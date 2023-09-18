@@ -17,7 +17,7 @@ function ApproveInvoice({
 		onClose();
 	};
 
-	const { loading, updateStatus }	= useUpdateCrossEntityStatus();
+	const { loading = false, updateStatus = () => {} }	= useUpdateCrossEntityStatus();
 
 	const [value, setValue] = useState(false);
 
@@ -31,7 +31,7 @@ function ApproveInvoice({
 				</div>
 			</Modal.Body>
 
-			<Modal.Footer className={styles.btn_div}>
+			<Modal.Footer className={styles.close_button}>
 				<Button
 					themeType="secondary"
 					onClick={onClose}
@@ -43,6 +43,7 @@ function ApproveInvoice({
 				<Button
 					onClick={() => updateStatus({ invoice_id: invoice?.id, status: 'approved', refetchAfterCall })}
 					disabled={loading || !value}
+					loading={loading}
 				>
 					Approved
 				</Button>

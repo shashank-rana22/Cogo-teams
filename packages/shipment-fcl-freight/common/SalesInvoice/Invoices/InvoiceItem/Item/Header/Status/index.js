@@ -73,7 +73,7 @@ function Status({
 		return (
 			<div className={styles.invoice_container}>
 				<div className={styles.invoice_status}>
-					{startCase(invoice?.status)}
+					{startCase(invoice?.status || '')}
 				</div>
 			</div>
 		);
@@ -84,7 +84,7 @@ function Status({
 			{invoice?.status
 					&& RESTRICT_REVOKED_STATUS.includes(invoice?.status) ? (
 						<div className={styles.invoice_status}>
-							{startCase(invoice?.status)}
+							{startCase(invoice?.status || '')}
 						</div>
 				) : null}
 

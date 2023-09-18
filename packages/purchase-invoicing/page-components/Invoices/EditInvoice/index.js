@@ -18,13 +18,13 @@ function EditInvoice({
 }) {
 	const geo = getGeoConstants();
 
-	const { role_ids } = useSelector(({ profile }) => ({
+	const { role_ids = [] } = useSelector(({ profile = {} }) => ({
 		role_ids: profile.partner?.user_role_ids,
 	}));
 	const isAdminSuperAdmin = [geo.uuid.admin_id, geo.uuid.super_admin_id]
 		.some((ele) => role_ids?.includes(ele));
 
-	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
+	const { shipment_data = {}, primary_service = {} } = useContext(ShipmentDetailContext);
 
 	const {
 		controls,
@@ -100,6 +100,7 @@ function EditInvoice({
 					size="md"
 					themeType="secondary"
 					onClick={onClose}
+					disabled={loading}
 				>
 					Cancel
 				</Button>
@@ -107,7 +108,8 @@ function EditInvoice({
 				<Button
 					size="md"
 					onClick={handleSubmit(onCreate)}
-					style={{ marginLeft: '16px' }}
+					className={styles.save_button}
+					loading={loading}
 					disabled={loading}
 				>
 					Save

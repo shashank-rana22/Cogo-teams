@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateCrossEntityStatus = () => {
-	const [{ loading, data: invoiceData }, trigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_cross_entity_invoice_status',
 		method : 'POST',
 	}, { manual: true });
@@ -28,7 +28,6 @@ const useUpdateCrossEntityStatus = () => {
 
 	return {
 		loading,
-		data: invoiceData || {},
 		updateStatus,
 	};
 };

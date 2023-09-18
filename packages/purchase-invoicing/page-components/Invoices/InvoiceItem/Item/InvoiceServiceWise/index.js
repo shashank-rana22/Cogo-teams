@@ -1,5 +1,4 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import React from 'react';
 
 import CardList from './CardList';
 import { invoiceTable } from './InvoiceTable';
@@ -19,10 +18,10 @@ const format = (amount, currency) => formatAmount({
 
 function InvoiceServiceWise({ item = {}, loading = false }) {
 	const {
-		service_total_discounted,
-		service_total_currency,
-		tax_total_discounted,
-		total_price_discounted,
+		service_total_discounted = '',
+		service_total_currency = '',
+		tax_total_discounted = '',
+		total_price_discounted = '',
 		line_items = [],
 		quotation_source = '',
 		detail = {},
@@ -44,25 +43,33 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 			/>
 
 			<div className={styles.totals}>
+
 				<div className={styles.tax_info}>
+
 					Total Tax:
 					{' '}
 					{format(tax_total_discounted, service_total_currency)}
+
 				</div>
 
 				<div className={styles.total_tax}>
+
 					Total w/o Tax:
 					{' '}
 					{format(total_price_discounted, service_total_currency)}
+
 				</div>
 			</div>
 
 			<div className={styles.total_container}>
 				<div className={styles.billed_text}>{renderBilledText}</div>
+
 				Total Amount After Tax :
+
 				<div className={styles.total_amount}>
 					{format(service_total_discounted, service_total_currency)}
 				</div>
+
 			</div>
 		</div>
 	);

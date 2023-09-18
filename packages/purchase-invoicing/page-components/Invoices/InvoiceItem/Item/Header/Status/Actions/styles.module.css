@@ -28,7 +28,7 @@
 	line-height: 16px;
 	color: var(--color-secondary-greyscale-2);
 	white-space: nowrap;
-	background-color: #fbe6e6;
+	background-color: var(--color-accent-orange-5);
 	border-radius: 4px;
 }
 
@@ -60,7 +60,7 @@
 	cursor: pointer;
 
 	&:hover {
-		color: #5936f0;
+		color: var(--color-tertiary-lavendar-1);
 	}
 }
 
@@ -116,7 +116,7 @@
 	&.utr_details {
 		flex-direction: column;
 		margin-top: 3px;
-		border-top: 1px solid #a8acce;
+		border-top: 1px solid var(--color-tertiary-lavendar-4);
 	}
 }
 
@@ -148,7 +148,7 @@
 	justify-content: center;
 	padding: 2px 10px;
 	font-size: var(--font-size-sm);
-	background-color: #fcedbf;
+	background-color: var(--color-tertiary-beige-3);
 	border-radius: 4px;
 }
 
@@ -184,7 +184,7 @@
 	text-align: center;
 	text-transform: capitalize;
 	white-space: nowrap;
-	background-color: #ddebc0;
+	background-color: var(--color-tertiary-success-green-4);
 	border-radius: 4px;
 
 	@media (max-width: 768px) {

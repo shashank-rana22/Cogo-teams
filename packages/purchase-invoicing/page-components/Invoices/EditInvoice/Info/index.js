@@ -6,19 +6,25 @@ import styles from './styles.module.css';
 function Info() {
 	return (
 		<div className={styles.container}>
+
 			<Tooltip
 				theme="light"
 				content={(
+
 					<div className={styles.content_div}>
+
 						You can enter customized line item name/code according to
 						customer&apos;s need.
-						{' '}
+
 					</div>
 				)}
 			>
 				<div className={styles.info_div}>
+
 					<IcMInfo fill="rgb(89, 54, 240)" />
+
 				</div>
+
 			</Tooltip>
 		</div>
 	);

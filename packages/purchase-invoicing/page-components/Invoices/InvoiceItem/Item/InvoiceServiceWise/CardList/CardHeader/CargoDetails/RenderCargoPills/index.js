@@ -24,7 +24,7 @@ const labels = [
 	'trip_type',
 ];
 
-function RenderCargoPills({ detail }) {
+function RenderCargoPills({ detail = {} }) {
 	return (
 		<>
 			{labels.map((label) => {

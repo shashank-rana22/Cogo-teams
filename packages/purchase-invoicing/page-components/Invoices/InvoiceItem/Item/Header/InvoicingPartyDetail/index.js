@@ -4,17 +4,17 @@ import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeat
 import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import React, { useContext, useRef } from 'react';
 
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 function InvoicingPartyDetail({
 	invoice = {},
 }) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
 	const invoicePartyDetailsRef = useRef(null);
 
 	const {
-		buy_address,
+		buy_address = {},
 	} = invoice;
 
 	const RESTRICTED_ENTITY_IDS = [];

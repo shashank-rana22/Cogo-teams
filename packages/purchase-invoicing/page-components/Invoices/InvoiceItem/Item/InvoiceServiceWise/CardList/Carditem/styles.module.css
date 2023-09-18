@@ -3,12 +3,12 @@
 	max-width: 100%;
 	font-size: var(--font-size-md);
 	font-weight: normal;
-	color: #000;
+	color: var(--color-secondary-greyscale-2);
 	text-align: center;
 	text-align: left;
 	word-break: break-word;
 	word-wrap: break-word;
-	background-color: red;
+	background-color: var(--color-primary-error-red-2);
 }
 
 .row {
@@ -17,7 +17,7 @@
 	padding: 12px;
 
 	&:hover {
-		background-color: #f9f9f9;
+		background-color: var(--color-secondary-5);
 	}
 }
 

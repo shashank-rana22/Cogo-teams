@@ -30,9 +30,13 @@ function Invoices({
 	isIRNGenerated = false,
 }) {
 	const { outstanding_by_reg_num } = useOrgOutStanding({ org_reg_nums: Object.keys(groupedInvoices || {}) });
+
 	const { salesList : invoicesList, refetch: bfInvoiceRefetch } = useListBfSalesInvoices();
-	const { shipment_data } = useContext(ShipmentDetailContext);
+
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
+
 	const totals = invoiceData?.invoicing_party_wise_total;
+
 	const totalsCE = invoiceDataCE?.invoicing_party_wise_total;
 
 	const invoiceStatuses = invoiceData?.invoicing_parties?.map(
@@ -40,12 +44,15 @@ function Invoices({
 	);
 
 	let count = START_COUNT;
+
 	invoiceStatuses.forEach((item) => {
 		if (POST_REVIEWED_INVOICES.includes(item)) {
 			count += INCREMENT_IN_COUNT_BY_FOR_POST_REVIEW_STATUS;
 		}
 	});
+
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);
+
 	if (invoiceStatuses.length === count) {
 		disableAction = true;
 	}
@@ -56,9 +63,9 @@ function Invoices({
 
 	disableAction = showForOldShipments ? false : disableAction;
 
-	const { list, cnRefetch, loading: cNLoading } = useGetCreditNotes({});
+	const { list = [], cnRefetch, loading: cNLoading } = useGetCreditNotes({});
 
-	const { CECreditNoteData, loadingCECN } = useGetCrossEntityCreditNotes();
+	const { CECreditNoteData = [], loadingCECN } = useGetCrossEntityCreditNotes();
 
 	return (
 		<main className={styles.container}>
@@ -75,6 +82,7 @@ function Invoices({
 
 			<section>
 				{Object.keys(groupedInvoices || {}).map((item) => (
+
 					<InvoiceItem
 						key={item}
 						item={groupedInvoices[item]}
@@ -88,11 +96,13 @@ function Invoices({
 						salesInvoicesRefetch={salesInvoicesRefetch}
 						refetchCN={cnRefetch}
 					/>
+
 				))}
 			</section>
 
 			<section>
 				{Object.keys(groupedInvoicesCE || {}).map((item) => (
+
 					<InvoiceItem
 						key={item}
 						item={groupedInvoicesCE[item]}
@@ -102,6 +112,7 @@ function Invoices({
 						invoicesList={invoicesList}
 						isCrossEntity
 					/>
+
 				))}
 			</section>
 
@@ -114,14 +125,17 @@ function Invoices({
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 					/>
+
 				) : null}
 
 			{!isEmpty(CECreditNoteData) ? (
+
 				<CrossEntityCreditNote
 					loading={loadingCECN}
 					list={CECreditNoteData}
 					invoicesList={invoicesList}
 				/>
+
 			) : null}
 
 		</main>

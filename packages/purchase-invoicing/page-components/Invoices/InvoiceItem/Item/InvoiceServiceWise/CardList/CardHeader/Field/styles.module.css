@@ -2,7 +2,7 @@
 	font-size: var(--font-size-md);
 	font-weight: 600;
 	line-height: 16px;
-	color: #000;
+	color: var(--color-secondary-greyscale-2);
 
 	&.icon {
 		justify-content: center;

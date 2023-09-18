@@ -83,17 +83,17 @@ const useEditLineItems = ({
 		onOptionsChange : handleOptionsChange,
 		value           : (service?.line_items || []).map((item) => {
 			const {
-				alias,
-				code,
+				alias = '',
+				code = '',
 				hsn_code = 'NA',
-				currency,
+				currency = '',
 				price_discounted = 0,
 				quantity = 0,
 				exchange_rate = 1,
 				tax_percent = 0,
-				unit,
+				unit = '',
 				tax_total_price_discounted = 0,
-				name,
+				name = '',
 			} = item || {};
 
 			return {
@@ -116,18 +116,28 @@ const useEditLineItems = ({
 	const defaultValues = generateDefaultValues({ values: controls });
 
 	const {
-		handleSubmit, control, setValue, setError,
-		watch, formState: { errors = {} },
-	} = useForm({ defaultValues });
+		handleSubmit,
+		control,
+		setValue,
+		setError,
+		watch,
+		formState: {
+			errors = {},
+		},
+
+	} = useForm({
+		defaultValues,
+	});
 
 	const formValues = watch();
 
 	const prepareFormValues = () => {
 		const allFormValues = { ...formValues };
+
 		(Object.keys(formValues) || []).forEach((key) => {
 			if (key && formValues?.[key]) {
 				allFormValues[key] = (allFormValues[key] || []).map((value) => {
-					const { price_discounted = 0, quantity = 0, code, ...rest } = value || {};
+					const { price_discounted = 0, quantity = 0, code = '', ...rest } = value || {};
 					return {
 						...rest,
 						tax      : selectedCodes[code]?.tax_percent || 'NA',

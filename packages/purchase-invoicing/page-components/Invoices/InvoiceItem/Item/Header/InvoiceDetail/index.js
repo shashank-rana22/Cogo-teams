@@ -2,10 +2,10 @@ import { cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase, isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import { getDocumentInfo } from '../../../../../../helpers/getDocumentInfo';
-import styles from '../styles.module.css';
+
+import styles from './styles.module.css';
 
 const CREDIT_SOURCE_FIRST = 0;
 

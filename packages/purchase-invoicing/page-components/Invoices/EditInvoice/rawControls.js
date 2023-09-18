@@ -11,8 +11,8 @@ const handleDisableCond = (charge, isAdminSuperAdmin) => charge?.service_type ==
 
 const rawControls = ({
 	handleChange,
-	charge,
-	info,
+	charge = {},
+	info = null,
 	isAdminSuperAdmin,
 	shipment_data = {},
 	primary_service = {},
@@ -20,7 +20,7 @@ const rawControls = ({
 	TRADE_MAPPING = {},
 }) => {
 	const isFieldsDisabled = handleDisableCond(charge, isAdminSuperAdmin);
-	const { id, shipment_type, entity_id } = shipment_data;
+	const { id = '', shipment_type = '', entity_id = '' } = shipment_data;
 
 	return {
 		type             : 'edit_service_charges',
@@ -69,7 +69,8 @@ const rawControls = ({
 				name  : 'alias',
 				label : (
 					<>
-						<div>Alias Name</div>
+						Alias Name
+						{' '}
 						{info}
 					</>
 				),

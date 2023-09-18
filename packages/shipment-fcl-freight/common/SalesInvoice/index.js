@@ -10,9 +10,10 @@ import Invoices from './Invoices';
 import styles from './styles.module.css';
 
 function SalesInvoice() {
-	const { list } = useListSageSalesInvoices();
+	const { list = [] } = useListSageSalesInvoices();
 
 	const { data: invoiceData, groupedInvoices, refetch: salesInvoicesRefetch, loading } = useGetShipmentInvoice();
+
 	const {
 		data: invoiceDataCE,
 		groupedInvoices:groupedInvoicesCE,
@@ -31,9 +32,11 @@ function SalesInvoice() {
 
 	return (
 		<main className={styles.container}>
+
 			<OverviewManageServices isOpen={false} source="overview" />
 
 			{!(loading || loadingCE) && !(isEmpty(invoiceData) && isEmpty(invoiceDataCE)) ? (
+
 				<Invoices
 					invoiceData={invoiceData}
 					invoiceDataCE={invoiceDataCE}
@@ -44,7 +47,9 @@ function SalesInvoice() {
 					salesInvoicesRefetch={salesInvoicesRefetch}
 					isIRNGenerated={isIRNGenerated}
 				/>
+
 			) : null}
+
 		</main>
 	);
 }

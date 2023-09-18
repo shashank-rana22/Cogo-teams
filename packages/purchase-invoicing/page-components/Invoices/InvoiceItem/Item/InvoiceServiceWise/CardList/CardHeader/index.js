@@ -13,11 +13,11 @@ function CardHeader({ fields = [], showCode = false, detail = {} }) {
 
 			<div className={styles.row}>
 				{fields?.map((field) => {
-					if (field.show === false) {
+					if (field?.show === false) {
 						return null;
 					}
 
-					return <Field key={field.label} field={field} showCode={showCode} />;
+					return <Field key={field?.label} field={field} showCode={showCode} />;
 				})}
 			</div>
 		</div>

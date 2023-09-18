@@ -7,10 +7,10 @@ const HUNDRED = 100;
 
 function Field({ field = {}, showCode = false }) {
 	const renderHeaderText = () => {
-		if (showCode && field.name) {
-			return field.name;
+		if (showCode && field?.name) {
+			return field?.name;
 		}
-		return field.label;
+		return field?.label;
 	};
 
 	const { span } = field;

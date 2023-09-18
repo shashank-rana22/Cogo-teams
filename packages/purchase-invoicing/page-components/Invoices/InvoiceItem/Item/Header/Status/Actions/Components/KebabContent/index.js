@@ -2,7 +2,7 @@ import { Popover, cl, Button } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import styles from '../../styles.module.css';
+import styles from './styles.module.css';
 
 function KebabContent({
 	setShowModal = () => {},

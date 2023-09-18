@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useContext } from 'react';
 
 const useGetCrossEntityCreditNotes = () => {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
 	const { id: shipment_id = '' } = shipment_data || {};
 
@@ -15,6 +15,7 @@ const useGetCrossEntityCreditNotes = () => {
 				shipment_id,
 			},
 		},
+
 	}, { manual: false });
 
 	return {
