@@ -1,0 +1,78 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 0 10px;
+	font-weight: 600;
+	color: #4f4f4f;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.refresh_icon {
+	width: 18px;
+	height: 18px;
+	margin-right: 4px;
+	cursor: pointer;
+}
+
+.filter_icon {
+	width: 20px;
+	height: 20px;
+	margin-top: 4px;
+	cursor: pointer;
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.tippy-content {
+			width: 180px;
+			padding: 0;
+		}
+
+		.ui_popover_container {
+			padding: 0;
+		}
+	}
+}
+
+.left_details {
+	display: flex;
+	align-items: center;
+}
+
+.input_container {
+	margin-left: 4px;
+
+	:global {
+		.ui_input_container {
+			width: 160px;
+			height: 20px;
+		}
+	}
+}
+
+.note {
+	position: absolute;
+	bottom: 0;
+	width: 90%;
+	padding: 10px;
+	font-size: 11px;
+	background: #fff;
+	border-radius: 6px 6px 0 0;
+	box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+	animation: slidein-up 1s  both;
+
+	@keyframes slidein-up {
+		0% {
+			visibility: visible;
+			transform: translateY(100%);
+		}
+
+		100% {
+			transform: translateY(0);
+		}
+	}
+}

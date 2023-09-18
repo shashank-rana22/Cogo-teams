@@ -39,6 +39,16 @@ function ShipmentInfo() {
 				/>
 			) : null}
 
+			{shipment_data?.remaining_closure_days ? (
+				<Pill size="sm" color="#c4dc91" className={styles.pill}>
+					Operational Closure in:
+					{' '}
+					{shipment_data?.remaining_closure_days}
+					{' '}
+					Day(s)
+				</Pill>
+			) : null}
+
 			{shipment_data?.fm_rejection_reason ? (
 				<Tooltip
 					placement="top"

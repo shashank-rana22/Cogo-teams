@@ -16,6 +16,7 @@ import { getDefaultFilters } from '../../../../utils/startDateOfMonth';
 import BookingNoteModal from './BookingNoteModal';
 import Filter from './Filter';
 import LoadingState from './LoadingState';
+import NotesModal from './NotesModal';
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 
@@ -33,8 +34,9 @@ function ListShipmentCards({
 	setShowPopover = () => {},
 	showPopover = '',
 	setShowPocModal = () => {},
-	showAddPrimaryUserButton = false,
+	viewType = '',
 	mailProps = {},
+	showModalType = () => {},
 	params = {},
 	range = '',
 }) {
@@ -65,8 +67,9 @@ function ListShipmentCards({
 				setShowPopover={setShowPopover}
 				showPopover={showPopover}
 				setShowPocModal={setShowPocModal}
-				showAddPrimaryUserButton={showAddPrimaryUserButton}
+				viewType={viewType}
 				mailProps={mailProps}
+				showModalType={showModalType}
 				params={params}
 				range={range}
 			/>
@@ -74,7 +77,7 @@ function ListShipmentCards({
 	);
 }
 
-function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton = false, mailProps = {} }) {
+function ShipmentsHomePage({ setActiveTab = () => {}, viewType = '', mailProps = {} }) {
 	const { queryParams = {} } = getFormatedPath();
 
 	const [showPocDetails, setShowPocDetails] = useState({});
@@ -84,6 +87,7 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 	const [showPopover, setShowPopover] = useState('');
 	const [showPocModal, setShowPocModal] = useState({ show: false, shipmentData: {} });
 
+	const [modalState, setModalState] = useState({ show: '', shipmentData: {} });
 	const defaultFilters = getDefaultFilters({ range });
 
 	const [dateFilters, setDateFilters] = useState({ ...defaultFilters });
@@ -102,6 +106,10 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 		page_limit = PAGE_LIMIT,
 		total_count = DEFAULT_SHIPMENTS_COUNT,
 	} = shipmentsData || {};
+
+	const showModalType = ({ modalType = '', shipmentData = {} }) => {
+		setModalState({ show: modalType, shipmentData });
+	};
 
 	const contextValues = useMemo(() => ({
 		shipment_data: showShipmentChat,
@@ -159,8 +167,9 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 								setShowPopover={setShowPopover}
 								showPopover={showPopover}
 								setShowPocModal={setShowPocModal}
-								showAddPrimaryUserButton={showAddPrimaryUserButton}
+								viewType={viewType}
 								mailProps={mailProps}
+								showModalType={showModalType}
 								params={params}
 								range={range}
 							/>
@@ -199,6 +208,14 @@ function ShipmentsHomePage({ setActiveTab = () => {}, showAddPrimaryUserButton =
 						setActiveTab={setActiveTab}
 					/>
 				) : null}
+
+			{modalState?.show === 'show_notes_modal' ? (
+				<NotesModal
+					modalState={modalState}
+					setModalState={setModalState}
+					key={modalState?.shipmentData?.id}
+				/>
+			) : null}
 		</>
 	);
 }

@@ -45,12 +45,12 @@ export const SORTBY_OPTION = [
 		name  : 'totalOutstandingAmount',
 	},
 	{
-		label : 'Open OnAccount Amount',
+		label : 'Open On Account Amount',
 		value : 'openOnAccountAmount',
 		name  : 'openOnAccountAmount',
 	},
 	{
-		label : 'Open CreditNote Amount',
+		label : 'Open Credit Note Amount',
 		value : 'openCreditNoteAmount',
 		name  : 'openCreditNoteAmount',
 	},

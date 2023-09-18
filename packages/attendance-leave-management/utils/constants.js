@@ -203,3 +203,75 @@ export const RED_DOT = ['absent', 'half_day_absent', 'leave_without_pay', 'half_
 
 export const SEPARATOR_CONDITION = ['half_day_absent_sick_leave', 'half_day_absent_privilege_leave',
 	'half_day_absent_casual_leave', 'half_day_absent'];
+
+export const API_DATA_MAPPING = {
+	hr_meet             : 'hr_meet',
+	rm_clearance        : 'rm_clearance.rm_clearance',
+	review_request      : 'rm_clearance.review_request',
+	assign_hoto         : 'rm_clearance.assign_hoto',
+	finance_clearance   : 'finance_clearance',
+	hoto_clearance      : 'hoto_clearance',
+	admin_clearance     : 'admin_clearance',
+	tech_clearance      : 'tech_clearance',
+	exit_interview      : 'exit_interview.exit_interview',
+	interview_scheduled : 'exit_interview.interview_scheduled',
+	interview_completed : 'exit_interview.interview_completed',
+};
+
+export const TASK_LIST = [
+	{
+		title     : 'HR Meet',
+		key       : 'hr_meet',
+		view_type : 'hr_meet',
+	},
+	{
+		title   	 : 'RM Clearance',
+		key     	 : 'rm_clearance',
+		view_type : 'manager_clearance',
+		subtask   : [
+			{
+				title : 'Review Request',
+				key   : 'review_request',
+			},
+			{
+				title : 'Assign HOTO',
+				key   : 'assign_hoto',
+			},
+		],
+	},
+	{
+		title     : 'Finance clearance',
+		key       : 'finance_clearance',
+		view_type : 'finance_clearance',
+	},
+	{
+		title     : 'HOTO Clearance',
+		key       : 'hoto_clearance',
+		view_type : 'hoto_clearance',
+	},
+	{
+		title     : 'Admin Clearance',
+		key       : 'admin_clearance',
+		view_type : 'admin_clearance',
+	},
+	{
+		title     : 'Tech Clearance',
+		key       : 'tech_clearance',
+		view_type : 'tech_clearance',
+	},
+	{
+		title   	 : 'Exit Interview',
+		key     	 : 'exit_interview',
+		view_type : 'exit_interview',
+		subtask   : [
+			{
+				title : 'Interview Scheduled',
+				key   : 'interview_scheduled',
+			},
+			{
+				title : 'Interview Completed',
+				key   : 'interview_completed',
+			},
+		],
+	},
+];
