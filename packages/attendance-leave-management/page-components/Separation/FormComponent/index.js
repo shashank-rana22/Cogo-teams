@@ -106,7 +106,7 @@ function FormComponent({
 
 	return (
 		<div className={styles.container}>
-			<Render data={data} loading={loading} refetch={refetchApplicationDetails} />
+			<TechClearance data={data} loading={loading} refetch={refetchApplicationDetails} />
 		</div>
 	);
 }
