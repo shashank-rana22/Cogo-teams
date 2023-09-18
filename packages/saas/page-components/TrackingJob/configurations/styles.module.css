@@ -1,0 +1,104 @@
+.data_container {
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	&.id {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: fit-content;
+		padding: 3px;
+		font-size: 10px;
+		font-weight: 400;
+		cursor: pointer;
+		background: rgb(230 251 233);
+		border-radius: 4px;
+		-webkit-box-pack: center;
+		-webkit-box-align: center;
+	}
+
+	&.serialId {
+		width: fit-content;
+		padding: 3px;
+		cursor: pointer;
+		background: #e0e0e0;
+		border-radius: 4px;
+	}
+}
+
+.container {
+	display: flex;
+	align-items: center;
+
+	.sort-icon {
+		width: 20px;
+		height: 14px;
+	}
+
+	.sort-icon.active {
+		transition: transform 400ms;
+		transform: rotate(0deg);
+	}
+
+	.sort-icon.inactive {
+		transition: transform 400ms;
+		transform: rotate(180deg);
+	}
+}
+
+.title {
+	display: flex;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 10px;
+	color: #303b67;
+}
+
+.TagsData {
+	display: flex;
+	width: fit-content;
+	padding: 0 4px;
+	margin-left: 3px;
+	color: #fff;
+	background: #7278ad;
+	border: 1px solid #7278ad;
+	border-radius: 4px;
+}
+
+.TagMap {
+	display: flex;
+	margin: 5px 0;
+	cursor: pointer;
+}
+
+.NewTag {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	font-size: 10px;
+	font-weight: 400;
+	cursor: pointer;
+	border-radius: 4px;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+
+	.newColor {
+		color: #1b4332;
+	}
+
+	.updateColor {
+		color: #805b10;
+	}
+
+	.seenColor {
+		color: #03045e;
+	}
+}
+
+.UpdateDate {
+	margin-left: 25px;
+}

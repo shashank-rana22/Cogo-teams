@@ -1,0 +1,84 @@
+.title_container {
+	font-size: 24px;
+	font-weight: 500;
+	text-decoration: underline;
+}
+
+.search_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 0;
+	background: white;
+	border-bottom: solid 1px gainsboro;
+}
+
+.button_container {
+	margin-right: 25px;
+}
+
+.style_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 18px;
+}
+
+.styled_modal_flex {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.first {
+	width: 70%;
+}
+
+.second {
+	width: 60%;
+	height: 500px;
+	margin-top: 95px;
+	overflow-y: auto;
+}
+
+.styled_table {
+	.ui-table {
+		.ui-table-head-cell {
+			text-align: center;
+
+			.airline {
+				justify-content: center;
+				margin: 0 20px;
+			}
+		}
+
+		.ui-table-body-row {
+			height: 56px;
+		}
+
+		.ui-table-body-cell {
+			padding: 0;
+			background: #fff;
+
+			.image {
+				width: 50px;
+				height: 25px;
+				margin: 5px 0;
+			}
+
+			.title {
+				font-weight: bold;
+			}
+
+			.airlinedata {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				margin-bottom: 5px;
+			}
+		}
+
+		.ui-table-body-cell:first-of-type {
+			width: 200px;
+			padding-left: 24px;
+		}
+	}
+}
