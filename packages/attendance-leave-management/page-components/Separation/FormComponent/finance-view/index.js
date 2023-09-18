@@ -108,6 +108,7 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 					</div>
 				</div>
 			) : null}
+
 			<div className={styles.container}>
 				<div className={styles.heading_container}>
 					<div className={styles.heading}>
