@@ -9,7 +9,7 @@ const getFormControls = ({
 	setCollectionParty = () => {},
 	collectionPartyAddresses,
 	setCollectionPartyAddress = () => {},
-	COLLECTION_PARTY_BANK_OPTIONS = [],
+	collectionPartyBankOptions = [],
 }) => [
 	{
 		name               : 'collection_party',
@@ -56,7 +56,7 @@ const getFormControls = ({
 		rules       : { required: 'Collection Party Bank Details is Required' },
 		size        : 'sm',
 		isClearable : true,
-		options     : COLLECTION_PARTY_BANK_OPTIONS,
+		options     : collectionPartyBankOptions,
 		placeholder : 'Select Bank Details...',
 		span        : 4,
 	},

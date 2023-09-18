@@ -1,12 +1,15 @@
 import { useRequest } from '@cogoport/request';
+import { useEffect, useCallback } from 'react';
+
+import toastApiError from '../utils/toastApiError';
 
 const useGetTradeParties = ({ serviceProvider = {} }) => {
 	const [{ loading = false, data = {} }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_organization_trade_parties',
-	});
+	}, { manual: true });
 
-	const getSelfTradeParty = async () => {
+	const getSelfTradeParty = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -23,9 +26,13 @@ const useGetTradeParties = ({ serviceProvider = {} }) => {
 				},
 			});
 		} catch (error) {
-			console.log(error);
+			toastApiError(error);
 		}
-	};
+	}, [trigger, serviceProvider]);
+
+	useEffect(() => {
+		getSelfTradeParty();
+	}, [getSelfTradeParty]);
 
 	return {
 		loading,

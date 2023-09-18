@@ -24,7 +24,7 @@ import TitleCard from './TitleCard';
 const EMPTY_TRADE_PARTY_LENGTH = 0;
 const DEFAULT_STEP = 1;
 const DEFAULT_NET_TOTAL = 0;
-const ONE = 1;
+const DEFAULT_LENGTH = 1;
 
 const PURCHASE_INVOICE_SHIPMENT_STATES = ['init', 'awaiting_service_provider_confirmation'];
 
@@ -105,7 +105,7 @@ function CollectionPartyDetails({
 	const showGenerate = showUpload
 	&& shipment_data.shipment_type === 'ftl_freight'
 	&& !shipment_data?.is_job_closed
-	&& filteredServices.length === ONE;
+	&& filteredServices.length === DEFAULT_LENGTH;
 
 	const SERVICES_LIST = [];
 	(servicesData || []).forEach((element) => {
@@ -181,18 +181,18 @@ function CollectionPartyDetails({
 						) : null}
 					{
 							showGenerate && (
-								<div>
-									<Button
-										size="md"
-										themeType="secondary"
-										className={styles.marginright}
-										onClick={() => {
-											setGenerateInvoiceModal(true);
-										}}
-									>
-										Generate Invoice
-									</Button>
-								</div>
+
+								<Button
+									size="md"
+									themeType="secondary"
+									className={styles.marginright}
+									onClick={() => {
+										setGenerateInvoiceModal(true);
+									}}
+								>
+									Generate Invoice
+								</Button>
+
 							)
 						}
 					{INVOICE_SHIPMENT_TYPES.includes(shipment_type) && (

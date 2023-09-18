@@ -41,6 +41,11 @@ function InvoiceTemplate({
 	};
 	const [imageSrc, setImageSrc] = useState('');
 
+	const callback = (res) => {
+		setDownloadButtonState(res?.data?.pdf_url);
+		setRenderContent('form');
+	};
+
 	const { generatePdf } = useGeneratePdf();
 
 	const ref = useRef(null);
@@ -50,24 +55,17 @@ function InvoiceTemplate({
 		await generatePdf({
 			html,
 			scale: 0.8,
-			setDownloadButtonState,
-			setRenderContent,
+			callback,
 		});
 	};
 
 	const {
 		data: tradePartyData,
-		getSelfTradeParty,
 	} = useGetTradeParties({ serviceProvider });
 	const { list = [] } = tradePartyData || {};
 
 	useEffect(() => {
 		fetchImageData({ url: GLOBAL_CONSTANTS.image_url.cogo_logo, setterFunc: setImageSrc });
-	}, []);
-
-	useEffect(() => {
-		getSelfTradeParty();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const serviceProviderTradePartyObj = list?.find((item) => item?.trade_party_type === 'self') || {};

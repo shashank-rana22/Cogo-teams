@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { usePublicRequest } from '@cogoport/request';
+
+import toastApiError from '../utils/toastApiError';
 
 const useGeneratePdf = () => {
 	const [{ loading }, trigger] = usePublicRequest({
@@ -9,10 +10,9 @@ const useGeneratePdf = () => {
 	}, { manual: false });
 
 	const generatePdf = async ({
-		html,
+		html = '',
 		scale = 1,
-		setDownloadButtonState = () => {},
-		setRenderContent = () => {},
+		callback = () => {},
 	}) => {
 		try {
 			const res = await trigger({
@@ -25,10 +25,9 @@ const useGeneratePdf = () => {
 				},
 			});
 			Toast.success('Uploaded Successfully');
-			setDownloadButtonState(res?.data?.pdf_url);
-			setRenderContent('form');
+			callback(res);
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.data) || 'Something Went Wrong');
+			toastApiError(error || 'Something Went Wrong');
 		}
 	};
 

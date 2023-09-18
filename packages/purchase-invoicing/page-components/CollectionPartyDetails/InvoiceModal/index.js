@@ -1,6 +1,6 @@
 import { Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import useCalculateTotalPrice from '../../../helpers/useCalculateTotalPrice';
 import useGetEntities from '../../../hooks/useGetEntities';
@@ -9,8 +9,9 @@ import { getCollectionPartyDetails } from
 import InvoiceTemplate from '../../InvoiceTemplate';
 import InvoiceModalContent from '../InvoiceModalContent';
 
-const ZERO = 0;
-const ONE = 1;
+const DEFAULT_AMOUNT_TAXABLE = 0;
+const DEFAULT_AMOUNT_TOTAL = 0;
+const SERIAL_INCREMENT = 1;
 
 function InvoiceModal({
 	generateInvoiceModal = false,
@@ -48,29 +49,30 @@ function InvoiceModal({
 	});
 	const { handleModifiedOptions = () => {} } = getCollectionPartyDetails();
 	const cpParams = getCollectionPartyParams(collectionParty?.service_provider_id);
-	const COLLECTION_PARTY_BANK_OPTIONS = [];
-
-	(bank_details || []).forEach((bank) => {
+	const COLLECTION_PARTY_BANK_OPTIONS = useMemo(() => (
+		bank_details || []).reduce((collectionPartyBankOptions, bank) => {
 		if (
 			['pending', 'verified'].includes(bank?.verification_status)
-			&& bank?.status === 'active'
+					&& bank?.status === 'active'
 		) {
-			COLLECTION_PARTY_BANK_OPTIONS.push({
+			collectionPartyBankOptions.push({
 				...bank,
 				label : bank?.data?.bank_name,
 				value : bank?.data?.bank_account_number,
 			});
 		}
-	});
+		return collectionPartyBankOptions;
+	}, []), [bank_details]);
+
 	const {
 		billing_addresses: billingAddresses = [],
 		other_addresses: otherAddresses = [],
 	} = collectionPartyState || {};
 
-	const allAddresses = [...billingAddresses, ...otherAddresses];
+	const allAddresses = useMemo(() => [...billingAddresses, ...otherAddresses], [billingAddresses, otherAddresses]);
 
 	const collectionPartyAddresses = (allAddresses || []).map((address) => ({
-		...address,
+		...(address || {}),
 		label : `${address?.address} / ${address?.tax_number}`,
 		value : address?.id,
 	}));
@@ -81,24 +83,27 @@ function InvoiceModal({
 		chargeCodes  : codes,
 	});
 
-	const lineItemsDataArray = (calculatedValues.newItems || []).map(
-		(item, index) => {
-			const codeData = codes[item?.code] || {};
-			return {
-				serial_number       : index + ONE,
-				code                : item?.code,
-				product_description : codeData?.actualname,
-				sac                 : codeData?.sac_code,
-				currency            : item?.currency,
-				quantity            : item?.quantity,
-				exchange_rate       : item?.exchange_rate,
-				tax_type            : 'T',
-				tax_percent         : `${codeData?.tax_percent}%`,
-				taxable_amount      : Number(item?.tax_amt || ZERO),
-				total               : Number(item?.cost || ZERO),
-				truck_number        : formValues?.truck_number,
-			};
-		},
+	const lineItemsDataArray = useMemo(
+		() => (calculatedValues.newItems || []).map(
+			(item, index) => {
+				const codeData = codes[item?.code] || {};
+				return {
+					serial_number       : index + SERIAL_INCREMENT,
+					code                : item?.code,
+					product_description : codeData?.actualname,
+					sac                 : codeData?.sac_code,
+					currency            : item?.currency,
+					quantity            : item?.quantity,
+					exchange_rate       : item?.exchange_rate,
+					tax_type            : 'T',
+					tax_percent         : `${codeData?.tax_percent}%`,
+					taxable_amount      : Number(item?.tax_amt || DEFAULT_AMOUNT_TAXABLE),
+					total               : Number(item?.cost || DEFAULT_AMOUNT_TOTAL),
+					truck_number        : formValues?.truck_number,
+				};
+			},
+		),
+		[calculatedValues.newItems, codes, formValues],
 	);
 	const { listEntities, entitiesLoading } = useGetEntities();
 
@@ -116,7 +121,7 @@ function InvoiceModal({
 			<Modal.Header title={MODAL_TITLE} />
 			<Modal.Body style={{ maxHeight: '780px' }}>
 				{
-					renderContent === 'form' && (
+					renderContent === 'form' ? (
 						<InvoiceModalContent
 							generateInvoiceModal={generateInvoiceModal}
 							control={control}
@@ -142,10 +147,7 @@ function InvoiceModal({
 							downloadButtonState={downloadButtonState}
 							setRenderContent={setRenderContent}
 						/>
-					)
-				}
-				{
-					renderContent === 'template' && (
+					) : (
 						<InvoiceTemplate
 							serviceProvider={collectionParty}
 							formValues={formValues}
