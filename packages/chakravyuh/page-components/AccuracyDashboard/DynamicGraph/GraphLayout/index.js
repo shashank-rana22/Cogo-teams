@@ -22,6 +22,11 @@ function GraphLayout({ graph = {}, activeParent = null, setActiveParent = () => 
 	});
 	const { minX, minY, maxY } = bounds;
 
+	const svgOffset = {
+		top  : `${-minY}px`,
+		left : `${-minX}px`,
+	};
+
 	const handleClick = (val) => {
 		setActiveParent(val);
 	};
@@ -35,19 +40,13 @@ function GraphLayout({ graph = {}, activeParent = null, setActiveParent = () => 
 			>
 				<div
 					className={styles.svg_layout}
-					style={{
-						top  : `${-minY}px`,
-						left : `${-minX}px`,
-					}}
+					style={svgOffset}
 				>
 					<SVGLayout mode="background" paths={paths} bounds={bounds} />
 				</div>
 				<div
 					className={styles.svg_layout}
-					style={{
-						top  : `${-minY}px`,
-						left : `${-minX}px`,
-					}}
+					style={svgOffset}
 				>
 					<SVGLayout paths={paths} bounds={bounds} />
 				</div>

@@ -10,7 +10,7 @@ import styles from '../styles.module.css';
 
 const VALID_IDS = ['supply', 'rate_extension', 'predicted', 'cluster_extension'];
 
-function RateAccuracyChart({
+function RateAccuracy({
 	accuracy = [],
 	loading = false, parent_mode = null,
 	isAnimating = false,
@@ -44,4 +44,4 @@ function RateAccuracyChart({
 	);
 }
 
-export default RateAccuracyChart;
+export default RateAccuracy;

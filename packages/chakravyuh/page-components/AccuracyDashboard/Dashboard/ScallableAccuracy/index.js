@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 
 import { section_container, bottom_label } from '../styles.module.css';
 
-import DeviationChart from './DeviationChart';
-import RateAccuracyChart from './RateAccuracyChart';
+import Deviation from './Deviation';
+import RateAccuracy from './RateAccuracy';
 import styles from './styles.module.css';
-import TrendChart from './TrendChart';
+import Trend from './Trend';
 
 const TIME_LIMIT = 200;
 
@@ -16,21 +16,21 @@ const ALL_TABS_LIST = [
 		key       : 'deviation',
 		name      : 'deviation',
 		title     : 'Deviation',
-		Component : DeviationChart,
+		Component : Deviation,
 		heading   : 'Rate Deviation with Time (USD)',
 	},
 	{
 		key       : 'trend',
 		name      : 'trend',
 		title     : 'Trend',
-		Component : TrendChart,
+		Component : Trend,
 		heading   : 'Rate Trend with Time (USD)',
 	},
 	{
 		key       : 'accuracy',
 		name      : 'accuracy',
 		title     : 'Accuracy',
-		Component : RateAccuracyChart,
+		Component : RateAccuracy,
 		heading   : 'Rate Accuracy with Time',
 	},
 ];

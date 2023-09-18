@@ -12,7 +12,7 @@ import styles from '../styles.module.css';
 const FCL_VALID_IDS = ['supply', 'rate_extension', 'cluster_extension'];
 const AIR_IDS = ['cargo_ai', 'freight_look', 'manual', 'rate_extension', 'rate_sheet'];
 
-function TrendChart({
+function Trend({
 	parent_mode = null,
 	isAnimating = false,
 	isHighlighted = false,
@@ -50,4 +50,4 @@ function TrendChart({
 	);
 }
 
-export default TrendChart;
+export default Trend;
