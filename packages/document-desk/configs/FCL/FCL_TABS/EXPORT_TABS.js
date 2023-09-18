@@ -17,8 +17,12 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn }) => {
 				},
 			],
 		},
+
 		upload_shipping_instruction: {
 			task_attributes: [
+				{
+					assigned_taskholder: 'service_ops2',
+				},
 				{
 					task   : 'upload_si',
 					status : 'completed',
@@ -28,9 +32,24 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn }) => {
 					status : 'pending',
 				},
 			],
+			service_state: [
+				'init',
+				'awaiting_service_provider_confirmation',
+				'confirmed_by_service_provider',
+			],
+			state: [
+				'in_progress',
+				'shipment_received',
+				'confirmed_by_importer_exporter',
+			],
 		},
+
 		upload_draft_bil_of_lading: {
 			task_attributes: [
+				{
+					...(isCriticalOn ? { status: 'pending' } : {}),
+					assigned_stakeholder: 'service_ops2',
+				},
 				{
 					task   : 'update_si_filled_at',
 					status : 'completed',
@@ -40,6 +59,8 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn }) => {
 				},
 			],
 			service_state: [
+				'init',
+				'awaiting_service_provider_confirmation',
 				'confirmed_by_service_provider',
 			],
 			state: [
@@ -48,10 +69,10 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn }) => {
 				'confirmed_by_importer_exporter',
 			],
 		},
+
 		confirmed_by_service_provider: {
 			task_attributes: [
 				{
-					...(isCriticalOn ? { status: 'pending' } : {}),
 					assigned_stakeholder: 'service_ops2',
 				},
 				{
@@ -60,12 +81,18 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn }) => {
 				},
 			],
 
+			service_state: [
+				'init',
+				'awaiting_service_provider_confirmation',
+				'confirmed_by_service_provider',
+			],
 			state: [
 				'in_progress',
 				'shipment_received',
 				'confirmed_by_importer_exporter',
 			],
 		},
+
 		bl_approval_pending: {
 			task_attributes: [
 				{
@@ -88,8 +115,8 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn }) => {
 };
 
 const CRITICAL_TABS = {
-	upload_shipping_instruction   : { si_cutoff_less_than: subtractDays(TODAY, TWO) },
-	upload_draft_bil_of_lading    : { si_filed_at_less_than: addDays(TODAY, ONE) },
+	upload_shipping_instruction   : { si_cutoff_less_than: addDays(TODAY, TWO) },
+	upload_draft_bil_of_lading    : { si_filed_at_less_than: subtractDays(TODAY, ONE) },
 	confirmed_by_service_provider : { si_cutoff_less_than: addDays(TODAY, ONE) },
 	bl_approval_pending           : { schedule_departure_less_than: TODAY },
 };
