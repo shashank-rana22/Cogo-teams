@@ -155,7 +155,7 @@ function AccordianCards({
 									</div>
 									<div className={styles.expense_value_text}>
 										{formatAmount({
-											amount   :	buyQuotationTotalAmount as string,
+											amount   :	String(buyQuotationTotalAmount),
 											currency :	GLOBAL_CONSTANTS.currency_code.INR,
 											options  : {
 												style           : 'currency',
@@ -223,7 +223,7 @@ function AccordianCards({
 									</div>
 									<div className={styles.expense_value_text}>
 										{formatAmount({
-											amount   :	sellQuotationTotalAmount as string,
+											amount   :	String(sellQuotationTotalAmount),
 											currency :	GLOBAL_CONSTANTS.currency_code.INR,
 											options  : {
 												style           : 'currency',

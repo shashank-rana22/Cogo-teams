@@ -11,10 +11,11 @@ function SIDView({
 	onAccept = (prop) => (prop),
 	showTab = false,
 	sidDataChecked = false,
+	jobNumberByQuery = '',
 }) {
 	const {
 		list: { data },
-	} = useShipmentIdView({ invoicesRequired: true, shipmentId });
+	} = useShipmentIdView({ invoicesRequired: true, shipmentId, jobNumberByQuery });
 
 	const [currentOpenSID, setCurrentOpenSID] = useState('');
 	if (isEmpty(data)) return <h2>No Data Found</h2>;

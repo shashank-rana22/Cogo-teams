@@ -104,6 +104,7 @@ function ViewInvoices() {
 				setIsTagFound={setIsTagFound}
 				setCurrentTab={setCurrentTab}
 				setCombinedRemarks={setCombinedRemarks}
+				jobNumberByQuery={jobNumber}
 			/>
 		</div>
 	);

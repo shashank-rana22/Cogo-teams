@@ -121,7 +121,7 @@ interface ShipmentDetailsInterface {
 	setIsTagFound?: any;
 	setCurrentTab?: any;
 	setCombinedRemarks?: Function;
-
+	jobNumberByQuery?: string;
 }
 
 function ShipmentDetails({
@@ -140,11 +140,13 @@ function ShipmentDetails({
 	setIsTagFound = () => {},
 	setCurrentTab = () => {},
 	setCombinedRemarks = () => {},
+	jobNumberByQuery = '',
 }: ShipmentDetailsInterface) {
 	const [showVariance, setShowVariance] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
 	const { job, consolidatedShipmentIds = [] } = data || {};
 	const { jobNumber, referenceId = '' } = job || {};
+
 	const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
 	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
 	const dataList = shipmentData?.list[GLOBAL_CONSTANTS.zeroth_index] || {};
@@ -287,6 +289,7 @@ function ShipmentDetails({
 						onAccept={onAccept}
 						showTab={tab.sidDataTab}
 						sidDataChecked={checkItem.sidDataCheck}
+						jobNumberByQuery={jobNumberByQuery}
 					/>
 
 				</>
