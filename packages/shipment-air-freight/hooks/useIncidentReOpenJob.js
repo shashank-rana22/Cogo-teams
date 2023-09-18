@@ -51,7 +51,7 @@ const useIncidentReOpenJob = ({
 
 			setIsSuccess(true);
 
-			await incidentStatusRefetch();
+			incidentStatusRefetch();
 
 			setShowModal(false);
 		} catch (error) {
