@@ -5,12 +5,12 @@ import EmptyState from '../../../../commons/EmptyState';
 
 import styles from './styles.module.css';
 
-function LeadTable({ columns, data, loading }) {
+function LeadTable({ columns = [], data = [], loading = false, height = 280, width = 440 }) {
 	if (isEmpty(data) && !loading) {
 		return (
 			<EmptyState
-				height={280}
-				width={440}
+				height={height}
+				width={width}
 				emptyText="No records found"
 				textSize="20px"
 				flexDirection="column"
@@ -23,8 +23,8 @@ function LeadTable({ columns, data, loading }) {
 
 			<Table
 				className={styles.table}
-				columns={columns || []}
-				data={data || []}
+				columns={columns}
+				data={data}
 				loading={loading}
 				loadingRowsCount={5}
 			/>

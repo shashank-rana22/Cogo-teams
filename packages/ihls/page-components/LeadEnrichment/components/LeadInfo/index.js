@@ -1,4 +1,4 @@
-import { Button, Input, Modal, Pagination, Popover } from '@cogoport/components';
+import { Button, Modal, Pagination, Popover } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -63,15 +63,6 @@ function LeadInfo({
 	return (
 		<div className={styles.container}>
 			<div className={styles.tableHeader}>
-				<div className={styles.select}>
-					<div className={styles.inputName}>
-						Select first
-					</div>
-					<div className={styles.inputNum}>
-						<Input size="sm" placeholder="00" type="number" />
-						<Button size="md" themeType="accent">Ok</Button>
-					</div>
-				</div>
 				<div className={styles.triggerButtons}>
 					<Popover
 						onClickOutside={() => onCloseActions()}
@@ -134,23 +125,26 @@ function LeadInfo({
 					<Button onClick={onClose}>Close</Button>
 				</Modal.Footer>
 			</Modal>
-			<Modal style={{ width: '60%' }} show={leadId} onClose={onCloseLogs} placement="center">
-				<Modal.Header title={(
-					<>
-						<IcMEyeopen className={styles.eye_icon} />
-						<span>
-							Enrichment History
-						</span>
-					</>
-				)}
-				/>
-				<Modal.Body>
-					<LeadEnrichmentLogs />
-				</Modal.Body>
-				<Modal.Footer>
-					<Button onClick={onCloseLogs}>Close</Button>
-				</Modal.Footer>
-			</Modal>
+			{leadId
+			&& (
+				<Modal style={{ width: '60%' }} show={leadId} onClose={onCloseLogs} placement="center">
+					<Modal.Header title={(
+						<>
+							<IcMEyeopen className={styles.eye_icon} />
+							<span>
+								Enrichment History
+							</span>
+						</>
+					)}
+					/>
+					<Modal.Body>
+						<LeadEnrichmentLogs lead_id={leadId} />
+					</Modal.Body>
+					<Modal.Footer>
+						<Button onClick={onCloseLogs}>Close</Button>
+					</Modal.Footer>
+				</Modal>
+			)}
 
 			<EnrichmentRequestModal
 				checkedRowsId={checkedRowsId}

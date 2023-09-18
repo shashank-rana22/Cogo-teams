@@ -1,62 +1,28 @@
-import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-const list = [
-	{
-		id          : 1,
-		objective   : 'org_name ka kuch bada sa naam',
-		entity      : 'any pan',
-		agent_roles : 'any iec',
-		creation    : 'any source',
-		activation  : 'date',
-
-	},
-	{
-		id          : 2,
-		objective   : 'org_name ka kuch bada sa naam',
-		entity      : 'any pan',
-		agent_roles : 'any iec',
-		creation    : 'any source',
-		activation  : 'date',
-
-	},
-];
-
-const useGetLeadEnrichmentLogs = ({ id = null }) => {
+const useGetLeadEnrichmentLogs = ({ lead_id = null }) => {
 	const [params, setParams] = useState({
-		page_limit : 10,
-		page       : 1,
-		id,
+		page_limit               : 10,
+		page                     : 1,
+		allocation_lead_id       : lead_id,
+		pagination_data_required : true,
 	});
 
-	const [searchValue, setSearchValue] = useState('');
-
-	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
-
-	const [{ loading = false }] = useRequest({
-		url    : 'list_enrichment_request',
+	const [{ data = {}, loading = false }] = useRequest({
+		url    : 'org_enrichment_history',
 		method : 'get',
 		params,
 	}, { manual: false });
 
-	useEffect(() => {
-		setParams((previousParams) => ({
-			...previousParams,
-			filters: {
-				...(previousParams.filters || {}),
-				q: searchQuery || undefined,
-			},
-		}));
-	}, [searchQuery]);
+	const { list = [], ...paginationData } = data || {};
 
 	return {
 		loading,
 		response: (list || []),
-		debounceQuery,
-		searchValue,
-		setSearchValue,
+		params,
 		setParams,
+		paginationData,
 	};
 };
 

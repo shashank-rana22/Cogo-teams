@@ -12,14 +12,14 @@ function Statistics({
 	head = 'contact',
 	params = {},
 }) {
-	const { title, count, loading, sample_contact_data } = useGetStatsData({ stats_type: head, params });
+	const { title, count, loading, data } = useGetStatsData({ stats_type: head, params });
 
-	const colors = sample_contact_data?.map((item) => item.color);
+	const colors = data?.map((item) => item.color);
 
 	function CustomLegend() {
 		return (
 			<g transform="translate(435.328125,-1)">
-				{(sample_contact_data)?.map((item, ind) => (
+				{(data)?.map((item, ind) => (
 					<g
 						key={item.id}
 						transform={`translate(0,${TRANSFORM_Y * ind})`}
@@ -91,13 +91,13 @@ function Statistics({
 				</span>
 			</div>
 			{
-				!loading && isEmpty(sample_contact_data)
+				!loading && isEmpty(data)
 					? <EmptyState showImage={false} height={100} width={150} />
 					: (
 						<div className={styles.single_chart_container}>
 							<ResponsivePie
 								className={styles.container_pie}
-								data={sample_contact_data}
+								data={data}
 								margin={{ top: 20, bottom: 20, left: -220 }}
 								startAngle={-180}
 								sortByValue

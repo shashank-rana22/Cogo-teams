@@ -4,6 +4,7 @@ export const REGISTRATION_MAPPING = {
 	C : 'company',
 };
 export const REGISTRATION_TYPE_INDEX = 3;
+export const STATISTICS_HEAD_LIMIT_INDEX = 6;
 
 export const STATISTICS_HEAD = [
 	'segment', 'shipment', 'registration',

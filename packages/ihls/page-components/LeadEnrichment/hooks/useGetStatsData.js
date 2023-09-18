@@ -139,9 +139,9 @@ const useGetStatsData = ({ stats_type = null, params = {} }) => {
 	});
 
 	return {
-		title               : TITLE_MAPPING[stats_type] || stats_type,
-		count               : loading ? '---' : data?.count,
-		sample_contact_data : loading ? [] : modifiedData || [],
+		title : TITLE_MAPPING[stats_type] || stats_type,
+		count : loading ? '---' : data?.count,
+		data  : loading ? [] : modifiedData || [],
 		loading,
 		error,
 	};

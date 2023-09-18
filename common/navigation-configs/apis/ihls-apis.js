@@ -65,6 +65,11 @@ const ihls = {
 			access_type  : 'public',
 			service_name : 'athena',
 		},
+		{
+			api          : 'org_enrichment_history',
+			access_type  : 'public',
+			service_name : 'athena',
+		},
 	],
 };
 

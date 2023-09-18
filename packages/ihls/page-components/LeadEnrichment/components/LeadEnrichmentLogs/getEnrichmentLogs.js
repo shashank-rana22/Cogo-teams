@@ -1,13 +1,14 @@
-import { startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase, format } from '@cogoport/utils';
 
 const getEnrichmentColumns = () => [
 	{
-		Header   : 'ENRICHMENT ATTEMPT',
-		key      : 'enrichment_attempt',
-		id       : 'enrichment_attempt',
-		accessor : ({ enrichment_attempt }) => (
+		Header   : 'REQUEST NAME',
+		key      : 'request_name',
+		id       : 'request_name',
+		accessor : ({ request_name }) => (
 			<section>
-				{enrichment_attempt || '___'}
+				{request_name || '___'}
 			</section>
 		),
 	},
@@ -15,26 +16,38 @@ const getEnrichmentColumns = () => [
 		Header   : 'ENRICHMENT AGENCY',
 		key      : 'enrichment_agency',
 		id       : 'enrichment_agency',
-		accessor : ({ enrichment_agency }) => (
+		accessor : ({ source_name }) => (
 			<section>
-				{startCase(enrichment_agency || '___')}
+				{startCase(source_name || '___')}
 			</section>
 		),
 	},
 	{
-		Header   : 'ENRICHMENT DATE',
-		key      : 'enrichment_date',
-		id       : 'enrichment_date',
-		accessor : ({ enriched_date = '' }) => (
-			enriched_date
+		Header   : 'ENRICHMENT STATUS',
+		key      : 'enrichment_status',
+		id       : 'enrichment_status',
+		accessor : ({ enrichment_status }) => (
+			<section>
+				{startCase(enrichment_status || '___')}
+			</section>
 		),
 	},
 	{
-		Header   : 'ENRICHMENT',
-		key      : 'contact_enrichment',
-		id       : 'contact_enrichment',
-		accessor : ({ contact_enrichment }) => (
-			contact_enrichment
+		Header   : 'USERS ENRICHED',
+		key      : 'users_enriched',
+		id       : 'users_enriched',
+		accessor : ({ users_enriched }) => (
+			users_enriched
+		),
+	},
+	{
+		Header   : 'ENRICHMENT DATE',
+		key      : 'created_at',
+		id       : 'created_at',
+		accessor : ({ created_at = '' }) => (
+			<section>
+				{created_at ? format(created_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']) : '___'}
+			</section>
 		),
 	},
 ];

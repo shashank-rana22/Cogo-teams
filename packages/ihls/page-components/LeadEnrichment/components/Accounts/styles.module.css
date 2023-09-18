@@ -25,3 +25,13 @@
 .statistics > div {
 	flex: calc(33% - 8px);
 }
+
+.user_button {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 16px;
+}
+
+.button_name {
+	margin-right: 4px;
+}
