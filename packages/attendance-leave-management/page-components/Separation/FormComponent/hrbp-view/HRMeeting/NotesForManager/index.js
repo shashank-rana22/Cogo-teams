@@ -1,4 +1,5 @@
 import { InputController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -23,7 +24,7 @@ function NotesForManager({ control = {}, data = {} }) {
 						size="md"
 						style={{ marginRight: '8px', width: '100%' }}
 						placeholder="Type your notes here"
-						disabled={notes?.[FOURTH_INDEX]?.value}
+						disabled={notes?.[FOURTH_INDEX]?.value || notes?.[GLOBAL_CONSTANTS.zeroth_index]?.value}
 					/>
 				</div>
 			) }

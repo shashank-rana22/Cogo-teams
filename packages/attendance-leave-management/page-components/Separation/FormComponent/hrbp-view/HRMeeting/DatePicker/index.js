@@ -19,9 +19,12 @@ function DatePicker({ control = {}, errors = {}, lastWorkingDay = '' }) {
 					name="date"
 					className={styles.datepicker}
 					disabled={lastWorkingDay}
+					rules={{ required: 'this is required' }}
 				/>
+			</div>
+			<div>
 				{errors.date && (
-					<span className={styles.error}>Location Name is Required</span>
+					<span className={styles.error}>*Last Working Day is Required</span>
 				)}
 			</div>
 
