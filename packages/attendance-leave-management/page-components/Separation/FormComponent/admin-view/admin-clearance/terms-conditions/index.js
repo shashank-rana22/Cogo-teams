@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function TermsConditions({ control = {}, errors = {}, termsChecked = false }) {
+function TermsConditions({ control = {}, errors = {}, termsChecked = false, is_complete = false }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>TERMS & CONDITIONS</div>
@@ -15,6 +15,7 @@ function TermsConditions({ control = {}, errors = {}, termsChecked = false }) {
 						name="termsAcceptance"
 						control={control}
 						checked={termsChecked}
+						disabled={is_complete}
 					/>
 					<div className={styles.content}>
 						<p>
@@ -44,8 +45,8 @@ function TermsConditions({ control = {}, errors = {}, termsChecked = false }) {
 							control={control}
 							name="name"
 							rules={{ required: 'this is required' }}
+							disabled={is_complete}
 						/>
-
 						{errors.name ? <span className={styles.error}>*required</span> : null}
 					</div>
 				</div>
