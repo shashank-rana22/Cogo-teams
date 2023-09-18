@@ -94,11 +94,9 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 
 	return (
 		<>
-			<div className={styles.header}>
-				<div className={styles.left_header}>
+			<div className={styles.left_header}>
 					<span className={styles.upper_text}>FINANCE CLEARANCE</span>
 					<span className={styles.lower_text}>FNF & other settlements </span>
-				</div>
 			</div>
 			{is_complete ? (
 				<div className={styles.completed_notification_container}>

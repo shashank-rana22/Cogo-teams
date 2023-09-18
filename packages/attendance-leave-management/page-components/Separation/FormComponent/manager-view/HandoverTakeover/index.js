@@ -152,14 +152,14 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 				</div>
 			</div>
 
-			<div className={styles.button_container}>
-				<Button onClick={handleSubmit(() => setShowModal(true))}>
-					Accept & Proceed
-					<IcMArrowRight height="18px" width="18px" />
-				</Button>
-			</div>
-
-			<ModalComponent
+			{ is_complete===false && 
+			  <div className={styles.button_container}> 
+			  		<Button onClick={handleSubmit(() => setShowModal(true))}>
+						Accept & Proceed
+						<IcMArrowRight height="18px" width="18px" />
+				    </Button>
+			  </div>
+			}<ModalComponent
 				showModal={showModal}
 				setShowModal={setShowModal}
 				handleSubmit={handleSubmit}

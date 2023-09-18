@@ -19,7 +19,7 @@
 	font-weight: 400;
 }
 
-.containerotp {
+.container_otp {
 	display: flex;
 	align-items: center;
 	margin-top: 12px;
@@ -32,7 +32,7 @@
 	}
 }
 
-.dividercontainer {
+.divider_container {
 	display: flex;
 	margin-top: 16px;
 }

@@ -15,6 +15,7 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 	} = useForm();
 
 	const { admin_clearance, application_status } = data || {};
+	console.log('🚀 ~ file: index.js:18 ~ AdminClearanceHrbp ~ admin_clearance:', admin_clearance);
 	const { process_user_details, admin_clearance:adminClearance } = admin_clearance || {};
 	let { name } = process_user_details || {};
 	const { sub_process_data, is_complete } = adminClearance || {};
@@ -94,7 +95,7 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 								<div className={styles.lower_text}>
 									Ans.
 									{' '}
-									{item?.value || '-'}
+									{item?.Value || '-'}
 								</div>
 							</div>
 						))}

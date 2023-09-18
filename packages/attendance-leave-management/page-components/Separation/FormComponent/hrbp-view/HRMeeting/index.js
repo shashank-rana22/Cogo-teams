@@ -15,8 +15,6 @@ import JoiningBonus from './JoiningBonus';
 import NotesForManager from './NotesForManager';
 import styles from './styles.module.css';
 
-const FIRST_INDEX = 1;
-const SECOND_INDEX = 2;
 const THIRD_INDEX = 3;
 const FOURTH_INDEX = 4;
 function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loading = false }) {
@@ -103,10 +101,10 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 			setValue('joining_bonus_clawback', sub_process_data?.joiningBonusApplicable);
 			setValue('your_notes', sub_process_data?.notes[GLOBAL_CONSTANTS.zeroth_index].value);
 			setValue('your_notes_cb', sub_process_data?.notes[GLOBAL_CONSTANTS.zeroth_index].is_shared_with_manager);
-			setValue('your_notes_2', sub_process_data?.notes[FIRST_INDEX].value);
-			setValue('your_notes_cb_2', sub_process_data?.notes[FIRST_INDEX].is_shared_with_manager);
-			setValue('your_notes_3', sub_process_data?.notes[SECOND_INDEX].value);
-			setValue('your_notes_cb_3', sub_process_data?.notes[SECOND_INDEX].is_shared_with_manager);
+			setValue('your_notes_2', sub_process_data?.notes[GLOBAL_CONSTANTS.one].value);
+			setValue('your_notes_cb_2', sub_process_data?.notes[GLOBAL_CONSTANTS.one].is_shared_with_manager);
+			setValue('your_notes_3', sub_process_data?.notes[GLOBAL_CONSTANTS.two].value);
+			setValue('your_notes_cb_3', sub_process_data?.notes[GLOBAL_CONSTANTS.two].is_shared_with_manager);
 			setValue('your_notes_4', sub_process_data?.notes[THIRD_INDEX].value);
 			setValue('your_notes_cb_4', sub_process_data?.notes[THIRD_INDEX].is_shared_with_manager);
 			setValue('your_notes_manager', sub_process_data?.notes[FOURTH_INDEX].value);
