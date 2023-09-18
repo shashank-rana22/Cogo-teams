@@ -23,14 +23,14 @@ function InvoiceModal({
 	shipment_data = {},
 }) {
 	const [renderContent, setRenderContent] = useState('form');
-	const MODAL_TITLE = renderContent === 'form' ? 'Generate Invoice' : null;
+	const MODAL_TITLE = renderContent === 'form' ? 'Generate Invoice' : '';
 
 	const [billingParty, setBillingParty] = useState({});
 	const [downloadButtonState, setDownloadButtonState] = useState('');
 
 	const [collectionPartyState, setCollectionPartyState] = useState({});
 	const [collectionPartyAddress, setCollectionPartyAddress] = useState({});
-	const [codes, setCodes] = useState({});
+	const [chargeCodes, setChargeCodes] = useState({});
 
 	const { fields, control, watch, setValue } = useForm();
 
@@ -82,13 +82,13 @@ function InvoiceModal({
 	const calculatedValues = useCalculateTotalPrice({
 		baseCurrency : formValues?.invoice_currency,
 		lineItems    : formValues?.line_items,
-		chargeCodes  : codes,
+		chargeCodes,
 	});
 
 	const lineItemsDataArray = useMemo(
 		() => (calculatedValues.newItems || []).map(
 			(item, index) => {
-				const codeData = codes[item?.code] || {};
+				const codeData = chargeCodes[item?.code] || {};
 				return {
 					serial_number       : index + SERIAL_INCREMENT,
 					code                : item?.code,
@@ -105,7 +105,7 @@ function InvoiceModal({
 				};
 			},
 		),
-		[calculatedValues.newItems, codes, formValues],
+		[calculatedValues.newItems, chargeCodes, formValues],
 	);
 	const { listEntities, entitiesLoading } = useGetEntities();
 
@@ -136,7 +136,7 @@ function InvoiceModal({
 							setBillingParty={setBillingParty}
 							watch={watch}
 							setValue={setValue}
-							setCodes={setCodes}
+							setCodes={setChargeCodes}
 							cpParams={cpParams}
 							handleModifiedOptions={handleModifiedOptions}
 							collectionPartyState={collectionPartyState}

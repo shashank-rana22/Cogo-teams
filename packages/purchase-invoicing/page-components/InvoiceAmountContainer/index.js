@@ -43,34 +43,32 @@ function InvoiceAmountContainer({
 					</div>
 				))}
 			</div>
-			<div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-				<div style={styles.total_amount}>
-					<div style={{ width: '50%', border: '0.5px solid black' }}>
-						<b>
-							{formatAmount({
-								amount   : calculatedValues.total_tax_amount || ZERO,
-								currency : formValues?.invoice_currency,
-								options  : {
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 2,
-								},
-							})}
-						</b>
-					</div>
-					<div style={{ width: '50%', border: '0.5px solid black' }}>
-						<b>
-							{formatAmount({
-								amount   : calculatedValues.sub_total_amount || ZERO,
-								currency : formValues?.invoice_currency,
-								options  : {
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 2,
-								},
-							})}
-						</b>
-					</div>
+			<div style={styles.total_amount}>
+				<div style={{ width: '12%', border: '0.5px solid black' }}>
+					<b>
+						{formatAmount({
+							amount   : calculatedValues.total_tax_amount || ZERO,
+							currency : formValues?.invoice_currency,
+							options  : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 2,
+							},
+						})}
+					</b>
+				</div>
+				<div style={{ width: '12%', border: '0.5px solid black' }}>
+					<b>
+						{formatAmount({
+							amount   : calculatedValues.sub_total_amount || ZERO,
+							currency : formValues?.invoice_currency,
+							options  : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 2,
+							},
+						})}
+					</b>
 				</div>
 			</div>
 		</div>

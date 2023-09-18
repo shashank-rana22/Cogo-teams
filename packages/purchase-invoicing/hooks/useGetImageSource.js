@@ -6,7 +6,7 @@ import toastApiError from '../utils/toastApiError';
 const useGetImageSource = () => {
 	const [imageSrc, setImageSrc] = useState('');
 
-	const fetchImageData = async ({ url = '', setterFunc }) => {
+	const fetchImageData = async ({ url = '', setterFunc = () => {} }) => {
 		try {
 			const response = await fetch(url);
 			const blobData = await response.blob();

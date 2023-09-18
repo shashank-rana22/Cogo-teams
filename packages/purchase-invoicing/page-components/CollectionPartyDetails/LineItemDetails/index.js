@@ -10,6 +10,17 @@ import { renderLineItemFunctions } from '../../RenderFunctions/renderLineItemFun
 
 import styles from './styles.module.css';
 
+const LINE_ITEMS_DETAILS = {
+	total_tax: {
+		label : 'Total Tax',
+		value : 'total_tax_amount',
+	},
+	sub_total_amount: {
+		label : 'Total Cost',
+		value : 'sub_total_amount',
+	},
+};
+
 const DEFAULT_SIZE_VALUE = 1;
 const MAX_PERCENT_VALUE = 100;
 const FULL_SPAN_WIDTH = 12;
@@ -31,7 +42,7 @@ function LineItemDetails({
 	shipmentId = '',
 	shipment_data = {},
 }) {
-	const { fields, append, remove } = useFieldArray({
+	const { fields = [], append, remove } = useFieldArray({
 		control,
 		name: 'line_items',
 	});
@@ -127,24 +138,20 @@ function LineItemDetails({
 							<div>NG: Non GST R: Reverse Charge</div>
 						</div>
 						<div className={`${styles.flex} ${styles.label}`}>
-							<div className={styles.amount}>
-								<div className={styles.label}>
-									Total Tax
-								</div>
-								<div className={styles.label}>
-									{getFormattedAmount(calculatedValues?.total_tax_amount
-										|| DEFAULT_AMOUNT_VALUE, invoiceCurrency)}
-								</div>
-							</div>
-							<div className={styles.amount}>
-								<div className={styles.label}>
-									Total Cost
-								</div>
-								<div className={styles.label}>
-									{getFormattedAmount(calculatedValues?.sub_total_amount
-										|| DEFAULT_AMOUNT_VALUE, invoiceCurrency)}
-								</div>
-							</div>
+							{
+								Object.entries(LINE_ITEMS_DETAILS).map(([key, item]) => (
+									<div key={key} className={styles.amount}>
+										<div className={styles.label}>
+											{item.label}
+										</div>
+										<div className={styles.label}>
+											{getFormattedAmount(calculatedValues?.[item?.value]
+												|| DEFAULT_AMOUNT_VALUE, invoiceCurrency)}
+										</div>
+									</div>
+								))
+
+							}
 						</div>
 					</div>
 				</div>

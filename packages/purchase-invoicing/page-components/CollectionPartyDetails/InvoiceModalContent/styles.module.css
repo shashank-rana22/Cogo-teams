@@ -23,8 +23,7 @@
 .generate_button {
 	width: 100px;
 	min-height: 40px;
-	margin-top: 40px;
-	margin-left: 50%;
+	margin: 40px 0 0 50%;
 }
 
 .download_button {

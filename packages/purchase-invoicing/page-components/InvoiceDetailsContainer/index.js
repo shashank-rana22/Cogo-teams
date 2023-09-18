@@ -66,17 +66,7 @@ function InvoiceDetailsContainer({
 				<div style={{ fontSize: '15px', padding: '12px 0 0 6px' }}>
 					<b>COGOPORT PRIVATE LIMITED</b>
 					<div>
-						{address}
-						,
-						{' '}
-						{city?.name}
-						{' '}
-						-
-						{' '}
-						{pin_code}
-						,
-						{' '}
-						{country?.name}
+						{`${address} , ${city?.name} - ${pin_code} , ${country.name}`}
 					</div>
 					<div>
 						CIN No :

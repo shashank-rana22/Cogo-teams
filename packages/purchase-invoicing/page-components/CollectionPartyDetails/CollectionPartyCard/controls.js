@@ -36,7 +36,8 @@ const getFormControls = ({
 	},
 	{
 		name        : 'cp_address',
-		label       : 'Select Collection Party Address',
+		label       : 'Collection Party Address',
+		placeholder : 'Select Collection Party Address',
 		type        : 'select',
 		rules       : { required: 'Address is required' },
 		size        : 'sm',
@@ -50,14 +51,14 @@ const getFormControls = ({
 	},
 	{
 		name        : 'collection_party_bank_details',
-		label       : 'Select Collection Party Bank Details',
+		label       : 'Collection Party Bank Details',
+		placeholder : 'Select Bank Details...',
 		renderLabel : (bank) => <RenderLabel bank={bank} />,
 		type        : 'select',
 		rules       : { required: 'Collection Party Bank Details is Required' },
 		size        : 'sm',
 		isClearable : true,
 		options     : collectionPartyBankOptions,
-		placeholder : 'Select Bank Details...',
 		span        : 4,
 	},
 ];

@@ -117,8 +117,13 @@ const GLOBAL_CONSTANTS = {
 		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae5'
 							+ '9e95d4e38a4271ff/UTRuploadSampleFileForAdvancePayment.xlsx',
 	},
-	cogoport_agent_email_id    : 'agentid@cogoport.com',
-	flash_booking_charge_codes : [
+
+	invoice_crawler:
+	'https://vmoiuzda31.execute-api.ap-south-1.amazonaws.com/production/generate_from_html',
+
+	cogoport_agent_email_id: 'agentid@cogoport.com',
+
+	flash_booking_charge_codes: [
 		'OTC',
 		'BAS',
 		'BASNO',

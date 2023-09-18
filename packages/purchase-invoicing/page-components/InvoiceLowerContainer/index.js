@@ -24,7 +24,7 @@ function InvoiceLowerContainer({
 				<div style={styles.tax}>
 					<div>
 						<b>
-							Total Amount Before Tax: &nbsp; &nbsp;
+							Total Amount Before Tax:
 							{' '}
 							{formatAmount({
 								amount   : calculatedValues.sub_total_amount || ZERO,
@@ -39,7 +39,7 @@ function InvoiceLowerContainer({
 					</div>
 					<div>
 						<b>
-							Total Amount After Tax: &nbsp; &nbsp; &nbsp;
+							Total Amount After Tax:
 							{' '}
 							{formatAmount({
 								amount   : calculatedValues.invoice_amount || ZERO,
@@ -56,7 +56,11 @@ function InvoiceLowerContainer({
 			</div>
 			<div style={{ display: 'flex' }}>
 				<div style={styles.remarks}>
-					<b>Remarks: &nbsp;</b>
+					<b>
+						Remarks:
+						{' '}
+
+					</b>
 					<div>
 						{formValues?.remarks || ''}
 					</div>

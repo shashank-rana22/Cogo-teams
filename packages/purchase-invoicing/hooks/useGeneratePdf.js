@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { usePublicRequest } from '@cogoport/request';
 
 import toastApiError from '../utils/toastApiError';
@@ -6,7 +7,7 @@ import toastApiError from '../utils/toastApiError';
 const useGeneratePdf = () => {
 	const [{ loading }, trigger] = usePublicRequest({
 		method : 'post',
-		url    : 'https://vmoiuzda31.execute-api.ap-south-1.amazonaws.com/production/generate_from_html',
+		url    : GLOBAL_CONSTANTS.invoice_crawler,
 	}, { manual: false });
 
 	const generatePdf = async ({
