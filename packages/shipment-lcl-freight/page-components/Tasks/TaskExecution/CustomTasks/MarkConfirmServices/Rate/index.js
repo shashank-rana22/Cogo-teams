@@ -37,7 +37,7 @@ function Rate({ data = {}, setStep = () => {}, servicesList = [], task = {}, for
 	const formProps = useForm({ defaultValues: { ...defaultValues, ...spDefaultValues } });
 	const { control, handleSubmit, formState:{ errors = {} } = {}, watch, setValue } = formProps || {};
 
-	const { service_charges_with_trade = [] } = data;
+	const { service_charges_with_trade = [] } = data || {};
 
 	const CUSTOM_VALUES = {};
 	const formValues = watch();

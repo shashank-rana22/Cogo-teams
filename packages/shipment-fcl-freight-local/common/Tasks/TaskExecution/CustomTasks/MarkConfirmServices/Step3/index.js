@@ -18,7 +18,7 @@ function StepThree({ data = {}, setStep = () => {}, shipment_id = '' }) {
 	const formProps = useForm({ defaultValues });
 	const { control, handleSubmit, formState:{ errors = {} } = {}, watch, setValue } = formProps || {};
 
-	const { service_charges_with_trade = [] } = data;
+	const { service_charges_with_trade = [] } = data || {};
 
 	const CUSTOM_VALUES = {};
 	const formValues = watch();

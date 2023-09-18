@@ -39,7 +39,7 @@ function RenderAddRateForm({
 
 	let { services = [] } = serviceData || {};
 	const { service_type = '' } = serviceData || {};
-	services = services?.find((service) => service.service_type === service_type);
+	services = services?.find((service) => service?.service_type === service_type);
 
 	const selectedUnit = watch('unit');
 	const prefillValue = UNIT_VALUE_MAPPING?.[selectedUnit];

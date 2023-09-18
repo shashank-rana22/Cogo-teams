@@ -24,7 +24,7 @@ function EditQuotations({
 }) {
 	const [confirmModal, setConfirmModal] = useState(false);
 
-	const { service_charges_with_trade = [] } = data;
+	const { service_charges_with_trade = [] } = data || {};
 
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 	const formProps = useForm({ defaultValues });
