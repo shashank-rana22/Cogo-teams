@@ -56,10 +56,7 @@ function CommunicationModals({
 
 		return (
 			<>
-				<div
-					className={styles.wrapper}
-					role="presentation"
-				>
+				<div className={styles.wrapper}>
 					<div className={styles.plus_circle}>
 						<div className={styles.action}>
 							<Comp onClick={clickFunc} />
