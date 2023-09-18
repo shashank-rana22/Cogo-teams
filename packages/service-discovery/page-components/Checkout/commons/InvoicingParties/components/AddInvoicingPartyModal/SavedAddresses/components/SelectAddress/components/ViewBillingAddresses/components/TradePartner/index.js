@@ -50,8 +50,12 @@ function TradePartner({
 						<Pill className={verification_status}>{verification_status}</Pill>
 
 						<Tooltip
-							content={`Please provide a proof of agreement that verifies the tradeparty&apos;s 
-							authorization to make payment on behalf of the Booking party.`}
+							content={(
+								<div>
+									Please provide a proof of agreement that verifies the trade party&apos;s
+									authorization to make payment on behalf of the Booking party
+								</div>
+							)}
 							placement="top"
 							caret={false}
 							interactive

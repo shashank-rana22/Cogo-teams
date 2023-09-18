@@ -108,14 +108,18 @@ const GLOBAL_CONSTANTS = {
 		razer_pay_url: 'https://checkout.razorpay.com/v1/checkout.js',
 	},
 	sample_document_url: {
-		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com/
-						3dbb0e12ed2336171d1d32cb72ed2d4e/new_employee_bulk_upload_sample.csv`,
+		new_hire_bulk_upload_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
+		+ '3dbb0e12ed2336171d1d32cb72ed2d4e/new_employee_bulk_upload_sample.csv',
+	},
+	sample_ratesheet_url: {
+		sample_file_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/ea6f784b835820e9558b7098928cc2fd/'
+		+ 'cogo-assured-rate-sheet-sample.csv',
 	},
 	upload_utr_sample_file: {
-		normal_payment: 'https://cogoport-testing.sgp1.digitaloceanspaces.com/06679b4fca57'
-							+ 'a312ee8f3fe0ded72246/UTRuploadSampleFile.xlsx',
-		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae5'
-							+ '9e95d4e38a4271ff/UTRuploadSampleFileForAdvancePayment.xlsx',
+		normal_payment: 'https://cogoport-testing.sgp1.digitaloceanspaces.com/06679b4fca57a312ee8f3fe0ded72246/'
+		+ 'UTRuploadSampleFile.xlsx',
+		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae59e95d4e38a4271ff/'
+		+ 'UTRuploadSampleFileForAdvancePayment.xlsx',
 	},
 	cogoport_agent_email_id    : 'agentid@cogoport.com',
 	flash_booking_charge_codes : [
@@ -394,6 +398,7 @@ const GLOBAL_CONSTANTS = {
 		help_desk            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg',
 		clock_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/clock_icon_with_hands.svg',
+		firebase_configuration  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/firebase_icon.png',
 		green_arrow             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/green_arrow.png',
 		red_arrow               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/red_arrow.png',
 		sign_up_failed          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sinup_failed.png',
@@ -418,6 +423,7 @@ const GLOBAL_CONSTANTS = {
 		reply_all           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay_all.png',
 		reply               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/replay.png',
 		cogoport_email_logo : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogoport_top.svg',
+		empty_notes         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/notes-empty.svg',
 		no_incident_data    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no-incident-data.svg',
 		booking_verification_png:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/booking_verification-s2c',
@@ -449,7 +455,8 @@ const GLOBAL_CONSTANTS = {
 
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
-			+ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx',
+		+ '45773ab4048f606ce6ef06fa1d083352/'
+		+ 'Book%201%20-%20Copy.xlsx',
 	},
 
 	urls: {
@@ -694,6 +701,9 @@ const GLOBAL_CONSTANTS = {
 			},
 			treasury: {
 				currencies: ['INR', 'USD', 'VND'],
+			},
+			feedback_services: {
+				currencies: ['INR', 'USD', 'EUR', 'GBP', 'VND', 'IDR', 'SGD', 'THB', 'CNY', 'AED'],
 			},
 		},
 	},

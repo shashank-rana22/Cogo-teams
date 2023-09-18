@@ -8,7 +8,7 @@ import {
 	MarkConfirmServices,
 	GenerateMawb,
 	ConfirmBookingWithAirline,
-	ConfirmSellPrice, ConfirmCargoAir, TerminalChargeReceipt,
+	ConfirmSellPrice, ConfirmCargoAir, TerminalChargeReceipt, UploadChecklist, UploadShippingBill, UploadLeo,
 } from './CustomTasks';
 import UpdateCargoAir from './CustomTasks/UpdateCargoAir';
 import ExecuteStep from './ExecuteStep';
@@ -23,7 +23,6 @@ function ExecuteTask({
 	services = [],
 	shipment_data = {},
 	primary_service = {},
-	getShipment = () => {},
 	getShipmentTimeline = () => {},
 	servicesLoading = false,
 
@@ -186,6 +185,42 @@ function ExecuteTask({
 			/>
 		);
 	}
+	if (
+		task.task === 'upload_checklist' && tradeType === 'export'
+	) {
+		return (
+			<UploadChecklist
+				shipmentData={shipment_data}
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
+			/>
+		);
+	}
+	if (
+		task.task === 'upload_leo' && tradeType === 'export'
+	) {
+		return (
+			<UploadLeo
+				shipmentData={shipment_data}
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
+			/>
+		);
+	}
+	if (
+		task.task === 'upload_shipping_bill' && tradeType === 'export'
+	) {
+		return (
+			<UploadShippingBill
+				shipmentData={shipment_data}
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
+			/>
+		);
+	}
 	if (task.task === 'upload_terminal_handling_charge_receipt') {
 		return (
 			<TerminalChargeReceipt
@@ -211,7 +246,6 @@ function ExecuteTask({
 			uiConfig={taskConfigData?.task_config?.ui_config?.[currentStep]}
 			selectedMail={selectedMail}
 			serviceIdMapping={serviceIdMapping}
-			getShipment={getShipment}
 			getShipmentTimeline={getShipmentTimeline}
 			services={services}
 			shipment_data={shipment_data}

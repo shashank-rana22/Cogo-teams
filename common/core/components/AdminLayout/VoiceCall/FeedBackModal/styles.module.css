@@ -1,11 +1,12 @@
 .feed_title {
+	margin-bottom: 6px;
 	font-size: 16px;
 	font-weight: 700;
 	color: #4f4f4f;
 }
 
 .label {
-	margin: 6px 0;
+	margin: 6px 10px 6px 0;
 	font-size: 12px;
 	color: #000;
 }
@@ -23,6 +24,11 @@
 			border-top: none !important;
 			border-bottom: none !important;
 		}
+
+		.ui_select_display_container {
+			width: 160px;
+			height: 32px !important;
+		}
 	}
 }
 
@@ -36,4 +42,9 @@
 .styled_chips {
 	display: flex;
 	flex-wrap: wrap;
+}
+
+.shipment_details {
+	display: flex;
+	align-items: center;
 }

@@ -13,7 +13,7 @@ function AddNewService({
 }) {
 	const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj);
 
-	const { primary_service } = useContext(ShipmentDetailContext);
+	const { shipment_data = {}, primary_service = {} } = useContext(ShipmentDetailContext);
 
 	const [upsellModal, setUpsellModal] = useState(false);
 
@@ -45,15 +45,14 @@ function AddNewService({
 	return (
 		<>
 			{showAddServiceBox ? (
-				<div
+				<button
 					className={styles.container}
 					onClick={closeModal}
-					role="button"
-					tabIndex={0}
+					disabled={shipment_data?.is_job_closed}
 				>
-					<div className={styles.text}>{upsellableService.display_label}</div>
+					<div className={styles.text}>{upsellableService?.display_label}</div>
 					<IcMPlus />
-				</div>
+				</button>
 			) : null}
 
 			{upsellModal ? (

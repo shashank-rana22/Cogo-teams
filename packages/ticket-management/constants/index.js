@@ -121,3 +121,17 @@ export const getTicketActionLabel = ({ t, type }) => {
 
 	return ACTIONS[type];
 };
+export const REQUEST_TYPE_OPTIONS = [
+	{ label: 'Shipment', value: 'shipment' },
+	{ label: 'Rate', value: 'rate' },
+	{ label: 'Finance', value: 'finance' },
+	{ label: 'Platform Issue', value: 'platform_issue' },
+];
+
+export const SHIPMENT_RATE_KEYS = ['request_type', 'organization_id', 'user_id',
+	'serial_id', 'service', 'trade_type', 'category', 'sub_category', 'issue_type',
+	'additional_information', 'priority', 'file_url', 'notify_customer'];
+
+export const FINANCE_PLATFORM_KEYS = ['request_type', 'category', 'sub_category', 'issue_type',
+	'additional_information', 'priority',
+	'file_url', 'notify_customer'];

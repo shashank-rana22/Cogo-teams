@@ -125,5 +125,10 @@
     "performance_rating": "Performance Rating",
     "users_based_on_issues":"Users (based on issues)",
     "top_categories": "Top Categories",
-    "are_you_sure_want_to": "Are you sure want to"
+    "are_you_sure_want_to": "Are you sure want to",
+    "raised_by_desk": "Raised by desk",
+    "raised_to_desk": "Raised to desk",
+    "request_type": "Request Type",
+    "select_sid": "Select SID",
+    "select_request_ype": "Select Request Type"
 }
