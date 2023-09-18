@@ -16,7 +16,7 @@
 .error {
 	display: flex;
 	font-size: 10px;
-	color: red;
+	color: #f00;
 }
 
 .heading {
@@ -70,8 +70,7 @@
 	min-height: 44px;
 	padding: 8px;
 	background-color: #fff;
-	border-bottom-right-radius: 6px;
-	border-bottom-left-radius: 6px;
+	border-radius: 0 0 6px 6px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
 }
 

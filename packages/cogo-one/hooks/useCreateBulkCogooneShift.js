@@ -7,7 +7,9 @@ const getPayload = ({ team_name, formattedValues }) => {
 
 	const filteredList = formattedValues.filter(({ shift_id }) => !shift_id);
 
-	filteredList.forEach(({ shift_name, start_time_local, end_time_local }) => {
+	filteredList.forEach((itm) => {
+		const { shift_name, start_time_local, end_time_local } = itm || {};
+
 		if (start_time_local && end_time_local) {
 			shiftDetails = [
 				...shiftDetails,

@@ -3,7 +3,7 @@ import { isValid } from '@cogoport/utils';
 export const transformShiftData = ({ newData = {}, savedData = [] }) => {
 	const UPDATED_DATA = {};
 
-	Object.entries(newData).forEach(
+	Object.entries(newData || {}).forEach(
 		([key, time]) => {
 			const [shift_name, time_key] = key.split('_shift_');
 
