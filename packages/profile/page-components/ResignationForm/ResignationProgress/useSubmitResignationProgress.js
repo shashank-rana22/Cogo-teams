@@ -2,6 +2,10 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { setCookie } from '@cogoport/utils';
+
+const NEGATIVE_INDEX = -1;
+const SESSION_TIMEOUT = 3000;
 
 const useSubmitResignationProgress = () => {
 	const [{ loading }, trigger] = useHarbourRequest({
@@ -20,8 +24,14 @@ const useSubmitResignationProgress = () => {
 				},
 			});
 			Toast.success(
-				'Completed Separation',
+				'Separation Completed, Please Relogin',
 			);
+
+			setTimeout(() => {
+				setCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME, 'expired', NEGATIVE_INDEX);
+				setCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME, 'expired', NEGATIVE_INDEX);
+				window.location.href = '/v2/login';
+			}, SESSION_TIMEOUT);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 		}
