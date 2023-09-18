@@ -13,7 +13,7 @@ import useCreateRevenueDeskWallet from '../../hooks/useCreateRevenueDeskWallet';
 import styles from './styles.module.css';
 
 function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetch = () => {} }) {
-	const [submitValue, setSubmitValue] = useState();
+	const [submitValue, setSubmitValue] = useState({});
 
 	const { createRevenueDeskWallet, loading } = useCreateRevenueDeskWallet({ setCreateWallet, refetch });
 
