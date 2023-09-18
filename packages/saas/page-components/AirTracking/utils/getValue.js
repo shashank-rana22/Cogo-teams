@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, getByKey, startCase, format } from '@cogoport/utils';
 
 const ActionFunction = {
@@ -36,7 +37,7 @@ const getValue = (itemData, itemField, functions, emptyState) => {
 	switch (itemField.type) {
 		case 'datetime':
 			return val
-				? format(val, itemField.formatType || 'dd MMM yy | hh:mm a')
+				? format(val, itemField.formatType || GLOBAL_CONSTANTS.formats.date['dd MMM yy | hh:mm a'])
 				: null;
 
 		case 'price':

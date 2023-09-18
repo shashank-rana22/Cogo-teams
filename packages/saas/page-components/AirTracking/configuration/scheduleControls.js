@@ -1,4 +1,6 @@
-const TIME_ARRAY = [...Array(24).keys()].reduce((acc, curr) => {
+const HOURS_IN_DAY = 24;
+
+const TIME_ARRAY = [...Array(HOURS_IN_DAY).keys()].reduce((acc, curr) => {
 	const hour = curr;
 	const minutes = ['00', '15', '30', '45'];
 	return acc.concat(

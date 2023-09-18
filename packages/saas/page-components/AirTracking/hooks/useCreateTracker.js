@@ -5,7 +5,7 @@ import { isEmpty, upperCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useCallback, useEffect, useState } from 'react';
 
-import headerFormControls, { defaultValues } from '../configuration/headerFormControls';
+import headerFormControls, { DEFAULT_VALUES } from '../configuration/headerFormControls';
 
 import useRedirectFn from './useRedirectFn';
 
@@ -102,7 +102,7 @@ const useCreateTracker = ({ operatorData }) => {
 	};
 
 	useEffect(() => {
-		reset(defaultValues);
+		reset(DEFAULT_VALUES);
 	}, [reset, trackingType]);
 
 	useEffect(() => {

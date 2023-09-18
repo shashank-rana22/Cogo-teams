@@ -1,6 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEmail, IcMUserAllocations } from '@cogoport/icons-react';
-
-import patterns from '@/ui/commons/configurations/patterns';
 
 const getAddContactControls = ({ t }) => [
 	{
@@ -23,7 +22,7 @@ const getAddContactControls = ({ t }) => [
 		rules       : {
 			required : t('airOceanTracking:tracking_add_contact_control_email_required_text'),
 			pattern  : {
-				value   : patterns.EMAIL,
+				value   : GLOBAL_CONSTANTS.regex_patterns.email,
 				message : t('airOceanTracking:tracking_add_contact_control_invalid_email_text'),
 			},
 		},
@@ -38,7 +37,7 @@ const getAddContactControls = ({ t }) => [
 		rules           : {
 			required : t('airOceanTracking:tracking_add_contact_control_mobile_required_text'),
 			pattern  : {
-				value   : patterns.MOBILE,
+				value   : GLOBAL_CONSTANTS.regex_patterns.mobile_number,
 				message : t('airOceanTracking:tracking_add_contact_control_invalid_mobile_text'),
 			},
 		},

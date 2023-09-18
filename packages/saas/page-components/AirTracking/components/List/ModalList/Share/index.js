@@ -3,14 +3,13 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
+import Table from '../../../../common/Table';
 import getShareListConfig from '../../../../configuration/shareListConfig';
 import getShareTrackerControls from '../../../../configuration/shareTrackerControls';
 import getField from '../../../../constant/getField';
 import useShareTracker from '../../../../hooks/useShareTracker';
 
 import styles from './styles.module.css';
-
-import Table from '@/ui/page-components/air-ocean-tracking/common/Table';
 
 function Share({ shipmentId = '' }) {
 	const { t } = useTranslation(['common', 'airOceanTracking']);

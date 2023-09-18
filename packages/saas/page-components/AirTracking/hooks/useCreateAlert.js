@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
@@ -28,9 +29,9 @@ const preFilledFn = ({ prevAlertData }) => {
 		consignee : [],
 		dsr       : [],
 	};
-	const pocDetails = [];
-	const shipperArr = [];
-	const consigneeArr = [];
+	const POC_DETAILS = [];
+	const SHIPPER_ARR = [];
+	const CONSIGNEE_ARR = [];
 
 	prevAlertData.forEach((value) => {
 		const { dsr } = prefilValue;
@@ -39,10 +40,10 @@ const preFilledFn = ({ prevAlertData }) => {
 
 		const pocId = id;
 
-		pocDetails.push(poc_details);
+		POC_DETAILS.push(poc_details);
 
-		shipperArr.push(user_type === 'SHIPPER');
-		consigneeArr.push(user_type === 'CONSIGNEE');
+		SHIPPER_ARR.push(user_type === 'SHIPPER');
+		CONSIGNEE_ARR.push(user_type === 'CONSIGNEE');
 
 		const usertType = USER_TYPE_MAPPING[user_type ?? 'DEFAULT'];
 		prefilValue[usertType] = [...(prefilValue[usertType] || []), pocId];
@@ -61,10 +62,10 @@ const preFilledFn = ({ prevAlertData }) => {
 		});
 	});
 
-	isShipper = shipperArr.includes(true);
-	isConsignee = consigneeArr.includes(true);
+	isShipper = SHIPPER_ARR.includes(true);
+	isConsignee = CONSIGNEE_ARR.includes(true);
 
-	return { prefilValue, pocDetails };
+	return { prefilValue, POC_DETAILS };
 };
 
 const useCreateAlert = ({
@@ -143,8 +144,8 @@ const useCreateAlert = ({
 		}) : [];
 
 		return {
-			shipper                : shipper[0],
-			consignee              : consignee[0],
+			shipper                : shipper[GLOBAL_CONSTANTS.zeroth_index],
+			consignee              : consignee[GLOBAL_CONSTANTS.zeroth_index],
 			alert_configuration,
 			[TRACKER_ID_KEY]       : shipmentId,
 			organization_branch_id : query?.branch_id,
@@ -211,7 +212,7 @@ const useCreateAlert = ({
 			}
 		} else {
 			const matchIndex = values.findIndex((item) => item === contactInfo?.id);
-			values.splice(matchIndex, 1);
+			values.splice(matchIndex, GLOBAL_CONSTANTS.one);
 		}
 		setTableValue((prev) => ({
 			...prev,

@@ -3,10 +3,11 @@ import { Image } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
 
 import getMappingObject from '../../../../constant/card';
+import { getMilestone } from '../../../../utils/getMilestone';
 
 import styles from './styles.module.css';
 
-import { getMilestone } from '@/ui/page-components/air-ocean-tracking/utils/getMilestone';
+const ZERO = 0;
 
 function Stepper({ activeTab, lineInfo = {}, airCargoDetails = {} }) {
 	const { short_name = '', logo_url = '' } = lineInfo || {};
@@ -31,9 +32,9 @@ function Stepper({ activeTab, lineInfo = {}, airCargoDetails = {} }) {
 				{Object.keys(MILESTONE_MAPPING).map((item, index) => (
 					<div
 						key={item}
-						className={cl`${styles.dot_line} ${index === 0 ? styles.first_dot : ''}`}
+						className={cl`${styles.dot_line} ${index === ZERO ? styles.first_dot : ''}`}
 					>
-						{index !== 0 && (
+						{index !== ZERO && (
 							<div className={cl`${styles.line}
 								${DEFAULT_STATUS[index] ? styles.active_line : ''}`}
 							/>

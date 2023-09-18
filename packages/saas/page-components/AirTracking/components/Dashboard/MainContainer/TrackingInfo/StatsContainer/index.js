@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useTranslation } from 'react-i18next';
 
 import getStatsMapping from '../../../../../constant/statsMapping';
@@ -42,7 +43,7 @@ function StatsContainer({ stats: statsData = {}, globalFilter, setGlobalFilter }
 
 					<div className={styles.info_container}>
 						<p className={styles.text}>{stats.label}</p>
-						<p className={styles.num}>{statsData?.[stats.dashboardKey] || 0}</p>
+						<p className={styles.num}>{statsData?.[stats.dashboardKey] || GLOBAL_CONSTANTS.zeroth_index}</p>
 					</div>
 				</div>
 			))}

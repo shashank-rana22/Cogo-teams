@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import { isFutureDate } from './dateCompare';
@@ -24,7 +25,7 @@ const checkForMerging = (curr, next) => {
 };
 
 const mergeOceanMilestone = (list = []) => {
-	const result = [];
+	const RESULT = [];
 
 	const filteredList = (list || []).filter((item) => {
 		const { location = '', event_date = '', milestone = '' } = item || {};
@@ -42,14 +43,14 @@ const mergeOceanMilestone = (list = []) => {
 
 	let currentEle = 0;
 	while (currentEle < sortedList.length) {
-		let nextEle = currentEle + 1;
+		let nextEle = currentEle + GLOBAL_CONSTANTS.one;
 		while (nextEle < sortedList.length && checkForMerging(sortedList[currentEle], sortedList[nextEle])) {
-			nextEle += 1;
+			nextEle += GLOBAL_CONSTANTS.one;
 		}
-		result.push(sortedList.slice(currentEle, nextEle));
+		RESULT.push(sortedList.slice(currentEle, nextEle));
 		currentEle = nextEle;
 	}
-	return result;
+	return RESULT;
 };
 
 const mergeAirMilestone = (list = []) => {

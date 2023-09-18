@@ -1,4 +1,4 @@
-import patterns from '@/ui/commons/configurations/patterns';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const getShareTrackerControls = ({ t }) => [
 	{
@@ -18,7 +18,7 @@ const getShareTrackerControls = ({ t }) => [
 		rules       : {
 			required : t('airOceanTracking:tracking_share_list_config_email_required_text'),
 			pattern  : {
-				value   : patterns.EMAIL,
+				value   : GLOBAL_CONSTANTS.regex_patterns.email,
 				message : t('airOceanTracking:tracking_share_list_config_invalid_email_text'),
 			},
 		},

@@ -1,6 +1,6 @@
-import patterns from '@/ui/commons/configurations/patterns';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const defaultValues = {
+const DEFAULT_VALUES = {
 	shipmentNumber : '',
 	shippingLine   : '',
 	airLine        : '',
@@ -34,7 +34,7 @@ const headerFormControls = ({ trackingType = 'ocean',	operatorData = {}, t }) =>
 			rules       : {
 				required : t('airOceanTracking:tracking_header_form_control_required_text_3'),
 				pattern  : {
-					value   : patterns.AIRWAY_BILL_NO,
+					value   : GLOBAL_CONSTANTS.regex_patterns.airway_bill_number,
 					message : t('airOceanTracking:tracking_header_form_control_invalid_airline_text'),
 				},
 			},
@@ -70,4 +70,4 @@ const headerFormControls = ({ trackingType = 'ocean',	operatorData = {}, t }) =>
 };
 
 export default headerFormControls;
-export { defaultValues };
+export { DEFAULT_VALUES };

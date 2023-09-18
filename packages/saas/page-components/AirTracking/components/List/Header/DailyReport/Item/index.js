@@ -4,11 +4,10 @@ import { useState } from 'react';
 
 import getDailyStatusConfig from '../../../../../configuration/dailyStatusConfig';
 import useUpdateDsrStatus from '../../../../../hooks/useUpdateDsrStatus';
+import getValue from '../../../../../utils/getValue';
 import itemFunction from '../../../../../utils/itemFunction';
 
 import styles from './styles.module.css';
-
-import getValue from '@/ui/commons/utils/getValue';
 
 const Item = ({ data = {}, loading: listLoading = false, setStatusModal }) => {
 	const { id = '', schedule = '', shipments = 0 } = data || {};

@@ -7,6 +7,8 @@ import { getMilestone } from '../../../../utils/getMilestone';
 
 import styles from './styles.module.css';
 
+const ZERO = 0;
+
 function Stepper({ activeTab, currentMilestone = {}, lineInfo = {}, airCargoDetails = {} }) {
 	const { short_name = '', logo_url = '' } = lineInfo || {};
 	const { container_status = {} } = currentMilestone || {};
@@ -28,9 +30,9 @@ function Stepper({ activeTab, currentMilestone = {}, lineInfo = {}, airCargoDeta
 				{Object.keys(MILESTONE_MAPPING).map((item, index) => (
 					<div
 						key={item}
-						className={cl`${styles.dot_line} ${index === 0 ? styles.first_dot : ''}`}
+						className={cl`${styles.dot_line} ${index === ZERO ? styles.first_dot : ''}`}
 					>
-						{index !== 0 && (
+						{index !== ZERO && (
 							<div className={cl`${styles.line}
 								${bool_status[index] ? styles.active_line : ''}`}
 							/>

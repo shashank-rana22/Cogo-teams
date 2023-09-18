@@ -1,4 +1,5 @@
 import { cl, Placeholder, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMAlert, IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
@@ -17,7 +18,7 @@ function RenderValue({ value = '' }) {
 	return (
 		<Tooltip content={value} placement="bottom">
 			<div>
-				{value.substring(0, 40)}
+				{value.substring(GLOBAL_CONSTANTS.zeroth_index, INFO_MAX_LENGTH)}
 				...
 			</div>
 		</Tooltip>
@@ -70,7 +71,7 @@ function ContainerInfo({
 			<div className={styles.flex_box}>
 				<h3>{SHIPMENT_TITLE}</h3>
 
-				{containerDetailsLength > 1 && (
+				{containerDetailsLength > GLOBAL_CONSTANTS.one && (
 					<div className={styles.pagination_container}>
 						<IcMArrowLeft onClick={() => incrementHandler(false)} />
 						<span className={styles.num}>{activeContainerIndex}</span>

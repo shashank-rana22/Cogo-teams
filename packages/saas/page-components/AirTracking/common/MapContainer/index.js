@@ -10,6 +10,8 @@ import styles from './styles.module.css';
 
 const CogoMaps = dynamic(() => import('./MapsComp'), { ssr: false });
 
+const TIMEOUT = 6500;
+
 function MapContainer({ height = '60vh', data = {}, activeTab }) {
 	const { list } = data || {};
 
@@ -17,18 +19,18 @@ function MapContainer({ height = '60vh', data = {}, activeTab }) {
 
 	const LOADING_TEXT = getLoadingText({ t });
 
-	const [count, setCount] = useState(0);
+	const [count, setCount] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
 	const { loading, allRoute } = useGetMapRoute({ trackingInfo: list, type: activeTab });
 
 	useEffect(() => {
-		if (loading && count >= 0) {
+		if (loading && count >= GLOBAL_CONSTANTS.zeroth_index) {
 			const timeout = setTimeout(() => {
 				setCount((prev) => {
-					if (prev === LOADING_TEXT_COUNT) return 0;
-					return prev + 1;
+					if (prev === LOADING_TEXT_COUNT) return GLOBAL_CONSTANTS.zeroth_index;
+					return prev + GLOBAL_CONSTANTS.one;
 				});
-			}, 6500);
+			}, TIMEOUT);
 
 			return () => {
 				clearTimeout(timeout);

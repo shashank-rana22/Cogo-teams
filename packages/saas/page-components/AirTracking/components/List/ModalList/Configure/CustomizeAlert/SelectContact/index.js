@@ -4,13 +4,12 @@ import { useRouter } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
+import AddContactModal from '../../../../../../common/AddContactModal';
 import customizeAlertControls from '../../../../../../configuration/customizeAlertControls';
 import getField from '../../../../../../constant/getField';
 import useCreateContact from '../../../../../../hooks/useCreateContact';
 
 import styles from './styles.module.css';
-
-import AddContactModal from '@/ui/page-components/air-ocean-tracking/common/AddContactModal';
 
 function SelectContact({
 	closeHandler, nextStepHandler, selectContactList, setSelectContactList,

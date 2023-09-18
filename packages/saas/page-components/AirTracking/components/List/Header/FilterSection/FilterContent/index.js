@@ -4,10 +4,9 @@ import React from 'react';
 
 import getFilterControls from '../../../../../configuration/filterControls';
 import getField from '../../../../../constant/getField';
+import useFilterContent from '../../../../../hooks/useFilterContent';
 
 import styles from './styles.module.css';
-
-import useFilterContent from '@/ui/page-components/air-ocean-tracking/hooks/useFilterContent';
 
 function FilterContent({ filterData = {}, activeTab, globalFilter = {}, setGlobalFilter }) {
 	const { shipping_lines, poc_details = [], booked_with_cogoport = [], air_lines } = filterData || {};

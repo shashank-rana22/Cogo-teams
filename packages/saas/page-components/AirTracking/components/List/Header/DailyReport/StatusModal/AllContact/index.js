@@ -4,14 +4,13 @@ import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useMemo, useState } from 'react';
 
+import AddContactModal from '../../../../../../common/AddContactModal';
+import Table from '../../../../../../common/Table';
 import getContactListConfig from '../../../../../../configuration/contactListConfig';
 import useCreateDsr from '../../../../../../hooks/useCreateDsr';
 import useGetContactList from '../../../../../../hooks/useGetContactList';
 
 import styles from './styles.module.css';
-
-import AddContactModal from '@/ui/page-components/air-ocean-tracking/common/AddContactModal';
-import Table from '@/ui/page-components/air-ocean-tracking/common/Table';
 
 function AllContact({ selectedContact, setSelectedContact, setIsSingleReport, activeTab }) {
 	const { t } = useTranslation(['common', 'airOceanTracking']);

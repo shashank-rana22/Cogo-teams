@@ -9,6 +9,8 @@ import useCreateShipment from '../../../../../hooks/useCreateShipment';
 
 import styles from './styles.module.css';
 
+const ZERO = 0;
+
 function DetentionDemurrage({ closeHandler, shipmentId, refetchTrackerList, shipmentInfo = {} }) {
 	const { origin_detention = '', destination_demurrage = '', destination_detention = '' } = shipmentInfo || {};
 
@@ -29,9 +31,9 @@ function DetentionDemurrage({ closeHandler, shipmentId, refetchTrackerList, ship
 	const onSubmit = (data) => {
 		const payload = {
 			saas_container_subscription_id : shipmentId,
-			origin_detention               : data?.origin_detention || 0,
-			destination_detention          : data?.destination_detention || 0,
-			destination_demurrage          : data?.destination_demurrage || 0,
+			origin_detention               : data?.origin_detention || ZERO,
+			destination_detention          : data?.destination_detention || ZERO,
+			destination_demurrage          : data?.destination_demurrage || ZERO,
 		};
 		updateTrackerInfo({ payload });
 	};
@@ -53,7 +55,7 @@ function DetentionDemurrage({ closeHandler, shipmentId, refetchTrackerList, ship
 						const { name, label = '', type } = config || {};
 						const Element = getField(type);
 						return (
-							<div key={name} className={cl`${styles.col} ${index === 0 ? styles.first_col : ''}`}>
+							<div key={name} className={cl`${styles.col} ${index === ZERO ? styles.first_col : ''}`}>
 								<p className={styles.label}>{label}</p>
 								<Element control={control} {...config} />
 								<p className={styles.errors}>{errors?.[name]?.message || errors?.[name]?.type}</p>

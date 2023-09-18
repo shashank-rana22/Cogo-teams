@@ -1,18 +1,22 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { CogoMaps, L } from '@cogoport/maps';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
-
-import Pointer from './Pointer';
-import Route from './Route';
 
 import {
 	CENTER, LAYER, MAP_ATTRIBUTE,
 	BOTTOM_LEFT_LAT, BOTTOM_LEFT_LNG, TOP_RIGHT_LAT, TOP_RIGHT_LNG,
-} from '@/ui/commons/constants/mapConstant';
+} from '../../../../constant/mapConstant';
+
+import Pointer from './Pointer';
+import Route from './Route';
 
 const corner1 = L.latLng(BOTTOM_LEFT_LAT, BOTTOM_LEFT_LNG);
 const corner2 = L.latLng(TOP_RIGHT_LAT, TOP_RIGHT_LNG);
 
 const bounds = L.latLngBounds(corner1, corner2);
+
+const ONE = 1;
 
 function MapComps({ height = '500px', pointsArr = [], type = 'ocean' }) {
 	const [map, setMap] = useState();
@@ -36,13 +40,17 @@ function MapComps({ height = '500px', pointsArr = [], type = 'ocean' }) {
 			maxZoom={12}
 			maxBoundsViscosity={1}
 		>
-			{pointsArrLength > 0 && (
+			{!isEmpty(pointsArr) && (
 				<>
-					<Pointer lat={pointsArr[0]?.lat} lng={pointsArr[0]?.lng} type="origin" />
-					{pointsArrLength !== 1 && <Route positions={pointsArr} map={map} transportMode={type} />}
 					<Pointer
-						lat={pointsArr[pointsArrLength - 1]?.lat}
-						lng={pointsArr[pointsArrLength - 1]?.lng}
+						lat={pointsArr[GLOBAL_CONSTANTS.zeroth_index]?.lat}
+						lng={pointsArr[GLOBAL_CONSTANTS.zeroth_index]?.lng}
+						type="origin"
+					/>
+					{pointsArrLength !== ONE && <Route positions={pointsArr} map={map} transportMode={type} />}
+					<Pointer
+						lat={pointsArr[pointsArrLength - ONE]?.lat}
+						lng={pointsArr[pointsArrLength - ONE]?.lng}
 						type="destination"
 					/>
 				</>

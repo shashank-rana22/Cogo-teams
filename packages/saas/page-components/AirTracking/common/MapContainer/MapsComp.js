@@ -1,21 +1,22 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { CogoMaps } from '@cogoport/maps';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { PATH_OPTION, LAYER, CENTER } from '../../constant/mapConstant';
+
 import Pointer from './Pointer';
 import Route from './Route';
-
-import { PATH_OPTION, LAYER, CENTER } from '@/ui/commons/constants/mapConstant';
 
 const getLatLng = ({ route = [] }) => {
 	const routeLength = route?.length;
 	const 	origin = {
-		lat : route[0]?.lat,
-		lng : route[0]?.lng,
+		lat : route[GLOBAL_CONSTANTS.zeroth_index]?.lat,
+		lng : route[GLOBAL_CONSTANTS.zeroth_index]?.lng,
 	};
 	const	destination = {
-		lat : route[routeLength - 1]?.lat,
-		lng : route[routeLength - 1]?.lng,
+		lat : route[routeLength - GLOBAL_CONSTANTS.one]?.lat,
+		lng : route[routeLength - GLOBAL_CONSTANTS.one]?.lng,
 	};
 	return { origin, destination };
 };
