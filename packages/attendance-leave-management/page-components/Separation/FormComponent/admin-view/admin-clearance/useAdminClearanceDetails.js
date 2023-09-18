@@ -63,7 +63,7 @@ const useAdminClearanceDetails = ({ data = {}, refetch = () => {} }) => {
 		setValue('specify', sub_process_data?.specify);
 		setValue('notes', sub_process_data?.notes[GLOBAL_CONSTANTS.zeroth_index].Value);
 		setValue('termsAcceptance', sub_process_data?.termsAcceptance);
-		setValue('last_working_day', last_working_day && new Date(last_working_day));
+		setValue('last_working_day', last_working_day ? new Date(last_working_day) : null);
 	}, [setValue, sub_process_data, is_complete, last_working_day]);
 
 	return {

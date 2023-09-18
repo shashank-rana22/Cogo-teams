@@ -39,7 +39,7 @@ function FinanceConfirmModal({
 						size="md"
 						themeType="primary"
 						className={styles.proceed_modal_btn}
-						onClick={() => { handleSubmit(onSubmit)(); }}
+						onClick={handleSubmit(onSubmit)}
 					>
 						Yes, Proceed
 					</Button>
