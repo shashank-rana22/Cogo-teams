@@ -3,7 +3,7 @@ import { addDays, subtractDays } from '@cogoport/utils';
 const TODAY = new Date();
 const TWO = 2;
 const ONE = 1;
-const tabwiseFilters = ({ activeTab = '', isCriticalOn }) => {
+const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 	const mapping = {
 		awaiting_service_provider_confirmation: {
 			task_attributes: [
