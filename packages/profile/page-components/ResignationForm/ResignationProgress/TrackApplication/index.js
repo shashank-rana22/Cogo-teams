@@ -3,20 +3,10 @@ import { IcMArrowDown, IcMEmail, IcMProfile, IcMClock } from '@cogoport/icons-re
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useCallback } from 'react';
 
+import { STEPPER_ITEMS } from '../../../../utils/constants';
 import ExitInterview from '../ExitInterview';
 
 import styles from './styles.module.css';
-
-const STEPPER_ITEMS = [
-	{ title: 'HR Meet', key: 'hr_meet' },
-	{ title: 'RM Clearance', key: 'manager_clearance' },
-	{ title: 'Tech Clearance', key: 'tech_clearance' },
-	{ title: 'HOTO Clearance', key: 'hoto_clearance' },
-	{ title: 'Finance Clearance', key: 'finance_clearance' },
-	{ title: 'Admin Clearance', key: 'admin_clearance' },
-	{ title: 'Exit Interview', key: 'exit_interview' },
-	{ title: 'Exit Completed', key: 'exit_completed' },
-];
 
 function TrackApplication({ data = {} }) {
 	const [show, setShow] = useState(true);
