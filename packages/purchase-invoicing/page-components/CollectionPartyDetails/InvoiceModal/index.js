@@ -18,7 +18,7 @@ const STATUS_ARRAY = ['pending', 'verified'];
 function InvoiceModal({
 	generateInvoiceModal = false,
 	setGenerateInvoiceModal = () => {},
-	primary_service,
+	primary_service = {},
 	collectionParty = {},
 	shipment_data = {},
 }) {

@@ -23,7 +23,7 @@ const INVOICE_TYPE_OPTIONS = [
 
 function IndexModalContent({
 	control = {},
-	primary_service,
+	primary_service = {},
 	collectionParty = {},
 	invoiceCurrency = '',
 	listEntities = {},
