@@ -35,6 +35,7 @@ function Routes({
 	const router = useRouter();
 
 	const [buttonDisabled, setButtonDisabled] = useState(true);
+	const [typeOfJourney, setTypeOfJourney] = useState('one_way');
 
 	const service_type = mode.mode_value;
 
@@ -85,6 +86,8 @@ function Routes({
 					setFormValues={setFormValues}
 					organization={organization}
 					intent="rate_search"
+					setTypeOfJourney={setTypeOfJourney}
+					typeOfJourney={typeOfJourney}
 				/>
 			</div>
 
