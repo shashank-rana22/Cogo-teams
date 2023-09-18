@@ -99,6 +99,16 @@ const useGetConfigDataMapping = ({
 					listInoiceCommonConfig  : advancePaymentListView,
 				},
 			),
+			OVERHEADS: getCommonMapping(
+				{
+					payrunConfig      : PAYRUN_AUDITED_PAYMENT_READY,
+					viewInvoiceConfig : VIEW_INVOICE_PAYMENT_READY_CONFIG_COUNTRY_WISE[country_code],
+					listViewConfig    : INITIATED_LIST_VIEW_CONFIG_COUNTRY_WISE[country_code],
+					payrunCommonConfig,
+					viewInvoiceCommonConfig,
+					listInoiceCommonConfig,
+				},
+			),
 		},
 		PAYMENT_INITIATED: {
 			NORMAL: getCommonMapping({
@@ -127,6 +137,16 @@ const useGetConfigDataMapping = ({
 					payrunCommonConfig,
 					viewInvoiceCommonConfig : advancePaymentViewInvoiceCommonConfig,
 					listInoiceCommonConfig  : advancePaymentListView,
+				},
+			),
+			OVERHEADS: getCommonMapping(
+				{
+					payrunConfig      :	PAYMENT_INITIATED_PAYRUN,
+					viewInvoiceConfig : VIEW_INVOICE_PAYMENT_INTIATED_COUNTRY_WISE[country_code],
+					listViewConfig    : INITIATED_LIST_VIEW_CONFIG_COUNTRY_WISE[country_code],
+					payrunCommonConfig,
+					viewInvoiceCommonConfig,
+					listInoiceCommonConfig,
 				},
 			),
 		},
@@ -179,6 +199,16 @@ const useGetConfigDataMapping = ({
 					payrunCommonConfig,
 					viewInvoiceCommonConfig : advancePaymentViewInvoiceCommonConfig,
 					listInoiceCommonConfig  : advancePaymentListView,
+				},
+			),
+			OVERHEADS: getCommonMapping(
+				{
+					payrunConfig      :	PAYRUN_HISTORY_CONFIG,
+					viewInvoiceConfig :	VIEW_INVOICE_PAYRUN_HISTORY_CONFIG_COUNTRY_WISE[country_code],
+					listViewConfig    :	INVOICE_LIST_PAYRUN_HISTORY_CONFIG_COUNTRY_WISE[country_code],
+					payrunCommonConfig,
+					viewInvoiceCommonConfig,
+					listInoiceCommonConfig,
 				},
 			),
 		},
