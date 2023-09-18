@@ -180,7 +180,7 @@ function CollectionPartyDetails({
 						</div>
 						) : null}
 					{
-							showGenerate && (
+							showGenerate ? (
 
 								<Button
 									size="md"
@@ -193,7 +193,7 @@ function CollectionPartyDetails({
 									Generate Invoice
 								</Button>
 
-							)
+							) : null
 						}
 					{INVOICE_SHIPMENT_TYPES.includes(shipment_type) && (
 						<div className={styles.not_added}>

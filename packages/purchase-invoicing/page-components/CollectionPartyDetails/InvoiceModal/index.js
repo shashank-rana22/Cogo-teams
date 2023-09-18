@@ -13,6 +13,8 @@ const DEFAULT_AMOUNT_TAXABLE = 0;
 const DEFAULT_AMOUNT_TOTAL = 0;
 const SERIAL_INCREMENT = 1;
 
+const STATUS_ARRAY = ['pending', 'verified'];
+
 function InvoiceModal({
 	generateInvoiceModal = false,
 	setGenerateInvoiceModal = () => {},
@@ -52,7 +54,7 @@ function InvoiceModal({
 	const COLLECTION_PARTY_BANK_OPTIONS = useMemo(() => (
 		bank_details || []).reduce((collectionPartyBankOptions, bank) => {
 		if (
-			['pending', 'verified'].includes(bank?.verification_status)
+			STATUS_ARRAY.includes(bank?.verification_status)
 					&& bank?.status === 'active'
 		) {
 			collectionPartyBankOptions.push({

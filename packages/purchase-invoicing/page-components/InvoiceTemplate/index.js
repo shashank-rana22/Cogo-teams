@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
-// eslint-disable-next-line import/no-unresolved
 import converter from 'number-to-words';
 import { useRef } from 'react';
 
@@ -11,8 +11,6 @@ import InvoiceAmountContainer from '../InvoiceAmountContainer';
 import InvoiceDetailsContainer from '../InvoiceDetailsContainer';
 import InvoiceHeaderContainer from '../InvoiceHeaderContainer';
 import InvoiceLowerContainer from '../InvoiceLowerContainer';
-
-const ZERO = 0;
 
 function InvoiceTemplate({
 	serviceProvider = {},
@@ -57,7 +55,7 @@ function InvoiceTemplate({
 		...(serviceProviderTradePartyObj?.other_addresses || []),
 	];
 
-	const billingAddress = serviceProviderAllBillingAddresses?.[ZERO] || {};
+	const billingAddress = serviceProviderAllBillingAddresses?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const {
 		business_name = '',
