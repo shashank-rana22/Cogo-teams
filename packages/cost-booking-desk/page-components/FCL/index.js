@@ -24,10 +24,11 @@ function FclFreight() {
 					<Stepper />
 				</div>
 
-				<Filters />
+				{activeTab !== SECURITY_DEPOSIT_TAB ? <Filters /> : null}
+
 			</div>
 
-			<AppliedFilters />
+			{activeTab !== SECURITY_DEPOSIT_TAB ? <AppliedFilters /> : null}
 
 			<div className={styles.search_and_tab}>
 				<StepperTabs />

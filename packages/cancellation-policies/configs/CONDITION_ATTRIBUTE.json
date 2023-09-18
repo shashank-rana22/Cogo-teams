@@ -1,0 +1,10 @@
+[
+  {
+    "label": "Arrival",
+    "value": "schedule_arrival"
+  },
+  {
+    "label": "Departure",
+    "value": "schedule_departure"
+  }
+]

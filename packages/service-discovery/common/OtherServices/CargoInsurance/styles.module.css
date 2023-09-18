@@ -1,0 +1,11 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-bottom: 32px;
+}
+
+.heading {
+	margin-bottom: 12px;
+	font-weight: 500;
+}

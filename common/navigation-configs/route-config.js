@@ -11,14 +11,17 @@ import bookingDeskAir from './config/booking-desk-air';
 import bookingDeskSurface from './config/booking-desk-surface';
 import businessFinance from './config/business-finance';
 import byodDashboard from './config/byod-dashboard';
+import cancellationPolicies from './config/cancellation-policies';
 import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
+import cogoAssured from './config/cogo-assured';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
+import convenienceRates from './config/convenience-rates';
 import costBookingDesk from './config/cost-booking-desk';
 import demandForecast from './config/demand-forecast';
 import documentDesk from './config/document-desk';
@@ -28,6 +31,7 @@ import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import ftlAdmin from './config/ftl-admin';
 import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
+import governanceManager from './config/governance-manager';
 import groundOps from './config/ground-ops';
 import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
@@ -45,15 +49,18 @@ import newEmployeeDashboard from './config/new-employee-dashboard';
 import notifications from './config/notifications';
 import PERFORMANCE_MANAGEMENT from './config/performance-management';
 import printingDesk from './config/printing-desk';
+import profile from './config/profile';
 import referral from './config/referral';
 import resource from './config/resources';
 import revenueDesk from './config/revenue-desk';
 import rfqDashboard from './config/rfq-dashboard';
 import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
+import saas from './config/saas';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import schedules from './config/schedules';
+import serviceDiscovery from './config/service-discovery';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
 import shipmentAirFreightLocal from './config/shipment-air-freight-local';
@@ -72,13 +79,16 @@ import supplyAllocation from './config/supply-allocation';
 import supplyDashboard from './config/supply-dashboards';
 import supplyTools from './config/supply-tools';
 import ticketManagement from './config/ticket-management';
+import tradeParties from './config/trade-parties';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
+import warehouseManagement from './config/warehouse-management';
 import welcome from './config/welcome';
 
 const routeConfig = {
 	...rolesAndPermissions,
 	...locations,
+	...cogoAssured,
 	...groundOps,
 	...allocations,
 	...supplyDashboard,
@@ -110,6 +120,7 @@ const routeConfig = {
 	...shipmentRailDomesticFreight,
 	...shipmentHaulageFreight,
 	...bookingDesk,
+	...cancellationPolicies,
 	...bnSalvage,
 	...costBookingDesk,
 	...authorityDesk,
@@ -138,10 +149,13 @@ const routeConfig = {
 	...ticketManagement,
 	...liabilityDashboard,
 	...rfqDashboard,
+	...governanceManager,
 	...byodDashboard,
+	...convenienceRates,
 	...employeeDashboard,
 	...managerDashboard,
 	...printingDesk,
+	...warehouseManagement,
 	...ftlAdmin,
 	...schedules,
 	...igmDesk,
@@ -154,7 +168,11 @@ const routeConfig = {
 	...attendanceLeaveManagement,
 	...centralisedCustomerService,
 	...resource,
+	...serviceDiscovery,
 	...supplyTools,
+	...profile,
+	...tradeParties,
+	...saas,
 };
 
 export default routeConfig;

@@ -10,6 +10,7 @@ const getAdSellerAddress = ({
 		business_name = '',
 		country_id = '',
 		registration_number = '',
+		id = '',
 	} = collectionParty || {};
 
 	const {
@@ -25,6 +26,7 @@ const getAdSellerAddress = ({
 		companyType          : 'SELLER',
 		organizationSerialId : 24918,
 		organizationId       : organization_id,
+		tradePartyMappingId  : id,
 		organizationName     : business_name,
 		pincode,
 		address,

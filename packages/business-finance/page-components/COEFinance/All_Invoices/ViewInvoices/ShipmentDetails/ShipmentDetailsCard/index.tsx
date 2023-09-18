@@ -95,6 +95,7 @@ function ShipmentDetailsCard({
 		accountNumber = '',
 		ifscCode = '',
 		beneficiaryName = '',
+		swiftCode = '',
 	} = sellerBankDetail || {};
 
 	const {
@@ -228,6 +229,7 @@ function ShipmentDetailsCard({
 			ifscCode,
 			registrationNumber,
 			taxNumber,
+			swiftCode,
 		},
 	);
 	const billingPartyRejectionList = billingPartyRejectCheckboxList(

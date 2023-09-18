@@ -1,4 +1,4 @@
-const COGOVERSE_AGENT_MAPPINGS = {
+export const COGOVERSE_AGENT_MAPPINGS = {
 	supply: [
 		'supply',
 		'supply_nvocc',

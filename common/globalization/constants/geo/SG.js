@@ -51,6 +51,7 @@ export default {
 		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		cogoverse_user_id                : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',
 		cogo_demo_account_shipper        : ['302bdc56-e807-4c71-a27c-92f83640f140'],
+		cogo_auditor_id                  : 'fc2f1dac-6de9-4dd9-990e-bd8746fc10ce',
 		spot_booking_shipping_lines      : [
 			'c3649537-0c4b-4614-b313-98540cffcf40',
 			'b2f92d49-6180-43bd-93a5-4d64f5819a9b',
@@ -75,11 +76,10 @@ export default {
 			'95113dbb-43bf-4434-958c-3fe8063657e7',
 			'0461c31b-4761-40b6-ac2a-59a4e9d4e23f',
 		],
-		cogo_demo_account_shipper_user: '7f6f97fd-c17b-4760-a09f-d70b6ad963e8',
-		cogo_demo_account_shipper_user_branch:
-      '2c72817c-c663-48ea-b8ef-cd92397842a1',
-		business_owner_ids : ['0f9ddc9b-e2d7-4fee-83f6-08fb8bed6d11'],
-		supply_role_ids    : [
+		cogo_demo_account_shipper_user        : '7f6f97fd-c17b-4760-a09f-d70b6ad963e8',
+		cogo_demo_account_shipper_user_branch : '2c72817c-c663-48ea-b8ef-cd92397842a1',
+		business_owner_ids                    : ['0f9ddc9b-e2d7-4fee-83f6-08fb8bed6d11'],
+		supply_role_ids                       : [
 			'e31c6d7b-e62e-4fd5-a2e1-106e037ac03c',
 			'70710ab2-0f80-4e12-a4f5-d75660c05315',
 			'a1ddec39-48a5-4ab5-8db4-16fa02cdf720',
@@ -96,6 +96,7 @@ export default {
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
 		operation_manager          : 'ed3e6418-6013-4710-83cf-5b0b117aa8a1',
 		finops_manager             : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
+		cogo_auditor               : 'fc2f1dac-6de9-4dd9-990e-bd8746fc10ce',
 		ff_cost_booking_executive  : '8cc096a8-e279-425c-ba95-3970614c3d8e',
 		kam_ids                    : [
 			'9ead41d4-ced8-45c2-b370-4399cbfcf478', // Prod_KAM Location Sales
@@ -458,6 +459,7 @@ export default {
 					'trade_enquiry',
 					'disliked_rates',
 					'manage_forecast',
+					'rate_density',
 					'rfq_enquiries',
 					'rates_sheets',
 				],
@@ -582,6 +584,12 @@ export default {
 						request_replace_invoice : false,
 						request_credit_note     : false,
 					},
+				},
+				common: {
+					validate_registration_number : false,
+					validate_pan_number          : false,
+					include_gst                  : false,
+					is_export_tradeType          : false,
 				},
 			},
 		},

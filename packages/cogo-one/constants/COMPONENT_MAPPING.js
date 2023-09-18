@@ -10,6 +10,7 @@ import OrganizationDetails from '../page-components/CogoOneChannel/ProfileDetail
 import QuickActions from '../page-components/CogoOneChannel/ProfileDetails/QuickActions';
 import Tickets from '../page-components/CogoOneChannel/ProfileDetails/Tickets';
 import UserActivities from '../page-components/CogoOneChannel/ProfileDetails/UserActivity';
+import UserMails from '../page-components/CogoOneChannel/ProfileDetails/UserMails';
 
 const COMPONENT_MAPPING = {
 	profile                 : AgentDetails,
@@ -24,6 +25,7 @@ const COMPONENT_MAPPING = {
 	tickets                 : Tickets,
 	flash_shipment_bookings : FlashReverts,
 	add_on_services         : AddOnServices,
+	user_mails              : UserMails,
 };
 
 export default COMPONENT_MAPPING;

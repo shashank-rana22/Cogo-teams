@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useState } from 'react';
@@ -11,6 +11,21 @@ import MailAttachments from './MailAttachments';
 import MailHeader from './MailHeader';
 import styles from './styles.module.css';
 
+const getEmailText = ({
+	expandedState = '',
+	loading = false,
+}) => {
+	if (loading) {
+		return 'Loading...';
+	}
+
+	if (expandedState) {
+		return 'Collapse';
+	}
+
+	return 'Expand';
+};
+
 function MailBody({
 	eachMessage = {},
 	hasPermissionToEdit = false,
@@ -21,11 +36,6 @@ function MailBody({
 	const { source = '' } = formattedData || {};
 
 	const { response, send_by = '', created_at = '', media_url = [] } = eachMessage || {};
-
-	const {
-		setButtonType = () => {},
-		setEmailState = () => {},
-	} = mailProps || {};
 
 	const {
 		subject = '',
@@ -52,8 +62,7 @@ function MailBody({
 	});
 
 	const { handleClick = () => {} } = getRecipientData({
-		setButtonType,
-		setEmailState,
+		mailProps,
 		senderAddress,
 		recipientData,
 		ccData,
@@ -90,6 +99,7 @@ function MailBody({
 					eachMessage={eachMessage}
 					handleClick={handleClick}
 					hasPermissionToEdit={hasPermissionToEdit}
+					handleExpandClick={handleExpandClick}
 				/>
 
 				<div className={styles.subject}>
@@ -99,26 +109,29 @@ function MailBody({
 				</div>
 
 				<div
-					className={cl`${styles.body} ${expandedState ? styles.expanded_body : styles.collapsed_body}`}
+					className={cl`${styles.body} 
+					${expandedState ? styles.expanded_body : styles.collapsed_body}`}
 					dangerouslySetInnerHTML={{ __html: bodyMessage || body }}
 				/>
 
-				<Button
-					onClick={handleExpandClick}
-					style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
-					size="xs"
-					className={styles.dots_body}
-					themeType="linkUi"
-				>
-					{expandedState ? 'Collapse' : 'Expand'}
-				</Button>
-
-				{hasPermissionToEdit && (
+				{hasPermissionToEdit ? (
 					<MailActions
 						handleClick={handleClick}
 					/>
-				)}
+				) : null}
+
 				<MailAttachments mediaUrls={media_url} />
+
+				<div className={styles.extra_controls}>
+					<div
+						role="presentation"
+						onClick={handleExpandClick}
+						style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
+						className={styles.dots_body}
+					>
+						{getEmailText({ expandedState, loading })}
+					</div>
+				</div>
 			</div>
 		</div>
 	);

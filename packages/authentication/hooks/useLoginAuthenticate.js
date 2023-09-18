@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useAuthRequest } from '@cogoport/request';
 import useRequest from '@cogoport/request/hooks/useRequest';
@@ -74,11 +75,11 @@ const useLoginAuthenticate = () => {
 		const redirectPath = decodeURIComponent(redirect_path);
 
 		if (redirectPath) {
-			await router.push(`${redirectPath}`);
+			window.location.href = `/v2/${profile?.partner?.id}${redirectPath || EMPTY_PATH}`;
 		} else if (configs?.href?.includes('/v2')) {
 			const replaceHref = configs?.href?.replace('/v2', '');
-			const replaceAs = configs?.as?.replace('/v2', '');
-			await router.push(replaceHref, replaceAs);
+
+			window.location.href = `/v2/${profile?.partner?.id}${replaceHref || EMPTY_PATH}`;
 		} else if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
 			// eslint-disable-next-line no-undef
 			window.location.href = `/${profile?.partner?.id}${configs?.href || EMPTY_PATH}`;
@@ -154,10 +155,16 @@ const useLoginAuthenticate = () => {
 
 			const res = await triggerSession();
 
-			const { partner = {} } = res.data || {};
+			const { partner = {}, user = {} } = res.data || {};
+
+			const { preferred_languages } = user || {};
+
+			const userLanguagePreferenece = preferred_languages?.[GLOBAL_CONSTANTS.zeroth_index]
+			|| GLOBAL_CONSTANTS.default_preferred_language;
 
 			dispatch(setProfileState(res.data));
 			setCookie('parent_entity_id', partner.id);
+			setCookie('lang_preference', userLanguagePreferenece);
 
 			if (source === 'add_account') {
 				// eslint-disable-next-line no-undef

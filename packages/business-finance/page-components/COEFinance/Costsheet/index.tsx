@@ -3,9 +3,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcADocumentTemplates, IcMArrowNext } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { GenericObject } from '../../commons/Interfaces';
 import Details from '../All_Invoices/ViewInvoices/ShipmentDetails/Details';
@@ -13,7 +12,6 @@ import Documents from '../All_Invoices/ViewInvoices/ShipmentDetails/Documents';
 import useGetShipmentCostSheet from '../hook/useGetShipmentCostSheet';
 import useGetWallet from '../hook/useGetWallet';
 import useListShipment from '../hook/useListShipment';
-import useUpdateJob from '../hook/useUpdateJob';
 
 import { CardBody } from './Card/CardBody';
 import CardHeader from './Card/CardHeader';
@@ -21,12 +19,6 @@ import DiscountRect from './DiscountRect';
 import Line from './Line';
 import StatRect from './StatRect';
 import styles from './styles.module.css';
-
-interface RootState {
-	profile?: {
-		permissions_navigations?: object
-	};
-}
 
 function GetPills({ loadingShipment, sourceText, tradeType }) {
 	if (loadingShipment) {
@@ -44,23 +36,8 @@ function GetPills({ loadingShipment, sourceText, tradeType }) {
 function CostSheet() {
 	const Router = useRouter();
 	const { query } = Router || {};
-	const { shipmentId, jobNumber, IsJobClose } = query || {};
-	const getStatus = () => {
-		if (IsJobClose === 'OPEN') {
-			return false;
-		}
-		if (IsJobClose === 'OPR_CLOSED') {
-			return true;
-		}
-		return false;
-	};
-	const { profile = {} }: RootState = useSelector((state) => state);
-	const { permissions_navigations:permissionsNavigation = {} } = profile || {};
-	const { view_type : viewType = '' } = permissionsNavigation['business_finance-coe_finance']
-		?.update_shipment[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const { shipmentId, jobNumber } = query || {};
 
-	const [showButton, setShowButton] = useState(getStatus());
-	const [showFinal, setShowFinal] = useState(IsJobClose === 'CLOSED' || false);
 	const {
 		selldata,
 		buydata,
@@ -85,17 +62,6 @@ function CostSheet() {
 	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { totalActual: buyTotal } = buyData || {};
 	const { totalActual: sellTotal } = sellData || {};
-	const { getData, getFinalData, FinalLoading, loading } = useUpdateJob({
-		query,
-		setShowButton,
-		setShowFinal,
-		showFinal,
-		showButton,
-	});
-	const handleOperationalClose = (e: any) => {
-		const data = e.target.innerText;
-		getData(data);
-	};
 
 	return (
 		<div>
@@ -109,43 +75,6 @@ function CostSheet() {
 				>
 					Go Back
 				</Button>
-				{viewType === 'allowed' ? (
-					<div className={styles.flexwidth}>
-						{showButton ? (
-							<>
-								<div>Status - </div>
-								<div className={styles.tag}>Operationally Closed</div>
-								<div
-									className={styles.link}
-									onClick={(e) => handleOperationalClose(e)}
-									role="presentation"
-								>
-									Undo
-								</div>
-							</>
-						) : (
-							<Button
-								size="md"
-								themeType="primary"
-								disabled={loading}
-								onClick={(e) => handleOperationalClose(e)}
-							>
-								Close Operationally
-							</Button>
-						)}
-
-						<Button
-							size="md"
-							themeType="primary"
-							disabled={!showButton || FinalLoading || showFinal}
-							onClick={() => {
-								getFinalData();
-							}}
-						>
-							{showFinal ? 'Financially Closed' : 'Close Financially'}
-						</Button>
-					</div>
-				) : null}
 			</div>
 			<Line margin="20px 0px 0px 0px" />
 			<div className={styles.heading}>Profitability</div>

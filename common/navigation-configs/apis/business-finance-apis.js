@@ -262,6 +262,26 @@ const business_finance = {
 			access_type  : 'private',
 			service_name : 'bookings',
 		},
+		{
+			api         : 'get_common_job_get_job_closure_rules',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'put_common_job_edit_job_closure_rule',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'put_common_job_delete_job_closure_rule',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'post_common_job_create_job_closure_rule',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
 	],
 
 };

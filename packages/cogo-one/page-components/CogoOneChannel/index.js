@@ -8,7 +8,7 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
-import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR } from '../../constants';
+import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR, FIREBASE_TABS } from '../../constants';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
@@ -39,7 +39,7 @@ function CogoOne() {
 	}));
 
 	const [activeTab, setActiveTab] = useState({
-		tab               : 'message',
+		tab               : channel_type === 'email' ? 'firebase_emails' : 'message',
 		subTab            : 'all',
 		hasNoFireBaseRoom : false,
 		expandSideBar     : false,
@@ -101,15 +101,20 @@ function CogoOne() {
 		viewType,
 		userSharedMails,
 		activeMail    : activeTab?.data,
-		setActiveMail : (val) => {
-			setActiveTab((prev) => ({ ...prev, data: val }));
+		setActiveMail : ({ val = {}, tab = '', expandSideBar }) => {
+			setActiveTab((prev) => ({ ...prev, data: val, tab, expandSideBar }));
 		},
 		userId,
 		userName,
 	};
 
 	const commonProps = {
-		setSendBulkTemplates, preferenceLoading, setActiveTab, selectedAutoAssign, setAutoAssignChats,
+		setSendBulkTemplates,
+		preferenceLoading,
+		setActiveTab,
+		selectedAutoAssign,
+		setAutoAssignChats,
+		queryAssignedChat: assigned_chat,
 	};
 
 	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
@@ -117,7 +122,7 @@ function CogoOne() {
 	const { user_id = '', lead_user_id = '' } = tabData || {};
 
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
-	const orgId = activeTab?.tab === 'message'
+	const orgId = FIREBASE_TABS.includes(activeTab?.tab)
 		? formattedMessageData?.organization_id
 		: activeTab?.data?.organization_id;
 

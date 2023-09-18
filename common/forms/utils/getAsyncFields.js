@@ -914,6 +914,28 @@ function asyncListTruckTypes() {
 	};
 }
 
+function asyncListUserShipments() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'serial_id',
+		endpoint    : '/list_shipments_on_feedback',
+		initialCall : true,
+		params      : {},
+	};
+}
+
+function asyncFieldsOrganizationOnCall() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : '/list_organizations_on_call',
+		initialCall : true,
+		params      : {
+			filters: { status: 'active' },
+		},
+	};
+}
+
 function asyncListCompanyLocations() {
 	return {
 		labelKey    : 'display_name',
@@ -921,6 +943,69 @@ function asyncListCompanyLocations() {
 		endpoint    : 'list_company_location',
 		initialCall : true,
 		params      : {},
+	};
+}
+
+function asyncListSaasHsCodes() {
+	return {
+		valueKey       : 'id',
+		labelKey       : 'description',
+		authkey        : 'get_saas_hs_code_list',
+		endpoint       : 'saas/hs-code/list',
+		defaultOptions : true,
+		searchByq      : true,
+		qFilterKey     : 'query',
+		microService   : 'business_finance',
+		defaultParams  : {},
+	};
+}
+
+function asyncListSpotSearchRateCardOperators() {
+	return {
+		labelKey    : 'short_name',
+		valueKey    : 'id',
+		endpoint    : 'list_spot_search_rate_card_operators',
+		initialCall : true,
+	};
+}
+
+function asyncListLocationClusters() {
+	return {
+		labelKey    : 'cluster_name',
+		valueKey    : 'id',
+		endpoint    : 'list_location_clusters',
+		initialCall : true,
+		params      : {
+			filters    : { status: 'active' },
+			page_limit : 50,
+		},
+	};
+}
+
+function asyncListFclFreightCommodityClusters() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_fcl_freight_commodity_clusters',
+		initialCall : true,
+		params      : {
+			filters        : { status: 'active' },
+			page_limit     : 50,
+			defaultOptions : true,
+			isSearchable   : true,
+		},
+	};
+}
+
+function asyncListOverSeasTradeParties() {
+	return {
+		valueKey     : 'organizationId',
+		labelKey     : 'organizationName',
+		endpoint     : '/purchase/bills/list-overseas-trade-parties',
+		authkey      : 'list-overseas-trade-parties',
+		initialCall  : false,
+		microService : 'business_finance',
+		searchByq    : true,
 	};
 }
 
@@ -999,4 +1084,11 @@ export {
 	asyncListPricingZones,
 	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
+	asyncListUserShipments,
+	asyncFieldsOrganizationOnCall,
+	asyncListSaasHsCodes,
+	asyncListLocationClusters,
+	asyncListFclFreightCommodityClusters,
+	asyncListSpotSearchRateCardOperators,
+	asyncListOverSeasTradeParties,
 };

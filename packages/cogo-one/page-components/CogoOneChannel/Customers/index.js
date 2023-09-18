@@ -96,6 +96,7 @@ function Customers({
 			},
 			activeVoiceCard : activeTab?.data || {},
 			activeTab       : activeTab?.tab,
+			viewType,
 		},
 		outlook: {
 			mailProps,
@@ -108,6 +109,7 @@ function Customers({
 			mailsToBeShown: userSharedMails,
 			firestore,
 			userId,
+			isBotSession,
 		},
 	};
 
@@ -127,10 +129,10 @@ function Customers({
 	useEffect(() => {
 		const chatTabsActive = VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.chat_tabs_to_be_shown || [];
 
-		if (!chatTabsActive?.includes(activeTab?.tab)) {
+		if (!chatTabsActive?.includes(activeTab?.tab) && viewType) {
 			setActiveTab((prev) => ({
 				...prev,
-				tab: chatTabsActive[GLOBAL_CONSTANTS.zeroth_index],
+				tab: chatTabsActive?.[GLOBAL_CONSTANTS.zeroth_index] || 'message',
 			}));
 		}
 	}, [activeTab?.tab, setActiveTab, viewType]);

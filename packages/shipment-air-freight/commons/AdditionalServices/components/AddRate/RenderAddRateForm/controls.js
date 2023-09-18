@@ -1,3 +1,4 @@
+import { CustomOptions } from '@cogoport/air-modules';
 import currencies from '@cogoport/air-modules/helpers/currencies';
 import { startCase } from '@cogoport/utils';
 
@@ -63,9 +64,10 @@ const controls = ({ serviceData = {}, source = '' }) => {
 					kyc_status   : 'verified',
 				},
 			},
-			show  : source === 'purchase',
-			size  : 'sm',
-			rules : { required: 'Service Provider is required' },
+			show        : source === 'purchase',
+			size        : 'sm',
+			rules       : { required: 'Service Provider is required' },
+			renderLabel : CustomOptions,
 		},
 		{
 			name        : 'price',

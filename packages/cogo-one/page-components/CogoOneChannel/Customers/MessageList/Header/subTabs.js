@@ -8,13 +8,15 @@ import styles from './styles.module.css';
 const MORE_THAN_SINGLE_TAB = 2;
 
 function SubTabs({
-	activeSubTab,
-	setActiveSubTab,
-	viewType,
-	setAppliedFilters,
-	setIsBotSession,
+	activeSubTab = () => {},
+	setActiveSubTab = () => {},
+	viewType = '',
+	setAppliedFilters = () => {},
+	setIsBotSession = () => {},
+	activeTab = '',
+	hasSidFilter = false,
 }) {
-	const subTabMapping = getSubTabsMapping({ viewType });
+	const subTabMapping = getSubTabsMapping({ viewType, activeTab });
 
 	const handleTabClick = ({ name }) => {
 		setActiveSubTab(name);
@@ -30,7 +32,7 @@ function SubTabs({
 	}
 
 	return (
-		<div className={styles.parent_tab_div}>
+		<div className={styles.parent_tab_div} style={{ marginBottom: hasSidFilter ? '0' : '10px' }}>
 			{subTabMapping.map((eachTab = {}) => (
 				<div
 					key={eachTab?.name}

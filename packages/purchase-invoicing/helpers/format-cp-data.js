@@ -23,6 +23,7 @@ export const formatLineItems = (line_items, codes) => {
 		const cost = (total || DEFAULT_ZERO_VALUE) + (tax_total || DEFAULT_ZERO_VALUE);
 
 		const { tax_percent, service_name, trade_type, product_code, actualname } = codes?.[item?.code] || {};
+		const [truckNumber = '', serviceId = ''] = item?.truck_number?.split(':') || [];
 
 		return {
 			code                : item?.code,
@@ -38,11 +39,15 @@ export const formatLineItems = (line_items, codes) => {
 			serviceName:
                 ['fcl_freight', 'lcl_freight', 'air_freight'].includes(service_name)
                     && trade_type === 'LOCAL' ? `${service_name}_local` : service_name,
-			productCode     : product_code,
-			taxTotalPrice   : Number(cost || DEFAULT_ZERO_VALUE),
-			name            : actualname || item?.actualname,
-			unit            : item?.unit,
-			containerNumber : item?.container_number || '',
+			productCode        : product_code,
+			taxTotalPrice      : Number(cost || DEFAULT_ZERO_VALUE),
+			name               : actualname || item?.actualname,
+			unit               : item?.unit,
+			containerNumber    : item?.container_number || '',
+			lineItemAdditional : {
+				truckNumber,
+				serviceId,
+			},
 		};
 	});
 

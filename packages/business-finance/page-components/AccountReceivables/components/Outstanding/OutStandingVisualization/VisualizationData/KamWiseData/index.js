@@ -17,6 +17,7 @@ function KamWiseData({
 	barData = [],
 	setKamOwnerId = () => {},
 	pageNumber = 1,
+	entityCode = '',
 }) {
 	const [filters, setFilters] = useState({
 		page: 1,
@@ -27,6 +28,7 @@ function KamWiseData({
 		path         : 'kam_owner_list',
 		barGraphData : barData,
 		pageNumber,
+		entityCode,
 	});
 
 	const { list } = data || {};
@@ -89,6 +91,7 @@ function KamWiseData({
 					filters={filters}
 					setFilters={setFilters}
 					barData={barData}
+					entityCode={entityCode}
 				/>
 			</>
 		);

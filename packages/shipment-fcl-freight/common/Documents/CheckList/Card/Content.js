@@ -234,21 +234,23 @@ function Content({
 				/>
 			) : null}
 
-			<Modal
-				size="xl"
-				show={updateFreightCertificate}
-				onClose={() => setUpdateFreightCertificate(false)}
-				closeOnOuterClick={false}
-			>
-				<Modal.Header title="Update Freight Certificate" />
-				<Modal.Body>
-					<GenerateFreightCertificate
-						task={taskList?.filter((task) => task?.document_type === document_type)}
-						refetch={shipmentDocumentRefetch}
-						onCancel={() => setUpdateFreightCertificate(false)}
-					/>
-				</Modal.Body>
-			</Modal>
+			{updateFreightCertificate ? (
+				<Modal
+					size="xl"
+					show={updateFreightCertificate}
+					onClose={() => setUpdateFreightCertificate(false)}
+					closeOnOuterClick={false}
+				>
+					<Modal.Header title="Update Freight Certificate" />
+					<Modal.Body>
+						<GenerateFreightCertificate
+							task={taskList?.filter((task) => task?.document_type === document_type)}
+							refetch={shipmentDocumentRefetch}
+							onCancel={() => setUpdateFreightCertificate(false)}
+						/>
+					</Modal.Body>
+				</Modal>
+			) : null}
 
 		</div>
 	);

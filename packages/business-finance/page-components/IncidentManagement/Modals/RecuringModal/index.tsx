@@ -100,7 +100,7 @@ const getSummaryDataTwo = ({
 
 const getSummaryDataThree = ({ startDate, endDate, repeatFrequency, t }) => [
 	{
-		title : t('incidentManagement:end_date_title'),
+		title : t('incidentManagement:start_date_title'),
 		value : (
 			<div>
 				{startDate

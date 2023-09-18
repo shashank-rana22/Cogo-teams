@@ -55,11 +55,11 @@ const getFormControls = ({
 			options     : currencyCodeOptions,
 			rules       : { required: 'Currency is required' },
 			size        : 'sm',
-			span        : 2,
+			span        : 3,
 		},
 		{
 			name        : 'amount',
-			label       : 'Amount',
+			label       : 'Amount per Container',
 			type        : 'number',
 			placeholder : 'Enter Amount per Container',
 			rules       : { required: 'Amount per Container is required', min: 0 },
@@ -73,7 +73,7 @@ const getFormControls = ({
 			placeholder : 'Enter number of containers',
 			rules       : { required: 'Amount of Containers are required', min: 0 },
 			size        : 'sm',
-			span        : 5,
+			span        : 4,
 		},
 		{
 			name        : 'payment_mode',
@@ -143,7 +143,7 @@ const getFormControls = ({
 			span               : 6,
 			getModifiedOptions : ({ options }) => handleModifiedOptions({ options }),
 			initialCall        : true,
-			onChange           : (_, item) => {
+			handleChange       : (_, item) => {
 				if (item?.verification_status === 'pending') {
 					setValue('collection_party', undefined);
 					Toast.error('Cannot select KYC pending collection party!');
@@ -197,26 +197,9 @@ const getFormControls = ({
 			type                  : 'datepicker',
 			rules                 : { required: 'Due Date is required' },
 			size                  : 'sm',
-			style                 : { marginRight: '100px' },
 			isPreviousDaysAllowed : true,
 			span                  : 6,
 
-		},
-		{
-			name  : 'place_of_supply',
-			label : 'Place of Supply',
-			type  : 'text',
-			rules : { required: 'Place of Supply is required' },
-			size  : 'sm',
-			span  : 6,
-		},
-		{
-			name  : 'place_of_destination',
-			label : 'Place of Destination',
-			type  : 'text',
-			rules : { required: 'Place of Destination is required' },
-			size  : 'sm',
-			span  : 6,
 		},
 	];
 };

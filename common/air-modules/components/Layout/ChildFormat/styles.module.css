@@ -35,6 +35,11 @@
 	font-weight: 600;
 }
 
+.required_field::after {
+	color: var(--color-primary-error-red-2);
+	content: " *";
+}
+
 .add_button_text {
 	font-size: var(--font-size-md);
 }

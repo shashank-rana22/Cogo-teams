@@ -1,0 +1,42 @@
+module.exports = {
+	en: {
+		key         : 'en',
+		label       : 'EN',
+		language    : 'English',
+		value       : 'english',
+		link        : 'Poppins:wght@400',
+		font_family : 'var(--font-family-en)',
+	},
+	vi: {
+		key         : 'vi',
+		label       : 'VI',
+		language    : 'Vietnamese',
+		value       : 'vietnamese',
+		link        : 'Be+Vietnam+Pro:wght@400;500',
+		font_family : 'var(--font-family-vi)',
+	},
+	th: {
+		key         : 'th',
+		label       : 'TH',
+		language    : 'Thai',
+		value       : 'thai',
+		link        : 'Poppins:wght@400',
+		font_family : 'var(--font-family-en)',
+	},
+	id: {
+		key         : 'id',
+		label       : 'ID',
+		language    : 'Indonesian',
+		value       : 'indonesian',
+		link        : 'Poppins:wght@400',
+		font_family : 'var(--font-family-en)',
+	},
+	zh: {
+		key         : 'zh',
+		label       : 'ZH',
+		language    : 'Chinese',
+		value       : 'chinese',
+		link        : 'Poppins:wght@400',
+		font_family : 'var(--font-family-en)',
+	},
+};
