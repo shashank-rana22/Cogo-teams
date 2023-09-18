@@ -41,7 +41,11 @@ function ApproveInvoice({
 				</Button>
 
 				<Button
-					onClick={() => updateStatus({ invoice_id: invoice?.id, status: 'approved', refetchAfterCall })}
+					onClick={() => updateStatus({
+						invoice_id : invoice?.id,
+						status     : 'approved',
+						refetch    : refetchAfterCall,
+					})}
 					disabled={loading || !value}
 					loading={loading}
 				>

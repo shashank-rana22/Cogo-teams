@@ -119,7 +119,6 @@ const useEditLineItems = ({
 		handleSubmit,
 		control,
 		setValue,
-		setError,
 		watch,
 		formState: {
 			errors = {},
@@ -163,48 +162,7 @@ const useEditLineItems = ({
 		};
 	});
 
-	const validateForPriceChanges = (values) => {
-		let isLineItemsValid = true;
-
-		Object.keys(values).forEach((key) => {
-			const { line_items: lineItems } = (services || []).find(
-				(ele) => {
-					const [serviceId] = (key || '').split(':');
-					return serviceId && ele.service_id === serviceId;
-				},
-			) || {};
-
-			const formValsToChecked = (values[key] || []).filter(
-				(formLineItem) => formLineItem?.not_new_line_item,
-			);
-
-			formValsToChecked.forEach((val, idx) => {
-				const originalValue = lineItems?.[idx];
-
-				if (val.price_discounted < originalValue.price_discounted) {
-					const priceDiscountedRefKey = `${key}.${idx}.price_discounted`;
-
-					setError(priceDiscountedRefKey, {
-						type    : 'custom',
-						ref     : { name: priceDiscountedRefKey },
-						message : `Price cannot be less than ${originalValue.price_discounted}`,
-					});
-
-					isLineItemsValid = false;
-				}
-			});
-		});
-
-		return isLineItemsValid;
-	};
-
 	const onCreate = async (values) => {
-		const isValid = validateForPriceChanges(values);
-
-		if (!isValid) {
-			return;
-		}
-
 		try {
 			const PAYLOAD = [];
 			Object.keys(values).forEach((key) => {

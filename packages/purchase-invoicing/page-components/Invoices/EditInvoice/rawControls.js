@@ -31,7 +31,7 @@ const rawControls = ({
 		shipment_type,
 		entity_id,
 		trade_type       : primary_service?.trade_type,
-		showDeleteButton : false,
+		showDeleteButton : true,
 		value            : [
 			{
 				code             : '',
