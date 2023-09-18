@@ -1,5 +1,5 @@
 import { SelectController, InputController } from '@cogoport/forms';
-import UNIT_TO_PREFILL_VALUE_MAPPING from '@cogoport/ocean-modules/constants/UNIT_TO_PREFILL_VALUE_MAPPING';
+import UNIT_VALUE_MAPPING from '@cogoport/ocean-modules/constants/UNIT_VALUE_MAPPING';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -42,7 +42,7 @@ function RenderAddRateForm({
 	services = services?.find((service) => service.service_type === serviceData?.service_type);
 
 	const selectedUnit = watch('unit');
-	const prefillValue = UNIT_TO_PREFILL_VALUE_MAPPING?.[selectedUnit];
+	const prefillValue = UNIT_VALUE_MAPPING?.[selectedUnit];
 
 	setValue('quantity', services?.[prefillValue]);
 	if (selectedUnit === 'per_shipment') {

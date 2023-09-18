@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/ocean-modules';
-import UNIT_TO_PREFILL_VALUE_MAPPING from '@cogoport/ocean-modules/constants/UNIT_TO_PREFILL_VALUE_MAPPING';
+import UNIT_VALUE_MAPPING from '@cogoport/ocean-modules/constants/UNIT_VALUE_MAPPING';
 import { useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -30,7 +30,7 @@ function StepThree({ data = {}, setStep = () => {} }) {
 					if (idx === +index) {
 						const { service_detail = [] } = (service_charges_with_trade || [])
 							.find((element) => element.service_id === service_id);
-						const prefillKey = UNIT_TO_PREFILL_VALUE_MAPPING?.[val?.unit];
+						const prefillKey = UNIT_VALUE_MAPPING?.[val?.unit];
 						const prefillValue = service_detail[GLOBAL_CONSTANTS.zeroth_index]?.[prefillKey]
 						|| (val?.unit === 'per_shipment' ? QUANTITY_ONE : '');
 						return {
