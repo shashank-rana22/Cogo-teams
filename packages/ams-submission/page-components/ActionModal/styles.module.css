@@ -3,7 +3,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 500px !important;
+	max-width: 500px;
 	padding: 25px 0;
 
 	:global {

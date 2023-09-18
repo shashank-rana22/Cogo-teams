@@ -11,8 +11,8 @@ function EmptyState() {
 	return (
 		<div className={styles.container}>
 			<div>
-				<h1 className={styles.header}>{t('amsSubmission:no_shipments_found')}</h1>
-				<h3>{t('amsSubmission:no_results_found')}</h3>
+				<div className={styles.header}>{t('amsSubmission:no_shipments_found')}</div>
+				<div className={styles.sub_header}>{t('amsSubmission:no_results_found')}</div>
 			</div>
 
 			<Image
