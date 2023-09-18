@@ -125,5 +125,10 @@
     "performance_rating": "การให้คะแนนประสิทธิภาพ",
     "users_based_on_issues":"ผู้ใช้ (โดยอิงตามปัญหา)",
     "top_categories": "หมวดหมู่ยอดนิยม",
-    "are_you_sure_want_to": "คุณแน่ใจหรือไม่ว่าต้องการ"
+    "are_you_sure_want_to": "คุณแน่ใจหรือไม่ว่าต้องการ",
+    "raised_by_desk": "ยกโดยโต๊ะ",
+    "raised_to_desk": "ยกไปยังโต๊ะ",
+    "request_type": "ประเภทคำขอ",
+    "select_sid": "เลือก SID",
+    "select_request_ype": "เลือกประเภทคำขอ"
 }

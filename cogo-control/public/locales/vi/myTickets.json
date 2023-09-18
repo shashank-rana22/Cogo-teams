@@ -125,5 +125,10 @@
     "performance_rating": "Điểm Đánh Giá Hiệu Suất",
     "users_based_on_issues":"Người Dùng (dựa trên vấn đề)",
     "top_categories": "Các Danh Mục Đáng Chú Ý",
-    "are_you_sure_want_to": "Bạn Chắc Chắn Muốn"
+    "are_you_sure_want_to": "Bạn Chắc Chắn Muốn",
+    "raised_by_desk": "Được đặt lên bàn",
+    "raised_to_desk": "Được đặt xuống bàn",
+    "request_type": "Loại yêu cầu",
+    "select_sid": "Chọn SID",
+    "select_request_ype": "Chọn loại yêu cầu"
 }
