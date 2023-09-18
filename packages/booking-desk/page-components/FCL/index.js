@@ -1,5 +1,8 @@
+import { routeConfig } from '@cogoport/navigation-configs';
 import { dynamic } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
+import { ShipmentChat } from '@cogoport/shipment-chat';
+import { useSelector } from '@cogoport/store';
 import { useContext } from 'react';
 
 import Search from '../../commons/Search';
@@ -32,12 +35,19 @@ const SEGMENTED_TAB_OPTIONS = Object.entries(TABS_CONFIG.fcl_freight.segmented_t
 }));
 
 export default function FclDesk() {
+	const { general } = useSelector((s) => s);
+
 	const contextValues = useContext(BookingDeskContext);
+
 	const { tabState: { stepperTab, segmentedTab }, scopeFilters } = contextValues || {};
 
 	const { tabs } = TABS_CONFIG.fcl_freight.segmented_tabs[segmentedTab];
 
 	const ResolvedList = RESOLVE_DESK[segmentedTab];
+
+	const { pathname } = general;
+
+	const navigation = routeConfig?.[pathname]?.navigation || '';
 
 	return (
 		<>
@@ -49,6 +59,8 @@ export default function FclDesk() {
 						onChange={(v) => handleStepperTabChange({ ...contextValues, newStepperTab: v })}
 					/>
 				</div>
+
+				<ShipmentChat navigation={navigation} />
 
 				<ScopeSelect size="md" defaultValues={scopeFilters} />
 			</div>

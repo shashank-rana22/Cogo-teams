@@ -6,6 +6,14 @@
 	transition: 150ms ease-in-out;
 }
 
+.chat_container_booking_desk {
+	position: fixed;
+	top: 30px;
+	right: 120px;
+	z-index: 100;
+	transition: 150ms ease-in-out;
+}
+
 .chat_icon {
 	z-index: 100;
 	display: flex;

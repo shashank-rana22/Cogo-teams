@@ -11,7 +11,11 @@ import styles from './styles.module.css';
 
 const INITIAL_MSG_COUNT = 0;
 
-function ShipmentChat({ setMessagesCount = () => { } }) {
+const CONTAINER_STYLES_MAPPING = {
+	'coe-booking_note_desk': styles.chat_container_booking_desk,
+};
+
+function ShipmentChat({ setMessagesCount = () => { }, navigation = '' }) {
 	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
 
 	const [show, setShow] = useState(false);
@@ -53,7 +57,7 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 	}, [count, setMessagesCount, audio]);
 
 	return (
-		<div className={styles.chat_container}>
+		<div className={CONTAINER_STYLES_MAPPING[navigation] || styles.chat_container}>
 			<div className={styles.chat_icon}>
 				<Button
 					themeType="linkUi"
