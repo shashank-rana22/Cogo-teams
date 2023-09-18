@@ -49,10 +49,10 @@ function ShipmentDetails() {
 		features = [],
 		default_tab = 'tasks',
 		visible_tabs = [],
-		shipment_info: {
-			job_open_request = false,
-		},
+		shipment_info = {},
 	} = stakeholderConfig || {};
+
+	const { job_open_request = false } = shipment_info || {};
 
 	const [activeTab, setActiveTab] = useState(default_tab);
 

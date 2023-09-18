@@ -758,6 +758,12 @@ export default {
 						request_credit_note     : true,
 					},
 				},
+				common: {
+					validate_registration_number : true,
+					validate_pan_number          : true,
+					include_gst                  : true,
+					is_export_tradeType          : true,
+				},
 			},
 		},
 	},

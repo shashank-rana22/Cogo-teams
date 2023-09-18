@@ -82,16 +82,15 @@ const useCompanyDetails = ({
 				...(businessApiLoading && {
 					suffix: (
 						<Spinner
-							size={20}
-							style={{ padding: '4px', margin: '16px' }}
-							spinBorderColor="#1444a1"
-							outerBorderColor="#e7efff"
+							width={24}
+							height={24}
 						/>
 					),
 				}),
 				...(validate_registration_number && { maxLength: 10 }),
-				label : validate_registration_number ? 'PAN' : 'Registration Number',
-				rules : {
+				label       : validate_registration_number ? 'PAN' : 'Registration Number',
+				placeholder : ' ',
+				rules       : {
 					...(newField.rules || {}),
 					pattern: {},
 					...(validate_registration_number && {
