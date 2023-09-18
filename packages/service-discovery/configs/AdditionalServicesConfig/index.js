@@ -55,22 +55,6 @@ export const serviceMappings = ({ service:primaryService, origin_country_id = ''
 			return serviceUpdated;
 		});
 	};
-	switch (primaryService) {
-		case 'fcl_freight':
-			return configureService('fcl_freight');
-		case 'lcl_freight':
-			return configureService('lcl_freight');
-		case 'air_freight':
-			return configureService('air_freight');
-		case 'ftl_freight':
-			return configureService('ftl_freight');
-		case 'ltl_freight':
-			return configureService('ltl_freight');
-		case 'trailer_freight':
-			return configureService('trailer_freight');
-		case 'fcl_freight_local':
-			return configureService('fcl_freight_local');
-		default:
-			return [];
-	}
+
+	return configureService(primaryService) || [];
 };
