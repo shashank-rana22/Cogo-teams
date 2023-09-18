@@ -3,14 +3,13 @@ import { Tooltip, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
 import billingPartyRejectCheckboxList from '../../../../constants/billing-party-remark-checkbox-list';
 import collectionPartyRejectCheckboxList from '../../../../constants/collection-party-remark-checkbox-list';
-import useGetDocumentContent from '../../../../hook/useGetDocumentContent';
 import useListShipment from '../../../../hook/useListShipment';
 import useShipmentDocument from '../../../../hook/useShipmentDocument';
 import { getCardDataFromId } from '../../../../utils/getCardDataFromId';
@@ -40,6 +39,9 @@ interface ShipmentDetailsCardInterface {
 		invoiceDetailsTab?: boolean,
 		lineItemsTab?: boolean,
 	};
+	setCombinedRemarks?: Function;
+	docContent?: string;
+	chargesTable?: any;
 }
 
 const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
@@ -58,6 +60,9 @@ function ShipmentDetailsCard({
 	onAccept = (prop) => (prop),
 	onTabClick = (prop) => (prop),
 	tab = {},
+	setCombinedRemarks = () => {},
+	docContent = '',
+	chargesTable = [],
 }: ShipmentDetailsCardInterface) {
 	const [showValue, setShowValue] = useState([]);
 	const [rejected, setRejected] = useState([]);
@@ -159,8 +164,6 @@ function ShipmentDetailsCard({
 		?.filter((item) => JSON.parse(JSON.stringify(item?.data || ''))?.invoice_number === billNumber
 		&& item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
 
-	const { docContent } = useGetDocumentContent({ data });
-
 	const handleClickUndo = (id?: number) => {
 		const undoApprovedData = showValue.filter((item: any) => item !== id);
 		setShowValue(undoApprovedData);
@@ -238,6 +241,14 @@ function ShipmentDetailsCard({
 	);
 
 	const lineItemCheckedCount = lineItemsCheck ? 1 : 0;
+
+	useEffect(() => {
+		const COMBINED_DATA = {};
+		Object.keys(checkedValue)?.forEach((key) => {
+			COMBINED_DATA[key] = [...checkedValue[key], ...remarksVal[key]];
+		});
+		setCombinedRemarks({ ...COMBINED_DATA });
+	}, [checkedValue, remarksVal, setCombinedRemarks]);
 
 	return (
 		<div>
@@ -387,6 +398,7 @@ function ShipmentDetailsCard({
 									setCheckItem={setCheckItem}
 									onTabClick={onTabClick}
 									showTab={tab.lineItemsTab}
+									chargesTable={chargesTable}
 								/>
 							)}
 						</>

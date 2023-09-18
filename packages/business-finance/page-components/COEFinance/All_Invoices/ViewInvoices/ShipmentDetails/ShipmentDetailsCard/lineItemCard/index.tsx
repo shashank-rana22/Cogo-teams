@@ -20,6 +20,7 @@ import React, { useEffect, useState } from 'react';
 import List from '../../../../../../commons/List/index';
 import { LINE_ITEMS, LINE_ITEMS_CHECK } from '../../../../../configurations/LINE_ITEMS';
 import { getLineItemLabelStyle, getLineItemIcon } from '../../../../../utils/getLabelStyle';
+import getLineItemsMappedColor from '../../../../../utils/getLineItemsMappedColor';
 
 import RenderAction from './RenderAction';
 import styles from './styles.module.css';
@@ -43,6 +44,7 @@ interface LineItemCardInterface {
 	setCheckItem?: React.Dispatch<React.SetStateAction<{}>>;
 	onTabClick?: Function;
 	showTab?: boolean;
+	chargesTable?: any;
 }
 
 const PERCENTAGE_FACTOR = 100;
@@ -70,6 +72,7 @@ function LineItemCard({
 	setCheckItem = (prop) => (prop),
 	onTabClick = (prop) => (prop),
 	showTab = false,
+	chargesTable = [],
 }: LineItemCardInterface) {
 	const [approvedItems, setApprovedItems] = useState({});
 	const [popover, setPopover] = useState(false);
@@ -202,6 +205,35 @@ function LineItemCard({
 				)}
 			</div>
 		),
+
+		renderCurrency: (row) => {
+			const { currency = '-' } = row || {};
+			return (
+				<div style={{ color: getLineItemsMappedColor({ row, chargesTable }) }}>
+					{currency}
+				</div>
+			);
+		},
+		renderPrice: (row) => {
+			const { price = '-' } = row || {};
+			return <div style={{ color: getLineItemsMappedColor({ row, chargesTable }) }}>{price}</div>;
+		},
+		renderQuantity: (row) => {
+			const { quantity = '-' } = row || {};
+			return <div style={{ color: getLineItemsMappedColor({ row, chargesTable }) }}>{quantity}</div>;
+		},
+		renderExchangeRate: (row) => {
+			const { exchangeRate = '-' } = row || {};
+			return <div style={{ color: getLineItemsMappedColor({ row, chargesTable }) }}>{exchangeRate}</div>;
+		},
+		renderTaxAmount: (row) => {
+			const { taxAmount = '-' } = row || {};
+			return <div style={{ color: getLineItemsMappedColor({ row, chargesTable }) }}>{taxAmount}</div>;
+		},
+		renderTotalCost: (row) => {
+			const { total = '-' } = row || {};
+			return <div>{total}</div>;
+		},
 	};
 
 	const { id } = showRejectedModal;

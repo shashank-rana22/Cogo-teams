@@ -10,6 +10,7 @@ import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
+import useGetDocumentContent from '../../../hook/useGetDocumentContent';
 import useGetVariance from '../../../hook/useGetVariance';
 import useListShipment from '../../../hook/useListShipment';
 import Tagging from '../Taggings';
@@ -118,6 +119,8 @@ interface ShipmentDetailsInterface {
 	isTagFound?: boolean;
 	setIsTagFound?: any;
 	setCurrentTab?: any;
+	setCombinedRemarks?: Function;
+
 }
 
 function ShipmentDetails({
@@ -135,6 +138,7 @@ function ShipmentDetails({
 	isTagFound = false,
 	setIsTagFound = () => {},
 	setCurrentTab = () => {},
+	setCombinedRemarks = () => {},
 }: ShipmentDetailsInterface) {
 	const [showVariance, setShowVariance] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
@@ -157,6 +161,9 @@ function ShipmentDetails({
 		invoiceDetailsTab  : false,
 		lineItemsTab       : false,
 	});
+
+	const { docContent = '', chargesTable = [] } = useGetDocumentContent({ data });
+
 	const onTabClick = ({ tabName = '' }) => {
 		setTab(
 			(prev: any) => ({ ...prev, [tabName]: !prev[tabName] }),
@@ -236,7 +243,7 @@ function ShipmentDetails({
 						</div>
 						{tab.documentsTab && <div className={styles.hr} />}
 						<div className={styles.documents}>
-							{tab.documentsTab && <Documents shipmentId={shipmentId} />}
+							{tab.documentsTab && <Documents shipmentId={shipmentId} docContent={docContent} />}
 							{' '}
 						</div>
 						{tab.documentsTab && (
@@ -372,6 +379,9 @@ function ShipmentDetails({
 						onAccept={onAccept}
 						onTabClick={onTabClick}
 						tab={tab}
+						setCombinedRemarks={setCombinedRemarks}
+						docContent={docContent}
+						chargesTable={chargesTable}
 					/>
 				</div>
 			</div>
