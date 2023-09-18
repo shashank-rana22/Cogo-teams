@@ -21,12 +21,12 @@ function JobStatus({ shipment_data = {}, job_open_request = false }) {
 
 			{job_open_request ? (
 				<Button
-					className={styles.job_undo_button}
+					className={styles.job_reopen_button}
 					themeType="link"
 					size="md"
 					onClick={() => setShowModal(true)}
 				>
-					Undo
+					Re-open
 				</Button>
 			) : null}
 

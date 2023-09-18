@@ -1,15 +1,23 @@
 import { cl } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 
-import pricingListConfig from '../../../configuration/pricingListConfig';
+import getPricingListConfig from '../../../configuration/pricingListConfig';
 
 import Item from './Item';
 import styles from './styles.module.css';
 
+const LOADER_COUNT = 4;
+
 function Pricing({ pricing = [], loading = false }) {
-	const updatePricing = loading ? [...Array(4).keys()] : pricing;
+	const { t } = useTranslation(['saasSubscription']);
+
+	const pricingListConfig = getPricingListConfig({ t });
+
+	const updatePricing = loading ? [...Array(LOADER_COUNT).keys()] : pricing;
+
 	return (
 		<div className={styles.container}>
-			<h3>Pricing</h3>
+			<h3>{t('saasSubscription:plan_details_pricing_title')}</h3>
 
 			<div className={cl`${styles.card_header} ${styles.flex_box}`}>
 				{pricingListConfig.map((config) => (

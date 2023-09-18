@@ -6,7 +6,7 @@ export { default } from '@cogoport/saas-subscription/page-components/Customer';
 export async function getServerSideProps({ locale }) {
 	return {
 		props: {
-			...(await serverSideTranslations(locale, ['common'])),
+			...(await serverSideTranslations(locale, ['common', 'saasSubscription'])),
 		},
 	};
 }
