@@ -2,6 +2,8 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import getLeaderboardFilterControls from '../../../../configurations/get-leaderboard-filter-controls';
+
 const MIN_LENGTH = 0;
 
 const useFilterContent = (props) => {
@@ -11,7 +13,7 @@ const useFilterContent = (props) => {
 
 	const [filters, setFilters] = useState({});
 
-	const CONTROLS = [];
+	const controls = getLeaderboardFilterControls();
 
 	const formProps = useForm();
 
@@ -19,7 +21,7 @@ const useFilterContent = (props) => {
 
 	const resetParams = () => {
 		const FILTER_VALUES = {};
-		CONTROLS.forEach((control) => {
+		controls.forEach((control) => {
 			FILTER_VALUES[control.name] = undefined;
 		});
 		return FILTER_VALUES;
@@ -29,7 +31,7 @@ const useFilterContent = (props) => {
 		const data = getValues();
 
 		const FILTER_VALUES = {};
-		CONTROLS.forEach((control) => {
+		controls.forEach((control) => {
 			if (!isEmpty(data[control.name] || {})) {
 				FILTER_VALUES[control.name] = data?.[control.name];
 			}
@@ -70,7 +72,7 @@ const useFilterContent = (props) => {
 	const filtersApplied = Object.keys(filters).length !== MIN_LENGTH;
 
 	return {
-		CONTROLS,
+		controls,
 		formProps,
 		showFilters,
 		setShowFilters,

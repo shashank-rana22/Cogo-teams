@@ -14,7 +14,7 @@ const getListColumnMapping = () => {
 		{
 			id       : 'name',
 			key      : 'name',
-			flex     : 4,
+			flex     : 2,
 			Header   : <div className={styles.top_heading}>Name</div>,
 			accessor : ({ name }) => (isEmpty(name) ? null : <p className={styles.name}>{name}</p>),
 		},

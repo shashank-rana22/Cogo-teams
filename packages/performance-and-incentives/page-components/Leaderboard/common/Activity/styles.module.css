@@ -5,7 +5,14 @@
 	border-radius: 8px;
 }
 
+.inner_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .heading {
+	margin-bottom: 0;
 	font-size: 1.2em;
 
 	@media (min-width: 1024px) {

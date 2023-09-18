@@ -1,8 +1,8 @@
 import { Button, Badge, Toggle } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 
-import Filters from '../../../../../../common/Filters';
-import SearchInput from '../../../../../../common/SearchInput';
+import Filters from '../../../../common/Filters';
+import SearchInput from '../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
@@ -57,9 +57,10 @@ function LeaderboardFilters(props) {
 					<Button
 						themeType="secondary"
 						type="button"
+						size="lg"
 						onClick={() => setShowFilters(!showFilters)}
 					>
-						<div style={{ fontSize: '14px' }}>Filter</div>
+						<div style={{ fontSize: '16px' }}>Filter</div>
 
 						{conditionalWrapper({
 							condition : filtersApplied,
