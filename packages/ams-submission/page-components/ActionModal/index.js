@@ -4,22 +4,17 @@ import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
 import getContentMapping from '../../configurations/get-content-mapping';
-import useGetAirlineConfigList from '../../hooks/useGetAirlineConfigList';
 
 import styles from './styles.module.css';
 
 function ActionModal({
 	modalData = {},
 	setModalData = () => {},
-	amsDataApiTrigger = () => {},
+	lmsApiTrigger = () => {},
+	lmsLoading = false,
 }) {
 	const { t } = useTranslation(['amsSubmission']);
 	const contentMapping = getContentMapping({ t });
-
-	const {
-		apiTrigger: lmsApiTrigger = () => {},
-		loading: lmsLoading = false,
-	} = useGetAirlineConfigList({ amsDataApiTrigger });
 
 	const handleClick = () => {
 		const { data = {}, type = '' } = modalData || {};
@@ -38,7 +33,7 @@ function ActionModal({
 		<div className={styles.container}>
 			<Modal
 				className={styles.modal_container}
-				show={!isEmpty(modalData)}
+				show={!isEmpty(modalData?.data)}
 			>
 				<IcCError width={40} height={50} />
 				<div className={styles.content}>

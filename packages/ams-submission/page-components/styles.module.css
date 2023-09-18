@@ -78,3 +78,8 @@
 	justify-content: space-between;
 	font-weight: 600;
 }
+
+.submit_status {
+	font-weight: 500;
+	color: #0b8f01;
+}

@@ -75,7 +75,7 @@ const getTcStatusColumns = ({
 				);
 			}
 			if (item?.amsStatus === 'completed') {
-				return <div style={{ color: 'green' }}>{t('amsSubmission:action_button_query_submitted')}</div>;
+				return <div className={styles.submit_status}>{t('amsSubmission:action_button_query_submitted')}</div>;
 			}
 
 			return (

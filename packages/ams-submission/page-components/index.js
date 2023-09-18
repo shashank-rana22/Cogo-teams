@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import EmptyState from '../common/EmptyState';
 import getColumns from '../configurations/get-columns';
+import useGetAirlineConfigList from '../hooks/useGetAirlineConfigList';
 import useGetAmsData from '../hooks/useGetAmsData';
 import usePutAirCoeAirFreight from '../hooks/usePutAirCoeAirFreight';
 
@@ -36,6 +37,11 @@ function AmsSubmission() {
 		apiTrigger: submitStatusApiTrigger = () => {},
 		loading: submitStatusLoading = false,
 	} = usePutAirCoeAirFreight({ amsDataApiTrigger });
+
+	const {
+		apiTrigger: lmsApiTrigger = () => {},
+		loading: lmsLoading = false,
+	} = useGetAirlineConfigList({ amsDataApiTrigger });
 
 	const columns = getColumns({
 		t,
@@ -83,7 +89,8 @@ function AmsSubmission() {
 				<ActionModal
 					modalData={modalData}
 					setModalData={setModalData}
-					amsDataApiTrigger={amsDataApiTrigger}
+					lmsApiTrigger={lmsApiTrigger}
+					lmsLoading={lmsLoading}
 				/>
 			) : null}
 		</div>

@@ -1,10 +1,8 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
-import { useRouter } from 'next/router';
 
 const useGetAirlineConfigList = ({ amsDataApiTrigger = () => {} }) => {
-	const router = useRouter();
 	const [{ data = {}, loading }, trigger] = useRequestAir({
 		url     : '/air-coe/airline-config/list',
 		method  : 'GET',
@@ -13,17 +11,18 @@ const useGetAirlineConfigList = ({ amsDataApiTrigger = () => {} }) => {
 
 	const apiTrigger = async ({ payload = {}, setModalData = () => {} }) => {
 		try {
-			await trigger({
+			const res = await trigger({
 				params: payload,
 			});
-			setModalData({});
 
-			if (data?.lmsUrl) {
-				router.push(data?.lmsUrl, data?.lmsUrl);
+			if (res?.data?.data?.lmsUrl) {
+				window.open(res?.data?.data?.lmsUrl, '_blank');
 			} else {
 				Toast.error('Something went wrong');
 			}
+
 			amsDataApiTrigger();
+			setModalData({});
 		} catch (err) {
 			toastApiError(err);
 		}

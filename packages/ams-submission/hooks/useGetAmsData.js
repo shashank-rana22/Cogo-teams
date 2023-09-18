@@ -6,13 +6,10 @@ import { useRequestAir } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
 const INIT_PAGE = 1;
-const PREV_DATE = 11;
 
 const getPayload = ({ activeTab = 'tc_status_check', pagination = INIT_PAGE, query = '' }) => {
-	const newDate = new Date();
-	newDate.setDate(newDate.getDate() - PREV_DATE);
 	const date = formatDate({
-		date       : newDate,
+		date       : new Date(),
 		formatType : 'date',
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 	});
