@@ -3,6 +3,7 @@ import { Pagination, Button, Modal } from '@cogoport/components';
 import { getFieldController } from '../../../../../commons/Form/getFieldController';
 import LeadTable from '../../../commons/LeadTable';
 import getSearchControls from '../../../configurations/search-control';
+import useDownloadRequestOrgData from '../../../hooks/useDownloadRequestOrgData';
 import useGetEnrichmentRequestLeads from '../../../hooks/useGetEnrichmentRequestLeads';
 
 import getEnrichmentRequestOrganizations from './getEnrichmentRequestOrganizationsColumns';
@@ -17,6 +18,8 @@ function EnrichmentRequestInfo({ request = {}, onClose = () => {} }) {
 		paginationData,
 		setParams,
 	} = useGetEnrichmentRequestLeads({ enrichment_request_id: request.id });
+
+	const { loading: downloading, downloadFile } = useDownloadRequestOrgData();
 
 	const columns = getEnrichmentRequestOrganizations();
 	const searchControls = getSearchControls({ debounceQuery });
@@ -78,7 +81,10 @@ function EnrichmentRequestInfo({ request = {}, onClose = () => {} }) {
 				</>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={onClose}>Close</Button>
+				<div className={styles.button_div}>
+					<Button onClick={() => downloadFile(request.id)} loading={downloading}>Download</Button>
+					<Button themeType="secondary" onClick={onClose}>Close</Button>
+				</div>
 			</Modal.Footer>
 		</Modal>
 	);

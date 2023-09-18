@@ -60,6 +60,11 @@ const ihls = {
 			access_type  : 'public',
 			service_name : 'athena',
 		},
+		{
+			api          : 'lead_data_url',
+			access_type  : 'public',
+			service_name : 'athena',
+		},
 	],
 };
 

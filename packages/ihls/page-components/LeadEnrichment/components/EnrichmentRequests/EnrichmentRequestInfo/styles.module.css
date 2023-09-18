@@ -9,6 +9,10 @@
 }
 
 .tableContainer {
-	/* width: 1000px; */
 	overflow-x: scroll;
+}
+
+.button_div {
+	display: flex;
+	gap: 8px;
 }
