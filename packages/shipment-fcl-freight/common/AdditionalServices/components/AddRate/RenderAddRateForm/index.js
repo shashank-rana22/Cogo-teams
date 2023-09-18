@@ -38,15 +38,14 @@ function RenderAddRateForm({
 	const { formControl = [] } = controls({ serviceData, source });
 
 	let { services = [] } = serviceData || {};
-	services = services?.find((service) => service.service_type === serviceData?.service_type);
+	const { service_type = '' } = serviceData || {};
+	services = services?.find((service) => service.service_type === service_type);
 
 	const selectedUnit = watch('unit');
 	const prefillValue = UNIT_VALUE_MAPPING?.[selectedUnit];
+	const prefillQuantity = selectedUnit === 'per_shipment' ? PREFILL_QUANTITY_ONE : services?.[prefillValue];
 
-	setValue('quantity', services?.[prefillValue]);
-	if (selectedUnit === 'per_shipment') {
-		setValue('quantity', PREFILL_QUANTITY_ONE);
-	}
+	setValue('quantity', prefillQuantity);
 
 	return (
 		<form className={styles.form_container}>
