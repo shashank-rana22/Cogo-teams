@@ -28,9 +28,9 @@ function ReviewServices({
 
 	const handleUpdate = () => {
 		apiTrigger({
-			id     : invoice?.id,
-			status : value ? 'reviewed' : undefined,
-			...(invoice?.is_fx_locked ? { is_fx_locked: invoice.is_fx_locked } : null),
+			id           : invoice?.id,
+			status       : value ? 'reviewed' : undefined,
+			is_fx_locked : invoice?.is_fx_locked || undefined,
 		});
 	};
 
