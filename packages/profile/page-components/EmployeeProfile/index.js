@@ -1,8 +1,9 @@
-import { Button, Placeholder } from '@cogoport/components';
+import { Button, Placeholder, Popover } from '@cogoport/components';
 import {
 	IcMArrowBack,
 	IcMArrowDown,
 } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React from 'react';
 
@@ -20,7 +21,7 @@ function EmployeeProfile() {
 
 	const { employee_detail } = data || {};
 	const employeeData = getEmployeeData(employee_detail);
-
+	const router = useRouter();
 	return (
 		<div className={styles.main_container}>
 			{(data || loading) && (
@@ -78,12 +79,22 @@ function EmployeeProfile() {
 												</div>
 											)
 									}
-										<Button size="md" themeType="accent" disabled>
-											<div className={styles.actions_container}>
-												<span>Actions</span>
-												<IcMArrowDown width={12} height={12} />
-											</div>
-										</Button>
+										<Popover
+											placement="left"
+											render={(
+												<Button onClick={() => router.push('/apply-resignation')}>
+													Apply for Resignation
+												</Button>
+											)}
+										>
+											<Button size="md" themeType="accent">
+												<div className={styles.actions_container}>
+													<span>Actions</span>
+													<IcMArrowDown width={12} height={12} />
+												</div>
+											</Button>
+										</Popover>
+
 									</div>
 								</div>
 								<div className={styles.desig_location}>

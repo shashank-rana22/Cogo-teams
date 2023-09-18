@@ -20,7 +20,7 @@ const SUPPORT_ADMIN = {
 	accesible_agent_types_query   : [where('agent_type', 'in', COMMON_AGENT_TYPES)],
 	extra_side_bar_navs_access    : ['spot_search'],
 	get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
-	show_relevant_templates       : ['quick_reply'],
+	show_relevant_templates       : ['quick_reply', 'support'],
 	mails_to_be_shown             : [],
 	bulk_assign_features          : [],
 	configurations_to_be_shown    : [],
