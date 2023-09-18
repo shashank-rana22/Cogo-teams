@@ -27,7 +27,7 @@ const useGeneratePdf = () => {
 			Toast.success('Uploaded Successfully');
 			callback(res);
 		} catch (error) {
-			toastApiError(error || 'Something Went Wrong');
+			toastApiError(error);
 		}
 	};
 
