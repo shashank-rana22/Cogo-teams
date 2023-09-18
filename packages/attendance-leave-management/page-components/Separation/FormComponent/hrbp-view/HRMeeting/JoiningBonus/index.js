@@ -19,7 +19,6 @@ function JoiningBonus({ control = {}, errors = {}, data = {}, watch = () => {} }
 					control={control}
 					name="joining_bonus_clawback"
 					options={options}
-					defaultValue="no"
 				/>
 				{errors.joining_bonus_clawback && (
 					<span className={styles.error}>Selection is Required</span>
