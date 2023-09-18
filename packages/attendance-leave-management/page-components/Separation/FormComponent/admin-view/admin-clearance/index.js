@@ -47,6 +47,7 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 				handleSubmit={handleSubmit}
 				onSubmit={onSubmit}
 				termsChecked={termsChecked}
+				is_complete={is_complete}
 			/>
 			<div className={styles.button_div}>
 				<Button

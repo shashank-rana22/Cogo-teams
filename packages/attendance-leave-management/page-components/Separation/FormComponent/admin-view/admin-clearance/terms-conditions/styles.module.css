@@ -23,6 +23,7 @@
 	display: flex;
 	align-items: flex-start;
 	margin-bottom: 24px;
+
 	:global {
 		.ui_checkbox_container {
 			padding: 0;
@@ -64,7 +65,7 @@
 .name_input_container {
 	display: flex;
 	flex: 1 0 0;
-	align-items: center;
+	flex-direction: column;
 	width: 100%;
 }
 
