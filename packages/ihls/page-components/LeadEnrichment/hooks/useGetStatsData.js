@@ -132,14 +132,14 @@ const useGetStatsData = ({ stats_type = null, params = {} }) => {
 		return ({
 			...item,
 			id,
-			label      : MAPPING[id]?.label,
+			label      : MAPPING[id]?.label || id,
 			color      : MAPPING[id]?.color,
 			percentage : Math.round((item.value * PERCENTAGE) / (data?.count || UNITY)),
 		});
 	});
 
 	return {
-		title               : TITLE_MAPPING[stats_type] || '__',
+		title               : TITLE_MAPPING[stats_type] || stats_type,
 		count               : loading ? '---' : data?.count,
 		sample_contact_data : loading ? [] : modifiedData || [],
 		loading,
