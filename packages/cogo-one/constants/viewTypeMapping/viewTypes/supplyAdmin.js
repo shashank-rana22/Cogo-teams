@@ -55,7 +55,6 @@ const SUPPLY_ADMIN = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : false,
-		show_email_communication                    : false,
 	},
 };
 

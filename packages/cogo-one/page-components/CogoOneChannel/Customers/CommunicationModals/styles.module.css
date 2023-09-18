@@ -6,17 +6,12 @@
 	width: 45px;
 	height: 45px;
 	cursor: pointer;
-	background-color: #000;
 	border-radius: 100%;
-	box-shadow: 3px 7px 16px #8a795d99;
-}
-
-.single_communication {
-	background-color: #606060;
 }
 
 .multiple_communication {
 	background-color: #000;
+	box-shadow: 3px 7px 16px #8a795d99;
 }
 
 .plus_circle svg {
@@ -85,7 +80,6 @@
 }
 
 .mail_icon_styles {
-	background: #ffff;
 	border-radius: 50%;
 }
 

@@ -1,5 +1,6 @@
 import { cl, Toast } from '@cogoport/components';
-import { IcMPlus, IcMEmail } from '@cogoport/icons-react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
@@ -11,6 +12,7 @@ import { ICONS_MAPPING } from './iconsMappings';
 import styles from './styles.module.css';
 
 const ICON_STYLES = ['position_1', 'position_2', 'position_3', 'position_4', 'position_5'];
+const ACCESS_LENGTH = 1;
 
 function CommunicationModals({
 	mailProps = {},
@@ -27,7 +29,6 @@ function CommunicationModals({
 	const { buttonType, setButtonType, activeMail } = mailProps;
 
 	const ACCESSIBLE_BUTTONS = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accessible_new_communications || [];
-	const showOnlyEmailCommunication = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_email_communication;
 
 	const CLICK_FUNCTIONS = {
 		new_call     : () => setShowDialModal(true),
@@ -49,21 +50,19 @@ function CommunicationModals({
 		},
 	};
 
-	if (showOnlyEmailCommunication) {
+	if (ACCESSIBLE_BUTTONS.length === ACCESS_LENGTH) {
+		const Comp = ICONS_MAPPING[ACCESSIBLE_BUTTONS[GLOBAL_CONSTANTS.zeroth_index]] || null;
+		const clickFunc = CLICK_FUNCTIONS[ACCESSIBLE_BUTTONS[GLOBAL_CONSTANTS.zeroth_index]] || null;
+
 		return (
 			<>
 				<div
 					className={styles.wrapper}
 					role="presentation"
-					onClick={CLICK_FUNCTIONS?.new_mail}
 				>
-					<div className={cl`${styles.plus_circle} ${styles.single_communication}`}>
-						<div className={styles.wheel_box}>
-							<IcMEmail
-								fill="#ffffff"
-								width={25}
-								height={30}
-							/>
+					<div className={styles.plus_circle}>
+						<div className={styles.action}>
+							<Comp onClick={clickFunc} />
 						</div>
 					</div>
 				</div>
