@@ -16,14 +16,17 @@ const useGetUnreadMailsCount = ({ firestore, viewType, agentId, isBotSession }) 
 
 	useEffect(() => {
 		const getBaseQuery = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.all_chats_base_query;
+		const getSessionQuery = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.session_type_query;
 
 		mountUnreadCountSnapShot({
 			unreadCountSnapshotListener,
 			omniChannelCollection : collectionGroup(firestore, 'rooms'),
 			baseQuery             : getBaseQuery?.({ agentId }) || [],
-			sessionQuery          : [where('session_type', '==', 'admin')],
-			queryFilters          : [where('channel_type', 'in', ['email'])],
-			setUnReadChatsCount   : setUnReadMailsCount,
+			sessionQuery          : getSessionQuery?.({
+				sessionType: isBotSession ? 'bot' : 'admin',
+			}) || [],
+			queryFilters        : [where('channel_type', 'in', ['email'])],
+			setUnReadChatsCount : setUnReadMailsCount,
 		});
 	}, [firestore, viewType, agentId, isBotSession]);
 

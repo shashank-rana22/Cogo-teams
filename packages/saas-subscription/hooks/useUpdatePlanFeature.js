@@ -1,18 +1,20 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 
-import addonConfig from '../configuration/addonConfig';
-import { updatePlanFeatureConfig } from '../configuration/planFeatureConfig';
-import updateAddonControl, { addonDefaultValue } from '../configuration/updateAddonControl';
-import updatePlanFeatureControl, { planFeatureDefaultValue } from '../configuration/updatePlanFeatureControl';
+import getAddonConfig from '../configuration/addonConfig';
+import { getUpdatePlanFeatureConfig } from '../configuration/planFeatureConfig';
+import getUpdateAddonControl, { ADDON_DEFAULT_VALUE } from '../configuration/updateAddonControl';
+import getUpdatePlanFeatureControl, { PLAN_FEATURE_DEFAULT_VALUE } from '../configuration/updatePlanFeatureControl';
 
 const createDrafultValue = (list, name) => {
 	if (name === 'addon') {
 		const defaultValue = list.map((item) => ({
 			product_id : item?.saas_product_id,
 			count      : item?.unit_count,
-			discount   : item?.discount_percent || 0,
+			discount   : item?.discount_percent || GLOBAL_CONSTANTS.zeroth_index,
 		}));
 		return ({
 			updateAddon: defaultValue,
@@ -29,26 +31,27 @@ const createDrafultValue = (list, name) => {
 	});
 };
 
-const getFeatureMapping = (info, name) => ({
+const getFeatureMapping = (info, name, t) => ({
 	addon: {
 		name         : 'updateAddon',
-		title        : 'Add Add-ons',
-		configs      : addonConfig,
-		formControls : updateAddonControl,
+		title        : t('saasSubscription:pricing_feature_mapping_addon'),
+		configs      : getAddonConfig({ t }),
+		formControls : getUpdateAddonControl({ t }),
 		defaultValue : createDrafultValue(info, name),
-		appendValue  : addonDefaultValue,
+		appendValue  : ADDON_DEFAULT_VALUE,
 	},
 	planFeature: {
 		name         : 'updatePlanFeature',
-		title        : 'Add Plan Feature',
-		configs      : updatePlanFeatureConfig,
-		formControls : updatePlanFeatureControl,
+		title        : t('saasSubscription:pricing_feature_mapping_plan'),
+		configs      : getUpdatePlanFeatureConfig({ t }),
+		formControls : getUpdatePlanFeatureControl({ t }),
 		defaultValue : createDrafultValue(info, name),
-		appendValue  : planFeatureDefaultValue,
+		appendValue  : PLAN_FEATURE_DEFAULT_VALUE,
 	},
 });
 
 const useUpdatePlanFeature = ({ planId = '', setFeatureModal }) => {
+	const { t } = useTranslation(['saasSubscription']);
 	const [{ loading: addonLoading }, addonTrigger] = useRequest({
 		url    : '/update_saas_product_plan_mapping',
 		method : 'post',
@@ -72,7 +75,7 @@ const useUpdatePlanFeature = ({ planId = '', setFeatureModal }) => {
 				},
 			});
 			modalCloseHandler(true);
-			Toast.success('SuccessFully updated Add-ons');
+			Toast.success(t('saasSubscription:update_addon_success'));
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}
@@ -87,7 +90,7 @@ const useUpdatePlanFeature = ({ planId = '', setFeatureModal }) => {
 				},
 			});
 			modalCloseHandler(true);
-			Toast.success('SuccessFully updated Plan Feature');
+			Toast.success(t('saasSubscription:update_addon_success'));
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}

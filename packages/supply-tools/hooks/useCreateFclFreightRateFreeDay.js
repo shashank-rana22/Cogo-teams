@@ -11,7 +11,7 @@ const useCreateFclFreightRateFreeDay = ({
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_fcl_freight_rate_free_day',
 		method : 'POST',
-	});
+	}, { manual: true });
 
 	const apiTrigger = async (val) => {
 		try {

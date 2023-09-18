@@ -1,8 +1,8 @@
 .styled_ui_modal_dialog {
-	top: 40px !important;
+	top: 30px !important;
 	display: flex;
 	flex-direction: column;
-	height: 80vh;
+	height: 82vh;
 	border-top: none !important;
 
 	:global {
@@ -33,15 +33,15 @@
 	}
 }
 
-.template_view {
-	width: 55%;
+.modal_header {
+	width: 100%;
+	padding: 0;
 }
 
 .expand_icon {
 	position: absolute;
-	top: 5px;
-	left: 4px;
-	cursor: pointer;
+	top: 8px;
+	left: 8px;
 
 	svg {
 		width: 20px;
@@ -49,37 +49,20 @@
 	}
 }
 
-.minimize_container {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 66px;
-	height: 20px;
-	padding: auto;
-	color: var(--color-secondary-greyscale-3);
-	cursor: pointer;
-	border: 1px solid #e0e0e0;
-	border-radius: 4px;
-
-	&:hover {
-		font-weight: 500;
-		color: #fff;
-		background-color: var(--color-tertiary-blue-2);
-	}
-}
-
 .minimized_modal_styles {
 	position: fixed;
-	right: calc(50% - 170px);
+	right: 10%;
 	bottom: 0;
+	z-index: 9999;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 340px;
 	height: 40px;
+	cursor: pointer;
 	background: #fff;
-	border: 1px solid #e0e0e0;
+	border: 1px solid #ff5655;
+	border-radius: 8px 8px 0 0;
 }
 
 .title {
