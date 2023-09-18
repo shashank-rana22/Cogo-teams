@@ -50,7 +50,6 @@ const useAdminClearanceDetails = ({ data = {}, refetch = () => {} }) => {
 		updateApplication({
 			payload,
 		});
-		reset();
 	};
 
 	useEffect(() => {

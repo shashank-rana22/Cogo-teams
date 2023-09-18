@@ -15,7 +15,6 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 	} = useForm();
 
 	const { admin_clearance, application_status } = data || {};
-	console.log('🚀 ~ file: index.js:18 ~ AdminClearanceHrbp ~ admin_clearance:', admin_clearance);
 	const { process_user_details, admin_clearance:adminClearance } = admin_clearance || {};
 	let { name } = process_user_details || {};
 	const { sub_process_data, is_complete } = adminClearance || {};
@@ -43,7 +42,7 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 								<div className={styles.row2}>
 									<IcCFtick width={16} height={16} style={{ color: '#849E4C' }} />
 									<span style={{ marginLeft: '4px' }}>
-										{startCase(sub_process_data?.idcardstatus)}
+										{startCase(sub_process_data?.idCardStatus)}
 									</span>
 								</div>
 							</div>
@@ -53,7 +52,7 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 								<div className={styles.row2}>
 									<IcCFtick width={16} height={16} style={{ color: '#849E4C' }} />
 									<span style={{ marginLeft: '4px' }}>
-										{startCase(sub_process_data?.accesscardstatus)}
+										{startCase(sub_process_data?.accessCardStatus)}
 									</span>
 								</div>
 							</div>
@@ -63,7 +62,7 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 								<div className={styles.row2}>
 									<IcCFtick width={16} height={16} style={{ color: '#849E4C' }} />
 									<span style={{ marginLeft: '4px' }}>
-										{startCase(sub_process_data?.companyassets)}
+										{startCase(sub_process_data?.companyAssets)}
 									</span>
 								</div>
 							</div>
@@ -72,7 +71,7 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 								<div className={styles.row1}>Parking Charges</div>
 								<div className={styles.row2}>
 									<span style={{ color: '#BF291E' }}>
-										{startCase(sub_process_data?.parkingcharges)}
+										{startCase(sub_process_data?.parkingCharges)}
 										rs
 									</span>
 								</div>
