@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
 import { STATUS_MAPPING, getStatusLabelMapping } from '../../../constants';
@@ -23,11 +24,14 @@ function TicketStructureBody({
 		ActivityCount: activityCount = 0,
 		IsClosureAuthorizer: isClosureAuthorizer = false,
 		TicketStatus: ticketStatus = '',
+		Data: ticketData = {},
 	} = data;
 
 	const { t } = useTranslation(['myTickets']);
 
 	const { color: textColor, label } =	getStatusLabelMapping({ t })?.[STATUS_MAPPING[ticketStatus]] || {};
+
+	const { RequestType: request_type } = ticketData || {};
 
 	const handleTicket = (e, { actionType }) => {
 		e.stopPropagation();
@@ -38,9 +42,14 @@ function TicketStructureBody({
 		<div className={styles.ticket_container}>
 			<div className={styles.subcontainer_one}>
 				<div className={styles.subcontainer_header}>
-					<div className={styles.ticket_id}>
-						#
-						{id}
+					<div className={styles.info}>
+						<div className={styles.ticket_id}>
+							#
+							{id}
+						</div>
+						<div className={styles.request_type}>
+							{startCase(request_type)}
+						</div>
 					</div>
 
 					<TicketActions

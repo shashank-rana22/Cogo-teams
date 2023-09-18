@@ -27,7 +27,11 @@ function RaiseTickets({ showRaiseTicket = false, setShowRaiseTicket = () => {}, 
 		setShowRaiseTicket(false);
 	};
 
-	const { raiseTickets, loading } = useRaiseTicket({ handleClose, additionalInfo, setRefreshList });
+	const { raiseTickets, loading } = useRaiseTicket({
+		handleClose,
+		additionalInfo,
+		setRefreshList,
+	});
 
 	return (
 		<Modal
