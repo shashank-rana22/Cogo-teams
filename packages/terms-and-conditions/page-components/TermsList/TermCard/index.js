@@ -21,7 +21,6 @@ function TermCard({
 	onClickUpdateTerms = () => {},
 	onClickShowMoreTnC = () => {},
 	refetch = () => {},
-	description = [],
 	tncLevel = 'basicInfo',
 	setTncLevel = () => {},
 	organizationId = null,
@@ -32,7 +31,7 @@ function TermCard({
 	const [visibleToolTip, setShowVisibleToolTip] = useState(false);
 	const editRef = useRef(null);
 
-	const { id = '', service = '', status = '' } = listItem;
+	const { id = '', service = '', status = '', description = [] } = listItem;
 
 	const [visible, setVisible] = useState(false);
 	const callBack = () => setShowEdit(null);

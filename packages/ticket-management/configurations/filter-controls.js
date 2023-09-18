@@ -45,8 +45,13 @@ const useRaiseTicketcontrols = ({
 
 	const serialIdOptions = useGetAsyncOptions({
 		...asyncListShipments(),
-		params   : { filters: { importer_exporter_id: watchOrgId, user_id: watchUserId } },
-		valueKey : 'serial_id',
+		params: {
+			filters: {
+				importer_exporter_id : watchOrgId || undefined,
+				user_id              : watchUserId || undefined,
+			},
+		},
+		valueKey: 'serial_id',
 	});
 	return [
 		{
@@ -65,7 +70,6 @@ const useRaiseTicketcontrols = ({
 			name           : 'organization_id',
 			controllerType : 'select',
 			placeholder    : 'Select Organization',
-			rules          : { required: true },
 			isClearable    : true,
 		},
 		{
@@ -75,7 +79,6 @@ const useRaiseTicketcontrols = ({
 			controllerType : 'select',
 			placeholder    : 'Select User',
 			isClearable    : true,
-			rules          : { required: true },
 		},
 		{
 			...(serialIdOptions || {}),
@@ -110,7 +113,7 @@ const useRaiseTicketcontrols = ({
 		},
 		{
 			...(categoryOptions || {}),
-			label          : 'Select category',
+			label          : 'Raised by desk',
 			name           : 'category',
 			controllerType : 'select',
 			placeholder    : 'Select Type',
@@ -122,7 +125,7 @@ const useRaiseTicketcontrols = ({
 			},
 		},
 		{
-			label          : 'Select Sub-category',
+			label          : 'Raised to desk',
 			name           : 'sub_category',
 			controllerType : 'select',
 			placeholder    : 'Select sub category',

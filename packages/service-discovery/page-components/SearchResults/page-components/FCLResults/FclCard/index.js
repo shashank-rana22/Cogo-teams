@@ -236,8 +236,8 @@ function FclCard({
 
 	return (
 		<div
-			className={styles.container}
-			style={isSelectedCard ? { backgroundColor: '#F5FFFF', border: '1px solid #E6F3F3' } : null}
+			className={cl`${styles.container} ${isSelectedCard && styles.selected_card}`}
+			style={{ marginTop: index === GLOBAL_CONSTANTS.zeroth_index ? '0px' : '40px' }}
 		>
 			<RateCardTopSection
 				rateCardData={rateCardData}

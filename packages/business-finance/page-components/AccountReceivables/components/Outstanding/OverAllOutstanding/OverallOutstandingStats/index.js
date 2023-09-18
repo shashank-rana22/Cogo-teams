@@ -30,21 +30,21 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 				</div>
 				<div style={{ margin: '12px 0px 20px 11px' }}>
 					<OutStandingStatsCommonCard
-						label="Open invoices"
+						label="OPEN INVOICES"
 						item={openInvoiceBucket}
 						amountValue={OVERALL_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
 						amountColor="#FC5555"
 					/>
 					<OutStandingStatsCommonCard
-						label="On Account Payments"
+						label="ON ACCOUNT PAYMENTS"
 						item={onAccountBucket}
 						amountValue={ONACCOUNT_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
 						amountColor="#29CC6A"
 					/>
 					<OutStandingStatsCommonCard
-						label="Credit Notes"
+						label="CREDIT NOTES"
 						item={creditNoteBucket}
 						amountValue={OVERALL_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}

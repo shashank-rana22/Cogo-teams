@@ -40,7 +40,6 @@ function TermList({
 						editTncModalId={editTncModalId}
 						listItem={listItem}
 						refetch={refetch}
-						description={listItem?.description}
 						showMoreTnC={showHiddenContentId === listItem?.id}
 						onClickShowMoreTnC={
 							() => setShowHiddenContentId((pv) => (pv === listItem.id ? null : listItem.id))
