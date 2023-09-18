@@ -3,22 +3,26 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
 const getPayload = ({ team_name, formattedValues }) => {
-	const PAYLOAD = [];
+	let shiftDetails = [];
+
 	const filteredList = formattedValues.filter(({ shift_id }) => !shift_id);
+
 	filteredList.forEach(({ shift_name, start_time_local, end_time_local }) => {
 		if (start_time_local && end_time_local) {
-			PAYLOAD.push({
-				shift_name,
-				start_time_local : String(start_time_local),
-				end_time_local   : String(end_time_local),
-			});
+			shiftDetails = [
+				...shiftDetails,
+				{
+					shift_name,
+					start_time_local : String(start_time_local),
+					end_time_local   : String(end_time_local),
+				},
+			];
 		}
 	});
+
 	return {
-		data: {
-			team_name,
-			shift_details: PAYLOAD,
-		},
+		team_name,
+		shift_details: shiftDetails,
 	};
 };
 
@@ -28,21 +32,25 @@ const useCreateBulkCogooneShift = ({ handleClose = () => {} }) => {
 		method : 'post',
 	}, { manual: true });
 
-	const createCogooneShift = async (payload) => {
+	const createCogooneShift = async ({ payload }) => {
 		try {
-			await trigger(payload);
-			Toast.success(' Shift created successfully');
-			handleClose();
+			await trigger({ data: payload });
+			Toast.success('Shifts created successfully');
 		} catch (e) {
 			console.error(e);
 		}
 	};
 
-	const createCogooneShiftRequest = async ({ team_name, formattedValues }) => {
+	const createCogooneShiftRequest = async ({
+		team_name,
+		formattedValues,
+	}) => {
 		const payload = getPayload({ team_name, formattedValues });
-		if (!isEmpty(payload.data.shift_details)) {
-			await createCogooneShift(payload);
+
+		if (!isEmpty(payload.shift_details)) {
+			await createCogooneShift({ payload });
 		}
+
 		handleClose();
 	};
 

@@ -3,20 +3,28 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
-const checkTimeEqual = (timeString, date) => {
-	const [hr, mn] = timeString.split(':');
+const checkTimeEqual = ({
+	timeString = '',
+	date = {},
+}) => {
+	const [hour, minute] = timeString.split(':');
+
 	if (
-		Number(hr) === Number(date.getHours())
-		&& Number(mn) === Number(date.getMinutes())
-	) { return true; }
+		Number(hour) === Number(date.getHours())
+		&& Number(minute) === Number(date.getMinutes())
+	) {
+		return true;
+	}
+
 	return false;
 };
 
-const getPayload = ({ formattedValues, prevList }) => {
-	const PAYLOAD = [];
+const getPayload = ({ formattedValues = [], prevList = [] }) => {
+	let filteredData = [];
 
 	formattedValues.forEach((valueItem) => {
 		const { shift_id, start_time_local, end_time_local } = valueItem;
+
 		const [oldItem] = prevList.filter(({ id }) => id === shift_id);
 
 		if (!isEmpty(oldItem) && shift_id) {
@@ -26,22 +34,23 @@ const getPayload = ({ formattedValues, prevList }) => {
 			} = oldItem;
 
 			if (
-				!checkTimeEqual(prev_start_time_local, start_time_local)
-				|| !checkTimeEqual(prev_end_time_local, end_time_local)
+				!checkTimeEqual({ timeString: prev_start_time_local, date: start_time_local })
+				|| !checkTimeEqual({ timeString: prev_end_time_local, date: end_time_local })
 			) {
-				PAYLOAD.push({
-					shift_id,
-					start_time_local : String(start_time_local),
-					end_time_local   : String(end_time_local),
-				});
+				filteredData = [
+					...filteredData,
+					{
+						shift_id,
+						start_time_local : String(start_time_local),
+						end_time_local   : String(end_time_local),
+					},
+				];
 			}
 		}
 	});
 
 	return {
-		data: {
-			shift_details: PAYLOAD,
-		},
+		shift_details: filteredData,
 	};
 };
 
@@ -51,9 +60,9 @@ function useUpdateCogooneShift() {
 		method : 'post',
 	}, { manual: true });
 
-	const updateTeamsShift = async (payload) => {
+	const updateTeamsShift = async ({ payload }) => {
 		try {
-			await trigger(payload);
+			await trigger({ data: payload });
 			Toast.success('Timing updated successfully');
 		} catch (error) {
 			Toast.error(
@@ -65,8 +74,9 @@ function useUpdateCogooneShift() {
 
 	const createUpdateRequest = async ({ formattedValues, prevList }) => {
 		const payload = getPayload({ formattedValues, prevList });
-		if (!isEmpty(payload.data.shift_details)) {
-			await updateTeamsShift(payload);
+
+		if (!isEmpty(payload.shift_details)) {
+			await updateTeamsShift({ payload });
 		}
 	};
 

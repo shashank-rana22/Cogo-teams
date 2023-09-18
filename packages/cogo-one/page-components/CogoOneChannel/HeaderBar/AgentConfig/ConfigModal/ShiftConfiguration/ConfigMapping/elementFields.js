@@ -8,16 +8,17 @@ import styles from './styles.module.css';
 const handleValidate = ({ value, name, formValues }) => {
 	const [phase, type] = name.split('_shift_');
 
-	if (type === 'start_time') {
-		return validateTime({
-			start_time : value,
-			end_time   : formValues[`${phase}_shift_end_time`],
-		});
-	}
+	const startTime = type === 'start_time'
+		? value
+		: formValues[`${phase}_shift_start_time`];
+
+	const endTime = type === 'start_time'
+		? formValues[`${phase}_shift_end_time`]
+		: value;
 
 	return validateTime({
-		start_time : formValues[`${phase}_shift_start_time`],
-		end_time   : value,
+		startTime,
+		endTime,
 	});
 };
 
@@ -31,7 +32,7 @@ function ElementFields({
 		<>
 			{fields.map(
 				(name) => (
-					<div key={name}>
+					<div key={name} className={styles.fields_styles}>
 						<TimepickerController
 							placeholder="Select time"
 							control={control}
@@ -46,8 +47,12 @@ function ElementFields({
 							}}
 						/>
 
-						{errors && errors[name]
-							? <div className={styles.error}>{errors[name]?.message || 'Required'}</div>
+						{(errors && errors[name])
+							? (
+								<div className={styles.error}>
+									{errors[name]?.message || 'Required'}
+								</div>
+							)
 							: null}
 					</div>
 				),

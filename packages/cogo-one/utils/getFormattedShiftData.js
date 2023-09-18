@@ -2,15 +2,8 @@ import { getDateFromTime } from './getDateFromTime';
 
 const ALLOWED = ['morning', 'afternoon', 'night'];
 
-export default function getDefaultValues({ list = [] }) {
-	let defaultValues = {
-		morning_shift_start_time   : null,
-		morning_shift_end_time     : null,
-		afternoon_shift_start_time : null,
-		afternoon_shift_end_time   : null,
-		night_shift_start_time     : null,
-		night_shift_end_time       : null,
-	};
+function getFormattedShiftData({ list = [] }) {
+	let defaultValues = {};
 
 	list.forEach(
 		(shift) => {
@@ -19,11 +12,19 @@ export default function getDefaultValues({ list = [] }) {
 					...defaultValues,
 					[`${shift.shift_name}_shift_start_time`]: (
 						shift?.start_time_utc
-							? getDateFromTime(shift.start_time_utc) : null
+							? getDateFromTime({
+								timeStr  : shift?.start_time_utc,
+								timeZone : shift?.local_time_zone,
+							})
+							: null
 					),
 					[`${shift.shift_name}_shift_end_time`]: (
 						shift?.end_time_utc
-							? getDateFromTime(shift.end_time_utc) : null
+							? getDateFromTime({
+								timeStr  : shift?.end_time_utc,
+								timeZone : shift?.local_time_zone,
+							})
+							: null
 					),
 				};
 			}
@@ -32,3 +33,5 @@ export default function getDefaultValues({ list = [] }) {
 
 	return defaultValues;
 }
+
+export default getFormattedShiftData;

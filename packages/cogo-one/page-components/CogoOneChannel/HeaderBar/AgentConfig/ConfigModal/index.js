@@ -72,7 +72,8 @@ function ConfigModal({
 		setIsInActive = () => {},
 		isInActive = false,
 	} = hookToBeUsed({
-		agentType: getCommonAgentType({ viewType }),
+		agentType  : getCommonAgentType({ viewType }),
+		activeCard : activeCard || 'default',
 	}) || {};
 
 	const {

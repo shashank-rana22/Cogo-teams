@@ -6,7 +6,7 @@ import { CONTROLS, SHIFT_CONFIGURATION_HEADING } from '../../../../../../../cons
 import { transformShiftData } from '../../../../../../../helpers/shiftConfigurationHelpers';
 import useCreateBulkCogooneShift from '../../../../../../../hooks/useCreateBulkCogooneShift';
 import useUpdateCogooneShift from '../../../../../../../hooks/useUpdateCogooneShift';
-import getDefaultValues from '../../../../../../../utils/getDefaultValues';
+import getFormattedShiftData from '../../../../../../../utils/getFormattedShiftData';
 
 import ElementFields from './elementFields';
 import styles from './styles.module.css';
@@ -20,13 +20,12 @@ function ConfigMapping({
 	const { list = [] } = shiftsData || {};
 
 	const defaultValues = useMemo(
-		() => getDefaultValues({
+		() => getFormattedShiftData({
 			list,
 			selectedTeam,
 		}),
 		[selectedTeam, list],
 	);
-	console.log('defaultValues:', defaultValues);
 
 	const {
 		control,
@@ -42,11 +41,14 @@ function ConfigMapping({
 	const formValues = watch();
 
 	const onSubmit = async (val) => {
-		const formattedValues = transformShiftData({ val, list });
+		const formattedValues = transformShiftData({
+			newData   : val,
+			savedData : list,
+		});
 
 		await createUpdateRequest({
-			formattedValues : [...formattedValues],
-			prevList        : list,
+			formattedValues,
+			prevList: list,
 		});
 
 		createCogooneShiftRequest({
@@ -59,7 +61,7 @@ function ConfigMapping({
 		<>
 			<div className={styles.heading}>
 				{SHIFT_CONFIGURATION_HEADING.map((item) => (
-					<div key={item.key}>
+					<div className={styles.header_label} key={item.key}>
 						{item.label}
 					</div>
 				))}
