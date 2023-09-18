@@ -37,6 +37,7 @@ function ReOpenJob({
 		shipmentData,
 		setIsSuccess,
 		incidentStatusRefetch,
+		setShowModal,
 	});
 
 	const { formState: { errors }, handleSubmit, control } = useForm();

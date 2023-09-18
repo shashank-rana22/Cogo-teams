@@ -6,7 +6,9 @@ import getIncidentReOpenJobPayload from '../utils/getIncidentReOpenJobPayload';
 
 const useIncidentReOpenJob = ({
 	shipmentData = {},
-	setIsSuccess = () => {},
+	setIsSuccess = () => { },
+	incidentStatusRefetch = () => { },
+	setShowModal = () => {},
 }) => {
 	const { user_id = '' } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -27,6 +29,10 @@ const useIncidentReOpenJob = ({
 			});
 
 			setIsSuccess(true);
+
+			incidentStatusRefetch();
+
+			setShowModal(false);
 		} catch (error) {
 			toastApiError(error);
 		}
