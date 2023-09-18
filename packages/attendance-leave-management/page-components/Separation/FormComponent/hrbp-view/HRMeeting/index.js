@@ -1,9 +1,9 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMTaskCompleted, IcMArrowRight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import EmployeeDetail from '../../commons/EmployeeDetail';
 import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
@@ -20,6 +20,7 @@ const SECOND_INDEX = 2;
 const THIRD_INDEX = 3;
 const FOURTH_INDEX = 4;
 function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loading = false }) {
+	const [show, setShow] = useState(false);
 	const {
 		control,
 		watch,
@@ -35,8 +36,23 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 	const { sub_process_detail_id, sub_process_data = {}, is_complete } = hrMeet || {};
 	const { lastWorkingDay } = sub_process_data || {};
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, handleNext });
+	const compulsory_question_1 = watch('your_notes');
+	const joiningBonusCb = watch('joining_bonus_clawback');
 
+	useEffect(() => {
+		if (joiningBonusCb === 'no') {
+			setValue('joining_bonus_amount', GLOBAL_CONSTANTS.zeroth_index);
+		}
+	}, [joiningBonusCb, setValue]);
+
+	const toggleModal = () => {
+		setShow(!show);
+	};
 	const onSubmit = (values) => {
+		if (!compulsory_question_1) {
+			Toast.error('Please answer Questions for Interview');
+			return;
+		}
 		const payload = {
 			process_name     : 'hr_meet',
 			sub_process_detail_id,
@@ -76,7 +92,7 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 		};
 
 		updateApplication({ payload });
-		reset();
+		setShow(!show);
 	};
 
 	useEffect(() => {
@@ -126,7 +142,7 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 				lastWorkingDay={sub_process_data?.lastWorkingDay}
 				suggestedLastday={last_working_day}
 			/>
-			<JoiningBonus control={control} errors={errors} data={sub_process_data} />
+			<JoiningBonus control={control} errors={errors} data={sub_process_data} watch={watch} />
 			<InterviewQuestions control={control} errors={errors} data={sub_process_data} watch={watch} />
 			<NotesForManager control={control} watch={watch} data={sub_process_data} />
 			<div className={styles.button}>
@@ -136,10 +152,22 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 						<IcMArrowRight width={16} height={16} />
 					</Button>
 				) : (
-					<Button size="md" onClick={handleSubmit(onSubmit)}>
-						<span style={{ fontSize: '16px' }}>Submit Notes</span>
-						<IcMArrowRight width={25} height={25} />
+					<Button size="md" onClick={handleSubmit(toggleModal)}>
+						Submit Notes
+						<Modal size="md" show={show} onClose={() => { setShow(!show); }} placement="center">
+							<Modal.Header title="Are you sure?" />
+							<Modal.Body>
+								The above enteries cannot be changed again.
+							</Modal.Body>
+							<Modal.Footer>
+								<Button size="md" onClick={handleSubmit(onSubmit)}>
+									<span style={{ fontSize: '16px' }}>Submit Notes</span>
+									<IcMArrowRight width={25} height={25} />
+								</Button>
+							</Modal.Footer>
+						</Modal>
 					</Button>
+
 				)}
 			</div>
 
