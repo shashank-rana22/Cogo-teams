@@ -22,6 +22,7 @@
     "react-grid-layout": "^1.3.4",
     "reactour": "^1.19.0",
     "styled-components": "^6.0.7",
+    "@cogoport/scope-select": "workspace:0.1.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

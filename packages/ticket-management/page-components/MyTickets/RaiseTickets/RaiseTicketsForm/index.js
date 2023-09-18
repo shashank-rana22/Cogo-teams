@@ -92,8 +92,7 @@ function RaiseTicketsForm({
 				const { name, label, controllerType } = elementItem || {};
 				const Element = getFieldController(controllerType);
 
-				if ((name === 'user_id' && isEmpty(watchOrgId))
-				|| (name === 'serial_id' && (isEmpty(watchOrgId) || isEmpty(watchUserId)))) {
+				if ((name === 'user_id' && isEmpty(watchOrgId))) {
 					return null;
 				}
 

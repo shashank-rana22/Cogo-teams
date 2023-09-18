@@ -78,4 +78,11 @@ export const officeLocations = [
 			branchId : 'd0324967-35a7-4efe-b925-9e0a69ed6f0d',
 		}),
 	},
+	{
+		label : 'Varanasi',
+		value : JSON.stringify({
+			name     : 'Varanasi',
+			branchId : '12c9c474-845a-480c-9a6c-0e078f9cdeea',
+		}),
+	},
 ];

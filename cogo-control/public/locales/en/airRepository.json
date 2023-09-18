@@ -76,5 +76,10 @@
     "created":"Created",
     "failed_to_upload":"Failed to Upload",
     "before":"Before",
-    "after":"After"
+    "after":"After",
+    "ams_mode_field_label": "Ams Mode",
+    "ams_mode_placeholder": "Select AMS Mode",
+    "ams_mode_label": "AMS Mode for this Airline Airport Pair",
+    "electronic_label": "Electronic",
+    "manual_label": "Manual"
 }

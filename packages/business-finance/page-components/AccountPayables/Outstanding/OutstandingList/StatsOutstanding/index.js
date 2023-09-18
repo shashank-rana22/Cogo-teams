@@ -115,7 +115,7 @@ function StatsOutstanding({ item = {}, source = '' }) {
 			>
 				<div>
 					<div>
-						<div className={styles.total}>Total Outstanding</div>
+						<div className={styles.total}>Total Payables</div>
 						<div className={cl`${styles.amount} ${styles.marginleft}
 						${item?.totalOutstanding >= DEFAULT_AMOUNT
 							? styles.positive : styles.amount}`}
