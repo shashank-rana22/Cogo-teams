@@ -8,13 +8,22 @@
 
 .failed_draft {
 	display: flex;
+	align-items: center;
 	font-size: 12px;
 	font-style: oblique;
 	color: #ee3425;
 }
 
+.pending_draft {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-style: oblique;
+	color: #f9ae64;
+}
+
 .delete_svg {
-	margin-left: 8px;
+	margin-left: 4px;
 	transition: 0.5s ease-in-out;
 
 	&:hover {
@@ -39,4 +48,8 @@
 	display: flex;
 	justify-content: flex-end;
 	margin-bottom: 4px;
+}
+
+.tick_styles {
+	margin-left: 4px;
 }

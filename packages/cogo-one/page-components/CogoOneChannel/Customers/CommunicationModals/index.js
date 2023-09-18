@@ -25,7 +25,7 @@ function CommunicationModals({
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
 
-	const { buttonType, setButtonType, activeMail } = mailProps;
+	const { buttonType, setButtonType, activeMail, resetEmailState = () => {} } = mailProps;
 
 	const ACCESSIBLE_BUTTONS = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accessible_new_communications || [];
 
@@ -41,6 +41,7 @@ function CommunicationModals({
 				return;
 			}
 			setButtonType('send_mail');
+			resetEmailState();
 		},
 		global_contacts : () => setOpenKamContacts(true),
 		sp_contacts     : () => {
@@ -103,6 +104,7 @@ function CommunicationModals({
 					activeMail={activeMail}
 					viewType={viewType}
 					firestore={firestore}
+					resetEmailState={resetEmailState}
 				/>
 			)}
 

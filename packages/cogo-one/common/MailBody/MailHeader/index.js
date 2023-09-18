@@ -17,7 +17,11 @@ function MailHeader({
 	isDraft = false,
 	emailStatus = '',
 }) {
-	const { response, send_by = '', conversation_type = '', last_draft_saved_on = '' } = eachMessage || {};
+	const {
+		response, send_by = '',
+		conversation_type = '', last_draft_saved_on = '',
+		communication_id = '',
+	} = eachMessage || {};
 
 	const {
 		cc_mails = [],
@@ -74,7 +78,12 @@ function MailHeader({
 			<div>
 				{hasPermissionToEdit ? (
 					<div className={styles.icon_flex}>
-						<RightButtonsMapping isDraft={isDraft} handleClick={handleClick} emailStatus={emailStatus} />
+						<RightButtonsMapping
+							isDraft={isDraft}
+							handleClick={handleClick}
+							emailStatus={emailStatus}
+							isDraftAlreadySent={!!communication_id}
+						/>
 					</div>
 				) : null}
 

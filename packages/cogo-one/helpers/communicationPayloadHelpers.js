@@ -7,6 +7,7 @@ export const ENDPOINT_MAPPING = {
 	forward   : '/forward_mail',
 	reply     : '/reply_mail',
 	reply_all : '/reply_all',
+	send_mail : '/send_mail',
 };
 
 const getOmniChannelLink = ({ id, channel_type }) => {

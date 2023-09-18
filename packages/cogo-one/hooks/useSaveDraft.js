@@ -3,6 +3,7 @@ import { merge } from '@cogoport/utils';
 import { addDoc, updateDoc, doc, collection } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
+import updateEmailState from '../helpers/updateEmailState';
 
 const INCREASE_MESSAGE_COUNT_BY_ONE = 1;
 
@@ -13,26 +14,26 @@ const formatMailDraftMessage = ({
 	parentEmailMessage,
 	roomId,
 }) => ({
-	agent_type          : 'bot',
-	conversation_type   : 'received',
-	last_draft_saved_on : Date.now(),
-	updated_at          : Date.now(),
-	message_type        : 'text',
-	is_draft            : true,
-	communication_id    : communication_id || '',
-	room_id             : roomId,
-	draft_type          : buttonType,
-	response            : {
-		attachments          : payload?.attachments || [],
-		bcc_mails            : payload?.bccrecipients || [],
-		body                 : payload?.content || '',
-		cc_mails             : payload?.ccrecipients || [],
-		message_id           : payload?.msgId || '',
-		sender               : payload?.sender || '',
-		subject              : payload?.subject || '',
-		to_mails             : payload?.toUserEmail || [],
-		parent_email_message : parentEmailMessage || {},
-		draft_type           : buttonType,
+	agent_type           : 'bot',
+	conversation_type    : 'received',
+	last_draft_saved_on  : Date.now(),
+	updated_at           : Date.now(),
+	message_type         : 'text',
+	is_draft             : true,
+	communication_id     : communication_id || '',
+	room_id              : roomId,
+	draft_type           : buttonType,
+	parent_email_message : parentEmailMessage || {},
+	response             : {
+		attachments : payload?.attachments || [],
+		bcc_mails   : payload?.bccrecipients || [],
+		body        : payload?.content || '',
+		cc_mails    : payload?.ccrecipients || [],
+		message_id  : payload?.msgId || '',
+		sender      : payload?.sender || '',
+		subject     : payload?.subject || '',
+		to_mails    : payload?.toUserEmail || [],
+		draft_type  : buttonType,
 	},
 });
 
@@ -82,8 +83,9 @@ const updateMessage = async ({
 	messageId = '',
 	no_of_drafts = 0,
 	is_draft = false,
-	draftMessageData = {},
 	isNewRoomCreated = false,
+	setEmailState = () => {},
+	isMinimize = false,
 }) => {
 	const updatePayload = formatMailDraftMessage({
 		communication_id,
@@ -122,11 +124,14 @@ const updateMessage = async ({
 			merge(
 				updatePayload,
 				{
-					created_at : Date.now(),
-					response   : { parent_email_message: draftMessageData },
+					created_at: Date.now(),
 				},
 			),
 		);
+		if (isMinimize) {
+			await updateEmailState({ roomId, messageId: res?.id, firestore, setEmailState });
+		}
+
 		return { roomId, messageId: res?.id };
 	}
 
@@ -139,16 +144,39 @@ const updateMessage = async ({
 		messageDoc,
 		updatePayload,
 	);
+
+	if (isMinimize) {
+		await updateEmailState({
+			roomId,
+			messageId,
+			firestore,
+			setEmailState,
+		});
+	}
+
 	return { roomId, messageId };
 };
 
-const useSaveDraft = ({ roomData, draftMessageData, buttonType, firestore, rteEditorPayload }) => {
+const useSaveDraft = ({
+	roomData = {},
+	draftMessageData = {},
+	buttonType = '',
+	firestore = {},
+	rteEditorPayload = {},
+	parentMessageData = {},
+	setEmailState = () => {},
+}) => {
 	const agentId = useSelector((state) => state.profile?.user?.id);
 
-	const saveDraft = async ({ communication_id, newComposeRoomId = '', newComposeDraftMsgId = '' } = {}) => {
+	const saveDraft = async ({
+		communication_id = '',
+		newComposeRoomId = '',
+		newComposeDraftMsgId = '',
+		isMinimize = false,
+	} = {}) => {
 		const { id: roomId, no_of_drafts = 0 } = roomData || {};
 
-		const { is_draft = false, id = '', parent_email_message = {} } = draftMessageData || {};
+		const { is_draft = false, id = '' } = draftMessageData || {};
 
 		let roomIdNew = newComposeRoomId || roomId;
 
@@ -161,21 +189,22 @@ const useSaveDraft = ({ roomData, draftMessageData, buttonType, firestore, rteEd
 				buttonType,
 			});
 		}
-		console.log('roomIdNew', roomIdNew);
 
 		return updateMessage({
-			roomId           : roomIdNew,
-			payload          : rteEditorPayload,
+			roomId               : roomIdNew,
+			payload              : rteEditorPayload,
 			communication_id,
 			buttonType,
-			parent_email_message,
+			parent_email_message : parentMessageData,
 			firestore,
-			channel_type     : 'email',
-			messageId        : newComposeDraftMsgId || id,
+			channel_type         : 'email',
+			messageId            : newComposeDraftMsgId || id,
 			no_of_drafts,
-			is_draft         : newComposeDraftMsgId ? true : is_draft,
+			is_draft             : newComposeDraftMsgId ? true : is_draft,
 			draftMessageData,
-			isNewRoomCreated : !roomId,
+			isNewRoomCreated     : !roomId,
+			setEmailState,
+			isMinimize,
 		});
 	};
 

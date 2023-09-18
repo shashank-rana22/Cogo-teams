@@ -23,6 +23,7 @@ function MailEditorModal({
 		buttonType,
 		setEmailState,
 		setButtonType,
+		resetEmailState,
 	} = mailProps;
 
 	const uploaderRef = useRef(null);
@@ -128,6 +129,7 @@ function MailEditorModal({
 						setButtonType={setButtonType}
 						handleSaveDraft={handleSaveDraft}
 						setMinimizeModal={setMinimizeModal}
+						resetEmailState={resetEmailState}
 					/>
 				)}
 				className={styles.modal_header}

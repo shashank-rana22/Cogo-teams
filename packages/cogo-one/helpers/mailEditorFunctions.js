@@ -34,6 +34,7 @@ function useMailEditorFunctions({
 		ccrecipients = [],
 		bccrecipients = [],
 		body = '',
+		draftMessageData = {},
 	} = emailState || {};
 
 	const handlePayload = () => {
@@ -54,10 +55,12 @@ function useMailEditorFunctions({
 
 	const { saveDraft = () => {} } = useSaveDraft({
 		firestore,
-		draftMessageData : eachMessage,
+		draftMessageData,
 		buttonType,
-		rteEditorPayload : handlePayload(),
-		roomData         : formattedData,
+		rteEditorPayload  : handlePayload(),
+		roomData          : formattedData,
+		parentMessageData : eachMessage,
+		setEmailState,
 	});
 
 	const {
@@ -127,7 +130,8 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		await saveDraft();
+		await saveDraft({ isMinimize });
+
 		if (isMinimize) {
 			return;
 		}

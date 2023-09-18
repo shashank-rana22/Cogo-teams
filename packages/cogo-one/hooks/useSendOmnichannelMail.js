@@ -37,6 +37,8 @@ const useSendOmnichannelMail = ({
 		}
 
 		try {
+			const { roomId, messageId } = await saveDraft();
+
 			const response = await trigger({
 				data: getCommunicationPayload({
 					userId,
@@ -50,7 +52,11 @@ const useSendOmnichannelMail = ({
 				}),
 			});
 
-			saveDraft({ communication_id: response?.data?.id });
+			saveDraft({
+				communication_id     : response?.data?.id,
+				newComposeRoomId     : roomId,
+				newComposeDraftMsgId : messageId,
+			});
 
 			Toast.success(`${startCase(mailActions?.actionType)} mail sent successfully`);
 

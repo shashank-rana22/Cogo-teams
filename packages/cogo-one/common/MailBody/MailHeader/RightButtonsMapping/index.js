@@ -1,4 +1,4 @@
-import { IcMRefresh, IcMAppDelete, IcMFtick } from '@cogoport/icons-react';
+import { IcMRefresh, IcMAppDelete, IcMFtick, IcMTimer } from '@cogoport/icons-react';
 
 import { BUTTON_MAPPING, BUTTON_KEYS_MAPPING } from '../../../../constants/mailConstants';
 
@@ -8,8 +8,14 @@ const SUCESS_MESSAGE = 'Draft delivered sucessfully';
 
 const FAILED_MESSAGE = 'Delivery Failed. Please try again';
 
-function DraftMailStatus({ emailStatus = '', handleClick = () => {} }) {
-	if (emailStatus === 'success') {
+const PENDING_MESSAGE = 'pending';
+
+function DraftMailStatus({
+	emailStatus = '',
+	handleClick = () => {},
+	isDraftAlreadySent = false,
+}) {
+	if (emailStatus === 'delivered') {
 		return (
 			<div className={styles.draft_message}>
 				<div>{SUCESS_MESSAGE}</div>
@@ -17,6 +23,7 @@ function DraftMailStatus({ emailStatus = '', handleClick = () => {} }) {
 					width={16}
 					height={16}
 					color="#849e4c"
+					className={styles.tick_styles}
 				/>
 				<IcMAppDelete
 					width={16}
@@ -31,8 +38,22 @@ function DraftMailStatus({ emailStatus = '', handleClick = () => {} }) {
 		);
 	}
 
+	if (isDraftAlreadySent && !emailStatus) {
+		return (
+			<div className={styles.failed_draft}>
+				<div>{PENDING_MESSAGE}</div>
+				<IcMTimer
+					width={13}
+					height={13}
+					color="#F68B21"
+					className={styles.delete_svg}
+				/>
+			</div>
+		);
+	}
+
 	return (
-		<div className={styles.failed_draft}>
+		<div className={styles.pending_draft}>
 			<div>{FAILED_MESSAGE}</div>
 			<IcMRefresh
 				width={13}
@@ -44,13 +65,19 @@ function DraftMailStatus({ emailStatus = '', handleClick = () => {} }) {
 				}}
 			/>
 		</div>
+
 	);
 }
 
-function RightButtonsMapping({ isDraft = false, handleClick = () => {}, emailStatus = '' }) {
+function RightButtonsMapping({
+	isDraft = false,
+	handleClick = () => {},
+	emailStatus = '',
+	isDraftAlreadySent = false,
+}) {
 	const buttonKeys = BUTTON_KEYS_MAPPING[isDraft ? 'draft' : 'mail'] || [];
 
-	if (!emailStatus) {
+	if (!isDraftAlreadySent || !isDraft) {
 		return BUTTON_MAPPING.map(
 			(item) => {
 				const { key = '', icon = '' } = item || {};
@@ -82,6 +109,7 @@ function RightButtonsMapping({ isDraft = false, handleClick = () => {}, emailSta
 		<DraftMailStatus
 			emailStatus={emailStatus}
 			handleClick={handleClick}
+			isDraftAlreadySent={isDraftAlreadySent}
 		/>
 	);
 }

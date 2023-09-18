@@ -82,7 +82,7 @@ export function getRecipientData({
 		buttonType = '',
 	} = mailProps || {};
 
-	const { response = {}, created_at = '', id = '' } = eachMessage || {};
+	const { response = {}, created_at = '', id = '', parent_email_message = {} } = eachMessage || {};
 
 	const {
 		body = '',
@@ -118,14 +118,15 @@ export function getRecipientData({
 				(prev) => ({
 					...prev,
 					emailVia,
-					body          : body || '',
-					from_mail     : sender || '',
-					subject       : draftSubject || '',
-					toUserEmail   : to_mails || [],
-					ccrecipients  : cc_mails || [],
-					bccrecipients : bcc_mails || [],
+					body             : body || '',
+					from_mail        : sender || '',
+					subject          : draftSubject || '',
+					toUserEmail      : to_mails || [],
+					ccrecipients     : cc_mails || [],
+					bccrecipients    : bcc_mails || [],
 					formattedData,
-					eachMessage,
+					eachMessage      : parent_email_message,
+					draftMessageData : eachMessage,
 				}),
 			);
 
@@ -160,14 +161,15 @@ export function getRecipientData({
 			(prev) => ({
 				...prev,
 				emailVia,
-				body          : '',
-				from_mail     : activeMailAddress,
-				subject       : newSubject || subject,
-				toUserEmail   : mailData?.toUserEmail || [],
-				ccrecipients  : mailData?.ccrecipients || [],
-				bccrecipients : mailData?.bccrecipients || [],
+				body             : '',
+				from_mail        : activeMailAddress,
+				subject          : newSubject || subject,
+				toUserEmail      : mailData?.toUserEmail || [],
+				ccrecipients     : mailData?.ccrecipients || [],
+				bccrecipients    : mailData?.bccrecipients || [],
 				formattedData,
 				eachMessage,
+				draftMessageData : {},
 			}),
 		);
 	};
