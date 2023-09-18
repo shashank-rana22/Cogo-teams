@@ -6,6 +6,11 @@ const ihls = {
 			service_name : 'allocation',
 		},
 		{
+			api          : 'list_enrichment_sources',
+			access_type  : 'public',
+			service_name : 'athena',
+		},
+		{
 			api          : 'list_locations',
 			access_type  : 'public',
 			service_name : 'location',

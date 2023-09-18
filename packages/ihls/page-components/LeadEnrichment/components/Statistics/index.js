@@ -21,7 +21,6 @@ function Statistics({
 			<g transform="translate(435.328125,-1)">
 				{(sample_contact_data)?.map((item, ind) => (
 					<g
-						style={{ borderBottom: '1px solid #F8F2E7' }}
 						key={item.id}
 						transform={`translate(0,${TRANSFORM_Y * ind})`}
 					>

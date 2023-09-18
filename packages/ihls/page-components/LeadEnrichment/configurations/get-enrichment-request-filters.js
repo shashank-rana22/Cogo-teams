@@ -2,11 +2,12 @@ const enrichment_request_filters = [
 	{
 		name        : 'enrichment_source_id',
 		placeholder : 'Agency',
-		type        : 'select',
+		type        : 'asyncSelect',
+		asyncKey    : 'list_enrichment_sources',
+		valueKey    : 'id',
+		params      : { page_limit: 20, filters: { status: 'active', service: 'contact_enrichment' } },
+		initialCall : true,
 		width       : '18%',
-		options     : [
-			{ label: 'Neo Kinetics', value: '4' },
-		],
 	},
 	{
 		name        : 'enrichment_status',
@@ -14,7 +15,7 @@ const enrichment_request_filters = [
 		type        : 'select',
 		width       : '18%',
 		options     : [
-			{ label: 'Enriched', value: 'enriched' },
+			{ label: 'Enriched', value: 'success' },
 			{ label: 'Pending', value: 'pending' },
 			{ label: 'Processing', value: 'processing' },
 			{ label: 'Failed', value: 'failed' },

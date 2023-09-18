@@ -1,30 +1,15 @@
 import { useRequest } from '@cogoport/request';
 
-const COLOR_MAPPINGS = {
-	source: {
-		title  : 'Source',
-		colors : ['#69A5CD', '#76CEC1', '#B5AFD4', '#FFAD5B'],
-	},
-	segment: {
-		title : 'Segment',
-		color : ['#FFEA67', '#ABCD62', '#EE3425', '#B5AFD4'],
-	},
-	company_type: {
-		title : 'Company Type',
-		color : ['#ABCD62', '#EE3425', '#FFEA67', '#69A5CD'],
-	},
-	lifecycle_stage: {
-		title  : 'Lifecycle Stage',
-		colors : ['#69A5CD', '#76CEC1', '#B5AFD4', '#FFAD5B'],
-	},
-	shipment: {
-		title  : 'Trade',
-		colors : ['#69A5CD', '#76CEC1', '#B5AFD4', '#FFAD5B'],
-	},
-	registration: {
-		title  : 'Registration',
-		colors : ['#69A5CD', '#76CEC1'],
-	},
+const TITLE_MAPPING = {
+	source             : 'Source',
+	segment            : 'Segment',
+	company_type       : 'Company Type',
+	lifecycle_stage    : 'Lifecycle Stage',
+	shipment           : 'Trade',
+	registration       : 'Registration',
+	users              : 'User',
+	organization_users : 'Organization Users',
+	user_contacts      : 'User Enriched',
 };
 // 'lifecycle_stage', 'source'
 const MAPPING = {
@@ -88,21 +73,29 @@ const MAPPING = {
 		label : 'Marketing Qualified',
 		color : '#EE3425',
 	},
-	in_house: {
-		label : 'In House',
-		color : '#69A5CD',
-	},
-	manual: {
-		label : 'Manual',
-		color : '#B5AFD4',
-	},
-	cogoport_saas_signup: {
-		label : 'cogoport_saas_signup',
+	platform: {
+		label : 'platform',
 		color : '#76CEC1',
 	},
-	ingestion: {
-		label : 'Ingestion',
+	ihls: {
+		label : 'ihls',
 		color : '#FFAD5B',
+	},
+	email: {
+		label : 'Email',
+		color : '#76CEC1',
+	},
+	mobile: {
+		label : 'Mobile',
+		color : '#69A5CD',
+	},
+	lead_users: {
+		label : 'Lead User',
+		color : '#76CEC1',
+	},
+	users: {
+		label : 'User',
+		color : '#69A5CD',
 	},
 	both: {
 		label : 'Both',
@@ -146,7 +139,7 @@ const useGetStatsData = ({ stats_type = null, params = {} }) => {
 	});
 
 	return {
-		title               : COLOR_MAPPINGS[stats_type]?.title || '__',
+		title               : TITLE_MAPPING[stats_type] || '__',
 		count               : loading ? '---' : data?.count,
 		sample_contact_data : loading ? [] : modifiedData || [],
 		loading,

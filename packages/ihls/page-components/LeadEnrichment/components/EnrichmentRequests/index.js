@@ -79,22 +79,20 @@ function EnrichmentRequests() {
 				<div className={styles.input_filters}>
 					{enrichment_request_filters.map((item) => {
 						const ele = { ...item };
-						const { name, placeholder, type, width, options } = item;
+						const { name, placeholder, type, width, ...rest } = item;
 						const Element = getFieldController(type);
 						return (
-						// <div key={name} className={styles.field_container}>
 							<Element
 								{...ele}
 								prefix={null}
 								placeholder={placeholder}
-								options={options}
 								isClearable
 								style={{ width }}
 								control={control}
 								key={name}
 								size="sm"
+								{...rest}
 							/>
-						// </div>
 						);
 					})}
 					<Button

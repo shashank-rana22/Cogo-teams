@@ -25,13 +25,15 @@ const enrichment_request_controls = [
 	},
 	{
 		name        : 'enrichment_source_id',
-		placeholder : 'select source',
 		displayName : 'Enrichment Source',
-		type        : 'select',
-		options     : [
-			{ label: 'Neo Kinetics', value: '4' },
-		],
-		rules: { required: 'Required' },
+		placeholder : 'Agency',
+		type        : 'asyncSelect',
+		asyncKey    : 'list_enrichment_sources',
+		valueKey    : 'id',
+		params      : { page_limit: 20, filters: { status: 'active', service: 'contact_enrichment' } },
+		initialCall : true,
+		width       : '28%',
+		rules       : { required: 'Required' },
 	},
 ];
 
