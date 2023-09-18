@@ -14,7 +14,7 @@ function TermsConditions({ control = {}, errors = {}, termsChecked = false }) {
 						className={styles.Checkbox}
 						name="termsAcceptance"
 						control={control}
-						checkeed={termsChecked}
+						checked={termsChecked}
 					/>
 					<div className={styles.content}>
 						<p>
@@ -28,9 +28,9 @@ function TermsConditions({ control = {}, errors = {}, termsChecked = false }) {
 						<p>
 							Enter your Full Name, confirm your understanding and commitment to these terms.
 						</p>
+						{!termsChecked ? <span className={styles.error}>*required</span> : null}
 					</div>
 				</div>
-				{!termsChecked ? <span className={styles.error}>*required</span> : null}
 
 				<div className={styles.name_main_container}>
 					<div className={styles.full_name_text}>

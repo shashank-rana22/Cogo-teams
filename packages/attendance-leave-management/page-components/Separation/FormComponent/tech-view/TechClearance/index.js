@@ -25,7 +25,7 @@ const OPTIONS = [
 
 function TechClearance({ data = {}, refetch = () => {} }) {
 	const [showModal, setShowModal] = useState(false);
-
+	
 	const [items, setItems] = useState(OPTIONS);
 	const {
 		control,
@@ -40,6 +40,7 @@ function TechClearance({ data = {}, refetch = () => {} }) {
 
 	const TECH_CLEARANCE_STATUS = techClearance?.is_complete;
 
+	
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
 
 	const onSubmit = (values = {}) => {
@@ -55,7 +56,9 @@ function TechClearance({ data = {}, refetch = () => {} }) {
 		};
 		updateApplication({ payload });
 	};
-
+	const handleSeparation = () => {
+		setShowModal(true);
+	};
 	return (
 		<div className={styles.tech_container}>
 			<div className={styles.container}>
@@ -105,7 +108,7 @@ function TechClearance({ data = {}, refetch = () => {} }) {
 							size="md"
 							themeType="primary"
 							className={styles.provide_clearance_btn}
-							onClick={() => setShowModal(true)}
+							onClick={handleSubmit(handleSeparation)}
 						>
 							Provide Clearance
 							<IcMTick width="18px" height="18px" color="white" />

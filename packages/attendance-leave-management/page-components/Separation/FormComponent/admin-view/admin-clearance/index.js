@@ -22,7 +22,6 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 		onSubmit,
 	} = useAdminClearanceDetails({ data, refetch });
 	const termsChecked = watch('termsAcceptance');
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.container_main}>
@@ -42,29 +41,26 @@ function AdminClearance({ data = {}, refetch = () => {} }) {
 				<Servicelist control={control} errors={errors} is_complete={is_complete} />
 				<NotesHrbp control={control} errors={errors} is_complete={is_complete} />
 			</div>
-			{!is_complete ? (
-				<>
-					<TermsConditions
-						control={control}
-						errors={errors}
-						handleSubmit={handleSubmit}
-						onSubmit={onSubmit}
-						termsChecked={termsChecked}
+			<TermsConditions
+				control={control}
+				errors={errors}
+				handleSubmit={handleSubmit}
+				onSubmit={onSubmit}
+				termsChecked={termsChecked}
+			/>
+			<div className={styles.button_div}>
+				<Button
+					className={styles.admin_button}
+					onClick={handleSubmit(() => setShow(!show))}
+					disabled={is_complete}
+				>
+					Provide Clearance
+					<IcMTick
+						width={16}
+						height={16}
 					/>
-					<div className={styles.button_div}>
-						<Button
-							className={styles.admin_button}
-							onClick={() => setShow(!show)}
-						>
-							Provide Clearance
-							<IcMTick
-								width={16}
-								height={16}
-							/>
-						</Button>
-					</div>
-				</>
-			) : null}
+				</Button>
+			</div>
 
 			<OpenModal
 				show={show}
