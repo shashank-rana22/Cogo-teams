@@ -106,16 +106,14 @@ function RenderHeader({
 						</Button>
 					</div>
 
-					{['reply', 'reply_all', 'forward'].includes(buttonType) && (
-						<Button
-							size="sm"
-							themeType="secondary"
-							disabled={replyLoading}
-							onClick={handleSaveDraft}
-						>
-							Save as draft
-						</Button>
-					)}
+					<Button
+						size="sm"
+						themeType="secondary"
+						disabled={replyLoading}
+						onClick={handleSaveDraft}
+					>
+						Save as draft
+					</Button>
 
 					{DISABLE_ATTACHMENTS_FOR.includes(buttonType) ? null : (
 						<div className={styles.file_uploader_div} title="attachment">

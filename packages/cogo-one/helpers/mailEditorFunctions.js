@@ -128,7 +128,7 @@ function useMailEditorFunctions({
 		}
 
 		await saveDraft();
-		if (!isMinimize) {
+		if (isMinimize) {
 			return;
 		}
 

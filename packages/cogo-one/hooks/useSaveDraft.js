@@ -52,7 +52,8 @@ const createDraftRoom = async ({
 		agent_type          : 'bot',
 		channel_type        : 'email',
 		created_at          : Date.now(),
-		show_in_draft       : true,
+		show_in_drafts      : true,
+		session_type        : 'admin',
 		new_message_sent_at : Date.now(),
 		updated_at          : Date.now(),
 		no_of_drafts        : 1,
@@ -99,6 +100,7 @@ const updateMessage = async ({
 			no_of_drafts        : no_of_drafts + INCREASE_MESSAGE_COUNT_BY_ONE,
 			last_draft_document : updatePayload,
 			updated_at          : Date.now(),
+			session_type        : 'admin',
 		};
 
 		const roomDoc = doc(
@@ -159,6 +161,7 @@ const useSaveDraft = ({ roomData, draftMessageData, buttonType, firestore, rteEd
 				buttonType,
 			});
 		}
+		console.log('roomIdNew', roomIdNew);
 
 		return updateMessage({
 			roomId           : roomIdNew,
