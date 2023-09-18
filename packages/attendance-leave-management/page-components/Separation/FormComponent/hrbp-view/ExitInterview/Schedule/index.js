@@ -65,7 +65,7 @@ function ScheduleInterview({ is_complete = false, control = {}, errors = {}, set
 							disabled={is_complete || complete}
 						/>
 					</div>
-					{errors.offtime ? <span className={styles.error}>*required</span> : null}
+					{errors.interviewTime ? <span className={styles.error}>*required</span> : null}
 				</div>
 
 				<div className={styles.detail}>

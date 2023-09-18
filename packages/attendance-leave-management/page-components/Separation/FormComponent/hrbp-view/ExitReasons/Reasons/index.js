@@ -70,7 +70,6 @@ function ReasonsToLeave({ setComplete, setCode, control, off_boarding_applicatio
 			</div>
 
 			<div className={styles.footer}>
-				<Button themeType="secondary" style={{ marginRight: '12px' }}>Back</Button>
 				<Button themeType="primary" onClick={handleGetCode}>
 					Generate Code
 				</Button>

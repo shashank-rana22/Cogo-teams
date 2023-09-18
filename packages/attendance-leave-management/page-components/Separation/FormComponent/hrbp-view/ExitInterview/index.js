@@ -53,6 +53,7 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 			setValue('info', sub_process_data?.info);
 		}
 	}, [is_complete, setValue, sub_process_data]);
+
 	return (
 		<>
 			<ExitHeading title="EXIT INTERVIEW" subTitle="Schedule interview the the employee" />
