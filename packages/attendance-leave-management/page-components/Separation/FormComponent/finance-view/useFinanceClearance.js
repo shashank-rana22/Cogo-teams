@@ -48,10 +48,10 @@ const useFinanceClearance = ({ data, refetch }) => {
 			sub_process_data : {
 				fnf_excel_sheet_url        : values.fnffile?.finalUrl || values.fnffile || '',
 				outstanding_amount_details : OUTSTANDINDDETAILS,
-				update_fnf_status          : updateData.map(({ particular, category, recoverableAmount }) => ({
+				update_fnf_status          : updateData.map(({ particular, category, recoverable_amount }) => ({
 					particular,
 					category,
-					recoverable_amount: parseInt(recoverableAmount, 10),
+					recoverable_amount: parseInt(recoverable_amount, 10),
 				})),
 				total_recoverable_amount : totalRecoverableAmount,
 				additional_remarks       : values.additionalRemarks,

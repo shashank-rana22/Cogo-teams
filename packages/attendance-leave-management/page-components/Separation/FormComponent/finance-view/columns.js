@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
@@ -6,6 +7,7 @@ import styles from './styles.module.css';
 
 const fnfColumns = ({
 	errors = {},
+	is_complete = false,
 	deleteItemUpdateStatus = () => {},
 }) => ([
 	{
@@ -26,7 +28,7 @@ const fnfColumns = ({
 		accessor : (item) => (
 			<section className={styles.recover_container}>
 				{formatAmount({
-					amount   : item?.recoverable_amount,
+					amount   : item?.recoverable_amount || GLOBAL_CONSTANTS.zeroth_index,
 					currency : 'INR',
 					options  : {
 						style                 : 'currency',
@@ -39,11 +41,14 @@ const fnfColumns = ({
 					onClick={() => { deleteItemUpdateStatus(item.id); }}
 					aria-hidden
 				>
-					<IcMDelete
-						width={22}
-						height={22}
-					/>
+					{is_complete ?	null : (
+						<IcMDelete
+							width={22}
+							height={22}
+						/>
+					)}
 				</div>
+
 			</section>
 		),
 	},

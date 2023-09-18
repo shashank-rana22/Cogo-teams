@@ -90,13 +90,13 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 		setUpdateData(temp);
 	};
 	useEffect(() => { totalRecoverableAmountFun(); }, [totalRecoverableAmountFun, updateData]);
-	const columns = fnfColumns({ errors, deleteItemUpdateStatus });
+	const columns = fnfColumns({ errors, deleteItemUpdateStatus, is_complete });
 
 	return (
 		<>
 			<div className={styles.left_header}>
-					<span className={styles.upper_text}>FINANCE CLEARANCE</span>
-					<span className={styles.lower_text}>FNF & other settlements </span>
+				<span className={styles.upper_text}>FINANCE CLEARANCE</span>
+				<span className={styles.lower_text}>FNF & other settlements </span>
 			</div>
 			{is_complete ? (
 				<div className={styles.completed_notification_container}>
