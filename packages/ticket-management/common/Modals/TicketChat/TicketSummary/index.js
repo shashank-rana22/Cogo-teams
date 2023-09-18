@@ -31,7 +31,15 @@ function TicketSummary({
 		CreatedAt: createdAt = '',
 		Priority: priority = '',
 		Source: source = '',
+		Data: data = {},
 	} = ticket || {};
+
+	const {
+		SerialID: serialId,
+		Service: service,
+		TradeType: tradeType,
+		RequestType: requestType,
+	} = data || {};
 
 	const authorizers = (closureAuthorizers || []).map((item) => item.Name);
 
@@ -142,6 +150,38 @@ function TicketSummary({
 						{mobileNumber}
 					</span>
 				</div>
+				{requestType && (
+					<div className={styles.ticket_data}>
+						Request Type:
+						<span className={styles.updated_at}>
+							{startCase(requestType)}
+						</span>
+					</div>
+				)}
+				{serialId && (
+					<div className={styles.ticket_data}>
+						SID:
+						<span className={styles.updated_at}>
+							{serialId}
+						</span>
+					</div>
+				)}
+				{service && (
+					<div className={styles.ticket_data}>
+						Service:
+						<span className={styles.updated_at}>
+							{startCase(service)}
+						</span>
+					</div>
+				)}
+				{tradeType && (
+					<div className={styles.ticket_data}>
+						Trade Type:
+						<span className={styles.updated_at}>
+							{startCase(tradeType)}
+						</span>
+					</div>
+				)}
 				<div className={styles.ticket_data}>
 					Assigned to:
 					<span className={styles.updated_at}>
