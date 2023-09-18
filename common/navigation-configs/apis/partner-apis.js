@@ -9660,6 +9660,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'get_incident_management_incident_job_reopen_incident_exists',
+			access_type  : 'private',
+			service_name : 'incident-management',
+		},
 	],
 
 	campaigns: [
