@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import ResignEmployeeDetails from '../ResignEmployeeDetails';
 
 import CommunicationMode from './CommunicationMode';
+import ConfirmationModal from './ConfirmationModal';
 import DatePicker from './DatePicker';
 import styles from './styles.module.css';
 import useGetEmployeeDetails from './useGetEmployeeDetails';
@@ -23,6 +24,7 @@ function ResignationFormLanding({ refetch = () => {} }) {
 	const [show, setShow] = useState(false);
 
 	const [showModal, setShowModal] = useState(false);
+	const [showModalConfirm, setShowModalConfirm] = useState(false);
 
 	const { application_exist } = dataItems || {};
 	const { application_status } = dataItems || {};
@@ -59,6 +61,7 @@ function ResignationFormLanding({ refetch = () => {} }) {
 			status         : CANCEL_REQUEST,
 		};
 		requestCancellation({ payload });
+		setShowModalConfirm(false);
 	};
 	const handleSeparation = () => {
 		setShowModal(true);
@@ -80,7 +83,7 @@ function ResignationFormLanding({ refetch = () => {} }) {
 						<Button
 							size="md"
 							themeType="secondary"
-							onClick={cancelRequest}
+							onClick={() => setShowModalConfirm(true)}
 							disabled={application_status === 'cancellation_requested'}
 							className={styles.button_separation}
 						>
@@ -184,7 +187,7 @@ function ResignationFormLanding({ refetch = () => {} }) {
 					</Button>
 					<Button
 						size="md"
-						themeType="Accent"
+						themeType="primary"
 						className={styles.proceed_modal_btn}
 						onClick={() => {
 							setShowModal(false);
@@ -195,6 +198,12 @@ function ResignationFormLanding({ refetch = () => {} }) {
 					</Button>
 				</Modal.Footer>
 			</Modal>
+
+			<ConfirmationModal
+				showModalConfirm={showModalConfirm}
+				setShowModalConfirm={setShowModalConfirm}
+				cancelRequest={cancelRequest}
+			/>
 		</div>
 	);
 }

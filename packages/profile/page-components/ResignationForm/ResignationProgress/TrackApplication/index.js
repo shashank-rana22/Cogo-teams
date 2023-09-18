@@ -21,7 +21,6 @@ const STEPPER_ITEMS = [
 function TrackApplication({ data = {} }) {
 	const [show, setShow] = useState(true);
 	const [inProgressObject, setInProgressObject] = useState({});
-	const [authorityName, setAuthorityName] = useState('');
 
 	const [activeKey, setActiveKey] = useState('hr_meet');
 
@@ -36,13 +35,11 @@ function TrackApplication({ data = {} }) {
 			Object.keys(dataset?.process_status).forEach((key) => {
 				const value = dataset?.process_status[key];
 				if (value?.status === 'in_progress') {
-					setAuthorityName(key);
 					setActiveKey(key);
 				}
 			});
 		}
 	}, []);
-
 	useEffect(() => {
 		applicationStatusStepper(data);
 	}, [applicationStatusStepper, data]);
@@ -69,7 +66,7 @@ function TrackApplication({ data = {} }) {
 						style={{ background: '#f9f9f9' }}
 					/>
 				</div>
-				{(authorityName !== 'exit_interview' && !isEmpty(inProgressObject))
+				{(inProgressObject?.name !== 'exit_interview' && !isEmpty(inProgressObject))
 				&& (
 					<div className={styles.stages_container_main}>
 						<div className={styles.name_and_mail_container_main}>
@@ -87,14 +84,14 @@ function TrackApplication({ data = {} }) {
 							</div>
 						</div>
 						<div className={styles.waiting_notification_container}>
-							{authorityName === 'hr_meet' && (
+							{inProgressObject?.name === 'hr_meet' && (
 								<div className={styles.waiting_notification_text}>
 									You will be contacted by the HR for the meeting.
 									Post meeting the separation process will formally start.
 								</div>
 							)}
 							{(
-								authorityName !== 'hr_meet'
+								inProgressObject?.name !== 'hr_meet'
 							) && (
 								<>
 									<IcMClock height="22px" width="22px" color="#F68B21" />
@@ -109,7 +106,7 @@ function TrackApplication({ data = {} }) {
 
 					</div>
 				)}
-				{(authorityName === 'exit_interview' || isEmpty(inProgressObject)) && (
+				{(inProgressObject?.name === 'exit_interview' || isEmpty(inProgressObject)) && (
 					<ExitInterview
 						data={data}
 						inProgressObject={inProgressObject}
