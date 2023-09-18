@@ -9665,6 +9665,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'incident-management',
 		},
+		{
+			api          : 'post_incident_management_incident',
+			access_type  : 'private',
+			service_name : 'incident-management',
+		},
 	],
 
 	campaigns: [

@@ -1819,7 +1819,7 @@ const apis = [
 		service_name : 'fcl_freight_rate',
 	},
 	{
-		api          : 'incident',
+		api          : 'post_incident_management_incident',
 		access_type  : 'private',
 		service_name : 'incident-management',
 	},
