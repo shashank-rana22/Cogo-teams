@@ -1,10 +1,13 @@
 .step {
 	display: flex;
 	align-items: center;
-	padding: 6px 8px;
-	cursor: no-drop;
+	padding: 8px;
+}
 
-	/* border-left: 1px solid var(--color-primary-error-red-2); */
+.main_step {
+	display: flex;
+	align-items: center;
+	padding: 2px 8px;
 }
 
 .clickable_step {
@@ -15,19 +18,25 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 22px;
-	height: 22px;
 	color: var(--color-secondary-greyscale-4);
 	background: var(--color-secondary-5);
 	border: 1px solid var(--color-secondary-greyscale-4);
 	border-radius: 100%;
 }
 
+.sub_step_wrapper_tick {
+	width: 18px;
+	height: 18px;
+}
+
+.main_step_wrapper {
+	width: 22px;
+	height: 22px;
+}
+
 .text {
 	margin-left: 8px;
 	font-family: var(--font-family);
-	font-size: 14px;
-	font-weight: 500;
 	color: var(--color-secondary-greyscale-4);
 
 	@media (max-width: 760px) {
@@ -35,10 +44,30 @@
 	}
 }
 
+.main_text {
+	font-size: 14px;
+}
+
+.sub_type_text {
+	font-size: 12px;
+}
+
 .step_active {
 	cursor: pointer;
 
 	.step_wrapper {
+		color: var(--color-secondary-5);
+		background-color: var(--color-primary-error-red-2);
+		border-color: var(--color-primary-error-red-2);
+	}
+
+	.text {
+		color: var(--color-secondary-greyscale-2);
+	}
+}
+
+.sub_step_active {
+	.sub_step_active_wrapper {
 		color: var(--color-secondary-5);
 		background-color: var(--color-primary-error-red-2);
 		border-color: var(--color-primary-error-red-2);
@@ -68,18 +97,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 22px;
-	height: 22px;
+	width: 18px;
+	height: 18px;
 	border: 1px solid var(--color-secondary-greyscale-4);
 	border-radius: 100%;
 }
 
-/* ************************** */
-
 .container {
 	display: flex;
 	width: fit-content;
-	margin: 20px;
 	background: var(--color-secondary-5);
 	border-radius: 6px;
 }
@@ -95,7 +121,13 @@
 
 .step_connector {
 	width: 40px;
-	min-height: 40px;
+	min-height: 28px;
+	border-color: var(--color-secondary-greyscale-4);
+}
+
+.last_step_connector {
+	width: 20px;
+	min-height: 28px;
 	border-color: var(--color-secondary-greyscale-4);
 }
 
@@ -127,4 +159,8 @@
 			height: auto !important;
 		}
 	}
+}
+
+.cursor_auto {
+	cursor: default;
 }

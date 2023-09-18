@@ -4,21 +4,9 @@ import { IcMTick } from '@cogoport/icons-react';
 import { getByKey } from '@cogoport/utils';
 import React from 'react';
 
-import styles from './styles.module.css';
+import { API_DATA_MAPPING } from '../../../utils/constants';
 
-const API_DATA_MAPPING = {
-	hr_meet             : 'hr_meet',
-	rm_clearance        : 'rm_clearance.rm_clearance',
-	review_request      : 'rm_clearance.review_request',
-	assign_hoto         : 'rm_clearance.assign_hoto',
-	finance_clearance   : 'finance_clearance',
-	hoto_clearance      : 'hoto_clearance',
-	admin_clearance     : 'admin_clearance',
-	tech_clearance      : 'tech_clearance',
-	exit_interview      : 'exit_interview.exit_interview',
-	interview_scheduled : 'exit_interview.interview_scheduled',
-	interview_completed : 'exit_interview.interview_completed',
-};
+import styles from './styles.module.css';
 
 function SubStep({ description = '', stepCompleted = false, stepActive = false }) {
 	return (
