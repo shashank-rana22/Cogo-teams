@@ -244,12 +244,6 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 						</Button>
 					</div>
 				)}
-
-			{/* <FinanceUpdateModal
-				showModal={showModal}
-				setShowModal={setShowModal}
-				setUpdateData={setUpdateData}
-			/> */}
 			<FinanceConfirmModal
 				confirmModal={confirmModal}
 				setConfirmModal={setConfirmModal}

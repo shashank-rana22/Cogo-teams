@@ -2,23 +2,15 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState, useEffect } from 'react';
 
+import {
+	REASONS_LIST,
+} from '../../../../../utils/constants';
 import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
 import ExitHeading from '../ExitInterview/ExitHeading';
 
 import InterviewComplete from './InterviewCompletion';
 import ReasonsToLeave from './Reasons';
 import styles from './styles.module.css';
-
-const REASONS_LIST = [
-	'Lack of Career Growth and Development Opportunities',
-	'Inadequate Compensation and Benefits',
-	'Work-Life Balance Issues',
-	'Company Culture and Values Misalignment',
-	'Lack of Recognition and Appreciation',
-	'Poor Communication',
-	'Unchallenging tasks No job satisfaction',
-	'Conflict and Workplace/ Team Issues',
-	'Personal Reasons'];
 
 function ExitReasons({ refetch = () => {}, handleNext = () => {}, handleBack = () => {}, data = {} }) {
 	const {

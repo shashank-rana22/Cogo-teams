@@ -67,3 +67,8 @@
 	margin-top: 16px;
 	margin-right: 12px;
 }
+
+.proceedbtn {
+	display: flex;
+	align-items: center;
+}

@@ -3,9 +3,6 @@ import { useForm } from '@cogoport/forms';
 import { IcMTick, IcMError, IcMFtick } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-// import useGetApplicationProcessDetails from '../../useGetApplicationProcessDetails';
-// import useSubmitTechClearance from '../useSubmitTechClearance';
-
 import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
 
 import DatePicker from './DatePicker';

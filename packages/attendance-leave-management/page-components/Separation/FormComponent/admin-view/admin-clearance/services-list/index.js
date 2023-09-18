@@ -1,18 +1,12 @@
-// import { Button } from '@cogoport/components';
 import { InputController, SelectController } from '@cogoport/forms';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import styles from './styles.module.css';
+import {
+	IDCARDOPTIONS, COMPANYASSETS, ACCESSCARDOPTIONS,
+} from '../../../../../../utils/constants';
 
-const IDCARDOPTIONS = [{ label: 'Collected', value: 'collected' }, { label: 'Not Collected', value: 'notcollected' }];
-const ACCESSCARDOPTIONS = [
-	{ label: 'Collected', value: 'collected' },
-	{ label: 'Not Collected', value: 'notcollected' }];
-const COMPANYASSETS = [
-	{ label: 'Collected', value: 'collected' },
-	{ label: 'Not Collected', value: 'notcollected' },
-	{ label: 'Not Allocated', value: 'notallocated' }];
+import styles from './styles.module.css';
 
 function Servicelist({ control = {}, errors = {}, is_complete = false }) {
 	const [show, setShow] = useState(true);

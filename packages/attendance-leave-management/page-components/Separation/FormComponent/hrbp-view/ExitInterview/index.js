@@ -25,6 +25,7 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 	const { exit_interview_scheduled } = exit_interview || {};
 	const { sub_process_detail_id, is_complete, sub_process_data } = exit_interview_scheduled || {};
 	const [visible, setVisible] = useState(is_complete || false);
+	const complete = exit_interview?.exit_interview_scheduled == null;
 
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, handleNext });
 
@@ -73,12 +74,17 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 				setEdit={setVisible}
 				control={control}
 				reset={reset}
+				complete={complete}
 				errors={errors}
 			/>
 
 			<div className={styles.footer}>
 				<Button themeType="secondary" style={{ marginRight: '12px' }} onClick={handleBack}>Back</Button>
-				<Button themeType="primary" onClick={handleSubmit(onSubmit)}>
+				<Button
+					themeType="primary"
+					onClick={handleSubmit(onSubmit)}
+					disabled={complete}
+				>
 					Notify Employee
 					<IcMArrowRight width={16} height={16} style={{ marginLeft: '12px' }} />
 				</Button>

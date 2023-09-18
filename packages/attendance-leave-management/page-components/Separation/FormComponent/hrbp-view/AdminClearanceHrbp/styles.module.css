@@ -63,3 +63,8 @@
 	font-weight: 400;
 	color: #4f4f4f;
 }
+
+.proceedbtn {
+	display: flex;
+	align-items: center;
+}

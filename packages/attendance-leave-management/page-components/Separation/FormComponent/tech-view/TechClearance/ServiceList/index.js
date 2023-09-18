@@ -5,14 +5,11 @@ import {
 import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import styles from './styles.module.css';
+import {
+	SERVICE_CHECKBOX_LIST,
+} from '../../../../../../utils/constants';
 
-const SERVICE_CHECKBOX_LIST = [
-	{ label: 'Cloud Services', value: 'Cloud_Services' },
-	{ label: 'Atlassian', value: 'Atlassian' },
-	{ label: 'Figma', value: 'Figma' },
-	{ label: 'Github', value: 'Github' },
-];
+import styles from './styles.module.css';
 
 function ServiceList({ control = {}, errors = {} }) {
 	const [show, setShow] = useState(false);
