@@ -21,7 +21,7 @@ function Delete({
 
 	return !isEmpty(show) ? (
 		<Modal show={!isEmpty(show)} onClose={() => setShow(null)} placement="top">
-			<Modal.Header title="DELETE COMMOODITY CLUSTER" />
+			<Modal.Header title="DELETE COMMODITY CLUSTER" />
 
 			<Modal.Body>
 				<div>
