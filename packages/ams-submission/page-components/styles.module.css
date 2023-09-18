@@ -1,11 +1,11 @@
-.main_container {
+.table_container {
 	:global {
 		.ui_table_head_row {
 			background-color: #333;
 		}
 
 		.ui_table_body_row {
-			background-color: #fff;
+			background-color: var(--color-secondary-5);
 		}
 
 		.ui_table_head_cell {
@@ -40,10 +40,6 @@
 			text-indent: -99999px;
 			content: "_";
 		}
-
-		.ui_ps_themeType_secondary {
-			border: solid 1px #000;
-		}
 	}
 }
 
@@ -53,7 +49,7 @@
 }
 
 .header {
-	color: #fff;
+	color: var(--color-secondary-5);
 }
 
 .location {
@@ -77,6 +73,12 @@
 	align-items: center;
 	justify-content: space-between;
 	font-weight: 600;
+
+	:global {
+		.ui_ps_themeType_secondary {
+			border: solid 1px #000;
+		}
+	}
 }
 
 .submit_status {

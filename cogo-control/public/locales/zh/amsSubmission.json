@@ -25,5 +25,6 @@
     "header_data_submission": "电子数据提交",
     "action_button_query_submitted": "已提交",
     "action_button_query_submitted_status_yes": "是的",
-    "action_button_query_submitted_status_no": "不"
+    "action_button_query_submitted_status_no": "不",
+    "toast_error": "出了点问题"
 }

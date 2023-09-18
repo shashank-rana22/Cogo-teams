@@ -9,7 +9,7 @@
 	:global {
 		.ui_ps_themeType_secondary {
 			margin-right: 15px;
-			border: solid 1px #000;
+			border: solid 1px var(--color-secondary-greyscale-2);
 		}
 	}
 }

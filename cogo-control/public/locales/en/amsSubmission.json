@@ -1,7 +1,7 @@
 {
     "no_shipments_found": "No Shipments found !!",
     "no_results_found": "Looks like no results were found...",
-    "empty_page_alt": "empty_page",
+    "empty_page_alt": "Empty Page",
     "heading_awb_number": "AWB Number",
     "heading_origin_airport": "Origin Airport",
     "heading_airline": "Airline",
@@ -25,5 +25,6 @@
     "header_data_submission": "Electronic Data Submission",
     "action_button_query_submitted": "Submitted",
     "action_button_query_submitted_status_yes": "Yes",
-    "action_button_query_submitted_status_no": "No"
+    "action_button_query_submitted_status_no": "No",
+    "toast_error": "Something Went Wrong"
 }

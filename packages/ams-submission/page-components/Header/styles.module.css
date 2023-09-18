@@ -14,12 +14,12 @@
 				.ui_tab_container {
 					padding: 12px 20px;
 					margin: 4px 20px 4px 4px;
-					background-color: #fff;
+					background-color: var(--color-secondary-5);
 					border-radius: 6px;
 					box-shadow: 0 0 8px rgb(44 62 80 / 20%);
 
 					.ui_tabs_list_title {
-						font-size: 12px;
+						font-size: var(--font-size-md);
 						font-weight: 600;
 					}
 				}
@@ -29,7 +29,7 @@
 				}
 
 				.ui_tab_container.ui_tab_active {
-					background-color: #fdebe9;
+					background-color: var(--color-primary-error-red-5);
 				}
 			}
 		}
@@ -39,11 +39,11 @@
 		}
 
 		.ui_toggle_container.ui_toggle_labeled .ui_inner::after {
-			background-color: #f68b21;
+			background-color: var(--color-accent-orange-2);
 		}
 
 		.ui_toggle_container.ui_toggle_labeled .ui_inner::before {
-			background-color: #f68b21;
+			background-color: var(--color-accent-orange-2);
 		}
 	}
 }

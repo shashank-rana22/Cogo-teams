@@ -9,7 +9,7 @@ const INIT_PAGE = 1;
 
 const getPayload = ({
 	activeTab = 'tc_status_check',
-	pagination = INIT_PAGE,
+	pagination = 1,
 	query = '',
 }) => {
 	const date = formatDate({

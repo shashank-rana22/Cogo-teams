@@ -1,7 +1,7 @@
 {
     "no_shipments_found": "ไม่พบการจัดส่ง !!",
     "no_results_found": "ดูเหมือนไม่พบผลลัพธ์...",
-    "empty_page_alt": "Empty_page",
+    "empty_page_alt": "หน้าว่าง",
     "heading_awb_number": "หมายเลข AWB",
     "heading_origin_airport": "สนามบินต้นทาง",
     "heading_airline": "สายการบิน",
@@ -25,5 +25,6 @@
     "header_data_submission": "การส่งข้อมูลอิเล็กทรอนิกส์",
     "action_button_query_submitted": "ส่ง",
     "action_button_query_submitted_status_yes": "ใช่",
-    "action_button_query_submitted_status_no": "เลขที่"
+    "action_button_query_submitted_status_no": "เลขที่",
+    "toast_error": "เกิดข้อผิดพลาดบางอย่าง"
 }

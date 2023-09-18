@@ -54,7 +54,7 @@ function AmsSubmission() {
 	const { list = [], totalRecords } = data || {};
 
 	return (
-		<div className={styles.main_container}>
+		<div>
 			<h1>{t('amsSubmission:header_data_submission')}</h1>
 			<Header
 				activeTab={activeTab}
@@ -64,6 +64,7 @@ function AmsSubmission() {
 			/>
 
 			<Table
+				className={styles.table_container}
 				data={list}
 				columns={columns}
 				loading={loading}

@@ -1,7 +1,7 @@
 {
     "no_shipments_found": "Tidak ada Pengiriman yang ditemukan!!",
     "no_results_found": "Sepertinya tidak ada hasil yang ditemukan...",
-    "empty_page_alt": "halaman_kosong",
+    "empty_page_alt": "Halaman Kosong",
     "heading_awb_number": "Nomor AWB",
     "heading_origin_airport": "Bandara Asal",
     "heading_airline": "Perusahaan penerbangan",
@@ -25,5 +25,6 @@
     "header_data_submission": "Penyampaian Data Elektronik",
     "action_button_query_submitted": "Dikirim",
     "action_button_query_submitted_status_yes": "Ya",
-    "action_button_query_submitted_status_no": "TIDAK"
+    "action_button_query_submitted_status_no": "TIDAK",
+    "toast_error": "Terjadi kesalahan"
 }
