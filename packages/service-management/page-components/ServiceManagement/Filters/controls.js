@@ -9,6 +9,7 @@ const controls = [
 		type        : 'async_select',
 		span        : 12,
 		asyncKey    : 'organizations',
+		isClearable : true,
 		params      : { filters: { status: 'active' }, account_type: 'service_provider' },
 	},
 	{
@@ -18,6 +19,7 @@ const controls = [
 		label       : 'Service',
 		type        : 'select',
 		span        : 12,
+		isClearable : true,
 		options     : serviceOptions,
 	},
 
