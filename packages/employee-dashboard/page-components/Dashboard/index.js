@@ -1,5 +1,3 @@
-import { Button } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useGetEmployeeDetails from '../../hooks/useGetEmployeeDetails';
@@ -10,8 +8,6 @@ import EmployeePerformance from './EmployeePerformance';
 import styles from './styles.module.css';
 
 function EmployeeDashboard() {
-	const router = useRouter();
-
 	const [ratingCycle, setRatingCycle] = useState('');
 	const [yearlyRatingCycle, setYearlyRatingCycle] = useState('2023');
 
@@ -25,9 +21,6 @@ function EmployeeDashboard() {
 			<div className={styles.heading}>
 				Employee Dashboard
 
-				<Button onClick={() => router.push('/apply-resignation')}>
-					Apply for Resignation
-				</Button>
 			</div>
 
 			<div className={styles.flex_container}>

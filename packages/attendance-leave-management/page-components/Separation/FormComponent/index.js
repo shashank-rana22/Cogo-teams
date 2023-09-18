@@ -53,8 +53,7 @@ function FormComponent({
 	loading = false,
 	refetchApplicationDetails = () => {},
 	view_type = '',
-	// currentComponent = 'hr_meet',
-	currentComponent = 'finance_clearance',
+	currentComponent = 'hr_meet',
 	setCurrentComponent = () => {},
 }) {
 	let Render = null;
@@ -97,17 +96,17 @@ function FormComponent({
 		);
 	}
 
-	// Object.keys(COMPONENT_MAPPING[view_type]).every((key) => {
-	// 	const { is_complete = false } = data?.[view_type]?.[key] || {};
+	Object.keys(COMPONENT_MAPPING[view_type]).every((key) => {
+		const { is_complete = false } = data?.[view_type]?.[key] || {};
 
-	// 	Render = COMPONENT_MAPPING?.[view_type]?.[key];
+		Render = COMPONENT_MAPPING?.[view_type]?.[key];
 
-	// 	return is_complete;
-	// });
+		return is_complete;
+	});
 
 	return (
 		<div className={styles.container}>
-			<FinanceClearanceEmployeeSide data={data} loading={loading} refetch={refetchApplicationDetails} />
+			<Render data={data} loading={loading} refetch={refetchApplicationDetails} />
 		</div>
 	);
 }
