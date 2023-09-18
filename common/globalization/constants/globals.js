@@ -118,9 +118,6 @@ const GLOBAL_CONSTANTS = {
 							+ '9e95d4e38a4271ff/UTRuploadSampleFileForAdvancePayment.xlsx',
 	},
 
-	invoice_crawler:
-	'https://vmoiuzda31.execute-api.ap-south-1.amazonaws.com/production/generate_from_html',
-
 	cogoport_agent_email_id: 'agentid@cogoport.com',
 
 	flash_booking_charge_codes: [
