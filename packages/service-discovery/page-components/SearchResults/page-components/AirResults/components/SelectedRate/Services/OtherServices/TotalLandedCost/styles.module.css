@@ -3,3 +3,7 @@
 	align-items: center;
 	justify-content: space-between;
 }
+
+.proceed_button {
+	padding: 16px 20px;
+}

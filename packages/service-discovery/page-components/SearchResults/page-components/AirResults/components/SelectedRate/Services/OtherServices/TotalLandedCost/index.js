@@ -85,7 +85,6 @@ function TotalLandedCost({
 				onClick={handleProceedToCheckout}
 				size="lg"
 				themeType="accent"
-				style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 16, paddingBottom: 16 }}
 				className={styles.proceed_button}
 				loading={createCheckoutLoading}
 				disabled={!proceedToCheckoutIsValid}

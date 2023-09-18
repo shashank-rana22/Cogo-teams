@@ -14,7 +14,6 @@ function Header({
 					{airline?.short_name}
 				</span>
 			</span>
-
 		</div>
 	);
 }
