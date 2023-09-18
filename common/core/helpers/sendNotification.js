@@ -3,11 +3,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { doc, updateDoc } from 'firebase/firestore';
 
-import { FIRESTORE_PATH } from '../components/AdminLayout/LockScreen/configurations/firebase-config';
+import { FIRESTORE_PATH } from '../constants/firebase-constants';
 
 const CLOSE_NOTIFY_DURATION = 3000;
 
-const getNotification = async ({ resultList = {}, firestore = {} }) => {
+const sendNotification = async ({ resultList = {}, firestore = {} }) => {
 	if (isEmpty(resultList)) {
 		return;
 	}
@@ -64,7 +64,6 @@ const getNotification = async ({ resultList = {}, firestore = {} }) => {
 					await updateDoc(messageDoc, {
 						show_floating_notification : false,
 						has_admin_unread_messages  : false,
-						new_message_count          : 0,
 					});
 
 					const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
@@ -90,4 +89,4 @@ const getNotification = async ({ resultList = {}, firestore = {} }) => {
 	}
 };
 
-export default getNotification;
+export default sendNotification;

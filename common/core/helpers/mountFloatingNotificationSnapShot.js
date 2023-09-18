@@ -3,7 +3,7 @@ import {
 	query, where, orderBy,
 } from 'firebase/firestore';
 
-import getNotification from './getNotification';
+import sendNotification from './sendNotification';
 
 export function snapshotCleaner({ ref }) {
 	const tempRef = ref;
@@ -14,18 +14,17 @@ export function snapshotCleaner({ ref }) {
 }
 
 function dataFormatter(list) {
-	let resultList = {};
-	list?.forEach((item) => {
+	const resultList = list?.reduce((accumulator, item) => {
 		const { created_at, updated_at, new_message_count, ...rest } = item.data() || {};
 		const userData = {
 			id         : item?.id,
-			created_at : item.data().created_at || Date.now(),
+			created_at : created_at || Date.now(),
 			new_message_count,
 			...rest,
 		};
 
-		resultList = { ...resultList, [item?.id]: userData };
-	});
+		return { ...accumulator, [item?.id]: userData };
+	}, {});
 
 	return {
 		resultList,
@@ -35,10 +34,8 @@ function dataFormatter(list) {
 export function mountFloatingNotificationSnapShot({
 	unreadCountSnapshotListener = {},
 	omniChannelCollection = {},
-	baseQuery = [],
-	sessionQuery = [],
-	queryFilters = [],
 	firestore = {},
+	agentId = '',
 }) {
 	const mailSnapshotRef = unreadCountSnapshotListener;
 
@@ -48,9 +45,12 @@ export function mountFloatingNotificationSnapShot({
 			omniChannelCollection,
 			where('has_admin_unread_messages', '==', true),
 			where('show_floating_notification', '==', true),
-			...(baseQuery || []),
-			...(sessionQuery || []),
-			...(queryFilters || []),
+			[where('support_agent_id', '==', agentId)],
+			[where('session_type', '==', 'admin')],
+			[
+				where('channel_type', 'in', ['email']),
+				where('show_in_inbox', '==', true),
+			],
 			orderBy('new_message_sent_at', 'desc'),
 		);
 
@@ -59,7 +59,7 @@ export function mountFloatingNotificationSnapShot({
 			(floatNotificationChatSnapshot) => {
 				const { resultList } = dataFormatter(floatNotificationChatSnapshot?.docs);
 
-				getNotification({
+				sendNotification({
 					resultList,
 					firestore,
 				});
