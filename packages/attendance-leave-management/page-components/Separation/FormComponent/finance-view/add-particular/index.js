@@ -9,6 +9,7 @@ import {
 
 import styles from './styles.module.css';
 
+let ID = GLOBAL_CONSTANTS.zeroth_index;
 function AddParticular({
 	addParticular = false,
 	setAddParticular = () => {},
@@ -19,11 +20,13 @@ function AddParticular({
 	const onSubmit = (values) => {
 		setUpdateData((prev) => [...prev,
 			{
+				id                 : ID + GLOBAL_CONSTANTS.one,
 				particular         : values?.particular,
 				category           : values?.category,
 				recoverable_amount : parseInt(values?.recoverableAmount, 10),
 			}]);
 		setAddParticular(false);
+		ID += GLOBAL_CONSTANTS.one;
 		reset();
 	};
 
@@ -52,6 +55,7 @@ function AddParticular({
 							placeholder="Select Category"
 							className={styles.name_input}
 							name="category"
+							value=""
 							size="md"
 							type="number"
 							options={FNFPARTICULARDATA}

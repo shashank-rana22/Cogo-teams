@@ -55,19 +55,19 @@
 
 .input_cont {
 	width: 33%;
-	padding: 16px;
+	padding: 0 16px;
 }
 
 .amount_container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 16px 16px 0;
+	padding: 0 16px;
 }
 
 .input_cont_part {
 	width: 33%;
-	padding: 16px 16px 16px 0;
+	padding: 0 16px 16px 0;
 }
 
 .sub_container {

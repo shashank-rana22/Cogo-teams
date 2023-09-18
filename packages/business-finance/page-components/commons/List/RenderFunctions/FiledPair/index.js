@@ -1,13 +1,24 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { getByKey, isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
-import getFormattedAmount from '../../../../Settlement/commons/Utils/getFormattedAmount.ts';
-
 import styled from './styles.module.css';
+
+const getFormattedAmount = ({ amount, currency }) => (
+	formatAmount({
+		amount,
+		currency,
+		options: {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			maximumFractionDigits : 2,
+		},
+	})
+);
 
 function FieldPair({ itemData, field }) {
 	const { topKey, lowerKey } = field || {};
-	const getElement = (type, key, currencyKey = 'currency') => {
+	function Element(type, key, currencyKey = 'currency') {
 		if (type === 'href') {
 			return (
 				<div className={styled.link}>
@@ -35,12 +46,12 @@ function FieldPair({ itemData, field }) {
 			);
 		}
 		return (<div>{getByKey(itemData, key)}</div>);
-	};
+	}
 
 	return (
 		<div>
-			{!isEmpty(topKey) ? getElement(topKey?.type, topKey?.key, topKey?.currencyKey) : null}
-			{!isEmpty(topKey) ? getElement(lowerKey?.type, lowerKey?.key, lowerKey?.currencyKey) : null}
+			{!isEmpty(topKey) ? Element(topKey?.type, topKey?.key, topKey?.currencyKey) : null}
+			{!isEmpty(lowerKey) ? Element(lowerKey?.type, lowerKey?.key, lowerKey?.currencyKey) : null}
 		</div>
 	);
 }

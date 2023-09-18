@@ -1,6 +1,5 @@
 import { Button, Modal, MultiSelect, SingleDateRange } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -63,26 +62,28 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 					<div className={styles.container}>
 						<div className={styles.date}>
 							<h5>Date Range*</h5>
+
 							<SingleDateRange
 								placeholder="Select Date Range"
 								dateFormat="dd/MM/yyyy"
 								name="date"
 								onChange={setDate}
 								value={date}
-								style={{ width: '80%' }}
+								style={{ width: '100%' }}
 								isPreviousDaysAllowed
 							/>
-
 						</div>
-						<div>
+
+						<div className={styles.date}>
 							<h5>Entity*</h5>
+
 							<MultiSelect
 								value={entities}
 								onChange={setEntites}
 								placeholder="Select Entity"
 								options={entityOptions}
 								isClearable
-								style={{ width: '250px' }}
+								style={{ width: '95%' }}
 								prefix={() => {}}
 							/>
 
@@ -91,7 +92,6 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 					<div className={styles.download}>
 						<Button onClick={handleClick} disabled={!isEnabled}>
 							Download
-							<IcMDownload className={styles.download_icon} />
 						</Button>
 					</div>
 				</Modal.Body>

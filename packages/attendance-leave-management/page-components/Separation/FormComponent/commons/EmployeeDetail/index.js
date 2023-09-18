@@ -30,7 +30,7 @@ function EmployeeDetail({ data = {}, loading = false }) {
 		reporting_manager   : applicant_details?.reporting_manager,
 		hrbp                : applicant_details?.hrbp,
 		feedback_rating     : applicant_details?.feedback_rating,
-		personal_mail       : applicant_details?.personal_mail,
+		personal_mail       : applicant_details?.personal_email,
 		reason_for_leaving  : applicant_details?.reason_for_leaving,
 	};
 	if (loading) return <Loader />;

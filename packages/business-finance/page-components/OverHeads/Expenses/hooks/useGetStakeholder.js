@@ -1,9 +1,11 @@
 import { useRequestBf } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
+import { EntityContext } from '../../commons/Contexts';
 
 const useGetStakeholder = ({ billId }) => {
+	const entity = useContext(EntityContext);
 	const [{ data, loading = false }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/expense',
@@ -19,7 +21,8 @@ const useGetStakeholder = ({ billId }) => {
 				await trigger(
 					{
 						params: {
-							id: billId,
+							id           : billId,
+							cogoEntityId : entity,
 						},
 					},
 				);
@@ -28,7 +31,7 @@ const useGetStakeholder = ({ billId }) => {
 			}
 		};
 		api();
-	}, [trigger, billId]);
+	}, [trigger, billId, entity]);
 
 	return {
 		loading,

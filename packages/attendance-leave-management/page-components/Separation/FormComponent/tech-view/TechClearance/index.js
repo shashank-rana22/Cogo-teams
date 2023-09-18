@@ -140,7 +140,7 @@ function TechClearance({ data = {}, refetch = () => {} }) {
 					</Button>
 					<Button
 						size="md"
-						themeType="Accent"
+						themeType="primary"
 						className={styles.proceed_modal_btn}
 						onClick={() => {
 							handleSubmit(onSubmit)();

@@ -25,7 +25,7 @@ export const repositoryFields = (t = () => {}) => ({
 		{
 			key   : 'lms_url',
 			label : t('airRepository:lms_url_field_label'),
-			span  : 2.5,
+			span  : 1.5,
 			func  : 'handlePlatformURL',
 		},
 		{
@@ -36,6 +36,11 @@ export const repositoryFields = (t = () => {}) => ({
 		{
 			key   : 'lms_password',
 			label : t('airRepository:lms_password_field_label'),
+			span  : 1,
+		},
+		{
+			key   : 'ams_mode',
+			label : t('airRepository:ams_mode_field_label'),
 			span  : 1,
 		},
 		{

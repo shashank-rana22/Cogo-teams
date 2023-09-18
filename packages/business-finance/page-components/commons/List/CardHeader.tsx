@@ -31,7 +31,7 @@ function Header({
 	};
 	return (
 		<header className={styles.header} style={headerStyles}>
-			{showHeaderCheckbox && renderHeaderCheckbox()}
+
 			{fields.map((field) => (
 				<div
 					className={`${styles.col} ${field.className || ''}`}
@@ -39,9 +39,11 @@ function Header({
 						'--span' : field.span || 1,
 						width    : `${((field.span || 1) * (100 / 12))}px`,
 					} as React.CSSProperties}
+					key={field?.key}
 				>
+					{(showHeaderCheckbox && field?.func === 'renderCheckbox') ? renderHeaderCheckbox() : null}
 					{field.label}
-					{field.sorting && (
+					{field.sorting ? (
 						<>
 							<div className={styles.center}>
 								<IcMArrowRotateUp
@@ -60,7 +62,7 @@ function Header({
 								/>
 							</div>
 						</>
-					)}
+					) : null}
 				</div>
 			))}
 		</header>

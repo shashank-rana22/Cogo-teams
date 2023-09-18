@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { getStepperMapping } from '../../utils/getStepperMapping';
 
 import FormComponent from './FormComponent';
 import PersonalDetails from './PersonalDetails';
@@ -7,7 +9,10 @@ import TaskList from './TaskList';
 import useGetApplicationProcessDetails from './useGetApplicationProcessDetails';
 
 function Separation() {
+	const [currentComponent, setCurrentComponent] = useState('hr_meet');
 	const { data, loading, refetchApplicationDetails, process_name } = useGetApplicationProcessDetails();
+
+	const stepperStatusMapping = getStepperMapping(data);
 
 	return (
 		<div className={styles.container}>
@@ -16,7 +21,11 @@ function Separation() {
 			<div className={styles.hr_separation}>
 				<div className={styles.employee_details}>
 					<PersonalDetails data={data} />
-					<TaskList />
+					<TaskList
+						apiData={stepperStatusMapping}
+						view_type={process_name}
+						setCurrentComponent={setCurrentComponent}
+					/>
 				</div>
 
 				<div className={styles.hr_meeting}>
@@ -25,6 +34,8 @@ function Separation() {
 						loading={loading}
 						refetchApplicationDetails={refetchApplicationDetails}
 						view_type={process_name}
+						currentComponent={currentComponent}
+						setCurrentComponent={setCurrentComponent}
 					/>
 				</div>
 			</div>

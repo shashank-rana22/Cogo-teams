@@ -8,7 +8,8 @@
 }
 
 :root {
-	--font-family: 'Roboto', 'sans-serif';
+	--font-family-en: 'Poppins', sans-serif;
+	--font-family-vi: 'Be Vietnam Pro', sans-serif;
 }
 
 #nprogress .spinner-icon {

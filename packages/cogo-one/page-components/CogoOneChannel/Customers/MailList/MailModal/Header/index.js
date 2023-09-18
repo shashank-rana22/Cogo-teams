@@ -1,6 +1,6 @@
 import { cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMSend, IcMAttach, IcMArrowBack } from '@cogoport/icons-react';
+import { IcMSend, IcMAttach, IcMArrowBack, IcMMinus } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
 import CustomFileUploader from '../../../../../../common/CustomFileUploader';
@@ -40,19 +40,9 @@ function RenderHeader({
 	setMinimizeModal = () => {},
 }) {
 	return (
-		<>
-			<div className={styles.top_left_section}>
-				{isTemplateView ? (
-					<div className={styles.back_icon}>
-						<IcMArrowBack
-							onClick={() => setEmailTemplate(() => ({ emailData: {}, isTemplateView: false }))}
-							width={20}
-							height={20}
-							cursor="pointer"
-						/>
-						Back
-					</div>
-				) : (
+		<div className={styles.mail_modal_header}>
+			<div className={styles.header}>
+				<div className={styles.left_container}>
 					<Button
 						size="md"
 						themeType="link"
@@ -60,15 +50,37 @@ function RenderHeader({
 					>
 						Cancel
 					</Button>
-				)}
+				</div>
+
+				<div
+					className={styles.title}
+					role="presentation"
+				>
+					{HEADER_MAPPING[buttonType] || 'New Message'}
+				</div>
+
+				<div className={styles.right_container}>
+					<div className={styles.minimize_button} title="minimize">
+						<IcMMinus onClick={() => setMinimizeModal(true)} />
+					</div>
+				</div>
 			</div>
 
-			<div
-				className={styles.title}
-				role="presentation"
-				onClick={() => setMinimizeModal(true)}
-			>
-				{HEADER_MAPPING[buttonType] || 'New Message'}
+			<div className={styles.top_left_section}>
+				{isTemplateView ? (
+					<div className={styles.back_icon}>
+						<IcMArrowBack
+							onClick={() => setEmailTemplate(() => ({
+								emailData      : {},
+								isTemplateView : false,
+							}))}
+							width={20}
+							height={20}
+							cursor="pointer"
+						/>
+						Back
+					</div>
+				) : null}
 			</div>
 
 			{isTemplateView ? null : (
@@ -86,7 +98,7 @@ function RenderHeader({
 					</div>
 
 					{DISABLE_ATTACHMENTS_FOR.includes(buttonType) ? null : (
-						<div className={styles.file_uploader_div}>
+						<div className={styles.file_uploader_div} title="attachment">
 							<CustomFileUploader
 								disabled={uploading}
 								handleProgress={setUploading}
@@ -101,15 +113,15 @@ function RenderHeader({
 							/>
 						</div>
 					)}
-
 					<div
 						className={cl`${replyLoading ? styles.disabled_button : ''} ${styles.send_icon}`}
+						title="send"
 					>
 						<IcMSend onClick={handleSend} />
 					</div>
 				</div>
 			)}
-		</>
+		</div>
 	);
 }
 

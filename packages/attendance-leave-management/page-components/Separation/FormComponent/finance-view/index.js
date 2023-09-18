@@ -1,16 +1,13 @@
 import { Button	 } from '@cogoport/components';
-import { UploadController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMArrowDown,
 	IcMArrowRight,
-	IcMDownload,
 	IcMFtick,
 	IcMPlus,
 } from '@cogoport/icons-react';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-
-import StyledTable from '../commons/StyledTable';
 
 import AddParticular from './add-particular';
 import AdditionalRemarks from './additional-remarks';
@@ -18,6 +15,7 @@ import fnfColumns from './columns';
 import FinanceConfirmModal from './confirm-modal';
 import FinanceRecommendations from './finance-recommendations';
 import FnfTable from './FnfTable';
+import OutstandingDetails from './outstanding-details';
 import getColumns from './Outstandingamount/getcolumns';
 import styles from './styles.module.css';
 import TermsConditions from './terms-conditions';
@@ -27,7 +25,7 @@ import useFinanceClearance from './useFinanceClearance';
 function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = () => {} }) {
 	const {
 		handleSubmit, onSubmit, control, errors,
-		outstanding_amount_details, watch, updateData, setUpdateData, totalRecoverableAmount, setTotalRecoverableAmount,
+		outstanding_amount_details, updateData, setUpdateData, totalRecoverableAmount, setTotalRecoverableAmount,
 		setFinanceRecommendation, financeRecommendation, off_boarding_application_id,
 		sub_process_data, confirmModal, setConfirmModal, is_complete,
 		setValue,
@@ -75,6 +73,7 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 		await getDownloadOutstandingFileLink(off_boarding_application_id);
 		window.open(downloadlink, '_blank');
 	};
+
 	const totalRecoverableAmountFun = useCallback(
 		() => {
 			let recoverable_amount_sum = 0;
@@ -86,10 +85,13 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 		},
 		[is_complete, showdata, data1, setTotalRecoverableAmount],
 	);
-
+	const deleteItemUpdateStatus = (id = 1) => {
+		const temp = updateData.filter((obj) => obj.id !== id);
+		setUpdateData(temp);
+	};
 	useEffect(() => { totalRecoverableAmountFun(); }, [totalRecoverableAmountFun, updateData]);
+	const columns = fnfColumns({ errors, deleteItemUpdateStatus });
 
-	const columns = fnfColumns({ control, errors, setTotalRecoverableAmount, watch, totalRecoverableAmountFun });
 	return (
 		<>
 			<div className={styles.header}>
@@ -154,61 +156,28 @@ function FinanceClearanceEmployeeSide({ data = {}, loading = false, refetch = ()
 							Total Recoverable Amount
 						</div>
 						<span className={styles.recoverable_amount}>
-							{totalRecoverableAmount}
+							{formatAmount({
+								amount   : totalRecoverableAmount,
+								currency : 'INR',
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 2,
+								},
+							})}
 						</span>
 					</div>
 				</div>
 			</div>
-
-			<div className={styles.container}>
-				<div
-					className={styles.heading_container}
-				>
-					<div className={styles.heading}>
-						B. Outstanding Amount
-					</div>
-					<div className={styles.btn_and_arrow}>
-						<div className={styles.heading_btn}>
-							<Button
-								size="md"
-								themeType="secondary"
-								onClick={() => handleDownloadSheet()}
-							>
-								<IcMDownload />
-								{' '}
-								Download Outstanding Sheet
-							</Button>
-						</div>
-						<IcMArrowDown
-							width={22}
-							height={22}
-							aria-hidden
-							onClick={() => setOutStandingShow(!outStandingShow)}
-							className={outStandingShow ? styles.caret_active : styles.caret_arrow}
-						/>
-					</div>
-				</div>
-
-				<div className={outStandingShow ? styles.show_application : styles.hide_application}>
-					<div className={styles.table_update_out_amount}>
-						<div className={styles.outstanding_heading}>Outstanding Amount Details</div>
-						<StyledTable columns={columnsout} data={outstanding_amount_details} loading={false} />
-					</div>
-					{is_complete ?	null : (
-						<div className={styles.fnf_excel_sheet_container}>
-							<div className={styles.outstanding_fnf_heading}> FNF Excel Sheet</div>
-							<UploadController
-								name="fnffile"
-								control={control}
-								placeholder="Only Image, pdf/doc..."
-								size="md"
-								disabled={is_complete}
-								className={is_complete ? styles.uploadbtn : null}
-							/>
-						</div>
-					)}
-				</div>
-			</div>
+			<OutstandingDetails
+				handleDownloadSheet={handleDownloadSheet}
+				columnsout={columnsout}
+				control={control}
+				outStandingShow={outStandingShow}
+				setOutStandingShow={setOutStandingShow}
+				outstanding_amount_details={outstanding_amount_details}
+				is_complete={is_complete}
+			/>
 			<FinanceRecommendations
 				control={control}
 				financeRecommendation={financeRecommendation}

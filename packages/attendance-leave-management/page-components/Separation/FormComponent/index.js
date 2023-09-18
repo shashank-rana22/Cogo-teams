@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import React, { useState } from 'react';
+import React from 'react';
 
 import AdminClearance from './admin-view/admin-clearance';
 import HOTOClearance from './employee-view/HOTOClearance';
@@ -17,16 +17,18 @@ import ReviewRequest from './manager-view/ReviewRequest';
 import styles from './styles.module.css';
 import TechClearance from './tech-view/TechClearance';
 
+const INVALID_INDEX = -1;
+
 const COMPONENT_MAPPING = {
 	hr_meet: {
-		hr_meet                     : HRMeeting,
-		manager_clearance           : ManagerClearance,
-		finance_clearance           : FinanceClearance,
-		handover_takeover_clearance : HandoverTakeoverClearance,
-		admin_clearance             : AdminClearanceHrbp,
-		tech_clearance              : TechClearanceHrbp,
-		exit_interview              : ExitInterview,
-		exit_reasons                : ExitReasons,
+		hr_meet           : HRMeeting,
+		manager_clearance : ManagerClearance,
+		finance_clearance : FinanceClearance,
+		hoto_clearance    : HandoverTakeoverClearance,
+		admin_clearance   : AdminClearanceHrbp,
+		tech_clearance    : TechClearanceHrbp,
+		exit_interview    : ExitInterview,
+		exit_reasons      : ExitReasons,
 	},
 	manager_clearance: {
 		review_request : ReviewRequest,
@@ -51,9 +53,9 @@ function FormComponent({
 	loading = false,
 	refetchApplicationDetails = () => {},
 	view_type = '',
+	currentComponent = 'hr_meet',
+	setCurrentComponent = () => {},
 }) {
-	const [currentComponent, setCurrentComponent] = useState('hr_meet');
-	const INVALID_INDEX = -1;
 	let Render = null;
 
 	if (view_type === 'hrbp_clearance') {

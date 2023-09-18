@@ -2,7 +2,6 @@ import useGetShipmentQuotation from '../../../../../hooks/useGetShipmentQuotatio
 import useListCurrencyConversion from '../../../../../hooks/useListCurrencyConversion';
 import useUpdateCurrencyConversion from '../../../../../hooks/useUpdateCurrencyConversion';
 
-const OBJ = {};
 const INITIAL_STATE = 0;
 const CURRENCY_CONVERSION_FACTOR = 1;
 
@@ -11,6 +10,7 @@ const useHelper = ({ invoiceCurrency = '', refetch = () => {}, shipment_id = '' 
 	const { quotationData } = useGetShipmentQuotation({ shipment_id });
 	const { handleFormSubmit, loading } = useUpdateCurrencyConversion({ shipment_id, refetch });
 
+	const OBJ = {};
 	const DIFFERENT_CURRENCIES_HASH = {};
 	const AVAILABLE_CURRENCY_CONVERSION = {};
 

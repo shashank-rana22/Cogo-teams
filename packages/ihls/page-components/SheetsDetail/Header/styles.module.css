@@ -1,0 +1,9 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.spacing {
+	margin-right: 5px;
+}
