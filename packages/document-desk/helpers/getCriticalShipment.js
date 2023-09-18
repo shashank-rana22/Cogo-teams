@@ -1,7 +1,8 @@
 import { addDays, subtractDays } from '@cogoport/utils';
 
 const TODAY_HOURS = 23;
-const TODAY_MINUTES_OR_SEC = 59;
+const TODAY_SEC = 59;
+const TODAY_MINUTES = 59;
 const TODAY_MS = 999;
 
 const ONE = 1;
@@ -11,13 +12,13 @@ const FOUR = 4;
 const FIVE = 5;
 
 const getCriticalShipment = ({ tab, shipment }) => {
-	const { estimated_arrival, estimated_departure, cutoffs = {}, si_filed_at = '' } = shipment || {};
-	const { document_amendment_requested } = shipment || {};
+	const { estimated_arrival = '', estimated_departure = '', cutoffs = {}, si_filed_at = '' } = shipment || {};
+	const { document_amendment_requested = '' } = shipment || {};
 	const { si_cutoff = '', gate_in_cutoff = '' } = cutoffs;
 
 	if (!estimated_arrival) return false;
 
-	const TODAY = new Date(new Date().setHours(TODAY_HOURS, TODAY_MINUTES_OR_SEC, TODAY_MINUTES_OR_SEC, TODAY_MS));
+	const TODAY = new Date(new Date().setHours(TODAY_HOURS, TODAY_MINUTES, TODAY_SEC, TODAY_MS));
 	const timezoneOffset = TODAY.getTimezoneOffset();
 
 	const estimated_arr = new Date(new Date(estimated_arrival).getTime() + timezoneOffset);
