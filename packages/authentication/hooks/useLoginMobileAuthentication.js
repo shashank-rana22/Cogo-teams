@@ -33,7 +33,9 @@ const useLoginMobileAuthentication = ({
 			setMobileNumber(values?.mobile_number);
 			setMode('otp');
 		} catch (err) {
-			Toast.error(t('login:login_otp_failed'));
+			Toast.error(
+				getApiErrorString(err?.response?.data) || t('login:login_otp_failed'),
+			);
 		}
 	};
 
