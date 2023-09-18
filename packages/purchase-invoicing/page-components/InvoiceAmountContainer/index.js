@@ -44,7 +44,7 @@ function InvoiceAmountContainer({
 				))}
 			</div>
 			<div style={styles.total_amount}>
-				<div style={{ width: '12%', border: '0.5px solid black' }}>
+				<div style={styles.amount_container}>
 					<b>
 						{formatAmount({
 							amount   : calculatedValues.total_tax_amount || ZERO,
@@ -57,7 +57,7 @@ function InvoiceAmountContainer({
 						})}
 					</b>
 				</div>
-				<div style={{ width: '12%', border: '0.5px solid black' }}>
+				<div style={styles.amount_container}>
 					<b>
 						{formatAmount({
 							amount   : calculatedValues.sub_total_amount || ZERO,

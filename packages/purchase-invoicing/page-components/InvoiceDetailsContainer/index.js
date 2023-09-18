@@ -29,7 +29,7 @@ function InvoiceDetailsContainer({
 				<div style={{ textAlign: 'center' }}>
 					<b>Ship To Customer</b>
 				</div>
-				<div style={{ fontSize: '15px', padding: '12px 0 0 6px' }}>
+				<div style={styles.block}>
 					<b>{business_name}</b>
 					<div style={{ paddingTop: '5px' }}>
 						<div>{address}</div>
@@ -63,7 +63,7 @@ function InvoiceDetailsContainer({
 				<div style={{ textAlign: 'center' }}>
 					<b>Bill To Customer</b>
 				</div>
-				<div style={{ fontSize: '15px', padding: '12px 0 0 6px' }}>
+				<div style={styles.block}>
 					<b>COGOPORT PRIVATE LIMITED</b>
 					<div>
 						{`${address} , ${city?.name} - ${pin_code} , ${country.name}`}
@@ -89,7 +89,7 @@ function InvoiceDetailsContainer({
 				<div style={{ textAlign: 'center' }}>
 					<b>Bank Details</b>
 				</div>
-				<div style={{ fontSize: '15px', padding: '12px 0 0 6px' }}>
+				<div style={styles.block}>
 					<div>
 						<b>Account No. :</b>
 						{' '}
@@ -112,7 +112,7 @@ function InvoiceDetailsContainer({
 				</div>
 			</div>
 			<div style={styles.invoice_details}>
-				<div style={{ fontSize: '15px', padding: '12px 0 0 6px' }}>
+				<div style={styles.block}>
 					<div>
 						<b>Invoice No : </b>
 						{tax_invoice_no}

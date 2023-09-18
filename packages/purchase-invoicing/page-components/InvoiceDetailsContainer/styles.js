@@ -21,5 +21,9 @@ const styles = {
 		width  : '30%',
 		border : '1px solid #000',
 	},
+	block: {
+		fontSize : '15px',
+		padding  : '12px 0 0 6px',
+	},
 };
 export default styles;

@@ -29,5 +29,9 @@ const styles = {
 		fontSize       : '15px',
 		width          : '100%',
 	},
+	amount_container: {
+		width  : '12%',
+		border : '0.5px solid #000',
+	},
 };
 export default styles;
