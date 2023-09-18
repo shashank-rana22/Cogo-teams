@@ -78,8 +78,6 @@ const getCheckoutPayload = ({
 		tradeType,
 	});
 
-	console.log('serviceWiseValues', serviceWiseValues);
-
 	return {
 		id                                          : checkout_id,
 		service                                     : finalServiceName,
