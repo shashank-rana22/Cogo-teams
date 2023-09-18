@@ -1,0 +1,12 @@
+.button {
+	margin-right: 5px;
+}
+
+.modal {
+	:global {
+		.ui_modal_body_container {
+			padding-top: 0;
+			border-top: none;
+		}
+	}
+}

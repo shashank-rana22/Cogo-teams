@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image, dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useMemo, useState } from 'react';
@@ -5,8 +6,6 @@ import { useEffect, useMemo, useState } from 'react';
 import useGetMapRoute from '../../../../hooks/useGetMapRoute';
 
 import styles from './styles.module.css';
-
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const CogoMaps = dynamic(() => import('./MapComps'), { ssr: false });
 
@@ -35,7 +34,7 @@ function Map({
 			const currentTrackingInfo = allRoute.filter(
 				(info) => info?.containerNo === currContainerDetails?.container_no
 					|| info?.airWayNo === currContainerDetails?.airway_bill_no,
-			)[0];
+			)[GLOBAL_CONSTANTS.zeroth_index];
 
 			setCurrentRoute(currentTrackingInfo?.route);
 		}

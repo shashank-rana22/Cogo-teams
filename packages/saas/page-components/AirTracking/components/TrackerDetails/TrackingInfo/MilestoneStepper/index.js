@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useRef } from 'react';
 
 import useGetMilestoneInfo from '../../../../hooks/useGetMilestoneInfo';
@@ -6,8 +7,6 @@ import { isCurrentDate, isFutureDate } from '../../../../utils/dateCompare';
 
 import Card from './Card';
 import styles from './styles.module.css';
-
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const LAST_INDEX = -1;
 
@@ -40,7 +39,8 @@ function MilestoneStepper({ combineMileStoneList = [], trackingType = 'ocean' })
 							${isCurrentMilestonePresent ? styles.curr_milestone : ''}`}
 						>
 							<div className={styles.dot} />
-							{index !== combineMileStoneListLength - 1 && <div className={styles.line} />}
+							{index !== combineMileStoneListLength - GLOBAL_CONSTANTS.one && (
+								<div className={styles.line} />)}
 						</div>
 						<div
 							className={styles.card_container}

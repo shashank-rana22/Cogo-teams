@@ -16,7 +16,7 @@ const COMPONENT_MAPPING = {
 	configure : Configure,
 };
 
-function ModalList({ modalInfo = {}, setModalInfo, activeTab, refetchTrackerList }) {
+function ModalList({ modalInfo = {}, setModalInfo = () => {}, activeTab = '', refetchTrackerList = () => {} }) {
 	const { show, name = 'archive', shipmentId = '', shipmentInfo = {} } = modalInfo || {};
 
 	const { t } = useTranslation(['common', 'airOceanTracking']);

@@ -1,0 +1,24 @@
+.title {
+	margin: 10px 0;
+	font-size: 12px;
+}
+
+.container {
+	padding-top: 20px;
+	margin-top: 10px;
+}
+
+.chips {
+	padding: 10px 0;
+	margin-bottom: 10px;
+
+	:global {
+		.ui_chips_container {
+			flex-wrap: wrap;
+		}
+
+		.ui_chip_container {
+			max-width: none;
+		}
+	}
+}

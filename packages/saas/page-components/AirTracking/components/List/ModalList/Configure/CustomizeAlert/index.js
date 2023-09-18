@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
@@ -8,14 +9,12 @@ import AddAlert from './AddAlert';
 import SelectContact from './SelectContact';
 import styles from './styles.module.css';
 
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 const COMPONENT_MAPPING = {
 	select_contact : SelectContact,
 	add_alert      : AddAlert,
 };
 
-function CustomizeAlert({ closeHandler, shipmentId = '', activeTab = 'ocean' }) {
+function CustomizeAlert({ closeHandler = () => {}, shipmentId = '', activeTab = 'ocean' }) {
 	const [step, setStep] = useState('select_contact');
 	const [selectContactList, setSelectContactList] = useState([]);
 	const {

@@ -1,0 +1,5 @@
+.rate_us_button {
+	display: flex;
+	text-decoration: underline;
+	cursor: pointer;
+}

@@ -1,19 +1,18 @@
 import { Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
+import MapContainer from '../../../../common/MapContainer';
+import Table from '../../../../common/Table';
 import dashboardTableConfig from '../../../../configuration/dashboardTableConfig';
 import useRedirectFn from '../../../../hooks/useRedirectFn';
 
 import StatsContainer from './StatsContainer';
 import styles from './styles.module.css';
 
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import MapContainer from '@/ui/page-components/air-ocean-tracking/common/MapContainer';
-import Table from '@/ui/page-components/air-ocean-tracking/common/Table';
-
-function TrackingInfo({ summaryHook, view }) {
+function TrackingInfo({ summaryHook = {}, view = 'list' }) {
 	const { data, loading, globalFilter, setGlobalFilter } = summaryHook;
 	const { activeTab } = globalFilter;
 	const {
@@ -32,7 +31,7 @@ function TrackingInfo({ summaryHook, view }) {
 
 	return (
 		<div className={styles.container}>
-			{activeTab === 'ocean' &&			(
+			{activeTab === 'ocean' && (
 				<StatsContainer
 					stats={{ on_track, delayed, attention_required }}
 					globalFilter={globalFilter}

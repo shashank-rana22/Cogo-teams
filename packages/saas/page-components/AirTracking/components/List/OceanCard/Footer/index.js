@@ -1,12 +1,11 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useTranslation } from 'next-i18next';
 
 import { SEVERITY_MAPPING } from '../../../../constant/card';
 
 import styles from './styles.module.css';
-
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@/ui/commons/utils/formatDate';
 
 function Footer({ lastUpdated = '', currentMilestone = {}, currentContainerAction = {} }) {
 	const { current_status } = currentMilestone || {};

@@ -15,7 +15,13 @@ const COMPONENT_MAPPING = {
 	CustomizedAlerts  : CustomizeAlert,
 };
 
-function Configure({ closeHandler, shipmentId, refetchTrackerList, activeTab = 'ocean', shipmentInfo = {} }) {
+function Configure({
+	closeHandler = () => {},
+	shipmentId = '',
+	refetchTrackerList = () => {},
+	activeTab = 'ocean',
+	shipmentInfo = {},
+}) {
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
 	const configTab = {

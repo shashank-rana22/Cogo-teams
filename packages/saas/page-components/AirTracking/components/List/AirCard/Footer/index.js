@@ -1,13 +1,12 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 
 import { SEVERITY_MAPPING } from '../../../../constant/card';
 
 import styles from './styles.module.css';
-
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@/ui/commons/utils/formatDate';
 
 const renderTitle = ({ next_milestone = '' }) => {
 	if (next_milestone) return 'Next Milestone';

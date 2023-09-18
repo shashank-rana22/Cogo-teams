@@ -1,4 +1,6 @@
 import { cl, Tooltip, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMInfo } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useTranslation } from 'react-i18next';
@@ -8,12 +10,11 @@ import getMappingObject from '../../../../../constant/card';
 import Stepper from './Stepper';
 import styles from './styles.module.css';
 
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@/ui/commons/utils/formatDate';
-
 const INVALID_VESSEL_NAME = ['N/A'];
 
-const widthProp = {
+const DEFAULT_WIDTH = 35;
+
+const WIDTH_PROP = {
 	VESSEL : 35,
 	TRUCK  : 55,
 	RAIL   : 55,
@@ -27,7 +28,7 @@ const getIconUrl = ({ mapping, type, transportMode }) => {
 	return obj[type];
 };
 
-function MilestoneName({ milestone, vessel_name }) {
+function MilestoneName({ milestone = null, vessel_name = '' }) {
 	return 	(
 		<>
 			{milestone}
@@ -45,7 +46,7 @@ function MilestoneName({ milestone, vessel_name }) {
 
 function Card({
 	combineList = [], trackingType = 'ocean', isCurrentMilestone = false,
-	milestoneSubIndex,
+	milestoneSubIndex = null,
 }) {
 	const {
 		location = '', station = '',
@@ -68,7 +69,7 @@ function Card({
 				<h3 className={styles.title}>{location || station}</h3>
 				<Image
 					src={url}
-					width={widthProp?.[transport_mode] || 35}
+					width={WIDTH_PROP?.[transport_mode] || DEFAULT_WIDTH}
 					height={35}
 					alt="logo"
 				/>
@@ -77,7 +78,7 @@ function Card({
 			<div className={styles.info}>
 				{combineList.map((item, index) => {
 					const { id = '', milestone, event_date = '', actual_date = '', vessel_name = '' } = item || {};
-					const isLastRow = index === combineListLength - 1;
+					const isLastRow = index === combineListLength - GLOBAL_CONSTANTS.one;
 					const currSubMilestone = isCurrentMilestone && milestoneSubIndex === index;
 
 					const date = formatDate({

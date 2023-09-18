@@ -1,6 +1,8 @@
 import { cl, Button, Pagination, ButtonIcon } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
@@ -10,16 +12,13 @@ import Item from './Item';
 import StatusModal from './StatusModal';
 import styles from './styles.module.css';
 
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import getLoadingArr from '@/ui/page-components/air-ocean-tracking/utils/getLoadingArr';
+const LOADING_ROWS = 5;
 
-const LOADING_ARR = getLoadingArr(5);
-
-function DailyReport({ dsrListValue = {}, setShowConfigure, activeTab = 'ocean' }) {
+function DailyReport({ dsrListValue = {}, setShowConfigure = () => {}, activeTab = 'ocean' }) {
 	const { data = {}, loading, setPage, getDsrList } = dsrListValue || {};
 
 	const { list = [], page = 0, total_count = 0, page_limit = 0 } = data || {};
-	const newList = loading ? LOADING_ARR : list || [];
+	const newList = loading ? [...Array(LOADING_ROWS).keys()] : list || [];
 
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 	const [statusModal, setStatusModal] = useState({ isOpen: false });
@@ -57,7 +56,7 @@ function DailyReport({ dsrListValue = {}, setShowConfigure, activeTab = 'ocean' 
 					))}
 				</div>
 
-				{newList.length > 0 ? newList.map((item) => (
+				{!isEmpty(newList) ? newList.map((item) => (
 					<div key={item?.id || item} className={styles.flex_box}>
 						<Item data={item} loading={loading} setStatusModal={setStatusModal} />
 					</div>

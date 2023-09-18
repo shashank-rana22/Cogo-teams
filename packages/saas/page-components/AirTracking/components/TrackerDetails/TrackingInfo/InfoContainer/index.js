@@ -1,13 +1,13 @@
 import { Select, cl, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 import Image from 'next/image';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import styles from './styles.module.css';
+import getMappingObject from '../../../../constant/card';
 
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import getMappingObject from '@/ui/page-components/air-ocean-tracking/constant/card';
+import styles from './styles.module.css';
 
 const getOptions = ({ containerDetails = [] }) => containerDetails.map((item) => ({
 	label : item?.container_no,
@@ -22,8 +22,8 @@ const COLOR = {
 const SINGLE_DETAIL_INDEX = 1;
 
 function InfoContainer({
-	containerDetails = [], currContainerDetails = {}, setCurrContainerDetails,
-	shipmentInfo = {}, trackingType, poc_details = [], airwayBillNo = '',
+	containerDetails = [], currContainerDetails = {}, setCurrContainerDetails = () => {},
+	shipmentInfo = {}, trackingType = '', poc_details = [], airwayBillNo = '',
 }) {
 	const { container_no = '', container_length = '', container_description = '' } = currContainerDetails || {};
 
@@ -36,19 +36,19 @@ function InfoContainer({
 
 	const { traderInfo, ...restInfo } = useMemo(() => {
 		const { commodity = '', hs_code = '', weight = '', piece = '' } = shipmentInfo || {};
-		const shipperArr = [];
-		const consigneeArr = [];
+		const SHIPPER_ARR = [];
+		const CONSIGNEE_ARR = [];
 
 		poc_details.forEach((detail) => {
 			if (detail?.user_type === 'SHIPPER') {
-				shipperArr.push(detail);
+				SHIPPER_ARR.push(detail);
 			} else if (detail?.user_type === 'CONSIGNEE') {
-				consigneeArr.push(detail);
+				CONSIGNEE_ARR.push(detail);
 			}
 		});
 
-		const shipperDetails =	shipperArr[GLOBAL_CONSTANTS.zeroth_index] || {};
-		const consigneeDetails = consigneeArr[GLOBAL_CONSTANTS.zeroth_index] || {};
+		const shipperDetails =	SHIPPER_ARR[GLOBAL_CONSTANTS.zeroth_index] || {};
+		const consigneeDetails = CONSIGNEE_ARR[GLOBAL_CONSTANTS.zeroth_index] || {};
 		const incoterm = shipmentInfo?.incoterm;
 
 		return {
@@ -102,7 +102,7 @@ function InfoContainer({
 				{(container_length || container_description) && (
 					<div className={styles.image_row}>
 						<Image
-							src="https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/container2.png"
+							src={GLOBAL_CONSTANTS.image_url.container2}
 							width={50}
 							height={40}
 						/>

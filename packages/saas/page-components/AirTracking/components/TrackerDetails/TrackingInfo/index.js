@@ -1,5 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
+import EmptyState from '../../../common/EmptyState';
 import useGetCurrentInfo from '../../../hooks/useGetCurrentInfo';
 import useGetShipmentInfo from '../../../hooks/useGetTrackingInfo';
 
@@ -8,8 +9,6 @@ import Loader from './Loader';
 import Maps from './Map';
 import MilestoneStepper from './MilestoneStepper';
 import styles from './styles.module.css';
-
-import EmptyState from '@/ui/page-components/air-ocean-tracking/common/EmptyState';
 
 function TrackingInfo() {
 	const { loading, data, trackingType } = useGetShipmentInfo();

@@ -1,10 +1,12 @@
 import { Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetListTracker from '../../hooks/useGetListTracker';
+import CustomerSatisfaction from '../CustomerSatisfaction';
 
 import AirCard from './AirCard';
 import Header from './Header';
@@ -12,8 +14,7 @@ import ModalList from './ModalList';
 import OceanCard from './OceanCard';
 import styles from './styles.module.css';
 
-import CustomerSatisfaction from '@/ui/commons/components/CustomerSatisfaction';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+const LOADING_ROWS = 5;
 
 const CARD_COMPONENT = {
 	air   : AirCard,
@@ -40,7 +41,7 @@ function List() {
 
 	const { list = [], filter_data = {}, page, page_limit, total_count } = data || {};
 
-	const newList = loading ? [...Array(5).keys()] : list;
+	const newList = loading ? [...Array(LOADING_ROWS).keys()] : list;
 	const Card = CARD_COMPONENT?.[activeTab];
 
 	return (
