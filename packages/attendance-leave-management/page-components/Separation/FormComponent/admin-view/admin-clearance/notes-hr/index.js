@@ -29,8 +29,9 @@ function NotesHrbp({ control = {}, errors = {}, is_complete = false }) {
 						rules={{ required: 'this is required' }}
 						disabled={is_complete}
 					/>
+					{errors.notes ? <span className={styles.error}>*required</span> : null}
 				</div>
-				{errors.notes ? <span className={styles.error}>*required</span> : null}
+
 			</div>
 
 		</div>
