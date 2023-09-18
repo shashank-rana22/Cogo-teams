@@ -105,6 +105,8 @@ function AdminLayout({
 					pinnedNavs={pinnedNavs}
 					mobileShow={showMobileNavbar}
 					inCall={inCall}
+					userId={user_id}
+					firestore={firestore}
 				/>
 			) : null}
 			<VoiceCall
