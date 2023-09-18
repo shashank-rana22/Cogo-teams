@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 
+import AdditionalServices from '../../../../../../../../common/OtherServices/AdditionalServices';
 import AdditionalConditions from '../../../../../../commons/AdditionalConditions';
 import BookingContent from '../../../../../../commons/BookingContent';
 import PreviewBookingFooter from '../../../../../../commons/PreviewBookingFooter';
@@ -11,13 +12,11 @@ import styles from './styles.module.css';
 function AdditionalContent({
 	agreeTandC = false,
 	setAgreeTandC = () => {},
-	setInfoBanner = () => {},
-	infoBanner = {},
 }) {
 	const {
 		rate = {},
 		detail = {},
-		// primaryService,
+		primaryService,
 		getCheckout,
 		isChannelPartner,
 		kycShowCondition,
@@ -26,8 +25,8 @@ function AdditionalContent({
 		updateLoading,
 		orgData,
 		loading,
-		// setHeaderProps,
-		// possible_subsidiary_services = [],
+		setHeaderProps,
+		possible_subsidiary_services = [],
 	} = useContext(CheckoutContext);
 
 	const [noRatesPresent, setNoRatesPresent] = useState(false);
@@ -69,7 +68,7 @@ function AdditionalContent({
 
 	return (
 		<div className={styles.container}>
-			{/* <AdditionalServices
+			<AdditionalServices
 				rate={rate}
 				detail={detail}
 				setHeaderProps={setHeaderProps}
@@ -77,12 +76,10 @@ function AdditionalContent({
 				getCheckout={getCheckout}
 				loading={loading}
 				possible_subsidiary_services={possible_subsidiary_services}
-				servicesLength={Object.values(services).length}
-				infoBanner={infoBanner}
-				setInfoBanner={setInfoBanner}
+				servicesLength={Object.values(rateServices).length}
 				nextGuide="proceed_button"
 				prevGuide="shipping_preferences"
-			/> */}
+			/>
 
 			<BookingContent
 				detail={detail}
@@ -113,8 +110,6 @@ function AdditionalContent({
 				updateCheckout={updateCheckout}
 				updateLoading={updateLoading}
 				agreeTandC={agreeTandC}
-				infoBanner={infoBanner}
-				setInfoBanner={setInfoBanner}
 				noRatesPresent={noRatesPresent}
 				onClickNextButton={onClickNextButton}
 			/>

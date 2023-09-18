@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import { CheckoutContext } from '../../../../../context';
 
-// import AdditionalServices from './AdditionalServices';
+import AdditionalServices from './AdditionalServices';
 import EditMarginFooter from './EditMarginFooter';
 import styles from './styles.module.css';
 
@@ -12,16 +12,14 @@ function AdditionalContent({
 	convenience_line_item = {},
 	noRatesPresent = false,
 	state = '',
-	infoBanner = {},
-	setInfoBanner = () => {},
 }) {
 	const {
-		// rate,
-		// detail,
-		// primaryService,
-		// getCheckout,
-		// setHeaderProps,
-		// possible_subsidiary_services = [],
+		rate,
+		detail,
+		primaryService,
+		getCheckout,
+		setHeaderProps,
+		possible_subsidiary_services = [],
 		loading,
 		updateCheckout,
 		updateLoading = false,
@@ -29,7 +27,7 @@ function AdditionalContent({
 
 	return (
 		<div className={styles.container}>
-			{/* <AdditionalServices
+			<AdditionalServices
 				rate={rate}
 				detail={detail}
 				setHeaderProps={setHeaderProps}
@@ -38,9 +36,7 @@ function AdditionalContent({
 				loading={loading}
 				possible_subsidiary_services={possible_subsidiary_services}
 				servicesLength={rateDetails.length}
-				setInfoBanner={setInfoBanner}
-				infoBanner={infoBanner}
-			/> */}
+			/>
 
 			<EditMarginFooter
 				updateCheckout={updateCheckout}
@@ -51,8 +47,6 @@ function AdditionalContent({
 				convenienceDetails={convenienceDetails}
 				convenience_line_item={convenience_line_item}
 				state={state}
-				setInfoBanner={setInfoBanner}
-				infoBanner={infoBanner}
 			/>
 		</div>
 	);

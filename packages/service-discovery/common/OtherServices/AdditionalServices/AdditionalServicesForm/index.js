@@ -5,7 +5,7 @@ import { IcMCross } from '@cogoport/icons-react';
 import getElementController from '../../../../configs/getElementController';
 import useSpotSearchService from '../../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
 import getOptions from '../../../../page-components/SearchResults/utils/getOptions';
-import { getFclPayload } from '../configs';
+import { getServiceWisePayload } from '../configs';
 import findKey from '../utils/findKeyInObject';
 
 import styles from './styles.module.css';
@@ -46,7 +46,7 @@ function AdditionalServicesForm({
 	});
 
 	const onSubmit = async (values) => {
-		const payload = getFclPayload({
+		const payload = getServiceWisePayload({ primary_service: detail.primary_service || detail.service_type })({
 			rateCardData,
 			detail,
 			additionalFormInfo : values,

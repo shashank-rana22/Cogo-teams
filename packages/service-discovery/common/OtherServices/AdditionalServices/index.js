@@ -1,6 +1,6 @@
 import { Select, Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { serviceMappings } from '../../../configs/AdditionalServicesConfig';
 import getTradeTypeWiseIncoTerms from '../../../configs/getTradeTypeWiseIncoTerms';
@@ -256,6 +256,7 @@ function AdditionalServices({ // used in search results and checkout
 					incoterm={inco_term}
 					checkout_id={detail?.checkout_id}
 					service_details={service_details}
+					service_type={service_type}
 				/>
 			) : null}
 		</div>

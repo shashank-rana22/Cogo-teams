@@ -11,8 +11,6 @@ function BookingPreview({
 	rate = {},
 	setShowBreakup = () => {},
 	showBreakup = false,
-	setInfoBanner = () => {},
-	infoBanner = {},
 }) {
 	const [rateDetails, setRateDetails] = useState([]);
 	const [noRatesPresent, setNoRatesPresent] = useState([]);
@@ -34,8 +32,6 @@ function BookingPreview({
 			<BookingDetails
 				setShowBreakup={setShowBreakup}
 				showBreakup={showBreakup}
-				infoBanner={infoBanner}
-				setInfoBanner={setInfoBanner}
 			/>
 
 			{showBreakup ? (

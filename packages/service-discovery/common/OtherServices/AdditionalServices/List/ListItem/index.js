@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import useSpotSearchService from '../../../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
 import DeleteServiceModal from '../../../common/DeleteServiceModal';
-import { getFclPayload } from '../../configs';
+import { getServiceWisePayload } from '../../configs';
 import useDeleteAdditionalService from '../../hooks/useDeleteAdditionalService';
 import ICONS_MAPPING from '../../icons-mapping';
 
@@ -65,7 +65,7 @@ function ListItem({
 
 	const handleAddServices = async (service) => {
 		if (!service.controls.length) {
-			const payload = getFclPayload({
+			const payload = getServiceWisePayload({ primary_service: detail.primary_service || detail.service_type })({
 				rateCardData,
 				detail,
 				additionalFormInfo : {},

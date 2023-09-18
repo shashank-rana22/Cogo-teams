@@ -1,10 +1,9 @@
-import { Button, Popover, Toast } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcCWaitForTimeSlots, IcMArrowDoubleRight, IcCFtick } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRef, useEffect, useContext } from 'react';
 
-import InfoBannerContent from '../../../../../../../../common/InfoBannerContent';
 import { CheckoutContext } from '../../../../../../context';
 import useUpdateCheckoutMargin from '../../../../../../hooks/useUpdateCheckoutMargin';
 import handleTimer from '../../../../../../utils/handleTimer';
@@ -49,8 +48,6 @@ function EditMarginFooter({
 	convenienceDetails = {},
 	convenience_line_item = {},
 	state = '',
-	infoBanner = {},
-	setInfoBanner = () => {},
 }) {
 	const { push } = useRouter();
 
@@ -175,8 +172,6 @@ function EditMarginFooter({
 		return () => {};
 	}, [hasExpired, validity_end]);
 
-	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
-
 	return (
 		<div className={styles.container} id="proceed_button">
 			<div className={styles.validity_time}>
@@ -202,36 +197,21 @@ function EditMarginFooter({
 				</span>
 			</div>
 
-			<Popover
-				placement="bottom"
-				caret
-				visible={current === 'proceed_button'}
-				render={(
-					<InfoBannerContent
-						popoverComponentData={buttonProps.proceed_button || {}}
-						totalBanners={totalBanners}
-						setInfoBanner={setInfoBanner}
-						guideKey="edit_margin_guide_completed_for"
-						prevGuide="additional_services"
-					/>
-				)}
-			>
-				<div className={styles.button_container}>
-					{MAPPING.map((item) => {
-						const { key, label, ...restProps } = item;
+			<div className={styles.button_container}>
+				{MAPPING.map((item) => {
+					const { key, label, ...restProps } = item;
 
-						if (hasExpired) {
-							return null;
-						}
+					if (hasExpired) {
+						return null;
+					}
 
-						return (
-							<Button key={key} {...restProps}>
-								{label}
-							</Button>
-						);
-					})}
-				</div>
-			</Popover>
+					return (
+						<Button key={key} {...restProps}>
+							{label}
+						</Button>
+					);
+				})}
+			</div>
 		</div>
 	);
 }

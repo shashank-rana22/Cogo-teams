@@ -1,10 +1,9 @@
-import { Button, Popover, cl } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMUnlock, IcMLock } from '@cogoport/icons-react';
 import { useContext } from 'react';
 
 import ContainerDetails from '../../../../../../../../../common/ContainerDetails';
-import InfoBannerContent from '../../../../../../../../../common/InfoBannerContent';
 import LocationDetails from '../../../../../../../../../common/LocationDetails';
 import PromocodesModal from '../../../../../../../commons/Promocodes/components/PromocodesModal';
 import { CheckoutContext } from '../../../../../../../context';
@@ -16,8 +15,6 @@ import useHandleBookingDetails from './useHandleBookingDetails';
 function BookingDetails({
 	setShowBreakup = () => {},
 	showBreakup = false,
-	setInfoBanner = () => {},
-	infoBanner = {},
 }) {
 	const {
 		rate = {},
@@ -45,8 +42,6 @@ function BookingDetails({
 		appliedPromotion = {},
 		onClickButtonDiv,
 	} = useHandleBookingDetails({ setShowBreakup, showBreakup });
-
-	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 
 	return (
 		<div className={styles.container}>
@@ -104,37 +99,22 @@ function BookingDetails({
 						showCoupons={showCouponCode}
 					/>
 
-					<Popover
-						placement="bottom"
-						caret
-						visible={current === 'multiple_options'}
-						render={(
-							<InfoBannerContent
-								popoverComponentData={buttonProps.multiple_options || {}}
-								totalBanners={totalBanners}
-								setInfoBanner={setInfoBanner}
-								guideKey="preview_booking_guide_completed_for"
-								nextGuide="cargo_details"
-							/>
-						)}
+					<div
+						role="presentation"
+						id="multiple_options"
+						onClick={onClickButtonDiv}
+						className={styles.button_container}
 					>
-						<div
-							role="presentation"
-							id="multiple_options"
-							onClick={onClickButtonDiv}
-							className={styles.button_container}
-						>
-							{BUTTON_MAPPING.map((item) => {
-								const { key, label, ...restProps } = item || {};
+						{BUTTON_MAPPING.map((item) => {
+							const { key, label, ...restProps } = item || {};
 
-								return (
-									<Button key={key} type="button" {...restProps}>
-										{label}
-									</Button>
-								);
-							})}
-						</div>
-					</Popover>
+							return (
+								<Button key={key} type="button" {...restProps}>
+									{label}
+								</Button>
+							);
+						})}
+					</div>
 				</div>
 			</div>
 		</div>

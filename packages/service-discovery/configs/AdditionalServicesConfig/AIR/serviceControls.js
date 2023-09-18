@@ -46,7 +46,7 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 		name        : 'location_id',
 		placeholder : 'Search via pincode',
 		type        : 'async-select',
-		asyncKey    : 'locations',
+		asyncKey    : 'list_locations',
 		grouped     : ['city'],
 		params      : {
 			filters: {
@@ -60,6 +60,19 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 		prefix      : <IcMLocation fontSize={16} />,
 		renderLabel : (option) => <>{CustomSelectOption({ data: option, key: 'locations' })}</>,
 		rules       : { required: 'Pincode is required' },
+	},
+	{
+		label       : 'Warehouse Location',
+		name        : 'location_id',
+		placeholder : 'Search via warehouse',
+		type        : 'async-select',
+		asyncKey    : 'list_locations',
+		params      : {
+			filters: { type: ['warehouse'] },
+		},
+		defaultOptions : true,
+		condition      : { services: ['warehouse'] },
+		rules          : { required: 'Address is required' },
 	},
 	{
 		name           : 'truck_type',
@@ -89,15 +102,15 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 		rules: { required: 'Trucks count is required', min: 0 },
 	},
 	{
-		label          : 'Drop Pincode',
-		name           : 'location_id',
-		placeholder    : 'Search via pincode',
-		type           : 'location-select',
-		caret          : true,
-		span           : 12,
-		style          : { width: 200 },
-		optionsListKey : 'locations',
-		params         : {
+		label       : 'Drop Pincode',
+		name        : 'location_id',
+		placeholder : 'Search via pincode',
+		type        : 'async-select',
+		caret       : true,
+		span        : 12,
+		style       : { width: 200 },
+		asyncKey    : 'list_locations',
+		params      : {
 			filters: {
 				status     : 'active',
 				type       : ['pincode'],
