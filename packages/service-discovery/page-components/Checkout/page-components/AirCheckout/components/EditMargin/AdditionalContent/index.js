@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 
 import { CheckoutContext } from '../../../../../context';
+import AdditionalServices from '../../../commons/AdditionalServices';
 
-import AdditionalServices from './AdditionalServices';
 import EditMarginFooter from './EditMarginFooter';
 import styles from './styles.module.css';
 

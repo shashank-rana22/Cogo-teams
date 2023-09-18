@@ -1,11 +1,11 @@
 import { useContext, useState, useEffect } from 'react';
 
-import AdditionalServices from '../../../../../../../../common/OtherServices/AdditionalServices';
 import AdditionalConditions from '../../../../../../commons/AdditionalConditions';
 import BookingContent from '../../../../../../commons/BookingContent';
 import PreviewBookingFooter from '../../../../../../commons/PreviewBookingFooter';
 import ServiceTerms from '../../../../../../commons/ServiceTerms';
 import { CheckoutContext } from '../../../../../../context';
+import AdditionalServices from '../../../../commons/AdditionalServices';
 
 import styles from './styles.module.css';
 
@@ -77,8 +77,6 @@ function AdditionalContent({
 				loading={loading}
 				possible_subsidiary_services={possible_subsidiary_services}
 				servicesLength={Object.values(rateServices).length}
-				nextGuide="proceed_button"
-				prevGuide="shipping_preferences"
 			/>
 
 			<BookingContent

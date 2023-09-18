@@ -1,14 +1,14 @@
 import { Accordion } from '@cogoport/components';
 import { dynamic } from '@cogoport/next';
 
-import AdditionalServicesComponent from '../../../../../../../../common/OtherServices/AdditionalServices';
-import SubsidiaryServices from '../../../../../../../../common/OtherServices/SubsidiaryServices';
+import AdditionalServicesComponent from '../../../../../../common/OtherServices/AdditionalServices';
+import SubsidiaryServices from '../../../../../../common/OtherServices/SubsidiaryServices';
 
 import styles from './styles.module.css';
 
 const CargoInsurance = dynamic(
 	() => import(
-		'../../../../../../../../common/OtherServices/CargoInsurance'
+		'../../../../../../common/OtherServices/CargoInsurance'
 	),
 	{ ssr: false },
 );
