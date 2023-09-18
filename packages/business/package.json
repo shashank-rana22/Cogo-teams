@@ -1,14 +1,9 @@
 {
   "name": "@cogoport/business",
   "version": "1.0.0",
-  "description": "",
+  "description": "Business",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  
   "dependencies": {
     "@cogoport/components": "^1.0.345",
     "@cogoport/forms": "workspace:^0.1.0",

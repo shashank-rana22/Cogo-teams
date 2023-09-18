@@ -8,6 +8,7 @@ const getCreateBusinessPayload = (values = {}) => {
 		identity_type,
 		status,
 		trade_name,
+		addresses,
 	} = values;
 
 	const formValues = {
@@ -20,8 +21,8 @@ const getCreateBusinessPayload = (values = {}) => {
 		status             : status || undefined,
 		trade_name         : trade_name || undefined,
 	};
-	const { addresses = [] } = values;
-	const addressesNew = addresses.map((item) => ({
+
+	const addressesNew = addresses?.map((item) => ({
 		address  : item.address,
 		district : item.district,
 		city     : item.city,
