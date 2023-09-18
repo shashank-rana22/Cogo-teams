@@ -13,7 +13,7 @@ function HandoverTakeoverClearance({ data = {}, refetch = () => {}, handleBack =
 	let { name } = process_user_details || {};
 	const { is_complete } = hotoClearance || {};
 	const { sub_process_data } = hotoClearance || {};
-	const { name:approver_name, takeover_by } = sub_process_data || {};
+	const { name:approver_name } = sub_process_data || {};
 
 	name = !approver_name ? name : approver_name;
 
@@ -43,11 +43,11 @@ function HandoverTakeoverClearance({ data = {}, refetch = () => {}, handleBack =
 								Handover is successful
 								given by
 								{' '}
-								{applicant_details?.employee_name}
+								{applicant_details?.employee_name || '-'}
 								{' '}
 								to
 								{' '}
-								{takeover_by}
+								{process_user_details?.name || '-'}
 								{' '}
 							</span>
 						</div>

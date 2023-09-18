@@ -1,15 +1,18 @@
-import { Button, Modal,Input } from '@cogoport/components';
+import { Button, Modal, Input } from '@cogoport/components';
 import {
 	CheckboxGroupController,
 } from '@cogoport/forms';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import {
-	SERVICE_CHECKBOX_LIST,
-} from '../../../../../../utils/constants';
-
 import styles from './styles.module.css';
+
+const SERVICE_CHECKBOX_LIST = [
+	{ label: 'Cloud Services', value: 'Cloud_Services' },
+	{ label: 'Atlassian', value: 'Atlassian' },
+	{ label: 'Figma', value: 'Figma' },
+	{ label: 'Github', value: 'Github' },
+];
 
 function ServiceList({ control = {}, errors = {} }) {
 	const [show, setShow] = useState(false);
@@ -60,13 +63,16 @@ function ServiceList({ control = {}, errors = {} }) {
 					name="service_list"
 				/>
 				<Modal size="sm" show={showModal} onClose={() => setShowModal(false)}>
-					<Modal.Header title="Add Service"/>
+					<Modal.Header title="Add Service" />
 					<Modal.Body>
 						<div className={styles.modal_message_container}>
 							<div className={styles.modal_message_text}>
-							<Input size="sm" placeholder="Enter a new service" 
-							value={newService}  
-							onChange={(e) => setNewService(e.target.value)}/>
+								<Input
+									size="sm"
+									placeholder="Enter a new service"
+									value={newService}
+									onChange={(e) => setNewService(e)}
+								/>
 							</div>
 						</div>
 
