@@ -1,7 +1,7 @@
 const controls = [
 	{
 		name        : 'locations',
-		type        : 'fieldArray',
+		type        : 'nestedFieldArray',
 		showButtons : true,
 		buttonText  : 'Add Location',
 		value       : {},
@@ -12,6 +12,7 @@ const controls = [
 				placeholder    : 'Select Location',
 				label          : 'Location',
 				optionsListKey : 'locations',
+				asyncKey       : 'locations',
 				params         : { filters: { type: ['airport'] } },
 				span           : 5,
 				className      : 'primary md',
@@ -27,7 +28,7 @@ const controls = [
 					{
 						label          : 'Expected Date',
 						name           : 'expected_date',
-						type           : 'datepicker',
+						type           : 'date_picker',
 						withTimePicker : true,
 						placeholder    : 'Expected Date',
 						span           : 4,
@@ -37,7 +38,7 @@ const controls = [
 					{
 						label          : 'Actual Date',
 						name           : 'actual_date',
-						type           : 'datepicker',
+						type           : 'date_picker',
 						withTimePicker : true,
 						placeholder    : 'Actual Date',
 						span           : 4,

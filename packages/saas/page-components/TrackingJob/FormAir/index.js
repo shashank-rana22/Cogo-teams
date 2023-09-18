@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
 import Layout from '../../../common/Layout';
+import NestedLayout from '../../../common/NestedLayout';
 import controls from '../configurations/controls-air';
 import useGetAirData from '../hooks/useGetAirData';
 
@@ -35,7 +36,7 @@ function Form({ refetch, showUpdate, setShowUpdate }) {
 				<Button onClick={handleSubmit(handleData)}>Submit</Button>
 			</div> */}
 
-			<Layout control={control} controls={controls} />
+			<NestedLayout control={control} controls={controls} />
 		</div>
 	);
 }
