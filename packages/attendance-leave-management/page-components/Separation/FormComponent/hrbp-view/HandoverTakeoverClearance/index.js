@@ -8,12 +8,12 @@ import Heading from '../HRMeeting/Heading';
 import styles from './styles.module.css';
 
 function HandoverTakeoverClearance({ data = {}, refetch = () => {}, handleBack = () => {}, handleNext = () => {} }) {
-	const { hoto_clearance, application_status } = data || {};
+	const { hoto_clearance, application_status, applicant_details } = data || {};
 	const { process_user_details, hoto_clearance:hotoClearance } = hoto_clearance || {};
 	let { name } = process_user_details || {};
 	const { is_complete } = hotoClearance || {};
 	const { sub_process_data } = hotoClearance || {};
-	const { name:approver_name } = sub_process_data || {};
+	const { name:approver_name, takeover_by } = sub_process_data || {};
 
 	name = !approver_name ? name : approver_name;
 
@@ -41,7 +41,13 @@ function HandoverTakeoverClearance({ data = {}, refetch = () => {}, handleBack =
 						<div className={styles.content}>
 							<span className={styles.text}>
 								Handover is successful
-								given by Employee Name to Employee
+								given by
+								{' '}
+								{applicant_details?.employee_name}
+								{' '}
+								to
+								{' '}
+								{takeover_by}
 								{' '}
 							</span>
 						</div>
