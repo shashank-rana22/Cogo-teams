@@ -14,7 +14,7 @@ function TermsConditions({ control = {}, errors = {}, termsChecked = false }) {
 						className={styles.Checkbox}
 						name="termsAcceptance"
 						control={control}
-						checkeed={termsChecked}
+						checked={termsChecked}
 					/>
 					<div className={styles.content}>
 						<p>
