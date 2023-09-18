@@ -27,7 +27,8 @@ const getFormattedPayload = ({ values = {}, shipmentData = {}, user_id = '' }) =
 
 const useIncidentReOpenJob = ({
 	shipmentData = {},
-	setIsSuccess = () => {},
+	setIsSuccess = () => { },
+	incidentStatusRefetch = () => {},
 }) => {
 	const { user_id = '' } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -48,6 +49,8 @@ const useIncidentReOpenJob = ({
 			});
 
 			setIsSuccess(true);
+
+			incidentStatusRefetch();
 		} catch (error) {
 			toastApiError(error);
 		}
