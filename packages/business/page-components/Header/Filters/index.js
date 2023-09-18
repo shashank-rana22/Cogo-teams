@@ -2,8 +2,8 @@ import { Button, Popover } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import Filters from '../../../common/Filter';
 import getFilterControls from '../../../config/filter-controls';
+import Filters from '../Filter';
 
 import styles from './styles.module.css';
 

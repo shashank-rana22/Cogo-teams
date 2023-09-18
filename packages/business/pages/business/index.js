@@ -1,1 +1,2 @@
-export { default } from '../../page-components/Business';
+// eslint-disable-next-line import/no-unresolved
+export { default } from '@cogoport/business/page-components/Business';

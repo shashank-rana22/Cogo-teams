@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import Layout from '../Layout';
+import Layout from '../../../common/Layout';
 
 import styles from './styles.module.css';
 

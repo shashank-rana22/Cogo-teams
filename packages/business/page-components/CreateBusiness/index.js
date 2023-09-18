@@ -14,7 +14,12 @@ function AddEdit({
 	const onSubmit = () => {
 		formRef.current.formSubmit();
 	};
-	const { apiTrigger, loading } = useCreateBusiness({ refetch, setShowModal });
+	const { apiTrigger, loading } = useCreateBusiness({
+		refetch: () => {
+			refetch();
+			setShowModal(false);
+		},
+	});
 	const handleSubmitForm = (values) => {
 		apiTrigger(values);
 	};
@@ -34,7 +39,6 @@ function AddEdit({
 					<Modal.Header title="Create Business" />
 					<Modal.Body>
 						<Form
-							setShowModal={setShowModal}
 							ref={formRef}
 							refetch={refetch}
 							handleSubmitForm={handleSubmitForm}

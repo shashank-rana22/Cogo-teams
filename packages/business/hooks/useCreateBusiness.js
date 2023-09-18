@@ -7,7 +7,6 @@ import toastApiError from '../utlis/toastApiError';
 
 const useCreateBusiness = ({
 	refetch = () => {},
-	setShowModal = () => {},
 }) => {
 	const {
 		general: { scope },
@@ -15,7 +14,7 @@ const useCreateBusiness = ({
 
 	const [{ loading }, trigger] = useRequest({ method: 'post', scope, url: '/create_business_entity' });
 
-	const onSubmit = async (values = {}) => {
+	const apiTrigger = async (values = {}) => {
 		try {
 			const payload = getCreateBusinessPayload(values);
 			await trigger({
@@ -23,8 +22,6 @@ const useCreateBusiness = ({
 			});
 
 			Toast.success('Business entity Created Successfully');
-
-			setShowModal(false);
 			refetch();
 		} catch (error) {
 			toastApiError(error);
@@ -32,9 +29,8 @@ const useCreateBusiness = ({
 	};
 
 	return {
-		onSubmit,
 		loading,
-		apiTrigger: onSubmit,
+		apiTrigger,
 	};
 };
 

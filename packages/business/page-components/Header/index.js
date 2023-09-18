@@ -13,7 +13,7 @@ function Header({ filters = () => {}, setFilters = () => {}, refetch = () => {},
 				<h1 className={styles.title}>Business</h1>
 				<div className={styles.btn_align}>
 					<Filters filters={filters} setFilters={setFilters} />
-					<ScopeSelect showChooseAgent={false} />
+					<ScopeSelect size="md" showChooseAgent={false} />
 					<CreateBusiness refetch={refetch} apiTrigger={apiTrigger} />
 				</div>
 

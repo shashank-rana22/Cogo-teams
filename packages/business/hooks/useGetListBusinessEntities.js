@@ -124,7 +124,6 @@ const useGetListBusinessEntities = () => {
 		setFiters,
 		loading,
 		data,
-		list       : data?.list || [],
 		refetch    : getListBusinessEntities,
 		totalCount : data?.total_count,
 		columns,

@@ -7,9 +7,7 @@ import Header from '../Header';
 import styles from './styles.module.css';
 
 function Business() {
-	const {
-		list, loading, columns, data, filters, setFiters, refetch, apiTrigger,
-	} = useGetListBusinessEntities();
+	const { loading, columns, data, filters, setFiters, refetch, apiTrigger } = useGetListBusinessEntities();
 	return (
 		<div>
 			<Header filters={filters} setFilters={setFiters} refetch={refetch} apiTrigger={apiTrigger} />
@@ -17,7 +15,7 @@ function Business() {
 			<ListPagination filters={filters} setFilters={setFiters} data={data} />
 			<Table
 				className={styles.table}
-				data={list || []}
+				data={data?.list || []}
 				loading={loading}
 				columns={columns}
 			/>
