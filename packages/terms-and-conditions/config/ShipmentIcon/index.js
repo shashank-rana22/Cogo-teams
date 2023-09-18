@@ -13,6 +13,8 @@ import {
 	IcCFairCustoms,
 	IcMFtrailorFull,
 	IcMFairport,
+	IcCLclLocals,
+	IcCFclLocals,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -29,6 +31,8 @@ const iconMapping = {
 	lcl_freight           : { icon: IcMFlcl, fill: '#ee3425', text: 'LCL' },
 	lcl_customs           : { icon: IcCFlclCustoms, fill: '#ee3425', text: 'LCL Customs' },
 	air_freight           : { icon: IcMAir, fill: '#ee3425', text: 'AIR' },
+	fcl_freight_local     : { icon: IcCFclLocals, fill: '#ee3425', text: 'FCL local' },
+	lcl_freight_local     : { icon: IcCLclLocals, fill: '#ee3425', text: 'LCL local' },
 	air_freight_local     : { icon: IcMFairport, fill: '#ee3425', text: 'AIR local' },
 	air_customs           : { icon: IcCFairCustoms, fill: '#ee3425', text: 'AIR customs' },
 	ftl_freight           : { icon: IcMFftl, fill: '#ee3425', text: 'FTL' },
@@ -49,6 +53,7 @@ function ShipmentIcon({ shipment_type = '' }) {
 		<div className={styles.container}>
 			<div className={cl`${styles.icon_container} customize_icon`}>
 				<Icon height={HEIGHT} width={WIDTH} fill={currentIcon?.fill || ''} />
+				<p>{iconMapping[shipment_type].text}</p>
 			</div>
 		</div>
 	);

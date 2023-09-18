@@ -1,5 +1,7 @@
 .container {
 	display: flex;
+	flex-direction: column;
+	align-items: center;
 	margin-bottom: 16px;
 	background-color: #fff;
 	border: 1px solid transparent;
@@ -14,8 +16,10 @@
 
 .freight_item_header {
 	position: relative;
+	display: flex;
 	width: 90%;
-	padding: 16px 16px 16px 24px;
+	padding: 16px;
+	padding-left: 24px;
 	cursor: pointer;
 }
 
@@ -76,7 +80,8 @@
 }
 
 .freight_item_main {
-	padding: 16px 16px 16px 24px;
+	padding: 16px;
+	padding-left: 24px;
 	margin-bottom: 15px;
 	overflow-y: visible;
 	background-color: #fff;

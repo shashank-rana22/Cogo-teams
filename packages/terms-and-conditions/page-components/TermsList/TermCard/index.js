@@ -1,13 +1,19 @@
-import { Popover, Modal, Tooltip } from '@cogoport/components';
+import { Popover, Modal, Tooltip, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMOverflowDot as ViewMoreActionIcon } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMArrowRotateUp, IcMOverflowDot as ViewMoreActionIcon } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
-import FREIGHT_DETAILS_MAPPING from '../../../config/freight-details-mapping';
+import useUpdateTnc from '../../../hooks/useUpdateTnc';
+import FREIGHT_DETAILS_MAPPING from '../freight-details-mapping';
 import ShowMoreTNC from '../ShowMoreTnC';
 
 import PopOverContent from './PopContent';
 import styles from './style.module.css';
+
+const LABEL_MAPPING = {
+	fcl_freight : 'Shipping Line',
+	air_freight : 'Airline',
+};
 
 function TermCard({
 	listItem = {},
@@ -26,11 +32,8 @@ function TermCard({
 	const [visibleToolTip, setShowVisibleToolTip] = useState(false);
 	const editRef = useRef(null);
 
-	const LABEL_MAPPING = {
-		fcl_freight : 'Shipping Line',
-		air_freight : 'Airline',
-	};
 	const { id = '', service = '', status = '' } = listItem;
+
 	const [visible, setVisible] = useState(false);
 	const callBack = () => setShowEdit(null);
 	function GetToolTipContent({ list = [] }) {
@@ -46,15 +49,22 @@ function TermCard({
 			</div>
 		);
 	}
-
+	const { apiTrigger } = useUpdateTnc({
+		refetch: () => {
+			setShowEdit(false);
+			refetch();
+			setEditTncModalId(null);
+			setTncLevel('basicInfo');
+		},
+	});
+	const handleSubmitForm = ({ values, editFormValue }) => {
+		apiTrigger({ values, editFormValue });
+	};
 	return (
 		<div>
-			<div
-				className={styles.container}
-			>
+			<div className={styles.container}>
 				<div
 					className={styles.freight_item_header}
-					onClick={onClickShowMoreTnC}
 					role="presentation"
 				>
 
@@ -101,44 +111,58 @@ function TermCard({
 						})}
 
 					</div>
-
+					<div className={styles.freight_item_header_right}>
+						<ViewMoreActionIcon
+							style={{ cursor: 'pointer' }}
+							onClick={() => setVisible(!visible)}
+						/>
+						<Popover
+							placement="left"
+							onClickOutside={() => setVisible(false)}
+							caret={false}
+							render={(
+								<PopOverContent
+									setShowEdit={setShowEdit}
+									setEditTncModalId={setEditTncModalId}
+									item={listItem}
+									setVisible={setVisible}
+									onClickUpdateTerms={onClickUpdateTerms}
+									status={status}
+									propsForUpdation={{
+										id,
+										status,
+										refetch,
+									}}
+								/>
+							)}
+							visible={visible}
+						/>
+					</div>
 				</div>
-				<div className={styles.freight_item_header_right}>
-					<ViewMoreActionIcon
-						style={{ cursor: 'pointer' }}
-						onClick={() => setVisible(!visible)}
-					/>
-					<Popover
-						placement="left"
-						onClickOutside={() => setVisible(false)}
-						caret={false}
-						render={(
-							<PopOverContent
-								setShowEdit={setShowEdit}
-								setEditTncModalId={setEditTncModalId}
-								item={listItem}
-								setVisible={setVisible}
-								onClickUpdateTerms={onClickUpdateTerms}
-								status={status}
-								propsForUpdation={{
-									id,
-									status,
-									refetch,
-								}}
-							/>
-						)}
-						visible={visible}
-					/>
-					<div className={styles.see_more} role="presentation" onClick={onClickShowMoreTnC}>see more</div>
+				<div className={styles.actions_container}>
+					{showMoreTnC ? (
+						<Button onClick={onClickShowMoreTnC} size="xs" themeType="link">
+							{' '}
+							View Less
+							{' '}
+							<IcMArrowRotateUp />
+						</Button>
+					) : (
+						<Button onClick={onClickShowMoreTnC} size="xs" themeType="link">
+							{' '}
+							View More
+							{' '}
+							<IcMArrowRotateDown />
+						</Button>
+					)}
 				</div>
-
 			</div>
 
-			{showMoreTnC && (
+			{showMoreTnC ? (
 				<div className={styles.freight_item_main}>
 					<ShowMoreTNC description={description} />
 				</div>
-			)}
+			) : null}
 
 			{showEdit ? (
 				<Modal
@@ -154,11 +178,11 @@ function TermCard({
 							ref={editRef}
 							tncLevel={tncLevel}
 							setTncLevel={setTncLevel}
+							handleSubmitForm={handleSubmitForm}
 							organizationId={organizationId}
 							setEditTncModalId={setEditTncModalId}
-							setShowEdit={setShowEdit}
 							callBack={callBack}
-							refetch={refetch}
+							refetch={() => { refetch(); setShowEdit(false); }}
 						/>
 					</Modal.Body>
 				</Modal>

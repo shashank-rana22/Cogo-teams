@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -7,7 +8,7 @@ import styles from './style.module.css';
 import TermCard from './TermCard/index';
 
 function TermList({
-	list = [],
+	data = {},
 	loading = false,
 	refetch = () => {},
 	setEditTncModalId = null,
@@ -15,15 +16,22 @@ function TermList({
 	tncLevel = 'basicInfo',
 	editTncModalId = () => {},
 	EditForm = () => {},
-	handleSubmitForm = () => {},
 }) {
 	const [showHiddenContentId, setShowHiddenContentId] = useState(null);
-	if (isEmpty(list)) {
+	if (isEmpty(data?.list)) {
 		return <EmptyState />;
 	}
+	if (loading) {
+		return (
+			<div className={styles.loader}>
+				<Loader />
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
-			{!loading && list.map((listItem) => (
+			{!loading ? data?.list?.map((listItem) => (
 				<div key={listItem.id}>
 					<TermCard
 						EditForm={EditForm}
@@ -32,9 +40,8 @@ function TermList({
 						editTncModalId={editTncModalId}
 						listItem={listItem}
 						refetch={refetch}
-						handleSubmitForm={handleSubmitForm}
-						description={listItem.description}
-						showMoreTnC={showHiddenContentId === listItem.id}
+						description={listItem?.description}
+						showMoreTnC={showHiddenContentId === listItem?.id}
 						onClickShowMoreTnC={
 							() => setShowHiddenContentId((pv) => (pv === listItem.id ? null : listItem.id))
 }
@@ -43,7 +50,7 @@ function TermList({
 						}}
 					/>
 				</div>
-			))}
+			)) : null}
 		</div>
 	);
 }

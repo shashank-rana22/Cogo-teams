@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 
-import useUpdateTermsAndConditions from '../../../../hooks/useUpdateTermsAndConditionsStatus';
+import useUpdateTermsAndConditions from '../../../../hooks/useUpdateTermsAndConditions';
 
 import styles from './styles.module.css';
 
@@ -27,7 +27,6 @@ function PopOverContent({
 			}}
 			>
 				Update Terms
-
 			</Button>
 			<Button
 				loading={loading}

@@ -3,21 +3,28 @@ import { useForm } from '@cogoport/forms';
 import { useImperativeHandle, forwardRef, useMemo } from 'react';
 
 import Layout from '../../../../common/Layout';
-import getOptions from '../../../../config/service-to-trade-type-mappings';
-import getShowElements from '../../../../hooks/getShowElements';
-import useCreateUpdateTnc from '../../../../hooks/useCreateUpdateTnc';
+import SERVICE_TRADE_TYPE_OPTION_MAPPING from '../../../../config/service-to-trade-type-mappings';
+import getShowElements from '../../../../helpers/getShowElements';
 import useValidateTermsAndCondition from '../../../../hooks/useValidateTermsAndCondition';
 
 import getControls from './controls';
 import CONTROLS_FORM_TYPE_MAPPING from './formTypesControls.json';
 import styles from './styles.module.css';
 
+const LABEL_MAPPING = {
+	import  : 'Import To',
+	export  : 'Export From',
+	default : 'Country',
+};
 function Form({
-	item = {}, tncLevel = 'basicInfo', setTncLevel = () => {}, organizationId = null, refetch = () => {},
-	setEditTncModalId = () => {}, setShowModal = () => {}, setAddShowModal = () => {}, setShowEdit = () => {},
+	createLoading = false,
+	item = {}, tncLevel = 'basicInfo', setTncLevel = () => {}, organizationId = null,
+	setAddShowModal = () => {}, handleSubmitForm = () => {},
 }, ref) {
 	const controls = getControls({ item });
+
 	const DEFAULT_VALUES = {};
+
 	controls.forEach((ctrl) => {
 		if (ctrl?.value) {
 			DEFAULT_VALUES[ctrl.name] = ctrl.value;
@@ -33,51 +40,26 @@ function Form({
 
 		return controls.filter((ctrl) => controlNames.includes(ctrl.name));
 	}, [tncLevel, controls]);
-	const formValue = watch();
-	const watchTradeType = watch('trade_type');
-	const watchService = watch('service');
 
-	const {
-		service,
-		trade_type,
-	} = formValue;
-	const newControl = filteredControls.map((field) => {
-		const { name } = field;
-		let newField = { ...field };
+	const { service, trade_type } = watch();
 
-		if (name === 'country_id') {
-			newField = {
-				...newField,
-				label:
-				(trade_type === 'import' && 'Import To')
-				|| (trade_type === 'export' && 'Export From')
-				|| 'Country',
-			};
+	filteredControls.forEach((ctrl, index) => {
+		if (ctrl?.name === 'country_id') {
+			filteredControls[index].label = LABEL_MAPPING?.[trade_type] || LABEL_MAPPING.default;
 		}
-		if (name === 'trade_type') {
-			newField = {
-				...newField,
-				options: getOptions[service],
-			};
+
+		if (ctrl?.name === 'trade_type') {
+			filteredControls[index].options = SERVICE_TRADE_TYPE_OPTION_MAPPING[service] || [];
 		}
-		return { ...newField };
 	});
-	const { onSubmit, loading } = useCreateUpdateTnc({
-		editTncModalId : item.id,
-		setEditTncModalId,
-		setShowModal,
-		setAddShowModal,
-		refetch,
-		setTncLevel,
-		editFormValue  : item,
-		action         : item.id ? 'update' : 'create',
-		organizationId : null,
-	});
+
+	const onSubmit = ({ values, editFormValue }) => { handleSubmitForm({ values, editFormValue }); };
 
 	const { onValdidateSubmit, validateLoading } = useValidateTermsAndCondition({
-		setTncLevel,
 		organizationId,
-		setEditTncModalId,
+		refetch: () => {
+			setTncLevel('termsAndCondition');
+		},
 	});
 	const onError = (err) => (err);
 
@@ -87,19 +69,19 @@ function Form({
 		},
 	}));
 
-	const showElements = getShowElements({ service: watchService, trade_type: watchTradeType, controls });
+	const showElements = getShowElements({ service, trade_type, controls });
 
 	return (
 		<div>
 			{' '}
-			<Layout controls={newControl} control={control} errors={errors} showElements={showElements} />
+			<Layout controls={filteredControls} control={control} errors={errors} showElements={showElements} />
 			<div className={styles.modal_footer}>
 				{tncLevel === 'basicInfo' ? (
 					<>
 						<Button
 							className="primary md"
 							disabled={validateLoading}
-							onClick={() => { setAddShowModal(false); setShowEdit(false); }}
+							onClick={() => { setAddShowModal(false); }}
 							style={{ marginLeft: '8px', textTransform: 'capitalize' }}
 						>
 							Cancel
@@ -107,8 +89,8 @@ function Form({
 						<Button
 							className="primary md"
 							disabled={validateLoading}
-							onClick={() => (item.id
-								? setTncLevel('termsAndCondition') : onValdidateSubmit(formValue))}
+							onClick={() => (item?.id
+								? setTncLevel('termsAndCondition') : onValdidateSubmit(watch()))}
 							style={{ marginLeft: '8px', textTransform: 'capitalize' }}
 						>
 							Proceed
@@ -125,7 +107,15 @@ function Form({
 								Back
 							</Button>
 
-							<Button disabled={loading} onClick={() => onSubmit(formValue)}>Submit</Button>
+							<Button
+								disabled={createLoading}
+								onClick={
+								() => handleSubmit(onSubmit({ values: watch(), editFormValue: item }))
+								}
+							>
+								Submit
+
+							</Button>
 						</>
 					)}
 			</div>

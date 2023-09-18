@@ -6,7 +6,7 @@ const tradeTypeAbsentForServices = [
 
 const getShowElements = ({ service = '', trade_type = '', controls = [] }) => {
 	const showElements = controls.reduce((pv, cv) => {
-		const { name = '' } = cv;
+		const { name = '' } = cv || {};
 
 		let showElement = true;
 		if (

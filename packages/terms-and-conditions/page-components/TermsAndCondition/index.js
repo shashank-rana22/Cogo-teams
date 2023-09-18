@@ -1,19 +1,15 @@
-import ListPagination from '../common/ListPagination';
-import useGetTermsAndCondition from '../hooks/useGetTermsAndCondition';
-
-import Form from './CreateUpdateTnC/AddEdit/Form';
-import Header from './Header/index';
-import TermList from './TermsList';
+import ListPagination from '../../common/ListPagination';
+import useGetTermsAndCondition from '../../hooks/useGetTermsAndCondition';
+import Form from '../CreateUpdateTnC/AddEdit/Form';
+import Header from '../Header/index';
+import TermList from '../TermsList';
 
 function TermsAndConditions({ organizationDetails = {} }) {
 	const { id: organizationId } = organizationDetails || {};
 	const {
-		list,
 		data,
-		totalCount,
 		loading,
 		refetchListApi = () => {},
-		setPagination = () => {},
 		editTncModalId,
 		setEditTncModalId,
 		tncLevel,
@@ -31,7 +27,6 @@ function TermsAndConditions({ organizationDetails = {} }) {
 				setFilters={setFilters}
 				tncLevel={tncLevel}
 				setTncLevel={setTncLevel}
-				setPagination={setPagination}
 				editTncModalId={editTncModalId}
 				setEditTncModalId={setEditTncModalId}
 				refetch={refetchListApi}
@@ -40,7 +35,7 @@ function TermsAndConditions({ organizationDetails = {} }) {
 
 			<TermList
 				EditForm={Form}
-				list={list}
+				data={data}
 				loading={loading}
 				setTncLevel={setTncLevel}
 				tncLevel={tncLevel}

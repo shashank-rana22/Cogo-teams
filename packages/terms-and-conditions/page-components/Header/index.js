@@ -6,9 +6,6 @@ import Filter from './Filters';
 import styles from './styles.module.css';
 
 function Header({
-	currentStatus = 'active',
-	setCurrentStatus = () => {},
-	setPagination = () => {},
 	filters = {},
 	setFilters = () => {},
 	tncLevel = 'basicInfo',
@@ -18,9 +15,7 @@ function Header({
 	refetch = () => {},
 }) {
 	const onChangeToggleStatus = () => {
-		setCurrentStatus((pv) => (pv === 'active' ? 'inactive' : 'active'));
-		const FIRST_PAGE = 1;
-		setPagination(FIRST_PAGE);
+		setFilters({ status: filters?.status === 'active' ? 'inactive' : 'active', page: 1 });
 	};
 	return (
 		<div className={styles.container}>
@@ -36,7 +31,7 @@ function Header({
 				<Toggle
 					onLabel="Inactive"
 					offLabel="Active"
-					value={currentStatus}
+					value={filters?.status}
 					onChange={onChangeToggleStatus}
 				/>
 				<Filter filters={filters} setFilters={setFilters} />

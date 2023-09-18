@@ -1,6 +1,5 @@
 const getCreateUpdateTncPayload = ({ values = {}, editFormValue = {}, organizationId = null }) => {
 	const isUpdatable = editFormValue?.id;
-
 	const {
 		service,
 		shipping_line_id,

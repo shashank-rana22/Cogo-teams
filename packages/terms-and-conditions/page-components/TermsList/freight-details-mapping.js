@@ -2,8 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
-import SERVICE_TYPES_MAPPING from './service-types-mapping';
-import ShipmentIcon from './ShipmentIcon';
+import ShipmentIcon from '../../config/ShipmentIcon';
 
 const FREIGHT_DETAILS_MAPPING = {
 	service: {
@@ -17,8 +16,6 @@ const FREIGHT_DETAILS_MAPPING = {
 					<div style={{ margin: '4px 4px 0px 0px' }}>
 						{ <ShipmentIcon shipment_type={service} /> || <IcMDocument />}
 					</div>
-
-					{SERVICE_TYPES_MAPPING?.[service]?.label || '-'}
 				</div>
 			);
 		},

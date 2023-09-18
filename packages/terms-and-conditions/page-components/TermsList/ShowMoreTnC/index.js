@@ -3,9 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function ShowMoreTNC(props) {
-	const { description } = props;
-
+function ShowMoreTNC({ description = [] }) {
 	if (isEmpty(description)) {
 		return (
 			<div className={styles.not_found}>
@@ -15,13 +13,13 @@ function ShowMoreTNC(props) {
 	}
 	return (
 		<div>
-			{description.map((item, index) => (
+			{description?.map((item, index) => (
 				<div key={item?.id} className={styles.applied_terms}>
 					<div className={styles.index}>
 						{index + GLOBAL_CONSTANTS.one}
 						.
 					</div>
-					{item}
+					{item || ''}
 				</div>
 			))}
 		</div>
