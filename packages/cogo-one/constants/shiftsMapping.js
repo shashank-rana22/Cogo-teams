@@ -1,14 +1,3 @@
-export const teamsOption = [
-	{ label: 'Supply', value: 'supply' },
-	{ label: 'Support', value: 'support' },
-	{ label: 'Sales', value: 'sales' },
-	{ label: 'Shipment Specialist', value: 'shipment_specialist' },
-	{ label: 'Cp Support', value: 'cp_support' },
-	{ label: 'Marketing', value: 'marketing' },
-	{ label: 'Tech Support', value: 'tech_support' },
-	{ label: 'Credit Controller', value: 'credit_controller' },
-];
-
 export const SHIFT_CONFIGURATION_HEADING = [
 	{
 		label : 'Shift Name',

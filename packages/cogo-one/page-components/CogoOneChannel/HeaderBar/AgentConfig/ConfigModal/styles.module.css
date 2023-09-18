@@ -4,13 +4,9 @@
 }
 
 .modal_body {
-	height: 464px;
+	height: 344px;
 	padding: 8px 0;
-}
-
-.shift_container {
-	max-height: 360px;
-	border-top: 1px solid #e0e0e0;
+	border-top: 1px solid #dedede;
 }
 
 .footer_styles {
@@ -27,12 +23,6 @@
 	overflow: auto;
 }
 
-.wrap_container {
-	justify-content: flex-start;
-	padding: 12px 0 20px 20px;
-	overflow-y: hidden;
-}
-
 .active_card {
 	background: #c26d1a;
 
@@ -47,7 +37,7 @@
 	align-items: center;
 	justify-content: center;
 	width: 30%;
-	height: 48%;
+	height: 46%;
 	margin: 6px;
 	cursor: pointer;
 	background: #fef3e9;

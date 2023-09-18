@@ -51,7 +51,6 @@ const CP_SUPPORT = {
 		show_shipment_reminder                      : true,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : false,
-		shift_configuration_select                  : false,
 	},
 };
 

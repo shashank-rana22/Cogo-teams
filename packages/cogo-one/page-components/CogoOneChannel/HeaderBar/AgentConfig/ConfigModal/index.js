@@ -16,8 +16,6 @@ import SwitchView from './SwitchView';
 
 const SHOW_PAGINATION_FOR = ['list_agents', 'agents_status'];
 
-const THREE_CONTAINER = 3;
-
 const TAB_CONFIG_MAPPING = {
 	list_agents: {
 		Component  : AgentWiseLockScreen,
@@ -28,10 +26,6 @@ const TAB_CONFIG_MAPPING = {
 		Component  : FireBaseConfiguration,
 		headerText : 'Fire Base Configuration',
 	},
-	shift_configuration: {
-		Component  : ShiftConfiguration,
-		headerText : 'Shift Configuration',
-	},
 	agents_status: {
 		Component  : LeaveStatusView,
 		hook       : useListAgentStatus,
@@ -41,7 +35,13 @@ const TAB_CONFIG_MAPPING = {
 		Component  : SwitchView,
 		headerText : 'Switch View',
 	},
+	shift_configuration: {
+		Component  : ShiftConfiguration,
+		headerText : 'Shift Configuration',
+	},
 };
+
+const ALLOW_BACK_BUTTON_FOR = ['fire_base_configuration', 'shift_configuration'];
 
 function ConfigModal({
 	showAgentDetails = false,
@@ -109,10 +109,6 @@ function ConfigModal({
 			setActiveCard,
 			handleClose,
 		},
-		shift_configuration: {
-			handleClose,
-			viewType,
-		},
 		agents_status: {
 			firestore,
 			isLoading: loading,
@@ -130,7 +126,12 @@ function ConfigModal({
 			handleClose,
 			setViewType,
 		},
+		shift_configuration: {
+			handleClose,
+			viewType,
+		},
 	};
+
 	return (
 		<Modal
 			size="md"
@@ -141,7 +142,7 @@ function ConfigModal({
 		>
 			<Modal.Header
 				className={styles.modal_header}
-				title={(activeCard === 'fire_base_configuration' || activeCard === 'shift_configuration') ? (
+				title={ALLOW_BACK_BUTTON_FOR.includes(activeCard) ? (
 					<>
 						<IcMArrowBack className={styles.back_icon} onClick={handleBack} />
 						<span className={styles.header_label}>{headerText || 'Configuration'}</span>
@@ -151,10 +152,7 @@ function ConfigModal({
 				)}
 			/>
 
-			<Modal.Body className={cl`${styles.modal_body}
-							 ${activeCard === 'shift_configuration'
-				? styles.shift_container : ''}`}
-			>
+			<Modal.Body className={styles.modal_body}>
 				{(activeCard && Component)
 					? (
 						<Component
@@ -162,11 +160,7 @@ function ConfigModal({
 							{...COMPONENT_PROPS[activeCard]}
 						/>
 					) : (
-						<div
-							className={cl`${styles.screen_container}
-							 ${configurationsToBeShown.length > THREE_CONTAINER
-								? styles.wrap_container : ''}`}
-						>
+						<div className={styles.screen_container}>
 							{AGENT_CONFIG_MAPPING.map((item) => {
 								const { label = '', name = '', icon = {} } = item || {};
 

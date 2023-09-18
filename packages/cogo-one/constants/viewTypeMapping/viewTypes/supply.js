@@ -58,7 +58,6 @@ const SUPPLY = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : false,
-		shift_configuration_select                  : false,
 	},
 };
 

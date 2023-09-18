@@ -1,3 +1,5 @@
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
+
 const getCommonAgentType = ({ viewType = '' }) => {
 	if (viewType.includes('supply')) {
 		return 'supply';
@@ -24,6 +26,26 @@ const getCommonAgentType = ({ viewType = '' }) => {
 	}
 
 	return '';
+};
+
+const FILTER_AGENT_TYPES = ['cogoone_admin', 'default'];
+export const getAgentTypesList = () => {
+	let agentTypes = [];
+
+	Object.keys(VIEW_TYPE_GLOBAL_MAPPING).forEach(
+		(itm) => {
+			const agentType = getCommonAgentType({ viewType: itm }) || itm;
+
+			if (agentTypes !== 'cogoone_admin' && !agentTypes.includes(agentType)) {
+				agentTypes = [...agentTypes, agentType];
+			}
+		},
+	);
+
+	return {
+		agentTypes,
+		filteredAgentTypes: agentTypes.filter((itm) => !FILTER_AGENT_TYPES.includes(itm)),
+	};
 };
 
 export default getCommonAgentType;

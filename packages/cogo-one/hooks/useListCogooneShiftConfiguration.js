@@ -3,26 +3,29 @@ import { useCallback, useEffect } from 'react';
 
 const getPayload = ({ selectedTeam }) => ({
 	filters: {
-		team_name : selectedTeam,
+		team_name : selectedTeam || undefined,
 		status    : 'active',
 	},
 });
 
-function useListCogooneShiftConfiguration({ selectedTeam }) {
+function useListCogooneShiftConfiguration({ selectedTeam = '' }) {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_cogoone_shifts',
 		method : 'get',
 	}, { manual: true });
 
-	const getListShift = useCallback(async () => {
-		try {
-			await trigger({
-				params: getPayload({ selectedTeam }),
-			});
-		} catch (error) {
-			console.error(error);
-		}
-	}, [trigger, selectedTeam]);
+	const getListShift = useCallback(
+		async () => {
+			try {
+				await trigger({
+					params: getPayload({ selectedTeam }),
+				});
+			} catch (error) {
+				console.error(error);
+			}
+		},
+		[trigger, selectedTeam],
+	);
 
 	useEffect(() => {
 		getListShift();
@@ -34,4 +37,5 @@ function useListCogooneShiftConfiguration({ selectedTeam }) {
 		shiftDataLoading : loading,
 	};
 }
+
 export default useListCogooneShiftConfiguration;

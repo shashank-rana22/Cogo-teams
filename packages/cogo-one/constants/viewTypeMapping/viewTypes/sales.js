@@ -56,7 +56,6 @@ const SALES = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : true,
 		show_shipments_stakeholders_contact_details : true,
-		shift_configuration_select                  : false,
 	},
 };
 

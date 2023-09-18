@@ -32,10 +32,6 @@ export const validateTime = ({ start_time, end_time }) => {
 	if (!start_time && !end_time) {
 		return true;
 	}
-	if (
-		!compareTime({ start_time, end_time })
-	) {
-		return false;
-	}
-	return true;
+
+	return !compareTime({ start_time, end_time });
 };
