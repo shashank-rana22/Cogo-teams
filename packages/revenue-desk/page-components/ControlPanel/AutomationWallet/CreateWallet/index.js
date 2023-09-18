@@ -13,7 +13,7 @@ import useCreateRevenueDeskWallet from '../../hooks/useCreateRevenueDeskWallet';
 import styles from './styles.module.css';
 
 function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetch = () => {} }) {
-	const [submitValue, setSubmitValue] = useState();
+	const [submitValue, setSubmitValue] = useState({});
 
 	const { createRevenueDeskWallet, loading } = useCreateRevenueDeskWallet({ setCreateWallet, refetch });
 
@@ -51,15 +51,13 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 							/>
 							<div className={styles.errors}>{errors?.service_type?.message}</div>
 						</div>
-						{(isService === 'fcl_freight_service'
-						|| isService === 'lcl_freight_service' || isService === 'air_freight_service')
-					&& (
-						<div>
-							<div className={styles.label}>Select Trade Type</div>
-							<RadioGroupController control={control} {...trade} style={{ width: '250px' }} />
-							<div className={styles.errors}>{errors?.trade_type?.message}</div>
-						</div>
-					)}
+						{isService && (
+							<div>
+								<div className={styles.label}>Select Trade Type</div>
+								<RadioGroupController control={control} {...trade} style={{ width: '250px' }} />
+								<div className={styles.errors}>{errors?.trade_type?.message}</div>
+							</div>
+						)}
 					</div>
 
 					<div className={styles.content}>

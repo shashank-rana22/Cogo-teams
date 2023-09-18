@@ -72,15 +72,15 @@ export const sortByOptions = [
 ];
 
 export const filterOption = {
-	fcl_freight     : ['seaport'],
-	lcl_freight     : ['seaport'],
-	air_freight     : ['airport'],
-	fcl_customs     : ['seaport'],
-	lcl_customs     : ['seaport'],
-	air_customs     : ['airport'],
-	haulage_freight : ['pincode', 'seaport'],
-	trailer_freight : ['pincode', 'seaport'],
-	ltl_freight     : ['pincode', 'seaport'],
-	ftl_freight     : ['pincode', 'seaport'],
-	fcl_cfs         : ['seaport'],
+	fcl_freight_service     : ['seaport'],
+	lcl_freight_service     : ['seaport'],
+	air_freight_service     : ['airport'],
+	fcl_customs_service     : ['seaport'],
+	lcl_customs_service     : ['seaport'],
+	air_customs_service     : ['airport'],
+	haulage_freight_service : ['pincode', 'seaport'],
+	trailer_freight_service : ['pincode', 'seaport'],
+	ltl_freight_service     : ['pincode', 'seaport'],
+	ftl_freight_service     : ['pincode', 'seaport'],
+	fcl_cfs_service         : ['seaport'],
 };
