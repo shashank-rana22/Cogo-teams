@@ -205,6 +205,7 @@ function LineItemCard({
 				)}
 			</div>
 		),
+		renderName: (row) => <div style={{ color: getLineItemsMappedColor({ row, chargesTable }) }}>{row?.name}</div>,
 
 		renderCurrency: (row) => {
 			const { currency = '-' } = row || {};

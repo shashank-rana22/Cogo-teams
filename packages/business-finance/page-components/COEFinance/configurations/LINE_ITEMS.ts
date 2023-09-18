@@ -18,6 +18,7 @@ export const LINE_ITEMS = {
 		{
 			label : 'Product',
 			key   : 'name',
+			func  : 'renderName',
 			span  : 3,
 		},
 		{
