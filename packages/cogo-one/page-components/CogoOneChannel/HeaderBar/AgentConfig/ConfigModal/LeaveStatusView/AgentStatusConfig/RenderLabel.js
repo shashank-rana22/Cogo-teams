@@ -2,28 +2,28 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const HOUR_TIME_FORMAT = 12;
-const START_TIME_HOUR = 0;
+const TIME_FORMAT = 24;
+const ONE_MINUTE = 60;
+const CHECK_MERIDIEM = 12;
+const STRING_LENGTH = 2;
 
-const formatSingleTime = ({ time }) => {
-	const [hours, minutes] = time.split(':');
-	let midDay = 'AM';
-	let formattedHours = parseInt(hours, 10);
+function formatTimeToIST({ timeString, localTime }) {
+	const [hours, minutes] = timeString.split(':').map(Number);
+	const [localHour, localMinute] = localTime.replace('+', '').split(':').map(Number);
 
-	if (formattedHours >= HOUR_TIME_FORMAT) {
-		midDay = 'PM';
-		if (formattedHours > HOUR_TIME_FORMAT) {
-			formattedHours -= HOUR_TIME_FORMAT;
-		}
-	} else if (formattedHours === START_TIME_HOUR) {
-		formattedHours = HOUR_TIME_FORMAT;
-	}
+	const ISTHours = (hours + localHour) % TIME_FORMAT;
+	const ISTMinutes = (minutes + localMinute) % ONE_MINUTE;
+	const period = ISTHours < CHECK_MERIDIEM ? 'AM' : 'PM';
+	const ISTHours12 = ISTHours % CHECK_MERIDIEM || CHECK_MERIDIEM;
 
-	return `${formattedHours}:${minutes} ${midDay}`;
-};
+	return `${ISTHours12.toString().padStart(STRING_LENGTH, '0')}:${ISTMinutes.toString().padStart(STRING_LENGTH, '0')} 
+	${period}`;
+}
 
 function RenderLabel({ item = {} }) {
-	const { shift_name = '', start_time_local = '', end_time_local = '' } = item || {};
+	const {
+		shift_name = '', start_time_utc = '', end_time_utc = '', local_time_zone = '',
+	} = item || {};
 
 	return (
 		<div className={styles.content}>
@@ -32,11 +32,11 @@ function RenderLabel({ item = {} }) {
 				Shift :
 				{' '}
 				<span>
-					{formatSingleTime({ time: start_time_local })}
+					{formatTimeToIST({ timeString: start_time_utc, localTime: local_time_zone })}
 					{' '}
 					-
 					{' '}
-					{formatSingleTime({ time: end_time_local })}
+					{formatTimeToIST({ timeString: end_time_utc, localTime: local_time_zone })}
 				</span>
 			</div>
 		</div>
