@@ -88,7 +88,10 @@ function Login() {
 				</div>
 
 				<div className={styles.input_container}>
-					{ACTIVE_TAB[activeTab]}
+					<div className={styles.active_components}>
+						{ACTIVE_TAB[activeTab]}
+					</div>
+
 					<div className={styles.or}>
 						<hr className={styles.line} />
 						{t('login:or_label')}

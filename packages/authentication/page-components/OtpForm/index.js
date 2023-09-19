@@ -38,6 +38,7 @@ function OtpForm({
 				<IcMArrowBack
 					width="20px"
 					height="20px"
+					disabled={loading}
 				/>
 			</span>
 			<div className={styles.card_heading}>{t('login:login_Otp_field_title')}</div>
