@@ -23,7 +23,7 @@ const useCreateReplyDraft = () => {
 			const modifiedDraft = dataParser({ res });
 			callbackFunc({ content: modifiedDraft });
 		} catch (err) {
-			console.log('err', err);
+			console.error('err', err);
 		}
 	};
 

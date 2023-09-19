@@ -22,6 +22,7 @@ function useMailEditorFunctions({
 		emailState = {},
 		setEmailState = () => {},
 		setButtonType = () => {},
+		resetEmailState = () => {},
 	} = mailProps || {};
 
 	const {
@@ -137,6 +138,7 @@ function useMailEditorFunctions({
 		}
 
 		setButtonType('');
+		resetEmailState();
 		Toast.success('Draft has saved successfully');
 	};
 

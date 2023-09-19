@@ -3,7 +3,7 @@ const dataParser = ({ res }) => {
 
 	const draftContent = parsedData?.body?.content || '';
 
-	const modifiedDraft = `<br/><br/><br/><br/>${draftContent}`;
+	const modifiedDraft = `<hr><br/><br/><br/><br/>${draftContent}`;
 	return modifiedDraft;
 };
 

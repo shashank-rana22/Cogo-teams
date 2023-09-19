@@ -28,7 +28,7 @@ const updateEmailState = async ({ roomId = '', messageId = '', firestore = {}, s
 			draftMessageData,
 		}));
 	} catch (e) {
-		console.log('e', e);
+		console.error('e', e);
 	}
 };
 export default updateEmailState;

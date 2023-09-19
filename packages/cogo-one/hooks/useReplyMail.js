@@ -86,7 +86,7 @@ function useReplyMail(mailProps) {
 			const res = await trigger({
 				data: getPayload({ payload, userId, userName, userSharedMails, roomId }),
 			});
-			saveDraft({
+			await saveDraft({
 				communication_id     : res?.data?.id,
 				newComposeRoomId     : roomId,
 				newComposeDraftMsgId : messageId,

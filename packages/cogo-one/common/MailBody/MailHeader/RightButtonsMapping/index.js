@@ -4,11 +4,11 @@ import { BUTTON_MAPPING, BUTTON_KEYS_MAPPING } from '../../../../constants/mailC
 
 import styles from './styles.module.css';
 
-const SUCCESS_MESSAGE = 'Draft delivered sucCessfully';
+const SUCCESS_MESSAGE = 'Draft delivered successfully';
 
 const FAILED_MESSAGE = 'Delivery Failed. Please try again';
 
-const PENDING_MESSAGE = 'pending';
+const PENDING_MESSAGE = 'Pending';
 
 function DraftMailStatus({
 	emailStatus = '',

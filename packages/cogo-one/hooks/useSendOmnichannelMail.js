@@ -52,7 +52,7 @@ const useSendOmnichannelMail = ({
 				}),
 			});
 
-			saveDraft({
+			await saveDraft({
 				communication_id     : response?.data?.id,
 				newComposeRoomId     : roomId,
 				newComposeDraftMsgId : messageId,
