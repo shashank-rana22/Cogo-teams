@@ -2576,7 +2576,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/employee-dashboard',
 			type          : 'link',
 			icon          : IcMDashboard,
-			possible_apis : apis.employee_performance_dashboard,
+			possible_apis : [...apis.employee_performance_dashboard, ...apis.separation],
 			main_apis     : [],
 			module_type   : 'dashboards',
 		},
@@ -2655,7 +2655,10 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/attendance-leave-management',
 			type          : 'link',
 			module_type   : 'dashboards',
-			possible_apis : apis.attendance_leave_management,
+			possible_apis : [
+				...apis.attendance_leave_management,
+				...apis.separation,
+			],
 		},
 
 		profile: {
