@@ -16,10 +16,12 @@ import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
+import cogoAssured from './config/cogo-assured';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
+import convenienceRates from './config/convenience-rates';
 import costBookingDesk from './config/cost-booking-desk';
 import demandForecast from './config/demand-forecast';
 import documentDesk from './config/document-desk';
@@ -54,6 +56,7 @@ import revenueDesk from './config/revenue-desk';
 import rfqDashboard from './config/rfq-dashboard';
 import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
+import saas from './config/saas';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import schedules from './config/schedules';
@@ -85,6 +88,7 @@ import welcome from './config/welcome';
 const routeConfig = {
 	...rolesAndPermissions,
 	...locations,
+	...cogoAssured,
 	...groundOps,
 	...allocations,
 	...supplyDashboard,
@@ -147,6 +151,7 @@ const routeConfig = {
 	...rfqDashboard,
 	...governanceManager,
 	...byodDashboard,
+	...convenienceRates,
 	...employeeDashboard,
 	...managerDashboard,
 	...printingDesk,
@@ -167,6 +172,7 @@ const routeConfig = {
 	...supplyTools,
 	...profile,
 	...tradeParties,
+	...saas,
 };
 
 export default routeConfig;

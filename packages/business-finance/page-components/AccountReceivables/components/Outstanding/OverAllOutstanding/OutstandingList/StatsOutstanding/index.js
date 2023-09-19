@@ -149,7 +149,7 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 				showOutStanding ? (
 					<div
 						className={styles.outstanding_card}
-						style={{ background: '#FEF9FE' }}
+						style={{ background: '#F9FBFE' }}
 					>
 						<div className={styles.flex_column}>
 							<div className={styles.label_outstanding}>Total Outstanding</div>

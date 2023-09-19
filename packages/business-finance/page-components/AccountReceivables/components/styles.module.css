@@ -28,3 +28,11 @@
 .input {
 	width: 284px;
 }
+
+.nodisplay {
+	:global {
+		.ui_tab_list_container {
+			display: none;
+		}
+	}
+}

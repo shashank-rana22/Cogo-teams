@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 
 import { STATUS_LABEL_MAPPING, STATUS_MAPPING } from '../../../constants';
 import TicketActions from '../../TicketActions';
@@ -22,7 +23,10 @@ function TicketStructureBody({
 		ActivityCount: activityCount = 0,
 		IsClosureAuthorizer: isClosureAuthorizer = false,
 		TicketStatus: ticketStatus = '',
+		Data: ticketData = {},
 	} = data;
+
+	const { RequestType: request_type } = ticketData || {};
 
 	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[ticketStatus]] || {};
 
@@ -35,9 +39,14 @@ function TicketStructureBody({
 		<div className={styles.ticket_container}>
 			<div className={styles.subcontainer_one}>
 				<div className={styles.subcontainer_header}>
-					<div className={styles.ticket_id}>
-						#
-						{id}
+					<div className={styles.info}>
+						<div className={styles.ticket_id}>
+							#
+							{id}
+						</div>
+						<div className={styles.request_type}>
+							{startCase(request_type)}
+						</div>
 					</div>
 					<TicketActions
 						id={id}
