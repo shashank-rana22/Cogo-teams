@@ -71,10 +71,8 @@ function Status({
 
 	if (isCrossEntity) {
 		return (
-			<div className={styles.invoice_container}>
-				<div className={styles.invoice_status}>
-					{startCase(invoice?.status || '')}
-				</div>
+			<div className={styles.invoice_status_cross_entity}>
+				{startCase(invoice?.status || '')}
 			</div>
 		);
 	}

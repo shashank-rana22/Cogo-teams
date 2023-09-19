@@ -1,4 +1,4 @@
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import getFormattedAmount from '../../../../../common/helpers/formatAmount';
 
 import CardList from './CardList';
 import { invoiceTable } from './InvoiceTable';
@@ -6,15 +6,7 @@ import styles from './styles.module.css';
 
 const BILLED_ITEMS_CODE = ['BookingCONV', 'BookingNOST'];
 
-const format = (amount, currency) => formatAmount({
-	amount,
-	currency,
-	options: {
-		style                 : 'currency',
-		currencyDisplay       : 'code',
-		maximumFractionDigits : 2,
-	},
-});
+const TWO = 2;
 
 function InvoiceServiceWise({ item = {}, loading = false }) {
 	const {
@@ -48,7 +40,7 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 
 					Total Tax:
 					{' '}
-					{format(tax_total_discounted, service_total_currency)}
+					{getFormattedAmount(tax_total_discounted, service_total_currency, TWO)}
 
 				</div>
 
@@ -56,7 +48,7 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 
 					Total w/o Tax:
 					{' '}
-					{format(total_price_discounted, service_total_currency)}
+					{getFormattedAmount(total_price_discounted, service_total_currency, TWO)}
 
 				</div>
 			</div>
@@ -67,7 +59,7 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 				Total Amount After Tax :
 
 				<div className={styles.total_amount}>
-					{format(service_total_discounted, service_total_currency)}
+					{getFormattedAmount(service_total_discounted, service_total_currency, TWO)}
 				</div>
 
 			</div>

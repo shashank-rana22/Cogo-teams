@@ -15,7 +15,7 @@ function InvoicingPartyDetail({
 
 	const {
 		buy_address = {},
-	} = invoice;
+	} = invoice || {};
 
 	const RESTRICTED_ENTITY_IDS = [];
 

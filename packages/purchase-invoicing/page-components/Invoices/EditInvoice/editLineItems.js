@@ -154,7 +154,8 @@ const useEditLineItems = ({
 	const LABELS = {};
 
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
-	Object.keys(controls?.[GLOBAL_CONSTANTS.zeroth_index]).forEach((key) => {
+
+	Object.keys(controls?.[GLOBAL_CONSTANTS.zeroth_index] || {}).forEach((key) => {
 		CUSTOM_VALUES[key] = {
 			formValues : newFormValues[key],
 			label      : LABELS[key],
@@ -165,7 +166,7 @@ const useEditLineItems = ({
 	const onCreate = async (values) => {
 		try {
 			const PAYLOAD = [];
-			Object.keys(values).forEach((key) => {
+			Object.keys(values || {}).forEach((key) => {
 				const currentService = services.find(
 					(serviceItem, index) => `${serviceItem.service_id}:${index}` === key,
 				);

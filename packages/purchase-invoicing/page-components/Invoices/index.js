@@ -10,8 +10,8 @@ function Invoices({
 	purchaseInvoicesRefetch = () => {},
 }) {
 	const {
-		salesList : invoicesList,
-		refetch: bfInvoiceRefetch,
+		salesList : invoicesList = [],
+		refetch: bfInvoiceRefetch = () => {},
 	} = useListBfSalesInvoices({ serial_id: shipmentData?.serial_id });
 
 	const totalsCE = invoiceDataCE?.invoicing_party_wise_total;

@@ -19,8 +19,8 @@ const useGetCrossEntityCreditNotes = () => {
 	}, { manual: false });
 
 	return {
-		loadingCECN      : loading,
-		CECreditNoteData : data?.list || [],
+		crossEntityCreditNoteLoading : loading,
+		listCrossEntityCreditNote    : data?.list || [],
 		trigger,
 	};
 };

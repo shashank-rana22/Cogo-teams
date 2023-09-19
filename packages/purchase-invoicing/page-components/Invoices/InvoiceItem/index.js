@@ -1,7 +1,9 @@
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import getFormattedAmount from '../../../common/helpers/formatAmount';
 
 import Item from './Item';
 import styles from './styles.module.css';
+
+const TWO = 2;
 
 function InvoiceItem({
 	item = {},
@@ -22,15 +24,7 @@ function InvoiceItem({
 				<div className={styles.invoice_value_container}>
 					<div className={styles.invoice_value_title}>Invoice Value -</div>
 					<div className={styles.invoice_value}>
-						{formatAmount({
-							amount   : total?.total_price_discounted,
-							currency : total?.total_price_currency,
-							options  : {
-								style                 : 'currency',
-								currencyDisplay       : 'code',
-								maximumFractionDigits : 2,
-							},
-						})}
+						{getFormattedAmount(total?.total_price_discounted, total?.total_price_currency, TWO)}
 					</div>
 				</div>
 			</div>

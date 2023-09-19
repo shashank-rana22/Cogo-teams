@@ -180,7 +180,6 @@ function Actions({
 						bfInvoice={bfInvoice}
 					/>
 				</div>
-
 			</div>
 
 			{(invoice?.services || []).length && showModal === 'edit_invoice' ? (

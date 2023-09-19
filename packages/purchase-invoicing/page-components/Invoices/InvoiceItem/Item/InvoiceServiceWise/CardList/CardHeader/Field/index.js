@@ -13,7 +13,7 @@ function Field({ field = {}, showCode = false }) {
 		return field?.label;
 	};
 
-	const { span } = field;
+	const { span = 1 } = field;
 	const widthVal = (span / TWELVE) * HUNDRED;
 
 	return (

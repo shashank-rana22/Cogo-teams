@@ -9,7 +9,8 @@ const DECIMAL_UPTO_SECOND_PLACE = 2;
 export const renderValue = (label = '', detail = {}) => {
 	const {
 		packages = [],
-		weight = '', volume = '',
+		weight = '',
+		volume = '',
 	} = detail || {};
 
 	const valueForInput = Array.isArray(packages)

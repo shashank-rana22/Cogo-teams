@@ -23,7 +23,7 @@ function InvoiceDetail({
 		live_invoice_number = '',
 		credit_option = {},
 		payment_mode = '',
-	} = invoice;
+	} = invoice || {};
 
 	const creditSource = credit_option?.credit_source?.split('_');
 

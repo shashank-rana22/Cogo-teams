@@ -15,9 +15,9 @@ function SalesInvoice() {
 	const { data: invoiceData, groupedInvoices, refetch: salesInvoicesRefetch, loading } = useGetShipmentInvoice();
 
 	const {
-		data: invoiceDataCE,
-		groupedInvoices:groupedInvoicesCE,
-		loading:loadingCE,
+		data: invoiceDataCE = {},
+		groupedInvoices:groupedInvoicesCE = {},
+		loading:loadingCE = false,
 	} = useGetShipmentCrossEntityInvoice();
 
 	const isIRNGenerated = !!list?.find((item) => !!item?.irn_number);

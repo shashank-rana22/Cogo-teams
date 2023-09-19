@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 const ONE = 1;
 const TWO = 2;
 
-export const getDocumentInfo = ({ bfInvoice }) => {
+export const getDocumentInfo = ({ bfInvoice = {} }) => {
 	const {
 		einvoiceNumber = '', invoiceNumber = '', proformaNumber = '',
 		invoiceAdditional = {},

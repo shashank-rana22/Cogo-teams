@@ -6,9 +6,11 @@ import { useEffect, useCallback, useContext } from 'react';
 import { groupByRegistrationNum } from '../utils/groupByRegistrationNum';
 
 const useGetShipmentCrossEntityInvoice = () => {
-	const { shipment_data = {} } = useContext(ShipmentDetailContext);
-
-	const { id: shipment_id = '' } = shipment_data || {};
+	const {
+		shipment_data :{
+			id :shipment_id = '',
+		} = {},
+	} = useContext(ShipmentDetailContext);
 
 	const [{ loading, data: invoiceData }, trigger] = useRequest({
 		url    : '/get_shipment_cross_entity_invoice',

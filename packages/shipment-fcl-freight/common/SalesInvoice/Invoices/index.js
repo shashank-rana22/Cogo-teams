@@ -63,9 +63,9 @@ function Invoices({
 
 	disableAction = showForOldShipments ? false : disableAction;
 
-	const { list = [], cnRefetch, loading: cNLoading } = useGetCreditNotes({});
+	const { list = [], cnRefetch = () => {}, loading: cNLoading = false } = useGetCreditNotes({});
 
-	const { CECreditNoteData = [], loadingCECN } = useGetCrossEntityCreditNotes();
+	const { listCrossEntityCreditNote = [], crossEntityCreditNoteLoading = false } = useGetCrossEntityCreditNotes();
 
 	return (
 		<main className={styles.container}>
@@ -116,7 +116,7 @@ function Invoices({
 				))}
 			</section>
 
-			{list?.length
+			{!isEmpty(list)
 				? (
 					<CreditNote
 						cnRefetch={cnRefetch}
@@ -128,11 +128,11 @@ function Invoices({
 
 				) : null}
 
-			{!isEmpty(CECreditNoteData) ? (
+			{!isEmpty(listCrossEntityCreditNote) ? (
 
 				<CrossEntityCreditNote
-					loading={loadingCECN}
-					list={CECreditNoteData}
+					loading={crossEntityCreditNoteLoading}
+					list={listCrossEntityCreditNote}
 					invoicesList={invoicesList}
 				/>
 

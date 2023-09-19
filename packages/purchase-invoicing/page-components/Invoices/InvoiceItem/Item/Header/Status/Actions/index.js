@@ -11,7 +11,6 @@ const EditInvoice = dynamic(() => import('../../../../../EditInvoice/index'), { 
 function Actions({
 	invoice = {},
 	refetch = () => {},
-	shipment_data = {},
 }) {
 	const [showModal, setShowModal] = useState('');
 
@@ -45,18 +44,17 @@ function Actions({
 					onClose={onModalClose}
 					invoice={invoice}
 					refetch={refetch}
-					shipment_data={shipment_data}
 				/>
 			) : null}
 
-			{showModal === 'approve_invoice' && (
+			{showModal === 'approve_invoice' ? (
 				<ApproveInvoice
 					show={showModal === 'approve_invoice'}
 					onClose={onModalClose}
 					invoice={invoice}
 					refetch={refetch}
 				/>
-			)}
+			) : null}
 
 		</div>
 	);
