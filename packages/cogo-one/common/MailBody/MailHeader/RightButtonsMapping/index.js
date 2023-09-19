@@ -4,7 +4,7 @@ import { BUTTON_MAPPING, BUTTON_KEYS_MAPPING } from '../../../../constants/mailC
 
 import styles from './styles.module.css';
 
-const SUCESS_MESSAGE = 'Draft delivered sucessfully';
+const SUCCESS_MESSAGE = 'Draft delivered sucCessfully';
 
 const FAILED_MESSAGE = 'Delivery Failed. Please try again';
 
@@ -18,7 +18,7 @@ function DraftMailStatus({
 	if (emailStatus === 'delivered') {
 		return (
 			<div className={styles.draft_message}>
-				<div>{SUCESS_MESSAGE}</div>
+				<div>{SUCCESS_MESSAGE}</div>
 				<IcMFtick
 					width={16}
 					height={16}
