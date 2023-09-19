@@ -22,7 +22,5 @@ const useGetUnreadMails = ({ firestore = {}, agentId = '' }) => {
 		});
 		return () => { cleanupfunc?.(); };
 	}, [firestore, agentId]);
-
-	return null;
 };
 export default useGetUnreadMails;
