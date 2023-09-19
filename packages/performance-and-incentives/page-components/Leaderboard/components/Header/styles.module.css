@@ -57,5 +57,6 @@
 }
 
 .rotate {
-	transform: rotate(180);
+	transition: transform 0.3s;
+	transform: rotate(180deg);
 }
