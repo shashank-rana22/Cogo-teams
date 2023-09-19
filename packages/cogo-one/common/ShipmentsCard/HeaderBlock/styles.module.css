@@ -14,7 +14,7 @@
 }
 
 .shipper_details {
-	width: 68%;
+	width: 60%;
 }
 
 .sid_id {
@@ -28,7 +28,7 @@
 }
 
 .importer_exporter_styles {
-	width: 100%;
+	width: 60%;
 	overflow: hidden;
 	font-size: 12px;
 	color: #000;
