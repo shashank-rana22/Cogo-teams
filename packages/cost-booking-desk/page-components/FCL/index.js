@@ -1,3 +1,6 @@
+import { routeConfig } from '@cogoport/navigation-configs';
+import { ShipmentChat } from '@cogoport/shipment-chat';
+import { useSelector } from '@cogoport/store';
 import { useContext } from 'react';
 
 import AppliedFilters from '../../common/AppliedFilters';
@@ -15,7 +18,11 @@ import styles from './styles.module.css';
 const SECURITY_DEPOSIT_TAB = 'security_deposit';
 
 function FclFreight() {
+	const { general } = useSelector((s) => s);
 	const { activeTab } = useContext(CostBookingDeskContext);
+	const { pathname } = general;
+
+	const navigation = routeConfig?.[pathname]?.navigation || '';
 
 	return (
 		<div>
@@ -23,6 +30,8 @@ function FclFreight() {
 				<div className={styles.stepper_container}>
 					<Stepper />
 				</div>
+
+				<ShipmentChat navigation={navigation} />
 
 				{activeTab !== SECURITY_DEPOSIT_TAB ? <Filters /> : null}
 
