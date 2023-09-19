@@ -1,0 +1,27 @@
+.port {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	align-items: center;
+	text-align: center;
+}
+
+.location {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.trade {
+	font-size: 14px;
+	color: #333;
+}
+
+.origin {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.destination {
+	font-size: 16px;
+	font-weight: bold;
+}

@@ -39,7 +39,7 @@ function CardComponent({ data = {}, key = '', activeTab = '' }) {
 			<SliderComponent />
 			<div className={styles.flex}>
 				<div className={styles.flex_column}>
-					<div className={styles.name}>{startCase(data?.service_approvers?.[ZERO]?.role?.name)}</div>
+					<div>{startCase(data?.service_approvers?.[ZERO]?.role?.name)}</div>
 					<div>
 						{(formatDate({
 							date       : data?.service_approvers?.[ZERO]?.updated_at,
@@ -50,7 +50,7 @@ function CardComponent({ data = {}, key = '', activeTab = '' }) {
 					</div>
 				</div>
 				<div className={styles.flex_column}>
-					<div className={styles.name}>{startCase(data?.service_approvers?.[ONE]?.role?.name)}</div>
+					<div>{startCase(data?.service_approvers?.[ONE]?.role?.name)}</div>
 					<div>
 						{(formatDate({
 							date       : data?.service_approvers?.[ONE]?.updated_at,

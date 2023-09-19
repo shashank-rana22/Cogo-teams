@@ -1,15 +1,16 @@
 import { Popover, Button, Loader } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
+import ScopeSelect from '@cogoport/scope-select/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 import { v1 as uuid } from 'uuid';
 
 import EmptyState from '../../common/EmptyState';
+import ListPagination from '../../common/ListPagination';
 import useListOrganizationServices from '../../hooks/useListOrganizationServices';
 
 import CardComponent from './CardComponent';
 import Filters from './Filters';
-import ListPagination from './ListPagination';
 import SortComponent from './SortComponent';
 import styles from './styles.module.css';
 import TabsComponent from './TabsComponent';
@@ -34,7 +35,11 @@ function ServiceManagement() {
 	const paginationProps = { filters, setFilters, data };
 	return (
 		<div>
-			<h1>Service Management</h1>
+			<div className={styles.flex}>
+				<h1>Service Management</h1>
+				<ScopeSelect size="md" />
+			</div>
+
 			<div className={styles.flex}>
 				<TabsComponent activeTab={activeTab} setActive={setActive} />
 				<SortComponent params={params} setParams={setParams} activeTab={activeTab} />
