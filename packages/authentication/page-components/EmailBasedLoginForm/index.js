@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { useForm, InputController } from '@cogoport/forms';
 import { IcMEyeopen, IcMEyeclose } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -78,7 +78,7 @@ function EmailBasedLoginForm() {
 							<Button
 								themeType="accent"
 								onClick={() => router.back()}
-								className={styles.go_back}
+								className={cl`${styles.submit_button} ${styles.go_back}`}
 								type="button"
 							>
 								{t('login:go_back_button')}

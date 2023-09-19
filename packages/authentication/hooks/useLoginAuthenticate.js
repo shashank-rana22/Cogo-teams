@@ -15,7 +15,7 @@ const EMPTY_PATH = '/empty';
 
 const COOKIE_EXPIRY = -1;
 
-const getFormattedPayload = ({ mobileNumber, otpId, otpValue }) => ({
+const getFormattedPayload = ({ mobileNumber = {}, otpId = '', otpValue = '' }) => ({
 	id                  : otpId,
 	mobile_otp          : otpValue,
 	mobile_number       : mobileNumber?.number,

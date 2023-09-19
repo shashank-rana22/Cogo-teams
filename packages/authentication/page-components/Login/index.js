@@ -21,7 +21,6 @@ function Login() {
 	const [activeTab, setActiveTab] = useState('email');
 	const [mode, setMode] = useState('login');
 	const [mobileNumber, setMobileNumber] = useState({});
-
 	const [otpId, setOtpId] = useState('');
 
 	const { onLogin = () => {}, socialLoginLoading = false } = useFormLoginwithMS();
@@ -58,6 +57,7 @@ function Login() {
 		}
 		return null;
 	}
+
 	const ACTIVE_TAB = {
 		email  : <EmailBasedLoginForm />,
 		mobile : <MobileLogin />,
