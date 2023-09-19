@@ -20,7 +20,6 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 	} = item || {};
 
 	const showBilledText = (items) => !!BILLED_ITEMS_CODE.includes(items?.code);
-	line_items.every(showBilledText);
 
 	const renderBilledText = showBilledText && quotation_source === 'billed_at_actuals' ? '*will be billed at actuals'
 		: null;
