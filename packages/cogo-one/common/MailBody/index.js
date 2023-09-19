@@ -4,6 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useState } from 'react';
 
 import { getRecipientData } from '../../helpers/getRecipientData';
+import useCreateReplyAllDraft from '../../hooks/useCreateReplyAllDraft ';
+import useCreateReplyDraft from '../../hooks/useCreateReplyDraft';
 import useGetMailContent from '../../hooks/useGetMailContent';
 
 import MailActions from './mailActions';
@@ -77,6 +79,9 @@ function MailBody({
 		loading = false,
 	} = useGetMailContent({ messageId: message_id, source, setExpandedState });
 
+	const { createReplyAllDraft } = useCreateReplyAllDraft();
+	const { createReplyDraft } = useCreateReplyDraft();
+
 	const date = created_at && formatDate({
 		date       : new Date(created_at),
 		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -98,6 +103,8 @@ function MailBody({
 		subject,
 		emailVia          : 'firebase_emails',
 		deleteMessage,
+		createReplyDraft,
+		createReplyAllDraft,
 	});
 
 	const handleExpandClick = () => {
