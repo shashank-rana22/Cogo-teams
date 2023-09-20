@@ -11,6 +11,7 @@ function PricePerPackage({
 	price = 0,
 	price_currency = 'INR',
 	isTotalPrice = false,
+	showKgTag = false,
 	packages_count = 0,
 }) {
 	return (
@@ -35,9 +36,9 @@ function PricePerPackage({
 						},
 					})}
 
-					{/* {isTotalPrice ? null : (
-						<span className={styles.per_package_label}>Per Pkg.</span>
-					)} */}
+					{showKgTag ? (
+						<span className={styles.per_kg_label}>Per Kg.</span>
+					) : null}
 				</span>
 
 				{isTotalPrice ? (
