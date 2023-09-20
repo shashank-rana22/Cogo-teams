@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
@@ -91,7 +92,9 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 							<div className={styles.flex}>
 								{(invoiceObject.statsKey || []).map((val) => (
 									<div key={val.label} className={styles.label}>
-										<div className={styles.amount}>
+										<div className={cl`${invoiceObject?.name === 'ON ACCOUNT PAYMENTS'
+											? styles.account : styles.amount}`}
+										>
 											{formatAmount({
 												amount:
 													invoiceObject.ageingBucket[
@@ -146,10 +149,10 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 				showOutStanding ? (
 					<div
 						className={styles.outstanding_card}
-						style={{ background: '#FEF9FE' }}
+						style={{ background: '#F9FBFE' }}
 					>
 						<div className={styles.flex_column}>
-							<div className={styles.label}>Total Outstanding</div>
+							<div className={styles.label_outstanding}>Total Outstanding</div>
 							<div className={styles.amountout}>
 								{formatAmount({
 									amount: totalOutstanding.ledgerAmount || DEFAULT_AMOUNT,

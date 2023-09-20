@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -21,19 +22,19 @@ interface ListItem {
 	documentNo: string;
 	accountType: string;
 	accMode: string;
-	notPostedSettlementIds : Array<number>;
+	notPostedSettlementIds: Array<number>;
 	ledCurrency: string;
 }
 
 interface Props {
 	item: ListItem;
 	getTableBodyCheckbox?: Function;
-	refetch: ()=>void
+	refetch: () => void
 	source?: string;
 
 }
 
-function ColumnCard({ item, getTableBodyCheckbox = () => {}, refetch, source }: Props) {
+function ColumnCard({ item, getTableBodyCheckbox = () => { }, refetch, source }: Props) {
 	const [showDetails, setShowDetails] = useState(false);
 
 	const Icon = showDetails ? IcMArrowRotateUp : IcMArrowRotateDown;
@@ -56,19 +57,19 @@ function ColumnCard({ item, getTableBodyCheckbox = () => {}, refetch, source }: 
 				<div>{getTableBodyCheckbox(item)}</div>
 				<div className={styles.refnumb}>{item?.documentValue}</div>
 				<div className={styles.amount}>
-					{	getFormattedPrice(
+					{getFormattedPrice(
 						item?.documentAmount,
 						item?.currency,
 					)}
 				</div>
 				<div className={styles.utilized}>
-					{	getFormattedPrice(
+					{getFormattedPrice(
 						item?.settledAmount,
 						item?.currency,
 					)}
 				</div>
 				<div className={styles.balance}>
-					{	getFormattedPrice(
+					{getFormattedPrice(
 						item?.balanceAmount,
 						item?.currency,
 					)}
@@ -97,6 +98,17 @@ function ColumnCard({ item, getTableBodyCheckbox = () => {}, refetch, source }: 
 						onClick={() => { handleClickIcon(); }}
 					/>
 				</div>
+
+				{source ? null : (
+					<div className={styles.ribbon_render}>
+						<div
+							className={item?.accMode === 'AP' ? styles.ribbon
+								: cl`${styles.ribbon} ${styles.ribbon_orange}`}
+						>
+							{item?.accMode}
+						</div>
+					</div>
+				)}
 
 			</div>
 			{showDetails ? (

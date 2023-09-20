@@ -66,28 +66,28 @@ export const TICKET_OPEN_STATUS = [
 	'resolve_requested',
 ];
 
-export const STATUS_LABEL_MAPPING = {
+export const getStatusLabelMapping = ({ t }) => ({
 	open: {
-		label : 'OPEN',
+		label : t('myTickets:open_status'),
 		color : '#D6B300',
 	},
 	closed: {
-		label : 'CLOSED',
+		label : t('myTickets:closed_status'),
 		color : '#009900',
 	},
 	overdue: {
-		label : 'OVERDUE',
+		label : t('myTickets:overdue_status'),
 		color : '#8d99ae',
 	},
 	pending: {
-		label : 'PENDING',
+		label : t('myTickets:pending_status'),
 		color : '#F68B21',
 	},
 	escalated: {
-		label : 'ESCALATED!!',
+		label : t('myTickets:escalated_status'),
 		color : '#F37166',
 	},
-};
+});
 
 export const PRIORITY_MAPPING = {
 	high   : 'high',
@@ -97,9 +97,41 @@ export const PRIORITY_MAPPING = {
 
 export const REQUIRED_ROLES = ['partner-roles', 'partner-users'];
 
-export const SPECTATOR_TYPE_OPTIONS = [
-	{ label: 'Tickets assigned to me', value: 'reviewer' },
-	{ label: 'Tickets raised by me', value: 'agent' },
-	{ label: 'Closure Authorizer', value: 'closure_authorizer' },
-	{ label: 'My Configurations', value: 'configuration_owner' },
+export const getSpectatorTypeOptions = ({ t }) => [
+	{ label: t('myTickets:spectator_type_1'), value: 'reviewer' },
+	{ label: t('myTickets:spectator_type_2'), value: 'agent' },
+	{ label: t('myTickets:spectator_type_3'), value: 'closure_authorizer' },
+	{ label: t('myTickets:spectator_type_4'), value: 'configuration_owner' },
 ];
+
+export const getTicketActionLabel = ({ t, type }) => {
+	const ACTIONS = {
+		resolve_requested : t('myTickets:resolve_requested'),
+		resolve_request   : t('myTickets:resolve_request'),
+		unresolved        : t('myTickets:unresolved'),
+		escalated         : t('myTickets:escalated'),
+		reassign          : t('myTickets:reassign'),
+		escalate          : t('myTickets:escalate'),
+		resolve           : t('myTickets:resolve'),
+		pending           : t('myTickets:pending'),
+		approve           : t('myTickets:approve'),
+		reject            : t('myTickets:reject'),
+		reopen            : t('myTickets:reopen'),
+	};
+
+	return ACTIONS[type];
+};
+export const REQUEST_TYPE_OPTIONS = [
+	{ label: 'Shipment', value: 'shipment' },
+	{ label: 'Rate', value: 'rate' },
+	{ label: 'Finance', value: 'finance' },
+	{ label: 'Platform Issue', value: 'platform_issue' },
+];
+
+export const SHIPMENT_RATE_KEYS = ['request_type', 'organization_id', 'user_id',
+	'serial_id', 'service', 'trade_type', 'category', 'sub_category', 'issue_type',
+	'additional_information', 'priority', 'file_url', 'notify_customer'];
+
+export const FINANCE_PLATFORM_KEYS = ['request_type', 'category', 'sub_category', 'issue_type',
+	'additional_information', 'priority',
+	'file_url', 'notify_customer'];

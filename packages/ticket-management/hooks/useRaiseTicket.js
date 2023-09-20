@@ -5,23 +5,35 @@ import { isEmpty } from '@cogoport/utils';
 
 const getPayload = ({
 	id, priority, finalUrl, selectedServices, issue_type, additional_information,
-	notify_customer, additionalData,
+	notify_customer, additionalData, request_type, category, serial_id, sub_category,
+	service, trade_type,
 }) => ({
-	UserID         : id,
-	PerformedByID  : id,
-	Source         : 'admin',
-	Category       : '',
-	Subcategory    : '',
-	Priority       : priority,
-	UserType       : 'ticket_user',
-	Data           : { Attachment: [finalUrl] || [], ...selectedServices },
-	Type           : issue_type,
-	Description    : additional_information,
-	NotifyCustomer : notify_customer,
+	UserID        : id || undefined,
+	PerformedByID : id || undefined,
+	Source        : 'admin',
+	Category      : category || undefined,
+	Priority      : priority || undefined,
+	UserType      : 'ticket_user',
+	Data          : {
+		Attachment  : [finalUrl] || [],
+		...selectedServices,
+		RequestType : request_type || undefined,
+		SerialID    : serial_id || undefined,
+		TradeType   : trade_type || undefined,
+		Service     : service || undefined,
+	},
+	Type           : issue_type || undefined,
+	Description    : additional_information || undefined,
+	NotifyCustomer : notify_customer || undefined,
+	Subcategory    : sub_category || undefined,
 	...additionalData,
 });
 
-const useRaiseTicket = ({ handleClose = () => {}, additionalInfo = [], setRefreshList = () => {} }) => {
+const useRaiseTicket = ({
+	handleClose = () => {},
+	additionalInfo = [],
+	setRefreshList = () => {},
+}) => {
 	const { profile } = useSelector((state) => state);
 
 	const [{ loading }, trigger] = useTicketsRequest({
@@ -32,13 +44,19 @@ const useRaiseTicket = ({ handleClose = () => {}, additionalInfo = [], setRefres
 
 	const raiseTickets = async (val) => {
 		const {
+			request_type,
 			issue_type,
 			additional_information,
 			organization_id,
 			user_id,
 			priority,
 			file_url,
+			serial_id,
 			notify_customer,
+			service,
+			trade_type,
+			category,
+			sub_category,
 			...rest
 		} = val || {};
 		const { finalUrl = '' } = file_url || {};
@@ -60,13 +78,19 @@ const useRaiseTicket = ({ handleClose = () => {}, additionalInfo = [], setRefres
 			await trigger({
 				data: getPayload({
 					id: profile?.user?.id,
-					priority,
-					finalUrl,
-					selectedServices,
-					issue_type,
 					additional_information,
+					selectedServices,
 					notify_customer,
 					additionalData,
+					request_type,
+					issue_type,
+					serial_id,
+					finalUrl,
+					service,
+					trade_type,
+					category,
+					priority,
+					sub_category,
 				}),
 			});
 			Toast.success('Successfully Created');

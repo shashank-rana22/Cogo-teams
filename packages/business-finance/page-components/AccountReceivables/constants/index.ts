@@ -1,12 +1,12 @@
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 
-export const getTaxLabels = (entityCode) => [
+export const getTaxLabels = (entityCode = '') => [
 	{
-		label    : ENTITY_FEATURE_MAPPING[entityCode].labels.tax_label,
+		label    : ENTITY_FEATURE_MAPPING[entityCode]?.labels?.tax_label,
 		valueKey : 'registrationNumber',
 	},
 	{
-		label    : ENTITY_FEATURE_MAPPING[entityCode].labels.sage_label,
+		label    : ENTITY_FEATURE_MAPPING[entityCode]?.labels?.sage_label,
 		valueKey : 'sageId',
 	},
 	{
@@ -20,14 +20,14 @@ export const getTaxLabels = (entityCode) => [
 		defaultValueKey : '0',
 	},
 ];
-export const getSearchOptionsLabels = (entityCode) => [
+export const getSearchOptionsLabels = (entityCode = '') => [
 	{
 		label : 'Trade Party Serial Id',
 		value : 'tradePartySerialId',
 		name  : 'tradePartySerialId',
 	},
 	{
-		label : ENTITY_FEATURE_MAPPING[entityCode].labels.search_options_label_sage,
+		label : ENTITY_FEATURE_MAPPING[entityCode]?.labels?.search_options_label_sage,
 		value : 'sageId',
 		name  : 'sageId',
 	},
@@ -37,7 +37,7 @@ export const getSearchOptionsLabels = (entityCode) => [
 		name  : 'organizationSerialId',
 	},
 	{
-		label : ENTITY_FEATURE_MAPPING[entityCode].labels.search_options_label_pan,
+		label : ENTITY_FEATURE_MAPPING[entityCode]?.labels?.search_options_label_pan,
 		value : 'q',
 		name  : 'q',
 	},
@@ -210,27 +210,27 @@ export const StatsKeyMapping = [
 		textColor : '#cb6464',
 	},
 	{
-		label     : '31-45 DAYS',
+		label     : '31-60 DAYS',
 		valueKey  : 'fortyFive',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '46-60 DAYS',
+		label     : '61-90 DAYS',
 		valueKey  : 'sixty',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '61-90 DAYS',
+		label     : '91-180 DAYS',
 		valueKey  : 'ninety',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '91-180 DAYS',
+		label     : '181-365 DAYS',
 		valueKey  : 'oneEighty',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '180+ DAYS',
+		label     : '365+ DAYS',
 		valueKey  : 'oneEightyPlus',
 		textColor : '#cb6464',
 	},

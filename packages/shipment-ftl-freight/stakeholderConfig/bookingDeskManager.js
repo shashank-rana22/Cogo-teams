@@ -23,9 +23,11 @@ export default {
 		'purchase',
 		'field_executive',
 	],
-	shipment_info : {},
-	default_tab   : 'overview',
-	overview      : {
+	shipment_info: {
+		job_open_request: true,
+	},
+	default_tab : 'overview',
+	overview    : {
 		tab_title: 'Overview',
 	},
 	tasks: {

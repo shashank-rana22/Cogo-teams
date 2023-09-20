@@ -26,7 +26,7 @@
         "role": "sales"
     },
     "purchase":{
-        "tab_title": "Purchase Live Invoices"
+        "tab_title": "Live Invoices"
     },
     "edit_supplier": false,
     "cancel_service": false,
@@ -51,5 +51,6 @@
         "can_view":["notifying_party","pocs","invoicing_party","service_provider","collection_party"],
         "can_edit":["collection_party","notifying_party"],
         "can_add_service_provider_poc":true
-    }
+    },
+    "job_open_request": true
 }

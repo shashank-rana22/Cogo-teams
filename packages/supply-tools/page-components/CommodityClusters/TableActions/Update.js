@@ -25,7 +25,7 @@ function Update({ show = null, setShow = () => {}, item = {}, refetch = () => {}
 
 	return !isEmpty(show) ? (
 		<Modal show={!isEmpty(show)} onClose={() => setShow(null)} placement="top" size="lg">
-			<Modal.Header title="UPDATE COMMOODITY CLUSTER" />
+			<Modal.Header title="UPDATE COMMODITY CLUSTER" />
 
 			<Modal.Body>
 				<CommodityForm handleSubmitForm={handleSubmitForm} item={show} ref={formRef} />

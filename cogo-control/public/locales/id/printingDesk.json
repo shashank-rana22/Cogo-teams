@@ -2,6 +2,7 @@
     "header_tabs_approved_awb": "Disetujui AWB",
     "header_tabs_handed_over": "Diserahkan",
     "header_tabs_final_awb": "Terakhir AWB",
+    "header_tabs_completed_awb": "Lengkap Terakhir AWB",
     "header_printing_desk": "Meja Pencetakan",
     "header_search_placeholder": "Cari dengan nomor SID atau AWB",
     "header_toggle_onlabel": "Relevan bagi saya",
@@ -122,5 +123,10 @@
     "utils_common_functions_tooltip_edit_text": "Sunting",
     "utils_common_functions_tooltip_preview_text": "Pratinjau",
     "utils_common_functions_manifest_button_text": "Tampak",
-    "utils_get_select_all_checkbox_label": "Pilih Semua"
+    "utils_get_select_all_checkbox_label": "Pilih Semua",
+    "completed_awb_fields_sid_label": "SID",
+    "completed_awb_fields_awb_label": "AWB",
+    "completed_awb_fields_awb_category_label": "AWB Kategori",
+    "completed_awb_fields_uploaded_by_label": "Diunggah oleh",
+    "completed_awb_fields_uploaded_at_label": "Diunggah di"
 }

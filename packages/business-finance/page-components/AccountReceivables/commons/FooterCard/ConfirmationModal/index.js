@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function ConfirmationModal(
 	{
-		entityCode,
+		entityCode = '',
 		checkedRows = [],
 		bulkIrnGenerate = () => {},
 		bulkIrnLoading = false,
@@ -14,7 +14,7 @@ function ConfirmationModal(
 		setConfirmation = () => {},
 	},
 ) {
-	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
+	const irnLabel = ENTITY_FEATURE_MAPPING[entityCode]?.labels?.irn_label;
 	return (
 		<Modal
 			show={confirmation}

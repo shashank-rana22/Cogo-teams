@@ -65,6 +65,7 @@ import {
 	IcMBookingDesk,
 	IcASecureCloudStorage,
 	IcMUpwardGraph,
+	IcMAppProfile,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -80,8 +81,10 @@ const navigationMapping = ({ t = () => {} }) => {
 			type          : 'link',
 			icon          : IcMDashboard,
 			main_apis     : [],
-			possible_apis : apis.employee_portal,
-			module_type   : 'dashboards',
+			possible_apis : [
+				...apis.welcome,
+			],
+			module_type: 'dashboards',
 		},
 		employee_portal: {
 			key           : 'employee_portal',
@@ -747,8 +750,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					title : t('common:location_clusters'),
-					href  : '/locations-clusters',
-					as    : '/locations-clusters',
+					href  : '/v2/locations-clusters',
+					as    : '/v2/locations-clusters',
 					type  : 'link',
 				},
 				{
@@ -1641,8 +1644,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'cogo_assured-rate_sheets',
 					title         : t('common:rate_sheets'),
-					href          : '/cogo-assured/rate_sheets',
-					as            : '/cogo-assured/rate_sheets',
+					href          : '/v2/cogo-assured/rate_sheets',
+					as            : '/v2/cogo-assured/rate_sheets',
 					type          : 'link',
 					possible_apis : apis.cogo_assured,
 
@@ -1777,8 +1780,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'transaction_setting-convenience_rate',
 					title         : t('common:convenience_rates'),
-					href          : '/convenience-rates',
-					as            : '/convenience-rates',
+					href          : '/v2/convenience-rates',
+					as            : '/v2/convenience-rates',
 					main_apis     : ['list_convenience_rates'],
 					possible_apis : apis.convenience_rate,
 					module_type   : 'crm',
@@ -2286,8 +2289,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'ihls-data_pipeline',
 					title         : t('common:file_processing_dashboard'),
-					href          : '/ihls/data-pipeline',
-					as            : '/ihls/data-pipeline',
+					href          : '/v2/ihls/data-pipeline',
+					as            : '/v2/ihls/data-pipeline',
 					type          : 'link',
 					icon          : IcMDataPipeline,
 					possible_apis : [],
@@ -2563,7 +2566,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/employee-dashboard',
 			type          : 'link',
 			icon          : IcMDashboard,
-			possible_apis : apis.employee_performance_dashboard,
+			possible_apis : [...apis.employee_performance_dashboard, ...apis.separation],
 			main_apis     : [],
 			module_type   : 'dashboards',
 		},
@@ -2621,19 +2624,16 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/supply-allocation',
 					type          : 'link',
 					possible_apis : apis.supply_allocation,
-
-					main_apis: [],
+					main_apis     : [],
 				},
 				{
-					key   : 'forecast-demand_forecast',
-					title : t('common:demand_forecast'),
-
+					key           : 'forecast-demand_forecast',
+					title         : t('common:demand_forecast'),
 					href          : '/v2//demand-forecast',
 					as            : '/v2/demand-forecast',
 					type          : 'link',
 					possible_apis : apis.demand_forecast,
-
-					main_apis: [],
+					main_apis     : ['get_rolling_forecast_fcl_freight_clusters', 'get_rolling_forecast_port_pairs'],
 				},
 			],
 		},
@@ -2645,7 +2645,22 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/attendance-leave-management',
 			type          : 'link',
 			module_type   : 'dashboards',
-			possible_apis : apis.attendance_leave_management,
+			possible_apis : [
+				...apis.attendance_leave_management,
+				...apis.separation,
+			],
+		},
+
+		profile: {
+			key           : 'profile',
+			title         : 'Employee Profile',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			href          : '/v2/profile',
+			as            : '/v2/profile',
+			possible_apis : apis.profile,
+			icon          : IcMAppProfile,
 		},
 	};
 
