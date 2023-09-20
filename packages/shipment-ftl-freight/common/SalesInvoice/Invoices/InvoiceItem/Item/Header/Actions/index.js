@@ -137,7 +137,7 @@ function Actions({
 						)}
 
 					{!isEmpty(invoice.remarks) ? (
-						<Tooltip placement="bottom" content={RemarkRender({ invoice })}>
+						<Tooltip placement="bottom" content={<RemarkRender invoice={invoice} />}>
 							<div className={styles.icon_more_wrapper}>
 								<IcMInfo fill="#DDEBC0" />
 							</div>
