@@ -459,7 +459,7 @@ const GLOBAL_CONSTANTS = {
 		+ '45773ab4048f606ce6ef06fa1d083352/'
 		+ 'Book%201%20-%20Copy.xlsx',
 		bulk_jv_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
-		+ '6c4152e2ee0e09b3dd367781d911b724/test3%20%281%29.xlsx',
+		+ 'ae3740f2c19b22161257c6e416cd2f5a/JVUploadSampleExcel.xlsx',
 	},
 
 	urls: {
