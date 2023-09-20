@@ -12,7 +12,10 @@ import AccessorComponent from './AccessorComponent';
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
-export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab, t }) => [
+export const columns = ({
+	setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab, t,
+	detailsModal = {}, setDetailsModal = () => {},
+}) => [
 	{
 		Header   : t('incidentManagement:incident_id_header'),
 		accessor : 'incident_id',
@@ -209,7 +212,12 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 
 	{
 		accessor: (row:any) => (
-			<AccessorComponent row={row} getIncidentData={getIncidentData} />
+			<AccessorComponent
+				row={row}
+				getIncidentData={getIncidentData}
+				detailsModal={detailsModal}
+				setDetailsModal={setDetailsModal}
+			/>
 		),
 		id: 'actionColumn',
 	},

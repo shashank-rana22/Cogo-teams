@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 import { FilterProps } from '../common/interface';
 
@@ -15,4 +15,6 @@ export interface ColumnInterface {
 	setIsAscendingActive:React.Dispatch<React.SetStateAction<boolean>>
 	getIncidentData?:()=>{}
 	t?:Function;
+	detailsModal: {}
+	setDetailsModal: any
 }

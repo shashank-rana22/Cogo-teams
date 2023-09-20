@@ -57,3 +57,7 @@
 .icon {
 	margin-left: 4px;
 }
+
+.containerDisplay {
+	border: 2px solid black;
+}
