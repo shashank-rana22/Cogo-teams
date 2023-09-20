@@ -63,6 +63,12 @@ function IndexModalContent({
 		collectionPartyAddress, collectionPartyAddresses,
 		setCollectionPartyAddress, collectionPartyBankOptions]);
 
+	const handleDownload = () => {
+		if (downloadButtonState) {
+			window.open(downloadButtonState, '_blank');
+		}
+	};
+
 	return (
 		<>
 			<RadioGroupController
@@ -155,16 +161,9 @@ function IndexModalContent({
 									size="lg"
 									themeType="linkUi"
 									className={styles.download_button}
+									onClick={handleDownload}
 								>
-									<a
-										href={downloadButtonState}
-										target="_blank"
-										rel="noopener noreferrer"
-										download
-									>
-										Download
-
-									</a>
+									Download
 								</Button>
 							)
 						}
