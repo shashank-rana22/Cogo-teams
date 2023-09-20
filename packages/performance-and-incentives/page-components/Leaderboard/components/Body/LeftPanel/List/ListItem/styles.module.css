@@ -1,0 +1,26 @@
+.list_row {
+	display: flex;
+	padding: 8px 10px;
+	margin-bottom: 8px;
+	background-color: #fff;
+	border: 1px solid #f9f9f9;
+	border-radius: 6px;
+
+	&:hover {
+		cursor: pointer;
+		background: #fef199;
+	}
+}
+
+.list_column {
+	>p {
+		margin-bottom: 0;
+	}
+
+	display: flex;
+	align-items: center;
+}
+
+.box_shadow {
+	box-shadow: 0 1px 1px 0 rgb(252 220 0 / 50%);
+}

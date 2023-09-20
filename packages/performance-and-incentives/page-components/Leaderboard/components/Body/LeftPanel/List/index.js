@@ -1,11 +1,33 @@
-import { cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 import getListColumnMapping from './get-list-column-mapping';
+import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 function List(props) {
-	const { table_list = [{ rank: 1, name: 'madhesh', score: '3000', percentile: '50' }] } = props;
+	const {
+		table_list = [{
+			rank       : 1,
+			name       : 'madhesh',
+			score      : '3000',
+			percentile : '50',
+			children   : [{
+				rank       : 2,
+				name       : 'khushal',
+				score      : '2000',
+				percentile : '75%',
+
+				children: [{
+					rank  : 3,
+					name  : 'vimal',
+					score : '3000',
+				}],
+			}],
+		}, {
+			rank       : 5,
+			name       : 'mohith',
+			score      : '3000',
+			percentile : '50',
+		}],
+	} = props;
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping();
 
@@ -22,28 +44,7 @@ function List(props) {
 			</div>
 
 			<div className={styles.list_body_container}>
-				{table_list.map((listItem, index) => {
-					const isFirstEntry = index === GLOBAL_CONSTANTS.zeroth_index;
-					const boxShadow = isFirstEntry ? styles.box_shadow : '';
-
-					return (
-						<div key={listItem.id} className={cl`${styles.list_row} ${boxShadow}`}>
-							{LIST_COLUMN_MAPPING.map((columnItem) => {
-								const { key, flex, accessor } = columnItem;
-
-								return (
-									<div
-										key={key}
-										style={{ flex }}
-										className={styles.list_column}
-									>
-										{accessor(listItem)}
-									</div>
-								);
-							})}
-						</div>
-					);
-				})}
+				{table_list.map((listItem, index) => <ListItem key={listItem.id} listItem={listItem} index={index} />)}
 			</div>
 		</div>
 	);

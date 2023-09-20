@@ -9,6 +9,7 @@ function Body() {
 
 			<RightPanel />
 		</div>
+
 	);
 }
 
