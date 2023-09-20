@@ -2,15 +2,17 @@ import { Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
-import useGetSchedules from '../../../../../../../../../hooks/useGetSchedules';
+import useGetSchedules from '../../hooks/useGetSchedules';
 
 import Schedule from './Schedule';
 import styles from './styles.module.css';
 
-function PossibleSchedules({ rate = {}, service_type = '' }) {
+function PossibleSchedules({ rateCardData = {}, service_type = '' }) {
 	const { scheduleObject = {}, loading } = useGetSchedules(service_type);
 
-	const schedules = scheduleObject[rate?.airline?.id]?.schedules || [];
+	const line_id = rateCardData?.shipping_line?.id || rateCardData?.airline?.id;
+
+	const schedules = scheduleObject[line_id]?.schedules || [];
 
 	if (loading) {
 		return (

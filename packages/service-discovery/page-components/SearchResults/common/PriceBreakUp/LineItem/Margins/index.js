@@ -2,8 +2,8 @@ import { Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
-import CC from '../../../../../../../../../../helpers/condition-constants';
-import useGetPermission from '../../../../../../../../../../helpers/useGetPermission';
+import CC from '../../../../../../helpers/condition-constants';
+import useGetPermission from '../../../../../../helpers/useGetPermission';
 
 import styles from './styles.module.css';
 

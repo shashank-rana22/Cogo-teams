@@ -3,8 +3,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 
-import CC from '../../../../../../../../../../../../helpers/condition-constants';
-import useGetPermission from '../../../../../../../../../../../../helpers/useGetPermission';
+import CC from '../../../../../helpers/condition-constants';
+import useGetPermission from '../../../../../helpers/useGetPermission';
 
 import Margins from './Margins';
 import styles from './styles.module.css';
@@ -12,53 +12,36 @@ import styles from './styles.module.css';
 const DEFAULT_VALUE = 0;
 
 function LineItem({ lineItem = {} }) {
-	const { isConditionMatches, isChannelPartner } = useGetPermission({ navigation: 'service_discovery' });
+	const { isConditionMatches } = useGetPermission({ navigation: 'service_discovery' });
 
 	const {
 		currency,
 		margins,
-		total_price_discounted = 0,
-		price = 0,
+		price_discounted = 0,
 	} = lineItem || {};
 
 	let totalMarginValue = 0;
 	if (isConditionMatches(CC.SEE_SALES_MARGIN, 'or')) {
 		totalMarginValue = !isEmpty(margins)
 			? (margins || []).filter((margin) => margin?.margin_type === 'demand')[GLOBAL_CONSTANTS.zeroth_index]
-				?.total_margin_value
+				?.margin_value
 			: DEFAULT_VALUE;
 	}
 	if (isConditionMatches(CC.SEE_SUPPLY_MARGIN, 'or')) {
 		totalMarginValue = !isEmpty(margins)
 			? (margins || []).filter((margin) => margin?.margin_type === 'supply')[GLOBAL_CONSTANTS.zeroth_index]
-				?.total_margin_value
+				?.margin_value
 			: DEFAULT_VALUE;
 	}
 	if (isConditionMatches(CC.SEE_ALL_MARGINS, 'or')) {
 		(margins || []).forEach((margin) => {
-			totalMarginValue += margin.total_margin_value || DEFAULT_VALUE;
+			totalMarginValue += margin.margin_value || DEFAULT_VALUE;
 		});
 	}
 
 	const priceWithoutMargin = totalMarginValue
-		? total_price_discounted - totalMarginValue
-		: total_price_discounted;
-
-	if (isChannelPartner) {
-		return (
-			<div className={styles.container}>
-				{formatAmount({
-					amount  : price,
-					currency,
-					options : {
-						style                 : 'currency',
-						currencyDisplay       : 'symbol',
-						maximumFractionDigits : 0,
-					},
-				})}
-			</div>
-		);
-	}
+		? price_discounted - totalMarginValue
+		: price_discounted;
 
 	return (
 		<div className={styles.container}>

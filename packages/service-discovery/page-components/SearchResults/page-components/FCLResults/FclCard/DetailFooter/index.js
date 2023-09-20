@@ -2,10 +2,11 @@ import { cl, Tooltip } from '@cogoport/components';
 import { IcCCogoCoin, IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import PossibleSchedules from '../../../../common/PossibleSchedules';
+import PriceBreakup from '../../../../common/PriceBreakUp';
+import TermsConditions from '../../../../common/TermsConditions';
+
 import BottomTabs from './BottomTabs';
-import PossibleSchedules from './BottomTabs/PossibleSchedules';
-import PriceBreakup from './BottomTabs/PriceBreakUp';
-import TermsConditions from './BottomTabs/TermsConditions';
 import DetentionDemurrage from './DetentionDemurrage';
 import styles from './styles.module.css';
 
