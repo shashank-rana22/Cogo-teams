@@ -7,7 +7,7 @@ const useGeneratePdf = () => {
 	const [{ loading }, trigger] = usePublicRequest({
 		method : 'post',
 		url    : 'https://vmoiuzda31.execute-api.ap-south-1.amazonaws.com/production/generate_from_html',
-	}, { manual: false });
+	}, { manual: true });
 
 	const generatePdf = async ({
 		html = '',
