@@ -51,7 +51,7 @@ function SegmentedFilters({
 					/>
 				</div>
 
-				<FilterModal setFilters={setFilters} filters={filters} />
+				<FilterModal setFilters={setFilters} />
 			</div>
 		</div>
 	);
