@@ -23,7 +23,6 @@ const UPLOAD_TERMINAL_CHARGE_CONTROL = [
 		rules      : {
 			required: true,
 		},
-
 	},
 
 ];
