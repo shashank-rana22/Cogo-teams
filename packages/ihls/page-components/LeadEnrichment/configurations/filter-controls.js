@@ -27,7 +27,7 @@ const controls = [
 	},
 	{
 		name        : 'origin_country_port',
-		placeholder : 'Origin country / Port',
+		placeholder : 'Origin Port',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
 		valueKey    : 'id',
@@ -35,7 +35,7 @@ const controls = [
 			page_limit : 20,
 			filters    : {
 				status : 'active',
-				type   : ['seaport', 'country'],
+				type   : ['seaport', 'airport'],
 			},
 			includes: {
 				city                    : true,
@@ -48,7 +48,7 @@ const controls = [
 	},
 	{
 		name        : 'destination_country_port',
-		placeholder : 'Destination country / Port',
+		placeholder : 'Destination Port',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
 		valueKey    : 'id',
@@ -56,7 +56,7 @@ const controls = [
 			page_limit : 20,
 			filters    : {
 				status : 'active',
-				type   : ['seaport', 'country'],
+				type   : ['seaport', 'airport'],
 			},
 			includes: {
 				city                    : true,
