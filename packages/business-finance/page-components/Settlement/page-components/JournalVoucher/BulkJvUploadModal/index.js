@@ -11,7 +11,12 @@ import styles from './styles.module.css';
 const SAMPLE_BULK_JV_PDF_URL = GLOBAL_CONSTANTS.pdf_url.bulk_jv_sample_url;
 function BulkJvUpload({ showBulkJV = false, setShowBulkJV = () => {} }) {
 	const [fileValue, setFileValue] = useState('');
-	const { getUploadApi, bulkJvLoading } =	 useBulkJvUpload({ fileValue, setShowBulkJV });
+
+	const {
+		getUploadApi = () => {}, bulkJvLoading = false,
+		uploadData = {},
+	} =	 useBulkJvUpload({ fileValue, setShowBulkJV });
+
 	return (
 		<Modal size="md" show={showBulkJV} onClose={() => setShowBulkJV(false)} placement="center">
 			<Modal.Header title="Bulk JV Upload" />
@@ -24,6 +29,15 @@ function BulkJvUpload({ showBulkJV = false, setShowBulkJV = () => {} }) {
 						draggable
 						accept=".csv,.xlsx"
 					/>
+					{uploadData?.data?.errorFileUrl ? (
+						<Button
+							size="md"
+							themeType="linkUi"
+							onClick={() => window.open(uploadData?.data?.errorFileUrl, '_self')}
+						>
+							Download Error Document
+						</Button>
+					) : null}
 					<div className={styles.download_container}>
 						<p className={styles.sample_text}>Sample</p>
 						<IcMDownload
