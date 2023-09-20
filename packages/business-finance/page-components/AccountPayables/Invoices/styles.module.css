@@ -3,6 +3,12 @@
 	margin-top: 16px;
 }
 
+.toggle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .filtercontainer {
 	display: flex;
 	align-items: center;
