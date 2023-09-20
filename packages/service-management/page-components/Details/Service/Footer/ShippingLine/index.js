@@ -6,7 +6,7 @@ import {
 	SERVICES,
 	LOGO_MAPPING,
 	NAME_MAPPING,
-} from '../../../../common/SERVICES';
+} from '../../../../../common/SERVICES';
 
 import styles from './styles.module.css';
 

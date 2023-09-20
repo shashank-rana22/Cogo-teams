@@ -1,10 +1,9 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-// import { useState } from 'react';
 
-import Layout from '../../../common/Layout';
-import { PORT_PAIR_SERVICES } from '../../../common/SERVICES';
-import useUpdateOrganizationService from '../../../hooks/useUpdateOrganizationService';
+import Layout from '../../../../common/Layout';
+import { PORT_PAIR_SERVICES } from '../../../../common/SERVICES';
+import useUpdateOrganizationService from '../../../../hooks/useUpdateOrganizationService';
 
 import getControls from './getControls';
 
@@ -13,16 +12,16 @@ function AddServices({
 	org_id = '',
 	selected = [],
 	data = {},
-	setIsEdit = () => {},
-	// refetchGetServices,
-	// locationsPrefill = [],
-	// fetchService,
+	setIsEdit = () => { },
+	locations_prefill = [],
 }) {
-	// const [formValues, setFormValues] = useState({});
 	const controls = getControls({ organization_id: org_id });
-	const { control, formValues:{ errors = {} } = {}, handleSubmit } = useForm();
+	const {
+		control, formValues: { errors = {} } = {},
+		handleSubmit,
+	} = useForm({ defaultValues: { location_pairs: locations_prefill } });
 
-	const { onSubmit:addUpdateHandle = () => {} } = useUpdateOrganizationService();
+	const { onSubmit: addUpdateHandle = () => { } } = useUpdateOrganizationService();
 
 	const fieldKey = PORT_PAIR_SERVICES.includes(service_type)
 		? 'location_pairs'
@@ -42,19 +41,14 @@ function AddServices({
 			total_teus  : '0 - 50',
 		};
 	});
-	// console.log('SELECTED', selectedServices);
 
 	const onSubmit = async (values) => {
-		// console.log('VALUES', values);
 		const locations = [...selectedServices, ...values[fieldKey]];
 
 		const formattedData = {
 			service_data: { [fieldKey]: locations },
 		};
-		// console.log(formattedData, 'Format');
 		await addUpdateHandle({ service_data: formattedData, service_type, org_id, data });
-		// refetchGetServices();
-		// fetchService();
 		setIsEdit(false);
 	};
 
@@ -62,9 +56,11 @@ function AddServices({
 
 		<div>
 			<Layout control={control} errors={errors} controls={controls} />
-			<Button onClick={handleSubmit(onSubmit)}>
-				Save
-			</Button>
+			<div style={{ marginTop: 10, display: 'flex', justifyContent: 'flex-end' }}>
+				<Button onClick={handleSubmit(onSubmit)}>
+					Save
+				</Button>
+			</div>
 		</div>
 
 	);

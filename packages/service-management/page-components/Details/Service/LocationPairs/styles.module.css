@@ -1,0 +1,20 @@
+.parent {
+	display: flex;
+	flex-direction: column;
+	min-height: 400px;
+	padding: 16px;
+}
+
+.content {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.locations {
+	display: flex;
+	align-items: center;
+}
+
+.port {
+	margin-right: 10px;
+}

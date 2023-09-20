@@ -1,7 +1,7 @@
 import { Checkbox } from '@cogoport/components';
 import { v1 as uuid } from 'uuid';
 
-import ComponentMapping from '../../OptedRecommendedServices.js/ComponentMapping';
+import ComponentMapping from '../../OptedRecommendedServices/ComponentMapping';
 
 import styles from './styles.module.css';
 

@@ -1,17 +1,10 @@
 import { Modal, Button } from '@cogoport/components';
 
+import { PORT_PAIR_SERVICES } from '../../../../common/SERVICES';
+
 import Footer from './Footer';
 import LocationPairs from './LocationPairs';
 import Locations from './Locations';
-
-const PORT_PAIR_SERVICES = [
-	'fcl_freight',
-	'lcl_freight',
-	'ftl_freight',
-	'ltl_freight',
-	'air_freight',
-	'haulage_freight',
-];
 
 function ModalComponent({ data = {}, show = false, setShow = () => {} }) {
 	return (

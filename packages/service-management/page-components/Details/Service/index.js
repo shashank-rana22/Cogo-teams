@@ -1,4 +1,4 @@
-import { Loader, cl } from '@cogoport/components';
+import { Loader, cl, Button } from '@cogoport/components';
 import { IcMCross, IcMEdit } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -6,13 +6,13 @@ import { useState } from 'react';
 import { PORT_PAIR_SERVICES } from '../../../common/SERVICES';
 import useListOrganizationServiceExpertises from '../../../hooks/useListOrganizationServiceExpertises';
 import useListRecommendServiceExpertise from '../../../hooks/useListRecommendServiceExpertise';
-import AddServices from '../AddServices';
-import Footer from '../Footer';
-import LocationPairs from '../LocationPairs';
-import Locations from '../Locations';
-import OptedRecommendedServices from '../OptedRecommendedServices.js';
-import RecommendedServices from '../RecommendedServices';
 
+import AddServices from './AddServices';
+import Footer from './Footer';
+import LocationPairs from './LocationPairs';
+import Locations from './Locations';
+import OptedRecommendedServices from './OptedRecommendedServices';
+import RecommendedServices from './RecommendedServices';
 import styles from './styles.module.css';
 
 function Service({ item = {} }) {
@@ -21,10 +21,12 @@ function Service({ item = {} }) {
 			organization_id : item?.organization_id,
 			service_type    : item?.requested_service?.service,
 		},
+		defaultParams: { location_details_required: true },
 	});
 	const [isEdit, setIsEdit] = useState(false);
 	const [show, setShow] = useState(false);
 	const [selected, setSelected] = useState([]);
+
 	const prefill = Object.keys(data?.list || [])?.map((val) => {
 		const key = data?.list?.[val];
 		if (key?.location_id) {
@@ -61,7 +63,6 @@ function Service({ item = {} }) {
 
 	if (loading) return <Loader />;
 	return (
-
 		<div className={styles.container}>
 			<div className={styles.request_title}>Requested service</div>
 			<div className={styles.details}>
@@ -72,8 +73,8 @@ function Service({ item = {} }) {
 				</div>
 				<div className={styles.service_title}>
 					{isEdit && (
-						<button
-							className={cl`${styles.primary} ${styles.sm} ${styles.text}`}
+						<Button
+							themeType="secondary"
 							onClick={() => !isEmpty(expertise) && setShow(!show)}
 							style={{
 								cursor    : isEmpty(expertise) && 'not-allowed',
@@ -81,7 +82,7 @@ function Service({ item = {} }) {
 							}}
 						>
 							Add recommended services
-						</button>
+						</Button>
 					)}
 				</div>
 				{!isEmpty(selected) && isEdit && (
@@ -93,7 +94,7 @@ function Service({ item = {} }) {
 
 				<div className={styles.edit_wrap}>
 					<div className={styles.title}>Location Pairs</div>
-					<button
+					<Button
 						className={cl`${styles.primary} ${styles.sm}`}
 						onClick={() => setIsEdit(!isEdit)}
 					>
@@ -109,7 +110,7 @@ function Service({ item = {} }) {
 								style={{ marginLeft: '4px', color: '#fff' }}
 							/>
 						)}
-					</button>
+					</Button>
 				</div>
 
 				{!isEdit ? (
@@ -127,8 +128,6 @@ function Service({ item = {} }) {
 						<AddServices
 							service_type={item?.requested_service?.service}
 							org_id={item?.organization_id}
-							// refetchGetServices={refetchGetServices}
-							// fetchService={fetchService}
 							setIsEdit={setIsEdit}
 							selected={selected}
 							data={data}
