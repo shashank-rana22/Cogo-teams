@@ -8,6 +8,7 @@ import getRecommendation from '../../../helpers/getRecommendation';
 import getSellRateDetailPayload from '../../../helpers/getSellRateDetailPayload';
 import getSystemFormatedRates from '../../../helpers/getSystemFormatedRates';
 import groupSimilarServices from '../../../helpers/groupSimilarServices';
+import useGetRDWallet from '../../../hooks/useGetRDWallet';
 // import useGetShipmentEligibleBookingDocument from '../../../hooks/useGetShipmentEligibleBookingDocument';
 import useListRevenueDeskAvailableRates from '../../../hooks/useListRevenueDeskAvailableRates';
 import useListShipmentBookingConfirmationPreferences from
@@ -83,6 +84,7 @@ function SingleService({
 		isPreferenceRequired: !isPreferenceSet,
 	});
 
+	const { data: walletAmount } = useGetRDWallet({ singleServiceData });
 	// const { data:existingData, loading:existingDataLoading } = useGetShipmentEligibleBookingDocument({
 	// 	shipmentData,
 	// 	singleServiceData,
@@ -164,6 +166,7 @@ function SingleService({
 				serviceData={singleServiceData}
 				price={priceData?.[singleServiceData?.id]}
 				shipmentData={shipmentData}
+				walletAmount={walletAmount}
 			/>
 			{(isPreferenceSet || ['cancelled', 'completed'].includes(shipmentData?.state)) ? (
 				<PreferenceSetServiceData
@@ -208,6 +211,7 @@ function SingleService({
 							prefrence_key={item?.prefrence_key}
 							loading={ratesLoading}
 							shipmentData={shipmentData}
+							walletAmount={walletAmount}
 						/>
 					))}
 				</>

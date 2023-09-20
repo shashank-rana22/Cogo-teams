@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Toast } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
@@ -8,13 +8,21 @@ import styles from './styles.module.css';
 
 function Card({
 	data, setPrefrences, prefrences, rate_key, singleServiceData, setSellRates,
-	sellRates, prefrence_key, fromkey, priority_no, shipmentData,
+	sellRates, prefrence_key, fromkey, priority_no, shipmentData, walletAmount = {},
 }) {
 	const handlePrefrence = (rate) => {
 		const foundItem = (prefrences?.[singleServiceData?.id] || []).find(
 			(obj) => obj?.validity_id === rate?.rowData?.validity_id
 			&& obj?.rate_id === rate?.id,
 		);
+
+		const { rowData } = rate;
+		const { total_buy_price_in_preferred_currency, total_sell_price_in_preferred_currency } = rowData || {};
+		const walletBalance = total_buy_price_in_preferred_currency
+			- total_sell_price_in_preferred_currency;
+
+		const rejectRate = walletBalance > walletAmount?.wallet_amount;
+
 		if (foundItem) {
 			const oldItems = prefrences?.[singleServiceData?.id];
 			const newRows = oldItems.filter((val) => {
@@ -33,20 +41,24 @@ function Card({
 			}
 		} else {
 			const newList = prefrences?.[singleServiceData?.id] || [];
-			newList.push({
-				rate_id     : rate?.id,
-				id          : rate?.rowData?.service_provider_id,
-				key         : prefrence_key,
-				data        : rate,
-				validity_id : rate?.rowData?.validity_id,
-			});
-			setPrefrences({ ...prefrences, [singleServiceData?.id]: [...newList] });
+			if (!rejectRate) {
+				newList.push({
+					rate_id     : rate?.id,
+					id          : rate?.rowData?.service_provider_id,
+					key         : prefrence_key,
+					data        : rate,
+					validity_id : rate?.rowData?.validity_id,
+				});
+				setPrefrences({ ...prefrences, [singleServiceData?.id]: [...newList] });
+			} else {
+				Toast.error('Exceeding Wallet Amount');
+			}
 		}
 	};
 	const showData = (val) => val || '';
 	const updated_at = data?.rowData?.updated_at;
 
-	const handleLeftSectionPriority = (ratekey) => {
+	function HandleLeftSectionPriority(ratekey) {
 		if (ratekey === 'selected_rate') {
 			return `${priority_no}.`;
 		} if (ratekey === 'preferences_rate') {
@@ -62,7 +74,7 @@ function Card({
 				validity_id={data?.rowData?.validity_id}
 			/>
 		);
-	};
+	}
 	return (
 		<div
 			className={((rate_key === 'selected_rate') || (rate_key === 'preferences_rate'))
@@ -71,7 +83,7 @@ function Card({
 			onClick={() => (!rate_key ? handlePrefrence(data) : null)}
 		>
 			<div className={styles.left_section_container}>
-				{handleLeftSectionPriority(rate_key)}
+				{HandleLeftSectionPriority(rate_key)}
 			</div>
 			<div className={styles.line} />
 			<div className={styles.right_section_container}>

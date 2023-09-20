@@ -1,6 +1,5 @@
 import { InputNumber } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
@@ -34,10 +33,6 @@ const getServiceLabel = ({ service, isHead }) => {
 	}
 	return `${startCase(Label[GLOBAL_CONSTANTS.zeroth_index])} ${startCase(Label[NUMBERS.ONE])}`;
 };
-const calcProfit = ({ prefCount, sumBuy, sumSell }) => (NUMBERS.HUNDRED
-* parseFloat((Number(sumSell[prefCount - NUMBERS.ONE])
-			- Number(sumBuy[prefCount - NUMBERS.ONE]))
-			/ Number(sumBuy[prefCount - NUMBERS.ONE]))).toFixed(NUMBERS.TWO);
 
 function ColumnHeader({ list = {}, priceData = {} }) {
 	const [prefCount, setPrefCount] = useState(NUMBERS.ONE);
@@ -90,38 +85,6 @@ function ColumnHeader({ list = {}, priceData = {} }) {
 							step={1}
 						/>
 					</div>
-				</div>
-
-				<div className={styles.title}>
-					{`${calcProfit({ prefCount, sumBuy, sumSell }) || GLOBAL_CONSTANTS.zeroth_index}%`}
-
-				</div>
-				<div className={styles.title} style={{ color: '#849E4C' }}>
-					{
-formatAmount({
-	amount   : sumBuy?.[prefCount - NUMBERS.ONE] || GLOBAL_CONSTANTS.zeroth_index,
-	currency : 'USD',
-	options  : {
-		style                 : 'currency',
-		currencyDisplay       : 'code',
-		maximumFractionDigits : 2,
-	},
-})
-}
-				</div>
-				<div className={styles.title} style={{ color: '#EE3425' }}>
-					{
-formatAmount({
-	amount   : sumSell?.[prefCount - NUMBERS.ONE] || GLOBAL_CONSTANTS.zeroth_index,
-	currency : 'USD',
-	options  : {
-		style                 : 'currency',
-		currencyDisplay       : 'code',
-		maximumFractionDigits : 2,
-	},
-})
-            }
-
 				</div>
 			</div>
 			<div className={styles.tableContainer}>

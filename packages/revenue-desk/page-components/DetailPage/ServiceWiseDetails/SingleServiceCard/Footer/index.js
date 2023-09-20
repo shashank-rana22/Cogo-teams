@@ -1,13 +1,10 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format, startCase } from '@cogoport/utils';
 
-import useGetRDWallet from '../../../../../hooks/useGetRDWallet';
-
 import styles from './styles.module.css';
 
-function Footer({ data = {} }) {
+function Footer({ data = {}, walletAmount = {} }) {
 	const ZERO_VALUE = 0;
-	const { data: walletAmount } = useGetRDWallet({ data });
 	const { wallet_amount = '', currency = '' } = walletAmount || {};
 
 	const infoArray = [

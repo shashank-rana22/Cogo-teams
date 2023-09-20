@@ -36,10 +36,13 @@
 
 .select_container {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
-	width: 300px;
-	margin-left: 12px;
+
+	:global {
+		.ui_chips_container {
+			margin-right: 5px;
+		}
+	}
 }
 
 .select_outer_container {
@@ -76,5 +79,5 @@
 }
 
 .service_outer_container {
-	width: 23vw;
+	width: 24vw;
 }
