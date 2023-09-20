@@ -9,18 +9,12 @@ import useListAuthorityDeskShipments from '../../hooks/useListAuthorityDeskShipm
 import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
 import Filters from './Filters';
-import GoToKamDesk from './GoToKamDesk';
 import List from './List';
 import styles from './styles.module.css';
 
 const DEFAULT_COUNT = 0;
 
 const SERVICES = { fcl_freight: 'FCL Freight', lcl_freight: 'LCL Freight', fcl_local: 'FCL Locals' };
-const ROLE_NAME = {
-	kam            : 'KAM',
-	so2            : 'SO2',
-	credit_control : '',
-};
 
 function Ocean() {
 	const { role } = useStakeholderCheck();
@@ -45,18 +39,13 @@ function Ocean() {
 	});
 
 	const { data, loading, refetch } = useListAuthorityDeskShipments({ ...tabsState, filters });
+
 	const { count_stats } = data;
 
 	const { buckets, additionalTabs } = BucketsMapping({ role, count_stats });
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
-				<div className={styles.heading}>{`${ROLE_NAME[role]} Authority Desk`}</div>
-				{role === 'kam'
-				&& <GoToKamDesk />}
-			</div>
-
 			<Tabs
 				activeTab={tabsState.activeTab}
 				themeType="primary"

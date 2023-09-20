@@ -1322,8 +1322,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key       : 'coe-bl_do',
 					title     : t('common:authority_desk'),
-					href      : '/bl-do',
-					as        : '/bl-do',
+					href      : '/v2/bl-do',
+					as        : '/v2/bl-do',
 					type      : 'link',
 					main_apis : [
 						'list_authority_desk_bl_documents',
