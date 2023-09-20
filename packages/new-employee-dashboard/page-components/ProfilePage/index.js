@@ -32,14 +32,14 @@ function ProfilePage() {
 		loading = false,
 		ctcStructure = {},
 		initialQuestion = '',
-		setInitialQuestion = () => {},
+		setInitialQuestion = () => { },
 		formProps = {},
 		getEmployeeDetails,
 		getEmployeeDetailsLoading,
 		error = false,
 		shareOfferLetter = '',
-		setShareOfferLetter = () => {},
-		setError = () => {},
+		setShareOfferLetter = () => { },
+		setError = () => { },
 	} = useProfileDetails();
 
 	const {
