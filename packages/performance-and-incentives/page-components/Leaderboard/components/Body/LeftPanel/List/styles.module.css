@@ -13,7 +13,10 @@
 }
 
 .top_heading {
+	display: flex;
+	align-items: center;
 	color: #828282;
+	cursor: pointer;
 }
 
 .rank {
@@ -24,4 +27,8 @@
 
 .name {
 	font-size: 18px;
+}
+
+.arrow {
+	margin-left: 10px;
 }
