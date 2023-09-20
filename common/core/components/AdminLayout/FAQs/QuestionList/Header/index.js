@@ -1,6 +1,6 @@
-import { Toast, Input, Button } from '@cogoport/components';
+import { Toast, Input, Button, cl } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { IcMSearchlight, IcMCross, IcMArrowLeft } from '@cogoport/icons-react';
+import { IcMSearchlight, IcMCross, IcMArrowLeft, IcMFeedback } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -90,7 +90,7 @@ function Header({
 
 	return (
 
-		<div className={`${styles.container} ${styles[from]}`}>
+		<div className={cl`${styles.container} ${styles[from]}`}>
 
 			<div className={styles.wrapper}>
 				{showFeedback ?	(
@@ -110,7 +110,8 @@ function Header({
 							className={styles.feedback}
 							onClick={handleFeedback}
 						>
-							Give a feedback
+							<IcMFeedback />
+							Feedback
 						</Button>
 					)}
 
