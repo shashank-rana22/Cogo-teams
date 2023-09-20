@@ -25,7 +25,7 @@ const OPTIONS = [
 
 function TechClearance({ data = {}, refetch = () => {} }) {
 	const [showModal, setShowModal] = useState(false);
-	
+
 	const [items, setItems] = useState(OPTIONS);
 	const {
 		control,
@@ -40,7 +40,6 @@ function TechClearance({ data = {}, refetch = () => {} }) {
 
 	const TECH_CLEARANCE_STATUS = techClearance?.is_complete;
 
-	
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch });
 
 	const onSubmit = (values = {}) => {

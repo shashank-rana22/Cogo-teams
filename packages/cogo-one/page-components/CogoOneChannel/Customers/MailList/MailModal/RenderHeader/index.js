@@ -38,6 +38,7 @@ function RenderHeader({
 	setEmailTemplate = () => {},
 	isTemplateView = false,
 	setMinimizeModal = () => {},
+	handleSaveDraft = () => {},
 }) {
 	return (
 		<div className={styles.mail_modal_header}>
@@ -61,7 +62,11 @@ function RenderHeader({
 
 				<div className={styles.right_container}>
 					<div className={styles.minimize_button} title="minimize">
-						<IcMMinus onClick={() => setMinimizeModal(true)} />
+						<IcMMinus onClick={() => {
+							handleSaveDraft({ isMinimize: true });
+							setMinimizeModal(true);
+						}}
+						/>
 					</div>
 				</div>
 			</div>
@@ -89,18 +94,31 @@ function RenderHeader({
 						<Button
 							size="sm"
 							themeType="accent"
-							onClick={() => {
-								setEmailTemplate((prev) => ({ ...prev, isTemplateView: true }));
-							}}
+							disabled={replyLoading}
+							onClick={() => setEmailTemplate(
+								(prev) => ({
+									...prev,
+									isTemplateView: true,
+								}),
+							)}
 						>
 							Add Template
 						</Button>
 					</div>
 
+					<Button
+						size="sm"
+						themeType="secondary"
+						disabled={replyLoading}
+						onClick={handleSaveDraft}
+					>
+						Save as draft
+					</Button>
+
 					{DISABLE_ATTACHMENTS_FOR.includes(buttonType) ? null : (
 						<div className={styles.file_uploader_div} title="attachment">
 							<CustomFileUploader
-								disabled={uploading}
+								disabled={uploading || replyLoading}
 								handleProgress={setUploading}
 								className="file_uploader"
 								accept=".png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx"
@@ -113,6 +131,7 @@ function RenderHeader({
 							/>
 						</div>
 					)}
+
 					<div
 						className={cl`${replyLoading ? styles.disabled_button : ''} ${styles.send_icon}`}
 						title="send"
