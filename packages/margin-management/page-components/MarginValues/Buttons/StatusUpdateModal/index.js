@@ -1,4 +1,5 @@
 import { Button, Modal, Toast } from '@cogoport/components';
+import { useCallback } from 'react';
 
 import useUpdateMargin from '../../../../hooks/useUpdateMargin';
 
@@ -11,19 +12,15 @@ function StatusUpdateModal({
 }) {
 	const { loading, onSubmit } = useUpdateMargin();
 
-	const handleSave = async (status) => {
-		const params = {
-			id,
-			status,
-		};
-		const success = await onSubmit({ params });
+	const handleSave = useCallback(async (status) => {
+		const success = await onSubmit({ params: { id, status } });
 		if (success) {
 			setShow(false);
 			setMarginBreakupData({});
 			refetch();
 			Toast.success('Status has been updated successfully!');
 		}
-	};
+	}, [id, setMarginBreakupData, setShow, refetch, onSubmit]);
 
 	return (
 		<Modal show={show} onClose={setShow} placement="top" showCloseIcon={false}>

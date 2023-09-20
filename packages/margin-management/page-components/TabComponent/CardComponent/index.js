@@ -7,21 +7,17 @@ import Footer from '../Footer';
 
 import styles from './styles.module.css';
 
+const ZERO = 0;
+
 function CardComponent({
 	service = {}, margin_type = '', setMarginBreakupData = () => {},
 	showContainerDetails = true,
 }) {
 	const [showDetails, setShowDetails] = useState(false);
-	// console.log({ showDetails });
 	if (isEmpty(service?.service)) return null;
 
 	const setDetails = () => {
 		setShowDetails(!showDetails);
-
-		// if (service?.service === activeService) {
-		// 	setActiveService('');
-		// } else setActiveService(service?.service);
-		// console.log(service?.service, 'HERE', activeService);
 	};
 	return (
 		<div>
@@ -34,8 +30,8 @@ function CardComponent({
 				<Button onClick={setDetails}>VIEW DETAILS</Button>
 			</div>
 			<div className={styles.button_container}>
-				<Pill color="green">{`${service?.active_count} ACTIVE`}</Pill>
-				<Pill>{`${service?.inactive_count} INACTIVE`}</Pill>
+				<Pill color="green">{`${service?.active_count || ZERO} ACTIVE`}</Pill>
+				<Pill>{`${service?.inactive_count || ZERO} INACTIVE`}</Pill>
 			</div>
 			{showDetails && (
 				<Footer

@@ -1,5 +1,7 @@
 import { Pill } from '@cogoport/components';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
+
+import getOriginMarginType from '../../../helpers/getOriginMarginType';
 
 import styles from './styles.module.css';
 
@@ -11,21 +13,8 @@ function Info({ data = {} }) {
 		trade_type = '',
 		rate_type = '',
 	} = data?.filters || {};
-	const origin = () => {
-		if (!isEmpty(location)) {
-			return location?.display_name;
-		}
-		if (!isEmpty(origin_location)) {
-			return origin_location?.display_name;
-		}
-		return null;
-	};
-	const marginType = () => {
-		if (data?.margin_type === 'demand') {
-			return 'sales';
-		}
-		return data?.margin_type;
-	};
+
+	const { origin = {}, margin_type = '' } = getOriginMarginType({ location, origin_location, data });
 	return (
 		<div>
 			<div className={styles.flex}>
@@ -33,8 +22,8 @@ function Info({ data = {} }) {
 				{trade_type ? <Pill>{startCase(trade_type)}</Pill> : null}
 			</div>
 			<div className={styles.flex}>
-				{origin()?.display_name ? (
-					<Pill>{origin()?.display_name}</Pill>
+				{origin?.display_name ? (
+					<Pill>{origin?.display_name}</Pill>
 				) : null}
 				{destination_location?.display_name ? (
 					<Pill>{destination_location?.display_name}</Pill>
@@ -43,7 +32,7 @@ function Info({ data = {} }) {
 
 			<div className={styles.flex}>
 				<div>Margin Type</div>
-				<Pill>{marginType()}</Pill>
+				<Pill>{margin_type}</Pill>
 			</div>
 			<div className={styles.flex}>
 				<div>Rate Type</div>

@@ -1,5 +1,7 @@
 import { Pill, Button } from '@cogoport/components';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
+
+import getOriginMarginType from '../../../helpers/getOriginMarginType';
 
 import styles from './styles.module.css';
 
@@ -15,15 +17,7 @@ function Details({ data = {}, setMarginBreakupData = () => {}, showContainerDeta
 		trade_type = '',
 	} = filters || {};
 	const { business_name } = partner || {};
-	const origin = () => {
-		if (!isEmpty(location)) {
-			return location?.display_name;
-		}
-		if (!isEmpty(origin_location)) {
-			return origin_location?.display_name;
-		}
-		return null;
-	};
+	const { origin } = getOriginMarginType({ origin_location, location });
 	const setData = () => {
 		setMarginBreakupData(data);
 	};
@@ -33,8 +27,8 @@ function Details({ data = {}, setMarginBreakupData = () => {}, showContainerDeta
 				<div className={styles.flex}>
 					<Pill size="md" color="yellow">{startCase(service)}</Pill>
 					<div className={styles.origin_destination}>
-						{origin() && (
-							<Pill size="md" color="yellow">{origin()}</Pill>
+						{origin && (
+							<Pill size="md" color="yellow">{origin}</Pill>
 						) }
 						{destination_location?.display_name && (
 							<Pill size="md" color="yellow">{destination_location?.display_name}</Pill>
@@ -47,55 +41,55 @@ function Details({ data = {}, setMarginBreakupData = () => {}, showContainerDeta
 					<div style={{ marginLeft: '10px' }}>{data?.organization?.business_name}</div>
 				</div>
 				<div className={styles.flex}>
-					{data?.partner?.business_name && (
+					{data?.partner?.business_name ? (
 						<Pill size="md" color="blue">
 							Partner Entity:
 							{' '}
 							{startCase(business_name)}
 						</Pill>
-					)}
-					{data?.margin_type && (
+					) : null}
+					{data?.margin_type ? (
 						<Pill size="md" color="blue">
 							Margin Type:
 							{' '}
 							{startCase(margin_type)}
 						</Pill>
-					)}
-					{data?.margin_slabs_currency && (
+					) : null}
+					{data?.margin_slabs_currency ? (
 						<Pill size="md" color="blue">
 							Margin Currency:
 							{' '}
 							{startCase(margin_slabs_currency)}
 						</Pill>
-					)}
+					) : null}
 				</div>
 				{showContainerDetails && (
 					<div className={styles.flex}>
-						{container_size && (
+						{container_size ? (
 							<Pill size="md">
 								Container Size:
 								{' '}
 								{startCase(container_size)}
 							</Pill>
-						) }
-						{container_type && (
+						) : null}
+						{container_type ? (
 							<Pill size="md">
 								Container Type:
 								{' '}
 								{startCase(container_type)}
 							</Pill>
-						) }
-						{commodity && (
+						) : null }
+						{commodity ? (
 							<Pill size="md">
 								Commodity:
 								{' '}
 								{startCase(commodity)}
 							</Pill>
-						) }
+						) : null }
 					</div>
 				)}
 				{data?.agent?.name ? (
-					<div style={{ marginTop: '8px', marginLeft: '10px' }}>
+					<div className={styles.agent_name}>
 						{`Agent: ${data?.agent?.name} ${data?.agent?.email ? `(${data?.agent?.email})` : ''
 						}`}
 					</div>

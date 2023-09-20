@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { useCallback } from 'react';
 
 import useUpdateMargin from '../../../../hooks/useUpdateMargin';
 
@@ -11,12 +12,8 @@ function DeactiveModal({
 }) {
 	const router = useRouter();
 	const { loading = false, onSubmit = () => {} } = useUpdateMargin();
-	const handleSave = async () => {
-		const params = {
-			id,
-			status: 'inactive',
-		};
-		const success = await onSubmit({ params });
+	const handleSave = useCallback(async () => {
+		const success = await onSubmit({ params: { id, status: 'inactive' } });
 		if (success) {
 			setOpenModal(false);
 			setMarginBreakupData({});
@@ -25,7 +22,7 @@ function DeactiveModal({
 				router.push('/margins');
 			}
 		}
-	};
+	}, [id, onSubmit, refetch, router, setMarginBreakupData, setOpenModal, type]);
 	return (
 		<Modal show={openModal} onClose={setOpenModal} placement="top" showCloseIcon={false}>
 			<Modal.Header title="Deactivate" />

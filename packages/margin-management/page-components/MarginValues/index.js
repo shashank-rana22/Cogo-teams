@@ -17,15 +17,10 @@ function MarginValues({ data = {}, activeTab = '', setMarginBreakupData = () => 
 					return <div style={{ textAlign: 'center' }}>{item?.min_value}</div>;
 				}
 				return (
-					<div
-						style={{ textAlign: 'center' }}
-					>
-						{`${item?.currency}(${item?.min_value}-${item?.max_value})`}
-
-					</div>
+					<div className={styles.currency}>{`${item?.currency}(${item?.min_value}-${item?.max_value})`}</div>
 				);
 			}
-			return <div style={{ textAlign: 'center' }}>{`${item?.currency} 0`}</div>;
+			return <div className={styles.currency}>{`${item?.currency} 0`}</div>;
 		}
 		return null;
 	}

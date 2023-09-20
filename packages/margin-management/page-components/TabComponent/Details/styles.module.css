@@ -24,3 +24,8 @@
 	border-radius: 10px;
 	box-shadow: 0 2px 55px 10px rgb(60 67 83 / 5%);
 }
+
+.agent_name {
+	margin-top: "8px";
+	margin-left: "10px";
+}

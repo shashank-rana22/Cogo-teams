@@ -1,6 +1,5 @@
 import { Loader } from '@cogoport/components';
 import { useEffect } from 'react';
-import { v1 as uuid } from 'uuid';
 
 import useListMargins from '../../../hooks/useListMargins';
 import Details from '../Details';
@@ -27,11 +26,11 @@ function Footer({
 	return (
 		<div>
 			<ListPagination paginationProps={paginationProps} />
-			{(data?.list || []).map((item, index) => (
+			{(data?.list || []).map((item) => (
 				<Details
 					showContainerDetails={showContainerDetails}
 					setMarginBreakupData={setMarginBreakupData}
-					key={`${`${index}${uuid()}`}`}
+					key={item?.id}
 					data={item}
 				/>
 			))}
