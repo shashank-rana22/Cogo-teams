@@ -16,7 +16,7 @@ function Card({
 	activeCard = '',
 	statsLoading = false,
 	className = '',
-	handleClick = () => { },
+	handleClick = () => {},
 	filter = {},
 }) {
 	const { title = 'Previous Backlogs', color = '#000' } = detail;
@@ -69,7 +69,7 @@ function Card({
 				</div>
 				<span className={styles.link}>
 					{activeCard !== detail?.status && (
-						<Button themeType="linkUi"  type="button">
+						<Button themeType="linkUi" type="button">
 							View all
 							{' '}
 							<IcMArrowDown />
