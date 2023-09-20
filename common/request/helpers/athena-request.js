@@ -1,11 +1,8 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format } from '@cogoport/utils';
 import Axios from 'axios';
 import qs from 'qs';
 
 import getMicroServiceName from './get-microservice-name';
-
-const FIRST_INDEX = 1;
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
@@ -17,11 +14,11 @@ const customSerializer = (params) => {
 
 const microServices = getMicroServiceName();
 
-const athenaRequest = Axios.create({ baseURL: process.env.IHLS_BASE_URL });
+const athenaRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
 
 athenaRequest.interceptors.request.use((oldConfig) => {
 	const { ...newConfig } = oldConfig;
-	const apiPath =	newConfig.url.split('/')[FIRST_INDEX] || newConfig.url.split('/')[GLOBAL_CONSTANTS.zeroth_index];
+	const apiPath =	newConfig.url.split('/')[1] || newConfig.url.split('/')[0];
 	const serviceName = microServices[apiPath];
 
 	if (serviceName) {
