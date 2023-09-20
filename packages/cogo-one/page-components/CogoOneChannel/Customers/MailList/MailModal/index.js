@@ -9,7 +9,7 @@ import mailFunction from '../../../../../utils/mailFunctions';
 
 import ComposeEmailBody from './ComposeEmailBody';
 import EmailTemplateList from './EmailTemplateList';
-import RenderHeader from './Header';
+import RenderHeader from './RenderHeader';
 import styles from './styles.module.css';
 
 function MailEditorModal({
@@ -17,11 +17,13 @@ function MailEditorModal({
 	userId = '',
 	activeMail = {},
 	viewType = '',
+	firestore = {},
 }) {
 	const {
 		buttonType,
 		setEmailState,
 		setButtonType,
+		resetEmailState,
 	} = mailProps;
 
 	const uploaderRef = useRef(null);
@@ -70,12 +72,14 @@ function MailEditorModal({
 	const {
 		handleSend = () => {},
 		replyLoading = false,
+		handleSaveDraft = () => {},
 	} = useMailEditorFunctions({
 		uploading,
 		activeMail,
 		attachments,
 		userId,
 		mailProps,
+		firestore,
 	});
 
 	if (minimizeModal) {
@@ -123,7 +127,9 @@ function MailEditorModal({
 						setEmailTemplate={setEmailTemplate}
 						isTemplateView={isTemplateView}
 						setButtonType={setButtonType}
+						handleSaveDraft={handleSaveDraft}
 						setMinimizeModal={setMinimizeModal}
+						resetEmailState={resetEmailState}
 					/>
 				)}
 				className={styles.modal_header}

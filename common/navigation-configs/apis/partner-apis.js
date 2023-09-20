@@ -12849,6 +12849,16 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'create_draft_reply_all_html',
+			access_type  : 'private',
+			service_name : 'cogolens',
+		},
+		{
+			api          : 'create_draft_reply_html',
+			access_type  : 'private',
+			service_name : 'cogolens',
+		},
+		{
 			api          : 'list_shipment_operating_procedures',
 			access_type  : 'private',
 			service_name : 'shipment',

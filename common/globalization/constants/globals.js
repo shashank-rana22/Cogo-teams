@@ -255,6 +255,7 @@ const GLOBAL_CONSTANTS = {
 		saas_subscription_loading : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/loading.svg',
 		empty_state               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		empty_port                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
+		tick_icon_green           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tick_subtract.svg',
 		empty_chart:
 			'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg',
 		empty_customer_card : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg',
@@ -448,6 +449,7 @@ const GLOBAL_CONSTANTS = {
 		fcl_container_icon_s2c  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg',
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
+		cogoport_login_logo: 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
 	},
 
 	video_call_ring_tone_url:

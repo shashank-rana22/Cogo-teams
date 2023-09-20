@@ -75,17 +75,26 @@ function Invoices({ activeEntity = '' }) {
 
 	return (
 		<div>
-			<div className={styles.statscontainer}>
-				{TABS.map(({ label, value }) => (
-					<TabStat
-						name={label}
-						isActive={activeTab === value}
-						key={value}
-						value={value}
-						number={stats?.[value]}
-						setActiveTab={setActiveTab}
-					/>
-				))}
+			<div className={styles.toggle}>
+				<div className={styles.statscontainer}>
+					{TABS.map(({ label, value }) => (
+						<TabStat
+							name={label}
+							isActive={activeTab === value}
+							key={value}
+							value={value}
+							number={stats?.[value]}
+							setActiveTab={setActiveTab}
+						/>
+					))}
+				</div>
+				<Toggle
+					name="toggle"
+					size="md"
+					onLabel="Old"
+					offLabel="New"
+					onChange={handleVersionChange}
+				/>
 			</div>
 			<div className={styles.filters}>
 				<div className={styles.filtercontainer}>
@@ -93,13 +102,6 @@ function Invoices({ activeEntity = '' }) {
 					<FilterModal filters={billsFilters} setFilters={setBillsFilters} activeTab={activeTab} />
 				</div>
 				<div className={styles.search_filter}>
-					<Toggle
-						name="toggle"
-						size="md"
-						onLabel="Old"
-						offLabel="New"
-						onChange={handleVersionChange}
-					/>
 					<div>
 						<Button
 							size="md"
