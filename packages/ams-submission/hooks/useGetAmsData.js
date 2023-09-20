@@ -1,11 +1,13 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useDebounceQuery } from '@cogoport/forms';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestAir } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
 const INIT_PAGE = 1;
+const geo = getGeoConstants();
 
 const getPayload = ({
 	activeTab = 'tc_status_check',
@@ -23,6 +25,7 @@ const getPayload = ({
 		cargoHandedOverAtOriginAt : date,
 		originAirportId           : null,
 		state                     : activeTab === 'tc_status_check' ? 'TC' : 'TD',
+		serviceProviderId         : geo.uuid.freight_force_org_id,
 		page                      : pagination,
 		pageSize                  : 10,
 		...searchQuery,
