@@ -11,10 +11,9 @@ function FreightPrice({
 	const {
 		total_price_discounted = 0,
 		total_price_currency = 'INR',
+		freight_price_discounted:price = 0,
 		freight_price_currency = 'INR',
 	} = rate || {};
-
-	const price = rate?.freight_price_discounted || DEFAULT_PRICE_VALUE;
 
 	const freight_price = detail.service_type === 'air_freight' && !rate.is_minimum_threshold_rate
 		? price / (detail?.chargeable_weight || DEFAULT_DIVISOR_VALUE) || DEFAULT_PRICE_VALUE
