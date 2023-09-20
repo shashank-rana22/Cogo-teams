@@ -51,11 +51,6 @@ const ihls = {
 			service_name : 'athena',
 		},
 		{
-			api          : 'create_enrichment_user_metadata',
-			access_type  : 'public',
-			service_name : 'athena',
-		},
-		{
 			api          : 'list_enrichment_users',
 			access_type  : 'public',
 			service_name : 'athena',
