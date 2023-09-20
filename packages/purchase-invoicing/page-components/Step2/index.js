@@ -10,19 +10,21 @@ import PurchaseLineItemDetails from '../PurchaseLineItemDetails';
 import KnockOffMode from './KnockOffMode';
 import styles from './styles.module.css';
 
-function Step2({
+const STEP_ONE = 1;
+
+function StepTwo({
 	contentText = '',
 	purchaseInvoiceValues = {},
 	serviceProvider = {},
-	setExchangeRateModal,
+	setExchangeRateModal = () => {},
 	billingPartyObj = {},
-	collectionPartyObj,
+	collectionPartyObj = {},
 	editData = {},
 	setStep = () => {},
 	exchangeRateModal = false,
 	onClose = () => {},
-	billId,
-	partyId,
+	billId = '',
+	partyId = '',
 	closeModal = () => {},
 	formValues = {},
 }) {
@@ -50,25 +52,28 @@ function Step2({
 	const context = knockOffMode ? <span className={styles.headingmodal}>STEP 2b - Locked Items / Services</span>
 		: contentText;
 
-	const goBack = (
-		<span className={styles.flex}>
-			<Button
-				themeType="secondary"
-				onClick={
+	function GoBack() {
+		return (
+			<span className={styles.flex}>
+				<Button
+					themeType="secondary"
+					onClick={
 					iseditable
-						? () => setStep(1)
-						: () => closeModal()
-				}
-			>
-				Go Back
+						? () => setStep(STEP_ONE)
+						: closeModal
+					}
+				>
+					Go Back
 
-			</Button>
-			<span className={styles.marginleft}>{context}</span>
-		</span>
-	);
+				</Button>
+				<span className={styles.marginleft}>{context}</span>
+			</span>
+		);
+	}
+
 	return (
 		<div>
-			<Modal.Header title={goBack} />
+			<Modal.Header title={(<GoBack />)} />
 			<Modal.Body>
 				{knockOffMode ? (
 					<KnockOffMode
@@ -127,10 +132,11 @@ function Step2({
 							Close
 						</Button>
 					)}
+
 					{editData?.status !== 'coe_approved' ? (
 						<Button
 							className={styles.marginleft}
-							disabled={loading}
+							disabled={loading || isEmpty(currentSelected?.buy)}
 							onClick={() => {
 								setExchangeRateModal(true);
 							}}
@@ -138,8 +144,10 @@ function Step2({
 							Save
 						</Button>
 					) : null}
+
 				</div>
 			</Modal.Footer>
+
 			{exchangeRateModal ? (
 				<ExchangeRateModal
 					exchangeRateModal={exchangeRateModal}
@@ -154,4 +162,4 @@ function Step2({
 	);
 }
 
-export default Step2;
+export default StepTwo;
