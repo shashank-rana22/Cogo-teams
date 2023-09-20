@@ -19,7 +19,7 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 		dislikes_count : rateCardData?.dislikes_count,
 	});
 
-	const { handleLikeRateCard, loading } = useLikeFeedback({
+	const { handleLikeRateCard = () => {}, loading } = useLikeFeedback({
 		setLikeState,
 		detail,
 		rate: rateCardData,
