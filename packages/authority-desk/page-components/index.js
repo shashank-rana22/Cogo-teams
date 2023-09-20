@@ -1,5 +1,6 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useState, useCallback } from 'react';
 
 import TemporaryLoader from '../commons/TemporaryLoader';
@@ -38,6 +39,9 @@ function AuthorityDesk() {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.heading}>{`${ROLE_NAME?.[role] || ''} Authority Desk`}</div>
+
+				<ShipmentChat />
+
 				{role === 'kam'
 				&& <GoToKamDesk />}
 			</div>
