@@ -749,6 +749,9 @@ importers:
       '@cogoport/icons-react':
         specifier: ^1.0.60
         version: 1.0.98(react@18.2.0)
+      '@cogoport/navigation-configs':
+        specifier: workspace:^0.1.0
+        version: link:../navigation-configs
       '@cogoport/next':
         specifier: workspace:^0.1.0
         version: link:../next
@@ -1215,6 +1218,9 @@ importers:
       '@cogoport/scope-select':
         specifier: workspace:^0.1.0
         version: link:../../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-chat
       '@cogoport/store':
         specifier: workspace:^0.1.0
         version: link:../../common/store
@@ -1314,6 +1320,9 @@ importers:
       '@cogoport/scope-select':
         specifier: workspace:^0.1.0
         version: link:../../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-chat
       '@cogoport/store':
         specifier: workspace:^0.1.0
         version: link:../../common/store
@@ -1963,6 +1972,9 @@ importers:
       '@cogoport/scope-select':
         specifier: workspace:^0.1.0
         version: link:../../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-chat
       '@cogoport/store':
         specifier: workspace:^0.1.0
         version: link:../../common/store
@@ -2038,6 +2050,9 @@ importers:
       '@cogoport/scope-select':
         specifier: workspace:^0.1.0
         version: link:../../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-chat
       '@cogoport/store':
         specifier: workspace:^0.1.0
         version: link:../../common/store
@@ -2470,6 +2485,9 @@ importers:
       '@cogoport/scope-select':
         specifier: workspace:^0.1.0
         version: link:../../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-chat
       '@cogoport/store':
         specifier: workspace:^0.1.0
         version: link:../../common/store
@@ -2500,6 +2518,9 @@ importers:
       '@cogoport/scope-select':
         specifier: workspace:^0.1.0
         version: link:../../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-chat
       '@cogoport/store':
         specifier: workspace:^0.1.0
         version: link:../../common/store
