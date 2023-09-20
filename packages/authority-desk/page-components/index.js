@@ -58,7 +58,6 @@ function AuthorityDesk() {
 
 				<TabPanel key="surface" name="surface" title="SURFACE" />
 			</Tabs>
-
 		</div>
 	);
 }

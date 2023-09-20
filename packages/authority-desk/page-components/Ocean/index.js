@@ -1,7 +1,6 @@
-import { Tabs, TabPanel, cl, Toggle, Placeholder } from '@cogoport/components';
+import { Tabs, TabPanel, cl, Placeholder } from '@cogoport/components';
 import ScopeSelect from '@cogoport/scope-select';
-import { useRouter } from 'next/router';
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 
 import ClickableDiv from '../../commons/ClickableDiv';
 import { BucketsMapping } from '../../config/BucketMapping';
@@ -19,19 +18,12 @@ const SERVICES = { fcl_freight: 'FCL Freight', lcl_freight: 'LCL Freight', fcl_l
 function Ocean() {
 	const { role } = useStakeholderCheck();
 
-	const router = useRouter();
-
 	const [tabsState, setTabsState] = useState({
 		activeTab         : 'bl',
 		service           : 'fcl_freight',
 		bucket            : 'eligible',
 		subApprovedBucket : '',
 	});
-
-	const handleVersionChange = useCallback(() => {
-		const newPathname = `${router.asPath}`;
-		window.location.replace(newPathname);
-	}, [router.asPath]);
 
 	const [filters, setFilters] = useState({
 		is_job_closed : 'no',
@@ -85,15 +77,6 @@ function Ocean() {
 				</div>
 
 				<div className={styles.right_content}>
-					<div className={styles.version}>
-						<Toggle
-							size="md"
-							onLabel="Old"
-							offLabel="New"
-							onChange={handleVersionChange}
-						/>
-					</div>
-
 					{role === 'kam' ? <ScopeSelect size="md" /> : null}
 				</div>
 

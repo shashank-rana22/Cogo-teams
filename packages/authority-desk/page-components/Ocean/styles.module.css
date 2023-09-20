@@ -1,3 +1,9 @@
+.container {
+	:global(.ui_tab_list_container) {
+		border: none;
+	}
+}
+
 .buckets {
 	display: flex;
 	align-items: center;
@@ -71,12 +77,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-}
-
-.version {
-	display: flex;
-	align-items: center;
-	margin-right: 10px;
 }
 
 .loader {
