@@ -21,10 +21,12 @@ const CONTAINER_STYLES_MAPPING = {
 };
 
 function ShipmentChat({ setMessagesCount = () => { } }) {
-	const { general = {}, profile = {} } = useSelector((s) => s);
-	const { id: user_id = '' } = profile?.user || {};
+	const {
+		general:{ pathname = '' } = {},
+		profile:{ user = {} } = {},
+	} = useSelector((s) => s);
 
-	const { pathname = '' } = general;
+	const { id: user_id = '' } = user || {};
 
 	const current_navigation = routeConfig?.[pathname]?.navigation || '';
 
