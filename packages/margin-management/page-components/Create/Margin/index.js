@@ -1,7 +1,8 @@
 import { Pill } from '@cogoport/components';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import NestedLayout from '../../../common/NestedLayout';
+import getOriginDestination from '../../../helpers/getOriginDestination';
 
 import styles from './styles.module.css';
 
@@ -23,51 +24,10 @@ function Margin({
 		}
 		return margin_type;
 	};
-
-	const origin = () => {
-		if (type === 'edit') {
-			if (
-				!isEmpty(data?.filters?.location)
-                || !isEmpty(idValues?.location_id?.name)
-			) {
-				return idValues?.location_id?.name || data?.filters?.location?.name;
-			}
-			if (
-				!isEmpty(data?.filters?.origin_location)
-                || !isEmpty(idValues?.origin_location_id?.name)
-			) {
-				return (
-					idValues?.origin_location_id?.name
-                    || data?.filters?.origin_location?.name
-				);
-			}
-		}
-		if (type === 'create') {
-			return idValues?.location_id?.name || idValues?.origin_location_id?.name;
-		}
-		return null;
-	};
-
-	const destination = type === 'edit'
-		? idValues?.organization_id?.business_name
-        || data?.organization?.business_name
-		: idValues?.organization_id?.business_name;
-
-	const organization = type === 'edit'
-		? idValues?.organization_id?.business_name
-        || data?.organization?.business_name
-		: idValues?.organization_id?.business_name;
-
-	const shipping_line = type === 'edit'
-		? idValues?.shipping_line?.business_name
-        || data?.filters?.shipping_line?.business_name
-		: idValues?.shipping_line?.business_name;
-
-	const airline = type === 'edit'
-		? idValues?.airline?.business_name
-        || data?.filters?.airline?.business_name
-		: idValues?.airline?.business_name;
-
+	const {
+		destination, origin, organization,
+		shipping_line, airline,
+	} = getOriginDestination({ type, idValues, data });
 	return (
 		<div>
 			<div className={styles.details_panel}>
@@ -78,7 +38,7 @@ function Margin({
 					<Pill color="yellow" className={styles.pill}>{startCase(service)}</Pill>
 
 					<div className={styles.flex}>
-						{origin() && <Pill className={styles.pill}>{origin() }</Pill>}
+						{origin && <Pill className={styles.pill}>{origin }</Pill>}
 						{destination && <Pill className={styles.pill}>{ destination}</Pill>}
 					</div>
 
@@ -96,12 +56,16 @@ function Margin({
 				</div>
 				<div>
 					{(idValues?.container_size || data?.container_size)
-                    && <Pill>{idValues?.container_size || data?.container_size}</Pill>}
+						? <Pill>{idValues?.container_size || data?.container_size}</Pill> : null}
 					{(idValues?.container_type || data?.container_type)
-                    && <Pill>{idValues?.container_type || idValues?.container_type || data?.container_type }</Pill>}
+						? (
+							<Pill>
+								{idValues?.container_type || idValues?.container_type || data?.container_type }
+							</Pill>
+						) : null}
 					{(idValues?.commodity || data?.commodity) && <Pill>{idValues?.commodity || data?.commodity}</Pill>}
 					{(idValues?.trade_type || data?.trade_type)
-                    && <Pill>{idValues?.trade_type || data?.trade_type}</Pill>}
+						? <Pill>{idValues?.trade_type || data?.trade_type}</Pill> : null}
 				</div>
 			</div>
 			<NestedLayout

@@ -1,10 +1,10 @@
 import { Loader, Button } from '@cogoport/components';
 import { Link } from '@cogoport/next';
+import ScopeSelect from '@cogoport/scope-select';
 import { useState, useEffect } from 'react';
 
 import useListMargins from '../hooks/useListMargins';
 
-import Filter from './Filter';
 import MarginValues from './MarginValues';
 import Search from './Search';
 import styles from './styles.module.css';
@@ -30,7 +30,7 @@ function MarginManagement() {
 		<div className={styles.container}>
 			<div className={styles.flex}>
 				<div className={styles.heading}>Margin Management</div>
-				<Filter filterParams={filterParams} setFilterParams={setFilterParams} />
+				<ScopeSelect size="md" />
 
 			</div>
 			<div className={styles.flex}>

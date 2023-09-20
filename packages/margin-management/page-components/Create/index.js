@@ -54,7 +54,7 @@ function Create({ type = 'create', item = {} }) {
 		formState: { errors = {} } = {},
 	} = useForm({ defaultValues: idValues });
 	const formValues = watch();
-	const { controls: initialControls } = getControls({
+	const initialControls = getControls({
 		type,
 		marginType : formValues?.margin_type,
 		partnerId  : formValues?.partner_id,

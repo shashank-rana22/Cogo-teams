@@ -1,4 +1,4 @@
-export default function getMarginControls({ service }) {
+export default function getMarginControls({ service = '' }) {
 	const service_name = `${service}_charges`;
 	const marginControls = [{
 		name               : 'margin_slabs',
@@ -42,15 +42,7 @@ export default function getMarginControls({ service }) {
 				type               : 'fieldArray',
 				buttonText         : 'Add Field',
 				noDeleteButtonTill : 1,
-				value              : {
-					code      : '',
-					type      : '',
-					value     : '',
-					currency  : '',
-					min_value : '',
-					max_value : '',
-				},
-				controls: [
+				controls           : [
 					{
 						name        : 'code',
 						label       : 'Code',
@@ -113,7 +105,6 @@ export default function getMarginControls({ service }) {
 						type         : 'number',
 						span         : 2.5,
 						placeholder  : 'Enter value',
-						validateOn   : ['onBlur'],
 						watch        : true,
 						className    : 'code-value',
 						showOptional : false,
@@ -124,7 +115,6 @@ export default function getMarginControls({ service }) {
 						span         : 2.5,
 						type         : 'number',
 						placeholder  : 'Enter value',
-						validateOn   : ['onBlur'],
 						showOptional : false,
 						watch        : true,
 						className    : 'code-value',

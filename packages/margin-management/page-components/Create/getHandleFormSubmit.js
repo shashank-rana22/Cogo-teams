@@ -8,18 +8,18 @@ const getHandleFormSubmit = ({
 	router = {}, updateForm = () => {}, submitForm = () => {},
 }) => {
 	const handleFormSubmit = (value) => {
-		const MV = [];
-		const { margin_slabs:MS, ...rest } = value;
-		const ms = MS.map((it) => {
+		const MARGIN_VALUES = [];
+		const { margin_slabs:marginSlabs, ...rest } = value;
+		const formattedMarginSlabs = marginSlabs.map((it) => {
 			const { lower_limit, upper_limit, limit_currency, margin_values } = it;
 			const new_margin_values = margin_values.map((val) => {
 				const { code, currency, min_value, max_value } = val;
 				return { code, type: val.type, value: val.value, currency, min_value, max_value };
 			});
-			MV.push(new_margin_values);
+			MARGIN_VALUES.push(new_margin_values);
 			return { lower_limit, upper_limit, limit_currency };
 		});
-		const values = { margin_slabs: ms, ...rest, margin_values: MV };
+		const values = { margin_slabs: formattedMarginSlabs, ...rest, margin_values: MARGIN_VALUES };
 		const [slabs_currency] = values.margin_slabs || [];
 		const { limit_currency } = slabs_currency || {};
 

@@ -1,3 +1,5 @@
+import serviceOptions from '../../config/SERVICE_OPTIONS.json';
+
 const getControls = ({ type = '', marginType = '', partnerId = '', item = {} }) => {
 	const controls = [
 		{
@@ -14,12 +16,7 @@ const getControls = ({ type = '', marginType = '', partnerId = '', item = {} }) 
 			params         : { filters: { status: 'active' } },
 			disabled       : type === 'edit',
 			value          : item?.partner_id,
-			style          : {
-				control: (base) => ({
-					...base,
-					'&:disabled': { cursor: 'not-allowed', opacity: '0.6' },
-				}),
-			},
+
 		},
 		{
 			label    : 'Select Margin Type',
@@ -55,75 +52,19 @@ const getControls = ({ type = '', marginType = '', partnerId = '', item = {} }) 
 		},
 
 		{
-			name     : 'service',
-			label    : 'Service',
-			type     : 'select',
-			span     : 7,
-			caret    : true,
-			watch    : true,
-			value    : item?.service,
-			disabled : type === 'edit',
-			options  : [
-				{
-					label : 'FCL FREIGHT',
-					value : 'fcl_freight',
-				},
-				{
-					label : 'FTL FREIGHT',
-					value : 'ftl_freight',
-				},
-				{
-					label : 'HAULAGE FREIGHT',
-					value : 'haulage_freight',
-				},
-				{
-					label : 'FCL CUSTOMS',
-					value : 'fcl_customs',
-				},
-				{
-					label : 'AIR FREIGHT',
-					value : 'air_freight',
-				},
-				{
-					label : 'AIR CUSTOMS',
-					value : 'air_customs',
-				},
-				{
-					label : 'LCL FREIGHT',
-					value : 'lcl_freight',
-				},
-				{
-					label : 'LCL CUSTOMS',
-					value : 'lcl_customs',
-				},
-				{
-					label : 'LTL FREIGHT',
-					value : 'ltl_freight',
-				},
-				{
-					label : 'FCL CFS',
-					value : 'fcl_cfs',
-				},
-				{
-					label : 'FCL FREIGHT LOCAL',
-					value : 'fcl_freight_local',
-				},
-				{
-					label : 'LCL FREIGHT LOCAL',
-					value : 'lcl_freight_local',
-				},
-			],
+			name        : 'service',
+			label       : 'Service',
+			type        : 'select',
+			span        : 7,
+			caret       : true,
+			watch       : true,
+			value       : item?.service,
+			disabled    : type === 'edit',
+			options     : serviceOptions?.service,
 			multiple    : false,
 			placeholder : 'Select service',
 			rules       : { required: 'Service is Required' },
-			style       : {
-				control: (base) => ({
-					...base,
-					'&:focus-within' : { boxShadow: 'none', borderColor: '#e0e0e0' },
-					'&:hover'        : { borderColor: '#333' },
-					'&:disabled'     : { cursor: 'not-allowed', opacity: '0.6' },
-				}),
-			},
+
 		},
 		{
 			label       : 'Organization Type',
@@ -163,16 +104,11 @@ const getControls = ({ type = '', marginType = '', partnerId = '', item = {} }) 
 					partner_id: partnerId || undefined,
 				},
 			},
-			value : item?.organization_id,
-			style : {
-				control: (base) => ({
-					...base,
-					'&:disabled': { cursor: 'not-allowed', opacity: '0.6' },
-				}),
-			},
+			value: item?.organization_id,
+
 		},
 	];
-	return { controls };
+	return controls;
 };
 
 export default getControls;

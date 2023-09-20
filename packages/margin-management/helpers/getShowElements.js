@@ -12,7 +12,17 @@ const notMandatoryControls = [
 	'service',
 
 ];
+const AGENT_ARRAY = ['sales_agent_view', 'supply_agent_view', 'sales_team_members_view', 'supply_team_members_view'];
 const TWO = 2;
+
+const MARGIN_VALUES = {
+	code      : true,
+	type      : true,
+	value     : true,
+	currency  : true,
+	min_value : true,
+	max_value : true,
+};
 
 const getShowElements = ({
 	allPresentControls = [], formValues = {}, item = {}, agent_view = [],
@@ -22,7 +32,7 @@ const getShowElements = ({
 	const NEW_VALUES = {};
 
 	Object.keys(formValues).forEach((key) => { (NEW_VALUES[key] = (formValues?.[key] || item?.[key])); });
-	notMandatoryControls.forEach((key) => { (SHOW_ELEMENTS[key] = 'true'); });
+	notMandatoryControls.forEach((key) => { (SHOW_ELEMENTS[key] = true); });
 
 	SHOW_ELEMENTS.trade_type = (!isEmpty(NEW_VALUES?.service));
 	SHOW_ELEMENTS.origin_location_id = (!isEmpty(NEW_VALUES?.trade_type));
@@ -31,15 +41,12 @@ const getShowElements = ({
 	SHOW_ELEMENTS.transport_mode = (!isEmpty(NEW_VALUES?.destination_location_id));
 	SHOW_ELEMENTS.container_size = (!isEmpty(NEW_VALUES?.shipping_line_id || NEW_VALUES?.location_id));
 	SHOW_ELEMENTS.container_type = (!isEmpty(NEW_VALUES?.container_size));
-
 	allPresentControls.forEach((control) => {
 		if (control?.name === 'addition_type') {
 			if (isConditionMatches(conditions?.ADD_CHANNEL_PARTNER_MARGIN)) {
 				if (
-					agent_view[TWO] === 'sales_agent_view'
-					|| agent_view[TWO] === 'supply_agent_view'
-					|| agent_view[TWO] === 'sales_team_members_view'
-					|| agent_view[TWO] === 'supply_team_members_view'
+					AGENT_ARRAY.includes(agent_view?.[TWO])
+
 				) {
 					SHOW_ELEMENTS.addition_type = false;
 				} else {
@@ -81,24 +88,10 @@ const getShowElements = ({
 
 		if (control.name === 'margin_values' && NEW_VALUES?.margin_values) {
 			SHOW_ELEMENTS[control.name] = NEW_VALUES?.margin_values.map((itemValue) => {
-				if (itemValue?.type === 'percentage') {
-					return {
-						code      : true,
-						type      : true,
-						value     : true,
-						currency  : true,
-						min_value : true,
-						max_value : true,
-					};
+				if (itemValue?.type !== 'percentage') {
+					return { ...MARGIN_VALUES, min_value: false, max_value: false };
 				}
-				return {
-					code      : true,
-					type      : true,
-					value     : true,
-					currency  : true,
-					min_value : false,
-					max_value : false,
-				};
+				return MARGIN_VALUES;
 			});
 		}
 
