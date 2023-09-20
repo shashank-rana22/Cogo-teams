@@ -23,12 +23,11 @@ function EnrichmentInfo({ lead_id = null }) {
 	};
 	return (
 		<div className={styles.container}>
-			<LeadTable columns={columns} data={response} loading={loading} height={200} width={300} />
 			{!loading && !isEmpty(response)
 				&& (
 					<div className={styles.pagination}>
 						<Pagination
-							type="number"
+							type="table"
 							currentPage={paginationData?.page}
 							totalItems={paginationData?.count}
 							pageSize={paginationData?.page_limit}
@@ -36,6 +35,7 @@ function EnrichmentInfo({ lead_id = null }) {
 						/>
 					</div>
 				)}
+			<LeadTable columns={columns} data={response} loading={loading} height={200} width={300} />
 		</div>
 	);
 }
