@@ -19,6 +19,7 @@ function CardHeader({
 
 					return (
 						<Field
+							key={field.label}
 							field={field}
 							showCode={showCode}
 							sort={sort}
