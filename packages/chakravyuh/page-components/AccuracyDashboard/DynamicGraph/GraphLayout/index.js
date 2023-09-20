@@ -33,7 +33,7 @@ function GraphLayout({ graph = {}, activeParent = null, setActiveParent = () => 
 
 	return (
 		<div className={cl`${styles.container} ${styles[`parent_zoom_level_${DEFAULT_ZOOM_LEVEL}`]}`}>
-			<h3>Rate Lifecycle</h3>
+			<h3>{graph?.heading}</h3>
 			<div
 				className={cl`${styles.graph_layout} ${styles.zoom_child}`}
 				style={{ height: `${maxY - minY + EXTRA_HEIGHT}px` }}
