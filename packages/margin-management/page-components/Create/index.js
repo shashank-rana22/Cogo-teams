@@ -38,6 +38,7 @@ function Create({ type = 'create', item = {} }) {
 		agent_id: profile?.user?.id,
 
 	}));
+
 	const { isConditionMatches } = useGetPermission();
 	const [activeKey, setActiveKey] = useState(isEmpty(item) ? 'customize' : 'add');
 	const [idValues, setIdValues] = useState({ margin_slabs: DEFAULT_MARGIN_SLABS, ...item });
@@ -52,7 +53,7 @@ function Create({ type = 'create', item = {} }) {
 		fields,
 		setValue,
 		formState: { errors = {} } = {},
-	} = useForm({ defaultValues: idValues });
+	} = useForm({ defaultValues: { margin_slabs: DEFAULT_MARGIN_SLABS, ...item } });
 	const formValues = watch();
 	const initialControls = getControls({
 		type,

@@ -14,7 +14,6 @@ export default function getMarginControls({ service = '' }) {
 				size  : 'lg',
 				span  : 4,
 				rules : { required: 'Lower Limit is required' },
-				value : '',
 			},
 			{
 				name  : 'upper_limit',
@@ -22,8 +21,7 @@ export default function getMarginControls({ service = '' }) {
 				type  : 'input',
 				size  : 'lg',
 				span  : 4,
-				rules : { required: 'UpperLimit is required' },
-				value : '',
+				rules : { required: 'Upper Limit is required' },
 			},
 			{
 				name     : 'limit_currency',
@@ -34,7 +32,6 @@ export default function getMarginControls({ service = '' }) {
 				watch    : true,
 				asyncKey : 'list_exchange_rate_currencies',
 				rules    : { required: 'Currency is required' },
-				value    : '',
 			},
 			{
 				name               : 'margin_values',
@@ -47,8 +44,7 @@ export default function getMarginControls({ service = '' }) {
 						name        : 'code',
 						label       : 'Code',
 						type        : 'async_select',
-						value       : '',
-						span        : 2.5,
+						span        : 6,
 						asyncKey    : 'list_rate_charge_codes',
 						params      : { service_name },
 						initialCall : true,
