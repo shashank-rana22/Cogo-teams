@@ -1,9 +1,11 @@
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
 function CategoryType(props) {
 	const { searchParams, setSearchParams, isAdmin } = props;
+	const { t } = useTranslation(['myTickets']);
 
 	return (
 		<div className={styles.category_container}>
@@ -14,7 +16,7 @@ function CategoryType(props) {
 					valueKey="user_id"
 					initialCall
 					value={searchParams.agent}
-					placeholder="Select agent"
+					placeholder={t('myTickets:agent_filter_placeholder_text')}
 					isClearable
 					onChange={(val) => setSearchParams((prev) => ({
 						...prev,
@@ -31,7 +33,7 @@ function CategoryType(props) {
 				params={{ Audience: 'cogoport_user' }}
 				asyncKey="default_types"
 				value={searchParams.category}
-				placeholder="Ticket type"
+				placeholder={t('myTickets:ticket_type_filter_placeholder_text')}
 				microService="tickets"
 				isClearable
 				initialCall
