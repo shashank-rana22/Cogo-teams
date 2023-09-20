@@ -68,9 +68,7 @@ function AgentDetails({
 
 	const { partnerUsers } = useListPartnerUsers({ activeMessageCard });
 	const {
-		deleteGroupMember,
-		approveGroupRequest,
-		deleteGroupRequest,
+		deleteGroupMember, approveGroupRequest, deleteGroupRequest,
 		addGroupMember,
 	} = useGroupChat({ activeMessageCard, firestore });
 
@@ -149,11 +147,21 @@ function AgentDetails({
 	const handleSummary = () => { setShowMore(true); setActiveSelect('user_activity'); };
 
 	const setActiveMessage = (val) => { switchUserChats({ val, firestore, setActiveTab }); };
-
 	if (!userId && !leadUserId && !mobile_no) {
 		return (
 			<>
-				<div className={styles.title}>Profile</div>
+				<div className={styles.flex_div}>
+					<div className={styles.title}>Profile</div>
+					{FIREBASE_TABS.includes(activeTab) && (
+						<div
+							role="presentation"
+							className={styles.copy_link}
+							onClick={() => handleClick({ id, channel_type })}
+						>
+							Share
+						</div>
+					)}
+				</div>
 				<EmptyState
 					type="profile"
 					user_type={user_type}
@@ -169,7 +177,6 @@ function AgentDetails({
 			</>
 		);
 	}
-
 	return (
 		<>
 			<div className={styles.top_div}>
@@ -185,7 +192,6 @@ function AgentDetails({
 							Share
 						</div>
 					)}
-
 				</div>
 			</div>
 
