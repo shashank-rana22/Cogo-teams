@@ -4,12 +4,8 @@ import React from 'react';
 
 import styled from './styles.module.css';
 
-interface ItemProps {
-	status: string;
-	urgencyTag: Array<string>;
-}
 interface Props {
-	itemData: ItemProps;
+	itemData?: any;
 	searchValue?: string;
 }
 
@@ -23,7 +19,7 @@ interface ItemTypes {
 	isProforma?:string;
 	jobType?:string
 }
-function RenderViewMoreButton({ itemData, searchValue = '' }: Props) {
+function RenderViewMoreButton({ itemData = {}, searchValue = '' }: Props) {
 	const router = useRouter();
 
 	const handleChange = (item: ItemTypes) => {
