@@ -221,6 +221,7 @@ function Customers({
 				viewType={viewType}
 				setOpenKamContacts={setOpenKamContacts}
 				setSendBulkTemplates={setSendBulkTemplates}
+				firestore={firestore}
 			/>
 		</div>
 	);

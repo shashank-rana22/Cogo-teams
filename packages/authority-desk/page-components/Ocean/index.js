@@ -1,5 +1,6 @@
 import { Tabs, TabPanel, cl, Toggle, Placeholder } from '@cogoport/components';
 import ScopeSelect from '@cogoport/scope-select';
+import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useRouter } from 'next/router';
 import React, { useState, useCallback } from 'react';
 
@@ -53,6 +54,9 @@ function Ocean() {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.heading}>{`${ROLE_NAME[role]} Authority Desk`}</div>
+
+				<ShipmentChat />
+
 				{role === 'kam'
 				&& <GoToKamDesk />}
 			</div>
