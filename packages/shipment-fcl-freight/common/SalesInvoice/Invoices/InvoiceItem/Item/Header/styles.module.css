@@ -202,6 +202,7 @@
 
 .invoice_container {
 	width: 26%;
+	padding: 0 8px;
 
 	@media (max-width: 768px) {
 		display: none;
@@ -230,6 +231,11 @@
 	white-space: nowrap;
 	background-color: #fbe6e6;
 	border-radius: 4px;
+}
+
+.invoice_rejection_reason {
+	font-size: var(--font-size-sm);
+	color: var(--color-primary-error-red-2);
 }
 
 .flex_container {
