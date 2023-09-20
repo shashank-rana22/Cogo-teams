@@ -65,7 +65,6 @@ function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 					{shipment_data?.is_job_closed && (
 						<JobStatus
 							shipment_data={shipment_data}
-							activeStakeholder={activeStakeholder}
 						/>
 					)}
 

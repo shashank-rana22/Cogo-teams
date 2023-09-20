@@ -118,7 +118,14 @@
 }
 
 .stakeholder {
+	margin-right: 4px;
 	font-size: 12px;
 	font-weight: 600;
 	color: #f68b21;
+}
+
+.stakeholder_details {
+	display: flex;
+	align-items: center;
+	margin-right: 20px;
 }

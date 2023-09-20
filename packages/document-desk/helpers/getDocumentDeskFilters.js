@@ -12,7 +12,7 @@ const mapping = {
 	fcl_cfs     : cfsMapping,
 };
 
-const keyMapping = {
+const KEYMAPPING = {
 	eta : 'schedule_arrival',
 	etd : 'schedule_departure',
 };
@@ -23,7 +23,7 @@ const getDocumentDeskFilters = ({ documentDeskContextValues, filters }) => {
 
 	const stepperMapping = mapping[stepperTab];
 
-	const tabFilters = stepperMapping?.TABWISE_FILTERS({ activeTab, isCriticalOn }) || {};
+	const tabFilters = stepperMapping?.tabwiseFilters({ activeTab, isCriticalOn }) || {};
 
 	let finalFilters = { ...(tabFilters || {}), ...restFilters };
 
@@ -33,8 +33,8 @@ const getDocumentDeskFilters = ({ documentDeskContextValues, filters }) => {
 	}
 
 	if (dateRange && startDate && date_type && endDate) {
-		finalFilters[`${keyMapping[date_type]}_greater_than`] = startDate;
-		finalFilters[`${keyMapping[date_type]}_less_than`] = endDate;
+		finalFilters[`${KEYMAPPING[date_type]}_greater_than`] = startDate;
+		finalFilters[`${KEYMAPPING[date_type]}_less_than`] = endDate;
 	}
 
 	if (['import', 'export'].includes(stepperTab)) finalFilters.trade_type = stepperTab;

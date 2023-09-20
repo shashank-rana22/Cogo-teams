@@ -26,6 +26,7 @@ const shipmentChatStakeholders = [
 	'service_ops2',
 	'service_ops3',
 	'booking_agent',
+	'ckam',
 	'supply_agent',
 	'sales_agent',
 	'costbooking_ops',
@@ -42,6 +43,7 @@ const CONDITION_MAPPING = {
 	CCS           : 'booking_agent',
 	document_desk : 'service_ops2',
 	'BL/DO'       : 'release_desk',
+	booking_desk  : 'service_ops1',
 };
 
 function Details({

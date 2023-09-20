@@ -96,8 +96,9 @@ function LineItemDetails({
 												entity_id               : billingParty?.id,
 												organization_trade_party_detail_id:
 													collectionParty?.organization_trade_party_detail_id,
-												serviceNames  : SERVICE_NAMES,
-												shipment_type : shipment_data?.shipment_type,
+												serviceNames   : SERVICE_NAMES,
+												shipment_type  : shipment_data?.shipment_type,
+												job_created_at : shipment_data?.created_at,
 											},
 											errors,
 											setCodes,
