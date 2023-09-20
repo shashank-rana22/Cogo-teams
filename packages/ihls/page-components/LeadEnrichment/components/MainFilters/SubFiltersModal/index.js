@@ -70,7 +70,6 @@ function SubFiltersModal({
 				</div>
 			</Modal.Footer>
 		</Modal>
-	// </div>
 	);
 }
 

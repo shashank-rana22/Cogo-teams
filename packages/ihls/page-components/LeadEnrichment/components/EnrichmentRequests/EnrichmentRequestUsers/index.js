@@ -1,30 +1,30 @@
-import { Button, Modal } from '@cogoport/components';
+import { Pagination, Button, Modal } from '@cogoport/components';
 import React from 'react';
 
-import SearchInput from '../../../../../commons/SearchInput';
+import { getFieldController } from '../../../../../commons/Form/getFieldController';
 import LeadTable from '../../../commons/LeadTable';
+import getSearchControls from '../../../configurations/search-control';
 import useGetEnrichmentRequestUsers from '../../../hooks/useGetEnrichmentRequestUsers';
-
-// import useGetObjectiveInfo from '../../hooks/useGetObjectiveInfo';
-
-// import Header from './components/Header';
-// import ObjectiveTable from './components/ObjectiveTable';
 
 import getEnrichmentRequestUsersColumns from './getEnrichmentRequestUsersColumns';
 import styles from './styles.module.css';
 
 function EnrichmentRequestUsers({ request = null, onClose = () => {} }) {
 	const {
-		// loading,
+		loading,
 		response,
-		// searchQuery,
+		control,
 		debounceQuery,
-		searchValue,
-		setSearchValue,
-		// setParams,
+		setParams,
+		paginationData,
 	} = useGetEnrichmentRequestUsers({ enrichment_request_id: request.id });
+	const searchControls = getSearchControls({ debounceQuery, placeholder: 'name', name: 'q' });
 
 	const columns = getEnrichmentRequestUsersColumns();
+
+	const onPageChange = (pageNumber) => {
+		setParams((p) => ({ ...p, page: pageNumber }));
+	};
 
 	return (
 		<Modal
@@ -43,17 +43,36 @@ function EnrichmentRequestUsers({ request = null, onClose = () => {} }) {
 				<>
 					<div className={styles.search}>
 						<div className={styles.searchbar}>
-							<SearchInput
-								placeholder="Search Objective"
-								size="sm"
-								setGlobalSearch={setSearchValue}
-								debounceQuery={debounceQuery}
-								value={searchValue}
-							/>
+							{searchControls.map((item) => {
+								const { name, type, width } = item;
+								const Element = getFieldController(type);
+
+								if (!Element) return null;
+
+								return (
+									<Element
+										{...item}
+										name={name}
+										isClearable
+										prefix={null}
+										style={{ width }}
+										control={control}
+										key={name}
+										size="sm"
+									/>
+								);
+							})}
 						</div>
+						<Pagination
+							type="table"
+							currentPage={paginationData.page}
+							totalItems={paginationData.count}
+							pageSize={10}
+							onPageChange={onPageChange}
+						/>
 					</div>
 					<div className={styles.tableContainer}>
-						<LeadTable columns={columns} data={response} />
+						<LeadTable columns={columns} data={response} loading={loading} />
 					</div>
 				</>
 			</Modal.Body>

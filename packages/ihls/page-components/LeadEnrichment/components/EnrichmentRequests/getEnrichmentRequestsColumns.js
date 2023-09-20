@@ -1,6 +1,5 @@
 import { Button, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import { IcMEyeopen } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';

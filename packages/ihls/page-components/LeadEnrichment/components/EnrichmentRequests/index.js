@@ -28,6 +28,7 @@ function EnrichmentRequests() {
 			type : null,
 		}));
 	};
+
 	const columns = getEnrichmentRequestsColumns({
 		request,
 		setRequest,
@@ -45,6 +46,7 @@ function EnrichmentRequests() {
 		setParams,
 		debounceQuery,
 	} = useGetEnrichmentRequests();
+
 	const searchControls = getSearchControls({ debounceQuery, name: 'name', placeholder: 'Request name...' });
 
 	const onClickReset = () => {

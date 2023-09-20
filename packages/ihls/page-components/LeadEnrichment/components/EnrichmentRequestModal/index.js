@@ -17,11 +17,11 @@ function EnrichmentRequestModal({ checkedRowsId = [], showRequest = false, setSh
 		errors,
 		watch,
 		reset,
-		// params,
-		// setParams = () => {},
 		onSave = () => {},
 	} = useCreateEnrichmentRequest({ setShowRequest, params, checkedRowsId });
+
 	const mode = watch('mode');
+
 	const onCloseRequest = () => {
 		setShowRequest(false);
 		reset();
@@ -36,7 +36,7 @@ function EnrichmentRequestModal({ checkedRowsId = [], showRequest = false, setSh
 			)}
 			/>
 			<Modal.Body>
-				{enrichment_request_controls.map((item) => {
+				{(enrichment_request_controls || []).map((item) => {
 					const { name, type, displayName } = item;
 					if (name === 'select_first' && mode !== 'select_first') {
 						return null;

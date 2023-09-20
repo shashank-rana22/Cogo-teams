@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 function ListCard(props) {
-	const { listItem, LIST_COLUMN_MAPPING } = props;
+	const { listItem, LIST_COLUMN_MAPPING = [] } = props;
 
 	return (
 		<div className={styles.list_card}>

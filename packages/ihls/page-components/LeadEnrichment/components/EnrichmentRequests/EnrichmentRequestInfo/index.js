@@ -17,7 +17,7 @@ function EnrichmentRequestInfo({ request = {}, onClose = () => {} }) {
 		debounceQuery,
 		paginationData,
 		setParams,
-	} = useGetEnrichmentRequestLeads({ enrichment_request_id: request.id });
+	} = useGetEnrichmentRequestLeads({ enrichment_request_id: request?.id });
 
 	const { loading: downloading, downloadFile } = useDownloadRequestOrgData();
 
@@ -31,7 +31,7 @@ function EnrichmentRequestInfo({ request = {}, onClose = () => {} }) {
 	return (
 		<Modal
 			style={{ width: '70%' }}
-			show={request.type === 'view'}
+			show={request?.type === 'view'}
 			onClose={onClose}
 			placement="center"
 		>
@@ -82,7 +82,7 @@ function EnrichmentRequestInfo({ request = {}, onClose = () => {} }) {
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.button_div}>
-					<Button onClick={() => downloadFile(request.id)} loading={downloading}>Download</Button>
+					<Button onClick={() => downloadFile(request?.id)} loading={downloading}>Download</Button>
 					<Button themeType="secondary" onClick={onClose}>Close</Button>
 				</div>
 			</Modal.Footer>

@@ -5,17 +5,17 @@ import useUpdateEnrichmentRequest from '../../../hooks/useUpdateEnrichmentReques
 
 import styles from './styles.module.css';
 
-function EnrichmentRequestEdit({ request = null, onClose = () => {}, refetch = () => {} }) {
+function EnrichmentRequestEdit({ request = {}, onClose = () => {}, refetch = () => {} }) {
 	const {
 		onUpdate,
 		loading,
 		control,
 		errors,
 		handleSubmit,
-	} = useUpdateEnrichmentRequest({ requestId: request.id, refetch, onClose });
+	} = useUpdateEnrichmentRequest({ requestId: request?.id, refetch, onClose });
 	return (
 		<Modal
-			show={request.type === 'action'}
+			show={request?.type === 'action'}
 			onClose={onClose}
 			placement="center"
 		>

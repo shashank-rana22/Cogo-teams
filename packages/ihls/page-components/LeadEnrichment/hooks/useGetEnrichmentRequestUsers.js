@@ -7,6 +7,9 @@ const useGetEnrichmentRequestUsers = ({ enrichment_request_id }) => {
 		page_limit               : 10,
 		page                     : 1,
 		pagination_data_required : true,
+		filters                  : {
+			enrichment_request_id,
+		},
 	});
 	const [{ data, loading }, refetch] = useRequest({
 		url    : 'list_enrichment_users',
@@ -39,17 +42,6 @@ const useGetEnrichmentRequestUsers = ({ enrichment_request_id }) => {
 
 		return () => subscription.unsubscribe();
 	}, [watch, setParams]);
-
-	useEffect(() => {
-		if (params?.filters?.enrichment_request_id !== enrichment_request_id) {
-			setParams((previousParams) => ({
-				...previousParams,
-				filters: {
-					enrichment_request_id,
-				},
-			}));
-		}
-	}, [enrichment_request_id, params]);
 
 	useEffect(() => {
 		setParams((previousParams) => ({

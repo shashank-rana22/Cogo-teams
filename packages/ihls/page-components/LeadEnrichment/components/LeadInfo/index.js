@@ -151,7 +151,6 @@ function LeadInfo({
 				params={params}
 				showRequest={showRequest}
 				setShowRequest={setShowRequest}
-				// onCloseRequest={onCloseRequest}
 			/>
 
 		</div>

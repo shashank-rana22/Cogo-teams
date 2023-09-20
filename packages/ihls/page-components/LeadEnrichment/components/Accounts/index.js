@@ -62,6 +62,7 @@ function Accounts() {
 						/>
 					</div>
 				))}
+
 				{showUsers && STATISTICS_HEAD.slice(STATISTICS_HEAD_LIMIT_INDEX).map((item) => (
 					<div key={item} className={styles.statistics__item}>
 						<Statistics
@@ -71,6 +72,7 @@ function Accounts() {
 					</div>
 				))}
 			</div>
+
 			<div className={styles.user_button}>
 				<Button onClick={() => setShowUsers(!showUsers)}>
 					<div className={styles.button_name}>
@@ -81,7 +83,9 @@ function Accounts() {
 			</div>
 
 			<div className={styles.account_table}>
+
 				<div className={styles.header}>Accounts List</div>
+
 				<LeadInfo
 					response={response}
 					paginationData={paginationData}

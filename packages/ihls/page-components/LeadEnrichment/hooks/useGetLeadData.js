@@ -21,6 +21,7 @@ const useGetLeadData = () => {
 	const [selectAll, setSelectAll] = useState(false);
 
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
+
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
 	const [{ data, loading, error }] = useRequest({
