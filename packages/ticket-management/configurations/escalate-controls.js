@@ -1,9 +1,9 @@
-export const escalateTicketsControls = [
+export const escalateTicketsControls = ({ t }) => [
 	{
 		name           : 'comment',
 		controllerType : 'textarea',
-		label          : 'Enter reason to escalate',
-		placeholder    : 'Enter here...',
+		label          : t('myTickets:reason_to_escalate'),
+		placeholder    : t('myTickets:enter_here'),
 		rules          : { required: true },
 	},
 ];
