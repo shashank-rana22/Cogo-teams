@@ -7,8 +7,8 @@ const formatForPayload = (
 	taskData,
 	dataToSend,
 	serviceIdMapping,
+	primaryService,
 	finalConfig,
-	primaryService = {},
 ) => {
 	const FINAL_PAYLOAD = {};
 
