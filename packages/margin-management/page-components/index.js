@@ -1,7 +1,7 @@
 import { Loader, Button } from '@cogoport/components';
 import { Link } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import useListMargins from '../hooks/useListMargins';
 
@@ -19,9 +19,6 @@ function MarginManagement() {
 		defaultFilters: { margin_type: 'demand', service: '', status: 'active' },
 
 	});
-	useEffect(() => {
-		setFilterParams({ margin_type: 'demand', service: '', status: 'active' });
-	}, [setFilterParams]);
 	const [marginBreakupData, setMarginBreakupData] = useState({});
 	const [activeTab, setActivetab] = useState('demand');
 	const [activeService, setActiveService] = useState('');
@@ -58,7 +55,7 @@ function MarginManagement() {
 							<Button themeType="primary">CREATE NEW MARGIN</Button>
 						</Link>
 					</div>
-					<div className={styles.margin}>
+					<div className={styles.button}>
 						<MarginValues
 							data={marginBreakupData}
 							setMarginBreakupData={setMarginBreakupData}

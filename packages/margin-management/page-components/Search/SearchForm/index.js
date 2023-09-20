@@ -13,7 +13,7 @@ function SearchForm({ activeTab = '', setFilterParams = () => {}, filterParams =
 		setFilterParams((prev) => ({ ...prev, ...values }));
 	};
 	const onReset = (values) => {
-		const obj = { ...values };
+		const obj = values;
 		Object.keys(values).forEach((key) => {
 			obj[key] = '';
 		});

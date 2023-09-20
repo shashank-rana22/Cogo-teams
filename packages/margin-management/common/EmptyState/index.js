@@ -1,3 +1,5 @@
+import constants from '@cogoport/globalization/constants/globals';
+
 function EmptyState() {
 	return (
 		<div>
@@ -7,7 +9,7 @@ function EmptyState() {
 			</div>
 
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-nonfunded.svg"
+				src={constants?.image_url?.empty_state_margins_breakup_url}
 				alt="empty"
 				style={{
 					width     : '15em',

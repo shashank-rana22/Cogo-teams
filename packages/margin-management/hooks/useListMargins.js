@@ -5,7 +5,7 @@ import toastApiError from '../utils/toastApiError';
 
 const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
 	const [data, setData] = useState({});
-	const [filterParams, setFilterParams] = useState({});
+	const [filterParams, setFilterParams] = useState(defaultFilters);
 	const { page = 1, ...restFilters } = (filterParams || {});
 	const [{ loading }, trigger] = useRequest(
 		{

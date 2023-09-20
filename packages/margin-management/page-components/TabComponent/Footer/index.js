@@ -1,5 +1,4 @@
 import { Loader } from '@cogoport/components';
-import { useEffect } from 'react';
 
 import useListMargins from '../../../hooks/useListMargins';
 import Details from '../Details';
@@ -14,13 +13,8 @@ function Footer({
 	} = useListMargins({
 		defaultParams:
             { margin_stats_required: true, page_limit: 5 },
+		defaultFilters: { margin_type, service, status: 'active' },
 	});
-	useEffect(() => {
-		setFilterParams({ margin_type: 'demand', service: '', status: 'active' });
-	}, [setFilterParams]);
-	useEffect(() => {
-		setFilterParams((prev) => ({ ...prev, service, margin_type }));
-	}, [service, setFilterParams, margin_type]);
 	const paginationProps = { filterParams, setFilterParams, data };
 	if (loading) return <Loader themeType="primary" />;
 	return (

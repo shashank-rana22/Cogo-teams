@@ -2,8 +2,9 @@ import { cl } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { v1 as uuid } from 'uuid';
 
+import EmptyState from '../../common/EmptyState';
+
 import Buttons from './Buttons';
-import EmptyState from './EmptyState';
 import Info from './Info';
 import styles from './styles.module.css';
 
