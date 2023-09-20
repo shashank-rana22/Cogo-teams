@@ -1,3 +1,59 @@
-.container {
+.styled_ui_modal_dialog {
+	width: 480px !important;
+	height: 400px !important;
+	border: none !important;
+
+	:global {
+		.ui_modal_body_container {
+			min-height: 300px;
+			padding: 0 20px;
+		}
+
+		.ui_modal_header_container {
+			padding: 16px 16px 0;
+		}
+	}
+}
+
+.header_container {
+	margin-top: -6px;
+	text-align: flex-start;
+}
+
+.group {
 	display: flex;
+	align-items: center;
+}
+
+.title {
+	font-size: 22px;
+	font-weight: 500;
+}
+
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 0 20px;
+}
+
+.no_back {
+	justify-content: space-between;
+}
+
+.cancel {
+	margin-right: 10px;
+}
+
+.actions {
+	display: flex;
+}
+
+.back {
+	margin-right: 6px;
+	transition: 0.3s ease-in-out;
+
+	&:hover {
+		transform: scaleY(1.2);
+	}
 }

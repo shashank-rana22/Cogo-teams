@@ -1,0 +1,17 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	margin-top: 20px;
+
+	:global {
+		.ui_text_area_container {
+			min-height: 110px;
+		}
+	}
+}
+
+.label {
+	margin: 16px 0 4px;
+	font-size: 12px;
+}
