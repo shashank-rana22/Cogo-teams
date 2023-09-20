@@ -1,0 +1,19 @@
+.list {
+	padding: 16px 8px;
+	margin-top: 6px;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+}
+
+.scroll_view {
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 350px);
+	overflow: auto;
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 10px;
+}
