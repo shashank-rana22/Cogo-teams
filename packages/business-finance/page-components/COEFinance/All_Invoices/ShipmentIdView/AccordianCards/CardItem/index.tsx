@@ -120,13 +120,15 @@ function CardItem({
 				{getFormattedAmount(tax_total_price, currency)}
 			</div>
 		),
+		renderLineItemUnit: ({ unit }) => <div>{unit}</div>,
+
 	};
 
 	const getResponseData = () => {
 		if (amountTab === 'expense' || amountTab === 'income') {
 			return fullResponse;
 		} if (amountTab === 'sellQuote' || amountTab === 'buyQuote') {
-			return { list: quoteData?.lineItems || [] };
+			return { list: quoteData || [] };
 		}
 		return { list: [] };
 	};

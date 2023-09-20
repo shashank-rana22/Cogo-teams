@@ -34,9 +34,14 @@ function useGetQuotation({ jobNumber = '', amountTab = '' }) {
 		}
 	};
 
+	// getFormattedData -> filtering 'isDeleted' data rows and combining lineItems array inside each row
+	const getFormattedData = (dataList) => (dataList || [])
+		.filter((item) => item?.isDeleted === false)
+		?.flatMap((item) => item?.lineItems || []);
+
 	return {
 		quotationLoading : quotationApiLoading,
-		quoteData        : apiData,
+		quoteData        : getFormattedData(apiData),
 		quoteConfig      : quotationConfig,
 		getQuotationData,
 	};

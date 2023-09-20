@@ -32,8 +32,8 @@ function CardHeader({ amountTab, setAmountTab, itemData, showTab = false }: Prop
 
 	if (showTab) {
 		options = [
-			{ name: 'Sell Quote', value: 'sellQuote' },
-			{ name: 'Buy Quote', value: 'buyQuote' },
+			{ name: 'Sell Quotation', value: 'sellQuote' },
+			{ name: 'Buy Quotation', value: 'buyQuote' },
 			...options,
 		];
 	}
