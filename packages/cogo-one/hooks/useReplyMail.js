@@ -22,6 +22,7 @@ const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', use
 		send_to_omnichannel : !!userSharedMails?.includes(payload?.sender),
 		sender_user_id      : userId,
 		send_by             : userName,
+		draft_url           : getOmniChannelLink({ id: roomId, channel_type: 'email' }),
 	},
 	sender_user_id  : userId,
 	service         : 'user',
@@ -31,7 +32,6 @@ const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', use
 	bcc_emails      : isEmpty(payload?.bccrecipients) ? undefined : payload?.bccrecipients,
 	attachment_urls : isEmpty(payload?.attachments) ? undefined : payload?.attachments,
 	source          : 'CogoOne:AdminPlatform',
-	draft_url       : getOmniChannelLink({ id: roomId, channel_type: 'email' }),
 });
 
 const API_MAPPING = {

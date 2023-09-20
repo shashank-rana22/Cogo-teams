@@ -72,6 +72,8 @@ function CommunicationModals({
 						userId={userId}
 						activeMail={activeMail}
 						viewType={viewType}
+						firestore={firestore}
+						resetEmailState={resetEmailState}
 					/>
 				)}
 			</>

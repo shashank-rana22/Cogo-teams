@@ -61,6 +61,7 @@ export const getCommunicationPayload = ({
 			conversation_id,
 			send_by             : name,
 			sender_user_id      : userId,
+			draft_url           : getOmniChannelLink({ id, channel_type: 'email' }) || '',
 		},
 		sender_user_id  : userId,
 		service         : 'user',
@@ -70,6 +71,5 @@ export const getCommunicationPayload = ({
 		bcc_emails      : isEmpty(bccrecipients) ? undefined : bccrecipients,
 		attachment_urls : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
 		source          : 'CogoOne:AdminPlatform',
-		draft_url       : getOmniChannelLink({ id, channel_type: 'email' }) || '',
 	};
 };
