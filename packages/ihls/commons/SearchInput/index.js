@@ -9,8 +9,8 @@ function SearchInput(props) {
 		placeholder = '',
 		size = 'lg',
 		setGlobalSearch = () => {},
-		debounceQuery,
-		disabled,
+		debounceQuery = () => {},
+		disabled = false,
 		...rest
 	} = props;
 

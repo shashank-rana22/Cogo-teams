@@ -31,7 +31,7 @@ function FieldArray(props) {
 			{fields.map((field, index) => (
 				<Child
 					{...rest}
-					key={field.id}
+					key={field?.id}
 					field={field}
 					index={index}
 					control={control}
