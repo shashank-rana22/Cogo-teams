@@ -2,6 +2,7 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useState, useCallback } from 'react';
 
+import TemporaryLoader from '../commons/TemporaryLoader';
 import { useStakeholderCheck } from '../hooks/useStakeholderCheck';
 
 import Ocean from './Ocean';
@@ -54,9 +55,13 @@ function AuthorityDesk() {
 					<Ocean />
 				</TabPanel>
 
-				<TabPanel key="air" name="air" title="AIR" />
+				<TabPanel key="air" name="air" title="AIR">
+					<TemporaryLoader />
+				</TabPanel>
 
-				<TabPanel key="surface" name="surface" title="SURFACE" />
+				<TabPanel key="surface" name="surface" title="SURFACE">
+					<TemporaryLoader />
+				</TabPanel>
 			</Tabs>
 		</div>
 	);
