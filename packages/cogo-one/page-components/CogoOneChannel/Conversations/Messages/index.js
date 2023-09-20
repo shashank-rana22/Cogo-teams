@@ -120,6 +120,7 @@ function Messages({
 		userId,
 		supportAgentId,
 		activeMessageCard: activeTab?.data,
+		setActiveTab,
 	};
 
 	useEffect(() => {
