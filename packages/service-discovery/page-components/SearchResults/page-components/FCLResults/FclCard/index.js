@@ -237,7 +237,10 @@ function FclCard({
 	return (
 		<div
 			className={cl`${styles.container} ${isSelectedCard && styles.selected_card}`}
-			style={{ marginTop: index === GLOBAL_CONSTANTS.zeroth_index ? '0px' : '40px' }}
+			style={{
+				marginTop  : index === GLOBAL_CONSTANTS.zeroth_index ? '0px' : '40px',
+				background : isCogoAssured ? '#fff' : 'linear-gradient(180deg, #f3f3f3, #fff)',
+			}}
 		>
 			<RateCardTopSection
 				rateCardData={rateCardData}
