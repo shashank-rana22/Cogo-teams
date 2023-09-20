@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { routeConfig } from '@cogoport/navigation-configs';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
@@ -17,8 +18,13 @@ const CONTAINER_STYLES_MAPPING = {
 	'coe-cost_booking_desk' : styles.chat_container_cost_booking_desk,
 };
 
-function ShipmentChat({ setMessagesCount = () => { }, navigation = '' }) {
-	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
+function ShipmentChat({ setMessagesCount = () => { } }) {
+	const { general = {}, profile = {} } = useSelector((s) => s);
+	const { id: user_id = '' } = profile?.user || {};
+
+	const { pathname } = general;
+
+	const current_navigation = routeConfig?.[pathname]?.navigation || '';
 
 	const [show, setShow] = useState(false);
 	const [seenLoading, setSeenLoading] = useState(false);
@@ -58,10 +64,10 @@ function ShipmentChat({ setMessagesCount = () => { }, navigation = '' }) {
 		setMessagesCount((pv) => ({ ...pv, shipment_chat: count }));
 	}, [count, setMessagesCount, audio]);
 
-	console.log('navigation', navigation);
+	console.log('navigation', current_navigation);
 
 	return (
-		<div className={CONTAINER_STYLES_MAPPING[navigation] || styles.chat_container}>
+		<div className={CONTAINER_STYLES_MAPPING[current_navigation] || styles.chat_container}>
 			<div className={styles.chat_icon}>
 				<Button
 					themeType="linkUi"
