@@ -47,7 +47,6 @@ import {
 	asyncListShipments,
 	asyncListShipmentPendingTasks,
 	asyncListAllocationObjectives,
-	asyncListEnrichmentSources,
 } from '@cogoport/forms/utils/getAsyncFields';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
@@ -123,7 +122,6 @@ const keyAsyncFieldsParamsMapping = {
 	list_shipments                       : asyncListShipments,
 	list_shipment_pending_tasks          : asyncListShipmentPendingTasks,
 	allocation_objectives                : asyncListAllocationObjectives,
-	list_enrichment_source               : asyncListEnrichmentSources,
 };
 
 function AsyncSelect(props) {
