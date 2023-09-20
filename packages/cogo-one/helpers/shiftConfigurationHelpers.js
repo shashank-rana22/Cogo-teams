@@ -41,7 +41,7 @@ export const validateTime = ({
 		&& (Number(startTime.getHours()) <= Number(endTime.getHours()))
 		&& (
 			Number(startTime.getHours()) !== Number(endTime.getHours())
-			|| Number(startTime.getMinutes()) <= Number(endTime.getMinutes())
+			|| Number(startTime.getMinutes()) < Number(endTime.getMinutes())
 		)
 	) {
 		return true;

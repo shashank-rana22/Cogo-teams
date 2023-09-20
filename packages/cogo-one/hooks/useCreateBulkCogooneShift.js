@@ -15,8 +15,8 @@ const getPayload = ({ team_name, formattedValues }) => {
 				...shiftDetails,
 				{
 					shift_name,
-					start_time_local : String(start_time_local),
-					end_time_local   : String(end_time_local),
+					start_time_local,
+					end_time_local,
 				},
 			];
 		}
@@ -39,7 +39,7 @@ const useCreateBulkCogooneShift = ({ handleClose = () => {} }) => {
 			await trigger({ data: payload });
 			Toast.success('Shifts created successfully');
 		} catch (e) {
-			console.error(e);
+			Toast.error(e?.response?.data?.message || 'Something Went Wrong');
 		}
 	};
 
@@ -61,4 +61,5 @@ const useCreateBulkCogooneShift = ({ handleClose = () => {} }) => {
 		loading,
 	};
 };
+
 export default useCreateBulkCogooneShift;

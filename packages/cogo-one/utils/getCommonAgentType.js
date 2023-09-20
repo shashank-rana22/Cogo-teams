@@ -33,6 +33,7 @@ const getCommonAgentType = ({ viewType = '' }) => {
 };
 
 const FILTER_AGENT_TYPES = ['cogoone_admin', 'default'];
+
 export const getAgentTypesList = () => {
 	let agentTypes = [];
 
@@ -41,14 +42,19 @@ export const getAgentTypesList = () => {
 			const agentType = getCommonAgentType({ viewType: itm }) || itm;
 
 			if (agentTypes !== 'cogoone_admin' && !agentTypes.includes(agentType)) {
-				agentTypes = [...agentTypes, agentType];
+				agentTypes = [
+					...agentTypes,
+					agentType,
+				];
 			}
 		},
 	);
 
 	return {
 		agentTypes,
-		filteredAgentTypes: agentTypes.filter((itm) => !FILTER_AGENT_TYPES.includes(itm)),
+		filteredAgentTypes: agentTypes.filter(
+			(itm) => !FILTER_AGENT_TYPES.includes(itm),
+		),
 	};
 };
 

@@ -41,8 +41,8 @@ const getPayload = ({ formattedValues = [], prevList = [] }) => {
 					...filteredData,
 					{
 						shift_id,
-						start_time_local : String(start_time_local),
-						end_time_local   : String(end_time_local),
+						start_time_local,
+						end_time_local,
 					},
 				];
 			}
