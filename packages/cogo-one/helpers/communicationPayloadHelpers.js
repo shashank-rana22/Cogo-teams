@@ -31,6 +31,7 @@ export const getCommunicationPayload = ({
 
 	const {
 		message_id = '',
+		internet_message_id = '',
 	} = response || {};
 
 	const { conversation_id = '', user_id = '', lead_user_id = '', id = '' } = formattedData || {};
@@ -38,15 +39,16 @@ export const getCommunicationPayload = ({
 	const { ccrecipients = [], bccrecipients = [], subject = '', toUserEmail = [] } = emailState || {};
 
 	const payload = {
-		sender      : source,
+		sender            : source,
 		toUserEmail,
 		ccrecipients,
 		bccrecipients,
 		subject,
-		content     : getRenderEmailBody({ html: draftMessage }),
-		msgId       : message_id,
+		content           : getRenderEmailBody({ html: draftMessage }),
+		msgId             : message_id,
 		userId,
-		attachments : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
+		attachments       : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
+		internetMessageId : internet_message_id,
 	};
 
 	return {
