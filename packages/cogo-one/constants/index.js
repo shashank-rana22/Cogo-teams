@@ -393,3 +393,8 @@ export const OFFLINE_REASONS_OPTIONS = [
 		value : 'others',
 	},
 ];
+
+export const TEAMS_ICON_MAPPING = {
+	private : GLOBAL_CONSTANTS.image_url.private,
+	public  : GLOBAL_CONSTANTS.image_url.universe,
+};

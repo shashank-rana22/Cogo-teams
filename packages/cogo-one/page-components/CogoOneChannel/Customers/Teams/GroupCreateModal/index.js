@@ -1,34 +1,31 @@
 import { Modal, Button, cl } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import GroupInformation from './GroupInformation';
 import GroupSelection from './GroupSelection';
 import Header from './Header';
 import styles from './styles.module.css';
+import Success from './Success';
 
 const FIRST_COMPONENT = 1;
+const SECOUND_COMPONENT = 2;
 
 function GroupCreateModal({
 	setCreteTeams = () => {},
 	creteTeams = false,
 }) {
 	const [activeComponent, setActiveComponent] = useState(FIRST_COMPONENT);
+	const [isDisableNextButton, setIsDisableNextButton] = useState(false);
 	const [selectedGroup, setSelectedGroup] = useState({
 		group_type        : '',
 		group_name        : '',
 		group_description : '',
 	});
 
-	const showBackButton = activeComponent > FIRST_COMPONENT;
-
-	const handleMove = () => {
-		setActiveComponent(activeComponent + FIRST_COMPONENT);
-	};
-
-	const handleBack = () => {
-		setActiveComponent(activeComponent - FIRST_COMPONENT);
-	};
+	const { group_type = '', group_name = '', group_description = '' } = selectedGroup || {};
+	const showBackButton = activeComponent === SECOUND_COMPONENT;
+	const showHeader = activeComponent <= SECOUND_COMPONENT;
 
 	const handleClose = () => {
 		setCreteTeams(false);
@@ -40,12 +37,33 @@ function GroupCreateModal({
 		});
 	};
 
+	const handleMove = () => {
+		if (showHeader) {
+			setActiveComponent(activeComponent + FIRST_COMPONENT);
+		} else {
+			handleClose();
+		}
+	};
+
+	const handleBack = () => {
+		setActiveComponent(activeComponent - FIRST_COMPONENT);
+	};
+
 	const COMPONENT_MAPPING = {
 		1 : GroupSelection,
 		2 : GroupInformation,
+		3 : Success,
 	};
 
 	const ActiveModalComp = COMPONENT_MAPPING[activeComponent];
+
+	useEffect(() => {
+		if (activeComponent === FIRST_COMPONENT) {
+			setIsDisableNextButton(!group_type);
+		} else if (activeComponent === SECOUND_COMPONENT) {
+			setIsDisableNextButton(!group_name || !group_description);
+		}
+	}, [activeComponent, group_type, group_description, group_name]);
 
 	return (
 		<Modal
@@ -59,7 +77,13 @@ function GroupCreateModal({
 		>
 			<Modal.Header />
 			<Modal.Body>
-				<Header />
+				{showHeader ? (
+					<Header
+						activeComponent={activeComponent}
+						selectedGroup={selectedGroup}
+					/>
+				) : null}
+
 				<ActiveModalComp
 					activeComponent={activeComponent}
 					setActiveComponent={setActiveComponent}
@@ -78,18 +102,21 @@ function GroupCreateModal({
 				) : null}
 
 				<div className={styles.actions}>
-					<Button
-						className={styles.cancel}
-						themeType="link"
-						onClick={handleClose}
-					>
-						Cancel
-					</Button>
+					{showHeader ? (
+						<Button
+							className={styles.cancel}
+							themeType="link"
+							onClick={handleClose}
+						>
+							Cancel
+						</Button>
+					) : null}
+
 					<Button
 						onClick={handleMove}
+						disabled={isDisableNextButton}
 					>
 						Next
-
 					</Button>
 				</div>
 
