@@ -2,10 +2,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import { mergeAirMilestone, mergeOceanMilestone } from '../utlis/mergeMilestone';
+import { mergeAirMilestone, mergeOceanMilestone, mergeSurfaceMilestone } from '../utlis/mergeMilestone';
 
 const useGetCurrentInfo = ({ data = {}, trackingType }) => {
-	console.log(data, 'surface');
 	const { data: trackingInfo = [] } = data || {};
 
 	const [currContainerDetails, setCurrContainerDetails] = useState({});
@@ -30,9 +29,13 @@ const useGetCurrentInfo = ({ data = {}, trackingType }) => {
 			const { tracking_data = [] } = currentTracking || {};
 
 			combineList = mergeOceanMilestone(tracking_data);
-		} else {
+		} else if (trackingType === 'air') {
 			const list = data?.data;
 			combineList = mergeAirMilestone(list);
+		} else {
+			const list = data?.list;
+			combineList = mergeSurfaceMilestone(list);
+			console.log(combineList, 'combineListSurface');
 		}
 		// setCombineMileStoneList(combineList);
 	}, [currContainerDetails, trackingType, trackingInfo]);

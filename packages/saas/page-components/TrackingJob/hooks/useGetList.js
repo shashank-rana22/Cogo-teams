@@ -30,10 +30,12 @@ const useGetList = ({
 		try {
 			trigger({
 				params: {
-					page    : 1,
-					filters : {
+					filters: {
 						...filters,
 					},
+					page               : filters?.page,
+					priority_sort_type : 'desc',
+					sort_by            : 'updated_at',
 				},
 			});
 		} catch (err) {
@@ -42,7 +44,7 @@ const useGetList = ({
 	};
 	useEffect(() => {
 		refetch();
-	}, [activeTab]);
+	}, [activeTab, filters]);
 	return {
 		data,
 		filters,

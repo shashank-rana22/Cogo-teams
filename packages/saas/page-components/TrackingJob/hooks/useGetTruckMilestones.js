@@ -10,7 +10,7 @@ const useGetTruckMilestones = ({ id = null, trackingType }) => {
 	const getMilestones = useCallback(async () => {
 		try {
 			await trigger({
-				params: { id },
+				params: { trip_id: id },
 			});
 			console.log('trigger');
 		} catch (err) {

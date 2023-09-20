@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMInfo } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
-import { useTranslation } from 'react-i18next';
 
 import getMappingObject from '../../../../../constant/card';
 
@@ -12,7 +11,7 @@ import styles from './styles.module.css';
 
 const INVALID_VESSEL_NAME = ['N/A'];
 
-const widthProp = {
+const WIDTH_PROP = {
 	VESSEL : 35,
 	TRUCK  : 55,
 	RAIL   : 55,
@@ -65,7 +64,7 @@ function Card({
 				<h3 className={styles.title}>{location || station}</h3>
 				<Image
 					src={url}
-					width={widthProp?.[transport_mode] || 35}
+					width={WIDTH_PROP?.[transport_mode] || 35}
 					height={35}
 					alt="logo"
 				/>

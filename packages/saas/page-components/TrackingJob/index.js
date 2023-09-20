@@ -2,6 +2,7 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
 import AirTracking from './AirTracking';
+import ListPagination from './common/ListPagination';
 import useGetList from './hooks/useGetList';
 import OceanTracking from './OceanTracking';
 import TruckTracking from './TruckTracking';
@@ -20,6 +21,7 @@ function TrackingJob() {
 	return (
 		<div>
 			<div style={{ margin: 20 }}>
+				<ListPagination filters={filters} setFilters={setFilters} data={data} />
 				<Tabs
 					activeTab={activeTab}
 					themeType="primary"
@@ -28,7 +30,6 @@ function TrackingJob() {
 					<TabPanel name="air_tracking" title="Air Tracking">
 						<AirTracking list={data?.list} loading={loading} />
 					</TabPanel>
-
 					<TabPanel name="ocean_tracking" title="Ocean Tracking">
 						<OceanTracking list={data?.list} loading={loading} />
 					</TabPanel>

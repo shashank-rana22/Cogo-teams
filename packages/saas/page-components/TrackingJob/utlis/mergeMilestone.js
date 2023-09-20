@@ -54,7 +54,6 @@ const mergeOceanMilestone = (list = []) => {
 };
 
 const mergeAirMilestone = (list = []) => {
-	console.log(list, 'list');
 	const filteredList = list?.filter((item) => {
 		const { station = '', actual_date = '', milestone = '' } = item || {};
 
@@ -74,5 +73,25 @@ const mergeAirMilestone = (list = []) => {
 
 	return result;
 };
+const mergeSurfaceMilestone = (list = []) => {
+	const filteredList = list?.filter((item) => {
+		const { city = '', eta = '' } = item || {};
 
-export { mergeOceanMilestone, mergeAirMilestone };
+		if (!isEmpty(city) && !isEmpty(eta)) {
+			return true;
+		}
+		return false;
+	});
+
+	const sortedList = filteredList.sort(
+		(curr, next) => new Date(curr.eta) - new Date(next.eta),
+	);
+
+	const uniqueStations = [...new Set(sortedList?.map((item) => item?.station))];
+
+	const result = uniqueStations.map((station) => sortedList.filter((item) => item.station === station));
+
+	return result;
+};
+
+export { mergeOceanMilestone, mergeAirMilestone, mergeSurfaceMilestone };
