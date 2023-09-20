@@ -8,7 +8,7 @@ const FIRST_INDEX = 1;
 
 function Child(props) {
 	const {
-		controls,
+		controls = [],
 		control,
 		index,
 		name,
@@ -23,21 +23,21 @@ function Child(props) {
 	return (
 		<div className={styles.content}>
 			{controls.map((controlItem) => {
-				const Element = getFieldController(controlItem.type);
+				const Element = getFieldController(controlItem?.type);
 
 				if (!Element) return null;
 
 				return (
-					<div key={controlItem.name} className={styles.list}>
-						<div className={styles.label}>{controlItem.label}</div>
+					<div key={controlItem?.name} className={styles.list}>
+						<div className={styles.label}>{controlItem?.label}</div>
 
 						<Element
 							{...rest}
-							key={`${name}.${index}.${controlItem.name}`}
+							key={`${name}.${index}.${controlItem?.name}`}
 							control={control}
-							id={`create_form_${controlItem.name}_field`}
+							id={`create_form_${controlItem?.name}_field`}
 							{...controlItem}
-							name={`${name}.${index}.${controlItem.name}`}
+							name={`${name}.${index}.${controlItem?.name}`}
 						/>
 
 						<div className={styles.error_message}>
