@@ -24,12 +24,14 @@ function Header() {
 					{user.name}
 				</h2>
 
-				<p className={styles.subheading}>
-					You are viewing Incentive and Scoring Analytics
-					{' '}
-					<span className={styles.light}>for</span>
-					{' '}
-					<i>Cogo India</i>
+				<div className={styles.subheading}>
+					<div>
+						You are viewing Incentive and Scoring Analytics
+						{' '}
+						<span className={styles.light}>for</span>
+						{' '}
+						<i>Cogo India</i>
+					</div>
 
 					<div className={styles.container}>
 						<Popover
@@ -68,7 +70,7 @@ function Header() {
 
 						</Popover>
 					</div>
-				</p>
+				</div>
 
 			</div>
 
