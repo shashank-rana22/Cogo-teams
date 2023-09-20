@@ -61,6 +61,7 @@ function AmsSubmission() {
 				setActiveTab={setActiveTab}
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
+				setPagination={setPagination}
 			/>
 
 			<Table

@@ -57,10 +57,6 @@ const useGetAmsData = ({
 	}, [apiTrigger, pagination]);
 
 	useEffect(() => {
-		setPagination(INIT_PAGE);
-	}, [activeTab]);
-
-	useEffect(() => {
 		debounceQuery(searchValue);
 	}, [debounceQuery, searchValue]);
 

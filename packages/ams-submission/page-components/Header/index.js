@@ -7,21 +7,29 @@ import tabs from '../../configurations/tabs';
 
 import styles from './styles.module.css';
 
+const INIT_PAGE = 1;
+
 function Header({
 	activeTab = '',
 	setActiveTab = () => {},
 	searchValue = '',
 	setSearchValue = () => {},
+	setPagination = () => {},
 }) {
 	const { t } = useTranslation(['amsSubmission']);
 	const tabOptions = tabs({ t });
+
+	const handleChange = (e) => {
+		setActiveTab(e);
+		setPagination(INIT_PAGE);
+	};
 
 	return (
 		<div className={styles.main_header}>
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary"
-				onChange={setActiveTab}
+				onChange={handleChange}
 			>
 				{(tabOptions || []).map((item) => {
 					const { name = '', label = '' } = item;
