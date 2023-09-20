@@ -1,49 +1,37 @@
 .chat_container {
-	position: fixed;
 	top: 20px;
 	right: 20px;
+}
+
+.chat_container_common {
+	position: fixed;
 	z-index: 100;
 	transition: 150ms ease-in-out;
 }
 
 .chat_container_booking_desk {
-	position: fixed;
 	top: 30px;
 	right: 120px;
-	z-index: 100;
-	transition: 150ms ease-in-out;
 }
 
 .chat_container_kam_desk {
-	position: fixed;
 	top: 30px;
 	right: 260px;
-	z-index: 100;
-	transition: 150ms ease-in-out;
 }
 
 .chat_container_cost_booking_desk {
-	position: fixed;
 	top: 30px;
 	right: 240px;
-	z-index: 100;
-	transition: 150ms ease-in-out;
 }
 
 .chat_container_document_desk {
-	position: fixed;
 	top: 70px;
 	right: 20px;
-	z-index: 100;
-	transition: 150ms ease-in-out;
 }
 
 .chat_container_last_mile_desk {
-	position: fixed;
 	top: 86px;
 	right: 20px;
-	z-index: 100;
-	transition: 150ms ease-in-out;
 }
 
 .chat_icon {

@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { routeConfig } from '@cogoport/navigation-configs';
 import { useSelector } from '@cogoport/store';
@@ -24,7 +24,7 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 	const { general = {}, profile = {} } = useSelector((s) => s);
 	const { id: user_id = '' } = profile?.user || {};
 
-	const { pathname } = general;
+	const { pathname = '' } = general;
 
 	const current_navigation = routeConfig?.[pathname]?.navigation || '';
 
@@ -66,10 +66,10 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 		setMessagesCount((pv) => ({ ...pv, shipment_chat: count }));
 	}, [count, setMessagesCount, audio]);
 
-	console.log('navigation', current_navigation);
-
 	return (
-		<div className={CONTAINER_STYLES_MAPPING[current_navigation] || styles.chat_container}>
+		<div className={cl`${CONTAINER_STYLES_MAPPING[current_navigation]
+		|| styles.chat_container} ${styles.chat_container_common}`}
+		>
 			<div className={styles.chat_icon}>
 				<Button
 					themeType="linkUi"
