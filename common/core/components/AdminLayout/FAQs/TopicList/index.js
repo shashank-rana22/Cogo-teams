@@ -5,6 +5,7 @@ import Announcements from '../../Announcements';
 import QuestionListComponent from '../../QuestionListComponent';
 import Header from '../QuestionList/Header';
 
+import Feedback from './Feedback';
 import styles from './styles.module.css';
 import useTopicList from './useTopicList';
 
@@ -17,7 +18,9 @@ function TopicList({
 	setShow = () => {},
 	announcementProps = {},
 	selectedAnnouncement = '',
+	setModalData = () => {},
 }) {
+	const [showFeedback, setShowFeedback] = useState(false);
 	const [activeTab, setActiveTab] = useState('faq');
 	const [input, setInput] = useState('');
 
@@ -138,25 +141,34 @@ function TopicList({
 				from={from}
 				setInput={setInput}
 				input={input}
+				showFeedback={showFeedback}
+				setModalData={setModalData}
+				setShowFeedback={setShowFeedback}
 			/>
 
-			<Tabs
-				activeTab={activeTab}
-				onChange={setActiveTab}
-				fullWidth
-				className={styles.tab_hide}
-				themeType="main_tabs"
-			>
-				{TABS_MAPPING.map((tabItem) => {
-					const { name, title, component: Component, props } = tabItem;
+			{showFeedback
+				? (
+					<Feedback />
+				)
+				: (
+					<Tabs
+						activeTab={activeTab}
+						onChange={setActiveTab}
+						fullWidth
+						className={styles.tab_hide}
+						themeType="main_tabs"
+					>
+						{TABS_MAPPING.map((tabItem) => {
+							const { name, title, component: Component, props } = tabItem;
 
-					return (
-						<TabPanel key={name} name={name} title={title}>
-							<Component {...props} />
-						</TabPanel>
-					);
-				})}
-			</Tabs>
+							return (
+								<TabPanel key={name} name={name} title={title}>
+									<Component {...props} />
+								</TabPanel>
+							);
+						})}
+					</Tabs>
+				)}
 		</div>
 	);
 }

@@ -17,6 +17,9 @@ function Header({
 	setQuestion,
 	showHistory,
 	setShowHistory = () => {},
+	setShowFeedback = () => {},
+	setModalData = () => {},
+	showFeedback = '',
 	setShowNotificationContent = () => {},
 	showNotificationContent,
 	refetch,
@@ -76,11 +79,41 @@ function Header({
 		},
 	};
 
+	const handleFeedback = () => {
+		setTopic(null);
+		setModalData({});
+		setQuestion(null);
+		setShowHistory(false);
+		setShowNotificationContent(false);
+		setShowFeedback((prev) => !prev);
+	};
+
 	return (
 
 		<div className={`${styles.container} ${styles[from]}`}>
 
 			<div className={styles.wrapper}>
+				{showFeedback ?	(
+					<Button
+						size="sm"
+						themeType="link"
+						className={styles.feedback}
+						onClick={handleFeedback}
+					>
+						Back to main view
+					</Button>
+				)
+					: (
+						<Button
+							size="sm"
+							themeType="accent"
+							className={styles.feedback}
+							onClick={handleFeedback}
+						>
+							Give a feedback
+						</Button>
+					)}
+
 				{from !== 'test_module' ? (
 					<div className={styles.heading_container}>
 						{showBackIcon && TABS_CONTENT_MAPPING[activeTab].back_icon_visible ? (
