@@ -1,3 +1,7 @@
+import { Button } from '@cogoport/components';
+// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+// import formatDate from '@cogoport/globalization/utils/formatDate';
+
 import styles from './styles.module.css';
 
 function Card() {
@@ -6,7 +10,14 @@ function Card() {
 			<div className={styles.header}>
 				<div className={styles.basic_info}>
 					<div className={styles.feedback_number}>#123</div>
-					<div className={styles.file}>file</div>
+					<Button
+						size="md"
+						themeType="linkUi"
+						id={styles.attachment}
+						// onClick={() => window.open()}
+					>
+						Attachment
+					</Button>
 				</div>
 
 				<div className={styles.category}>category</div>
@@ -14,7 +25,16 @@ function Card() {
 			</div>
 
 			<div className={styles.desc_info}>
-				<div className={styles.date}>date</div>
+				<div className={styles.date}>
+					{/* {formatDate({
+						date       : createdAt,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/mm/yyyy'],
+						separator  : ', ',
+						timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+						formatType : 'dateTime',
+					})} */}
+					date
+				</div>
 				<div className={styles.desc}>desc</div>
 			</div>
 		</div>
