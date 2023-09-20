@@ -8,7 +8,7 @@ const useUpdateTnc = ({
 	refetch = () => {},
 	organizationId = null,
 }) => {
-	const [{ loading }, trigger] = useRequest({ method: 'post', url: '/update_terms_and_condition' });
+	const [{ loading }, trigger] = useRequest({ method: 'post', url: '/update_terms_and_condition' }, { manual: true });
 
 	const apiTrigger = async ({ values = {}, editFormValue = {} }) => {
 		try {

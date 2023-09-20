@@ -9,19 +9,23 @@ const useGetTermsAndCondition = () => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_terms_and_conditions',
 		method : 'get',
-	});
+	}, { manual: true });
 
 	const getListTermsAndConditionsApi = useCallback(() => {
-		const params = {
-			sort_by : 'updated_at',
-			filters : {
+		try {
+			const params = {
 				sort_by : 'updated_at',
-				...filters,
-				type    : 'logistics_services',
-			},
-		};
+				filters : {
+					sort_by : 'updated_at',
+					...filters,
+					type    : 'logistics_services',
+				},
+			};
 
-		trigger({ params });
+			trigger({ params });
+		} catch (error) {
+			console.log(error);
+		}
 	}, [filters, trigger]);
 
 	useEffect(() => {
