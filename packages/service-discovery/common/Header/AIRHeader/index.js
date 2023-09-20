@@ -15,6 +15,7 @@ function AIRHeader({
 	activePage = '',
 	infoBanner = {},
 	setInfoBanner = () => {},
+	setRouterLoading = () => {},
 	isGuideViewed = false,
 	...rest
 }) {
@@ -35,6 +36,7 @@ function AIRHeader({
 					showAdditionalHeader={showAdditionalHeader}
 					isAllowedToEdit={isAllowedToEdit}
 					activePage={activePage}
+					setRouterLoading={setRouterLoading}
 				/>
 			</div>
 
@@ -47,6 +49,7 @@ function AIRHeader({
 					infoBanner={infoBanner}
 					setInfoBanner={setInfoBanner}
 					isGuideViewed={isGuideViewed}
+					setRouterLoading={setRouterLoading}
 				/>
 
 				<Wallet

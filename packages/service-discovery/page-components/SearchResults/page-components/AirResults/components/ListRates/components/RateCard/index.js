@@ -15,6 +15,7 @@ function RateCard({
 	// showGuide = false,
 	isSelectedCard = false,
 	index = 0,
+	setRouterLoading = () => {},
 }) {
 	return (
 		<div
@@ -35,6 +36,7 @@ function RateCard({
 				detail={detail}
 				rate={rate}
 				isSelectedCard={isSelectedCard}
+				setRouterLoading={setRouterLoading}
 			/>
 
 			<Footer

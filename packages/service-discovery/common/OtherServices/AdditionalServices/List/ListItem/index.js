@@ -136,14 +136,14 @@ function ListItem({
 		const currency = rateData?.[GLOBAL_CONSTANTS.zeroth_index]?.total_price_currency;
 		let ratesAvailableForAll = true;
 
-		const totalPrice = rateData
-			.map((rateItem) => {
-				if (!rateItem.total_price_discounted) {
-					ratesAvailableForAll = false;
-				}
-				return rateItem.total_price_discounted || DEFAULT_PRICE_VALUE;
-			})
-			.reduce((accumulator, value) => accumulator + value, INITIAL_REDUCE_VALUE);
+		const totalPrice = rateData.reduce((accumulator, rateItem) => {
+			const { total_price_discounted } = rateItem;
+			if (typeof total_price_discounted !== 'number') {
+				ratesAvailableForAll = false;
+			}
+			return accumulator + (typeof total_price_discounted === 'number'
+				? total_price_discounted : DEFAULT_PRICE_VALUE);
+		}, INITIAL_REDUCE_VALUE);
 
 		const formattedAmount = formatPrice(currency, totalPrice);
 

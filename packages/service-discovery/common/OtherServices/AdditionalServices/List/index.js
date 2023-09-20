@@ -9,7 +9,7 @@ import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 
-const INITIAL_VALUE = 0;
+const INITIAL_REDUCER_VALUE = 0;
 const DEFAULT_VALUE = 0;
 
 function List({
@@ -28,20 +28,16 @@ function List({
 
 	let currency = '';
 
-	const totalPrice = list
-		.map((listItem) => {
-			if (listItem.rateData && !isEmpty(listItem.rateData)) {
-				return (listItem.rateData || []).map((rateItem) => {
-					const { total_price_discounted = 0, total_price_currency } = rateItem;
-					currency = total_price_currency;
-					return total_price_discounted;
-				});
-			}
-			return DEFAULT_VALUE;
-		})
-		.flat()
-		.filter((value) => typeof value === 'number')
-		.reduce((accumulator, value) => accumulator + value, INITIAL_VALUE);
+	const totalPrice = list.reduce((accumulator, listItem) => {
+		if (listItem.rateData && !isEmpty(listItem.rateData)) {
+			return accumulator + listItem.rateData.reduce((subTotal, rateItem) => {
+				const { total_price_discounted = 0, total_price_currency } = rateItem;
+				currency = total_price_currency;
+				return subTotal + (typeof total_price_discounted === 'number' ? total_price_discounted : DEFAULT_VALUE);
+			}, INITIAL_REDUCER_VALUE);
+		}
+		return accumulator + DEFAULT_VALUE;
+	}, INITIAL_REDUCER_VALUE);
 
 	return (
 		<div className={styles.container}>

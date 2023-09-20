@@ -12,15 +12,24 @@
 
 .loading {
 	display: flex;
-	align-items: center;
+	align-items: baseline;
 	justify-content: center;
-	margin-top: 100px;
+	padding-left: 40px;
+	margin: -20px;
+	margin-top: 120px;
+	background: #fff;
+
+	:global {
+		.ui_loader {
+			background-color: #221f20;
+		}
+	}
 }
 
 .loading_text {
-	margin-right: 8px;
-	font-size: 26px;
-	font-weight: 500;
+	margin-right: 20px;
+	font-size: 48px;
+	color: #221f20;
 }
 
 .header {

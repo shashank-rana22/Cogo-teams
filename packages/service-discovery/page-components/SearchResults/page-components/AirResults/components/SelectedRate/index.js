@@ -15,6 +15,7 @@ import styles from './styles.module.css';
 function SelectedRate({
 	setHeaderProps = () => {},
 	headerProps = {},
+	setRouterLoading = () => {},
 }) {
 	const { query = {} } = useSelector(({ general }) => ({
 		query: general?.query,
@@ -52,6 +53,7 @@ function SelectedRate({
 				isSelectedCard
 				rate={selectedRate}
 				detail={detail}
+				setRouterLoading={setRouterLoading}
 			/>
 
 			<Services

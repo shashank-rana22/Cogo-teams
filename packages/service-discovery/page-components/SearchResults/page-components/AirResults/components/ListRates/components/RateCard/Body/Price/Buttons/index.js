@@ -12,6 +12,7 @@ function Buttons({
 	detail = {},
 	isSelectedCard = false,
 	setScreen = () => {},
+	setRouterLoading = () => {},
 }) {
 	const router = useRouter();
 
@@ -35,6 +36,7 @@ function Buttons({
 
 			setScreen('selectedCardScreen');
 		} else {
+			setRouterLoading(true);
 			router.push(`/book/${router.query.spot_search_id}`);
 		}
 	};

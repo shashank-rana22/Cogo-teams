@@ -16,6 +16,7 @@ function Packages({
 	isAllowedToEdit = true,
 	infoBanner = {},
 	setInfoBanner = () => {},
+	setRouterLoading = () => {},
 	isGuideViewed = false,
 }) {
 	const [showModal, setShowModal] = useState(false);
@@ -56,6 +57,7 @@ function Packages({
 					show={showModal}
 					data={data}
 					setShow={setShowModal}
+					setRouterLoading={setRouterLoading}
 				/>
 			) : null}
 		</div>

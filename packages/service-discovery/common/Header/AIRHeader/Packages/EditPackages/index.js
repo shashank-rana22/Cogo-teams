@@ -59,6 +59,7 @@ const MAX_WEIGHT_ALLOWED = 150;
 function EditPackages({
 	show = false,
 	setShow = () => {},
+	setRouterLoading = () => {},
 	data = {},
 }) {
 	const router = useRouter();
@@ -107,6 +108,8 @@ function EditPackages({
 		});
 
 		if (spot_search_id && typeof spot_search_id === 'string') {
+			setRouterLoading(true);
+
 			router.push(
 				'/book/[spot_search_id]',
 				`/book/${spot_search_id}`,
