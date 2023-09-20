@@ -24,6 +24,8 @@ function Navbar({
 	setPinnedNavKeys = () => {},
 	mobileShow = false,
 	inCall = false,
+	userId = '',
+	firestore = {},
 }) {
 	const ref = useRef(null);
 	const { t } = useTranslation(['common']);
@@ -99,6 +101,8 @@ function Navbar({
 						openPopover={openPopover}
 						timeLeft={timeLeft}
 						refetch={refetch}
+						userId={userId}
+						firestore={firestore}
 					/>
 
 					<div className={styles.search_container}>
