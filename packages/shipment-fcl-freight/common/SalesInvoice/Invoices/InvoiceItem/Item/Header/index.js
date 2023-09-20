@@ -1,5 +1,4 @@
 import { cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase, upperCase } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
@@ -23,6 +22,7 @@ function Header({
 	isIRNGenerated = false,
 	salesInvoicesRefetch = () => {},
 	refetchCN = () => {},
+	isCrossEntity = false,
 }) {
 	const [open, setOpen] = useState(false);
 	const [askNullify, setAskNullify] = useState(false);
@@ -35,15 +35,6 @@ function Header({
 	};
 
 	const { updateInvoiceStatus = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
-
-	let invoiceStatus = invoicesList?.filter(
-		(item) => item?.invoiceNumber === invoice?.live_invoice_number
-			|| item?.proformaNumber === invoice?.live_invoice_number,
-	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
-
-	if (invoiceStatus === 'POSTED') {
-		invoiceStatus = 'IRN GENERATED';
-	}
 
 	return (
 		<div className={styles.container}>
@@ -81,6 +72,7 @@ function Header({
 					updateInvoiceStatus={updateInvoiceStatus}
 					isIRNGenerated={isIRNGenerated}
 					setAskNullify={setAskNullify}
+					isCrossEntity={isCrossEntity}
 				/>
 
 				<div
