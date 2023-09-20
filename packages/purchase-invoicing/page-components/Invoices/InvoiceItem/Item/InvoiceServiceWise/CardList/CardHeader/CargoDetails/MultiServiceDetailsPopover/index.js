@@ -8,7 +8,7 @@ const ONE = 1;
 const ZERO = 0;
 
 function MultiServiceDetailsPopover({
-	children = {},
+	children = null,
 	mainServices = [],
 }) {
 	if (mainServices?.length <= ONE) {
