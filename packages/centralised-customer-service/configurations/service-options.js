@@ -1,11 +1,19 @@
 const services = [
 	{
-		label : 'FCL Short Transit',
-		value : 'fcl_freight-short_transit',
+		label : 'FCL Short Transit (Import)',
+		value : 'fcl_freight-short_transit-import',
 	},
 	{
-		label : 'FCL Long Transit',
-		value : 'fcl_freight-long_transit',
+		label : 'FCL Short Transit (Export)',
+		value : 'fcl_freight-short_transit-export',
+	},
+	{
+		label : 'FCL Long Transit (Import)',
+		value : 'fcl_freight-long_transit-import',
+	},
+	{
+		label : 'FCL Long Transit (Export)',
+		value : 'fcl_freight-long_transit-export',
 	},
 	{
 		label : 'LCL Short Transit',
