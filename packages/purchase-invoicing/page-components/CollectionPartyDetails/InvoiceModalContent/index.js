@@ -6,7 +6,7 @@ import {
 	InputController,
 } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import AdditionalDetails from '../../InvoiceFormLayout/AdditionalDetails';
 import BillingPartyDetails from '../../InvoiceFormLayout/BillingPartyDetails';
@@ -47,6 +47,22 @@ function IndexModalContent({
 }) {
 	const [errors, setErrors] = useState({});
 	const [errMszs, setErrMszs] = useState({});
+
+	const formControls = useMemo(() => getFormControls({
+		setValue,
+		cpParams,
+		handleModifiedOptions,
+		collectionParty    : collectionPartyState,
+		setCollectionParty : setCollectionPartyState,
+		collectionPartyAddress,
+		collectionPartyAddresses,
+		setCollectionPartyAddress,
+		collectionPartyBankOptions,
+	}), [setValue, cpParams, handleModifiedOptions,
+		collectionPartyState, setCollectionPartyState,
+		collectionPartyAddress, collectionPartyAddresses,
+		setCollectionPartyAddress, collectionPartyBankOptions]);
+
 	return (
 		<>
 			<RadioGroupController
@@ -77,17 +93,7 @@ function IndexModalContent({
 			/>
 			<h3 style={{ margin: '10px' }}>Collection Party Details</h3>
 			<div className={styles.collection_party}>
-				{(getFormControls({
-					setValue,
-					cpParams,
-					handleModifiedOptions,
-					collectionParty    : collectionPartyState,
-					setCollectionParty : setCollectionPartyState,
-					collectionPartyAddress,
-					collectionPartyAddresses,
-					setCollectionPartyAddress,
-					collectionPartyBankOptions,
-				}) || []).map((item) => {
+				{(formControls || []).map((item) => {
 					const ele = { ...item };
 					if (ele.name === 'collection_party') {
 						return (
