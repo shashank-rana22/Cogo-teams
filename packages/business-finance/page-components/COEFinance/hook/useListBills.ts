@@ -7,7 +7,6 @@ import { incomeConfig } from '../configurations/ShipmentIdView/incomeConfig';
 import { quotationConfig } from '../configurations/ShipmentIdView/quotationConfig';
 
 import useGetFiniteList from './useGetFiniteList';
-import useGetQuotation from './useGetQuotationBill';
 
 interface DataType {
 	currentPage: number;
@@ -41,11 +40,6 @@ const useListBills = (allParams) => {
 			authorizationparameters: profile?.authorizationparameters,
 		}),
 	);
-
-	const { getQuotationData, quotationLoading, quoteData } = useGetQuotation({
-		jobNumber : params?.jobNumber,
-		amountTab : params?.amountTab,
-	});
 
 	if (authorizationparameters?.split(':')?.[1] === 'across_all') {
 		let check = true;
@@ -112,10 +106,8 @@ const useListBills = (allParams) => {
 	});
 
 	const API_MAPPING = {
-		expense   : listExpenseInvoicesApi,
-		income    : listSalesInvoicesApi,
-		sellQuote : getQuotationData,
-		buyQuote  : getQuotationData,
+		expense : listExpenseInvoicesApi,
+		income  : listSalesInvoicesApi,
 	};
 
 	const currentApi = API_MAPPING[params?.amountTab];
@@ -146,7 +138,7 @@ const useListBills = (allParams) => {
 
 	const config = CONFIG_MAPPING[params?.amountTab];
 
-	const apiLoading = loading || billsApiLoading || invoicesApiLoading || quotationLoading;
+	const apiLoading = loading || billsApiLoading || invoicesApiLoading;
 
 	return {
 		loading : apiLoading,
@@ -158,7 +150,6 @@ const useListBills = (allParams) => {
 		setQ,
 		q,
 		config,
-		quoteData,
 	};
 };
 

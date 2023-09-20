@@ -16,27 +16,19 @@ interface PropsType {
 	itemData: ItemProps;
 	amountTab: string;
 	setAmountTab: Function;
-	showTab?: boolean;
 }
 
-function CardHeader({ amountTab, setAmountTab, itemData, showTab = false }: PropsType) {
+function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
 	const {
 		discountAppliedKam,
 		discountAppliedRevenueDesk,
 		jobStatus,
 	} = itemData || {};
-	let options = [
+
+	const options = [
 		{ name: 'Expense', value: 'expense' },
 		{ name: 'Income', value: 'income' },
 	];
-
-	if (showTab) {
-		options = [
-			{ name: 'Sell Quotation', value: 'sellQuote' },
-			{ name: 'Buy Quotation', value: 'buyQuote' },
-			...options,
-		];
-	}
 
 	return (
 		<div className={styles.container}>

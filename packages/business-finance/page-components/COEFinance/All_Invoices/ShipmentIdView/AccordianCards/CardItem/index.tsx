@@ -63,7 +63,6 @@ function CardItem({
 		config,
 		filters,
 		hookSetters,
-		quoteData,
 	} = useListBills({
 		jobNumber,
 		jobType,
@@ -127,8 +126,6 @@ function CardItem({
 	const getResponseData = () => {
 		if (amountTab === 'expense' || amountTab === 'income') {
 			return fullResponse;
-		} if (amountTab === 'sellQuote' || amountTab === 'buyQuote') {
-			return { list: quoteData || [] };
 		}
 		return { list: [] };
 	};
@@ -141,7 +138,6 @@ function CardItem({
 					itemData={cardData}
 					amountTab={amountTab}
 					setAmountTab={setAmountTab}
-					showTab={showTab}
 				/>
 			</div>
 
