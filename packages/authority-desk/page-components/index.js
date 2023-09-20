@@ -21,7 +21,7 @@ function AuthorityDesk() {
 	const [activeTab, setActiveTab] = useState('ocean');
 
 	const handleVersionChange = useCallback((tab) => {
-		const newHref = `${window.location.origin}/${router?.query?.partner_id}/bl_do?active_tab=${tab}`;
+		const newHref = `${window.location.origin}/${router?.query?.partner_id}/bl-do?active_tab=${tab}`;
 		window.location.replace(newHref);
 		window.sessionStorage.setItem('prev_nav', newHref);
 	}, [router?.query?.partner_id]);
