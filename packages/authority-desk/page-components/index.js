@@ -16,7 +16,7 @@ const ROLE_NAME = {
 };
 
 function AuthorityDesk() {
-	const { role } = useStakeholderCheck();
+	const { role = '' } = useStakeholderCheck();
 
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('ocean');
@@ -37,7 +37,7 @@ function AuthorityDesk() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<div className={styles.heading}>{`${ROLE_NAME[role]} Authority Desk`}</div>
+				<div className={styles.heading}>{`${ROLE_NAME?.[role] || ''} Authority Desk`}</div>
 				{role === 'kam'
 				&& <GoToKamDesk />}
 			</div>
