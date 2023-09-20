@@ -24,6 +24,8 @@ const CN_STATUS_MAPPING = {
 	finance_rejected : 'finance_rejected',
 };
 
+const REJECTED_STATUS = ['rejected', 'finance_rejected'];
+
 function Item({
 	item = {},
 	cnRefetch = () => {},
@@ -126,15 +128,14 @@ function Item({
 									{startCase(CN_STATUS_MAPPING[itemStatus] || '')}
 								</div>
 
-								{(itemStatus === 'finance_rejected' || itemStatus === 'rejected')
-								&& item?.rejection_reason ? (
+								{REJECTED_STATUS.includes(itemStatus) && item?.rejection_reason ? (
 									<div className={styles.rejection_reason}>
 										<IcCError width={16} height={16} />
 										<span>
 											{item.rejection_reason}
 										</span>
 									</div>
-									) : null}
+								) : null}
 							</div>
 
 							{itemStatus === 'pending' ? (
