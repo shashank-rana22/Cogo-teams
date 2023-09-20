@@ -20,7 +20,7 @@ const getPillData = ({ item = {}, service_type = '' }) => {
 
 	const commonPackageDetails = [
 		`${packages_count} Pkgs, ${volume} CBM Vol., ${weight} KG WT.`,
-		commodity ? COMMODITY_NAME_MAPPING[commodity]?.name : '',
+		COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity),
 	];
 
 	const SUBSIDIARY_CONTENT_MAPPING = {

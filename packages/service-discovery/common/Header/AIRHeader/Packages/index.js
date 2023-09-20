@@ -20,9 +20,9 @@ function Packages({
 }) {
 	const [showModal, setShowModal] = useState(false);
 
-	const { service_details } = data || {};
+	const { service_details, services } = data || {};
 
-	const load = getLoadArray(SERVICE, service_details || []);
+	const load = getLoadArray(SERVICE, service_details || services || []);
 
 	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 

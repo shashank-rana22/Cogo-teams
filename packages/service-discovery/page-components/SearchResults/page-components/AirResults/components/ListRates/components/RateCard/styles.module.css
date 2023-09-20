@@ -8,7 +8,7 @@
 
 	&.selected_card {
 		margin-top: 10px !important;
-		background-color: #f5ffff;
+		background: #f5ffff;
 		border: 1px solid #e6f3f3;
 	}
 }
