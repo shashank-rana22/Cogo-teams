@@ -15,11 +15,13 @@ function PricePerPackage({
 }) {
 	return (
 		<div className={styles.container}>
-			<span className={styles.packages_count}>
-				{packages_count}
-				{' '}
-				{packages_count > ONE_PACKAGE_COUNT ? 'Boxes' : 'Box'}
-			</span>
+			{packages_count ? (
+				<span className={styles.packages_count}>
+					{packages_count}
+					{' '}
+					{packages_count > ONE_PACKAGE_COUNT ? 'Boxes' : 'Box'}
+				</span>
+			) : null}
 
 			<div className={styles.amount_wrapper}>
 				<span className={styles.amount}>
@@ -33,9 +35,9 @@ function PricePerPackage({
 						},
 					})}
 
-					{isTotalPrice ? null : (
+					{/* {isTotalPrice ? null : (
 						<span className={styles.per_package_label}>Per Pkg.</span>
-					)}
+					)} */}
 				</span>
 
 				{isTotalPrice ? (

@@ -24,9 +24,9 @@ const format = ({ value = '', type = '' }) => {
 };
 
 function Route({ detail = {}, rate = {} }) {
-	const { transit_time = 0, schedules = {} } = rate;
+	const { transit_time = 0, schedules = {}, schedule_source = '' } = rate;
 
-	const { arrival = '', departure = '', source:schedule_source = '' } = schedules || {};
+	const { arrival = '', departure = '' } = schedules || {};
 
 	const scheduleData = {
 		arrival: `${format({ value: arrival, type: 'time' })}, 
@@ -58,19 +58,15 @@ function Route({ detail = {}, rate = {} }) {
 			</div>
 
 			<div className={styles.schedule_container}>
-				<div className={styles.origin}>
-					<span className={styles.schedule_item}>
-						{scheduleData.departure}
-					</span>
-				</div>
+				<span className={styles.schedule_item}>
+					{scheduleData.departure}
+				</span>
 
 				<JourneyLine scheduleData={scheduleData} />
 
-				<div className={styles.destination}>
-					<span className={styles.schedule_item}>
-						{scheduleData.arrival}
-					</span>
-				</div>
+				<span className={styles.schedule_item}>
+					{scheduleData.arrival}
+				</span>
 			</div>
 		</div>
 	);

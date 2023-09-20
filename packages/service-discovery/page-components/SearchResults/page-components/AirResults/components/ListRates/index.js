@@ -108,6 +108,7 @@ function ListRates({
 						loading={loading}
 						rate={rateItem}
 						detail={detail}
+						index={index}
 						setComparisonRates={setComparisonRates}
 						comparisonRates={comparisonRates}
 					/>
@@ -143,7 +144,11 @@ function ListRates({
 				</div>
 			)}
 
-			{loading ? null : <RequestRate details={detail} className={styles.request_rate} />}
+			{loading ? null : (
+				<div className={styles.request_rate}>
+					<RequestRate details={detail} />
+				</div>
+			)}
 		</div>
 	);
 }
