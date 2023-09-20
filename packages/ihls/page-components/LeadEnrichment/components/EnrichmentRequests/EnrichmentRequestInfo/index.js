@@ -65,17 +65,15 @@ function EnrichmentRequestInfo({ request = {}, onClose = () => {} }) {
 								);
 							})}
 						</div>
+						<Pagination
+							type="table"
+							currentPage={paginationData.page}
+							totalItems={paginationData.count}
+							pageSize={10}
+							onPageChange={onPageChange}
+						/>
 					</div>
 					<div className={styles.tableContainer}>
-						<div className={styles.pagination}>
-							<Pagination
-								type="table"
-								currentPage={paginationData.page}
-								totalItems={paginationData.count}
-								pageSize={10}
-								onPageChange={onPageChange}
-							/>
-						</div>
 						<LeadTable columns={columns} data={response} loading={loading} />
 					</div>
 				</>
