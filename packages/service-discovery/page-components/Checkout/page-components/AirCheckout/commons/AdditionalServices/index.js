@@ -1,17 +1,17 @@
 import { Accordion } from '@cogoport/components';
-import { dynamic } from '@cogoport/next';
+// import { dynamic } from '@cogoport/next';
 
 import AdditionalServicesComponent from '../../../../../../common/OtherServices/AdditionalServices';
 import SubsidiaryServices from '../../../../../../common/OtherServices/SubsidiaryServices';
 
 import styles from './styles.module.css';
 
-const CargoInsurance = dynamic(
-	() => import(
-		'../../../../../../common/OtherServices/CargoInsurance'
-	),
-	{ ssr: false },
-);
+// const CargoInsurance = dynamic(
+// 	() => import(
+// 		'../../../../../../common/OtherServices/CargoInsurance'
+// 	),
+// 	{ ssr: false },
+// );
 
 const MAX_SERVICES_LENGTH = 3;
 
@@ -52,12 +52,12 @@ function AdditionalServices({
 				source="checkout"
 			/>
 
-			<CargoInsurance
+			{/* <CargoInsurance
 				key={loading}
 				data={finalDetails}
 				rateCardData={rateCardData}
 				refetch={getCheckout}
-			/>
+			/> */}
 
 			<SubsidiaryServices
 				possible_subsidiary_services={possible_subsidiary_services}

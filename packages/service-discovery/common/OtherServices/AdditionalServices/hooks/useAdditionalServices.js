@@ -66,6 +66,7 @@ const useAdditionalServices = ({ rateCardData = {}, detail = {}, source = '' }) 
 			name         : 'cargo_insurance',
 			service_type : 'cargo_insurance',
 			title        : 'Cargo Insurance',
+			inco_terms   : ['cif', 'cfr', 'cpt', 'cip', 'dat', 'dap', 'ddp', 'exw', 'fca', 'fob', 'fas'],
 		});
 	}
 
