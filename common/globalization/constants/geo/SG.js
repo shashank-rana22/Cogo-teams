@@ -10,8 +10,8 @@ export default {
 			code   : 'SGD',
 			symbol : 'S$',
 		},
-		mobile_country_code : '+65',
-		allowed_languages   : ['english'],
+		mobile_country_code       : '+65',
+		invoice_allowed_languages : ['english'],
 	},
 	formats: {
 		amount: {

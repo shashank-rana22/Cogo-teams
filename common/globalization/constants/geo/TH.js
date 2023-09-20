@@ -10,8 +10,8 @@ export default {
 			code   : 'THB',
 			symbol : '฿',
 		},
-		mobile_country_code : '+66',
-		allowed_languages   : ['english'],
+		mobile_country_code       : '+66',
+		invoice_allowed_languages : ['english'],
 
 	},
 	formats: {

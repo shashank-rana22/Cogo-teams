@@ -11,8 +11,8 @@ export default {
 			code   : 'INR',
 			symbol : '₹',
 		},
-		mobile_country_code : '+91',
-		allowed_languages   : ['english'],
+		mobile_country_code       : '+91',
+		invoice_allowed_languages : ['english'],
 	},
 	formats: {
 		amount: {

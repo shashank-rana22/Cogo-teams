@@ -256,5 +256,6 @@
     "forecast": "Forecast",
     "supply_allocation": "Supply Allocation",
     "warehouse_management": "Warehouse Management",
-    "demand_forecast": "Demand Forecast"
+    "demand_forecast": "Demand Forecast",
+    "select_language": "Select Language"
 }
