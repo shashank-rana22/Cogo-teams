@@ -6,9 +6,7 @@ const getSearchControls = (props) => {
 			name,
 			placeholder,
 			type     : 'text',
-			onChange : (val) => {
-				debounceQuery(val);
-			},
+			onChange : (val) => debounceQuery(val),
 		},
 	];
 

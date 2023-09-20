@@ -1,10 +1,9 @@
 import { Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import CARD_DATA_MAPPING from './card-data-mapping';
 import styles from './styles.module.css';
-
-const FIRST_INDEX = 0;
 
 function ServiceCard(props) {
 	const { index, item, service_requirement_operator } = props;
@@ -18,7 +17,7 @@ function ServiceCard(props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading_container}>
-				{index !== FIRST_INDEX && (
+				{index !== GLOBAL_CONSTANTS.zeroth_index && (
 					<Pill
 						size="md"
 						color="orange"

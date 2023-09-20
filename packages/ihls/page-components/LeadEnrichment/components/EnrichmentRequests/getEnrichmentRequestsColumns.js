@@ -44,9 +44,7 @@ const getEnrichmentRequestsColumns = ({
 			id       : 'total_accounts',
 			accessor : ({ total_accounts }) => (
 				<div className={styles.table_cell}>
-					<div>
-						{total_accounts || '___'}
-					</div>
+					{total_accounts || '___'}
 				</div>
 			),
 		},

@@ -125,7 +125,6 @@ const getLeadInfoColumns = ({
 			<section className={styles.enrich}>
 				{shipment_modes ? (
 					<Pill
-					// key={item}
 						size="md"
 						color="#F3FAFA"
 						style={{ width: '30%' }}

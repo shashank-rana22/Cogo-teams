@@ -36,21 +36,11 @@ function LeadInfo({
 		setAllocationLeadId,
 	});
 
-	const onClose = () => {
-		setAllocationLeadId(null);
-	};
+	const onClose = () => setAllocationLeadId(null);
 
-	const onCloseLogs = () => {
-		setLeadId(null);
-	};
+	const onCloseLogs = () => setLeadId(null);
 
-	const onCloseActions = () => {
-		setVisible(false);
-	};
-
-	const onPageChange = (pageNumber) => {
-		setParams((p) => ({ ...p, page: pageNumber }));
-	};
+	const onPageChange = (pageNumber) => setParams((p) => ({ ...p, page: pageNumber }));
 
 	if (!loading && isEmpty(response)) {
 		return (
@@ -65,7 +55,7 @@ function LeadInfo({
 			<div className={styles.tableHeader}>
 				<div className={styles.triggerButtons}>
 					<Popover
-						onClickOutside={() => onCloseActions()}
+						onClickOutside={() => setVisible(false)}
 						placement="bottom"
 						caret={false}
 						render={(
@@ -126,25 +116,25 @@ function LeadInfo({
 				</Modal.Footer>
 			</Modal>
 			{leadId
-			&& (
-				<Modal style={{ width: '60%' }} show={leadId} onClose={onCloseLogs} placement="center">
-					<Modal.Header title={(
-						<>
-							<IcMEyeopen className={styles.eye_icon} />
-							<span>
-								Enrichment History
-							</span>
-						</>
-					)}
-					/>
-					<Modal.Body>
-						<LeadEnrichmentLogs lead_id={leadId} />
-					</Modal.Body>
-					<Modal.Footer>
-						<Button onClick={onCloseLogs}>Close</Button>
-					</Modal.Footer>
-				</Modal>
-			)}
+				? (
+					<Modal style={{ width: '60%' }} show={leadId} onClose={onCloseLogs} placement="center">
+						<Modal.Header title={(
+							<>
+								<IcMEyeopen className={styles.eye_icon} />
+								<span>
+									Enrichment History
+								</span>
+							</>
+						)}
+						/>
+						<Modal.Body>
+							<LeadEnrichmentLogs lead_id={leadId} />
+						</Modal.Body>
+						<Modal.Footer>
+							<Button onClick={onCloseLogs}>Close</Button>
+						</Modal.Footer>
+					</Modal>
+				) : null}
 
 			<EnrichmentRequestModal
 				checkedRowsId={checkedRowsId}
