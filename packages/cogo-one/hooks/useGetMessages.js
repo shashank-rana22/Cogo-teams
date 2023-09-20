@@ -9,6 +9,7 @@ import {
 	getDocs,
 	doc,
 	deleteDoc,
+	collection,
 } from 'firebase/firestore';
 import { useState, useEffect, useRef } from 'react';
 
@@ -19,8 +20,13 @@ import useListCogooneTimeline from './useListCogooneTimeline';
 
 const PAGE_LIMIT = 10;
 const LAST_INDEX_FROM_END = 1;
+const ZERO_MESSAGES = 0;
+const QUERY_LIMIT = 1;
 
-const useGetMessages = ({ activeChatCollection, id, viewType, firestore = {}, channel_type = '' }) => {
+const useGetMessages = ({
+	activeChatCollection, id, viewType, firestore = {},
+	channel_type = '', setActiveTab = () => {},
+}) => {
 	const [messagesState, setMessagesState] = useState({});
 
 	const firstMessages = useRef(null);
@@ -135,7 +141,7 @@ const useGetMessages = ({ activeChatCollection, id, viewType, firestore = {}, ch
 		setLoadingPrevMessages(false);
 	};
 
-	const deleteMessage = ({ timestamp = '', messageDocId = '' }) => {
+	const deleteMessage = async ({ timestamp = '', messageDocId = '' }) => {
 		setMessagesState((prev) => {
 			const { [id]: currentDocument, ...rest } = prev;
 
@@ -150,12 +156,46 @@ const useGetMessages = ({ activeChatCollection, id, viewType, firestore = {}, ch
 				},
 			};
 		});
+
 		try {
 			const messageDoc = doc(
 				firestore,
 				`${FIRESTORE_PATH[channel_type]}/${id}/messages/${messageDocId}`,
 			);
+
 			deleteDoc(messageDoc);
+
+			const messagesCollection = collection(
+				firestore,
+				`${FIRESTORE_PATH[channel_type]}/${id}/messages`,
+			);
+
+			const messagesCollectionQuery = query(
+				messagesCollection,
+				limit(QUERY_LIMIT),
+			);
+
+			const messagesDocs = await getDocs(messagesCollectionQuery);
+
+			const hasMessages = messagesDocs?.size > ZERO_MESSAGES;
+
+			if (hasMessages) {
+				return;
+			}
+
+			const roomDoc = doc(
+				firestore,
+				`${FIRESTORE_PATH[channel_type]}/${id}`,
+			);
+
+			setActiveTab({
+				tab               : 'firebase_emails',
+				subTab            : 'all',
+				hasNoFireBaseRoom : false,
+				expandSideBar     : false,
+				data              : {},
+			});
+			deleteDoc(roomDoc);
 		} catch (e) {
 			console.error('e', e);
 		}

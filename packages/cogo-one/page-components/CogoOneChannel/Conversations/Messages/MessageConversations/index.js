@@ -38,6 +38,7 @@ function MessageConversations({
 	assignChat = () => {},
 	supportAgentId = '',
 	userId = '',
+	setActiveTab = () => {},
 }) {
 	const conversationsDivRef = useRef(null);
 
@@ -49,7 +50,15 @@ function MessageConversations({
 	const {
 		getNextData = () => {}, lastPage, firstLoadingMessages,
 		messagesData, loadingPrevMessages, deleteMessage,
-	} = useGetMessages({ activeChatCollection, id, viewType, hasNoFireBaseRoom, firestore, channel_type });
+	} = useGetMessages({
+		activeChatCollection,
+		id,
+		viewType,
+		hasNoFireBaseRoom,
+		firestore,
+		channel_type,
+		setActiveTab,
+	});
 
 	const handleScroll = (e) => {
 		const bottom = e.target.scrollTop <= DISTANCE_FROM_TOP;
