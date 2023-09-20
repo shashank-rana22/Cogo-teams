@@ -31,7 +31,7 @@ interface ShipmentDetailsCardInterface {
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
 	invoiceStatus: string;
 	lineItemsCheck?: boolean;
-	setCheckItem: React.Dispatch<React.SetStateAction<{}>>;
+	setCheckItem: any;
 	onAccept: any;
 	onTabClick: any;
 	tab?: { collectionPartyTab?: boolean,
@@ -56,9 +56,9 @@ function ShipmentDetailsCard({
 	setLineItemsRemarks = () => {},
 	invoiceStatus = '',
 	lineItemsCheck = false,
-	setCheckItem = (prop) => (prop),
-	onAccept = (prop) => (prop),
-	onTabClick = (prop) => (prop),
+	setCheckItem = () => {},
+	onAccept = () => {},
+	onTabClick = () => {},
 	tab = {},
 	setCombinedRemarks = () => {},
 	docContent = '',
