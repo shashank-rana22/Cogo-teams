@@ -30,31 +30,32 @@ function AccordianCards({
 	currentOpenSID,
 	setCurrentOpenSID,
 	shipmentIdView = true,
-	onTabClick = (prop) => (prop),
-	onAccept = (prop) => (prop),
+	onTabClick = () => {},
+	onAccept = () => {},
 	showTab = false,
 	sidDataChecked = false,
 }: ListData) {
 	const {
-		jobId,
-		jobNumber,
-		jobStatus,
-		quotationProfitability,
-		tentativeProfitability,
-		incomeCount,
-		incomeTotalAmount,
-		expenseCount,
-		expenseTotalAmount,
+		jobId = '',
+		jobNumber = '',
+		jobStatus = '',
+		quotationProfitability = '',
+		tentativeProfitability = '',
+		incomeCount = 0,
+		incomeTotalAmount = 0,
+		expenseCount = 0,
+		expenseTotalAmount = 0,
 		buyQuotationCount = 0,
 		buyQuotationTotalAmount = 0,
 		sellQuotationCount = 0,
 		sellQuotationTotalAmount = 0,
-		serviceType,
-		pendingApprovalCount,
-		urgentCount,
-		urgentTotalAmount,
-		creditNoteCount,
-		creditNoteTotalAmount,
+		serviceType = '',
+		pendingApprovalCount = 0,
+		urgentCount = 0,
+		urgentTotalAmount = 0,
+		creditNoteCount = 0,
+		creditNoteTotalAmount = 0,
+		amountCurrency = '',
 	} = itemData || {};
 
 	const [amountTab, setAmountTab] = useState('expense');
@@ -67,6 +68,8 @@ function AccordianCards({
 		shipmentId     : '',
 	});
 	const router = useRouter();
+	const arrowElement = showTab
+		? <IcMArrowRotateUp height="17px" width="17px" /> : <IcMArrowRotateDown height="17px" width="17px" />;
 
 	return (
 		<div>
@@ -134,8 +137,8 @@ function AccordianCards({
 									</div>
 									<div className={styles.urgent_value_text}>
 										{formatAmount({
-											amount   : urgentTotalAmount! as any,
-											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											amount   : urgentTotalAmount! as number,
+											currency : amountCurrency,
 											options  : {
 												style           : 'currency',
 												currencyDisplay : 'code',
@@ -156,7 +159,7 @@ function AccordianCards({
 									<div className={styles.expense_value_text}>
 										{formatAmount({
 											amount   :	String(buyQuotationTotalAmount),
-											currency :	GLOBAL_CONSTANTS.currency_code.INR,
+											currency :	amountCurrency,
 											options  : {
 												style           : 'currency',
 												currencyDisplay : 'code',
@@ -181,7 +184,7 @@ function AccordianCards({
 									{formatAmount(
 										{
 											amount   :	incomeTotalAmount as any,
-											currency :	GLOBAL_CONSTANTS.currency_code.INR,
+											currency :	amountCurrency,
 											options  : {
 												style           : 'currency',
 												currencyDisplay : 'code',
@@ -202,8 +205,8 @@ function AccordianCards({
 									</div>
 									<div className={styles.expense_value_text}>
 										{formatAmount({
-											amount   :	creditNoteTotalAmount as any,
-											currency :	GLOBAL_CONSTANTS.currency_code.INR,
+											amount   :	creditNoteTotalAmount as number,
+											currency :	amountCurrency,
 											options  : {
 												style           : 'currency',
 												currencyDisplay : 'code',
@@ -224,7 +227,7 @@ function AccordianCards({
 									<div className={styles.expense_value_text}>
 										{formatAmount({
 											amount   :	String(sellQuotationTotalAmount),
-											currency :	GLOBAL_CONSTANTS.currency_code.INR,
+											currency :	amountCurrency,
 											options  : {
 												style           : 'currency',
 												currencyDisplay : 'code',
@@ -309,11 +312,7 @@ function AccordianCards({
 								onClick={() => onTabClick({ tabName: PRESENT_TAB })}
 								role="presentation"
 							>
-								{showTab ? (
-									<IcMArrowRotateUp height="17px" width="17px" />
-								) : (
-									<IcMArrowRotateDown height="17px" width="17px" />
-								)}
+								{arrowElement}
 							</div>
 						) }
 					</div>
@@ -324,7 +323,7 @@ function AccordianCards({
 					)}
 				</div>
 				<div>
-					{(showTab || currentOpenSID === jobId) && (
+					{(showTab || currentOpenSID === jobId) ? (
 						<CardItem
 							cardData={itemData}
 							currentOpenSID={currentOpenSID}
@@ -336,7 +335,7 @@ function AccordianCards({
 							showTab={showTab}
 							sidDataChecked={sidDataChecked}
 						/>
-					)}
+					) : null}
 
 				</div>
 			</div>

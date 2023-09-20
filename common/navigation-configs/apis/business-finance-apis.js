@@ -117,7 +117,7 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
-			api         : 'get_common_job-profitability_get-quotations',
+			api         : 'get_common_job_profitability_get_quotations',
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},

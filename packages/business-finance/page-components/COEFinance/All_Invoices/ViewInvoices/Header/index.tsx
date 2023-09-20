@@ -69,7 +69,7 @@ function Header({
 	|| remarksVal?.invoiceDetailsRemark?.length > 0
 	|| remarksVal?.taggingRemark?.length > 0;
 
-	const isItemNotChecked = Object.values(checkItem).some((item) => item === false);
+	const isItemNotChecked = Object.values(checkItem).some((item) => !item);
 
 	const getRoute = () => {
 		if (isShipment) {

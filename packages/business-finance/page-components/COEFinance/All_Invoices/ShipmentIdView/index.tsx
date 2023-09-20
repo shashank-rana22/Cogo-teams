@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useShipmentIdView from '../../hook/useShipmentIdView';
@@ -35,6 +36,7 @@ export interface ItemDataProps {
 	buyQuotationTotalAmount?: number,
 	sellQuotationCount?: number,
 	sellQuotationTotalAmount?: number,
+	amountCurrency?: string,
 }
 
 function ShipmentIdView() {
@@ -51,31 +53,6 @@ function ShipmentIdView() {
 	} = useShipmentIdView({ invoicesRequired: pendingApproval, shipmentId: serialId });
 	const { totalRecords } = shipmentData || {};
 
-	function HandleShipmentView() {
-		if (loading) {
-			return (
-				<div style={{ marginTop: '10px' }}>
-					{[1, 2, 3, 4, 5].map((val) => <LoadingState key={val} />)}
-				</div>
-			);
-		}
-		if (data.length === 0) {
-			return (
-				<div className={styles.no_data}>
-					No data Available
-				</div>
-			);
-		}
-		return data?.map((item: ItemDataProps) => (
-			<AccordianCards
-				itemData={item}
-				currentOpenSID={currentOpenSID}
-				setCurrentOpenSID={setCurrentOpenSID}
-				key={item?.jobId}
-			/>
-		));
-	}
-
 	return (
 		<div>
 			<Filters
@@ -88,7 +65,27 @@ function ShipmentIdView() {
 			/>
 
 			<div>
-				{HandleShipmentView()}
+				{loading ? (
+					<div style={{ marginTop: '10px' }}>
+						{[1, 2, 3, 4, 5].map((val) => <LoadingState key={val} />)}
+					</div>
+				) : null}
+
+				{!loading && isEmpty(data) ? (
+					<div className={styles.no_data}>
+						No data Available
+					</div>
+				) : null}
+
+				{!loading && !isEmpty(data) ? data?.map((item: ItemDataProps) => (
+					<AccordianCards
+						itemData={item}
+						currentOpenSID={currentOpenSID}
+						setCurrentOpenSID={setCurrentOpenSID}
+						key={item?.jobId}
+					/>
+				)) : null}
+
 				{data.length > 0 ? (
 					<div className={styles.pagination}>
 						<Pagination

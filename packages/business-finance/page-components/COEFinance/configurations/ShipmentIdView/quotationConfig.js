@@ -32,7 +32,6 @@ export const quotationConfig = {
 		{
 			label : 'Unit',
 			key   : 'unit',
-			func  : 'renderLineItemUnit',
 			span  : 2,
 		},
 		{

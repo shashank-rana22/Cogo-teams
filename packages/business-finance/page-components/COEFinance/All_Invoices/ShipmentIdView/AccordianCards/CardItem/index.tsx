@@ -103,35 +103,22 @@ function CardItem({
 		renderStatus        : (item: {}) => <Status item={item} />,
 		renderInvoices      : (item: {}, field: object) => <ViewInvoice item={item} field={field} />,
 		renderRemarks       : (item: {}) => <Remarks itemData={item} />,
-		renderQuotationName : ({ name = '' }) => <div>{showOverflowingNumber(name, 30)}</div>,
-		showFormattedPrice  : ({ price = '', currency = '' }) => (
-			<div>
-				{getFormattedAmount(price, currency)}
-			</div>
-		),
-		showFormattedPreTax: ({ total_price = '', currency = '' }) => (
-			<div>
-				{getFormattedAmount(total_price, currency)}
-			</div>
-		),
-		showFormattedPostTax: ({ tax_total_price = '', currency = '' }) => (
-			<div>
-				{getFormattedAmount(tax_total_price, currency)}
-			</div>
-		),
-		renderLineItemUnit: ({ unit }) => <div>{unit}</div>,
-
+		renderQuotationName : ({ name = '' }) => showOverflowingNumber(name, 30),
+		showFormattedPrice  : ({ price = '', currency = '' }) => getFormattedAmount(price, currency),
+		showFormattedPreTax : ({ total_price = '', currency = '' }) => getFormattedAmount(total_price, currency),
+		showFormattedPostTax:
+		({ tax_total_price = '', currency = '' }) => getFormattedAmount(tax_total_price, currency),
 	};
 
 	const getResponseData = () => {
-		if (amountTab === 'expense' || amountTab === 'income') {
+		if (['expense', 'income'].includes(amountTab)) {
 			return fullResponse;
 		}
 		return { list: [] };
 	};
 
 	return (
-		<div>
+		<>
 			<div className={styles.hr} />
 			<div className={styles.header}>
 				<CardHeader
@@ -161,7 +148,7 @@ function CardItem({
 				<div className={styles.footer}>
 					<div
 						className={styles.footer_text}
-						onClick={() => handleClick()}
+						onClick={handleClick}
 						role="presentation"
 					>
 						View Less
@@ -183,7 +170,7 @@ function CardItem({
 					</Button>
 				</div>
 			)}
-		</div>
+		</>
 	);
 }
 

@@ -7,8 +7,8 @@ import AccordianCards from '../../ShipmentIdView/AccordianCards/index.tsx';
 
 function SIDView({
 	shipmentId = '',
-	onTabClick = (prop) => (prop),
-	onAccept = (prop) => (prop),
+	onTabClick = () => {},
+	onAccept = () => {},
 	showTab = false,
 	sidDataChecked = false,
 	jobNumberByQuery = '',
