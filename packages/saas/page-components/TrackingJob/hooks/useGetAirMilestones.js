@@ -1,26 +1,35 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useEffect, useCallback } from 'react';
 
-const useGetAirMilestones = ({ id }) => {
-	const { loading, data, trigger } = useRequest(
-		'get',
-		false,
-	)('/get_saas_air_subscription');
-
-	const getMilestones = async () => {
-		await trigger({
-			params: { id },
-		});
+const useGetAirMilestones = ({ id = null, trackingType }) => {
+	const SHIPMENT_DATA_URL = {
+		ocean : '/get_saas_container_subscription',
+		air   : '/get_saas_air_subscription',
 	};
+	const [{ loading, data }, trigger] = useRequest({
+		method : 'get',
+		url    : SHIPMENT_DATA_URL[trackingType],
+	});
+
+	const getMilestones = useCallback(async () => {
+		try {
+			await trigger({
+				params: { id },
+			});
+			console.log('trigger');
+		} catch (err) {
+			console.log(err);
+		}
+	}, [id, trackingType, trigger]);
 
 	useEffect(() => {
 		getMilestones();
-	}, []);
+	}, [getMilestones]);
 
 	return {
-		getMilestones,
-		milestoneData: data?.data,
+		data,
+		datae: data,
 		loading,
 	};
 };

@@ -1,9 +1,12 @@
-import { Button } from '@cogoport/components';
+import { Button, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useMemo } from 'react';
 
+import styles from './styles.module.css';
+
+const FIRST_INDEX = 1;
 export const columns = ({
 	handleShowModal,
 	showData,
@@ -46,31 +49,54 @@ export const columns = ({
 		},
 		{
 			Header   : <p>CONTAINER NO./BL NO</p>,
-			accessor : (item) => (
-				<>
-					<div className="id">{`#${item?.data?.search_value}`}</div>
+			accessor : ({ item }) => {
+				const totalFunctionPills = item?.data?.tags.length;
 
-					{item?.data?.tags?.length > 2 ? (
-						<p>
-							{item?.data?.tags?.map((x, i) => i < 2 && <p>{x}</p>)}
-							<div>
-								<p
-									content={item?.data?.tags?.slice(2).join(',  ', ' ')}
+				if (totalFunctionPills <= FIRST_INDEX) {
+					(item?.data?.tags).map((items) => (
+						<Pill
+							key={items}
+							className={styles.function_head}
+							color="red"
+						>
+							{items}
+						</Pill>
+					));
+				}
 
-								>
-									<p>{`+${item?.data?.tags?.length - 2}`}</p>
-								</p>
-							</div>
-						</p>
-					) : (
-						<p>
-							{item?.data?.tags?.map((x) => (
-								<p>{x}</p>
-							))}
-						</p>
-					)}
-				</>
-			),
+				const renderTooltip = item?.data?.tags.slice(FIRST_INDEX).map((item) => (
+					<Pill
+						key={item}
+						className={styles.function_head}
+						color="red"
+					>
+						{item}
+					</Pill>
+				));
+
+				return (
+					<section>
+						<div className={styles.sub_functions_container}>
+							{item?.data?.tags[GLOBAL_CONSTANTS.zeroth_index] && (
+								<Pill className={styles.function_head} color="red">
+									{item?.data?.tags[GLOBAL_CONSTANTS.zeroth_index]}
+								</Pill>
+							)}
+
+							{totalFunctionPills > FIRST_INDEX && (
+								<Tooltip content={renderTooltip} placement="top">
+									<strong>
+										(+
+										{totalFunctionPills - FIRST_INDEX}
+										)
+									</strong>
+								</Tooltip>
+							)}
+
+						</div>
+					</section>
+				);
+			},
 			id: 'container_no',
 		},
 		{

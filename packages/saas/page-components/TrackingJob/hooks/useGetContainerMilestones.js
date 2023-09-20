@@ -1,15 +1,11 @@
+import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
-import { useRequest, useScope } from '@cogo/commons/hooks';
 
-const useGetContainerMilestones = ({ showUpdate = {} }) => {
-	const id = showUpdate?.data?.saas_container_subscription_id;
-	const { scope } = useScope();
-
-	const { loading, data, trigger } = useRequest(
-		'get',
-		false,
-		scope,
-	)('/get_saas_container_subscription');
+const useGetContainerMilestones = ({ id = {} }) => {
+	const [{ loading, data }, trigger] = useRequest({
+		method : 'get',
+		url    : 'get_saas_container_subscription',
+	});
 
 	const getMilestones = async () => {
 		await trigger({
@@ -21,13 +17,14 @@ const useGetContainerMilestones = ({ showUpdate = {} }) => {
 		if (id) {
 			getMilestones();
 		}
-	}, [showUpdate]);
+	}, [id]);
 
 	return {
 		getMilestones,
-		milestoneData: data?.data,
-		apiloading: loading,
-		shipping_line_id: data?.shipping_line_id,
+		data,
+		milestoneData    : data?.data,
+		apiloading       : loading,
+		shipping_line_id : data?.shipping_line_id,
 	};
 };
 

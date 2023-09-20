@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
@@ -23,7 +24,7 @@ export const columns = ({
 
 			Header   : <p>SERIAL ID</p>,
 			accessor : (item) => (
-				<>
+				<div>
 					{item?.serial_id ? (
 						<p className="serialId">
 							{`${item?.serial_id}`}
@@ -31,7 +32,7 @@ export const columns = ({
 					) : (
 						''
 					)}
-				</>
+				</div>
 			),
 			id: 'serial_id',
 		},
@@ -142,15 +143,15 @@ export const columns = ({
 		},
 		{
 			id       : 'container_update',
-			Header   : <p align="center">ACTIONS</p>,
+			Header   : <p>ACTIONS</p>,
 			accessor : (item) => (
-				<div onClick={() => handleShowModal(item)}>
+				<Button onClick={() => handleShowModal(item)}>
 					View Status
-				</div>
+				</Button>
 			),
 		},
 		{
-			Header   : <p align="center">STATUS</p>,
+			Header   : <p>STATUS</p>,
 			accessor : (item) => {
 				let action = '';
 				if (item?.status) {

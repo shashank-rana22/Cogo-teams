@@ -1,24 +1,29 @@
 import { useRequest } from '@cogoport/request';
+import { useCallback, useEffect } from 'react';
 
-const useGetTruckMilestones = () => {
+const useGetTruckMilestones = ({ id = null, trackingType }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_saas_ftl_tracking_detail',
 	});
 
-	const getMilestones = async ({ trip_id }) => {
+	const getMilestones = useCallback(async () => {
 		try {
-			trigger({
-				params: { trip_id },
+			await trigger({
+				params: { id },
 			});
+			console.log('trigger');
 		} catch (err) {
 			console.log(err);
 		}
-	};
+	}, [id, trackingType, trigger]);
+
+	useEffect(() => {
+		getMilestones();
+	}, [getMilestones]);
 
 	return {
-		getMilestones,
-		milestoneData: data,
+		data,
 		loading,
 	};
 };

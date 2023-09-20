@@ -40,7 +40,9 @@
 }
 
 .styled_table {
-	.ui-table {
+	.ui-table-container {
+		background-color: #fff;
+
 		.ui-table-head-cell {
 			text-align: center;
 
@@ -59,7 +61,7 @@
 			background: #fff;
 
 			.image {
-				width: 50px;
+				width: 20px;
 				height: 25px;
 				margin: 5px 0;
 			}
@@ -73,6 +75,11 @@
 				flex-direction: column;
 				align-items: center;
 				margin-bottom: 5px;
+
+				.image {
+					width: 42px;
+					height: 42px;
+				}
 			}
 		}
 

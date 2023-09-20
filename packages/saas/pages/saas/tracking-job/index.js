@@ -6,7 +6,7 @@ export { default } from '@cogoport/saas/page-components/TrackingJob';
 export async function getServerSideProps({ locale }) {
 	return {
 		props: {
-			...(await serverSideTranslations(locale, ['common'])),
+			...(await serverSideTranslations(locale, ['common', 'airOceanTracking'])),
 		},
 	};
 }
