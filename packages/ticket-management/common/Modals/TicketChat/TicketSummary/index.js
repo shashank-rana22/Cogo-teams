@@ -3,9 +3,10 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCWaitForTimeSlots } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { PRIORITY_MAPPING, STATUS_LABEL_MAPPING, STATUS_MAPPING } from '../../../../constants';
+import { PRIORITY_MAPPING, STATUS_MAPPING, getStatusLabelMapping } from '../../../../constants';
 import useGetCountdown from '../../../../hooks/useGetCountdown';
 import TicketLoader from '../../../TicketStructure/TicketStructureLoader';
 
@@ -31,11 +32,22 @@ function TicketSummary({
 		CreatedAt: createdAt = '',
 		Priority: priority = '',
 		Source: source = '',
+		Data: data = {},
 	} = ticket || {};
+
+	const { t } = useTranslation(['myTickets']);
+
+	const {
+		SerialID: serialId,
+		Service: service,
+		TradeType: tradeType,
+		RequestType: requestType,
+	} = data || {};
 
 	const authorizers = (closureAuthorizers || []).map((item) => item.Name);
 
-	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[ticketStatus]] || {};
+	const { color: textColor, label } = getStatusLabelMapping({ t })
+		?.[STATUS_MAPPING[ticketStatus]] || {};
 
 	const isSameName = agentName === name;
 
@@ -52,9 +64,9 @@ function TicketSummary({
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<div className={styles.title}>Ticket Summary</div>
+				<div className={styles.title}>{t('myTickets:ticket_summary')}</div>
 				<div className={cl`${styles.priority} ${styles[PRIORITY_MAPPING[priority]]}`}>
-					{startCase(`${priority} priority`)}
+					{startCase(`${priority} ${t('myTickets:priority')}`)}
 				</div>
 			</div>
 			<div className={styles.ticket_body}>
@@ -65,13 +77,13 @@ function TicketSummary({
 							{id}
 						</div>
 						{isCurrentReviewer && isTicketExpired ? (
-							<Tooltip content="Ticket escalation time" placement="right">
+							<Tooltip content={t('myTickets:ticket_escalation_time')} placement="right">
 								<div className={styles.timer}>
 									<IcCWaitForTimeSlots />
 									{formattedTime}
 								</div>
 							</Tooltip>
-						) : <div className={styles.escalation_label}>Already Escalated</div>}
+						) : <div className={styles.escalation_label}>{t('myTickets:already_escalated')}</div>}
 					</div>
 					<div className={styles.description}>{type}</div>
 				</div>
@@ -97,11 +109,12 @@ function TicketSummary({
 
 			<div className={styles.summary}>
 				<div className={styles.ticket_data}>
-					Source:
+					{t('myTickets:source')}
+					:
 					<span className={styles.updated_at}>{startCase(source)}</span>
 				</div>
 				<div className={styles.ticket_data}>
-					{status === 'closed' ? 'Resolved on' : 'Created on'}
+					{status === 'closed' ? t('myTickets:resolved_on') : t('myTickets:created_on')}
 					<span className={styles.updated_at}>
 						{formatDate({
 							date       : status === 'closed' ? updatedAt : createdAt,
@@ -114,7 +127,8 @@ function TicketSummary({
 				</div>
 				{agentName && (
 					<div className={styles.ticket_data}>
-						Created by:
+						{t('myTickets:created_by')}
+						:
 						<span className={styles.updated_at}>
 							{agentName}
 						</span>
@@ -122,34 +136,71 @@ function TicketSummary({
 				)}
 				{name && !isSameName && (
 					<div className={styles.ticket_data}>
-						On behalf of:
+						{t('myTickets:on_behalf_of')}
+						:
 						<span className={styles.updated_at}>
 							{name}
 						</span>
 					</div>
 				)}
 				<div className={styles.ticket_data}>
-					Email:
+					{t('myTickets:email')}
+					:
 					<span className={styles.updated_at}>
 						{email}
 					</span>
 				</div>
 				<div className={styles.ticket_data}>
-					Contact no:
+					{t('myTickets:contact_no')}
+					:
 					<span className={styles.updated_at}>
 						{mobileCountryCode}
 						{' '}
 						{mobileNumber}
 					</span>
 				</div>
+				{requestType && (
+					<div className={styles.ticket_data}>
+						Request Type:
+						<span className={styles.updated_at}>
+							{startCase(requestType)}
+						</span>
+					</div>
+				)}
+				{serialId && (
+					<div className={styles.ticket_data}>
+						SID:
+						<span className={styles.updated_at}>
+							{serialId}
+						</span>
+					</div>
+				)}
+				{service && (
+					<div className={styles.ticket_data}>
+						Service:
+						<span className={styles.updated_at}>
+							{startCase(service)}
+						</span>
+					</div>
+				)}
+				{tradeType && (
+					<div className={styles.ticket_data}>
+						Trade Type:
+						<span className={styles.updated_at}>
+							{startCase(tradeType)}
+						</span>
+					</div>
+				)}
 				<div className={styles.ticket_data}>
-					Assigned to:
+					{t('myTickets:assigned_to')}
+					:
 					<span className={styles.updated_at}>
 						{ticketReviewer?.User?.Name}
 					</span>
 				</div>
 				<div className={styles.ticket_data}>
-					Closure authorizers:
+					{t('myTickets:closure_authorizers')}
+					:
 					<span className={styles.updated_at}>
 						{authorizers.map((item) => item).join(', ') || '-'}
 					</span>
