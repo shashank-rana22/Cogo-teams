@@ -3,6 +3,7 @@ import { Button } from '@cogoport/components';
 import {
 	useForm,
 } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useCreateShipmentAirFreightConsolidatedInvoice
@@ -26,7 +27,7 @@ function TerminalChargeRate({
 	const [irnGenerated, setIRNGenerated] = useState(true);
 	const [collectionPartyData, setCollectionPartyData] = useState({});
 	const [sheetData, setSheetData] = useState({});
-	const [showConfirm, setShowConfirm] = useState(false);
+	const [showConfirm, setShowConfirm] = useState({});
 
 	const controls = getTerminalChargeRateControl({
 		entityData,
@@ -68,6 +69,10 @@ function TerminalChargeRate({
 		updateShipmentAirFreightConsolidatedInvoice();
 	};
 
+	const handleUpload = (values) => {
+		setShowConfirm(values);
+	};
+
 	return (
 		<div>
 			<Layout
@@ -77,7 +82,7 @@ function TerminalChargeRate({
 			/>
 			<div className={styles.button_container}>
 				<Button
-					onClick={handleSubmit(() => setShowConfirm(true))}
+					onClick={handleSubmit(handleUpload)}
 					disabled={loading || updateLoading || !irnGenerated}
 				>
 					Create Proforma
@@ -89,7 +94,7 @@ function TerminalChargeRate({
 					IRN Generated
 				</Button>
 			</div>
-			{showConfirm ? (
+			{!isEmpty(showConfirm) ? (
 				<ConfirmModal
 					showConfirm={showConfirm}
 					setShowConfirm={setShowConfirm}
@@ -99,6 +104,7 @@ function TerminalChargeRate({
 					loading={loading}
 					updateLoading={updateLoading}
 					irnGenerated={irnGenerated}
+					mainServicesData={mainServicesData}
 				/>
 			) : null}
 		</div>

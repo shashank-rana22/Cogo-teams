@@ -1,20 +1,36 @@
 import { Button, Modal } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
+
+import useCreateShipmentAirCSRSheet from '../../../../../../../hooks/useCreateShipmentAirCSRSheet';
 
 import styles from './styles.module.css';
 
 function ConfirmModal({
-	showConfirm = false,
+	showConfirm = {},
 	setShowConfirm = () => {},
+	setSheetData = () => {},
 	handleSubmit = () => {},
 	handleCreateProforma = () => {},
 	loading = false,
 	updateLoading = false,
 	irnGenerated = false,
+	mainServicesData = {},
 }) {
+	const { createShipmentAirCSRSheet, csrCreateLoading = false } = useCreateShipmentAirCSRSheet({
+		mainServicesData,
+		setSheetData,
+	});
+
+	useEffect(() => {
+		createShipmentAirCSRSheet(showConfirm);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<Modal
-			show={showConfirm}
-			onClose={() => setShowConfirm(false)}
+			show={!isEmpty(showConfirm)}
+			onClose={() => setShowConfirm({})}
 			className={styles.container}
 		>
 			<Modal.Header title="Final Confirmation !" />
@@ -25,7 +41,7 @@ function ConfirmModal({
 				<div className={styles.button_head}>
 					<Button
 						themeType="secondary"
-						onClick={() => { setShowConfirm(false); }}
+						onClick={() => { setShowConfirm({}); }}
 						disabled={updateLoading}
 					>
 						Cancel
@@ -34,7 +50,7 @@ function ConfirmModal({
 				<div className={styles.button_head}>
 					<Button
 						onClick={handleSubmit(handleCreateProforma)}
-						disabled={loading || updateLoading || !irnGenerated}
+						disabled={loading || updateLoading || !irnGenerated || csrCreateLoading}
 					>
 						Confirm
 					</Button>

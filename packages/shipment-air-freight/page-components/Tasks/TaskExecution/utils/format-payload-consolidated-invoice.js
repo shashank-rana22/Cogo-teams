@@ -34,7 +34,17 @@ const getPayload = ({
 
 	const { id:country_id = '', country_code = '', name = '', type = '' } = country || {};
 
-	const { currency = '', price = 0, tax_price = 0, total_tax_price = 0, mawb_number = '' } = values || {};
+	const { currency = '', mawb_number = '' } = values || {};
+
+	let price = 0;
+	let tax_price = 0;
+	let total_tax_price = 0;
+
+	(values?.terminalChargeReceipt || []).forEach((val) => {
+		price += Number(val.price);
+		tax_price += Number(val.tax_price);
+		total_tax_price += Number(val.total_tax_price);
+	});
 
 	const {
 		chargeable_weight = '', airline_id = '', origin_airport_id = '',

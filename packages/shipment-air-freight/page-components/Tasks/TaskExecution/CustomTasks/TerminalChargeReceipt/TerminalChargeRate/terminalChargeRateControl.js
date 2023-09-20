@@ -99,6 +99,30 @@ const getTerminalChargeRateControl = ({
 			span: 6,
 		},
 		{
+			name        : 'csr_reference_number',
+			label       : 'TC Invoice Number',
+			type        : 'text',
+			placeholder : 'Type TC Invoice No',
+			span        : 6,
+			rules:
+				{
+					required: 'TC Invoice No. is required',
+				},
+		},
+		{
+			name       : 'terminal_charge_document',
+			label      : 'Terminal Charge Receipt',
+			type       : 'file',
+			drag       : true,
+			span       : 6,
+			maxSize    : '10485760',
+			uploadType : 'aws',
+			accept     : '.pdf',
+			rules      : {
+				required: true,
+			},
+		},
+		{
 			name               : 'terminalChargeReceipt',
 			label              : 'Upload Terminal Charge Receipt',
 			span               : 6,
@@ -148,30 +172,6 @@ const getTerminalChargeRateControl = ({
 					type        : 'text',
 					placeholder : 'Enter Alias (Only if required)',
 					span        : 6,
-				},
-				{
-					name        : 'csr_reference_number',
-					label       : 'TC Invoice Number',
-					type        : 'text',
-					placeholder : 'Type TC Invoice No',
-					span        : 6,
-					rules:
-						{
-							required: 'TC Invoice No. is required',
-						},
-				},
-				{
-					name       : 'terminal_charge_document',
-					label      : 'Terminal Charge Receipt',
-					type       : 'file',
-					drag       : true,
-					span       : 6,
-					maxSize    : '10485760',
-					uploadType : 'aws',
-					accept     : '.pdf',
-					rules      : {
-						required: true,
-					},
 				},
 			],
 		},
