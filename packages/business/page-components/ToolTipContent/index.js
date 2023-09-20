@@ -10,7 +10,7 @@ function ToolTipContent(props) {
 	const totalFunctionPills = content.length;
 
 	if (totalFunctionPills <= FIRST_INDEX) {
-		(content).map((item) => (
+		(content || []).map((item) => (
 			<Pill
 				key={item}
 				className={styles.function_head}
@@ -21,7 +21,7 @@ function ToolTipContent(props) {
 		));
 	}
 
-	const renderTooltip = content.slice(FIRST_INDEX).map((item) => (
+	const renderTooltip = content?.slice(FIRST_INDEX)?.map((item) => (
 		<Pill
 			key={item}
 			className={styles.function_head}

@@ -9,7 +9,7 @@ const getCreateBusinessPayload = (values = {}) => {
 		status,
 		trade_name,
 		addresses,
-	} = values;
+	} = values || {};
 
 	const formValues = {
 		business_name      : business_name || undefined,
