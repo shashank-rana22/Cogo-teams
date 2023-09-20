@@ -21,6 +21,10 @@ const getCommonAgentType = ({ viewType = '' }) => {
 		return 'shipment_specialist';
 	}
 
+	if (viewType.includes('credit_controller')) {
+		return 'credit_controller';
+	}
+
 	if (viewType.includes('marketing')) {
 		return 'marketing';
 	}
