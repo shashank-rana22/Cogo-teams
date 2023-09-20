@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
@@ -41,8 +42,14 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 		serviceWiseData.forEach((item) => {
 			const serviceValue = item.service;
 
+			setValue(`${item.service}-release_trigger`);
+
 			item.data.forEach((subItem, index) => {
 				setValue(`${index}-${serviceValue}`, subItem.shipment_capacity);
+
+				if (index === GLOBAL_CONSTANTS.zeroth_index) {
+					setValue(`${item.service}-release_trigger`, subItem.release_trigger);
+				}
 			});
 		});
 	}, [data, handleReset, setValue]);

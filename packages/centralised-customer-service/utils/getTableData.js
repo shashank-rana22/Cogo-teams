@@ -1,3 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
+
 import services from '../configurations/service-options';
 
 const DEFAULT_VALUE = 0;
@@ -16,7 +19,7 @@ const getTableData = ({ data = {} }) => {
 	const rowData = serviceWiseData?.map((serviceDetails) => {
 		const SERVICE_OBJ = {};
 		SERVICE_OBJ.service = serviceDetails.service || '';
-		SERVICE_OBJ.trigger = 'Mark shipment as complete';
+		SERVICE_OBJ.release_trigger = startCase(serviceDetails.data?.[GLOBAL_CONSTANTS.zeroth_index].release_trigger);
 		serviceDetails.data.forEach((item, slabIndex) => {
 			SERVICE_OBJ[`slab_${slabIndex}_capacity`] = item.shipment_capacity || DEFAULT_VALUE;
 			SERVICE_OBJ[`slab_${slabIndex}_NEQ`] = item.normalized_capacity || DEFAULT_VALUE;

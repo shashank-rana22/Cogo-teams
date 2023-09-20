@@ -31,8 +31,8 @@ const getTableColumns = ({ slabData = [] }) => {
 
 	columns.push({
 		Header   : 'RELEASE TRIGGER',
-		id       : 'trigger',
-		accessor : 'trigger',
+		id       : 'release_trigger',
+		accessor : 'release_trigger',
 	});
 
 	return columns;
