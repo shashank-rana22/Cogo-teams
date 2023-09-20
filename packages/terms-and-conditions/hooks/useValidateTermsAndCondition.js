@@ -17,7 +17,7 @@ const useValidateTermsAndCondition = ({ refetch, organizationId }) => {
 				trade_type,
 				country_id,
 				paying_party_country_ids,
-			} = values;
+			} = values || {};
 			const payload = {
 				service,
 				trade_type               : trade_type || undefined,

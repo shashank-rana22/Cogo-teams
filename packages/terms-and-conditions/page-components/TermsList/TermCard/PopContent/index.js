@@ -13,9 +13,7 @@ function PopOverContent({
 	setEditModalId = () => {},
 	item = {},
 }) {
-	const { onSubmit, loading } = useUpdateTermsAndConditions({
-		...propsForUpdation,
-	});
+	const { onSubmit, loading } = useUpdateTermsAndConditions({ ...(propsForUpdation || {}) });
 
 	return (
 		<div className={styles.pop_content}>

@@ -35,14 +35,15 @@ function TermCard({
 
 	const [visible, setVisible] = useState(false);
 	const callBack = () => setShowEdit(null);
+
 	function GetToolTipContent({ list = [] }) {
 		return (
 			<div>
-				{list.map((countryObj, i) => (
+				{list?.map((countryObj, i) => (
 					<div key={countryObj.id}>
 						{i + GLOBAL_CONSTANTS.one}
 						.
-						{countryObj.name}
+						{countryObj?.name}
 					</div>
 				))}
 			</div>
@@ -59,6 +60,7 @@ function TermCard({
 	const handleSubmitForm = ({ values, editFormValue }) => {
 		apiTrigger({ values, editFormValue });
 	};
+
 	return (
 		<div>
 			<div className={styles.container}>
@@ -72,10 +74,7 @@ function TermCard({
 							const { key, label, value } = freightItem;
 							const valueItem = value(listItem);
 							let labelName = label;
-							if (
-								key === 'line_name'
-							&& ['air_freight', 'fcl_freight'].includes(service)
-							) {
+							if (key === 'line_name' && ['air_freight', 'fcl_freight'].includes(service)) {
 								labelName = LABEL_MAPPING[service];
 							}
 

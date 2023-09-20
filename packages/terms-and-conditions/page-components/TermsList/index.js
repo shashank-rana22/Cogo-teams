@@ -32,7 +32,7 @@ function TermList({
 	return (
 		<div className={styles.container}>
 			{!loading ? data?.list?.map((listItem) => (
-				<div key={listItem.id}>
+				<div key={listItem?.id}>
 					<TermCard
 						EditForm={EditForm}
 						tncLevel={tncLevel}
@@ -42,10 +42,10 @@ function TermList({
 						refetch={refetch}
 						showMoreTnC={showHiddenContentId === listItem?.id}
 						onClickShowMoreTnC={
-							() => setShowHiddenContentId((pv) => (pv === listItem.id ? null : listItem.id))
+							() => setShowHiddenContentId((pv) => (pv === listItem?.id ? null : listItem.id))
 }
 						onClickUpdateTerms={() => {
-							setTncLevel('termsAndCondition'); setEditTncModalId(listItem.id);
+							setTncLevel('termsAndCondition'); setEditTncModalId(listItem?.id);
 						}}
 					/>
 				</div>

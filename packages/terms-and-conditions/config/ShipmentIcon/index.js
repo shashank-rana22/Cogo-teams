@@ -47,7 +47,7 @@ function ShipmentIcon({ shipment_type = '' }) {
 
 	const Icon = currentIcon?.icon;
 
-	if (isEmpty(currentIcon)) return null;
+	if (isEmpty(currentIcon) || !Icon) return null;
 
 	return (
 		<div className={styles.container}>

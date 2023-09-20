@@ -11,14 +11,14 @@ const controls = [
 		rules   : { required: true },
 	},
 	{
-		name           : 'shipping_line_id',
-		label          : 'Shipping Line',
-		type           : 'async_select',
-		asyncKey       : 'list_operators',
-		placeholder    : 'Select Shipping Line',
-		defaultOptions : true,
-		span           : 12,
-		params         : {
+		name        : 'shipping_line_id',
+		label       : 'Shipping Line',
+		type        : 'async_select',
+		asyncKey    : 'list_operators',
+		placeholder : 'Select Shipping Line',
+		initialCall : true,
+		span        : 12,
+		params      : {
 			page_limit : 10,
 			sort_by    : 'short_name',
 			sort_type  : 'asc',

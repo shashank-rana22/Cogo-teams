@@ -13,10 +13,11 @@ const useCreateTnc = ({
 	const apiTrigger = async ({ values = {}, editFormValue = {} }) => {
 		try {
 			const payload = getCreateUpdateTncPayload({ values, editFormValue, organizationId });
-			await trigger({
-				data: payload,
-			});
+
+			await trigger({ data: payload });
+
 			Toast.success('Terms And Conditions Created Successfully');
+
 			refetch();
 		} catch (error) {
 			toastApiError(error);

@@ -13,7 +13,7 @@ const getCreateUpdateTncPayload = ({ values = {}, editFormValue = {}, organizati
 	} = values || {};
 
 	const formValues = {
-		id                      	: editFormValue?.id || undefined,
+		id                      	: isUpdatable || undefined,
 		service                  : service || undefined,
 		trade_type               : trade_type || undefined,
 		airline_id               : airline_id || undefined,
@@ -27,7 +27,7 @@ const getCreateUpdateTncPayload = ({ values = {}, editFormValue = {}, organizati
 	const descriptionNew = description?.map((item) => item?.terms_and_condition);
 
 	const payload = {
-		...(isUpdatable ? { id: editFormValue?.id } : { ...formValues }),
+		...(isUpdatable ? { id: isUpdatable } : { ...formValues }),
 		description: descriptionNew,
 	};
 
