@@ -16,6 +16,8 @@ const CONTAINER_STYLES_MAPPING = {
 	'coe-booking_note_desk' : styles.chat_container_booking_desk,
 	'coe-kam_desk'          : styles.chat_container_kam_desk,
 	'coe-cost_booking_desk' : styles.chat_container_cost_booking_desk,
+	'coe-document_desk'     : styles.chat_container_document_desk,
+	'coe-last_mile'         : styles.chat_container_last_mile_desk,
 };
 
 function ShipmentChat({ setMessagesCount = () => { } }) {
