@@ -23,10 +23,10 @@ function DatepickerController(props) {
 					key={name}
 					id={name}
 					onChange={(e) => {
+						onChange(e);
 						if (typeof rest?.onChange === 'function') {
 							rest?.onChange(e);
 						}
-						onChange(e);
 					}}
 					value={newValue}
 					onBlur={onBlur}
