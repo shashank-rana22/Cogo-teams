@@ -30,6 +30,7 @@ function Item({
 	invoiceData = {},
 	loading = false,
 	invoicesList = [],
+	isCrossEntity = false,
 }) {
 	const [open, setOpen] = useState('');
 
@@ -65,7 +66,11 @@ function Item({
 			<main className={styles.main}>
 				<div className={styles.header}>
 					<div className={styles.billing_party} ref={billingPartyHeightRef}>
-						<h5>{item?.billing_address?.name}</h5>
+						<h5>
+							{isCrossEntity ? item?.billing_address?.business_name?.toUpperCase()
+								: item?.billing_address?.name}
+
+						</h5>
 
 						<Tooltip
 							theme="light"
