@@ -8,7 +8,7 @@ import CustumTable from '../../commons/CustumTable';
 import { jvFilters } from '../../configurations/jv-filters';
 import useGetJvList from '../../hooks/useGetJvList';
 
-import BulkJvUpload from './BulkJvUploadModal';
+import BulkJvUpload from './BulkJvUploadModal/index';
 import CreateJvModal from './CreateJvModal';
 import styles from './styles.module.css';
 
@@ -87,7 +87,7 @@ function JournalVoucher({ entityCode }) {
 				/>
 			) : null}
 			{showBulkJV ? (
-				<BulkJvUpload showBulkJV={showBulkJV} setShowBulkJV={setShowBulkJV} />
+				<BulkJvUpload showBulkJV={showBulkJV} setShowBulkJV={setShowBulkJV as any} />
 			) : null}
 		</div>
 	);
