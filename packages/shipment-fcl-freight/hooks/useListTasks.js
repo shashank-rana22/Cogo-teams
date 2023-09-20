@@ -15,6 +15,7 @@ const STAKEHOLDER_MAPPINGS = {
 	booking_agent_manager           : 'booking_agent',
 	sales_agent                     : 'sales_agent',
 	consignee_shipper_booking_agent : 'booking_agent',
+	coe_head                        : 'booking_agent',
 };
 
 function useListTasks({
