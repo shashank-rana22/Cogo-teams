@@ -445,7 +445,11 @@ const GLOBAL_CONSTANTS = {
 		fcl_container_icon_s2c  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg',
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
-		container2: 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/container2.png',
+		container2         : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/container2.png',
+		container_icon     : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/icdport.svg',
+		empty_state_finder : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/ic-empty-doc_app.svg',
+		air_empty_state    : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/air-connect.svg',
+		ocean_empty_state  : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/ship-cargo.jpg',
 	},
 
 	video_call_ring_tone_url:
