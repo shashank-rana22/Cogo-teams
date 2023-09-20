@@ -1,0 +1,56 @@
+.card {
+	margin: 0 8px;
+	margin-bottom: 12px;
+	border: 1px solid #fbd1a6;
+	border-radius: 4px;
+	box-shadow: 0 2px 3px 1px #e0e0e0;
+}
+
+.header {
+	padding: 12px 12px 6px;
+	background-color: #fdfbf6;
+	border-radius: 4px;
+}
+
+.basic_info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 4px;
+}
+
+.feedback_number {
+	font-weight: 600;
+}
+
+.category {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.issue_type {
+	overflow: hidden;
+	font-size: 12px;
+	color: #828282;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.desc_info {
+	padding: 4px 12px;
+}
+
+.date {
+	width: max-content;
+	margin-left: auto;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.desc {
+	overflow: hidden;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
