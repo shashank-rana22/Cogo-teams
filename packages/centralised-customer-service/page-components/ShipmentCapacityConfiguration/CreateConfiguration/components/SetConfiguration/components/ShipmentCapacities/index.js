@@ -148,6 +148,14 @@ function ShipmentCapacities(props, ref) {
 											required: 'Required',
 										}}
 									/>
+
+									{errors?.[`${service.value}-release_trigger`]?.message
+										? (
+											<p className={styles.err_msg}>
+												{errors?.[`${service.value}-release_trigger`]?.message}
+											</p>
+										) : null}
+
 								</div>
 
 							</div>
