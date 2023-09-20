@@ -11,19 +11,29 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { REQUEST_TYPE_OPTIONS } from '../constants';
 
+function RenderLabel({ label = '' }) {
+	return (
+		<div>
+			{label}
+			<span style={{ color: 'red' }}>*</span>
+		</div>
+	);
+}
+
 const useRaiseTicketcontrols = ({
 	watchOrgId = '', watchUserId = '', watchService = '', watchTradeType = '', watchCategory = '',
 	watchRequestType = '', resetField = () => {}, setAdditionalInfo = () => {}, setValue = () => {},
 	formattedSubCategories = [], setSubCategories = () => {}, watchSubCategory = '',
-	t = () => {},
+	t = () => {}, setRaiseToDesk = () => {}, formatRaiseToDeskOptions = [], watchToggle,
 }) => {
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
-	const categoryOptions = useGetAsyncTicketOptions({
-		...asyncTicketsCategory(),
+	const categoryDeskOptions = useGetAsyncTicketOptions({
+		...asyncTicketsCategory({ endLabelKey: !watchToggle ? 'category' : 'raised_by_desk' }),
 		params: {
-			Service     : watchService || undefined,
-			TradeType   : watchTradeType || undefined,
-			RequestType : watchRequestType || undefined,
+			Service          : watchService || undefined,
+			TradeType        : watchTradeType || undefined,
+			RequestType      : watchRequestType || undefined,
+			CategoryDeskType : !watchToggle ? 'by_category' : 'by_desk',
 		},
 	});
 
@@ -57,7 +67,7 @@ const useRaiseTicketcontrols = ({
 
 	return [
 		{
-			label          : t('myTickets:request_type'),
+			label          : <RenderLabel label={t('myTickets:request_type')} />,
 			placeholder    : t('myTickets:select_request_ype'),
 			name           : 'request_type',
 			controllerType : 'select',
@@ -84,7 +94,7 @@ const useRaiseTicketcontrols = ({
 		},
 		{
 			...(serialIdOptions || {}),
-			label          : t('myTickets:select_sid'),
+			label          : <RenderLabel label={t('myTickets:select_sid')} />,
 			placeholder    : t('myTickets:select_sid'),
 			name           : 'serial_id',
 			controllerType : 'select',
@@ -96,7 +106,7 @@ const useRaiseTicketcontrols = ({
 			},
 		},
 		{
-			label          : t('myTickets:select_service'),
+			label          : <RenderLabel label={t('myTickets:select_service')} />,
 			name           : 'service',
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_service'),
@@ -105,7 +115,7 @@ const useRaiseTicketcontrols = ({
 			isClearable    : true,
 		},
 		{
-			label          : t('myTickets:select_trade_type'),
+			label          : <RenderLabel label={t('myTickets:select_trade_type')} />,
 			name           : 'trade_type',
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_trade_type'),
@@ -114,8 +124,15 @@ const useRaiseTicketcontrols = ({
 			isClearable    : true,
 		},
 		{
-			...(categoryOptions || {}),
-			label          : t('myTickets:raised_by_desk'),
+			name           : 'toggle_value',
+			offLabel       : t('myTickets:by_category'),
+			onLabel        : t('myTickets:by_desk'),
+			value          : false,
+			controllerType : 'toggle',
+		},
+		{
+			...(categoryDeskOptions || {}),
+			label          : t('myTickets:select_category'),
 			name           : 'category',
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_category'),
@@ -127,7 +144,7 @@ const useRaiseTicketcontrols = ({
 			},
 		},
 		{
-			label          : t('myTickets:raised_to_desk'),
+			label          : <RenderLabel label={t('myTickets:select_sub_category')} />,
 			name           : 'sub_category',
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_sub_category'),
@@ -136,8 +153,31 @@ const useRaiseTicketcontrols = ({
 			options        : formattedSubCategories,
 		},
 		{
+			...(categoryDeskOptions || {}),
+			label          : <RenderLabel label={t('myTickets:raised_by_desk')} />,
+			name           : 'raised_by_desk',
+			controllerType : 'select',
+			placeholder    : t('myTickets:select_raised_by_desk'),
+			rules          : { required: true },
+			isClearable    : true,
+			defaultOptions : true,
+			onChange       : (_, val) => {
+				setRaiseToDesk(val?.raised_to_desk);
+				resetField('raised_to_desk');
+			},
+		},
+		{
+			label          : <RenderLabel label={t('myTickets:raised_to_desk')} />,
+			name           : 'raised_to_desk',
+			controllerType : 'select',
+			placeholder    : t('myTickets:select_raised_to_desk'),
+			rules          : { required: true },
+			isClearable    : true,
+			options        : formatRaiseToDeskOptions,
+		},
+		{
 			...(ticketTypeOptions || {}),
-			label          : t('myTickets:select_issue_type'),
+			label          : <RenderLabel label={t('myTickets:select_issue_type')} />,
 			name           : 'issue_type',
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_issue_type'),
@@ -147,7 +187,7 @@ const useRaiseTicketcontrols = ({
 			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
 		},
 		{
-			label          : t('myTickets:describe_issue'),
+			label          : <RenderLabel label={t('myTickets:describe_issue')} />,
 			name           : 'additional_information',
 			controllerType : 'textarea',
 			placeholder    : t('myTickets:enter_comments'),
@@ -163,7 +203,7 @@ const useRaiseTicketcontrols = ({
 		},
 		{
 			...(organizationUserOptions || {}),
-			label          : t('myTickets:select_user'),
+			label          : <RenderLabel label={t('myTickets:select_user')} />,
 			name           : 'user_id',
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_user'),
