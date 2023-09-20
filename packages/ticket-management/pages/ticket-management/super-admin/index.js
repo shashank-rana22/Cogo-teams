@@ -6,7 +6,7 @@ export { default } from '@cogoport/ticket-management/page-components/SuperAdmin'
 export async function getServerSideProps({ locale }) {
 	return {
 		props: {
-			...(await serverSideTranslations(locale, ['common'])),
+			...(await serverSideTranslations(locale, ['common', 'myTickets'])),
 		},
 	};
 }
