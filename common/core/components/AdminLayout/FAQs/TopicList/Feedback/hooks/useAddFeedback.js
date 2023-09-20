@@ -11,11 +11,12 @@ const getPayload = ({
 }) => ({
 	UserID        : id || undefined,
 	PerformedByID : id || undefined,
-	Source        : 'feedback',
+	Source        : 'admin',
 	Category      : category || undefined,
 	UserType      : 'ticket_user',
 	Data          : {
-		Attachment: [finalUrl] || [],
+		RequestType : 'feedback',
+		Attachment  : [finalUrl] || [],
 	},
 	Type        : issue_type || undefined,
 	Description : additional_information || undefined,

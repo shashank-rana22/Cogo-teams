@@ -3,6 +3,7 @@ import { IcMFeedback } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import FeedbackForm from './FeedbackForm';
+import List from './List';
 import styles from './styles.module.css';
 
 function Feedback() {
@@ -34,6 +35,7 @@ function Feedback() {
 						</div>
 					</div>
 				)}
+			<List />
 		</div>
 	);
 }
