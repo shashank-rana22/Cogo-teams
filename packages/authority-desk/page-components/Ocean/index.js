@@ -1,8 +1,6 @@
 import { Tabs, TabPanel, cl, Toggle, Placeholder } from '@cogoport/components';
-import { routeConfig } from '@cogoport/navigation-configs';
 import ScopeSelect from '@cogoport/scope-select';
 import { ShipmentChat } from '@cogoport/shipment-chat';
-import { useSelector } from '@cogoport/store';
 import { useRouter } from 'next/router';
 import React, { useState, useCallback } from 'react';
 
@@ -26,8 +24,6 @@ const ROLE_NAME = {
 };
 
 function Ocean() {
-	const { general } = useSelector((s) => s);
-
 	const { role } = useStakeholderCheck();
 
 	const router = useRouter();
@@ -54,16 +50,12 @@ function Ocean() {
 
 	const { buckets, additionalTabs } = BucketsMapping({ role, count_stats });
 
-	const { pathname } = general;
-
-	const navigation = routeConfig?.[pathname]?.navigation || '';
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.heading}>{`${ROLE_NAME[role]} Authority Desk`}</div>
 
-				<ShipmentChat navigation={navigation} />
+				<ShipmentChat />
 
 				{role === 'kam'
 				&& <GoToKamDesk />}

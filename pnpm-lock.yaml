@@ -856,7 +856,6 @@ importers:
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.68
-      '@cogoport/navigation-configs': workspace:^0.1.0
       '@cogoport/next': workspace:^0.1.0
       '@cogoport/ocean-modules': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
@@ -866,11 +865,10 @@ importers:
       '@cogoport/utils': ^1.2.10
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.442_434chb7tbeieycp76dfs74etje
+      '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.98_react@18.2.0
-      '@cogoport/navigation-configs': link:../../common/navigation-configs
+      '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
       '@cogoport/ocean-modules': link:../../common/ocean-modules
       '@cogoport/request': link:../../common/request
@@ -935,7 +933,6 @@ importers:
       '@cogoport/components': ^1.0.390
       '@cogoport/core': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.61
-      '@cogoport/navigation-configs': workspace:^0.1.0
       '@cogoport/next': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
       '@cogoport/scope-select': workspace:^0.1.0
@@ -944,10 +941,9 @@ importers:
       '@cogoport/utils': ^1.2.6
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.442_434chb7tbeieycp76dfs74etje
+      '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
       '@cogoport/core': link:../../common/core
-      '@cogoport/icons-react': 1.0.98_react@18.2.0
-      '@cogoport/navigation-configs': link:../../common/navigation-configs
+      '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/scope-select': link:../../common/scope-select
@@ -1400,7 +1396,6 @@ importers:
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.61
-      '@cogoport/navigation-configs': workspace:^0.1.0
       '@cogoport/next': workspace:^0.1.0
       '@cogoport/ocean-modules': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
@@ -1411,11 +1406,10 @@ importers:
       react: 18.2.0
     dependencies:
       '@cogoport/air-modules': link:../../common/air-modules
-      '@cogoport/components': 1.0.442_434chb7tbeieycp76dfs74etje
+      '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.98_react@18.2.0
-      '@cogoport/navigation-configs': link:../../common/navigation-configs
+      '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
       '@cogoport/ocean-modules': link:../../common/ocean-modules
       '@cogoport/request': link:../../common/request
@@ -1470,10 +1464,10 @@ importers:
       react: 18.2.0
       uuid: ^9.0.0
     dependencies:
-      '@cogoport/components': 1.0.442_434chb7tbeieycp76dfs74etje
+      '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.98_react@18.2.0
+      '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/scope-select': link:../../common/scope-select
@@ -1773,7 +1767,6 @@ importers:
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.61
-      '@cogoport/navigation-configs': workspace:^0.1.0
       '@cogoport/next': workspace:^0.1.0
       '@cogoport/ocean-modules': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
@@ -1784,11 +1777,10 @@ importers:
       react: 18.2.0
       uuid: ^9.0.0
     dependencies:
-      '@cogoport/components': 1.0.442_434chb7tbeieycp76dfs74etje
+      '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.98_react@18.2.0
-      '@cogoport/navigation-configs': link:../../common/navigation-configs
+      '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
       '@cogoport/ocean-modules': link:../../common/ocean-modules
       '@cogoport/request': link:../../common/request
@@ -1811,8 +1803,8 @@ importers:
       '@cogoport/utils': ^1.2.6
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.442_434chb7tbeieycp76dfs74etje
-      '@cogoport/icons-react': 1.0.98_react@18.2.0
+      '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
+      '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/scope-select': link:../../common/scope-select
@@ -9561,7 +9553,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -9572,7 +9564,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -9583,7 +9575,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -9595,7 +9587,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -9606,7 +9598,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -9618,7 +9610,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       immutable: 3.8.2
     dev: false
 

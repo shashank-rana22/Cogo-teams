@@ -34,7 +34,6 @@ const SEGMENTED_TAB_OPTIONS = Object.entries(TABS_CONFIG.fcl_freight.segmented_t
 
 export default function FclDesk() {
 	const contextValues = useContext(BookingDeskContext);
-
 	const { tabState: { stepperTab, segmentedTab }, scopeFilters } = contextValues || {};
 
 	const { tabs } = TABS_CONFIG.fcl_freight.segmented_tabs[segmentedTab];
