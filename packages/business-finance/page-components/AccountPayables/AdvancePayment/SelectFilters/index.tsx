@@ -1,4 +1,5 @@
-import { Input, Button } from '@cogoport/components';
+import { Input, Button, Select, SingleDateRange } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -8,8 +9,15 @@ import PayRunModal from '../PayrunModal';
 import { filterControls } from './filterControls';
 import styles from './styles.module.css';
 
+interface DateRangeProps {
+	startDate?: Date,
+	endDate?: Date
+}
+
 interface FilterProps {
 	search?:string,
+	documentType?:string,
+	dateRange?:DateRangeProps
 }
 
 interface Props {
@@ -19,18 +27,46 @@ interface Props {
 	createButton?:string;
 }
 
-function SelectFilters({ filters, setFilters, activeEntity, createButton }:Props) {
+function SelectFilters({ filters = {}, setFilters = () => {}, activeEntity = '', createButton = '' }:Props) {
 	const [showPayRunModal, setshowPayRunModal] = useState(false);
-	const { search = '' } = filters || {};
+	const { search = '', documentType = '', dateRange = {} } = filters || {};
+
 	return (
 		<div className={styles.container}>
-			<div>
+			<div className={styles.filters}>
 				<Filter
 					controls={filterControls}
 					filters={filters}
 					setFilters={setFilters}
 				/>
+
+				<Select
+					value={documentType}
+					onChange={(e) => setFilters((prev) => ({ ...prev, documentType: e }))}
+					placeholder="Select Advance Payment Type"
+					size="sm"
+					isClearable
+					options={[
+						{
+							label : 'Container Security Deposit',
+							value : 'CONTAINER_SECURITY_DEPOSIT',
+						},
+						{
+							label : 'Pre Deposit Amount',
+							value : 'PRE_DEPOSIT_AMOUNT',
+						},
+					]}
+				/>
+
+				<SingleDateRange
+					name="date"
+					isPreviousDaysAllowed
+					onChange={(e) => setFilters((prev) => ({ ...prev, dateRange: e }))}
+					value={dateRange}
+					dateFormat={GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']}
+				/>
 			</div>
+
 			<div className={styles.search_filter}>
 				<div>
 					<Input
