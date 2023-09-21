@@ -12,6 +12,7 @@ import ViewPdf from './components/ViewPdf';
 import styles from './style.module.css';
 
 function JobOpenDetailsModal({ row = {}, setDetailsModal = () => {} }) {
+	console.log(row);
 	const { level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark = '' } = row || {};
 	const level0 = { ...createdBy, remark };
 	const { t } = useTranslation(['incidentManagement']);

@@ -1,11 +1,11 @@
 import { Button, cl, Textarea } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import usePostJobOpenRemark from '../../../../apisModal/usePostJobOpenRemark';
 import STATUS_MAPPING from '../../../../Constants/status_mapping';
 import useGetShipmentCostSheet from '../../../../hooks/useGetShipmentCostSheet';
+import { getFormatAmount } from '../../../../utils/getformatamount';
 
 import StatRect from './StatRect';
 import styles from './styles.module.css';
@@ -74,41 +74,31 @@ function Details({ row = {}, setDetailsModal = () => {} }) {
 				<div>
 					<div className={styles.heading}>Estimated Sell</div>
 					<div className={styles.text}>
-						INR
-						{' '}
-						{row?.data?.jobOpenRequest?.estimatedSell || GLOBAL_CONSTANTS.zeroth_index}
+						{getFormatAmount(row?.data?.jobOpenRequest?.estimatedSell)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Sell</div>
 					<div className={styles.text}>
-						INR
-						{' '}
-						{row?.data?.jobOpenRequest?.totalSell || GLOBAL_CONSTANTS.zeroth_index}
+						{getFormatAmount(row?.data?.jobOpenRequest?.totalSell)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Estimated Buy</div>
 					<div className={styles.text}>
-						INR
-						{' '}
-						{row?.data?.jobOpenRequest?.estimatedBuy || GLOBAL_CONSTANTS.zeroth_index}
+						{getFormatAmount(row?.data?.jobOpenRequest?.estimatedBuy)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Buy</div>
 					<div className={styles.text}>
-						INR
-						{' '}
-						{row?.data?.jobOpenRequest?.totalBuy || GLOBAL_CONSTANTS.zeroth_index}
+						{getFormatAmount(row?.data?.jobOpenRequest?.totalBuy)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Profit Margin</div>
 					<div className={styles.text}>
-						INR
-						{' '}
-						{row?.data?.jobOpenRequest?.profitMargin || GLOBAL_CONSTANTS.zeroth_index}
+						{getFormatAmount(row?.data?.jobOpenRequest?.profitMargin)}
 					</div>
 				</div>
 			</div>
