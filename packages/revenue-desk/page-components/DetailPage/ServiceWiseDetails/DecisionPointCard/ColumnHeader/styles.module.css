@@ -7,12 +7,6 @@
 	box-shadow: 0 4px 10px -4px rgb(98 127 172 / 20%);
 }
 
-.overall {
-	display: flex;
-	align-items: center;
-	background: #f9f9f9;
-}
-
 .title {
 	display: flex;
 	align-items: center;
@@ -34,45 +28,6 @@
 	font-weight: 600;
 	color: #221f20;
 	text-align: center;
-}
-
-.rowTitle {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 20%;
-	padding: 10px;
-	font-size: 14px;
-	font-weight: 600;
-	color: #221f20;
-	box-shadow: 4px 0 4px -3px rgb(98 127 172 / 20%);
-
-	.ui_input_number_container {
-		width: 50px;
-	}
-}
-
-.preference {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 45%;
-	font-size: 8px;
-	font-weight: 500;
-	color: #221f20;
-
-	.ui_input_number_container {
-		width: 50px;
-	}
-}
-
-.text {
-	display: flex;
-	align-items: center;
-	margin-right: 10px;
-	font-size: 8px;
-	font-weight: 500;
-	color: #221f20;
 }
 
 .prefTitle {

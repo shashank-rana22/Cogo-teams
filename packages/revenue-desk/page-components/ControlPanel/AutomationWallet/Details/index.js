@@ -75,6 +75,17 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 							}) || '-'}
 						</div>
 
+						<div className={styles.content}>
+							Wallet Remaining :
+							{formatAmount({
+								amount  : walletAmount - wallet_used,
+								currency,
+								options : {
+									style: 'currency',
+								},
+							}) || '-'}
+						</div>
+
 						<Input
 							value={walletAmount}
 							disabled={!disabledValue}

@@ -1,8 +1,5 @@
-import { InputNumber } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcCFtick } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
 
 import GetTableValue from './GetTableValue';
 import styles from './styles.module.css';
@@ -35,33 +32,6 @@ const getServiceLabel = ({ service, isHead }) => {
 };
 
 function ColumnHeader({ list = {}, priceData = {} }) {
-	const [prefCount, setPrefCount] = useState(NUMBERS.ONE);
-	const [sumBuy, setSumBuy] = useState({});
-	const [sumSell, setSumSell] = useState({});
-	useEffect(() => {
-		setSumBuy({});
-		setSumSell({});
-		Object.keys(list).map((service) => {
-			Object.keys(list[service]).map((rowData) => {
-				(list[service][rowData]).map((rowItem, index) => {
-					setSumBuy((prev) => ({
-						...prev,
-						[index]: Number(rowItem?.data?.rowData?.total_buy_price_in_preferred_currency),
-					}));
-					setSumSell((prev) => ({
-						...prev,
-						[index]: Number(rowItem?.data?.rowData?.total_sell_price_in_preferred_currency),
-					}));
-					return null;
-				});
-				return null;
-			});
-			return null;
-		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(list)]);
-
-	if (isEmpty(sumBuy)) return null;
 	return (
 		<div>
 			<div className={styles.outerContainer}>
@@ -70,22 +40,6 @@ function ColumnHeader({ list = {}, priceData = {} }) {
 						{getServiceLabel({ service: title, isHead: true })}
 					</div>
 				))}
-			</div>
-			<div className={styles.overall}>
-				<div className={styles.rowTitle}>
-					Overall
-					<div className={styles.preference}>
-						<div className={styles.text}>Preference</div>
-						<InputNumber
-							size="xs"
-							min={1}
-							max={Math.max(Object.keys(sumBuy).length, Object.keys(sumSell).length)}
-							value={prefCount}
-							onChange={setPrefCount}
-							step={1}
-						/>
-					</div>
-				</div>
 			</div>
 			<div className={styles.tableContainer}>
 				{Object.keys(list).map((service, index) => {
@@ -111,8 +65,6 @@ function ColumnHeader({ list = {}, priceData = {} }) {
 													{idxx + NUMBERS.ONE}
 
 												</div>
-												{idxx + NUMBERS.ONE === prefCount
-													? <IcCFtick width="20px" height="20px" /> : null}
 											</div>
 											{columnTitle.map((key) => (
 												<div
@@ -127,7 +79,6 @@ function ColumnHeader({ list = {}, priceData = {} }) {
 									))}
 								</div>
 							))}
-
 						</div>
 					);
 				})}

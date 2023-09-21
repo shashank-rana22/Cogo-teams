@@ -9,11 +9,13 @@ function DecisionPointsCard({ serviceData, supplierPayload, priceData }) {
 		(Object.keys(supplierPayload)).forEach((item) => {
 			serviceData.map((serv) => {
 				if (item === serv?.id) {
-					setList({
-						...list,
-						[serv.service_type]:
-						{ ...list[serv.service_type], [serv.id]: [...supplierPayload[serv.id]] },
-					});
+					setList((prevList) => ({
+						...prevList,
+						[serv.service_type]: {
+							...prevList[serv.service_type],
+							[serv.id]: [...supplierPayload[serv.id]],
+						},
+					}));
 				}
 				return null;
 			});
