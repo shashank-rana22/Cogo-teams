@@ -66,19 +66,8 @@ const getAddressMappingControls = ({ organizationCountryId }) => [
 		showIn : ['otherAddress'],
 	},
 	{
-		type  : 'text',
-		name  : 'tax_number',
-		label : (
-			<>
-				<CountrySpecificData
-					country_id={organizationCountryId}
-					accessorType="registration_number"
-					accessor="label"
-				/>
-				{' '}
-				Number
-			</>
-		),
+		type      : 'text',
+		name      : 'tax_number',
 		className : 'uppercase',
 		maxLength : 15,
 		rules     : {

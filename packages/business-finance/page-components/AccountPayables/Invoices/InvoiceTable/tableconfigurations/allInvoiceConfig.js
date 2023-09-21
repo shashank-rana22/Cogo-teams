@@ -75,7 +75,7 @@ export const ALL_INVOICE_CONFIG = {
 			},
 		},
 		{
-			label       : 'Tds',
+			label       : 'TDS',
 			key         : 'tdsAmount',
 			func        : 'renderAmount',
 			currencyKey : 'currency',
@@ -105,8 +105,8 @@ export const ALL_INVOICE_CONFIG = {
 		{
 			label : 'Urgency',
 			key   : 'urgencyTag',
-			span  : 1,
 			func  : 'renderUrgencyTag',
+			span  : 1,
 		},
 		{
 			label : 'Action',

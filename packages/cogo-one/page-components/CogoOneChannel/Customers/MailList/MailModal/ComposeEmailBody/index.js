@@ -33,6 +33,7 @@ function ComposeEmailBody(props) {
 		[...new Set([
 			...getUserActiveMails({ userEmailAddress, viewType }),
 			...(userSharedMails || []),
+			...([emailState?.from_mail || activeMailAddress]),
 		])]
 	).map(
 		(curr) => ({ label: curr, value: curr }),

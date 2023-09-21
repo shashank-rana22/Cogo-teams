@@ -1,12 +1,12 @@
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 
-export const getTaxLabels = (entityCode) => [
+export const getTaxLabels = (entityCode = '') => [
 	{
-		label    : ENTITY_FEATURE_MAPPING[entityCode].labels.tax_label,
+		label    : ENTITY_FEATURE_MAPPING[entityCode]?.labels?.tax_label,
 		valueKey : 'registrationNumber',
 	},
 	{
-		label    : ENTITY_FEATURE_MAPPING[entityCode].labels.sage_label,
+		label    : ENTITY_FEATURE_MAPPING[entityCode]?.labels?.sage_label,
 		valueKey : 'sageId',
 	},
 	{
@@ -20,14 +20,14 @@ export const getTaxLabels = (entityCode) => [
 		defaultValueKey : '0',
 	},
 ];
-export const getSearchOptionsLabels = (entityCode) => [
+export const getSearchOptionsLabels = (entityCode = '') => [
 	{
 		label : 'Trade Party Serial Id',
 		value : 'tradePartySerialId',
 		name  : 'tradePartySerialId',
 	},
 	{
-		label : ENTITY_FEATURE_MAPPING[entityCode].labels.search_options_label_sage,
+		label : ENTITY_FEATURE_MAPPING[entityCode]?.labels?.search_options_label_sage,
 		value : 'sageId',
 		name  : 'sageId',
 	},
@@ -37,7 +37,7 @@ export const getSearchOptionsLabels = (entityCode) => [
 		name  : 'organizationSerialId',
 	},
 	{
-		label : ENTITY_FEATURE_MAPPING[entityCode].labels.search_options_label_pan,
+		label : ENTITY_FEATURE_MAPPING[entityCode]?.labels?.search_options_label_pan,
 		value : 'q',
 		name  : 'q',
 	},
@@ -124,14 +124,9 @@ export const SORTBY_OPTION = [
 		name  : 'openInvoiceNotDueLedgerAmount',
 	},
 	{
-		label : '1-30 Days',
+		label : '0-30 Days',
 		value : 'openInvoiceThirtyLedgerAmount',
 		name  : 'openInvoiceThirtyLedgerAmount',
-	},
-	{
-		label : '31-45 Days',
-		value : 'openInvoiceFortyFiveLedgerAmount',
-		name  : 'openInvoiceFortyFiveLedgerAmount',
 	},
 	{
 		label : '31-60 Days',
@@ -149,9 +144,14 @@ export const SORTBY_OPTION = [
 		name  : 'openInvoiceOneEightyLedgerAmount',
 	},
 	{
-		label : '181+ Days',
-		value : 'openInvoiceOneEightyPlusLedgerAmount',
-		name  : 'openInvoiceOneEightyPlusLedgerAmount',
+		label : '181-365 Days',
+		value : 'openInvoiceThreeSixtyFiveLedgerAmount',
+		name  : 'openInvoiceThreeSixtyFiveLedgerAmount',
+	},
+	{
+		label : '365+ Days',
+		value : 'openInvoiceThreeSixtyFivePlusLedgerAmount',
+		name  : 'openInvoiceThreeSixtyFivePlusLedgerAmount',
 	},
 	{
 		label : 'Total Outstanding Amount',
@@ -210,12 +210,7 @@ export const StatsKeyMapping = [
 		textColor : '#cb6464',
 	},
 	{
-		label     : '31-45 DAYS',
-		valueKey  : 'fortyFive',
-		textColor : '#cb6464',
-	},
-	{
-		label     : '46-60 DAYS',
+		label     : '31-60 DAYS',
 		valueKey  : 'sixty',
 		textColor : '#cb6464',
 	},
@@ -230,8 +225,13 @@ export const StatsKeyMapping = [
 		textColor : '#cb6464',
 	},
 	{
-		label     : '180+ DAYS',
-		valueKey  : 'oneEightyPlus',
+		label     : '181-365 DAYS',
+		valueKey  : 'threeSixtyFive',
+		textColor : '#cb6464',
+	},
+	{
+		label     : '365+ DAYS',
+		valueKey  : 'threeSixtyFivePlus',
 		textColor : '#cb6464',
 	},
 ];
@@ -248,12 +248,7 @@ export const StatsKeyMappingPayment = [
 		textColor : '#cb6464',
 	},
 	{
-		label     : '31-45 DAYS',
-		valueKey  : 'fortyFive',
-		textColor : '#cb6464',
-	},
-	{
-		label     : '46-60 DAYS',
+		label     : '31-60 DAYS',
 		valueKey  : 'sixty',
 		textColor : '#cb6464',
 	},
@@ -268,8 +263,13 @@ export const StatsKeyMappingPayment = [
 		textColor : '#cb6464',
 	},
 	{
-		label     : '180+ DAYS',
-		valueKey  : 'oneEightyPlus',
+		label     : '181-365 DAYS',
+		valueKey  : 'threeSixtyFive',
+		textColor : '#cb6464',
+	},
+	{
+		label     : '365+ DAYS',
+		valueKey  : 'threeSixtyFivePlus',
 		textColor : '#cb6464',
 	},
 ];

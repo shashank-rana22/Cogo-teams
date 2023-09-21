@@ -1,9 +1,12 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { getRecipientData } from '../../helpers/getRecipientData';
+import useCreateReplyAllDraft from '../../hooks/useCreateReplyAllDraft ';
+import useCreateReplyDraft from '../../hooks/useCreateReplyDraft';
 import useGetMailContent from '../../hooks/useGetMailContent';
 
 import MailActions from './mailActions';
@@ -26,16 +29,40 @@ const getEmailText = ({
 	return 'Expand';
 };
 
+const getEmailBorder = ({ isDraft = false, emailStatus = '' }) => {
+	if (!isDraft) {
+		return '#e0e0e0';
+	}
+
+	if (!emailStatus) {
+		return '#F9AE64';
+	}
+
+	if (emailStatus === 'delivered') {
+		return '#ABCD62';
+	}
+
+	return '#EE3425';
+};
+
 function MailBody({
 	eachMessage = {},
 	hasPermissionToEdit = false,
 	formattedData = {},
 	mailProps = {},
+	deleteMessage = () => {},
 }) {
 	const [expandedState, setExpandedState] = useState(false);
 	const { source = '' } = formattedData || {};
 
-	const { response, send_by = '', created_at = '', media_url = [] } = eachMessage || {};
+	const {
+		response,
+		send_by = '',
+		created_at = '',
+		media_url = [],
+		is_draft: isDraft = false,
+		email_status: emailStatus = '',
+	} = eachMessage || {};
 
 	const {
 		subject = '',
@@ -45,6 +72,7 @@ function MailBody({
 		to_mails: recipientData = [],
 		cc_mails: ccData = [],
 		bcc_mails: bccData = [],
+		attachments = [],
 	} = response || {};
 
 	const {
@@ -52,6 +80,9 @@ function MailBody({
 		message: bodyMessage = '',
 		loading = false,
 	} = useGetMailContent({ messageId: message_id, source, setExpandedState });
+
+	const { createReplyAllDraft } = useCreateReplyAllDraft();
+	const { createReplyDraft } = useCreateReplyDraft();
 
 	const date = created_at && formatDate({
 		date       : new Date(created_at),
@@ -70,36 +101,44 @@ function MailBody({
 		formattedData,
 		eachMessage,
 		activeMailAddress : source,
-		isDraft           : false,
+		isDraft,
 		subject,
 		emailVia          : 'firebase_emails',
+		deleteMessage,
+		createReplyDraft,
+		createReplyAllDraft,
 	});
 
 	const handleExpandClick = () => {
-		if (!expandedState && !bodyMessage) {
+		if (!expandedState && !bodyMessage && !isDraft) {
 			getEmailBody();
 			return;
 		}
 		setExpandedState((prev) => !prev);
 	};
 
+	const emailBorderColor = getEmailBorder({ isDraft, emailStatus });
+
 	return (
-		<div>
+		<div className={styles.email_container}>
 			<div className={styles.send_by_name}>
-				Replied by
+				{isDraft ? 'Created' : 'Replied'}
+				{' '}
+				by
 				{' '}
 				{send_by || 'user'}
 				,
 				<span className={styles.time_stamp}>{date || ''}</span>
 			</div>
-			<div
-				className={styles.container}
-			>
+
+			<div className={styles.container} style={{ border: `1px solid ${emailBorderColor}` }}>
 				<MailHeader
 					eachMessage={eachMessage}
 					handleClick={handleClick}
 					hasPermissionToEdit={hasPermissionToEdit}
 					handleExpandClick={handleExpandClick}
+					isDraft={isDraft}
+					emailStatus={emailStatus}
 				/>
 
 				<div className={styles.subject}>
@@ -117,10 +156,11 @@ function MailBody({
 				{hasPermissionToEdit ? (
 					<MailActions
 						handleClick={handleClick}
+						isDraft={isDraft}
 					/>
 				) : null}
 
-				<MailAttachments mediaUrls={media_url} />
+				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
 
 				<div className={styles.extra_controls}>
 					<div

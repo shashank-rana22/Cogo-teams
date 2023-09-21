@@ -7844,6 +7844,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_settlement',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_organization_trade_parties',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -8838,6 +8842,18 @@ const partner = {
 			feature     : 'outstanding',
 		},
 		{
+			api         : 'get_payments_settlement',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_payments_settlement_history',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
 			api          : 'list_partner_users',
 			access_type  : 'private',
 			service_name : 'outstanding',
@@ -9515,6 +9531,12 @@ const partner = {
 			feature     : 'JournalVoucher',
 		},
 		{
+			api         : 'post_payments_parent_jv_bulk_jv_upload',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
 			api         : 'post_payments_parent_jv_post_to_sage',
 			access_type : 'private',
 			module      : 'JournalVoucher',
@@ -9643,6 +9665,11 @@ const partner = {
 			api          : 'list_shipment_collection_party',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+		{
+			api          : 'post_incident_management_incident',
+			access_type  : 'private',
+			service_name : 'incident-management',
 		},
 	],
 
@@ -12823,6 +12850,16 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'create_draft_reply_all_html',
+			access_type  : 'private',
+			service_name : 'cogolens',
+		},
+		{
+			api          : 'create_draft_reply_html',
+			access_type  : 'private',
+			service_name : 'cogolens',
+		},
+		{
 			api          : 'list_shipment_operating_procedures',
 			access_type  : 'private',
 			service_name : 'shipment',
@@ -13361,6 +13398,21 @@ const partner = {
 			api          : 'onboard_lead_organization',
 			access_type  : 'private',
 			service_name : 'lead',
+		},
+		{
+			api          : 'list_cogoone_shifts',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_bulk_cogoone_shift',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_bulk_cogoone_shift',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 		{
 			api          : 'list_platform_config_constants',

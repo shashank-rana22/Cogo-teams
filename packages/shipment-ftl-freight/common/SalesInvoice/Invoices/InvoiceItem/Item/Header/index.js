@@ -24,7 +24,7 @@ const BF_INVOICE_STATUS = ['POSTED', 'FAILED', 'IRN_GENERATED'];
 const RESTRICTED_ENTITY_IDS = [];
 
 Object.entries(ENTITY_MAPPING).forEach(([key, value]) => (
-	ENTITY_FEATURE_MAPPING[key]?.feature_supported?.includes('freight_sales_invoice_restricted_enitity')
+	ENTITY_FEATURE_MAPPING[key]?.feature_supported?.includes('freight_sales_invoice_restricted_entity')
 		? RESTRICTED_ENTITY_IDS.push(value.id) : null));
 
 function Header({
@@ -111,8 +111,9 @@ function Header({
 
 	const isTaxMechanismGoodsTransportAgency = tax_mechanism === 'goods_transport_agency';
 
-	disableMarkAsReviewed = isEmptyInvoicesList && isShipmentCompleted
-		&& !(isTaxMechanismGoodsTransportAgency);
+	disableMarkAsReviewed = isTaxMechanismGoodsTransportAgency ? false : (isEmptyInvoicesList
+		|| isShipmentCompleted
+		|| disableMarkAsReviewed);
 
 	return (
 		<div className={styles.container}>
@@ -191,8 +192,8 @@ function Header({
 
 			{showOtpModal ? (
 				<OTPVerification
-					showOtpModal={showOtpModal}
-					setShowOTPModal={setShowOTPModal}
+					show={showOtpModal}
+					setShow={setShowOTPModal}
 					invoice={invoice}
 					refetch={salesInvoicesRefetch}
 					shipment_data={shipment_data}
@@ -201,8 +202,8 @@ function Header({
 
 			{showReview ? (
 				<ReviewServices
-					showReview={showReview}
-					setShowReview={setShowReview}
+					show={showReview}
+					setShow={setShowReview}
 					invoice={invoice}
 					refetch={salesInvoicesRefetch}
 				/>

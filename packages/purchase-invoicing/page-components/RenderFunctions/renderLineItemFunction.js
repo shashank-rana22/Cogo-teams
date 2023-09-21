@@ -81,6 +81,7 @@ export const renderLineItemFunctions = {
 							? [extradata?.shipment_type] : extradata?.serviceNames,
 						invoicing_type: 'PURCHASE',
 					},
+					job_created_at: extradata?.job_created_at || undefined,
 				}}
 				onChange={(_, obj) => (setCodes((codes) => ({ ...codes, [obj?.code]: obj })))}
 				rules={{ required: true }}

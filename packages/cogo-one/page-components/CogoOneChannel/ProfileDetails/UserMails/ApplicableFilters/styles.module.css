@@ -1,0 +1,36 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.sticky_boxshadow_styles {
+	position: sticky;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 50px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 15px 10px 15px 15px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.footer {
+	padding: 12px 10px;
+}
+
+.clear_all {
+	font-size: 12px;
+	cursor: pointer;
+}

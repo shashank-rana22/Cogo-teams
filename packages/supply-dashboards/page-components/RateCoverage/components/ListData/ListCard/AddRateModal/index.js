@@ -13,7 +13,7 @@ import { isEmpty, merge, startCase } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import Layout from '../../../../../RfqEnquiries/Layout';
-import { DEFAULT_VALUE, DELTA_VALUE, FIVE_HUNDRED, VALUE_ONE } from '../../../../configurations/helpers/constants';
+import { DEFAULT_VALUE, DELTA_VALUE, VALUE_ONE } from '../../../../configurations/helpers/constants';
 import FieldMutation from '../../../../configurations/helpers/mutation-fields';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
@@ -192,18 +192,6 @@ function AddRateModal({
 					);
 				}
 			});
-		} else {
-			(weightSlabs || []).forEach((slab, index) => {
-				if (index === DEFAULT_VALUE) {
-					setValue('weight_slabs.0.lower_limit', DELTA_VALUE);
-					setValue('weight_slabs.0.upper_limit', FIVE_HUNDRED);
-				} else {
-					setValue(
-						`weight_slabs.${index}.lower_limit`,
-						Number(weightSlabs[index - VALUE_ONE].upper_limit) + DELTA_VALUE || DELTA_VALUE,
-					);
-				}
-			});
 		}
 	}, [weightSlabsJSON, weightSlabs, isAirService, freeWeight, setValue]);
 
@@ -219,31 +207,32 @@ function AddRateModal({
 				setValue('validity_start', new Date(validities[DEFAULT_VALUE]?.validity_start));
 				setValue('validity_end', new Date(validities[DEFAULT_VALUE]?.validity_end));
 			}
-
-			let mandatoryFreightCodes = [];
-			Object.keys(rateData?.freight_charge_codes || {}).forEach((code) => {
-				if (rateData?.freight_charge_codes?.[code].tags?.includes('mandatory')) {
-					let flag = {};
-					prefillFreightCodes.forEach((charge) => {
-						if (charge.code === code) {
-							flag = charge;
-						}
-					});
-					if (Object.keys(flag).length) {
-						prefillFreightCodes = prefillFreightCodes.filter((item) => item.code !== flag.code);
-						mandatoryFreightCodes = [...mandatoryFreightCodes,
-							{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
-					} else {
-						mandatoryFreightCodes = [...mandatoryFreightCodes,
-							{ code, price: '', unit: '', currency: '' }];
-					}
-				}
-			});
-
-			if (mandatoryFreightCodes.length || prefillFreightCodes.length) {
-				setValue('line_items', [...mandatoryFreightCodes, ...prefillFreightCodes]);
-			}
 		}
+
+		let mandatoryFreightCodes = [];
+		Object.keys(rateData?.freight_charge_codes || {}).forEach((code) => {
+			if (rateData?.freight_charge_codes?.[code].tags?.includes('mandatory')) {
+				let flag = {};
+				prefillFreightCodes.forEach((charge) => {
+					if (charge.code === code) {
+						flag = charge;
+					}
+				});
+				if (Object.keys(flag).length) {
+					prefillFreightCodes = prefillFreightCodes.filter((item) => item.code !== flag.code);
+					mandatoryFreightCodes = [...mandatoryFreightCodes,
+						{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
+				} else {
+					mandatoryFreightCodes = [...mandatoryFreightCodes,
+						{ code, price: '', unit: '', currency: '' }];
+				}
+			}
+		});
+
+		if (mandatoryFreightCodes.length || prefillFreightCodes.length) {
+			setValue('line_items', [...mandatoryFreightCodes, ...prefillFreightCodes]);
+		}
+
 		setValue('free_weight', rateData?.weight_limit?.free_limit);
 	}, [JSON.stringify(rateData)]);
 

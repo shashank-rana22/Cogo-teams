@@ -3,16 +3,15 @@ import React from 'react';
 
 import StyledTable from '../../commons/styledTable/index.tsx';
 import organizationColumn from '../../configs/OrganizationUserTable';
-import useGetOrganizationUsers from '../../hooks/useGetOrganizationUsers';
 
 import styles from './styles.module.css';
 
-function Users({ organizationId = '', setStats = () => {} }) {
-	const { organizationData = {}, param = {}, setParam = () => { }, loading = false } = useGetOrganizationUsers({
-		organizationId,
-		setStats,
-	});
-
+function Users({
+	organizationData = {},
+	param = {},
+	setParam = () => {},
+	orgLoader = false,
+}) {
 	const { list = [], page = 1, totalRecords = 10 } = organizationData || {};
 
 	return (
@@ -20,7 +19,7 @@ function Users({ organizationId = '', setStats = () => {} }) {
 			<StyledTable
 				data={list}
 				columns={organizationColumn}
-				loading={loading}
+				loading={orgLoader}
 			/>
 
 			<div className={styles.pagination_container}>

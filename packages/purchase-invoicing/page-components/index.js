@@ -1,7 +1,11 @@
+import { isEmpty } from '@cogoport/utils';
+
 import useGetCollectionParty from '../hooks/useGetCollectionPartylist';
+import useGetShipmentCrossEntityInvoice from '../hooks/useGetShipmentCrossEntityInvoice';
 
 import CollectionPartyDetails from './CollectionPartyDetails';
 import Loader from './CollectionPartyDetails/Loader';
+import Invoices from './Invoices';
 
 function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = () => {} }) {
 	const {
@@ -14,21 +18,41 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = 
 		shipment_type : shipmentData?.shipment_type,
 	});
 
-	if (collectionPartyLoading) {
+	const {
+		data: invoiceDataCE,
+		groupedInvoices:groupedInvoicesCE,
+		loading:loadingCE,
+		refetch:purchaseInvoicesRefetch,
+	} = useGetShipmentCrossEntityInvoice({ shipment_id: shipmentData?.id });
+
+	if (collectionPartyLoading || loadingCE) {
 		return <Loader />;
 	}
+
 	return (
-		(collectionPartyList || []).map((collectionParty) => (
-			<CollectionPartyDetails
-				shipmentData={shipmentData}
-				collectionParty={collectionParty}
-				refetch={refetch}
-				servicesData={servicesData}
-				key={collectionParty.id}
-				AddService={AddService}
-				fullwidth={shipmentData?.shipment_type === 'ftl_freight'}
-			/>
-		))
+		<div>
+			{(collectionPartyList || []).map((collectionParty) => (
+				<CollectionPartyDetails
+					shipmentData={shipmentData}
+					collectionParty={collectionParty}
+					refetch={refetch}
+					servicesData={servicesData}
+					key={collectionParty?.id}
+					AddService={AddService}
+					fullwidth={shipmentData?.shipment_type === 'ftl_freight'}
+				/>
+			))}
+
+			{!loadingCE && !isEmpty(invoiceDataCE) && shipmentData?.shipment_type === 'fcl_freight' ? (
+				<Invoices
+					invoiceDataCE={invoiceDataCE}
+					groupedInvoicesCE={groupedInvoicesCE}
+					loadingCE={loadingCE}
+					shipmentData={shipmentData}
+					purchaseInvoicesRefetch={purchaseInvoicesRefetch}
+				/>
+			) : null}
+		</div>
 	);
 }
 

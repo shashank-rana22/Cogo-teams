@@ -1,6 +1,6 @@
-import { Button, Loader, Placeholder, Popover } from '@cogoport/components';
+import { Button, Loader, Placeholder, Popover, cl } from '@cogoport/components';
 import { IcMArrowDown, IcMDownload } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useGetCsvFile from '../../../../hooks/useGetCsvUrl';
@@ -38,20 +38,25 @@ function Card({
 			(urlList || []).map((url, index) => (
 				<div key={url}>
 					<Button className={styles.url_link} themeType="linkUi" onClick={() => { window.open(url); }}>
-						{`link ${index + VALUE_ONE}`}
+						{`${startCase(activeCard)} ${index + VALUE_ONE}`}
 					</Button>
 				</div>
 			))
 		);
 	}
 	return (
-		<div className={styles[className]}>
+		<div
+			role="button"
+			tabIndex={0}
+			className={cl`${styles.card_main_container} ${styles[className]}`}
+			onClick={handleClick}
+		>
 			<div className={styles.row}>
 				<div className={styles.heading}>{title}</div>
 				{(activeCard === detail?.status && activeCard !== 'weekly_backlog_count')
 				&&					(
 					<Popover placement="top" render={<div className={styles.url_container}><RenderContent /></div>}>
-						<IcMDownload onClick={handleDownload} />
+						<IcMDownload onClick={handleDownload} style={{ cursor: 'pointer' }} />
 					</Popover>
 				)}
 			</div>
@@ -64,7 +69,7 @@ function Card({
 				</div>
 				<span className={styles.link}>
 					{activeCard !== detail?.status && (
-						<Button themeType="linkUi" onClick={handleClick} type="button">
+						<Button themeType="linkUi" type="button">
 							View all
 							{' '}
 							<IcMArrowDown />

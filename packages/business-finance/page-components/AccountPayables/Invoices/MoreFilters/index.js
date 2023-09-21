@@ -21,10 +21,10 @@ function FilterModal({
 	const [modalFilters, setModalFilters] = useState({
 		currency    : filters?.currency,
 		invoiceType : filters?.invoiceType || undefined,
-		entity      : filters.entity,
+		entity      : filters?.entity,
 	});
-	const { currency = '' } = modalFilters || {};
 
+	const { currency = '' } = modalFilters || {};
 	const handleClose = () => {
 		setShowModal(false);
 	};
@@ -86,12 +86,17 @@ function FilterModal({
 										pageIndex   : 1,
 										pageSize    : 10,
 										invoiceView : filters?.invoiceView || '',
-										category    : filters?.category || undefined,
-										currency    : filters?.currency || '',
+										category    : undefined,
+										currency    : '',
 										entity      : filters?.entity || '',
+										invoiceType : undefined,
 									});
 									onClear();
-									setModalFilters({ currency: filters?.currency || '' });
+									setModalFilters({
+										currency   : '',
+										urgencyTag : [],
+										services   : [],
+									});
 									setShowModal(false);
 								}}
 							>
