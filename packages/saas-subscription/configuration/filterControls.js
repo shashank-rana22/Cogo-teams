@@ -7,7 +7,6 @@ const filterControls = [
 		multiple    : true,
 		asyncKey    : 'list_saas_plan',
 		initialCall : true,
-		isClearable : true,
 		size        : 'sm',
 		rules       : { required: true },
 	},

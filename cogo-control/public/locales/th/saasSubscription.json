@@ -109,6 +109,6 @@
     "meta_data":"ข้อมูลเมตา",
     "apply":"นำมาใช้",
     "filters":"ตัวกรอง",
-    "valid_json":"กรุณากรอก JSON ที่ถูกต้อง"
-
+    "valid_json":"กรุณากรอก JSON ที่ถูกต้อง",
+    "clear":"Clear"
 }

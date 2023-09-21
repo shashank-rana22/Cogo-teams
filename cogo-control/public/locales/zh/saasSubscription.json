@@ -109,6 +109,6 @@
     "meta_data":"元数据",
     "apply":"申请",
     "filters":"过滤器",
-    "valid_json":"请输入有效的JSON"
-
+    "valid_json":"请输入有效的JSON",
+    "clear":"Clear"
 }

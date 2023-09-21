@@ -21,6 +21,7 @@ const useGetUserList = () => {
 			await trigger({
 				params: {
 					service_object_required : true,
+					segment_stats_required  : true,
 					filters                 : { q: search, ...rest },
 					page,
 				},
@@ -35,7 +36,7 @@ const useGetUserList = () => {
 	}, [globalFilters, refectUserList]);
 
 	return {
-		userList: data, loading, refectUserList, globalFilters, setGlobalFilters,
+		data, loading, refectUserList, globalFilters, setGlobalFilters,
 	};
 };
 

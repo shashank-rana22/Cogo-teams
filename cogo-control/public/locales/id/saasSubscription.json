@@ -109,6 +109,6 @@
     "meta_data":"Data meta",
     "apply":"Menerapkan",
     "filters":"Filter",
-    "valid_json":"Harap masukkan JSON yang valid"
-
+    "valid_json":"Harap masukkan JSON yang valid",
+    "clear":"Clear"
 }

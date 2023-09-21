@@ -12,10 +12,13 @@
 	display: flex;
 	justify-content: space-between;
 	width: 30%;
+}
 
+.filter_container {
 	:global {
-		.ui_buttonicon_container {
-			border: 1px solid #bababa;
+		.ui_button_container {
+			min-width: auto;
+			padding: 7px 10px;
 		}
 	}
 }

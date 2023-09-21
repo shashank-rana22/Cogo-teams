@@ -1,4 +1,4 @@
-import { Input, Button, ButtonIcon, Popover } from '@cogoport/components';
+import { Input, Button, Popover } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
@@ -8,7 +8,7 @@ import AssignPlanModal from './AssignPlanModal';
 import FilterPopover from './FilterPopover';
 import styles from './styles.module.css';
 
-function FilterContainer({ setGlobalFilters, refetchUserStats, refectUserList }) {
+function FilterContainer({ setGlobalFilters, refectUserList }) {
 	const { t } = useTranslation(['saasSubscription']);
 
 	const { debounceQuery, query } = useDebounceQuery();
@@ -25,9 +25,8 @@ function FilterContainer({ setGlobalFilters, refetchUserStats, refectUserList })
 				page   : 1,
 				search : query,
 			}));
-			refetchUserStats(query);
 		}
-	}, [query, refetchUserStats, setGlobalFilters]);
+	}, [query, setGlobalFilters]);
 
 	useEffect(() => {
 		if (searchTerm !== null && searchTerm !== undefined) {
@@ -52,6 +51,7 @@ function FilterContainer({ setGlobalFilters, refetchUserStats, refectUserList })
 				/>
 
 				<Popover
+					className={styles.filter}
 					content={(
 						<FilterPopover
 							setShowPopover={setShowPopover}
@@ -60,12 +60,15 @@ function FilterContainer({ setGlobalFilters, refetchUserStats, refectUserList })
 					)}
 					visible={showPopover}
 				>
-					<ButtonIcon
-						size="md"
-						icon={<IcMFilter />}
-						themeType="primary"
-						onClick={() => setShowPopover(true)}
-					/>
+					<div className={styles.filter_container}>
+						<Button
+							className={styles.filter_icon}
+							themeType="secondary"
+							onClick={() => setShowPopover((prev) => !prev)}
+						>
+							<IcMFilter width={15} height={15} />
+						</Button>
+					</div>
 				</Popover>
 
 				<Button

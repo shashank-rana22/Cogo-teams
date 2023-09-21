@@ -109,6 +109,6 @@
     "meta_data":"Metadata",
     "apply":"Áp dụng",
     "filters":"Bộ lọc",
-    "valid_json":"Vui lòng nhập JSON hợp lệ"
-
+    "valid_json":"Vui lòng nhập JSON hợp lệ",
+    "clear":"Clear"
 }

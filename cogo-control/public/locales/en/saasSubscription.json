@@ -109,5 +109,6 @@
     "meta_data":"Meta Data",
     "apply":"Apply",
     "filters":"Filters",
-    "valid_json":"Please enter a valid JSON"
+    "valid_json":"Please enter a valid JSON",
+    "clear":"Clear"
 }

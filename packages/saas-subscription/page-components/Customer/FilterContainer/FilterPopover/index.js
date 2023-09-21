@@ -1,5 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, ButtonIcon } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { IcMCross } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 
 import filterControls from '../../../../configuration/filterControls';
@@ -10,7 +11,7 @@ import styles from './styles.module.css';
 function FilterPopover({ setShowPopover, setGlobalFilters }) {
 	const { t } = useTranslation(['saasSubscription']);
 
-	const { control, handleSubmit } = useForm();
+	const { control, handleSubmit, reset } = useForm();
 
 	const submitHandler = (data) => {
 		setGlobalFilters((prev) => ({
@@ -20,10 +21,19 @@ function FilterPopover({ setShowPopover, setGlobalFilters }) {
 		}));
 	};
 
+	const clearHandler = () => {
+		setGlobalFilters((prev) => {
+			const { plan_ids, ...rest } = prev || {};
+			return rest;
+		});
+		reset({});
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				{t('saasSubscription:filters')}
+				<ButtonIcon size="sm" icon={<IcMCross />} onClick={() => setShowPopover(false)} />
 			</div>
 
 			<div className={styles.body}>
@@ -43,9 +53,9 @@ function FilterPopover({ setShowPopover, setGlobalFilters }) {
 				<Button
 					size="sm"
 					themeType="secondary"
-					onClick={() => setShowPopover(false)}
+					onClick={clearHandler}
 				>
-					{t('saasSubscription:cancel')}
+					{t('saasSubscription:clear')}
 
 				</Button>
 
