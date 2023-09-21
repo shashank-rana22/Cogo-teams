@@ -1,0 +1,30 @@
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    width:28%;
+    height: 56px;
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+    align-content: flex-start;
+    /* background: #FFFCE6; */
+    margin-bottom: 12px;
+    padding: 4px;
+    margin-right: 20px;
+
+    &:hover {
+        background-color:#FFFCE6;
+        border: 1px solid #FEF199;
+    }
+    
+    &:active {
+        background-color:#FEF199;
+    }
+    cursor:pointer;
+}
+.active {
+    background-color:#FEF199;
+    &:hover {
+        background-color:#FEF199;
+        border: 1px solid #FEF199;
+    }
+}
