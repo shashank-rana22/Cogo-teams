@@ -7,6 +7,11 @@ import styles from '../Navbar/styles.module.css';
 
 import useAddRemovePin from './useAddRemovePin';
 
+const ONE = 1;
+const ZERO = 0;
+const TWO = 2;
+const FIVE = 5;
+
 function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys, showPin, inCall = false }) {
 	const router = useRouter();
 	const { query, asPath } = router;
@@ -19,7 +24,7 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 
-	const splitAspath = asPath.split('/')?.[1];
+	const splitAspath = asPath.split('/')?.[ONE];
 
 	const { options = [] } = item || {};
 	const openNewTab = (as = '', href = '') => {
@@ -30,8 +35,9 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 			'noreferrer',
 		);
 	};
+
 	const handleClickOnItem = (itemdata) => {
-		if (itemdata.options?.length > 0) {
+		if (itemdata.options?.length > ZERO) {
 			setShowSubNav(!showSubNav);
 		} else if (itemdata?.href?.includes('/v2')) {
 			const replaceHref = itemdata?.href?.replace('/v2', '');
@@ -54,7 +60,8 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 			router.push(itemdata.href, itemdata.as);
 		}
 	};
-	const pathWithoutPartnerId = `/${asPath.split('/').slice(2, 5).join('/')}`;
+
+	const pathWithoutPartnerId = `/${asPath.split('/').slice(TWO, FIVE).join('/')}`;
 
 	const isSubActive = options?.some((singleOption) => singleOption.as?.replace('/v2', '') === pathWithoutPartnerId);
 
@@ -65,13 +72,13 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 	const singleNav = (
 		<div
 			className={`
-			${item.options?.length > 0 ? styles.has_options : ''}
+			${item.options?.length > ZERO ? styles.has_options : ''}
 			${isHref ? `${styles.list_item_inner} ${styles.active_item}` : styles.list_item_inner}`}
 			role="button"
 			tabIndex={0}
 			onClick={() => handleClickOnItem(item)}
 		>
-			{item.options?.length > 0 && (
+			{item.options?.length > ZERO && (
 				<IcMArrowRotateDown
 					className={`${styles.icon} ${showSubNav ? styles.active : ''}`}
 				/>

@@ -315,3 +315,23 @@
 .line {
 	margin-bottom: 8px;
 }
+
+.notification_count {
+	position: absolute;
+	right: 8px;
+	display: flex;
+	align-items: center;
+	align-self: flex-end;
+	height: 16px;
+	padding: 4px;
+	margin: 0 0 8px;
+	font-size: 10px;
+	font-weight: bold;
+	line-height: 12px;
+	color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	background: #000;
+	border-radius: 16px;
+}

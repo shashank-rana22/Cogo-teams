@@ -1,4 +1,9 @@
-.container {
+.row {
+	display: flex;
+	align-items: center;
+}
+
+.header_container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -6,9 +11,8 @@
 	border-bottom: 1px solid #e0e0e0;
 }
 
-.row {
-	display: flex;
-	align-items: center;
+.margin_horizontal {
+	margin: 0 16px;
 }
 
 .mark_read {

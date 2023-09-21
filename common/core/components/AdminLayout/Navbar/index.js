@@ -1,7 +1,10 @@
+/* eslint-disable max-lines-per-function */
 import { Input, cl } from '@cogoport/components';
-import { IcMSearchdark } from '@cogoport/icons-react';
+import { IcMSearchdark, IcMNotifications } from '@cogoport/icons-react';
+// import NewNotifications from '@cogoport/notifications/page-components/NewNotifications/index';
+import { useRequest } from '@cogoport/request';
 import { useTranslation } from 'next-i18next';
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 
 import { LOGO } from '../../../constants/logo';
 import { applyFilter } from '../../../helpers/applyFilter';
@@ -10,10 +13,14 @@ import { sortNavs } from '../../../helpers/sortItems';
 import useGetUserSessionMappings from '../../../hooks/useGetUserSessionMappings';
 import Items from '../Items';
 
+import AdminNotification from './AdminNotification';
 import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
 import SwitchAccounts from './SwitchAccounts';
 // import ThemeToggle from './ThemeToggle';
+
+const ZERO = 0;
+const MAX_COUNT = 100;
 
 function Navbar({
 	className,
@@ -26,10 +33,13 @@ function Navbar({
 	inCall = false,
 	userId = '',
 	firestore = {},
+	showCount,
+	setShowCount,
 }) {
 	const ref = useRef(null);
 	const { t } = useTranslation(['common']);
 	const userBasedNavView = formatUserBasedNavView(nav);
+
 	// eslint-disable-next-line no-undef
 	// const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
 
@@ -45,6 +55,8 @@ function Navbar({
 
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [openPopover, setOpenPopover] = useState(false);
+	const [openNotificationPopover, setOpenNotificationPopover] = useState(false);
+	const [unseenNotificationCount, setUnseenNotificationCount] = useState(false);
 	const [searchString, setSearchString] = useState('');
 
 	const filterdList = searchString
@@ -66,8 +78,41 @@ function Navbar({
 		[],
 	);
 
+	const [{ data:notificationData, loading : notificationLoading }, trigger] = useRequest({
+		url    : '/list_communications',
+		method : 'get',
+		// params : {
+		// 	data_required                  : true,
+		// 	not_seen_count_required        : true,
+		// 	pagination_data_required       : true,
+		// 	page                           : 1,
+		// 	communication_content_required : true,
+		// 	filters                        : { type: 'platform_notification' },
+		// },
+	}, { manual: true });
+
+	const { is_not_seen_count = ZERO } = notificationData || {};
+
+	useEffect(() => {
+		trigger({
+			params: {
+				data_required                  : true,
+				not_seen_count_required        : true,
+				pagination_data_required       : true,
+				page                           : 1,
+				communication_content_required : true,
+				filters                        : { type: 'platform_notification' },
+			},
+		});
+	}, [trigger]);
+
+	useEffect(() => {
+		setUnseenNotificationCount(is_not_seen_count);
+	}, [is_not_seen_count]);
+
 	const handleLeave = () => {
-		if (openPopover) {
+		setShowCount(true);
+		if (openPopover || openNotificationPopover) {
 			setResetSubnavs(true);
 		} else {
 			setResetSubnavs(false);
@@ -80,7 +125,10 @@ function Navbar({
 			className={cl`${mobileShow ? styles.mobile_container : styles.container}${className}`}
 		>
 			<nav
-				onMouseEnter={() => setResetSubnavs(true)}
+				onMouseEnter={() => {
+					setResetSubnavs(true);
+					setShowCount(false);
+				}}
 				onMouseLeave={handleLeave}
 			>
 				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}`} />
@@ -96,13 +144,19 @@ function Navbar({
 					<ProfileManager
 						resetSubnavs={resetSubnavs}
 						setOpenPopover={setOpenPopover}
+						setOpenNotificationPopover={setOpenNotificationPopover}
 						checkIfSessionExpiring={checkIfSessionExpiring}
 						loading={loading}
 						openPopover={openPopover}
+						openNotificationPopover={openNotificationPopover}
 						timeLeft={timeLeft}
 						refetch={refetch}
 						userId={userId}
 						firestore={firestore}
+						notificationLoading={notificationLoading}
+						trigger={trigger}
+						data={notificationData}
+						showCount={showCount}
 					/>
 
 					<div className={styles.search_container}>
@@ -113,6 +167,27 @@ function Navbar({
 							prefix={<IcMSearchdark width={16} height={16} />}
 							onChange={setSearchFunc}
 						/>
+					</div>
+
+					<div
+						onClick={() => {
+							setOpenNotificationPopover(!openNotificationPopover);
+							setOpenPopover(false);
+						}}
+						className={styles.list_item_inner}
+						style={{ marginTop: 8 }}
+						role="presentation"
+					>
+						<IcMNotifications width={16} height={16} fill={unseenNotificationCount ? 'red' : '#000'} />
+						{unseenNotificationCount && showCount && !openNotificationPopover ? (
+							<div className={styles.notification_count}>
+								{unseenNotificationCount >= MAX_COUNT
+									? `${MAX_COUNT}+` : unseenNotificationCount}
+							</div>
+						) : null}
+
+						<span>Notifications</span>
+
 					</div>
 
 					<div className={styles.line} />
@@ -160,6 +235,7 @@ function Navbar({
 					{/* </ul> */}
 				</div>
 			</nav>
+
 			<div
 				onMouseLeave={() => setResetSubnavs(false)}
 			>
@@ -176,7 +252,24 @@ function Navbar({
 							/>
 						)
 				}
+
+				{
+					openNotificationPopover
+						&& (
+							<AdminNotification
+								notificationData={notificationData}
+								notificationLoading={notificationLoading}
+								trigger={trigger}
+								openNotificationPopover={openNotificationPopover}
+								setOpenNotificationPopover={setOpenNotificationPopover}
+								setUnseenNotificationCount={setUnseenNotificationCount}
+								unseenNotificationCount={unseenNotificationCount}
+							/>
+						)
+				}
+
 			</div>
+
 		</div>
 
 	);

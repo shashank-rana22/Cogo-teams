@@ -546,7 +546,8 @@ export default {
 			},
 		},
 	},
-	others: {
+	notification_polling_interval : 300000,
+	others                        : {
 		registration_number: {
 			label      : 'UEN',
 			pattern    : /((S|T)([\d]{2})([A-Z]{2})([\d]{4})([A-Z])|(\d{9})([A-Z]))/g,

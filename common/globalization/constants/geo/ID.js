@@ -540,7 +540,8 @@ export default {
 			},
 		},
 	},
-	others: {
+	notification_polling_interval : 300000,
+	others                        : {
 		registration_number: {
 			label      : 'NPWP',
 			pattern    : /^\d{13}$/,

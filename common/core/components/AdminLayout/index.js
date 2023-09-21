@@ -35,6 +35,7 @@ function AdminLayout({
 	children = null, showTopbar = true, topbar = {}, showNavbar = false, navbar = {},
 }) {
 	const { t } = useTranslation(['common']);
+	const [showCount, setShowCount] = useState(true);
 
 	const {
 		user_data,
@@ -81,7 +82,8 @@ function AdminLayout({
 	useGetUnreadMails({ firestore, agentId: user_id });
 
 	return (
-		<div className={cl`
+		<div
+			className={cl`
 			${styles.container} 
 			${showTopbar ? styles.has_topbar : ''} 
 			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg} 
@@ -111,6 +113,8 @@ function AdminLayout({
 					inCall={inCall}
 					userId={user_id}
 					firestore={firestore}
+					showCount={showCount}
+					setShowCount={setShowCount}
 				/>
 			) : null}
 			<VoiceCall

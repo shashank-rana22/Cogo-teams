@@ -1,36 +1,17 @@
-.notification_container {
-	width: 460px;
-	max-height: 545px;
-
-	@media (max-width: 1064px) {
-		width: 312px;
-	}
-}
-
 .container {
-	.name {
-		margin-right: 6px;
-		font-size: 12px;
-		font-style: normal;
-		font-weight: 500;
-		line-height: 14px;
-		color: #000;
-		letter-spacing: 0.04em;
-	}
-
-	/* stylelint-disable-next-line selector-class-pattern */
-	.pop-arrow {
-		z-index: 1 !important;
-		filter: none !important;
-	}
+	z-index: 100;
+	display: flex;
+	transition: 150ms ease-in-out;
 }
 
 .wrapper {
 	position: relative;
 	display: flex;
-	align-items: center;
 	height: 100%;
+	padding: 8px;
 	cursor: pointer;
+
+	/* background-color: yellowgreen; */
 }
 
 .new_notifications {
@@ -53,8 +34,33 @@
 	border-radius: 16px;
 }
 
-.popover_container {
-	& #wrapper + div {
-		border: 1px solid darkred;
-	}
+.notifications_container {
+	display: flex;
+
+	/* margin: 0; */
+
+	/* margin-bottom: 10px; */
+	align-items: center;
+	width: 100%;
+	padding: 0;
+	margin: 8px 0;
+	overflow: auto;
+}
+
+.notifiction_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px 16px;
+	border-radius: 11.0769px;
+}
+
+.button_styles {
+	flex: 1;
+	padding-top: 1px;
+	overflow: hidden;
+	font-weight: 500;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	user-select: none;
 }

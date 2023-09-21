@@ -1,8 +1,10 @@
 // import logout from '@cogoport/authentication/utils/getLogout';
 import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+// import { useRequest } from '@cogoport/request';
+// import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
-import React, { useState } from 'react';
+import React from 'react';
 
 import useGetAllActions from '../../../../hooks/useGetAllActions';
 import useRemoveUserSessions from '../../../../hooks/useRemoveUserSessions';
@@ -15,18 +17,39 @@ function ProfileManager({
 	resetSubnavs,
 	setOpenPopover = () => {},
 	openPopover,
+	openNotificationPopover,
+	setOpenNotificationPopover,
 	timeLeft,
 	refetch = () => {},
 	loading,
 	checkIfSessionExpiring,
 	userId = '',
 	firestore = {},
+	data,
+	notificationLoading,
+	trigger,
+	showCount,
 }) {
 	const router = useRouter();
 	const { t } = useTranslation(['common']);
+	// const { general } = useSelector((state) => state);
+	// const { scope } = general;
 
-	const [notificationPopover, setNotificationPopover] = useState(false);
+	// const [notificationPopover, setNotificationPopover] = useState(false);
 
+	// const [{ data, loading : notificationLoading }, trigger] = useRequest({
+	// 	url    : '/list_communications',
+	// 	method : 'get',
+	// 	params : {
+	// 		data_required                  : true,
+	// 		not_seen_count_required        : true,
+	// 		pagination_data_required       : true,
+	// 		page                           : 1,
+	// 		communication_content_required : true,
+	// 		filters                        : { type: 'platform_notification' },
+	// 	},
+	// 	scope,
+	// }, { manual: false });
 	const { unReadChatsCount = 0 } = useGetUnreadMessagesCount({
 		firestore,
 		userId,
@@ -48,6 +71,11 @@ function ProfileManager({
 			fun   : routerFunction,
 			icon  : IcMProfile,
 		},
+		// {
+		// 	title : 'notification', // add in translation
+		// 	name  : 'notifications',
+		// 	icon  : IcMNotifications,
+		// },
 		{
 			title : t('common:switch_account'),
 			name  : 'switch_account',
@@ -74,6 +102,10 @@ function ProfileManager({
 
 	];
 
+	// useEffect(() => {
+	// 	trigger();
+	// }, [trigger]);
+
 	return (
 		<ul className={styles.list_container}>
 			<Items
@@ -85,9 +117,15 @@ function ProfileManager({
 				setOpenPopover={setOpenPopover}
 				checkIfSessionExpiring={checkIfSessionExpiring}
 				openPopover={openPopover}
-				notificationPopover={notificationPopover}
-				setNotificationPopover={setNotificationPopover}
-				notificationCount={unReadChatsCount}
+				// notificationPopover={notificationPopover}
+				// setNotificationPopover={setNotificationPopover}
+				notificationLoading={notificationLoading}
+				trigger={trigger}
+				openNotificationPopover={openNotificationPopover}
+				setOpenNotificationPopover={setOpenNotificationPopover}
+				notificationData={data}
+				showCount={showCount}
+				notificationCount={unReadChatsCount} // not being used
 			/>
 		</ul>
 	);

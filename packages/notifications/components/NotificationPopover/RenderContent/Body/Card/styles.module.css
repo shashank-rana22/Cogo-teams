@@ -1,5 +1,5 @@
 .container {
-	padding: 12px 4px 0;
+	padding: 16px;
 	cursor: pointer;
 	border-bottom: 1px solid #e0e0e0;
 
@@ -12,7 +12,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	cursor: pointer;
 }
 
 .row {
@@ -22,7 +21,7 @@
 	margin: -5px 0;
 }
 
-.new_notification {
+.new_notification_style {
 	position: absolute;
 	left: -12px;
 	display: flex;
@@ -30,4 +29,12 @@
 	height: 6px;
 	background: #cb6464;
 	border-radius: 50%;
+}
+
+.time_status {
+	margin-right: 8px;
+	font-size: 10px;
+	line-height: 12px;
+	color: #828282;
+	letter-spacing: 0.02em;
 }
