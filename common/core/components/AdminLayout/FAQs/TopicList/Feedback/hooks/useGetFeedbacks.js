@@ -48,6 +48,7 @@ const useGetFeedbacks = ({ page }) => {
 
 	return {
 		loading,
+		getFeedbacks,
 		feedbacks : items || [],
 		pageData  : rest,
 	};

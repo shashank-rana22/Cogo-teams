@@ -22,7 +22,7 @@ const getPayload = ({
 	Description : additional_information || undefined,
 });
 
-const useAddFeedback = () => {
+const useAddFeedback = ({ getFeedbacks, setShowAddFeedback }) => {
 	const { profile } = useSelector((state) => state);
 
 	const [{ loading }, trigger] = useTicketsRequest({
@@ -53,6 +53,8 @@ const useAddFeedback = () => {
 			});
 
 			Toast.success('Feedback successfully added');
+			getFeedbacks();
+			setShowAddFeedback(false);
 		} catch (error) {
 			Toast.error(error?.response?.data);
 		}
