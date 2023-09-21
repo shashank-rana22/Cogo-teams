@@ -123,7 +123,7 @@ function TopicList({
 
 	return (
 		<div
-			className={cl`${styles.container} ${(showHistory || from === 'test_module') && styles.hide_tabs}`}
+			className={cl`${styles.container} ${(showHistory || from === 'test_module') ? styles.hide_tabs : ''}`}
 		>
 			{showFeedback
 				? (
