@@ -42,11 +42,9 @@ function KebabContent({
 	const commonActions = invoice?.status !== 'approved'
 	&& !disableAction;
 
-	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true
-		&& !invoice?.is_igst
-	)
-		|| [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
-			GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
+	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
+	|| [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
+		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
