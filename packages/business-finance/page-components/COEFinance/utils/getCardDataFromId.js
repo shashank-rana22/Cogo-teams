@@ -7,23 +7,35 @@ export const getCardDataFromId = (id) => {
 	let tabToOpen = '';
 	let timelineItem = '';
 
-	const fillData = (TabName, TabToOpen, TimelineItem) => {
-		tabName = TabName;
-		tabToOpen = TabToOpen;
-		timelineItem = TimelineItem;
+	const fillData = ({ tabNameValue, tabToOpenValue, timelineItemValue }) => {
+		tabName = tabNameValue;
+		tabToOpen = tabToOpenValue;
+		timelineItem = timelineItemValue;
 	};
 
 	switch (id) {
 		case (FIRST_ID):
-			fillData('collectionPartyTab', 'billingPartyTab', 'collectionPartyCheck');
+			fillData({
+				tabNameValue      : 'collectionPartyTab',
+				tabToOpenValue    : 'billingPartyTab',
+				timelineItemValue : 'collectionPartyCheck',
+			});
 			break;
 
 		case (SECOND_ID):
-			fillData('billingPartyTab', 'invoiceDetailsTab', 'billingPartyCheck');
+			fillData({
+				tabNameValue      : 'billingPartyTab',
+				tabToOpenValue    : 'invoiceDetailsTab',
+				timelineItemValue : 'billingPartyCheck',
+			});
 			break;
 
 		case (THIRD_ID):
-			fillData('invoiceDetailsTab', 'lineItemsTab', 'invoiceDetailsCheck');
+			fillData({
+				tabNameValue      : 'invoiceDetailsTab',
+				tabToOpenValue    : 'lineItemsTab',
+				timelineItemValue : 'invoiceDetailsCheck',
+			});
 			break;
 
 		default:

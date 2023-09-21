@@ -2,7 +2,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
-import { ENTITY_NAME_LIST } from '../constants/ENTITY_NAME_LIST';
+import getSupplierMappedName from '../utils/getSupplierMappedName';
 
 const useGetDocumentContent = ({ data }) => {
 	const { billDocumentUrl } = data?.bill || {};
@@ -20,24 +20,13 @@ const useGetDocumentContent = ({ data }) => {
 	);
 
 	useEffect(() => {
-		const getSupplierMappedName = () => {
-			let supplierMappedName = 'default';
-			const formattedOrgName = orgName?.replaceAll(' ', '_')?.toLowerCase();
-			ENTITY_NAME_LIST.forEach((singleName) => {
-				if (formattedOrgName?.includes(singleName)) {
-					supplierMappedName = singleName;
-				}
-			});
-			return supplierMappedName;
-		};
-
 		const getContent = async () => {
 			try {
 				trigger({
 					params: {
 						file_url    : billDocumentUrl,
 						entity_type : 'purchase_invoice',
-						entity_name : getSupplierMappedName(),
+						entity_name : getSupplierMappedName({ orgName }),
 					},
 				});
 			} catch (err) {

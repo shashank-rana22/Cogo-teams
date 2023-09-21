@@ -3,6 +3,11 @@ import { useRequestBf } from '@cogoport/request';
 import toastApiError from '../../commons/toastApiError.ts';
 import { quotationConfig } from '../configurations/ShipmentIdView/quotationConfig';
 
+const QUOTATION_TYPE_MAPPING = {
+	sellQuote : 'SELL',
+	buyQuote  : 'BUY',
+};
+
 function useGetQuotation({ jobNumber = '', amountTab = '' }) {
 	const [
 		{ data: apiData, loading: quotationApiLoading },
@@ -15,11 +20,6 @@ function useGetQuotation({ jobNumber = '', amountTab = '' }) {
 		},
 		{ manual: true, autoCancel: false },
 	);
-
-	const QUOTATION_TYPE_MAPPING = {
-		sellQuote : 'SELL',
-		buyQuote  : 'BUY',
-	};
 
 	const getQuotationData = async () => {
 		try {

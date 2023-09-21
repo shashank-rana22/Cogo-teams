@@ -83,35 +83,35 @@ function LineItemCard({
 		name : '',
 	});
 
-	const ApproveCheck = Object.values(approvedItems).filter(
+	const approveCheck = Object.values(approvedItems).filter(
 		(item) => item === true,
 	).length;
 
-	const RejectCheck = Object.keys(rejectedItems).length;
+	const rejectCheck = Object.keys(rejectedItems).length;
 
 	useEffect(() => {
-		if (lineItems?.length === ApproveCheck + RejectCheck) {
+		if (lineItems?.length === approveCheck + rejectCheck) {
 			setCheckItem(
 				(prev) => ({ ...prev, lineItemsCheck: true }),
 			);
-		} else if (lineItems?.length !== ApproveCheck + RejectCheck) {
+		} else if (lineItems?.length !== approveCheck + rejectCheck) {
 			setCheckItem(
 				(prev) => ({ ...prev, lineItemsCheck: false }),
 			);
 		}
-	}, [ApproveCheck, RejectCheck, lineItems?.length, setCheckItem]);
+	}, [approveCheck, rejectCheck, lineItems?.length, setCheckItem]);
 
 	const lineItemLabel = getLineItemLabelStyle({
 		length: lineItems?.length,
-		ApproveCheck,
-		RejectCheck,
+		approveCheck,
+		rejectCheck,
 		styles,
 		isInvoiceApproved,
 	});
 	const iconElement = getLineItemIcon({
 		length: lineItems?.length,
-		ApproveCheck,
-		RejectCheck,
+		approveCheck,
+		rejectCheck,
 		isInvoiceApproved,
 	});
 
