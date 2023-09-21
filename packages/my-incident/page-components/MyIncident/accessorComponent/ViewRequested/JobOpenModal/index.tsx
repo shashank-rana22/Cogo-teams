@@ -1,6 +1,4 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -8,19 +6,6 @@ import StakeHolderTimeline from '../../../StakeHolderTimeline';
 import stakeHolderTimeLineData from '../../../utils/formatStakeHolderData';
 
 import styles from './style.module.css';
-
-const geo = getGeoConstants();
-
-const customFormatAmount = (value) => (
-	formatAmount({
-		amount   :	value,
-		currency : geo.country.currency.code,
-		options  : {
-			style           : 'currency',
-			currencyDisplay : 'code',
-		},
-	})
-);
 
 function JobOpenModal({
 	itemData = {},
@@ -45,9 +30,6 @@ function JobOpenModal({
 		documentUrls = [],
 		jobNumber = '',
 		remark = '',
-		totalSell = '',
-		totalBuy = '',
-		profitMargin = '',
 		customerName = '',
 	} = data?.jobOpenRequest || {};
 
@@ -99,35 +81,11 @@ function JobOpenModal({
 									{referenceId || '--'}
 								</span>
 							</div>
-
-							<div className={styles.details}>
-								Total Buy
-
-								<span className={styles.details_value}>
-									{customFormatAmount(totalBuy)}
-								</span>
-							</div>
-
-							<div className={styles.details}>
-								Total Sell
-
-								<span className={styles.details_value}>
-									{customFormatAmount(totalSell)}
-								</span>
-							</div>
-
-							<div className={styles.details}>
-								Profit Margin
-
-								<span className={styles.details_value}>
-									{customFormatAmount(profitMargin)}
-								</span>
-							</div>
 						</div>
 
 						<div className={styles.remark}>
 							<div className={styles.label}>
-								Remarks
+								Remarks -
 
 							</div>
 							{remark}
