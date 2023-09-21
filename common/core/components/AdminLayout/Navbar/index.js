@@ -27,8 +27,6 @@ function Navbar({
 	inCall = false,
 	userId = '',
 	firestore = {},
-	// showCount,
-	// setShowCount,
 }) {
 	const ref = useRef(null);
 	const { t } = useTranslation(['common']);
@@ -72,7 +70,6 @@ function Navbar({
 	);
 
 	const handleLeave = () => {
-		// setShowCount(true);
 		if (openPopover || openNotificationPopover) {
 			setResetSubnavs(true);
 		} else {
@@ -86,10 +83,7 @@ function Navbar({
 			className={cl`${mobileShow ? styles.mobile_container : styles.container}${className}`}
 		>
 			<nav
-				onMouseEnter={() => {
-					setResetSubnavs(true);
-					// setShowCount(false);
-				}}
+				onMouseEnter={() => setResetSubnavs(true)}
 				onMouseLeave={handleLeave}
 			>
 				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}`} />
@@ -105,11 +99,11 @@ function Navbar({
 					<ProfileManager
 						resetSubnavs={resetSubnavs}
 						setOpenPopover={setOpenPopover}
-						setOpenNotificationPopover={setOpenNotificationPopover}
 						checkIfSessionExpiring={checkIfSessionExpiring}
 						loading={loading}
 						openPopover={openPopover}
 						openNotificationPopover={openNotificationPopover}
+						setOpenNotificationPopover={setOpenNotificationPopover}
 						timeLeft={timeLeft}
 						refetch={refetch}
 						userId={userId}
@@ -195,8 +189,6 @@ function Navbar({
 							<AdminNotification
 								openNotificationPopover={openNotificationPopover}
 								setOpenNotificationPopover={setOpenNotificationPopover}
-								// setUnseenNotificationCount={setUnseenNotificationCount}
-								// unseenNotificationCount={unseenNotificationCount}
 							/>
 						)
 				}

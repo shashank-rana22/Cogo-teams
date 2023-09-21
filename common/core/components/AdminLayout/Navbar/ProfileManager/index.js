@@ -1,8 +1,6 @@
 // import logout from '@cogoport/authentication/utils/getLogout';
 import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-// import { useRequest } from '@cogoport/request';
-// import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
@@ -25,10 +23,6 @@ function ProfileManager({
 	checkIfSessionExpiring,
 	userId = '',
 	firestore = {},
-	data,
-	notificationLoading,
-	trigger,
-	showCount,
 }) {
 	const router = useRouter();
 	const { t } = useTranslation(['common']);
@@ -91,12 +85,8 @@ function ProfileManager({
 				setOpenPopover={setOpenPopover}
 				checkIfSessionExpiring={checkIfSessionExpiring}
 				openPopover={openPopover}
-				notificationLoading={notificationLoading}
-				trigger={trigger}
 				openNotificationPopover={openNotificationPopover}
 				setOpenNotificationPopover={setOpenNotificationPopover}
-				notificationData={data}
-				showCount={showCount}
 				notificationCount={unReadChatsCount}
 			/>
 		</ul>
