@@ -1,3 +1,5 @@
+import { startCase } from '@cogoport/utils';
+
 const MAX_UPPER_LIMIT = 99999;
 
 const getTableColumns = ({ slabData = [] }) => {
@@ -32,7 +34,7 @@ const getTableColumns = ({ slabData = [] }) => {
 	columns.push({
 		Header   : 'RELEASE TRIGGER',
 		id       : 'release_trigger',
-		accessor : 'release_trigger',
+		accessor : ({ release_trigger = 'mark_shipment_as_complete' }) => <div>{startCase(release_trigger)}</div>,
 	});
 
 	return columns;

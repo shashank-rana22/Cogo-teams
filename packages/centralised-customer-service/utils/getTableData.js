@@ -7,8 +7,9 @@ const DEFAULT_VALUE = 0;
 
 const getTableData = ({ data = {} }) => {
 	const serviceWiseData = services?.map((service) => {
-		const filteredData = data.shipment_capacities?.filter((item) => ((item.service_transit_type
-			? `${item.service_type}-${item.service_transit_type}` : item.service_type) === service.value)) || [];
+		const filteredData = data.shipment_capacities?.filter((item) => ([item.service_type, item.service_transit_type,
+			item.service_trade_type]
+			.filter(Boolean).join('-') === service.value)) || [];
 
 		return {
 			service : service.label,
@@ -16,10 +17,10 @@ const getTableData = ({ data = {} }) => {
 		};
 	});
 
-	const rowData = serviceWiseData?.map((serviceDetails) => {
+	const rowData = serviceWiseData?.map((serviceDetails = {}) => {
 		const SERVICE_OBJ = {};
 		SERVICE_OBJ.service = serviceDetails.service || '';
-		SERVICE_OBJ.release_trigger = startCase(serviceDetails.data?.[GLOBAL_CONSTANTS.zeroth_index].release_trigger);
+		SERVICE_OBJ.release_trigger = startCase(serviceDetails.data?.[GLOBAL_CONSTANTS.zeroth_index]?.release_trigger);
 		serviceDetails.data.forEach((item, slabIndex) => {
 			SERVICE_OBJ[`slab_${slabIndex}_capacity`] = item.shipment_capacity || DEFAULT_VALUE;
 			SERVICE_OBJ[`slab_${slabIndex}_NEQ`] = item.normalized_capacity || DEFAULT_VALUE;

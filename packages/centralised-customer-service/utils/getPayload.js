@@ -11,7 +11,7 @@ const getPayload = ({
 		if (curr.includes('trigger')) return acc;
 
 		const [index, ...rest] = curr.split('-');
-		const [service_type, service_duration_type, trade_type] = rest;
+		const [service_type, service_duration_type, service_trade_type] = rest;
 
 		const releaseTrigger = rest.join('-');
 
@@ -33,9 +33,9 @@ const getPayload = ({
 					? Number(slabDetails.slab_upper_limit) : SLAB_UPPER_LIMIT_MAX,
 				service_type,
 				service_transit_type : service_duration_type,
-				trade_type,
+				service_trade_type,
 				shipment_capacity    : Number(values[curr]),
-				release_trigger      : values[releaseTrigger],
+				release_trigger      : values[`${releaseTrigger}-release_trigger`],
 			},
 		];
 	}, []);

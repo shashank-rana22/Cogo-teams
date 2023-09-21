@@ -143,7 +143,7 @@ function ShipmentCapacities(props, ref) {
 										name={`${service.value}-release_trigger`}
 										control={control}
 										options={releaseTriggerOptions}
-										value="trigger"
+										value="mark_shipment_as_complete"
 										rules={{
 											required: 'Required',
 										}}

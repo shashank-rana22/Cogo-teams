@@ -19,7 +19,11 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 		const registeredFieldNames = Object.keys(getValues());
 
 		registeredFieldNames.forEach((fieldName) => {
-			setValue(fieldName, '');
+			if (fieldName.includes('release_trigger')) {
+				setValue(fieldName, 'mark_shipment_as_complete');
+			} else {
+				setValue(fieldName, '');
+			}
 		});
 	}, [getValues, setValue]);
 
@@ -30,8 +34,12 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 		}
 
 		const serviceWiseData = services?.map((service) => {
-			const filteredData = data.shipment_capacities?.filter((item) => ((item.service_transit_type
-				? `${item.service_type}-${item.service_transit_type}` : item.service_type) === service.value)) || [];
+			const filteredData = data.shipment_capacities?.filter((item) => (
+				[
+					item.service_type,
+					item.service_transit_type,
+					item.service_trade_type,
+				].filter(Boolean).join('-') === service.value)) || [];
 
 			return {
 				service : service.value,
@@ -42,9 +50,7 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 		serviceWiseData.forEach((item) => {
 			const serviceValue = item.service;
 
-			setValue(`${item.service}-release_trigger`);
-
-			item.data.forEach((subItem, index) => {
+			item.data?.forEach((subItem, index) => {
 				setValue(`${index}-${serviceValue}`, subItem.shipment_capacity);
 
 				if (index === GLOBAL_CONSTANTS.zeroth_index) {
