@@ -9,9 +9,7 @@ const SHOW_ALL_TASKS = ['manager', 'admin'];
 
 const geo = getGeoConstants();
 
-const is_indonesia_coe_head = geo.others.navigations.partner.bookings.pending_tasks.is_booking_agent_filter_required;
-
-const STAKEHOLDER_MAPPINGS = {
+const stakeholderMappings = ({ is_indonesia_coe_head = false }) => ({
 	booking_desk                    : 'service_ops',
 	lastmile_ops                    : 'lastmile_ops',
 	document_desk                   : 'service_ops',
@@ -21,7 +19,7 @@ const STAKEHOLDER_MAPPINGS = {
 	sales_agent                     : 'sales_agent',
 	consignee_shipper_booking_agent : 'booking_agent',
 	coe_head                        : is_indonesia_coe_head ? 'booking_agent' : undefined,
-};
+});
 
 function useListTasks({
 	filters = {},
@@ -32,12 +30,14 @@ function useListTasks({
 }) {
 	let showOnlyMyTasks = showMyTasks;
 	const { profile } = useSelector((state) => state);
-	const { refetchServices = () => {}, shipment_data = {} } = useContext(ShipmentDetailContext);
+	const { refetchServices = () => { }, shipment_data = {} } = useContext(ShipmentDetailContext);
+
+	const is_indonesia_coe_head = geo?.others.navigations.partner.bookings
+		.pending_tasks.is_booking_agent_filter_required;
 
 	const { stakeholders = [] } = shipment_data || {};
 
 	let updatedActiveStakeholder = activeStakeholder;
-	console.log('activeStakeholder:: ', activeStakeholder);
 
 	let isBookingAgent = false;
 	let isSalesAgent = false;
@@ -56,9 +56,7 @@ function useListTasks({
 
 	const user_id = profile?.user?.id;
 
-	const stakeholder = STAKEHOLDER_MAPPINGS[updatedActiveStakeholder] || '';
-
-	console.log('stakeholder:: ', stakeholder);
+	const stakeholder = stakeholderMappings({ is_indonesia_coe_head })[updatedActiveStakeholder] || '';
 
 	let showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
 

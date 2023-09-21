@@ -221,8 +221,7 @@ export default {
 			'e48ae064-781a-43ee-af27-b7d4ed37329f', // Prod_Account Payable Executive
 			'6106378a-44e0-4f60-9f4b-4160843d9dc9', // Temp-  Corporate Owner Finance
 			'1f7b1fd3-5c5b-4009-9cb5-c712436bc071', // Corporate Owner Fintech
-			'b5e1c496-9d2c-47bc-b9c2-a24ce7ba1cd0', 	//	Prod Overseas Desk
-
+			'b5e1c496-9d2c-47bc-b9c2-a24ce7ba1cd0', //	Prod Overseas Desk
 		],
 		so1_so2_ops_role_id              : 'd974d323-b777-47a8-b14a-64df2e59df84',
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
@@ -311,6 +310,7 @@ export default {
 		finops                   : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
 		cogo_one_kyc             : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
 		finance_branch_accounts  : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
+		so3_vietnam              : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam'
 
 	},
 	options: {
