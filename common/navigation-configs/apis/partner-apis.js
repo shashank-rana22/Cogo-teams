@@ -13820,6 +13820,20 @@ const partner = {
 		},
 
 	],
+	ams_submission: [
+		{
+			api         : 'get_air_coe_air_freight_ams_data',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_air_freight',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_airline_config_list',
+			access_type : 'private',
+		},
+	],
 	business_finance_dunnings: [
 		{
 			api         : 'get_payments_dunning_organization_stakeholders',
