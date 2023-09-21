@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import COMMUNICATION_OPTIONS from '@cogoport/constants/call-status-options.json';
 import {
 	AsyncSelectController,
 	CheckboxController,
@@ -11,7 +12,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
-import COMMUNICATION_OPTIONS from '@cogoport/constants/call-status-options.json'
+
 import FeedbackComponent from '../FeedbackComponent';
 
 import styles from './styles.module.css';

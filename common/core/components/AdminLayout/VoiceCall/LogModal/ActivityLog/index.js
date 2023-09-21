@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import COMMUNICATION_OPTIONS from '@cogoport/constants/call-status-options.json';
 import {
 	AsyncSelectController,
 	CheckboxController,
@@ -13,7 +14,6 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import FeedbackComponent from '../FeedbackComponent';
-import COMMUNICATION_OPTIONS from '@cogoport/constants/call-status-options.json'
 
 import styles from './styles.module.css';
 
@@ -23,7 +23,6 @@ const CALL_OPTIONS = [
 	{ label: 'Meeting', value: 'meeting' },
 	{ label: 'Platform Demo', value: 'platformDemo' },
 ];
-
 
 function ActivityLog({
 	formData = {},
