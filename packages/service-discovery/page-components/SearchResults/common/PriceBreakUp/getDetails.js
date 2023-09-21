@@ -71,7 +71,7 @@ const getDetails = ({ item, service = '' }) => {
 		haulage_freight   : commonContainerDetails,
 	};
 
-	return MAPPING[service] || ['hello'];
+	return MAPPING[service] || [];
 };
 
 export default getDetails;
