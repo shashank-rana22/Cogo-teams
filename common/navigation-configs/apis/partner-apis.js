@@ -1088,6 +1088,11 @@ const partner = {
 	],
 	demand_crm: [
 		{
+			api          : 'create_shipment_trade_partner_organization',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_lead_organization_users',
 			access_type  : 'private',
 			service_name : 'lead',
