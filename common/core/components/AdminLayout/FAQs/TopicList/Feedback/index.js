@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Pagination } from '@cogoport/components';
 import { IcMFeedback } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -7,12 +7,14 @@ import useGetFeedbacks from './hooks/useGetFeedbacks';
 import List from './List';
 import styles from './styles.module.css';
 
+const DEFAULT_PAGE = 1;
+
 function Feedback() {
 	const [showAddFeedback, setShowAddFeedback] = useState(false);
-	const DEFAULT_PAGE = 1;
 	const [page, setPage] = useState(DEFAULT_PAGE);
 
-	const { feedbacks, pageData } = 	useGetFeedbacks({ page });
+	const { feedbacks, pageData } = useGetFeedbacks({ page });
+	const { total = '' } = pageData || {};
 
 	return (
 		<div className={styles.feedback_section}>
@@ -31,7 +33,7 @@ function Feedback() {
 						<div className={styles.feedback_action}>
 							<Button
 								size="sm"
-								themeType="secondary"
+								themeType="accent"
 								onClick={() => setShowAddFeedback(true)}
 							>
 								Add Feedback
@@ -40,12 +42,20 @@ function Feedback() {
 						</div>
 					</div>
 				)}
+
 			<List
 				feedbacks={feedbacks}
-				setPage={setPage}
-				page={page}
-				{...pageData}
 			/>
+
+			<div className={styles.pagination}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={total}
+					pageSize={10}
+					onPageChange={(val) => setPage(val)}
+				/>
+			</div>
 		</div>
 	);
 }
