@@ -4,6 +4,7 @@ import ShipmentDetails from '@cogoport/air-modules/components/AWBTemplate/Shipme
 import ShipperConsigneeDetails from '@cogoport/air-modules/components/AWBTemplate/ShipperConsigneeDetails';
 import { Button, Checkbox, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
 import React, { createRef, useState, ReactFragment } from 'react';
@@ -128,16 +129,10 @@ function GenerateMawb({
 	});
 
 	const takeImageScreenShot = async (node) => {
+		const dataURI = await htmlToImage.toJpeg(node);
 		const doc = new JsPDF('p', 'mm', [900, 1300]);
-
-		let pdfDataURI;
-		await doc.html(node, {
-			callback(pdf) {
-				pdfDataURI = pdf.output('datauristring');
-			},
-			x : 10,
-			y : 10,
-		});
+		await doc.addImage(dataURI, 'JPEG', 0, 0, 900, 1300);
+		const pdfDataURI = doc.output('datauristring');
 		return pdfDataURI;
 	};
 
