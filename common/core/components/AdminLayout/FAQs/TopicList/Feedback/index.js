@@ -1,5 +1,6 @@
 import { Button, Pagination } from '@cogoport/components';
-import { IcMFeedback } from '@cogoport/icons-react';
+import { IcMFeedback, IcMArrowLeft } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import FeedbackForm from './FeedbackForm';
@@ -9,11 +10,11 @@ import styles from './styles.module.css';
 
 const DEFAULT_PAGE = 1;
 
-function Feedback() {
+function Feedback({ setShowFeedback = () => {} }) {
 	const [showAddFeedback, setShowAddFeedback] = useState(false);
 	const [page, setPage] = useState(DEFAULT_PAGE);
 
-	const { feedbacks, loading, pageData } = useGetFeedbacks({ page });
+	const { feedbacks, loading, getFeedbacks, pageData } = useGetFeedbacks({ page });
 	const { total = '' } = pageData || {};
 
 	return (
@@ -21,14 +22,25 @@ function Feedback() {
 
 			{showAddFeedback
 				? (
-					<FeedbackForm setShowAddFeedback={setShowAddFeedback} />
+					<FeedbackForm getFeedbacks={getFeedbacks} setShowAddFeedback={setShowAddFeedback} />
 				)
 				: (
 					<div className={styles.header}>
-						<div className={styles.title}>
-							<IcMFeedback />
-							Feedbacks
+						<div className={styles.back_action}>
+							<Button
+								size="sm"
+								themeType="link"
+								className={styles.feedback}
+								onClick={() => setShowFeedback((prev) => !prev)}
+							>
+								<IcMArrowLeft />
+							</Button>
 
+							<div className={styles.title}>
+								<IcMFeedback />
+								Feedbacks
+
+							</div>
 						</div>
 						<div className={styles.feedback_action}>
 							<Button
@@ -43,20 +55,24 @@ function Feedback() {
 					</div>
 				)}
 
-			<List
-				feedbacks={feedbacks}
-				loading={loading}
-			/>
-
-			<div className={styles.pagination}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={total}
-					pageSize={10}
-					onPageChange={(val) => setPage(val)}
+			{!showAddFeedback && (
+				<List
+					feedbacks={feedbacks}
+					loading={loading}
 				/>
-			</div>
+			)}
+
+			{!isEmpty(feedbacks) && !showAddFeedback && (
+				<div className={styles.pagination}>
+					<Pagination
+						type="table"
+						currentPage={page}
+						totalItems={total}
+						pageSize={10}
+						onPageChange={(val) => setPage(val)}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }
