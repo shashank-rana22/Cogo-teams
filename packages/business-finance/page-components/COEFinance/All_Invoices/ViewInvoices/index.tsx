@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState, useEffect } from 'react';
 
@@ -49,11 +50,13 @@ function ViewInvoices() {
 
 	useEffect(() => {
 		const listenScrollEvent = () => {
-			const { scrollY } = window || {};
-			if (scrollY > 50) {
-				setIsSticky(true);
-			} else {
-				setIsSticky(false);
+			if (window) {
+				const { scrollY } = window || {};
+				if (scrollY > 50) {
+					setIsSticky(true);
+				} else {
+					setIsSticky(false);
+				}
 			}
 		};
 
@@ -66,13 +69,7 @@ function ViewInvoices() {
 	return (
 		<div>
 			<div
-				className={styles.sticky}
-				style={{
-					boxShadow: isSticky
-						? '0px 4px 8px #bbbbc1'
-						: 'none',
-					background: isSticky ? '#ecfdff' : 'none',
-				}}
+				className={cl`${styles.sticky} ${isSticky ? styles.sticky_container : null}`}
 			>
 				<Header
 					data={fullResponse}

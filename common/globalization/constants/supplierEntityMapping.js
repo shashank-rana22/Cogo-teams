@@ -1,4 +1,4 @@
-export const ENTITY_NAME_LIST = [
+const supplierEntityMapping = [
 	'maersk',
 	'cma',
 	'hapag_lloyd',
@@ -70,3 +70,5 @@ export const ENTITY_NAME_LIST = [
 	'rama',
 	'zircon',
 ];
+
+export default supplierEntityMapping;

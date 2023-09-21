@@ -53,7 +53,7 @@ function Tagging({
 				</div>
 			</div>
 
-			{showTab && (
+			{showTab ? (
 				<div>
 					<TagMap
 						billId={billId}
@@ -78,7 +78,7 @@ function Tagging({
 						Approve
 					</Button>
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }

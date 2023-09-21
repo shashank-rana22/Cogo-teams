@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 
 import toastApiError from '../../commons/toastApiError.ts';
-import { quotationConfig } from '../configurations/ShipmentIdView/quotationConfig';
+import quotationConfig from '../configurations/ShipmentIdView/quotationConfig.json';
 
 const QUOTATION_TYPE_MAPPING = {
 	sellQuote : 'SELL',

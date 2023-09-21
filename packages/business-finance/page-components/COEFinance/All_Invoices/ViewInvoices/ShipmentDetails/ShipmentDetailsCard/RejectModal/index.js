@@ -7,11 +7,17 @@ import {
 } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 import invoiceDetailsRejectCheckboxList from '../../../../../constants/invoice-details-checkbox-list.ts';
 
 import styles from './styles.module.css';
+
+const CHECKED_VALUE_MAPPING = {
+	1 : 'collectionPartyRemark',
+	2 : 'billingPartyRemark',
+	3 : 'invoiceDetailsRemark',
+};
 
 function RejectModal({
 	id = '',
@@ -78,12 +84,6 @@ function RejectModal({
 		return acc;
 	}, []);
 
-	const CHECKED_VALUE_MAPPING = useMemo(() => ({
-		1 : 'collectionPartyRemark',
-		2 : 'billingPartyRemark',
-		3 : 'invoiceDetailsRemark',
-	}), []);
-
 	const onCheckboxChange = (event) => {
 		setCheckedValue(
 			{ ...checkedValue, [CHECKED_VALUE_MAPPING[rejectedId]]: [...event] },
@@ -103,7 +103,7 @@ function RejectModal({
 				[CHECKED_VALUE_MAPPING[rejectedId]]: [],
 			}));
 		}
-	}, [CHECKED_VALUE_MAPPING, extraCheck, rejectedId, setRemarksVal]);
+	}, [extraCheck, rejectedId, setRemarksVal]);
 
 	return (
 		<Modal
@@ -158,7 +158,7 @@ function RejectModal({
 							className={styles.extra_checks}
 						/>
 					</div>
-					{!isEmpty(extraCheck) && (
+					{!isEmpty(extraCheck) ? (
 						<Textarea
 							name="remark"
 							size="md"
@@ -170,7 +170,7 @@ function RejectModal({
 								[CHECKED_VALUE_MAPPING[rejectedId]]: [value],
 							})}
 						/>
-					)}
+					) : null}
 				</div>
 			</Modal.Body>
 			<Modal.Footer>

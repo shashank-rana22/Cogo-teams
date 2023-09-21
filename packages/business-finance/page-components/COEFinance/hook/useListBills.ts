@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { expenseConfig } from '../configurations/ShipmentIdView/expenseConfig';
 import { incomeConfig } from '../configurations/ShipmentIdView/incomeConfig';
-import { quotationConfig } from '../configurations/ShipmentIdView/quotationConfig';
+import quotationConfig from '../configurations/ShipmentIdView/quotationConfig.json';
 
 import useGetFiniteList from './useGetFiniteList';
 

@@ -36,7 +36,7 @@ function AdditionalInvoiceDetails({
 	let button = null;
 
 	if (!Number.isNaN(advancedATHAmountPercentage) && isAdvancedATHAmountGreaterThan80Percent) {
-		if (!advancedPaymentObj?.remarks?.includes('accepted', 'rejected')) {
+		if (!advancedPaymentObj?.remarks?.includes('accepted')) {
 			button = (
 				<Tooltip
 					placement="top"
@@ -66,13 +66,13 @@ function AdditionalInvoiceDetails({
 	}
 	return (
 		<div>
-			{billType === 'BILL' && isIncidental && (
+			{billType === 'BILL' && isIncidental ? (
 				<div className={styles.margin_bottom}>
 					Is Incidental -
 					{' '}
 					<span>{startCase(isIncidental)}</span>
 				</div>
-			)}
+			) : null}
 
 			{ billType === 'BILL' && paymentType && (
 				<div className={styles.margin_bottom}>
@@ -98,7 +98,7 @@ function AdditionalInvoiceDetails({
 				{button}
 			</div>
 
-			{advancedPaymentObj?.data && shipmentType === 'ftl_freight' && (
+			{advancedPaymentObj?.data && shipmentType === 'ftl_freight' ? (
 				<div className={styles.margin_bottom}>
 					Updated Advanced Amount -
 					{' '}
@@ -109,9 +109,9 @@ function AdditionalInvoiceDetails({
                         || MIN_AMOUNT}
 					</span>
 				</div>
-			)}
+			) : null}
 
-			{outstandingDocument && shipmentType === 'ftl_freight' && (
+			{outstandingDocument && shipmentType === 'ftl_freight' ? (
 				<div className={styles.margin_bottom}>
 					Outstanding Proforma Approval-
 					{' '}
@@ -124,15 +124,15 @@ function AdditionalInvoiceDetails({
 						themeType="primary"
 					/>
 				</div>
-			)}
+			) : null}
 
-			{billType === 'CREDIT_NOTE' && reasonForCN && shipmentType === 'ftl_freight' && (
+			{billType === 'CREDIT_NOTE' && reasonForCN && shipmentType === 'ftl_freight' ? (
 				<div className={styles.margin_bottom}>
 					Reason For CN -
 					{' '}
 					<span>{startCase(reasonForCN)}</span>
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }

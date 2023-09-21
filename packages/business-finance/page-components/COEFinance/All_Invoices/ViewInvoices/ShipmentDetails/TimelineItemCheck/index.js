@@ -4,19 +4,20 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const ITEMS = {
-	shipmentDetailsCheck : 'Shipment Details',
-	documentsCheck       : 'Documents',
-	taggingCheck         : 'Invoice Tagging',
-	sidDataCheck         : 'SID Data',
-	collectionPartyCheck : 'Collection Party Details',
-	billingPartyCheck    : 'Billing Party Details',
-	invoiceDetailsCheck  : 'Invoice Details',
-	lineItemsCheck       : 'Line Items',
-};
-
 function TimeLineItemCheck({ checkItem = {}, status = '', isTagFound = false, currentTab = '' }) {
 	const isInvoiceApproved = status === 'FINANCE_ACCEPTED';
+
+	const ITEMS = {
+		shipmentDetailsCheck : 'Shipment Details',
+		documentsCheck       : 'Documents',
+		taggingCheck         : 'Invoice Tagging',
+		sidDataCheck         : 'SID Data',
+		collectionPartyCheck : 'Collection Party Details',
+		billingPartyCheck    : 'Billing Party Details',
+		invoiceDetailsCheck  : 'Invoice Details',
+		lineItemsCheck       : 'Line Items',
+	};
+
 	if (!isTagFound) {
 		delete ITEMS.taggingCheck;
 	}

@@ -7,3 +7,8 @@
 	border-radius: 4px;
 	transition: box-shadow 0.8s;
 }
+
+.sticky_container {
+	background: #ecfdff;
+	box-shadow: 0 4px 8px #bbbbc1;
+}

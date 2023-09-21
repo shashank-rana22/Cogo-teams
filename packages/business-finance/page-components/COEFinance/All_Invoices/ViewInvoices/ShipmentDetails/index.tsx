@@ -18,11 +18,8 @@ import Tagging from '../Taggings';
 import ConsolidatedShipmentDetail from './ConsolidatedShipmentDetails/index';
 import DetailsCard from './DetailsCard';
 import Documents from './Documents/index';
-// eslint-disable-next-line import/no-cycle
 import PdfDisplay from './PdfDisplay/index';
-// eslint-disable-next-line import/no-cycle
 import POC from './POC/index';
-// eslint-disable-next-line import/no-cycle, import/no-named-as-default
 import ShipmentDetailsCard from './ShipmentDetailsCard/index';
 import SIDView from './SIDView';
 import styles from './styles.module.css';

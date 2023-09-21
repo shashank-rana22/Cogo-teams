@@ -1,18 +1,7 @@
-import {
-	Button,
-	Tooltip,
-	Popover,
-	Modal,
-	Textarea,
-} from '@cogoport/components';
+import { Button, Tooltip, Popover, Modal, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import {
-	IcMOverflowDot,
-	IcMInfo,
-	IcMArrowRotateDown,
-	IcMArrowRotateUp,
-} from '@cogoport/icons-react';
+import { IcMOverflowDot, IcMInfo, IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import converter from 'number-to-words';
 import React, { useEffect, useState } from 'react';
@@ -20,32 +9,10 @@ import React, { useEffect, useState } from 'react';
 import List from '../../../../../../commons/List/index';
 import { LINE_ITEMS, LINE_ITEMS_CHECK } from '../../../../../configurations/LINE_ITEMS';
 import { getLineItemLabelStyle, getLineItemIcon } from '../../../../../utils/getLabelStyle';
-import getLineItemsMappedColor from '../../../../../utils/getLineItemsMappedColor';
 
+import extraFunctions from './extraFunctions';
 import RenderAction from './RenderAction';
 import styles from './styles.module.css';
-
-interface LineItemCardInterface {
-	lineItems?: Array<object>;
-	bill?: {
-		taxTotal: any;
-		billCurrency: string;
-		grandTotal: any;
-		subTotal?: string | number;
-		tdsAmount: string | number;
-	};
-	lineItemsRemarks: object;
-	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
-	isInvoiceApproved: boolean;
-	shipmentType: string;
-	tdsRate: string | number;
-	paidTds?: string | number;
-	subTotal?: string | number;
-	setCheckItem?: React.Dispatch<React.SetStateAction<{}>>;
-	onTabClick?: Function;
-	showTab?: boolean;
-	chargesTable?: any;
-}
 
 const PERCENTAGE_FACTOR = 100;
 const MAX_DECIMAL_PLACES = 2;
@@ -73,7 +40,7 @@ function LineItemCard({
 	onTabClick = (prop) => (prop),
 	showTab = false,
 	chargesTable = [],
-}: LineItemCardInterface) {
+}: any) {
 	const [approvedItems, setApprovedItems] = useState({});
 	const [popover, setPopover] = useState(false);
 	const [rejectedItems, setRejectedItems] = useState({});
@@ -205,37 +172,9 @@ function LineItemCard({
 				)}
 			</div>
 		),
-		renderName: (row) => <div style={{ color: getLineItemsMappedColor({ row, chargesTable }) }}>{row?.name}</div>,
-
-		renderCurrency: (row) => {
-			const { currency = '-' } = row || {};
-			return (
-				<div style={{ color: getLineItemsMappedColor({ row, chargesTable }) }}>
-					{currency}
-				</div>
-			);
-		},
-		renderPrice: (row) => {
-			const { price = '-' } = row || {};
-			return <div style={{ color: getLineItemsMappedColor({ row, chargesTable }) }}>{price}</div>;
-		},
-		renderQuantity: (row) => {
-			const { quantity = '-' } = row || {};
-			return <div style={{ color: getLineItemsMappedColor({ row, chargesTable }) }}>{quantity}</div>;
-		},
-		renderExchangeRate: (row) => {
-			const { exchangeRate = '-' } = row || {};
-			return <div style={{ color: getLineItemsMappedColor({ row, chargesTable }) }}>{exchangeRate}</div>;
-		},
-		renderTaxAmount: (row) => {
-			const { taxAmount = '-' } = row || {};
-			return <div style={{ color: getLineItemsMappedColor({ row, chargesTable }) }}>{taxAmount}</div>;
-		},
-		renderTotalCost: (row) => {
-			const { total = '-' } = row || {};
-			return <div>{total}</div>;
-		},
 	};
+
+	const allFunctions = { ...functions, ...(extraFunctions({ chargesTable })) };
 
 	const { id } = showRejectedModal;
 
@@ -304,7 +243,7 @@ function LineItemCard({
 						<List
 							config={LINE_ITEMS}
 							itemData={{ list: lineItems }}
-							functions={functions}
+							functions={allFunctions}
 						/>
 
 						<div className={styles.outer}>
@@ -404,7 +343,7 @@ function LineItemCard({
 								<List
 									config={LINE_ITEMS_CHECK}
 									itemData={{ list: [showRejectedModal] }}
-									functions={functions}
+									functions={allFunctions}
 								/>
 							</div>
 

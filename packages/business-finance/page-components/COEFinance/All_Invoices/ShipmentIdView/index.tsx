@@ -1,9 +1,9 @@
 import { Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useShipmentIdView from '../../hook/useShipmentIdView';
 
-// eslint-disable-next-line import/no-cycle
 import AccordianCards from './AccordianCards/index';
 import Filters from './Filters';
 import LoadingState from './LoadingState/index';
@@ -59,7 +59,7 @@ function ShipmentIdView() {
 				</div>
 			);
 		}
-		if (data.length === 0) {
+		if (isEmpty(data)) {
 			return (
 				<div className={styles.no_data}>
 					No data Available
@@ -89,7 +89,7 @@ function ShipmentIdView() {
 
 			<div>
 				{HandleShipmentView()}
-				{data.length > 0 ? (
+				{!isEmpty(data) ? (
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={pageNo}

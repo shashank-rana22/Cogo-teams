@@ -6,14 +6,11 @@ import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// eslint-disable-next-line import/no-cycle
-import { ItemDataProps } from '../index';
-
 import CardItem from './CardItem/index';
 import styles from './styles.module.css';
 
 interface ListData {
-	itemData: ItemDataProps;
+	itemData: any;
 	currentOpenSID: string;
 	setCurrentOpenSID: Function;
 	shipmentIdView?: boolean;

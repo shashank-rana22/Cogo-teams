@@ -1,12 +1,9 @@
-/* eslint-disable no-nested-ternary */
 import { Tooltip, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-// eslint-disable-next-line import/no-cycle
-import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
 import billingPartyRejectCheckboxList from '../../../../constants/billing-party-remark-checkbox-list';
 import collectionPartyRejectCheckboxList from '../../../../constants/collection-party-remark-checkbox-list';
@@ -24,7 +21,7 @@ import RejectModal from './RejectModal';
 import styles from './styles.module.css';
 
 interface ShipmentDetailsCardInterface {
-	data: DataInterface;
+	data: any;
 	remarksVal: RemarksValInterface;
 	setRemarksVal: any;
 	lineItemsRemarks: object;
