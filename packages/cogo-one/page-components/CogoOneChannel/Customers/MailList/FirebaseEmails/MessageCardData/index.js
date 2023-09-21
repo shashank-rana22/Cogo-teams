@@ -59,7 +59,7 @@ function MessageCardData({
 
 	const isImportant = chat_tags?.includes('important') || false;
 
-	const mailToBeShown = activeFolder === 'inbox' ? sender : to_mails.join(',');
+	const mailToBeShown = activeFolder === 'inbox' ? sender : to_mails.join(', ');
 
 	const checkActiveCard = activeTab?.data?.id === id;
 
