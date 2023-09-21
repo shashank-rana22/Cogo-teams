@@ -31,7 +31,7 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 			<div className={styles.container}>
 				{(stakeHolders || []).map((item, index) => {
 					const isStakeholderActive = !index
-					|| ['APPROVED', 'REQUESTER'].includes(stakeHolders[index - FIRST]?.status);
+					|| ['APPROVED', 'REQUESTED BY'].includes(stakeHolders[index - FIRST]?.status);
 					return (
 						<div
 							className={cl`${styles.section} ${!isStakeholderActive ? styles.faded_text : ''}`}
@@ -47,7 +47,7 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 								) : (
 									<div
 										className={cl`${styles.circle} 
-										${stakeHolders[index]?.status === 'REQUESTER'
+										${stakeHolders[index]?.status === 'REQUESTED BY'
 											? styles.approved_bg : ''} 
 											${stakeHolders[index]?.status === 'PENDING' ? styles.faded_bg : ''}
 											${isStakeholderActive ? styles.active_bg : ''}`}
@@ -59,7 +59,7 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 								{index < stakeHolders.length - FIRST ? (
 									<div
 										className={cl`${styles.line} 
-										${(item?.status === 'APPROVED' || item?.status === 'REQUESTER')
+										${(item?.status === 'APPROVED' || item?.status === 'REQUESTED BY')
 											? styles.approved_bg : styles.faded_bg}`}
 									/>
 								) : null}

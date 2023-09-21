@@ -31,7 +31,7 @@ function Details({ row = {}, setDetailsModal = () => {} }) {
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
 
 	const handleClick = () => {
-		setDetailsModal(false);
+		setDetailsModal(null);
 		onSubmit(STATUS_MAPPING.approved);
 	};
 
