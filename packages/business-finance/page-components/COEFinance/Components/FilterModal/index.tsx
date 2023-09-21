@@ -15,7 +15,10 @@ interface Props {
 }
 
 function FilterModal({ setFilters = () => {} }: Props) {
-	const [modalFilters, setModalFilters] = useState({});
+	const [modalFilters, setModalFilters] = useState({
+		currency    : [],
+		serviceType : [],
+	});
 	const [showModal, setShowModal] = useState(false);
 	const [currencies, setCurrencies] = useState([{}]);
 
@@ -28,20 +31,36 @@ function FilterModal({ setFilters = () => {} }: Props) {
 		}));
 	}, [currencies, setModalFilters]);
 
-	const handleClose = () => {
-		setModalFilters({});
-		setCurrencies([]);
-		setShowModal(false);
-	};
 	const handleRemoveCurrency = (item) =>	{
 		const currencyList = [...(modalFilters?.currency || [])];
 		const newList = currencyList?.filter((currency) => currency !== item);
-		setModalFilters(() => ({
+		setModalFilters((p) => ({
+			...p,
 			currency: newList,
 		}));
 	};
 
-	const isFilterApplied = Object.keys(modalFilters)?.length === 1 && isEmpty(modalFilters?.currency);
+	const isFilterEmpty = Object.keys(modalFilters)?.length === 2
+	&& isEmpty(modalFilters?.currency)
+	&& isEmpty(modalFilters?.serviceType);
+
+	const clearFilters = () => {
+		setModalFilters({
+			currency    : [],
+			serviceType : [],
+		});
+		setFilters((prev) => ({
+			...prev,
+			currency    : undefined,
+			serviceType : undefined,
+			billDate    : undefined,
+			dueDate     : undefined,
+			updatedDate : undefined,
+			billType    : undefined,
+		}));
+		setCurrencies([]);
+		setShowModal(false);
+	};
 
 	return (
 		<div className={styles.modal_container}>
@@ -51,9 +70,7 @@ function FilterModal({ setFilters = () => {} }: Props) {
 				scroll={false}
 				show={showModal}
 				closeOnOuterClick={false}
-				onClose={() => {
-					handleClose();
-				}}
+				onClose={() => setShowModal(false)}
 			>
 				<Modal.Header
 					title={
@@ -114,17 +131,15 @@ function FilterModal({ setFilters = () => {} }: Props) {
 						<div className={styles.clear}>
 							<Button
 								themeType="secondary"
-								onClick={() => {
-									setModalFilters({});
-									setCurrencies([]);
-									setShowModal(false);
-								}}
+								onClick={clearFilters}
+								disabled={isFilterEmpty}
 							>
 								Clear Filters
 							</Button>
 						</div>
 						<div>
 							<Button
+								disabled={isFilterEmpty}
 								onClick={() => {
 									setFilters((prev) => ({ ...prev, ...modalFilters }));
 									setShowModal(false);
@@ -148,7 +163,7 @@ function FilterModal({ setFilters = () => {} }: Props) {
 				<span className={styles.icon}>
 					<IcMFilter />
 				</span>
-				{isFilterApplied ? null : (
+				{isFilterEmpty ? null : (
 					<IcCRedCircle
 						height={8}
 						width={8}
