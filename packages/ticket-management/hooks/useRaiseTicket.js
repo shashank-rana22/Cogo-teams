@@ -6,8 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 const getPayload = ({
 	id, priority, finalUrl, selectedServices, issue_type, additional_information,
 	notify_customer, additionalData, request_type, category, serial_id, sub_category,
-	service, trade_type,
-	toggle_value, raised_by_desk, raised_to_desk,
+	service, trade_type, raised_by_desk, raised_to_desk, isOperation,
 }) => ({
 	UserID        : id || undefined,
 	PerformedByID : id || undefined,
@@ -29,7 +28,7 @@ const getPayload = ({
 	Subcategory      : sub_category || undefined,
 	RaisedByDesk     : raised_by_desk || undefined,
 	RaisedToDesk     : raised_to_desk || undefined,
-	CategoryDeskType : !toggle_value ? 'by_category' : 'by_desk',
+	CategoryDeskType : isOperation ? 'by_desk' : 'by_category',
 	...additionalData,
 });
 
@@ -40,6 +39,9 @@ const useRaiseTicket = ({
 	reset = () => {},
 }) => {
 	const { profile } = useSelector((state) => state);
+
+	const roleFunctions = profile.auth_role_data.role_functions || [];
+	const isOperation = roleFunctions.includes('operations');
 
 	const [{ loading }, trigger] = useTicketsRequest({
 		url     : '/ticket',
@@ -62,7 +64,6 @@ const useRaiseTicket = ({
 			trade_type,
 			category,
 			sub_category,
-			toggle_value,
 			raised_by_desk,
 			raised_to_desk,
 			...rest
@@ -99,9 +100,9 @@ const useRaiseTicket = ({
 					category,
 					priority,
 					sub_category,
-					toggle_value,
 					raised_by_desk,
 					raised_to_desk,
+					isOperation,
 				}),
 			});
 

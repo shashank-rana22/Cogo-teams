@@ -19,9 +19,6 @@ const CONTROLS_MAPPING = {
 	platform_issue : FINANCE_PLATFORM_KEYS,
 };
 
-const CATEGORY_TYPES = ['category', 'sub_category'];
-const DESK_TYPES = ['raised_by_desk', 'raised_to_desk'];
-
 function RaiseTicketsForm({
 	watch = () => {}, control = {}, formState = {}, additionalInfo = [], resetField = () => {},
 	setAdditionalInfo = () => {}, setValue = () => {},
@@ -42,7 +39,8 @@ function RaiseTicketsForm({
 	const watchIssueType = watch('issue_type');
 	const watchService = watch('service');
 	const watchTradeType = watch('trade_type');
-	const watchToggle = watch('toggle_value');
+	const watchRaisedToDesk = watch('raised_to_desk');
+	const watchRaisedByDesk = watch('raised_by_desk');
 
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label          : item,
@@ -59,7 +57,7 @@ function RaiseTicketsForm({
 
 	const formatRaiseToDeskOptions = (raiseToDesk || []).map((item) => ({
 		label : item?.name,
-		value : item?.id,
+		value : item?.name,
 	}));
 
 	const defaultControls = useRaiseTicketcontrols({
@@ -76,9 +74,10 @@ function RaiseTicketsForm({
 		formattedSubCategories,
 		setSubCategories,
 		t,
-		watchToggle,
 		setRaiseToDesk,
 		formatRaiseToDeskOptions,
+		watchRaisedToDesk,
+		watchRaisedByDesk,
 	});
 
 	const filteredControls = defaultControls
@@ -109,9 +108,7 @@ function RaiseTicketsForm({
 				const { name, label, controllerType } = elementItem || {};
 				const Element = getFieldController(controllerType);
 
-				if ((name === 'user_id' && isEmpty(watchOrgId))
-				|| (!watchToggle && DESK_TYPES.includes(name))
-				|| (watchToggle && CATEGORY_TYPES.includes(name))) {
+				if (name === 'user_id' && isEmpty(watchOrgId)) {
 					return null;
 				}
 

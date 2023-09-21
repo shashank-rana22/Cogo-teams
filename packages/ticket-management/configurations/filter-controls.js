@@ -8,6 +8,7 @@ import {
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
 
 import { REQUEST_TYPE_OPTIONS } from '../constants';
 
@@ -24,16 +25,21 @@ const useRaiseTicketcontrols = ({
 	watchOrgId = '', watchUserId = '', watchService = '', watchTradeType = '', watchCategory = '',
 	watchRequestType = '', resetField = () => {}, setAdditionalInfo = () => {}, setValue = () => {},
 	formattedSubCategories = [], setSubCategories = () => {}, watchSubCategory = '',
-	t = () => {}, setRaiseToDesk = () => {}, formatRaiseToDeskOptions = [], watchToggle,
+	t = () => {}, setRaiseToDesk = () => {}, formatRaiseToDeskOptions = [],
+	watchRaisedByDesk = '', watchRaisedToDesk = '',
 }) => {
+	const { rolesArr } = useSelector(({ profile }) => ({ rolesArr: profile?.auth_role_data?.role_functions || [] }));
+
+	const isOperation = rolesArr.includes('operations');
+
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
 	const categoryDeskOptions = useGetAsyncTicketOptions({
-		...asyncTicketsCategory({ endLabelKey: !watchToggle ? 'category' : 'raised_by_desk' }),
+		...asyncTicketsCategory({ endLabelKey: !isOperation ? 'category' : 'raised_by_desk' }),
 		params: {
 			Service          : watchService || undefined,
 			TradeType        : watchTradeType || undefined,
 			RequestType      : watchRequestType || undefined,
-			CategoryDeskType : !watchToggle ? 'by_category' : 'by_desk',
+			CategoryDeskType : isOperation ? 'by_desk' : 'by_category',
 		},
 	});
 
@@ -47,10 +53,13 @@ const useRaiseTicketcontrols = ({
 	const ticketTypeOptions = useGetAsyncTicketOptions({
 		...asyncFieldsTicketTypes(),
 		params: {
-			Audience    : 'cogoport_user',
-			RequestType : watchRequestType || undefined,
-			Category    : watchCategory || undefined,
-			Subcategory : watchSubCategory || undefined,
+			Audience         : 'cogoport_user',
+			RequestType      : watchRequestType || undefined,
+			Category         : watchCategory || undefined,
+			Subcategory      : watchSubCategory || undefined,
+			RaisedByDesk     : watchRaisedByDesk || undefined,
+			RaisedToDesk     : watchRaisedToDesk || undefined,
+			CategoryDeskType : isOperation ? 'by_desk' : 'by_category',
 		},
 	});
 
@@ -65,7 +74,7 @@ const useRaiseTicketcontrols = ({
 		valueKey: 'serial_id',
 	});
 
-	return [
+	const controls = [
 		{
 			label          : <RenderLabel label={t('myTickets:request_type')} />,
 			placeholder    : t('myTickets:select_request_ype'),
@@ -75,6 +84,7 @@ const useRaiseTicketcontrols = ({
 			value          : 'shipment',
 			options        : REQUEST_TYPE_OPTIONS,
 			isClearable    : true,
+			visible        : true,
 		},
 		{
 			...(organizationOptions || {}),
@@ -83,6 +93,7 @@ const useRaiseTicketcontrols = ({
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_organization'),
 			isClearable    : true,
+			visible        : true,
 		},
 		{
 			...(organizationUserOptions || {}),
@@ -91,6 +102,7 @@ const useRaiseTicketcontrols = ({
 			name           : 'user_id',
 			controllerType : 'select',
 			isClearable    : true,
+			visible        : true,
 		},
 		{
 			...(serialIdOptions || {}),
@@ -104,6 +116,7 @@ const useRaiseTicketcontrols = ({
 				setValue('service', obj?.shipment_type);
 				setValue('trade_type', obj?.trade_type);
 			},
+			visible: true,
 		},
 		{
 			label          : <RenderLabel label={t('myTickets:select_service')} />,
@@ -113,6 +126,7 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			options        : GLOBAL_CONSTANTS.shipment_types,
 			isClearable    : true,
+			visible        : true,
 		},
 		{
 			label          : <RenderLabel label={t('myTickets:select_trade_type')} />,
@@ -122,13 +136,7 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			options        : GLOBAL_CONSTANTS.trade_types,
 			isClearable    : true,
-		},
-		{
-			name           : 'toggle_value',
-			offLabel       : t('myTickets:by_category'),
-			onLabel        : t('myTickets:by_desk'),
-			value          : false,
-			controllerType : 'toggle',
+			visible        : true,
 		},
 		{
 			...(categoryDeskOptions || {}),
@@ -142,6 +150,7 @@ const useRaiseTicketcontrols = ({
 				setSubCategories(val?.subcategories);
 				resetField('sub_category');
 			},
+			visible: !isOperation,
 		},
 		{
 			label          : <RenderLabel label={t('myTickets:select_sub_category')} />,
@@ -151,6 +160,7 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			isClearable    : true,
 			options        : formattedSubCategories,
+			visible        : !isOperation,
 		},
 		{
 			...(categoryDeskOptions || {}),
@@ -161,6 +171,7 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			isClearable    : true,
 			defaultOptions : true,
+			visible        : isOperation,
 			onChange       : (_, val) => {
 				setRaiseToDesk(val?.raised_to_desk);
 				resetField('raised_to_desk');
@@ -174,6 +185,7 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			isClearable    : true,
 			options        : formatRaiseToDeskOptions,
+			visible        : isOperation,
 		},
 		{
 			...(ticketTypeOptions || {}),
@@ -185,6 +197,7 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			defaultOptions : true,
 			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
+			visible        : true,
 		},
 		{
 			label          : <RenderLabel label={t('myTickets:describe_issue')} />,
@@ -192,6 +205,7 @@ const useRaiseTicketcontrols = ({
 			controllerType : 'textarea',
 			placeholder    : t('myTickets:enter_comments'),
 			rules          : { required: true },
+			visible        : true,
 		},
 		{
 			label          : t('myTickets:priority_label'),
@@ -215,18 +229,23 @@ const useRaiseTicketcontrols = ({
 			],
 			theme     : 'admin',
 			className : 'primary md',
+			visible   : true,
 		},
 		{
 			label          : t('myTickets:upload_supporting_document'),
 			name           : 'file_url',
 			controllerType : 'uploader',
+			visible        : true,
 		},
 		{
 			label          : t('myTickets:notify_customer'),
 			name           : 'notify_customer',
 			controllerType : 'checkbox',
+			visible        : true,
 		},
 	];
+
+	return controls.filter((itm) => itm?.visible === true);
 };
 
 export default useRaiseTicketcontrols;
