@@ -30,7 +30,13 @@ function EditInvoicePreference({
 		setShow(false);
 	};
 
-	const { importer_exporter_id, country_id, is_tax_applicable } = shipment_data || {};
+	const {
+		importer_exporter_id = '',
+		country_id = '',
+		is_tax_applicable = false,
+		shipment_type = '',
+		is_job_closed_financially = false,
+	} = shipment_data || {};
 
 	const {
 		selectedParties = [],
@@ -62,7 +68,7 @@ function EditInvoicePreference({
 			<Button
 				size="sm"
 				onClick={() => setShow(true)}
-				disabled={disableAction}
+				disabled={is_job_closed_financially || disableAction}
 				themeType="secondary"
 			>
 				Edit Invoice Preference
@@ -133,7 +139,7 @@ function EditInvoicePreference({
 											handleInvoicingPartyAdd(ip);
 											setAddInvoicingParty(false);
 										}}
-										primary_service={shipment_data?.shipment_type}
+										primary_service={shipment_type}
 									/>
 								</div>
 							</Modal.Body>
