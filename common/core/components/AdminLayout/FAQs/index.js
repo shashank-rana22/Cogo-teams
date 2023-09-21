@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { cl, Modal } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
@@ -16,17 +16,17 @@ const SHIFT_X = 30;
 const SHIFT_Y = 30;
 
 function FAQs({
-	faqNotificationApiLoading,
-	fetchFaqNotification,
-	faqNotificationData,
-	refetch,
+	faqNotificationApiLoading = false,
+	fetchFaqNotification = () => {},
+	faqNotificationData = {},
+	refetch = () => {},
 }) {
-	const dispatch = useDispatch();
+	const router = useRouter();
 	const profileData = useSelector(({ profile }) => profile);
+	const dispatch = useDispatch();
 
 	const { showFaq = false } = profileData || {};
 
-	const router = useRouter();
 	const { asPath } = router;
 
 	const hideSupportIcon = !asPath.includes('/cogo-one/omni-channel');
@@ -105,7 +105,8 @@ function FAQs({
 
 			{(show || showFaq) ? (
 				<Modal
-					className={`${styles.modal_wrapper} ${!isEmpty(announcementModalData) && styles.increase_width}`}
+					className={cl`${styles.modal_wrapper} 
+					${!isEmpty(announcementModalData) ? styles.increase_width : ''}`}
 					show={show || showFaq}
 					onClose={handleClose}
 					placement={isMobile ? 'fullscreen' : 'right'}
@@ -113,7 +114,7 @@ function FAQs({
 				>
 
 					<div className={styles.modal_content}>
-						<div className={`${styles.topiclist_container} 
+						<div className={cl`${styles.topiclist_container} 
 						${!isEmpty(announcementModalData) && styles.hide_list}`}
 						>
 							<TopicList

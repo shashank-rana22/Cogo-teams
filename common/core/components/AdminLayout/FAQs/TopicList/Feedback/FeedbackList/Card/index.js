@@ -42,7 +42,7 @@ function Card({
 						{id}
 					</div>
 					<div className={styles.file_status}>
-						{fileUrl && (
+						{fileUrl ? (
 							<Button
 								size="md"
 								themeType="linkUi"
@@ -51,7 +51,7 @@ function Card({
 							>
 								Attachment
 							</Button>
-						)}
+						) : null}
 						<div
 							className={cl`${styles.status} ${styles[value]}`}
 						>
