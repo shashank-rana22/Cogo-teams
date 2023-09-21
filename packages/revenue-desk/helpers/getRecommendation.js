@@ -4,7 +4,7 @@ const getRecommendation = ({
 	setSupplierPayload,
 	allPreferenceCardsData,
 	currentFormatedrates,
-	systemFormattedRates,
+	systemFormatedRates,
 	singleServiceData,
 }) => {
 	const SERVICE_PROVIDERS = [];
@@ -17,7 +17,7 @@ const getRecommendation = ({
 		if (source === 'flashed') {
 			required_rate = (currentFormatedrates?.rows || []).find((obj) => obj?.id === rate_id);
 		} else {
-			required_rate = (systemFormattedRates?.rows || []).find((obj) => {
+			required_rate = (systemFormatedRates?.rows || []).find((obj) => {
 				if (validity_id) {
 					return obj?.id === rate_id && obj?.rowData.validity_id === validity_id;
 				}
