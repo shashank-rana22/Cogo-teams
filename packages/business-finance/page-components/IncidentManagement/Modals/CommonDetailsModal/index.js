@@ -12,6 +12,7 @@ function CommonDetailsModal({ setDetailsModal = () => {}, detailsModal = {} }) {
 				size="md"
 				themeType="secondary"
 				onClick={() => setDetailsModal(null)}
+				className={styles.go_back_button}
 			>
 				Go Back
 

@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-const allStakeHolderTimeLineData = ({ level0, level1, level2, level3 }) => {
+const allStakeHolderTimeLineData = ({ level0 = {}, level1 = {}, level2 = {}, level3 = {} }) => {
 	const { stakeholder: stakeholder3, status: status3 } = level3 || {};
 	const { stakeholder: stakeholder2, status: status2 } = level2 || {};
 	const { stakeholder: stakeholder1, status: status1 } = level1 || {};

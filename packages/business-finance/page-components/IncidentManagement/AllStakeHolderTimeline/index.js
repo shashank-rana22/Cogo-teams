@@ -1,6 +1,6 @@
 import { Pill, cl } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, pascalCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
@@ -56,7 +56,7 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 									</div>
 								)}
 
-								{index < stakeHolders.length ? (
+								{index < stakeHolders.length - FIRST ? (
 									<div
 										className={cl`${styles.line} 
 										${(item?.status === 'APPROVED' || item?.status === 'REQUESTER')
@@ -65,8 +65,9 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 								) : null}
 							</div>
 							<div className={styles.flex}>
-
-								{item?.name || '-'}
+								<div className={styles.font500}>
+									{item?.name || '-'}
+								</div>
 								<Pill
 									size="sm"
 									style={{
@@ -74,10 +75,12 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 									}}
 									className={styles.level_status_pill}
 								>
-									{item?.status || t('incidentManagement:pending_status')}
+									{pascalCase(item?.status) || t('incidentManagement:pending_status')}
 								</Pill>
 							</div>
-							{item?.email || '-'}
+							<div className={styles.font12}>
+								{item?.email || '-'}
+							</div>
 
 							<div className={styles.remark_section}>
 								<div>{t('incidentManagement:remarks')}</div>

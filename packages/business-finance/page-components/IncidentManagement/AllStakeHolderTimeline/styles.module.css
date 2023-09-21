@@ -38,7 +38,6 @@
 	flex-direction: column;
 	width: 40%;
 	height: 216px;
-	font-weight: 500;
 }
 
 .inner_div {
@@ -95,12 +94,20 @@
 	margin-top: 5px;
 	overflow: hidden;
 	font-size: 12px;
-	font-weight: 400;
 	word-wrap: break-word;
 }
 
 .red_line {
 	width: 50px;
 	height: 2px;
+	margin-bottom: 15px;
 	background-color: red;
+}
+
+.font500 {
+	font-weight: 500;
+}
+
+.font12 {
+	font-size: 12px;
 }
