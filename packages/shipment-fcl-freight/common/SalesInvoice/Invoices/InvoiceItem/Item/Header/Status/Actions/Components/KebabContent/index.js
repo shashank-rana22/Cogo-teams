@@ -40,7 +40,7 @@ function KebabContent({
 	}
 
 	const commonActions = invoice.status !== 'approved' && !disableAction
-	&& (!invoice?.processing || invoice?.invoice_total_discounted === ZERO);
+		&& (!invoice?.processing || invoice?.invoice_total_discounted === ZERO);
 
 	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true
 		&& !invoice?.is_igst
