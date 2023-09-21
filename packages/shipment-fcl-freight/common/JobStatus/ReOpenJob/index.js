@@ -77,7 +77,7 @@ function ReOpenJob({
 						<div key={item.name} className={styles.input_container}>
 							<label>{item.label}</label>
 							<span className={styles.required}>{item?.rules?.required ? ' *' : null}</span>
-							<Component {...item} control={control} accept="image/*, .pdf" />
+							<Component {...item} control={control} />
 							<div className={styles.errors}>
 								{errors?.[item.name]?.message || ''}
 							</div>
