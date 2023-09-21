@@ -16,8 +16,7 @@ function NewNotifications({
 	notificationData = {},
 	notificationLoading :loading = false,
 	trigger = () => {},
-	setOpenNotificationPopover = () => {},
-	// openNotificationPopover,
+	setNotificationPopover = () => {},
 	dataRequired,
 	setDataRequired,
 	onMarkAllAsRead,
@@ -144,7 +143,7 @@ function NewNotifications({
 				}
 			}
 
-			setOpenNotificationPopover(false);
+			setNotificationPopover(false);
 		} catch (err) {
 			showErrorsInToast(err.data);
 		}

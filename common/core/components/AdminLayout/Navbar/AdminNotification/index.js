@@ -8,10 +8,8 @@ import styles from './styles.module.css';
 
 function AdminNotification(props) {
 	const {
-		setOpenNotificationPopover = () => {},
-		openNotificationPopover,
-		// setUnseenNotificationCount = () => {},
-		// unseenNotificationCount,
+		setNotificationPopover = () => {},
+		notificationPopover,
 	} = props || {};
 
 	const { zeroth_index } = GLOBAL_CONSTANTS;
@@ -73,21 +71,20 @@ function AdminNotification(props) {
 	};
 
 	useEffect(() => {
-		onShowToggle(openNotificationPopover);
+		onShowToggle(notificationPopover);
 		// if (!openNotificationPopover && unseenNotificationCount > zeroth_index) {
 		// 	setUnseenNotificationCount(zeroth_index);
 		// }
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [openNotificationPopover, setOpenNotificationPopover]);
+	}, [notificationPopover, setNotificationPopover]);
 
-	return openNotificationPopover ? (
+	return notificationPopover ? (
 		<div className={styles.container}>
 			<NewNotifications
 				notificationData={data}
 				notificationLoading={loading}
 				trigger={trigger}
-				setOpenNotificationPopover={setOpenNotificationPopover}
-				openNotificationPopover={openNotificationPopover}
+				setNotificationPopover={setNotificationPopover}
 				dataRequired={dataRequired}
 				setDataRequired={setDataRequired}
 				onMarkAllAsRead={onMarkAllAsRead}

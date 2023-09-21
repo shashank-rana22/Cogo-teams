@@ -64,8 +64,8 @@ function Items({
 	refetch = () => {},
 	checkIfSessionExpiring,
 	notificationCount = ZERO_COUNT,
-	openNotificationPopover,
-	setOpenNotificationPopover,
+	notificationPopover,
+	setNotificationPopover,
 
 }) {
 	const { t } = useTranslation(['common']);
@@ -97,11 +97,11 @@ function Items({
 
 	const handlePopover = () => {
 		setOpenPopover(!openPopover);
-		setOpenNotificationPopover(false);
+		setNotificationPopover(false);
 	};
 
 	const handleNotificationPopover = () => {
-		setOpenNotificationPopover(!openNotificationPopover);
+		setNotificationPopover(!notificationPopover);
 	};
 
 	let activeUser = {};
@@ -121,7 +121,7 @@ function Items({
 	useEffect(() => {
 		setShowSubNav(false);
 		setOpenPopover(false);
-		setOpenNotificationPopover(false);
+		setNotificationPopover(false);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [resetSubnavs]);
 

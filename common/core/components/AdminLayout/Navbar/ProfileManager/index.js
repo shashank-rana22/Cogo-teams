@@ -2,7 +2,6 @@
 import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
 
 import useGetAllActions from '../../../../hooks/useGetAllActions';
 import useRemoveUserSessions from '../../../../hooks/useRemoveUserSessions';
@@ -15,8 +14,8 @@ function ProfileManager({
 	resetSubnavs,
 	setOpenPopover = () => {},
 	openPopover,
-	openNotificationPopover,
-	setOpenNotificationPopover,
+	notificationPopover,
+	setNotificationPopover,
 	timeLeft,
 	refetch = () => {},
 	loading,
@@ -85,8 +84,8 @@ function ProfileManager({
 				setOpenPopover={setOpenPopover}
 				checkIfSessionExpiring={checkIfSessionExpiring}
 				openPopover={openPopover}
-				openNotificationPopover={openNotificationPopover}
-				setOpenNotificationPopover={setOpenNotificationPopover}
+				notificationPopover={notificationPopover}
+				setNotificationPopover={setNotificationPopover}
 				notificationCount={unReadChatsCount}
 			/>
 		</ul>

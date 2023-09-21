@@ -47,7 +47,7 @@ function Navbar({
 
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [openPopover, setOpenPopover] = useState(false);
-	const [openNotificationPopover, setOpenNotificationPopover] = useState(false);
+	const [notificationPopover, setNotificationPopover] = useState(false);
 	const [searchString, setSearchString] = useState('');
 
 	const filterdList = searchString
@@ -70,7 +70,7 @@ function Navbar({
 	);
 
 	const handleLeave = () => {
-		if (openPopover || openNotificationPopover) {
+		if (openPopover || notificationPopover) {
 			setResetSubnavs(true);
 		} else {
 			setResetSubnavs(false);
@@ -102,8 +102,8 @@ function Navbar({
 						checkIfSessionExpiring={checkIfSessionExpiring}
 						loading={loading}
 						openPopover={openPopover}
-						openNotificationPopover={openNotificationPopover}
-						setOpenNotificationPopover={setOpenNotificationPopover}
+						notificationPopover={notificationPopover}
+						setNotificationPopover={setNotificationPopover}
 						timeLeft={timeLeft}
 						refetch={refetch}
 						userId={userId}
@@ -184,11 +184,11 @@ function Navbar({
 				}
 
 				{
-					openNotificationPopover
+					notificationPopover
 						&& (
 							<AdminNotification
-								openNotificationPopover={openNotificationPopover}
-								setOpenNotificationPopover={setOpenNotificationPopover}
+								notificationPopover={notificationPopover}
+								setNotificationPopover={setNotificationPopover}
 							/>
 						)
 				}
