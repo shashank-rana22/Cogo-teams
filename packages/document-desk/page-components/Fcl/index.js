@@ -1,3 +1,5 @@
+import { ShipmentChat } from '@cogoport/shipment-chat';
+
 import Header from '../../common/Header';
 import Loader from '../../common/Loader';
 import useListDocumentDesk from '../../hooks/useListDocumentDesk';
@@ -25,6 +27,8 @@ function Fcl() {
 			<AppliedFilters />
 
 			<StepperTabs />
+
+			<ShipmentChat />
 
 			<DeskTabs />
 
