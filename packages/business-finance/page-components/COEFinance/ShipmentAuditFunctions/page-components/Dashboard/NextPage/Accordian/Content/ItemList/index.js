@@ -1,7 +1,7 @@
 import { Table } from '@cogoport/components';
 import React from 'react';
 
-import getColumns from '../../../../../ConfigurationTab/getColumns';
+import getServiceColumns from '../../../../../ConfigurationTab/getServiceColumns';
 
 const dummy = [
 	{
@@ -17,7 +17,7 @@ const dummy = [
 ];
 
 export default function List() {
-	const TABLE_COLUMNS = getColumns();
+	const TABLE_COLUMNS = getServiceColumns();
 	return (
 		<div>
 			<Table columns={TABLE_COLUMNS} data={dummy} />

@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-const getColumns = () => {
+const getServiceColumns = () => {
 	const columns = [
 		{
 			id     : 'documentValue1',
@@ -95,4 +95,4 @@ const getColumns = () => {
 
 	return columns;
 };
-export default getColumns;
+export default getServiceColumns;

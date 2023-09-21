@@ -58,6 +58,38 @@ export default function Accordian({
 					)}
 			</div>
 			<div className={`${!isOpen ? styles.nothing : styles.content}`}>
+				{(columnIndex % 2 === 0)
+					? (
+						<>
+							<div style={{ display: 'flex', alignItems: 'center', marginBottom: '24px' }}>
+								<div className={`${!isOpen ? styles.nothing : styles.margin}`}>
+									<div className={styles.regular}>Income :</div>
+									<div>{income}</div>
+								</div>
+								<div className={`${!isOpen ? styles.nothing : styles.margin}`}>
+									<div className={styles.regular}>Profitability :</div>
+									<div className={`${profitability > 0
+										? styles.green : styles.red}`}
+									>
+										{profitability}
+
+									</div>
+								</div>
+							</div>
+							<Content
+								toggleAccordion={toggleAccordion}
+								columnIndex={columnIndex}
+								index={index}
+							/>
+						</>
+					)
+					: (
+						<BuySellStatusContent
+							toggleAccordion={toggleAccordion}
+							columnIndex={columnIndex}
+							index={index}
+						/>
+					)}
 				{/* <div style={{ display: 'flex', alignItems: 'center', marginBottom: '24px' }}>
 					<div className={`${!isOpen ? styles.nothing : styles.margin}`}>
 						<div className={styles.regular}>Income :</div>
@@ -73,11 +105,11 @@ export default function Accordian({
 					columnIndex={columnIndex}
 					index={index}
 				/> */}
-				<BuySellStatusContent
+				{/* <BuySellStatusContent
 					toggleAccordion={toggleAccordion}
 					columnIndex={columnIndex}
 					index={index}
-				/>
+				/> */}
 			</div>
 		</div>
 	);

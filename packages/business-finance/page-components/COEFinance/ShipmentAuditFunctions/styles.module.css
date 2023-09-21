@@ -2,3 +2,52 @@
 	display: flex;
 	margin: 8px 0;
 }
+.date_picker {
+	:global {
+		.react-datepicker__input-container button {
+			background: transparent;
+			border-right: 1px solid #e0e0e0;
+		}
+	}
+}
+.container {
+	display: flex;
+	align-items: center;
+}
+.main_container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.search {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 12px 12px 20px;
+
+	:global {
+		.ui_input_container {
+			width: 200px;
+			height: 32px;
+		}
+
+		.ui_input_container.ui_ps_size_md .ui_input_control {
+			font-size: 14px;
+		}
+		.ui_input_label {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.ui_input_suffix {
+			margin-right: 8px;
+		}
+
+		.ui_button_container {
+			min-width: fit-content;
+			height: fit-content;
+			padding: 7px;
+			font-size: var(--font-size-lg);
+		}
+	}
+}
