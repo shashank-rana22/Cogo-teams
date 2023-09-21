@@ -1,7 +1,6 @@
 import { addDays, subtractDays } from '@cogoport/utils';
 
 const TODAY = new Date();
-const TWO = 2;
 const ONE = 1;
 const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 	const mapping = {
@@ -21,26 +20,13 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 		upload_shipping_instruction: {
 			task_attributes: [
 				{
+					...(isCriticalOn ? { status: 'pending' } : {}),
 					assigned_taskholder: 'service_ops2',
 				},
 				{
-					task   : 'upload_si',
+					task   : 'upload_booking_note',
 					status : 'completed',
 				},
-				{
-					task   : 'update_si_filled_at',
-					status : 'pending',
-				},
-			],
-			service_state: [
-				'init',
-				'awaiting_service_provider_confirmation',
-				'confirmed_by_service_provider',
-			],
-			state: [
-				'in_progress',
-				'shipment_received',
-				'confirmed_by_importer_exporter',
 			],
 		},
 
@@ -115,7 +101,18 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 };
 
 const CRITICAL_TABS = {
-	upload_shipping_instruction   : { si_cutoff_less_than: addDays(TODAY, TWO) },
+	upload_shipping_instruction: {
+		task_attributes: [
+			{
+				task   : 'upload_si',
+				status : 'completed',
+			},
+			{
+				task   : 'update_si_filled_at',
+				status : 'pending',
+			},
+		],
+	},
 	upload_draft_bil_of_lading    : { si_filed_at_less_than: subtractDays(TODAY, ONE) },
 	confirmed_by_service_provider : { si_cutoff_less_than: addDays(TODAY, ONE) },
 	bl_approval_pending           : { schedule_departure_less_than: TODAY },

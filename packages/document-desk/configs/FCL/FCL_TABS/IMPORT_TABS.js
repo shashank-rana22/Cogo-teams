@@ -35,17 +35,14 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 					task   : 'upload_booking_note',
 					status : 'completed',
 				},
-				{
-					task   : 'mark_container_gated_in',
-					status : 'pending',
-				},
 			],
 			state: [
 				'in_progress',
 				'shipment_received',
 				'confirmed_by_importer_exporter',
 			],
-			bl_uploaded: true,
+			bl_uploaded             : false,
+			containers_not_gated_in : true,
 		},
 
 		amendment_requested_by_importer_exporter: {
@@ -55,7 +52,7 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 					assigned_stakeholder: 'service_ops2',
 				},
 			],
-			document_amendment_requested: true,
+			bl_amendment_requested: true,
 		},
 
 		do_approval_pending_import: {
@@ -95,23 +92,22 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 			task_attributes: [
 				{
 					assigned_stakeholder: 'service_ops2',
+					...(isCriticalOn ? { status: 'pending' } : {}),
 				},
 				{
 					task   : 'mark_vessel_departed',
 					status : 'completed',
 				},
-				{
-					task   : 'upload_bill_of_lading',
-					status : 'pending',
-				},
 			],
-			bl_approval_completed: true,
+			bl_lading_not_uploaded : true,
+			bl_approval_completed  : true,
 		},
 
 		agent_invoice: {
 			task_attributes: [
 				{
 					assigned_stakeholder: 'service_ops2',
+					...(isCriticalOn ? { status: 'pending' } : {}),
 				},
 				{
 					task   : 'upload_bill_of_lading',
@@ -124,12 +120,7 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 		telex: {
 			task_attributes: [
 				{
-					task   : 'update_mbl_collection_status',
-					status : 'pending',
-				},
-				{
-					task   : 'update_hbl_collection_status',
-					status : 'pending',
+					assigned_stakeholder: 'service_ops2',
 				},
 				{
 					task   : 'mark_vessel_departed',
@@ -143,13 +134,25 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 					task   : 'mark_container_gated_in',
 					status : 'completed',
 				},
-
 			],
-			completed_collections : true,
-			bl_approval_completed : true,
+
+			hbl_mbl_collection_not_completed : true,
+			completed_collections            : true,
+			bl_approval_completed            : true,
 		},
 
 		completed: {
+			task_attributes: [
+
+				{
+					task   : 'update_mbl_collection_status',
+					status : 'completed',
+				},
+				{
+					task   : 'update_hbl_collection_status',
+					status : 'completed',
+				},
+			],
 			service_state: ['vessel_arrived', 'containers_gated_out', 'completed'],
 		},
 
@@ -167,7 +170,7 @@ const CRITICAL_TABS = {
 		si_cutoff_less_than : addDays(TODAY, THREE),
 		bl_uploaded         : false,
 	},
-	do_approval_pending_import               : { gate_in_cutoff_less_than: addDays(TODAY, ONE) },
+	do_approval_pending_import               : { gate_in_cutoff: addDays(TODAY, ONE) },
 	vessel_departed_import                   : { schedule_departure_less_than: TODAY },
 	amendment_requested_by_importer_exporter : {
 		schedule_departure_less_than : addDays(TODAY, FOUR),
