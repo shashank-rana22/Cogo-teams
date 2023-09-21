@@ -2,6 +2,8 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
+const MAX_COUNT = 99;
+
 const getTabMappings = ({
 	unReadChatsCount = 0,
 	unReadMailsCount = 0,
@@ -15,13 +17,13 @@ const getTabMappings = ({
 		{
 			label : 'Chats',
 			value : 'message',
-			badge : unReadChatsCount,
+			badge : unReadChatsCount > MAX_COUNT ? '99+' : unReadChatsCount,
 			show  : true,
 		},
 		{
 			label : 'Calls',
 			value : 'voice',
-			badge : unReadMissedCallCount,
+			badge : unReadMissedCallCount > MAX_COUNT ? '99+' : unReadMissedCallCount,
 			show  : geo.others.navigations.cogo_one.has_voice_call_access,
 		},
 		{
@@ -32,7 +34,7 @@ const getTabMappings = ({
 		{
 			label : 'Mails',
 			value : 'firebase_emails',
-			badge : unReadMailsCount,
+			badge : unReadMailsCount > MAX_COUNT ? '99+' : unReadMailsCount,
 			show  : true,
 		},
 		{

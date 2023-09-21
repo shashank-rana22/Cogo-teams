@@ -60,6 +60,7 @@ function CogoOne() {
 	const [sendBulkTemplates, setSendBulkTemplates] = useState(false);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
+	const [mailAttachments, setMailAttachments] = useState([]);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -70,16 +71,11 @@ function CogoOne() {
 	});
 
 	const {
-		viewType: initialViewType = '',
-		loading: workPrefernceLoading = false,
+		viewType: initialViewType = '', loading: workPrefernceLoading = false,
 		userSharedMails = [],
 	} = useAgentWorkPrefernce();
 
-	const {
-		fetchWorkStatus = () => {},
-		agentWorkStatus = {},
-		preferenceLoading = false,
-	} = useGetAgentPreference();
+	const { fetchWorkStatus = () => {}, agentWorkStatus = {}, preferenceLoading = false } = useGetAgentPreference();
 
 	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
 
@@ -107,6 +103,8 @@ function CogoOne() {
 		userId,
 		userName,
 		resetEmailState: () => setEmailState(DEFAULT_EMAIL_STATE),
+		setMailAttachments,
+		mailAttachments,
 	};
 
 	const commonProps = {

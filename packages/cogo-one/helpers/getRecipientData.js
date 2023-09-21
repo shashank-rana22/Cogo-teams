@@ -93,6 +93,7 @@ export function getRecipientData({
 		setButtonType = () => {},
 		setEmailState = () => {},
 		buttonType = '',
+		setMailAttachments = () => {},
 	} = mailProps || {};
 
 	const { response = {}, created_at = '', id = '', parent_email_message = {} } = eachMessage || {};
@@ -106,6 +107,7 @@ export function getRecipientData({
 		cc_mails = [],
 		bcc_mails = [],
 		message_id = '',
+		attachments = [],
 	} = response || {};
 
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
@@ -144,6 +146,7 @@ export function getRecipientData({
 				}),
 			);
 
+			setMailAttachments(attachments);
 			return;
 		}
 
