@@ -1,51 +1,27 @@
 import { Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
 const useUpdateOrganizationService = () => {
+	const router = useRouter();
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_organization_service',
 		method : 'POST',
 	}, { manual: true });
 
-	const onSubmit = async ({ service_type = '', org_id = '', data = {}, service_data = {} }) => {
-		const location_pairs = Object.keys(
-			service_data?.service_data?.location_pairs || [],
-		)?.map((val) => {
-			const key = service_data?.service_data?.location_pairs?.[val];
-			if (key?.location_id) {
-				return {
-					location_id : key?.location_id,
-					trade_type  : key?.trade_type,
-					total_teus  : key?.total_teus,
-					user_id     : key?.user_id,
-				};
-			}
-			return {
-				origin_location_id      : key?.origin_location_id,
-				destination_location_id : key?.destination_location_id,
-				total_teus              : key?.total_teus,
-				user_id                 : key?.user_id,
-			};
-		});
+	const apiTrigger = useCallback(async ({ data = {} }) => {
 		try {
-			await trigger({
-				data: {
-					service_data: {
-						location_pairs: [...location_pairs],
-						...data?.requested_service?.service_data,
-					},
-					organization_id       : org_id,
-					service               : service_type,
-					delete_rest_expertise : false,
-				},
-			});
+			await trigger({ data });
 			Toast.success('service updated successfully');
+			router.push('/service-management');
 		} catch (error) {
 			toastApiError(error);
 		}
-	};
-	return { loading, onSubmit };
+	}, [trigger, router]);
+
+	return { loading, apiTrigger };
 };
 export default useUpdateOrganizationService;

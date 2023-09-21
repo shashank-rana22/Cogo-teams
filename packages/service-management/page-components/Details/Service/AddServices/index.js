@@ -11,9 +11,10 @@ function AddServices({
 	service_type = '',
 	org_id = '',
 	selected = [],
-	data = {},
 	setIsEdit = () => { },
 	locations_prefill = [],
+	service_data = {},
+	// data = {},
 }) {
 	const controls = getControls({ organization_id: org_id });
 	const {
@@ -21,7 +22,7 @@ function AddServices({
 		handleSubmit,
 	} = useForm({ defaultValues: { location_pairs: locations_prefill } });
 
-	const { onSubmit: addUpdateHandle = () => { } } = useUpdateOrganizationService();
+	const { apiTrigger: addUpdateHandle = () => { } } = useUpdateOrganizationService();
 
 	const fieldKey = PORT_PAIR_SERVICES.includes(service_type)
 		? 'location_pairs'
@@ -48,7 +49,34 @@ function AddServices({
 		const formattedData = {
 			service_data: { [fieldKey]: locations },
 		};
-		await addUpdateHandle({ service_data: formattedData, service_type, org_id, data });
+		const locationPairs = formattedData?.service_data?.location_pairs.map((item) => {
+			const keys = Object.keys(item);
+			if (keys.includes('location_id')) {
+				return {
+					location_id : item?.location_id,
+					trade_type  : item?.trade_type,
+					total_teus  : item?.total_teus,
+					user_id     : item?.user_id,
+				};
+			}
+			return {
+				origin_location_id      : item?.origin_location_id,
+				destination_location_id : item?.destination_location_id,
+				total_teus              : item?.total_teus,
+				user_id                 : item?.user_id,
+			};
+		});
+		formattedData.service_data.location_pairs = locationPairs;
+		formattedData.service_data = { ...service_data, ...formattedData.service_data };
+
+		await addUpdateHandle({
+			data: {
+				service_data          : formattedData?.service_data,
+				service               : service_type,
+				organization_id       : org_id,
+				delete_rest_expertise : false,
+			},
+		});
 		setIsEdit(false);
 	};
 

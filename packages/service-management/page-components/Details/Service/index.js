@@ -15,7 +15,7 @@ import OptedRecommendedServices from './OptedRecommendedServices';
 import RecommendedServices from './RecommendedServices';
 import styles from './styles.module.css';
 
-function Service({ item = {} }) {
+function Service({ item = {}, service_data = {} }) {
 	const { data = {}, loading = false, filters = {}, setFilters = () => { } } = useListOrganizationServiceExpertises({
 		defaultFilters: {
 			organization_id : item?.organization_id,
@@ -133,6 +133,7 @@ function Service({ item = {} }) {
 							data={data}
 							isEdit={isEdit}
 							locations_prefill={prefill}
+							service_data={service_data}
 						/>
 					</div>
 				)}
