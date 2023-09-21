@@ -17,7 +17,7 @@ function RenderLabel({ label = '' }) {
 	return (
 		<div>
 			{label}
-			<span style={{ color: 'red' }}>*</span>
+			<span style={{ color: '#ee3425' }}>*</span>
 		</div>
 	);
 }
