@@ -104,8 +104,7 @@ function UserOnboard({ leadsData = {}, defaultValues = {}, refetchList = () => {
 						},
 						pattern: {
 							value   : countrySpecificPattern,
-							message : `${countrySpecificLabel}
-								Number is invalid`,
+							message : `${countrySpecificLabel} Number is invalid`,
 						},
 					}}
 				/>
