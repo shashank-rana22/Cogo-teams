@@ -15,7 +15,21 @@ const EMPTY_PATH = '/empty';
 
 const COOKIE_EXPIRY = -1;
 
-const useLoginAuthenticate = () => {
+const getFormattedPayload = ({ mobileNumber = {}, otpId = '', otpValue = '' }) => ({
+	id                  : otpId,
+	mobile_otp          : otpValue,
+	mobile_number       : mobileNumber?.number,
+	mobile_country_code : mobileNumber?.country_code,
+	auth_scope          : 'partner',
+	platform            : 'admin',
+});
+
+const useLoginAuthenticate = ({
+	mobileNumber = {},
+	otpId = '',
+	otpValue = '',
+	type = '',
+}) => {
 	const router = useRouter();
 
 	const { t } = useTranslation(['login']);
@@ -32,6 +46,13 @@ const useLoginAuthenticate = () => {
 		method : 'post',
 	}, { manual: true });
 
+	const [{ loading: otpLoading }, triggerOtp] = useRequest(
+		{
+			url    : 'login_user_with_mobile',
+			method : 'post',
+		},
+		{ manual: true },
+	);
 	const [{ loading: sessionLoading }, triggerSession] = useAuthRequest({
 		url    : '/get_user_session',
 		method : 'get',
@@ -96,11 +117,11 @@ const useLoginAuthenticate = () => {
 	}, [profile, router, source]);
 
 	const onSubmit = async (values, e) => {
-		e.preventDefault();
+		e?.preventDefault();
 		try {
 			let is_already_added_email = false;
 			let user_data = {};
-
+			const userPayload = getFormattedPayload({ mobileNumber, otpId, otpValue });
 			if (cogo_admin_auth_token) {
 				const mapping_response = await triggerUserSessionMapping({
 					params: { parent_user_session_id: cogo_admin_auth_token },
@@ -127,17 +148,26 @@ const useLoginAuthenticate = () => {
 
 				return;
 			}
+			let response = {};
 
-			const response = await trigger({
-				data: {
-					...values,
-					auth_scope   : 'partner',
-					platform     : 'admin',
-					parent_token : cogo_admin_auth_token || undefined,
-				},
-			});
+			if (type === 'eamil_auth') {
+				response = await trigger({
+					data: {
+						...values,
+						auth_scope   : 'partner',
+						platform     : 'admin',
+						parent_token : cogo_admin_auth_token || undefined,
+					},
+				});
+			}
 
-			const { token } = response.data || {};
+			if (type === 'otp_auth') {
+				response = await triggerOtp({
+					data: userPayload,
+				});
+			}
+
+			const { token } = response?.data || {};
 
 			const payload = {
 				active_user_session_id : token,
@@ -177,7 +207,8 @@ const useLoginAuthenticate = () => {
 
 	return {
 		onSubmit,
-		loading: loginLoading || sessionLoading || updateSessionMappingLoading || userSessionMappingLoading,
+		loading: loginLoading || sessionLoading || updateSessionMappingLoading
+		|| userSessionMappingLoading || otpLoading,
 		source,
 	};
 };

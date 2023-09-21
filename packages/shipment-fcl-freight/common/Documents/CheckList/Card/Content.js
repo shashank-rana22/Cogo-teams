@@ -22,6 +22,12 @@ const SUPPLIER_STAKEHOLDERS = [
 	'superadmin',
 ];
 
+const KAM_STAKEHOLDERS = [
+	'booking_agent',
+	'consignee_shipper_booking_agent',
+	'booking_agent_manager',
+];
+
 const PRINTABLE_DOCS = ['draft_house_bill_of_lading'];
 
 function Content({
@@ -60,7 +66,10 @@ function Content({
 		'bill_of_lading',
 	].includes(uploadedItem?.document_type);
 
-	const isRestrictedExportBlDo = (isHBLMBL && tradeType === 'export' && isSeaway && isEmpty(bl_details));
+	const isRestrictedExportBlDo = isHBLMBL && tradeType === 'export' && isEmpty(bl_details) && (
+		KAM_STAKEHOLDERS.includes(activeStakeholder) ? true : isSeaway
+	);
+
 	const isRestrictedImportBlDo = (uploadedItem?.document_type === 'bill_of_lading' && tradeType === 'import'
 	&& isEmpty(do_details) && activeStakeholder !== 'document_control_manager');
 
