@@ -9531,6 +9531,12 @@ const partner = {
 			feature     : 'JournalVoucher',
 		},
 		{
+			api         : 'post_payments_parent_jv_bulk_jv_upload',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
 			api         : 'post_payments_parent_jv_post_to_sage',
 			access_type : 'private',
 			module      : 'JournalVoucher',
