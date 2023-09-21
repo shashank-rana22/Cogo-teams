@@ -81,7 +81,7 @@ const getPayload = ({
 		csr_sheet_id           : id,
 		sheet_index            : DEFAULT_VALUE_FOR_SHEET_INDEX,
 		organization_id        : geo.uuid.freight_force_org_id,
-		invoice_type_line_item : taskType === 'terminal' ? 'terminal_handling_charge' : 'gate_pass_charge',
+		invoice_type_line_item : taskType === 'terminal' ? 'thc' : 'gic',
 		billing_party_detail   : {
 			organization_id : cogo_entity_id,
 			cin,
