@@ -8,8 +8,8 @@ function ShipmentAuditFunction() {
 
 	const handleClick = () => {
 		push(
-			'/business-finance/shipment-audit-function/next-page',
-			'/business-finance/shipment-audit-function/next-page',
+			'/business-finance/coe-finance/next-page',
+			'/business-finance/coe-finance/next-page',
 		);
 	};
 

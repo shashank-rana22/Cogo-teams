@@ -100,10 +100,6 @@ const businessFinance = {
 		navigation : 'business_finance-cogo_financials',
 		isMainNav  : true,
 	},
-	'/[partner_id]/business-finance/shipment_audit_function': {
-		navigation : 'business_finance-shipment_audit_function',
-		isMainNav  : true,
-	},
 };
 
 export default businessFinance;
