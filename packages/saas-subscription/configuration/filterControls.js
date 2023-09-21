@@ -1,6 +1,6 @@
 const filterControls = [
 	{
-		name        : 'plan_id',
+		name        : 'plan_ids',
 		type        : 'asyncSelect',
 		label       : 'Select Plan',
 		placeholder : 'Select Plan',
