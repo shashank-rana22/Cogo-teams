@@ -7,3 +7,8 @@
 	align-items: center;
 	justify-content: flex-end;
 }
+
+.upload_button {
+	display: flex;
+	justify-content: space-between;
+}

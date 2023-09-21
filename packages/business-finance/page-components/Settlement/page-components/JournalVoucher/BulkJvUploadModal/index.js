@@ -24,7 +24,7 @@ function BulkJvUpload({ showBulkJV = false, setShowBulkJV = () => {} }) {
 				<div>
 					<FileUploader
 						value={fileValue}
-						onChange={(val) => { setFileValue(val); }}
+						onChange={(val) => setFileValue(val)}
 						showProgress
 						draggable
 						accept=".xlsx"
@@ -52,9 +52,9 @@ function BulkJvUpload({ showBulkJV = false, setShowBulkJV = () => {} }) {
 
 			</Modal.Body>
 			<Modal.Footer>
-				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+				<div className={styles.upload_button}>
 					<Button
-						onClick={() => { getUploadApi(); }}
+						onClick={() => getUploadApi()}
 						disabled={!fileValue}
 						loading={bulkJvLoading}
 						style={{ marginLeft: '10px' }}
