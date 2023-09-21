@@ -69,7 +69,15 @@ function CustomerContacts({
 
 	return (
 		<>
-			<UserOnboard leadsData={leadsData} defaultValues={defaultValues} refetchList={refetchList} />
+			<UserOnboard
+				leadsData={leadsData}
+				defaultValues={defaultValues}
+				refetchList={refetchList}
+				task={task}
+				shipment_data={shipment_data}
+				setConsigneeId={setConsigneeId}
+				setStep={setStep}
+			/>
 
 			<div className={styles.main_container}>
 				<h4>Customer Contacts</h4>

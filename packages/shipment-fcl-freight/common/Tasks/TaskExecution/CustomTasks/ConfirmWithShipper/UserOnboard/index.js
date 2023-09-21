@@ -17,7 +17,15 @@ function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
-function UserOnboard({ leadsData = {}, defaultValues = {}, refetchList = () => {} }) {
+function UserOnboard({
+	leadsData = {},
+	defaultValues = {},
+	refetchList = () => {},
+	task = {},
+	shipment_data = {},
+	setConsigneeId = () => {},
+	setStep = () => {},
+}) {
 	const {
 		control,
 		formState:{ errors = {} },
@@ -49,7 +57,7 @@ function UserOnboard({ leadsData = {}, defaultValues = {}, refetchList = () => {
 	const {
 		updateLoading = false,
 		updateLeadOrganization = () => {},
-	} = useUpdateLeadOrganization({ leadsData, refetchList });
+	} = useUpdateLeadOrganization({ leadsData, refetchList, task, shipment_data, setConsigneeId, setStep });
 
 	const { business_name = '', country_id = '', registration_number = '' } = leadsData || {};
 
