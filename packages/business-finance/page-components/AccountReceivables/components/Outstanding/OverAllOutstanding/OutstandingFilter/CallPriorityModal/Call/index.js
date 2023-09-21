@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import callConfig from '../../../../../../configs/callConfig';
@@ -19,15 +18,6 @@ function Call({ orgData = {} }) {
 	} = useGetOrganizationComLogs({ orgData, communication_type: 'call' });
 	return (
 		<div className={styles.container}>
-			<div className={styles.buttons}>
-				<Button
-					themeType="primary"
-					className={styles.feedback}
-					onClick={() => setShowLog(true)}
-				>
-					Add Call Feedback
-				</Button>
-			</div>
 			<LogModal
 				showLog={showLog}
 				setShowLog={setShowLog}
