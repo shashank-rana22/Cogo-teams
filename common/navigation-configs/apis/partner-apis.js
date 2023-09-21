@@ -9531,6 +9531,12 @@ const partner = {
 			feature     : 'JournalVoucher',
 		},
 		{
+			api         : 'post_payments_parent_jv_bulk_jv_upload',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
 			api         : 'post_payments_parent_jv_post_to_sage',
 			access_type : 'private',
 			module      : 'JournalVoucher',
@@ -9659,6 +9665,11 @@ const partner = {
 			api          : 'list_shipment_collection_party',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+		{
+			api          : 'get_incident_management_incident_job_reopen_incident_exists',
+			access_type  : 'private',
+			service_name : 'incident-management',
 		},
 		{
 			api          : 'post_incident_management_incident',
