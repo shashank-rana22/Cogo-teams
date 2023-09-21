@@ -49,13 +49,13 @@ const useGetAdvancePaymentList = ({
 		search       : undefined,
 		service      : undefined,
 		documentType : undefined,
-		dateRange    : undefined,
+		dateRange    : { startDate: '', endDate: '' },
 		pageIndex    : 1,
 	});
 	const [apiData, setApiData] = useState({ list: [] });
 
 	const { search, service, documentType, dateRange, pageIndex } = filters || {};
-	const { startDate, endDate } = dateRange;
+	const { startDate = '', endDate = '' } = dateRange;
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const { query: urlQuery } = useSelector(({ general }) => ({
 		query: general.query,
