@@ -9,15 +9,16 @@ function ToolTipContent({ content = [] }) {
 	const totalFunctionPills = content?.length;
 
 	if (totalFunctionPills <= FIRST_INDEX) {
-		(content).map((item) => (
-			<Pill
-				key={item}
-				className={styles.function_head}
-				color="red"
-			>
-				{item}
-			</Pill>
-		));
+		return (
+			(content).map((item) => (
+				<Pill
+					key={item}
+					className={styles.function_head}
+					color="red"
+				>
+					{item}
+				</Pill>
+			)));
 	}
 
 	const renderTooltip = content.slice(FIRST_INDEX).map((item) => (
@@ -39,7 +40,7 @@ function ToolTipContent({ content = [] }) {
 					</Pill>
 				)}
 
-				{totalFunctionPills > FIRST_INDEX && (
+				{totalFunctionPills > FIRST_INDEX ? (
 					<Tooltip content={renderTooltip} placement="top">
 						<strong>
 							(+
@@ -47,7 +48,7 @@ function ToolTipContent({ content = [] }) {
 							)
 						</strong>
 					</Tooltip>
-				)}
+				) : null}
 
 			</div>
 		</section>

@@ -22,11 +22,11 @@ const columns = [
 	},
 	{
 		Header   : 'Iec Numbers',
-		accessor : ({ iec_numbers = [] }) => {
+		accessor : ({ iec_numbers = [] }) => (
 			<section>
 				<ToolTipContent content={iec_numbers} />
-			</section>;
-		},
+			</section>
+		),
 	},
 	{
 		Header   : 'Tax Numbers',

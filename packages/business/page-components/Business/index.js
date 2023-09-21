@@ -8,7 +8,14 @@ import Header from '../Header';
 import styles from './styles.module.css';
 
 function Business() {
-	const { loading, data, filters, setFiters, refetch, apiTrigger } = useGetListBusinessEntities();
+	const {
+		loading = false,
+		data = {},
+		filters = {},
+		setFiters = () => {},
+		refetch = () => {},
+		apiTrigger = () => {},
+	} = useGetListBusinessEntities();
 
 	return (
 		<div>
