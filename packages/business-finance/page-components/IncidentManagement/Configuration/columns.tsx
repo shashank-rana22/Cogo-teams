@@ -13,7 +13,7 @@ import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
 export const columns = ({
-	setIsAscendingActive = () => {}, setFilters = () => {},
+	setIsAscendingActive, setFilters,
 	isAscendingActive, getIncidentData, activeTab, t,
 	detailsModal = {}, setDetailsModal = () => { },
 }) => [
