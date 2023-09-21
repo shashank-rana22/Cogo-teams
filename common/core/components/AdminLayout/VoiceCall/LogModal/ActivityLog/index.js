@@ -13,6 +13,7 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import FeedbackComponent from '../FeedbackComponent';
+import COMMUNICATION_OPTIONS from '@cogoport/constants/call-status-options.json'
 
 import styles from './styles.module.css';
 
@@ -23,24 +24,6 @@ const CALL_OPTIONS = [
 	{ label: 'Platform Demo', value: 'platformDemo' },
 ];
 
-const COMMUNICATION_OPTIONS = [
-	{ label: 'Answered', value: 'answered' },
-	{ label: 'Not Answered', value: 'unanswered' },
-	{ label: 'Wrong Number', value: 'wrong_number' },
-	{ label: 'Invalid Number', value: 'invalid_number' },
-	{ label: 'Not Reachable', value: 'not_reachable' },
-	{ label: 'Busy', value: 'busy' },
-	{ label: 'Does not exist', value: 'does_not_exist' },
-	{
-		label : 'Does not belong to this user',
-		value : 'does_not_belong_to_this_user',
-	},
-	{
-		label : 'Belongs to the user who has left the company',
-		value : 'belongs_to_user_who_has_left_company',
-	},
-
-];
 
 function ActivityLog({
 	formData = {},
