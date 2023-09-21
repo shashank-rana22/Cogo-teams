@@ -63,6 +63,6 @@ export const getCommunicationPayload = ({
 		cc_emails       : isEmpty(ccrecipients) ? undefined : ccrecipients,
 		bcc_emails      : isEmpty(bccrecipients) ? undefined : bccrecipients,
 		attachment_urls : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
-		source          : 'outstanding',
+		source          : '',
 	};
 };
