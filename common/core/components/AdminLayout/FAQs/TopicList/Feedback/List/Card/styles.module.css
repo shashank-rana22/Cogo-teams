@@ -21,9 +21,28 @@
 .status {
 	padding: 2px 4px;
 	margin-left: 8px;
-	font-size: 10px;
-	border: 1px solid #e0e0e0;
-	border-radius: 4px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.open {
+	color: #d6b300;
+}
+
+.closed {
+	color: #090;
+}
+
+.overdue {
+	color: #8d99ae;
+}
+
+.pending {
+	color: #f68b21;
+}
+
+.escalated {
+	color: #f37166;
 }
 
 .file_status {
@@ -33,6 +52,7 @@
 }
 
 .feedback_number {
+	font-size: 13px;
 	font-weight: 600;
 }
 

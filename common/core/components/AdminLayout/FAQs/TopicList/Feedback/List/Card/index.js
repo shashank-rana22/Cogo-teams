@@ -1,8 +1,10 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
+
+import { STATUS_LABEL_MAPPING, STATUS_MAPPING } from '../../constants';
 
 import styles from './styles.module.css';
 
@@ -17,6 +19,7 @@ function Card({
 }) {
 	const { Attachment: attachment = [] } = data || {};
 	const fileUrl = attachment[GLOBAL_CONSTANTS.zeroth_index];
+	const { value, label } = STATUS_LABEL_MAPPING[STATUS_MAPPING[status]] || {};
 
 	const { query } = useRouter();
 
@@ -47,7 +50,12 @@ function Card({
 								Attachment
 							</Button>
 						)}
-						<div className={styles.status}>{startCase(status)}</div>
+						<div
+							className={cl`${styles.status} ${styles[value]}`}
+						>
+							{startCase(label)}
+
+						</div>
 					</div>
 				</div>
 
