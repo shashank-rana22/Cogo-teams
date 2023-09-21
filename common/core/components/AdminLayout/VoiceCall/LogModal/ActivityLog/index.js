@@ -186,7 +186,7 @@ function ActivityLog({
 						asyncKey="list_organization_users"
 						placeholder="Type to search..."
 						valueKey="user_id"
-						initialCall={false}
+						initialCall
 						control={control}
 						params={{
 							filters: {
