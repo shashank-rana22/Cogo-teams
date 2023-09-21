@@ -9,7 +9,7 @@ const getFormattedPayload = ({ values = {}, leadsData = {} }) => {
 		id                  : leadsData?.id,
 		country_id          : values?.country_id,
 		registration_number : values?.registration_number,
-
+		bypass_duplicacy    : true,
 	};
 
 	return payload;
