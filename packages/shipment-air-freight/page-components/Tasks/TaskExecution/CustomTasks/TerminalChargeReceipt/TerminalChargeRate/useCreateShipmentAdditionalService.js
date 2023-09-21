@@ -4,6 +4,7 @@ import { useRequest } from '@cogoport/request';
 const useCreateShipmentAdditionalService = ({
 	shipmentData = {},
 	setIRNGenerated = () => {},
+	setShowConfirm = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_additional_service',
@@ -37,6 +38,7 @@ const useCreateShipmentAdditionalService = ({
 		try {
 			await trigger({ data: payload });
 			setIRNGenerated(false);
+			setShowConfirm({});
 		} catch (err) {
 			toastApiError(err);
 		}

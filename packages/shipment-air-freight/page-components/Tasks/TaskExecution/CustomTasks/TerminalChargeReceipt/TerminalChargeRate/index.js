@@ -43,6 +43,7 @@ function TerminalChargeRate({
 	const { createShipmentAdditionalService } =	useCreateShipmentAdditionalService({
 		shipmentData,
 		setIRNGenerated,
+		setShowConfirm,
 	});
 
 	const {

@@ -65,7 +65,7 @@ const getPayload = ({
 					discount        : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
 					commission      : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
 					total_tax       : Number(tax_price),
-					weight          : chargeable_weight,
+					weight          : Number(chargeable_weight),
 					currency,
 					tax_total_price : Number(total_tax_price),
 				},

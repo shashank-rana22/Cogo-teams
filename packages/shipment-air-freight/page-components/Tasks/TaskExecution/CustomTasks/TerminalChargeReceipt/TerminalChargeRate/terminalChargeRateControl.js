@@ -28,6 +28,17 @@ const getTerminalChargeRateControl = ({
 
 	const TERMINAL_CHARGE_RATE_CONTROL = [
 		{
+			name        : 'mawb_number',
+			label       : 'MAWB Number',
+			type        : 'text',
+			placeholder : 'Enter MAWB Number (XXX-XXXX-XXXX)',
+			rules       : { required: 'MAWB Number is required' },
+			span        : 6,
+		},
+		{
+			span: 6,
+		},
+		{
 			name     : 'cogo_entity_id',
 			label    : 'Billing Party',
 			type     : 'async-select',
