@@ -3,43 +3,37 @@ import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const SORT_BY = 'created_at';
-const SORT_TYPE = 'asc';
 const PAGE_LIMIT = 10;
 
-const useListConvenienceRateConfigurations = ({
+const useGetListPromotionRule = ({
 	defaultFilters = {},
 	defaultParams = {},
 }) => {
 	const [data, setData] = useState({});
 	const [filters, setFilters] = useState({});
 
-	const { activeList: status = '', activeService: service_type = '' } = defaultFilters || {};
+	const { activeList: status = '', activeService: primary_service = '' } = defaultFilters || {};
 
-	const { page = 1, ...restFilters } = filters || {};
+	const { page = 1 } = filters || {};
 	const [{ loading }, trigger] = useRequest(
 		{
-			url    : '/list_convenience_rate_configurations',
+			url    : '/list_promotion_rules',
 			method : 'GET',
 			params : {
-				filters: {
-					service_type,
-					status,
-					...(defaultFilters || {}),
-					...restFilters,
-				},
-				page_limit               : PAGE_LIMIT,
-				sort_by                  : SORT_BY,
-				sort_type                : SORT_TYPE,
-				pagination_data_required : true,
 				page,
+				page_limit : PAGE_LIMIT,
+				filters    : {
+					primary_service,
+					categories: ['business'],
+					status,
+				},
 				...(defaultParams || {}),
 			},
 		},
 		{ manual: true },
 	);
 
-	const listConvenienceRate = useCallback(async () => {
+	const listPromotionRule = useCallback(async () => {
 		try {
 			const res = await trigger();
 			if (res?.data) {
@@ -52,8 +46,8 @@ const useListConvenienceRateConfigurations = ({
 	}, [trigger]);
 
 	useEffect(() => {
-		listConvenienceRate();
-	}, [listConvenienceRate, filters]);
+		listPromotionRule();
+	}, [listPromotionRule, filters]);
 
 	return {
 		data,
@@ -63,4 +57,4 @@ const useListConvenienceRateConfigurations = ({
 	};
 };
 
-export default useListConvenienceRateConfigurations;
+export default useGetListPromotionRule;

@@ -50,6 +50,7 @@ import notifications from './config/notifications';
 import PERFORMANCE_MANAGEMENT from './config/performance-management';
 import printingDesk from './config/printing-desk';
 import profile from './config/profile';
+import promotions from './config/promotions';
 import referral from './config/referral';
 import resource from './config/resources';
 import revenueDesk from './config/revenue-desk';
@@ -105,6 +106,7 @@ const routeConfig = {
 	...cogoOne,
 	...myProfile,
 	...inventory_management,
+	...promotions,
 	...kamMonitoring,
 	...PERFORMANCE_MANAGEMENT,
 	...supplyAllocation,
