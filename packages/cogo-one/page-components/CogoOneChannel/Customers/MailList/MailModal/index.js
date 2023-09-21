@@ -20,12 +20,12 @@ function MailEditorModal({
 	firestore = {},
 }) {
 	const {
-		buttonType,
-		setEmailState,
-		setButtonType,
-		resetEmailState,
-		setMailAttachments,
-		mailAttachments,
+		buttonType = '',
+		setEmailState = () => {},
+		setButtonType = () => {},
+		resetEmailState = () => {},
+		setMailAttachments = () => {},
+		mailAttachments = [],
 	} = mailProps;
 
 	const uploaderRef = useRef(null);
