@@ -62,9 +62,8 @@ export default function PopoverContent({
 				</>
 			) : null}
 
-			{!invoice?.processing ? (
-				<>
-					{ showCancelOptions?.showCancel ? (
+			{ showCancelOptions?.showCancel
+					&& !invoice?.processing ? (
 						<Button
 							themeType="tertiary"
 							className={styles.text}
@@ -73,9 +72,10 @@ export default function PopoverContent({
 						>
 							Request Cancel E Invoice
 						</Button>
-					) : null}
+				) : null}
 
-					{ showCancelOptions?.showReplace ? (
+			{ showCancelOptions?.showReplace
+					&& !invoice?.processing ? (
 						<Button
 							themeType="tertiary"
 							className={styles.text}
@@ -84,20 +84,19 @@ export default function PopoverContent({
 						>
 							Request Replace E Invoice
 						</Button>
-					) : null}
+				) : null}
 
-					{(invoice.exchange_rate_document || []).map((url) => (
-						<Button
-							key={url}
-							themeType="tertiary"
-							className={styles.text}
-							onClick={() => window.open(url, '_blank')}
-						>
-							Exchange Rate Document
-						</Button>
-					))}
-				</>
-			) : null}
+			{!invoice?.processing
+				? (invoice.exchange_rate_document || []).map((url) => (
+					<Button
+						key={url}
+						themeType="tertiary"
+						className={styles.text}
+						onClick={() => window.open(url, '_blank')}
+					>
+						Exchange Rate Document
+					</Button>
+				)) : null}
 
 		</>
 	);
