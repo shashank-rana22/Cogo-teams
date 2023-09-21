@@ -47,7 +47,7 @@
 }
 
 .user_name_title {
-	width: 100%;
+	width: 90%;
 	overflow: hidden;
 	font-size: 13px;
 	font-weight: 500;
@@ -65,9 +65,7 @@
 	width: 96%;
 	overflow: hidden;
 	font-size: 13px;
-	font-weight: 500;
-
-	/* color: #6c6b6b; */
+	font-weight: 600;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }

@@ -53,9 +53,13 @@ function MessageCardData({
 		subject = '',
 		body = '',
 		body_preview: bodyPreview = '',
+		to_mails = [],
+		sender = '',
 	} = response || {};
 
 	const isImportant = chat_tags?.includes('important') || false;
+
+	const mailToBeShown = activeFolder === 'inbox' ? sender : to_mails.join(',');
 
 	const checkActiveCard = activeTab?.data?.id === id;
 
@@ -104,6 +108,10 @@ function MessageCardData({
 						})}
 					</div>
 				</div>
+			</div>
+
+			<div className={styles.user_name_title}>
+				{mailToBeShown || ''}
 			</div>
 
 			<div className={styles.subject_container}>
