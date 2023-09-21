@@ -4,12 +4,11 @@ import { useState } from 'react';
 
 import getAutoUpsellPayload from '../helpers/getAutoUpsellPayload';
 
-import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
-
 function useCreateAutoUpsellService({
-	task = {}, refetch = () => {}, onCancel = () => {},
-	refetchServices = () => {}, shipment_data = {},
+	task = {},
+	shipment_data = {},
 	consigneeId = '',
+	updatePendingTask = () => {},
 }) {
 	const [countryId, setCountryId] = useState('');
 
@@ -18,35 +17,11 @@ function useCreateAutoUpsellService({
 		method : 'POST',
 	}, { manual: true });
 
-	const taskRefetch = () => {
-		onCancel();
-		refetch();
-		refetchServices();
-	};
-
-	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch: taskRefetch });
-
-	const createAutoUpsellService = async ({ payload, cargo_readiness_date }) => {
+	const createAutoUpsellService = async ({ payload }) => {
 		try {
 			await trigger({ data: payload });
 
-			await apiTrigger({
-				id   : task?.id,
-				data : {
-					pending_task: {
-						id              : task?.id,
-						organization_id : shipment_data?.consignee_shipper_id || consigneeId,
-					},
-					fcl_freight_service: {
-						shipment_id: shipment_data?.id,
-						cargo_readiness_date,
-					},
-					shipment: {
-						id                   : shipment_data?.id,
-						consignee_shipper_id : shipment_data?.consignee_shipper_id || consigneeId,
-					},
-				},
-			});
+			updatePendingTask();
 		} catch (error) {
 			toastApiError(error);
 		}
@@ -60,7 +35,7 @@ function useCreateAutoUpsellService({
 			consigneeId: shipment_data?.consignee_shipper_id || consigneeId,
 		});
 
-		createAutoUpsellService({ payload, cargo_readiness_date: values?.cargo_readiness_date });
+		createAutoUpsellService({ payload });
 	};
 
 	return {

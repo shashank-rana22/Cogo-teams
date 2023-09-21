@@ -14,6 +14,7 @@ import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 
 import useCreateAutoUpsellService from '../../../../../../hooks/useCreateAutoUpsellService';
 import useListOrganizationUsers from '../../../../../../hooks/useListOrganizationUsers';
+import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 import getControls from './getControls';
 import styles from './styles.module.css';
@@ -41,16 +42,52 @@ function BillingAddress({
 	shipment_data = {},
 	consigneeId = '',
 }) {
-	const { control, reset = () => {}, formState:{ errors = {} }, handleSubmit = () => {} } = useForm();
+	const {
+		control, reset = () => {},
+		formState: { errors = {} },
+		handleSubmit = () => {},
+		watch = () => {},
+	} = useForm();
+
+	const taskRefetch = () => {
+		onCancel();
+		refetch();
+		refetchServices();
+	};
 
 	const { loading = false } = useListOrganizationUsers({ shipment_data, reset, consigneeId });
 
+	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch: taskRefetch });
+
+	const { cargo_readiness_date = '' } = watch();
+
+	const updatePendingTask = () => {
+		const updatePendingTaskPayload = {
+			id   : task?.id,
+			data : {
+				pending_task: {
+					id              : task?.id,
+					organization_id : shipment_data?.consignee_shipper_id || consigneeId,
+				},
+				fcl_freight_service: {
+					shipment_id: shipment_data?.id,
+					cargo_readiness_date,
+				},
+				shipment: {
+					id                   : shipment_data?.id,
+					consignee_shipper_id : shipment_data?.consignee_shipper_id || consigneeId,
+				},
+			},
+		};
+
+		apiTrigger({ ...updatePendingTaskPayload });
+	};
 	const {
 		onSubmit = () => {},
 		loading: upsellLoading = false,
 		countryId = '',
 		setCountryId = () => {},
-	} = useCreateAutoUpsellService({ task, refetch, onCancel, refetchServices, shipment_data, consigneeId });
+	} = useCreateAutoUpsellService({ task, shipment_data, consigneeId, updatePendingTask });
 
 	const countryValidation = getCountryConstants({
 		country_id    : countryId,

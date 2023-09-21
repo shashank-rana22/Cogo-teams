@@ -10,12 +10,14 @@ import isEqual from '@cogoport/ocean-modules/utils/isEqual';
 import { useEffect } from 'react';
 
 import useUpdateLeadOrganization from '../../../../../../hooks/useUpdateLeadOrganization';
+import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 import styles from './styles.module.css';
 
 function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
+const ONE = '1';
 
 function UserOnboard({
 	leadsData = {},
@@ -54,10 +56,36 @@ function UserOnboard({
 		isDefaultData : false,
 	});
 
+	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ successMessage: 'Updated Successfully' });
+
+	const updatePendingTask = (res) => {
+		const updatePendingTaskPayload = {
+			id     : task?.id,
+			tags   : [ONE],
+			status : 'pending',
+			data   : {
+				shipment: {
+					id                   : shipment_data?.id,
+					consignee_shipper_id : res?.data?.organization_id,
+				},
+				pending_task: {
+					id              : task?.id,
+					organization_id : res?.data?.organization_id,
+				},
+			},
+		};
+
+		apiTrigger({ ...updatePendingTaskPayload });
+
+		setConsigneeId(res?.data?.organization_id);
+
+		setStep(ONE);
+	};
+
 	const {
 		updateLoading = false,
 		updateLeadOrganization = () => {},
-	} = useUpdateLeadOrganization({ leadsData, refetchList, task, shipment_data, setConsigneeId, setStep });
+	} = useUpdateLeadOrganization({ leadsData, refetchList, updatePendingTask });
 
 	const { business_name = '', country_id = '', registration_number = '' } = leadsData || {};
 

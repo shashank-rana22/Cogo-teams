@@ -2,10 +2,6 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
-
-const ONE = '1';
-
 const getFormattedPayload = ({ values = {}, leadsData = {} }) => {
 	const payload = {
 		account_type        : 'importer_exporter',
@@ -22,13 +18,8 @@ const getFormattedPayload = ({ values = {}, leadsData = {} }) => {
 function useUpdateLeadOrganization({
 	leadsData = {},
 	refetchList = () => {},
-	task = {},
-	shipment_data = {},
-	setConsigneeId = () => {},
-	setStep = () => {},
+	updatePendingTask = () => {},
 }) {
-	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ successMessage: 'Updated Successfully' });
-
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_lead_organization',
 		method : 'POST',
@@ -41,27 +32,7 @@ function useUpdateLeadOrganization({
 			const res = await trigger({ data: payload });
 
 			if (res?.data?.organization_id) {
-				const updatePendingTaskPayload = {
-					id     : task?.id,
-					tags   : [ONE],
-					status : 'pending',
-					data   : {
-						shipment: {
-							id                   : shipment_data?.id,
-							consignee_shipper_id : res?.data?.organization_id,
-						},
-						pending_task: {
-							id              : task?.id,
-							organization_id : res?.data?.organization_id,
-						},
-					},
-				};
-
-				await apiTrigger({ ...updatePendingTaskPayload });
-
-				setConsigneeId(res?.data?.organization_id);
-
-				setStep(ONE);
+				updatePendingTask(res);
 			} else {
 				refetchList();
 			}
