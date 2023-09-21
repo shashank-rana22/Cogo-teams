@@ -1,6 +1,6 @@
 .collection_party {
 	display: flex;
-	border: 1px solid black;
+	border: 1px solid #000;
 
 	@media (max-width: 768px) {
 		display: block;

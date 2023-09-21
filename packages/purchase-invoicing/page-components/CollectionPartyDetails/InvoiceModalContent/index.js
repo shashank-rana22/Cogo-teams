@@ -101,27 +101,23 @@ function IndexModalContent({
 			<div className={styles.collection_party}>
 				{(formControls || []).map((item) => {
 					const ele = { ...item };
-					if (ele.name === 'collection_party') {
-						return (
-							<div key={ele.name} className={styles.controller}>
-								<div style={{ marginLeft: '20px' }}>{ele.label}</div>
+					return (
+						<div key={ele.name} className={styles.controller}>
+							<div style={{ marginLeft: '20px' }}>{ele.label}</div>
+							{ele.name === 'collection_party' ? (
 								<AsyncSelectController
 									{...ele}
 									key={ele.name}
 									control={control}
 								/>
-							</div>
-						);
-					}
-					return (
-						<div key={ele.name} className={styles.controller}>
-							<div style={{ marginLeft: '20px' }}>{ele.label}</div>
-							<SelectController
-								{...ele}
-								label={ele.label}
-								key={ele.name}
-								control={control}
-							/>
+							) : (
+								<SelectController
+									{...ele}
+									label={ele.label}
+									key={ele.name}
+									control={control}
+								/>
+							)}
 						</div>
 					);
 				})}

@@ -31,7 +31,7 @@ function InvoiceAmountContainer({
 						{invoiceColumns.map((item) => (
 							<div
 								style={{
-									border    : '1px solid black',
+									border    : '1px solid #000',
 									width     : '100%',
 									textAlign : 'center',
 								}}
@@ -45,7 +45,7 @@ function InvoiceAmountContainer({
 			</div>
 			<div style={styles.total_amount}>
 				<div style={styles.amount_container}>
-					<b>
+					<strong>
 						{formatAmount({
 							amount   : calculatedValues.total_tax_amount || ZERO,
 							currency : formValues?.invoice_currency,
@@ -55,10 +55,10 @@ function InvoiceAmountContainer({
 								maximumFractionDigits : 2,
 							},
 						})}
-					</b>
+					</strong>
 				</div>
 				<div style={styles.amount_container}>
-					<b>
+					<strong>
 						{formatAmount({
 							amount   : calculatedValues.sub_total_amount || ZERO,
 							currency : formValues?.invoice_currency,
@@ -68,7 +68,7 @@ function InvoiceAmountContainer({
 								maximumFractionDigits : 2,
 							},
 						})}
-					</b>
+					</strong>
 				</div>
 			</div>
 		</div>

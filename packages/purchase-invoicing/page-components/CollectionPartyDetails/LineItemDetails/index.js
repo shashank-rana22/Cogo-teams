@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import React from 'react';
 
@@ -132,12 +132,12 @@ function LineItemDetails({
 							+ Add
 						</Button>
 					</div>
-					<div className={`${styles.flex} ${styles.spacebetween}`}>
+					<div className={cl`${styles.flex} ${styles.spacebetween}`}>
 						<div className={styles.padding}>
 							<div>T: Taxable P: Pure Agent E: Exempted N: Nil Rated</div>
 							<div>NG: Non GST R: Reverse Charge</div>
 						</div>
-						<div className={`${styles.flex} ${styles.label}`}>
+						<div className={cl`${styles.flex} ${styles.label}`}>
 							{
 								Object.entries(LINE_ITEMS_DETAILS).map(([key, item]) => (
 									<div key={key} className={styles.amount}>
@@ -155,7 +155,7 @@ function LineItemDetails({
 						</div>
 					</div>
 				</div>
-				<div className={`${styles.total} ${styles.tax}`}>
+				<div className={cl`${styles.total} ${styles.tax}`}>
 					<div>Total Amount After Tax :</div>
 					<span className={styles.keyvalue}>
 						{getFormattedAmount(calculatedValues?.invoice_amount || DEFAULT_AMOUNT_VALUE, invoiceCurrency)}

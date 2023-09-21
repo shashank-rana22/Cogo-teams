@@ -9,7 +9,7 @@ function InvoiceHeaderContainer({
 	return (
 		<div style={styles.header_container}>
 			<div style={styles.customer_info}>
-				<b>{serviceProviderTradePartyObj?.business_name}</b>
+				<strong>{serviceProviderTradePartyObj?.business_name}</strong>
 				<div style={{ paddingTop: '5px' }}>
 					<div>
 						{billingAddress?.address}
@@ -32,7 +32,7 @@ function InvoiceHeaderContainer({
 			</div>
 			<div style={styles.invoice_type}>
 				<div style={styles.proforma}>
-					<b>{formValues.invoice_type}</b>
+					<strong>{formValues.invoice_type}</strong>
 				</div>
 				<img src={imageSrc} alt="Cogoport" height="40px" />
 			</div>

@@ -2107,7 +2107,6 @@ importers:
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.6
       file-saver: ^2.0.5
-      number-to-words: ^1.2.4
       react: 18.2.0
       uuid: ^9.0.0
     dependencies:
@@ -2123,7 +2122,6 @@ importers:
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
       file-saver: 2.0.5
-      number-to-words: 1.2.4
       react: 18.2.0
       uuid: 9.0.0
 

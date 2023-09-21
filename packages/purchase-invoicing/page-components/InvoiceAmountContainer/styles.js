@@ -3,7 +3,7 @@ const styles = {
 		border: '1px solid #000',
 	},
 	column_headings: {
-		border    : '1px solid black',
+		border    : '1px solid #000',
 		display   : 'flex',
 		minHeight : '25px',
 		fontSize  : '15px',

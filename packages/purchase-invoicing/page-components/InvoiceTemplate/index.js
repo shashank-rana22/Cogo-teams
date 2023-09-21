@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase } from '@cogoport/utils';
-import converter from 'number-to-words';
+import { startCase, toWords } from '@cogoport/utils';
 import { useRef } from 'react';
 
 import useGeneratePdf from '../../hooks/useGeneratePdf';
@@ -102,10 +101,10 @@ function InvoiceTemplate({
 	if (calculatedValues.invoice_amount) {
 		try {
 			amountInWords = startCase(
-				converter.toWords(calculatedValues.invoice_amount),
+				toWords(calculatedValues.invoice_amount),
 			);
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	}
 

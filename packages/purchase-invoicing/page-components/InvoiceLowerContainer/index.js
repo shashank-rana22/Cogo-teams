@@ -13,17 +13,17 @@ function InvoiceLowerContainer({
 		<div style={styles.fourth_container}>
 			<div style={{ display: 'flex' }}>
 				<div style={styles.amount}>
-					<b>
+					<strong>
 						Total Payable in Words :
 						{' '}
 						{formValues?.invoice_currency}
 						{' '}
 						{amountInWords || '-'}
-					</b>
+					</strong>
 				</div>
 				<div style={styles.tax}>
 					<div>
-						<b>
+						<strong>
 							Total Amount Before Tax:
 							{' '}
 							{formatAmount({
@@ -35,10 +35,10 @@ function InvoiceLowerContainer({
 									maximumFractionDigits : 2,
 								},
 							})}
-						</b>
+						</strong>
 					</div>
 					<div>
-						<b>
+						<strong>
 							Total Amount After Tax:
 							{' '}
 							{formatAmount({
@@ -50,23 +50,23 @@ function InvoiceLowerContainer({
 									maximumFractionDigits : 2,
 								},
 							})}
-						</b>
+						</strong>
 					</div>
 				</div>
 			</div>
 			<div style={{ display: 'flex' }}>
 				<div style={styles.remarks}>
-					<b>
+					<strong>
 						Remarks:
 						{' '}
 
-					</b>
+					</strong>
 					<div>
 						{formValues?.remarks || ''}
 					</div>
 				</div>
 				<div style={styles.signature}>
-					<b> Authorised Signatory </b>
+					<strong> Authorised Signatory </strong>
 				</div>
 			</div>
 		</div>

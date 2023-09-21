@@ -27,10 +27,10 @@ function InvoiceDetailsContainer({
 		<div style={styles.details_container}>
 			<div style={styles.billing_party_details}>
 				<div style={{ textAlign: 'center' }}>
-					<b>Ship To Customer</b>
+					<strong>Ship To Customer</strong>
 				</div>
 				<div style={styles.block}>
-					<b>{business_name}</b>
+					<strong>{business_name}</strong>
 					<div style={{ paddingTop: '5px' }}>
 						<div>{address}</div>
 						<div>
@@ -61,10 +61,10 @@ function InvoiceDetailsContainer({
 			</div>
 			<div style={styles.billing_party_address}>
 				<div style={{ textAlign: 'center' }}>
-					<b>Bill To Customer</b>
+					<strong>Bill To Customer</strong>
 				</div>
 				<div style={styles.block}>
-					<b>COGOPORT PRIVATE LIMITED</b>
+					<strong>COGOPORT PRIVATE LIMITED</strong>
 					<div>
 						{`${address} , ${city?.name} - ${pin_code} , ${country.name}`}
 					</div>
@@ -87,26 +87,26 @@ function InvoiceDetailsContainer({
 			</div>
 			<div style={styles.bank_details}>
 				<div style={{ textAlign: 'center' }}>
-					<b>Bank Details</b>
+					<strong>Bank Details</strong>
 				</div>
 				<div style={styles.block}>
 					<div>
-						<b>Account No. :</b>
+						<strong>Account No. :</strong>
 						{' '}
 						{bank_account_number}
 					</div>
 					<div>
-						<b>IFSC Number :</b>
+						<strong>IFSC Number :</strong>
 						{' '}
 						{ifsc_number}
 					</div>
 					<div>
-						<b>Bank Name :</b>
+						<strong>Bank Name :</strong>
 						{' '}
 						{bank_name}
 					</div>
 					<div>
-						<b>Branch Name :</b>
+						<strong>Branch Name :</strong>
 						{branch_name}
 					</div>
 				</div>
@@ -114,11 +114,11 @@ function InvoiceDetailsContainer({
 			<div style={styles.invoice_details}>
 				<div style={styles.block}>
 					<div>
-						<b>Invoice No : </b>
+						<strong>Invoice No : </strong>
 						{tax_invoice_no}
 					</div>
 					<div>
-						<b>Invoice Date : </b>
+						<strong>Invoice Date : </strong>
 						{formatDate({
 							date       : invoice_date,
 							formatType : 'dateTime',
@@ -126,7 +126,7 @@ function InvoiceDetailsContainer({
 						})}
 					</div>
 					<div>
-						<b>Due Date : </b>
+						<strong>Due Date : </strong>
 						{formatDate({
 							date       : due_date,
 							formatType : 'dateTime',
@@ -134,16 +134,16 @@ function InvoiceDetailsContainer({
 						})}
 					</div>
 					<div>
-						<b>Shipment Id : </b>
+						<strong>Shipment Id : </strong>
 						{shipment_data?.serial_id}
 					</div>
 					<div>
-						<b>Place Of Supply : </b>
+						<strong>Place Of Supply : </strong>
 						{formValues?.place_of_supply}
 					</div>
 					{split_type && (
 						<div>
-							<b>Split type : </b>
+							<strong>Split type : </strong>
 							{startCase(split_type)}
 						</div>
 					)}
