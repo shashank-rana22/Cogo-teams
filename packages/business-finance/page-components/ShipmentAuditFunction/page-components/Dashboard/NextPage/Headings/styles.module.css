@@ -1,12 +1,13 @@
 .headings {
-    font-weight:500;
-    font-size: 20px;
-    display: inline-block;
-    margin:12px 0;
+	display: inline-block;
+	margin: 12px 0;
+	font-size: 20px;
+	font-weight: 500;
 }
+
 .line {
-    height:2px;
-    background-color:#ED3726;
-    width: 60%;
-    border-radius: 30px;
+	width: 60%;
+	height: 2px;
+	background-color: #ed3726;
+	border-radius: 30px;
 }
