@@ -13,19 +13,19 @@ function Header({
 	announcementHeaderProps = {},
 	topic = '',
 	setTopic = () => {},
-	question,
-	setQuestion,
-	showHistory,
+	question = null,
+	setQuestion = () => {},
+	showHistory = false,
 	setShowHistory = () => {},
 	setShowFeedback = () => {},
 	setModalData = () => {},
 	showFeedback = '',
 	setShowNotificationContent = () => {},
-	showNotificationContent,
-	refetch,
-	from,
-	setInput,
-	input,
+	showNotificationContent = false,
+	refetch = () => {},
+	from = 'cogo_assist',
+	setInput = () => {},
+	input = '',
 }) {
 	const {
 		searchAnnouncement = '',
@@ -93,27 +93,17 @@ function Header({
 		<div className={cl`${styles.container} ${styles[from]}`}>
 
 			<div className={styles.wrapper}>
-				{showFeedback ?	(
+				{!showFeedback && (
 					<Button
 						size="sm"
-						themeType="link"
+						themeType="accent"
 						className={styles.feedback}
 						onClick={handleFeedback}
 					>
-						Back to main view
+						<IcMFeedback />
+						Feedback
 					</Button>
-				)
-					: (
-						<Button
-							size="sm"
-							themeType="accent"
-							className={styles.feedback}
-							onClick={handleFeedback}
-						>
-							<IcMFeedback />
-							Feedback
-						</Button>
-					)}
+				)}
 
 				{from !== 'test_module' ? (
 					<div className={styles.heading_container}>
