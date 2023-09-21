@@ -27,13 +27,14 @@ function BulkJvUpload({ showBulkJV = false, setShowBulkJV = () => {} }) {
 						onChange={(val) => { setFileValue(val); }}
 						showProgress
 						draggable
-						accept=".csv,.xlsx"
+						accept=".xlsx"
 					/>
 					{uploadData?.data?.errorFileUrl ? (
 						<Button
 							size="md"
 							themeType="linkUi"
 							onClick={() => window.open(uploadData?.data?.errorFileUrl, '_self')}
+							style={{ color: '#EE3425' }}
 						>
 							Download Error Document
 						</Button>

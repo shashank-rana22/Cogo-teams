@@ -43,14 +43,6 @@ function JournalVoucher({ entityCode }) {
 						offLabel="New"
 						onChange={handleVersionChange}
 					/>
-					<Button
-						themeType="primary"
-						onClick={() => setShowBulkJV(true)}
-						style={{ marginRight: '10px' }}
-					>
-						BulK JV Upload
-
-					</Button>
 					<Input
 						name="query"
 						onChange={(val) => { setFilters({ ...filters, query: val, page: 1 }); }}
@@ -67,6 +59,15 @@ function JournalVoucher({ entityCode }) {
 						className={styles.jvbutton}
 					>
 						Create JV
+					</Button>
+					<Button
+						size="md"
+						themeType="primary"
+						onClick={() => setShowBulkJV(true)}
+						style={{ marginLeft: '10px', padding: '18px' }}
+					>
+						BulK JV Upload
+
 					</Button>
 				</div>
 			</div>
