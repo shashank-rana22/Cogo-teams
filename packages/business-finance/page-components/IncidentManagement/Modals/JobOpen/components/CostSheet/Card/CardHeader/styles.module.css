@@ -1,0 +1,20 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	padding: 15px 35px;
+	margin-top: 15px;
+	background: #333;
+	border-radius: 4px;
+}
+
+.font {
+	display: flex;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 20px;
+	color: #fff;
+}
+
+.placeholder {
+	margin-left: 10px;
+}

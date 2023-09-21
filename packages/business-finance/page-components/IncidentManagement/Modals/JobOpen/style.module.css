@@ -48,16 +48,11 @@
 	margin-top: 4px;
 }
 
-.modal_footer {
-	& > button:first-child {
-		margin-right: 12px;
-	}
-}
-
 .icon {
 	margin-left: 4px;
 }
 
-.containerDisplay {
-	border: 2px solid black;
+.container_view {
+	display: flex;
+	justify-content: space-between;
 }
