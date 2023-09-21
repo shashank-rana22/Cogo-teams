@@ -39,7 +39,7 @@ function ParametersForm({ openForm = false, setOpenForm = () => {}, refetch = ()
 					<Modal.Body>
 						<div className={styles.content}>
 							<div>
-								<div className={styles.label}>Select Service Type</div>
+								<div className={styles.label}>Select Service Type *</div>
 								<SelectController
 									control={control}
 									{...service}
@@ -50,7 +50,7 @@ function ParametersForm({ openForm = false, setOpenForm = () => {}, refetch = ()
 
 							{serviceType && (
 								<div>
-									<div className={styles.label}>Select Trade Type</div>
+									<div className={styles.label}>Select Trade Type *</div>
 									<SelectController
 										control={control}
 										{...tradeType}
@@ -62,7 +62,7 @@ function ParametersForm({ openForm = false, setOpenForm = () => {}, refetch = ()
 
 							{tradeTypeValue && (
 								<div>
-									<div className={styles.label}>Select IncoTerms Type</div>
+									<div className={styles.label}>Select IncoTerms Type *</div>
 									<SelectController
 										control={control}
 										{...tradeTypeValue === 'import'

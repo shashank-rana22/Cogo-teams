@@ -317,7 +317,7 @@ const apis = [
 		service_name : 'revenue_desk',
 	},
 	{
-		api          : 'get_rd_wallet',
+		api          : 'get_revenue_desk_wallet',
 		access_type  : 'private',
 		service_name : 'revenue_desk',
 	},

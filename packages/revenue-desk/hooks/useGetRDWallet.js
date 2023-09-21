@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 const useGetRDWallet = ({ singleServiceData }) => {
 	const [{ data }, trigger] = useRequest({
 		method : 'GET',
-		url    : '/get_rd_wallet',
+		url    : '/get_revenue_desk_wallet',
 	}, { manual: true });
 
 	const { id = '', service_type = '' } = singleServiceData || {};

@@ -43,7 +43,7 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 				<Modal.Body>
 					<div className={styles.content}>
 						<div>
-							<div className={styles.label}>Select Service Type</div>
+							<div className={styles.label}>Select Service Type *</div>
 							<SelectController
 								control={control}
 								{...service}
@@ -53,7 +53,7 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 						</div>
 						{isService && (
 							<div>
-								<div className={styles.label}>Select Trade Type</div>
+								<div className={styles.label}>Select Trade Type *</div>
 								<RadioGroupController control={control} {...trade} style={{ width: '250px' }} />
 								<div className={styles.errors}>{errors?.trade_type?.message}</div>
 							</div>
@@ -104,7 +104,7 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 							</div>
 
 							<div>
-								<div className={styles.label}>Wallet Amount</div>
+								<div className={styles.label}>Wallet Amount *</div>
 								<InputController
 									control={control}
 									name="wallet_amount"
