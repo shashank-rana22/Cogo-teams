@@ -33,69 +33,76 @@ export default function PopoverContent({
 						</Button>
 					) : null}
 
-					<Button
-						themeType="tertiary"
-						className={styles.text}
-						onClick={() => handleClick('change_currency')}
-						disabled={is_job_closed_financially}
-					>
-						Change Currency
-					</Button>
+					{!invoice?.processing ? (
+						<>
+							<Button
+								themeType="tertiary"
+								className={styles.text}
+								onClick={() => handleClick('change_currency')}
+								disabled={is_job_closed_financially}
+							>
+								Change Currency
+							</Button>
 
-					<Button
-						themeType="tertiary"
-						className={styles.text}
-						onClick={() => handleClick('add_remarks')}
-						disabled={is_job_closed_financially}
-					>
-						Add Remarks
-					</Button>
+							<Button
+								themeType="tertiary"
+								className={styles.text}
+								onClick={() => handleClick('add_remarks')}
+								disabled={is_job_closed_financially}
+							>
+								Add Remarks
+							</Button>
 
-					{invoice?.billing_address?.trade_party_type === 'self' ? (
-						<Button
-							themeType="tertiary"
-							className={styles.text}
-							onClick={() => handleClick('change_payment_mode')}
-							disabled={is_job_closed_financially}
-						>
-							Change Payment Mode
-						</Button>
+							{invoice?.billing_address?.trade_party_type === 'self' ? (
+								<Button
+									themeType="tertiary"
+									className={styles.text}
+									onClick={() => handleClick('change_payment_mode')}
+									disabled={is_job_closed_financially}
+								>
+									Change Payment Mode
+								</Button>
+							) : null}
+						</>
 					) : null}
 				</>
 			) : null}
 
-			{ showCancelOptions?.showCancel ? (
-				<Button
-					themeType="tertiary"
-					className={styles.text}
-					onClick={() => handleClick('cancel_e_invoice')}
-					type="button"
-				>
-					Request Cancel E Invoice
-				</Button>
-			) : null}
+			{ showCancelOptions?.showCancel
+					&& !invoice?.processing ? (
+						<Button
+							themeType="tertiary"
+							className={styles.text}
+							onClick={() => handleClick('cancel_e_invoice')}
+							type="button"
+						>
+							Request Cancel E Invoice
+						</Button>
+				) : null}
 
-			{ showCancelOptions?.showReplace ? (
-				<Button
-					themeType="tertiary"
-					className={styles.text}
-					onClick={() => handleClick('replace_e_invoice')}
-					type="button"
-				>
-					Request Replace E Invoice
-				</Button>
-			) : null}
+			{ showCancelOptions?.showReplace
+					&& !invoice?.processing ? (
+						<Button
+							themeType="tertiary"
+							className={styles.text}
+							onClick={() => handleClick('replace_e_invoice')}
+							type="button"
+						>
+							Request Replace E Invoice
+						</Button>
+				) : null}
 
-			{(invoice.exchange_rate_document || []).map((url) => (
-				<Button
-					key={url}
-					themeType="tertiary"
-					className={styles.text}
-					onClick={() => window.open(url, '_blank')}
-				>
-					Exchange Rate Document
-				</Button>
-			))}
+			{!invoice?.processing
+				? (invoice.exchange_rate_document || []).map((url) => (
+					<Button
+						key={url}
+						themeType="tertiary"
+						className={styles.text}
+						onClick={() => window.open(url, '_blank')}
+					>
+						Exchange Rate Document
+					</Button>
+				)) : null}
 		</>
 	);
 }

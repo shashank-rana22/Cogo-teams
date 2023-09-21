@@ -27,7 +27,7 @@ function KebabContent({
 		),
 	);
 
-	const { serial_id = '', is_cogo_assured = false, is_job_closed_financially = false } = shipment_data || {};
+	const { serial_id = '', is_cogo_assured = false } = shipment_data || {};
 
 	const showForOldShipments = serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice.status === 'pending';
@@ -37,35 +37,30 @@ function KebabContent({
 
 	let disableAction = showForOldShipments ? isIRNGenerated : disableActionCondition;
 
-	if (invoice.status === 'amendment_requested') {
+	if (invoice?.status === 'amendment_requested') {
 		disableAction = false;
 	}
 
-	const commonActions = invoice.status !== 'approved' && !disableAction;
+	const commonActions = invoice?.status !== 'approved'
+	&& !disableAction;
 
-	const editInvoicesVisiblity = (is_cogo_assured !== true
-		&& !invoice?.is_igst
-		&& (!invoice?.processing || invoice?.invoice_total_discounted === ZERO))
-		|| [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
-			GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
-
-	const handleClick = (modalName) => {
-		setShowModal(modalName);
-		setShow(false);
-	};
+	const editInvoicesVisiblity = (is_cogo_assured !== true && !invoice?.is_igst)
+	|| [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
+		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 			{(!disableAction || invoice.exchange_rate_document?.length)
 					&& invoice.status !== 'revoked'
-					&& (!invoice?.processing || invoice?.invoice_total_discounted === ZERO)
+					&& (!invoice?.processing
+					|| (invoice?.invoice_total_discounted === ZERO && commonActions && editInvoicesVisiblity))
 					&& notInsuranceService ? (
 						<Popover
 							interactive
 							placement="bottom"
 							visible={show}
 							className={styles.popover_content}
-							content={!(invoice?.processing) ? (
+							content={(
 								<PopoverContent
 									setShow={setShow}
 									setShowModal={setShowModal}
@@ -75,15 +70,6 @@ function KebabContent({
 									showCancelOptions={showCancelOptions}
 									shipment_data={shipment_data}
 								/>
-							) : editInvoicesVisiblity && (
-								<Button
-									themeType="tertiary"
-									className={styles.text}
-									onClick={() => handleClick('edit_invoice')}
-									disabled={is_job_closed_financially}
-								>
-									Edit Invoice
-								</Button>
 							)}
 							onClickOutside={() => setShow(false)}
 						>
