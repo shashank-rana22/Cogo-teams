@@ -24,4 +24,10 @@
 
 .lead_count_div {
 	font-size: 12px;
+	color: var(--color-secondary-greyscale-1);
+}
+
+.info_message {
+	font-size: 12px;
+	color: var(--color-primary-yellow-1);
 }

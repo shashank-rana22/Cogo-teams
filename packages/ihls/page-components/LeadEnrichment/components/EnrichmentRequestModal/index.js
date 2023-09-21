@@ -27,6 +27,7 @@ function EnrichmentRequestModal({
 
 	const mode = watch('mode');
 	const select_first = watch('select_first');
+	const enriched_filter_present = params?.filters?.is_user_enriched === false;
 
 	const countValue = () => {
 		let show_count = null;
@@ -48,13 +49,20 @@ function EnrichmentRequestModal({
 						Enrichment Request
 					</div>
 					<div className={styles.lead_count_div}>
-						Total count: -
+						Total leads: -
 						{` ${countValue()}`}
 					</div>
 				</div>
 			)}
 			/>
 			<Modal.Body>
+				{!enriched_filter_present
+					? (
+						<div className={styles.info_message}>
+							**The list may contain enriched leads, apply filter to get not enriched leads.
+						</div>
+					)
+					: null}
 				{(enrichment_request_controls || []).map((item) => {
 					const { name, type, displayName } = item;
 					if (name === 'select_first' && mode !== 'select_first') {
