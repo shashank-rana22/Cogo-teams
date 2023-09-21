@@ -207,9 +207,9 @@ function ShipmentDetails({
 			{jobType === 'SHIPMENT' && (
 				<>
 					<DetailsCard
-						onTabClick={onTabClick}
+						onTabClick={onTabClick as any}
 						loadingShipment={loadingShipment}
-						onAccept={onAccept}
+						onAccept={onAccept as any}
 						shipmentDetailsTab={tab.shipmentDetailsTab}
 						shipmentDetailsCheck={checkItem.shipmentDetailsCheck}
 						dataList={dataList}
@@ -282,8 +282,8 @@ function ShipmentDetails({
 
 					<SIDView
 						shipmentId={jobNumber}
-						onTabClick={onTabClick}
-						onAccept={onAccept}
+						onTabClick={onTabClick as any}
+						onAccept={onAccept as any}
 						showTab={tab.sidDataTab}
 						sidDataChecked={checkItem.sidDataCheck}
 						jobNumberByQuery={jobNumberByQuery}

@@ -23,7 +23,7 @@ function BillingPartyCard({
 	handleClick = () => {},
 	status = '',
 	docContent = '',
-	setCheckItem = (prop) => (prop),
+	setCheckItem = () => {},
 	onAccept = () => {},
 	onTabClick = () => {},
 	showTab = false,
@@ -75,9 +75,7 @@ function BillingPartyCard({
 								</Button>
 								<div
 									className={styles.caret}
-									onClick={() => {
-										onTabClick({ tabName: PRESENT_TAB });
-									}}
+									onClick={() => onTabClick({ tabName: PRESENT_TAB })}
 									role="presentation"
 								>
 									<IcMArrowRotateUp height="17px" width="17px" />
@@ -113,13 +111,10 @@ function BillingPartyCard({
 				)) : (
 					<div
 						className={styles.caret}
-						onClick={() => {
-							onTabClick({ tabName: PRESENT_TAB });
-						}}
+						onClick={() => onTabClick({ tabName: PRESENT_TAB })}
 						role="presentation"
 					>
 						<IcMArrowRotateDown height="17px" width="17px" />
-
 					</div>
 				)}
 			</div>

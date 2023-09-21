@@ -13,17 +13,17 @@ function Tagging({
 	billId = '',
 	setRemarksVal = () => {},
 	status = '',
-	onTabClick = (prop) => (prop),
-	onAccept = (prop) => (prop),
+	onTabClick = () => {},
+	onAccept = () => {},
 	showTab = false,
 	taggingChecked = false,
 	setIsTagFound = () => {},
 }:
 {
-	billId: string, status: string, onTabClick: Function,
+	billId: string, status: string, onTabClick: any,
 	setIsTagFound?: any,
 	showTab?: boolean, taggingChecked?: boolean,
-	onAccept?: Function,
+	onAccept?: any,
 	setRemarksVal: React.Dispatch<React.SetStateAction<{
 		collectionPartyRemark: string[];
 		billingPartyRemark: string[];

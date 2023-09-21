@@ -35,6 +35,7 @@ export interface ItemDataProps {
 	buyQuotationTotalAmount?: number,
 	sellQuotationCount?: number,
 	sellQuotationTotalAmount?: number,
+	amountCurrency?: string,
 }
 
 function ShipmentIdView() {

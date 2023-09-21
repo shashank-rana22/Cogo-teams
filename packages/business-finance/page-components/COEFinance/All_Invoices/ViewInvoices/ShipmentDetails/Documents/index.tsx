@@ -24,7 +24,7 @@ function Documents({ shipmentId = '', docContent = '' }: DocumentsInterface) {
 	const functions = {
 		DocumentTypeFunc: (item) => {
 			const { document_type: DocumentType } = item || {};
-			return <p>{startCase(DocumentType)}</p>;
+			return <p>{startCase(DocumentType) || ''}</p>;
 		},
 		DocumentNumberFunc: (item) => {
 			const { data = {} } = item || {};
@@ -35,7 +35,7 @@ function Documents({ shipmentId = '', docContent = '' }: DocumentsInterface) {
 				<p
 					style={{ color: getDetailValueColor({ value: documentNumber, docContent }) }}
 				>
-					{startCase(documentNumber)}
+					{startCase(documentNumber) || ''}
 				</p>
 			);
 		},
@@ -95,30 +95,25 @@ function Documents({ shipmentId = '', docContent = '' }: DocumentsInterface) {
 		},
 	};
 
-	function GetDocumentData() {
-		if (loading) {
-			return (
-				<div className={styles.loader_main}>
-					<Loader className={styles.loader} />
-				</div>
-			);
-		}
-		if (isEmpty(documentData)) {
-			return <EmptyStateDocs />;
-		}
+	if (loading) {
 		return (
+			<div className={styles.loader_main}>
+				<Loader className={styles.loader} />
+			</div>
+		);
+	}
+	if (isEmpty(documentData)) {
+		return <EmptyStateDocs />;
+	}
+
+	return (
+		<div className={styles.list}>
 			<List
 				config={config}
 				itemData={documentData}
 				functions={functions}
 				loading={loading}
 			/>
-		);
-	}
-
-	return (
-		<div className={styles.list}>
-			{GetDocumentData()}
 		</div>
 	);
 }

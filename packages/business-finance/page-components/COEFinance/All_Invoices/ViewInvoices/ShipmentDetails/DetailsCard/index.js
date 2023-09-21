@@ -15,13 +15,16 @@ import styles from './styles.module.css';
 const DEFAULT_AMOUNT = 0;
 
 function DetailsCard({
-	onTabClick = (prop) => (prop),
+	onTabClick = () => {},
 	loadingShipment = false,
-	onAccept = (prop) => (prop),
+	onAccept = () => {},
 	shipmentDetailsTab = false,
 	shipmentDetailsCheck = false,
 	dataList = [],
 }) {
+	const arrowElement = shipmentDetailsTab ? <IcMArrowRotateUp height="17px" width="17px" />
+		: <IcMArrowRotateDown height="17px" width="17px" />;
+
 	const shipmentId = dataList?.id || '';
 	const { data: dataWallet } = useGetWallet(shipmentId);
 	const {
@@ -54,9 +57,9 @@ function DetailsCard({
 						<div className={styles.data}>
 							<div className={styles.kam_data}>KAM -</div>
 							<div>
-								{agentData?.name}
+								{agentData?.name || ''}
 								(
-								{agentRoleData?.name}
+								{agentRoleData?.name || ''}
 								)
 							</div>
 							<div className={styles.kam_data}>Wallet Usage - </div>
@@ -72,11 +75,7 @@ function DetailsCard({
 					className={styles.caret}
 					role="presentation"
 				>
-					{shipmentDetailsTab ? (
-						<IcMArrowRotateUp height="17px" width="17px" />
-					) : (
-						<IcMArrowRotateDown height="17px" width="17px" />
-					)}
+					{arrowElement}
 				</div>
 			</div>
 
