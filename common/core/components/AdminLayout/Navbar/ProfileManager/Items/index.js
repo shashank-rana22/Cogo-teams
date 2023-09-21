@@ -66,7 +66,6 @@ function Items({
 	notificationCount = ZERO_COUNT,
 	notificationPopover,
 	setNotificationPopover,
-
 }) {
 	const { t } = useTranslation(['common']);
 
@@ -89,10 +88,6 @@ function Items({
 		window.location.href = '/v2/login?source=add_account';
 	};
 
-	// const notificationRedirect = () => {
-	// 	window.location.href = `/v2/${partner_id}/notifications`;
-	// };
-
 	const { picture = '', name = '' } = user_data;
 
 	const handlePopover = () => {
@@ -101,6 +96,7 @@ function Items({
 	};
 
 	const handleNotificationPopover = () => {
+		setOpenPopover(false);
 		setNotificationPopover(!notificationPopover);
 	};
 
@@ -121,7 +117,6 @@ function Items({
 	useEffect(() => {
 		setShowSubNav(false);
 		setOpenPopover(false);
-		setNotificationPopover(false);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [resetSubnavs]);
 
