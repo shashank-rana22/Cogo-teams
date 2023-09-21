@@ -2,7 +2,7 @@
 	display: flex;
 	padding: 20px;
 	margin-bottom: 32px;
-	background-color: #fff;
+	background-color: var(--color-secondary-5);
 	border-radius: 10px;
 }
 
@@ -28,7 +28,7 @@
 	width: 24px;
 	height: 22px;
 	overflow: hidden;
-	color: #fff;
+	color: var(--color-secondary-5);
 	text-align: center;
 	border-radius: 50%;
 }
