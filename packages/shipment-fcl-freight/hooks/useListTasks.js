@@ -32,7 +32,7 @@ function useListTasks({
 	const { profile } = useSelector((state) => state);
 	const { refetchServices = () => { }, shipment_data = {} } = useContext(ShipmentDetailContext);
 
-	const is_indonesia_coe_head = geo?.others.navigations.partner.bookings
+	const is_indonesia_coe_head = geo.others.navigations.partner.bookings
 		.pending_tasks.is_booking_agent_filter_required;
 
 	const { stakeholders = [] } = shipment_data || {};

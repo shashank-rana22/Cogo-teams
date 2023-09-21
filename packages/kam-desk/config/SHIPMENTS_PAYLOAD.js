@@ -120,8 +120,7 @@ const tabPayload = {
 				],
 			},
 			confirm_with_shipper: {
-				state           : ['shipment_received'],
-				task_attributes : [
+				task_attributes: [
 					{
 						task                 : 'confirm_with_shipper',
 						status               : ['pending'],
