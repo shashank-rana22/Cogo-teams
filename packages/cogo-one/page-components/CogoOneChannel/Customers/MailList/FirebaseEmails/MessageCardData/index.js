@@ -110,7 +110,7 @@ function MessageCardData({
 				</div>
 			</div>
 
-			<div className={styles.user_name_title}>
+			<div className={styles.email_sender}>
 				{mailToBeShown || ''}
 			</div>
 
