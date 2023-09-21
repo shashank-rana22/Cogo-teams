@@ -1,98 +1,165 @@
-import styles from './styles.module.css';
+import { Button } from '@cogoport/components';
 
-const getServiceColumns = () => {
+const getJobColumns = ({ handleClick }) => {
 	const columns = [
 		{
-			id     : 'documentValue1',
+			id     : 'sid',
 			Header : (
-				<div>Name</div>
+				<div>SID</div>
 			),
-			accessor: (row) => (
-				<div>
-					{row?.document1}
-				</div>
-			),
+			accessor: (row) => {
+				const { sid = '' } = row || {};
+				return (
+					<div>
+						{sid}
+					</div>
+				);
+			},
 		},
 		{
-			id     : 'documentValue2',
+			id     : 'sell',
 			Header : (
-				<div className={styles.quantity}>Qty.</div>
-			),
-			accessor: (row) => (
-				<div className={styles.quantity}>
-					{row?.document2}
+				<div style={{
+					display        : 'flex',
+					justifyContent : 'space-between',
+					alignItems     : 'center',
+					flexDirection  : 'column',
+					marginRight    : '20px',
+				}}
+				>
+					<div>Sell</div>
+					<div style={{
+						display        : 'flex',
+						justifyContent : 'space-between',
+						alignItems     : 'center',
+						width          : '100%',
+					}}
+					>
+						<div>Estimated</div>
+						<div>Operational</div>
+						<div>Financial</div>
+					</div>
 				</div>
 			),
-		},
-		{
-			id     : 'documentValue3',
-			Header : (
-				<div>Unit</div>
-			),
-			accessor: (row) => (
-				<div>
-					{row?.document3}
-				</div>
-			),
-		},
-		{
-			id     : 'documentValue4',
-			Header : (
-				<div>Price</div>
-			),
-			accessor: (row) => (
-				<div>
-					{row?.document4}
-				</div>
-			),
-		},
-		{
-			id     : 'documentValue5',
-			Header : (
-				<div>Margin</div>
-			),
-			accessor: (row) => (
-				<div>
-					{row?.document5}
-				</div>
-			),
-		},
-		{
-			id     : 'documentValue6',
-			Header : (
-				<div>Ex. Rate</div>
-			),
-			accessor: (row) => (
-				<div>
-					{row?.document6}
-				</div>
-			),
-		},
-		{
-			id     : 'documentValue7',
-			Header : (
-				<div>Tax</div>
-			),
-			accessor: (row) => (
-				<div>
-					{row?.document7}
-				</div>
-			),
-		},
-		{
-			id     : 'documentValue8',
-			Header : (
-				<div>Cost</div>
-			),
-			accessor: (row) => (
-				<div>
-					{row?.document8}
-				</div>
-			),
-		},
+			accessor: (row) => {
+				const { sell = {} } = row || {};
+				const { estimated, operational, financial } = sell || {};
+				return (
 
+					<div style={{
+						display        : 'flex',
+						justifyContent : 'space-between',
+						alignItems     : 'center',
+						marginRight    : '20px',
+					}}
+					>
+						<div>{estimated}</div>
+						<div>{operational}</div>
+						<div>{financial}</div>
+					</div>
+				);
+			},
+		},
+		{
+			id     : 'buy',
+			Header : (
+				<div style={{
+					display        : 'flex',
+					justifyContent : 'space-between',
+					alignItems     : 'center',
+					flexDirection  : 'column',
+					marginRight    : '20px',
+				}}
+				>
+					<div>Buy</div>
+					<div style={{
+						display        : 'flex',
+						justifyContent : 'space-between',
+						alignItems     : 'center',
+						width          : '100%',
+					}}
+					>
+						<div>Estimated</div>
+						<div>Operational</div>
+						<div>Financial</div>
+					</div>
+				</div>
+			),
+			accessor: (row) => {
+				const { buy = {} } = row || {};
+				const { estimated, operational, financial } = buy || {};
+				return (
+
+					<div style={{
+						display        : 'flex',
+						justifyContent : 'space-between',
+						alignItems     : 'center',
+						marginRight    : '20px',
+					}}
+					>
+						<div>{estimated}</div>
+						<div>{operational}</div>
+						<div>{financial}</div>
+					</div>
+				);
+			},
+		},
+		{
+			id     : 'profitability',
+			Header : (
+				<div style={{
+					display        : 'flex',
+					justifyContent : 'space-between',
+					alignItems     : 'center',
+					flexDirection  : 'column',
+					marginRight    : '20px',
+				}}
+				>
+					<div>Profitability</div>
+					<div style={{
+						display        : 'flex',
+						justifyContent : 'space-between',
+						alignItems     : 'center',
+						width          : '100%',
+					}}
+					>
+						<div>Estimated</div>
+						<div>Operational</div>
+						<div>Financial</div>
+					</div>
+				</div>
+			),
+			accessor: (row) => {
+				const { profitability = {} } = row || {};
+				const { estimated, operational, financial } = profitability || {};
+				return (
+
+					<div style={{
+						display        : 'flex',
+						justifyContent : 'space-between',
+						alignItems     : 'center',
+						marginRight    : '20px',
+					}}
+					>
+						<div>{estimated}</div>
+						<div>{operational}</div>
+						<div>{financial}</div>
+					</div>
+				);
+			},
+		},
+		{
+			id       : 'estimated',
+			Header   : '',
+			accessor : () => (
+
+				<div>
+					<Button themeType="secondary" onClick={() => handleClick()}>Audit</Button>
+				</div>
+			),
+		},
 	];
 
 	return columns;
 };
-export default getServiceColumns;
+export default getJobColumns;
