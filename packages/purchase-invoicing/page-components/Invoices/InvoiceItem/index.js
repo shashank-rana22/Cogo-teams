@@ -3,8 +3,6 @@ import getFormattedAmount from '../../../common/helpers/formatAmount';
 import Item from './Item';
 import styles from './styles.module.css';
 
-const TWO = 2;
-
 function InvoiceItem({
 	item = {},
 	total = {},
@@ -24,7 +22,7 @@ function InvoiceItem({
 				<div className={styles.invoice_value_container}>
 					<div className={styles.invoice_value_title}>Invoice Value -</div>
 					<div className={styles.invoice_value}>
-						{getFormattedAmount(total?.total_price_discounted, total?.total_price_currency, TWO)}
+						{getFormattedAmount(total?.total_price_discounted, total?.total_price_currency)}
 					</div>
 				</div>
 			</div>
