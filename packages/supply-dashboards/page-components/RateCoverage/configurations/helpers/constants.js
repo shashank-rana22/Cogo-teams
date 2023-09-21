@@ -4,7 +4,7 @@ import { IcMAir, IcMFcl } from '@cogoport/icons-react';
 export const STAT_CARDS_MAPPING = {
 	pending   : { title: 'Today\'s Pending', color: '#FF5733', status: 'pending' },
 	completed : { title: 'Today\'s Completed', color: '#728F3C', status: 'completed' },
-	backlogs  : { title: 'Previous Backlogs', color: '#F69E50', status: 'backlogs' },
+	backlog   : { title: 'Previous Backlogs', color: '#F69E50', status: 'backlog' },
 };
 
 export const WEEKLY_BACKLOG = {
@@ -72,7 +72,7 @@ export const taskStatusOptions = [
 	},
 	{
 		label : 'Backlogs',
-		value : 'backlogs',
+		value : 'backlog',
 	},
 	{
 		label : 'Aborted',
@@ -181,3 +181,5 @@ export const densityRatioOptions = [
 export const DEFAULT_VALUE = 0;
 export const FIFTY = 50;
 export const SEVENTY_FIVE = 75;
+export const VALUE_ONE = 1;
+export const DELTA_VALUE = 0.1;

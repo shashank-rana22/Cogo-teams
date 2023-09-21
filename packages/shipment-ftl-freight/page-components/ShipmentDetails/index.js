@@ -10,6 +10,7 @@ import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
 import AddService from '../../common/AdditionalServices/components/List/AddService';
 import CancelDetails from '../../common/CancelDetails';
+import JobStatus from '../../common/JobStatus';
 import PocSop from '../../common/PocSop';
 import ShipmentHeader from '../../common/ShipmentHeader';
 import ShipmentInfo from '../../common/ShipmentInfo';
@@ -44,7 +45,14 @@ function ShipmentDetails() {
 	const activeStakeholder = useGetActiveStakeholder();
 	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder, authParams });
 	const { get } = useGetShipment();
-	const { features = [], default_tab = 'tasks', visible_tabs = [] } = stakeholderConfig || {};
+	const {
+		features = [],
+		default_tab = 'tasks',
+		visible_tabs = [],
+		shipment_info = {},
+	} = stakeholderConfig || {};
+
+	const { job_open_request = false } = shipment_info || {};
 
 	const [activeTab, setActiveTab] = useState(default_tab);
 
@@ -157,6 +165,14 @@ function ShipmentDetails() {
 					<ShipmentInfo />
 
 					<div className={styles.toggle_chat}>
+
+						{shipment_data?.is_job_closed && (
+							<JobStatus
+								shipment_data={shipment_data}
+								job_open_request={job_open_request}
+							/>
+						)}
+
 						{conditionMapping?.scope ? (
 							<ScopeSelect
 								size="md"

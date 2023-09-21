@@ -1,7 +1,10 @@
 import { Button, Popover, cl } from '@cogoport/components';
 import { IcMCenterAlign } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
+
+import { getTicketActionLabel } from '../../constants';
 
 import ActionConfirmation from './ActionConfirmation';
 import styles from './styles.module.css';
@@ -40,6 +43,8 @@ function RenderContent({
 	filteredActions = [], isModal = false, isCurrentReviewer = false, handleAction = () => {},
 	updateLoading = false, actionLoading = '', setConfirmationConfig = () => {},
 }) {
+	const { t } = useTranslation(['myTickets']);
+
 	const handleConfirmation = ({ e, item }) => {
 		if (isModal) {
 			handleAction(e, item);
@@ -63,7 +68,7 @@ function RenderContent({
 						loading={updateLoading && actionLoading === item}
 						disabled={updateLoading && actionLoading !== item}
 					>
-						{startCase(item)}
+						{getTicketActionLabel({ t, type: item })}
 					</Button>
 				);
 			})}

@@ -1,4 +1,4 @@
-import sort from './sortTabel';
+import sort from './sortTable';
 
 // eslint-disable-next-line import/no-unresolved
 import countries from '@/data-store/constants/countries.json';

@@ -96,6 +96,7 @@ function Customers({
 			},
 			activeVoiceCard : activeTab?.data || {},
 			activeTab       : activeTab?.tab,
+			viewType,
 		},
 		outlook: {
 			mailProps,
@@ -108,6 +109,7 @@ function Customers({
 			mailsToBeShown: userSharedMails,
 			firestore,
 			userId,
+			isBotSession,
 		},
 	};
 
@@ -217,6 +219,7 @@ function Customers({
 				viewType={viewType}
 				setOpenKamContacts={setOpenKamContacts}
 				setSendBulkTemplates={setSendBulkTemplates}
+				firestore={firestore}
 			/>
 		</div>
 	);

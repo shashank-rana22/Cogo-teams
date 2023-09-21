@@ -2,10 +2,14 @@
 	padding: 20px;
 
 	:global {
-		.ui_tab_container {
-			width: 200px;
-			padding: 10px;
-			border-radius: 4px;
+		.ui_tab_list_container {
+			display: flex !important;
 		}
 	}
+}
+
+.select {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 12px;
 }

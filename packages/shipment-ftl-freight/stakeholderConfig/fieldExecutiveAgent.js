@@ -10,9 +10,11 @@ export default {
 		'overview',
 		'field_executive',
 	],
-	shipment_info : {},
-	default_tab   : 'field_executive',
-	overview      : {
+	shipment_info: {
+		job_open_request: false,
+	},
+	default_tab : 'field_executive',
+	overview    : {
 		tab_title: 'Overview',
 	},
 	tasks: {

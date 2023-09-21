@@ -7,9 +7,11 @@ import {
 	handlingtypeOptions, packagingTypeOptions, priceTypeOptions, rateTypeOptions,
 } from '../../../../configurations/helpers/constants';
 
+import styles from './styles.module.css';
+
 const airControls = ({
 	data, listPartnerUserOptions, user_id, originLocationOptions, destinationLocationOptions,
-	serviceProviders, organizationUsers, listAirLineOptions,
+	serviceProviders, listAirLineOptions,
 }) => [
 	{
 		name        : 'rate_type',
@@ -58,7 +60,6 @@ const airControls = ({
 		heading     : 'Rate Provided By LSP User',
 		placeholder : 'Rate Provided By LSP User',
 		type        : 'select',
-		...organizationUsers,
 		span        : 4,
 		rules       : { required: 'sourced by is required' },
 	},
@@ -78,6 +79,7 @@ const airControls = ({
 		placeholder : 'Commodity',
 		type        : 'select',
 		value       : data?.commodity || 'general',
+		disabled    : data?.commodity,
 		options     : commodityOptions,
 		span        : 4,
 		rules       : { required: 'commodity is required' },
@@ -102,18 +104,20 @@ const airControls = ({
 		rules   : { required: 'flight operation type is required' },
 	},
 	{
-		heading : 'Validity Start',
-		name    : 'validity_start',
-		type    : 'date_picker',
-		span    : 4,
-		rules   : { required: 'validity is required' },
+		heading   : 'Validity Start',
+		name      : 'validity_start',
+		type      : 'date_picker',
+		className : styles.air_date_filter,
+		span      : 4,
+		rules     : { required: 'validity is required' },
 	},
 	{
-		heading : 'Validity End',
-		name    : 'validity_end',
-		type    : 'date_picker',
-		span    : 4,
-		rules   : { required: 'validity end is required' },
+		heading   : 'Validity End',
+		name      : 'validity_end',
+		type      : 'date_picker',
+		className : styles.air_date_filter,
+		span      : 4,
+		rules     : { required: 'validity end is required' },
 	},
 	{
 		heading : 'Packaging Type',

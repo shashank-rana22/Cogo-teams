@@ -67,7 +67,7 @@ function AcceptAudit({
 						<Modal.Footer>
 							<Button
 								themeType="primary"
-								disabled={!remarks}
+								disabled={!(remarks?.[item?.id])}
 								loading={updateLoading}
 								onClick={() => onSubmit({ value: remarks?.[item?.id], invoice_id: item?.id })}
 							>

@@ -5,14 +5,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	width: 93%;
+	width: 96%;
+	margin-left: -56px;
 	background: var(--color-secondary-5);
 	box-shadow: 0 0 33px rgb(0 0 0 / 25%);
-}
-
-.button_style {
-	padding: 20px;
-	margin: 0 32px;
 }
 
 .count_ref {
@@ -20,6 +16,13 @@
 }
 
 .heading_style {
+	margin: 8px 30px 0 0;
 	font-size: var(--font-size-lg);
 	font-weight: 600;
+}
+
+.total_invoice_count {
+	display: flex;
+	padding: 20px;
+	margin-right: 7%;
 }

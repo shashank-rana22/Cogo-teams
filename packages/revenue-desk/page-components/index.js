@@ -44,7 +44,6 @@ function RevenueDesk() {
 						<Button
 							size="md"
 							themeType="accent"
-							// style={{ color: '#221F20' }}
 							onClick={() => router.push(`/${partnerId}/revenue-desk/control-panel`)}
 						>
 							Control Panel

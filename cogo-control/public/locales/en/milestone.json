@@ -1,0 +1,16 @@
+{
+    "main_title":"Standard Milestones",
+    "create":"Create",
+    "empty_milestone":"No Standard Milestones",
+    "loader_alt":"cogoport loading",
+    "filter_opertor_placeholder":"Enter Shipping Line",
+    "filter_source_placeholder":"Select Source",
+    "filter_source_opt_1":"Tracking Job",
+    "filter_source_opt_2":"Default",
+    "filter_source_opt_3":"LDB",
+    "filter_status_placeholder":"Select Status",
+    "filter_status_opt_1":"Active",
+    "filter_status_opt_2":"Inative",
+    "filter_status_opt_3":"Unmapped",
+    "filter_search_placeholder":"Search by Milestone/Standard Milestone"
+}

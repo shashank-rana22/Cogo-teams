@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 import Treasury from './Treasury';
 
 const ENTITY_CODE_LENGTH = 1;
-const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment', 'outstanding', 'treasury-chest'];
+const FILTER_TABS = ['dashboard', 'payruns', 'advance-payment', 'outstanding', 'treasury-chest', 'invoices'];
 
 function AccountPayables() {
 	const { query, push } = useRouter();
@@ -38,12 +38,6 @@ function AccountPayables() {
 	const entity = getDefaultEntityCode(partnerId);
 
 	const handleTabChange = (v) => {
-		if (
-			['invoices', 'payruns'].includes(v)
-		) {
-			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
-			return;
-		}
 		setActivePayables(v);
 		push(
 			'/business-finance/account-payables/[active_tab]',
@@ -53,7 +47,7 @@ function AccountPayables() {
 
 	const [activeEntity, setActiveEntity] = useState(entity);
 
-	const EntityOptions = (entityData || []).map((item) => {
+	const entityOptions = (entityData || []).map((item) => {
 		const {
 			business_name: companyName = '',
 			entity_code: entityCode = '',
@@ -73,13 +67,13 @@ function AccountPayables() {
 					<Placeholder className={styles.loader} />
 				) : (
 					<div>
-						{FILTER_TABS.includes(activePayables) ? (
+						{isEmpty(selectedOrg) && FILTER_TABS.includes(activePayables) ? (
 							<Select
 								name="activeEntity"
 								value={activeEntity}
 								onChange={(entityVal) => setActiveEntity(entityVal)}
 								placeholder="Select Entity"
-								options={EntityOptions}
+								options={entityOptions}
 								size="sm"
 								style={{ width: '284px' }}
 								disabled={entityDataCount <= ENTITY_CODE_LENGTH}
@@ -99,7 +93,7 @@ function AccountPayables() {
 						<Dashboard activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="invoices" title="INVOICES">
-						<Invoices />
+						<Invoices activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="advance-payment" title="ADVANCE PAYMENT">
 						<AdvancePayment activeEntity={activeEntity} />

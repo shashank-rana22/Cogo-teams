@@ -14,7 +14,7 @@ interface Props {
 	entityCode?: string
 }
 
-function PaymentTable({ organizationId,	entityCode }: Props) {
+function PaymentTable({ organizationId = '', entityCode = '' }: Props) {
 	const {
 		paymentList,
 		paymentLoading,
@@ -26,11 +26,11 @@ function PaymentTable({ organizationId,	entityCode }: Props) {
 
 	const { list = [], pageNo, totalRecords } = paymentList || {};
 
-	const onChange = (val:string, name:string) => {
+	const onChange = (val: string, name: string) => {
 		setPaymentFilters((p) => ({ ...p, [name]: val }));
 	};
 
-	const onChangeStatus = (val:string[], name:string) => {
+	const onChangeStatus = (val: string[], name: string) => {
 		setPaymentFilters((p) => ({ ...p, [name]: val }));
 	};
 
@@ -54,7 +54,7 @@ function PaymentTable({ organizationId,	entityCode }: Props) {
 				<MultiSelect
 					placeholder="Select Status"
 					value={paymentFilters.statusList}
-					onChange={(val:string[]) => onChangeStatus(val, 'statusList')}
+					onChange={(val: string[]) => onChangeStatus(val, 'statusList')}
 					options={UTILIZATION_STATUS}
 					style={{ width: 200, marginRight: '16px' }}
 				/>
@@ -62,7 +62,7 @@ function PaymentTable({ organizationId,	entityCode }: Props) {
 					className="primary md"
 					placeholder="Search by Payment Number / Sage Reference Number"
 					value={paymentFilters.query}
-					onChange={(val:string) => onChange(val, 'query')}
+					onChange={(val: string) => onChange(val, 'query')}
 					prefix={(
 						<IcMSearchdark />
 					)}
@@ -75,16 +75,20 @@ function PaymentTable({ organizationId,	entityCode }: Props) {
 				columns={filterTableColumns}
 				loading={paymentLoading}
 			/>
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="table"
-					currentPage={pageNo}
-					totalItems={totalRecords}
-					pageSize={paymentFilters.pageLimit}
-					onPageChange={(val) => setPaymentFilters({ ...paymentFilters, page: val })}
-				/>
 
-			</div>
+			{totalRecords >= paymentFilters.pageLimit
+				? (
+					<div className={styles.pagination_container}>
+						<Pagination
+							type="table"
+							currentPage={pageNo}
+							totalItems={totalRecords}
+							pageSize={paymentFilters.pageLimit}
+							onPageChange={(val) => setPaymentFilters({ ...paymentFilters, page: val })}
+						/>
+					</div>
+				)
+				: null}
 		</div>
 	);
 }
