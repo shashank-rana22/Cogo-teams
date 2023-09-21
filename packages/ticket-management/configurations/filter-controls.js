@@ -249,7 +249,7 @@ const useRaiseTicketcontrols = ({
 		},
 	];
 
-	return controls.filter((itm) => itm?.visible === true);
+	return controls.filter((itm) => itm?.visible);
 };
 
 export default useRaiseTicketcontrols;

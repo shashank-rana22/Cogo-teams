@@ -39,9 +39,10 @@ const useRaiseTicket = ({
 	reset = () => {},
 }) => {
 	const { profile } = useSelector((state) => state);
+	const { auth_role_data = {} } = profile || {};
+	const { role_functions: roleFunctions = [] } = auth_role_data || {};
 
-	const roleFunctions = profile.auth_role_data.role_functions || [];
-	const isOperation = roleFunctions.includes('operations');
+	const isOperation = roleFunctions?.includes('operations');
 
 	const [{ loading }, trigger] = useTicketsRequest({
 		url     : '/ticket',
