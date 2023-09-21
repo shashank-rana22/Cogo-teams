@@ -106,6 +106,7 @@ function CogoOne() {
 		},
 		userId,
 		userName,
+		resetEmailState: () => setEmailState(DEFAULT_EMAIL_STATE),
 	};
 
 	const commonProps = {

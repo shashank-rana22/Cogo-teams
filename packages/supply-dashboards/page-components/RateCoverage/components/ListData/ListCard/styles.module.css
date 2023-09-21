@@ -22,6 +22,10 @@
 	align-items: center;
 	justify-content: center;
 	width: 40%;
+
+	:global(.ui_button_childeren) {
+		width: max-content;
+	}
 }
 
 .row {
@@ -56,6 +60,10 @@
 	margin-bottom: 20px;
 	background: #fff;
 	border-radius: 6px;
+
+	&:hover {
+		box-shadow: 0 0 8px #eee;
+	}
 }
 
 .top_left_details {
