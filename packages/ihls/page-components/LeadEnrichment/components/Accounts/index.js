@@ -17,11 +17,7 @@ function Accounts() {
 		loading,
 		response,
 		control,
-		handleClick,
-		searchQuery,
 		debounceQuery,
-		handleSubmit,
-		watch,
 		reset,
 		params,
 		setParams = () => {},
@@ -41,13 +37,10 @@ function Accounts() {
 				<MainFilters
 					className={styles.mainFilters}
 					control={control}
-					handleSubmit={handleSubmit}
-					handleClick={handleClick}
 					loading={loading}
 					reset={reset}
-					watch={watch}
-					searchQuery={searchQuery}
 					debounceQuery={debounceQuery}
+					params={params}
 					setParams={setParams}
 				/>
 			</div>

@@ -60,7 +60,7 @@ const sub_controls = 	{
 				type        : 'number',
 			},
 			{
-				name        : 'org_enrichment_status',
+				name        : 'is_user_enriched',
 				displayName : 'Org Enrichment Status',
 				type        : 'select',
 				placeholder : 'Select',
