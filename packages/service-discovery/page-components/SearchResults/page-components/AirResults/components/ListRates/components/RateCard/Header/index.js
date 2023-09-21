@@ -35,10 +35,9 @@ function Header({
 				[card_id]: rate,
 			}));
 		} else {
-			setComparisonRates((pv) => {
-				const temp = { ...pv };
-				delete temp[card_id];
-				return temp;
+			setComparisonRates((prevRates) => {
+				const { [card_id]: _, ...updatedRates } = prevRates;
+				return updatedRates;
 			});
 		}
 	};
