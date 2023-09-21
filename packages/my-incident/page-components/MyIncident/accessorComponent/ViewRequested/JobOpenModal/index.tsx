@@ -44,7 +44,7 @@ function JobOpenModal({
 				View
 			</Button>
 
-			{showModal && (
+			{showModal ? (
 				<Modal
 					size="lg"
 					show={showModal}
@@ -111,7 +111,7 @@ function JobOpenModal({
 								className={styles.text_area}
 								size="lg"
 								placeholder="Enter here..."
-								onChange={(values) => setRemarks(values)}
+								onChange={setRemarks}
 								defaultValue={userNotes}
 							/>
 						</div>
@@ -131,7 +131,7 @@ function JobOpenModal({
 					</Modal.Footer>
 
 				</Modal>
-			)}
+			) : null}
 		</div>
 	);
 }

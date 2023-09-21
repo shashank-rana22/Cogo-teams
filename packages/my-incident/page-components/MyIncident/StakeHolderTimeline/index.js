@@ -1,4 +1,4 @@
-import { Popover, Pill, cl } from '@cogoport/components';
+import { Tooltip, Pill, cl } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -84,13 +84,12 @@ function StakeHolderTimeline({ timeline = [], isStatusPill = {} }) {
 							</div>
 
 							<div className={styles.popover_section}>
-								<Popover
-									trigger="mouseenter"
+								<Tooltip
 									placement="bottom"
-									render={item?.remarks || 'No Remarks'}
+									content={item?.remarks || 'No Remarks'}
 								>
 									<span>Remarks</span>
-								</Popover>
+								</Tooltip>
 							</div>
 
 						</div>

@@ -27,7 +27,7 @@
 	width: 24px;
 	height: 22px;
 	overflow: hidden;
-	color: #fff;
+	color: var(--color-secondary-5);
 	text-align: center;
 	border-radius: 50%;
 }
