@@ -76,12 +76,8 @@ function List({
 
 	let unSeenMsg = [];
 	unSeenMsg = messageContentArr.filter((item) => item[user_id]);
-	let unreadDataList = unSeenMsg?.map((obj) => obj?.channel_details);
-	unreadDataList = unreadDataList.sort((a, b) => {
-		const date1 = new Date(a.updated_at);
-		const date2 = new Date(b.updated_at);
-		return date2 - date1;
-	});
+	const unreadDataList = unSeenMsg?.map((obj) => obj?.channel_details);
+	unreadDataList.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
 	const channelList = showUnreadChat ? unreadDataList : listData;
 
 	const handleClick = () => {
