@@ -96,7 +96,17 @@ const getTerminalChargeRateControl = ({
 			options : currencies,
 		},
 		{
-			span: 6,
+			name       : 'terminal_charge_document',
+			label      : type === 'terminal' ? 'Terminal Charge Receipt' : 'Gatepass Charge Receipt',
+			type       : 'file',
+			drag       : true,
+			span       : 6,
+			maxSize    : '10485760',
+			uploadType : 'aws',
+			accept     : '.pdf',
+			rules      : {
+				required: true,
+			},
 		},
 		{
 			name        : 'csr_reference_number',
@@ -110,17 +120,7 @@ const getTerminalChargeRateControl = ({
 				},
 		},
 		{
-			name       : 'terminal_charge_document',
-			label      : type === 'terminal' ? 'Terminal Charge Receipt' : 'Gatepass Charge Receipt',
-			type       : 'file',
-			drag       : true,
-			span       : 6,
-			maxSize    : '10485760',
-			uploadType : 'aws',
-			accept     : '.pdf',
-			rules      : {
-				required: true,
-			},
+			span: 6,
 		},
 		{
 			name  : 'terminalChargeReceipt',
