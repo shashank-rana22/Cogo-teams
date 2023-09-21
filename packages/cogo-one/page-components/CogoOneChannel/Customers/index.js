@@ -26,7 +26,7 @@ const COMPONENT_MAPPING = {
 	teams           : Teams,
 };
 
-const DEFAULT_PADDING_NOT_REQUIRED = ['outlook', 'firebase_emails'];
+const DEFAULT_PADDING_NOT_REQUIRED = ['outlook', 'firebase_emails', 'teams'];
 
 function Customers({
 	setActiveTab = () => {},

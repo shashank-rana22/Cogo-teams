@@ -1,4 +1,30 @@
 .container {
 	display: flex;
 	flex-direction: column;
+
+	:global {
+		.ui_multiselect_display_container {
+			width: 220px !important;
+		}
+
+		.ui_multiselect_container {
+			width: 220px;
+		}
+
+		.ui_multiselect_input_control {
+			font-size: 12px;
+		}
+	}
+}
+
+.action {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 16px;
+}
+
+.label {
+	margin-bottom: 6px;
+	font-size: 13px;
+	color: #4f4f4f;
 }

@@ -118,7 +118,7 @@ function CogoOne() {
 		queryAssignedChat: assigned_chat,
 	};
 
-	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
+	const { hasNoFireBaseRoom = false, data:tabData, tab = '' } = activeTab || {};
 
 	const { user_id = '', lead_user_id = '' } = tabData || {};
 
@@ -186,7 +186,6 @@ function CogoOne() {
 						{...commonProps}
 					/>
 				</div>
-
 				{sendBulkTemplates ? (
 					<PortPairOrgFilters
 						setSelectedAutoAssign={setSelectedAutoAssign}
@@ -259,7 +258,7 @@ function CogoOne() {
 								) : null}
 						</>
 					)}
-				<AndroidApp />
+				{tab !== 'teams' ? <AndroidApp /> : null }
 			</div>
 
 			<ModalComp
