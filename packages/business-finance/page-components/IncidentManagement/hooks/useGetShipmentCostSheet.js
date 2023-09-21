@@ -6,7 +6,7 @@ import getFormattedData from '../utils/getFormattedData';
 
 const SUCCESS = 200;
 
-const useGetShipmentCostSheet = ({ ShipmentId, jobNumber, JOB_SOURCE, JOB_TYPE }) => {
+const useGetShipmentCostSheet = ({ ShipmentId = '', jobNumber = '', JOB_SOURCE = '', JOB_TYPE = '' }) => {
 	const jobType = JOB_TYPE;
 	const jobSource = JOB_SOURCE;
 	const [{ data:postTaxData, loading:postTaxLoading }, postTaxFetch] = useRequestBf(
