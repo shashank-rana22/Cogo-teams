@@ -1,4 +1,3 @@
-import useGetEntityBanks from '../../../hooks/useGetEntityBank';
 import { INVOICE_VIEW_FILTERS } from '../invoiceViewFilterControl';
 import { payrunBankDateFilters } from '../payrunPaidFilterControls';
 import { UPLOAD_HISTORY_FILTERS } from '../uploadHistoryFilterControl';
@@ -10,9 +9,10 @@ const powerControls = (banks = []) => (banks || []).map((control) => (control ||
 	}),
 ));
 
-const GetChooseFilterControls = ({ activePayrunTab, overseasData, isInvoiceView }) => {
-	const { entityBank = [] } = useGetEntityBanks({});
-
+const getChooseFilterControls = ({
+	activePayrunTab = '',
+	overseasData = '', isInvoiceView = false, entityBank = [],
+}) => {
 	const banks = (entityBank || []).map((control) => control.bank_details);
 
 	const bankDetails = powerControls(banks);
@@ -32,4 +32,4 @@ const GetChooseFilterControls = ({ activePayrunTab, overseasData, isInvoiceView 
 	}
 	return [];
 };
-export default GetChooseFilterControls;
+export default getChooseFilterControls;
