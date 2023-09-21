@@ -40,7 +40,7 @@ function JobOpenModal({
 
 	return (
 		<div>
-			<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>
+			<Button size="md" themeType="secondary" onClick={() => setShowModal(true)}>
 				View
 			</Button>
 
@@ -48,9 +48,7 @@ function JobOpenModal({
 				<Modal
 					size="lg"
 					show={showModal}
-					onClose={() => {
-						setShowModal(false);
-					}}
+					onClose={() => setShowModal(false)}
 				>
 					<Modal.Header
 						title={
@@ -124,9 +122,7 @@ function JobOpenModal({
 
 						<Button
 							disabled={!remarks || loadingOnSave}
-							onClick={() => {
-								onSave();
-							}}
+							onClick={onSave}
 						>
 							Save
 
