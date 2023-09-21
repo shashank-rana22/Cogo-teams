@@ -448,6 +448,8 @@ const GLOBAL_CONSTANTS = {
 		fcl_container_icon_s2c  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg',
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
+		airline_default_icon:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png',
 	},
 
 	video_call_ring_tone_url:

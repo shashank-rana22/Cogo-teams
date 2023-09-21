@@ -1,4 +1,5 @@
 import { Checkbox, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import LikeDislike from '../../../../../../../common/LikeDislike';
 
@@ -48,7 +49,7 @@ function Header({
 
 	// const popoverComponentData = buttonProps.comparision_button || {};
 
-	const imageUrl = airline?.logo_url;
+	const imageUrl = airline?.logo_url || GLOBAL_CONSTANTS.image_url.airline_default_icon;
 
 	return (
 		<div className={styles.container}>
@@ -67,14 +68,12 @@ function Header({
 				) : null}
 
 				<div className={styles.airline_info}>
-					{imageUrl ? (
-						<img
-							src={imageUrl}
-							alt={rate?.airline?.short_name}
-							className={styles.airline__logo}
-							height={30}
-						/>
-					) : null}
+					<img
+						src={imageUrl}
+						alt={rate?.airline?.short_name}
+						className={styles.airline__logo}
+						height={30}
+					/>
 
 					<div className={styles.airline_name}>
 						{rate?.airline?.short_name}
