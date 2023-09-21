@@ -6,9 +6,9 @@ import React, { useState } from 'react';
 import { STATISTICS_HEAD, STATISTICS_HEAD_LIMIT_INDEX } from '../../helpers/constants';
 import useGetLeadData from '../../hooks/useGetLeadData';
 import LeadInfo from '../LeadInfo';
-import MainFilters from '../MainFilters';
 import Statistics from '../Statistics';
 
+import MainFilters from './MainFilters';
 import styles from './styles.module.css';
 
 function Accounts() {

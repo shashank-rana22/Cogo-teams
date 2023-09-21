@@ -2,8 +2,8 @@ import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
-import { getFieldController } from '../../../../../commons/Form/getFieldController';
-import sub_controls from '../../../configurations/sub-filter-controls';
+import { getFieldController } from '../../../../../../commons/Form/getFieldController';
+import sub_controls from '../../../../configurations/sub-filter-controls';
 
 import getDefaultFormValues from './get-default-form-values';
 import styles from './styles.module.css';

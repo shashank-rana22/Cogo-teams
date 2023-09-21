@@ -2,9 +2,9 @@ import { Button } from '@cogoport/components';
 import { IcMFilter, IcMUndo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import { getFieldController } from '../../../../commons/Form/getFieldController';
-import controls from '../../configurations/filter-controls';
-import getSearchControls from '../../configurations/search-control';
+import { getFieldController } from '../../../../../commons/Form/getFieldController';
+import controls from '../../../configurations/filter-controls';
+import getSearchControls from '../../../configurations/search-control';
 
 import styles from './styles.module.css';
 import SubFiltersModal from './SubFiltersModal';
