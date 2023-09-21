@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -46,6 +47,8 @@ const useIncidentReOpenJob = ({
 			await trigger({
 				data: payload,
 			});
+
+			Toast.success('Request Submitted!');
 
 			refetch();
 		} catch (error) {

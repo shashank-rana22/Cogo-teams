@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
@@ -25,6 +26,8 @@ const useIncidentReOpenJob = ({
 			await trigger({
 				data: payload,
 			});
+
+			Toast.success('Request Submitted!');
 
 			refetch();
 		} catch (error) {
