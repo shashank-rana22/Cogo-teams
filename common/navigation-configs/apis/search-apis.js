@@ -574,10 +574,5 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'spot_search',
 	},
-	{
-		api          : 'create_shipment_trade_partner_organization',
-		access_type  : 'private',
-		service_name : 'spot_search',
-	},
 ];
 export default apis;
