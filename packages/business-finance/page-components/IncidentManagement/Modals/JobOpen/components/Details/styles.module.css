@@ -39,6 +39,7 @@
 
 .profit_container {
 	display: flex;
+	margin-left: 12px;
 }
 
 .shipment_container {
