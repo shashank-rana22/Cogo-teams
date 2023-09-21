@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import { IcMNotifications } from '@cogoport/icons-react';
 import { NewNotifications } from '@cogoport/notifications';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
@@ -9,26 +8,27 @@ import styles from './styles.module.css';
 
 function AdminNotification(props) {
 	const {
-		notificationLoading = false,
-		notificationData = {},
-		trigger = () => {},
 		setOpenNotificationPopover = () => {},
 		openNotificationPopover,
-		setUnseenNotificationCount = () => {},
-		unseenNotificationCount,
+		// setUnseenNotificationCount = () => {},
+		// unseenNotificationCount,
 	} = props || {};
 
 	const { zeroth_index } = GLOBAL_CONSTANTS;
 
-	const { is_not_seen_count = 0 } = notificationData;
-
 	const [dataRequired, setDataRequired] = useState(false);
+
+	const [{ data, loading }, trigger] = useRequest({
+		url    : '/list_communications',
+		method : 'get',
+	}, { manual: true });
 
 	const [, triggerBulkCommunication] = useRequest({
 		url    : '/bulk_update_communications',
 		method : 'POST',
 	}, { manual: true });
 
+	const { is_not_seen_count = 0 } = data || {};
 	const updateAction = async (action) => {
 		try {
 			const payload = {
@@ -74,17 +74,17 @@ function AdminNotification(props) {
 
 	useEffect(() => {
 		onShowToggle(openNotificationPopover);
-		if (!openNotificationPopover && unseenNotificationCount > zeroth_index) {
-			setUnseenNotificationCount(zeroth_index);
-		}
+		// if (!openNotificationPopover && unseenNotificationCount > zeroth_index) {
+		// 	setUnseenNotificationCount(zeroth_index);
+		// }
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [openNotificationPopover, setOpenNotificationPopover]);
 
 	return openNotificationPopover ? (
 		<div className={styles.container}>
 			<NewNotifications
-				notificationData={notificationData}
-				notificationLoading={notificationLoading}
+				notificationData={data}
+				notificationLoading={loading}
 				trigger={trigger}
 				setOpenNotificationPopover={setOpenNotificationPopover}
 				openNotificationPopover={openNotificationPopover}

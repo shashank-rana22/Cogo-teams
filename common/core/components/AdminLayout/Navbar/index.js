@@ -1,10 +1,7 @@
-/* eslint-disable max-lines-per-function */
 import { Input, cl } from '@cogoport/components';
-import { IcMSearchdark, IcMNotifications } from '@cogoport/icons-react';
-// import NewNotifications from '@cogoport/notifications/page-components/NewNotifications/index';
-import { useRequest } from '@cogoport/request';
+import { IcMSearchdark } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 
 import { LOGO } from '../../../constants/logo';
 import { applyFilter } from '../../../helpers/applyFilter';
@@ -19,9 +16,6 @@ import styles from './styles.module.css';
 import SwitchAccounts from './SwitchAccounts';
 // import ThemeToggle from './ThemeToggle';
 
-const ZERO = 0;
-const MAX_COUNT = 100;
-
 function Navbar({
 	className,
 	style,
@@ -33,8 +27,8 @@ function Navbar({
 	inCall = false,
 	userId = '',
 	firestore = {},
-	showCount,
-	setShowCount,
+	// showCount,
+	// setShowCount,
 }) {
 	const ref = useRef(null);
 	const { t } = useTranslation(['common']);
@@ -56,7 +50,6 @@ function Navbar({
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [openPopover, setOpenPopover] = useState(false);
 	const [openNotificationPopover, setOpenNotificationPopover] = useState(false);
-	const [unseenNotificationCount, setUnseenNotificationCount] = useState(false);
 	const [searchString, setSearchString] = useState('');
 
 	const filterdList = searchString
@@ -78,40 +71,8 @@ function Navbar({
 		[],
 	);
 
-	const [{ data:notificationData, loading : notificationLoading }, trigger] = useRequest({
-		url    : '/list_communications',
-		method : 'get',
-		// params : {
-		// 	data_required                  : true,
-		// 	not_seen_count_required        : true,
-		// 	pagination_data_required       : true,
-		// 	page                           : 1,
-		// 	communication_content_required : true,
-		// 	filters                        : { type: 'platform_notification' },
-		// },
-	}, { manual: true });
-
-	const { is_not_seen_count = ZERO } = notificationData || {};
-
-	useEffect(() => {
-		trigger({
-			params: {
-				data_required                  : true,
-				not_seen_count_required        : true,
-				pagination_data_required       : true,
-				page                           : 1,
-				communication_content_required : true,
-				filters                        : { type: 'platform_notification' },
-			},
-		});
-	}, [trigger]);
-
-	useEffect(() => {
-		setUnseenNotificationCount(is_not_seen_count);
-	}, [is_not_seen_count]);
-
 	const handleLeave = () => {
-		setShowCount(true);
+		// setShowCount(true);
 		if (openPopover || openNotificationPopover) {
 			setResetSubnavs(true);
 		} else {
@@ -127,7 +88,7 @@ function Navbar({
 			<nav
 				onMouseEnter={() => {
 					setResetSubnavs(true);
-					setShowCount(false);
+					// setShowCount(false);
 				}}
 				onMouseLeave={handleLeave}
 			>
@@ -153,10 +114,6 @@ function Navbar({
 						refetch={refetch}
 						userId={userId}
 						firestore={firestore}
-						notificationLoading={notificationLoading}
-						trigger={trigger}
-						data={notificationData}
-						showCount={showCount}
 					/>
 
 					<div className={styles.search_container}>
@@ -167,27 +124,6 @@ function Navbar({
 							prefix={<IcMSearchdark width={16} height={16} />}
 							onChange={setSearchFunc}
 						/>
-					</div>
-
-					<div
-						onClick={() => {
-							setOpenNotificationPopover(!openNotificationPopover);
-							setOpenPopover(false);
-						}}
-						className={styles.list_item_inner}
-						style={{ marginTop: 8 }}
-						role="presentation"
-					>
-						<IcMNotifications width={16} height={16} fill={unseenNotificationCount ? 'red' : '#000'} />
-						{unseenNotificationCount && showCount && !openNotificationPopover ? (
-							<div className={styles.notification_count}>
-								{unseenNotificationCount >= MAX_COUNT
-									? `${MAX_COUNT}+` : unseenNotificationCount}
-							</div>
-						) : null}
-
-						<span>Notifications</span>
-
 					</div>
 
 					<div className={styles.line} />
@@ -257,13 +193,10 @@ function Navbar({
 					openNotificationPopover
 						&& (
 							<AdminNotification
-								notificationData={notificationData}
-								notificationLoading={notificationLoading}
-								trigger={trigger}
 								openNotificationPopover={openNotificationPopover}
 								setOpenNotificationPopover={setOpenNotificationPopover}
-								setUnseenNotificationCount={setUnseenNotificationCount}
-								unseenNotificationCount={unseenNotificationCount}
+								// setUnseenNotificationCount={setUnseenNotificationCount}
+								// unseenNotificationCount={unseenNotificationCount}
 							/>
 						)
 				}

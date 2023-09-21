@@ -1,15 +1,10 @@
-/* eslint-disable max-lines-per-function */
-/* eslint-disable max-len */
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// eslint-disable-next-line no-unused-vars
 import { IcMArrowRotateDown, IcMNotifications } from '@cogoport/icons-react';
-// import NewNotifications from '../../../../../../../packages/notifications/page-components/NewNotifications';
 import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
-// import AdminNotification from '../../AdminNotification';
 import SwitchAccounts from '../../SwitchAccounts';
 
 import styles from './styles.module.css';
@@ -22,7 +17,6 @@ const ONE = 1;
 const TWO = 2;
 const ZERO_COUNT = 0;
 const MAX_NOTIFICATION_COUNT = 99;
-// const MAX_COUNT = 100;
 
 function ProfileAvatar({ picture = '' }) {
 	return (
@@ -70,25 +64,23 @@ function Items({
 	refetch = () => {},
 	checkIfSessionExpiring,
 	notificationCount = ZERO_COUNT,
-	// openNotificationPopover,
+	openNotificationPopover,
 	setOpenNotificationPopover,
-	// notificationData,
-	// showCount,
-	// notificationLoading,
-	// trigger,
+
 }) {
 	const { t } = useTranslation(['common']);
 
-	// const notificationCount = notificationData?.is_not_seen_count;
-	// const notificationCount = 2;
-
-	const { user_data, userSessionMappings, query } = useSelector(({ profile, general }) => ({
+	const {
+		user_data,
+		userSessionMappings,
+		// query,
+	} = useSelector(({ profile, general }) => ({
 		user_data           : profile?.user || {},
 		userSessionMappings : profile?.user_session_mappings || [],
 		query               : general?.query || {},
 	}));
 
-	const { partner_id = '' } = query || {};
+	// const { partner_id = '' } = query || {};
 
 	const [showSubNav, setShowSubNav] = useState(false);
 
@@ -97,9 +89,9 @@ function Items({
 		window.location.href = '/v2/login?source=add_account';
 	};
 
-	const notificationRedirect = () => {
-		window.location.href = `/v2/${partner_id}/notifications`;
-	};
+	// const notificationRedirect = () => {
+	// 	window.location.href = `/v2/${partner_id}/notifications`;
+	// };
 
 	const { picture = '', name = '' } = user_data;
 
@@ -108,9 +100,9 @@ function Items({
 		setOpenNotificationPopover(false);
 	};
 
-	// const handleNotificationPopover = () => {
-	// 	setOpenNotificationPopover(!openNotificationPopover);
-	// };
+	const handleNotificationPopover = () => {
+		setOpenNotificationPopover(!openNotificationPopover);
+	};
 
 	let activeUser = {};
 	(userSessionMappings || []).forEach((user) => {
@@ -125,8 +117,6 @@ function Items({
 	const lessThan30Seconds = Number(timeLeft) >= Number(expire_time / TOTAL_TIME - THIRTY_SECONDS);
 
 	const loadingState = checkIfSessionExpiring || lessThan30Seconds || loading;
-
-	// console.log('notification data 1', notificationData);
 
 	useEffect(() => {
 		setShowSubNav(false);
@@ -193,9 +183,6 @@ function Items({
 										) {
 											handlePopover();
 										}
-
-										if (singleOption?.name
-                                            === 'notifications') { notificationRedirect(); }
 									}}
 									aria-hidden
 								>
@@ -222,66 +209,6 @@ function Items({
 				})}
 			</div>
 
-			{
-			// (notificationCount > ZERO_COUNT) && (
-				// <div className={styles.notifications_container}>
-				// 	{!showSubNav ? (
-				// 		<div className={styles.notifiction_icon}>
-				// 			<IcMNotifications width={16} height={16} fill="red" />
-				// 			{notificationCount && showCount && !openNotificationPopover ? (
-				// 				<div className={styles.new_notifications}>
-				// 					{notificationCount >= MAX_COUNT
-				// 						? `${MAX_COUNT}+` : notificationCount}
-				// 				</div>
-				// 			) : null}
-				// 		</div>
-				// 	) : null}
-
-				// 	<div style={showSubNav ? { width: '100%' } : {}}>
-				// 		<Button
-				// 			size="md"
-				// 			themeType="primary"
-				// 			onClick={handleNotificationPopover}
-				// 			disabled={loadingState}
-				// 			className={styles.button_styles}
-				// 			style={showSubNav ? { width: '100%' } : {}}
-				// 		>
-				// 			{notificationCount ? `
-				// 			${t('common:you_have')}
-				// 			${' '}
-				// 			${notificationCount}
-				// 			${' '}
-				// 			${t('common:new')}
-				// 			${' '}
-				// 			${notificationCount > ONE ? t('common:notifications') : t('common:notification')}` : 'You have no new Notifications'}
-				// 		</Button>
-				// 	</div>
-
-				// </div>
-			// )
-			}
-
-			{/*
-			{(notificationCount > ZERO_COUNT && showSubNav) && (
-				<div className={styles.button_container}>
-					<Button
-						size="md"
-						style={{ width: '100%', marginTop: 10 }}
-						themeType="primary"
-						onClick={handleNotificationPopover}
-						disabled={loadingState}
-					>
-						{t('common:you_have')}
-						{' '}
-						{notificationCount}
-						{' '}
-						{t('common:new')}
-						{' '}
-						{notificationCount > ONE ? t('common:notifications') : t('common:notification')}
-					</Button>
-				</div>
-			)} */}
-
 			{showSubNav && (
 				<div className={styles.button_container}>
 					<Button
@@ -296,32 +223,32 @@ function Items({
 				</div>
 			)}
 
-			{notificationCount > ZERO_COUNT && (
-				<div className={styles.button_container}>
-					<Button
-						size="md"
-						style={{ width: '100%', marginTop: 10 }}
-						themeType="primary"
-						onClick={notificationRedirect}
-						disabled={loadingState}
-					>
-						{resetSubnavs ? (
-							`${t('common:you_have')} ${notificationCount} ${t('common:new')} ${
-								notificationCount > ONE ? t('common:notifications') : t('common:notification')
-							}`
-						) : (
-							<div className={styles.notification_wrapper}>
-								<IcMNotifications height="24px" width="24px" />
-								<div className={styles.notifications_badge}>
-									{notificationCount > MAX_NOTIFICATION_COUNT
-										? `${MAX_NOTIFICATION_COUNT}+`
-										: notificationCount}
-								</div>
+			{/* {notificationCount > ZERO_COUNT && ( */}
+			<div className={styles.button_container}>
+				<Button
+					size="md"
+					style={{ width: '100%', marginTop: 10 }}
+					themeType="primary"
+					onClick={handleNotificationPopover}
+					disabled={loadingState}
+				>
+					{resetSubnavs ? (
+						`${t('common:you_have')} ${notificationCount} ${t('common:new')} ${
+							notificationCount > ONE ? t('common:notifications') : t('common:notification')
+						}`
+					) : (
+						<div className={styles.notification_wrapper}>
+							<IcMNotifications height="24px" width="24px" />
+							<div className={styles.notifications_badge}>
+								{notificationCount > MAX_NOTIFICATION_COUNT
+									? `${MAX_NOTIFICATION_COUNT}+`
+									: notificationCount}
 							</div>
-						)}
-					</Button>
-				</div>
-			)}
+						</div>
+					)}
+				</Button>
+			</div>
+			{/* )} */}
 		</>
 	);
 }
