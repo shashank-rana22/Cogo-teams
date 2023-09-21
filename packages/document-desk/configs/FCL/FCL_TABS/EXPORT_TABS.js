@@ -20,7 +20,6 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 		upload_shipping_instruction: {
 			task_attributes: [
 				{
-					...(isCriticalOn ? { status: 'pending' } : {}),
 					assigned_taskholder: 'service_ops2',
 				},
 				{

@@ -88,7 +88,6 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 			task_attributes: [
 				{
 					assigned_stakeholder: 'service_ops2',
-					...(isCriticalOn ? { status: 'pending' } : {}),
 				},
 				{
 					task   : 'mark_vessel_departed',
