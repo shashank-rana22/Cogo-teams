@@ -9,7 +9,7 @@ const SHOW_ALL_TASKS = ['manager', 'admin'];
 
 const geo = getGeoConstants();
 
-const is_indonesia_coe_head = geo.navigations.partner.bookings.pending_tasks.is_booking_agent_filter_required;
+const is_indonesia_coe_head = geo.others.navigations.partner.bookings.pending_tasks.is_booking_agent_filter_required;
 
 const STAKEHOLDER_MAPPINGS = {
 	booking_desk                    : 'service_ops',
@@ -37,6 +37,7 @@ function useListTasks({
 	const { stakeholders = [] } = shipment_data || {};
 
 	let updatedActiveStakeholder = activeStakeholder;
+	console.log('activeStakeholder:: ', activeStakeholder);
 
 	let isBookingAgent = false;
 	let isSalesAgent = false;
@@ -56,6 +57,8 @@ function useListTasks({
 	const user_id = profile?.user?.id;
 
 	const stakeholder = STAKEHOLDER_MAPPINGS[updatedActiveStakeholder] || '';
+
+	console.log('stakeholder:: ', stakeholder);
 
 	let showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
 
