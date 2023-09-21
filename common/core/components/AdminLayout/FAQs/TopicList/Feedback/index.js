@@ -47,7 +47,10 @@ function Feedback({ setShowFeedback = () => {} }) {
 							<Button
 								size="sm"
 								themeType="accent"
-								onClick={() => setShowAddFeedback(true)}
+								onClick={() => {
+									setShowAddFeedback(true);
+									setActiveTab('all');
+								}}
 							>
 								Add Feedback
 
