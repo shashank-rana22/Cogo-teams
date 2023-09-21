@@ -82,7 +82,11 @@ function Details({ row = {} }) {
 				</div>
 				<div>
 					<div className={styles.heading}>Profit Margin</div>
-					<div className={styles.text}>{row?.data?.jobOpenRequest?.profitMargin}</div>
+					<div className={styles.text}>
+						INR
+						{' '}
+						{row?.data?.jobOpenRequest?.profitMargin}
+					</div>
 				</div>
 			</div>
 
