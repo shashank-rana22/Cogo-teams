@@ -10,9 +10,10 @@ import MetaDataModal from './MetaData';
 import styles from './styles.module.css';
 
 function Header({ plan = {}, loading = false }) {
+	const { t } = useTranslation(['saasSubscription']);
+
 	const [metaData, setMetaData] = useState({});
 
-	const { t } = useTranslation(['saasSubscription']);
 	const colFunc = itemFunction({ t });
 
 	const planListConfig = getPlanDetailsConfig({ isPlanDetail: true, t });
@@ -40,8 +41,7 @@ function Header({ plan = {}, loading = false }) {
 						});
 					}}
 				>
-					Edit Meta Data
-
+					{t('saasSubscription:edit_meta_data')}
 				</Button>
 			</div>
 

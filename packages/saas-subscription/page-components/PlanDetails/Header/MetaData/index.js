@@ -1,4 +1,5 @@
 import { Button, Modal, Textarea } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import usePlanMetaData from '../../../../hooks/usePlanMetaData';
@@ -6,13 +7,15 @@ import usePlanMetaData from '../../../../hooks/usePlanMetaData';
 import styles from './styles.module.css';
 
 function MetaDataModal({ metaData, setMetaData }) {
+	const { t } = useTranslation(['saasSubscription']);
+
 	const [newMetaData, setNewMetaData] = useState(JSON.stringify(metaData?.info));
 
 	const { loading, submitHandler, closeModalHandler } = usePlanMetaData({ metaData, setMetaData });
 
 	return (
 		<Modal show={metaData.open} onClose={closeModalHandler} closeOnOuterClick>
-			<Modal.Header title="Meta Data" />
+			<Modal.Header title={t('saasSubscription:meta_data')} />
 
 			<div className={styles.modal_body}>
 				<Textarea
@@ -29,8 +32,7 @@ function MetaDataModal({ metaData, setMetaData }) {
 					themeType="secondary"
 					onClick={closeModalHandler}
 				>
-					Cancel
-
+					{t('saasSubscription:cancel')}
 				</Button>
 				<Button
 					themeType="accent"
@@ -38,8 +40,7 @@ function MetaDataModal({ metaData, setMetaData }) {
 					disabled={!newMetaData}
 					onClick={() => submitHandler(newMetaData)}
 				>
-					Save
-
+					{t('saasSubscription:save')}
 				</Button>
 			</div>
 		</Modal>

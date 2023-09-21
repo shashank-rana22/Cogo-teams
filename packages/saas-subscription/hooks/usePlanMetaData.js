@@ -1,8 +1,11 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 
 const usePlanMetaData = ({ metaData, setMetaData }) => {
+	const { t } = useTranslation(['saasSubscription']);
+
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_saas_plan',
@@ -28,7 +31,7 @@ const usePlanMetaData = ({ metaData, setMetaData }) => {
 			JSON.parse(val);
 			editMetaDataHandler({ payload: { id: metaData?.id, metaData: val } });
 		} catch (e) {
-			Toast.error('Please enter a valid JSON');
+			Toast.error(t('saasSubscription:valid_json'));
 		}
 	};
 

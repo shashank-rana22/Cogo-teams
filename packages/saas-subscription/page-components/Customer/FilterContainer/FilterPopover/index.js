@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 
 import filterControls from '../../../../configuration/filterControls';
 import { getFieldController } from '../../../../utils/getFieldController';
@@ -7,6 +8,8 @@ import { getFieldController } from '../../../../utils/getFieldController';
 import styles from './styles.module.css';
 
 function FilterPopover({ setShowPopover, setGlobalFilters }) {
+	const { t } = useTranslation(['saasSubscription']);
+
 	const { control, handleSubmit } = useForm();
 
 	const submitHandler = (data) => {
@@ -20,7 +23,7 @@ function FilterPopover({ setShowPopover, setGlobalFilters }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				Filters
+				{t('saasSubscription:filters')}
 			</div>
 
 			<div className={styles.body}>
@@ -37,7 +40,14 @@ function FilterPopover({ setShowPopover, setGlobalFilters }) {
 			</div>
 
 			<div className={styles.footer}>
-				<Button size="sm" themeType="secondary" onClick={() => setShowPopover(false)}>Cancel</Button>
+				<Button
+					size="sm"
+					themeType="secondary"
+					onClick={() => setShowPopover(false)}
+				>
+					{t('saasSubscription:cancel')}
+
+				</Button>
 
 				<Button
 					size="sm"
@@ -45,7 +55,7 @@ function FilterPopover({ setShowPopover, setGlobalFilters }) {
 					className={styles.save_btn}
 					themeType="accent"
 				>
-					Apply
+					{t('saasSubscription:apply')}
 				</Button>
 			</div>
 		</div>

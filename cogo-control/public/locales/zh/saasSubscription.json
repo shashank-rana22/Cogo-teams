@@ -104,6 +104,11 @@
     "utr_title_approve":"批准计划",
     "utr_title_current":"当前计划",
     "sure":"你确定你要",
-    "plan":"计划？"
+    "plan":"计划？",
+    "edit_meta_data":"编辑元数据",
+    "meta_data":"元数据",
+    "apply":"申请",
+    "filters":"过滤器",
+    "valid_json":"请输入有效的JSON"
 
 }

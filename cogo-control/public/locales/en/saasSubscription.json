@@ -104,5 +104,10 @@
     "utr_title_approve":"Approve Plan",
     "utr_title_current":"Current Plan",
     "sure":"Are you sure you want to",
-    "plan":"plan?"
+    "plan":"plan?",
+    "edit_meta_data":"Edit Meta Data",
+    "meta_data":"Meta Data",
+    "apply":"Apply",
+    "filters":"Filters",
+    "valid_json":"Please enter a valid JSON"
 }

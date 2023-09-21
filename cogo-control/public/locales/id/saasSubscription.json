@@ -104,6 +104,11 @@
     "utr_title_approve":"Menyetujui rencana",
     "utr_title_current":"Rencana saat ini",
     "sure":"Apakah Anda yakin ingin",
-    "plan":"rencana?"
+    "plan":"rencana?",
+    "edit_meta_data":"Edit data meta",
+    "meta_data":"Data meta",
+    "apply":"Menerapkan",
+    "filters":"Filter",
+    "valid_json":"Harap masukkan JSON yang valid"
 
 }

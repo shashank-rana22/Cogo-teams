@@ -104,6 +104,11 @@
     "utr_title_approve":"Phê duyệt kế hoạch",
     "utr_title_current":"Kế hoạch hiện tại",
     "sure":"Bạn có chắc bạn muốn",
-    "plan":"kế hoạch?"
+    "plan":"kế hoạch?",
+    "edit_meta_data":"Chỉnh sửa dữ liệu meta",
+    "meta_data":"Metadata",
+    "apply":"Áp dụng",
+    "filters":"Bộ lọc",
+    "valid_json":"Vui lòng nhập JSON hợp lệ"
 
 }
