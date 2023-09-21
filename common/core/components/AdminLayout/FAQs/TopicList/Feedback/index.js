@@ -4,8 +4,8 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import FeedbackForm from './FeedbackForm';
+import FeedbackList from './FeedbackList';
 import useGetFeedbacks from './hooks/useGetFeedbacks';
-import List from './List';
 import styles from './styles.module.css';
 
 const DEFAULT_PAGE = 1;
@@ -13,8 +13,9 @@ const DEFAULT_PAGE = 1;
 function Feedback({ setShowFeedback = () => {} }) {
 	const [showAddFeedback, setShowAddFeedback] = useState(false);
 	const [page, setPage] = useState(DEFAULT_PAGE);
+	const [activeTab, setActiveTab] = useState('all');
 
-	const { feedbacks, loading, getFeedbacks, pageData } = useGetFeedbacks({ page });
+	const { feedbacks, loading, getFeedbacks, pageData } = useGetFeedbacks({ activeTab, page });
 	const { total = '' } = pageData || {};
 
 	return (
@@ -56,7 +57,9 @@ function Feedback({ setShowFeedback = () => {} }) {
 				)}
 
 			{!showAddFeedback && (
-				<List
+				<FeedbackList
+					setActiveTab={setActiveTab}
+					activeTab={activeTab}
 					feedbacks={feedbacks}
 					loading={loading}
 				/>
