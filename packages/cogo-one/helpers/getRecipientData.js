@@ -181,7 +181,7 @@ export function getRecipientData({
 				...prev,
 				emailVia,
 				body:
-				!(CREATE_DRAFT_FOR.includes(newButtonType) && emailVia === 'firebase_emails') ? signature : '',
+				emailVia === 'firebase_emails' && !CREATE_DRAFT_FOR.includes(newButtonType) ? signature : '',
 				from_mail        : activeMailAddress,
 				subject          : newSubject || subject,
 				toUserEmail      : mailData?.toUserEmail || [],
