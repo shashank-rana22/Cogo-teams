@@ -101,12 +101,8 @@
 	}
 
 	&.min_width {
-		min-width: 100%;
+		min-width: 88%;
 	}
-}
-
-.min_width {
-	min-width: 100%;
 }
 
 .line_grey {
@@ -130,11 +126,10 @@
 .mile_stone_description {
 	position: absolute;
 	top: 20px;
-	left: -28px;
+	left: -5px;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	justify-content: center;
 	min-width: 100px;
 }
 
@@ -143,8 +138,7 @@
 	overflow: hidden;
 	font-size: 10px;
 	line-height: 14px;
-	color: var(--color-accent-orange-2);
-	text-align: center;
+	color: black;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 
@@ -174,5 +168,5 @@
 }
 
 .tool_tip_item {
-	color: var(--color-accent-orange-2);
+	color: black;
 }

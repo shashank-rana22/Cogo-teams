@@ -1,4 +1,5 @@
 import { Button, cl, Textarea } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -33,11 +34,11 @@ function Details({ row = {} }) {
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{row?.data?.organization?.businessName}</div>
+					<div className={styles.text}>{row?.data?.organization?.businessName || ''}</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{row?.createdBy?.name}</div>
+					<div className={styles.text}>{row?.createdBy?.name || ''}</div>
 				</div>
 			</div>
 			<div className={styles.line} />
@@ -59,33 +60,49 @@ function Details({ row = {} }) {
 				<div className={styles.heading}>Shipment Id</div>
 				<div className={styles.shipment_id}>
 					#
-					{row?.data?.jobOpenRequest?.jobNumber}
+					{row?.data?.jobOpenRequest?.jobNumber || ''}
 				</div>
 			</div>
 
 			<div className={styles.buy_sell_div}>
 				<div>
 					<div className={styles.heading}>Estimated Sell</div>
-					<div className={styles.text}>INR 20,000</div>
+					<div className={styles.text}>
+						INR
+						{' '}
+						{row?.data?.jobOpenRequest?.estimatedSell || GLOBAL_CONSTANTS.zeroth_index}
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Sell</div>
-					<div className={styles.text}>INR 20,000</div>
+					<div className={styles.text}>
+						INR
+						{' '}
+						{row?.data?.jobOpenRequest?.totalSell || GLOBAL_CONSTANTS.zeroth_index}
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Estimated Buy</div>
-					<div className={styles.text}>INR 20,000</div>
+					<div className={styles.text}>
+						INR
+						{' '}
+						{row?.data?.jobOpenRequest?.estimatedBuy || GLOBAL_CONSTANTS.zeroth_index}
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Buy</div>
-					<div className={styles.text}>INR 20,000</div>
+					<div className={styles.text}>
+						INR
+						{' '}
+						{row?.data?.jobOpenRequest?.totalBuy || GLOBAL_CONSTANTS.zeroth_index}
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Profit Margin</div>
 					<div className={styles.text}>
 						INR
 						{' '}
-						{row?.data?.jobOpenRequest?.profitMargin}
+						{row?.data?.jobOpenRequest?.profitMargin || GLOBAL_CONSTANTS.zeroth_index}
 					</div>
 				</div>
 			</div>

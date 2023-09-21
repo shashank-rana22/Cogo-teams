@@ -58,10 +58,9 @@ function TimeLineItem({
 				<Tooltip placement="top" content={<Content />}>
 					<div className={styles.flex}>
 						{!item?.is_sub || isLast ? (
-
 							className === 'complete'
-                  && item?.completed_on
-                  && !item?.is_sub ? (
+                              && item?.completed_on
+                            && !item?.is_sub ? (
 	<IcMFtick color="#f68b21" height={20} width={20} />
 								) : (
 									<div

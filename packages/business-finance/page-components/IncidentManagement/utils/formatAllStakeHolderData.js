@@ -13,7 +13,7 @@ const allStakeHolderTimeLineData = ({ level0, level1, level2, level3 }) => {
 						email   : level0?.email,
 						name    : level0?.name,
 						remarks : level0?.remark,
-						status  : 'REQUESTER',
+						status  : 'REQUESTED BY',
 					}
 					: {}),
 			},

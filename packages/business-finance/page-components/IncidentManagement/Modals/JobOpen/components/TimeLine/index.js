@@ -9,7 +9,7 @@ import TimeLineItem from './TimeLineItem/index';
 const TIMELINE_LINE_FACTOR = 1;
 
 function TimeLine({ row = {} }) {
-	const shipmentId = row?.data?.jobOpenRequest?.id;
+	const shipmentId = row?.data?.jobOpenRequest?.id || '';
 	const { data: timelineData, loading } = useGetShipmentTimeLine(shipmentId);
 
 	const SHIPMENT_DATA = {};
