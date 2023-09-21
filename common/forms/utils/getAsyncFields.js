@@ -366,10 +366,10 @@ function asyncFieldsTicketTypes() {
 	};
 }
 
-function asyncTicketsCategory({ endLabelKey = '' }) {
+function asyncTicketsCategory() {
 	return {
-		labelKey     : endLabelKey,
-		valueKey     : endLabelKey,
+		labelKey     : 'category',
+		valueKey     : 'category',
 		endpoint     : 'configuration_categories',
 		authkey      : 'get_tickets_configuration_categories',
 		microService : 'tickets',

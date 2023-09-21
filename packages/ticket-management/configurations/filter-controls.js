@@ -34,13 +34,15 @@ const useRaiseTicketcontrols = ({
 
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
 	const categoryDeskOptions = useGetAsyncTicketOptions({
-		...asyncTicketsCategory({ endLabelKey: !isOperation ? 'category' : 'raised_by_desk' }),
+		...asyncTicketsCategory(),
 		params: {
 			Service          : watchService || undefined,
 			TradeType        : watchTradeType || undefined,
 			RequestType      : watchRequestType || undefined,
 			CategoryDeskType : isOperation ? 'by_desk' : 'by_category',
 		},
+		valueKey : 'raised_by_desk',
+		labelKey : 'raised_by_desk',
 	});
 
 	const organizationUserOptions = useGetAsyncOptions({
