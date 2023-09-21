@@ -61,6 +61,7 @@ function CogoOne() {
 	const [sendBulkTemplates, setSendBulkTemplates] = useState(false);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
+	const [mailAttachments, setMailAttachments] = useState([]);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -71,16 +72,11 @@ function CogoOne() {
 	});
 
 	const {
-		viewType: initialViewType = '',
-		loading: workPrefernceLoading = false,
+		viewType: initialViewType = '', loading: workPrefernceLoading = false,
 		userSharedMails = [],
 	} = useAgentWorkPrefernce();
 
-	const {
-		fetchWorkStatus = () => {},
-		agentWorkStatus = {},
-		preferenceLoading = false,
-	} = useGetAgentPreference();
+	const { fetchWorkStatus = () => {}, agentWorkStatus = {}, preferenceLoading = false } = useGetAgentPreference();
 
 	const { addSignature } = useGetSignature();
 	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
@@ -108,7 +104,12 @@ function CogoOne() {
 		},
 		userId,
 		userName,
-		resetEmailState: () => setEmailState({ ...DEFAULT_EMAIL_STATE, body: addSignature() }),
+		resetEmailState: () => {
+			setEmailState({ ...DEFAULT_EMAIL_STATE, body: addSignature() });
+			setMailAttachments([]);
+		},
+		setMailAttachments,
+		mailAttachments,
 	};
 
 	const commonProps = {
@@ -137,7 +138,6 @@ function CogoOne() {
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
 			const auth = getAuth();
-
 			signInWithCustomToken(auth, token).catch((error) => {
 				console.error(error.message);
 			});

@@ -1,6 +1,7 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { getRecipientData } from '../../helpers/getRecipientData';
@@ -72,6 +73,7 @@ function MailBody({
 		to_mails: recipientData = [],
 		cc_mails: ccData = [],
 		bcc_mails: bccData = [],
+		attachments = [],
 	} = response || {};
 
 	const {
@@ -162,7 +164,7 @@ function MailBody({
 					/>
 				) : null}
 
-				<MailAttachments mediaUrls={media_url} />
+				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
 
 				<div className={styles.extra_controls}>
 					<div
