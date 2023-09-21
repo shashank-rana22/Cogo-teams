@@ -141,6 +141,7 @@ function LeadInfo({
 				params={params}
 				showRequest={showRequest}
 				setShowRequest={setShowRequest}
+				lead_count={paginationData.count}
 			/>
 
 		</div>

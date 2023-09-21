@@ -9,7 +9,12 @@ import useCreateEnrichmentRequest from '../../hooks/useCreateEnrichmentRequest';
 
 import styles from './styles.module.css';
 
-function EnrichmentRequestModal({ checkedRowsId = [], showRequest = false, setShowRequest = () => {}, params = {} }) {
+function EnrichmentRequestModal({
+	lead_count = null,
+	checkedRowsId = [],
+	showRequest = false,
+	setShowRequest = () => {}, params = {},
+}) {
 	const {
 		loading,
 		control,
@@ -21,6 +26,14 @@ function EnrichmentRequestModal({ checkedRowsId = [], showRequest = false, setSh
 	} = useCreateEnrichmentRequest({ setShowRequest, params, checkedRowsId });
 
 	const mode = watch('mode');
+	const select_first = watch('select_first');
+
+	const countValue = () => {
+		let show_count = null;
+		if (lead_count) { show_count = lead_count; }
+		if (select_first) { show_count = select_first; }
+		return show_count;
+	};
 
 	const onCloseRequest = () => {
 		setShowRequest(false);
@@ -30,9 +43,15 @@ function EnrichmentRequestModal({ checkedRowsId = [], showRequest = false, setSh
 	return (
 		<Modal size="sm" show={showRequest} onClose={onCloseRequest} placement="center">
 			<Modal.Header title={(
-				<span>
-					Enrichment Request
-				</span>
+				<div className={styles.modal_header}>
+					<div>
+						Enrichment Request
+					</div>
+					<div className={styles.lead_count_div}>
+						Total count: -
+						{` ${countValue()}`}
+					</div>
+				</div>
 			)}
 			/>
 			<Modal.Body>

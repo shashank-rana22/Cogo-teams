@@ -16,3 +16,12 @@
 	font-size: 10px;
 	color: #cb6464;
 }
+
+.modal_header {
+	display: flex;
+	flex-direction: column;
+}
+
+.lead_count_div {
+	font-size: 12px;
+}
