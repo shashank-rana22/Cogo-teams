@@ -1,4 +1,4 @@
-import { Button, Modal, MultiSelect, SingleDateRange } from '@cogoport/components';
+import { Button, DateRangepicker, Modal, MultiSelect, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
@@ -14,8 +14,8 @@ const ALL_ENTITIES = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map((entity
 	value : String(entity),
 }));
 
-function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item = {} }) {
-	const [date, setDate] = useState(null);
+function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal = () => {}, item = {} }) {
+	const [date, setDate] = useState({ startDate: null, endDate: new Date() });
 	const [entities, setEntites] = useState([]);
 	const [entityOptions, setEntityOptions] = useState(ALL_ENTITIES);
 
@@ -27,6 +27,10 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 	});
 
 	const handleClick = () => {
+		if (date?.startDate > date?.endDate) {
+			Toast.error('Please select a Start Date that is earlier than the End Date');
+			return;
+		}
 		downloadLedger();
 	};
 	const isEnabled = date?.startDate && date?.endDate && !isEmpty(entities)
@@ -49,6 +53,12 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 		}
 	}, [entities]);
 
+	const dateChangeHandler = (curr) => {
+		setDate((prev) => ({
+			...prev, startDate: curr?.startDate, endDate: (curr?.endDate === null) ? prev?.endDate : curr?.endDate,
+		}));
+	};
+
 	return (
 		<div>
 			<Modal
@@ -63,14 +73,15 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal, item
 						<div className={styles.date}>
 							<h5>Date Range*</h5>
 
-							<SingleDateRange
+							<DateRangepicker
 								placeholder="Select Date Range"
 								dateFormat="dd/MM/yyyy"
 								name="date"
-								onChange={setDate}
+								onChange={dateChangeHandler}
 								value={date}
 								style={{ width: '100%' }}
 								isPreviousDaysAllowed
+								maxDate={new Date()}
 							/>
 						</div>
 

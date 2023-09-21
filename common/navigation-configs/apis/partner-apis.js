@@ -1088,6 +1088,11 @@ const partner = {
 	],
 	demand_crm: [
 		{
+			api          : 'create_shipment_trade_partner_organization',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_lead_organization_users',
 			access_type  : 'private',
 			service_name : 'lead',
@@ -2779,6 +2784,21 @@ const partner = {
 		},
 		{
 			api          : 'update_organization_asset',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_user_communication_preferences',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'bulk_update_organization_user_communication_preference',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_user_communication_preference',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -9531,6 +9551,12 @@ const partner = {
 			feature     : 'JournalVoucher',
 		},
 		{
+			api         : 'post_payments_parent_jv_bulk_jv_upload',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
 			api         : 'post_payments_parent_jv_post_to_sage',
 			access_type : 'private',
 			module      : 'JournalVoucher',
@@ -9659,6 +9685,11 @@ const partner = {
 			api          : 'list_shipment_collection_party',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+		{
+			api          : 'get_incident_management_incident_job_reopen_incident_exists',
+			access_type  : 'private',
+			service_name : 'incident-management',
 		},
 		{
 			api          : 'post_incident_management_incident',
@@ -12844,6 +12875,16 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'create_draft_reply_all_html',
+			access_type  : 'private',
+			service_name : 'cogolens',
+		},
+		{
+			api          : 'create_draft_reply_html',
+			access_type  : 'private',
+			service_name : 'cogolens',
+		},
+		{
 			api          : 'list_shipment_operating_procedures',
 			access_type  : 'private',
 			service_name : 'shipment',
@@ -13382,6 +13423,21 @@ const partner = {
 			api          : 'onboard_lead_organization',
 			access_type  : 'private',
 			service_name : 'lead',
+		},
+		{
+			api          : 'list_cogoone_shifts',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_bulk_cogoone_shift',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_bulk_cogoone_shift',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 		{
 			api          : 'list_platform_config_constants',

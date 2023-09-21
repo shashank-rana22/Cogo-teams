@@ -8,6 +8,7 @@ import CustumTable from '../../commons/CustumTable';
 import { jvFilters } from '../../configurations/jv-filters';
 import useGetJvList from '../../hooks/useGetJvList';
 
+import BulkJvUpload from './BulkJvUploadModal/index';
 import CreateJvModal from './CreateJvModal';
 import styles from './styles.module.css';
 
@@ -15,7 +16,7 @@ function JournalVoucher({ entityCode }) {
 	const { query } = useRouter();
 	const [filters, setFilters] = useState({});
 	const [show, setShow] = useState(false);
-
+	const [showBulkJV, setShowBulkJV] = useState(false);
 	const { data, loading, refetch } = useGetJvList({ filters, entityCode });
 
 	const handleVersionChange = () => {
@@ -48,6 +49,7 @@ function JournalVoucher({ entityCode }) {
 						placeholder="Search By JV Number/Business Partner"
 						size="md"
 						suffix={<IcMSearchlight height="20px" width="20px" className={styles.search} />}
+						style={{ width: '300px' }}
 					/>
 					<Button
 						type="button"
@@ -57,6 +59,15 @@ function JournalVoucher({ entityCode }) {
 						className={styles.jvbutton}
 					>
 						Create JV
+					</Button>
+					<Button
+						size="md"
+						themeType="primary"
+						onClick={() => setShowBulkJV(true)}
+						style={{ marginLeft: '10px', padding: '18px' }}
+					>
+						BulK JV Upload
+
 					</Button>
 				</div>
 			</div>
@@ -75,6 +86,9 @@ function JournalVoucher({ entityCode }) {
 					onClose={onClose}
 					refetch={refetch}
 				/>
+			) : null}
+			{showBulkJV ? (
+				<BulkJvUpload showBulkJV={showBulkJV} setShowBulkJV={setShowBulkJV as any} />
 			) : null}
 		</div>
 	);

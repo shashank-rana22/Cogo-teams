@@ -10,5 +10,15 @@
     "or_label": "ATAU",
     "continue_with_microsoft": "LANJUTKAN DENGAN MICROSOFT",
     "already_login_toast_error": "Tidak dapat masuk dengan akun yang sudah aktif",
-    "failed_to_login_toast_error": "Gagal masuk, silakan coba lagi..."
+    "failed_to_login_toast_error": "Gagal masuk, silakan coba lagi...",
+    "login_field_mobile_placeholder": "Masukkan nomor ponsel Anda",
+    "login_field_mobile_error": "Detail ponsel diperlukan.",
+    "login_field_submit_otp_button": "Dapatkan OTP",
+    "login_otp_failed":"akun tidak ditemukan",
+    "login_otp_resend_success":"OTP St berhasil",
+    "mobile_title":"Silakan berikan nomor Anda dan terima OTP",
+    "login_Otp_field_title": "Verifikasi ponsel Anda",
+    "login_otp_field_subtitle": "Dengan kode verifikasi adalah St",
+    "login_otp_field_subtitle_null": "Nomor ponsel.",
+    "login_otp_field_submit_button": "Memeriksa"
 }

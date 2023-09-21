@@ -24,6 +24,7 @@ const SUPPORT_ADMIN = {
 	mails_to_be_shown             : [],
 	bulk_assign_features          : [],
 	configurations_to_be_shown    : [],
+	shift_view_default_type       : '',
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 	group_agents_api_filter       : ['shipment_specialist', 'support', 'shipment_specialist_admin'],
 	permissions                   : {

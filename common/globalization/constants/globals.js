@@ -450,6 +450,7 @@ const GLOBAL_CONSTANTS = {
 		fcl_container_icon_s2c  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg',
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
+		cogoport_login_logo: 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
 	},
 
 	video_call_ring_tone_url:
@@ -459,6 +460,8 @@ const GLOBAL_CONSTANTS = {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
 		+ '45773ab4048f606ce6ef06fa1d083352/'
 		+ 'Book%201%20-%20Copy.xlsx',
+		bulk_jv_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
+		+ 'ae3740f2c19b22161257c6e416cd2f5a/JVUploadSampleExcel.xlsx',
 	},
 
 	urls: {
