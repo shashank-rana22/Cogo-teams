@@ -41,6 +41,10 @@ function useCreateAutoUpsellService({
 						shipment_id: shipment_data?.id,
 						cargo_readiness_date,
 					},
+					shipment: {
+						id                   : shipment_data?.id,
+						consignee_shipper_id : shipment_data?.consignee_shipper_id || consigneeId,
+					},
 				},
 			});
 		} catch (error) {
