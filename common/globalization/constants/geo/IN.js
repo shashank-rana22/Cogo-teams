@@ -757,6 +757,9 @@ export default {
 						request_replace_invoice : false,
 						request_credit_note     : true,
 					},
+					pending_tasks: {
+						is_booking_agent_filter_required: false,
+					},
 				},
 				common: {
 					validate_registration_number : true,

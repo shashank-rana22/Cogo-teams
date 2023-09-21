@@ -1,10 +1,15 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useContext, useEffect, useCallback } from 'react';
 
 const SHOW_ALL_TASKS = ['manager', 'admin'];
+
+const geo = getGeoConstants();
+
+const is_indonesia_coe_head = geo.navigations.partner.bookings.pending_tasks.is_booking_agent_filter_required;
 
 const STAKEHOLDER_MAPPINGS = {
 	booking_desk                    : 'service_ops',
@@ -15,7 +20,7 @@ const STAKEHOLDER_MAPPINGS = {
 	booking_agent_manager           : 'booking_agent',
 	sales_agent                     : 'sales_agent',
 	consignee_shipper_booking_agent : 'booking_agent',
-	coe_head                        : 'booking_agent',
+	coe_head                        : is_indonesia_coe_head ? 'booking_agent' : undefined,
 };
 
 function useListTasks({
