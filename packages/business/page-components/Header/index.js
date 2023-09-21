@@ -10,12 +10,12 @@ function Header({ filters = () => {}, setFilters = () => {}, refetch = () => {},
 
 		<div className={styles.header}>
 			<h1 className={styles.title}>Business</h1>
+
 			<div className={styles.btn_align}>
 				<Filters filters={filters} setFilters={setFilters} />
 				<ScopeSelect size="md" showChooseAgent={false} />
 				<CreateBusiness refetch={refetch} apiTrigger={apiTrigger} />
 			</div>
-
 		</div>
 
 	);

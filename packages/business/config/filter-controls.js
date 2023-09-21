@@ -18,7 +18,6 @@ const getFilterControls = [
 				value : 'registration',
 			},
 		],
-		multiple: false,
 	},
 	{
 		name  : 'identity_number',

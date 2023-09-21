@@ -23,6 +23,7 @@ function AddEdit({
 	const handleSubmitForm = (values) => {
 		apiTrigger(values);
 	};
+
 	return (
 		<div>
 			<Button onClick={() => setShowModal(true)}>
@@ -50,11 +51,11 @@ function AddEdit({
 							<Button onClick={() => setShowModal(false)}>
 								Cancel
 							</Button>
+
 							<Button onClick={onSubmit} disabled={loading}>
 								Create
 							</Button>
 						</div>
-
 					</Modal.Footer>
 				</Modal>
 			) : null}
