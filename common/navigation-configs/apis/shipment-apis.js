@@ -154,6 +154,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_shipment_cross_entity_invoice',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'generate_freight_certificate',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -184,6 +189,16 @@ const apis = [
 	},
 	{
 		api          : 'get_sales_invoice_shipment_list',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_cross_entity_invoice',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_cross_entity_invoice_status',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
@@ -1831,6 +1846,11 @@ const apis = [
 	{
 		api         : 'post_purchase_advance_document',
 		access_type : 'private',
+	},
+	{
+		api          : 'list_shipment_cross_entity_credit_notes',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 ];
 

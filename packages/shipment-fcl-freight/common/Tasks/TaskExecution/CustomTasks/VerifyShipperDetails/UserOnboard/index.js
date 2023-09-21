@@ -5,7 +5,7 @@ import {
 	InputController,
 	useForm,
 } from '@cogoport/forms';
-import { getCountryConstants } from '@cogoport/globalization/constants/geo';
+import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 import isEqual from '@cogoport/ocean-modules/utils/isEqual';
 import { useEffect } from 'react';
 
@@ -32,7 +32,19 @@ function UserOnboard({ leadsData = {}, defaultValues = {}, refetchList = () => {
 		reset(defaultValues);
 	}, [defaultValues, reset]);
 
-	const countryValidation = getCountryConstants({ country_id: leadsData?.country_id, isDefaultData: false });
+	const countrySpecificLabel = getCountrySpecificData({
+		country_id    : formValues?.country_id,
+		accessorType  : 'identification_number',
+		accessor      : 'label',
+		isDefaultData : false,
+	});
+
+	const countrySpecificPattern = getCountrySpecificData({
+		country_id    : formValues?.country_id,
+		accessorType  : 'identification_number',
+		accessor      : 'pattern',
+		isDefaultData : false,
+	});
 
 	const {
 		updateLoading = false,
@@ -76,21 +88,23 @@ function UserOnboard({ leadsData = {}, defaultValues = {}, refetchList = () => {
 
 			<div className={styles.form_item_container}>
 				<label className={styles.form_label}>
-					{countryValidation?.others?.pan_number?.label || 'PAN'}
+					{countrySpecificLabel || 'PAN'}
 				</label>
 
 				<InputController
 					size="sm"
 					name="registration_number"
 					control={control}
-					placeholder={`Enter ${countryValidation?.others?.pan_number?.label || 'PAN'}`}
+					placeholder={`Enter ${countrySpecificLabel || 'PAN'}`}
 					value={registration_number}
 					rules={{
-						required : { value: !formValues?.pan_number, message: 'PAN number is required' },
-						pattern  : {
-							value   : countryValidation?.others?.pan_number?.pattern,
-							message : `${countryValidation?.others?.pan_number?.label}
-								Number is invalid`,
+						required: {
+							value   : !formValues?.pan_number,
+							message : `${countrySpecificLabel} is required`,
+						},
+						pattern: {
+							value   : countrySpecificPattern,
+							message : `${countrySpecificLabel} is invalid`,
 						},
 					}}
 				/>

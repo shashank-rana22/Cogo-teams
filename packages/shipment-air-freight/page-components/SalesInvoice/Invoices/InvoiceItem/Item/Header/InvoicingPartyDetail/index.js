@@ -17,7 +17,7 @@ function InvoicingPartyDetail({
 	const RESTRICTED_ENTITY_IDS = [];
 
 	Object.entries(ENTITY_MAPPING).forEach(([, value]) => (
-		value?.feature_supported?.includes('freight_sales_invoice_restricted_enitity')
+		value?.feature_supported?.includes('freight_sales_invoice_restricted_entity')
 			&& RESTRICTED_ENTITY_IDS.push(value.id)));
 
 	return (

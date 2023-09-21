@@ -1,6 +1,7 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { useTranslation } from 'next-i18next';
 
 import DisplayTime from '../../../../common/DisplayTime';
 import { statsMapping } from '../../../../configurations/stats-mapping';
@@ -11,6 +12,8 @@ const DEFAULT_TOTAL_TICKET = 0;
 const DEFAULT_COUNT = 0;
 
 function OverallStats({ data = {}, ticketCount = {} }) {
+	const { t } = useTranslation(['myTickets']);
+
 	const pieData = Object.keys(ticketCount || {}).map((key) => ({
 		id    : key.toLocaleLowerCase(),
 		label : key,
@@ -40,7 +43,7 @@ function OverallStats({ data = {}, ticketCount = {} }) {
 									{' '}
 									{value}
 									{' '}
-									Tickets
+									{t('myTickets:tickets_label')}
 								</div>
 							</div>
 						)}
@@ -48,7 +51,7 @@ function OverallStats({ data = {}, ticketCount = {} }) {
 				</div>
 				<div className={styles.graph_total}>
 					<span className={styles.graph_label}>
-						No. of Tickets
+						{t('myTickets:total_tickets_label')}
 					</span>
 					<span className={styles.graph_count}>
 						{formatAmount({
@@ -78,7 +81,7 @@ function OverallStats({ data = {}, ticketCount = {} }) {
 				</div>
 			</div>
 
-			{(statsMapping || []).map((item) => {
+			{(statsMapping({ t }) || []).map((item) => {
 				const { key, icon, label, type } = item || {};
 
 				return (

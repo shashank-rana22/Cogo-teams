@@ -10,5 +10,15 @@
     "or_label": "OR",
     "continue_with_microsoft": "CONTINUE WITH MICROSOFT",
     "already_login_toast_error": "Cannot login with already active account",
-    "failed_to_login_toast_error": "Failed to login, please try again..."
+    "failed_to_login_toast_error": "Failed to login, please try again...",
+    "login_field_mobile_placeholder": "Enter your Mobile Number",
+    "login_field_mobile_error": "Mobile details are required.",
+    "login_field_submit_otp_button": "Get OTP",
+    "login_otp_failed":"Account not found",
+    "login_otp_resend_success":"OTP sent successfully",
+    "mobile_title":"Please provide your number to recieve OTP",
+    "login_Otp_field_title": "Verify your mobile",
+    "login_otp_field_subtitle": "Verification code is sent to",
+    "login_otp_field_subtitle_null": "the mobile number.",
+    "login_otp_field_submit_button": "Verify"
 }
