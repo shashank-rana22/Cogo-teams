@@ -1,10 +1,10 @@
 .containerDisplay {
-	margin: 20px;
+	margin: 15px;
+}
 
-	:global {
-		.ui_button_container {
-			border: 1px solid black;
-			border-radius: 4px;
-		}
-	}
+.go_back_button {
+	font-size: 12px !important;
+	font-weight: 500;
+	border: 1px solid #221f20 !important;
+	border-radius: 4px;
 }

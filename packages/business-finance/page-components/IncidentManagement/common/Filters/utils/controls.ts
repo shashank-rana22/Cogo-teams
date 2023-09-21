@@ -168,6 +168,7 @@ export const remainControls = ({ t = () => {}, isSettlementExecutive = false }:P
 			caret       : true,
 			isClearable : true,
 			options     : optionsVal,
+			className   : styles.category_section,
 		},
 		{
 			name                  : 'date',

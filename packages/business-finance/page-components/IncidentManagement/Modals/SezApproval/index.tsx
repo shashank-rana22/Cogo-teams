@@ -32,7 +32,10 @@ interface Props {
 	row?:object,
 }
 
-function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEditable = true, remark, row }:Props) {
+function SezApproval({
+	sezRequest, organization, id, refetch = () => {},
+	isEditable = true, remark = '', row = {},
+}:Props) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [showModal, setShowModal] = useState(false);
 	const [inputValues, setInputValues] = useState({

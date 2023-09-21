@@ -1,5 +1,3 @@
-// import React from 'react';
-
 import { FilterProps } from '../common/interface';
 
 export interface TooltipInterface {

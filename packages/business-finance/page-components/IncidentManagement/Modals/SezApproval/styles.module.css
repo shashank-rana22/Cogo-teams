@@ -5,17 +5,16 @@
 
 .title {
 	min-width: 200px;
-	font-weight: 400;
 }
 
 .flex {
 	display: flex;
 	margin-bottom: 8px;
-	font-weight: 600;
 }
 
 .name {
 	padding: 0 4px;
+	font-weight: 600;
 }
 
 .remarks {
