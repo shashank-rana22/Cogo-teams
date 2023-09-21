@@ -1,4 +1,4 @@
-import { Button, Loader, Placeholder, Popover } from '@cogoport/components';
+import { Button, Loader, Placeholder, Popover, cl } from '@cogoport/components';
 import { IcMArrowDown, IcMDownload } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -45,7 +45,12 @@ function Card({
 		);
 	}
 	return (
-		<div className={styles[className]}>
+		<div
+			role="button"
+			tabIndex={0}
+			className={cl`${styles.card_main_container} ${styles[className]}`}
+			onClick={handleClick}
+		>
 			<div className={styles.row}>
 				<div className={styles.heading}>{title}</div>
 				{(activeCard === detail?.status && activeCard !== 'weekly_backlog_count')
@@ -64,7 +69,7 @@ function Card({
 				</div>
 				<span className={styles.link}>
 					{activeCard !== detail?.status && (
-						<Button themeType="linkUi" onClick={handleClick} type="button">
+						<Button themeType="linkUi" type="button">
 							View all
 							{' '}
 							<IcMArrowDown />

@@ -1,3 +1,5 @@
+import { ShipmentChat } from '@cogoport/shipment-chat';
+
 import Loader from '../../commons/Loader';
 import useListLastMileDeskShipments from '../../hooks/useListLastMileDeskShipments';
 
@@ -21,6 +23,8 @@ function Fcl() {
 			<AppliedFilters />
 
 			<DeskTabs />
+
+			<ShipmentChat />
 
 			{loading
 				? <Loader />
