@@ -228,6 +228,18 @@ function ExecuteTask({
 				task={task}
 				refetch={taskListRefetch}
 				onCancel={onCancel}
+				type="terminal"
+			/>
+		);
+	}
+	if (task.task === 'upload_gate_pass_charge_receipt') {
+		return (
+			<TerminalChargeReceipt
+				shipmentData={shipment_data}
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
+				type="gatepass"
 			/>
 		);
 	}

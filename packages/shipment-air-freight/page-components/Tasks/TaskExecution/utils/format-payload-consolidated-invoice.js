@@ -4,7 +4,7 @@ const DEFAULT_VALUE_FOR_TERMINAL_CHARGE = 0;
 const DEFAULT_VALUE_FOR_SHEET_INDEX = 1;
 
 const getPayload = ({
-	values = {}, mainServicesData = {}, sheetData = {},
+	type: taskType = 'terminal', values = {}, mainServicesData = {}, sheetData = {},
 	entityData = {}, collectionPartyData = {},
 }) => {
 	const geo = getGeoConstants();
@@ -76,12 +76,13 @@ const getPayload = ({
 	const payload = {
 		csr_data,
 		mawb_number,
-		payment_mode         : 'cash',
-		service              : 'air_freight_local_service',
-		csr_sheet_id         : id,
-		sheet_index          : DEFAULT_VALUE_FOR_SHEET_INDEX,
-		organization_id      : geo.uuid.freight_force_org_id,
-		billing_party_detail : {
+		payment_mode           : 'cash',
+		service                : 'air_freight_local_service',
+		csr_sheet_id           : id,
+		sheet_index            : DEFAULT_VALUE_FOR_SHEET_INDEX,
+		organization_id        : geo.uuid.freight_force_org_id,
+		invoice_type_line_item : taskType === 'terminal' ? 'terminal_handling_charge' : 'gate_pass_charge',
+		billing_party_detail   : {
 			organization_id : cogo_entity_id,
 			cin,
 			entity_code,

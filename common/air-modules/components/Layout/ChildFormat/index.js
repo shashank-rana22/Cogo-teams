@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
-import React from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useEffect } from 'react';
 
 import Child from './child';
 import styles from './styles.module.css';
@@ -19,6 +20,16 @@ function FieldArray({
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({ control, name });
+
+	const CHILD_EMPTY_VALUES = { };
+
+	useEffect(() => {
+		if (isEmpty(fields)) {
+			append(CHILD_EMPTY_VALUES);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<div className={styles.child}>
 			{fields.map((field, index) => (
@@ -43,7 +54,7 @@ function FieldArray({
 					<Button
 						size="sm"
 						themeType="accent"
-						onClick={() => append()}
+						onClick={() => append(CHILD_EMPTY_VALUES)}
 					>
 						<div className={styles.add_button_text}>
 							+&nbsp;

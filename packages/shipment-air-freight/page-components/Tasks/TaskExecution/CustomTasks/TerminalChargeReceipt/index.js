@@ -5,7 +5,10 @@ import useListShipmentServices from '../../../../../hooks/useListShipmentService
 import styles from './styles.module.css';
 import TerminalChargeRate from './TerminalChargeRate';
 
-function TerminalChargeReceipt({ shipmentData = {}, task = {}, refetch = () => {}, onCancel = () => {} }) {
+function TerminalChargeReceipt({
+	shipmentData = {}, task = {}, refetch = () => {},
+	onCancel = () => {}, type = 'terminal',
+}) {
 	const { servicesList } = useListShipmentServices({ defaultFilters: { shipment_id: shipmentData?.id } });
 
 	const mainServicesData = (servicesList || []).filter((item) => item?.service_type
@@ -19,6 +22,7 @@ function TerminalChargeReceipt({ shipmentData = {}, task = {}, refetch = () => {
 				onCancel={onCancel}
 				task_id={task?.id}
 				shipmentData={shipmentData}
+				type={type}
 			/>
 		</div>
 	);

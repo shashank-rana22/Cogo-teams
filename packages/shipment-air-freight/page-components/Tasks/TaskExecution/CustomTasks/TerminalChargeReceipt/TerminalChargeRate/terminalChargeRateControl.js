@@ -21,7 +21,7 @@ const getCollectionAddressOptions = (collectionParty = {}) => (
 );
 
 const getTerminalChargeRateControl = ({
-	entityData = {}, setEntityData = () => {},
+	type = 'terminal', entityData = {}, setEntityData = () => {},
 	collectionPartyData = {}, setCollectionPartyData = () => {},
 }) => {
 	const geo = getGeoConstants();
@@ -100,7 +100,7 @@ const getTerminalChargeRateControl = ({
 		},
 		{
 			name        : 'csr_reference_number',
-			label       : 'TC Invoice Number',
+			label       : type === 'terminal' ? 'TC Invoice Number' : 'Gatepass Invoice Number',
 			type        : 'text',
 			placeholder : 'Type TC Invoice No',
 			span        : 6,
@@ -111,7 +111,7 @@ const getTerminalChargeRateControl = ({
 		},
 		{
 			name       : 'terminal_charge_document',
-			label      : 'Terminal Charge Receipt',
+			label      : type === 'terminal' ? 'Terminal Charge Receipt' : 'Gatepass Charge Receipt',
 			type       : 'file',
 			drag       : true,
 			span       : 6,
@@ -123,8 +123,9 @@ const getTerminalChargeRateControl = ({
 			},
 		},
 		{
-			name               : 'terminalChargeReceipt',
-			label              : 'Upload Terminal Charge Receipt',
+			name  : 'terminalChargeReceipt',
+			label : type === 'terminal' ? 'Add Terminal Charge Informations'
+				: 'Add Gatepass Charge Informations',
 			span               : 6,
 			type               : 'fieldArray',
 			showButtons        : true,
@@ -133,12 +134,10 @@ const getTerminalChargeRateControl = ({
 			noDeleteButtonTill : 1,
 			value              : [
 				{
-					price                    : 0,
-					tax_price                : 0,
-					total_tax_price          : 0,
-					alias                    : '',
-					csr_reference_number     : '',
-					terminal_charge_document : '',
+					price           : 0,
+					tax_price       : 0,
+					total_tax_price : 0,
+					alias           : '',
 				},
 			],
 			controls: [

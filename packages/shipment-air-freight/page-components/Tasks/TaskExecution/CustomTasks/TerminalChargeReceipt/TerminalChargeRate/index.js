@@ -22,6 +22,7 @@ function TerminalChargeRate({
 	onCancel = () => {},
 	task_id = '',
 	shipmentData = {},
+	type = 'terminal',
 }) {
 	const [entityData, setEntityData] = useState({});
 	const [irnGenerated, setIRNGenerated] = useState(true);
@@ -30,6 +31,7 @@ function TerminalChargeRate({
 	const [showConfirm, setShowConfirm] = useState({});
 
 	const controls = getTerminalChargeRateControl({
+		type,
 		entityData,
 		setEntityData,
 		collectionPartyData,
@@ -48,6 +50,7 @@ function TerminalChargeRate({
 		loading, updateLoading,
 		data:invoiceData,
 	} = useCreateShipmentAirFreightConsolidatedInvoice({
+		type,
 		sheetData,
 		mainServicesData,
 		entityData,
