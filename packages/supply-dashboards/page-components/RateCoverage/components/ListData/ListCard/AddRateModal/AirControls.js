@@ -196,7 +196,6 @@ const airControls = ({
 				name        : 'lower_limit',
 				type        : 'number',
 				placeholder : 'Lower Limit',
-				disabled    : true,
 				span        : 2,
 			},
 			{
