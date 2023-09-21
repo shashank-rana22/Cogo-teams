@@ -1,6 +1,7 @@
 import { Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import EmptyTicket from '../../../EmptyTicket';
@@ -25,6 +26,8 @@ function ChatBody({
 	modalData = {},
 	detailsLoading = false,
 }) {
+	const { t } = useTranslation(['myTickets']);
+
 	const { user: { id: userId = '' } } = useSelector(({ profile }) => profile);
 	const { items = [], last, page } = listData;
 	const { TicketReviewer: ticketReviewer = {} } = ticketData || {};
@@ -39,9 +42,9 @@ function ChatBody({
 	};
 
 	if (!doesTicketsExists && !chatLoading) {
-		const emptyText = `No records for ticket #${
+		const emptyText = `${t('myTickets:no_records_for_ticket')} #${
 			modalData?.ticketId
-		} found`;
+		} ${t('myTickets:found')}`;
 
 		return (
 			<EmptyTicket emptyText={emptyText} />

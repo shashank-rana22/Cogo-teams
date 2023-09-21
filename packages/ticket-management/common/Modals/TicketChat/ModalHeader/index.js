@@ -1,4 +1,5 @@
 import { IcMRefresh } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 
 import TicketActions from '../../../TicketActions';
 
@@ -18,6 +19,8 @@ function ModalHeader({
 	} = ticketData || {};
 	const { ID: id = '' } = ticket || {};
 
+	const { t } = useTranslation(['myTickets']);
+
 	const handleTicket = (e, { actionType }) => {
 		e.stopPropagation();
 		updateTicketActivity({ actionType, id });
@@ -26,7 +29,7 @@ function ModalHeader({
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.tickets_header}>
-				<div className={styles.tickets_header_text}>Chat</div>
+				<div className={styles.tickets_header_text}>{t('myTickets:chat')}</div>
 				<IcMRefresh className={styles.refresh_icon} onClick={refreshTickets} />
 			</div>
 			<TicketActions
