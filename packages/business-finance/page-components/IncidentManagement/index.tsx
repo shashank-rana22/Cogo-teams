@@ -150,7 +150,6 @@ function IncidentManagement() {
 	return (
 		<div>
 			<div className={isEmpty(detailsModal) ? styles.nodisplay : null}>
-				mayank
 				<CommonDetailsModal setDetailsModal={setDetailsModal} detailsModal={detailsModal} />
 			</div>
 			<div className={!isEmpty(detailsModal) ? styles.nodisplay : null}>
