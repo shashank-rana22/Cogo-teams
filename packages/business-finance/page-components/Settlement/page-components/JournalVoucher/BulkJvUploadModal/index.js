@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, cl } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload } from '@cogoport/icons-react';
@@ -39,7 +39,7 @@ function BulkJvUpload({ showBulkJV = false, setShowBulkJV = () => {} }) {
 							Download Error Document
 						</Button>
 					) : null}
-					<div className={styles.download_container}>
+					<div className={cl`${styles.upload_button} ${styles.download_container}`}>
 						<p className={styles.sample_text}>Sample</p>
 						<IcMDownload
 							width={16}
