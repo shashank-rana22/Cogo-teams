@@ -25,19 +25,19 @@ const CALL_OPTIONS = [
 
 const COMMUNICATION_OPTIONS = [
 	{ label: 'Answered', value: 'answered' },
-	{ label: 'Not Answered', value: 'not_answered' },
+	{ label: 'Not Answered', value: 'unanswered' },
 	{ label: 'Wrong Number', value: 'wrong_number' },
 	{ label: 'Invalid Number', value: 'invalid_number' },
 	{ label: 'Not Reachable', value: 'not_reachable' },
-	{ label: 'Busy', value: 'Busy' },
-	{ label: 'Does not exist', value: 'Does not exist' },
+	{ label: 'Busy', value: 'busy' },
+	{ label: 'Does not exist', value: 'does_not_exist' },
 	{
 		label : 'Does not belong to this user',
-		value : 'Does not belong to this user',
+		value : 'does_not_belong_to_this_user',
 	},
 	{
 		label : 'Belongs to the user who has left the company',
-		value : 'Belongs to the user who has left the company',
+		value : 'belongs_to_user_who_has_left_company',
 	},
 
 ];
