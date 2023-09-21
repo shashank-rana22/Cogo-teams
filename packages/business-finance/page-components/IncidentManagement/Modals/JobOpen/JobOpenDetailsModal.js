@@ -11,7 +11,7 @@ import TimeLine from './components/TimeLine';
 import ViewPdf from './components/ViewPdf';
 import styles from './style.module.css';
 
-function JobOpenDetailsModal({ row = {} }) {
+function JobOpenDetailsModal({ row = {}, setDetailsModal = () => {} }) {
 	const { level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark = '' } = row || {};
 	const level0 = { ...createdBy, remark };
 	const { t } = useTranslation(['incidentManagement']);
@@ -38,7 +38,7 @@ function JobOpenDetailsModal({ row = {} }) {
 			</div>
 			<div className={styles.container_view}>
 				<ViewPdf row={row} />
-				<Details row={row} />
+				<Details row={row} setDetailsModal={setDetailsModal} />
 			</div>
 
 		</div>

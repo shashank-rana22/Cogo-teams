@@ -10,7 +10,7 @@ import useGetShipmentCostSheet from '../../../../hooks/useGetShipmentCostSheet';
 import StatRect from './StatRect';
 import styles from './styles.module.css';
 
-function Details({ row = {} }) {
+function Details({ row = {}, setDetailsModal = () => {} }) {
 	const shipmentId = row?.data?.jobOpenRequest?.id;
 	const { jobNumber = '' } = row?.data?.jobOpenRequest || {};
 	const JOB_SOURCE = 'LOGISTICS';
@@ -29,6 +29,12 @@ function Details({ row = {} }) {
 	} = useGetShipmentCostSheet({ shipmentId, jobNumber, JOB_SOURCE, JOB_TYPE });
 	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
+
+	const handleClick = () => {
+		setDetailsModal(false);
+		onSubmit(STATUS_MAPPING.approved);
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_box}>
@@ -137,7 +143,7 @@ function Details({ row = {} }) {
 					themeType="primary"
 					disabled={isEmpty(remarks) || loading}
 					loading={loading}
-					onClick={() => onSubmit(STATUS_MAPPING.approved)}
+					onClick={() => handleClick()}
 				>
 					Approve
 				</Button>
