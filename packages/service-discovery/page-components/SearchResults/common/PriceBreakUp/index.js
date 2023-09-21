@@ -91,12 +91,12 @@ const handleServicesNames = (item) => {
 		: `${formattedTradeType} ${formattedService}`;
 };
 
-function IndividualPriceBreakup({ service = {}, service_type = '', restServiceDetail = {} }) {
+function IndividualPriceBreakup({ service = {}, restServiceDetail = {} }) {
 	const {
 		line_items = [],
 	} = service;
 
-	const containerDetail = getDetails({ primary_service: service_type, item: restServiceDetail });
+	const containerDetail = getDetails({ service: service?.service_type, item: restServiceDetail });
 
 	const ifRateAvailabe = !isEmpty(line_items);
 
