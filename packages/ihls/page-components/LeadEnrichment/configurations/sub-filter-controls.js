@@ -60,6 +60,17 @@ const sub_controls = 	{
 				type        : 'number',
 			},
 			{
+				name        : 'lead_source',
+				displayName : 'Source',
+				type        : 'select',
+				placeholder : 'Select',
+				options     : [
+					{ label: 'Migrated to CRM', value: 'migrated_to_crm' },
+					{ label: 'IHLS', value: 'ihls' },
+					{ label: 'Platform', value: 'platform' },
+				],
+			},
+			{
 				name        : 'is_user_enriched',
 				displayName : 'Org Enrichment Status',
 				type        : 'select',

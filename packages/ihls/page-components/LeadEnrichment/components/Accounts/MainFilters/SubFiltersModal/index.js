@@ -48,6 +48,7 @@ function SubFiltersModal({
 			is_email_verified,
 			contact_count,
 			shipment_count,
+			lead_source,
 		} = formValues;
 
 		const formatted_is_email_bounce_check = getFormattedParam(is_email_bounce_check);
@@ -66,7 +67,8 @@ function SubFiltersModal({
 				registration_type  : registration_type && !isEmpty(registration_type) ? registration_type : undefined,
 				is_user_enriched   : is_user_enriched
 					? STRING_BOOL_MAPPINGS[is_user_enriched] : undefined,
-				objective_filters: {
+				lead_source       : lead_source || undefined,
+				objective_filters : {
 					min_lead_score: min_lead_score || undefined,
 				},
 				users_filters: {
