@@ -13,6 +13,7 @@ function ItemHeader({
 	isIRNGenerated = false,
 	salesInvoicesRefetch = () => {},
 	refetchCN = () => {},
+	isCrossEntity = false,
 }) {
 	return (
 		<div className={styles.container}>
@@ -24,6 +25,7 @@ function ItemHeader({
 				isIRNGenerated={isIRNGenerated}
 				salesInvoicesRefetch={salesInvoicesRefetch}
 				refetchCN={refetchCN}
+				isCrossEntity={isCrossEntity}
 			>
 				<div className={styles.invoice_info}>
 					{(invoice?.services || []).map((item) => (

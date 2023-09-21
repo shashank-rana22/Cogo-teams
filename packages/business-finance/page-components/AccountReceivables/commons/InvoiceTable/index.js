@@ -5,7 +5,7 @@ import Filters from '../../../commons/Filters/index.tsx';
 import completedColumn from '../../configs/Completed_table.tsx';
 import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate.ts';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard.ts';
-import { INVOICE_FILTER } from '../../Utils/invoicelistFilter.ts';
+import { invoiceFilter } from '../../Utils/invoicelistFilter.ts';
 import FilterPopover from '../FilterPopover';
 import FooterCard from '../FooterCard';
 import SearchInput from '../searchInput/index.tsx';
@@ -138,7 +138,7 @@ function InvoiceTable({
 						<Filters
 							filters={invoiceFilters}
 							setFilters={setinvoiceFilters}
-							controls={INVOICE_FILTER()}
+							controls={invoiceFilter()}
 						/>
 						<FilterPopover
 							filters={invoiceFilters}
@@ -191,15 +191,19 @@ function InvoiceTable({
 					loading={invoiceLoading}
 				/>
 			</div>
-			<div className={cl`${styles.pagination_container} ${showFilters ? '' : styles.nomargin}`}>
-				<Pagination
-					type="table"
-					currentPage={pageInvoiceList}
-					totalItems={recordInvoiceList}
-					pageSize={invoiceFilters.pageLimit}
-					onPageChange={(val) => setinvoiceFilters({ ...invoiceFilters, page: val })}
-				/>
-			</div>
+			{recordInvoiceList >= invoiceFilters.pageLimit
+				? (
+					<div className={cl`${styles.pagination_container} ${showFilters ? '' : styles.nomargin}`}>
+						<Pagination
+							type="table"
+							currentPage={pageInvoiceList}
+							totalItems={recordInvoiceList}
+							pageSize={invoiceFilters.pageLimit}
+							onPageChange={(val) => setinvoiceFilters({ ...invoiceFilters, page: val })}
+						/>
+					</div>
+				)
+				: null}
 			{showFilters ? (
 				<FooterCard
 					entityCode={entityCode}

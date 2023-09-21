@@ -126,7 +126,7 @@ function ResponsivePieChart({
 			<div className={styles.flex}>
 				<div className={styles.heading}>{heading}</div>
 				<Button
-					className="secondary sm"
+					themeType="secondary"
 					onClick={() => setShowListView(!showListView)}
 				>
 					{!showListView ? 'Graph View' : 'List View'}

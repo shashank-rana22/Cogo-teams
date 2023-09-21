@@ -4,22 +4,25 @@ import { useEffect, useCallback, useState } from 'react';
 
 const PAGE_LIMIT = 10;
 
-const getParams = ({ agentType, page, query }) => ({
+const getParams = ({ agentType, page, query, isInActive = false }) => ({
 	filters: {
 		q          : query || undefined,
 		agent_type : agentType || undefined,
+		...(isInActive ? { status: 'inactive' } : { status_not: 'inactive' }),
 	},
 	page,
 	page_limit : PAGE_LIMIT,
 	sort_by    : 'agent_type',
 });
 
-function useListChatAgents() {
+function useListChatAgents({ activeCard = '' }) {
 	const [paramsState, setParamsState] = useState({
 		page      : 1,
 		query     : '',
 		agentType : '',
 	});
+
+	const [isInActive, setIsInActive] = useState(false);
 
 	const { query: debounceSearchQuery = '', debounceQuery } = useDebounceQuery();
 
@@ -33,17 +36,22 @@ function useListChatAgents() {
 
 	const getListChatAgents = useCallback(async () => {
 		try {
+			if (activeCard && activeCard === 'default') {
+				return;
+			}
+
 			await trigger({
 				params: getParams({
 					agentType : paramsState?.agentType,
 					page      : paramsState?.page,
 					query     : debounceSearchQuery,
+					isInActive,
 				}),
 			});
 		} catch (error) {
 			console.error(error);
 		}
-	}, [trigger, paramsState?.agentType, paramsState?.page, debounceSearchQuery]);
+	}, [activeCard, trigger, paramsState?.agentType, paramsState?.page, debounceSearchQuery, isInActive]);
 
 	useEffect(() => {
 		debounceQuery(paramsState?.query);
@@ -51,7 +59,7 @@ function useListChatAgents() {
 
 	useEffect(() => {
 		setParamsState((p) => ({ ...p, page: 1 }));
-	}, [debounceSearchQuery, paramsState?.agentType]);
+	}, [debounceSearchQuery, paramsState?.agentType, isInActive]);
 
 	useEffect(() => {
 		getListChatAgents();
@@ -65,6 +73,8 @@ function useListChatAgents() {
 		setSearch     : (val) => setParamsState((prev) => ({ ...prev, query: val })),
 		setAgentType  : (val) => setParamsState((prev) => ({ ...prev, agentType: val })),
 		paramsState,
+		setIsInActive,
+		isInActive,
 	};
 }
 export default useListChatAgents;

@@ -33,8 +33,12 @@ function RepositoryModal({
 
 	const onSubmit = (values) => {
 		const pocData = (values.pocs_data || []).map((poc) => dataPayload(poc));
-
-		const payload = { ...values, pocs_data: pocData, id: item?.id, action_name: edit ? 'update' : undefined };
+		const payload = {
+			...values || {},
+			pocs_data   : pocData || undefined,
+			id          : item?.id,
+			action_name : edit ? 'update' : undefined,
+		};
 		handleRepository({ payload, listRepository, setShowModal }).then(() => {
 			if (edit) {
 				setEdit(false);

@@ -5,6 +5,7 @@ import toastApiError from '../utils/toastApiError';
 
 const useGetOrganization = ({ refetch = () => {}, initialCall = true }) => {
 	const [data, setData] = useState({});
+
 	const [{ loading }, trigger] = useRequest(
 		{ url: '/get_organization' },
 		{ manual: true },

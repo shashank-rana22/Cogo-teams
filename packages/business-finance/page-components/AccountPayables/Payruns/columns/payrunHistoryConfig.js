@@ -18,13 +18,13 @@ export const PAYRUN_HISTORY_CONFIG = {
 		{
 			label : 'PayRun Name',
 			key   : 'name',
-			span  : 1.8,
+			span  : 2.3,
 		},
 		{
 			label : 'Total Value',
 			key   : 'totalValue',
 			func  : 'renderFormatedAmount',
-			span  : 1.4,
+			span  : 1.9,
 		},
 		{
 			label : 'No. Of Invoices',
@@ -40,10 +40,6 @@ export const PAYRUN_HISTORY_CONFIG = {
 		{
 			func : 'renderViewInvoice',
 			span : 2,
-		},
-		{
-			func : 'renderDownloadOverseasInvoice',
-			span : 1,
 		},
 		{
 			func : 'renderRibbon',

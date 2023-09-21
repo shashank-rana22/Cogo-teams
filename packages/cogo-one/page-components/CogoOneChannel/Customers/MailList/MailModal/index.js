@@ -1,13 +1,15 @@
 import { Modal, Pagination } from '@cogoport/components';
+import { IcMExpand } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
+import { HEADER_MAPPING } from '../../../../../constants/mailConstants';
 import useMailEditorFunctions from '../../../../../helpers/mailEditorFunctions';
 import useListEmailTemplates from '../../../../../hooks/useListEmailTemplates';
 import mailFunction from '../../../../../utils/mailFunctions';
 
 import ComposeEmailBody from './ComposeEmailBody';
 import EmailTemplateList from './EmailTemplateList';
-import RenderHeader from './Header';
+import RenderHeader from './RenderHeader';
 import styles from './styles.module.css';
 
 function MailEditorModal({
@@ -15,19 +17,23 @@ function MailEditorModal({
 	userId = '',
 	activeMail = {},
 	viewType = '',
+	firestore = {},
 }) {
 	const {
-		buttonType,
-		setEmailState,
-		setButtonType,
+		buttonType = '',
+		setEmailState = () => {},
+		setButtonType = () => {},
+		resetEmailState = () => {},
+		setMailAttachments = () => {},
+		mailAttachments = [],
 	} = mailProps;
 
 	const uploaderRef = useRef(null);
 
 	const [showControl, setShowControl] = useState(null);
 	const [errorValue, setErrorValue] = useState('');
+	const [minimizeModal, setMinimizeModal] = useState(false);
 	const [uploading, setUploading] = useState(false);
-	const [attachments, setAttachments] = useState([]);
 	const [emailTemplate, setEmailTemplate] = useState({
 		isTemplateView : false,
 		emailData      : {},
@@ -59,31 +65,53 @@ function MailEditorModal({
 		setErrorValue,
 		setShowControl,
 		showControl,
-		setAttachments,
-		attachments,
+		setAttachments : setMailAttachments,
+		attachments    : mailAttachments,
 		uploaderRef,
 	});
 
 	const {
 		handleSend = () => {},
 		replyLoading = false,
+		handleSaveDraft = () => {},
 	} = useMailEditorFunctions({
 		uploading,
 		activeMail,
-		attachments,
+		attachments: mailAttachments,
 		userId,
 		mailProps,
+		firestore,
 	});
+
+	if (minimizeModal) {
+		return (
+			<div
+				className={styles.minimized_modal_styles}
+				role="presentation"
+				onClick={() => setMinimizeModal(false)}
+			>
+				<div className={styles.expand_icon}>
+					<IcMExpand />
+				</div>
+
+				<div className={styles.title}>
+					{HEADER_MAPPING[buttonType] || 'New Message'}
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<Modal
 			show={buttonType}
 			onClose={handleClose}
-			onOuterClick={handleClose}
 			size="lg"
 			className={styles.styled_ui_modal_dialog}
 			placement="top"
 			scroll
+			animate={false}
+			showCloseIcon={false}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header
 				title={(
@@ -92,17 +120,20 @@ function MailEditorModal({
 						handleSend={handleSend}
 						setUploading={setUploading}
 						uploading={uploading}
-						attachments={attachments}
-						setAttachments={setAttachments}
+						attachments={mailAttachments}
+						setAttachments={setMailAttachments}
 						handleClose={handleClose}
 						uploaderRef={uploaderRef}
 						buttonType={buttonType}
 						setEmailTemplate={setEmailTemplate}
 						isTemplateView={isTemplateView}
 						setButtonType={setButtonType}
+						handleSaveDraft={handleSaveDraft}
+						setMinimizeModal={setMinimizeModal}
+						resetEmailState={resetEmailState}
 					/>
 				)}
-				className={isTemplateView ? styles.template_view : ''}
+				className={styles.modal_header}
 			/>
 			<Modal.Body>
 				{!isTemplateView ? (
@@ -116,7 +147,7 @@ function MailEditorModal({
 						handleAttachmentDelete={handleAttachmentDelete}
 						getDecodedData={getDecodedData}
 						errorValue={errorValue}
-						attachments={attachments}
+						attachments={mailAttachments}
 						showControl={showControl}
 						uploading={uploading}
 					/>

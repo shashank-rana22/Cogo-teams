@@ -25,7 +25,8 @@ const useGetOrganizationUsers = ({ selfOrganizationId }: Props) => {
 			await trigger({
 				params: {
 					filters: {
-						organization_id: selfOrganizationId,
+						organization_id : selfOrganizationId,
+						status          : 'active',
 					},
 				},
 			});
