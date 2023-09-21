@@ -36,10 +36,10 @@
 	font-weight: 500;
 }
 
-.textarea {
+.text_area {
 	min-height: 80px;
 	padding: 4px;
-	margin-top: 4px;
+	margin-top: 6px;
 }
 
 .modal_footer {

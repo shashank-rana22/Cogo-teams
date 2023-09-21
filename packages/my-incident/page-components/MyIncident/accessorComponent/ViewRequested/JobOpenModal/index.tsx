@@ -3,7 +3,6 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useTranslation } from 'next-i18next';
 
 import StakeHolderTimeline from '../../../StakeHolderTimeline';
 import stakeHolderTimeLineData from '../../../utils/formatStakeHolderData';
@@ -32,8 +31,6 @@ function JobOpenModal({
 	setShowModal = () => {},
 	loadingOnSave = false,
 }) {
-	const { t } = useTranslation(['incidentManagement']);
-
 	const {
 		referenceId = '',
 		data = {},
@@ -61,7 +58,6 @@ function JobOpenModal({
 
 	return (
 		<div>
-			{/* <ViewButton state={setShowModal} /> */}
 			<Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>
 				View
 			</Button>
@@ -76,7 +72,7 @@ function JobOpenModal({
 				>
 					<Modal.Header
 						title={
-							`${t('incidentManagement:shipment_re_open_request')} - SID ${jobNumber}: ${customerName}`
+							`Shipment Re-Open Request - SID ${jobNumber}: ${customerName}`
 						}
 					/>
 					<Modal.Body>
@@ -90,8 +86,7 @@ function JobOpenModal({
 
 						<div className={styles.details_container}>
 							<div className={styles.details}>
-								{t('incidentManagement:shipment_id')}
-
+								Shipment ID
 								<span className={styles.details_value}>
 									#
 									{jobNumber || '--'}
@@ -99,15 +94,14 @@ function JobOpenModal({
 							</div>
 
 							<div className={styles.details}>
-								{t('incidentManagement:incident_id_header')}
-
+								INCIDENT ID
 								<span className={styles.details_value}>
 									{referenceId || '--'}
 								</span>
 							</div>
 
 							<div className={styles.details}>
-								{t('incidentManagement:total_buy_label')}
+								Total Buy
 
 								<span className={styles.details_value}>
 									{customFormatAmount(totalBuy)}
@@ -115,7 +109,7 @@ function JobOpenModal({
 							</div>
 
 							<div className={styles.details}>
-								{t('incidentManagement:total_sell_label')}
+								Total Sell
 
 								<span className={styles.details_value}>
 									{customFormatAmount(totalSell)}
@@ -123,7 +117,7 @@ function JobOpenModal({
 							</div>
 
 							<div className={styles.details}>
-								{t('incidentManagement:profit_margin_label')}
+								Profit Margin
 
 								<span className={styles.details_value}>
 									{customFormatAmount(profitMargin)}
@@ -133,26 +127,29 @@ function JobOpenModal({
 
 						<div className={styles.remark}>
 							<div className={styles.label}>
-								{t('incidentManagement:remarks')}
+								Remarks
+
 							</div>
 							{remark}
 						</div>
 
 						<div className={styles.document_container}>
-							<div className={styles.label}>{`${t('incidentManagement:doc')} - `}</div>
+							<div className={styles.label}>{'Document - '}</div>
 
 							{!isEmpty(documentUrls)
 								? (documentUrls || []).map((url: string) => (
 									<a key={url} href={url} target="_blank" rel="noreferrer">
-										{t('incidentManagement:view_doc_link')}
+										View Document
 										<IcMEyeopen className={styles.icon} />
 									</a>
 								)) : (
-									t('incidentManagement:no_doc_available')
+									'No Document Available'
 								)}
 						</div>
 						<div className={styles.remarks_style}>
+
 							Notes (only visible to self)
+
 							<Textarea
 								name="remarks"
 								className={styles.text_area}

@@ -1,7 +1,6 @@
 import { Popover, Pill, cl } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -18,11 +17,10 @@ const STATUS_COLOR_MAPPING = {
 
 function StakeHolderTimeline({ timeline = [], isStatusPill = {} }) {
 	const stakeHolders = timeline?.filter((item) => !isEmpty(item));
-	const { t } = useTranslation(['incidentManagement']);
 	return (
 		<div>
 			<div className={styles.heading}>
-				<h3>{t('incidentManagement:approval')}</h3>
+				<h3>Approval</h3>
 				{isStatusPill?.display ? (
 					<Pill
 						size="md"
@@ -31,7 +29,7 @@ function StakeHolderTimeline({ timeline = [], isStatusPill = {} }) {
 						}}
 						className={styles.status_pill}
 					>
-						{isStatusPill?.value || t('incidentManagement:pending_status')}
+						{isStatusPill?.value || 'Pending'}
 					</Pill>
 				) : null}
 			</div>
@@ -81,7 +79,7 @@ function StakeHolderTimeline({ timeline = [], isStatusPill = {} }) {
 									}}
 									className={styles.level_status_pill}
 								>
-									{item?.status || t('incidentManagement:pending_status')}
+									{item?.status || 'Pending'}
 								</Pill>
 							</div>
 
@@ -89,9 +87,9 @@ function StakeHolderTimeline({ timeline = [], isStatusPill = {} }) {
 								<Popover
 									trigger="mouseenter"
 									placement="bottom"
-									render={item?.remarks || t('incidentManagement:no_remarks')}
+									render={item?.remarks || 'No Remarks'}
 								>
-									<span>{t('incidentManagement:remarks')}</span>
+									<span>Remarks</span>
 								</Popover>
 							</div>
 
