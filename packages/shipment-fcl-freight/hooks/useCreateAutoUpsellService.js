@@ -53,7 +53,12 @@ function useCreateAutoUpsellService({
 	};
 
 	const onSubmit = (values) => {
-		const payload = getAutoUpsellPayload({ task, values, countryId, consigneeId });
+		const payload = getAutoUpsellPayload({
+			task,
+			values,
+			countryId,
+			consigneeId: shipment_data?.consignee_shipper_id || consigneeId,
+		});
 
 		createAutoUpsellService({ payload, cargo_readiness_date: values?.cargo_readiness_date });
 	};
