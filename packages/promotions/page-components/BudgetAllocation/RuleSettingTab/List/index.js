@@ -7,6 +7,7 @@ function List({
 	activeList = '',
 	setActiveList = () => {},
 	activeService = '',
+	setShowAddRuleForm = () => {},
 }) {
 	const defaultFilters = { activeList, activeService };
 	const DEFAULT_PARAMS = {
@@ -29,11 +30,13 @@ function List({
 				activeList={activeList}
 				setActiveList={setActiveList}
 				activeService={activeService}
+				setShowAddRuleForm={setShowAddRuleForm}
 			/>
 			<ListContent
 				data={data}
 				loading={loading}
 				filters={filters}
+				setFilters={setFilters}
 				activeList={activeList}
 				activeService={activeService}
 			/>

@@ -42,7 +42,7 @@ const columnsWithValue = ({ data = {}, list = [] }) => {
 	return NEW_MAPPING_LIST;
 };
 
-function ListItem({ data = {}, loading = '', onEdit = () => {} }) {
+function ListItem({ data = {}, loading = '', activeList = '', onEdit = () => {} }) {
 	const [open, setOpen] = useState(false);
 	const [showDeactivateModal, setShowDeactivateModal] = useState(false);
 	const tagsList = columnsWithValue({ data, list: tagsMapping });
@@ -93,18 +93,20 @@ function ListItem({ data = {}, loading = '', onEdit = () => {} }) {
 						>
 							View & Edit
 						</Button>
-						<Button
-							themeType="secondary"
-							size="md"
-							style={{
-								marginRight: '16px',
-							}}
-							onClick={() => {
-								setShowDeactivateModal(true);
-							}}
-						>
-							Deactivate
-						</Button>
+						{activeList === 'active' && (
+							<Button
+								themeType="secondary"
+								size="md"
+								style={{
+									marginRight: '16px',
+								}}
+								onClick={() => {
+									setShowDeactivateModal(true);
+								}}
+							>
+								Deactivate
+							</Button>
+						)}
 					</div>
 				</div>
 

@@ -13,7 +13,7 @@ function ListFilters({
 	setShowPopover = () => {},
 }) {
 	const DEFAULT_VALUES = {};
-	const controls = getControls({ activeService });
+	const controls = getControls();
 
 	const {
 		control,

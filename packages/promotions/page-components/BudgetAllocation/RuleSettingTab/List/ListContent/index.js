@@ -14,6 +14,7 @@ function ListContent({
 	loading = {},
 	filters = {},
 	setFilters = () => {},
+	activeList = '',
 	// activeService = '',
 }) {
 	// const router = useRouter();
@@ -50,6 +51,7 @@ function ListContent({
 					key={item.id}
 					data={item}
 					loading={loading}
+					activeList={activeList}
 					isLastItem={i === list.length - LAST_INDEX}
 					total={total_count || ZERO_PAGES}
 					onEdit={() => {}}

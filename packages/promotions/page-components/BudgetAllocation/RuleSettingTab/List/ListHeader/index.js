@@ -25,7 +25,7 @@ function ListHeader({
 	filters = {},
 	setFilters = () => {},
 	activeService = '',
-	setShowGlobalConfigForm = '',
+	setShowAddRuleForm = '',
 }) {
 	const [showPopover, setShowPopover] = useState(false);
 	return (
@@ -99,7 +99,7 @@ function ListHeader({
 					size="lg"
 					themeType="primary"
 					className={styles.add_btn}
-					onClick={() => setShowGlobalConfigForm(true)}
+					onClick={() => setShowAddRuleForm(true)}
 				>
 					Add Rule
 				</Button>
