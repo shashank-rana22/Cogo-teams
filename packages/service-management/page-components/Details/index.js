@@ -5,7 +5,6 @@ import { Link } from '@cogoport/next';
 import useGetOrganizationServiceDetails from '../../hooks/useGetOrganizationServiceDetails';
 
 import BuySellServices from './BuySellServices';
-import Caution from './Caution';
 import Form from './Form';
 import Service from './Service';
 import styles from './styles.module.css';
@@ -36,7 +35,6 @@ function Details() {
 				organization_id={data?.organization_id}
 				service={data?.requested_service?.service}
 			/>
-			<Caution />
 
 		</div>
 	);

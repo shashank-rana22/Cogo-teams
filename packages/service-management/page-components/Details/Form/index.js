@@ -1,6 +1,7 @@
 import { useForm } from '@cogoport/forms';
 
 import Layout from '../../../common/Layout';
+import Caution from '../Caution';
 
 import firstControls from './firstControls';
 import Footer from './Footer';
@@ -24,6 +25,7 @@ function Form({ supply_agent = '', organization_id = '', service = '' }) {
 					<Layout controls={thirdControls} control={control} />
 				</div>
 			</div>
+			<Caution />
 			<Footer organization_id={organization_id} service={service} handleSubmit={handleSubmit} />
 
 		</div>
