@@ -35,10 +35,10 @@ function useCreateLeadOrganizationToAccount({
 			const res = await trigger({ data: payload });
 
 			const updatePendingTaskPayload = {
-				id          : task?.id,
-				tags        : [ONE],
-				status      : 'pending',
-				update_data : {
+				id     : task?.id,
+				tags   : [ONE],
+				status : 'pending',
+				data   : {
 					shipment: {
 						id                   : shipment_data?.id,
 						consignee_shipper_id : res?.data?.organization_id,

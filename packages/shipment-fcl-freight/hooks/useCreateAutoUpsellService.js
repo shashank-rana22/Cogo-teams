@@ -31,8 +31,8 @@ function useCreateAutoUpsellService({
 			await trigger({ data: payload });
 
 			await apiTrigger({
-				id          : task?.id,
-				update_data : {
+				id   : task?.id,
+				data : {
 					pending_task: {
 						id              : task?.id,
 						organization_id : shipment_data?.consignee_shipper_id || consigneeId,
