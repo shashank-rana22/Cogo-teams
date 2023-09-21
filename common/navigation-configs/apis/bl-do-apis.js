@@ -109,6 +109,35 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api         : 'create_chat_message',
+		access_type : 'private',
+	},
+	{
+		api         : 'list_chat_channels',
+		access_type : 'private',
+	},
+	{
+		api         : 'delete_chat_message',
+		access_type : 'private',
+	},
+	{
+		api         : 'update_chat_message',
+		access_type : 'private',
+	},
+	{
+		api         : 'get_chat_channel',
+		access_type : 'private',
+	},
+	{
+		api         : 'create_chat_channel',
+		access_type : 'private',
+	},
+	{
+		api         : 'update_chat_channel_seen',
+		access_type : 'private',
+
+	},
+	{
 		api          : 'list_shipment_bl_details',
 		access_type  : 'private',
 		feature      : 'bl_do',

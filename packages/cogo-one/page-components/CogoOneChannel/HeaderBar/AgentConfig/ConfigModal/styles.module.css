@@ -4,8 +4,9 @@
 }
 
 .modal_body {
-	height: 464px;
+	height: 344px;
 	padding: 8px 0;
+	border-top: 1px solid #dedede;
 }
 
 .footer_styles {
@@ -36,7 +37,7 @@
 	align-items: center;
 	justify-content: center;
 	width: 30%;
-	height: 48%;
+	height: 46%;
 	margin: 6px;
 	cursor: pointer;
 	background: #fef3e9;

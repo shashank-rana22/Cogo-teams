@@ -2,6 +2,7 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { Image } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 
 import MessageBody from './MessageBody';
 import styles from './styles.module.css';
@@ -27,6 +28,8 @@ function TicketComment({
 	const isCurrentUser = activityUserId === userId;
 	const isAgent = userType === 'user';
 
+	const { t } = useTranslation(['myTickets']);
+
 	if (type === 'respond') {
 		return (
 			<div
@@ -36,7 +39,7 @@ function TicketComment({
 				{!isCurrentUser && (
 					<Image
 						src={GLOBAL_CONSTANTS.image_url?.[isAgent ? 'bot_icon' : 'user_avatar']}
-						alt="agent"
+						alt={t('myTickets:agent')}
 						width={20}
 						height={20}
 						className={styles.agent_profile_pic}
