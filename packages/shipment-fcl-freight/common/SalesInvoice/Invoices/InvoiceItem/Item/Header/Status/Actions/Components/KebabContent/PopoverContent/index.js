@@ -9,11 +9,14 @@ export default function PopoverContent({
 	commonActions = false,
 	editInvoicesVisiblity = false,
 	showCancelOptions = {},
+	shipment_data = {},
 }) {
 	const handleClick = (modalName) => {
 		setShowModal(modalName);
 		setShow(false);
 	};
+
+	const { is_job_closed_financially = false } = shipment_data || {};
 
 	return (
 		<>
@@ -24,6 +27,7 @@ export default function PopoverContent({
 							themeType="tertiary"
 							className={styles.text}
 							onClick={() => handleClick('edit_invoice')}
+							disabled={is_job_closed_financially}
 						>
 							Edit Invoice
 						</Button>
@@ -33,6 +37,7 @@ export default function PopoverContent({
 						themeType="tertiary"
 						className={styles.text}
 						onClick={() => handleClick('change_currency')}
+						disabled={is_job_closed_financially}
 					>
 						Change Currency
 					</Button>
@@ -41,6 +46,7 @@ export default function PopoverContent({
 						themeType="tertiary"
 						className={styles.text}
 						onClick={() => handleClick('add_remarks')}
+						disabled={is_job_closed_financially}
 					>
 						Add Remarks
 					</Button>
@@ -50,6 +56,7 @@ export default function PopoverContent({
 							themeType="tertiary"
 							className={styles.text}
 							onClick={() => handleClick('change_payment_mode')}
+							disabled={is_job_closed_financially}
 						>
 							Change Payment Mode
 						</Button>
