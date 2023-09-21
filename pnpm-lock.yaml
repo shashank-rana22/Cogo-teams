@@ -338,7 +338,7 @@ importers:
       '@cogoport/constants': workspace:^0.1.0
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/globalization': workspace:*
-      '@cogoport/icons-react': ^1.0.73
+      '@cogoport/icons-react': ^1.0.101
       '@cogoport/navigation-configs': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:^0.1.0
@@ -943,9 +943,9 @@ importers:
       '@cogoport/utils': ^1.2.6
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.441_nhwv4sts7er3wb6j7avl7at36a
+      '@cogoport/components': 1.0.441_bea3ndy6bxd3lsa7nghpeqlde4
       '@cogoport/core': link:../../common/core
-      '@cogoport/icons-react': 1.0.101_react@18.2.0
+      '@cogoport/icons-react': 1.0.101_biqbaboplfbrettd7655fr4n2y
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/scope-select': link:../../common/scope-select
