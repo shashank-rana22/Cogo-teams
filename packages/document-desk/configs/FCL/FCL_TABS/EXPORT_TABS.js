@@ -28,6 +28,16 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 					status : 'completed',
 				},
 			],
+			service_state: [
+				'init',
+				'awaiting_service_provider_confirmation',
+				'confirmed_by_service_provider',
+			],
+			state: [
+				'in_progress',
+				'shipment_received',
+				'confirmed_by_importer_exporter',
+			],
 		},
 
 		upload_draft_bil_of_lading: {
