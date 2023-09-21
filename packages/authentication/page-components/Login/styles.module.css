@@ -13,12 +13,17 @@
 	}
 }
 
-.form_container {
+.input_container {
+	display: flex;
+	flex-direction: column;
 	width: 75%;
 }
 
+.active_components {
+	min-height: 260px;
+}
+
 .logo {
-	width: 200px;
 	margin-bottom: 20px;
 }
 
@@ -38,64 +43,11 @@
 	}
 }
 
-.input_container {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	margin-top: 20px;
-}
-
-.input_label {
-	width: 70%;
-	font-size: 14px;
-	color: #828282;
-	text-align: center;
-}
-
-.password {
-	padding: 0 8px;
-	border-radius: 5px;
-}
-
-.password_container {
-	border-radius: 5px;
-}
-
 .submit_button {
 	font-size: 12px;
 	font-weight: 600;
 	border-radius: 12px;
 	box-shadow: 0 4px 8px rgb(98 127 172 / 20%);
-}
-
-.go_back {
-	margin-top: 10px;
-	font-size: 12px;
-	font-weight: 600;
-	border-radius: 12px;
-	box-shadow: 0 4px 8px rgb(98 127 172 / 20%);
-}
-
-.errors {
-	font-size: 12px;
-	color: var(--color-primary-error-red-1);
-}
-
-.show_password {
-	width: 30px;
-	height: 20px;
-	cursor: pointer;
-}
-
-.forgot {
-	margin: 20px;
-	text-align: center;
-
-	a {
-		font-weight: 500;
-		color: #221f20;
-		text-decoration-line: underline !important;
-	}
 }
 
 .or {
@@ -113,6 +65,32 @@
 }
 
 .micro {
+	width: 100%;
 	padding-left: 5px;
 	margin-top: 7px;
+}
+
+.tabs {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 75%;
+	background: #fff;
+	border: none;
+	border-radius: 4px;
+	box-shadow: rgb(17 17 26 / 5%) 0 1px 0, rgb(17 17 26 / 10%) 0 0 8px;
+}
+
+.tab {
+	display: flex;
+	justify-content: center;
+	width: 75%;
+	padding: 8px 0;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.active_tab {
+	color: var(--color-primary-error-red-2);
+	background-color: var(--color-primary-error-red-5);
 }

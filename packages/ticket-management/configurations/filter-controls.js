@@ -194,24 +194,6 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 		},
 		{
-			...(organizationOptions || {}),
-			label          : t('myTickets:on_behalf_of'),
-			name           : 'organization_id',
-			controllerType : 'select',
-			placeholder    : t('myTickets:select_organization'),
-			isClearable    : true,
-		},
-		{
-			...(organizationUserOptions || {}),
-			label          : <RenderLabel label={t('myTickets:select_user')} />,
-			name           : 'user_id',
-			controllerType : 'select',
-			placeholder    : t('myTickets:select_user'),
-			isClearable    : true,
-			rules          : { required: true },
-
-		},
-		{
 			label          : t('myTickets:priority_label'),
 			name           : 'priority',
 			controllerType : 'select',

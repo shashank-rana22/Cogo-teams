@@ -12844,6 +12844,16 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'create_draft_reply_all_html',
+			access_type  : 'private',
+			service_name : 'cogolens',
+		},
+		{
+			api          : 'create_draft_reply_html',
+			access_type  : 'private',
+			service_name : 'cogolens',
+		},
+		{
 			api          : 'list_shipment_operating_procedures',
 			access_type  : 'private',
 			service_name : 'shipment',
@@ -13382,6 +13392,21 @@ const partner = {
 			api          : 'onboard_lead_organization',
 			access_type  : 'private',
 			service_name : 'lead',
+		},
+		{
+			api          : 'list_cogoone_shifts',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_bulk_cogoone_shift',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_bulk_cogoone_shift',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 		{
 			api          : 'list_platform_config_constants',
