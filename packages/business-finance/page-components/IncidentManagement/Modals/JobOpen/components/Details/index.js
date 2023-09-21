@@ -19,6 +19,7 @@ function Details({ row = {}, setDetailsModal = () => {} }) {
 	const [remarks, setRemarks] = useState('');
 	const { id = '' } = row || {};
 	const { onSubmit = () => {}, loading = false } = usePostJobOpenRemark({
+		setShowModal: setDetailsModal,
 		id,
 		remarks,
 	});
@@ -30,11 +31,6 @@ function Details({ row = {}, setDetailsModal = () => {} }) {
 	} = useGetShipmentCostSheet({ shipmentId, jobNumber, JOB_SOURCE, JOB_TYPE });
 	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
-
-	const handleClick = () => {
-		setDetailsModal(null);
-		onSubmit(STATUS_MAPPING.approved);
-	};
 
 	return (
 		<div className={styles.container}>
@@ -134,7 +130,7 @@ function Details({ row = {}, setDetailsModal = () => {} }) {
 					themeType="primary"
 					disabled={isEmpty(remarks) || loading}
 					loading={loading}
-					onClick={() => handleClick()}
+					onClick={() => { onSubmit(STATUS_MAPPING.approved); }}
 				>
 					Approve
 				</Button>

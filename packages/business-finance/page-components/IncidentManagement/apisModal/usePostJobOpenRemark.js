@@ -40,7 +40,7 @@ const usePostJobOpenRemark = ({
 				Toast.success(t('incidentManagement:request_updated_successfully_message'));
 			}
 
-			setShowModal(false);
+			setShowModal(null);
 
 			refetch();
 		} catch (err) {
