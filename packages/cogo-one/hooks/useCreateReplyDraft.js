@@ -14,13 +14,14 @@ const useCreateReplyDraft = () => {
 
 	const createReplyDraft = async ({ payload, callbackFunc = () => {} }) => {
 		try {
+			const { signature = '', ...rest } = payload || {};
 			const res = await trigger({
 				data: {
-					...payload,
+					...rest,
 					userId,
 				},
 			});
-			const modifiedDraft = dataParser({ res });
+			const modifiedDraft = dataParser({ res, signature });
 			callbackFunc({ content: modifiedDraft });
 		} catch (err) {
 			console.error('err', err);
