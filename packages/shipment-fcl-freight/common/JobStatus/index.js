@@ -10,11 +10,16 @@ import styles from './styles.module.css';
 function JobStatus({ shipment_data = {} }) {
 	const [showModal, setShowModal] = useState(false);
 
+	const defaultParams = {
+		jobNumber    : shipment_data?.serial_id,
+		shipmentType : (shipment_data?.shipment_type)?.toUpperCase(),
+	};
+
 	const {
 		incidentStatusData = {},
 		incidentStatusLoading = false,
 		incidentStatusRefetch = () => { },
-	} = useCheckIncidentStatus({ shipment_data });
+	} = useCheckIncidentStatus({ defaultParams });
 
 	const isNotIncident = isEmpty(incidentStatusData);
 
