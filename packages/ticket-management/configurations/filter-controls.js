@@ -10,6 +10,7 @@ import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOpt
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 
+import CustomIssueLabel from '../common/CustomIssueLabel';
 import { REQUEST_TYPE_OPTIONS } from '../constants';
 
 function RenderLabel({ label = '' }) {
@@ -200,6 +201,7 @@ const useRaiseTicketcontrols = ({
 			defaultOptions : true,
 			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
 			visible        : true,
+			renderLabel    : (item) => <CustomIssueLabel optionsLabel={item} />,
 		},
 		{
 			label          : <RenderLabel label={t('myTickets:describe_issue')} />,
