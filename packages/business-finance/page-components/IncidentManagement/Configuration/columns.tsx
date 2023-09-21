@@ -13,8 +13,9 @@ import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
 export const columns = ({
-	setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab, t,
-	detailsModal = {}, setDetailsModal = () => {},
+	setIsAscendingActive = () => {}, setFilters = () => {},
+	isAscendingActive, getIncidentData, activeTab, t,
+	detailsModal = {}, setDetailsModal = () => { },
 }) => [
 	{
 		Header   : t('incidentManagement:incident_id_header'),
@@ -22,7 +23,7 @@ export const columns = ({
 		id       : 'incident_id',
 		Cell     : ({ row: { original } }) => {
 			const { referenceId = {} } = original || {};
-			return <span className={styles.incident_id}>{ referenceId }</span>;
+			return <span className={styles.incident_id}>{referenceId}</span>;
 		},
 	},
 	{
@@ -34,16 +35,16 @@ export const columns = ({
 			const { organization = '' } = data || {};
 			const { interCompanyJournalVoucherRequest } = data || {};
 			const { list } = interCompanyJournalVoucherRequest || {};
-			const getList = () => (list || [{}]).map((item:TooltipInterface) => item?.tradePartyName);
+			const getList = () => (list || [{}]).map((item: TooltipInterface) => item?.tradePartyName);
 			const bankTradePartyName = data?.bankRequest
 					&& data?.organization?.tradePartyType;
 			const tdsTradePartyName = data?.tdsRequest
-				&& data?.organization?.tradePartyType;
+					&& data?.organization?.tradePartyType;
 
 			return list ? (
 				<Tooltip
 					interactive
-					content={(list || [{}]).map((item:TooltipInterface) => (
+					content={(list || [{}]).map((item: TooltipInterface) => (
 						<div className={styles.trade_party_name} key={item?.id}>
 							<div>{toTitleCase(item?.div || '-')}</div>
 						</div>
@@ -60,7 +61,7 @@ export const columns = ({
 							<div>
 								{(organization?.tradePartyType === 'SELF'
 									? organization?.businessName : organization?.tradePartyName)
-									|| toTitleCase(organization?.businessName || '-')}
+										|| toTitleCase(organization?.businessName || '-')}
 
 							</div>
 						) : (
@@ -71,7 +72,7 @@ export const columns = ({
 							<div className={styles.wrapper}>
 								{(organization?.tradePartyType === 'SELF'
 									? organization?.businessName : organization?.tradePartyName)
-									|| toTitleCase(organization?.businessName || '-')}
+										|| toTitleCase(organization?.businessName || '-')}
 
 							</div>
 						) : (
@@ -106,7 +107,7 @@ export const columns = ({
 			return (
 				<div className={styles.credit}>
 					<span>
-						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? (
+						{requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? (
 							<span>
 								{t('incidentManagement:icjv_approval')}
 							</span>
@@ -160,7 +161,7 @@ export const columns = ({
 					{createdAt ? formatDate({
 						date: createdAt,
 						dateFormat:
-							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 						formatType : 'dateTime',
 						separator  : ' ',
@@ -184,7 +185,7 @@ export const columns = ({
 					{updatedAt ? formatDate({
 						date: updatedAt,
 						dateFormat:
-							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 						formatType : 'dateTime',
 						seperator  : ' ',
@@ -211,7 +212,7 @@ export const columns = ({
 	},
 
 	{
-		accessor: (row:any) => (
+		accessor: (row: any) => (
 			<AccessorComponent
 				row={row}
 				getIncidentData={getIncidentData}

@@ -33,7 +33,7 @@ function CostSheet({ row = {} }) {
 			<div
 				className={styles.data_container}
 				onClick={() => {
-					setOpen(!open);
+					setOpen(((prev) => (!prev)));
 				}}
 				role="presentation"
 			>

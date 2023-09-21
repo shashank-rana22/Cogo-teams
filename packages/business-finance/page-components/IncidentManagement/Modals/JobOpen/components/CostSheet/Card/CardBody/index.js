@@ -12,15 +12,15 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 
 const SPLIT_NUMBER = 2;
+const BORDER_COLOR = '#000000';
 
-export function CardBody({ charge, type }) {
+export function CardBody({ charge = {}, type = '' }) {
 	const [showFullDetails, setShowFullDetails] = useState(false);
 	const handleWidth = () => {
 		setShowFullDetails(!showFullDetails);
 	};
 	const { serviceType, lineItems = [] } = charge || {};
 	const hidden = lineItems.length < SPLIT_NUMBER ? styles.hidden : '';
-	const BORDER_COLOR = 'black';
 	function ToolTipContent(quotation, actual) {
 		return (
 			<div className={styles.content}>

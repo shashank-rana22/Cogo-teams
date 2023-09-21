@@ -18,33 +18,33 @@ interface SezInterface {
 }
 
 interface Org {
-	businessName?:string,
-	tradePartyType?:string,
+	businessName?: string,
+	tradePartyType?: string,
 }
 
 interface Props {
 	sezRequest?: SezInterface,
 	id?: string,
-	refetch?:()=>void,
-	organization?:Org,
-	isEditable?:boolean,
-	remark?:string,
-	row?:object,
+	refetch?: () => void,
+	organization?: Org,
+	isEditable?: boolean,
+	remark?: string,
+	row?: object,
 }
 
 function SezApproval({
-	sezRequest, organization, id, refetch = () => {},
+	sezRequest = {}, organization = {}, id = '', refetch = () => { },
 	isEditable = true, remark = '', row = {},
-}:Props) {
+}: Props) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [showModal, setShowModal] = useState(false);
 	const [inputValues, setInputValues] = useState({
 		remarks: null,
 	});
 	const { name, pincode, taxNumber, address, documentUrls } = sezRequest || {};
-	const { businessName:organizationName, tradePartyType = '' } = organization || {};
+	const { businessName: organizationName, tradePartyType = '' } = organization || {};
 
-	const { useOnAction:OnAction, loading } = useSezApproveReject({
+	const { useOnAction: OnAction, loading } = useSezApproveReject({
 		refetch,
 		setShowModal,
 		id,
@@ -121,7 +121,7 @@ function SezApproval({
 									<div>{detail.value}</div>
 								</div>
 							</div>
-						))	}
+						))}
 
 						<div>
 							<div style={{ display: 'flex' }}>

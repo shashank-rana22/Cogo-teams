@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 const FIXED_DECIMAL_VALUE = 2;
 
-function StatRect({ heading = '', expected, actual, loading }) {
+function StatRect({ heading = '', expected = 0, actual = 0, loading = false }) {
 	return (
 		<div className={styles.layout}>
 			{!loading ? (

@@ -3,8 +3,9 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function CardHeader({ header, value, loading }) {
+function CardHeader({ header = '', value = '', loading = false }) {
 	return (
+
 		<div className={styles.header}>
 			<span className={styles.font}>{header}</span>
 			<span className={styles.font}>

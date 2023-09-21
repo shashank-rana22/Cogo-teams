@@ -10,10 +10,11 @@ import { getFormatAmount } from '../../../../utils/getformatamount';
 import StatRect from './StatRect';
 import styles from './styles.module.css';
 
+const JOB_SOURCE = 'LOGISTICS';
+
 function Details({ row = {}, setDetailsModal = () => {} }) {
 	const shipmentId = row?.data?.jobOpenRequest?.id;
 	const { jobNumber = '' } = row?.data?.jobOpenRequest || {};
-	const JOB_SOURCE = 'LOGISTICS';
 	const JOB_TYPE = row?.source.toUpperCase();
 	const [remarks, setRemarks] = useState('');
 	const { id = '' } = row || {};

@@ -1,23 +1,23 @@
 /* eslint-disable no-nested-ternary */
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
-
-import { formatDate } from '../../../../../utils/formatDate';
 
 import styles from './styles.module.css';
 
 const TIMELINE_LINE_FACTOR = 1;
 
 function TimeLineItem({
-	item,
-	isLast,
-	shipmentData,
-	timeLine,
-	index,
-	isCompleted,
-	isNextMain,
+	item = {},
+	isLast = false,
+	shipmentData = {},
+	timeLine = [],
+	index = 0,
+	isCompleted = false,
+	isNextMain = false,
 }) {
 	const checkService = (shipmentData?.services || []).includes(
 		item?.service_type,
@@ -43,7 +43,11 @@ function TimeLineItem({
 						{isComplete ? 'Completed On' : 'Expected'}
 
 						<div className={styles.tool_tip_item}>
-							{formatDate(item?.completed_on, 'dd-MMM-yy', {}, true)}
+							{formatDate({
+								date       : item?.completed_on,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								formatType : 'date',
+							})}
 						</div>
 					</div>
 				) : null}

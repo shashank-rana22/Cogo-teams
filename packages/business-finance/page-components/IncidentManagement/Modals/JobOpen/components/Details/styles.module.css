@@ -65,12 +65,11 @@
 }
 
 .heading {
-	font-size: 12px;
-	font-weight: 400;
+	font-size: var(--font-size-md);
 }
 
 .text {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 }
 
