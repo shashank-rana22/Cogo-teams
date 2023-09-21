@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 
 const MIN_COUNT = 8;
 const MAX_COUNT = 16;
-function List({ isSeller = false }) {
+function List({ isSeller = false, source = 'overview' }) {
 	const { servicesList, refetchServices, shipment_data, activeStakeholder } = useContext(
 		ShipmentDetailContext,
 	);
@@ -165,7 +165,7 @@ function List({ isSeller = false }) {
 						refetch={refetch}
 						setItem={setItem}
 						setShowChargeCodes={setShowModal}
-						source="overview"
+						source={source}
 					/>
 				)}
 

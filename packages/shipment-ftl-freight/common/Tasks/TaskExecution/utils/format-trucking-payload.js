@@ -1,3 +1,16 @@
+const TASK_KEYS = {
+	upload_service_provider_proof_of_delivery: {
+		data_key      : 'physical_pod_location_id',
+		accessor_key  : 'physical_pod_location_id',
+		default_value : '',
+	},
+	pod_sent_to_shipper: {
+		data_key      : 'courier_tracking_number',
+		accessor_key  : 'courier_tracking_number',
+		default_value : '',
+	},
+};
+
 const formatTruckingPayload = (
 	task = {},
 	rawValues = {},
@@ -114,6 +127,47 @@ const formatTruckingPayload = (
 			});
 
 			payload.service_data.push(eachTruckPayload);
+		});
+	}
+
+	if (task.task === 'upload_invoice_submission_acknowledgement') {
+		getApisData.list_shipment_services.forEach((serviceItem) => {
+			const eachServicePayload = {
+				service_id : serviceItem?.id,
+				data       : {
+					invoice_submission_details: [],
+				},
+			};
+
+			rawValues.documents.forEach((documentItem) => {
+				if (documentItem?.service_id === serviceItem?.id) {
+					eachServicePayload.data.invoice_submission_details.push({
+						invoice_submission_date: documentItem?.invoice_submission_date,
+					});
+				}
+			});
+
+			payload.service_data.push(eachServicePayload);
+		});
+	}
+
+	if (task.task in TASK_KEYS) {
+		const taskObj = TASK_KEYS[task.task];
+		getApisData.list_shipment_services.forEach((serviceItem) => {
+			const eachServicePayload = {
+				service_id : serviceItem?.id,
+				data       : {
+					[taskObj.data_key]: taskObj.default_value,
+				},
+			};
+
+			rawValues.documents.forEach((documentItem) => {
+				if (documentItem?.service_id === serviceItem?.id) {
+					eachServicePayload.data[taskObj.data_key] = documentItem[taskObj.accessor_key];
+				}
+			});
+
+			payload.service_data.push(eachServicePayload);
 		});
 	}
 
