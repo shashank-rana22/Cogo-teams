@@ -787,6 +787,9 @@ const GLOBAL_CONSTANTS = {
 		cogoport_ftl_collections : 'ftl.collections@cogoport.com',
 		cogoport_support         : 'support@cogoport.com',
 	},
+	mobile_number: {
+		cogoone_sales_contact_no: '+91-8069182176',
+	},
 	websites: {
 		cogoport : 'www.cogoport.com',
 		fortigo  : 'www.4tigo.com',

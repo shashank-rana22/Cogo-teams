@@ -1,14 +1,20 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
-
-const SALES_CONTACT_NO = '+91-8069182176';
+import { useMemo } from 'react';
 
 const getSignatureText = ({ userName }) => (
-	`<br><br><br><br><div>
+	`
+	<br>
+	<br>
+	<br>
+	<br>
+	<p>
 		<p>Regards</p>
 		<p>${userName}</p>
 		<p>CogoOne Advisor</p>
-		<p>${SALES_CONTACT_NO}</p>
-	</div>`
+		<p>${GLOBAL_CONSTANTS.mobile_number.cogoone_sales_contact_no}</p>
+	</p>
+	`
 );
 
 function useGetSignature() {
@@ -20,8 +26,10 @@ function useGetSignature() {
 		return signature;
 	};
 
+	const signature = useMemo(addSignature, [userName]);
+
 	return {
-		addSignature,
+		signature,
 	};
 }
 

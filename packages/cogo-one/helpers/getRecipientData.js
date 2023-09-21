@@ -89,7 +89,7 @@ export function getRecipientData({
 	deleteMessage = () => {},
 	createReplyDraft = () => {},
 	createReplyAllDraft = () => {},
-	addSignature = () => {},
+	signature = '',
 }) {
 	const {
 		setButtonType = () => {},
@@ -157,8 +157,6 @@ export function getRecipientData({
 
 		let mailData = {};
 		const newSubject = getSubject({ subject, newButtonType });
-
-		const signature = addSignature();
 
 		if (newButtonType === 'reply') {
 			mailData = getReplyMails({

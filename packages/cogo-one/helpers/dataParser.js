@@ -1,4 +1,4 @@
-const dataParser = ({ res, signature = '' }) => {
+const dataParser = ({ res = {}, signature = '' }) => {
 	const parsedData = JSON.parse(res?.data?.message || '{}') || {};
 
 	const draftContent = parsedData?.body?.content || '';

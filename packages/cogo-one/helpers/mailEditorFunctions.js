@@ -81,7 +81,7 @@ function useMailEditorFunctions({
 
 	const handleSend = () => {
 		const isEmptyMail = getFormatedEmailBody({ emailState });
-		if (replyLoading) {
+		if (replyLoading || mailLoading) {
 			return;
 		}
 

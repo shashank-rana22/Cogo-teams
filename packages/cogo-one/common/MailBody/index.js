@@ -82,7 +82,7 @@ function MailBody({
 		loading = false,
 	} = useGetMailContent({ messageId: message_id, source, setExpandedState });
 
-	const { addSignature } = useGetSignature();
+	const { signature } = useGetSignature();
 
 	const { createReplyAllDraft } = useCreateReplyAllDraft();
 	const { createReplyDraft } = useCreateReplyDraft();
@@ -110,7 +110,7 @@ function MailBody({
 		deleteMessage,
 		createReplyDraft,
 		createReplyAllDraft,
-		addSignature,
+		signature,
 	});
 
 	const handleExpandClick = () => {

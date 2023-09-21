@@ -78,7 +78,7 @@ function CogoOne() {
 
 	const { fetchWorkStatus = () => {}, agentWorkStatus = {}, preferenceLoading = false } = useGetAgentPreference();
 
-	const { addSignature } = useGetSignature();
+	const { signature } = useGetSignature();
 	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
 
 	const { suggestions = [] } = useListChatSuggestions();
@@ -105,7 +105,7 @@ function CogoOne() {
 		userId,
 		userName,
 		resetEmailState: () => {
-			setEmailState({ ...DEFAULT_EMAIL_STATE, body: addSignature() });
+			setEmailState({ ...DEFAULT_EMAIL_STATE, body: signature });
 			setMailAttachments([]);
 		},
 		setMailAttachments,
