@@ -60,7 +60,7 @@
 	padding: 6px 0 4px;
 
 	&:last-child {
-		border-bottom: 0;
+		border-bottom: unset;
 	}
 
 	:global {

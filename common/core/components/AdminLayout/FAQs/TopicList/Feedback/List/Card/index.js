@@ -17,11 +17,13 @@ function Card({
 	Data: data = {},
 	Type: issueType = '',
 }) {
-	const { Attachment: attachment = [] } = data || {};
-	const fileUrl = attachment[GLOBAL_CONSTANTS.zeroth_index];
-	const { value, label } = STATUS_LABEL_MAPPING[STATUS_MAPPING[status]] || {};
-
 	const { query } = useRouter();
+
+	const { Attachment: attachment = [] } = data || {};
+
+	const fileUrl = attachment?.[GLOBAL_CONSTANTS.zeroth_index];
+
+	const { value, label } = STATUS_LABEL_MAPPING[STATUS_MAPPING[status]] || {};
 
 	const { partner_id: partnerId = '' } = query || {};
 
