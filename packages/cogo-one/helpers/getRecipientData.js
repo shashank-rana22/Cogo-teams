@@ -110,6 +110,7 @@ export function getRecipientData({
 		bcc_mails = [],
 		message_id = '',
 		attachments = [],
+		draftQuillMessage = '',
 	} = response || {};
 
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
@@ -136,7 +137,7 @@ export function getRecipientData({
 				(prev) => ({
 					...prev,
 					emailVia,
-					body             : body || '',
+					body             : draftQuillMessage || body || '',
 					from_mail        : sender || '',
 					subject          : draftSubject || '',
 					toUserEmail      : to_mails || [],

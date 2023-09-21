@@ -62,6 +62,7 @@ function useMailEditorFunctions({
 		roomData          : formattedData,
 		parentMessageData : eachMessage,
 		setEmailState,
+		body,
 	});
 
 	const {
