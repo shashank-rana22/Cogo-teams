@@ -5,21 +5,26 @@ import {
 	useCallback,
 } from 'react';
 
+import { STATUS_KEY_MAPPING } from '../constants';
+
 const PAGE_DECREMENT = 1;
 
 const getPayload = ({
 	performerId,
+	status,
 	page,
 }) => ({
 	PerformedByID : performerId,
 	size          : 10,
 	page          : page - PAGE_DECREMENT,
 	RequestType   : 'feedback',
-	Statuses      : '' || undefined,
+	Statuses      : status || undefined,
 });
 
-const useGetFeedbacks = ({ page }) => {
+const useGetFeedbacks = ({ activeTab, page }) => {
 	const { id : performerId = '' } = useSelector((state) => state?.profile?.user);
+
+	const status = STATUS_KEY_MAPPING[activeTab];
 
 	const [{ data, loading }, trigger] = useTicketsRequest({
 		url     : '/list',
@@ -32,13 +37,14 @@ const useGetFeedbacks = ({ page }) => {
 			trigger({
 				params: getPayload({
 					performerId,
+					status,
 					page,
 				}),
 			});
 		} catch (error) {
 			console.error('error:', error);
 		}
-	}, [performerId, trigger, page]);
+	}, [performerId, trigger, status, page]);
 
 	const { items, ...rest } = data || {};
 
