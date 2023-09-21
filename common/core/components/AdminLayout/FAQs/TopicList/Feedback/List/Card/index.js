@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -17,8 +18,18 @@ function Card({
 	const { Attachment: attachment = [] } = data || {};
 	const fileUrl = attachment[GLOBAL_CONSTANTS.zeroth_index];
 
+	const { query } = useRouter();
+
+	const { partner_id: partnerId = '' } = query || {};
+
+	const redirectUrl = `${window.location.origin}/v2/${partnerId}/ticket-management/my-tickets?ticket_id=${id}`;
+
 	return (
-		<div className={styles.card}>
+		<div
+			role="presentation"
+			className={styles.card}
+			onClick={() => window.open(redirectUrl, '_blank')}
+		>
 			<div className={styles.header}>
 				<div className={styles.basic_info}>
 					<div className={styles.feedback_number}>
