@@ -9531,6 +9531,12 @@ const partner = {
 			feature     : 'JournalVoucher',
 		},
 		{
+			api         : 'post_payments_parent_jv_bulk_jv_upload',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
 			api         : 'post_payments_parent_jv_post_to_sage',
 			access_type : 'private',
 			module      : 'JournalVoucher',
@@ -13392,6 +13398,21 @@ const partner = {
 			api          : 'onboard_lead_organization',
 			access_type  : 'private',
 			service_name : 'lead',
+		},
+		{
+			api          : 'list_cogoone_shifts',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_bulk_cogoone_shift',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_bulk_cogoone_shift',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 		{
 			api          : 'list_platform_config_constants',
