@@ -182,7 +182,8 @@ const useHandleQuotationModal = ({
 		Object.keys(values || {}).forEach((key) => {
 			const value = values[key];
 			if (value && key === 'attachment_file_urls') {
-				const urls = (value || []).map((item) => item?.url);
+				const urls = (value || []).map((item) => item?.finalUrl || item || '');
+
 				NEW_VALUES[key] = urls;
 			} else if (value && key === 'terms_and_conditions') {
 				NEW_VALUES[key] = [value];
@@ -219,6 +220,8 @@ const useHandleQuotationModal = ({
 			const values = emailWatch();
 			if (values) {
 				onSave(formatEmailValues(values), false);
+
+				emailSetValue('attachment_file_urls', []);
 
 				if (activeState === 'customize') {
 					setActiveState('select_recipient');
@@ -294,6 +297,7 @@ const useHandleQuotationModal = ({
 				orgUsersData,
 				emailWatch,
 				emailContent,
+				loading,
 			},
 			buttons: [
 				{
@@ -315,10 +319,6 @@ const useHandleQuotationModal = ({
 			],
 		},
 	};
-
-	useEffect(() => {
-		getEmailPreview({ ...getEmailPreviewProps, emailContentNew: {} });
-	}, [getEmailPreviewProps]);
 
 	return {
 		activeState,
