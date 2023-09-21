@@ -3,7 +3,7 @@ import React from 'react';
 
 import CardList from '../../../../commons/CardList';
 
-import { InvoiceTable } from './InvoiceTable';
+import { invoiceTable } from './InvoiceTable';
 import styles from './styles.module.css';
 
 const BILLED_ITEMS_CODE = ['BookingCONV', 'BookingNOST'];
@@ -30,16 +30,16 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 	} = item || {};
 
 	const showBilledText = (items) => !!BILLED_ITEMS_CODE.includes(items?.code);
-	line_items.every(showBilledText);
+	const allItemsBilled = line_items?.every(showBilledText);
 
-	const renderBilledText = showBilledText && quotation_source === 'billed_at_actuals' ? '*will be billed at actuals'
+	const renderBilledText = allItemsBilled && quotation_source === 'billed_at_actuals' ? '*will be billed at actuals'
 		: null;
 
 	return (
 		<div className={styles.container}>
 			<CardList
 				loading={loading}
-				fields={InvoiceTable(item)}
+				fields={invoiceTable(item)}
 				data={line_items || [{}]}
 				detail={detail}
 			/>
@@ -47,13 +47,13 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 			<div className={styles.totals}>
 				<div className={styles.tax_info}>
 					Total Tax:
-					&nbsp;
+					{' '}
 					{format(tax_total_discounted, service_total_currency)}
 				</div>
 
 				<div className={styles.total_tax}>
 					Total w/o Tax:
-					&nbsp;
+					{' '}
 					{format(total_price_discounted, service_total_currency)}
 				</div>
 			</div>

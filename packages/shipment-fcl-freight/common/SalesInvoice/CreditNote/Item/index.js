@@ -24,12 +24,15 @@ const CN_STATUS_MAPPING = {
 	finance_rejected : 'finance_rejected',
 };
 
+const REJECTED_STATUS = ['rejected', 'finance_rejected'];
+
 function Item({
 	item = {},
 	cnRefetch = () => {},
 	invoiceData = {},
 	loading = false,
 	invoicesList = [],
+	isCrossEntity = false,
 }) {
 	const [open, setOpen] = useState('');
 
@@ -65,7 +68,11 @@ function Item({
 			<main className={styles.main}>
 				<div className={styles.header}>
 					<div className={styles.billing_party} ref={billingPartyHeightRef}>
-						<h5>{item?.billing_address?.name}</h5>
+						<h5>
+							{isCrossEntity ? item?.billing_address?.business_name?.toUpperCase()
+								: item?.billing_address?.name}
+
+						</h5>
 
 						<Tooltip
 							theme="light"
@@ -123,11 +130,16 @@ function Item({
 						<div className={styles.invoice_status_and_action}>
 							<div className={styles.status}>
 								<div className={cl`${styles[CN_STATUS_MAPPING[itemStatus]]} ${styles.status_text}`}>
-									{startCase(CN_STATUS_MAPPING[itemStatus])}
+									{startCase(CN_STATUS_MAPPING[itemStatus] || '')}
 								</div>
 
-								{itemStatus === 'rejected' ? (
-									<IcCError width={16} height={16} />
+								{REJECTED_STATUS.includes(itemStatus) && item?.rejection_reason ? (
+									<div className={styles.rejection_reason}>
+										<IcCError width={16} height={16} />
+										<span>
+											{item.rejection_reason}
+										</span>
+									</div>
 								) : null}
 							</div>
 
