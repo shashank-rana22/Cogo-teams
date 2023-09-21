@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useState, useRef } from 'react';
 
-import useCreateBusiness from '../../hooks/useCreateBusiness';
+import useCreateBusinessEntity from '../../hooks/useCreateBusinessEntity';
 
 import Form from './Form';
 import styles from './styles.module.css';
@@ -14,7 +14,7 @@ function AddEdit({
 	const onSubmit = () => {
 		formRef.current.formSubmit();
 	};
-	const { apiTrigger, loading } = useCreateBusiness({
+	const { apiTrigger, loading } = useCreateBusinessEntity({
 		refetch: () => {
 			refetch();
 			setShowModal(false);

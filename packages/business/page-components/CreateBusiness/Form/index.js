@@ -5,10 +5,10 @@ import Layout from '../../../common/Layout';
 
 import getControls from './getControls';
 
-function Form({ item = {}, handleSubmitForm = () => {} }, ref) {
+function Form({ handleSubmitForm = () => {} }, ref) {
 	const DEFAULT_VALUES = {};
 
-	const controls = getControls({ item });
+	const controls = getControls;
 
 	controls.forEach((ctrl) => {
 		if (ctrl?.value) {

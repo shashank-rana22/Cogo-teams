@@ -5,9 +5,8 @@ import styles from './styles.module.css';
 
 const FIRST_INDEX = 1;
 
-function ToolTipContent(props) {
-	const { content } = props;
-	const totalFunctionPills = content.length;
+function ToolTipContent({ content = [] }) {
+	const totalFunctionPills = content?.length;
 
 	if (totalFunctionPills <= FIRST_INDEX) {
 		(content).map((item) => (

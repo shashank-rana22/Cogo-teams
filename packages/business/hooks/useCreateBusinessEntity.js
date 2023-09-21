@@ -4,10 +4,10 @@ import { useRequest } from '@cogoport/request';
 import getCreateBusinessPayload from '../helpers/getCreateBusinessPayload';
 import toastApiError from '../utlis/toastApiError';
 
-const useCreateBusiness = ({
+const useCreateBusinessEntity = ({
 	refetch = () => {},
 }) => {
-	const [{ loading }, trigger] = useRequest({ method: 'post', url: '/create_business_entity' });
+	const [{ loading }, trigger] = useRequest({ method: 'post', url: '/create_business_entity' }, { manual: true });
 
 	const apiTrigger = async (values = {}) => {
 		try {
@@ -29,4 +29,4 @@ const useCreateBusiness = ({
 	};
 };
 
-export default useCreateBusiness;
+export default useCreateBusinessEntity;

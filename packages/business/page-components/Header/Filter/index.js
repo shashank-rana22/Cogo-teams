@@ -2,14 +2,15 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
 import Layout from '../../../common/Layout';
+import getFilterControls from '../../../config/filter-controls';
 
 import styles from './styles.module.css';
 
-function Filters({ controls = [], filters = {}, setFilters = () => {}, setShow = () => {} }) {
+function Filters({ filters = {}, setFilters = () => {}, setShow = () => {} }) {
 	const { page, ...restFilters } = filters || {};
 
 	const { control, handleSubmit } = useForm({ defaultValues: restFilters });
-
+	const controls = getFilterControls;
 	const onReset = () => {
 		setFilters({ page: 1 });
 		setShow(false);

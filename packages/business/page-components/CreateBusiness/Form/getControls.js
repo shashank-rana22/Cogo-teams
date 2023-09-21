@@ -34,7 +34,7 @@ const fieldArrayField = [
 	},
 ];
 
-const getControls = () => [
+const getControls = [
 	{
 		name        : 'business_type',
 		label       : 'Business Type',
@@ -101,7 +101,6 @@ const getControls = () => [
 		placeholder    : 'Country',
 		label          : 'Country',
 		type           : 'country_select',
-		optionsListKey : 'countries',
 		optionValueKey : 'country_code',
 		caret          : true,
 		multiple       : false,
@@ -110,11 +109,10 @@ const getControls = () => [
 		},
 	},
 	{
-		name       : 'status',
-		label      : 'Status',
-		type       : 'select',
-		selectType : 'pills',
-		options    : [
+		name    : 'status',
+		label   : 'Status',
+		type    : 'select',
+		options : [
 			{ label: 'Active', value: 'active' },
 			{ label: 'Inactive', value: 'inactive' },
 		],
