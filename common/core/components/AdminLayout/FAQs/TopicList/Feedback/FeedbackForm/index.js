@@ -8,7 +8,7 @@ import { getFieldController } from '../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-function FeedbackForm({ setShowAddFeedback = () => {} }) {
+function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }) {
 	const formProps = useForm();
 
 	const {
@@ -24,7 +24,7 @@ function FeedbackForm({ setShowAddFeedback = () => {} }) {
 
 	const controls = useRaiseTicketcontrols({ watchCategory });
 
-	const { addFeedback, loading } = useAddFeedback({});
+	const { addFeedback, loading } = useAddFeedback({ getFeedbacks, setShowAddFeedback });
 
 	return (
 		<div className={styles.container}>
