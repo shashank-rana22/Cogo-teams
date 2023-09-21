@@ -2793,6 +2793,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'create_organization_user_communication_preference',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'send_channel_partner_user_welcome_email',
 			access_type  : 'private',
 			service_name : 'partner',
