@@ -17,7 +17,7 @@ import styles from './styles.module.css';
 const STATUS_MAPPING = {
 	inactive : 'inactive',
 	active   : 'active',
-	recent   : 'active',
+	unread   : 'active',
 };
 
 function List({
@@ -47,7 +47,7 @@ function List({
 			status            : STATUS_MAPPING[status],
 			q,
 		},
-		sort_by: status === 'recent' ? 'created_at' : undefined,
+		sort_by: status === 'unread' ? 'updated_at' : undefined,
 	};
 	const states = { list, setList };
 	const { listData, total_page, loading } = useGetShipmentChatList({ payload: getListPayload, states });
@@ -55,7 +55,7 @@ function List({
 	const defaultChannel = listData?.find((obj) => obj?.source_id === shipment_data?.id);
 	const channelId = defaultChannel ? defaultChannel?.id : listData[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
-	const updateSeenPayload = { id, showUnreadChat };
+	const updateSeenPayload = { id, showUnreadChat, status };
 	const { loading: seenLoading } = useUpdateSeen({ payload: updateSeenPayload });
 
 	const getChannelPayload = { id };
@@ -76,8 +76,16 @@ function List({
 
 	let unSeenMsg = [];
 	unSeenMsg = messageContentArr.filter((item) => item[user_id]);
-	const unreadDataList = unSeenMsg?.map((obj) => obj?.channel_details);
-	const channelList = showUnreadChat ? unreadDataList : listData;
+	let unreadDataList = unSeenMsg?.map((obj) => obj?.channel_details);
+
+	unreadDataList = unreadDataList.sort((a, b) => {
+		const date1 = new Date(a.updated_at);
+		const date2 = new Date(b.updated_at);
+
+		return date2 - date1;
+	});
+
+	const channelList = (showUnreadChat || status === 'unread') ? unreadDataList : listData;
 
 	const handleClick = () => {
 		refOuter.current.scrollTop = 0;
