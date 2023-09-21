@@ -92,15 +92,33 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 		bl_approval_pending: {
 			task_attributes: [
 				{
-					...(isCriticalOn ? { status: 'pending' } : {}),
 					assigned_stakeholder: 'service_ops2',
 				},
+				{
+					task   : 'mark_vessel_departed',
+					status : 'pending',
+				},
+				{
+					task   : 'upload_draft_bill_of_lading',
+					status : 'completed',
+				},
 			],
+
 			service_state : ['containers_gated_in'],
 			state         : ['in_progress', 'confirmed_by_importer_exporter'],
 		},
 		completed: {
-			service_state: ['vessel_departed', 'vessel_arrived', 'containers_gated_out', 'completed'],
+			task_attributes: [
+				{
+					task   : 'mark_vessel_departed',
+					status : 'completed',
+				},
+				{
+					task   : 'upload_draft_bill_of_lading',
+					status : 'completed',
+				},
+			],
+			service_state: ['containers_gated_in'],
 		},
 		cancelled: {
 			state: 'cancelled',

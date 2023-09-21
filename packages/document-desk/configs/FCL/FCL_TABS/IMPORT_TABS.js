@@ -148,6 +148,14 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 					task   : 'update_hbl_collection_status',
 					status : 'completed',
 				},
+				{
+					task   : 'upload_bill_of_lading',
+					status : 'completed',
+				},
+				{
+					task   : 'mark_vessel_departed',
+					status : 'completed',
+				},
 			],
 			service_state: ['vessel_arrived', 'containers_gated_out', 'completed'],
 		},
