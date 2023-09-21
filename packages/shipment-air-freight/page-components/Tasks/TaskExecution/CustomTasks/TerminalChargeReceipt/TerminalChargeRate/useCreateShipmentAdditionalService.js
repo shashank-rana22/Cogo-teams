@@ -12,7 +12,13 @@ const useCreateShipmentAdditionalService = ({
 	}, { manual: true });
 
 	const createShipmentAdditionalService = async (values) => {
-		const { total_tax_price = '', currency = '' } = values || {};
+		const { currency = '' } = values || {};
+
+		let total_tax_price = 0;
+
+		(values?.terminalChargeReceipt || []).forEach((val) => {
+			total_tax_price += Number(val.total_tax_price);
+		});
 		const { id = '', all_services = [] } = shipmentData || {};
 
 		const airFreightLocalService = all_services.find((
