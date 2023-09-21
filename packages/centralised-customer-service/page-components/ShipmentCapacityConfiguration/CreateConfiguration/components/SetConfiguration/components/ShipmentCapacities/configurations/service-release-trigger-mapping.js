@@ -1,7 +1,7 @@
 const options = {
 	fcl: [
-		{ label: 'Shipment State: Vessel Departed', value: 'vessel_departed' },
-		{ label: 'Upload Delivery Order', value: 'upload_delivery_order' },
+		{ label: 'Cargo Sailed', value: 'cargo_sailed' },
+		{ label: 'Uploaded Delivery Order', value: 'uploaded_delivery_order' },
 	],
 };
 

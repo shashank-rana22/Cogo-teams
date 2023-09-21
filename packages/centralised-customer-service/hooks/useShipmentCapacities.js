@@ -20,7 +20,7 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 
 		registeredFieldNames.forEach((fieldName) => {
 			if (fieldName.includes('release_trigger')) {
-				setValue(fieldName, 'mark_shipment_as_complete');
+				setValue(fieldName, []);
 			} else {
 				setValue(fieldName, '');
 			}

@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { InputController, SelectController } from '@cogoport/forms';
+import { InputController, MultiselectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
@@ -8,7 +8,6 @@ import React, { forwardRef } from 'react';
 import services from '../../../../../../../configurations/service-options';
 import useShipmentCapacities from '../../../../../../../hooks/useShipmentCapacities';
 
-import DEFAULT_RELEASE_TRIGGER_OPTION from './constants/default-trigger-option';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 import getReleaseTriggerOptions from './utils/get-release-trigger-options';
@@ -100,8 +99,7 @@ function ShipmentCapacities(props, ref) {
 					</div>
 
 					{services.map((service) => {
-						const releaseTriggerOptions = [...getReleaseTriggerOptions({ service }),
-							DEFAULT_RELEASE_TRIGGER_OPTION];
+						const releaseTriggerOptions = [...getReleaseTriggerOptions({ service })];
 
 						return (
 							<div className={styles.service_item} key={service.value}>
@@ -139,14 +137,10 @@ function ShipmentCapacities(props, ref) {
 								</div>
 
 								<div className={styles.trigger}>
-									<SelectController
+									<MultiselectController
 										name={`${service.value}-release_trigger`}
 										control={control}
 										options={releaseTriggerOptions}
-										value="mark_shipment_as_complete"
-										rules={{
-											required: 'Required',
-										}}
 									/>
 
 									{errors?.[`${service.value}-release_trigger`]?.message
