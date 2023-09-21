@@ -32,7 +32,7 @@ function UserOnboard({ leadsData = {}, defaultValues = {}, refetchList = () => {
 		reset(defaultValues);
 	}, [defaultValues, reset]);
 
-	const countryValidation = getCountryConstants({ country_id: leadsData?.country_id, isDefaultData: false });
+	const countryValidation = getCountryConstants({ country_id: formValues?.country_id, isDefaultData: false });
 
 	const {
 		updateLoading = false,
