@@ -125,25 +125,29 @@ function InvoiceDetail({
 				</div>
 			</div>
 
-			<div className={styles.payment_mode_status}>
-				{invoice?.payment_mode === 'credit' ? (
-					<div>
-						<div className={styles.info_container}>
-							{startCase(creditSource?.slice(CREDIT_SOURCE_FIRST, SLICE_CREDIT_UPTO))}
-						</div>
+			{invoice?.payment_mode ? (
+				<div className={styles.payment_mode_status}>
+					{invoice?.payment_mode === 'credit' ? (
+						<div>
+							<div className={styles.info_container}>
+								{startCase(creditSource?.slice(CREDIT_SOURCE_FIRST, SLICE_CREDIT_UPTO))}
+							</div>
 
-						<div className={styles.payment_method}>
-							{startCase(
-								`${
-									creditSource?.[(creditSource?.length ?? CREDIT_SOURCE_FIRST) - CREDIT_INDEX_OFFSET]
-								} deferred payment`,
-							)}
+							<div className={styles.payment_method}>
+								{startCase(
+									`${
+										creditSource?.
+											[(creditSource?.length ?? CREDIT_SOURCE_FIRST) - CREDIT_INDEX_OFFSET]
+									} deferred payment`,
+								)}
+							</div>
 						</div>
-					</div>
-				) : (
-					<div className={styles.payment_method}>{invoice?.payment_mode}</div>
-				)}
-			</div>
+					) : (
+						<div className={styles.payment_method}>{invoice?.payment_mode}</div>
+					)}
+				</div>
+			) : null}
+
 		</div>
 	);
 }

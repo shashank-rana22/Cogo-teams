@@ -1,7 +1,6 @@
-import { Tabs, TabPanel, cl, Toggle, Placeholder } from '@cogoport/components';
+import { Tabs, TabPanel, cl, Placeholder } from '@cogoport/components';
 import ScopeSelect from '@cogoport/scope-select';
-import { useRouter } from 'next/router';
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 
 import ClickableDiv from '../../commons/ClickableDiv';
 import { BucketsMapping } from '../../config/BucketMapping';
@@ -9,23 +8,15 @@ import useListAuthorityDeskShipments from '../../hooks/useListAuthorityDeskShipm
 import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
 import Filters from './Filters';
-import GoToKamDesk from './GoToKamDesk';
 import List from './List';
 import styles from './styles.module.css';
 
 const DEFAULT_COUNT = 0;
 
 const SERVICES = { fcl_freight: 'FCL Freight', lcl_freight: 'LCL Freight', fcl_local: 'FCL Locals' };
-const ROLE_NAME = {
-	kam            : 'KAM',
-	so2            : 'SO2',
-	credit_control : '',
-};
 
 function Ocean() {
 	const { role } = useStakeholderCheck();
-
-	const router = useRouter();
 
 	const [tabsState, setTabsState] = useState({
 		activeTab         : 'bl',
@@ -34,29 +25,19 @@ function Ocean() {
 		subApprovedBucket : '',
 	});
 
-	const handleVersionChange = useCallback(() => {
-		const newPathname = `${router.asPath}`;
-		window.location.replace(newPathname);
-	}, [router.asPath]);
-
 	const [filters, setFilters] = useState({
 		is_job_closed : 'no',
 		page          : 1,
 	});
 
 	const { data, loading, refetch } = useListAuthorityDeskShipments({ ...tabsState, filters });
+
 	const { count_stats } = data;
 
 	const { buckets, additionalTabs } = BucketsMapping({ role, count_stats });
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
-				<div className={styles.heading}>{`${ROLE_NAME[role]} Authority Desk`}</div>
-				{role === 'kam'
-				&& <GoToKamDesk />}
-			</div>
-
 			<Tabs
 				activeTab={tabsState.activeTab}
 				themeType="primary"
@@ -96,15 +77,6 @@ function Ocean() {
 				</div>
 
 				<div className={styles.right_content}>
-					<div className={styles.version}>
-						<Toggle
-							size="md"
-							onLabel="Old"
-							offLabel="New"
-							onChange={handleVersionChange}
-						/>
-					</div>
-
 					{role === 'kam' ? <ScopeSelect size="md" /> : null}
 				</div>
 
