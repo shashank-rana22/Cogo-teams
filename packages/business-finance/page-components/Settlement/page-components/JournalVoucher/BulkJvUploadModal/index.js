@@ -54,7 +54,7 @@ function BulkJvUpload({ showBulkJV = false, setShowBulkJV = () => {} }) {
 			<Modal.Footer>
 				<div className={styles.upload_button}>
 					<Button
-						onClick={() => getUploadApi()}
+						onClick={getUploadApi}
 						disabled={!fileValue}
 						loading={bulkJvLoading}
 						style={{ marginLeft: '10px' }}
