@@ -41,8 +41,7 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 				'shipment_received',
 				'confirmed_by_importer_exporter',
 			],
-			bl_uploaded             : false,
-			containers_not_gated_in : true,
+			bl_uploaded: false,
 		},
 
 		amendment_requested_by_importer_exporter: {
@@ -61,13 +60,10 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 					...(isCriticalOn ? { status: 'pending' } : {}),
 					assigned_stakeholder: 'service_ops2',
 				},
-				{
-					task   : 'mark_container_gated_in',
-					status : 'pending',
-				},
 			],
-			bl_approval_completed : true,
-			service_state         : ['containers_gated_in'],
+			bl_approval_completed   : true,
+			containers_not_gated_in : true,
+			service_state           : ['containers_gated_in'],
 		},
 
 		vessel_departed_import: {
