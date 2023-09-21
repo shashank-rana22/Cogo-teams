@@ -17,7 +17,7 @@ function Details({ row = {}, setDetailsModal = () => {} }) {
 	const { jobNumber = '' } = row?.data?.jobOpenRequest || {};
 	const JOB_TYPE = row?.source.toUpperCase();
 	const [remarks, setRemarks] = useState('');
-	const { id = '' } = row || {};
+	const { id = '', status = '' } = row || {};
 	const { onSubmit = () => {}, loading = false } = usePostJobOpenRemark({
 		setShowModal: setDetailsModal,
 		id,
@@ -99,43 +99,47 @@ function Details({ row = {}, setDetailsModal = () => {} }) {
 					</div>
 				</div>
 			</div>
-
-			<div className={cl`${styles.label} 
+			{ status === 'REQUESTED' ? (
+				<div>
+					<div className={cl`${styles.label} 
 								${styles.required_field}`}
-			>
-				Remarks
-			</div>
+					>
+						Remarks
+					</div>
 
-			<Textarea
-				className={styles.textarea}
-				name="remark"
-				size="md"
-				placeholder="Enter Remarks Here"
-				onChange={(value) => setRemarks(value)}
-			/>
-			<div className={styles.button_container}>
+					<Textarea
+						className={styles.textarea}
+						name="remark"
+						size="md"
+						placeholder="Enter Remarks Here"
+						onChange={(value) => setRemarks(value)}
+					/>
+					<div className={styles.button_container}>
 
-				<Button
-					size="md"
-					themeType="secondary"
-					disabled={isEmpty(remarks) || loading}
-					loading={loading}
-					onClick={() => onSubmit(STATUS_MAPPING.rejected)}
-				>
-					Reject
-				</Button>
+						<Button
+							size="md"
+							themeType="secondary"
+							disabled={isEmpty(remarks) || loading}
+							loading={loading}
+							onClick={() => onSubmit(STATUS_MAPPING.rejected)}
+						>
+							Reject
+						</Button>
 
-				<Button
-					size="md"
-					themeType="primary"
-					disabled={isEmpty(remarks) || loading}
-					loading={loading}
-					onClick={() => { onSubmit(STATUS_MAPPING.approved); }}
-				>
-					Approve
-				</Button>
+						<Button
+							size="md"
+							themeType="primary"
+							disabled={isEmpty(remarks) || loading}
+							loading={loading}
+							onClick={() => { onSubmit(STATUS_MAPPING.approved); }}
+						>
+							Approve
+						</Button>
+					</div>
 
-			</div>
+				</div>
+			) : null }
+
 		</div>
 	);
 }
