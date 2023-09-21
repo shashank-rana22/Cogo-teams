@@ -7,6 +7,7 @@ import AutoJobClosure from './AutoJobClosure/index';
 import Dashboard from './Dashboard';
 import usePurchaseViewStats from './hook/getPurchaseViewStats';
 import Rejected from './Rejected';
+import ShipmentAuditFunction from './ShipmentAuditFunctions';
 import styles from './styles.module.css';
 
 function CoeFinance() {
@@ -26,7 +27,7 @@ function CoeFinance() {
 		<div>
 			<div className={styles.header}>
 				<div className={styles.header_style}>
-					COE Finance
+					Shipment Audit Function
 
 				</div>
 			</div>
@@ -50,6 +51,15 @@ function CoeFinance() {
 							statsLoading={statsLoading}
 						/>
 					</TabPanel>
+
+					<TabPanel name="operational_close" title="Operational Close">
+						<ShipmentAuditFunction />
+					</TabPanel>
+
+					<TabPanel name="financial_close" title="Financial Close">
+						<ShipmentAuditFunction />
+					</TabPanel>
+
 					<TabPanel name="all_invoices" title="All Invoices">
 						<AllInvoices statsData={statsData} />
 					</TabPanel>
