@@ -1,0 +1,38 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRequest } from '@cogoport/request';
+
+const usePlanMetaData = ({ metaData, setMetaData }) => {
+	const [{ loading }, trigger] = useRequest({
+		method : 'post',
+		url    : '/update_saas_plan',
+	}, { manual: true });
+
+	const closeModalHandler = () => {
+		setMetaData({ open: false });
+	};
+
+	const editMetaDataHandler = async ({ payload }) => {
+		try {
+			await trigger({
+				data: payload,
+			});
+			closeModalHandler();
+		} catch (e) {
+			Toast.error(getApiErrorString(e.response?.data));
+		}
+	};
+
+	const submitHandler = (val) => {
+		try {
+			JSON.parse(val);
+			editMetaDataHandler({ payload: { id: metaData?.id, metaData: val } });
+		} catch (e) {
+			Toast.error('Please enter a valid JSON');
+		}
+	};
+
+	return { loading, submitHandler, closeModalHandler };
+};
+
+export default usePlanMetaData;

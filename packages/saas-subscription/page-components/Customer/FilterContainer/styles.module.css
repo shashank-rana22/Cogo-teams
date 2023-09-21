@@ -5,12 +5,17 @@
 }
 
 .input_box {
-	width: 70%;
-	margin-right: 12px;
+	width: 60%;
 }
 
 .flex_box {
 	display: flex;
 	justify-content: space-between;
 	width: 30%;
+
+	:global {
+		.ui_buttonicon_container {
+			border: 1px solid #bababa;
+		}
+	}
 }

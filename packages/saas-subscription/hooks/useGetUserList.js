@@ -7,6 +7,7 @@ const useGetUserList = () => {
 	const [globalFilters, setGlobalFilters] = useState({
 		page             : 1,
 		customer_segment : 'platform_user',
+		search           : '',
 	});
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
@@ -15,17 +16,17 @@ const useGetUserList = () => {
 
 	// getting cancel error by removing async await
 	const refectUserList = useCallback(async () => {
-		const { page, customer_segment, search } = globalFilters;
+		const { page, search, ...rest } = globalFilters;
 		try {
 			await trigger({
 				params: {
 					service_object_required : true,
-					filters                 : { customer_segment, q: search },
+					filters                 : { q: search, ...rest },
 					page,
 				},
 			});
 		} catch (err) {
-			Toast.error(getApiErrorString(err.response?.data));
+			if (err.code !== 'ERR_CANCELED') Toast.error(getApiErrorString(err.response?.data));
 		}
 	}, [globalFilters, trigger]);
 

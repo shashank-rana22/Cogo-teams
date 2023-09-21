@@ -1009,6 +1009,18 @@ function asyncListOverSeasTradeParties() {
 	};
 }
 
+function asyncListSaasPlan() {
+	return {
+		labelKey : 'display_name',
+		valueKey : 'id',
+		endpoint : '/list_saas_plans',
+		params   : {
+			filters    : { is_active: true, plan_type: 'P' },
+			page_limit : 50,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1091,4 +1103,5 @@ export {
 	asyncListFclFreightCommodityClusters,
 	asyncListSpotSearchRateCardOperators,
 	asyncListOverSeasTradeParties,
+	asyncListSaasPlan,
 };

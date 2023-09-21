@@ -18,7 +18,7 @@ const useGetUserStats = () => {
 				},
 			});
 		} catch (err) {
-			Toast.error(getApiErrorString(err.response?.data));
+			if (err.code !== 'ERR_CANCELED') Toast.error(getApiErrorString(err.response?.data));
 		}
 	}, [trigger]);
 
