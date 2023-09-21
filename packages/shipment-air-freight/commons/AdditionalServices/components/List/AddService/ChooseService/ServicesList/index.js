@@ -1,5 +1,5 @@
 import EmptyState from '@cogoport/air-modules/common/EmptyState';
-import React from 'react';
+import { isEmpty } from '@cogoport/utils';
 
 import Header from './CardHeader';
 import CardItem from './Carditem';
@@ -11,12 +11,13 @@ function List({ fields = [], data = [] }) {
 			<Header fields={fields} />
 
 			<div className={styles.card_list}>
-				{data.length ? (
+				{!isEmpty(data) ? (
 					(data || []).map((item) => {
-						const { code = '', name = '', units = [] } = item;
+						const { code = '', name = '', units = [], service_type = '' } = item || {};
+
 						return (
 							<CardItem
-								key={code + name + JSON.stringify(units)}
+								key={code + name + JSON.stringify(units) + service_type}
 								item={item}
 								fields={fields}
 							/>
