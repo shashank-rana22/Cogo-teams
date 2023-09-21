@@ -34,6 +34,8 @@ function Status({
 		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
+	const { serial_id = '', is_job_closed = '' } = shipment_data || {};
+
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === invoice?.live_invoice_number,
 	)?.[GLOBAL_CONSTANTS.zeroth_index];
@@ -65,9 +67,9 @@ function Status({
 
 	const showRequestCN = showCN
 	&& !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice?.status)
-	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
+	&& (serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
 		&& geo.others.navigations.partner.bookings.invoicing.request_credit_note
-		&& !shipment_data?.is_job_closed && !invoice?.processing;
+		&& !invoice?.processing;
 
 	if (isCrossEntity) {
 		return (
@@ -107,12 +109,12 @@ function Status({
 			)}
 
 			{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+					&& serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 					&& !invoice?.processing ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"
-							disabled={shipment_data?.is_job_closed}
+							disabled={is_job_closed}
 							onClick={() => handleClick('amendment_requested')}
 						>
 							Request Amendment
@@ -123,7 +125,7 @@ function Status({
 				<Button
 					style={{ marginTop: '4px' }}
 					size="sm"
-					disabled={shipment_data?.is_job_closed}
+					disabled={is_job_closed}
 					onClick={() => setAskNullify(true)}
 				>
 					Request CN

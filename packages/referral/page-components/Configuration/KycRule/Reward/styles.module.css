@@ -4,7 +4,7 @@
 
 .flex {
 	display: flex;
-	align-items: end;
+	align-items: flex-end;
 	justify-content: space-between;
 	padding: 4px 16px;
 }
