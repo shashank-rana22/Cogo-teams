@@ -16,13 +16,11 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 	const agreementDocument = documentUrls[0] || '';
 	const [showModal, setShowModal] = useState(false);
 	const [remarks, setRemarks] = useState(remark);
-	const [reqRevokeInvoiceRequest, setReqRevokeInvoiceRequest] = useState(revokeInvoiceRequest);
 	const { useOnAction:onAction, loading } = useGetRevokeInvoiceData({
 		refetch,
 		setShowModal,
 		id,
-		reqRevokeInvoiceRequest,
-		setReqRevokeInvoiceRequest,
+		reqRevokeInvoiceRequest: revokeInvoiceRequest,
 		remarks,
 		t,
 	});
@@ -56,7 +54,7 @@ function RevokeInvoice({ id, refetch, row, isEditable = true, remark = '' }) {
 								{t('incidentManagement:cancel_reason')}
 							</div>
 							<div className={styles.date_value}>
-								{`: ${reqRevokeInvoiceRequest?.cancelReason || '-'}`}
+								{`: ${revokeInvoiceRequest?.cancelReason || '-'}`}
 							</div>
 						</div>
 

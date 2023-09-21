@@ -150,7 +150,7 @@ function IncidentManagement() {
 	return (
 		<div>
 			<div className={isEmpty(detailsModal) ? styles.nodisplay : null}>
-				<CommonDetailsModal setDetailsModal={setDetailsModal} detailsModal={detailsModal} />
+				<CommonDetailsModal setDetailsModal={setDetailsModal as any} detailsModal={detailsModal} />
 			</div>
 			<div className={!isEmpty(detailsModal) ? styles.nodisplay : null}>
 				<div className={styles.header}>
