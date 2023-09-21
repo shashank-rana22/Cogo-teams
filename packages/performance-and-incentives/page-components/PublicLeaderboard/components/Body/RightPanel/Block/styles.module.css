@@ -30,3 +30,12 @@
 .activity {
 	color: #828282;
 }
+
+.highlighter {
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	margin-left: 4px;
+	border-radius: 50%;
+	opacity: 0.6;
+}

@@ -444,6 +444,7 @@ const GLOBAL_CONSTANTS = {
 		fcl_container_icon_s2c  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg',
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
+		confetti: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti_svg.svg',
 	},
 
 	video_call_ring_tone_url:

@@ -14,15 +14,27 @@ const ACTIVITY_ICON_MAPPING = {
 	[SHIPMENTS]  : IcMShipment,
 };
 
+const BACKGROUND_COLOR_MAPPING = {
+	[ENGAGEMENT] : '#f8aea8',
+	[ACCOUNTS]   : '#ddebc0',
+	[ENRICHMENT] : '#ddebc0',
+	[SHIPMENTS]  : '#f8aea8',
+};
+
 function Block(props) {
 	const { block, data } = props;
 
 	const AcitivityIcon = ACTIVITY_ICON_MAPPING[block] || IcMEngagement;
 
+	const HighLighterColor = BACKGROUND_COLOR_MAPPING[block] || '#f8aea8';
+
 	return (
 		<div>
 			<div className={styles.header}>
 				<AcitivityIcon width={20} height={20} style={{ marginRight: '8px' }} />
+
+				<div className={styles.highlighter} style={{ backgroundColor: HighLighterColor }} />
+
 				<p className={styles.heading}>{isEmpty(block) ? '' : startCase(block)}</p>
 			</div>
 
