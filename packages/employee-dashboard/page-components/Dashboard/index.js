@@ -20,6 +20,7 @@ function EmployeeDashboard() {
 		<>
 			<div className={styles.heading}>
 				Employee Dashboard
+
 			</div>
 
 			<div className={styles.flex_container}>

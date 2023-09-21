@@ -12,9 +12,9 @@ export const GMAIL_OPTIONS_CONFIG = [
 		hoverImage  : GLOBAL_CONSTANTS.image_url.email_inbox_icon,
 	},
 	{
-		label       : 'Draft',
-		value       : 'draft',
-		allowedTabs : ['outlook'],
+		label       : 'Drafts',
+		value       : 'drafts',
+		allowedTabs : ['outlook', 'firebase_emails'],
 		icon        : <IcMDocument
 			fill="#BDBDBD"
 			height={24}
