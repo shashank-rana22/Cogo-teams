@@ -100,11 +100,11 @@ function UserOnboard({ leadsData = {}, defaultValues = {}, refetchList = () => {
 					rules={{
 						required: {
 							value   : !formValues?.pan_number,
-							message : `${countrySpecificLabel} Number is required`,
+							message : `${countrySpecificLabel} is required`,
 						},
 						pattern: {
 							value   : countrySpecificPattern,
-							message : `${countrySpecificLabel} Number is invalid`,
+							message : `${countrySpecificLabel} is invalid`,
 						},
 					}}
 				/>
