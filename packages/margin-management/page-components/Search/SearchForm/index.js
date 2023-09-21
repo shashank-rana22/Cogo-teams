@@ -17,7 +17,7 @@ function SearchForm({ activeTab = '', setFilterParams = () => {}, filterParams =
 		Object.keys(values).forEach((key) => {
 			obj[key] = '';
 		});
-		setFilterParams((prev) => ({ ...prev, ...obj }));
+		setFilterParams((prev) => ({ ...prev, ...obj, margin_type: activeTab }));
 		reset();
 	};
 	return (

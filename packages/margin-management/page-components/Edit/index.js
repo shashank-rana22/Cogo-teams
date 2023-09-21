@@ -12,7 +12,8 @@ function Edit() {
 	});
 	return (
 		<div>
-			{loading ? <Loader /> : <Create type="edit" item={data?.list?.[ZERO]} />}
+			{loading ? <Loader /> : null}
+			{ !loading && data?.list?.length ? <Create type="edit" item={data?.list?.[ZERO]} /> : null}
 		</div>
 	);
 }

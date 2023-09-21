@@ -1,6 +1,5 @@
 import { cl } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { v1 as uuid } from 'uuid';
 
 import EmptyState from '../../common/EmptyState';
 
@@ -8,7 +7,6 @@ import Buttons from './Buttons';
 import Info from './Info';
 import styles from './styles.module.css';
 
-const MINUS_ONE = -1;
 function MarginValues({ data = {}, activeTab = '', setMarginBreakupData = () => {}, refetch = () => {} }) {
 	const { margin_slabs = [], margin_slabs_currency } = data || [];
 	function HandlePercentage({ item }) {
@@ -33,8 +31,8 @@ function MarginValues({ data = {}, activeTab = '', setMarginBreakupData = () => 
 					<div>
 						<Info data={data} />
 						<div className={styles.line} />
-						{margin_slabs.map((val, index) => (
-							<div key={`${`${index}${uuid()}`}`}>
+						{margin_slabs.map((val) => (
+							<div key={val}>
 								<div className={styles.header}>
 									{`${val.lower_limit} - ${val.upper_limit === null
 										? 'INF' : val.upper_limit} ${margin_slabs_currency}`}
@@ -48,7 +46,7 @@ function MarginValues({ data = {}, activeTab = '', setMarginBreakupData = () => 
 								</div>
 
 								{(val?.margin_values || []).map((item) => (
-									<div key={`${`${index * MINUS_ONE}${uuid()}`}`} className={styles.flex}>
+									<div key={item} className={styles.flex}>
 										<div className={cl` ${styles.left} ${styles.bold}`}>{item?.code}</div>
 
 										<div className={cl` ${styles.center} ${styles.bold}`}>

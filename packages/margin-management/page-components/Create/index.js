@@ -33,10 +33,10 @@ const items = [
 
 let initialCall = false;
 function Create({ type = 'create', item = {} }) {
+	const { filters = {}, ...rest } = item;
 	const router = useRouter();
 	const { agent_id } = useSelector(({ profile }) => ({
 		agent_id: profile?.user?.id,
-
 	}));
 
 	const { isConditionMatches } = useGetPermission();
@@ -45,7 +45,6 @@ function Create({ type = 'create', item = {} }) {
 	const { onSubmit: submitForm } = useCreateMargin();
 	const { onSubmit: updateForm } = useUpdateMargin();
 	const [openModal, setOpenModal] = useState(false);
-
 	const {
 		control,
 		watch,
@@ -53,7 +52,8 @@ function Create({ type = 'create', item = {} }) {
 		fields,
 		setValue,
 		formState: { errors = {} } = {},
-	} = useForm({ defaultValues: { margin_slabs: DEFAULT_MARGIN_SLABS, ...item } });
+	} = useForm({ defaultValues: { margin_slabs: DEFAULT_MARGIN_SLABS, ...rest, ...filters } });
+
 	const formValues = watch();
 	const initialControls = getControls({
 		type,
@@ -84,8 +84,10 @@ function Create({ type = 'create', item = {} }) {
 	const customFieldArrayControls = { margin_slabs: [] };
 	useEffect(() => {
 		margin_slabs?.forEach((_o, index) => {
+			setValue(`margin_slabs.${index}.limit_currency`, margin_slabs[index]?.margin_values?.[ZERO]?.currency);
 			if (index > ZERO) {
 				setValue(`margin_slabs.${index}.lower_limit`, Number(margin_slabs[index - ONE].upper_limit) + ONE);
+				setValue(`margin_slabs.${index}.limit_currency`, margin_slabs[index - ONE].limit_currency);
 			} else {
 				setValue(`margin_slabs.${index}.lower_limit`, '0');
 			}
@@ -162,7 +164,7 @@ function Create({ type = 'create', item = {} }) {
 						/>
 						deactivate
 					</Button>
-				) }
+				)}
 			</div>
 			{openModal && (
 				<DeactiveModal
@@ -171,7 +173,7 @@ function Create({ type = 'create', item = {} }) {
 					id={item?.id}
 					openModal={openModal}
 				/>
-			) }
+			)}
 			<div className={styles.sub_container}>
 				<FunnelStepper
 					className={styles.stepper_container}

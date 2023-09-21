@@ -36,6 +36,7 @@ function NestedFieldArray({
 						if (['fieldArray', 'nestedFieldArray'].includes(type)) {
 							return (
 								<div key={field.id} className={styles.nested_container}>
+
 									<FieldArray
 										key={field.id}
 										field={field}
@@ -68,10 +69,9 @@ function NestedFieldArray({
 									control={control}
 									type={type}
 								/>
-
-								{error?.[ctrlItemName]?.message ? (
+								{error?.[index]?.[ctrlItemName]?.message ? (
 									<p className={styles.error}>
-										{error?.[ctrlItemName]?.message || ''}
+										{error?.[index]?.[ctrlItemName]?.message || ''}
 									</p>
 								) : null}
 							</div>

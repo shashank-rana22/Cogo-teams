@@ -68,48 +68,61 @@ function TabComponent({
 
 				{condition.supply ? (
 					<TabPanel name="supply" title="SUPPLY">
-						{(data?.margin_stats || []).map((service) => (
-							<CardComponent
-								activeService={activeService}
-								setActiveService={setActiveService}
-								setMarginBreakupData={setMarginBreakupData}
-								key={service?.id}
-								service={service}
-								filterparams={filterParams}
-								setFilterParams={setFilterParams}
-								margin_type={activeTab}
-								showContainerDetails={false}
-							/>
-						))}
+						{isEmpty(data?.margin_stats) ? <EmptyState /> : (
+							<div>
+								{(data?.margin_stats || []).map((service) => (
+
+									<CardComponent
+										activeService={activeService}
+										setActiveService={setActiveService}
+										setMarginBreakupData={setMarginBreakupData}
+										key={service?.id}
+										service={service}
+										filterparams={filterParams}
+										setFilterParams={setFilterParams}
+										margin_type={activeTab}
+										showContainerDetails={false}
+									/>
+								))}
+							</div>
+						)}
 					</TabPanel>
 				) : null}
 
 				{condition.cogoport ? (
 					<TabPanel name="cogoport" title="COGOPORT">
-						{(data?.margin_stats || []).map((service) => (
-							<CardComponent
-								activeService={activeService}
-								setActiveService={setActiveService}
-								setMarginBreakupData={setMarginBreakupData}
-								key={service?.id}
-								service={service}
-								filterparams={filterParams}
-								setFilterParams={setFilterParams}
-								margin_type={activeTab}
-							/>
-						))}
+						{isEmpty(data?.margin_stats) ? <EmptyState /> : (
+							<div>
+								{(data?.margin_stats || []).map((service) => (
+									<CardComponent
+										activeService={activeService}
+										setActiveService={setActiveService}
+										setMarginBreakupData={setMarginBreakupData}
+										key={service?.id}
+										service={service}
+										filterparams={filterParams}
+										setFilterParams={setFilterParams}
+										margin_type={activeTab}
+									/>
+								))}
+							</div>
+						)}
 					</TabPanel>
 				) : null}
 
 				{condition.approval_pending ? (
 					<TabPanel name="approval_pending" title="Approval Pending">
-						{(data?.list || []).map((service) => (
-							<Details
-								setMarginBreakupData={setMarginBreakupData}
-								key={service?.id}
-								data={service}
-							/>
-						))}
+						{isEmpty(data?.margin_stats) ? <EmptyState /> : (
+							<div>
+								{(data?.list || []).map((service) => (
+									<Details
+										setMarginBreakupData={setMarginBreakupData}
+										key={service?.id}
+										data={service}
+									/>
+								))}
+							</div>
+						)}
 					</TabPanel>
 				) : null}
 			</Tabs>

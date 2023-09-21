@@ -5,6 +5,7 @@ import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import SERVICE_OPTIONS from '../../../config/SERVICE_OPTIONS.json';
 
 const getControls = ({ activeTab = '' }) => {
+	const account_type = (activeTab === 'supply' ? 'service_provider' : 'importer_exporter');
 	const commoditiesOptions = getCommodityList('freight');
 	const controls = [
 		{
@@ -18,17 +19,15 @@ const getControls = ({ activeTab = '' }) => {
 			span        : 12,
 		},
 		{
-			label          : 'Select any Organization',
-			name           : 'organization_id',
-			type           : 'select',
-			placeholder    : 'Drop down to select',
-			optionsListKey : 'verified-importer-exporters',
-			multiple       : false,
-			watch          : true,
-			params         : {
+			label       : 'Select any Organization',
+			name        : 'organization_id',
+			type        : 'async_select',
+			asyncKey    : 'organizations',
+			multiple    : false,
+			isClearable : true,
+			params      : {
 				filters: {
-					account_type:
-					activeTab === 'supply' ? 'service_provider' : 'importer_exporter',
+					account_type,
 				},
 			},
 			span: 12,

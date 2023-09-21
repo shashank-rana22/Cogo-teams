@@ -50,7 +50,6 @@ function FieldArray({
 									formValues={formValues}
 									showElements={showElements}
 									customFieldArrayControls={customFieldArrayControls}
-
 								/>
 							))}
 
