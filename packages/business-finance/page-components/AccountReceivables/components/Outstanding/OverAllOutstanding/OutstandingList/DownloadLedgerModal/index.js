@@ -27,7 +27,7 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal = () 
 	});
 
 	const handleClick = () => {
-		if (date.startDate > date.endDate) {
+		if (date?.startDate > date?.endDate) {
 			Toast.error('Please select a Start Date that is earlier than the End Date');
 			return;
 		}
@@ -55,7 +55,7 @@ function DownloadLedgerModal({ showLedgerModal = false, setShowLedgerModal = () 
 
 	const dateChangeHandler = (curr) => {
 		setDate((prev) => ({
-			...prev, startDate: curr?.startDate, endDate: (curr.endDate === null) ? prev.endDate : curr.endDate,
+			...prev, startDate: curr?.startDate, endDate: (curr?.endDate === null) ? prev?.endDate : curr?.endDate,
 		}));
 	};
 
