@@ -11,9 +11,15 @@
 	justify-content: center;
 	width: 28px;
 	height: 28px;
-	font-size: var(--font-size-xl);
+	font-size: 18px;
 	background-color: #fcdc00;
 	border-radius: 50%;
+
+	@media (min-width: 2560px) {
+		width: 84px;
+		height: 84px;
+		font-size: 56px;
+	}
 }
 
 .image {
@@ -38,5 +44,8 @@
 
 	@media (max-width: 768px) {
 		font-size: 100%;
+	}
+	@media (min-width: 2560px) {
+		font-size: 500%;
 	}
 }

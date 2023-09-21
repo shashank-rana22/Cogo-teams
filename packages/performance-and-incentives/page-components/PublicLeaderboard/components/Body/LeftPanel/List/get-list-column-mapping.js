@@ -23,7 +23,7 @@ const getListColumnMapping = () => {
 			key      : 'score',
 			flex     : 1.5,
 			Header   : <div className={styles.top_heading}>Score</div>,
-			accessor : ({ score }) => (isEmpty(score) ? null : <p>{score}</p>),
+			accessor : ({ score }) => (isEmpty(score) ? null : <p className={styles.row_item}>{score}</p>),
 		},
 		{
 			id       : 'percentile',
@@ -31,7 +31,7 @@ const getListColumnMapping = () => {
 			flex     : 1.5,
 			Header   : <div className={styles.top_heading}>%ile</div>,
 			accessor : ({ percentile }) => (isEmpty(percentile) ? null : (
-				<p>
+				<p className={styles.row_item}>
 					{percentile}
 					%
 				</p>

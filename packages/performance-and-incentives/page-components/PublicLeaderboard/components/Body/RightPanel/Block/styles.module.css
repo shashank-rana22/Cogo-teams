@@ -1,12 +1,47 @@
 .header {
 	display: flex;
 	align-items: center;
-	margin-bottom: 8px;
+	margin-bottom: 12px;
+
+	@media (min-width: 2560px) {
+		margin-bottom: 36px;
+	}
+}
+
+.activity_icon {
+	width: 20px;
+	height: 20px;
+	margin-right: 8px;
+
+	@media (min-width: 2560px) {
+		width: 72px;
+		height: 72px;
+		margin-right: 24px;
+	}
+}
+
+.highlighter {
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	margin-left: 4px;
+	border-radius: 50%;
+	opacity: 0.6;
+
+	@media (min-width: 2560px) {
+		width: 56px;
+		height: 56px;
+		margin-left: 20px;
+	}
 }
 
 .heading {
 	margin-bottom: 0;
 	font-size: 18px;
+
+	@media (min-width: 2560px) {
+		font-size: 56px;
+	}
 }
 
 .block_container {
@@ -25,17 +60,18 @@
 	margin-right: 8px;
 	font-size: 18px;
 	font-weight: 600;
+
+	@media (min-width: 2560px) {
+		margin-right: 24px;
+		font-size: 56px;
+	}
 }
 
 .activity {
 	color: #828282;
-}
+	white-space: nowrap;
 
-.highlighter {
-	position: absolute;
-	width: 18px;
-	height: 18px;
-	margin-left: 4px;
-	border-radius: 50%;
-	opacity: 0.6;
+	@media (min-width: 2560px) {
+		font-size: 38px;
+	}
 }

@@ -31,7 +31,7 @@ function Block(props) {
 	return (
 		<div>
 			<div className={styles.header}>
-				<AcitivityIcon width={20} height={20} style={{ marginRight: '8px' }} />
+				<AcitivityIcon className={styles.activity_icon} />
 
 				<div className={styles.highlighter} style={{ backgroundColor: HighLighterColor }} />
 
