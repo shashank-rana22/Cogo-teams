@@ -6,7 +6,7 @@ import React from 'react';
 
 import NoDataState from '../../../../../common/NoDataState';
 import useGetFclFreightRateTrends from '../../../../../hooks/useGetFclFreightRateTrends';
-import SeriesChart from '../SeriesChart';
+import AreaChart from '../AreaChart';
 import styles from '../styles.module.css';
 
 const FCL_VALID_IDS = ['supply', 'rate_extension', 'cluster_extension'];
@@ -31,7 +31,7 @@ function Deviation({
 			<div className={cl`${styles.chart_container} ${isAnimating ? styles.blur : ''}`}>
 				{(loading || !isEmpty(trendsData))
 					? (
-						<SeriesChart loading={loading} data={filteredDataForChart} seriesIds={IDS} />
+						<AreaChart loading={loading} data={filteredDataForChart} seriesIds={IDS} />
 					)
 					: <NoDataState flow="column" />}
 			</div>
