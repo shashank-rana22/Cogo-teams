@@ -452,6 +452,9 @@ const GLOBAL_CONSTANTS = {
 		groups              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/group.png',
 		private             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/private.png',
 		universe            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Universe.png',
+		teams               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/teams.png',
+		success             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/created.gif',
+		video_call          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/video_call.png',
 		cogoport_login_logo : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
 	},
 

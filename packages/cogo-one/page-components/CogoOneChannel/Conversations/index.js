@@ -1,6 +1,7 @@
 import MailConversation from './MailConversation';
 import MessageComponent from './MessageComponent';
 import styles from './styles.module.css';
+import TeamChats from './TeamChats';
 import VoiceCall from './VoiceCall';
 
 const CONVERSATION_COMPONENT_MAPPING = {
@@ -8,6 +9,7 @@ const CONVERSATION_COMPONENT_MAPPING = {
 	voice           : VoiceCall,
 	outlook         : MailConversation,
 	firebase_emails : MessageComponent,
+	teams           : TeamChats,
 };
 
 function Conversations({
@@ -52,6 +54,9 @@ function Conversations({
 			suggestions,
 			setModalType,
 			mailProps,
+		},
+		teams: {
+			activeTeamCard: activeTab?.data || {},
 		},
 	};
 

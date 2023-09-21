@@ -113,6 +113,14 @@ function Customers({
 			userId,
 			isBotSession,
 		},
+		teams: {
+			setActiveTeamCard: (val) => {
+				setActiveTab((prev) => ({ ...prev, data: val }));
+			},
+			activeTeamCard : activeTab?.data || {},
+			activeTab      : activeTab?.tab,
+			viewType,
+		},
 	};
 
 	const tabMappings = getTabMappings({

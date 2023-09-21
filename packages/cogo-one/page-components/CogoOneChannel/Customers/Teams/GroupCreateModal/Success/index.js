@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -13,6 +14,12 @@ function Success({
 
 	return (
 		<div className={styles.container}>
+			<Image
+				src={GLOBAL_CONSTANTS.image_url.success}
+				alt="group"
+				width={180}
+				height={180}
+			/>
 			<div className={styles.group}>
 				<Image
 					src={TEAMS_ICON_MAPPING[group_type] || ''}
