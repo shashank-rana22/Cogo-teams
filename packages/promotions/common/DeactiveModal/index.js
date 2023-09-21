@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function DeactiveModal({ onClose = () => {} }) {
+function DeactiveModal({ onClose = () => {}, onClickYes = () => {} }) {
 	return (
 		<Modal
 			size="md"
@@ -20,7 +20,7 @@ function DeactiveModal({ onClose = () => {} }) {
 				>
 					Cancel
 				</Button>
-				<Button onClick={onClose}>OK</Button>
+				<Button onClick={onClickYes}>OK</Button>
 			</Modal.Footer>
 		</Modal>
 	);

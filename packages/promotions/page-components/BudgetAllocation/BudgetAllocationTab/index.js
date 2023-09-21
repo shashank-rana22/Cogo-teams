@@ -1,7 +1,6 @@
 import { TabPanel, Tabs, Button } from '@cogoport/components';
 import { useState } from 'react';
 
-import DeactiveModal from './DeactiveModal';
 import styles from './styles.module.css';
 
 const OPTIONS = [
@@ -11,7 +10,6 @@ const OPTIONS = [
 
 function BudgetAllocationTab() {
 	const [activeList, setActiveList] = useState('active');
-	const [addAllocateModal, setAddAllocateModal] = useState(false);
 	return (
 		<div className={styles.container}>
 			<div>
@@ -40,13 +38,9 @@ function BudgetAllocationTab() {
 					size="lg"
 					themeType="primary"
 					className={styles.add_btn}
-					onClick={() => setAddAllocateModal(true)}
 				>
 					Allocate
 				</Button>
-				{addAllocateModal && (
-					<DeactiveModal onClose={() => setAddAllocateModal(false)} />
-				)}
 			</div>
 		</div>
 	);

@@ -17,7 +17,7 @@ function ShipmentSlabsTable({ slabsDetailData = {}, loading = '' }) {
 		},
 		{
 			Header   : 'Slab To',
-			accessor : (item) => (item?.fee_unit ? startCase(item.slab_upper_limit) : '--'),
+			accessor : (item) => item?.slab_upper_limit || '--',
 		},
 		{
 			Header   : 'Discount Limit Unit',

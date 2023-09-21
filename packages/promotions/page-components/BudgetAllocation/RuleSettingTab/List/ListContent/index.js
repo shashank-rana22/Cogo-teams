@@ -3,11 +3,11 @@ import { Loader, Pagination } from '@cogoport/components';
 
 import EmptyState from '../../../../../common/EmptyState';
 
-// import ListItem from './ListItem';
+import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 const ZERO_PAGES = 0;
-// const LAST_INDEX = 1;
+const LAST_INDEX = 1;
 
 function ListContent({
 	data = {},
@@ -45,21 +45,16 @@ function ListContent({
 				/>
 			</div>
 
-			{/* {list?.map((item, i) => (
-                <ListItem
-                    key={item.id}
-                    data={item}
-                    loading={loading}
-                    isLastItem={i === list.length - LAST_INDEX}
-                    total={total_count || ZERO_PAGES}
-                    onEdit={() => {
-                        router.push(
-                            `/convenience-rates/[convenience_rate_id]?service=${activeService}`,
-                            `/convenience-rates/${item?.id}?service=${activeService}`
-                        );
-                    }}
-                />
-            ))} */}
+			{list?.map((item, i) => (
+				<ListItem
+					key={item.id}
+					data={item}
+					loading={loading}
+					isLastItem={i === list.length - LAST_INDEX}
+					total={total_count || ZERO_PAGES}
+					onEdit={() => {}}
+				/>
+			))}
 			<div className={styles.pagination}>
 				<Pagination
 					type="table"
