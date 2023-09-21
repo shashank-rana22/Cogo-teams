@@ -9,7 +9,7 @@
 	flex-wrap: wrap;
 	gap: 10;
 	justify-content: space-between;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 
 	:global {
 		.ui_radiogroup_container {
@@ -23,5 +23,5 @@
 }
 
 .label {
-	margin: 10px 0 7px;
+	margin: 15px 0 7px;
 }

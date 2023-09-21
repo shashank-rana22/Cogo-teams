@@ -1,6 +1,6 @@
-import { Button, InputNumber } from '@cogoport/components';
+import { Button, InputNumber, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowRotateRight } from '@cogoport/icons-react';
+import { IcMArrowRotateRight, IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -59,12 +59,19 @@ function RowElement({
 			<div className={styles.table} style={{ maxHeight: max, overflow: 'scroll' }}>
 				{list.map((item) => (
 					<div className={styles.row} key={item}>
-						<div
-							style={{ width: column_width }}
-						>
+						<div style={{ width: column_width }}>
 							<div className={!isFulfillType(item) ? null : styles.row_subitem}>
 								{isFulfillType(item) ? <IcMArrowRotateRight /> : null}
-								<div className={isFulfillType(item) ? styles.text : null}>{item.label}</div>
+								<div className={isFulfillType(item) ? styles.text : null}>
+									<div style={{ display: 'flex' }}>
+										{item.label}
+										{item?.key === 'threshold' && (
+											<Tooltip content="overall automation cutoff" placement="top">
+												<IcMInfo style={{ margin: '2px 8px' }} />
+											</Tooltip>
+										)}
+									</div>
+								</div>
 							</div>
 						</div>
 						{!addWeightage && (
