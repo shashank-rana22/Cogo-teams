@@ -13,7 +13,7 @@ function Feedback() {
 	const [showAddFeedback, setShowAddFeedback] = useState(false);
 	const [page, setPage] = useState(DEFAULT_PAGE);
 
-	const { feedbacks, pageData } = useGetFeedbacks({ page });
+	const { feedbacks, loading, pageData } = useGetFeedbacks({ page });
 	const { total = '' } = pageData || {};
 
 	return (
@@ -45,6 +45,7 @@ function Feedback() {
 
 			<List
 				feedbacks={feedbacks}
+				loading={loading}
 			/>
 
 			<div className={styles.pagination}>

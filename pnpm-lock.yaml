@@ -31,7 +31,7 @@ importers:
       turbo: ^1.10.2
       turbo-darwin-64: ^1.10.3
     dependencies:
-      '@cogoport/maps': 1.0.3_hicsc7ykyii55b7aewtacg7hfe
+      '@cogoport/maps': 1.0.3_bea3ndy6bxd3lsa7nghpeqlde4
       '@sentry/nextjs': 7.68.0_next@13.1.6+react@18.2.0
       accept-language: 3.0.18
       axios-hooks: 4.0.0_axios@1.5.0+react@18.2.0
@@ -337,7 +337,7 @@ importers:
       '@cogoport/components': ^1.0.359
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/globalization': workspace:*
-      '@cogoport/icons-react': ^1.0.73
+      '@cogoport/icons-react': ^1.0.101
       '@cogoport/navigation-configs': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:^0.1.0
@@ -353,10 +353,10 @@ importers:
       simple-peer: ^9.11.1
     dependencies:
       '@cogoport/authentication': link:../../packages/authentication
-      '@cogoport/components': 1.0.442_434chb7tbeieycp76dfs74etje
+      '@cogoport/components': 1.0.442_nhwv4sts7er3wb6j7avl7at36a
       '@cogoport/forms': link:../forms
       '@cogoport/globalization': link:../globalization
-      '@cogoport/icons-react': 1.0.98_react@18.2.0
+      '@cogoport/icons-react': 1.0.101_react@18.2.0
       '@cogoport/navigation-configs': link:../navigation-configs
       '@cogoport/next': link:../next
       '@cogoport/request': link:../request
@@ -4557,6 +4557,40 @@ packages:
       - sass
     dev: false
 
+  /@cogoport/components/1.0.442_nhwv4sts7er3wb6j7avl7at36a:
+    resolution: {integrity: sha512-BMwECKreRF4BXRUUIWvREQlY942nS5SlFLHHavzuoIPCRxFSjXHGRk2LPNzVZz1yeZ6uixMCx9sKyH7CsdE1WQ==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.101_react@18.2.0
+      '@tippyjs/react': 4.2.6_react@18.2.0
+      '@types/quill': 2.0.11
+      '@types/react-rte': 0.16.5
+      axios: 1.5.0
+      axios-hooks: 4.0.0_axios@1.5.0+react@18.2.0
+      date-fns: 2.30.0
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0_kzhlcyde2l6xjiirkbg7jzhosa
+      react-hook-form: 7.46.1_react@18.2.0
+      react-quill: 2.0.0_react@18.2.0
+      react-rte: 0.16.5_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1_react@18.2.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - encoding
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
   /@cogoport/components/1.0.442_whyrdmb63dppcumjyjoew2sv5i:
     resolution: {integrity: sha512-BMwECKreRF4BXRUUIWvREQlY942nS5SlFLHHavzuoIPCRxFSjXHGRk2LPNzVZz1yeZ6uixMCx9sKyH7CsdE1WQ==}
     peerDependencies:
@@ -4618,6 +4652,27 @@ packages:
       - supports-color
     dev: true
 
+  /@cogoport/icons-react/1.0.101_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-5X39zxkWVgqAmUsaL2bFnADSbyONkxf7k5HtpJfrK6Ld9YJzJZ36e0RNQoNps6+gRHCRFEEk3zvzD7PJuUoiAg==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/icons': 1.0.101
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@cogoport/icons-react/1.0.101_react@18.2.0:
+    resolution: {integrity: sha512-5X39zxkWVgqAmUsaL2bFnADSbyONkxf7k5HtpJfrK6Ld9YJzJZ36e0RNQoNps6+gRHCRFEEk3zvzD7PJuUoiAg==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/icons': 1.0.101
+      react: 18.2.0
+    dev: false
+
   /@cogoport/icons-react/1.0.98_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-GfUXia7RR5iD2+um8JBvmf8vMPzYJXgS3WThtNndwdn0L/d2vacgW9yEmfsiEOcxis7rTFIFi+6drVnJb1rzSw==}
     peerDependencies:
@@ -4639,6 +4694,10 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@cogoport/icons/1.0.101:
+    resolution: {integrity: sha512-MxWGAemKvGUd9XSQo5JERjCS5ZRBqKyHlLO0d5e1jDU2v0ycvTTUjEitmg3MHjJoHooGVOLfXThT3PILQhsH2w==}
+    dev: false
+
   /@cogoport/icons/1.0.98:
     resolution: {integrity: sha512-hJtTxEHwKcX0BZk8Dhxtioa2HRGCHCps6aCslgmX9c5AjFVdqM9seHMIw9wPyzU1iXQvKDkagR7fZWve9zem4w==}
     dev: false
@@ -4654,6 +4713,20 @@ packages:
       leaflet: 1.9.4
       react: 18.2.0
       react-leaflet: 4.2.1_leaflet@1.9.4+react@18.2.0
+    dev: false
+
+  /@cogoport/maps/1.0.3_bea3ndy6bxd3lsa7nghpeqlde4:
+    resolution: {integrity: sha512-nWNhGesbEQNqBGy1KO9O85eU04zcVaIVvuHXcq7CKa+pij74yU3BKB4PTBvoSrbLHAgIctxe8KOQVzBVgTLl/w==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.101_biqbaboplfbrettd7655fr4n2y
+      leaflet: 1.9.4
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-leaflet: 4.2.1_p7e52lah55xmyywv7f3e7owrmy
     dev: false
 
   /@cogoport/maps/1.0.3_hicsc7ykyii55b7aewtacg7hfe:
