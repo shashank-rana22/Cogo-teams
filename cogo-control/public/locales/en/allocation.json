@@ -879,5 +879,7 @@
     "validity_enrichment_request_cancel": "No",
     "validity_enrichment_request_submit": "Yes",
     "validity_enrichment_request_success_toast": "Updated Successfully",
-    "validity_enrichment_request_actions": "Actions"
+    "validity_enrichment_request_actions": "Actions",
+    "validity_enrichment_status_valid": "Valid",
+    "validity_enrichment_status_invalid": "Invalid"
 }

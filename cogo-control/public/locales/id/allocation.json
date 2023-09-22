@@ -879,5 +879,7 @@
     "validity_enrichment_request_cancel": "Tidak",
     "validity_enrichment_request_submit": "Ya",
     "validity_enrichment_request_success_toast": "Diperbarui dengan Sukses",
-    "validity_enrichment_request_actions": "Aksi"
+    "validity_enrichment_request_actions": "Aksi",
+    "validity_enrichment_status_valid": "Valid",
+    "validity_enrichment_status_invalid": "Tidak Valid"
 }

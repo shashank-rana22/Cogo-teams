@@ -199,7 +199,10 @@ export const getFeedbackColumns = ({
 			}
 
 			return (
-				<section className={styles.table_cell}>{ is_valid_feedback ? 'Valid' : 'In Valid'}</section>
+				<section className={styles.table_cell}>
+					{is_valid_feedback ? t('allocation:validity_enrichment_status_valid')
+						: t('allocation:validity_enrichment_status_invalid')}
+				</section>
 			);
 		},
 	},
