@@ -13,6 +13,7 @@ function EnrichmentRequestEdit({ request = {}, onClose = () => {}, refetch = () 
 		errors,
 		handleSubmit,
 	} = useUpdateEnrichmentRequest({ requestId: request?.id, refetch, onClose });
+
 	return (
 		<Modal
 			show={request?.type === 'action'}
@@ -25,34 +26,36 @@ function EnrichmentRequestEdit({ request = {}, onClose = () => {}, refetch = () 
 				</span>
 			)}
 			/>
-			<Modal.Body className={styles.modal_body}>
-				<div className={styles.container}>
-					<UploadController
-						control={control}
-						errors={errors}
-						name="upload_question"
-						accept=".csv, .xlsx"
-						rules={{ required: 'File is required.' }}
-					/>
+			<form onSubmit={handleSubmit(onUpdate)}>
+				<Modal.Body className={styles.modal_body}>
+					<div className={styles.container}>
+						<UploadController
+							control={control}
+							errors={errors}
+							name="upload_question"
+							accept=".csv, .xlsx"
+							rules={{ required: 'File is required.' }}
+						/>
 
-					{errors.upload_question && (
-						<div className={styles.error_msg}>
-							{errors.upload_question.message}
-						</div>
-					)}
-				</div>
-			</Modal.Body>
-			<Modal.Footer>
-				<div className={styles.button_div}>
-					<Button
-						loading={loading}
-						onClick={handleSubmit(onUpdate)}
-					>
-						Update
-					</Button>
-					<Button themeType="secondary" onClick={onClose}>Close</Button>
-				</div>
-			</Modal.Footer>
+						{errors.upload_question && (
+							<div className={styles.error_msg}>
+								{errors.upload_question.message}
+							</div>
+						)}
+					</div>
+				</Modal.Body>
+				<Modal.Footer>
+					<div className={styles.button_div}>
+						<Button
+							loading={loading}
+							type="submit"
+						>
+							Update
+						</Button>
+						<Button themeType="secondary" onClick={onClose}>Close</Button>
+					</div>
+				</Modal.Footer>
+			</form>
 		</Modal>
 	);
 }

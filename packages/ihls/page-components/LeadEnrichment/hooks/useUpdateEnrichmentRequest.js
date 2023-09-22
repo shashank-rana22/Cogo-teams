@@ -28,13 +28,14 @@ const useUpdateEnrichmentRequest = (props) => {
 				performed_by_id,
 				enriched_file_url     : val?.upload_question?.finalUrl,
 			};
+
 			await trigger({ data: payload });
 
 			Toast.success('File uploaded Successfully');
 			refetch();
 			onClose();
 		} catch (error) {
-			Toast.error(getApiErrorString(error));
+			Toast.error(error?.response?.data?.detail || getApiErrorString(error.response));
 		}
 	};
 
