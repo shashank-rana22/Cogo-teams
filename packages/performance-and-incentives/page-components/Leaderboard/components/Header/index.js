@@ -57,7 +57,6 @@ function Header() {
 						You are viewing Incentive and Scoring Analytics
 						{' '}
 						<span className={styles.light}>for</span>
-						{' '}
 					</div>
 
 					<div className={styles.filter_container}>
