@@ -1,5 +1,6 @@
 import EmptyState from '@cogoport/air-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
+import React from 'react';
 
 import Header from './CardHeader';
 import CardItem from './Carditem';
