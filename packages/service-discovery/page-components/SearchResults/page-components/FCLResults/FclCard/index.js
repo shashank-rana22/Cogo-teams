@@ -246,7 +246,7 @@ function FclCard({
 	return (
 		<div
 			className={cl`${styles.container} ${styles[subStyleClassname]}`}
-			style={(!index && !isSelectedCard && !isCogoAssured) ? { marginTop: 0 } : {}}
+			style={(!index && !isSelectedCard) ? { marginTop: 0 } : {}}
 		>
 			<RateCardTopSection
 				rateCardData={rateCardData}
