@@ -52,12 +52,14 @@ function Details({ row = {}, setDetailsModal = () => {} }) {
 					actual={preTaxActual}
 					loading={preTaxLoading}
 				/>
-				<StatRect
-					heading="Profit on Shipment - Post Tax"
-					expected={postTaxExpected}
-					actual={postTaxActual}
-					loading={postTaxLoading}
-				/>
+				<div className={styles.post_tax_container}>
+					<StatRect
+						heading="Profit on Shipment - Post Tax"
+						expected={postTaxExpected}
+						actual={postTaxActual}
+						loading={postTaxLoading}
+					/>
+				</div>
 			</div>
 			<div className={styles.shipment_container}>
 				<div className={styles.heading}>Shipment Id</div>

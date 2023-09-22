@@ -17,34 +17,36 @@ function TimeLine({ row = {} }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.wrapper}>
-				{!loading ? timelineData?.map((item, i) => {
-					if (!item?.completed_on) {
-						isCompleted = false;
-					}
+			{timelineData ? (
+				<div className={styles.wrapper}>
+					{!loading ? timelineData?.map((item, i) => {
+						if (!item?.completed_on) {
+							isCompleted = false;
+						}
 
-					const isNextMain = !timelineData[i + TIMELINE_LINE_FACTOR]?.is_sub;
+						const isNextMain = !timelineData[i + TIMELINE_LINE_FACTOR]?.is_sub;
 
-					return (
-						<TimeLineItem
-							key={timelineData?.milestone}
-							timeLine={timelineData}
-							index={i}
-							isCompleted={isCompleted}
-							shipmentData={SHIPMENT_DATA}
-							item={item}
-							isNextMain={isNextMain}
-							isLast={i === timelineData.length - TIMELINE_LINE_FACTOR}
-						/>
-					);
-				}) : (
-					<div className={styles.loading}>
-						<Placeholder height="30px" width="300px" />
-						<Placeholder height="30px" width="300px" />
-						<Placeholder height="30px" width="300px" />
-					</div>
-				)}
-			</div>
+						return (
+							<TimeLineItem
+								key={timelineData?.milestone}
+								timeLine={timelineData}
+								index={i}
+								isCompleted={isCompleted}
+								shipmentData={SHIPMENT_DATA}
+								item={item}
+								isNextMain={isNextMain}
+								isLast={i === timelineData.length - TIMELINE_LINE_FACTOR}
+							/>
+						);
+					}) : (
+						<div className={styles.loading}>
+							<Placeholder height="30px" width="300px" />
+							<Placeholder height="30px" width="300px" />
+							<Placeholder height="30px" width="300px" />
+						</div>
+					)}
+				</div>
+			) : null }
 		</div>
 	);
 }

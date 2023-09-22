@@ -110,7 +110,11 @@ function TimeLineItem({
                     className === 'pending' ? `${styles.desc} ${styles[className]}` : styles.desc
                   }
 							>
-								{formatDate(item.completed_on, 'dd-MMM-yy', {}, true)}
+								{formatDate({
+									date       : item?.completed_on,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								})}
 							</div>
 						) : null}
 					</div>
