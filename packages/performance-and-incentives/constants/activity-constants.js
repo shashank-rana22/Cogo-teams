@@ -1,8 +1,8 @@
 const ACTIVITY_CONSTANTS = {
-	ENGAGEMENT : 'eangagement',
-	ACCOUNTS   : 'accounts',
+	ENGAGEMENT : 'engagement',
+	ACCOUNTS   : 'account',
 	ENRICHMENT : 'enrichment',
-	SHIPMENTS  : 'shipments',
+	SHIPMENTS  : 'transaction',
 };
 
 export default ACTIVITY_CONSTANTS;
