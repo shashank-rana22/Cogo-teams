@@ -3,8 +3,15 @@ import IncentiveSnapshot from '../../../common/IncentiveSnapshot';
 import RankingAndScoring from '../../../common/RankingAndScoring';
 
 import styles from './styles.module.css';
+import useGetAgentScoringReportStats from './useGetAgentScoringReportStats';
 
 function RightPanel() {
+	const { data } = useGetAgentScoringReportStats();
+
+	const {
+		block_wise_stats: activityData = {},
+	} = data || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.entity_tag}>
@@ -17,7 +24,7 @@ function RightPanel() {
 
 			<IncentiveSnapshot />
 
-			<Activity />
+			<Activity activityData={activityData} />
 		</div>
 	);
 }

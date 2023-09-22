@@ -28,7 +28,7 @@ function useGetLeaderboardView() {
 
 			dispatch(setProfileState({ incentive_leaderboard_viewtype: res?.data }));
 		} catch (err) {
-			console.log('err :: ', err);
+			console.log(err);
 		}
 	};
 
