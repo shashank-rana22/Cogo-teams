@@ -16,7 +16,7 @@ function AddServices({
 	locations_prefill = [],
 	service_data = {},
 }) {
-	const controls = services({ organization_id: org_id })[service_type] || [];
+	const controls = services({ organization_id: org_id, data: { locations_prefill } })[service_type] || [];
 	const {
 		control, formValues: { errors = {} } = {},
 		handleSubmit,

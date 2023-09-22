@@ -24,6 +24,7 @@ function Footer({ organization_id = '', service = '', handleSubmit = () => {} })
 				service,
 				status                : 'active',
 			},
+			reload: true,
 		});
 	};
 	return (

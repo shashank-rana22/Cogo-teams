@@ -28,6 +28,7 @@ function ModalComp({
 					service,
 					status                : 'inactive',
 				},
+				reload: true,
 			});
 		}
 	};

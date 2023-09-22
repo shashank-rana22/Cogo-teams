@@ -3,6 +3,7 @@ import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import FormElement from '../FormElement';
+import getCustomOptions from '../getCustomOptions';
 import getWidthPercent from '../getWidthPercent';
 
 import getTotalFields from './getTotalFields';
@@ -22,6 +23,7 @@ function Child({
 	showDeleteButton = true,
 	error = {},
 	remove = () => {},
+	formValues = {},
 }) {
 	const total_fields = getTotalFields({ controls });
 
@@ -40,6 +42,17 @@ function Child({
 							const flex = getWidthPercent(span || TOTAL_SPAN);
 							const element_name = `${name}.${index}.${ctrlItemName}`;
 
+							let options = [];
+
+							if (controlItem?.options_key) {
+								options = getCustomOptions({
+									...controlItem,
+									isFieldArray : true,
+									name         : element_name,
+									formValues,
+								});
+							}
+
 							return (
 								<div className={styles.element} style={{ width: `${flex}%` }} key={ctrlItemName}>
 									<h4 className={styles.label}>
@@ -52,6 +65,8 @@ function Child({
 										name={element_name}
 										control={control}
 										type={controlItem.type}
+										{...controlItem?.options_key ? { options } : {}}
+
 									/>
 
 									{error?.[ctrlItemName]?.message ? (
@@ -60,8 +75,10 @@ function Child({
 										</p>
 									) : null}
 								</div>
+
 							);
 						})}
+
 					</div>
 				))}
 

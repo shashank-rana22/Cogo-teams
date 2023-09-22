@@ -3,21 +3,13 @@ const getAirFreight = ({ organization_id = '', params = {} }) => {
 		name               : 'location_pairs',
 		type               : 'fieldArray',
 		noDeleteButtonTill : 1,
-		value              : [
-			{
-				location_id : '',
-				trade_type  : '',
-				total_teus  : '',
-			},
-		],
-		controls: [
+		controls           : [
 			{
 				type: 'async_select',
 				params,
 
-				name  : 'origin_location_id',
-				label : 'Origin',
-
+				name         : 'origin_location_id',
+				label        : 'Origin',
 				asyncKey     : 'list_locations',
 				grouped      : ['city', 'country'],
 				initiallCall : true,

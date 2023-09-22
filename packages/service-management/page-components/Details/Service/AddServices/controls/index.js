@@ -47,6 +47,7 @@ const services = ({ organization_id = '' }) => {
 				},
 			},
 			organization_id,
+
 		}),
 		ftl_freight: getFreight({
 			organization_id,

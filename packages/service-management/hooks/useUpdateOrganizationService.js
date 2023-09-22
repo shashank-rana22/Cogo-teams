@@ -12,11 +12,11 @@ const useUpdateOrganizationService = () => {
 		method : 'POST',
 	}, { manual: true });
 
-	const apiTrigger = useCallback(async ({ data = {} }) => {
+	const apiTrigger = useCallback(async ({ data = {}, reload = false }) => {
 		try {
 			await trigger({ data });
 			Toast.success('service updated successfully');
-			router.push('/service-management');
+			if (reload) router.push('/service-management');
 		} catch (error) {
 			toastApiError(error);
 		}

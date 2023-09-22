@@ -3,11 +3,11 @@ import { useForm } from '@cogoport/forms';
 import Layout from '../../../common/Layout';
 import Caution from '../Caution';
 
-import firstControls from './firstControls';
+import firstControls from './controls/firstControls';
+import getSecondControls from './controls/getSecondControls';
+import thirdControls from './controls/thirdControls';
 import Footer from './Footer';
-import getSecondControls from './getSecondControls';
 import styles from './styles.module.css';
-import thirdControls from './thirdControls';
 
 function Form({ supply_agent = '', organization_id = '', service = '' }) {
 	const secondControls = getSecondControls({ supply_agent });

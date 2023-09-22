@@ -1,11 +1,11 @@
 const tradeOptions = [
 	{
-		name  : 'import',
-		label : 'IMPORT',
+		value : 'import',
+		label : 'Import',
 	},
 	{
-		name  : 'export',
-		label : 'EXPORT',
+		value : 'export',
+		label : 'Export',
 	},
 ];
 const getAirCustoms = ({ organization_id = '', params = {} }) => {
@@ -13,18 +13,10 @@ const getAirCustoms = ({ organization_id = '', params = {} }) => {
 		name               : 'location_pairs',
 		type               : 'fieldArray',
 		noDeleteButtonTill : 1,
-		value              : [
+		controls           : [
 			{
-				location_id : '',
-				trade_type  : '',
-				total_teus  : '',
-			},
-		],
-		controls: [
-			{
-				span : 3,
-				type : 'select',
-
+				span         : 3,
+				type         : 'select',
 				name         : 'location_id',
 				params,
 				label        : 'Location',

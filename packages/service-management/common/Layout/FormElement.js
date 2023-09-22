@@ -27,10 +27,6 @@ const MultiSelectController = dynamic(
 	() => import('@cogoport/forms').then((module) => module.MultiselectController),
 	{ ssr: false },
 );
-const CountrySelectController = dynamic(
-	() => import('@cogoport/forms').then((module) => module.CountrySelectController),
-	{ ssr: false },
-);
 const RadioGroupController = dynamic(
 	() => import('@cogoport/forms').then((module) => module.RadioGroupController),
 	{ ssr: false },
@@ -50,12 +46,9 @@ function FormElement({ type = '', ...rest }) {
 	if (type === 'chips') return <ChipsController {...rest} />;
 
 	if (type === 'multi_select') return <MultiSelectController {...rest} />;
-
-	if (type === 'country_select') return <CountrySelectController {...rest} />;
-
+	if (type === 'upload') return <UploadController {...rest} />;
 	if (type === 'radio') return <RadioGroupController {...rest} />;
 
-	if (type === 'upload') return <UploadController {...rest} />;
 	return <InputController {...rest} type={type} />;
 }
 
