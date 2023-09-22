@@ -78,7 +78,7 @@ function Actions({	checkedRowsId = [],	setActiveTab = () => {}, refetchFeedbackT
 	const Component = COMPONENT_MAPPING?.[modalDetails] || null;
 
 	return (
-		<div>
+		<>
 			<div className={styles.popover_container}>
 				<Popover
 					visible={showPopover}
@@ -106,7 +106,7 @@ function Actions({	checkedRowsId = [],	setActiveTab = () => {}, refetchFeedbackT
 
 			{modalDetails ? (
 				<Component {...componentProps[modalDetails]} />) : null}
-		</div>
+		</>
 	);
 }
 export default Actions;
