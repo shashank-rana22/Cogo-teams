@@ -68,7 +68,7 @@ function SegmentedFilters({
 							setFilters={setFilters}
 						/>
 					</div>
-					<FilterModal setFilters={setFilters} filters={filters} />
+					<FilterModal setFilters={setFilters} />
 				</div>
 				<div className={styled.search_filter}>
 					<div className={styled.search}>
