@@ -8,15 +8,22 @@
 .container {
 	min-height: 160px;
 	padding-top: 12px;
+	margin-top: 40px;
 	background: linear-gradient(180deg, #f3f3f3, #fff);
 	border: 1px solid #f9f7f7;
 	border-radius: 8px;
 	box-shadow: 0 4px 4px 0 rgb(0 0 0 / 10%);
-}
 
-.selected_card {
-	background: #f5ffff;
-	border: 1px solid #e6f3f3;
+	&.selected_card {
+		margin-top: 10px;
+		background: #f5ffff;
+		border: 1px solid #e6f3f3;
+		box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
+	}
+
+	&.cogo_assured {
+		background: #fff;
+	}
 }
 
 .middle {

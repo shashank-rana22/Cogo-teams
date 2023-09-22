@@ -1,10 +1,9 @@
-import { RadioGroup, Button } from '@cogoport/components';
+import { RadioGroup } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState, useContext } from 'react';
 
-import PocDetails from '../../../../../../commons/ShareQuotation/PocDetails';
-import QuotationModal from '../../../../../../commons/ShareQuotation/QuotationModal';
-import { CheckoutContext } from '../../../../../../context';
+import { CheckoutContext } from '../../context';
+import PocDetails from '../ShareQuotation/PocDetails';
 
 import BookingProof from './BookingProof';
 import styles from './styles.module.css';
@@ -15,19 +14,19 @@ function BookingTypeOptions({
 	radioOption = [],
 	bookingConfirmationMode = '',
 	setBookingConfirmationMode = () => {},
+	isAssistedBookingNotAllowed = false,
 }) {
 	const {
 		detail = {},
-		rate = {},
 		updateCheckout = () => {},
 		updateLoading = false,
-		invoice = {},
-		orgData = {},
-		isChannelPartner = false,
 	} = useContext(CheckoutContext);
 
-	const [showShareQuotationModal, setShowShareQuotationModal] = useState(false);
 	const [showWhatsappVerificationModal, setShowWhatsappVerificationModal] = useState(false);
+
+	if (isAssistedBookingNotAllowed) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
@@ -60,43 +59,15 @@ function BookingTypeOptions({
 				) : null}
 			</div>
 
-			{showShareQuotationModal ? (
-				<QuotationModal
-					modalSize="xl"
-					selectedModes={['email']}
-					setShowShareQuotationModal={setShowShareQuotationModal}
-					showShareQuotationModal={showShareQuotationModal}
-					invoice={invoice}
-					rate={rate}
-					detail={detail}
-					organization={orgData}
-					widths={{ email: '100%', message: '0%' }}
-					updateCheckout={updateCheckout}
-					updateLoading={updateLoading}
-				/>
-			) : null}
-
 			{bookingConfirmationMode === 'whatsapp' ? (
 				<PocDetails
 					showWhatsappVerificationModal={showWhatsappVerificationModal}
 					setShowWhatsappVerificationModal={setShowWhatsappVerificationModal}
 					bookingConfirmationMode={bookingConfirmationMode}
 					detail={detail}
-					isChannelPartner={isChannelPartner}
 					updateCheckout={updateCheckout}
 					updateLoading={updateLoading}
 				/>
-			) : null}
-
-			{bookingConfirmationMode === 'email' ? (
-				<Button
-					type="button"
-					size="lg"
-					themeType="accent"
-					onClick={() => setShowShareQuotationModal(true)}
-				>
-					Share Quotation
-				</Button>
 			) : null}
 		</div>
 	);
