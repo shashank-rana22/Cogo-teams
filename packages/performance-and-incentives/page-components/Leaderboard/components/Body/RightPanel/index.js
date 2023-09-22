@@ -10,6 +10,7 @@ function RightPanel() {
 
 	const {
 		block_wise_stats: activityData = {},
+		graph_data: scoringGraphData = {},
 	} = data || {};
 
 	return (
@@ -20,7 +21,7 @@ function RightPanel() {
 				<div>Cogo India</div>
 			</div>
 
-			<RankingAndScoring />
+			<RankingAndScoring scoringGraphData={scoringGraphData} />
 
 			<IncentiveSnapshot />
 

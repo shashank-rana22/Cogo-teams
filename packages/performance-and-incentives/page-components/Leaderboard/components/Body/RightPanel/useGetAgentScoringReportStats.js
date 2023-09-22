@@ -1,7 +1,7 @@
 import { useAllocationRequest } from '@cogoport/request';
 
 function useGetAgentScoringReportStats() {
-	const [{ data }] = useAllocationRequest({
+	const [{ data, loading }] = useAllocationRequest({
 		url     : '/report_stats',
 		method  : 'GET',
 		authkey : 'get_agent_scoring_report_stats',
@@ -9,6 +9,7 @@ function useGetAgentScoringReportStats() {
 
 	return {
 		data,
+		loading,
 	};
 }
 
