@@ -15,9 +15,9 @@ import styles from './styles.module.css';
 function EnrichmentRequest({
 	checkedRowsId = [],
 	setActiveTab = () => {},
-	modalDetails = '',
+	currentModalName = '',
 	onCloseModal = () => {},
-	setModalDetails = () => {},
+	setCurrentModalName = () => {},
 }) {
 	const { t } = useTranslation(['allocation']);
 
@@ -27,7 +27,7 @@ function EnrichmentRequest({
 		thirdParty = '',
 		setThirdParty = () => {},
 		setThirdPartyPayload = () => {},
-	} = useCreateBulkEnrichment({ setActiveTab, checkedRowsId, t, setModalDetails });
+	} = useCreateBulkEnrichment({ setActiveTab, checkedRowsId, t, setCurrentModalName });
 
 	const geo = getGeoConstants();
 
@@ -58,7 +58,7 @@ function EnrichmentRequest({
 
 	return (
 		<Modal
-			show={!!modalDetails}
+			show={!!currentModalName}
 			size="md"
 			closeOnOuterClick={false}
 			onClose={onCloseModal}

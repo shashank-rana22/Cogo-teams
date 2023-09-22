@@ -17,7 +17,7 @@ const CHIP_OPTIONS = POSSIBLE_FEEDBACK_STATUSES.map((item) => ({
 }));
 
 function ValidateRequest({
-	modalDetails = '',
+	currentModalName = '',
 	onCloseModal = () => { },
 	checkedRowsId = [],
 	refetchFeedbackTable = () => {},
@@ -35,7 +35,7 @@ function ValidateRequest({
 
 	return (
 		<Modal
-			show={!!modalDetails}
+			show={!!currentModalName}
 			size="md"
 			closeOnOuterClick={false}
 			placement="top"

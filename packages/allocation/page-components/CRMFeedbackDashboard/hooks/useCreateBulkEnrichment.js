@@ -5,10 +5,10 @@ import { useState } from 'react';
 
 const useCreateBulkEnrichment = ({
 	setActiveTab = () => {}, checkedRowsId = [], t = () => {},
-	setModalDetails = () => {},
+	setCurrentModalName = () => {},
 }) => {
 	const onCloseModal = () => {
-		setModalDetails('');
+		setCurrentModalName('');
 	};
 
 	const [thirdParty, setThirdParty] = useState('');

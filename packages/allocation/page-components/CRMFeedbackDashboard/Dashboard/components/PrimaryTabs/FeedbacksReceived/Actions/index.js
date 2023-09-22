@@ -25,7 +25,7 @@ const getButtonsMapping = ({ t }) => [
 	},
 ];
 
-function ButtonsComponent({ buttonsMapping, checkedRowsId, setShowPopover, setModalDetails }) {
+function ButtonsComponent({ buttonsMapping, checkedRowsId, setShowPopover, setCurrentModalName }) {
 	return buttonsMapping.map((button) => {
 		const { name, label } = button;
 		return (
@@ -34,7 +34,7 @@ function ButtonsComponent({ buttonsMapping, checkedRowsId, setShowPopover, setMo
 				role="presentation"
 				className={styles.cta}
 				onClick={() => {
-					setModalDetails(name); setShowPopover(false);
+					setCurrentModalName(name); setShowPopover(false);
 				}}
 				disabled={isEmpty(checkedRowsId)}
 			>
@@ -49,33 +49,33 @@ function Actions({	checkedRowsId = [],	setActiveTab = () => {}, refetchFeedbackT
 	const { t } = useTranslation(['allocation']);
 
 	const [showPopover, setShowPopover] = useState(false);
-	const [modalDetails, setModalDetails] = useState('');
+	const [currentModalName, setCurrentModalName] = useState('');
 
 	const buttonsMapping = getButtonsMapping({ t });
 
 	const onCloseModal = () => {
-		setModalDetails('');
+		setCurrentModalName('');
 	};
 
 	const componentProps = {
 		create_enrichment_request: {
 			checkedRowsId,
 			setActiveTab,
-			modalDetails,
-			setModalDetails,
+			currentModalName,
+			setCurrentModalName,
 			onCloseModal,
 		},
 		validate_enrichment_request: {
 			checkedRowsId,
-			modalDetails,
-			setModalDetails,
+			currentModalName,
+			setCurrentModalName,
 			onCloseModal,
 			refetchFeedbackTable,
 		},
 
 	};
 
-	const Component = COMPONENT_MAPPING?.[modalDetails] || null;
+	const Component = COMPONENT_MAPPING?.[currentModalName] || null;
 
 	return (
 		<>
@@ -89,7 +89,7 @@ function Actions({	checkedRowsId = [],	setActiveTab = () => {}, refetchFeedbackT
 							buttonsMapping={buttonsMapping}
 							checkedRowsId={checkedRowsId}
 							setShowPopover={setShowPopover}
-							setModalDetails={setModalDetails}
+							setCurrentModalName={setCurrentModalName}
 						/>
 					)}
 					onClickOutside={() => setShowPopover((prev) => !prev)}
@@ -104,8 +104,8 @@ function Actions({	checkedRowsId = [],	setActiveTab = () => {}, refetchFeedbackT
 				</Popover>
 			</div>
 
-			{modalDetails ? (
-				<Component {...componentProps[modalDetails]} />) : null}
+			{currentModalName ? (
+				<Component {...componentProps[currentModalName]} />) : null}
 		</>
 	);
 }
