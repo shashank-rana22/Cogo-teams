@@ -1,20 +1,18 @@
-import { useState } from 'react';
-
-import { getThisMonthStartDate } from '../../utils/start-date-functions';
-
 import EmptyState from './common/EmptyState';
 import FetchingLeaderboard from './common/FetchingLeaderboard';
 import Body from './components/Body';
 import Header from './components/Header';
-import useGetLeaderboardView from './hooks/useGetLeaderboardView';
+import useGetLeaderboardView from './useGetLeaderboardView';
 
 function Leaderboard() {
-	const { loading, viewData } = useGetLeaderboardView();
-
-	const [dateRange, setDateRange] = useState({
-		startDate : getThisMonthStartDate(),
-		endDate   : new Date(),
-	});
+	const {
+		loading,
+		viewData,
+		entity,
+		setEntity,
+		dateRange,
+		setDateRange,
+	} = useGetLeaderboardView();
 
 	if (loading) {
 		return <FetchingLeaderboard />;
@@ -34,7 +32,7 @@ function Leaderboard() {
 
 	return (
 		<>
-			<Header dateRange={dateRange} setDateRange={setDateRange} />
+			<Header dateRange={dateRange} setDateRange={setDateRange} entity={entity} setEntity={setEntity} />
 
 			<Body dateRange={dateRange} />
 		</>

@@ -1,10 +1,20 @@
 import { useAllocationRequest } from '@cogoport/request';
-import { useDispatch } from '@cogoport/store';
+import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+import { getThisMonthStartDate } from '../../utils/start-date-functions';
 
 function useGetLeaderboardView() {
+	const { partner } = useSelector(({ profile }) => profile);
+
 	const dispatch = useDispatch();
+
+	const [entity, setEntity] = useState(partner.id);
+	const [dateRange, setDateRange] = useState({
+		startDate : getThisMonthStartDate(),
+		endDate   : new Date(),
+	});
 
 	const [{ data, loading }, trigger] = useAllocationRequest({
 		url     : '/view',
@@ -28,6 +38,10 @@ function useGetLeaderboardView() {
 	return {
 		loading,
 		viewData: data,
+		entity,
+		setEntity,
+		dateRange,
+		setDateRange,
 	};
 }
 

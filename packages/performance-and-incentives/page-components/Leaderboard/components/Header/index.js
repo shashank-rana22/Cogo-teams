@@ -28,15 +28,13 @@ const GET_START_DATE_FUNCTION_MAPPING = {
 };
 
 function Header(props) {
-	const { dateRange, setDateRange } = props;
+	const { dateRange, setDateRange, entity, setEntity } = props;
 
 	const { push } = useRouter();
 
-	const { user, partner, incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
+	const { user, incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
 
 	const [duration, setDuration] = useState('today');
-
-	const [entity, setEntity] = useState(partner.id);
 
 	const onChangeDuration = (selectedDuration) => {
 		if (typeof GET_START_DATE_FUNCTION_MAPPING[selectedDuration] === 'function') {
