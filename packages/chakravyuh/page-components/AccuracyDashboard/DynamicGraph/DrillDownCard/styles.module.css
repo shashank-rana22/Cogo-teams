@@ -45,7 +45,7 @@
 	}
 
 	&.animate {
-		--card-color: #001219;
+		--card-color: #0a9396;
 
 		animation-name: shadow-animation;
 		animation-duration: 4s;
@@ -134,11 +134,11 @@
 		box-shadow: 0 0 4px 4px rgb(0 0 0 / 5%);
 	}
 
-	30% {
+	10% {
 		box-shadow: 0 0 4px 4px rgb(0 0 0 / 5%);
 	}
 
-	80% {
+	50% {
 		border: 1px solid var(--card-color);
 		box-shadow: 0 0 4px var(--card-color);
 	}
