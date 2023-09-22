@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Upload, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
@@ -54,17 +55,14 @@ function CustomFileUploader(props, ref) {
 			setUrlStore(urls);
 		}
 		setLoading(false);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [!isEmpty(defaultValues)]);
 
 	useEffect(() => {
 		onChange(multiple ? urlStore : urlStore?.[GLOBAL_CONSTANTS.zeroth_index]);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [urlStore]);
 
 	useEffect(() => {
 		handleProgress(loading);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [loading]);
 
 	const onUploadProgress = (index) => (file) => {
