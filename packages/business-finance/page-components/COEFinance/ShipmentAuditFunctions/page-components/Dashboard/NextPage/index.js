@@ -118,10 +118,10 @@ import Headings from './Headings';
 import styles from './styles.module.css';
 
 const ZEROTH_INDEX = 0;
-const FIRST_INDEX = 0;
-const SECOND_INDEX = 0;
-const THIRD_INDEX = 0;
-const FIFTH_INDEX = 0;
+const FIRST_INDEX = 1;
+const SECOND_INDEX = 2;
+const THIRD_INDEX = 3;
+const FIFTH_INDEX = 5;
 
 function NextPage() {
 	const [accordionStates, setAccordionStates] = useState([
