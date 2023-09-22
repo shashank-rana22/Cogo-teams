@@ -1,14 +1,17 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 import NEXT_LEVEL_MAPPING from '../constants/next-level-mapping';
 
-const useGetScoringReports = ({ viewData = '' }) => {
+const useGetScoringReports = () => {
+	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
+
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
-	const [view] = viewData.split('_');
+	const [view] = viewType.split('_');
 
 	const [searchValue, setSearchValue] = useState('');
 	const [currLevel, setCurrLevel] = useState([NEXT_LEVEL_MAPPING[`${view}_report`], '']);
