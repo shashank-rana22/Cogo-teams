@@ -3,27 +3,31 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
+import DURATION_CONSTANTS from '../../../../constants/duration-constants';
 import getEntityOptions from '../../../../utils/get-entity-options';
 import {
-	getThisAseessYearStartDate,
+	getThisAseessYearStartDate, getTodayStartDate,
 	getThisMonthStartDate, getThisQuarterStartDate,
 } from '../../../../utils/start-date-functions';
 import DURATION_OPTIONS from '../../configurations/get-duration-filter-options';
 
 import styles from './styles.module.css';
 
+const { TODAY, THIS_MONTH, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
+
 const GET_START_DATE_FUNCTION_MAPPING = {
-	this_month   : getThisMonthStartDate,
-	this_quarter : getThisQuarterStartDate,
-	this_year    : getThisAseessYearStartDate,
+	[TODAY]        : getTodayStartDate,
+	[THIS_MONTH]   : getThisMonthStartDate,
+	[THIS_QUARTER] : getThisQuarterStartDate,
+	[THIS_YEAR]    : getThisAseessYearStartDate,
 };
 
 function Header() {
 	const { push } = useRouter();
 
-	const { user, partner } = useSelector(({ profile }) => profile);
+	const { user, partner, incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
 
-	const [duration, setDuration] = useState('this_month');
+	const [duration, setDuration] = useState('today');
 
 	const [dateRange, setDateRange] = useState({
 		startDate : getThisMonthStartDate(),
@@ -72,7 +76,7 @@ function Header() {
 							options={DURATION_OPTIONS}
 						/>
 
-						{duration === 'custom' && (
+						{duration === CUSTOM && (
 							<DateRangepicker
 								onChange={setDateRange}
 								value={dateRange}
@@ -84,17 +88,19 @@ function Header() {
 				</div>
 			</div>
 
-			<div className={styles.button_container}>
-				<Button
-					type="button"
-					size="lg"
-					themeType="secondary"
-					style={{ marginRight: '12px' }}
-					onClick={() => push('/performance-and-incentives/public-leaderboard')}
-				>
-					Public View Mode
-				</Button>
-			</div>
+			{incentive_leaderboard_viewtype === 'admin_view' && (
+				<div className={styles.button_container}>
+					<Button
+						type="button"
+						size="lg"
+						themeType="secondary"
+						style={{ marginRight: '12px' }}
+						onClick={() => push('/performance-and-incentives/public-leaderboard')}
+					>
+						Public View Mode
+					</Button>
+				</div>
+			)}
 		</div>
 	);
 }
