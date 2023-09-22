@@ -16,6 +16,16 @@
 	display: flex;
 	align-items: center;
 
+	:global {
+		.ui_buttonicon_container.ui_ps_themeType_primary {
+			background-color: transparent;
+
+			&:hover {
+				background-color: var(--color-primary-yellow-5);
+			}
+		}
+	}
+
 	@media screen and (max-width: 767px) {
 		flex-wrap: wrap;
 	}
