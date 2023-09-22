@@ -50,6 +50,18 @@ function CollectionPartyDetails({
 	const { user } = useSelector(({ profile }) => ({ user: profile }));
 	const { shipment_data = {}, primary_service } = useContext(ShipmentDetailContext);
 
+	const {
+		id = '',
+		shipment_type = '',
+		stakeholders = [],
+		stakeholder_types = [],
+		source = '',
+		all_services = [],
+		importer_exporter_id = '',
+		is_job_closed = false,
+		is_job_closed_financially = false,
+	} = shipment_data || {};
+
 	const [showModal, setShowModal] = useState(false);
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
 	const [openComparision, setOpenComparision] = useState(false);
@@ -67,12 +79,12 @@ function CollectionPartyDetails({
 		(item) => PURCHASE_INVOICE_SHIPMENT_STATES.includes(item?.detail?.state),
 	);
 
-	const airServiceProviderConfirmation = shipment_data?.shipment_type === 'air_freight'
+	const airServiceProviderConfirmation = shipment_type === 'air_freight'
 		&& serviceProviderConfirmation;
 
-	const uploadInvoiceAllowed = shipment_data?.stakeholders
+	const uploadInvoiceAllowed = stakeholders
 		?.some((ele) => STAKE_HOLDER_TYPES.includes(ele?.stakeholder_type))
-		|| shipment_data?.stakeholder_types
+		|| stakeholder_types
 			?.some((ele) => STAKE_HOLDER_TYPES.includes(ele))
 		|| [
 			geo.uuid.super_admin_id,
@@ -81,7 +93,7 @@ function CollectionPartyDetails({
 			geo.uuid.prod_process_owner,
 		].some((ele) => user?.partner.user_role_ids?.includes(ele));
 
-	const showUpload = uploadInvoiceAllowed || shipment_data?.source === 'spot_line_booking';
+	const showUpload = uploadInvoiceAllowed || source === 'spot_line_booking';
 
 	const onClose = () => {
 		setUploadInvoiceUrl('');
@@ -91,10 +103,9 @@ function CollectionPartyDetails({
 
 	let disableInvoice = false;
 	let errorMsg = '';
-	const shipment_type = shipment_data?.shipment_type;
 
 	const { tdata } = useGetTradeParty({
-		shipment_id: shipment_data?.id || '',
+		shipment_id: id,
 		shipment_data,
 	});
 
@@ -115,7 +126,7 @@ function CollectionPartyDetails({
 	});
 
 	if (shipment_type === 'ftl_freight') {
-		disableInvoice = !shipment_data?.all_services?.some(
+		disableInvoice = !all_services?.some(
 			(item) => item?.service_type === 'ftl_freight_service'
 				&& (item?.lr_numbers || []).length,
 		);
@@ -123,14 +134,12 @@ function CollectionPartyDetails({
 
 		if (
 			tdata?.list?.length === EMPTY_TRADE_PARTY_LENGTH
-			&& geo.uuid.fortigo_network_ids.includes(shipment_data?.importer_exporter_id)
+			&& geo.uuid.fortigo_network_ids.includes(importer_exporter_id)
 		) {
 			disableInvoice = true;
 			errorMsg = 'Shipper not added';
 		}
 	}
-
-	const isJobClosed = shipment_data?.is_job_closed;
 
 	const onConfirm = () => {
 		if (!isEmpty(uploadInvoiceUrl)) {
@@ -168,10 +177,10 @@ function CollectionPartyDetails({
 								size="md"
 								themeType="secondary"
 								className={styles.marginright}
-								disabled={disableInvoice}
+								disabled={is_job_closed_financially || disableInvoice}
 								onClick={() => { setOpen(true); }}
 							>
-								{isJobClosed ? 'Upload Credit Note' : 'Upload Invoice'}
+								{is_job_closed ? 'Upload Credit Note' : 'Upload Invoice'}
 							</Button>
 
 							{disableInvoice ? (
@@ -204,7 +213,7 @@ function CollectionPartyDetails({
 								onClick={() => setShowModal(
 									shipment_type === 'ftl_freight' ? 'purchase' : 'charge_code',
 								)}
-								disabled={shipment_data?.is_job_closed}
+								disabled={is_job_closed}
 							>
 								Add Incidental Charges
 							</Button>
@@ -230,7 +239,7 @@ function CollectionPartyDetails({
 						size="sm"
 						onClose={() => { setOpen(false); }}
 					>
-						<Modal.Header title={isJobClosed ? 'Upload Scan of Credit Note' : 'Upload Scan of Invoice'} />
+						<Modal.Header title={is_job_closed ? 'Upload Scan of Credit Note' : 'Upload Scan of Invoice'} />
 						<Modal.Body>
 							<section>
 								<FileUploader
@@ -267,7 +276,7 @@ function CollectionPartyDetails({
 				&& (
 					<AddService
 						shipmentType={shipment_type}
-						shipmentId={shipment_data?.id}
+						shipmentId={id}
 						services={SERVICES_LIST}
 						refetch={refetch}
 						source={showModal}

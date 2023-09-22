@@ -130,5 +130,9 @@
     "raised_to_desk": "Ditinggikan ke meja",
     "request_type": "Jenis Permintaan",
     "select_sid": "Pilih SID",
-    "select_request_ype": "Pilih Jenis Permintaan"
+    "select_request_ype": "Pilih Jenis Permintaan",
+    "by_category": "Oleh kategori",
+    "by_desk": "Oleh meja",
+    "select_raised_by_desk": "Pilih Dibesarkan dengan Meja",
+    "select_raised_to_desk": "Pilih Dibesarkan ke Meja"
 }
