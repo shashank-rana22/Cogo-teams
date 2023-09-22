@@ -31,16 +31,25 @@ const getServiceLabel = ({ service, isHead }) => {
 	return `${startCase(Label[GLOBAL_CONSTANTS.zeroth_index])} ${startCase(Label[NUMBERS.ONE])}`;
 };
 
-function ColumnHeader({ list = {}, priceData = {} }) {
+function ColumnHeader({ list = {}, priceData = {}, supplierPayload = {} }) {
+	let showHeader = false;
+	Object.keys(supplierPayload).forEach((payload) => {
+		if (payload.lenght) {
+			showHeader = true;
+		}
+	});
 	return (
 		<div>
-			<div className={styles.outerContainer}>
-				{columnTitle.map((title) => (
-					<div key={title} className={styles.title}>
-						{getServiceLabel({ service: title, isHead: true })}
-					</div>
-				))}
-			</div>
+			{showHeader && (
+				<div className={styles.outerContainer}>
+					{columnTitle.map((title) => (
+						<div key={title} className={styles.title}>
+							{getServiceLabel({ service: title, isHead: true })}
+						</div>
+					))}
+				</div>
+			)}
+
 			<div className={styles.tableContainer}>
 				{Object.keys(list).map((service, index) => {
 					const serviceIndex = index;
