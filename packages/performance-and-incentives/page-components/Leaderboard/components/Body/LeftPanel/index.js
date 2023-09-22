@@ -26,6 +26,8 @@ function LeftPanel(props) {
 		levelStack,
 		setLevelStack,
 		currentUserData,
+		isExpanded,
+		setIsExpanded,
 	} = useGetScoringReports({ dateRange, entity });
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
@@ -52,7 +54,12 @@ function LeftPanel(props) {
 
 	return (
 		<div className={styles.container}>
-			<Header currLevel={currLevel} setParams={setParams} />
+			<Header
+				currLevel={currLevel}
+				setParams={setParams}
+				isExpanded={isExpanded}
+				setIsExpanded={setIsExpanded}
+			/>
 
 			<LeaderboardFilters
 				setParams={setParams}
@@ -62,6 +69,7 @@ function LeftPanel(props) {
 				levelStack={levelStack}
 				setCurrLevel={setCurrLevel}
 				setLevelStack={setLevelStack}
+				isExpanded={isExpanded}
 			/>
 
 			<List

@@ -18,6 +18,8 @@ const useGetScoringReports = (props) => {
 	const [searchValue, setSearchValue] = useState('');
 	const [currLevel, setCurrLevel] = useState([NEXT_LEVEL_MAPPING[`${view}_report`], '']);
 	const [levelStack, setLevelStack] = useState([]);
+	const [isExpanded, setIsExpanded] = useState(false);
+
 	const [params, setParams] = useState({
 		page                    : 1,
 		page_limit              : 10,
@@ -66,6 +68,8 @@ const useGetScoringReports = (props) => {
 		levelStack,
 		setLevelStack,
 		currentUserData,
+		isExpanded,
+		setIsExpanded,
 	};
 };
 

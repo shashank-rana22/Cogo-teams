@@ -5,14 +5,16 @@ import { IcMArrowRight } from '@cogoport/icons-react';
 import styles from './styles.module.css';
 
 function Header(props) {
-	const { currLevel, setParams } = props;
+	const { currLevel, setParams, isExpanded, setIsExpanded } = props;
 
 	const handleClick = () => {
+		setIsExpanded((prev) => !prev);
+
 		setParams((prev) => ({
 			...prev,
 			filters: {
 				...prev.filters,
-				report_type : 'kam_report',
+				report_type : isExpanded ? currLevel[GLOBAL_CONSTANTS.zeroth_index] : 'kam_report',
 				user_rm_ids : currLevel[GLOBAL_CONSTANTS.one] ? [currLevel[GLOBAL_CONSTANTS.one]] : undefined,
 			},
 		}));
@@ -33,7 +35,7 @@ function Header(props) {
 
 				{currLevel[GLOBAL_CONSTANTS.zeroth_index] !== 'kam_report' ? (
 					<Button size="md" themeType="linkUi" onClick={handleClick}>
-						Expand All
+						{isExpanded ? 'Collapse' : 'Expand All'}
 						{' '}
 						<IcMArrowRight width={16} height={16} />
 					</Button>
