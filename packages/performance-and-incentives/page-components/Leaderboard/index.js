@@ -1,3 +1,4 @@
+import EmptyState from './common/EmptyState';
 import FetchingLeaderboard from './common/FetchingLeaderboard';
 import Body from './components/Body';
 import Header from './components/Header';
@@ -11,7 +12,15 @@ function Leaderboard() {
 	}
 
 	if (!viewData) {
-		return 'nothing';
+		return (
+			<EmptyState
+				emptyText="Report Not Found"
+				flexDirection="column"
+				width={450}
+				height={250}
+				textSize={20}
+			/>
+		);
 	}
 
 	return (

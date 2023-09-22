@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
@@ -18,7 +20,7 @@ function useGetLeaderboardView() {
 
 			dispatch(setProfileState({ incentive_leaderboard_viewtype: res?.data }));
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err?.response?.data) || 'Something Went Wrong!');
 		}
 	};
 
