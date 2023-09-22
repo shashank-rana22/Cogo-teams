@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import React from 'react';
+import React, { useState } from 'react';
 
 import List from '../../../../../commons/List/index';
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
@@ -34,6 +34,7 @@ interface PropsType {
 	onAccept?: Function;
 	showTab?: boolean;
 	sidDataChecked?: boolean;
+	shipmentIdView?: boolean;
 }
 
 interface FullResponseProps {
@@ -55,7 +56,10 @@ function CardItem({
 	onAccept = (prop) => (prop),
 	showTab = false,
 	sidDataChecked = false,
+	shipmentIdView = true,
 }: PropsType) {
+	const [isCheckoutQuote, setIsCheckoutQuote] = useState(false);
+
 	const { jobNumber, jobType } = cardData || {};
 	const {
 		loading,
@@ -63,12 +67,14 @@ function CardItem({
 		config,
 		filters,
 		hookSetters,
+		quoteData,
 	} = useListBills({
 		jobNumber,
 		jobType,
 		amountTab,
 		currentOpenSID,
 		setDataCard,
+		isCheckoutQuote,
 	});
 
 	const handleClick = () => {
@@ -85,6 +91,14 @@ function CardItem({
 		},
 	});
 
+	const getLineItemData = (lineItemData) => {
+		const parts = lineItemData.split('_');
+		const capitalizedWords = parts.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+		const resultData = capitalizedWords.join(' ');
+
+		return resultData;
+	};
+
 	const { pageIndex = 1 }: FullResponseProps = fullResponse || {};
 
 	const functions = {
@@ -100,12 +114,14 @@ function CardItem({
 		renderAmount: (item: {}, field: {}) => (
 			<AmountWithCurrency item={item} field={field} />
 		),
-		renderStatus        : (item: {}) => <Status item={item} />,
-		renderInvoices      : (item: {}, field: object) => <ViewInvoice item={item} field={field} />,
-		renderRemarks       : (item: {}) => <Remarks itemData={item} />,
-		renderQuotationName : ({ name = '' }) => showOverflowingNumber(name, 30),
-		showFormattedPrice  : ({ price = '', currency = '' }) => getFormattedAmount(price, currency),
-		showFormattedPreTax : ({ total_price = '', currency = '' }) => getFormattedAmount(total_price, currency),
+		renderStatus              : (item: {}) => <Status item={item} />,
+		renderInvoices            : (item: {}, field: object) => <ViewInvoice item={item} field={field} />,
+		renderRemarks             : (item: {}) => <Remarks itemData={item} />,
+		renderQuotationName       : ({ name = '' }) => showOverflowingNumber(name, 30),
+		renderLineItemUnit        : ({ unit = '' }) => getLineItemData(unit),
+		renderLineItemServiceType : ({ service_type = '' }) => getLineItemData(service_type),
+		showFormattedPrice        : ({ price = '', currency = '' }) => getFormattedAmount(price, currency),
+		showFormattedPreTax       : ({ total_price = '', currency = '' }) => getFormattedAmount(total_price, currency),
 		showFormattedPostTax:
 		({ tax_total_price = '', currency = '' }) => getFormattedAmount(tax_total_price, currency),
 	};
@@ -113,6 +129,8 @@ function CardItem({
 	const getResponseData = () => {
 		if (['expense', 'income'].includes(amountTab)) {
 			return fullResponse;
+		} if (['buyQuote', 'sellQuote'].includes(amountTab)) {
+			return { list: quoteData || [] };
 		}
 		return { list: [] };
 	};
@@ -125,10 +143,14 @@ function CardItem({
 					itemData={cardData}
 					amountTab={amountTab}
 					setAmountTab={setAmountTab}
+					showTab={showTab}
+					shipmentIdView={shipmentIdView}
+					isCheckoutQuote={isCheckoutQuote}
+					setIsCheckoutQuote={setIsCheckoutQuote}
 				/>
 			</div>
 
-			<div className={styles.card_list}>
+			<div className={cl`${styles.card_list} ${!shipmentIdView ? styles.scrollable_list : null}`}>
 				<List
 					config={config}
 					itemData={getResponseData()}

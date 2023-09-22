@@ -9158,6 +9158,18 @@ const partner = {
 			api         : 'post_incident_management_incident_send_overhead_mail',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_common_job_post_tax_profit',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_pre_tax_profit',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_list_service_charges',
+			access_type : 'private',
+		},
 	],
 	vietnam_account_receivables: [
 		{
