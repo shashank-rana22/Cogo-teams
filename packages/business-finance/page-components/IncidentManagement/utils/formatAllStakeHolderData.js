@@ -1,120 +1,41 @@
 import { isEmpty } from '@cogoport/utils';
 
-const allStakeHolderTimeLineData = ({ level0 = {}, level1 = {}, level2 = {}, level3 = {} }) => {
-	const { stakeholder: stakeholder3, status: status3 } = level3 || {};
-	const { stakeholder: stakeholder2, status: status2 } = level2 || {};
-	const { stakeholder: stakeholder1, status: status1 } = level1 || {};
+const stakeholderData = (levelData) => {
+	const data = (levelData || []).map((item) => {
+		const { stakeholder = {}, status = '', remarks = '' } = item || {};
+		const { userEmail = '', userName = '' } = stakeholder || {};
+		return (
+			{
+				...(stakeholder
+					? {
+						email : userEmail,
+						name  : userName,
+						remarks,
+						status,
+					}
+					: {}),
+			}
+		);
+	});
 
-	if (!isEmpty(level3)) {
-		return [
-			{
-				...(level0
-					? {
-						email   : level0?.email,
-						name    : level0?.name,
-						remarks : level0?.remark,
-						status  : 'REQUESTED BY',
-					}
-					: {}),
-			},
-			{
-				...(stakeholder1
-					? {
-						email   : stakeholder1?.userEmail,
-						name    : stakeholder1?.userName,
-						remarks : level1?.remarks,
-						status  : status1,
-					}
-					: {}),
-			},
-			{
-				...(stakeholder2
-					? {
-						email   : stakeholder2?.userEmail,
-						name    : stakeholder2?.userName,
-						remarks : level2?.remarks,
-						status  : status2,
-					}
-					: {}),
-			},
-			{
-				...(stakeholder3
-					? {
-						email   : stakeholder3?.userEmail,
-						name    : stakeholder3?.userName,
-						remarks : level3?.remarks,
-						status  : status3,
-					}
-					: {}),
-			},
-		];
-	}
-	if (!isEmpty(level2)) {
-		return [
-			{
-				...(level0
-					? {
-						email   : level0?.email,
-						name    : level0?.name,
-						remarks : level0?.remark,
-						status  : 'REQUESTED BY',
-					}
-					: {}),
-			},
-			{
-				...(stakeholder1
-					? {
-						email   : stakeholder1?.userEmail,
-						name    : stakeholder1?.userName,
-						remarks : level1?.remarks,
-						status  : status1,
-					}
-					: {}),
-			},
-			{
-				...(stakeholder2
-					? {
-						email   : stakeholder2?.userEmail,
-						name    : stakeholder2?.userName,
-						remarks : level2?.remarks,
-						status  : status2,
-					}
-					: {}),
-			},
-		];
-	}
-	if (!isEmpty(level2)) {
-		return [
-			{
-				...(level0
-					? {
-						email   : level0?.email,
-						name    : level0?.name,
-						remarks : level0?.remark,
-						status  : 'REQUESTED BY',
-					}
-					: {}),
-			},
-			{
-				email   : stakeholder1?.userEmail,
-				name    : stakeholder1?.userName,
-				remarks : level1?.remarks,
-				status  : status1,
-			},
-		];
-	}
-	return [
-		{
-			...(level0
-				? {
-					email   : level0?.email,
-					name    : level0?.name,
-					remarks : level0?.remark,
-					status  : 'REQUESTED BY',
-				}
-				: {}),
-		},
-	];
+	return data;
 };
 
-export default allStakeHolderTimeLineData;
+const stakeHolderTimeLineData = ({ level3 = {}, level2 = {}, level1 = {}, level0 = {} }) => {
+	const level = {
+		...level0,
+		level       : 0,
+		status      : 'REQUESTED BY',
+		stakeholder : { userEmail: level0.email, userName: level0.name },
+		remarks     : level0.remark,
+	};
+	if (!isEmpty(level3)) {
+		return stakeholderData([level, level1, level2, level3]);
+	}
+	if (!isEmpty(level2)) {
+		return stakeholderData([level, level1, level2]);
+	}
+	return stakeholderData([level, level1]);
+};
+
+export default stakeHolderTimeLineData;

@@ -11,7 +11,6 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const SPLIT_NUMBER = 2;
-// const BORDER_COLOR = '#000000';
 const SHOWFULLDETAILS = true;
 
 export function CardBody({ charge = {}, type = '' }) {
@@ -38,7 +37,6 @@ export function CardBody({ charge = {}, type = '' }) {
 			className={`${SHOWFULLDETAILS ? styles.card : styles.custompadding} ${
 				lineItems.length < SPLIT_NUMBER ? styles.padding : ''
 			}`}
-			// style={{ '--bordercolor': BORDER_COLOR }}
 		>
 			<div className={styles.layout}>
 				<div

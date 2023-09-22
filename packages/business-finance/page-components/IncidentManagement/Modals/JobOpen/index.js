@@ -5,10 +5,7 @@ function JobOpen({
 	setDetailsModal = () => {},
 }) {
 	return (
-		<div>
-			<Button size="md" themeType="secondary" onClick={() => setDetailsModal(row)}>View</Button>
-
-		</div>
+		<Button size="md" themeType="secondary" onClick={() => setDetailsModal(row)}>View</Button>
 	);
 }
 export default JobOpen;
