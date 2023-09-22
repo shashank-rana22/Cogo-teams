@@ -5,7 +5,7 @@ import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
 
 import styles from './styles.module.css';
 
-function CommonDetailsModal({ setDetailsModal = () => {}, detailsModal = {} }) {
+function CommonDetailsModal({ setDetailsModal = () => {}, detailsModal = {}, refetch = () => {} }) {
 	return (
 		<div className={styles.containerDisplay}>
 			<Button
@@ -22,6 +22,7 @@ function CommonDetailsModal({ setDetailsModal = () => {}, detailsModal = {} }) {
 				<JobOpenDetailsModal
 					row={detailsModal}
 					setDetailsModal={setDetailsModal}
+					refetch={refetch}
 				/>
 			) : null }
 
