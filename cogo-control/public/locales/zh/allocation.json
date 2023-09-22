@@ -831,7 +831,7 @@
     "event_name_label": "事件名称",
     "scores_label": "分数",
     "events_label": "事件",
-    "badge_updated_toast": "徽章已更新！" ,
+    "badge_updated_toast": "徽章已更新！",
     "all_events_label": "所有事件",
     "add_event_label": "新增事件",
     "attributes_label": "属性",
@@ -879,4 +879,5 @@
     "validity_enrichment_request_cancel": "否",
     "validity_enrichment_request_submit": "是",
     "validity_enrichment_request_success_toast": "成功更新",
-    "validity_enrichment_request_actions": "操作"}
+    "validity_enrichment_request_actions": "操作"
+}
