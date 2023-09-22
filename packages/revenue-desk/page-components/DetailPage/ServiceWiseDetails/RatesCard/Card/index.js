@@ -17,9 +17,10 @@ function Card({
 		);
 
 		const { rowData } = rate;
-		const { total_buy_price_in_preferred_currency, total_sell_price_in_preferred_currency } = rowData || {};
-		const walletBalance = total_buy_price_in_preferred_currency
-			- total_sell_price_in_preferred_currency;
+		const {
+			total_profit_in_preferred_currency,
+		} = rowData || {};
+		const walletBalance = -total_profit_in_preferred_currency;
 
 		const rejectRate = walletBalance > walletAmount?.wallet_amount;
 
