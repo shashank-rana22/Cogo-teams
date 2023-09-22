@@ -36,6 +36,7 @@ function MailEditorModal({
 		userId           : profile?.user?.id,
 		userName         : profile?.user?.name,
 	}));
+
 	const [buttonType, setButtonType] = useState('');
 	const [emailState, setEmailState] = useState({
 		...DEFAULT_EMAIL_STATE,

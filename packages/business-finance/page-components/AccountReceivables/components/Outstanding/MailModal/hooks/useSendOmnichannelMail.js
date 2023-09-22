@@ -28,7 +28,7 @@ const useSendOmnichannelMail = ({
 		formattedData = {},
 		mailActions = {},
 		emailState = {},
-		source = '',
+		source = 'outstanding',
 	}) => {
 		try {
 			await trigger({

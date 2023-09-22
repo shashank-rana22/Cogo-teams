@@ -29,7 +29,7 @@ function ComposeEmailBody(props) {
 
 	const userActiveMails = (
 		[...new Set([
-			...(userEmailAddress || []),
+			...([userEmailAddress]),
 			...(userSharedMails || []),
 		])]
 	).map(

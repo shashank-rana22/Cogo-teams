@@ -2,7 +2,6 @@ import { Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import useReplyMail from '../hooks/useReplyMail';
-import useSendOmnichannelMail from '../hooks/useSendOmnichannelMail';
 
 import getFormatedEmailBody from './getFormatedEmailBody';
 import getRenderEmailBody from './getRenderEmailBody';
@@ -44,13 +43,6 @@ function useMailEditorFunctions({
 		email,
 	});
 
-	const {
-		mailLoading = false,
-	} = useSendOmnichannelMail({
-		setEmailState,
-		setButtonType,
-	});
-
 	const handleSend = () => {
 		const isEmptyMail = getFormatedEmailBody({ emailState });
 		if (replyLoading) {
@@ -90,7 +82,7 @@ function useMailEditorFunctions({
 
 	return {
 		handleSend,
-		replyLoading: replyLoading || mailLoading,
+		replyLoading,
 	};
 }
 

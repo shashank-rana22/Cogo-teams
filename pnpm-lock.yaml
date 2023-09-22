@@ -753,6 +753,9 @@ importers:
       '@cogoport/icons-react':
         specifier: ^1.0.60
         version: 1.0.98(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/navigation-configs':
+        specifier: workspace:^0.1.0
+        version: link:../navigation-configs
       '@cogoport/next':
         specifier: workspace:^0.1.0
         version: link:../next
@@ -1219,6 +1222,9 @@ importers:
       '@cogoport/scope-select':
         specifier: workspace:^0.1.0
         version: link:../../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-chat
       '@cogoport/store':
         specifier: workspace:^0.1.0
         version: link:../../common/store
@@ -1318,6 +1324,9 @@ importers:
       '@cogoport/scope-select':
         specifier: workspace:^0.1.0
         version: link:../../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-chat
       '@cogoport/store':
         specifier: workspace:^0.1.0
         version: link:../../common/store
@@ -1438,9 +1447,6 @@ importers:
       file-saver:
         specifier: ^2.0.5
         version: 2.0.5
-      firebase:
-        specifier: ^9.17.2
-        version: 9.23.0
       number-to-words:
         specifier: ^1.2.4
         version: 1.2.4
@@ -1970,6 +1976,9 @@ importers:
       '@cogoport/scope-select':
         specifier: workspace:^0.1.0
         version: link:../../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-chat
       '@cogoport/store':
         specifier: workspace:^0.1.0
         version: link:../../common/store
@@ -2045,6 +2054,9 @@ importers:
       '@cogoport/scope-select':
         specifier: workspace:^0.1.0
         version: link:../../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-chat
       '@cogoport/store':
         specifier: workspace:^0.1.0
         version: link:../../common/store
@@ -2477,6 +2489,9 @@ importers:
       '@cogoport/scope-select':
         specifier: workspace:^0.1.0
         version: link:../../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-chat
       '@cogoport/store':
         specifier: workspace:^0.1.0
         version: link:../../common/store
@@ -2507,6 +2522,9 @@ importers:
       '@cogoport/scope-select':
         specifier: workspace:^0.1.0
         version: link:../../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-chat
       '@cogoport/store':
         specifier: workspace:^0.1.0
         version: link:../../common/store
@@ -2926,6 +2944,9 @@ importers:
       '@cogoport/next':
         specifier: workspace:^0.1.0
         version: link:../../common/next
+      '@cogoport/ocean-modules':
+        specifier: workspace:^0.1.0
+        version: link:../../common/ocean-modules
       '@cogoport/request':
         specifier: workspace:^0.1.0
         version: link:../../common/request
@@ -2941,6 +2962,9 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
+      uuid:
+        specifier: ^9.0.0
+        version: 9.0.0
 
   packages/referral:
     dependencies:
