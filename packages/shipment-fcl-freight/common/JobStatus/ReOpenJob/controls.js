@@ -11,6 +11,7 @@ const controls = [
 				message : 'File is required',
 			},
 		},
+		accept       : 'image/*, .pdf',
 		showProgress : true,
 		uploadDesc   : 'Upload Files',
 	},

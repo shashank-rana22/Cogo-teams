@@ -1,4 +1,4 @@
-import toastApiError from '@cogoport/air-modules/utils/toastApiError';
+import { toastApiError } from '@cogoport/air-modules';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
