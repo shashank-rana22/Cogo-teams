@@ -64,13 +64,14 @@ const getReplyAllMails = ({
 	};
 };
 
-const getDraftPayload = ({ mailData, subject, activeMailAddress, msgId }) => ({
+const getDraftPayload = ({ mailData, subject, activeMailAddress, msgId, signature }) => ({
 	sender        : activeMailAddress,
 	toUserEmail   : mailData?.toUserEmail || [],
 	ccrecipients  : mailData?.ccrecipients || [],
 	bccrecipients : mailData?.bccrecipients || [],
 	msgId,
 	subject,
+	signature,
 });
 
 export function getRecipientData({
@@ -88,6 +89,7 @@ export function getRecipientData({
 	deleteMessage = () => {},
 	createReplyDraft = () => {},
 	createReplyAllDraft = () => {},
+	signature = '',
 }) {
 	const {
 		setButtonType = () => {},
@@ -108,6 +110,7 @@ export function getRecipientData({
 		bcc_mails = [],
 		message_id = '',
 		attachments = [],
+		draftQuillMessage = '',
 	} = response || {};
 
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
@@ -134,7 +137,7 @@ export function getRecipientData({
 				(prev) => ({
 					...prev,
 					emailVia,
-					body             : body || '',
+					body             : draftQuillMessage || body || '',
 					from_mail        : sender || '',
 					subject          : draftSubject || '',
 					toUserEmail      : to_mails || [],
@@ -177,7 +180,8 @@ export function getRecipientData({
 			(prev) => ({
 				...prev,
 				emailVia,
-				body             : '',
+				body:
+				emailVia === 'firebase_emails' && !CREATE_DRAFT_FOR.includes(newButtonType) ? signature : '',
 				from_mail        : activeMailAddress,
 				subject          : newSubject || subject,
 				toUserEmail      : mailData?.toUserEmail || [],
@@ -195,6 +199,7 @@ export function getRecipientData({
 				subject : newSubject || subject,
 				activeMailAddress,
 				msgId   : message_id,
+				signature,
 			});
 
 			const callbackFunc = ({ content }) => {

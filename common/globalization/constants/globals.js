@@ -121,8 +121,10 @@ const GLOBAL_CONSTANTS = {
 		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae59e95d4e38a4271ff/'
 		+ 'UTRuploadSampleFileForAdvancePayment.xlsx',
 	},
-	cogoport_agent_email_id    : 'agentid@cogoport.com',
-	flash_booking_charge_codes : [
+
+	cogoport_agent_email_id: 'agentid@cogoport.com',
+
+	flash_booking_charge_codes: [
 		'OTC',
 		'BAS',
 		'BASNO',
@@ -789,6 +791,9 @@ const GLOBAL_CONSTANTS = {
 		export_rates             : 'Export.rates@cogoport.com',
 		cogoport_ftl_collections : 'ftl.collections@cogoport.com',
 		cogoport_support         : 'support@cogoport.com',
+	},
+	mobile_number: {
+		cogoone_sales_contact_no: '+91-8069182176',
 	},
 	websites: {
 		cogoport : 'www.cogoport.com',
