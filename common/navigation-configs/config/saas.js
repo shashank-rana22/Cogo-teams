@@ -9,17 +9,22 @@ const saas = {
 		navigation : 'saas_air_schedules',
 		isMainNav  : true,
 	},
-	'/[partner_id]/saas/air-tracking': {
+	'/[partner_id]/saas/tracking': {
 		layoutType : 'no_header',
 		navigation : 'saas_air_tracking',
 		isMainNav  : true,
 	},
-	'/[partner_id]/saas/air-tracking/archive': {
+	'/[partner_id]/saas/tools/tracking/list': {
 		layoutType : 'no_header',
 		navigation : 'saas_air_tracking',
 		isMainNav  : true,
 	},
-	'/[partner_id]/saas/air-tracking/[tracker_id]': {
+	'/[partner_id]/saas/tools/tracking/list/archive/[trackingType]': {
+		layoutType : 'no_header',
+		navigation : 'saas_air_tracking',
+		isMainNav  : true,
+	},
+	'/[partner_id]/saas/tools/tracking/list/[trackingType]/[trackingId]': {
 		layoutType : 'no_header',
 		navigation : 'saas_air_tracking',
 		isMainNav  : true,

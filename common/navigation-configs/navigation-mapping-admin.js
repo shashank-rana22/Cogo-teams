@@ -1130,8 +1130,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		saas_air_tracking: {
 			key           : 'saas_air_tracking',
 			title         : t('common:air_tracking'),
-			href          : '/saas/air-tracking',
-			as            : '/saas/air-tracking',
+			href          : '/saas/tracking',
+			as            : '/saas/tracking',
 			type          : 'link',
 			main_apis     : [],
 			possible_apis : apis.app_saas_air_tracking,
@@ -1194,8 +1194,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		tracking: {
 			key           : 'tracking',
 			title         : t('common:tracking'),
-			href          : '/tracking',
-			as            : '/tracking',
+			href          : '/saas/tracking',
+			as            : '/saas/tracking',
 			icon          : IcMTracking,
 			possible_apis : apis.tracking,
 			type          : 'link',

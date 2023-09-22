@@ -6,29 +6,29 @@ const useRedirectFn = () => {
 	const { push } = useRouter();
 	const redirectArchivedList = (activeTab) => {
 		push(
-			'/saas/tools/air-ocean-tracking/list/archive/[trackingType]?isArchived=true',
-			`/saas/tools/air-ocean-tracking/list/archive/${activeTab}?isArchived=true`,
+			'/saas/tracking/list/archive/[trackingType]?isArchived=true',
+			`/saas/tracking/list/archive/${activeTab}?isArchived=true`,
 		);
 	};
 
 	const redirectToTracker = ({ type, id, isFirst = false, fromDashBoard = false }) => {
 		push(
-			`/saas/tools/air-ocean-tracking/list/[trackingType]/
+			`/saas/tracking/list/[trackingType]/
 			[trackingId]?isFirstVisit=${isFirst}&fromDashBoard=${fromDashBoard}`,
-			`/saas/tools/air-ocean-tracking/list/${type}/${id}?isFirstVisit=${isFirst}&fromDashBoard=${fromDashBoard}`,
+			`/saas/tracking/list/${type}/${id}?isFirstVisit=${isFirst}&fromDashBoard=${fromDashBoard}`,
 		);
 	};
 
 	const redirectToList = ({ type = 'ocean' }) => {
 		push(
-			`/saas/tools/air-ocean-tracking/list?trackingType=${type}`,
-			`/saas/tools/air-ocean-tracking/list?trackingType=${type}`,
+			`/saas/tracking/list?trackingType=${type}`,
+			`/saas/tracking/list?trackingType=${type}`,
 		);
 	};
 
 	const redirectToDashboard = () => {
 		push(
-			'/saas/tools/air-ocean-tracking',
+			'/saas/tracking',
 		);
 	};
 

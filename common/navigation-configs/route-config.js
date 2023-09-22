@@ -80,6 +80,7 @@ import supplyAllocation from './config/supply-allocation';
 import supplyDashboard from './config/supply-dashboards';
 import supplyTools from './config/supply-tools';
 import ticketManagement from './config/ticket-management';
+import tracking from './config/tracking';
 import tradeParties from './config/trade-parties';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
@@ -175,6 +176,7 @@ const routeConfig = {
 	...amsSubmission,
 	...tradeParties,
 	...saas,
+	...tracking,
 };
 
 export default routeConfig;

@@ -1,7 +1,7 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // eslint-disable-next-line import/no-unresolved
-export { default } from '@cogoport/saas/page-components/AirTracking/components/TrackerDetails';
+export { default } from '@cogoport/saas/page-components/Tracking/components/List';
 
 export async function getServerSideProps({ locale }) {
 	return {
