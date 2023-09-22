@@ -37,9 +37,7 @@ const useUpdateRatesPreferences = ({
 		const AMOUNT = [];
 
 		(selectedRates).forEach((provider, index) => {
-			const totalSellValue = provider?.data?.rowData?.total_sell_price_in_preferred_currency;
-			const totalBuyValue = provider?.data?.rowData?.total_buy_price_in_preferred_currency;
-			const amount_Value = totalBuyValue - totalSellValue;
+			const profit = provider?.data?.rowData?.total_profit_in_preferred_currency;
 			const preferred_currency = provider?.data?.rowData?.preferred_currency;
 			SERVICE_PROVIDERS.push({
 				priority                    : index + INCREMENT_BY_ONE,
@@ -48,7 +46,7 @@ const useUpdateRatesPreferences = ({
 				validity_id                 : provider?.validity_id,
 				booking_confirmation_status : service?.service_type === 'air_freight_service' ? 'pending' : undefined,
 			});
-			AMOUNT.push({ amount: amount_Value, priority: index + INCREMENT_BY_ONE, currency: preferred_currency });
+			AMOUNT.push({ amount: -profit, priority: index + INCREMENT_BY_ONE, currency: preferred_currency });
 		});
 
 		let mergedAmount = {
