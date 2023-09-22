@@ -15,7 +15,9 @@
 .subheading {
 	display: flex;
 	align-items: center;
-	font-size: 0.6em;
+	font-size: var(--font-size-xl);
+
+	/* font-size: 0.6em; */
 
 	/* @media (min-width: 1024px) {
 		font-size: 0.8em;

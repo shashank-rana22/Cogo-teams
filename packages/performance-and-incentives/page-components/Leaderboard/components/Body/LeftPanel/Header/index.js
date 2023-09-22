@@ -17,7 +17,7 @@ function Header() {
 					<i>Cogo India</i>
 				</div>
 
-				<Button size="md" themeType="link">
+				<Button size="md" themeType="linkUi">
 					Expand All
 					{' '}
 					<IcMArrowRight width={16} height={16} />
