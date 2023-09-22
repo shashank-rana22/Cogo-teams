@@ -2308,8 +2308,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'ihls-lead_data_pipeline',
 					title         : t('common:lead_enrichment_dashboard'),
-					href          : '/ihls/lead-data-pipeline',
-					as            : '/ihls/lead-data-pipeline',
+					href          : '/v2/ihls/lead-data-pipeline',
+					as            : '/v2/ihls/lead-data-pipeline',
 					type          : 'link',
 					possible_apis : [],
 					icon          : IcMDataPipeline,
