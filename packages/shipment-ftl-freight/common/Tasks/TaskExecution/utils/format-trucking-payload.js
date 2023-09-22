@@ -130,8 +130,8 @@ const formatTruckingPayload = (
 		});
 	}
 
-	if (task.task === 'upload_invoice_submission_acknowledgement') {
-		getApisData.list_shipment_services.forEach((serviceItem) => {
+	if (task?.task === 'upload_invoice_submission_acknowledgement') {
+		getApisData?.list_shipment_services?.forEach((serviceItem) => {
 			const eachServicePayload = {
 				service_id : serviceItem?.id,
 				data       : {
@@ -139,7 +139,7 @@ const formatTruckingPayload = (
 				},
 			};
 
-			rawValues.documents.forEach((documentItem) => {
+			rawValues?.documents?.forEach((documentItem) => {
 				if (documentItem?.service_id === serviceItem?.id) {
 					eachServicePayload.data.invoice_submission_details.push({
 						invoice_submission_date: documentItem?.invoice_submission_date,
@@ -151,9 +151,9 @@ const formatTruckingPayload = (
 		});
 	}
 
-	if (task.task in TASK_KEYS) {
-		const taskObj = TASK_KEYS[task.task];
-		getApisData.list_shipment_services.forEach((serviceItem) => {
+	if (task?.task in TASK_KEYS) {
+		const taskObj = TASK_KEYS[task?.task];
+		getApisData?.list_shipment_services?.forEach((serviceItem) => {
 			const eachServicePayload = {
 				service_id : serviceItem?.id,
 				data       : {
