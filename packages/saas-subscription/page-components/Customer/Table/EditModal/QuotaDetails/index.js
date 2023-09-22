@@ -1,16 +1,18 @@
 import { cl } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
 function QuotaDetails({ editModalChangeHandler, quotas = [] }) {
+	const { t } = useTranslation(['saasSubscription']);
 	return (
 		<div className={styles.container}>
 
 			<div className={cl`${styles.flex_box} ${styles.card_header}`}>
-				<div>Products</div>
-				<div>Quota</div>
+				<div>{t('saasSubscription:quota_details_product')}</div>
+				<div>{t('saasSubscription:quota_details_quota')}</div>
 			</div>
 
 			<div className={styles.scroll_container}>

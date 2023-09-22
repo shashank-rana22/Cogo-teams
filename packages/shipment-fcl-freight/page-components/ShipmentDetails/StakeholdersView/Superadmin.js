@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Pill } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
@@ -10,6 +10,7 @@ import React, { useMemo, useState } from 'react';
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
+import JobStatus from '../../../common/JobStatus';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import PurchaseInvoice from '../../../common/PurchaseInvoice';
@@ -66,9 +67,11 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 
 					<RolloverDetails />
 
-					{shipment_data?.is_job_closed
-						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
-						: null}
+					{shipment_data?.is_job_closed && (
+						<JobStatus
+							shipment_data={shipment_data}
+						/>
+					)}
 
 					<ShipmentChat />
 				</div>
@@ -129,6 +132,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 				{!isEmpty(rollover_containers) ? (
 					<RolloverRequestedModal rollover_containers={rollover_containers} />
 				) : null}
+
 			</ShipmentDetailContext.Provider>
 		</ShipmentPageContainer>
 	);

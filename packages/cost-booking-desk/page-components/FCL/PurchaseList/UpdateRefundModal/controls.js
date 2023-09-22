@@ -1,4 +1,5 @@
 import currencyCodeOptions from '@cogoport/ocean-modules/utils/currencyCode';
+import { isEmpty } from '@cogoport/utils';
 
 const PAYMENT_MODE_OPTIONS = [
 	{
@@ -9,15 +10,12 @@ const PAYMENT_MODE_OPTIONS = [
 		label : 'RTGS',
 		value : 'RTGS',
 	},
-	{
-		label : 'DEMAND DRAFT',
-		value : 'DEMAND_DRAFT',
-	},
 ];
 
 const getFormControls = ({
 	listEntities = {},
 	setBillingParty = () => {},
+	currency = '',
 }) => {
 	const billingPartyOpts = listEntities?.list?.map((item) => ({
 		...item,
@@ -35,7 +33,8 @@ const getFormControls = ({
 			value       : 'INR',
 			rules       : { required: 'Currency is required' },
 			size        : 'sm',
-			span        : 2,
+			span        : 3,
+			disabled    : !isEmpty(currency),
 		},
 		{
 			name        : 'amount',
@@ -55,7 +54,7 @@ const getFormControls = ({
 			size                  : 'sm',
 			maxDate               : Date.now(),
 			isPreviousDaysAllowed : true,
-			span                  : 6,
+			span                  : 5,
 		},
 		{
 			name        : 'payment_mode',

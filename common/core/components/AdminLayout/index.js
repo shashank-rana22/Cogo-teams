@@ -7,6 +7,8 @@ import { getFirestore } from 'firebase/firestore';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
+import useGetUnreadMails from '../../helpers/useGetUnreadMails';
+
 import AnnouncementModal from './Announcements/AnnouncementModal';
 import LeadFeedBackVoiceCallForm from './LeadFeedBackVoiceCallForm';
 import { LockScreen } from './LockScreen';
@@ -24,6 +26,9 @@ const WHITE_BACKGROUND_MAPPING = [
 	'/[partner_id]/learning/course/[course_id]',
 	'/[partner_id]/learning/course/introduction',
 	'/[partner_id]/learning/course/preview',
+	'/[partner_id]/checkout/[checkout_id]',
+	'/[partner_id]/book/[spot_search_id]',
+	'/[partner_id]/service-discovery',
 ];
 
 function AdminLayout({
@@ -73,11 +78,13 @@ function AdminLayout({
 	const isTnCModalVisible = Object.keys(partnerData).includes('is_joining_tnc_accepted')
 									&& is_joining_tnc_accepted === false;
 
+	useGetUnreadMails({ firestore, agentId: user_id });
+
 	return (
 		<div className={cl`
 			${styles.container} 
 			${showTopbar ? styles.has_topbar : ''} 
-			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg}
+			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg} 
 			${showNavbar ? styles.has_navbar : ''}`}
 		>
 			<main className={styles.children_container}>{children}</main>
@@ -102,6 +109,8 @@ function AdminLayout({
 					pinnedNavs={pinnedNavs}
 					mobileShow={showMobileNavbar}
 					inCall={inCall}
+					userId={user_id}
+					firestore={firestore}
 				/>
 			) : null}
 			<VoiceCall

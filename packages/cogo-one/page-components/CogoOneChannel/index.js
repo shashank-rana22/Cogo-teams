@@ -8,12 +8,13 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
-import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR } from '../../constants';
+import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR, FIREBASE_TABS } from '../../constants';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
 import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
+import useGetSignature from '../../hooks/useGetSignature';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
@@ -60,6 +61,7 @@ function CogoOne() {
 	const [sendBulkTemplates, setSendBulkTemplates] = useState(false);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
+	const [mailAttachments, setMailAttachments] = useState([]);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -70,17 +72,13 @@ function CogoOne() {
 	});
 
 	const {
-		viewType: initialViewType = '',
-		loading: workPrefernceLoading = false,
+		viewType: initialViewType = '', loading: workPrefernceLoading = false,
 		userSharedMails = [],
 	} = useAgentWorkPrefernce();
 
-	const {
-		fetchWorkStatus = () => {},
-		agentWorkStatus = {},
-		preferenceLoading = false,
-	} = useGetAgentPreference();
+	const { fetchWorkStatus = () => {}, agentWorkStatus = {}, preferenceLoading = false } = useGetAgentPreference();
 
+	const { signature } = useGetSignature();
 	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
 
 	const { suggestions = [] } = useListChatSuggestions();
@@ -101,11 +99,17 @@ function CogoOne() {
 		viewType,
 		userSharedMails,
 		activeMail    : activeTab?.data,
-		setActiveMail : (val) => {
-			setActiveTab((prev) => ({ ...prev, data: val }));
+		setActiveMail : ({ val = {}, tab = '', expandSideBar }) => {
+			setActiveTab((prev) => ({ ...prev, data: val, tab, expandSideBar }));
 		},
 		userId,
 		userName,
+		resetEmailState: () => {
+			setEmailState({ ...DEFAULT_EMAIL_STATE, body: signature });
+			setMailAttachments([]);
+		},
+		setMailAttachments,
+		mailAttachments,
 	};
 
 	const commonProps = {
@@ -122,7 +126,7 @@ function CogoOne() {
 	const { user_id = '', lead_user_id = '' } = tabData || {};
 
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
-	const orgId = activeTab?.tab === 'message'
+	const orgId = FIREBASE_TABS.includes(activeTab?.tab)
 		? formattedMessageData?.organization_id
 		: activeTab?.data?.organization_id;
 
@@ -134,7 +138,6 @@ function CogoOne() {
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
 			const auth = getAuth();
-
 			signInWithCustomToken(auth, token).catch((error) => {
 				console.error(error.message);
 			});

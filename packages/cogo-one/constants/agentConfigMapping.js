@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMAgentManagement, IcMLock } from '@cogoport/icons-react';
+import { IcMAgentManagement, IcMClock } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
 const AGENT_CONFIG_MAPPING = [
@@ -9,9 +9,19 @@ const AGENT_CONFIG_MAPPING = [
 		icon  : <IcMAgentManagement width={40} height={40} />,
 	},
 	{
-		label : 'Lock Screen',
-		name  : 'lock_configuration',
-		icon  : <IcMLock width={40} height={40} />,
+		label : 'Fire Base',
+		name  : 'fire_base_configuration',
+		icon  : <Image
+			src={GLOBAL_CONSTANTS.image_url.firebase_configuration}
+			height={44}
+			width={44}
+			alt="fire-base-configuration"
+		/>,
+	},
+	{
+		label : 'Shift Configuration',
+		name  : 'shift_configuration',
+		icon  : <IcMClock width={40} height={40} />,
 	},
 	{
 		label : 'Agents Status',

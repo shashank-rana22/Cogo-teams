@@ -1,7 +1,7 @@
-const airFreightControls = [
+const airFreightControls = (t = () => {}) => [
 	{
 		name           : 'origin_airport_id',
-		label          : 'Origin Airport',
+		label          : t('airBookingDesk:label_origin_airport'),
 		type           : 'location-select',
 		optionsListKey : 'locations',
 		params         : {
@@ -17,7 +17,7 @@ const airFreightControls = [
 	},
 	{
 		name           : 'destination_airport_id',
-		label          : 'Destination Airport',
+		label          : t('airBookingDesk:label_destination_airport'),
 		type           : 'location-select',
 		optionsListKey : 'locations',
 		params         : {
@@ -33,17 +33,17 @@ const airFreightControls = [
 	},
 	{
 		name        : 'trade_type',
-		label       : 'Trade Type',
+		label       : t('airBookingDesk:label_trade_type'),
 		type        : 'select',
-		placeholder : 'Select Trade type',
+		placeholder : t('airBookingDesk:placeholder_trade_type'),
 		className   : 'primary md',
 		options     : [
 			{
-				label : 'Import',
+				label : t('airBookingDesk:trade_type_import'),
 				value : 'import',
 			},
 			{
-				label : 'Export',
+				label : t('airBookingDesk:trade_type_export'),
 				value : 'export',
 			},
 		],
@@ -52,33 +52,33 @@ const airFreightControls = [
 	},
 	{
 		name        : 'state',
-		label       : 'State',
+		label       : t('airBookingDesk:label_state'),
 		type        : 'select',
-		placeholder : 'Select State',
+		placeholder : t('airBookingDesk:placeholder_state'),
 		className   : 'primary md',
 		options     : [
 			{
-				label : 'Awaiting service provider confirmation',
+				label : t('airBookingDesk:state_awaiting_confirmation'),
 				value : 'awaiting_service_provider_confirmation',
 			},
 			{
-				label : 'Confirmed by service provider',
+				label : t('airBookingDesk:state_confirmed_by_service_provider'),
 				value : 'confirmed_by_service_provider',
 			},
 			{
-				label : 'Cargo handed over at origin',
+				label : t('airBookingDesk:state_cargo_handed_over_at_origin'),
 				value : 'cargo_handed_over_at_origin',
 			},
 			{
-				label : 'Flight departed',
+				label : t('airBookingDesk:state_flight_departed'),
 				value : 'flight_departed',
 			},
 			{
-				label : 'Flight arrived',
+				label : t('airBookingDesk:state_flight_arrived'),
 				value : 'flight_arrived',
 			},
 			{
-				label : 'Cargo handed over at destination',
+				label : t('airBookingDesk:state_cargo_handed_over_at_destination'),
 				value : 'cargo_handed_over_at_destination',
 			},
 		],
@@ -86,4 +86,5 @@ const airFreightControls = [
 		span        : 6,
 	},
 ];
+
 export default airFreightControls;

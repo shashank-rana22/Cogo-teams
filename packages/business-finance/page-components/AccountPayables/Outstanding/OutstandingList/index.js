@@ -5,10 +5,13 @@ import { IcMDownload, IcMRadioLoader } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useGetBillsList from '../../Invoices/hooks/useGetBillsList';
 import useGetDownloadReport from '../../Invoices/hooks/useGetDownloadReport';
 import { getDetails } from '../constants/details';
+import useGetOrganizationUsers from '../hooks/useGetOrganizationUsers';
+import useHistorySettlement from '../hooks/useGetSettlement';
 
-import StatsOutstanding from './StatsOutstanding/index';
+import StatsOutstanding from './StatsOutstanding';
 import styles from './styles.module.css';
 import TAB_OPTIONS from './TabOptions';
 import UserDetails from './UserDetails';
@@ -65,23 +68,78 @@ function OutstandingList({
 		selfOrganizationId = '',
 	} = item || {};
 
+	const { generateInvoice = () => { }, loading: generating = false } = useGetDownloadReport({
+		globalFilters:
+			{ organizationId },
+	});
+
+	const {
+		billsData = {},
+		billsLoading = false,
+		billsFilters = {},
+		setBillsFilters = () => { },
+		orderBy = {},
+		setOrderBy = () => { },
+	} = useGetBillsList({ activeTab: 'all', organizationId, showElement });
+
+	const {
+		data = {}, loading = false, filters = {},
+		setFilters = () => { }, apiData = {}, refetch = () => { },
+	} = useHistorySettlement({ organizationId, showElement });
+
+	const {
+		organizationData = {},
+		param = {},
+		setParam = () => { },
+		loading: orgLoader = false,
+	} = useGetOrganizationUsers({
+		organizationId: selfOrganizationId,
+		showElement,
+	});
+
 	const propsData = {
 		invoice_details: {
 			organizationId,
 			entityCode,
 			showName: false,
+			billsData,
+			billsLoading,
+			billsFilters,
+			setBillsFilters,
+			orderBy,
+			setOrderBy,
 		},
 		settlement: {
 			organizationId,
 			entityCode,
+			data,
+			loading,
+			filters,
+			setFilters,
+			apiData,
+			refetch,
 		},
 		organization_users: {
 			organizationId : selfOrganizationId,
 			orgData        : item,
+			organizationData,
+			param,
+			setParam,
+			orgLoader,
 		},
 	};
 
-	const { generateInvoice = () => { }, loading: generating = false } = useGetDownloadReport({});
+	const newStatsMap = {
+		invoice_details    : billsData,
+		settlement         : data,
+		organization_users : organizationData,
+	};
+
+	const loaderMap = {
+		invoice_details    : billsLoading,
+		settlement         : loading,
+		organization_users : orgLoader,
+	};
 
 	return (
 		<div
@@ -198,7 +256,13 @@ function OutstandingList({
 						>
 							{(TAB_OPTIONS || []).map(
 								({ key, name, component: Component }) => (
-									<TabPanel key={key} name={key} title={name}>
+									<TabPanel
+										key={key}
+										name={key}
+										title={name}
+										badge={loaderMap[key] ? '...'
+											: newStatsMap[key]?.totalRecords || newStatsMap[key]?.total || DEFAULT_LEN}
+									>
 										{activeTab ? (
 											<Component {...propsData[activeTab]} />
 										) : null}

@@ -32,7 +32,7 @@ function InvoicingPartyDetail({
 	const RESTRICTED_ENTITY_IDS = [];
 
 	Object.entries(ENTITY_MAPPING).forEach(([key, value]) => (
-		ENTITY_FEATURE_MAPPING[key]?.feature_supported?.includes('freight_sales_invoice_restricted_enitity')
+		ENTITY_FEATURE_MAPPING[key]?.feature_supported?.includes('freight_sales_invoice_restricted_entity')
 			? RESTRICTED_ENTITY_IDS.push(value.id) : null));
 
 	return (

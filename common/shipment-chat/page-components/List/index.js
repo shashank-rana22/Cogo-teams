@@ -26,7 +26,7 @@ function List({
 	user_id = '',
 	setSeenLoading = () => { },
 }) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
 	const refOuter = useRef(null);
 	const [id, setId] = useState('');
@@ -37,7 +37,7 @@ function List({
 		total      : 0,
 		total_page : 0,
 	});
-	const [filters, setFilters] = useState({ page: 1 });
+	const [filters, setFilters] = useState({ page: 1, q: shipment_data?.serial_id });
 	const { page = 1, q } = filters || {};
 
 	const getListPayload = {
@@ -47,7 +47,7 @@ function List({
 			status            : STATUS_MAPPING[status],
 			q,
 		},
-		sort_by: status === 'recent' ? 'created_at' : undefined,
+		sort_by: status === 'recent' ? 'updated_at' : undefined,
 	};
 	const states = { list, setList };
 	const { listData, total_page, loading } = useGetShipmentChatList({ payload: getListPayload, states });
@@ -77,6 +77,7 @@ function List({
 	let unSeenMsg = [];
 	unSeenMsg = messageContentArr.filter((item) => item[user_id]);
 	const unreadDataList = unSeenMsg?.map((obj) => obj?.channel_details);
+	unreadDataList.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
 	const channelList = showUnreadChat ? unreadDataList : listData;
 
 	const handleClick = () => {
@@ -99,8 +100,11 @@ function List({
 			total      : 0,
 			total_page : 0,
 		});
-		setFilters({ page: 1 });
-	}, [status, setFilters]);
+		setFilters({
+			page : 1,
+			q    : shipment_data?.serial_id,
+		});
+	}, [status, setFilters, shipment_data?.serial_id]);
 
 	return (
 		<div className={styles.list_container}>
@@ -113,6 +117,7 @@ function List({
 					setFilters={setFilters}
 					showUnreadChat={showUnreadChat}
 					handleClick={handleClick}
+					shipment_data={shipment_data}
 				/>
 
 				<ListBody

@@ -26,7 +26,6 @@
 .styled_heading {
 	display: flex;
 	align-items: center;
-	font-size: 13px;
 	font-weight: 600;
 }
 
@@ -89,12 +88,32 @@
 	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
 }
 
+.padding_total {
+	padding-top: 20px;
+}
+
 .empty_container {
 	min-width: 16%;
 }
 
+.financial {
+	margin-left: 12px;
+	font-weight: 600;
+}
+
+.year {
+	margin-left: 4px;
+	font-size: 8px;
+	font-weight: 600;
+}
+
+.month {
+	margin-left: 4px;
+	font-size: 10px;
+	color: #09f;
+}
+
 .stats_lable {
-	font-size: 14px;
 	font-weight: 600;
 }
 

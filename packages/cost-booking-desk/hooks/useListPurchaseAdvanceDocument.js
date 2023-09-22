@@ -8,6 +8,8 @@ import CostBookingDeskContext from '../context/CostBookingDeskContext';
 
 const INIT_PAGE = 1;
 
+const APPROVED_STATUS = 'APPROVED';
+
 const getParams = ({
 	query = '',
 	pagination = INIT_PAGE,
@@ -25,8 +27,7 @@ const getParams = ({
 	};
 };
 
-function useListPurchaseAdvanceDocument({ show = {} }) {
-	const { searchValue = '' } = show;
+function useListPurchaseAdvanceDocument({ searchValue = '', modalData = {} }) {
 	const {
 		activeTab = '',
 		paymentActiveTab = '',
@@ -36,17 +37,27 @@ function useListPurchaseAdvanceDocument({ show = {} }) {
 		newScopeFilters = {},
 	} = useContext(CostBookingDeskContext);
 
+	const { statusFilter } = modalData;
+
 	const [pagination, setPagination] = useState(INIT_PAGE);
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const extraFilters = paymentActiveTab === 'refunds_and_settlements' ? { status: 'APPROVED' } : {};
+	const extraFilters = paymentActiveTab === 'payment_request'
+		? {
+			status: !isEmpty(statusFilter)
+				? [statusFilter] : undefined,
+		} : {
+			status     : APPROVED_STATUS,
+			reconciled : !isEmpty(statusFilter)
+				? statusFilter : undefined,
+		};
 
 	const [{ loading, data }, trigger] = useRequestBf({
 		url     : '/purchase/advance-document/list-csd-advance-documents',
 		method  : 'GET',
 		authKey : 'get_purchase_advance_document_list_csd_advance_documents',
-		params  : getParams({ query, pagination, extraFilters }),
+		params  : getParams({ query, pagination, extraFilters, statusFilter, paymentActiveTab }),
 	}, { manual: false });
 
 	const documentListIds = useMemo(() => (data?.list || []).map((item) => item?.advanceDocumentId), [data?.list]);

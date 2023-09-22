@@ -48,3 +48,8 @@
 	margin-bottom: 6px;
 	font-size: 12px;
 }
+
+.required_field::after {
+	color: var(--color-primary-error-red-2);
+	content: " *";
+}

@@ -1,12 +1,13 @@
 function collectionPartyRejectCheckboxList(
 	{
-		organizationName,
-		beneficiaryName,
-		bankName,
-		accountNumber,
-		ifscCode,
-		registrationNumber,
-		taxNumber,
+		organizationName = '',
+		beneficiaryName = '',
+		bankName = '',
+		accountNumber = '',
+		ifscCode = '',
+		registrationNumber = '',
+		taxNumber = '',
+		swiftCode = '',
 	},
 ) {
 	return [
@@ -22,7 +23,7 @@ function collectionPartyRejectCheckboxList(
 		},
 		{ name: 'Bank Name', value: 'Bank Name', label: `Bank Name - ${bankName}` },
 		{ name: 'Account Number', value: 'Account Number', label: `Account Number - ${accountNumber}` },
-		{ name: 'IFSC', value: 'IFSC', label: `IFSC - ${ifscCode}` },
+		{ name: 'IFSC', value: 'IFSC', label: `IFSC - ${ifscCode || swiftCode}` },
 		{ name: 'PAN Number', value: 'PAN Number', label: `PAN Number - ${registrationNumber || ''}` },
 		{ name: 'GST Number', value: 'GST Number', label: `GST Number - ${taxNumber}` },
 

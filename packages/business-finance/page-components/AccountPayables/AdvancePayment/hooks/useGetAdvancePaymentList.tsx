@@ -2,6 +2,7 @@ import { Toast, Checkbox } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { format } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
@@ -45,13 +46,16 @@ const useGetAdvancePaymentList = ({
 	const { user, session_type: sessionType } = UserData;
 	const { id: userId = '', name } = user || {};
 	const [filters, setFilters] = useState({
-		search    : undefined,
-		service   : undefined,
-		pageIndex : 1,
+		search       : undefined,
+		service      : undefined,
+		documentType : undefined,
+		dateRange    : { startDate: undefined, endDate: undefined },
+		pageIndex    : 1,
 	});
 	const [apiData, setApiData] = useState({ list: [] });
 
-	const { search, service, pageIndex } = filters || {};
+	const { search, service, documentType, dateRange, pageIndex } = filters || {};
+	const { startDate = '', endDate = '' } = dateRange;
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const { query: urlQuery } = useSelector(({ general }) => ({
 		query: general.query,
@@ -140,11 +144,17 @@ const useGetAdvancePaymentList = ({
 				await trigger({
 					params: {
 						pageIndex,
-						pageSize    : 10,
-						hasPayrun   : false,
-						q           : query !== '' ? query : undefined,
-						entityCode  : activeEntity || entity,
-						serviceType : service || undefined,
+						pageSize            : 10,
+						hasPayrun           : false,
+						q                   : query !== '' ? query : undefined,
+						entityCode          : activeEntity || entity,
+						serviceType         : service || undefined,
+						advanceDocumentType : documentType || undefined,
+						startDate           : startDate && endDate
+							? format(startDate, "yyyy-MM-dd'T'HH:mm:sso", {}, false) : undefined,
+
+						endDate: endDate && startDate
+							? format(endDate, "yyyy-MM-dd'T'HH:mm:sso", {}, false) : undefined,
 						currency,
 						...sort,
 					},
@@ -162,6 +172,9 @@ const useGetAdvancePaymentList = ({
 		sort,
 		entity,
 		currency,
+		documentType,
+		startDate,
+		endDate,
 	]);
 
 	useEffect(() => {
@@ -324,20 +337,18 @@ const useGetAdvancePaymentList = ({
 		});
 	};
 
-	const getTableHeaderCheckbox = () => {
+	function TableHeaderCheckbox() {
 		const { list = [] } = apiData || {};
 		const { list: dataList = [] } = data || {};
 		const isCheckedLength = list.filter((value) => value?.checked).length;
 		const isAllRowsChecked = isCheckedLength === dataList.length;
 		return (
-			<div className={styles.checkbox_style}>
-				<Checkbox
-					checked={isAllRowsChecked && !loading}
-					onChange={onChangeTableHeaderCheckbox}
-				/>
-			</div>
+			<Checkbox
+				checked={isAllRowsChecked && !loading}
+				onChange={onChangeTableHeaderCheckbox}
+			/>
 		);
-	};
+	}
 
 	const onChangeTableBodyCheckbox = (itemData: ItemProps) => {
 		const { advanceDocumentId = '' } = itemData || {};
@@ -359,7 +370,7 @@ const useGetAdvancePaymentList = ({
 			return prevData;
 		});
 	};
-	const getTableBodyCheckbox = (itemData: ItemProps) => {
+	function TableBodyCheckbox(itemData: ItemProps) {
 		const { advanceDocumentId = '' } = itemData || {};
 		const { list = [] } = apiData || {};
 		const isChecked = list.find(
@@ -367,12 +378,14 @@ const useGetAdvancePaymentList = ({
 		)?.checked;
 
 		return (
-			<Checkbox
-				checked={isChecked}
-				onChange={() => onChangeTableBodyCheckbox(itemData)}
-			/>
+			<div className={styles.checkbox_style}>
+				<Checkbox
+					checked={isChecked}
+					onChange={() => onChangeTableBodyCheckbox(itemData)}
+				/>
+			</div>
 		);
-	};
+	}
 
 	return {
 		data,
@@ -383,9 +396,9 @@ const useGetAdvancePaymentList = ({
 		submitSelectedInvoices,
 		selectedData,
 		selectedDataLoading,
-		getTableBodyCheckbox,
+		getTableBodyCheckbox   : TableBodyCheckbox,
 		apiData,
-		getTableHeaderCheckbox,
+		getTableHeaderCheckbox : TableHeaderCheckbox,
 		viewSelectedData,
 		viewSelectedDataLoading,
 		getViewSelectedInvoices,

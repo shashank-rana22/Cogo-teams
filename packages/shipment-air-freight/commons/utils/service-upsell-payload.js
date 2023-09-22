@@ -1,4 +1,5 @@
 import { HAZ_CLASSES } from '@cogoport/globalization/constants/commodities';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const TYPE_NUMBER_FIELDS = ['length', 'width', 'height', 'packages_count', 'package_weight', 'trucks_count'];
 
@@ -29,6 +30,8 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 		commodity_details,
 		packages,
 	} = primary_service || {};
+
+	const { commodity_subtype = '', commodity_type = '' } = commodity_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const common = {
 		commodity : commodity !== 'all_commodity' ? commodity : 'general',
@@ -61,18 +64,33 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 		}];
 	}
 
+	if (search_type === 'warehouse') {
+		return [{
+			location_id              : formValues?.location_id,
+			expected_cargo_gated_in  : formValues?.expected_cargo_gated_in,
+			expected_cargo_gated_out : formValues?.expected_cargo_gated_out || undefined,
+			packages_count           : Number(packages_count || SINGLE_PACKAGE),
+			commodity_sub_type       : commodity_subtype,
+			packages,
+			commodity_type,
+			...common,
+		}];
+	}
+
 	if (search_type === 'ltl_freight') {
 		if (trade_type === 'export') {
 			return [{
-				origin_location_id : formValues?.location_id,
+				origin_location_id      : formValues?.location_id,
+				destination_location_id : primary_service?.origin_airport?.id,
 				destination_country_id,
 				...common,
-				commodity          : HAZ_CLASSES.includes(commodity) ? commodity : null,
-				packages           : formValues?.packages?.map((obj) => formattedAsNumberData(obj)),
+				commodity               : HAZ_CLASSES.includes(commodity) ? commodity : null,
+				packages                : formValues?.packages?.map((obj) => formattedAsNumberData(obj)),
 			}];
 		}
 		return [{
 			destination_location_id : formValues?.location_id,
+			origin_location_id      : primary_service?.destination_airport?.id,
 			origin_country_id,
 			...common,
 			commodity               : HAZ_CLASSES.includes(commodity) ? commodity : null,

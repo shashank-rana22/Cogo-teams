@@ -3,6 +3,7 @@ export const INNER_TAB_MAPPING = [
 	{ title: 'Domestic', name: 'NORMAL' },
 	{ title: 'Overseas', name: 'OVERSEAS' },
 	{ title: 'Adv.Payment', name: 'ADVANCE_PAYMENT' },
+	{ title: 'Overheads', name: 'OVERHEADS' },
 ];
 export const PAID_INNER_TAB_MAPPING = [
 	{ title: 'Domestic', name: 'NORMAL' },
@@ -20,6 +21,7 @@ export const RIBBON_VALUE_MAPPING = {
 	NORMAL          : 'DOMESTIC',
 	OVERSEAS        : 'OVERSEAS',
 	ADVANCE_PAYMENT : 'Adv.Payment',
+	OVERHEADS       : 'OVERHEADS',
 };
 export const INVOICE_DATA_MAPPING = [
 	{ id: 1, label: 'Customer Information' },

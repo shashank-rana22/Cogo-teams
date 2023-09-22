@@ -12,6 +12,7 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const LAST_ITEM = 1;
 const FALLBACK_VALUE = 0;
+const LIMIT = 10;
 
 export function snapshotCleaner({ ref }) {
 	const tempRef = ref;
@@ -49,11 +50,12 @@ export function mountFlashChats({
 	setCarouselState = () => {},
 	updateLoadingState = () => {},
 	workPrefernceLoading = false,
+	listOnlyMails = false,
 }) {
 	const snapshotRef = flashMessagesSnapShotListener;
 	snapshotCleaner({ ref: flashMessagesSnapShotListener });
 
-	if (!VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.claim_chats || workPrefernceLoading) {
+	if (!VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.claim_chats || workPrefernceLoading || listOnlyMails) {
 		return;
 	}
 
@@ -61,11 +63,16 @@ export function mountFlashChats({
 	setFlashMessagesData({});
 
 	try {
+		const claimAgentTypeQuery = viewType === 'cogoone_admin'
+			? [] : [where('claim_chat_agent_type', '==', viewType)];
+
 		const newChatsQuery = query(
 			omniChannelCollection,
 			where('session_type', '==', 'bot'),
 			where('can_claim_chat', '==', true),
+			...claimAgentTypeQuery,
 			orderBy('updated_at', 'desc'),
+			limit(LIMIT),
 		);
 
 		snapshotRef.current = onSnapshot(
@@ -93,18 +100,18 @@ export function mountFlashChats({
 export function mountPinnedSnapShot({
 	setLoadingState, pinSnapshotListener, setListData, userId,
 	omniChannelCollection, queryForSearch, canShowPinnedChats, omniChannelQuery, viewType,
-	activeSubTab, updateLoadingState, workPrefernceLoading, listOnlyMails,
+	activeSubTab, updateLoadingState, workPrefernceLoading,
 }) {
 	const snapshotRef = pinSnapshotListener;
 	snapshotCleaner({ ref: pinSnapshotListener });
 
 	setListData((prev) => ({ ...prev, pinnedMessagesData: {}, messagesListData: {} }));
 
-	if (!listOnlyMails
-		&& (activeSubTab !== 'all'
+	if (
+		activeSubTab !== 'all'
 			|| viewType === 'shipment_specialist'
 			|| !canShowPinnedChats
-			|| workPrefernceLoading)
+			|| workPrefernceLoading
 	) {
 		return;
 	}

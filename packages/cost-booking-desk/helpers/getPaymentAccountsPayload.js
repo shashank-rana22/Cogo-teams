@@ -10,6 +10,8 @@ const getPaymentAccountsPayload = ({
 		advanceDocumentSellerBankDetail = {},
 		advanceDocumentId = '',
 		shipmentType = '',
+		jobNumber = '',
+		serviceProvider = '',
 	} = data || {};
 
 	const { accountNumber = '', bankName = '' } = advanceDocumentSellerBankDetail || {};
@@ -36,12 +38,14 @@ const getPaymentAccountsPayload = ({
 		payMode           : payment_mode,
 		remarks,
 		utr               : utr_number,
-		accMode           : 'AP',
+		accMode           : 'CSD',
 		bankAccountNumber : accountNumber,
 		bankName,
 		bankId            : id,
 		tradePartyMappingId,
 		advanceDocumentId,
+		jobNumber,
+		serviceProvider,
 		paymentDocUrl     : upload?.finalUrl || upload,
 		serviceType       : shipmentType?.toUpperCase(),
 		createdBy         : user_id,

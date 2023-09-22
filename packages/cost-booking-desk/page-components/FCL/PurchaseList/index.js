@@ -23,8 +23,9 @@ function PurchaseList() {
 
 	const [searchValue, setSearchValue] = useState('');
 	const [modalData, setModalData] = useState({
-		data : {},
-		type : '',
+		data         : {},
+		type         : '',
+		statusFilter : '',
 	});
 
 	const {
@@ -32,7 +33,7 @@ function PurchaseList() {
 		data = {},
 		pagination = INIT_PAGE,
 		setPagination = () => {},
-	} = useListPurchaseAdvanceDocument({ searchValue });
+	} = useListPurchaseAdvanceDocument({ searchValue, modalData });
 
 	const { list = [], totalRecords = INIT_RECORDS } = data || {};
 
@@ -43,6 +44,8 @@ function PurchaseList() {
 			<Header
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
+				modalData={modalData}
+				setModalData={setModalData}
 			/>
 			{loading ? <Loader /> : (
 				<div className={styles.table_container}>
@@ -51,15 +54,17 @@ function PurchaseList() {
 						data={list}
 					/>
 					{isEmpty(list) ? <EmptyState /> : null}
-					<div className={styles.footer}>
-						<Pagination
-							type="table"
-							currentPage={pagination}
-							totalItems={totalRecords}
-							pageSize={PAGE_LIMIT}
-							onPageChange={setPagination}
-						/>
-					</div>
+					{totalRecords > PAGE_LIMIT ? (
+						<div className={styles.footer}>
+							<Pagination
+								type="table"
+								currentPage={pagination}
+								totalItems={totalRecords}
+								pageSize={PAGE_LIMIT}
+								onPageChange={setPagination}
+							/>
+						</div>
+					) : null}
 				</div>
 			)}
 

@@ -1,5 +1,5 @@
 {
-    "features":["shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "sales", "documents", "emails", "tracking"],  
+    "features":["shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "sales", "documents", "tracking"],  
     "timeline": {
         "can_edit": true,
         "editable_fields": ["cargo_handed_over_at_origin_at"]
@@ -19,9 +19,6 @@
     },
     "documents":{
         "tab_title":"Documents"
-    },
-    "emails":{
-        "tab_title":"Emails"
     },
     "edit_params": {
         "can_edit": true
@@ -49,5 +46,6 @@
         "can_edit":["notifying_party","invoicing_party","self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],
         "add_external_import_poc":true,
         "add_external_export_poc":true
-    }
+    },
+    "job_open_request": true
 }

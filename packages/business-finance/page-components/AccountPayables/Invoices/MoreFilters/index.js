@@ -11,11 +11,20 @@ import styles from './styles.module.css';
 
 const FILTER_LENGTH = 3;
 
-function FilterModal({ filters = {}, setFilters = () => {}, filterlen = FILTER_LENGTH }) {
+function FilterModal({
+	filters = {},
+	setFilters = () => { },
+	filterLength = FILTER_LENGTH,
+	onClear = () => {},
+}) {
 	const [showModal, setShowModal] = useState(false);
-	const [modalFilters, setModalFilters] = useState({});
-	const { currency = '' } = modalFilters || {};
+	const [modalFilters, setModalFilters] = useState({
+		currency    : filters?.currency,
+		invoiceType : filters?.invoiceType || undefined,
+		entity      : filters?.entity,
+	});
 
+	const { currency = '' } = modalFilters || {};
 	const handleClose = () => {
 		setShowModal(false);
 	};
@@ -77,9 +86,17 @@ function FilterModal({ filters = {}, setFilters = () => {}, filterlen = FILTER_L
 										pageIndex   : 1,
 										pageSize    : 10,
 										invoiceView : filters?.invoiceView || '',
-										category    : filters?.category || '',
+										category    : undefined,
+										currency    : '',
+										entity      : filters?.entity || '',
+										invoiceType : undefined,
 									});
-									setModalFilters({});
+									onClear();
+									setModalFilters({
+										currency   : '',
+										urgencyTag : [],
+										services   : [],
+									});
 									setShowModal(false);
 								}}
 							>
@@ -111,8 +128,8 @@ function FilterModal({ filters = {}, setFilters = () => {}, filterlen = FILTER_L
 					<IcMFilter />
 				</span>
 				{Object.keys(filters)?.filter((key) => ((key !== 'category')
-					&& (!isEmpty(filters?.[key])))).length > filterlen
-					? <IcCRedCircle height={8} width={8} /> : null}
+					&& (!isEmpty(filters?.[key])))).length > filterLength
+					&& <IcCRedCircle height={8} width={8} />}
 			</div>
 		</div>
 	);

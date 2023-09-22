@@ -2,7 +2,6 @@ import { Button, TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -47,6 +46,7 @@ interface OutstandingListProps {
 	outStandingFilters?: object;
 	formFilters?: object;
 	organizationId?: string;
+	setSelectedOrgId?: any;
 }
 
 function OutstandingList({
@@ -54,8 +54,8 @@ function OutstandingList({
 	entityCode = '',
 	showElement = false,
 	organizationId = '',
+	setSelectedOrgId = () => {},
 }: OutstandingListProps) {
-	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('invoice_details');
 	const [showLedgerModal, setShowLedgerModal] = useState(false);
 
@@ -126,14 +126,6 @@ function OutstandingList({
 			</div>
 		);
 	}
-
-	const handleViewDetailClick = () => {
-		router.push(
-			`/business-finance/account-receivables/outstanding/
-			viewOrgDetail/?orgSerialId=${organizationSerialId}&entityCode=${entityCode}
-			&organizationId=${organizationId}`,
-		);
-	};
 
 	return (
 		<div
@@ -264,16 +256,18 @@ function OutstandingList({
 					</div>
 					<div className={styles.ledger_style}>
 						<Tooltip content="Ledger Download" placement="top">
-							<IcMDownload
-								className={styles.download_icon_div}
-								onClick={() => setShowLedgerModal(true)}
-							/>
+							<div className={styles.download_icon_div}>
+								<IcMDownload
+									fill="black"
+									onClick={() => setShowLedgerModal(true)}
+								/>
+							</div>
 						</Tooltip>
 						{!showElement && (
 							<Button
 								size="md"
 								style={{ marginLeft: '20px' }}
-								onClick={() => handleViewDetailClick()}
+								onClick={() => setSelectedOrgId(item)}
 							>
 								View Details
 							</Button>
@@ -284,7 +278,6 @@ function OutstandingList({
 				<div className={styles.org_list}>
 					<StatsOutstanding item={item} />
 				</div>
-
 				{showElement && (
 					<Tabs
 						activeTab={activeTab}

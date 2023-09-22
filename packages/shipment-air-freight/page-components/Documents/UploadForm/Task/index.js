@@ -10,7 +10,7 @@ function Task({ showDoc = {}, setShowDoc = () => {}, refetch = () => {} }) {
 
 	const {
 		shipment_data, primary_service,
-		servicesList, getShipmentTimeline = () => {}, getShipment = () => {},
+		servicesList, getShipmentTimeline = () => {},
 	} = useContext(ShipmentDetailContext);
 	const handleClick = () => {
 		setShowDoc({});
@@ -24,7 +24,6 @@ function Task({ showDoc = {}, setShowDoc = () => {}, refetch = () => {} }) {
 				taskListRefetch={refetch}
 				shipment_data={shipment_data}
 				getShipmentTimeline={getShipmentTimeline}
-				getShipment={getShipment}
 				primary_service={primary_service}
 				servicesList={servicesList}
 			/>

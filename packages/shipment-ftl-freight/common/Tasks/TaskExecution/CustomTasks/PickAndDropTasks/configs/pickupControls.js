@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const DELAYED_PICKUP_REASONS = [
 	{ label: 'Pickup Address Not Found', value: 'Pickup Address Not Found' },
 	{ label: 'Pickup Address Incorrect', value: 'Pickup Address Incorrect' },
@@ -5,23 +7,32 @@ const DELAYED_PICKUP_REASONS = [
 	{ label: 'Others', value: 'others' },
 ];
 
-const getControls = (item, dateObj) => {
+const getControls = (item) => {
+	const onlyDate = GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'];
+	const onlyTime = GLOBAL_CONSTANTS.formats.time['HH:mm:ss aaa'];
+	const dateFormat = `${onlyDate} ${onlyTime}`;
+
 	const controls = [
 		{
-			name     : 'truck_number',
-			span     : 2,
-			type     : 'text',
-			label    : 'Truck Number',
-			value    : item?.truck_number,
-			disabled : true,
+			name  : 'truck_number',
+			span  : 2,
+			type  : 'text',
+			label : 'Truck Number',
+			value : item?.truck_number,
+			rules : {
+				required: {
+					value   : true,
+					message : 'Truck Number is required',
+				},
+			},
+			disabled: true,
 		},
 		{
 			name                  : 'loading_date',
 			span                  : 3,
 			type                  : 'datepicker',
 			label                 : 'Loading Date',
-			minDate               : dateObj?.loadingMinDate,
-			maxDate               : dateObj?.loadingMaxDate,
+			dateFormat,
 			showTimeSelect        : true,
 			usePortal             : true,
 			placeholder           : 'Select',
@@ -38,9 +49,8 @@ const getControls = (item, dateObj) => {
 					message : 'Cargo picked up at is required',
 				},
 			},
-			minDate               : dateObj?.pickupMinDate,
-			usePortal             : true,
 			placeholder           : 'Select',
+			dateFormat,
 			showTimeSelect        : true,
 			isPreviousDaysAllowed : true,
 		},
@@ -75,7 +85,6 @@ const getControls = (item, dateObj) => {
 			span  : 2,
 			type  : 'textarea',
 			label : 'Remark',
-			rules : dateObj?.DELAYED_PICKUP_REMARK_RULES,
 		},
 	];
 	return controls;

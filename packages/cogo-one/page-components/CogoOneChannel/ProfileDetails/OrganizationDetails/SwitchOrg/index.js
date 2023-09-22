@@ -1,12 +1,39 @@
-import { Popover, Select, Button } from '@cogoport/components';
+import { Popover, Select, Button, cl } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMapping';
-import { getOrgOptions } from '../../../../../helpers/switchOrgHelpers';
 import useSwitchOrganization from '../../../../../hooks/useSwitchOrganization';
 
 import styles from './styles.module.css';
+
+function RenderLabel({ item = {} }) {
+	const { business_name = '', serial_id, kyc_status = '' } = item || {};
+
+	return (
+		<div className={styles.label_wrapper}>
+			<div className={styles.label}>
+				{startCase(business_name)}
+			</div>
+			<div className={styles.sub_label}>
+				{serial_id ? (
+					<div className={styles.serial_id}>
+						ID:
+						{' '}
+						{serial_id}
+					</div>
+				) : null}
+				<div className={cl`${styles.tag} ${kyc_status === 'verified'
+					? styles.verified
+					: styles.not_verified}`}
+				>
+					{kyc_status !== 'verified' ? 'Not verified' : 'Verified'}
+				</div>
+			</div>
+		</div>
+	);
+}
 
 function PopoverContent({
 	loading = false,
@@ -25,8 +52,11 @@ function PopoverContent({
 				<Select
 					value={selectedOrg}
 					onChange={setSelectedOrg}
-					size="sm"
-					options={getOrgOptions({ organizations }) || []}
+					size="md"
+					options={organizations || []}
+					labelKey="business_name"
+					valueKey="organization_id"
+					renderLabel={(item) => <RenderLabel item={item} />}
 				/>
 			</div>
 			<div className={styles.footer_flex}>

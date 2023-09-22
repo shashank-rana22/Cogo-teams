@@ -6,6 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
+import { FIREBASE_TABS } from '../../../../constants';
 import { getHasAccessToEditGroup, switchUserChats } from '../../../../helpers/agentDetailsHelpers';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
@@ -22,8 +23,6 @@ import GroupMembersRequests from './GroupMembersRequests';
 import Profile from './Profile';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
-
-const ENABLE_SHARE_BUTTON_FOR = ['message', 'firebase_emails'];
 
 const handleClick = ({ id, channel_type }) => {
 	const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
@@ -69,9 +68,7 @@ function AgentDetails({
 
 	const { partnerUsers } = useListPartnerUsers({ activeMessageCard });
 	const {
-		deleteGroupMember,
-		approveGroupRequest,
-		deleteGroupRequest,
+		deleteGroupMember, approveGroupRequest, deleteGroupRequest,
 		addGroupMember,
 	} = useGroupChat({ activeMessageCard, firestore });
 
@@ -150,11 +147,21 @@ function AgentDetails({
 	const handleSummary = () => { setShowMore(true); setActiveSelect('user_activity'); };
 
 	const setActiveMessage = (val) => { switchUserChats({ val, firestore, setActiveTab }); };
-
 	if (!userId && !leadUserId && !mobile_no) {
 		return (
 			<>
-				<div className={styles.title}>Profile</div>
+				<div className={styles.flex_div}>
+					<div className={styles.title}>Profile</div>
+					{FIREBASE_TABS.includes(activeTab) && (
+						<div
+							role="presentation"
+							className={styles.copy_link}
+							onClick={() => handleClick({ id, channel_type })}
+						>
+							Share
+						</div>
+					)}
+				</div>
 				<EmptyState
 					type="profile"
 					user_type={user_type}
@@ -170,14 +177,13 @@ function AgentDetails({
 			</>
 		);
 	}
-
 	return (
 		<>
 			<div className={styles.top_div}>
 
 				<div className={styles.title}>Profile</div>
 				<div className={styles.quick_actions}>
-					{ENABLE_SHARE_BUTTON_FOR.includes(activeTab) && (
+					{FIREBASE_TABS.includes(activeTab) && (
 						<div
 							role="presentation"
 							className={styles.copy_link}
@@ -186,7 +192,6 @@ function AgentDetails({
 							Share
 						</div>
 					)}
-
 				</div>
 			</div>
 
@@ -194,7 +199,7 @@ function AgentDetails({
 
 			<ContactVerification leadUserId={leadUserId} userId={userId} loading={getUserLoading} userData={userData} />
 
-			{(activeTab === 'message' && !getUserLoading && !orgLoading)
+			{(FIREBASE_TABS.includes(activeTab) && !getUserLoading && !orgLoading)
 			&& (
 				<AgentQuickActions
 					userEmail={userEmail}

@@ -3,6 +3,7 @@ import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import AllInvoices from './All_Invoices/index';
+import AutoJobClosure from './AutoJobClosure/index';
 import Dashboard from './Dashboard';
 import usePurchaseViewStats from './hook/getPurchaseViewStats';
 import Rejected from './Rejected';
@@ -10,11 +11,12 @@ import styles from './styles.module.css';
 
 function CoeFinance() {
 	const { query, push } = useRouter();
-	const [filters, setFilters] = useState({ timePeriod: 'day' });
+	const [filters, setFilters] = useState<any>({ timePeriod: 'day' });
 	const { statsData, statsCOEApprovedData, statsLoading } = usePurchaseViewStats({ filters });
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
 	const handleTabChange = (tab:string) => {
 		setActiveTab(tab);
+		setFilters({});
 		push(
 			'/business-finance/coe-finance/[active_tab]',
 			`/business-finance/coe-finance/${tab}`,
@@ -55,6 +57,9 @@ function CoeFinance() {
 
 					<TabPanel name="rejected" title="Rejected">
 						<Rejected statsData={statsData} />
+					</TabPanel>
+					<TabPanel name="auto_job_closure" title="Auto-Job Closure">
+						<AutoJobClosure />
 					</TabPanel>
 				</Tabs>
 			</div>

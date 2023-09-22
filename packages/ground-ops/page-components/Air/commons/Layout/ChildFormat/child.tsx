@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -20,33 +21,33 @@ function Child({
 	error,
 }) {
 	let rowWiseFields = [];
-	const totalFields = [];
+	const TOTAL_FIELDS = [];
 	let span = 0;
 	controls.forEach((fields) => {
 		span += fields.span || 11;
 		if (span === 11) {
 			rowWiseFields.push(fields);
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
 			span = 0;
 		} else if (span < 11) {
 			rowWiseFields.push(fields);
 		} else {
-			totalFields.push(rowWiseFields);
+			TOTAL_FIELDS.push(rowWiseFields);
 			rowWiseFields = [];
 			rowWiseFields.push(fields);
 			span = fields.span;
 		}
 	});
 	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
 	return (
 		<div className={styles.fieldarray} key={field.id}>
-			{totalFields.map((fields) => (
-				<div className={styles.row}>
-					{fields.map((controlItem) => {
+			{Object.keys(TOTAL_FIELDS).map((rowfield) => (
+				<div key={rowfield} className={styles.row}>
+					{TOTAL_FIELDS[rowfield].map((controlItem) => {
 						const Element = getElementController(controlItem.type);
 
 						const errorOriginal = getErrorMessage({
@@ -54,23 +55,22 @@ function Child({
 							rules : controlItem?.rules,
 							label : controlItem?.label,
 						});
-						const extraProps:NestedObj = {};
+						const EXTRA_PROPS: NestedObj = {};
 						if (controlItem.customProps?.options) {
-							extraProps.options = controlItem.customProps.options[index];
+							EXTRA_PROPS.options = controlItem.customProps.options[index];
 						}
 						const flex = ((controlItem?.span || 12) / 12) * 100 - 1;
 						if (!Element) return null;
 						return (
-							<div className={styles.element} style={{ width: `${flex}%` }}>
-								<h4 style={{
-									height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
-								}}
+							<div key={controlItem.name} className={styles.element} style={{ width: `${flex}%` }}>
+								<div className={cl`${styles.label} 
+								${controlItem?.rules?.required ? styles.required_field : ''}`}
 								>
 									{controlItem?.label}
-								</h4>
+								</div>
 								<Element
 									{...controlItem}
-									{...extraProps}
+									{...EXTRA_PROPS}
 									style={{ minWidth: '0px' }}
 									key={`${name}.${index}.${controlItem.name}`}
 									name={`${name}.${index}.${controlItem.name}`}

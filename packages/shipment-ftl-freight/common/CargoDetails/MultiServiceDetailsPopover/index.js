@@ -5,16 +5,19 @@ import RenderCargoPills from '../RenderCargoPills';
 
 import styles from './styles.module.css';
 
+const ONE = 1;
+const ZERO = 0;
+
 function MultiServiceDetailsPopover({
 	children = {},
 	mainServices = [],
 }) {
-	if (mainServices?.length <= 1) {
+	if (mainServices?.length <= ONE) {
 		return null;
 	}
 
-	const renderBody = () => (
-		mainServices.map((item, idx) => (idx !== 0 ? (
+	const RenderBody = () => (
+		mainServices.map((item, idx) => (idx !== ZERO ? (
 			<div className={styles.container} key={item.id}>
 				<RenderCargoPills detail={item} />
 			</div>
@@ -25,7 +28,7 @@ function MultiServiceDetailsPopover({
 			theme="light"
 			placement="bottom"
 			interactive
-			content={renderBody()}
+			content={(<RenderBody />)}
 		>
 			<div className={styles.tooltip_customise}>
 				{children}

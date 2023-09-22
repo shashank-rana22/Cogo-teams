@@ -33,6 +33,7 @@ function ComposeEmailBody(props) {
 		[...new Set([
 			...getUserActiveMails({ userEmailAddress, viewType }),
 			...(userSharedMails || []),
+			...([emailState?.from_mail || activeMailAddress]),
 		])]
 	).map(
 		(curr) => ({ label: curr, value: curr }),
@@ -103,7 +104,14 @@ function ComposeEmailBody(props) {
 									className={styles.uploaded_files}
 									key={fileName}
 								>
-									<div className={styles.uploaded_files_content}>
+									<div
+										className={styles.uploaded_files_content}
+										role="presentation"
+										onClick={(e) => {
+											e.stopPropagation();
+											window.open(data, '_blank');
+										}}
+									>
 										{fileIcon}
 										<div className={styles.content_div}>
 											{fileName}
