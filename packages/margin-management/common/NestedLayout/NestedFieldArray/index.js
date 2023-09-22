@@ -15,7 +15,7 @@ const TOTAL_SPAN = 12;
 
 function NestedFieldArray({
 	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
-	showElements = {},
+	showElements = {}, customFieldArrayControls = {},
 }) {
 	const { controls = [], name, addButtonText = '' } = ctrl || {};
 
@@ -32,7 +32,6 @@ function NestedFieldArray({
 
 					{controls.map((nestCtrl) => {
 						const { type = '', name:ctrlItemName, span, ...restCtrl } = nestCtrl;
-
 						if (['fieldArray', 'nestedFieldArray'].includes(type)) {
 							return (
 								<div key={field.id} className={styles.nested_container}>
@@ -47,6 +46,7 @@ function NestedFieldArray({
 										name={name}
 										formValues={formValues}
 										showElements={showElements}
+										customFieldArrayControls={customFieldArrayControls?.[name]}
 									/>
 								</div>
 							);
