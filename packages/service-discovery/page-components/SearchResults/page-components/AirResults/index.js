@@ -1,7 +1,7 @@
 import Comparison from '../../common/Comparison';
 
 import ListRates from './components/ListRates';
-import SelectedRate from './components/SelectedRate';
+import SelectedRateCard from './components/SelectedRateCard';
 
 function AIRResults({
 	rates = [],
@@ -67,7 +67,7 @@ function AIRResults({
 			},
 		},
 		selectedCardScreen: {
-			component : SelectedRate,
+			component : SelectedRateCard,
 			props     : {
 				headerProps,
 				setHeaderProps,

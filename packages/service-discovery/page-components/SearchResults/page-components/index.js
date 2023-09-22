@@ -151,6 +151,7 @@ function SearchResults() {
 	const { service_type = '' } = detail;
 
 	const ActiveComponent = COMPONENT_MAPPING[service_type];
+
 	if (!ActiveComponent) return null;
 
 	return (

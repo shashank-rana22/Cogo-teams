@@ -31,9 +31,9 @@ function ListRates({
 	setSelectedWeek = () => {},
 	paginationProps = {},
 	contract_detail = {},
-	// infoBanner = {},
-	// setInfoBanner = () => {},
-	// isGuideViewed = false,
+	infoBanner = {},
+	setInfoBanner = () => {},
+	isGuideViewed = false,
 	routerLoading = false,
 	setRouterLoading = () => {},
 }) {
@@ -130,6 +130,9 @@ function ListRates({
 						setComparisonRates={setComparisonRates}
 						comparisonRates={comparisonRates}
 						routerLoading={routerLoading}
+						showGuide={!index && !isGuideViewed}
+						infoBanner={infoBanner}
+						setInfoBanner={setInfoBanner}
 					/>
 
 					{index === GLOBAL_CONSTANTS.zeroth_index ? (

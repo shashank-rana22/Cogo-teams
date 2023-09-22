@@ -8,8 +8,8 @@ const getSearchResultsPayload = ({
 	rateCardData = {},
 }) => {
 	const {
-		destination_cargo_handling_type = '',
-		origin_cargo_handling_type = '',
+		export_transportation_pickup_type = '',
+		import_transportation_pickup_type = '',
 	} = additionalFormInfo;
 
 	const rate_card_id = rateCardData?.id;
@@ -20,15 +20,15 @@ const getSearchResultsPayload = ({
 		return {
 			spot_search_id,
 			service:
-				origin_cargo_handling_type === 'stuffing_at_factory'
-					? 'trailer_freight'
-					: 'ftl_freight',
-			...(origin_cargo_handling_type === 'stuffing_at_factory'
+			export_transportation_pickup_type === 'ltl_freight'
+				? 'ltl_freight'
+				: 'ftl_freight',
+			...(export_transportation_pickup_type === 'ltl_freight'
 				? {
-					trailer_freight_services_attributes: getServiceWisePayload({
+					ltl_freight_services_attributes: getServiceWisePayload({
 						additionalFormInfo,
 						detail,
-						service_name: 'trailer_freight',
+						service_name: 'ltl_freight',
 						tradeType,
 					}),
 				}
@@ -47,15 +47,15 @@ const getSearchResultsPayload = ({
 		return {
 			spot_search_id,
 			service:
-				destination_cargo_handling_type !== 'destuffing_at_dock'
-					? 'trailer_freight'
+				import_transportation_pickup_type === 'ltl_freight'
+					? 'ltl_freight'
 					: 'ftl_freight',
-			...(destination_cargo_handling_type !== 'destuffing_at_dock'
+			...(import_transportation_pickup_type === 'ltl_freight'
 				? {
-					trailer_freight_services_attributes: getServiceWisePayload({
+					ltl_freight_services_attributes: getServiceWisePayload({
 						additionalFormInfo,
 						detail,
-						service_name: 'trailer_freight',
+						service_name: 'ltl_freight',
 						tradeType,
 					}),
 				}
@@ -76,8 +76,8 @@ const getSearchResultsPayload = ({
 
 	const serviceWiseValues = getServiceWisePayload({
 		additionalFormInfo,
-		detail,
-		service_name: finalServiceName,
+		detail       : { ...rateCardData, ...detail },
+		service_name : finalServiceName,
 		tradeType,
 	});
 

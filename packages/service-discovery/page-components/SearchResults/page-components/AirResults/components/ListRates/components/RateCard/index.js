@@ -11,11 +11,12 @@ function RateCard({
 	detail = {},
 	comparisonRates = {},
 	setComparisonRates = () => {},
-	// infoBanner = {},
-	// showGuide = false,
 	isSelectedCard = false,
 	index = 0,
 	setRouterLoading = () => {},
+	infoBanner = {},
+	showGuide = false,
+	setInfoBanner = () => {},
 }) {
 	return (
 		<div
@@ -30,6 +31,9 @@ function RateCard({
 				comparisonRates={comparisonRates}
 				setComparisonRates={setComparisonRates}
 				isSelectedCard={isSelectedCard}
+				infoBanner={infoBanner}
+				showGuide={showGuide}
+				setInfoBanner={setInfoBanner}
 			/>
 
 			<Body
