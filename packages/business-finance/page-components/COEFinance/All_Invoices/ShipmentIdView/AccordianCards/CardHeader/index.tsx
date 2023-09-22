@@ -1,3 +1,4 @@
+import { Toggle } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
@@ -16,19 +17,36 @@ interface PropsType {
 	itemData: ItemProps;
 	amountTab: string;
 	setAmountTab: Function;
+	showTab?: boolean;
+	shipmentIdView?: boolean;
+	isCheckoutQuote?: boolean;
+	setIsCheckoutQuote?: any;
 }
 
-function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
+function CardHeader({
+	amountTab = '',
+	setAmountTab = () => {},
+	itemData = {},
+	showTab = false,
+	shipmentIdView = true,
+	isCheckoutQuote = false,
+	setIsCheckoutQuote = () => {},
+}: PropsType) {
 	const {
 		discountAppliedKam,
 		discountAppliedRevenueDesk,
 		jobStatus,
 	} = itemData || {};
 
-	const options = [
+	let options = [
 		{ name: 'Expense', value: 'expense' },
 		{ name: 'Income', value: 'income' },
 	];
+
+	if (!shipmentIdView) {
+		options = [{ name: 'Sell Quote', value: 'sellQuote' },
+			{ name: 'Buy Quote', value: 'buyQuote' }, ...options];
+	}
 
 	return (
 		<div className={styles.container}>
@@ -77,6 +95,14 @@ function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
 					<div className={styles.status_value}>{toTitleCase(jobStatus)}</div>
 				</div>
 			)}
+			{showTab && amountTab === 'sellQuote' ? (
+				<Toggle
+					size="sm"
+					onLabel="Checkout"
+					offLabel="Current"
+					onChange={() => setIsCheckoutQuote(!isCheckoutQuote)}
+				/>
+			) : null}
 		</div>
 	);
 }

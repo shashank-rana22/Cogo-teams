@@ -7,6 +7,7 @@ import { incomeConfig } from '../configurations/ShipmentIdView/incomeConfig';
 import quotationConfig from '../configurations/ShipmentIdView/quotationConfig.json';
 
 import useGetFiniteList from './useGetFiniteList';
+import useGetQuotation from './useGetQuotationBill';
 
 interface DataType {
 	currentPage: number;
@@ -21,7 +22,8 @@ interface AllParams {
 	jobType?:string;
 	status?: string;
 	amountTab?: string;
-	setDataCard:Function
+	setDataCard:Function;
+	isCheckoutQuote?:boolean;
 }
 interface Profile {
 	authorizationparameters?: string;
@@ -40,6 +42,11 @@ const useListBills = (allParams) => {
 			authorizationparameters: profile?.authorizationparameters,
 		}),
 	);
+	const { getQuotationData, quotationLoading, quoteData } = useGetQuotation({
+		jobNumber       : params?.jobNumber,
+		amountTab       : params?.amountTab,
+		isCheckoutQuote : params?.isCheckoutQuote,
+	});
 
 	if (authorizationparameters?.split(':')?.[1] === 'across_all') {
 		let check = true;
@@ -106,8 +113,10 @@ const useListBills = (allParams) => {
 	});
 
 	const API_MAPPING = {
-		expense : listExpenseInvoicesApi,
-		income  : listSalesInvoicesApi,
+		expense   : listExpenseInvoicesApi,
+		income    : listSalesInvoicesApi,
+		sellQuote : getQuotationData,
+		buyQuote  : getQuotationData,
 	};
 
 	const currentApi = API_MAPPING[params?.amountTab];
@@ -138,7 +147,7 @@ const useListBills = (allParams) => {
 
 	const config = CONFIG_MAPPING[params?.amountTab];
 
-	const apiLoading = loading || billsApiLoading || invoicesApiLoading;
+	const apiLoading = loading || billsApiLoading || invoicesApiLoading || quotationLoading;
 
 	return {
 		loading : apiLoading,
@@ -150,6 +159,7 @@ const useListBills = (allParams) => {
 		setQ,
 		q,
 		config,
+		quoteData,
 	};
 };
 
