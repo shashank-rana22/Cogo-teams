@@ -4,9 +4,11 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
-import NEXT_LEVEL_MAPPING from '../constants/next-level-mapping';
+import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
 
-const useGetScoringReports = () => {
+const useGetScoringReports = (props) => {
+	const { dateRange, entity } = props;
+
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
@@ -16,7 +18,6 @@ const useGetScoringReports = () => {
 	const [searchValue, setSearchValue] = useState('');
 	const [currLevel, setCurrLevel] = useState([NEXT_LEVEL_MAPPING[`${view}_report`], '']);
 	const [levelStack, setLevelStack] = useState([]);
-
 	const [params, setParams] = useState({
 		page                    : 1,
 		page_limit              : 10,
@@ -25,48 +26,41 @@ const useGetScoringReports = () => {
 		add_current_user_report : true,
 		sort_by                 : 'rank',
 		sort_type               : 'asc',
-
-		filters: {
+		filters                 : {
 			report_type: currLevel[GLOBAL_CONSTANTS.zeroth_index],
 		},
 	});
 
-	const [{ data, loading }, refetch] = useAllocationRequest({
+	const [{ data, loading }] = useAllocationRequest({
 		url     : '/reports',
 		method  : 'GET',
 		authkey : 'get_agent_scoring_reports',
 		params,
 	}, { manual: false });
 
-	const { list = [], current_user_data: currentUserData, ...paginationData } = data || {};
-
-	const getNextPage = (nextPage) => {
-		setParams((previousParams) => ({
-			...previousParams,
-			page: nextPage,
-		}));
-	};
+	const { list = [], current_user_data: currentUserData } = data || {};
 
 	useEffect(() => {
 		setParams((previousParams) => ({
 			...previousParams,
 			filters: {
 				...(previousParams.filters || {}),
+				q                       : searchQuery || undefined,
+				created_at_greater_than : dateRange?.startDate || undefined,
+				created_at_less_than    : dateRange?.endDate || undefined,
+				partner_id              : entity || undefined,
 			},
 		}));
-	}, [searchQuery]);
+	}, [searchQuery, dateRange, entity]);
 
 	return {
 		params,
 		setParams,
 		loading,
 		list,
-		paginationData,
-		getNextPage,
 		debounceQuery,
 		searchValue,
 		setSearchValue,
-		refetch,
 		currLevel,
 		setCurrLevel,
 		levelStack,

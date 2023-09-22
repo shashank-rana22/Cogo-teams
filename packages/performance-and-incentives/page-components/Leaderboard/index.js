@@ -2,10 +2,17 @@ import EmptyState from './common/EmptyState';
 import FetchingLeaderboard from './common/FetchingLeaderboard';
 import Body from './components/Body';
 import Header from './components/Header';
-import useGetLeaderboardView from './hooks/useGetLeaderboardView';
+import useGetLeaderboardView from './useGetLeaderboardView';
 
 function Leaderboard() {
-	const { loading, viewData } = useGetLeaderboardView();
+	const {
+		loading,
+		viewData,
+		entity,
+		setEntity,
+		dateRange,
+		setDateRange,
+	} = useGetLeaderboardView();
 
 	if (loading) {
 		return <FetchingLeaderboard />;
@@ -25,9 +32,9 @@ function Leaderboard() {
 
 	return (
 		<>
-			<Header />
+			<Header dateRange={dateRange} setDateRange={setDateRange} entity={entity} setEntity={setEntity} />
 
-			<Body />
+			<Body dateRange={dateRange} entity={entity} />
 		</>
 	);
 }
