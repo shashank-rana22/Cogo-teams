@@ -32,7 +32,6 @@ function LeaderboardFilters(props) {
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.toggle_container}>
 				<Toggle
 					name="mode"
@@ -44,7 +43,6 @@ function LeaderboardFilters(props) {
 			</div>
 
 			<div className={styles.inner_container}>
-
 				<Filters
 					controls={controls}
 					open={showFilters}
@@ -57,7 +55,7 @@ function LeaderboardFilters(props) {
 					<Button
 						themeType="secondary"
 						type="button"
-						size="lg"
+						size="md"
 						onClick={() => setShowFilters(!showFilters)}
 					>
 						<div style={{ fontSize: '16px' }}>Filter</div>
@@ -76,7 +74,7 @@ function LeaderboardFilters(props) {
 
 				<div className={styles.search_container}>
 					<SearchInput
-						size="md"
+						size="sm"
 						placeholder="Search by Name"
 						debounceQuery={debounceQuery}
 						value={searchValue}
