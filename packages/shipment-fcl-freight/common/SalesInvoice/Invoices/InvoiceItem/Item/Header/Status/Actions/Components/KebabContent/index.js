@@ -27,7 +27,9 @@ function KebabContent({
 		),
 	);
 
-	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+	const { serial_id = '', is_cogo_assured = false } = shipment_data || {};
+
+	const showForOldShipments = serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
@@ -42,7 +44,7 @@ function KebabContent({
 	const commonActions = invoice?.status !== 'approved'
 	&& !disableAction;
 
-	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
+	const editInvoicesVisiblity = (is_cogo_assured !== true && !invoice?.is_igst)
 	|| [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
 		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 
@@ -66,6 +68,7 @@ function KebabContent({
 									commonActions={commonActions}
 									editInvoicesVisiblity={editInvoicesVisiblity}
 									showCancelOptions={showCancelOptions}
+									shipment_data={shipment_data}
 								/>
 							)}
 							onClickOutside={() => setShow(false)}
