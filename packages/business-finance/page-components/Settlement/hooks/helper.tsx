@@ -66,15 +66,7 @@ export 	const powerControls = (newControls, bankData, accountMode) => newControl
 				],
 			};
 		}
-		if (accountMode === 'CSD') {
-			return {
-				...controlValue,
-				options: [
-					{ label: 'Payment', value: 'PAYMENT' },
-				],
-			};
-		}
-		if (accountMode === 'PDA') {
+		if (accountMode === 'CSD' || accountMode === 'PDA') {
 			return {
 				...controlValue,
 				options: [
