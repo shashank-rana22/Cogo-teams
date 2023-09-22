@@ -16,5 +16,13 @@
 }
 
 .port {
-	margin-right: 10px;
+	max-width: 60px;
+	max-height: 25px;
+	margin: 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.teus {
+	margin: 10px 20px;
 }

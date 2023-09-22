@@ -61,7 +61,7 @@ function Service({ item = {}, service_data = {} }) {
 		? LocationPairs
 		: Locations;
 
-	if (loading) return <Loader />;
+	if (loading) return <Loader themeType="secondary" />;
 	return (
 		<div className={styles.container}>
 			<div className={styles.request_title}>Requested service</div>

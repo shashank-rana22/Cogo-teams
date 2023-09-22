@@ -3,9 +3,10 @@ import { useForm } from '@cogoport/forms';
 
 import Layout from '../../../../common/Layout';
 import { PORT_PAIR_SERVICES } from '../../../../common/SERVICES';
+import getLocationPairs from '../../../../helpers/getLocationPairs';
 import useUpdateOrganizationService from '../../../../hooks/useUpdateOrganizationService';
 
-import getControls from './getControls';
+import services from './controls';
 
 function AddServices({
 	service_type = '',
@@ -14,9 +15,8 @@ function AddServices({
 	setIsEdit = () => { },
 	locations_prefill = [],
 	service_data = {},
-	// data = {},
 }) {
-	const controls = getControls({ organization_id: org_id });
+	const controls = services({ organization_id: org_id })[service_type] || [];
 	const {
 		control, formValues: { errors = {} } = {},
 		handleSubmit,
@@ -49,23 +49,7 @@ function AddServices({
 		const formattedData = {
 			service_data: { [fieldKey]: locations },
 		};
-		const locationPairs = formattedData?.service_data?.location_pairs.map((item) => {
-			const keys = Object.keys(item);
-			if (keys.includes('location_id')) {
-				return {
-					location_id : item?.location_id,
-					trade_type  : item?.trade_type,
-					total_teus  : item?.total_teus,
-					user_id     : item?.user_id,
-				};
-			}
-			return {
-				origin_location_id      : item?.origin_location_id,
-				destination_location_id : item?.destination_location_id,
-				total_teus              : item?.total_teus,
-				user_id                 : item?.user_id,
-			};
-		});
+		const locationPairs = getLocationPairs({ data: formattedData });
 		formattedData.service_data.location_pairs = locationPairs;
 		formattedData.service_data = { ...service_data, ...formattedData.service_data };
 
