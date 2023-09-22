@@ -39,10 +39,6 @@
 	color: var(--color-secondary-2);
 }
 
-.button_container {
-	display: flex;
-}
-
 .filter_container {
 	display: flex;
 	gap: 8px;
