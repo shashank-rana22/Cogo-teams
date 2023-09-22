@@ -9,7 +9,7 @@ function useGetLeaderboardView() {
 
 	return {
 		loading,
-		data,
+		viewData: data,
 
 	};
 }

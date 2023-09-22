@@ -2,23 +2,28 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useGetScoringReports = () => {
+import NEXT_LEVEL_MAPPING from '../constants/next-level-mapping';
+
+const useGetScoringReports = ({ viewData = '' }) => {
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
+	const [view] = viewData.split('_');
+
 	const [searchValue, setSearchValue] = useState('');
-	const [currLevel, setCurrLevel] = useState('');
+	const [currLevel, setCurrLevel] = useState(`${view}_report`);
 	const [levelStack, setLevelStack] = useState([]);
 
 	const [params, setParams] = useState({
-		page               : 1,
-		page_limit         : 10,
-		user_data_required : true,
-		role_data_required : true,
-		sort_by            : 'rank',
-		sort_type          : 'asc',
+		page                    : 1,
+		page_limit              : 10,
+		user_data_required      : true,
+		role_data_required      : true,
+		add_current_user_report : true,
+		sort_by                 : 'rank',
+		sort_type               : 'asc',
 
 		filters: {
-			report_type: 'kam_report',
+			report_type: NEXT_LEVEL_MAPPING[currLevel],
 		},
 	});
 

@@ -4,24 +4,25 @@ import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import styles from './styles.module.css';
 
-function Body() {
+function Body({ viewData = '' }) {
 	const {
 		list,
 		params,
 		setParams,
-		// loading,
+		loading,
 		// refetch,
 		currLevel,
 		setCurrLevel,
 		// levelStack,
 		setLevelStack,
-	} = useGetScoringReports();
+	} = useGetScoringReports({ viewData });
 
 	return (
 		<div className={styles.container}>
 			<LeftPanel
 				list={list}
 				params={params}
+				loading={loading}
 				setParams={setParams}
 				currLevel={currLevel}
 				setCurrLevel={setCurrLevel}

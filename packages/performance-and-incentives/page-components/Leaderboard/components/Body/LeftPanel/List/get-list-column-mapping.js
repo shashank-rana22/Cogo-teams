@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -93,7 +94,7 @@ const getListColumnMapping = ({ params = {}, setParams = () => {} }) => {
 				),
 			accessor: ({ percentile }) => (isEmpty(percentile) ? null : (
 				<div>
-					{percentile}
+					{percentile.toFixed(GLOBAL_CONSTANTS.two)}
 					%
 				</div>
 			)),

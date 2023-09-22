@@ -3,6 +3,7 @@ import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
 import Header from './Header';
 import LeaderboardFilters from './LeaderboardFilters';
 import List from './List';
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function LeftPanel(props) {
@@ -10,6 +11,7 @@ function LeftPanel(props) {
 		list,
 		params,
 		setParams,
+		loading,
 		currLevel,
 		setCurrLevel,
 		setLevelStack,
@@ -34,9 +36,14 @@ function LeftPanel(props) {
 		<div className={styles.container}>
 			<Header />
 
-			<LeaderboardFilters />
+			{loading ? <LoadingState /> : (
+				<>
+					<LeaderboardFilters />
 
-			<List list={list} params={params} setParams={setParams} handleClick={handleClick} />
+					<List list={list} params={params} setParams={setParams} handleClick={handleClick} />
+				</>
+			)}
+
 		</div>
 	);
 }

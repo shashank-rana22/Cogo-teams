@@ -4,13 +4,13 @@ import Header from './components/Header';
 import useGetLeaderboardView from './hooks/useGetLeaderboardView';
 
 function Leaderboard() {
-	const { loading, data } = useGetLeaderboardView();
+	const { loading, viewData } = useGetLeaderboardView();
 
 	if (loading) {
 		return <FetchingLeaderboard />;
 	}
 
-	if (!data) {
+	if (!viewData) {
 		return 'nothing';
 	}
 
@@ -18,7 +18,7 @@ function Leaderboard() {
 		<>
 			<Header />
 
-			<Body />
+			<Body viewData={viewData} />
 		</>
 	);
 }
