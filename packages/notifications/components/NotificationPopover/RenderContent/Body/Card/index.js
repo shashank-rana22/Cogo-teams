@@ -7,11 +7,9 @@ import styles from './styles.module.css';
 function Card({
 	item = {},
 	handleNotificationClick = () => {},
-	setShow = () => {},
 }) {
 	const handleClick = () => {
 		handleNotificationClick(item);
-		setShow(false);
 	};
 
 	const handleKeyDown = (e) => {
@@ -36,8 +34,7 @@ function Card({
 		<div
 			className={styles.container}
 			onClick={handleClick}
-			role="button"
-			tabIndex={0}
+			role="presentation"
 			onKeyDown={handleKeyDown}
 		>
 			<div className={styles.space_between}>

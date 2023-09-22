@@ -17,8 +17,8 @@ import SwitchAccounts from './SwitchAccounts';
 // import ThemeToggle from './ThemeToggle';
 
 function Navbar({
-	className,
-	style,
+	className = '',
+	style = {},
 	nav = [],
 	partner_user_id = '',
 	pinnedNavs = [],

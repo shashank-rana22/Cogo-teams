@@ -9,7 +9,6 @@ function Body({
 	loading = false,
 	list = [],
 	handleNotificationClick = () => {},
-	setShowPopover = () => {},
 }) {
 	if (loading) { return <LoaderComp />; }
 
@@ -19,10 +18,9 @@ function Body({
 		<div className={styles.body_container}>
 			{list?.map((item) => (
 				<Card
-					key={item}
+					key={item?.id}
 					item={item}
 					handleNotificationClick={handleNotificationClick}
-					setShow={setShowPopover}
 				/>
 			))}
 		</div>

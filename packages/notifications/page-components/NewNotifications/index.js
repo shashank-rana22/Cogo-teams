@@ -1,11 +1,11 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo';
+// import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import navigationMapping from '@cogoport/navigation-configs/navigation-mapping-admin';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import NotificationsPopover from '../../components/NotificationPopover';
 import extractNavLinks from '../../helpers/extractNavLinks';
@@ -13,110 +13,52 @@ import notificationsRedirectLink from '../../helpers/notificationsRedirectLink';
 import showErrorsInToast from '../../utils/showErrorsInToast';
 
 function NewNotifications({
-	notificationData = {},
-	notificationLoading :loading = false,
-	trigger = () => {},
+	notificationPopover = true,
 	setNotificationPopover = () => {},
-	dataRequired,
-	setDataRequired,
-	onMarkAllAsRead,
 }) {
+	const { push } = useRouter();
+	const { t } = useTranslation(['notifications', 'common']); // ??
+	const { general } = useSelector((state) => state);
+	// const { unPrefixedPath } = general;
+	const { query: { partner_id } = {} } = general;
+	// const geo = getGeoConstants();
+	// const intervalRef = useRef(null);
+	const navigationMappingAdmin = navigationMapping({ t });
+	const NAVIGATION_LINKS = extractNavLinks(navigationMappingAdmin);
 	const { zeroth_index } = GLOBAL_CONSTANTS;
 
-	const { is_not_seen_count = zeroth_index, list = [] } = notificationData;
+	const [dataRequired, setDataRequired] = useState(false);
 
-	const { push } = useRouter();
+	const [{ data, loading }, trigger] = useRequest({
+		url    : '/list_communications',
+		method : 'get',
+	}, { manual: false });
 
-	const { t } = useTranslation(['notifications', 'common']); // ??
-
-	const { general } = useSelector((state) => state);
-
-	const { unPrefixedPath } = general;
-
-	const geo = getGeoConstants();
-
-	const intervalRef = useRef(null);
-
-	const { query: { partner_id } = {} } = general;
-
-	// const [dataRequired, setDataRequired] = useState(false);
-
-	// const [{ loading, data }, trigger] = useRequest({
-	// 	url    : '/list_communications',
-	// 	method : 'get',
-	// }, { manual: true });
-
-	// const [, triggerBulkCommunication] = useRequest({
-	// 	url    : '/bulk_update_communications',
-	// 	method : 'POST',
-	// }, { manual: true });
+	const [, triggerBulkCommunication] = useRequest({
+		url    : '/bulk_update_communications',
+		method : 'POST',
+	}, { manual: true });
 
 	const [, triggerCommunication] = useRequest({
 		url    : '/update_communication',
 		method : 'POST',
 	}, { manual: true });
 
-	const formattedData = {
-		not_seen_count: is_not_seen_count,
-		list,
-		loading,
-		trigger,
-	};
+	const { is_not_seen_count = zeroth_index, list = [] } = data || {};
 
-	const navigationMappingAdmin = navigationMapping({ t });
+	const updateAction = async (action) => {
+		try {
+			const payload = {
+				filters     : { type: 'platform_notification' },
+				action_name : action,
+			};
 
-	const NAVIGATION_LINKS = extractNavLinks(navigationMappingAdmin);
-
-	// const updateAction = async (action) => {
-	// 	try {
-	// 		const payload = {
-	// 			filters     : { type: 'platform_notification' },
-	// 			action_name : action,
-	// 		};
-
-	// 		await triggerBulkCommunication({
-	// 			data: payload,
-	// 		});
-	// 	} catch (err) {
-	// 		console.log('err updateAction', err);
-	// 		showErrorsInToast(err.data, t);
-	// 	}
-	// };
-
-	// const onShowToggle = async (show) => {
-	// 	console.log('show ', show, is_not_seen_count);
-	// 	if (show) {
-	// 		try {
-	// 			setDataRequired(true);
-	// 			await trigger({
-	// 				params: {
-	// 					data_required                  : true,
-	// 					communication_content_required : true,
-	// 					not_seen_count_required        : true,
-	// 					filters                        : { type: 'platform_notification' },
-	// 				},
-	// 			});
-	// 			if (is_not_seen_count >= zeroth_index) {
-	// 				await updateAction('seen');
-	// 			}
-	// 		} catch (err) {
-	// 			Promise.reject();
-	// 		}
-	// 	} else {
-	// 		setDataRequired(false);
-	// 		if (is_not_seen_count >= zeroth_index) {
-	// 			updateAction('seen');
-	// 		}
-	// 	}
-	// };
-
-	// const onMarkAllAsRead = () => {
-	// 	updateAction('clicked');
-	// };
-
-	const onSeeAll = () => {
-		push('/notifications');
-		setDataRequired(false);
+			await triggerBulkCommunication({
+				data: payload,
+			});
+		} catch (err) {
+			showErrorsInToast(err.data, t);
+		}
 	};
 
 	const handleNotificationClick = async (item) => {
@@ -149,30 +91,75 @@ function NewNotifications({
 		}
 	};
 
-	// Todo : Not being used to countinuesly fire trigger
+	const onShowToggle = async (show) => {
+		if (show) {
+			try {
+				setDataRequired(true);
+				await trigger({
+					params: {
+						data_required                  : true,
+						communication_content_required : true,
+						not_seen_count_required        : true,
+						filters                        : { type: 'platform_notification' },
+					},
+				});
+			} catch (err) {
+				Promise.reject();
+			}
+		} else {
+			setDataRequired(false);
+			if (is_not_seen_count >= zeroth_index) {
+				await updateAction('seen');
+			}
+		}
+	};
+
+	const onMarkAllAsRead = async () => {
+		await updateAction('clicked');
+		setNotificationPopover(false);
+	};
 
 	useEffect(() => {
-		if (!loading && (unPrefixedPath !== '/notifications' || dataRequired)) {
-			intervalRef.current = setInterval(() => {
-				try {
-					trigger({
-						params: {
-							data_required                  : dataRequired,
-							not_seen_count_required        : true,
-							filters                        : { type: 'platform_notification' },
-							communication_content_required : dataRequired,
-						},
-					});
-				} catch (err) {
-					Promise.reject(err);
-				}
-			}, geo.notification_polling_interval);
-		}
+		onShowToggle(notificationPopover);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [notificationPopover, setNotificationPopover]);
 
-		return () => {
-			clearInterval(intervalRef.current);
-		};
-	}, [loading, dataRequired, unPrefixedPath, geo.notification_polling_interval, trigger]);
+	const formattedData = {
+		not_seen_count: is_not_seen_count,
+		list,
+		loading,
+	};
+
+	const onSeeAll = () => {
+		push('/notifications');
+		setNotificationPopover(false);
+		setDataRequired(false);
+	};
+
+	// Todo : Not being used to countinuesly fire trigger
+
+	// useEffect(() => {
+	// 	if (!loading && (unPrefixedPath !== '/notifications' || dataRequired)) {
+	// 		intervalRef.current = setInterval(() => {
+	// 			try {
+	// 				trigger({
+	// 					params: {
+	// 						data_required                  : dataRequired,
+	// 						not_seen_count_required        : true,
+	// 						filters                        : { type: 'platform_notification' },
+	// 						communication_content_required : dataRequired,
+	// 					},
+	// 				});
+	// 			} catch (err) {
+	// 				Promise.reject(err);
+	// 			}
+	// 		}, geo.notification_polling_interval);
+	// 	}
+
+	// 	return () => {
+	// 		clearInterval(intervalRef.current);
+	// 	};
+	// }, [loading, dataRequired, unPrefixedPath, geo.notification_polling_interval, trigger]);
 
 	// useEffect(() => {
 	// 	onShowToggle(openNotificationPopover);
@@ -184,7 +171,6 @@ function NewNotifications({
 
 	return (
 		<NotificationsPopover
-			// onShowToggle={onShowToggle}
 			formattedData={formattedData}
 			handleNotificationClick={handleNotificationClick}
 			onMarkAllAsRead={onMarkAllAsRead}
