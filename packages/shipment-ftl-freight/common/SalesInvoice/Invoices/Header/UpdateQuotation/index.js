@@ -16,7 +16,7 @@ function UpdateQuotation({
 
 	const [show, setShow] = useState(false);
 
-	const { source = '', is_job_closed_financially = false } = shipment_data;
+	const { source = '', is_job_closed_financially = false } = shipment_data || {};
 
 	const invoiceStatus = invoiceData?.invoicing_parties.some(
 		(item) => item?.status === 'pending',
