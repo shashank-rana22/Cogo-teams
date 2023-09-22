@@ -37,7 +37,7 @@
 	display: flex;
 	flex-direction: column;
 	width: 40%;
-	height: 216px;
+	max-height: 216px;
 }
 
 .inner_div {
@@ -90,7 +90,7 @@
 .remarks_text {
 	width: 70%;
 	min-width: 300px;
-	height: 110px;
+	max-height: 110px;
 	margin-top: 5px;
 	overflow: hidden;
 	font-size: 12px;

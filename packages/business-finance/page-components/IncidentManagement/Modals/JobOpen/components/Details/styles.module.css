@@ -49,6 +49,7 @@
 .shipment_id {
 	font-weight: 500;
 	color: #f68b21;
+	text-decoration: underline;
 }
 
 .buy_sell_div {
@@ -76,4 +77,8 @@
 .required_field::after {
 	color: var(--color-primary-error-red-2);
 	content: " *";
+}
+
+.post_tax_container {
+	margin-left: 5%;
 }
