@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
@@ -5,6 +6,7 @@ import toastApiError from '../utils/toastApiError';
 
 const useGetShipmentChatList = ({ payload, states = {} }) => {
 	const { list = {}, setList = () => {} } = states;
+	const { status = '' } = payload?.filters || {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'list_chat_channels',
@@ -16,22 +18,24 @@ const useGetShipmentChatList = ({ payload, states = {} }) => {
 
 	const getShipmentChatList = useCallback(() => {
 		(async () => {
-			try {
-				const res = await trigger();
+			if (status !== 'unread') {
+				try {
+					const res = await trigger();
 
-				setList((prevState) => ({
-					data:
-						res?.data?.page <= 1
-							? res?.data?.list || []
-							: [...(prevState.data || []), ...(res?.data?.list || [])],
-					total      : res?.data?.total_count,
-					total_page : res?.data?.total,
-				}));
-			} catch (err) {
-				toastApiError(err);
+					setList((prevState) => ({
+						data:
+							res?.data?.page <= GLOBAL_CONSTANTS.one
+								? res?.data?.list || []
+								: [...(prevState.data || []), ...(res?.data?.list || [])],
+						total      : res?.data?.total_count,
+						total_page : res?.data?.total,
+					}));
+				} catch (err) {
+					toastApiError(err);
+				}
 			}
 		})();
-	}, [trigger, setList]);
+	}, [trigger, setList, status]);
 
 	useEffect(() => {
 		getShipmentChatList();
