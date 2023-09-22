@@ -2,7 +2,7 @@ import { TabPanel, Tabs, Select, Placeholder } from '@cogoport/components';
 import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { upperCase } from '@cogoport/utils';
+import { isEmpty, upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useListCogoEntities from '../../AccountPayables/Dashboard/hooks/useListCogoEntities';
@@ -25,7 +25,7 @@ interface Profile {
 function AccountReceivables() {
 	const { push, query } = useRouter();
 	const { profile }:Profile = useSelector((state) => state);
-
+	const [selectedOrgId, setSelectedOrgId] = useState({});
 	const { partner } = profile || {};
 
 	const { id: partnerId } = partner || {};
@@ -69,22 +69,22 @@ function AccountReceivables() {
 					<Placeholder width="200px" height="30px" />
 				) : (
 					<div className={styles.input}>
-
-						<Select
-							name="business_name"
-							onChange={(entityVal: string) => setEntityCode(entityVal)}
-							value={entityCode}
-							options={entityOptions}
-							placeholder="Select Entity Code"
-							size="sm"
-							disabled={entityDataCount <= 1}
-						/>
-
+						{isEmpty(selectedOrgId) ? (
+							<Select
+								name="business_name"
+								onChange={(entityVal: string) => setEntityCode(entityVal)}
+								value={entityCode}
+								options={entityOptions}
+								placeholder="Select Entity Code"
+								size="sm"
+								disabled={entityDataCount <= 1}
+							/>
+						) : null}
 					</div>
 				)}
 			</div>
 
-			<div className={styles.tabs_container}>
+			<div className={isEmpty(selectedOrgId) ? styles.tabs_container : styles.nodisplay}>
 				<Tabs
 					activeTab={receivables}
 					onChange={(val: string) => handleChange(val)}
@@ -98,7 +98,11 @@ function AccountReceivables() {
 						<Invoice entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="outstanding" title="Outstanding">
-						<Outstanding entityCode={entityCode} />
+						<Outstanding
+							entityCode={entityCode}
+							selectedOrgId={selectedOrgId}
+							setSelectedOrgId={setSelectedOrgId}
+						/>
 					</TabPanel>
 
 					<TabPanel name="defaulters" title="Defaulters">

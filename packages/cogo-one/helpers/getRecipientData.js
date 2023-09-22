@@ -1,10 +1,12 @@
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 
 const CHECK_ONE_OR_MORE_ELEMENTS = 1;
 const NULL_SUBJECT_LENGTH = 0;
 const MAXIMUM_ALLOWED_SUBJECT_LENGTH = 250;
+
+const CREATE_DRAFT_FOR = ['reply', 'reply_all'];
 
 const EMAIL_SUBJECT_PREFIX_MAPPING = {
 	reply     : 'RE',
@@ -12,10 +14,10 @@ const EMAIL_SUBJECT_PREFIX_MAPPING = {
 	forward   : 'FW',
 };
 
-export function getSubject({ subject = '', val = '' }) {
+export function getSubject({ subject = '', newButtonType = '' }) {
 	const formatedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
 
-	const emailPrefix = EMAIL_SUBJECT_PREFIX_MAPPING[val] || '';
+	const emailPrefix = EMAIL_SUBJECT_PREFIX_MAPPING[newButtonType] || '';
 
 	return (formatedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
 		? subject : `${emailPrefix}: ${formatedSubject}`;
@@ -62,6 +64,15 @@ const getReplyAllMails = ({
 	};
 };
 
+const getDraftPayload = ({ mailData, subject, activeMailAddress, msgId }) => ({
+	sender        : activeMailAddress,
+	toUserEmail   : mailData?.toUserEmail || [],
+	ccrecipients  : mailData?.ccrecipients || [],
+	bccrecipients : mailData?.bccrecipients || [],
+	msgId,
+	subject,
+});
+
 export function getRecipientData({
 	mailProps = {},
 	senderAddress = '',
@@ -74,20 +85,40 @@ export function getRecipientData({
 	emailVia = '',
 	formattedData = {},
 	eachMessage = {},
+	deleteMessage = () => {},
+	createReplyDraft = () => {},
+	createReplyAllDraft = () => {},
 }) {
 	const {
 		setButtonType = () => {},
 		setEmailState = () => {},
 		buttonType = '',
+		setMailAttachments = () => {},
 	} = mailProps || {};
+
+	const { response = {}, created_at = '', id = '', parent_email_message = {} } = eachMessage || {};
+
+	const {
+		body = '',
+		sender = '',
+		draft_type = '',
+		subject: draftSubject = '',
+		to_mails = [],
+		cc_mails = [],
+		bcc_mails = [],
+		message_id = '',
+		attachments = [],
+	} = response || {};
 
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
 	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
 	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
 
-	const handleClick = (val) => {
-		if (isDraft) {
-			Toast.error(`you cant ${startCase(val)} the draft mail`);
+	const handleClick = ({
+		buttonType: newButtonType = '',
+	}) => {
+		if (newButtonType === 'delete') {
+			deleteMessage({ timestamp: created_at, messageDocId: id });
 			return;
 		}
 
@@ -96,11 +127,35 @@ export function getRecipientData({
 			return;
 		}
 
-		setButtonType(val);
+		if (isDraft) {
+			setButtonType(draft_type);
+
+			setEmailState(
+				(prev) => ({
+					...prev,
+					emailVia,
+					body             : body || '',
+					from_mail        : sender || '',
+					subject          : draftSubject || '',
+					toUserEmail      : to_mails || [],
+					ccrecipients     : cc_mails || [],
+					bccrecipients    : bcc_mails || [],
+					formattedData,
+					eachMessage      : parent_email_message,
+					draftMessageData : eachMessage,
+				}),
+			);
+
+			setMailAttachments(attachments);
+			return;
+		}
+
+		setButtonType(newButtonType);
 
 		let mailData = {};
+		const newSubject = getSubject({ subject, newButtonType });
 
-		if (val === 'reply') {
+		if (newButtonType === 'reply') {
 			mailData = getReplyMails({
 				filteredRecipientData,
 				senderAddress,
@@ -108,7 +163,7 @@ export function getRecipientData({
 				filteredCcData,
 				filteredBccData,
 			});
-		} else if (val === 'reply_all') {
+		} else if (newButtonType === 'reply_all') {
 			mailData = getReplyAllMails({
 				filteredRecipientData,
 				senderAddress,
@@ -118,22 +173,42 @@ export function getRecipientData({
 			});
 		}
 
-		const newSubject = getSubject({ subject, val });
-
 		setEmailState(
 			(prev) => ({
 				...prev,
 				emailVia,
-				body          : '',
-				from_mail     : activeMailAddress,
-				subject       : newSubject || subject,
-				toUserEmail   : mailData?.toUserEmail || [],
-				ccrecipients  : mailData?.ccrecipients || [],
-				bccrecipients : mailData?.bccrecipients || [],
+				body             : '',
+				from_mail        : activeMailAddress,
+				subject          : newSubject || subject,
+				toUserEmail      : mailData?.toUserEmail || [],
+				ccrecipients     : mailData?.ccrecipients || [],
+				bccrecipients    : mailData?.bccrecipients || [],
 				formattedData,
 				eachMessage,
+				draftMessageData : {},
 			}),
 		);
+
+		if (CREATE_DRAFT_FOR.includes(newButtonType) && emailVia === 'firebase_emails') {
+			const payload = getDraftPayload({
+				mailData,
+				subject : newSubject || subject,
+				activeMailAddress,
+				msgId   : message_id,
+			});
+
+			const callbackFunc = ({ content }) => {
+				setEmailState(
+					(prev) => ({
+						...prev,
+						body: content,
+					}),
+				);
+			};
+			const draftFunc = newButtonType === 'reply' ? createReplyDraft : createReplyAllDraft;
+
+			draftFunc({ payload, callbackFunc });
+		}
 	};
 
 	return { handleClick, filteredCcData, filteredBccData, filteredRecipientData };

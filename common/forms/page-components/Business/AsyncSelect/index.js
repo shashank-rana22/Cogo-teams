@@ -74,6 +74,8 @@ import {
 	asyncFieldsOrganizationOnCall,
 	asyncListSaasHsCodes,
 	asyncListSpotSearchRateCardOperators,
+	asyncListLocationClusters,
+	asyncListFclFreightCommodityClusters,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -104,6 +106,8 @@ const keyAsyncFieldsParamsMapping = {
 	partner_roles                        : asyncFieldsPartnerRoles,
 	segments                             : asyncFieldsCampaignSegments,
 	list_locations                       : asyncFieldsLocations,
+	list_location_clusters         	     : asyncListLocationClusters,
+	commodity_clusters                   : asyncListFclFreightCommodityClusters,
 	list_locations_mapping               : asyncFieldsLocationsMapping,
 	list_operators                       : asyncFieldsListOperators,
 	list_rate_charge_codes               : asyncFieldListRateChargeCodes,

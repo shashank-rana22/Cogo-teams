@@ -116,7 +116,11 @@ function ExecuteTask({
 	}
 
 	if (
-		task.task === 'upload_draft_bill_of_lading' && primary_service?.trade_type === 'export'
+		task?.task === 'upload_draft_bill_of_lading'
+	&& (
+		(primary_service?.trade_type === 'import' && shipment_data?.end_to_end_shipment?.is_possible)
+		|| primary_service?.trade_type === 'export'
+	)
 	) {
 		return (
 			<UploadDraftBL

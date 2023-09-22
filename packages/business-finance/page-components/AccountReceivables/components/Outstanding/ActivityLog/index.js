@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import COMMUNICATION_OPTIONS from '@cogoport/constants/call-status-options.json';
 import {
 	AsyncSelectController,
 	CheckboxController,
@@ -21,25 +22,6 @@ const CALL_OPTIONS = [
 	{ label: 'Email', value: 'email' },
 	{ label: 'Meeting', value: 'meeting' },
 	{ label: 'Platform Demo', value: 'platformDemo' },
-];
-
-const COMMUNICATION_OPTIONS = [
-	{ label: 'Answered', value: 'answered' },
-	{ label: 'Not Answered', value: 'not_answered' },
-	{ label: 'Wrong Number', value: 'wrong_number' },
-	{ label: 'Invalid Number', value: 'invalid_number' },
-	{ label: 'Not Reachable', value: 'not_reachable' },
-	{ label: 'Busy', value: 'Busy' },
-	{ label: 'Does not exist', value: 'Does not exist' },
-	{
-		label : 'Does not belong to this user',
-		value : 'Does not belong to this user',
-	},
-	{
-		label : 'Belongs to the user who has left the company',
-		value : 'Belongs to the user who has left the company',
-	},
-
 ];
 
 function ActivityLog({
@@ -186,7 +168,7 @@ function ActivityLog({
 						asyncKey="list_organization_users"
 						placeholder="Type to search..."
 						valueKey="user_id"
-						initialCall={false}
+						initialCall
 						control={control}
 						params={{
 							filters: {

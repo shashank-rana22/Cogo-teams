@@ -21,6 +21,7 @@ function CustomFileUploader(props, ref) {
 		defaultValues,
 		multiple,
 		docName,
+		value: initialValues = [],
 		uploadIcon = null,
 		handleProgress,
 		channel = '',
@@ -28,7 +29,7 @@ function CustomFileUploader(props, ref) {
 	} = props;
 	const [fileName, setFileName] = useState(null);
 	const [loading, setLoading] = useState(false);
-	const [urlStore, setUrlStore] = useState([]);
+	const [urlStore, setUrlStore] = useState(initialValues || []);
 	const [progress, setProgress] = useState({});
 
 	useEffect(() => {

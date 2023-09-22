@@ -1,116 +1,114 @@
-import { FluidContainer, Button } from '@cogoport/components';
-import { useForm, InputController } from '@cogoport/forms';
-import { IcCMicrosoft, IcMEyeopen, IcMEyeclose } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { FluidContainer, Button, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcCMicrosoft } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useFormLoginwithMS from '../../hooks/useFormLoginwithMS';
-import useLoginAuthenticate from '../../hooks/useLoginAuthenticate';
+import EmailBasedLoginForm from '../EmailBasedLoginForm';
+import OtpBasedLoginForm from '../OtpBasedLoginForm';
+import OtpForm from '../OtpForm';
 
 import styles from './styles.module.css';
 
-function Login() {
-	const router = useRouter();
+const TABS = ['email', 'mobile'];
 
+function Login() {
 	const { t } = useTranslation(['login']);
 
-	const { onSubmit = () => {}, loading = false, source = '' } = useLoginAuthenticate();
-	const { onLogin = () => {}, socialLoginLoading = false } = useFormLoginwithMS();
-	const [showPassword, setShowPassword] = useState(false);
-	const { handleSubmit, formState: { errors }, control } = useForm();
+	const [activeTab, setActiveTab] = useState('email');
+	const [mode, setMode] = useState('login');
+	const [mobileNumber, setMobileNumber] = useState({});
+	const [otpId, setOtpId] = useState('');
 
-	function RenderSuffix() {
-		if (!showPassword) {
-			return <IcMEyeopen className={styles.show_password} onClick={() => setShowPassword(!showPassword)} />;
+	const { onLogin = () => {}, socialLoginLoading = false } = useFormLoginwithMS();
+
+	const LOGIN_FLOW_MAPPING = {
+		login : OtpBasedLoginForm,
+		otp   : OtpForm,
+	};
+
+	const componentProps = {
+		login: {
+			setMode,
+			setMobileNumber,
+			setOtpId,
+			mobileNumber,
+		},
+		otp: {
+			otpId,
+			mobileNumber,
+			setMode,
+		},
+	};
+
+	const Component = LOGIN_FLOW_MAPPING[mode] || null;
+
+	function MobileLogin() {
+		if (Component) {
+			return (
+				<Component
+					key={mode}
+					{...(componentProps[mode] || {})}
+				/>
+			);
 		}
-		return <IcMEyeclose className={styles.show_password} onClick={() => setShowPassword(!showPassword)} />;
+		return null;
 	}
+
+	const ACTIVE_TAB = {
+		email  : <EmailBasedLoginForm />,
+		mobile : <MobileLogin />,
+	};
 
 	return (
 		<FluidContainer className={styles.container}>
 			<div className={styles.box_container}>
-				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg"
-					alt="Logo Cogoport"
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.cogoport_login_logo}
+					width={400}
+					height={50}
+					alt="logo"
 					className={styles.logo}
 				/>
-				<div className={styles.input_label}>
-					{t('login:title')}
+
+				<div className={styles.tabs}>
+					{(TABS || []).map((itm) => (
+						<div
+							className={cl`${styles.tab} ${activeTab === itm ? styles.active_tab : ''}`}
+							onClick={() => setActiveTab(itm)}
+							key={itm}
+							role="presentation"
+						>
+							{startCase(itm)}
+						</div>
+					))}
 				</div>
-				<form className={styles.form_container} onSubmit={handleSubmit((data, e) => onSubmit(data, e))}>
-					<div className={styles.input_container}>
-						<InputController
-							control={control}
-							name="email"
-							type="email"
-							placeholder={t('login:email_placeholder')}
-							rules={{ required: t('login:email_rules_required') }}
-						/>
-						{errors.email && (
-							<span className={styles.errors}>
-								{errors.email.message}
-							</span>
-						)}
-						<br />
-						<div className={styles.password_container}>
-							<InputController
-								control={control}
-								name="password"
-								type={showPassword ? 'text' : 'password'}
-								suffix={<RenderSuffix />}
-								placeholder={t('login:password_placeholder')}
-								rules={{ required: t('login:password_rules_required') }}
-							/>
-						</div>
-						{errors.password && (
-							<span className={styles.errors}>
-								{errors.password.message}
-							</span>
-						)}
 
-						<div className={styles.forgot}>
-							<a href="/forgot-password">{t('login:forgot_your_password')}</a>
-						</div>
-
-						<Button
-							loading={loading}
-							className={styles.submit_button}
-							type="submit"
-						>
-							{t('login:login_button')}
-						</Button>
-
-						{source === 'add_account'
-						&& (
-							<Button
-								themeType="accent"
-								onClick={() => router.back()}
-								className={styles.go_back}
-								type="button"
-							>
-								{t('login:go_back_button')}
-							</Button>
-						)}
-
-						<div className={styles.or}>
-							<hr className={styles.line} />
-							{t('login:or_label')}
-							<hr className={styles.line} />
-						</div>
-
-						<Button
-							loading={socialLoginLoading}
-							themeType="secondary"
-							className={styles.submit_button}
-							style={{ fontWeight: '500' }}
-							onClick={onLogin}
-						>
-							<IcCMicrosoft />
-							<p className={styles.micro}>{t('login:continue_with_microsoft')}</p>
-						</Button>
+				<div className={styles.input_container}>
+					<div className={styles.active_components}>
+						{ACTIVE_TAB[activeTab]}
 					</div>
-				</form>
+
+					<div className={styles.or}>
+						<hr className={styles.line} />
+						{t('login:or_label')}
+						<hr className={styles.line} />
+					</div>
+
+					<Button
+						loading={socialLoginLoading}
+						themeType="secondary"
+						className={styles.submit_button}
+						style={{ fontWeight: '500' }}
+						onClick={onLogin}
+					>
+						<IcCMicrosoft />
+						<p className={styles.micro}>{t('login:continue_with_microsoft')}</p>
+					</Button>
+				</div>
 			</div>
 		</FluidContainer>
 	);

@@ -8,7 +8,12 @@ import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
 
 const getLensPayload = ({ payload }) => payload;
 
-const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', userSharedMails = [] }) => ({
+const getOmniChannelLink = ({ id, channel_type }) => {
+	const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
+	return `${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`;
+};
+
+const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', userSharedMails = [], roomId = '' }) => ({
 	type             : 'rpa_email',
 	recipient        : payload?.toUserEmail?.[GLOBAL_CONSTANTS.zeroth_index],
 	message_metadata : {
@@ -17,6 +22,7 @@ const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', use
 		send_to_omnichannel : !!userSharedMails?.includes(payload?.sender),
 		sender_user_id      : userId,
 		send_by             : userName,
+		draft_url           : getOmniChannelLink({ id: roomId, channel_type: 'email' }),
 	},
 	sender_user_id  : userId,
 	service         : 'user',
@@ -59,6 +65,7 @@ function useReplyMail(mailProps) {
 		userId = '',
 		userName = '',
 		userSharedMails = [],
+		saveDraft = () => {},
 	} = mailProps;
 
 	const {
@@ -74,8 +81,15 @@ function useReplyMail(mailProps) {
 
 	const replyMailApi = async (payload) => {
 		try {
-			await trigger({
-				data: getPayload({ payload, userId, userName, userSharedMails }),
+			const { roomId, messageId } = await saveDraft();
+
+			const res = await trigger({
+				data: getPayload({ payload, userId, userName, userSharedMails, roomId }),
+			});
+			await saveDraft({
+				communication_id     : res?.data?.id,
+				newComposeRoomId     : roomId,
+				newComposeDraftMsgId : messageId,
 			});
 			Toast.success('Mail Sent Successfully.');
 			setEmailState(DEFAULT_EMAIL_STATE);
