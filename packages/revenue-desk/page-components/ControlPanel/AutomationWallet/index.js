@@ -1,8 +1,9 @@
-import { Button, Select, Pagination, Placeholder } from '@cogoport/components';
+import { Button, Select, Pagination } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import LoaderDetails from '../../common/Loader';
 import {
-	serviceOptions, VALUE_FIVE, VALUE_FOUR, VALUE_ONE, VALUE_THREE, VALUE_TWO, VALUE_ZERO, VALUE_TEN, SRC,
+	serviceOptions, VALUE_ONE, VALUE_ZERO, VALUE_TEN, SRC,
 } from '../../constants';
 import useListRevenueDeskWallet from '../hooks/useListRevenueDeskWallet';
 
@@ -41,17 +42,7 @@ function AutomationWallet() {
 				</Button>
 			</div>
 
-			{loading
-				&& (
-					[VALUE_ONE, VALUE_TWO, VALUE_THREE, VALUE_FOUR, VALUE_FIVE]?.map((key) => (
-						<Placeholder
-							height="50px"
-							width="1250px"
-							key={key}
-							style={{ margin: '10px' }}
-						/>
-					))
-				)}
+			{loading && <LoaderDetails />}
 
 			{!loading && (
 				<div>
