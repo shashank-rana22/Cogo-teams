@@ -80,15 +80,17 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 	if (search_type === 'ltl_freight') {
 		if (trade_type === 'export') {
 			return [{
-				origin_location_id : formValues?.location_id,
+				origin_location_id      : formValues?.location_id,
+				destination_location_id : primary_service?.origin_airport?.id,
 				destination_country_id,
 				...common,
-				commodity          : HAZ_CLASSES.includes(commodity) ? commodity : null,
-				packages           : formValues?.packages?.map((obj) => formattedAsNumberData(obj)),
+				commodity               : HAZ_CLASSES.includes(commodity) ? commodity : null,
+				packages                : formValues?.packages?.map((obj) => formattedAsNumberData(obj)),
 			}];
 		}
 		return [{
 			destination_location_id : formValues?.location_id,
+			origin_location_id      : primary_service?.destination_airport?.id,
 			origin_country_id,
 			...common,
 			commodity               : HAZ_CLASSES.includes(commodity) ? commodity : null,

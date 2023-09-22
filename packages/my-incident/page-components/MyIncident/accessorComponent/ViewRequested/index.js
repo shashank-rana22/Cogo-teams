@@ -9,6 +9,7 @@ import AdvanceSecurityDepositModal from './AdvanceSecurityDepositModal/index.tsx
 import AdvanceSecurityDepositRefundModal from './AdvanceSecurityDepositRefundModal/index.tsx';
 import BankDatailsModal from './BankDetailsModal/index.tsx';
 import IcJvApproval from './IcJvApproval/index.tsx';
+import JobOpenModal from './JobOpenModal/index.tsx';
 import JournalVoucher from './JournalVoucher/index.tsx';
 import PaymentConfirmation from './PaymentConfirmation/index.tsx';
 import RequestCN from './RequestCN/index.tsx';
@@ -27,6 +28,7 @@ const TYPE_COMPONENT_MAPPING = {
 	ADVANCE_SECURITY_DEPOSIT_REFUND        : AdvanceSecurityDepositRefundModal,
 	RECURRING_EXPENSE_APPROVAL             : RecuringModal,
 	OVERHEAD_APPROVAL                      : NonRecuringModal,
+	JOB_OPEN                               : JobOpenModal,
 };
 
 function ViewRequested({ itemData = {}, name = '', refetch = () => {} }) {
