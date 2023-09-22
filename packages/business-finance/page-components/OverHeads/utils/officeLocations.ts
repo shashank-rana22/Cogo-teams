@@ -85,4 +85,18 @@ export const officeLocations = [
 			branchId : '12c9c474-845a-480c-9a6c-0e078f9cdeea',
 		}),
 	},
+	{
+		label : 'Kanpur',
+		value : JSON.stringify({
+			name     : 'Kanpur',
+			branchId : '9a0d3dc6-52cd-4e08-a8ef-bbeb51c28ecf',
+		}),
+	},
+	{
+		label : 'Nasik',
+		value : JSON.stringify({
+			name     : 'Nasik',
+			branchId : 'fef0cbb6-252b-4c2e-95aa-b978d1772cbd',
+		}),
+	},
 ];

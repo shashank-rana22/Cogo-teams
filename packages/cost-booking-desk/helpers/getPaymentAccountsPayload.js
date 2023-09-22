@@ -38,7 +38,7 @@ const getPaymentAccountsPayload = ({
 		payMode           : payment_mode,
 		remarks,
 		utr               : utr_number,
-		accMode           : 'AP',
+		accMode           : 'CSD',
 		bankAccountNumber : accountNumber,
 		bankName,
 		bankId            : id,

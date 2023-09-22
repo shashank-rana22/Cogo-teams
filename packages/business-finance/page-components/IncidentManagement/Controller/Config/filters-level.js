@@ -47,6 +47,10 @@ const getControls = (t = () => {}) => [
 				value : 'OVERHEAD_APPROVAL',
 				label : t('incidentManagement:expense_approval'),
 			},
+			{
+				value : 'JOB_OPEN',
+				label : t('incidentManagement:job_open_label'),
+			},
 		],
 		rules: { required: t('incidentManagement:incident_type_required_message') },
 	},
