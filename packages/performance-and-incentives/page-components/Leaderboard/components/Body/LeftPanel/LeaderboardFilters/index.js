@@ -22,6 +22,7 @@ function LeaderboardFilters(props) {
 		setSearchValue,
 		setEntity,
 		levelStack,
+		setCurrLevel,
 		setLevelStack,
 	} = props;
 
@@ -55,6 +56,8 @@ function LeaderboardFilters(props) {
 
 			return curr;
 		});
+
+		setCurrLevel([beforeLevel, id]);
 	};
 
 	return (

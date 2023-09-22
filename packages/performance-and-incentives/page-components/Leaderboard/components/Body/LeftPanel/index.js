@@ -46,7 +46,12 @@ function LeftPanel(props) {
 
 			{loading ? <LoadingState /> : (
 				<>
-					<LeaderboardFilters levelStack={levelStack} setLevelStack={setLevelStack} setParams={setParams} />
+					<LeaderboardFilters
+						setCurrLevel={setCurrLevel}
+						levelStack={levelStack}
+						setLevelStack={setLevelStack}
+						setParams={setParams}
+					/>
 
 					<List list={list} params={params} setParams={setParams} handleClick={handleClick} />
 				</>
