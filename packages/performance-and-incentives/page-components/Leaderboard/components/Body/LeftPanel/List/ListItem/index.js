@@ -12,15 +12,15 @@ function conditionalWrapper({ condition, title, wrapper, children }) {
 }
 
 function ListItem(props) {
-	const { listItem = {}, index } = props;
+	const { listItem = {}, index, handleClick } = props;
 
 	const isFirstEntry = index === GLOBAL_CONSTANTS.zeroth_index;
 	const boxShadow = isFirstEntry ? styles.box_shadow : '';
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping();
+	const LIST_COLUMN_MAPPING = getListColumnMapping({});
 
 	return (
-		<div className={cl`${styles.list_row} ${boxShadow}`}>
+		<div className={cl`${styles.list_row} ${boxShadow}`} role="presentation" onClick={handleClick}>
 			{LIST_COLUMN_MAPPING.map((columnItem) => {
 				const { key, flex, accessor } = columnItem;
 

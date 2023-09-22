@@ -46,7 +46,13 @@ const performance_and_incentives = {
 			service_name : 'agent_scoring',
 		},
 	],
-	performance_and_incentives_leaderboard: [],
+	performance_and_incentives_leaderboard: [
+		{
+			api          : 'get_agent_scoring_reports',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+	],
 };
 
 export default performance_and_incentives;

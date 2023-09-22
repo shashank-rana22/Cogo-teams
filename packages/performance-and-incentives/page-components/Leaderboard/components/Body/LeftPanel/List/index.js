@@ -3,33 +3,11 @@ import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 function List(props) {
-	const {
-		table_list = [{
-			rank       : 1,
-			name       : 'madhesh',
-			score      : '3000',
-			percentile : '50',
-			children   : [{
-				rank       : 2,
-				name       : 'khushal',
-				score      : '2000',
-				percentile : '75%',
+	const { list, params, setParams, handleClick } = props;
 
-				children: [{
-					rank  : 3,
-					name  : 'vimal',
-					score : '3000',
-				}],
-			}],
-		}, {
-			rank       : 5,
-			name       : 'mohith',
-			score      : '3000',
-			percentile : '50',
-		}],
-	} = props;
+	// const { user = {} }	 = useSelector((state) => state?.profile || {});
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping();
+	const LIST_COLUMN_MAPPING = getListColumnMapping({ params, setParams });
 
 	return (
 		<div className={styles.list_container}>
@@ -44,7 +22,14 @@ function List(props) {
 			</div>
 
 			<div className={styles.list_body_container}>
-				{table_list.map((listItem, index) => <ListItem key={listItem.id} listItem={listItem} index={index} />)}
+				{list.map((listItem, index) => (
+					<ListItem
+						key={listItem.id}
+						listItem={listItem}
+						index={index}
+						handleClick={handleClick}
+					/>
+				))}
 			</div>
 		</div>
 	);

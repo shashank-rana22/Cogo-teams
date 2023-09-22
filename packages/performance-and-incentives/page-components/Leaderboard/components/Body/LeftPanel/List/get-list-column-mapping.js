@@ -3,18 +3,6 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const handleSort = ({ params = {}, setParams = () => {}, sortBy }) => {
-	if (params.sort_by === sortBy) {
-		if (params.sort_type === 'asc') {
-			setParams((prev) => ({ ...prev, sort_type: 'desc' }));
-		} else {
-			setParams((prev) => ({ ...prev, sort_type: 'asc' }));
-		}
-		return;
-	}
-	setParams((prev) => ({ ...prev, sort_by: sortBy, sort_type: 'desc' }));
-};
-
 function ArrowType({ sortBy = '', sortType = '', title = '' }) {
 	if (sortBy !== title) {
 		return <IcMArrowRotateUp className={styles.arrow} fill="#e0e0e0" />;
@@ -27,7 +15,19 @@ function ArrowType({ sortBy = '', sortType = '', title = '' }) {
 	return <IcMArrowRotateDown className={styles.arrow} fill="#e0e0e0" />;
 }
 
-const getListColumnMapping = () => {
+const getListColumnMapping = ({ params = {}, setParams = () => {} }) => {
+	const handleSort = ({ title }) => {
+		if (params.sort_by === title) {
+			if (params.sort_type === 'asc') {
+				setParams((prev) => ({ ...prev, sort_type: 'desc' }));
+			} else {
+				setParams((prev) => ({ ...prev, sort_type: 'asc' }));
+			}
+			return;
+		}
+		setParams((prev) => ({ ...prev, sort_by: title, sort_type: 'desc' }));
+	};
+
 	const LIST_COLUMN_MAPPING = [
 		{
 			id   : 'rank',
@@ -38,10 +38,10 @@ const getListColumnMapping = () => {
 					<div
 						role="presentation"
 						className={styles.top_heading}
-						onClick={() => handleSort({})}
+						onClick={() => handleSort({ title: 'rank' })}
 					>
 						<div>Rank</div>
-						<ArrowType title="rank" />
+						<ArrowType sortBy={params.sort_by} sortType={params.sort_type} title="rank" />
 					</div>
 				),
 			accessor: ({ rank }) => (isEmpty(rank) ? null : (
@@ -57,20 +57,24 @@ const getListColumnMapping = () => {
 			key      : 'name',
 			flex     : 2,
 			Header   : <div className={styles.top_heading}>Name</div>,
-			accessor : ({ name }) => (isEmpty(name) ? null : <div className={styles.name}>{name}</div>),
+			accessor : ({ user = {} }) => (isEmpty(user.name) ? null : <div className={styles.name}>{user.name}</div>),
 		},
 		{
-			id   : 'score',
-			key  : 'score',
+			id   : 'total_score',
+			key  : 'total_score',
 			flex : 1.5,
 			Header:
 				(
-					<div role="presentation" className={styles.top_heading} onClick={() => handleSort({})}>
+					<div
+						role="presentation"
+						className={styles.top_heading}
+						onClick={() => handleSort({ title: 'total_score' })}
+					>
 						<div>Score</div>
-						<ArrowType title="score" />
+						<ArrowType sortBy={params.sort_by} sortType={params.sort_type} title="total_score" />
 					</div>
 				),
-			accessor: ({ score }) => (isEmpty(score) ? null : <div>{score}</div>),
+			accessor: ({ total_score }) => (isEmpty(total_score) ? null : <div>{total_score}</div>),
 		},
 		{
 			id   : 'percentile',
@@ -78,9 +82,13 @@ const getListColumnMapping = () => {
 			flex : 1.5,
 			Header:
 				(
-					<div role="presentation" className={styles.top_heading} onClick={() => handleSort({})}>
+					<div
+						role="presentation"
+						className={styles.top_heading}
+						onClick={() => handleSort({ title: 'percentile' })}
+					>
 						<div>%ile</div>
-						<ArrowType title="percentile" />
+						<ArrowType sortBy={params.sort_by} sortType={params.sort_type} title="percentile" />
 					</div>
 				),
 			accessor: ({ percentile }) => (isEmpty(percentile) ? null : (
