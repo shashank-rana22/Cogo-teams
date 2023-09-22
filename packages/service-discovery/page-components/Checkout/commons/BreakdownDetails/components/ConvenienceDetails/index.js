@@ -90,7 +90,7 @@ function ConvenienceDetails({
 								Sub Total
 								{' '}
 								<span style={{ fontSize: '12px' }}>
-									(excl service charges and taxes)
+									(excl service charges, taxes and discounts)
 								</span>
 							</div>
 							<div className={styles.amount}>{subTotalDisplay}</div>

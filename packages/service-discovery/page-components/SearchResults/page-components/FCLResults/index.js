@@ -85,6 +85,8 @@ function FCLResults({
 
 	const RateCardsComponent = SCREEN_MAPPING[screen] || null;
 
+	if (!RateCardsComponent) return null;
+
 	return (
 		<RateCardsComponent {...SCREEN_PROPS_MAPPING[screen]} />
 	);

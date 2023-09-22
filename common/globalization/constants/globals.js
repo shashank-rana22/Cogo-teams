@@ -75,7 +75,7 @@ const GLOBAL_CONSTANTS = {
 	cargo_insurance: {
 		IN: ['fcl_freight', 'air_freight', 'lcl_freight'],
 	},
-	new_search_supported_services : ['fcl_freight'],
+	new_search_supported_services : ['fcl_freight', 'air_freight'],
 	formats                       : {
 		date: {
 			'dd/MM/yyyy'        : 'dd/MM/yyyy',
@@ -456,6 +456,8 @@ const GLOBAL_CONSTANTS = {
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
 		cogoport_login_logo: 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
+		airline_default_icon:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png',
 	},
 
 	video_call_ring_tone_url:

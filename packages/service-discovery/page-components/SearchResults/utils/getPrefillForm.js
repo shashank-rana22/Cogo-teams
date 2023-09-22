@@ -42,6 +42,12 @@ const getPrefillForm = (values, service_key) => {
 		};
 	}
 
+	if (service_type === 'air_freight') {
+		loadData = {
+			...load[GLOBAL_CONSTANTS.zeroth_index],
+		};
+	}
+
 	if (service_type === 'trailer_freight') {
 		loadData = {
 			container: load.map((containerItem) => (

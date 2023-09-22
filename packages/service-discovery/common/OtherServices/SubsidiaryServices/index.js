@@ -1,8 +1,8 @@
-import { Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase, upperCase } from '@cogoport/utils';
 import React, { useState, useEffect, useMemo } from 'react';
+
+import SearchInput from '../../SearchInput';
 
 import ServiceItem from './ServiceItem';
 import styles from './styles.module.css';
@@ -17,7 +17,6 @@ function SubsidiaryServices({
 	refetch = () => {},
 	checkout_id = '',
 	loading = false,
-	...rest
 }) {
 	const [searchValue, setSearchValue] = useState('');
 	const [disabled, setIsDisabled] = useState('');
@@ -75,27 +74,6 @@ function SubsidiaryServices({
 
 	const servicesToShow = useMemo(() => [...popularServices], [popularServices]);
 
-	function InputSuffix() {
-		return (
-			<div className={styles.suffix_container}>
-				{searchValue ? (
-					<IcMCross
-						width={20}
-						height={20}
-						className={styles.cross}
-						onClick={() => setSearchValue('')}
-					/>
-				) : null}
-
-				<IcMSearchlight
-					width={20}
-					height={20}
-					className={styles.input_suffix}
-				/>
-			</div>
-		);
-	}
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -105,12 +83,12 @@ function SubsidiaryServices({
 			<div className={styles.select_container}>
 				<div className={styles.label}>Search Subsidiary Services</div>
 
-				<Input
-					suffix={<InputSuffix />}
+				<SearchInput
 					value={searchValue}
-					onChange={(val) => setSearchValue(val)}
-					size={rest.size || 'md'}
+					onSearch={setSearchValue}
 					placeholder="Eg. - Origin Entry Summary Declaration"
+					showPrefix={false}
+					onReset={() => setSearchValue('')}
 				/>
 			</div>
 

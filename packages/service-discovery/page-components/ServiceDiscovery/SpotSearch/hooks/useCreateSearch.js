@@ -32,15 +32,11 @@ const useCreateSearch = () => {
 					destination,
 				});
 
-				payload = {
-					...defaultPayload,
-				};
+				payload = { ...defaultPayload };
 			} else if (['edit', 'quick-search'].includes(action)) {
 				const editPayload = getEditPayload(service_type, { origin, destination, formValues });
 
-				payload = {
-					...editPayload,
-				};
+				payload = { ...editPayload };
 			}
 
 			payload = {
@@ -57,8 +53,8 @@ const useCreateSearch = () => {
 
 			return res?.data?.id;
 		} catch (err) {
-			if (err.response?.data) {
-				Toast.error(getApiErrorString(err.response?.data));
+			if (err?.response?.data) {
+				Toast.error(getApiErrorString(err?.response?.data));
 			}
 
 			return err;

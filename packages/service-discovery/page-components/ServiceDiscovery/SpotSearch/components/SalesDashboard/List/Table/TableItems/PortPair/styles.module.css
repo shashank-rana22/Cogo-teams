@@ -12,6 +12,7 @@
 	overflow: hidden;
 	font-size: 14px;
 	font-weight: 500;
+	text-decoration: underline;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }

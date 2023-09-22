@@ -16,7 +16,7 @@ function Submitted({ detail = {}, contractData = {} }) {
 
 	const { max_containers_count = 100 } = contractData;
 
-	const { container_type, container_size, commodity } = detail;
+	const { container_type, container_size, commodity = '', volume, weight } = detail;
 
 	const { origin, destination } = getLocationInfo(detail, 'search_type');
 
@@ -80,6 +80,12 @@ function Submitted({ detail = {}, contractData = {} }) {
 										: container_size}
 									{' '}
 									{startCase(container_type)}
+								</span>
+							) : null}
+
+							{volume || weight ? (
+								<span className={styles.load_item}>
+									{`Vol: ${volume} CBM, WT: ${weight} KG`}
 								</span>
 							) : null}
 

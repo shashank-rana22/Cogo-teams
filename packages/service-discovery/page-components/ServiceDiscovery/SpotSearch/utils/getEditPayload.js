@@ -1,3 +1,4 @@
+import getAirPayload from './getAirPayload';
 import getFclPayload from './getFclPayload';
 import getLclPayload from './getLclPayload';
 import getTrailerPayload from './getTrailerPayload';
@@ -5,7 +6,7 @@ import getTrailerPayload from './getTrailerPayload';
 const PAYLOAD_FUNCTION_MAPPING = {
 	fcl_freight     : getFclPayload,
 	lcl_freight     : getLclPayload,
-	air_freight     : getLclPayload,
+	air_freight     : getAirPayload,
 	ftl_freight     : getLclPayload,
 	ltl_freight     : getLclPayload,
 	trailer_freight : getTrailerPayload,
