@@ -73,10 +73,6 @@ function TerminalChargeRate({
 		updateShipmentAirFreightConsolidatedInvoice();
 	};
 
-	const handleUpload = (values) => {
-		setShowConfirm(values);
-	};
-
 	return (
 		<div>
 			<Layout
@@ -86,7 +82,7 @@ function TerminalChargeRate({
 			/>
 			<div className={styles.button_container}>
 				<Button
-					onClick={handleSubmit(handleUpload)}
+					onClick={handleSubmit((values) => setShowConfirm(values))}
 					disabled={loading || updateLoading || !irnGenerated}
 				>
 					Create Proforma

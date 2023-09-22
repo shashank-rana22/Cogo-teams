@@ -232,7 +232,7 @@ function ExecuteTask({
 			/>
 		);
 	}
-	if (task.task === 'upload_gate_pass_charge_receipt') {
+	if (task?.task === 'upload_gate_pass_charge_receipt') {
 		return (
 			<TerminalChargeReceipt
 				shipmentData={shipment_data}

@@ -12,11 +12,11 @@ const useCreateShipmentAdditionalService = ({
 	}, { manual: true });
 
 	const createShipmentAdditionalService = async (values) => {
-		const { currency = '' } = values || {};
+		const { currency = '', terminalChargeReceipt = [] } = values || {};
 
 		let total_tax_price = 0;
 
-		(values?.terminalChargeReceipt || []).forEach((val) => {
+		(terminalChargeReceipt || []).forEach((val) => {
 			total_tax_price += Number(val.total_tax_price);
 		});
 		const { id = '', all_services = [] } = shipmentData || {};

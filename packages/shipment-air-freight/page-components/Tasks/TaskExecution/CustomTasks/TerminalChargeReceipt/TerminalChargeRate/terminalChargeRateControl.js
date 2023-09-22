@@ -6,15 +6,8 @@ const ENTITY_CODES = Object.keys(ENTITY_FEATURE_MAPPING).filter(
 	(key) => ENTITY_FEATURE_MAPPING[key].feature_supported.includes('terminal_charge'),
 );
 
-const getBillingAddressOptions = (billingParty = {}) => (
-	billingParty?.addresses?.map((address) => ({
-		label : address?.address,
-		value : address?.id,
-	}))
-);
-
-const getCollectionAddressOptions = (collectionParty = {}) => (
-	collectionParty?.billing_addresses?.map((address) => ({
+const getAddressOptions = (item = []) => (
+	(item || []).map((address) => ({
 		label : address?.address,
 		value : address?.id,
 	}))
@@ -58,7 +51,7 @@ const getTerminalChargeRateControl = ({
 			label       : 'Billing Party Address',
 			name        : 'billing_address',
 			type        : 'select',
-			options     : getBillingAddressOptions(entityData),
+			options     : getAddressOptions(entityData?.addresses),
 			placeholder : 'Select Address',
 			span        : 6,
 			rules       : {
@@ -91,7 +84,7 @@ const getTerminalChargeRateControl = ({
 			label       : 'Collection Party Address',
 			name        : 'collection_party_address',
 			type        : 'select',
-			options     : getCollectionAddressOptions(collectionPartyData),
+			options     : getAddressOptions(collectionPartyData?.billing_addresses),
 			span        : 6,
 			placeholder : 'Select Collection Party Address',
 			rules       : {
