@@ -1,12 +1,18 @@
 import { cl } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
+
+import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
-function QuotaDetails({ editModalChangeHandler, quotas = [] }) {
+function QuotaDetails({ editModalChangeHandler, quotas = [], currentTab }) {
 	const { t } = useTranslation(['saasSubscription']);
+
+	if (isEmpty(quotas)) {
+		return <EmptyState currentTab={currentTab} />;
+	}
 	return (
 		<div className={styles.container}>
 
