@@ -13444,6 +13444,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'platform_config',
 		},
+		{
+			api          : 'list_cogoone_shifts',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	analytics_dashboard: [
 		{
