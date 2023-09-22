@@ -29,7 +29,7 @@ function EditInvoicePreference({
 	const {
 		importer_exporter_id = '',
 		country_id = '',
-		is_tax_applicable = false,
+		is_tax_applicable,
 		is_job_closed_financially = false,
 		shipment_type = '',
 	} = shipment_data || {};
