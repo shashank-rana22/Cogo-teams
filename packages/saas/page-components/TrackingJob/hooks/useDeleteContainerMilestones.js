@@ -1,19 +1,16 @@
 import { useRequest } from '@cogoport/request';
 
-const useDeleteContainerMilestones = () => {
-	const [{ loading, data }, trigger] = useRequest({
+const useDeleteContainerMilestones = ({ refetch }) => {
+	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/delete_saas_container_timeline_detail',
 	});
 
-	const deleteMileStones = async (id, getMilestones) => {
+	const deleteMileStones = async (id) => {
 		trigger({
 			params: { saas_container_timeline_detail_id: id },
 		});
-
-		if (data) {
-			await getMilestones();
-		}
+		refetch();
 	};
 
 	return {

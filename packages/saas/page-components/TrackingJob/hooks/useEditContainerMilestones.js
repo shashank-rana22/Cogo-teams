@@ -1,28 +1,24 @@
 import { useRequest } from '@cogoport/request';
 
-const useEditContainerMilestones = (id, getMilestones) => {
-	const { loading, trigger } = useRequest(
-		'post',
-		false,
+const useEditContainerMilestones = ({ refetch }) => {
+	const [{ loading }, trigger] = useRequest({
+		method : 'post',
+		url    : '/update_saas_container_timeline_detail',
+	});
 
-	)('/update_saas_container_timeline_detail');
-
-	const updateMilestoneData = async (data) => {
-		const res = await trigger({
+	const updateMilestoneData = async ({ id, values }) => {
+		await trigger({
 			data: {
-				saas_container_timeline_detail_id: id,
-				data,
+				saas_container_timeline_detail_id : id,
+				data                              : values,
 			},
 		});
-
-		if (res?.data) {
-			await getMilestones();
-		}
+		refetch();
 	};
 
 	return {
-		updateMilestoneData,
 		loading,
+		apiTrigger: updateMilestoneData,
 	};
 };
 

@@ -8,7 +8,7 @@ const LAST_INDEX = -1;
 const useGetMilestoneInfo = ({ combineMileStoneList = [] }) => {
 	let currentMilestoneIndex = null;
 	let milestoneSubIndex = null;
-	const combineMileStoneListLength = combineMileStoneList.length;
+	const combineMileStoneListLength = combineMileStoneList?.length;
 
 	combineMileStoneList?.forEach((combineList, index) => {
 		if (combineList.length === SINGLE_MILESTONE_INDEX) {
@@ -18,8 +18,8 @@ const useGetMilestoneInfo = ({ combineMileStoneList = [] }) => {
 				currentMilestoneIndex = index;
 			}
 		} else {
-			const firstMilestoneDate = combineList[GLOBAL_CONSTANTS.zeroth_index]?.event_date;
-			const lastMilestoneDate = combineList.slice(LAST_INDEX)[GLOBAL_CONSTANTS.zeroth_index]?.event_date;
+			const firstMilestoneDate = combineList?.[GLOBAL_CONSTANTS.zeroth_index]?.event_date;
+			const lastMilestoneDate = combineList?.slice(LAST_INDEX)[GLOBAL_CONSTANTS.zeroth_index]?.event_date;
 
 			const isFirstMilestonePastPresent = !isFutureDate(firstMilestoneDate) || isCurrentDate(firstMilestoneDate);
 			const isLastMilestonePresentFuture = isFutureDate(lastMilestoneDate) || isCurrentDate(lastMilestoneDate);
@@ -33,7 +33,7 @@ const useGetMilestoneInfo = ({ combineMileStoneList = [] }) => {
 	if (currentMilestoneIndex) {
 		const combineMileStoneSubArr = combineMileStoneList[currentMilestoneIndex];
 
-		combineMileStoneSubArr.forEach((list, index) => {
+		combineMileStoneSubArr?.forEach((list, index) => {
 			const milestoneDate = list?.event_date;
 
 			if (isCurrentDate(milestoneDate)) {

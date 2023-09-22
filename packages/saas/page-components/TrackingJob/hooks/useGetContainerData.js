@@ -1,36 +1,36 @@
-import { useRequest, useScope } from '@cogo/commons/hooks';
-import { getApiErrorString } from '@cogoport/front/utils';
-import { toast } from '@cogoport/front/components/admin';
+import { Toast } from '@cogoport/components';
+// import { getApiErrorString } from '@cogoport/front/utils';
+import { useRequest } from '@cogoport/request';
+
+import getOceanFormatterValues from '../helpers/getOceanFormattedValue';
 
 const useGetContainerData = ({ reset, refetch }) => {
-	const { scope } = useScope();
-	const submitAPI = useRequest(
-		'post',
-		false,
-		scope,
-	)('/update_container_and_bl_milestones');
-	const onSubmit = async (values = {}, showUpdate, setShowUpdate) => {
-		const payload = {
-			...values,
-			saas_container_subscription_id:
-				showUpdate.data.saas_container_subscription_id,
-			search_type: showUpdate.data.search_type,
-		};
+	const [{ loading }, trigger] = useRequest({
+		method : 'post',
+		url    : '/update_container_and_bl_milestones',
+	});
+	const apiTrigger = async ({ values = {}, showUpdate }) => {
 		try {
-			await submitAPI.trigger({
-				data: payload,
+			console.log(values);
+			const formatPayload = getOceanFormatterValues(values);
+			await trigger({
+				data: {
+					...formatPayload,
+					saas_container_subscription_id:
+						showUpdate.data.saas_container_subscription_id,
+					search_type: showUpdate.data.search_type,
+				},
 			});
-			setShowUpdate({ show: false });
 			reset();
 			refetch();
-			toast.success('Tracking Data Added Successfully');
+			Toast.success('Tracking Data Added Successfully');
 		} catch (err) {
-			toast.error(getApiErrorString(err.data));
+			console.log(err);
 		}
 	};
 	return {
-		submitAPI,
-		onSubmit,
+		apiTrigger,
+		loading,
 	};
 };
 

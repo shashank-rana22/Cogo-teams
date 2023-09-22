@@ -249,6 +249,11 @@ const GLOBAL_CONSTANTS = {
 	months: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
 
 	image_url: {
+		ship_icon                 : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipIcon.jpg',
+		truck_icon                : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/truckIcon.png',
+		air_icon2                 : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/airplane.png',
+		loading                   : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/loading.svg',
+		extract_data              : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/Data-extraction.jpg',
 		general_icon              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg',
 		eclamation_svg            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg',
 		cart_png                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cart_icon.png',

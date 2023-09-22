@@ -12,7 +12,6 @@ const useGetTruckMilestones = ({ id = null, trackingType }) => {
 			await trigger({
 				params: { trip_id: id },
 			});
-			console.log('trigger');
 		} catch (err) {
 			console.log(err);
 		}

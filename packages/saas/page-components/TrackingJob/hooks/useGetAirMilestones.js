@@ -17,7 +17,6 @@ const useGetAirMilestones = ({ id = null, trackingType }) => {
 			await trigger({
 				params: { id },
 			});
-			console.log('trigger');
 		} catch (err) {
 			console.log(err);
 		}
@@ -29,7 +28,7 @@ const useGetAirMilestones = ({ id = null, trackingType }) => {
 
 	return {
 		data,
-		datae: data,
+		refetch: getMilestones,
 		loading,
 	};
 };

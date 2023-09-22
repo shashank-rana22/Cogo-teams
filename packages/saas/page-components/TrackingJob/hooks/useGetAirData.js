@@ -2,17 +2,23 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
+import getFormatterValues from '../helpers/getFormattedValue';
+
 const useGetAirData = ({ reset, refetch }) => {
-	const submitAPI = useRequest('post', false)('/update_air_milestones');
-	const onSubmit = async (values = {}, showUpdate, setShowUpdate) => {
-		const payload = {
-			...values,
-			airway_bill_no           : showUpdate?.data?.airway_bill_no,
-			saas_air_subscription_id : showUpdate?.data?.saas_air_subscription_id,
-		};
+	const [{ loading }, trigger] = useRequest({
+		method : 'post',
+		url    : '/update_air_milestones',
+	});
+	const apiTrigger = async ({ values = {}, showUpdate, setShowUpdate }) => {
+		const payload = getFormatterValues(values);
+
 		try {
-			await submitAPI.trigger({
-				data: payload,
+			await trigger({
+				data: {
+					...payload,
+					airway_bill_no           : showUpdate?.data?.airway_bill_no,
+					saas_air_subscription_id : showUpdate?.data?.saas_air_subscription_id,
+				},
 			});
 			setShowUpdate({ show: false });
 			reset();
@@ -23,8 +29,8 @@ const useGetAirData = ({ reset, refetch }) => {
 		}
 	};
 	return {
-		submitAPI,
-		onSubmit,
+		apiTrigger,
+		loading,
 	};
 };
 

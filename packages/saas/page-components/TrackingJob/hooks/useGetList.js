@@ -1,37 +1,36 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 const useGetList = ({
 	activeTab,
-	showData,
-	sortType,
-	sort,
 }) => {
-	const [pagination, setPagination] = useState(1);
-	const [tags, setTags] = useState();
 	const [filters, setFilters] = useState({ page: 1 });
-	const [shippinglineValue, setshippinglineValue] = useState();
-	const apiName = {
+	const [searchString, setSearchString] = useState('');
+	const [serialId, setSerialId] = useState('');
+	const APINAME = {
 		air_tracking   : '/list_untracked_air_shipments',
 		ocean_tracking : '/list_untracked_containers',
 		truck_tracking : '/list_saas_surface_shipment_details',
 	};
-	console.log(apiName[activeTab]);
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : apiName[activeTab],
+		url    : APINAME[activeTab],
 	});
-	// const { query: searchQuery, debounceQuery } = useSearchQuery();
 
-	// useEffect(() => {
-	// 	debounceQuery(searchValue);
-	// }, [searchValue]);
+	const { query = '', debounceQuery } = useDebounceQuery();
 	const refetch = async () => {
 		try {
-			trigger({
+			await trigger({
 				params: {
 					filters: {
 						...filters,
+						q         : query || undefined,
+						serial_id : serialId,
+						truck_number:
+							activeTab === 'truck_tracking' && searchString
+								? searchString
+								: undefined,
 					},
 					page               : filters?.page,
 					priority_sort_type : 'desc',
@@ -42,22 +41,27 @@ const useGetList = ({
 			console.log(err);
 		}
 	};
+	useEffect(() => debounceQuery(searchString), [searchString, debounceQuery]);
+	useEffect(() => debounceQuery(serialId), [serialId, debounceQuery]);
+
+	useEffect(() => {
+		setFilters({ page: 1 });
+		setSearchString('');
+	}, [activeTab]);
 	useEffect(() => {
 		refetch();
-	}, [activeTab, filters]);
+	}, [activeTab, filters, query]);
+
 	return {
 		data,
 		filters,
 		setFilters,
 		loading,
+		searchString,
+		setSearchString,
+		setSerialId,
 		trigger,
 		refetch,
-		pagination,
-		setPagination,
-		setTags,
-		tags,
-		shippinglineValue,
-		setshippinglineValue,
 	};
 };
 
