@@ -10,6 +10,17 @@ import styles from './styles.module.css';
 
 const DEFAULT_ROUNDING = 2;
 
+const getTruckNumberOptions = ({ serviceProvider, options:newOptions = [] }) => {
+	serviceProvider?.service_charges.forEach((item) => {
+		if (item?.service_type === 'ftl_freight_service') {
+			newOptions.push(
+				{ label: item?.detail?.truck_number, value: item?.detail?.truck_number },
+			);
+		}
+	});
+	return newOptions;
+};
+
 const handleModifiedOptions = ({ options: newOptions = [] }) => newOptions?.map((option) => ({
 	...option,
 	actualname : option?.item_name,
@@ -55,6 +66,23 @@ export const renderLineItemFunctions = {
 				rules={{ required: true }}
 			/>
 			{errors?.line_items?.[index]?.container_number ? (
+				<div className={styles.errors}>
+					* Required
+				</div>
+			) : null}
+		</div>
+	),
+	truck_number: ({ control, index, errors, serviceProvider }) => (
+		<div className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
+			<SelectController
+				control={control}
+				name="truck_number"
+				placeholder="Enter"
+				initialCall
+				options={getTruckNumberOptions({ serviceProvider })}
+				rules={{ required: true }}
+			/>
+			{errors?.line_items?.[index]?.truck_number ? (
 				<div className={styles.errors}>
 					* Required
 				</div>

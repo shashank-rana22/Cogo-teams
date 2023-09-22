@@ -1,5 +1,7 @@
 import { Select, Input, Pagination, Button, Placeholder, Chips } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { serviceOptions, sortByOptions } from '../helpers/filterOptionMapping';
@@ -12,8 +14,9 @@ import List from './List';
 import styles from './styles.module.css';
 
 function RevenueDesk() {
+	const router = useRouter();
+	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 	const [showDetailPage, setShowDetailPage] = useState(null);
-
 	const options = [{
 		key      : 'reverted',
 		disabled : false,
@@ -36,7 +39,16 @@ function RevenueDesk() {
 				/>
 			) : (
 				<div>
-					<div className={styles.heading}>Revenue Desk</div>
+					<div className={styles.header}>
+						<div className={styles.heading}>Revenue Desk</div>
+						<Button
+							size="md"
+							themeType="accent"
+							onClick={() => router.push(`/${partnerId}/revenue-desk/control-panel`)}
+						>
+							Control Panel
+						</Button>
+					</div>
 					<div className={styles.sub_section}>
 						<div className={styles.service_outer_container}>
 							<div className={styles.service_container}>
