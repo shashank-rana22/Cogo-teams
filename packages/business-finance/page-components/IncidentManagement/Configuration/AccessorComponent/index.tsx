@@ -35,7 +35,7 @@ const TYPE_COMPONENT_MAPPING = {
 	JOB_OPEN                               : JobOpen,
 };
 
-function AccessorComponent({ row, getIncidentData }) {
+function AccessorComponent({ row, getIncidentData, detailsModal = {}, setDetailsModal = () => { } }) {
 	const { type = '', id = '', data, remark = '', status = '', referenceId = '' } = row || {};
 	const { organization } = data || {};
 
@@ -55,6 +55,8 @@ function AccessorComponent({ row, getIncidentData }) {
 			isEditable={status === 'REQUESTED'}
 			status={status}
 			remark={remark}
+			detailsModal={detailsModal}
+			setDetailsModal={setDetailsModal}
 		/>
 	);
 }
