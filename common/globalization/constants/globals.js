@@ -3,6 +3,7 @@
 import CURRENCY_CODE from './currencyCode';
 import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
+import SUPPLIER_ENTITY_MAPPING from './supplierEntityMapping';
 
 const GLOBAL_CONSTANTS = {
 	attendence_options: [
@@ -809,7 +810,8 @@ const GLOBAL_CONSTANTS = {
 	governance_manager_rejected_image_url:
     'https://cogoport-testing.sgp1.digitaloceanspaces.com/2466c7e2faa34ad8f4beb2b110b1ce1e/Group.svg',
 
-	default_preferred_language: 'english',
+	default_preferred_language : 'english',
+	supplier_entity_mapping    : SUPPLIER_ENTITY_MAPPING,
 };
 
 export default GLOBAL_CONSTANTS;

@@ -80,10 +80,7 @@
 	display: flex;
 	flex: 1;
 	align-items: center;
-	justify-content: space-between;
-	max-width: 30%;
 	padding: 12px 16px;
-	margin-top: 12px;
 	margin-right: 4px;
 	background-color: #fff;
 	border-radius: 4px;
@@ -116,6 +113,7 @@
 }
 
 .view_more {
+	margin-left: 10px;
 	color: #ed3726;
 	text-decoration: underline;
 	cursor: pointer;
@@ -139,4 +137,54 @@
 .line {
 	margin-bottom: 12px;
 	border: 1px solid #333;
+}
+
+.tagging {
+	flex-direction: column;
+	margin: 15px 0;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+}
+
+.approve_button {
+	float: right;
+	margin: 10px;
+	font-size: var(--font-size-md);
+	font-weight: 500;
+	border: 1px solid !important;
+}
+
+.shipment_container_section {
+	width: 100%;
+	margin-top: 20px;
+}
+
+.apply_section {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.sid_card {
+	cursor: pointer;
+}
+
+.poc_aligned {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.container_number {
+	display: flex;
+	align-items: center;
+}
+
+.select_filter {
+	margin-left: 10px;
+}
+
+.variance_margin {
+	margin-right: 2px;
 }

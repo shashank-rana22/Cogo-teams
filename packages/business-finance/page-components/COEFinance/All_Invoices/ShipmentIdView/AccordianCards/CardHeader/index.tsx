@@ -24,10 +24,12 @@ function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
 		discountAppliedRevenueDesk,
 		jobStatus,
 	} = itemData || {};
+
 	const options = [
 		{ name: 'Expense', value: 'expense' },
 		{ name: 'Income', value: 'income' },
 	];
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.amount}>
