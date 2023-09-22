@@ -27,123 +27,133 @@ function InvoiceDetails({
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-	|| isAuthorized;
+	const { is_cogo_assured = false, is_job_closed_financially = false } = shipment_data || {};
 
-	const commonActions = invoice.status !== 'approved' && !disableAction;
+	const editInvoicesVisiblity = !is_job_closed_financially && (
+		(is_cogo_assured !== true && !invoice?.is_igst) || isAuthorized);
 
-	const remarkRender = () => (
-		<div className={styles.remarkcontainer}>
-			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
-		</div>
-	);
+	const commonActions = invoice?.status !== 'approved' && !disableAction;
+
+	function RemarkRender() {
+		return (
+			<div className={styles.remarkcontainer}>
+				<div className={styles.title}>Invoice Remarks</div>
+				<div className={styles.value}>{invoice?.remarks}</div>
+			</div>
+		);
+	}
 
 	const handleClick = (setState = () => {}) => {
 		setShow(false);
 		setState(true);
 	};
 
-	const content = (
-		<div className={styles.dialog_box}>
-			{commonActions ? (
-				<>
-					{editInvoicesVisiblity ? (
-						<div style={{ width: '100%' }}>
+	function Content() {
+		return (
+			<div className={styles.dialog_box}>
+				{commonActions ? (
+					<>
+						{editInvoicesVisiblity ? (
+							<div style={{ width: '100%' }}>
+								<ClickableDiv
+									className={styles.text}
+									onClick={() => handleClick(setIsEditInvoice)}
+								>
+									Edit Invoices
+
+								</ClickableDiv>
+								<div className={styles.line} />
+							</div>
+						) : null}
+
+						{!is_job_closed_financially ? (
+							<div>
+								<ClickableDiv
+									className={styles.text}
+									onClick={() => handleClick(setIsChangeCurrency)}
+								>
+									Change Currency
+								</ClickableDiv>
+								<div className={styles.line} />
+							</div>
+						) : null}
+
+						{!is_job_closed_financially ? (
 							<ClickableDiv
 								className={styles.text}
-								onClick={() => handleClick(setIsEditInvoice)}
+								onClick={() => handleClick(setShowAddRemarks)}
 							>
-								Edit Invoices
-
+								Add Remarks
 							</ClickableDiv>
-							<div className={styles.line} />
-						</div>
-					) : null}
+						) : null}
 
-					<div>
+						{!is_job_closed_financially && invoice?.billing_address?.trade_party_type === 'self' ? (
+							<div>
+								<div className={styles.line} />
+								<ClickableDiv
+									className={styles.text}
+									onClick={() => handleClick(setShowChangePaymentMode)}
+								>
+									Change Payment Mode
+								</ClickableDiv>
+							</div>
+						) : null}
+					</>
+				) : null}
+
+				{(invoice.exchange_rate_document || []).map((url) => (
+					<div key={url}>
+						{commonActions ? <div className={styles.line} /> : null}
 						<ClickableDiv
 							className={styles.text}
-							onClick={() => handleClick(setIsChangeCurrency)}
+							onClick={() => window.open(url, '_blank')}
 						>
-							Change Currency
+							Exchange Rate Document
 						</ClickableDiv>
 						<div className={styles.line} />
-					</div>
+						<ClickableDiv
+							onClick={() => handleClick(setExchangeRate)}
+							className={styles.text}
+						>
+							Exchange Rate Sheet
 
-					<ClickableDiv
-						className={styles.text}
-						onClick={() => handleClick(setShowAddRemarks)}
-					>
-						Add Remarks
-					</ClickableDiv>
-
-					{invoice?.billing_address?.trade_party_type === 'self' ? (
+						</ClickableDiv>
 						<div>
 							<div className={styles.line} />
 							<ClickableDiv
 								className={styles.text}
-								onClick={() => handleClick(setShowChangePaymentMode)}
+								onClick={() => handleClick(setAddCustomerInvoice)}
 							>
-								Change Payment Mode
+								{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
+								{' '}
+								{['reviewed', 'approved'].includes(invoice?.status) ? '/Generate' : ''}
+								Customer Invoice
 							</ClickableDiv>
+							{['reviewed', 'approved'].includes(invoice?.status) ? (
+								<ClickableDiv
+									className={styles.text}
+									onClick={() => handleClick(setUpdateCustomerInvoice)}
+								>
+									Update Customer Invoice
+								</ClickableDiv>
+							) : null}
 						</div>
-					) : null}
-				</>
-			) : null}
-
-			{(invoice.exchange_rate_document || []).map((url) => (
-				<div key={url}>
-					{commonActions ? <div className={styles.line} /> : null}
-					<ClickableDiv
-						className={styles.text}
-						onClick={() => window.open(url, '_blank')}
-					>
-						Exchange Rate Document
-					</ClickableDiv>
-					<div className={styles.line} />
-					<ClickableDiv
-						onClick={() => handleClick(setExchangeRate)}
-						className={styles.text}
-					>
-						Exchange Rate Sheet
-
-					</ClickableDiv>
+					</div>
+				))}
+				{['reviewed', 'approved'].includes(invoice?.status) ? (
 					<div>
 						<div className={styles.line} />
 						<ClickableDiv
 							className={styles.text}
-							onClick={() => handleClick(setAddCustomerInvoice)}
+							onClick={() => handleClick(setFillCustomerData)}
 						>
-							{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
-								&nbsp;
-							{['reviewed', 'approved'].includes(invoice?.status) ? '/Generate' : ''}
-							Customer Invoice
+							Fill Shipment Data For Customer Portal
 						</ClickableDiv>
-						{['reviewed', 'approved'].includes(invoice?.status) ? (
-							<ClickableDiv
-								className={styles.text}
-								onClick={() => handleClick(setUpdateCustomerInvoice)}
-							>
-								Update Customer Invoice
-							</ClickableDiv>
-						) : null}
 					</div>
-				</div>
-			))}
-			{['reviewed', 'approved'].includes(invoice?.status) ? (
-				<div>
-					<div className={styles.line} />
-					<ClickableDiv
-						className={styles.text}
-						onClick={() => handleClick(setFillCustomerData)}
-					>
-						Fill Shipment Data For Customer Portal
-					</ClickableDiv>
-				</div>
-			) : null}
-		</div>
-	);
+				) : null}
+			</div>
+		);
+	}
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
@@ -153,7 +163,7 @@ function InvoiceDetails({
 							interactive
 							placement="bottom"
 							visible={show}
-							content={content}
+							content={<Content />}
 							theme="light"
 							onClickOutside={() => setShow(false)}
 						>
@@ -172,7 +182,7 @@ function InvoiceDetails({
 			{!isEmpty(invoice.remarks) ? (
 				<Tooltip
 					placement="bottom"
-					content={remarkRender()}
+					content={<RemarkRender />}
 				>
 					<div className={styles.icon_more_wrapper}>
 						<IcMInfo fill="#DDEBC0" />
