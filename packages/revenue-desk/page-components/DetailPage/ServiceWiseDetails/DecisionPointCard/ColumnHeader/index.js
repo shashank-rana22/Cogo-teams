@@ -34,7 +34,7 @@ const getServiceLabel = ({ service, isHead }) => {
 function ColumnHeader({ list = {}, priceData = {}, supplierPayload = {} }) {
 	let showHeader = false;
 	Object.keys(supplierPayload).forEach((payload) => {
-		if (payload.lenght) {
+		if (payload.length) {
 			showHeader = true;
 		}
 	});

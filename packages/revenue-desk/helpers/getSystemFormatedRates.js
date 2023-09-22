@@ -25,6 +25,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			preferred_currency                     : validities?.preferred_currency,
 			total_buy_price_in_preferred_currency  : validities?.total_buy_price_in_preferred_currency,
 			total_sell_price_in_preferred_currency : validities?.total_sell_price_in_preferred_currency,
+			total_profit_in_preferred_currency     : validities?.total_profit_in_preferrred_currency,
 			profit                                 : validities?.profit || DEFAULT_VALUE,
 			schedule_type                          : validities?.schedule_type,
 			profit_percentage                      : validities?.profit_percentage,
