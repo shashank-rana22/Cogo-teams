@@ -48,7 +48,7 @@ function AddNewService({
 				<button
 					className={styles.container}
 					onClick={closeModal}
-					disabled={shipment_data?.is_job_closed}
+					disabled={shipment_data?.is_job_closed_financially}
 				>
 					<div className={styles.text}>{upsellableService?.display_label}</div>
 					<IcMPlus />

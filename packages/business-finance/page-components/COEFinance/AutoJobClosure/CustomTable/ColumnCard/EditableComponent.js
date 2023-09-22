@@ -1,4 +1,4 @@
-import Placeholder, { Button, cl } from '@cogoport/components';
+import { Button, Placeholder, cl } from '@cogoport/components';
 import { SelectController, InputController, useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
@@ -95,7 +95,7 @@ function EditableComponent({
 				className={cl`${styles.selectController} ${styles.font12}`}
 				control={control}
 				name="tradeType"
-				Placeholder={tradeType}
+				placeholder={tradeType}
 				options={TRADE_TYPE_OPTIONS}
 				rules={{ required: true }}
 			/>

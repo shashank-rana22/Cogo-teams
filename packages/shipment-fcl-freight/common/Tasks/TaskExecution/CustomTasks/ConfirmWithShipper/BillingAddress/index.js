@@ -3,6 +3,7 @@ import {
 	AsyncSelectController,
 	ChipsController,
 	CreatableSelectController,
+	DatepickerController,
 	InputController,
 	MobileNumberController,
 	TextAreaController,
@@ -25,6 +26,7 @@ const INPUT_MAPPING = {
 	creatableSelect : CreatableSelectController,
 	textarea        : TextAreaController,
 	mobileNumber    : MobileNumberController,
+	date            : DatepickerController,
 };
 
 function Error(key, errors) {
