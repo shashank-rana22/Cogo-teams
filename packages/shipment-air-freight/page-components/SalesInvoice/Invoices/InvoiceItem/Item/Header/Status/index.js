@@ -21,8 +21,6 @@ function Status({
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const IS_JOB_CLOSED = shipment_data?.is_job_closed;
-
 	const { sendInvoiceToFinance = () => {} } = useSendInvoiceToFinance({ refetch: refetchAferApiCall });
 
 	let invoiceStatus = invoicesList?.filter(
@@ -37,11 +35,20 @@ function Status({
 	return (
 		<div className={styles.invoice_container}>
 			{invoice?.status
-					&& restrictedRevokedStatus.includes(invoice?.status) && (
-						<div className={styles.invoice_status}>
-							{startCase(invoice?.status)}
-						</div>
-			)}
+					&& restrictedRevokedStatus.includes(invoice?.status) ? (
+						<>
+							<div className={styles.invoice_status}>
+								{startCase(invoice.status || '')}
+							</div>
+							{invoice?.status === 'finance_rejected' && invoice?.rejection_reason
+								? (
+									<div className={styles.invoice_rejection_reason}>
+										{invoice.rejection_reason}
+									</div>
+								)
+								: null}
+						</>
+				) : null}
 
 			{invoice?.processing ? (
 				<div className={styles.reload}>
@@ -49,7 +56,6 @@ function Status({
 					<Button
 						size="sm"
 						themeType="tertiary"
-						disabled={IS_JOB_CLOSED}
 						onClick={() => sendInvoiceToFinance({
 							payload: {
 								id: invoice?.id,

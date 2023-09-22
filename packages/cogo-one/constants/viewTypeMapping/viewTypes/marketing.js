@@ -28,6 +28,7 @@ const MARKETING = {
 	mails_to_be_shown             : [],
 	bulk_assign_features          : [],
 	configurations_to_be_shown    : [],
+	shift_view_default_type       : '',
 	group_agents_api_filter       : ['marketing'],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 	permissions                   : {

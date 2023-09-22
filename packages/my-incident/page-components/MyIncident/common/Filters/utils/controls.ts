@@ -35,6 +35,10 @@ export const filterControls = (activeTab) => {
 							value : 'OVERHEAD_APPROVAL',
 							label : 'Expense Approval',
 						},
+						{
+							value : 'JOB_OPEN',
+							label : 'Job Open',
+						},
 					],
 				},
 				{
@@ -93,6 +97,10 @@ export const filterControls = (activeTab) => {
 							value : 'OVERHEAD_APPROVAL',
 							label : 'Expense Approval',
 						},
+						{
+							value : 'JOB_OPEN',
+							label : 'Job Open',
+						},
 					],
 				},
 				{
@@ -150,6 +158,10 @@ export const filterControls = (activeTab) => {
 						{
 							value : 'OVERHEAD_APPROVAL',
 							label : 'Expense Approval',
+						},
+						{
+							value : 'JOB_OPEN',
+							label : 'Job Open',
 						},
 					],
 				},

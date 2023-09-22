@@ -34,11 +34,13 @@ function MessageCardData({
 		new_message_count = 0,
 		last_inbound_document = null,
 		last_outbound_document = null,
+		last_draft_document = null,
 	} = formattedData || {};
 
 	const reqLastDocumentMapping = {
 		sent_items : last_outbound_document,
 		inbox      : last_inbound_document,
+		drafts     : last_draft_document,
 	};
 
 	const lastMessageVar = isEmpty(reqLastDocumentMapping[activeFolder])
@@ -51,9 +53,13 @@ function MessageCardData({
 		subject = '',
 		body = '',
 		body_preview: bodyPreview = '',
+		to_mails = [],
+		sender = '',
 	} = response || {};
 
 	const isImportant = chat_tags?.includes('important') || false;
+
+	const mailToBeShown = activeFolder === 'inbox' ? sender : to_mails.join(', ');
 
 	const checkActiveCard = activeTab?.data?.id === id;
 
@@ -102,6 +108,10 @@ function MessageCardData({
 						})}
 					</div>
 				</div>
+			</div>
+
+			<div className={styles.email_sender}>
+				{mailToBeShown || ''}
 			</div>
 
 			<div className={styles.subject_container}>
