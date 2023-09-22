@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { expenseConfig } from '../configurations/ShipmentIdView/expenseConfig';
 import { incomeConfig } from '../configurations/ShipmentIdView/incomeConfig';
+import quotationConfig from '../configurations/ShipmentIdView/quotationConfig.json';
 
 import useGetFiniteList from './useGetFiniteList';
 
@@ -104,9 +105,13 @@ const useListBills = (allParams) => {
 		},
 	});
 
-	const currentApi = params?.amountTab === 'expense'
-		? listExpenseInvoicesApi
-		: listSalesInvoicesApi;
+	const API_MAPPING = {
+		expense : listExpenseInvoicesApi,
+		income  : listSalesInvoicesApi,
+	};
+
+	const currentApi = API_MAPPING[params?.amountTab];
+
 	const {
 		loading,
 		page,
@@ -124,9 +129,17 @@ const useListBills = (allParams) => {
 		params.setDataCard(fullResponse?.list?.[0]?.job || fullResponse?.list?.[0]);
 	}, [fullResponse, params]);
 
-	const config = params?.amountTab === 'expense' ? expenseConfig : incomeConfig;
+	const CONFIG_MAPPING = {
+		expense   : expenseConfig,
+		income    : incomeConfig,
+		sellQuote : quotationConfig,
+		buyQuote  : quotationConfig,
+	};
+
+	const config = CONFIG_MAPPING[params?.amountTab];
 
 	const apiLoading = loading || billsApiLoading || invoicesApiLoading;
+
 	return {
 		loading : apiLoading,
 		page,
