@@ -18,7 +18,7 @@ function Leaderboard() {
 		<>
 			<Header />
 
-			<Body viewData={viewData} />
+			<Body />
 		</>
 	);
 }

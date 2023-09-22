@@ -4,7 +4,7 @@ import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import styles from './styles.module.css';
 
-function Body({ viewData = '' }) {
+function Body() {
 	const {
 		list,
 		params,
@@ -15,7 +15,7 @@ function Body({ viewData = '' }) {
 		setCurrLevel,
 		// levelStack,
 		setLevelStack,
-	} = useGetScoringReports({ viewData });
+	} = useGetScoringReports();
 
 	return (
 		<div className={styles.container}>
