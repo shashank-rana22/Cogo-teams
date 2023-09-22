@@ -75,10 +75,14 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 	};
 	return (
 		<div>
-			<div>
-				<RejectedCharts filters={filters} />
-				{/* <MyResponsiveBar data={BarData({ dashboardData })} /> */}
-			</div>
+			{
+				subActiveTabReject === 'coe_rejected' ? (
+					<div>
+						<RejectedCharts filters={filters} />
+					</div>
+				) : null
+			}
+
 			<SegmentedFilters
 				filters={filters}
 				setFilters={setFilters}

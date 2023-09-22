@@ -8,13 +8,13 @@ function ResponsiveBarChart({ barData }) {
 	return (
 		<ResponsiveBar
 			data={barData}
-			keys={['income', 'expense']}
-			indexBy="month"
+			keys={['Total Audited', 'Rejected']}
+			indexBy="date"
 			margin={{ top: 100, right: 30, bottom: 80, left: 60 }}
 			padding={0.3}
 			valueScale={{ type: 'linear' }}
 			indexScale={{ type: 'band', round: true }}
-			colors={['#DDEBC0', '#ACDADF']}
+			colors={['#C4DC91', '#F8AEA8']}
 			enableGridY
 			enableLabel
 			layout="vertical"
@@ -24,15 +24,22 @@ function ResponsiveBarChart({ barData }) {
 			}}
 			axisTop={null}
 			axisRight={null}
-			innerPadding={8}
+			innerPadding={4}
 			axisBottom={{
-				tickSize: 0, tickPadding: 20, tickRotation: 0,
+				tickSize       : 5,
+				tickPadding    : 10,
+				tickRotation   : 0,
+				legend         : 'Date',
+				legendOffset   : 44,
+				legendPosition : 'middle',
 			}}
 			axisLeft={{
-				tickSize     : 0,
-				tickPadding  : -10,
-				tickRotation : 0,
-				format       : (value) => value,
+				tickSize       : 5,
+				tickPadding    : 5,
+				tickRotation   : 0,
+				legend         : 'Lorem lpsum',
+				legendOffset   : -50,
+				legendPosition : 'middle',
 			}}
 			labelSkipWidth={36}
 			labelSkipHeight={12}

@@ -87,6 +87,11 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
+			api         : 'get_purchase_bills_comment_remarks_counts',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
 			api         : 'get_purchase_bills_so2_success_rate',
 			access_type : 'private',
 			feature     : 'coeFinance',
