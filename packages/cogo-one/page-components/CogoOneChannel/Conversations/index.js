@@ -57,6 +57,7 @@ function Conversations({
 		},
 		teams: {
 			activeTeamCard: activeTab?.data || {},
+			suggestions,
 		},
 	};
 

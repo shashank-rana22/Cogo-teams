@@ -1,12 +1,14 @@
 import { Button, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import React from 'react';
+import React, { useState } from 'react';
 
 import AddMembers from './AddMembers';
 import styles from './styles.module.css';
 
 function Header() {
+	const [showPopover, setShowPopover] = useState(false);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.group}>
@@ -26,8 +28,8 @@ function Header() {
 				</div>
 			</div>
 			<div className={styles.group}>
-				<Popover placement="bottom" render={<AddMembers />}>
-					<Button themeType="tertiary">
+				<Popover placement="bottom" render={showPopover ? (<AddMembers />) : null}>
+					<Button themeType="tertiary" onClick={() => setShowPopover((prev) => !prev)}>
 						<Image
 							src={GLOBAL_CONSTANTS.image_url.groups}
 							alt="group"

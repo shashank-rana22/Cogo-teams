@@ -10,8 +10,21 @@
 	background: #f9f9f9;
 }
 
+.messages {
+	height: calc(100% - 60px);
+	overflow-y: auto;
+}
+
 .header {
 	height: fit-content;
 	background: #fff;
 	border-bottom: 1px solid #f0f0f0;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background: #fff;
+	box-shadow: 0 -4px 3px rgb(255 187 187 / 20%);
 }
