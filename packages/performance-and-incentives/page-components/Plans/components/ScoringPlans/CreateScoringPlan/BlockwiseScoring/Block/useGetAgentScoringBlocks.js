@@ -18,7 +18,7 @@ const useGetAgentScoringBlocks = (props) => {
 				params: {
 					agent_scoring_parameters_data_required : true,
 					filters                                : {
-						display_name: watchBlock,
+						q: watchBlock,
 					},
 					page_limit: 1000,
 				},
