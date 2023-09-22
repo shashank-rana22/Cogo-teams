@@ -1,6 +1,9 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+
 import { INCREMENT_BY_ONE, VALUE_ZERO } from '../../../../../constants';
 
 import SingleSelectedCard from './SingleSelectedCard';
+import styles from './styles.module.css';
 
 function SelectedCards({ prefrences, shipmentType }) {
 	let wallet_amount = 0;
@@ -15,10 +18,18 @@ function SelectedCards({ prefrences, shipmentType }) {
 	return (
 		<div>
 			{wallet_amount > VALUE_ZERO && (
-				<div>
+				<div className={styles.label}>
 					Wallet Used :
 					{' '}
-					{wallet_amount}
+					<div className={styles.value}>
+						{formatAmount({
+							amount   : wallet_amount,
+							currency : 'USD',
+							options  : {
+								style: 'currency',
+							},
+						}) || '-'}
+					</div>
 				</div>
 			)}
 			{prefrences?.map((singleItem, index) => (
