@@ -9,6 +9,11 @@
 			padding: 0 20px;
 		}
 
+		.ui_input_container,
+		.ui_text_area_container {
+			width: 440px;
+		}
+
 		.ui_modal_header_container {
 			padding: 16px 16px 0;
 		}

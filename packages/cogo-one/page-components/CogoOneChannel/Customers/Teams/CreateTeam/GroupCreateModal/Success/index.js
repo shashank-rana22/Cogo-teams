@@ -3,7 +3,7 @@ import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { TEAMS_ICON_MAPPING } from '../../../../../../constants';
+import { TEAMS_ICON_MAPPING } from '../../../../../../../constants';
 
 import styles from './styles.module.css';
 

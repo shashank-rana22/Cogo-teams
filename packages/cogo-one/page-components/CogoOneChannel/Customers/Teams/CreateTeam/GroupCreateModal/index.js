@@ -12,8 +12,8 @@ const FIRST_COMPONENT = 1;
 const SECOUND_COMPONENT = 2;
 
 function GroupCreateModal({
-	setCreteTeams = () => {},
-	creteTeams = false,
+	setCreateTeams = () => {},
+	createTeams = false,
 }) {
 	const [activeComponent, setActiveComponent] = useState(FIRST_COMPONENT);
 	const [isDisableNextButton, setIsDisableNextButton] = useState(false);
@@ -28,7 +28,7 @@ function GroupCreateModal({
 	const showHeader = activeComponent <= SECOUND_COMPONENT;
 
 	const handleClose = () => {
-		setCreteTeams(false);
+		setCreateTeams(false);
 		setActiveComponent(FIRST_COMPONENT);
 		setSelectedGroup({
 			group_type        : '',
@@ -69,7 +69,7 @@ function GroupCreateModal({
 		<Modal
 			className={styles.styled_ui_modal_dialog}
 			scroll={false}
-			show={creteTeams}
+			show={createTeams}
 			size="sm"
 			placement="center"
 			onClose={handleClose}

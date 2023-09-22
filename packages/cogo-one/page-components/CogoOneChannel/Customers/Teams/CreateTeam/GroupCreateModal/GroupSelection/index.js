@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 import { Image } from '@cogoport/next';
 import React from 'react';
 
-import { GROUP_TYPE_SELECTIONS } from '../../../../../../constants/GROUP_TYPE_SELECTIONS';
+import { GROUP_TYPE_SELECTIONS } from '../../../../../../../constants/GROUP_TYPE_SELECTIONS';
 
 import styles from './styles.module.css';
 

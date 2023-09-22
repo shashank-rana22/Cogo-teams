@@ -1,4 +1,7 @@
+/* eslint-disable custom-eslint/variables-name-check */
 /* eslint-disable max-len */
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import React from 'react';
 
 import ReceiveComponent from './ReceiveComponent';
@@ -52,12 +55,29 @@ const DUMMY = [
 		response          : { message: 'life is short enjoy fast' },
 	},
 ];
+
 const CONVERSATION_TYPE_MAPPING = {
 	sent     : SentComponent,
 	received : ReceiveComponent,
 };
 
+const loading = false;
+
 function Messages() {
+	if (loading) {
+		return (
+			<div className={styles.flex_div}>
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.cogo_one_loader}
+					type="video/gif"
+					alt="loading"
+					width={100}
+					height={100}
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			{(DUMMY || []).map((eachMessage) => {
@@ -66,7 +86,7 @@ function Messages() {
 				return (
 					<Component
 						key={eachMessage?.created_at}
-                        // isSent={eachMessage?.}
+                         // isSent={eachMessage?.}
 						eachMessage={eachMessage}
 					/>
 				);

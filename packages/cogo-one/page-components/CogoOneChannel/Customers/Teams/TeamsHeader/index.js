@@ -1,5 +1,5 @@
 import { Popover, Input } from '@cogoport/components';
-import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMFilter, IcMSearchlight, IcMEdit } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
@@ -32,6 +32,7 @@ function TeamsHeader({
 					className={styles.filter_icon}
 				/>
 			</Popover>
+			<IcMEdit />
 		</div>
 	);
 }
