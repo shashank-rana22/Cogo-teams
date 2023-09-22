@@ -9,7 +9,7 @@ const NUMBERS = {
 	TWO     : 2,
 	HUNDRED : 100,
 };
-const columnTitle = [
+const COLUMN_TITLE = [
 	'profitability', 'buy_price', 'sell_price', 'shipping_line_/_airline',
 	'service_provider', 'active_booking', 'alloc_ratio', 'fulfill_ratio',
 ];
@@ -35,7 +35,7 @@ function ColumnHeader({ list = {}, priceData = {} }) {
 	return (
 		<div>
 			<div className={styles.outerContainer}>
-				{columnTitle.map((title) => (
+				{COLUMN_TITLE.map((title) => (
 					<div key={title} className={styles.title}>
 						{getServiceLabel({ service: title, isHead: true })}
 					</div>
@@ -66,7 +66,7 @@ function ColumnHeader({ list = {}, priceData = {} }) {
 
 												</div>
 											</div>
-											{columnTitle.map((key) => (
+											{COLUMN_TITLE.map((key) => (
 												<div
 													key={key}
 													style={{ color: getBackGround(key) }}
