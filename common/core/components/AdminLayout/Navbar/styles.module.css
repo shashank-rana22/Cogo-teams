@@ -249,6 +249,10 @@
 	will-change: transform;
 }
 
+.notification_popover_bg_nav {
+	transform: none;
+}
+
 .icon {
 	width: 10px !important;
 	height: 10px !important;
@@ -285,6 +289,10 @@
 			transform: translate3d(0, 0, 0);
 		}
 	}
+}
+
+.expanded {
+	width: var(--layout-navbar);
 }
 
 .mobile_container {

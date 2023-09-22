@@ -80,13 +80,16 @@ function Navbar({
 	return (
 		<div
 			style={style}
-			className={cl`${mobileShow ? styles.mobile_container : styles.container}${className}`}
+			className={cl`${mobileShow ? styles.mobile_container : styles.container}${className}
+			${notificationPopover ? ` ${styles.expanded}` : ''}`}
 		>
 			<nav
 				onMouseEnter={() => setResetSubnavs(true)}
 				onMouseLeave={handleLeave}
 			>
-				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}`} />
+				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}
+				${notificationPopover ? ` ${styles.notification_popover_bg_nav}` : ''}`}
+				/>
 				<div className={styles.inner_container}>
 					<div className={styles.brand_logo}>
 						<img

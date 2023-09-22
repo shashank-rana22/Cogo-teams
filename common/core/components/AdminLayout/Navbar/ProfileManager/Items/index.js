@@ -55,31 +55,28 @@ function SingleNav({
 }
 
 function Items({
-	item,
-	resetSubnavs,
+	item = [],
+	resetSubnavs = false,
 	setOpenPopover = () => {},
-	timeLeft,
-	loading,
-	openPopover,
+	timeLeft = '',
+	loading = true,
+	openPopover = () => {},
 	refetch = () => {},
-	checkIfSessionExpiring,
+	checkIfSessionExpiring = false,
 	notificationCount = ZERO_COUNT,
-	notificationPopover,
-	setNotificationPopover,
+	notificationPopover = false,
+	setNotificationPopover = () => {},
 }) {
 	const { t } = useTranslation(['common']);
 
 	const {
 		user_data,
 		userSessionMappings,
-		// query,
 	} = useSelector(({ profile, general }) => ({
 		user_data           : profile?.user || {},
 		userSessionMappings : profile?.user_session_mappings || [],
 		query               : general?.query || {},
 	}));
-
-	// const { partner_id = '' } = query || {};
 
 	const [showSubNav, setShowSubNav] = useState(false);
 
