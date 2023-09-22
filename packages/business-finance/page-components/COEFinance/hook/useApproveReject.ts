@@ -15,7 +15,7 @@ interface ApproveRejectInterface {
 	lineItemsRemarks?:object
 }
 
-const ApproveReject = ({
+const useApproveReject = ({
 	remarksVal, overAllRemark,
 	lineItemsRemarks, modalData, setApprove, billId,
 }:ApproveRejectInterface) => {
@@ -48,7 +48,7 @@ const ApproveReject = ({
 		},
 		{ autoCancel: false },
 	);
-	const rejectApproveApi = async (getRoute) => {
+	const rejectApproveApi = async ({ getRoute, isAdditional = false, additionalRemarks = {} }) => {
 		try {
 			await trigger({
 				data: {
@@ -59,6 +59,7 @@ const ApproveReject = ({
 					remarksList         : modalData !== 'Approve' ? remarksVal : undefined,
 					remarks             : overAllRemark,
 					lineItemsRemarks    : modalData !== 'Approve' ? lineItemsRemarks : undefined,
+					additionalRemarks   : isAdditional ? additionalRemarks : undefined,
 				},
 			});
 			setApprove(false);
@@ -78,4 +79,4 @@ const ApproveReject = ({
 	};
 };
 
-export default ApproveReject;
+export default useApproveReject;

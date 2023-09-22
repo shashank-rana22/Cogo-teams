@@ -1,17 +1,9 @@
 import { Checkbox, Radio, RadioGroup, Textarea } from '@cogoport/components';
-import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
 // eslint-disable-next-line max-lines-per-function
-function AdditionalRemarks() {
-	const [remarkData, setRemarkData] = useState({
-		profitability : null,
-		mismatched    : null,
-		miscellaneous : null,
-		other         : null,
-	});
-
+function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {} }) {
 	const handleCategoryChange = (fieldName) => {
 		setRemarkData((prev) => ({
 			...prev,
@@ -136,17 +128,16 @@ function AdditionalRemarks() {
 		},
 	];
 
-	console.log({ remarkData });
 	return (
 		<div>
-			<h1>AdditionalRemarks</h1>
+			<h3>Rejection Reason:</h3>
 			<Checkbox
 				label="Profitability"
 				checked={remarkData?.profitability}
 				onChange={() => {
 					setRemarkData((prev) => ({
 						...prev,
-						profitability: prev?.profitability ? null : {},
+						profitability: prev?.profitability ? undefined : {},
 					}));
 				}}
 			/>
@@ -172,10 +163,10 @@ function AdditionalRemarks() {
 										},
 									}))}
 									value={typeof (remarkData?.profitability?.notBilled) === 'string'
-										? (remarkData?.profitability?.notBilled) : null}
+										? (remarkData?.profitability?.notBilled) : undefined}
 								/>
 							)
-							: null}
+							: undefined}
 					</div>
 
 					<Radio
@@ -197,10 +188,10 @@ function AdditionalRemarks() {
 										},
 									}))}
 									value={typeof (remarkData?.profitability?.billed) === 'string'
-										? (remarkData?.profitability?.billed) : null}
+										? (remarkData?.profitability?.billed) : undefined}
 								/>
 							)
-							: null}
+							: undefined}
 					</div>
 
 					<Radio
@@ -222,10 +213,10 @@ function AdditionalRemarks() {
 										},
 									}))}
 									value={typeof (remarkData?.profitability?.draft) === 'string'
-										? (remarkData?.profitability?.draft) : null}
+										? (remarkData?.profitability?.draft) : undefined}
 								/>
 							)
-							: null}
+							: undefined}
 					</div>
 
 					<Radio
@@ -259,7 +250,7 @@ function AdditionalRemarks() {
 					/>
 
 				</div>
-			) : null}
+			) : undefined}
 
 			<Checkbox
 				label="Document number mismatched"
@@ -267,12 +258,12 @@ function AdditionalRemarks() {
 				onChange={() => {
 					setRemarkData((prev) => ({
 						...prev,
-						mismatched: prev?.mismatched ? null : true,
+						mismatched: prev?.mismatched ? undefined : true,
 					}));
 				}}
 			/>
 
-			<div className={styles.sub_category}>
+			<div className={styles.category}>
 				{(remarkData?.mismatched)
 					? (
 						<RadioGroup
@@ -282,10 +273,10 @@ function AdditionalRemarks() {
 								mismatched: val,
 							}))}
 							value={typeof (remarkData?.mismatched) === 'string'
-								? (remarkData?.mismatched) : null}
+								? (remarkData?.mismatched) : undefined}
 						/>
 					)
-					: null}
+					: undefined}
 			</div>
 
 			<Checkbox
@@ -294,12 +285,12 @@ function AdditionalRemarks() {
 				onChange={() => {
 					setRemarkData((prev) => ({
 						...prev,
-						miscellaneous: prev?.miscellaneous ? null : true,
+						miscellaneous: prev?.miscellaneous ? undefined : true,
 					}));
 				}}
 			/>
 
-			<div className={styles.sub_category}>
+			<div className={styles.category}>
 				{(remarkData?.miscellaneous)
 					? (
 						<RadioGroup
@@ -309,10 +300,10 @@ function AdditionalRemarks() {
 								miscellaneous: val,
 							}))}
 							value={typeof (remarkData?.miscellaneous) === 'string'
-								? (remarkData?.miscellaneous) : null}
+								? (remarkData?.miscellaneous) : undefined}
 						/>
 					)
-					: null}
+					: undefined}
 			</div>
 
 			<Checkbox
@@ -321,7 +312,7 @@ function AdditionalRemarks() {
 				onChange={() => {
 					setRemarkData((prev) => ({
 						...prev,
-						other: prev?.other ? null : true,
+						other: prev?.other ? undefined : true,
 					}));
 				}}
 			/>
@@ -329,13 +320,14 @@ function AdditionalRemarks() {
 			{remarkData?.other ? (
 				<Textarea
 					value={typeof (remarkData?.other) === 'string'
-						? (remarkData?.other) : null}
+						? (remarkData?.other) : undefined}
 					onChange={(e) => setRemarkData((prev) => ({
 						...prev,
 						other: e,
 					}))}
+					style={{ height: '100px', margin: '12px 0' }}
 				/>
-			) : null}
+			) : undefined}
 
 		</div>
 	);

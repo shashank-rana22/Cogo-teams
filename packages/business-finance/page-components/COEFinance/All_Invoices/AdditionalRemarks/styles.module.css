@@ -7,3 +7,13 @@
 		}
 	}
 }
+
+.category {
+	margin: 0 28px;
+
+	:global {
+		.ui_radiogroup_container {
+			display: block;
+		}
+	}
+}

@@ -1,32 +1,13 @@
 import { Button, Textarea, Modal } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { RemarksValInterface } from '../../../../commons/Interfaces/index';
 import useApproveReject from '../../../hook/useApproveReject';
+import AdditionalRemarks from '../../AdditionalRemarks';
 import TimeLineItemCheck from '../ShipmentDetails/TimelineItemCheck';
 
 import styles from './styles.module.css';
-
-interface BillAdditionalInterface {
-	collectionPartyId?: string;
-}
-
-interface DataInterface {
-	billAdditionalObject?: BillAdditionalInterface;
-}
-interface HeaderInterface {
-	data?: DataInterface;
-	remarksVal?: RemarksValInterface;
-	overAllRemark?:string;
-	setOverAllRemark?:Function;
-	lineItemsRemarks: object;
-	status: string;
-	jobNumber?:string;
-	checkItem?: any;
-	isTagFound?: boolean;
-	currentTab?: string;
-}
 
 function Header({
 	data,
@@ -39,9 +20,16 @@ function Header({
 	checkItem = {},
 	isTagFound = false,
 	currentTab = '',
-}: HeaderInterface) {
+}: any) {
 	const [approve, setApprove] = useState(false);
 	const [modalData, setModalData] = useState('');
+	const [remarkData, setRemarkData] = useState({
+		profitability : undefined,
+		mismatched    : undefined,
+		miscellaneous : undefined,
+		other         : undefined,
+	});
+
 	const Router = useRouter();
 	const billId = Router?.query?.billId;
 	const { isShipment, searchValue } = Router?.query || {};
@@ -85,6 +73,23 @@ function Header({
 		];
 	};
 
+	const clearRemark = () => {
+		setRemarkData({
+			profitability : undefined,
+			mismatched    : undefined,
+			miscellaneous : undefined,
+			other         : undefined,
+		});
+	};
+
+	const getAdditionalRemarks = () => ({
+		profitabilityRemarks: remarkData?.profitability?.notBilled || remarkData?.profitability?.billed
+		|| remarkData?.profitability?.draft || remarkData?.profitability,
+		documentNumberRemarks : remarkData?.mismatched,
+		miscellaneousRemarks  : remarkData?.miscellaneous,
+		otherRemarks          : remarkData?.other,
+	});
+
 	return (
 		<div>
 			<div className={styles.container}>
@@ -121,7 +126,7 @@ function Header({
 					<Button
 						size="md"
 						style={{ marginRight: '8px' }}
-						disabled={isItemNotChecked || !isApproveDisabled}
+						disabled={isItemNotChecked}
 						onClick={(e: any) => handleModalData(e)}
 					>
 						Reject
@@ -139,48 +144,86 @@ function Header({
 
 			{approve && (
 				<Modal
-					size="md"
+					size="lg"
 					show={approve}
 					onClose={() => {
 						setApprove(false);
 					}}
+					className={styles.modal_body_section_custom}
 				>
 					<Modal.Body>
-						<div className={styles.heading}>
-							Are you sure you want to
-							{' '}
-							{modalData}
-							{' '}
-							this invoice ?
-						</div>
-						<Textarea
-							name="remark"
-							size="md"
-							placeholder="Remarks Here ..."
-							value={overAllRemark}
-							onChange={(value: string) => setOverAllRemark(value)}
-							style={{ width: '700', height: '100px', marginBottom: '12px' }}
-						/>
-						<div className={styles.button}>
-							<Button
-								size="md"
-								themeType="secondary"
-								style={{ marginRight: '8px' }}
-								onClick={() => {
-									setApprove(false);
-								}}
-							>
-								No
-							</Button>
-							<Button
-								size="md"
-								style={{ marginRight: '8px' }}
-								disabled={!(overAllRemark?.length > 0)}
-								onClick={() => rejectApproveApi(getRoute)}
-							>
-								Yes
-							</Button>
-						</div>
+						{isApproveDisabled ? (
+							<div>
+								<div className={styles.heading}>
+									Are you sure you want to
+									{' '}
+									{modalData}
+									{' '}
+									this invoice ?
+								</div>
+								<Textarea
+									name="remark"
+									size="md"
+									placeholder="Remarks Here ..."
+									value={overAllRemark}
+									onChange={(value: string) => setOverAllRemark(value)}
+									style={{ width: '700', height: '100px', marginBottom: '12px' }}
+								/>
+								<div className={styles.button}>
+									<Button
+										size="md"
+										themeType="secondary"
+										style={{ marginRight: '8px' }}
+										onClick={() => {
+											setApprove(false);
+										}}
+									>
+										No
+									</Button>
+									<Button
+										size="md"
+										style={{ marginRight: '8px' }}
+										disabled={!(overAllRemark?.length > 0)}
+										onClick={() => rejectApproveApi({ getRoute })}
+									>
+										Yes
+									</Button>
+								</div>
+							</div>
+						) : (
+							<div>
+								<AdditionalRemarks
+									remarkData={remarkData}
+									setRemarkData={setRemarkData}
+								/>
+								<div className={styles.btn_container}>
+									<Button
+										onClick={() => {
+											setApprove(false);
+											clearRemark();
+										}}
+										themeType="secondary"
+										style={{ marginRight: '8px' }}
+									>
+										Close
+									</Button>
+
+									<Button
+										size="md"
+										style={{ marginRight: '8px' }}
+										disabled={isEmpty(Object.values(remarkData)
+											?.filter((item) => item !== undefined && item !== true))}
+										onClick={() => rejectApproveApi({
+											getRoute,
+											isAdditional      : true,
+											additionalRemarks : getAdditionalRemarks(),
+										})}
+									>
+										Reject
+									</Button>
+								</div>
+							</div>
+						)}
 					</Modal.Body>
 				</Modal>
 			)}
