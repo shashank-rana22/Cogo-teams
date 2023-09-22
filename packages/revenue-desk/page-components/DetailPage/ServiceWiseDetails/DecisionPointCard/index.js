@@ -26,7 +26,7 @@ function DecisionPointsCard({ serviceData, supplierPayload, priceData }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
-				<ColumnHeader list={list} priceData={priceData} />
+				<ColumnHeader list={list} priceData={priceData} supplierPayload={supplierPayload} />
 			</div>
 		</div>
 	);

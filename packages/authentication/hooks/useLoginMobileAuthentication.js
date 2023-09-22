@@ -26,6 +26,7 @@ const useLoginMobileAuthentication = ({
 				data: {
 					mobile_number       : values?.mobile_number?.number,
 					mobile_country_code : values?.mobile_number?.country_code,
+					platform            : 'admin',
 				},
 			});
 

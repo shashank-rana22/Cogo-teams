@@ -1,9 +1,8 @@
-import { Pagination, Placeholder } from '@cogoport/components';
+import { Pagination } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import {
-	VALUE_ONE, VALUE_TWO, VALUE_THREE, VALUE_FOUR, VALUE_FIVE, VALUE_ZERO, VALUE_TEN, SRC,
-} from '../../constants';
+import LoaderDetails from '../../common/Loader';
+import { VALUE_ONE, VALUE_ZERO, VALUE_TEN, SRC } from '../../constants';
 import useListAutomationParameter from '../hooks/useListAutomationParameter';
 
 import FilterLayout from './FilterLayout';
@@ -17,17 +16,7 @@ function AutomationDesk() {
 	return (
 		<div>
 			<FilterLayout filter={filter} setFilter={setFilter} refetch={refetch} />
-			{loading
-				&& (
-					[VALUE_ONE, VALUE_TWO, VALUE_THREE, VALUE_FOUR, VALUE_FIVE]?.map((key) => (
-						<Placeholder
-							height="50px"
-							width="1250px"
-							key={key}
-							style={{ margin: '10px' }}
-						/>
-					))
-				)}
+			{loading && <LoaderDetails />}
 			{!loading && (
 				<div>
 					{data?.list?.length === VALUE_ZERO ? (
