@@ -29,7 +29,10 @@ interface Props {
 
 function SelectFilters({ filters = {}, setFilters = () => {}, activeEntity = '', createButton = '' }:Props) {
 	const [showPayRunModal, setshowPayRunModal] = useState(false);
-	const { search = '', documentType = '', dateRange = {} } = filters || {};
+	const {
+		search = '', documentType = '',
+		dateRange = { startDate: new Date(), endDate: new Date() },
+	} = filters || {};
 
 	return (
 		<div className={styles.container}>
