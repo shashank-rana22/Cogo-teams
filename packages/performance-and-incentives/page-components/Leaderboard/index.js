@@ -34,7 +34,7 @@ function Leaderboard() {
 		<>
 			<Header dateRange={dateRange} setDateRange={setDateRange} entity={entity} setEntity={setEntity} />
 
-			<Body dateRange={dateRange} />
+			<Body dateRange={dateRange} entity={entity} />
 		</>
 	);
 }

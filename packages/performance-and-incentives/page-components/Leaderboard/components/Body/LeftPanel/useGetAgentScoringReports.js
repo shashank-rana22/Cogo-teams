@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
 
 const useGetScoringReports = (props) => {
-	const { dateRange } = props;
+	const { dateRange, entity } = props;
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 
@@ -31,51 +31,36 @@ const useGetScoringReports = (props) => {
 		},
 	});
 
-	const [{ data, loading }, refetch] = useAllocationRequest({
+	const [{ data, loading }] = useAllocationRequest({
 		url     : '/reports',
 		method  : 'GET',
 		authkey : 'get_agent_scoring_reports',
 		params,
 	}, { manual: false });
 
-	const { list = [], current_user_data: currentUserData, ...paginationData } = data || {};
-
-	const getNextPage = (nextPage) => {
-		setParams((previousParams) => ({
-			...previousParams,
-			page: nextPage,
-		}));
-	};
+	const { list = [], current_user_data: currentUserData } = data || {};
 
 	useEffect(() => {
 		setParams((previousParams) => ({
 			...previousParams,
 			filters: {
 				...(previousParams.filters || {}),
-				q: searchQuery || undefined,
+				q                       : searchQuery || undefined,
+				created_at_greater_than : dateRange?.startDate || undefined,
+				created_at_less_than    : dateRange?.endDate || undefined,
+				partner_id              : entity || undefined,
 			},
 		}));
-	}, [searchQuery]);
-
-	useEffect(() => {
-		setParams((previousParams) => ({
-			...previousParams,
-			created_at_greater_than : dateRange?.startDate || undefined,
-			created_at_less_than    : dateRange?.endDate || undefined,
-		}));
-	}, [dateRange]);
+	}, [searchQuery, dateRange, entity]);
 
 	return {
 		params,
 		setParams,
 		loading,
 		list,
-		paginationData,
-		getNextPage,
 		debounceQuery,
 		searchValue,
 		setSearchValue,
-		refetch,
 		currLevel,
 		setCurrLevel,
 		levelStack,

@@ -3,14 +3,21 @@ import { isEmpty } from '@cogoport/utils';
 
 import getListColumnMapping from './get-list-column-mapping';
 import ListItem from './ListItem';
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function List(props) {
-	const { list, params, setParams, handleClick, viewType, currLevel, currentUserData } = props;
+	const {
+		loading, list, params, setParams, handleClick, viewType, currLevel, currentUserData,
+	} = props;
 
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({ params, setParams });
+
+	if (loading) {
+		return <LoadingState />;
+	}
 
 	return (
 		<div className={styles.list_container}>

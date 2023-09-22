@@ -6,25 +6,27 @@ import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
 import Header from './Header';
 import LeaderboardFilters from './LeaderboardFilters';
 import List from './List';
-import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 import useGetScoringReports from './useGetAgentScoringReports';
 
 function LeftPanel(props) {
-	const { dateRange } = props;
+	const { dateRange, entity } = props;
 
 	const {
-		list,
+
 		params,
 		setParams,
 		loading,
-		// refetch,
+		list,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
 		currLevel,
 		setCurrLevel,
 		levelStack,
 		setLevelStack,
 		currentUserData,
-	} = useGetScoringReports({ dateRange });
+	} = useGetScoringReports({ dateRange, entity });
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 
@@ -52,27 +54,26 @@ function LeftPanel(props) {
 		<div className={styles.container}>
 			<Header />
 
-			{loading ? <LoadingState /> : (
-				<>
-					<LeaderboardFilters
-						setCurrLevel={setCurrLevel}
-						levelStack={levelStack}
-						setLevelStack={setLevelStack}
-						setParams={setParams}
-					/>
+			<LeaderboardFilters
+				setParams={setParams}
+				debounceQuery={debounceQuery}
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
+				levelStack={levelStack}
+				setCurrLevel={setCurrLevel}
+				setLevelStack={setLevelStack}
+			/>
 
-					<List
-						list={list}
-						params={params}
-						setParams={setParams}
-						handleClick={handleClick}
-						viewType={viewType}
-						currLevel={currLevel}
-						currentUserData={currentUserData}
-					/>
-				</>
-			)}
-
+			<List
+				loading={loading}
+				list={list}
+				params={params}
+				setParams={setParams}
+				handleClick={handleClick}
+				viewType={viewType}
+				currLevel={currLevel}
+				currentUserData={currentUserData}
+			/>
 		</div>
 	);
 }
