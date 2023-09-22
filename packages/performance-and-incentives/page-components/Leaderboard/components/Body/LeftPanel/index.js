@@ -8,19 +8,23 @@ import LeaderboardFilters from './LeaderboardFilters';
 import List from './List';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
+import useGetScoringReports from './useGetAgentScoringReports';
 
 function LeftPanel(props) {
+	const { dateRange } = props;
+
 	const {
 		list,
 		params,
 		setParams,
 		loading,
+		// refetch,
 		currLevel,
 		setCurrLevel,
 		levelStack,
 		setLevelStack,
 		currentUserData,
-	} = props;
+	} = useGetScoringReports({ dateRange });
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 

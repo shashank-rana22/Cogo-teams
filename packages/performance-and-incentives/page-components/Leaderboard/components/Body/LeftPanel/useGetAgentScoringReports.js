@@ -4,7 +4,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
-import NEXT_LEVEL_MAPPING from '../constants/next-level-mapping';
+import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
 
 const useGetScoringReports = (props) => {
 	const { dateRange } = props;
