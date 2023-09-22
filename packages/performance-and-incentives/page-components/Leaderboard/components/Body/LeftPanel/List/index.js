@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
@@ -17,6 +19,18 @@ function List(props) {
 
 	if (loading) {
 		return <LoadingState />;
+	}
+
+	if (!loading && isEmpty(list) && isEmpty(currentUserData)) {
+		return (
+			<Image
+				src={GLOBAL_CONSTANTS.image_url.empty_customer_card}
+				width={350}
+				height={400}
+				alt="Empty List"
+				className={styles.empty_img}
+			/>
+		);
 	}
 
 	return (

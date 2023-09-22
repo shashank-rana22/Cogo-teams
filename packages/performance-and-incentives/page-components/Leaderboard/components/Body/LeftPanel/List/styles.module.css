@@ -31,3 +31,9 @@
 .arrow {
 	margin-left: 10px;
 }
+
+.empty_img {
+	display: block;
+	margin: 0 auto;
+	margin-top: 50px;
+}
