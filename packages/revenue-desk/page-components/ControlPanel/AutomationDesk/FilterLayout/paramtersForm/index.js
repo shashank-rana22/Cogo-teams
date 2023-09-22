@@ -3,9 +3,8 @@ import { SelectController, useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
 import { parametersForm } from '../../../../../configurations/parametersForm';
+import styles from '../../../styles.module.css';
 import Details from '../../Details';
-
-import styles from './styles.module.css';
 
 function ParametersForm({ openForm = false, setOpenForm = () => {}, refetch = () => {} }) {
 	const [openTable, setOpentable] = useState(false);
@@ -35,62 +34,64 @@ function ParametersForm({ openForm = false, setOpenForm = () => {}, refetch = ()
 			<Modal.Header title="Automation Desk" />
 			{!openTable
 			&& (
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<Modal.Body>
-						<div className={styles.content}>
-							<div>
-								<div className={styles.label}>Select Service Type *</div>
-								<SelectController
-									control={control}
-									{...service}
-									style={{ width: '250px' }}
-								/>
-								<div className={styles.errors}>{errors?.service_type?.message}</div>
-							</div>
-
-							{serviceType && (
+				<div className={styles.body}>
+					<form onSubmit={handleSubmit(onSubmit)}>
+						<Modal.Body>
+							<div className={styles.content}>
 								<div>
-									<div className={styles.label}>Select Trade Type *</div>
+									<div className={styles.label}>Select Service Type *</div>
 									<SelectController
 										control={control}
-										{...tradeType}
+										{...service}
 										style={{ width: '250px' }}
 									/>
-									<div className={styles.errors}>{errors?.trade_type?.message}</div>
+									<div className={styles.errors}>{errors?.service_type?.message}</div>
 								</div>
-							)}
 
-							{tradeTypeValue && (
-								<div>
-									<div className={styles.label}>Select IncoTerms Type *</div>
-									<SelectController
-										control={control}
-										{...tradeTypeValue === 'import'
-											? { ...importIncoTerms } : { ...exportIncoterms }}
-										style={{ width: '250px' }}
-									/>
-									<div className={styles.errors}>
-										{errors?.inco_term?.message}
+								{serviceType && (
+									<div>
+										<div className={styles.label}>Select Trade Type *</div>
+										<SelectController
+											control={control}
+											{...tradeType}
+											style={{ width: '250px' }}
+										/>
+										<div className={styles.errors}>{errors?.trade_type?.message}</div>
 									</div>
-								</div>
-							)}
-							{incoTerms && (
-								<div>
-									<div className={styles.label}>Select Container Type</div>
-									<SelectController
-										control={control}
-										{...containerType}
-										style={{ width: '250px' }}
-									/>
-									<div className={styles.errors}>{errors?.containerType?.message}</div>
-								</div>
-							)}
-						</div>
-					</Modal.Body>
-					<Modal.Footer>
-						<Button type="submit">Submit</Button>
-					</Modal.Footer>
-				</form>
+								)}
+
+								{tradeTypeValue && (
+									<div>
+										<div className={styles.label}>Select IncoTerms Type *</div>
+										<SelectController
+											control={control}
+											{...tradeTypeValue === 'import'
+												? { ...importIncoTerms } : { ...exportIncoterms }}
+											style={{ width: '250px' }}
+										/>
+										<div className={styles.errors}>
+											{errors?.inco_term?.message}
+										</div>
+									</div>
+								)}
+								{incoTerms && (
+									<div>
+										<div className={styles.label}>Select Container Type</div>
+										<SelectController
+											control={control}
+											{...containerType}
+											style={{ width: '250px' }}
+										/>
+										<div className={styles.errors}>{errors?.containerType?.message}</div>
+									</div>
+								)}
+							</div>
+						</Modal.Body>
+						<Modal.Footer>
+							<Button type="submit">Submit</Button>
+						</Modal.Footer>
+					</form>
+				</div>
 			)}
 
 			{openTable
