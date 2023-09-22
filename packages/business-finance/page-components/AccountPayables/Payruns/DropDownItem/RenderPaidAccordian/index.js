@@ -9,17 +9,15 @@ function RenderPaidAccordian({
 	singleitem = {},
 	country_code = '',
 }) {
-	if (viewId !== singleitem?.objectId) {
+	if (viewId !== singleitem?.singleitem?.objectId) {
 		return null;
 	}
 	return (
-		<div>
-			<DropDownItem
-				data={dropDownData}
-				loadingDropDown={loadingDropDown}
-				country_code={country_code}
-			/>
-		</div>
+		<DropDownItem
+			data={dropDownData}
+			loadingDropDown={loadingDropDown}
+			country_code={country_code}
+		/>
 	);
 }
 

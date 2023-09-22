@@ -1,3 +1,5 @@
+import { IcAAirTracking } from '@cogoport/icons-react';
+
 import LocationControl from '../common/LocationControl';
 import ToggleLocation from '../common/ToggleLocation';
 import getControls from '../getControls';
@@ -14,6 +16,7 @@ function AIRRouteForm({ mode = '', setFormValues = () => {}, formValues = {} }) 
 				formValues={formValues}
 				setFormValues={setFormValues}
 				controlItem={originControls}
+				prefix={<IcAAirTracking width={26} height={26} />}
 			/>
 
 			<ToggleLocation
@@ -25,6 +28,7 @@ function AIRRouteForm({ mode = '', setFormValues = () => {}, formValues = {} }) 
 				formValues={formValues}
 				setFormValues={setFormValues}
 				controlItem={destinationControls}
+				prefix={<IcAAirTracking width={26} height={26} />}
 			/>
 		</div>
 	);

@@ -15,9 +15,10 @@ function ContainerItem({
 	setShowModal = () => {},
 	setInfoBanner = () => {},
 	isFirst = false,
+	margin = 0,
 }) {
 	return (
-		<div className={styles.container} style={{ marginTop: isFirst ? '0px' : '12px' }}>
+		<div className={styles.container} style={{ margin }}>
 			<div className={styles.load_item}>
 				<span className={styles.text}>
 					{`${loadItem.containers_count} X ${

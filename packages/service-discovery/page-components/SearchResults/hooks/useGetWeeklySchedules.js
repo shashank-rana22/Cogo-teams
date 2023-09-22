@@ -46,7 +46,7 @@ const useGetWeeklySchedules = ({ filters = {}, setSelectedWeek = () => {} }) => 
 			if (alreadyPresent) setSelectedWeek(alreadyPresent);
 		} catch (error) {
 			if (error?.response?.data) {
-				Toast.error(getApiErrorString(error.response?.data));
+				Toast.error(getApiErrorString(error?.response?.data));
 			}
 		}
 	}, [filters, setSelectedWeek, spot_search_id, trigger]);

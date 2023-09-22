@@ -6,33 +6,57 @@ import getLoadArray from '../../../../../../../../SearchResults/utils/getLoadArr
 import styles from './styles.module.css';
 import TruckShipments from './TruckShipments';
 
+const ONE_COUNT = 1;
+
 function LoadDetails({ data = {}, item = {} }) {
+	const {
+		container_size = '',
+		containers_count = 0,
+		container_type = '',
+		total_quantity = 0,
+		total_volume = 0,
+		total_weight = 0,
+		commodity = '',
+	} = data;
+
 	return (
 		<>
-			{data?.container_size ? (
+			{container_size ? (
 				<Pill size="md" color="#F9F9F9">
-					{data.container_size === '20' || data.container_size === '40'
-						? `${data.container_size}ft`
-						: data.container_size}
+					{container_size === '20' || container_size === '40'
+						? `${container_size}ft`
+						: container_size}
 				</Pill>
 			) : null}
 
-			{data?.containers_count ? (
+			{containers_count ? (
 				<Pill size="md" color="#F9F9F9">
-					{`${data.containers_count} Container`}
+					{`${containers_count} Container`}
 				</Pill>
 			) : null}
 
-			{data?.container_type ? (
-				<Pill size="md" color="#F9F9F9">{startCase(data.container_type)}</Pill>
+			{container_type ? (
+				<Pill size="md" color="#F9F9F9">{startCase(container_type)}</Pill>
 			) : null}
 
-			{(startCase(data.container_type)
-								|| data.container_size
-								|| data.containers_count) && <br />}
+			{total_quantity ? (
+				<Pill size="md" color="#F9F9F9">
+					{`${total_quantity} ${total_quantity <= ONE_COUNT ? 'Package' : 'Packages'}`}
+				</Pill>
+			) : null}
+
+			{total_volume ? (
+				<Pill size="md" color="#F9F9F9">{`${total_volume} CBM`}</Pill>
+			) : null}
+
+			{total_weight ? (
+				<Pill size="md" color="#F9F9F9">{`${total_weight} KG`}</Pill>
+			) : null}
+
+			{(container_type || container_size || containers_count || total_volume || total_quantity) && <br />}
 
 			<Pill size="md" color="#F9F9F9">
-				{startCase(data.commodity) || 'All Commodities'}
+				{startCase(commodity) || 'All Commodities'}
 			</Pill>
 
 			{item?.inco_term ? (
@@ -70,7 +94,7 @@ function ShipmentDetails({ item = {}, field = {} }) {
 
 	return (
 		<div className={styles.container}>
-			<LoadDetails data={firstLoadObject} item={item} />
+			<LoadDetails data={firstLoadObject || {}} item={item} />
 
 			{!isEmpty(load) ? (
 				<Pill size="md" color="#F9F9F9">
@@ -81,7 +105,7 @@ function ShipmentDetails({ item = {}, field = {} }) {
 								{load.map((loadItem) => (
 									<LoadDetails
 										key={loadItem?.id}
-										data={loadItem}
+										data={loadItem || {}}
 										item={item}
 									/>
 								))}

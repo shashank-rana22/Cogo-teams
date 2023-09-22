@@ -48,9 +48,13 @@ function TableHeader({ itemsKeys = [], LOGO_MAPPING = {} }) {
 
 				return (
 					<div key={key} className={styles.header_column}>
-						{imageUrl ? (
-							<img src={imageUrl} alt="shipping-line" style={{ objectFit: 'cover', width: 92 }} />
-						) : columnHeader}
+						<img
+							src={imageUrl}
+							height={32}
+							alt="line"
+							style={{ objectFit: 'cover' }}
+						/>
+						<span className={styles.line_name}>{columnHeader}</span>
 					</div>
 				);
 			})}

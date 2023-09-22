@@ -18,7 +18,7 @@ function ServiceChargesTitle({
 						style={{ color: '#c26d1a' }}
 						className={styles.label}
 					>
-						{discount ? 'Coupon Applied' : 'Apply Coupon'}
+						{discount ? 'Discount Applied' : 'Apply Coupon'}
 					</div>
 
 					{discount ? <div className={styles.coupon_value}>{localedDiscount}</div> : null}

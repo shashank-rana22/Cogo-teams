@@ -21,6 +21,7 @@ const CONTROLLER_MAPPING = {
 	'multi-select'   : MultiselectController,
 	'async-select'   : AsyncSelectController,
 	datepicker       : DatepickerController,
+	'date-picker '   : DatepickerController,
 	upload           : UploadController,
 	file             : UploadController,
 	textarea         : TextAreaController,

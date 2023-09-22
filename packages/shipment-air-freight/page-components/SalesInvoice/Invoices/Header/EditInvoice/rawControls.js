@@ -117,7 +117,11 @@ const rawControls = (
 				type   : 'static',
 				name   : 'total',
 				render : (item) => <div style={{ marginLeft: '24px' }} className="amount-excl">{item?.total}</div>,
-				span   : 1.5,
+				span   : 1.4,
+			},
+			{
+				name : 'name',
+				span : 0.1,
 			},
 		],
 	});

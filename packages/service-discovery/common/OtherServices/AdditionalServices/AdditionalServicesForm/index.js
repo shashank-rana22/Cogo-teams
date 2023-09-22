@@ -5,7 +5,7 @@ import { IcMCross } from '@cogoport/icons-react';
 import getElementController from '../../../../configs/getElementController';
 import useSpotSearchService from '../../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
 import getOptions from '../../../../page-components/SearchResults/utils/getOptions';
-import { getFclPayload } from '../configs';
+import { getServiceWisePayload } from '../configs';
 import findKey from '../utils/findKeyInObject';
 
 import styles from './styles.module.css';
@@ -46,7 +46,7 @@ function AdditionalServicesForm({
 	});
 
 	const onSubmit = async (values) => {
-		const payload = getFclPayload({
+		const payload = getServiceWisePayload({ primary_service: detail.primary_service || detail.service_type })({
 			rateCardData,
 			detail,
 			additionalFormInfo : values,
@@ -65,6 +65,7 @@ function AdditionalServicesForm({
 					style={{ cursor: 'pointer' }}
 				/>
 			</div>
+
 			<div className={styles.control_container}>
 				{service.controls.map((controlItem) => {
 					let newControl = { ...controlItem };
@@ -102,7 +103,15 @@ function AdditionalServicesForm({
 					return (
 						<div key={newControl.name} className={styles.control_style}>
 							<div className={styles.label}>
-								{ newControl.label}
+								{newControl.label}
+
+								{newControl?.rules?.required && newControl.label ? (
+									<div className={styles.required_mark}>*</div>
+								) : null}
+
+								{newControl?.showOptional && newControl.label ? (
+									<div className={styles.optional_text}>(Optional)</div>
+								) : null}
 							</div>
 
 							<Element {...newControl} control={control} value={value} />
@@ -126,9 +135,7 @@ function AdditionalServicesForm({
 				>
 					Update Details
 				</Button>
-
 			</div>
-
 		</div>
 
 	);

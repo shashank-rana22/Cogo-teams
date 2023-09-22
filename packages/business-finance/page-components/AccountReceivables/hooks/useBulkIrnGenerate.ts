@@ -12,7 +12,7 @@ interface Props {
 }
 
 const useBulkIrnGenerate = (
-	{ entityCode, getOrganizationInvoices, checkedRows, setCheckedRows, setIsHeaderChecked }:Props,
+	{ entityCode = '', getOrganizationInvoices, checkedRows, setCheckedRows, setIsHeaderChecked }:Props,
 ) => {
 	const { user_profile: userProfile = {} } = useSelector(({ profile }) => ({
 		user_profile: profile,
@@ -22,7 +22,7 @@ const useBulkIrnGenerate = (
 
 	const { id: userId = '' } = user;
 
-	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
+	const irnLabel = ENTITY_FEATURE_MAPPING[entityCode]?.labels?.irn_label;
 	const [
 		{ loading:bulkIrnLoading },
 		bulkIrnTrigger,

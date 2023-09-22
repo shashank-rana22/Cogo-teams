@@ -1,0 +1,62 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	margin: 0 8px;
+}
+
+.transit_time {
+	padding: 4px;
+	font-size: 10px;
+	color: #000;
+	background: #f7faef;
+	border-radius: 4px;
+}
+
+.journey_line {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin: 2px 0;
+}
+
+.circle {
+	flex-shrink: 0;
+	width: 6px;
+	height: 6px;
+	background: #fff;
+	border: 1px solid #7278ad;
+	border-radius: 50%;
+}
+
+.dotted_line {
+	width: 99%;
+	height: 1px;
+	margin-right: 1px;
+	margin-left: 1px;
+	border-top: 1.5px dotted #7278ad;
+}
+
+.active_circle {
+	flex-shrink: 0;
+	width: 6px;
+	height: 6px;
+	background: #b3d5fb;
+	border: 1px solid #7278ad;
+	border-radius: 50%;
+}
+
+.schedule_type {
+	display: flex;
+	align-items: center;
+	align-self: center;
+	justify-content: center;
+	padding: 2px 5px;
+	margin-bottom: 4px;
+	font-size: 10px;
+	color: #333;
+	text-align: center;
+	background: #ded7fc;
+	border-radius: 4px;
+}

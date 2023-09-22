@@ -1,5 +1,6 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
+import { useSelector, useDispatch } from '@cogoport/store';
+import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useEffect, useCallback, useState } from 'react';
 
 import getViewType from '../helpers/getViewType';
@@ -11,6 +12,8 @@ function useAgentWorkPrefernce() {
 		userId       : profile?.user?.id,
 		authRoleData : profile?.auth_role_data,
 	}));
+
+	const dispatch = useDispatch();
 
 	const [viewType, setViewType] = useState('');
 	const [userSharedMails, setUserSharedMails] = useState([]);
@@ -26,6 +29,11 @@ function useAgentWorkPrefernce() {
 		let res;
 		try {
 			res = await trigger();
+			dispatch(
+				setProfileState({
+					cogoone_agent_type: res?.data?.agent_type,
+				}),
+			);
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -35,7 +43,7 @@ function useAgentWorkPrefernce() {
 			setUserSharedMails(res?.data?.emails || []);
 			setViewType(viewTypeValue);
 		}
-	}, [trigger, viewTypeFromRoleIds]);
+	}, [dispatch, trigger, viewTypeFromRoleIds]);
 
 	useEffect(() => {
 		fetchworkPrefernce();

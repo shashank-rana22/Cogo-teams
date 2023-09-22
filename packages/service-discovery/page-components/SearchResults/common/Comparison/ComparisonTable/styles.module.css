@@ -2,6 +2,11 @@
 	margin: 20px;
 }
 
+.line_name {
+	margin-top: 4px;
+	font-size: 12px;
+}
+
 .table {
 	display: flex;
 	flex-direction: column;

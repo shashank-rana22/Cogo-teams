@@ -1,6 +1,6 @@
-import { Toast, Input, Button } from '@cogoport/components';
+import { Toast, Input, Button, cl } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { IcMSearchlight, IcMCross, IcMArrowLeft } from '@cogoport/icons-react';
+import { IcMSearchlight, IcMCross, IcMArrowLeft, IcMFeedback } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -13,16 +13,19 @@ function Header({
 	announcementHeaderProps = {},
 	topic = '',
 	setTopic = () => {},
-	question,
-	setQuestion,
-	showHistory,
+	question = null,
+	setQuestion = () => {},
+	showHistory = false,
 	setShowHistory = () => {},
+	setShowFeedback = () => {},
+	setModalData = () => {},
+	showFeedback = '',
 	setShowNotificationContent = () => {},
-	showNotificationContent,
-	refetch,
-	from,
-	setInput,
-	input,
+	showNotificationContent = false,
+	refetch = () => {},
+	from = 'cogo_assist',
+	setInput = () => {},
+	input = '',
 }) {
 	const {
 		searchAnnouncement = '',
@@ -76,11 +79,32 @@ function Header({
 		},
 	};
 
+	const handleFeedback = () => {
+		setTopic(null);
+		setModalData({});
+		setQuestion(null);
+		setShowHistory(false);
+		setShowNotificationContent(false);
+		setShowFeedback((prev) => !prev);
+	};
+
 	return (
 
-		<div className={`${styles.container} ${styles[from]}`}>
+		<div className={cl`${styles.container} ${styles[from]}`}>
 
 			<div className={styles.wrapper}>
+				{!showFeedback && (
+					<Button
+						size="sm"
+						themeType="accent"
+						className={styles.feedback}
+						onClick={handleFeedback}
+					>
+						<IcMFeedback />
+						Feedback
+					</Button>
+				)}
+
 				{from !== 'test_module' ? (
 					<div className={styles.heading_container}>
 						{showBackIcon && TABS_CONTENT_MAPPING[activeTab].back_icon_visible ? (

@@ -4,10 +4,12 @@ import { useMemo, useState } from 'react';
 import useGetCheckout from '../hooks/useGetCheckout';
 import useUpdateCheckout from '../hooks/useUpdateCheckout';
 
+import AirCheckout from './AirCheckout';
 import FclCheckout from './FclCheckout';
 
 const MAPPING = {
-	fcl_freight: FclCheckout,
+	fcl_freight : FclCheckout,
+	air_freight : AirCheckout,
 };
 
 const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
