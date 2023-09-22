@@ -23,14 +23,18 @@ function ListItem(props) {
 	const isAllowed = (currLevel[GLOBAL_CONSTANTS.zeroth_index]?.split('_') !== viewType)
 	|| (user.id === listItem?.user?.id);
 
+	const actionsAllowed = isAllowed && currLevel[GLOBAL_CONSTANTS.zeroth_index] !== 'kam_report';
+
 	return (
 		<div
-			className={cl`${styles.list_row} ${boxShadow} ${isAllowed ? styles.hover : ''}`}
 			role="presentation"
-			onClick={() => {
-				if (isAllowed) handleClick({ id: listItem.user?.id });
-			}}
 			style={user.id === listItem.user?.id ? { background: '#faf8df' } : {}}
+			className={cl`${styles.list_row} ${boxShadow} ${actionsAllowed ? styles.hover : ''}`}
+			onClick={() => {
+				if (actionsAllowed) {
+					handleClick({ id: listItem.user?.id });
+				}
+			}}
 		>
 			{LIST_COLUMN_MAPPING.map((columnItem) => {
 				const { key, flex, accessor } = columnItem;
