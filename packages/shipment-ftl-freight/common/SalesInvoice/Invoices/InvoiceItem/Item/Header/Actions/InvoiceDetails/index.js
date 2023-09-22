@@ -29,7 +29,7 @@ function InvoiceDetails({
 
 	const { is_cogo_assured = false, is_job_closed_financially = false } = shipment_data || {};
 
-	const editInvoicesVisiblity = !is_job_closed_financially && (
+	const editInvoicesVisibility = !is_job_closed_financially && (
 		(is_cogo_assured !== true && !invoice?.is_igst) || isAuthorized);
 
 	const commonActions = invoice?.status !== 'approved' && !disableAction;
@@ -53,7 +53,7 @@ function InvoiceDetails({
 			<div className={styles.dialog_box}>
 				{commonActions ? (
 					<>
-						{editInvoicesVisiblity ? (
+						{editInvoicesVisibility ? (
 							<div style={{ width: '100%' }}>
 								<ClickableDiv
 									className={styles.text}
