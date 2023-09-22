@@ -20,7 +20,11 @@ function ListItem(props) {
 	const LIST_COLUMN_MAPPING = getListColumnMapping({});
 
 	return (
-		<div className={cl`${styles.list_row} ${boxShadow}`} role="presentation" onClick={handleClick}>
+		<div
+			className={cl`${styles.list_row} ${boxShadow}`}
+			role="presentation"
+			onClick={() => handleClick({ id: listItem.user?.id })}
+		>
 			{LIST_COLUMN_MAPPING.map((columnItem) => {
 				const { key, flex, accessor } = columnItem;
 
@@ -32,7 +36,7 @@ function ListItem(props) {
 					>
 
 						{conditionalWrapper({
-							condition : isFirstEntry && key === 'rank',
+							condition : listItem.rank === GLOBAL_CONSTANTS.one && key === 'rank',
 							title     : key,
 							wrapper   : (children) => (
 
