@@ -20,17 +20,17 @@ function ShippingLine({ mode = [], serviceType = '' }) {
 				Line
 			</div>
 			<div className={styles.flex_div}>
-				{mode.map((item, index) => (
+				{mode?.map((item, index) => (
 					<div className={styles.flex_div} key={`${`${index}${uuid()}`}`}>
 						{item[LOGO_MAPPING[serviceType]] && (
 							<img
 								className={styles.image}
-								src={item[LOGO_MAPPING[serviceType]]}
+								src={item?.[LOGO_MAPPING[serviceType]]}
 								alt={`${SERVICES[serviceType]} logo`}
 							/>
 						)}
 						<div className={cl`${styles.text} ${styles.service_name}`}>
-							{item[NAME_MAPPING[serviceType]] || '-'}
+							{item?.[NAME_MAPPING[serviceType]] || '-'}
 						</div>
 					</div>
 				))}

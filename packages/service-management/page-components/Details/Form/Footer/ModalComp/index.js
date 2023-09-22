@@ -2,7 +2,7 @@ import { Modal, Textarea, Button } from '@cogoport/components';
 import { useState } from 'react';
 
 function ModalComp({
-	show = false, setShow = () => { },
+	show = false, setShow = () => {},
 	title = '', organization_id = '', submitForm = () => {}, service = '',
 }) {
 	const [comment, setComment] = useState('');

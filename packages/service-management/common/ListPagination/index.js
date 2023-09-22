@@ -3,7 +3,7 @@ import { Pagination } from '@cogoport/components';
 import styles from './styles.module.css';
 
 function ListPagination({ paginationProps = {} }) {
-	const { filters = {}, setFilters = () => {}, data = {} } = paginationProps;
+	const { filters = {}, setFilters = () => {}, data = {} } = paginationProps || {};
 	const setPage = (value) => {
 		setFilters((prev) => ({ ...prev, page: value }));
 	};

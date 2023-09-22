@@ -46,7 +46,9 @@ function FormElement({ type = '', ...rest }) {
 	if (type === 'chips') return <ChipsController {...rest} />;
 
 	if (type === 'multi_select') return <MultiSelectController {...rest} />;
+
 	if (type === 'upload') return <UploadController {...rest} />;
+
 	if (type === 'radio') return <RadioGroupController {...rest} />;
 
 	return <InputController {...rest} type={type} />;

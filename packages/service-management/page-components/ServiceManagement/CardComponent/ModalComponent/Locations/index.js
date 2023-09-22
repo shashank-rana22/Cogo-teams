@@ -10,7 +10,7 @@ function Locations({ locations = [] }) {
 
 	return (
 		<div>
-			{locations.map((location, index) => (
+			{locations?.map((location, index) => (
 				<div key={`${`${index}${uuid()}`}`}>
 					<div className={styles.content}>
 						<div className={styles.port}>

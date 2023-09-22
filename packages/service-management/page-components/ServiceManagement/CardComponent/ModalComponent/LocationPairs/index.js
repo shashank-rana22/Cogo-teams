@@ -11,7 +11,7 @@ function LocationPairs({ locationPairs = [] }) {
 
 	return (
 		<div>
-			{locationPairs.map((location, index) => (
+			{locationPairs?.map((location, index) => (
 				<div key={`${`${index}${uuid()}`}`}>
 					<div className={styles.content}>
 						<div className={styles.port}>{location?.origin_location?.name}</div>

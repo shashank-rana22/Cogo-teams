@@ -26,13 +26,18 @@ function ServiceManagement() {
 		},
 		defaultFilters: { status: 'pending_approval' },
 	});
+
 	const [activeTab, setActiveTab] = useState('pending_approval');
+
 	const setActive = (value) => {
 		setActiveTab(value);
 		setFilters((p) => ({ ...p, status: value }));
 	};
+
 	if (loading) return (<Loader />);
+
 	const paginationProps = { filters, setFilters, data };
+
 	return (
 		<div>
 			<div className={styles.flex}>
@@ -50,19 +55,22 @@ function ServiceManagement() {
 					</Button>
 				</Popover>
 			</div>
-			{isEmpty(data?.list) ? <EmptyState /> : (
-				<div>
-					<ListPagination paginationProps={paginationProps} />
-					{data?.list?.map((item, index) => (
-						<CardComponent
-							key={`${`${index}${uuid()}`}`}
-							data={item}
-							activeTab={activeTab}
-						/>
-					))}
-					<ListPagination paginationProps={paginationProps} />
-				</div>
-			)}
+
+			{isEmpty(data?.list)
+				? <EmptyState />
+				: (
+					<div>
+						<ListPagination paginationProps={paginationProps} />
+						{data?.list?.map((item, index) => (
+							<CardComponent
+								key={`${`${index}${uuid()}`}`}
+								data={item}
+								activeTab={activeTab}
+							/>
+						))}
+						<ListPagination paginationProps={paginationProps} />
+					</div>
+				)}
 		</div>
 	);
 }

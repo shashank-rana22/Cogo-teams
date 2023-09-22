@@ -3,6 +3,7 @@ import { Checkbox } from '@cogoport/components';
 import styles from './styles.module.css';
 
 const ZERO = 0;
+
 function Header({
 	setIsCheckAll = () => {},
 	selected = [],

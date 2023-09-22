@@ -1,4 +1,5 @@
 import { Button, Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 
@@ -8,8 +9,6 @@ import BuySellServices from './BuySellServices';
 import Form from './Form';
 import Service from './Service';
 import styles from './styles.module.css';
-
-const ZERO = 0;
 
 function Details() {
 	const { data = {}, loading = false } = useGetOrganizationServiceDetails();
@@ -31,7 +30,7 @@ function Details() {
 				/>
 			</div>
 			<Form
-				supply_agent={data?.supply_agent_details?.[ZERO]?.name}
+				supply_agent={data?.supply_agent_details?.[GLOBAL_CONSTANTS.zero]?.name}
 				organization_id={data?.organization_id}
 				service={data?.requested_service?.service}
 			/>

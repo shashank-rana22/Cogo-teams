@@ -1,13 +1,17 @@
 import getCustoms from './getCustoms';
 import getFreight from './getFreight';
 
+const OCEAN = ['seaport', 'country', 'trade'];
+const AIR = ['airport', 'country', 'trade'];
+const SURFACE = ['cluster', 'seaport', 'airport', 'pincode'];
+
 const services = ({ organization_id = '' }) => {
 	const SERVICES = {
 		fcl_freight: getFreight({
 			organization_id,
 			params: {
 				filters: {
-					type: ['seaport', 'country', 'trade'],
+					type: OCEAN,
 				},
 			},
 
@@ -16,26 +20,25 @@ const services = ({ organization_id = '' }) => {
 			organization_id,
 			params: {
 				filters: {
-					type: ['seaport', 'country', 'trade'],
+					type: OCEAN,
 				},
 			},
 
 		}),
 		air_freight: getFreight({
-			organization_id: {
-				params: {
-					filters: {
-						type: ['airport', 'country', 'trade'],
-					},
+			organization_id,
+			params: {
+				filters: {
+					type: AIR,
 				},
-
 			},
+
 		}),
 		haulage_freight: getFreight({
 			organization_id,
 			params: {
 				filters: {
-					type: ['cluster', 'seaport', 'airport', 'pincode'],
+					type: SURFACE,
 				},
 			},
 
@@ -43,7 +46,7 @@ const services = ({ organization_id = '' }) => {
 		fcl_customs: getCustoms({
 			params: {
 				filters: {
-					type: ['seaport', 'country', 'trade'],
+					type: OCEAN,
 				},
 			},
 			organization_id,
@@ -53,7 +56,7 @@ const services = ({ organization_id = '' }) => {
 			organization_id,
 			params: {
 				filters: {
-					type: ['cluster', 'seaport', 'airport', 'pincode'],
+					type: SURFACE,
 				},
 			},
 
@@ -70,7 +73,7 @@ const services = ({ organization_id = '' }) => {
 		lcl_customs: getCustoms({
 			params: {
 				filters: {
-					type: ['seaport', 'country', 'trade'],
+					type: OCEAN,
 				},
 			},
 			organization_id,
@@ -87,14 +90,14 @@ const services = ({ organization_id = '' }) => {
 			organization_id,
 			params: {
 				filters: {
-					type: ['seaport', 'country', 'trade'],
+					type: OCEAN,
 				},
 			},
 		}),
 		fcl_freight_local_agent: getCustoms({
 			params: {
 				filters: {
-					type: ['seaport', 'country', 'trade'],
+					type: OCEAN,
 				},
 			},
 			organization_id,
@@ -103,7 +106,7 @@ const services = ({ organization_id = '' }) => {
 			organization_id,
 			params: {
 				filters: {
-					type: ['airport', 'country', 'trade'],
+					type: AIR,
 				},
 			},
 		}),
@@ -114,7 +117,6 @@ const services = ({ organization_id = '' }) => {
 					type: ['railway_terminal'],
 				},
 			},
-
 		}),
 	};
 	return SERVICES;

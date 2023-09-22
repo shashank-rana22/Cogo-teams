@@ -17,11 +17,13 @@ function RecommendedServices({
 	const [isCheckAll, setIsCheckAll] = useState(false);
 
 	const newData = (list || [])?.map((item, index) => ({
-		...item,
+		...(item || {}),
 		id: index + ONE,
 	}));
+
 	const l1 = selected?.length || ZERO;
 	const l2 = newData?.length || ZERO;
+
 	const handleSelect = (checked, item) => {
 		if (checked) {
 			setSelected((val) => {
@@ -35,7 +37,7 @@ function RecommendedServices({
 		} else {
 			setSelected((val) => {
 				const newArr = [...val];
-				const index = newArr.findIndex((s) => s.id === item.id);
+				const index = newArr.findIndex((s) => s?.id === item?.id);
 				newArr.splice(index, ONE);
 				return newArr;
 			});

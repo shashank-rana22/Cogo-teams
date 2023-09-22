@@ -14,7 +14,7 @@ function Filters({ filters = '', setFilters = () => {} }) {
 		reset();
 	};
 	const onSubmit = (values) => {
-		setFilters((p) => ({ ...p, ...values }));
+		setFilters((p) => ({ ...p, ...(values || {}) }));
 	};
 	return (
 		<div className={styles.container}>
