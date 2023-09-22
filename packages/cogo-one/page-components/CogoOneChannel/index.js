@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { IcMComment } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -259,7 +260,10 @@ function CogoOne() {
 					)}
 				<AndroidApp />
 			</div>
-
+			<div className={styles.feedback}>
+				<IcMComment />
+				<span className={styles.feedback_label}>Feedback</span>
+			</div>
 			<ModalComp
 				raiseTicketModal={raiseTicketModal}
 				setRaiseTicketModal={setRaiseTicketModal}
