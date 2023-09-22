@@ -120,6 +120,7 @@ function Customers({
 			activeTeamCard : activeTab?.data || {},
 			activeTab      : activeTab?.tab,
 			viewType,
+			firestore,
 		},
 	};
 

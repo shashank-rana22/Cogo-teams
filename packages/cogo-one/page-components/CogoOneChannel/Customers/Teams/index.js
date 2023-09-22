@@ -8,6 +8,7 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useFetchTeamsRoom from '../../../../hooks/useFetchTeamsRoom';
 import LoadingState from '../LoadingState';
 
 import GroupCard from './GroupCard';
@@ -16,73 +17,21 @@ import styles from './styles.module.css';
 import TeamsHeader from './TeamsHeader';
 
 function Teams(teamsProps) {
+	const { firestore = {} } = teamsProps;
+
 	const [searchValue, setSearchValue] = useState('');
 	const [creteTeams, setCreteTeams] = useState(false);
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
-	// eslint-disable-next-line custom-eslint/variables-name-check
-	const loading = false;
+
+	const {
+		unpinnedChats,
+		// handleScroll, add  on scroll
+		pinnedChats,
+		loading,
+	} = useFetchTeamsRoom({ firestore });
+
 	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
-	const list = [
-		{
-			id           : 1,
-			icon         : GLOBAL_CONSTANTS.image_url.private,
-			name         : 'My First Team',
-			disdcription : 'this my fotsy group vchcnjeneenjucn jbcjcnenk',
-
-		},
-		{
-			id           : 2,
-			icon         : GLOBAL_CONSTANTS.image_url.private,
-			name         : 'First Group',
-			disdcription : 'this my fotsy group vchcnjeneenjucn jbcjcnenk',
-
-		},
-		{
-			id           : 3,
-			icon         : GLOBAL_CONSTANTS.image_url.private,
-			name         : 'First Group',
-			disdcription : 'this my fotsy group vchcnjeneenjucn jbcjcnenk',
-
-		},
-		{
-			icon         : GLOBAL_CONSTANTS.image_url.private,
-			name         : 'First Group',
-			disdcription : 'this my fotsy group vchcnjeneenjucn jbcjcnenk',
-
-		},
-		{
-			icon         : GLOBAL_CONSTANTS.image_url.private,
-			name         : 'My First Team',
-			disdcription : 'this my fotsy group vchcnjeneenjucn jbcjcnenk',
-
-		},
-		{
-			icon         : GLOBAL_CONSTANTS.image_url.private,
-			name         : 'First Group',
-			disdcription : 'this my fotsy group vchcnjeneenjucn jbcjcnenk',
-
-		},
-		{
-			icon         : GLOBAL_CONSTANTS.image_url.private,
-			name         : 'First Group',
-			disdcription : 'this my fotsy group vchcnjeneenjucn jbcjcnenk',
-
-		},
-		{
-			icon         : GLOBAL_CONSTANTS.image_url.private,
-			name         : 'First Group',
-			disdcription : 'this my fotsy group vchcnjeneenjucn jbcjcnenk',
-
-		},
-		{
-			icon         : GLOBAL_CONSTANTS.image_url.private,
-			name         : 'First Group',
-			disdcription : 'this my fotsy group vchcnjeneenjucn jbcjcnenk',
-
-		},
-
-	];
 
 	return (
 		<>
@@ -113,13 +62,12 @@ function Teams(teamsProps) {
 			</div>
 
 			<div className={styles.list_container}>
-				{!loading && isEmpty(list) ? (
+				{/* {!loading && isEmpty(pinnedChats) ? (
 					<div className={styles.empty_state}>
 						No Groups Yet...
 					</div>
-				) : null }
+				) : null } */}
 
-				{/* {!isPinnedChatEmpty && ( */}
 				<div
 					role="presentation"
 					className={styles.pinned_chat_flex}
@@ -131,7 +79,7 @@ function Teams(teamsProps) {
 
 				{openPinnedChats && (
 					<div className={styles.pinned_chats_div}>
-						{(list || []).map((singleGroup) => (
+						{(pinnedChats || []).map((singleGroup) => (
 							<GroupCard
 								singleGroup={singleGroup}
 								key={singleGroup}
@@ -140,12 +88,11 @@ function Teams(teamsProps) {
 						))}
 					</div>
 				)}
-				{/* )} */}
 
-				{!loading && !isEmpty(list) ? (
+				{!loading && !isEmpty(unpinnedChats) ? (
 					<>
 						<div className={styles.recent_text}>Recent</div>
-						{(list || []).map((singleGroup) => (
+						{(unpinnedChats || []).map((singleGroup) => (
 							<GroupCard
 								singleGroup={singleGroup}
 								key={singleGroup}
