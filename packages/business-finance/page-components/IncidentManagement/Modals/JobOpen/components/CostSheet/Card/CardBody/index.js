@@ -3,24 +3,19 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMArrowNext,
-	IcMArrowRotateDown,
 	IcMInfo,
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
 const SPLIT_NUMBER = 2;
 const BORDER_COLOR = '#000000';
+const SHOWFULLDETAILS = true;
 
 export function CardBody({ charge = {}, type = '' }) {
-	const [showFullDetails, setShowFullDetails] = useState(false);
-	const handleWidth = () => {
-		setShowFullDetails(!showFullDetails);
-	};
 	const { serviceType, lineItems = [] } = charge || {};
-	const hidden = lineItems.length < SPLIT_NUMBER ? styles.hidden : '';
 	function ToolTipContent(quotation, actual) {
 		return (
 			<div className={styles.content}>
@@ -40,7 +35,7 @@ export function CardBody({ charge = {}, type = '' }) {
 
 	return charge ? (
 		<div
-			className={`${showFullDetails ? styles.card : styles.custompadding} ${
+			className={`${SHOWFULLDETAILS ? styles.card : styles.custompadding} ${
 				lineItems.length < SPLIT_NUMBER ? styles.padding : ''
 			}`}
 			style={{ '--bordercolor': BORDER_COLOR }}
@@ -65,7 +60,7 @@ export function CardBody({ charge = {}, type = '' }) {
 					Actual
 				</div>
 			</div>
-			{(showFullDetails ? lineItems
+			{(SHOWFULLDETAILS ? lineItems
 				: lineItems.slice(GLOBAL_CONSTANTS.zeroth_index, SPLIT_NUMBER)).map((lineItem) => {
 				const value = Number(lineItem?.priceInInrActual) - Number(lineItem?.priceInInrQuotation);
 				let className = styles.neutral;
@@ -138,7 +133,7 @@ export function CardBody({ charge = {}, type = '' }) {
 					</div>
 				);
 			})}
-			{(showFullDetails || lineItems.length < SPLIT_NUMBER) && (
+			{(SHOWFULLDETAILS || lineItems.length < SPLIT_NUMBER) && (
 				<div className={styles.total}>
 					<div
 						className={styles.heading}
@@ -176,7 +171,7 @@ export function CardBody({ charge = {}, type = '' }) {
 					</div>
 				</div>
 			)}
-			<div
+			{/* <div
 				className={`${styles.viewmore} ${hidden}`}
 				role="presentation"
 				onClick={handleWidth}
@@ -187,7 +182,7 @@ export function CardBody({ charge = {}, type = '' }) {
 				>
 					<IcMArrowRotateDown height={15} width={15} />
 				</span>
-			</div>
+			</div> */}
 		</div>
 	) : null;
 }
