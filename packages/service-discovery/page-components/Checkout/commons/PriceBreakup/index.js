@@ -2,8 +2,8 @@ import { Accordion } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState, useContext } from 'react';
 
-import BreakdownDetails from '../../../../../../commons/BreakdownDetails';
-import { CheckoutContext } from '../../../../../../context';
+import { CheckoutContext } from '../../context';
+import BreakdownDetails from '../BreakdownDetails';
 
 import styles from './styles.module.css';
 
@@ -33,7 +33,6 @@ function PriceBreakup({
 			type="form"
 			title="View Price Breakup"
 			animate
-			isOpen
 		>
 			<BreakdownDetails
 				rateDetails={rateDetails}

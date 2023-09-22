@@ -2,8 +2,8 @@ import { RadioGroup } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState, useContext } from 'react';
 
-import PocDetails from '../../../../../../commons/ShareQuotation/PocDetails';
-import { CheckoutContext } from '../../../../../../context';
+import { CheckoutContext } from '../../context';
+import PocDetails from '../ShareQuotation/PocDetails';
 
 import BookingProof from './BookingProof';
 import styles from './styles.module.css';
@@ -14,6 +14,7 @@ function BookingTypeOptions({
 	radioOption = [],
 	bookingConfirmationMode = '',
 	setBookingConfirmationMode = () => {},
+	isAssistedBookingNotAllowed = false,
 }) {
 	const {
 		detail = {},
@@ -22,6 +23,10 @@ function BookingTypeOptions({
 	} = useContext(CheckoutContext);
 
 	const [showWhatsappVerificationModal, setShowWhatsappVerificationModal] = useState(false);
+
+	if (isAssistedBookingNotAllowed) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
