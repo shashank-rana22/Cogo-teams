@@ -1,3 +1,4 @@
+import { Button, Modal } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
@@ -5,6 +6,7 @@ import { GenericObject } from '../../../commons/Interfaces/index';
 import List from '../../../commons/List/index';
 import PURCHASE_VIEW_CONFIG from '../../configurations/PURCHASE_VIEW_LIST';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
+import AdditionalRemarks from '../AdditionalRemarks';
 
 import { FieldProps } from './interfaces/index';
 import FieldPair from './RenderData/FiledPair/index';
@@ -46,6 +48,9 @@ interface Props {
 }
 
 function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props) {
+	const [showMisc, setShowMisc] = useState(false);
+	console.log({ showMisc });
+
 	const { query } = useRouter();
 	const { jobNumber } = query || {};
 
@@ -95,6 +100,21 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 				currentTab={currentTab}
 				setCurrentTab={setCurrentTab}
 			/>
+			<Button onClick={() => setShowMisc(true)}>Misc. Remarks</Button>
+			<Modal
+				size="md"
+				show
+				onClose={() => setShowMisc(false)}
+				placement="center"
+			>
+				<Modal.Body>
+					<AdditionalRemarks />
+				</Modal.Body>
+				<Modal.Footer>
+					<Button onClick={() => setShowMisc(false)}>Close</Button>
+				</Modal.Footer>
+			</Modal>
+
 			<List
 				config={PURCHASE_VIEW_CONFIG}
 				itemData={data}
