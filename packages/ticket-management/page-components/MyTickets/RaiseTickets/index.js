@@ -31,6 +31,7 @@ function RaiseTickets({ showRaiseTicket = false, setShowRaiseTicket = () => {}, 
 		handleClose,
 		additionalInfo,
 		setRefreshList,
+		reset,
 	});
 
 	return (
