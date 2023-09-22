@@ -22,17 +22,14 @@ const GET_START_DATE_FUNCTION_MAPPING = {
 	[THIS_YEAR]    : getThisAseessYearStartDate,
 };
 
-function Header() {
+function Header(props) {
+	const { dateRange, setDateRange } = props;
+
 	const { push } = useRouter();
 
 	const { user, partner, incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
 
 	const [duration, setDuration] = useState('today');
-
-	const [dateRange, setDateRange] = useState({
-		startDate : getThisMonthStartDate(),
-		endDate   : new Date(),
-	});
 
 	const [entity, setEntity] = useState(partner.id);
 

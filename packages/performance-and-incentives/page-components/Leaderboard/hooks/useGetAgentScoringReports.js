@@ -6,7 +6,9 @@ import { useState, useEffect } from 'react';
 
 import NEXT_LEVEL_MAPPING from '../constants/next-level-mapping';
 
-const useGetScoringReports = () => {
+const useGetScoringReports = (props) => {
+	const { dateRange } = props;
+
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
@@ -16,7 +18,6 @@ const useGetScoringReports = () => {
 	const [searchValue, setSearchValue] = useState('');
 	const [currLevel, setCurrLevel] = useState([NEXT_LEVEL_MAPPING[`${view}_report`], '']);
 	const [levelStack, setLevelStack] = useState([]);
-
 	const [params, setParams] = useState({
 		page                    : 1,
 		page_limit              : 10,
@@ -25,8 +26,7 @@ const useGetScoringReports = () => {
 		add_current_user_report : true,
 		sort_by                 : 'rank',
 		sort_type               : 'asc',
-
-		filters: {
+		filters                 : {
 			report_type: currLevel[GLOBAL_CONSTANTS.zeroth_index],
 		},
 	});
@@ -52,9 +52,18 @@ const useGetScoringReports = () => {
 			...previousParams,
 			filters: {
 				...(previousParams.filters || {}),
+				q: searchQuery || undefined,
 			},
 		}));
 	}, [searchQuery]);
+
+	useEffect(() => {
+		setParams((previousParams) => ({
+			...previousParams,
+			created_at_greater_than : dateRange?.startDate || undefined,
+			created_at_less_than    : dateRange?.endDate || undefined,
+		}));
+	}, [dateRange]);
 
 	return {
 		params,

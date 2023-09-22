@@ -4,7 +4,9 @@ import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import styles from './styles.module.css';
 
-function Body() {
+function Body(props) {
+	const { dateRange } = props;
+
 	const {
 		list,
 		params,
@@ -15,7 +17,7 @@ function Body() {
 		setCurrLevel,
 		levelStack,
 		setLevelStack,
-	} = useGetScoringReports();
+	} = useGetScoringReports({ dateRange });
 
 	return (
 		<div className={styles.container}>
