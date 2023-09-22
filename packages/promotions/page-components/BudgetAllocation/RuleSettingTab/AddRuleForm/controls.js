@@ -54,7 +54,6 @@ const controls = () => [
 		options     : TRADE_TYPE_MAPPING,
 		size        : 'sm',
 		span        : 2,
-		rules       : { required: 'Trade Type is required' },
 	},
 	{
 		label       : 'Rate Source',
@@ -64,7 +63,6 @@ const controls = () => [
 		options     : RATE_SOURCE_MAPPING,
 		span        : 2,
 		size        : 'sm',
-		rules       : { required: 'Rate Source is required' },
 	},
 	{
 		label       : 'For Organisation',
@@ -76,9 +74,9 @@ const controls = () => [
 		labelKey    : 'business_name',
 		valueKey    : 'id',
 		renderLabel : (item) => item?.trade_name,
-		span        : 2,
-		rules       : { required: 'For Organisation is required' },
+		span        : 3,
 		size        : 'sm',
+		isClearable : true,
 	},
 	{
 		label       : 'Organisation Type',

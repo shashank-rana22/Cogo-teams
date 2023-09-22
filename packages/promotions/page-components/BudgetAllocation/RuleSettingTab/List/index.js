@@ -17,10 +17,14 @@ function List({
 		updated_by_user_data_required : true,
 		discount_config_data_required : true,
 	};
-	const { data, loading, filters, setFilters } = useGetListPromotionRule({
+	const { data, loading, filters, setFilters, refetch } = useGetListPromotionRule({
 		defaultFilters,
 		defaultParams: DEFAULT_PARAMS,
 	});
+
+	const refetchList = () => {
+		refetch();
+	};
 
 	return (
 		<div>
@@ -38,6 +42,7 @@ function List({
 				filters={filters}
 				setFilters={setFilters}
 				activeList={activeList}
+				refetchList={refetchList}
 				activeService={activeService}
 			/>
 		</div>

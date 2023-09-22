@@ -13,12 +13,13 @@ const discountConfigControls = () => [
 		size        : 'sm',
 	},
 	{
-		name           : 'discount_limit_currency',
-		label          : 'Discount Limit Currency',
-		type           : 'select',
-		placeholder    : 'Currency',
-		optionsListKey : 'currencies',
-		rules          : {
+		name        : 'discount_limit_currency',
+		label       : 'Discount Limit Currency',
+		type        : 'async_select',
+		placeholder : 'Currency',
+		asyncKey    : 'list_exchange_rate_currencies',
+		initialCall : true,
+		rules       : {
 			required: 'Discount Limit Currency is required',
 		},
 		span : 2,

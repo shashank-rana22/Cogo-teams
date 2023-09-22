@@ -3,6 +3,7 @@ import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import DeactiveModal from '../../../../../../common/DeactiveModal';
+import useDeactivePromotionRule from '../../../../../../hooks/useDeactivePromotionRule';
 
 import columnsMapping from './columnsMapping';
 import DiscountSlabsTable from './DiscountSlabsTable';
@@ -42,19 +43,17 @@ const columnsWithValue = ({ data = {}, list = [] }) => {
 	return NEW_MAPPING_LIST;
 };
 
-function ListItem({ data = {}, loading = '', activeList = '', onEdit = () => {} }) {
+function ListItem({ data = {}, loading = '', activeList = '', onEdit = () => {}, refetchList = () => {} }) {
 	const [open, setOpen] = useState(false);
 	const [showDeactivateModal, setShowDeactivateModal] = useState(false);
 	const tagsList = columnsWithValue({ data, list: tagsMapping });
 	const columnsList = columnsWithValue({ data, list: columnsMapping });
 
+	const { onClickDeactivate = () => {} } = useDeactivePromotionRule({ data, refetchList });
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.upper}>
-				{
-                    data?.config_type === 'default' ? (<div className={styles.default_tag}>Default</div>
-                    ) : null
-                }
 				<div className={styles.tags_list}>
 					{tagsList.map((tabsDetails) => {
 						const { key, value } = tabsDetails || {};
@@ -146,7 +145,10 @@ function ListItem({ data = {}, loading = '', activeList = '', onEdit = () => {} 
 				{showDeactivateModal && (
 					<DeactiveModal
 						onClose={() => setShowDeactivateModal(false)}
-						onClickYes={() => setShowDeactivateModal(false)}
+						onClickYes={() => {
+							onClickDeactivate();
+							setShowDeactivateModal(false);
+						}}
 					/>
 				)}
 			</div>

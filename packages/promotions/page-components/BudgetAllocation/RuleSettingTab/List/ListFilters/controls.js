@@ -7,7 +7,7 @@ import TRADE_TYPE_MAPPING from '../../../../../configs/TRADE_TYPE_MAPPING.json';
 
 const controls = () => [
 	{
-		name        : 'cogo_entity',
+		name        : 'cogo_entity_id',
 		label       : 'Cogo Entity',
 		type        : 'async_select',
 		placeholder : 'Select Cogo Entity',
@@ -20,7 +20,7 @@ const controls = () => [
 	},
 	{
 		label       : 'Rule Type',
-		name        : 'rule_type',
+		name        : 'scope',
 		type        : 'select',
 		placeholder : 'Select Rule Type',
 		options     : RULE_TYPE_MAPPING,
@@ -47,7 +47,7 @@ const controls = () => [
 	},
 	{
 		label       : 'For Organisation',
-		name        : 'for_organisation',
+		name        : 'organization_id',
 		type        : 'async_select',
 		placeholder : 'Organisation Name',
 		asyncKey    : 'organizations',

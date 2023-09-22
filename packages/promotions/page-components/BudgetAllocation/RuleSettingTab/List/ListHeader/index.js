@@ -7,7 +7,6 @@ import {
 	ButtonIcon,
 } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import ListFilters from '../ListFilters';
@@ -62,6 +61,7 @@ function ListHeader({
 							themeType="primary"
 						/>
 					)}
+					onChange={(e) => { setFilters({ ...filters, serial_id: e }); }}
 					placeholder="Search by Serial Id"
 				/>
 				<div className={styles.filter}>
@@ -74,6 +74,7 @@ function ListHeader({
 						onClickOutside={() => setShowPopover(false)}
 						content={(
 							<ListFilters
+								filters={filters}
 								setFilters={setFilters}
 								activeService={activeService}
 								setShowPopover={setShowPopover}
@@ -86,7 +87,7 @@ function ListHeader({
 								size="lg"
 								onClick={() => setShowPopover(!showPopover)}
 							>
-								{!isEmpty(filters) ? (
+								{Object.keys(filters).some((key) => key !== 'serial_id') ? (
 									<span className={styles.filter_applied} />
 								) : null}
 								<IcMFilter style={{ marginRight: 4 }} />

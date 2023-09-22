@@ -24,14 +24,19 @@ function Child({
 	error = {},
 	remove = () => {},
 	formValues = {},
+	showHeading = true,
+	customField = {},
+	showElements = {},
 }) {
 	const total_fields = getTotalFields({ controls });
 
 	return (
 		<div key={field.id} className={styles.child}>
-			<div className={styles.heading}>
-				{`${startCase(name || 'document')} ${index + INCREMENT_BY_ONE}`}
-			</div>
+			{showHeading ? (
+				<div className={styles.heading}>
+					{`${startCase(name || 'document')} ${index + INCREMENT_BY_ONE}`}
+				</div>
+			) : null}
 
 			<div className={styles.row_flex}>
 				{Object.keys(total_fields).map((rowFields) => (
@@ -41,6 +46,10 @@ function Child({
 
 							const flex = getWidthPercent(span || TOTAL_SPAN);
 							const element_name = `${name}.${index}.${ctrlItemName}`;
+
+							if (element_name in showElements && !showElements[element_name]) {
+								return null;
+							}
 
 							let options = [];
 
@@ -61,6 +70,7 @@ function Child({
 
 									<FormElement
 										{...controlItem}
+										{...(customField?.[ctrlItemName] || {})}
 										key={element_name}
 										name={element_name}
 										control={control}

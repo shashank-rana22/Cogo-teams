@@ -5,7 +5,14 @@ import FormElement from './FormElement';
 import getWidthPercent from './getWidthPercent';
 import styles from './styles.module.css';
 
-function Layout({ controls = [], control = {}, errors = {}, showElements = {}, formValues = {} }) {
+function Layout({
+	controls = [],
+	control = {},
+	errors = {},
+	showElements = {},
+	formValues = {},
+	customFieldArrayControls = {},
+}) {
 	const finalControls = controls.filter((c) => {
 		if (c.name in showElements) {
 			return showElements[c.name];
@@ -16,7 +23,10 @@ function Layout({ controls = [], control = {}, errors = {}, showElements = {}, f
 	return (
 		<div className={styles.container}>
 			{finalControls.map((ctrl) => {
-				const { type = '', label = '', span = 6, removeLabelMargin = false, ...restCtrl } = ctrl || {};
+				const {
+					type = '', label = '', span = 6, removeLabelMargin = false,
+					handleFieldArrayAddCheck = () => true, ...restCtrl
+				} = ctrl || {};
 
 				if (type === 'fieldArray') {
 					return (
@@ -26,6 +36,9 @@ function Layout({ controls = [], control = {}, errors = {}, showElements = {}, f
 							control={control}
 							error={errors?.[ctrl.name]}
 							formValues={formValues}
+							handleFieldArrayAddCheck={handleFieldArrayAddCheck}
+							customFieldArrayControls={customFieldArrayControls}
+							showElements={showElements}
 						/>
 					);
 				}

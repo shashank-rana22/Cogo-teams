@@ -15,6 +15,7 @@ function ListContent({
 	filters = {},
 	setFilters = () => {},
 	activeList = '',
+	refetchList = () => {},
 	// activeService = '',
 }) {
 	// const router = useRouter();
@@ -55,6 +56,7 @@ function ListContent({
 					isLastItem={i === list.length - LAST_INDEX}
 					total={total_count || ZERO_PAGES}
 					onEdit={() => {}}
+					refetchList={refetchList}
 				/>
 			))}
 			<div className={styles.pagination}>

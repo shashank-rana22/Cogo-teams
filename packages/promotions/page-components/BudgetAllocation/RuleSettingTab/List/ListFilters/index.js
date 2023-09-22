@@ -8,6 +8,7 @@ import getControls from './controls';
 import styles from './styles.module.css';
 
 function ListFilters({
+	filters = {},
 	setFilters = () => {},
 	activeService = '',
 	setShowPopover = () => {},
@@ -23,22 +24,35 @@ function ListFilters({
 	} = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
+
 	const onClickReset = useCallback(() => {
 		setShowPopover(false);
-		setFilters({});
+		const existingSerialId = filters.serial_id;
+		if (existingSerialId) {
+			setFilters({ serial_id: existingSerialId });
+		} else {
+			setFilters({});
+		}
 		reset();
-	}, [setFilters, setShowPopover, reset]);
+	}, [setShowPopover, filters.serial_id, reset, setFilters]);
+
 	const onSave = (values) => {
+		const existingSerialId = filters.serial_id;
 		const filter = Object.fromEntries(
 			Object.entries(values).filter(([, value]) => value),
 		);
+		if (existingSerialId) {
+			filter.serial_id = existingSerialId;
+		}
 
 		setFilters({ ...filter });
 		setShowPopover(false);
 	};
+
 	useEffect(() => {
 		onClickReset();
 	}, [activeService, onClickReset]);
+
 	return (
 		<div className={styles.container}>
 			<Layout
