@@ -93,7 +93,7 @@ function ShipmentIdView() {
 			/>
 
 			<div>
-				<HandleShipmentView />
+				{HandleShipmentView()}
 				{!isEmpty(data) ? (
 					<div className={styles.pagination}>
 						<Pagination
