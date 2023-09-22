@@ -24,7 +24,7 @@
 		"value": "ftl_freight", 
 		"label": "FTL", 
 		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/12bc32389e72a35152448914b558e2e4.png",
-		"is_available": false,
+		"is_available": true,
 		"type": ["seaport", "airport", "pincode","railway_terminal"]  
 	},
 	{ 
