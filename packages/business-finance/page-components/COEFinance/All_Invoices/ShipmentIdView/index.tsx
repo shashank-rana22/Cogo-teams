@@ -10,32 +10,32 @@ import LoadingState from './LoadingState/index';
 import styles from './styles.module.css';
 
 export interface ItemDataProps {
-	jobId: string,
-	jobNumber: string,
-	jobStatus: string,
-	quotationProfitability: number,
-	tentativeProfitability: number,
-	incomeCount: number,
-	incomeTotalAmount: number,
-	expenseCount: number,
-	expenseTotalAmount: string,
-	sellQuoteCount?: number,
-	sellQuoteTotalAmount?: string,
-	buyQuoteCount?: number,
-	buyQuoteTotalAmount?: string,
-	serviceType: string,
-	discountAppliedKam: number,
-	discountAppliedRevenueDesk: number,
-	pendingApprovalCount: number,
-	urgentCount: number,
-	urgentTotalAmount: number,
-	creditNoteCount: number,
-	creditNoteTotalAmount: number,
-	buyQuotationCount?: number,
-	buyQuotationTotalAmount?: number,
-	sellQuotationCount?: number,
-	sellQuotationTotalAmount?: number,
-	amountCurrency?: string,
+	jobId: string;
+	jobNumber: string;
+	jobStatus: string;
+	quotationProfitability: number;
+	tentativeProfitability: number;
+	incomeCount: number;
+	incomeTotalAmount: number;
+	expenseCount: number;
+	expenseTotalAmount: string;
+	sellQuoteCount?: number;
+	sellQuoteTotalAmount?: string;
+	buyQuoteCount?: number;
+	buyQuoteTotalAmount?: string;
+	serviceType: string;
+	discountAppliedKam: number;
+	discountAppliedRevenueDesk: number;
+	pendingApprovalCount: number;
+	urgentCount: number;
+	urgentTotalAmount: number;
+	creditNoteCount: number;
+	creditNoteTotalAmount: number;
+	buyQuotationCount?: number;
+	buyQuotationTotalAmount?: number;
+	sellQuotationCount?: number;
+	sellQuotationTotalAmount?: number;
+	amountCurrency?: string;
 }
 
 function ShipmentIdView() {
@@ -49,32 +49,37 @@ function ShipmentIdView() {
 		loading,
 		shipmentData,
 		list: { data },
-	} = useShipmentIdView({ invoicesRequired: pendingApproval, shipmentId: serialId });
+	} = useShipmentIdView({
+		invoicesRequired : pendingApproval,
+		shipmentId       : serialId,
+	});
 	const { totalRecords } = shipmentData || {};
 
 	function HandleShipmentView() {
 		if (loading) {
 			return (
 				<div style={{ marginTop: '10px' }}>
-					{[1, 2, 3, 4, 5].map((val) => <LoadingState key={val} />)}
+					{[1, 2, 3, 4, 5].map((val) => (
+						<LoadingState key={val} />
+					))}
 				</div>
 			);
 		}
 		if (isEmpty(data)) {
-			return (
-				<div className={styles.no_data}>
-					No data Available
-				</div>
-			);
+			return <div className={styles.no_data}>No data Available</div>;
 		}
-		return data?.map((item: ItemDataProps) => (
-			<AccordianCards
-				itemData={item}
-				currentOpenSID={currentOpenSID}
-				setCurrentOpenSID={setCurrentOpenSID}
-				key={item?.jobId}
-			/>
-		));
+		return (
+			<div>
+				{data?.map((item: ItemDataProps) => (
+					<AccordianCards
+						itemData={item}
+						currentOpenSID={currentOpenSID}
+						setCurrentOpenSID={setCurrentOpenSID}
+						key={item?.jobId}
+					/>
+				))}
+			</div>
+		);
 	}
 
 	return (
