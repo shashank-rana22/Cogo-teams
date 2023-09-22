@@ -12,18 +12,25 @@ function conditionalWrapper({ condition, title, wrapper, children }) {
 }
 
 function ListItem(props) {
-	const { listItem = {}, index, handleClick } = props;
+	const { listItem = {}, index = 0, handleClick, viewType, currLevel, user } = props;
 
 	const isFirstEntry = index === GLOBAL_CONSTANTS.zeroth_index;
+
 	const boxShadow = isFirstEntry ? styles.box_shadow : '';
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({});
 
+	const isAllowed = (currLevel[GLOBAL_CONSTANTS.zeroth_index]?.split('_') !== viewType)
+	|| (user.id === listItem?.user?.id);
+
 	return (
 		<div
-			className={cl`${styles.list_row} ${boxShadow}`}
+			className={cl`${styles.list_row} ${boxShadow} ${isAllowed ? styles.hover : ''}`}
 			role="presentation"
-			onClick={() => handleClick({ id: listItem.user?.id })}
+			onClick={() => {
+				if (isAllowed) handleClick({ id: listItem.user?.id });
+			}}
+			style={user.id === listItem.user?.id ? { background: '#faf8df' } : {}}
 		>
 			{LIST_COLUMN_MAPPING.map((columnItem) => {
 				const { key, flex, accessor } = columnItem;

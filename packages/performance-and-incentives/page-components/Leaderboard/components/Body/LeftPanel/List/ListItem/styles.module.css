@@ -5,11 +5,6 @@
 	background-color: #fff;
 	border: 1px solid #f9f9f9;
 	border-radius: 6px;
-
-	&:hover {
-		cursor: pointer;
-		background: #fef199;
-	}
 }
 
 .list_column {
@@ -24,4 +19,11 @@
 .rank_container {
 	display: flex;
 	align-items: center;
+}
+
+.hover {
+	&:hover {
+		cursor: pointer;
+		background: #fef199;
+	}
 }

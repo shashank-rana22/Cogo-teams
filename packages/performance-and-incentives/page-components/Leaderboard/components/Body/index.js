@@ -15,6 +15,7 @@ function Body() {
 		setCurrLevel,
 		levelStack,
 		setLevelStack,
+		currentUserData,
 	} = useGetScoringReports();
 
 	return (
@@ -27,6 +28,7 @@ function Body() {
 				currLevel={currLevel}
 				setCurrLevel={setCurrLevel}
 				levelStack={levelStack}
+				currentUserData={currentUserData}
 				setLevelStack={setLevelStack}
 			/>
 

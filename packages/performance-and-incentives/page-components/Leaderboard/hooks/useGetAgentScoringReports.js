@@ -38,7 +38,7 @@ const useGetScoringReports = () => {
 		params,
 	}, { manual: false });
 
-	const { list = [], ...paginationData } = data || {};
+	const { list = [], current_user_data: currentUserData, ...paginationData } = data || {};
 
 	const getNextPage = (nextPage) => {
 		setParams((previousParams) => ({
@@ -71,6 +71,7 @@ const useGetScoringReports = () => {
 		setCurrLevel,
 		levelStack,
 		setLevelStack,
+		currentUserData,
 	};
 };
 
