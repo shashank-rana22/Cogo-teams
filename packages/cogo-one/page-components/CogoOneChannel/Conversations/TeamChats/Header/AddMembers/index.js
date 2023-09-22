@@ -3,9 +3,12 @@ import { AsyncSelect } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import getCommonAgentType from '../../../../../../utils/getCommonAgentType';
+import UserCard from '../UserCard';
+
 import styles from './styles.module.css';
 
-function AddMembers() {
+function AddMembers({ viewType = '' }) {
 	const [selectedMembers, setSelectedMembers] = useState([]);
 	const isNoSelectedUsers = isEmpty(selectedMembers);
 
@@ -17,15 +20,21 @@ function AddMembers() {
 
 			<AsyncSelect
 				multiple
-				asyncKey="list_chat_agents"
 				value={selectedMembers}
-				// valueKey="agent_id"
-                // name="agent_id"
 				placeholder="Enter a name or email"
 				onChange={setSelectedMembers}
 				className={styles.select}
 				isClearable
-				// renderLabel={(item) => <RenderSelectLabel item={item} />}
+				asyncKey="list_chat_agents"
+				initialCall
+				params={{
+					filters: {
+						status     : 'active',
+						agent_type : getCommonAgentType({ viewType }) || undefined,
+					},
+					sort_by: 'agent_type',
+				}}
+				renderLabel={(item) => <UserCard item={item} />}
 			/>
 
 			<div className={styles.action}>

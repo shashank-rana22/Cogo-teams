@@ -1,5 +1,9 @@
 import { Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import {
+	IcMArrowRotateRight,
+	IcMArrowRotateDown,
+} from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -15,10 +19,10 @@ function Teams(teamsProps) {
 	const [searchValue, setSearchValue] = useState('');
 	const [creteTeams, setCreteTeams] = useState(false);
 	const [filterVisible, setFilterVisible] = useState(false);
-
+	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 	// eslint-disable-next-line custom-eslint/variables-name-check
 	const loading = false;
-
+	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
 	const list = [
 		{
 			id           : 1,
@@ -115,8 +119,32 @@ function Teams(teamsProps) {
 					</div>
 				) : null }
 
+				{/* {!isPinnedChatEmpty && ( */}
+				<div
+					role="presentation"
+					className={styles.pinned_chat_flex}
+					onClick={() => setOpenPinnedChats((prev) => !prev)}
+				>
+					<ActiveIcon className={styles.icon} />
+					<div className={styles.pin_text}>pinned chats</div>
+				</div>
+
+				{openPinnedChats && (
+					<div className={styles.pinned_chats_div}>
+						{(list || []).map((singleGroup) => (
+							<GroupCard
+								singleGroup={singleGroup}
+								key={singleGroup}
+								teamsProps={teamsProps}
+							/>
+						))}
+					</div>
+				)}
+				{/* )} */}
+
 				{!loading && !isEmpty(list) ? (
 					<>
+						<div className={styles.recent_text}>Recent</div>
 						{(list || []).map((singleGroup) => (
 							<GroupCard
 								singleGroup={singleGroup}

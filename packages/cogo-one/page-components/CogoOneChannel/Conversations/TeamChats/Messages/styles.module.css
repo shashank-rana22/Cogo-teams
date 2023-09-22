@@ -1,0 +1,9 @@
+.container {
+	margin: 4px 30px 4px  20px;
+}
+
+.loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

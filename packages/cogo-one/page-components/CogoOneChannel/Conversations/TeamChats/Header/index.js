@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import AddMembers from './AddMembers';
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ viewType = '' }) {
 	const [showPopover, setShowPopover] = useState(false);
 
 	return (
@@ -28,7 +28,13 @@ function Header() {
 				</div>
 			</div>
 			<div className={styles.group}>
-				<Popover placement="bottom" render={showPopover ? (<AddMembers />) : null}>
+				<Popover
+					placement="bottom"
+					visible={showPopover}
+					render={showPopover ? (
+						<AddMembers viewType={viewType} />
+					) : null}
+				>
 					<Button themeType="tertiary" onClick={() => setShowPopover((prev) => !prev)}>
 						<Image
 							src={GLOBAL_CONSTANTS.image_url.groups}

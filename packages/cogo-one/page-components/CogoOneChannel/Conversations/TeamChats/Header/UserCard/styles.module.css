@@ -1,0 +1,29 @@
+.agent_label {
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.lower_label {
+	font-size: 12px;
+	color: #838080;
+}
+
+.user_list_container {
+	display: flex;
+	align-items: center;
+}
+
+.over_text {
+	max-width: 130px;
+	overflow: hidden;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.styled_avatar {
+	margin-right: 6px;
+	background: #ffd761;
+	border-radius: 50% !important;
+}

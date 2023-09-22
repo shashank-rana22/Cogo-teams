@@ -5,8 +5,12 @@
 	margin-top: 20px;
 
 	:global {
-		.ui_text_area_container {
-			min-height: 110px;
+		.ui_text_area_control {
+			height: 100px !important;
+		}
+
+		.ui_input_control {
+			font-size: 14px !important;
 		}
 	}
 }

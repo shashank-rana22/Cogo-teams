@@ -1,107 +1,20 @@
 import Footer from './Footer';
 import Header from './Header';
+import Messages from './Messages';
 import styles from './styles.module.css';
 
 function TeamChats(props) {
-	const { activeTeamCard = {}, suggestions = [] } = props || {};
+	const { activeTeamCard = {}, suggestions = [], viewType = '' } = props || {};
 	console.log('activeTeamCard:', activeTeamCard);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<Header />
+				<Header viewType={viewType} />
 			</div>
 			<div className={styles.message_container}>
 				<div className={styles.messages}>
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
-					Hello
-					<br />
+					<Messages />
 				</div>
 				<div className={styles.footer}>
 					<Footer
