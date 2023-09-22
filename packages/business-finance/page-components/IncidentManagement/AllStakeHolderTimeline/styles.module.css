@@ -100,7 +100,7 @@
 	width: 50px;
 	height: 2px;
 	margin-bottom: 15px;
-	background-color: red;
+	background-color: var(--color-primary-error-red-2);
 }
 
 .font500 {
@@ -108,12 +108,12 @@
 }
 
 .remark_heading {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 }
 
 .name_text {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 }
 
 .center_align {

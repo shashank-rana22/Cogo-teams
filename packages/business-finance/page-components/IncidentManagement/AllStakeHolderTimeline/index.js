@@ -99,9 +99,9 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 					);
 				})}
 				{showTimeline ? (
-					<IcMArrowRotateUp width={15} height={15} onClick={() => setShowTimeline(!showTimeline)} />
+					<IcMArrowRotateUp width={15} height={15} onClick={() => setShowTimeline((pv) => !pv)} />
 				) : (
-					<IcMArrowRotateDown width={15} height={15} onClick={() => setShowTimeline(!showTimeline)} />
+					<IcMArrowRotateDown width={15} height={15} onClick={() => setShowTimeline((pv) => !pv)} />
 				)}
 			</div>
 		</div>

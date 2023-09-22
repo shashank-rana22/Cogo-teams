@@ -11,7 +11,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const SPLIT_NUMBER = 2;
-const BORDER_COLOR = '#000000';
+// const BORDER_COLOR = '#000000';
 const SHOWFULLDETAILS = true;
 
 export function CardBody({ charge = {}, type = '' }) {
@@ -38,7 +38,7 @@ export function CardBody({ charge = {}, type = '' }) {
 			className={`${SHOWFULLDETAILS ? styles.card : styles.custompadding} ${
 				lineItems.length < SPLIT_NUMBER ? styles.padding : ''
 			}`}
-			style={{ '--bordercolor': BORDER_COLOR }}
+			// style={{ '--bordercolor': BORDER_COLOR }}
 		>
 			<div className={styles.layout}>
 				<div
@@ -49,13 +49,11 @@ export function CardBody({ charge = {}, type = '' }) {
 				</div>
 				<div
 					className={styles.flex}
-					style={{ '--span': 1 }}
 				>
 					Expected
 				</div>
 				<div
 					className={styles.flex}
-					style={{ '--span': 1 }}
 				>
 					Actual
 				</div>
@@ -101,7 +99,6 @@ export function CardBody({ charge = {}, type = '' }) {
 						</div>
 						<div
 							className={styles.flex}
-							style={{ '--span': 1 }}
 						>
 							{(lineItem?.priceQuotation && lineItem?.currencyQuotation) ? formatAmount({
 								amount   : lineItem?.priceQuotation,
@@ -114,7 +111,6 @@ export function CardBody({ charge = {}, type = '' }) {
 						</div>
 						<div
 							className={styles.flex}
-							style={{ '--span': 1 }}
 						>
 							{(lineItem?.priceActual && lineItem?.currencyActual) ? formatAmount({
 								amount   :	lineItem?.priceActual,
@@ -141,7 +137,6 @@ export function CardBody({ charge = {}, type = '' }) {
 					/>
 					<div
 						className={`${styles.flex} ${styles.totalamount}`}
-						style={{ '--span': 1 }}
 					>
 						{charge?.serviceTotalQuotational
 							? formatAmount({
@@ -156,7 +151,6 @@ export function CardBody({ charge = {}, type = '' }) {
 					</div>
 					<div
 						className={`${styles.flex} ${styles.totalamount}`}
-						style={{ '--span': 1 }}
 					>
 						{charge?.serviceTotalActual
 							? formatAmount({
@@ -171,18 +165,6 @@ export function CardBody({ charge = {}, type = '' }) {
 					</div>
 				</div>
 			)}
-			{/* <div
-				className={`${styles.viewmore} ${hidden}`}
-				role="presentation"
-				onClick={handleWidth}
-			>
-				{showFullDetails ? 'View Less' : 'View More'}
-				<span
-					className={showFullDetails ? styles.arrowicon : styles.bottomicon}
-				>
-					<IcMArrowRotateDown height={15} width={15} />
-				</span>
-			</div> */}
 		</div>
 	) : null;
 }
