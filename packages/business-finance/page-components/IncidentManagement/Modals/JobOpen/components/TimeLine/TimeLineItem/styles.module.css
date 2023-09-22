@@ -99,10 +99,6 @@
 	.complete {
 		background: var(--color-accent-orange-2);
 	}
-
-	&.min_width {
-		min-width: 88%;
-	}
 }
 
 .line_grey {
@@ -126,7 +122,7 @@
 .mile_stone_description {
 	position: absolute;
 	top: 20px;
-	left: -5px;
+	left: 5px;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
