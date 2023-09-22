@@ -1,24 +1,26 @@
 import { Pill, cl } from '@cogoport/components';
-import { IcMTick } from '@cogoport/icons-react';
+import { IcMTick, IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty, pascalCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
 const FIRST = 1;
 
 const STATUS_COLOR_MAPPING = {
-	PENDING        : '#fbd1a6',
+	PENDING        : '#fef3e9',
 	REJECTED       : '#f37166',
 	APPROVED       : '#c4dc91',
 	NOT_APPLICABLE : '#fef199',
 	REQUESTED      : '#fbd1a6',
+	'REQUESTED BY' : '#acdadf',
 };
 
 function AllStakeHolderTimeline({ timeline = [] }) {
 	const stakeHolders = timeline?.filter((item) => !isEmpty(item));
 	const { t } = useTranslation(['incidentManagement']);
+	const [showTimeline, setShowTimeline] = useState(true);
 	return (
 		<div>
 			<div className={styles.heading}>
@@ -64,34 +66,43 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 									/>
 								) : null}
 							</div>
-							<div className={styles.flex}>
-								<div className={styles.font500}>
-									{item?.name || '-'}
-								</div>
-								<Pill
-									size="sm"
-									style={{
-										background: STATUS_COLOR_MAPPING[item?.status || 'PENDING'],
-									}}
-									className={styles.level_status_pill}
-								>
-									{pascalCase(item?.status) || t('incidentManagement:pending_status')}
-								</Pill>
-							</div>
-							<div className={styles.font12}>
-								{item?.email || '-'}
-							</div>
 
-							<div className={styles.remark_section}>
-								<div>{t('incidentManagement:remarks')}</div>
-								<div className={styles.remarks_text}>
-									{item?.remarks || t('incidentManagement:no_remarks') }
+							<div>
+								<div className={styles.flex}>
+									<div className={styles.center_align}>
+										<div className={styles.name_text}>
+											{pascalCase(item?.name || '-')}
+										</div>
+										<Pill
+											size="sm"
+											style={{
+												background: STATUS_COLOR_MAPPING[item?.status || 'PENDING'],
+											}}
+											className={styles.level_status_pill}
+										>
+											{pascalCase(item?.status) || t('incidentManagement:pending_status')}
+										</Pill>
+									</div>
 								</div>
+								{item?.email || '-'}
+								{ showTimeline && (
+									<div className={styles.remark_section}>
+										<div className={styles.remark_heading}>{t('incidentManagement:remarks')}</div>
+										<div className={styles.remarks_text}>
+											{item?.remarks || t('incidentManagement:no_remarks') }
+										</div>
+									</div>
+								)}
 							</div>
 
 						</div>
 					);
 				})}
+				{showTimeline ? (
+					<IcMArrowRotateUp width={15} height={15} onClick={() => setShowTimeline(!showTimeline)} />
+				) : (
+					<IcMArrowRotateDown width={15} height={15} onClick={() => setShowTimeline(!showTimeline)} />
+				)}
 			</div>
 		</div>
 	);

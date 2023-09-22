@@ -1,7 +1,7 @@
 .container {
 	display: flex;
 	padding: 20px;
-	margin-bottom: 32px;
+	font-size: 10px;
 	background-color: var(--color-secondary-5);
 	border-radius: 10px;
 }
@@ -53,10 +53,6 @@
 	size: 14px;
 }
 
-.status_pill {
-	margin-left: 12px;
-}
-
 .faded_text {
 	color: var(--color-secondary-greyscale-4);
 }
@@ -78,11 +74,15 @@
 }
 
 .level_status_pill {
-	margin-left: 10px;
+	margin: 0 8px;
 
 	:global {
 		.ui_pill_text {
 			font-weight: 600;
+		}
+
+		.ui_pill_container.ui_ps_size_sm {
+			padding: 2px 8px 1px !important;
 		}
 	}
 }
@@ -93,7 +93,6 @@
 	max-height: 110px;
 	margin-top: 5px;
 	overflow: hidden;
-	font-size: 12px;
 	word-wrap: break-word;
 }
 
@@ -108,6 +107,16 @@
 	font-weight: 500;
 }
 
-.font12 {
+.remark_heading {
 	font-size: 12px;
+	font-weight: 500;
+}
+
+.name_text {
+	font-size: 12px;
+}
+
+.center_align {
+	display: flex;
+	align-items: center;
 }

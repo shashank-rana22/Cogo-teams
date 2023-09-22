@@ -16,8 +16,9 @@ function TimeLine({ row = {} }) {
 	let isCompleted = true;
 
 	return (
-		<div className={styles.container}>
-			{timelineData ? (
+		timelineData ? (
+
+			<div className={styles.container}>
 				<div className={styles.wrapper}>
 					{!loading ? timelineData?.map((item, i) => {
 						if (!item?.completed_on) {
@@ -46,8 +47,9 @@ function TimeLine({ row = {} }) {
 						</div>
 					)}
 				</div>
-			) : null }
-		</div>
+			</div>
+		) : null
+
 	);
 }
 
