@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useAllocationRequest } from '@cogoport/request';
 
 const usePostAllocationFeedback = ({
 	t,
@@ -9,10 +9,10 @@ const usePostAllocationFeedback = ({
 	status,
 	refetchFeedbackTable,
 }) => {
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/feedback_status',
-		method  : 'post',
-		authkey : 'post_allocation_feedback',
+		method  : 'POST',
+		authkey : 'post_allocation_feedback_status',
 	}, { manual: true });
 
 	const requests = checkedRowsId.map((id) => ({

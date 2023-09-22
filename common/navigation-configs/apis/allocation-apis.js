@@ -430,7 +430,7 @@ const allocation = {
 			service_name : 'allocation',
 		},
 		{
-			api          : 'feedback_status',
+			api          : 'post_allocation_feedback_status',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
