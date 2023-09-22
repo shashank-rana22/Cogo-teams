@@ -17,6 +17,7 @@ function Body(props) {
 		setCurrLevel,
 		levelStack,
 		setLevelStack,
+		currentUserData,
 	} = useGetScoringReports({ dateRange });
 
 	return (
@@ -29,6 +30,7 @@ function Body(props) {
 				currLevel={currLevel}
 				setCurrLevel={setCurrLevel}
 				levelStack={levelStack}
+				currentUserData={currentUserData}
 				setLevelStack={setLevelStack}
 			/>
 

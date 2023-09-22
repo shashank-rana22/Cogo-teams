@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
 
 import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
 
@@ -18,7 +19,10 @@ function LeftPanel(props) {
 		setCurrLevel,
 		levelStack,
 		setLevelStack,
+		currentUserData,
 	} = props;
+
+	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 
 	const handleClick = ({ id = '' }) => {
 		setParams((prev) => ({
@@ -53,7 +57,15 @@ function LeftPanel(props) {
 						setParams={setParams}
 					/>
 
-					<List list={list} params={params} setParams={setParams} handleClick={handleClick} />
+					<List
+						list={list}
+						params={params}
+						setParams={setParams}
+						handleClick={handleClick}
+						viewType={viewType}
+						currLevel={currLevel}
+						currentUserData={currentUserData}
+					/>
 				</>
 			)}
 
