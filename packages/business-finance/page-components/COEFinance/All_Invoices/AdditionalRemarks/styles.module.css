@@ -1,0 +1,9 @@
+.sub_category {
+	margin: 0 56px;
+
+	:global {
+		.ui_radiogroup_container {
+			display: block;
+		}
+	}
+}
