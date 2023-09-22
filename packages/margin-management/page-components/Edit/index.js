@@ -1,5 +1,6 @@
 import { Loader } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 import useListMargins from '../../hooks/useListMargins';
 import Create from '../Create';
@@ -13,7 +14,7 @@ function Edit() {
 	return (
 		<div>
 			{loading ? <Loader /> : null}
-			{ !loading && data?.list?.length ? <Create type="edit" item={data?.list?.[ZERO]} /> : null}
+			{ !loading && !isEmpty(data?.list) ? <Create type="edit" item={data?.list?.[ZERO]} /> : null}
 		</div>
 	);
 }
