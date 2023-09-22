@@ -87,7 +87,6 @@ function Header({
 		|| remarkData?.profitability?.draft || remarkData?.profitability,
 		documentNumberRemarks : remarkData?.mismatched,
 		miscellaneousRemarks  : remarkData?.miscellaneous,
-		otherRemarks          : remarkData?.other,
 	});
 
 	return (
@@ -217,6 +216,7 @@ function Header({
 											getRoute,
 											isAdditional      : true,
 											additionalRemarks : getAdditionalRemarks(),
+											otherRemarks      : remarkData?.other,
 										})}
 									>
 										Reject

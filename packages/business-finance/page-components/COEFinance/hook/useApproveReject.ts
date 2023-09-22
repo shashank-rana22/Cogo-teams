@@ -48,7 +48,7 @@ const useApproveReject = ({
 		},
 		{ autoCancel: false },
 	);
-	const rejectApproveApi = async ({ getRoute, isAdditional = false, additionalRemarks = {} }) => {
+	const rejectApproveApi = async ({ getRoute, isAdditional = false, additionalRemarks = {}, otherRemarks = '' }) => {
 		try {
 			await trigger({
 				data: {
@@ -57,7 +57,7 @@ const useApproveReject = ({
 					updatedBy           : userData?.user?.id,
 					performedByUserType : userData?.session_type,
 					remarksList         : modalData !== 'Approve' ? remarksVal : undefined,
-					remarks             : overAllRemark,
+					remarks             : overAllRemark || otherRemarks,
 					lineItemsRemarks    : modalData !== 'Approve' ? lineItemsRemarks : undefined,
 					additionalRemarks   : isAdditional ? additionalRemarks : undefined,
 				},
