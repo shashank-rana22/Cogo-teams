@@ -1,6 +1,6 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-function formattedAmount(
+function getFormattedAmount(
 	amount = 0,
 	currency = 'INR',
 	maximumFractionDigits = 2,
@@ -15,4 +15,4 @@ function formattedAmount(
 	});
 }
 
-export default formattedAmount;
+export default getFormattedAmount;

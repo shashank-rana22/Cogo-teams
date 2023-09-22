@@ -88,7 +88,7 @@ function AddNewService({
 						className={styles.container}
 						onClick={closeModal}
 						tabIndex={0}
-						disabled={shipmentData?.is_job_closed}
+						disabled={shipmentData?.is_job_closed_financially}
 					>
 						<div className={styles.text}>{upsellableService.display_label}</div>
 						<IcMPlus />
