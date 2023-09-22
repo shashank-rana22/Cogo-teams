@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
 import { generateSVGPaths } from '../../../../utils/generateSVGPaths';
 import { getCardsDataFromGraph } from '../../../../utils/getCardsDataFromGraph';
@@ -13,7 +14,12 @@ const INITIAL_POSITION_X = 100;
 const INITIAL_POSITION_Y = 100;
 const EXTRA_HEIGHT = 300;
 
-function GraphLayout({ graph = {}, activeParent = null, setActiveParent = () => {} }) {
+function GraphLayout({
+	title = 'rate_lifecycle',
+	graph = {},
+	activeParent = null,
+	setActiveParent = () => {},
+}) {
 	const { paths } = generateSVGPaths({
 		graph,
 	});
@@ -33,7 +39,7 @@ function GraphLayout({ graph = {}, activeParent = null, setActiveParent = () => 
 
 	return (
 		<div className={cl`${styles.container} ${styles[`parent_zoom_level_${DEFAULT_ZOOM_LEVEL}`]}`}>
-			<h3>Rate Lifecycle</h3>
+			<h3>{startCase(title)}</h3>
 			<div
 				className={cl`${styles.graph_layout} ${styles.zoom_child}`}
 				style={{ height: `${maxY - minY + EXTRA_HEIGHT}px` }}

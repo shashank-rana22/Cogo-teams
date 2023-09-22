@@ -13,10 +13,11 @@ function DrillDownCard({
 	data = {}, cardIndex = 1, delay = 2, handleClick = () => {}, animate = false,
 	isAtTop = false, parentAction = 'Search', parent = null, parentCount = 0,
 }) {
+	const { drop, rates_count, action_type } = data;
 	const isMainCard = !cardIndex;
 	const action_text = parentAction.split('_').join(' ');
 	const indicatorHeight = !cardIndex
-		? NORMALISED_PERCENTAGE : (data.rates_count / parentCount) * NORMALISED_PERCENTAGE;
+		? NORMALISED_PERCENTAGE : (rates_count / parentCount) * NORMALISED_PERCENTAGE;
 
 	return (
 		<div
@@ -31,21 +32,21 @@ function DrillDownCard({
 			/>
 
 			<div className={styles.flex_between}>
-				<p className={styles.card_name}>{`${startCase(data?.action_type)}`}</p>
+				<p className={styles.card_name}>{`${startCase(action_type)}`}</p>
 				{(isAtTop || isMainCard) && (
 					<h3 className={styles.rate_amount}>
 						<Tooltip
-							content={<span>{data?.rates_count || GLOBAL_CONSTANTS.zeroth_index}</span>}
+							content={<span>{rates_count || GLOBAL_CONSTANTS.zeroth_index}</span>}
 							placement="bottom"
 						>
-							{formatBigNumbers(data?.rates_count || GLOBAL_CONSTANTS.zeroth_index)}
+							{formatBigNumbers(rates_count || GLOBAL_CONSTANTS.zeroth_index)}
 						</Tooltip>
 					</h3>
 				)}
 			</div>
-			<div className={styles.flex_between}>
+			<div className={cl`${styles.flex_between} ${styles.single_line_text}`}>
 				{
-					!['revenue_desk', 'idle_rates'].includes(data?.action_type)
+					drop || drop === GLOBAL_CONSTANTS.zeroth_index
 						? (
 							<p className={styles.drop_off_text}>
 								<img
@@ -53,7 +54,7 @@ function DrillDownCard({
 									alt="drop"
 									className={styles.drop_icon}
 								/>
-								{`${formatBigNumbers(data?.drop || GLOBAL_CONSTANTS.zeroth_index)}%`}
+								{`${formatBigNumbers(drop || GLOBAL_CONSTANTS.zeroth_index)}%`}
 							</p>
 						)
 						: <p> </p>
@@ -67,10 +68,10 @@ function DrillDownCard({
 					: (
 						<h3 className={styles.rate_amount}>
 							<Tooltip
-								content={<span>{data?.rates_count || GLOBAL_CONSTANTS.zeroth_index}</span>}
+								content={<span>{rates_count || GLOBAL_CONSTANTS.zeroth_index}</span>}
 								placement="bottom"
 							>
-								{formatBigNumbers(data?.rates_count || GLOBAL_CONSTANTS.zeroth_index)}
+								{formatBigNumbers(rates_count || GLOBAL_CONSTANTS.zeroth_index)}
 							</Tooltip>
 						</h3>
 					)

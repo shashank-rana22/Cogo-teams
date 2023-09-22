@@ -3,12 +3,12 @@ import { isEmpty } from '@cogoport/utils';
 
 const FIRST = 1;
 const SECOND = 2;
-const INITIAL_POSITION_X = 120;
+const INITIAL_POSITION_X = 128;
 const INITIAL_POSITION_Y = 113;
 
 const LENGTH_FACTOR = 112;
-const ADJUSTMENT_FACTOR = 0.78;
-const HORIZONTAL_LENGTH_FACTOR = 112;
+const ADJUSTMENT_FACTOR = 0.75;
+const HORIZONTAL_LENGTH_FACTOR = 135;
 const VERTICAL_LENGTH_FACTOR = 112;
 const CURVE_FACTOR = 6;
 

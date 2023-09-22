@@ -18,7 +18,7 @@ const PATH_STYLE = {
 
 const ANIMATION_DURATION = 2000;
 const ANIMATION_END_DELAY = 2000;
-const ADJUSTMENT_FACTOR = 120;
+const ADJUSTMENT_FACTOR_Y = 120;
 
 function SVGLayout({ paths = [], bounds = [], mode = '' }) {
 	const svgRef = useRef(null);
@@ -58,9 +58,9 @@ function SVGLayout({ paths = [], bounds = [], mode = '' }) {
 	return (
 		<svg
 			ref={svgRef}
-			width={`${maxX + ADJUSTMENT_FACTOR}pt`}
-			height={`${maxY + ADJUSTMENT_FACTOR}pt`}
-			viewBox={`0 0 ${maxX + ADJUSTMENT_FACTOR} ${maxY + ADJUSTMENT_FACTOR}`}
+			width={`${maxX}pt`}
+			height={`${maxY + ADJUSTMENT_FACTOR_Y}pt`}
+			viewBox={`0 0 ${maxX} ${maxY + ADJUSTMENT_FACTOR_Y}`}
 			xmlSpace="preserve"
 			shapeRendering="geometricPrecision"
 			textRendering="geometricPrecision"

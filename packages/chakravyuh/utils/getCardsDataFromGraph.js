@@ -5,7 +5,7 @@ const SECOND = 2;
 const ADJUSTMENT_FACTOR = 1.5;
 const POSITION_FACTOR = 150;
 const VERTICAL_POSITION_FACTOR = 150;
-const HORIZONTAL_POSITION_FACTOR = 150;
+const HORIZONTAL_POSITION_FACTOR = 180;
 
 const positionMapping = (position, direction) => {
 	switch (direction) {
