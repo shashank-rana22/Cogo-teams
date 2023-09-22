@@ -1,8 +1,10 @@
 import { Button, cl, Textarea } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import usePostJobOpenRemark from '../../../../apisModal/usePostJobOpenRemark';
+import SHIPMENT_MAPPING from '../../../../Constants/SHIPMENT_MAPPING';
 import STATUS_MAPPING from '../../../../Constants/status_mapping';
 import useGetShipmentCostSheet from '../../../../hooks/useGetShipmentCostSheet';
 import { getFormatAmount } from '../../../../utils/getformatamount';
@@ -11,10 +13,16 @@ import StatRect from './StatRect';
 import styles from './styles.module.css';
 
 const JOB_SOURCE = 'LOGISTICS';
+function openPDF({ event, partnerId, id, incidentType }) {
+	event.preventDefault();
+	window.open(`/${partnerId}/booking/${incidentType}/${id}`, '_blank');
+}
 
 function Details({ row = {}, setDetailsModal = () => {} }) {
 	const shipmentId = row?.data?.jobOpenRequest?.id;
 	const { jobNumber = '' } = row?.data?.jobOpenRequest || {};
+	const { query } = useRouter();
+	const { partner_id } = query || {};
 	const JOB_TYPE = row?.source.toUpperCase();
 	const [remarks, setRemarks] = useState('');
 	const { id = '', status = '' } = row || {};
@@ -31,7 +39,6 @@ function Details({ row = {}, setDetailsModal = () => {} }) {
 	} = useGetShipmentCostSheet({ shipmentId, jobNumber, JOB_SOURCE, JOB_TYPE });
 	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_box}>
@@ -63,7 +70,19 @@ function Details({ row = {}, setDetailsModal = () => {} }) {
 				<div className={styles.heading}>Shipment Id</div>
 				<div className={styles.shipment_id}>
 					#
-					{row?.data?.jobOpenRequest?.jobNumber || ''}
+					<a
+						href={row?.data?.jobOpenRequest?.jobNumber}
+						onClick={(event) => {
+							openPDF({
+								event,
+								partnerId    : partner_id,
+								id           : row?.data?.jobOpenRequest?.id,
+								incidentType : SHIPMENT_MAPPING[row?.incidentSubtype],
+							});
+						}}
+					>
+						{row?.data?.jobOpenRequest?.jobNumber || ''}
+					</a>
 				</div>
 			</div>
 
