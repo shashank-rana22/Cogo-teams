@@ -25,7 +25,10 @@ function Header() {
 
 	const [duration, setDuration] = useState('this_month');
 
-	const [dateRange, setDateRange] = useState(null);
+	const [dateRange, setDateRange] = useState({
+		startDate : getThisMonthStartDate(),
+		endDate   : new Date(),
+	});
 
 	const [entity, setEntity] = useState(partner.id);
 
