@@ -24,6 +24,7 @@ function LeaderboardFilters(props) {
 		levelStack,
 		setCurrLevel,
 		setLevelStack,
+		isExpanded,
 	} = props;
 
 	const {
@@ -72,7 +73,9 @@ function LeaderboardFilters(props) {
 						offLabel="by Location"
 						onChange={(e) => setEntity(!e?.target?.checked)}
 					/>
-				) : (
+				) : null}
+
+				{!isEmpty(levelStack) && !isExpanded ? (
 					<div className={styles.back}>
 						<IcMArrowBack style={{ marginRight: '6px', cursor: 'pointer' }} onClick={handleBack} />
 						<div>
@@ -83,7 +86,7 @@ function LeaderboardFilters(props) {
 							Leaderboard
 						</div>
 					</div>
-				)}
+				) : null}
 
 			</div>
 
