@@ -1,4 +1,4 @@
-import { Button, DateRangepicker } from '@cogoport/components';
+import { Button, DateRangepicker, Select } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -7,6 +7,25 @@ import styles from './styles.module.css';
 
 const OFFSET = 1;
 const MAX_MONTH = 11;
+
+const DURATION_OPTIONS = [
+	{
+		label : 'This Month',
+		value : 'this_month',
+	},
+	{
+		label : 'This Quarter',
+		value : 'this_quarter',
+	},
+	{
+		label : 'This Year',
+		value : 'this_year',
+	},
+	{
+		label : 'Custom',
+		value : 'custom',
+	},
+];
 
 const getPreviousMonthDate = () => {
 	const currentDate = new Date();
@@ -23,10 +42,30 @@ function Header() {
 
 	const { user } = useSelector(({ profile }) => profile);
 
-	const [dateRange, setDateRange] = useState({
-		startDate : getPreviousMonthDate(),
-		endDate   : new Date(),
-	});
+	const [duration, setDuration] = useState('this_month');
+
+	const [dateRange, setDateRange] = useState(null);
+
+	const onChangeDuration = (selectedDuration) => {
+		if (selectedDuration === 'this_month') {
+			setDateRange({
+				startDate : getPreviousMonthDate(),
+				endDate   : new Date(),
+			});
+		} else if (selectedDuration === 'this_quarter') {
+			setDateRange({
+				startDate : getPreviousMonthDate(),
+				endDate   : new Date(),
+			});
+		} else if (selectedDuration === 'this_year') {
+			setDateRange({
+				startDate : getPreviousMonthDate(),
+				endDate   : new Date(),
+			});
+		}
+
+		setDuration(selectedDuration);
+	};
 
 	return (
 		<div className={styles.head_container}>
@@ -46,18 +85,24 @@ function Header() {
 						<i>Cogo India</i>
 					</div>
 
-					<div className={styles.container}>
-
-						<DateRangepicker
-							name="date"
-							onChange={setDateRange}
-							value={dateRange}
-							maxDate={new Date()}
-							isPreviousDaysAllowed
+					<div className={styles.filter_container}>
+						<Select
+							value={duration}
+							onChange={onChangeDuration}
+							options={DURATION_OPTIONS}
 						/>
+
+						{duration === 'custom' && (
+							<DateRangepicker
+								onChange={setDateRange}
+								value={dateRange}
+								maxDate={new Date()}
+								isPreviousDaysAllowed
+							/>
+						)}
+
 					</div>
 				</div>
-
 			</div>
 
 			<div className={styles.button_container}>

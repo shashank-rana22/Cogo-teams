@@ -41,8 +41,11 @@
 	display: flex;
 }
 
-.container {
-	margin-left: 10px;
+.filter_container {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	margin-left: 12px;
 
 	:global {
 		.ui_datepicker_container {
@@ -55,14 +58,6 @@
 			width: 120px;
 		}
 	}
-}
-
-.filter_container {
-	display: flex;
-	align-items: center;
-	width: fit-content;
-	padding: 8px 12px;
-	background-color: #fff;
 }
 
 .rotate {
