@@ -130,5 +130,9 @@
     "raised_to_desk": "被放到桌子上",
     "request_type": "请求类型",
     "select_sid": "选择SID",
-    "select_request_ype": "选择请求类型"
+    "select_request_ype": "选择请求类型",
+    "by_category": "按类别",
+    "by_desk": "在桌子上",
+    "select_raised_by_desk": "选择桌子抬高",
+    "select_raised_to_desk": "选择升高到桌子"
 }

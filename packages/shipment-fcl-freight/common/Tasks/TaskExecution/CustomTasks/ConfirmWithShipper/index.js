@@ -10,7 +10,7 @@ const COMPONENT_MAPPING = {
 	1 : BillingAddress,
 };
 
-function VerifyShipperDetails({
+function ConfirmWithShipper({
 	task = {},
 	onCancel = () => {},
 	refetch = () => {},
@@ -39,4 +39,4 @@ function VerifyShipperDetails({
 	);
 }
 
-export default VerifyShipperDetails;
+export default ConfirmWithShipper;

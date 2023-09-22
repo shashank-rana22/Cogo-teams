@@ -62,8 +62,8 @@ const createDraftRoom = async ({
 		last_draft_document : formatMailDraftMessage({
 			communication_id,
 			buttonType,
-			rteEditorPayload,
-			roomId: '',
+			payload : rteEditorPayload,
+			roomId  : '',
 		}),
 	};
 

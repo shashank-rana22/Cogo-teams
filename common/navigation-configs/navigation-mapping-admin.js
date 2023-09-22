@@ -1929,6 +1929,16 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.ground_ops,
 			module_type   : 'dashboards',
 		},
+		ams_submission: {
+			key           : 'ams_submission',
+			title         : t('common:ams_submission'),
+			href          : '/v2/ams-submission',
+			as            : '/v2/ams-submission',
+			type          : 'link',
+			main_apis     : [],
+			possible_apis : apis.ams_submission,
+			module_type   : 'dashboards',
+		},
 		printing_desk: {
 			key           : 'printing_desk',
 			title         : t('common:printing_desk'),
