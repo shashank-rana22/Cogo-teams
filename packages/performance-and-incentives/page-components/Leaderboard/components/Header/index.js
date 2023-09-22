@@ -3,63 +3,36 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
+import getEntityOptions from '../../../../utils/get-entity-options';
+import {
+	getThisAseessYearStartDate,
+	getThisMonthStartDate, getThisQuarterStartDate,
+} from '../../../../utils/start-date-functions';
+import DURATION_OPTIONS from '../../configurations/get-duration-filter-options';
+
 import styles from './styles.module.css';
 
-const OFFSET = 1;
-const MAX_MONTH = 11;
-
-const DURATION_OPTIONS = [
-	{
-		label : 'This Month',
-		value : 'this_month',
-	},
-	{
-		label : 'This Quarter',
-		value : 'this_quarter',
-	},
-	{
-		label : 'This Year',
-		value : 'this_year',
-	},
-	{
-		label : 'Custom',
-		value : 'custom',
-	},
-];
-
-const getPreviousMonthDate = () => {
-	const currentDate = new Date();
-	currentDate.setMonth(currentDate.getMonth() - OFFSET);
-
-	if (currentDate.getMonth() === MAX_MONTH) {
-		currentDate.setFullYear(currentDate.getFullYear() - OFFSET);
-	}
-	return currentDate;
+const GET_START_DATE_FUNCTION_MAPPING = {
+	this_month   : getThisMonthStartDate,
+	this_quarter : getThisQuarterStartDate,
+	this_year    : getThisAseessYearStartDate,
 };
 
 function Header() {
 	const { push } = useRouter();
 
-	const { user } = useSelector(({ profile }) => profile);
+	const { user, partner } = useSelector(({ profile }) => profile);
 
 	const [duration, setDuration] = useState('this_month');
 
 	const [dateRange, setDateRange] = useState(null);
 
+	const [entity, setEntity] = useState(partner.id);
+
 	const onChangeDuration = (selectedDuration) => {
-		if (selectedDuration === 'this_month') {
+		if (typeof GET_START_DATE_FUNCTION_MAPPING[selectedDuration] === 'function') {
 			setDateRange({
-				startDate : getPreviousMonthDate(),
-				endDate   : new Date(),
-			});
-		} else if (selectedDuration === 'this_quarter') {
-			setDateRange({
-				startDate : getPreviousMonthDate(),
-				endDate   : new Date(),
-			});
-		} else if (selectedDuration === 'this_year') {
-			setDateRange({
-				startDate : getPreviousMonthDate(),
+				startDate : GET_START_DATE_FUNCTION_MAPPING[selectedDuration](),
 				endDate   : new Date(),
 			});
 		}
@@ -101,6 +74,11 @@ function Header() {
 							/>
 						)}
 
+						<Select
+							value={entity}
+							onChange={setEntity}
+							options={getEntityOptions()}
+						/>
 					</div>
 				</div>
 			</div>
