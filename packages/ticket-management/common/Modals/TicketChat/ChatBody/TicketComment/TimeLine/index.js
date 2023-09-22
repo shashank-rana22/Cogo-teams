@@ -6,6 +6,7 @@ import React from 'react';
 
 import getRenderHeader from '../../../../../../utils/renderHeader';
 
+import Comments from './Comments';
 import styles from './styles.module.css';
 
 function Rating({ rating = 0, t = () => {} }) {
@@ -59,6 +60,7 @@ function TimeLine({
 					<div className={styles.timeline_text}>
 						{timelineText}
 						{rating && type === 'mark_as_resolved' ? <Rating rating={rating} t={t} /> : null}
+						{description && <Comments description={description} />}
 					</div>
 					<div className={styles.chat_break} />
 				</div>
