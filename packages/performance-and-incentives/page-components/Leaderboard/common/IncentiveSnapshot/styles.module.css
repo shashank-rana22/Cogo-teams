@@ -3,7 +3,7 @@
 }
 
 .heading {
-	font-size: 1.2em;
+	/* font-size: 1.2em;
 
 	@media (min-width: 1024px) {
 		font-size: 1.3em;
@@ -13,7 +13,7 @@
 	}
 	@media (min-width: 2560px) {
 		font-size: 1.6em;
-	}
+	} */
 }
 
 .snapshot_container {

@@ -6,9 +6,9 @@ import styles from './styles.module.css';
 function Header() {
 	return (
 		<>
-			<h2 className={styles.heading}>
+			<h3 className={styles.heading}>
 				Leaderboard
-			</h2>
+			</h3>
 
 			<div className={styles.subheading}>
 				<div>

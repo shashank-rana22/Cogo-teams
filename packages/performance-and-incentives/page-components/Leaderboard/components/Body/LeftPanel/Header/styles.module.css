@@ -1,7 +1,7 @@
 .heading {
 	margin-bottom: 0;
 
-	@media (min-width: 1024px) {
+	/* @media (min-width: 1024px) {
 		font-size: 1.2em;
 	}
 	@media (min-width: 1440px) {
@@ -9,7 +9,7 @@
 	}
 	@media (min-width: 2560px) {
 		font-size: 1.6em;
-	}
+	} */
 }
 
 .subheading {
@@ -17,7 +17,7 @@
 	align-items: center;
 	font-size: 0.6em;
 
-	@media (min-width: 1024px) {
+	/* @media (min-width: 1024px) {
 		font-size: 0.8em;
 	}
 	@media (min-width: 1440px) {
@@ -25,7 +25,7 @@
 	}
 	@media (min-width: 2560px) {
 		font-size: 1.2em;
-	}
+	} */
 }
 
 .light {
