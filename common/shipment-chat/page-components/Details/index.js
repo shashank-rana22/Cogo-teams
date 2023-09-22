@@ -26,16 +26,24 @@ const shipmentChatStakeholders = [
 	'service_ops2',
 	'service_ops3',
 	'booking_agent',
+	'ckam',
 	'supply_agent',
 	'sales_agent',
 	'costbooking_ops',
 	'lastmile_ops',
+	'release_desk',
+	'collection_desk',
+	'bl_release_desk',
+	'bl_collection_desk',
+	'do_release_desk',
+	'do_collection_desk',
 ];
 
 const CONDITION_MAPPING = {
 	CCS           : 'booking_agent',
 	document_desk : 'service_ops2',
 	'BL/DO'       : 'release_desk',
+	booking_desk  : 'service_ops1',
 };
 
 function Details({

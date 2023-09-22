@@ -14,7 +14,7 @@ const TEN_PERCENT = 10;
 
 function errorMsg({
 	new_item = {}, types = '', inputvalue = 0,
-	originalAllocation = 0, fieldType = '', originalTDS = 0,
+	originalAllocation = 0, fieldType = '', originalTDS = 0, t = () => {},
 }) {
 	if (fieldType === 'allocation') {
 		const {
@@ -33,11 +33,11 @@ function errorMsg({
 		let errorMessege = '';
 
 		if (lessValue) {
-			errorMessege = 'Allocation cannot be less than or equal to 0';
+			errorMessege = t('settlement:allocation_amount_error_message_1');
 		} else if (maxValue) {
 			errorMessege =			types === 'history'
-				? 'Allocation cannot be greater than Balance Amount + Settled Amount'
-				: 'Allocation cannot be greater than Balance Amount';
+				? t('settlement:allocation_amount_error_message_2')
+				: t('settlement:allocation_amount_error_message_3');
 		} else {
 			errorMessege =	getFormatAmount(originalAllocation, currency) || '';
 		}
@@ -60,9 +60,9 @@ function errorMsg({
 	let errorMessege = '';
 
 	if (lessValue) {
-		errorMessege = 'TDS cannot be less than 0';
+		errorMessege = t('settlement:tds_error_message_1');
 	} else if (maxValue) {
-		errorMessege = 'TDS plus Settled TDS cannot be greater than 10 % of  Doc. Amount';
+		errorMessege = t('settlement:tds_error_message_2');
 	} else {
 		errorMessege =	getFormatAmount(originalTDS, currency) || '';
 	}
@@ -70,13 +70,13 @@ function errorMsg({
 	return error;
 }
 
-function RenderContent({ isError = false, errorMessege = '', fieldType = '' }) {
+function RenderContent({ isError = false, errorMessege = '', fieldType = '', t = () => {} }) {
 	return (
 		<div>
 			{
 			(!isError && fieldType === 'allocation')
-				? <div className={styles.header_msg}>Actual Allocation Value</div>
-				: <div className={styles.header_msg}>Actual Tds Value</div>
+				? <div className={styles.header_msg}>{t('settlement:actual_allocation_value_text')}</div>
+				: <div className={styles.header_msg}>{t('settlement:actual_tds_value_text')}</div>
 		}
 			<div className={cl`${styles.msg} ${isError ? styles.error : ''}`}>{errorMessege}</div>
 		</div>
@@ -95,10 +95,11 @@ function EditFields({
 	setPrevTDS = () => {},
 	fieldType = '',
 	types = '',
+	t = () => {},
 }) {
 	const new_item = newItem || {};
 
-	const error = errorMsg({ new_item, types, inputvalue, originalAllocation, fieldType, originalTDS });
+	const error = errorMsg({ new_item, types, inputvalue, originalAllocation, fieldType, originalTDS, t });
 
 	const { isError = false, errorMessege = '' } = error || {};
 
@@ -116,7 +117,7 @@ function EditFields({
 			<Tooltip
 				animation="scale"
 				placement="top"
-				content={<RenderContent isError={isError} errorMessege={errorMessege} fieldType={fieldType} />}
+				content={<RenderContent isError={isError} errorMessege={errorMessege} fieldType={fieldType} t={t} />}
 				maxWidth="none"
 			>
 				<ButtonIcon

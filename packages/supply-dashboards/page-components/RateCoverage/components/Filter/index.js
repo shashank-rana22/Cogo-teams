@@ -61,7 +61,10 @@ function Filter({
 	};
 
 	return (
-		<div className={styles.parent}>
+		<div
+			className={styles.parent}
+			key={isAirService}
+		>
 			<div className={styles.heading}>
 				<span className={styles.apply_filters}>Apply Filter</span>
 				{' '}
@@ -139,7 +142,7 @@ function Filter({
 					<Select
 						placeholder="Search here"
 						value={filter?.commodity}
-						options={(isAirService) ? commodityOptions : FCL_COMMODITY_OPTIONS}
+						options={isAirService ? commodityOptions : FCL_COMMODITY_OPTIONS}
 						isClearable
 						onChange={(value) => {
 							setFilter((prevFilters) => ({ ...prevFilters, commodity: value, page: 1 }));

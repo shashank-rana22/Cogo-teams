@@ -5,7 +5,7 @@ import InvoiceItem from './Item';
 function ListInvoicePreferences({
 	shipmentData = {},
 	invoicingParties = [],
-	raw_invoicing_parties,
+	raw_invoicing_parties = [],
 	...rest
 }) {
 	const [openedService, setOpenedService] = useState(null);
@@ -16,6 +16,7 @@ function ListInvoicePreferences({
 		service_source : ip?.source,
 		is_igst        : ip?.is_igst,
 		status         : ip?.status,
+		processing     : ip?.processing,
 	}))).flat();
 
 	return (

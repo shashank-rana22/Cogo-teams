@@ -76,6 +76,11 @@ function UpdateButton({
 		);
 	}
 
+	if (task?.task === 'add_shipper_details') {
+		disableTask = (tasksList || []).some((item) => item?.task === 'mark_confirmed'
+		&& item?.status === 'pending' && !item?.service_id);
+	}
+
 	if (
 		RPA_SUPPORTED_TASKS.includes(task.task)
 		&& (task.task !== 'upload_si')

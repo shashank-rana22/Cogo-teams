@@ -37,6 +37,14 @@
 			display: none;
 		}
 	}
+
+	:global .ui_select_container {
+		position: relative;
+		top: -22px;
+		left: 240px;
+		width: 0;
+		height: 0;
+	}
 }
 
 .rate_accuracy_chart_container {

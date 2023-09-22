@@ -57,11 +57,27 @@
 }
 
 .main_heading {
-	margin: 8px 0;
+	margin: 8px 0 0;
 	font-size: 24px;
 	font-weight: 600;
 }
 
 .coming_soon {
 	margin: 20px;
+}
+
+.header {
+	display: flex;
+	justify-content: flex-end;
+	padding-bottom: 16px;
+
+	:global {
+		.ui_select_option_item {
+			font-weight: 500;
+		}
+	}
+}
+
+.font {
+	font-family: Poppins, sans-serif !important;
 }
