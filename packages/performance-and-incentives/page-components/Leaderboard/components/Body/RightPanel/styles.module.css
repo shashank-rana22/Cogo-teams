@@ -12,7 +12,7 @@
 .entity_tag {
 	display: flex;
 	align-items: center;
-	font-size: 20px;
+	font-size: var(--font-size-lg);
 	font-weight: 700;
 	color: #565a85;
 }
