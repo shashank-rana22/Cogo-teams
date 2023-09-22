@@ -2,12 +2,12 @@ import { useContext, useRef } from 'react';
 
 import AdditionalConditions from '../../../../commons/AdditionalConditions';
 import BookingConfirmationFooter from '../../../../commons/BookingConfirmationFooter';
+import BookingTypeOptions from '../../../../commons/BookingTypeOptions';
 import InvoicingParties from '../../../../commons/InvoicingParties';
+import PriceBreakup from '../../../../commons/PriceBreakup';
 import ShareQuotation from '../../../../commons/ShareQuotation';
 import { CheckoutContext } from '../../../../context';
 
-import BookingTypeOptions from './components/BookingTypeOptions';
-import PriceBreakup from './components/PriceBreakup';
 import styles from './styles.module.css';
 import useHandleBookingConfirmation from './useHandleBookingConfirmation';
 
