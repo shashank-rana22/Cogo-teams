@@ -13,7 +13,7 @@ function Body() {
 		// refetch,
 		currLevel,
 		setCurrLevel,
-		// levelStack,
+		levelStack,
 		setLevelStack,
 	} = useGetScoringReports();
 
@@ -26,6 +26,7 @@ function Body() {
 				setParams={setParams}
 				currLevel={currLevel}
 				setCurrLevel={setCurrLevel}
+				levelStack={levelStack}
 				setLevelStack={setLevelStack}
 			/>
 

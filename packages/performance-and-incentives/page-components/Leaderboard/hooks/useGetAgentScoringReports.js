@@ -1,4 +1,5 @@
 import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
@@ -13,7 +14,7 @@ const useGetScoringReports = () => {
 	const [view] = viewType.split('_');
 
 	const [searchValue, setSearchValue] = useState('');
-	const [currLevel, setCurrLevel] = useState(`${view}_report`);
+	const [currLevel, setCurrLevel] = useState([NEXT_LEVEL_MAPPING[`${view}_report`], '']);
 	const [levelStack, setLevelStack] = useState([]);
 
 	const [params, setParams] = useState({
@@ -24,8 +25,9 @@ const useGetScoringReports = () => {
 		add_current_user_report : true,
 		sort_by                 : 'rank',
 		sort_type               : 'asc',
-		filters                 : {
-			report_type: NEXT_LEVEL_MAPPING[currLevel],
+
+		filters: {
+			report_type: currLevel[GLOBAL_CONSTANTS.zeroth_index],
 		},
 	});
 
