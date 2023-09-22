@@ -1,7 +1,6 @@
 import { RTEditor, Input, Select } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 
-import { getUserActiveMails } from '../configurations/mail-configuration';
 import RTE_TOOL_BAR_CONFIG from '../mailConstants/rteToolBarConfig';
 
 import Recipients from './Recipients';
@@ -19,7 +18,6 @@ function ComposeEmailBody(props) {
 		userEmailAddress,
 		setEmailState = () => { },
 		userSharedMails = [],
-		viewType = '',
 		errorValue = '',
 		attachments = [],
 		emailState = {},
@@ -31,7 +29,7 @@ function ComposeEmailBody(props) {
 
 	const userActiveMails = (
 		[...new Set([
-			...getUserActiveMails({ userEmailAddress, viewType }),
+			...(userEmailAddress || []),
 			...(userSharedMails || []),
 		])]
 	).map(

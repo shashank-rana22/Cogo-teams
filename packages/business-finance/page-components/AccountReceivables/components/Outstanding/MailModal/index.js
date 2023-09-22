@@ -29,7 +29,6 @@ function MailIcon({ onClick = () => { } }) {
 }
 
 function MailEditorModal({
-	viewType = '',
 	email = '',
 }) {
 	const { userEmailAddress = '', userId = '', userName = '' } = useSelector(({ profile }) => ({
@@ -64,7 +63,7 @@ function MailEditorModal({
 		fetchEmailTemplate = () => { },
 		search = '',
 		setSearch = () => { },
-	} = useListEmailTemplates({ isTemplateView, viewType });
+	} = useListEmailTemplates({ isTemplateView });
 
 	const { list = [], page = 1, total_count = 0, page_limit = 6 } = data || {};
 

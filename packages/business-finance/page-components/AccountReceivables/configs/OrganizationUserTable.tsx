@@ -46,7 +46,7 @@ const organizationColumn = ({ orgData }) => [
 		accessor : (row) => (
 			<div className={styles.flexmail}>
 				<HandleCall row={row} orgData={orgData} />
-				<MailEditorModal viewType="cogoone_admin" email={row?.email} />
+				<MailEditorModal email={row?.email} />
 			</div>
 		),
 		id: 'mobile',

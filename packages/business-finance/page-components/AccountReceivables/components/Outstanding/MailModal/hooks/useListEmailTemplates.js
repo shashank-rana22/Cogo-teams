@@ -2,9 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../viewTypeMapping';
-
-const getParams = ({ page, query, viewType }) => ({
+const getParams = ({ page, query }) => ({
 	page,
 	page_limit               : 6,
 	pagination_data_required : true,
@@ -14,11 +12,10 @@ const getParams = ({ page, query, viewType }) => ({
 		q      : query?.trim() || undefined,
 		type   : 'email',
 		source : 'rich_text',
-		tags   : VIEW_TYPE_GLOBAL_MAPPING[viewType]?.show_relevant_templates || undefined,
 	},
 });
 
-function useListEmailTemplates({ isTemplateView = false, viewType = '' }) {
+function useListEmailTemplates({ isTemplateView = false }) {
 	const [search, setSearch] = useState('');
 
 	const { query, debounceQuery } = useDebounceQuery();
@@ -34,12 +31,12 @@ function useListEmailTemplates({ isTemplateView = false, viewType = '' }) {
 		}
 		try {
 			await trigger({
-				params: getParams({ page, query, viewType }),
+				params: getParams({ page, query }),
 			});
 		} catch (error) {
 			console.error(error);
 		}
-	}, [trigger, query, isTemplateView, viewType]);
+	}, [trigger, query, isTemplateView]);
 
 	useEffect(() => {
 		debounceQuery(search);

@@ -21,9 +21,6 @@ function useMailEditorFunctions({
 	email = '',
 }) {
 	const {
-		emailVia = '',
-		formattedData = {},
-		eachMessage = {},
 		toUserEmail = [],
 		subject = '',
 		from_mail = [],
@@ -49,7 +46,6 @@ function useMailEditorFunctions({
 
 	const {
 		mailLoading = false,
-		sendMail = () => { },
 	} = useSendOmnichannelMail({
 		setEmailState,
 		setButtonType,
@@ -89,19 +85,6 @@ function useMailEditorFunctions({
 			userId,
 
 		};
-		if (emailVia === 'firebase_emails') {
-			sendMail({
-				source        : from_mail || activeMailAddress,
-				uploadedFiles : attachments,
-				formattedData,
-				mailActions   : {
-					actionType : buttonType,
-					data       : eachMessage,
-				},
-				emailState,
-			});
-			return;
-		}
 		replyMailApi(payload);
 	};
 
