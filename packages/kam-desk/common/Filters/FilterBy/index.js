@@ -21,6 +21,11 @@ const PARTNER_PARAMS = {
 	},
 };
 
+const TRADE_TYPE_OPTIONS = [
+	{ label: 'Import', value: 'import' },
+	{ label: 'Export', value: 'export' },
+];
+
 function FilterBy({
 	setPopoverFilter = () => {},
 	popoverFilter = {},
@@ -246,6 +251,17 @@ function FilterBy({
 					/>
 				</div>
 			) : null}
+
+			<div className={styles.channel_partner}>
+				<div className={styles.filter_heading}>Trade Type</div>
+				<Select
+					options={TRADE_TYPE_OPTIONS}
+					value={popoverFilter?.trade_type}
+					onChange={(val) => { setPopoverFilter({ ...popoverFilter, trade_type: val }); }}
+					size="sm"
+					isClearable
+				/>
+			</div>
 		</div>
 	);
 }
