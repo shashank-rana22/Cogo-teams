@@ -12,7 +12,7 @@ import Header from './Header';
 import Services from './Services';
 import styles from './styles.module.css';
 
-function SelectedRate({
+function SelectedRateCard({
 	setHeaderProps = () => {},
 	headerProps = {},
 	setRouterLoading = () => {},
@@ -83,4 +83,4 @@ function SelectedRate({
 	);
 }
 
-export default SelectedRate;
+export default SelectedRateCard;

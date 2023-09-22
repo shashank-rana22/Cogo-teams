@@ -1,6 +1,7 @@
-import { Checkbox, cl } from '@cogoport/components';
+import { Checkbox, cl, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import InfoBannerContent from '../../../../../../../../../common/InfoBannerContent';
 import LikeDislike from '../../../../../../../common/LikeDislike';
 
 import styles from './styles.module.css';
@@ -20,9 +21,10 @@ function Header({
 	detail = {},
 	comparisonRates = {},
 	setComparisonRates = () => {},
-	// infoBanner = {},
-	// showGuide = false,
 	isSelectedCard = false,
+	infoBanner = {},
+	showGuide = false,
+	setInfoBanner = () => {},
 }) {
 	const { airline = {}, id: card_id, source = '' } = rate;
 
@@ -42,11 +44,11 @@ function Header({
 		}
 	};
 
-	// const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
+	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 
-	// const showPopover = current === 'comparision_button' && showGuide;
+	const showPopover = current === 'comparision_button' && showGuide;
 
-	// const popoverComponentData = buttonProps.comparision_button || {};
+	const popoverComponentData = buttonProps.comparision_button || {};
 
 	const imageUrl = airline?.logo_url || GLOBAL_CONSTANTS.image_url.airline_default_icon;
 
@@ -58,12 +60,25 @@ function Header({
 
 			<div className={styles.left_section}>
 				{!isSelectedCard ? (
-					<Checkbox
-						checked={selectedCardIDs.includes(card_id)}
-						onChange={handleCheckbox}
-						disabled={selectedCardIDs.length >= MAX_COMPARABLE_RATE_CARD_INDEX
+					<Popover
+						placement="bottom"
+						caret
+						render={(
+							<InfoBannerContent
+								popoverComponentData={popoverComponentData}
+								totalBanners={totalBanners}
+								setInfoBanner={setInfoBanner}
+							/>
+						)}
+						visible={showPopover}
+					>
+						<Checkbox
+							checked={selectedCardIDs.includes(card_id)}
+							onChange={handleCheckbox}
+							disabled={selectedCardIDs.length >= MAX_COMPARABLE_RATE_CARD_INDEX
 						&& !selectedCardIDs.includes(card_id)}
-					/>
+						/>
+					</Popover>
 				) : null}
 
 				<div className={styles.airline_info}>
