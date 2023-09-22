@@ -19,7 +19,7 @@ export const useStakeholderCheck = () => {
 				geo.uuid.operation_manager,
 				geo.uuid.finops_manager,
 				geo.uuid.coe_head,
-				geo.uuid.so3_vietnam,
+				geo.uuid.service_ops3,
 			],
 			role: 'credit_control',
 		},
