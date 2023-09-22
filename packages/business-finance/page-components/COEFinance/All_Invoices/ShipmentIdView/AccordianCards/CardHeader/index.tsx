@@ -97,6 +97,7 @@ function CardHeader({
 			)}
 			{showTab && amountTab === 'sellQuote' ? (
 				<Toggle
+					name="a4"
 					size="sm"
 					onLabel="Checkout"
 					offLabel="Current"

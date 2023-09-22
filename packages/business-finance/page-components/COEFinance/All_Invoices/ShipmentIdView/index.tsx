@@ -67,14 +67,18 @@ function ShipmentIdView() {
 				</div>
 			);
 		}
-		return data?.map((item: ItemDataProps) => (
-			<AccordianCards
-				itemData={item}
-				currentOpenSID={currentOpenSID}
-				setCurrentOpenSID={setCurrentOpenSID}
-				key={item?.jobId}
-			/>
-		));
+		return (
+			<div>
+				{ data?.map((item: ItemDataProps) => (
+					<AccordianCards
+						itemData={item}
+						currentOpenSID={currentOpenSID}
+						setCurrentOpenSID={setCurrentOpenSID}
+						key={item?.jobId}
+					/>
+				))}
+			</div>
+		);
 	}
 
 	return (
