@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { cl, Modal } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
@@ -11,18 +11,22 @@ import useGetAnnouncementList from '../Announcements/hooks/useGetAnnouncementLis
 import styles from './styles.module.css';
 import TopicList from './TopicList';
 
+const MOBILE_DEVICE = 768;
+const SHIFT_X = 30;
+const SHIFT_Y = 30;
+
 function FAQs({
-	faqNotificationApiLoading,
-	fetchFaqNotification,
-	faqNotificationData,
-	refetch,
+	faqNotificationApiLoading = false,
+	fetchFaqNotification = () => {},
+	faqNotificationData = {},
+	refetch = () => {},
 }) {
-	const dispatch = useDispatch();
+	const router = useRouter();
 	const profileData = useSelector(({ profile }) => profile);
+	const dispatch = useDispatch();
 
 	const { showFaq = false } = profileData || {};
 
-	const router = useRouter();
 	const { asPath } = router;
 
 	const hideSupportIcon = !asPath.includes('/cogo-one/omni-channel');
@@ -41,7 +45,7 @@ function FAQs({
 
 	useEffect(() => {
 		function handleResize() {
-			setIsMobile(window.innerWidth < 768);
+			setIsMobile(window.innerWidth < MOBILE_DEVICE);
 		}
 		window.addEventListener('resize', handleResize);
 		return () => window.removeEventListener('resize', handleResize);
@@ -58,7 +62,7 @@ function FAQs({
 
 		const shiftY = ev.clientY;
 
-		if (shiftX && shiftY)ballRef.current.style = `top: ${shiftY - 30}px;left: ${shiftX - 30}px;`;
+		if (shiftX && shiftY)ballRef.current.style = `top: ${shiftY - SHIFT_Y}px;left: ${shiftX - SHIFT_X}px;`;
 	}
 
 	const handleClose = () => {
@@ -101,7 +105,8 @@ function FAQs({
 
 			{(show || showFaq) ? (
 				<Modal
-					className={`${styles.modal_wrapper} ${!isEmpty(announcementModalData) && styles.increase_width}`}
+					className={cl`${styles.modal_wrapper} 
+					${!isEmpty(announcementModalData) ? styles.increase_width : ''}`}
 					show={show || showFaq}
 					onClose={handleClose}
 					placement={isMobile ? 'fullscreen' : 'right'}
@@ -109,13 +114,14 @@ function FAQs({
 				>
 
 					<div className={styles.modal_content}>
-						<div className={`${styles.topiclist_container} 
+						<div className={cl`${styles.topiclist_container} 
 						${!isEmpty(announcementModalData) && styles.hide_list}`}
 						>
 							<TopicList
 								faqNotificationData={faqNotificationData}
 								faqNotificationApiLoading={faqNotificationApiLoading}
 								fetchFaqNotification={fetchFaqNotification}
+								setModalData={setAnnouncementModalData}
 								refetch={refetch}
 								setShow={setShow}
 								announcementProps={announcementProps}

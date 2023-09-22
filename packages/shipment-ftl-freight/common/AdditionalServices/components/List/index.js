@@ -27,6 +27,8 @@ function List({ isSeller = false }) {
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(MIN_COUNT);
 
+	const { id = '', is_job_closed_financially = false } = shipment_data || {};
+
 	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({
 		shipment_data,
 		pageLimit,
@@ -118,7 +120,7 @@ function List({ isSeller = false }) {
 			<div className={styles.not_added}>
 				<Button
 					onClick={() => setShowModal('charge_code')}
-					disabled={shipment_data?.is_job_closed}
+					disabled={is_job_closed_financially}
 				>
 					<div className={styles.add_icon}>+</div>
 					Add Additional Services
@@ -159,7 +161,7 @@ function List({ isSeller = false }) {
 			{showModal === 'charge_code'
 				&& (
 					<AddService
-						shipmentId={shipment_data?.id}
+						shipmentId={id}
 						services={servicesList}
 						isSeller={isSeller}
 						refetch={refetch}

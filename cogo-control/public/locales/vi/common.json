@@ -254,7 +254,8 @@
     "switching_profile": "Switching Profile",
     "forecast": "Forecast",
     "supply_allocation": "Supply Allocation",
-    "demand_forecast": "Demand Forecast",
     "performance_and_incentives": "Performance and Incentives",
-    "warehouse_management": "Warehouse Management"
+    "ams_submission": "AMS Submission",
+    "warehouse_management": "Warehouse Management",
+    "demand_forecast": "Demand Forecast"
 }
