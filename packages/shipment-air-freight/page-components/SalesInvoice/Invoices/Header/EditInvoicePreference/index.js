@@ -29,7 +29,7 @@ function EditInvoicePreference({
 	const {
 		importer_exporter_id = '',
 		country_id = '',
-		is_tax_applicable,
+		is_tax_applicable = true,
 		is_job_closed_financially = false,
 		shipment_type = '',
 	} = shipment_data || {};
@@ -48,9 +48,9 @@ function EditInvoicePreference({
 	});
 
 	const organizationDetails = {
-		id                : importer_exporter_id || undefined,
-		country_id        : country_id || undefined,
-		is_tax_applicable : is_tax_applicable ?? true,
+		id         : importer_exporter_id || undefined,
+		country_id : country_id || undefined,
+		is_tax_applicable,
 	};
 
 	const handleClose = () => {
