@@ -109,10 +109,15 @@ function GenerateMAWB({
 	const {
 		data: organizationData = {},
 		listOrganization,
-	} = 	GetOrganization({ importerExporterIds: item.importerExporterId });
+	} = GetOrganization({ importerExporterIds: item.importerExporterId });
 	const { list: organizationList = [] } = organizationData;
 
-	const fields = mawbControls(disableClass, !customHawbNumber, unitDefaultValue);
+	const fields = mawbControls({
+		disableClass,
+		editHawbNumberCondition: !customHawbNumber,
+		unitDefaultValue,
+		activeCategory,
+	});
 
 	const { packingData, packingList } = usePackingList();
 
@@ -194,7 +199,7 @@ function GenerateMAWB({
 				...hawbData.data?.data,
 				originAirportId   : item.originAirportId,
 				serviceProviderId : item.serviceProviderId,
-				dimension         : newDimensions,
+				dimension         : !isEmpty(newDimensions) ? newDimensions : hawbData?.data?.data?.dimension,
 			});
 			setHawbSuccess(false);
 		}
@@ -322,6 +327,7 @@ function GenerateMAWB({
 	}, [formValues.paymentTerm]);
 
 	useEffect(() => {
+		console.log(taskItem);
 		finalFields.forEach((c) => {
 			setValue(c.name, taskItem[c.name]);
 		});
@@ -366,26 +372,23 @@ function GenerateMAWB({
 	}, [edit, editCopies]);
 
 	useEffect(() => {
-		if (edit && activeCategory === 'hawb') {
-			return;
-		}
 		let totalVolume:number = 0;
 		let totalPackage:number = 0;
 		(formValues.dimension || []).forEach((dimensionObj) => {
-			if (dimensionObj.unit === 'inch') {
+			if (dimensionObj?.unit === 'inch') {
 				totalVolume
-				+= Number(dimensionObj.length) * 2.54
-				* Number(dimensionObj.width) * 2.54
-				* Number(dimensionObj.height) * 2.54
-				* Number(dimensionObj.packages_count);
-			} else if (dimensionObj.unit === 'cms') {
+				+= Number(dimensionObj?.length) * 2.54
+				* Number(dimensionObj?.width) * 2.54
+				* Number(dimensionObj?.height) * 2.54
+				* Number(dimensionObj?.packages_count);
+			} else if (dimensionObj?.unit === 'cms') {
 				totalVolume
-				+= Number(dimensionObj.length)
-				* Number(dimensionObj.width)
-				* Number(dimensionObj.height)
-				* Number(dimensionObj.packages_count);
+				+= Number(dimensionObj?.length)
+				* Number(dimensionObj?.width)
+				* Number(dimensionObj?.height)
+				* Number(dimensionObj?.packages_count);
 			}
-			totalPackage += Number(dimensionObj.packages_count);
+			totalPackage += Number(dimensionObj?.packages_count) || 0;
 		});
 		setValue('volumetricWeight', viewDoc ? taskItem.volumetricWeight
 			: Number(((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));

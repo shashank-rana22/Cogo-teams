@@ -15,7 +15,7 @@ const convertObjectMappingToArray = (obj) => Object.keys(obj).map((item) => ({
 	label : obj[item],
 }));
 
-const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) => ({
+const mawbControls = ({ disableClass, editHawbNumberCondition, unitDefaultValue, activeCategory }) => ({
 	hawb_controls: [
 		{
 			name        : 'document_number',
@@ -211,6 +211,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 					label       : 'Length',
 					type        : 'number',
 					className   : 'primary lg',
+					disabled    : activeCategory === 'mawb',
 					span        : 1.25,
 					rules       : {
 						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
@@ -221,6 +222,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 					placeholder : 'Width',
 					label       : 'Width',
 					type        : 'number',
+					disabled    : activeCategory === 'mawb',
 					className   : 'primary lg',
 					span        : 1.25,
 					rules       : {
@@ -231,6 +233,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 					name        : 'height',
 					placeholder : 'Height',
 					label       : 'Height',
+					disabled    : activeCategory === 'mawb',
 					type        : 'number',
 					className   : 'primary lg',
 					span        : 1.5,
@@ -244,6 +247,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 					label       : 'Number of Packages',
 					type        : 'number',
 					className   : 'primary lg',
+					disabled    : activeCategory === 'mawb',
 					span        : 2,
 					rules       : {
 						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
@@ -253,6 +257,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 					label       : 'Unit',
 					type        : 'select',
 					placeholder : 'select',
+					disabled    : activeCategory === 'mawb',
 					span        : 1.25,
 					options     : [
 						{ label: 'Cm', value: 'cms' },
