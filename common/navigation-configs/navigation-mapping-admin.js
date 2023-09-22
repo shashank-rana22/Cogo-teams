@@ -1194,8 +1194,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		tracking: {
 			key           : 'tracking',
 			title         : t('common:tracking'),
-			href          : '/saas/tracking',
-			as            : '/saas/tracking',
+			href          : '/tracking',
+			as            : '/tracking',
 			icon          : IcMTracking,
 			possible_apis : apis.tracking,
 			type          : 'link',

@@ -14,17 +14,17 @@ const saas = {
 		navigation : 'saas_air_tracking',
 		isMainNav  : true,
 	},
-	'/[partner_id]/saas/tools/tracking/list': {
+	'/[partner_id]/saas/tracking/list': {
 		layoutType : 'no_header',
 		navigation : 'saas_air_tracking',
 		isMainNav  : true,
 	},
-	'/[partner_id]/saas/tools/tracking/list/archive/[trackingType]': {
+	'/[partner_id]/saas/tracking/list/archive/[trackingType]': {
 		layoutType : 'no_header',
 		navigation : 'saas_air_tracking',
 		isMainNav  : true,
 	},
-	'/[partner_id]/saas/tools/tracking/list/[trackingType]/[trackingId]': {
+	'/[partner_id]/saas/tracking/list/[trackingType]/[trackingId]': {
 		layoutType : 'no_header',
 		navigation : 'saas_air_tracking',
 		isMainNav  : true,

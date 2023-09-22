@@ -16,11 +16,10 @@ import FilterSection from './FilterSection';
 import styles from './styles.module.css';
 
 function Header(props) {
+	const { query } = useRouter();
 	const { globalFilter, filterChangeHandler } = props;
 
 	const { t } = useTranslation(['common', 'airOceanTracking']);
-
-	const { query } = useRouter();
 
 	const TAB_MAPPING = getTabMapping({ t });
 

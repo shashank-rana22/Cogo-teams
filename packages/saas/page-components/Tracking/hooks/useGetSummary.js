@@ -9,7 +9,7 @@ const SUMARY_API = {
 
 const useGetSummary = () => {
 	const { query } = useRouter();
-	const { branch_id, activeTab: trackingType } = query;
+	const { partner_id, activeTab: trackingType } = query;
 	const [globalFilter, setGlobalFilter] = useState({
 		page            : 1,
 		activeTab       : trackingType || 'ocean',
@@ -29,7 +29,7 @@ const useGetSummary = () => {
 				params: {
 					filters: {
 						period_in_days         : globalFilter?.period_in_days,
-						organization_branch_id : branch_id,
+						organization_branch_id : partner_id,
 						shipment_status        : globalFilter?.shipment_status,
 					},
 					page                 : globalFilter.page,
@@ -40,7 +40,7 @@ const useGetSummary = () => {
 		} catch (err) {
 			console.error(err);
 		}
-	}, [branch_id, trigger, globalFilter]);
+	}, [partner_id, trigger, globalFilter]);
 
 	useEffect(() => {
 		getSummary();
