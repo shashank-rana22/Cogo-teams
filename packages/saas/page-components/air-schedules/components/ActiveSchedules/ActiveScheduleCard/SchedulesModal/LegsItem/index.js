@@ -1,6 +1,6 @@
 import { Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate, { differenceInDays } from '@cogoport/utils';
+import { differenceInDays, format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -23,14 +23,14 @@ function LegsItem({ legItem = {} }) {
 			<div>
 				<div className={styles.dates_container}>
 					<div className={styles.date_container}>
-						{formatDate(
+						{format(
 							legItem?.departure,
 							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 
 						)}
 					</div>
 					<div className={styles.date_container}>
-						{formatDate(
+						{format(
 							legItem?.arrival,
 							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 

@@ -11,14 +11,14 @@ import styles from './styles.module.css';
 const PARSE_OPTIONS_INDEX = 1;
 
 function BillingPartyDetails({
-	control,
+	control = {},
 	billingParty = {},
-	setBillingParty,
+	setBillingParty = () => {},
 	setValue = () => {},
-	watch,
+	watch = () => {},
 	errors = {},
 	errMszs = {},
-	open,
+	open = false,
 	purchaseInvoiceValues = {},
 	listEntities = {},
 	entitiesLoading = false,
