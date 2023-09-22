@@ -1,6 +1,6 @@
 import { Button, Badge, Toggle } from '@cogoport/components';
 import { IcMFilter, IcMArrowBack } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import Filters from '../../../../common/Filters';
 import SearchInput from '../../../../common/SearchInput';
@@ -64,7 +64,7 @@ function LeaderboardFilters(props) {
 		<div className={styles.container}>
 			<div className={styles.toggle_container}>
 
-				{false ? (
+				{isEmpty(levelStack) ? (
 					<Toggle
 						name="mode"
 						size="md"

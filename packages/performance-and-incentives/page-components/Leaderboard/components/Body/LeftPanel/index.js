@@ -46,7 +46,7 @@ function LeftPanel(props) {
 
 	return (
 		<div className={styles.container}>
-			<Header />
+			<Header currLevel={currLevel} setParams={setParams} />
 
 			{loading ? <LoadingState /> : (
 				<>
