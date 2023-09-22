@@ -22,6 +22,7 @@
 	display: flex;
 	height: fit-content;
 	padding: 2px;
+	margin-bottom: 10px;
 	cursor: pointer;
 	background: #f9f9f9;
 	border: 1px solid rgb(242 242 242);
@@ -30,6 +31,7 @@
 
 .content_details {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
-	width: 75%;
+	width: 60%;
 }
