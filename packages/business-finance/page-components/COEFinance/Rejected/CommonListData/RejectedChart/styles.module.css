@@ -1,0 +1,14 @@
+.responsive_pie {
+	min-width: 49%;
+	height: 420px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.responsive_bar_chart {
+	min-width: 35%;
+	height: 420px;
+	margin-left: 40px;
+	background: #fff;
+	border-radius: 8px;
+}

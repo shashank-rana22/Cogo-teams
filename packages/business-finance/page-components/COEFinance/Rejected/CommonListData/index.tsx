@@ -13,6 +13,7 @@ import RenderViewMoreButton from '../../All_Invoices/PurchaseInvoiceView/RenderD
 import PURCHASE_VIEW_CONFIG from '../../configurations/PURCHASE_VIEW_LIST';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
+import RejectedCharts from './RejectedChart';
 import SegmentedFilters from './SegmentedFilters';
 
 interface ItemProps {
@@ -74,6 +75,10 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 	};
 	return (
 		<div>
+			<div>
+				<RejectedCharts filters={filters} />
+				{/* <MyResponsiveBar data={BarData({ dashboardData })} /> */}
+			</div>
 			<SegmentedFilters
 				filters={filters}
 				setFilters={setFilters}
