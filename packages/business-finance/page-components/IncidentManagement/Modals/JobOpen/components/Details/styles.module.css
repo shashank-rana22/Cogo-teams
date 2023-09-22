@@ -49,6 +49,7 @@
 .shipment_id {
 	font-weight: 500;
 	color: #f68b21;
+	text-decoration: underline;
 }
 
 .buy_sell_div {
