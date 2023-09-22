@@ -25,7 +25,7 @@ function LeftPanel(props) {
 			},
 		}));
 
-		setLevelStack((prev) => prev.push(currLevel));
+		setLevelStack((prev) => ([...prev, prev.push(currLevel)]));
 
 		setCurrLevel((prev) => NEXT_LEVEL_MAPPING[prev]);
 	};
