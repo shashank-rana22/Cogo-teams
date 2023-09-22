@@ -48,7 +48,13 @@ function Header() {
 
 					<div className={styles.container}>
 
-						<DateRangepicker name="date" onChange={setDateRange} value={dateRange} maxDate={new Date()} />
+						<DateRangepicker
+							name="date"
+							onChange={setDateRange}
+							value={dateRange}
+							maxDate={new Date()}
+							isPreviousDaysAllowed
+						/>
 					</div>
 				</div>
 
