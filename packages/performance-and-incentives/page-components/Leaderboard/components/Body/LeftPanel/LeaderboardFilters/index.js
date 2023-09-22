@@ -1,11 +1,14 @@
 import { Button, Badge, Toggle } from '@cogoport/components';
-import { IcMFilter } from '@cogoport/icons-react';
+import { IcMFilter, IcMArrowBack } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import Filters from '../../../../common/Filters';
 import SearchInput from '../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
+
+const OFFSET = 1;
 
 function conditionalWrapper({ condition, wrapper, children }) {
 	return condition ? wrapper(children) : children;
@@ -18,6 +21,8 @@ function LeaderboardFilters(props) {
 		searchValue,
 		setSearchValue,
 		setEntity,
+		levelStack,
+		setLevelStack,
 	} = props;
 
 	const {
@@ -30,16 +35,53 @@ function LeaderboardFilters(props) {
 		filtersApplied,
 	} = useFilterContent({ setParams });
 
+	const [beforeLevel = '', id] = levelStack[levelStack.length - OFFSET] || [];
+
+	const [backText] = beforeLevel.split('_') || [];
+
+	const handleBack = () => {
+		setParams((prev) => ({
+			...prev,
+			filters: {
+				...prev.filters,
+				report_type : beforeLevel,
+				user_rm_ids : id ? [id] : undefined,
+			},
+		}));
+
+		setLevelStack((prev) => {
+			const curr = [...prev];
+			curr.pop();
+
+			return curr;
+		});
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.toggle_container}>
-				<Toggle
-					name="mode"
-					size="md"
-					onLabel="by Channel"
-					offLabel="by Location"
-					onChange={(e) => setEntity(!e?.target?.checked)}
-				/>
+
+				{false ? (
+					<Toggle
+						name="mode"
+						size="md"
+						onLabel="by Channel"
+						offLabel="by Location"
+						onChange={(e) => setEntity(!e?.target?.checked)}
+					/>
+				) : (
+					<div className={styles.back}>
+						<IcMArrowBack style={{ marginRight: '6px', cursor: 'pointer' }} onClick={handleBack} />
+						<div>
+							Back to
+							{' '}
+							{startCase(backText)}
+							{' '}
+							Leaderboard
+						</div>
+					</div>
+				)}
+
 			</div>
 
 			<div className={styles.inner_container}>

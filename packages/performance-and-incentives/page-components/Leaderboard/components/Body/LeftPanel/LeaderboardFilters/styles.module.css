@@ -23,3 +23,9 @@
 		}
 	}
 }
+
+.back {
+	display: flex;
+	align-items: center;
+	color: #828282;
+}

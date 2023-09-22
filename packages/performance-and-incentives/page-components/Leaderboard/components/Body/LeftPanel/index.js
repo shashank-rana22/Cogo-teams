@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
 
 import Header from './Header';
@@ -14,6 +16,7 @@ function LeftPanel(props) {
 		loading,
 		currLevel,
 		setCurrLevel,
+		levelStack,
 		setLevelStack,
 	} = props;
 
@@ -22,14 +25,19 @@ function LeftPanel(props) {
 			...prev,
 			filters: {
 				...prev.filters,
-				report_type : NEXT_LEVEL_MAPPING[currLevel],
+				report_type : NEXT_LEVEL_MAPPING[currLevel[GLOBAL_CONSTANTS.zeroth_index]],
 				user_rm_ids : [id],
 			},
 		}));
 
-		setLevelStack((prev) => ([...prev, prev.push(currLevel)]));
+		setLevelStack((prev) => {
+			const curr = [...prev];
+			curr.push([currLevel[GLOBAL_CONSTANTS.zeroth_index], currLevel[GLOBAL_CONSTANTS.one]]);
 
-		setCurrLevel((prev) => NEXT_LEVEL_MAPPING[prev]);
+			return curr;
+		});
+
+		setCurrLevel((prev) => [NEXT_LEVEL_MAPPING[prev[GLOBAL_CONSTANTS.zeroth_index]], id]);
 	};
 
 	return (
@@ -38,7 +46,7 @@ function LeftPanel(props) {
 
 			{loading ? <LoadingState /> : (
 				<>
-					<LeaderboardFilters />
+					<LeaderboardFilters levelStack={levelStack} setLevelStack={setLevelStack} setParams={setParams} />
 
 					<List list={list} params={params} setParams={setParams} handleClick={handleClick} />
 				</>

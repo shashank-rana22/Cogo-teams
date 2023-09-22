@@ -13,7 +13,7 @@ function Body({ viewData = '' }) {
 		// refetch,
 		currLevel,
 		setCurrLevel,
-		// levelStack,
+		levelStack,
 		setLevelStack,
 	} = useGetScoringReports({ viewData });
 
@@ -26,6 +26,7 @@ function Body({ viewData = '' }) {
 				setParams={setParams}
 				currLevel={currLevel}
 				setCurrLevel={setCurrLevel}
+				levelStack={levelStack}
 				setLevelStack={setLevelStack}
 			/>
 
