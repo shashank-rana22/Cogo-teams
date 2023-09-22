@@ -85,7 +85,8 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 								},
 							}) || '-'}
 						</div>
-
+					</div>
+					<div className={styles.icon}>
 						<Input
 							value={walletAmount}
 							disabled={!disabledValue}
@@ -96,23 +97,24 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 							onChange={(e) => setWalletAmount(e)}
 							style={{ width: '180px', marginRight: '10px' }}
 						/>
-					</div>
-					<div className={styles.icon}>
 						{disabledValue && (
 							<Button
-								style={{ marginRight: '10px' }}
+								size="md"
+								style={{ marginRight: '10px', width: '125px' }}
 								onClick={updateRevenueDeskWallet}
 							>
 								Save
 							</Button>
 						)}
-						<Button
-							style={{ marginRight: '10px', background: '#f9f9f9', color: '#000' }}
-							onClick={() => setDisabledValue(!disabledValue)}
-						>
-							<IcMEdit style={{ marginRight: '10px' }} />
-							Edit Amount
-						</Button>
+						{!disabledValue && (
+							<Button
+								style={{ marginRight: '10px', background: '#f9f9f9', color: '#000' }}
+								onClick={() => setDisabledValue(!disabledValue)}
+							>
+								<IcMEdit style={{ marginRight: '10px' }} />
+								Edit Amount
+							</Button>
+						)}
 
 						<Button
 							themeType="secondary"
