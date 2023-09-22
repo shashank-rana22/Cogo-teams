@@ -31,14 +31,12 @@ import styles from './styles.module.css';
 
 function CogoOne() {
 	const { query: { assigned_chat = '', channel_type = '' } } = useRouter();
-
 	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile, general }) => ({
 		userId           : profile?.user?.id,
 		userName         : profile?.user?.name,
 		token            : general.firestoreToken,
 		userEmailAddress : profile?.user?.email,
 	}));
-
 	const [activeTab, setActiveTab] = useState({
 		tab               : channel_type === 'email' ? 'firebase_emails' : 'message',
 		subTab            : 'all',
@@ -49,7 +47,6 @@ function CogoOne() {
 			channel_type,
 		} : {},
 	});
-
 	const [viewType, setViewType] = useState('');
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
@@ -62,7 +59,8 @@ function CogoOne() {
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
 	const [mailAttachments, setMailAttachments] = useState([]);
-
+	const [showFeedback, setShowFeedback] = useState(false);
+	console.log('showFeedback:', showFeedback);
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
 		activeVoiceCard   : activeTab?.data,
@@ -70,14 +68,10 @@ function CogoOne() {
 		setRaiseTicketModal,
 		agentId           : userId,
 	});
-
 	const {
-		viewType: initialViewType = '', loading: workPrefernceLoading = false,
-		userSharedMails = [],
+		viewType: initialViewType = '', loading: workPrefernceLoading = false, userSharedMails = [],
 	} = useAgentWorkPrefernce();
-
 	const { fetchWorkStatus = () => {}, agentWorkStatus = {}, preferenceLoading = false } = useGetAgentPreference();
-
 	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
 
 	const { suggestions = [] } = useListChatSuggestions();
@@ -118,9 +112,7 @@ function CogoOne() {
 	};
 
 	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
-
 	const { user_id = '', lead_user_id = '' } = tabData || {};
-
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
 	const orgId = FIREBASE_TABS.includes(activeTab?.tab)
 		? formattedMessageData?.organization_id
@@ -142,9 +134,7 @@ function CogoOne() {
 	}, [token]);
 
 	useEffect(
-		() => {
-			setViewType(initialViewType);
-		},
+		() => { setViewType(initialViewType); },
 		[initialViewType],
 	);
 
@@ -185,7 +175,6 @@ function CogoOne() {
 						{...commonProps}
 					/>
 				</div>
-
 				{sendBulkTemplates ? (
 					<PortPairOrgFilters
 						setSelectedAutoAssign={setSelectedAutoAssign}
@@ -194,7 +183,6 @@ function CogoOne() {
 						{...commonProps}
 					/>
 				) : null}
-
 				{isEmpty(activeTab?.data)
 					? (
 						<div className={styles.empty_page}>
@@ -225,7 +213,6 @@ function CogoOne() {
 									setModalType={setModalType}
 								/>
 							</div>
-
 							{(
 								ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
 								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
@@ -260,10 +247,17 @@ function CogoOne() {
 					)}
 				<AndroidApp />
 			</div>
-			<div className={styles.feedback}>
+			<div
+				role="presentation"
+				className={styles.feedback}
+				onClick={() => setShowFeedback(((prev) => !prev))}
+			>
 				<IcMComment />
-				<span className={styles.feedback_label}>Feedback</span>
+				<span className={styles.feedback_label}>
+					Feedback
+				</span>
 			</div>
+
 			<ModalComp
 				raiseTicketModal={raiseTicketModal}
 				setRaiseTicketModal={setRaiseTicketModal}
