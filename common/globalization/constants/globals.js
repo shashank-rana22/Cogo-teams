@@ -122,8 +122,10 @@ const GLOBAL_CONSTANTS = {
 		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae59e95d4e38a4271ff/'
 		+ 'UTRuploadSampleFileForAdvancePayment.xlsx',
 	},
-	cogoport_agent_email_id    : 'agentid@cogoport.com',
-	flash_booking_charge_codes : [
+
+	cogoport_agent_email_id: 'agentid@cogoport.com',
+
+	flash_booking_charge_codes: [
 		'OTC',
 		'BAS',
 		'BASNO',
@@ -293,6 +295,7 @@ const GLOBAL_CONSTANTS = {
 		books_png              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
 		map_png                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
 		nodata_image           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
+		ams_empty_state        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		promocode_thumbnail:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
 		risk_free:
@@ -789,6 +792,9 @@ const GLOBAL_CONSTANTS = {
 		export_rates             : 'Export.rates@cogoport.com',
 		cogoport_ftl_collections : 'ftl.collections@cogoport.com',
 		cogoport_support         : 'support@cogoport.com',
+	},
+	mobile_number: {
+		cogoone_sales_contact_no: '+91-8069182176',
 	},
 	websites: {
 		cogoport : 'www.cogoport.com',

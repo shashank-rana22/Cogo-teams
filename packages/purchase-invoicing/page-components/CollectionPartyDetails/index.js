@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
@@ -16,12 +17,14 @@ import useGetTradeParty from '../../hooks/useGetTradeParty';
 import toastApiError from '../../utils/toastApiError';
 import InvoicesUploaded from '../InvoicesUploaded';
 
+import InvoiceModal from './InvoiceModal';
 import styles from './styles.module.css';
 import TitleCard from './TitleCard';
 
 const EMPTY_TRADE_PARTY_LENGTH = 0;
 const DEFAULT_STEP = 1;
 const DEFAULT_NET_TOTAL = 0;
+const DEFAULT_LENGTH = 1;
 
 const PURCHASE_INVOICE_SHIPMENT_STATES = ['init', 'awaiting_service_provider_confirmation'];
 
@@ -45,7 +48,7 @@ function CollectionPartyDetails({
 	fullwidth = false, AddService = () => {},
 }) {
 	const { user } = useSelector(({ profile }) => ({ user: profile }));
-	const { shipment_data = {} } = useContext(ShipmentDetailContext);
+	const { shipment_data = {}, primary_service } = useContext(ShipmentDetailContext);
 
 	const {
 		id = '',
@@ -64,6 +67,7 @@ function CollectionPartyDetails({
 	const [openComparision, setOpenComparision] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [step, setStep] = useState(DEFAULT_STEP);
+	const [generateInvoiceModal, setGenerateInvoiceModal] = useState(false);
 
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
@@ -104,6 +108,15 @@ function CollectionPartyDetails({
 		shipment_id: id,
 		shipment_data,
 	});
+
+	const filteredServices = servicesData.filter(
+		(singleItem) => singleItem?.service_type !== 'subsidiary_service',
+	);
+
+	const showGenerate = showUpload
+	&& shipment_data.shipment_type === 'ftl_freight'
+	&& !shipment_data?.is_job_closed
+	&& filteredServices.length === DEFAULT_LENGTH;
 
 	const SERVICES_LIST = [];
 	(servicesData || []).forEach((element) => {
@@ -175,7 +188,22 @@ function CollectionPartyDetails({
 							) : null}
 						</div>
 						) : null}
+					{
+							showGenerate ? (
 
+								<Button
+									size="md"
+									themeType="secondary"
+									className={styles.marginright}
+									onClick={() => {
+										setGenerateInvoiceModal(true);
+									}}
+								>
+									Generate Invoice
+								</Button>
+
+							) : null
+						}
 					{INVOICE_SHIPMENT_TYPES.includes(shipment_type) && (
 						<div className={styles.not_added}>
 							<Button
@@ -271,6 +299,16 @@ function CollectionPartyDetails({
 							onClose();
 							refetch();
 						}}
+					/>
+				) : null}
+
+				{generateInvoiceModal ? (
+					<InvoiceModal
+						generateInvoiceModal={generateInvoiceModal}
+						setGenerateInvoiceModal={setGenerateInvoiceModal}
+						shipment_data={shipment_data}
+						primary_service={primary_service}
+						collectionParty={collectionParty}
 					/>
 				) : null}
 			</AccordianView>
