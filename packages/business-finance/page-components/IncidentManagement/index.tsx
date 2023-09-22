@@ -37,7 +37,7 @@ function IncidentManagement() {
 
 	const { t } = useTranslation(['incidentManagement']);
 
-	const { profile }:Profile = useSelector((state) => state);
+	const { profile }: Profile = useSelector((state) => state);
 
 	const { partner } = profile || {};
 
@@ -150,7 +150,11 @@ function IncidentManagement() {
 	return (
 		<div>
 			<div className={isEmpty(detailsModal) ? styles.nodisplay : null}>
-				<CommonDetailsModal setDetailsModal={setDetailsModal as any} detailsModal={detailsModal} />
+				<CommonDetailsModal
+					setDetailsModal={setDetailsModal as any}
+					detailsModal={detailsModal}
+					refetch={getIncidentData}
+				/>
 			</div>
 			<div className={!isEmpty(detailsModal) ? styles.nodisplay : null}>
 				<div className={styles.header}>

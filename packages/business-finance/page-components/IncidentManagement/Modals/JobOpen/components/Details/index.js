@@ -18,7 +18,7 @@ function openPDF({ event, partnerId, id, incidentType }) {
 	window.open(`/${partnerId}/booking/${incidentType}/${id}`, '_blank');
 }
 
-function Details({ row = {}, setDetailsModal = () => {} }) {
+function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const shipmentId = row?.data?.jobOpenRequest?.id;
 	const { jobNumber = '' } = row?.data?.jobOpenRequest || {};
 	const { query } = useRouter();
@@ -30,6 +30,7 @@ function Details({ row = {}, setDetailsModal = () => {} }) {
 		setShowModal: setDetailsModal,
 		id,
 		remarks,
+		refetch,
 	});
 	const {
 		preTaxData,
