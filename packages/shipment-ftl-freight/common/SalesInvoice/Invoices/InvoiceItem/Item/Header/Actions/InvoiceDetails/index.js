@@ -60,8 +60,8 @@ function InvoiceDetails({
 									onClick={() => handleClick(setIsEditInvoice)}
 								>
 									Edit Invoices
-
 								</ClickableDiv>
+
 								<div className={styles.line} />
 							</div>
 						) : null}
@@ -74,6 +74,7 @@ function InvoiceDetails({
 								>
 									Change Currency
 								</ClickableDiv>
+
 								<div className={styles.line} />
 							</div>
 						) : null}
@@ -90,6 +91,7 @@ function InvoiceDetails({
 						{!is_job_closed_financially && invoice?.billing_address?.trade_party_type === 'self' ? (
 							<div>
 								<div className={styles.line} />
+
 								<ClickableDiv
 									className={styles.text}
 									onClick={() => handleClick(setShowChangePaymentMode)}
@@ -104,13 +106,16 @@ function InvoiceDetails({
 				{(invoice.exchange_rate_document || []).map((url) => (
 					<div key={url}>
 						{commonActions ? <div className={styles.line} /> : null}
+
 						<ClickableDiv
 							className={styles.text}
 							onClick={() => window.open(url, '_blank')}
 						>
 							Exchange Rate Document
 						</ClickableDiv>
+
 						<div className={styles.line} />
+
 						<ClickableDiv
 							onClick={() => handleClick(setExchangeRate)}
 							className={styles.text}
@@ -118,8 +123,10 @@ function InvoiceDetails({
 							Exchange Rate Sheet
 
 						</ClickableDiv>
+
 						<div>
 							<div className={styles.line} />
+
 							<ClickableDiv
 								className={styles.text}
 								onClick={() => handleClick(setAddCustomerInvoice)}
@@ -129,6 +136,7 @@ function InvoiceDetails({
 								{['reviewed', 'approved'].includes(invoice?.status) ? '/Generate' : ''}
 								Customer Invoice
 							</ClickableDiv>
+
 							{['reviewed', 'approved'].includes(invoice?.status) ? (
 								<ClickableDiv
 									className={styles.text}
@@ -140,9 +148,11 @@ function InvoiceDetails({
 						</div>
 					</div>
 				))}
+
 				{['reviewed', 'approved'].includes(invoice?.status) ? (
 					<div>
 						<div className={styles.line} />
+
 						<ClickableDiv
 							className={styles.text}
 							onClick={() => handleClick(setFillCustomerData)}
