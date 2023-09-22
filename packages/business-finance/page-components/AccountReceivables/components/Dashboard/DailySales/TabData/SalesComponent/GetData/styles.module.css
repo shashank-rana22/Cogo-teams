@@ -1,4 +1,6 @@
 .container {
+	width: 100%;
+
 	:global {
 		table {
 			border-collapse: collapse;
@@ -15,7 +17,7 @@
 }
 
 .table_style {
-	width: 1200px;
+	width: 100%;
 	height: 200px;
 	margin-top: 20px;
 }
@@ -47,6 +49,10 @@
 .styled_credit {
 	font-size: 14px;
 	font-weight: 500;
+}
+
+.negative_credit {
+	color: red;
 }
 
 .styled_amount {

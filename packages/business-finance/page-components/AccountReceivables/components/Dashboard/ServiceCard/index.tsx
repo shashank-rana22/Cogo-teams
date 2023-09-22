@@ -9,6 +9,12 @@ import CardData from './CardData';
 import { getCardData, getServiceData } from './getCardServiceData';
 import styles from './styles.module.css';
 
+const TRADE_TYPE_MAPPING = {
+	Ocean   : 'ocean',
+	Air     : 'air',
+	Surface : 'surface',
+};
+
 interface OverallStats {
 	customersCount?: number,
 	dashboardCurrency?: string,
@@ -42,7 +48,7 @@ interface ServiceCardProps {
 	entityCode?: string,
 }
 
-function ServiceCard({ outstandingData, outstandingLoading, entityCode }: ServiceCardProps) {
+function ServiceCard({ outstandingData = {}, outstandingLoading = false, entityCode = '' }: ServiceCardProps) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const { outstandingServiceWise = {} } = outstandingData || {};
@@ -54,9 +60,6 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 	} = outstandingServiceWise || {};
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 
-	const handleClick = () => {
-		setIsAccordionActive(!isAccordionActive);
-	};
 	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	const {
@@ -74,6 +77,14 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 		data : outstandingServiceWise?.ocean?.tradeType || [{}],
 	});
 
+	const handleClick = (el) => {
+		if (el !== '') {
+			const tradeTypeKey = TRADE_TYPE_MAPPING[el] || 'Ocean';
+			setTab({ key: el, data: outstandingServiceWise?.[tradeTypeKey]?.tradeType || [{}] });
+		}
+		setIsAccordionActive(!isAccordionActive);
+	};
+
 	useEffect(() => {
 		setTab({
 			key  : 'Ocean',
@@ -90,7 +101,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 		>
 			<div
 				className={styles.service_container}
-				onClick={() => handleClick()}
+				onClick={() => (isAccordionActive ? handleClick('') : handleClick('Ocean'))}
 				role="presentation"
 			>
 				<div className={styles.sub_service_container}>
@@ -128,6 +139,11 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 										<div
 											className={styles.sub_ocean_container}
 											key={item.label}
+											onClick={(event) => {
+												event.stopPropagation();
+												handleClick(item?.label);
+											}}
+											role="presentation"
 										>
 											{item.icon}
 											<div className={styles.ocean_text}>
@@ -178,7 +194,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 					</div>
 				)}
 
-				<div className={styles.header}>
+				<div className={styles.header} onClick={() => handleClick('')} role="presentation">
 					{isAccordionActive ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 				</div>
 
@@ -252,7 +268,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 					<div><CardData tab={tab} /></div>
 					<div
 						className={styles.view_less}
-						onClick={() => handleClick()}
+						onClick={() => handleClick('')}
 						role="presentation"
 					>
 						<div

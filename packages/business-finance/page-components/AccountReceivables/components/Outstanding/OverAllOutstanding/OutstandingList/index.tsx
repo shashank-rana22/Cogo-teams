@@ -1,8 +1,8 @@
 import { Button, TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMDownload } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { IcMDownload, IcMProfile } from '@cogoport/icons-react';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { getTaxLabels } from '../../../../constants/index';
@@ -58,6 +58,7 @@ function OutstandingList({
 }: OutstandingListProps) {
 	const [activeTab, setActiveTab] = useState('invoice_details');
 	const [showLedgerModal, setShowLedgerModal] = useState(false);
+	const [profileClicked, setIsProfileClicked] = useState(false);
 
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 	const { data, getPartnerMappingData, loading } = useGetPartnerRmMapping();
@@ -246,15 +247,26 @@ function OutstandingList({
 							</div>
 						)}
 					</div>
-					<div className={styles.category_container}>
-						<PopoverTags
-							data={data}
-							loading={loading}
-							handleClick={handleClick}
-							item={item}
-						/>
-					</div>
+					{profileClicked && (
+						<div className={styles.category_container}>
+							<PopoverTags
+								data={data}
+								loading={loading}
+								handleClick={handleClick}
+								item={item}
+							/>
+						</div>
+					)}
 					<div className={styles.ledger_style}>
+						<Tooltip content="View Details" placement="top">
+							<div className={styles.download_icon_div}>
+								<IcMProfile
+									fill="black"
+									onClick={() => setIsProfileClicked((prev) => !prev)}
+									disabled={isEmpty(data)}
+								/>
+							</div>
+						</Tooltip>
 						<Tooltip content="Ledger Download" placement="top">
 							<div className={styles.download_icon_div}>
 								<IcMDownload

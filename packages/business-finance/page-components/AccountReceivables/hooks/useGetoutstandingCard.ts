@@ -43,6 +43,8 @@ const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
 		{ manual: true },
 	);
 
+	console.log('downloadApi', downloadApi);
+
 	const {
 		page,
 		pageLimit,
@@ -169,7 +171,7 @@ const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
 
 	const sendReport = async () => {
 		try {
-			await downloadApi({
+			const response = await downloadApi({
 				params: {
 					page,
 					pageLimit,
@@ -186,6 +188,7 @@ const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
 					performedBy       : userData.id,
 				},
 			});
+			console.log('response', response);
 			Toast.success('Report Sent Successfully');
 		} catch (e) {
 			if (e?.error?.message) {
