@@ -10,7 +10,7 @@ function Header() {
 	return (
 		<div className={styles.container}>
 			<div>
-				<h2>Scoring</h2>
+				<h2 className={styles.heading}>Scoring</h2>
 				<p className={styles.sub_heading}>
 					for
 					{' '}

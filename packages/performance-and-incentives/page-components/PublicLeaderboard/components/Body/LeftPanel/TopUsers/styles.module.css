@@ -3,6 +3,10 @@
 	justify-content: space-evenly;
 	width: 100%;
 	margin-bottom: 28px;
+
+	@media (min-width: 2560px) {
+		margin-bottom: 96px;
+	}
 }
 
 .top_user_container {
@@ -17,6 +21,10 @@
 	margin-top: 16px;
 	font-size: 18px;
 	font-weight: 600;
+
+	@media (min-width: 2560px) {
+		font-size: 56px;
+	}
 }
 
 .bottom_panel {
@@ -28,4 +36,9 @@
 	background-color: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 4px 0 #fef199;
+
+	@media (min-width: 2560px) {
+		font-size: 42px;
+		border-radius: 12px;
+	}
 }

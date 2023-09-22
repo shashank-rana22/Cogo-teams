@@ -3,9 +3,23 @@
 	justify-content: space-between;
 	height: fit-content;
 	padding: 20px 32px;
+
+	@media (min-width: 2560px) {
+		padding: 64px 100px;
+	}
+}
+
+.heading {
+	@media (min-width: 2560px) {
+		font-size: 60px;
+	}
 }
 
 .sub_heading {
 	font-size: 18px;
 	color: #4f4f4f;
+
+	@media (min-width: 2560px) {
+		font-size: 56px;
+	}
 }
