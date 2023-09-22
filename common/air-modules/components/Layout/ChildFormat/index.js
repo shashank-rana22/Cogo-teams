@@ -21,14 +21,11 @@ function FieldArray({
 }) {
 	const { fields, append, remove } = useFieldArray({ control, name });
 
-	const CHILD_EMPTY_VALUES = { };
-
 	useEffect(() => {
 		if (isEmpty(fields)) {
-			append(CHILD_EMPTY_VALUES);
+			append({});
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [append, fields]);
 
 	return (
 		<div className={styles.child}>
@@ -54,7 +51,7 @@ function FieldArray({
 					<Button
 						size="sm"
 						themeType="accent"
-						onClick={() => append(CHILD_EMPTY_VALUES)}
+						onClick={() => append({})}
 					>
 						<div className={styles.add_button_text}>
 							+&nbsp;

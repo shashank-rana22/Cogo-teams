@@ -3,9 +3,9 @@ import { Button } from '@cogoport/components';
 import {
 	useForm,
 } from '@cogoport/forms';
-import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import useCreateShipmentAirCSRSheet from '../../../../../../hooks/useCreateShipmentAirCSRSheet';
 import useCreateShipmentAirFreightConsolidatedInvoice
 	from '../../../../../../hooks/useCreateShipmentAirFreightConsolidatedInvoice';
 import useUpdateShipmentAirFreightConsolidatedInvoice
@@ -28,7 +28,7 @@ function TerminalChargeRate({
 	const [irnGenerated, setIRNGenerated] = useState(true);
 	const [collectionPartyData, setCollectionPartyData] = useState({});
 	const [sheetData, setSheetData] = useState({});
-	const [showConfirm, setShowConfirm] = useState({});
+	const [showConfirm, setShowConfirm] = useState(false);
 
 	const controls = getTerminalChargeRateControl({
 		type,
@@ -65,12 +65,22 @@ function TerminalChargeRate({
 		updateLoading: taskUpdateLoading,
 	} = 	useUpdateShipmentAirFreightConsolidatedInvoice({ refetch, onCancel, task_id, invoiceData });
 
+	const { createShipmentAirCSRSheet, csrCreateLoading = false } = useCreateShipmentAirCSRSheet({
+		mainServicesData,
+		setSheetData,
+	});
+
 	const handleCreateProforma = (values) => {
 		createShipmentAirFreightConsolidatedInvoice(values);
 	};
 
 	const handleIRNGeneration = () => {
 		updateShipmentAirFreightConsolidatedInvoice();
+	};
+
+	const handleUpload = (values) => {
+		setShowConfirm(true);
+		createShipmentAirCSRSheet(values);
 	};
 
 	return (
@@ -82,7 +92,7 @@ function TerminalChargeRate({
 			/>
 			<div className={styles.button_container}>
 				<Button
-					onClick={handleSubmit((values) => setShowConfirm(values))}
+					onClick={handleSubmit(handleUpload)}
 					disabled={loading || updateLoading || !irnGenerated}
 				>
 					Create Proforma
@@ -94,17 +104,16 @@ function TerminalChargeRate({
 					IRN Generated
 				</Button>
 			</div>
-			{!isEmpty(showConfirm) ? (
+			{showConfirm ? (
 				<ConfirmModal
 					showConfirm={showConfirm}
 					setShowConfirm={setShowConfirm}
-					setSheetData={setSheetData}
 					handleSubmit={handleSubmit}
 					handleCreateProforma={handleCreateProforma}
 					loading={loading}
 					updateLoading={updateLoading}
 					irnGenerated={irnGenerated}
-					mainServicesData={mainServicesData}
+					csrCreateLoading={csrCreateLoading}
 				/>
 			) : null}
 		</div>

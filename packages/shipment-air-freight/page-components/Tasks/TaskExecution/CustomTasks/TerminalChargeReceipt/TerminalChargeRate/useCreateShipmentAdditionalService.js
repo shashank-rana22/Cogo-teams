@@ -44,7 +44,7 @@ const useCreateShipmentAdditionalService = ({
 		try {
 			await trigger({ data: payload });
 			setIRNGenerated(false);
-			setShowConfirm({});
+			setShowConfirm(false);
 		} catch (err) {
 			toastApiError(err);
 		}
