@@ -869,5 +869,15 @@
     "is_triggered_on": "được kích hoạt trên",
     "having_parameter": "có tham số",
     "delete_event_heading": "Xoá Sự kiện",
-    "confirmation_text_to_delete_event": "Bạn có chắc muốn xoá sự kiện này không?"
+    "confirmation_text_to_delete_event": "Bạn có chắc muốn xoá sự kiện này không?",
+    "validate_enrichment_request": "Xác minh Yêu cầu Bổ sung",
+    "validity_status": "Trạng thái Hợp lệ",
+    "feedback_parameter_placeholder": "Loại con",
+    "feedback_placeholder": "Phản hồi",
+    "validity_enrichment_request_title": "Cập nhật Yêu cầu Bổ sung",
+    "validity_enrichment_request_body": "Vui lòng chọn trạng thái",
+    "validity_enrichment_request_cancel": "Không",
+    "validity_enrichment_request_submit": "Có",
+    "validity_enrichment_request_success_toast": "Cập nhật thành công",
+    "validity_enrichment_request_actions": "Hành động"
 }

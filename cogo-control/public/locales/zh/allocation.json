@@ -869,5 +869,14 @@
     "is_triggered_on": "触发于",
     "having_parameter": "具有参数",
     "delete_event_heading": "删除事件",
-    "confirmation_text_to_delete_event": "您确定要删除此事件吗？"
-}
+    "confirmation_text_to_delete_event": "您确定要删除此事件吗？",
+    "validate_enrichment_request": "验证丰富请求",
+    "validity_status": "有效状态",
+    "feedback_parameter_placeholder": "子类型",
+    "feedback_placeholder": "反馈",
+    "validity_enrichment_request_title": "更新丰富请求",
+    "validity_enrichment_request_body": "请选择状态",
+    "validity_enrichment_request_cancel": "否",
+    "validity_enrichment_request_submit": "是",
+    "validity_enrichment_request_success_toast": "成功更新",
+    "validity_enrichment_request_actions": "操作"}

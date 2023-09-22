@@ -429,6 +429,11 @@ const allocation = {
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
+		{
+			api          : 'feedback_status',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
 	],
 	account_scoring: [
 		{

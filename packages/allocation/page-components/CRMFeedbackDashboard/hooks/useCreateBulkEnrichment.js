@@ -3,14 +3,15 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useCreateBulkEnrichment = ({ setActiveTab = () => {}, checkedRowsId = [], t = () => {} }) => {
-	const [isOpenModal, setisOpenModal] = useState(false);
-
+const useCreateBulkEnrichment = ({
+	setActiveTab = () => {}, checkedRowsId = [], t = () => {},
+	setModalDetails = () => {},
+}) => {
 	const onCloseModal = () => {
-		setisOpenModal(false);
+		setModalDetails('');
 	};
 
-	const [thirdParty, setThirdParty] = useState();
+	const [thirdParty, setThirdParty] = useState('');
 	const [thirdPartyPayload, setThirdPartyPayload] = useState([]);
 
 	const requestPayload = checkedRowsId.map((id) => ({
@@ -49,8 +50,6 @@ const useCreateBulkEnrichment = ({ setActiveTab = () => {}, checkedRowsId = [], 
 	return {
 		onEnrichmentRequest,
 		loading,
-		isOpenModal,
-		setisOpenModal,
 		onCloseModal,
 		thirdParty,
 		setThirdParty,

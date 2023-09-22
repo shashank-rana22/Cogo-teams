@@ -1,4 +1,5 @@
 import { ButtonIcon, Tooltip, Checkbox } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 
@@ -55,7 +56,7 @@ export const getFeedbackColumns = ({
 		id       : 'type',
 		accessor : ({ source_type }) => (
 			<section className={styles.table_cell}>
-				{startCase(source_type || '___') }
+				{startCase(source_type || '___')}
 			</section>
 		),
 	},
@@ -65,7 +66,7 @@ export const getFeedbackColumns = ({
 		id       : 'sub_type',
 		accessor : ({ feedback_parameter }) => (
 			<section className={styles.table_cell}>
-				{startCase(feedback_parameter || '___') }
+				{startCase(feedback_parameter || '___')}
 			</section>
 		),
 	},
@@ -106,7 +107,7 @@ export const getFeedbackColumns = ({
 					disabled={isEmpty(feedback)}
 				>
 					<span className={styles.tooltip_text}>
-						{startCase(feedback || '___') }
+						{startCase(feedback || '___')}
 					</span>
 				</Tooltip>
 				{feedback_reference_document_url ? (
@@ -184,8 +185,22 @@ export const getFeedbackColumns = ({
 		id       : 'created_date',
 		accessor : ({ created_at }) => (
 			<section className={styles.table_cell}>
-				{created_at ? format(created_at, 'dd MMM yyyy') : '___'}
+				{created_at ? format(created_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']) : '___'}
 			</section>
 		),
+	},
+	{
+		Header   : t('allocation:validity_status'),
+		key      : 'is_valid_feedback',
+		id       : 'is_valid_feedback',
+		accessor : ({ is_valid_feedback }) => {
+			if (is_valid_feedback == null) {
+				return null;
+			}
+
+			return (
+				<section className={styles.table_cell}>{ is_valid_feedback ? 'Valid' : 'In Valid'}</section>
+			);
+		},
 	},
 ];

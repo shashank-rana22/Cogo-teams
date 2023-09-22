@@ -869,5 +869,14 @@
     "is_triggered_on": "ถูกเรียกใช้ใน",
     "having_parameter": "มีพารามิเตอร์",
     "delete_event_heading": "ลบเหตุการณ์",
-    "confirmation_text_to_delete_event": "คุณแน่ใจหรือไม่ว่าต้องการลบเหตุการณ์นี้?"
-}
+    "confirmation_text_to_delete_event": "คุณแน่ใจหรือไม่ว่าต้องการลบเหตุการณ์นี้?",
+    "validate_enrichment_request": "ตรวจสอบคำขอการเพิ่มข้อมูล",
+    "validity_status": "สถานะความถูกต้อง",
+    "feedback_parameter_placeholder": "ประเภทย่อย",
+    "feedback_placeholder": "ข้อเสนอแนะ",
+    "validity_enrichment_request_title": "อัพเดทคำขอการเพิ่มข้อมูล",
+    "validity_enrichment_request_body": "โปรดเลือกสถานะ",
+    "validity_enrichment_request_cancel": "ไม่",
+    "validity_enrichment_request_submit": "ใช่",
+    "validity_enrichment_request_success_toast": "อัพเดทสำเร็จ",
+    "validity_enrichment_request_actions": "การดำเนินการ"}
