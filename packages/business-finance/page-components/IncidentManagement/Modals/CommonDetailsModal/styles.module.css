@@ -6,4 +6,5 @@
 	font-size: var(--font-size-md);
 	font-weight: 500;
 	border-radius: 4px;
+	border : 1px solid #221f20 !important;
 }
