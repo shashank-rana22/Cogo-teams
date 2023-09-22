@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 
 import useSezApproveReject from '../../apisModal/useSezApproveReject';
+import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
 
 import styles from './styles.module.css';
@@ -17,30 +18,33 @@ interface SezInterface {
 }
 
 interface Org {
-	businessName?:string,
-	tradePartyType?:string,
+	businessName?: string,
+	tradePartyType?: string,
 }
 
 interface Props {
 	sezRequest?: SezInterface,
 	id?: string,
-	refetch?:()=>void,
-	organization?:Org,
-	isEditable?:boolean,
-	remark?:string,
+	refetch?: () => void,
+	organization?: Org,
+	isEditable?: boolean,
+	remark?: string,
+	row?: object,
 }
 
-function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEditable = true, remark }:Props) {
+function SezApproval({
+	sezRequest = {}, organization = {}, id = '', refetch = () => { },
+	isEditable = true, remark = '', row = {},
+}: Props) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [showModal, setShowModal] = useState(false);
 	const [inputValues, setInputValues] = useState({
 		remarks: null,
 	});
-
 	const { name, pincode, taxNumber, address, documentUrls } = sezRequest || {};
-	const { businessName:organizationName, tradePartyType = '' } = organization || {};
+	const { businessName: organizationName, tradePartyType = '' } = organization || {};
 
-	const { useOnAction:OnAction, loading } = useSezApproveReject({
+	const { useOnAction: OnAction, loading } = useSezApproveReject({
 		refetch,
 		setShowModal,
 		id,
@@ -72,7 +76,7 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 							>
 								{t('incidentManagement:view_doc_link')}
 							</a>
-							<div className={styles.eye}><IcMEyeopen /></div>
+							<div className={styles.eye}><IcMEyeopen fill="var(--color-accent-orange-2)" /></div>
 						</div>
 					))}
 				</div>),
@@ -104,6 +108,7 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 				>
 					<Modal.Header title={t('incidentManagement:sez_approval_title')} />
 					<Modal.Body>
+						{!isEditable && <ApproveAndReject row={row} />}
 						{details?.map((detail) => (
 							<div key={detail.title} className={styles.flex}>
 								<div className={styles.title}>
@@ -116,7 +121,7 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 									<div>{detail.value}</div>
 								</div>
 							</div>
-						))	}
+						))}
 
 						<div>
 							<div style={{ display: 'flex' }}>
