@@ -8,3 +8,19 @@
 	background-color: #fff;
 	border-top-right-radius: 8px;
 }
+
+.entity_tag {
+	display: flex;
+	align-items: center;
+	font-size: 20px;
+	font-weight: 700;
+	color: #565a85;
+}
+
+.badge {
+	width: 4px;
+	height: 22px;
+	margin-right: 8px;
+	background: #565a85;
+	border-radius: 0 4px 4px 0;
+}
