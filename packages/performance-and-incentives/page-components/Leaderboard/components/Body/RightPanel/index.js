@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 function RightPanel() {
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.entity_tag}>
 				<div className={styles.badge} />
 

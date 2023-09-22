@@ -5,6 +5,7 @@ function Leaderboard() {
 	return (
 		<>
 			<Header />
+
 			<Body />
 		</>
 	);

@@ -6,9 +6,9 @@ import styles from './styles.module.css';
 function Header() {
 	return (
 		<>
-			<h2 className={styles.heading}>
+			<h3 className={styles.heading}>
 				Leaderboard
-			</h2>
+			</h3>
 
 			<div className={styles.subheading}>
 				<div>
@@ -17,7 +17,7 @@ function Header() {
 					<i>Cogo India</i>
 				</div>
 
-				<Button size="md" themeType="link">
+				<Button size="md" themeType="linkUi">
 					Expand All
 					{' '}
 					<IcMArrowRight width={16} height={16} />
