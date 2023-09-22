@@ -452,6 +452,7 @@ const GLOBAL_CONSTANTS = {
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
 		confetti            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti_svg.svg',
 		cogoport_login_logo : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
+		badge               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
 	},
 
 	video_call_ring_tone_url:

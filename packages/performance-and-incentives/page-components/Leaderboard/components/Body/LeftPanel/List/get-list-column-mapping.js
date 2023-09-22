@@ -35,19 +35,29 @@ const getListColumnMapping = () => {
 			flex : 1,
 			Header:
 				(
-					<div role="presentation" className={styles.top_heading} onClick={() => handleSort({})}>
+					<div
+						role="presentation"
+						className={styles.top_heading}
+						onClick={() => handleSort({})}
+					>
 						<div>Rank</div>
 						<ArrowType title="rank" />
 					</div>
 				),
-			accessor: ({ rank }) => (isEmpty(rank) ? null : <p className={styles.rank}>{rank}</p>),
+			accessor: ({ rank }) => (isEmpty(rank) ? null : (
+				<div
+					className={styles.rank}
+				>
+					{rank}
+				</div>
+			)),
 		},
 		{
 			id       : 'name',
 			key      : 'name',
 			flex     : 2,
 			Header   : <div className={styles.top_heading}>Name</div>,
-			accessor : ({ name }) => (isEmpty(name) ? null : <p className={styles.name}>{name}</p>),
+			accessor : ({ name }) => (isEmpty(name) ? null : <div className={styles.name}>{name}</div>),
 		},
 		{
 			id   : 'score',
@@ -60,7 +70,7 @@ const getListColumnMapping = () => {
 						<ArrowType title="score" />
 					</div>
 				),
-			accessor: ({ score }) => (isEmpty(score) ? null : <p>{score}</p>),
+			accessor: ({ score }) => (isEmpty(score) ? null : <div>{score}</div>),
 		},
 		{
 			id   : 'percentile',
@@ -74,10 +84,10 @@ const getListColumnMapping = () => {
 					</div>
 				),
 			accessor: ({ percentile }) => (isEmpty(percentile) ? null : (
-				<p>
+				<div>
 					{percentile}
 					%
-				</p>
+				</div>
 			)),
 		},
 	];
