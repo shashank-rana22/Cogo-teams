@@ -1,4 +1,3 @@
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
@@ -22,7 +21,7 @@ const useGetFclFreightRateLifecycle = ({ globalFilters = {} }) => {
 	useEffect(() => {
 		const { service_type } = globalFilters;
 		if (service_type === 'fcl') {
-			const params = getFormattedPayload(globalFilters);
+			const params = getFormattedPayload(globalFilters, ['chart_type']);
 			getFclFreightRateLifecycle(params);
 		}
 	}, [globalFilters, getFclFreightRateLifecycle]);

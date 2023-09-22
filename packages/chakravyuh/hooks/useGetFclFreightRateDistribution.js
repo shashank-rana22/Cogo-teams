@@ -10,7 +10,7 @@ const useGetFclFreightDistribution = ({ filters }) => {
 		method : 'GET',
 	}, { manual: true });
 
-	const { parent_mode, chartType, ...rest } = filters;
+	const { parent_mode, chart_type, ...rest } = filters;
 
 	const getStats = useCallback(
 		async (params) => {

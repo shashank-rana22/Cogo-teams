@@ -53,7 +53,7 @@ const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 			const params = getFormattedPayload({
 				...globalFilters,
 				start_date: new Date(),
-			}, ['end_date', ...EXCLUDE_KEYS]);
+			}, ['end_date', 'chart_type', ...EXCLUDE_KEYS]);
 			const { sort_by } = sort;
 			const [[aggregate_type]] = Object.entries(SELECT_AGGREGATE).filter(
 				([, value]) => {

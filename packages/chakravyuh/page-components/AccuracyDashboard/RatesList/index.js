@@ -14,7 +14,7 @@ function SupplyRates({
 	globalFilters = {}, pageSize = 10, className = '', heading = null, activeParent = '',
 }) {
 	const { service_type = 'fcl' } = globalFilters;
-	const { chartType, ...filters } = globalFilters;
+	const { chart_type, ...filters } = globalFilters;
 	const { data, page, setPage, loading } = useListFclFreightRateStatistics({ filters, activeParent });
 	const { total_count = 0, list = [] } = data || {};
 	const { columns } = getListConfig(service_type, activeParent);
