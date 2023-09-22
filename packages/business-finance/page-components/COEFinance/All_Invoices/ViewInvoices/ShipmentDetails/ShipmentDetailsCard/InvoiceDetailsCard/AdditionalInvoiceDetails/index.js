@@ -66,7 +66,7 @@ function AdditionalInvoiceDetails({
 	}
 	return (
 		<div>
-			{billType === 'BILL' && isIncidental ? (
+			{(billType === 'BILL' && isIncidental) ? (
 				<div className={styles.margin_bottom}>
 					Is Incidental -
 					{' '}
@@ -74,13 +74,13 @@ function AdditionalInvoiceDetails({
 				</div>
 			) : null}
 
-			{ billType === 'BILL' && paymentType && (
+			{(billType === 'BILL' && paymentType) ? (
 				<div className={styles.margin_bottom}>
 					Payment Type -
 					{' '}
 					<span>{startCase(paymentType)}</span>
 				</div>
-			)}
+			) : null}
 
 			<div className={styles.document}>
 				Advance amount -
@@ -98,7 +98,7 @@ function AdditionalInvoiceDetails({
 				{button}
 			</div>
 
-			{advancedPaymentObj?.data && shipmentType === 'ftl_freight' ? (
+			{(advancedPaymentObj?.data && shipmentType === 'ftl_freight') ? (
 				<div className={styles.margin_bottom}>
 					Updated Advanced Amount -
 					{' '}
@@ -111,7 +111,7 @@ function AdditionalInvoiceDetails({
 				</div>
 			) : null}
 
-			{outstandingDocument && shipmentType === 'ftl_freight' ? (
+			{(outstandingDocument && shipmentType === 'ftl_freight') ? (
 				<div className={styles.margin_bottom}>
 					Outstanding Proforma Approval-
 					{' '}
@@ -126,7 +126,7 @@ function AdditionalInvoiceDetails({
 				</div>
 			) : null}
 
-			{billType === 'CREDIT_NOTE' && reasonForCN && shipmentType === 'ftl_freight' ? (
+			{(billType === 'CREDIT_NOTE' && reasonForCN && shipmentType === 'ftl_freight') ? (
 				<div className={styles.margin_bottom}>
 					Reason For CN -
 					{' '}
