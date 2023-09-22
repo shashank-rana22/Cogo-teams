@@ -28,7 +28,7 @@ export const CRITICAL_TABS = {
 		},
 		import: {
 			mark_confirmed        : scheduleDepartureInThreeDays,
-			verify_shipper        : scheduleDepartureInThreeDays,
+			confirm_with_shipper  : scheduleDepartureInThreeDays,
 			upload_shipping_order : scheduleDepartureInThreeDays,
 			list_task_pending     : scheduleDepartureYesterday,
 			document_approval     : scheduleDepartureTomorrow,
@@ -119,11 +119,10 @@ const tabPayload = {
 					},
 				],
 			},
-			verify_shipper: {
-				state           : ['shipment_received'],
-				task_attributes : [
+			confirm_with_shipper: {
+				task_attributes: [
 					{
-						task                 : 'verify_shipper_details',
+						task                 : 'confirm_with_shipper',
 						status               : ['pending'],
 						assigned_stakeholder : 'origin_booking_agent',
 					},

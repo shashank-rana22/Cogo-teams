@@ -294,3 +294,15 @@
 	background: #67c676;
 	border-radius: 4px;
 }
+
+.ic_arrow {
+	margin-top: 6px;
+	cursor: pointer;
+}
+
+.approve_button {
+	float: right;
+	margin: 10px;
+	font-size: var(--font-size-md);
+	font-weight: 500;
+}

@@ -26,7 +26,8 @@ function Content({
 	setExchangeRate = () => {},
 	invoice = {},
 	showCancelOptions = {},
-	setShowCancelModal = () => {},
+	setShowCancelModal = () => { },
+	isJobClosedFinancially = false,
 }) {
 	return (
 		<div className={styles.dialog_box}>
@@ -37,6 +38,7 @@ function Content({
 							<Button
 								themeType="tertiary"
 								onClick={() => handleClick(setIsEditInvoice)}
+								disabled={isJobClosedFinancially}
 							>
 								Edit Invoice
 							</Button>
@@ -47,6 +49,7 @@ function Content({
 					<Button
 						themeType="tertiary"
 						onClick={() => handleClick(setIsChangeCurrency)}
+						disabled={isJobClosedFinancially}
 					>
 						Change Currency
 					</Button>
@@ -54,6 +57,7 @@ function Content({
 					<Button
 						themeType="tertiary"
 						onClick={() => handleClick(setShowAddRemarks)}
+						disabled={isJobClosedFinancially}
 					>
 						Add Remarks
 					</Button>
@@ -64,6 +68,7 @@ function Content({
 							<Button
 								themeType="tertiary"
 								onClick={() => handleClick(setShowChangePaymentMode)}
+								disabled={isJobClosedFinancially}
 							>
 								Change Payment Mode
 							</Button>
@@ -170,6 +175,7 @@ function KebabContent({
 									invoice={invoice}
 									showCancelOptions={showCancelOptions}
 									setShowCancelModal={setShowCancelModal}
+									isJobClosedFinancially={shipment_data?.is_job_closed_financially}
 								/>
 							)}
 							theme="light"
