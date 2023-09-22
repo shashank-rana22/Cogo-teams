@@ -144,7 +144,7 @@ function LineItemCard({
 		),
 		renderReject: (item: any) => (
 			<div style={{ cursor: 'pointer' }}>
-				{!isInvoiceApproved && (
+				{!isInvoiceApproved ? (
 					<Popover
 						placement="left"
 						render={(
@@ -169,7 +169,7 @@ function LineItemCard({
 							{' '}
 						</div>
 					</Popover>
-				)}
+				) : null}
 			</div>
 		),
 	};
@@ -207,9 +207,9 @@ function LineItemCard({
 						{iconElement}
 					</div>
 
-					{showTab && (
+					{showTab ? (
 						<div>
-							{!isInvoiceApproved && (
+							{!isInvoiceApproved ? (
 								<div className={styles.header_detail}>
 									Click
 									{' '}
@@ -217,9 +217,9 @@ function LineItemCard({
 									{' '}
 									To reject line item
 								</div>
-							)}
+							) : null}
 						</div>
-					)}
+					) : null}
 				</div>
 				<div
 					className={styles.caret}
@@ -280,32 +280,32 @@ function LineItemCard({
 											},
 										})}
 										{shipmentType === 'ftl_freight'
-								&& (
-									<div>
-										<div className={styles.tds_amount}>
-											(Applicable  TDS
-											{' '}
-											{tdsRate}
-											% -
-											{' '}
-											{startCase(bill?.billCurrency)}
-											{' '}
-											{bill?.tdsAmount || DEFAULT_ZERO_VALUE}
-											)
-										</div>
-										<div className={styles.tds_amount}>
-											(Ded. TDS
-											{' '}
-											{paidTdsPercentage}
-											% -
-											{' '}
-											{startCase(bill?.billCurrency)}
-											{' '}
-											{paidTds || DEFAULT_ZERO_VALUE}
-											)
-										</div>
-									</div>
-								)}
+											? (
+												<div>
+													<div className={styles.tds_amount}>
+														(Applicable  TDS
+														{' '}
+														{tdsRate}
+														% -
+														{' '}
+														{startCase(bill?.billCurrency)}
+														{' '}
+														{bill?.tdsAmount || DEFAULT_ZERO_VALUE}
+														)
+													</div>
+													<div className={styles.tds_amount}>
+														(Ded. TDS
+														{' '}
+														{paidTdsPercentage}
+														% -
+														{' '}
+														{startCase(bill?.billCurrency)}
+														{' '}
+														{paidTds || DEFAULT_ZERO_VALUE}
+														)
+													</div>
+												</div>
+											) : null}
 									</div>
 								</div>
 							</div>
@@ -330,7 +330,7 @@ function LineItemCard({
 					</div>
 				) : undefined }
 
-				{popover[id as keyof typeof popover] && (
+				{popover[id as keyof typeof popover] ? (
 					<Modal
 						size="lg"
 						placement="center"
@@ -372,7 +372,7 @@ function LineItemCard({
 							</Button>
 						</Modal.Footer>
 					</Modal>
-				)}
+				) : null}
 			</div>
 		</div>
 	);

@@ -115,7 +115,7 @@ function ShipmentDetailsCard({
 
 	const { organizationId: serviceProviderOrgId } = serviceProviderDetail || {};
 
-	const [DetailsCard, setDetailsCard] = useState([
+	const [detailsCard, setDetailsCard] = useState([
 		{
 			id    : 1,
 			name  : 'billing-details',
@@ -131,14 +131,14 @@ function ShipmentDetailsCard({
 	const handleClick = (id?: number) => {
 		const approveData = [...showValue, id];
 		setShowValue(approveData);
-		DetailsCard.push(DetailsCard.shift());
-		setDetailsCard(DetailsCard);
+		detailsCard.push(detailsCard.shift());
+		setDetailsCard(detailsCard);
 	};
 
 	const handleRejected = (id: number) => {
 		setRejected([...rejected, id]);
-		DetailsCard.push(DetailsCard.shift());
-		setDetailsCard(DetailsCard);
+		detailsCard.push(detailsCard.shift());
+		setDetailsCard(detailsCard);
 	};
 
 	let invoiceType = startCase(billType);
@@ -251,7 +251,7 @@ function ShipmentDetailsCard({
 
 	return (
 		<div>
-			{!!showHighAdvanceModal && (
+			{showHighAdvanceModal ? (
 				<HighAmountRequestModal
 					shipmentData={shipmentData}
 					invoiceData={{
@@ -268,7 +268,7 @@ function ShipmentDetailsCard({
 					modalData={{ show: showHighAdvanceModal, hide: () => setShowHighAdvancedModal(false) }}
 					refetchShipmentDocument={refetchShipmentDocument}
 				/>
-			)}
+			) : null}
 			<div>
 				<div className={styles.main_header}>
 					<div className={styles.instructions}>
@@ -287,7 +287,7 @@ function ShipmentDetailsCard({
 						{!isEmpty(invoiceType) ? <Pill color="blue">{invoiceType}</Pill> : undefined}
 					</div>
 
-					{!isInvoiceApproved && (
+					{!isInvoiceApproved ? (
 						<div className={styles.completed}>
 							<span className={styles.status_completed_text}>Completed</span>
 
@@ -296,15 +296,15 @@ function ShipmentDetailsCard({
 							/
 							{MAX_CARDS}
 						</div>
-					)}
+					) : null}
 				</div>
 				<div className={styles.small_hr} />
-				{DetailsCard.map((itemData: any) => {
+				{detailsCard.map((itemData: any) => {
 					const { id = '' } = itemData || {};
 
 					return (
 						<>
-							{showRejected[id as keyof typeof showRejected] && (
+							{showRejected[id as keyof typeof showRejected] ? (
 								<RejectModal
 									id={id}
 									showRejected={showRejected}
@@ -322,9 +322,9 @@ function ShipmentDetailsCard({
 									billAdditionalObject={billAdditionalObject}
 									bill={bill}
 								/>
-							)}
+							) : null}
 
-							{id === 1 && (
+							{id === 1 ? (
 								<CollectionPartyCard
 									showValue={showValue}
 									isInvoiceApproved={isInvoiceApproved}
@@ -340,9 +340,9 @@ function ShipmentDetailsCard({
 									onTabClick={onTabClick}
 									showTab={tab.collectionPartyTab}
 								/>
-							)}
+							) : null}
 
-							{id === 2 && (
+							{id === 2 ? (
 								<BillingPartyCard
 									showValue={showValue}
 									isInvoiceApproved={isInvoiceApproved}
@@ -358,9 +358,9 @@ function ShipmentDetailsCard({
 									onTabClick={onTabClick}
 									showTab={tab.billingPartyTab}
 								/>
-							)}
+							) : null}
 
-							{id === 3 && (
+							{id === 3 ? (
 								<InvoiceDetailsCard
 									showValue={showValue}
 									isInvoiceApproved={isInvoiceApproved}
@@ -381,9 +381,9 @@ function ShipmentDetailsCard({
 									onTabClick={onTabClick}
 									showTab={tab.invoiceDetailsTab}
 								/>
-							)}
+							) : null}
 
-							{id === 4 && (
+							{id === 4 ? (
 								<LineItemCard
 									lineItems={lineItems}
 									bill={bill}
@@ -399,7 +399,7 @@ function ShipmentDetailsCard({
 									showTab={tab.lineItemsTab}
 									chargesTable={chargesTable}
 								/>
-							)}
+							) : null}
 						</>
 					);
 				})}

@@ -14,7 +14,7 @@ function SIDView({
 	jobNumberByQuery = '',
 }) {
 	const {
-		list: { data = [] },
+		list: { data = [] } = {},
 	} = useShipmentIdView({ invoicesRequired: true, shipmentId, jobNumberByQuery });
 
 	const [currentOpenSID, setCurrentOpenSID] = useState('');
