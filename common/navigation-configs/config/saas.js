@@ -11,22 +11,22 @@ const saas = {
 	},
 	'/[partner_id]/saas/tracking': {
 		layoutType : 'no_header',
-		navigation : 'saas_air_tracking',
+		navigation : 'saas_tracking',
 		isMainNav  : true,
 	},
 	'/[partner_id]/saas/tracking/list': {
 		layoutType : 'no_header',
-		navigation : 'saas_air_tracking',
+		navigation : 'saas_tracking',
 		isMainNav  : true,
 	},
 	'/[partner_id]/saas/tracking/list/archive/[trackingType]': {
 		layoutType : 'no_header',
-		navigation : 'saas_air_tracking',
+		navigation : 'saas_tracking',
 		isMainNav  : true,
 	},
 	'/[partner_id]/saas/tracking/list/[trackingType]/[trackingId]': {
 		layoutType : 'no_header',
-		navigation : 'saas_air_tracking',
+		navigation : 'saas_tracking',
 		isMainNav  : true,
 	},
 };
