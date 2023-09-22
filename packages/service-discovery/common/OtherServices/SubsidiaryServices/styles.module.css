@@ -3,15 +3,6 @@
 	flex-direction: column;
 }
 
-.input_suffix {
-	margin-right: 12px;
-}
-
-.cross {
-	margin-right: 12px;
-	cursor: pointer;
-}
-
 .select_container {
 	margin: 20px 0;
 }
@@ -25,10 +16,6 @@
 
 .most_popular_container {
 	margin-top: 8px;
-}
-
-.suffix_container {
-	display: flex;
 }
 
 .wrapper {

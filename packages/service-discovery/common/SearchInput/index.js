@@ -11,21 +11,32 @@ function SearchInput({
 	placeholder = '',
 	size = 'md',
 	onReset = () => {},
+	showPrefix = true,
+	...rest
 }) {
 	return (
 		<section className={styles.container} style={style}>
 			<Input
-				prefix={<IcMSearchlight />}
+				{...rest}
+				{...(showPrefix && {
+					prefix: <IcMSearchlight
+						className={styles.icon}
+					/>,
+				})}
 				value={value}
 				onChange={(val) => onSearch(val)}
 				size={size}
 				placeholder={placeholder}
-				{...(value ? {
-					suffix: <IcMCross
-						className={styles.cross_icon}
+				suffix={value ? (
+					<IcMCross
+						className={styles.icon}
 						onClick={onReset}
-					/>,
-				} : {})}
+					/>
+				) : (
+					<IcMSearchlight
+						className={styles.icon}
+					/>
+				)}
 			/>
 		</section>
 	);
