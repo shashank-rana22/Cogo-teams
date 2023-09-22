@@ -12,6 +12,7 @@ const controls = [
 			},
 		},
 		showProgress : true,
+		accept       : 'image/*, .pdf',
 		uploadDesc   : 'Upload Files',
 	},
 	{

@@ -18,7 +18,7 @@ const EMPTY_DATA = { list: [], total: 0, total_page: 0 };
 export default function useListIGMDeskShipments() {
 	const { partner_id, authParams = {}, selected_agent_id = '' } = useSelector(({ general, profile }) => ({
 		partner_id        : general?.query?.partner_id,
-		authParams        : profile.authParams || {},
+		authParams        : profile.authParams || ' ',
 		selected_agent_id : profile.selected_agent_id || '',
 	}));
 

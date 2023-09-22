@@ -1,4 +1,5 @@
 import { cl, Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -11,6 +12,7 @@ import { ICONS_MAPPING } from './iconsMappings';
 import styles from './styles.module.css';
 
 const ICON_STYLES = ['position_1', 'position_2', 'position_3', 'position_4', 'position_5'];
+const ACCESS_LENGTH = 1;
 
 function CommunicationModals({
 	mailProps = {},
@@ -20,11 +22,12 @@ function CommunicationModals({
 	viewType = '',
 	setOpenKamContacts = () => {},
 	setSendBulkTemplates = () => {},
+	firestore = {},
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
 
-	const { buttonType, setButtonType, activeMail } = mailProps;
+	const { buttonType, setButtonType, activeMail, resetEmailState = () => {} } = mailProps;
 
 	const ACCESSIBLE_BUTTONS = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accessible_new_communications || [];
 
@@ -40,6 +43,7 @@ function CommunicationModals({
 				return;
 			}
 			setButtonType('send_mail');
+			resetEmailState();
 		},
 		global_contacts : () => setOpenKamContacts(true),
 		sp_contacts     : () => {
@@ -47,6 +51,34 @@ function CommunicationModals({
 			setIsChecked(false);
 		},
 	};
+
+	if (ACCESSIBLE_BUTTONS.length === ACCESS_LENGTH) {
+		const Comp = ICONS_MAPPING[ACCESSIBLE_BUTTONS[GLOBAL_CONSTANTS.zeroth_index]] || null;
+		const clickFunc = CLICK_FUNCTIONS[ACCESSIBLE_BUTTONS[GLOBAL_CONSTANTS.zeroth_index]] || null;
+
+		return (
+			<>
+				<div className={styles.wrapper}>
+					<div className={styles.plus_circle}>
+						<div className={styles.action}>
+							<Comp onClick={clickFunc} />
+						</div>
+					</div>
+				</div>
+
+				{!!buttonType && (
+					<MailEditorModal
+						mailProps={mailProps}
+						userId={userId}
+						activeMail={activeMail}
+						viewType={viewType}
+						firestore={firestore}
+						resetEmailState={resetEmailState}
+					/>
+				)}
+			</>
+		);
+	}
 
 	return (
 		<>
@@ -58,7 +90,7 @@ function CommunicationModals({
 					checked={isChecked}
 					readOnly
 				/>
-				<div htmlFor="plus_checkbox" className={styles.plus_circle}>
+				<div htmlFor="plus_checkbox" className={cl`${styles.plus_circle} ${styles.multiple_communication}`}>
 					<div className={styles.wheel_box}>
 						<IcMPlus
 							onClick={() => setIsChecked((prev) => !prev)}
@@ -101,6 +133,8 @@ function CommunicationModals({
 					userId={userId}
 					activeMail={activeMail}
 					viewType={viewType}
+					firestore={firestore}
+					resetEmailState={resetEmailState}
 				/>
 			)}
 

@@ -10,5 +10,15 @@
     "or_label": "HOẶC",
     "continue_with_microsoft": "TIẾP TỤC VỚI MICROSOFT",
     "already_login_toast_error": "Không thể đăng nhập với tài khoản đã hoạt động",
-    "failed_to_login_toast_error": "Đăng nhập thất bại, vui lòng thử lại..."
+    "failed_to_login_toast_error": "Đăng nhập thất bại, vui lòng thử lại...",
+    "login_field_mobile_placeholder": "Nhập sô điện thoại di động của bạn",
+    "login_field_mobile_error": "Thông tin di động là bắt buộc.",
+    "login_field_submit_otp_button": "Nhận OTP",
+    "login_otp_failed":"Tài khoản không được tìm thấy",
+    "login_otp_resend_success":"OTP đã được gửi thành công",
+    "mobile_title":"Vui lòng cung cấp số điện thoại của bạn để nhận OTP",
+    "login_Otp_field_title": "Xác minh điện thoại di động của bạn",
+    "login_otp_field_subtitle": "Mã xác minh được gửi tới",
+    "login_otp_field_subtitle_null": "số điện thoại di động.",
+    "login_otp_field_submit_button": "Xác minh"
 }
