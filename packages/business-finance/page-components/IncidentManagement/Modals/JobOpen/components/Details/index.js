@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 const JOB_SOURCE = 'LOGISTICS';
 function openPDF({ event, partnerId, id, incidentType }) {
 	event.preventDefault();
-	window.open(`/${partnerId}/booking/${incidentType}/${id}`, '_blank');
+	window.open(`/v2/${partnerId}/booking/${incidentType}/${id}`, '_blank');
 }
 
 function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
@@ -40,6 +40,7 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	} = useGetShipmentCostSheet({ shipmentId, jobNumber, JOB_SOURCE, JOB_TYPE });
 	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
+	const details = row?.data?.jobOpenRequest || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_box}>
@@ -74,17 +75,17 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 				<div className={styles.shipment_id}>
 					#
 					<a
-						href={row?.data?.jobOpenRequest?.jobNumber}
+						href={details?.jobNumber}
 						onClick={(event) => {
 							openPDF({
 								event,
 								partnerId    : partner_id,
-								id           : row?.data?.jobOpenRequest?.id,
+								id           : details?.id,
 								incidentType : SHIPMENT_MAPPING[row?.incidentSubtype],
 							});
 						}}
 					>
-						{row?.data?.jobOpenRequest?.jobNumber || ''}
+						{details?.jobNumber || ''}
 					</a>
 				</div>
 			</div>
@@ -93,31 +94,31 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 				<div>
 					<div className={styles.heading}>Estimated Sell</div>
 					<div className={styles.text}>
-						{getFormatAmount(row?.data?.jobOpenRequest?.estimatedSell)}
+						{getFormatAmount(details?.estimatedSell)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Sell</div>
 					<div className={styles.text}>
-						{getFormatAmount(row?.data?.jobOpenRequest?.totalSell)}
+						{getFormatAmount(details?.totalSell)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Estimated Buy</div>
 					<div className={styles.text}>
-						{getFormatAmount(row?.data?.jobOpenRequest?.estimatedBuy)}
+						{getFormatAmount(details?.estimatedBuy)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Buy</div>
 					<div className={styles.text}>
-						{getFormatAmount(row?.data?.jobOpenRequest?.totalBuy)}
+						{getFormatAmount(details?.totalBuy)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Profit Margin</div>
 					<div className={styles.text}>
-						{getFormatAmount(row?.data?.jobOpenRequest?.profitMargin)}
+						{getFormatAmount(details?.profitMargin)}
 					</div>
 				</div>
 			</div>

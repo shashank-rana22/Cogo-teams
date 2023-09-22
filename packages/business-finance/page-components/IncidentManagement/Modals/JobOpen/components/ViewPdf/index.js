@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
+import Image from 'next/image';
 
 import styles from './styles.module.css';
 
@@ -7,7 +8,7 @@ function ViewPdf({ row = {} }) {
 	const docUrl = row?.data?.jobOpenRequest?.documentUrls?.[GLOBAL_CONSTANTS.zeroth_index] || '';
 	return (
 		isEmpty(docUrl) ? (
-			<img
+			<Image
 				src={GLOBAL_CONSTANTS.image_url.list_no_result_found}
 				width={600}
 				height={500}
@@ -16,7 +17,6 @@ function ViewPdf({ row = {} }) {
 			/>
 		)
 			: (
-
 				<iframe
 					src={docUrl}
 					title="PDF"

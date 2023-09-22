@@ -47,13 +47,11 @@ export function CardBody({ charge = {}, type = '' }) {
 				</div>
 				<div
 					className={styles.flex}
-					style={{ '--span': 1 }}
 				>
 					Expected
 				</div>
 				<div
 					className={styles.flex}
-					style={{ '--span': 1 }}
 				>
 					Actual
 				</div>
@@ -99,7 +97,6 @@ export function CardBody({ charge = {}, type = '' }) {
 						</div>
 						<div
 							className={styles.flex}
-							style={{ '--span': 1 }}
 						>
 							{(lineItem?.priceQuotation && lineItem?.currencyQuotation) ? formatAmount({
 								amount   : lineItem?.priceQuotation,
@@ -112,7 +109,6 @@ export function CardBody({ charge = {}, type = '' }) {
 						</div>
 						<div
 							className={styles.flex}
-							style={{ '--span': 1 }}
 						>
 							{(lineItem?.priceActual && lineItem?.currencyActual) ? formatAmount({
 								amount   :	lineItem?.priceActual,
@@ -139,7 +135,6 @@ export function CardBody({ charge = {}, type = '' }) {
 					/>
 					<div
 						className={`${styles.flex} ${styles.totalamount}`}
-						style={{ '--span': 1 }}
 					>
 						{charge?.serviceTotalQuotational
 							? formatAmount({
@@ -154,7 +149,6 @@ export function CardBody({ charge = {}, type = '' }) {
 					</div>
 					<div
 						className={`${styles.flex} ${styles.totalamount}`}
-						style={{ '--span': 1 }}
 					>
 						{charge?.serviceTotalActual
 							? formatAmount({
@@ -169,18 +163,6 @@ export function CardBody({ charge = {}, type = '' }) {
 					</div>
 				</div>
 			)}
-			{/* <div
-				className={`${styles.viewmore} ${hidden}`}
-				role="presentation"
-				onClick={handleWidth}
-			>
-				{showFullDetails ? 'View Less' : 'View More'}
-				<span
-					className={showFullDetails ? styles.arrowicon : styles.bottomicon}
-				>
-					<IcMArrowRotateDown height={15} width={15} />
-				</span>
-			</div> */}
 		</div>
 	) : null;
 }

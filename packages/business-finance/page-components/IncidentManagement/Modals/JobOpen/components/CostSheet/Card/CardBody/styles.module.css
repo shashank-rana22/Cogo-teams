@@ -24,7 +24,7 @@
 
 .flex {
 	display: flex;
-	flex: var(--span);
+	flex: 1;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -108,7 +108,7 @@
 	padding: 10px 20px;
 	margin: 20px 0;
 	background: var(--color-secondary-5);
-	border: 1px solid var(--bordercolor);
+	border: 1px solid #000;
 	border-radius: 4px;
 
 	@media (max-width: 768px) {
@@ -148,7 +148,7 @@
 	padding: 18px 20px;
 	margin: 20px 0;
 	background: var(--color-secondary-5);
-	border: 1px solid var(--bordercolor);
+	border: 1px solid #000;
 	border-radius: 4px;
 
 	@media (max-width: 768px) {
