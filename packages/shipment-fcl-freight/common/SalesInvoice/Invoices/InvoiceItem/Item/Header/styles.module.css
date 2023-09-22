@@ -209,18 +209,6 @@
 	}
 }
 
-.invoice_status_cross_entity {
-	width: 26%;
-	padding: 4px 7px;
-	margin-bottom: 6px;
-	font-size: var(--font-size-sm);
-	line-height: 16px;
-	color: var(--color-secondary-greyscale-2);
-	white-space: nowrap;
-	background-color: #fbe6e6;
-	border-radius: 4px;
-}
-
 .invoice_status {
 	width: max-content;
 	padding: 4px 7px;
