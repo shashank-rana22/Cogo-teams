@@ -123,14 +123,12 @@ function EnrichmentRequests() {
 						/>
 					</div>
 				)}
+				{request?.type === 'view' ? <EnrichmentRequestInfo request={request} onClose={onClose} /> : null}
+				{request?.type === 'users' ? <EnrichmentRequestUsers request={request} onClose={onClose} /> : null}
+				{request?.type === 'edit'
+					? <EnrichmentRequestEdit refetch={refetch} request={request} onClose={onClose} />
+					: null}
 
-				{request.type ? (
-					<>
-						<EnrichmentRequestInfo request={request} onClose={onClose} />
-						<EnrichmentRequestEdit refetch={refetch} request={request} onClose={onClose} />
-						<EnrichmentRequestUsers request={request} onClose={onClose} />
-					</>
-				) : null}
 			</div>
 		</div>
 	);

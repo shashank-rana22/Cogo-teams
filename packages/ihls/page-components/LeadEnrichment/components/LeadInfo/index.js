@@ -52,38 +52,36 @@ function LeadInfo({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.tableHeader}>
-				<div className={styles.triggerButtons}>
-					<Popover
-						onClickOutside={() => setVisible(false)}
-						placement="bottom"
-						caret={false}
-						render={(
-							<>
-								<Button
-									className={styles.popover_buttons}
-									size="md"
-									themeType="primary"
-									onClick={() => { setShowRequest(true); setVisible(false); }}
-								>
-									Send to Enrichment
+			<div className={styles.triggerButtons}>
+				<Popover
+					onClickOutside={() => setVisible(false)}
+					placement="bottom"
+					caret={false}
+					render={(
+						<>
+							<Button
+								className={styles.popover_buttons}
+								size="md"
+								themeType="primary"
+								onClick={() => { setShowRequest(true); setVisible(false); }}
+							>
+								Send to Enrichment
 
-								</Button>
-								<Button
-									className={styles.popover_buttons}
-									size="md"
-									themeType="primary"
-								>
-									Push to CRM
+							</Button>
+							<Button
+								className={styles.popover_buttons}
+								size="md"
+								themeType="primary"
+							>
+								Push to CRM
 
-								</Button>
-							</>
-						)}
-						visible={visible}
-					>
-						<Button themeType="secondary" onClick={() => setVisible(!visible)}>Action</Button>
-					</Popover>
-				</div>
+							</Button>
+						</>
+					)}
+					visible={visible}
+				>
+					<Button themeType="secondary" onClick={() => setVisible(!visible)}>Action</Button>
+				</Popover>
 			</div>
 
 			<LeadTable columns={columns} data={response} loading={loading} />

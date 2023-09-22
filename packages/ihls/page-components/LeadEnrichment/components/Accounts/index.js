@@ -67,7 +67,7 @@ function Accounts() {
 			</div>
 
 			<div className={styles.user_button}>
-				<Button onClick={() => setShowUsers(!showUsers)}>
+				<Button onClick={() => setShowUsers((prev) => !prev)}>
 					<div className={styles.button_name}>
 						User Stats
 					</div>

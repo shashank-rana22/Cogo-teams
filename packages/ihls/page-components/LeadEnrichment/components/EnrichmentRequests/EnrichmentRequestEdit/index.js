@@ -16,16 +16,11 @@ function EnrichmentRequestEdit({ request = {}, onClose = () => {}, refetch = () 
 
 	return (
 		<Modal
-			show={request?.type === 'action'}
+			show={request?.type === 'edit'}
 			onClose={onClose}
 			placement="center"
 		>
-			<Modal.Header title={(
-				<span>
-					Upload Enriched File
-				</span>
-			)}
-			/>
+			<Modal.Header title="Upload Enriched File" />
 			<form onSubmit={handleSubmit(onUpdate)}>
 				<Modal.Body className={styles.modal_body}>
 					<div className={styles.container}>

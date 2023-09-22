@@ -91,7 +91,7 @@ const getEnrichmentRequestsColumns = ({
 									className={styles.popover_buttons}
 									size="md"
 									themeType="primary"
-									onClick={() => onClickButton({ id, type: 'action' })}
+									onClick={() => onClickButton({ id, type: 'edit' })}
 								>
 									Edit
 
