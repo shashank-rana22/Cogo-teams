@@ -11,12 +11,18 @@
 			"label" : "Name",
 			"key"   : "name",
 			"func"  : "renderQuotationName",
-			"span"  : 2.1
+			"span"  : 1.5
+		},
+		{
+			"label" : "Service type",
+			"key"   : "service_type",
+			"span"  : 1.8,
+			"func"  : "renderLineItemServiceType"
 		},
 		{
 			"label" : "Code",
 			"key"   : "code",
-			"span"  : 1.5
+			"span"  : 1
 		},
 		{
 			"label" : "Price",
@@ -27,32 +33,32 @@
 		{
 			"label" : "Quantity",
 			"key"   : "quantity",
-			"span"  : 1.5
+			"span"  : 1
 		},
 		{
 			"label" : "Unit",
 			"key"   : "unit",
 			"func"  : "renderLineItemUnit",
-			"span"  : 2
+			"span"  : 1.2
 		},
 		{
 			"label"       : "Pre tax total",
 			"key"         : "total_price",
 			"currencyKey" : "currency",
 			"func"        : "showFormattedPreTax",
-			"span"        : 2
+			"span"        : 1.5
 		},
 		{
 			"label" : "Tax%",
 			"key"   : "tax_percent",
-			"span"  : 1.5
+			"span"  : 1
 		},
 		{
 			"label"       : "Post tax total",
 			"key"         : "tax_total_price",
 			"currencyKey" : "currency",
 			"func"        : "showFormattedPostTax",
-			"span"        : 1.4
+			"span"        : 1.5
 		}
 	]
 }
