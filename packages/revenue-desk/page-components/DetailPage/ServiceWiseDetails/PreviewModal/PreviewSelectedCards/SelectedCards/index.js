@@ -6,8 +6,8 @@ function SelectedCards({ prefrences, shipmentType }) {
 	let wallet_amount = 0;
 
 	(prefrences || []).forEach((pref) => {
-		const buy = pref?.data?.rowData?.total_buy_price_in_preferred_currency;
-		const sell = pref?.data?.rowData?.total_sell_price_in_preferred_currency;
+		const buy = pref?.data?.rowData?.total_buy_price_in_preferred_currency || VALUE_ZERO;
+		const sell = pref?.data?.rowData?.total_sell_price_in_preferred_currency || VALUE_ZERO;
 		if ((buy - sell) > wallet_amount) {
 			wallet_amount = buy - sell;
 		}
