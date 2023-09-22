@@ -230,8 +230,8 @@ const GLOBAL_CONSTANTS = {
 		],
 		air_admin_user_ids: [
 			'6d713339-c528-4696-9f7b-c01f86887ac1',		// Vinod's ID
+			'039a0141-e6f3-43b0-9c51-144b22b9fc84', 	// Santram's ID
 			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8',		// Rishi's ID
-			'cf2c9d24-e1e0-4223-a228-69ebbdc349c1',		// Linh's ID
 		],
 	},
 	view_key_mappings: {
