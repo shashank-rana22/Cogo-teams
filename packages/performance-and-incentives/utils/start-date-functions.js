@@ -7,6 +7,8 @@ const NOVEMBER = 10;
 const DECEMBER = 11;
 const MARCH = 2;
 
+export const getTodayStartDate = () => new Date();
+
 export const getThisMonthStartDate = () => {
 	const currentDate = new Date();
 	currentDate.setDate(START_DATE);

@@ -5,8 +5,6 @@ import styles from './styles.module.css';
 function List(props) {
 	const { list, params, setParams, handleClick } = props;
 
-	// const { user = {} }	 = useSelector((state) => state?.profile || {});
-
 	const LIST_COLUMN_MAPPING = getListColumnMapping({ params, setParams });
 
 	return (

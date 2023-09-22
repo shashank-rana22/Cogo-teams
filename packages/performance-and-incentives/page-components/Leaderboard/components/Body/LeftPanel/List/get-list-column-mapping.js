@@ -46,11 +46,7 @@ const getListColumnMapping = ({ params = {}, setParams = () => {} }) => {
 					</div>
 				),
 			accessor: ({ rank }) => (isEmpty(rank) ? null : (
-				<div
-					className={styles.rank}
-				>
-					{rank}
-				</div>
+				<div className={styles.rank}>{rank}</div>
 			)),
 		},
 		{

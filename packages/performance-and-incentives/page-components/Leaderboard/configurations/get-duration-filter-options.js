@@ -1,19 +1,27 @@
+import DURATION_CONSTANTS from '../../../constants/duration-constants';
+
+const { TODAY, THIS_MONTH, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
+
 const DURATION_OPTIONS = [
 	{
+		label : 'Today',
+		value : TODAY,
+	},
+	{
 		label : 'This Month',
-		value : 'this_month',
+		value : THIS_MONTH,
 	},
 	{
 		label : 'This Quarter',
-		value : 'this_quarter',
+		value : THIS_QUARTER,
 	},
 	{
 		label : 'This Year',
-		value : 'this_year',
+		value : THIS_YEAR,
 	},
 	{
 		label : 'Custom',
-		value : 'custom',
+		value : CUSTOM,
 	},
 ];
 
