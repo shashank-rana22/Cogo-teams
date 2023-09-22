@@ -1,11 +1,16 @@
-import { Button } from '@cogoport/components';
+import { Button, Select } from '@cogoport/components';
 import { IcMArrowLeft } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useState } from 'react';
+
+import VIEW_OPTIONS from '../../configurations/view-type-options';
 
 import styles from './styles.module.css';
 
 function Header() {
 	const router = useRouter();
+
+	const [view, setView] = useState('locations');
 
 	return (
 		<div className={styles.container}>
@@ -22,12 +27,15 @@ function Header() {
 				</p>
 			</div>
 
-			<div>
+			<div className={styles.actions_container}>
+				<Select value={view} onChange={setView} options={VIEW_OPTIONS} />
+
 				<Button
 					type="button"
 					size="lg"
 					themeType="secondary"
 					onClick={() => router.back()}
+					style={{ marginLeft: '12px' }}
 				>
 					<IcMArrowLeft height={20} width={20} style={{ marginRight: '4px' }} />
 					Admin View
