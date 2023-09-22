@@ -47,7 +47,7 @@ function List({
 			status            : STATUS_MAPPING[status],
 			q,
 		},
-		sort_by: status === 'recent' ? 'created_at' : undefined,
+		sort_by: status === 'recent' ? 'updated_at' : undefined,
 	};
 	const states = { list, setList };
 	const { listData, total_page, loading } = useGetShipmentChatList({ payload: getListPayload, states });
@@ -77,6 +77,7 @@ function List({
 	let unSeenMsg = [];
 	unSeenMsg = messageContentArr.filter((item) => item[user_id]);
 	const unreadDataList = unSeenMsg?.map((obj) => obj?.channel_details);
+	unreadDataList.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
 	const channelList = showUnreadChat ? unreadDataList : listData;
 
 	const handleClick = () => {

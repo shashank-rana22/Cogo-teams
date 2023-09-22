@@ -130,5 +130,9 @@
     "raised_to_desk": "Được đặt xuống bàn",
     "request_type": "Loại yêu cầu",
     "select_sid": "Chọn SID",
-    "select_request_ype": "Chọn loại yêu cầu"
+    "select_request_ype": "Chọn loại yêu cầu",
+    "by_category": "Theo thể loại",
+    "by_desk": "Bàn làm việc",
+    "select_raised_by_desk": "Chọn được nâng lên bằng bàn",
+    "select_raised_to_desk": "Chọn nâng lên bàn"
 }
