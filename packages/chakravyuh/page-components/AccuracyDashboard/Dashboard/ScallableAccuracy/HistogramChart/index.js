@@ -7,7 +7,9 @@ import React, { useEffect } from 'react';
 
 import { COLOR_MAPPINGS } from '../../../../../constants/pie_chart_config';
 
-function AreaChart({ loading = false, data = [], seriesId = 'supply' }) {
+const DOLLAR = '$';
+
+function AreaChart({ loading = false, data = [], seriesIds = [], seriesId = 'supply' }) {
 	useEffect(() => {
 		const root = am5.Root.new('chartdiv');
 
@@ -16,53 +18,63 @@ function AreaChart({ loading = false, data = [], seriesId = 'supply' }) {
 		]);
 
 		const chart = root.container.children.push(am5xy.XYChart.new(root, {
-			panX       : true,
-			panY       : true,
-			wheelX     : 'panX',
-			wheelY     : 'zoomX',
-			pinchZoomX : true,
+			panX   : true,
+			panY   : true,
+			wheelX : 'panX',
+			wheelY : 'zoomX',
+			layout : root.verticalLayout,
 		}));
 
 		chart.get('colors').set(
 			'colors',
-			[am5.color(COLOR_MAPPINGS?.[seriesId]?.[GLOBAL_CONSTANTS.zeroth_index])],
+			seriesIds.map((id) => am5.color(COLOR_MAPPINGS?.[id]?.[GLOBAL_CONSTANTS.zeroth_index])),
 		);
 
-		const cursor = chart.set('cursor', am5xy.XYCursor.new(root, {}));
-		cursor.lineX.set('forceHidden', true);
-		cursor.lineY.set('forceHidden', true);
-
-		const xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
-			renderer: am5xy.AxisRendererX.new(root, {}),
+		const xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+			categoryField : 'from',
+			renderer      : am5xy.AxisRendererX.new(root, {
+				minGridDistance : 50,
+				maxGridDistance : 60,
+			}),
+			tooltip: am5.Tooltip.new(root, {}),
 		}));
+
+		xAxis.data.setAll(data);
 
 		const yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-			renderer: am5xy.AxisRendererY.new(root, {}),
+			maxPrecision : 0,
+			renderer     : am5xy.AxisRendererY.new(root, {}),
 		}));
 
-		const series = chart.series.push(am5xy.LineSeries.new(root, {
-			name        : 'Series',
+		const series = chart.series.push(am5xy.ColumnSeries.new(root, {
 			xAxis,
 			yAxis,
-			valueYField : 'rate_count',
-			valueXField : 'deviation',
-			tooltip     : am5.Tooltip.new(root, {
-				labelText: '{valueY}',
+			valueYField    : 'rate_count',
+			categoryXField : 'from',
+		}));
+
+		series.columns.template.setAll({
+			tooltipText : `${DOLLAR}{categoryX} : {valueY}`,
+			tooltipY    : 0,
+			width       : am5.p100,
+		});
+
+		series.bullets.push(() => am5.Bullet.new(root, {
+			locationY : 0.5,
+			sprite    : am5.Label.new(root, {
+				fill         : root.interfaceColors.get('alternativeText'),
+				centerY      : am5.p50,
+				centerX      : am5.p50,
+				populateText : true,
 			}),
 		}));
 
-		series.fills.template.setAll({
-			fillOpacity : 0.2,
-			visible     : true,
+		series.columns.template.setAll({
+			fillOpacity : 0.5,
+			strokeWidth : 2,
 		});
-
-		chart.set('scrollbarX', am5.Scrollbar.new(root, {
-			orientation: 'horizontal',
-		}));
-
 		series.data.setAll(data);
-
-		series.data.setAll(data);
+		series.appear();
 
 		const indicator = root.container.children.push(am5.Container.new(root, {
 			width      : am5.p100,
@@ -116,7 +128,7 @@ function AreaChart({ loading = false, data = [], seriesId = 'supply' }) {
 				root.dispose();
 			}
 		};
-	}, [loading, data, seriesId]);
+	}, [loading, data, seriesId, seriesIds]);
 
 	return (
 		<div

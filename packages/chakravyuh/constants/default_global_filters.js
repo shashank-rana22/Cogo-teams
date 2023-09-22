@@ -7,5 +7,5 @@ export const DEFAULT_GLOBAL_FILTERS = {
 	parent_mode  : null,
 	start_date   : subtractDays(new Date(), MONTH_DAYS),
 	end_date     : addDays(new Date(), MONTH_DAYS),
-	chartType    : 'trend',
+	chart_type   : 'trend',
 };

@@ -50,7 +50,7 @@
 
 .chart_container {
 	position: relative;
-	width: 100%;
+	width: 99%;
 	height: calc(100% - 40px);
 	transition: all 0.1s ease;
 	transition-delay: 0.2s;

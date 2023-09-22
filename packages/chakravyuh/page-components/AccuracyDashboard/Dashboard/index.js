@@ -23,7 +23,7 @@ function DashboardView(props) {
 		data, loading,
 	} = useGetFclFreightRateStats({ filters: globalFilters });
 
-	const { accuracy = [], ...rest } = data || {};
+	const { accuracy = [], deviation = [], ...rest } = data || {};
 
 	let dateString = [];
 	if (start_date) {
@@ -56,29 +56,38 @@ function DashboardView(props) {
 			setGlobalFilters({ ...DEFAULT_GLOBAL_FILTERS, service_type });
 		}
 	}, [service_type, setIsHighlighted, setGlobalFilters]);
+
 	return (
 		<>
 			<div className={styles.main_container}>
 				<div className={cl`${styles.graph_container} ${isHighlighted ? styles.highlight : ''}`}>
 					<ScallableAccuracy
-						accuracy={accuracy}
 						loading={loading}
+						accuracy={accuracy}
+						deviation={deviation}
+						dateString={dateString}
 						parent_mode={parent_mode}
 						isHighlighted={isHighlighted}
-						setIsHighlighted={setIsHighlighted}
 						globalFilters={globalFilters}
+						setIsHighlighted={setIsHighlighted}
 						setGlobalFilters={setGlobalFilters}
-						dateString={dateString}
 					/>
 					<RateAddition
 						dateString={dateString}
-						setGlobalFilters={setGlobalFilters}
 						globalFilters={globalFilters}
+						setGlobalFilters={setGlobalFilters}
 					/>
 				</div>
 				<div className={cl`${styles.side_container} ${isHighlighted ? styles.minimise : ''}`}>
-					<Views setView={setView} data={rest} loading={loading} />
-					<Distribution {...props} dateString={dateString} />
+					<Views
+						setView={setView}
+						data={rest}
+						loading={loading}
+					/>
+					<Distribution
+						{...props}
+						dateString={dateString}
+					/>
 				</div>
 			</div>
 			{

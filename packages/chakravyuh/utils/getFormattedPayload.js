@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import { LOCATION_KEYS } from '../constants/map_constants';
 
 const EXCLUDE_KEYS = ['origin', 'destination', 'service_type', 'origin_type', 'destination_type',
-	'is_origin_icd', 'is_destination_icd', 'page', 'chartType', 'weight_slab_in_kg'];
+	'is_origin_icd', 'is_destination_icd', 'page', 'weight_slab_in_kg'];
 
 const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
 	const { service_type } = globalFilters;
@@ -25,6 +25,10 @@ const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 	}) : undefined;
 	filters.commodity = !isEmpty(filters?.commodity) ? filters.commodity : undefined;
+
+	if (filters.chart_type === 'trend') {
+		filters.chart_type = undefined;
+	}
 
 	if (weight_slab_in_kg) {
 		const [lower_limit, upper_limit] = weight_slab_in_kg.split('_');

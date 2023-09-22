@@ -43,11 +43,11 @@ function ScallableAccuracy(props) {
 		setGlobalFilters = () => {},
 		dateString = '',
 	} = props;
-	const { chartType = 'trend', service_type } = globalFilters;
+	const { chart_type = 'trend', service_type } = globalFilters;
 	const [isAnimating, setIsAnimating] = useState(false);
 
 	const onChange = (val) => {
-		setGlobalFilters((prev) => ({ ...prev, chartType: val }));
+		setGlobalFilters((prev) => ({ ...prev, chart_type: val }));
 	};
 
 	useEffect(() => {
@@ -61,7 +61,7 @@ function ScallableAccuracy(props) {
 		};
 	}, [isHighlighted]);
 
-	const TABS_LIST = service_type === 'fcl' ? ALL_TABS_LIST : ALL_TABS_LIST.filter(({ key }) => key !== 'accuracy');
+	const TABS_LIST = service_type === 'fcl' ? ALL_TABS_LIST : ALL_TABS_LIST.filter(({ key }) => key === 'trend');
 
 	return (
 		<div className={cl`${section_container} ${styles.container} 
@@ -79,7 +79,7 @@ function ScallableAccuracy(props) {
 				/>
 			)}
 			<Tabs
-				activeTab={chartType}
+				activeTab={chart_type}
 				themeType="primary"
 				onChange={onChange}
 				size="sm"

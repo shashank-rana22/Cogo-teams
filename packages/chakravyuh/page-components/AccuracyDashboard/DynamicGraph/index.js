@@ -1,9 +1,10 @@
+import { Placeholder } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import useGetFclFreightRateLifecycle from '../../../hooks/useGetFclFreightRateLifecycle';
 
 import GraphLayout from './GraphLayout';
-
+import styles from './styles.module.css';
 // const DUMMY_GRAPH_1 = {
 // 	name        : 'Spot Search',
 // 	rates_count : '1230',
@@ -138,10 +139,10 @@ import GraphLayout from './GraphLayout';
 // 		}],
 // 	},
 // };
-
+const PLACEHOLDER_LENGTH = 3;
 function DynamicGraph({ globalFilters = {} }) {
 	const [activeParent, setActiveParent] = useState(null);
-	const { graphs } = useGetFclFreightRateLifecycle({ globalFilters });
+	const { loading, graphs } = useGetFclFreightRateLifecycle({ globalFilters });
 	// const graphsList = [DUMMY_GRAPH_1, DUMMY_GRAPH_2, DUMMY_GRAPH_3];
 	const graphsList = Object.entries(graphs || {}).map(([title, value]) => ({
 		title,
@@ -149,15 +150,28 @@ function DynamicGraph({ globalFilters = {} }) {
 	})) || [];
 
 	return (
-		graphsList.map(({ title = 'rate_lifecycle', graph }) => (
-			<GraphLayout
-				key={graph}
-				graph={graph}
-				title={title}
-				activeParent={activeParent}
-				setActiveParent={setActiveParent}
-			/>
-		))
+		<>
+			{graphsList.map(({ title = 'rate_lifecycle', graph }) => (
+				<GraphLayout
+					key={graph}
+					graph={graph}
+					title={title}
+					activeParent={activeParent}
+					setActiveParent={setActiveParent}
+				/>
+			))}
+			{loading
+				? [...Array(PLACEHOLDER_LENGTH).keys()].map((key) => (
+					<Placeholder
+						key={key}
+						className={styles.graph_placeholder}
+						width="100%"
+						height="400px"
+						margin="24px 0"
+					/>
+				))
+				: null}
+		</>
 	);
 }
 
