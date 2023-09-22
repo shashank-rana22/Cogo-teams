@@ -1,10 +1,9 @@
 import { Pagination } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useShipmentIdView from '../../hook/useShipmentIdView';
 
-// eslint-disable-next-line import/no-cycle
 import AccordianCards from './AccordianCards/index';
 import Filters from './Filters';
 import LoadingState from './LoadingState/index';
@@ -20,6 +19,10 @@ export interface ItemDataProps {
 	incomeTotalAmount: number,
 	expenseCount: number,
 	expenseTotalAmount: string,
+	sellQuoteCount?: number,
+	sellQuoteTotalAmount?: string,
+	buyQuoteCount?: number,
+	buyQuoteTotalAmount?: string,
 	serviceType: string,
 	discountAppliedKam: number,
 	discountAppliedRevenueDesk: number,
@@ -27,15 +30,18 @@ export interface ItemDataProps {
 	urgentCount: number,
 	urgentTotalAmount: number,
 	creditNoteCount: number,
-	creditNoteTotalAmount: number
+	creditNoteTotalAmount: number,
+	buyQuotationCount?: number,
+	buyQuotationTotalAmount?: number,
+	sellQuotationCount?: number,
+	sellQuotationTotalAmount?: number,
+	amountCurrency?: string,
 }
 
 function ShipmentIdView() {
-	const { query } = useRouter();
-	const { jobNumber } = query || {};
 	const [currentOpenSID, setCurrentOpenSID] = useState('');
 	const [pendingApproval, setPendingApproval] = useState('all');
-	const [serialId, setSerialId] = useState(jobNumber || '');
+	const [serialId, setSerialId] = useState('');
 	const {
 		hookSetters,
 		pageNo,
@@ -46,7 +52,7 @@ function ShipmentIdView() {
 	} = useShipmentIdView({ invoicesRequired: pendingApproval, shipmentId: serialId });
 	const { totalRecords } = shipmentData || {};
 
-	const handleShipmentView = () => {
+	function HandleShipmentView() {
 		if (loading) {
 			return (
 				<div style={{ marginTop: '10px' }}>
@@ -54,7 +60,7 @@ function ShipmentIdView() {
 				</div>
 			);
 		}
-		if (data.length === 0) {
+		if (isEmpty(data)) {
 			return (
 				<div className={styles.no_data}>
 					No data Available
@@ -69,7 +75,7 @@ function ShipmentIdView() {
 				key={item?.jobId}
 			/>
 		));
-	};
+	}
 
 	return (
 		<div>
@@ -83,8 +89,8 @@ function ShipmentIdView() {
 			/>
 
 			<div>
-				{handleShipmentView()}
-				{data.length > 0 ? (
+				{HandleShipmentView()}
+				{!isEmpty(data) ? (
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={pageNo}

@@ -1,43 +1,60 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMArrowRotateDown,	IcMArrowRotateUp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
-
-// eslint-disable-next-line import/no-cycle
-import { ItemDataProps } from '../index';
 
 import CardItem from './CardItem/index';
 import styles from './styles.module.css';
 
 interface ListData {
-	itemData: ItemDataProps;
+	itemData: any;
 	currentOpenSID: string;
 	setCurrentOpenSID: Function;
+	shipmentIdView?: boolean;
+	onTabClick?: Function;
+	onAccept?: Function;
+	showTab?: boolean;
+	sidDataChecked?: boolean;
 }
+
+const PRESENT_TAB = 'sidDataTab';
+
 function AccordianCards({
 	itemData,
 	currentOpenSID,
 	setCurrentOpenSID,
+	shipmentIdView = true,
+	onTabClick = () => {},
+	onAccept = () => {},
+	showTab = false,
+	sidDataChecked = false,
 }: ListData) {
 	const {
-		jobId,
-		jobNumber,
-		jobStatus,
-		quotationProfitability,
-		tentativeProfitability,
-		incomeCount,
-		incomeTotalAmount,
-		expenseCount,
-		expenseTotalAmount,
-		serviceType,
-		pendingApprovalCount,
-		urgentCount,
-		urgentTotalAmount,
-		creditNoteCount,
-		creditNoteTotalAmount,
+		jobId = '',
+		jobNumber = '',
+		jobStatus = '',
+		quotationProfitability = '',
+		tentativeProfitability = '',
+		incomeCount = 0,
+		incomeTotalAmount = 0,
+		expenseCount = 0,
+		expenseTotalAmount = 0,
+		buyQuotationCount = 0,
+		buyQuotationTotalAmount = 0,
+		sellQuotationCount = 0,
+		sellQuotationTotalAmount = 0,
+		serviceType = '',
+		pendingApprovalCount = 0,
+		urgentCount = 0,
+		urgentTotalAmount = 0,
+		creditNoteCount = 0,
+		creditNoteTotalAmount = 0,
+		amountCurrency = '',
 	} = itemData || {};
+
 	const [amountTab, setAmountTab] = useState('expense');
 	const [dataCard, setDataCard] = useState({
 		jobNumber      : '',
@@ -48,6 +65,8 @@ function AccordianCards({
 		shipmentId     : '',
 	});
 	const router = useRouter();
+	const arrowElement = showTab
+		? <IcMArrowRotateUp height="17px" width="17px" /> : <IcMArrowRotateDown height="17px" width="17px" />;
 
 	return (
 		<div>
@@ -103,26 +122,50 @@ function AccordianCards({
 									})}
 								</div>
 							</div>
-							<div className={styles.urgent}>
-								<div className={styles.urgent_label_text}>
-									Urgent (
-									{urgentCount}
-									)
+							{shipmentIdView ? (
+								<div className={styles.urgent}>
+									<div className={styles.urgent_label_text}>
+										Urgent (
+										{urgentCount}
+										)
+									</div>
+									<div className={styles.small_right_border}>
+										<div className={styles.urgent_vr} />
+									</div>
+									<div className={styles.urgent_value_text}>
+										{formatAmount({
+											amount   : urgentTotalAmount! as number,
+											currency : amountCurrency,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										})}
+									</div>
 								</div>
-								<div className={styles.small_right_border}>
-									<div className={styles.urgent_vr} />
+							) : (
+								<div className={styles.expense}>
+									<div className={styles.expense_label_text}>
+										Buy Quote (
+										{buyQuotationCount}
+										)
+									</div>
+									<div className={styles.small_right_border}>
+										<div className={styles.small_vr} />
+									</div>
+									<div className={styles.expense_value_text}>
+										{formatAmount({
+											amount   :	String(buyQuotationTotalAmount),
+											currency :	amountCurrency,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										})}
+									</div>
 								</div>
-								<div className={styles.urgent_value_text}>
-									{formatAmount({
-										amount   : urgentTotalAmount! as any,
-										currency : GLOBAL_CONSTANTS.currency_code.INR,
-										options  : {
-											style           : 'currency',
-											currencyDisplay : 'code',
-										},
-									})}
-								</div>
-							</div>
+							)}
+
 						</div>
 						<div className={styles.expense_amount}>
 							<div className={styles.expense}>
@@ -138,7 +181,7 @@ function AccordianCards({
 									{formatAmount(
 										{
 											amount   :	incomeTotalAmount as any,
-											currency :	GLOBAL_CONSTANTS.currency_code.INR,
+											currency :	amountCurrency,
 											options  : {
 												style           : 'currency',
 												currencyDisplay : 'code',
@@ -147,26 +190,50 @@ function AccordianCards({
 									)}
 								</div>
 							</div>
-							<div className={styles.expense}>
-								<div className={styles.expense_label_text}>
-									Credit Note (
-									{creditNoteCount}
-									)
+							{shipmentIdView ? (
+								<div className={styles.expense}>
+									<div className={styles.expense_label_text}>
+										Credit Note (
+										{creditNoteCount}
+										)
+									</div>
+									<div className={styles.small_right_border}>
+										<div className={styles.small_vr} />
+									</div>
+									<div className={styles.expense_value_text}>
+										{formatAmount({
+											amount   :	creditNoteTotalAmount as number,
+											currency :	amountCurrency,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										})}
+									</div>
 								</div>
-								<div className={styles.small_right_border}>
-									<div className={styles.small_vr} />
+							) : (
+								<div className={styles.expense}>
+									<div className={styles.expense_label_text}>
+										Sell Quote (
+										{sellQuotationCount}
+										)
+									</div>
+									<div className={styles.small_right_border}>
+										<div className={styles.small_vr} />
+									</div>
+									<div className={styles.expense_value_text}>
+										{formatAmount({
+											amount   :	String(sellQuotationTotalAmount),
+											currency :	amountCurrency,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										})}
+									</div>
 								</div>
-								<div className={styles.expense_value_text}>
-									{formatAmount({
-										amount   :	creditNoteTotalAmount as any,
-										currency :	GLOBAL_CONSTANTS.currency_code.INR,
-										options  : {
-											style           : 'currency',
-											currencyDisplay : 'code',
-										},
-									})}
-								</div>
-							</div>
+							) }
+
 						</div>
 					</div>
 					<div className={styles.right_border}>
@@ -207,7 +274,7 @@ function AccordianCards({
 							</div>
 						</div>
 						<div className={styles.button_style}>
-							{currentOpenSID !== jobId ? (
+							{currentOpenSID !== jobId && shipmentIdView ? (
 								<Button
 									style={{ height: '30px', fontSize: '12px' }}
 									onClick={() => {
@@ -236,6 +303,15 @@ function AccordianCards({
 								</Button>
 							)}
 						</div>
+						{!shipmentIdView && (
+							<div
+								className={styles.ic_arrow}
+								onClick={() => onTabClick({ tabName: PRESENT_TAB })}
+								role="presentation"
+							>
+								{arrowElement}
+							</div>
+						) }
 					</div>
 					{jobStatus === 'OPEN' ? (
 						<div className={styles.ribbon}>{jobStatus}</div>
@@ -244,7 +320,7 @@ function AccordianCards({
 					)}
 				</div>
 				<div>
-					{currentOpenSID === jobId ? (
+					{(showTab || currentOpenSID === jobId) ? (
 						<CardItem
 							cardData={itemData}
 							currentOpenSID={currentOpenSID}
@@ -252,8 +328,12 @@ function AccordianCards({
 							setDataCard={setDataCard}
 							amountTab={amountTab}
 							setAmountTab={setAmountTab}
+							onAccept={onAccept}
+							showTab={showTab}
+							sidDataChecked={sidDataChecked}
 						/>
 					) : null}
+
 				</div>
 			</div>
 		</div>
