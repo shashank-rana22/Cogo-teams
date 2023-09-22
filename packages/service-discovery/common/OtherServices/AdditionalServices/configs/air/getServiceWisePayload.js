@@ -1,7 +1,12 @@
 import { HAZ_CLASSES } from '@cogoport/globalization/constants/commodities';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', tradeType = '' }) => {
+const getServiceWisePayload = ({
+	additionalFormInfo,
+	detail = {},
+	service_name = '',
+	tradeType = '',
+}) => {
 	const {
 		truck_type = '',
 		trucks_count = 0,
@@ -14,14 +19,20 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 	const {
 		origin_airport_id = '',
 		destination_airport_id = '',
-		volume,
-		weight,
+		volume = 1,
+		weight = 1,
 		packages = [],
-		packages_count,
+		packages_count = 1,
 		cargo_readiness_date,
 		commodity = '',
 		commodity_details = [],
 		load_selection_type = '',
+		payment_type = '',
+		cargo_value,
+		cargo_value_currency,
+		dry_ice_required = false,
+		terminal_charge_type = '',
+		airline_id = '',
 	} = detail;
 
 	const TRADE_TYPE_MAPPING = {
@@ -92,6 +103,28 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 				volume,
 				status     : 'active',
 				trade_type : trade_type || 'domestic',
+			},
+		],
+		air_freight_local: [
+			{
+				airport_id:
+					tradeType === 'export'
+						? origin_airport_id
+						: destination_airport_id,
+				trade_type           : tradeType,
+				terminal_charge_type : terminal_charge_type || undefined,
+				payment_type         : payment_type || undefined,
+				cargo_value          : cargo_value || undefined,
+				cargo_value_currency : cargo_value_currency || undefined,
+				dry_ice_required,
+				packages_count       : Number(packages_count),
+				weight               : Number(weight),
+				volume               : Number(volume),
+				status               : 'active',
+				commodity            : commodity && commodity !== 'all_commodity' ? commodity : 'general',
+				commodity_details,
+				packages,
+				airline_id,
 			},
 		],
 		warehouse: [{
