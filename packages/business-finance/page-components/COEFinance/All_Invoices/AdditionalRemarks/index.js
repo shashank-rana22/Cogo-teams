@@ -1,4 +1,4 @@
-import { Checkbox, Radio, RadioGroup } from '@cogoport/components';
+import { Checkbox, Radio, RadioGroup, Textarea } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -9,6 +9,7 @@ function AdditionalRemarks() {
 		profitability : null,
 		mismatched    : null,
 		miscellaneous : null,
+		other         : null,
 	});
 
 	const handleCategoryChange = (fieldName) => {
@@ -109,28 +110,33 @@ function AdditionalRemarks() {
 
 	const miscellaneousOptions = [
 		{
-			name  : 'demo',
-			value : 'demo',
-			label : 'demo',
+			name  : 'duplicate',
+			value : 'Duplicate Invoice',
+			label : 'Duplicate Invoice',
 		},
 		{
-			name  : 'demo',
-			value : 'demo',
-			label : 'demo',
+			name  : 'exeptions',
+			value : 'Invoice not billed to cogoport',
+			label : 'Invoice not billed to cogoport',
 		},
 		{
-			name  : 'demo',
-			value : 'demo',
-			label : 'demo',
+			name  : 'uploaded',
+			value : 'Invocie uploaded in wrong SID',
+			label : 'Invocie uploaded in wrong SID',
 		},
 		{
-			name  : 'demo',
-			value : 'demo',
-			label : 'demo',
+			name  : 'revised',
+			value : 'Revised invoice received and this old one should be rejected',
+			label : 'Revised invoice received and this old one should be rejected',
+		},
+		{
+			name  : 'pod',
+			value : 'POD not signed/stamped ',
+			label : 'POD not signed/stamped ',
 		},
 	];
 
-	// console.log({ remarkData });
+	console.log({ remarkData });
 	return (
 		<div>
 			<h1>AdditionalRemarks</h1>
@@ -308,6 +314,28 @@ function AdditionalRemarks() {
 					)
 					: null}
 			</div>
+
+			<Checkbox
+				label="Other"
+				checked={remarkData?.other}
+				onChange={() => {
+					setRemarkData((prev) => ({
+						...prev,
+						other: prev?.other ? null : true,
+					}));
+				}}
+			/>
+
+			{remarkData?.other ? (
+				<Textarea
+					value={typeof (remarkData?.other) === 'string'
+						? (remarkData?.other) : null}
+					onChange={(e) => setRemarkData((prev) => ({
+						...prev,
+						other: e,
+					}))}
+				/>
+			) : null}
 
 		</div>
 	);
