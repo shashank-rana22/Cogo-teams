@@ -1,0 +1,9 @@
+.list {
+	margin-top: 6px;
+
+	:global {
+		.ui_tab_container {
+			padding: 8px 16px;
+		}
+	}
+}

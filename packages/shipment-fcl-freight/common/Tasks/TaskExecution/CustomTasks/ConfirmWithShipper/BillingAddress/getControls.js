@@ -45,16 +45,25 @@ function getControls({ countryValidation = {}, setCountryId = () => {} }) {
 			rows        : 3,
 			type        : 'textarea',
 			placeholder : 'Enter Address',
-			styles      : { flexBasis: '58.5%' },
+			styles      : { flexBasis: '60%' },
 			rules       : {
 				required: 'Address is required',
+			},
+		},
+		{
+			name   : 'cargo_readiness_date',
+			label  : 'Cargo Readiness Date',
+			type   : 'date',
+			styles : { flexBasis: '10%' },
+			rules  : {
+				required: 'Date is required',
 			},
 		},
 		{
 			name    : 'is_sez',
 			label   : 'Is your Address SEZ ?',
 			type    : 'chips',
-			styles  : { flexBasis: '25%' },
+			styles  : { flexBasis: '10%' },
 			options : [
 				{
 					label : 'Yes',
