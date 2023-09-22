@@ -61,7 +61,7 @@ function EditInvoicePreference({
 			<Button
 				size="sm"
 				onClick={() => setShow(true)}
-				disabled={disableAction && disableOnProcessing}
+				disabled={disableAction || disableOnProcessing}
 				themeType="secondary"
 			>
 				Edit Invoice Preference
