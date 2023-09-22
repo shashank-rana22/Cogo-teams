@@ -41,12 +41,17 @@
 }
 
 .container {
-	width: fit-content;
 	margin-left: 10px;
 
 	:global {
-		.ui_popover_container {
-			padding: unset !important;
+		.ui_datepicker_container {
+			.react-datepicker__aria-live {
+				display: none;
+			}
+		}
+
+		.ui_dateRange_content_start {
+			width: 120px;
 		}
 	}
 }

@@ -15,16 +15,16 @@ const handleSort = ({ params = {}, setParams = () => {}, sortBy }) => {
 	setParams((prev) => ({ ...prev, sort_by: sortBy, sort_type: 'desc' }));
 };
 
-function ArrowType({ sortBy = '', sortType = '', key = '' }) {
-	if (sortBy !== key) {
-		return <IcMArrowRotateUp className={styles.arrow} />;
+function ArrowType({ sortBy = '', sortType = '', title = '' }) {
+	if (sortBy !== title) {
+		return <IcMArrowRotateUp className={styles.arrow} fill="#e0e0e0" />;
 	}
 
 	if (sortType === 'asc') {
-		return <IcMArrowRotateUp className={styles.arrow} />;
+		return <IcMArrowRotateUp className={styles.arrow} fill="#e0e0e0" />;
 	}
 
-	return <IcMArrowRotateDown className={styles.arrow} />;
+	return <IcMArrowRotateDown className={styles.arrow} fill="#e0e0e0" />;
 }
 
 const getListColumnMapping = () => {
@@ -37,7 +37,7 @@ const getListColumnMapping = () => {
 				(
 					<div role="presentation" className={styles.top_heading} onClick={() => handleSort({})}>
 						<div>Rank</div>
-						<ArrowType key="rank" />
+						<ArrowType title="rank" />
 					</div>
 				),
 			accessor: ({ rank }) => (isEmpty(rank) ? null : <p className={styles.rank}>{rank}</p>),
@@ -57,7 +57,7 @@ const getListColumnMapping = () => {
 				(
 					<div role="presentation" className={styles.top_heading} onClick={() => handleSort({})}>
 						<div>Score</div>
-						<ArrowType key="score" />
+						<ArrowType title="score" />
 					</div>
 				),
 			accessor: ({ score }) => (isEmpty(score) ? null : <p>{score}</p>),
@@ -70,7 +70,7 @@ const getListColumnMapping = () => {
 				(
 					<div role="presentation" className={styles.top_heading} onClick={() => handleSort({})}>
 						<div>%ile</div>
-						<ArrowType key="percentile" />
+						<ArrowType title="percentile" />
 					</div>
 				),
 			accessor: ({ percentile }) => (isEmpty(percentile) ? null : (
