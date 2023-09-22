@@ -5,6 +5,8 @@ const TRIGGER_OPTIONS_FIELDS = [
 	'fcl_freight-short_transit-export',
 	'fcl_freight-long_transit-import',
 	'fcl_freight-long_transit-export',
+	'air_freight-import',
+	'air_freight-export',
 ];
 
 const getReleaseTriggerOptions = ({ service = '' }) => {

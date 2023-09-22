@@ -35,7 +35,7 @@ const getPayload = ({
 				service_transit_type : service_duration_type,
 				service_trade_type,
 				shipment_capacity    : Number(values[curr]),
-				release_trigger      : values[`${releaseTrigger}-release_trigger`],
+				release_trigger      : values[`${releaseTrigger}-release_trigger`].filter((item) => item !== 'trigger'),
 			},
 		];
 	}, []);

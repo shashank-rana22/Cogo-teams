@@ -13,14 +13,18 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 		createShipmentCapacities,
 	} = useCreateShipmentCapacities({ data, setActiveItem, source });
 
-	const { control, formState: { errors }, handleSubmit, setValue, getValues } = useForm();
+	const { control, formState: { errors }, handleSubmit, setValue, getValues, watch } = useForm();
+
+	console.log(watch(), 'h7');
 
 	const handleReset = useCallback(() => {
+		console.log(getValues(), 'h10');
+
 		const registeredFieldNames = Object.keys(getValues());
 
 		registeredFieldNames.forEach((fieldName) => {
 			if (fieldName.includes('release_trigger')) {
-				setValue(fieldName, []);
+				setValue(fieldName, ['trigger']);
 			} else {
 				setValue(fieldName, '');
 			}
@@ -63,6 +67,7 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 	return {
 		control,
 		errors,
+		watch,
 		handleSubmit,
 		handleReset,
 		createShipmentLoading,

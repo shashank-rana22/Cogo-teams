@@ -8,6 +8,7 @@ import React, { forwardRef } from 'react';
 import services from '../../../../../../../configurations/service-options';
 import useShipmentCapacities from '../../../../../../../hooks/useShipmentCapacities';
 
+import DEFAULT_RELEASE_TRIGGER_OPTION from './constants/default-trigger-option';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 import getReleaseTriggerOptions from './utils/get-release-trigger-options';
@@ -99,7 +100,10 @@ function ShipmentCapacities(props, ref) {
 					</div>
 
 					{services.map((service) => {
-						const releaseTriggerOptions = [...getReleaseTriggerOptions({ service })];
+						const releaseTriggerOptions = [...getReleaseTriggerOptions({ service }),
+							DEFAULT_RELEASE_TRIGGER_OPTION];
+
+						console.log(releaseTriggerOptions, 'hello8');
 
 						return (
 							<div className={styles.service_item} key={service.value}>
@@ -136,11 +140,14 @@ function ShipmentCapacities(props, ref) {
 
 								</div>
 
-								<div className={styles.trigger}>
+								<div className={styles.trigger} key={releaseTriggerOptions}>
 									<MultiselectController
 										name={`${service.value}-release_trigger`}
 										control={control}
 										options={releaseTriggerOptions}
+										rules={{
+											required: 'Required',
+										}}
 									/>
 
 									{errors?.[`${service.value}-release_trigger`]?.message
