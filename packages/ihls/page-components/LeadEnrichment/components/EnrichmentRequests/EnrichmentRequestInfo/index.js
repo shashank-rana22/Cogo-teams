@@ -6,6 +6,7 @@ import getSearchControls from '../../../configurations/search-control';
 import useDownloadRequestOrgData from '../../../hooks/useDownloadRequestOrgData';
 import useGetEnrichmentRequestLeads from '../../../hooks/useGetEnrichmentRequestLeads';
 
+import EnrichmentConstraints from './EnrichmentConstraints';
 import getEnrichmentRequestOrganizations from './getEnrichmentRequestOrganizationsColumns';
 import styles from './styles.module.css';
 
@@ -43,6 +44,7 @@ function EnrichmentRequestInfo({ request = {}, onClose = () => {} }) {
 			/>
 			<Modal.Body className={styles.modal_body}>
 				<>
+					<EnrichmentConstraints request={request} />
 					<div className={styles.search}>
 						<div className={styles.searchbar}>
 							{searchControls.map((item) => {

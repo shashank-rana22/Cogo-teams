@@ -65,6 +65,11 @@ const ihls = {
 			access_type  : 'public',
 			service_name : 'athena',
 		},
+		{
+			api          : 'list_enrichment_request_constraints',
+			access_type  : 'public',
+			service_name : 'athena',
+		},
 	],
 };
 

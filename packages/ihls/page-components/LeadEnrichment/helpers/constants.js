@@ -8,6 +8,6 @@ export const STATISTICS_HEAD_LIMIT_INDEX = 6;
 
 export const STATISTICS_HEAD = [
 	'segment', 'shipment', 'registration',
-	'company_type', 'lifecycle_stage', 'source', 'users',
+	'company_type', 'lifecycle_stage', 'source', 'enrichment_stats',
 	'organization_users', 'user_contacts',
 ];

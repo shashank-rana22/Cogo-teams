@@ -30,9 +30,14 @@ function EnrichmentRequestModal({
 	const enriched_filter_present = params?.filters?.is_user_enriched === false;
 
 	const countValue = () => {
-		let show_count = null;
-		if (lead_count) { show_count = lead_count; }
-		if (select_first) { show_count = select_first; }
+		let show_count = checkedRowsId.length || lead_count || null;
+		if (mode === 'checked') {
+			show_count = checkedRowsId.length;
+		} else if (mode === 'select_first' && select_first) {
+			show_count = select_first;
+		} else if (mode === 'api_call') {
+			show_count = lead_count;
+		}
 		return show_count;
 	};
 

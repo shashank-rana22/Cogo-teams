@@ -10,8 +10,9 @@ const TITLE_MAPPING = {
 	users              : 'User',
 	organization_users : 'Organization Users',
 	user_contacts      : 'User Enriched',
+	enrichment_stats   : 'Enrichment Stats',
 };
-// 'lifecycle_stage', 'source'
+
 const MAPPING = {
 	enterprise: {
 		label : 'Enterprise',
@@ -108,6 +109,10 @@ const MAPPING = {
 	none: {
 		label : 'None',
 		color : '#FFAD5B',
+	},
+	not_enriched: {
+		label : 'Not Enriched',
+		color : '#76CEC1',
 	},
 };
 
