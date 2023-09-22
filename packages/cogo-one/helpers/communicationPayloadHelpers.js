@@ -7,6 +7,12 @@ export const ENDPOINT_MAPPING = {
 	forward   : '/forward_mail',
 	reply     : '/reply_mail',
 	reply_all : '/reply_all',
+	send_mail : '/send_mail',
+};
+
+const getOmniChannelLink = ({ id, channel_type }) => {
+	const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
+	return `${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`;
 };
 
 export const getCommunicationPayload = ({
@@ -25,22 +31,24 @@ export const getCommunicationPayload = ({
 
 	const {
 		message_id = '',
+		internet_message_id = '',
 	} = response || {};
 
-	const { conversation_id = '', user_id = '', lead_user_id = '' } = formattedData || {};
+	const { conversation_id = '', user_id = '', lead_user_id = '', id = '' } = formattedData || {};
 
 	const { ccrecipients = [], bccrecipients = [], subject = '', toUserEmail = [] } = emailState || {};
 
 	const payload = {
-		sender      : source,
+		sender            : source,
 		toUserEmail,
 		ccrecipients,
 		bccrecipients,
 		subject,
-		content     : getRenderEmailBody({ html: draftMessage }),
-		msgId       : message_id,
+		content           : getRenderEmailBody({ html: draftMessage }),
+		msgId             : message_id,
 		userId,
-		attachments : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
+		attachments       : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
+		internetMessageId : internet_message_id,
 	};
 
 	return {
@@ -55,6 +63,7 @@ export const getCommunicationPayload = ({
 			conversation_id,
 			send_by             : name,
 			sender_user_id      : userId,
+			draft_url           : getOmniChannelLink({ id, channel_type: 'email' }) || '',
 		},
 		sender_user_id  : userId,
 		service         : 'user',

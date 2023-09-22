@@ -4,7 +4,10 @@ const attendanceLeaveManagement = {
 		navigation : 'attendance_leave_management',
 		isMainNav  : true,
 	},
-
+	'/[partner_id]/separation': {
+		layoutType : 'no_header',
+		navigation : 'attendance_leave_management',
+	},
 };
 
 module.exports = attendanceLeaveManagement;

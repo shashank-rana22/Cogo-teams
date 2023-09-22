@@ -1,4 +1,4 @@
-import Placeholder, { cl } from '@cogoport/components';
+import { cl, Placeholder } from '@cogoport/components';
 import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber.tsx';

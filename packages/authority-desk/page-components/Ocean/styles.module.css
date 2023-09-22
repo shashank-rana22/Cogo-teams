@@ -1,26 +1,7 @@
-.heading {
-	position: relative;
-	display: flex;
-	width: fit-content;
-	margin-bottom: 12px;
-	font-size: 22px;
-	font-weight: 700;
-
-	&::after {
-		position: absolute;
-		top: 32px;
-		display: inline-block;
-		width: 40%;
-		height: 2px;
-		content: "";
-		background-color: #000;
+.container {
+	:global(.ui_tab_list_container) {
+		border: none;
 	}
-}
-
-.header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 }
 
 .buckets {
@@ -96,12 +77,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-}
-
-.version {
-	display: flex;
-	align-items: center;
-	margin-right: 10px;
 }
 
 .loader {

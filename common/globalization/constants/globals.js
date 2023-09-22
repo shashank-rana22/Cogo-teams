@@ -124,8 +124,10 @@ const GLOBAL_CONSTANTS = {
 		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae59e95d4e38a4271ff/'
 		+ 'UTRuploadSampleFileForAdvancePayment.xlsx',
 	},
-	cogoport_agent_email_id    : 'agentid@cogoport.com',
-	flash_booking_charge_codes : [
+
+	cogoport_agent_email_id: 'agentid@cogoport.com',
+
+	flash_booking_charge_codes: [
 		'OTC',
 		'BAS',
 		'BASNO',
@@ -258,6 +260,7 @@ const GLOBAL_CONSTANTS = {
 		saas_subscription_loading : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/loading.svg',
 		empty_state               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		empty_port                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
+		tick_icon_green           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tick_subtract.svg',
 		empty_chart:
 			'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg',
 		empty_customer_card : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg',
@@ -294,6 +297,7 @@ const GLOBAL_CONSTANTS = {
 		books_png              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
 		map_png                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
 		nodata_image           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
+		ams_empty_state        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		promocode_thumbnail:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
 		risk_free:
@@ -451,6 +455,7 @@ const GLOBAL_CONSTANTS = {
 		fcl_container_icon_s2c  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg',
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
+		cogoport_login_logo: 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
 	},
 
 	video_call_ring_tone_url:
@@ -460,6 +465,8 @@ const GLOBAL_CONSTANTS = {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
 		+ '45773ab4048f606ce6ef06fa1d083352/'
 		+ 'Book%201%20-%20Copy.xlsx',
+		bulk_jv_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
+		+ 'ae3740f2c19b22161257c6e416cd2f5a/JVUploadSampleExcel.xlsx',
 	},
 
 	urls: {
@@ -809,6 +816,9 @@ const GLOBAL_CONSTANTS = {
 		export_rates             : 'Export.rates@cogoport.com',
 		cogoport_ftl_collections : 'ftl.collections@cogoport.com',
 		cogoport_support         : 'support@cogoport.com',
+	},
+	mobile_number: {
+		cogoone_sales_contact_no: '+91-8069182176',
 	},
 	websites: {
 		cogoport : 'www.cogoport.com',
