@@ -1,40 +1,24 @@
+import FetchingLeaderboard from './common/FetchingLeaderboard';
 import Body from './components/Body';
 import Header from './components/Header';
-import useGetScoringReports from './hooks/useGetAgentScoringReports';
+import useGetLeaderboardView from './hooks/useGetLeaderboardView';
 
-export async function getServerSideProps() {
-	return {
-		props: {
-		},
-	};
-}
+function Leaderboard() {
+	const { loading, data } = useGetLeaderboardView();
 
-function Leaderboard(props) {
-	const {
-		list,
-		params,
-		setParams,
-		// loading,
-		// refetch,
-		currLevel,
-		setCurrLevel,
-		levelStack,
-		setLevelStack,
-	} = useGetScoringReports(props);
+	if (loading) {
+		return <FetchingLeaderboard />;
+	}
+
+	if (!data) {
+		return 'nothing';
+	}
 
 	return (
 		<>
 			<Header />
 
-			<Body
-				list={list}
-				params={params}
-				setParams={setParams}
-				currLevel={currLevel}
-				setCurrLevel={setCurrLevel}
-				levelStack={levelStack}
-				setLevelStack={setLevelStack}
-			/>
+			<Body />
 		</>
 	);
 }

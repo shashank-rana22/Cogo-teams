@@ -1,16 +1,21 @@
+import useGetScoringReports from '../../hooks/useGetAgentScoringReports';
+
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import styles from './styles.module.css';
 
-function Body(props) {
+function Body() {
 	const {
 		list,
 		params,
 		setParams,
+		// loading,
+		// refetch,
 		currLevel,
 		setCurrLevel,
+		// levelStack,
 		setLevelStack,
-	} = props;
+	} = useGetScoringReports();
 
 	return (
 		<div className={styles.container}>
