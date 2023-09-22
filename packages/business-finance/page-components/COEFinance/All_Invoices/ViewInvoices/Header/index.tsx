@@ -82,12 +82,12 @@ function Header({
 		});
 	};
 
-	const getAdditionalRemarks = () => ({
+	const additionalRemarks = {
 		profitabilityRemarks: remarkData?.profitability?.notBilled || remarkData?.profitability?.billed
 		|| remarkData?.profitability?.draft || remarkData?.profitability,
 		documentNumberRemarks : remarkData?.mismatched,
 		miscellaneousRemarks  : remarkData?.miscellaneous,
-	});
+	};
 
 	return (
 		<div>
@@ -214,9 +214,9 @@ function Header({
 											?.filter((item) => item !== undefined && item !== true))}
 										onClick={() => rejectApproveApi({
 											getRoute,
-											isAdditional      : true,
-											additionalRemarks : getAdditionalRemarks(),
-											otherRemarks      : remarkData?.other,
+											isAdditional : true,
+											additionalRemarks,
+											otherRemarks : remarkData?.other,
 										})}
 									>
 										Reject
