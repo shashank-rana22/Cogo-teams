@@ -16,10 +16,12 @@
 	} */
 }
 
-.subheading {
+.subheading_container {
 	display: flex;
 	align-items: center;
+}
 
+.subheading {
 	/* font-size: 1em; */
 
 	/* @media (min-width: 1024px) {
@@ -45,7 +47,7 @@
 	display: flex;
 	gap: 8px;
 	align-items: center;
-	margin-left: 12px;
+	margin-left: 8px;
 
 	:global {
 		.ui_datepicker_container {

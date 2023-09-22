@@ -70,7 +70,7 @@ function RankingAndScoring() {
 						data={data}
 						colors="#7278ad"
 						lineWidth={2}
-						curve="linear"
+						curve="catmullRom"
 						xScale={{ type: 'point' }}
 						yScale={{
 							type    : 'linear',

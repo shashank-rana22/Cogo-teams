@@ -52,16 +52,21 @@ function Header() {
 					{user.name}
 				</h2>
 
-				<div className={styles.subheading}>
-					<div>
+				<div className={styles.subheading_container}>
+					<div className={styles.subheading}>
 						You are viewing Incentive and Scoring Analytics
 						{' '}
 						<span className={styles.light}>for</span>
 						{' '}
-						<i>Cogo India</i>
 					</div>
 
 					<div className={styles.filter_container}>
+						<Select
+							value={entity}
+							onChange={setEntity}
+							options={getEntityOptions()}
+						/>
+
 						<Select
 							value={duration}
 							onChange={onChangeDuration}
@@ -76,12 +81,6 @@ function Header() {
 								isPreviousDaysAllowed
 							/>
 						)}
-
-						<Select
-							value={entity}
-							onChange={setEntity}
-							options={getEntityOptions()}
-						/>
 					</div>
 				</div>
 			</div>
