@@ -52,7 +52,7 @@
 }
 
 .link {
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 700;
 	color: #ed3726;
 	text-decoration: underline;
@@ -117,7 +117,7 @@
 	padding: 10px 20px 10px 10px;
 	margin-top: 15px;
 	margin-left: 20px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 600;
 	line-height: 16px;
 	color: #ed3726;
@@ -133,7 +133,7 @@
 
 .amountselect {
 	margin-right: 10px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 500;
 }
 
@@ -206,14 +206,8 @@
 }
 
 .label {
-	font-size: 12;
+	font-size: var(--font-size-md);
 	font-weight: 500;
-}
-
-.sid {
-	display: flex;
-	gap: 4px;
-	font-size: 18px;
 }
 
 .job {

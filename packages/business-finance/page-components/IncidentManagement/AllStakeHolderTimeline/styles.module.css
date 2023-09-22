@@ -1,6 +1,7 @@
 .container {
 	display: flex;
 	padding: 20px;
+	padding-right: 40px;
 	font-size: 10px;
 	background-color: var(--color-secondary-5);
 	border-radius: 10px;
@@ -119,4 +120,8 @@
 .center_align {
 	display: flex;
 	align-items: center;
+}
+
+.arrow {
+	cursor: pointer;
 }

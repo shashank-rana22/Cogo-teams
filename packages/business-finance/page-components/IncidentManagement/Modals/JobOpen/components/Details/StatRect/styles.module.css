@@ -6,7 +6,7 @@
 	margin: 14px 10px;
 	font-weight: 500;
 	line-height: 20px;
-	background-color: #fff;
+	background-color: var(--color-secondary-5);
 	border: 1px solid #bdbdbd;
 	border-radius: 8px;
 
@@ -55,7 +55,6 @@
 .number {
 	font-size: 20px;
 	font-weight: 510;
-	line-height: 20px;
 }
 
 .label {

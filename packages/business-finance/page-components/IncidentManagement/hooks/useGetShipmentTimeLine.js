@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useGetShipmentTimeLine = (shipmentId) => {
 	const [{ data, loading }, trigger] = useRequest(
@@ -9,16 +9,21 @@ const useGetShipmentTimeLine = (shipmentId) => {
 		},
 	);
 
-	useEffect(() => {
-		const getList = async () => {
+	const apiTrigger = useCallback(async () => {
+		try {
 			await trigger({
 				params: {
 					shipment_id: shipmentId,
 				},
 			});
-		};
-		getList();
+		} catch (error) {
+			console.log(error);
+		}
 	}, [shipmentId, trigger]);
+
+	useEffect(() => {
+		apiTrigger();
+	}, [apiTrigger]);
 
 	return {
 		loading,

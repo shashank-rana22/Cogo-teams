@@ -11,13 +11,14 @@ import CardHeader from './Card/CardHeader';
 import DiscountRect from './DiscountRect';
 import styles from './styles.module.css';
 
+const JOB_SOURCE = 'LOGISTICS';
+
 const ARRAY_SPLIT = 4;
 
 function CostSheet({ row = {} }) {
 	const shipmentId = row?.data?.jobOpenRequest?.id;
 	const { jobNumber = '' } = row?.data?.jobOpenRequest || {};
 	const JOB_TYPE = row?.source.toUpperCase();
-	const JOB_SOURCE = 'LOGISTICS';
 	const [open, setOpen] = useState(false);
 	const {
 		selldata,

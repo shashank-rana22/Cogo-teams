@@ -1,14 +1,12 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 import getFormattedData from '../utils/getFormattedData';
 
-const SUCCESS = 200;
-
-const useGetShipmentCostSheet = ({ ShipmentId = '', jobNumber = '', JOB_SOURCE = '', JOB_TYPE = '' }) => {
-	const jobType = JOB_TYPE;
-	const jobSource = JOB_SOURCE;
+const useGetShipmentCostSheet = ({
+	ShipmentId = '', jobNumber = '',
+	JOB_SOURCE:jobSource = '', JOB_TYPE : jobType = '',
+}) => {
 	const [{ data:postTaxData, loading:postTaxLoading }, postTaxFetch] = useRequestBf(
 		{
 			url     : '/common/job/post-tax/profit',
@@ -46,33 +44,21 @@ const useGetShipmentCostSheet = ({ ShipmentId = '', jobNumber = '', JOB_SOURCE =
 		{ manual: true },
 	);
 
-	useEffect(() => {
-		const getbuydataFromApi = async () => {
-			try {
-				const res = await sellTrigger();
-				if (res.status !== SUCCESS) {
-					Toast.error('Something went wrong!');
-				}
-			} catch (err) {
-				console.log(err);
-			}
-		};
+	const apiTrigger = useCallback(async () => {
+		try {
+			await sellTrigger();
+			await buyTrigger();
+			postTaxFetch();
+			preTaxFetch();
+		} catch (error) {
+			console.error(error);
+		}
+	}, [sellTrigger, buyTrigger, postTaxFetch, preTaxFetch]);
 
-		const getselldataFromApi = async () => {
-			try {
-				const resp = await buyTrigger();
-				if (resp.status !== SUCCESS) {
-					Toast.error('Something went wrong!');
-				}
-			} catch (err) {
-				console.log(err);
-			}
-		};
-		getbuydataFromApi();
-		getselldataFromApi();
-		postTaxFetch();
-		preTaxFetch();
-	}, [ShipmentId, sellTrigger, buyTrigger, postTaxFetch, preTaxFetch]);
+	useEffect(() => {
+		apiTrigger();
+	}, [ShipmentId, apiTrigger]);
+
 	const {
 		formattedBuyData,
 		sellQuotationData,
