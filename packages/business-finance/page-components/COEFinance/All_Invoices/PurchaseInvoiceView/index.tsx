@@ -52,7 +52,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 	console.log({ showMisc });
 
 	const { query } = useRouter();
-	const { jobNumber } = query || {};
+	const { searchValue:previouslySearched } = query || {};
 
 	const [sort, setSort] = useState({});
 
@@ -65,7 +65,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 		tab,
 		setTab,
 		setCurrentTab,
-	} = useGetPurchaseViewList({ filters, setFilters, sort, jobNumber });
+	} = useGetPurchaseViewList({ filters, setFilters, sort, previouslySearched });
 
 	const functions = {
 		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,
@@ -80,7 +80,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 		),
 		renderRemarks  : (itemData: ItemProps) => <RenderRemarks item={itemData} />,
 		renderViewMore : (itemData: ItemProps) => (
-			<RenderViewMoreButton itemData={itemData} />
+			<RenderViewMoreButton itemData={itemData} searchValue={searchValue} />
 		),
 		renderUrgencyTag: (itemData: ItemProps, field: FieldProps) => (
 			<RenderUrgencyTag item={itemData} field={field} />

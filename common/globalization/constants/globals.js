@@ -3,6 +3,7 @@
 import CURRENCY_CODE from './currencyCode';
 import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
+import supplierEntityMapping from './supplierEntityMapping.json';
 
 const GLOBAL_CONSTANTS = {
 	attendence_options: [
@@ -792,6 +793,9 @@ const GLOBAL_CONSTANTS = {
 		cogoport_ftl_collections : 'ftl.collections@cogoport.com',
 		cogoport_support         : 'support@cogoport.com',
 	},
+	mobile_number: {
+		cogoone_sales_contact_no: '+91-8069182176',
+	},
 	websites: {
 		cogoport : 'www.cogoport.com',
 		fortigo  : 'www.4tigo.com',
@@ -806,7 +810,8 @@ const GLOBAL_CONSTANTS = {
 	governance_manager_rejected_image_url:
     'https://cogoport-testing.sgp1.digitaloceanspaces.com/2466c7e2faa34ad8f4beb2b110b1ce1e/Group.svg',
 
-	default_preferred_language: 'english',
+	default_preferred_language : 'english',
+	supplier_entity_mapping    : supplierEntityMapping.shippingCompanies,
 };
 
 export default GLOBAL_CONSTANTS;

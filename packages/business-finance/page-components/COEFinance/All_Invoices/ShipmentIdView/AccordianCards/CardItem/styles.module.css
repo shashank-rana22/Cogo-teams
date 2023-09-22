@@ -45,3 +45,10 @@
 	text-align: center;
 	text-decoration-line: underline;
 }
+
+.approve_button {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 4px 24px 12px 0;
+}
