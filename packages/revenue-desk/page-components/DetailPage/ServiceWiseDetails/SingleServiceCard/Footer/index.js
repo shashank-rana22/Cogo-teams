@@ -1,10 +1,11 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format, startCase } from '@cogoport/utils';
 
+import { VALUE_ZERO } from '../../../../constants';
+
 import styles from './styles.module.css';
 
 function Footer({ data = {}, walletAmount = {} }) {
-	const ZERO_VALUE = 0;
 	const { wallet_amount = '', currency = '' } = walletAmount || {};
 
 	const infoArray = [
@@ -55,7 +56,7 @@ function Footer({ data = {}, walletAmount = {} }) {
 				<div className={styles.wallet_text}>
 					Wallet Balance :
 					{' '}
-					<span className={wallet_amount > ZERO_VALUE ? styles.price_text : styles.red_text}>
+					<span className={wallet_amount > VALUE_ZERO ? styles.price_text : styles.red_text}>
 						{formatAmount({
 							amount  : wallet_amount,
 							currency,

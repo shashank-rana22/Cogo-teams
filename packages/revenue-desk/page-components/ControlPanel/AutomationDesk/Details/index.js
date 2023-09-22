@@ -3,7 +3,7 @@ import { IcMArrowRotateDown, IcMArrowRotateRight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { list } from '../../../common/columns';
+import { deskColumnTitle, list, NUMBERS } from '../../../common/columns';
 import RowElement from '../../../common/RowElement';
 import useCreateRDAutomationParameters from '../../hooks/useCreateRDAutomationParameters';
 
@@ -13,15 +13,9 @@ function Details({
 	deskValue = {},
 	addWeightage = false, margin = '', openForm = false, setOpenForm = () => {}, maxHeight = '', refetch = () => {},
 }) {
-	const NUMBERS = {
-		ONE     : 1,
-		HUNDRED : 100,
-	};
-	const columnTitle = ['variables', 'Add weightage'];
-
 	const [showWeight, setShowWeight] = useState(false);
 	const { apiTrigger = () => {} } = useCreateRDAutomationParameters({ refetch });
-	const column_width = `${NUMBERS.HUNDRED / (columnTitle.length || NUMBERS.ONE)}%`;
+	const column_width = `${NUMBERS.HUNDRED / (deskColumnTitle.length || NUMBERS.ONE)}%`;
 
 	return (
 		<>
@@ -57,7 +51,7 @@ function Details({
 			{showWeight && (
 				<div className={styles.list}>
 					<div className={styles.tableheader}>
-						{columnTitle.map((item) => (
+						{deskColumnTitle.map((item) => (
 							<div
 								key={item?.id}
 								style={{ width: column_width }}

@@ -1,10 +1,11 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
+import { VALUE_ONE } from '../../constants';
+
 const useListRevenueDeskWallet = () => {
-	const ONE_VALUE = 1;
 	const [filters, setFilter] = useState({ service_type: 'fcl_freight_service', status: 'active' });
-	const [page, setPage] = useState(ONE_VALUE);
+	const [page, setPage] = useState(VALUE_ONE);
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_revenue_desk_wallet',

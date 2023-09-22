@@ -4,6 +4,8 @@ export const NUMBERS = {
 };
 export const columnTitle = ['variables', 'current weightage', 'Add weightage'];
 
+export const deskColumnTitle = ['variables', 'Add weightage'];
+
 export const list = [
 	{ key: 'preferred_shipping_line', label: 'Preferred Shipping Line' },
 	{ key: 'same_port_same_customer', label: 'Same Customer in Last 5 Shipments' },

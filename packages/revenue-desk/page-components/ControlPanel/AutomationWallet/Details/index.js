@@ -4,14 +4,12 @@ import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { VALUE_TEN, VALUE_ZERO } from '../../../constants';
 import useUpdateRevenueDeskWallet from '../../hooks/useUpdateRevenueDeskWallet';
 
 import styles from './styles.module.css';
 
 function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
-	const TEN_VALUE = 10;
-	const ZERO_VALUE = 0;
-
 	const [disabledValue, setDisabledValue] = useState(false);
 	const [walletAmount, setWalletAmount] = useState(data?.wallet_amount);
 
@@ -41,10 +39,10 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 						{origin_location &&	(
 							<div className={styles.content}>
 								Origin Location :
-								{origin_location?.name?.length > TEN_VALUE
+								{origin_location?.name?.length > VALUE_TEN
 									? (
 										<Tooltip content={origin_location?.name}>
-											{origin_location?.name?.slice(ZERO_VALUE, TEN_VALUE)}
+											{origin_location?.name?.slice(VALUE_ZERO, VALUE_TEN)}
 											...
 										</Tooltip>
 									) : origin_location?.name}
@@ -54,10 +52,10 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 							&& (
 								<div className={styles.content}>
 									Destination Location :
-									{destination_location?.name?.length > TEN_VALUE
+									{destination_location?.name?.length > VALUE_TEN
 										? (
 											<Tooltip content={destination_location?.name}>
-												{destination_location?.name?.slice(ZERO_VALUE, TEN_VALUE)}
+												{destination_location?.name?.slice(VALUE_ZERO, VALUE_TEN)}
 												...
 											</Tooltip>
 										) : destination_location?.name}
