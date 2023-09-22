@@ -3,7 +3,7 @@ import { IcMArrowNext } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const getJobColumns = ({ handleClick }) => {
+const getFinancialCloseColumns = ({ handleClick }) => {
 	const columns = [
 		{
 			id     : 'sid',
@@ -30,7 +30,7 @@ const getJobColumns = ({ handleClick }) => {
 						alignItems     : 'center',
 						flexDirection  : 'column',
 						width          : '100%',
-						padding        : '0 30px',
+						padding        : '0 10px',
 					}}
 					>
 						<div className={styles.main_heading}>Sell</div>
@@ -42,8 +42,8 @@ const getJobColumns = ({ handleClick }) => {
 						}}
 						>
 							<div>Estimated</div>
-							<div className={styles.operationally}>Operational</div>
-							{/* <div className={styles.financial}>Financial</div> */}
+							<div className={styles.operational}>Operational</div>
+							<div className={styles.financial}>Financial</div>
 						</div>
 					</div>
 					<div className={styles.vertical_rule} />
@@ -51,14 +51,14 @@ const getJobColumns = ({ handleClick }) => {
 			),
 			accessor: (row) => {
 				const { sell = {} } = row || {};
-				const { estimated, operational } = sell || {};
+				const { estimated, operational, financial } = sell || {};
 				return (
 
 					<div style={{
 						display        : 'flex',
 						justifyContent : 'space-between',
 						alignItems     : 'center',
-						padding        : '0 30px',
+						padding        : '0 10px',
 					}}
 					>
 						<div className={styles.fix_layout}>{estimated}</div>
@@ -73,17 +73,17 @@ const getJobColumns = ({ handleClick }) => {
 								<IcMArrowNext height="16" width="16" />
 							</div> */}
 						</div>
-						{/* <div>
+						<div>
 							<div className={styles.fix_layout}>
 								{financial}
 							</div>
 							<div className={styles.profit_icon}>
 								<IcMArrowNext height="16" width="16" />
 							</div>
-							<div className={styles.loss_icon}>
+							{/* <div className={styles.loss_icon}>
 								<IcMArrowNext height="16" width="16" />
-							</div>
-						</div> */}
+							</div> */}
+						</div>
 					</div>
 				);
 			},
@@ -98,7 +98,7 @@ const getJobColumns = ({ handleClick }) => {
 						alignItems     : 'center',
 						flexDirection  : 'column',
 						width          : '100%',
-						padding        : '0 30px',
+						padding        : '0 10px',
 					}}
 					>
 						<div className={styles.main_heading}>Buy</div>
@@ -110,8 +110,8 @@ const getJobColumns = ({ handleClick }) => {
 						}}
 						>
 							<div>Estimated</div>
-							<div className={styles.operationally}>Operational</div>
-							{/* <div className={styles.financial}>Financial</div> */}
+							<div className={styles.operational}>Operational</div>
+							<div className={styles.financial}>Financial</div>
 						</div>
 					</div>
 					<div className={styles.vertical_rule} />
@@ -119,14 +119,14 @@ const getJobColumns = ({ handleClick }) => {
 			),
 			accessor: (row) => {
 				const { buy = {} } = row || {};
-				const { estimated, operational } = buy || {};
+				const { estimated, operational, financial } = buy || {};
 				return (
 
 					<div style={{
 						display        : 'flex',
 						justifyContent : 'space-between',
 						alignItems     : 'center',
-						padding        : '0 30px',
+						padding        : '0 10px',
 					}}
 					>
 						<div className={styles.fix_layout}>{estimated}</div>
@@ -141,17 +141,17 @@ const getJobColumns = ({ handleClick }) => {
 								<IcMArrowNext height="16" width="16" />
 							</div> */}
 						</div>
-						{/* <div>
+						<div>
 							<div className={styles.fix_layout}>
 								{financial}
 							</div>
 							<div className={styles.profit_icon}>
 								<IcMArrowNext height="16" width="16" />
 							</div>
-							<div className={styles.loss_icon}>
+							{/* <div className={styles.loss_icon}>
 								<IcMArrowNext height="16" width="16" />
-							</div>
-						</div> */}
+							</div> */}
+						</div>
 					</div>
 				);
 			},
@@ -166,7 +166,7 @@ const getJobColumns = ({ handleClick }) => {
 						alignItems     : 'center',
 						flexDirection  : 'column',
 						width          : '100%',
-						padding        : '0 30px',
+						padding        : '0 10px',
 					}}
 					>
 						<div className={styles.main_heading}>Profitability</div>
@@ -178,8 +178,8 @@ const getJobColumns = ({ handleClick }) => {
 						}}
 						>
 							<div>Estimated</div>
-							<div className={styles.operationally}>Operational</div>
-							{/* <div className={styles.financial}>Financial</div> */}
+							<div className={styles.operational}>Operational</div>
+							<div className={styles.financial}>Financial</div>
 						</div>
 					</div>
 					<div className={styles.vertical_rule} />
@@ -187,14 +187,14 @@ const getJobColumns = ({ handleClick }) => {
 			),
 			accessor: (row) => {
 				const { profitability = {} } = row || {};
-				const { estimated, operational } = profitability || {};
+				const { estimated, operational, financial } = profitability || {};
 				return (
 
 					<div style={{
 						display        : 'flex',
 						justifyContent : 'space-between',
 						alignItems     : 'center',
-						padding        : '0 30px',
+						padding        : '0 10px',
 					}}
 					>
 						<div className={styles.fix_layout}>{estimated}</div>
@@ -209,17 +209,17 @@ const getJobColumns = ({ handleClick }) => {
 								<IcMArrowNext height="16" width="16" />
 							</div> */}
 						</div>
-						{/* <div>
+						<div>
 							<div className={styles.fix_layout}>
 								{financial}
 							</div>
 							<div className={styles.profit_icon}>
 								<IcMArrowNext height="16" width="16" />
 							</div>
-							<div className={styles.loss_icon}>
+							{/* <div className={styles.loss_icon}>
 								<IcMArrowNext height="16" width="16" />
-							</div>
-						</div> */}
+							</div> */}
+						</div>
 					</div>
 				);
 			},
@@ -238,4 +238,4 @@ const getJobColumns = ({ handleClick }) => {
 
 	return columns;
 };
-export default getJobColumns;
+export default getFinancialCloseColumns;

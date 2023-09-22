@@ -3,12 +3,31 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
+// import getFinancialCloseColumns from './page-components/ConfigurationTab/getFinancialCloseColumns';
 import getJobColumns from './page-components/ConfigurationTab/getJobColumns';
 import styles from './styles.module.css';
 
 const list = [
 	{
 		sid  : '1234567890',
+		sell : {
+			estimated   : 'INR 2,00,00,000',
+			operational : 'INR 2,00,00,000',
+			financial   : 'INR 2,00,00,000',
+		},
+		buy: {
+			estimated   : 'INR 2,00,00,000',
+			operational : 'INR 2,00,00,000',
+			financial   : 'INR 2,00,00,000',
+		},
+		profitability: {
+			estimated   : 'INR 2,00,00,000',
+			operational : 'INR 2,00,00,000',
+			financial   : 'INR 2,00,00,000',
+		},
+	},
+	{
+		sid  : '1234567891',
 		sell : {
 			estimated   : 'INR 2,00,00,000',
 			operational : 'INR 2,00,00,000',
@@ -38,6 +57,7 @@ function ShipmentAuditFunction() {
 		);
 	};
 	const columns = getJobColumns({ handleClick });
+	// const columns = getFinancialCloseColumns({ handleClick });
 
 	return (
 		<>
@@ -45,7 +65,7 @@ function ShipmentAuditFunction() {
 				<div className={styles.container}>
 					<div style={{ margin: '1rem 1rem 1rem 0' }} className={styles.date_picker}>
 						<Datepicker
-							placeholder="Enter Date"
+							placeholder="Date"
 							showTimeSelect
 							dateFormat="MM/dd/yyyy"
 							name="date"
@@ -62,7 +82,7 @@ function ShipmentAuditFunction() {
 						size="md"
 						placeholder="Search"
 						value={search}
-						suffix={<IcMSearchlight />}
+						suffix={<IcMSearchlight height="16" width="16" />}
 						onChange={(val) => setSearch(val)}
 					/>
 				</div>

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-array-index-key */
 // import Accordian from './Accordian';
 // import Headings from './Headings';
 // import styles from './styles.module.css';
@@ -107,12 +109,19 @@
 
 // export default NextPage;
 
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDummyCircle } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import Accordian from './Accordian';
 import Headings from './Headings';
 import styles from './styles.module.css';
+
+const ZEROTH_INDEX = 0;
+const FIRST_INDEX = 0;
+const SECOND_INDEX = 0;
+const THIRD_INDEX = 0;
+const FIFTH_INDEX = 0;
 
 function NextPage() {
 	const [accordionStates, setAccordionStates] = useState([
@@ -126,7 +135,6 @@ function NextPage() {
 	const [profitability, setProfitability] = useState('123');
 
 	const toggleAccordion = (rowIndex, index) => {
-		console.log(accordionStates);
 		const newAccordionStates = [...accordionStates];
 		newAccordionStates[rowIndex][index] = !newAccordionStates[rowIndex][index];
 		setAccordionStates(newAccordionStates);
@@ -137,7 +145,7 @@ function NextPage() {
 		<div key={`${columnIndex},${index}`} style={{ display: 'flex', width: '100%' }}>
 			<div className={styles.vertical_timeline}>
 
-				{ index !== 5
+				{ index !== FIFTH_INDEX
 					? (
 						<>
 							<IcMDummyCircle
@@ -172,31 +180,31 @@ function NextPage() {
 		<div className={styles.row}>
 			<div className={styles.column}>
 				<div className={styles.accordion}>
-					<div>
-						<Headings />
+					<div className={styles.header}>
+						<Headings heaadingText="Sell Quotation" />
 					</div>
-					{GenerateColumn(0)}
+					{GenerateColumn(ZEROTH_INDEX)}
 				</div>
 
 				<div className={styles.accordion}>
-					<div>
-						<Headings />
+					<div className={styles.header}>
+						<Headings heaadingText="Operationally Closed Sell" />
 					</div>
-					{GenerateColumn(1)}
+					{GenerateColumn(FIRST_INDEX)}
 				</div>
 			</div>
 			<div className={styles.column}>
 				<div className={styles.accordion}>
-					<div>
-						<Headings />
+					<div className={styles.header}>
+						<Headings heaadingText="Buy Quotation" />
 					</div>
-					{GenerateColumn(2)}
+					{GenerateColumn(SECOND_INDEX)}
 				</div>
 				<div className={styles.accordion}>
-					<div>
-						<Headings />
+					<div className={styles.header}>
+						<Headings heaadingText="Operationally Closed Buy" />
 					</div>
-					{GenerateColumn(3)}
+					{GenerateColumn(THIRD_INDEX)}
 				</div>
 
 			</div>
