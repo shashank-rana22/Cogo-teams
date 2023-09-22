@@ -18,28 +18,28 @@ const useGetShipmentChatList = ({ payload, states = {} }) => {
 
 	const getShipmentChatList = useCallback(() => {
 		(async () => {
-			if (status !== 'unread') {
-				try {
-					const res = await trigger();
+			try {
+				const res = await trigger();
 
-					setList((prevState) => ({
-						data:
+				setList((prevState) => ({
+					data:
 							res?.data?.page <= GLOBAL_CONSTANTS.one
 								? res?.data?.list || []
 								: [...(prevState.data || []), ...(res?.data?.list || [])],
-						total      : res?.data?.total_count,
-						total_page : res?.data?.total,
-					}));
-				} catch (err) {
-					toastApiError(err);
-				}
+					total      : res?.data?.total_count,
+					total_page : res?.data?.total,
+				}));
+			} catch (err) {
+				toastApiError(err);
 			}
 		})();
-	}, [trigger, setList, status]);
+	}, [trigger, setList]);
 
 	useEffect(() => {
-		getShipmentChatList();
-	}, [getShipmentChatList]);
+		if (status !== 'unread') {
+			getShipmentChatList();
+		}
+	}, [getShipmentChatList, status]);
 
 	return {
 		listData   : list?.data,
