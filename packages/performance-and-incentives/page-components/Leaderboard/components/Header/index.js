@@ -70,14 +70,6 @@ function Header() {
 				>
 					Public View Mode
 				</Button>
-
-				<Button
-					type="button"
-					size="lg"
-					themeType="secondary"
-				>
-					Across All
-				</Button>
 			</div>
 		</div>
 	);
