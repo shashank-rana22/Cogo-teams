@@ -61,7 +61,7 @@ function MainFilters({
 				})}
 			</div>
 			<div className={styles.rightFilters}>
-				<div className={styles.popoverDiv}>
+				<div>
 					<Button themeType="tertiary" onClick={() => { setShow(true); }}>
 						<IcMFilter className={styles.icmFilter} />
 					</Button>

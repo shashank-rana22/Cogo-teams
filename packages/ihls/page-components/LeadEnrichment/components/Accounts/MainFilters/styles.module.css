@@ -2,8 +2,6 @@
 	width: 50%;
 	overflow: hidden;
 	cursor: pointer;
-
-	/* border-radius: 10px; */
 }
 
 .filterContainer {
@@ -23,8 +21,6 @@
 
 	@media (max-width: 768px) {
 		flex-direction: column;
-
-		/* flex: 12; */
 	}
 }
 
@@ -59,15 +55,4 @@
 	min-height: 32px;
 	padding: 3px 8px;
 	margin-left: 8px;
-}
-
-.popoverDiv {
-	:global(.ui_popover_container) {
-		width: 280px;
-	}
-
-	/* stylelint-disable-next-line selector-class-pattern */
-	:global(.tippy-content) {
-		width: 100%;
-	}
 }
