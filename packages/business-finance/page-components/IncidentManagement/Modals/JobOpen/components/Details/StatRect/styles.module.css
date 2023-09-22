@@ -33,7 +33,7 @@
 .spacebetween {
 	display: flex;
 	justify-content: space-between;
-	padding: 5px 25px 0;
+	padding: 5px 20px 0;
 	margin: 10px 0;
 }
 

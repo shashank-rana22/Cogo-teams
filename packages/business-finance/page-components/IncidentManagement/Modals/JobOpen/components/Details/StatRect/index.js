@@ -21,7 +21,6 @@ function StatRect({ heading = '', expected = 0, actual = 0, loading = false }) {
 								{((expected) || GLOBAL_CONSTANTS.zeroth_index).toFixed(FIXED_DECIMAL_VALUE) || '0'}
 								{' '}
 								%
-								{' '}
 							</span>
 							<span className={styles.label}>Expected</span>
 						</div>
