@@ -1,3 +1,5 @@
+import LoadingState from '../../../../../common/LoadingState';
+
 import Block from './Block';
 import styles from './styles.module.css';
 import useGetActivityCount from './useGetActivityCount';
@@ -5,11 +7,13 @@ import useGetActivityCount from './useGetActivityCount';
 function RightPanel(props) {
 	const { view } = props;
 
-	const { data } = useGetActivityCount({ view });
+	const { data, loading } = useGetActivityCount({ view });
 
 	const { block_wise_stats: activityData } = data || {};
 
-	console.log('activityData :: ', activityData);
+	if (loading) {
+		return <div className={styles.container}><LoadingState /></div>;
+	}
 
 	return (
 		<div className={styles.container}>
