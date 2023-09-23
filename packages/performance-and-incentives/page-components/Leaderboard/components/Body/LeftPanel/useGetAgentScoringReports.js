@@ -21,17 +21,15 @@ const useGetScoringReports = (props) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	const [params, setParams] = useState({
-		page                    : 1,
-		page_limit              : 10,
-		user_data_required      : true,
-		role_data_required      : true,
-		add_current_user_report : true,
-		sort_by                 : 'rank',
-		sort_type               : 'asc',
-		filters                 : {
-			// report_type      : currLevel[GLOBAL_CONSTANTS.zeroth_index],
-			report_view_type        : view === 'admin' ? 'location_wise' : `${view}_wise`,
-			// report_type             : currLevel[GLOBAL_CONSTANTS.zeroth_index],
+		page               : 1,
+		page_limit         : 10,
+		user_data_required : true,
+		role_data_required : true,
+		sort_by            : 'rank',
+		sort_type          : 'asc',
+		filters            : {
+			report_view_type: view === 'admin' ? 'location_wise' : `${view}_wise`,
+
 			q                       : searchQuery || undefined,
 			created_at_greater_than : dateRange?.startDate || undefined,
 			created_at_less_than    : dateRange?.endDate || undefined,

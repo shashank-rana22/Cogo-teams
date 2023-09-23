@@ -38,11 +38,10 @@ function LeftPanel(props) {
 			add_current_user_report : true,
 			filters                 : {
 				...prev.filters,
-				report_type        : NEXT_LEVEL_MAPPING[currLevel[GLOBAL_CONSTANTS.zeroth_index]],
-				office_location_id : location_id,
-				channel,
-				report_view_type   : undefined,
-				user_rm_ids        : id ? [id] : undefined,
+				report_type      : NEXT_LEVEL_MAPPING[currLevel[GLOBAL_CONSTANTS.zeroth_index]],
+				...((location_id && channel) ? { office_location_id: location_id } : { channel }),
+				report_view_type : undefined,
+				user_rm_ids      : id ? [id] : undefined,
 			},
 		}));
 
@@ -51,7 +50,7 @@ function LeftPanel(props) {
 			let firstElement = currLevel[GLOBAL_CONSTANTS.zeroth_index];
 
 			if (isEmpty(prev)) {
-				firstElement = params.report_view_type;
+				firstElement = params.filters?.report_view_type;
 			}
 			curr.push([firstElement, currLevel[GLOBAL_CONSTANTS.one]]);
 

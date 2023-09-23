@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -55,7 +55,7 @@ const getListColumnMapping = ({ params = {}, setParams = () => {} }) => {
 			flex     : 2,
 			Header   : <div className={styles.top_heading}>Name</div>,
 			accessor : ({ user = {}, name = '' }) => ((isEmpty(user.name) && isEmpty(name))
-				? null : <div className={styles.name}>{user.name || name}</div>),
+				? null : <div className={styles.name}>{user.name || startCase(name)}</div>),
 		},
 		{
 			id   : 'total_score',
