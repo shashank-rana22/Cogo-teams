@@ -1,5 +1,4 @@
 import { useDebounceQuery } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
@@ -29,7 +28,8 @@ const useGetScoringReports = (props) => {
 		sort_by                 : 'rank',
 		sort_type               : 'asc',
 		filters                 : {
-			report_type: currLevel[GLOBAL_CONSTANTS.zeroth_index],
+			// report_type      : currLevel[GLOBAL_CONSTANTS.zeroth_index],
+			report_view_type: 'location_wise',
 		},
 	});
 

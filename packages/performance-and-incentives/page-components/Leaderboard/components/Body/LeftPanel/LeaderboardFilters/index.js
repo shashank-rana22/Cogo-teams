@@ -20,7 +20,6 @@ function LeaderboardFilters(props) {
 		debounceQuery,
 		searchValue,
 		setSearchValue,
-		setEntity,
 		levelStack,
 		setCurrLevel,
 		setLevelStack,
@@ -71,7 +70,13 @@ function LeaderboardFilters(props) {
 						size="md"
 						onLabel="by Channel"
 						offLabel="by Location"
-						onChange={(e) => setEntity(!e?.target?.checked)}
+						onChange={(e) => setParams((prev) => ({
+							...prev,
+							filters: {
+								...prev.filters,
+								report_view_type: e?.target?.checked ? 'channel_wise' : 'location_wise',
+							},
+						}))}
 					/>
 				) : null}
 
