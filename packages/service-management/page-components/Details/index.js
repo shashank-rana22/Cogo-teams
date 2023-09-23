@@ -1,7 +1,7 @@
 import { Button, Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { Link } from '@cogoport/next';
+import { Link, useRouter } from '@cogoport/next';
 
 import useGetOrganizationServiceDetails from '../../hooks/useGetOrganizationServiceDetails';
 
@@ -11,7 +11,11 @@ import Service from './Service';
 import styles from './styles.module.css';
 
 function Details() {
-	const { data = {}, loading = false } = useGetOrganizationServiceDetails();
+	const router = useRouter();
+	const service_id = router?.asPath?.split('/')?.pop();
+	const { data = {}, loading = false } = useGetOrganizationServiceDetails({
+		defaultParams: { organization_service_id: service_id },
+	});
 	if (loading) return <Loader />;
 	return (
 		<div>

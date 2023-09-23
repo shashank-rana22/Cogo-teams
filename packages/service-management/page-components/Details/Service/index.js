@@ -16,7 +16,9 @@ import RecommendedServices from './RecommendedServices';
 import styles from './styles.module.css';
 
 function Service({ item = {}, service_data = {} }) {
-	const { data = {}, loading = false, filters = {}, setFilters = () => { } } = useListOrganizationServiceExpertises({
+	const {
+		data = {}, loading = false, filters = {}, setFilters = () => {}, apiTrigger:refetch = () => {},
+	} = useListOrganizationServiceExpertises({
 		defaultFilters: {
 			organization_id : item?.organization_id,
 			service_type    : item?.requested_service?.service,
@@ -73,7 +75,7 @@ function Service({ item = {}, service_data = {} }) {
 					{startCase(item?.requested_service?.service)}
 				</div>
 				<div className={styles.service_title}>
-					{isEdit && (
+					{isEdit ? (
 						<Button
 							themeType="secondary"
 							onClick={() => !isEmpty(expertise) && setShow(!show)}
@@ -84,14 +86,14 @@ function Service({ item = {}, service_data = {} }) {
 						>
 							Add recommended services
 						</Button>
-					)}
+					) : null}
 				</div>
-				{!isEmpty(selected) && isEdit && (
+				{!isEmpty(selected) && isEdit ? (
 					<OptedRecommendedServices
 						selected={selected}
 						service={item?.requested_service?.service}
 					/>
-				)}
+				) : null}
 
 				<div className={styles.edit_wrap}>
 					<div className={styles.title}>Location Pairs</div>
@@ -102,12 +104,10 @@ function Service({ item = {}, service_data = {} }) {
 						{isEdit ? 'Cancel' : 'Edit'}
 						{isEdit ? (
 							<IcMCross
-								size={1}
 								style={{ marginLeft: '4px', color: '#fff' }}
 							/>
 						) : (
 							<IcMEdit
-								size={1}
 								style={{ marginLeft: '4px', color: '#fff' }}
 							/>
 						)}
@@ -135,6 +135,7 @@ function Service({ item = {}, service_data = {} }) {
 							isEdit={isEdit}
 							locations_prefill={prefill}
 							service_data={service_data}
+							refetch={refetch}
 						/>
 					</div>
 				)}

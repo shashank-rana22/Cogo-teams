@@ -17,10 +17,10 @@
 
 .port {
 	max-width: 60px;
-	max-height: 25px;
 	margin: 10px;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .teus {

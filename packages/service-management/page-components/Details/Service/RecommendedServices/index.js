@@ -20,7 +20,6 @@ function RecommendedServices({
 		...(item || {}),
 		id: index + ONE,
 	}));
-
 	const l1 = selected?.length || ZERO;
 	const l2 = newData?.length || ZERO;
 
@@ -52,8 +51,8 @@ function RecommendedServices({
 			onClose={() => setShow(false)}
 			onOuterClick={() => setShow(false)}
 		>
-			<div className={styles.section}>
-				<div className={styles.title}>Recommended Service</div>
+			<Modal.Header title="Recommended Service" />
+			<Modal.Body>
 				<Header
 					selected={selected}
 					newData={newData}
@@ -69,10 +68,14 @@ function RecommendedServices({
 					setIsCheckAll={setIsCheckAll}
 					service={service_type}
 				/>
-			</div>
-			<div className={styles.btn_wrap}>
-				<Button onClick={() => setShow(false)}>Add services</Button>
-			</div>
+			</Modal.Body>
+
+			<Modal.Footer>
+				<div className={styles.btn_wrap}>
+					<Button onClick={() => setShow(false)}>Add services</Button>
+				</div>
+
+			</Modal.Footer>
 		</Modal>
 	);
 }

@@ -3,7 +3,6 @@ import { IcMFilter } from '@cogoport/icons-react';
 import ScopeSelect from '@cogoport/scope-select/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
-import { v1 as uuid } from 'uuid';
 
 import EmptyState from '../../common/EmptyState';
 import ListPagination from '../../common/ListPagination';
@@ -33,7 +32,6 @@ function ServiceManagement() {
 		setActiveTab(value);
 		setFilters((p) => ({ ...p, status: value }));
 	};
-
 	if (loading) return (<Loader />);
 
 	const paginationProps = { filters, setFilters, data };
@@ -48,7 +46,16 @@ function ServiceManagement() {
 			<div className={styles.flex}>
 				<TabsComponent activeTab={activeTab} setActive={setActive} />
 				<SortComponent params={params} setParams={setParams} activeTab={activeTab} />
-				<Popover placement="bottom" content={<Filters filters={filters} setFilters={setFilters} />}>
+				<Popover
+					placement="bottom"
+					content={(
+						<Filters
+							filters={filters}
+							setFilters={setFilters}
+							activeTab={activeTab}
+						/>
+					)}
+				>
 					<Button themeType="secondary">
 						FILTERS
 						<IcMFilter style={{ marginLeft: 8 }} />
@@ -61,9 +68,9 @@ function ServiceManagement() {
 				: (
 					<div>
 						<ListPagination paginationProps={paginationProps} />
-						{data?.list?.map((item, index) => (
+						{data?.list?.map((item) => (
 							<CardComponent
-								key={`${`${index}${uuid()}`}`}
+								key={item?.id}
 								data={item}
 								activeTab={activeTab}
 							/>

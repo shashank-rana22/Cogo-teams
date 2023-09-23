@@ -1,3 +1,5 @@
+import TEUS_OPTIONS from '../../../../../config/TEUS_OPTIONS.json';
+
 const getAirFreight = ({ organization_id = '', params = {} }) => {
 	const freight = [{
 		name               : 'location_pairs',
@@ -34,15 +36,9 @@ const getAirFreight = ({ organization_id = '', params = {} }) => {
 				label       : 'Total Kgs (yearly)',
 				type        : 'select',
 				placeholder : 'Kgs',
-				options     : [
-					{ label: '0 - 50', value: '0 - 50' },
-					{ label: '50 - 100', value: '50 - 100' },
-					{ label: '100 - 500', value: '100 - 500' },
-					{ label: '500 - 1000', value: '500 - 1000' },
-					{ label: 'Over 1000+', value: 'Over 1000+' },
-				],
-				rules : { required: 'Total Kgs is required' },
-				span  : 3,
+				options     : TEUS_OPTIONS,
+				rules       : { required: 'Total Kgs is required' },
+				span        : 3,
 			},
 			{
 				type         : 'async_select',

@@ -4,8 +4,8 @@
 }
 
 .container {
-	padding: 20px 30px;
-	margin: 20px;
+	padding: 16px 20px;
+	margin: 20px 16px;
 	background-color: white;
 	border-radius: 6px;
 }
@@ -19,4 +19,11 @@
 
 .title {
 	width: 350px;
+}
+
+.sub_container {
+	padding: 10px;
+	margin: 16px;
+	border: 1px solid rgb(201 201 201);
+	border-radius: 6px;
 }

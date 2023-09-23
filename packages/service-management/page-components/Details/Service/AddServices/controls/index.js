@@ -5,7 +5,7 @@ const OCEAN = ['seaport', 'country', 'trade'];
 const AIR = ['airport', 'country', 'trade'];
 const SURFACE = ['cluster', 'seaport', 'airport', 'pincode'];
 
-const services = ({ organization_id = '' }) => {
+const getServices = ({ organization_id = '' }) => {
 	const SERVICES = {
 		fcl_freight: getFreight({
 			organization_id,
@@ -122,4 +122,4 @@ const services = ({ organization_id = '' }) => {
 	return SERVICES;
 };
 
-export default services;
+export default getServices;

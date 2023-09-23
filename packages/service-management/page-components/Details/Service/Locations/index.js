@@ -1,5 +1,4 @@
 import { isEmpty } from '@cogoport/utils';
-import { v1 as uuid } from 'uuid';
 
 import styles from './styles.module.css';
 
@@ -8,18 +7,18 @@ function Locations({ locations = [], service = '' }) {
 		return <div className={styles.empty_state}>No Locations Addeed</div>;
 	}
 
-	const TeusCheck = ['air_freight', 'air_customs', 'air-local-agents'].includes(
+	const TeusUnitCheck = ['air_freight', 'air_customs', 'air-local-agents'].includes(
 		service,
 	);
 
-	return (locations || [])?.map((location, index) => (
-		<div className={styles.content} key={`${`${index}${uuid()}`}`}>
-			<div className={styles.port}>{location.location?.name}</div>
-			<div className={styles.trade_type}>{location.trade_type}</div>
+	return (locations || [])?.map((location) => (
+		<div className={styles.content} key={location}>
+			<div className={styles.port}>{location?.location?.name}</div>
+			<div className={styles.trade_type}>{location?.trade_type}</div>
 			<div className={styles.teus}>
 				{location.total_teus}
 				{' '}
-				{TeusCheck ? 'Kgs' : 'Teus'}
+				{TeusUnitCheck ? 'Kgs' : 'Teus'}
 			</div>
 		</div>
 	));

@@ -6,12 +6,12 @@ import useUpdateOrganizationService from '../../../../hooks/useUpdateOrganizatio
 import ModalComp from './ModalComp';
 import styles from './styles.module.css';
 
-function Footer({ organization_id = '', service = '', handleSubmit = () => {} }) {
+function Footer({ organization_id = '', service = '', handleSubmit = () => {}, refetch = () => {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [title, setTitle] = useState('');
-	const { apiTrigger:submitForm = () => {} } = useUpdateOrganizationService();
+	const { apiTrigger:submitForm = () => {} } = useUpdateOrganizationService({ refetch });
 	const onSubmit = (values) => {
-		const { cooling_days = '', credit_amount = '', credit_currency = '', credit_days = '' } = values;
+		const { cooling_days = '', credit_amount = '', credit_currency = '', credit_days = '' } = (values || {});
 
 		submitForm({
 			data: {

@@ -1,12 +1,15 @@
+import Image from 'next/image';
+
 import styles from './styles.module.css';
 
 function Empty() {
 	return (
 		<div className={styles.container}>
-			<img
+			<Image
 				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty.svg"
 				alt="empty"
-				style={{ width: '200px', height: '200px' }}
+				width={200}
+				height={200}
 			/>
 			<span>No Data Found</span>
 		</div>

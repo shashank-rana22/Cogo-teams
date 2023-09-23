@@ -6,11 +6,11 @@ import Layout from '../../../common/Layout';
 import controls from './controls';
 import styles from './styles.module.css';
 
-function Filters({ filters = '', setFilters = () => {} }) {
+function Filters({ filters = '', setFilters = () => {}, activeTab = '' }) {
 	const { control, handleSubmit, reset } = useForm({ defaultValues: filters });
 
 	const onReset = () => {
-		setFilters({});
+		setFilters({ status: activeTab });
 		reset();
 	};
 	const onSubmit = (values) => {

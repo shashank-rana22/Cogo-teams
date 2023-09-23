@@ -6,7 +6,7 @@ export function SingleLocation({ item = {} }) {
 	const { location = {}, trade_type = '' } = (item || {});
 	return (
 		<div className={styles.port}>
-			<div className={styles.location}>{location?.display_name}</div>
+			<div className={styles.origin}>{location?.display_name}</div>
 			<div className={styles.trade}>{trade_type}</div>
 		</div>
 	);
@@ -18,7 +18,7 @@ export function MultipleLocation({ item = {} }) {
 		<div className={styles.port}>
 			<div className={styles.origin}>{origin_location?.display_name}</div>
 			<IcMPortArrow />
-			<div className={styles.destination}>{destination_location?.display_name}</div>
+			<div className={styles.origin}>{destination_location?.display_name}</div>
 		</div>
 	);
 }

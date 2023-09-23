@@ -7,20 +7,17 @@ const PORT_PAIR_SERVICES = [
 	'haulage_freight',
 	'rail_domestic_freight',
 ];
-
 const SERVICES = {
-	fcl_freight : 'Shipping lines',
-	air_freight : 'Airlines',
-};
-
-const LOGO_MAPPING = {
-	fcl_freight : 'shipping_line_logo',
-	air_freight : 'airline_logo',
-};
-
-const NAME_MAPPING = {
-	fcl_freight : 'shipping_line_name',
-	air_freight : 'airline_name',
+	fcl_freight: {
+		preffered : 'Shipping lines',
+		logo      : 'shipping_line_logo',
+		name      : 'shipping_line_name',
+	},
+	air_freight: {
+		preffered : 'Airlines',
+		logo      : 'airline_logo',
+		name      : 'airline_name',
+	},
 };
 
 const APPROVAL_STATUS = {
@@ -33,8 +30,6 @@ const APPROVAL_STATUS = {
 export {
 	PORT_PAIR_SERVICES,
 	SERVICES,
-	LOGO_MAPPING,
-	NAME_MAPPING,
 	APPROVAL_STATUS,
 };
 export default PORT_PAIR_SERVICES;

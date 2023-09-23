@@ -1,12 +1,8 @@
 import { cl } from '@cogoport/components';
+import Image from 'next/image';
 import React from 'react';
-import { v1 as uuid } from 'uuid';
 
-import {
-	SERVICES,
-	LOGO_MAPPING,
-	NAME_MAPPING,
-} from '../../../../../common/SERVICES';
+import { SERVICES } from '../../../../../common/SERVICES';
 
 import styles from './styles.module.css';
 
@@ -15,22 +11,23 @@ function ShippingLine({ mode = [], serviceType = '' }) {
 		<div>
 			<div className={styles.title}>
 				Preffered
-				{SERVICES[serviceType]}
 				{' '}
-				Line
+				{SERVICES?.[serviceType]?.preffered}
 			</div>
 			<div className={styles.flex_div}>
-				{mode?.map((item, index) => (
-					<div className={styles.flex_div} key={`${`${index}${uuid()}`}`}>
-						{item[LOGO_MAPPING[serviceType]] && (
-							<img
+				{mode?.map((item) => (
+					<div className={styles.flex_div} key={item}>
+						{item?.[SERVICES?.[serviceType]?.logo] && (
+							<Image
 								className={styles.image}
-								src={item?.[LOGO_MAPPING[serviceType]]}
-								alt={`${SERVICES[serviceType]} logo`}
+								src={item?.SERVICES?.[serviceType]?.logo}
+								alt={`${SERVICES?.[serviceType]?.preffered} logo`}
+								width={35}
+								height={35}
 							/>
 						)}
 						<div className={cl`${styles.text} ${styles.service_name}`}>
-							{item?.[NAME_MAPPING[serviceType]] || '-'}
+							{item?.[SERVICES?.[serviceType]?.name] || '-'}
 						</div>
 					</div>
 				))}

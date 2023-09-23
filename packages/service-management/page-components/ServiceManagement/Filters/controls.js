@@ -1,4 +1,4 @@
-import { serviceOptions } from './serviceOptions';
+import serviceOptions from '../../../config/SERVICE_OPTIONS.json';
 
 const controls = [
 	{

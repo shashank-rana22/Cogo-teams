@@ -1,6 +1,6 @@
+import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { v1 as uuid } from 'uuid';
 
 import ListPagination from '../../../../common/ListPagination';
 
@@ -8,10 +8,10 @@ import styles from './styles.module.css';
 
 function LocationPairs({ locations = [], service = '', data = {}, filters = {}, setFilters = () => {} }) {
 	if (isEmpty(locations)) {
-		return <div className={styles.empty_state}>No Location Pairs Addeed</div>;
+		return <div className={styles.empty_state}>No Location Pairs Added</div>;
 	}
 
-	const TeusCheck = ['air_freight', 'air_customs', 'air-local-agents'].includes(
+	const TeusUnitCheck = ['air_freight', 'air_customs', 'air-local-agents'].includes(
 		service,
 	);
 	const paginationProps = { data, filters, setFilters };
@@ -20,22 +20,31 @@ function LocationPairs({ locations = [], service = '', data = {}, filters = {}, 
 		<div>
 			{data?.total_count > data?.page_limit && <ListPagination paginationProps={paginationProps} />}
 			<div className={styles.parent}>
-				{(locations || []).map((location, index) => (
-					<div className={styles.content} key={`${`${index}${uuid()}`}`}>
+				{(locations || []).map((location) => (
+
+					<div className={styles.content} key={location}>
 						<div className={styles.locations}>
-							<div className={styles.port}>{location?.origin_location?.name}</div>
+							<Tooltip
+								placement="bottom"
+								content={location?.origin_location?.name}
+							>
+								<div className={styles.port}>{location?.origin_location?.name}</div>
+
+							</Tooltip>
 							<IcMPortArrow />
-							<div className={styles.port}>{location?.destination_location?.name}</div>
+							<Tooltip content={location?.destination_location?.name} placement="bottom">
+								<div className={styles.port}>{location?.destination_location?.name}</div>
+							</Tooltip>
 						</div>
 						<div className={styles.teus}>
 							{location.total_teus}
 							{' '}
-							{TeusCheck ? 'Kgs' : 'Teus'}
+							{TeusUnitCheck ? 'Kgs' : 'Teus'}
 						</div>
 					</div>
 				))}
 			</div>
-			{data?.total_count > data?.page_limit && <ListPagination paginationProps={paginationProps} />}
+			{data?.total_count > data?.page_limit ? <ListPagination paginationProps={paginationProps} /> : null}
 		</div>
 	);
 }

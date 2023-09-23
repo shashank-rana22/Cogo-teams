@@ -32,7 +32,7 @@ const useListOrganizationServiceExpertises = ({ defaultParams = {}, defaultFilte
 		apiTrigger();
 	}, [apiTrigger]);
 	return {
-		data, loading, filters, setFilters,
+		data, loading, filters, setFilters, apiTrigger,
 	};
 };
 

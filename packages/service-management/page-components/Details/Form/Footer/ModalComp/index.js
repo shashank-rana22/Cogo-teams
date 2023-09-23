@@ -3,14 +3,14 @@ import { useState } from 'react';
 
 function ModalComp({
 	show = false, setShow = () => {},
-	title = '', organization_id = '', submitForm = () => {}, service = '',
+	title = '', organization_id = '', submitForm:onSubmit = () => {}, service = '',
 }) {
 	const [comment, setComment] = useState('');
 	const [reason, setReason] = useState('');
 	const submit = () => {
 		setShow(false);
 		if (title === 'information') {
-			submitForm({
+			onSubmit({
 				data: {
 					delete_rest_expertise      : false,
 					more_info_required_comment : comment,
@@ -20,7 +20,7 @@ function ModalComp({
 				},
 			});
 		} else {
-			submitForm({
+			onSubmit({
 				data: {
 					delete_rest_expertise : false,
 					rejection_reason      : reason,

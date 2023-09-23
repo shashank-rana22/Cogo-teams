@@ -9,7 +9,6 @@ import ModalComponent from './ModalComponent';
 import SliderComponent from './SliderComponent';
 import styles from './styles.module.css';
 
-const ZERO = 0; const ONE = 1;
 function CardComponent({ data = {}, key = '', activeTab = '' }) {
 	const [showModal, setShowModal] = useState(false);
 	return (
@@ -24,40 +23,50 @@ function CardComponent({ data = {}, key = '', activeTab = '' }) {
 					<Button themeType="link">{data?.organization?.business_name}</Button>
 				</Link>
 				<div>{startCase(data?.service)}</div>
-				{activeTab === 'pending_approval' && (
+				{activeTab === 'pending_approval' ? (
 					<Link href="/service-management/[id]" as={`/service-management/${data?.id}`}>
 						<Button>TAKE ACTION</Button>
 					</Link>
-				)}
-				{activeTab !== 'pending_approval' && (
+				) : null}
+				{activeTab !== 'pending_approval' ? (
 					<div>
 						<Button onClick={() => setShowModal(true)}>VIEW</Button>
 						<ModalComponent show={showModal} setShow={setShowModal} data={data} />
 					</div>
-				)}
+				) : null}
 			</div>
-			<SliderComponent />
-			<div className={styles.flex}>
-				<div className={styles.flex_column}>
-					<div>{startCase(data?.service_approvers?.[ZERO]?.role?.name)}</div>
-					<div>
-						{(formatDate({
-							date       : data?.service_approvers?.[ZERO]?.updated_at,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'date',
-						}))}
-
+			<div className={styles.sub_container}>
+				<div className={styles.flex}>
+					<div className={styles.flex_column}>
+						{startCase(data?.service_approvers?.[GLOBAL_CONSTANTS.zeroth_index]?.user?.name)}
+					</div>
+					<div className={styles.flex_column}>
+						{startCase(data?.service_approvers?.[GLOBAL_CONSTANTS.one]?.user?.name)}
 					</div>
 				</div>
-				<div className={styles.flex_column}>
-					<div>{startCase(data?.service_approvers?.[ONE]?.role?.name)}</div>
-					<div>
-						{(formatDate({
-							date       : data?.service_approvers?.[ONE]?.updated_at,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'date',
-						}))}
+				<SliderComponent />
+				<div className={styles.flex}>
+					<div className={styles.flex_column}>
+						<div>{startCase(data?.service_approvers?.[GLOBAL_CONSTANTS.zeroth_index]?.role?.name)}</div>
+						<div>
+							{(formatDate({
+								date       : data?.service_approvers?.[GLOBAL_CONSTANTS.zeroth_index]?.updated_at,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								formatType : 'date',
+							}))}
 
+						</div>
+					</div>
+					<div className={styles.flex_column}>
+						<div>{startCase(data?.service_approvers?.[GLOBAL_CONSTANTS.one]?.role?.name)}</div>
+						<div>
+							{(formatDate({
+								date       : data?.service_approvers?.[GLOBAL_CONSTANTS.one]?.updated_at,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								formatType : 'date',
+							}))}
+
+						</div>
 					</div>
 				</div>
 			</div>

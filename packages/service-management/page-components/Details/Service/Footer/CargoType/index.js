@@ -8,6 +8,7 @@ function ShippingLine({ cargo_types = [] }) {
 		<div>
 			<div className={styles.title}>Cargo Type</div>
 			<Chips
+				className={styles.chips}
 				items={cargo_types?.map((x) => ({
 					children: x?.cargo_type?.replaceAll('_', ' '),
 				}))}

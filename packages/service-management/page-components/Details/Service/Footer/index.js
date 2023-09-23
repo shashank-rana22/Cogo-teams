@@ -18,7 +18,7 @@ function Footer({ service = {} }) {
 		<div className={styles.container}>
 			<div className={styles.border_bottom} />
 			<div className={styles.flex_div}>
-				{!isEmpty(service[SERVICES[serviceType]]) && (
+				{!isEmpty(service[SERVICES[serviceType]]) ? (
 					<>
 						<div className={styles.col}>
 							<ShippingLine
@@ -28,7 +28,7 @@ function Footer({ service = {} }) {
 						</div>
 						<div className={styles.border_right} />
 					</>
-				)}
+				) : null}
 				<div className={styles.col}>
 					<CargoType cargo_types={service.service_data?.cargo_types} />
 				</div>
@@ -36,7 +36,7 @@ function Footer({ service = {} }) {
 			<br />
 			<div className={styles.border_bottom} />
 
-			{service.comment && <Comment message={service.service_comment} />}
+			{service.comment ? <Comment message={service.service_comment} /> : null}
 		</div>
 	);
 }

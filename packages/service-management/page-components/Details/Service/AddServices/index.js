@@ -6,7 +6,7 @@ import { PORT_PAIR_SERVICES } from '../../../../common/SERVICES';
 import getLocationPairs from '../../../../helpers/getLocationPairs';
 import useUpdateOrganizationService from '../../../../hooks/useUpdateOrganizationService';
 
-import services from './controls';
+import getServices from './controls';
 
 function AddServices({
 	service_type = '',
@@ -15,14 +15,15 @@ function AddServices({
 	setIsEdit = () => {},
 	locations_prefill = [],
 	service_data = {},
+	refetch = () => {},
 }) {
-	const controls = services({ organization_id: org_id, data: { locations_prefill } })?.[service_type] || [];
+	const controls = getServices({ organization_id: org_id, data: { locations_prefill } })?.[service_type] || [];
 	const {
 		control, formValues: { errors = {} } = {},
 		handleSubmit,
 	} = useForm({ defaultValues: { location_pairs: locations_prefill } });
 
-	const { apiTrigger: addUpdateHandle = () => {} } = useUpdateOrganizationService();
+	const { apiTrigger: addUpdateHandle = () => {} } = useUpdateOrganizationService({ refetch });
 
 	const fieldKey = PORT_PAIR_SERVICES.includes(service_type)
 		? 'location_pairs'

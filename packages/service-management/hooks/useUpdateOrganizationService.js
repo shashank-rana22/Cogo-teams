@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useUpdateOrganizationService = () => {
+const useUpdateOrganizationService = ({ refetch = () => {} }) => {
 	const router = useRouter();
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_organization_service',
@@ -17,10 +17,11 @@ const useUpdateOrganizationService = () => {
 			await trigger({ data });
 			Toast.success('service updated successfully');
 			if (reload) router.push('/service-management');
+			refetch();
 		} catch (error) {
 			toastApiError(error);
 		}
-	}, [trigger, router]);
+	}, [trigger, router, refetch]);
 
 	return { loading, apiTrigger };
 };
