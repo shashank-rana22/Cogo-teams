@@ -11,6 +11,7 @@ function RightPanel() {
 	const {
 		block_wise_stats: activityData = {},
 		graph_data: scoringGraphData = {},
+		incentive_snapshot: incentiveSnapshotData = {},
 	} = data || {};
 
 	return (
@@ -23,7 +24,7 @@ function RightPanel() {
 
 			<RankingAndScoring scoringGraphData={scoringGraphData} />
 
-			<IncentiveSnapshot />
+			<IncentiveSnapshot incentiveSnapshotData={incentiveSnapshotData} />
 
 			<Activity activityData={activityData} />
 		</div>
