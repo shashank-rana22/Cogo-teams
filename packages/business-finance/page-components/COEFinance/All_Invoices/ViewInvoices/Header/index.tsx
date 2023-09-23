@@ -7,6 +7,7 @@ import useApproveReject from '../../../hook/useApproveReject';
 import AdditionalRemarks from '../../AdditionalRemarks';
 import TimeLineItemCheck from '../ShipmentDetails/TimelineItemCheck';
 
+import getCombinedRemarks from './getCombinedRemarks';
 import styles from './styles.module.css';
 
 function Header({
@@ -88,6 +89,8 @@ function Header({
 		documentNumberRemarks : remarkData?.mismatched,
 		miscellaneousRemarks  : remarkData?.miscellaneous,
 	};
+
+	const combinedRemarks = getCombinedRemarks(remarkData);
 
 	return (
 		<div>
@@ -209,8 +212,7 @@ function Header({
 									<Button
 										size="md"
 										style={{ marginRight: '8px' }}
-										disabled={isEmpty(Object.values(remarkData)
-											?.filter((item) => item !== undefined && item !== true))}
+										disabled={isEmpty(combinedRemarks)}
 										onClick={() => rejectApproveApi({
 											getRoute,
 											isAdditional : true,

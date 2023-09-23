@@ -29,8 +29,8 @@ export const billedOptions = [
 	},
 	{
 		name  : 'sell',
-		value : 'Sell-side charged less then buy quotation',
-		label : 'Sell-side charged less then buy quotation',
+		value : 'Sell-side charged less than buy quotation',
+		label : 'Sell-side charged less than buy quotation',
 	},
 	{
 		name  : 'system',
