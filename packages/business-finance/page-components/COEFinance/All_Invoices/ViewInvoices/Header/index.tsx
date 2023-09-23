@@ -106,8 +106,8 @@ function Header({
 				<div className={styles.sub_container}>
 					<Button
 						size="md"
-						themeType="secondary"
-						style={{ marginRight: '8px' }}
+						themeType="primary"
+						style={{ backgroundColor: 'green' }}
 						disabled={isItemNotChecked || isApproveDisabled}
 						onClick={(e: any) => handleModalData(e)}
 					>
@@ -116,7 +116,7 @@ function Header({
 					<Button
 						size="md"
 						themeType="secondary"
-						style={{ marginRight: '8px' }}
+						style={{ margin: '0 16px', border: '1px solid #d2c3c3' }}
 						disabled={status === 'FINANCE_ACCEPTED'}
 						onClick={(e: any) => handleModalData(e)}
 					>
@@ -124,7 +124,6 @@ function Header({
 					</Button>
 					<Button
 						size="md"
-						style={{ marginRight: '8px' }}
 						disabled={isItemNotChecked}
 						onClick={(e: any) => handleModalData(e)}
 					>
