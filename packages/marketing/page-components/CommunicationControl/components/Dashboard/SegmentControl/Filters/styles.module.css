@@ -1,0 +1,26 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.btn_container {
+	display: flex;
+}
+
+.filter_header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.filter_btn_container {
+	display: flex;
+}
+
+.popver {
+	:global {
+		.ui_popover_container {
+			width: 300px !important;
+		}
+	}
+}
