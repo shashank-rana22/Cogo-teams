@@ -6,24 +6,27 @@ import { useState } from 'react';
 import usePostJobOpenRemark from '../../../../apisModal/usePostJobOpenRemark';
 import SHIPMENT_MAPPING from '../../../../Constants/SHIPMENT_MAPPING';
 import STATUS_MAPPING from '../../../../Constants/status_mapping';
-import useGetShipmentCostSheet from '../../../../hooks/useGetShipmentCostSheet';
 import { getFormatAmount } from '../../../../utils/getformatamount';
 
 import StatRect from './StatRect';
 import styles from './styles.module.css';
 
-const JOB_SOURCE = 'LOGISTICS';
 function openPDF({ event, partnerId, id, incidentType }) {
 	event.preventDefault();
 	window.open(`/v2/${partnerId}/booking/${incidentType}/${id}`, '_blank');
 }
 
-function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
-	const shipmentId = row?.data?.jobOpenRequest?.id;
-	const { jobNumber = '' } = row?.data?.jobOpenRequest || {};
+function Details({
+	row = {},
+	setDetailsModal = () => {},
+	refetch = () => {},
+	preTaxData = {},
+	postTaxData = {},
+	preTaxLoading = false,
+	postTaxLoading = false,
+}) {
 	const { query } = useRouter();
 	const { partner_id } = query || {};
-	const JOB_TYPE = row?.source.toUpperCase();
 	const [remarks, setRemarks] = useState('');
 	const { id = '', status = '' } = row || {};
 	const { onSubmit = () => {}, loading = false } = usePostJobOpenRemark({
@@ -32,12 +35,6 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 		remarks,
 		refetch,
 	});
-	const {
-		preTaxData,
-		postTaxData,
-		preTaxLoading,
-		postTaxLoading,
-	} = useGetShipmentCostSheet({ shipmentId, jobNumber, JOB_SOURCE, JOB_TYPE });
 	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
 	const details = row?.data?.jobOpenRequest || {};
