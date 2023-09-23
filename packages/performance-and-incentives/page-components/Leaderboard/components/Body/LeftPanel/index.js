@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
 
@@ -34,7 +35,8 @@ function LeftPanel(props) {
 	const handleClick = ({ id = '', location_id, channel }) => {
 		setParams((prev) => ({
 			...prev,
-			filters: {
+			add_current_user_report : true,
+			filters                 : {
 				...prev.filters,
 				report_type        : NEXT_LEVEL_MAPPING[currLevel[GLOBAL_CONSTANTS.zeroth_index]],
 				office_location_id : location_id,
@@ -46,22 +48,27 @@ function LeftPanel(props) {
 
 		setLevelStack((prev) => {
 			const curr = [...prev];
-			let firstElement = '';
+			let firstElement = currLevel[GLOBAL_CONSTANTS.zeroth_index];
 
-			if (id) {
-				firstElement = currLevel[GLOBAL_CONSTANTS.zeroth_index];
-			} else if (channel) {
-				firstElement = 'channel';
-			} else if (location_id) {
-				firstElement = 'location';
+			if (isEmpty(prev)) {
+				firstElement = params.report_view_type;
 			}
-
 			curr.push([firstElement, currLevel[GLOBAL_CONSTANTS.one]]);
 
 			return curr;
 		});
 
-		setCurrLevel((prev) => [NEXT_LEVEL_MAPPING[prev[GLOBAL_CONSTANTS.zeroth_index]], id]);
+		let secondElement = '';
+
+		if (id) {
+			secondElement = id;
+		} else if (channel) {
+			secondElement = channel;
+		} else if (location_id) {
+			secondElement = location_id;
+		}
+
+		setCurrLevel((prev) => [NEXT_LEVEL_MAPPING[prev[GLOBAL_CONSTANTS.zeroth_index]], secondElement]);
 	};
 
 	return (

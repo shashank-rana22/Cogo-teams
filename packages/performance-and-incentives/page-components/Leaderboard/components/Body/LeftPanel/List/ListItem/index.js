@@ -36,7 +36,7 @@ function ListItem(props) {
 					handleClick({
 						id          : listItem.user?.id,
 						location_id : !isEmpty(listItem.user) ? undefined : listItem.id,
-						channel     : !isEmpty(listItem.user) ? undefined : listItem.channel,
+						channel     : !isEmpty(listItem.user) ? undefined : listItem.name,
 					});
 				}
 			}}

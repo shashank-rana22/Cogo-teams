@@ -10,9 +10,41 @@ import useFilterContent from './useFilterContent';
 
 const OFFSET = 1;
 
+const EXCLUDE_USER_DATA = [
+	'location_wise',
+	'channel_wise',
+];
+
 function conditionalWrapper({ condition, wrapper, children }) {
 	return condition ? wrapper(children) : children;
 }
+
+function containsOnlyLetters(inputString) {
+	const PATTERN = /^[A-Za-z]+$/;
+	return PATTERN.test(inputString);
+}
+
+const getFilters = ({ beforeLevel, id }) => {
+	if (beforeLevel === 'owner_report') {
+		if (containsOnlyLetters(id)) {
+			return {
+				report_type : beforeLevel,
+				channel     : id,
+				user_rm_ids : undefined,
+			};
+		}
+
+		return {
+			report_type        : beforeLevel,
+			office_location_id : id,
+			user_rm_ids        : undefined,
+		};
+	}
+
+	return {
+		report_type: beforeLevel,
+	};
+};
 
 function LeaderboardFilters(props) {
 	const {
@@ -43,15 +75,17 @@ function LeaderboardFilters(props) {
 	const handleBack = () => {
 		setParams((prev) => ({
 			...prev,
+			...((levelStack.length === OFFSET && EXCLUDE_USER_DATA.includes(beforeLevel))
+				? { add_current_user_report: false } : {}),
 			filters: {
 				...prev.filters,
 
-				...(levelStack.length === OFFSET ? {
-					report_view_type : `${beforeLevel}_wise`,
-					report_type      : undefined,
-				} : { report_type: beforeLevel }),
-
 				user_rm_ids: id ? [id] : undefined,
+
+				...(levelStack.length === OFFSET ? {
+					report_view_type : beforeLevel,
+					report_type      : undefined,
+				} : getFilters({ beforeLevel, id })),
 			},
 		}));
 
