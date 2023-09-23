@@ -15,13 +15,8 @@ const KEY_TO_SEND = {
 const useListFclFreightRateStatistics = ({ filters, activeParent = '' }) => {
 	const [page, setPage] = useState(START_PAGE);
 
-	const [{ data:rateData, loading:rateLoading }, trigger] = useRequest({
+	const [{ data, loading }, trigger] = useRequest({
 		url    : 'list_fcl_freight_rate_statistics',
-		method : 'GET',
-	}, { manual: true });
-
-	const [{ data:rateRequestData, loading:rateRequestLoading }, rateRequestTrigger] = useRequest({
-		url    : 'list_fcl_freight_rate_request_statistics',
 		method : 'GET',
 	}, { manual: true });
 
@@ -33,27 +28,15 @@ const useListFclFreightRateStatistics = ({ filters, activeParent = '' }) => {
 		}
 	};
 
-	const getRateRequestsData = async (params) => {
-		try {
-			await rateRequestTrigger({ params });
-		} catch (err) {
-			toastApiError(err);
-		}
-	};
-
 	useEffect(() => {
 		const params = getFormattedPayload(filters);
 		const extraFilters = KEY_TO_SEND[activeParent] ? { filters: { [KEY_TO_SEND[activeParent]]: true } } : {};
-		if (activeParent === 'missing_rates') {
-			getRateRequestsData({ ...params, page });
-		} else {
-			getRatesData(merge({ ...params, page }, extraFilters));
-		}
+
+		getRatesData(merge({ ...params, page }, extraFilters));
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(filters), page, activeParent]);
 
-	const data = activeParent === 'missing_rates' ? rateRequestData : rateData;
-
-	return { data, loading: rateLoading || rateRequestLoading, page, setPage };
+	return { data, loading, page, setPage };
 };
 export default useListFclFreightRateStatistics;

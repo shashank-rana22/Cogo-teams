@@ -7,38 +7,39 @@ import React, { useEffect } from 'react';
 
 import { COLOR_MAPPINGS } from '../../../../../constants/pie_chart_config';
 
-function ColumnChart({ loading = false, data = [], seriesId = 'supply' }) {
+function ColumnChart({ loading = false, data = [], seriesIds = ['supply'] }) {
 	useEffect(() => {
-		const root = am5.Root.new('chartdiv');
+		const root = am5.Root.new('columnchartdiv');
 
 		root.setThemes([
 			am5themes_Animated.new(root), am5themes_Responsive.new(root),
 		]);
 
-		const chart = root.container.children.push(am5xy.XYChart.new(root, {
-			panX   : false,
-			panY   : false,
-			wheelX : 'panX',
-			wheelY : 'zoomX',
-		}));
+		const chart = root.container.children.push(
+			am5xy.XYChart.new(root, {
+				panX               : false,
+				panY               : false,
+				wheelX             : 'panX',
+				wheelY             : 'zoomX',
+				layout             : root.verticalLayout,
+				maxTooltipDistance : 0,
+			}),
+		);
 
 		chart.get('colors').set(
 			'colors',
-			[am5.color(COLOR_MAPPINGS?.[seriesId]?.[GLOBAL_CONSTANTS.zeroth_index])],
+			seriesIds.map((id) => am5.color(COLOR_MAPPINGS?.[id]?.[GLOBAL_CONSTANTS.zeroth_index])),
 		);
 
 		const cursor = chart.set('cursor', am5xy.XYCursor.new(root, {
 			behavior: 'zoomX',
 		}));
+
 		cursor.lineY.set('visible', false);
 
 		const xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
-			maxDeviation : 0,
-			baseInterval : {
-				timeUnit : 'day',
-				count    : 1,
-			},
-			renderer: am5xy.AxisRendererX.new(root, {
+			baseInterval : { timeUnit: 'day', count: 1 },
+			renderer     : am5xy.AxisRendererX.new(root, {
 				minGridDistance: 60,
 			}),
 			tooltip: am5.Tooltip.new(root, {}),
@@ -52,7 +53,7 @@ function ColumnChart({ loading = false, data = [], seriesId = 'supply' }) {
 			name        : 'Series',
 			xAxis,
 			yAxis,
-			valueYField : 'rate_count',
+			valueYField : 'rates_count',
 			valueXField : 'day',
 			tooltip     : am5.Tooltip.new(root, {
 				labelText: '{valueY}',
@@ -115,16 +116,14 @@ function ColumnChart({ loading = false, data = [], seriesId = 'supply' }) {
 		}
 
 		return () => {
-			if (root) {
-				root.dispose();
-			}
+			root.dispose();
 		};
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(data), loading]);
+	}, [loading, JSON.stringify(data)]);
 
 	return (
 		<div
-			id="chartdiv"
+			id="columnchartdiv"
 			style={{ width: '100%', height: '100%' }}
 		/>
 	);

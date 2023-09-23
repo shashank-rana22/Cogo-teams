@@ -9,7 +9,7 @@ import { COLOR_MAPPINGS } from '../../../../../constants/pie_chart_config';
 
 const DOLLAR = '$';
 
-function AreaChart({ loading = false, data = [], seriesIds = [], seriesId = 'supply' }) {
+function AreaChart({ loading = false, data = [], seriesIds = [] }) {
 	useEffect(() => {
 		const root = am5.Root.new('chartdiv');
 
@@ -128,7 +128,8 @@ function AreaChart({ loading = false, data = [], seriesIds = [], seriesId = 'sup
 				root.dispose();
 			}
 		};
-	}, [loading, data, seriesId, seriesIds]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [loading, JSON.stringify(data), JSON.stringify(seriesIds)]);
 
 	return (
 		<div
