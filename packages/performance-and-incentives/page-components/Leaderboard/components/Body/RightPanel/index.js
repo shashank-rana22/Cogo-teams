@@ -5,11 +5,15 @@ import RankingAndScoring from '../../../common/RankingAndScoring';
 import styles from './styles.module.css';
 import useGetAgentScoringReportStats from './useGetAgentScoringReportStats';
 
-function RightPanel() {
-	const { data } = useGetAgentScoringReportStats();
+function RightPanel(props) {
+	const { dateRange, entity } = props;
+
+	const { data } = useGetAgentScoringReportStats({ dateRange, entity });
 
 	const {
 		block_wise_stats: activityData = {},
+		graph_data: scoringGraphData = {},
+		incentive_snapshot: incentiveSnapshotData = {},
 	} = data || {};
 
 	return (
@@ -20,9 +24,9 @@ function RightPanel() {
 				<div>Cogo India</div>
 			</div>
 
-			<RankingAndScoring />
+			<RankingAndScoring scoringGraphData={scoringGraphData} />
 
-			<IncentiveSnapshot />
+			<IncentiveSnapshot incentiveSnapshotData={incentiveSnapshotData} />
 
 			<Activity activityData={activityData} />
 		</div>
