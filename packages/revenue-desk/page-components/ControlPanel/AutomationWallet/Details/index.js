@@ -14,7 +14,7 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 	const [walletAmount, setWalletAmount] = useState(data?.wallet_amount);
 
 	const { service_type = '', shipment_parameters = {}, wallet_used = '', currency = '' } = data || {};
-	const { trade_type, origin_location = '', destination_location = '' } = shipment_parameters || {};
+	const { trade_type, origin_location = '', destination_location = '', location = '' } = shipment_parameters || {};
 
 	const { updateRevenueDeskWallet } = useUpdateRevenueDeskWallet({
 		service_type,
@@ -34,6 +34,18 @@ function AutomationWalletDetails({ data = {}, refetch = () => {} }) {
 								Trade Type :
 								{' '}
 								{startCase(trade_type)}
+							</div>
+						)}
+						{location &&	(
+							<div className={styles.content}>
+								Location :
+								{location?.name?.length > VALUE_TEN
+									? (
+										<Tooltip content={origin_location?.name}>
+											{location?.name?.slice(VALUE_ZERO, VALUE_TEN)}
+											...
+										</Tooltip>
+									) : location?.name}
 							</div>
 						)}
 						{origin_location &&	(
