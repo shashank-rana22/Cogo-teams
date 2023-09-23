@@ -43,7 +43,7 @@ function List({
 	});
 	const [filters, setFilters] = useState({ page: 1, q: shipment_data?.serial_id });
 
-	const { page = 1, q = '' } = filters || {};
+	const { page = 1, q } = filters || {};
 
 	const getListPayload = {
 		page,
@@ -93,7 +93,7 @@ function List({
 
 	if (q) {
 		filteredUnreadList = (unreadDataList || []).filter(
-			(item) => item?.channel_name?.toLowerCase()?.includes(q?.toLowerCase()),
+			(item) => item?.channel_name?.toLowerCase()?.includes(q?.toString()?.toLowerCase()),
 		);
 	}
 
