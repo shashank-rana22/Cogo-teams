@@ -22,11 +22,11 @@ const BACKGROUND_COLOR_MAPPING = {
 };
 
 function Block(props) {
-	const { block, data } = props;
+	const { activity, data } = props;
 
-	const AcitivityIcon = ACTIVITY_ICON_MAPPING[block] || IcMEngagement;
+	const AcitivityIcon = ACTIVITY_ICON_MAPPING[activity] || IcMEngagement;
 
-	const HighLighterColor = BACKGROUND_COLOR_MAPPING[block] || '#f8aea8';
+	const HighLighterColor = BACKGROUND_COLOR_MAPPING[activity] || '#f8aea8';
 
 	return (
 		<div>
@@ -35,16 +35,20 @@ function Block(props) {
 
 				<div className={styles.highlighter} style={{ backgroundColor: HighLighterColor }} />
 
-				<p className={styles.heading}>{isEmpty(block) ? '' : startCase(block)}</p>
+				<p className={styles.heading}>{isEmpty(activity) ? '' : startCase(activity)}</p>
 			</div>
 
 			<div className={styles.block_container}>
-				{Object.entries(data).map(([activity, value]) => (
-					<div key={activity} className={styles.activity_container}>
-						<p className={styles.value}>{value}</p>
-						<p className={styles.activity}>{isEmpty(activity) ? '' : startCase(activity)}</p>
-					</div>
-				))}
+				{(data || []).map((item) => {
+					const { name, count } = item || {};
+
+					return (
+						<div key={activity} className={styles.activity_container}>
+							<p className={styles.value}>{count}</p>
+							<p className={styles.activity}>{isEmpty(name) ? '' : startCase(name)}</p>
+						</div>
+					);
+				})}
 			</div>
 		</div>
 	);

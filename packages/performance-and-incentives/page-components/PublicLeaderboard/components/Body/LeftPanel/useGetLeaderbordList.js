@@ -6,7 +6,7 @@ function useGetLeaderbordList(props) {
 
 	const [params, setParams] = useState({
 		page               : 1,
-		page_limit         : 10,
+		page_limit         : 8,
 		user_data_required : true,
 		role_data_required : true,
 		filters            : {
