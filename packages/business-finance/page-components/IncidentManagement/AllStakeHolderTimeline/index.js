@@ -89,7 +89,7 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 									<div className={styles.remark_section}>
 										<div className={styles.remark_heading}>{t('incidentManagement:remarks')}</div>
 										<div className={styles.remarks_text}>
-											{item?.remarks || t('incidentManagement:no_remarks') }
+											{item?.remarks || '-' }
 										</div>
 									</div>
 								)}
