@@ -9,23 +9,26 @@ const RANK_SIZE_MAPPING = {
 };
 
 function TopUsers(props) {
-	const { top_list } = props;
+	const { topList, view } = props;
 
 	return (
 		<div className={styles.container}>
-			{top_list.map((item) => {
-				const { id, rank, name, score, percentile } = item;
+			{topList.map((item) => {
+				const { id, rank, name, user, total_score, percentile } = item || {};
 
 				const size = RANK_SIZE_MAPPING[rank] || 'md';
 
 				return (
 					<div key={id} className={styles.top_user_container}>
-						<Avatar user={item} size={size} />
+						<Avatar user={user} size={size} rank={rank} />
 
-						<p className={styles.name}>{name}</p>
+						<p className={styles.name}>
+							{['owner_wise', 'manager_wise', 'kam_wise'].includes(view)
+								? user?.name : name}
+						</p>
 
 						<div className={styles.bottom_panel}>
-							<span>{score}</span>
+							<span>{total_score}</span>
 
 							<span>
 								{percentile}

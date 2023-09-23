@@ -1,23 +1,23 @@
 const VIEW_OPTIONS = [
 	{
 		label : 'Locations',
-		value : 'locations',
+		value : 'location_wise',
 	},
 	{
 		label : 'Channels',
-		value : 'channel',
+		value : 'channel_wise',
 	},
 	{
 		label : 'Owners',
-		value : 'owners',
+		value : 'owner_wise',
 	},
 	{
 		label : 'Managers',
-		value : 'managers',
+		value : 'manager_wise',
 	},
 	{
 		label : 'Users',
-		value : 'users',
+		value : 'kam_wise',
 	},
 ];
 

@@ -2,7 +2,9 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const getListColumnMapping = () => {
+const getListColumnMapping = (props) => {
+	const { view } = props;
+
 	const LIST_COLUMN_MAPPING = [
 		{
 			id       : 'rank',
@@ -16,14 +18,20 @@ const getListColumnMapping = () => {
 			key      : 'name',
 			flex     : 4,
 			Header   : <div className={styles.top_heading}>Name</div>,
-			accessor : ({ name }) => (isEmpty(name) ? null : <p className={styles.name}>{name}</p>),
+			accessor : ({ name, user }) => (
+				<p className={styles.name}>
+					{['owner_wise', 'manager_wise', 'kam_wise'].includes(view)
+						? user?.name : name}
+				</p>
+			),
 		},
 		{
 			id       : 'score',
 			key      : 'score',
 			flex     : 1.5,
 			Header   : <div className={styles.top_heading}>Score</div>,
-			accessor : ({ score }) => (isEmpty(score) ? null : <p className={styles.row_item}>{score}</p>),
+			accessor : ({ total_score }) => (isEmpty(total_score) ? null
+				: <p className={styles.row_item}>{total_score}</p>),
 		},
 		{
 			id       : 'percentile',

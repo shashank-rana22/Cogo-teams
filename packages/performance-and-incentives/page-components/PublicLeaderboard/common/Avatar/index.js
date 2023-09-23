@@ -19,9 +19,9 @@ const SIZE_MAPPING = {
 };
 
 const getInitials = (name) => {
-	const parts = name.split(' ');
+	const parts = name?.split(' ');
 	let initials = '';
-	for (let i = 0; i < parts.length && initials.length < MAX_INITIAL_LENGTH; i += INCEREMENT) {
+	for (let i = 0; i < parts?.length && initials.length < MAX_INITIAL_LENGTH; i += INCEREMENT) {
 		if (!isEmpty(parts[i]) && parts[i] !== '') {
 			initials += parts[i][GLOBAL_CONSTANTS.zeroth_index];
 		}
@@ -30,9 +30,9 @@ const getInitials = (name) => {
 };
 
 function Avatar(props) {
-	const { user, size = 'lg' } = props;
+	const { user, size = 'lg', rank } = props;
 
-	const { picture, name, rank } = user;
+	const { picture, name } = user || {};
 
 	const SIZE_STYLE = SIZE_MAPPING[size];
 

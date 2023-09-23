@@ -1,16 +1,15 @@
 import { Button, Select } from '@cogoport/components';
 import { IcMArrowLeft } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
 
 import VIEW_OPTIONS from '../../configurations/view-type-options';
 
 import styles from './styles.module.css';
 
-function Header() {
-	const router = useRouter();
+function Header(props) {
+	const { view, setView } = props;
 
-	const [view, setView] = useState('locations');
+	const router = useRouter();
 
 	return (
 		<div className={styles.container}>

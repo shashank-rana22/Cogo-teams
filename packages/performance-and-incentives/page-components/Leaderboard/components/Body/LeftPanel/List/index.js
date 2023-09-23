@@ -3,9 +3,10 @@ import { Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
+import LoadingState from '../../../../../../common/LoadingState';
+
 import getListColumnMapping from './get-list-column-mapping';
 import ListItem from './ListItem';
-import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function List(props) {

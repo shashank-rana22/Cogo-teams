@@ -1,13 +1,17 @@
+import { useState } from 'react';
+
 import Body from './components/Body';
 import Header from './components/Header';
 import styles from './styles.module.css';
 
 function PublicDashboard() {
+	const [view, setView] = useState('kam_wise');
+
 	return (
 		<div className={styles.container}>
-			<Header />
+			<Header view={view} setView={setView} />
 
-			<Body />
+			<Body view={view} />
 		</div>
 	);
 }

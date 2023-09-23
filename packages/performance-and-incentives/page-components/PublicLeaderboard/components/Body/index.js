@@ -2,12 +2,14 @@ import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import styles from './styles.module.css';
 
-function Body() {
+function Body(props) {
+	const { view } = props;
+
 	return (
 		<div className={styles.container}>
-			<LeftPanel />
+			<LeftPanel view={view} />
 
-			<RightPanel />
+			<RightPanel view={view} />
 		</div>
 	);
 }
