@@ -2,9 +2,9 @@ import getListColumnMapping from './get-list-column-mapping';
 import styles from './styles.module.css';
 
 function List(props) {
-	const { table_list } = props;
+	const { tableList, view } = props;
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping();
+	const LIST_COLUMN_MAPPING = getListColumnMapping({ view });
 
 	return (
 		<div className={styles.list_container}>
@@ -19,7 +19,7 @@ function List(props) {
 			</div>
 
 			<div className={styles.list_body_container}>
-				{table_list.map((listItem) => (
+				{tableList.map((listItem) => (
 					<div key={listItem.id} className={styles.list_row}>
 						{LIST_COLUMN_MAPPING.map((columnItem) => {
 							const { key, flex, accessor } = columnItem;

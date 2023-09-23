@@ -1,34 +1,35 @@
-function useGetActivityCount() {
-	const data = {
-		engagement: {
-			call_received  : 55,
-			chats_attended : 122,
-			emails_sent    : 70,
-			missed_calls   : 0,
-			calls_made     : 90,
-			chats_missed   : 100,
+import { useAllocationRequest } from '@cogoport/request';
+import { useState, useEffect } from 'react';
+
+function useGetActivityCount(props) {
+	const { view } = props;
+
+	const [statParams, setStatParams] = useState({
+		filters: {
+			report_view_type: view,
 		},
-		accounts: {
-			new_activations   : 21,
-			reactivations     : 23,
-			kyc_verifications : 0,
-			true_activations  : 430,
-			retentions        : 1,
-		},
-		enrichment: {
-			contacts_enriched   : 32,
-			feedbacks_submitted : 0,
-		},
-		shipments: {
-			new_sids              : 21,
-			sids_cancelled        : 0,
-			quotations_sent       : 12,
-			new_services_unlocked : 43,
-		},
-	};
+	});
+
+	const [{ data, loading }] = useAllocationRequest({
+		url     : '/report_stats',
+		method  : 'GET',
+		authkey : 'get_agent_scoring_report_stats',
+		params  : statParams,
+	}, { manual: false });
+
+	useEffect(() => {
+		setStatParams((previousParams) => ({
+			...previousParams,
+			filters: {
+				...(previousParams.filters || {}),
+				report_view_type: view || undefined,
+			},
+		}));
+	}, [view]);
 
 	return {
 		data,
+		loading,
 	};
 }
 
