@@ -9,7 +9,7 @@ function Body(props) {
 		<div className={styles.container}>
 			<LeftPanel dateRange={dateRange} entity={entity} />
 
-			<RightPanel />
+			<RightPanel dateRange={dateRange} entity={entity} />
 		</div>
 
 	);

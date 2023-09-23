@@ -5,8 +5,10 @@ import RankingAndScoring from '../../../common/RankingAndScoring';
 import styles from './styles.module.css';
 import useGetAgentScoringReportStats from './useGetAgentScoringReportStats';
 
-function RightPanel() {
-	const { data } = useGetAgentScoringReportStats();
+function RightPanel(props) {
+	const { dateRange, entity } = props;
+
+	const { data } = useGetAgentScoringReportStats({ dateRange, entity });
 
 	const {
 		block_wise_stats: activityData = {},

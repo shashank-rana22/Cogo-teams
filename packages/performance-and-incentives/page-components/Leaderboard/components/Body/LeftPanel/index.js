@@ -13,7 +13,6 @@ function LeftPanel(props) {
 	const { dateRange, entity } = props;
 
 	const {
-
 		params,
 		setParams,
 		loading,
