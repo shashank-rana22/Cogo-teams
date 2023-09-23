@@ -88,9 +88,15 @@ function List({
 
 	const unreadDataList = unSeenMsg?.map((obj) => obj?.channel_details);
 	(unreadDataList || []).sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
-	const filteredUnreadList = (unreadDataList || []).filter(
-		(item) => item?.channel_name?.toLowerCase().includes(q?.toLowerCase()),
-	);
+
+	let filteredUnreadList = unreadDataList || [];
+
+	if (q) {
+		filteredUnreadList = (unreadDataList || []).filter(
+			(item) => item?.channel_name?.toLowerCase()?.includes(q?.toLowerCase()),
+		);
+	}
+
 	const channelList = showUnreadChat || status === 'unread' ? filteredUnreadList : listData;
 
 	const handleClick = () => {
