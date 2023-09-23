@@ -24,6 +24,17 @@
 	border-radius: 4px;
 }
 
+.scrollable_list {
+	position: relative;
+	max-height: 400px;
+	overflow: auto;
+
+	header {
+		position: sticky;
+		top: 0;
+	}
+}
+
 .header {
 	margin: -2px 24px 23px;
 }

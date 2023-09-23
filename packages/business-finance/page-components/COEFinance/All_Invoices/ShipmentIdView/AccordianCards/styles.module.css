@@ -125,9 +125,12 @@
 	width: 60%;
 	padding-right: 5px;
 	margin-right: 5px;
+	overflow: hidden;
 	font-size: 12px;
 	font-weight: 400;
 	color: #67c676;
+	text-overflow: clip;
+	white-space: nowrap;
 }
 
 .profitibility_value {
