@@ -75,7 +75,6 @@ function DashboardView(props) {
 					<RateAddition
 						dateString={dateString}
 						globalFilters={globalFilters}
-						setGlobalFilters={setGlobalFilters}
 					/>
 				</div>
 				<div className={cl`${styles.side_container} ${isHighlighted ? styles.minimise : ''}`}>
