@@ -51,7 +51,7 @@ function FieldArray({
 					<Button
 						size="sm"
 						themeType="accent"
-						onClick={() => append({})}
+						onClick={() => append()}
 					>
 						<div className={styles.add_button_text}>
 							+&nbsp;

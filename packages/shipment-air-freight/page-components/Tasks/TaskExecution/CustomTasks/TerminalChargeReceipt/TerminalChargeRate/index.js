@@ -65,7 +65,7 @@ function TerminalChargeRate({
 		updateLoading: taskUpdateLoading,
 	} = 	useUpdateShipmentAirFreightConsolidatedInvoice({ refetch, onCancel, task_id, invoiceData });
 
-	const { createShipmentAirCSRSheet, csrCreateLoading = false } = useCreateShipmentAirCSRSheet({
+	const { createShipmentAirCSRSheet = () => {}, csrCreateLoading = false } = useCreateShipmentAirCSRSheet({
 		mainServicesData,
 		setSheetData,
 	});
