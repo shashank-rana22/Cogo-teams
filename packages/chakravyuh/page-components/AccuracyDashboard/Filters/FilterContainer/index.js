@@ -68,10 +68,6 @@ function FilterContainer({
 		setVisible(false);
 	};
 
-	useEffect(() => {
-		onReset();
-	}, [service_type, onReset]);
-
 	return (
 		<div className={cl`${styles.main_container} ${!showText ? styles.small_view : ''}`}>
 			<div className={styles.header_row}>

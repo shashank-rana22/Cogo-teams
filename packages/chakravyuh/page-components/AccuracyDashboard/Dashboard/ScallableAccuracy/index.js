@@ -17,7 +17,7 @@ const ALL_TABS_LIST = [
 		name      : 'deviation',
 		title     : 'Deviation',
 		Component : Deviation,
-		heading   : 'Rate Deviation with Time (USD)',
+		heading   : 'Rate Deviation with Price (USD)',
 	},
 	{
 		key       : 'trend',
@@ -103,7 +103,6 @@ function ScallableAccuracy(props) {
 						</TabPanel>
 					);
 				})}
-
 			</Tabs>
 
 		</div>
