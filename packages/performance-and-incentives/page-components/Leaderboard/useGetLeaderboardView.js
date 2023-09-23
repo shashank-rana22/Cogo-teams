@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useEffect, useState } from 'react';
 
-import { getThisMonthStartDate } from '../../utils/start-date-functions';
+import { getTodayStartDate } from '../../utils/start-date-functions';
 
 function useGetLeaderboardView() {
 	const { partner } = useSelector(({ profile }) => profile);
@@ -12,7 +12,7 @@ function useGetLeaderboardView() {
 
 	const [entity, setEntity] = useState(partner.id);
 	const [dateRange, setDateRange] = useState({
-		startDate : getThisMonthStartDate(),
+		startDate : getTodayStartDate(),
 		endDate   : new Date(),
 	});
 
