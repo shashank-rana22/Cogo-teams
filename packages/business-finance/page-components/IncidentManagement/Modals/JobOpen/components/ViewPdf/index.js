@@ -4,8 +4,29 @@ import Image from 'next/image';
 
 import styles from './styles.module.css';
 
+const FIRST = 1;
+
 function ViewPdf({ row = {} }) {
 	const docUrl = row?.data?.jobOpenRequest?.documentUrls?.[GLOBAL_CONSTANTS.zeroth_index] || '';
+	const decodedUrl = decodeURI(docUrl);
+	const urlSplitByDot = decodedUrl?.split?.('.') || [];
+	const extension = urlSplitByDot?.[urlSplitByDot.length - FIRST] || '';
+	if (extension === 'zip') {
+		return (
+			<div className={styles.zip_text}>
+				The zip file has been downloaded.
+				<div>
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.ic_initial_state_svg}
+						width={500}
+						height={500}
+						alt="Empty-state"
+					/>
+				</div>
+			</div>
+
+		);
+	}
 	return (
 		isEmpty(docUrl) ? (
 			<Image

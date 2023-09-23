@@ -6,3 +6,9 @@
 .empty_state {
 	padding: 70px;
 }
+
+.zip_text {
+	padding: 50px;
+	font-size: 18px;
+	font-weight: 500;
+}
