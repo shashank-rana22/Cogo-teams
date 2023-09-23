@@ -80,7 +80,11 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 						<div className={styles.content}>
 							{isTrade && (
 								<div>
-									<div className={styles.label}>Select origin Location</div>
+									<div className={styles.label}>
+										{SINGLE_LOCATIONS_SERVICES.includes(isService)
+											? 'Location' : 'Select Origin Location'}
+
+									</div>
 									<SelectController
 										size="md"
 										control={control}
