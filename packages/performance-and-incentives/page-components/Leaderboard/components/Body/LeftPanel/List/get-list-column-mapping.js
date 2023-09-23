@@ -54,7 +54,8 @@ const getListColumnMapping = ({ params = {}, setParams = () => {} }) => {
 			key      : 'name',
 			flex     : 2,
 			Header   : <div className={styles.top_heading}>Name</div>,
-			accessor : ({ user = {} }) => (isEmpty(user.name) ? null : <div className={styles.name}>{user.name}</div>),
+			accessor : ({ user = {}, name = '' }) => ((isEmpty(user.name) && isEmpty(name))
+				? null : <div className={styles.name}>{user.name || name}</div>),
 		},
 		{
 			id   : 'total_score',

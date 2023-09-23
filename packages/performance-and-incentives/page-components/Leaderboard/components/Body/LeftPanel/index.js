@@ -31,19 +31,32 @@ function LeftPanel(props) {
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 
-	const handleClick = ({ id = '' }) => {
+	const handleClick = ({ id = '', location_id, channel }) => {
 		setParams((prev) => ({
 			...prev,
 			filters: {
 				...prev.filters,
-				report_type : NEXT_LEVEL_MAPPING[currLevel[GLOBAL_CONSTANTS.zeroth_index]],
-				user_rm_ids : [id],
+				report_type        : NEXT_LEVEL_MAPPING[currLevel[GLOBAL_CONSTANTS.zeroth_index]],
+				office_location_id : location_id,
+				channel,
+				report_view_type   : undefined,
+				user_rm_ids        : id ? [id] : undefined,
 			},
 		}));
 
 		setLevelStack((prev) => {
 			const curr = [...prev];
-			curr.push([currLevel[GLOBAL_CONSTANTS.zeroth_index], currLevel[GLOBAL_CONSTANTS.one]]);
+			let firstElement = '';
+
+			if (id) {
+				firstElement = currLevel[GLOBAL_CONSTANTS.zeroth_index];
+			} else if (channel) {
+				firstElement = 'channel';
+			} else if (location_id) {
+				firstElement = 'location';
+			}
+
+			curr.push([firstElement, currLevel[GLOBAL_CONSTANTS.one]]);
 
 			return curr;
 		});

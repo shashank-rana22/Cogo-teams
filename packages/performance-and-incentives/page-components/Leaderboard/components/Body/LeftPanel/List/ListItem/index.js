@@ -1,6 +1,7 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 
 import getListColumnMapping from '../get-list-column-mapping';
 
@@ -32,7 +33,11 @@ function ListItem(props) {
 			className={cl`${styles.list_row} ${boxShadow} ${actionsAllowed ? styles.hover : ''}`}
 			onClick={() => {
 				if (actionsAllowed) {
-					handleClick({ id: listItem.user?.id });
+					handleClick({
+						id          : listItem.user?.id,
+						location_id : !isEmpty(listItem.user) ? undefined : listItem.id,
+						channel     : !isEmpty(listItem.user) ? undefined : listItem.channel,
+					});
 				}
 			}}
 		>

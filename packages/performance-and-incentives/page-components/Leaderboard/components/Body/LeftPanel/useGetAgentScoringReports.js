@@ -1,10 +1,10 @@
 import { useDebounceQuery } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
-import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
+// import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
 
 const useGetScoringReports = (props) => {
 	const { dateRange, entity } = props;
@@ -16,7 +16,7 @@ const useGetScoringReports = (props) => {
 	const [view] = viewType.split('_');
 
 	const [searchValue, setSearchValue] = useState('');
-	const [currLevel, setCurrLevel] = useState([NEXT_LEVEL_MAPPING[`${view}_report`], '']);
+	const [currLevel, setCurrLevel] = useState([`${view}_report`, '']);
 	const [levelStack, setLevelStack] = useState([]);
 	const [isExpanded, setIsExpanded] = useState(false);
 
@@ -30,8 +30,8 @@ const useGetScoringReports = (props) => {
 		sort_type               : 'asc',
 		filters                 : {
 			// report_type      : currLevel[GLOBAL_CONSTANTS.zeroth_index],
-			report_view_type        : 'location_wise',
-			report_type             : currLevel[GLOBAL_CONSTANTS.zeroth_index],
+			report_view_type        : view === 'admin' ? 'location_wise' : `${view}_wise`,
+			// report_type             : currLevel[GLOBAL_CONSTANTS.zeroth_index],
 			q                       : searchQuery || undefined,
 			created_at_greater_than : dateRange?.startDate || undefined,
 			created_at_less_than    : dateRange?.endDate || undefined,
@@ -76,6 +76,7 @@ const useGetScoringReports = (props) => {
 		currentUserData,
 		isExpanded,
 		setIsExpanded,
+		viewType,
 	};
 };
 

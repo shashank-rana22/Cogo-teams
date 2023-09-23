@@ -45,8 +45,13 @@ function LeaderboardFilters(props) {
 			...prev,
 			filters: {
 				...prev.filters,
-				report_type : beforeLevel,
-				user_rm_ids : id ? [id] : undefined,
+
+				...(levelStack.length === OFFSET ? {
+					report_view_type : `${beforeLevel}_wise`,
+					report_type      : undefined,
+				} : { report_type: beforeLevel }),
+
+				user_rm_ids: id ? [id] : undefined,
 			},
 		}));
 
