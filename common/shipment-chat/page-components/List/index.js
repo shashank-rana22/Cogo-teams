@@ -41,9 +41,10 @@ function List({
 		total      : 0,
 		total_page : 0,
 	});
+
 	const [filters, setFilters] = useState({ page: 1, q: shipment_data?.serial_id });
 
-	const { page = 1, q } = filters || {};
+	const { page = 1, q = '' } = filters || {};
 
 	const getListPayload = {
 		page,
