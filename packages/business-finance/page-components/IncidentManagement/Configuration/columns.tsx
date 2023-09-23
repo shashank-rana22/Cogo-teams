@@ -196,16 +196,16 @@ export const columns = ({
 	},
 	{
 		Header   : t('incidentManagement:remark_header'),
-		accessor : 'remark',
+		accessor : 'financeRemark',
 		id       : 'remark',
 		Cell     : ({ row: { original } }) => {
-			const { remark = '' } = original || {};
+			const { financeRemark = '' } = original || {};
 
 			return (
 				<Tooltip
-					content={<div className={styles.tooltip}>{remark}</div>}
+					content={<div className={styles.tooltip}>{financeRemark}</div>}
 				>
-					<div className={styles.remark}>{remark}</div>
+					<div className={styles.remark}>{financeRemark}</div>
 				</Tooltip>
 			);
 		},

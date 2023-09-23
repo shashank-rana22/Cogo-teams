@@ -38,6 +38,7 @@ function Details({
 	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
 	const details = row?.data?.jobOpenRequest || {};
+	const { currency = '' } = details || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_box}>
@@ -91,31 +92,31 @@ function Details({
 				<div>
 					<div className={styles.heading}>Estimated Sell</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.estimatedSell)}
+						{getFormatAmount(details?.estimatedSell, currency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Sell</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.totalSell)}
+						{getFormatAmount(details?.totalSell, currency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Estimated Buy</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.estimatedBuy)}
+						{getFormatAmount(details?.estimatedBuy, currency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Buy</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.totalBuy)}
+						{getFormatAmount(details?.totalBuy, currency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Profit Margin</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.profitMargin)}
+						{getFormatAmount(details?.profitMargin, currency)}
 					</div>
 				</div>
 			</div>

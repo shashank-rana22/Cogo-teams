@@ -17,7 +17,7 @@ function ViewPdf({ row = {} }) {
 				The zip file has been downloaded.
 				<div>
 					<Image
-						src={GLOBAL_CONSTANTS.image_url.ic_initial_state_svg}
+						src={GLOBAL_CONSTANTS.image_url.download_icon_svg}
 						width={500}
 						height={500}
 						alt="Empty-state"
