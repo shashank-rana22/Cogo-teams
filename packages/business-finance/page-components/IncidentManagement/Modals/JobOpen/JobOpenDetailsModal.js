@@ -32,17 +32,6 @@ function JobOpenDetailsModal({ row = {}, setDetailsModal = () => {}, refetch = (
 		sellData,
 		buyData,
 	} = useGetShipmentCostSheet({ shipmentId, jobNumber, JOB_SOURCE, JOB_TYPE });
-	console.log({
-		preTaxData,
-		postTaxData,
-		preTaxLoading,
-		postTaxLoading,
-		selldata,
-		buydata,
-		apiloading,
-		sellData,
-		buyData,
-	});
 	return (
 		<div className={styles.containerDisplay}>
 			<div className={styles.heading}>
