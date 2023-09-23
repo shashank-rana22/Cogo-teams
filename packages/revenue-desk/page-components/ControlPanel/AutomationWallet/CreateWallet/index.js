@@ -11,6 +11,10 @@ import { filterOption } from '../../../../helpers/filterOptionMapping';
 import useCreateRevenueDeskWallet from '../../hooks/useCreateRevenueDeskWallet';
 import styles from '../../styles.module.css';
 
+const DOMESTIC_SERVICES = ['ftl_freight_service', 'haulage_freight_service', 'ltl_freight_service'];
+const SINGLE_LOCATIONS_SERVICES = ['fcl_customs_service',
+	'lcl_customs_service', 'air_customs_service', 'fcl_cfs_service'];
+
 function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetch = () => {} }) {
 	const [submitValue, setSubmitValue] = useState(false);
 
@@ -34,6 +38,15 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 		setSubmitValue(data);
 		if (data?.wallet_amount !== undefined) createRevenueDeskWallet(data);
 	};
+	const TRADE_TYPES = [
+		{ label: 'Import', value: 'import' },
+		{ label: 'Export', value: 'export' },
+	];
+
+	if (DOMESTIC_SERVICES.includes(isService)) {
+		TRADE_TYPES.push({ label: 'Domestic', value: 'domestic' });
+	}
+	const name = SINGLE_LOCATIONS_SERVICES.includes(isService) ? 'location_id' : 'origin_location_id';
 
 	return (
 		<Modal size="md" show={createWallet} onClose={() => setCreateWallet(!createWallet)} placement="top">
@@ -54,7 +67,11 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 							{isService && (
 								<div>
 									<div className={styles.label}>Select Trade Type *</div>
-									<RadioGroupController control={control} {...trade} style={{ width: '250px' }} />
+									<RadioGroupController
+										control={control}
+										{...trade}
+										options={TRADE_TYPES}
+									/>
 									<div className={styles.errors}>{errors?.trade_type?.message}</div>
 								</div>
 							)}
@@ -67,14 +84,14 @@ function CreateWallet({ createWallet = false, setCreateWallet = () => {}, refetc
 									<SelectController
 										size="md"
 										control={control}
-										name="origin_location_id"
+										name={name}
 										{...locationOptions}
 										isClearable
 										style={{ width: '250px' }}
 									/>
 								</div>
 							)}
-							{isOrigin && (
+							{isOrigin && !SINGLE_LOCATIONS_SERVICES.includes(isService) && (
 								<div>
 									<div className={styles.label}>Select Destination Location</div>
 									<SelectController
