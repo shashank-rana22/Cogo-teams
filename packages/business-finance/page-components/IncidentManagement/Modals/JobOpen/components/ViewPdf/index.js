@@ -20,7 +20,7 @@ function ViewPdf({ row = {} }) {
 						src={GLOBAL_CONSTANTS.image_url.download_icon_svg}
 						width={500}
 						height={500}
-						alt="Empty-state"
+						alt="Download icon"
 					/>
 				</div>
 			</div>
@@ -33,7 +33,7 @@ function ViewPdf({ row = {} }) {
 				src={GLOBAL_CONSTANTS.image_url.list_no_result_found}
 				width={600}
 				height={500}
-				alt="No list found"
+				alt="No list found icon"
 				className={styles.empty_state}
 			/>
 		)
