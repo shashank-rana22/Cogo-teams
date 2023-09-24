@@ -161,7 +161,7 @@ function ConcorModal({
 									disabled={!isEditable}
 									placeholder={t('incidentManagement:remarks_placeholder')}
 									onChange={(value: string) => setInputValues({ ...inputValues, remarks: value })}
-									style={{ height: '100px', margin: '0 12px 12px 0' }}
+									style={{ height: '80px', margin: '0 12px 12px 0' }}
 								/>
 							</div>
 						</div>

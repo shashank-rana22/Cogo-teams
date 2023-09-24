@@ -3,19 +3,12 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'react-i18next';
 
-interface Props {
-	id?: string;
-	remarks?: string;
-	setShowModal?: (p: any) => void;
-	refetch?: Function;
-}
-
 const usePostJobOpenRemark = ({
 	id = '',
 	remarks = '',
 	setShowModal = () => {},
 	refetch = () => {},
-}: Props) => {
+}) => {
 	const { t } = useTranslation(['incidentManagement']);
 
 	const { user_id: userId = '' } = useSelector(({ profile }) => ({
@@ -31,7 +24,7 @@ const usePostJobOpenRemark = ({
 		{ manual: true },
 	);
 
-	const onSubmit = async (status: string) => {
+	const onSubmit = async (status) => {
 		try {
 			const payload = {
 				remark    : remarks,
@@ -47,7 +40,7 @@ const usePostJobOpenRemark = ({
 				Toast.success(t('incidentManagement:request_updated_successfully_message'));
 			}
 
-			setShowModal(false);
+			setShowModal(null);
 
 			refetch();
 		} catch (err) {

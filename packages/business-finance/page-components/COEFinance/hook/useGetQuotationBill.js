@@ -8,7 +8,7 @@ const QUOTATION_TYPE_MAPPING = {
 	buyQuote  : 'BUY',
 };
 
-function useGetQuotation({ jobNumber = '', amountTab = '' }) {
+function useGetQuotation({ jobNumber = '', amountTab = '', isCheckoutQuote = false }) {
 	const [
 		{ data: apiData, loading: quotationApiLoading },
 		trigger,
@@ -34,10 +34,12 @@ function useGetQuotation({ jobNumber = '', amountTab = '' }) {
 		}
 	};
 
-	// getFormattedData -> filtering 'isDeleted' data rows and combining lineItems array inside each row
-	const getFormattedData = (dataList) => (dataList || [])
-		.filter((item) => item?.isDeleted === false)
-		?.flatMap((item) => item?.lineItems || []);
+	const getFormattedData = (dataList) => {
+		if (isCheckoutQuote && amountTab === 'sellQuote') {
+			return dataList?.firstSellQuotationLineItems;
+		}
+		return dataList?.lineItems;
+	};
 
 	return {
 		quotationLoading : quotationApiLoading,
@@ -46,4 +48,5 @@ function useGetQuotation({ jobNumber = '', amountTab = '' }) {
 		getQuotationData,
 	};
 }
+
 export default useGetQuotation;
