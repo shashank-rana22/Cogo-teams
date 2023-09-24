@@ -75,6 +75,7 @@ function ChannelControl() {
 				<Button
 					onClick={() => handleSave(list)}
 					disabled={updateChannelLoading}
+					className={styles.btn}
 				>
 					SAVE
 				</Button>

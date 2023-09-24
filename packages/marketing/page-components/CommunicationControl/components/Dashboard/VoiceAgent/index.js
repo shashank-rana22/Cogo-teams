@@ -47,6 +47,12 @@ function VoiceAgent() {
 
 	const { servetalAgent = () => {}, createServetalAgentloading = '' } = useCreateServetalAgent({ listServetalAgent });
 
+	const cols = columns({
+		checkedRowsSerialId,
+		setCheckedRowsSerialId,
+		listServetalAgent,
+	});
+
 	const loadingColumn = [
 		{
 			Header   : 'LOADING...',
@@ -56,11 +62,6 @@ function VoiceAgent() {
 		},
 	];
 
-	const cols = columns({
-		checkedRowsSerialId,
-		setCheckedRowsSerialId,
-		listServetalAgent,
-	});
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>

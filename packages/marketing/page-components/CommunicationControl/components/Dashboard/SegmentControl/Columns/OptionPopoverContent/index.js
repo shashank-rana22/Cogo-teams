@@ -1,19 +1,23 @@
 import { Button } from '@cogoport/components';
+import { useState } from 'react';
+
+import AddEditRule from '../../AddEditRule';
 
 function OptionPopoverContent(
 	{
-		item = {}, setShowDeleteModal = () => {}, setOperationType = () => {},
-		setVisible = () => {}, setItemData = () => {}, setShowAddModal = () => {},
+		item = {}, setShowDeleteModal = () => {}, updateSegment = () => {},
+		setVisible = () => {}, setItemData = () => {}, updateLoading = '',
 	},
 ) {
+	const [showModal, setShowModal] = useState(false);
+
 	return (
 		<div>
 			<Button
 				style={{ marginBottom: '2px', minWidth: '105px' }}
 				themeType="secondary"
 				onClick={() => {
-					setShowAddModal(true);
-					setOperationType('edit');
+					setShowModal(true);
 					setVisible(false);
 				}}
 			>
@@ -30,6 +34,14 @@ function OptionPopoverContent(
 			>
 				DEACTIVATE
 			</Button>
+			<AddEditRule
+				showAddModal={showModal}
+				setShowAddModal={setShowModal}
+				submit={updateSegment}
+				loading={updateLoading}
+				item={item}
+				title="Edit"
+			/>
 		</div>
 	);
 }

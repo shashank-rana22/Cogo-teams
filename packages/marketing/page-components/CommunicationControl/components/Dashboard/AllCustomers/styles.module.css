@@ -46,3 +46,17 @@
 .filter_btn_container {
 	display: flex;
 }
+.popover_container{
+	position: absolute;
+	right: 0px;
+	top:10px;
+	:global{
+		.ui_popover_container {
+			width: 300px !important;
+		}
+		.ui_select_input_control{
+			max-width: 196px !important;
+		}
+	}
+}
+

@@ -2,6 +2,7 @@ import { Table, Placeholder } from '@cogoport/components';
 import { useState } from 'react';
 
 import TableView from '../../../common/TableView';
+import useCreateSegment from '../../../hooks/useCreateSegment';
 import useGetSegment from '../../../hooks/useGetSegment';
 import useUpdateSegment from '../../../hooks/useUpdateSegment';
 
@@ -25,16 +26,19 @@ function SegmentControl() {
 		setFilters = () => {},
 	} = useGetSegment({ statusFilter, pagination });
 
+	const { createSegment = () => {}, createSegmentLoading = '' } = useCreateSegment({ getSegmentData });
+
+	const { updateSegment = () => {}, updateLoading = '' } = useUpdateSegment({ getSegmentData });
+
 	const cols = columns({
 		page      : data?.page,
 		pageLimit : data?.page_limit,
 		setShowDeleteModal,
-		setShowAddModal,
 		setItemData,
 		statusFilter,
+		updateSegment,
+		updateLoading,
 	});
-
-	const { updateSegment = () => {} } = useUpdateSegment({ getSegmentData });
 
 	const loadingColumn = [
 		{
@@ -79,6 +83,9 @@ function SegmentControl() {
 			<AddEditRule
 				showAddModal={showAddModal}
 				setShowAddModal={setShowAddModal}
+				submit={createSegment}
+				loading={createSegmentLoading}
+				title="Add"
 			/>
 		</div>
 	);

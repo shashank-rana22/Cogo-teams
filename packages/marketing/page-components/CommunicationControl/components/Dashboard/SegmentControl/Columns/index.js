@@ -11,8 +11,8 @@ const INDEX_OFFSET = 1;
 
 function PopoverItem(
 	{
-		item = {}, setShowDeleteModal = () => {}, setOperationType = () => {},
-		setItemData = () => {}, setShowAddModal = () => {},
+		item = {}, setShowDeleteModal = () => {}, setItemData = () => {},
+		updateSegment = () => {}, updateLoading = '',
 	},
 ) {
 	const [visible, setVisible] = useState(false);
@@ -25,10 +25,10 @@ function PopoverItem(
 				<OptionPopoverContent
 					item={item}
 					setShowDeleteModal={setShowDeleteModal}
-					setOperationType={setOperationType}
 					setVisible={setVisible}
 					setItemData={setItemData}
-					setShowAddModal={setShowAddModal}
+					updateSegment={updateSegment}
+					updateLoading={updateLoading}
 				/>
 			)}
 		>
@@ -40,7 +40,7 @@ function PopoverItem(
 const columns = (
 	{
 		page = 1, pageLimit = 10, setShowDeleteModal = () => {}, statusFilter = '',
-		setOperationType = () => {}, setItemData = () => {}, setShowAddModal = () => {},
+		setItemData = () => {}, updateSegment = () => {}, updateLoading = '',
 	},
 ) => {
 	const dateTime = (item) => (
@@ -103,9 +103,9 @@ const columns = (
 				<PopoverItem
 					item={item}
 					setShowDeleteModal={setShowDeleteModal}
-					setOperationType={setOperationType}
 					setItemData={setItemData}
-					setShowAddModal={setShowAddModal}
+					updateSegment={updateSegment}
+					updateLoading={updateLoading}
 				/>
 			),
 		},

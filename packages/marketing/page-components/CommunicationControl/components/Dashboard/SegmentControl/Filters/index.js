@@ -49,16 +49,16 @@ function Filters({ statusFilter = '', setStatusFilter = () => {}, setShowAddModa
 			<div className={styles.btn_container}>
 				<Button
 					onClick={() => setShowAddModal(true)}
-					style={{ marginRight: 5 }}
+					className={styles.btn}
 				>
 					ADD RULES
 				</Button>
-				<div className={styles.popver}>
+				<div className={styles.popver_container}>
 					<Popover
 						placement="bottom"
 						visible={isOpen}
 						onClickOutside={() => { setIsOpen(false); }}
-						content={(
+						render={(
 							<div>
 								<div className={styles.filter_header}>
 									<h3>Filters</h3>
@@ -90,6 +90,7 @@ function Filters({ statusFilter = '', setStatusFilter = () => {}, setShowAddModa
 						<div>
 							<Button
 								onClick={() => { setIsOpen((prev) => !prev); }}
+								className={styles.btn}
 							>
 								FILTER BY
 								<IcMFilter style={{ marginLeft: 4 }} />

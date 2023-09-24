@@ -1,0 +1,26 @@
+.container {
+	margin-top: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.company {
+	display: flex;
+}
+.name {
+	margin-left: 8px;
+}
+.logo{
+	border: 2px solid #f37066;
+	background-color: #f3d5d5;
+	width: 30px;
+	height: 30px;
+	border-radius: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18px;
+	font-weight: 500;
+	padding: 1px;
+	text-transform: uppercase;
+}

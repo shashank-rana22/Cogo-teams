@@ -17,6 +17,7 @@ const FIRST_PAGE = 1;
 function AllCustomers() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [pagination, setPagination] = useState(FIRST_PAGE);
+	const [visible, setVisible] = useState(false);
 	const { data = {}, loading = false, setFilters = () => {} } = useGetCustomers({ pagination });
 	const cols = columns({ data });
 
@@ -55,56 +56,68 @@ function AllCustomers() {
 	}
 
 	return (
-		<div className={styles.container}>
-			<Popover
-				placement="bottom"
-				visible={isOpen}
-				onClickOutside={() => { setIsOpen(false); }}
-				content={(
-					<div>
-						<div className={styles.filter_header}>
-							<h3>Filters</h3>
-							<div className={styles.filter_btn_container}>
-								<Button
-									themeType="secondary"
-									size="sm"
-									style={{ marginRight: 5 }}
-									onClick={() => { onReset(); }}
-								>
-									RESET FORM
-								</Button>
-								<Button
-									size="sm"
-									onClick={() => { onSubmit(); }}
-								>
-									SHOW RESULTS
-								</Button>
+		<>
+			<div className={styles.container}>
+				<div className={styles.popover_container}>
+					<Popover
+						placement="bottom"
+						visible={isOpen}
+						onClickOutside={() => { setIsOpen(false); }}
+						content={(
+							<div>
+								<div className={styles.filter_header}>
+									<h3>Filters</h3>
+									<div className={styles.filter_btn_container}>
+										<Button
+											themeType="secondary"
+											size="sm"
+											style={{ marginRight: 5 }}
+											onClick={() => { onReset(); }}
+										>
+											RESET FORM
+										</Button>
+										<Button
+											size="sm"
+											onClick={() => { onSubmit(); }}
+										>
+											SHOW RESULTS
+										</Button>
+									</div>
+								</div>
+								<Layout
+									control={control}
+									controls={getControls}
+									errors={errors}
+								/>
 							</div>
-						</div>
-						<Layout
-							control={control}
-							controls={getControls}
-							errors={errors}
-						/>
-					</div>
-				)}
-			>
-				<Button
-					className={styles.filter}
-					onClick={() => { setIsOpen((prev) => !prev); }}
-				>
-					FILTER BY
-					<IcMFilter style={{ marginLeft: 5 }} />
-				</Button>
-			</Popover>
-			<TableView
-				columns={cols}
-				data={data}
-				pagination={pagination}
-				setPagination={setPagination}
-				loading={loading}
-			/>
-		</div>
+						)}
+					>
+						<Button
+							onClick={() => { setIsOpen(!isOpen); }}
+						>
+							FILTER BY
+							<IcMFilter style={{ marginLeft: 5 }} />
+						</Button>
+					</Popover>
+				</div>
+
+				<TableView
+					columns={cols}
+					data={data}
+					pagination={pagination}
+					setPagination={setPagination}
+					loading={loading}
+				/>
+			</div>
+			<Button onClick={() => setVisible(!visible)}>
+				Click to open popover
+				<Popover
+					placement="bottom"
+					render="helo"
+					visible={visible}
+				/>
+			</Button>
+		</>
 	);
 }
 export default AllCustomers;

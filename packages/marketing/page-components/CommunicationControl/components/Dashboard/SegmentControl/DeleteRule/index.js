@@ -25,7 +25,7 @@ function DeleteRule(
 				</Button>
 				<Button
 					onClick={() => {
-						updateSegment({ id: itemData?.id, type: 'deactivate' });
+						updateSegment({ id: itemData?.id, status: 'deactive' });
 					}}
 				>
 					YES

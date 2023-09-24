@@ -10,13 +10,11 @@ function AssignRoleModal({
 	const { updateRoles = () => {}, loading = '' } = useUpdateCommunicatonRoles({
 		getChannelConfig,
 		setShow,
-		// channel,
-		// roleIds: values,
 	});
 	const PAYLOAD = {
 		channel,
 		credential_id : itemId,
-		roleIds       : values,
+		role_ids      : values,
 	};
 	const submitHandler = () => {
 		updateRoles(PAYLOAD);

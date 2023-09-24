@@ -17,10 +17,19 @@
 	display: flex;
 }
 
-.popver {
+.btn {
+	margin-left: 5px;
+	font-weight: 700;
+}
+
+.popver_container {
 	:global {
 		.ui_popover_container {
 			width: 300px !important;
 		}
+		.ui_select_input_control{
+			max-width: 196px !important;
+		}
+		
 	}
 }

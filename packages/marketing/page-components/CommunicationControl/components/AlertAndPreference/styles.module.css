@@ -1,0 +1,21 @@
+.container {
+    margin-top: 12px;
+	width: 75%;
+	padding-bottom: 20px;
+}
+
+.heading {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.title {
+    margin-bottom: 0;
+    margin-left: 8px;
+}
+.arrow_back {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+}

@@ -14,6 +14,11 @@ const marketing = {
 		navigation : 'marketing-marketing_communication_control',
 		isMainNav  : true,
 	},
+	'/[partner_id]/marketing/communication-control/[company_id]': {
+		layoutType : 'no_header',
+		navigation : 'marketing-marketing_communication_control',
+		isMainNav  : false,
+	},
 };
 
 export default marketing;

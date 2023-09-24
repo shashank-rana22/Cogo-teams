@@ -16,6 +16,10 @@
 	align-items: center;
 }
 
+.btn {
+	font-weight: 700;
+}
+
 .table_container {
 	width: 100%;
 	padding: 12px 4px;
