@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { Button, Checkbox, cl, DateRangepicker, Select } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { startCase, upperCase, isEmpty } from '@cogoport/utils';
@@ -27,6 +26,19 @@ const TRADE_TYPE_OPTIONS = [
 	{ label: 'Import', value: 'import' },
 	{ label: 'Export', value: 'export' },
 ];
+
+const handleShipmentTypeChange = ({ setPopoverFilter = () => {}, popoverFilter = {}, val }) => {
+	setPopoverFilter({ ...popoverFilter, shipment_type: val });
+};
+
+const handleTradeTypeChange = ({ setPopoverFilter = () => {}, popoverFilter = {}, dynamicShipmentType, val }) => {
+	setPopoverFilter({
+		...popoverFilter,
+		[`${dynamicShipmentType}_service`]: {
+			trade_type: val,
+		},
+	});
+};
 
 function FilterBy({
 	setPopoverFilter = () => {},
@@ -162,11 +174,9 @@ function FilterBy({
 					</div>
 				</div>
 			) : null}
-
 			{date_type ? (
 				<div className={styles.filter_container}>
 					<div className={styles.filter_heading}>{upperCase(date_type)}</div>
-
 					<div className={styles.date_range_container}>
 						{Object.keys(DATE_RANGE_MAPPING).map((dateKey) => (
 							<div
@@ -186,7 +196,6 @@ function FilterBy({
 								</Button>
 							</div>
 						))}
-
 						<div className={cl`${dateRange === 'custom' ? styles.active : styles.inactive}
 							${styles.filter_by_buttons}`}
 						>
@@ -204,7 +213,6 @@ function FilterBy({
 							</Button>
 						</div>
 					</div>
-
 					{dateRange === 'custom' ? (
 						<div className={styles.filter_container}>
 							<DateRangepicker
@@ -216,20 +224,16 @@ function FilterBy({
 					) : null}
 				</div>
 			) : null}
-
 			<div className={styles.channel_partner}>
 				<div className={styles.filter_heading}>Shipment Type</div>
 				<Select
 					options={SHIPMENT_TYPE_OPTIONS}
 					value={popoverFilter?.shipment_type}
-					onChange={(val) => {
-						setPopoverFilter({ ...popoverFilter, shipment_type: val });
-					}}
+					onChange={(val) => { handleShipmentTypeChange({ setPopoverFilter, popoverFilter, val }); }}
 					size="sm"
 					isClearable
 				/>
 			</div>
-
 			{possibleFilters?.includes('source') ? (
 				<div className={styles.channel_partner}>
 					<div className={styles.filter_heading}>Source</div>
@@ -242,7 +246,6 @@ function FilterBy({
 					/>
 				</div>
 			) : null}
-
 			{possibleFilters?.includes('payment_term') ? (
 				<div className={styles.channel_partner}>
 					<div className={styles.filter_heading}>Payment Type</div>
@@ -268,7 +271,6 @@ function FilterBy({
 					/>
 				</div>
 			) : null}
-
 			{
 				!isEmpty(popoverFilter?.shipment_type) && (
 					<div className={styles.channel_partner}>
@@ -277,12 +279,7 @@ function FilterBy({
 							options={TRADE_TYPE_OPTIONS}
 							value={popoverFilter?.[`${dynamicShipmentType}_service`]?.trade_type}
 							onChange={(val) => {
-								setPopoverFilter({
-									...popoverFilter,
-									[`${dynamicShipmentType}_service`]: {
-										trade_type: val,
-									},
-								});
+								handleTradeTypeChange({ setPopoverFilter, popoverFilter, dynamicShipmentType, val });
 							}}
 							size="sm"
 							isClearable

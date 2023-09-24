@@ -39,7 +39,9 @@ export default function useShipmentBack() {
 		if (isBackAllowed) {
 			router.back();
 		} else if (version === 'v2') {
-			router.push(navToRedirect?.href, navToRedirect?.as);
+			const REMOVE_V2 = '/v2';
+			const routerPushURL = navToRedirect?.href.slice(REMOVE_V2.length);
+			router.push(routerPushURL, routerPushURL);
 		} else {
 			const newUrl = `${window.location.origin}/${router?.query?.partner_id}/${navToRedirect.href}`;
 
