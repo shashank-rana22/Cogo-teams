@@ -133,6 +133,17 @@ export const columns = ({
 		Header   : t('incidentManagement:request_sub_type_header'),
 		accessor : 'incidentSubtype',
 		id       : 'request_sub_type',
+		Cell     : ({ row: { original } }) => {
+			const { incidentSubtype = '' } = original || {};
+			return (
+				<Tooltip
+					interactive
+					content={(incidentSubtype.replace(/_/g, ' '))}
+				>
+					<div className={styles.wrapper}>{(incidentSubtype.replace(/_/g, ' '))}</div>
+				</Tooltip>
+			);
+		},
 	},
 	{
 		Header   : t('incidentManagement:source_header'),
