@@ -6,6 +6,12 @@
 }
 
 .filter_icon {
+	width: 22px;
+	height: 22px;
+	cursor: pointer;
+}
+
+.edit_icon {
 	width: 25px;
 	height: 25px;
 	cursor: pointer;

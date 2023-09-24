@@ -129,7 +129,7 @@ async function prevTeamRooms({
 }
 
 function useFetchTeamsRoom({ firestore = {} }) {
-	const loggedInUserId = useSelector(({ profile }) => profile.user.id);
+	const loggedInUserId = useSelector(({ profile }) => profile?.user?.id);
 
 	const snapshotRef = useRef({});
 

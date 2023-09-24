@@ -21,11 +21,19 @@ function Teams(teamsProps) {
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 
 	const {
-		unpinnedChats,
+		unpinnedChats = [],
 		// handleScroll, add  on scroll
-		pinnedChats,
+		// pinnedChats = [],
 		loading,
 	} = useFetchTeamsRoom({ firestore });
+
+	const pinnedChats = [
+		{
+			id: '1',
+
+		},
+	];
+	const isPinnedChatEmpty = isEmpty(pinnedChats);
 
 	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
 
@@ -42,31 +50,35 @@ function Teams(teamsProps) {
 			</div>
 
 			<div className={styles.list_container}>
-				{/* {!loading && isEmpty(pinnedChats) ? (
+				{!loading && isEmpty(pinnedChats) ? (
 					<div className={styles.empty_state}>
 						No Groups Yet...
 					</div>
-				) : null } */}
+				) : null }
 
-				<div
-					role="presentation"
-					className={styles.pinned_chat_flex}
-					onClick={() => setOpenPinnedChats((prev) => !prev)}
-				>
-					<ActiveIcon className={styles.icon} />
-					<div className={styles.pin_text}>pinned chats</div>
-				</div>
+				{!isPinnedChatEmpty && (
+					<>
+						<div
+							role="presentation"
+							className={styles.pinned_chat_flex}
+							onClick={() => setOpenPinnedChats((prev) => !prev)}
+						>
+							<ActiveIcon className={styles.icon} />
+							<div className={styles.pin_text}>pinned chats</div>
+						</div>
 
-				{openPinnedChats && (
-					<div className={styles.pinned_chats_div}>
-						{(pinnedChats || []).map((singleGroup) => (
-							<GroupCard
-								singleGroup={singleGroup}
-								key={singleGroup}
-								teamsProps={teamsProps}
-							/>
-						))}
-					</div>
+						{openPinnedChats && (
+							<div className={styles.pinned_chats_div}>
+								{(pinnedChats || []).map((singleGroup) => (
+									<GroupCard
+										singleGroup={singleGroup}
+										key={singleGroup}
+										teamsProps={teamsProps}
+									/>
+								))}
+							</div>
+						)}
+					</>
 				)}
 
 				{!loading && !isEmpty(unpinnedChats) ? (

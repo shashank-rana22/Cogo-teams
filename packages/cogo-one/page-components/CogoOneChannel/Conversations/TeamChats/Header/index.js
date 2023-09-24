@@ -1,5 +1,7 @@
-import { Button, Popover } from '@cogoport/components';
+/* eslint-disable custom-eslint/variables-name-check */
+import { Button, Popover, Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMCall } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import React, { useState } from 'react';
 
@@ -8,16 +10,44 @@ import styles from './styles.module.css';
 
 function Header({ viewType = '' }) {
 	const [showPopover, setShowPopover] = useState(false);
+	const type = 'single';
+
+	const USER_AVATAR_MAPPING = {
+		single: (<Avatar
+			personName="Lachiram naik"
+			alt="img"
+			disabled={false}
+			size="40px"
+			className={styles.styled_avatar}
+		/>),
+		group: (<Image
+			src={GLOBAL_CONSTANTS.image_url.teams}
+			alt="group"
+			width={40}
+			height={40}
+		/>),
+	};
+
+	const ACTION_ICON_MAPPING = {
+		single: (
+			<IcMCall
+				width={22}
+				height={22}
+				fill="#777"
+			/>
+		),
+		group: (<Image
+			src={GLOBAL_CONSTANTS.image_url.video_call}
+			alt="group"
+			width={22}
+			height={22}
+		/>),
+	};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.group}>
-				<Image
-					src={GLOBAL_CONSTANTS.image_url.teams}
-					alt="group"
-					width={40}
-					height={40}
-				/>
+				{USER_AVATAR_MAPPING[type]}
 				<div className={styles.info}>
 					<div className={styles.group_name}>
 						Purnendu & Ankur
@@ -28,6 +58,9 @@ function Header({ viewType = '' }) {
 				</div>
 			</div>
 			<div className={styles.group}>
+				<Button themeType="tertiary">
+					{ACTION_ICON_MAPPING[type]}
+				</Button>
 				<Popover
 					placement="bottom"
 					visible={showPopover}
@@ -45,14 +78,6 @@ function Header({ viewType = '' }) {
 					</Button>
 				</Popover>
 
-				<Button themeType="tertiary">
-					<Image
-						src={GLOBAL_CONSTANTS.image_url.video_call}
-						alt="group"
-						width={22}
-						height={22}
-					/>
-				</Button>
 			</div>
 		</div>
 	);
