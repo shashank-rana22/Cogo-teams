@@ -19,16 +19,26 @@ const useGetScoringReports = (props) => {
 	const [currLevel, setCurrLevel] = useState([`${view}_report`, '']);
 	const [levelStack, setLevelStack] = useState([]);
 	const [isExpanded, setIsExpanded] = useState(false);
+	const [isChannel, setIsChannel] = useState(false);
+
+	let report_view_type;
+
+	if (view === 'admin') {
+		report_view_type = isChannel ? 'channel_wise' : 'location_wise';
+	} else {
+		report_view_type = `${view}_wise`;
+	}
 
 	const [params, setParams] = useState({
-		page               : 1,
-		page_limit         : 10,
-		user_data_required : true,
-		role_data_required : true,
-		sort_by            : 'rank',
-		sort_type          : 'asc',
-		filters            : {
-			report_view_type: view === 'admin' ? 'location_wise' : `${view}_wise`,
+		page                    : 1,
+		page_limit              : 10,
+		user_data_required      : true,
+		role_data_required      : true,
+		sort_by                 : 'rank',
+		sort_type               : 'asc',
+		add_current_user_report : view !== 'admin',
+		filters                 : {
+			report_view_type,
 
 			q                       : searchQuery || undefined,
 			created_at_greater_than : dateRange?.startDate || undefined,
@@ -59,6 +69,16 @@ const useGetScoringReports = (props) => {
 		}));
 	}, [searchQuery, dateRange, entity]);
 
+	useEffect(() => {
+		setParams((prev) => ({
+			...prev,
+			filters: {
+				...prev.filters,
+				report_view_type: isChannel ? 'channel_wise' : 'location_wise',
+			},
+		}));
+	}, [isChannel]);
+
 	return {
 		params,
 		setParams,
@@ -75,6 +95,8 @@ const useGetScoringReports = (props) => {
 		isExpanded,
 		setIsExpanded,
 		viewType,
+		isChannel,
+		setIsChannel,
 	};
 };
 

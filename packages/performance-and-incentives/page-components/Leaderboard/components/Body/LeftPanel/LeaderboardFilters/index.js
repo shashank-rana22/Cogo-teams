@@ -10,11 +10,6 @@ import useFilterContent from './useFilterContent';
 
 const OFFSET = 1;
 
-const EXCLUDE_USER_DATA = [
-	'location_wise',
-	'channel_wise',
-];
-
 function conditionalWrapper({ condition, wrapper, children }) {
 	return condition ? wrapper(children) : children;
 }
@@ -56,6 +51,8 @@ function LeaderboardFilters(props) {
 		setCurrLevel,
 		setLevelStack,
 		isExpanded,
+		isChannel,
+		setIsChannel,
 	} = props;
 
 	const {
@@ -75,7 +72,7 @@ function LeaderboardFilters(props) {
 	const handleBack = () => {
 		setParams((prev) => ({
 			...prev,
-			...((levelStack.length === OFFSET && EXCLUDE_USER_DATA.includes(beforeLevel))
+			...((levelStack.length === OFFSET)
 				? { add_current_user_report: false } : {}),
 			filters: {
 				...prev.filters,
@@ -83,8 +80,10 @@ function LeaderboardFilters(props) {
 				user_rm_ids: id ? [id] : undefined,
 
 				...(levelStack.length === OFFSET ? {
-					report_view_type : beforeLevel,
-					report_type      : undefined,
+					report_view_type   : isChannel ? 'channel_wise' : 'location_wise',
+					office_location_id : undefined,
+					channel            : undefined,
+					report_type        : undefined,
 				} : getFilters({ beforeLevel, id })),
 			},
 		}));
@@ -109,13 +108,10 @@ function LeaderboardFilters(props) {
 						size="md"
 						onLabel="by Channel"
 						offLabel="by Location"
-						onChange={(e) => setParams((prev) => ({
-							...prev,
-							filters: {
-								...prev.filters,
-								report_view_type: e?.target?.checked ? 'channel_wise' : 'location_wise',
-							},
-						}))}
+						checked={isChannel}
+						onChange={() => {
+							setIsChannel((prev) => !prev);
+						}}
 					/>
 				) : null}
 

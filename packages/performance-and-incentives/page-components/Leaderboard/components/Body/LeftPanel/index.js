@@ -1,6 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
 
 import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
 
@@ -28,6 +27,8 @@ function LeftPanel(props) {
 		currentUserData,
 		isExpanded,
 		setIsExpanded,
+		isChannel,
+		setIsChannel,
 	} = useGetScoringReports({ dateRange, entity });
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
@@ -40,6 +41,7 @@ function LeftPanel(props) {
 				...prev.filters,
 				report_type      : NEXT_LEVEL_MAPPING[currLevel[GLOBAL_CONSTANTS.zeroth_index]],
 				...((location_id && channel) ? { office_location_id: location_id } : { channel }),
+				...((!location_id && !channel) ? { office_location_id: undefined, channel: undefined } : {}),
 				report_view_type : undefined,
 				user_rm_ids      : id ? [id] : undefined,
 			},
@@ -47,24 +49,19 @@ function LeftPanel(props) {
 
 		setLevelStack((prev) => {
 			const curr = [...prev];
-			let firstElement = currLevel[GLOBAL_CONSTANTS.zeroth_index];
-
-			if (isEmpty(prev)) {
-				firstElement = params.filters?.report_view_type;
-			}
-			curr.push([firstElement, currLevel[GLOBAL_CONSTANTS.one]]);
+			curr.push([currLevel[GLOBAL_CONSTANTS.zeroth_index], currLevel[GLOBAL_CONSTANTS.one]]);
 
 			return curr;
 		});
 
 		let secondElement = '';
 
-		if (id) {
-			secondElement = id;
+		if (location_id && channel) {
+			secondElement = location_id;
 		} else if (channel) {
 			secondElement = channel;
-		} else if (location_id) {
-			secondElement = location_id;
+		} else {
+			secondElement = id;
 		}
 
 		setCurrLevel((prev) => [NEXT_LEVEL_MAPPING[prev[GLOBAL_CONSTANTS.zeroth_index]], secondElement]);
@@ -88,6 +85,8 @@ function LeftPanel(props) {
 				setCurrLevel={setCurrLevel}
 				setLevelStack={setLevelStack}
 				isExpanded={isExpanded}
+				isChannel={isChannel}
+				setIsChannel={setIsChannel}
 			/>
 
 			<List
