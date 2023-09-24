@@ -38,7 +38,15 @@ function Details({
 	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
 	const details = row?.data?.jobOpenRequest || {};
-	const { currency = '' } = details || {};
+	const {
+		currency = '',
+		jobNumber = '',
+		estimatedSell = 0,
+		totalSell = 0,
+		estimatedBuy = 0,
+		totalBuy = 0,
+		profitMargin = 0,
+	} = details || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_box}>
@@ -73,7 +81,7 @@ function Details({
 				<div className={styles.shipment_id}>
 					#
 					<a
-						href={details?.jobNumber}
+						href={jobNumber}
 						onClick={(event) => {
 							openPDF({
 								event,
@@ -83,7 +91,7 @@ function Details({
 							});
 						}}
 					>
-						{details?.jobNumber || ''}
+						{jobNumber || ''}
 					</a>
 				</div>
 			</div>
@@ -92,31 +100,31 @@ function Details({
 				<div>
 					<div className={styles.heading}>Estimated Sell</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.estimatedSell, currency)}
+						{getFormatAmount(estimatedSell, currency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Sell</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.totalSell, currency)}
+						{getFormatAmount(totalSell, currency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Estimated Buy</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.estimatedBuy, currency)}
+						{getFormatAmount(estimatedBuy, currency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Buy</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.totalBuy, currency)}
+						{getFormatAmount(totalBuy, currency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Profit Margin</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.profitMargin, currency)}
+						{getFormatAmount(profitMargin, currency)}
 					</div>
 				</div>
 			</div>

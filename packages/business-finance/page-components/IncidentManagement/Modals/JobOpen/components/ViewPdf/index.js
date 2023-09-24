@@ -33,7 +33,7 @@ function ViewPdf({ row = {} }) {
 				src={GLOBAL_CONSTANTS.image_url.list_no_result_found}
 				width={600}
 				height={500}
-				alt="Empty-state"
+				alt="No list found"
 				className={styles.empty_state}
 			/>
 		)
