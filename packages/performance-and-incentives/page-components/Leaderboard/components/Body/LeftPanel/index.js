@@ -6,6 +6,7 @@ import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
 import Header from './Header';
 import LeaderboardFilters from './LeaderboardFilters';
 import List from './List';
+import RefreshResults from './RefreshResults';
 import styles from './styles.module.css';
 import useGetScoringReports from './useGetAgentScoringReports';
 
@@ -29,6 +30,7 @@ function LeftPanel(props) {
 		setIsExpanded,
 		isChannel,
 		setIsChannel,
+		refetch,
 	} = useGetScoringReports({ dateRange, entity });
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
@@ -88,6 +90,8 @@ function LeftPanel(props) {
 				isChannel={isChannel}
 				setIsChannel={setIsChannel}
 			/>
+
+			<RefreshResults loading={loading} refetch={refetch} />
 
 			<List
 				loading={loading}

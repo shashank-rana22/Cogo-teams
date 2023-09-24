@@ -1,10 +1,7 @@
 import { useDebounceQuery } from '@cogoport/forms';
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
-
-// import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
 
 const useGetScoringReports = (props) => {
 	const { dateRange, entity } = props;
@@ -47,7 +44,7 @@ const useGetScoringReports = (props) => {
 		},
 	});
 
-	const [{ data, loading }] = useAllocationRequest({
+	const [{ data, loading }, trigger] = useAllocationRequest({
 		url     : '/reports',
 		method  : 'GET',
 		authkey : 'get_agent_scoring_reports',
@@ -97,6 +94,7 @@ const useGetScoringReports = (props) => {
 		viewType,
 		isChannel,
 		setIsChannel,
+		refetch: trigger,
 	};
 };
 
