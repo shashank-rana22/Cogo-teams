@@ -37,7 +37,6 @@ function Details({
 	});
 	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
-	const details = row?.data?.jobOpenRequest || {};
 	const {
 		currency = '',
 		jobNumber = '',
@@ -46,7 +45,8 @@ function Details({
 		estimatedBuy = 0,
 		totalBuy = 0,
 		profitMargin = 0,
-	} = details || {};
+		id: jobOpenId = '',
+	} = row?.data?.jobOpenRequest || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_box}>
@@ -86,7 +86,7 @@ function Details({
 							openPDF({
 								event,
 								partnerId    : partner_id,
-								id           : details?.id,
+								id           : jobOpenId,
 								incidentType : SHIPMENT_MAPPING[row?.incidentSubtype],
 							});
 						}}
