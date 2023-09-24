@@ -1,26 +1,29 @@
 .container {
-	margin-top: 12px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin-top: 12px;
 }
+
 .company {
 	display: flex;
 }
+
 .name {
 	margin-left: 8px;
 }
-.logo{
-	border: 2px solid #f37066;
-	background-color: #f3d5d5;
+
+.logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 30px;
 	height: 30px;
-	border-radius: 25px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	padding: 1px;
 	font-size: 18px;
 	font-weight: 500;
-	padding: 1px;
 	text-transform: uppercase;
+	background-color: #f3d5d5;
+	border: 2px solid #f37066;
+	border-radius: 25px;
 }
