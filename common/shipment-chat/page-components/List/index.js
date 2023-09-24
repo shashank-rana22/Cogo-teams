@@ -41,6 +41,7 @@ function List({
 		total      : 0,
 		total_page : 0,
 	});
+
 	const [filters, setFilters] = useState({ page: 1, q: shipment_data?.serial_id });
 
 	const { page = 1, q = '' } = filters || {};
@@ -88,9 +89,15 @@ function List({
 
 	const unreadDataList = unSeenMsg?.map((obj) => obj?.channel_details);
 	(unreadDataList || []).sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
-	const filteredUnreadList = (unreadDataList || []).filter(
-		(item) => item?.channel_name?.toLowerCase().includes(q?.toLowerCase()),
-	);
+
+	let filteredUnreadList = unreadDataList || [];
+
+	if (q) {
+		filteredUnreadList = (unreadDataList || []).filter(
+			(item) => item?.channel_name?.toLowerCase()?.includes(q?.toString()?.toLowerCase()),
+		);
+	}
+
 	const channelList = showUnreadChat || status === 'unread' ? filteredUnreadList : listData;
 
 	const handleClick = () => {
