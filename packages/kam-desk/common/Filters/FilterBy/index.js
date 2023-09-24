@@ -1,6 +1,7 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Checkbox, cl, DateRangepicker, Select } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
-import { startCase, upperCase } from '@cogoport/utils';
+import { startCase, upperCase, isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import DATE_RANGE_MAPPING from '../../../config/DATE_RANGE_MAPPING';
@@ -9,6 +10,7 @@ import ShipmentTabMapping from '../../../config/SHIPMENT_TAB_MAPPING';
 import KamDeskContext from '../../../context/KamDeskContext';
 import convertArrayToOptions from '../../../utils/convertArrayToOptions';
 
+import SHIPMENT_TYPE_OPTIONS from './shipmentTypeOptions';
 import styles from './styles.module.css';
 
 const PARTNER_PARAMS = {
@@ -34,6 +36,8 @@ function FilterBy({
 	const { filters = {}, setFilters, shipmentType, stepperTab } = useContext(KamDeskContext);
 
 	const { date_type, dateRange = '' } = popoverFilter || {};
+
+	const dynamicShipmentType = popoverFilter?.shipment_type;
 
 	const possibleFilters = shipmentType === 'all'
 		? ShipmentTabMapping.all.possible_filters
@@ -213,6 +217,19 @@ function FilterBy({
 				</div>
 			) : null}
 
+			<div className={styles.channel_partner}>
+				<div className={styles.filter_heading}>Shipment Type</div>
+				<Select
+					options={SHIPMENT_TYPE_OPTIONS}
+					value={popoverFilter?.shipment_type}
+					onChange={(val) => {
+						setPopoverFilter({ ...popoverFilter, shipment_type: val });
+					}}
+					size="sm"
+					isClearable
+				/>
+			</div>
+
 			{possibleFilters?.includes('source') ? (
 				<div className={styles.channel_partner}>
 					<div className={styles.filter_heading}>Source</div>
@@ -252,16 +269,27 @@ function FilterBy({
 				</div>
 			) : null}
 
-			<div className={styles.channel_partner}>
-				<div className={styles.filter_heading}>Trade Type</div>
-				<Select
-					options={TRADE_TYPE_OPTIONS}
-					value={popoverFilter?.trade_type}
-					onChange={(val) => { setPopoverFilter({ ...popoverFilter, trade_type: val }); }}
-					size="sm"
-					isClearable
-				/>
-			</div>
+			{
+				!isEmpty(popoverFilter?.shipment_type) && (
+					<div className={styles.channel_partner}>
+						<div className={styles.filter_heading}>Trade Type</div>
+						<Select
+							options={TRADE_TYPE_OPTIONS}
+							value={popoverFilter?.[`${dynamicShipmentType}_service`]?.trade_type}
+							onChange={(val) => {
+								setPopoverFilter({
+									...popoverFilter,
+									[`${dynamicShipmentType}_service`]: {
+										trade_type: val,
+									},
+								});
+							}}
+							size="sm"
+							isClearable
+						/>
+					</div>
+				)
+			}
 		</div>
 	);
 }
