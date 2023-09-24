@@ -16,6 +16,7 @@ import ShipmentInfo from '../ShipmentInfo';
 import ShipmentTags from '../ShipmentTags';
 import TimeLine from '../TimeLine';
 
+import ReOpenShipment from './ReOpenShipment';
 import styles from './styles.module.css';
 
 const TAB_MAPPING = {
@@ -56,15 +57,17 @@ function HandleRaiseContainer({
 
 function DefaultView() {
 	const router = useRouter();
-
 	const {
 		shipment_data = {}, stakeholderConfig = {},
 		getShipmentStatusCode = 0, isGettingShipment = false,
 		refetchServices = () => {},
 	} = useContext(ShipmentDetailContext) || {};
 
+	const { id: shipment_id } = shipment_data || {};
+
 	const { features = [], default_tab = 'tasks', job_open_request = false } = stakeholderConfig || {};
 	const [activeTab, setActiveTab] = useState(default_tab);
+	const [finJobOpenConfirmation, setFinJobOpenConfirmation] = useState(false);
 
 	const [alarmId, setAlarmId] = useState('');
 	const [reload, setReload] = useState(false);
@@ -143,6 +146,12 @@ function DefaultView() {
 						onLabel="Old"
 						offLabel="New"
 						onChange={handleVersionChange}
+					/>
+
+					<ReOpenShipment
+						finJobOpenConfirmation={finJobOpenConfirmation}
+						setFinJobOpenConfirmation={setFinJobOpenConfirmation}
+						shipment_id={shipment_id}
 					/>
 
 					<HandleRaiseContainer
