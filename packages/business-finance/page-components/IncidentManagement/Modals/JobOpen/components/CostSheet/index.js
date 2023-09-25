@@ -4,29 +4,21 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowNext, IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import useGetShipmentCostSheet from '../../../../hooks/useGetShipmentCostSheet';
-
 import { CardBody } from './Card/CardBody';
 import CardHeader from './Card/CardHeader';
 import DiscountRect from './DiscountRect';
 import styles from './styles.module.css';
 
-const JOB_SOURCE = 'LOGISTICS';
-
 const ARRAY_SPLIT = 4;
 
-function CostSheet({ row = {} }) {
-	const shipmentId = row?.data?.jobOpenRequest?.id;
-	const { jobNumber = '' } = row?.data?.jobOpenRequest || {};
-	const JOB_TYPE = row?.source.toUpperCase();
+function CostSheet({
+	selldata = [],
+	buydata = [],
+	apiloading = false,
+	CostSheetsellData: sellData = {},
+	CostSheetbuyData: buyData = {},
+}) {
 	const [open, setOpen] = useState(false);
-	const {
-		selldata,
-		buydata,
-		apiloading,
-		sellData,
-		buyData,
-	} = useGetShipmentCostSheet({ shipmentId, jobNumber, JOB_SOURCE, JOB_TYPE });
 	const { totalActual: buyTotal } = buyData || {};
 	const { totalActual: sellTotal } = sellData || {};
 	return (

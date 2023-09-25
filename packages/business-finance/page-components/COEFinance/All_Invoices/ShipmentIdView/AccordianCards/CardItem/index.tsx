@@ -91,12 +91,14 @@ function CardItem({
 		},
 	});
 
-	const getLineItemData = (lineItemData) => {
-		const parts = lineItemData.split('_');
-		const capitalizedWords = parts.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
-		const resultData = capitalizedWords.join(' ');
-
-		return resultData;
+	const getLineItemData = (lineItemData = '-') => {
+		if (typeof lineItemData === 'string') {
+			const parts = lineItemData?.split('_');
+			const capitalizedWords = (parts || []).map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+			const resultData = capitalizedWords.join(' ');
+			return resultData;
+		}
+		return '-';
 	};
 
 	const { pageIndex = 1 }: FullResponseProps = fullResponse || {};
@@ -154,7 +156,7 @@ function CardItem({
 				<List
 					config={config}
 					itemData={getResponseData()}
-					functions={functions}
+					functions={functions as any}
 					loading={loading}
 					page={pageIndex}
 					pageSize={10}

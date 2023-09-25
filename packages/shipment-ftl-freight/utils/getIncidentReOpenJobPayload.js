@@ -15,6 +15,7 @@ const getIncidentReOpenJobPayload = ({ values = {}, shipmentData = {}, user_id =
 			businessName: shipmentData?.importer_exporter?.business_name,
 		},
 	},
+	description             : values?.remark,
 	toWhomToSendForApproval : LEVELS_FOR_APPROVAL,
 	createdBy               : user_id,
 	source                  : 'SHIPMENT',
