@@ -9,7 +9,7 @@ import itemFunction from '../../Plan/ItemFunction';
 import MetaDataModal from './MetaData';
 import styles from './styles.module.css';
 
-function Header({ plan = {}, loading = false }) {
+function Header({ plan = {}, loading = false, setFeatureModal }) {
 	const { t } = useTranslation(['saasSubscription']);
 
 	const [metaData, setMetaData] = useState({});
@@ -45,7 +45,13 @@ function Header({ plan = {}, loading = false }) {
 				</Button>
 			</div>
 
-			{metaData?.open ? <MetaDataModal metaData={metaData} setMetaData={setMetaData} /> : null}
+			{metaData?.open ? (
+				<MetaDataModal
+					metaData={metaData}
+					setMetaData={setMetaData}
+					setFeatureModal={setFeatureModal}
+				/>
+			) : null}
 		</>
 
 	);

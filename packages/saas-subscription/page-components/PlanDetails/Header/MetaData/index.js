@@ -6,14 +6,14 @@ import usePlanMetaData from '../../../../hooks/usePlanMetaData';
 
 import styles from './styles.module.css';
 
-function MetaDataModal({ metaData, setMetaData }) {
+function MetaDataModal({ metaData, setMetaData, setFeatureModal }) {
 	const { t } = useTranslation(['saasSubscription']);
 
 	const jsonMetaData = JSON.stringify(metaData?.info);
 
 	const [newMetaData, setNewMetaData] = useState(jsonMetaData);
 
-	const { loading, submitHandler, closeModalHandler } = usePlanMetaData({ metaData, setMetaData });
+	const { loading, submitHandler, closeModalHandler } = usePlanMetaData({ metaData, setMetaData, setFeatureModal });
 
 	return (
 		<Modal show={metaData.open} onClose={closeModalHandler} closeOnOuterClick>

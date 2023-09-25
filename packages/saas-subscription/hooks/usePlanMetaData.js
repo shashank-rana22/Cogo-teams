@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useTranslation } from 'next-i18next';
 
-const usePlanMetaData = ({ metaData, setMetaData }) => {
+const usePlanMetaData = ({ metaData, setMetaData, setFeatureModal }) => {
 	const { t } = useTranslation(['saasSubscription']);
 
 	const [{ loading }, trigger] = useRequest({
@@ -20,6 +20,8 @@ const usePlanMetaData = ({ metaData, setMetaData }) => {
 			await trigger({
 				data: payload,
 			});
+			Toast.success('Updated Meta Data');
+			setFeatureModal({ apiCall: true });
 			closeModalHandler();
 		} catch (e) {
 			Toast.error(getApiErrorString(e.response?.data));
@@ -28,8 +30,8 @@ const usePlanMetaData = ({ metaData, setMetaData }) => {
 
 	const submitHandler = (val) => {
 		try {
-			JSON.parse(val);
-			editMetaDataHandler({ payload: { id: metaData?.id, metaData: val } });
+			const validJson = JSON.parse(val);
+			editMetaDataHandler({ payload: { id: metaData?.id, metadata: validJson } });
 		} catch (e) {
 			Toast.error(t('saasSubscription:valid_json'));
 		}

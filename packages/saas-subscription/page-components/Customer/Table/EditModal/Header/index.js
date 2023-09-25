@@ -39,7 +39,7 @@ function Header({ info = {}, editModalChangeHandler, closeModalHandler, ...rest 
 					<Button
 						onClick={() => editModalChangeHandler(
 							'editPlan',
-							{ id, product_family_id, saas_subscription_customer_id },
+							{ id, saas_product_family_id: product_family_id, saas_subscription_customer_id },
 						)}
 						type="button"
 					>
