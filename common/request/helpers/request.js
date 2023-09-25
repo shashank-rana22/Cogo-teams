@@ -70,14 +70,20 @@ request.interceptors.request.use((oldConfig) => {
 		}
 	}
 
-	if (PEEWEE_SERVICES.includes(serviceName) && isDevMode) {
-		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
+	if (PEEWEE_SERVICES.includes(serviceName)) {
+		newConfig.baseURL = 'https://2c30-2409-40c0-1031-4064-4470-2de4-a51a-2efe.ngrok-free.app';
 	}
 
+	if (serviceName === 'location') {
+		newConfig.baseURL = 'https://api.cogoport.com';
+	}
 	return {
 		...newConfig,
 		headers: {
-			authorizationscope: 'partner', authorization: `Bearer: ${token}`, authorizationparameters,
+			authorizationscope           : 'partner',
+			authorization                : `Bearer: ${token}`,
+			authorizationparameters,
+			'ngrok-skip-browser-warning' : '*',
 		},
 	};
 });
