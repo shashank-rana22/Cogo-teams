@@ -33,6 +33,14 @@ function CommonDetailsModal({ setDetailsModal = () => {}, detailsModal = {}, ref
 					refetch={refetch}
 				/>
 			) : null }
+
+			{ detailsModal?.type === 'SEZ_APPROVAL' ? (
+				<JobOpenDetailsModal
+					row={detailsModal}
+					setDetailsModal={setDetailsModal}
+					refetch={refetch}
+				/>
+			) : null }
 		</div>
 	);
 }

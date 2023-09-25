@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import usePostJobOpenRemark from '../../../apisModal/usePostJobOpenRemark';
+import useSezApproveReject from '../../../apisModal/useSezApproveReject';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
 
 import styles from './styles.module.css';
@@ -15,22 +15,15 @@ function Details({
 }) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
-	const { status = '' } = row || {};
+	const { status = '', id = '', data = {} } = row || {};
+	const { sezRequest = {} } = data || {};
 
-	const {
-		currentTdsRate,
-		requestedTdsRate,
-	} = row?.data?.tdsRequest || {};
-
-	const getRatePercentageData = [
-		{ label: t('incidentManagement:current_tds_rate'), value: currentTdsRate },
-		{ label: t('incidentManagement:requested_tds_rate'), value: requestedTdsRate },
-	];
-	const { onSubmit = () => {}, loading = false } = usePostJobOpenRemark({
-		setShowModal : setDetailsModal,
-		id           : row?.id,
-		remarks,
+	const { useOnAction: OnAction, loading } = useSezApproveReject({
 		refetch,
+		setDetailsModal,
+		id,
+		sezRequest,
+		t,
 	});
 	return (
 		<div className={styles.container}>
@@ -45,16 +38,13 @@ function Details({
 				</div>
 			</div>
 			<div className={styles.line} />
-			<div className={styles.flex}>
-				{getRatePercentageData.map((itemData) => (
-					<div className={styles.rates_data} key={itemData?.label_text}>
-						<div className={styles.rates}>
-							{itemData?.value || '-'}
-							%
-						</div>
-						<div className={styles.label}>{itemData?.label || '-'}</div>
-					</div>
-				))}
+			<div className={styles.company_div}>
+				<div className={styles.heading}>GST Number</div>
+				<div className={styles.text}>{row?.data?.sezRequest?.taxNumber || ''}</div>
+			</div>
+			<div className={styles.company_div}>
+				<div className={styles.heading}>Address</div>
+				<div className={styles.text}>{row?.data?.sezRequest?.address || ''}</div>
 			</div>
 
 			{ status === 'REQUESTED' ? (
@@ -79,7 +69,7 @@ function Details({
 							themeType="secondary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => onSubmit(STATUS_MAPPING.rejected)}
+							onClick={() => OnAction(STATUS_MAPPING.rejected)}
 						>
 							Reject
 						</Button>
@@ -89,7 +79,7 @@ function Details({
 							themeType="primary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => { onSubmit(STATUS_MAPPING.approved); }}
+							onClick={() => { OnAction(STATUS_MAPPING.approved); }}
 						>
 							Approve
 						</Button>

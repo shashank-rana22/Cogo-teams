@@ -36,6 +36,7 @@ function SezApproval({
 	sezRequest = {}, organization = {}, id = '', refetch = () => { },
 	isEditable = true, remark = '', row = {},
 }: Props) {
+	console.log(row);
 	const { t } = useTranslation(['incidentManagement']);
 	const [showModal, setShowModal] = useState(false);
 	const [inputValues, setInputValues] = useState({

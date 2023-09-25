@@ -9,7 +9,7 @@ import allStakeHolderTimeLineData from '../../utils/formatAllStakeHolderData';
 import Details from './Details';
 import styles from './styles.module.css';
 
-function TdsApproval({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
+function TdsApprovalDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const { level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark = '' } = row || {};
 	const level0 = { ...createdBy, remark };
 	const { t } = useTranslation(['incidentManagement']);
@@ -43,4 +43,4 @@ function TdsApproval({ row = {}, setDetailsModal = () => {}, refetch = () => {} 
 		</div>
 	);
 }
-export default TdsApproval;
+export default TdsApprovalDetails;
