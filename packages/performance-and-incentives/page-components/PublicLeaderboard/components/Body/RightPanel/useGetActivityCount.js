@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
@@ -22,7 +23,9 @@ function useGetActivityCount(props) {
 			...previousParams,
 			filters: {
 				...(previousParams.filters || {}),
-				report_view_type: view || undefined,
+				report_view_type : view || undefined,
+				report_type      : ['owner_wise', 'manager_wise', 'kam_wise'].includes(view)
+					? `${view.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]}_report` : undefined,
 			},
 		}));
 	}, [view]);
