@@ -1,5 +1,6 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Datepicker } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import MyResponsivePie from '../../../Components/PieChart';
 import { PieChartData } from '../../../Components/PieChart/PieChartData';
@@ -8,6 +9,7 @@ import ResponsiveBarChart from '../../../Components/ResponsiveBarChart';
 import styles from './styles.module.css';
 
 function RejectedCharts({ filters = {} }) {
+	const [date, setDate] = useState(null);
 	const data = [
 		{
 			currency      : 'INR',
@@ -78,16 +80,20 @@ function RejectedCharts({ filters = {} }) {
 							placement="right"
 							caret={false}
 						>
-							<IcMInfo />
+							<IcMInfo height={30} />
 						</Tooltip>
+						<div style={{ marginLeft: '20px' }}>
+							<Datepicker
+								placeholder="Enter Date"
+								showTimeSelect
+								dateFormat="MM/dd/yyyy HH:mm"
+								name="date"
+								onChange={setDate}
+								value={date}
+							/>
+						</div>
 					</div>
-					{/* <div style={{ marginTop: '10px', marginLeft: '20px' }}>
-						<Popover render={content()} caret={false} placement="bottom">
-							<div className={styles.input_div}>
 
-							</div>
-						</Popover>
-					</div> */}
 				</div>
 				<ResponsiveBarChart barData={data} />
 			</div>
