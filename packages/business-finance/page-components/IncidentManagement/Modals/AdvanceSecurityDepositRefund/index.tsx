@@ -8,27 +8,28 @@ import SecurityDepositCommonModal from '../AdvanceSecurityDepositCommonModal';
 import getSecurityDepositRefundData from './securityDeositRefundData';
 
 interface DepositRefundInterface {
-	totalAmount?:number,
+	totalAmount?: number,
 	sid?: string,
 	utrNumber?: string,
 	remark?: string,
 	supplierName?: string,
-	uploadProof?:string[],
+	uploadProof?: string[],
 }
 interface Props {
 	advanceSecurityDepositRefund?: DepositRefundInterface,
 	id?: string,
-	refetch?:()=>void,
-	isEditable?:boolean,
-	row?:object,
+	refetch?: () => void,
+	isEditable?: boolean,
+	row?: object,
 }
 
 function AdvanceSecurityDepositRefund({
 	advanceSecurityDepositRefund = {},
 	id = '',
-	refetch = () => {},
+	refetch = () => { },
 	isEditable = true, row = {},
-}:Props) {
+}: Props) {
+	console.log(row);
 	const { t } = useTranslation(['incidentManagement']);
 	const [showDepositModal, setShowDepositModal] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
@@ -47,20 +48,20 @@ function AdvanceSecurityDepositRefund({
 				<ViewButton state={setShowDepositModal} />
 			</div>
 			{showDepositModal
-			&& (
-				<SecurityDepositCommonModal
-					securityDepositDetails={getSecurityDepositRefundData({ advanceSecurityDepositRefund, t })}
-					showDepositModal={showDepositModal}
-					setShowDepositModal={setShowDepositModal}
-					isEditable={isEditable}
-					row={row}
-					getData={getData}
-					loading={loading}
-					setRemarkValue={setRemarkValue}
-					type="SecurityDepositRefund"
-					remarkValue={remarkValue}
-				/>
-			)}
+				&& (
+					<SecurityDepositCommonModal
+						securityDepositDetails={getSecurityDepositRefundData({ advanceSecurityDepositRefund, t })}
+						showDepositModal={showDepositModal}
+						setShowDepositModal={setShowDepositModal}
+						isEditable={isEditable}
+						row={row}
+						getData={getData}
+						loading={loading}
+						setRemarkValue={setRemarkValue}
+						type="SecurityDepositRefund"
+						remarkValue={remarkValue}
+					/>
+				)}
 		</div>
 	);
 }

@@ -1,13 +1,15 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-// import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
-// import RequestCNDetails from '../RequestCN';
+import AdvanceSecurityDeposit from '../AdvanceSecurityDepositDetails';
+import AdvanceSecurityDepositRefund from '../AdvanceSecurityRefundDetails';
+import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
+import RequestCNDetails from '../RequestCN';
+import SezApprovalDetails from '../SezApprovalDetails';
+import TdsApprovalDetails from '../TdsApprovalDetails';
 
-// import ConcorModal from './.ConcorModal/ConcorDetails';
-// import AdvanceSecurityDeposit from './AdvanceSecurityDeposit/AdvanceSecurityDepositDetails';
-// import AdvanceSecurityDepositRefund from './AdvanceSecurityDepositRefund/AdvanceSecurityDepositRefundDetails';
-// import BankDetails from './BankDetails/BankDetails';
+import styles from './styles.module.css';
+
 // import ICJVModal from './ICJV_Modal/ICJVDetails';
 // import JvModal from './JvModal/JVDetails';
 // import NonRecuringModal from './NonRecuringModal/NonRecuringDetails';
@@ -16,30 +18,25 @@ import React from 'react';
 // import RevokeInvoice from './RevokeInvoice/RevokeInvoiceDetails';
 // import SettlementModal from './SettlementModal/SettlementModalDetails';
 // import SezApproval from './SezApproval/SezApprovalDetails';
-import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
-import SezApprovalDetails from '../SezApprovalDetails';
-import TdsApprovalDetails from '../TdsApprovalDetails';
-
-import styles from './styles.module.css';
 // import TDSModal from './TDSModal/TDSDetails';
 
 const TYPE_COMPONENT_MAPPING = {
-	// BANK_DETAIL_APPROVAL                   : BankDetails,
+	// BANK_DETAIL_APPROVAL     : BankDetails,
 	// TDS_APPROVAL                           : TDSModal,
 	// JOURNAL_VOUCHER_APPROVAL               : JvModal,
 	// SETTLEMENT_APPROVAL                    : SettlementModal,
 	// INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL : ICJVModal,
 	// PAYMENT_CONFIRMATION_APPROVAL          : PaymentConfirmation,
-	// ADVANCE_SECURITY_DEPOSIT               : AdvanceSecurityDeposit,
-	// ADVANCE_SECURITY_DEPOSIT_REFUND        : AdvanceSecurityDepositRefund,
 	// RECURRING_EXPENSE_APPROVAL             : RecuringModal,
 	// OVERHEAD_APPROVAL                      : NonRecuringModal,
 	// SEZ_APPROVAL                           : SezApproval,
-	// CONCOR_PDA_APPROVAL                    : ConcorModal,
+	// CONCOR_PDA_APPROVAL      : ConcorModal,
 	// CONSOLIDATED_CREDIT_NOTE               : RequestCNDetails,
 	// REVOKE_INVOICE                         : RevokeInvoice,
-	// ISSUE_CREDIT_NOTE                      : RequestCNDetails,
-	// JOB_OPEN                               : JobOpenDetailsModal,
+	ADVANCE_SECURITY_DEPOSIT        : AdvanceSecurityDeposit,
+	ADVANCE_SECURITY_DEPOSIT_REFUND : AdvanceSecurityDepositRefund,
+	ISSUE_CREDIT_NOTE               : RequestCNDetails,
+	JOB_OPEN                        : JobOpenDetailsModal,
 };
 function CommonDetailsModal({
 	setDetailsModal = () => {},
@@ -86,6 +83,14 @@ function CommonDetailsModal({
 			) : null }
 
 			{ detailsModal?.type === 'SEZ_APPROVAL' ? (
+				<SezApprovalDetails
+					row={detailsModal}
+					setDetailsModal={setDetailsModal}
+					refetch={refetch}
+				/>
+			) : null }
+
+			{ detailsModal?.type === 'REVOKE_INVOICE' ? (
 				<SezApprovalDetails
 					row={detailsModal}
 					setDetailsModal={setDetailsModal}
