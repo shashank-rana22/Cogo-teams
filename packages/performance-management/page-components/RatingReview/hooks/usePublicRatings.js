@@ -42,7 +42,7 @@ const usePublishRatings = ({
 	selectedEmployees, level, selectCycle, activeTab,
 	fetchRatingReviewDetails, setSelectedEmployees,
 }) => {
-	const { user = {} }	 = useSelector((state) => state?.profile || {});
+	const { user = {} } = useSelector((state) => state?.profile || {});
 
 	const [toggleVal, setToggleVal] = useState([]);
 
