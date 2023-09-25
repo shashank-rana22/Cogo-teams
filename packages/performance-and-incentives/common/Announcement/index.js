@@ -1,4 +1,5 @@
-import { IcMCross, IcC1 } from '@cogoport/icons-react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMCross } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -11,7 +12,7 @@ function Announcement() {
 			{announcement ? (
 				<div className={styles.announcement_container}>
 					<div className={styles.left_panel}>
-						<div className={styles.tag}><IcC1 height={20} width={20} className={styles.icon} /></div>
+						<div className={styles.tag}><span className={styles.badge}>{GLOBAL_CONSTANTS.one}</span></div>
 
 						<div
 							className={styles.announcement}
