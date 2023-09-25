@@ -69,6 +69,7 @@ export const EMPTY_LINE_ITEMS = {
 	exchange_rate    : '',
 	tax_amt          : '',
 	cost             : '',
+	truck_number     : '',
 };
 
 export const UNIT_OPTIONS = [

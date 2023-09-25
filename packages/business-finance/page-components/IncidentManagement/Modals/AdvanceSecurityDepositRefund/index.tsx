@@ -58,6 +58,7 @@ function AdvanceSecurityDepositRefund({
 					loading={loading}
 					setRemarkValue={setRemarkValue}
 					type="SecurityDepositRefund"
+					remarkValue={remarkValue}
 				/>
 			)}
 		</div>

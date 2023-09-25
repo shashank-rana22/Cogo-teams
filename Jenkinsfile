@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent { 
+    label 'ec2-fleet' 
+	}
 
     environment {
         AWS_DEFAULT_REGION = 'ap-south-1'

@@ -1,4 +1,4 @@
-import { Button, Modal, Toggle } from '@cogoport/components';
+import { Button, Modal, Toggle, Checkbox } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload } from '@cogoport/icons-react';
@@ -16,6 +16,7 @@ function UploadUTR({
 }) {
 	const [advancePayment, setAdvancePayment] = useState(false);
 	const [fileValue, setFileValue] = useState(null);
+	const [isCSD, setIsCSD] = useState(false);
 
 	const { upload, loading } = useUploadBulkUtr({
 		setFileValue,
@@ -23,6 +24,7 @@ function UploadUTR({
 		advancePayment,
 		refetch,
 		setShowUploadUTR,
+		isCSD,
 	});
 
 	const SAMPLE_FILE = advancePayment ? GLOBAL_CONSTANTS.upload_utr_sample_file.advance_payment
@@ -45,6 +47,9 @@ function UploadUTR({
 							offLabel="Normal"
 						/>
 					</div>
+
+					<Checkbox label="CSD" value={isCSD} onChange={setIsCSD} />
+
 					<FileUploader
 						value={fileValue}
 						onChange={setFileValue}

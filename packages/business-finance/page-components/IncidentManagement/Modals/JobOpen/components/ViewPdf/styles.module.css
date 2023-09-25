@@ -1,0 +1,8 @@
+.pdf_container {
+	width: 49%;
+	border-radius: 10px;
+}
+
+.empty_state {
+	padding: 70px;
+}

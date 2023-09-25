@@ -50,7 +50,7 @@
 }
 
 .view {
-	color: green;
+	color: #f68b21;
 	text-decoration: underline;
 	background-color: transparent;
 }
@@ -62,6 +62,7 @@
 .view_flex {
 	display: flex;
 	align-items: center;
+	margin-left: 2px;
 }
 
 .date_value {
@@ -71,6 +72,11 @@
 .document {
 	margin: 4px 0;
 	font-weight: 600;
+}
+
+.remark_document {
+	padding-right: 2px;
+	margin: 4px 0;
 }
 
 .document_flex {
@@ -93,6 +99,7 @@
 .wrapper {
 	width: 600px;
 	overflow: hidden;
+	font-weight: 600;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	cursor: pointer;

@@ -43,6 +43,8 @@ export interface IncidentDataInterface {
 	isSettlementExecutive?:boolean
 	incidentLoading?:boolean
 	getIncidentData?:()=>{ }
+	detailsModal?:{},
+	setDetailsModal?:any,
 }
 
 export interface MatchModalInterface {

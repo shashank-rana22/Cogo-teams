@@ -10,5 +10,15 @@
     "or_label": "或",
     "continue_with_microsoft": "继续使用微软账号登录",
     "already_login_toast_error": "无法使用已经激活的账号登录",
-    "failed_to_login_toast_error": "登录失败，请重试..."
+    "failed_to_login_toast_error": "登录失败，请重试...",
+    "login_field_mobile_placeholder": "输入你的手机号码",
+    "login_field_mobile_error": "需要提供手机详细信息。",
+    "login_field_submit_otp_button": "获取一次性密码",
+    "login_otp_failed":"找不到帐户",
+    "login_otp_resend_success":"OTP 发送成功",
+    "mobile_title":"请提供您的号码以接收 OTP",
+    "login_Otp_field_title": "验证您的手机",
+    "login_otp_field_subtitle": "验证码发送至",
+    "login_otp_field_subtitle_null": "手机号码。",
+    "login_otp_field_submit_button": "核实"
 }  
