@@ -16,7 +16,7 @@ const MAX_BOUNDS = [
 	[-MAX_LNG, -MAX_LAT],
 	[MAX_LNG, MAX_LAT]];
 
-const COLORS = ['#FFEACC', '#ffc680', '#f0883e', '#db6d28', '#bd561d', '#9b4215', '#762d0a', '#3d1300'];
+export const COLORS = ['#ffeacc', '#ffc680', '#f0883e', '#db6d28', '#bd561d', '#9b4215', '#762d0a', '#3d1300'];
 function BirdsEyeView({ countMapping = {}, maxCount = 0, minCount = 0 }) {
 	const [map, setMap] = useState(null);
 	const { data = [] } = useGetSimplifiedGeometry({ type: 'country' });

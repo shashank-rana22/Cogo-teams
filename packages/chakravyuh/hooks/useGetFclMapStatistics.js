@@ -12,7 +12,7 @@ const EXCLUDE_KEYS = LOCATION_KEYS.map((key) => [key,
 	...HIERARCHY_KEYS.map((sub_key) => `${key}_${sub_key}_id`)]).flat();
 
 const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
-	const [sort, setSort] = useState({ sort_by: 'total_accuracy', sort_type: 'asc' });
+	const [filterBy, setFilterBy] = useState('bas_standard_price_accuracy');
 	const [page, setPage] = useState(START_PAGE);
 	const [activeList, setActiveList] = useState([]);
 
@@ -43,9 +43,20 @@ const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 	}, {});
 
 	const accuracyMapping = (activeList).reduce((acc, item) => {
-		acc[item.destination_id] = item?.total_accuracy;
+		acc[item.destination_id] = item?.count;
 		return acc;
 	}, {});
+
+	const [[aggregate_type]] = Object.entries(SELECT_AGGREGATE).filter(
+		([, value]) => {
+			if (value.includes(filterBy)) {
+				return true;
+			}
+			return false;
+		},
+	);
+
+	filters.select_aggregate = { count: `${[aggregate_type]}(${filterBy})` };
 
 	useEffect(() => {
 		const { service_type } = globalFilters;
@@ -54,25 +65,15 @@ const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 				...globalFilters,
 				start_date: new Date(),
 			}, ['end_date', 'chart_type', ...EXCLUDE_KEYS]);
-			const { sort_by } = sort;
-			const [[aggregate_type]] = Object.entries(SELECT_AGGREGATE).filter(
-				([, value]) => {
-					if (value.includes(sort_by)) {
-						return true;
-					}
-					return false;
-				},
-			);
-			const select_aggregate = { count: `${[aggregate_type]}(${sort_by})` };
+
 			getStats(merge(params, {
 				filters,
-				select_aggregate,
 				page: 1,
 			}));
 			setPage(START_PAGE);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(filters), JSON.stringify(globalFilters), sort]);
+	}, [JSON.stringify(filters), JSON.stringify(globalFilters)]);
 
 	useEffect(() => {
 		if (page > START_PAGE) {
@@ -80,13 +81,13 @@ const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 				...globalFilters,
 				start_date: new Date(),
 			}, ['end_date', ...EXCLUDE_KEYS]);
-			getStats(merge(params, { filters, ...sort, page }));
+			getStats(merge(params, { filters, page }));
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [page]);
 
 	return {
-		data, loading, page, setPage, activeList, setActiveList, accuracyMapping, sort, setSort,
+		data, loading, page, setPage, activeList, setActiveList, accuracyMapping, filterBy, setFilterBy,
 	};
 };
 

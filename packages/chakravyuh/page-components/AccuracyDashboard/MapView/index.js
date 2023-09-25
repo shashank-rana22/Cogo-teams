@@ -24,10 +24,10 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 	});
 
 	const {
-		sort,
+		filterBy,
 		page,
 		setPage,
-		setSort,
+		setFilterBy,
 		activeList,
 		setActiveList,
 		accuracyMapping,
@@ -66,6 +66,7 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 			<div className={styles.map}>
 				<Map
 					data={data}
+					filterBy={filterBy}
 					isFull={isFull}
 					bounds={bounds}
 					loading={loading}
@@ -76,6 +77,7 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 					setCurrentId={setActiveId}
 					setHierarchy={setHierarchy}
 					setActiveList={setActiveList}
+					accuracyLoading={accuracyLoading}
 					accuracyMapping={accuracyMapping}
 					locationFilters={locationFilters}
 					setLocationFilters={setLocationFilters}
@@ -86,9 +88,9 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 			<SidePanel
 				page={page}
 				data={data}
-				sort={sort}
+				filterBy={filterBy}
 				isFull={isFull}
-				setSort={setSort}
+				setFilterBy={setFilterBy}
 				setPage={setPage}
 				setView={setView}
 				backView={backView}
