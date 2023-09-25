@@ -51,5 +51,7 @@
     "shipment_state_cancelled": "CANCELLED",
     "serial_id_label_consol": "Consol ID",
     "serial_id_label_coload": "Coload ID",
-    "serial_id_label_default_value": "Shipment ID"
+    "serial_id_label_default_value": "Shipment ID",
+    "operationally_closed": "Ops Closed",
+    "financially_closed": "Fin Closed"
 }
