@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 import { toTitleCase } from './utils';
 
 function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
+	console.log(row, tdsData);
 	const { t } = useTranslation(['incidentManagement']);
 	const [showTdsModal, setShowTdsModal] = useState(false);
 	const [remark, setRemark] = useState('');
