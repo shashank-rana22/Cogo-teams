@@ -14,6 +14,7 @@ import {
 } from '../../../../utils/start-date-functions';
 import DURATION_OPTIONS from '../../configurations/get-duration-filter-options';
 
+import Announcement from './Announcement';
 import styles from './styles.module.css';
 
 const { TODAY, THIS_MONTH, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
@@ -48,57 +49,61 @@ function Header(props) {
 	};
 
 	return (
-		<div className={styles.head_container}>
-			<div>
-				<h2 className={styles.heading}>
-					Welcome,
-					{' '}
-					{user.name}
-				</h2>
-
-				<div className={styles.subheading_container}>
-					<div className={styles.subheading}>
-						You are viewing Incentive and Scoring Analytics
+		<div className={styles.container}>
+			<div className={styles.head_container}>
+				<div>
+					<h2 className={styles.heading}>
+						Welcome,
 						{' '}
-						<span className={styles.light}>for</span>
-					</div>
+						{user.name}
+					</h2>
 
-					<div className={styles.filter_container}>
-						<Select
-							value={entity}
-							onChange={setEntity}
-							options={getEntityOptions()}
-							disabled={incentive_leaderboard_viewtype !== ADMIN}
-						/>
+					<div className={styles.subheading_container}>
+						<div className={styles.subheading}>
+							You are viewing Incentive and Scoring Analytics
+							{' '}
+							<span className={styles.light}>for</span>
+						</div>
 
-						<Select
-							value={duration}
-							onChange={onChangeDuration}
-							options={DURATION_OPTIONS}
-						/>
-
-						{duration === CUSTOM && (
-							<DateRangepicker
-								onChange={setDateRange}
-								value={dateRange}
-								maxDate={new Date()}
-								isPreviousDaysAllowed
+						<div className={styles.filter_container}>
+							<Select
+								value={entity}
+								onChange={setEntity}
+								options={getEntityOptions()}
+								disabled={incentive_leaderboard_viewtype !== ADMIN}
 							/>
-						)}
+
+							<Select
+								value={duration}
+								onChange={onChangeDuration}
+								options={DURATION_OPTIONS}
+							/>
+
+							{duration === CUSTOM && (
+								<DateRangepicker
+									onChange={setDateRange}
+									value={dateRange}
+									maxDate={new Date()}
+									isPreviousDaysAllowed
+								/>
+							)}
+						</div>
 					</div>
 				</div>
+
+				{incentive_leaderboard_viewtype === ADMIN && (
+					<Button
+						type="button"
+						size="lg"
+						themeType="secondary"
+						onClick={() => push('/performance-and-incentives/public-leaderboard')}
+					>
+						Public View Mode
+					</Button>
+				)}
 			</div>
 
-			{incentive_leaderboard_viewtype === ADMIN && (
-				<Button
-					type="button"
-					size="lg"
-					themeType="secondary"
-					onClick={() => push('/performance-and-incentives/public-leaderboard')}
-				>
-					Public View Mode
-				</Button>
-			)}
+			<Announcement />
 		</div>
 	);
 }
