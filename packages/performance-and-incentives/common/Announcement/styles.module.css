@@ -39,7 +39,8 @@
 }
 
 .icon {
-	fill: black;
+	color: rgb(0 0 0);
+	fill: rgb(0 0 0);
 }
 
 .announcement_button {

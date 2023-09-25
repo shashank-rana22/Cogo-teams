@@ -1,24 +1,24 @@
-import { Button, Badge, Toggle } from '@cogoport/components';
+import { Toggle } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMFilter, IcMArrowBack } from '@cogoport/icons-react';
+import { IcMArrowBack } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../constants/leaderboard-viewtype-constants';
-import Filters from '../../../../common/Filters';
+// import Filters from '../../../../common/Filters';
 import SearchInput from '../../../../common/SearchInput';
 
 import RefreshResults from './RefreshResults';
 import styles from './styles.module.css';
-import useFilterContent from './useFilterContent';
+// import useFilterContent from './useFilterContent';
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 const OFFSET = 1;
 
-function conditionalWrapper({ condition, wrapper, children }) {
-	return condition ? wrapper(children) : children;
-}
+// function conditionalWrapper({ condition, wrapper, children }) {
+// 	return condition ? wrapper(children) : children;
+// }
 
 function containsOnlyLetters(inputString) {
 	const PATTERN = GLOBAL_CONSTANTS.regex_patterns.alphabets;
@@ -68,15 +68,15 @@ function LeaderboardFilters(props) {
 		statsLoading,
 	} = props;
 
-	const {
-		controls,
-		formProps,
-		showFilters,
-		setShowFilters,
-		handleReset,
-		applyFilters,
-		filtersApplied,
-	} = useFilterContent({ setParams });
+	// const {
+	// 	controls,
+	// 	formProps,
+	// 	showFilters,
+	// 	setShowFilters,
+	// 	handleReset,
+	// 	applyFilters,
+	// 	filtersApplied,
+	// } = useFilterContent({ setParams });
 
 	const [beforeLevel = '', id] = levelStack[levelStack.length - OFFSET] || [];
 
@@ -162,7 +162,7 @@ function LeaderboardFilters(props) {
 					statsLoading={statsLoading}
 				/>
 
-				<Filters
+				{/* <Filters
 					controls={controls}
 					open={showFilters}
 					setOpen={setShowFilters}
@@ -189,7 +189,7 @@ function LeaderboardFilters(props) {
 							children: <IcMFilter width={18} height={18} style={{ marginLeft: '4px' }} />,
 						})}
 					</Button>
-				</Filters>
+				</Filters> */}
 
 				<div className={styles.search_container}>
 					<SearchInput
