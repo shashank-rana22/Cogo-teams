@@ -62,3 +62,11 @@
 	transition: transform 0.3s;
 	transform: rotate(180deg);
 }
+
+.entity_selector {
+	width: 250px;
+}
+
+.period_selector {
+	width: 150px;
+}

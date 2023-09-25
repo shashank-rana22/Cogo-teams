@@ -69,12 +69,14 @@ function Header(props) {
 							onChange={setEntity}
 							options={getEntityOptions()}
 							disabled={incentive_leaderboard_viewtype !== ADMIN}
+							className={styles.entity_selector}
 						/>
 
 						<Select
 							value={duration}
 							onChange={onChangeDuration}
 							options={DURATION_OPTIONS}
+							className={styles.period_selector}
 						/>
 
 						{duration === CUSTOM && (
