@@ -18,7 +18,6 @@ export const requestColumn = ({
 	isAscendingActive,
 	getIncidentData,
 	t,
-	detailsModal = {},
 	setDetailsModal = () => {},
 }) => [
 	{
@@ -231,7 +230,7 @@ export const requestColumn = ({
 			<AccessorComponent
 				row={row}
 				getIncidentData={getIncidentData}
-				detailsModal={detailsModal}
+				// detailsModal={detailsModal}
 				setDetailsModal={setDetailsModal}
 			/>
 		),

@@ -1,6 +1,6 @@
-function RequestCN() {
+function ConcorDetails() {
 	return (
 		<>concor</>
 	);
 }
-export default RequestCN;
+export default ConcorDetails;

@@ -1,6 +1,6 @@
-function RequestCN() {
+function BankDetails() {
 	return (
 		<>bank</>
 	);
 }
-export default RequestCN;
+export default BankDetails;
