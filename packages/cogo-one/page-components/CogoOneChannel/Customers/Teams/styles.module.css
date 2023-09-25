@@ -1,12 +1,5 @@
-.text {
-	margin: 0 8px;
-	font-weight: 600;
-	color: #777;
-}
-
 .header {
 	padding: 6px 10px;
-	padding-bottom: 14px;
 	border-bottom: 1px solid #eee;
 
 	:global {
@@ -14,10 +7,6 @@
 			padding: 0;
 		}
 	}
-}
-
-.create_group {
-	margin: 6px 0 0 4px;
 }
 
 .list_container {

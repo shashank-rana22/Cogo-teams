@@ -1,13 +1,19 @@
-import { Popover, Input } from '@cogoport/components';
-import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
+import {
+	// Popover,
+	Input,
+} from '@cogoport/components';
+import {
+	// IcMFilter,
+	IcMSearchlight, IcMPlus,
+} from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
 function TeamsHeader({
 	searchValue = '',
 	setSearchValue = () => {},
-	filterVisible = false,
-	setFilterVisible = () => {},
+	// filterVisible = false,
+	// setFilterVisible = () => {},
 }) {
 	return (
 		<div className={styles.header_container}>
@@ -21,7 +27,7 @@ function TeamsHeader({
 					arrow={false}
 				/>
 			</div>
-			<Popover
+			{/* <Popover
 				placement="right"
 				render="will be add"
 				className={styles.styled_popover}
@@ -31,7 +37,10 @@ function TeamsHeader({
 					onClick={() => setFilterVisible((prev) => !prev)}
 					className={styles.filter_icon}
 				/>
-			</Popover>
+			</Popover> */}
+			<IcMPlus
+				className={styles.edit_icon}
+			/>
 		</div>
 	);
 }

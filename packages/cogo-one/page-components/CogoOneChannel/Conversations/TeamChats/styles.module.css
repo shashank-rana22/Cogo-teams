@@ -11,7 +11,7 @@
 }
 
 .messages {
-	height: calc(100% - 60px);
+	height: calc(100% - 150px);
 	overflow-y: auto;
 }
 
