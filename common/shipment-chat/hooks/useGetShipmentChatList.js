@@ -25,7 +25,7 @@ const useGetShipmentChatList = ({ payload, states = {} }) => {
 					data:
 							res?.data?.page <= GLOBAL_CONSTANTS.one
 								? res?.data?.list || []
-								: [...(prevState.data || []), ...(res?.data?.list || [])],
+								: [...(prevState?.data || []), ...(res?.data?.list || [])],
 					total      : res?.data?.total_count,
 					total_page : res?.data?.total,
 				}));

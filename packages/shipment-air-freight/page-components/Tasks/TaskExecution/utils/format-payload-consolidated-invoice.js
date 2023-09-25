@@ -1,12 +1,11 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const DEFAULT_VALUE_FOR_TERMINAL_CHARGE = 0;
 const DEFAULT_VALUE_FOR_SHEET_INDEX = 1;
 
 const getPayload = ({
-	values = {}, mainServicesData = {}, sheetData = {},
-	entityData = {},
+	type: taskType = 'terminal', values = {}, mainServicesData = {}, sheetData = {},
+	entityData = {}, collectionPartyData = {},
 }) => {
 	const geo = getGeoConstants();
 
@@ -19,9 +18,33 @@ const getPayload = ({
 		addresses = [],
 	} = entityData || {};
 
+	const {
+		business_name: collectionBusinessName = '', registration_number :collectionRegistrationNumber = '',
+		billing_addresses = [],
+	} = collectionPartyData || {};
+
+	const billingAddress = addresses.find((address) => address.id === values?.billing_address);
+
+	const collectionPartyAddress = billing_addresses.find((address) => address.id === values?.collection_party_address);
+
+	const {
+		pincode:collectionPincode = '', address: collectionAddress = '',
+		tax_number: collectionTaxNumber = '',
+	} = collectionPartyAddress || {};
+
 	const { id:country_id = '', country_code = '', name = '', type = '' } = country || {};
 
-	const { currency = '', price = 0, tax_price = 0, total_tax_price = 0 } = values || {};
+	const { currency = '', mawb_number = '' } = values || {};
+
+	let price = 0;
+	let tax_price = 0;
+	let total_tax_price = 0;
+
+	(values?.terminalChargeReceipt || []).forEach((val) => {
+		price += Number(val.price);
+		tax_price += Number(val.tax_price);
+		total_tax_price += Number(val.total_tax_price);
+	});
 
 	const {
 		chargeable_weight = '', airline_id = '', origin_airport_id = '',
@@ -42,7 +65,7 @@ const getPayload = ({
 					discount        : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
 					commission      : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
 					total_tax       : Number(tax_price),
-					weight          : chargeable_weight,
+					weight          : Number(chargeable_weight),
 					currency,
 					tax_total_price : Number(total_tax_price),
 				},
@@ -52,12 +75,14 @@ const getPayload = ({
 
 	const payload = {
 		csr_data,
-		payment_mode         : 'cash',
-		service              : 'air_freight_local_service',
-		csr_sheet_id         : id,
-		sheet_index          : DEFAULT_VALUE_FOR_SHEET_INDEX,
-		organization_id      : geo.uuid.freight_force_org_id,
-		billing_party_detail : {
+		mawb_number,
+		payment_mode           : 'cash',
+		service                : 'air_freight_local_service',
+		csr_sheet_id           : id,
+		sheet_index            : DEFAULT_VALUE_FOR_SHEET_INDEX,
+		organization_id        : geo.uuid.freight_force_org_id,
+		invoice_type_line_item : taskType === 'terminal' ? 'thc' : 'gic',
+		billing_party_detail   : {
 			organization_id : cogo_entity_id,
 			cin,
 			entity_code,
@@ -73,8 +98,15 @@ const getPayload = ({
 				type,
 			},
 			address: {
-				...addresses[GLOBAL_CONSTANTS.zeroth_index],
+				...billingAddress,
 			},
+		},
+		collection_party_detail: {
+			pincode             : collectionPincode,
+			address             : collectionAddress,
+			tax_number          : collectionTaxNumber,
+			business_name       : collectionBusinessName,
+			registration_number : collectionRegistrationNumber,
 		},
 	};
 	return payload;
