@@ -112,10 +112,15 @@ function GenerateMAWB({
 	} = GetOrganization({ importerExporterIds: item.importerExporterId });
 	const { list: organizationList = [] } = organizationData;
 
+	const category = item?.blCategory;
+	const mawbId = item?.documentId;
+	const pendingTaskId = item?.id || item?.taskId || undefined;
+
 	const fields = mawbControls({
 		disableClass,
 		editHawbNumberCondition: !customHawbNumber,
 		unitDefaultValue,
+		category,
 		activeCategory,
 	});
 
@@ -127,10 +132,6 @@ function GenerateMAWB({
 	};
 
 	const { hawbData, getHawb, hawbSuccess, setHawbSuccess, loading } = useGetHawb();
-
-	const category = item.blCategory;
-	const mawbId = item.documentId;
-	const pendingTaskId = item?.id || item?.taskId || undefined;
 
 	const finalFields = [
 		...fields.hawb_controls,
@@ -371,6 +372,10 @@ function GenerateMAWB({
 	}, [edit, editCopies]);
 
 	useEffect(() => {
+		if (edit && activeCategory === 'hawb') {
+			return;
+		}
+
 		let totalVolume:number = 0;
 		let totalPackage:number = 0;
 		(formValues.dimension || []).forEach((dimensionObj) => {
