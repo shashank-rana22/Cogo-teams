@@ -1,7 +1,6 @@
 import { Tooltip, Datepicker } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
-import { subtractDays } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import MyResponsivePie from '../../../Components/PieChart';
@@ -12,7 +11,7 @@ import useGetCommentRemarkCounts from '../../../hook/useGetCommentRemarkCounts';
 import styles from './styles.module.css';
 
 function RejectedCharts() {
-	const [date, setDate] = useState(null);
+	const [date, setDate] = useState(new Date());
 
 	const { pieData = [], getData = () => {} } = useGetCommentRemarkCounts();
 
@@ -71,7 +70,7 @@ function RejectedCharts() {
 								onChange={setDate}
 								value={date}
 								isPreviousDaysAllowed
-								maxDate={subtractDays(new Date(), 7)}
+								maxDate={new Date()}
 							/>
 						</div>
 					</div>

@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 	padding: 20px 0 0 36px;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 600;
 }
 
