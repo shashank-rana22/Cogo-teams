@@ -13,16 +13,18 @@ function conditionalWrapper({ condition, title, wrapper, children }) {
 }
 
 function ListItem(props) {
-	const { listItem = {}, index = 0, handleClick, viewType, currLevel, user } = props;
+	const { listItem = {}, handleClick, viewType, currLevel, user } = props;
 
-	const isFirstEntry = index === GLOBAL_CONSTANTS.zeroth_index;
+	const isFirstEntry = listItem.rank === GLOBAL_CONSTANTS.one;
 
 	const boxShadow = isFirstEntry ? styles.box_shadow : '';
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({});
 
-	const isAllowed = (currLevel[GLOBAL_CONSTANTS.zeroth_index]?.split('_') !== viewType)
-	|| (user.id === listItem?.user?.id);
+	const [currView] = currLevel[GLOBAL_CONSTANTS.zeroth_index].split('_') || [];
+
+	const isAllowed = (`${currView}_view` !== viewType)
+	|| (user.id === listItem?.user?.id || viewType === 'admin_view');
 
 	const actionsAllowed = isAllowed && currLevel[GLOBAL_CONSTANTS.zeroth_index] !== 'kam_report';
 
