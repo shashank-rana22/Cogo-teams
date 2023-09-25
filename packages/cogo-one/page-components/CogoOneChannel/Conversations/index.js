@@ -56,9 +56,10 @@ function Conversations({
 			mailProps,
 		},
 		teams: {
-			activeTeamCard: activeTab?.data || {},
+			activeTeamCard : activeTab?.data || {},
 			suggestions,
 			viewType,
+			loggedInUserId : userId,
 		},
 	};
 

@@ -28,4 +28,22 @@ function pinnedChatsFormatter(list) {
 	return resultList;
 }
 
-export { dataFormatter, pinnedChatsFormatter };
+function messagesFormatter(query) {
+	let newMessagesHash = {};
+
+	query.forEach((eachMessage) => {
+		const timeStamp = eachMessage?.data()?.created_at;
+
+		newMessagesHash = {
+			...newMessagesHash,
+			[timeStamp]: {
+				...(eachMessage.data() || {}),
+				id: eachMessage.id,
+			},
+		};
+	});
+
+	return newMessagesHash;
+}
+
+export { dataFormatter, pinnedChatsFormatter, messagesFormatter };

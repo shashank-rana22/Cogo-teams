@@ -4,7 +4,7 @@
 
 	:global {
 		.ui_avatar_text {
-			background: none;
+			background-color: none;
 		}
 	}
 }

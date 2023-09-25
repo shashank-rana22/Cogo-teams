@@ -8,7 +8,7 @@ import TeamsBody from './TeamsBody';
 import TeamsHeader from './TeamsHeader';
 
 function Teams(teamsProps) {
-	const { firestore = {} } = teamsProps;
+	const { firestore = {}, setActiveTeamCard = () => {} } = teamsProps;
 
 	const [searchValue, setSearchValue] = useState('');
 
@@ -25,6 +25,7 @@ function Teams(teamsProps) {
 				<TeamsHeader
 					searchValue={searchValue}
 					setSearchValue={setSearchValue}
+					setActiveTeamCard={setActiveTeamCard}
 				/>
 				<CreateTeam />
 			</div>

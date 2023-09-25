@@ -7,16 +7,14 @@ import styles from './styles.module.css';
 function UserCard({ item = {} }) {
 	return (
 		<div className={styles.user_list_container}>
-			<div>
-				<Avatar
-					personName={item.name}
-					alt="img"
-					disabled={false}
-					size="35px"
-					className={styles.styled_avatar}
-				/>
-			</div>
-			<div>
+			<Avatar
+				personName={item.name}
+				alt="img"
+				disabled={false}
+				size="35px"
+				className={styles.styled_avatar}
+			/>
+			<div className={styles.child_wrapper}>
 				<div className={cl`${styles.agent_label} ${styles.over_text}`}>
 					{startCase(item.name)}
 				</div>

@@ -12,10 +12,11 @@
 .user_list_container {
 	display: flex;
 	align-items: center;
+	width: 100%;
 }
 
 .over_text {
-	max-width: 130px;
+	max-width: 100%;
 	overflow: hidden;
 	font-size: 12px;
 	text-overflow: ellipsis;
@@ -26,4 +27,8 @@
 	margin-right: 6px;
 	background: #ffd761;
 	border-radius: 50% !important;
+}
+
+.child_wrapper {
+	width: calc(100% - 35px);
 }

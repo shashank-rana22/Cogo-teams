@@ -1,38 +1,31 @@
-/* eslint-disable custom-eslint/variables-name-check */
 import Footer from './Footer';
-import CreatableHeader from './Headers/CreatableHeader';
-import NormalHeader from './Headers/NormalHeader';
+import Header from './Header';
 import Messages from './Messages';
 import styles from './styles.module.css';
 
 function TeamChats(props) {
-	const { activeTeamCard = {}, suggestions = [], viewType = '' } = props || {};
-	console.log('activeTeamCard:', activeTeamCard);
-	const type = 'creatable';
-	const HEADERS_MAPPING = {
-		creatable : CreatableHeader,
-		normal    : NormalHeader,
-	};
+	const { activeTeamCard = {}, suggestions = [], viewType = '', loggedInUserId = '' } = props || {};
 
-	const ActiveHeader = HEADERS_MAPPING[type];
+	const {
+		internal_room_id = '',
+	} = activeTeamCard || {};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				{/* <Header viewType={viewType} /> */}
-				<ActiveHeader
+				<Header
+					activeTeamCard={activeTeamCard}
+					loggedInUserId={loggedInUserId}
 					viewType={viewType}
 				/>
 			</div>
-			<div className={styles.message_container}>
-				<div className={styles.messages}>
-					<Messages />
-				</div>
-				<div className={styles.footer}>
-					<Footer
-						suggestions={suggestions}
-					/>
-				</div>
+			<div className={styles.messages}>
+				<Messages internalRoomId={internal_room_id} />
+			</div>
+			<div className={styles.footer}>
+				<Footer
+					suggestions={suggestions}
+				/>
 			</div>
 		</div>
 	);

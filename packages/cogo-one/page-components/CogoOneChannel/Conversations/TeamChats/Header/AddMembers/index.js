@@ -3,7 +3,7 @@ import { AsyncSelect } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import getCommonAgentType from '../../../../../../../utils/getCommonAgentType';
+import getCommonAgentType from '../../../../../../utils/getCommonAgentType';
 import UserCard from '../UserCard';
 
 import styles from './styles.module.css';
@@ -23,14 +23,14 @@ function AddMembers({ viewType = '' }) {
 				value={selectedMembers}
 				placeholder="Enter a name or email"
 				onChange={setSelectedMembers}
-				className={styles.select}
 				isClearable
 				asyncKey="list_chat_agents"
 				initialCall
 				params={{
 					filters: {
-						status     : 'active',
-						agent_type : getCommonAgentType({ viewType }) || undefined,
+						status: 'active',
+						agent_type:
+						viewType === 'cogoone_admin' ? undefined : getCommonAgentType({ viewType }) || undefined,
 					},
 					sort_by: 'agent_type',
 				}}

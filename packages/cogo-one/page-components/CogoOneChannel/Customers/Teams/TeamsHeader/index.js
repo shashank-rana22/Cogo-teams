@@ -15,9 +15,14 @@ import styles from './styles.module.css';
 function TeamsHeader({
 	searchValue = '',
 	setSearchValue = () => {},
+	setActiveTeamCard = () => {},
 
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
+
+	const newConversation = () => {
+		setActiveTeamCard({ internal_room_id: '', group_member_count: 0 });
+	};
 
 	return (
 		<div className={styles.header_container}>
@@ -48,6 +53,7 @@ function TeamsHeader({
 				width={20}
 				height={20}
 				src={GLOBAL_CONSTANTS.image_url.edit_square}
+				onClick={newConversation}
 			/>
 		</div>
 	);
