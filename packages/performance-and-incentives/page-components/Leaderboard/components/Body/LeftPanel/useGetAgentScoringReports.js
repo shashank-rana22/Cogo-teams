@@ -14,7 +14,7 @@ const useGetScoringReports = (props) => {
 	const [levelStack, setLevelStack] = useState([]);
 	const [isExpanded, setIsExpanded] = useState(false);
 
-	const [{ data, loading }, trigger] = useAllocationRequest({
+	const [{ data, loading }, refetch] = useAllocationRequest({
 		url     : '/reports',
 		method  : 'GET',
 		authkey : 'get_agent_scoring_reports',
@@ -35,7 +35,7 @@ const useGetScoringReports = (props) => {
 		currentUserData,
 		isExpanded,
 		setIsExpanded,
-		refetch: trigger,
+		refetch,
 		view,
 	};
 };

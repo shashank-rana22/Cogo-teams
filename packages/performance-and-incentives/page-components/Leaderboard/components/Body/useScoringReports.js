@@ -43,7 +43,6 @@ const useScoringReports = (props) => {
 			created_at_less_than    : dateRange?.endDate || undefined,
 			partner_id              : entity || undefined,
 			current_user_id         : incentive_leaderboard_viewtype !== ADMIN ? user.id : undefined,
-			user_id                 : incentive_leaderboard_viewtype !== ADMIN ? user.id : undefined,
 		},
 	});
 

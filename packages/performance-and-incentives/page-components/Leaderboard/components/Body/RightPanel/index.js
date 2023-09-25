@@ -1,4 +1,5 @@
 // import getEntityNameById from '../../../../../utils/get-entity-name-by-id';
+import LoadingState from '../../../../../common/LoadingState';
 import Activity from '../../../common/Activity';
 import IncentiveSnapshot from '../../../common/IncentiveSnapshot';
 import RankingAndScoring from '../../../common/RankingAndScoring';
@@ -7,7 +8,7 @@ import styles from './styles.module.css';
 import useGetAgentScoringReportStats from './useGetAgentScoringReportStats';
 
 function RightPanel(props) {
-	const { data } = useGetAgentScoringReportStats(props);
+	const { data, loading } = useGetAgentScoringReportStats(props);
 
 	const {
 		block_wise_stats: activityData = {},
@@ -16,6 +17,14 @@ function RightPanel(props) {
 	} = data || {};
 
 	// const COGO_ENTITY = getEntityNameById(entity);
+
+	if (loading) {
+		return (
+			<div className={styles.container}>
+				<LoadingState />
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>

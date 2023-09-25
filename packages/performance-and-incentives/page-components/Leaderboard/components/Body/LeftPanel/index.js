@@ -26,7 +26,7 @@ function LeftPanel(props) {
 		setIsExpanded,
 		refetch,
 		view,
-	} = useGetScoringReports(props);
+	} = useGetScoringReports({ params });
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 
