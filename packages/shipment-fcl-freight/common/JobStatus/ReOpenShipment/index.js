@@ -14,6 +14,7 @@ function ReOpenShipment({
 }) {
 	const profile = useSelector((state) => state.profile || {});
 	const { id = '' } = profile?.user || {};
+
 	const {
 		loading = false,
 		handleConfirm = () => {},
@@ -27,7 +28,7 @@ function ReOpenShipment({
 					className={styles.request_reopen}
 					onClick={() => setFinJobOpenConfirmation(true)}
 				>
-					Re-open
+					Fin Re-open
 				</Button>
 			)}
 			{finJobOpenConfirmation
