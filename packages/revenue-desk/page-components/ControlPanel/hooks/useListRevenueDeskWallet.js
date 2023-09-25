@@ -4,7 +4,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { VALUE_ONE } from '../../constants';
 
 const useListRevenueDeskWallet = () => {
-	const [filters, setFilter] = useState({ service_type: 'all', status: 'active' });
+	const [filters, setFilter] = useState({ service_type: 'all' });
 	const [page, setPage] = useState(VALUE_ONE);
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -17,7 +17,7 @@ const useListRevenueDeskWallet = () => {
 	const listRevenueDesk = useCallback(async () => {
 		try {
 			await trigger({
-				params: { service_type: service_type === 'all' ? undefined : service_type }
+				params: { service_type: service_type === 'all' ? undefined : service_type, status: 'active' }
 			|| {},
 				page,
 				pagination_data_required: true,
