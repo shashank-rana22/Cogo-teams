@@ -46,7 +46,6 @@ const useUploadBulkUtr = ({
 			});
 			setFileValue(null);
 			Toast.success('File successfully uploaded');
-			Toast.success('Account Number should be same as the one you have selected while creating payrun');
 			setShowUploadUTR(false);
 			refetch();
 		} catch (e) {

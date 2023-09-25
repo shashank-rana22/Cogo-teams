@@ -119,8 +119,8 @@ const GLOBAL_CONSTANTS = {
 	upload_utr_sample_file: {
 		normal_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/94addc4adc90598c259ccb9042021efb/'
 		+ 'UTRuploadSampleFileWithAccNumber.xlsx',
-		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae59e95d4e38a4271ff/'
-		+ 'UTRuploadSampleFileForAdvancePayment.xlsx',
+		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/8ada7aec57e6c3b0a068efed43814e1f/'
+		+ 'UTRuploadSampleFileForAdvancePaymentNew.xlsx',
 	},
 
 	cogoport_agent_email_id: 'agentid@cogoport.com',
