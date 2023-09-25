@@ -52,12 +52,10 @@ function ListItem(props) {
 						style={{ flex }}
 						className={styles.list_column}
 					>
-
 						{conditionalWrapper({
 							condition : listItem.rank === GLOBAL_CONSTANTS.one && key === 'rank',
 							title     : key,
 							wrapper   : (children) => (
-
 								<div className={styles.rank_container}>
 									<Image
 										src={GLOBAL_CONSTANTS.image_url.badge}
@@ -68,7 +66,6 @@ function ListItem(props) {
 									/>
 									{children}
 								</div>
-
 							),
 							children: accessor(listItem),
 						})}
