@@ -15,6 +15,8 @@ function useMailEditorFunctions({
 	userId = '',
 	mailProps = {},
 	firestore = {},
+	sendLoading = false,
+	setSendLoading = () => {},
 }) {
 	const {
 		buttonType = '',
@@ -55,6 +57,7 @@ function useMailEditorFunctions({
 	};
 
 	const { saveDraft = () => {} } = useSaveDraft({
+		setSendLoading,
 		firestore,
 		draftMessageData,
 		buttonType,
@@ -80,8 +83,7 @@ function useMailEditorFunctions({
 	});
 
 	const handleSend = () => {
-		const isEmptyMail = getFormatedEmailBody({ emailState });
-		if (replyLoading || mailLoading) {
+		if (replyLoading || mailLoading || sendLoading) {
 			return;
 		}
 
@@ -95,8 +97,10 @@ function useMailEditorFunctions({
 			return;
 		}
 
+		const isEmptyMail = getFormatedEmailBody({ emailState });
+
 		if (isEmptyMail || !subject) {
-			Toast.error('Both Subject and Body are Requied');
+			Toast.error('Both Subject and Body are Required');
 			return;
 		}
 
@@ -120,12 +124,16 @@ function useMailEditorFunctions({
 	};
 
 	const handleSaveDraft = async ({ isMinimize = false } = {}) => {
-		const isEmptyMail = getFormatedEmailBody({ emailState });
+		if (sendLoading) {
+			return;
+		}
 
 		if (uploading) {
 			Toast.error('Files are uploading...');
 			return;
 		}
+
+		const isEmptyMail = getFormatedEmailBody({ emailState });
 
 		if (isEmptyMail && isEmpty(attachments)) {
 			Toast.error('There is nothing in email body to save as draft');
