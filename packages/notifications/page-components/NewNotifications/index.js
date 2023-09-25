@@ -117,7 +117,7 @@ function NewNotifications({
 	};
 
 	const onMarkAllAsRead = async () => {
-		await updateAction('clicked');
+		await updateAction('seen');
 		setNotificationPopover(false);
 		setResetSubnavs(false);
 	};
