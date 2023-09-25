@@ -1,12 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { useRequest } from '@cogoport/request';
-import { merge } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
-
-import getControls from '../configurations/create-form';
 
 const useCreateUpdate = () => {
 	const { t } = useTranslation(['locations']);
@@ -21,60 +16,21 @@ const useCreateUpdate = () => {
 		watch,
 	} = useForm();
 
-	const onCreate = async () => {
-		const formattedValues = getValues();
-		formattedValues.is_icd = formattedValues.is_icd === 'Yes';
+	const onCreate = async ({ data }) => {
+		const formattedValues = data;
+		// formattedValues.is_icd = formattedValues.is_icd === 'Yes';
 
 		const payload = { ...formattedValues };
 
 		try {
-			const res = await trigger({ data: { ...payload } });
+			const res = await trigger({ data });
 			if (res?.data) {
 				Toast.success(t('locations:location_created_successfully'));
 			}
 		} catch (error) {
-			Toast.error(t('locations:some_went_wrong_error_toast'));
+			console.log(error);
 		}
 	};
-
-	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['country'] } },
-	}));
-
-	const zoneOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['zone'] } },
-	}));
-
-	const regionOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['region'] } },
-	}));
-
-	const cityOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['city'] } },
-	}));
-
-	const clusterOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['cluster'] } },
-	}));
-
-	const pincodeOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['pincode'] } },
-	}));
-
-	const cfsOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['cfs'] } },
-	}));
-
-	const fields = getControls({
-		countryOptions,
-		zoneOptions,
-		regionOptions,
-		cityOptions,
-		clusterOptions,
-		pincodeOptions,
-		cfsOptions,
-		t,
-	});
 
 	return {
 		handleSubmit,
@@ -83,7 +39,6 @@ const useCreateUpdate = () => {
 		control,
 		loading,
 		onCreate,
-		fields,
 	};
 };
 

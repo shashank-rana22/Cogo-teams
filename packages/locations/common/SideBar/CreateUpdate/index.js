@@ -1,60 +1,41 @@
 import { Button } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
+import { useRef } from 'react';
 
-import getElementController from '../../../constants/getController';
 import useCreateUpdate from '../../../hooks/useCreateUpdate';
-import FieldArray from '../../FieldArray';
 
-import styles from './styles.module.css';
+import Form from './Form';
 
 function CreateUpdateForm() {
 	const { t } = useTranslation(['locations']);
 
+	const formRef = useRef(null);
+
+	const onSubmit = () => {
+		formRef.current.formSubmit();
+	};
 	const {
-		handleSubmit,
-		errors,
-		watch,
-		control,
 		loading,
 		onCreate,
-		fields,
 	} = useCreateUpdate();
-
-	const watchType = watch('type');
+	const handleSubmitForm = ({ data }) => {
+		console.log(data, 'data');
+		onCreate({ data });
+	};
 
 	return (
-		<form onSubmit={handleSubmit(onCreate)}>
-			<div className={styles.content}>
-				{fields.map((field) => {
-					const { condition = {}, ...rest } = field;
+		<div>
+			<Form ref={formRef} handleSubmitForm={handleSubmitForm} />
 
-					if (rest.type === 'fieldArray') {
-						return (
-							<FieldArray key={field.name} {...rest} control={control} />
-						);
-					}
+			<Button
+				disabled={loading}
+				onClick={onSubmit}
+				type="submit"
+			>
+				{t('locations:submit_button')}
 
-					const Element = getElementController(rest.type);
-					if (!('condition' in field) || condition?.type?.includes(watchType?.value)) {
-						return (
-							<div key={field.name} className={styles.list}>
-								<h4>{field.label}</h4>
-								<Element
-									width="100%"
-									control={control}
-									id={`create_role_form_${field.name}_field`}
-									{...rest}
-								/>
-								<div className={styles.error}>{errors[field.name]?.message}</div>
-							</div>
-						);
-					}
-					return null;
-				})}
-			</div>
-
-			<Button disabled={loading} type="submit">{t('locations:submit_button')}</Button>
-		</form>
+			</Button>
+		</div>
 	);
 }
 export default CreateUpdateForm;

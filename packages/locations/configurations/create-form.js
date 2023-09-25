@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-const getFields = ({ t = () => {} }) => [
+const controls = ({ t = () => {} }) => [
 	{
 		name        : 'name',
 		label       : t('locations:controls_name_label'),
@@ -95,17 +95,20 @@ const getFields = ({ t = () => {} }) => [
 		rules       : { required: t('locations:controls_country_code_rules_required') },
 	},
 	{
-		name        : 'mobile_country_code',
-		label       : t('locations:controls_mobile_country_code_label'),
-		type        : 'text',
-		condition   : { type: ['country'] },
-		placeholder : t('locations:controls_mobile_country_code_placeholder'),
-		rules       : { required: t('locations:controls_mobile_country_code_rules_required') },
+		name           : 'mobile_country_code',
+		label          : t('locations:controls_mobile_country_code_label'),
+		type           : 'country_select',
+		optionValueKey : 'country_code',
+		params         : { filters: { type: ['country'] } },
+		placeholder    : t('locations:controls_mobile_country_code_placeholder'),
+		rules          : { required: t('locations:controls_mobile_country_code_rules_required') },
 	},
 	{
 		name        : 'country_id',
-		label       : t('locations:controls_country_id_label'),
-		type        : 'select',
+		label       : 'Country',
+		asyncKey    : 'list_locations',
+		type        : 'async_select',
+		params      : { filters: { type: ['country'] } },
 		placeholder : t('locations:controls_country_id_placeholder'),
 		condition   : {
 			type: [
@@ -126,19 +129,25 @@ const getFields = ({ t = () => {} }) => [
 	{
 		name        : 'zone_id',
 		label       : t('locations:controls_zone_id_label'),
-		type        : 'select',
+		type        : 'async_select',
+		asyncKey    : 'list_locations',
+		params      : { filters: { type: ['zone'] } },
 		placeholder : t('locations:controls_zone_id_placeholder'),
 	},
 	{
 		name        : 'region_id',
 		label       : t('locations:controls_region_id_label'),
-		type        : 'select',
+		type        : 'async_select',
+		asyncKey    : 'list_locations',
+		params      : { filters: { type: ['region'] } },
 		placeholder : t('locations:controls_region_id_placeholder'),
 	},
 	{
 		name        : 'city_id',
 		label       : t('locations:controls_city_id_label'),
-		type        : 'select',
+		type        : 'async_select',
+		asyncKey    : 'list_locations',
+		params      : { filters: { type: ['city'] } },
 		placeholder : t('locations:controls_city_id_placeholder'),
 		condition   : {
 			type: [
@@ -157,8 +166,10 @@ const getFields = ({ t = () => {} }) => [
 	{
 		name        : 'cluster_id',
 		label       : t('locations:controls_cluster_id_label'),
-		type        : 'select',
 		placeholder : t('locations:controls_cluster_id_placeholder'),
+		type        : 'async_select',
+		asyncKey    : 'list_locations',
+		params      : { filters: { type: ['cluster'] } },
 		condition   : {
 			type: ['seaport', 'airport', 'pincode', 'cfs', 'cluster', 'yard'],
 		},
@@ -166,8 +177,10 @@ const getFields = ({ t = () => {} }) => [
 	{
 		name        : 'pincode_id',
 		label       : t('locations:controls_pincode_id_label'),
-		type        : 'select',
 		placeholder : t('locations:controls_pincode_id_placeholder'),
+		type        : 'async_select',
+		asyncKey    : 'list_locations',
+		params      : { filters: { type: ['pincode'] } },
 		condition   : {
 			type: [
 				'seaport',
@@ -183,7 +196,9 @@ const getFields = ({ t = () => {} }) => [
 	{
 		name        : 'cfs_code',
 		label       : t('locations:controls_cfs_code_label'),
-		type        : 'select',
+		type        : 'async_select',
+		asyncKey    : 'list_locations',
+		params      : { filters: { type: ['cfs'] } },
 		placeholder : t('locations:controls_cfs_code_placeholder'),
 		condition   : { type: ['cfs'] },
 	},
@@ -265,12 +280,12 @@ const getFields = ({ t = () => {} }) => [
 		],
 	},
 	{
-		name        : 'aliases_attributes',
-		label       : t('locations:controls_aliases_attributes_label'),
-		type        : 'fieldArray',
-		showButtons : true,
-		buttonText  : t('locations:controls_aliases_attributes_button_text'),
-		controls    : [
+		name          : 'aliases_attributes',
+		label         : t('locations:controls_aliases_attributes_label'),
+		type          : 'fieldArray',
+		showButtons   : true,
+		addButtonText : t('locations:controls_aliases_attributes_button_text'),
+		controls      : [
 			{
 				name  : 'name',
 				label : t('locations:controls_name_field_array_label'),
@@ -306,48 +321,4 @@ const getFields = ({ t = () => {} }) => [
 	},
 ];
 
-const getControls = ({
-	countryOptions = {},
-	zoneOptions = {},
-	regionOptions = {},
-	cityOptions = {},
-	clusterOptions = {},
-	pincodeOptions = {},
-	cfsOptions = {},
-	t = () => {},
-}) => (getFields({ t }) || []).map((control) => {
-	const { name } = control;
-	let newControl = { ...control };
-
-	if (name === 'country_id') {
-		newControl = { ...newControl, ...countryOptions };
-	}
-
-	if (name === 'zone_id') {
-		newControl = { ...newControl, ...zoneOptions };
-	}
-
-	if (name === 'region_id') {
-		newControl = { ...newControl, ...regionOptions };
-	}
-
-	if (name === 'city_id') {
-		newControl = { ...newControl, ...cityOptions };
-	}
-
-	if (name === 'cluster_id') {
-		newControl = { ...newControl, ...clusterOptions };
-	}
-
-	if (name === 'pincode_id') {
-		newControl = { ...newControl, ...pincodeOptions };
-	}
-
-	if (name === 'cfs_code') {
-		newControl = { ...newControl, ...cfsOptions };
-	}
-
-	return { ...newControl };
-});
-
-export default getControls;
+export default controls;

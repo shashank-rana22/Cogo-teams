@@ -1,3 +1,4 @@
+import { Modal } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
 
 import getHeader from '../../constants/header';
@@ -33,13 +34,19 @@ function SideBarComponent({
 	};
 	return (
 		<div className={styles.sidebar}>
-			<div className={styles.sidebar_body}>
-				<div role="presentation" className={styles.close} onClick={onClose}>
-					&times;
-				</div>
-				<h2>{header[sideBar]}</h2>
-				<div>{renderBody()}</div>
-			</div>
+
+			<Modal
+				show={sideBar}
+				onClose={onClose}
+				closeOnOuterClick={setSideBar}
+				placement="right"
+				size="sm"
+			>
+				<Modal.Header title={header[sideBar]} />
+				<Modal.Body>
+					<div>{renderBody()}</div>
+				</Modal.Body>
+			</Modal>
 		</div>
 	);
 }
