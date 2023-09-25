@@ -9158,6 +9158,18 @@ const partner = {
 			api         : 'post_incident_management_incident_send_overhead_mail',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_common_job_post_tax_profit',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_pre_tax_profit',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_list_service_charges',
+			access_type : 'private',
+		},
 	],
 	vietnam_account_receivables: [
 		{
@@ -13443,6 +13455,11 @@ const partner = {
 			api          : 'list_platform_config_constants',
 			access_type  : 'private',
 			service_name : 'platform_config',
+		},
+		{
+			api          : 'list_cogoone_shifts',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 	],
 	analytics_dashboard: [
