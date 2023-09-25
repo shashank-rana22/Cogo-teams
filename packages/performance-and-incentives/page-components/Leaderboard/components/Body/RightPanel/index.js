@@ -7,9 +7,9 @@ import styles from './styles.module.css';
 import useGetAgentScoringReportStats from './useGetAgentScoringReportStats';
 
 function RightPanel(props) {
-	const { dateRange, entity } = props;
+	const { entity } = props;
 
-	const { data } = useGetAgentScoringReportStats({ dateRange, entity });
+	const { data } = useGetAgentScoringReportStats(props);
 
 	const {
 		block_wise_stats: activityData = {},

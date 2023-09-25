@@ -11,14 +11,11 @@ import styles from './styles.module.css';
 import useGetScoringReports from './useGetAgentScoringReports';
 
 function LeftPanel(props) {
-	const { dateRange, entity } = props;
+	const { entity, params, setParams, isChannel, setIsChannel, debounceQuery } = props;
 
 	const {
-		params,
-		setParams,
 		loading,
 		list,
-		debounceQuery,
 		searchValue,
 		setSearchValue,
 		currLevel,
@@ -28,10 +25,8 @@ function LeftPanel(props) {
 		currentUserData,
 		isExpanded,
 		setIsExpanded,
-		isChannel,
-		setIsChannel,
 		refetch,
-	} = useGetScoringReports({ dateRange, entity });
+	} = useGetScoringReports(props);
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 
