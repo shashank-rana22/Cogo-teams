@@ -51,9 +51,11 @@ function InvoiceInfo({
 		is_revoked = false,
 	} = invoice || {};
 
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
-	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	const { serial_id = '', is_job_closed = false, is_job_closed_financially = false } = shipment_data || {};
+
+	const showIrnTriggerForOldShipments = serial_id <= GLOBAL_CONSTANTS.invoice_check_id
 	&& status === 'reviewed'
 		&& !isEmpty(invoice?.data);
 
@@ -199,11 +201,11 @@ function InvoiceInfo({
 				) : null}
 
 				{(status === 'reviewed'
-					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id && !isProcessing) ? (
+					&& serial_id <= GLOBAL_CONSTANTS.invoice_check_id && !isProcessing) ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"
-							disabled={shipment_data?.is_job_closed}
+							disabled={is_job_closed}
 							onClick={() => handleClick('amendment_requested')}
 						>
 							Request Amendment
@@ -214,7 +216,7 @@ function InvoiceInfo({
 					<Button
 						style={{ marginTop: '4px' }}
 						size="sm"
-						disabled={shipment_data?.is_job_closed}
+						disabled={is_job_closed}
 						onClick={() => setAskNullify(true)}
 					>
 						Request CN
@@ -225,7 +227,7 @@ function InvoiceInfo({
 					<Button
 						size="sm"
 						onClick={() => setShowOTPModal(true)}
-						disabled={shipment_data?.is_job_closed_financially}
+						disabled={is_job_closed_financially}
 					>
 						Send OTP for Approval
 					</Button>
@@ -237,7 +239,7 @@ function InvoiceInfo({
 						onClick={() => setShowReview(true)}
 						themeType="accent"
 						disabled={disableMarkAsReviewed
-							|| invoice?.is_eta_etd || shipment_data?.is_job_closed_financially}
+							|| invoice?.is_eta_etd || is_job_closed_financially}
 					>
 						Mark as Reviewed
 					</Button>
