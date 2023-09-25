@@ -46,7 +46,7 @@ function MilestoneName({ milestone = '', vessel_name = '' }) {
 
 function Card({
 	combineList = [], trackingType = 'ocean', isCurrentMilestone = false,
-	milestoneSubIndex = null,
+	milestoneSubIndex = null, refetch,
 }) {
 	const {
 		location = '', station = '',
@@ -77,7 +77,7 @@ function Card({
 				<h3 className={styles.title}>{location || station}</h3>
 				<Image
 					src={url}
-					width={WIDTH_PROP?.[transport_mode]}
+					width={WIDTH_PROP?.[transport_mode] || 35}
 					height={35}
 					alt="logo"
 				/>
@@ -157,6 +157,7 @@ function Card({
 					deleteModal={deleteModal}
 					setDeleteModal={setDeleteModal}
 					deleteId={deleteId}
+					refetch={refetch}
 					// containerSubscriptionId={containerSubscriptionId}
 				/>
 
@@ -164,10 +165,9 @@ function Card({
 
 			{editModal && (
 				<EditModal
-					// getMilestones={getMilestones}
 					editModal={editModal}
 					setEditModal={setEditModal}
-					// refetch={refetch}
+					refetch={refetch}
 					// showUpdate={showUpdate}
 					// setShowUpdate={setShowUpdate}
 					// isDisabled={isDisabled}

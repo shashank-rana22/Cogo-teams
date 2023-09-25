@@ -12,10 +12,12 @@ function DeleteModal({
 	deleteModal,
 	setDeleteModal,
 	deleteId,
+	refetch,
 }) {
 	const { deleteMileStones = () => {}, loading = false } = useDeleteContainerMilestones({
 		refetch: () => {
 			setDeleteModal();
+			refetch();
 		},
 	});
 	return (

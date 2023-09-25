@@ -23,9 +23,8 @@ function SearchFilters({ activeTab = () => {}, setSearchString = () => {}, setSe
 
 	return (
 		<div className={styles.container_class}>
-			<div>
-				<Layout controls={controls} control={control} showElements={getShowElements({ activeTab, controls })} />
-			</div>
+			<Layout controls={controls} control={control} showElements={getShowElements({ activeTab, controls })} />
+
 		</div>
 	);
 }

@@ -21,6 +21,7 @@ const useGetContainerMilestones = ({ id = '' }) => {
 
 	return {
 		getMilestones,
+		refetch          : getMilestones,
 		data,
 		milestoneData    : data?.data,
 		apiloading       : loading,

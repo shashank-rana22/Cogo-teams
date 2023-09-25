@@ -8,7 +8,7 @@ import { isCurrentDate, isFutureDate } from '../../../../../../utlis/dateCompare
 import Card from './Card';
 import styles from './styles.module.css';
 
-function MilestoneStepper({ combineMileStoneList = [], trackingType = 'air' }) {
+function MilestoneStepper({ combineMileStoneList = [], trackingType = 'air', refetch }) {
 	const scrollRef = useRef({});
 
 	const {
@@ -49,6 +49,7 @@ function MilestoneStepper({ combineMileStoneList = [], trackingType = 'air' }) {
 						>
 							<Card
 								combineList={combineList}
+								refetch={refetch}
 								trackingType={trackingType}
 								isCurrentMilestone={index === currentMilestoneIndex}
 								milestoneSubIndex={milestoneSubIndex}

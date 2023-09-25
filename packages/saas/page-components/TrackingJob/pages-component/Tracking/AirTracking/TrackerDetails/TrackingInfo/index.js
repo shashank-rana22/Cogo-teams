@@ -7,31 +7,28 @@ import Loader from './Loader';
 import MilestoneStepper from './MilestoneStepper';
 import styles from './styles.module.css';
 
-function TrackingInfo({ trackingType = 'air', data, loading, refetch }) {
+function TrackingInfo({ trackingType = 'air', data = {}, loading = false, refetch = () => {} }) {
 	const {
 		combineMileStoneList,
 	} = useGetCurrentInfo({ data, trackingType });
 	if (loading) {
 		return <Loader type={trackingType} />;
 	}
-	if (!loading && isEmpty(combineMileStoneList)) {
+	if (isEmpty(combineMileStoneList)) {
 		return (
 			<EmptyState />
 		);
 	}
 	return (
-		<div className={styles.container}>
-			<div className={styles.info_container}>
-				<div className={styles.milestone_container}>
-					<MilestoneStepper
-						combineMileStoneList={combineMileStoneList}
-						trackingType={trackingType}
-						refetch={refetch}
-					/>
-				</div>
 
-			</div>
+		<div className={styles.milestone_container}>
+			<MilestoneStepper
+				combineMileStoneList={combineMileStoneList}
+				trackingType={trackingType}
+				refetch={refetch}
+			/>
 		</div>
+
 	);
 }
 

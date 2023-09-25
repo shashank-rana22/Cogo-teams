@@ -1,4 +1,3 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
@@ -20,7 +19,7 @@ const useGetAirMilestones = ({ id = null, trackingType }) => {
 		} catch (err) {
 			console.log(err);
 		}
-	}, [id, trackingType, trigger]);
+	}, [id, trigger]);
 
 	useEffect(() => {
 		getMilestones();

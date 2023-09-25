@@ -6,7 +6,7 @@ import MilestoneStepper from './MilestoneStepper';
 import styles from './styles.module.css';
 
 function TrackingInfo({ id = null }) {
-	const { loading, data } = useGetContainerMilestones({ id });
+	const { loading, data, refetch } = useGetContainerMilestones({ id });
 
 	const {
 		combineMileStoneList,
@@ -21,7 +21,7 @@ function TrackingInfo({ id = null }) {
 			<div className={styles.info_container}>
 				<p>{data?.shipment_details?.[0]?.container_no}</p>
 				<div className={styles.milestone_container}>
-					<MilestoneStepper combineMileStoneList={combineMileStoneList} trackingType="ocean" />
+					<MilestoneStepper combineMileStoneList={combineMileStoneList} trackingType="ocean" refetch={refetch} />
 				</div>
 
 			</div>

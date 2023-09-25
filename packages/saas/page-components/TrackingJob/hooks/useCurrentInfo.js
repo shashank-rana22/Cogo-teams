@@ -1,11 +1,10 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import { mergeAirMilestone, mergeOceanMilestone, mergeSurfaceMilestone } from '../utlis/mergeMilestone';
 
 const useGetCurrentInfo = ({ data = {}, trackingType }) => {
-	const { tracking_data:trackingInfo = [] } = data?.data?.[0] || {};
+	const { tracking_data:trackingInfo = [] } = data?.data?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { list:surfaceList = [] } = data || {};
 	const { data : airList = [] } = data || {};
 	const [combineMileStoneList, setCombineMileStoneList] = useState([]);

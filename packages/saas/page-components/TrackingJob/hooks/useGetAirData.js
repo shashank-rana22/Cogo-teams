@@ -24,7 +24,6 @@ const useGetAirData = ({ refetch }) => {
 			refetch();
 			Toast.success('Tracking Data Added Successfully');
 		} catch (err) {
-			console.log(err);
 			toastApiError(err);
 		}
 	};

@@ -20,11 +20,11 @@ function TrackingInfo({ id = null, trackingType = 'surface' }) {
 	if (loading) {
 		return <Loader type="surface" />;
 	}
-	// if (isEmpty(data?.list)) {
-	// 	return (
-	// 		<EmptyState />
-	// 	);
-	// }
+	if (isEmpty(combineMileStoneList)) {
+		return (
+			<EmptyState />
+		);
+	}
 	return (
 
 		<div className={styles.info_container}>

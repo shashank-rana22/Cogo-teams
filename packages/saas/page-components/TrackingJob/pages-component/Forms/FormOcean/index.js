@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function Form({
 	handleSubmitForm = () => {},
-	showUpdate,
+	showUpdate = {},
 }, ref) {
 	const { control, handleSubmit, formState:{ errors = {} } } = useForm();
 	const controls = formControls({ isDisabled: true, showUpdate });

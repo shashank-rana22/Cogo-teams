@@ -1,12 +1,13 @@
 const controls = [
 	{
-		name        : 'locations',
-		type        : 'nestedFieldArray',
-		showButtons : true,
-		buttonText  : 'Add Location',
-		value       : {},
-		rules       : { required: 'This is required' },
-		controls    : [
+		name          : 'locations',
+		type          : 'nestedFieldArray',
+		showButtons   : true,
+		addButtonText : 'Add Location',
+		value         : {},
+
+		rules    : { required: 'This is required' },
+		controls : [
 			{
 				name        : 'location_id',
 				type        : 'async_select',
@@ -24,13 +25,13 @@ const controls = [
 				rules : { required: 'This is required' },
 			},
 			{
-				name        : 'milestones',
-				type        : 'fieldArray',
-				showButtons : true,
-				buttonText  : 'Add Milestones',
-				value       : {},
-				span        : 12,
-				controls    : [
+				name          : 'milestones',
+				type          : 'fieldArray',
+				showButtons   : true,
+				addButtonText : 'Add Milestones',
+				value         : {},
+				span          : 12,
+				controls      : [
 					{
 						label          : 'Expected Date',
 						name           : 'expected_date',

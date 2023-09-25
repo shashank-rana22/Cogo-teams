@@ -10,6 +10,7 @@ function EditModal({
 	editModal = false,
 	setEditModal = () => {},
 	editDetail = {},
+	refetch = () => {},
 }) {
 	const formRef = useRef(null);
 
@@ -20,6 +21,7 @@ function EditModal({
 	const { apiTrigger, loading = false } = useEditContainerMilestones({
 		refetch: () => {
 			setEditModal();
+			refetch();
 		},
 	});
 
