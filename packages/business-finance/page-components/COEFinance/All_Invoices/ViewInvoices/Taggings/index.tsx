@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -31,6 +30,14 @@ function Tagging({
 	}>> }) {
 	const [value, setValue] = useState({ approve: '', reject: '', undo: '', remark: '' });
 
+	const switchDetails = () => {
+		onAccept({
+			tabName      : PRESENT_TAB,
+			tabToOpen    : TAB_TO_OPEN,
+			timelineItem : 'taggingCheck',
+		});
+	};
+
 	return (
 		<div style={{ padding: '0 20px' }}>
 			<div
@@ -60,21 +67,9 @@ function Tagging({
 						setRemarksVal={setRemarksVal}
 						status={status}
 						mappingsData={mappingsData}
+						switchDetails={switchDetails}
+						taggingChecked={taggingChecked}
 					/>
-					<Button
-						size="md"
-						themeType="secondary"
-						style={{ marginRight: '8px' }}
-						disabled={taggingChecked}
-						onClick={() => onAccept({
-							tabName      : PRESENT_TAB,
-							tabToOpen    : TAB_TO_OPEN,
-							timelineItem : 'taggingCheck',
-						})}
-						className={styles.approve_button}
-					>
-						Approve
-					</Button>
 				</div>
 			) : null}
 		</div>
