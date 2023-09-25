@@ -130,8 +130,10 @@ function GenerateMawb({
 
 	const takeImageScreenShot = async (node) => {
 		const dataURI = await htmlToImage.toJpeg(node);
-		const doc = new JsPDF('p', 'mm', [900, 1300]);
-		await doc.addImage(dataURI, 'JPEG', 0, 0, 900, 1300);
+		const doc = new JsPDF();
+		const docWidth = doc.internal.pageSize.getWidth();
+		const docHeight = doc.internal.pageSize.getHeight();
+		await doc.addImage(dataURI, 'jpeg', ZERO_COORDINATE, ZERO_COORDINATE, docWidth, docHeight);
 		const pdfDataURI = doc.output('datauristring');
 		return pdfDataURI;
 	};
