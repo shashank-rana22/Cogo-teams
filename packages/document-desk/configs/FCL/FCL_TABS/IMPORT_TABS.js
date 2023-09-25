@@ -41,7 +41,7 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 				'shipment_received',
 				'confirmed_by_importer_exporter',
 			],
-			bl_uploaded: false,
+			bl_not_uploaded: true,
 		},
 
 		amendment_requested_by_importer_exporter: {
