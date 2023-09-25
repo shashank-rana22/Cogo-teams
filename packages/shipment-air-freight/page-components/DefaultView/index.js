@@ -63,7 +63,10 @@ function DefaultView() {
 		refetchServices = () => {},
 	} = useContext(ShipmentDetailContext) || {};
 
-	const { id: shipment_id } = shipment_data || {};
+	const {
+		id: shipment_id,
+		is_job_closed_financially = false,
+	} = shipment_data || {};
 
 	const { features = [], default_tab = 'tasks', job_open_request = false } = stakeholderConfig || {};
 	const [activeTab, setActiveTab] = useState(default_tab);
@@ -148,11 +151,13 @@ function DefaultView() {
 						onChange={handleVersionChange}
 					/>
 
-					<ReOpenShipment
-						finJobOpenConfirmation={finJobOpenConfirmation}
-						setFinJobOpenConfirmation={setFinJobOpenConfirmation}
-						shipment_id={shipment_id}
-					/>
+					{is_job_closed_financially && (
+						<ReOpenShipment
+							finJobOpenConfirmation={finJobOpenConfirmation}
+							setFinJobOpenConfirmation={setFinJobOpenConfirmation}
+							shipment_id={shipment_id}
+						/>
+					)}
 
 					<HandleRaiseContainer
 						shipment_data={shipment_data}
