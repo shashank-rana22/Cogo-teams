@@ -97,11 +97,11 @@ function Navbar({
 			style={style}
 			className={cl`${mobileShow ? styles.mobile_container : styles.container}${className}
 			${notificationPopover ? ` ${styles.expanded}` : ''}`}
+			ref={navRef}
 		>
 			<nav
 				onMouseEnter={() => setResetSubnavs(true)}
 				onMouseLeave={handleLeave}
-				ref={navRef}
 			>
 				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}
 				${notificationPopover ? ` ${styles.notification_popover_bg_nav}` : ''}`}
