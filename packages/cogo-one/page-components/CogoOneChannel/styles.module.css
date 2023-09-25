@@ -85,13 +85,35 @@
 
 	&:hover {
 		right: 0;
-		transition: 0.1s;
+		animation: slide 0.5s;
 	}
 
 	svg {
 		width: 24px;
 		height: 24px;
 		margin-left: 10px;
+	}
+}
+
+@keyframes slide {
+	0% {
+		right: 0;
+	}
+
+	25% {
+		right: -12px;
+	}
+
+	50% {
+		right: 0;
+	}
+
+	75% {
+		right: -3px;
+	}
+
+	100% {
+		right: 0;
 	}
 }
 
