@@ -3,6 +3,7 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
+import Announcement from '../../../../common/Announcement';
 import DURATION_CONSTANTS from '../../../../constants/duration-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
 import getEntityOptions from '../../../../utils/get-entity-options';
@@ -12,9 +13,9 @@ import {
 	getThisMonthStartDate,
 	getThisQuarterStartDate,
 } from '../../../../utils/start-date-functions';
+import ProgressBar from '../../common/ProgressBar';
 import DURATION_OPTIONS from '../../configurations/get-duration-filter-options';
 
-import Announcement from './Announcement';
 import styles from './styles.module.css';
 
 const { TODAY, THIS_MONTH, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
@@ -85,16 +86,20 @@ function Header(props) {
 					</div>
 				</div>
 
-				{incentive_leaderboard_viewtype === ADMIN && (
-					<Button
-						type="button"
-						size="lg"
-						themeType="secondary"
-						onClick={() => push('/performance-and-incentives/public-leaderboard')}
-					>
-						Public View Mode
-					</Button>
-				)}
+				<div>
+					{incentive_leaderboard_viewtype !== ADMIN && (<ProgressBar />)}
+
+					{incentive_leaderboard_viewtype === ADMIN && (
+						<Button
+							type="button"
+							size="lg"
+							themeType="secondary"
+							onClick={() => push('/performance-and-incentives/public-leaderboard')}
+						>
+							Public View Mode
+						</Button>
+					)}
+				</div>
 			</div>
 
 			<Announcement />

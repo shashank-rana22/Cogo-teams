@@ -1,0 +1,20 @@
+.container {
+	display: flex;
+	gap: 28px;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px;
+	background-color: #fff;
+	border-radius: 6px;
+}
+
+.username {
+	margin: 0;
+	font-size: var(--font-size-md);
+	font-weight: 900;
+}
+
+.points_till_now {
+	margin: 0;
+	font-size: 10px;
+}
