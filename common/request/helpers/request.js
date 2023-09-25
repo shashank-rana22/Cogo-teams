@@ -45,7 +45,7 @@ request.interceptors.request.use((oldConfig) => {
 	const newConfig = { ...oldConfig };
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
 
-	// const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com');
+	const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com');
 
 	const authorizationparameters = getAuthorizationParams(store, newConfig.url);
 
@@ -61,28 +61,23 @@ request.interceptors.request.use((oldConfig) => {
 	newConfig.paramsSerializer = { serialize: customSerializer };
 
 	if (serviceName) {
-		newConfig.url = `/${serviceName === 'location' ? 'public_location' : serviceName}/${originalApiPath}`;
+		newConfig.url = `/${serviceName}/${originalApiPath}`;
 		if (
 			PEEWEE_SERVICES.includes(serviceName)
-			|| (serviceName === 'location')) {
+			|| (serviceName === 'location'
+			&& !isDevMode)) {
 			newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
 		}
 	}
 
-	if (PEEWEE_SERVICES.includes(serviceName)) {
-		newConfig.baseURL = 'https://2c30-2409-40c0-1031-4064-4470-2de4-a51a-2efe.ngrok-free.app';
+	if (PEEWEE_SERVICES.includes(serviceName) && isDevMode) {
+		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
 	}
 
-	if (serviceName === 'location') {
-		newConfig.baseURL = 'https://api.cogoport.com';
-	}
 	return {
 		...newConfig,
 		headers: {
-			authorizationscope           : 'partner',
-			authorization                : `Bearer: ${token}`,
-			authorizationparameters,
-			'ngrok-skip-browser-warning' : '*',
+			authorizationscope: 'partner', authorization: `Bearer: ${token}`, authorizationparameters,
 		},
 	};
 });
