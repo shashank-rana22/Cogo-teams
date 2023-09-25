@@ -210,13 +210,13 @@ export const columns = ({
 		accessor : 'financeRemark',
 		id       : 'remark',
 		Cell     : ({ row: { original } }) => {
-			const { financeRemark = '' } = original || {};
+			const { financeRemark = '', remark = '' } = original || {};
 
 			return (
 				<Tooltip
-					content={<div className={styles.tooltip}>{financeRemark}</div>}
+					content={<div className={styles.tooltip}>{financeRemark || remark}</div>}
 				>
-					<div className={styles.remark}>{financeRemark}</div>
+					<div className={styles.remark}>{financeRemark || remark}</div>
 				</Tooltip>
 			);
 		},
