@@ -156,7 +156,7 @@ function CardItem({
 				<List
 					config={config}
 					itemData={getResponseData()}
-					functions={functions}
+					functions={functions as any}
 					loading={loading}
 					page={pageIndex}
 					pageSize={10}
