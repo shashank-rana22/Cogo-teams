@@ -41,7 +41,6 @@ function ListHeader({
 						const { label = '', value = '' } = item;
 						return (
 							<TabPanel
-								themeType="primary"
 								key={value}
 								name={value}
 								title={label}
@@ -58,7 +57,6 @@ function ListHeader({
 							size="sm"
 							icon={<IcMSearchlight />}
 							disabled
-							themeType="primary"
 						/>
 					)}
 					onChange={(e) => { setFilters({ ...filters, serial_id: e }); }}
@@ -98,7 +96,6 @@ function ListHeader({
 				</div>
 				<Button
 					size="lg"
-					themeType="primary"
 					className={styles.add_btn}
 					onClick={() => setShowAddRuleForm(true)}
 				>

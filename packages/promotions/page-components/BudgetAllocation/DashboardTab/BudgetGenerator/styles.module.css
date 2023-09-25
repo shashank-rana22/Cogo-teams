@@ -18,18 +18,18 @@
 	font-weight: 500;
 }
 
-.mainText {
+.main_text {
 	margin: 0 12px;
 	font-size: 20px;
 	font-weight: 600;
 }
 
-.currencyText {
+.currency_text {
 	font-size: 14px;
 	font-weight: 500;
 }
 
-.currencySelect {
+.currency_select {
 	min-width: 300px;
 	padding: 16px;
 }

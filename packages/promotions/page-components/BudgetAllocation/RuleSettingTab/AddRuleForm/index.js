@@ -5,9 +5,9 @@ import React, { useEffect } from 'react';
 
 import Layout from '../../../../common/Layout';
 
-import getControls from './controls';
-import discountConfigControls from './discountConfigControls';
-import shipmentConfigControls from './shipmentConfigControls';
+import getControls from './controls/controls';
+import discountConfigControls from './controls/discountConfigControls';
+import shipmentConfigControls from './controls/shipmentConfigControls';
 import styles from './styles.module.css';
 
 const INCREMENT = 0.01;
@@ -22,48 +22,32 @@ function AddRuleForm({
 	const discountControls = discountConfigControls();
 	const shipmentControls = shipmentConfigControls();
 
-	controls.forEach((ctrl) => {
-		if (ctrl?.value) {
-			DEFAULT_VALUES[ctrl.name] = ctrl.value;
-		}
-	});
-	discountControls.forEach((ctrl) => {
-		if (ctrl?.value) {
-			DEFAULT_VALUES[ctrl.name] = ctrl.value;
-		}
-	});
-	shipmentControls.forEach((ctrl) => {
-		if (ctrl?.value) {
-			DEFAULT_VALUES[ctrl.name] = ctrl.value;
-		}
-	});
+	DEFAULT_VALUES.scope = 'shipment';
+	DEFAULT_VALUES.category = 'business';
+	DEFAULT_VALUES.for_service = 'fcl_customs';
 
 	const {
 		control, formState: { errors = {} } = {}, handleSubmit, watch, setValue,
 	} = useForm({ defaultValues: DEFAULT_VALUES });
-
 	const formValues = watch();
-	const scope = formValues?.scope;
-	const for_organisation = formValues?.for_organisation;
 
 	const SHOW_ELEMENTS = {
-		organisation_type     : for_organisation === '',
-		organisation_sub_type : for_organisation === '',
+		organisation_type     : formValues?.for_organisation === '' || formValues?.for_organisation === undefined,
+		organisation_sub_type : formValues?.for_organisation === '' || formValues?.for_organisation === undefined,
 	};
 
 	const { shipment_price_slab_config = [] } = formValues;
-	const customFieldArrayControls = { shipment_price_slab_config: {} };
-
 	useEffect(() => {
 		shipment_price_slab_config?.forEach((_o, index) => {
 			if (index === ZERO) {
-				setValue(`shipment_price_slab_config.${index}.slab_lower_limit`, ZERO);
+				setValue(`shipment_price_slab_config.${index}.slab_lower_limit`, ONE);
 			} else {
 				setValue(
 					`shipment_price_slab_config.${index}.slab_lower_limit`,
 					Number(shipment_price_slab_config[index - ONE].slab_upper_limit) + INCREMENT,
 				);
 			}
+			setValue(`shipment_price_slab_config.${index}.slab_unit`, 'shipment_value');
 		});
 	}, [shipment_price_slab_config, setValue]);
 
@@ -81,7 +65,6 @@ function AddRuleForm({
 					size="lg"
 					icon={<IcMCross />}
 					disabled={false}
-					themeType="primary"
 					onClick={() => {
 						setShowAddRuleForm(false);
 					}}
@@ -99,7 +82,7 @@ function AddRuleForm({
 				<div className={styles.heading}>Global Configuration</div>
 			</div>
 
-			{scope === 'organization' ? (
+			{formValues?.scope === 'organization' ? (
 				<Layout
 					controls={discountControls}
 					control={control}
@@ -110,9 +93,7 @@ function AddRuleForm({
 					controls={shipmentControls}
 					control={control}
 					errors={errors}
-					customFieldArrayControls={customFieldArrayControls}
 					formValues={formValues}
-					// showElements={SHIPMENT_SHOW_ELEMENTS}
 					showElements={SHOW_ELEM}
 				/>
 			)}
@@ -120,7 +101,6 @@ function AddRuleForm({
 			<div className={styles.btn_container}>
 				<Button
 					className={styles.btn}
-					themeType="primary"
 					size="md"
 					onClick={handleSubmit}
 				>

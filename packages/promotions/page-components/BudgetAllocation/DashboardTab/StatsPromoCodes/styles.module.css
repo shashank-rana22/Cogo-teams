@@ -14,12 +14,12 @@
 	font-weight: 500;
 }
 
-.mainContainer {
+.main_container {
 	display: flex;
 	margin-top: 16px;
 }
 
-.containerColumn {
+.container_column {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -33,12 +33,12 @@
 	border: 0.1px solid #838383;
 }
 
-.mainText {
+.main_text {
 	font-size: 18px;
 	font-weight: 600;
 }
 
-.subText {
+.sub_text {
 	font-size: 14px;
 	font-weight: 400;
 }

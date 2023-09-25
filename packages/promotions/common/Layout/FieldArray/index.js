@@ -12,14 +12,12 @@ function FieldArray({
 	showButtons = true,
 	formValues = {},
 	handleFieldArrayAddCheck = () => true,
-	customFieldArrayControls = {},
 	showElements = [],
 }) {
 	const { controls = [], name, showHeading = true } = ctrl || {};
 
 	const { fields, append, remove } = useFieldArray({ control, name });
 
-	const currentFieldArrayCustomField = customFieldArrayControls?.[name] || {};
 	const handleAppend = () => {
 		if (handleFieldArrayAddCheck({ currentIndex: fields.length, formValues, name })) {
 			append();
@@ -40,7 +38,6 @@ function FieldArray({
 					name={name}
 					formValues={formValues}
 					showHeading={showHeading}
-					customField={currentFieldArrayCustomField?.[index] || {}}
 					showElements={showElements}
 				/>
 			))}

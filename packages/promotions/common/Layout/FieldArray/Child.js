@@ -25,7 +25,6 @@ function Child({
 	remove = () => {},
 	formValues = {},
 	showHeading = true,
-	customField = {},
 	showElements = {},
 }) {
 	const total_fields = getTotalFields({ controls });
@@ -70,7 +69,6 @@ function Child({
 
 									<FormElement
 										{...controlItem}
-										{...(customField?.[ctrlItemName] || {})}
 										key={element_name}
 										name={element_name}
 										control={control}

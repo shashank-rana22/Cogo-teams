@@ -11,7 +11,6 @@ function Layout({
 	errors = {},
 	showElements = {},
 	formValues = {},
-	customFieldArrayControls = {},
 }) {
 	const finalControls = controls.filter((c) => {
 		if (c.name in showElements) {
@@ -37,7 +36,6 @@ function Layout({
 							error={errors?.[ctrl.name]}
 							formValues={formValues}
 							handleFieldArrayAddCheck={handleFieldArrayAddCheck}
-							customFieldArrayControls={customFieldArrayControls}
 							showElements={showElements}
 						/>
 					);

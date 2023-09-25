@@ -6,23 +6,20 @@ function StatsPromoCodes({
 	title = '',
 	number = '',
 	amount = '',
-	currency = '$',
+	selectedCurrency = 'USD',
 }) {
 	return (
 		<div className={styles.card}>
 			<div className={styles.title}>{title}</div>
-			<div className={styles.mainContainer}>
-				<div className={styles.containerColumn}>
-					<div className={styles.mainText}>{number}</div>
-					<div className={styles.subText}>Number</div>
+			<div className={styles.main_container}>
+				<div className={styles.container_column}>
+					<div className={styles.main_text}>{number}</div>
+					<div className={styles.sub_text}>Number</div>
 				</div>
 				<div className={styles.divider} />
-				<div className={styles.containerColumn}>
-					<div className={styles.mainText}>{amount}</div>
-					<div className={styles.subText}>
-						{currency}
-						Amount
-					</div>
+				<div className={styles.container_column}>
+					<div className={styles.main_text}>{selectedCurrency + amount}</div>
+					<div className={styles.sub_text}>Amount</div>
 				</div>
 			</div>
 		</div>

@@ -2,6 +2,8 @@ import { ButtonIcon, Select, Input } from '@cogoport/components';
 import { IcMEdit, IcMTick, IcMCross } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import useUpdatePromotionBudgetAmount from '../../../../hooks/useUpdatePromotionBudgetAmount';
+
 import styles from './styles.module.css';
 
 const options = [
@@ -9,10 +11,19 @@ const options = [
 	{ label: 'INR', value: 'INR' },
 ];
 
-function BudgetGenerator({ amount = '', onChangeCurrency = () => {} }) {
+function BudgetGenerator({
+	budgetId = '',
+	amount = '',
+	budgetValue = '',
+	setBudgetValue = () => {},
+	refetchDashboard = () => {},
+	selectedCurrency = 'USD',
+	setSelectedCurrency = () => {},
+}) {
 	const [isEdit, setIsEdit] = useState(false);
-	const [budgetValue, setBudgetValue] = useState(amount);
-	const [value, setValue] = useState('USD');
+	const { updateBudgetAmount = () => {} } = useUpdatePromotionBudgetAmount({
+		budgetId, budgetValue, refetchDashboard,
+	});
 
 	return (
 		<div className={styles.card}>
@@ -21,36 +32,36 @@ function BudgetGenerator({ amount = '', onChangeCurrency = () => {} }) {
 				{isEdit ? (
 					<div className={styles.content}>
 						<Input
-							className={styles.mainText}
+							className={styles.main_text}
 							size="md"
 							placeholder="Enter Budget amount"
 							value={budgetValue}
 							onChange={(e) => {
-								setBudgetValue(e.value);
+								setBudgetValue(e);
 							}}
 						/>
 						<ButtonIcon
 							size="md"
 							icon={<IcMTick />}
-							disabled={false}
 							themeType="primary"
 							onClick={() => {
-								// TODO
+								updateBudgetAmount();
+								setIsEdit(false);
 							}}
 						/>
 						<ButtonIcon
 							size="md"
 							icon={<IcMCross />}
-							disabled={false}
 							themeType="primary"
 							onClick={() => {
+								refetchDashboard();
 								setIsEdit(false);
 							}}
 						/>
 					</div>
 				) : (
 					<div className={styles.content}>
-						<div className={styles.mainText}>{amount}</div>
+						<div className={styles.main_text}>{selectedCurrency + amount}</div>
 						<ButtonIcon
 							size="md"
 							icon={<IcMEdit />}
@@ -64,11 +75,11 @@ function BudgetGenerator({ amount = '', onChangeCurrency = () => {} }) {
 				)}
 			</div>
 			<div className={styles.content}>
-				<div className={styles.currencyText}>Currency:</div>
-				<div className={styles.currencySelect}>
+				<div className={styles.currency_text}>Currency:</div>
+				<div className={styles.currency_select}>
 					<Select
-						value={value}
-						onChange={(e) => { setValue(e.value); onChangeCurrency(); }}
+						value={selectedCurrency}
+						onChange={(e) => { setSelectedCurrency(e); }}
 						placeholder="Select Currency"
 						size="md"
 						options={options}

@@ -1,6 +1,6 @@
-import DISCOUNT_LIMIT_UNIT_MAPPING from '../../../../configs/DISCOUNT_LIMIT_UNIT_MAPPING.json';
-
-import handleFieldArrayAddCheck from './helpers/checkShipmentSlabConfig';
+import DISCOUNT_LIMIT_UNIT_MAPPING from '../../../../../configs/DISCOUNT_LIMIT_UNIT_MAPPING.json';
+import SLAB_UNIT_MAPPING from '../../../../../configs/SLAB_UNIT_MAPPING.json';
+import handleFieldArrayAddCheck from '../helpers/checkShipmentSlabConfig';
 
 const MIN_DISCOUNT_PRICE = 0;
 
@@ -13,13 +13,13 @@ const shipmentConfigControls = () => [{
 	...({ handleFieldArrayAddCheck }),
 	controls           : [
 		{
-			name        : 'slab_unit',
-			label       : 'Slab Unit',
-			type        : 'select',
-			placeholder : 'Shipment Value',
-			span        : 1.7,
-			disabled    : true,
-			size        : 'sm',
+			name     : 'slab_unit',
+			label    : 'Slab Unit',
+			type     : 'select',
+			options  : SLAB_UNIT_MAPPING,
+			span     : 1.7,
+			disabled : true,
+			size     : 'sm',
 		},
 		{
 			name        : 'slab_unit_currency',

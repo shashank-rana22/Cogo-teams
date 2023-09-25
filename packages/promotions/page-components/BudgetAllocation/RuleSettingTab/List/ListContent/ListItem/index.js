@@ -43,7 +43,13 @@ const columnsWithValue = ({ data = {}, list = [] }) => {
 	return NEW_MAPPING_LIST;
 };
 
-function ListItem({ data = {}, loading = '', activeList = '', onEdit = () => {}, refetchList = () => {} }) {
+function ListItem({
+	data = {},
+	loading = '',
+	activeList = '',
+	onEdit = () => {},
+	refetchList = () => {},
+}) {
 	const [open, setOpen] = useState(false);
 	const [showDeactivateModal, setShowDeactivateModal] = useState(false);
 	const tagsList = columnsWithValue({ data, list: tagsMapping });

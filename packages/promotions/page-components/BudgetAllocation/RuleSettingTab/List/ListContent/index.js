@@ -7,7 +7,6 @@ import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 const ZERO_PAGES = 0;
-const LAST_INDEX = 1;
 
 function ListContent({
 	data = {},
@@ -47,14 +46,12 @@ function ListContent({
 				/>
 			</div>
 
-			{list?.map((item, i) => (
+			{list?.map((item) => (
 				<ListItem
 					key={item.id}
 					data={item}
 					loading={loading}
 					activeList={activeList}
-					isLastItem={i === list.length - LAST_INDEX}
-					total={total_count || ZERO_PAGES}
 					onEdit={() => {}}
 					refetchList={refetchList}
 				/>

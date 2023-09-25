@@ -22,7 +22,7 @@ function BudgetAllocation() {
 						key="dashboard"
 						title="Dashboard"
 					>
-						<div className={styles.tabMargin}>
+						<div className={styles.tab_margin}>
 							<DashboardTab />
 						</div>
 					</TabPanel>
@@ -32,7 +32,7 @@ function BudgetAllocation() {
 						key="budget_allocation"
 						title="Budget Allocation"
 					>
-						<div className={styles.tabMargin}>
+						<div className={styles.tab_margin}>
 							<BudgetAllocationTab />
 						</div>
 					</TabPanel>
@@ -42,7 +42,7 @@ function BudgetAllocation() {
 						key="rule_setting"
 						title="Rule Setting"
 					>
-						<div className={styles.tabMargin}>
+						<div className={styles.tab_margin}>
 							<RuleSettingTab />
 						</div>
 					</TabPanel>
