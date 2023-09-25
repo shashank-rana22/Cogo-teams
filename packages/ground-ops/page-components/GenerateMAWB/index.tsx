@@ -111,17 +111,16 @@ function GenerateMAWB({
 		listOrganization,
 	} = GetOrganization({ importerExporterIds: item.importerExporterId });
 	const { list: organizationList = [] } = organizationData;
-
 	const category = item?.blCategory;
 	const mawbId = item?.documentId;
 	const pendingTaskId = item?.id || item?.taskId || undefined;
 
+	const packageDisableCheck = category === 'hawb' && activeCategory === 'mawb';
 	const fields = mawbControls({
 		disableClass,
 		editHawbNumberCondition: !customHawbNumber,
 		unitDefaultValue,
-		category,
-		activeCategory,
+		packageDisableCheck,
 	});
 
 	const { packingData, packingList } = usePackingList();
