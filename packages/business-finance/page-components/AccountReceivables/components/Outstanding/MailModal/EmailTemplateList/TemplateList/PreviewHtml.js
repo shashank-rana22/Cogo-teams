@@ -13,7 +13,6 @@ function PreviewHtml({ html = '' }) {
 		<iframe
 			width="100%"
 			height="75%"
-			frameBorder="0"
 			title="Preview"
 			ref={frameRef}
 		/>
