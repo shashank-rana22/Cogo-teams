@@ -100,15 +100,15 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 				})}
 				{showTimeline ? (
 					<IcMArrowRotateUp
-						width={18}
-						height={18}
+						width={15}
+						height={15}
 						onClick={() => setShowTimeline(!showTimeline)}
 						className={styles.arrow}
 					/>
 				) : (
 					<IcMArrowRotateDown
-						width={18}
-						height={18}
+						width={15}
+						height={15}
 						onClick={() => setShowTimeline(!showTimeline)}
 						className={styles.arrow}
 					/>
