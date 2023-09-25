@@ -1,4 +1,4 @@
-const extractNavLinks = (obj) => {
+const extractNavLinks = (obj = {}) => {
 	const NAV_LINKS = [];
 
 	Object.values(obj).forEach((item) => {

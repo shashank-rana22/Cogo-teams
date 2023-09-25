@@ -4,6 +4,16 @@ import formatDistanceToNow from '../../../../../utils/formatDistanceToNow';
 
 import styles from './styles.module.css';
 
+const getStatus = (is_clicked = false, is_seen = false) => {
+	if (is_clicked) {
+		return 'Read';
+	}
+	if (is_seen) {
+		return 'Seen';
+	}
+	return 'Unread';
+};
+
 function Card({
 	item = {},
 	handleNotificationClick = () => {},
@@ -18,17 +28,12 @@ function Card({
 		}
 	};
 
-	const { is_seen = false, content, created_at } = item;
-
-	const getStatus = () => {
-		if (item?.is_clicked) {
-			return 'Read';
-		}
-		if (item?.is_seen) {
-			return 'Seen';
-		}
-		return 'Unread';
-	};
+	const {
+		is_seen = false,
+		content = {},
+		created_at = '',
+		is_clicked = false,
+	} = item || {};
 
 	return (
 		<div
@@ -49,7 +54,7 @@ function Card({
 						<p className={styles.time_status}>
 							{formatDistanceToNow(created_at, { addSuffix: true })}
 						</p>
-						{!item.is_rpa ? <p className={styles.time_status}>{getStatus()}</p> : null}
+						{!item.is_rpa ? <p className={styles.time_status}>{getStatus(is_clicked, is_seen)}</p> : null}
 					</div>
 				</div>
 

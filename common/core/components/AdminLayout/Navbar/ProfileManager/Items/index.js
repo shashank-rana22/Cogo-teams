@@ -226,7 +226,7 @@ function Items({
 			<div className={styles.button_container}>
 				<Button
 					size="md"
-					style={styles.button_styles}
+					className={styles.button_styles}
 					themeType="primary"
 					onClick={handleNotificationNav}
 					disabled={loadingState}

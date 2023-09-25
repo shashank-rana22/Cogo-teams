@@ -1,4 +1,9 @@
-const notificationsRedirectLink = ({ link, push, partner_id, NAVIGATION_LINKS }) => {
+const notificationsRedirectLink = ({
+	link = '',
+	push,
+	partner_id = '',
+	NAVIGATION_LINKS = [],
+}) => {
 	let isVersionTwo = false;
 	let redirectLink = null;
 

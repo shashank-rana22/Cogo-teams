@@ -1,5 +1,4 @@
 import { Tabs, TabPanel, Placeholder, cl } from '@cogoport/components';
-// import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
@@ -56,25 +55,6 @@ function NotificationPage({
 							activeTab={activeTab}
 							disabled={disabled}
 						/>
-
-						{/* {loading
-							? ([...Array(LOADER_COUNT).keys()].map((item) => (
-								<Placeholder key={item} height="50px" width="100%" margin="0px 0px 20px 0px" />
-							)))
-							: null}
-
-						{!loading && !isEmpty(formattedData?.list)
-							? (
-								formattedData?.list || []).map((item) => (
-									<Notification
-										key={item?.id}
-										item={item}
-										handleNotificationClick={handleNotificationClick}
-										disabled={disabled}
-										setDisabled={setDisabled}
-									/>
-							))
-							: null} */}
 
 						{!loading
 							? (formattedData?.list || []).map((item) => (
