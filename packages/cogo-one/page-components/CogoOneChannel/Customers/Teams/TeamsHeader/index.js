@@ -1,20 +1,24 @@
 import {
-	// Popover,
 	Input,
+	Popover,
 } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
-	// IcMFilter,
-	IcMSearchlight, IcMPlus,
+	IcMFilter,
+	IcMSearchlight,
 } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function TeamsHeader({
 	searchValue = '',
 	setSearchValue = () => {},
-	// filterVisible = false,
-	// setFilterVisible = () => {},
+
 }) {
+	const [filterVisible, setFilterVisible] = useState(false);
+
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.search_field}>
@@ -27,19 +31,23 @@ function TeamsHeader({
 					arrow={false}
 				/>
 			</div>
-			{/* <Popover
-				placement="right"
-				render="will be add"
-				className={styles.styled_popover}
-				visible={filterVisible}
-			>
-				<IcMFilter
-					onClick={() => setFilterVisible((prev) => !prev)}
-					className={styles.filter_icon}
-				/>
-			</Popover> */}
-			<IcMPlus
+			<div className={styles.styled_popover}>
+				<Popover
+					placement="right"
+					render="will be add"
+					visible={filterVisible}
+				>
+					<IcMFilter
+						onClick={() => setFilterVisible((prev) => !prev)}
+						className={styles.filter_icon}
+					/>
+				</Popover>
+			</div>
+			<Image
 				className={styles.edit_icon}
+				width={20}
+				height={20}
+				src={GLOBAL_CONSTANTS.image_url.edit_square}
 			/>
 		</div>
 	);

@@ -2,30 +2,46 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin: 12px 0 6px;
+	padding: 0 10px;
+	border-bottom: 1px solid #eee;
 }
 
 .filter_icon {
-	width: 22px;
-	height: 22px;
 	cursor: pointer;
+	fill: #4f4f4f;
 }
 
 .edit_icon {
-	width: 25px;
-	height: 25px;
 	cursor: pointer;
 }
 
 .search_field {
 	display: flex;
 	align-items: center;
-	width: calc(100% - 44px);
+	width: calc(100% - 50px);
+
+	:global {
+		.ui_input_container {
+			border: none;
+		}
+
+		.ui_input_prefix {
+			padding: 0;
+		}
+	}
 }
 
 .styled_popover {
+	display: flex;
 	padding: 0;
-	margin-top: 10px;
+
+	>div {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding-top: 2px;
+		font-size: 21px;
+	}
 
 	:global {
 		.tippy-content {
