@@ -24,6 +24,7 @@ import AndroidApp from './AndroidApp';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
+import FeedbackModal from './FeedbackModal';
 import HeaderBar from './HeaderBar';
 import ModalComp from './ModalComps';
 import PortPairOrgFilters from './PortPairOrgFilters';
@@ -61,7 +62,7 @@ function CogoOne() {
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
 	const [mailAttachments, setMailAttachments] = useState([]);
 	const [showFeedback, setShowFeedback] = useState(false);
-	console.log('showFeedback:', showFeedback);
+
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
 		activeVoiceCard   : activeTab?.data,
@@ -73,15 +74,11 @@ function CogoOne() {
 		viewType: initialViewType = '', loading: workPrefernceLoading = false, userSharedMails = [],
 	} = useAgentWorkPrefernce();
 	const { fetchWorkStatus = () => {}, agentWorkStatus = {}, preferenceLoading = false } = useGetAgentPreference();
-
 	const { signature } = useGetSignature();
 	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
-
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
-
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
-
 	const firestore = getFirestore(app);
 
 	const mailProps = {
@@ -128,7 +125,6 @@ function CogoOne() {
 		|| (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) && activeTab?.expandSideBar));
 	const collapsedSideBar = ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
 								&& !activeTab?.expandSideBar;
-
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
 			const auth = getAuth();
@@ -262,6 +258,13 @@ function CogoOne() {
 					Feedback
 				</span>
 			</div>
+
+			{showFeedback && (
+				<FeedbackModal
+					showFeedback={showFeedback}
+					setShowFeedback={setShowFeedback}
+				/>
+			)}
 
 			<ModalComp
 				raiseTicketModal={raiseTicketModal}
