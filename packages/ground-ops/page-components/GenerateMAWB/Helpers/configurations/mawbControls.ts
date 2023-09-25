@@ -195,6 +195,7 @@ const mawbControls = ({ disableClass, editHawbNumberCondition, unitDefaultValue,
 			span               : 12,
 			showButtons        : true,
 			noDeleteButtonTill : 1,
+			disabled           : activeCategory === 'mawb',
 			value              : [
 				{
 					length  : '',

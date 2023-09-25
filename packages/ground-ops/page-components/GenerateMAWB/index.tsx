@@ -327,7 +327,6 @@ function GenerateMAWB({
 	}, [formValues.paymentTerm]);
 
 	useEffect(() => {
-		console.log(taskItem);
 		finalFields.forEach((c) => {
 			setValue(c.name, taskItem[c.name]);
 		});
