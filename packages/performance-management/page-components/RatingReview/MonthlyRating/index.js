@@ -12,9 +12,12 @@ function MonthlyRating() {
 						<div className={styles.title}>September ratings</div>
 						<div className={styles.sub_title}>Please rate your employees as you see fit</div>
 					</div>
-					<div>
-						<IcCStarfull />
+					<div className={styles.rating_container}>
 						Team Rating
+						<div className={styles.rating}>
+							<IcCStarfull style={{ marginRight: 4 }} />
+							3 stars
+						</div>
 					</div>
 				</div>
 			</div>
