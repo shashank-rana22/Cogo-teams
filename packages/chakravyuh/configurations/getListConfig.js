@@ -4,6 +4,7 @@ import { IcMAir, IcMShip } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import styles from '../page-components/AccuracyDashboard/RatesList/styles.module.css';
+import { formatBigNumbers } from '../utils/formatBigNumbers';
 
 const COMMON_START_COLUMNS = [
 	{
@@ -119,7 +120,7 @@ const COMMON_END_COLUMNS = [
 		accessor : ({ aggregate_bookings_created = '' }) => (
 			<div className={styles.row_commodity_cell}>
 				<div className={styles.percent}>
-					{`${aggregate_bookings_created || GLOBAL_CONSTANTS.zeroth_index}%` }
+					{`${aggregate_bookings_created || GLOBAL_CONSTANTS.zeroth_index}` }
 				</div>
 			</div>
 		),
@@ -128,7 +129,7 @@ const COMMON_END_COLUMNS = [
 		Header   : 'CHECKOUT COUNT',
 		accessor : ({ aggregate_checkout_count = '' }) => (
 			<div className={styles.row_commodity_cell}>
-				<div className={styles.percent}>{`${aggregate_checkout_count || GLOBAL_CONSTANTS.zeroth_index}%` }</div>
+				<div className={styles.percent}>{`${aggregate_checkout_count || GLOBAL_CONSTANTS.zeroth_index}` }</div>
 			</div>
 		),
 	},
@@ -137,7 +138,7 @@ const COMMON_END_COLUMNS = [
 		accessor : ({ aggregate_rate_deviation_from_booking_rate = '' }) => (
 			<div className={styles.row_commodity_cell}>
 				<div className={styles.percent}>
-					{`${aggregate_rate_deviation_from_booking_rate || GLOBAL_CONSTANTS.zeroth_index}%` }
+					{`${formatBigNumbers(aggregate_rate_deviation_from_booking_rate)}$` }
 				</div>
 			</div>
 		),

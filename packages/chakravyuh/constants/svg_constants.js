@@ -73,18 +73,6 @@ export const ANIMATION_CONFIG = [
 					transform : T_PATH_2,
 				},
 			},
-			// {
-			// 	gProps: {
-			// 		transform : 'matrix(0.8633 0 0 -0.7748 -411.0941 97.7556)',
-			// 		id        : 'g14',
-			// 	},
-			// 	pathProps: {
-			// 		id        : 'path_4',
-			// 		style     : COLORS_CONFIG.dropoff,
-			// 		d         : D_PATH_1,
-			// 		transform : T_PATH_1,
-			// 	},
-			// },
 			{
 				gProps: {
 					transform : 'matrix(3.7171 0 0 0.3727 147.8524 -262.2221)',
