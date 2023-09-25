@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 
 const FIRST = 1;
-
 const STATUS_COLOR_MAPPING = {
 	PENDING        : '#fef3e9',
 	REJECTED       : '#f37166',
@@ -32,6 +31,10 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 
 			<div className={styles.container}>
 				{(stakeHolders || []).map((item, index) => {
+					let flag = false;
+					if (item?.status === 'REQUESTED BY') {
+						flag = true;
+					}
 					const isStakeholderActive = !index
 					|| ['APPROVED', 'REQUESTED BY'].includes(stakeHolders[index - FIRST]?.status);
 					return (
@@ -80,7 +83,8 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 											}}
 											className={styles.level_status_pill}
 										>
-											{pascalCase(item?.status) || t('incidentManagement:pending_status')}
+											{flag ? 'Requested By'
+												: pascalCase(item?.status) || t('incidentManagement:pending_status')}
 										</Pill>
 									</div>
 								</div>
