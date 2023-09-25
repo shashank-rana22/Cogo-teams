@@ -162,9 +162,9 @@ export const requestColumn = ({
 			return (
 				<Tooltip
 					interactive
-					content={(incidentSubtype.replace(/_/g, ' '))}
+					content={(incidentSubtype?.replace(/_/g, ' '))}
 				>
-					<div className={styles.wrapper}>{(incidentSubtype.replace(/_/g, ' '))}</div>
+					<div className={styles.wrapper}>{(incidentSubtype?.replace(/_/g, ' '))}</div>
 				</Tooltip>
 			);
 		},
