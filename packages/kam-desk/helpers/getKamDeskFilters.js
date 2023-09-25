@@ -45,18 +45,13 @@ export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 		finalFilters[`${KEY_MAPPING[date_type]}_greater_than`] = startDate;
 		finalFilters[`${KEY_MAPPING[date_type]}_less_than`] = endDate;
 	}
-
-	// this can be removed
-	if (['import', 'export'].includes(stepperTab)) {
-		finalFilters.trade_type = stepperTab;
-	}
-
 	if (['upload_booking_note', 'update_container_details'].includes(activeTab)) {
-		finalFilters.trade_type = 'export';
-	}
-
-	if (['confirm_with_shipper', 'upload_shipping_order'].includes(activeTab)) {
-		finalFilters.trade_type = 'import';
+		finalFilters.trade_type = ['export'];
+	} else if (['confirm_with_shipper', 'upload_shipping_order'].includes(activeTab)) {
+		finalFilters.trade_type = ['import'];
+	} else if (['document_approval', 'vessel_departed',
+		'vessel_arrived', 'completed', 'cancelled'].includes(activeTab)) {
+		finalFilters.trade_type = ['import', 'export'];
 	}
 
 	return {

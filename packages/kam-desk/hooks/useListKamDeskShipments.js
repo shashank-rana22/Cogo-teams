@@ -19,7 +19,6 @@ const useListKamDeskShipments = () => {
 	const { activeTab, filters = {}, setFilters, stepperTab, shipmentType } = kamDeskContextValues || {};
 
 	const { page = 1, ...restFilters } = filters || {};
-	console.log('rfff', restFilters);
 
 	const debounceQuery = useRef({ q: filters.q });
 

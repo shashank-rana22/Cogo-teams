@@ -1,6 +1,5 @@
 {
     "export_import":{
-
         "tabs":[
             {
                 "value":"mark_confirmed",
@@ -13,88 +12,6 @@
             {
                 "value":"update_container_details",
                 "label":"Mark Container Pickup"
-            },
-            {
-                "label":"Verify Shipper",
-                "value":"confirm_with_shipper"
-            },
-            {
-                "label":"Waiting for SO",
-                "value":"upload_shipping_order"
-            },
-            {
-                "value":"list_task_pending",
-                "label":"Packing/Commercial/SI"
-            },
-            {
-                "value":"document_approval",
-                "label":"BL Approval"
-            },
-            {
-                "value":"vessel_departed",
-                "label":"Vessel Departed"
-            },
-            {
-                "value":"vessel_arrived",
-                "label":"Vessel Arrived"
-            },
-            {
-                "value":"completed",
-                "label":"Completed"
-            },
-            {
-                "value":"cancelled",
-                "label":"Cancelled"
-            }
-        ],
-        "possible_filters":["importer_exporter_id","triggered_pending_invoices","date_type","source","tags"]
-    },
-    "export":{
-        "tabs":[
-            {
-                "value":"mark_confirmed",
-                "label":"Confirm Booking"
-            },
-            {
-                "value":"upload_booking_note",
-                "label":"Waiting for BN"
-            },
-            {
-                "value":"update_container_details",
-                "label":"Mark Container Pickup"
-            },
-            {
-                "value":"list_task_pending",
-                "label":"Packing/Commercial/SI"
-            },
-            {
-                "value":"document_approval",
-                "label":"BL Approval"
-            },
-            {
-                "value":"vessel_departed",
-                "label":"Vessel Departed"
-            },
-            {
-                "value":"vessel_arrived",
-                "label":"Vessel Arrived"
-            },
-            {
-                "value":"completed",
-                "label":"Completed"
-            },
-            {
-                "value":"cancelled",
-                "label":"Cancelled"
-            }
-        ],
-        "possible_filters":["importer_exporter_id","triggered_pending_invoices","date_type","source","tags"]
-    },
-    "import":{
-        "tabs":[
-            {
-                "label":"Confirm Booking",
-                "value":"mark_confirmed"
             },
             {
                 "label":"Confirm with Shipper",
@@ -105,32 +22,33 @@
                 "value":"upload_shipping_order"
             },
             {
-                "label":"Packing/Commercial/SI",
-                "value":"list_task_pending"
+                "value":"list_task_pending",
+                "label":"Packing/Commercial/SI"
             },
             {
-                "label":"BL Approval",
-                "value":"document_approval"
+                "value":"document_approval",
+                "label":"BL Approval"
             },
             {
-                "label":"Vessel Departed",
-                "value":"vessel_departed"
+                "value":"vessel_departed",
+                "label":"Vessel Departed"
             },
             {
-                "label":"Vessel Arrived",
-                "value":"vessel_arrived"
+                "value":"vessel_arrived",
+                "label":"Vessel Arrived"
             },
             {
-                "label":"Completed",
-                "value":"completed"
-            }, 
+                "value":"completed",
+                "label":"Completed"
+            },
             {
-                "label":"Cancelled",
-                "value":"cancelled"
+                "value":"cancelled",
+                "label":"Cancelled"
             }
         ],
         "possible_filters":["importer_exporter_id","triggered_pending_invoices","date_type","source","tags"]
     },
+
     "fcl_customs":{
         "tabs":[
             {

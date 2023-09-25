@@ -5,6 +5,8 @@ import shipmentTabMapping from '../../config/SHIPMENT_TAB_MAPPING';
 import { CRITICAL_TABS } from '../../config/SHIPMENTS_PAYLOAD';
 import KamDeskContext from '../../context/KamDeskContext';
 
+import styles from './styles.module.css';
+
 function DeskTabs() {
 	const { stepperTab, shipmentType, activeTab, setActiveTab, setFilters, filters } = useContext(KamDeskContext);
 
@@ -25,7 +27,7 @@ function DeskTabs() {
 	};
 
 	return (
-		<div>
+		<div className={styles.tabs_container}>
 			<Tabs themeType="secondary" activeTab={activeTab} onChange={handleChange}>
 				{tabs?.map((tab) => (
 					<TabPanel

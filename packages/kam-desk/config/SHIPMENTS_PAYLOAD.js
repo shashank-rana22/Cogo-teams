@@ -29,24 +29,6 @@ export const CRITICAL_TABS = {
 			vessel_departed          : scheduleArrivalToday,
 			vessel_arrived           : { detention_days: 2 },
 		},
-		export: {
-			mark_confirmed           : scheduleDepartureInThreeDays,
-			upload_booking_note      : scheduleDepartureInThreeDays,
-			update_container_details : scheduleDepartureInThreeDays,
-			list_task_pending        : scheduleDepartureYesterday,
-			document_approval        : scheduleDepartureTomorrow,
-			vessel_departed          : scheduleArrivalToday,
-			vessel_arrived           : { detention_days: 2 },
-		},
-		import: {
-			mark_confirmed        : scheduleDepartureInThreeDays,
-			confirm_with_shipper  : scheduleDepartureInThreeDays,
-			upload_shipping_order : scheduleDepartureInThreeDays,
-			list_task_pending     : scheduleDepartureYesterday,
-			document_approval     : scheduleDepartureTomorrow,
-			vessel_departed       : scheduleArrivalToday,
-			vessel_arrived        : { detention_days: 2 },
-		},
 	},
 	lcl_freight: {
 		export: {
@@ -108,6 +90,7 @@ const tabPayload = {
 			document_approval: {
 				state               : 'in_progress',
 				bl_approval_pending : true,
+
 			},
 			vessel_departed: {
 				state         : 'in_progress',
