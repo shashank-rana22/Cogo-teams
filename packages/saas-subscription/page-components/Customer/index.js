@@ -1,13 +1,11 @@
 import ArrowStepper from '../../common/ArrowStepper';
 import useGetUserList from '../../hooks/useGetUserList';
-// import useGetUserStats from '../../hooks/useGetUserStats';
 
 import FilterContainer from './FilterContainer';
 import styles from './styles.module.css';
 import Table from './Table';
 
 function CustomerSubscription() {
-	// const { userStatsData = {}, refetchUserStats } = useGetUserStats();
 	const {
 		data = {}, loading = false,
 		globalFilters, refectUserList, setGlobalFilters,

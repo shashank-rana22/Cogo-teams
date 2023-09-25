@@ -20,7 +20,7 @@ const usePlanMetaData = ({ metaData, setMetaData, setFeatureModal }) => {
 			await trigger({
 				data: payload,
 			});
-			Toast.success('Updated Meta Data');
+			Toast.success(t('saasSubscription:update_meta_data'));
 			setFeatureModal({ apiCall: true });
 			closeModalHandler();
 		} catch (e) {

@@ -110,5 +110,12 @@
     "apply":"Menerapkan",
     "filters":"Filter",
     "valid_json":"Harap masukkan JSON yang valid",
-    "clear":"Clear"
+    "clear":"Jernih",
+    "promo_cancel_name":"Nama layanan",
+    "promo_cancel_val":"Nilai",
+    "promo_cancel_use":"Penggunaan tersisa",
+    "promo_cancel_status":"status",
+    "empty_state_1":"TIDAK",
+    "empty_state_2":"tersedia",
+    "update_meta_data":"Data meta yang diperbarui!"
 }

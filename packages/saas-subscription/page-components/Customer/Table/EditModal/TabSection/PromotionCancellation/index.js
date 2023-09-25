@@ -1,7 +1,8 @@
 import { cl } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
-import promotionCancellationConfig from '../../../../../../configuration/promotionCancellationConfig';
+import getPromotionCancellationConfig from '../../../../../../configuration/promotionCancellationConfig';
 import getValues from '../../../../../../utils/getValues';
 import itemFunction from '../../../../../../utils/itemFunctions';
 import EmptyState from '../../EmptyState';
@@ -9,7 +10,11 @@ import EmptyState from '../../EmptyState';
 import styles from './styles.module.css';
 
 function PromotionCancellation({ currentTab, promotion_discount = [], cancellation_discount = [] }) {
+	const { t } = useTranslation(['saasSubscription']);
+
 	const data = currentTab === 'promotion' ? promotion_discount : cancellation_discount;
+
+	const promotionCancellationConfig = getPromotionCancellationConfig({ t });
 
 	if (isEmpty(data)) {
 		return (

@@ -110,5 +110,12 @@
     "apply":"Apply",
     "filters":"Filters",
     "valid_json":"Please enter a valid JSON",
-    "clear":"Clear"
+    "clear":"Clear",
+    "promo_cancel_name":"Service Name",
+    "promo_cancel_val":"Value",
+    "promo_cancel_use":"Usages Left",
+    "promo_cancel_status":"Status",
+    "empty_state_1":"No",
+    "empty_state_2":"avaliable",
+    "update_meta_data":"Updated Meta Data!"
 }

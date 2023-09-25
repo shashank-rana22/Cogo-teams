@@ -110,5 +110,12 @@
     "apply":"申请",
     "filters":"过滤器",
     "valid_json":"请输入有效的JSON",
-    "clear":"Clear"
+    "clear":"清除",
+    "promo_cancel_name":"服务名称",
+    "promo_cancel_val":"价值",
+    "promo_cancel_use":"剩下的用法",
+    "promo_cancel_status":"地位",
+    "empty_state_1":"不",
+    "empty_state_2":"可用的",
+    "update_meta_data":"更新的元数据！"
 }

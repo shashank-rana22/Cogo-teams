@@ -110,5 +110,12 @@
     "apply":"Áp dụng",
     "filters":"Bộ lọc",
     "valid_json":"Vui lòng nhập JSON hợp lệ",
-    "clear":"Clear"
+    "clear":"Thông thoáng",
+    "promo_cancel_name":"Tên dịch vụ",
+    "promo_cancel_val":"Giá trị",
+    "promo_cancel_use":"Sử dụng còn lại",
+    "promo_cancel_status":"Trạng thái",
+    "empty_state_1":"KHÔNG",
+    "empty_state_2":"có sẵn",
+    "update_meta_data":"Cập nhật dữ liệu meta!"
 }

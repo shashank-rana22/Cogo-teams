@@ -110,5 +110,12 @@
     "apply":"นำมาใช้",
     "filters":"ตัวกรอง",
     "valid_json":"กรุณากรอก JSON ที่ถูกต้อง",
-    "clear":"Clear"
+    "clear":"ชัดเจน",
+    "promo_cancel_name":"ชื่อบริการ",
+    "promo_cancel_val":"ค่า",
+    "promo_cancel_use":"ประเพณีที่เหลืออยู่",
+    "promo_cancel_status":"สถานะ",
+    "empty_state_1":"เลขที่",
+    "empty_state_2":"มีอยู่",
+    "update_meta_data":"อัปเดตข้อมูลเมตา!"
 }

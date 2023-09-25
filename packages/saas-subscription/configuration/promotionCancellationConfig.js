@@ -1,27 +1,27 @@
-const promotionCancellationConfig = [
+const getPromotionCancellationConfig = ({ t }) => [
 	{
 		key        : 'service_name',
-		label      : 'Service Name',
+		label      : t('saasSubscription:promo_cancel_name'),
 		renderFunc : 'renderName',
 		width      : '30%',
 	},
 	{
 		key        : 'value',
-		label      : 'Value',
+		label      : t('saasSubscription:promo_cancel_val'),
 		renderFunc : 'renderValue',
 		width      : '20%',
 	},
 	{
 		key   : 'usages_left',
-		label : 'Usages Left',
+		label : t('saasSubscription:promo_cancel_use'),
 		width : '20%',
 	},
 	{
 		key        : 'is_active',
-		label      : 'Status',
+		label      : t('saasSubscription:promo_cancel_status'),
 		renderFunc : 'renderStatus',
 		width      : '30%',
 	},
 ];
 
-export default promotionCancellationConfig;
+export default getPromotionCancellationConfig;
