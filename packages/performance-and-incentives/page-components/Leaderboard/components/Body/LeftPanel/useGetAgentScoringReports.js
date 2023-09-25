@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 const useGetScoringReports = (props) => {
 	const { dateRange, entity } = props;
 
-	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
+	const { incentive_leaderboard_viewtype: viewType, user } = useSelector(({ profile }) => profile);
 
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
@@ -27,8 +27,6 @@ const useGetScoringReports = (props) => {
 	}
 
 	const [params, setParams] = useState({
-		// page                    : 1,
-		// page_limit              : 10,
 		user_data_required      : true,
 		role_data_required      : true,
 		add_current_user_report : view !== 'admin',
@@ -39,6 +37,7 @@ const useGetScoringReports = (props) => {
 			created_at_greater_than : dateRange?.startDate || undefined,
 			created_at_less_than    : dateRange?.endDate || undefined,
 			partner_id              : entity || undefined,
+			current_user_id         : view !== 'admin' ? user.id : undefined,
 		},
 	});
 
