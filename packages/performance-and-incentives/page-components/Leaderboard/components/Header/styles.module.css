@@ -48,7 +48,6 @@
 	display: flex;
 	gap: 8px;
 	align-items: center;
-	margin-left: 8px;
 
 	:global {
 		.ui_datepicker_container {
