@@ -22,7 +22,7 @@ function ReOpenShipment({
 
 	return (
 		<div className={styles.request_reopen}>
-			{(id === GLOBAL_CONSTANTS.uuid.hk_user_id || id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id) && (
+			{[GLOBAL_CONSTANTS.uuid.hk_user_id, GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id].includes(id) && (
 				<Button
 					themeType="secondary"
 					className={styles.request_reopen}
