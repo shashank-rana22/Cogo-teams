@@ -33,7 +33,7 @@ function AdditionalServices({
 		<div>
 			<div className={styles.heading}>
 				You may need these services
-				{source === 'checkout' ? (
+				{source === 'checkout' && !isEmpty(incoTermOptions) ? (
 					<div style={{ fontWeight: 500, display: 'flex', alignItems: 'center' }}>
 						IncoTerm:
 						<Select

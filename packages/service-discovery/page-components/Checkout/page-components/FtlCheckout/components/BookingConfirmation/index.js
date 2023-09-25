@@ -77,6 +77,7 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				radioOption={radioOption}
 				bookingConfirmationMode={bookingConfirmationMode}
 				setBookingConfirmationMode={setBookingConfirmationMode}
+				isAssistedBookingNotAllowed={isAssistedBookingNotAllowed}
 			/>
 
 			<BookingConfirmationFooter

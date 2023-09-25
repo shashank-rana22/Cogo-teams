@@ -47,7 +47,7 @@ const getDetails = ({ item, primary_service }) => {
 		],
 		ftl_freight: [
 			`${trucks_count} truck`,
-			`${truck_type}`,
+			`${startCase(truck_type)}`,
 			`${commodity || 'General'}`,
 		],
 		ltl_freight : [`${volume} cc`, `${weight} kg`, `${commodity || 'General'}`],

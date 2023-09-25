@@ -1,23 +1,18 @@
-import { Accordion } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState, useContext } from 'react';
 
-import BreakdownDetails from '../../../../../../commons/BreakdownDetails';
-import { CheckoutContext } from '../../../../../../context';
+import BreakdownDetails from '../../../../commons/BreakdownDetails';
+import { CheckoutContext } from '../../../../context';
 
+import AdditionalContent from './AdditionalContent';
 import styles from './styles.module.css';
 
-function PriceBreakup({
-	noRatesPresent = false,
-	setNoRatesPresent = () => {},
-	getCheckoutInvoices = () => {},
-}) {
+function EditMargin({ state = '' }) {
 	const { rate = {} } = useContext(CheckoutContext);
 
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[GLOBAL_CONSTANTS.zeroth_index];
 
 	const [rateDetails, setRateDetails] = useState([]);
-
 	const [convenienceDetails, setConvenienceDetails] = useState(() => ({
 		convenience_rate: {
 			price    : convenience_line_item?.price,
@@ -26,27 +21,34 @@ function PriceBreakup({
 			quantity : convenience_line_item?.quantity,
 		},
 	}));
+	const [noRatesPresent, setNoRatesPresent] = useState(false);
 
 	return (
-		<Accordion
-			className={styles.container}
-			type="form"
-			title="View Price Breakup"
-			animate
-			isOpen
-		>
+		<div>
 			<BreakdownDetails
 				rateDetails={rateDetails}
 				setRateDetails={setRateDetails}
 				convenienceDetails={convenienceDetails}
-				source="booking_confirmation"
-				setNoRatesPresent={setNoRatesPresent}
-				noRatesPresent={noRatesPresent}
 				setConvenienceDetails={setConvenienceDetails}
-				getCheckoutInvoices={getCheckoutInvoices}
+				setNoRatesPresent={setNoRatesPresent}
+				source="edit_margin"
 			/>
-		</Accordion>
+
+			{noRatesPresent ? (
+				<div className={styles.error}>
+					** REMOVE SERVICES WITH (NO RATES) TAG TO SEND QUOTATION.
+				</div>
+			) : null}
+
+			<AdditionalContent
+				rateDetails={rateDetails}
+				convenienceDetails={convenienceDetails}
+				convenience_line_item={convenience_line_item}
+				noRatesPresent={noRatesPresent}
+				state={state}
+			/>
+		</div>
 	);
 }
 
-export default PriceBreakup;
+export default EditMargin;
