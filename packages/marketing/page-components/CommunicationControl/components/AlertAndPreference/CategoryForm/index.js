@@ -2,20 +2,21 @@ import { Button, Checkbox } from '@cogoport/components';
 import { CheckboxController, useForm } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
-import getPaloadAlertsPreferences from '../../../helpers/getPayloadAlertsPreferences';
+import getPayloadAlertsPreferences from '../../../helpers/getPayloadAlertsPreferences';
 import selectAllAlertsHelper from '../../../helpers/selectAllAlertsHelper';
 import useUpdatePreference from '../../../hooks/useUpdatePreference';
 
 import Card from './Card';
 import styles from './styles.module.css';
 
-function CategoryForm({ query = {}, back = () => {} }) {
+function CategoryForm({ query = {}, back = () => {}, data = {} }) {
 	const [selectAllChecked, setSelectAllChecked] = useState(false);
-	const { control, watch, setValue } = useForm();
+	const { control, watch, setValue } = useForm({ defaultValues: data });
 	const formValues = watch();
+	// console.log(formValues);
 
 	const { loading = '', updatePreference = () => {} } = useUpdatePreference();
-	const preferences = getPaloadAlertsPreferences(formValues);
+	const preferences = getPayloadAlertsPreferences(formValues);
 
 	const PAYLOAD = {
 		user_id         : query?.partner_id,
@@ -62,6 +63,7 @@ function CategoryForm({ query = {}, back = () => {} }) {
 					<CheckboxController
 						name="offers_discounts"
 						label="Offers/Discounts"
+						value={data?.offers_discounts}
 						control={control}
 					/>
 					Receive offers and discounts.

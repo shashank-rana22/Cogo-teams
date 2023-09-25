@@ -1,5 +1,4 @@
 import { Select } from '@cogoport/components';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -7,9 +6,8 @@ const START_INDEX = 0;
 const WORD_LENGTH = 1;
 
 function Header({
-	orgName = '', options = {},
+	orgName = '', options = {}, user = '', setUser = () => {},
 }) {
-	const [value, setValue] = useState('');
 	return (
 		<div className={styles.container}>
 			<div className={styles.company}>
@@ -19,10 +17,10 @@ function Header({
 			<div className={styles.input_container}>
 				<h3 style={{ marginBottom: 0 }}>Select Users</h3>
 				<Select
-					value={value}
+					value={user}
 					options={options}
 					isClearable
-					onChange={setValue}
+					onChange={setUser}
 					label="Select Users"
 					placeholder="select your fav"
 				/>
