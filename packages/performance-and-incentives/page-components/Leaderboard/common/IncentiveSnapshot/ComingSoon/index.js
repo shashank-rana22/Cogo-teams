@@ -1,11 +1,16 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 import styles from './styles.module.css';
 
 function ComingSoon() {
 	return (
 		<div className={styles.container}>
-			<img src={GLOBAL_CONSTANTS.image_url.general_icon} alt="coming_soon" />
+			<div className={styles.coming_soon}>
+				Coming Soon!
+			</div>
+
+			<p>
+				We are working to bring Incentives for your efforts! Continue your hard work,
+				and you will soon be rewarded!
+			</p>
 		</div>
 	);
 }
