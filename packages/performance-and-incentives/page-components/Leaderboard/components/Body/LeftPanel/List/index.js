@@ -61,10 +61,10 @@ function List(props) {
 
 				{(!isEmpty(currentUserData) && isEmpty(list.find((item) => item.user?.id === user.id))) ? (
 					<>
-						<div>
-							<span>.</span>
-							<span>.</span>
-							<span>.</span>
+						<div className={styles.ellipsis_container}>
+							<span className={styles.dot}>.</span>
+							<span className={styles.dot}>.</span>
+							<span className={styles.dot}>.</span>
 						</div>
 
 						<ListItem
@@ -75,9 +75,7 @@ function List(props) {
 							currLevel={currLevel}
 						/>
 					</>
-
 				) : null}
-
 			</div>
 		</div>
 	);
