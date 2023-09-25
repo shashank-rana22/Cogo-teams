@@ -1,31 +1,34 @@
-import { TabPanel, Tabs, Loader } from '@cogoport/components';
+// import { TabPanel, Tabs, Loader } from '@cogoport/components';
 
-import HeaderComponent from './HeaderComponent';
-import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
+// import HeaderComponent from './HeaderComponent';
+// import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
+import MonthlyRating from './MonthlyRating';
 import styles from './styles.module.css';
 
-const TABS_MAPPING = { vertical_head: 'Across All', functional_manager: 'Team View' };
+// const TABS_MAPPING = { vertical_head: 'Across All', functional_manager: 'Team View' };
 
 function PerformanceRatingReview() {
-	const props = useGetEmployeeLevels();
+	// const props = useGetEmployeeLevels();
 
-	const { level, activeTab, setActiveTab, loading } = props || {};
+	// const { level, activeTab, setActiveTab, loading } = props || {};
 
-	if (loading) {
-		return (
-			<div className={styles.loader}>
-				<Loader style={{ height: '60px', width: '60px' }} />
-			</div>
-		);
-	}
+	// if (loading) {
+	// 	return (
+	// 		<div className={styles.loader}>
+	// 			<Loader style={{ height: '60px', width: '60px' }} />
+	// 		</div>
+	// 	);
+	// }
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<div className={styles.header}>
 				Performance Rating Review
 			</div>
 
-			{
+			<MonthlyRating />
+
+			{/* {
 				level === 'vertical_head' ? (
 					<Tabs
 						activeTab={activeTab}
@@ -41,8 +44,7 @@ function PerformanceRatingReview() {
 						}
 					</Tabs>
 				) : <HeaderComponent props={props} />
-			}
-
+			} */}
 		</div>
 	);
 }
