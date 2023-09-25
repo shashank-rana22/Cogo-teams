@@ -62,11 +62,11 @@ const controls = ({ serviceData = {}, source = '' }) => {
 		},
 		{
 			name        : 'price',
-			label       : 'Price',
+			label       : 'Sell Price',
 			type        : 'number',
 			placeholder : 'Enter Sell Price',
 			rules       : { required: 'Price is required', min: 0 },
-			show        : ['task', 'purchase'].includes(source),
+			show        : ['overview'].includes(source),
 			size        : 'sm',
 		},
 		{
@@ -82,7 +82,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 				},
 			},
 			size  : 'sm',
-			show  : ['overview'].includes(source),
+			show  : ['purchase'].includes(source),
 			rules : { required: 'org is required' },
 		},
 		{
