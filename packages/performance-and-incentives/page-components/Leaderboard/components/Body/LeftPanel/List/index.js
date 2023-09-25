@@ -66,6 +66,7 @@ function List(props) {
 							<span>.</span>
 							<span>.</span>
 						</div>
+
 						<ListItem
 							listItem={currentUserData}
 							handleClick={handleClick}
