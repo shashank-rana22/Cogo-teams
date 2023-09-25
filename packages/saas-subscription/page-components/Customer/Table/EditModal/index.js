@@ -27,7 +27,7 @@ function EditModal({ editModal, setEditModal }) {
 	} = useGetSubscriptionInfo({ setEditModal, editModal });
 
 	const { active = {} } = subInfo || {};
-	const { id = '', plan = {}, pricing = {}, product_family = {} } = active || {};
+	const { pricing = {}, product_family = {} } = active || {};
 
 	return (
 		<Modal show={open} onClose={closeModalHandler} closeOnOuterClick={closeModalHandler} size="lg">
@@ -46,11 +46,10 @@ function EditModal({ editModal, setEditModal }) {
 				)}
 
 				<Header
-					id={id}
-					plan={plan}
 					info={info}
 					editModalChangeHandler={editModalChangeHandler}
 					closeModalHandler={closeModalHandler}
+					{...active}
 				/>
 
 				<div className={cl`${styles.flex_box} ${styles.details_container}`}>

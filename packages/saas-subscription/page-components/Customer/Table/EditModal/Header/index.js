@@ -7,8 +7,11 @@ import { HEADER_MAPPING } from '../../../../../constant/editModalConstant';
 
 import styles from './styles.module.css';
 
-function Header({ id = '', info = {}, plan = {}, editModalChangeHandler, closeModalHandler }) {
+function Header({ info = {}, editModalChangeHandler, closeModalHandler, ...rest }) {
+	const { id = '', plan = {}, product_family = {}, saas_subscription_customer_id = '' } = rest || {};
+
 	const { organization = {} } = info || {};
+	const { id:product_family_id } = product_family || {};
 
 	const { t } = useTranslation(['saasSubscription']);
 
@@ -34,7 +37,10 @@ function Header({ id = '', info = {}, plan = {}, editModalChangeHandler, closeMo
 
 				<div className={styles.flex_box}>
 					<Button
-						onClick={() => editModalChangeHandler('editPlan', id)}
+						onClick={() => editModalChangeHandler(
+							'editPlan',
+							{ id, product_family_id, saas_subscription_customer_id },
+						)}
 						type="button"
 					>
 						{t('saasSubscription:change_plan')}

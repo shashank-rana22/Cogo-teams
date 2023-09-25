@@ -9,7 +9,9 @@ import styles from './styles.module.css';
 function MetaDataModal({ metaData, setMetaData }) {
 	const { t } = useTranslation(['saasSubscription']);
 
-	const [newMetaData, setNewMetaData] = useState(JSON.stringify(metaData?.info));
+	const jsonMetaData = JSON.stringify(metaData?.info);
+
+	const [newMetaData, setNewMetaData] = useState(jsonMetaData);
 
 	const { loading, submitHandler, closeModalHandler } = usePlanMetaData({ metaData, setMetaData });
 
@@ -37,7 +39,7 @@ function MetaDataModal({ metaData, setMetaData }) {
 				<Button
 					themeType="accent"
 					loading={loading}
-					disabled={!newMetaData}
+					disabled={newMetaData === jsonMetaData}
 					onClick={() => submitHandler(newMetaData)}
 				>
 					{t('saasSubscription:save')}
