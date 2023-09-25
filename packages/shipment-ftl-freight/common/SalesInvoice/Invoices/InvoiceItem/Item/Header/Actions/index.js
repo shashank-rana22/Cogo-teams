@@ -56,7 +56,7 @@ function Actions({
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
-	const editInvoicesVisibility = !shipment_data?.is_job_closed_financially
+	const editInvoicesVisiblity = !shipment_data?.is_job_closed_financially
 		&& ((shipment_data?.is_cogo_assured !== true
 		&& !invoice?.is_igst && !!invoice?.edit_invoice
 		) || isAuthorized);
@@ -121,7 +121,7 @@ function Actions({
 								<KebabContent
 									handleSetter={handleSetter}
 									commonActions={commonActions}
-									editInvoicesVisibility={editInvoicesVisibility}
+									editInvoicesVisiblity={editInvoicesVisiblity}
 									invoice={invoice}
 									is_job_closed_financially={shipment_data?.is_job_closed_financially}
 								/>

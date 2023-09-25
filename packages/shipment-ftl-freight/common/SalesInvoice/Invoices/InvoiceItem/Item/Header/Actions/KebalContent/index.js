@@ -7,7 +7,7 @@ const CUSTOMER_INVOICE_STATUSES = ['reviewed', 'approved'];
 function KebabContent({
 	handleSetter = () => {},
 	commonActions = false,
-	editInvoicesVisibility = false,
+	editInvoicesVisiblity = false,
 	invoice = {},
 	is_job_closed_financially = false,
 }) {
@@ -15,7 +15,7 @@ function KebabContent({
 		<div className={styles.dialog_box}>
 			{commonActions ? (
 				<>
-					{editInvoicesVisibility ? (
+					{editInvoicesVisiblity ? (
 						<div style={{ width: '100%' }}>
 							<ClickableDiv
 								className={styles.text}
