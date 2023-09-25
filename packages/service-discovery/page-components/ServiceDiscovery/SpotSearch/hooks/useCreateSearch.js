@@ -23,6 +23,7 @@ const useCreateSearch = () => {
 				origin = {},
 				destination = {},
 				formValues = {},
+				ftlFormData = {},
 			} = values;
 
 			if (action === 'default') {
@@ -30,6 +31,7 @@ const useCreateSearch = () => {
 					service_type,
 					origin,
 					destination,
+					ftlFormData,
 				});
 
 				payload = { ...defaultPayload };

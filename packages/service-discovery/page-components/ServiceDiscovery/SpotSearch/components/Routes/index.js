@@ -1,7 +1,7 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import RouteForm from '../../../../../common/RouteForm';
 
@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 
 const isFormValid = (values, setErrors) => {
 	let isValid = true;
+	setErrors({});
 
 	Object.keys(values).forEach((key) => {
 		if (!values[key] || isEmpty(values[key])) {
@@ -31,16 +32,32 @@ function Routes({
 	createSearch = () => {},
 	createSearchLoading = false,
 	setErrors = () => {},
+	errors = {},
 }) {
 	const router = useRouter();
 
 	const [buttonDisabled, setButtonDisabled] = useState(true);
-	const [typeOfJourney, setTypeOfJourney] = useState('one_way');
+	const [ftlFormData, setFtlFormData] = useState({
+		typeOfJourney : 'one_way',
+		touchPoints   : {
+			one_way : [],
+			round   : [],
+		},
+		haltTime: {},
+	});
 
 	const service_type = mode.mode_value;
 
 	const onClickSearch = async () => {
-		const isValid = isFormValid(organization, setErrors);
+		const valuesToBeChecked = {
+			...organization,
+			...((ftlFormData.haltTime?.halt_time_value && !ftlFormData.haltTime?.halt_time_unit)
+				? { halt_time_unit: '' } : {}),
+			...((!ftlFormData.haltTime?.halt_time_value && ftlFormData.haltTime?.halt_time_unit)
+				? { halt_time_value: '' } : {}),
+		};
+
+		const isValid = isFormValid(valuesToBeChecked, setErrors);
 
 		if (!isValid) {
 			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -49,7 +66,13 @@ function Routes({
 
 		const spot_search_id = await createSearch({
 			action : 'default',
-			values : { service_type, ...organization, ...formValues, setButtonDisabled },
+			values : {
+				service_type,
+				...organization,
+				...formValues,
+				setButtonDisabled,
+				ftlFormData,
+			},
 		});
 
 		if (spot_search_id && typeof spot_search_id === 'string') {
@@ -77,7 +100,7 @@ function Routes({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.route_form}>
+			<div className={cl`${styles.route_form} ${styles[service_type]}`}>
 				<div className={styles.heading}>{`Enter ${mode?.mode_label} Details`}</div>
 
 				<RouteForm
@@ -86,8 +109,9 @@ function Routes({
 					setFormValues={setFormValues}
 					organization={organization}
 					intent="rate_search"
-					setTypeOfJourney={setTypeOfJourney}
-					typeOfJourney={typeOfJourney}
+					setFtlFormData={setFtlFormData}
+					ftlFormData={ftlFormData}
+					errors={errors}
 				/>
 			</div>
 

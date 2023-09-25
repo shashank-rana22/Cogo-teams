@@ -10,7 +10,7 @@ const ftlRouteControls = [
 		placeholder : 'Port/Airport/Pincode/Railway Terminal',
 		type        : 'async-select',
 		asyncKey    : 'list_locations',
-		span        : 6,
+		span        : 4,
 		isClearable : true,
 		params      : {
 			apply_sorting : false,
@@ -28,7 +28,7 @@ const ftlRouteControls = [
 		placeholder : 'Port/Airport/Pincode/Railway Terminal',
 		type        : 'async-select',
 		asyncKey    : 'list_locations',
-		span        : 6,
+		span        : 4,
 		isClearable : true,
 		params      : {
 			apply_sorting : false,
