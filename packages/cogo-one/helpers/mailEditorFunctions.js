@@ -25,6 +25,7 @@ function useMailEditorFunctions({
 		setEmailState = () => {},
 		setButtonType = () => {},
 		resetEmailState = () => {},
+		setMailAttachments = () => {},
 	} = mailProps || {};
 
 	const {
@@ -80,6 +81,7 @@ function useMailEditorFunctions({
 		setEmailState,
 		setButtonType,
 		saveDraft,
+		setMailAttachments,
 	});
 
 	const handleSend = () => {

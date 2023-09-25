@@ -11,6 +11,7 @@ const useSendOmnichannelMail = ({
 	setEmailState = () => {},
 	setButtonType = () => {},
 	saveDraft = () => {},
+	setMailAttachments = () => {},
 }) => {
 	const {
 		user: { id: userId, name = '' },
@@ -61,6 +62,7 @@ const useSendOmnichannelMail = ({
 			Toast.success(`${startCase(mailActions?.actionType)} mail sent successfully`);
 
 			setEmailState({ ...DEFAULT_EMAIL_STATE, scrollToTop: true });
+			setMailAttachments([]);
 			setButtonType('');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
