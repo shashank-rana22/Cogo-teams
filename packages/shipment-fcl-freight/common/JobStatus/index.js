@@ -32,15 +32,14 @@ function JobStatus({ shipment_data = {} }) {
 
 	if (is_job_closed_financially) {
 		return (
-			<div className={styles.fin_job_close_container}>
+			<div className={styles.job_closed_container}>
+				<Pill className={styles.job_closed_pill} size="lg">Financially Closed</Pill>
+
 				<ReOpenShipment
 					finJobOpenConfirmation={finJobOpenConfirmation}
 					setFinJobOpenConfirmation={setFinJobOpenConfirmation}
 					shipment_id={shipment_id}
 				/>
-				<div className={styles.job_closed_container}>
-					<Pill className={styles.job_closed_pill} size="lg">Financially Closed</Pill>
-				</div>
 			</div>
 		);
 	}
