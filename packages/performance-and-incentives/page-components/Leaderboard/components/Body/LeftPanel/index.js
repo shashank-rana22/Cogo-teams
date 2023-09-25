@@ -36,7 +36,6 @@ function LeftPanel(props) {
 		setParams((prev) => ({
 			...prev,
 			add_current_user_report : true,
-			current_user_id         : user.id,
 			filters                 : {
 				...prev.filters,
 				report_type      : NEXT_LEVEL_MAPPING[currLevel[GLOBAL_CONSTANTS.zeroth_index]],
@@ -44,6 +43,7 @@ function LeftPanel(props) {
 				...((!location_id && !channel) ? { office_location_id: undefined, channel: undefined } : {}),
 				report_view_type : undefined,
 				user_rm_ids      : id ? [id] : undefined,
+				current_user_id  : user.id,
 			},
 		}));
 
