@@ -47,11 +47,10 @@ function List(props) {
 			</div>
 
 			<div className={styles.list_body_container}>
-				{list.map((listItem, index) => (
+				{list.map((listItem) => (
 					<ListItem
 						key={listItem.id}
 						listItem={listItem}
-						index={index}
 						handleClick={handleClick}
 						viewType={viewType}
 						user={user}
