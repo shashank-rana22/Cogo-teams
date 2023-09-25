@@ -12,7 +12,7 @@ import {
 	UploadCargoArrival,
 	UploadComplianceDocs,
 	UploadContainerDetails,
-	VerifyShipperDetails,
+	ConfirmWithShipper,
 } from './CustomTasks';
 
 const TRADE_PARTY_TYPE = {
@@ -25,7 +25,7 @@ const {
 	UPLOAD_CONTAINER_ARRIVAL_NOTICE,
 	AMEND_DRAFT_BL,
 	CHOOSE_SERVICE_PROVIDER,
-	VERIFY_SHIPPER_DETAILS,
+	CONFIRM_WITH_SHIPPER,
 	UPDATE_NOMINATION_DETAILS,
 	GENERATE_FREIGHT_CERTIFICATE,
 	GENERATE_CARGO_INSURANCE,
@@ -40,7 +40,7 @@ const COMPONENT_MAPPING = {
 	[UPLOAD_CONTAINER_ARRIVAL_NOTICE] : UploadCargoArrival,
 	[AMEND_DRAFT_BL]                  : AmendDraftBl,
 	[CHOOSE_SERVICE_PROVIDER]         : ChooseServiceProvider,
-	[VERIFY_SHIPPER_DETAILS]          : VerifyShipperDetails,
+	[CONFIRM_WITH_SHIPPER]            : ConfirmWithShipper,
 	[UPDATE_NOMINATION_DETAILS]       : NominationTask,
 	[GENERATE_FREIGHT_CERTIFICATE]    : GenerateFreightCertificate,
 	[GENERATE_CARGO_INSURANCE]        : CargoInsurance,
@@ -93,7 +93,7 @@ const getCustomTaskComponent = ({
 			refetch  : taskListRefetch,
 			services : servicesList,
 		},
-		[VERIFY_SHIPPER_DETAILS]: {
+		[CONFIRM_WITH_SHIPPER]: {
 			task,
 			onCancel,
 			refetch: taskListRefetch,

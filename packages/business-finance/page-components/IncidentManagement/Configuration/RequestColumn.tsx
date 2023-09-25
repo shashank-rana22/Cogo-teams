@@ -18,6 +18,8 @@ export const requestColumn = ({
 	isAscendingActive,
 	getIncidentData,
 	t,
+	detailsModal = {},
+	setDetailsModal = () => {},
 }) => [
 	{
 		Header   : t('incidentManagement:incident_id_header'),
@@ -215,7 +217,12 @@ export const requestColumn = ({
 	},
 	{
 		accessor: (row) => (
-			<AccessorComponent row={row} getIncidentData={getIncidentData} />
+			<AccessorComponent
+				row={row}
+				getIncidentData={getIncidentData}
+				detailsModal={detailsModal}
+				setDetailsModal={setDetailsModal}
+			/>
 		),
 		id: 'action',
 	},

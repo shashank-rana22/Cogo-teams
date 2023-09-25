@@ -13,6 +13,7 @@ const formatMailDraftMessage = ({
 	buttonType,
 	parentEmailMessage,
 	roomId,
+	body,
 }) => ({
 	agent_type           : 'bot',
 	conversation_type    : 'received',
@@ -25,15 +26,16 @@ const formatMailDraftMessage = ({
 	draft_type           : buttonType,
 	parent_email_message : parentEmailMessage || {},
 	response             : {
-		attachments : payload?.attachments || [],
-		bcc_mails   : payload?.bccrecipients || [],
-		body        : payload?.content || '',
-		cc_mails    : payload?.ccrecipients || [],
-		message_id  : payload?.msgId || '',
-		sender      : payload?.sender || '',
-		subject     : payload?.subject || '',
-		to_mails    : payload?.toUserEmail || [],
-		draft_type  : buttonType,
+		attachments       : payload?.attachments || [],
+		bcc_mails         : payload?.bccrecipients || [],
+		body              : payload?.content || '',
+		cc_mails          : payload?.ccrecipients || [],
+		message_id        : payload?.msgId || '',
+		sender            : payload?.sender || '',
+		subject           : payload?.subject || '',
+		to_mails          : payload?.toUserEmail || [],
+		draft_type        : buttonType,
+		draftQuillMessage : body,
 	},
 });
 
@@ -43,6 +45,7 @@ const createDraftRoom = async ({
 	communication_id = '',
 	rteEditorPayload = {},
 	buttonType = '',
+	body = '',
 }) => {
 	const emailCollection = collection(
 		firestore,
@@ -62,8 +65,9 @@ const createDraftRoom = async ({
 		last_draft_document : formatMailDraftMessage({
 			communication_id,
 			buttonType,
-			rteEditorPayload,
-			roomId: '',
+			payload : rteEditorPayload,
+			roomId  : '',
+			body,
 		}),
 	};
 
@@ -86,6 +90,7 @@ const updateMessage = async ({
 	isNewRoomCreated = false,
 	setEmailState = () => {},
 	isMinimize = false,
+	body = '',
 }) => {
 	const updatePayload = formatMailDraftMessage({
 		communication_id,
@@ -93,6 +98,7 @@ const updateMessage = async ({
 		buttonType,
 		parentEmailMessage: parent_email_message,
 		roomId,
+		body,
 	});
 
 	if (!isNewRoomCreated) {
@@ -165,6 +171,7 @@ const useSaveDraft = ({
 	rteEditorPayload = {},
 	parentMessageData = {},
 	setEmailState = () => {},
+	body = '',
 }) => {
 	const agentId = useSelector((state) => state.profile?.user?.id);
 
@@ -187,6 +194,7 @@ const useSaveDraft = ({
 				communication_id,
 				rteEditorPayload,
 				buttonType,
+				body,
 			});
 		}
 
@@ -205,6 +213,7 @@ const useSaveDraft = ({
 			isNewRoomCreated     : !roomId,
 			setEmailState,
 			isMinimize,
+			body,
 		});
 	};
 

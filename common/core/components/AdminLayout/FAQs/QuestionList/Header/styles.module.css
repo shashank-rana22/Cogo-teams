@@ -1,6 +1,5 @@
 .container {
 	padding-bottom: 12px;
-	margin-top: -21px;
 	border-radius: 10px 0 0;
 
 	&.cogo_assist {
@@ -10,13 +9,25 @@
 
 .wrapper {
 	align-items: center;
-	margin: 21px 14px;
+	padding: 20px 14px;
+}
+
+.feedback {
+	display: flex;
+	align-items: center;
+	margin-left: auto;
+
+	& svg {
+		width: 16px;
+		height: 16px;
+		margin-right: 6px;
+	}
 }
 
 .heading_container {
 	display: flex;
 	align-items: center;
-	padding: 20px 0 0;
+	padding: 8px 0 0;
 }
 
 .gap {
