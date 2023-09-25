@@ -1,6 +1,6 @@
-function RequestCN() {
+function AdvanceSecurityDeposit() {
 	return (
 		<>advance security deposit</>
 	);
 }
-export default RequestCN;
+export default AdvanceSecurityDeposit;

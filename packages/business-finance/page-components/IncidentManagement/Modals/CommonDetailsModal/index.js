@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import React from 'react';
 
 import AdvanceSecurityDeposit from '../AdvanceSecurityDepositDetails';
-import AdvanceSecurityDepositRefundDetails from '../AdvanceSecurityRefundDetails';
+import AdvanceSecurityDepositRefund from '../AdvanceSecurityRefundDetails';
 import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
 import RequestCNDetails from '../RequestCN';
 import RevokeInvoiceDetails from '../RevokeInvoiceDetails';
@@ -10,6 +10,18 @@ import SezApprovalDetails from '../SezApprovalDetails';
 import TdsApprovalDetails from '../TdsApprovalDetails';
 
 import styles from './styles.module.css';
+
+// import ICJVModal from './ICJV_Modal/ICJVDetails';
+// import JvModal from './JvModal/JVDetails';
+// import NonRecuringModal from './NonRecuringModal/NonRecuringDetails';
+// import PaymentConfirmation from './PaymentConfirmation/PaymentConfirmationDetails';
+// import RecuringModal from './RecuringModal/RecuringModalDetails';
+// import RevokeInvoice from './RevokeInvoice/RevokeInvoiceDetails';
+// import SettlementModal from './SettlementModal/SettlementModalDetails';
+// import SezApproval from './SezApproval/SezApprovalDetails';
+// import BankDetails from '../BankDetails/BankDetails';
+// import ConcorModal from '../ConcorModal/ConcorDetails';
+// import TDSModal from './TDSModal/TDSDetails';
 
 const TYPE_COMPONENT_MAPPING = {
 	// BANK_DETAIL_APPROVAL     : BankDetails,
@@ -25,7 +37,7 @@ const TYPE_COMPONENT_MAPPING = {
 	// CONSOLIDATED_CREDIT_NOTE               : RequestCNDetails,
 	REVOKE_INVOICE                  : RevokeInvoiceDetails,
 	ADVANCE_SECURITY_DEPOSIT        : AdvanceSecurityDeposit,
-	ADVANCE_SECURITY_DEPOSIT_REFUND : AdvanceSecurityDepositRefundDetails,
+	ADVANCE_SECURITY_DEPOSIT_REFUND : AdvanceSecurityDepositRefund,
 	ISSUE_CREDIT_NOTE               : RequestCNDetails,
 	JOB_OPEN                        : JobOpenDetailsModal,
 };
@@ -56,6 +68,14 @@ function CommonDetailsModal({
 				setDetailsModal={setDetailsModal}
 				refetch={refetch}
 			/>
+
+			{/* { detailsModal?.type === 'TDS_APPROVAL' ? (
+				<JobOpenDetailsModal
+					row={detailsModal}
+					setDetailsModal={setDetailsModal}
+					refetch={refetch}
+				/>
+			) : null } */}
 		</div>
 	);
 }
