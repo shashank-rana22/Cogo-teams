@@ -4,7 +4,7 @@ import tabPayload, { CRITICAL_TABS } from '../config/SHIPMENTS_PAYLOAD';
 
 import getAdditionalMethods from './getAdditionalMethods';
 
-const keyMapping = {
+const KEY_MAPPING = {
 	eta : 'schedule_arrival',
 	etd : 'schedule_departure',
 };
@@ -12,9 +12,28 @@ const keyMapping = {
 export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 	const { activeTab, shipmentType, stepperTab } = kamDeskContextValues || {};
 	const { criticalOn, date_type, dateRange, startDate, endDate, tags, ...restFilters } = filters || {};
+	console.log('reff', restFilters);
 
-	const tabwiseFilters = shipmentType === 'all' ? tabPayload.all?.[activeTab]
-		: tabPayload?.[shipmentType]?.[stepperTab]?.[activeTab];
+	let tabwiseFilters = {};
+
+	if (shipmentType === 'fcl_freight' && stepperTab === 'export_import') {
+		const export_tabs = Object.keys(tabPayload?.[shipmentType]?.export || {});
+		const import_tabs = Object.keys(tabPayload?.[shipmentType]?.import || {});
+		console.log('reffe', activeTab);
+
+		if (export_tabs?.includes(activeTab)) {
+			tabwiseFilters = { ...tabwiseFilters, ...tabPayload?.[shipmentType]?.export?.[activeTab] };
+		}
+
+		if (import_tabs?.includes(activeTab)) {
+			tabwiseFilters = { ...tabwiseFilters, ...tabPayload?.[shipmentType]?.import?.[activeTab] };
+		}
+	} else {
+		tabwiseFilters = shipmentType === 'all' ? tabPayload.all?.[activeTab]
+			: tabPayload?.[shipmentType]?.[stepperTab]?.[activeTab];
+	}
+
+	console.log('refff', tabwiseFilters);
 
 	let finalFilters = { ...(tabwiseFilters || {}), ...restFilters };
 
@@ -27,12 +46,21 @@ export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 	}
 
 	if (dateRange && startDate && date_type && endDate) {
-		finalFilters[`${keyMapping[date_type]}_greater_than`] = startDate;
-		finalFilters[`${keyMapping[date_type]}_less_than`] = endDate;
+		finalFilters[`${KEY_MAPPING[date_type]}_greater_than`] = startDate;
+		finalFilters[`${KEY_MAPPING[date_type]}_less_than`] = endDate;
 	}
 
+	// this can be removed
 	if (['import', 'export'].includes(stepperTab)) {
 		finalFilters.trade_type = stepperTab;
+	}
+
+	if (['upload_booking_note', 'update_container_details'].includes(activeTab)) {
+		finalFilters.trade_type = 'export';
+	}
+
+	if (['confirm_with_shipper', 'upload_shipping_order'].includes(activeTab)) {
+		finalFilters.trade_type = 'import';
 	}
 
 	return {

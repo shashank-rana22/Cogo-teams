@@ -19,10 +19,11 @@ const useListKamDeskShipments = () => {
 	const { activeTab, filters = {}, setFilters, stepperTab, shipmentType } = kamDeskContextValues || {};
 
 	const { page = 1, ...restFilters } = filters || {};
+	console.log('rfff', restFilters);
 
 	const debounceQuery = useRef({ q: filters.q });
 
-	const apiPrefix = ['import', 'export'].includes(stepperTab) ? shipmentType : stepperTab;
+	const apiPrefix = ['import', 'export', 'export_import'].includes(stepperTab) ? shipmentType : stepperTab;
 
 	const [{ loading }, trigger] = useRequest({
 		url    : `${apiPrefix}/list_kam_desk_shipments`,
