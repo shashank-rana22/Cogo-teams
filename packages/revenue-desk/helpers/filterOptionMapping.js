@@ -70,3 +70,17 @@ export const sortByOptions = [
 	{ label: 'Schedule Departure : Latest', value: 'schedule_departure_desc' },
 	{ label: 'Schedule Departure : Earliest', value: 'schedule_departure_asc' },
 ];
+
+export const filterOption = {
+	fcl_freight_service     : ['seaport'],
+	lcl_freight_service     : ['seaport'],
+	air_freight_service     : ['airport'],
+	fcl_customs_service     : ['seaport'],
+	lcl_customs_service     : ['seaport'],
+	air_customs_service     : ['airport'],
+	haulage_freight_service : ['pincode', 'seaport'],
+	trailer_freight_service : ['pincode', 'seaport'],
+	ltl_freight_service     : ['pincode', 'seaport'],
+	ftl_freight_service     : ['pincode', 'seaport'],
+	fcl_cfs_service         : ['seaport'],
+};

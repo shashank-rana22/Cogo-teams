@@ -30,13 +30,13 @@ export const useReassignTicketsControls = ({ t, watchType, setUserData }) => {
 			className      : 'primary md',
 			placeholder    : t('myTickets:search_by_name'),
 			onChange       : (_, obj) => setUserData(obj),
+			rules          : { required: true },
 		},
 		{
 			name           : 'comment',
 			controllerType : 'textarea',
 			label          : t('myTickets:comments'),
 			placeholder    : t('myTickets:enter_comments'),
-			rules          : { required: true },
 		},
 	];
 };
