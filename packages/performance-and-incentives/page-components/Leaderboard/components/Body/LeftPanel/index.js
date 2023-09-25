@@ -70,6 +70,7 @@ function LeftPanel(props) {
 	return (
 		<div className={styles.container}>
 			<Header
+				params={params}
 				currLevel={currLevel}
 				setParams={setParams}
 				isExpanded={isExpanded}
