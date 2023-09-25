@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import AddMembers from './AddMembers';
 import styles from './styles.module.css';
 
-function Header({ viewType = '' }) {
+function NormalHeader({ viewType = '' }) {
 	const [showPopover, setShowPopover] = useState(false);
 	const type = 'single';
 
@@ -83,4 +83,4 @@ function Header({ viewType = '' }) {
 	);
 }
 
-export default Header;
+export default NormalHeader;
