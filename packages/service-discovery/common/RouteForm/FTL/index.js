@@ -105,7 +105,7 @@ function FTLRouteForm({
 					size="sm"
 					onLabel="Round Trip"
 					offLabel="One Way"
-					value={typeOfJourney}
+					checked={typeOfJourney === 'round'}
 					onChange={handleToggle}
 				/>
 			</div>

@@ -1,5 +1,4 @@
-const getFormattedTouchPointDataprefill = (data) => {
-	const { touch_points = {} } = data || {};
+const getFormattedTouchPointDataprefill = (touch_points = {}) => {
 	const { primary_service = {} } = touch_points || {};
 	const { enroute = [] } = primary_service || {};
 	const forwardJourney = enroute.filter(

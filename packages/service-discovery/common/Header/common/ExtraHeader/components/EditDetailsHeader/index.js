@@ -1,4 +1,4 @@
-import { Button, Toast } from '@cogoport/components';
+import { Button, Toast, cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
@@ -7,6 +7,7 @@ import getLocationInfo from '../../../../../../page-components/SearchResults/uti
 import useCreateSearch from '../../../../../../page-components/ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 import OrganisationForm from '../../../../../OrganisationForm';
 import RouteForm from '../../../../../RouteForm';
+import getFtlPrefillValues from '../../../../utils/getFtlPrefillValues';
 
 import styles from './styles.module.css';
 
@@ -16,10 +17,18 @@ function removeItemFromLocalStorage() {
 	localStorage.removeItem('additionalFormInfo');
 }
 
-function EditDetailsHeader({ data = {}, setShow = () => {}, setRouterLoading = () => {}, ...rest }) {
-	const { createSearch, loading } = useCreateSearch();
-
+function EditDetailsHeader({
+	data = {},
+	setShow = () => {},
+	setRouterLoading = () => {},
+	touch_points = {},
+	...rest
+}) {
 	const router = useRouter();
+
+	const [ftlFormData, setFtlFormData] = useState(getFtlPrefillValues(data, touch_points));
+
+	const { createSearch, loading } = useCreateSearch();
 
 	const {
 		importer_exporter_id = '',
@@ -78,7 +87,7 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, setRouterLoading = (
 				service_type,
 				...organization,
 				...locationValues,
-				formValues: loadValues,
+				formValues: { ...loadValues, ftlFormData },
 			},
 		});
 
@@ -98,9 +107,8 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, setRouterLoading = (
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.form}>
-
-				<div className={styles.form_item}>
+			<div className={cl`${styles.form} ${styles[service_type]}`}>
+				<div className={cl`${styles.form_item} ${styles[service_type]} ${styles.organization}`}>
 					<OrganisationForm
 						organization={organization}
 						setOrganization={setOrganization}
@@ -108,16 +116,17 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, setRouterLoading = (
 					/>
 				</div>
 
-				<div className={styles.form_item}>
+				<div className={cl`${styles.form_item} ${styles[service_type]}`}>
 					<RouteForm
 						mode={service_type}
 						formValues={locationValues}
 						setFormValues={setLocationValues}
 						intent="rate_search"
 						organization={organization}
+						setFtlFormData={setFtlFormData}
+						ftlFormData={ftlFormData}
 					/>
 				</div>
-
 			</div>
 
 			<Button

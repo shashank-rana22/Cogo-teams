@@ -64,6 +64,12 @@ const getPrefillForm = (values, service_key) => {
 		};
 	}
 
+	if (service_type === 'ftl_freight') {
+		loadData = {
+			...load[GLOBAL_CONSTANTS.zeroth_index],
+		};
+	}
+
 	return loadData;
 };
 export default getPrefillForm;

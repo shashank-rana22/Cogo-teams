@@ -12,11 +12,13 @@ import getRedirectionDetails from '../utils/getRedirectionDetails';
 
 import AIRResults from './AirResults';
 import FCLResults from './FCLResults';
+import FTLResults from './FTLResults';
 import styles from './styles.module.css';
 
 const COMPONENT_MAPPING = {
 	fcl_freight : FCLResults,
 	air_freight : AIRResults,
+	ftl_freight : FTLResults,
 };
 
 function SearchResults() {
@@ -98,15 +100,25 @@ function SearchResults() {
 		setSelectedCard,
 		selectedCard,
 		page = 1,
-		rates = [],
+		// rates = [],
 	} = useGetSpotSearch({ setComparisonRates });
 
+	// const {
+	// 	spot_search_detail:detail = {},
+	// 	contract_detail = {},
+	// 	possible_subsidiary_services = [],
+	// 	total_count,
+	// 	page_limit,
+	// } = data || {};
+
 	const {
-		spot_search_detail:detail = {},
+		detail = {},
 		contract_detail = {},
 		possible_subsidiary_services = [],
 		total_count,
 		page_limit,
+		rates = [],
+		touch_points = {},
 	} = data || {};
 
 	const paginationProps = { page, page_limit, total_count };
@@ -173,6 +185,7 @@ function SearchResults() {
 				isGuideViewed={isGuideViewed}
 				service_key="service_type"
 				setRouterLoading={setRouterLoading}
+				touch_points={touch_points}
 			/>
 
 			<div

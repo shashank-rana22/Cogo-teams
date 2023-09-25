@@ -8,8 +8,12 @@
 
 .form {
 	display: flex;
-	width: 80%;
+	width: 85%;
 	margin-right: 32px;
+
+	&.ftl_freight {
+		flex-direction: column;
+	}
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -21,6 +25,15 @@
 	flex-direction: column;
 	width: 48%;
 	margin-right: 20px;
+
+	&.ftl_freight {
+		width: 100%;
+		margin-right: 0;
+
+		&.organization {
+			width: 80%;
+		}
+	}
 
 	@media (max-width: 768px) {
 		width: 100%;

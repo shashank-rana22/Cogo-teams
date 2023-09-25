@@ -17,6 +17,7 @@ function SearchDetails({
 	currentScreen = '',
 	setCurrentScreen = () => {},
 	setRouterLoading = () => {},
+	touch_points = {},
 	...rest
 }) {
 	const { importer_exporter = {}, user = {} } = data || {};
@@ -25,7 +26,7 @@ function SearchDetails({
 
 	const handleEdit = (event) => {
 		event.stopPropagation();
-		setHeaderProps({ key: 'edit_details', data, setShow: setHeaderProps, setRouterLoading });
+		setHeaderProps({ key: 'edit_details', data, setShow: setHeaderProps, setRouterLoading, touch_points });
 	};
 
 	return (

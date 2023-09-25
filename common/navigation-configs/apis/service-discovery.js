@@ -388,6 +388,12 @@ const apis = [
 		service_name : 'location',
 		feature      : 'search',
 	},
+	{
+		api          : 'get_spot_search', // remove later on
+		access_type  : 'private',
+		feature      : 'search',
+		service_name : 'spot_search',
+	},
 ];
 
 export default apis;
