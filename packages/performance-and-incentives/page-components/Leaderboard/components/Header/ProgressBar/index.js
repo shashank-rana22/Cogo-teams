@@ -32,13 +32,13 @@ function ProgreeBar() {
 				<p className={styles.points_till_now}>
 					This Month:
 					{' '}
-					<b>{date_range_points_achieved || ''}</b>
+					<b>{date_range_points_achieved}</b>
 				</p>
 
 				<div className={styles.today_points}>
 					Today:
 					{' '}
-					<b>{date_points_achieved || ''}</b>
+					<b>{date_points_achieved}</b>
 				</div>
 			</div>
 
@@ -72,7 +72,7 @@ function ProgreeBar() {
 							<p>
 								Provisional till now:
 								{' '}
-								<b>{date_range_points_achieved || ''}</b>
+								<b>{date_range_points_achieved}</b>
 							</p>
 						</>
 					)}
@@ -85,7 +85,7 @@ function ProgreeBar() {
 							}}
 						/>
 						<div className={styles.target_line} />
-						<div className={styles.target}>{end_point || ''}</div>
+						<div className={styles.target}>{end_point}</div>
 					</Tooltip>
 				</div>
 			</div>
