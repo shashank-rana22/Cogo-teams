@@ -134,5 +134,11 @@
     "by_category": "Oleh kategori",
     "by_desk": "Oleh meja",
     "select_raised_by_desk": "Pilih Dibesarkan dengan Meja",
-    "select_raised_to_desk": "Pilih Dibesarkan ke Meja"
+    "select_raised_to_desk": "Pilih Dibesarkan ke Meja",
+    "organization": "Organisasi",
+    "sid": "SID",
+    "service": "Layanan",
+    "trade_type": "Jenis Perdagangan",
+    "category": "Kategori",
+    "sub_category": "Sub Kategori"
 }

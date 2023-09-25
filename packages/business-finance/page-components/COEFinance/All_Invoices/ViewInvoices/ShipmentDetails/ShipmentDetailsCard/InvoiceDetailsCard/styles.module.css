@@ -14,6 +14,26 @@
 	font-weight: 700;
 }
 
+.label_approved {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	width: 100%;
+	padding: 24px 16px 24px 32px;
+	font-weight: 700;
+	color: #6cc077;
+}
+
+.label_rejected {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	width: 100%;
+	padding: 24px 16px 24px 32px;
+	font-weight: 700;
+	color: red;
+}
+
 .hr {
 	width: 100%;
 	border: 1px solid #ed3726;

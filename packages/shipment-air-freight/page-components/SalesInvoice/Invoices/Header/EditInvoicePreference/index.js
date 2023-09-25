@@ -66,7 +66,7 @@ function EditInvoicePreference({
 			<Button
 				size="sm"
 				onClick={() => setShow(true)}
-				disabled={is_job_closed_financially || (disableAction && disableOnProcessing)}
+				disabled={is_job_closed_financially || disableAction || disableOnProcessing}
 				themeType="secondary"
 			>
 				Edit Invoice Preference

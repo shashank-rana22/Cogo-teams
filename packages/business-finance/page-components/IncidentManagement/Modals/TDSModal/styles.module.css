@@ -16,7 +16,7 @@
 }
 
 .view {
-	color: green;
+	color: #f68b21;
 	text-decoration: underline;
 	background-color: transparent;
 }
@@ -74,4 +74,12 @@
 	margin: 8px 0;
 	font-size: 12px;
 	font-weight: 600;
+}
+
+.text_area {
+	:global {
+		.ui_text_area_container {
+			height: 80px;
+		}
+	}
 }

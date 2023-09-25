@@ -57,6 +57,7 @@ function AdvanceSecurityDeposit({
 					row={row}
 					getData={getData}
 					loading={loading}
+					remarkValue={remarkValue}
 					setRemarkValue={setRemarkValue}
 					type="SecurityDeposit"
 				/>

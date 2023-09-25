@@ -134,7 +134,7 @@ function AccordianCards({
 									</div>
 									<div className={styles.urgent_value_text}>
 										{formatAmount({
-											amount   : urgentTotalAmount! as number,
+											amount   : String(urgentTotalAmount),
 											currency : amountCurrency,
 											options  : {
 												style           : 'currency',
@@ -202,7 +202,7 @@ function AccordianCards({
 									</div>
 									<div className={styles.expense_value_text}>
 										{formatAmount({
-											amount   :	creditNoteTotalAmount as number,
+											amount   :	String(creditNoteTotalAmount),
 											currency :	amountCurrency,
 											options  : {
 												style           : 'currency',
@@ -331,6 +331,7 @@ function AccordianCards({
 							onAccept={onAccept}
 							showTab={showTab}
 							sidDataChecked={sidDataChecked}
+							shipmentIdView={shipmentIdView}
 						/>
 					) : null}
 
