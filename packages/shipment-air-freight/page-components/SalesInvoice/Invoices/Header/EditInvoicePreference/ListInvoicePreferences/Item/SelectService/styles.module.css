@@ -44,3 +44,8 @@
 .service_details {
 	font-size: var(--font-size-sm);
 }
+
+.select_container {
+	display: flex;
+	align-items: center;
+}

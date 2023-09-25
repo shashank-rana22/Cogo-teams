@@ -133,6 +133,17 @@ export const columns = ({
 		Header   : t('incidentManagement:request_sub_type_header'),
 		accessor : 'incidentSubtype',
 		id       : 'request_sub_type',
+		Cell     : ({ row: { original } }) => {
+			const { incidentSubtype = '' } = original || {};
+			return (
+				<Tooltip
+					interactive
+					content={(incidentSubtype?.replace(/_/g, ' '))}
+				>
+					<div className={styles.wrapper}>{(incidentSubtype?.replace(/_/g, ' '))}</div>
+				</Tooltip>
+			);
+		},
 	},
 	{
 		Header   : t('incidentManagement:source_header'),
@@ -196,16 +207,16 @@ export const columns = ({
 	},
 	{
 		Header   : t('incidentManagement:remark_header'),
-		accessor : 'remark',
+		accessor : 'financeRemark',
 		id       : 'remark',
 		Cell     : ({ row: { original } }) => {
-			const { remark = '' } = original || {};
+			const { financeRemark = '', remark = '' } = original || {};
 
 			return (
 				<Tooltip
-					content={<div className={styles.tooltip}>{remark}</div>}
+					content={<div className={styles.tooltip}>{financeRemark || remark}</div>}
 				>
-					<div className={styles.remark}>{remark}</div>
+					<div className={styles.remark}>{financeRemark || remark}</div>
 				</Tooltip>
 			);
 		},
