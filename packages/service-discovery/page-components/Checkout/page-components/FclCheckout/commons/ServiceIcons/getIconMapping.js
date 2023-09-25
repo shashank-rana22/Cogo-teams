@@ -1,34 +1,42 @@
 const getIconMapping = ({ primaryService = {}, detailedServices = {} }) => {
-	const origin_main_port_name =		primaryService?.origin_main_port?.display_name
-		|| primaryService?.origin_port?.display_name;
-	const destination_main_port_name =		primaryService?.destination_main_port?.display_name
-		|| primaryService?.destination_port?.display_name;
+	const {
+		origin_main_port = {},
+		origin_port = {},
+		destination_main_port = {},
+		destination_port = {},
+	} = primaryService;
+
+	const origin_main_port_name = origin_main_port?.display_name || origin_port?.display_name;
+	const destination_main_port_name = destination_main_port?.display_name || destination_port?.display_name;
 
 	const HASH = {};
 
-	const selectedServices = (Object.values(detailedServices) || []).map(
-		(per_service) => {
-			if (per_service?.trade_type === 'export') {
-				if (
-					per_service?.service_type === 'trailer_freight'
-					|| per_service?.service_type === 'ftl_freight'
-				) {
-					HASH[`origin_${per_service?.service_type}`] = per_service?.origin_location?.display_name;
-				}
-				return `origin_${per_service?.service_type}`;
+	const selectedServices = (Object.values(detailedServices) || []).map((service) => {
+		const {
+			trade_type = '',
+			service_type = '',
+			origin_location = {},
+			destination_location = {},
+		} = service || {};
+
+		if (trade_type === 'export') {
+			if (['ftl_freight', 'trailer_freight'].includes(service_type)) {
+				HASH[`origin_${service_type}`] = origin_location?.display_name;
 			}
-			if (per_service?.trade_type === 'import') {
-				if (
-					per_service?.service_type === 'trailer_freight'
-					|| per_service?.service_type === 'ftl_freight'
-				) {
-					HASH[`destination_${per_service?.service_type}`] = per_service?.destination_location?.display_name;
-				}
-				return `destination_${per_service?.service_type}`;
+
+			return `origin_${service_type}`;
+		}
+
+		if (trade_type === 'import') {
+			if (['ftl_freight', 'trailer_freight'].includes(service_type)) {
+				HASH[`destination_${service_type}`] = destination_location?.display_name;
 			}
-			return per_service.service_type;
-		},
-	);
+
+			return `destination_${service_type}`;
+		}
+
+		return service.service_type;
+	});
 
 	const freightTypeIncoTermsMapping = {
 		fcl_freight: [
@@ -44,12 +52,12 @@ const getIconMapping = ({ primaryService = {}, detailedServices = {} }) => {
 					? 'origin_ftl_freight'
 					: 'origin_trailer_freight',
 			},
-			primaryService?.origin_main_port?.display_name && {
+			origin_main_port?.display_name && {
 				type     : 'text',
 				iconName : '',
-				label    : primaryService?.origin_port?.display_name,
+				label    : origin_port?.display_name,
 			},
-			primaryService?.origin_main_port?.display_name && {
+			origin_main_port?.display_name && {
 				type     : 'icon',
 				iconName : 'origin_haulage_freight',
 			},
@@ -71,17 +79,17 @@ const getIconMapping = ({ primaryService = {}, detailedServices = {} }) => {
 			{ type: 'icon', iconName: 'destination_fcl_cfs' },
 			{ type: 'icon', iconName: 'destination_fcl_customs' },
 
-			primaryService?.destination_main_port?.name && {
+			destination_main_port?.name && {
 				type     : 'icon',
 				iconName : 'destination_haulage_freight',
 			},
 
-			primaryService?.destination_main_port?.display_name && {
+			destination_main_port?.display_name && {
 				type     : 'text',
 				iconName : Object.keys(HASH).includes('destination_ftl_freight')
 					? 'destination_ftl_freight'
 					: 'destination_trailer_freight',
-				label: primaryService?.destination_port?.display_name,
+				label: destination_port?.display_name,
 			},
 
 			{ type: 'icon', iconName: 'destination_trailer_freight' },

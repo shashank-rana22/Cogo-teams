@@ -50,7 +50,7 @@ function ServiceIcon({ service = {}, selectedServices = [] }) {
 
 	return (
 		<Tooltip
-			theme="light"
+			interactive
 			content={(
 				<div>
 					{startCase(iconName || label) || `Add ${point} Transportation`}
