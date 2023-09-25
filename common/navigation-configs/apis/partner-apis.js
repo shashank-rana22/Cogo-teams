@@ -11325,6 +11325,10 @@ const partner = {
 			api         : 'post_common_tax_bulk_upload',
 			access_type : 'private',
 		},
+		{
+			api         : 'post_common_tax_change_state_product_code',
+			access_type : 'private',
+		},
 	],
 	manual_invoice: [
 		{
