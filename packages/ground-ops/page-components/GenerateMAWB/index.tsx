@@ -376,16 +376,16 @@ function GenerateMAWB({
 		(formValues.dimension || []).forEach((dimensionObj) => {
 			if (dimensionObj?.unit === 'inch') {
 				totalVolume
-				+= Number(dimensionObj?.length) * 2.54
+				+= (Number(dimensionObj?.length) * 2.54
 				* Number(dimensionObj?.width) * 2.54
 				* Number(dimensionObj?.height) * 2.54
-				* Number(dimensionObj?.packages_count);
+				* Number(dimensionObj?.packages_count)) || 0;
 			} else if (dimensionObj?.unit === 'cms') {
 				totalVolume
-				+= Number(dimensionObj?.length)
+				+= (Number(dimensionObj?.length)
 				* Number(dimensionObj?.width)
 				* Number(dimensionObj?.height)
-				* Number(dimensionObj?.packages_count);
+				* Number(dimensionObj?.packages_count)) || 0;
 			}
 			totalPackage += Number(dimensionObj?.packages_count) || 0;
 		});
