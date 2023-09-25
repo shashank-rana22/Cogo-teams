@@ -73,7 +73,7 @@ function GenerateMAWB({
 		{ id: uuid(), documentNo: null, isNew: true },
 	]);
 
-	const [activeHawb, setActiveHawb] = useState(hawbDetails[GLOBAL_CONSTANTS?.zeroth_index]);
+	const [activeHawb, setActiveHawb] = useState(hawbDetails[GLOBAL_CONSTANTS.zeroth_index]);
 	const [activeKey, setActiveKey] = useState('basic');
 
 	const [customHawbNumber, setCustomHawbNumber] = useState(false);
@@ -89,7 +89,7 @@ function GenerateMAWB({
 	const formValues = watch();
 
 	const [unitDefaultValue, setUnitDefaultValue] = useState(
-		formValues?.dimension?.[GLOBAL_CONSTANTS?.zeroth_index]?.unit,
+		formValues?.dimension?.[GLOBAL_CONSTANTS.zeroth_index]?.unit,
 	);
 
 	const [chargeableWeight, setChargeableWeight] = useState(Number((Math.max(
@@ -113,7 +113,7 @@ function GenerateMAWB({
 	const { list: organizationList = [] } = organizationData;
 	const category = item?.blCategory;
 	const mawbId = item?.documentId;
-	const pendingTaskId = item?.id || item?.taskId || undefined;
+	const pendingTaskId = item?.id || item?.taskId;
 
 	const packageDisableCheck = category === 'hawb' && activeCategory === 'mawb';
 	const fields = mawbControls({
@@ -188,7 +188,7 @@ function GenerateMAWB({
 		}
 
 		if (hawbSuccess) {
-			const newDimensions = (hawbData?.data?.hawbDetails || [])?.reduce((prev, hawbItem) => {
+			const newDimensions = (hawbData?.data?.hawbDetails || []).reduce((prev, hawbItem) => {
 				const dimension = hawbItem?.documentData?.dimension || [];
 				return [...prev, ...dimension];
 			}, []);
@@ -274,11 +274,11 @@ function GenerateMAWB({
 		if (!isEmpty(operatorList) && !edit) {
 			setTaskItem((prev) => ({
 				...prev,
-				airline         : operatorList[GLOBAL_CONSTANTS?.zeroth_index]?.business_name,
-				airlineIataCode : operatorList[GLOBAL_CONSTANTS?.zeroth_index]?.iata_code,
+				airline         : operatorList[GLOBAL_CONSTANTS.zeroth_index]?.business_name,
+				airlineIataCode : operatorList[GLOBAL_CONSTANTS.zeroth_index]?.iata_code,
 			}));
-			setValue('airline', operatorList[GLOBAL_CONSTANTS?.zeroth_index]?.business_name);
-			setValue('airlineIataCode', operatorList[GLOBAL_CONSTANTS?.zeroth_index]?.iata_code);
+			setValue('airline', operatorList[GLOBAL_CONSTANTS.zeroth_index]?.business_name);
+			setValue('airlineIataCode', operatorList[GLOBAL_CONSTANTS.zeroth_index]?.iata_code);
 		}
 	}, [operatorList]);
 
@@ -286,10 +286,10 @@ function GenerateMAWB({
 		if (!isEmpty(organizationList) && !edit) {
 			setTaskItem((prev) => ({
 				...prev,
-				customer_name: organizationList[GLOBAL_CONSTANTS?.zeroth_index]?.business_name,
+				customer_name: organizationList[GLOBAL_CONSTANTS.zeroth_index]?.business_name,
 			}));
-			setValue('customer_name', organizationList[GLOBAL_CONSTANTS?.zeroth_index]?.business_name);
-			setValue('shipperSignature', organizationList[GLOBAL_CONSTANTS?.zeroth_index]?.business_name);
+			setValue('customer_name', organizationList[GLOBAL_CONSTANTS.zeroth_index]?.business_name);
+			setValue('shipperSignature', organizationList[GLOBAL_CONSTANTS.zeroth_index]?.business_name);
 		}
 	}, [organizationList]);
 
@@ -399,7 +399,7 @@ function GenerateMAWB({
 	}, [JSON.stringify(formValues.dimension), formValues.weight]);
 
 	useEffect(() => {
-		setUnitDefaultValue(formValues?.dimension?.[GLOBAL_CONSTANTS?.zeroth_index]?.unit);
+		setUnitDefaultValue(formValues?.dimension?.[GLOBAL_CONSTANTS.zeroth_index]?.unit);
 	}, [JSON.stringify(formValues?.dimension)]);
 
 	return (

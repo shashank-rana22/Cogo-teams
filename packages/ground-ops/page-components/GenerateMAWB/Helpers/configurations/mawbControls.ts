@@ -15,7 +15,12 @@ const convertObjectMappingToArray = (obj) => Object.keys(obj).map((item) => ({
 	label : obj[item],
 }));
 
-const mawbControls = ({ disableClass, editHawbNumberCondition, unitDefaultValue, packageDisableCheck }) => ({
+const mawbControls = ({
+	disableClass = false,
+	editHawbNumberCondition = false,
+	unitDefaultValue = '',
+	packageDisableCheck = false,
+}) => ({
 	hawb_controls: [
 		{
 			name        : 'document_number',
