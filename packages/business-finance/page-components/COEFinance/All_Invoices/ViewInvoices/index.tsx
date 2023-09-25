@@ -1,8 +1,10 @@
 import { cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import useGetBill from '../../hook/useGetBill';
+import useGetTaggingBills from '../../hook/useGetMappings';
 
 import Header from './Header/index';
 import ShipmentDetails from './ShipmentDetails/index';
@@ -34,17 +36,8 @@ function ViewInvoices() {
 		lineItemsCheck       : false,
 	});
 
-	const [isTagFound, setIsTagFound] = useState(false);
 	const [currentTab, setCurrentTab] = useState('shipmentDetailsTab');
 	const [combinedRemarks, setCombinedRemarks] = useState({});
-
-	useEffect(() => {
-		if (!isTagFound) {
-			setCheckItem(
-				(prev) => ({ ...prev, taggingCheck: true }),
-			);
-		}
-	}, [setCheckItem, isTagFound]);
 
 	const [isSticky, setIsSticky] = useState(false);
 
@@ -65,6 +58,14 @@ function ViewInvoices() {
 			window.removeEventListener('scroll', listenScrollEvent);
 		};
 	}, []);
+
+	const { mappingsData, loading } = useGetTaggingBills({
+		billId,
+	});
+	let isTagFound = true;
+	if (!loading) {
+		isTagFound = !isEmpty(mappingsData);
+	}
 
 	return (
 		<div>
@@ -93,15 +94,14 @@ function ViewInvoices() {
 				setLineItemsRemarks={setLineItemsRemarks}
 				status={status}
 				jobType={jobType}
-				billId={billId}
 				lineItemsCheck={checkItem?.lineItemsCheck}
 				checkItem={checkItem}
 				setCheckItem={setCheckItem}
 				isTagFound={isTagFound}
-				setIsTagFound={setIsTagFound}
 				setCurrentTab={setCurrentTab}
 				setCombinedRemarks={setCombinedRemarks}
 				jobNumberByQuery={jobNumber}
+				mappingsData={mappingsData}
 			/>
 		</div>
 	);

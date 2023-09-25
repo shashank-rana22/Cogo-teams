@@ -7,6 +7,14 @@
 	border-radius: 4px 0 !important;
 }
 
+.job_closed {
+	background: #fbd1a6;
+}
+
+.financially_closed {
+	background: #f8aea8;
+}
+
 .importer_exporter_tags {
 	background: #e0e4ff;
 }
@@ -32,6 +40,8 @@
 .source,
 .cogoverse,
 .cogoport_assured,
+.job_closed,
+.financially_closed,
 .post_facto {
 	width: max-content;
 	padding: 2px 20px;
