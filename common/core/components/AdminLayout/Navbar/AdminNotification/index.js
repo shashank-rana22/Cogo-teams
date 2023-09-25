@@ -6,6 +6,7 @@ function AdminNotification(props) {
 	const {
 		setNotificationPopover = () => {},
 		notificationPopover,
+		setResetSubnavs = () => {},
 	} = props || {};
 
 	return notificationPopover ? (
@@ -13,6 +14,7 @@ function AdminNotification(props) {
 			<NewNotifications
 				setNotificationPopover={setNotificationPopover}
 				notificationPopover={notificationPopover}
+				setResetSubnavs={setResetSubnavs}
 			/>
 		</div>
 	) : null;

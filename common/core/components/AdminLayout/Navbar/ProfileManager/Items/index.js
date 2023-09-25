@@ -15,7 +15,7 @@ const TOTAL_TIME = 1000;
 const THIRTY_SECONDS = 30;
 const ONE = 1;
 const TWO = 2;
-const ZERO_COUNT = 0;
+const ZERO = 0;
 const MAX_NOTIFICATION_COUNT = 99;
 
 function ProfileAvatar({ picture = '' }) {
@@ -63,7 +63,7 @@ function Items({
 	openPopover = () => {},
 	refetch = () => {},
 	checkIfSessionExpiring = false,
-	notificationCount = ZERO_COUNT,
+	notificationCount = ZERO,
 	notificationPopover = false,
 	setNotificationPopover = () => {},
 }) {
@@ -224,8 +224,9 @@ function Items({
 					onClick={handleNotificationPopover}
 					disabled={loadingState}
 				>
-					{resetSubnavs ? (
-						`${t('common:you_have')} ${notificationCount} ${t('common:new')} ${
+					{resetSubnavs || notificationPopover ? (
+						`${t('common:you_have')} ${notificationCount === ZERO ? 'no' : notificationCount} 
+						${t('common:new')} ${
 							notificationCount > ONE ? t('common:notifications') : t('common:notification')
 						}`
 					) : (

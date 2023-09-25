@@ -15,6 +15,7 @@ import showErrorsInToast from '../../utils/showErrorsInToast';
 function NewNotifications({
 	notificationPopover = true,
 	setNotificationPopover = () => {},
+	setResetSubnavs = () => {},
 }) {
 	const { push } = useRouter();
 	const { t } = useTranslation(['notifications', 'common']); // ??
@@ -86,6 +87,7 @@ function NewNotifications({
 			}
 
 			setNotificationPopover(false);
+			setResetSubnavs(false);
 		} catch (err) {
 			showErrorsInToast(err.data);
 		}
@@ -117,6 +119,7 @@ function NewNotifications({
 	const onMarkAllAsRead = async () => {
 		await updateAction('clicked');
 		setNotificationPopover(false);
+		setResetSubnavs(false);
 	};
 
 	useEffect(() => {
@@ -134,6 +137,7 @@ function NewNotifications({
 		push('/notifications');
 		setNotificationPopover(false);
 		setDataRequired(false);
+		setResetSubnavs(false);
 	};
 
 	// Todo : Not being used to countinuesly fire trigger

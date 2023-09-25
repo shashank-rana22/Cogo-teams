@@ -1,7 +1,7 @@
 import { Input, cl } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 
 import { LOGO } from '../../../constants/logo';
 import { applyFilter } from '../../../helpers/applyFilter';
@@ -29,6 +29,7 @@ function Navbar({
 	firestore = {},
 }) {
 	const ref = useRef(null);
+	const navRef = useRef(null);
 	const { t } = useTranslation(['common']);
 	const userBasedNavView = formatUserBasedNavView(nav);
 
@@ -77,6 +78,20 @@ function Navbar({
 		}
 	};
 
+	const handleClickOutside = (event) => {
+		if (navRef.current && !navRef.current.contains(event.target)) {
+			setNotificationPopover(false);
+			setResetSubnavs(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('click', handleClickOutside);
+		return () => {
+			document.removeEventListener('click', handleClickOutside);
+		};
+	}, []);
+
 	return (
 		<div
 			style={style}
@@ -86,6 +101,7 @@ function Navbar({
 			<nav
 				onMouseEnter={() => setResetSubnavs(true)}
 				onMouseLeave={handleLeave}
+				ref={navRef}
 			>
 				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}
 				${notificationPopover ? ` ${styles.notification_popover_bg_nav}` : ''}`}
@@ -94,7 +110,7 @@ function Navbar({
 					<div className={styles.brand_logo}>
 						<img
 							className={styles.logo}
-							src={resetSubnavs ? LOGO.LARGE : LOGO.SMALL}
+							src={resetSubnavs || notificationPopover ? LOGO.LARGE : LOGO.SMALL}
 							alt="Logo Cogoport"
 						/>
 					</div>
@@ -192,6 +208,7 @@ function Navbar({
 							<AdminNotification
 								notificationPopover={notificationPopover}
 								setNotificationPopover={setNotificationPopover}
+								setResetSubnavs={setResetSubnavs}
 							/>
 						)
 				}
