@@ -10,20 +10,19 @@ const PRESENT_TAB = 'taggingTab';
 const TAB_TO_OPEN = 'sidDataTab';
 
 function Tagging({
-	billId = '',
 	setRemarksVal = () => {},
 	status = '',
 	onTabClick = () => {},
 	onAccept = () => {},
 	showTab = false,
 	taggingChecked = false,
-	setIsTagFound = () => {},
+	mappingsData = {},
 }:
 {
-	billId: string, status: string, onTabClick: any,
-	setIsTagFound?: any,
+	status: string, onTabClick: any,
 	showTab?: boolean, taggingChecked?: boolean,
 	onAccept?: any,
+	mappingsData?: any,
 	setRemarksVal: React.Dispatch<React.SetStateAction<{
 		collectionPartyRemark: string[];
 		billingPartyRemark: string[];
@@ -56,12 +55,11 @@ function Tagging({
 			{showTab ? (
 				<div>
 					<TagMap
-						billId={billId}
 						value={value}
 						setValue={setValue}
 						setRemarksVal={setRemarksVal}
 						status={status}
-						setIsTagFound={setIsTagFound}
+						mappingsData={mappingsData}
 					/>
 					<Button
 						size="md"

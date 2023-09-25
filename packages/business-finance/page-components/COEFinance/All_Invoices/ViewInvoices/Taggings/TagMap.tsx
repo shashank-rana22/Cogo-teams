@@ -1,23 +1,20 @@
-import { Button, Placeholder, Modal, Textarea, cl } from '@cogoport/components';
+import { Button, Modal, Textarea, cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import useGetTaggingBills from '../../../hook/useGetMappings';
 import isDisabled from '../../../utils/isDisabled';
 
 import styles from './styles.module.css';
 import { TagCard } from './TagCard';
 
 function TagMap({
-	billId = '',
 	value = { remark: '' },
 	setValue = () => {},
 	setRemarksVal = () => {},
 	status = '',
-	setIsTagFound = () => {},
+	mappingsData = {},
 }: {
-	billId: string, status?: string, value?: { approve?: string, reject?: string, undo?: string, remark: string, },
-	setIsTagFound?: any,
+	mappingsData?: any, status?: string, value?: { approve?: string, reject?: string, undo?: string, remark: string, },
 	setValue: React.Dispatch<React.SetStateAction<{
 		approve: string;
 		reject: string;
@@ -31,15 +28,6 @@ function TagMap({
 	}>>
 }) {
 	const [approve, setApprove] = useState(false);
-	const { mappingsData, loading } = useGetTaggingBills({
-		billId,
-	});
-
-	useEffect(() => {
-		if (!isEmpty(mappingsData)) {
-			setIsTagFound(true);
-		}
-	}, [mappingsData, setIsTagFound]);
 
 	const classname = !isEmpty(mappingsData?.merge) ? 'merge' : '';
 
@@ -63,28 +51,26 @@ function TagMap({
 	return (
 		<>
 			<div className={styles.border}>
-				{!loading ? (
-					<div className={cl`${styles.flex} 
+				<div className={cl`${styles.flex} 
 					${styles.column} ${classname === 'merge' ? styles.merge : ''}`}
-					>
-						{!isEmpty(mappingsData)
-							? (
-								mappingsData?.merge || mappingsData?.split || []
-							).map((item) => (
-								<div
-									key={item?.id}
-									className={cl`${styles.flex} ${styles.bordernone} ${styles.wrapper}`}
-								>
-									<TagCard
-										item={item}
-										classname={classname}
-										isfirst
-									/>
-								</div>
-							))
-							: <div className={styles.empty}>No Taggings Found</div>}
-					</div>
-				) : <Placeholder width="100%" height="200px" />}
+				>
+					{!isEmpty(mappingsData)
+						? (
+							mappingsData?.merge || mappingsData?.split || []
+						).map((item) => (
+							<div
+								key={item?.id}
+								className={cl`${styles.flex} ${styles.bordernone} ${styles.wrapper}`}
+							>
+								<TagCard
+									item={item}
+									classname={classname}
+									isfirst
+								/>
+							</div>
+						))
+						: <div className={styles.empty}>No Taggings Found</div>}
+				</div>
 			</div>
 
 			{!isEmpty(mappingsData) && isDisabled(status) && (
