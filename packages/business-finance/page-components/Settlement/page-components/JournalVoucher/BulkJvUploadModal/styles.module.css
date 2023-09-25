@@ -1,0 +1,12 @@
+.sample_text {
+	margin: 0 4px 2px 0;
+}
+
+.upload_button {
+	display: flex;
+	justify-content: space-between;
+}
+
+.download_container {
+	justify-content: flex-end;
+}

@@ -10,5 +10,15 @@
     "or_label": "หรือ",
     "continue_with_microsoft": "ดำเนินการต่อด้วย Microsoft",
     "already_login_toast_error": "ไม่สามารถเข้าสู่ระบบด้วยบัญชีที่มีอยู่แล้ว",
-    "failed_to_login_toast_error": "ไม่สามารถเข้าสู่ระบบได้ โปรดลองอีกครั้ง..."
+    "failed_to_login_toast_error": "ไม่สามารถเข้าสู่ระบบได้ โปรดลองอีกครั้ง...",
+    "login_field_mobile_placeholder": "กรอกหมายเลขโทรศัพท์มือถือของคุณ",
+    "login_field_mobile_error": "จำเป็นต้องมีรายละเอียดมือถือ",
+    "login_field_submit_otp_button": "รับรหัสโอทีพี",
+    "login_otp_failed":"ไม่พบบัญชี",
+    "login_otp_resend_success":"ส่ง OTP เรียบร้อยแล้ว",
+    "mobile_title":"กรุณากรอกหมายเลขเพื่อรับ OTP",
+    "login_Otp_field_title": "ยืนยันมือถือของคุณ",
+    "login_otp_field_subtitle": "รหัสยืนยันถูกส่งไปที่",
+    "login_otp_field_subtitle_null": "หมายเลขโทรศัพท์มือถือ",
+    "login_otp_field_submit_button": "ตรวจสอบ"
 }

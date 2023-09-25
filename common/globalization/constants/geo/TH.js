@@ -154,7 +154,7 @@ export default {
 			'b69344b8-f00c-4870-be0f-3233413edccf',
 		],
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
-		coe_head                  : '0e68d129-6f07-4324-95ee-88731b35c0c4',
+		coe_head                  : '84bfc147-b21f-4994-b4a8-e42b9433b1b0',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
 		credit_controller_id      : 'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		vietnam_business_heads    : [
@@ -280,6 +280,7 @@ export default {
 		finops                    : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
 		cogo_one_kyc              : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
 		finance_branch_accounts   : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
+		service_ops3              : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
 	},
 	options: {
 		registration_types: [
@@ -580,6 +581,9 @@ export default {
 						request_cancel_invoice  : false,
 						request_replace_invoice : false,
 						request_credit_note     : false,
+					},
+					pending_tasks: {
+						is_booking_agent_filter_required: false,
 					},
 				},
 				common: {

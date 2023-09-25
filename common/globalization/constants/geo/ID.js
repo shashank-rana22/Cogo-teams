@@ -278,6 +278,7 @@ export default {
 		finops                    : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
 		cogo_one_kyc              : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
 		finance_branch_accounts   : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
+		service_ops3              : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
 	},
 	options: {
 		registration_types: [
@@ -578,6 +579,9 @@ export default {
 						request_cancel_invoice  : false,
 						request_replace_invoice : false,
 						request_credit_note     : false,
+					},
+					pending_tasks: {
+						is_booking_agent_filter_required: true,
 					},
 				},
 				common: {

@@ -9,7 +9,7 @@ import mailFunction from '../../../../../utils/mailFunctions';
 
 import ComposeEmailBody from './ComposeEmailBody';
 import EmailTemplateList from './EmailTemplateList';
-import RenderHeader from './Header';
+import RenderHeader from './RenderHeader';
 import styles from './styles.module.css';
 
 function MailEditorModal({
@@ -17,11 +17,15 @@ function MailEditorModal({
 	userId = '',
 	activeMail = {},
 	viewType = '',
+	firestore = {},
 }) {
 	const {
-		buttonType,
-		setEmailState,
-		setButtonType,
+		buttonType = '',
+		setEmailState = () => {},
+		setButtonType = () => {},
+		resetEmailState = () => {},
+		setMailAttachments = () => {},
+		mailAttachments = [],
 	} = mailProps;
 
 	const uploaderRef = useRef(null);
@@ -30,7 +34,6 @@ function MailEditorModal({
 	const [errorValue, setErrorValue] = useState('');
 	const [minimizeModal, setMinimizeModal] = useState(false);
 	const [uploading, setUploading] = useState(false);
-	const [attachments, setAttachments] = useState([]);
 	const [emailTemplate, setEmailTemplate] = useState({
 		isTemplateView : false,
 		emailData      : {},
@@ -62,20 +65,22 @@ function MailEditorModal({
 		setErrorValue,
 		setShowControl,
 		showControl,
-		setAttachments,
-		attachments,
+		setAttachments : setMailAttachments,
+		attachments    : mailAttachments,
 		uploaderRef,
 	});
 
 	const {
 		handleSend = () => {},
 		replyLoading = false,
+		handleSaveDraft = () => {},
 	} = useMailEditorFunctions({
 		uploading,
 		activeMail,
-		attachments,
+		attachments: mailAttachments,
 		userId,
 		mailProps,
+		firestore,
 	});
 
 	if (minimizeModal) {
@@ -115,15 +120,17 @@ function MailEditorModal({
 						handleSend={handleSend}
 						setUploading={setUploading}
 						uploading={uploading}
-						attachments={attachments}
-						setAttachments={setAttachments}
+						attachments={mailAttachments}
+						setAttachments={setMailAttachments}
 						handleClose={handleClose}
 						uploaderRef={uploaderRef}
 						buttonType={buttonType}
 						setEmailTemplate={setEmailTemplate}
 						isTemplateView={isTemplateView}
 						setButtonType={setButtonType}
+						handleSaveDraft={handleSaveDraft}
 						setMinimizeModal={setMinimizeModal}
+						resetEmailState={resetEmailState}
 					/>
 				)}
 				className={styles.modal_header}
@@ -140,7 +147,7 @@ function MailEditorModal({
 						handleAttachmentDelete={handleAttachmentDelete}
 						getDecodedData={getDecodedData}
 						errorValue={errorValue}
-						attachments={attachments}
+						attachments={mailAttachments}
 						showControl={showControl}
 						uploading={uploading}
 					/>

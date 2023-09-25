@@ -7,6 +7,10 @@
 	border-radius: 6px;
 }
 
+.draft {
+	border: 1px solid #e17b4b;
+}
+
 .active_container {
 	border: 1px solid #f9ae64;
 }
@@ -99,7 +103,13 @@
 	width: 100%;
 }
 
+.email_container {
+	position: relative;
+}
+
 .dots_body {
+	position: absolute;
+	bottom: 10px;
 	width: auto;
 	padding: 2px 6px;
 	font-size: 12px;
