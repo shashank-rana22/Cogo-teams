@@ -36,6 +36,7 @@ const useGetScoringReports = (props) => {
 		isExpanded,
 		setIsExpanded,
 		refetch: trigger,
+		view,
 	};
 };
 

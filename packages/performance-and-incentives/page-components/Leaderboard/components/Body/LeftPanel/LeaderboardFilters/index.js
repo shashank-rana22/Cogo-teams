@@ -25,19 +25,19 @@ function containsOnlyLetters(inputString) {
 }
 
 const getFilters = ({ beforeLevel, id }) => {
+	const obj = { report_type: beforeLevel, user_rm_ids: undefined };
+
 	if (beforeLevel === 'owner_report') {
 		if (containsOnlyLetters(id)) {
 			return {
-				report_type : beforeLevel,
-				channel     : id,
-				user_rm_ids : undefined,
+				...obj,
+				channel: id,
 			};
 		}
 
 		return {
-			report_type        : beforeLevel,
-			office_location_id : id,
-			user_rm_ids        : undefined,
+			...obj,
+			office_location_id: id,
 		};
 	}
 
@@ -50,6 +50,7 @@ function LeaderboardFilters(props) {
 	const { incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
 
 	const {
+		view,
 		setParams,
 		debounceQuery,
 		searchValue,
@@ -79,18 +80,30 @@ function LeaderboardFilters(props) {
 	const handleBack = () => {
 		setParams((prev) => ({
 			...prev,
+
 			...((levelStack.length === OFFSET)
 				? { add_current_user_report: false } : {}),
+
 			filters: {
 				...prev.filters,
 
 				user_rm_ids: id ? [id] : undefined,
 
 				...(levelStack.length === OFFSET ? {
-					report_view_type   : isChannel ? 'channel_wise' : 'location_wise',
-					office_location_id : undefined,
-					channel            : undefined,
-					report_type        : undefined,
+
+					...(incentive_leaderboard_viewtype === ADMIN
+						? {
+							report_view_type: isChannel
+								? 'channel_wise' : 'location_wise',
+						} : { report_view_type: `${view}_wise` }),
+
+					office_location_id: undefined,
+
+					channel: undefined,
+
+					...(incentive_leaderboard_viewtype === ADMIN
+						? { report_type: undefined } : { report_type: `${view}_report` }),
+
 				} : getFilters({ beforeLevel, id })),
 			},
 		}));
