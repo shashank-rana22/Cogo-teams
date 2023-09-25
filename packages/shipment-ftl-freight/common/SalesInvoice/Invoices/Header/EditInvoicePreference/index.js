@@ -63,12 +63,14 @@ function EditInvoicePreference({
 		setAddInvoicingParty(false);
 	};
 
+	const disableOnProcessing = (selectedParties || []).some((obj) => obj?.processing);
+
 	return (
 		<>
 			<Button
 				size="sm"
 				onClick={() => setShow(true)}
-				disabled={is_job_closed_financially || disableAction}
+				disabled={is_job_closed_financially || disableAction || disableOnProcessing}
 				themeType="secondary"
 			>
 				Edit Invoice Preference

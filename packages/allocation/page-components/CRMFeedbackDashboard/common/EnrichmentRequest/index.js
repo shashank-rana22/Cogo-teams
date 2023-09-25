@@ -15,19 +15,19 @@ import styles from './styles.module.css';
 function EnrichmentRequest({
 	checkedRowsId = [],
 	setActiveTab = () => {},
+	currentModalName = '',
+	onCloseModal = () => {},
+	setCurrentModalName = () => {},
 }) {
 	const { t } = useTranslation(['allocation']);
 
 	const {
 		onEnrichmentRequest = () => {},
 		loading = false,
-		isOpenModal = false,
-		setisOpenModal = () => {},
-		onCloseModal = () => {},
 		thirdParty = '',
 		setThirdParty = () => {},
 		setThirdPartyPayload = () => {},
-	} = useCreateBulkEnrichment({ setActiveTab, checkedRowsId, t });
+	} = useCreateBulkEnrichment({ setActiveTab, checkedRowsId, t, setCurrentModalName });
 
 	const geo = getGeoConstants();
 
@@ -57,69 +57,55 @@ function EnrichmentRequest({
 	};
 
 	return (
-		<>
-			<Button
-				size="lg"
-				themeType="primary"
-				className={styles.button}
-				onClick={() => {
-					setisOpenModal(true);
-				}}
-				disabled={isEmpty(checkedRowsId)}
-			>
-				{t('allocation:create_enrichment_request')}
-			</Button>
+		<Modal
+			show={!!currentModalName}
+			size="md"
+			closeOnOuterClick={false}
+			onClose={onCloseModal}
+			placement="top"
+		>
+			<Modal.Header title={t('allocation:create_enrichment_request')} />
 
-			<Modal
-				show={isOpenModal}
-				size="md"
-				closeOnOuterClick={false}
-				onClose={onCloseModal}
-				placement="top"
-			>
-				<Modal.Header title={t('allocation:create_enrichment_request')} />
+			<Modal.Body className={styles.modal_body}>
+				{t('allocation:create_enrichment_request_phrase')}
+				{' '}
+				{checkedRowsId.length || 'these'}
+				{' '}
+				{t('allocation:selected_feedbacks')}
+				<Select
+					className={styles.modal_select}
+					placeholder={t('allocation:select_third_party_agents')}
+					value={thirdParty}
+					onChange={handleChange}
+					isClearable
+					{...thirdPartyOptions}
+				/>
+			</Modal.Body>
 
-				<Modal.Body className={styles.modal_body}>
-					{t('allocation:create_enrichment_request_phrase')}
-					{' '}
-					{checkedRowsId.length || 'these'}
-					{' '}
-					{t('allocation:selected_feedbacks')}
-					<Select
-						className={styles.modal_select}
-						placeholder={t('allocation:select_third_party_agents')}
-						value={thirdParty}
-						onChange={handleChange}
-						isClearable
-						{...thirdPartyOptions}
-					/>
-				</Modal.Body>
+			<Modal.Footer>
+				<Button
+					type="button"
+					size="md"
+					themeType="secondary"
+					onClick={onCloseModal}
+					disabled={loading}
+				>
+					{t('allocation:cancel_button')}
+				</Button>
 
-				<Modal.Footer>
-					<Button
-						type="button"
-						size="md"
-						themeType="secondary"
-						onClick={onCloseModal}
-						disabled={loading}
-					>
-						{t('allocation:cancel_button')}
-					</Button>
-
-					<Button
-						type="button"
-						size="md"
-						themeType="primary"
-						className={styles.submit_button}
-						disabled={isEmpty(thirdParty) || loading}
-						onClick={onEnrichmentRequest}
-						loading={loading}
-					>
-						{t('allocation:send_request')}
-					</Button>
-				</Modal.Footer>
-			</Modal>
-		</>
+				<Button
+					type="button"
+					size="md"
+					themeType="primary"
+					className={styles.submit_button}
+					disabled={isEmpty(thirdParty) || loading}
+					onClick={onEnrichmentRequest}
+					loading={loading}
+				>
+					{t('allocation:send_request')}
+				</Button>
+			</Modal.Footer>
+		</Modal>
 
 	);
 }

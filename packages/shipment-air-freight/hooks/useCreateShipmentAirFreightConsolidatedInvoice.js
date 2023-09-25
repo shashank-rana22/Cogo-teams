@@ -4,8 +4,9 @@ import { useRequest } from '@cogoport/request';
 import getPayload from '../page-components/Tasks/TaskExecution/utils/format-payload-consolidated-invoice';
 
 const useCreateShipmentAirFreightConsolidatedInvoice = ({
-	sheetData = {}, mainServicesData = {},
+	type = 'terminal', sheetData = {}, mainServicesData = {},
 	entityData = {},
+	collectionPartyData = {},
 	createShipmentAdditionalService = () => {},
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
@@ -15,10 +16,12 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 
 	const createShipmentAirFreightConsolidatedInvoice = async (values) => {
 		const additionalServicePayload = getPayload({
+			type,
 			values,
 			mainServicesData,
 			sheetData,
 			entityData,
+			collectionPartyData,
 		});
 
 		try {

@@ -16,9 +16,15 @@ const SHIPMENT_DOCUMENTS_CONFIG = {
 			func  : 'DocumentTypeFunc',
 		},
 		{
+			label : 'Document number',
+			key   : 'document_type',
+			span  : 1.2,
+			func  : 'DocumentNumberFunc',
+		},
+		{
 			label : 'Uploaded by',
 			key   : 'uploaded_by_org.business_name',
-			span  : 1.5,
+			span  : 1.4,
 			func  : 'UploadedTypeFunc',
 		},
 		{
@@ -35,23 +41,23 @@ const SHIPMENT_DOCUMENTS_CONFIG = {
 		{
 			label : 'Service',
 			key   : 'service_type',
-			span  : 1.5,
+			span  : 1.2,
 			func  : 'ServiceTypeFunc',
 		},
 		{
 			label : 'Document Status',
 			key   : 'state',
-			span  : 1.5,
+			span  : 1,
 			func  : 'DocumentStatus',
 		},
 		{
 			key  : 'view',
-			span : 0.5,
+			span : 0.4,
 			func : 'viewFunc',
 		},
 		{
 			key  : 'download',
-			span : 0.5,
+			span : 0.3,
 			func : 'downloadFunc',
 		},
 	],

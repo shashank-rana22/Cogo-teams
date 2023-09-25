@@ -26,6 +26,11 @@ const business_finance = {
 			service_name : 'shipment',
 		},
 		{
+			api          : 'list_shipment_container_details',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api         : 'get_purchase_bills_sid_details_by_id',
 			access_type : 'private',
 			feature     : 'coeFinance',
@@ -113,6 +118,11 @@ const business_finance = {
 		},
 		{
 			api         : 'get_common_job_pre_tax_profit',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'get_common_job_profitability_get_quotations',
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},

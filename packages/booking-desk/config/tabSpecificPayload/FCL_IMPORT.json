@@ -11,10 +11,6 @@
                 "task": "mark_confirmed",
                 "state": "shipment_received",
                 "status": "completed"
-            },
-            {
-                "task": "confirm_with_shipper",
-                "status": "completed"
             }
         ],
         "booking_preference":true

@@ -1,6 +1,6 @@
 import { Button, Placeholder, Modal, Textarea, cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useGetTaggingBills from '../../../hook/useGetMappings';
 import isDisabled from '../../../utils/isDisabled';
@@ -10,9 +10,14 @@ import { TagCard } from './TagCard';
 
 function TagMap({
 	billId = '',
-	value = { remark: '' }, setValue = () => {}, setRemarksVal = () => {}, status = '',
+	value = { remark: '' },
+	setValue = () => {},
+	setRemarksVal = () => {},
+	status = '',
+	setIsTagFound = () => {},
 }: {
 	billId: string, status?: string, value?: { approve?: string, reject?: string, undo?: string, remark: string, },
+	setIsTagFound?: any,
 	setValue: React.Dispatch<React.SetStateAction<{
 		approve: string;
 		reject: string;
@@ -29,6 +34,12 @@ function TagMap({
 	const { mappingsData, loading } = useGetTaggingBills({
 		billId,
 	});
+
+	useEffect(() => {
+		if (!isEmpty(mappingsData)) {
+			setIsTagFound(true);
+		}
+	}, [mappingsData, setIsTagFound]);
 
 	const classname = !isEmpty(mappingsData?.merge) ? 'merge' : '';
 

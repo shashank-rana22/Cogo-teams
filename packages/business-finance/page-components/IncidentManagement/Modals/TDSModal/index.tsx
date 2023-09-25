@@ -109,9 +109,11 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 								<a href={url} target="_blank" rel="noreferrer" key={url}>
 									<div className={styles.view_flex}>
 										<div className={styles.view}>
-											{`${t('incidentManagement:view_doc_link')} -`}
+											{`${t('incidentManagement:view_doc_link')}`}
 										</div>
-										<IcMEyeopen />
+										<IcMEyeopen
+											fill="#f68b21"
+										/>
 									</div>
 								</a>
 							) : (
@@ -124,13 +126,15 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 						{isEditable && (
 							<>
 								<div className={styles.remarks}>{`${t('incidentManagement:remarks')}*`}</div>
-								<Textarea
-									name="remark"
-									size="md"
-									placeholder={t('incidentManagement:remarks_placeholder') || ''}
-									onChange={(value: string) => setRemark(value)}
-									style={{ width: '700', height: '100px', marginBottom: '12px' }}
-								/>
+								<div className={styles.text_area}>
+									<Textarea
+										name="remark"
+										size="md"
+										placeholder={t('incidentManagement:remarks_placeholder') || ''}
+										onChange={(value: string) => setRemark(value)}
+										style={{ height: '80px', marginBottom: '12px' }}
+									/>
+								</div>
 							</>
 						) }
 
