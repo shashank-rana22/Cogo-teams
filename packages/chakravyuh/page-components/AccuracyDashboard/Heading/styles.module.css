@@ -23,13 +23,12 @@
 		}
 	}
 
-	>h5 {
+	.info {
 		position: absolute;
-		top: 60px;
-		left: 100px;
-		font-size: 14px;
-		font-weight: 600;
-		color: #626060;
+		top: 55px;
+		left: 322px;
+		font-size: 10px;
+		color: #7a7777;
 	}
 }
 
