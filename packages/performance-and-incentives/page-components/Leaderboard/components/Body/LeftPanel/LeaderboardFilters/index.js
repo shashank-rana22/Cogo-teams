@@ -87,7 +87,7 @@ function LeaderboardFilters(props) {
 			...prev,
 
 			...((levelStack.length === OFFSET && view === 'admin')
-				? { add_current_user_report: false } : {}),
+				? { add_current_user_report: false, current_user_id: undefined } : {}),
 
 			filters: {
 				...prev.filters,

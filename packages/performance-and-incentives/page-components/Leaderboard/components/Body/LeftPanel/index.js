@@ -30,12 +30,13 @@ function LeftPanel(props) {
 		view,
 	} = useGetScoringReports({ params });
 
-	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
+	const { incentive_leaderboard_viewtype: viewType, user = {} } = useSelector(({ profile }) => profile);
 
 	const handleClick = ({ id = '', location_id, channel }) => {
 		setParams((prev) => ({
 			...prev,
 			add_current_user_report : true,
+			current_user_id         : user.id,
 			filters                 : {
 				...prev.filters,
 				report_type      : NEXT_LEVEL_MAPPING[currLevel[GLOBAL_CONSTANTS.zeroth_index]],
