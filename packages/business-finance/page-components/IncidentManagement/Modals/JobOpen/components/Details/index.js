@@ -6,24 +6,27 @@ import { useState } from 'react';
 import usePostJobOpenRemark from '../../../../apisModal/usePostJobOpenRemark';
 import SHIPMENT_MAPPING from '../../../../Constants/SHIPMENT_MAPPING';
 import STATUS_MAPPING from '../../../../Constants/status_mapping';
-import useGetShipmentCostSheet from '../../../../hooks/useGetShipmentCostSheet';
 import { getFormatAmount } from '../../../../utils/getformatamount';
 
 import StatRect from './StatRect';
 import styles from './styles.module.css';
 
-const JOB_SOURCE = 'LOGISTICS';
 function openPDF({ event, partnerId, id, incidentType }) {
 	event.preventDefault();
 	window.open(`/v2/${partnerId}/booking/${incidentType}/${id}`, '_blank');
 }
 
-function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
-	const shipmentId = row?.data?.jobOpenRequest?.id;
-	const { jobNumber = '' } = row?.data?.jobOpenRequest || {};
+function Details({
+	row = {},
+	setDetailsModal = () => {},
+	refetch = () => {},
+	preTaxData = {},
+	postTaxData = {},
+	preTaxLoading = false,
+	postTaxLoading = false,
+}) {
 	const { query } = useRouter();
 	const { partner_id } = query || {};
-	const JOB_TYPE = row?.source.toUpperCase();
 	const [remarks, setRemarks] = useState('');
 	const { id = '', status = '' } = row || {};
 	const { onSubmit = () => {}, loading = false } = usePostJobOpenRemark({
@@ -32,15 +35,18 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 		remarks,
 		refetch,
 	});
-	const {
-		preTaxData,
-		postTaxData,
-		preTaxLoading,
-		postTaxLoading,
-	} = useGetShipmentCostSheet({ shipmentId, jobNumber, JOB_SOURCE, JOB_TYPE });
 	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
-	const details = row?.data?.jobOpenRequest || {};
+	const {
+		currency = '',
+		jobNumber = '',
+		estimatedSell = 0,
+		totalSell = 0,
+		estimatedBuy = 0,
+		totalBuy = 0,
+		profitMargin = 0,
+		id: jobOpenId = '',
+	} = row?.data?.jobOpenRequest || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_box}>
@@ -75,17 +81,17 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 				<div className={styles.shipment_id}>
 					#
 					<a
-						href={details?.jobNumber}
+						href={jobNumber}
 						onClick={(event) => {
 							openPDF({
 								event,
 								partnerId    : partner_id,
-								id           : details?.id,
+								id           : jobOpenId,
 								incidentType : SHIPMENT_MAPPING[row?.incidentSubtype],
 							});
 						}}
 					>
-						{details?.jobNumber || ''}
+						{jobNumber || ''}
 					</a>
 				</div>
 			</div>
@@ -94,31 +100,31 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 				<div>
 					<div className={styles.heading}>Estimated Sell</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.estimatedSell)}
+						{getFormatAmount(estimatedSell, currency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Sell</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.totalSell)}
+						{getFormatAmount(totalSell, currency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Estimated Buy</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.estimatedBuy)}
+						{getFormatAmount(estimatedBuy, currency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Buy</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.totalBuy)}
+						{getFormatAmount(totalBuy, currency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Profit Margin</div>
 					<div className={styles.text}>
-						{getFormatAmount(details?.profitMargin)}
+						{getFormatAmount(profitMargin, currency)}
 					</div>
 				</div>
 			</div>

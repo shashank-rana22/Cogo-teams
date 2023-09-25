@@ -5,10 +5,17 @@ import { useState } from 'react';
 import useCheckIncidentStatus from '../../hooks/useCheckIncidentStatus';
 
 import ReOpenJob from './ReOpenJob';
+import ReOpenShipment from './ReOpenShipment';
 import styles from './styles.module.css';
 
 function JobStatus({ shipment_data = {} }) {
 	const [showModal, setShowModal] = useState(false);
+	const [finJobOpenConfirmation, setFinJobOpenConfirmation] = useState(false);
+
+	const {
+		id: shipment_id = '',
+		is_job_closed_financially = false,
+	} = shipment_data || {};
 
 	const defaultParams = {
 		jobNumber    : shipment_data?.serial_id,
@@ -23,10 +30,16 @@ function JobStatus({ shipment_data = {} }) {
 
 	const isNotIncident = isEmpty(incidentStatusData);
 
-	if (shipment_data?.is_job_closed_financially) {
+	if (is_job_closed_financially) {
 		return (
 			<div className={styles.job_closed_container}>
 				<Pill className={styles.job_closed_pill} size="lg">Financially Closed</Pill>
+
+				<ReOpenShipment
+					finJobOpenConfirmation={finJobOpenConfirmation}
+					setFinJobOpenConfirmation={setFinJobOpenConfirmation}
+					shipment_id={shipment_id}
+				/>
 			</div>
 		);
 	}
@@ -51,6 +64,14 @@ function JobStatus({ shipment_data = {} }) {
 					<Pill className={styles.tooltip}>Job Open Requested</Pill>
 				</Tooltip>
 			) : null}
+
+			{is_job_closed_financially && (
+				<ReOpenShipment
+					finJobOpenConfirmation={finJobOpenConfirmation}
+					setFinJobOpenConfirmation={setFinJobOpenConfirmation}
+					shipment_id={shipment_id}
+				/>
+			)}
 
 			<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
 
