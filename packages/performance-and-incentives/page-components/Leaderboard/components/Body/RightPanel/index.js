@@ -5,10 +5,9 @@ import IncentiveSnapshot from '../../../common/IncentiveSnapshot';
 import RankingAndScoring from '../../../common/RankingAndScoring';
 
 import styles from './styles.module.css';
-import useGetAgentScoringReportStats from './useGetAgentScoringReportStats';
 
 function RightPanel(props) {
-	const { data, loading } = useGetAgentScoringReportStats(props);
+	const { data, loading } = props;
 
 	const {
 		block_wise_stats: activityData = {},

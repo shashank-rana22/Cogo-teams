@@ -1,28 +1,28 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function RefreshResults({ loading: getLoading = false, refetch = () => {} }) {
-	const [loading, setLoading] = useState(false);
-
-	const fetchData = async () => {
-		setLoading(true);
+function RefreshResults({
+	loading: getLoading = false,
+	refetch = () => {}, refetchStats = () => {}, statsLoading = false,
+}) {
+	const fetchData = () => {
 		try {
-			await refetch();
-		} finally {
-			setLoading(false);
+			refetch();
+			refetchStats();
+		} catch {
+			Toast.error('Something went wrong!');
 		}
 	};
 
-	const className = loading ? 'animate' : '';
+	const className = getLoading || statsLoading ? 'animate' : '';
 
 	return (
 		<Button
 			size="md"
 			themeType="secondary"
-			disabled={!loading && getLoading}
+			disabled={getLoading || statsLoading}
 			onClick={fetchData}
 			className={styles.refresh}
 		>

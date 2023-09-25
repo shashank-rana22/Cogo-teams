@@ -20,7 +20,7 @@ function useGetAgentScoringReportStats(props) {
 		},
 	});
 
-	const [{ data, loading }] = useAllocationRequest({
+	const [{ data, loading }, refetch] = useAllocationRequest({
 		url     : '/report_stats',
 		method  : 'GET',
 		authkey : 'get_agent_scoring_report_stats',
@@ -43,6 +43,7 @@ function useGetAgentScoringReportStats(props) {
 	return {
 		data,
 		loading,
+		refetch,
 	};
 }
 

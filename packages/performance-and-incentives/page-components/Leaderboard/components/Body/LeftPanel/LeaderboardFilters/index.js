@@ -64,6 +64,8 @@ function LeaderboardFilters(props) {
 		setIsChannel,
 		loading,
 		refetch,
+		refetchStats,
+		statsLoading,
 	} = props;
 
 	const {
@@ -85,7 +87,7 @@ function LeaderboardFilters(props) {
 			...prev,
 
 			...((levelStack.length === OFFSET && view === 'admin')
-				? { add_current_user_report: false } : {}),
+				? { add_current_user_report: false, current_user_id: undefined } : {}),
 
 			filters: {
 				...prev.filters,
@@ -153,7 +155,12 @@ function LeaderboardFilters(props) {
 			</div>
 
 			<div className={styles.inner_container}>
-				<RefreshResults loading={loading} refetch={refetch} />
+				<RefreshResults
+					loading={loading}
+					refetch={refetch}
+					refetchStats={refetchStats}
+					statsLoading={statsLoading}
+				/>
 
 				<Filters
 					controls={controls}

@@ -58,36 +58,30 @@ function Header(props) {
 						{user.name}
 					</h2>
 
-					<div className={styles.subheading_container}>
-						<div className={styles.subheading}>
-							You are viewing Incentive and Scoring Analytics
-							{' '}
-							<span className={styles.light}>for</span>
-						</div>
+					<div className={styles.filter_container}>
+						<Select
+							value={entity}
+							onChange={setEntity}
+							options={getEntityOptions()}
+							disabled={incentive_leaderboard_viewtype !== ADMIN}
+							className={styles.entity_selector}
+						/>
 
-						<div className={styles.filter_container}>
-							<Select
-								value={entity}
-								onChange={setEntity}
-								options={getEntityOptions()}
-								disabled={incentive_leaderboard_viewtype !== ADMIN}
+						<Select
+							value={duration}
+							onChange={onChangeDuration}
+							options={DURATION_OPTIONS}
+							className={styles.period_selector}
+						/>
+
+						{duration === CUSTOM && (
+							<DateRangepicker
+								onChange={setDateRange}
+								value={dateRange}
+								maxDate={new Date()}
+								isPreviousDaysAllowed
 							/>
-
-							<Select
-								value={duration}
-								onChange={onChangeDuration}
-								options={DURATION_OPTIONS}
-							/>
-
-							{duration === CUSTOM && (
-								<DateRangepicker
-									onChange={setDateRange}
-									value={dateRange}
-									maxDate={new Date()}
-									isPreviousDaysAllowed
-								/>
-							)}
-						</div>
+						)}
 					</div>
 				</div>
 
