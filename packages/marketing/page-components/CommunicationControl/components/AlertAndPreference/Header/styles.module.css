@@ -27,3 +27,7 @@
 	border: 2px solid #f37066;
 	border-radius: 25px;
 }
+
+.input_container {
+	width: 300px;
+}
