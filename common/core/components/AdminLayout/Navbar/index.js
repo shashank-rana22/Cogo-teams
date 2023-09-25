@@ -127,6 +127,7 @@ function Navbar({
 						refetch={refetch}
 						userId={userId}
 						firestore={firestore}
+						mobileShow={mobileShow}
 					/>
 
 					<div className={styles.search_container}>

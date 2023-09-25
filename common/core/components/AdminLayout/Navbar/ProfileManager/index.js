@@ -11,17 +11,18 @@ import Items from './Items';
 import styles from './styles.module.css';
 
 function ProfileManager({
-	resetSubnavs,
+	resetSubnavs = () => {},
 	setOpenPopover = () => {},
-	openPopover,
-	notificationPopover,
-	setNotificationPopover,
-	timeLeft,
+	openPopover = false,
+	notificationPopover = false,
+	setNotificationPopover = () => {},
+	timeLeft = '',
 	refetch = () => {},
-	loading,
-	checkIfSessionExpiring,
+	loading = false,
+	checkIfSessionExpiring = false,
 	userId = '',
 	firestore = {},
+	mobileShow = false,
 }) {
 	const router = useRouter();
 	const { t } = useTranslation(['common']);
@@ -87,6 +88,7 @@ function ProfileManager({
 				notificationPopover={notificationPopover}
 				setNotificationPopover={setNotificationPopover}
 				notificationCount={unReadChatsCount}
+				mobileShow={mobileShow}
 			/>
 		</ul>
 	);

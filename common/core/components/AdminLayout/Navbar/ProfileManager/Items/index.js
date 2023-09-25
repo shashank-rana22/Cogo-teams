@@ -66,17 +66,21 @@ function Items({
 	notificationCount = ZERO,
 	notificationPopover = false,
 	setNotificationPopover = () => {},
+	mobileShow = false,
 }) {
 	const { t } = useTranslation(['common']);
 
 	const {
 		user_data,
 		userSessionMappings,
+		query,
 	} = useSelector(({ profile, general }) => ({
 		user_data           : profile?.user || {},
 		userSessionMappings : profile?.user_session_mappings || [],
 		query               : general?.query || {},
 	}));
+
+	const { partner_id = '' } = query || {};
 
 	const [showSubNav, setShowSubNav] = useState(false);
 
@@ -92,9 +96,13 @@ function Items({
 		setNotificationPopover(false);
 	};
 
-	const handleNotificationPopover = () => {
-		setOpenPopover(false);
-		setNotificationPopover(!notificationPopover);
+	const handleNotificationNav = () => {
+		if (mobileShow) {
+			window.location.href = `/v2/${partner_id}/notifications`;
+		} else {
+			setOpenPopover(false);
+			setNotificationPopover(!notificationPopover);
+		}
 	};
 
 	let activeUser = {};
@@ -215,13 +223,12 @@ function Items({
 				</div>
 			)}
 
-			{/* {notificationCount > ZERO_COUNT && ( */}
 			<div className={styles.button_container}>
 				<Button
 					size="md"
-					style={{ width: '100%', marginTop: 10 }}
+					style={styles.button_styles}
 					themeType="primary"
-					onClick={handleNotificationPopover}
+					onClick={handleNotificationNav}
 					disabled={loadingState}
 				>
 					{resetSubnavs || notificationPopover ? (
@@ -232,16 +239,18 @@ function Items({
 					) : (
 						<div className={styles.notification_wrapper}>
 							<IcMNotifications height="24px" width="24px" />
-							<div className={styles.notifications_badge}>
-								{notificationCount > MAX_NOTIFICATION_COUNT
-									? `${MAX_NOTIFICATION_COUNT}+`
-									: notificationCount}
-							</div>
+
+							{notificationCount > ZERO ? (
+								<div className={styles.notifications_badge}>
+									{notificationCount > MAX_NOTIFICATION_COUNT
+										? `${MAX_NOTIFICATION_COUNT}+`
+										: notificationCount}
+								</div>
+							) : null}
 						</div>
 					)}
 				</Button>
 			</div>
-			{/* )} */}
 		</>
 	);
 }
