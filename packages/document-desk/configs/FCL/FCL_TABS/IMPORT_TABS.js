@@ -36,12 +36,12 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 					status : 'completed',
 				},
 			],
-			state: [
+			bl_approval_pending : true,
+			state               : [
 				'in_progress',
 				'shipment_received',
 				'confirmed_by_importer_exporter',
 			],
-			bl_not_uploaded: true,
 		},
 
 		amendment_requested_by_importer_exporter: {
@@ -61,7 +61,7 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 					assigned_stakeholder: 'service_ops2',
 				},
 			],
-			bl_approval_completed   : true,
+			bl_approval_completed_  : true,
 			containers_not_gated_in : true,
 			service_state           : ['containers_gated_in'],
 		},
