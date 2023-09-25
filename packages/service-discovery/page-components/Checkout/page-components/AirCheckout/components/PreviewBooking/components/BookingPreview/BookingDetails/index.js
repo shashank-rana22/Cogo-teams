@@ -8,7 +8,7 @@ import LocationDetails from '../../../../../../../../../common/LocationDetails';
 import PromocodesModal from '../../../../../../../commons/Promocodes/components/PromocodesModal';
 import { CheckoutContext } from '../../../../../../../context';
 
-import ShippingLineDetails from './ShippingLineDetails';
+import AirLineDetails from './AirLineDetails';
 import styles from './styles.module.css';
 import useHandleBookingDetails from './useHandleBookingDetails';
 
@@ -28,10 +28,10 @@ function BookingDetails({
 	const { quotation_email_sent_at = '' } = detail;
 
 	const {
-		shipping_line = {},
+		airline = {},
 		BUTTON_MAPPING = [],
 		primary_service = {},
-		mainServiceObject = {},
+		primaryService = {},
 		services = {},
 		hasExpired = false,
 		timerRef,
@@ -46,9 +46,9 @@ function BookingDetails({
 	return (
 		<div className={styles.container}>
 			<div className={styles.main_content}>
-				<ShippingLineDetails shipping_line={shipping_line} source={source} />
+				<AirLineDetails airline={airline} source={source} />
 
-				<LocationDetails data={mainServiceObject} />
+				<LocationDetails data={primaryService} />
 
 				<ContainerDetails
 					primary_service={primary_service}
