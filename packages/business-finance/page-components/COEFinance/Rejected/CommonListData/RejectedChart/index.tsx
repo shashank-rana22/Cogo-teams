@@ -1,66 +1,39 @@
 import { Tooltip, Datepicker } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { subtractDays } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import MyResponsivePie from '../../../Components/PieChart';
 import ResponsiveBarChart from '../../../Components/ResponsiveBarChart';
+import useGetBillStatusStats from '../../../hook/useGetBillStatusStats';
 import useGetCommentRemarkCounts from '../../../hook/useGetCommentRemarkCounts';
 
 import styles from './styles.module.css';
 
-function RejectedCharts({ filters = {} }) {
+function RejectedCharts() {
 	const [date, setDate] = useState(null);
 
-	const { pieData } = useGetCommentRemarkCounts();
-	console.log(filters, 'filters');
+	const { pieData = [], getData = () => {} } = useGetCommentRemarkCounts();
 
-	const data = [
-		{
-			currency      : 'INR',
-			total_audited : 8377,
-			rejected      : 8456,
-			date          : 'FEBRUARY',
-		},
-		{
-			currency      : 'INR',
-			total_audited : 8332,
-			rejected      : 8221,
-			date          : 'MARCH',
-		},
-		{
-			currency      : 'INR',
-			total_audited : 8000,
-			rejected      : 7900,
-			date          : 'APRIL',
-		},
-		{
-			currency      : 'INR',
-			total_audited : 8370,
-			rejected      : 8450,
-			date          : 'MAY',
-		},
-		{
-			currency      : 'INR',
-			total_audited : 8300,
-			rejected      : 8200,
-			date          : 'June',
-		},
-		{
-			currency      : 'INR',
-			total_audited : 8000,
-			rejected      : 7000,
-			date          : 'July',
-		},
-		{
-			currency      : 'INR',
-			total_audited : 8100,
-			rejected      : 7500,
-			date          : 'AUGUST',
-		},
-	];
-	const handleOnClick = (value) => {
-		console.log(value);
-	};
+	const { data = [] } = useGetBillStatusStats(date);
+
+	const formateData = (data || []).map((item) => {
+		const { rejectedCount, auditedCount } = item || {};
+		return (
+			{
+				...item,
+				Rejected        : rejectedCount,
+				'Total Audited' : auditedCount,
+			}
+		);
+	});
+
+	useEffect(() => {
+		getData();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.responsive_bar_chart}>
@@ -74,14 +47,15 @@ function RejectedCharts({ filters = {} }) {
 						<Tooltip
 							content={(
 								<div className={styles.text_styles}>
-									A comparison between
+									Showing rejection/on-hold of pre-payment
+									{' '}
 									<br />
-									consecutive months to identify
+									audit on daily basis
 									<br />
-									the
-									month-on-month changes
+									Bucketing of reasons for rejection/on-hold of
+									{' '}
 									<br />
-									in cashflow.
+									pre-payment audit 1st April onwards.
 								</div>
 							)}
 							placement="right"
@@ -92,21 +66,22 @@ function RejectedCharts({ filters = {} }) {
 						<div style={{ marginLeft: '20px' }}>
 							<Datepicker
 								placeholder="Enter Date"
-								showTimeSelect
-								dateFormat="MM/dd/yyyy HH:mm"
+								dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
 								name="date"
 								onChange={setDate}
 								value={date}
+								isPreviousDaysAllowed
+								maxDate={subtractDays(new Date(), 7)}
 							/>
 						</div>
 					</div>
 
 				</div>
-				<ResponsiveBarChart barData={data} />
+				<ResponsiveBarChart barData={formateData} />
 			</div>
 			<div className={styles.responsive_pie}>
 
-				<MyResponsivePie data={pieData} handleOnClick={handleOnClick} title="Rejection Reason" />
+				<MyResponsivePie data={pieData} title="Rejection Reason" />
 			</div>
 		</div>
 	);

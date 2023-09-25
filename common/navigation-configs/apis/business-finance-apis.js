@@ -92,7 +92,12 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
-			api         : 'get_purchase_bills_comment_remarks_counts',
+			api         : 'get_purchase_bills_comment_remark_counts',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'get_purchase_bills_bill_status_stats',
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},

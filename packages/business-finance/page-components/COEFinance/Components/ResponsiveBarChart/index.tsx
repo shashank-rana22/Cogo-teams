@@ -1,6 +1,6 @@
 import { ResponsiveBar } from '@cogoport/charts/bar/index';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { upperCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -47,23 +47,14 @@ function ResponsiveBarChart({ barData = {} }) {
 			labelTextColor={{
 				from: 'color', modifiers: [['darker',	1]],
 			}}
-			tooltip={({ label, value, data }) => (
+			tooltip={({ label, value }) => (
 				<div className={styles.tooltip}>
-					{label?.split('-')[GLOBAL_CONSTANTS.zeroth_index]}
+					{upperCase(label?.split('-')[GLOBAL_CONSTANTS.zeroth_index])}
 					{' '}
 					:
 					{' '}
 					<tspan color="#000">
-						{formatAmount({
-							amount   : (value || '')?.toString(),
-							currency : data?.currency,
-							options  : {
-								currencyDisplay       : 'code',
-								compactDisplay        : 'short',
-								maximumFractionDigits : 2,
-								style                 : 'currency',
-							},
-						})}
+						{value}
 					</tspan>
 				</div>
 			)}
