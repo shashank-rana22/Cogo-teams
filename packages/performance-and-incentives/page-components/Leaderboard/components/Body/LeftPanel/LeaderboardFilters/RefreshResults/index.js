@@ -16,8 +16,6 @@ function RefreshResults({
 		}
 	};
 
-	const className = getLoading || statsLoading ? 'animate' : '';
-
 	return (
 		<Button
 			size="md"
@@ -27,7 +25,6 @@ function RefreshResults({
 			className={styles.refresh}
 		>
 			<IcMRefresh
-				className={styles[className]}
 				width={16}
 				height={16}
 			/>
