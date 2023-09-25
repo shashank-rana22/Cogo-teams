@@ -12,14 +12,12 @@ const KEY_MAPPING = {
 export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 	const { activeTab, shipmentType, stepperTab } = kamDeskContextValues || {};
 	const { criticalOn, date_type, dateRange, startDate, endDate, tags, ...restFilters } = filters || {};
-	console.log('reff', restFilters);
 
 	let tabwiseFilters = {};
 
 	if (shipmentType === 'fcl_freight' && stepperTab === 'export_import') {
 		const export_tabs = Object.keys(tabPayload?.[shipmentType]?.export || {});
 		const import_tabs = Object.keys(tabPayload?.[shipmentType]?.import || {});
-		console.log('reffe', activeTab);
 
 		if (export_tabs?.includes(activeTab)) {
 			tabwiseFilters = { ...tabwiseFilters, ...tabPayload?.[shipmentType]?.export?.[activeTab] };
@@ -32,8 +30,6 @@ export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 		tabwiseFilters = shipmentType === 'all' ? tabPayload.all?.[activeTab]
 			: tabPayload?.[shipmentType]?.[stepperTab]?.[activeTab];
 	}
-
-	console.log('refff', tabwiseFilters);
 
 	let finalFilters = { ...(tabwiseFilters || {}), ...restFilters };
 
