@@ -78,7 +78,7 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 			{
 				subActiveTabReject === 'coe_rejected' ? (
 					<div>
-						<RejectedCharts filters={filters} />
+						<RejectedCharts filters={filters} setFilters={setFilters} />
 					</div>
 				) : null
 			}

@@ -1,10 +1,11 @@
 import { ResponsiveBar } from '@cogoport/charts/bar/index';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function ResponsiveBarChart({ barData }) {
+function ResponsiveBarChart({ barData = {} }) {
 	return (
 		<ResponsiveBar
 			data={barData}
@@ -48,7 +49,7 @@ function ResponsiveBarChart({ barData }) {
 			}}
 			tooltip={({ label, value, data }) => (
 				<div className={styles.tooltip}>
-					{label?.split('-')[0]}
+					{label?.split('-')[GLOBAL_CONSTANTS.zeroth_index]}
 					{' '}
 					:
 					{' '}

@@ -4,11 +4,11 @@ import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function MyResponsivePie({ data = [] }) {
+function MyResponsivePie({ data = [], handleOnClick = () => {}, title = '' }) {
 	return (
 		<>
 			<div className={styles.invoice}>
-				Rejection Statistics
+				{title}
 				<Tooltip
 					content={(
 						<div className={styles.tooltip_text}>
@@ -41,6 +41,7 @@ function MyResponsivePie({ data = [] }) {
 						],
 					],
 				}}
+				onClick={handleOnClick}
 				sortByValue
 				arcLinkLabelsSkipAngle={10}
 				arcLinkLabelsTextColor="#ffff"

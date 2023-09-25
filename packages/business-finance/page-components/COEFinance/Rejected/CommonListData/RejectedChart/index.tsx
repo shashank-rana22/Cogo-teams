@@ -3,13 +3,17 @@ import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import MyResponsivePie from '../../../Components/PieChart';
-import { PieChartData } from '../../../Components/PieChart/PieChartData';
 import ResponsiveBarChart from '../../../Components/ResponsiveBarChart';
+import useGetCommentRemarkCounts from '../../../hook/useGetCommentRemarkCounts';
 
 import styles from './styles.module.css';
 
 function RejectedCharts({ filters = {} }) {
 	const [date, setDate] = useState(null);
+
+	const { pieData } = useGetCommentRemarkCounts();
+	console.log(filters, 'filters');
+
 	const data = [
 		{
 			currency      : 'INR',
@@ -54,6 +58,9 @@ function RejectedCharts({ filters = {} }) {
 			date          : 'AUGUST',
 		},
 	];
+	const handleOnClick = (value) => {
+		console.log(value);
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.responsive_bar_chart}>
@@ -99,7 +106,7 @@ function RejectedCharts({ filters = {} }) {
 			</div>
 			<div className={styles.responsive_pie}>
 
-				<MyResponsivePie data={PieChartData(filters)} />
+				<MyResponsivePie data={pieData} handleOnClick={handleOnClick} title="Rejection Reason" />
 			</div>
 		</div>
 	);
