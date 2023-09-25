@@ -34,7 +34,7 @@ const useGetScoringReports = (props) => {
 		add_current_user_report : view !== 'admin',
 		filters                 : {
 			report_view_type,
-
+			...(view !== 'admin' ? { report_type: `${view}_report` } : {}),
 			q                       : searchQuery || undefined,
 			created_at_greater_than : dateRange?.startDate || undefined,
 			created_at_less_than    : dateRange?.endDate || undefined,
@@ -69,10 +69,11 @@ const useGetScoringReports = (props) => {
 			...prev,
 			filters: {
 				...prev.filters,
-				report_view_type: isChannel ? 'channel_wise' : 'location_wise',
+				...(view === 'admin' ? { report_view_type: isChannel ? 'channel_wise' : 'location_wise' } : {}),
+
 			},
 		}));
-	}, [isChannel]);
+	}, [isChannel, view]);
 
 	return {
 		params,
