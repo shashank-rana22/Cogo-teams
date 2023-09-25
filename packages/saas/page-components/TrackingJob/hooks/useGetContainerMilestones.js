@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetContainerMilestones = ({ id = {} }) => {
+const useGetContainerMilestones = ({ id = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : 'get_saas_container_subscription',

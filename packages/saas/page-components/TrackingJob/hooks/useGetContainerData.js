@@ -3,15 +3,15 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 import getOceanFormatterValues from '../helpers/getOceanFormattedValue';
+import toastApiError from '../utlis/toastApiError';
 
-const useGetContainerData = ({ reset, refetch }) => {
+const useGetContainerData = ({ refetch }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_container_and_bl_milestones',
 	});
 	const apiTrigger = async ({ values = {}, showUpdate }) => {
 		try {
-			console.log(values);
 			const formatPayload = getOceanFormatterValues(values);
 			await trigger({
 				data: {
@@ -21,16 +21,15 @@ const useGetContainerData = ({ reset, refetch }) => {
 					search_type: showUpdate.data.search_type,
 				},
 			});
-			reset();
 			refetch();
 			Toast.success('Tracking Data Added Successfully');
 		} catch (err) {
-			console.log(err);
+			toastApiError(err);
 		}
 	};
 	return {
 		apiTrigger,
-		loading,
+		createLoading: loading,
 	};
 };
 

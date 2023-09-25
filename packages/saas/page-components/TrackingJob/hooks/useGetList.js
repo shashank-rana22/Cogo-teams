@@ -32,9 +32,9 @@ const useGetList = ({
 								? searchString
 								: undefined,
 					},
-					page               : filters?.page,
-					priority_sort_type : 'desc',
-					sort_by            : 'updated_at',
+					page      : filters?.page,
+					sort_type : filters?.sort_type,
+					sort_by   : filters?.sort_by,
 				},
 			});
 		} catch (err) {
@@ -47,6 +47,7 @@ const useGetList = ({
 	useEffect(() => {
 		setFilters({ page: 1 });
 		setSearchString('');
+		// setSerialId('');
 	}, [activeTab]);
 	useEffect(() => {
 		refetch();

@@ -1,0 +1,21 @@
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 8px;
+
+	button:first-child {
+		margin-right: 8px;
+	}
+}
+
+.container_class {
+	display: flex;
+	justify-content: end;
+	width: 100%;
+}
+
+.container {
+	display: flex;
+	justify-content: end;
+	width: 100%;
+}

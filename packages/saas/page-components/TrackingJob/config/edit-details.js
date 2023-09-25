@@ -1,5 +1,3 @@
-import formatDate from '@cogoport/globalization/utils/formatDate';
-
 const editOceanControls = ({ editDetail, shipping_line_id = '' }) => [
 	{
 		name           : 'location_id',

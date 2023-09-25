@@ -27,17 +27,7 @@ const checkForMerging = (curr, next) => {
 const mergeOceanMilestone = (list = []) => {
 	const RESULT = [];
 
-	const filteredList = (list || []).filter((item) => {
-		const { actual_date = '', milestone = '' } = item || {};
-
-		if (!isEmpty(actual_date) && !isEmpty(milestone)) {
-			return true;
-		}
-
-		return false;
-	});
-
-	const sortedList = filteredList.sort(
+	const sortedList = list.sort(
 		(curr, next) => new Date(curr.actual_date) - new Date(next.actual_date),
 	);
 
@@ -55,16 +45,7 @@ const mergeOceanMilestone = (list = []) => {
 };
 
 const mergeAirMilestone = (list = []) => {
-	const filteredList = list?.filter((item) => {
-		const { station = '', actual_date = '', milestone = '' } = item || {};
-
-		if (!isEmpty(station) && !isEmpty(actual_date) && !isEmpty(milestone)) {
-			return true;
-		}
-		return false;
-	});
-
-	const sortedList = filteredList.sort(
+	const sortedList = list.sort(
 		(curr, next) => new Date(curr.event_date) - new Date(next.event_date),
 	);
 

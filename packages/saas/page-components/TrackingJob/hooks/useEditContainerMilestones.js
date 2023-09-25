@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useEditContainerMilestones = ({ refetch }) => {
@@ -14,6 +15,7 @@ const useEditContainerMilestones = ({ refetch }) => {
 			},
 		});
 		refetch();
+		Toast.success('MileStone Updated Sucessfully!');
 	};
 
 	return {

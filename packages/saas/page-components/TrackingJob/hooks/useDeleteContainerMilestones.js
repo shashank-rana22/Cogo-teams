@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useDeleteContainerMilestones = ({ refetch }) => {
@@ -7,9 +8,10 @@ const useDeleteContainerMilestones = ({ refetch }) => {
 	});
 
 	const deleteMileStones = async (id) => {
-		trigger({
+		await trigger({
 			params: { saas_container_timeline_detail_id: id },
 		});
+		Toast.success('Deleted Sucessfully');
 		refetch();
 	};
 

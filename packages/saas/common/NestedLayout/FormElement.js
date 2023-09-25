@@ -45,6 +45,10 @@ const DatepickerController = dynamic(
 	() => import('@cogoport/forms').then((module) => module.DatepickerController),
 	{ ssr: false },
 );
+const CreatableSelectController = dynamic(
+	() => import('@cogoport/forms').then((module) => module.CreatableSelectController),
+	{ ssr: false },
+);
 
 function FormElement({ type = '', ...rest }) {
 	if (type === 'select') return <SelectController {...rest} />;
@@ -62,6 +66,8 @@ function FormElement({ type = '', ...rest }) {
 	if (type === 'country_select') return <CountrySelectController {...rest} />;
 
 	if (type === 'number') return <InputNumberController {...rest} />;
+
+	if (type === 'creatable_select') return <CreatableSelectController {...rest} />;
 
 	return <InputController {...rest} type={type} />;
 }

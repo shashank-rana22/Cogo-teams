@@ -1,14 +1,15 @@
-import { Tabs, TabPanel, Popover } from '@cogoport/components';
-import { IcMArrowRotateDown, IcMDoubleFilter } from '@cogoport/icons-react';
+import { Tabs, TabPanel, Popover, Button } from '@cogoport/components';
+import { IcMFilter } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import ListPagination from './common/ListPagination';
 import useGetList from './hooks/useGetList';
-import TagsFilter from './TagsFilter';
-import SearchFilters from './TagsFilter/search';
-import AirTracking from './Tracking/AirTracking';
-import OceanTracking from './Tracking/OceanTracking';
-import TruckTracking from './Tracking/TruckTracking';
+import TagsFilter from './pages-component/TagsFilter';
+import SearchFilters from './pages-component/TagsFilter/search';
+import AirTracking from './pages-component/Tracking/AirTracking';
+import OceanTracking from './pages-component/Tracking/OceanTracking';
+import TruckTracking from './pages-component/Tracking/TruckTracking';
+import styles from './styles.module.css';
 
 function TrackingJob() {
 	const [activeTab, setActiveTab] = useState('air_tracking');
@@ -28,44 +29,41 @@ function TrackingJob() {
 	return (
 		<div>
 			<div style={{ margin: 20 }}>
-				<div>
-
+				<h1>Tracking Job</h1>
+				<div className={styles.filter_container}>
+					<SearchFilters
+						searchString={searchString}
+						setSearchString={setSearchString}
+						activeTab={activeTab}
+						filters={filters}
+						setFilters={setFilters}
+						setSerialId={setSerialId}
+					/>
 					{activeTab === 'ocean_tracking' && (
-						<div>
-							<div>
-								Priority
-								<IcMArrowRotateDown />
-							</div>
 
-							<Popover
-								placement="bottom"
-								theme="light"
-								interactive
-								content={(
-									<TagsFilter
-										activeTab={activeTab}
-										filters={filters}
-										setFilters={setFilters}
-									/>
-								)}
-							>
-								<div>
-									<IcMDoubleFilter />
-									APPLY FILTERS
-								</div>
-							</Popover>
-						</div>
+						<Popover
+							placement="auto-end"
+							theme="light"
+							interactive
+							content={(
+								<TagsFilter
+									activeTab={activeTab}
+									filters={filters}
+									setFilters={setFilters}
+								/>
+							)}
+						>
+							<Button themeType="secondary">
+								<IcMFilter />
+								{' '}
+								FILTERS
+							</Button>
+						</Popover>
+
 					)}
 
 				</div>
-				<SearchFilters
-					searchString={searchString}
-					setSearchString={setSearchString}
-					activeTab={activeTab}
-					filters={filters}
-					setFilters={setFilters}
-					setSerialId={setSerialId}
-				/>
+
 				<ListPagination filters={filters} setFilters={setFilters} data={data} />
 				<Tabs
 					activeTab={activeTab}
@@ -73,7 +71,13 @@ function TrackingJob() {
 					onChange={setActiveTab}
 				>
 					<TabPanel name="air_tracking" title="Air Tracking">
-						<AirTracking list={data?.list} loading={loading} refetch={refetch} />
+						<AirTracking
+							list={data?.list}
+							loading={loading}
+							refetch={refetch}
+							filters={filters}
+							setFilters={setFilters}
+						/>
 					</TabPanel>
 					<TabPanel name="ocean_tracking" title="Ocean Tracking">
 						<OceanTracking list={data?.list} loading={loading} refetch={refetch} />

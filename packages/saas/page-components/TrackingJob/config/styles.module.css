@@ -29,24 +29,19 @@
 	}
 }
 
-.container {
-	display: flex;
-	align-items: center;
+.sort-icon {
+	width: 20px;
+	height: 14px;
+}
 
-	.sort-icon {
-		width: 20px;
-		height: 14px;
-	}
+.sort_icon_active {
+	transition: transform 400ms;
+	transform: rotate(0deg);
+}
 
-	.sort-icon.active {
-		transition: transform 400ms;
-		transform: rotate(0deg);
-	}
-
-	.sort-icon.inactive {
-		transition: transform 400ms;
-		transform: rotate(180deg);
-	}
+.sort-icon.inactive {
+	transition: transform 400ms;
+	transform: rotate(180deg);
 }
 
 .title {

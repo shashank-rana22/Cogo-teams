@@ -1,10 +1,10 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 import getFormatterValues from '../helpers/getFormattedValue';
+import toastApiError from '../utlis/toastApiError';
 
-const useGetAirData = ({ reset, refetch }) => {
+const useGetAirData = ({ refetch }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_air_milestones',
@@ -21,16 +21,16 @@ const useGetAirData = ({ reset, refetch }) => {
 				},
 			});
 			setShowUpdate({ show: false });
-			reset();
 			refetch();
 			Toast.success('Tracking Data Added Successfully');
 		} catch (err) {
-			Toast.error(getApiErrorString(err.data));
+			console.log(err);
+			toastApiError(err);
 		}
 	};
 	return {
 		apiTrigger,
-		loading,
+		createLoading: loading,
 	};
 };
 
