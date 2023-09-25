@@ -1,12 +1,17 @@
 import { Button, Badge, Toggle } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMFilter, IcMArrowBack } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 
+import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../constants/leaderboard-viewtype-constants';
 import Filters from '../../../../common/Filters';
 import SearchInput from '../../../../common/SearchInput';
 
 import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
+
+const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 const OFFSET = 1;
 
@@ -15,7 +20,7 @@ function conditionalWrapper({ condition, wrapper, children }) {
 }
 
 function containsOnlyLetters(inputString) {
-	const PATTERN = /^[A-Za-z]+$/;
+	const PATTERN = GLOBAL_CONSTANTS.regex_patterns.alphabets;
 	return PATTERN.test(inputString);
 }
 
@@ -42,6 +47,8 @@ const getFilters = ({ beforeLevel, id }) => {
 };
 
 function LeaderboardFilters(props) {
+	const { incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
+
 	const {
 		setParams,
 		debounceQuery,
@@ -101,8 +108,7 @@ function LeaderboardFilters(props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.toggle_container}>
-
-				{isEmpty(levelStack) ? (
+				{(isEmpty(levelStack) && incentive_leaderboard_viewtype === ADMIN) ? (
 					<Toggle
 						name="mode"
 						size="md"

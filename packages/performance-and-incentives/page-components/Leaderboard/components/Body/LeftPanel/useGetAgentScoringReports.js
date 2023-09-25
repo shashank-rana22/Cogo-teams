@@ -27,12 +27,10 @@ const useGetScoringReports = (props) => {
 	}
 
 	const [params, setParams] = useState({
-		page                    : 1,
-		page_limit              : 10,
+		// page                    : 1,
+		// page_limit              : 10,
 		user_data_required      : true,
 		role_data_required      : true,
-		sort_by                 : 'rank',
-		sort_type               : 'asc',
 		add_current_user_report : view !== 'admin',
 		filters                 : {
 			report_view_type,
