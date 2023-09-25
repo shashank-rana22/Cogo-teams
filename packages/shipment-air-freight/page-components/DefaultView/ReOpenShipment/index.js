@@ -17,7 +17,7 @@ function ReOpenShipment({
 	const {
 		loading = false,
 		handleConfirm = () => {},
-	} = useUpdateShipmentReopenJob({ setFinJobOpenConfirmation, user_id: id, shipment_id });
+	} = useUpdateShipmentReopenJob({ setFinJobOpenConfirmation, shipment_id });
 
 	return (
 		<div className={styles.request_reopen}>

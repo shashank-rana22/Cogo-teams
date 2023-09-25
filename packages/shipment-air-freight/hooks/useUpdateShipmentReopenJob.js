@@ -3,7 +3,6 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateShipmentReopenJob = ({
-	user_id = '',
 	shipment_id = '',
 	setFinJobOpenConfirmation = () => {},
 }) => {
@@ -18,7 +17,6 @@ const useUpdateShipmentReopenJob = ({
 			await trigger({
 				params: {
 					id                                 : shipment_id,
-					performed_by_user_id               : user_id,
 					revert_financially_closed_shipment : true,
 				},
 			});
