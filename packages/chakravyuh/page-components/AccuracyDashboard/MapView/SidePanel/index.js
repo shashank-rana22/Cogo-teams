@@ -37,10 +37,9 @@ function SidePanel({
 	setPage = () => {},
 	accuracyLoading = false,
 	setActiveList = () => {},
-	setSort = () => {},
-	sort = {},
+	setFilterBy = () => {},
+	filterBy = '',
 }) {
-	const { sort_by, sort_type } = sort;
 	const originName = locationFilters.origin?.name || countriesHash?.[locationFilters?.origin?.id]?.name;
 	const destinationType = locationFilters?.destination?.type || '';
 	const destination = destinationType.includes('port')
@@ -100,11 +99,11 @@ function SidePanel({
 						</h4>
 						<Select
 							size="sm"
-							placeholder="sort by"
+							placeholder="Filter by"
 							options={SORT_OPTIONS}
 							style={{ width: '140px' }}
-							value={sort_by}
-							onChange={(val) => setSort({ sort_by: val, sort_type: 'asc' })}
+							value={filterBy}
+							onChange={(val) => setFilterBy(val)}
 						/>
 					</div>
 					<InfiniteScroll
@@ -117,7 +116,7 @@ function SidePanel({
 						loader={<div className={styles.mini_loader}><Loader /></div>}
 					>
 						<List
-							key={`${sort_by} ${sort_type} ${destination}`}
+							key={`${filterBy} ${destination}`}
 							setActiveId={setActiveId}
 							loading={accuracyLoading}
 							finalList={activeList}

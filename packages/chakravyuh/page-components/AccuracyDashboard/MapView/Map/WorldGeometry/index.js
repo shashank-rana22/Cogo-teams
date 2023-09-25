@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { FeatureGroup, GeoJSON, L } from '@cogoport/maps';
 import { isEmpty } from '@cogoport/utils';
 import React, { useRef, useEffect } from 'react';
@@ -5,7 +6,9 @@ import ReactDOMServer from 'react-dom/server';
 
 import MapTooltip from '../../../../../common/MapTooltip';
 // import useListNearestLocations from '../../../../../hooks/useListNearestLocations';
+import { formatBigNumbers } from '../../../../../utils/formatBigNumbers';
 import { getPolygonStyleProps } from '../../../../../utils/map-utils';
+import { COLORS } from '../../../Heading/BirdsEyeView';
 // import styles from '../styles.module.css';
 
 const ONE = 1;
@@ -20,6 +23,10 @@ const WorldGeometry = React.forwardRef(({
 	setActiveList = () => {},
 	setLocationFilters = () => {},
 	setBounds = () => {},
+	filterBy = '',
+	minCount = 0,
+	maxCount = 0,
+	range = 1,
 }, ref) => {
 	// const timerRef = useRef(null);
 	const activeCountryRef = useRef(null);
@@ -36,7 +43,20 @@ const WorldGeometry = React.forwardRef(({
 	// });
 
 	const onEachFeature = (feature, layer, id, name) => {
-		const styleProps = getPolygonStyleProps(accuracyMapping[id]);
+		const fillColor = !accuracyMapping[id]
+			? 'transparent'
+			: COLORS[Math.floor((accuracyMapping[id] - minCount) / range)];
+
+		const styleProps = filterBy.includes('accuracy') ? getPolygonStyleProps(accuracyMapping[id]) : {
+			weight      : 0.5,
+			fillOpacity : 1,
+			opacity     : 1,
+			fillColor   : fillColor || '#FFF',
+			color       : '#828282',
+		};
+		const value = filterBy.includes('accuracy')
+			? (accuracyMapping[id] || GLOBAL_CONSTANTS.zeroth_index).toFixed(ONE + ONE)
+			: formatBigNumbers(accuracyMapping[id]);
 
 		const activeProps = activeId === id ? {
 			fillOpacity : 0,
@@ -57,9 +77,10 @@ const WorldGeometry = React.forwardRef(({
 			ReactDOMServer.renderToString(
 				<MapTooltip
 					display_name={name}
-					color={styleProps.color}
-					value={accuracyMapping[id]}
+					color={filterBy.includes('accuracy') ? styleProps?.color : fillColor}
+					value={value}
 					value_key=""
+					value_suffix={filterBy.includes('accuracy') ? '%' : ''}
 				/>,
 			),
 			{ sticky: true, direction: 'top' },
@@ -95,7 +116,7 @@ const WorldGeometry = React.forwardRef(({
 	}, [filteredData.length, setBounds, hierarchy]);
 
 	return (
-		<FeatureGroup key={activeId}>
+		<FeatureGroup key={`${filterBy} ${minCount} ${maxCount} ${activeId}`}>
 			{filteredData.map((item) => {
 				const currentRef = item.id === currentId ? ref : null;
 				const isActive = item.id === activeId;
