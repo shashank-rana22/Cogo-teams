@@ -55,7 +55,7 @@ function CogoOne() {
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [modalType, setModalType] = useState({ type: null, data: {} });
 	const [buttonType, setButtonType] = useState('');
-	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
+	const [activeMailAddress, setActiveMailAddress] = useState('');
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
 	const [openKamContacts, setOpenKamContacts] = useState(false);
 	const [sendBulkTemplates, setSendBulkTemplates] = useState(false);
