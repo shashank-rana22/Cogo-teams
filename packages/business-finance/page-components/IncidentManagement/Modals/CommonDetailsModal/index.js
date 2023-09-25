@@ -3,43 +3,38 @@ import React from 'react';
 
 import AdvanceSecurityDeposit from '../AdvanceSecurityDepositDetails';
 import AdvanceSecurityDepositRefund from '../AdvanceSecurityRefundDetails';
+import BankDetails from '../BankDetails/indexB';
+import ConcorDetails from '../ConcorDetails';
+import ICJV_Details from '../ICJV_Details';
 import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
+import JvDetails from '../JVDetails';
+import NonRecuring from '../NonRecuringDetails';
+import PaymentDetails from '../PaymentDetails';
+import RecuringDetails from '../RecuringDetails';
 import RequestCNDetails from '../RequestCN';
 import RevokeInvoiceDetails from '../RevokeInvoiceDetails';
+import Settlement from '../SettlementDetails';
 import SezApprovalDetails from '../SezApprovalDetails';
 import TdsApprovalDetails from '../TdsApprovalDetails';
 
 import styles from './styles.module.css';
 
-// import ICJVModal from './ICJV_Modal/ICJVDetails';
-// import JvModal from './JvModal/JVDetails';
-// import NonRecuringModal from './NonRecuringModal/NonRecuringDetails';
-// import PaymentConfirmation from './PaymentConfirmation/PaymentConfirmationDetails';
-// import RecuringModal from './RecuringModal/RecuringModalDetails';
-// import RevokeInvoice from './RevokeInvoice/RevokeInvoiceDetails';
-// import SettlementModal from './SettlementModal/SettlementModalDetails';
-// import SezApproval from './SezApproval/SezApprovalDetails';
-// import BankDetails from '../BankDetails/BankDetails';
-// import ConcorModal from '../ConcorModal/ConcorDetails';
-// import TDSModal from './TDSModal/TDSDetails';
-
 const TYPE_COMPONENT_MAPPING = {
-	// BANK_DETAIL_APPROVAL     : BankDetails,
-	TDS_APPROVAL                    : TdsApprovalDetails,
-	// JOURNAL_VOUCHER_APPROVAL               : JvModal,
-	// SETTLEMENT_APPROVAL                    : SettlementModal,
-	// INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL : ICJVModal,
-	// PAYMENT_CONFIRMATION_APPROVAL          : PaymentConfirmation,
-	// RECURRING_EXPENSE_APPROVAL             : RecuringModal,
-	// OVERHEAD_APPROVAL                      : NonRecuringModal,
-	SEZ_APPROVAL                    : SezApprovalDetails,
-	// CONCOR_PDA_APPROVAL      : ConcorModal,
-	// CONSOLIDATED_CREDIT_NOTE               : RequestCNDetails,
-	REVOKE_INVOICE                  : RevokeInvoiceDetails,
-	ADVANCE_SECURITY_DEPOSIT        : AdvanceSecurityDeposit,
-	ADVANCE_SECURITY_DEPOSIT_REFUND : AdvanceSecurityDepositRefund,
-	ISSUE_CREDIT_NOTE               : RequestCNDetails,
-	JOB_OPEN                        : JobOpenDetailsModal,
+	BANK_DETAIL_APPROVAL                   : BankDetails,
+	TDS_APPROVAL                           : TdsApprovalDetails,
+	JOURNAL_VOUCHER_APPROVAL               : JvDetails,
+	SETTLEMENT_APPROVAL                    : Settlement,
+	INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL : ICJV_Details,
+	PAYMENT_CONFIRMATION_APPROVAL          : PaymentDetails,
+	RECURRING_EXPENSE_APPROVAL             : RecuringDetails,
+	OVERHEAD_APPROVAL                      : NonRecuring,
+	SEZ_APPROVAL                           : SezApprovalDetails,
+	CONCOR_PDA_APPROVAL                    : ConcorDetails,
+	REVOKE_INVOICE                         : RevokeInvoiceDetails,
+	ADVANCE_SECURITY_DEPOSIT               : AdvanceSecurityDeposit,
+	ADVANCE_SECURITY_DEPOSIT_REFUND        : AdvanceSecurityDepositRefund,
+	ISSUE_CREDIT_NOTE                      : RequestCNDetails,
+	JOB_OPEN                               : JobOpenDetailsModal,
 };
 function CommonDetailsModal({
 	setDetailsModal = () => {},
