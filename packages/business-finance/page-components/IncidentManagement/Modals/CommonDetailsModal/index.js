@@ -64,13 +64,6 @@ function CommonDetailsModal({
 				refetch={refetch}
 			/>
 
-			{/* { detailsModal?.type === 'TDS_APPROVAL' ? (
-				<JobOpenDetailsModal
-					row={detailsModal}
-					setDetailsModal={setDetailsModal}
-					refetch={refetch}
-				/>
-			) : null } */}
 		</div>
 	);
 }
