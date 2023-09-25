@@ -19,7 +19,6 @@ function RefreshResults({ loading: getLoading = false, refetch = () => {} }) {
 	const className = loading ? 'animate' : '';
 
 	return (
-
 		<Button
 			size="md"
 			themeType="secondary"

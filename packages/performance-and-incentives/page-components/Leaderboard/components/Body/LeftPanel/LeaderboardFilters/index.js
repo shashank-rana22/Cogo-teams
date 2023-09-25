@@ -8,6 +8,7 @@ import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../constants/leaderbo
 import Filters from '../../../../common/Filters';
 import SearchInput from '../../../../common/SearchInput';
 
+import RefreshResults from './RefreshResults';
 import styles from './styles.module.css';
 import useFilterContent from './useFilterContent';
 
@@ -61,6 +62,8 @@ function LeaderboardFilters(props) {
 		isExpanded,
 		isChannel,
 		setIsChannel,
+		loading,
+		refetch,
 	} = props;
 
 	const {
@@ -150,6 +153,8 @@ function LeaderboardFilters(props) {
 			</div>
 
 			<div className={styles.inner_container}>
+				<RefreshResults loading={loading} refetch={refetch} />
+
 				<Filters
 					controls={controls}
 					open={showFilters}

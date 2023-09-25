@@ -60,13 +60,21 @@ function List(props) {
 				))}
 
 				{(!isEmpty(currentUserData) && isEmpty(list.find((item) => item.user?.id === user.id))) ? (
-					<ListItem
-						listItem={currentUserData}
-						handleClick={handleClick}
-						viewType={viewType}
-						user={user}
-						currLevel={currLevel}
-					/>
+					<>
+						<div>
+							<span>.</span>
+							<span>.</span>
+							<span>.</span>
+						</div>
+						<ListItem
+							listItem={currentUserData}
+							handleClick={handleClick}
+							viewType={viewType}
+							user={user}
+							currLevel={currLevel}
+						/>
+					</>
+
 				) : null}
 
 			</div>

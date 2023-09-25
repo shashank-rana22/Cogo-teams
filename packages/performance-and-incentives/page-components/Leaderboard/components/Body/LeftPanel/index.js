@@ -6,7 +6,6 @@ import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
 import Header from './Header';
 import LeaderboardFilters from './LeaderboardFilters';
 import List from './List';
-import RefreshResults from './RefreshResults';
 import styles from './styles.module.css';
 import useGetScoringReports from './useGetAgentScoringReports';
 
@@ -73,6 +72,7 @@ function LeftPanel(props) {
 				isExpanded={isExpanded}
 				setIsExpanded={setIsExpanded}
 				entity={entity}
+				levelStack={levelStack}
 			/>
 
 			<LeaderboardFilters
@@ -87,9 +87,9 @@ function LeftPanel(props) {
 				isExpanded={isExpanded}
 				isChannel={isChannel}
 				setIsChannel={setIsChannel}
+				loading={loading}
+				refetch={refetch}
 			/>
-
-			<RefreshResults loading={loading} refetch={refetch} />
 
 			<List
 				loading={loading}
