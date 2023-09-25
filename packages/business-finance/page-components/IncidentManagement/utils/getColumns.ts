@@ -1,11 +1,11 @@
-import { columns } from '../Configuration/columns';
-import { requestColumn } from '../Configuration/RequestColumn';
+import { columns } from '../Configuration/columnB';
+import { requestColumn } from '../Configuration/RequestColumnB';
 
 import { ColumnInterface } from './interface';
 
 const getColumns = ({
 	activeTab, setIsAscendingActive, setFilters,
-	isAscendingActive, getIncidentData, t = () => {}, detailsModal = {},
+	isAscendingActive, t = () => {},
 	setDetailsModal,
 }:ColumnInterface) => {
 	if (activeTab === 'requested') {
@@ -13,9 +13,7 @@ const getColumns = ({
 			setIsAscendingActive,
 			setFilters,
 			isAscendingActive,
-			getIncidentData,
 			t,
-			detailsModal,
 			setDetailsModal,
 		});
 	}
@@ -24,10 +22,8 @@ const getColumns = ({
 			setIsAscendingActive,
 			setFilters,
 			isAscendingActive,
-			getIncidentData,
 			activeTab,
 			t,
-			detailsModal,
 			setDetailsModal,
 		})
 	);

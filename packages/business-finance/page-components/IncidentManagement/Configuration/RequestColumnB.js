@@ -226,7 +226,7 @@ export const requestColumn = ({
 	},
 	{
 		accessor: (row) => (
-			<Button size="md" themeType="secondary" onClick={() => setDetailsModal(row)}>View lksdcmzx</Button>
+			<Button size="md" themeType="secondary" onClick={() => setDetailsModal(row)}>View2</Button>
 		),
 		id: 'action',
 	},
