@@ -12,6 +12,13 @@ const { ADMIN, OWNER } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 const MIN_LENGTH = 1;
 
+const getReportType = ({ currLevel }) => {
+	if (currLevel[GLOBAL_CONSTANTS.zeroth_index] === 'admin_report') {
+		return undefined;
+	}
+	return currLevel[GLOBAL_CONSTANTS.zeroth_index];
+};
+
 function Header(props) {
 	const { currLevel, setParams, isExpanded, setIsExpanded, entity, levelStack } = props;
 
@@ -24,8 +31,7 @@ function Header(props) {
 			...prev,
 			filters: {
 				...prev.filters,
-				report_type : isExpanded ? currLevel[GLOBAL_CONSTANTS.zeroth_index] : 'kam_report',
-				user_rm_ids : currLevel[GLOBAL_CONSTANTS.one] ? [currLevel[GLOBAL_CONSTANTS.one]] : undefined,
+				report_type: isExpanded ? getReportType({ currLevel }) : 'kam_report',
 			},
 		}));
 	};
@@ -45,8 +51,9 @@ function Header(props) {
 					<i>{COGO_ENTITY}</i>
 				</div>
 
-				{(incentive_leaderboard_viewtype === ADMIN
-				|| (incentive_leaderboard_viewtype === OWNER && levelStack?.length === MIN_LENGTH)) ? (
+				{((incentive_leaderboard_viewtype === ADMIN
+				|| (incentive_leaderboard_viewtype === OWNER && levelStack?.length === MIN_LENGTH))
+				&& (currLevel[GLOBAL_CONSTANTS.zeroth_index] !== 'kam_report')) ? (
 					<Button size="md" themeType="linkUi" onClick={handleClick}>
 						{isExpanded ? 'Collapse' : 'Expand All'}
 						{' '}
