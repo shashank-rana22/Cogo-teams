@@ -19,6 +19,7 @@ function FilterPopover({ setShowPopover, setGlobalFilters }) {
 			page: 1,
 			...data,
 		}));
+		setShowPopover(false);
 	};
 
 	const clearHandler = () => {
