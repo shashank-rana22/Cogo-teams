@@ -91,24 +91,24 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 		bl_approval_pending: {
 			task_attributes: [
 				{
-					assigned_stakeholder: 'service_ops2',
-				},
-				{
-					task   : 'mark_vessel_departed',
-					status : 'pending',
+					assigned_stakeholder: ['service_ops2'],
 				},
 				{
 					task   : 'upload_draft_bill_of_lading',
 					status : 'completed',
 				},
 			],
-
-			service_state : ['containers_gated_in'],
-			state         : ['in_progress', 'confirmed_by_importer_exporter'],
+			vessel_not_departed : true,
+			service_state       : ['containers_gated_in'],
+			state               : ['in_progress', 'confirmed_by_importer_exporter'],
 		},
 		completed: {
 			task_attributes: [
 				{
+					task   : 'mark_container_gated_in',
+					status : 'completed',
+				},
+				{
 					task   : 'mark_vessel_departed',
 					status : 'completed',
 				},
@@ -117,7 +117,6 @@ const tabwiseFilters = ({ activeTab = '', isCriticalOn = false }) => {
 					status : 'completed',
 				},
 			],
-			service_state: ['containers_gated_in'],
 		},
 		cancelled: {
 			state: 'cancelled',
