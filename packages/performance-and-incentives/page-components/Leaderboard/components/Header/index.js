@@ -13,9 +13,9 @@ import {
 	getThisMonthStartDate,
 	getThisQuarterStartDate,
 } from '../../../../utils/start-date-functions';
-import ProgressBar from '../../common/ProgressBar';
 import DURATION_OPTIONS from '../../configurations/get-duration-filter-options';
 
+import ProgressBar from './ProgressBar';
 import styles from './styles.module.css';
 
 const { TODAY, THIS_MONTH, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
@@ -60,6 +60,12 @@ function Header(props) {
 					</h2>
 
 					<div className={styles.filter_container}>
+						<div className={styles.subheading}>
+							You are viewing Incentive and Scoring Analytics
+							{' '}
+							<span className={styles.light}>for</span>
+						</div>
+
 						<Select
 							value={entity}
 							onChange={setEntity}
