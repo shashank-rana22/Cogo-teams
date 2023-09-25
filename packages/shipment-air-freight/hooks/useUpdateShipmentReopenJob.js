@@ -16,8 +16,8 @@ const useUpdateShipmentReopenJob = ({
 		try {
 			await trigger({
 				params: {
-					id                                 : shipment_id,
-					revert_financially_closed_shipment : true,
+					id            : shipment_id,
+					is_job_closed : false,
 				},
 			});
 			Toast.success('Shipment Reopened');
