@@ -10,7 +10,9 @@ import styles from './styles.module.css';
 import useGetScoringReports from './useGetAgentScoringReports';
 
 function LeftPanel(props) {
-	const { entity, params, setParams, isChannel, setIsChannel, debounceQuery } = props;
+	const {
+		entity, params, setParams, isChannel, setIsChannel, debounceQuery, refetch: refetchStats, loading: statsLoading,
+	} = props;
 
 	const {
 		loading,
@@ -89,6 +91,8 @@ function LeftPanel(props) {
 				setIsChannel={setIsChannel}
 				loading={loading}
 				refetch={refetch}
+				refetchStats={refetchStats}
+				statsLoading={statsLoading}
 			/>
 
 			<List

@@ -64,6 +64,8 @@ function LeaderboardFilters(props) {
 		setIsChannel,
 		loading,
 		refetch,
+		refetchStats,
+		statsLoading,
 	} = props;
 
 	const {
@@ -153,7 +155,12 @@ function LeaderboardFilters(props) {
 			</div>
 
 			<div className={styles.inner_container}>
-				<RefreshResults loading={loading} refetch={refetch} />
+				<RefreshResults
+					loading={loading}
+					refetch={refetch}
+					refetchStats={refetchStats}
+					statsLoading={statsLoading}
+				/>
 
 				<Filters
 					controls={controls}

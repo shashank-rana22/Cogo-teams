@@ -4,13 +4,17 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function RefreshResults({ loading: getLoading = false, refetch = () => {} }) {
+function RefreshResults({
+	loading: getLoading = false,
+	refetch = () => {}, refetchStats = () => {}, statsLoading = false,
+}) {
 	const [loading, setLoading] = useState(false);
 
 	const fetchData = async () => {
 		setLoading(true);
 		try {
 			await refetch();
+			await refetchStats();
 		} finally {
 			setLoading(false);
 		}
@@ -22,7 +26,7 @@ function RefreshResults({ loading: getLoading = false, refetch = () => {} }) {
 		<Button
 			size="md"
 			themeType="secondary"
-			disabled={!loading && getLoading}
+			disabled={!loading && (getLoading || statsLoading)}
 			onClick={fetchData}
 			className={styles.refresh}
 		>

@@ -4,7 +4,7 @@
 
 .animate {
 	cursor: not-allowed;
-	animation: spin-anim 0.4s linear infinite;
+	animation: spin-anim 0.8s linear infinite;
 
 	@keyframes spin-anim {
 		0% {
