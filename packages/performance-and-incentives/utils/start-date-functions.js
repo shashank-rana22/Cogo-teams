@@ -6,6 +6,8 @@ const AUGUST = 7;
 const NOVEMBER = 10;
 const DECEMBER = 11;
 const MARCH = 2;
+const ADD_MONTH = 1;
+const ZERO = 0;
 
 export const getTodayStartDate = () => new Date();
 
@@ -13,6 +15,12 @@ export const getThisMonthStartDate = () => {
 	const currentDate = new Date();
 	currentDate.setDate(START_DATE);
 	return currentDate;
+};
+
+export const getThisMonthLastDate = () => {
+	const currentDate = new Date();
+
+	return new Date(currentDate.getFullYear(), currentDate.getMonth() + ADD_MONTH, ZERO);
 };
 
 export const getThisQuarterStartDate = () => {
