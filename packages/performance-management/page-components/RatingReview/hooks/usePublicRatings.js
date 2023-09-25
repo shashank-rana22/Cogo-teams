@@ -38,7 +38,10 @@ const getPayload = ({ toggleVal, selectedEmployees, manager_user_id, level, acti
 	};
 };
 
-const usePublishRatings = ({ selectedEmployees, level, selectCycle, activeTab, fetchRatingReviewDetails }) => {
+const usePublishRatings = ({
+	selectedEmployees, level, selectCycle, activeTab,
+	fetchRatingReviewDetails, setSelectedEmployees,
+}) => {
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
 
 	const [toggleVal, setToggleVal] = useState([]);
@@ -62,7 +65,7 @@ const usePublishRatings = ({ selectedEmployees, level, selectCycle, activeTab, f
 			await trigger({
 				data: payload,
 			});
-
+			setSelectedEmployees({});
 			fetchRatingReviewDetails();
 			Toast.success('Rating has been updated successfully');
 		} catch (err) {
