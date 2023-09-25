@@ -14,8 +14,14 @@ interface ItemProps {
 function AccountPayablesByService({ activeEntity }:ItemProps) {
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 	const [activeBox, setActiveBox] = useState(null);
-	const handleClick = () => {
-		setIsAccordionActive(true);
+	const handleClick = (item) => {
+		if (activeBox === null || item?.service !== activeBox) {
+			setIsAccordionActive(true);
+			setActiveBox(item?.service);
+		} else {
+			setActiveBox(null);
+			setIsAccordionActive(false);
+		}
 	};
 	const { data, loading } = useGetPayablesByService({ activeEntity });
 	const { list, currency } = data || {};
@@ -374,6 +380,52 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 
 					</div>
 				);
+			case 'Overseas':
+				return (
+					<div className={styles.imports_container}>
+
+						<div className={styles.sub_container}>
+							<div className={styles.ocean_text}>
+								Overseas
+							</div>
+						</div>
+						<div className={styles.vr} />
+						<div className={styles.sub_container}>
+							<div className={styles.label}>
+								Overseas
+							</div>
+							<div className={styles.ocean_value}>
+								<Tooltip
+									content={formatAmount({
+										amount  : list[7]?.amount,
+										currency,
+										options : {
+											currencyDisplay : 'code',
+											style           : 'currency',
+										},
+									})}
+									interactive
+								>
+									<div>
+										{formatAmount({
+											amount  : list[8]?.amount,
+											currency,
+											options : {
+												currencyDisplay       : 'code',
+												style                 : 'currency',
+												notation              : 'compact',
+												compactDisplay        : 'short',
+												minimumFractionDigits : 2,
+											},
+										})}
+
+									</div>
+								</Tooltip>
+							</div>
+						</div>
+
+					</div>
+				);
 
 			default:
 				return null;
@@ -406,8 +458,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									key={item?.service}
 									className={activeBox === item?.service ? styles.sub_container_click : styles.amount}
 									onClick={() => {
-										handleClick();
-										setActiveBox(item?.service);
+										handleClick(item);
 									}}
 									role="presentation"
 								>
