@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
+import { useState } from 'react';
 
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../constants/leaderboard-viewtype-constants';
 import getEntityNameById from '../../../../../../utils/get-entity-name-by-id';
@@ -12,26 +13,26 @@ const { ADMIN, OWNER } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 const MIN_LENGTH = 1;
 
-const getReportType = ({ currLevel }) => {
-	if (currLevel[GLOBAL_CONSTANTS.zeroth_index] === 'admin_report') {
-		return undefined;
-	}
-	return currLevel[GLOBAL_CONSTANTS.zeroth_index];
-};
-
 function Header(props) {
-	const { currLevel, setParams, isExpanded, setIsExpanded, entity, levelStack } = props;
-
+	const { params, currLevel, setParams, isExpanded, setIsExpanded, entity, levelStack } = props;
 	const { incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
+	const [reportDetails, setReportDetails] = useState({});
 
 	const handleClick = () => {
 		setIsExpanded((prev) => !prev);
+
+		if (!isExpanded) {
+			setReportDetails({
+				report_type      : params.filters?.report_type || undefined,
+				report_view_type : params.filters?.report_view_type || undefined,
+			});
+		} else setReportDetails({});
 
 		setParams((prev) => ({
 			...prev,
 			filters: {
 				...prev.filters,
-				report_type: isExpanded ? getReportType({ currLevel }) : 'kam_report',
+				...(!isExpanded ? { report_type: 'kam_report', report_view_type: 'kam_wise' } : reportDetails),
 			},
 		}));
 	};
