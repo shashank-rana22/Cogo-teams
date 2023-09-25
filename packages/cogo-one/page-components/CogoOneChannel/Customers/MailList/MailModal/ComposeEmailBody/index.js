@@ -1,5 +1,7 @@
 import { RTEditor, Input, Select } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
+import { useEffect, useMemo } from 'react';
 
 import { getUserActiveMails } from '../../../../../../configurations/mail-configuration';
 import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
@@ -27,16 +29,26 @@ function ComposeEmailBody(props) {
 		activeMailAddress = '',
 		showControl = null,
 		uploading = false,
+		setActiveMailAddress = () => {},
 	} = props || {};
 
-	const userActiveMails = (
+	const userActiveMails = useMemo(() => (
 		[...new Set([
 			...getUserActiveMails({ userEmailAddress, viewType }),
 			...(userSharedMails || []),
+			...([emailState?.from_mail || activeMailAddress]),
 		])]
-	).map(
+	), [activeMailAddress, emailState?.from_mail, userEmailAddress, userSharedMails, viewType]);
+
+	const userActiveMailOptions = (userActiveMails || []).map(
 		(curr) => ({ label: curr, value: curr }),
 	);
+
+	useEffect(() => {
+		if (buttonType === 'send_mail' && !activeMailAddress) {
+			setActiveMailAddress(userActiveMails?.[GLOBAL_CONSTANTS.zeroth_index]);
+		}
+	}, [activeMailAddress, buttonType, setActiveMailAddress, userActiveMails]);
 
 	return (
 		<>
@@ -49,7 +61,7 @@ function ComposeEmailBody(props) {
 						value={emailState?.from_mail || activeMailAddress}
 						onChange={(val) => setEmailState((prev) => ({ ...prev, from_mail: val }))}
 						disabled={buttonType !== 'send_mail'}
-						options={userActiveMails}
+						options={userActiveMailOptions}
 						size="sm"
 					/>
 				</div>

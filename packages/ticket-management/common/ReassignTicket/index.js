@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 import { useState, useEffect } from 'react';
 
 import { useReassignTicketsControls } from '../../configurations/reassign-controls';
@@ -14,6 +15,8 @@ function ReassignTicket({
 	ticketId = '', showReassign = true, setShowReassign = () => {}, getTicketActivity = () => {},
 	getTicketDetails = () => {}, setListData = () => {},
 }) {
+	const { t } = useTranslation(['myTickets']);
+
 	const [userData, setUserData] = useState({});
 	const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -21,7 +24,7 @@ function ReassignTicket({
 
 	const watchType = watch('type');
 
-	const controls = useReassignTicketsControls({ watchType, setUserData });
+	const controls = useReassignTicketsControls({ t, watchType, setUserData });
 
 	const { reassignTicket, reassignLoading } = useReassignTicket({
 		ticketId,
@@ -40,7 +43,6 @@ function ReassignTicket({
 		await reassignTicket({ val, type: watchType, userData });
 		handleClose();
 	};
-
 	useEffect(() => {
 		setValue('assign_to', '');
 	}, [watchType, setValue]);
@@ -52,7 +54,7 @@ function ReassignTicket({
 			onClose={handleClose}
 		>
 			<form onSubmit={handleSubmit(handleReassignTicket)}>
-				<Modal.Header title={`Re-Assign Ticket (${ticketId})`} />
+				<Modal.Header title={`${t('myTickets:re_assign_ticket')} (${ticketId})`} />
 
 				<Modal.Body>
 					<div>
@@ -78,7 +80,10 @@ function ReassignTicket({
 										size="sm"
 										control={control}
 									/>
-									<div className={styles.error}>{errors?.[controlItem.name] && 'Required'}</div>
+
+									<div className={styles.error}>
+										{errors?.[controlItem.name] && t('myTickets:required')}
+									</div>
 								</div>
 							);
 						})}
@@ -89,12 +94,13 @@ function ReassignTicket({
 					{showConfirmation
 						? (
 							<Confirmation
+								t={t}
 								loading={reassignLoading}
 								handleChange={setShowConfirmation}
 							/>
 						) : (
 							<Button size="md" onClick={() => setShowConfirmation(true)} loading={reassignLoading}>
-								Submit
+								{t('myTickets:submit')}
 							</Button>
 						)}
 				</Modal.Footer>

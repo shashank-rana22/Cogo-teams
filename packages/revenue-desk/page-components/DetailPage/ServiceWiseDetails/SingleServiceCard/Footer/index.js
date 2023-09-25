@@ -1,8 +1,13 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format, startCase } from '@cogoport/utils';
+
+import { VALUE_ZERO } from '../../../../constants';
 
 import styles from './styles.module.css';
 
-function Footer({ data }) {
+function Footer({ data = {}, walletAmount = {} }) {
+	const { wallet_amount = '', currency = '' } = walletAmount || {};
+
 	const infoArray = [
 		{
 			key   : 'Cargo Readiness Date',
@@ -34,6 +39,7 @@ function Footer({ data }) {
 			value : data?.preferred_shipping_line?.business_name,
 		},
 	];
+
 	return (
 		<div className={styles.container}>
 			{infoArray.map((item) => (item.value ? (
@@ -45,7 +51,28 @@ function Footer({ data }) {
 					{item.value}
 				</div>
 			) : null))}
+
+			<div className={styles.wallet_container}>
+				<div className={styles.wallet_text}>
+					Wallet Balance :
+					{' '}
+					<span className={wallet_amount > VALUE_ZERO ? styles.price_text : styles.red_text}>
+						{formatAmount({
+							amount  : wallet_amount,
+							currency,
+							options : {
+								style                 : 'currency',
+								notation              : 'compact',
+								compactDisplay        : 'short',
+								minimumFractionDigits : 2,
+							},
+						})}
+					</span>
+				</div>
+			</div>
+
 		</div>
+
 	);
 }
 export default Footer;

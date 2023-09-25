@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { updateDoc, doc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -14,19 +15,28 @@ const useTransferChat = ({ firestore, activeMessageCard }) => {
 	const {
 		requested_group_members = [],
 		group_members = [],
-		support_agent_id,
-		channel_type,
-		id,
+		channel_type = '',
+		id = '',
+		has_requested_by = {},
 	} = activeMessageCard || {};
 
 	const { user: { id: logginInAgentId } } = profile || {};
 
-	const roomRef = doc(
-		firestore,
-		`${FIRESTORE_PATH[channel_type]}/${id}`,
-	);
+	let roomRef;
+
+	if (id) {
+		roomRef = doc(
+			firestore,
+			`${FIRESTORE_PATH[channel_type]}/${id}`,
+		);
+	}
 
 	const requestToJoinGroup = async () => {
+		if (isEmpty(roomRef)) {
+			Toast.error('Invalid Chat!');
+			return;
+		}
+
 		if (group_members.includes(logginInAgentId)) {
 			Toast.warn('You are alredy in group');
 			return;
@@ -53,6 +63,13 @@ const useTransferChat = ({ firestore, activeMessageCard }) => {
 	};
 
 	const dissmissTransferRequest = async () => {
+		const agentId = has_requested_by?.agent_id;
+
+		if (isEmpty(roomRef)) {
+			Toast.error('Invalid Chat!');
+			return;
+		}
+
 		await updateDoc(roomRef, {
 			has_requested_by: {},
 		});
@@ -62,8 +79,8 @@ const useTransferChat = ({ firestore, activeMessageCard }) => {
 			payload: {
 				channel           : channel_type,
 				channel_chat_id   : id,
-				agent_id          : support_agent_id,
-				conversation_type : 'request_dissmissed',
+				agent_id          : agentId,
+				conversation_type : 'request_dismissed',
 			},
 		});
 	};

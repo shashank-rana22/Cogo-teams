@@ -15,12 +15,13 @@ const SHIPMENT_SPECIALIST = {
 	default_side_nav             : 'user_activity',
 	get_accesible_assign_buttons : getShipmentSpecialistButtons,
 	accesible_agent_types_query  : [where('agent_type', 'in', COMMON_AGENT_TYPES)],
-	show_relevant_templates      : ['quick_reply'],
+	show_relevant_templates      : ['quick_reply', 'shipment_specialist'],
 	mails_to_be_shown            : [],
 	bulk_assign_features         : [],
 	stats_feedback_count         : [],
 	to_show_agent_activity_graph : false,
 	configurations_to_be_shown   : [],
+	shift_view_default_type      : '',
 	group_agents_api_filter      : ['shipment_specialist',
 		'support', 'shipment_specialist_admin', ...COGOVERSE_AGENT_MAPPINGS.sales],
 	accessible_new_communications : ['new_mail'],
@@ -46,6 +47,7 @@ const SHIPMENT_SPECIALIST = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : true,
+		hide_personal_mail                          : true,
 	},
 };
 
