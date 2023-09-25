@@ -56,7 +56,6 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 			}
 			return acc;
 		}, {});
-		setActiveList([]);
 		setActiveId(hierarchy[parent]);
 		setHierarchy(newHierarchy);
 	};
@@ -86,6 +85,7 @@ function MapView({ setView = () => {}, backView = '', globalFilters = {}, setGlo
 				/>
 			</div>
 			<SidePanel
+				key={filterBy}
 				page={page}
 				data={data}
 				filterBy={filterBy}

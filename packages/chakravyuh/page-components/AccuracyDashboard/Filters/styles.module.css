@@ -19,7 +19,7 @@
 	flex-direction: column;
 
 	.title_label {
-		margin: 0 0 4px;
+		margin: 0 0 4px 4px;
 		font-size: 14px;
 		color: #4f4f4f;
 	}

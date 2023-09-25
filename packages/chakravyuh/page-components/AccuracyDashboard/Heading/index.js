@@ -58,7 +58,7 @@ function Heading({
 			</h1>
 
 			{!backView
-				&& <h5>From 1st September</h5>}
+				&& <p className={styles.info}>from 1st September</p>}
 
 			{showFilters ? (
 				<div className={styles.right_container}>

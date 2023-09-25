@@ -25,6 +25,7 @@ import WorldGeometry from './WorldGeometry';
 
 const CENTER_LNG = 20;
 const INITIAL_ZOOM = 2;
+const ACTIVE_SIZE = 14;
 const K = 0.0001;
 
 function Map({
@@ -171,18 +172,18 @@ function Map({
 			{showPorts
 			&& activeList.map((item) => {
 				const position = [item.destination_latitude, item.destination_longitude];
-				const fillColor = COLORS[Math.floor((accuracyMapping[item.destination_id] - minCount) / range)];
 				const value = filterBy.includes('accuracy')
 					? (accuracyMapping[item.destination_id] || GLOBAL_CONSTANTS.zeroth_index).toFixed(INITIAL_ZOOM)
 					: formatBigNumbers(accuracyMapping[item.destination_id]);
-				const { color, accuracy } = getPolygonStyleProps(accuracyMapping[item.destination_id]);
-
+				const color = filterBy.includes('accuracy')
+					? getPolygonStyleProps(accuracyMapping[item.destination_id])?.color
+					: COLORS[Math.floor((accuracyMapping[item.destination_id] - minCount) / range)];
 				return (
 					<Point
 						key={item.destination_id}
 						position={position}
 						ref={currentId === item.destination_id ? activeRef : null}
-						className={filterBy.includes('accuracy') ? styles[accuracy] : styles[`color_${fillColor}`]}
+						backgroundColor={color}
 						eventHandlers={{
 							click: (e) => {
 								L.DomEvent.stopPropagation(e);
@@ -197,7 +198,6 @@ function Map({
 										},
 									}));
 									setHierarchy((prev) => ({ ...prev, port_id: item.destination_id }));
-									setActiveList([]);
 								}
 							},
 						}}
@@ -208,7 +208,7 @@ function Map({
 						>
 							<MapTooltip
 								display_name={item.destination_name}
-								color={filterBy.includes('accuracy') ? color : fillColor}
+								color={color}
 								value={value}
 								value_key=""
 								value_suffix={filterBy.includes('accuracy') ? '%' : ''}
@@ -233,7 +233,13 @@ function Map({
 				className={styles.legend}
 			/>
 
-			{originPosition && <Point position={originPosition} animate />}
+			{originPosition && (
+				<Point
+					position={originPosition}
+					animate
+					size={[ACTIVE_SIZE, ACTIVE_SIZE]}
+				/>
+			)}
 			{showLoading && (
 				<div className={styles.loader_container}>
 					<Loader className={styles.loader} />
