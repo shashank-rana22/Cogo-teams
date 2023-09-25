@@ -1,5 +1,6 @@
 import { Button, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import List from '../../../../../commons/List/index';
@@ -92,11 +93,14 @@ function CardItem({
 	});
 
 	const getLineItemData = (lineItemData) => {
-		const parts = lineItemData.split('_');
-		const capitalizedWords = parts.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
-		const resultData = capitalizedWords.join(' ');
+		if (typeof lineItemData === 'string' && !isEmpty(lineItemData)) {
+			const parts = lineItemData.split('_');
+			const capitalizedWords = (parts || []).map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+			const resultData = capitalizedWords.join(' ');
 
-		return resultData;
+			return resultData;
+		}
+		return '-';
 	};
 
 	const { pageIndex = 1 }: FullResponseProps = fullResponse || {};
