@@ -19,7 +19,7 @@ const OPTIONS = [
 	{
 		key              : 'map_view',
 		heading          : 'Map View',
-		highlight_key    : 'rate_count_with_deviation_more_than_30',
+		highlight_key    : 'rate_count_with_deviation_more_than_x_price',
 		highlight_suffix : ' Rates',
 		highlight_info   : 'With Deviation more than 30%',
 		func             : formatBigNumbers,

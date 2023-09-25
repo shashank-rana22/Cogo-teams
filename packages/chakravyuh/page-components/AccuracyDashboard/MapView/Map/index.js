@@ -12,18 +12,20 @@ import {
 	BASE_LAYER, LAYOUT_WIDTH, TIME_LIMIT,
 	MAX_BOUNDS, ITEMS, SECOND_IDX,
 } from '../../../../constants/map_constants';
-// import useGetSimplifiedGeometry from '../../../../hooks/useGetSimplifiedGeometry';
+import { formatBigNumbers } from '../../../../utils/formatBigNumbers';
 import { getLowestHierarchy, HIERARCHY_MAPPING } from '../../../../utils/hierarchy-utils';
 import { getPolygonStyleProps } from '../../../../utils/map-utils';
-
+// import useGetSimplifiedGeometry from '../../../../hooks/useGetSimplifiedGeometry';
 // import ActiveRegions from './ActiveRegions';
+import { COLORS } from '../../Heading/BirdsEyeView';
+
 import Point from './AnimatedPoint';
-import MapEvents from './MapEvents';
 import styles from './styles.module.css';
 import WorldGeometry from './WorldGeometry';
 
 const CENTER_LNG = 20;
 const INITIAL_ZOOM = 2;
+const K = 0.0001;
 
 function Map({
 	data = [],
@@ -39,12 +41,18 @@ function Map({
 	setHierarchy = () => {},
 	setActiveList = () => {},
 	setLocationFilters = () => {},
+	accuracyLoading = false,
 	handleBackHierarchy = () => {},
+	filterBy = '',
 }) {
 	const [map, setMap] = useState(null);
-	const [zoom, setZoom] = useState(INITIAL_ZOOM);
 	const activeRef = useRef(null);
 
+	const minCount = Math.min(...Object.values(accuracyMapping));
+	const maxCount = Math.max(...Object.values(accuracyMapping));
+	const range = (minCount === maxCount && !!maxCount)
+		? maxCount / COLORS.length
+		: K + (maxCount - minCount) / COLORS.length;
 	const lowestHierarchy = getLowestHierarchy(hierarchy);
 	// const requiredType = getChildHierarchy(lowestHierarchy, hierarchy);
 	// const type = requiredType && (requiredType !== 'port_id' && requiredType !== 'country_id')
@@ -119,7 +127,7 @@ function Map({
 				}
 			}
 		};
-	}, [activeRef, isFull, setBounds, currentId, map, zoom]);
+	}, [activeRef, isFull, setBounds, currentId, map]);
 
 	return (
 		<CogoMaps
@@ -131,7 +139,6 @@ function Map({
 			maxZoom={7}
 			zoomPosition="topright"
 		>
-			<MapEvents setZoom={setZoom} />
 			<WorldGeometry
 				map={map}
 				ref={activeRef}
@@ -143,6 +150,11 @@ function Map({
 				setActiveList={setActiveList}
 				accuracyMapping={accuracyMapping}
 				setLocationFilters={setLocationFilters}
+				filterBy={filterBy}
+				key={accuracyLoading}
+				minCount={minCount}
+				maxCount={maxCount}
+				range={range}
 			/>
 			{/* <ActiveRegions
 				ref={activeRef}
@@ -159,13 +171,18 @@ function Map({
 			{showPorts
 			&& activeList.map((item) => {
 				const position = [item.destination_latitude, item.destination_longitude];
+				const fillColor = COLORS[Math.floor((accuracyMapping[item.destination_id] - minCount) / range)];
+				const value = filterBy.includes('accuracy')
+					? (accuracyMapping[item.destination_id] || GLOBAL_CONSTANTS.zeroth_index).toFixed(INITIAL_ZOOM)
+					: formatBigNumbers(accuracyMapping[item.destination_id]);
 				const { color, accuracy } = getPolygonStyleProps(accuracyMapping[item.destination_id]);
+
 				return (
 					<Point
 						key={item.destination_id}
 						position={position}
 						ref={currentId === item.destination_id ? activeRef : null}
-						className={styles[accuracy]}
+						className={filterBy.includes('accuracy') ? styles[accuracy] : styles[`color_${fillColor}`]}
 						eventHandlers={{
 							click: (e) => {
 								L.DomEvent.stopPropagation(e);
@@ -191,9 +208,10 @@ function Map({
 						>
 							<MapTooltip
 								display_name={item.destination_name}
-								color={color}
-								value={accuracyMapping[item.destination_id]}
+								color={filterBy.includes('accuracy') ? color : fillColor}
+								value={value}
 								value_key=""
+								value_suffix={filterBy.includes('accuracy') ? '%' : ''}
 							/>
 						</Tooltip>
 					</Point>
