@@ -2,10 +2,12 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRight } from '@cogoport/icons-react';
 
+import getEntityNameById from '../../../../../../utils/get-entity-name-by-id';
+
 import styles from './styles.module.css';
 
 function Header(props) {
-	const { currLevel, setParams, isExpanded, setIsExpanded } = props;
+	const { currLevel, setParams, isExpanded, setIsExpanded, entity } = props;
 
 	const handleClick = () => {
 		setIsExpanded((prev) => !prev);
@@ -20,6 +22,8 @@ function Header(props) {
 		}));
 	};
 
+	const COGO_ENTITY = getEntityNameById(entity);
+
 	return (
 		<>
 			<h3 className={styles.heading}>
@@ -30,7 +34,7 @@ function Header(props) {
 				<div>
 					<span className={styles.light}>for</span>
 					{' '}
-					<i>Cogo India</i>
+					<i>{COGO_ENTITY}</i>
 				</div>
 
 				{currLevel[GLOBAL_CONSTANTS.zeroth_index] !== 'kam_report' ? (

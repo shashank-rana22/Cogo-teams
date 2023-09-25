@@ -76,6 +76,7 @@ function LeftPanel(props) {
 				setParams={setParams}
 				isExpanded={isExpanded}
 				setIsExpanded={setIsExpanded}
+				entity={entity}
 			/>
 
 			<LeaderboardFilters

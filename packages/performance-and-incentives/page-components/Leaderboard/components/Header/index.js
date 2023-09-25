@@ -68,6 +68,7 @@ function Header(props) {
 							value={entity}
 							onChange={setEntity}
 							options={getEntityOptions()}
+							disabled={incentive_leaderboard_viewtype !== ADMIN}
 						/>
 
 						<Select
