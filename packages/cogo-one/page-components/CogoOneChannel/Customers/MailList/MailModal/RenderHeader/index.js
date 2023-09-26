@@ -39,6 +39,7 @@ function RenderHeader({
 	isTemplateView = false,
 	setMinimizeModal = () => {},
 	handleSaveDraft = () => {},
+	sendLoading = false,
 }) {
 	return (
 		<div className={styles.mail_modal_header}>
@@ -48,6 +49,7 @@ function RenderHeader({
 						size="md"
 						themeType="link"
 						onClick={handleClose}
+						disabled={replyLoading || sendLoading}
 					>
 						Cancel
 					</Button>
@@ -94,7 +96,7 @@ function RenderHeader({
 						<Button
 							size="sm"
 							themeType="accent"
-							disabled={replyLoading}
+							disabled={replyLoading || sendLoading}
 							onClick={() => setEmailTemplate(
 								(prev) => ({
 									...prev,
@@ -109,7 +111,7 @@ function RenderHeader({
 					<Button
 						size="sm"
 						themeType="secondary"
-						disabled={replyLoading}
+						disabled={replyLoading || sendLoading}
 						onClick={handleSaveDraft}
 					>
 						Save as draft
@@ -118,7 +120,7 @@ function RenderHeader({
 					{DISABLE_ATTACHMENTS_FOR.includes(buttonType) ? null : (
 						<div className={styles.file_uploader_div} title="attachment">
 							<CustomFileUploader
-								disabled={uploading || replyLoading}
+								disabled={uploading || replyLoading || sendLoading}
 								handleProgress={setUploading}
 								className="file_uploader"
 								accept=".png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx"
@@ -133,7 +135,9 @@ function RenderHeader({
 					)}
 
 					<div
-						className={cl`${replyLoading ? styles.disabled_button : ''} ${styles.send_icon}`}
+						className={cl`
+								${(replyLoading || sendLoading) ? styles.disabled_button : ''} 
+								${styles.send_icon}`}
 						title="send"
 					>
 						<IcMSend onClick={handleSend} />
