@@ -31,11 +31,12 @@ const useEditInvoicePref = ({
 	const updateExportInvoices = getTradeTypeByIncoTerm(inco_term) === 'export';
 	const ALL_SERVICE_LINE_ITEMS = [];
 	invoicing_parties?.forEach((p) => {
-		const { invoice_currency, is_igst } = p || {};
+		const { invoice_currency, is_igst, invoice_language } = p || {};
 		const allServices = (p?.services || []).map((service) => ({
 			...service,
 			invoice_currency,
 			is_igst,
+			invoice_language,
 		}));
 		ALL_SERVICE_LINE_ITEMS.push(...allServices);
 	});
@@ -85,6 +86,7 @@ const useEditInvoicePref = ({
 				tax_mechanism,
 			},
 			invoice_currency : geo.country.currency.code,
+			invoice_language : geo.country?.language || '',
 			services         : [],
 			is_active        : true,
 			invoice_source   : '',
@@ -92,7 +94,10 @@ const useEditInvoicePref = ({
 		setSelectedParties([newParty, ...selectedParties]);
 	};
 
-	const handleServiceChange = (inv, { service_ids: newServices, invoice_currency: new_ic }) => {
+	const handleServiceChange = (inv, {
+		service_ids: newServices, invoice_currency: new_ic,
+		invoice_language: new_il,
+	}) => {
 		const currentInvoiceIndex = selectedParties?.findIndex(
 			(party) => party.id === inv.id,
 		);
@@ -151,6 +156,7 @@ const useEditInvoicePref = ({
 				},
 			);
 			NEW_SELECT_PARTIES[currentInvoiceIndex].invoice_currency = new_ic;
+			NEW_SELECT_PARTIES[currentInvoiceIndex].invoice_language = new_il;
 
 			let finalNewSelectParties = [...NEW_SELECT_PARTIES];
 			if (finalNewSelectParties?.length > PARTY_SERVICES_LENGTH_GREATER_THAN) {

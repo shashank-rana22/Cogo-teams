@@ -3,35 +3,47 @@ import { Button } from '@cogoport/components';
 import {
 	useForm,
 } from '@cogoport/forms';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
+import useCreateShipmentAirCSRSheet from '../../../../../../hooks/useCreateShipmentAirCSRSheet';
 import useCreateShipmentAirFreightConsolidatedInvoice
 	from '../../../../../../hooks/useCreateShipmentAirFreightConsolidatedInvoice';
 import useUpdateShipmentAirFreightConsolidatedInvoice
 	from '../../../../../../hooks/useUpdateShipmentAirFreightConsolidatedInvoice';
 
+import ConfirmModal from './ConfirmModal';
 import styles from './styles.module.css';
 import getTerminalChargeRateControl from './terminalChargeRateControl';
 import useCreateShipmentAdditionalService from './useCreateShipmentAdditionalService';
 
 function TerminalChargeRate({
-	sheetData = {},
 	mainServicesData = {},
 	refetch = () => {},
 	onCancel = () => {},
 	task_id = '',
 	shipmentData = {},
-	csr_data = {},
+	type = 'terminal',
 }) {
 	const [entityData, setEntityData] = useState({});
 	const [irnGenerated, setIRNGenerated] = useState(true);
+	const [collectionPartyData, setCollectionPartyData] = useState({});
+	const [sheetData, setSheetData] = useState({});
+	const [showConfirm, setShowConfirm] = useState(false);
 
-	const controls = getTerminalChargeRateControl({ setEntityData });
-	const { formState:{ errors }, control, handleSubmit, setValue } = useForm();
+	const controls = getTerminalChargeRateControl({
+		type,
+		entityData,
+		setEntityData,
+		collectionPartyData,
+		setCollectionPartyData,
+	});
+
+	const { formState:{ errors }, control, handleSubmit } = useForm();
 
 	const { createShipmentAdditionalService } =	useCreateShipmentAdditionalService({
 		shipmentData,
 		setIRNGenerated,
+		setShowConfirm,
 	});
 
 	const {
@@ -39,9 +51,11 @@ function TerminalChargeRate({
 		loading, updateLoading,
 		data:invoiceData,
 	} = useCreateShipmentAirFreightConsolidatedInvoice({
+		type,
 		sheetData,
 		mainServicesData,
 		entityData,
+		collectionPartyData,
 		createShipmentAdditionalService,
 	});
 
@@ -51,6 +65,11 @@ function TerminalChargeRate({
 		updateLoading: taskUpdateLoading,
 	} = 	useUpdateShipmentAirFreightConsolidatedInvoice({ refetch, onCancel, task_id, invoiceData });
 
+	const { createShipmentAirCSRSheet = () => {}, csrCreateLoading = false } = useCreateShipmentAirCSRSheet({
+		mainServicesData,
+		setSheetData,
+	});
+
 	const handleCreateProforma = (values) => {
 		createShipmentAirFreightConsolidatedInvoice(values);
 	};
@@ -59,14 +78,10 @@ function TerminalChargeRate({
 		updateShipmentAirFreightConsolidatedInvoice();
 	};
 
-	useEffect(() => {
-		const { ocr_data = {} } = csr_data || {};
-		const { amount = 0, tax = 0, total_amount = 0 } = ocr_data;
-		setValue('price', Number(amount));
-		setValue('tax_price', Number(tax));
-		setValue('total_tax_price', Number(total_amount));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(csr_data)]);
+	const handleUpload = (values) => {
+		setShowConfirm(true);
+		createShipmentAirCSRSheet(values);
+	};
 
 	return (
 		<div>
@@ -77,7 +92,7 @@ function TerminalChargeRate({
 			/>
 			<div className={styles.button_container}>
 				<Button
-					onClick={handleSubmit(handleCreateProforma)}
+					onClick={handleSubmit(handleUpload)}
 					disabled={loading || updateLoading || !irnGenerated}
 				>
 					Create Proforma
@@ -89,6 +104,18 @@ function TerminalChargeRate({
 					IRN Generated
 				</Button>
 			</div>
+			{showConfirm ? (
+				<ConfirmModal
+					showConfirm={showConfirm}
+					setShowConfirm={setShowConfirm}
+					handleSubmit={handleSubmit}
+					handleCreateProforma={handleCreateProforma}
+					loading={loading}
+					updateLoading={updateLoading}
+					irnGenerated={irnGenerated}
+					csrCreateLoading={csrCreateLoading}
+				/>
+			) : null}
 		</div>
 
 	);

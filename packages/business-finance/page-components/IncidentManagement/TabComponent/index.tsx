@@ -14,6 +14,8 @@ function TabComponent({
 	isSettlementExecutive,
 	incidentLoading,
 	getIncidentData,
+	detailsModal = {},
+	setDetailsModal = () => {},
 }:IncidentDataInterface) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [isAscendingActive, setIsAscendingActive] = useState();
@@ -24,7 +26,16 @@ function TabComponent({
 
 	const { page } = filters || {};
 
-	const columns = getColumns({ activeTab, setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, t });
+	const columns = getColumns({
+		activeTab,
+		setIsAscendingActive,
+		setFilters,
+		isAscendingActive,
+		getIncidentData,
+		t,
+		detailsModal,
+		setDetailsModal,
+	});
 
 	return (
 		<div>

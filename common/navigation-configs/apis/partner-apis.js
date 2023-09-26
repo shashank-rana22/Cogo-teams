@@ -8597,6 +8597,22 @@ const partner = {
 			service_name : 'sage',
 		},
 		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_email_suggestions',
+			access_type  : 'private',
+			service_name : 'cogolens',
+		},
+		{
+
+			api          : 'create_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_organization_communication_logs',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -9156,6 +9172,18 @@ const partner = {
 		},
 		{
 			api         : 'post_incident_management_incident_send_overhead_mail',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_post_tax_profit',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_pre_tax_profit',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_list_service_charges',
 			access_type : 'private',
 		},
 	],
@@ -11313,6 +11341,10 @@ const partner = {
 			api         : 'post_common_tax_bulk_upload',
 			access_type : 'private',
 		},
+		{
+			api         : 'post_common_tax_change_state_product_code',
+			access_type : 'private',
+		},
 	],
 	manual_invoice: [
 		{
@@ -13443,6 +13475,11 @@ const partner = {
 			api          : 'list_platform_config_constants',
 			access_type  : 'private',
 			service_name : 'platform_config',
+		},
+		{
+			api          : 'list_cogoone_shifts',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 	],
 	analytics_dashboard: [

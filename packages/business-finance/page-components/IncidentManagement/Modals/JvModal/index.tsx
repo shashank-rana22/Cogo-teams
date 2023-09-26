@@ -112,7 +112,9 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 
 						<div className={styles.document_flex}>
 							<div className={styles.document}>{`${t('incidentManagement:remark_title')} -`}</div>
-							<div>{description}</div>
+							<div style={{ fontWeight: '600', marginLeft: '2px' }}>
+								{description}
+							</div>
 						</div>
 
 						{isEditable && (
@@ -124,7 +126,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 									size="md"
 									placeholder={t('incidentManagement:remarks_placeholder')}
 									onChange={(value: string) => setRemark(value)}
-									style={{ width: '700', height: '100px', marginBottom: '12px' }}
+									style={{ width: '700', height: '80px', marginBottom: '12px' }}
 								/>
 							</>
 						) }

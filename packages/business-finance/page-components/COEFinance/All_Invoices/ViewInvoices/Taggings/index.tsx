@@ -1,56 +1,77 @@
-import { Accordion } from '@cogoport/components';
-import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import ShowIcon from './ShowIcon';
 import styles from './styles.module.css';
 import TagMap from './TagMap';
 
-function Tagging({ billId = '', setRemarksVal = () => {}, status = '' }:
+const PRESENT_TAB = 'taggingTab';
+const TAB_TO_OPEN = 'sidDataTab';
+
+function Tagging({
+	setRemarksVal = () => {},
+	status = '',
+	onTabClick = () => {},
+	onAccept = () => {},
+	showTab = false,
+	taggingChecked = false,
+	mappingsData = {},
+}:
 {
-	billId: string, status: string, setRemarksVal: React.Dispatch<React.SetStateAction<{
+	status: string, onTabClick: any,
+	showTab?: boolean, taggingChecked?: boolean,
+	onAccept?: any,
+	mappingsData?: any,
+	setRemarksVal: React.Dispatch<React.SetStateAction<{
 		collectionPartyRemark: string[];
 		billingPartyRemark: string[];
 		invoiceDetailsRemark: string[];
 		taggingRemark: string[];
-
 	}>> }) {
 	const [value, setValue] = useState({ approve: '', reject: '', undo: '', remark: '' });
-	const showIcon = () => {
-		if (value?.approve === 'approve') {
-			return <IcCFtick height="17px" width="17px" />;
-		} if (value?.reject === 'reject') {
-			return (
-				<div className={styles.color_reject}>
-					<IcMCrossInCircle height="17px" width="17px" />
-				</div>
-			);
-		}
-		return null;
+
+	const switchDetails = () => {
+		onAccept({
+			tabName      : PRESENT_TAB,
+			tabToOpen    : TAB_TO_OPEN,
+			timelineItem : 'taggingCheck',
+		});
 	};
 
 	return (
-		<div className={styles.container}>
-			<Accordion
-				type="text"
-				title={(
-					<div className={styles.heading_data}>
-						<div className={styles.business_name}>
-							Invoice Tagging
-							{' '}
-							{showIcon()}
-						</div>
-					</div>
-				)}
+		<div style={{ padding: '0 20px' }}>
+			<div
+				className={styles.heading_data}
+				role="presentation"
+				onClick={() => onTabClick({ tabName: PRESENT_TAB })}
 			>
-				<div className={styles.line} />
-				<TagMap
-					billId={billId}
-					value={value}
-					setValue={setValue}
-					setRemarksVal={setRemarksVal}
-					status={status}
-				/>
-			</Accordion>
+				<div className={styles.business_name}>
+					Invoice Tagging
+					{' '}
+					<ShowIcon value={value} />
+				</div>
+				<div>
+					{
+					showTab
+						? <IcMArrowRotateUp height={16} width={16} />
+						: <IcMArrowRotateDown height={16} width={16} />
+}
+				</div>
+			</div>
+
+			{showTab ? (
+				<div>
+					<TagMap
+						value={value}
+						setValue={setValue}
+						setRemarksVal={setRemarksVal}
+						status={status}
+						mappingsData={mappingsData}
+						switchDetails={switchDetails}
+						taggingChecked={taggingChecked}
+					/>
+				</div>
+			) : null}
 		</div>
 	);
 }

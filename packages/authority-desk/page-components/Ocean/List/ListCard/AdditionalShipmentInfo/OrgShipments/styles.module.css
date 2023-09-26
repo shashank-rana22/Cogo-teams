@@ -38,3 +38,13 @@
 .loader_icon {
 	width: 50px;
 }
+
+.filter_container {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+.pagination {
+	margin-left: 8px;
+}

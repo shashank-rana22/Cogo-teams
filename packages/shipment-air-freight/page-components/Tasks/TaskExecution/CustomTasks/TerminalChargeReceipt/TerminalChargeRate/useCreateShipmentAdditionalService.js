@@ -4,6 +4,7 @@ import { useRequest } from '@cogoport/request';
 const useCreateShipmentAdditionalService = ({
 	shipmentData = {},
 	setIRNGenerated = () => {},
+	setShowConfirm = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_additional_service',
@@ -11,7 +12,13 @@ const useCreateShipmentAdditionalService = ({
 	}, { manual: true });
 
 	const createShipmentAdditionalService = async (values) => {
-		const { total_tax_price = '', currency = '' } = values || {};
+		const { currency = '', terminalChargeReceipt = [] } = values || {};
+
+		let total_tax_price = 0;
+
+		(terminalChargeReceipt || []).forEach((val) => {
+			total_tax_price += Number(val.total_tax_price);
+		});
 		const { id = '', all_services = [] } = shipmentData || {};
 
 		const airFreightLocalService = all_services.find((
@@ -37,6 +44,7 @@ const useCreateShipmentAdditionalService = ({
 		try {
 			await trigger({ data: payload });
 			setIRNGenerated(false);
+			setShowConfirm(false);
 		} catch (err) {
 			toastApiError(err);
 		}
