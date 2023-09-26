@@ -12,10 +12,8 @@
 	display: flex;
 	justify-content: flex-end;
 	width: 100%;
-}
 
-.container {
-	display: flex;
-	justify-content: flex-end;
-	width: 100%;
+	>div {
+		flex-wrap: nowrap;
+	}
 }

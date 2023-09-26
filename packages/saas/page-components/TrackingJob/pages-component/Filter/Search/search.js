@@ -1,9 +1,9 @@
 import { useForm } from '@cogoport/forms';
 
-import Layout from '../../../../common/Layout';
+import Layout from '../../../../../common/Layout';
+import getShowElements from '../showElement';
 
 import getFilterControls from './search-controls';
-import getShowElements from './showElement';
 import styles from './styles.module.css';
 
 function SearchFilters({

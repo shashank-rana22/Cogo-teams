@@ -1,6 +1,8 @@
 import { Table, Modal, TabPanel, Tabs, Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
+import EmptyState from '../../../common/EmptyState';
 import { columns } from '../../../config/ocean-tracking-columns';
 import useGetContainerData from '../../../hooks/useGetContainerData';
 import Form from '../../Forms/FormOcean/index';
@@ -40,6 +42,9 @@ function OceanTracking({
 	const handleSubmitForm = ({ values }) => {
 		apiTrigger({ values, showUpdate, setShowUpdate });
 	};
+	if (isEmpty(list)) {
+		return <EmptyState />;
+	}
 	return (
 		<div>
 
@@ -48,6 +53,7 @@ function OceanTracking({
 				show={showUpdate.show}
 				onClose={() => handleCloseModal()}
 				onOuterClick={() => handleCloseModal()}
+				size="lg"
 			>
 				<Modal.Header title={`Search Value. -
 				${showUpdate?.data?.search_value}`}
@@ -77,19 +83,21 @@ function OceanTracking({
 					<div />
 
 				</Modal.Body>
-				{
-					activeTab === 'add_location' && (
-						<Modal.Footer>
-							<Button
-								className={styles.btn_align}
-								onClick={onSubmit}
-								disabled={createLoading}
-							>
-								Submit
-							</Button>
-						</Modal.Footer>
+				<Modal.Footer>
+					{
+					activeTab === 'add_location' ? (
+						<Button
+							className={styles.btn_align}
+							onClick={onSubmit}
+							disabled={createLoading}
+						>
+							Submit
+						</Button>
+					) :	(
+						<Button onClick={() => handleCloseModal()}>Close</Button>
 					)
 				}
+				</Modal.Footer>
 			</Modal>
 
 		</div>

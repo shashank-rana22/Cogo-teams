@@ -18,7 +18,6 @@ function NestedFieldArray({
 	showElements = {}, customFieldArrayControls = {},
 }) {
 	const { controls = [], name, addButtonText = '' } = ctrl || {};
-	console.log(error, ctrl, 'nested');
 	const { fields, append, remove } = useFieldArray({ control, name });
 
 	return (

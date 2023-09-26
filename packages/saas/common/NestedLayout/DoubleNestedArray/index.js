@@ -19,7 +19,6 @@ function DoubleNestedFieldArray({
 	showElements = {}, customFieldArrayControls = {},
 }) {
 	const { controls = [], name, addButtonText = '' } = ctrl || {};
-	console.log(error, ctrl, 'double nested');
 	const { fields, append, remove } = useFieldArray({ control, name });
 
 	return (

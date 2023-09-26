@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import useGetCurrentInfo from '../../../../../hooks/useCurrentInfo';
 import useGetContainerMilestones from '../../../../../hooks/useGetContainerMilestones';
 
@@ -19,9 +21,13 @@ function TrackingInfo({ id = null }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.info_container}>
-				<p>{data?.shipment_details?.[0]?.container_no}</p>
+				<p>{data?.shipment_details?.[GLOBAL_CONSTANTS.zeroth_index]?.container_no}</p>
 				<div className={styles.milestone_container}>
-					<MilestoneStepper combineMileStoneList={combineMileStoneList} trackingType="ocean" refetch={refetch} />
+					<MilestoneStepper
+						combineMileStoneList={combineMileStoneList}
+						trackingType="ocean"
+						refetch={refetch}
+					/>
 				</div>
 
 			</div>

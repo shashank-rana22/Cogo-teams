@@ -13,7 +13,6 @@ function FieldArray({
 	ctrl = {}, control = {}, error = {}, formValues = {}, name = '', index = 0,
 	showElements = {}, customFieldArrayControls = {},
 }) {
-	console.log(error, 'inner most');
 	const {
 		controls = [],
 		name:nestedName = '',

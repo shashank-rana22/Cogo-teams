@@ -49,6 +49,7 @@ const useGetList = ({
 		setFilters({ page: 1, sort_by: 'updated_at', sort_type: 'desc' });
 		setSearchString('');
 		setSerialId('');
+		console.log('hey', 'serialId', serialId, 'searchString', searchString);
 	}, [activeTab]);
 
 	useEffect(() => {

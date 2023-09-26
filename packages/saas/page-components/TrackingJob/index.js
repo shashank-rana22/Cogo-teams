@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 import ListPagination from './common/ListPagination';
 import useGetList from './hooks/useGetList';
-import TagsFilter from './pages-component/TagsFilter';
-import SearchFilters from './pages-component/TagsFilter/search';
+import Filters from './pages-component/Filter';
+import SearchFilters from './pages-component/Filter/Search/search';
 import AirTracking from './pages-component/Tracking/AirTracking';
 import OceanTracking from './pages-component/Tracking/OceanTracking';
 import TruckTracking from './pages-component/Tracking/TruckTracking';
@@ -48,7 +48,7 @@ function TrackingJob() {
 							theme="light"
 							interactive
 							content={(
-								<TagsFilter
+								<Filters
 									activeTab={activeTab}
 									filters={filters}
 									setFilters={setFilters}

@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function Form({ handleSubmitForm = () => {} }, ref) {
 	const { control, handleSubmit, formState:{ errors = {} } } = useForm();
-	const onSubmit = (values) => { handleSubmitForm({ values }); console.log('errors', errors); };
+	const onSubmit = (values) => handleSubmitForm({ values });
 	useImperativeHandle(ref, () => ({
 		formSubmit() {
 			handleSubmit(onSubmit)();

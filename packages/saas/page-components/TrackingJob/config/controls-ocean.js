@@ -2,12 +2,12 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const formControls = ({ showUpdate }) => [
 	{
-		name        : 'containers',
-		type        : 'doubleNestedFieldArray',
-		showButtons : true,
-		buttonText  : 'Add Container',
-		value       : {},
-		controls    : [
+		name          : 'containers',
+		type          : 'doubleNestedFieldArray',
+		showButtons   : true,
+		addButtonText : 'Add Container',
+		value         : {},
+		controls      : [
 			{
 				name        : 'container_no',
 				type        : 'text',
@@ -19,13 +19,13 @@ const formControls = ({ showUpdate }) => [
 				disabled    : showUpdate?.data?.search_type === 'CONTAINER_NO',
 			},
 			{
-				name        : 'locations',
-				type        : 'nestedFieldArray',
-				showButtons : true,
-				buttonText  : 'Add Milestones',
-				value       : {},
-				span        : 12,
-				controls    : [
+				name          : 'locations',
+				type          : 'nestedFieldArray',
+				showButtons   : true,
+				addButtonText : 'Add Location',
+				value         : {},
+				span          : 12,
+				controls      : [
 					{
 						name        : 'location_id',
 						type        : 'async_select',
@@ -39,7 +39,7 @@ const formControls = ({ showUpdate }) => [
 						name               : 'margin_values',
 						label              : 'Mile Stone',
 						type               : 'fieldArray',
-						buttonText         : 'Add Field',
+						addButtonText      : 'Add MileStone',
 						noDeleteButtonTill : 1,
 						controls           : [
 							{
