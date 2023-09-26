@@ -18,7 +18,7 @@ function DynamicGraph({ globalFilters = {} }) {
 
 	return (
 		<>
-			{graphsList.map(({ title = 'rate_lifecycle', graph }) => (
+			{!loading && graphsList.map(({ title = 'rate_lifecycle', graph }) => (
 				<GraphLayout
 					key={graph}
 					graph={graph}
@@ -28,7 +28,7 @@ function DynamicGraph({ globalFilters = {} }) {
 				/>
 			))}
 			{loading
-				? [...Array(PLACEHOLDER_LENGTH).keys()].map((key) => (
+				&& [...Array(PLACEHOLDER_LENGTH).keys()].map((key) => (
 					<Placeholder
 						key={key}
 						className={styles.graph_placeholder}
@@ -36,8 +36,7 @@ function DynamicGraph({ globalFilters = {} }) {
 						height="400px"
 						margin="24px 0"
 					/>
-				))
-				: null}
+				))}
 		</>
 	);
 }
