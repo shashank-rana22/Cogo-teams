@@ -5,7 +5,7 @@ import { useState } from 'react';
 import RaiseTicketModal from './RaiseTicketModal';
 import RenderContent from './RenderContent';
 
-function RenderActionButton() {
+function RenderActionButton({ itemData = {} }) {
 	const [showPopover, setShowPopover] = useState(false);
 	const [showTicketModal, setShowTicketModal] = useState(false);
 	return (
@@ -26,7 +26,11 @@ function RenderActionButton() {
 				/>
 			</Popover>
 			{showTicketModal ? (
-				<RaiseTicketModal showTicketModal={showTicketModal} setShowTicketModal={setShowTicketModal} />
+				<RaiseTicketModal
+					showTicketModal={showTicketModal}
+					setShowTicketModal={setShowTicketModal}
+					itemData={itemData}
+				/>
 			) : null}
 
 		</>
