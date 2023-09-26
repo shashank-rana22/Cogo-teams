@@ -21,8 +21,8 @@ const useGetBillStatusStats = (date) => {
 			async () => {
 				const startDate = subtractDays(date, NUMBER_OF_DAYS);
 				const 	payload = {
-					startDate : format(startDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']),
-					endDate   : format(date, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']),
+					fromDate : format(startDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']),
+					toDate   : format(date, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']),
 				};
 
 				try {

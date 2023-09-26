@@ -10,6 +10,13 @@
 	height: 420px;
 	background: var(--color-secondary-5);
 	border-radius: 8px;
+
+	:global {
+		.react-datepicker__close-icon {
+			top: 4px;
+			height: 0;
+		}
+	}
 }
 
 .container {

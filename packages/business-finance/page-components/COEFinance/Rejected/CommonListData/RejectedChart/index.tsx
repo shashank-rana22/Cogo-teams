@@ -10,10 +10,12 @@ import useGetCommentRemarkCounts from '../../../hook/useGetCommentRemarkCounts';
 
 import styles from './styles.module.css';
 
-function RejectedCharts() {
+function RejectedCharts({ subActiveTabReject = '' }) {
 	const [date, setDate] = useState(new Date());
 
-	const { pieData = [], getData = () => {} } = useGetCommentRemarkCounts();
+	const [remarkDate, setRemarkDate] = useState(null);
+
+	const { pieData = [], getData = () => {} } = useGetCommentRemarkCounts(remarkDate);
 
 	const { data = [] } = useGetBillStatusStats(date);
 
@@ -31,7 +33,7 @@ function RejectedCharts() {
 	useEffect(() => {
 		getData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [remarkDate]);
 
 	return (
 		<div className={styles.container}>
@@ -80,7 +82,13 @@ function RejectedCharts() {
 			</div>
 			<div className={styles.responsive_pie}>
 
-				<MyResponsivePie data={pieData} title="Rejection Reason" />
+				<MyResponsivePie
+					data={pieData}
+					title="Rejection Reason"
+					subActiveTabReject={subActiveTabReject}
+					remarkDate={remarkDate}
+					setRemarkDate={setRemarkDate}
+				/>
 			</div>
 		</div>
 	);
