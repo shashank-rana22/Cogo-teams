@@ -7,11 +7,13 @@ import useUpdateCheckout from '../hooks/useUpdateCheckout';
 import AirCheckout from './AirCheckout';
 import FclCheckout from './FclCheckout';
 import FtlCheckout from './FtlCheckout';
+import LtlCheckout from './LtlCheckout';
 
 const MAPPING = {
 	fcl_freight : FclCheckout,
 	air_freight : AirCheckout,
 	ftl_freight : FtlCheckout,
+	ltl_freight : LtlCheckout,
 };
 
 const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {

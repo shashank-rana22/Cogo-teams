@@ -141,7 +141,7 @@ function BreakdownDetailsHeader({
 		let percent = (finalMargin / totalPrice) * MAX_PERCENT;
 		percent = parseFloat(percent).toFixed(ROUND_OFF_VALUE);
 
-		setProfitPercent(percent);
+		setProfitPercent(totalPrice ? percent : DEFAULT_VALUE);
 		setLatestDemandMargin(parseFloat(finalMargin).toFixed(ROUND_OFF_VALUE));
 	}, [
 		buyPrice,

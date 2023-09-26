@@ -7,6 +7,7 @@ import ExtraHeader from './common/ExtraHeader';
 import FCLHeader from './FCLHeader';
 import FTLHeader from './FTLHeader';
 import LCLHeader from './LCLHeader';
+import LTLHeader from './LTLHeader';
 import styles from './styles.module.css';
 
 const HEADER_COMPONENT_MAPPING = {
@@ -14,6 +15,7 @@ const HEADER_COMPONENT_MAPPING = {
 	air_freight : AIRHeader,
 	lcl_freight : LCLHeader,
 	ftl_freight : FTLHeader,
+	ltl_freight : LTLHeader,
 };
 
 function Header(props = {}) {

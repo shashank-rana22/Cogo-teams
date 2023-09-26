@@ -76,13 +76,16 @@ function ProfitOutlook({
 
 			<div className={styles.amount}>{toalProfitDisplay}</div>
 
-			<div style={{ marginRight: '12px' }}>
-				(
-				{profitPercent}
-				% )
-			</div>
+			{profitPercent ? (
+				<>
+					(
+					{profitPercent}
+					% )
+				</>
+			) : null}
 
 			<Tags
+				style={{ marginLeft: '12px' }}
 				items={[
 					{
 						key      : 'margin',
