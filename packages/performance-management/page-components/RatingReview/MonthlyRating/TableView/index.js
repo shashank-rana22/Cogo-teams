@@ -1,8 +1,8 @@
-import { Input, Select, Table, Button, Pagination } from '@cogoport/components';
+import { Input, Select, Table, Button, Pagination, Modal } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMAppSearch, IcMArrowRotateRight } from '@cogoport/icons-react';
+import { IcMAppSearch, IcMArrowRotateRight, IcMError } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -33,13 +33,21 @@ function TableView({
 	setLocation = () => {},
 	department = '',
 	setDepartment = () => {},
+	props = '',
+	showUnrated = false,
+	setShowUnrated = () => {},
+	refetch = () => {},
 }) {
 	const {
 		rating,
 		setRating,
 		feedback,
 		setFeedback,
-	} = useTableView();
+		showModal,
+		setShowModal,
+		onSubmitFinalRating,
+		updateApiLoading,
+	} = useTableView({ props, list, refetch });
 
 	const columns = getColumns({
 		rating,
@@ -48,7 +56,7 @@ function TableView({
 		setFeedback,
 	});
 
-	const { page_limit, total_count } = paginationData || {};
+	const { page_limit, total_count, total_unrated_employees } = paginationData || {};
 
 	if (!loading && isEmpty(list)) return null;
 
@@ -104,11 +112,19 @@ function TableView({
 
 			<div className={styles.bottom_banner}>
 				<div className={styles.banner_text}>
-					12 Employees have not been rated
-					<div className={styles.link_text}>Show unrated employees</div>
+					{showUnrated
+						? 'Showing unrated employees.'
+						: `${total_unrated_employees} Employees have not been rated.`}
+					<div
+						role="presentation"
+						className={styles.link_text}
+						onClick={() => setShowUnrated((pv) => !pv)}
+					>
+						{!showUnrated ? 'Show unrated employees' : 'Remove filter'}
+					</div>
 				</div>
 
-				<Button>
+				<Button onClick={() => setShowModal(true)}>
 					Send Ratings
 					<IcMArrowRotateRight
 						height="16px"
@@ -117,6 +133,43 @@ function TableView({
 					/>
 				</Button>
 			</div>
+
+			<Modal
+				show={showModal}
+				size="sm"
+				placement="center"
+				onClose={() => setShowModal(false)}
+			>
+				<Modal.Body>
+					<div className={styles.icon_container}>
+						<IcMError width="40px" height="40px" color="#C26D1A" />
+					</div>
+					<div className={styles.modal_text}>
+						Ratings once sent can not be edited. Are you sure you want to proceed?
+					</div>
+				</Modal.Body>
+
+				<Modal.Footer>
+					<div className={styles.button_container}>
+						<Button
+							themeType="secondary"
+							onClick={() => setShowModal(false)}
+							style={{ marginRight: 8 }}
+							disabled={updateApiLoading}
+						>
+							Cancel
+						</Button>
+
+						<Button
+							themeType="accent"
+							onClick={onSubmitFinalRating}
+							disabled={updateApiLoading}
+						>
+							Yes, Proceed
+						</Button>
+					</div>
+				</Modal.Footer>
+			</Modal>
 		</div>
 	);
 }

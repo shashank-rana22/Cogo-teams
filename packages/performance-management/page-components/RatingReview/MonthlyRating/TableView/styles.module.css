@@ -75,7 +75,7 @@
 }
 
 .link_text {
-	margin-left: 12px;
+	margin-left: 4px;
 	color: #034afd;
 	text-decoration-line: underline;
 	text-transform: capitalize;
@@ -98,4 +98,21 @@
 	margin: 0 8px;
 	background: #d9d9d9;
 	border-radius: 50%;
+}
+
+.button_container {
+	display: flex;
+}
+
+.icon_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 12px 0 18px;
+}
+
+.modal_text {
+	font-weight: 700;
+	color: #221f20;
+	text-align: center;
 }

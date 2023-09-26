@@ -20,7 +20,10 @@ function MonthlyRating({ props = {} }) {
 		setLocation,
 		department,
 		setDepartment,
-	} = useMonthlyRating({ level: props?.level });
+		showUnrated,
+		setShowUnrated,
+		refetch,
+	} = useMonthlyRating({ props });
 
 	const { team_rating = 0 } = paginationData || {};
 
@@ -72,6 +75,10 @@ function MonthlyRating({ props = {} }) {
 					setLocation={setLocation}
 					department={department}
 					setDepartment={setDepartment}
+					props={props}
+					showUnrated={showUnrated}
+					setShowUnrated={setShowUnrated}
+					refetch={refetch}
 				/>
 			</div>
 		</div>
