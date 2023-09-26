@@ -6,7 +6,7 @@ import { dateFormatter } from '../helpers';
 
 const getPaidListPayload = ({
 	pageIndex, pageSize, activePayrunTab, query, billStatus, paymentStatusList,
-	selectFromDate, selectToDate, cogoBankId,
+	selectFromDate, selectToDate, cogoBankId, activeEntity = '',
 }) => ({
 	pageIndex,
 	pageSize,
@@ -17,10 +17,14 @@ const getPaidListPayload = ({
 	startDate         : selectFromDate || undefined,
 	endDate           : selectToDate || undefined,
 	cogoBankId        : cogoBankId || undefined,
+	cogoEntity        : activeEntity,
 });
 
 const useGetPaidList = ({ activePayrunTab, query, globalFilters }) => {
-	const { paymentStatusList, billStatus, pageIndex, pageSize, selectDate, cogoBankId } = globalFilters || {};
+	const {
+		paymentStatusList,
+		billStatus, pageIndex, pageSize, selectDate, cogoBankId, activeEntity = '',
+	} = globalFilters || {};
 
 	const [{ data, loading }, paidTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill/list-paid-bill',
@@ -41,6 +45,7 @@ const useGetPaidList = ({ activePayrunTab, query, globalFilters }) => {
 			selectFromDate,
 			selectToDate,
 			cogoBankId,
+			activeEntity,
 		});
 
 		try {
@@ -51,7 +56,7 @@ const useGetPaidList = ({ activePayrunTab, query, globalFilters }) => {
 			Toast.error(error.message || 'Somthing went wrong');
 		}
 	}, [activePayrunTab, billStatus, cogoBankId, pageIndex, pageSize, paidTrigger,
-		paymentStatusList, query, selectFromDate, selectToDate]);
+		paymentStatusList, query, selectFromDate, selectToDate, activeEntity]);
 
 	return {
 		paidDataList    : data,

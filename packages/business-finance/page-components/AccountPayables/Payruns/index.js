@@ -35,6 +35,7 @@ function Payruns({ activeEntity = '' }) {
 		setOverseasData,
 		setViewId,
 		setCheckedRow,
+		activeEntity,
 	});
 
 	const { functions } = renderFunctions(
