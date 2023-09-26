@@ -651,8 +651,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		margin: {
 			key           : 'margin',
 			title         : t('common:margin_management'),
-			href          : '/v2/margins',
-			as            : '/v2/margins',
+			href          : '/margins',
+			as            : '/margins',
 			type          : 'link',
 			possible_apis : apis.margin,
 			icon          : IcMMarginManagement,
@@ -716,8 +716,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		organization_service_management: {
 			key           : 'organization_service_management',
 			title         : t('common:service_management'),
-			href          : '/v2/service-management',
-			as            : '/v2/service-management',
+			href          : '/service-management',
+			as            : '/service-management',
 			type          : 'link',
 			possible_apis : apis.organization_service_management,
 			icon          : IcMMarginManagement,
