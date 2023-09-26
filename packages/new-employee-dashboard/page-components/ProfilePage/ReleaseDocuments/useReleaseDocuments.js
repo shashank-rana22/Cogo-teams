@@ -26,7 +26,7 @@ const useReleaseDocuments = ({
 	getEmployeeDetails,
 }) => {
 	const profile = useSelector((state) => state.profile);
-	const defaultEditorValue = RichTextEditor?.createValueFromString((profile?.additional_clause?.[profileData.detail.id] || ''), 'html');
+	const defaultEditorValue = RichTextEditor?.createValueFromString((profile?.additional_clause?.[profileData?.detail?.id] || ''), 'html');
 
 	const [editorValue, setEditorValue] = useState(defaultEditorValue || RichTextEditor.createEmptyValue());
 	const [selectedItems, setSelectedItems] = useState([]);
