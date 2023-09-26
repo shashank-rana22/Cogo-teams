@@ -21,6 +21,7 @@ function RadioSelectPayrun({
 		<div>
 			<Radio
 				name="selectRadio"
+				disabled={itemData?.type === 'OVERSEAS'}
 				checked={checkedRow?.id === id}
 				onChange={handleRadioChange}
 			/>

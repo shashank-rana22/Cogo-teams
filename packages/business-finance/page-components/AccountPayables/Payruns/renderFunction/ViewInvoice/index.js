@@ -1,8 +1,11 @@
 import { Button } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import useGetPermission from '@cogoport/request/hooks/useGetPermission';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
+
+import CC from '../../utils/conditionConstants';
 
 import styles from './styles.module.css';
 
@@ -10,6 +13,12 @@ function ViewInvoices({
 	itemData = {}, setSelectedPayrun = () => {},
 	selectedPayrun = {},
 }) {
+	const { isConditionMatches } = useGetPermission();
+
+	const isCreatePayrunAllowed = isConditionMatches(
+		CC.SEE_CREATE_PAYRUN_ALLOWED,
+	);
+
 	const { push } = useRouter();
 
 	const handleClick = () => {
@@ -35,7 +44,7 @@ function ViewInvoices({
 		}
 	};
 
-	if (itemData?.state === 'DRAFT') {
+	if (itemData?.state === 'DRAFT' && isCreatePayrunAllowed) {
 		return (
 			<div>
 				<Button
