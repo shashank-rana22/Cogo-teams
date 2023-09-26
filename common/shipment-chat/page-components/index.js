@@ -13,13 +13,11 @@ import styles from './styles.module.css';
 const INITIAL_MSG_COUNT = 0;
 
 const CONTAINER_STYLES_MAPPING = {
-	'coe-booking_note_desk'        : styles.chat_container_booking_desk,
-	'coe-kam_desk'                 : styles.chat_container_kam_desk,
-	'coe-cost_booking_desk'        : styles.chat_container_cost_booking_desk,
-	'coe-document_desk'            : styles.chat_container_document_desk,
-	'coe-last_mile'                : styles.chat_container_last_mile_desk,
-	'coe-bl_do_collection_release' : styles.chat_container_bl_do_collection,
-	ground_ops                     : styles.chat_container_ground_ops,
+	'coe-booking_note_desk' : styles.chat_container_booking_desk,
+	'coe-kam_desk'          : styles.chat_container_kam_desk,
+	'coe-cost_booking_desk' : styles.chat_container_cost_booking_desk,
+	'coe-document_desk'     : styles.chat_container_document_desk,
+	'coe-last_mile'         : styles.chat_container_last_mile_desk,
 };
 
 function ShipmentChat({ setMessagesCount = () => { } }) {
@@ -31,7 +29,6 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 	const { id: user_id = '' } = user || {};
 
 	const current_navigation = routeConfig?.[pathname]?.navigation || '';
-	console.log(current_navigation, 'navigation');
 
 	const [show, setShow] = useState(false);
 	const [seenLoading, setSeenLoading] = useState(false);

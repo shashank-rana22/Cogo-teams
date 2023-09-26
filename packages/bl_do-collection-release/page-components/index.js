@@ -65,9 +65,8 @@ export default function BLDoCollectionDesk() {
 						onChange={handleVersionChange}
 					/>
 				</div>
-				<div>
-					<ShipmentChat />
-				</div>
+
+				<ShipmentChat />
 
 			</div>
 			<Tabs
