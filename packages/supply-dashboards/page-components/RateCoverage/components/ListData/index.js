@@ -7,6 +7,7 @@ import { CARDS_MAPPING, HEADINGS } from '../../configurations/helpers/constants'
 import Card from '../TasksOverview/OverviewContent/Card';
 
 import ListCard from './ListCard';
+import LiveBookingsListCard from './LiveBookingsListCard';
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
@@ -85,38 +86,43 @@ function ListData({
 						style={{ marginTop: '10px' }}
 					/>
 				))}
-				{(!isEmpty(list) && !listLoading) && (
-					<>
-						{(list || []).map((list_data) => (
-							<ListCard
-								data={list_data}
-								key={list_data?.id}
-								getListCoverage={getListCoverage}
-								filter={filter}
-								getStats={getStats}
-								source={source}
+				{source === 'live_bookings' ? <LiveBookingsListCard />
+					: (
+						<div>
+							{(!isEmpty(list) && !listLoading) && (
+								<>
+									{(list || []).map((list_data) => (
+										<ListCard
+											data={list_data}
+											key={list_data?.id}
+											getListCoverage={getListCoverage}
+											filter={filter}
+											getStats={getStats}
+											source={source}
+										/>
+									))}
+									<div className={styles.pagination}>
+										<Pagination
+											type="table"
+											currentPage={page}
+											totalItems={dynamic_statistics[source] || statistics[filter?.status]}
+											pageSize={10}
+											onPageChange={(pageNumber) => { setPage(pageNumber); }}
+										/>
+									</div>
+								</>
+							)}
+							{(isEmpty(list) && !listLoading)
+						&& (
+							<EmptyState
+								height={220}
+								width={380}
+								flexDirection="column"
+								textSize="20px"
 							/>
-						))}
-						<div className={styles.pagination}>
-							<Pagination
-								type="table"
-								currentPage={page}
-								totalItems={dynamic_statistics[source] || statistics[filter?.status]}
-								pageSize={10}
-								onPageChange={(pageNumber) => { setPage(pageNumber); }}
-							/>
+						)}
 						</div>
-					</>
-				)}
-				{(isEmpty(list) && !listLoading)
-				&& (
-					<EmptyState
-						height={220}
-						width={380}
-						flexDirection="column"
-						textSize="20px"
-					/>
-				)}
+					)}
 			</div>
 		</div>
 	);

@@ -33,9 +33,7 @@ function CircularProgressBar({
 				r={radius}
 				strokeWidth={`${strokeWidth}px`}
 				transform={`rotate(-90 ${sqSize / VALUE_TWO} ${sqSize / VALUE_TWO})`}
-				style={{
-					strokeDasharray: dashArray, strokeDashoffset: dashOffset,
-				}}
+				style={{ strokeDasharray: dashArray, strokeDashoffset: dashOffset }}
 			/>
 			<text
 				className={styles.circle_text}

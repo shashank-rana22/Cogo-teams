@@ -70,10 +70,10 @@ function RateCoverageContent() {
 					{' '}
 					{user_name}
 				</span>
-				{!filter?.releventToMeValue
+				<div className={styles.filter_container}>
+					{!filter?.releventToMeValue
 					&& (
 						<Select
-							className={styles.assigned_input}
 							size="sm"
 							placeholder="Select"
 							value={filter?.assign_to_id}
@@ -81,26 +81,24 @@ function RateCoverageContent() {
 							onChange={(val) => setFilter((prev) => ({
 								...prev, assign_to_id: val, user_id: getUserId(val),
 							}))}
+							style={{ width: '200px' }}
+							isClearable
 						/>
 					)}
-				<div className={styles.filter_container}>
 					<Toggle
-						name="a4"
 						size="md"
-						className={styles.relevent_toggle}
-						disabled={false}
 						checked={!filter?.releventToMeValue}
 						onLabel="Relevant to all"
 						offLabel="Relevant to me"
 						onChange={handleToggle}
 					/>
 					<Button
-						themeType="none"
-						className={styles.filter_button}
+						themeType="secondary"
 						onClick={() => { setShowFilters((prev) => !prev); }}
+						style={{ width: '100px' }}
 					>
-						<IcMFilter />
-						Filter
+						<IcMFilter style={{ marginRight: '6px', width: 'auto', height: '16px' }} />
+						<span className={styles.filter_text}> Filter </span>
 					</Button>
 				</div>
 			</div>

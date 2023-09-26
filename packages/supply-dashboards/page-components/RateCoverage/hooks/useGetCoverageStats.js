@@ -77,7 +77,7 @@ const useGetCoverageStats = (filter) => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	}, [trigger, user_id, filter]);
 

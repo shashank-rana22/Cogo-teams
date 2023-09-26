@@ -1,4 +1,4 @@
-import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMArrowLeft } from '@cogoport/icons-react';
 import React from 'react';
 
 import OverviewContent from './OverviewContent';
@@ -36,9 +36,6 @@ function TasksOverview({
 							setSource={setSource}
 						/>
 					)}
-			</div>
-			<div className={styles.swipe_button}>
-				<IcMArrowRight onClick={handleClick} />
 			</div>
 		</div>
 	);

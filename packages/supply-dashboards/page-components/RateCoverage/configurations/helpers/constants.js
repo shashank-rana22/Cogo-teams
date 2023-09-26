@@ -14,14 +14,24 @@ export const WEEKLY_BACKLOG = {
 };
 
 export const CARDS_MAPPING = {
+	live_bookings: {
+		title        : 'Live Bookings',
+		status       : 'live_bookings',
+		showViewMore : true,
+	},
+	disliked_rates: {
+		title        : 'Disliked Rates',
+		status       : 'disliked_rates',
+		showViewMore : true,
+	},
+	missing_rates: {
+		title        : 'Missing Rates',
+		status       : 'missing_rates',
+		showViewMore : true,
+	},
 	critical_ports: {
 		title        : 'Critical Port Pairs',
 		status       : 'critical_ports',
-		showViewMore : true,
-	},
-	expiring_rates: {
-		title        : 'Expiring Rates',
-		status       : 'expiring_rates',
 		showViewMore : true,
 	},
 	spot_search: {
@@ -29,11 +39,6 @@ export const CARDS_MAPPING = {
 		status       : 'spot_search',
 		showViewMore : true,
 	},
-	// monitoring_dashboard: {
-	// 	title        : 'Monitoring Dashboard',
-	// 	status       : 'monitoring_dashboard',		//may introduced in future
-	// 	showViewMore : true,
-	// },
 	cancelled_shipments: {
 		title        : 'Cancelled Shipment',
 		status       : 'cancelled_shipments',
@@ -58,6 +63,14 @@ export const serviceOptions = [
 	{
 		label : 'AIR Freight',
 		value : 'air_freight',
+	},
+	{
+		label : 'Haulage',
+		value : 'haulage_freight',
+	},
+	{
+		label : 'FCL Customs',
+		value : 'fcl_customs',
 	},
 ];
 
