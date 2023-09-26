@@ -55,6 +55,7 @@ function TableView({
 		setRating,
 		feedback,
 		setFeedback,
+		props,
 	});
 
 	const { page_limit, total_count, total_unrated_employees } = paginationData || {};
@@ -94,9 +95,9 @@ function TableView({
 			</div>
 
 			<div className={styles.table_container}>
-				{!isEmpty(list)
-					? <Table columns={columns} data={list} loading={loading} />
-					: <EmptyState />}
+				{isEmpty(list) && !loading
+					? <EmptyState />
+					: <Table columns={columns} data={list} loading={loading} />}
 
 				{total_count > page_limit ? (
 					<div style={{ display: 'flex' }}>
