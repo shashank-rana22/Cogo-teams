@@ -34,9 +34,13 @@ const invoicePaymentList = ({
 		Header   : 'Payment Number',
 		id       : 'name',
 		accessor : (row) => (
-
 			<div>
-				{getByKey(row, 'paymentNumber') as string}
+				<div>
+					{getByKey(row, 'paymentNumber') as string}
+				</div>
+				<Pill size="sm" className={row?.signFlag === 1 ? styles.debit : styles.credit}>
+					{row?.signFlag === 1 ? 'DEBIT' : 'CREDIT'}
+				</Pill>
 			</div>
 
 		),
@@ -47,7 +51,7 @@ const invoicePaymentList = ({
 		id       : 'sageRefNumber',
 		accessor : (row) => (
 			<div>
-				{row?.sageRefNumber}
+				{row?.sageRefNumber || '-'}
 			</div>
 
 		),

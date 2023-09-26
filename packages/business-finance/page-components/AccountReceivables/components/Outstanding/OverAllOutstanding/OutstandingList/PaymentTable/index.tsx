@@ -1,4 +1,4 @@
-import { Pagination, Input, MultiSelect } from '@cogoport/components';
+import { Pagination, Input, MultiSelect, cl } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -13,7 +13,7 @@ interface Props {
 	organizationId: string,
 	entityCode?: string
 }
-
+const STATUS_FILTER_MAX_LEN = 3;
 function PaymentTable({ organizationId = '', entityCode = '' }: Props) {
 	const {
 		paymentList,
@@ -47,10 +47,13 @@ function PaymentTable({ organizationId = '', entityCode = '' }: Props) {
 	});
 
 	const filterTableColumns = tableColumns.filter((item) => entityCode !== '501' || item.id !== 'sageRefNumber');
-
 	return (
 		<div>
-			<div className={styles.filter_wrap}>
+			<div className={cl`
+				${styles.filter_wrap} 
+				${paymentFilters?.statusList?.length === STATUS_FILTER_MAX_LEN ? styles.empty : null} 
+			`}
+			>
 				<MultiSelect
 					placeholder="Select Status"
 					value={paymentFilters.statusList}
