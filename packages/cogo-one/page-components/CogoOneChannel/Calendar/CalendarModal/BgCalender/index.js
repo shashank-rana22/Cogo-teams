@@ -147,9 +147,9 @@ function BgCalender() {
 		},
 	];
 
-	function EventDetails({ event = {} }) {
-		return <CustomCard event={event} />;
-	}
+	// function EventDetails({ event = {} }) {
+	// 	return <CustomCard event={event} />;
+	// }
 
 	const [selectedDate, setSelectedDate] = useState(null);
 	console.log('selectedDate:', selectedDate);
@@ -163,21 +163,48 @@ function BgCalender() {
 		setSelectedDate(slotInfo.start); // Set the selected date
 	};
 
+	const customDayProp = (date) => {
+		if (moment(date).isSame(selectedDate, 'day')) {
+			return {
+				className: 'selected-date',
+			};
+		}
+		return {};
+	};
+
+	const defaultDate = moment('2023-09-01');
+
 	return (
+
 		<div className={styles.container}>
+
 			<Calendar
+				// localizer={localizer}
+				// events={myEventsList}
+				// startAccessor="start"
+				// endAccessor="end"
+				// style={{ height: 640, width: 630 }}
+				// components={{
+				// 	event: EventDetails,
+				// }}
+				// onSelectEvent={handleEventClick} // Handle event click, if needed
+				// onSelectSlot={handleSelectSlot} // Handle slot selection (date click)
+				// selectable // Enables selecting slots (dates)
+				// selected={new Date('Wed Sep 20 2023 00:00:00 GMT+0530 (India Standard Time)')}
 				localizer={localizer}
 				events={myEventsList}
 				startAccessor="start"
 				endAccessor="end"
 				style={{ height: 640, width: 630 }}
 				components={{
-					event: EventDetails,
+					event: CustomCard,
 				}}
-				onSelectEvent={handleEventClick} // Handle event click, if needed
-				onSelectSlot={handleSelectSlot} // Handle slot selection (date click)
-				selectable // Enables selecting slots (dates)
-				selected={selectedDate} // Highlight the selected date
+				onSelectEvent={handleEventClick}
+				onSelectSlot={handleSelectSlot}
+				selectable
+				selected={selectedDate}
+				eventPropGetter={customDayProp}
+				defaultDate={defaultDate}
 			/>
 		</div>
 	);

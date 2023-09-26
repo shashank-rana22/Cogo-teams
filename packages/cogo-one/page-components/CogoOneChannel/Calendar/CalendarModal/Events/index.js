@@ -10,7 +10,7 @@ import UserEvents from './UserEvents';
 
 const date = formatDate({
 	date       : new Date(),
-	dateFormat : GLOBAL_CONSTANTS.formats.date['MMM dd yyyy'],
+	dateFormat : GLOBAL_CONSTANTS.formats.date['MMMM dd, YYYY'],
 	formatType : 'date',
 	separator  : ',',
 });

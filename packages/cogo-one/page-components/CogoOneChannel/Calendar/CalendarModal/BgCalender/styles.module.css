@@ -43,3 +43,9 @@
 		}
 	}
 }
+
+.selected-event {
+	color: #000; /* Customize the text color */
+	background-color: #ffcccb; /* Customize the background color */
+	border: 2px solid #f00; /* Customize the border */
+}
