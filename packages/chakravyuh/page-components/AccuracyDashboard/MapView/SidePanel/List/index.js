@@ -9,8 +9,9 @@ import styles from '../styles.module.css';
 import EmptyState from './EmptyState';
 
 const HOVER_DELAY = 300;
+const DECIMAL = 2;
 
-function List({ loading = false, finalList = [], setActiveId = () => {}, originName = '' }) {
+function List({ loading = false, finalList = [], setActiveId = () => {}, originName = '', filterBy = '' }) {
 	const [hoverTimer, setHoverTimer] = useState(null);
 
 	const handleMouseOver = (destination_id) => {
@@ -63,7 +64,12 @@ function List({ loading = false, finalList = [], setActiveId = () => {}, originN
 								content={<span>{count}</span>}
 								placement="bottom"
 							>
-								<h4>{formatBigNumbers(count)}</h4>
+								<h4>
+									{filterBy.includes('accuracy')
+										? count.toFixed(DECIMAL)
+										: formatBigNumbers(count)}
+
+								</h4>
 							</Tooltip>
 						</div>
 					</button>

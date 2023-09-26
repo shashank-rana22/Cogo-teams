@@ -121,6 +121,7 @@ function SidePanel({
 							loading={accuracyLoading}
 							finalList={activeList}
 							originName={originName}
+							filterBy={filterBy}
 						/>
 					</InfiniteScroll>
 					{!hasMore && !isEmpty(activeList) && !accuracyLoading && (
