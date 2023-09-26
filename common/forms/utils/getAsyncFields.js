@@ -698,6 +698,7 @@ function asyncListRoles() {
 		},
 	};
 }
+
 function asyncListDepartment() {
 	return {
 		labelKey    : 'department_name',
@@ -1009,6 +1010,21 @@ function asyncListOverSeasTradeParties() {
 	};
 }
 
+function asyncListAdminRole() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_roles',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: true,
+			},
+			page_limit: 200,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1091,4 +1107,5 @@ export {
 	asyncListFclFreightCommodityClusters,
 	asyncListSpotSearchRateCardOperators,
 	asyncListOverSeasTradeParties,
+	asyncListAdminRole,
 };

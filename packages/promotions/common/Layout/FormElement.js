@@ -14,7 +14,9 @@ const InputController = dynamic(
 	{ ssr: false },
 );
 const DateRangePickerController = dynamic(
-	() => import('@cogoport/forms').then((module) => module.DateRangePickerController),
+	() => import('@cogoport/forms').then(
+		(module) => module.DateRangePickerController,
+	),
 	{ ssr: false },
 );
 

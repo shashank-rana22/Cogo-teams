@@ -1,0 +1,14 @@
+.table_heading {
+	font-size: 12px;
+	font-weight: 600;
+	color: #303b67;
+}
+
+.promo_budget_details_table_heading {
+	min-width: 150px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 18px;
+	color: #303b67;
+	text-align: left;
+}

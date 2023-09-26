@@ -1,0 +1,33 @@
+.header {
+	display: flex;
+	align-items: baseline;
+	font-size: 20px;
+	font-weight: 500;
+	color: #393f70;
+}
+
+.users {
+	margin-left: 6px;
+	font-size: 20px;
+	font-weight: 500;
+	color: #5936f0;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: end;
+	padding-bottom: 16px;
+	background: #fff;
+}
+
+.top_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 8px 16px 16px 8px;
+}
+
+.input_cont .core-ui-select__control {
+	width: 270px;
+}

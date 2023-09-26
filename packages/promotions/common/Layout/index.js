@@ -5,7 +5,13 @@ import FormElement from './FormElement';
 import getWidthPercent from './getWidthPercent';
 import styles from './styles.module.css';
 
-function Layout({ controls = [], control = {}, errors = {}, showElements = {}, formValues = {} }) {
+function Layout({
+	controls = [],
+	control = {},
+	errors = {},
+	showElements = {},
+	formValues = {},
+}) {
 	const finalControls = controls.filter((c) => {
 		if (c.name in showElements) {
 			return showElements[c.name];
@@ -31,7 +37,6 @@ function Layout({ controls = [], control = {}, errors = {}, showElements = {}, f
 				}
 
 				const width = getWidthPercent(span);
-
 				return (
 					<div
 						key={restCtrl.name}
@@ -40,17 +45,23 @@ function Layout({ controls = [], control = {}, errors = {}, showElements = {}, f
 					>
 						{label ? (
 							<div
-								className={cl`${styles.label} ${removeLabelMargin ? styles.removeLabelMargin : ''}`}
+								className={cl`${styles.label} ${
+									removeLabelMargin ? styles.removeLabelMargin : ''
+								}`}
 							>
 								{label}
 							</div>
 						) : null}
 
-						{type ? <FormElement control={control} {...restCtrl} type={type} /> : null}
+						{type ? (
+							<FormElement control={control} {...restCtrl} type={type} />
+						) : null}
 
-						{errors?.[restCtrl.name]
-							? <div className={styles.errors}>{errors[restCtrl.name]?.message}</div>
-							: null}
+						{errors?.[restCtrl.name] ? (
+							<div className={styles.errors}>
+								{errors[restCtrl.name]?.message}
+							</div>
+						) : null}
 					</div>
 				);
 			})}

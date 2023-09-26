@@ -1,0 +1,23 @@
+.styled_text {
+	font-size: 16px;
+	font-weight: 400;
+	text-align: center;
+}
+
+.styled_flex {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 40px 10px 5px;
+}
+
+.button_flex {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	margin-top: 30px;
+}
+
+.button_flex .space-left {
+	margin-left: 8px;
+}

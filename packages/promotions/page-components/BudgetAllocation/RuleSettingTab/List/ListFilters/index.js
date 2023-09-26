@@ -41,11 +41,7 @@ function ListFilters({
 	}, [activeService, onClickReset]);
 	return (
 		<div className={styles.container}>
-			<Layout
-				controls={controls}
-				control={control}
-				errors={errors}
-			/>
+			<Layout controls={controls} control={control} errors={errors} />
 			<div className={styles.btn_container}>
 				<Button
 					themeType="secondary"

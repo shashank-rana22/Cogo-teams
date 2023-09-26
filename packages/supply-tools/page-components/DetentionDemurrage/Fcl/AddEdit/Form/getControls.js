@@ -97,7 +97,6 @@ const getControls = ({ item = {} }) => [
 			sort_by    : 'short_name',
 			sort_type  : 'asc',
 			filters    : { operator_type: 'shipping_line', status: 'active' },
-
 		},
 	},
 	{
@@ -205,7 +204,7 @@ const getControls = ({ item = {} }) => [
 	{
 		name  : 'validity',
 		type  : 'date_range_picker',
-		value : (item?.validity_start && item?.validity_end)
+		value :	item?.validity_start && item?.validity_end
 			? { startDate: new Date(item?.validity_start), endDate: new Date(item?.validity_end) } : {},
 		span        : 8,
 		placeholder : 'Select Validity Range',
@@ -260,8 +259,9 @@ const getControls = ({ item = {} }) => [
 		name               : 'demurrage',
 		buttonText         : 'Add Slab',
 		noDeleteButtonTill : 0,
-		value              : item?.free_days_type === 'demurrage' ? item?.slabs : [{ lower_limit: '' }],
-		controls           : fieldArrayField,
+		value:
+      item?.free_days_type === 'demurrage' ? item?.slabs : [{ lower_limit: '' }],
+		controls: fieldArrayField,
 	},
 	{
 		label : 'Detention',
@@ -274,8 +274,9 @@ const getControls = ({ item = {} }) => [
 		showButtons        : true,
 		buttonText         : 'Add Slab',
 		noDeleteButtonTill : 0,
-		value              : item?.free_days_type === 'detention' ? item?.slabs : [{ lower_limit: '' }],
-		controls           : fieldArrayField,
+		value:
+      item?.free_days_type === 'detention' ? item?.slabs : [{ lower_limit: '' }],
+		controls: fieldArrayField,
 	},
 ];
 
