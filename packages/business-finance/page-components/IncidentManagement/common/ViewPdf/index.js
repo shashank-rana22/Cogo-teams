@@ -6,8 +6,7 @@ import styles from './styles.module.css';
 
 const FIRST = 1;
 
-function ViewPdf({ row = {} }) {
-	const docUrl = row?.data?.jobOpenRequest?.documentUrls?.[GLOBAL_CONSTANTS.zeroth_index] || '';
+function ViewPdf({ docUrl = '' }) {
 	const decodedUrl = decodeURI(docUrl);
 	const urlSplitByDot = decodedUrl?.split?.('.') || [];
 	const extension = urlSplitByDot?.[urlSplitByDot.length - FIRST] || '';
