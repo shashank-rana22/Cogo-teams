@@ -1,5 +1,4 @@
 import { cl } from '@cogoport/components';
-import { IcMComment } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -24,7 +23,6 @@ import AndroidApp from './AndroidApp';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
-import FeedbackModal from './FeedbackModal';
 import HeaderBar from './HeaderBar';
 import ModalComp from './ModalComps';
 import PortPairOrgFilters from './PortPairOrgFilters';
@@ -61,7 +59,6 @@ function CogoOne() {
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
 	const [mailAttachments, setMailAttachments] = useState([]);
-	const [showFeedback, setShowFeedback] = useState(false);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -245,26 +242,8 @@ function CogoOne() {
 						</>
 					)}
 				<AndroidApp />
-			</div>
-			{!showFeedback && (
-				<div
-					role="presentation"
-					className={styles.feedback}
-					onClick={() => setShowFeedback(((prev) => !prev))}
-				>
-					<IcMComment />
-					<span className={styles.feedback_label}>
-						Feedback
-					</span>
-				</div>
-			)}
 
-			{showFeedback && (
-				<FeedbackModal
-					showFeedback={showFeedback}
-					setShowFeedback={setShowFeedback}
-				/>
-			)}
+			</div>
 
 			<ModalComp
 				raiseTicketModal={raiseTicketModal}

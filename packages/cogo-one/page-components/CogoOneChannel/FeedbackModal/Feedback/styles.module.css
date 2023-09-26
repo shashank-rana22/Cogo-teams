@@ -2,6 +2,10 @@
 	height: 90vh;
 	overflow: auto;
 	background-color: transparent;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .feedback_action {
