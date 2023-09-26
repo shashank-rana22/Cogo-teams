@@ -25,11 +25,12 @@ const getColumns = ({ rating, setRating, feedback, setFeedback }) => [
 			<RatingComponent
 				type="star"
 				totalStars={5}
-				value={rating?.[item?.id]}
+				value={rating?.[item?.id]?.value}
 				onChange={(e) => setRating((prev) => ({
 					...prev,
-					[item?.id]: e,
+					[item?.id]: { value: e },
 				}))}
+				disabled={rating?.[item?.id]?.disabled}
 			/>
 		),
 	},
@@ -38,11 +39,12 @@ const getColumns = ({ rating, setRating, feedback, setFeedback }) => [
 		accessor : (item) => (
 			<Input
 				placeholder="Type here..."
-				value={feedback?.[item?.id]}
+				value={feedback?.[item?.id]?.value}
 				onChange={(e) => setFeedback((prev) => ({
 					...prev,
-					[item?.id]: e,
+					[item?.id]: { value: e },
 				}))}
+				disabled={feedback?.[item?.id]?.disabled}
 			/>
 		),
 	},

@@ -16,8 +16,8 @@ const useTableView = ({ props, list, refetch }) => {
 		try {
 			const employee_rating_data = Object.keys(rating).map((employee_id) => ({
 				employee_id,
-				rating   : rating?.[employee_id],
-				comments : feedback?.[employee_id] || '',
+				rating   : rating?.[employee_id]?.value,
+				comments : feedback?.[employee_id]?.value || '',
 			}));
 
 			const payload = {
@@ -35,16 +35,32 @@ const useTableView = ({ props, list, refetch }) => {
 	};
 
 	useEffect(() => {
-		const DEFAULT_RATING = {};
-		const DEFAULT_FEEDBACK = {};
+		let defaultRating = {};
+		let defaultFeedback = {};
 
 		(list || []).forEach((element) => {
-			if (element?.rating) DEFAULT_RATING[element?.id] = element.rating;
-			if (element?.comments) DEFAULT_FEEDBACK[element?.id] = element.comments;
+			if (element?.rating) {
+				defaultRating = {
+					...defaultRating,
+					[element?.id]: {
+						value    : element.rating,
+						disabled : true,
+					},
+				};
+			}
+			if (element?.comments) {
+				defaultFeedback = {
+					...defaultFeedback,
+					[element?.id]: {
+						value    : element.comments,
+						disabled : true,
+					},
+				};
+			}
 		});
 
-		setRating(DEFAULT_RATING);
-		setFeedback(DEFAULT_FEEDBACK);
+		setRating((prev) => ({ ...prev, ...defaultRating }));
+		setFeedback((prev) => ({ ...prev, ...defaultFeedback }));
 	}, [list]);
 
 	return {
