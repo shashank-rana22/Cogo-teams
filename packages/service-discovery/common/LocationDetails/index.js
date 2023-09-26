@@ -1,4 +1,5 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowNext } from '@cogoport/icons-react';
 
 import getLocationInfo from '../../page-components/SearchResults/utils/locations-search';
@@ -8,15 +9,21 @@ import styles from './styles.module.css';
 
 const SHOW_PINCODES = ['ftl_freight'];
 
+const LAST_INDEX = -1;
+const THIRD_TO_LAST_INDEX = -3;
+
 function LocationItem({ location = {}, service_type = '' }) {
 	const { name = '', port_code, country_code, postal_code } = location || {};
+
+	const city_name = (location?.display_name?.split(',') || [])
+		.slice(THIRD_TO_LAST_INDEX, LAST_INDEX)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	return (
 		<div className={styles.location}>
 			<span className={styles.location_country_text}>
 				{postal_code && SHOW_PINCODES.includes(service_type) ? `${postal_code}, ` : null}
 				{port_code ? `${port_code}, ` : null}
-				{country_code}
+				{SHOW_PINCODES.includes(service_type) ? city_name : country_code}
 			</span>
 
 			<Tooltip

@@ -1,7 +1,11 @@
-.job_closed_container {
+.fin_job_close_container {
 	display: flex;
 	align-items: center;
 	margin-right: 16px;
+}
+
+.job_closed_container {
+	padding-top: 5px;
 }
 
 .job_closed_pill {

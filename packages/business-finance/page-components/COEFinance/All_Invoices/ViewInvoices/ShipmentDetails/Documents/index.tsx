@@ -27,9 +27,11 @@ function Documents({ shipmentId = '', docContent = '' }: DocumentsInterface) {
 			return <p>{startCase(DocumentType) || ''}</p>;
 		},
 		DocumentNumberFunc: (item) => {
-			const { data = {} } = item || {};
-			const parsedData = JSON.parse(data);
-			const documentNumber = parsedData?.document_number || '';
+			let formattedData = item?.data;
+			if (typeof formattedData === 'string') {
+				formattedData = JSON.parse(item?.data || '');
+			}
+			const documentNumber = formattedData?.document_number || '';
 
 			return (
 				<p

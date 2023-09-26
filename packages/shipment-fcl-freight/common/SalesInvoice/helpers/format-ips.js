@@ -2,7 +2,8 @@ const formatIps = (ips) => {
 	const newIps = ips?.map((ip) => {
 		const {
 			billing_address : ba, id, is_active, services = [], is_igst,
-			invoice_currency, invoice_total_discounted, invoicing_party_total_discounted, invoice_total_currency,
+			invoice_currency, invoice_total_discounted, invoicing_party_total_discounted,
+			invoice_total_currency, invoice_language,
 			status, source:invoice_source, processing,
 		} = ip || {};
 
@@ -52,6 +53,7 @@ const formatIps = (ips) => {
 			invoice_total_discounted,
 			invoicing_party_total_discounted,
 			invoice_total_currency,
+			invoice_language,
 			status,
 			invoice_source,
 			is_igst,

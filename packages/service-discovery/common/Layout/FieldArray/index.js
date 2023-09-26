@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -64,7 +64,10 @@ function FieldArray({
 		<div className={styles.container}>
 			<div className={styles.childs_container}>
 				{fields.map((field, index) => (
-					<div className={styles.child} key={`${field.id}_${name}`}>
+					<div
+						className={cl`${styles.child} ${index && styles.divider}`}
+						key={`${field.id}_${name}`}
+					>
 						<Child
 							{...rest}
 							field={field}

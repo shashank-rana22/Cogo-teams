@@ -1,7 +1,6 @@
 .container {
 	display: flex;
 	align-items: center;
-	height: 20px;
 
 	img {
 		max-width: 100%;
@@ -10,6 +9,7 @@
 }
 
 .name {
+	margin-left: 4px;
 	font-size: 18px;
 	font-weight: 600;
 }
