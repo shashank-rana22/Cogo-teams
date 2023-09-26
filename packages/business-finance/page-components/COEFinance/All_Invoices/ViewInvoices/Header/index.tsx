@@ -153,7 +153,7 @@ function Header({
 					className={styles.modal_body_section_custom}
 				>
 					<Modal.Body>
-						{isApproveDisabled ? (
+						{modalData !== 'Reject' ? (
 							<div>
 								<div className={styles.heading}>
 									Are you sure you want to
