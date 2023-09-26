@@ -144,5 +144,4 @@ export const URGENCY_TAG_OPTIONS = [
 	{ label: 'Co-ordination Charges', value: 'coordination_charges' },
 	{ label: 'SEZ Shipment', value: 'sez_shipment' },
 	{ label: 'Airlines DO Payments', value: 'air_do' },
-	{ label: 'THC', value: 'thc' },
 ];
