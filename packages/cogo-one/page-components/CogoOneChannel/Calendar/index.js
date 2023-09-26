@@ -13,14 +13,20 @@ function Calendar() {
 			<div
 				className={styles.calender}
 				role="presentation"
-				onClick={() => setEventValendar((prev) => !prev)}
+				onClick={() => setEventValendar(true)}
 			>
-				<Image
-					src={GLOBAL_CONSTANTS.image_url.calendar}
-					height={26}
-					width={26}
-					alt="calender"
-				/>
+				<div className={styles.icon}>
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.calendar}
+						height={26}
+						width={26}
+						alt="calender"
+					/>
+				</div>
+
+				<div className={styles.title}>
+					Calendar
+				</div>
 			</div>
 			{eventClender ? <CalendarModal eventClender={eventClender} setEventValendar={setEventValendar} /> : null}
 		</>

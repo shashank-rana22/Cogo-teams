@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 /* eslint-disable custom-eslint/import-from-react */
 import moment from 'moment';
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const localizer = momentLocalizer(moment);
 
-function BgCalender() {
+function BgCalender({ setSelectedEventData = () => {} }) {
 	const myEventsList = [
 		{
 
@@ -20,7 +20,7 @@ function BgCalender() {
 					event_types    : 'call_customer',
 					customer       : 'Lachiramnaik',
 					poc            : 'chandu',
-					remarks        : 'need to call this date otherwise shipment will calcel',
+					remarks        : 'need to call this date otherwise shipment will cancel',
 					import         : true,
 				},
 				{
@@ -28,7 +28,7 @@ function BgCalender() {
 					event_types    : 'send_quotation',
 					customer       : 'Lachiramnaik',
 					poc            : 'chandu',
-					remarks        : 'need to call this date otherwise shipment will calcel',
+					remarks        : 'need to call this date otherwise shipment will cancel',
 					import         : true,
 				},
 				{
@@ -36,7 +36,23 @@ function BgCalender() {
 					event_types    : 'other',
 					customer       : 'Lachiramnaik',
 					poc            : 'chandu',
-					remarks        : 'need to call this date otherwise shipment will calcel',
+					remarks        : 'need to call this date otherwise shipment will cancel',
+					import         : true,
+				},
+				{
+					event_category : 'event',
+					event_types    : 'other',
+					customer       : 'sanmit',
+					poc            : 'chandu',
+					remarks        : 'need to call this date otherwise shipment will cancel',
+					import         : true,
+				},
+				{
+					event_category : 'event',
+					event_types    : 'other',
+					customer       : 'sandeep',
+					poc            : 'chandu',
+					remarks        : 'need to call this date otherwise shipment will cancel',
 					import         : true,
 				},
 			],
@@ -52,7 +68,7 @@ function BgCalender() {
 					event_types    : 'call_customer',
 					customer       : 'Lachiramnaik',
 					poc            : 'chandu',
-					remarks        : 'need to call this date otherwise shipment will calcel',
+					remarks        : 'need ',
 					import         : true,
 				},
 				{
@@ -60,15 +76,15 @@ function BgCalender() {
 					event_types    : 'send_quotation',
 					customer       : 'Lachiramnaik',
 					poc            : 'chandu',
-					remarks        : 'need to call this date otherwise shipment will calcel',
+					remarks        : 'need to call this ',
 					import         : true,
 				},
 				{
 					event_category : 'event',
 					event_types    : 'other',
-					customer       : 'Lachiramnaik',
+					customer       : 'Lachiram',
 					poc            : 'chandu',
-					remarks        : 'need to call this date otherwise shipment will calcel',
+					remarks        : 'need to call this date otherwise shipment will cancel',
 					import         : true,
 				},
 			],
@@ -84,7 +100,7 @@ function BgCalender() {
 					event_types    : 'call_customer',
 					customer       : 'Lachiramnaik',
 					poc            : 'chandu',
-					remarks        : 'need to call this date otherwise shipment will calcel',
+					remarks        : 'need to call this date otherwise shipment will cancel',
 					import         : true,
 				},
 				{
@@ -92,15 +108,15 @@ function BgCalender() {
 					event_types    : 'send_quotation',
 					customer       : 'Lachiramnaik',
 					poc            : 'chandu',
-					remarks        : 'need to call this date otherwise shipment will calcel',
+					remarks        : 'need to call this date otherwise shipment',
 					import         : true,
 				},
 				{
 					event_category : 'event',
 					event_types    : 'other',
-					customer       : 'Lachiramnaik',
+					customer       : 'sanmit',
 					poc            : 'chandu',
-					remarks        : 'need to call this date otherwise shipment will calcel',
+					remarks        : 'need to call this date otherwise shipment ',
 					import         : true,
 				},
 			],
@@ -115,7 +131,7 @@ function BgCalender() {
 					event_types    : 'call_customer',
 					customer       : 'Lachiramnaik',
 					poc            : 'chandu',
-					remarks        : 'need to call this date otherwise shipment will calcel',
+					remarks        : 'need to call this date otherwise shipment will cancel',
 					import         : true,
 				},
 				{
@@ -123,7 +139,7 @@ function BgCalender() {
 					event_types    : 'other',
 					customer       : 'Lachiramnaik',
 					poc            : 'chandu',
-					remarks        : 'need to call this date otherwise shipment will calcel',
+					remarks        : 'need to call this date otherwise shipment will cancel',
 					import         : true,
 				},
 			],
@@ -142,42 +158,61 @@ function BgCalender() {
 					import         : true,
 				},
 			],
-			start : new Date(2023, 8, 25, 9, 0),
-			end   : new Date(2023, 8, 25, 10, 30),
+			start : new Date(2023, 8, 26, 9, 0),
+			end   : new Date(2023, 8, 26, 10, 30),
 		},
 	];
 
-	// function EventDetails({ event = {} }) {
-	// 	return <CustomCard event={event} />;
-	// }
+	const [myEvents, setEvents] = useState({});
 
-	const [selectedDate, setSelectedDate] = useState(null);
-	console.log('selectedDate:', selectedDate);
+	const handleSelectSlot = useCallback(
+		({ start, end }) => {
+			console.log('teststart:', start);
+			setEvents({ start, end });
+		},
+		[setEvents],
+	);
 
 	const handleEventClick = (event) => {
-		console.log('event:', event);
+		setSelectedEventData(event);
 	// Handle event click, if needed
 	};
 
-	const handleSelectSlot = (slotInfo) => {
-		setSelectedDate(slotInfo.start); // Set the selected date
-	};
-
-	const customDayProp = (date) => {
-		if (moment(date).isSame(selectedDate, 'day')) {
+	const customDayPropGetter = (date) => {
+		if (date.getDate() === myEvents?.start?.getDate()) {
 			return {
-				className: 'selected-date',
+				// className : styles.specialDay,
+				style: {
+					border       : 'solid 1.5px #034AFD',
+					borderRadius : '2px',
+				},
+			};
+		}
+		if (!date.getDate() === myEvents?.start?.getDate() && date.getDate() === new Date().getDate()) {
+			return {
+				// className : styles.specialDay,
+				style: {
+					border       : 'solid 1.5px #034AFD',
+					borderRadius : '2px',
+				},
 			};
 		}
 		return {};
 	};
 
-	const defaultDate = moment('2023-09-01');
+	const { components } = useMemo(
+		() => ({
+			components: {
+				event: CustomCard,
+			},
+			defaultDate: new Date(2015, 3, 7),
+		}),
+		[],
+	);
 
 	return (
 
 		<div className={styles.container}>
-
 			<Calendar
 				// localizer={localizer}
 				// events={myEventsList}
@@ -195,16 +230,15 @@ function BgCalender() {
 				events={myEventsList}
 				startAccessor="start"
 				endAccessor="end"
-				style={{ height: 640, width: 630 }}
-				components={{
-					event: CustomCard,
-				}}
+				style={{ height: 600, width: 630 }}
+				// components={{
+				// 	event: CustomCard,
+				// }}
+				selectable
+				components={components}
 				onSelectEvent={handleEventClick}
 				onSelectSlot={handleSelectSlot}
-				selectable
-				selected={selectedDate}
-				eventPropGetter={customDayProp}
-				defaultDate={defaultDate}
+				dayPropGetter={customDayPropGetter}
 			/>
 		</div>
 	);

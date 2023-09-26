@@ -40,6 +40,7 @@ function CustomCard({ event = {} }) {
 			<div className={styles.header}>
 				{(firstTwoEvents || []).map((item) => {
 					const eventData = HEADER_MAPPING[item?.event_types];
+
 					if (isEmpty(eventData)) {
 						return null;
 					}
@@ -57,16 +58,18 @@ function CustomCard({ event = {} }) {
 					);
 				})}
 			</div>
-			{(firstTwoEvents || []).map((item) => (
-				<div className={styles.remarks_container} key={item?.id}>
-					<div
-						className={styles.remarks}
-						style={{ borderLeft: `2px solid ${COLORS_MAPPING[item?.event_types]}` }}
-					>
-						{startCase(item?.event_types)}
+			<div className={styles.events}>
+				{(firstTwoEvents || []).map((item) => (
+					<div className={styles.remarks_container} key={item?.id}>
+						<div
+							className={styles.remarks}
+							style={{ borderLeft: `2px solid ${COLORS_MAPPING[item?.event_types]}` }}
+						>
+							{startCase(item?.event_types)}
+						</div>
 					</div>
-				</div>
-			))}
+				))}
+			</div>
 
 			{isShowMore ? (
 				<div className={styles.more}>

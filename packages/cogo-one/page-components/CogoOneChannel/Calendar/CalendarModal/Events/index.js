@@ -8,18 +8,20 @@ import CreateEvent from './CreateEvent';
 import styles from './styles.module.css';
 import UserEvents from './UserEvents';
 
-const date = formatDate({
-	date       : new Date(),
-	dateFormat : GLOBAL_CONSTANTS.formats.date['MMMM dd, YYYY'],
-	formatType : 'date',
-	separator  : ',',
-});
-
-function Events({ addEvents = true, setAddEvents = () => {} }) {
+function Events({ addEvents = true, setAddEvents = () => {}, selectedEventData = {} }) {
 	const [eventDetails, setEventDetails] = useState({
 		category   : 'event',
 		event_type : 'call_customer',
 		event_date : { startDate: new Date(), endDate: new Date() },
+	});
+
+	const { start = '' } = selectedEventData || {};
+
+	const date = formatDate({
+		date       : start || new Date(),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['MMMM dd, YYYY'],
+		formatType : 'date',
+		separator  : ',',
 	});
 
 	return (
@@ -52,7 +54,7 @@ function Events({ addEvents = true, setAddEvents = () => {} }) {
 					</div>
 				)}
 
-				{addEvents ? <UserEvents /> : (
+				{addEvents ? <UserEvents selectedEventData={selectedEventData} /> : (
 					<CreateEvent
 						eventDetails={eventDetails}
 						setEventDetails={setEventDetails}
