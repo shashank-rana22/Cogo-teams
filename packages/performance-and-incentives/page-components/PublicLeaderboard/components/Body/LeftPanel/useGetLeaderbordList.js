@@ -3,7 +3,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 function useGetLeaderbordList(props) {
-	const { view } = props;
+	const { view, dateRange } = props;
 
 	const [params, setParams] = useState({
 		page               : 1,
@@ -11,9 +11,9 @@ function useGetLeaderbordList(props) {
 		user_data_required : true,
 		role_data_required : true,
 		filters            : {
-			report_view_type: view,
-			// created_at_greater_than : new Date(),
-			// created_at_less_than : new Date(),
+			report_view_type        : view,
+			created_at_greater_than : dateRange?.startDate || undefined,
+			created_at_less_than    : dateRange?.endDate || undefined,
 		},
 	});
 
@@ -34,9 +34,11 @@ function useGetLeaderbordList(props) {
 				report_view_type : view || undefined,
 				report_type      : ['owner_wise', 'manager_wise', 'kam_wise'].includes(view)
 					? `${view.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]}_report` : undefined,
+				created_at_greater_than : dateRange?.startDate || undefined,
+				created_at_less_than    : dateRange?.endDate || undefined,
 			},
 		}));
-	}, [view]);
+	}, [view, dateRange]);
 
 	return {
 		list,

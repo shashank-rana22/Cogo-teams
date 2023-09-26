@@ -10,9 +10,9 @@ import TopUsers from './TopUsers';
 import useGetLeaderbordList from './useGetLeaderbordList';
 
 function LeftPanel(props) {
-	const { view } = props;
+	const { view, dateRange } = props;
 
-	const { list, loading } = useGetLeaderbordList({ view });
+	const { list, loading } = useGetLeaderbordList({ view, dateRange });
 
 	const [firstUser, secondUser, thirdUser, ...tableList] = list;
 

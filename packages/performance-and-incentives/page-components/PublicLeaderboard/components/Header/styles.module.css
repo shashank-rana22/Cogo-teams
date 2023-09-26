@@ -15,7 +15,14 @@
 	}
 }
 
+.sub_container {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+
 .sub_heading {
+	margin: 0;
 	font-size: 18px;
 	color: #4f4f4f;
 
