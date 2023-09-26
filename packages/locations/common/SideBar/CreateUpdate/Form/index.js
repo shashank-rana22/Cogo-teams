@@ -4,25 +4,18 @@ import { useTranslation } from 'next-i18next';
 import { useImperativeHandle, forwardRef } from 'react';
 
 import controls from '../../../../configurations/create-form';
+import getShowElement from '../../../../utils/get-show-control';
 import Layout from '../../../Layout';
 
 function Form({ handleSubmitForm = () => {}, callBack = () => {} }, ref) {
 	const DEFAULT_VALUES = {};
 	const { t } = useTranslation(['locations']);
 	const fields = controls({ t });
-
+	const ctrl = [...(fields?.controls || [])].filter((control) => getShowElement(control, {}));
+	console.log(ctrl);
 	const { control, handleSubmit, formState:{ errors = {} }, watch, setValue } = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
-
-	const {
-		service_provider_id = '',
-		free_days_type = '',
-		location_type = '',
-		detention = [],
-		demurrage = [],
-		free_limit,
-	} = watch();
 
 	const onSubmit = (values) => { console.log(values); handleSubmitForm({ data: values, callBack }); };
 
@@ -31,7 +24,14 @@ function Form({ handleSubmitForm = () => {}, callBack = () => {} }, ref) {
 			handleSubmit(onSubmit)();
 		},
 	}));
-	return <Layout controls={fields} control={control} errors={errors} />;
+	return (
+		<Layout
+			controls={ctrl}
+			control={control}
+			errors={errors}
+			// showElements={getShowElement({ control, formValues: watch() })}
+		/>
+	);
 }
 
 export default forwardRef(Form);

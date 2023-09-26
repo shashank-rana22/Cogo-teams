@@ -2,7 +2,7 @@ const getFunction = {
 	type: (control, formValues) => control?.condition?.type.includes(formValues?.type),
 };
 
-const getShowElement = (control, formValues) => {
+const getShowElement = ({ control, formValues }) => {
 	let flag = true;
 
 	const { condition } = control;
@@ -10,7 +10,7 @@ const getShowElement = (control, formValues) => {
 	Object.keys(condition || {}).forEach((conditionName) => {
 		flag =			flag && (getFunction[conditionName] || (() => true))(control, formValues);
 	});
-
+	console.log(flag);
 	return flag;
 };
 
