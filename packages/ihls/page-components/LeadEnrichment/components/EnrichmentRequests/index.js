@@ -1,5 +1,5 @@
 import { Button, Pagination } from '@cogoport/components';
-import { IcMUndo } from '@cogoport/icons-react';
+import { IcMDown, IcMUndo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -7,6 +7,7 @@ import { getFieldController } from '../../../../commons/Form/getFieldController'
 import LeadTable from '../../commons/LeadTable';
 import enrichment_request_filters from '../../configurations/get-enrichment-request-filters';
 import getSearchControls from '../../configurations/search-control';
+import useDownloadTemplate from '../../hooks/useDownloadTemplate';
 import useGetEnrichmentRequests from '../../hooks/useGetEnrichmentRequests';
 
 import EnrichmentRequestEdit from './EnrichmentRequestEdit';
@@ -47,6 +48,8 @@ function EnrichmentRequests() {
 		debounceQuery,
 	} = useGetEnrichmentRequests();
 
+	const { loading: templateLoading, downloadTemplate } = useDownloadTemplate();
+
 	const searchControls = getSearchControls({ debounceQuery, name: 'name', placeholder: 'Request name...' });
 
 	const onClickReset = () => {
@@ -59,6 +62,17 @@ function EnrichmentRequests() {
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.template}>
+				<Button
+					loading={templateLoading}
+					className="primary"
+					onClick={() => downloadTemplate()}
+				>
+					<IcMDown style={{ marginRight: '4px' }} />
+					Download Template
+
+				</Button>
+			</div>
 			<div className={styles.filter_container}>
 				<div>
 					{searchControls.map((item) => {

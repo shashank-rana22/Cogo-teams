@@ -29,12 +29,22 @@ const getLeadInfoColumns = ({
 		),
 	},
 	{
-		Header   : 'NAME',
-		key      : 'name',
-		id       : 'name',
-		accessor : ({ name }) => (
+		Header   : 'BUSINESS NAME',
+		key      : 'business_name',
+		id       : 'business_name',
+		accessor : ({ business_name }) => (
 			<section className={styles.table_cell}>
-				{startCase(name || '___')}
+				{startCase(business_name || '___')}
+			</section>
+		),
+	},
+	{
+		Header   : 'TRADE NAME',
+		key      : 'trade_name',
+		id       : 'trade_name',
+		accessor : ({ trade_name }) => (
+			<section className={styles.table_cell}>
+				{startCase(trade_name || '___')}
 			</section>
 		),
 	},

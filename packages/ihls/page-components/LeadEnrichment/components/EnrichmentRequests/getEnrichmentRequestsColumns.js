@@ -110,7 +110,7 @@ const getEnrichmentRequestsColumns = ({
 						visible={id === request.id && request.type === null}
 					>
 						<Button
-							size="sm"
+							size="md"
 							themeType="secondary"
 							onClick={() => { onClickButton({ id, type: null }); }}
 						>
