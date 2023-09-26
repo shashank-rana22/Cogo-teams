@@ -116,3 +116,9 @@
 	width: 100%;
 	padding: 32px 24px 24px;
 }
+
+.requested_tds_text {
+	font-size: var(--font-size-md);
+	font-weight: 500;
+	color: #f68b21;
+}

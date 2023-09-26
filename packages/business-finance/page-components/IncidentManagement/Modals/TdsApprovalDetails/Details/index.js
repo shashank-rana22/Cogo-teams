@@ -84,7 +84,7 @@ function Details({
 					<div className={styles.heading}>
 						New TDS Style Requested
 					</div>
-					<div className={styles.text}>{requestedTdsStyle || ''}</div>
+					<div className={styles.requested_tds_text}>{requestedTdsStyle || ''}</div>
 				</div>
 			</div>
 

@@ -7,6 +7,7 @@ import { useState } from 'react';
 import useGetSecurityDepositData from '../../../apisModal/useGetSecurityDeposit';
 import SHIPMENT_MAPPING from '../../../Constants/SHIPMENT_MAPPING';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
+import { getFormatAmount } from '../../../utils/getformatamount';
 
 import styles from './styles.module.css';
 
@@ -30,6 +31,9 @@ function Details({
 		supplierName = '',
 		totalAmountToBePaid = 0,
 		paymentMode = '',
+		amountPerContainer = 0,
+		numberOfContainers = 0,
+		currency = '',
 	} = advanceSecurityDeposit || {};
 
 	const { getData, loading } = useGetSecurityDepositData({
@@ -43,57 +47,63 @@ function Details({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.display_box}>
-				<div className={styles.company_div}>
-					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{row?.data?.organization?.businessName || ''}</div>
+			<div className={styles.details_box}>
+				<div className={styles.display_box}>
+					<div className={styles.company_div}>
+						<div className={styles.heading}>Company Name</div>
+						<div className={styles.text}>{row?.data?.organization?.businessName || ''}</div>
+					</div>
+					<div>
+						<div className={styles.heading}>Requested By</div>
+						<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+					</div>
 				</div>
-				<div>
-					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+				<div className={styles.line} />
+				<div className={styles.supplier_div}>
+					<div className={styles.heading}>Supplier Name</div>
+					<div className={styles.text}>{supplierName || ''}</div>
 				</div>
-			</div>
-			<div className={styles.line} />
-			<div className={styles.company_div}>
-				<div className={styles.heading}>Supplier Name</div>
-				<div className={styles.text}>{supplierName || ''}</div>
-			</div>
-			<div className={styles.shipment_container}>
-				<div className={styles.heading}>Shipment Id</div>
-				<div className={styles.shipment_id}>
-					#
-					<a
-						href={shipmentId}
-						onClick={(event) => {
-							openPDF({
-								event,
-								partnerId    : partner_id,
-								id           : shipmentId,
-								incidentType : SHIPMENT_MAPPING[row?.incidentSubtype],
-							});
-						}}
-					>
-						{shipmentId || ''}
-					</a>
+				<div className={styles.shipment_container}>
+					<div className={styles.heading}>Shipment Id</div>
+					<div className={styles.shipment_id}>
+						#
+						<a
+							href={shipmentId}
+							onClick={(event) => {
+								openPDF({
+									event,
+									partnerId    : partner_id,
+									id           : shipmentId,
+									incidentType : SHIPMENT_MAPPING[row?.incidentSubtype],
+								});
+							}}
+						>
+							{shipmentId || ''}
+						</a>
+					</div>
 				</div>
-			</div>
-			<div className={styles.amount_details}>
-				<div className={styles.company_div}>
-					<div className={styles.heading}>Amount Per Container</div>
-					<div className={styles.text}>{shipmentId || ''}</div>
+				<div className={styles.amount_details}>
+					<div className={styles.per_container_div}>
+						<div className={styles.heading}>Amount Per Container</div>
+						<div className={styles.text}>
+							{getFormatAmount(amountPerContainer, currency)}
+						</div>
+					</div>
+					<div className={styles.count_div}>
+						<div className={styles.heading}>Container Count</div>
+						<div className={styles.text}>{numberOfContainers || ''}</div>
+					</div>
+					<div className={styles.amount_div}>
+						<div className={styles.heading}>Total Amount</div>
+						<div className={styles.text}>
+							{getFormatAmount(totalAmountToBePaid, currency)}
+						</div>
+					</div>
 				</div>
-				<div className={styles.company_div}>
-					<div className={styles.heading}>Container Count</div>
-					<div className={styles.text}>{shipmentId || ''}</div>
+				<div className={styles.payment_div}>
+					<div className={styles.heading}>Payment Mode</div>
+					<div className={styles.text}>{paymentMode || ''}</div>
 				</div>
-				<div className={styles.company_div}>
-					<div className={styles.heading}>Total Amount</div>
-					<div className={styles.text}>{totalAmountToBePaid || '0'}</div>
-				</div>
-			</div>
-			<div className={styles.company_div}>
-				<div className={styles.heading}>Payment Mode</div>
-				<div className={styles.text}>{paymentMode || ''}</div>
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>
@@ -135,7 +145,6 @@ function Details({
 
 				</div>
 			) : null }
-
 		</div>
 	);
 }

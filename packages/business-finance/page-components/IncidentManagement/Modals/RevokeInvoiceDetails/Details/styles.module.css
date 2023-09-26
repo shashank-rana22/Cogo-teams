@@ -62,7 +62,7 @@
 	display: flex;
 	gap: 12px;
 	justify-content: flex-end;
-	margin: 80px 18px 18px;
+	margin: 290px 18px 18px;
 }
 
 .heading {
@@ -106,7 +106,7 @@
 }
 
 .invoice {
-	padding: 24px;
+	padding: 24px 24px 32px 24px;
 }
 
 .invoice_text {
