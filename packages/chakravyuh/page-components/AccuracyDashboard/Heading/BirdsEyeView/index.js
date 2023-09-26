@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { CogoMaps, FeatureGroup, GeoJSON } from '@cogoport/maps';
 import React, { useState } from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -17,7 +18,7 @@ const MAX_BOUNDS = [
 	[MAX_LNG, MAX_LAT]];
 
 export const COLORS = ['#ffeacc', '#ffc680', '#f0883e', '#db6d28', '#bd561d', '#9b4215', '#762d0a', '#3d1300'];
-function BirdsEyeView({ countMapping = {}, maxCount = 0, minCount = 0 }) {
+function BirdsEyeView({ countMapping = {}, maxCount = 0, minCount = 0, loading = false }) {
 	const [map, setMap] = useState(null);
 	const { data = [] } = useGetSimplifiedGeometry({ type: 'country' });
 
@@ -83,6 +84,11 @@ function BirdsEyeView({ countMapping = {}, maxCount = 0, minCount = 0 }) {
 					</p>
 				))}
 			</div>
+			{loading && (
+				<div className={styles.loader_container}>
+					<Loader className={styles.loader} />
+				</div>
+			)}
 		</CogoMaps>
 	);
 }
