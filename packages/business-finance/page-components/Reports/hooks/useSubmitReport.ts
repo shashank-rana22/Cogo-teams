@@ -13,6 +13,7 @@ interface Props {
 	reportType?:string,
 	dateRange?: DateInterface,
 	accountType?:string,
+	activeEntity?:string
 }
 
 const useSubmitReport = (value:Props) => {
@@ -33,9 +34,10 @@ const useSubmitReport = (value:Props) => {
 		try {
 			const response = await trigger({
 				params: {
-					start_date   : !dateOptionnal ? format(startDate, 'yyyy-MM-dd', {}, false) : undefined,
-					end_date     : !dateOptionnal ? format(endDate, 'yyyy-MM-dd', {}, false) : undefined,
-					account_type : accountType || undefined,
+					start_date     : !dateOptionnal ? format(startDate, 'yyyy-MM-dd', {}, false) : undefined,
+					end_date       : !dateOptionnal ? format(endDate, 'yyyy-MM-dd', {}, false) : undefined,
+					account_type   : accountType || undefined,
+					entity_code_id : value?.activeEntity || undefined,
 				},
 			});
 

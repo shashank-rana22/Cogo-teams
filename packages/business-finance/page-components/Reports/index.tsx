@@ -1,18 +1,21 @@
-import { SingleDateRange, Button, Select } from '@cogoport/components';
+import { SingleDateRange, Button, Select, Placeholder } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
 
 import { REPORT_TYPE_OPTIONS, ACCOUNT_TYPE_OPTIONS, DATE_OPTIONAL_APIS } from './constants';
+import useListCogoEntities from './hooks/useListCogoEntities';
 import useSubmitReport from './hooks/useSubmitReport';
 import styles from './styles.module.css';
 
 function Reports() {
 	const [value, setValue] = useState({
-		reportType  : null,
-		dateRange   : null,
-		accountType : null,
+		reportType   : null,
+		dateRange    : null,
+		accountType  : null,
+		activeEntity : null,
 	});
 
 	const { api, loading } = useSubmitReport(value);
+	const { entityLoading = true, entityData = [] } = useListCogoEntities();
 
 	const onChange = (val:string, name:string) => {
 		setValue((p) => ({ ...p, [name]: val }));
@@ -33,11 +36,24 @@ function Reports() {
 
 	const isDateOptional = (DATE_OPTIONAL_APIS.includes(value.reportType));
 
+	const entityOptions = (entityData || []).map((item) => {
+		const {
+			id = '',
+			entity_code: entitycode = '',
+		} = item || {};
+
+		return {
+			label : `${entitycode} - ${item.business_name}`,
+			value : id,
+		};
+	});
+
 	const isSubmitDisabled = loading
 	|| !value.reportType
 	|| !value.dateRange?.startDate
 	|| !value.dateRange?.endDate
-	|| isDisabledForAccountType();
+	|| isDisabledForAccountType()
+	|| !value.activeEntity;
 
 	const disable = isDateOptional ? loading : isSubmitDisabled;
 
@@ -80,6 +96,20 @@ function Reports() {
 								onChange={(e:any) => setValue((p) => ({ ...p, dateRange: e }))}
 								value={value.dateRange}
 								isPreviousDaysAllowed
+							/>
+						</div>
+					</div>
+				)}
+				{entityLoading ? <Placeholder height="30px" width="260px" /> : (
+					<div className={styles.select_entity}>
+						<div className={styles.title}>Select Entity*</div>
+						<div>
+							<Select
+								name="activeEntity"
+								value={value.activeEntity}
+								onChange={(e:any) => setValue((p) => ({ ...p, activeEntity: e }))}
+								placeholder="Select Entity"
+								options={entityOptions}
 							/>
 						</div>
 					</div>
