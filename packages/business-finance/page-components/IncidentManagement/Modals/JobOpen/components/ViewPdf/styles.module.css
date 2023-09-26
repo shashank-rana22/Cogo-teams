@@ -4,5 +4,18 @@
 }
 
 .empty_state {
+	width: 49%;
+	height: 100%;
 	padding: 70px;
+	background-color: #fff;
+	border-radius: 10px;
+}
+
+.zip_text {
+	width: 49%;
+	padding: 50px;
+	font-size: 18px;
+	font-weight: 500;
+	background-color: #fff;
+	border-radius: 10px;
 }

@@ -1,0 +1,28 @@
+.request_reopen {
+	margin: 3px 5px 0 0;
+	color: red;
+}
+
+.details {
+	display: flex;
+
+	& div {
+		display: flex;
+		flex-direction: column;
+		margin-right: 16px;
+	}
+
+	& span {
+		font-weight: 500;
+	}
+
+	.label {
+		font-size: var(--font-size-md);
+	}
+}
+
+.modal_footer {
+	& button:first-child {
+		margin-right: 12px;
+	}
+}

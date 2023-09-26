@@ -34,6 +34,7 @@ function MailEditorModal({
 	const [errorValue, setErrorValue] = useState('');
 	const [minimizeModal, setMinimizeModal] = useState(false);
 	const [uploading, setUploading] = useState(false);
+	const [sendLoading, setSendLoading] = useState(false);
 	const [emailTemplate, setEmailTemplate] = useState({
 		isTemplateView : false,
 		emailData      : {},
@@ -81,6 +82,8 @@ function MailEditorModal({
 		userId,
 		mailProps,
 		firestore,
+		sendLoading,
+		setSendLoading,
 	});
 
 	if (minimizeModal) {
@@ -131,6 +134,7 @@ function MailEditorModal({
 						handleSaveDraft={handleSaveDraft}
 						setMinimizeModal={setMinimizeModal}
 						resetEmailState={resetEmailState}
+						sendLoading={sendLoading}
 					/>
 				)}
 				className={styles.modal_header}
