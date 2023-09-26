@@ -115,7 +115,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 					pointBorderColor={{ from: 'serieColor' }}
 					pointLabelYOffset={-12}
 					useMesh
-					legends={[{
+					legends={formatdata.length > 1 ? [{
 						anchor            : 'bottom-right',
 						direction         : 'column',
 						justify           : false,
@@ -133,7 +133,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 							on    : 'hover',
 							style : { itemBackground: 'rgba(0, 0, 0, .03)', itemOpacity: 1 },
 						}],
-					}]}
+					}] : []}
 				/>
 			)
 	);
