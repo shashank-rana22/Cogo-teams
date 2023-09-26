@@ -2,9 +2,9 @@ import { Button } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import SideBarComponent from '../common/SideBar';
+import SideBarComponent from '../../common/SideBar';
 
-import PageView from './PageView';
+import PageView from './page-components/PageView';
 import styles from './styles.module.css';
 
 function Locations() {

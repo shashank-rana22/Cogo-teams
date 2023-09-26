@@ -1,11 +1,13 @@
-import { TabPanel, Tabs, Pagination } from '@cogoport/components';
+import { TabPanel, Tabs, Pagination, Modal, Button } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
+import { useState, useRef } from 'react';
 
-import getFieldsByTab from '../../constants/config';
-import getTabsMapping from '../../constants/tabs';
-import useGetLocationsList from '../../hooks/useGetLocationsList';
+import Form from '../../../../common/SideBar/CreateUpdate/Form';
+import getFieldsByTab from '../../../../constants/config';
+import getTabsMapping from '../../../../constants/tabs';
+import useGetLocationsList from '../../../../hooks/useGetLocationsList';
+import Header from '../Header';
 
-import Header from './Header';
 import List from './List';
 import styles from './styles.module.css';
 
@@ -34,7 +36,6 @@ function PageView({ onClickCard = () => {}, setSelectedLocation = () => {}, setS
 	const handlePageChange = (pageNumber) => {
 		hookSetters.setFilters({ ...filters, page: pageNumber });
 	};
-
 	return (
 		<div className={styles.container} id="locations_main_container">
 			<Tabs activeTab={filters.type} onChange={onTabChange} id="locations_tab_view">
@@ -47,17 +48,20 @@ function PageView({ onClickCard = () => {}, setSelectedLocation = () => {}, setS
 			<section className={styles.list_view} id="locations_list_view">
 				<Header columns={columns} id="locations_list_header" />
 				{(list.data || []).map((item) => (
-					<List
-						key={item?.id}
-						id="locations_list_body"
-						loading={loading}
-						onClick={onClickCard}
-						item={item}
-						columns={columns}
-					/>
+					<div key={item?.id}>
+						<List
+							key={item?.id}
+							id="locations_list_body"
+							loading={loading}
+							onClick={onClickCard}
+							item={item}
+							columns={columns}
+						/>
+
+					</div>
+
 				))}
 			</section>
-
 			<div className={styles.pagination_container}>
 				<Pagination
 					type="table"

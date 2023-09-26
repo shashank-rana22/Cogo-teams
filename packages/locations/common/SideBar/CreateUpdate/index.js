@@ -6,7 +6,7 @@ import useCreateUpdate from '../../../hooks/useCreateUpdate';
 
 import Form from './Form';
 
-function CreateUpdateForm() {
+function CreateUpdateForm({ item = {} }) {
 	const { t } = useTranslation(['locations']);
 
 	const formRef = useRef(null);
@@ -19,14 +19,12 @@ function CreateUpdateForm() {
 		onCreate,
 	} = useCreateUpdate();
 	const handleSubmitForm = ({ data }) => {
-		console.log(data, 'data');
 		onCreate({ data });
 	};
 
 	return (
 		<div>
-			<Form ref={formRef} handleSubmitForm={handleSubmitForm} />
-
+			<Form ref={formRef} handleSubmitForm={handleSubmitForm} item={item} />
 			<Button
 				disabled={loading}
 				onClick={onSubmit}

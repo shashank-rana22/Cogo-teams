@@ -25,3 +25,12 @@
 	text-align: right;
 	cursor: pointer;
 }
+
+.btn_align {
+	display: flex;
+	justify-content: end;
+
+	button:first-child {
+		margin-right: 8px;
+	}
+}

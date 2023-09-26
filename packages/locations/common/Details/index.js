@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
@@ -5,7 +6,7 @@ import getDetails from '../../constants/details';
 
 import styles from './styles.module.css';
 
-function Details({ activeCard = {} }) {
+function Details({ activeCard = {}, setSideBar = () => {} }) {
 	const { t } = useTranslation(['locations']);
 
 	const formatDate = (date) => format(date, 'dd MMM yy | hh:mm a');

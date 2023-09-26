@@ -1,6 +1,6 @@
 import { Placeholder } from '@cogoport/components';
 
-import getValue from '../../../utils/getValues';
+import getValue from '../../../../utils/getValues';
 
 import styles from './styles.module.css';
 
@@ -23,6 +23,7 @@ function List({
 						style={{ flex }}
 					>
 						{loading ? <Placeholder /> : getValue(item, singleItem) }
+
 					</div>
 				);
 			})}

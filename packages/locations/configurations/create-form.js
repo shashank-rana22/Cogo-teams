@@ -284,7 +284,7 @@ const controls = ({ t = () => {} }) => [
 		label         : t('locations:controls_aliases_attributes_label'),
 		type          : 'fieldArray',
 		showButtons   : true,
-		addButtonText : t('locations:controls_aliases_attributes_button_text'),
+		addButtonText : 'Add Aliases',
 		controls      : [
 			{
 				name  : 'name',

@@ -1,5 +1,4 @@
 import { useForm } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useTranslation } from 'next-i18next';
 import { useImperativeHandle, forwardRef } from 'react';
 
@@ -7,17 +6,25 @@ import controls from '../../../../configurations/create-form';
 import getShowElement from '../../../../utils/get-show-control';
 import Layout from '../../../Layout';
 
-function Form({ handleSubmitForm = () => {}, callBack = () => {} }, ref) {
+function Form({ handleSubmitForm = () => {}, callBack = () => {}, item = {} }, ref) {
 	const DEFAULT_VALUES = {};
 	const { t } = useTranslation(['locations']);
-	const fields = controls({ t });
-	const ctrl = [...(fields?.controls || [])].filter((control) => getShowElement(control, {}));
-	console.log(ctrl);
-	const { control, handleSubmit, formState:{ errors = {} }, watch, setValue } = useForm({
-		defaultValues: DEFAULT_VALUES,
+	let fields = controls({ t, item });
+	if (item) {
+		fields = fields.map((data) => ({ ...data, value: item[data.name] }));
+	}
+	fields.forEach((ctrl) => {
+		if (ctrl?.value) {
+			DEFAULT_VALUES[ctrl.name] = ctrl.value;
+		}
 	});
 
-	const onSubmit = (values) => { console.log(values); handleSubmitForm({ data: values, callBack }); };
+	const { control, handleSubmit, formState:{ errors = {} }, watch } = useForm({
+		defaultValues: DEFAULT_VALUES,
+	});
+	const showElements = getShowElement({ controls: fields, formValues: watch() });
+
+	const onSubmit = (values) => handleSubmitForm({ data: values, callBack });
 
 	useImperativeHandle(ref, () => ({
 		formSubmit() {
@@ -26,10 +33,10 @@ function Form({ handleSubmitForm = () => {}, callBack = () => {} }, ref) {
 	}));
 	return (
 		<Layout
-			controls={ctrl}
+			controls={fields}
 			control={control}
 			errors={errors}
-			// showElements={getShowElement({ control, formValues: watch() })}
+			showElements={showElements}
 		/>
 	);
 }

@@ -1,17 +1,20 @@
 const getFunction = {
-	type: (control, formValues) => control?.condition?.type.includes(formValues?.type),
+	type: (condition, formValues) => condition?.type.includes(formValues?.type),
 };
 
-const getShowElement = ({ control, formValues }) => {
-	let flag = true;
+const getShowElement = ({ controls = [], formValues = {} }) => {
+	const showElements = controls.reduce((pv, cv) => {
+		const { name = '', condition } = cv || {};
 
-	const { condition } = control;
+		let flag = true;
 
-	Object.keys(condition || {}).forEach((conditionName) => {
-		flag =			flag && (getFunction[conditionName] || (() => true))(control, formValues);
-	});
-	console.log(flag);
-	return flag;
+		Object.keys(condition || {}).forEach((conditionName) => {
+			flag =			flag && (getFunction[conditionName] || (() => true))(condition, formValues);
+		});
+
+		return { ...pv, [name]: flag };
+	}, {});
+	return showElements;
 };
 
 export default getShowElement;

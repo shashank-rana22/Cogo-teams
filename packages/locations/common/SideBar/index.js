@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
 
 import getHeader from '../../constants/header';
@@ -25,9 +25,18 @@ function SideBarComponent({
 	const renderBody = () => {
 		switch (sideBar) {
 			case 'details':
-				return <Details activeCard={selectedLocation} />;
+				return (
+					<div>
+						<div className={styles.btn_align}>
+							<Button>{selectedLocation.status === 'active' ? 'Deactivate' : 'Activate'}</Button>
+							<Button onClick={() => setSideBar('create')}>Update</Button>
+						</div>
+
+						<Details activeCard={selectedLocation} setSideBar={setSideBar} />
+					</div>
+				);
 			case 'create':
-				return <CreateUpdateForm />;
+				return <CreateUpdateForm item={selectedLocation} />;
 			default:
 				return null;
 		}

@@ -31,7 +31,7 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, f
 						size="sm"
 						onClick={append}
 					>
-						Add Name
+						Add Aliases
 					</Button>
 				</div>
 			) : null}
