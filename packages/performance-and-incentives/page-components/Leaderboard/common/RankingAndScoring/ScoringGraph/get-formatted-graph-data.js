@@ -6,16 +6,14 @@ const getFormattedGraphData = (scoringGraphData) => {
 
 	return [{
 		id   : 'rank',
-		data : Object.entries(data_points || {}).map(([timestamp, score]) => ({
+		data : (data_points || []).map(([timestamp, score]) => ({
 			x: abscissa === 'hour' ? formatDate({
 				date       : timestamp,
-				// dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 				formatType : 'time',
 			}) : formatDate({
 				date       : timestamp,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
-				// timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 				formatType : 'date',
 			}),
 			y: score,
