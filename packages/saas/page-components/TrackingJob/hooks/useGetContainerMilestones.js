@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useGetContainerMilestones = ({ id = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
@@ -7,17 +7,15 @@ const useGetContainerMilestones = ({ id = '' }) => {
 		url    : 'get_saas_container_subscription',
 	});
 
-	const getMilestones = async () => {
+	const getMilestones = useCallback(async () => {
 		await trigger({
 			params: { id },
 		});
-	};
+	}, [id, trigger]);
 
 	useEffect(() => {
-		if (id) {
-			getMilestones();
-		}
-	}, [id]);
+		getMilestones();
+	}, [getMilestones]);
 
 	return {
 		getMilestones,
