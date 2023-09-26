@@ -6,7 +6,7 @@ function Locations({ locations = [] }) {
 	if (isEmpty(locations)) {
 		return <div className={styles.empty_state}>No Locations Added</div>;
 	}
-	console.log({ locations });
+
 	return (
 		<div>
 			{locations?.map((location) => (
