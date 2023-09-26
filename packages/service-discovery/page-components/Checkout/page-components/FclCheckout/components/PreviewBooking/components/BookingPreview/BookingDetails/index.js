@@ -28,7 +28,7 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 		shipping_line = {},
 		BUTTON_MAPPING = [],
 		primary_service = {},
-		mainServiceObject = {},
+		primaryService = {},
 		services = {},
 		hasExpired = false,
 		timerRef,
@@ -45,7 +45,7 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 			<div className={styles.main_content}>
 				<ShippingLineDetails shipping_line={shipping_line} source={source} />
 
-				<LocationDetails data={mainServiceObject} />
+				<LocationDetails data={primaryService} />
 
 				<ContainerDetails
 					primary_service={primary_service}

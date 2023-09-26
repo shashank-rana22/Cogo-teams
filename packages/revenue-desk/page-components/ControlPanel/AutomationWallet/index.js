@@ -31,6 +31,7 @@ function AutomationWallet() {
 					value={filters?.service_type}
 					onChange={(val) => onChange(val, 'service_type')}
 					size="md"
+					style={{ width: '200px' }}
 				/>
 
 				<Button
