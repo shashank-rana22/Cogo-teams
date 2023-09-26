@@ -33,7 +33,7 @@ function ControlPanel() {
 					<AutomationDesk />
 				</TabPanel>
 
-				<TabPanel name="automation_wallet" title="Automation Wallet">
+				<TabPanel name="automation_wallet" title="Wallet">
 					<AutomationWallet />
 				</TabPanel>
 			</Tabs>
