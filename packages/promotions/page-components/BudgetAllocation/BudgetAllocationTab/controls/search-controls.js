@@ -4,6 +4,7 @@ const controls = (selectedDetails) => [
 		placeholder    : 'Select',
 		type           : 'async_select',
 		asyncKey       : 'partner_users_ids',
+		span           : 12,
 		initialCall    : true,
 		labelKey       : 'name',
 		valueKey       : 'id',

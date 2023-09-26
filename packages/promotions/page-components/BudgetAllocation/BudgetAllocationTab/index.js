@@ -8,9 +8,9 @@ import ShowModal from './common/ShowModal';
 import BudgetAllocate from './components/BudgetAllocate';
 import CreateAllocationCard from './components/CreateAllocationCard';
 import ViewModal from './components/ViewModal';
-import BudgetAllocationControls from './configurations/budget-allocation-form-controls';
-import RadioOptions from './configurations/budget-allocation-radio';
-import RoleOptions from './configurations/budget-allocation-role';
+import BudgetAllocationControls from './controls/budget-allocation-form-controls';
+import RadioOptions from './controls/budget-allocation-radio';
+import RoleOptions from './controls/budget-allocation-role';
 import useListPromoBudgetAllocation from './hooks/useListPromoBudgetAllocations';
 import styles from './styles.module.css';
 

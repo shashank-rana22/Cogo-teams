@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 import Layout from '../../../../../common/Layout';
 import tableColumns from '../../configurations/promo-budget-details-table';
-import controls from '../../configurations/search-controls';
+import controls from '../../controls/search-controls';
 import useGetPromoAllocationDetail from '../../hooks/useGetPromoAllocationDetail';
 import StyledTableComponent from '../StyledTableComponent';
 
@@ -26,7 +26,7 @@ function ViewModal({
 	} = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
-	const { agent_id } = watch();
+	const agent_id = watch('agent_id');
 	const {
 		loading,
 		promoAllocationList,
@@ -52,13 +52,13 @@ function ViewModal({
 			onClose={closeModal}
 			onOuterClick={closeModal}
 			className="primary xl"
+			style={{ width: '80%' }}
 		>
 			<div className={styles.top_container}>
 				<div className={styles.header}>
 					Budget allocation for KAM:
 					<div className={styles.users}>
 						{selectedDetails.user_count}
-						{' '}
 						users
 					</div>
 				</div>
@@ -85,7 +85,7 @@ function ViewModal({
 					pageLimit={paginationData.page_limit}
 					pagination={paginationData.page}
 					total={paginationData.total_count}
-					setPagination={(val) => {
+					onPageChange={(val) => {
 						setPagination({ ...pagination, page: val });
 					}}
 				/>
