@@ -152,7 +152,7 @@
 }
 
 .debit {
-	background-color: #ee3425;
+	background-color: #f55;
 
 	:global {
 		.ui_pill_text {
