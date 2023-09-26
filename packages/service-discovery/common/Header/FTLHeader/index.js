@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import SearchDetails from '../common/SearchDetails';
 import Wallet from '../common/Wallet';
 
+import Load from './Load';
 import styles from './styles.module.css';
 
 function FTLHeader({
@@ -41,16 +42,16 @@ function FTLHeader({
 			</div>
 
 			<div className={styles.right_section}>
-				{/* <Packages
+				<Load
 					data={data}
 					loading={loading && isEmpty(data)}
-					activePage={rest.activePage}
+					activePage={activePage}
 					isAllowedToEdit={isAllowedToEdit}
-					infoBanner={infoBanner}
-					setInfoBanner={setInfoBanner}
-					isGuideViewed={isGuideViewed}
+					// infoBanner={infoBanner}
+					// setInfoBanner={setInfoBanner}
+					// isGuideViewed={isGuideViewed}
 					setRouterLoading={setRouterLoading}
-				/> */}
+				/>
 
 				<Wallet
 					data={data}

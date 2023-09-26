@@ -1,5 +1,5 @@
 import { Checkbox, cl, Popover } from '@cogoport/components';
-import { IcMUp } from '@cogoport/icons-react';
+import { IcMRoundtrip, IcMUp } from '@cogoport/icons-react';
 
 import InfoBannerContent from '../../../../../../../../../common/InfoBannerContent';
 import LikeDislike from '../../../../../../../common/LikeDislike';
@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 const MAX_COMPARABLE_RATE_CARD_INDEX = 3;
 
 const IMAGE_MAPPING = {
-	one_way : <IcMUp className={styles.one_way_icon} />,
-	round   : <IcMUp className={styles.one_way_icon} />,
+	one_way : IcMUp,
+	round   : IcMRoundtrip,
 };
 
 const LABEL_MAPPING = {
@@ -94,7 +94,9 @@ function Header({
 				) : null}
 
 				<div className={styles.trip_type_container}>
-					{ImageComponent}
+					{ImageComponent ? (
+						<ImageComponent className={cl`${styles.trip_type_icon} ${styles[trip_type]}`} />
+					) : null}
 
 					<span className={styles.trip_type_label}>
 						{LABEL_MAPPING[trip_type]}

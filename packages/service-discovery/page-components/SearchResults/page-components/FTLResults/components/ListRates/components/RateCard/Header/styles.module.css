@@ -52,9 +52,12 @@
 	align-items: center;
 }
 
-.one_way_icon {
+.trip_type_icon {
 	font-size: 20px;
-	transform: rotate(90deg);
+
+	&.one_way {
+		transform: rotate(90deg);
+	}
 }
 
 .trip_type_label {

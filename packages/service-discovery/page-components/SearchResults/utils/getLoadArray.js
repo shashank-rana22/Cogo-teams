@@ -27,12 +27,17 @@ const getLoadArray = (search_type, serviceDetails) => {
 				});
 			} else if (service.service_type === 'ftl_freight') {
 				LOAD.push({
-					volume       : service.volume,
-					weight       : service.weight,
-					packages     : service.packages,
-					trip_type    : service.trip_type,
-					truck_type   : service.truck_type,
-					trucks_count : service.trucks_count,
+					volume               : service.volume,
+					weight               : service.weight,
+					packages             : service.packages,
+					trip_type            : service.trip_type,
+					truck_type           : service.truck_type,
+					trucks_count         : service.trucks_count,
+					id                   : service.id,
+					load_selection_type  : service.load_selection_type,
+					commodity            : service.commodity,
+					cargo_readiness_date : service.cargo_readiness_date,
+
 				});
 			} else if (service.service_type === 'ltl_freight') {
 				LOAD.push({
