@@ -1,19 +1,15 @@
 import { Button, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import { useMemo } from 'react';
 
+import SortColumns from './sort-columns';
 import styles from './styles.module.css';
 
 const FIRST_INDEX = 1;
 export const columns = ({
 	handleShowModal,
-	setshowData,
-	setSortType,
-	sortType,
-	activeTab,
-	showData,
+	filters,
+	setFilters,
 }) => {
 	const logo = ({ name }) => {
 		if (name === 'BLPL') {
@@ -31,7 +27,7 @@ export const columns = ({
 		seen            : '#caf0f8',
 	};
 
-	return useMemo(() => [
+	return [
 		{
 			Header   : <p>SERIAL ID</p>,
 			accessor : ({ data }) => (
@@ -114,27 +110,7 @@ export const columns = ({
 		{
 			id     : 'created_at',
 			Header : (
-				<div>
-					CREATED AT
-					<IcMArrowRotateDown
-						onClick={() => {
-							setshowData('created_at');
-							setSortType(!sortType);
-						}}
-						className={`sort-icon ${
-							showData === 'created_at'
-								&& sortType
-								&& activeTab === 'air_tracking'
-								? 'active'
-								: 'inactive'
-						}`}
-						style={{
-							width      : '14px',
-							height     : '16px',
-							marginLeft : '8px',
-						}}
-					/>
-				</div>
+				<SortColumns filters={filters} setFilters={setFilters} sortType="created_at" />
 			),
 			accessor: (item) => (
 				<p>
@@ -149,11 +125,7 @@ export const columns = ({
 		{
 			id     : 'updated_at',
 			Header : (
-				<div>
-					<p>
-						LAST UPDATED AT
-					</p>
-				</div>
+				<SortColumns filters={filters} setFilters={setFilters} sortType="updated_at" />
 			),
 			accessor: (item) => (
 				<div>
@@ -212,5 +184,5 @@ export const columns = ({
 
 			id: 'actions',
 		},
-	]);
+	];
 };

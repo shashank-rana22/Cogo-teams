@@ -1,11 +1,11 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const useGetList = ({
 	activeTab,
 }) => {
-	const [filters, setFilters] = useState({ page: 1 });
+	const [filters, setFilters] = useState({ page: 1, sort_by: 'updated_at', sort_type: 'desc' });
 	const [searchString, setSearchString] = useState('');
 	const [serialId, setSerialId] = useState('');
 	const APINAME = {
@@ -19,7 +19,8 @@ const useGetList = ({
 	});
 
 	const { query = '', debounceQuery } = useDebounceQuery();
-	const refetch = async () => {
+
+	const refetch = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -40,18 +41,19 @@ const useGetList = ({
 		} catch (err) {
 			console.log(err);
 		}
-	};
+	}, [activeTab, filters, query, trigger, searchString, serialId]);
 	useEffect(() => debounceQuery(searchString), [searchString, debounceQuery]);
 	useEffect(() => debounceQuery(serialId), [serialId, debounceQuery]);
 
 	useEffect(() => {
-		setFilters({ page: 1 });
+		setFilters({ page: 1, sort_by: 'updated_at', sort_type: 'desc' });
 		setSearchString('');
-		// setSerialId('');
+		setSerialId('');
 	}, [activeTab]);
+
 	useEffect(() => {
 		refetch();
-	}, [activeTab, filters, query]);
+	}, [refetch]);
 
 	return {
 		data,
@@ -60,6 +62,7 @@ const useGetList = ({
 		loading,
 		searchString,
 		setSearchString,
+		serialId,
 		setSerialId,
 		trigger,
 		refetch,

@@ -19,6 +19,7 @@ function TrackingJob() {
 		filters,
 		setFilters,
 		searchString,
+		serialId,
 		setSearchString,
 		setSerialId,
 		refetch,
@@ -33,6 +34,7 @@ function TrackingJob() {
 				<div className={styles.filter_container}>
 					<SearchFilters
 						searchString={searchString}
+						serialId={serialId}
 						setSearchString={setSearchString}
 						activeTab={activeTab}
 						filters={filters}
@@ -53,7 +55,7 @@ function TrackingJob() {
 								/>
 							)}
 						>
-							<Button themeType="secondary">
+							<Button themeType="secondary" size="lg">
 								<IcMFilter />
 								{' '}
 								FILTERS
@@ -80,10 +82,22 @@ function TrackingJob() {
 						/>
 					</TabPanel>
 					<TabPanel name="ocean_tracking" title="Ocean Tracking">
-						<OceanTracking list={data?.list} loading={loading} refetch={refetch} />
+						<OceanTracking
+							list={data?.list}
+							loading={loading}
+							refetch={refetch}
+							filters={filters}
+							setFilters={setFilters}
+						/>
 					</TabPanel>
 					<TabPanel name="truck_tracking" title="Surface Tracking">
-						<TruckTracking list={data?.list} loading={loading} refetch={refetch} />
+						<TruckTracking
+							list={data?.list}
+							loading={loading}
+							refetch={refetch}
+							filters={filters}
+							setFilters={setFilters}
+						/>
 					</TabPanel>
 				</Tabs>
 			</div>

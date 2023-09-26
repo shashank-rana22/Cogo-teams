@@ -8,6 +8,8 @@ import TrackingInfo from './TrackerDetails/TrackingInfo';
 
 function TruckTracking({
 	list = [],
+	filters = {},
+	setFilters,
 }) {
 	const [showUpdate, setShowUpdate] = useState({ show: false, data: {} });
 
@@ -20,12 +22,18 @@ function TruckTracking({
 	};
 	const column = columns({
 		handleShowModal,
+		filters,
+		setFilters,
 	});
 
 	return (
 		<div>
 
-			<Table columns={column} data={list || []} className={styles.table} />
+			<Table
+				columns={column}
+				data={list || []}
+				className={styles.table}
+			/>
 			<Modal
 				show={showUpdate.show}
 				onClose={() => handleCloseModal()}

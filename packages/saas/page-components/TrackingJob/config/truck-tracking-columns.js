@@ -2,9 +2,12 @@ import { Button, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
-import { useMemo } from 'react';
+
+import SortColumns from './sort-columns';
 
 export const columns = ({
+	filters,
+	setFilters,
 	handleShowModal,
 }) => {
 	const COLOR_MAPPING = {
@@ -13,7 +16,7 @@ export const columns = ({
 		cargo_dropped : '#CDF7D4',
 	};
 
-	return useMemo(() => [
+	return [
 		{
 
 			Header   : <p>SERIAL ID</p>,
@@ -50,9 +53,7 @@ export const columns = ({
 		{
 			id     : 'created_at',
 			Header : (
-				<div>
-					CREATED AT
-				</div>
+				<SortColumns filters={filters} setFilters={setFilters} sortType="created_at" />
 			),
 			accessor: (item) => (
 				<p>
@@ -67,9 +68,7 @@ export const columns = ({
 		{
 			id     : 'updated_at',
 			Header : (
-				<div>
-					LAST UPDATED AT
-				</div>
+				<SortColumns filters={filters} setFilters={setFilters} sortType="updated_at" />
 			),
 			accessor: (item) => (
 				<div>
@@ -102,5 +101,5 @@ export const columns = ({
 			),
 
 		},
-	]);
+	];
 };

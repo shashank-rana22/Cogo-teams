@@ -11,7 +11,8 @@ import TrackerDetails from './TrackerDetails';
 function OceanTracking({
 	loading = false,
 	list = [],
-
+	filters = {},
+	setFilters = () => {},
 }) {
 	const [showUpdate, setShowUpdate] = useState({ show: false, data: {} });
 	const [activeTab, setActiveTab] = useState('add_location');
@@ -23,8 +24,9 @@ function OceanTracking({
 	};
 	const column = columns({
 		handleShowModal,
+		filters,
+		setFilters,
 	});
-	console.log(showUpdate);
 	const formRef = useRef(null);
 	const { apiTrigger, createLoading } = useGetContainerData({
 		refetch: () => {

@@ -49,8 +49,7 @@ function FieldArray({
 									name={`${name}.${index}.${nestedName}`}
 									formValues={formValues}
 									showElements={showElements}
-									customFieldArrayControls={customFieldArrayControls}
-
+									customFieldArrayControls={customFieldArrayControls?.[nestedIndex]}
 								/>
 							))}
 
@@ -68,9 +67,10 @@ function FieldArray({
 							name={`${name}.${index}.${nestedName}`}
 							formValues={formValues}
 							labelName={nestedName}
-							customField={customFieldArrayControls}
+							customField={customFieldArrayControls?.[nestedIndex]}
 						/>
 					)}
+
 				</div>
 			))}
 

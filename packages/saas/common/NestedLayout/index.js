@@ -10,7 +10,6 @@ function Layout({
 	controls = [], control = {}, errors = {}, showElements = {}, formValues = {},
 	customFieldArrayControls = {},
 }) {
-	console.log(errors, 'errors');
 	const finalControls = controls.filter((c) => {
 		if (c.name in showElements) {
 			return showElements[c.name];

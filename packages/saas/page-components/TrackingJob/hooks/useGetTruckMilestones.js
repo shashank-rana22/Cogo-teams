@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useGetTruckMilestones = ({ id = null, trackingType }) => {
+const useGetTruckMilestones = ({ id = null }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_saas_ftl_tracking_detail',
@@ -15,7 +15,7 @@ const useGetTruckMilestones = ({ id = null, trackingType }) => {
 		} catch (err) {
 			console.log(err);
 		}
-	}, [id, trackingType, trigger]);
+	}, [id, trigger]);
 
 	useEffect(() => {
 		getMilestones();

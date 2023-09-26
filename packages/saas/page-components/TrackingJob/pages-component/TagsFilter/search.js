@@ -6,7 +6,11 @@ import getFilterControls from './search-controls';
 import getShowElements from './showElement';
 import styles from './styles.module.css';
 
-function SearchFilters({ activeTab = () => {}, setSearchString = () => {}, setSerialId = () => {} }) {
+function SearchFilters({
+	activeTab = () => {},
+	setSearchString = () => {},
+	setSerialId = () => {}, searchString = '', serialId = '',
+}) {
 	const { control, watch } = useForm();
 
 	const {
@@ -19,12 +23,11 @@ function SearchFilters({ activeTab = () => {}, setSearchString = () => {}, setSe
 	const q = airway_bill_no || container_bill_no || truck_no;
 	setSerialId(serial_id);
 	setSearchString(q);
-	const controls = getFilterControls({ setSearchString });
+	const controls = getFilterControls({ searchString, serialId, setSearchString });
 
 	return (
 		<div className={styles.container_class}>
 			<Layout controls={controls} control={control} showElements={getShowElements({ activeTab, controls })} />
-
 		</div>
 	);
 }
