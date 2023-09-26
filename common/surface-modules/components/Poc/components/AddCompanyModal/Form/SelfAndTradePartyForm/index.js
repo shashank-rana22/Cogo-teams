@@ -206,8 +206,11 @@ function SelfAndTradePartyForm({
 							</div>
 
 							<div className={styles.checkbox}>
-								<CheckboxController name="not_reg_under_gst" control={control} />
-								<label className={styles.form_label}>Not registered under GST</label>
+								<CheckboxController
+									name="not_reg_under_gst"
+									control={control}
+									label={<strong>Not registered under GST</strong>}
+								/>
 							</div>
 
 							<div className={styles.row}>
@@ -216,6 +219,7 @@ function SelfAndTradePartyForm({
 									<InputController
 										size="sm"
 										name="tax_number"
+										placeholder="Enter GST Number"
 										control={control}
 										rules={{
 											required : { value: !not_reg_under_gst, message: 'GST Number is required' },
