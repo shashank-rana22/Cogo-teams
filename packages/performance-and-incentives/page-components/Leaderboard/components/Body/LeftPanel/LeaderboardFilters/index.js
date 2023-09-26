@@ -48,7 +48,7 @@ const getFilters = ({ beforeLevel, id }) => {
 };
 
 function LeaderboardFilters(props) {
-	const { incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
+	const { incentive_leaderboard_viewtype, user } = useSelector(({ profile }) => profile);
 
 	const {
 		view,
@@ -118,7 +118,7 @@ function LeaderboardFilters(props) {
 			...prev,
 			filters: {
 				...prev.filters,
-				user_id: undefined,
+				user_id: user.id,
 			},
 		}));
 
