@@ -7,7 +7,7 @@ const MONTH_END_INDEX = 3;
 
 function Graph({ dataKeys = {} }) {
 	const graphData = [{
-		id    : 'Dashboard',
+		id    : 'Promo',
 		color : 'hsl(313, 70%, 50%)',
 		data  : dataKeys?.promotion_per_month?.map((item) => ({
 			x : item?.month.slice(MONTH_START_INDEX, MONTH_END_INDEX),
@@ -18,7 +18,7 @@ function Graph({ dataKeys = {} }) {
 		<div className={styles.graph_card}>
 			<ResponsiveLine
 				data={graphData}
-				margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+				margin={{ top: 50, right: 110, bottom: 50, left: 110 }}
 				xScale={{ type: 'point' }}
 				yScale={{
 					type    : 'linear',
@@ -35,7 +35,7 @@ function Graph({ dataKeys = {} }) {
 					tickPadding    : 5,
 					tickRotation   : 0,
 					legend         : 'Months',
-					legendOffset   : 36,
+					legendOffset   : 44,
 					legendPosition : 'middle',
 				}}
 				axisLeft={{
@@ -43,7 +43,7 @@ function Graph({ dataKeys = {} }) {
 					tickPadding    : 5,
 					tickRotation   : 0,
 					legend         : 'Amount',
-					legendOffset   : -40,
+					legendOffset   : -80,
 					legendPosition : 'middle',
 				}}
 				pointSize={10}

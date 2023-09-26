@@ -17,7 +17,7 @@ function DiscountSlabsTable({ slabsDetailData = {}, loading = '' }) {
 		},
 		{
 			Header   : 'Frequency',
-			accessor : (item) => (item?.fee_unit ? startCase(item.frequency) : '--'),
+			accessor : (item) => startCase(item?.frequency) || '--',
 		},
 	];
 

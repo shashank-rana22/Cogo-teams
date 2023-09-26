@@ -3,7 +3,11 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function DeactiveModal({ onClose = () => {}, onClickYes = () => {} }) {
+function UpdateModal({
+	title = 'Are you sure you want to DEACTIVE this rule?',
+	onClose = () => {},
+	onClickYes = () => {},
+}) {
 	return (
 		<Modal
 			size="md"
@@ -11,7 +15,7 @@ function DeactiveModal({ onClose = () => {}, onClickYes = () => {} }) {
 			onClose={onClose}
 			placement="center"
 		>
-			<Modal.Header title="Are you sure you want to DEACTIVE this rule?" />
+			<Modal.Header title={title} />
 			<Modal.Footer>
 				<Button
 					themeType="secondary"
@@ -26,4 +30,4 @@ function DeactiveModal({ onClose = () => {}, onClickYes = () => {} }) {
 	);
 }
 
-export default DeactiveModal;
+export default UpdateModal;

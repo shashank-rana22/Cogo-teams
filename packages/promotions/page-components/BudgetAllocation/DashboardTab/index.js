@@ -5,6 +5,7 @@ import useGetPromotionBudgetDashboard from '../../../hooks/useGetPromotionBudget
 
 import BudgetGenerator from './BudgetGenerator';
 import Graph from './Graph';
+import ProgressPercent from './ProgressPercent';
 import StatsAllotedBudget from './StatsAllotedBudget';
 import StatsPromoCodes from './StatsPromoCodes';
 import styles from './styles.module.css';
@@ -68,6 +69,12 @@ function DashboardTab() {
 				</div>
 			</div>
 			<Graph dataKeys={data} />
+			<ProgressPercent
+				allotedBudget={data?.alloted_budget || DEFAULT_AMOUNT}
+				promoUsed={data?.promocode_used_amount || DEFAULT_AMOUNT}
+				promoCreated={data?.promocode_created_amount || DEFAULT_AMOUNT}
+				selectedCurrency={selectedCurrency}
+			/>
 		</div>
 	);
 }

@@ -2,7 +2,9 @@ import FREQUENCY_MAPPING from '../../../../../configs/FREQUENCY_MAPPING.json';
 
 const MIN_DISCOUNT_PRICE = 0;
 
-const discountConfigControls = () => [
+const discountConfigControls = ({
+	disabledFrequency = false,
+}) => [
 	{
 		name        : 'discount_limit_unit',
 		label       : 'Discount Limit Unit',
@@ -45,6 +47,7 @@ const discountConfigControls = () => [
 		placeholder : 'Duration',
 		options     : FREQUENCY_MAPPING,
 		span        : 2,
+		disabled    : disabledFrequency,
 		rules       : {
 			required: 'Duration is Required.',
 		},

@@ -64,9 +64,17 @@ function RuleSettingTab() {
 	const [activeService, setActiveService] = useState('fcl_freight');
 	const [activeList, setActiveList] = useState('active');
 	const [showAddRuleForm, setShowAddRuleForm] = useState(false);
+	const [viewAndEditRuleData, setViewAndEditRuleData] = useState(null);
 	return (
 		<div>
-			{showAddRuleForm ? <AddRuleForm setShowAddRuleForm={setShowAddRuleForm} />
+			{showAddRuleForm || viewAndEditRuleData !== null ? (
+				<AddRuleForm
+					activeList={activeList}
+					setShowAddRuleForm={setShowAddRuleForm}
+					viewAndEditRuleData={viewAndEditRuleData}
+					setViewAndEditRuleData={setViewAndEditRuleData}
+				/>
+			)
 				: (
 					<>
 						<div className={styles.head}>
@@ -95,6 +103,7 @@ function RuleSettingTab() {
 							activeList={activeList}
 							setActiveList={setActiveList}
 							activeService={activeService}
+							setViewAndEditRuleData={setViewAndEditRuleData}
 							setShowAddRuleForm={setShowAddRuleForm}
 						/>
 					</>

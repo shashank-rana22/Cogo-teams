@@ -1,15 +1,12 @@
-import { Button, cl, Pill } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import UpdateModal from '../../../../../../common/UpdateModal';
-import useDeactivatePromotionRule from '../../../../../../hooks/useDeactivatePromotionRule';
+import DiscountSlabsTable from '../../../List/ListContent/ListItem/DiscountSlabsTable';
+import ShipmentSlabsTable from '../../../List/ListContent/ListItem/ShipmentSlabsTable';
 
 import columnsMapping from './columnsMapping';
-import DiscountSlabsTable from './DiscountSlabsTable';
-import ShipmentSlabsTable from './ShipmentSlabsTable';
 import styles from './styles.module.css';
-import tagsMapping from './tagsMapping';
 
 const LAST_INDEX = 1;
 
@@ -43,36 +40,18 @@ const columnsWithValue = ({ data = {}, list = [] }) => {
 	return NEW_MAPPING_LIST;
 };
 
-function ListItem({
+function CustomConfigListItem({
 	data = {},
-	loading = '',
-	activeList = '',
-	refetchList = () => {},
-	setViewAndEditRuleData = () => {},
+	type = '',
+	showCustomConfigForm = {},
+	setViewAndEditConfigData = () => {},
 }) {
 	const [open, setOpen] = useState(false);
-	const [showDeactivateModal, setShowDeactivateModal] = useState(false);
-	const tagsList = columnsWithValue({ data, list: tagsMapping });
 	const columnsList = columnsWithValue({ data, list: columnsMapping });
-
-	const { onUpdateStatus = () => {} } = useDeactivatePromotionRule({ data, refetchList });
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.upper}>
-				<div className={styles.tags_list}>
-					{tagsList.map((tabsDetails) => {
-						const { key, value } = tabsDetails || {};
-						return (
-							<div
-								key={key}
-								className={styles.tags_row}
-							>
-								{value ? <Pill size="md" color="green">{value}</Pill> : null }
-							</div>
-						);
-					})}
-				</div>
 				<div className={styles.grid_row}>
 					{columnsList.map((columnDetails, index) => {
 						const { key } = columnDetails;
@@ -87,20 +66,8 @@ function ListItem({
 							</div>
 						);
 					})}
-					<div className={styles.flex_content}>
-						<Button
-							themeType="secondary"
-							size="md"
-							style={{
-								marginRight: '16px',
-							}}
-							onClick={() => {
-								setViewAndEditRuleData(data);
-							}}
-						>
-							View & Edit
-						</Button>
-						{activeList === 'active' && (
+					{!showCustomConfigForm && (
+						<div className={styles.flex_content}>
 							<Button
 								themeType="secondary"
 								size="md"
@@ -108,13 +75,13 @@ function ListItem({
 									marginRight: '16px',
 								}}
 								onClick={() => {
-									setShowDeactivateModal(true);
+									setViewAndEditConfigData(data);
 								}}
 							>
-								Deactivate
+								View & Edit
 							</Button>
-						)}
-					</div>
+						</div>
+					)}
 				</div>
 
 			</div>
@@ -125,14 +92,14 @@ function ListItem({
 						key={data.cogo_entity_id}
 					>
 						<div className={styles.heading}>
-							{data?.scope === 'shipment'
+							{type === 'shipment'
 								? 'Slabs Details'
 								: 'Discount Configuration'}
 						</div>
 						<div className={styles.block}>
-							{data?.scope === 'shipment'
-								? <ShipmentSlabsTable slabsDetailData={data?.slab_configs} loading={loading} />
-								: <DiscountSlabsTable slabsDetailData={data?.discount_config} loading={loading} />}
+							{type === 'shipment'
+								? <ShipmentSlabsTable slabsDetailData={data?.slab_configs} />
+								: <DiscountSlabsTable slabsDetailData={data?.discount_config} />}
 						</div>
 					</div>
 				) : null }
@@ -152,17 +119,8 @@ function ListItem({
 						</>
 					)}
 				</button>
-				{showDeactivateModal && (
-					<UpdateModal
-						onClose={() => setShowDeactivateModal(false)}
-						onClickYes={() => {
-							onUpdateStatus();
-							setShowDeactivateModal(false);
-						}}
-					/>
-				)}
 			</div>
 		</div>
 	);
 }
-export default ListItem;
+export default CustomConfigListItem;

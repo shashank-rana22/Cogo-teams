@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 
 import toastApiError from '../utils/toastApiError';
 
-const useDeactivePromotionRule = ({ data = {}, refetchList = () => {} }) => {
+const useDeactivatePromotionRule = ({ data = {}, refetchList = () => {} }) => {
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/update_promotion_rule',
@@ -11,7 +11,7 @@ const useDeactivePromotionRule = ({ data = {}, refetchList = () => {} }) => {
 		{ manual: true },
 	);
 
-	const onClickDeactivate = async () => {
+	const onUpdateStatus = async () => {
 		const { id = ' ' } = data;
 		const payload = {
 			id,
@@ -27,7 +27,7 @@ const useDeactivePromotionRule = ({ data = {}, refetchList = () => {} }) => {
 		}
 	};
 
-	return { loading, onClickDeactivate };
+	return { loading, onUpdateStatus };
 };
 
-export default useDeactivePromotionRule;
+export default useDeactivatePromotionRule;

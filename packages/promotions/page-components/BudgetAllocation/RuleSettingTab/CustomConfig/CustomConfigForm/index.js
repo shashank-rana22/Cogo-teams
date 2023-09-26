@@ -1,41 +1,34 @@
-import { Button, ButtonIcon } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMCross } from '@cogoport/icons-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import Layout from '../../../../common/Layout';
-import UpdateModal from '../../../../common/UpdateModal';
-import CustomConfig from '../CustomConfig';
+import Layout from '../../../../../common/Layout';
+import discountConfigControls from '../../AddRuleForm/controls/discountConfigControls';
+import shipmentConfigControls from '../../AddRuleForm/controls/shipmentConfigControls';
 
-import getControls from './controls/controls';
-import discountConfigControls from './controls/discountConfigControls';
-import shipmentConfigControls from './controls/shipmentConfigControls';
+import getControls from './controls';
 import styles from './styles.module.css';
 
 const INCREMENT = 0.01;
 const ZERO = 0;
 const ONE = 1;
 
-function AddRuleForm({
-	activeList = '',
-	setShowAddRuleForm = () => {},
-	viewAndEditRuleData = {},
-	setViewAndEditRuleData = () => {},
+function CustomConfigForm({
+	data = {},
+	setShowCustomConfigForm = () => {},
+	viewAndEditConfigData = {},
+	setViewAndEditConfigData = () => {},
 }) {
-	const [showActivateModal, setShowActivateModal] = useState(false);
-
-	const DEFAULT_VALUES = viewAndEditRuleData === null ? {} : viewAndEditRuleData;
+	const DEFAULT_VALUES = viewAndEditConfigData === null ? {} : viewAndEditConfigData;
 	const controls = getControls();
-	const discountControls = discountConfigControls({ disabledFrequency: false });
+	const discountControls = discountConfigControls({ disabledFrequency: true });
 	const shipmentControls = shipmentConfigControls();
 
-	DEFAULT_VALUES.category = 'business';
-	DEFAULT_VALUES.for_service = 'fcl_customs';
-	if (viewAndEditRuleData === null) {
-		DEFAULT_VALUES.scope = 'shipment';
+	if (viewAndEditConfigData === null) {
+		DEFAULT_VALUES.frequency = `${data?.discount_config[GLOBAL_CONSTANTS.zeroth_index]?.frequency}ly`;
 	} else {
-		const { slab_configs = {}, discount_config = {} } = viewAndEditRuleData === null ? {} : viewAndEditRuleData;
+		const { slab_configs = {}, discount_config = {} } = viewAndEditConfigData === null ? {} : viewAndEditConfigData;
 		DEFAULT_VALUES.shipment_price_slab_config = slab_configs;
 		DEFAULT_VALUES.discount_limit_currency = discount_config[GLOBAL_CONSTANTS.zeroth_index]
 			?.discount_limit_currency;
@@ -78,17 +71,21 @@ function AddRuleForm({
 	return (
 		<div>
 			<div className={styles.container}>
-				<div className={styles.close_btn}>
-					<ButtonIcon
-						size="lg"
-						icon={<IcMCross />}
-						disabled={false}
-						onClick={() => {
-							setShowAddRuleForm(false);
-							setViewAndEditRuleData(null);
-						}}
-					/>
-				</div>
+				{viewAndEditConfigData !== null && (
+					<div className={styles.close_btn}>
+						<Button
+							className={styles.btn}
+							size="md"
+							themeType="secondary"
+							onClick={() => {
+								setViewAndEditConfigData(null);
+								setShowCustomConfigForm(false);
+							}}
+						>
+							DEACTIVATE
+						</Button>
+					</div>
+				)}
 				<Layout
 					controls={controls}
 					control={control}
@@ -97,11 +94,9 @@ function AddRuleForm({
 					showElements={SHOW_ELEMENTS}
 				/>
 
-				<div className={styles.head}>
-					<div className={styles.heading}>Global Configuration</div>
-				</div>
+				<div className={styles.head} />
 
-				{formValues?.scope === 'organization' ? (
+				{data?.scope === 'organization' ? (
 					<Layout
 						controls={discountControls}
 						control={control}
@@ -121,36 +116,25 @@ function AddRuleForm({
 					<Button
 						className={styles.btn}
 						size="md"
+						themeType="secondary"
 						onClick={() => {
-							if (activeList === 'active') {
-								handleSubmit();
-							} else {
-								// todo show modal
-								setShowActivateModal(true);
-							}
+							setViewAndEditConfigData(null);
+							setShowCustomConfigForm(false);
 						}}
 					>
-						{activeList === 'active' ? 'SAVE' : 'Activate'}
+						CANCEL
+					</Button>
+					<Button
+						className={styles.btn}
+						size="md"
+						onClick={handleSubmit}
+					>
+						SAVE
 					</Button>
 				</div>
 			</div>
-			{showActivateModal
-			&& (
-				<UpdateModal
-					title="Are you sure you want to ACTIVATE this rule?"
-					onClose={() => { setShowActivateModal(false); }}
-					onClickYes={() => {
-						// todo call the update rule api
-						setShowAddRuleForm(false);
-						setViewAndEditRuleData(null);
-						setShowActivateModal(false);
-					}}
-				/>
-			)}
-
-			{viewAndEditRuleData !== null && <CustomConfig data={viewAndEditRuleData} />}
 		</div>
 	);
 }
 
-export default AddRuleForm;
+export default CustomConfigForm;

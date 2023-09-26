@@ -7,6 +7,7 @@ function List({
 	activeList = '',
 	setActiveList = () => {},
 	activeService = '',
+	setViewAndEditRuleData = () => {},
 	setShowAddRuleForm = () => {},
 }) {
 	const defaultFilters = { activeList, activeService };
@@ -43,7 +44,7 @@ function List({
 				setFilters={setFilters}
 				activeList={activeList}
 				refetchList={refetchList}
-				activeService={activeService}
+				setViewAndEditRuleData={setViewAndEditRuleData}
 			/>
 		</div>
 	);

@@ -1,4 +1,5 @@
 import { ButtonIcon, Select, Input } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEdit, IcMTick, IcMCross } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -54,14 +55,23 @@ function BudgetGenerator({
 							icon={<IcMCross />}
 							themeType="primary"
 							onClick={() => {
-								refetchDashboard();
 								setIsEdit(false);
 							}}
 						/>
 					</div>
 				) : (
 					<div className={styles.content}>
-						<div className={styles.main_text}>{selectedCurrency + amount}</div>
+						<div className={styles.main_text}>
+							{formatAmount({
+								amount,
+								currency : selectedCurrency,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'symbol',
+									maximumFractionDigits : 0,
+								},
+							})}
+						</div>
 						<ButtonIcon
 							size="md"
 							icon={<IcMEdit />}

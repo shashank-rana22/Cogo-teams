@@ -1,5 +1,4 @@
 import { Loader, Pagination } from '@cogoport/components';
-// import { useRouter } from '@cogoport/next';
 
 import EmptyState from '../../../../../common/EmptyState';
 
@@ -15,9 +14,8 @@ function ListContent({
 	setFilters = () => {},
 	activeList = '',
 	refetchList = () => {},
-	// activeService = '',
+	setViewAndEditRuleData = () => {},
 }) {
-	// const router = useRouter();
 	const { list, page_limit = 10, total_count = 1 } = data || {};
 	if (loading) {
 		return (
@@ -52,8 +50,8 @@ function ListContent({
 					data={item}
 					loading={loading}
 					activeList={activeList}
-					onEdit={() => {}}
 					refetchList={refetchList}
+					setViewAndEditRuleData={setViewAndEditRuleData}
 				/>
 			))}
 			<div className={styles.pagination}>
