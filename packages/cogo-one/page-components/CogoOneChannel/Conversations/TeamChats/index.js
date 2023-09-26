@@ -14,7 +14,7 @@ function TeamChats(props) {
 	} = props || {};
 
 	const {
-		internal_room_id = '',
+		group_id = '',
 	} = activeTeamCard || {};
 
 	return (
@@ -29,7 +29,7 @@ function TeamChats(props) {
 				/>
 			</div>
 			<div className={styles.messages}>
-				<Messages internalRoomId={internal_room_id} />
+				<Messages internalRoomId={group_id} />
 			</div>
 			<div className={styles.footer}>
 				<Footer

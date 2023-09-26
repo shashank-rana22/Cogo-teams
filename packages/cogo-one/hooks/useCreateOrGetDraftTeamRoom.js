@@ -34,14 +34,14 @@ async function getExistingGlobalRoom({ userIds = [], length = 0, firestore = {},
 	const roomData = globalRoomDataDoc?.data() || {};
 
 	return {
-		internal_room_id : globalRoomDataDoc?.id,
-		id               : roomData?.group_member_rooms?.[loggedInAgendId] || '',
+		group_id : globalRoomDataDoc?.id,
+		id       : roomData?.group_member_rooms?.[loggedInAgendId] || '',
 		...roomData,
 	};
 }
 
 async function getExistingDraftRoom({ userIds = [], length = 0, firestore = {}, loggedInAgendId = '' }) {
-	const selfInternalRoomsCollection = collection(firestore, `users/${loggedInAgendId}/self_internal_rooms`);
+	const selfInternalRoomsCollection = collection(firestore, `users/${loggedInAgendId}/groups`);
 
 	const collectionQuery = query(
 		selfInternalRoomsCollection,
@@ -51,7 +51,6 @@ async function getExistingDraftRoom({ userIds = [], length = 0, firestore = {}, 
 		orderBy('created_at', 'desc'),
 		limit(LIMIT),
 	);
-	console.log('collectionQuery', collectionQuery);
 
 	const roomDocs = await getDocs(collectionQuery);
 
@@ -61,7 +60,7 @@ async function getExistingDraftRoom({ userIds = [], length = 0, firestore = {}, 
 }
 
 async function createDraftRoom({ userIds = [], userIdsData = [], firestore = {}, loggedInAgendId = '', length = 0 }) {
-	const selfInternalRoomsCollection = collection(firestore, `users/${loggedInAgendId}/self_internal_rooms`);
+	const selfInternalRoomsCollection = collection(firestore, `users/${loggedInAgendId}/groups`);
 
 	const draftRoomPayload = {
 		group_member_ids         : userIds,
@@ -70,7 +69,7 @@ async function createDraftRoom({ userIds = [], userIdsData = [], firestore = {},
 		is_draft                 : true,
 		is_pinned                : false,
 		group_members_data       : userIdsData,
-		internal_room_id         : null,
+		group_id                 : null,
 		new_message_sent_at      : Date.now(),
 		self_has_unread_messages : false,
 		group_members_count      : length,

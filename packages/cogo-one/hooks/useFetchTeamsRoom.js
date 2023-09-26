@@ -150,7 +150,7 @@ function useFetchTeamsRoom({ firestore = {} }) {
 		if (!activeAgent) {
 			return {};
 		}
-		const userCollectionPath = `users/${activeAgent}/self_internal_rooms`;
+		const userCollectionPath = `users/${activeAgent}/groups`;
 		return collection(firestore, userCollectionPath);
 	}, [activeAgent, firestore]);
 

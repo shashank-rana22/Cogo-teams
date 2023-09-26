@@ -64,8 +64,8 @@ function GroupCard({
 						<Image
 							src={GLOBAL_CONSTANTS.image_url.teams}
 							alt="group"
-							width={40}
-							height={40}
+							width={26}
+							height={26}
 						/>
 					) : (
 						<Avatar
