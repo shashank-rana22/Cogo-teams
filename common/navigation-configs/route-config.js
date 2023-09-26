@@ -64,6 +64,7 @@ import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import schedules from './config/schedules';
 import serviceDiscovery from './config/service-discovery';
+import serviceManagement from './config/service-management';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
 import shipmentAirFreightLocal from './config/shipment-air-freight-local';
@@ -181,6 +182,7 @@ const routeConfig = {
 	...tradeParties,
 	...margins,
 	...saas,
+	...serviceManagement,
 };
 
 export default routeConfig;

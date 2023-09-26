@@ -716,8 +716,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		organization_service_management: {
 			key           : 'organization_service_management',
 			title         : t('common:service_management'),
-			href          : '/service-management',
-			as            : '/service-management',
+			href          : '/v2/service-management',
+			as            : '/v2/service-management',
 			type          : 'link',
 			possible_apis : apis.organization_service_management,
 			icon          : IcMMarginManagement,
