@@ -5,20 +5,14 @@ import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../constants/leaderboard-viewtype-constants';
-// import Filters from '../../../../common/Filters';
 import SearchInput from '../../../../common/SearchInput';
 
 import RefreshResults from './RefreshResults';
 import styles from './styles.module.css';
-// import useFilterContent from './useFilterContent';
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 const OFFSET = 1;
-
-// function conditionalWrapper({ condition, wrapper, children }) {
-// 	return condition ? wrapper(children) : children;
-// }
 
 function containsOnlyLetters(inputString) {
 	const PATTERN = GLOBAL_CONSTANTS.regex_patterns.alphabets;
@@ -69,16 +63,6 @@ function LeaderboardFilters(props) {
 		setStatParams,
 	} = props;
 
-	// const {
-	// 	controls,
-	// 	formProps,
-	// 	showFilters,
-	// 	setShowFilters,
-	// 	handleReset,
-	// 	applyFilters,
-	// 	filtersApplied,
-	// } = useFilterContent({ setParams });
-
 	const [beforeLevel = '', id] = levelStack[levelStack.length - OFFSET] || [];
 
 	const [backText] = beforeLevel.split('_') || [];
@@ -87,12 +71,11 @@ function LeaderboardFilters(props) {
 		setParams((prev) => ({
 			...prev,
 
-			...((levelStack.length === OFFSET && view === 'admin')
+			...((levelStack.length === OFFSET && incentive_leaderboard_viewtype === ADMIN)
 				? { add_current_user_report: false, current_user_id: undefined } : {}),
 
 			filters: {
 				...prev.filters,
-
 				user_rm_ids: id ? [id] : undefined,
 
 				...(levelStack.length === OFFSET ? {
@@ -170,35 +153,6 @@ function LeaderboardFilters(props) {
 					refetchStats={refetchStats}
 					statsLoading={statsLoading}
 				/>
-
-				{/* <Filters
-					controls={controls}
-					open={showFilters}
-					setOpen={setShowFilters}
-					formProps={formProps}
-					onClickOutside={() => setShowFilters(false)}
-					applyFilters={applyFilters}
-					reset={handleReset}
-				>
-					<Button
-						themeType="secondary"
-						type="button"
-						size="md"
-						onClick={() => setShowFilters(!showFilters)}
-					>
-						<div style={{ fontSize: '16px' }}>Filter</div>
-
-						{conditionalWrapper({
-							condition : filtersApplied,
-							wrapper   : (children) => (
-								<Badge color="red" size="md" text="">
-									{children}
-								</Badge>
-							),
-							children: <IcMFilter width={18} height={18} style={{ marginLeft: '4px' }} />,
-						})}
-					</Button>
-				</Filters> */}
 
 				<div className={styles.search_container}>
 					<SearchInput

@@ -11,12 +11,12 @@ import styles from './styles.module.css';
 
 function List(props) {
 	const {
-		loading, list, params, setParams, handlePropagation, viewType, currLevel, currentUserData, setStatParams,
+		loading, list, handlePropagation, viewType, currLevel, currentUserData, setStatParams,
 	} = props;
 
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping({ params, setParams });
+	const LIST_COLUMN_MAPPING = getListColumnMapping();
 
 	if (loading) {
 		return <LoadingState />;
