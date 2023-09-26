@@ -154,6 +154,7 @@ function MailEditorModal({
 						attachments={mailAttachments}
 						showControl={showControl}
 						uploading={uploading}
+						mailProps={mailProps}
 					/>
 				) : (
 					<EmailTemplateList

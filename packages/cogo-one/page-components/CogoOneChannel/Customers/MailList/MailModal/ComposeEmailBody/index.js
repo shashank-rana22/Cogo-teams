@@ -30,6 +30,7 @@ function ComposeEmailBody(props) {
 		showControl = null,
 		uploading = false,
 		setActiveMailAddress = () => {},
+		mailProps = {},
 	} = props || {};
 
 	const userActiveMails = useMemo(() => (
@@ -76,6 +77,7 @@ function ComposeEmailBody(props) {
 				showControl={showControl}
 				errorValue={errorValue}
 				setEmailState={setEmailState}
+				mailProps={mailProps}
 			/>
 
 			<div className={styles.type_to}>

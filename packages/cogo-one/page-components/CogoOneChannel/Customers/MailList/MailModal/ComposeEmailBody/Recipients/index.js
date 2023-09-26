@@ -3,7 +3,9 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import MailRecipientType from '../../../../../../../common/MailRecipientType';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../constants/viewTypeMapping';
 
+import OrgSpecificRecipients from './OrgSpecificRecipients';
 import styles from './styles.module.css';
 
 const EMAIL_RECIPIENTS = [
@@ -21,6 +23,11 @@ const EMAIL_RECIPIENTS = [
 	},
 ];
 
+const ACTIVE_RECIPIENTS_COMP = {
+	specific : OrgSpecificRecipients,
+	default  : MailRecipientType,
+};
+
 function Recipients({
 	emailState = {},
 	handleChange = () => {},
@@ -31,7 +38,14 @@ function Recipients({
 	setEmailState = () => {},
 	showControl = '',
 	errorValue = '',
+	mailProps = {},
 }) {
+	const {
+		buttonType = '',
+		viewType = '',
+	} = mailProps;
+
+	const [orgId, setOrgId] = useState('');
 	const [enabledRecipients, setEnabledRecipients] = useState({
 		ccrecipients  : !isEmpty(emailState?.ccrecipients),
 		bccrecipients : !isEmpty(emailState?.bccrecipients),
@@ -44,6 +58,12 @@ function Recipients({
 		setEmailState((prev) => ({ ...prev, [itm.value]: [] }));
 	};
 
+	const restrictMailToOrganizations = (
+		VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.permissions?.restrict_mail_to_organizations || false
+	);
+
+	const showOrgRecipients = buttonType === 'send_mail' && restrictMailToOrganizations;
+
 	return (
 		<div className={styles.container}>
 			{EMAIL_RECIPIENTS.map((itm) => {
@@ -51,17 +71,20 @@ function Recipients({
 					return null;
 				}
 
+				const ActiveRecipientComp = ACTIVE_RECIPIENTS_COMP?.[showOrgRecipients ? 'specific' : 'default'];
+
 				return (
 					<div
 						className={styles.type_to}
 						key={itm.value}
+						style={{ borderBottom: showOrgRecipients ? 'unset' : '1px solid #e0e0e0' }}
 					>
 						<div className={styles.mail_recipient_container}>
 							<div className={styles.sub_text}>
 								{itm.label}
 								:
 							</div>
-							<MailRecipientType
+							<ActiveRecipientComp
 								emailRecipientType={emailState?.[itm.value]}
 								handleDelete={handleDelete}
 								showControl={showControl}
@@ -71,8 +94,12 @@ function Recipients({
 								handleKeyPress={handleKeyPress}
 								handleCancel={handleCancel}
 								handleEdit={handleEdit}
+								setOrgId={setOrgId}
+								orgId={orgId}
+								setEmailState={setEmailState}
 							/>
 						</div>
+
 						<div className={styles.button_styles}>
 							{itm.value === 'toUserEmail' ? (
 								<>

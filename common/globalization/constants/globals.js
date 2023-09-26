@@ -793,6 +793,10 @@ const GLOBAL_CONSTANTS = {
 		export_rates             : 'Export.rates@cogoport.com',
 		cogoport_ftl_collections : 'ftl.collections@cogoport.com',
 		cogoport_support         : 'support@cogoport.com',
+		hr                       : 'hr@cogoport.com',
+		internal_supply          : 'internal.supply@cogoport.com',
+		internal_operations      : 'internal.operations@cogoport.com',
+		internal_service         : 'internal.customer@cogoport.com',
 	},
 	mobile_number: {
 		cogoone_sales_contact_no: '+91-8069182176',
