@@ -40,13 +40,13 @@
 	position: relative;
 	width: 441px;
 	height: 6px;
-	background-color: #f6f5fe;
+	background-color: #f8aea8;
 	border-radius: 4px;
 }
 
 .filled_bar {
 	height: 100%;
-	background-color: #bdaff9;
+	background-color: #f37166;
 	border-radius: 4px;
 }
 
@@ -67,6 +67,6 @@
 	top: -8px;
 	width: 10px;
 	height: 10px;
-	background-color: #bdaff9;
+	background-color: #bf291e;
 	border-radius: 10px;
 }

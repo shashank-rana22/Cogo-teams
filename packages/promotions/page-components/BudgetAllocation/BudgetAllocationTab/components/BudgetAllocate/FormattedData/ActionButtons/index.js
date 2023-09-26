@@ -6,7 +6,7 @@ import DeactivatePromoBudget from '../../../../hooks/useDeactivatePromoBudget';
 
 import styles from './styles.module.css';
 
-function ActionButtons({ item, refetch }) {
+function ActionButtons({ item = {}, refetch = () => {} }) {
 	const { deactivateBudget, loading } = DeactivatePromoBudget({ refetch });
 	const handleDeactivate = (deactivateData) => {
 		deactivateBudget(deactivateData);
@@ -16,8 +16,8 @@ function ActionButtons({ item, refetch }) {
 		return (
 			<Button
 				onClick={() => handleDeactivate(item)}
-				className="secondary sm"
 				style={{ width: 'fit-content' }}
+				themeType="secondary"
 				loading={loading}
 			>
 				Deactivate

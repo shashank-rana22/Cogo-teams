@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-const useGetPromoAllocationDetail = ({ selectedDetails, filterValue }) => {
+const useGetPromoAllocationDetail = ({ selectedDetails = {}, filterValue = {} }) => {
 	const {
 		general: { scope = '' },
 	} = useSelector((state) => state);

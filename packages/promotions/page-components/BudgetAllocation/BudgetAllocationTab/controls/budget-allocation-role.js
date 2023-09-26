@@ -10,6 +10,7 @@ const RoleOptions = [
 		valueKey       : 'id',
 		theme          : 'admin',
 		defaultOptions : false,
+		isClearable    : true,
 	},
 ];
 export default RoleOptions;

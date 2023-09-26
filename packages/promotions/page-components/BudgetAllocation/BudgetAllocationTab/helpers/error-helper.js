@@ -1,4 +1,4 @@
-export const flattenErrorToString = (err) => {
+export const flattenErrorToString = (err = null) => {
 	if (err === null || typeof err === 'undefined') {
 		return '';
 	}

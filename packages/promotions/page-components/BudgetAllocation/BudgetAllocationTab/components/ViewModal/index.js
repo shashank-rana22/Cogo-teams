@@ -12,10 +12,10 @@ import formattedData from './FormattedData';
 import styles from './styles.module.css';
 
 function ViewModal({
-	setShowViewModal,
-	showViewModal,
+	setShowViewModal = () => {},
+	showViewModal = false,
 	selectedDetails = {},
-	refetchListBudgetAllocation,
+	refetchListBudgetAllocation = () => {},
 }) {
 	const [filterValue, setFilterValue] = useState('');
 	const DEFAULT_VALUES = {};

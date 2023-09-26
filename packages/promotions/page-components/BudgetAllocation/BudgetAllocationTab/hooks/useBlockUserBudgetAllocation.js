@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useBlockUserBudgetAllocation = ({ setBlock, refetch }) => {
+const useBlockUserBudgetAllocation = ({ setBlock = () => {}, refetch = () => {} }) => {
 	const {
 		general: { scope = '' },
 	} = useSelector((state) => state);

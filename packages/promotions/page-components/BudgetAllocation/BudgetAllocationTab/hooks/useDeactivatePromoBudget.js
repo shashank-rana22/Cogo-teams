@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useDeactivatePromoBudget = ({ refetch }) => {
+const useDeactivatePromoBudget = ({ refetch = () => {} }) => {
 	const {
 		general: { scope = '' },
 	} = useSelector((state) => state);

@@ -7,18 +7,18 @@ import useBudgetAllocation from '../../hooks/useBudgetAllocation';
 import styles from './styles.module.css';
 
 function ShowModal({
-	FormData,
-	setFormData,
-	setShowModal,
-	refetch,
-	showForm,
-	reset,
-	radiohandleSubmit,
-	radioErrors,
-	radioReset,
-	radioControl,
-	radioControls,
-	radioWatch,
+	FormData = {},
+	setFormData = () => {},
+	setShowModal = () => {},
+	refetch = () => {},
+	showForm = () => {},
+	reset = () => {},
+	radiohandleSubmit = () => {},
+	radioErrors = {},
+	radioReset = () => {},
+	radioControl = {},
+	radioControls = {},
+	radioWatch = {},
 }) {
 	const [showErrorModal, setShowErrorModal] = useState(false);
 	const closeModal = () => {

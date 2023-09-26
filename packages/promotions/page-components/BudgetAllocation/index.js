@@ -1,4 +1,4 @@
-import { TabPanel, Tabs, Button } from '@cogoport/components';
+import { TabPanel, Tabs } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import BudgetAllocationTab from './BudgetAllocationTab';
@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 
 function BudgetAllocation() {
 	const [activeTab, setActiveTab] = useState('dashboard');
-	const [formButton, setFormButton] = useState(false);
 
 	return (
 		<div>
@@ -27,26 +26,7 @@ function BudgetAllocation() {
 						title="Budget Allocation"
 					>
 						<div className={styles.tab_margin}>
-							{!formButton && activeTab === 'budget_allocation' ? (
-								<div
-									style={{
-										display        : 'flex',
-										justifyContent : 'flex-end',
-										marginTop      : '10px',
-									}}
-								>
-									<Button
-										className="primary sm"
-										onClick={() => setFormButton((prev) => !prev)}
-									>
-										ALLOCATE
-									</Button>
-								</div>
-							) : null}
-							<BudgetAllocationTab
-								formButton={formButton}
-								setFormButton={setFormButton}
-							/>
+							<BudgetAllocationTab />
 						</div>
 					</TabPanel>
 

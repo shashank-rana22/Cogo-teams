@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-const useListPromoBudgetAllocation = ({ activeTab, role }) => {
+const useListPromoBudgetAllocation = ({ activeTab = 'active_budget', role = '' }) => {
 	const [List, setList] = useState([]);
 	const [paginationData, setPaginationData] = useState({});
 	const [pagination, setPagination] = useState({ page: 1 });

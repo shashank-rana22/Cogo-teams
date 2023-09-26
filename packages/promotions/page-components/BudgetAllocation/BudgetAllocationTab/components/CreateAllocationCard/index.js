@@ -6,15 +6,15 @@ import Layout from '../../../../../common/Layout';
 import styles from './styles.module.css';
 
 function CreateAllocationCard({
-	setFormData,
-	setShowModal,
-	formButton,
-	setFormButton,
-	control,
-	controls,
-	handleSubmit,
-	errors,
-	reset,
+	setFormData = () => {},
+	setShowModal = () => {},
+	formButton = false,
+	setFormButton = () => {},
+	control = {},
+	controls = {},
+	handleSubmit = () => {},
+	errors = {},
+	reset = () => {},
 }) {
 	const onClickAllocate = (data) => {
 		setFormData(data);

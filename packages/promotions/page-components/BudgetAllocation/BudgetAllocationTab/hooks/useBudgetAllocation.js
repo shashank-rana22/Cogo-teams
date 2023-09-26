@@ -6,12 +6,12 @@ import { flattenErrorToString } from '../helpers/error-helper';
 
 const useBudgetAllocation = ({
 	FormData = {},
-	setShowErrorModal,
-	setShowModal,
-	refetch,
-	showForm,
-	reset,
-	radioReset,
+	setShowErrorModal = () => {},
+	setShowModal = () => {},
+	refetch = () => {},
+	showForm = () => {},
+	reset = () => {},
+	radioReset = () => {},
 }) => {
 	const formdata = FormData;
 

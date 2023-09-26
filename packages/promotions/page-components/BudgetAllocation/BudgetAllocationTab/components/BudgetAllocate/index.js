@@ -10,13 +10,13 @@ const ZERO = 0;
 
 function BudgetAllocate({
 	setSelectedDetails = () => {},
-	setShowViewModal,
-	promoBudgetList,
-	paginationData,
-	setPagination,
-	pagination,
-	loading,
-	refetch,
+	setShowViewModal = () => {},
+	promoBudgetList = [],
+	paginationData = {},
+	setPagination = () => {},
+	pagination = { page: 1 },
+	loading = true,
+	refetch = () => {},
 }) {
 	const pageSize = paginationData ? paginationData.page_limit : ZERO;
 	const currentPage = paginationData ? paginationData?.page : ZERO;

@@ -1,4 +1,4 @@
-import { TabPanel, Tabs } from '@cogoport/components';
+import { TabPanel, Tabs, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
@@ -19,7 +19,8 @@ const TABS = [
 	{ name: 'inactive_budget', title: 'Deactivated', key: 'inactive_budget' },
 ];
 
-function BudgetAllocationTab({ formButton, setFormButton }) {
+function BudgetAllocationTab() {
+	const [formButton, setFormButton] = useState(false);
 	const [showViewModal, setShowViewModal] = useState(false);
 	const [selectedDetails, setSelectedDetails] = useState({});
 	const [showModal, setShowModal] = useState(false);
@@ -98,6 +99,22 @@ function BudgetAllocationTab({ formButton, setFormButton }) {
 
 	return (
 		<div>
+			{!formButton ? (
+				<div
+					style={{
+						display        : 'flex',
+						justifyContent : 'flex-end',
+						marginTop      : '10px',
+					}}
+				>
+					<Button
+						className="primary sm"
+						onClick={() => setFormButton((prev) => !prev)}
+					>
+						ALLOCATE
+					</Button>
+				</div>
+			) : null}
 			{formButton && (
 				<CreateAllocationCard
 					setFormData={setFormData}

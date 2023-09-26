@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 
 import { flattenErrorToString } from '../helpers/error-helper';
 
-const useUpdateBudgetAllocation = ({ setShowSaveLink, refetch }) => {
+const useUpdateBudgetAllocation = ({ setShowSaveLink = () => {}, refetch = () => {} }) => {
 	const {
 		general: { scope = '' },
 	} = useSelector((state) => state);
