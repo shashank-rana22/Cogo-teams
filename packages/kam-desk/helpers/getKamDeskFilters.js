@@ -15,7 +15,7 @@ export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 
 	let tabwiseFilters = {};
 
-	if (shipmentType === 'fcl_freight' && stepperTab === 'export_import') {
+	if (stepperTab === 'export_import' && ['fcl_freight', 'lcl_freight'].includes(shipmentType)) {
 		const export_tabs = Object.keys(tabPayload?.[shipmentType]?.export || {});
 		const import_tabs = Object.keys(tabPayload?.[shipmentType]?.import || {});
 
@@ -47,12 +47,23 @@ export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 	}
 
 	if (shipmentType === 'fcl_freight' && stepperTab === 'export_import') {
-		if (['upload_booking_note', 'update_container_details'].includes(activeTab)) {
+		if (activeTab === 'update_container_details') {
 			finalFilters.trade_type = ['export'];
-		} else if (['confirm_with_shipper', 'upload_shipping_order'].includes(activeTab)) {
+		} else if (activeTab === 'confirm_with_shipper') {
 			finalFilters.trade_type = ['import'];
 		} else if (['document_approval', 'vessel_departed',
 			'vessel_arrived', 'completed', 'cancelled'].includes(activeTab)) {
+			finalFilters.trade_type = ['import', 'export'];
+		}
+	}
+
+	if (shipmentType === 'lcl_freight' && stepperTab === 'export_import') {
+		if (activeTab === 'bl_document_approval') {
+			finalFilters.trade_type = ['export'];
+		} else if (activeTab === 'do_document_approval') {
+			finalFilters.trade_type = ['import'];
+		} else if (['vessel_departed', 'vessel_arrived',
+			'completed', 'cancelled'].includes(activeTab)) {
 			finalFilters.trade_type = ['import', 'export'];
 		}
 	}

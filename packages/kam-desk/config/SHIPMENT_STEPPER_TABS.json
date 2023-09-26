@@ -19,6 +19,10 @@
   ],
   "lcl_freight": [
     {
+      "value": "export_import",
+      "label": "Export/Import"
+    },
+    {
       "value": "export",
       "label": "Export"
     },

@@ -17,13 +17,12 @@ const scheduleArrivalToday = { schedule_arrival_less_than: TODAY };
 
 export const CRITICAL_TABS = {
 	fcl_freight: {
-
 		export_import: {
 			mark_confirmed           : scheduleDepartureInThreeDays,
 			upload_booking_note      : scheduleDepartureInThreeDays,
 			update_container_details : scheduleDepartureInThreeDays,
 			confirm_with_shipper     : scheduleDepartureInThreeDays,
-			upload_shipping_order    : scheduleDepartureInThreeDays,
+			// upload_shipping_order    : scheduleDepartureInThreeDays,
 			list_task_pending        : scheduleDepartureYesterday,
 			document_approval        : scheduleDepartureTomorrow,
 			vessel_departed          : scheduleArrivalToday,
@@ -31,6 +30,16 @@ export const CRITICAL_TABS = {
 		},
 	},
 	lcl_freight: {
+		export_import: {
+			confirm_booking      : scheduleDepartureInThreeDays,
+			list_task_pending    : scheduleDepartureYesterday,
+			upload_carting_order : scheduleDepartureInThreeDays,
+			bl_document_approval : scheduleDepartureTomorrow,
+			do_document_approval : scheduleDepartureTomorrow,
+			vessel_departed      : scheduleArrivalToday,
+			vessel_arrived       : { detention_days: 2 },
+		},
+		// can be removed
 		export: {
 			confirm_booking      : scheduleDepartureInThreeDays,
 			list_task_pending    : scheduleDepartureYesterday,
@@ -123,7 +132,7 @@ const tabPayload = {
 					},
 				],
 			},
-			upload_shipping_order: {
+			upload_booking_note: {
 				import: [
 					{
 						task   : 'upload_booking_note',
@@ -226,8 +235,8 @@ const tabPayload = {
 	lcl_freight: {
 		export: {
 			confirm_booking: {
-				state           : ['shipment_received'],
-				task_attributes : [
+				state  : ['shipment_received'],
+				export : [
 					{
 						task                 : 'confirm_booking',
 						status               : 'pending',
@@ -236,7 +245,7 @@ const tabPayload = {
 				],
 			},
 			list_task_pending: {
-				task_attributes: [
+				export: [
 					{
 						task   : ['upload_si', 'upload_invoice'],
 						status : 'pending',
@@ -244,14 +253,14 @@ const tabPayload = {
 				],
 			},
 			upload_carting_order: {
-				task_attributes: [
+				export: [
 					{
 						task   : 'upload_carting_order',
 						status : 'pending',
 					},
 				],
 			},
-			document_approval: {
+			bl_document_approval: {
 				state               : 'in_progress',
 				bl_approval_pending : true,
 			},
@@ -268,8 +277,8 @@ const tabPayload = {
 		},
 		import: {
 			confirm_booking: {
-				state           : ['shipment_received'],
-				task_attributes : [
+				state  : ['shipment_received'],
+				import : [
 					{
 						task                 : 'confirm_booking',
 						status               : 'pending',
@@ -278,7 +287,7 @@ const tabPayload = {
 				],
 			},
 			list_task_pending: {
-				task_attributes: [
+				import: [
 					{
 						task   : ['upload_si', 'upload_invoice'],
 						status : 'pending',
@@ -286,14 +295,14 @@ const tabPayload = {
 				],
 			},
 			upload_carting_order: {
-				task_attributes: [
+				import: [
 					{
 						task   : 'upload_carting_order',
 						status : 'pending',
 					},
 				],
 			},
-			document_approval: {
+			do_document_approval: {
 				state               : 'in_progress',
 				do_approval_pending : true,
 			},

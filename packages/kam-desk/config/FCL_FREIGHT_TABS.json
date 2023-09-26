@@ -7,7 +7,7 @@
             },
             {
                 "value":"upload_booking_note",
-                "label":"Waiting for BN"
+                "label":"Waiting for BN/SO"
             },
             {
                 "value":"update_container_details",
@@ -16,10 +16,6 @@
             {
                 "label":"Confirm with Shipper",
                 "value":"confirm_with_shipper"
-            },
-            {
-                "label":"Waiting for SO",
-                "value":"upload_shipping_order"
             },
             {
                 "value":"list_task_pending",
