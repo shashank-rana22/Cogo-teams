@@ -66,12 +66,12 @@ function ViewInvoices() {
 	const isTagFound = !loading && !isEmpty(mappingsData);
 
 	useEffect(() => {
-		if (!isTagFound) {
+		if (!isTagFound && !loading) {
 			setCheckItem(
 				(prev: any) => ({ ...prev, taggingCheck: true }),
 			);
 		}
-	}, [isTagFound]);
+	}, [isTagFound, loading]);
 
 	return (
 		<div>
