@@ -11,13 +11,14 @@ import dateTimeConverter from '../../../../../utils/dateTimeConverter';
 
 import styles from './styles.module.css';
 
+const DEFAULT_UNREAD_MESSAGES = 0;
+const MAXIMUM_UNREAD_MESSAGES = 100;
 const GROUP_COUNT = 2;
 
 function GroupCard({
 	eachRoom = {},
 	activeTeamCard = {},
 	setActiveTeamCard = () => {},
-	loggedInUserId = '',
 }) {
 	const {
 		id = '',
@@ -25,9 +26,9 @@ function GroupCard({
 		new_message_sent_at = 0,
 		group_members_count = 0,
 		is_pinned = false,
-		group_members_data = [],
-		group_name = '',
+		search_name = '',
 		last_message_document = {},
+		self_unread_messages_count = 0,
 	} = eachRoom || {};
 
 	const activeCard = id === activeTeamCard?.id;
@@ -35,10 +36,6 @@ function GroupCard({
 	const lastActive = new Date(new_message_sent_at);
 
 	const isGroup = group_members_count > GROUP_COUNT;
-
-	const userName = group_members_data?.find((eachGroupMember) => eachGroupMember?.id !== loggedInUserId)?.name || '';
-
-	const displayName = isGroup ? group_name : (userName || 'User');
 
 	const lastMessage = last_message_document?.response?.message || '';
 
@@ -69,15 +66,22 @@ function GroupCard({
 						/>
 					) : (
 						<Avatar
-							personName={displayName}
+							personName={search_name}
 							alt="name"
 							size="26px"
 							className={styles.styled_avatar}
 						/>
 					)}
 					<div className={styles.type}>
-						{startCase(displayName)}
+						{startCase(search_name)}
 					</div>
+					{self_unread_messages_count > DEFAULT_UNREAD_MESSAGES && (
+						<div className={styles.new_message_count}>
+							{self_unread_messages_count > MAXIMUM_UNREAD_MESSAGES
+								? '99+'
+								: self_unread_messages_count}
+						</div>
+					)}
 				</div>
 				<div className={styles.description}>
 					<div className={cl`${styles.label} ${is_draft ? styles.draft_styles : ''}`}>

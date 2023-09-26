@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 function ReceiveComponent({
 	eachMessage = {},
 }) {
-	const { created_at = {}, name = '', response = {} } = eachMessage || {};
+	const { created_at = {}, send_by = '', response = {} } = eachMessage || {};
 
 	const date = created_at && formatDate({
 		date       : new Date(created_at),
@@ -25,14 +25,14 @@ function ReceiveComponent({
 		<div className={styles.container}>
 			<div className={styles.sender_details}>
 				<span className={styles.sender_name}>
-					{startCase(name)}
+					{startCase(send_by)}
 				</span>
 				{date || ''}
 			</div>
 
 			<div className={styles.message}>
 				<Avatar
-					personName={eachMessage.name}
+					personName={send_by}
 					alt="img"
 					disabled={false}
 					size="30px"

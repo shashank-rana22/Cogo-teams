@@ -1,17 +1,14 @@
 .container {
 	position: relative;
+	display: flex;
+	flex-direction: column;
 	height: 100%;
 	background: #f9f9f9;
 	border-radius: 8px;
 }
 
-.message_container {
-	height: calc(100% - 104px);
-	background: #f9f9f9;
-}
-
 .messages {
-	height: calc(100% - 150px);
+	flex: 1;
 	overflow-y: auto;
 }
 
@@ -22,7 +19,7 @@
 }
 
 .footer {
-	position: absolute;
+	position: sticky;
 	bottom: 0;
 	width: 100%;
 	background: #fff;

@@ -26,6 +26,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	width: 100%;
 	height: 100%;
 	margin-left: 10px;
 }
@@ -36,9 +37,13 @@
 }
 
 .type {
+	width: calc(100% - 66px);
 	margin-left: 6px;
+	overflow: hidden;
 	font-size: 12px;
 	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .description {
@@ -62,9 +67,11 @@
 
 .activity_duration {
 	width: 60px;
+	margin-right: 4px;
 	font-size: 10px;
 	font-weight: 500;
 	color: #4f4f4f;
+	text-align: right;
 	white-space: nowrap;
 }
 
@@ -89,4 +96,51 @@
 	font-style: oblique;
 	font-weight: 600;
 	color: #4f4f4f;
+}
+
+.new_message_count {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	margin-right: 20px;
+	font-size: 9px;
+	color: #fff;
+	background: #ef0a1a;
+	border-radius: 50%;
+}
+
+.content {
+	max-width: 90%;
+	height: 18px;
+	margin-left: 3px;
+	overflow: hidden;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	:global {
+		img {
+			display: none;
+		}
+
+		p {
+			width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		div {
+			display: none;
+		}
+	}
+}
+
+.content_div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 5px;
 }

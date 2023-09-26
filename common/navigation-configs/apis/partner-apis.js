@@ -12875,6 +12875,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'create_communication_internal_chat',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'create_draft_reply_all_html',
 			access_type  : 'private',
 			service_name : 'cogolens',

@@ -11,10 +11,13 @@ import {
 import { useState } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
+import { joinNamesWithCount } from '../helpers/sendTeamMessageHelpers';
 
 const LIMIT = 1;
 
 const SELF_COUNT = 1;
+
+const GROUP_COUNT_MIN = 2;
 
 async function getExistingGlobalRoom({ userIds = [], length = 0, firestore = {}, loggedInAgendId }) {
 	const internalRoomsCollection = collection(firestore, FIRESTORE_PATH.internal_rooms);
@@ -22,7 +25,7 @@ async function getExistingGlobalRoom({ userIds = [], length = 0, firestore = {},
 	const collectionQuery = query(
 		internalRoomsCollection,
 		where('group_members_count', '==', length),
-		where('group_member_ids', 'array-contains-any', userIds),
+		where('group_members_ids', 'array-contains-any', userIds),
 		orderBy('new_message_sent_at', 'desc'),
 		limit(LIMIT),
 	);
@@ -33,9 +36,13 @@ async function getExistingGlobalRoom({ userIds = [], length = 0, firestore = {},
 
 	const roomData = globalRoomDataDoc?.data() || {};
 
+	const selfRoomId = roomData?.group_members_rooms?.find(
+		(member) => member?.user_id === loggedInAgendId,
+	)?.internal_group_id || '';
+
 	return {
 		group_id : globalRoomDataDoc?.id,
-		id       : roomData?.group_member_rooms?.[loggedInAgendId] || '',
+		id       : selfRoomId,
 		...roomData,
 	};
 }
@@ -47,7 +54,7 @@ async function getExistingDraftRoom({ userIds = [], length = 0, firestore = {}, 
 		selfInternalRoomsCollection,
 		where('is_draft', '==', true),
 		where('group_members_count', '==', length),
-		where('group_member_ids', 'array-contains-any', userIds),
+		where('group_members_ids', 'array-contains-any', userIds),
 		orderBy('created_at', 'desc'),
 		limit(LIMIT),
 	);
@@ -62,8 +69,18 @@ async function getExistingDraftRoom({ userIds = [], length = 0, firestore = {}, 
 async function createDraftRoom({ userIds = [], userIdsData = [], firestore = {}, loggedInAgendId = '', length = 0 }) {
 	const selfInternalRoomsCollection = collection(firestore, `users/${loggedInAgendId}/groups`);
 
+	let searchName = '';
+	const isGroup = length > GROUP_COUNT_MIN;
+
+	if (!isGroup) {
+		searchName = userIdsData?.find((member) => member?.id !== loggedInAgendId)?.name || 'user';
+	} else {
+		const modifiedGroupMembers = userIdsData?.filter((member) => member?.id !== loggedInAgendId);
+		searchName = joinNamesWithCount({ modifiedGroupMembers });
+	}
+
 	const draftRoomPayload = {
-		group_member_ids         : userIds,
+		group_members_ids        : userIds,
 		created_at               : Date.now(),
 		updated_at               : Date.now(),
 		is_draft                 : true,
@@ -73,6 +90,8 @@ async function createDraftRoom({ userIds = [], userIdsData = [], firestore = {},
 		new_message_sent_at      : Date.now(),
 		self_has_unread_messages : false,
 		group_members_count      : length,
+		is_group                 : isGroup,
+		search_name              : searchName?.toUpperCase(),
 	};
 
 	const res = await addDoc(selfInternalRoomsCollection, draftRoomPayload);
@@ -97,21 +116,20 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 			},
 		}));
 	};
+
 	const createOrGetDraftTeamRoom = async ({ userIds = [], userIdsData = [] }) => {
-		console.log('userIds', userIds, userIdsData);
 		const userIdsLength = userIds.length + SELF_COUNT;
 		setLoading(true);
 
 		const modifiedUserIdsData = [...userIdsData, { id: loggedInAgendId, name: loggedInAgentName }];
 		const modifiedUserIds = [loggedInAgendId, ...userIds];
-		console.log('modifiedUserIds', modifiedUserIds);
 
 		try {
 			const globalRoomData = await getExistingGlobalRoom(
 				{ userIds: modifiedUserIds, length: userIdsLength, firestore, loggedInAgendId },
 			);
 
-			if (globalRoomData?.id) {
+			if (globalRoomData?.group_id) {
 				setActiveRoom({ val: globalRoomData });
 				return;
 			}
@@ -121,7 +139,6 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 			);
 
 			if (draftRoomData?.id) {
-				console.log('draftRoomData', draftRoomData);
 				setActiveRoom({ val: draftRoomData });
 				return;
 			}
@@ -133,7 +150,7 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 				loggedInAgendId,
 				length      : userIdsLength,
 			});
-			console.log('res', res);
+
 			setActiveRoom({ val: res });
 		} catch (e) {
 			console.error('e', e);

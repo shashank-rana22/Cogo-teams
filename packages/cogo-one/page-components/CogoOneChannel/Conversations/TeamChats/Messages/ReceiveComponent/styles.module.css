@@ -4,7 +4,7 @@
 
 	:global {
 		.ui_avatar_text {
-			background-color: none;
+			background: none;
 		}
 	}
 }
@@ -23,7 +23,7 @@
 }
 
 .sender_name {
-	margin-right: 8px;
+	margin-right: 4px;
 }
 
 .styled_avatar {

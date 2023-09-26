@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function Messages({
 	internalRoomId = '',
-	loading = false, // todo
+	loading = false,
 	firestore = {},
 }) {
 	if (loading) {
@@ -42,7 +42,10 @@ function Messages({
 	}
 
 	return (
-		<MessagesThread firestore={firestore} roomId={internalRoomId} />
+		<MessagesThread
+			firestore={firestore}
+			roomId={internalRoomId}
+		/>
 	);
 }
 

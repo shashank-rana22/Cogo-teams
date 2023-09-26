@@ -1,3 +1,5 @@
+import useFetchGlobalRoom from '../../../../hooks/useFetchGlobalRoom';
+
 import Footer from './Footer';
 import Header from './Header';
 import Messages from './Messages';
@@ -11,11 +13,22 @@ function TeamChats(props) {
 		loggedInUserId = '',
 		firestore = {},
 		setActiveTab = () => {},
+		activeTab = {},
 	} = props || {};
 
 	const {
 		group_id = '',
+		id = '',
 	} = activeTeamCard || {};
+
+	const { loading = false } = useFetchGlobalRoom({
+		firestore,
+		globalGroupId : group_id,
+		setActiveTab,
+		draftRoomId   : id,
+	});
+
+	const hasPermissionToEdit = (id || group_id);
 
 	return (
 		<div className={styles.container}>
@@ -29,11 +42,19 @@ function TeamChats(props) {
 				/>
 			</div>
 			<div className={styles.messages}>
-				<Messages internalRoomId={group_id} />
+				<Messages
+					internalRoomId={group_id}
+					firestore={firestore}
+					loading={loading}
+				/>
 			</div>
 			<div className={styles.footer}>
 				<Footer
 					suggestions={suggestions}
+					hasPermissionToEdit={hasPermissionToEdit}
+					activeTeamCard={activeTeamCard}
+					activeTab={activeTab}
+					firestore={firestore}
 				/>
 			</div>
 		</div>

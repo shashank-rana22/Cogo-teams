@@ -17,7 +17,6 @@ const ZERO_USERS = 0;
 function Header({
 	activeTeamCard = {},
 	viewType = '',
-	loggedInUserId = '',
 	firestore = {},
 	setActiveTab = () => {},
 }) {
@@ -25,19 +24,15 @@ function Header({
 
 	const {
 		group_members_count = 0,
-		group_name = '',
-		group_members_data = [],
+		is_draft = false,
+		search_name = '',
 	} = activeTeamCard || {};
 
 	const isGroup = group_members_count > GROUP_COUNT;
 
 	const newDraft = !(group_members_count > ZERO_USERS);
 
-	const userName = group_members_data?.find((eachGroupMember) => eachGroupMember?.id !== loggedInUserId)?.name || '';
-
-	const displayName = isGroup ? group_name : (userName || 'User');
-
-	if (newDraft) {
+	if (is_draft && newDraft) {
 		return (
 			<div className={styles.container}>
 				<ToUser
@@ -55,18 +50,18 @@ function Header({
 					<Image
 						src={GLOBAL_CONSTANTS.image_url.teams}
 						alt="group"
-						width={26}
-						height={26}
+						width={28}
+						height={28}
 					/>
 				) : (
 					<Avatar
-						personName={displayName}
+						personName={search_name}
 						alt="name"
-						size="26px"
+						size="28px"
 						className={styles.styled_avatar}
 					/>
 				)}
-				<div className={styles.name}>{startCase(displayName)}</div>
+				<div className={styles.name}>{startCase(search_name?.toLowerCase() || '')}</div>
 			</div>
 			<div className={styles.buttons_flex}>
 				<ButtonGroup size="xs" options={BUTTON_GROUP_OPTIONS} />

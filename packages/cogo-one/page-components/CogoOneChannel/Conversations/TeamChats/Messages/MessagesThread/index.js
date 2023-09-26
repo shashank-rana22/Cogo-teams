@@ -12,6 +12,7 @@ const CONVERSATION_TYPE_MAPPING = {
 	sent     : SentComponent,
 	received : ReceiveComponent,
 };
+
 function LoadPrevMessages({
 	loadingPrevMessages = false,
 	isLastPage = false,

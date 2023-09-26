@@ -62,6 +62,7 @@ function Conversations({
 			loggedInUserId : userId,
 			firestore,
 			setActiveTab,
+			activeTab,
 		},
 	};
 
