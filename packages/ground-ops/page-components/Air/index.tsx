@@ -53,6 +53,7 @@ function Air({ setGenerate = () => {}, setItem = () => {}, setViewDoc = () => {}
 	const [activeTab, setActiveTab] = useState(tabs[GLOBAL_CONSTANTS.zeroth_index].key);
 	const [filters, setFilters] = useState({});
 	const [relevantToMe, setRelevantToMe] = useState(false);
+	const [maxStatsTabKey, setMaxStatsTabKey] = useState('newAwbCount');
 
 	const ActiveTabComponent = tabsComponentMapping[activeTab] || null;
 
@@ -65,15 +66,21 @@ function Air({ setGenerate = () => {}, setItem = () => {}, setViewDoc = () => {}
 		setPage, listAPI, searchValue, setSearchValue,
 	} = useListShipmentPendingTasks({ activeTab, filter: filters, relevantToMe });
 
+	const { data: { stats = {} } = {} } = data || {};
+
 	useEffect(() => {
 		if (searchValue) {
-			const statsObj = data?.data?.stats || {};
+			const statsObj = stats || {};
 			const statsObjValues:Array<number> = Object.values(statsObj) || [];
 			const maxStats = Math.max(...statsObjValues);
 			const maxStatsKey = Object.keys(statsObj).find((key) => statsObj[key] === maxStats);
-			setActiveTab(TABS_STATS_MAPPING[maxStatsKey]);
+			setMaxStatsTabKey(TABS_STATS_MAPPING[maxStatsKey]);
 		}
-	}, [data, searchValue]);
+	}, [searchValue, stats]);
+
+	useEffect(() => {
+		setActiveTab(maxStatsTabKey);
+	}, [maxStatsTabKey]);
 
 	return (
 		<div>

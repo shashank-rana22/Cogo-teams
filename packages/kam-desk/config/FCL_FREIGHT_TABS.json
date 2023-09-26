@@ -47,8 +47,8 @@
                 "value":"mark_confirmed"
             },
             {
-                "label":"Verify Shipper",
-                "value":"verify_shipper"
+                "label":"Confirm with Shipper",
+                "value":"confirm_with_shipper"
             },
             {
                 "label":"Waiting for SO",

@@ -1,5 +1,5 @@
 import { Input } from '@cogoport/components';
-import { IcMSearchdark } from '@cogoport/icons-react';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import React from 'react';
 
 import Filter from '../../../../commons/Filters';
@@ -68,7 +68,7 @@ function SegmentedFilters({
 							setFilters={setFilters}
 						/>
 					</div>
-					<FilterModal setFilters={setFilters} filters={filters} />
+					<FilterModal setFilters={setFilters} />
 				</div>
 				<div className={styled.search_filter}>
 					<div className={styled.search}>
@@ -78,11 +78,8 @@ function SegmentedFilters({
 							value={searchValue}
 							onChange={(e: any) => setSearchValue(e)}
 							placeholder="Search by Invoice No./Shipment ID/Supplier name..."
-							suffix={(
-								<div style={{ margin: '4px', display: 'flex' }}>
-									<IcMSearchdark height={15} width={15} />
-								</div>
-							)}
+							suffix={<IcMSearchlight height={17} width={17} style={{ margin: '0 8px' }} />}
+
 						/>
 					</div>
 				</div>

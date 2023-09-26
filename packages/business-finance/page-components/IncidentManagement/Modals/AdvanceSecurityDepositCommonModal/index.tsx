@@ -19,6 +19,7 @@ interface Props {
 	row?:object,
 	getData?:Function,
 	loading?:boolean,
+	remarkValue?:string,
 	setRemarkValue?:React.Dispatch<React.SetStateAction<string>>,
 	type?:string,
 
@@ -31,6 +32,7 @@ function SecurityDepositCommonModal({
 	row,
 	getData,
 	loading,
+	remarkValue,
 	setRemarkValue,
 	type,
 }:Props) {
@@ -68,14 +70,16 @@ function SecurityDepositCommonModal({
 				{isEditable && (
 					<>
 						<div className={styles.remarks}>{`${t('incidentManagement:remarks')}*`}</div>
-						<Textarea
-							name="remark"
-							size="md"
-							rows={4}
-							cols={20}
-							placeholder={t('incidentManagement:remarks_placeholder')}
-							onChange={(e: string) => setRemarkValue(e)}
-						/>
+						<div className={styles.remark_text}>
+							<Textarea
+								name="remark"
+								size="md"
+								rows={4}
+								cols={20}
+								placeholder={t('incidentManagement:remarks_placeholder')}
+								onChange={(e: string) => setRemarkValue(e)}
+							/>
+						</div>
 					</>
 				)}
 			</Modal.Body>
@@ -86,7 +90,7 @@ function SecurityDepositCommonModal({
 							size="md"
 							themeType="secondary"
 							style={{ marginRight: '8px' }}
-							disabled={loading}
+							disabled={!(remarkValue.length) || loading}
 							onClick={() => {
 								getData({ status: 'REJECTED' });
 							}}
@@ -97,7 +101,7 @@ function SecurityDepositCommonModal({
 						<Button
 							size="md"
 							style={{ marginRight: '8px' }}
-							disabled={loading}
+							disabled={!(remarkValue.length) || loading}
 							onClick={() => {
 								getData({ status: 'APPROVED' });
 							}}

@@ -26,16 +26,24 @@ function useCreateAutoUpsellService({
 
 	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch: taskRefetch });
 
-	const createAutoUpsellService = async ({ payload }) => {
+	const createAutoUpsellService = async ({ payload, cargo_readiness_date }) => {
 		try {
 			await trigger({ data: payload });
 
 			await apiTrigger({
-				id          : task?.id,
-				update_data : {
+				id   : task?.id,
+				data : {
 					pending_task: {
 						id              : task?.id,
 						organization_id : shipment_data?.consignee_shipper_id || consigneeId,
+					},
+					fcl_freight_service: {
+						shipment_id: shipment_data?.id,
+						cargo_readiness_date,
+					},
+					shipment: {
+						id                   : shipment_data?.id,
+						consignee_shipper_id : shipment_data?.consignee_shipper_id || consigneeId,
 					},
 				},
 			});
@@ -45,9 +53,14 @@ function useCreateAutoUpsellService({
 	};
 
 	const onSubmit = (values) => {
-		const payload = getAutoUpsellPayload({ task, values, countryId });
+		const payload = getAutoUpsellPayload({
+			task,
+			values,
+			countryId,
+			consigneeId: shipment_data?.consignee_shipper_id || consigneeId,
+		});
 
-		createAutoUpsellService({ payload });
+		createAutoUpsellService({ payload, cargo_readiness_date: values?.cargo_readiness_date });
 	};
 
 	return {

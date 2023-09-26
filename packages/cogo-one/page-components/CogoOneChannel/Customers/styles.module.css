@@ -5,6 +5,14 @@
 	padding: 10px;
 	background: #fff;
 	border-radius: 8px;
+
+	:global {
+		.ui_tabs_list_badge {
+			padding: 0 3px !important;
+			margin-left: 2px !important;
+			font-weight: 500 !important;
+		}
+	}
 }
 
 .title {

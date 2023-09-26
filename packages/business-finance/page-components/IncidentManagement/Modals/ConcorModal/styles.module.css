@@ -14,7 +14,6 @@
 
 .name {
 	min-width: 160px;
-	padding: 0 4px;
 	font-weight: 600;
 }
 
@@ -39,7 +38,7 @@
 }
 
 .link {
-	color: blue !important;
+	color: #f68b21;
 	text-decoration: underline !important;
 }
 

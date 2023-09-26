@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import getFormattedAmount from '@cogoport/purchase-invoicing/common/helpers/formatAmount';
 
+import getFormattedAmount from '../../../../helpers/getFormattedAmount';
 import getServiceNameforTableColumn from '../../../../helpers/getServiceNameforTableColumn';
 
 const TWO = 2;

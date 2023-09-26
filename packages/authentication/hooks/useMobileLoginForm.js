@@ -12,7 +12,7 @@ const useMobileLoginForm = ({ onSendOtp = () => {}, t = () => {} }) => {
 			setCustomError('');
 			onSendOtp(values, e);
 		} else {
-			setCustomError(t('login:loginField_mobile_error'));
+			setCustomError(t('login:login_field_mobile_error'));
 		}
 	};
 

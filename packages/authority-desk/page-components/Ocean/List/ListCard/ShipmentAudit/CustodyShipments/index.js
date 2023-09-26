@@ -1,7 +1,7 @@
-import { Pagination, Loader } from '@cogoport/components';
+import { Pagination, Loader, Toggle } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../../../../commons/EmptyState';
@@ -10,136 +10,161 @@ import useRedirectToShipmentDetailPage from '../../../../../../hooks/useRedirect
 
 import styles from './styles.module.css';
 
+const DOC_STATUS_MAPPING = {
+	pending  : 'Final BL not uploaded',
+	uploaded : 'Final BL collected',
+};
+
+const STATUS_MAPPING = ['uploaded', 'pending'];
+
+function RenderBLDetails({ blDetails = {} }) {
+	return (
+		<div>
+			{STATUS_MAPPING.includes(blDetails?.status)
+				? DOC_STATUS_MAPPING[blDetails?.status]
+				: startCase(blDetails?.status)}
+		</div>
+	);
+}
+
 function CustodyShipments({ item = {} }) {
 	const geo = getGeoConstants();
 
 	const [filters, setFilters] = useState({ page: 1 });
+	const [isJobClosed, setIsJobClosed] = useState(false);
 
-	const { data, loading } = useListShipments({ item, filters });
+	const { data = {}, loading = false } = useListShipments({ item, filters, isJobClosed });
 
 	const { redirect } = useRedirectToShipmentDetailPage();
 
-	const { list = [], total_count } = data || {};
-
-	if (list?.length === 0 && !loading) {
-		return <EmptyState />;
-	}
-
-	if (loading) {
-		return (
-			<div className={styles.loader}>
-				Loading Shipments Data....
-				<Loader themeType="primary" className={styles.loader_icon} />
-			</div>
-		);
-	}
-
-	const renderPagination = (
-		<Pagination
-			type="table"
-			totalItems={total_count}
-			pageSize={10}
-			currentPage={filters.page}
-			className={styles.pagination}
-			onPageChange={(val) => setFilters({
-				...filters,
-				page: val,
-			})}
-		/>
-	);
-
-	const docStatusMapping = {
-		pending  : 'Final BL not uploaded',
-		uploaded : 'Final BL collected',
-	};
-
-	const renderBLDetails = (blDetails) => (
-		<div>
-			{['uploaded', 'pending'].includes(blDetails.status)
-				? docStatusMapping[blDetails.status]
-				: startCase(blDetails.status)}
-		</div>
-	);
-
-	const renderDODetails = (doDetails) => (
-		<div>{startCase(doDetails.status)}</div>
-	);
+	const { list = [], total_count = 0 } = data || {};
 
 	return (
 		<div className={styles.container}>
-			{renderPagination}
+			<div className={styles.filter_container}>
+				<Toggle
+					size="sm"
+					offLabel="Job Closed"
+					onLabel="Job Open"
+					onChange={() => setIsJobClosed(!isJobClosed)}
+				/>
 
-			<table>
-				<thead>
-					<tr className={styles.row}>
-						<th>Shipment ID</th>
-						<th>Service</th>
-						<th>Trade Type</th>
-						<th>Milestone</th>
-						<th>Invoice Value</th>
-						<th>Cargo Value</th>
-						<th>Payment Term</th>
-						<th>BL Status</th>
-						<th>DO Status</th>
-						<th>Booking Agent</th>
-					</tr>
-				</thead>
+				<Pagination
+					type="table"
+					totalItems={total_count}
+					pageSize={10}
+					currentPage={filters.page}
+					className={styles.pagination}
+					onPageChange={(val) => setFilters({
+						...filters,
+						page: val,
+					})}
+				/>
+			</div>
 
-				<tbody>
-					{(list || []).map((val) => (
-						<tr className={styles.row} key={val.serial_id}>
-							<td
-								role="presentation"
-								onClick={() => redirect({ service: val?.shipment_type, shipment: val })}
-							>
-								{val?.serial_id}
+			{loading ? (
+				<div className={styles.loader}>
+					Loading Shipments Data....
+					<Loader themeType="primary" className={styles.loader_icon} />
+				</div>
+			) : null}
 
-							</td>
-							<td>
-								{startCase(val?.shipment_type)}
-								{' '}
-							</td>
-							<td>{startCase(val?.trade_type)}</td>
-							<td>{startCase(val?.state)}</td>
-							<td>
-								{' '}
-								{ formatAmount({
-									amount   : val?.inr_invoice_value,
-									currency : geo.country.currency.code,
-									options  : {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 2,
-									},
-								})}
-								{' '}
+			{!loading && isEmpty(list) ? (
+				<EmptyState />
+			) : null}
 
-							</td>
-							<td>
-								{formatAmount({
-									amount   : val?.cargo_value,
-									currency : val?.cargo_value_currency,
-									options  : {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 2,
-									},
-								})}
-							</td>
-							<td>{startCase(val?.payment_term || '--')}</td>
-							<td>
-								{(val?.bl_details || []).map(renderBLDetails)}
-							</td>
-							<td>
-								{(val?.do_details || []).map(renderDODetails)}
-							</td>
-							<td>{val.booking_agent?.name || '--'}</td>
-						</tr>
-					))}
-				</tbody>
-			</table>
+			{!isEmpty(list) && !loading ? (
+				<>
+					<table>
+						<thead>
+							<tr className={styles.row}>
+								<th>Shipment ID</th>
+								<th>Service</th>
+								<th>Trade Type</th>
+								<th>Milestone</th>
+								<th>Invoice Value</th>
+								<th>Cargo Value</th>
+								<th>Payment Term</th>
+								<th>BL Status</th>
+								<th>DO Status</th>
+								<th>Booking Agent</th>
+							</tr>
+						</thead>
 
-			{renderPagination}
+						<tbody>
+							{(list || []).map((val) => (
+								<tr className={styles.row} key={val?.serial_id}>
+									<td>
+										<div
+											role="presentation"
+											onClick={() => redirect({ service: val?.shipment_type, shipment: val })}
+										>
+											{val?.serial_id}
+										</div>
+
+									</td>
+									<td>
+										{startCase(val?.shipment_type)}
+										{' '}
+									</td>
+									<td>{startCase(val?.trade_type)}</td>
+									<td>{startCase(val?.state)}</td>
+									<td>
+										{' '}
+										{ formatAmount({
+											amount   : val?.inr_invoice_value,
+											currency : geo.country.currency.code,
+											options  : {
+												style                 : 'currency',
+												currencyDisplay       : 'code',
+												maximumFractionDigits : 2,
+											},
+										})}
+										{' '}
+
+									</td>
+									<td>
+										{formatAmount({
+											amount   : val?.cargo_value,
+											currency : val?.cargo_value_currency,
+											options  : {
+												style                 : 'currency',
+												currencyDisplay       : 'code',
+												maximumFractionDigits : 2,
+											},
+										})}
+									</td>
+									<td>{startCase(val?.payment_term || '--')}</td>
+									<td>
+										{(val?.bl_details || []).map((blDetails) => (
+											<RenderBLDetails
+												key={blDetails?.id}
+												blDetails={blDetails}
+											/>
+										))}
+									</td>
+									<td>
+										{(val?.do_details || []).map((doDetails) => startCase(doDetails?.status))}
+									</td>
+									<td>{val?.booking_agent?.name || '--'}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+
+					<Pagination
+						type="table"
+						totalItems={total_count}
+						pageSize={10}
+						currentPage={filters.page}
+						className={styles.pagination}
+						onPageChange={(val) => setFilters({
+							...filters,
+							page: val,
+						})}
+					/>
+				</>
+			) : null}
 		</div>
 	);
 }

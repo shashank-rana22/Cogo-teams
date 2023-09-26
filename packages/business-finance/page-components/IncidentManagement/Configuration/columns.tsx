@@ -12,14 +12,18 @@ import AccessorComponent from './AccessorComponent';
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
-export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, getIncidentData, activeTab, t }) => [
+export const columns = ({
+	setIsAscendingActive, setFilters,
+	isAscendingActive, getIncidentData, activeTab, t,
+	detailsModal = {}, setDetailsModal = () => { },
+}) => [
 	{
 		Header   : t('incidentManagement:incident_id_header'),
 		accessor : 'incident_id',
 		id       : 'incident_id',
 		Cell     : ({ row: { original } }) => {
 			const { referenceId = {} } = original || {};
-			return <span className={styles.incident_id}>{ referenceId }</span>;
+			return <span className={styles.incident_id}>{referenceId}</span>;
 		},
 	},
 	{
@@ -31,16 +35,16 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			const { organization = '' } = data || {};
 			const { interCompanyJournalVoucherRequest } = data || {};
 			const { list } = interCompanyJournalVoucherRequest || {};
-			const getList = () => (list || [{}]).map((item:TooltipInterface) => item?.tradePartyName);
+			const getList = () => (list || [{}]).map((item: TooltipInterface) => item?.tradePartyName);
 			const bankTradePartyName = data?.bankRequest
 					&& data?.organization?.tradePartyType;
 			const tdsTradePartyName = data?.tdsRequest
-				&& data?.organization?.tradePartyType;
+					&& data?.organization?.tradePartyType;
 
 			return list ? (
 				<Tooltip
 					interactive
-					content={(list || [{}]).map((item:TooltipInterface) => (
+					content={(list || [{}]).map((item: TooltipInterface) => (
 						<div className={styles.trade_party_name} key={item?.id}>
 							<div>{toTitleCase(item?.div || '-')}</div>
 						</div>
@@ -57,7 +61,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 							<div>
 								{(organization?.tradePartyType === 'SELF'
 									? organization?.businessName : organization?.tradePartyName)
-									|| toTitleCase(organization?.businessName || '-')}
+										|| toTitleCase(organization?.businessName || '-')}
 
 							</div>
 						) : (
@@ -68,7 +72,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 							<div className={styles.wrapper}>
 								{(organization?.tradePartyType === 'SELF'
 									? organization?.businessName : organization?.tradePartyName)
-									|| toTitleCase(organization?.businessName || '-')}
+										|| toTitleCase(organization?.businessName || '-')}
 
 							</div>
 						) : (
@@ -103,7 +107,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 			return (
 				<div className={styles.credit}>
 					<span>
-						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? (
+						{requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? (
 							<span>
 								{t('incidentManagement:icjv_approval')}
 							</span>
@@ -129,6 +133,17 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		Header   : t('incidentManagement:request_sub_type_header'),
 		accessor : 'incidentSubtype',
 		id       : 'request_sub_type',
+		Cell     : ({ row: { original } }) => {
+			const { incidentSubtype = '' } = original || {};
+			return (
+				<Tooltip
+					interactive
+					content={(incidentSubtype?.replace(/_/g, ' '))}
+				>
+					<div className={styles.wrapper}>{(incidentSubtype?.replace(/_/g, ' '))}</div>
+				</Tooltip>
+			);
+		},
 	},
 	{
 		Header   : t('incidentManagement:source_header'),
@@ -157,7 +172,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 					{createdAt ? formatDate({
 						date: createdAt,
 						dateFormat:
-							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 						formatType : 'dateTime',
 						separator  : ' ',
@@ -181,7 +196,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 					{updatedAt ? formatDate({
 						date: updatedAt,
 						dateFormat:
-							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 						formatType : 'dateTime',
 						seperator  : ' ',
@@ -192,24 +207,29 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 	},
 	{
 		Header   : t('incidentManagement:remark_header'),
-		accessor : 'remark',
+		accessor : 'financeRemark',
 		id       : 'remark',
 		Cell     : ({ row: { original } }) => {
-			const { remark = '' } = original || {};
+			const { financeRemark = '', remark = '' } = original || {};
 
 			return (
 				<Tooltip
-					content={<div className={styles.tooltip}>{remark}</div>}
+					content={<div className={styles.tooltip}>{financeRemark || remark}</div>}
 				>
-					<div className={styles.remark}>{remark}</div>
+					<div className={styles.remark}>{financeRemark || remark}</div>
 				</Tooltip>
 			);
 		},
 	},
 
 	{
-		accessor: (row:any) => (
-			<AccessorComponent row={row} getIncidentData={getIncidentData} />
+		accessor: (row: any) => (
+			<AccessorComponent
+				row={row}
+				getIncidentData={getIncidentData}
+				detailsModal={detailsModal}
+				setDetailsModal={setDetailsModal}
+			/>
 		),
 		id: 'actionColumn',
 	},
