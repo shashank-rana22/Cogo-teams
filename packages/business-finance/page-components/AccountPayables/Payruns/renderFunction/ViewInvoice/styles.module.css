@@ -3,5 +3,6 @@
 }
 
 .edit_text {
-	margin-left: 1.5px;
+	margin-right: 4px;
+	white-space: nowrap;
 }

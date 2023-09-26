@@ -46,28 +46,23 @@ function ViewInvoices({
 
 	if (itemData?.state === 'DRAFT' && isCreatePayrunAllowed) {
 		return (
-			<div>
-				<Button
-					themeType="secondary"
-					onClick={handleEditPayrun}
-				>
-					<IcMEdit height={12} width={12}	/>
-
-					<span className={styles.edit_text}>Edit Payrun</span>
-				</Button>
-			</div>
+			<Button
+				themeType="secondary"
+				onClick={handleEditPayrun}
+			>
+				<span className={styles.edit_text}>Edit Payrun</span>
+				<IcMEdit height={10} width={10}	/>
+			</Button>
 		);
 	}
 	return (
-		<div>
-			<Button
-				themeType="secondary"
-				className={styles.view_invoices}
-				onClick={handleClick}
-			>
-				View Invoices
-			</Button>
-		</div>
+		<Button
+			themeType="secondary"
+			className={styles.view_invoices}
+			onClick={handleClick}
+		>
+			View Invoices
+		</Button>
 	);
 }
 
