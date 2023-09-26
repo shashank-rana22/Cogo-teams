@@ -5,7 +5,7 @@ import { useSelector } from '@cogoport/store';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-const useDeleteExcludePayrun = ({ refetch = () => {}, apiData = {}, type = '' }) => {
+const useDeleteExcludePayrun = ({ apiData = {}, type = '' }) => {
 	const { push } = useRouter();
 
 	const { userData = {}, query: urlQuery = {} } = useSelector(({ profile, general }) => ({
@@ -54,7 +54,6 @@ const useDeleteExcludePayrun = ({ refetch = () => {}, apiData = {}, type = '' })
 
 			Toast.success('Deleted Sucessfully');
 			Toast.success('Please wait while Payrun Saves...');
-			refetch();
 		} catch (err) {
 			toastApiError(err);
 		}
