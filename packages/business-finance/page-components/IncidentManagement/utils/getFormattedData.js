@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 const SPLICE_FACTOR = 1;
 
 const getFormattedData = (data) => {
-	console.log(data, 'data');
 	const { sell_quotation:sellQuotation = {}, buy_quotation:buyQuotation = {} } = data || {};
 	const sellQuotationData = sellQuotation.serviceCharges
 		?.map((item) => ({ ...item, serviceType: item.serviceType || 'Platform Fees' }));
