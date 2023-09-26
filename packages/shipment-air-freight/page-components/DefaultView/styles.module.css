@@ -29,6 +29,7 @@
 
 .toggle_chat {
 	display: flex;
+	padding-right: 40px;
 
 	:global {
 		.ui_toggle_container {
