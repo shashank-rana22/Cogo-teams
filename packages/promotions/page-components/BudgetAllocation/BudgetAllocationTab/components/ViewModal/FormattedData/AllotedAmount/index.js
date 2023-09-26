@@ -41,7 +41,7 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 							},
 						})}
 					</div>
-					{selectedDetails?.status !== 'deactivated' && (
+					{selectedDetails?.status !== 'deactivated' ? (
 						<div
 							className={styles.edit_button}
 							role="button"
@@ -53,7 +53,7 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 						>
 							<IcMPlus height={21} width={21} className={styles.addicon} />
 						</div>
-					)}
+					) : null}
 				</div>
 			) : null}
 			{showSaveLink ? (
