@@ -1,8 +1,6 @@
-import { TabPanel, Tabs, Pagination, Modal, Button } from '@cogoport/components';
+import { TabPanel, Tabs, Pagination } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
-import { useState, useRef } from 'react';
 
-import Form from '../../../../common/SideBar/CreateUpdate/Form';
 import getFieldsByTab from '../../../../constants/config';
 import getTabsMapping from '../../../../constants/tabs';
 import useGetLocationsList from '../../../../hooks/useGetLocationsList';
@@ -38,7 +36,7 @@ function PageView({ onClickCard = () => {}, setSelectedLocation = () => {}, setS
 	};
 	return (
 		<div className={styles.container} id="locations_main_container">
-			<Tabs activeTab={filters.type} onChange={onTabChange} id="locations_tab_view">
+			<Tabs themeType="primary" activeTab={filters.type} onChange={onTabChange} id="locations_tab_view">
 				{(tabsMapping || []).map(({
 					label = '',
 					value = '',
