@@ -59,6 +59,9 @@ function RenderHeader({
 						title="minimize"
 					>
 						<IcMMinus onClick={() => {
+							if (replyLoading || sendLoading) {
+								return;
+							}
 							handleSaveDraft({ isMinimize: true });
 							setMinimizeModal(true);
 						}}

@@ -27,8 +27,30 @@ function OrgSpecificRecipients({
 	type = '',
 	setEmailState = () => {},
 	emailRecipientType = [],
+	recipientTypes = [],
 }) {
 	const { orgLoading = false, orgData = {} } = useGetOrgUsers({ orgId });
+
+	const handleChange = (val) => {
+		setOrgId(val);
+
+		setEmailState(
+			(prev) => {
+				let newValues = {};
+
+				recipientTypes.forEach(
+					(itm) => {
+						newValues = {
+							...newValues,
+							[itm?.value]: [],
+						};
+					},
+				);
+
+				return { ...prev, ...newValues };
+			},
+		);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -40,7 +62,7 @@ function OrgSpecificRecipients({
 					isClearable
 					initialCall
 					value={orgId}
-					onChange={setOrgId}
+					onChange={handleChange}
 					size="sm"
 				/>
 			) : null}
@@ -51,10 +73,7 @@ function OrgSpecificRecipients({
 				isClearable
 				value={emailRecipientType}
 				onChange={(val) => setEmailState(
-					(prev) => ({
-						...prev,
-						[type]: val,
-					}),
+					(prev) => ({ ...prev, [type]: val }),
 				)}
 				disabled={!orgId || orgLoading}
 				size="sm"

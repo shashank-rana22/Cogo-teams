@@ -145,6 +145,8 @@ function MailBody({
 					emailStatus={emailStatus}
 				/>
 
+				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
+
 				<div className={styles.subject}>
 					Sub:
 					{' '}
@@ -163,8 +165,6 @@ function MailBody({
 						isDraft={isDraft}
 					/>
 				) : null}
-
-				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
 
 				<div className={styles.extra_controls}>
 					<div

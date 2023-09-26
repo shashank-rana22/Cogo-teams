@@ -97,6 +97,7 @@ function Recipients({
 								setOrgId={setOrgId}
 								orgId={orgId}
 								setEmailState={setEmailState}
+								recipientTypes={EMAIL_RECIPIENTS}
 							/>
 						</div>
 
