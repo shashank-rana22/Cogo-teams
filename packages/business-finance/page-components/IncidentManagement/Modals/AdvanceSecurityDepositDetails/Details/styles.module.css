@@ -25,7 +25,7 @@
 .display_box {
 	display: flex;
 	width: 100%;
-	padding: 36px 0px 24px 0px;
+	padding: 36px 0 24px;
 }
 
 .company_div {
@@ -102,8 +102,8 @@
 
 .amount_details {
 	display: flex;
-	padding: 16px 0px;
 	gap: 40px;
+	padding: 16px 0;
 }
 
 .details_box {
@@ -111,15 +111,15 @@
 }
 
 .supplier_div {
-	padding: 24px 0px 16px 0px;
+	padding: 24px 0 16px;
 }
 
 .shipment_container {
-	padding: 16px 0px;
+	padding: 16px 0;
 }
 
 .payment_div {
-	padding: 16px 0px 8px 0px;
+	padding: 16px 0 8px;
 }
 
 .per_container_div {
