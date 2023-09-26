@@ -15,7 +15,7 @@ function RenderActionButton() {
 				caret={false}
 				interactive
 				render={
-					<RenderContent setShowTicketModal={setShowTicketModal} />
+					<RenderContent setShowTicketModal={setShowTicketModal} setShowPopover={setShowPopover} />
             }
 				visible={showPopover}
 				onClickOutside={() => setShowPopover(false)}
@@ -26,7 +26,7 @@ function RenderActionButton() {
 				/>
 			</Popover>
 			{showTicketModal ? (
-				<RaiseTicketModal />
+				<RaiseTicketModal showTicketModal={showTicketModal} setShowTicketModal={setShowTicketModal} />
 			) : null}
 
 		</>

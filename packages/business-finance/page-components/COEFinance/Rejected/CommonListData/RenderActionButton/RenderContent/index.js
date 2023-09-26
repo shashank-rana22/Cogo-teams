@@ -1,12 +1,18 @@
 import styles from './styles.module.css';
 
-function RenderContent({ setShowTicketModal = () => {} }) {
+function RenderContent({
+	setShowTicketModal = () => {},
+	setShowPopover = () => {},
+}) {
 	return (
 		<div className={styles.container}>
 			<div
 				className={styles.styled_text}
 				role="presentation"
-				onClick={() => setShowTicketModal(true)}
+				onClick={() => {
+					setShowTicketModal(true);
+					setShowPopover(false);
+				}}
 			>
 				Raise Ticket
 				<div className={styles.hr} />
