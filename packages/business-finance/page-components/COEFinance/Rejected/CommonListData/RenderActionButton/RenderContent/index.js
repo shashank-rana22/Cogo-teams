@@ -3,9 +3,19 @@ import styles from './styles.module.css';
 function RenderContent({
 	setShowTicketModal = () => {},
 	setShowPopover = () => {},
+	onClickApprove = () => {},
+	onClickViewInvoice = () => {},
 }) {
 	return (
 		<div className={styles.container}>
+			<div
+				className={styles.styled_text}
+				role="presentation"
+				onClick={onClickViewInvoice}
+			>
+				View Invoice
+				<div className={styles.hr} />
+			</div>
 			<div
 				className={styles.styled_text}
 				role="presentation"
@@ -17,8 +27,12 @@ function RenderContent({
 				Raise Ticket
 				<div className={styles.hr} />
 			</div>
-			<div className={styles.styled_text}>
-				Delete
+			<div
+				className={styles.styled_text}
+				role="presentation"
+				onClick={onClickApprove}
+			>
+				Approve
 			</div>
 		</div>
 	);

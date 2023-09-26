@@ -1,22 +1,50 @@
 import { Popover } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
+
+import useUpdateCostApprovalBill from '../../../hook/useUpdateCostApprovalBill';
 
 import RaiseTicketModal from './RaiseTicketModal';
 import RenderContent from './RenderContent';
 
 function RenderActionButton({ itemData = {} }) {
+	const router = useRouter();
+
 	const [showPopover, setShowPopover] = useState(false);
 	const [showTicketModal, setShowTicketModal] = useState(false);
+
+	const {
+		apiTrigger,
+	} = useUpdateCostApprovalBill({ itemData, setShowPopover });
+
+	const onClickApprove = () => {
+		apiTrigger();
+	};
+
+	const onClickViewInvoice = () => {
+		router.push(
+			`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}
+				&billNumber=${itemData?.billNumber}&orgId=${itemData?.organizationId}&jobNumber=${itemData?.jobNumber}
+				&status=${itemData?.status}&billType=${itemData?.billType}
+				&isProforma=${itemData?.isProforma}&jobType=${itemData?.jobType}`,
+		);
+	};
+
 	return (
 		<>
 			<Popover
 				placement="left"
 				caret={false}
 				interactive
-				render={
-					<RenderContent setShowTicketModal={setShowTicketModal} setShowPopover={setShowPopover} />
-            }
+				render={(
+					<RenderContent
+						setShowTicketModal={setShowTicketModal}
+						setShowPopover={setShowPopover}
+						onClickApprove={onClickApprove}
+						onClickViewInvoice={onClickViewInvoice}
+     />
+				)}
 				visible={showPopover}
 				onClickOutside={() => setShowPopover(false)}
 			>

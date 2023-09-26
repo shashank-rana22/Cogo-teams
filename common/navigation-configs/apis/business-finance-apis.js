@@ -102,6 +102,11 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
+			api          : 'get_tickets_configuration_categories',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
 			api         : 'get_purchase_bills_so2_success_rate',
 			access_type : 'private',
 			feature     : 'coeFinance',
@@ -138,6 +143,11 @@ const business_finance = {
 		},
 		{
 			api         : 'get_purchase_bills_stats',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'put_purchase_bills_cost_advocate_bill_approve',
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},

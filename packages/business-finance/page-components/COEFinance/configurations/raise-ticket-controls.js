@@ -19,6 +19,7 @@ const controls = ({
 				RequestType      : request_type || undefined,
 				CategoryDeskType : 'by_desk',
 			},
+			value    : 'auditor',
 			valueKey : 'raised_by_desk',
 			labelKey : 'raised_by_desk',
 			onChange : (_, val) => {

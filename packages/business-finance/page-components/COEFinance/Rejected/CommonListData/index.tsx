@@ -10,7 +10,7 @@ import RenderRemarks from '../../All_Invoices/PurchaseInvoiceView/RenderData/Ren
 import RenderStatus from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderStatus';
 import RenderUrgencyTag from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderUrgencyTag';
 import RenderViewMoreButton from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderViewMoreButton';
-import PURCHASE_VIEW_CONFIG from '../../configurations/PURCHASE_VIEW_LIST';
+import COST_ADVOCATE_CONFIG from '../../configurations/COST_ADVOCATE_LIST';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
 import RejectedCharts from './RejectedChart';
@@ -77,6 +77,12 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 		renderUrgencyTag: (itemData: ItemProps, field: FieldProps) => (
 			<RenderUrgencyTag item={itemData} field={field} />
 		),
+		renderTicket: () => (
+			<div>ticket</div>
+		),
+		renderApprovalStatus: () => (
+			<div>Level 1 pending</div>
+		),
 	};
 	return (
 		<div>
@@ -99,7 +105,7 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 				searchValue={searchValue}
 			/>
 			<List
-				config={PURCHASE_VIEW_CONFIG}
+				config={COST_ADVOCATE_CONFIG}
 				itemData={data}
 				functions={functions}
 				loading={loading}
