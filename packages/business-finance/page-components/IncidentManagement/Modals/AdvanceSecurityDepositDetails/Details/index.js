@@ -10,38 +10,38 @@ function Details(
 				<div>
 					businessName :
 					{' '}
-					{data.organization.businessName || ''}
+					{data?.organization?.businessName || ''}
 				</div>
 				<div>
 					{' '}
 					Requested By :
 					{' '}
-					{ data.createdBy.name || ''}
+					{ data?.createdBy?.name || ''}
 					{' '}
 				</div>
 			</div>
 			<div>
 				suplierName :
 				{' '}
-				{data.advanceSecurityDeposit.supplierName || '' }
+				{data?.advanceSecurityDeposit?.supplierName || '' }
 			</div>
 			<div>
 				shipment Id :
-				{data.advanceSecurityDeposit.shipmentId || '' }
+				{data?.advanceSecurityDeposit?.shipmentId || '' }
 
 			</div>
 			<div>
 				<div>
 					Amount Per Container :
-					{data.advanceSecurityDeposit.amountPerContainer || ''}
+					{data?.advanceSecurityDeposit?.amountPerContainer || ''}
 				</div>
 				<div>
 					No of containers :
-					{data.advanceSecurityDeposit.numberOfContainers || ''}
+					{data?.advanceSecurityDeposit?.numberOfContainers || ''}
 				</div>
 				<div>
 					Total Amount :
-					{data.advanceSecurityDeposit.totalAmountToBePaid}
+					{data?.advanceSecurityDeposit?.totalAmountToBePaid}
 				</div>
 			</div>
 		</div>
