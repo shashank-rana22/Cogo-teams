@@ -101,10 +101,10 @@ const useFilterData = ({
 		setCheckedRow(null);
 		setSelectedIds([]);
 		setGlobalFilters({
-			activeEntity,
 			search    : undefined,
 			pageIndex : 1,
 			pageSize  : 10,
+			activeEntity,
 		});
 	}, [activePayrunTab, setCheckedRow, setOverseasData, setViewId, activeEntity]);
 

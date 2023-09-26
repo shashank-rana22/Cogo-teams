@@ -16,6 +16,7 @@ const getPayrunListPayload = ({ activePayrunTab, overseasData, query, pageIndex,
 
 const useGetPayrun = ({ activePayrunTab, overseasData, query, globalFilters }) => {
 	const { pageIndex, pageSize, activeEntity = '' } = globalFilters || {};
+
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/payrun',

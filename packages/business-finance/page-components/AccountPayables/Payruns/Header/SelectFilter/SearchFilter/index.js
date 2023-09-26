@@ -55,7 +55,7 @@ function SearchFilter({
 								<Toggle
 									name="isInvoiceView"
 									checked={isInvoiceView}
-									onChange={() => setIsInvoiceView(!isInvoiceView)}
+									onChange={() => setIsInvoiceView((prev) => (!prev))}
 									showOnOff
 									size="md"
 									onLabel="Invoices"
