@@ -2788,6 +2788,15 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'update_user_whatsapp_number',
+			access_type  : 'private',
+			service_name : 'organization',
+		},		{
+			api          : 'update_user_mobile_number',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_organization_user_communication_preferences',
 			access_type  : 'private',
 			service_name : 'organization',
