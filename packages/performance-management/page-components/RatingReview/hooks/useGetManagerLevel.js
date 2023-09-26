@@ -1,6 +1,9 @@
 import { useHarbourRequest } from '@cogoport/request';
+import { useState } from 'react';
 
 const useGetManagerLevel = () => {
+	const [activeTab, setActiveTab] = useState('functional_manager');
+
 	const [{ data, loading }] = useHarbourRequest({
 		url    : '/get_manager_level',
 		method : 'GET',
@@ -11,6 +14,8 @@ const useGetManagerLevel = () => {
 	return {
 		loading,
 		level,
+		activeTab,
+		setActiveTab,
 	};
 };
 

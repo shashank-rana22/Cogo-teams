@@ -459,6 +459,16 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'list_employee_ratings',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_departments',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	employee_performance_dashboard: [
 		{
