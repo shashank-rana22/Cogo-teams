@@ -65,3 +65,29 @@
 		bottom: 18px;
 	}
 }
+
+.legend_container {
+	right: 8px;
+	bottom: 28px;
+	width: 100px;
+	background-color: #fff;
+}
+
+.count_legend {
+	right: 100px;
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: space-between;
+	width: 18px;
+	height: 180px;
+	background: linear-gradient(to top, #ffeacc, #ffc680, #f0883e, #db6d28, #bd561d, #9b4215, #762d0a, #5a1e02, #3d1300);
+	border-radius: 2px;
+	box-shadow: 0 0 2px #a1a1a1;
+
+	p {
+		margin: 0 0 0 28px;
+		font-size: 12px;
+		font-weight: bold;
+		color: #333;
+	}
+}

@@ -5,14 +5,11 @@ import React, { useRef, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import MapTooltip from '../../../../../common/MapTooltip';
-// import useListNearestLocations from '../../../../../hooks/useListNearestLocations';
 import { formatBigNumbers } from '../../../../../utils/formatBigNumbers';
 import { getPolygonStyleProps } from '../../../../../utils/map-utils';
 import { COLORS } from '../../../Heading/BirdsEyeView';
-// import styles from '../styles.module.css';
 
 const ONE = 1;
-// const TIME_LIMIT = 300;
 
 const WorldGeometry = React.forwardRef(({
 	hierarchy = {},
@@ -28,19 +25,11 @@ const WorldGeometry = React.forwardRef(({
 	maxCount = 0,
 	range = 1,
 }, ref) => {
-	// const timerRef = useRef(null);
 	const activeCountryRef = useRef(null);
 
 	const filteredData = isEmpty(hierarchy) ? data
 		: data.filter(({ id }) => Object.values(hierarchy).includes(id));
 	const activeId = hierarchy?.country_id;
-
-	// const { getNearestLocations, loading } = useListNearestLocations({
-	// 	setLocationFilters,
-	// 	setHierarchy,
-	// 	setActiveList,
-	// 	activeId,
-	// });
 
 	const onEachFeature = (feature, layer, id, name) => {
 		const fillColor = !accuracyMapping[id]
@@ -87,27 +76,6 @@ const WorldGeometry = React.forwardRef(({
 		);
 	};
 
-	// const handleMapClick = (e) => {
-	// 	L.DomEvent.stopPropagation(e);
-	// 	const latitude = e.latlng.lat;
-	// 	const longitude = e.latlng.lng;
-
-	// 	getNearestLocations({ filters: { latitude, longitude, type: ['country'] } });
-	// };
-
-	// useMapEvents({
-	// 	click(e) {
-	// 		clearTimeout(timerRef.current);
-
-	// 		timerRef.current = setTimeout(() => {
-	// 			handleMapClick(e);
-	// 		}, TIME_LIMIT);
-	// 	},
-	// 	dblclick() {
-	// 		clearTimeout(timerRef.current);
-	// 	},
-	// });
-
 	useEffect(() => {
 		const cachedRef = activeCountryRef.current;
 		if (cachedRef && filteredData.length === ONE && !hierarchy.region_id) {
@@ -148,12 +116,6 @@ const WorldGeometry = React.forwardRef(({
 					/>
 				);
 			})}
-
-			{/* {loading && (
-				<div className={styles.loader_container}>
-					<Loader className={styles.loader} />
-				</div>
-			)} */}
 		</FeatureGroup>
 	);
 });
