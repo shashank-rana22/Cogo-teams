@@ -8,25 +8,36 @@ import {
 	where,
 	orderBy, addDoc,
 } from 'firebase/firestore';
+import { useState } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
 const LIMIT = 1;
 
-async function getExistingGlobalRoom({ userIds = [], length = 0, firestore = {}, loggedInAgendId = '' }) {
+const SELF_COUNT = 1;
+
+async function getExistingGlobalRoom({ userIds = [], length = 0, firestore = {}, loggedInAgendId }) {
 	const internalRoomsCollection = collection(firestore, FIRESTORE_PATH.internal_rooms);
 
 	const collectionQuery = query(
 		internalRoomsCollection,
 		where('group_members_count', '==', length),
-		where('group_member_ids', 'array-contains-any', [...userIds, loggedInAgendId]),
+		where('group_member_ids', 'array-contains-any', userIds),
 		orderBy('new_message_sent_at', 'desc'),
 		limit(LIMIT),
 	);
 
 	const roomDocs = await getDocs(collectionQuery);
 
-	return roomDocs?.docs?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
+	const globalRoomDataDoc = roomDocs?.docs?.[GLOBAL_CONSTANTS.zeroth_index];
+
+	const roomData = globalRoomDataDoc?.data() || {};
+
+	return {
+		internal_room_id : globalRoomDataDoc?.id,
+		id               : roomData?.group_member_rooms?.[loggedInAgendId] || '',
+		...roomData,
+	};
 }
 
 async function getExistingDraftRoom({ userIds = [], length = 0, firestore = {}, loggedInAgendId = '' }) {
@@ -36,62 +47,105 @@ async function getExistingDraftRoom({ userIds = [], length = 0, firestore = {}, 
 		selfInternalRoomsCollection,
 		where('is_draft', '==', true),
 		where('group_members_count', '==', length),
-		where('group_member_ids', 'array-contains-any', [...userIds, loggedInAgendId]),
+		where('group_member_ids', 'array-contains-any', userIds),
 		orderBy('created_at', 'desc'),
 		limit(LIMIT),
 	);
+	console.log('collectionQuery', collectionQuery);
+
 	const roomDocs = await getDocs(collectionQuery);
 
-	return roomDocs?.docs?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
+	const draftRoomData = roomDocs?.docs?.[GLOBAL_CONSTANTS.zeroth_index];
+
+	return { id: draftRoomData?.id, ...(draftRoomData?.data() || {}) };
 }
 
-async function createDraftRoom({ userIds = [], userIdsData = [], firestore = {}, loggedInAgendId = '' }) {
+async function createDraftRoom({ userIds = [], userIdsData = [], firestore = {}, loggedInAgendId = '', length = 0 }) {
 	const selfInternalRoomsCollection = collection(firestore, `users/${loggedInAgendId}/self_internal_rooms`);
 
 	const draftRoomPayload = {
-		group_member_ids         : [...userIds, loggedInAgendId],
+		group_member_ids         : userIds,
 		created_at               : Date.now(),
 		updated_at               : Date.now(),
 		is_draft                 : true,
 		is_pinned                : false,
-		group_members_Data       : userIdsData,
-		room_id                  : null,
+		group_members_data       : userIdsData,
+		internal_room_id         : null,
 		new_message_sent_at      : Date.now(),
 		self_has_unread_messages : false,
+		group_members_count      : length,
 	};
 
 	const res = await addDoc(selfInternalRoomsCollection, draftRoomPayload);
 
-	return res?.id;
+	return { id: res?.id, ...draftRoomPayload };
 }
 
-function useCreateOrGetDraftTeamRoom({ firestore = {} }) {
-	const loggedInAgendId = useSelector(({ profile }) => (profile.user.id));
+function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }) {
+	const { loggedInAgendId, loggedInAgentName } = useSelector(({ profile }) => ({
+		loggedInAgendId   : profile.user.id,
+		loggedInAgentName : profile.user.name,
+	}));
 
+	const [loading, setLoading] = useState(false);
+
+	const setActiveRoom = ({ val = {} }) => {
+		setActiveTab((prev) => ({
+			...prev,
+			data: {
+				...(prev?.data || {}),
+				...val,
+			},
+		}));
+	};
 	const createOrGetDraftTeamRoom = async ({ userIds = [], userIdsData = [] }) => {
-		const userIdsLength = userIds.length;
+		console.log('userIds', userIds, userIdsData);
+		const userIdsLength = userIds.length + SELF_COUNT;
+		setLoading(true);
 
-		const globalRoomId = await getExistingGlobalRoom(
-			{ userIds, length: userIdsLength, firestore, loggedInAgendId },
-		);
+		const modifiedUserIdsData = [...userIdsData, { id: loggedInAgendId, name: loggedInAgentName }];
+		const modifiedUserIds = [loggedInAgendId, ...userIds];
+		console.log('modifiedUserIds', modifiedUserIds);
 
-		if (globalRoomId) {
-			return globalRoomId;
+		try {
+			const globalRoomData = await getExistingGlobalRoom(
+				{ userIds: modifiedUserIds, length: userIdsLength, firestore, loggedInAgendId },
+			);
+
+			if (globalRoomData?.id) {
+				setActiveRoom({ val: globalRoomData });
+				return;
+			}
+
+			const draftRoomData = await getExistingDraftRoom(
+				{ userIds: modifiedUserIds, length: userIdsLength, firestore, loggedInAgendId },
+			);
+
+			if (draftRoomData?.id) {
+				console.log('draftRoomData', draftRoomData);
+				setActiveRoom({ val: draftRoomData });
+				return;
+			}
+
+			const res = await createDraftRoom({
+				userIds     : modifiedUserIds,
+				userIdsData : modifiedUserIdsData,
+				firestore,
+				loggedInAgendId,
+				length      : userIdsLength,
+			});
+			console.log('res', res);
+			setActiveRoom({ val: res });
+		} catch (e) {
+			console.error('e', e);
+		} finally {
+			setLoading(false);
 		}
-
-		const draftRoomId = await getExistingDraftRoom(
-			{ userIds, length: userIdsLength, firestore, loggedInAgendId },
-		);
-
-		if (draftRoomId) {
-			return draftRoomId;
-		}
-
-		return createDraftRoom({ userIds, userIdsData, firestore, loggedInAgendId });
 	};
 
 	return {
 		createOrGetDraftTeamRoom,
+		loading,
 	};
 }
 

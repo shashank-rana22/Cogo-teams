@@ -60,6 +60,8 @@ function Conversations({
 			suggestions,
 			viewType,
 			loggedInUserId : userId,
+			firestore,
+			setActiveTab,
 		},
 	};
 

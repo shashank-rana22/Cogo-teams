@@ -22,7 +22,7 @@ const COGOONE_CONSTANTS = '/cogoone_constants';
 
 const EMAIL = '/customer_chat/email/rooms';
 
-const INTERNAL_ROOMS = 'internal/internal_chats';
+const INTERNAL_ROOMS = 'internal/cogo_one/internal_chats';
 
 export const FIRESTORE_PATH = {
 	whatsapp          : WHATSAPP,

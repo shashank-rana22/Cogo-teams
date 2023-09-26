@@ -117,10 +117,11 @@ function Customers({
 			setActiveTeamCard: (val) => {
 				setActiveTab((prev) => ({ ...prev, data: val }));
 			},
-			activeTeamCard : activeTab?.data || {},
-			activeTab      : activeTab?.tab,
+			activeTeamCard  : activeTab?.data || {},
+			activeTab       : activeTab?.tab,
 			viewType,
 			firestore,
+			loggedInAgentId : userId,
 		},
 	};
 

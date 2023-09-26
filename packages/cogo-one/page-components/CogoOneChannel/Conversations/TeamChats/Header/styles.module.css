@@ -16,7 +16,7 @@
 .common_flex {
 	display: flex;
 	align-items: center;
-	max-width: 70%;
+	width: calc(100% - 120px);
 }
 
 .actions {
@@ -25,11 +25,32 @@
 }
 
 .styled_avatar {
+	margin-right: 6px;
 	background: #ffd761;
 	border-radius: 50% !important;
 }
 
 .name {
-	font-size: 12px;
+	font-size: 14px;
+	font-weight: 600;
 	color: #4f4f4f;
+}
+
+.image_styles {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 8px;
+	cursor: pointer;
+}
+
+.buttons_flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 120px;
+
+	>:last-child {
+		height: 100%;
+	}
 }

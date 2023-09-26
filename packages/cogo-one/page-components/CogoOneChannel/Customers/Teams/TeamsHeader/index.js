@@ -21,7 +21,7 @@ function TeamsHeader({
 	const [filterVisible, setFilterVisible] = useState(false);
 
 	const newConversation = () => {
-		setActiveTeamCard({ internal_room_id: '', group_member_count: 0 });
+		setActiveTeamCard({ internal_room_id: '', group_members_count: 0 });
 	};
 
 	return (

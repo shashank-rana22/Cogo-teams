@@ -8,7 +8,13 @@ import TeamsBody from './TeamsBody';
 import TeamsHeader from './TeamsHeader';
 
 function Teams(teamsProps) {
-	const { firestore = {}, setActiveTeamCard = () => {} } = teamsProps;
+	const {
+		firestore = {},
+		setActiveTeamCard = () => {},
+		activeTeamCard = {},
+		// viewType = '',
+		loggedInAgentId = '',
+	} = teamsProps;
 
 	const [searchValue, setSearchValue] = useState('');
 
@@ -31,7 +37,14 @@ function Teams(teamsProps) {
 			</div>
 
 			<div className={styles.list_container}>
-				<TeamsBody loading={loading} pinnedChats={pinnedChats} unpinnedChats={unpinnedChats} />
+				<TeamsBody
+					loading={loading}
+					pinnedChats={pinnedChats}
+					unpinnedChats={unpinnedChats}
+					activeTeamCard={activeTeamCard}
+					loggedInAgentId={loggedInAgentId}
+					setActiveTeamCard={setActiveTeamCard}
+				/>
 			</div>
 		</>
 

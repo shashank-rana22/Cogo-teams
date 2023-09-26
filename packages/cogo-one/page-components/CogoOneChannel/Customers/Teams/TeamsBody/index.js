@@ -10,7 +10,14 @@ import GroupCard from '../GroupCard';
 
 import styles from './styles.module.css';
 
-function TeamsBody({ loading = false, pinnedChats = [], unpinnedChats = [] }) {
+function TeamsBody({
+	loading = false,
+	pinnedChats = [],
+	unpinnedChats = [],
+	activeTeamCard = {},
+	loggedInAgentId = '',
+	setActiveTeamCard = () => {},
+}) {
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 
 	const isPinnedChatEmpty = isEmpty(pinnedChats);
@@ -41,11 +48,13 @@ function TeamsBody({ loading = false, pinnedChats = [], unpinnedChats = [] }) {
 
 					{openPinnedChats && (
 						<div className={styles.pinned_chats_div}>
-							{(pinnedChats || []).map((singleGroup) => (
+							{(pinnedChats || []).map((eachRoom) => (
 								<GroupCard
-									singleGroup={singleGroup}
-									key={singleGroup}
-									// teamsProps={teamsProps}
+									eachRoom={eachRoom}
+									key={eachRoom?.id}
+									activeTeamCard={activeTeamCard}
+									loggedInUserId={loggedInAgentId}
+									setActiveTeamCard={setActiveTeamCard}
 								/>
 							))}
 						</div>
@@ -56,11 +65,13 @@ function TeamsBody({ loading = false, pinnedChats = [], unpinnedChats = [] }) {
 			{!isUnpinnedEmpty ? (
 				<>
 					<div className={styles.recent_text}>Recent</div>
-					{(unpinnedChats || []).map((singleGroup) => (
+					{(unpinnedChats || []).map((eachRoom) => (
 						<GroupCard
-							singleGroup={singleGroup}
-							key={singleGroup}
-							// teamsProps={teamsProps}
+							eachRoom={eachRoom}
+							key={eachRoom?.id}
+							activeTeamCard={activeTeamCard}
+							loggedInUserId={loggedInAgentId}
+							setActiveTeamCard={setActiveTeamCard}
 						/>
 					))}
 				</>

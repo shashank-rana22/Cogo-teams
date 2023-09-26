@@ -1,23 +1,46 @@
+import { Button } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
+import { useState } from 'react';
 
+import useCreateOrGetDraftTeamRoom from '../../../../../../hooks/useCreateOrGetDraftTeamRoom';
 import getCommonAgentType from '../../../../../../utils/getCommonAgentType';
 import UserCard from '../UserCard';
 
 import styles from './styles.module.css';
 
-function ToUser({ users = [], setUsers = () => {}, viewType = '' }) {
+function ToUser({
+	viewType = '',
+	firestore = {},
+	setActiveTab = () => {},
+}) {
+	const [users, setUsers] = useState({ userIds: [], userData: [] });
+
+	const {
+		createOrGetDraftTeamRoom = () => {},
+		loading = false,
+	} = useCreateOrGetDraftTeamRoom({ firestore, setActiveTab });
+
+	const handleSave = () => {
+		const { userIds = [], userData = [] } = users || {};
+		const modifiedUserData = userData?.map((eachUser) => ({ id: eachUser?.agent_id, name: eachUser?.name })) || [];
+
+		createOrGetDraftTeamRoom({ userIds, userIdsData: modifiedUserData });
+	};
+
 	return (
 		<div className={styles.flex_common}>
 			<div className={styles.flex_child}>
 				To:
 				<AsyncSelect
 					multiple
-					value={users}
+					value={users?.userIds || []}
 					className={styles.input_styles}
 					size="sm"
 					placeholder="Enter a name or email"
-					onChange={setUsers}
+					onChange={(val, obj) => {
+						setUsers({ userIds: val, userData: obj });
+					}}
 					isClearable
 					asyncKey="list_chat_agents"
 					initialCall
@@ -32,7 +55,15 @@ function ToUser({ users = [], setUsers = () => {}, viewType = '' }) {
 					renderLabel={(item) => <UserCard item={item} />}
 				/>
 			</div>
-			<IcMPlus className={styles.plus_icon} />
+			<Button
+				size="md"
+				themeType="tertiary"
+				className={styles.button_styles}
+				loading={loading}
+				onClick={handleSave}
+			>
+				<IcMPlus className={styles.plus_icon} />
+			</Button>
 		</div>
 	);
 }

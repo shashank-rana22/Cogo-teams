@@ -4,7 +4,14 @@ import Messages from './Messages';
 import styles from './styles.module.css';
 
 function TeamChats(props) {
-	const { activeTeamCard = {}, suggestions = [], viewType = '', loggedInUserId = '' } = props || {};
+	const {
+		activeTeamCard = {},
+		suggestions = [],
+		viewType = '',
+		loggedInUserId = '',
+		firestore = {},
+		setActiveTab = () => {},
+	} = props || {};
 
 	const {
 		internal_room_id = '',
@@ -17,6 +24,8 @@ function TeamChats(props) {
 					activeTeamCard={activeTeamCard}
 					loggedInUserId={loggedInUserId}
 					viewType={viewType}
+					firestore={firestore}
+					setActiveTab={setActiveTab}
 				/>
 			</div>
 			<div className={styles.messages}>
