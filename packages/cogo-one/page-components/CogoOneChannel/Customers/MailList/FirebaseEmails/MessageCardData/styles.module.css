@@ -56,16 +56,6 @@
 	white-space: nowrap;
 }
 
-.email_sender {
-	width: 90%;
-	overflow: hidden;
-	font-size: 10px;
-	font-weight: 600;
-	color: #828282;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
 .header_title {
 	width: calc(100% - 40px);
 	margin-left: 4px;
@@ -106,4 +96,11 @@
 	top: 3px;
 	right: 8px;
 	cursor: pointer;
+}
+
+.tooltip_container {
+	width: fit-content;
+	max-width: unset !important;
+	max-height: 250px;
+	overflow-y: scroll;
 }
