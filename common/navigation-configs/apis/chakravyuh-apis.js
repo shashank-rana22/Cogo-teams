@@ -104,6 +104,12 @@ const chakravyuh = {
 			feature      : 'pricing_accuracy_dashboard',
 			service_name : 'fcl_freight_rate',
 		},
+		{
+			api          : 'get_user_interactions',
+			access_type  : 'private',
+			feature      : 'pricing_accuracy_dashboard',
+			service_name : 'location',
+		},
 	],
 };
 
