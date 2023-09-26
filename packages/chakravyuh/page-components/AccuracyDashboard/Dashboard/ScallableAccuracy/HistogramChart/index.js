@@ -54,7 +54,7 @@ function AreaChart({ loading = false, data = [], seriesIds = [] }) {
 		}));
 
 		series.columns.template.setAll({
-			tooltipText : `${DOLLAR}{categoryX} : {valueY}`,
+			tooltipText : `Deviation: ({categoryX} to {to})${DOLLAR}\nCount: {valueY}`,
 			tooltipY    : 0,
 			width       : am5.p100,
 		});
@@ -71,7 +71,7 @@ function AreaChart({ loading = false, data = [], seriesIds = [] }) {
 
 		series.columns.template.setAll({
 			fillOpacity : 0.5,
-			strokeWidth : 2,
+			strokeWidth : 1,
 		});
 		series.data.setAll(data);
 		series.appear();
