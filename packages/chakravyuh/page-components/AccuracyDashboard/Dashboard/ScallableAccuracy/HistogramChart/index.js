@@ -8,6 +8,8 @@ import React, { useEffect } from 'react';
 import { COLOR_MAPPINGS } from '../../../../../constants/pie_chart_config';
 
 const DOLLAR = '$';
+const TOOLTIP_BG = 0xffffff;
+const TOOLTIP_COLOR = 0X00000;
 
 function AreaChart({ loading = false, data = [], seriesIds = [] }) {
 	useEffect(() => {
@@ -46,16 +48,35 @@ function AreaChart({ loading = false, data = [], seriesIds = [] }) {
 			renderer     : am5xy.AxisRendererY.new(root, {}),
 		}));
 
+		const tooltip = am5.Tooltip.new(root, {
+			getFillFromSprite      : false,
+			getStrokeFromSprite    : true,
+			autoTextColor          : false,
+			getLabelFillFromSprite : false,
+			labelText:
+			`Deviation: ([bold]{categoryX}[/] to [bold]{to}[/])${DOLLAR}\nCount: [bold]{valueY}[/]`,
+		});
+
+		tooltip.get('background').setAll({
+			fill        : am5.color(TOOLTIP_BG),
+			fillOpacity : 1,
+		});
+
+		tooltip.label.setAll({
+			fill: am5.color(TOOLTIP_COLOR),
+		});
+
 		const series = chart.series.push(am5xy.ColumnSeries.new(root, {
 			xAxis,
 			yAxis,
 			valueYField    : 'rate_count',
 			categoryXField : 'from',
+			tooltip,
 		}));
 
 		series.columns.template.setAll({
-			tooltipText : `${DOLLAR}{categoryX} : {valueY}`,
-			tooltipY    : 0,
+			tooltipText : '{categoryX}, {to}, {valueY}',
+			tooltipY    : -2,
 			width       : am5.p100,
 		});
 
@@ -71,7 +92,7 @@ function AreaChart({ loading = false, data = [], seriesIds = [] }) {
 
 		series.columns.template.setAll({
 			fillOpacity : 0.5,
-			strokeWidth : 2,
+			strokeWidth : 1,
 		});
 		series.data.setAll(data);
 		series.appear();
