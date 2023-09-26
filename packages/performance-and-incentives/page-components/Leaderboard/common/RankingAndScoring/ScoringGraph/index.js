@@ -35,7 +35,7 @@ function ScoringGraph(props) {
 					axisBottom={{
 						tickSize       : 5,
 						tickPadding    : 5,
-						tickRotation   : 0,
+						tickRotation   : 45,
 						legend         : 'ACCUMULATION PERIOD',
 						legendOffset   : 50,
 						legendPosition : 'middle',
