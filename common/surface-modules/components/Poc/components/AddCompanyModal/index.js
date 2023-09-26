@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 import tradePartyTypeMapping from './tradePartyTypeMapping';
 
 const HISTORICAL = 'historical';
-const SHIPPER = 'shipper';
+const TRADE_PARTY_TYPES = ['shipper', 'consignee'];
 function AddCompanyModal({
 	tradePartnersData = {},
 	addCompany = {},
@@ -66,7 +66,7 @@ function AddCompanyModal({
 	};
 
 	const formSubmit = () => formRef?.current?.handleSubmit(onSubmit)();
-	const isShipperHistorical = trade_party_type === SHIPPER && companyType === HISTORICAL
+	const isShipperHistorical = TRADE_PARTY_TYPES.includes(trade_party_type) && companyType === HISTORICAL
 		&& shipment_type === 'ftl_freight';
 	return (
 		<Modal
