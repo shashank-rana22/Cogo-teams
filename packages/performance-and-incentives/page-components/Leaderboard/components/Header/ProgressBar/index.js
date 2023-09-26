@@ -8,6 +8,8 @@ import useGetUserProgress from './useGetUserProgress';
 
 const TARGET_WIDTH = 75;
 const INCENTIVE_WIDTH = 25;
+const IST_HOUR = 5;
+const IST_MIN = 30;
 
 const getProgress = ({ target, points }) => {
 	if (points < target) {
@@ -17,10 +19,23 @@ const getProgress = ({ target, points }) => {
 	return TARGET_WIDTH + (((points - target) / points) * INCENTIVE_WIDTH);
 };
 
+const setUTCtoIST = (timestamp) => {
+	let dateUTC = new Date(timestamp);
+	dateUTC = dateUTC.getTime();
+
+	const dateIST = new Date(dateUTC);
+	dateIST.setHours(dateIST.getHours() - IST_HOUR);
+	dateIST.setMinutes(dateIST.getMinutes() - IST_MIN);
+
+	return dateIST;
+};
+
 function ProgreeBar() {
 	const { progressData } = useGetUserProgress();
 
 	const { start_date, end_date, end_point, date_range_points_achieved, date_points_achieved } = progressData || {};
+
+	const END_DATE = setUTCtoIST(end_date);
 
 	const progress = getProgress({ target: end_point, points: date_range_points_achieved });
 
@@ -52,9 +67,11 @@ function ProgreeBar() {
 						})}
 					</div>
 
+					<div className={styles.heading}>Score</div>
+
 					<div className={styles.date}>
 						{formatDate({
-							date       : end_date,
+							date       : END_DATE,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 							formatType : 'date',
 						})}
