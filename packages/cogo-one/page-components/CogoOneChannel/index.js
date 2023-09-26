@@ -104,7 +104,6 @@ function CogoOne() {
 		setMailAttachments,
 		mailAttachments,
 	};
-
 	const commonProps = {
 		setSendBulkTemplates,
 		preferenceLoading,
@@ -120,7 +119,6 @@ function CogoOne() {
 	const orgId = FIREBASE_TABS.includes(activeTab?.tab)
 		? formattedMessageData?.organization_id
 		: activeTab?.data?.organization_id;
-
 	const expandedSideBar = (ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
 		|| (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) && activeTab?.expandSideBar));
 	const collapsedSideBar = ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
@@ -248,16 +246,18 @@ function CogoOne() {
 					)}
 				<AndroidApp />
 			</div>
-			<div
-				role="presentation"
-				className={styles.feedback}
-				onClick={() => setShowFeedback(((prev) => !prev))}
-			>
-				<IcMComment />
-				<span className={styles.feedback_label}>
-					Feedback
-				</span>
-			</div>
+			{!showFeedback && (
+				<div
+					role="presentation"
+					className={styles.feedback}
+					onClick={() => setShowFeedback(((prev) => !prev))}
+				>
+					<IcMComment />
+					<span className={styles.feedback_label}>
+						Feedback
+					</span>
+				</div>
+			)}
 
 			{showFeedback && (
 				<FeedbackModal
