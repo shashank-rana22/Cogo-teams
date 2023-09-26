@@ -2,13 +2,17 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
+import Layout from '../../../common/Layout';
+
 import ShowModal from './common/ShowModal';
 import BudgetAllocate from './components/BudgetAllocate';
 import CreateAllocationCard from './components/CreateAllocationCard';
 import ViewModal from './components/ViewModal';
 import BudgetAllocationControls from './configurations/budget-allocation-form-controls';
 import RadioOptions from './configurations/budget-allocation-radio';
+import RoleOptions from './configurations/budget-allocation-role';
 import useListPromoBudgetAllocation from './hooks/useListPromoBudgetAllocations';
+import styles from './styles.module.css';
 
 const TABS = [
 	{ name: 'active_budget', title: 'Active', key: 'active_budget' },
@@ -23,7 +27,14 @@ function BudgetAllocationTab({ formButton, setFormButton }) {
 	const [activeTab, setActiveTab] = useState('active_budget');
 	const [role, setRole] = useState('');
 	const DEFAULT_VALUES = {};
-	const controls = BudgetAllocationControls;
+
+	const {
+		control: roleControl,
+		watch: roleWatch,
+		setValue: roleSetValue,
+		errors: roleErrors,
+	} = useForm({ defaultValues: DEFAULT_VALUES });
+	const roleControls = RoleOptions;
 
 	const {
 		control,
@@ -33,8 +44,8 @@ function BudgetAllocationTab({ formButton, setFormButton }) {
 	} = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
+	const controls = BudgetAllocationControls;
 
-	const radioControls = RadioOptions;
 	const {
 		control: radioControl,
 		handleSubmit: radiohandleSubmit,
@@ -44,6 +55,7 @@ function BudgetAllocationTab({ formButton, setFormButton }) {
 	} = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
+	const radioControls = RadioOptions;
 
 	const {
 		loading,
@@ -74,7 +86,15 @@ function BudgetAllocationTab({ formButton, setFormButton }) {
 
 	useEffect(() => {
 		setRole('');
-	}, [activeTab]);
+		roleSetValue('role', '');
+	}, [activeTab, roleSetValue]);
+
+	useEffect(() => {
+		const subscription = roleWatch((val) => {
+			setRole(val.role);
+		});
+		return () => subscription.unsubscribe();
+	}, [roleWatch]);
 
 	return (
 		<div>
@@ -91,23 +111,28 @@ function BudgetAllocationTab({ formButton, setFormButton }) {
 					reset={reset}
 				/>
 			)}
-			<Tabs
-				activeTab={activeTab}
-				onChange={setActiveTab}
-				className="horizontal four"
-				themeType="tertiary"
-			>
-				{TABS.map((item) => (
-					<TabPanel
-						key={item.key}
-						name={item.name}
-						title={item.title}
-						className="horizontal four"
-					>
-						<BudgetAllocate {...budgetAllocateProps} />
-					</TabPanel>
-				))}
-			</Tabs>
+			<div className={styles.tab_container}>
+				<div className={styles.select_wrapper}>
+					<Layout controls={roleControls} control={roleControl} errors={roleErrors} />
+				</div>
+				<Tabs
+					activeTab={activeTab}
+					onChange={setActiveTab}
+					className="horizontal four"
+					themeType="tertiary"
+				>
+					{TABS.map((item) => (
+						<TabPanel
+							key={item.key}
+							name={item.name}
+							title={item.title}
+							className="horizontal four"
+						>
+							<BudgetAllocate {...budgetAllocateProps} />
+						</TabPanel>
+					))}
+				</Tabs>
+			</div>
 			{showViewModal && selectedDetails && (
 				<ViewModal
 					showViewModal={showViewModal}
