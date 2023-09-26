@@ -1,3 +1,4 @@
+import { Tooltip } from '@cogoport/components';
 import { IcMEngagement, IcMAccounts, IcMAccountEnrichment, IcMShipment } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
@@ -45,7 +46,9 @@ function Block(props) {
 					return (
 						<div key={activity} className={styles.activity_container}>
 							<p className={styles.value}>{count}</p>
-							<p className={styles.activity}>{isEmpty(name) ? '' : startCase(name)}</p>
+							<Tooltip content={<p>{isEmpty(name) ? '' : startCase(name)}</p>}>
+								<p className={styles.activity}>{isEmpty(name) ? '' : startCase(name)}</p>
+							</Tooltip>
 						</div>
 					);
 				})}

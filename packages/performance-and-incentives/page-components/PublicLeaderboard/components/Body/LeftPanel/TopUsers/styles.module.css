@@ -21,6 +21,8 @@
 	margin-top: 16px;
 	font-size: 18px;
 	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 
 	@media (min-width: 2560px) {
 		font-size: 56px;

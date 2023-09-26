@@ -36,7 +36,7 @@ function LeftPanel(props) {
 
 	return (
 		<div className={styles.container}>
-			<p className={styles.heading}>LEADER BOARD</p>
+			{/* <p className={styles.heading}>LEADER BOARD</p> */}
 
 			<TopUsers topList={topList} view={view} />
 
