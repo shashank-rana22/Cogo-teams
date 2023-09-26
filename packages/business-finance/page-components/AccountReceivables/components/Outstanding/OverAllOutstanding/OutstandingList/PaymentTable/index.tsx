@@ -51,7 +51,7 @@ function PaymentTable({ organizationId = '', entityCode = '' }: Props) {
 		<div>
 			<div className={cl`
 				${styles.filter_wrap} 
-				${paymentFilters?.statusList?.length === STATUS_FILTER_MAX_LEN ? styles.empty : null} 
+				${(paymentFilters?.statusList?.length === STATUS_FILTER_MAX_LEN) && styles.empty} 
 			`}
 			>
 				<MultiSelect
