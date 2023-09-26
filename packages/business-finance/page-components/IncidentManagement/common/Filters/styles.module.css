@@ -13,11 +13,6 @@
 		}
 
 		.react-datepicker__input-container {
-			input {
-				height: 32px;
-				font-size: 10px;
-			}
-
 			.react-datepicker__close-icon::after {
 				background: none !important;
 			}

@@ -1,5 +1,5 @@
 import { Input } from '@cogoport/components';
-import { IcMSearchdark } from '@cogoport/icons-react';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import React from 'react';
 
 import Filter from '../../../../commons/Filters';
@@ -52,7 +52,7 @@ function Filters({
 						value={serialId}
 						onChange={(e: any) => setSerialId(e)}
 						placeholder="Search by Shipment ID"
-						suffix={<IcMSearchdark height={15} width={15} />}
+						suffix={<IcMSearchlight height={17} width={17} style={{ margin: '0 8px' }} />}
 					/>
 				</div>
 			</div>

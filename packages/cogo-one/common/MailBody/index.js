@@ -1,12 +1,14 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { getRecipientData } from '../../helpers/getRecipientData';
 import useCreateReplyAllDraft from '../../hooks/useCreateReplyAllDraft ';
 import useCreateReplyDraft from '../../hooks/useCreateReplyDraft';
 import useGetMailContent from '../../hooks/useGetMailContent';
+import useGetSignature from '../../hooks/useGetSignature';
 
 import MailActions from './mailActions';
 import MailAttachments from './MailAttachments';
@@ -71,6 +73,7 @@ function MailBody({
 		to_mails: recipientData = [],
 		cc_mails: ccData = [],
 		bcc_mails: bccData = [],
+		attachments = [],
 	} = response || {};
 
 	const {
@@ -78,6 +81,8 @@ function MailBody({
 		message: bodyMessage = '',
 		loading = false,
 	} = useGetMailContent({ messageId: message_id, source, setExpandedState });
+
+	const { signature } = useGetSignature();
 
 	const { createReplyAllDraft } = useCreateReplyAllDraft();
 	const { createReplyDraft } = useCreateReplyDraft();
@@ -105,6 +110,7 @@ function MailBody({
 		deleteMessage,
 		createReplyDraft,
 		createReplyAllDraft,
+		signature,
 	});
 
 	const handleExpandClick = () => {
@@ -158,7 +164,7 @@ function MailBody({
 					/>
 				) : null}
 
-				<MailAttachments mediaUrls={media_url} />
+				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
 
 				<div className={styles.extra_controls}>
 					<div

@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -19,6 +20,7 @@ const getFormattedPayload = ({ values = {}, shipmentData = {}, user_id = '' }) =
 			businessName: shipmentData?.importer_exporter?.business_name,
 		},
 	},
+	description             : values?.remark,
 	toWhomToSendForApproval : LEVELS_FOR_APPROVAL,
 	createdBy               : user_id,
 	source                  : 'SHIPMENT',
@@ -27,7 +29,7 @@ const getFormattedPayload = ({ values = {}, shipmentData = {}, user_id = '' }) =
 
 const useIncidentReOpenJob = ({
 	shipmentData = {},
-	setIsSuccess = () => {},
+	refetch = () => {},
 }) => {
 	const { user_id = '' } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -47,7 +49,9 @@ const useIncidentReOpenJob = ({
 				data: payload,
 			});
 
-			setIsSuccess(true);
+			Toast.success('Request Submitted!');
+
+			refetch();
 		} catch (error) {
 			toastApiError(error);
 		}

@@ -19,7 +19,6 @@ import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 import TransactionInsights from './TransactionInsights';
 
-const IMAGE_SRC = 'https://cogoport-production.sgp1.digitaloceanspaces.com/1b40f946b221e5c1c03e3563ded91913/Vector.png';
 function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipments }) {
 	const [isPillSelected, setIsPillSelected] = useState({ origin: false, destination: false });
 	const [showDetail, setShowDetail] = useState(true);
@@ -83,25 +82,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 					</div>
 				</div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<div className={styles.wallet_container}>
-						<div>
-							<img
-								src={IMAGE_SRC}
-								alt="wallet"
-							/>
-						</div>
-						<div className={styles.text_container}>
-							<div className={styles.wallet_text}>
-								Wallet Balance
-							</div>
-							<div className={styles.price_text}>
-								-
-							</div>
-						</div>
-					</div>
-					<div>
-						<PocSopModal itemData={itemData} />
-					</div>
+					<PocSopModal itemData={itemData} />
 				</div>
 			</div>
 			{itemData?.state === 'cancelled' ? <CancelledShipmentCard itemData={itemData} /> : null}

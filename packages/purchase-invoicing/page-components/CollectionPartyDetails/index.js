@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
@@ -16,12 +17,14 @@ import useGetTradeParty from '../../hooks/useGetTradeParty';
 import toastApiError from '../../utils/toastApiError';
 import InvoicesUploaded from '../InvoicesUploaded';
 
+import InvoiceModal from './InvoiceModal';
 import styles from './styles.module.css';
 import TitleCard from './TitleCard';
 
 const EMPTY_TRADE_PARTY_LENGTH = 0;
 const DEFAULT_STEP = 1;
 const DEFAULT_NET_TOTAL = 0;
+const DEFAULT_LENGTH = 1;
 
 const PURCHASE_INVOICE_SHIPMENT_STATES = ['init', 'awaiting_service_provider_confirmation'];
 
@@ -45,13 +48,26 @@ function CollectionPartyDetails({
 	fullwidth = false, AddService = () => {},
 }) {
 	const { user } = useSelector(({ profile }) => ({ user: profile }));
-	const { shipment_data = {} } = useContext(ShipmentDetailContext);
+	const { shipment_data = {}, primary_service } = useContext(ShipmentDetailContext);
+
+	const {
+		id = '',
+		shipment_type = '',
+		stakeholders = [],
+		stakeholder_types = [],
+		source = '',
+		all_services = [],
+		importer_exporter_id = '',
+		is_job_closed = false,
+		is_job_closed_financially = false,
+	} = shipment_data || {};
 
 	const [showModal, setShowModal] = useState(false);
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
 	const [openComparision, setOpenComparision] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [step, setStep] = useState(DEFAULT_STEP);
+	const [generateInvoiceModal, setGenerateInvoiceModal] = useState(false);
 
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
@@ -63,12 +79,12 @@ function CollectionPartyDetails({
 		(item) => PURCHASE_INVOICE_SHIPMENT_STATES.includes(item?.detail?.state),
 	);
 
-	const airServiceProviderConfirmation = shipment_data?.shipment_type === 'air_freight'
+	const airServiceProviderConfirmation = shipment_type === 'air_freight'
 		&& serviceProviderConfirmation;
 
-	const uploadInvoiceAllowed = shipment_data?.stakeholders
+	const uploadInvoiceAllowed = stakeholders
 		?.some((ele) => STAKE_HOLDER_TYPES.includes(ele?.stakeholder_type))
-		|| shipment_data?.stakeholder_types
+		|| stakeholder_types
 			?.some((ele) => STAKE_HOLDER_TYPES.includes(ele))
 		|| [
 			geo.uuid.super_admin_id,
@@ -77,7 +93,7 @@ function CollectionPartyDetails({
 			geo.uuid.prod_process_owner,
 		].some((ele) => user?.partner.user_role_ids?.includes(ele));
 
-	const showUpload = uploadInvoiceAllowed || shipment_data?.source === 'spot_line_booking';
+	const showUpload = uploadInvoiceAllowed || source === 'spot_line_booking';
 
 	const onClose = () => {
 		setUploadInvoiceUrl('');
@@ -87,12 +103,20 @@ function CollectionPartyDetails({
 
 	let disableInvoice = false;
 	let errorMsg = '';
-	const shipment_type = shipment_data?.shipment_type;
 
 	const { tdata } = useGetTradeParty({
-		shipment_id: shipment_data?.id || '',
+		shipment_id: id,
 		shipment_data,
 	});
+
+	const filteredServices = servicesData.filter(
+		(singleItem) => singleItem?.service_type !== 'subsidiary_service',
+	);
+
+	const showGenerate = showUpload
+	&& shipment_data.shipment_type === 'ftl_freight'
+	&& !shipment_data?.is_job_closed
+	&& filteredServices.length === DEFAULT_LENGTH;
 
 	const SERVICES_LIST = [];
 	(servicesData || []).forEach((element) => {
@@ -102,7 +126,7 @@ function CollectionPartyDetails({
 	});
 
 	if (shipment_type === 'ftl_freight') {
-		disableInvoice = !shipment_data?.all_services?.some(
+		disableInvoice = !all_services?.some(
 			(item) => item?.service_type === 'ftl_freight_service'
 				&& (item?.lr_numbers || []).length,
 		);
@@ -110,14 +134,12 @@ function CollectionPartyDetails({
 
 		if (
 			tdata?.list?.length === EMPTY_TRADE_PARTY_LENGTH
-			&& geo.uuid.fortigo_network_ids.includes(shipment_data?.importer_exporter_id)
+			&& geo.uuid.fortigo_network_ids.includes(importer_exporter_id)
 		) {
 			disableInvoice = true;
 			errorMsg = 'Shipper not added';
 		}
 	}
-
-	const isJobClosed = shipment_data?.is_job_closed;
 
 	const onConfirm = () => {
 		if (!isEmpty(uploadInvoiceUrl)) {
@@ -155,10 +177,10 @@ function CollectionPartyDetails({
 								size="md"
 								themeType="secondary"
 								className={styles.marginright}
-								disabled={disableInvoice}
+								disabled={is_job_closed_financially || disableInvoice}
 								onClick={() => { setOpen(true); }}
 							>
-								{isJobClosed ? 'Upload Credit Note' : 'Upload Invoice'}
+								{is_job_closed ? 'Upload Credit Note' : 'Upload Invoice'}
 							</Button>
 
 							{disableInvoice ? (
@@ -166,7 +188,22 @@ function CollectionPartyDetails({
 							) : null}
 						</div>
 						) : null}
+					{
+							showGenerate ? (
 
+								<Button
+									size="md"
+									themeType="secondary"
+									className={styles.marginright}
+									onClick={() => {
+										setGenerateInvoiceModal(true);
+									}}
+								>
+									Generate Invoice
+								</Button>
+
+							) : null
+						}
 					{INVOICE_SHIPMENT_TYPES.includes(shipment_type) && (
 						<div className={styles.not_added}>
 							<Button
@@ -176,7 +213,7 @@ function CollectionPartyDetails({
 								onClick={() => setShowModal(
 									shipment_type === 'ftl_freight' ? 'purchase' : 'charge_code',
 								)}
-								disabled={shipment_data?.is_job_closed}
+								disabled={is_job_closed}
 							>
 								Add Incidental Charges
 							</Button>
@@ -202,7 +239,7 @@ function CollectionPartyDetails({
 						size="sm"
 						onClose={() => { setOpen(false); }}
 					>
-						<Modal.Header title={isJobClosed ? 'Upload Scan of Credit Note' : 'Upload Scan of Invoice'} />
+						<Modal.Header title={is_job_closed ? 'Upload Scan of Credit Note' : 'Upload Scan of Invoice'} />
 						<Modal.Body>
 							<section>
 								<FileUploader
@@ -239,7 +276,7 @@ function CollectionPartyDetails({
 				&& (
 					<AddService
 						shipmentType={shipment_type}
-						shipmentId={shipment_data?.id}
+						shipmentId={id}
 						services={SERVICES_LIST}
 						refetch={refetch}
 						source={showModal}
@@ -262,6 +299,16 @@ function CollectionPartyDetails({
 							onClose();
 							refetch();
 						}}
+					/>
+				) : null}
+
+				{generateInvoiceModal ? (
+					<InvoiceModal
+						generateInvoiceModal={generateInvoiceModal}
+						setGenerateInvoiceModal={setGenerateInvoiceModal}
+						shipment_data={shipment_data}
+						primary_service={primary_service}
+						collectionParty={collectionParty}
 					/>
 				) : null}
 			</AccordianView>

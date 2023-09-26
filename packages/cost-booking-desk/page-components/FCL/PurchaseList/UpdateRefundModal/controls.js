@@ -10,10 +10,6 @@ const PAYMENT_MODE_OPTIONS = [
 		label : 'RTGS',
 		value : 'RTGS',
 	},
-	{
-		label : 'DEMAND DRAFT',
-		value : 'DEMAND_DRAFT',
-	},
 ];
 
 const getFormControls = ({
