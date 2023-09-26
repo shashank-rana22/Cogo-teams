@@ -34,6 +34,12 @@
 	right: 20px;
 }
 
+.chat_container_bl_do_collection,
+.chat_container_ground_ops {
+	top: 30px;
+	right: 30px;
+}
+
 .chat_icon {
 	z-index: 100;
 	display: flex;
