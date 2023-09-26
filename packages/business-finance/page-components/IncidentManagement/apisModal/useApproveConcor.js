@@ -4,32 +4,16 @@ import { useSelector } from '@cogoport/store';
 
 const useApproveConcor = ({
 	refetch,
-	setShowModal,
+	setDetailsModal,
 	id,
-	concorData,
+	data,
 	t,
+	remarks,
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
-	const {
-		placeOfDestination = '',
-		documentDate = '',
-		placeOfSupply = '',
-		dueDate = '',
-		isTaxApplicable = false,
-		bankName = '',
-		accountNumber = '',
-		ifscCode = '',
-		beneficiaryName = '',
-		bookingProof = [],
-		supplierName = '',
-		entity = '',
-		sid = '',
-		totalBuyPrice = '',
-		currency = '',
-		registrationNo = '',
-	} = concorData || {};
+
 	const [
 		{ loading },
 		trigger,
@@ -42,35 +26,14 @@ const useApproveConcor = ({
 		{ manual: true },
 	);
 
-	const useOnAction = async (inputValues, status) => {
-		const { remarks } = inputValues || {};
+	const useOnAction = async (status) => {
 		try {
 			const apiResponse = await trigger({
 				data: {
 					status,
-					remark : remarks,
-					data   : {
-						concorPdaApprovalRequest: {
-							sid,
-							totalBuyPrice,
-							bookingProof,
-							bankName,
-							placeOfDestination,
-							documentDate,
-							placeOfSupply,
-							dueDate,
-							isTaxApplicable,
-							accountNumber,
-							ifscCode,
-							beneficiaryName,
-							supplierName,
-							registrationNo,
-							entity,
-							currency,
-
-						},
-					},
-					updatedBy: userId,
+					remark    : remarks,
+					data,
+					updatedBy : userId,
 				},
 			});
 			const {
@@ -78,7 +41,7 @@ const useApproveConcor = ({
 			} = apiResponse;
 			if (message === 'Updated Successfully') {
 				Toast.success(t('incidentManagement:request_updated_successfully_message'));
-				setShowModal(false);
+				setDetailsModal(null);
 				refetch();
 			} else {
 				Toast.error(message);

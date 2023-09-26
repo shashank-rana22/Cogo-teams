@@ -1,0 +1,94 @@
+.remark {
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.label {
+	margin-bottom: 6px;
+	font-weight: 500;
+}
+
+.textarea {
+	min-height: 80px;
+	padding: 4px;
+}
+
+.container {
+	width: 49%;
+	padding: 40px  25px;
+	line-height: normal;
+	background: white;
+	border-radius: 10px;
+}
+
+.info_box {
+	width: 50%;
+}
+
+.line {
+	margin: 0 24px 24px 0;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.shipment_id {
+	font-weight: 500;
+	color: #f68b21;
+	text-decoration: underline;
+}
+
+.button_container {
+	display: flex;
+	gap: 12px;
+	justify-content: flex-end;
+	margin: 80px 18px 18px;
+}
+
+.heading {
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+}
+
+.title {
+	font-size: var(--font-size-md);
+}
+
+.text {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.required_field::after {
+	color: var(--color-primary-error-red-2);
+	content: " *";
+}
+
+.post_tax_container {
+	margin-left: 1%;
+}
+
+.flex {
+	display: flex;
+
+	/* border: 2px solid black; */
+	margin: 24px 0;
+}
+
+.large {
+	width: 50%;
+}
+
+.medium {
+	width: 30%;
+}
+
+.small {
+	width: 20%;
+}
+
+.label_text {
+	font-weight: 500;
+}
+
+.rates {
+	font-weight: 600;
+}

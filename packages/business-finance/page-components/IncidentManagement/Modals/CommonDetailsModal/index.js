@@ -4,7 +4,7 @@ import React from 'react';
 import AdvanceSecurityDeposit from '../AdvanceSecurityDepositDetails';
 import AdvanceSecurityDepositRefund from '../AdvanceSecurityRefundDetails';
 import BankAccountDetails from '../BankAccountDetails';
-import ConcorDetails from '../ConcorDetails';
+import ConcorDetails from '../ConcorPDADetails';
 import ICJV_Details from '../ICJV_Details';
 import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
 import JvDetails from '../JVDetails';
