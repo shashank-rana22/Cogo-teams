@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCStarfull } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -39,7 +40,7 @@ function MonthlyRating({ props = {} }) {
 						Team Rating
 						<div className={styles.rating}>
 							<IcCStarfull style={{ marginRight: 4 }} height="16px" width="16px" />
-							{team_rating || '0'}
+							{team_rating.toFixed(GLOBAL_CONSTANTS.two) || '0'}
 							{' '}
 							stars
 						</div>
