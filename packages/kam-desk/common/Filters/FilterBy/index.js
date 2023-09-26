@@ -1,6 +1,6 @@
 import { Button, Checkbox, cl, DateRangepicker, Select } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
-import { startCase, upperCase, isEmpty } from '@cogoport/utils';
+import { startCase, upperCase } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import DATE_RANGE_MAPPING from '../../../config/DATE_RANGE_MAPPING';
@@ -9,7 +9,7 @@ import ShipmentTabMapping from '../../../config/SHIPMENT_TAB_MAPPING';
 import KamDeskContext from '../../../context/KamDeskContext';
 import convertArrayToOptions from '../../../utils/convertArrayToOptions';
 
-import SHIPMENT_TYPE_OPTIONS from './shipmentTypeOptions';
+import SHIPMENT_TYPE_OPTIONS from './shipmentTypeOptions.json';
 import styles from './styles.module.css';
 
 const PARTNER_PARAMS = {
@@ -27,11 +27,16 @@ const TRADE_TYPE_OPTIONS = [
 	{ label: 'Export', value: 'export' },
 ];
 
-const handleShipmentTypeChange = ({ setPopoverFilter = () => {}, popoverFilter = {}, val }) => {
-	setPopoverFilter({ ...popoverFilter, shipment_type: val });
+const handleShipmentTypeChange = ({ setPopoverFilter = () => {}, val = '' }) => {
+	setPopoverFilter((prev) => ({ ...prev, shipment_type: val }));
 };
 
-const handleTradeTypeChange = ({ setPopoverFilter = () => {}, popoverFilter = {}, dynamicShipmentType, val }) => {
+const handleTradeTypeChange = ({
+	setPopoverFilter = () => {},
+	popoverFilter = {},
+	dynamicShipmentType = '',
+	val = '',
+}) => {
 	setPopoverFilter({
 		...popoverFilter,
 		[`${dynamicShipmentType}_service`]: {
@@ -229,7 +234,7 @@ function FilterBy({
 				<Select
 					options={SHIPMENT_TYPE_OPTIONS}
 					value={popoverFilter?.shipment_type}
-					onChange={(val) => { handleShipmentTypeChange({ setPopoverFilter, popoverFilter, val }); }}
+					onChange={(val) => { handleShipmentTypeChange({ setPopoverFilter, val }); }}
 					size="sm"
 					isClearable
 				/>
@@ -272,7 +277,7 @@ function FilterBy({
 				</div>
 			) : null}
 			{
-				!isEmpty(popoverFilter?.shipment_type) && (
+				popoverFilter?.shipment_type ? (
 					<div className={styles.channel_partner}>
 						<div className={styles.filter_heading}>Trade Type</div>
 						<Select
@@ -285,7 +290,7 @@ function FilterBy({
 							isClearable
 						/>
 					</div>
-				)
+				) : null
 			}
 		</div>
 	);

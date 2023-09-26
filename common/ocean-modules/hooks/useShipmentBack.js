@@ -40,7 +40,7 @@ export default function useShipmentBack() {
 			router.back();
 		} else if (version === 'v2') {
 			const REMOVE_V2 = '/v2';
-			const routerPushURL = navToRedirect?.href.slice(REMOVE_V2.length);
+			const routerPushURL = navToRedirect?.href?.slice(REMOVE_V2.length);
 			router.push(routerPushURL, routerPushURL);
 		} else {
 			const newUrl = `${window.location.origin}/${router?.query?.partner_id}/${navToRedirect.href}`;
