@@ -12,9 +12,9 @@ const getPayload = ({
 	UserID        : id || undefined,
 	PerformedByID : id || undefined,
 	Source        : 'admin',
-	Category      : category || undefined,
 	UserType      : 'ticket_user',
 	Data          : {
+		Category    : category || undefined,
 		RequestType : 'feedback',
 		Attachment  : [finalUrl] || [],
 	},

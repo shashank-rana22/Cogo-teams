@@ -24,7 +24,10 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 
 	const controls = useRaiseTicketcontrols({ watchCategory });
 
-	const { addFeedback, loading } = useAddFeedback({ getFeedbacks, setShowAddFeedback });
+	const { addFeedback, loading } = useAddFeedback({
+		getFeedbacks,
+		setShowAddFeedback,
+	});
 
 	return (
 		<div className={styles.container}>
@@ -34,7 +37,13 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 					Add feedback
 				</div>
 
-				<Button size="md" themeType="link" onClick={() => setShowAddFeedback(false)}>Hide</Button>
+				<Button
+					size="sm"
+					themeType="link"
+					onClick={() => setShowAddFeedback(false)}
+				>
+					Back
+				</Button>
 			</div>
 
 			<form className={styles.form} onSubmit={handleSubmit(addFeedback)}>

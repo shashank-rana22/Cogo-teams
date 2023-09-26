@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 function FeedbackList({
 	setActiveTab = () => {},
+	setModalData = () => {},
 	activeTab = '',
 	feedbacks = [],
 	loading = false,
@@ -15,14 +16,14 @@ function FeedbackList({
 		<div className={styles.list}>
 			<Tabs
 				fullWidth
-				themeType="primary"
 				activeTab={activeTab}
 				onChange={setActiveTab}
+				themeType="secondary"
 			>
 				{
 					TABS_MAPPING.map((item) => (
 						<TabPanel key={item.key} name={item.key} title={item.title}>
-							<List loading={loading} feedbacks={feedbacks} />
+							<List setModalData={setModalData} loading={loading} feedbacks={feedbacks} />
 						</TabPanel>
 					))
 					}

@@ -1,5 +1,5 @@
 import { Button, Pagination } from '@cogoport/components';
-import { IcMFeedback } from '@cogoport/icons-react';
+import { IcMFeedback, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -11,10 +11,10 @@ import styles from './styles.module.css';
 
 const DEFAULT_PAGE = 1;
 
-function Feedback() {
+function Feedback({ setModalData = () => {} }) {
 	const [showAddFeedback, setShowAddFeedback] = useState(false);
-	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [activeTab, setActiveTab] = useState('all');
+	const [page, setPage] = useState(DEFAULT_PAGE);
 
 	const { feedbacks, loading, getFeedbacks, pageData } = useGetFeedbacks({ activeTab, page });
 	const { total = '' } = pageData || {};
@@ -45,8 +45,8 @@ function Feedback() {
 									setActiveTab('all');
 								}}
 							>
+								<IcMPlus height={14} width={14} />
 								Add Feedback
-
 							</Button>
 						</div>
 					</div>
@@ -54,6 +54,7 @@ function Feedback() {
 
 			{!showAddFeedback && (
 				<FeedbackList
+					setModalData={setModalData}
 					setActiveTab={setActiveTab}
 					activeTab={activeTab}
 					feedbacks={feedbacks}

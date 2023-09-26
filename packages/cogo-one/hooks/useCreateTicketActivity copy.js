@@ -15,7 +15,7 @@ const getPayload = ({ profile, message, ticketId, file, isInternal }) => ({
 const useCreateTicketActivity = ({
 	ticketId,
 	isInternal,
-	fetchDetails,
+	refreshTickets,
 	scrollToBottom,
 }) => {
 	const { profile } = useSelector((state) => state);
@@ -32,7 +32,7 @@ const useCreateTicketActivity = ({
 				data: getPayload({ profile, message, ticketId, file, isInternal }),
 			});
 
-			fetchDetails();
+			refreshTickets();
 			scrollToBottom();
 		} catch (error) {
 			console.error(error?.error);

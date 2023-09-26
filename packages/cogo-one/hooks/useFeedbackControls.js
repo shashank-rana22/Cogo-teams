@@ -7,13 +7,18 @@ import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOpt
 const useFeedbackControls = ({ watchCategory }) => {
 	const categoryOptions = useGetAsyncTicketOptions({
 		...asyncTicketsCategory(),
+		params: {
+			Audience    : 'cogoport_user',
+			RequestType : 'feedback',
+		},
 	});
 
 	const ticketTypeOptions = useGetAsyncTicketOptions({
 		...asyncFieldsTicketTypes(),
 		params: {
-			Audience : 'cogoport_user',
-			Category : watchCategory || undefined,
+			RequestType : 'feedback',
+			Audience    : 'cogoport_user',
+			Category    : watchCategory || undefined,
 		},
 	});
 

@@ -1,10 +1,10 @@
 import { Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { useRouter } from '@cogoport/next';
+import { IcMDocument } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import { STATUS_LABEL_MAPPING, STATUS_MAPPING } from '../../../../../../constants';
+import { STATUS_LABEL_MAPPING, FEEDBACK_STATUS_MAPPING } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -16,67 +16,72 @@ function Card({
 	Description: description = '',
 	Data: data = {},
 	Type: issueType = '',
+	setModalData = () => {},
 }) {
-	const { query } = useRouter();
-
 	const { Attachment: attachment = [] } = data || {};
 
 	const fileUrl = attachment?.[GLOBAL_CONSTANTS.zeroth_index];
 
-	const { value, label } = STATUS_LABEL_MAPPING[STATUS_MAPPING[status]] || {};
-
-	const { partner_id: partnerId = '' } = query || {};
-
-	const redirectUrl = `${window.location.origin}/v2/${partnerId}/ticket-management/my-tickets?ticket_id=${id}`;
+	const { value, label } = STATUS_LABEL_MAPPING[FEEDBACK_STATUS_MAPPING[status]] || {};
 
 	return (
 		<div
 			role="presentation"
 			className={styles.card}
-			onClick={() => window.open(redirectUrl, '_blank')}
+			onClick={() => setModalData({ ticketId: id })}
 		>
 			<div className={styles.header}>
+				<div className={styles.category}>{category}</div>
+
 				<div className={styles.basic_info}>
 					<div className={styles.feedback_number}>
 						#
 						{id}
 					</div>
-					<div className={styles.file_status}>
-						{fileUrl ? (
-							<Button
-								size="md"
-								themeType="linkUi"
-								id={styles.attachment}
-								onClick={() => window.open(fileUrl)}
-							>
-								Attachment
-							</Button>
-						) : null}
-						<div
-							className={cl`${styles.status} ${styles[value]}`}
-						>
-							{startCase(label)}
+					<div
+						className={cl`${styles.status} ${styles[value]}`}
+					>
+						{startCase(label)}
 
-						</div>
 					</div>
 				</div>
-
-				<div className={styles.category}>{category}</div>
-				<div className={styles.issue_type}>{issueType}</div>
 			</div>
 
 			<div className={styles.desc_info}>
-				<div className={styles.date}>
-					{formatDate({
-						date       : createdAt,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/mm/yyyy'],
-						separator  : ', ',
-						timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
-						formatType : 'dateTime',
-					})}
+				<div className={styles.issue_type}>{issueType}</div>
 
-				</div>
 				<div className={styles.description}>{description}</div>
+
+				<div className={styles.footer}>
+
+					<div className={styles.date}>
+						{formatDate({
+							date       : createdAt,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/mm/yyyy'],
+							separator  : ', ',
+							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+							formatType : 'dateTime',
+						})}
+					</div>
+
+					<div>
+						{fileUrl ? (
+
+							<Button
+								size="md"
+								themeType="link"
+								id={styles.attachment}
+								onClick={(e) => {
+									e.stopPropagation();
+									window.open(fileUrl);
+								}}
+							>
+								<IcMDocument className={styles.document_icon} />
+								Attachment
+							</Button>
+						) : null}
+					</div>
+				</div>
 			</div>
 		</div>
 	);
