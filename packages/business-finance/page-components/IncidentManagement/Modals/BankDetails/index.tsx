@@ -120,7 +120,7 @@ function BankDetails({
 							<div className={styles.simple_name}>{t('incidentManagement:bank_holder_name')}</div>
 							<div className={styles.flex}>
 								<div className={styles.font_name}>{startCase(bankHolderName) || '-'}</div>
-								<div>
+								<div className={styles.radio}>
 									<RadioGroup
 										options={getOptionsData}
 										onChange={(item: string) => setValue((prev) => ({ ...prev, radioName: item }))}
@@ -135,7 +135,7 @@ function BankDetails({
 							</div>
 							<div className={styles.flex}>
 								<div className={styles.font_name}>{accountNumber || '-'}</div>
-								<div>
+								<div className={styles.radio}>
 									<RadioGroup
 										options={getOptionsData}
 										onChange={(item: string) => setValue((prev) => ({
@@ -158,7 +158,7 @@ function BankDetails({
 										{startCase(branchName) || '-'}
 									</div>
 								</div>
-								<div>
+								<div className={styles.radio}>
 									<RadioGroup
 										options={getOptionsData}
 										onChange={(item: string) => setValue((prev) => ({
@@ -180,7 +180,7 @@ function BankDetails({
 								<div className={styles.font_name}>
 									{ifscCode ? ifscCode || '-' : swiftCode || ''}
 								</div>
-								<div>
+								<div className={styles.radio}>
 									<RadioGroup
 										options={getOptionsData}
 										onChange={(item: string) => setValue((prev) => ({
@@ -239,7 +239,7 @@ function BankDetails({
 									size="md"
 									placeholder={t('incidentManagement:remarks_placeholder')}
 									onChange={(v: string) => setValue((prev) => ({ ...prev, text: v }))}
-									style={{ width: '700', height: '100px', marginBottom: '12px' }}
+									style={{ width: '700', height: '80px', marginBottom: '12px' }}
 								/>
 							</>
 						)}

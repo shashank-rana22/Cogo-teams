@@ -50,7 +50,7 @@ function BarChart({ data = [], filterValues = {}, setSelectedBarData = () => {} 
 
 	const handleHover = (_, val) => {
 		const event = val;
-		event.target.style.cursor =			view_type === 'outstanding' ? 'pointer' : 'auto';
+		event.target.style.cursor = view_type === 'outstanding' ? 'pointer' : 'auto';
 	};
 
 	const barTotalsLayer = (props) => {
