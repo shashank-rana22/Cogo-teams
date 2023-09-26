@@ -17,7 +17,7 @@ function RightPanel(props) {
 
 	return (
 		<div className={styles.container}>
-			<p className={styles.heading}>ACTIVITY COUNT</p>
+			{/* <p className={styles.heading}>ACTIVITY COUNT</p> */}
 
 			<div className={styles.blocks}>
 				{Object.entries(activityData || {}).map(([activity, block_data]) => (
