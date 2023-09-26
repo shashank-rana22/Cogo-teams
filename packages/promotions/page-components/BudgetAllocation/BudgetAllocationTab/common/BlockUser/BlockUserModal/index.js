@@ -35,7 +35,7 @@ function BlockUserModal({ block, setBlock, item, refetch }) {
 				</Button>
 				<Button
 					onClick={() => blockUserBudget(item)}
-					className="primary sm space-left"
+					className={`primary sm ${styles.space_left}`}
 					disabled={loading}
 				>
 					Yes

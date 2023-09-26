@@ -33,7 +33,7 @@ const useBlockUserBudgetAllocation = ({ setBlock = () => {}, refetch = () => {} 
 				Toast.success('Agent UnBlocked!');
 			}
 
-			await refetch();
+			refetch();
 			setBlock(false);
 		} catch (error) {
 			Toast.error(error.message);

@@ -63,7 +63,7 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 							className="primary sm"
 							value={inputValue}
 							type="number"
-							onChange={(e) => setInputValue(e.target.value)}
+							onChange={(value) => setInputValue(value)}
 						/>
 					</div>
 					<div className={styles.save_close}>
