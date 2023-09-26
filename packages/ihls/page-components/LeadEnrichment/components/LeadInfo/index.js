@@ -1,4 +1,4 @@
-import { Button, Modal, Pagination, Popover } from '@cogoport/components';
+import { Button, Modal, Pagination, Popover, Tooltip } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -68,14 +68,22 @@ function LeadInfo({
 								Send to Enrichment
 
 							</Button>
-							<Button
-								className={styles.popover_buttons}
-								size="md"
-								themeType="primary"
+							<Tooltip
+								content="Feature coming soon"
+								placement="bottom"
+								caret={false}
 							>
-								Push to CRM
+								<Button
+									className={styles.popover_buttons}
+									size="md"
+									themeType="primary"
+									disabled
+								>
+									Push to CRM
 
-							</Button>
+								</Button>
+							</Tooltip>
+
 						</>
 					)}
 					visible={visible}

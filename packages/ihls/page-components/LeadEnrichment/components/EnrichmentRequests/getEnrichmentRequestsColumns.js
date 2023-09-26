@@ -1,6 +1,8 @@
-import { Button, Popover } from '@cogoport/components';
+import { Button, Pill, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format } from '@cogoport/utils';
+
+import { DEFAULT_LIST } from '../../helpers/constants';
 
 import styles from './styles.module.css';
 
@@ -32,11 +34,19 @@ const getEnrichmentRequestsColumns = ({
 			Header   : 'ENRICHMENT STATUS',
 			key      : 'enrichment_status',
 			id       : 'enrichment_status',
-			accessor : ({ enrichment_status }) => (
-				<div className={styles.table_cell}>
-					{enrichment_status || '___'}
-				</div>
-			),
+			accessor : ({ enrichment_status }) => {
+				const { color, label } = DEFAULT_LIST[enrichment_status] || '';
+				return (
+					<div className={styles.table_cell}>
+						<Pill
+							size="md"
+							color={color}
+						>
+							{label}
+						</Pill>
+					</div>
+				);
+			},
 		},
 		{
 			Header   : 'ACCOUNTS',

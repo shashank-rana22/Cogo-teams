@@ -2,7 +2,7 @@ import { Checkbox, Button, Pill } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import { REGISTRATION_MAPPING, REGISTRATION_TYPE_INDEX } from '../../helpers/constants';
+import { REGISTRATION_MAPPING, REGISTRATION_TYPE_INDEX, LIFECYCLE_STAGE } from '../../helpers/constants';
 
 import styles from './styles.module.css';
 
@@ -62,11 +62,19 @@ const getLeadInfoColumns = ({
 		Header   : 'LIFECYCLE STAGE',
 		key      : 'platform_lifecycle_stage',
 		id       : 'platform_lifecycle_stage',
-		accessor : ({ platform_lifecycle_stage }) => (
-			<section className={styles.table_cell}>
-				{platform_lifecycle_stage || '___'}
-			</section>
-		),
+		accessor : ({ platform_lifecycle_stage }) => {
+			const { color, label } = LIFECYCLE_STAGE[platform_lifecycle_stage] || { label: platform_lifecycle_stage };
+			return (
+				<div className={styles.table_cell}>
+					<Pill
+						size="md"
+						color={color}
+					>
+						{label}
+					</Pill>
+				</div>
+			);
+		},
 	},
 	{
 		Header   : 'TYPE',
@@ -136,7 +144,7 @@ const getLeadInfoColumns = ({
 				{shipment_modes ? (
 					<Pill
 						size="md"
-						color="#F3FAFA"
+						color="blue"
 						style={{ width: '30%' }}
 					>
 						{shipment_modes}
