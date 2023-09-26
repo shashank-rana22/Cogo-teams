@@ -1,18 +1,17 @@
 import { Button, TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMDownload, IcMProfile } from '@cogoport/icons-react';
+import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { getTaxLabels } from '../../../../constants/index';
-import useGetPartnerRmMapping from '../../../../hooks/useGetPartnerRmMapping';
 
 import DownloadLedgerModal from './DownloadLedgerModal';
-import PopoverTags from './PopoverTags';
 import StatsOutstanding from './StatsOutstanding/index';
 import styles from './styles.module.css';
 import TabsOptions from './TabOptions';
+import UserDetails from './UserDetails';
 
 interface CreditController {
 	id?: string;
@@ -58,13 +57,8 @@ function OutstandingList({
 }: OutstandingListProps) {
 	const [activeTab, setActiveTab] = useState('invoice_details');
 	const [showLedgerModal, setShowLedgerModal] = useState(false);
-	const [profileClicked, setIsProfileClicked] = useState(false);
 
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
-	const { data, getPartnerMappingData, loading } = useGetPartnerRmMapping();
-	const handleClick = (val) => {
-		getPartnerMappingData(val);
-	};
 
 	const handleActiveTabs = (val) => {
 		if (val === activeTab) {
@@ -247,26 +241,10 @@ function OutstandingList({
 							</div>
 						)}
 					</div>
-					{profileClicked && (
-						<div className={styles.category_container}>
-							<PopoverTags
-								data={data}
-								loading={loading}
-								handleClick={handleClick}
-								item={item}
-							/>
-						</div>
-					)}
 					<div className={styles.ledger_style}>
-						<Tooltip content="View Details" placement="top">
-							<div className={styles.download_icon_div}>
-								<IcMProfile
-									fill="black"
-									onClick={() => setIsProfileClicked((prev) => !prev)}
-									disabled={isEmpty(data)}
-								/>
-							</div>
-						</Tooltip>
+						{isEmpty(item) ? null : (
+							<UserDetails item={item} />
+						)}
 						<Tooltip content="Ledger Download" placement="top">
 							<div className={styles.download_icon_div}>
 								<IcMDownload
