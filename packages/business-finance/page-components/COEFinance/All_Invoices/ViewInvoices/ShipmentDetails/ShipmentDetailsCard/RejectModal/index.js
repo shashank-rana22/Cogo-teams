@@ -122,7 +122,7 @@ function RejectModal({
 								if (e?.target?.checked) {
 									setCheckedValue((p) => ({
 										...p,
-										[CHECKED_VALUE_MAPPING[rejectedId]]: [...allOptions],
+										[CHECKED_VALUE_MAPPING[rejectedId]]: ['All'],
 									}));
 									setExtraCheck('All');
 								} else {
@@ -135,12 +135,16 @@ function RejectModal({
 							}}
 							className={styles.extra_checks}
 						/>
-						<CheckboxGroup
-							options={basicOptions[rejectedId]}
-							onChange={onCheckboxChange}
-							value={checkedValue[CHECKED_VALUE_MAPPING[rejectedId]]}
-							style={{ display: 'flex', flexDirection: 'column' }}
-						/>
+
+						{isEmpty(extraCheck) ? (
+							<CheckboxGroup
+								options={basicOptions[rejectedId]}
+								onChange={onCheckboxChange}
+								value={checkedValue[CHECKED_VALUE_MAPPING[rejectedId]]}
+								style={{ display: 'flex', flexDirection: 'column' }}
+							/>
+						) : null}
+
 						<Checkbox
 							checked={extraCheck === 'Other'}
 							label="Other"
