@@ -138,7 +138,6 @@ function FilterBy({
 					/>
 				</div>
 			) : null}
-
 			{possibleFilters?.includes('triggered_pending_invoices') ? (
 				<div className={styles.pending_invoice}>
 					<Checkbox
@@ -151,7 +150,6 @@ function FilterBy({
 					<div className={styles.filter_heading}>Pending Invoices</div>
 				</div>
 			) : null}
-
 			{possibleFilters?.includes('date_type') ? (
 				<div className={styles.filter_container}>
 					<div className={styles.filter_heading}>Date Type</div>
@@ -229,16 +227,18 @@ function FilterBy({
 					) : null}
 				</div>
 			) : null}
-			<div className={styles.channel_partner}>
-				<div className={styles.filter_heading}>Shipment Type</div>
-				<Select
-					options={SHIPMENT_TYPE_OPTIONS}
-					value={popoverFilter?.shipment_type}
-					onChange={(val) => { handleShipmentTypeChange({ setPopoverFilter, val }); }}
-					size="sm"
-					isClearable
-				/>
-			</div>
+			{shipmentType === 'all' ? (
+				<div className={styles.channel_partner}>
+					<div className={styles.filter_heading}>Shipment Type</div>
+					<Select
+						options={SHIPMENT_TYPE_OPTIONS}
+						value={popoverFilter?.shipment_type}
+						onChange={(val) => { handleShipmentTypeChange({ setPopoverFilter, val }); }}
+						size="sm"
+						isClearable
+					/>
+				</div>
+			) : null}
 			{possibleFilters?.includes('source') ? (
 				<div className={styles.channel_partner}>
 					<div className={styles.filter_heading}>Source</div>
