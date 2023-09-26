@@ -3,8 +3,8 @@ import { useFieldArray } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import FormElement from '../FormElement';
-import getWidthPercent from '../getWidthPercent';
+import FormElement from '../../FormElement';
+import getWidthPercent from '../../getWidthPercent';
 
 import FieldArray from './FieldArray';
 import styles from './styles.module.css';
@@ -17,9 +17,8 @@ function NestedFieldArray({
 	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
 	showElements = {}, customFieldArrayControls = {},
 }) {
-	console.log(ctrl, error, 'nestr');
 	const { controls = [], name, addButtonText = '' } = ctrl || {};
-
+	console.log(error, ctrl, 'nested');
 	const { fields, append, remove } = useFieldArray({ control, name });
 
 	return (
@@ -33,10 +32,9 @@ function NestedFieldArray({
 
 					{controls.map((nestCtrl) => {
 						const { type = '', name:ctrlItemName, span, ...restCtrl } = nestCtrl;
-						if (['fieldArray', 'nestedFieldArray'].includes(type)) {
+						if (['fieldArray'].includes(type)) {
 							return (
 								<div key={field.id} className={styles.nested_container}>
-
 									<FieldArray
 										key={field.id}
 										field={field}

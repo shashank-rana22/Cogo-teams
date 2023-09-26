@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 const formControls = ({ showUpdate }) => [
 	{
 		name        : 'containers',
-		type        : 'nestedFieldArray',
+		type        : 'doubleNestedFieldArray',
 		showButtons : true,
 		buttonText  : 'Add Container',
 		value       : {},
@@ -15,13 +15,12 @@ const formControls = ({ showUpdate }) => [
 				label       : 'Container No',
 				span        : 5,
 				value       : showUpdate?.data?.container_no?.[GLOBAL_CONSTANTS.zeroth_index],
-				// value       : [{ container_no: '' }],
 				rules       : { required: 'This is required' },
 				disabled    : showUpdate?.data?.search_type === 'CONTAINER_NO',
 			},
 			{
-				name        : 'loactons',
-				type        : 'fieldArray',
+				name        : 'locations',
+				type        : 'nestedFieldArray',
 				showButtons : true,
 				buttonText  : 'Add Milestones',
 				value       : {},
@@ -39,7 +38,7 @@ const formControls = ({ showUpdate }) => [
 					{
 						name               : 'margin_values',
 						label              : 'Mile Stone',
-						type               : 'nestedFieldArray',
+						type               : 'fieldArray',
 						buttonText         : 'Add Field',
 						noDeleteButtonTill : 1,
 						controls           : [

@@ -1,5 +1,6 @@
 import { cl } from '@cogoport/components';
 
+import DoubleNestedFieldArray from './DoubleNestedArray';
 import FieldArray from './FieldArray';
 import FormElement from './FormElement';
 import getWidthPercent from './getWidthPercent';
@@ -10,6 +11,7 @@ function Layout({
 	controls = [], control = {}, errors = {}, showElements = {}, formValues = {},
 	customFieldArrayControls = {},
 }) {
+	console.log(errors, 'outer', controls);
 	const finalControls = controls.filter((c) => {
 		if (c.name in showElements) {
 			return showElements[c.name];
@@ -24,6 +26,20 @@ function Layout({
 					type = '', label = '', span = 6, removeLabelMargin = false,
 					showButtons = true, ...restCtrl
 				} = ctrl || {};
+				if (type === 'doubleNestedFieldArray') {
+					return (
+						<DoubleNestedFieldArray
+							customFieldArrayControls={customFieldArrayControls}
+							ctrl={ctrl}
+							key={ctrl.name}
+							control={control}
+							error={errors}
+							formValues={formValues}
+							showElements={showElements}
+							showButtons={showButtons}
+						/>
+					);
+				}
 
 				if (type === 'nestedFieldArray') {
 					return (
@@ -73,7 +89,12 @@ function Layout({
 						{type ? <FormElement control={control} {...restCtrl} type={type} /> : null}
 
 						{errors?.[restCtrl.name]
-							? <div className={styles.errors}>{errors[restCtrl.name]?.message}</div>
+							? (
+								<div className={styles.errors}>
+									{errors[restCtrl.name]?.message}
+									heelo
+								</div>
+							)
 							: null}
 					</div>
 				);

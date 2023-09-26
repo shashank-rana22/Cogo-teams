@@ -5,21 +5,21 @@ import { startCase } from '@cogoport/utils';
 
 import FormElement from '../FormElement';
 import getWidthPercent from '../getWidthPercent';
+import FieldArray from '../NestedFieldArray/FieldArray';
 
-import FieldArray from './FieldArray';
+import NestedFieldArray from './NestedFieldArray';
 import styles from './styles.module.css';
 
 const HEADING_INDEX_OFFSET = 1;
 const NO_OF_ELEMENTS_TO_BE_REMOVED = 1;
 const TOTAL_SPAN = 12;
 
-function NestedFieldArray({
+function DoubleNestedFieldArray({
 	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
 	showElements = {}, customFieldArrayControls = {},
 }) {
-	console.log(ctrl, error, 'nestr');
 	const { controls = [], name, addButtonText = '' } = ctrl || {};
-
+	console.log(error, ctrl, 'double nested');
 	const { fields, append, remove } = useFieldArray({ control, name });
 
 	return (
@@ -33,7 +33,25 @@ function NestedFieldArray({
 
 					{controls.map((nestCtrl) => {
 						const { type = '', name:ctrlItemName, span, ...restCtrl } = nestCtrl;
-						if (['fieldArray', 'nestedFieldArray'].includes(type)) {
+						if (type === 'nestedFieldArray') {
+							return (
+								<div key={field.id} className={styles.nested_container}>
+									<NestedFieldArray
+										key={field.id}
+										field={field}
+										error={error?.[ctrl.name]}
+										ctrl={nestCtrl}
+										control={control}
+										index={index}
+										name={name}
+										formValues={formValues}
+										showElements={showElements}
+										customFieldArrayControls={customFieldArrayControls?.[name]}
+									/>
+								</div>
+							);
+						}
+						if (type === 'fieldArray') {
 							return (
 								<div key={field.id} className={styles.nested_container}>
 
@@ -72,7 +90,7 @@ function NestedFieldArray({
 								/>
 								{error?.[index]?.[ctrlItemName]?.message ? (
 									<p className={styles.error}>
-										{error?.[index]?.[ctrlItemName]?.message || ''}
+										{error?.[index]?.[ctrlItemName].message || ''}
 									</p>
 								) : null}
 							</div>
@@ -96,4 +114,4 @@ function NestedFieldArray({
 	);
 }
 
-export default NestedFieldArray;
+export default DoubleNestedFieldArray;
