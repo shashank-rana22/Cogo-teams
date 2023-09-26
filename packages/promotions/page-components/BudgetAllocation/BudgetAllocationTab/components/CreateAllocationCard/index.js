@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 
 import Layout from '../../../../../common/Layout';
@@ -20,28 +20,29 @@ function CreateAllocationCard({
 		setFormData(data);
 		setShowModal(true);
 	};
-
 	return (
-		<div className={styles.top_container}>
-			<div
-				className={styles.icon}
-				style={{ display: 'flex', justifyContent: 'flex-end' }}
-			>
-				<IcMCross
-					size={1}
-					onClick={() => {
-						reset();
-						setFormButton(!formButton);
-					}}
-				/>
+		<Modal show showCloseIcon size="xl">
+			<div className={styles.top_container}>
+				<div
+					className={styles.icon}
+					style={{ display: 'flex', justifyContent: 'flex-end' }}
+				>
+					<IcMCross
+						size={1}
+						onClick={() => {
+							reset();
+							setFormButton(!formButton);
+						}}
+					/>
+				</div>
+				<Layout controls={controls} control={control} errors={errors} />
+				<div className={styles.button_container}>
+					<Button className="primary sm" onClick={handleSubmit(onClickAllocate)}>
+						Allocate
+					</Button>
+				</div>
 			</div>
-			<Layout controls={controls} control={control} errors={errors} />
-			<div className={styles.button_container}>
-				<Button className="primary sm" onClick={handleSubmit(onClickAllocate)}>
-					Allocate
-				</Button>
-			</div>
-		</div>
+		</Modal>
 	);
 }
 export default CreateAllocationCard;

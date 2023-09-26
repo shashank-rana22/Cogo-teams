@@ -75,9 +75,9 @@ function ShowModal({
 							control={radioControl}
 							errors={radioErrors}
 						/>
-						{radioErrors.radio && (
+						{radioErrors.radio ? (
 							<div className="align-left">Select any one option</div>
-						)}
+						) : null}
 					</div>
 					<div className={styles.button_flex}>
 						<Button className="secondary md" onClick={closeModal}>

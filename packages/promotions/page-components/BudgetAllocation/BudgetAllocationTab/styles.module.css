@@ -4,10 +4,18 @@
 
 .select_wrapper {
 	position: absolute;
-	top: 10px;
+	top: 0;
 	left: 50%;
 	z-index: 1;
 	min-width: 250px;
+	transform: translate(-50%, -10%);
+}
+
+.allocate_button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
 	transform: translate(-50%, -50%);
 }
 

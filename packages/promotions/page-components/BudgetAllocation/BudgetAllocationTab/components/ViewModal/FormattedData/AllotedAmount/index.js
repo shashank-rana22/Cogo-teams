@@ -28,7 +28,7 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 	};
 	return (
 		<div className={styles.amount_div}>
-			{!showSaveLink && (
+			{!showSaveLink ? (
 				<div className={styles.styled_div}>
 					<div className={styles.amount}>
 						{formatAmount({
@@ -55,8 +55,8 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 						</div>
 					)}
 				</div>
-			)}
-			{showSaveLink && (
+			) : null}
+			{showSaveLink ? (
 				<>
 					<div className={styles.input_styled}>
 						<Input
@@ -85,7 +85,7 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 						</div>
 					</div>
 				</>
-			)}
+			) : null}
 		</div>
 	);
 }

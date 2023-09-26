@@ -99,23 +99,7 @@ function BudgetAllocationTab() {
 
 	return (
 		<div>
-			{!formButton ? (
-				<div
-					style={{
-						display        : 'flex',
-						justifyContent : 'flex-end',
-						marginTop      : '10px',
-					}}
-				>
-					<Button
-						className="primary sm"
-						onClick={() => setFormButton((prev) => !prev)}
-					>
-						ALLOCATE
-					</Button>
-				</div>
-			) : null}
-			{formButton && (
+			{formButton ? (
 				<CreateAllocationCard
 					setFormData={setFormData}
 					setShowModal={setShowModal}
@@ -127,11 +111,28 @@ function BudgetAllocationTab() {
 					errors={errors}
 					reset={reset}
 				/>
-			)}
+			) : null}
 			<div className={styles.tab_container}>
 				<div className={styles.select_wrapper}>
 					<Layout controls={roleControls} control={roleControl} errors={roleErrors} />
 				</div>
+				{!formButton ? (
+					<div
+						className={styles.allocate_button}
+						style={{
+							display        : 'flex',
+							justifyContent : 'flex-end',
+							marginTop      : '10px',
+						}}
+					>
+						<Button
+							className="primary sm"
+							onClick={() => setFormButton((prev) => !prev)}
+						>
+							ALLOCATE
+						</Button>
+					</div>
+				) : null}
 				<Tabs
 					activeTab={activeTab}
 					onChange={setActiveTab}
@@ -150,15 +151,15 @@ function BudgetAllocationTab() {
 					))}
 				</Tabs>
 			</div>
-			{showViewModal && selectedDetails && (
+			{(showViewModal && selectedDetails) ? (
 				<ViewModal
 					showViewModal={showViewModal}
 					setShowViewModal={setShowViewModal}
 					selectedDetails={selectedDetails}
 					refetchListBudgetAllocation={refetch}
 				/>
-			)}
-			{showModal && (
+			) : null}
+			{showModal ? (
 				<ShowModal
 					setShowModal={setShowModal}
 					FormData={formData}
@@ -173,7 +174,7 @@ function BudgetAllocationTab() {
 					radioControls={radioControls}
 					radioWatch={radioWatch}
 				/>
-			)}
+			) : null}
 		</div>
 	);
 }

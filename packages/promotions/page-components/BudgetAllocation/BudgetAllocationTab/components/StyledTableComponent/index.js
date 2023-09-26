@@ -14,7 +14,7 @@ function StyledTableComponent({
 }) {
 	return (
 		<div>
-			{!loading && formattedData.length === ZERO ? (
+			{(!loading && formattedData.length === ZERO) ? (
 				<EmptyState />
 			) : (
 				<div className={styles.table}>
