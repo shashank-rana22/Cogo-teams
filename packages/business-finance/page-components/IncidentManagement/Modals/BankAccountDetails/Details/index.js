@@ -4,7 +4,8 @@ import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetBankData from '../../../apisModal/useGetBankData';
-import { getOptions, getOptionsManual } from '../constant';
+import ClipBoard from '../../../common/Clipboard';
+import { getOptions } from '../constant';
 
 import styles from './styles.module.css';
 
@@ -88,7 +89,7 @@ function Details({
 					{' '}
 				</div>
 				<div className={styles.flex}>
-					<div className={styles.font_name}>{accountNumber || '-'}</div>
+					<div className={styles.font_name}>{<ClipBoard data={accountNumber} /> || '-'}</div>
 					<div className={styles.radio}>
 						<RadioGroup
 							options={getOptionsData}
@@ -132,7 +133,8 @@ function Details({
 
 				<div className={styles.flex}>
 					<div className={styles.font_name}>
-						{ifscCode ? ifscCode || '-' : swiftCode || ''}
+						{ifscCode ? <ClipBoard data={ifscCode} /> || '-'
+							: <ClipBoard data={swiftCode} /> || ''}
 					</div>
 					<div className={styles.radio}>
 						<RadioGroup
@@ -146,11 +148,12 @@ function Details({
 					</div>
 				</div>
 
+				<div className={styles.simple_name}>{t('incidentManagement:verification_method')}</div>
 				<div className={styles.flex}>
-					<div className={styles.font_name}>{t('incidentManagement:verification_method')}</div>
+					<div className={styles.font_name}>{ifscCode}</div>
 					<div>
 						<RadioGroup
-							options={getOptionsManual({ isEditable, t })}
+							options={getOptionsData}
 							onChange={(item) => setValue((prev) => ({
 								...prev,
 								radioMethod: item,

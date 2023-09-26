@@ -25,7 +25,7 @@
 .display_box {
 	display: flex;
 	width: 100%;
-	padding: 60px 24px 24px;
+	padding: 36px 0px 24px 0px;
 }
 
 .company_div {
@@ -33,17 +33,12 @@
 }
 
 .line {
-	margin: 0 24px;
 	border-bottom: 1px solid #e0e0e0;
 }
 
 .profit_container {
 	display: flex;
 	margin-left: 12px;
-}
-
-.shipment_container {
-	padding: 16px 26px 6px;
 }
 
 .shipment_id {
@@ -107,5 +102,34 @@
 
 .amount_details {
 	display: flex;
-	justify-content: space-between;
+	padding: 16px 0px;
+	gap: 40px;
+}
+
+.details_box {
+	padding: 24px;
+}
+
+.supplier_div {
+	padding: 24px 0px 16px 0px;
+}
+
+.shipment_container {
+	padding: 16px 0px;
+}
+
+.payment_div {
+	padding: 16px 0px 8px 0px;
+}
+
+.per_container_div {
+	width: 60%;
+}
+
+.count_div {
+	width: 30%;
+}
+
+.amount_div {
+	width: 30%;
 }
