@@ -23,14 +23,6 @@
       "label": "Export/Import"
     },
     {
-      "value": "export",
-      "label": "Export"
-    },
-    {
-      "value": "import",
-      "label": "Import"
-    },
-    {
       "value": "lcl_customs",
       "label": "Customs"
     }
