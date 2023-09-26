@@ -52,6 +52,7 @@ function AccuracyDashboard() {
 					<Filters
 						globalFilters={globalFilters}
 						setGlobalFilters={setGlobalFilters}
+						view={view}
 					/>
 				</>
 			)}

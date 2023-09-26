@@ -27,6 +27,7 @@ const controls = [
 		label     : 'Container Size',
 		options   : containerSize,
 		span      : 12,
+		value     : '20',
 		className : 'filter-row-flex md',
 	},
 	{
@@ -53,6 +54,7 @@ const controls = [
 		label     : 'Container Type',
 		options   : containerTypes,
 		span      : 12,
+		value     : 'standard',
 		className : 'filter-row-flex md',
 	},
 
@@ -61,6 +63,7 @@ const controls = [
 		label       : 'Commodity',
 		type        : 'multi-select',
 		span        : 12,
+		value       : ['general'],
 		className   : 'filter-row-flex md',
 		placeholder : 'Type here...',
 		size        : 'md',
