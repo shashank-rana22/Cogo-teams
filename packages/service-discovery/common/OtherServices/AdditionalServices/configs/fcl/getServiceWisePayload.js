@@ -86,9 +86,8 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 			// cargo_handling_type,
 		})),
 		haulage_freight: primaryServicesObj.map((item) => ({
-			...trade_type === 'export'
-				? { origin_location_id: detail?.origin_port_id }
-				: { destination_location_id: detail?.destination_port_id },
+			origin_location_id,
+			destination_location_id,
 			container_size : item.container_size,
 			container_type : item.container_type,
 			commodity      : item?.commodity && HAZ_CLASSES.includes(item.commodity)

@@ -122,6 +122,7 @@ const useFeedbackTableData = ({ organizationId = '', type = '', route = '' }) =>
 		selectAll,
 		onChangeTableHeadCheckbox,
 		onChangeBodyCheckbox,
+		refetch,
 	};
 };
 

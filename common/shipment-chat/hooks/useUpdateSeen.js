@@ -4,7 +4,7 @@ import { useCallback, useEffect } from 'react';
 import toastApiError from '../utils/toastApiError';
 
 const useUpdateSeen = ({ payload }) => {
-	const { id = '', showUnreadChat = false } = payload;
+	const { id = '', showUnreadChat = false, status = '' } = payload;
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_chat_channel_seen',
@@ -25,10 +25,10 @@ const useUpdateSeen = ({ payload }) => {
 	}, [trigger]);
 
 	useEffect(() => {
-		if (id && !showUnreadChat) {
+		if (id && !showUnreadChat && status !== 'unread') {
 			onSeen();
 		}
-	}, [id, onSeen, showUnreadChat]);
+	}, [id, onSeen, showUnreadChat, status]);
 
 	return {
 		onSeen,

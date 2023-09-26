@@ -1088,6 +1088,11 @@ const partner = {
 	],
 	demand_crm: [
 		{
+			api          : 'create_shipment_trade_partner_organization',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_lead_organization_users',
 			access_type  : 'private',
 			service_name : 'lead',
@@ -2779,6 +2784,21 @@ const partner = {
 		},
 		{
 			api          : 'update_organization_asset',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_user_communication_preferences',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'bulk_update_organization_user_communication_preference',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_user_communication_preference',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -8577,6 +8597,22 @@ const partner = {
 			service_name : 'sage',
 		},
 		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_email_suggestions',
+			access_type  : 'private',
+			service_name : 'cogolens',
+		},
+		{
+
+			api          : 'create_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_organization_communication_logs',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -9138,6 +9174,18 @@ const partner = {
 			api         : 'post_incident_management_incident_send_overhead_mail',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_common_job_post_tax_profit',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_pre_tax_profit',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_list_service_charges',
+			access_type : 'private',
+		},
 	],
 	vietnam_account_receivables: [
 		{
@@ -9535,6 +9583,12 @@ const partner = {
 			feature     : 'JournalVoucher',
 		},
 		{
+			api         : 'post_payments_parent_jv_bulk_jv_upload',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
 			api         : 'post_payments_parent_jv_post_to_sage',
 			access_type : 'private',
 			module      : 'JournalVoucher',
@@ -9663,6 +9717,11 @@ const partner = {
 			api          : 'list_shipment_collection_party',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+		{
+			api          : 'get_incident_management_incident_job_reopen_incident_exists',
+			access_type  : 'private',
+			service_name : 'incident-management',
 		},
 		{
 			api          : 'post_incident_management_incident',
@@ -11284,6 +11343,10 @@ const partner = {
 		},
 		{
 			api         : 'post_common_tax_bulk_upload',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_common_tax_change_state_product_code',
 			access_type : 'private',
 		},
 	],
@@ -13417,6 +13480,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'platform_config',
 		},
+		{
+			api          : 'list_cogoone_shifts',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	analytics_dashboard: [
 		{
@@ -13792,6 +13860,20 @@ const partner = {
 			service_name : 'checkout',
 		},
 
+	],
+	ams_submission: [
+		{
+			api         : 'get_air_coe_air_freight_ams_data',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_air_freight',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_airline_config_list',
+			access_type : 'private',
+		},
 	],
 	business_finance_dunnings: [
 		{

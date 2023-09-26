@@ -281,6 +281,46 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'partner',
 	},
+	{
+		api          : 'create_revenue_desk_weightages',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'create_revenue_desk_automation_parameter',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'list_revenue_desk_automation_parameters',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'update_revenue_desk_automation_parameter',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'list_revenue_desk_wallet',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'create_revenue_desk_wallet',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'update_revenue_desk_wallet',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'get_revenue_desk_wallet',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
 ];
 
 export default apis;

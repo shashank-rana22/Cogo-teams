@@ -87,14 +87,15 @@ function Filters({
 	return (
 		<div className={styles.filter}>
 			{modifiedControls.map((control) => (
-				<Select
-					key={control.name}
-					placeholder={control.placeholder}
-					className={styles.select}
-					value={pageFilters?.[control.name]}
-					onChange={(val) => onChangeFilters({ [control.name]: val || undefined })}
-					{...control}
-				/>
+				<div className={styles.filter_item} key={control.name}>
+					<Select
+						placeholder={control.placeholder}
+						className={styles.select}
+						value={pageFilters?.[control.name]}
+						onChange={(val) => onChangeFilters({ [control.name]: val || undefined })}
+						{...control}
+					/>
+				</div>
 			))}
 
 			{activeTab === 'feedbacks_received' ? (

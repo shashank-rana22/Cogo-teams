@@ -19,6 +19,7 @@
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
+	height: 100%;
 	padding: 10px;
 	overflow: auto;
 
@@ -37,7 +38,7 @@
 }
 
 .agent_name {
-	width: 50%;
+	width: 40%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -53,6 +54,7 @@
 .agent_status {
 	display: flex;
 	align-items: center;
+	width: 60%;
 }
 
 .toggle {
@@ -75,12 +77,15 @@
 }
 
 .padding_inner {
+	height: 100%;
 	padding: 0 12px;
 }
 
 .header_bar {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 	color: #4f4f4f;
 }
 
@@ -90,4 +95,9 @@
 	margin-right: 4px;
 	cursor: pointer;
 	fill: #4f4f4f;
+}
+
+.back_section {
+	display: flex;
+	align-items: center;
 }

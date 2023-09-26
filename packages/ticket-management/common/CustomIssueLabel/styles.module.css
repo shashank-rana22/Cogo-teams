@@ -1,0 +1,25 @@
+.container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin-top: 8px;
+}
+
+.service {
+	width: fit-content;
+	height: fit-content;
+	padding: 0 2px;
+	margin-right: 16px;
+	font-size: 10px;
+	background: #faedcd;
+	border-radius: 4px;
+}
+
+.trade {
+	width: fit-content;
+	height: fit-content;
+	padding: 0 2px;
+	font-size: 10px;
+	background: #cfeaed;
+	border-radius: 4px;
+}
