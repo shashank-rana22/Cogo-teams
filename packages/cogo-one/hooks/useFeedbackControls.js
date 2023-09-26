@@ -4,7 +4,18 @@ import {
 } from '@cogoport/forms';
 import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
 
-const useFeedbackControls = ({ watchCategory }) => {
+function RenderLabel({ label = '' }) {
+	return (
+		<div>
+			{label}
+			<span style={{ color: '#ee3425', marginLeft: '2px' }}>*</span>
+		</div>
+	);
+}
+const useFeedbackControls = ({
+	watchCategory = '',
+	setAdditionalInfo = () => {},
+}) => {
 	const categoryOptions = useGetAsyncTicketOptions({
 		...asyncTicketsCategory(),
 		params: {
@@ -25,7 +36,7 @@ const useFeedbackControls = ({ watchCategory }) => {
 	return [
 		{
 			...(categoryOptions || {}),
-			label          : 'Category',
+			label          : <RenderLabel label="Category" />,
 			name           : 'category',
 			controllerType : 'select',
 			placeholder    : 'Select Type',
@@ -35,17 +46,18 @@ const useFeedbackControls = ({ watchCategory }) => {
 		},
 		{
 			...(ticketTypeOptions || {}),
-			label          : 'Select issue type',
+			label          : <RenderLabel label="Select Issue Type" />,
 			name           : 'issue_type',
 			controllerType : 'select',
 			placeholder    : 'Select Type',
 			isClearable    : true,
-			rules          : { required: true },
 			defaultOptions : true,
+			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
+			rules          : { required: true },
 		},
 
 		{
-			label          : 'Describe Issue',
+			label          : <RenderLabel label="Describe Issue" />,
 			name           : 'additional_information',
 			controllerType : 'textarea',
 			placeholder    : 'Enter Comments',

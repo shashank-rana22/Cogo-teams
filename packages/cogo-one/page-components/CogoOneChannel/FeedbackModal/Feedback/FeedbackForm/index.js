@@ -1,6 +1,8 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMFeedback } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
+import React, { useState } from 'react';
 
 import { getFieldController } from '../../../../../helpers/getFieldController';
 import useAddFeedback from '../../../../../hooks/useAddFeedback';
@@ -9,6 +11,10 @@ import useRaiseTicketcontrols from '../../../../../hooks/useFeedbackControls';
 import styles from './styles.module.css';
 
 function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }) {
+	const { t } = useTranslation(['myTickets']);
+
+	const [additionalInfo, setAdditionalInfo] = useState([]);
+
 	const formProps = useForm();
 
 	const {
@@ -22,12 +28,25 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 
 	const watchCategory = watch('category');
 
-	const controls = useRaiseTicketcontrols({ watchCategory });
-
 	const { addFeedback, loading } = useAddFeedback({
 		getFeedbacks,
+		additionalInfo,
 		setShowAddFeedback,
 	});
+
+	const defaultControls = useRaiseTicketcontrols({ setAdditionalInfo, watchCategory });
+
+	const additionalControls = (additionalInfo || []).map((item) => ({
+		label          : item,
+		name           : item,
+		controllerType : 'text',
+		placeholder    : `${t('myTickets:add')} ${item?.toLowerCase()}`,
+		showOptional   : false,
+	}));
+
+	const fileUploader = defaultControls.pop();
+
+	const controls = defaultControls?.concat(additionalControls, fileUploader);
 
 	return (
 		<div className={styles.container}>

@@ -15,6 +15,7 @@ const getPayload = ({
 	page,
 }) => ({
 	PerformedByID : performerId,
+	UserID        : performerId,
 	size          : 10,
 	page          : page - PAGE_DECREMENT,
 	RequestType   : 'feedback',

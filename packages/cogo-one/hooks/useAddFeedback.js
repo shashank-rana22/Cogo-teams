@@ -3,10 +3,11 @@ import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const getPayload = ({
-	additional_information,
-	issue_type,
-	category,
-	finalUrl,
+	additional_information = '',
+	issue_type = '',
+	additionalFields,
+	category = '',
+	finalUrl = '',
 	id,
 }) => ({
 	UserID        : id || undefined,
@@ -14,6 +15,7 @@ const getPayload = ({
 	Source        : 'admin',
 	UserType      : 'ticket_user',
 	Data          : {
+		...additionalFields,
 		Category    : category || undefined,
 		RequestType : 'feedback',
 		Attachment  : [finalUrl] || [],
@@ -22,7 +24,11 @@ const getPayload = ({
 	Description : additional_information || undefined,
 });
 
-const useAddFeedback = ({ getFeedbacks, setShowAddFeedback }) => {
+const useAddFeedback = ({
+	additionalInfo = [],
+	getFeedbacks = () => {},
+	setShowAddFeedback = () => {},
+}) => {
 	const { profile } = useSelector((state) => state);
 
 	const [{ loading }, trigger] = useTicketsRequest({
@@ -39,6 +45,10 @@ const useAddFeedback = ({ getFeedbacks, setShowAddFeedback }) => {
 			category,
 		} = val || {};
 
+		const additionalFields = Object.fromEntries(
+			Object.entries(val).filter(([key]) => additionalInfo.includes(key)),
+		);
+
 		const { finalUrl = '' } = file_url || {};
 
 		try {
@@ -46,6 +56,7 @@ const useAddFeedback = ({ getFeedbacks, setShowAddFeedback }) => {
 				data: getPayload({
 					id: profile?.user?.id,
 					additional_information,
+					additionalFields,
 					issue_type,
 					category,
 					finalUrl,
