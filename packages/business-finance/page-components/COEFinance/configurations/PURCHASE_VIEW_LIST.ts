@@ -86,7 +86,7 @@ const PURCHASE_VIEW_CONFIG = {
 		{
 			label : 'Remarks ',
 			key   : 'remarks',
-			span  : 0.9,
+			span  : 0.7,
 			func  : 'renderRemarks',
 		},
 		{
@@ -99,6 +99,11 @@ const PURCHASE_VIEW_CONFIG = {
 			key  : 'viewMore',
 			span : 1.8,
 			func : 'renderViewMore',
+		},
+		{
+			key  : 'action',
+			span : 0.5,
+			func : 'renderAction',
 		},
 	],
 };

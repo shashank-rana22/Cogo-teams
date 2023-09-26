@@ -13,6 +13,7 @@ import RenderViewMoreButton from '../../All_Invoices/PurchaseInvoiceView/RenderD
 import PURCHASE_VIEW_CONFIG from '../../configurations/PURCHASE_VIEW_LIST';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
+import RenderActionButton from './RenderActionButton';
 import SegmentedFilters from './SegmentedFilters';
 
 interface ItemProps {
@@ -67,6 +68,10 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 		renderRemarks  : (itemData: ItemProps) => <RenderRemarks item={itemData} />,
 		renderViewMore : (itemData: ItemProps) => (
 			<RenderViewMoreButton itemData={itemData} />
+		),
+		renderAction: (itemData: ItemProps) => (
+			// <RenderViewMoreButton itemData={itemData} />
+			<RenderActionButton itemData={itemData} />
 		),
 		renderUrgencyTag: (itemData: ItemProps, field: FieldProps) => (
 			<RenderUrgencyTag item={itemData} field={field} />
