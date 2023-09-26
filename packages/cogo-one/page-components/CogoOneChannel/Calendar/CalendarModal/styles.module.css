@@ -1,0 +1,75 @@
+.styled_ui_modal_dialog {
+	width: 915px !important;
+	height: 600px !important;
+	border: none !important;
+
+	:global {
+		.ui_modal_dialog.ui_ps_placement_bottom-right {
+			top: 96% !important;
+			left: 94% !important;
+		}
+
+		.ui_modal_body_container {
+			padding: 0 16px;
+		}
+
+		.ui_modal_header_container {
+			padding: 0;
+		}
+	}
+}
+
+.main_container {
+	position: absolute;
+	right: 32px;
+	bottom: 48px;
+	z-index: 10;
+	width: 67.5%;
+	background: #fff;
+	border-radius: 16px 0 0 16px;
+	box-shadow: 0 4px 100px 0 rgb(0 0 0 / 25%);
+	transition: all 0.35s ease;
+	transition: 0.5s ease;
+	animation: 0.2s filter-card both;
+
+	@keyframes filter-card {
+		0% {
+			opacity: 0;
+			transform: scale3d(0.8, 0.8, 0.8);
+		}
+
+		50% {
+			opacity: 1;
+		}
+	}
+}
+
+.container {
+	display: flex;
+	width: 100%;
+}
+
+.event_list {
+	width: 32%;
+	padding: 14px 0 14px 14px;
+}
+
+.calendar {
+	position: relative;
+	width: 68%;
+	transition: 0.3s ease;
+}
+
+.calendar_container {
+	padding: 14px 14px 14px 0;
+}
+
+.masked_calender {
+	position: absolute;
+	z-index: 5;
+	width: 100%;
+	height: 100%;
+	background: rgb(51 51 51 / 32%);
+	transition: 0.3s ease;
+	backdrop-filter: blur(6px);
+}

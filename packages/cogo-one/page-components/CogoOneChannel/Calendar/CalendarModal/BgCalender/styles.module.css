@@ -1,0 +1,45 @@
+.container {
+	:global {
+		.rbc-date-cell {
+			padding-left: 5px;
+			text-align: start;
+		}
+
+		.rbc-btn-group {
+			display: none;
+		}
+
+		.rbc-month-view {
+			border: none;
+		}
+
+		.rbc-month-row {
+			border-right: 1px  solid #ddd;
+			border-left: 1px  solid #ddd;
+
+			&:last-child {
+				border-bottom: 1px  solid #ddd;
+			}
+		}
+
+		.rbc-event {
+			background: none;
+		}
+
+		.rbc-day-bg {
+			cursor: pointer;
+		}
+
+		.rbc-header {
+			padding-bottom: 20px;
+			font-weight: 600;
+			border: none;
+			border-bottom: 1px  solid #ddd;
+		}
+
+		.rbc-button-link {
+			font-size: 14px !important;
+			font-weight: 600 !important;
+		}
+	}
+}

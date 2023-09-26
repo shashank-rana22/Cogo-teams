@@ -453,7 +453,9 @@ const GLOBAL_CONSTANTS = {
 		fcl_container_icon_s2c  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg',
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
-		cogoport_login_logo: 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
+		cogoport_login_logo : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
+		calendar            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/calendar.png',
+		empty_event         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty_events.png',
 	},
 
 	video_call_ring_tone_url:

@@ -1,0 +1,15 @@
+.calender {
+	position: absolute;
+	right: 0;
+	bottom: 150px;
+	z-index: 26;
+	display: flex;
+	align-items: center;
+	width: 50px;
+	height: 40px;
+	padding-left: 8px;
+	cursor: pointer;
+	background: #5a88fb;
+	border-radius: 20px 0 0 20px;
+	transition: 0.5s ease;
+}

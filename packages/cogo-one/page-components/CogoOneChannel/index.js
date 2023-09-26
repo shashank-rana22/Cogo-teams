@@ -20,6 +20,7 @@ import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
 import AndroidApp from './AndroidApp';
+import Calender from './Calendar';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
@@ -263,7 +264,7 @@ function CogoOne() {
 					)}
 				<AndroidApp />
 			</div>
-
+			<Calender />
 			<ModalComp
 				raiseTicketModal={raiseTicketModal}
 				setRaiseTicketModal={setRaiseTicketModal}

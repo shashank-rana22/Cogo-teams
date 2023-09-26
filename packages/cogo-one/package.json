@@ -18,7 +18,9 @@
     "@cogoport/store": "workspace:0.1.0",
     "@cogoport/utils": "^1.2.6",
     "firebase": "^9.17.2",
+    "moment": "^2.29.4",
     "react": "18.2.0",
+    "react-big-calendar": "^1.8.4",
     "stylelint": "^14.16.1",
     "uuid": "^9.0.0"
   }
