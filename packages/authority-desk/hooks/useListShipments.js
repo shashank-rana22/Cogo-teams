@@ -5,7 +5,7 @@ import toastApiError from '../utils/toastApiError';
 
 const emptyData = { list: [], total: 0, total_page: 0, count_stats: {} };
 
-function useListShipments({ item = {}, filters = {} }) {
+function useListShipments({ item = {}, filters = {}, isJobClosed = false }) {
 	const [data, setData] = useState(emptyData);
 
 	const [{ loading }, trigger] = useRequest({
@@ -19,7 +19,7 @@ function useListShipments({ item = {}, filters = {} }) {
 				params: {
 					filters: {
 						state                : ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
-						is_job_closed        : false,
+						is_job_closed        : isJobClosed,
 						importer_exporter_id : item?.importer_exporter_id,
 					},
 					invoice_value_required : true,
@@ -31,11 +31,11 @@ function useListShipments({ item = {}, filters = {} }) {
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [trigger, item?.importer_exporter_id, filters?.page]);
+	}, [trigger, item?.importer_exporter_id, filters?.page, isJobClosed]);
 
 	useEffect(() => {
 		listShipments();
-	}, [listShipments]);
+	}, [listShipments, isJobClosed]);
 
 	return {
 		data,

@@ -91,6 +91,7 @@ const updateMessage = async ({
 	setEmailState = () => {},
 	isMinimize = false,
 	body = '',
+	setSendLoading = () => {},
 }) => {
 	const updatePayload = formatMailDraftMessage({
 		communication_id,
@@ -138,6 +139,8 @@ const updateMessage = async ({
 			await updateEmailState({ roomId, messageId: res?.id, firestore, setEmailState });
 		}
 
+		setSendLoading(false);
+
 		return { roomId, messageId: res?.id };
 	}
 
@@ -160,6 +163,8 @@ const updateMessage = async ({
 		});
 	}
 
+	setSendLoading(false);
+
 	return { roomId, messageId };
 };
 
@@ -172,6 +177,7 @@ const useSaveDraft = ({
 	parentMessageData = {},
 	setEmailState = () => {},
 	body = '',
+	setSendLoading = () => {},
 }) => {
 	const agentId = useSelector((state) => state.profile?.user?.id);
 
@@ -181,6 +187,7 @@ const useSaveDraft = ({
 		newComposeDraftMsgId = '',
 		isMinimize = false,
 	} = {}) => {
+		setSendLoading(true);
 		const { id: roomId, no_of_drafts = 0 } = roomData || {};
 
 		const { is_draft = false, id = '' } = draftMessageData || {};
@@ -214,6 +221,7 @@ const useSaveDraft = ({
 			setEmailState,
 			isMinimize,
 			body,
+			setSendLoading,
 		});
 	};
 
