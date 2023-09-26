@@ -22,7 +22,7 @@ const useListKamDeskShipments = () => {
 
 	const debounceQuery = useRef({ q: filters.q });
 
-	const apiPrefix = ['import', 'export', 'export_import'].includes(stepperTab) ? shipmentType : stepperTab;
+	const apiPrefix = (stepperTab === 'export_import') ? shipmentType : stepperTab;
 
 	const [{ loading }, trigger] = useRequest({
 		url    : `${apiPrefix}/list_kam_desk_shipments`,
