@@ -273,6 +273,7 @@ function ShipmentDetails({
 								showTab={tab.taggingTab}
 								taggingChecked={checkItem.taggingCheck}
 								mappingsData={mappingsData}
+								setCheckItem={setCheckItem}
 							/>
 						</div>
 					) : undefined}
