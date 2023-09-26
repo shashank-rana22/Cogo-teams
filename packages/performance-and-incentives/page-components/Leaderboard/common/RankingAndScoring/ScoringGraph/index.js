@@ -56,6 +56,7 @@ function ScoringGraph(props) {
 					legends={[]}
 					animate
 					enablePoints={false}
+					enableArea
 				/>
 			</div>
 		</div>
