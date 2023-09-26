@@ -16,12 +16,14 @@ function Tagging({
 	showTab = false,
 	taggingChecked = false,
 	mappingsData = {},
+	setCheckItem = () => {},
 }:
 {
 	status: string, onTabClick: any,
 	showTab?: boolean, taggingChecked?: boolean,
 	onAccept?: any,
 	mappingsData?: any,
+	setCheckItem?: any,
 	setRemarksVal: React.Dispatch<React.SetStateAction<{
 		collectionPartyRemark: string[];
 		billingPartyRemark: string[];
@@ -69,6 +71,7 @@ function Tagging({
 						mappingsData={mappingsData}
 						switchDetails={switchDetails}
 						taggingChecked={taggingChecked}
+						setCheckItem={setCheckItem}
 					/>
 				</div>
 			) : null}
