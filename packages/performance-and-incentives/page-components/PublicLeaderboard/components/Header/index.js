@@ -1,29 +1,77 @@
-import { Button, Select } from '@cogoport/components';
+import { Button, Select, DateRangepicker } from '@cogoport/components';
 import { IcMArrowLeft } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useState } from 'react';
 
+import DURATION_CONSTANTS from '../../../../constants/duration-constants';
+import {
+	getThisAseessYearStartDate, getThisMonthStartDate,
+	getThisQuarterStartDate, getTodayStartDate,
+} from '../../../../utils/start-date-functions';
+import DURATION_OPTIONS from '../../../Leaderboard/configurations/get-duration-filter-options';
 import VIEW_OPTIONS from '../../configurations/view-type-options';
 
 import styles from './styles.module.css';
 
+const { TODAY, THIS_MONTH, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
+
+const GET_START_DATE_FUNCTION_MAPPING = {
+	[TODAY]        : getTodayStartDate,
+	[THIS_MONTH]   : getThisMonthStartDate,
+	[THIS_QUARTER] : getThisQuarterStartDate,
+	[THIS_YEAR]    : getThisAseessYearStartDate,
+};
+
 function Header(props) {
-	const { view, setView } = props;
+	const { view, setView, dateRange, setDateRange } = props;
 
 	const router = useRouter();
+
+	const [duration, setDuration] = useState('today');
+
+	const onChangeDuration = (selectedDuration) => {
+		if (typeof GET_START_DATE_FUNCTION_MAPPING[selectedDuration] === 'function') {
+			setDateRange({
+				startDate : GET_START_DATE_FUNCTION_MAPPING[selectedDuration](),
+				endDate   : new Date(),
+			});
+		}
+
+		setDuration(selectedDuration);
+	};
 
 	return (
 		<div className={styles.container}>
 			<div>
 				<h2 className={styles.heading}>Leaderboard</h2>
-				<p className={styles.sub_heading}>
-					for
-					{' '}
-					<i>
-						<b>SME Owners</b>
+
+				<div className={styles.sub_container}>
+					<p className={styles.sub_heading}>
+						for
 						{' '}
-						(Team Contributions)
-					</i>
-				</p>
+						<i>
+							<b>SME Owners</b>
+							{' '}
+							(Team Contributions)
+						</i>
+					</p>
+
+					<Select
+						value={duration}
+						onChange={onChangeDuration}
+						options={DURATION_OPTIONS}
+						className={styles.period_selector}
+					/>
+
+					{duration === CUSTOM && (
+						<DateRangepicker
+							onChange={setDateRange}
+							value={dateRange}
+							maxDate={new Date()}
+							isPreviousDaysAllowed
+						/>
+					)}
+				</div>
 			</div>
 
 			<div className={styles.actions_container}>

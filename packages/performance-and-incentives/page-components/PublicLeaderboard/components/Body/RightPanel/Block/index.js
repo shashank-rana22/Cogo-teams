@@ -15,26 +15,26 @@ const ACTIVITY_ICON_MAPPING = {
 	[SHIPMENTS]  : IcMShipment,
 };
 
-const BACKGROUND_COLOR_MAPPING = {
-	[ENGAGEMENT] : '#f8aea8',
-	[ACCOUNTS]   : '#ddebc0',
-	[ENRICHMENT] : '#ddebc0',
-	[SHIPMENTS]  : '#f8aea8',
-};
+// const BACKGROUND_COLOR_MAPPING = {
+// 	[ENGAGEMENT] : '#f8aea8',
+// 	[ACCOUNTS]   : '#ddebc0',
+// 	[ENRICHMENT] : '#ddebc0',
+// 	[SHIPMENTS]  : '#f8aea8',
+// };
 
 function Block(props) {
 	const { activity, data } = props;
 
 	const AcitivityIcon = ACTIVITY_ICON_MAPPING[activity] || IcMEngagement;
 
-	const HighLighterColor = BACKGROUND_COLOR_MAPPING[activity] || '#f8aea8';
+	// const HighLighterColor = BACKGROUND_COLOR_MAPPING[activity] || '#f8aea8';
 
 	return (
 		<div>
 			<div className={styles.header}>
 				<AcitivityIcon className={styles.activity_icon} />
 
-				<div className={styles.highlighter} style={{ backgroundColor: HighLighterColor }} />
+				{/* <div className={styles.highlighter} style={{ backgroundColor: HighLighterColor }} /> */}
 
 				<p className={styles.heading}>{isEmpty(activity) ? '' : startCase(activity)}</p>
 			</div>

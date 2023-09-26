@@ -5,9 +5,9 @@ import styles from './styles.module.css';
 import useGetActivityCount from './useGetActivityCount';
 
 function RightPanel(props) {
-	const { view } = props;
+	const { view, dateRange } = props;
 
-	const { data, loading } = useGetActivityCount({ view });
+	const { data, loading } = useGetActivityCount({ view, dateRange });
 
 	const { block_wise_stats: activityData } = data || {};
 
@@ -17,7 +17,7 @@ function RightPanel(props) {
 
 	return (
 		<div className={styles.container}>
-			<p className={styles.heading}>ACTIVITY COUNT</p>
+			{/* <p className={styles.heading}>ACTIVITY COUNT</p> */}
 
 			<div className={styles.blocks}>
 				{Object.entries(activityData || {}).map(([activity, block_data]) => (

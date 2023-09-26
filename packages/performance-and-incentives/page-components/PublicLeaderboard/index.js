@@ -7,11 +7,13 @@ import styles from './styles.module.css';
 function PublicDashboard() {
 	const [view, setView] = useState('kam_wise');
 
+	const [dateRange, setDateRange] = useState({});
+
 	return (
 		<div className={styles.container}>
-			<Header view={view} setView={setView} />
+			<Header view={view} setView={setView} dateRange={dateRange} setDateRange={setDateRange} />
 
-			<Body view={view} />
+			<Body view={view} dateRange={dateRange} />
 		</div>
 	);
 }

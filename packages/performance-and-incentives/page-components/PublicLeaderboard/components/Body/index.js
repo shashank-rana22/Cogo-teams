@@ -3,13 +3,13 @@ import RightPanel from './RightPanel';
 import styles from './styles.module.css';
 
 function Body(props) {
-	const { view } = props;
+	const { view, dateRange } = props;
 
 	return (
 		<div className={styles.container}>
-			<LeftPanel view={view} />
+			<LeftPanel view={view} dateRange={dateRange} />
 
-			<RightPanel view={view} />
+			<RightPanel view={view} dateRange={dateRange} />
 		</div>
 	);
 }
