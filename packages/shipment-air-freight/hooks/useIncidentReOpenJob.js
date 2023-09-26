@@ -20,6 +20,8 @@ const getFormattedPayload = ({ values = {}, shipmentData = {}, user_id = '' }) =
 			businessName: shipmentData?.importer_exporter?.business_name,
 		},
 	},
+	entityId                : shipmentData?.entity_id,
+	description             : values?.remark,
 	toWhomToSendForApproval : LEVELS_FOR_APPROVAL,
 	createdBy               : user_id,
 	source                  : 'SHIPMENT',

@@ -10,7 +10,8 @@ export default {
 			code   : 'CNY',
 			symbol : '¥',
 		},
-		mobile_country_code: '+86',
+		mobile_country_code       : '+86',
+		invoice_allowed_languages : ['english'],
 	},
 	formats: {
 		amount: {

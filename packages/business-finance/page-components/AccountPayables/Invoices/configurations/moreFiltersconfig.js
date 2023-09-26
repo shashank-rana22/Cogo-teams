@@ -74,6 +74,7 @@ export const moreFilters = [
 			{ label: 'ODEX', value: 'odex' },
 			{ label: 'Short Transit Shipment', value: 'short_transit_shipment' },
 			{ label: 'Co-ordination Charges', value: 'coordination_charges' },
+			{ label: 'THC', value: 'thc' },
 			{
 				label: (
 					<>

@@ -144,6 +144,7 @@ function SingleService({
 				systemFormatedRates,
 				currentFormatedrates,
 				singleServiceData,
+				supplierPayload,
 			});
 		}
 	}, [recommendationLoading, JSON.stringify(systemFormatedRates), JSON.stringify(currentFormatedrates),

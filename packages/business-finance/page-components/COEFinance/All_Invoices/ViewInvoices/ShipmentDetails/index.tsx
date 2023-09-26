@@ -106,7 +106,6 @@ interface ShipmentDetailsInterface {
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
 	status: string;
 	jobType?:string;
-	billId?:string;
 	setCheckItem?: React.Dispatch<React.SetStateAction<{}>>,
 	lineItemsCheck?: boolean;
 	checkItem?: { shipmentDetailsCheck?: boolean,
@@ -115,10 +114,10 @@ interface ShipmentDetailsInterface {
 		sidDataCheck?: boolean,
 	};
 	isTagFound?: boolean;
-	setIsTagFound?: any;
 	setCurrentTab?: any;
 	setCombinedRemarks?: Function;
 	jobNumberByQuery?: string;
+	mappingsData?: any;
 }
 
 function ShipmentDetails({
@@ -129,15 +128,14 @@ function ShipmentDetails({
 	setLineItemsRemarks = () => {},
 	status = '',
 	jobType = '',
-	billId = '',
 	lineItemsCheck = false,
 	checkItem = {},
 	setCheckItem = (prop) => (prop),
 	isTagFound = false,
-	setIsTagFound = () => {},
 	setCurrentTab = () => {},
 	setCombinedRemarks = () => {},
 	jobNumberByQuery = '',
+	mappingsData = {},
 }: ShipmentDetailsInterface) {
 	const [showVariance, setShowVariance] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
@@ -268,14 +266,14 @@ function ShipmentDetails({
 					{isTagFound ? (
 						<div className={styles.tagging}>
 							<Tagging
-								billId={billId}
 								setRemarksVal={setRemarksVal}
 								status={status}
 								onTabClick={onTabClick}
 								onAccept={onAccept}
 								showTab={tab.taggingTab}
 								taggingChecked={checkItem.taggingCheck}
-								setIsTagFound={setIsTagFound}
+								mappingsData={mappingsData}
+								setCheckItem={setCheckItem}
 							/>
 						</div>
 					) : undefined}
