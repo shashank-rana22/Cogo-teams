@@ -127,7 +127,7 @@ function Header({
 					</Button>
 					<Button
 						size="md"
-						disabled={isItemNotChecked}
+						// disabled={isItemNotChecked}
 						onClick={(e: any) => handleModalData(e)}
 					>
 						Reject
@@ -153,78 +153,81 @@ function Header({
 					className={styles.modal_body_section_custom}
 				>
 					<Modal.Body>
-						{modalData !== 'Reject' ? (
-							<div>
-								<div className={styles.heading}>
-									Are you sure you want to
-									{' '}
-									{modalData}
-									{' '}
-									this invoice ?
-								</div>
-								<Textarea
-									name="remark"
-									size="md"
-									placeholder="Remarks Here ..."
-									value={overAllRemark}
-									onChange={(value: string) => setOverAllRemark(value)}
-									style={{ width: '700', height: '100px', marginBottom: '12px' }}
-								/>
-								<div className={styles.button}>
-									<Button
-										size="md"
-										themeType="secondary"
-										style={{ marginRight: '8px' }}
-										onClick={() => {
-											setApprove(false);
-										}}
-									>
-										No
-									</Button>
-									<Button
-										size="md"
-										style={{ marginRight: '8px' }}
-										disabled={!(overAllRemark?.length > 0)}
-										onClick={() => rejectApproveApi({ getRoute })}
-									>
-										Yes
-									</Button>
-								</div>
-							</div>
-						) : (
-							<div>
-								<AdditionalRemarks
-									remarkData={remarkData}
-									setRemarkData={setRemarkData}
-								/>
-								<div className={styles.btn_container}>
-									<Button
-										onClick={() => {
-											setApprove(false);
-											clearRemark();
-										}}
-										themeType="secondary"
-										style={{ marginRight: '8px' }}
-									>
-										Close
-									</Button>
+						{
+							modalData === 'Reject' && !isApproveDisabled ? (
+								<div>
+									<AdditionalRemarks
+										remarkData={remarkData}
+										setRemarkData={setRemarkData}
+									/>
+									<div className={styles.btn_container}>
+										<Button
+											onClick={() => {
+												setApprove(false);
+												clearRemark();
+											}}
+											themeType="secondary"
+											style={{ marginRight: '8px' }}
+										>
+											Close
+										</Button>
 
-									<Button
-										size="md"
-										style={{ marginRight: '8px' }}
-										disabled={isEmpty(combinedRemarks)}
-										onClick={() => rejectApproveApi({
-											getRoute,
-											isAdditional : true,
-											additionalRemarks,
-											otherRemarks : remarkData?.other,
-										})}
-									>
-										Reject
-									</Button>
+										<Button
+											size="md"
+											style={{ marginRight: '8px' }}
+											disabled={isEmpty(combinedRemarks)}
+											onClick={() => rejectApproveApi({
+												getRoute,
+												isAdditional : true,
+												additionalRemarks,
+												otherRemarks : remarkData?.other,
+											})}
+										>
+											Reject
+										</Button>
+									</div>
 								</div>
-							</div>
-						)}
+							) : (
+								<div>
+									<div className={styles.heading}>
+										Are you sure you want to
+										{' '}
+										{modalData}
+										{' '}
+										this invoice ?
+									</div>
+									<Textarea
+										name="remark"
+										size="md"
+										placeholder="Remarks Here ..."
+										value={overAllRemark}
+										onChange={(value: string) => setOverAllRemark(value)}
+										style={{ width: '700', height: '100px', marginBottom: '12px' }}
+									/>
+									<div className={styles.button}>
+										<Button
+											size="md"
+											themeType="secondary"
+											style={{ marginRight: '8px' }}
+											onClick={() => {
+												setApprove(false);
+											}}
+										>
+											No
+										</Button>
+										<Button
+											size="md"
+											style={{ marginRight: '8px' }}
+											disabled={isEmpty(overAllRemark)}
+											onClick={() => rejectApproveApi({ getRoute })}
+										>
+											Yes
+										</Button>
+									</div>
+								</div>
+							)
+						}
+
 					</Modal.Body>
 				</Modal>
 			)}

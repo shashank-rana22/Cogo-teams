@@ -170,10 +170,22 @@ function ShipmentDetailsCard({
 
 		if (id === 1) {
 			setRemarksVal({ ...remarksVal, collectionPartyRemark: [] });
+			setCheckedValue({
+				...checkedValue,
+				collectionPartyRemark: [],
+			});
 		} else if (id === 2) {
 			setRemarksVal({ ...remarksVal, billingPartyRemark: [] });
+			setCheckedValue({
+				...checkedValue,
+				billingPartyRemark: [],
+			});
 		} else if (id === 3) {
 			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: [] });
+			setCheckedValue({
+				...checkedValue,
+				invoiceDetailsRemark: [],
+			});
 		}
 	};
 

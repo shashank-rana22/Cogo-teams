@@ -98,8 +98,8 @@ export const miscellaneousOptions = [
 	},
 	{
 		name  : 'uploaded',
-		value : 'Invocie uploaded in wrong SID',
-		label : 'Invocie uploaded in wrong SID',
+		value : 'Invoice uploaded in wrong SID',
+		label : 'Invoice uploaded in wrong SID',
 	},
 	{
 		name  : 'revised',
