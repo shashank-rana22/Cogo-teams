@@ -6,6 +6,7 @@ import { IcMAppSearch, IcMArrowRotateRight, IcMError } from '@cogoport/icons-rea
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
+import EmptyState from './EmptyState';
 import getColumns from './getColumns';
 import styles from './styles.module.css';
 import useTableView from './useTableView';
@@ -58,8 +59,6 @@ function TableView({
 
 	const { page_limit, total_count, total_unrated_employees } = paginationData || {};
 
-	if (!loading && isEmpty(list)) return null;
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters}>
@@ -95,7 +94,9 @@ function TableView({
 			</div>
 
 			<div className={styles.table_container}>
-				<Table columns={columns} data={list} loading={loading} />
+				{!isEmpty(list)
+					? <Table columns={columns} data={list} loading={loading} />
+					: <EmptyState />}
 
 				{total_count > page_limit ? (
 					<div style={{ display: 'flex' }}>
