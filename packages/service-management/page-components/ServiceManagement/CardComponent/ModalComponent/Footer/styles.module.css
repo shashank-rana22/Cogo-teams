@@ -1,0 +1,16 @@
+.col {
+	flex: 1;
+	padding-top: 10px;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+}
+
+.border_right {
+	height: 40px;
+	margin-right: 20px;
+	margin-left: 20px;
+	border: 1px solid #cbcff5;
+}
