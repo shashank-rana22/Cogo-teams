@@ -37,7 +37,7 @@ function ComposeEmail({
 		const isEmptyMail = getFormatedEmailBody({ emailState });
 
 		if (isEmptyMail || !emailState?.subject) {
-			Toast.error('Both Subject and Body are Requied');
+			Toast.error('Both Subject and Body are Required');
 			return;
 		}
 

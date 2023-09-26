@@ -3,6 +3,7 @@
 import CURRENCY_CODE from './currencyCode';
 import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
+import supplierEntityMapping from './supplierEntityMapping.json';
 
 const GLOBAL_CONSTANTS = {
 	attendence_options: [
@@ -121,8 +122,10 @@ const GLOBAL_CONSTANTS = {
 		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae59e95d4e38a4271ff/'
 		+ 'UTRuploadSampleFileForAdvancePayment.xlsx',
 	},
-	cogoport_agent_email_id    : 'agentid@cogoport.com',
-	flash_booking_charge_codes : [
+
+	cogoport_agent_email_id: 'agentid@cogoport.com',
+
+	flash_booking_charge_codes: [
 		'OTC',
 		'BAS',
 		'BASNO',
@@ -230,8 +233,8 @@ const GLOBAL_CONSTANTS = {
 		],
 		air_admin_user_ids: [
 			'6d713339-c528-4696-9f7b-c01f86887ac1',		// Vinod's ID
-			'039a0141-e6f3-43b0-9c51-144b22b9fc84',		// Santram's ID
-			'cf2c9d24-e1e0-4223-a228-69ebbdc349c1',		// Linh's ID
+			'039a0141-e6f3-43b0-9c51-144b22b9fc84', 	// Santram's ID
+			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8',		// Rishi's ID
 		],
 	},
 	view_key_mappings: {
@@ -255,6 +258,7 @@ const GLOBAL_CONSTANTS = {
 		saas_subscription_loading : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/loading.svg',
 		empty_state               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		empty_port                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
+		tick_icon_green           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tick_subtract.svg',
 		empty_chart:
 			'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg',
 		empty_customer_card : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg',
@@ -291,6 +295,7 @@ const GLOBAL_CONSTANTS = {
 		books_png              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
 		map_png                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
 		nodata_image           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
+		ams_empty_state        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		promocode_thumbnail:
 		'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
 		risk_free:
@@ -448,6 +453,7 @@ const GLOBAL_CONSTANTS = {
 		fcl_container_icon_s2c  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg',
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
+		cogoport_login_logo: 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
 	},
 
 	video_call_ring_tone_url:
@@ -457,6 +463,8 @@ const GLOBAL_CONSTANTS = {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
 		+ '45773ab4048f606ce6ef06fa1d083352/'
 		+ 'Book%201%20-%20Copy.xlsx',
+		bulk_jv_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
+		+ 'ae3740f2c19b22161257c6e416cd2f5a/JVUploadSampleExcel.xlsx',
 	},
 
 	urls: {
@@ -474,7 +482,8 @@ const GLOBAL_CONSTANTS = {
 			IN     : [CURRENCY_CODE.INR, CURRENCY_CODE.USD],
 			GB     : [CURRENCY_CODE.GBP, CURRENCY_CODE.EUR, CURRENCY_CODE.USD],
 			VN     : [CURRENCY_CODE.USD, CURRENCY_CODE.VND],
-			OTHERS : [CURRENCY_CODE.USD, CURRENCY_CODE.EUR, CURRENCY_CODE.INR],
+			SG     : [CURRENCY_CODE.USD, CURRENCY_CODE.SGD],
+			OTHERS : [CURRENCY_CODE.USD, CURRENCY_CODE.EUR, CURRENCY_CODE.INR, CURRENCY_CODE.SGD],
 		},
 		inco_term: {
 			cif: {
@@ -785,6 +794,9 @@ const GLOBAL_CONSTANTS = {
 		cogoport_ftl_collections : 'ftl.collections@cogoport.com',
 		cogoport_support         : 'support@cogoport.com',
 	},
+	mobile_number: {
+		cogoone_sales_contact_no: '+91-8069182176',
+	},
 	websites: {
 		cogoport : 'www.cogoport.com',
 		fortigo  : 'www.4tigo.com',
@@ -799,7 +811,8 @@ const GLOBAL_CONSTANTS = {
 	governance_manager_rejected_image_url:
     'https://cogoport-testing.sgp1.digitaloceanspaces.com/2466c7e2faa34ad8f4beb2b110b1ce1e/Group.svg',
 
-	default_preferred_language: 'english',
+	default_preferred_language : 'english',
+	supplier_entity_mapping    : supplierEntityMapping.shippingCompanies,
 };
 
 export default GLOBAL_CONSTANTS;

@@ -26,7 +26,10 @@ import ScrollBar from './ScrollBar';
 import styles from './styles.module.css';
 
 const LOADER_LEN = 7;
-function OverAllOutstanding({ entityCode = '' }) {
+function OverAllOutstanding({
+	entityCode = '',
+	setSelectedOrgId = () => {},
+}) {
 	const [formFilters, setFormFilters] = useState({
 		kamId              : '',
 		salesAgentId       : '',
@@ -240,6 +243,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 							outStandingFilters={outStandingFilters}
 							formFilters={formFilters}
 							organizationId={item?.organizationId}
+							setSelectedOrgId={setSelectedOrgId}
 						/>
 					))}
 					{isEmpty(list) && <div className={styles.empty_state}><EmptyState /></div>}

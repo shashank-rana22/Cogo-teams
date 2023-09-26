@@ -10,6 +10,8 @@ import { getCommunicationPayload, ENDPOINT_MAPPING } from '../helpers/communicat
 const useSendOmnichannelMail = ({
 	setEmailState = () => {},
 	setButtonType = () => {},
+	saveDraft = () => {},
+	setMailAttachments = () => {},
 }) => {
 	const {
 		user: { id: userId, name = '' },
@@ -36,7 +38,9 @@ const useSendOmnichannelMail = ({
 		}
 
 		try {
-			await trigger({
+			const { roomId, messageId } = await saveDraft();
+
+			const response = await trigger({
 				data: getCommunicationPayload({
 					userId,
 					formattedData,
@@ -48,9 +52,17 @@ const useSendOmnichannelMail = ({
 					source,
 				}),
 			});
+
+			await saveDraft({
+				communication_id     : response?.data?.id,
+				newComposeRoomId     : roomId,
+				newComposeDraftMsgId : messageId,
+			});
+
 			Toast.success(`${startCase(mailActions?.actionType)} mail sent successfully`);
 
 			setEmailState({ ...DEFAULT_EMAIL_STATE, scrollToTop: true });
+			setMailAttachments([]);
 			setButtonType('');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));

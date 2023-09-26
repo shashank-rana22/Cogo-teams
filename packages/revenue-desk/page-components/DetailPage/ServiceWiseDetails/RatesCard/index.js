@@ -12,7 +12,7 @@ const INITIAL_CARD_COUNT = 2;
 
 function RatesCard({
 	ratesData = [], setPrefrences, prefrences, type, singleServiceData, setSellRates,
-	sellRates, loading, shipmentData,
+	sellRates, loading, shipmentData, walletAmount = {},
 }) {
 	const [showFullList, setShowFullList] = useState(false);
 	const toggleList = () => {
@@ -40,6 +40,7 @@ function RatesCard({
 								sellRates={sellRates}
 								prefrence_key={type}
 								shipmentData={shipmentData}
+								walletAmount={walletAmount}
 							/>
 						))}
 					</div>

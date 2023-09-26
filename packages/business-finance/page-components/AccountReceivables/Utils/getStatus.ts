@@ -1,7 +1,7 @@
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 
 const getStatus = ({ entityCode, invoiceStatus = '', paymentStatus = '', eventName = '' }) => {
-	const { irn_label: irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
+	const irnLabel = ENTITY_FEATURE_MAPPING[entityCode]?.labels?.irn_label;
 
 	const INVOICE_STATUS_MAPPING = {
 		DRAFT            : 'DRAFT',
