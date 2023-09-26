@@ -13,7 +13,7 @@ import { isEmpty, merge, startCase } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import Layout from '../../../../../RfqEnquiries/Layout';
-import { DEFAULT_VALUE, DELTA_VALUE, FIVE_HUNDRED, VALUE_ONE } from '../../../../configurations/helpers/constants';
+import { DEFAULT_VALUE, DELTA_VALUE, VALUE_ONE } from '../../../../configurations/helpers/constants';
 import FieldMutation from '../../../../configurations/helpers/mutation-fields';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
@@ -185,18 +185,6 @@ function AddRateModal({
 			(weightSlabs || []).forEach((slab, index) => {
 				if (index === DEFAULT_VALUE) {
 					setValue('weight_slabs.0.lower_limit', Number(freeWeight) + DELTA_VALUE || DELTA_VALUE);
-				} else {
-					setValue(
-						`weight_slabs.${index}.lower_limit`,
-						Number(weightSlabs[index - VALUE_ONE].upper_limit) + DELTA_VALUE || DELTA_VALUE,
-					);
-				}
-			});
-		} else {
-			(weightSlabs || []).forEach((slab, index) => {
-				if (index === DEFAULT_VALUE) {
-					setValue('weight_slabs.0.lower_limit', DELTA_VALUE);
-					setValue('weight_slabs.0.upper_limit', FIVE_HUNDRED);
 				} else {
 					setValue(
 						`weight_slabs.${index}.lower_limit`,

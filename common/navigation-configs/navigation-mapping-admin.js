@@ -896,8 +896,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'business_finance-cogo_book',
 					title         : t('common:cogo_books'),
-					href          : '/business-finance/cogo-book/[active_tab]/[view]',
-					as            : '/business-finance/cogo-book/accruals/dashboard',
+					href          : '/v2/business-finance/cogo-book/[active_tab]/[view]',
+					as            : '/v2/business-finance/cogo-book/accruals/dashboard',
 					type          : 'link',
 					main_apis     : [],
 					possible_apis : apis.cogo_book,
@@ -1322,8 +1322,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key       : 'coe-bl_do',
 					title     : t('common:authority_desk'),
-					href      : '/bl-do',
-					as        : '/bl-do',
+					href      : '/v2/bl-do',
+					as        : '/v2/bl-do',
 					type      : 'link',
 					main_apis : [
 						'list_authority_desk_bl_documents',
@@ -1927,6 +1927,16 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis     : [],
 			icon          : IcMInvoiceApprovals,
 			possible_apis : apis.ground_ops,
+			module_type   : 'dashboards',
+		},
+		ams_submission: {
+			key           : 'ams_submission',
+			title         : t('common:ams_submission'),
+			href          : '/v2/ams-submission',
+			as            : '/v2/ams-submission',
+			type          : 'link',
+			main_apis     : [],
+			possible_apis : apis.ams_submission,
 			module_type   : 'dashboards',
 		},
 		printing_desk: {

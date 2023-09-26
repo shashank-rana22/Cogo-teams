@@ -43,7 +43,10 @@ function NewRequestModal({
 	const { loading = false, apiTrigger = () => {} } = useAdvanceDocument({ refetchAdvanceDocument });
 	const { listEntities = {} } = useGetEntities();
 
-	const { primary_service = {}, shipment_data: { serial_id } } = useContext(ShipmentDetailContext);
+	const {
+		primary_service = {},
+		shipment_data: { serial_id = '', shipment_type = '' },
+	} = useContext(ShipmentDetailContext);
 
 	const organization_id = primary_service?.service_provider?.id || '';
 	const { handleModifiedOptions = () => {} } = getCollectionPartyDetails();
@@ -111,6 +114,7 @@ function NewRequestModal({
 		const payload = getAdvanceDocumentPayload({
 			performedById : user?.id || '',
 			serial_id,
+			shipment_type,
 			formValues,
 			billingParty,
 			billingPartyAddress,
@@ -118,7 +122,6 @@ function NewRequestModal({
 			cogoEntityId  : partner?.id,
 			collectionPartyAddress,
 			collectionPartyBankDetails,
-			primary_service,
 		});
 		apiTrigger(payload);
 	};

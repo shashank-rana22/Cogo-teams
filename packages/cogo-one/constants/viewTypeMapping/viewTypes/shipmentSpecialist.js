@@ -21,6 +21,7 @@ const SHIPMENT_SPECIALIST = {
 	stats_feedback_count         : [],
 	to_show_agent_activity_graph : false,
 	configurations_to_be_shown   : [],
+	shift_view_default_type      : '',
 	group_agents_api_filter      : ['shipment_specialist',
 		'support', 'shipment_specialist_admin', ...COGOVERSE_AGENT_MAPPINGS.sales],
 	accessible_new_communications : ['new_mail'],
@@ -46,6 +47,7 @@ const SHIPMENT_SPECIALIST = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : true,
+		hide_personal_mail                          : true,
 	},
 };
 

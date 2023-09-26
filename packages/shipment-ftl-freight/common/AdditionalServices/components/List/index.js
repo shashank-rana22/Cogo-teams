@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 
 const MIN_COUNT = 8;
 const MAX_COUNT = 16;
-function List({ isSeller = false }) {
+function List({ isSeller = false, source = 'overview' }) {
 	const { servicesList, refetchServices, shipment_data, activeStakeholder } = useContext(
 		ShipmentDetailContext,
 	);
@@ -26,6 +26,8 @@ function List({ isSeller = false }) {
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(MIN_COUNT);
+
+	const { id = '', is_job_closed_financially = false } = shipment_data || {};
 
 	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({
 		shipment_data,
@@ -118,7 +120,7 @@ function List({ isSeller = false }) {
 			<div className={styles.not_added}>
 				<Button
 					onClick={() => setShowModal('charge_code')}
-					disabled={shipment_data?.is_job_closed}
+					disabled={is_job_closed_financially}
 				>
 					<div className={styles.add_icon}>+</div>
 					Add Additional Services
@@ -159,13 +161,13 @@ function List({ isSeller = false }) {
 			{showModal === 'charge_code'
 				&& (
 					<AddService
-						shipmentId={shipment_data?.id}
+						shipmentId={id}
 						services={servicesList}
 						isSeller={isSeller}
 						refetch={refetch}
 						setItem={setItem}
 						setShowChargeCodes={setShowModal}
-						source="overview"
+						source={source}
 					/>
 				)}
 
