@@ -8,13 +8,13 @@ import allStakeHolderTimeLineData from '../../utils/formatAllStakeHolderData';
 import Details from './Details';
 import styles from './styles.module.css';
 
-function RevokeInvoiceDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
+function RequestCNDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const { level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark = '' } = row || {};
 	const level0 = { ...createdBy, remark };
 	return (
 		<div className={styles.containerDisplay}>
 			<div className={styles.heading}>
-				Revoke Invoice
+				Request CN
 			</div>
 			{
 			(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
@@ -41,4 +41,4 @@ function RevokeInvoiceDetails({ row = {}, setDetailsModal = () => {}, refetch = 
 		</div>
 	);
 }
-export default RevokeInvoiceDetails;
+export default RequestCNDetails;

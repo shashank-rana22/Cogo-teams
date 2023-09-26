@@ -13,6 +13,7 @@ function Details({
 	setDetailsModal = () => {},
 	refetch = () => {},
 }) {
+	console.log(row);
 	const { t } = useTranslation(['incidentManagement']);
 	const [remark, setRemark] = useState('');
 	const { status = '', id = '' } = row || {};
@@ -20,6 +21,10 @@ function Details({
 	const {
 		currentTdsRate,
 		requestedTdsRate,
+		validFrom = '',
+		validTo = '',
+		currentTdsStyle = '',
+		requestedTdsStyle = '',
 	} = row?.data?.tdsRequest || {};
 
 	const getRatePercentageData = [
@@ -49,14 +54,38 @@ function Details({
 			<div className={styles.line} />
 			<div className={styles.flex}>
 				{getRatePercentageData.map((itemData) => (
-					<div className={styles.rates_data} key={itemData?.label_text}>
+					<div className={styles.rates_data} key={itemData?.label}>
 						<div className={styles.rates}>
 							{itemData?.value || '-'}
 							%
 						</div>
-						<div className={styles.label}>{itemData?.label || '-'}</div>
+						<div className={styles.label_text}>{itemData?.label || '-'}</div>
 					</div>
 				))}
+			</div>
+			<div className={styles.validity}>
+				<div className={styles.heading}>Validity</div>
+				<div className={styles.text}>
+					{validFrom || ''}
+					{' '}
+					-
+					{' '}
+					{validTo || ''}
+				</div>
+			</div>
+			<div className={styles.tds_style}>
+				<div className={styles.company_div}>
+					<div className={styles.heading}>
+						Current TDS Style
+					</div>
+					<div className={styles.text}>{currentTdsStyle || ''}</div>
+				</div>
+				<div>
+					<div className={styles.heading}>
+						New TDS Style Requested
+					</div>
+					<div className={styles.text}>{requestedTdsStyle || ''}</div>
+				</div>
 			</div>
 
 			{ status === 'REQUESTED' ? (

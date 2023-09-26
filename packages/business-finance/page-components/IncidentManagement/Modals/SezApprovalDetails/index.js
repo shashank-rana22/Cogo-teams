@@ -1,5 +1,4 @@
 import { isEmpty } from '@cogoport/utils';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
@@ -12,11 +11,10 @@ import styles from './styles.module.css';
 function SezApprovalDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const { level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark = '' } = row || {};
 	const level0 = { ...createdBy, remark };
-	const { t } = useTranslation(['incidentManagement']);
 	return (
 		<div className={styles.containerDisplay}>
 			<div className={styles.heading}>
-				{t('incidentManagement:shipment_re_open_request')}
+				SEZ Approval
 			</div>
 			{
 			(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (

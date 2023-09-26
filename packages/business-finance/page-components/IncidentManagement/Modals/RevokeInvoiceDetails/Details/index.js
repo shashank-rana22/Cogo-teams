@@ -16,7 +16,6 @@ function Details({
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
 	const { status = '', id = '', data: { revokeInvoiceRequest = {} } } = row || {};
-	const { sezRequest = {} } = revokeInvoiceRequest || {};
 
 	const { useOnAction: onAction, loading } = useGetRevokeInvoiceData({
 		refetch,
@@ -40,9 +39,9 @@ function Details({
 				</div>
 			</div>
 			<div className={styles.line} />
-			<div className={styles.company_div}>
+			<div className={styles.invoice}>
 				<div className={styles.heading}>Invoice Number</div>
-				<div className={styles.text}>{sezRequest?.invoiceNumber || ''}</div>
+				<div className={styles.invoice_text}>{revokeInvoiceRequest?.invoiceNumber || ''}</div>
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>

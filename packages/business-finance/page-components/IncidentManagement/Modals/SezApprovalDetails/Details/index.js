@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useSezApproveReject from '../../../apisModal/useSezApproveReject';
+import ClipBoard from '../../../common/Clipboard';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
 
 import styles from './styles.module.css';
@@ -38,11 +39,11 @@ function Details({
 				</div>
 			</div>
 			<div className={styles.line} />
-			<div className={styles.company_div}>
+			<div className={styles.company_gst}>
 				<div className={styles.heading}>GST Number</div>
-				<div className={styles.text}>{row?.data?.sezRequest?.taxNumber || ''}</div>
+				<div className={styles.text}>{<ClipBoard data={row?.data?.sezRequest?.taxNumber} /> || ''}</div>
 			</div>
-			<div className={styles.company_div}>
+			<div className={styles.company_address}>
 				<div className={styles.heading}>Address</div>
 				<div className={styles.text}>{row?.data?.sezRequest?.address || ''}</div>
 			</div>

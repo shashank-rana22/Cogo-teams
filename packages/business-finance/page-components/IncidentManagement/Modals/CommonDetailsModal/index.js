@@ -3,7 +3,7 @@ import React from 'react';
 
 import AdvanceSecurityDeposit from '../AdvanceSecurityDepositDetails';
 import AdvanceSecurityDepositRefund from '../AdvanceSecurityRefundDetails';
-import BankDetails from '../BankDetails/indexB';
+import BankAccountDetails from '../BankAccountDetails';
 import ConcorDetails from '../ConcorDetails';
 import ICJV_Details from '../ICJV_Details';
 import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
@@ -11,7 +11,7 @@ import JvDetails from '../JVDetails';
 import NonRecuring from '../NonRecuringDetails';
 import PaymentDetails from '../PaymentDetails';
 import RecuringDetails from '../RecuringDetails';
-import RequestCNDetails from '../RequestCN';
+import RequestCNDetails from '../RequestCNDetails';
 import RevokeInvoiceDetails from '../RevokeInvoiceDetails';
 import Settlement from '../SettlementDetails';
 import SezApprovalDetails from '../SezApprovalDetails';
@@ -20,7 +20,7 @@ import TdsApprovalDetails from '../TdsApprovalDetails';
 import styles from './styles.module.css';
 
 const TYPE_COMPONENT_MAPPING = {
-	BANK_DETAIL_APPROVAL                   : BankDetails,
+	BANK_DETAIL_APPROVAL                   : BankAccountDetails,
 	TDS_APPROVAL                           : TdsApprovalDetails,
 	JOURNAL_VOUCHER_APPROVAL               : JvDetails,
 	SETTLEMENT_APPROVAL                    : Settlement,
@@ -63,14 +63,6 @@ function CommonDetailsModal({
 				setDetailsModal={setDetailsModal}
 				refetch={refetch}
 			/>
-
-			{/* { detailsModal?.type === 'TDS_APPROVAL' ? (
-				<JobOpenDetailsModal
-					row={detailsModal}
-					setDetailsModal={setDetailsModal}
-					refetch={refetch}
-				/>
-			) : null } */}
 		</div>
 	);
 }

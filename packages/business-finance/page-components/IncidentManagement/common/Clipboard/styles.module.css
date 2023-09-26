@@ -1,0 +1,16 @@
+.container {
+	display: flex;
+}
+
+.icon_container {
+	margin: 0 5px;
+
+	svg {
+		fill: white;
+		stroke: grey;
+	}
+}
+
+.sub_name {
+	color: #000;
+}
