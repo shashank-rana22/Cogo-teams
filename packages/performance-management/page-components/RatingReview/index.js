@@ -2,6 +2,7 @@
 
 // import HeaderComponent from './HeaderComponent';
 // import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
+import useGetManagerLevel from './hooks/useGetManagerLevel';
 import MonthlyRating from './MonthlyRating';
 import styles from './styles.module.css';
 
@@ -9,6 +10,8 @@ import styles from './styles.module.css';
 
 function PerformanceRatingReview() {
 	// const props = useGetEmployeeLevels();
+
+	const props = useGetManagerLevel();
 
 	// const { level, activeTab, setActiveTab, loading } = props || {};
 
