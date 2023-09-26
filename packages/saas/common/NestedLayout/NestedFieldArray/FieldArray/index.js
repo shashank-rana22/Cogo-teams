@@ -60,7 +60,7 @@ function FieldArray({
 							key={field.id}
 							remove={remove}
 							field={field}
-							error={error?.[nestedIndex]}
+							error={error?.[nestedName]?.[nestedIndex]}
 							controls={controls}
 							control={control}
 							index={nestedIndex}

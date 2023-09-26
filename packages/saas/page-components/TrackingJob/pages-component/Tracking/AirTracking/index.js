@@ -47,8 +47,11 @@ function AirTracking({
 			<Table className={styles.table} data={list || []} columns={column} loading={loading} />
 			<Modal
 				show={showUpdate.show}
-				onClose={() => handleCloseModal()}
-				onOuterClick={() => handleCloseModal()}
+				onClose={handleCloseModal}
+				onOuterClick={handleCloseModal}
+				closeOnOuterClick
+				placement="top"
+				size="lg"
 			>
 				<Modal.Header title={`Airway Bill NO. -
 				${showUpdate?.data?.airway_bill_no}`}
