@@ -32,7 +32,7 @@ function Feedback({ setModalData = () => {} }) {
 
 							<div className={styles.title}>
 								<IcMFeedback />
-								Feedbacks
+								CogoCare
 
 							</div>
 						</div>
@@ -46,7 +46,7 @@ function Feedback({ setModalData = () => {} }) {
 								}}
 							>
 								<IcMPlus height={14} width={14} />
-								Add Feedback
+								Create Care
 							</Button>
 						</div>
 					</div>

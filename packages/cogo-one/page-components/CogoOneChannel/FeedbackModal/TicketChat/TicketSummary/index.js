@@ -76,7 +76,7 @@ function TicketSummary({
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<div className={styles.title}>{t('myTickets:ticket_summary')}</div>
+				<div className={styles.title}>Care Summary</div>
 				<div className={cl`${styles.priority} ${styles[PRIORITY_LABEL_MAPPING[priority]]}`}>
 					{startCase(`${priority} ${t('myTickets:priority')}`)}
 				</div>
