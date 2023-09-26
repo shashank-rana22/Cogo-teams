@@ -1,7 +1,7 @@
-import { ButtonIcon, Loader } from '@cogoport/components';
+import { ButtonIcon, cl, Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { CogoMaps, GeoJSON, L, Tooltip } from '@cogoport/maps';
+import { CogoMaps, GeoJSON, L } from '@cogoport/maps';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -10,15 +10,12 @@ import CustomLegend from '../../../../common/Legend';
 import MapTooltip from '../../../../common/MapTooltip';
 import {
 	BASE_LAYER, LAYOUT_WIDTH, TIME_LIMIT,
-	MAX_BOUNDS, ITEMS, SECOND_IDX,
+	MAX_BOUNDS, ITEMS,
 } from '../../../../constants/map_constants';
 import { formatBigNumbers } from '../../../../utils/formatBigNumbers';
-import { getLowestHierarchy, HIERARCHY_MAPPING } from '../../../../utils/hierarchy-utils';
-import { getPolygonStyleProps } from '../../../../utils/map-utils';
-// import useGetSimplifiedGeometry from '../../../../hooks/useGetSimplifiedGeometry';
-// import ActiveRegions from './ActiveRegions';
 import { COLORS } from '../../Heading/BirdsEyeView';
 
+import ActivePorts from './ActivePorts';
 import Point from './AnimatedPoint';
 import styles from './styles.module.css';
 import WorldGeometry from './WorldGeometry';
@@ -54,23 +51,8 @@ function Map({
 	const range = (minCount === maxCount && !!maxCount)
 		? maxCount / COLORS.length
 		: K + (maxCount - minCount) / COLORS.length;
-	const lowestHierarchy = getLowestHierarchy(hierarchy);
-	// const requiredType = getChildHierarchy(lowestHierarchy, hierarchy);
-	// const type = requiredType && (requiredType !== 'port_id' && requiredType !== 'country_id')
-	// 	? requiredType.split('_')[GLOBAL_CONSTANTS.zeroth_index] : null;
-
 	const originId = locationFilters.origin?.id;
-
-	// const { data: activeData = [], loading: activeLoading } = useGetSimplifiedGeometry({
-	// 	country_id   : hierarchy?.country_id,
-	// 	continent_id : hierarchy?.continent_id,
-	// 	type,
-	// });
-
-	// const showRegions = !isEmpty(activeData)
-	// 						&& HIERARCHY_MAPPING.region_id >= HIERARCHY_MAPPING[lowestHierarchy] - SECOND_IDX;
-	const showPorts = HIERARCHY_MAPPING[lowestHierarchy] <= SECOND_IDX;
-	const showLoading = loading;
+	const showLoading = loading || accuracyLoading;
 	const originPosition = locationFilters?.origin?.latitude
 		? [locationFilters.origin.latitude, locationFilters.origin.longitude] : null;
 	const originLocation = [...data]
@@ -152,72 +134,23 @@ function Map({
 				accuracyMapping={accuracyMapping}
 				setLocationFilters={setLocationFilters}
 				filterBy={filterBy}
-				key={accuracyLoading}
 				minCount={minCount}
 				maxCount={maxCount}
 				range={range}
 			/>
-			{/* <ActiveRegions
+			<ActivePorts
 				ref={activeRef}
-				setBounds={setBounds}
-				currentId={currentId}
-				hierarchy={hierarchy}
-				showRegions={showRegions}
-				setHierarchy={setHierarchy}
-				setActiveList={setActiveList}
+				activeList={activeList}
 				accuracyMapping={accuracyMapping}
+				filterBy={filterBy}
+				hierarchy={hierarchy}
+				minCount={minCount}
+				range={range}
+				currentId={currentId}
+				setBounds={setBounds}
 				setLocationFilters={setLocationFilters}
-				activeData={getFilteredData(activeData)}
-			/> */}
-			{showPorts
-			&& activeList.map((item) => {
-				const position = [item.destination_latitude, item.destination_longitude];
-				const value = filterBy.includes('accuracy')
-					? (accuracyMapping[item.destination_id] || GLOBAL_CONSTANTS.zeroth_index).toFixed(INITIAL_ZOOM)
-					: formatBigNumbers(accuracyMapping[item.destination_id]);
-				const color = filterBy.includes('accuracy')
-					? getPolygonStyleProps(accuracyMapping[item.destination_id])?.color
-					: COLORS[Math.floor((accuracyMapping[item.destination_id] - minCount) / range)];
-				return (
-					<Point
-						key={item.destination_id}
-						position={position}
-						ref={currentId === item.destination_id ? activeRef : null}
-						backgroundColor={color}
-						eventHandlers={{
-							click: (e) => {
-								L.DomEvent.stopPropagation(e);
-								const markerBounds = new L.LatLngBounds([position]);
-								setBounds(markerBounds);
-
-								if (!hierarchy?.port_id) {
-									setLocationFilters((prev) => ({
-										...prev,
-										destination: {
-											id: item.destination_id, name: item?.name, type: item.destination_type,
-										},
-									}));
-									setHierarchy((prev) => ({ ...prev, port_id: item.destination_id }));
-								}
-							},
-						}}
-					>
-						<Tooltip
-							direction="top"
-							sticky
-						>
-							<MapTooltip
-								display_name={item.destination_name}
-								color={color}
-								value={value}
-								value_key=""
-								value_suffix={filterBy.includes('accuracy') ? '%' : ''}
-							/>
-						</Tooltip>
-					</Point>
-				);
-			})}
-
+				setHierarchy={setHierarchy}
+			/>
 			{!isEmpty(hierarchy) && (
 				<ButtonIcon
 					size="md"
@@ -227,12 +160,6 @@ function Map({
 					onClick={handleBackHierarchy}
 				/>
 			)}
-
-			<CustomLegend
-				items={ITEMS}
-				className={styles.legend}
-			/>
-
 			{originPosition && (
 				<Point
 					position={originPosition}
@@ -269,7 +196,23 @@ function Map({
 						}}
 					/>
 				)}
-
+			{filterBy.includes('accuracy') ? (
+				<CustomLegend
+					items={ITEMS}
+					className={styles.legend}
+				/>
+			)
+				: (
+					<div className={cl`${styles.legend} ${styles.legend_container}`}>
+						<div className={styles.count_legend}>
+							{!!maxCount && COLORS.map((color, idx) => (
+								<p key={color}>
+									{formatBigNumbers(range * (idx + (INITIAL_ZOOM / INITIAL_ZOOM)))}
+								</p>
+							))}
+						</div>
+					</div>
+				)}
 		</CogoMaps>
 	);
 }

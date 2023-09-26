@@ -16,7 +16,7 @@ function RateAddition({ globalFilters = {}, dateString = '' }) {
 
 	return (
 		<div className={cl`${section_container} ${styles.container}`}>
-			<h3 className={styles.header}>Rate Addition with Time</h3>
+			<h3 className={styles.header}>Rate Affected with Time</h3>
 			<div className={cl`${styles.chart_container}`}>
 				{(loading || !isEmpty(list))
 					? (
