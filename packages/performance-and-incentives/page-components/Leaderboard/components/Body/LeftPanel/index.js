@@ -12,6 +12,7 @@ import useGetScoringReports from './useGetAgentScoringReports';
 function LeftPanel(props) {
 	const {
 		entity, params, setParams, isChannel, setIsChannel, debounceQuery, refetch: refetchStats, loading: statsLoading,
+		setStatParams,
 	} = props;
 
 	const {
@@ -32,7 +33,7 @@ function LeftPanel(props) {
 
 	const { incentive_leaderboard_viewtype: viewType, user = {} } = useSelector(({ profile }) => profile);
 
-	const handleClick = ({ id = '', location_id, channel }) => {
+	const handlePropagation = ({ id = '', location_id, channel }) => {
 		setParams((prev) => ({
 			...prev,
 			add_current_user_report : true,
@@ -95,6 +96,7 @@ function LeftPanel(props) {
 				refetch={refetch}
 				refetchStats={refetchStats}
 				statsLoading={statsLoading}
+				setStatParams={setStatParams}
 			/>
 
 			<List
@@ -102,7 +104,8 @@ function LeftPanel(props) {
 				list={list}
 				params={params}
 				setParams={setParams}
-				handleClick={handleClick}
+				setStatParams={setStatParams}
+				handlePropagation={handlePropagation}
 				viewType={viewType}
 				currLevel={currLevel}
 				currentUserData={currentUserData}

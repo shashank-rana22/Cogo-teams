@@ -9,7 +9,7 @@ function Body(props) {
 
 	const { params, setParams, debounceQuery, isChannel, setIsChannel } = useScoringReports(props);
 
-	const { data, loading, refetch } = useGetAgentScoringReportStats({ params, dateRange, entity });
+	const { data, loading, refetch, setStatParams } = useGetAgentScoringReportStats({ params, dateRange, entity });
 
 	return (
 		<div className={styles.container}>
@@ -23,6 +23,7 @@ function Body(props) {
 				setIsChannel={setIsChannel}
 				refetch={refetch}
 				loading={loading}
+				setStatParams={setStatParams}
 			/>
 
 			<RightPanel

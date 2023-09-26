@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 function List(props) {
 	const {
-		loading, list, params, setParams, handleClick, viewType, currLevel, currentUserData,
+		loading, list, params, setParams, handlePropagation, viewType, currLevel, currentUserData, setStatParams,
 	} = props;
 
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
@@ -51,10 +51,11 @@ function List(props) {
 					<ListItem
 						key={listItem.id}
 						listItem={listItem}
-						handleClick={handleClick}
+						handlePropagation={handlePropagation}
 						viewType={viewType}
 						user={user}
 						currLevel={currLevel}
+						setStatParams={setStatParams}
 						currentUserData={currentUserData}
 					/>
 				))}
@@ -69,10 +70,11 @@ function List(props) {
 
 						<ListItem
 							listItem={currentUserData}
-							handleClick={handleClick}
 							viewType={viewType}
 							user={user}
 							currLevel={currLevel}
+							setStatParams={setStatParams}
+							handlePropagation={handlePropagation}
 						/>
 					</>
 				) : null}

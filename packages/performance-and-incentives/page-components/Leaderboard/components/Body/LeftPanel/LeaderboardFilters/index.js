@@ -66,6 +66,7 @@ function LeaderboardFilters(props) {
 		refetch,
 		refetchStats,
 		statsLoading,
+		setStatParams,
 	} = props;
 
 	// const {
@@ -110,6 +111,14 @@ function LeaderboardFilters(props) {
 						? { report_type: undefined } : { report_type: `${view}_report` }),
 
 				} : getFilters({ beforeLevel, id })),
+			},
+		}));
+
+		setStatParams((prev) => ({
+			...prev,
+			filters: {
+				...prev.filters,
+				user_id: undefined,
 			},
 		}));
 

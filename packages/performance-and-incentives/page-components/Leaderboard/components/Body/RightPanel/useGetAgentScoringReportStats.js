@@ -44,6 +44,7 @@ function useGetAgentScoringReportStats(props) {
 		data,
 		loading,
 		refetch,
+		setStatParams,
 	};
 }
 
