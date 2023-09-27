@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCall, IcMShip, IcMSettings } from '@cogoport/icons-react';
@@ -45,12 +46,23 @@ function UserEvents({ selectedEventData = {} }) {
 	return (
 		<div className={styles.container}>
 			{(markedEvents || []).map((singleEvent) => {
-				const { event_types = '', customer = '', remarks = '' } = singleEvent || {};
+				const {
+					event_types = '', customer = '', remarks = '',
+					end = '', important = false,
+				} = singleEvent || {};
+
+				const isNotActiveEvents = new Date(end)?.getTime() < new Date().getTime();
 
 				const icons = ICON_MAPPING[event_types];
 
 				return (
-					<div className={styles.card} key={singleEvent?.id}>
+					<div
+						className={cl`${styles.card} 
+					${isNotActiveEvents ? styles.expired_event : ''}
+					${important ? styles.important_event : styles.not_important_event}
+					`}
+						key={singleEvent?.id}
+					>
 						<div className={styles.avatar_container}>
 							<div className={styles.avatar} style={{ background: `${icons?.color}` }}>
 								{icons?.icon}

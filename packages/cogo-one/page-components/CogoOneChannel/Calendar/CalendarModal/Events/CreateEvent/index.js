@@ -89,7 +89,7 @@ function CreateEvent({
 				</div>
 				<div className={styles.button_styles}>
 					<Button
-						size="md"
+						size="sm"
 						themeType="primary"
 						onClick={handleSubmit(handleEvents)}
 					>

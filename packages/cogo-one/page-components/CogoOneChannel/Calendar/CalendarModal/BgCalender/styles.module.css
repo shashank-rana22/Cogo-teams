@@ -31,6 +31,15 @@
 			background: none;
 		}
 
+		.rbc-selected {
+			border-color: #fff !important;
+			outline: none;
+
+			&:focus {
+				outline: none;
+			}
+		}
+
 		.rbc-day-bg {
 			cursor: pointer;
 		}
@@ -48,8 +57,4 @@
 			pointer-events: none;
 		}
 	}
-}
-
-.specialDay {
-	background-color: #fec !important;
 }

@@ -21,20 +21,19 @@
 	z-index: 10;
 	display: flex;
 	align-items: center;
-	width: 50px;
-	height: 40px;
 	cursor: pointer;
 	background: #5a88fb;
 	border-radius: 20px 0 0 20px;
 	transition: 0.5s ease;
 
 	&:hover {
-		.title {
-			display: block;
-		}
-
 		width: 110px;
 		background: #fff;
 		box-shadow: 0 4px 16px 0 rgb(98 127 172 / 20%);
+		transition: 0.5s ease-in-out;
+
+		.title {
+			display: block;
+		}
 	}
 }

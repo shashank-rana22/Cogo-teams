@@ -1,7 +1,7 @@
 import { DateRangepicker } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMPlusInCircle } from '@cogoport/icons-react';
+import { IcMPlusInCircle, IcMCancel } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import CreateEvent from './CreateEvent';
@@ -62,7 +62,7 @@ function Events({ addEvents = true, setAddEvents = () => {}, selectedEventData =
 				)}
 
 				<div className={styles.footer}>
-					<IcMPlusInCircle fill="#034AFD" />
+					{addEvents ? <IcMPlusInCircle fill="#034AFD" /> : <IcMCancel fill="#034AFD" />}
 					<div
 						className={styles.text}
 						role="presentation"

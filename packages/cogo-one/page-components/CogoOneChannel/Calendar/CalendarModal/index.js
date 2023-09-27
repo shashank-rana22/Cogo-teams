@@ -12,28 +12,6 @@ function CalendarModal({
 	const [selectedEventData, setSelectedEventData] = useState({});
 
 	return (
-	// <Modal
-	// 	className={styles.styled_ui_modal_dialog}
-	// 	scroll={false}
-	// 	show={eventClender}
-	// 	size="sm"
-	// 	placement="bottom-right"
-	// 	onClose={() => setEventValendar(false)}
-
-	// >
-	// 	<Modal.Header />
-	// 	<Modal.Body>
-	// 		<div className={styles.container}>
-	// 			<div className={styles.event_list}>
-	// 				<Events />
-	// 			</div>
-	// 			<div className={styles.calendar}>
-	// 				<BgCalender />
-	// 			</div>
-	// 		</div>
-	// 	</Modal.Body>
-	// </Modal>
-
 		<div className={styles.main_container}>
 			<div className={styles.close_calender}>
 				<IcMCross width={18} height={18} onClick={() => setEventValendar(false)} />
@@ -43,9 +21,8 @@ function CalendarModal({
 					<Events addEvents={addEvents} setAddEvents={setAddEvents} selectedEventData={selectedEventData} />
 				</div>
 				<div className={styles.calendar}>
-					{!addEvents ? <div className={styles.masked_calender} /> : null }
 					<div className={styles.calendar_container}>
-						<BgCalender setSelectedEventData={setSelectedEventData} />
+						<BgCalender setSelectedEventData={setSelectedEventData} setAddEvents={setAddEvents} />
 					</div>
 				</div>
 			</div>
