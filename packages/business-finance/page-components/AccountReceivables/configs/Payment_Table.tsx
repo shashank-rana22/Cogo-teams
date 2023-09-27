@@ -7,6 +7,8 @@ import { GenericObject } from '../commons/Interfaces';
 import SortHeader from './SortHeader';
 import styles from './styles.module.css';
 
+const SIGN_FLAG = 1;
+
 const INVOICE_STATUS = {
 	UNUTILIZED       : '#fcedbf',
 	UTILIZED         : '#a1f0ae',
@@ -38,8 +40,8 @@ const invoicePaymentList = ({
 				<div>
 					{getByKey(row, 'paymentNumber') as string}
 				</div>
-				<Pill size="sm" className={row?.signFlag === 1 ? styles.debit : styles.credit}>
-					{row?.signFlag === 1 ? 'DEBIT' : 'CREDIT'}
+				<Pill size="sm" className={row?.signFlag === SIGN_FLAG ? styles.debit : styles.credit}>
+					{row?.signFlag === SIGN_FLAG ? 'DEBIT' : 'CREDIT'}
 				</Pill>
 			</div>
 
@@ -51,7 +53,7 @@ const invoicePaymentList = ({
 		id       : 'sageRefNumber',
 		accessor : (row) => (
 			<div>
-				{row?.sageRefNumber || '-'}
+				{row.sageRefNumber || '-'}
 			</div>
 
 		),
