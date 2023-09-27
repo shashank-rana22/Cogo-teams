@@ -798,7 +798,7 @@ const GLOBAL_CONSTANTS = {
 		cogoport_support         : 'support@cogoport.com',
 	},
 	mobile_number: {
-		cogoone_sales_contact_no: '+91-8069182176',
+		cogoone_sales_contact_no: '+91-8069195810',
 	},
 	websites: {
 		cogoport : 'www.cogoport.com',
