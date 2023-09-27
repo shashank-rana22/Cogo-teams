@@ -45,7 +45,7 @@ interface ItemProps {
 interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
-	subActiveTabReject: string | any;
+	subActiveTabReject: string | undefined;
 }
 
 function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
