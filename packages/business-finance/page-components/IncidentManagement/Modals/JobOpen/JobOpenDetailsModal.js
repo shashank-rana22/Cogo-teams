@@ -21,8 +21,6 @@ function JobOpenDetailsModal({ row = {}, setDetailsModal = () => {}, refetch = (
 		level3 = {}, level2 = {}, level1 = {}, createdBy = {},
 		remark = '', status = '', updatedBy = {},
 	} = row || {};
-	// level2 = null;
-	// level3 = level2;
 	const level0 = { ...createdBy, remark };
 	const { t } = useTranslation(['incidentManagement']);
 	const {
