@@ -25,7 +25,7 @@ const useListBfSalesInvoices = () => {
 					jobNumber : shipment_data?.serial_id || undefined,
 					jobSource : 'LOGISTICS',
 					jobType   : 'SHIPMENT',
-					pageSize  : 10,
+					pageSize  : 100,
 					page      : 1,
 				},
 			});
