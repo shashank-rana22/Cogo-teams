@@ -65,6 +65,10 @@
     {
       "label": "Rail Domestic",
       "value": "rail_domestic_freight"
+    },
+    {
+      "label": "Haulage",
+      "value": "haulage_freight"
     }
   ],
   "all": []
