@@ -1,5 +1,13 @@
 const controls = () => [
 	{
+		name        : 'csr_reference_number',
+		label       : 'TC Invoice Number',
+		type        : 'text',
+		placeholder : 'Type TC Invoice No',
+		span        : 6,
+		rules       : { required: 'TC Invoice No. is required' },
+	},
+	{
 		name        : 'price',
 		label       : 'Price',
 		type        : 'number',

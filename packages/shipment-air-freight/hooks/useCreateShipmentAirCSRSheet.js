@@ -3,6 +3,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 
 function useCreateShipmentAirCSRSheet({
+	index = 0,
 	setTerminalChargeState = () => {},
 	mainServicesData = {},
 	setSheetData = () => {},
@@ -30,7 +31,7 @@ function useCreateShipmentAirCSRSheet({
 			setSheetData({
 				...response?.data,
 			});
-			setTerminalChargeState('fetching_data');
+			setTerminalChargeState((prev) => ({ ...prev, [index]: 'fetching_data' }));
 		} catch (err) {
 			toastApiError(err);
 		}

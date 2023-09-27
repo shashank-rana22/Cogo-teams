@@ -3,24 +3,19 @@ import { Button } from '@cogoport/components';
 import {
 	useForm,
 } from '@cogoport/forms';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import useCreateShipmentAirCSRSheet from '../../../../../../hooks/useCreateShipmentAirCSRSheet';
 import useCreateShipmentAirFreightConsolidatedInvoice
 	from '../../../../../../hooks/useCreateShipmentAirFreightConsolidatedInvoice';
-import useGetShipmentAirCSROCRSheetData from '../../../../../../hooks/useGetShipmentAirCSROCRSheetData';
 import useUpdateShipmentAirFreightConsolidatedInvoice
 	from '../../../../../../hooks/useUpdateShipmentAirFreightConsolidatedInvoice';
-import ChargeReceiptInformations from '../ChargeReceiptInformations';
-import UploadTerminalCharge from '../UploadTerminalCharge';
 
+import ChargeInformations from './ChargeInformations';
 import ConfirmModal from './ConfirmModal';
 import styles from './styles.module.css';
 import getTerminalChargeRateControl from './terminalChargeRateControl';
 import useCreateShipmentAdditionalService from './useCreateShipmentAdditionalService';
-
-const TIME_TO_FETCH_CSR_DATA = 15000;
-const INITIAL_VALUE = 1;
 
 function TerminalChargeRate({
 	mainServicesData = {},
@@ -35,10 +30,7 @@ function TerminalChargeRate({
 	const [collectionPartyData, setCollectionPartyData] = useState({});
 	const [sheetData, setSheetData] = useState({});
 	const [showConfirm, setShowConfirm] = useState(false);
-	const [chargeInformations, setChargeInformations] = useState(INITIAL_VALUE);
-	const [terminalChargeState, setTerminalChargeState] = useState('create');
-
-	console.log('setChargeInformations', setChargeInformations);
+	const [terminalChargeState, setTerminalChargeState] = useState({ 0: 'create' });
 
 	const controls = getTerminalChargeRateControl({
 		type,
@@ -80,8 +72,6 @@ function TerminalChargeRate({
 		setSheetData,
 	});
 
-	const { getCSROCRData, data } = useGetShipmentAirCSROCRSheetData({ setTerminalChargeState, sheetData });
-
 	const handleCreateProforma = (values) => {
 		createShipmentAirFreightConsolidatedInvoice(values);
 	};
@@ -95,15 +85,6 @@ function TerminalChargeRate({
 		createShipmentAirCSRSheet(values);
 	};
 
-	useEffect(() => {
-		if (terminalChargeState === 'fetching_data') {
-			const timeoutId = setTimeout(getCSROCRData, TIME_TO_FETCH_CSR_DATA);
-			return () => clearTimeout(timeoutId);
-		}
-		return () => {};
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [terminalChargeState]);
-
 	return (
 		<div>
 			<Layout
@@ -111,31 +92,36 @@ function TerminalChargeRate({
 				control={control}
 				errors={errors}
 			/>
-			{Array.from(Array(chargeInformations).keys()).map((i) => (
+			{Array.from(Array(Object.keys(terminalChargeState).length).keys()).map((i) => (
 				<div key={i}>
-					{terminalChargeState === 'create'
-						? (
-							<UploadTerminalCharge
-								setTerminalChargeState={setTerminalChargeState}
-								mainServicesData={mainServicesData}
-								setSheetData={setSheetData}
-								sheetData={sheetData}
-							/>
-						)
-						: null}
-					{terminalChargeState === 'fetching_data'
-						? <div> Wait for 15 seconds to fetch the data</div>
-						: null}
-					{terminalChargeState === 'data_fetched' ? (
-						<ChargeReceiptInformations
-							control={control}
-							errors={errors}
-							setValue={setValue}
-							csr_data={data}
-						/>
-					) : null}
+					<ChargeInformations
+						index={i}
+						sheetData={sheetData}
+						control={control}
+						errors={errors}
+						setValue={setValue}
+						setSheetData={setSheetData}
+						mainServicesData={mainServicesData}
+						terminalChargeState={terminalChargeState}
+						setTerminalChargeState={setTerminalChargeState}
+					/>
 				</div>
 			))}
+
+			<Button
+				size="sm"
+				themeType="secondary"
+				onClick={() => {
+					setTerminalChargeState((prev) => ({
+						...prev,
+						[[Object.keys(prev).length]]: 'create',
+					}));
+				}}
+				className={styles.add_button}
+			>
+				+ Add
+			</Button>
+
 			<div className={styles.button_container}>
 				<Button
 					onClick={handleSubmit(handleUpload)}

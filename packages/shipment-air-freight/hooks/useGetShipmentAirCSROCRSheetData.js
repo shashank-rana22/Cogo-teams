@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 
-const useGetShipmentAirCSROCRSheetData = ({ setTerminalChargeState = () => {}, sheetData = {} }) => {
+const useGetShipmentAirCSROCRSheetData = ({ index = 0, setTerminalChargeState = () => {}, sheetData = {} }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url          : '/get_shipment_air_csr_ocr_data',
 		method       : 'GET',
@@ -20,7 +20,7 @@ const useGetShipmentAirCSROCRSheetData = ({ setTerminalChargeState = () => {}, s
 		} catch (err) {
 			console.error(err);
 		} finally {
-			setTerminalChargeState('data_fetched');
+			setTerminalChargeState((prev) => ({ ...prev, [index]: 'data_fetched' }));
 		}
 	};
 	return {
