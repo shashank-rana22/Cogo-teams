@@ -28,7 +28,7 @@ function MyResponsivePie({
 						<IcMInfo />
 					</div>
 				</Tooltip>
-				{subActiveTabReject === 'coe_rejected'
+				{(subActiveTabReject === 'coe_rejected' || subActiveTabReject === 'coe_on_hold')
 					? (
 						<div style={{ marginLeft: '20px' }}>
 							<DateRangepicker

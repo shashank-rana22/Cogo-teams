@@ -10,7 +10,7 @@ import RenderContent from './RenderContent';
 
 function RenderActionButton({ itemData = {} }) {
 	const router = useRouter();
-
+	const { query } = router;
 	const [showPopover, setShowPopover] = useState(false);
 	const [showTicketModal, setShowTicketModal] = useState(false);
 
@@ -43,6 +43,7 @@ function RenderActionButton({ itemData = {} }) {
 						setShowPopover={setShowPopover}
 						onClickApprove={onClickApprove}
 						onClickViewInvoice={onClickViewInvoice}
+						query={query}
      />
 				)}
 				visible={showPopover}

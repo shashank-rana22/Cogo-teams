@@ -12,10 +12,15 @@ import styles from './styles.module.css';
 
 const TOTAL_REJECTED_KEY_MAPPING = {
 	coe_rejected : ['Total Audited', 'Rejected'],
-	on_hold      : ['Total Audited', 'Rejected'],
+	coe_on_hold  : ['Total Audited', 'On Hold'],
 };
 
-function RejectedCharts({ subActiveTabReject = '' }) {
+const TITLE_MAPPING = {
+	coe_rejected : 'Rejection Reason',
+	coe_on_hold  : 'On Hold Reason',
+};
+
+function RejectedCharts({ subActiveTabReject = '', setFilters = () => {} }) {
 	const [date, setDate] = useState(null);
 
 	const [remarkDate, setRemarkDate] = useState(null);
@@ -35,13 +40,17 @@ function RejectedCharts({ subActiveTabReject = '' }) {
 				...item,
 				Rejected        : filteredStatusCount || 0,
 				'Total Audited' : auditedCount || 0,
+				'On Hold'       : filteredStatusCount || 0,
 			}
 		);
 	});
 
 	const handleOnClick = (value) => {
 		if (value?.id === 'Rejected') {
-			console.log(value, 'value');
+			setFilters((pre) => ({
+				...pre,
+				createdDate: value?.indexValue,
+			}));
 		}
 	};
 
@@ -55,7 +64,7 @@ function RejectedCharts({ subActiveTabReject = '' }) {
 			<div className={styles.responsive_bar_chart}>
 				<div className={styles.text_filters_gap}>
 					<div className={styles.text_style}>
-						Total Rejected
+						{`Total ${subActiveTabReject === 'coe_rejected' ? 'Rejected' : 'Hold'}`}
 						<div className={styles.border} />
 					</div>
 
@@ -115,7 +124,7 @@ function RejectedCharts({ subActiveTabReject = '' }) {
 				) : (
 					<MyResponsivePie
 						data={pieData}
-						title="Rejection Reason"
+						title={TITLE_MAPPING[subActiveTabReject]}
 						subActiveTabReject={subActiveTabReject}
 						remarkDate={remarkDate}
 						setRemarkDate={setRemarkDate}

@@ -23,7 +23,7 @@ function RaiseTicketModal({
 
 	const { control, watch, handleSubmit, formState:{ errors = {} } = {} } = useForm();
 
-	const formValues = watch();
+	const watchRaisedToDesk = watch('raised_to_desk');
 
 	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({
 		onClose: setShowTicketModal,
@@ -47,7 +47,7 @@ function RaiseTicketModal({
 
 	const fields = controls({
 		formatRaiseToDeskOptions,
-		formValues,
+		watchRaisedToDesk,
 		setAdditionalInfo,
 		shipmentData,
 	});

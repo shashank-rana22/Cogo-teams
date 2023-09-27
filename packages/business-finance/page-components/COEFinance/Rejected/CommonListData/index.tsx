@@ -71,7 +71,6 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 			<RenderViewMoreButton itemData={itemData} />
 		),
 		renderAction: (itemData: ItemProps) => (
-			// <RenderViewMoreButton itemData={itemData} />
 			<RenderActionButton itemData={itemData} />
 		),
 		renderUrgencyTag: (itemData: ItemProps, field: FieldProps) => (
