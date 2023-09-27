@@ -9,7 +9,11 @@ function ClipBoard({ data = '', content = 'Copied', showText = true, style = {} 
 	if (!data) return null;
 	return (
 		<div className={styles.container}>
-			{showText && <span className={styles.sub_name} style={style}>{data}</span> }
+			{showText && (
+				<span className={styles.sub_name} style={style}>
+					{data}
+				</span>
+			) }
 
 			<Popover
 				placement="top"

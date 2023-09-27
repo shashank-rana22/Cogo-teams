@@ -1,5 +1,5 @@
 import { Button, cl, Textarea } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
@@ -56,7 +56,7 @@ function Details({
 				{getRatePercentageData.map((itemData) => (
 					<div className={styles.rates_data} key={itemData?.label}>
 						<div className={styles.rates}>
-							{itemData?.value || '-'}
+							{itemData?.value ?? '-'}
 							%
 						</div>
 						<div className={styles.label_text}>{itemData?.label || '-'}</div>
@@ -78,13 +78,13 @@ function Details({
 					<div className={styles.heading}>
 						Current TDS Style
 					</div>
-					<div className={styles.text}>{currentTdsStyle || ''}</div>
+					<div className={styles.text}>{startCase(currentTdsStyle) || ''}</div>
 				</div>
 				<div>
 					<div className={styles.heading}>
 						New TDS Style Requested
 					</div>
-					<div className={styles.requested_tds_text}>{requestedTdsStyle || ''}</div>
+					<div className={styles.requested_tds_text}>{startCase(requestedTdsStyle) || ''}</div>
 				</div>
 			</div>
 

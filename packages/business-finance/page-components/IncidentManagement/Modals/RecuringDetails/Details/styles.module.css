@@ -29,7 +29,7 @@
 }
 
 .company_div {
-	width: 50%;
+	width: 45%;
 }
 
 .line {
@@ -62,10 +62,7 @@
 	display: flex;
 	gap: 12px;
 	justify-content: flex-end;
-	padding: 12px;
-	margin: 44% 0 0;
-	border-radius: 0 0 10px 10px;
-	box-shadow: 0 0 8px 0 #2c3e5033;
+	margin: 290px 18px 18px;
 }
 
 .heading {
@@ -117,4 +114,32 @@
 	font-weight: 500;
 	color: #f68b21;
 	text-decoration: underline;
+}
+
+.section {
+	width: 24%;
+	margin: 0 0 16px 24px;
+}
+
+.section:first-child {
+	width: 38%;
+}
+
+.value {
+	font-size: var(--font-size-md);
+	font-weight: 500;
+}
+
+.title {
+	font-size: var(--font-size-md);
+}
+
+.summary {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 16px;
+}
+
+.hex_cont {
+	margin-top: 24px;
 }
