@@ -68,7 +68,7 @@ function Card({ data = {} }) {
 				</div>
 
 				<div className={styles.location_container}>
-					{['export', 'import'].includes(stepperTab) ? (
+					{stepperTab === 'export_import' ? (
 						<DualLocation data={data} />
 					) : (
 						<SingleLocation data={data} />
