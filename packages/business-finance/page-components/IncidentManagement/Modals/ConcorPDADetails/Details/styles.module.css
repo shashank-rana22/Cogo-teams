@@ -54,7 +54,7 @@
 
 .text {
 	font-size: var(--font-size-md);
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .required_field::after {
@@ -68,8 +68,6 @@
 
 .flex {
 	display: flex;
-
-	/* border: 2px solid black; */
 	margin: 24px 0;
 }
 
