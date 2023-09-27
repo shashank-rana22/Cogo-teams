@@ -1,11 +1,9 @@
-import { Button, Select, Toggle } from '@cogoport/components';
+import { Select, Toggle } from '@cogoport/components';
 import { asyncFieldsPartnerUsers, useGetAsyncOptions } from '@cogoport/forms';
-import { IcMFilter } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
-import Filter from './components/Filter';
 import ListData from './components/ListData';
 import TasksOverview from './components/TasksOverview';
 import useGetCoverageStats from './hooks/useGetCoverageStats';
@@ -18,8 +16,6 @@ function RateCoverageContent() {
 	}));
 	const { user: { name: user_name = '' } = {} } = user_data;
 
-	const [showFilters, setShowFilters] = useState(false);
-	const [serialId, setSerialId] = useState('');
 	const [showWeekData, setShowWeekData] = useState(false);
 
 	const {
@@ -92,26 +88,9 @@ function RateCoverageContent() {
 						offLabel="Relevant to me"
 						onChange={handleToggle}
 					/>
-					<Button
-						themeType="secondary"
-						onClick={() => { setShowFilters((prev) => !prev); }}
-						style={{ width: '100px' }}
-					>
-						<IcMFilter style={{ marginRight: '6px', width: 'auto', height: '16px' }} />
-						<span className={styles.filter_text}> Filter </span>
-					</Button>
 				</div>
 			</div>
-			{showFilters
-			&& (
-				<Filter
-					filter={filter}
-					setFilter={setFilter}
-					setSerialId={setSerialId}
-					setShowWeekData={setShowWeekData}
-					setSource={setSource}
-				/>
-			)}
+
 			<TasksOverview
 				data={statsData}
 				statsLoading={statsLoading}
@@ -132,9 +111,8 @@ function RateCoverageContent() {
 				page={page}
 				setPage={setPage}
 				setFilter={setFilter}
-				serialId={serialId}
-				setSerialId={setSerialId}
 				getStats={getStats}
+				setShowWeekData={setShowWeekData}
 			/>
 		</div>
 	);

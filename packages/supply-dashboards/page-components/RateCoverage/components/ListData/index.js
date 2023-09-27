@@ -1,9 +1,11 @@
-import { Placeholder, Pagination, Input } from '@cogoport/components';
+import { Placeholder, Pagination, Input, Button } from '@cogoport/components';
+import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import { CARDS_MAPPING, HEADINGS } from '../../configurations/helpers/constants';
+import Filter from '../Filter';
 import Card from '../TasksOverview/OverviewContent/Card';
 
 import ListCard from './ListCard';
@@ -20,15 +22,17 @@ function ListData({
 	statsData = {},
 	getListCoverage = () => {},
 	filter = {},
+	setFilter = () => {},
 	source = null,
 	setSource = () => {},
 	listLoading = false,
 	page = 1,
 	setPage = () => {},
-	serialId = '',
-	setSerialId = () => {},
 	getStats = () => {},
+	setShowWeekData = () => {},
 }) {
+	const [serialId, setSerialId] = useState('');
+	const [showFilters, setShowFilters] = useState(false);
 	const { statistics = {} } = statsData;
 	const { list = [] } = data;
 	const { dynamic_statistics = {} } = statsData;
@@ -61,22 +65,35 @@ function ListData({
 				))}
 			</div>
 			<div className={styles.container}>
-				{source
+				<div style={{ display: 'flex' }}>
+					{source
 				&& (
-					<span>
+					<span style={{ marginTop: '4px' }}>
 						{dynamic_statistics[source] || DEFAULT_VALUE}
 						{' '}
 						{HEADINGS[source] || 'Critical Port Pairs'}
 					</span>
 				)}
-				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<Input
 						size="sm"
 						value={serialId}
 						onChange={(val) => setSerialId(val)}
 						placeholder="Search by TID"
+						style={{ width: '200px', marginLeft: '10px' }}
 					/>
 				</div>
+
+				<div>
+					<Button
+						themeType="secondary"
+						onClick={() => { setShowFilters((prev) => !prev); }}
+						style={{ width: '100px' }}
+					>
+						<IcMFilter style={{ marginRight: '6px', width: 'auto', height: '16px' }} />
+						<span className={styles.filter_text}> Filter </span>
+					</Button>
+				</div>
+
 			</div>
 			<div>
 				{listLoading && [...new Array(LIST_CARD_LOADER_COUNT).keys()].map((ind) => (
@@ -124,6 +141,19 @@ function ListData({
 						</div>
 					)}
 			</div>
+
+			{showFilters
+			&& (
+				<Filter
+					filter={filter}
+					showFilters={showFilters}
+					setShowFilters={setShowFilters}
+					setFilter={setFilter}
+					setSerialId={setSerialId}
+					setShowWeekData={setShowWeekData}
+					setSource={setSource}
+				/>
+			)}
 		</div>
 	);
 }
