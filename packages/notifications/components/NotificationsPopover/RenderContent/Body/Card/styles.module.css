@@ -1,0 +1,48 @@
+.container {
+	padding: 16px;
+	cursor: pointer;
+	border-bottom: 1px solid #e0e0e0;
+
+	&.new {
+		background: #f9f9f9;
+	}
+}
+
+.space_between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.row {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin: -5px 0;
+}
+
+.new_notification_style {
+	position: absolute;
+	left: -12px;
+	display: flex;
+	width: 6px;
+	height: 6px;
+	background: #cb6464;
+	border-radius: 50%;
+}
+
+.time_status {
+	margin-right: 8px;
+	font-size: 10px;
+	line-height: 12px;
+	color: #828282;
+	letter-spacing: 0.02em;
+}
+
+.content_container {
+	width: 95%;
+}
+
+.status_container {
+	margin-top: 8px;
+}

@@ -1,4 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import List from '../../../../commons/List/index.tsx';
@@ -15,11 +14,11 @@ import styles from './styles.module.css';
 const MORE_THAN_ZERO = 0;
 const ZERO_AMOUNT = 0;
 const FIRST_PAGE = 1;
+const EMPTY_DATA_LENGTH = 0;
 
 function InvoiceSelection({
 	setActive = () => {},
 	setShowHeader = () => {},
-	showHeader = true,
 	active = '',
 	setBLData = () => {},
 	setShowPayableAmount = () => {},
@@ -85,11 +84,13 @@ function InvoiceSelection({
 		}
 	}, [totalCalc, setShowPayableAmount, active]);
 
+	const selectedInvoiceListLength = selectedListData?.list?.length || EMPTY_DATA_LENGTH;
+
 	useEffect(() => {
-		if (isEmpty(invoiceData?.list)) {
-			setShowSaveAsDraft(true);
-		}
-	}, [invoiceData, setShowSaveAsDraft]);
+		const getCondition = invoiceData?.list?.length === EMPTY_DATA_LENGTH
+		|| selectedInvoiceListLength === EMPTY_DATA_LENGTH;
+		setShowSaveAsDraft(getCondition);
+	}, [invoiceData, setShowSaveAsDraft, selectedInvoiceListLength]);
 
 	const LIST_FUNCTIONS = getFunctions({
 		onChangeTableBodyCheckbox,
@@ -105,8 +106,6 @@ function InvoiceSelection({
 				filters={globalFilters}
 				setFilters={setGlobalFilters}
 				goBack={goBack}
-				active={active}
-				showHeader={showHeader}
 				setShowHeader={setShowHeader}
 				viewSelectedInvoice={viewSelectedInvoice}
 				onClear={onClear}

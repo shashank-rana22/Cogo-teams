@@ -1,0 +1,11 @@
+.tabs_container {
+	:global {
+		.ui_tabs_container {
+			overflow: scroll auto;
+		}
+
+		.ui_tabs_container::-webkit-scrollbar {
+			display: none !important;
+		}
+	}
+}

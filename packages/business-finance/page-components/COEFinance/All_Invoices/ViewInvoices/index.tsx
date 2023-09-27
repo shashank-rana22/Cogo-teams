@@ -89,6 +89,7 @@ function ViewInvoices() {
 					checkItem={checkItem}
 					isTagFound={isTagFound}
 					currentTab={currentTab}
+					jobType={jobType}
 				/>
 			</div>
 
