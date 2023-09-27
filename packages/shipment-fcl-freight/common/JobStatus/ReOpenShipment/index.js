@@ -21,52 +21,54 @@ function ReOpenShipment({
 	} = useUpdateShipmentReopenJob({ setFinJobOpenConfirmation, shipment_id });
 
 	return (
-		<div className={styles.request_reopen}>
+		<div>
 			{[GLOBAL_CONSTANTS.uuid.hk_user_id, GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id].includes(id) && (
 				<Button
-					themeType="secondary"
+					themeType="link"
+					size="md"
 					className={styles.request_reopen}
 					onClick={() => setFinJobOpenConfirmation(true)}
 				>
 					Fin Re-open
 				</Button>
 			)}
+
 			{finJobOpenConfirmation
-            && (
-	<Modal
-		size="sm"
-		show={finJobOpenConfirmation}
-		onClose={() => setFinJobOpenConfirmation(false)}
-		closeOnOuterClick
-	>
-		<Modal.Header title="Request Re-open" />
+				? (
+					<Modal
+						size="sm"
+						show={finJobOpenConfirmation}
+						onClose={() => setFinJobOpenConfirmation(false)}
+						closeOnOuterClick
+					>
+						<Modal.Header title="Request Re-open" />
 
-		<Modal.Body>
-			<div className={styles.details}>
-				Are you sure you want to Re-open the Shipment?
-			</div>
-		</Modal.Body>
+						<Modal.Body>
+							<div className={styles.details}>
+								Are you sure you want to Re-open the Shipment?
+							</div>
+						</Modal.Body>
 
-		<Modal.Footer className={styles.modal_footer}>
-			<Button
-				themeType="secondary"
-				size="md"
-				onClick={() => setFinJobOpenConfirmation(false)}
-				disabled={loading}
-			>
-				Cancel
-			</Button>
-			<Button
-				themeType="primary"
-				size="md"
-				disabled={loading}
-				onClick={handleConfirm}
-			>
-				Submit
-			</Button>
-		</Modal.Footer>
-	</Modal>
-            )}
+						<Modal.Footer className={styles.modal_footer}>
+							<Button
+								themeType="secondary"
+								size="md"
+								onClick={() => setFinJobOpenConfirmation(false)}
+								disabled={loading}
+							>
+								Cancel
+							</Button>
+							<Button
+								themeType="primary"
+								size="md"
+								disabled={loading}
+								onClick={handleConfirm}
+							>
+								Submit
+							</Button>
+						</Modal.Footer>
+					</Modal>
+				) : null}
 		</div>
 
 	);

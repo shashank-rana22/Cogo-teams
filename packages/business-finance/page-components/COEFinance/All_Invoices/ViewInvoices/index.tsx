@@ -62,10 +62,16 @@ function ViewInvoices() {
 	const { mappingsData, loading } = useGetTaggingBills({
 		billId,
 	});
-	let isTagFound = true;
-	if (!loading) {
-		isTagFound = !isEmpty(mappingsData);
-	}
+
+	const isTagFound = !loading && !isEmpty(mappingsData);
+
+	useEffect(() => {
+		if (!isTagFound && !loading) {
+			setCheckItem(
+				(prev: any) => ({ ...prev, taggingCheck: true }),
+			);
+		}
+	}, [isTagFound, loading]);
 
 	return (
 		<div>

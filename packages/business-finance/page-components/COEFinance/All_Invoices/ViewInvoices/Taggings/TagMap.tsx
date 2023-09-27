@@ -13,7 +13,11 @@ function TagMap({
 	setRemarksVal = () => {},
 	status = '',
 	mappingsData = {},
+	switchDetails = () => {},
+	taggingChecked = false,
+	setCheckItem = () => {},
 }: {
+	switchDetails?:any, taggingChecked?: boolean, setCheckItem?: any,
 	mappingsData?: any, status?: string, value?: { approve?: string, reject?: string, undo?: string, remark: string, },
 	setValue: React.Dispatch<React.SetStateAction<{
 		approve: string;
@@ -46,6 +50,7 @@ function TagMap({
 	const handleClickUndo = () => {
 		setValue((prev) => ({ ...prev, reject: '', approve: '' }));
 		setRemarksVal((prev) => ({ ...prev, taggingRemark: [''] }));
+		setCheckItem((prev) => ({ ...prev, taggingCheck: false }));
 	};
 
 	return (
@@ -92,8 +97,10 @@ function TagMap({
 							<Button
 								size="md"
 								themeType="secondary"
+								disabled={taggingChecked}
 								onClick={() => {
 									handleClickApprove('approve');
+									switchDetails();
 								}}
 							>
 								Approve
@@ -101,6 +108,7 @@ function TagMap({
 							<Button
 								size="md"
 								themeType="secondary"
+								disabled={taggingChecked}
 								style={{ border: '1px solid #ed3726' }}
 								onClick={() => {
 									handleClickReject();
@@ -150,8 +158,11 @@ function TagMap({
 							<Button
 								size="md"
 								style={{ marginRight: '8px' }}
-								disabled={!(isEmpty(value?.remark))}
-								onClick={() => handleSubmitReject('reject')}
+								disabled={isEmpty(value?.remark)}
+								onClick={() => {
+									handleSubmitReject('reject');
+									switchDetails();
+								}}
 							>
 								Yes
 							</Button>
