@@ -58,6 +58,11 @@ function TableView({
 		isAllSelected,
 	} = useTableView({ props, list, refetch, isVerticalHead });
 
+	const handleUnrated = () => {
+		setShowUnrated((pv) => !pv);
+		setPage(GLOBAL_CONSTANTS.one);
+	};
+
 	const handleRatingUpdate = async (item) => {
 		const ratingData = {
 			employee_id          : item.id,
@@ -158,7 +163,7 @@ function TableView({
 					<div
 						role="presentation"
 						className={styles.link_text}
-						onClick={() => setShowUnrated((pv) => !pv)}
+						onClick={handleUnrated}
 					>
 						{!showUnrated ? 'Show unrated employees' : 'Remove filter'}
 					</div>
