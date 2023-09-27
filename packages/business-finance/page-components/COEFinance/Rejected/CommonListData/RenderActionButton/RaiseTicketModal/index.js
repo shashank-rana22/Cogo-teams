@@ -18,6 +18,7 @@ function RaiseTicketModal({
 	setShowTicketModal = () => {},
 	showTicketModal = false,
 	itemData = {},
+	refetch = () => {},
 }) {
 	const [additionalInfo, setAdditionalInfo] = useState([]);
 
@@ -28,6 +29,7 @@ function RaiseTicketModal({
 	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({
 		onClose: setShowTicketModal,
 		additionalInfo,
+		refetch,
 	});
 
 	const { data } = useListShipment(itemData?.jobNumber);

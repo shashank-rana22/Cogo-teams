@@ -10,7 +10,7 @@ import RenderRemarks from '../../All_Invoices/PurchaseInvoiceView/RenderData/Ren
 import RenderStatus from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderStatus';
 import RenderUrgencyTag from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderUrgencyTag';
 import RenderViewMoreButton from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderViewMoreButton';
-import COST_ADVOCATE_CONFIG from '../../configurations/COST_ADVOCATE_LIST';
+import constAdvocateConfig from '../../configurations/COST_ADVOCATE_LIST';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
 import RejectedCharts from './RejectedChart';
@@ -53,7 +53,10 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 		loading,
 		setSearchValue,
 		searchValue,
+		refetch,
 	} = useGetPurchaseViewList({ filters, setFilters, sort, subActiveTabReject });
+
+	const config = constAdvocateConfig(subActiveTabReject);
 
 	const functions: any = {
 		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,
@@ -71,7 +74,7 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 			<RenderViewMoreButton itemData={itemData} />
 		),
 		renderAction: (itemData: ItemProps) => (
-			<RenderActionButton itemData={itemData} />
+			<RenderActionButton itemData={itemData} refetch={refetch} />
 		),
 		renderUrgencyTag: (itemData: ItemProps, field: FieldProps) => (
 			<RenderUrgencyTag item={itemData} field={field} />
@@ -105,7 +108,7 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 				searchValue={searchValue}
 			/>
 			<List
-				config={COST_ADVOCATE_CONFIG}
+				config={config}
 				itemData={data}
 				functions={functions}
 				loading={loading}

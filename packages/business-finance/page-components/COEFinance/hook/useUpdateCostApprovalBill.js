@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 
 import toastApiError from '../../commons/toastApiError.ts';
 
-const useUpdateCostApprovalBill = ({ setShowPopover = () => {}, itemData = {} }) => {
+const useUpdateCostApprovalBill = ({ setShowPopover = () => {}, itemData = {}, refetch = () => {} }) => {
 	const { user_data: userData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
@@ -27,6 +27,7 @@ const useUpdateCostApprovalBill = ({ setShowPopover = () => {}, itemData = {} })
 				},
 			});
 			setShowPopover(false);
+			refetch();
 			Toast.success('Success');
 		} catch (err) {
 			toastApiError(err);

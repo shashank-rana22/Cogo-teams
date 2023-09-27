@@ -1,4 +1,9 @@
-const COST_ADVOCATE_CONFIG = {
+const LABEL_MAPPING = {
+	coe_rejected : 'Rejection Date',
+	coe_on_hold  : 'On Hold Date',
+};
+
+const constAdvocateConfig = (subActiveTabReject) => ({
 	showHeader   : true,
 	headerStyles : {
 		marginBottom : '16px',
@@ -57,7 +62,7 @@ const COST_ADVOCATE_CONFIG = {
 			func  : 'renderFormate',
 		},
 		{
-			label   : 'Last Modified Date',
+			label   : `${LABEL_MAPPING[subActiveTabReject] ? LABEL_MAPPING[subActiveTabReject] : 'Last Modified Date'}`,
 			span    : 2,
 			key     : 'createdDate',
 			func    : 'renderFormate',
@@ -113,6 +118,6 @@ const COST_ADVOCATE_CONFIG = {
 			func : 'renderAction',
 		},
 	],
-};
+});
 
-export default COST_ADVOCATE_CONFIG;
+export default constAdvocateConfig;

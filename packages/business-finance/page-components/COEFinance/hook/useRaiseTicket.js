@@ -5,6 +5,7 @@ import { useSelector } from '@cogoport/store';
 const useRaiseTicket = ({
 	handleClose = () => {},
 	shipmentData = {},
+	refetch = () => {},
 }) => {
 	const { profile } = useSelector((state) => state);
 	const [{ loading }, trigger] = useTicketsRequest({
@@ -51,6 +52,8 @@ const useRaiseTicket = ({
 			});
 
 			Toast.success('Successfully Created');
+
+			refetch();
 
 			handleClose(false);
 		} catch (error) {

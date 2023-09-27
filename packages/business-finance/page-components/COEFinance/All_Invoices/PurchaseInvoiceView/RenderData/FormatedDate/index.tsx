@@ -88,7 +88,8 @@ function FormatedDate({ item, field }: Props) {
 					</Tooltip>
 				</div>
 			)}
-			{field?.label === 'Last Modified Date' && (
+			{(field?.label === 'Last Modified Date' || field?.key === 'createdDate')
+			&& (
 				<div>
 					<text className={styled.sid}>{getCreatedDate}</text>
 					<div className={styled.service_type}>{getCreatedDateTime}</div>

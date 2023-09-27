@@ -8,7 +8,7 @@ import useUpdateCostApprovalBill from '../../../hook/useUpdateCostApprovalBill';
 import RaiseTicketModal from './RaiseTicketModal';
 import RenderContent from './RenderContent';
 
-function RenderActionButton({ itemData = {} }) {
+function RenderActionButton({ itemData = {}, refetch = () => {} }) {
 	const router = useRouter();
 	const { query } = router;
 	const [showPopover, setShowPopover] = useState(false);
@@ -16,7 +16,7 @@ function RenderActionButton({ itemData = {} }) {
 
 	const {
 		apiTrigger,
-	} = useUpdateCostApprovalBill({ itemData, setShowPopover });
+	} = useUpdateCostApprovalBill({ itemData, setShowPopover, refetch });
 
 	const onClickApprove = () => {
 		apiTrigger();
@@ -59,6 +59,7 @@ function RenderActionButton({ itemData = {} }) {
 					showTicketModal={showTicketModal}
 					setShowTicketModal={setShowTicketModal}
 					itemData={itemData}
+					refetch={refetch}
 				/>
 			) : null}
 

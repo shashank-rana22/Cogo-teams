@@ -167,6 +167,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 		setTab,
 		setSearchValue,
 		searchValue,
+		refetch,
 	};
 };
 
