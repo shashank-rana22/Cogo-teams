@@ -1,33 +1,11 @@
 .heading {
 	margin-bottom: 0;
-
-	/* @media (min-width: 1024px) {
-		font-size: 1.2em;
-	}
-	@media (min-width: 1440px) {
-		font-size: 1.4em;
-	}
-	@media (min-width: 2560px) {
-		font-size: 1.6em;
-	} */
 }
 
 .subheading {
 	display: flex;
 	align-items: center;
 	font-size: var(--font-size-xl);
-
-	/* font-size: 0.6em; */
-
-	/* @media (min-width: 1024px) {
-		font-size: 0.8em;
-	}
-	@media (min-width: 1440px) {
-		font-size: 1em;
-	}
-	@media (min-width: 2560px) {
-		font-size: 1.2em;
-	} */
 }
 
 .light {
