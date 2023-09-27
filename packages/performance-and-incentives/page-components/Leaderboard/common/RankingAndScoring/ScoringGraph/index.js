@@ -30,7 +30,7 @@ function ScoringGraph(props) {
 						top    : 20,
 						right  : 25,
 						bottom : 60,
-						left   : 50,
+						left   : 30,
 					}}
 					axisBottom={{
 						tickSize       : 5,
@@ -42,10 +42,10 @@ function ScoringGraph(props) {
 					}}
 					axisLeft={{
 						tickSize       : 5,
-						tickPadding    : 5,
+						tickPadding    : 100,
 						tickRotation   : 0,
 						legend         : 'SCORES',
-						legendOffset   : -40,
+						legendOffset   : -20,
 						legendPosition : 'middle',
 					}}
 					axisTop={null}

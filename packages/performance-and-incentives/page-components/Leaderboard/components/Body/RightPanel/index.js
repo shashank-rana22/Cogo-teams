@@ -1,5 +1,5 @@
-// import getEntityNameById from '../../../../../utils/get-entity-name-by-id';
 import LoadingState from '../../../../../common/LoadingState';
+import getEntityNameById from '../../../../../utils/get-entity-name-by-id';
 import Activity from '../../../common/Activity';
 import IncentiveSnapshot from '../../../common/IncentiveSnapshot';
 import RankingAndScoring from '../../../common/RankingAndScoring';
@@ -7,7 +7,7 @@ import RankingAndScoring from '../../../common/RankingAndScoring';
 import styles from './styles.module.css';
 
 function RightPanel(props) {
-	const { data, loading } = props;
+	const { data, loading, entity } = props;
 
 	const {
 		block_wise_stats: activityData = {},
@@ -15,7 +15,7 @@ function RightPanel(props) {
 		incentive_snapshot: incentiveSnapshotData = {},
 	} = data || {};
 
-	// const COGO_ENTITY = getEntityNameById(entity);
+	const COGO_ENTITY = getEntityNameById(entity);
 
 	if (loading) {
 		return (
@@ -27,11 +27,11 @@ function RightPanel(props) {
 
 	return (
 		<div className={styles.container}>
-			{/* <div className={styles.entity_tag}>
+			<div className={styles.entity_tag}>
 				<div className={styles.badge} />
 
 				<div>{COGO_ENTITY}</div>
-			</div> */}
+			</div>
 
 			<RankingAndScoring scoringGraphData={scoringGraphData} />
 
