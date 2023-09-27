@@ -50,7 +50,7 @@ function SendActions({
 	return (
 		<>
 			<div className={styles.icon_tools}>
-				{hasPermissionToEdit && (
+				{false && ( // remove
 					<CustomFileUploader
 						disabled={isUploadDisabled}
 						handleProgress={handleProgress}

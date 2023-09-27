@@ -10,8 +10,6 @@ import AddMembers from './AddMembers';
 import styles from './styles.module.css';
 import ToUser from './ToUsers';
 
-const GROUP_COUNT = 2;
-
 const ZERO_USERS = 0;
 
 function Header({
@@ -25,10 +23,9 @@ function Header({
 	const {
 		group_members_count = 0,
 		is_draft = false,
+		is_group: isGroup = false,
 		search_name = '',
 	} = activeTeamCard || {};
-
-	const isGroup = group_members_count > GROUP_COUNT;
 
 	const newDraft = !(group_members_count > ZERO_USERS);
 

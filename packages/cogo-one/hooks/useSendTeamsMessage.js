@@ -16,7 +16,7 @@ function useSendTeamsMessage({ activeTab = {}, firestore = {}, cleanUpFunc = () 
 
 	const [, trigger] = useRequest(
 		{
-			url    : '/create_communication_internal_chat',
+			url    : '/create_communication',
 			method : 'post',
 		},
 		{ manual: true, autoCancel: false },
@@ -30,6 +30,7 @@ function useSendTeamsMessage({ activeTab = {}, firestore = {}, cleanUpFunc = () 
 				loggedInAgentId,
 				firestore,
 			});
+			console.log('groupId', groupId);
 
 			if (!draftMessage && isEmpty(attachments)) {
 				return;

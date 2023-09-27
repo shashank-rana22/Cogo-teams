@@ -13,7 +13,6 @@ import styles from './styles.module.css';
 
 const DEFAULT_UNREAD_MESSAGES = 0;
 const MAXIMUM_UNREAD_MESSAGES = 100;
-const GROUP_COUNT = 2;
 
 function GroupCard({
 	eachRoom = {},
@@ -24,9 +23,9 @@ function GroupCard({
 		id = '',
 		is_draft = false,
 		new_message_sent_at = 0,
-		group_members_count = 0,
 		is_pinned = false,
 		search_name = '',
+		is_group :isGroup = false,
 		last_message_document = {},
 		self_unread_messages_count = 0,
 	} = eachRoom || {};
@@ -34,8 +33,6 @@ function GroupCard({
 	const activeCard = id === activeTeamCard?.id;
 
 	const lastActive = new Date(new_message_sent_at);
-
-	const isGroup = group_members_count > GROUP_COUNT;
 
 	const lastMessage = last_message_document?.response?.message || '';
 

@@ -136,7 +136,7 @@ const getOrPublishDraft = async ({
 			}
 
 			return createLocalRooms(
-				{ groupId, searchName, firestore, userId: eachId, isGroup: is_group },
+				{ groupId, searchName: searchName?.toUpperCase() || '', firestore, userId: eachId, isGroup: is_group },
 			);
 		});
 
