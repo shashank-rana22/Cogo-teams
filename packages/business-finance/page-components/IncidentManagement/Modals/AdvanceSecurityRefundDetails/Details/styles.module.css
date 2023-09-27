@@ -43,7 +43,7 @@
 }
 
 .shipment_container {
-	padding: 16px 26px 6px;
+	padding: 16px 26px;
 }
 
 .shipment_id {
@@ -62,7 +62,10 @@
 	display: flex;
 	gap: 12px;
 	justify-content: flex-end;
-	margin: 80px 18px 18px;
+	padding: 12px;
+	margin-top: 12%;
+	border-radius: 0 0 10px 10px;
+	box-shadow: 0 0 8px 0 #2c3e5033;
 }
 
 .heading {
@@ -103,4 +106,16 @@
 
 .rates {
 	font-weight: 600;
+}
+
+.supplier_div {
+	padding: 24px 24px 16px;
+}
+
+.amount_div {
+	padding: 16px 24px;
+}
+
+.utr_div {
+	padding: 16px 24px 32px;
 }

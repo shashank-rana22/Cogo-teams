@@ -14,6 +14,7 @@ function AdvanceSecurityDepositDetails({ row = {}, setDetailsModal = () => {}, r
 		level3 = {}, level2 = {}, level1 = {},
 		createdBy = {}, remark = '', data: { advanceSecurityDeposit = {} },
 	} = row || {};
+	console.log(row);
 	const docUrl = advanceSecurityDeposit?.documentUrls?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const level0 = { ...createdBy, remark };

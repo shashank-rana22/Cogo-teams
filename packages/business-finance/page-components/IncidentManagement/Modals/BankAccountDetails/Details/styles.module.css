@@ -71,7 +71,10 @@
 	display: flex;
 	gap: 12px;
 	justify-content: flex-end;
-	margin: 80px 18px 18px;
+	padding: 12px;
+	margin-top: 11.5%;
+	border-radius: 0 0 10px 10px;
+	box-shadow: 0 0 8px 0 #2c3e5033;
 }
 
 .heading {

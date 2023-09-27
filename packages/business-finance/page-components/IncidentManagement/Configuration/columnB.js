@@ -4,16 +4,14 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import showOverflowingNumber from '../../commons/showOverflowingNumber.tsx';
 import { toTitleCase } from '../utils/titleCase.ts';
 
 import SortIcon from './SortIcon/index.tsx';
 import styles from './styles.module.css';
 
-const TEN = 10;
 export const columns = ({
 	setIsAscendingActive, setFilters,
-	isAscendingActive, activeTab, t,
+	isAscendingActive, t,
 	setDetailsModal = () => { },
 }) => [
 	{
@@ -23,74 +21,6 @@ export const columns = ({
 		Cell     : ({ row: { original } }) => {
 			const { referenceId = {} } = original || {};
 			return <span className={styles.incident_id}>{referenceId}</span>;
-		},
-	},
-	{
-		Header   : t('incidentManagement:company_name_header'),
-		accessor : 'company_name',
-		id       : 'company_name',
-		Cell     : ({ row: { original } }) => {
-			const { data = {} } = original || {};
-			const { organization = '' } = data || {};
-			const { interCompanyJournalVoucherRequest } = data || {};
-			const { list } = interCompanyJournalVoucherRequest || {};
-			const getList = () => (list || [{}]).map((item) => item?.tradePartyName);
-			const bankTradePartyName = data?.bankRequest
-					&& data?.organization?.tradePartyType;
-			const tdsTradePartyName = data?.tdsRequest
-					&& data?.organization?.tradePartyType;
-
-			return list ? (
-				<Tooltip
-					interactive
-					content={(list || [{}]).map((item) => (
-						<div className={styles.trade_party_name} key={item?.id}>
-							<div>{toTitleCase(item?.div || '-')}</div>
-						</div>
-					))}
-				>
-					<div className={styles.wrapper}>{getList()[GLOBAL_CONSTANTS.zeroth_index]}</div>
-				</Tooltip>
-			) : (
-				<div>
-
-					<Tooltip
-						interactive
-						content={bankTradePartyName || tdsTradePartyName ? (
-							<div>
-								{(organization?.tradePartyType === 'SELF'
-									? organization?.businessName : organization?.tradePartyName)
-										|| toTitleCase(organization?.businessName || '-')}
-
-							</div>
-						) : (
-							<div>{toTitleCase(organization?.businessName || '-')}</div>
-						)}
-					>
-						{bankTradePartyName || tdsTradePartyName ? (
-							<div className={styles.wrapper}>
-								{(organization?.tradePartyType === 'SELF'
-									? organization?.businessName : organization?.tradePartyName)
-										|| toTitleCase(organization?.businessName || '-')}
-
-							</div>
-						) : (
-							<div className={styles.wrapper}>{toTitleCase(organization?.businessName || '-')}</div>
-						)}
-					</Tooltip>
-
-				</div>
-			);
-		},
-	},
-	{
-		Header   : t('incidentManagement:requested_by_header'),
-		accessor : 'requested_by',
-		id       : 'requested_by',
-		Cell     : ({ row: { original } }) => {
-			const { createdBy = {} } = original || {};
-			const { name = '' } = createdBy || {};
-			return <span>{showOverflowingNumber(name || '-', TEN)}</span>;
 		},
 	},
 	{
@@ -180,29 +110,6 @@ export const columns = ({
 			);
 		},
 		id: 'request_date',
-	},
-	{
-		Header: activeTab === 'approved' ? t('incidentManagement:approved_by_n_on')
-			: t('incidentManagement:rejected_by_n_on'),
-		accessor : 'updatedBy',
-		id       : 'username',
-		Cell     : ({ row: { original } }) => {
-			const { updatedBy = {}, updatedAt } = original || {};
-			const { name = '' } = updatedBy || {};
-			return (
-				<div className={styles.flex_reverse}>
-					<div>{name}</div>
-					{updatedAt ? formatDate({
-						date: updatedAt,
-						dateFormat:
-								GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-						formatType : 'dateTime',
-						seperator  : ' ',
-					}) : '_'}
-				</div>
-			);
-		},
 	},
 	{
 		Header   : t('incidentManagement:remark_header'),

@@ -7,6 +7,7 @@ import { useState } from 'react';
 import useGetSecurityDepositData from '../../../apisModal/useGetSecurityDeposit';
 import SHIPMENT_MAPPING from '../../../Constants/SHIPMENT_MAPPING';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
+import { getFormatAmount } from '../../../utils/getformatamount';
 
 import styles from './styles.module.css';
 
@@ -24,7 +25,8 @@ function Details({
 	const { partner_id } = query || {};
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarkValue, setRemarkValue] = useState('');
-	const { status = '', id = '', data: { revokeInvoiceRequest = {} } } = row || {};
+	const { status = '', id = '', data: { advanceSecurityDepositRefund = {} } } = row || {};
+	const { totalAmount = 0, currency = '' } = advanceSecurityDepositRefund || {};
 
 	const { getData, loading } = useGetSecurityDepositData({
 		refetch,
@@ -47,36 +49,38 @@ function Details({
 				</div>
 			</div>
 			<div className={styles.line} />
-			<div className={styles.company_div}>
+			<div className={styles.supplier_div}>
 				<div className={styles.heading}>Supplier Name</div>
-				<div className={styles.text}>{revokeInvoiceRequest?.invoiceNumber || ''}</div>
+				<div className={styles.text}>{advanceSecurityDepositRefund?.supplierName || ''}</div>
 			</div>
 			<div className={styles.shipment_container}>
 				<div className={styles.heading}>Shipment Id</div>
 				<div className={styles.shipment_id}>
 					#
 					<a
-						href={revokeInvoiceRequest?.id}
+						href={advanceSecurityDepositRefund?.id}
 						onClick={(event) => {
 							openPDF({
 								event,
 								partnerId    : partner_id,
-								id           : revokeInvoiceRequest?.id,
+								id           : advanceSecurityDepositRefund?.id,
 								incidentType : SHIPMENT_MAPPING[row?.incidentSubtype],
 							});
 						}}
 					>
-						{revokeInvoiceRequest?.id || ''}
+						{advanceSecurityDepositRefund?.id || ''}
 					</a>
 				</div>
 			</div>
-			<div className={styles.company_div}>
+			<div className={styles.amount_div}>
 				<div className={styles.heading}>Total Amount</div>
-				<div className={styles.text}>{revokeInvoiceRequest?.invoiceNumber || ''}</div>
+				<div className={styles.text}>
+					{getFormatAmount(totalAmount, currency)}
+				</div>
 			</div>
-			<div className={styles.company_div}>
+			<div className={styles.utr_div}>
 				<div className={styles.heading}>UTR Number</div>
-				<div className={styles.text}>{revokeInvoiceRequest?.invoiceNumber || ''}</div>
+				<div className={styles.text}>{advanceSecurityDepositRefund?.utrNumber || ''}</div>
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>

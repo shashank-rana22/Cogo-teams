@@ -84,20 +84,22 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 
 			{status === 'REQUESTED' ? (
 				<div>
-					<div
-						className={cl`${styles.label} 
+					<div className={styles.remarks_div}>
+						<div
+							className={cl`${styles.label} 
 								${styles.required_field}`}
-					>
-						Remarks
-					</div>
+						>
+							Remarks
+						</div>
 
-					<Textarea
-						className={styles.textarea}
-						name="remark"
-						size="md"
-						placeholder="Enter Remarks Here"
-						onChange={(value) => setRemarks(value)}
-					/>
+						<Textarea
+							className={styles.textarea}
+							name="remark"
+							size="md"
+							placeholder="Enter Remarks Here"
+							onChange={(value) => setRemarks(value)}
+						/>
+					</div>
 					<div className={styles.button_container}>
 						<Button
 							size="md"

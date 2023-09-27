@@ -13,7 +13,6 @@ function Details({
 	setDetailsModal = () => {},
 	refetch = () => {},
 }) {
-	console.log(row);
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
 	const { status = '', id = '', data = {} } = row || {};
@@ -101,19 +100,21 @@ function Details({
 
 			{ status === 'REQUESTED' ? (
 				<div>
-					<div className={cl`${styles.label} 
+					<div className={styles.remarks_div}>
+						<div className={cl`${styles.label} 
 								${styles.required_field}`}
-					>
-						Remarks
-					</div>
+						>
+							Remarks
+						</div>
 
-					<Textarea
-						className={styles.textarea}
-						name="remark"
-						size="md"
-						placeholder="Enter Remarks Here"
-						onChange={(value) => setRemarks(value)}
-					/>
+						<Textarea
+							className={styles.textarea}
+							name="remark"
+							size="md"
+							placeholder="Enter Remarks Here"
+							onChange={(value) => setRemarks(value)}
+						/>
+					</div>
 					<div className={styles.button_container}>
 
 						<Button
