@@ -38,12 +38,6 @@ function AccountPayables() {
 	const entity = getDefaultEntityCode(partnerId);
 
 	const handleTabChange = (v) => {
-		if (
-			['payruns', 'outstanding', 'invoices'].includes(v)
-		) {
-			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
-			return;
-		}
 		setActivePayables(v);
 		push(
 			'/business-finance/account-payables/[active_tab]',
@@ -73,7 +67,7 @@ function AccountPayables() {
 					<Placeholder className={styles.loader} />
 				) : (
 					<div>
-						{FILTER_TABS.includes(activePayables) ? (
+						{isEmpty(selectedOrg) && FILTER_TABS.includes(activePayables) ? (
 							<Select
 								name="activeEntity"
 								value={activeEntity}

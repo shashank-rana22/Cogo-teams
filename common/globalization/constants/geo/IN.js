@@ -11,7 +11,8 @@ export default {
 			code   : 'INR',
 			symbol : '₹',
 		},
-		mobile_country_code: '+91',
+		mobile_country_code       : '+91',
+		invoice_allowed_languages : ['english'],
 	},
 	formats: {
 		amount: {
@@ -179,7 +180,7 @@ export default {
 			'b69344b8-f00c-4870-be0f-3233413edccf',
 		],
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
-		coe_head                  : '0e68d129-6f07-4324-95ee-88731b35c0c4',
+		coe_head                  : '0e68d129-6f07-4324-95ee-88731b35c0c4', // temporarily id for vietnam coe_head
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
 		finops_manager            : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
 		cogo_auditor              : 'fc2f1dac-6de9-4dd9-990e-bd8746fc10ce',
@@ -221,8 +222,7 @@ export default {
 			'e48ae064-781a-43ee-af27-b7d4ed37329f', // Prod_Account Payable Executive
 			'6106378a-44e0-4f60-9f4b-4160843d9dc9', // Temp-  Corporate Owner Finance
 			'1f7b1fd3-5c5b-4009-9cb5-c712436bc071', // Corporate Owner Fintech
-			'b5e1c496-9d2c-47bc-b9c2-a24ce7ba1cd0', 	//	Prod Overseas Desk
-
+			'b5e1c496-9d2c-47bc-b9c2-a24ce7ba1cd0', //	Prod Overseas Desk
 		],
 		so1_so2_ops_role_id              : 'd974d323-b777-47a8-b14a-64df2e59df84',
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
@@ -311,7 +311,7 @@ export default {
 		finops                   : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
 		cogo_one_kyc             : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
 		finance_branch_accounts  : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
-
+		service_ops3             : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
 	},
 	options: {
 		registration_types: [
@@ -757,6 +757,15 @@ export default {
 						request_replace_invoice : false,
 						request_credit_note     : true,
 					},
+					pending_tasks: {
+						is_booking_agent_filter_required: false,
+					},
+				},
+				common: {
+					validate_registration_number : true,
+					validate_pan_number          : true,
+					include_gst                  : true,
+					is_export_tradeType          : true,
 				},
 			},
 		},

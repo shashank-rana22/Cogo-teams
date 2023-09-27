@@ -47,6 +47,10 @@
                 "value":"mark_confirmed"
             },
             {
+                "label":"Confirm with Shipper",
+                "value":"confirm_with_shipper"
+            },
+            {
                 "label":"Waiting for SO",
                 "value":"upload_shipping_order"
             },

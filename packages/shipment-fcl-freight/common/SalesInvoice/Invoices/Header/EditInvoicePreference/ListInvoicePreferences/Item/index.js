@@ -31,6 +31,7 @@ function Item({
 		services = [],
 		status = '',
 		id = '',
+		processing = false,
 	} = invoice || {};
 
 	const open = openedService && openedService?.id === id;
@@ -90,9 +91,9 @@ function Item({
 
 			<div
 				className={cl`${styles.header_container} ${open ? styles.open : ''} 
-				${invoice?.processing ? styles.disable : ''}`}
+				${processing ? styles.disable : ''}`}
 				style={{ cursor: noActionState || noActionForInsurance ? 'default' : '' }}
-				onClick={!invoice?.processing && !(noActionState || noActionForInsurance)
+				onClick={!processing && !(noActionState || noActionForInsurance)
 					? () => handleServiceToggle()
 					: null}
 			>

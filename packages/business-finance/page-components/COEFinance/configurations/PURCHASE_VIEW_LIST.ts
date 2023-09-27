@@ -13,6 +13,10 @@ const PURCHASE_VIEW_CONFIG = {
 		fontSize   : '12px',
 		lineHeight : '14px',
 		fontStyle  : 'normal',
+		background : '#fff',
+	},
+	itemStyles: {
+		borderBottom: '1px solid #d7d7d7',
 	},
 	fields: [
 		{

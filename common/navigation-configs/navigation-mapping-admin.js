@@ -65,6 +65,7 @@ import {
 	IcMBookingDesk,
 	IcASecureCloudStorage,
 	IcMUpwardGraph,
+	IcMAppProfile,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -749,8 +750,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					title : t('common:location_clusters'),
-					href  : '/locations-clusters',
-					as    : '/locations-clusters',
+					href  : '/v2/locations-clusters',
+					as    : '/v2/locations-clusters',
 					type  : 'link',
 				},
 				{
@@ -895,8 +896,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'business_finance-cogo_book',
 					title         : t('common:cogo_books'),
-					href          : '/business-finance/cogo-book/[active_tab]/[view]',
-					as            : '/business-finance/cogo-book/accruals/dashboard',
+					href          : '/v2/business-finance/cogo-book/[active_tab]/[view]',
+					as            : '/v2/business-finance/cogo-book/accruals/dashboard',
 					type          : 'link',
 					main_apis     : [],
 					possible_apis : apis.cogo_book,
@@ -1321,8 +1322,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key       : 'coe-bl_do',
 					title     : t('common:authority_desk'),
-					href      : '/bl-do',
-					as        : '/bl-do',
+					href      : '/v2/bl-do',
+					as        : '/v2/bl-do',
 					type      : 'link',
 					main_apis : [
 						'list_authority_desk_bl_documents',
@@ -1402,7 +1403,9 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/kam-desk',
 					type          : 'link',
 					main_apis     : ['list_kam_desk_shipments'],
-					possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens, ...apis.shipment],
+					possible_apis : [...apis.kam_desk, ...apis.search,
+						...apis.cogolens, ...apis.shipment, ...apis.feedback,
+						...apis.sales_invoice, ...apis.cargo_insurance],
 				},
 				{
 					key           : 'coe-document_desk',
@@ -1643,8 +1646,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'cogo_assured-rate_sheets',
 					title         : t('common:rate_sheets'),
-					href          : '/cogo-assured/rate_sheets',
-					as            : '/cogo-assured/rate_sheets',
+					href          : '/v2/cogo-assured/rate_sheets',
+					as            : '/v2/cogo-assured/rate_sheets',
 					type          : 'link',
 					possible_apis : apis.cogo_assured,
 
@@ -1779,8 +1782,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'transaction_setting-convenience_rate',
 					title         : t('common:convenience_rates'),
-					href          : '/convenience-rates',
-					as            : '/convenience-rates',
+					href          : '/v2/convenience-rates',
+					as            : '/v2/convenience-rates',
 					main_apis     : ['list_convenience_rates'],
 					possible_apis : apis.convenience_rate,
 					module_type   : 'crm',
@@ -1926,6 +1929,16 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis     : [],
 			icon          : IcMInvoiceApprovals,
 			possible_apis : apis.ground_ops,
+			module_type   : 'dashboards',
+		},
+		ams_submission: {
+			key           : 'ams_submission',
+			title         : t('common:ams_submission'),
+			href          : '/v2/ams-submission',
+			as            : '/v2/ams-submission',
+			type          : 'link',
+			main_apis     : [],
+			possible_apis : apis.ams_submission,
 			module_type   : 'dashboards',
 		},
 		printing_desk: {
@@ -2288,8 +2301,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'ihls-data_pipeline',
 					title         : t('common:file_processing_dashboard'),
-					href          : '/ihls/data-pipeline',
-					as            : '/ihls/data-pipeline',
+					href          : '/v2/ihls/data-pipeline',
+					as            : '/v2/ihls/data-pipeline',
 					type          : 'link',
 					icon          : IcMDataPipeline,
 					possible_apis : [],
@@ -2565,7 +2578,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/employee-dashboard',
 			type          : 'link',
 			icon          : IcMDashboard,
-			possible_apis : apis.employee_performance_dashboard,
+			possible_apis : [...apis.employee_performance_dashboard, ...apis.separation],
 			main_apis     : [],
 			module_type   : 'dashboards',
 		},
@@ -2644,7 +2657,22 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/attendance-leave-management',
 			type          : 'link',
 			module_type   : 'dashboards',
-			possible_apis : apis.attendance_leave_management,
+			possible_apis : [
+				...apis.attendance_leave_management,
+				...apis.separation,
+			],
+		},
+
+		profile: {
+			key           : 'profile',
+			title         : 'Employee Profile',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			href          : '/v2/profile',
+			as            : '/v2/profile',
+			possible_apis : apis.profile,
+			icon          : IcMAppProfile,
 		},
 	};
 

@@ -8,14 +8,14 @@ const getParams = ({ agentType, page, query, isInActive = false }) => ({
 	filters: {
 		q          : query || undefined,
 		agent_type : agentType || undefined,
-		status     : isInActive ? 'inactive' : 'active',
+		...(isInActive ? { status: 'inactive' } : { status_not: 'inactive' }),
 	},
 	page,
 	page_limit : PAGE_LIMIT,
 	sort_by    : 'agent_type',
 });
 
-function useListChatAgents() {
+function useListChatAgents({ activeCard = '' }) {
 	const [paramsState, setParamsState] = useState({
 		page      : 1,
 		query     : '',
@@ -36,6 +36,10 @@ function useListChatAgents() {
 
 	const getListChatAgents = useCallback(async () => {
 		try {
+			if (activeCard && activeCard === 'default') {
+				return;
+			}
+
 			await trigger({
 				params: getParams({
 					agentType : paramsState?.agentType,
@@ -47,7 +51,7 @@ function useListChatAgents() {
 		} catch (error) {
 			console.error(error);
 		}
-	}, [trigger, paramsState?.agentType, paramsState?.page, debounceSearchQuery, isInActive]);
+	}, [activeCard, trigger, paramsState?.agentType, paramsState?.page, debounceSearchQuery, isInActive]);
 
 	useEffect(() => {
 		debounceQuery(paramsState?.query);

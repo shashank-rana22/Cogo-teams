@@ -35,7 +35,6 @@
 
 .title {
 	min-width: 200px;
-	font-weight: 600;
 }
 
 .flex {
@@ -45,8 +44,17 @@
 
 .name {
 	padding: 0 4px;
+	font-weight: 600;
 }
 
 .divider {
 	margin-right: 4px;
+}
+
+.remark_text {
+	:global {
+		.ui_text_area_container {
+			height: 80px;
+		}
+	}
 }

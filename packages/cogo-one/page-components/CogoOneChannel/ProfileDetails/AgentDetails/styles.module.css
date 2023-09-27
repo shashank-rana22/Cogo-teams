@@ -43,3 +43,8 @@
 	display: flex;
 	margin: 7px 4px 10px 0;
 }
+
+.flex_div {
+	display: flex;
+	justify-content: space-between;
+}

@@ -9,20 +9,37 @@ import List from '../../../../../commons/List/index';
 import { formatDate } from '../../../../../commons/utils/formatDate';
 import config from '../../../../configurations/SHIPMENT_DOCUMENTS_CONFIG';
 import useShipmentDocument from '../../../../hook/useShipmentDocument';
+import { getDetailValueColor } from '../../../../utils/getDetailValueColor';
 
 import styles from './styles.module.css';
 
 interface DocumentsInterface {
 	shipmentId: string;
+	docContent?: string;
 }
 
-function Documents({ shipmentId = '' }: DocumentsInterface) {
+function Documents({ shipmentId = '', docContent = '' }: DocumentsInterface) {
 	const { data: documentData, loading } = useShipmentDocument(shipmentId);
 
 	const functions = {
 		DocumentTypeFunc: (item) => {
 			const { document_type: DocumentType } = item || {};
-			return <p>{startCase(DocumentType)}</p>;
+			return <p>{startCase(DocumentType) || ''}</p>;
+		},
+		DocumentNumberFunc: (item) => {
+			let formattedData = item?.data;
+			if (typeof formattedData === 'string') {
+				formattedData = JSON.parse(item?.data || '');
+			}
+			const documentNumber = formattedData?.document_number || '';
+
+			return (
+				<p
+					style={{ color: getDetailValueColor({ value: documentNumber, docContent }) }}
+				>
+					{startCase(documentNumber) || ''}
+				</p>
+			);
 		},
 		ServiceTypeFunc: (item) => {
 			const { service_type: serviceType } = item || {};
@@ -80,30 +97,25 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 		},
 	};
 
-	const getDocumentData = () => {
-		if (loading) {
-			return (
-				<div className={styles.loader_main}>
-					<Loader className={styles.loader} />
-				</div>
-			);
-		}
-		if (isEmpty(documentData)) {
-			return <EmptyStateDocs />;
-		}
+	if (loading) {
 		return (
+			<div className={styles.loader_main}>
+				<Loader className={styles.loader} />
+			</div>
+		);
+	}
+	if (isEmpty(documentData)) {
+		return <EmptyStateDocs />;
+	}
+
+	return (
+		<div className={styles.list}>
 			<List
 				config={config}
 				itemData={documentData}
 				functions={functions}
 				loading={loading}
 			/>
-		);
-	};
-
-	return (
-		<div className={styles.list}>
-			{getDocumentData()}
 		</div>
 	);
 }

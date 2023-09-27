@@ -30,6 +30,36 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'list_lead_organizations',
+		access_type  : 'private',
+		service_name : 'lead',
+	},
+	{
+		api          : 'auto_upsell_service',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_lead_organization',
+		access_type  : 'private',
+		service_name : 'lead',
+	},
+	{
+		api          : 'create_lead_organization_to_account',
+		access_type  : 'private',
+		service_name : 'lead',
+	},
+	{
+		api          : 'update_lead_user',
+		access_type  : 'private',
+		service_name : 'lead',
+	},
+	{
+		api          : 'create_lead_user',
+		access_type  : 'private',
+		service_name : 'lead',
+	},
+	{
 		api          : 'list_shipment_notes',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -124,6 +154,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_shipment_cross_entity_invoice',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'generate_freight_certificate',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -154,6 +189,16 @@ const apis = [
 	},
 	{
 		api          : 'get_sales_invoice_shipment_list',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_cross_entity_invoice',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_cross_entity_invoice_status',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
@@ -1789,7 +1834,7 @@ const apis = [
 		service_name : 'fcl_freight_rate',
 	},
 	{
-		api          : 'incident',
+		api          : 'post_incident_management_incident',
 		access_type  : 'private',
 		service_name : 'incident-management',
 	},
@@ -1801,6 +1846,16 @@ const apis = [
 	{
 		api         : 'post_purchase_advance_document',
 		access_type : 'private',
+	},
+	{
+		api          : 'get_incident_management_incident_job_reopen_incident_exists',
+		access_type  : 'private',
+		service_name : 'incident-management',
+	},
+	{
+		api          : 'list_shipment_cross_entity_credit_notes',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 ];
 

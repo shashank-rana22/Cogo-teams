@@ -82,7 +82,7 @@ function FilterpopOver({
 									name="user_id"
 									asyncKey="partner_users"
 									valueKey="user_id"
-									initialCall={false}
+									initialCall
 									onChange={(userId: string) => onChange(userId, 'kamId')}
 									value={filters.kamId}
 									placeholder="Select Kam Owner"
@@ -97,7 +97,7 @@ function FilterpopOver({
 									name="user_id"
 									asyncKey="partner_users"
 									valueKey="user_id"
-									initialCall={false}
+									initialCall
 									onChange={(userId: string) => onChange(userId, 'salesAgentId')}
 									value={filters.salesAgentId}
 									placeholder="Select Sales Agent User"
@@ -115,7 +115,7 @@ function FilterpopOver({
 									name="credit_controller_id"
 									asyncKey="partner_users"
 									valueKey="user_id"
-									initialCall={false}
+									initialCall
 									onChange={(userId: string) => onChange(userId, 'creditControllerId')}
 									value={filters.creditControllerId}
 									placeholder="Select Credit Controller User"
@@ -144,7 +144,7 @@ function FilterpopOver({
 			<Popover
 				visible={show}
 				placement="bottom"
-				render={<Content />}
+				render={show ? <Content /> : null}
 				className={styles.pop_over_style}
 				{...rest}
 			>

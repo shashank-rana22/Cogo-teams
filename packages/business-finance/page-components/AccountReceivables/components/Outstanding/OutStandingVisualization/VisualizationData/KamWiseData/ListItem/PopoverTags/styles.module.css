@@ -1,6 +1,7 @@
 .icon_wrapper {
 	display: flex;
 	align-items: center;
+	margin-right: 4px;
 	cursor: pointer;
 }
 
@@ -17,5 +18,5 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	justify-content: end;
+	justify-content: flex-end;
 }

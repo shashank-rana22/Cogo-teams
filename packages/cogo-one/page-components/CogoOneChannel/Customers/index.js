@@ -109,6 +109,7 @@ function Customers({
 			mailsToBeShown: userSharedMails,
 			firestore,
 			userId,
+			isBotSession,
 		},
 	};
 
@@ -218,6 +219,7 @@ function Customers({
 				viewType={viewType}
 				setOpenKamContacts={setOpenKamContacts}
 				setSendBulkTemplates={setSendBulkTemplates}
+				firestore={firestore}
 			/>
 		</div>
 	);

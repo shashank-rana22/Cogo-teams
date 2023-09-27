@@ -2,6 +2,7 @@ import advanceBookingManager from './config/advance-booking-manager';
 import airRepository from './config/air-repository';
 import airlinePluginBooking from './config/airline-booking-plugin';
 import allocations from './config/allocations';
+import amsSubmission from './config/ams-submission';
 import attendanceLeaveManagement from './config/attendance-leave-management';
 import authorityDesk from './config/authority-desk';
 import blDoCollectionRelease from './config/bl_do-collection-release';
@@ -9,6 +10,7 @@ import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
 import bookingDeskAir from './config/booking-desk-air';
 import bookingDeskSurface from './config/booking-desk-surface';
+import business from './config/business';
 import businessFinance from './config/business-finance';
 import byodDashboard from './config/byod-dashboard';
 import cancellationPolicies from './config/cancellation-policies';
@@ -16,10 +18,12 @@ import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
+import cogoAssured from './config/cogo-assured';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
+import convenienceRates from './config/convenience-rates';
 import costBookingDesk from './config/cost-booking-desk';
 import demandForecast from './config/demand-forecast';
 import documentDesk from './config/document-desk';
@@ -41,22 +45,26 @@ import lastMileDesk from './config/last-mile-desk';
 import liabilityDashboard from './config/liability-dashboard';
 import locations from './config/location';
 import managerDashboard from './config/manager-dashboard';
+import margins from './config/margins';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
 import notifications from './config/notifications';
 import PERFORMANCE_MANAGEMENT from './config/performance-management';
 import printingDesk from './config/printing-desk';
+import profile from './config/profile';
 import referral from './config/referral';
 import resource from './config/resources';
 import revenueDesk from './config/revenue-desk';
 import rfqDashboard from './config/rfq-dashboard';
 import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
+import saas from './config/saas';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import schedules from './config/schedules';
 import serviceDiscovery from './config/service-discovery';
+import serviceManagement from './config/service-management';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
 import shipmentAirFreightLocal from './config/shipment-air-freight-local';
@@ -74,6 +82,7 @@ import so2Surface from './config/so2-surface';
 import supplyAllocation from './config/supply-allocation';
 import supplyDashboard from './config/supply-dashboards';
 import supplyTools from './config/supply-tools';
+import termsAndConditions from './config/terms-and-conditions';
 import ticketManagement from './config/ticket-management';
 import tradeParties from './config/trade-parties';
 import unifiedDashboard from './config/unified-dashboard';
@@ -84,10 +93,12 @@ import welcome from './config/welcome';
 const routeConfig = {
 	...rolesAndPermissions,
 	...locations,
+	...cogoAssured,
 	...groundOps,
 	...allocations,
 	...supplyDashboard,
 	...contracts,
+	...business,
 	...businessFinance,
 	...unifiedDashboard,
 	...vendorRM,
@@ -146,6 +157,7 @@ const routeConfig = {
 	...rfqDashboard,
 	...governanceManager,
 	...byodDashboard,
+	...convenienceRates,
 	...employeeDashboard,
 	...managerDashboard,
 	...printingDesk,
@@ -162,9 +174,15 @@ const routeConfig = {
 	...attendanceLeaveManagement,
 	...centralisedCustomerService,
 	...resource,
+	...termsAndConditions,
 	...serviceDiscovery,
 	...supplyTools,
+	...profile,
+	...amsSubmission,
 	...tradeParties,
+	...margins,
+	...saas,
+	...serviceManagement,
 };
 
 export default routeConfig;

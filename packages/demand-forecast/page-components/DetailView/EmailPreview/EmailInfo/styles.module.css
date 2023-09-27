@@ -7,3 +7,8 @@
 .footer {
 	margin-bottom: 12px;
 }
+
+.bodyUrl {
+	color: #00e;
+	text-decoration: underline;
+}

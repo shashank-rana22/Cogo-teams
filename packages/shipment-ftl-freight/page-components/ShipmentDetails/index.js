@@ -34,6 +34,12 @@ const TAB_MAPPING = {
 	tracking        : dynamic(() => import('@cogoport/surface-modules/components/Tracking'), { ssr: false }),
 };
 const FORBIDDEN_STATUS_CODE = 403;
+const LAST_VALUE_INDEX = -1;
+
+const VIEW_MAPPING = {
+	booking_agent_view : 'booking_agent',
+	service_ops1_view  : 'booking_desk',
+};
 
 function ShipmentDetails() {
 	const router = useRouter();
@@ -43,16 +49,17 @@ function ShipmentDetails() {
 	const { authParams } = prof || {};
 
 	const activeStakeholder = useGetActiveStakeholder();
+
 	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder, authParams });
 	const { get } = useGetShipment();
 	const {
 		features = [],
 		default_tab = 'tasks',
 		visible_tabs = [],
-		shipment_info: {
-			job_open_request = false,
-		},
+		shipment_info = {},
 	} = stakeholderConfig || {};
+
+	const { job_open_request = false } = shipment_info || {};
 
 	const [activeTab, setActiveTab] = useState(default_tab);
 
@@ -66,13 +73,21 @@ function ShipmentDetails() {
 		window.sessionStorage.setItem('prev_nav', newHref);
 	}, [router?.query?.partner_id, shipment_data?.id]);
 
-	const contextValues = useMemo(() => ({
-		...get,
-		...getTimeline,
-		...servicesGet,
-		activeStakeholder,
-		stakeholderConfig,
-	}), [get, servicesGet, getTimeline, stakeholderConfig, activeStakeholder]);
+	const contextValues = useMemo(() => {
+		let stakeholder = activeStakeholder;
+		if (activeStakeholder === 'kam_so1') {
+			const view = authParams?.split(':')?.at(LAST_VALUE_INDEX);
+			stakeholder = VIEW_MAPPING[view] || stakeholder;
+		}
+
+		return {
+			...get,
+			...getTimeline,
+			...servicesGet,
+			activeStakeholder: stakeholder,
+			stakeholderConfig,
+		};
+	}, [get, servicesGet, getTimeline, stakeholderConfig, activeStakeholder, authParams]);
 
 	useEffect(() => {
 		router.prefetch(router.asPath);

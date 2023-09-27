@@ -14,7 +14,7 @@ const useCreateRailDomesticFreightRateFreeDay = ({
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_rail_domestic_freight_rate_free_day',
 		method : 'POST',
-	});
+	}, { manual: true });
 
 	const apiTrigger = async (val) => {
 		try {

@@ -1,4 +1,5 @@
 import { Button, Input, Toggle } from '@cogoport/components';
+import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
@@ -46,6 +47,7 @@ const FUNCTIONS = {
 };
 
 function Invoices({ activeEntity = '' }) {
+	const ELIGIBLE_ENITY_PAYRUN = ENTITY_FEATURE_MAPPING[activeEntity]?.feature_supported?.includes('create_payrun');
 	const { query } = useRouter();
 	const [activeTab, setActiveTab] = useState('all');
 	const [show, setShow] = useState(false);
@@ -58,7 +60,7 @@ function Invoices({ activeEntity = '' }) {
 		setBillsFilters,
 		orderBy,
 		setOrderBy,
-	} = useGetBillsList({ activeTab, activeEntity });
+	} = useGetBillsList({ activeTab, activeEntity, showElement: true });
 
 	const { stats = {} } = billsData || {};
 
@@ -73,17 +75,26 @@ function Invoices({ activeEntity = '' }) {
 
 	return (
 		<div>
-			<div className={styles.statscontainer}>
-				{TABS.map(({ label, value }) => (
-					<TabStat
-						name={label}
-						isActive={activeTab === value}
-						key={value}
-						value={value}
-						number={stats?.[value]}
-						setActiveTab={setActiveTab}
-					/>
-				))}
+			<div className={styles.toggle}>
+				<div className={styles.statscontainer}>
+					{TABS.map(({ label, value }) => (
+						<TabStat
+							name={label}
+							isActive={activeTab === value}
+							key={value}
+							value={value}
+							number={stats?.[value]}
+							setActiveTab={setActiveTab}
+						/>
+					))}
+				</div>
+				<Toggle
+					name="toggle"
+					size="md"
+					onLabel="Old"
+					offLabel="New"
+					onChange={handleVersionChange}
+				/>
 			</div>
 			<div className={styles.filters}>
 				<div className={styles.filtercontainer}>
@@ -91,13 +102,6 @@ function Invoices({ activeEntity = '' }) {
 					<FilterModal filters={billsFilters} setFilters={setBillsFilters} activeTab={activeTab} />
 				</div>
 				<div className={styles.search_filter}>
-					<Toggle
-						name="toggle"
-						size="md"
-						onLabel="Old"
-						offLabel="New"
-						onChange={handleVersionChange}
-					/>
 					<div>
 						<Button
 							size="md"
@@ -105,6 +109,7 @@ function Invoices({ activeEntity = '' }) {
 							onClick={() => {
 								setShowPayrunModal(true);
 							}}
+							disabled={!ELIGIBLE_ENITY_PAYRUN}
 						>
 							Create Pay Run
 						</Button>

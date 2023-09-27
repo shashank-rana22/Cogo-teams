@@ -10,7 +10,8 @@ export default {
 			code   : 'VND',
 			symbol : '₫',
 		},
-		mobile_country_code: '+84',
+		mobile_country_code       : '+84',
+		invoice_allowed_languages : ['english', 'vietnamese'],
 	},
 	formats: {
 		amount: {
@@ -32,7 +33,7 @@ export default {
 	regex: {
 		TAX                                : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		// eslint-disable-next-line max-len
-		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		GST                                : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		ECN                                : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
 		EMAIL                              : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
@@ -287,6 +288,7 @@ export default {
 		finops                    : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
 		cogo_one_kyc              : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
 		finance_branch_accounts   : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
+		service_ops3              : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
 	},
 	options: {
 		registration_types: [
@@ -546,7 +548,7 @@ export default {
 			pattern               : /^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
 		},
 		pan_number: {
-			label   : 'PAN',
+			label   : 'VAT',
 			pattern : undefined,
 		},
 		economic_zone: {
@@ -594,6 +596,15 @@ export default {
 						request_replace_invoice : true,
 						request_credit_note     : false,
 					},
+					pending_tasks: {
+						is_booking_agent_filter_required: false,
+					},
+				},
+				common: {
+					validate_registration_number : false,
+					validate_pan_number          : false,
+					include_gst                  : false,
+					is_export_tradeType          : false,
 				},
 			},
 		},

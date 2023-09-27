@@ -7,8 +7,6 @@ import {
 } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-// eslint-disable-next-line import/no-cycle
-import { DataInterface } from '..';
 import { POC_DATA_MAPPING } from '../../../../constants/constant';
 import usePOCDetails from '../../../../hook/usePOCDetails';
 
@@ -17,7 +15,7 @@ import POCTimeLine from './POCTimeLine/index';
 import styles from './styles.module.css';
 
 interface Props {
-	itemData: DataInterface;
+	itemData: any;
 }
 
 function POCDetails({ itemData }: Props) {

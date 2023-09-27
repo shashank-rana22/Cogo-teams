@@ -14,6 +14,7 @@ import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
 import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
+import useGetSignature from '../../hooks/useGetSignature';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
@@ -30,14 +31,12 @@ import styles from './styles.module.css';
 
 function CogoOne() {
 	const { query: { assigned_chat = '', channel_type = '' } } = useRouter();
-
 	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile, general }) => ({
 		userId           : profile?.user?.id,
 		userName         : profile?.user?.name,
 		token            : general.firestoreToken,
 		userEmailAddress : profile?.user?.email,
 	}));
-
 	const [activeTab, setActiveTab] = useState({
 		tab               : channel_type === 'email' ? 'firebase_emails' : 'message',
 		subTab            : 'all',
@@ -48,18 +47,18 @@ function CogoOne() {
 			channel_type,
 		} : {},
 	});
-
 	const [viewType, setViewType] = useState('');
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [modalType, setModalType] = useState({ type: null, data: {} });
 	const [buttonType, setButtonType] = useState('');
-	const [activeMailAddress, setActiveMailAddress] = useState(userEmailAddress);
+	const [activeMailAddress, setActiveMailAddress] = useState('');
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
 	const [openKamContacts, setOpenKamContacts] = useState(false);
 	const [sendBulkTemplates, setSendBulkTemplates] = useState(false);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
+	const [mailAttachments, setMailAttachments] = useState([]);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -68,26 +67,15 @@ function CogoOne() {
 		setRaiseTicketModal,
 		agentId           : userId,
 	});
-
 	const {
-		viewType: initialViewType = '',
-		loading: workPrefernceLoading = false,
-		userSharedMails = [],
+		viewType: initialViewType = '', loading: workPrefernceLoading = false, userSharedMails = [],
 	} = useAgentWorkPrefernce();
-
-	const {
-		fetchWorkStatus = () => {},
-		agentWorkStatus = {},
-		preferenceLoading = false,
-	} = useGetAgentPreference();
-
+	const { fetchWorkStatus = () => {}, agentWorkStatus = {}, preferenceLoading = false } = useGetAgentPreference();
+	const { signature } = useGetSignature();
 	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
-
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
-
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
-
 	const firestore = getFirestore(app);
 
 	const mailProps = {
@@ -101,13 +89,18 @@ function CogoOne() {
 		viewType,
 		userSharedMails,
 		activeMail    : activeTab?.data,
-		setActiveMail : (val) => {
-			setActiveTab((prev) => ({ ...prev, data: val }));
+		setActiveMail : ({ val = {}, tab = '', expandSideBar }) => {
+			setActiveTab((prev) => ({ ...prev, data: val, tab, expandSideBar }));
 		},
 		userId,
 		userName,
+		resetEmailState: () => {
+			setEmailState({ ...DEFAULT_EMAIL_STATE, body: signature });
+			setMailAttachments([]);
+		},
+		setMailAttachments,
+		mailAttachments,
 	};
-
 	const commonProps = {
 		setSendBulkTemplates,
 		preferenceLoading,
@@ -118,23 +111,18 @@ function CogoOne() {
 	};
 
 	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
-
 	const { user_id = '', lead_user_id = '' } = tabData || {};
-
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
 	const orgId = FIREBASE_TABS.includes(activeTab?.tab)
 		? formattedMessageData?.organization_id
 		: activeTab?.data?.organization_id;
-
 	const expandedSideBar = (ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
 		|| (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) && activeTab?.expandSideBar));
 	const collapsedSideBar = ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
 								&& !activeTab?.expandSideBar;
-
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
 			const auth = getAuth();
-
 			signInWithCustomToken(auth, token).catch((error) => {
 				console.error(error.message);
 			});
@@ -142,9 +130,7 @@ function CogoOne() {
 	}, [token]);
 
 	useEffect(
-		() => {
-			setViewType(initialViewType);
-		},
+		() => { setViewType(initialViewType); },
 		[initialViewType],
 	);
 
@@ -185,7 +171,6 @@ function CogoOne() {
 						{...commonProps}
 					/>
 				</div>
-
 				{sendBulkTemplates ? (
 					<PortPairOrgFilters
 						setSelectedAutoAssign={setSelectedAutoAssign}
@@ -194,7 +179,6 @@ function CogoOne() {
 						{...commonProps}
 					/>
 				) : null}
-
 				{isEmpty(activeTab?.data)
 					? (
 						<div className={styles.empty_page}>
@@ -225,7 +209,6 @@ function CogoOne() {
 									setModalType={setModalType}
 								/>
 							</div>
-
 							{(
 								ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
 								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
@@ -259,6 +242,7 @@ function CogoOne() {
 						</>
 					)}
 				<AndroidApp />
+
 			</div>
 
 			<ModalComp

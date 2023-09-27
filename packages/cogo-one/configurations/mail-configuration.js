@@ -12,9 +12,9 @@ export const GMAIL_OPTIONS_CONFIG = [
 		hoverImage  : GLOBAL_CONSTANTS.image_url.email_inbox_icon,
 	},
 	{
-		label       : 'Draft',
-		value       : 'draft',
-		allowedTabs : ['outlook'],
+		label       : 'Drafts',
+		value       : 'drafts',
+		allowedTabs : ['outlook', 'firebase_emails'],
 		icon        : <IcMDocument
 			fill="#BDBDBD"
 			height={24}
@@ -53,8 +53,10 @@ export const GMAIL_OPTIONS_CONFIG = [
 export const getUserActiveMails = ({ userEmailAddress, viewType }) => {
 	const mailsToBeShown = VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.mails_to_be_shown || [];
 
+	const hidePersonalMail = VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.permissions?.hide_personal_mail || false;
+
 	return [
-		userEmailAddress,
+		...(hidePersonalMail ? [] : [userEmailAddress]),
 		...(mailsToBeShown || []),
 	];
 };

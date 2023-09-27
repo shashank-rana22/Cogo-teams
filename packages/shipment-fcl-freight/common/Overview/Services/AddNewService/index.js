@@ -23,7 +23,7 @@ function AddNewService({
 	const haveToUpsell = is_end_to_end ? (upsellableService.service_type === 'fcl_freight_local_service'
 		&& upsellableService?.trade_type !== primary_service?.trade_type
 		&& primary_service?.bl_category === 'hbl' && activeStakeholder === 'consignee_shipper_booking_agent'
-		&& isEmpty(servicesList)) : false;
+		&& isEmpty(servicesList)) && primary_service?.trade_type !== 'import' : false;
 
 	const [upsellModal, setUpsellModal] = useState(haveToUpsell);
 
@@ -88,7 +88,7 @@ function AddNewService({
 						className={styles.container}
 						onClick={closeModal}
 						tabIndex={0}
-						disabled={shipmentData?.is_job_closed}
+						disabled={shipmentData?.is_job_closed_financially}
 					>
 						<div className={styles.text}>{upsellableService.display_label}</div>
 						<IcMPlus />

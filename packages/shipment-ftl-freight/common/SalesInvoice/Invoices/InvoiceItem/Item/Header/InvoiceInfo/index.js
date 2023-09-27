@@ -2,9 +2,11 @@ import { Button, cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMRefresh, IcCError } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
+import useSendInvoiceToFinance from '../../../../../../../hooks/useSendInvoiceToFinance';
 import useUpdateShipmentInvoiceStatus from '../../../../../../../hooks/useUpdateShipmentInvoiceStatus';
 import ClickableDiv from '../../../../../../ClickableDiv';
 import Actions from '../Actions';
@@ -16,7 +18,7 @@ const OFFSET_VALUE = 2;
 const END_INDEX_FOR_CREDIT_SOURCE = -2;
 const START_INDEX_FOR_CREDIT_SOURCE = 0;
 const FALLBACK_VALUE = 0;
-const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
+const INVOICE_STATUS = ['reviewed', 'approved', 'revoked', 'finance_rejected'];
 const API_SUCCESS_MESSAGE = {
 	reviewed : 'Invoice sent for approval to customer!',
 	approved : 'Invoice approved!,',
@@ -43,12 +45,19 @@ function InvoiceInfo({
 		invoice_total_currency,
 		invoice_total_discounted,
 		live_invoice_number,
-	} = invoice;
+		processing : isProcessing = false,
+		id: invoiceId = '',
+		status = '',
+		is_revoked = false,
+		rejection_reason = '',
+	} = invoice || {};
 
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
-	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
-	&& invoice?.status === 'reviewed'
+	const { serial_id = '', is_job_closed = false, is_job_closed_financially = false } = shipment_data || {};
+
+	const showIrnTriggerForOldShipments = serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	&& status === 'reviewed'
 		&& !isEmpty(invoice?.data);
 
 	const creditSource = invoice?.credit_option?.credit_source?.split('_');
@@ -58,6 +67,7 @@ function InvoiceInfo({
 	};
 
 	const { apiTrigger = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
+	const { sendInvoiceToFinance = () => {} } = useSendInvoiceToFinance({ refetch: refetchAferApiCall });
 
 	const handleDownload = (invoiceLink) => {
 		window.open(invoiceLink);
@@ -154,14 +164,42 @@ function InvoiceInfo({
 			</div>
 
 			<div className={styles.invoice_container}>
-				{invoice.status
-					&& RESTRICT_REVOKED_STATUS.includes(invoice.status) ? (
-						<div className={styles.invoice_status}>
-							{startCase(invoice.status)}
-						</div>
+				{status
+					&& RESTRICT_REVOKED_STATUS.includes(status) ? (
+						<>
+							<div className={styles.invoice_status}>
+								{startCase(status)}
+							</div>
+							{(status === 'finance_rejected' && rejection_reason)
+								? (
+									<div className={styles.rejection_reason}>
+										<IcCError width={16} height={16} />
+										<span>{rejection_reason}</span>
+									</div>
+								) : null}
+						</>
 					) : null}
 
-				{!invoice.is_revoked && invoice.status !== 'finance_rejected' ? (
+				{isProcessing
+					? (
+						<div className={styles.reload}>
+							<div className={cl`${styles.payment_method} ${styles.processing}`}>Processing</div>
+							<Button
+								size="sm"
+								themeType="tertiary"
+								onClick={() => sendInvoiceToFinance({
+									payload: {
+										id: invoiceId,
+									},
+								})}
+							>
+								<IcMRefresh width={15} height={15} fill="#ee3425" />
+							</Button>
+						</div>
+					)
+					: null}
+
+				{(!is_revoked && status !== 'finance_rejected' && !isProcessing) ? (
 					<Actions
 						invoice={invoice}
 						bfInvoiceRefetch={bfInvoiceRefetch}
@@ -172,52 +210,52 @@ function InvoiceInfo({
 					/>
 				) : null}
 
-				{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id ? (
+				{(status === 'reviewed'
+					&& serial_id <= GLOBAL_CONSTANTS.invoice_check_id && !isProcessing) ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"
-							disabled={shipment_data?.is_job_closed}
+							disabled={is_job_closed}
 							onClick={() => handleClick('amendment_requested')}
 						>
 							Request Amendment
 						</Button>
 					) : null}
 
-				{showRequestCN ? (
+				{(showRequestCN && !isProcessing) ? (
 					<Button
 						style={{ marginTop: '4px' }}
 						size="sm"
-						disabled={shipment_data?.is_job_closed}
+						disabled={is_job_closed}
 						onClick={() => setAskNullify(true)}
 					>
 						Request CN
 					</Button>
 				) : null}
 
-				{invoice?.status === 'reviewed' ? (
+				{(status === 'reviewed' && !isProcessing) ? (
 					<Button
 						size="sm"
 						onClick={() => setShowOTPModal(true)}
-						disabled={shipment_data?.is_job_closed_financially}
+						disabled={is_job_closed_financially}
 					>
 						Send OTP for Approval
 					</Button>
 				) : null}
 
-				{!INVOICE_STATUS.includes(invoice.status) ? (
+				{(!INVOICE_STATUS.includes(status) && !isProcessing) ? (
 					<Button
 						size="sm"
 						onClick={() => setShowReview(true)}
 						themeType="accent"
 						disabled={disableMarkAsReviewed
-							|| invoice?.is_eta_etd || shipment_data?.is_job_closed_financially}
+							|| invoice?.is_eta_etd || is_job_closed_financially}
 					>
 						Mark as Reviewed
 					</Button>
 				) : null}
 
-				{invoice?.is_revoked && invoice?.status !== 'revoked' ? (
+				{(is_revoked && status !== 'revoked' && !isProcessing) ? (
 					<div className={styles.info_container}>Requested for Revoke</div>
 				) : null}
 			</div>
