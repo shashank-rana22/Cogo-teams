@@ -29,7 +29,7 @@ function joinNamesWithCount({ modifiedGroupMembers = [] }) {
 	return `${firstTwoNames} +${extraCount}`;
 }
 
-const createGlobalRoom = async ({ data, firestore = {} }) => {
+const createGlobalRoom = async ({ data, firestore = {}, hashString = '' }) => {
 	const {
 		group_members_ids = [],
 		group_members_data = [],
@@ -43,8 +43,9 @@ const createGlobalRoom = async ({ data, firestore = {} }) => {
 			group_members_ids,
 			group_members_data,
 			group_members_count,
-			created_at : Date.now(),
-			updated_at : Date.now(),
+			created_at                : Date.now(),
+			updated_at                : Date.now(),
+			group_members_hash_string : hashString,
 		};
 
 		const res = await addDoc(globalRoomsCollection, globalRoomPayload);
@@ -110,6 +111,7 @@ const getOrPublishDraft = async ({
 		group_name = '',
 		is_group = false,
 		id = '',
+		group_members_hash_string = '',
 	} = data || {};
 
 	try {
@@ -117,7 +119,7 @@ const getOrPublishDraft = async ({
 			return group_id;
 		}
 
-		const groupId = await createGlobalRoom({ data, firestore });
+		const groupId = await createGlobalRoom({ data, firestore, hashString: group_members_hash_string });
 		const modifiedGroupMembersIds = group_members_ids?.filter((eachUserId) => eachUserId !== loggedInAgentId) || [];
 
 		const modifiedGroupMembers = group_members_data?.filter((eachUser) => eachUser?.id !== loggedInAgentId) || [];
