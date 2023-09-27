@@ -40,7 +40,7 @@ function ShowModal({
 		fetchCreateDataApi({ radioValue: radioWatch().radio });
 	};
 	return (
-		<Modal show="true" position="primary sm" onClose={() => closeModal()}>
+		<Modal show showCloseIcon position="primary sm" onClose={() => closeModal()}>
 			<div className={styles.styled_flex}>
 				<div className={styles.styled_text}>
 					Are you sure you want to allocate this budget worth

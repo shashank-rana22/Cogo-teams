@@ -50,7 +50,6 @@ const useGetPromoAllocationDetail = ({ selectedDetails = {}, filterValue = {} })
 		loading,
 		promoAllocationList: List,
 		paginationData,
-		pagination,
 		setPagination,
 		refetch,
 	};

@@ -62,7 +62,6 @@ function BudgetAllocationTab() {
 		loading,
 		promoBudgetList,
 		paginationData,
-		pagination,
 		setPagination,
 		refetch,
 	} = useListPromoBudgetAllocation({ activeTab, role });
@@ -73,7 +72,6 @@ function BudgetAllocationTab() {
 		promoBudgetList,
 		paginationData,
 		setPagination,
-		pagination,
 		activeTab,
 		loading,
 		refetch,

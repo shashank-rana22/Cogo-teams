@@ -37,7 +37,7 @@ const useListPromoBudgetAllocation = ({ activeTab = 'active_budget', role = '' }
 		} catch (error) {
 			Toast.error(error);
 		}
-	}, [trigger, setList, setPaginationData]);
+	}, [trigger]);
 
 	const refetch = () => {
 		setPagination({ page: 1 });
@@ -49,14 +49,13 @@ const useListPromoBudgetAllocation = ({ activeTab = 'active_budget', role = '' }
 	}, [pagination.page, activeTab, role, ListPromoBudget]);
 
 	useEffect(() => {
-		setPagination({ ...pagination, page: 1 });
-	}, [role, setPagination, pagination]);
+		setPagination((p) => ({ ...p, page: 1 }));
+	}, [role]);
 
 	return {
 		loading,
 		promoBudgetList: List,
 		paginationData,
-		pagination,
 		setPagination,
 		refetch,
 	};

@@ -12,10 +12,11 @@ function BudgetAllocate({
 	promoBudgetList = [],
 	paginationData = {},
 	setPagination = () => {},
-	pagination = { page: 1 },
 	loading = true,
 	refetch = () => {},
 }) {
+	const { page_limit = 10, total_count = 1, page = 1 } = paginationData || {};
+
 	return (
 		<div className={styles.container}>
 			<StyledTableComponent
@@ -33,11 +34,11 @@ function BudgetAllocate({
 			<div className={styles.pagination_container}>
 				<Pagination
 					type="table"
-					pageSize={paginationData.page_limit}
-					currentPage={paginationData?.page}
-					totalItems={paginationData?.total_count}
+					pageSize={page_limit}
+					currentPage={page}
+					totalItems={total_count}
 					onPageChange={(val) => {
-						setPagination({ ...pagination, page: val });
+						setPagination((p) => ({ ...p, page: val }));
 					}}
 				/>
 			</div>

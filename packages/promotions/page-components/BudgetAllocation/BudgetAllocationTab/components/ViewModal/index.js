@@ -31,10 +31,11 @@ function ViewModal({
 		loading,
 		promoAllocationList,
 		paginationData = {},
-		pagination,
 		setPagination,
 		refetch,
 	} = useGetPromoAllocationDetail({ selectedDetails, filterValue });
+
+	const { page_limit = 10, total_count = 1, page = 1 } = paginationData || {};
 
 	useEffect(() => {
 		setFilterValue(agent_id || '');
@@ -50,6 +51,7 @@ function ViewModal({
 		<Modal
 			show={showViewModal}
 			onClose={closeModal}
+			showCloseIcon
 			onOuterClick={closeModal}
 			className="primary xl"
 			style={{ width: '80%' }}
@@ -82,11 +84,11 @@ function ViewModal({
 			<div className={styles.pagination_container}>
 				<Pagination
 					className="md"
-					pageLimit={paginationData.page_limit}
-					pagination={paginationData.page}
-					total={paginationData.total_count}
+					pageSize={page_limit}
+					currentPage={page}
+					totalItems={total_count}
 					onPageChange={(val) => {
-						setPagination({ ...pagination, page: val });
+						setPagination((p) => ({ ...p, page: val }));
 					}}
 				/>
 			</div>

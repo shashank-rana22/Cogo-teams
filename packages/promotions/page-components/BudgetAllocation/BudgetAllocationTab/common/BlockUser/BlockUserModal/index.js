@@ -18,6 +18,7 @@ function BlockUserModal({ block, setBlock, item, refetch }) {
 			position="primary sm"
 			onOuterClick={onClose}
 			onClose={onClose}
+			showCloseIcon
 		>
 			<div className={styles.styled_flex}>
 				<div className={styles.styled_text}>
