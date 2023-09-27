@@ -26,8 +26,7 @@ function Ocean() {
 	});
 
 	const [filters, setFilters] = useState({
-		is_job_closed : 'no',
-		page          : 1,
+		page: 1,
 	});
 
 	const { data, loading, refetch } = useListAuthorityDeskShipments({ ...tabsState, filters });

@@ -1,0 +1,7 @@
+.btn_align {
+	display: flex;
+
+	button:first-child {
+		margin-right: 8px;
+	}
+}

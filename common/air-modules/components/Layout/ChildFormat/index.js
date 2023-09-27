@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
-import React from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useEffect } from 'react';
 
 import Child from './child';
 import styles from './styles.module.css';
@@ -19,6 +20,13 @@ function FieldArray({
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({ control, name });
+
+	useEffect(() => {
+		if (isEmpty(fields)) {
+			append({});
+		}
+	}, [append, fields]);
+
 	return (
 		<div className={styles.child}>
 			{fields.map((field, index) => (

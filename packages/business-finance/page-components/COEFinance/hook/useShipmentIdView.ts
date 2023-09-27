@@ -22,10 +22,12 @@ interface UseSelectorProps {
 interface AllParams {
 	shipmentId?:string;
 	pendingApproval?: string;
+	jobNumberByQuery?: string;
 }
 
 const useShipmentIdView = (allParams?: {}) => {
-	const { ...params }: AllParams = allParams || {};
+	const { jobNumberByQuery, ...params }: AllParams = allParams || {};
+
 	const { authorizationparameters } = useSelector(
 		({ profile }: UseSelectorProps) => ({
 			authorizationparameters: profile?.authorizationparameters,
@@ -43,20 +45,20 @@ const useShipmentIdView = (allParams?: {}) => {
 	const listAPi = (restFilters: FilterTypes, currentPage: DataType) => {
 		const allFilters = {
 			...(restFilters || {}),
-			...allParams,
+			...params,
 		};
 
-		const finalFiletrs: any = {};
+		const FINAL_FILTERS: any = {};
 		Object.keys(allFilters).forEach((filter) => {
 			if (allFilters[filter]) {
-				finalFiletrs[filter] = allFilters[filter];
+				FINAL_FILTERS[filter] = allFilters[filter];
 			}
 		});
 
 		return trigger({
 			params: {
 				...allFilters,
-				shipmentId  : params?.shipmentId === '' ? undefined : params?.shipmentId,
+				shipmentId  : params?.shipmentId || jobNumberByQuery,
 				jobState    : restFilters?.jobState === '' ? undefined : restFilters?.jobState,
 				serviceType : restFilters?.serviceType === '' ? undefined : restFilters?.serviceType,
 				pageIndex   : currentPage,

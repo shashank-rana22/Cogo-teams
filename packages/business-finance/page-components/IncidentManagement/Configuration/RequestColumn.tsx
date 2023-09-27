@@ -18,6 +18,8 @@ export const requestColumn = ({
 	isAscendingActive,
 	getIncidentData,
 	t,
+	detailsModal = {},
+	setDetailsModal = () => {},
 }) => [
 	{
 		Header   : t('incidentManagement:incident_id_header'),
@@ -157,6 +159,17 @@ export const requestColumn = ({
 		Header   : t('incidentManagement:request_sub_type_header'),
 		accessor : 'incidentSubtype',
 		id       : 'request_sub_type',
+		Cell     : ({ row: { original } }) => {
+			const { incidentSubtype = '' } = original || {};
+			return (
+				<Tooltip
+					interactive
+					content={(incidentSubtype?.replace(/_/g, ' '))}
+				>
+					<div className={styles.wrapper}>{(incidentSubtype?.replace(/_/g, ' '))}</div>
+				</Tooltip>
+			);
+		},
 	},
 	{
 		Header   : t('incidentManagement:source_header'),
@@ -215,7 +228,12 @@ export const requestColumn = ({
 	},
 	{
 		accessor: (row) => (
-			<AccessorComponent row={row} getIncidentData={getIncidentData} />
+			<AccessorComponent
+				row={row}
+				getIncidentData={getIncidentData}
+				detailsModal={detailsModal}
+				setDetailsModal={setDetailsModal}
+			/>
 		),
 		id: 'action',
 	},

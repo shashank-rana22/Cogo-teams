@@ -66,6 +66,7 @@ function useReplyMail(mailProps) {
 		userName = '',
 		userSharedMails = [],
 		saveDraft = () => {},
+		setMailAttachments = () => {},
 	} = mailProps;
 
 	const {
@@ -81,18 +82,27 @@ function useReplyMail(mailProps) {
 
 	const replyMailApi = async (payload) => {
 		try {
-			const { roomId, messageId } = await saveDraft();
+			let draftRoomData = {};
+
+			if (buttonType === 'send_mail') {
+				draftRoomData = await saveDraft();
+			}
+
+			const { roomId = '', messageId = '' } = draftRoomData || {};
 
 			const res = await trigger({
 				data: getPayload({ payload, userId, userName, userSharedMails, roomId }),
 			});
-			await saveDraft({
-				communication_id     : res?.data?.id,
-				newComposeRoomId     : roomId,
-				newComposeDraftMsgId : messageId,
-			});
+			if (buttonType === 'send_mail') {
+				await saveDraft({
+					communication_id     : res?.data?.id,
+					newComposeRoomId     : roomId,
+					newComposeDraftMsgId : messageId,
+				});
+			}
 			Toast.success('Mail Sent Successfully.');
 			setEmailState(DEFAULT_EMAIL_STATE);
+			setMailAttachments([]);
 			setButtonType('');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something Went Wrong');

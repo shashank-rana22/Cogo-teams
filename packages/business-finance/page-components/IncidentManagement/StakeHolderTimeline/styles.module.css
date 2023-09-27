@@ -78,4 +78,10 @@
 .level_status_pill {
 	margin: 0;
 	margin-left: 4px;
+
+	:global {
+		.ui_pill_text {
+			font-weight: 600;
+		}
+	}
 }

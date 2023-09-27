@@ -1,0 +1,55 @@
+.container {
+	width: calc(90%);
+}
+
+.sub_container {
+	padding: 20px 40px 60px;
+	background-color: white;
+	border-radius: 6px;
+}
+
+.header_wrap {
+	display: flex;
+	justify-content: space-between;
+}
+
+.heading {
+	font-size: 22px;
+	font-weight: 700;
+	line-height: 26px;
+	color: #333;
+}
+
+.text {
+	margin-top: 30px;
+	margin-bottom: 24px;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 16px;
+	letter-spacing: 0.02em;
+}
+
+.stepper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 500px;
+	min-height: 25px;
+}
+
+.stepper_container {
+	position: relative;
+	left: -20px;
+}
+
+.margin_button {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+.heading_button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

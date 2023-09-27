@@ -295,7 +295,7 @@ function RecuringModal({ id = '', refetch = () => {}, row, isEditable = true }) 
 								onChange={(value: string) => setRemarks(value)}
 								style={{
 									width        : '700',
-									height       : '100px',
+									height       : '80px',
 									marginBottom : '12px',
 								}}
 							/>

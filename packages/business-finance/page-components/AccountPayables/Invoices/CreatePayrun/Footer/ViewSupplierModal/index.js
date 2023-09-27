@@ -3,7 +3,6 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import List from '../../../../../commons/List/index.tsx';
-import useDeleteExcludePayrun from '../../../hooks/useDeleteExcludePayrun';
 import SUPPLIER_CONFIG from '../../Configurations/supplierConfig.json';
 import CN_CONFIG from '../../Configurations/viewCnConfig.json';
 
@@ -42,16 +41,12 @@ function ViewSupplierModal({
 	suppliers = {},
 	viewSupplier = false,
 	showViewSupplier = () => { },
-	refetch = () => {},
 	setApiData = () => {},
 	setFilters = () => {},
-	type = '',
+	onExclude = () => {},
+	loading = false,
 }) {
 	const [showId, setShowId] = useState(null);
-	const {
-		onExclude = () => {},
-		loading = false,
-	} = useDeleteExcludePayrun({ refetch, setApiData, apiData: suppliers, type });
 
 	const renderHeaderCheckbox = () => GetTableHeaderCheckbox({ apiData: suppliers, loading, setApiData });
 
