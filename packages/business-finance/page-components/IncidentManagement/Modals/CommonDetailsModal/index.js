@@ -5,36 +5,30 @@ import AdvanceSecurityDeposit from '../AdvanceSecurityDepositDetails';
 import AdvanceSecurityDepositRefund from '../AdvanceSecurityRefundDetails';
 import BankAccountDetails from '../BankAccountDetails';
 import ConcorDetails from '../ConcorPDADetails';
-import ICJV_Details from '../ICJV_Details';
 import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
-import JvDetails from '../JVDetails';
 import NonRecuring from '../NonRecuringDetails';
 import PaymentDetails from '../PaymentDetails';
 import RecuringDetails from '../RecuringDetails';
 import RequestCNDetails from '../RequestCNDetails';
 import RevokeInvoiceDetails from '../RevokeInvoiceDetails';
-import Settlement from '../SettlementDetails';
 import SezApprovalDetails from '../SezApprovalDetails';
 import TdsApprovalDetails from '../TdsApprovalDetails';
 
 import styles from './styles.module.css';
 
 const TYPE_COMPONENT_MAPPING = {
-	BANK_DETAIL_APPROVAL                   : BankAccountDetails,
-	TDS_APPROVAL                           : TdsApprovalDetails,
-	JOURNAL_VOUCHER_APPROVAL               : JvDetails,
-	SETTLEMENT_APPROVAL                    : Settlement,
-	INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL : ICJV_Details,
-	PAYMENT_CONFIRMATION_APPROVAL          : PaymentDetails,
-	RECURRING_EXPENSE_APPROVAL             : RecuringDetails,
-	OVERHEAD_APPROVAL                      : NonRecuring,
-	SEZ_APPROVAL                           : SezApprovalDetails,
-	CONCOR_PDA_APPROVAL                    : ConcorDetails,
-	REVOKE_INVOICE                         : RevokeInvoiceDetails,
-	ADVANCE_SECURITY_DEPOSIT               : AdvanceSecurityDeposit,
-	ADVANCE_SECURITY_DEPOSIT_REFUND        : AdvanceSecurityDepositRefund,
-	ISSUE_CREDIT_NOTE                      : RequestCNDetails,
-	JOB_OPEN                               : JobOpenDetailsModal,
+	BANK_DETAIL_APPROVAL            : BankAccountDetails,
+	TDS_APPROVAL                    : TdsApprovalDetails,
+	PAYMENT_CONFIRMATION_APPROVAL   : PaymentDetails,
+	RECURRING_EXPENSE_APPROVAL      : RecuringDetails,
+	OVERHEAD_APPROVAL               : NonRecuring,
+	SEZ_APPROVAL                    : SezApprovalDetails,
+	CONCOR_PDA_APPROVAL             : ConcorDetails,
+	REVOKE_INVOICE                  : RevokeInvoiceDetails,
+	ADVANCE_SECURITY_DEPOSIT        : AdvanceSecurityDeposit,
+	ADVANCE_SECURITY_DEPOSIT_REFUND : AdvanceSecurityDepositRefund,
+	ISSUE_CREDIT_NOTE               : RequestCNDetails,
+	JOB_OPEN                        : JobOpenDetailsModal,
 };
 function CommonDetailsModal({
 	setDetailsModal = () => {},

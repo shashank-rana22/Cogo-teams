@@ -15,10 +15,14 @@
 
 .container {
 	width: 49%;
-	padding: 40px  25px;
+	padding: 40px 0;
 	line-height: normal;
 	background: white;
 	border-radius: 10px;
+}
+
+.remarks_div {
+	margin: 0 24px;
 }
 
 .info_box {
@@ -40,7 +44,10 @@
 	display: flex;
 	gap: 12px;
 	justify-content: flex-end;
-	margin: 80px 18px 18px;
+	padding: 12px;
+	margin: 36% 0 0;
+	border-radius: 0 0 10px 10px;
+	box-shadow: 0 0 8px 0 #2c3e5033;
 }
 
 .heading {
@@ -68,7 +75,7 @@
 
 .flex {
 	display: flex;
-	margin: 24px 0;
+	margin: 24px;
 }
 
 .large {

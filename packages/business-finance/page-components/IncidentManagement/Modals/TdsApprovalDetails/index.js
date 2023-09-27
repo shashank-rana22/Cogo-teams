@@ -17,6 +17,7 @@ function TdsApprovalDetails({ row = {}, setDetailsModal = () => {}, refetch = ()
 		createdBy = {},
 		remark = '', data : { tdsRequest = {} },
 	} = row || {};
+	console.log(row);
 	const docUrl = tdsRequest?.documentUrls?.[GLOBAL_CONSTANTS.zeroth_index];
 	const level0 = { ...createdBy, remark };
 	return (

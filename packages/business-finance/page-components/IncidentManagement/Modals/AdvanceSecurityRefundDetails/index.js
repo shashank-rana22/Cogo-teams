@@ -1,5 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
@@ -10,13 +10,16 @@ import Details from './Details';
 import styles from './styles.module.css';
 
 function AdvanceSecurityDepositRefundDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
-	const { level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark = '' } = row || {};
+	const {
+		level3 = {}, level2 = {}, level1 = {}, createdBy = {},
+		remark = '', data: { advanceSecurityDepositRefund = {} },
+	} = row || {};
+	const docUrl = advanceSecurityDepositRefund?.uploadProof?.[GLOBAL_CONSTANTS.zeroth_index];
 	const level0 = { ...createdBy, remark };
-	const { t } = useTranslation(['incidentManagement']);
 	return (
 		<div className={styles.containerDisplay}>
 			<div className={styles.heading}>
-				{t('incidentManagement:shipment_re_open_request')}
+				Advance Container Security Deposit Refund
 			</div>
 			{
 			(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
@@ -32,7 +35,7 @@ function AdvanceSecurityDepositRefundDetails({ row = {}, setDetailsModal = () =>
 
 			</div>
 			<div className={styles.container_view}>
-				<ViewPdf row={row} />
+				<ViewPdf docUrl={docUrl} />
 				<Details
 					row={row}
 					setDetailsModal={setDetailsModal}
