@@ -1,11 +1,14 @@
-import { RatingComponent, Input } from '@cogoport/components';
+import { RatingComponent, Input, Button, Checkbox } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-const getColumns = ({ rating, setRating, feedback, setFeedback, props }) => {
+const getColumns = ({
+	rating, setRating, feedback, setFeedback, props, handleAllSelect,
+	handleSelectId, selectedEmployees, list, handleRatingUpdate,
+}) => {
 	const isVerticalHead = props?.level === 'vertical_head' && props?.activeTab === 'vertical_head';
 
-	return [
+	const columns = [
 		{
 			Header   : 'NAME',
 			accessor : (item) => (
@@ -21,6 +24,7 @@ const getColumns = ({ rating, setRating, feedback, setFeedback, props }) => {
 					</div>
 				</div>
 			),
+			id: 'name',
 		},
 		{
 			Header   : 'RATING',
@@ -36,6 +40,7 @@ const getColumns = ({ rating, setRating, feedback, setFeedback, props }) => {
 					disabled={rating?.[item?.id]?.disabled && !isVerticalHead}
 				/>
 			),
+			id: 'rating',
 		},
 		{
 			Header   : 'FEEDBACK',
@@ -50,8 +55,33 @@ const getColumns = ({ rating, setRating, feedback, setFeedback, props }) => {
 					disabled={feedback?.[item?.id]?.disabled && !isVerticalHead}
 				/>
 			),
+			id: 'feedback',
 		},
 	];
+
+	const checkboxCol = {
+		Header: <Checkbox
+			checked={list.length === selectedEmployees.length}
+			onChange={(e) => handleAllSelect(e)}
+		/>,
+		accessor: (item) => (
+			<Checkbox
+				checked={selectedEmployees.some((val) => val.id === item.id)}
+				onChange={(e) => handleSelectId(e, item)}
+			/>
+		),
+		id: 'select_all',
+	};
+
+	const actionCol = {
+		Header   : 'Action',
+		accessor : (item) => (
+			<Button onClick={() => handleRatingUpdate(item)}>Update</Button>
+		),
+		id: 'updated_employee',
+	};
+
+	return isVerticalHead ? [checkboxCol, ...columns, actionCol] : columns;
 };
 
 export default getColumns;

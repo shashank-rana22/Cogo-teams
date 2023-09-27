@@ -22,7 +22,8 @@ const useMonthlyRating = ({ props }) => {
 						level: props?.activeTab === 'functional_manager'
 							? 'functional_manager' : props?.level,
 						page,
-						filters: {
+						page_limit : 30,
+						filters    : {
 							department_id   : department || undefined,
 							office_location : location || undefined,
 							q               : search || undefined,

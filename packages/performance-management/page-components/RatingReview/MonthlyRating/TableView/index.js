@@ -1,14 +1,15 @@
-import { Input, Select, Table, Button, Pagination, Modal } from '@cogoport/components';
+import { Input, Select, Table, Button, Pagination, Modal, Checkbox } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMAppSearch, IcMArrowRotateRight, IcMError } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import EmptyState from './EmptyState';
 import getColumns from './getColumns';
 import styles from './styles.module.css';
+import UpdateRating from './UpdateRating';
 import useTableView from './useTableView';
 
 const india_country_id = GLOBAL_CONSTANTS.country_ids.IN;
@@ -20,7 +21,7 @@ const vietnam_constants = getCountryConstants({ country_id: vietnam_country_id }
 const OFFICE_LOCATIONS = [...india_constants.office_locations, ...vietnam_constants.office_locations];
 
 const REPORTING_CITY_OPTIONS = OFFICE_LOCATIONS.map((location) => (
-	{ label: startCase(location), value: location }));
+	{ label: startCase(location), value: startCase(location) }));
 
 function TableView({
 	list = [],
@@ -39,6 +40,9 @@ function TableView({
 	setShowUnrated = () => {},
 	refetch = () => {},
 }) {
+	const [openEditModal, setOpenEditModal] = useState(false);
+	const isVerticalHead = props?.activeTab === 'vertical_head' && props?.level === 'vertical_head';
+
 	const {
 		rating,
 		setRating,
@@ -48,7 +52,34 @@ function TableView({
 		setShowModal,
 		onSubmitFinalRating,
 		updateApiLoading,
-	} = useTableView({ props, list, refetch });
+		handleAllSelect,
+		handleSelectId,
+		selectedEmployees,
+		setSelectedEmployees,
+		setIsAllSelected,
+		isAllSelected,
+	} = useTableView({ props, list, refetch, isVerticalHead, setOpenEditModal });
+
+	const handleRatingUpdate = (item) => {
+		const ratingData = {
+			id                   : item.id,
+			rating               : rating?.[item.id]?.value,
+			comments             : feedback?.[item.id]?.value || '',
+			reporting_manager_id : item.reporting_manager_id,
+		};
+		setSelectedEmployees([ratingData]);
+		setOpenEditModal(true);
+	};
+
+	const handleAllEmployeeSelect = (e) => {
+		setSelectedEmployees([]);
+		setIsAllSelected(e.target.checked);
+	};
+
+	const onHide = () => {
+		setOpenEditModal(false);
+		setSelectedEmployees([]);
+	};
 
 	const columns = getColumns({
 		rating,
@@ -56,6 +87,11 @@ function TableView({
 		feedback,
 		setFeedback,
 		props,
+		handleAllSelect,
+		handleSelectId,
+		selectedEmployees,
+		list,
+		handleRatingUpdate,
 	});
 
 	const { page_limit, total_count, total_unrated_employees } = paginationData || {};
@@ -94,6 +130,16 @@ function TableView({
 				/>
 			</div>
 
+			{isVerticalHead && !isEmpty(list) && (
+				<div className={styles.checkbox_container}>
+					<Checkbox
+						label={`Select All ${total_count} Employees`}
+						checked={isAllSelected}
+						onChange={(e) => handleAllEmployeeSelect(e)}
+					/>
+				</div>
+			)}
+
 			<div className={styles.table_container}>
 				{isEmpty(list) && !loading
 					? <EmptyState />
@@ -126,14 +172,19 @@ function TableView({
 					</div>
 				</div>
 
-				<Button onClick={() => setShowModal(true)}>
-					Send Ratings
-					<IcMArrowRotateRight
-						height="16px"
-						width="16px"
-						style={{ marginLeft: 4 }}
-					/>
-				</Button>
+				{!isEmpty(list) && (
+					<Button
+						onClick={() => setShowModal(true)}
+						disabled={isVerticalHead && !isAllSelected && isEmpty(selectedEmployees)}
+					>
+						{`${isVerticalHead ? 'Publish' : 'Send'} Ratings`}
+						<IcMArrowRotateRight
+							height="16px"
+							width="16px"
+							style={{ marginLeft: 4 }}
+						/>
+					</Button>
+				)}
 			</div>
 
 			<Modal
@@ -164,7 +215,7 @@ function TableView({
 
 						<Button
 							themeType="accent"
-							onClick={onSubmitFinalRating}
+							onClick={() => onSubmitFinalRating({ isPublish: isVerticalHead })}
 							disabled={updateApiLoading}
 						>
 							Yes, Proceed
@@ -172,6 +223,14 @@ function TableView({
 					</div>
 				</Modal.Footer>
 			</Modal>
+			{openEditModal && (
+				<UpdateRating
+					show={openEditModal}
+					onHide={onHide}
+					onSubmitFinalRating={onSubmitFinalRating}
+					loading={updateApiLoading}
+				/>
+			) }
 		</div>
 	);
 }
