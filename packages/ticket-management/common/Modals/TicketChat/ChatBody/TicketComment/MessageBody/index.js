@@ -9,15 +9,13 @@ import styles from './styles.module.css';
 
 const URL_ARRAY_LAST_ELEMENT = 1;
 
-function ShowMessage({ message = '', restData = {} }) {
-	let newMessage = message.replace('<', '&lt;');
+function ShowMessage({ restData = {} }) {
+	let newMessage = '';
 
-	Object.keys(restData || {}).forEach((itm) => {
-		if (itm === 'MessageData') {
-			newMessage += '';
-		} else {
-			newMessage += `<br/>${startCase(itm)}: ${restData[itm]}`;
-		}
+	const AdditionalData = restData?.AdditionalFields || {};
+
+	Object.keys(AdditionalData || {}).forEach((itm) => {
+		newMessage += `<br/><b>${startCase(itm)}</b>: ${AdditionalData[itm]}`;
 	});
 
 	return (
@@ -45,6 +43,7 @@ function MessageBody({ message = '', mediaUrls = [], restData = {} }) {
 				})}
 			</div>
 			<div className={styles.message_section}>
+				{message && <div>{message}</div>}
 				<ShowMessage message={message} restData={restData} />
 			</div>
 		</>

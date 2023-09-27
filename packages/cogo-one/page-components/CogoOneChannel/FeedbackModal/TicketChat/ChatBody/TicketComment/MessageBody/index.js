@@ -43,7 +43,7 @@ function MessageBody({ message = '', mediaUrls = [], restData = {} }) {
 				})}
 			</div>
 			<div className={styles.message_section}>
-				<div>{message}</div>
+				{message && <div>{message}</div>}
 				<ShowMessage message={message} restData={restData} />
 			</div>
 		</>
