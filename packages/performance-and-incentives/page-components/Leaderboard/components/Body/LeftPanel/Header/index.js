@@ -4,11 +4,13 @@ import { IcMArrowRight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
+import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../../../constants/leaderboard-reporttype-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../constants/leaderboard-viewtype-constants';
 import getEntityNameById from '../../../../../../utils/get-entity-name-by-id';
 
 import styles from './styles.module.css';
 
+const { AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 const { ADMIN, OWNER } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 const MIN_LENGTH = 1;
@@ -32,7 +34,7 @@ function Header(props) {
 			...prev,
 			filters: {
 				...prev.filters,
-				...(!isExpanded ? { report_type: 'kam_report', report_view_type: 'kam_wise' } : reportDetails),
+				...(!isExpanded ? { report_type: AGENT_REPORT, report_view_type: 'kam_wise' } : reportDetails),
 			},
 		}));
 	};
@@ -54,7 +56,7 @@ function Header(props) {
 
 				{((incentive_leaderboard_viewtype === ADMIN
 				|| (incentive_leaderboard_viewtype === OWNER && levelStack?.length === MIN_LENGTH))
-				&& (currLevel[GLOBAL_CONSTANTS.zeroth_index] !== 'kam_report')) ? (
+				&& (currLevel[GLOBAL_CONSTANTS.zeroth_index] !== AGENT_REPORT)) ? (
 					<Button size="md" themeType="linkUi" onClick={handleClick}>
 						{isExpanded ? 'Collapse' : 'Expand All'}
 						{' '}

@@ -66,6 +66,7 @@ function List(props) {
 						<div className={styles.ellipsis_container}>
 							{[...Array(DOTS).keys()].map((key) => <span key={key} className={styles.dot}>.</span>)}
 						</div>
+
 						<ListItem
 							listItem={currentUserData}
 							viewType={viewType}
