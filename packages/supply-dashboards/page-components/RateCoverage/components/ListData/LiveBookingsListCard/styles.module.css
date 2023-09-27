@@ -11,17 +11,6 @@
 	color: #4f4f4f;
 }
 
-.price_color {
-	color: #ee3425;
-}
-
-.margin_line {
-	width: 100%;
-	margin: 14px 0 10px;
-	color: #bdbdbd;
-	border-top: 1px dashed;
-}
-
 .top_left_details {
 	display: flex;
 	align-items: center;
@@ -46,25 +35,16 @@
 	border-right: 1px dashed #bdbdbd;
 }
 
-.pill_container {
-	display: flex;
-	align-items: center;
-}
-
-.pill {
-	margin-right: 20px;
-}
-
 .body {
 	display: flex;
 	align-items: center;
-	margin-top: 20px;
+	justify-content: space-between;
+	margin-top: 14px;
 }
 
 .port_details {
 	display: flex;
 	align-items: center;
-	width: 45%;
 }
 
 .row {
@@ -90,36 +70,4 @@
 
 .port_code_color {
 	color: #f2761b;
-}
-
-.shipment_details {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	width: 65%;
-}
-
-.content {
-	display: flex;
-	padding: 8px;
-	font-size: 12px;
-	color: #828282;
-}
-
-.content_value {
-	margin-left: 6px;
-	font-weight: 600;
-	color: #221f20;
-}
-
-.footer {
-	display: flex;
-	justify-content: space-between;
-}
-
-.footer_content {
-	display: flex;
-	justify-content: space-between;
-	font-size: 12px;
-	color: #828282;
 }

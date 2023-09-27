@@ -10,15 +10,11 @@ function LiveBookingsListCard() {
 			<div className={styles.head}>
 				<div>Booked On : 12 Aug 2023 </div>
 				<div>
-					Main Service Indicative Price :
-					{' '}
-					<span className={styles.price_color}>$1200</span>
-					{' '}
+					Created At : 12 Aug 2023, 10:20AM
 				</div>
 			</div>
-			<div className={styles.margin_line} />
 
-			<div className={styles.head}>
+			<div className={styles.body}>
 				<div className={styles.top_left_details}>
 					<div className={styles.service_icon}>
 						<div style={{ margin: '5px 5px 0 0' }}><IcMFcl width="20px" height="20px" /></div>
@@ -29,34 +25,21 @@ function LiveBookingsListCard() {
 							Import
 						</Pill>
 					</div>
-					<div className={styles.vertical_line} />
 					<div>
 						<Pill size="md" color="blue">
-							Shipment Id : 12345
+							Shipping Line : Maersk
 						</Pill>
 					</div>
 				</div>
-				<div className={styles.pill_container}>
-					<div className={styles.pill}>
-						<Pill size="md" color="blue">
-							20ft
-						</Pill>
-						<Pill size="md" color="blue">
-							1 Container
-						</Pill>
-						<Pill size="md" color="blue">
-							General
-						</Pill>
-						<Pill size="md" color="blue">
-							Inco-FOB
-						</Pill>
-						<Pill size="md" color="blue">
-							18 MT
-						</Pill>
-						<Pill size="md" color="blue">
-							Collect
-						</Pill>
-					</div>
+				<div>
+					<Pill size="md" color="orange">
+						TID: 12345
+					</Pill>
+				</div>
+				<div>
+					<Pill size="md" color="blue">
+						Assigned to: Himanshu Gupta
+					</Pill>
 				</div>
 			</div>
 
@@ -103,68 +86,19 @@ function LiveBookingsListCard() {
 					</div>
 				</div>
 				<div className={styles.vertical_line} />
-				<div className={styles.shipment_details}>
-					<div className={styles.content}>
-						Cargo Ready :
-						<div className={styles.content_value}>29 Aug 2023</div>
-					</div>
-					<div className={styles.content}>
-						Destination Detention Free Days :
-						<div className={styles.content_value}>3</div>
-					</div>
-					<div className={styles.content}>
-						BL Type :
-						<div className={styles.content_value}>SOB</div>
-					</div>
-					<div className={styles.content}>
-						Commodity Description :
-						<div className={styles.content_value}>DSF</div>
-					</div>
-					<div className={styles.content}>
-						Expected Departure :
-						<div className={styles.content_value}>31 Aug 2023</div>
-					</div>
-					<div className={styles.content}>
-						Transit Time:
-						<div className={styles.content_value}>36 Days</div>
-					</div>
-					<div className={styles.content}>
-						Preferred Shipping :
-						<div className={styles.content_value}> Maersk</div>
-					</div>
-					<div className={styles.content}>
-						View More
-					</div>
-				</div>
-			</div>
-			<div className={styles.margin_line} />
 
-			<div className={styles.footer}>
-				<div className={styles.footer_content}>
-					<div className={styles.content}>
-						Supplier :
-						{' '}
-						<span className={styles.content_value}>JS International Korea</span>
-					</div>
-					<div className={styles.content}>
-						Customer :
-						<span className={styles.content_value}>Bhilosa Industries Pvt Ltd</span>
-
-					</div>
-					<div className={styles.content}>
-						Shiping Line :
-						<span className={styles.content_value}> N/A</span>
-
-					</div>
-					<div className={styles.content}>
-						Status :
-						<span className={styles.content_value}>Not Reverted</span>
-						{' '}
-					</div>
+				<div className={styles.top_left_details}>
+					<div><Pill>40 ft HC</Pill></div>
+					<div><Pill>Standard (Dry)</Pill></div>
+					<div><Pill>White Goods</Pill></div>
 				</div>
 
-				<Button size="sm" style={{ marginTop: '5px' }}>Reverted Price</Button>
+				<div className={styles.vertical_line} />
 
+				<div className={styles.top_left_details}>
+					<Button size="sm" style={{ marginRight: '10px' }} themeType="secondary">View Details</Button>
+					<Button size="sm">Add Rate</Button>
+				</div>
 			</div>
 		</div>
 	);
