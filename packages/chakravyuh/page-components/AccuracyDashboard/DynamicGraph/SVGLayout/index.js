@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import anime from 'animejs/lib/anime.es';
 import { useRef, useEffect } from 'react';
 
@@ -36,8 +37,13 @@ function SVGLayout({ paths = [], bounds = [], mode = '' }) {
 		if (svgRef.current && mode !== 'background') {
 			const svgPaths = svgRef.current.querySelectorAll('path');
 
+			let maxLength = GLOBAL_CONSTANTS.zeroth_index;
 			svgPaths.forEach((path) => {
-				const length = path.getTotalLength();
+				maxLength = Math.max(maxLength, path.getTotalLength());
+			});
+
+			svgPaths.forEach((path) => {
+				const length = maxLength;
 
 				path.style.strokeDasharray = length;
 				path.style.strokeDashoffset = length;
