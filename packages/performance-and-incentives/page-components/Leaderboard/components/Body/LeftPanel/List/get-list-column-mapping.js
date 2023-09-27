@@ -1,34 +1,9 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-// function ArrowType({ sortBy = '', sortType = '', title = '' }) {
-// 	if (sortBy !== title) {
-// 		return <IcMArrowRotateUp className={styles.arrow} fill="#e0e0e0" />;
-// 	}
-
-// 	if (sortType === 'asc') {
-// 		return <IcMArrowRotateUp className={styles.arrow} fill="#e0e0e0" />;
-// 	}
-
-// 	return <IcMArrowRotateDown className={styles.arrow} fill="#e0e0e0" />;
-// }
-
 const getListColumnMapping = () => {
-	// const handleSort = ({ title }) => {
-	// 	if (params.sort_by === title) {
-	// 		if (params.sort_type === 'asc') {
-	// 			setParams((prev) => ({ ...prev, sort_type: 'desc' }));
-	// 		} else {
-	// 			setParams((prev) => ({ ...prev, sort_type: 'asc' }));
-	// 		}
-	// 		return;
-	// 	}
-	// 	setParams((prev) => ({ ...prev, sort_by: title, sort_type: 'desc' }));
-	// };
-
 	const LIST_COLUMN_MAPPING = [
 		{
 			id   : 'rank',
@@ -39,10 +14,8 @@ const getListColumnMapping = () => {
 					<div
 						role="presentation"
 						className={styles.top_heading}
-						// onClick={() => handleSort({ title: 'rank' })}
 					>
-						<div>Rank</div>
-						{/* <ArrowType sortBy={params.sort_by} sortType={params.sort_type} title="rank" /> */}
+						Rank
 					</div>
 				),
 			accessor: ({ rank }) => (isEmpty(rank) ? null : (
@@ -64,12 +37,9 @@ const getListColumnMapping = () => {
 			Header:
 				(
 					<div
-						role="presentation"
 						className={styles.top_heading}
-						// onClick={() => handleSort({ title: 'total_score' })}
 					>
-						<div>Score</div>
-						{/* <ArrowType sortBy={params.sort_by} sortType={params.sort_type} title="total_score" /> */}
+						Score
 					</div>
 				),
 			accessor: ({ total_score }) => (isEmpty(total_score) ? null : <div>{total_score}</div>),
@@ -81,12 +51,9 @@ const getListColumnMapping = () => {
 			Header:
 				(
 					<div
-						role="presentation"
 						className={styles.top_heading}
-						// onClick={() => handleSort({ title: 'percentile' })}
 					>
-						<div>%ile</div>
-						{/* <ArrowType sortBy={params.sort_by} sortType={params.sort_type} title="percentile" /> */}
+						%ile
 					</div>
 				),
 			accessor: ({ percentile }) => (isEmpty(percentile) ? null : (
