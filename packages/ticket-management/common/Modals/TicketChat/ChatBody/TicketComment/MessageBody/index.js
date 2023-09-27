@@ -12,10 +12,10 @@ const URL_ARRAY_LAST_ELEMENT = 1;
 function ShowMessage({ restData = {} }) {
 	let newMessage = '';
 
-	const AdditionalData = restData?.AdditionalFields || {};
+	const additionalData = restData?.AdditionalFields || {};
 
-	Object.keys(AdditionalData || {}).forEach((itm) => {
-		newMessage += `<br/><b>${startCase(itm)}</b>: ${AdditionalData[itm]}`;
+	Object.keys(additionalData || {}).forEach((itm) => {
+		newMessage += `<br/><b>${startCase(itm)}</b>: ${additionalData[itm]}`;
 	});
 
 	return (
@@ -43,7 +43,7 @@ function MessageBody({ message = '', mediaUrls = [], restData = {} }) {
 				})}
 			</div>
 			<div className={styles.message_section}>
-				{message && <div>{message}</div>}
+				{message ? <div>{message}</div> : null}
 				<ShowMessage message={message} restData={restData} />
 			</div>
 		</>
