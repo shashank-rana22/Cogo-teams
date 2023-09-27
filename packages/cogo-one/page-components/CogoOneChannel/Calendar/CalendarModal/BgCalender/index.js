@@ -124,50 +124,12 @@ function BgCalender({ setSelectedEventData = () => {} }) {
 			start : new Date(2023, 8, 28, 9, 0),
 			end   : new Date(2023, 8, 28, 10, 30),
 		},
-		{
-			marked_events: [
-				{
-					event_category : 'event',
-					event_types    : 'call_customer',
-					customer       : 'Lachiramnaik',
-					poc            : 'chandu',
-					remarks        : 'need to call this date otherwise shipment will cancel',
-					import         : true,
-				},
-				{
-					event_category : 'event',
-					event_types    : 'other',
-					customer       : 'Lachiramnaik',
-					poc            : 'chandu',
-					remarks        : 'need to call this date otherwise shipment will cancel',
-					import         : true,
-				},
-			],
-
-			start : new Date(2023, 8, 24, 9, 0),
-			end   : new Date(2023, 8, 24, 10, 30),
-		},
-		{
-			marked_events: [
-				{
-					event_category : 'metting',
-					event_types    : 'send_quotation',
-					customer       : 'Sandeep',
-					poc            : 'Rahul',
-					remarks        : 'Need to ask some quations about shipments',
-					import         : true,
-				},
-			],
-			start : new Date(2023, 8, 26, 9, 0),
-			end   : new Date(2023, 8, 26, 10, 30),
-		},
 	];
 
 	const [myEvents, setEvents] = useState({});
 
 	const handleSelectSlot = useCallback(
 		({ start, end }) => {
-			console.log('teststart:', start);
 			setEvents({ start, end });
 		},
 		[setEvents],
@@ -175,11 +137,17 @@ function BgCalender({ setSelectedEventData = () => {} }) {
 
 	const handleEventClick = (event) => {
 		setSelectedEventData(event);
-	// Handle event click, if needed
 	};
 
 	const customDayPropGetter = (date) => {
-		if (date.getDate() === myEvents?.start?.getDate()) {
+		const currentDate = date?.getDate();
+		const currentMonth = date?.getMonth();
+		const selectedDate = myEvents?.start?.getDate();
+		const selectedMonth = myEvents?.start?.getMonth();
+		const showSelectedDate = currentDate === selectedDate && currentMonth === selectedMonth;
+		// const showDefaultDate = currentDate === new Date().getDate();
+
+		if (showSelectedDate) {
 			return {
 				// className : styles.specialDay,
 				style: {
@@ -188,15 +156,17 @@ function BgCalender({ setSelectedEventData = () => {} }) {
 				},
 			};
 		}
-		if (!date.getDate() === myEvents?.start?.getDate() && date.getDate() === new Date().getDate()) {
-			return {
-				// className : styles.specialDay,
-				style: {
-					border       : 'solid 1.5px #034AFD',
-					borderRadius : '2px',
-				},
-			};
-		}
+
+		// if (!showSelectedDate && showDefaultDate) {
+		// 	return {
+		// 		// className : styles.specialDay,
+		// 		style: {
+		// 			border       : 'solid 1.5px #034AFD',
+		// 			borderRadius : '2px',
+		// 		},
+		// 	};
+		// }
+
 		return {};
 	};
 

@@ -35,6 +35,8 @@ function CustomCard({ event = {} }) {
 
 	const isShowMore = (marked_events || []).length > MORE_THEN;
 
+	const moreCount = marked_events.length - MORE_THEN;
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -73,6 +75,11 @@ function CustomCard({ event = {} }) {
 
 			{isShowMore ? (
 				<div className={styles.more}>
+					+
+					<span className={styles.more_count}>
+						{moreCount}
+					</span>
+
 					More...
 				</div>
 			) : null}

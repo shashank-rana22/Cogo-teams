@@ -10,7 +10,6 @@ function CalendarModal({
 }) {
 	const [addEvents, setAddEvents] = useState(true);
 	const [selectedEventData, setSelectedEventData] = useState({});
-	console.log('selectedEventData:', selectedEventData);
 
 	return (
 	// <Modal
