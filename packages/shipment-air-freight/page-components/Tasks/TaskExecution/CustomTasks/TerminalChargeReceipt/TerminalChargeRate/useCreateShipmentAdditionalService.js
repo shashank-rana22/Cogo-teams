@@ -1,6 +1,8 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
+const DEFAULT_VALUE = 0;
+
 const useCreateShipmentAdditionalService = ({
 	shipmentData = {},
 	setIRNGenerated = () => {},
@@ -18,8 +20,8 @@ const useCreateShipmentAdditionalService = ({
 		let tax_price = 0;
 
 		(terminalChargeReceipt || []).forEach((val) => {
-			price += Number(val.price);
-			tax_price += Number(val.tax_price);
+			price += Number(val?.price || DEFAULT_VALUE);
+			tax_price += Number(val?.tax_price || DEFAULT_VALUE);
 		});
 		const { id = '', all_services = [] } = shipmentData || {};
 
