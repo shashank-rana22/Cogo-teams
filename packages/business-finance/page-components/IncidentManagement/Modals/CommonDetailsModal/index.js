@@ -29,6 +29,8 @@ const TYPE_COMPONENT_MAPPING = {
 	ADVANCE_SECURITY_DEPOSIT_REFUND : AdvanceSecurityDepositRefund,
 	ISSUE_CREDIT_NOTE               : RequestCNDetails,
 	JOB_OPEN                        : JobOpenDetailsModal,
+	CONSOLIDATED_CREDIT_NOTE        : RequestCNDetails,
+
 };
 function CommonDetailsModal({
 	setDetailsModal = () => {},
