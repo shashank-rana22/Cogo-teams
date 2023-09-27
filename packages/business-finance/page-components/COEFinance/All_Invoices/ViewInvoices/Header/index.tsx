@@ -26,6 +26,7 @@ interface HeaderInterface {
 	checkItem?: any;
 	isTagFound?: boolean;
 	currentTab?: string;
+	jobType?: string;
 }
 
 function Header({
@@ -39,6 +40,7 @@ function Header({
 	checkItem = {},
 	isTagFound = false,
 	currentTab = '',
+	jobType = '',
 }: HeaderInterface) {
 	const [approve, setApprove] = useState(false);
 	const [modalData, setModalData] = useState('');
@@ -134,6 +136,7 @@ function Header({
 					status={status}
 					isTagFound={isTagFound}
 					currentTab={currentTab}
+					jobType={jobType}
 				/>
 			</div>
 
