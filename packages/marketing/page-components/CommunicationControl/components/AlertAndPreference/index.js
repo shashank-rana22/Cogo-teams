@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import useGetOrganizationUsers from '../../hooks/useGetOrganizationUsers';
 import useGetPreferences from '../../hooks/useGetPreferences';
+import useUpdatePreference from '../../hooks/useUpdatePreference';
 
 import CategoryForm from './CategoryForm';
 import Header from './Header';
@@ -13,17 +14,26 @@ function AlertAndPreference() {
 	const router = useRouter();
 	const { org_name = '', company_id = '' } = router?.query || {};
 
-	const [formData, setFormData] = useState({});
 	const [user, setUser] = useState('');
 
-	const { list = [] } = useGetOrganizationUsers({ orgId: company_id });
+	const { list = [] } = useGetOrganizationUsers({ orgId: company_id, setUser });
 	const userOptions = list.map((item) => ({
 		label : item?.name,
 		value : item?.user_id,
 	}));
 	const listUserOptions = [{ label: 'Select All', value: '' }, ...userOptions];
 
-	const { preferences = {} } = useGetPreferences({ companyId: company_id, userId: user });
+	const { preferences = {}, loading:getPreferencesLoading = '' } = useGetPreferences({
+		companyId : company_id,
+		userId    : user,
+	});
+	const { updatePreference, loading:updateLoading } = useUpdatePreference();
+
+	const handleSave = async (PAYLOAD) => {
+		await updatePreference({ ...PAYLOAD, user_id: user });
+		router?.back();
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -36,16 +46,18 @@ function AlertAndPreference() {
 			<Header
 				orgName={org_name}
 				options={listUserOptions}
-				formData={formData}
-				setFormData={setFormData}
 				user={user}
 				setUser={setUser}
 			/>
-			<CategoryForm
-				query={router?.query}
-				back={router?.back}
-				data={preferences}
-			/>
+			{!getPreferencesLoading ? (
+				<CategoryForm
+					handleSave={handleSave}
+					query={router?.query}
+					data={preferences}
+					getPreferencesLoading={getPreferencesLoading}
+					updateLoading={updateLoading}
+				/>
+			) : null}
 		</div>
 	);
 }

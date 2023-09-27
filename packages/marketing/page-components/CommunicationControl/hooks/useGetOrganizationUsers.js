@@ -1,9 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useGetOrganizationUsers = ({ orgId = '' }) => {
+const useGetOrganizationUsers = ({ orgId = '', setUser = () => {} }) => {
 	const [data, setData] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
@@ -21,10 +22,11 @@ const useGetOrganizationUsers = ({ orgId = '' }) => {
 		try {
 			const res = await trigger();
 			setData(res?.data);
+			setUser(res?.data?.list[GLOBAL_CONSTANTS.zeroth_index]?.user_id);
 		} catch (error) {
 			toastApiError(error);
 		}
-	}, [trigger]);
+	}, [trigger, setUser]);
 
 	useEffect(() => {
 		getOrganizationUsers();

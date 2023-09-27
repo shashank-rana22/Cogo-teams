@@ -19,7 +19,6 @@ function Header({
 				<Select
 					value={user}
 					options={options}
-					isClearable
 					onChange={setUser}
 					label="Select Users"
 					placeholder="select your fav"

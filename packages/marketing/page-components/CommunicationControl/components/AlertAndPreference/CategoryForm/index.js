@@ -1,32 +1,32 @@
-import { Button, Checkbox } from '@cogoport/components';
+import { Button, Checkbox, Loader } from '@cogoport/components';
 import { CheckboxController, useForm } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
+import defaultValuesHelper from '../../../helpers/defaultValuesHelper';
 import getPayloadAlertsPreferences from '../../../helpers/getPayloadAlertsPreferences';
 import selectAllAlertsHelper from '../../../helpers/selectAllAlertsHelper';
-import useUpdatePreference from '../../../hooks/useUpdatePreference';
 
 import Card from './Card';
 import styles from './styles.module.css';
 
-function CategoryForm({ query = {}, back = () => {}, data = {} }) {
+function CategoryForm({
+	query = {}, handleSave = () => {}, data = {}, preferencesLoading = '', updateLoading = '',
+}) {
 	const [selectAllChecked, setSelectAllChecked] = useState(false);
-	const { control, watch, setValue } = useForm({ defaultValues: data });
-	const formValues = watch();
-	// console.log(formValues);
 
-	const { loading = '', updatePreference = () => {} } = useUpdatePreference();
+	const { control, watch, setValue } = useForm({ defaultValues: defaultValuesHelper(data) });
+	const formValues = watch();
+
 	const preferences = getPayloadAlertsPreferences(formValues);
 
 	const PAYLOAD = {
-		user_id         : query?.partner_id,
-		organization_id : query?.company_id,
+		organization_id: query?.company_id,
 		preferences,
 	};
 
 	useEffect(() => {
 		setSelectAllChecked(selectAllAlertsHelper(formValues));
-	}, [formValues]);
+	}, [formValues, data]);
 
 	const handleSelectAll = (e) => {
 		if (e.target.checked) {
@@ -45,74 +45,84 @@ function CategoryForm({ query = {}, back = () => {}, data = {} }) {
 			setValue('general_news', false);
 		}
 	};
+	if (preferencesLoading) {
+		return (<Loader themeType="primary" />);
+	}
 
 	return (
 		<div className={styles.container}>
 			<h3>Check the type of emails you want to receive</h3>
-			<Checkbox
-				name="select_all"
-				label="Select All"
-				checked={selectAllChecked}
-				onChange={(e) => {
-					setSelectAllChecked((prev) => !prev);
-					handleSelectAll(e);
-				}}
-			/>
-			<div className={styles.categories}>
-				<Card title="Promotional">
-					<CheckboxController
-						name="offers_discounts"
-						label="Offers/Discounts"
-						value={data?.offers_discounts}
-						control={control}
-					/>
-					Receive offers and discounts.
-					<CheckboxController
-						name="subscriber_special"
-						label="Subscriber Special"
-						control={control}
-					/>
-					Receive exclusive subscriber communications.
-				</Card>
-				<Card title="Product and Services">
-					<CheckboxController
-						name="new_product_service_launches_and_updates"
-						label="New product/Service launches and updates"
-						control={control}
-					/>
-					Get information on latest product launches and updates.
-					<CheckboxController
-						name="product_service_explainers"
-						label="Product/service Explainers"
-						control={control}
-					/>
-					Receive detailed product explanations.
-				</Card>
-				<Card title="Subscriptions">
-					<CheckboxController
-						name="newsletter"
-						label="Newsletter"
-						control={control}
-					/>
-					Get latest newsletters and services.
-					<CheckboxController
-						name="general_news"
-						label="General News"
-						control={control}
-					/>
-					Receive relevant news and information.
-				</Card>
-			</div>
-			<Button
-				className={styles.btn}
-				onClick={() => {
-					updatePreference(PAYLOAD);
-					back();
-				}}
-				disabled={loading}
-			>
-				UPDATE EMAIL PREFERENCES
-			</Button>
+			{!preferencesLoading
+				? (
+					<>
+						<Checkbox
+							name="select_all"
+							label="Select All"
+							checked={selectAllChecked}
+							onChange={(e) => {
+								setSelectAllChecked((prev) => !prev);
+								handleSelectAll(e);
+							}}
+						/>
+						<div className={styles.categories}>
+							<Card title="Promotional">
+								<CheckboxController
+									name="offers_discounts"
+									label="Offers/Discounts"
+									value={data?.offers_discounts === 'active'}
+									control={control}
+								/>
+								Receive offers and discounts.
+								<CheckboxController
+									name="subscriber_special"
+									label="Subscriber Special"
+									value={data?.subscriber_special === 'active'}
+									control={control}
+								/>
+								Receive exclusive subscriber communications.
+							</Card>
+							<Card title="Product and Services">
+								<CheckboxController
+									name="new_product_service_launches_and_updates"
+									label="New product/Service launches and updates"
+									value={data?.new_product_service_launches_and_updates === 'active'}
+									control={control}
+								/>
+								Get information on latest product launches and updates.
+								<CheckboxController
+									name="product_service_explainers"
+									label="Product/service Explainers"
+									value={data?.product_service_explainers === 'active'}
+									control={control}
+								/>
+								Receive detailed product explanations.
+							</Card>
+							<Card title="Subscriptions">
+								<CheckboxController
+									name="newsletter"
+									label="Newsletter"
+									value={data?.newsletter === 'active'}
+									control={control}
+								/>
+								Get latest newsletters and services.
+								<CheckboxController
+									name="general_news"
+									label="General News"
+									value={data?.general_news === 'active'}
+									control={control}
+								/>
+								Receive relevant news and information.
+							</Card>
+						</div>
+						<Button
+							className={styles.btn}
+							onClick={() => handleSave(PAYLOAD)}
+							disabled={updateLoading}
+						>
+							UPDATE EMAIL PREFERENCES
+						</Button>
+					</>
+				) : null}
 		</div>
 	);
 }

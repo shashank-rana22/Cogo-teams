@@ -29,33 +29,6 @@ const useGetPreferences = ({ companyId, userId }) => {
 			getPreferences();
 		}
 	}, [userId, getPreferences]);
-
-	// useEffect(() => {
-	// 	const { preferences } = data || {};
-	// 	const {
-	// 		offers_discounts,
-	// 		subscriber_special,
-	// 		new_product_service_launches_and_updates,
-	// 		product_service_explainers,
-	// 		general_news,
-	// 		newsletter,
-	// 	} = preferences || {};
-
-	// 	const handleStatus = (val) => val === 'active';
-
-	// 	setFormData((prev) => ({
-	// 		...prev,
-	// 		offers_discounts                         : handleStatus(offers_discounts),
-	// 		subscriber_special                       : handleStatus(subscriber_special),
-	// 		new_product_service_launches_and_updates : handleStatus(
-	// 			new_product_service_launches_and_updates,
-	// 		),
-	// 		product_service_explainers : handleStatus(product_service_explainers),
-	// 		newsletter                 : handleStatus(newsletter),
-	// 		general_news               : handleStatus(general_news),
-	// 	}));
-	// }, [data]);
-
 	return {
 		preferences: data?.preferences || {},
 		loading,

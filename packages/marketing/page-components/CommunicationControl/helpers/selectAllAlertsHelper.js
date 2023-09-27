@@ -7,6 +7,8 @@ const selectAllAlertsHelper = (formValues) => {
 			trueCount += PLUS_ONE_INDEX;
 		}
 	});
+
+	console.log({ trueCount });
 	return (trueCount === TOTAL_FIELDS);
 };
 export default selectAllAlertsHelper;
