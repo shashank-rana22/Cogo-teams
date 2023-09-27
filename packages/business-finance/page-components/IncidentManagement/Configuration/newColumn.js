@@ -13,8 +13,8 @@ const INDEX = 6;
 const FIRST = 1;
 
 function getColumns({
-	setIsAscendingActive, setFilters,
-	isAscendingActive, t,
+	setIsAscendingActive = () => {}, setFilters = () => {},
+	isAscendingActive = '', t,
 	setDetailsModal = () => { },
 	activeTab = 'requested',
 }) {
@@ -118,7 +118,7 @@ function getColumns({
 				</div>
 			),
 			accessor: (row) => {
-				const { createdAt } = row;
+				const { createdAt } = row || {};
 				return (
 					<div>
 						{createdAt ? formatDate({

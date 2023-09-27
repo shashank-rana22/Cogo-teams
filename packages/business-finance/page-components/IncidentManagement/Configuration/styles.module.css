@@ -22,8 +22,6 @@
 .flex {
 	display: flex;
 	align-items: center;
-
-	/* width: 50px; */
 }
 
 .tooltip {
