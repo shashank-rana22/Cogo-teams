@@ -7,8 +7,8 @@ import controls from '../../../config/controls-air';
 import styles from './styles.module.css';
 
 function Form({ handleSubmitForm = () => {} }, ref) {
-	const { control, handleSubmit, formState:{ errors = {} } } = useForm();
-	const onSubmit = (values) => handleSubmitForm({ values });
+	const { control, handleSubmit, formState:{ errors = {} }, reset } = useForm();
+	const onSubmit = (values) => { handleSubmitForm({ values }); reset(); };
 	useImperativeHandle(ref, () => ({
 		formSubmit() {
 			handleSubmit(onSubmit)();

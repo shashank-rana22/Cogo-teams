@@ -20,7 +20,7 @@ function DoubleNestedFieldArray({
 }) {
 	const { controls = [], name, addButtonText = '' } = ctrl || {};
 	const { fields, append, remove } = useFieldArray({ control, name });
-
+	// console.log(controls, error);
 	return (
 		<div className={styles.nested_field_array}>
 			{fields.map((field, index) => (
@@ -38,7 +38,7 @@ function DoubleNestedFieldArray({
 									<NestedFieldArray
 										key={field.id}
 										field={field}
-										error={error?.[ctrl.name]}
+										error={error}
 										ctrl={nestCtrl}
 										control={control}
 										index={index}
@@ -89,7 +89,7 @@ function DoubleNestedFieldArray({
 								/>
 								{error?.[index]?.[ctrlItemName]?.message ? (
 									<p className={styles.error}>
-										{error?.[index]?.[ctrlItemName].message || ''}
+										{error?.[ctrlItemName]?.[index]?.message || ''}
 									</p>
 								) : null}
 							</div>

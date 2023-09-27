@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const LAST_INDEX = -1;
 
-function MilestoneStepper({ combineMileStoneList = [], trackingType = 'air', status, truck_number }) {
+function MilestoneStepper({ combineMileStoneList = [], trackingType = 'air', status = '', truck_number = '' }) {
 	const scrollRef = useRef({});
 
 	const {

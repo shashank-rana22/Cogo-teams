@@ -1009,6 +1009,17 @@ function asyncListOverSeasTradeParties() {
 	};
 }
 
+function asyncListShippingLineEvents() {
+	return {
+		labelKey    : 'milestone',
+		valueKey    : 'id',
+		endpoint    : 'list_shipping_line_events',
+		initialCall : true,
+		params      : {
+			filters: { status: 'active' },
+		},
+	};
+}
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1091,4 +1102,5 @@ export {
 	asyncListFclFreightCommodityClusters,
 	asyncListSpotSearchRateCardOperators,
 	asyncListOverSeasTradeParties,
+	asyncListShippingLineEvents,
 };

@@ -2,8 +2,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import useGetCurrentInfo from '../../../../../hooks/useCurrentInfo';
 import useGetContainerMilestones from '../../../../../hooks/useGetContainerMilestones';
+import Loader from '../../../Loader';
 
-import Loader from './Loader';
 import MilestoneStepper from './MilestoneStepper';
 import styles from './styles.module.css';
 

@@ -24,6 +24,7 @@ function AirTracking({
 	};
 	const handleCloseModal = () => {
 		setShowUpdate({ show: false, data: {} });
+		setActiveTab('add_location');
 	};
 	const column = columns({
 		handleShowModal,
@@ -34,6 +35,7 @@ function AirTracking({
 	const { apiTrigger, createLoading } = useGetAirData({
 		refetch: () => {
 			setShowUpdate({ show: false, data: {} });
+			setActiveTab('add_location');
 			refetch();
 		},
 	});

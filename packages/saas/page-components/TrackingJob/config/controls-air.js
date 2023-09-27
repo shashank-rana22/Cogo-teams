@@ -4,10 +4,8 @@ const controls = [
 		type          : 'nestedFieldArray',
 		showButtons   : true,
 		addButtonText : 'Add Location',
-		value         : {},
-
-		rules    : { required: 'This is required' },
-		controls : [
+		rules         : { required: 'This is required' },
+		controls      : [
 			{
 				name        : 'location_id',
 				type        : 'async_select',
@@ -29,7 +27,6 @@ const controls = [
 				type          : 'fieldArray',
 				showButtons   : true,
 				addButtonText : 'Add Milestones',
-				value         : {},
 				span          : 12,
 				controls      : [
 					{

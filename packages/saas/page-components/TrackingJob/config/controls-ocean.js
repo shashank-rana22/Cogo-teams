@@ -62,11 +62,12 @@ const formControls = ({ showUpdate }) => [
 							},
 
 							{
-								label    : 'Milestone',
-								name     : 'milestone',
-								type     : 'creatable_select',
-								asyncKey : 'list_shipping_line_events',
-								params   : {
+								label        : 'Milestone',
+								name         : 'milestone',
+								type         : 'async_select',
+								asyncKey     : 'list_shipping_line_events',
+								optionsValue : 'milestone',
+								params       : {
 									shipping_line_id : showUpdate?.data?.shipping_line_id,
 									source           : 'tracking_job',
 								},

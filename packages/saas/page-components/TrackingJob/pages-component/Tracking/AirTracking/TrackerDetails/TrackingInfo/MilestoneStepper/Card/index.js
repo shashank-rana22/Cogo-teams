@@ -1,7 +1,6 @@
-import { cl, Tooltip, Pill } from '@cogoport/components';
+import { cl, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMInfo } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
 import getMappingObject from '../../../../../../../config/card';
@@ -56,14 +55,10 @@ function Card({
 				{combineList.map((item, index) => {
 					const {
 						id = '',
-						milestone,
 						event_date = '',
 						actual_date = '',
-						vessel_name = '',
-						flight_number = '',
-						piece = '',
 					} = item || {};
-					console.log(item);
+
 					const isLastRow = index === combineListLength - GLOBAL_CONSTANTS.one;
 					const currSubMilestone = isCurrentMilestone && milestoneSubIndex === index;
 

@@ -36,6 +36,7 @@ function EditModal({
 			onOuterClick={() => setEditModal()}
 			width={600}
 		>
+			<Modal.Header title="Edit Details" />
 			<Modal.Body>
 
 				<EditForm ref={formRef} editDetail={editDetail} handleSubmitForm={handleSubmitForm} />

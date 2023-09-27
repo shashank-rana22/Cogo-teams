@@ -41,7 +41,6 @@ function DeleteModal({
 				</div>
 
 			</Modal.Footer>
-
 		</Modal>
 	);
 }

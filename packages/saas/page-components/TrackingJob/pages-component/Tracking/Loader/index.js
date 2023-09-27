@@ -1,17 +1,18 @@
 import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMAirTracking, IcMOceanTracking, IcMTracking } from '@cogoport/icons-react';
+import { IcMAirTracking, IcMOceanTracking, IcMAppEndTracking } from '@cogoport/icons-react';
 import Image from 'next/image';
 
-import getLoadingArr from '../../../../../../utlis/getLoadingArr';
+import getLoadingArr from '../../../utlis/getLoadingArr';
 
 import styles from './styles.module.css';
 
-const LOADING_ARR = getLoadingArr(3);
+const THREE = 3;
+const LOADING_ARR = getLoadingArr(THREE);
 const LOADING_ICON = {
 	ocean   : <IcMOceanTracking width={40} height={40} fill="#838383" />,
 	air     : <IcMAirTracking width={40} height={40} fill="#838383" />,
-	surface : <IcMTracking width={40} height={40} fill="#838383" />,
+	surface : <IcMAppEndTracking width={40} height={40} fill="#838383" />,
 };
 
 function Loader({ type = 'ocean' }) {

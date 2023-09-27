@@ -54,7 +54,7 @@
 	.dot_bg {
 		position: relative;
 		background: #ffddda;
-		animation: current_milestone 0.8s infinite alternate;
+		animation: current-milestone 0.8s infinite alternate;
 	}
 
 	.line {
@@ -62,7 +62,7 @@
 	}
 }
 
-@keyframes current_milestone {
+@keyframes current-milestone {
 	0% {
 		top: 13px;
 		left: 13px;

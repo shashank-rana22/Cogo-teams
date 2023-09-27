@@ -10,7 +10,7 @@ import Stepper from './Stepper';
 import styles from './styles.module.css';
 
 const INVALID_VESSEL_NAME = ['N/A'];
-
+const THOUSAND = 1000;
 const WIDTH_PROP = {
 	VESSEL : 35,
 	TRUCK  : 55,
@@ -26,7 +26,11 @@ const getIconUrl = ({ mapping, type, transportMode }) => {
 	return obj[type];
 };
 
-function MilestoneName({ status, vessel_name, last_location = '', distance_remained, truck_number }) {
+function MilestoneName({
+	status = '',
+	vessel_name = '', last_location = '',
+	distance_remained = 0, truck_number = '',
+}) {
 	return 	(
 		<>
 			{status}
@@ -36,7 +40,7 @@ function MilestoneName({ status, vessel_name, last_location = '', distance_remai
 			<p>
 				Distance
 				{' '}
-				{Math.ceil(distance_remained / 1000)}
+				{Math.ceil(distance_remained / THOUSAND)}
 				km
 			</p>
 
@@ -60,7 +64,7 @@ function MilestoneName({ status, vessel_name, last_location = '', distance_remai
 
 function Card({
 	combineList = [], trackingType = 'ocean', isCurrentMilestone = false,
-	milestoneSubIndex, truck_number, status,
+	milestoneSubIndex = 0, truck_number = '',
 }) {
 	const {
 		location = '', station = '',
@@ -91,15 +95,13 @@ function Card({
 				{combineList.map((item, index) => {
 					const {
 						id = '',
-						milestone,
 						status = '',
 						vessel_name = '',
-						eta = '',
 						last_location = '',
 						distance_remained = '',
 						tracking_updated_at = '',
 					} = item || {};
-					const isLastRow = index === combineListLength - 1;
+					const isLastRow = index === combineListLength - GLOBAL_CONSTANTS.one;
 					const currSubMilestone = isCurrentMilestone && milestoneSubIndex === index;
 
 					const date = formatDate({

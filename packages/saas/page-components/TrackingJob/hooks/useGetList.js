@@ -42,6 +42,7 @@ const useGetList = ({
 			console.log(err);
 		}
 	}, [activeTab, filters, query, trigger, searchString, serialId]);
+
 	useEffect(() => debounceQuery(searchString), [searchString, debounceQuery]);
 	useEffect(() => debounceQuery(serialId), [serialId, debounceQuery]);
 
@@ -49,7 +50,6 @@ const useGetList = ({
 		setFilters({ page: 1, sort_by: 'updated_at', sort_type: 'desc' });
 		setSearchString('');
 		setSerialId('');
-		console.log('hey', 'serialId', serialId, 'searchString', searchString);
 	}, [activeTab]);
 
 	useEffect(() => {

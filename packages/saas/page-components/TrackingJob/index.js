@@ -30,40 +30,45 @@ function TrackingJob() {
 	return (
 		<div>
 			<div style={{ margin: 20 }}>
-				<h1>Tracking Job</h1>
+
 				<div className={styles.filter_container}>
-					<SearchFilters
-						searchString={searchString}
-						serialId={serialId}
-						setSearchString={setSearchString}
-						activeTab={activeTab}
-						filters={filters}
-						setFilters={setFilters}
-						setSerialId={setSerialId}
-					/>
-					{activeTab === 'ocean_tracking' && (
+					<div>
+						<h1>Tracking Job</h1>
+					</div>
+					<div className={styles.filter}>
 
-						<Popover
-							placement="auto-end"
-							theme="light"
-							interactive
-							content={(
-								<Filters
-									activeTab={activeTab}
-									filters={filters}
-									setFilters={setFilters}
-								/>
-							)}
-						>
-							<Button themeType="secondary" size="lg">
-								<IcMFilter />
-								{' '}
-								FILTERS
-							</Button>
-						</Popover>
+						<SearchFilters
+							searchString={searchString}
+							serialId={serialId}
+							setSearchString={setSearchString}
+							activeTab={activeTab}
+							filters={filters}
+							setFilters={setFilters}
+							setSerialId={setSerialId}
+						/>
+						{activeTab === 'ocean_tracking' && (
 
-					)}
+							<Popover
+								placement="auto-end"
+								theme="light"
+								interactive
+								content={(
+									<Filters
+										activeTab={activeTab}
+										filters={filters}
+										setFilters={setFilters}
+									/>
+								)}
+							>
+								<Button themeType="secondary" size="lg">
+									<IcMFilter />
+									{' '}
+									FILTERS
+								</Button>
+							</Popover>
 
+						)}
+					</div>
 				</div>
 
 				<ListPagination filters={filters} setFilters={setFilters} data={data} />

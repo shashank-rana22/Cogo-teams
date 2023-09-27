@@ -4,8 +4,8 @@ import { isEmpty } from '@cogoport/utils';
 import EmptyState from '../../../../../common/EmptyState';
 import useGetCurrentInfo from '../../../../../hooks/useCurrentInfo';
 import useGetTruckMilestones from '../../../../../hooks/useGetTruckMilestones';
+import Loader from '../../../Loader';
 
-import Loader from './Loader';
 import MilestoneStepper from './MilestoneStepper';
 import styles from './styles.module.css';
 

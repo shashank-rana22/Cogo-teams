@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function Stepper({ isLastRow = false, index, milestoneSubIndex }) {
+function Stepper({ isLastRow = false, index = 0, milestoneSubIndex = 0 }) {
 	return (
 		<div className={cl`${styles.container} ${index > milestoneSubIndex ? styles.next_step : ''}
         ${index === milestoneSubIndex ? styles.curr_dot : ''} `}
