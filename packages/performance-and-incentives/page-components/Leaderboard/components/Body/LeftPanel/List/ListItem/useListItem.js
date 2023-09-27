@@ -35,6 +35,7 @@ const useListItem = (props) => {
 					id          : listItem.user?.id,
 					location_id : isEmpty(listItem.user) ? listItem.id : undefined,
 					channel     : isEmpty(listItem.user) ? listItem.name : undefined,
+					name        : !isEmpty(listItem.user) ? listItem.user?.name : listItem.name,
 				});
 			}
 		}

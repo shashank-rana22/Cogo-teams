@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../../../constants/leaderboard-reporttype-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../constants/leaderboard-viewtype-constants';
-import getEntityNameById from '../../../../../../utils/get-entity-name-by-id';
+import getLeftPanelHeading from '../../../../helpers/getLeftPanelHeading';
 
 import styles from './styles.module.css';
 
@@ -16,7 +16,9 @@ const MIN_LENGTH = 1;
 
 function Header(props) {
 	const { params, currLevel, setParams, isExpanded, setIsExpanded, entity, levelStack } = props;
-	const { incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
+
+	const { incentive_leaderboard_viewtype, auth_role_data: selfRoleData } = useSelector(({ profile }) => profile);
+
 	const [reportDetails, setReportDetails] = useState({});
 
 	const handleClick = () => {
@@ -38,7 +40,7 @@ function Header(props) {
 		}));
 	};
 
-	const COGO_ENTITY = getEntityNameById(entity);
+	const HEADING = getLeftPanelHeading({ currLevel, entity, viewType: incentive_leaderboard_viewtype, selfRoleData });
 
 	return (
 		<>
@@ -50,7 +52,7 @@ function Header(props) {
 				<div>
 					<span className={styles.light}>for</span>
 					{' '}
-					<i>{COGO_ENTITY}</i>
+					<i>{HEADING}</i>
 				</div>
 
 				{((incentive_leaderboard_viewtype === ADMIN

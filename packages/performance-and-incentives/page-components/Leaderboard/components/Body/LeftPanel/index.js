@@ -25,7 +25,7 @@ const getSecondElement = ({ location_id, channel, id }) => {
 function LeftPanel(props) {
 	const {
 		entity, params, setParams, isChannel, setIsChannel, debounceQuery, refetch: refetchStats, loading: statsLoading,
-		setStatParams,
+		setStatParams, currLevel, setCurrLevel,
 	} = props;
 
 	const { incentive_leaderboard_viewtype: viewType, user = {} } = useSelector(({ profile }) => profile);
@@ -35,21 +35,18 @@ function LeftPanel(props) {
 		list,
 		searchValue,
 		setSearchValue,
-		currLevel,
-		setCurrLevel,
 		levelStack,
 		setLevelStack,
 		currentUserData,
 		isExpanded,
 		setIsExpanded,
 		refetch,
-		view,
 	} = useGetScoringReports({ params });
 
 	console.log('currLevel :: ', currLevel);
 	console.log('levelStack :: ', levelStack);
 
-	const handlePropagation = ({ id = '', location_id, channel }) => {
+	const handlePropagation = ({ id = '', location_id, channel, name }) => {
 		setParams((prev) => ({
 			...prev,
 			add_current_user_report : true,
@@ -68,7 +65,7 @@ function LeftPanel(props) {
 
 		const secondElement = getSecondElement({ location_id, channel, id });
 
-		setCurrLevel((prev) => ({ report_type: NEXT_LEVEL_MAPPING[prev.report_type], user: secondElement }));
+		setCurrLevel((prev) => ({ report_type: NEXT_LEVEL_MAPPING[prev.report_type], rm_id: secondElement, name }));
 	};
 
 	return (
@@ -84,7 +81,6 @@ function LeftPanel(props) {
 			/>
 
 			<LeaderboardFilters
-				view={view}
 				setParams={setParams}
 				debounceQuery={debounceQuery}
 				searchValue={searchValue}

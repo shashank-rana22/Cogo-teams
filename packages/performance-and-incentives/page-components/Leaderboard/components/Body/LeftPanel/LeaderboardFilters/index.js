@@ -42,10 +42,7 @@ const getFilters = ({ beforeLevel, id }) => {
 };
 
 function LeaderboardFilters(props) {
-	const { incentive_leaderboard_viewtype, user } = useSelector(({ profile }) => profile);
-
 	const {
-		view,
 		setParams,
 		debounceQuery,
 		searchValue,
@@ -63,7 +60,14 @@ function LeaderboardFilters(props) {
 		setStatParams,
 	} = props;
 
-	const { report_type: beforeLevel = '', user: id = '' } = levelStack[levelStack.length - OFFSET] || [];
+	const { incentive_leaderboard_viewtype, user } = useSelector(({ profile }) => profile);
+
+	const [view] = incentive_leaderboard_viewtype.split('_');
+
+	const {
+		report_type: beforeLevel = '',
+		rm_id = '', name: rm_name = '',
+	} = levelStack[levelStack.length - OFFSET] || [];
 
 	const [backText] = beforeLevel.split('_') || [];
 
@@ -76,7 +80,7 @@ function LeaderboardFilters(props) {
 
 			filters: {
 				...prev.filters,
-				user_rm_ids: id ? [id] : undefined,
+				user_rm_ids: rm_id ? [rm_id] : undefined,
 
 				...(levelStack.length === OFFSET ? {
 
@@ -93,7 +97,7 @@ function LeaderboardFilters(props) {
 					...(incentive_leaderboard_viewtype === ADMIN
 						? { report_type: undefined } : { report_type: `${view}_report` }),
 
-				} : getFilters({ beforeLevel, id })),
+				} : getFilters({ beforeLevel, rm_id })),
 			},
 		}));
 
@@ -112,8 +116,7 @@ function LeaderboardFilters(props) {
 			return curr;
 		});
 
-		// setCurrLevel([beforeLevel, id]);
-		setCurrLevel({ report_type: beforeLevel, user: id });
+		setCurrLevel({ report_type: beforeLevel, rm_id, name: rm_name });
 	};
 
 	return (
@@ -164,7 +167,6 @@ function LeaderboardFilters(props) {
 						setGlobalSearch={setSearchValue}
 					/>
 				</div>
-
 			</div>
 		</div>
 	);
