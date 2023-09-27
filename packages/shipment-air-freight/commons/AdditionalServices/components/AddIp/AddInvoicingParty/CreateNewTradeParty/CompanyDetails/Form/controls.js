@@ -17,7 +17,7 @@ const controls = ({ watch = () => {} }) => {
 		accessorType  : 'identification_number',
 		accessor      : 'label',
 		isDefaultData : false,
-	});
+	}) || 'PAN';
 
 	const formControl = [
 		{
@@ -33,9 +33,9 @@ const controls = ({ watch = () => {} }) => {
 		},
 		{
 			name        : 'registration_number',
-			label       : `${panLabel || 'PAN'}`,
+			label       : `${panLabel}`,
 			type        : 'input',
-			placeholder : `Enter ${panLabel || 'PAN'}`,
+			placeholder : `Enter ${panLabel}`,
 			rules       : {
 				required : `${panLabel} is required`,
 				pattern  : {
