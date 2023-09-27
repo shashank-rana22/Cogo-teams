@@ -5,6 +5,7 @@ import { useRequest } from '@cogoport/request';
 const useUpdateShipmentReopenJob = ({
 	shipment_id = '',
 	setFinJobOpenConfirmation = () => {},
+	refetch = () => {},
 }) => {
 	const [{ loading = false }, trigger] = useRequest({
 		url          : '/update_shipment',
@@ -23,6 +24,7 @@ const useUpdateShipmentReopenJob = ({
 			});
 			Toast.success('Shipment Reopened');
 			setFinJobOpenConfirmation(false);
+			refetch();
 		} catch (err) {
 			toastApiError(err);
 		}
