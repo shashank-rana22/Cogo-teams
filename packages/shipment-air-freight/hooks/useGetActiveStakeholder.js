@@ -24,7 +24,11 @@ const useGetActiveStakeholder = () => {
 			stakeholder: 'document_desk',
 		},
 		{ role_ids: geo.uuid.so_2_manager, stakeholder: 'document_desk_manager' },
-		{ role_ids: [geo.uuid.super_admin_id, geo.uuid.tech_super_admin_id], stakeholder: 'superadmin' },
+		{
+			role_ids: [
+				geo.uuid.super_admin_id, geo.uuid.tech_super_admin_id, geo.uuid.data_superadmin],
+			stakeholder: 'superadmin',
+		},
 		{ role_ids: geo.uuid.sales_role, stakeholder: 'sales_agent' },
 		{
 			role_ids    : [geo.uuid.admin_id, geo.uuid.corporate_owner_id, geo.uuid.corporate_owner_finance_id],

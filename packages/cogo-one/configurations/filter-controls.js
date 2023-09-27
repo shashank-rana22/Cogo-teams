@@ -89,7 +89,7 @@ const useGetControls = ({ tagOptions = [], viewType = '', activeSubTab }) => {
 			className      : 'escalation_field_controller',
 			placeholder    : 'Select Agent',
 			rules          : {
-				required: 'This is Requied',
+				required: 'This is Required',
 			},
 		},
 		{

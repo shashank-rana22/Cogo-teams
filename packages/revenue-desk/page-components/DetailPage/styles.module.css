@@ -16,17 +16,6 @@
 	border-left: 1px solid #e0e0e0;
 }
 
-.wallet_container {
-	display: flex;
-	align-items: center;
-	padding: 5px 12px;
-	margin-right: 12px;
-	background-color: #f7faef;
-	border: 1px solid #c4dc91;
-	border-radius: 4px;
-	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
-}
-
 .Detail_page {
 	margin: -24px -20px;
 }
@@ -56,22 +45,6 @@
 	font-size: 16px;
 	font-weight: 600;
 	color: #221f20;
-}
-
-.price_text {
-	font-size: 14px;
-	font-weight: 700;
-	color: #4f4f4f;
-}
-
-.wallet_text {
-	font-size: 12px;
-	font-weight: 500;
-	color: #434343;
-}
-
-.text_container {
-	margin-left: 15px;
 }
 
 .card {

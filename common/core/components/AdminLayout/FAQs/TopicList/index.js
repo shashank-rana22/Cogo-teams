@@ -1,10 +1,11 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, cl } from '@cogoport/components';
 import React, { useEffect, useState } from 'react';
 
 import Announcements from '../../Announcements';
 import QuestionListComponent from '../../QuestionListComponent';
 import Header from '../QuestionList/Header';
 
+import Feedback from './Feedback';
 import styles from './styles.module.css';
 import useTopicList from './useTopicList';
 
@@ -17,7 +18,9 @@ function TopicList({
 	setShow = () => {},
 	announcementProps = {},
 	selectedAnnouncement = '',
+	setModalData = () => {},
 }) {
+	const [showFeedback, setShowFeedback] = useState(false);
 	const [activeTab, setActiveTab] = useState('faq');
 	const [input, setInput] = useState('');
 
@@ -119,44 +122,58 @@ function TopicList({
 	];
 
 	return (
-		<div className={`${styles.container} ${(showHistory || from === 'test_module') && styles.hide_tabs}`}>
-			<Header
-				activeTab={activeTab}
-				search={search}
-				setSearch={setSearch}
-				announcementHeaderProps={announcementHeaderProps}
-				topic={topic}
-				setTopic={setTopic}
-				question={question}
-				showHistory={showHistory}
-				setQuestion={setQuestion}
-				setShowHistory={setShowHistory}
-				setShowNotificationContent={setShowNotificationContent}
-				showNotificationContent={showNotificationContent}
-				fetchFaqNotification={fetchFaqNotification}
-				refetch={refetch}
-				from={from}
-				setInput={setInput}
-				input={input}
-			/>
+		<div
+			className={cl`${styles.container} ${(showHistory || from === 'test_module') ? styles.hide_tabs : ''}`}
+		>
+			{showFeedback
+				? (
+					<Feedback setShowFeedback={setShowFeedback} />
+				)
 
-			<Tabs
-				activeTab={activeTab}
-				onChange={setActiveTab}
-				fullWidth
-				className={styles.tab_hide}
-				themeType="main_tabs"
-			>
-				{TABS_MAPPING.map((tabItem) => {
-					const { name, title, component: Component, props } = tabItem;
+				: (
+					<>
+						<Header
+							activeTab={activeTab}
+							search={search}
+							setSearch={setSearch}
+							announcementHeaderProps={announcementHeaderProps}
+							topic={topic}
+							setTopic={setTopic}
+							question={question}
+							showHistory={showHistory}
+							setQuestion={setQuestion}
+							setShowHistory={setShowHistory}
+							setShowNotificationContent={setShowNotificationContent}
+							showNotificationContent={showNotificationContent}
+							fetchFaqNotification={fetchFaqNotification}
+							refetch={refetch}
+							from={from}
+							setInput={setInput}
+							input={input}
+							showFeedback={showFeedback}
+							setModalData={setModalData}
+							setShowFeedback={setShowFeedback}
+						/>
 
-					return (
-						<TabPanel key={name} name={name} title={title}>
-							<Component {...props} />
-						</TabPanel>
-					);
-				})}
-			</Tabs>
+						<Tabs
+							activeTab={activeTab}
+							onChange={setActiveTab}
+							fullWidth
+							className={styles.tab_hide}
+							themeType="main_tabs"
+						>
+							{TABS_MAPPING.map((tabItem) => {
+								const { name, title, component: Component, props } = tabItem;
+
+								return (
+									<TabPanel key={name} name={name} title={title}>
+										<Component {...props} />
+									</TabPanel>
+								);
+							})}
+						</Tabs>
+					</>
+				)}
 		</div>
 	);
 }

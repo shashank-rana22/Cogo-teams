@@ -37,7 +37,15 @@ function HeaderComponent({ props = {} }) {
 		publishRatings,
 		toggleVal,
 		setToggleVal,
-	} = usePublishRatings({ selectedEmployees, level, data, selectCycle, activeTab, fetchRatingReviewDetails });
+	} = usePublishRatings({
+		selectedEmployees,
+		level,
+		data,
+		selectCycle,
+		activeTab,
+		fetchRatingReviewDetails,
+		setSelectedEmployees,
+	});
 
 	return (
 		<div>

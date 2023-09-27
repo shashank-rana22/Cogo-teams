@@ -46,8 +46,15 @@
 
 .pagination {
 	margin-left: auto;
+	margin-left: 8px;
 
 	> div {
 		margin-left: auto;
 	}
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }

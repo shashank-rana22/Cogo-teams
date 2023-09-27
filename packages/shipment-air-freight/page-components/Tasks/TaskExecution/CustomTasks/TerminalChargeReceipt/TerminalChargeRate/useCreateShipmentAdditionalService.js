@@ -1,9 +1,12 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
+const DEFAULT_VALUE = 0;
+
 const useCreateShipmentAdditionalService = ({
 	shipmentData = {},
 	setIRNGenerated = () => {},
+	setShowConfirm = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_additional_service',
@@ -11,7 +14,15 @@ const useCreateShipmentAdditionalService = ({
 	}, { manual: true });
 
 	const createShipmentAdditionalService = async (values) => {
-		const { total_tax_price = '', currency = '' } = values || {};
+		const { currency = '', terminalChargeReceipt = [] } = values || {};
+
+		let price = 0;
+		let tax_price = 0;
+
+		(terminalChargeReceipt || []).forEach((val) => {
+			price += Number(val?.price || DEFAULT_VALUE);
+			tax_price += Number(val?.tax_price || DEFAULT_VALUE);
+		});
 		const { id = '', all_services = [] } = shipmentData || {};
 
 		const airFreightLocalService = all_services.find((
@@ -27,8 +38,9 @@ const useCreateShipmentAdditionalService = ({
 			state                 : 'accepted_by_importer_exporter',
 			add_to_sell_quotation : true,
 			quantity              : 1,
-			buy_price             : Number(total_tax_price),
-			price                 : Number(total_tax_price),
+			buy_price             : Number(price),
+			price                 : Number(price),
+			tax_amount            : tax_price,
 			unit                  : 'per_shipment',
 			currency,
 			service_id            : airFreightLocalService?.id,
@@ -37,6 +49,7 @@ const useCreateShipmentAdditionalService = ({
 		try {
 			await trigger({ data: payload });
 			setIRNGenerated(false);
+			setShowConfirm(false);
 		} catch (err) {
 			toastApiError(err);
 		}

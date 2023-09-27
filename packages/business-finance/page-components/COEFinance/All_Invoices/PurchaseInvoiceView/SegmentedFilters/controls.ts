@@ -3,10 +3,11 @@ const controls = [
 		name        : 'urgencyTag',
 		type        : 'multiSelect',
 		placeholder : 'Select Urgency',
+		prefix      : () => {},
 		span        : 6,
 		isClearable : true,
-
-		options: [
+		style       : { margin: '0 8px' },
+		options     : [
 			{ label: 'Advanced PDA Accounts', value: 'pda' },
 			{ label: 'Advanced CFS security deposit', value: 'cfs' },
 			{ label: 'Surrender (Telex) BL Payments', value: 'telex' },
@@ -21,6 +22,7 @@ const controls = [
 			{ label: 'Short Transit Shipment', value: 'short_transit_shipment' },
 			{ label: 'Co-ordination Charges', value: 'coordination_charges' },
 			{ label: 'SEZ Shipment', value: 'sez_shipment' },
+			{ label: 'THC', value: 'thc' },
 		],
 	},
 ];

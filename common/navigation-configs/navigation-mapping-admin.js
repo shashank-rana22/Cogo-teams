@@ -1403,7 +1403,9 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/kam-desk',
 					type          : 'link',
 					main_apis     : ['list_kam_desk_shipments'],
-					possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens, ...apis.shipment],
+					possible_apis : [...apis.kam_desk, ...apis.search,
+						...apis.cogolens, ...apis.shipment, ...apis.feedback,
+						...apis.sales_invoice, ...apis.cargo_insurance],
 				},
 				{
 					key           : 'coe-document_desk',
@@ -1927,6 +1929,16 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis     : [],
 			icon          : IcMInvoiceApprovals,
 			possible_apis : apis.ground_ops,
+			module_type   : 'dashboards',
+		},
+		ams_submission: {
+			key           : 'ams_submission',
+			title         : t('common:ams_submission'),
+			href          : '/v2/ams-submission',
+			as            : '/v2/ams-submission',
+			type          : 'link',
+			main_apis     : [],
+			possible_apis : apis.ams_submission,
 			module_type   : 'dashboards',
 		},
 		printing_desk: {

@@ -130,5 +130,15 @@
     "raised_to_desk": "Raised to desk",
     "request_type": "Request Type",
     "select_sid": "Select SID",
-    "select_request_ype": "Select Request Type"
+    "select_request_ype": "Select Request Type",
+    "by_category": "By Category",
+    "by_desk": "By Desk",
+    "select_raised_by_desk": "Select raised by desk",
+    "select_raised_to_desk": "Select raised to desk",
+    "organization": "Organization",
+    "sid": "SID",
+    "service": "Service",
+    "trade_type": "Trade Type",
+    "category": "Category",
+    "sub_category": "Sub Category"
 }

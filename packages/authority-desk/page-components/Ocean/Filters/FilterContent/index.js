@@ -13,7 +13,7 @@ function FilterContent({ filters = {}, setShowPopover = () => {}, setFilters = (
 	const [formValues, setFormValues] = useState(defaultFilters);
 
 	const clearFilters = () => {
-		setFilters({ page: 1, is_job_closed: 'no' });
+		setFilters({ page: 1 });
 		setShowPopover(false);
 	};
 
@@ -56,6 +56,7 @@ function FilterContent({ filters = {}, setShowPopover = () => {}, setFilters = (
 			<div className={styles.action_button_container}>
 				{actionButtons.map((button) => (
 					<Button
+						key={button?.label}
 						size="md"
 						className={`${styles.action_button} ${styles.disabled_button}`}
 						{...button}

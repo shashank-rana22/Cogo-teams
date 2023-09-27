@@ -9,6 +9,7 @@ function KebabContent({
 	commonActions = false,
 	editInvoicesVisiblity = false,
 	invoice = {},
+	is_job_closed_financially = false,
 }) {
 	return (
 		<div className={styles.dialog_box}>
@@ -26,24 +27,28 @@ function KebabContent({
 						</div>
 					) : null}
 
-					<div>
+					{!is_job_closed_financially ? (
+						<div>
+							<ClickableDiv
+								className={styles.text}
+								onClick={() => handleSetter('changeCurrency')}
+							>
+								Change Currency
+							</ClickableDiv>
+							<div className={styles.line} />
+						</div>
+					) : null}
+
+					{!is_job_closed_financially ? (
 						<ClickableDiv
 							className={styles.text}
-							onClick={() => handleSetter('changeCurrency')}
+							onClick={() => handleSetter('addRemark')}
 						>
-							Change Currency
+							Add Remarks
 						</ClickableDiv>
-						<div className={styles.line} />
-					</div>
+					) : null}
 
-					<ClickableDiv
-						className={styles.text}
-						onClick={() => handleSetter('addRemark')}
-					>
-						Add Remarks
-					</ClickableDiv>
-
-					{invoice?.billing_address?.trade_party_type === 'self' ? (
+					{!is_job_closed_financially && invoice?.billing_address?.trade_party_type === 'self' ? (
 						<div>
 							<div className={styles.line} />
 							<ClickableDiv
@@ -60,34 +65,40 @@ function KebabContent({
 			{(invoice.exchange_rate_document || []).map((url) => (
 				<div key={url}>
 					{commonActions ? <div className={styles.line} /> : null}
+
 					<ClickableDiv
 						className={styles.text}
 						onClick={() => window.open(url, '_blank')}
 					>
 						Exchange Rate Document
 					</ClickableDiv>
+
 					<div className={styles.line} />
+
 					<ClickableDiv
 						onClick={() => handleSetter('rateSheet')}
 						className={styles.text}
 					>
 						Exchange Rate Sheet
-
 					</ClickableDiv>
-					<div>
-						<div className={styles.line} />
-						<ClickableDiv
-							className={styles.text}
-							onClick={() => handleSetter('addCustomerInvoice')}
-						>
-							Add
-							{' '}
-							{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? '/ Generate ' : ''}
-							Customer Invoice
-						</ClickableDiv>
-					</div>
+
+					{!is_job_closed_financially ? (
+						<div>
+							<div className={styles.line} />
+							<ClickableDiv
+								className={styles.text}
+								onClick={() => handleSetter('addCustomerInvoice')}
+							>
+								Add
+								{' '}
+								{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? '/ Generate ' : ''}
+								Customer Invoice
+							</ClickableDiv>
+						</div>
+					) : null}
 				</div>
 			))}
+
 			{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? (
 				<div>
 					<div className={styles.line} />

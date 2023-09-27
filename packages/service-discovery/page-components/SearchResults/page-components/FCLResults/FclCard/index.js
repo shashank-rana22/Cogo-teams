@@ -234,10 +234,19 @@ function FclCard({
 
 	const isMultiContainer = primaryServiceRates.length > ONE;
 
+	let subStyleClassname = '';
+
+	if (isCogoAssured) {
+		subStyleClassname = 'cogo_assured';
+	}
+	if (isSelectedCard) {
+		subStyleClassname = 'selected_card';
+	}
+
 	return (
 		<div
-			className={cl`${styles.container} ${isSelectedCard && styles.selected_card}`}
-			style={{ marginTop: index === GLOBAL_CONSTANTS.zeroth_index ? '0px' : '40px' }}
+			className={cl`${styles.container} ${styles[subStyleClassname]}`}
+			style={(!index && !isSelectedCard) ? { marginTop: 0 } : {}}
 		>
 			<RateCardTopSection
 				rateCardData={rateCardData}
