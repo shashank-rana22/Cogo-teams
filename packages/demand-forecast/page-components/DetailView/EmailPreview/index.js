@@ -41,8 +41,6 @@ function EmailPreview({
 
 	const { from = {}, organization_users = [], subject = '' } = emailPreviewData?.data || {};
 
-	console.log('organization_users::', organization_users);
-
 	const options = organization_users.map((user) => ({
 		label : user?.name,
 		value : user?.user_id,
