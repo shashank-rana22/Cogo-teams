@@ -1,5 +1,6 @@
+import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { format, startCase } from '@cogoport/utils';
+import { format, startCase, isEmpty } from '@cogoport/utils';
 
 import { VALUE_ZERO } from '../../../../constants';
 
@@ -40,6 +41,52 @@ function Footer({ data = {}, walletAmount = {} }) {
 		},
 	];
 
+	function Content() {
+		return (
+			<div>
+				<ui>
+					<li>
+						Min Price:
+						{' '}
+						{formatAmount({
+							amount   : data?.shipping_preferences?.min_price,
+							currency : data?.shipping_preferences?.currency,
+							options  : {
+								style                 : 'currency',
+								notation              : 'compact',
+								compactDisplay        : 'short',
+								minimumFractionDigits : 2,
+							},
+						})}
+					</li>
+					<li>
+						Max Price:
+						{' '}
+						{formatAmount({
+							amount   : data?.shipping_preferences?.max_price,
+							currency : data?.shipping_preferences?.currency,
+							options  : {
+								style                 : 'currency',
+								notation              : 'compact',
+								compactDisplay        : 'short',
+								minimumFractionDigits : 2,
+							},
+						})}
+					</li>
+					<ul>
+						Preferred Shipping Lines:
+						{' '}
+						{(data?.shipping_preferences?.preferred_shipping_lines || []).map((shipping_line) => (
+							<li key={shipping_line?.id}>{shipping_line?.business_name}</li>
+						))}
+
+					</ul>
+
+				</ui>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			{infoArray.map((item) => (item.value ? (
@@ -51,6 +98,19 @@ function Footer({ data = {}, walletAmount = {} }) {
 					{item.value}
 				</div>
 			) : null))}
+			{!isEmpty(data?.shipping_preferences) && (
+				<div className={styles.text}>
+					<span
+						style={{ fontWeight: '600', fontSize: '12px' }}
+					>
+						Shipping Preferences:-
+
+					</span>
+					<Tooltip content={Content()}>
+						<div style={{ textDecoration: 'underline' }}>view</div>
+					</Tooltip>
+				</div>
+			)}
 
 			<div className={styles.wallet_container}>
 				<div className={styles.wallet_text}>

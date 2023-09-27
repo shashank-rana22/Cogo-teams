@@ -32,6 +32,7 @@ function CargoDetailPills({ detail, labels }) {
 		'awb_execution_date',
 		'truck_types',
 		'commodity_description',
+		'bl_type',
 	];
 
 	const label = labels || labelsMapping;
