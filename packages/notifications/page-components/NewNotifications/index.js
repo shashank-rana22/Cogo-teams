@@ -1,4 +1,3 @@
-// import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import navigationMapping from '@cogoport/navigation-configs/navigation-mapping-admin';
 import { useRouter } from '@cogoport/next';
@@ -20,10 +19,7 @@ function NewNotifications({
 	const { push } = useRouter();
 	const { t } = useTranslation(['notifications', 'common']); // ??
 	const { general } = useSelector((state) => state);
-	// const { unPrefixedPath } = general;
 	const { query: { partner_id } = {} } = general;
-	// const geo = getGeoConstants();
-	// const intervalRef = useRef(null);
 	const navigationMappingAdmin = navigationMapping({ t });
 	const NAVIGATION_LINKS = extractNavLinks(navigationMappingAdmin);
 	const { zeroth_index } = GLOBAL_CONSTANTS;
@@ -46,6 +42,12 @@ function NewNotifications({
 	}, { manual: true });
 
 	const { is_not_seen_count = zeroth_index, list = [] } = data || {};
+
+	const formattedData = {
+		not_seen_count: is_not_seen_count,
+		list,
+		loading,
+	};
 
 	const updateAction = async (action) => {
 		try {
@@ -121,18 +123,6 @@ function NewNotifications({
 		setNotificationPopover(false);
 		setResetSubnavs(false);
 	};
-
-	useEffect(() => {
-		onShowToggle(notificationPopover);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [notificationPopover, setNotificationPopover]);
-
-	const formattedData = {
-		not_seen_count: is_not_seen_count,
-		list,
-		loading,
-	};
-
 	const onSeeAll = () => {
 		push('/notifications');
 		setNotificationPopover(false);
@@ -140,38 +130,10 @@ function NewNotifications({
 		setResetSubnavs(false);
 	};
 
-	// Todo : Not being used to countinuesly fire trigger
-
-	// useEffect(() => {
-	// 	if (!loading && (unPrefixedPath !== '/notifications' || dataRequired)) {
-	// 		intervalRef.current = setInterval(() => {
-	// 			try {
-	// 				trigger({
-	// 					params: {
-	// 						data_required                  : dataRequired,
-	// 						not_seen_count_required        : true,
-	// 						filters                        : { type: 'platform_notification' },
-	// 						communication_content_required : dataRequired,
-	// 					},
-	// 				});
-	// 			} catch (err) {
-	// 				Promise.reject(err);
-	// 			}
-	// 		}, geo.notification_polling_interval);
-	// 	}
-
-	// 	return () => {
-	// 		clearInterval(intervalRef.current);
-	// 	};
-	// }, [loading, dataRequired, unPrefixedPath, geo.notification_polling_interval, trigger]);
-
-	// useEffect(() => {
-	// 	onShowToggle(openNotificationPopover);
-	// 	// if (!openNotificationPopover && currentNotSeen > zeroth_index) {
-	// 	// 	setCurrentNotSeen(zeroth_index);
-	// 	// }
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [openNotificationPopover, setOpenNotificationPopover]);
+	useEffect(() => {
+		onShowToggle(notificationPopover);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [notificationPopover]);
 
 	return (
 		<NotificationsPopover

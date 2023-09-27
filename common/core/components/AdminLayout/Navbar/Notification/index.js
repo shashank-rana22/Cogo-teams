@@ -2,10 +2,10 @@ import { NewNotifications } from '@cogoport/notifications';
 
 import styles from './styles.module.css';
 
-function AdminNotification(props) {
+function Notification(props) {
 	const {
 		setNotificationPopover = () => {},
-		notificationPopover,
+		notificationPopover = false,
 		setResetSubnavs = () => {},
 	} = props || {};
 
@@ -20,4 +20,4 @@ function AdminNotification(props) {
 	) : null;
 }
 
-export default AdminNotification;
+export default Notification;

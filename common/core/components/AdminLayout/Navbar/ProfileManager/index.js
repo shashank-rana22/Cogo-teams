@@ -1,7 +1,10 @@
 // import logout from '@cogoport/authentication/utils/getLogout';
+import { Toast } from '@cogoport/components';
 import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import getStaticPath from '@cogoport/notifications/utils/getStaticPath';
 import { useTranslation } from 'next-i18next';
+import { useEffect, useState } from 'react';
 
 import useGetAllActions from '../../../../hooks/useGetAllActions';
 import useRemoveUserSessions from '../../../../hooks/useRemoveUserSessions';
@@ -9,6 +12,8 @@ import useRemoveUserSessions from '../../../../hooks/useRemoveUserSessions';
 import useGetUnreadMessagesCount from './helpers/useGetUnreadMessageCount';
 import Items from './Items';
 import styles from './styles.module.css';
+
+const ZERO = 0;
 
 function ProfileManager({
 	resetSubnavs = () => {},
@@ -25,12 +30,57 @@ function ProfileManager({
 	mobileShow = false,
 }) {
 	const router = useRouter();
-	const { t } = useTranslation(['common']);
+	const { t } = useTranslation(['common', 'notifications']);
+
+	let audio = null;
+
+	if (typeof window !== 'undefined') {
+		audio = new Audio(getStaticPath('/mp3/notification.mp3'));
+	}
 
 	const { unReadChatsCount = 0 } = useGetUnreadMessagesCount({
 		firestore,
 		userId,
 	});
+
+	const [currentNotSeen, setCurrentNotSeen] = useState(unReadChatsCount);
+
+	useEffect(() => {
+		try {
+			if (Notification && Notification.permission !== 'granted') {
+				Notification.requestPermission();
+			}
+		} catch (err) {
+			Toast.default(err, { hideAfter: 3 });
+		}
+	}, []);
+
+	useEffect(() => {
+		try {
+			if (unReadChatsCount < currentNotSeen) {
+				setCurrentNotSeen(unReadChatsCount);
+			}
+
+			const notifyMe = () => {
+				if (!('Notification' in window)) {
+					Toast.default('This browser does not support desktop notification', { icon: false });
+				} else if (Notification.permission === 'granted') {
+					// eslint-disable-next-line no-unused-vars
+					const notification = new Notification(
+						`${unReadChatsCount} ${t('notifications:new_notifications')}`,
+					);
+				}
+			};
+
+			if (audio && unReadChatsCount > currentNotSeen && unReadChatsCount !== ZERO) {
+				audio.play();
+				notifyMe();
+				setCurrentNotSeen(unReadChatsCount);
+			}
+		} catch (err) {
+			Toast.error(err, { hideAfter: 3 });
+		}
+	}, [audio, unReadChatsCount, currentNotSeen, t]);
 
 	const routerFunction = () => {
 		router.push('/my-profile');

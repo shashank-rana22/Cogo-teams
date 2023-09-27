@@ -10,7 +10,7 @@ import { sortNavs } from '../../../helpers/sortItems';
 import useGetUserSessionMappings from '../../../hooks/useGetUserSessionMappings';
 import Items from '../Items';
 
-import AdminNotification from './AdminNotification';
+import Notification from './Notification';
 import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
 import SwitchAccounts from './SwitchAccounts';
@@ -206,7 +206,7 @@ function Navbar({
 				{
 					notificationPopover
 						&& (
-							<AdminNotification
+							<Notification
 								notificationPopover={notificationPopover}
 								setNotificationPopover={setNotificationPopover}
 								setResetSubnavs={setResetSubnavs}
