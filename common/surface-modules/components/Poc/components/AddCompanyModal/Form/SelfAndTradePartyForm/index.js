@@ -1,5 +1,7 @@
 import { Loader } from '@cogoport/components';
 import {
+	CheckboxController,
+	UploadController,
 	CreatableSelectController,
 	InputController,
 	MobileNumberController,
@@ -7,6 +9,7 @@ import {
 	SelectController,
 	useForm,
 } from '@cogoport/forms';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
 
@@ -44,7 +47,8 @@ function SelfAndTradePartyForm({
 		setValue,
 	} = useForm();
 
-	const { trade_party_id, address } = watch() || {};
+	const { trade_party_id = '', address = '', not_reg_under_gst = false } = watch();
+	const geo = getGeoConstants();
 
 	const firstTradeParty = list?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
@@ -201,6 +205,45 @@ function SelfAndTradePartyForm({
 								</div>
 							</div>
 
+							<div className={styles.checkbox}>
+								<CheckboxController
+									name="not_reg_under_gst"
+									control={control}
+									label={<strong>Not registered under GST</strong>}
+								/>
+							</div>
+
+							<div className={styles.row}>
+								<div>
+									<label className={styles.form_label}>GST Number</label>
+									<InputController
+										size="sm"
+										name="tax_number"
+										placeholder="Enter GST Number"
+										control={control}
+										rules={{
+											required : { value: !not_reg_under_gst, message: 'GST Number is required' },
+											pattern  : { value: geo.regex.GST, message: 'GST Number is invalid' },
+										}}
+										disabled={not_reg_under_gst}
+									/>
+									{Error('tax_number', errors)}
+								</div>
+
+								<div className={styles.upload_container}>
+									<label className={styles.form_label}>GST Proof</label>
+									<UploadController
+										className="tax_document"
+										name="tax_number_document_url"
+										disabled={not_reg_under_gst}
+										control={control}
+										rules={{
+											required: { value: !not_reg_under_gst, message: 'GST Proof is required' },
+										}}
+									/>
+									{Error('tax_number_document_url', errors)}
+								</div>
+							</div>
 						</>
 
 					)}

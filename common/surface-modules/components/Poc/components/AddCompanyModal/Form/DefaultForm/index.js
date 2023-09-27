@@ -13,7 +13,7 @@ import getTradePartiesDefaultParams from '../../../../helpers/getTradePartiesDef
 
 import styles from './styles.module.css';
 
-const SHIPPER = 'shipper';
+const TRADE_PARTY_TYPES = ['shipper', 'consignee'];
 const PINCODE_INDEX = 1;
 
 function Error({ keyName = '', errors = {} }) {
@@ -52,7 +52,7 @@ function DefaultForm({
 		organization_id: organization_id || importer_exporter_id,
 		query,
 	});
-	const isShipperFTL = tradePartyType === SHIPPER && shipment_type === 'ftl_freight';
+	const isShipperFTL = TRADE_PARTY_TYPES.includes(tradePartyType) && shipment_type === 'ftl_freight';
 
 	const {
 		control,
