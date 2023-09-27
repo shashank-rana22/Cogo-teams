@@ -1,6 +1,6 @@
-import PossibleSchedules from './BottomTabs/PossibleSchedules';
-import PriceBreakup from './BottomTabs/PriceBreakUp';
-import TermsConditions from './BottomTabs/TermsConditions';
+import PossibleSchedules from '../../../../../../../common/PossibleSchedules';
+import PriceBreakup from '../../../../../../../common/PriceBreakUp';
+import TermsConditions from '../../../../../../../common/TermsConditions';
 
 const getTabs = ({
 	rate = {},
@@ -12,7 +12,7 @@ const getTabs = ({
 			label     : 'T&C',
 			component : TermsConditions,
 			props     : {
-				rate,
+				rateCardData: rate,
 				detail,
 			},
 		},
@@ -21,7 +21,7 @@ const getTabs = ({
 			label     : 'Price break up',
 			component : PriceBreakup,
 			props     : {
-				rate,
+				rateCardData: rate,
 				detail,
 			},
 		},
@@ -30,8 +30,8 @@ const getTabs = ({
 			label     : 'Possible Schedules',
 			component : PossibleSchedules,
 			props     : {
-				rate,
-				service_type: detail.service_type,
+				rateCardData : rate,
+				service_type : detail.service_type,
 			},
 		},
 	};

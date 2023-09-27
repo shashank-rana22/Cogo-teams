@@ -6,6 +6,7 @@ function Price({
 	rate = {},
 	detail = {},
 	isSelectedCard = false,
+	setRouterLoading = () => {},
 }) {
 	const { service_rates = {} } = rate;
 	const { service_details = {}, primary_service_id: serviceId = '' } = detail;
@@ -17,12 +18,13 @@ function Price({
 
 	return (
 		<div className={styles.container}>
-			<FreightPrice rate={rate} primary_service={primary_service} />
+			<FreightPrice rate={rate} primary_service={primary_service} detail={detail} />
 
 			<Buttons
 				detail={detail}
 				rate={rate}
 				isSelectedCard={isSelectedCard}
+				setRouterLoading={setRouterLoading}
 			/>
 		</div>
 	);

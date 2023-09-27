@@ -20,10 +20,9 @@ function ComparisonHeader({
 	const handleDelete = (rate) => {
 		const { id: idOfCardToBeDeleted = '' } = rate;
 
-		setComparisonRates((pv) => {
-			const tempObj = { ...pv };
-			delete tempObj[idOfCardToBeDeleted];
-			return tempObj;
+		setComparisonRates((prevRates) => {
+			const { [idOfCardToBeDeleted]: _, ...updatedRates } = prevRates;
+			return updatedRates;
 		});
 	};
 

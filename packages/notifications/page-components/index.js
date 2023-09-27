@@ -141,7 +141,7 @@ function Notifications() {
 	};
 
 	const onMarkAllAsRead = () => {
-		updateAction('clicked');
+		updateAction('seen');
 	};
 
 	const handleNotificationClick = async (item) => {

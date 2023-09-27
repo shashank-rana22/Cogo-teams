@@ -8,6 +8,7 @@ function Body({
 	// infoBanner = {},
 	// showGuide = false,
 	isSelectedCard = false,
+	setRouterLoading = () => {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -17,6 +18,7 @@ function Body({
 				detail={detail}
 				rate={rate}
 				isSelectedCard={isSelectedCard}
+				setRouterLoading={setRouterLoading}
 			/>
 		</div>
 	);

@@ -20,7 +20,7 @@ const getPillData = ({ item = {}, service_type = '' }) => {
 
 	const commonPackageDetails = [
 		`${packages_count} Pkgs, ${volume} CBM Vol., ${weight} KG WT.`,
-		commodity ? COMMODITY_NAME_MAPPING[commodity]?.name : '',
+		COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity),
 	];
 
 	const SUBSIDIARY_CONTENT_MAPPING = {
@@ -66,7 +66,7 @@ const getPillData = ({ item = {}, service_type = '' }) => {
 		air_customs       : commonPackageDetails,
 		fcl_freight_local : commonContainerDetails,
 		air_freight_local : commonPackageDetails,
-		transportation    : [startCase(truck_type)],
+		transportation    : [truck_type ? startCase(truck_type) : commonContainerDetails],
 		subsidiary        : SUBSIDIARY_CONTENT_MAPPING[item?.service],
 		haulage_freight   : commonContainerDetails,
 	};

@@ -1,7 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import { Router } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import DotLoader from '../../../../../../common/LoadingState/DotLoader';
 import AppliedFilters from '../../../../common/AppliedFilters';
@@ -30,9 +31,11 @@ function ListRates({
 	setSelectedWeek = () => {},
 	paginationProps = {},
 	contract_detail = {},
-	// infoBanner = {},
-	// setInfoBanner = () => {},
-	// isGuideViewed = false,
+	infoBanner = {},
+	setInfoBanner = () => {},
+	isGuideViewed = false,
+	routerLoading = false,
+	setRouterLoading = () => {},
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
@@ -40,6 +43,12 @@ function ListRates({
 	const showComparison = !isEmpty(comparisonRates);
 
 	const { total_count, page_limit, page } = paginationProps;
+
+	useEffect(() => {
+		Router.events.on('routeChangeComplete', () => {
+			setRouterLoading(false);
+		});
+	}, [setRouterLoading]);
 
 	if (!loading && isEmpty(rates)) {
 		return (
@@ -53,6 +62,14 @@ function ListRates({
 				setOpenAccordian={setOpenAccordian}
 				openAccordian={openAccordian}
 			/>
+		);
+	}
+	if (routerLoading) {
+		return (
+			<div className={styles.loading}>
+				<span className={styles.loading_text}>Loading Rates</span>
+				<DotLoader />
+			</div>
 		);
 	}
 
@@ -71,6 +88,7 @@ function ListRates({
 						setShowFilterModal={setShowFilterModal}
 						openAccordian={openAccordian}
 						setOpenAccordian={setOpenAccordian}
+						setRouterLoading={setRouterLoading}
 					/>
 
 					{showComparison ? (
@@ -108,8 +126,13 @@ function ListRates({
 						loading={loading}
 						rate={rateItem}
 						detail={detail}
+						index={index}
 						setComparisonRates={setComparisonRates}
 						comparisonRates={comparisonRates}
+						routerLoading={routerLoading}
+						showGuide={!index && !isGuideViewed}
+						infoBanner={infoBanner}
+						setInfoBanner={setInfoBanner}
 					/>
 
 					{index === GLOBAL_CONSTANTS.zeroth_index ? (
@@ -143,7 +166,11 @@ function ListRates({
 				</div>
 			)}
 
-			{loading ? null : <RequestRate details={detail} className={styles.request_rate} />}
+			{loading ? null : (
+				<div className={styles.request_rate}>
+					<RequestRate details={detail} />
+				</div>
+			)}
 		</div>
 	);
 }

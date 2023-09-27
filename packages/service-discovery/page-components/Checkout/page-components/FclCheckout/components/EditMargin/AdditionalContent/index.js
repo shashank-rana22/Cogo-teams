@@ -4,8 +4,8 @@ import Cancellation from '../../../../../commons/Cancellation';
 import ConfirmationTexts from '../../../../../commons/ConfirmationTexts';
 import DefaultQuotationInfo from '../../../../../commons/DefaultQuotationInfo';
 import { CheckoutContext } from '../../../../../context';
+import AdditionalServices from '../../../commons/AdditionalServices';
 
-import AdditionalServices from './AdditionalServices';
 import EditMarginFooter from './EditMarginFooter';
 import styles from './styles.module.css';
 

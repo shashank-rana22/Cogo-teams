@@ -26,7 +26,7 @@ function RatesCards({ data, singleServiceData, rate_key, loading }) {
 							<Card
 								data={item}
 								rate_key={rate_key}
-								serviceData={singleServiceData}
+								singleServiceData={singleServiceData}
 							/>
 						</div>
 					))}

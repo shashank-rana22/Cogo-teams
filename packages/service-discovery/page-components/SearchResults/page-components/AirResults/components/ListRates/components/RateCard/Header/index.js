@@ -1,5 +1,7 @@
-import { Checkbox, cl } from '@cogoport/components';
+import { Checkbox, cl, Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import InfoBannerContent from '../../../../../../../../../common/InfoBannerContent';
 import LikeDislike from '../../../../../../../common/LikeDislike';
 
 import styles from './styles.module.css';
@@ -19,9 +21,10 @@ function Header({
 	detail = {},
 	comparisonRates = {},
 	setComparisonRates = () => {},
-	// infoBanner = {},
-	// showGuide = false,
 	isSelectedCard = false,
+	infoBanner = {},
+	showGuide = false,
+	setInfoBanner = () => {},
 }) {
 	const { airline = {}, id: card_id, source = '' } = rate;
 
@@ -34,21 +37,20 @@ function Header({
 				[card_id]: rate,
 			}));
 		} else {
-			setComparisonRates((pv) => {
-				const temp = { ...pv };
-				delete temp[card_id];
-				return temp;
+			setComparisonRates((prevRates) => {
+				const { [card_id]: _, ...updatedRates } = prevRates;
+				return updatedRates;
 			});
 		}
 	};
 
-	// const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
+	const { current, buttonProps = {}, totalBanners = 1 } = infoBanner;
 
-	// const showPopover = current === 'comparision_button' && showGuide;
+	const showPopover = current === 'comparision_button' && showGuide;
 
-	// const popoverComponentData = buttonProps.comparision_button || {};
+	const popoverComponentData = buttonProps.comparision_button || {};
 
-	const imageUrl = airline?.logo_url;
+	const imageUrl = airline?.logo_url || GLOBAL_CONSTANTS.image_url.airline_default_icon;
 
 	return (
 		<div className={styles.container}>
@@ -58,23 +60,34 @@ function Header({
 
 			<div className={styles.left_section}>
 				{!isSelectedCard ? (
-					<Checkbox
-						checked={selectedCardIDs.includes(card_id)}
-						onChange={handleCheckbox}
-						disabled={selectedCardIDs.length >= MAX_COMPARABLE_RATE_CARD_INDEX
+					<Popover
+						placement="bottom"
+						caret
+						render={(
+							<InfoBannerContent
+								popoverComponentData={popoverComponentData}
+								totalBanners={totalBanners}
+								setInfoBanner={setInfoBanner}
+							/>
+						)}
+						visible={showPopover}
+					>
+						<Checkbox
+							checked={selectedCardIDs.includes(card_id)}
+							onChange={handleCheckbox}
+							disabled={selectedCardIDs.length >= MAX_COMPARABLE_RATE_CARD_INDEX
 						&& !selectedCardIDs.includes(card_id)}
-					/>
+						/>
+					</Popover>
 				) : null}
 
 				<div className={styles.airline_info}>
-					{imageUrl ? (
-						<img
-							src={imageUrl}
-							alt={rate?.airline?.short_name}
-							className={styles.airline__logo}
-							height={30}
-						/>
-					) : null}
+					<img
+						src={imageUrl}
+						alt={rate?.airline?.short_name}
+						className={styles.airline__logo}
+						height={30}
+					/>
 
 					<div className={styles.airline_name}>
 						{rate?.airline?.short_name}

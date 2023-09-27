@@ -2,8 +2,8 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 // import ShippingLineModal from '../../../../../../common/ShippingLineModal';
-import { LoadingState } from '../../../../../../common/LoadingState';
 import CargoModal from '../../../../common/CargoModal';
+import LoadingState from '../../../../common/Loading';
 import useCreateCheckout from '../../../../hooks/useCreateCheckout';
 import FclCard from '../../FclCard';
 

@@ -14,8 +14,6 @@ function PreviewBooking() {
 	} = useContext(CheckoutContext);
 
 	const {
-		setInfoBanner = () => {},
-		infoBanner = {},
 		setShowBreakup = () => {},
 		showBreakup = false,
 		agreeTandC = false,
@@ -30,15 +28,11 @@ function PreviewBooking() {
 				rate={rate}
 				setShowBreakup={setShowBreakup}
 				showBreakup={showBreakup}
-				setInfoBanner={setInfoBanner}
-				infoBanner={infoBanner}
 			/>
 
 			<AdditionalContent
 				agreeTandC={agreeTandC}
 				setAgreeTandC={setAgreeTandC}
-				setInfoBanner={setInfoBanner}
-				infoBanner={infoBanner}
 			/>
 		</div>
 	);

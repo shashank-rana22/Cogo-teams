@@ -11,7 +11,6 @@ import AccordianContent from './AccordianContent';
 import CargoInsuranceContainer from './CargoInsuranceContainer';
 import CargoInsuranceModal from './CargoInsuranceModal';
 import useDeleteCargoInsurance from './CargoInsuranceModal/hooks/useDeleteCargoInsurance';
-import styles from './styles.module.css';
 
 const DELETE_TITLE = `Customers have lost around $10 billion worth of goods in just last 1 
 year due to various reasons. We recommend keeping your cargo insurance.`;
@@ -72,9 +71,7 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 	}
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.heading}>Other Services</div>
-
+		<div>
 			<AccordionView
 				itemKey="cargo_insurance"
 				active={active}

@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import useSpotSearchService from '../../../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
 import DeleteServiceModal from '../../../common/DeleteServiceModal';
-import { getFclPayload } from '../../configs';
+import { getServiceWisePayload } from '../../configs';
 import useDeleteAdditionalService from '../../hooks/useDeleteAdditionalService';
 import ICONS_MAPPING from '../../icons-mapping';
 
@@ -65,7 +65,7 @@ function ListItem({
 
 	const handleAddServices = async (service) => {
 		if (!service.controls.length) {
-			const payload = getFclPayload({
+			const payload = getServiceWisePayload({ primary_service: detail.primary_service || detail.service_type })({
 				rateCardData,
 				detail,
 				additionalFormInfo : {},
@@ -136,14 +136,14 @@ function ListItem({
 		const currency = rateData?.[GLOBAL_CONSTANTS.zeroth_index]?.total_price_currency;
 		let ratesAvailableForAll = true;
 
-		const totalPrice = rateData
-			.map((rateItem) => {
-				if (!rateItem.total_price_discounted) {
-					ratesAvailableForAll = false;
-				}
-				return rateItem.total_price_discounted || DEFAULT_PRICE_VALUE;
-			})
-			.reduce((accumulator, value) => accumulator + value, INITIAL_REDUCE_VALUE);
+		const totalPrice = rateData.reduce((accumulator, rateItem) => {
+			const { total_price_discounted } = rateItem;
+			if (typeof total_price_discounted !== 'number') {
+				ratesAvailableForAll = false;
+			}
+			return accumulator + (typeof total_price_discounted === 'number'
+				? total_price_discounted : DEFAULT_PRICE_VALUE);
+		}, INITIAL_REDUCE_VALUE);
 
 		const formattedAmount = formatPrice(currency, totalPrice);
 

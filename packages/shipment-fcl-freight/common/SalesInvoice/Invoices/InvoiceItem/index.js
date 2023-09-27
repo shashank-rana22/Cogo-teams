@@ -15,6 +15,7 @@ function InvoiceItem({
 	org_outstanding = {},
 	salesInvoicesRefetch = () => {},
 	refetchCN = () => {},
+	isCrossEntity = false,
 }) {
 	const outStanding = formatAmount({
 		amount   : org_outstanding?.total_outstanding_amount || DEFAULT_AMOUNT,
@@ -49,7 +50,7 @@ function InvoiceItem({
 					</div>
 				</div>
 
-				{org_outstanding ? (
+				{org_outstanding && !isCrossEntity ? (
 					<div className={styles.invoice_value_container}>
 						<div className={styles.invoice_value_title}>Total Outstanding -</div>
 						<div className={styles.invoice_value}>{outStanding}</div>
@@ -69,6 +70,7 @@ function InvoiceItem({
 						isIRNGenerated={isIRNGenerated}
 						salesInvoicesRefetch={salesInvoicesRefetch}
 						refetchCN={refetchCN}
+						isCrossEntity={isCrossEntity}
 					/>
 				))}
 			</div>

@@ -1,0 +1,38 @@
+{
+	"export_transportation": {
+		"title": "Origin Transportation"
+	},
+	"export_air_customs": {
+		"title": "Origin Customs Clearance"
+	},
+	"export_air_haulage": {
+		"title": "ICD to Port Haulage"
+	},
+	"import_transportation": {
+		"title": "Destination Transportation"
+	},
+	"import_air_customs": {
+		"title": "Destination Customs Clearance"
+	},
+	"import_air_haulage": {
+		"title": "Port to ICD Haulage"
+	},
+	"air_freight": {
+		"title": "air Freight"
+	},
+	"export_air_cfs": {
+		"title": "Origin CFS Clearance"
+	},
+	"import_air_cfs": {
+		"title": "Destination CFS Clearance"
+	},
+	"export_air_freight_local": {
+		"title": "Origin Air Freight Local"
+	},
+	"import_air_freight_local": {
+		"title": "Destination Air Freight Local"
+	},
+	"warehouse":{
+		"title": "Warehouse Service"
+	}
+}

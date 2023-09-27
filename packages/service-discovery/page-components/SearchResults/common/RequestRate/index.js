@@ -17,8 +17,8 @@ function RequestRate({ details = {}, className = {}, rates = [] }) {
 			)
 		) {
 			ADDITIONAL_SERVICES.push(
-				`${details?.service_details?.[service]?.trade_type}_
-				${details?.service_details?.[service]?.service_type}`,
+				`${details?.service_details?.[service]?.trade_type}_${
+					details?.service_details?.[service]?.service_type}`,
 			);
 		}
 	});

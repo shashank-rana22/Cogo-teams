@@ -2,6 +2,7 @@ import { Button, Tooltip, CheckboxGroup, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
+import SelectLanguage from '@cogoport/select-language';
 import { startCase } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
@@ -55,12 +56,12 @@ function SelectService({
 	onClose = () => {},
 	allTakenServices = [],
 }) {
-	const { services = [], invoice_currency, invoice_source = '' } = invoice;
+	const { services = [], invoice_currency, invoice_source = '', invoice_language = '' } = invoice;
 	const selected = useMemo(() => services?.map((service) => service?.serviceKey || ''), [services]);
 
 	const [value, onChange] = useState(selected);
 	const [invoiceCurrency, setInvoiceCurrency] = useState(invoice_currency);
-
+	const [invoiceLanguage, setInvoiceLanguage] = useState(invoice_language);
 	let options = [];
 
 	allTakenServices?.forEach((service) => {
@@ -152,14 +153,19 @@ function SelectService({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>Select service and invoice currency</div>
+			<div className={styles.heading}>Select service, invoice currency and language</div>
 
-			<ChangeCurrency
-				invoice={invoice}
-				invoiceCurrency={invoiceCurrency}
-				setInvoiceCurrency={setInvoiceCurrency}
-			/>
-
+			<div className={styles.select_container}>
+				<ChangeCurrency
+					invoice={invoice}
+					invoiceCurrency={invoiceCurrency}
+					setInvoiceCurrency={setInvoiceCurrency}
+				/>
+				<SelectLanguage
+					invoiceLanguage={invoiceLanguage}
+					setInvoiceLanguage={setInvoiceLanguage}
+				/>
+			</div>
 			<div className={styles.checkbox_container}>
 				<CheckboxGroup
 					options={options}
@@ -183,6 +189,7 @@ function SelectService({
 					onClick={() => handleServiceChange(invoice, {
 						service_ids      : value,
 						invoice_currency : invoiceCurrency,
+						invoice_language : invoiceLanguage,
 					})}
 				>
 					Add Services

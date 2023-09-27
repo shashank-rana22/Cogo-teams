@@ -33,18 +33,9 @@
 	width: 100%;
 }
 
-.origin {
-	min-width: max-content;
-}
-
-.destination {
-	min-width: max-content;
-}
-
 .schedule_item {
 	min-width: max-content;
 	padding: 4px 0 0;
 	font-size: 20px;
-	font-weight: 300;
 	color: #000;
 }

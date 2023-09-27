@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import Body from './Body';
 import Footer from './Footer';
@@ -10,24 +11,36 @@ function RateCard({
 	detail = {},
 	comparisonRates = {},
 	setComparisonRates = () => {},
-	// infoBanner = {},
-	// showGuide = false,
 	isSelectedCard = false,
+	index = 0,
+	setRouterLoading = () => {},
+	infoBanner = {},
+	showGuide = false,
+	setInfoBanner = () => {},
 }) {
 	return (
-		<div className={cl`${styles.container} ${isSelectedCard && styles.selected_card}`}>
+		<div
+			className={cl`${styles.container} ${isSelectedCard && styles.selected_card}`}
+			style={{
+				marginTop: index === GLOBAL_CONSTANTS.zeroth_index ? '0px' : '40px',
+			}}
+		>
 			<Header
 				detail={detail}
 				rate={rate}
 				comparisonRates={comparisonRates}
 				setComparisonRates={setComparisonRates}
 				isSelectedCard={isSelectedCard}
+				infoBanner={infoBanner}
+				showGuide={showGuide}
+				setInfoBanner={setInfoBanner}
 			/>
 
 			<Body
 				detail={detail}
 				rate={rate}
 				isSelectedCard={isSelectedCard}
+				setRouterLoading={setRouterLoading}
 			/>
 
 			<Footer

@@ -39,7 +39,7 @@ function SelectedRatesCard({
 			</div>
 			<div className={styles.lower_section}>
 				{renderedCards?.map((singleItem, index) => (
-					<div key={singleItem?.rate_id}>
+					<div key={`${singleItem?.rate_id} ${singleItem?.validity_id}`}>
 						<Card
 							data={singleItem?.data}
 							rate_key="selected_rate"

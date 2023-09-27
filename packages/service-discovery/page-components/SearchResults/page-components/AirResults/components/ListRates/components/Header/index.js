@@ -1,11 +1,11 @@
 import dynamic from 'next/dynamic';
 
+import RefreshRate from '../../../../../../common/RefreshRate';
 import Filters from '../../../../common/Filters';
 
-import RefreshRate from './RefreshRate';
 import styles from './styles.module.css';
 
-const CopyUrl = dynamic(() => import('./CopyUrl'), { ssr: false });
+const CopyUrl = dynamic(() => import('../../../../../../common/CopyUrl'), { ssr: false });
 
 function Header({
 	details = {},

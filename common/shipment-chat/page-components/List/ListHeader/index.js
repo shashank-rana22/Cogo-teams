@@ -7,8 +7,8 @@ import styles from './styles.module.css';
 
 const TAB_MAPPING = [
 	{
-		label : 'Recent',
-		name  : 'recent',
+		label : 'Unread',
+		name  : 'unread',
 	},
 	{
 		label : 'Active',
@@ -26,13 +26,18 @@ function ListHeader({
 	setFilters = () => {},
 	showUnreadChat = false,
 	handleClick = () => {},
+	shipment_data = {},
 }) {
-	const [search, setSearch] = useState('');
+	const [search, setSearch] = useState(shipment_data?.serial_id || '');
 	const { query, debounceQuery } = useDebounceQuery();
 
 	useEffect(() => {
 		debounceQuery(search);
 	}, [debounceQuery, search]);
+
+	useEffect(() => {
+		setSearch(shipment_data?.serial_id || '');
+	}, [shipment_data?.serial_id, status]);
 
 	useEffect(() => {
 		setFilters((prev) => ({
