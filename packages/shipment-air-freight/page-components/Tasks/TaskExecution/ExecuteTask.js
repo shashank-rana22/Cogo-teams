@@ -5,9 +5,7 @@ import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import LoadingState from '../LoadingState';
 
 import {
-	MarkConfirmServices,
-	GenerateMawb,
-	ConfirmBookingWithAirline,
+	MarkConfirmServices, GenerateMawb, ConfirmBookingWithAirline, CartingOrderRequest,
 	ConfirmSellPrice, ConfirmCargoAir, TerminalChargeReceipt, UploadChecklist, UploadShippingBill, UploadLeo,
 } from './CustomTasks';
 import UpdateCargoAir from './CustomTasks/UpdateCargoAir';
@@ -16,29 +14,18 @@ import useTaskExecution from './helpers/useTaskExecution';
 
 const DEFAULT_STEP_VALUE = 1;
 function ExecuteTask({
-	task = {},
-	onCancel = () => {},
-	taskListRefetch = () => {},
-	selectedMail = [],
-	services = [],
-	shipment_data = {},
-	primary_service = {},
-	getShipmentTimeline = () => {},
-	servicesLoading = false,
+	task = {}, onCancel = () => {}, taskListRefetch = () => {}, selectedMail = [], services = [],
+	shipment_data = {}, primary_service = {}, getShipmentTimeline = () => {}, servicesLoading = false,
 
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
-
 	const incoTerm = shipment_data?.inco_term;
-
 	const tradeType = incoTermArray.find((x) => x.value === incoTerm)?.tradeType
 		|| primary_service.trade_type;
-
-	const awbExecutionDate =		(shipment_data.documents || []).find(
+	const awbExecutionDate = (shipment_data?.documents || []).find(
 		(item) => item?.document_type === 'draft_airway_bill'
 				&& item?.state === 'document_accepted',
 	) || {};
-
 	const service_names = (services || []).map((serviceObj) => (serviceObj?.trade_type === 'export'
 		? `origin_${serviceObj?.service_type}`
 		: `destination_${serviceObj?.service_type}`));
@@ -46,9 +33,7 @@ function ExecuteTask({
 	(services || []).forEach((serviceObj) => {
 		service_names.push(serviceObj.service_type);
 	});
-
 	const { serial_id, commodity_category, shipment_type } = shipment_data;
-
 	const modifiedDataForConfig = {
 		...(primary_service || {}),
 		trade_type: tradeType,
@@ -240,6 +225,16 @@ function ExecuteTask({
 				refetch={taskListRefetch}
 				onCancel={onCancel}
 				type="gatepass"
+			/>
+		);
+	}
+	if (task?.task === 'request_carting_order' && tradeType === 'export') {
+		return (
+			<CartingOrderRequest
+				shipmentData={shipment_data}
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
 			/>
 		);
 	}
