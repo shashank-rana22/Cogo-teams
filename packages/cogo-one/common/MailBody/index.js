@@ -8,6 +8,7 @@ import { getRecipientData } from '../../helpers/getRecipientData';
 import useCreateReplyAllDraft from '../../hooks/useCreateReplyAllDraft ';
 import useCreateReplyDraft from '../../hooks/useCreateReplyDraft';
 import useGetMailContent from '../../hooks/useGetMailContent';
+import useGetSignature from '../../hooks/useGetSignature';
 
 import MailActions from './mailActions';
 import MailAttachments from './MailAttachments';
@@ -81,6 +82,8 @@ function MailBody({
 		loading = false,
 	} = useGetMailContent({ messageId: message_id, source, setExpandedState });
 
+	const { signature } = useGetSignature();
+
 	const { createReplyAllDraft } = useCreateReplyAllDraft();
 	const { createReplyDraft } = useCreateReplyDraft();
 
@@ -107,6 +110,7 @@ function MailBody({
 		deleteMessage,
 		createReplyDraft,
 		createReplyAllDraft,
+		signature,
 	});
 
 	const handleExpandClick = () => {

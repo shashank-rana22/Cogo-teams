@@ -1,18 +1,24 @@
-import { Button, Placeholder, Modal, Textarea, cl } from '@cogoport/components';
+import { Button, Modal, Textarea, cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useGetTaggingBills from '../../../hook/useGetMappings';
 import isDisabled from '../../../utils/isDisabled';
 
 import styles from './styles.module.css';
 import { TagCard } from './TagCard';
 
 function TagMap({
-	billId = '',
-	value = { remark: '' }, setValue = () => {}, setRemarksVal = () => {}, status = '',
+	value = { remark: '' },
+	setValue = () => {},
+	setRemarksVal = () => {},
+	status = '',
+	mappingsData = {},
+	switchDetails = () => {},
+	taggingChecked = false,
+	setCheckItem = () => {},
 }: {
-	billId: string, status?: string, value?: { approve?: string, reject?: string, undo?: string, remark: string, },
+	switchDetails?:any, taggingChecked?: boolean, setCheckItem?: any,
+	mappingsData?: any, status?: string, value?: { approve?: string, reject?: string, undo?: string, remark: string, },
 	setValue: React.Dispatch<React.SetStateAction<{
 		approve: string;
 		reject: string;
@@ -26,9 +32,6 @@ function TagMap({
 	}>>
 }) {
 	const [approve, setApprove] = useState(false);
-	const { mappingsData, loading } = useGetTaggingBills({
-		billId,
-	});
 
 	const classname = !isEmpty(mappingsData?.merge) ? 'merge' : '';
 
@@ -47,33 +50,32 @@ function TagMap({
 	const handleClickUndo = () => {
 		setValue((prev) => ({ ...prev, reject: '', approve: '' }));
 		setRemarksVal((prev) => ({ ...prev, taggingRemark: [''] }));
+		setCheckItem((prev) => ({ ...prev, taggingCheck: false }));
 	};
 
 	return (
 		<>
 			<div className={styles.border}>
-				{!loading ? (
-					<div className={cl`${styles.flex} 
+				<div className={cl`${styles.flex} 
 					${styles.column} ${classname === 'merge' ? styles.merge : ''}`}
-					>
-						{!isEmpty(mappingsData)
-							? (
-								mappingsData?.merge || mappingsData?.split || []
-							).map((item) => (
-								<div
-									key={item?.id}
-									className={cl`${styles.flex} ${styles.bordernone} ${styles.wrapper}`}
-								>
-									<TagCard
-										item={item}
-										classname={classname}
-										isfirst
-									/>
-								</div>
-							))
-							: <div className={styles.empty}>No Taggings Found</div>}
-					</div>
-				) : <Placeholder width="100%" height="200px" />}
+				>
+					{!isEmpty(mappingsData)
+						? (
+							mappingsData?.merge || mappingsData?.split || []
+						).map((item) => (
+							<div
+								key={item?.id}
+								className={cl`${styles.flex} ${styles.bordernone} ${styles.wrapper}`}
+							>
+								<TagCard
+									item={item}
+									classname={classname}
+									isfirst
+								/>
+							</div>
+						))
+						: <div className={styles.empty}>No Taggings Found</div>}
+				</div>
 			</div>
 
 			{!isEmpty(mappingsData) && isDisabled(status) && (
@@ -95,8 +97,10 @@ function TagMap({
 							<Button
 								size="md"
 								themeType="secondary"
+								disabled={taggingChecked}
 								onClick={() => {
 									handleClickApprove('approve');
+									switchDetails();
 								}}
 							>
 								Approve
@@ -104,6 +108,7 @@ function TagMap({
 							<Button
 								size="md"
 								themeType="secondary"
+								disabled={taggingChecked}
 								style={{ border: '1px solid #ed3726' }}
 								onClick={() => {
 									handleClickReject();
@@ -153,8 +158,11 @@ function TagMap({
 							<Button
 								size="md"
 								style={{ marginRight: '8px' }}
-								disabled={!(isEmpty(value?.remark))}
-								onClick={() => handleSubmitReject('reject')}
+								disabled={isEmpty(value?.remark)}
+								onClick={() => {
+									handleSubmitReject('reject');
+									switchDetails();
+								}}
 							>
 								Yes
 							</Button>

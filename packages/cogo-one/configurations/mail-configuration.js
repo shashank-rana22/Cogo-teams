@@ -53,8 +53,10 @@ export const GMAIL_OPTIONS_CONFIG = [
 export const getUserActiveMails = ({ userEmailAddress, viewType }) => {
 	const mailsToBeShown = VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.mails_to_be_shown || [];
 
+	const hidePersonalMail = VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.permissions?.hide_personal_mail || false;
+
 	return [
-		userEmailAddress,
+		...(hidePersonalMail ? [] : [userEmailAddress]),
 		...(mailsToBeShown || []),
 	];
 };

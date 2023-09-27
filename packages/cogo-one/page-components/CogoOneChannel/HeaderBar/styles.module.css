@@ -4,6 +4,7 @@
 	right: 0;
 	z-index: 999;
 	width: 100%;
+	overflow: hidden;
 }
 
 .navigation_bar {
@@ -133,4 +134,65 @@
 
 .end_shift {
 	margin-left: 4px;
+}
+
+.feedback {
+	position: absolute;
+	right: 0;
+	bottom: 20px;
+	z-index: 99;
+	display: flex;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+	padding: 8px 4px;
+	overflow: hidden;
+	color: #fff;
+	cursor: pointer;
+	background-color: #f37166;
+	border-radius: 20px 0 0 20px;
+	transition: 1s;
+
+	svg {
+		width: 20px;
+		height: 20px;
+		margin-left: 10px;
+		fill: #fff;
+	}
+
+	span {
+		height: 20px;
+	}
+
+	&:hover {
+		width: 120px;
+		animation: slide 0.8s;
+	}
+}
+
+@keyframes slide {
+	0% {
+		width: 120px;
+	}
+
+	25% {
+		width: 110px;
+	}
+
+	50% {
+		width: 120px;
+	}
+
+	75% {
+		width: 115px;
+	}
+
+	100% {
+		width: 120px;
+	}
+}
+
+.feedback_label {
+	margin-left: 4px;
+	font-weight: 600;
 }

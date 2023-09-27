@@ -47,6 +47,7 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : true,
+		hide_personal_mail                          : true,
 	},
 };
 

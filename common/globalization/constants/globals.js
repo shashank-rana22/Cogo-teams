@@ -3,6 +3,7 @@
 import CURRENCY_CODE from './currencyCode';
 import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
+import supplierEntityMapping from './supplierEntityMapping.json';
 
 const GLOBAL_CONSTANTS = {
 	attendence_options: [
@@ -232,8 +233,8 @@ const GLOBAL_CONSTANTS = {
 		],
 		air_admin_user_ids: [
 			'6d713339-c528-4696-9f7b-c01f86887ac1',		// Vinod's ID
-			'039a0141-e6f3-43b0-9c51-144b22b9fc84',		// Santram's ID
-			'cf2c9d24-e1e0-4223-a228-69ebbdc349c1',		// Linh's ID
+			'039a0141-e6f3-43b0-9c51-144b22b9fc84', 	// Santram's ID
+			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8',		// Rishi's ID
 		],
 	},
 	view_key_mappings: {
@@ -251,6 +252,9 @@ const GLOBAL_CONSTANTS = {
 	months: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
 
 	image_url: {
+		empty_state_margins_url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
+		empty_state_margins_breakup_url:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-nonfunded.svg',
 		general_icon              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg',
 		eclamation_svg            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg',
 		cart_png                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cart_icon.png',
@@ -489,7 +493,8 @@ const GLOBAL_CONSTANTS = {
 			IN     : [CURRENCY_CODE.INR, CURRENCY_CODE.USD],
 			GB     : [CURRENCY_CODE.GBP, CURRENCY_CODE.EUR, CURRENCY_CODE.USD],
 			VN     : [CURRENCY_CODE.USD, CURRENCY_CODE.VND],
-			OTHERS : [CURRENCY_CODE.USD, CURRENCY_CODE.EUR, CURRENCY_CODE.INR],
+			SG     : [CURRENCY_CODE.USD, CURRENCY_CODE.SGD],
+			OTHERS : [CURRENCY_CODE.USD, CURRENCY_CODE.EUR, CURRENCY_CODE.INR, CURRENCY_CODE.SGD],
 		},
 		inco_term: {
 			cif: {
@@ -800,6 +805,9 @@ const GLOBAL_CONSTANTS = {
 		cogoport_ftl_collections : 'ftl.collections@cogoport.com',
 		cogoport_support         : 'support@cogoport.com',
 	},
+	mobile_number: {
+		cogoone_sales_contact_no: '+91-8069182176',
+	},
 	websites: {
 		cogoport : 'www.cogoport.com',
 		fortigo  : 'www.4tigo.com',
@@ -814,7 +822,8 @@ const GLOBAL_CONSTANTS = {
 	governance_manager_rejected_image_url:
     'https://cogoport-testing.sgp1.digitaloceanspaces.com/2466c7e2faa34ad8f4beb2b110b1ce1e/Group.svg',
 
-	default_preferred_language: 'english',
+	default_preferred_language : 'english',
+	supplier_entity_mapping    : supplierEntityMapping.shippingCompanies,
 };
 
 export default GLOBAL_CONSTANTS;

@@ -13,6 +13,7 @@ const formatMailDraftMessage = ({
 	buttonType,
 	parentEmailMessage,
 	roomId,
+	body,
 }) => ({
 	agent_type           : 'bot',
 	conversation_type    : 'received',
@@ -25,15 +26,16 @@ const formatMailDraftMessage = ({
 	draft_type           : buttonType,
 	parent_email_message : parentEmailMessage || {},
 	response             : {
-		attachments : payload?.attachments || [],
-		bcc_mails   : payload?.bccrecipients || [],
-		body        : payload?.content || '',
-		cc_mails    : payload?.ccrecipients || [],
-		message_id  : payload?.msgId || '',
-		sender      : payload?.sender || '',
-		subject     : payload?.subject || '',
-		to_mails    : payload?.toUserEmail || [],
-		draft_type  : buttonType,
+		attachments       : payload?.attachments || [],
+		bcc_mails         : payload?.bccrecipients || [],
+		body              : payload?.content || '',
+		cc_mails          : payload?.ccrecipients || [],
+		message_id        : payload?.msgId || '',
+		sender            : payload?.sender || '',
+		subject           : payload?.subject || '',
+		to_mails          : payload?.toUserEmail || [],
+		draft_type        : buttonType,
+		draftQuillMessage : body,
 	},
 });
 
@@ -43,6 +45,7 @@ const createDraftRoom = async ({
 	communication_id = '',
 	rteEditorPayload = {},
 	buttonType = '',
+	body = '',
 }) => {
 	const emailCollection = collection(
 		firestore,
@@ -64,6 +67,7 @@ const createDraftRoom = async ({
 			buttonType,
 			payload : rteEditorPayload,
 			roomId  : '',
+			body,
 		}),
 	};
 
@@ -86,6 +90,8 @@ const updateMessage = async ({
 	isNewRoomCreated = false,
 	setEmailState = () => {},
 	isMinimize = false,
+	body = '',
+	setSendLoading = () => {},
 }) => {
 	const updatePayload = formatMailDraftMessage({
 		communication_id,
@@ -93,6 +99,7 @@ const updateMessage = async ({
 		buttonType,
 		parentEmailMessage: parent_email_message,
 		roomId,
+		body,
 	});
 
 	if (!isNewRoomCreated) {
@@ -132,6 +139,8 @@ const updateMessage = async ({
 			await updateEmailState({ roomId, messageId: res?.id, firestore, setEmailState });
 		}
 
+		setSendLoading(false);
+
 		return { roomId, messageId: res?.id };
 	}
 
@@ -154,6 +163,8 @@ const updateMessage = async ({
 		});
 	}
 
+	setSendLoading(false);
+
 	return { roomId, messageId };
 };
 
@@ -165,6 +176,8 @@ const useSaveDraft = ({
 	rteEditorPayload = {},
 	parentMessageData = {},
 	setEmailState = () => {},
+	body = '',
+	setSendLoading = () => {},
 }) => {
 	const agentId = useSelector((state) => state.profile?.user?.id);
 
@@ -174,6 +187,7 @@ const useSaveDraft = ({
 		newComposeDraftMsgId = '',
 		isMinimize = false,
 	} = {}) => {
+		setSendLoading(true);
 		const { id: roomId, no_of_drafts = 0 } = roomData || {};
 
 		const { is_draft = false, id = '' } = draftMessageData || {};
@@ -187,6 +201,7 @@ const useSaveDraft = ({
 				communication_id,
 				rteEditorPayload,
 				buttonType,
+				body,
 			});
 		}
 
@@ -205,6 +220,8 @@ const useSaveDraft = ({
 			isNewRoomCreated     : !roomId,
 			setEmailState,
 			isMinimize,
+			body,
+			setSendLoading,
 		});
 	};
 

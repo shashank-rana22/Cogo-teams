@@ -12,18 +12,20 @@ const getUploadHistoryPayload = ({
 	sort,
 	pageSize,
 	query,
+	activeEntity = '',
 }) => ({
 	pageIndex,
 	pageSize,
-	q        : query !== '' ? query : undefined,
-	fromDate : selectFromDate || undefined,
-	toDate   : selectToDate || undefined,
-	status   : status || undefined,
+	q          : query !== '' ? query : undefined,
+	fromDate   : selectFromDate || undefined,
+	toDate     : selectToDate || undefined,
+	status     : status || undefined,
 	...sort,
+	entityCode : activeEntity,
 });
 
 const useGetUploadHistoryList = ({ sort, query, globalFilters }) => {
-	const { pageIndex, pageSize, uploadedDate, status } = globalFilters || {};
+	const { pageIndex, pageSize, uploadedDate, status, activeEntity = '' } = globalFilters || {};
 
 	const [{ data, loading },
 		uploadHistoryListTrigger] = useRequestBf({
@@ -43,6 +45,7 @@ const useGetUploadHistoryList = ({ sort, query, globalFilters }) => {
 			sort,
 			pageSize,
 			query,
+			activeEntity,
 		});
 
 		try {
@@ -52,7 +55,8 @@ const useGetUploadHistoryList = ({ sort, query, globalFilters }) => {
 		} catch (err) {
 			Toast.error(err.message || 'somthing went wrong');
 		}
-	}, [pageIndex, pageSize, query, selectFromDate, selectToDate, sort, status, uploadHistoryListTrigger]);
+	}, [pageIndex, pageSize, query, selectFromDate, selectToDate, sort, status, uploadHistoryListTrigger,
+		activeEntity]);
 
 	return {
 		getUploadHistoryList,

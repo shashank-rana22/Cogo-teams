@@ -24,7 +24,8 @@ const controls = [
 		rules       : { required: true },
 		value       : 'AR',
 		span        : 4,
-		options     : [{ label: 'AP', value: 'AP' }, { label: 'AR', value: 'AR' }],
+		options     : [{ label: 'AP', value: 'AP' }, { label: 'AR', value: 'AR' },
+			{ label: 'CSD', value: 'CSD' }, { label: 'PDA', value: 'PDA' }],
 	},
 	{
 		label       : 'Trade Party',

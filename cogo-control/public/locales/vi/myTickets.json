@@ -134,5 +134,11 @@
     "by_category": "Theo thể loại",
     "by_desk": "Bàn làm việc",
     "select_raised_by_desk": "Chọn được nâng lên bằng bàn",
-    "select_raised_to_desk": "Chọn nâng lên bàn"
+    "select_raised_to_desk": "Chọn nâng lên bàn",
+    "organization": "Tổ chức",
+    "sid": "Mã SID",
+    "service": "Dịch vụ",
+    "trade_type": "Loại giao dịch",
+    "category": "Danh mục",
+    "sub_category": "Danh mục con"
 }

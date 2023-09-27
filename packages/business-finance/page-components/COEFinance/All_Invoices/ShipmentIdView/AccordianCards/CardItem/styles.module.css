@@ -24,6 +24,18 @@
 	border-radius: 4px;
 }
 
+.scrollable_list {
+	position: relative;
+	max-height: 400px;
+	overflow: auto;
+
+	header {
+		position: sticky;
+		top: 0;
+		z-index: 2;
+	}
+}
+
 .header {
 	margin: -2px 24px 23px;
 }
@@ -44,4 +56,11 @@
 	color: #ed3726;
 	text-align: center;
 	text-decoration-line: underline;
+}
+
+.approve_button {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 4px 24px 12px 0;
 }
