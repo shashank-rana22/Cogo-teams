@@ -104,7 +104,7 @@ function VisualizationData({
 						{!toggleValue && (
 							<div className={styles.tab_container}>
 								<Tabs
-									activeTab={filterValues.view_type}
+									activeTab={filterValues?.view_type}
 									themeType="primary"
 									onChange={(e) => handleTabs(e)}
 									className={styles.custom_tabs}

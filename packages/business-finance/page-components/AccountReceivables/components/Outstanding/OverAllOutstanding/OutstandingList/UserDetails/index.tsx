@@ -31,10 +31,11 @@ interface ItemProps {
 
 function UserDetails({ item = {} }: ItemProps) {
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
+	const { kam = {}, salesAgent = {}, creditController = {} } = item || {};
 	const data = [
-		{ stakeholder_type: 'KAM Owner', email: item?.kam?.email, name: item?.kam?.name },
-		{ stakeholder_type: 'AGENT', email: item?.salesAgent?.email, name: item?.salesAgent?.name },
-		{ stakeholder_type: 'CC', email: item?.creditController?.email, name: item?.creditController?.name },
+		{ stakeholder_type: 'KAM Owner', email: kam?.email, name: kam?.name },
+		{ stakeholder_type: 'AGENT', email: salesAgent?.email, name: salesAgent?.name },
+		{ stakeholder_type: 'CC', email: creditController?.email, name: creditController?.name },
 	];
 	const allEmpty = data.every((el) => !el.email && !el.name);
 	return (
