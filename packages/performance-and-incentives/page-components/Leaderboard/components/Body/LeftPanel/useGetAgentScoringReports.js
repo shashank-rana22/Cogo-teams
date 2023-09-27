@@ -10,7 +10,7 @@ const useGetScoringReports = (props) => {
 	const [view] = viewType.split('_');
 
 	const [searchValue, setSearchValue] = useState('');
-	const [currLevel, setCurrLevel] = useState([`${view}_report`, '']);
+	const [currLevel, setCurrLevel] = useState({ report_type: `${view}_report`, user: null });
 	const [levelStack, setLevelStack] = useState([]);
 	const [isExpanded, setIsExpanded] = useState(false);
 

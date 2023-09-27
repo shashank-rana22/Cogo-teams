@@ -63,7 +63,7 @@ function LeaderboardFilters(props) {
 		setStatParams,
 	} = props;
 
-	const [beforeLevel = '', id] = levelStack[levelStack.length - OFFSET] || [];
+	const { report_type: beforeLevel = '', user: id = '' } = levelStack[levelStack.length - OFFSET] || [];
 
 	const [backText] = beforeLevel.split('_') || [];
 
@@ -112,7 +112,8 @@ function LeaderboardFilters(props) {
 			return curr;
 		});
 
-		setCurrLevel([beforeLevel, id]);
+		// setCurrLevel([beforeLevel, id]);
+		setCurrLevel({ report_type: beforeLevel, user: id });
 	};
 
 	return (

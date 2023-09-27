@@ -1,5 +1,4 @@
 import { Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -56,7 +55,7 @@ function Header(props) {
 
 				{((incentive_leaderboard_viewtype === ADMIN
 				|| (incentive_leaderboard_viewtype === OWNER && levelStack?.length === MIN_LENGTH))
-				&& (currLevel[GLOBAL_CONSTANTS.zeroth_index] !== AGENT_REPORT)) ? (
+				&& (currLevel.report_type !== AGENT_REPORT)) ? (
 					<Button size="md" themeType="linkUi" onClick={handleClick}>
 						{isExpanded ? 'Collapse' : 'Expand All'}
 						{' '}

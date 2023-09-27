@@ -1,4 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 
 import NEXT_LEVEL_MAPPING from '../../../constants/next-level-mapping';
@@ -29,6 +28,8 @@ function LeftPanel(props) {
 		setStatParams,
 	} = props;
 
+	const { incentive_leaderboard_viewtype: viewType, user = {} } = useSelector(({ profile }) => profile);
+
 	const {
 		loading,
 		list,
@@ -45,7 +46,8 @@ function LeftPanel(props) {
 		view,
 	} = useGetScoringReports({ params });
 
-	const { incentive_leaderboard_viewtype: viewType, user = {} } = useSelector(({ profile }) => profile);
+	console.log('currLevel :: ', currLevel);
+	console.log('levelStack :: ', levelStack);
 
 	const handlePropagation = ({ id = '', location_id, channel }) => {
 		setParams((prev) => ({
@@ -53,7 +55,7 @@ function LeftPanel(props) {
 			add_current_user_report : true,
 			filters                 : {
 				...prev.filters,
-				report_type      : NEXT_LEVEL_MAPPING[currLevel[GLOBAL_CONSTANTS.zeroth_index]],
+				report_type      : NEXT_LEVEL_MAPPING[currLevel.report_type],
 				...((location_id && channel) ? { office_location_id: location_id } : { channel }),
 				...((!location_id && !channel) ? { office_location_id: undefined, channel: undefined } : {}),
 				report_view_type : undefined,
@@ -62,16 +64,11 @@ function LeftPanel(props) {
 			},
 		}));
 
-		setLevelStack((prev) => {
-			const curr = [...prev];
-			curr.push([currLevel[GLOBAL_CONSTANTS.zeroth_index], currLevel[GLOBAL_CONSTANTS.one]]);
-
-			return curr;
-		});
+		setLevelStack((prev) => ([...prev, currLevel]));
 
 		const secondElement = getSecondElement({ location_id, channel, id });
 
-		setCurrLevel((prev) => [NEXT_LEVEL_MAPPING[prev[GLOBAL_CONSTANTS.zeroth_index]], secondElement]);
+		setCurrLevel((prev) => ({ report_type: NEXT_LEVEL_MAPPING[prev.report_type], user: secondElement }));
 	};
 
 	return (
