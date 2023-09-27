@@ -18,10 +18,12 @@ const useListRevenueDeskWallet = () => {
 		try {
 			await trigger({
 				params: {
-					filters                  : { status: 'active' },
-					service_type             : service_type === 'all' ? undefined : service_type,
+					filters: {
+						status       : 'active',
+						service_type : service_type === 'all' ? undefined : service_type,
+					},
 					page,
-					pagination_data_required : true,
+					pagination_data_required: true,
 				},
 			});
 		} catch (error) {
