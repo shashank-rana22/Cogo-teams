@@ -95,7 +95,7 @@ function AmountBoxes({ activeEntity }:ItemProps) {
 										{' '}
 										{openInvoicesCount}
 										{' '}
-										| Organizations -
+										Organizations -
 										{' '}
 										{organizationsCount}
 									</div>
