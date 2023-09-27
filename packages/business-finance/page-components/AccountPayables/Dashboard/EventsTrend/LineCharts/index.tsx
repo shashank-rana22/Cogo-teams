@@ -157,8 +157,6 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 		return `${formattedValue}`;
 	};
 
-	console.log('data3', data3);
-
 	return (
 		<div className={styles.line}>
 			<ResponsiveLine
