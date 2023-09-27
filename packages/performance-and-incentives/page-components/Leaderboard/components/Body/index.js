@@ -29,6 +29,7 @@ function Body(props) {
 			<RightPanel
 				data={data}
 				loading={loading}
+				entity={entity}
 			/>
 		</div>
 

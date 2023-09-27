@@ -12,15 +12,11 @@ const BOTTOM_CONT_ITEM_SIZE = 2;
 function LoadingState() {
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.top_container}>
-
 				<div className={styles.sub_item_one}>
-
 					{[...Array(SUB_ITEM_ONE_SIZE).keys()].map((subItem) => (
 						<Placeholder height={10} key={subItem} />
 					))}
-
 				</div>
 
 				<div className={styles.sub_item_two}>
@@ -28,16 +24,12 @@ function LoadingState() {
 						<Placeholder height={10} key={subItem} />
 					))}
 				</div>
-
 			</div>
 
 			{[...Array(BOTTOM_CONT_SIZE).keys()].map((cont_item) => (
 				<div className={styles.bottom_container} key={cont_item}>
-
 					<div className={styles.sub_item_one}>
-
 						<Placeholder height={10} />
-
 					</div>
 
 					{[...Array(BOTTOM_CONT_ITEM_SIZE).keys()].map((item) => (
@@ -47,10 +39,8 @@ function LoadingState() {
 							))}
 						</div>
 					))}
-
 				</div>
 			))}
-
 		</div>
 	);
 }

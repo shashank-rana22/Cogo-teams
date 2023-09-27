@@ -9,6 +9,8 @@ import getListColumnMapping from './get-list-column-mapping';
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 
+const DOTS = 3;
+
 function List(props) {
 	const {
 		loading, list, handlePropagation, viewType, currLevel, currentUserData, setStatParams,
@@ -62,9 +64,7 @@ function List(props) {
 				{(!isEmpty(currentUserData) && isEmpty(list.find((item) => item.user?.id === user.id))) ? (
 					<>
 						<div className={styles.ellipsis_container}>
-							<span className={styles.dot}>.</span>
-							<span className={styles.dot}>.</span>
-							<span className={styles.dot}>.</span>
+							{[...Array(DOTS).keys()].map((key) => <span key={key} className={styles.dot}>.</span>)}
 						</div>
 						<ListItem
 							listItem={currentUserData}
