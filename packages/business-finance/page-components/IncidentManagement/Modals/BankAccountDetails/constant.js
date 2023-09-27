@@ -11,3 +11,8 @@ export const getOptions = ({ isEditable, t = () => {} }) => [
 		name     : '',
 		disabled : !isEditable,
 	}];
+
+export const getOptionsManual = ({ isEditable, t = () => {} }) => [
+	{ label: t('incidentManagement:penny_testing'), value: 'PENNY', name: '', disabled: !isEditable },
+	{ label: t('incidentManagement:manual_verification'), value: 'MANUAL', name: '', disabled: !isEditable },
+];

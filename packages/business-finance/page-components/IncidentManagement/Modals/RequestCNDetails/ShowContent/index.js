@@ -9,7 +9,7 @@ import {
 import styles from './styles.module.css';
 
 function ShowContent({
-	creditNoteType = '', ISEDITABLE = false, level1 = {},
+	creditNoteType = '', isEditable = false, level1 = {},
 	t = () => {}, status = '', creditNoteRemarks = '', setShowPopover = () => {},
 	CNCategoryValues = {}, setCNCategoryValues = () => {},
 }) {
@@ -45,7 +45,7 @@ function ShowContent({
 						className="primary md"
 						placeholder={`${t('incidentManagement:cn_category_type')}..`}
 						value={creditNoteType || CNCategoryValues?.CNType}
-						disabled={!ISEDITABLE || level1?.status === 'APPROVED'}
+						disabled={!isEditable || level1?.status === 'APPROVED'}
 						onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNType: e })}
 						options={categoryOptions({ t })}
 					/>
@@ -70,7 +70,7 @@ function ShowContent({
 					className="primary md"
 					placeholder={t('incidentManagement:type_here_placeholder')}
 					value={creditNoteRemarks || CNCategoryValues?.CNValues}
-					disabled={!ISEDITABLE || level1?.status === 'APPROVED'}
+					disabled={!isEditable || level1?.status === 'APPROVED'}
 					onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNValues: e })}
 					options={creditNoteRemarks
 						? [...(revenueOptions({ t })), { label: creditNoteRemarks, value: creditNoteRemarks }]
@@ -83,7 +83,7 @@ function ShowContent({
 					placeholder={t('incidentManagement:type_here_placeholder')}
 					value={NON_REVENUE_DATA.includes(creditNoteRemarks) ? creditNoteRemarks
 						: creditNoteRemarks || CNCategoryValues?.CNValues}
-					disabled={!ISEDITABLE || level1?.status === 'APPROVED'}
+					disabled={!isEditable || level1?.status === 'APPROVED'}
 					onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNValues: e })}
 					options={creditNoteRemarks ? [
 						...(nonRevenueOptions({ t })),
@@ -100,7 +100,7 @@ function ShowContent({
 
 					<Textarea
 						value={CNCategoryValues?.remarks}
-						disabled={!ISEDITABLE}
+						disabled={!isEditable}
 						onChange={(e) => setCNCategoryValues({
 							...CNCategoryValues,
 							remarks: e,

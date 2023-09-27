@@ -207,6 +207,7 @@
 }
 
 .line_item_empty {
+	margin-top: 32px;
 	font-weight: 600;
 	color: #f68b21;
 }

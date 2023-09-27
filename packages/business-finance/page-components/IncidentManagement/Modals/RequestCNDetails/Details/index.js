@@ -25,14 +25,18 @@ function Details({
 }) {
 	// const { query } = useRouter();
 	// const { partner_id } = query || {};
-	const ISEDITABLE = true;
 	const { t } = useTranslation(['incidentManagement']);
-	const { status = '', id = '', level1 = {}, level2 = {}, data: { creditNoteRequest = {}, type = '' } } = row || {};
+	const { status = '', id = '', level1 = {}, level2 = {}, type = '', data = {} } = row || {};
+	const { creditNoteRequest, consolidatedCreditNoteRequest } = data || {};
 	const [creditNoteApprovalType, setCreditNoteApprovalType] = useState('');
 	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
 	const [showPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
 	const [showRejectModal, setShowRejectModal] = useState(false);
+	let isEditable = true;
+	if (status !== 'REQUESTED') {
+		isEditable = false;
+	}
 
 	const {
 		invoiceNumber,
@@ -48,7 +52,7 @@ function Details({
 		currency,
 		revoked,
 		creditNoteApprovalType: approvalType,
-	} = creditNoteRequest || {};
+	} = creditNoteRequest || consolidatedCreditNoteRequest || {};
 	const [CNCategoryValues, setCNCategoryValues] = useState({
 		CNType   : null,
 		CNValues : null,
@@ -149,7 +153,7 @@ function Details({
 							render={(
 								<ShowContent
 									creditNoteType={creditNoteType}
-									ISEDITABLE={ISEDITABLE}
+									isEditable={isEditable}
 									level1={level1}
 									t={t}
 									status={status}

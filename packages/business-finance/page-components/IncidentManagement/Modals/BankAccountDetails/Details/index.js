@@ -6,7 +6,7 @@ import { useState } from 'react';
 import useGetBankData from '../../../apisModal/useGetBankData';
 import ClipBoard from '../../../common/Clipboard';
 import RejectModal from '../../../common/RejectModal/index';
-import { getOptions } from '../constant';
+import { getOptions, getOptionsManual } from '../constant';
 
 import styles from './styles.module.css';
 
@@ -16,7 +16,6 @@ function Details({
 	refetch = () => {
 	},
 }) {
-	console.log(row);
 	const { t } = useTranslation(['incidentManagement']);
 	const { data: { bankRequest = '' }, id: bankId = '', status = '' } = row || {};
 	const {
@@ -164,7 +163,7 @@ function Details({
 					<div>
 						<RadioGroup
 							className={styles.radio_text}
-							options={getOptionsData}
+							options={getOptionsManual({ isEditable, t })}
 							onChange={(item) => setValue((prev) => ({
 								...prev,
 								radioMethod: item,
