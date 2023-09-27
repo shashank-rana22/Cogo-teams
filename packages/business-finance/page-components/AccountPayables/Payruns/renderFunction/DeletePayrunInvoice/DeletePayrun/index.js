@@ -32,6 +32,7 @@ function DeletePayrun({
 						type="reset"
 						themeType="secondary"
 						style={{ marginRight: '20px' }}
+						onClick={() => setShowDeleteModal(false)}
 					>
 						Cancel
 					</Button>

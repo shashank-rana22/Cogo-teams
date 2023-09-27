@@ -53,7 +53,7 @@ function Air({ setGenerate = () => {}, setItem = () => {}, setViewDoc = () => {}
 	const [activeTab, setActiveTab] = useState(tabs[GLOBAL_CONSTANTS.zeroth_index].key);
 	const [filters, setFilters] = useState({});
 	const [relevantToMe, setRelevantToMe] = useState(false);
-	const [maxStatsTabKey, setMaxStatsTabKey] = useState('newAwbCount');
+	const [maxStatsTabKey, setMaxStatsTabKey] = useState('new_awb');
 
 	const ActiveTabComponent = tabsComponentMapping[activeTab] || null;
 
