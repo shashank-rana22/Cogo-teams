@@ -18,7 +18,8 @@ function Details({
 	const [remarks, setRemarks] = useState('');
 	const [showRejectModal, setShowRejectModal] = useState(false);
 
-	const { status = '', id = '', data: { revokeInvoiceRequest = {} } } = row || {};
+	const { status = '', id = '', data: { revokeInvoiceRequest = {}, organization = {} } } = row || {};
+	const { tradePartyName = '', businessName = '' } = organization || {};
 
 	const { useOnAction: onAction, loading } = useGetRevokeInvoiceData({
 		refetch,
@@ -34,7 +35,7 @@ function Details({
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{row?.data?.organization?.businessName || ''}</div>
+					<div className={styles.text}>{tradePartyName || businessName || ''}</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>

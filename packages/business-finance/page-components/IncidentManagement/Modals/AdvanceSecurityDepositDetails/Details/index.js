@@ -28,7 +28,7 @@ function Details({
 	const [remarkValue, setRemarkValue] = useState('');
 	const [showRejectModal, setShowRejectModal] = useState(false);
 
-	const { status = '', id = '', data: { advanceSecurityDeposit = {} } } = row || {};
+	const { status = '', id = '', data: { advanceSecurityDeposit = {}, organization = {} } } = row || {};
 	const {
 		shipmentId = '',
 		supplierName = '',
@@ -38,7 +38,7 @@ function Details({
 		numberOfContainers = 0,
 		currency = '',
 	} = advanceSecurityDeposit || {};
-
+	const { tradePartyName = '', businessName = '' } = organization || {};
 	const { getData, loading } = useGetSecurityDepositData({
 		advanceSecurityDeposit,
 		refetch,
@@ -54,7 +54,7 @@ function Details({
 				<div className={styles.display_box}>
 					<div className={styles.company_div}>
 						<div className={styles.heading}>Company Name</div>
-						<div className={styles.text}>{row?.data?.organization?.businessName || ''}</div>
+						<div className={styles.text}>{tradePartyName || businessName || ''}</div>
 					</div>
 					<div>
 						<div className={styles.heading}>Requested By</div>

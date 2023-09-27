@@ -37,7 +37,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 	const [remarks, setRemarks] = useState('');
 	const { level3 = {}, level2 = {}, level1 = {}, data = {}, type } = row || {};
 	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
-	const { creditNoteRequest, consolidatedCreditNoteRequest, organization } = data;
+	const { creditNoteRequest = {}, consolidatedCreditNoteRequest = {}, organization = {} } = data;
 	const {
 		invoiceNumber,
 		jobNumber,
@@ -55,7 +55,6 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		revoked,
 		creditNoteApprovalType: approvalType,
 	} = creditNoteRequest || consolidatedCreditNoteRequest || {};
-
 	const { useOnAction:OnAction, loading } = useGetTdsData({
 		refetch,
 		setShowTdsModal,

@@ -131,7 +131,7 @@ function Details({
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
 	const { data = {}, id = '', status = '' } = row || {};
-	const { reccuringExpenseApproval = {} } = data;
+	const { reccuringExpenseApproval = {}, organization = {} } = data;
 	const {
 		agreementNumber,
 		maxPayoutAllowed,
@@ -145,7 +145,7 @@ function Details({
 		ledgerCurrency,
 		ledgerMaxPayoutAllowed,
 	} = reccuringExpenseApproval || {};
-
+	const { tradePartyName = '', businessName = '' } = organization || {};
 	const { useOnAction: onAction, loading } = usePostExpense({
 		refetch,
 		setDetailsModal,
@@ -187,7 +187,7 @@ function Details({
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{row?.data?.organization?.businessName || ''}</div>
+					<div className={styles.text}>{tradePartyName || businessName || ''}</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>

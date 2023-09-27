@@ -133,6 +133,7 @@
 .date_value {
 	font-size: var(--font-size-md);
 	font-weight: 500;
+	color: #f68b21;
 }
 
 .credit {
@@ -207,6 +208,7 @@
 }
 
 .line_item_empty {
+	margin-top: 32px;
 	font-weight: 600;
 	color: #f68b21;
 }

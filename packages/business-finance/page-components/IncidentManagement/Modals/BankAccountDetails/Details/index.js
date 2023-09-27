@@ -6,7 +6,7 @@ import { useState } from 'react';
 import useGetBankData from '../../../apisModal/useGetBankData';
 import ClipBoard from '../../../common/Clipboard';
 import RejectModal from '../../../common/RejectModal/index';
-import { getOptions } from '../constant';
+import { getOptions, getOptionsManual } from '../constant';
 
 import styles from './styles.module.css';
 
@@ -16,9 +16,8 @@ function Details({
 	refetch = () => {
 	},
 }) {
-	console.log(row);
 	const { t } = useTranslation(['incidentManagement']);
-	const { data: { bankRequest = '' }, id: bankId = '', status = '' } = row || {};
+	const { data: { bankRequest = '', organization = {} }, id: bankId = '', status = '' } = row || {};
 	const {
 		accountNumber,
 		bankHolderName,
@@ -32,6 +31,7 @@ function Details({
 		isIfscCodeValid,
 		methodOfVerification,
 	} = bankRequest || {};
+	const { tradePartyName = '', businessName = '', tradePartyType = '' } = organization || {};
 	let isEditable = true;
 	if (status !== 'REQUESTED') {
 		isEditable = false;
@@ -62,7 +62,7 @@ function Details({
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{row?.data?.organization?.businessName || ''}</div>
+					<div className={styles.text}>{tradePartyName || businessName || ''}</div>
 				</div>
 				<div className={styles.organization_div}>
 					<div className={styles.requested_div}>
@@ -71,7 +71,7 @@ function Details({
 					</div>
 					<div className={styles.requested_div}>
 						<div className={styles.heading}>Organization Type</div>
-						<div className={styles.text}>{row?.data?.organization?.tradePartyType || ''}</div>
+						<div className={styles.text}>{tradePartyType || ''}</div>
 					</div>
 				</div>
 			</div>
@@ -164,7 +164,7 @@ function Details({
 					<div>
 						<RadioGroup
 							className={styles.radio_text}
-							options={getOptionsData}
+							options={getOptionsManual({ isEditable, t })}
 							onChange={(item) => setValue((prev) => ({
 								...prev,
 								radioMethod: item,
