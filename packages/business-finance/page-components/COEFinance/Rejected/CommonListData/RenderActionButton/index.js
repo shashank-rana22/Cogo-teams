@@ -20,6 +20,7 @@ function RenderActionButton({ itemData = {}, refetch = () => {} }) {
 	} = useUpdateCostApprovalBill({ itemData, setShowPopover, refetch });
 
 	const onClickApprove = () => {
+		setShowPopover(false);
 		apiTrigger();
 	};
 

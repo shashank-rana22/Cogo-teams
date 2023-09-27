@@ -80,10 +80,10 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 			<RenderUrgencyTag item={itemData} field={field} />
 		),
 		renderTicket: () => (
-			<div>ticket</div>
+			<div>-</div>
 		),
 		renderApprovalStatus: () => (
-			<div>Level 1 pending</div>
+			<div>-</div>
 		),
 	};
 

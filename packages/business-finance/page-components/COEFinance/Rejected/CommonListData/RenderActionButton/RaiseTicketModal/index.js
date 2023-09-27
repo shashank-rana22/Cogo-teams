@@ -9,6 +9,7 @@ import controls from '../../../../configurations/raise-ticket-controls';
 import useGetConfigurationCategory from '../../../../hook/useGetConfigurationCategory';
 import useListShipment from '../../../../hook/useListShipment.ts';
 import useRaiseTicket from '../../../../hook/useRaiseTicket';
+import useUpdateBillsTicketId from '../../../../hook/useUpdateBIllsTicketId';
 
 import styles from './styles.module.css';
 
@@ -26,15 +27,20 @@ function RaiseTicketModal({
 
 	const watchRaisedToDesk = watch('raised_to_desk');
 
-	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({
-		onClose: setShowTicketModal,
-		additionalInfo,
-		refetch,
-	});
+	const {
+		updateBillsTicketId = () => {},
+		loading: updateLoading = false,
+	} = useUpdateBillsTicketId({ setShowTicketModal, refetch, itemData });
 
-	const { data } = useListShipment(itemData?.jobNumber);
+	const { data, loading:shipmentLoading } = useListShipment(itemData?.jobNumber);
 
 	const shipmentData = data?.list[GLOBAL_CONSTANTS.zeroth_index];
+
+	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({
+		additionalInfo,
+		updateBillsTicketId,
+		shipmentData,
+	});
 
 	const { data:configData = {} } = useGetConfigurationCategory(shipmentData);
 
@@ -104,7 +110,11 @@ function RaiseTicketModal({
 			</Modal.Body>
 
 			<Modal.Footer style={{ padding: 12 }}>
-				<Button size="md" disabled={loading} onClick={handleSubmit(raiseTickets)}>
+				<Button
+					size="md"
+					disabled={loading || updateLoading || shipmentLoading}
+					onClick={handleSubmit(raiseTickets)}
+				>
 					Submit
 				</Button>
 

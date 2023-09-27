@@ -3,9 +3,8 @@ import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useRaiseTicket = ({
-	handleClose = () => {},
 	shipmentData = {},
-	refetch = () => {},
+	updateBillsTicketId = () => {},
 }) => {
 	const { profile } = useSelector((state) => state);
 	const [{ loading }, trigger] = useTicketsRequest({
@@ -30,7 +29,7 @@ const useRaiseTicket = ({
 		} = shipmentData || {};
 
 		try {
-			await trigger({
+			const response = await trigger({
 				data: {
 					UserID           : profile?.user?.id || undefined,
 					PerformedByID    : profile?.user?.id || undefined,
@@ -53,9 +52,7 @@ const useRaiseTicket = ({
 
 			Toast.success('Successfully Created');
 
-			refetch();
-
-			handleClose(false);
+			updateBillsTicketId(response);
 		} catch (error) {
 			Toast.error(error?.response?.data);
 		}
