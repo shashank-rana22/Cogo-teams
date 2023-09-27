@@ -25,9 +25,9 @@ function Details({
 	const { partner_id } = query || {};
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarkValue, setRemarkValue] = useState('');
-	const { status = '', id = '', data: { advanceSecurityDepositRefund = {} } } = row || {};
+	const { status = '', id = '', data: { advanceSecurityDepositRefund = {}, organization = {} } } = row || {};
 	const { totalAmount = 0, currency = '' } = advanceSecurityDepositRefund || {};
-
+	const { tradePartyName = '', businessName = '' } = organization || {};
 	const { getData, loading } = useGetSecurityDepositData({
 		refetch,
 		setDetailsModal,
@@ -41,7 +41,7 @@ function Details({
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{row?.data?.organization?.businessName || ''}</div>
+					<div className={styles.text}>{tradePartyName || businessName || ''}</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>

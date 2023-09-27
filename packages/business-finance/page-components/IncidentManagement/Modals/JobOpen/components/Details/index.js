@@ -47,12 +47,13 @@ function Details({
 		profitMargin = 0,
 		id: jobOpenId = '',
 	} = row?.data?.jobOpenRequest || {};
+	const { tradePartyName = '', businssName = '' } = row?.data?.organization || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{row?.data?.organization?.businessName || ''}</div>
+					<div className={styles.text}>{tradePartyName || businssName || ''}</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>

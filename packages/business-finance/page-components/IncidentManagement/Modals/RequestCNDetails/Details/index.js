@@ -27,7 +27,7 @@ function Details({
 	// const { partner_id } = query || {};
 	const { t } = useTranslation(['incidentManagement']);
 	const { status = '', id = '', level1 = {}, level2 = {}, type = '', data = {} } = row || {};
-	const { creditNoteRequest, consolidatedCreditNoteRequest } = data || {};
+	const { creditNoteRequest = {}, consolidatedCreditNoteRequest = {}, organization = {} } = data || {};
 	const [creditNoteApprovalType, setCreditNoteApprovalType] = useState('');
 	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
 	const [showPopover, setShowPopover] = useState(false);
@@ -53,6 +53,7 @@ function Details({
 		revoked,
 		creditNoteApprovalType: approvalType,
 	} = creditNoteRequest || consolidatedCreditNoteRequest || {};
+	const { tradePartyName = '', businessName = '' } = organization || {};
 	const [CNCategoryValues, setCNCategoryValues] = useState({
 		CNType   : null,
 		CNValues : null,
@@ -70,16 +71,14 @@ function Details({
 		level2,
 		t,
 	});
-
 	const rest = { onClickOutside: () => { setShowPopover(false); } };
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_container}>
 				<div className={styles.display_box}>
 					<div className={styles.company_div}>
 						<div className={styles.heading}>Company Name</div>
-						<div className={styles.text}>{row?.data?.organization?.businessName || ''}</div>
+						<div className={styles.text}>{tradePartyName || businessName || ''}</div>
 					</div>
 					<div>
 						<div className={styles.heading}>Requested By</div>

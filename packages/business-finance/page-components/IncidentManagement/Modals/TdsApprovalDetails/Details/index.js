@@ -29,6 +29,7 @@ function Details({
 		currentTdsStyle = '',
 		requestedTdsStyle = '',
 	} = row?.data?.tdsRequest || {};
+	const { tradePartyName = '', businessName = '' } = row?.data?.organization || {};
 
 	const getRatePercentageData = [
 		{ label: t('incidentManagement:current_tds_rate'), value: currentTdsRate },
@@ -47,7 +48,7 @@ function Details({
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{row?.data?.organization?.businessName || ''}</div>
+					<div className={styles.text}>{tradePartyName || businessName || ''}</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>
