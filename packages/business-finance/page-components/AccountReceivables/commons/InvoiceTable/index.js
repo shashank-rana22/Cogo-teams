@@ -1,4 +1,5 @@
 import { cl, Pagination } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
 import Filters from '../../../commons/Filters/index.tsx';
@@ -15,6 +16,7 @@ import styles from './styles.module.css';
 
 const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
+const VALID_IDS = ['6d713339-c528-4696-9f7b-c01f86887ac1', '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44'];
 
 const SEARCH_PLACEHOLDER = 'Search by Invoice number / SID';
 
@@ -32,6 +34,7 @@ function InvoiceTable({
 	showFilters = true,
 	limit = 10,
 }) {
+	const { profile } = useSelector((state) => state);
 	const [checkedRows, setCheckedRows] = useState([]);
 	const [isHeaderChecked, setIsHeaderChecked] = useState(false);
 
@@ -138,7 +141,7 @@ function InvoiceTable({
 						<Filters
 							filters={invoiceFilters}
 							setFilters={setinvoiceFilters}
-							controls={invoiceFilter()}
+							controls={invoiceFilter({ profile })}
 						/>
 						<FilterPopover
 							filters={invoiceFilters}
@@ -148,15 +151,17 @@ function InvoiceTable({
 						/>
 					</div>
 					<div className={styles.filter_container}>
-						<div
-							className={styles.send_report}
-							onClick={() => {
-								sendReport();
-							}}
-							role="presentation"
-						>
-							Send Report
-						</div>
+						{(VALID_IDS.includes(profile?.user?.id)) ? (
+							<div
+								className={styles.send_report}
+								onClick={() => {
+									sendReport();
+								}}
+								role="presentation"
+							>
+								Send Report
+							</div>
+						) : null}
 
 						<SearchInput
 							value={invoiceFilters.search || ''}

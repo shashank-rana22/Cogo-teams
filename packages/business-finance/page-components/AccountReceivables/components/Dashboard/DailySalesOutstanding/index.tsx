@@ -192,7 +192,7 @@ function DailySalesOutstanding({
 
 					<div className={styles.vertical_bar_graph}>
 						<BarChart
-							currencyType={dailySalesOutstandingData[0]?.currency || GLOBAL_CONSTANTS.currency_code.INR}
+							currencyType=""
 							margin={MARGIN}
 							data={dailySalesOutstandingData || []}
 							dsoResponse
