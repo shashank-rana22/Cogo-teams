@@ -184,7 +184,7 @@ function ShipmentDetails({
 	useEffect(() => {
 		if (jobType === 'CONSOLIDATED') {
 			// clearing timeline elements that are not included in case of consolidated
-			setCheckItem((prev) => {
+			setCheckItem((prev:any) => {
 				const newCheckItem = { ...prev };
 				newCheckItem.shipmentDetailsCheck = true;
 				delete newCheckItem?.documentsCheck;
