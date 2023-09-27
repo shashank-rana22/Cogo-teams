@@ -38,7 +38,7 @@ function ResponsiveBarChart({ barData = [], keys = [] }) {
 				tickSize       : 5,
 				tickPadding    : 5,
 				tickRotation   : 0,
-				legend         : 'Lorem lpsum',
+				legend         : 'Count',
 				legendOffset   : -50,
 				legendPosition : 'middle',
 			}}
