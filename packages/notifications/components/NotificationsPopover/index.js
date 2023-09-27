@@ -18,7 +18,7 @@ function NewNotifications({
 	setResetSubnavs = () => {},
 }) {
 	const { push } = useRouter();
-	const { t } = useTranslation(['notifications', 'common']); // ??
+	const { t } = useTranslation(['notifications', 'common']);
 
 	const { partner_id } = useSelector(({ general }) => ({
 		partner_id: general?.query?.partner_id,
