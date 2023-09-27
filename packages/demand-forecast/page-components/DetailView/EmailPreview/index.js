@@ -43,7 +43,7 @@ function EmailPreview({
 
 	const options = organization_users.map((user) => ({
 		label : user?.name,
-		value : user?.id,
+		value : user?.user_id,
 	}));
 
 	const onClose = () => {
@@ -81,7 +81,7 @@ function EmailPreview({
 		setEmailSelected(val);
 
 		const tagOptions = val.map((value) => {
-			const userInfo = organization_users.find((user) => user.id === value);
+			const userInfo = organization_users.find((user) => user.user_id === value);
 			return {
 				key      : value,
 				children : userInfo?.name,
