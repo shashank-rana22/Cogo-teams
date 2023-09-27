@@ -15,6 +15,7 @@ import { overHeadConfigs } from './overheadsConfigs';
 import styles from './styles.module.css';
 
 function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
+	console.log(row);
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
 	const { status = '', id = '', data = {} } = row || {};

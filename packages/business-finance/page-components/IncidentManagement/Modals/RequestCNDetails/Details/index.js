@@ -2,12 +2,13 @@ import { Button, cl, Pill, Popover, Select, Textarea } from '@cogoport/component
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetTdsData from '../../../apisModal/useGetTdsData';
 import RejectModal from '../../../common/RejectModal/index';
+import SHIPMENT_MAPPING from '../../../Constants/SHIPMENT_MAPPING';
 import StyledTable from '../../../StyleTable';
 import { getFormatAmount } from '../../../utils/getformatamount';
 import ShowContent from '../ShowContent';
@@ -18,42 +19,45 @@ import {
 } from './credit-note-config';
 import styles from './styles.module.css';
 
+function openPDF({ event, partnerId, id, incidentType }) {
+	event.preventDefault();
+	window.open(`/v2/${partnerId}/booking/${incidentType}/${id}`, '_blank');
+}
+
 function Details({
 	row = {},
 	setDetailsModal = () => {},
 	refetch = () => {},
 }) {
-	// const { query } = useRouter();
-	// const { partner_id } = query || {};
+	const { query } = useRouter();
+	const { partner_id } = query || {};
 	const { t } = useTranslation(['incidentManagement']);
-	const { status = '', id = '', level1 = {}, level2 = {}, type = '', data = {} } = row || {};
-	const { creditNoteRequest = {}, consolidatedCreditNoteRequest = {}, organization = {} } = data || {};
+	const [showRejectModal, setShowRejectModal] = useState(false);
 	const [creditNoteApprovalType, setCreditNoteApprovalType] = useState('');
-	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
 	const [showPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
-	const [showRejectModal, setShowRejectModal] = useState(false);
-	let isEditable = true;
-	if (status !== 'REQUESTED') {
-		isEditable = false;
-	}
-
+	const { status = '', level2 = {}, level1 = {}, data = {}, type = '', id = '' } = row || {};
+	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
+	const { creditNoteRequest = {}, consolidatedCreditNoteRequest = {}, organization = {} } = data;
 	const {
 		invoiceNumber,
 		jobNumber,
 		subTotal,
 		taxAmount,
-		lineItems,
 		grandTotal,
-		invoiceId,
+		lineItems,
 		remark,
 		creditNoteType,
 		creditNoteRemarks,
 		currency,
 		revoked,
 		creditNoteApprovalType: approvalType,
-	} = creditNoteRequest || consolidatedCreditNoteRequest || {};
-	const { tradePartyName = '', businessName = '' } = organization || {};
+	} = !isEmpty(consolidatedCreditNoteRequest) ? consolidatedCreditNoteRequest : creditNoteRequest || {};
+	const { tradePartyName = '', businessName = '', id: shipmentId = '' } = organization || {};
+	let isEditable = true;
+	if (status !== 'REQUESTED') {
+		isEditable = false;
+	}
 	const [CNCategoryValues, setCNCategoryValues] = useState({
 		CNType   : null,
 		CNValues : null,
@@ -86,16 +90,26 @@ function Details({
 					</div>
 				</div>
 				<div className={styles.line} />
-
 				<div className={styles.flex}>
-
 					<div className={styles.value_data}>
 						<div className={styles.label_value}>
 							{t('incidentManagement:shipment_id')}
 						</div>
 						<div className={styles.date_value}>
 							#
-							{jobNumber || '-'}
+							<a
+								href={jobNumber}
+								onClick={(event) => {
+									openPDF({
+										event,
+										partnerId    : partner_id,
+										id           : shipmentId,
+										incidentType : SHIPMENT_MAPPING[row?.incidentSubtype],
+									});
+								}}
+							>
+								{jobNumber || '-'}
+							</a>
 						</div>
 					</div>
 
@@ -104,14 +118,7 @@ function Details({
 							{t('incidentManagement:invoice_number')}
 						</div>
 						<div className={styles.date_value}>
-							<a
-								href={`${process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL}/sales/invoice/final/
-										${invoiceId}/download/`}
-								target="_blank"
-								rel="noreferrer"
-							>
-								{invoiceNumber || '-'}
-							</a>
+							{invoiceNumber || '-'}
 						</div>
 					</div>
 
