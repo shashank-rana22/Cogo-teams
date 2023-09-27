@@ -5,8 +5,8 @@ import { useState, useEffect, memo } from 'react';
 
 import MyResponsivePie from '../../../Components/PieChart/index.tsx';
 import ResponsiveBarChart from '../../../Components/ResponsiveBarChart/index.tsx';
-import useGetBillStatusStats from '../../../hook/useGetBillStatusStats.ts';
-import useGetCommentRemarkCounts from '../../../hook/useGetCommentRemarkCounts.ts';
+import useGetBillStatusStats from '../../../hook/useGetBillStatusStats';
+import useGetCommentRemarkCounts from '../../../hook/useGetCommentRemarkCounts';
 
 import styles from './styles.module.css';
 

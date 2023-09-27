@@ -3,12 +3,16 @@ import { useRequestBf } from '@cogoport/request';
 import { upperCase, format } from '@cogoport/utils';
 import { useCallback } from 'react';
 
-import toastApiError from '../../commons/toastApiError';
+import toastApiError from '../../commons/toastApiError.ts';
 
 const REJECTION_CATEGORY_MAPPING = {
 	coe_rejected : 'COE_REJECTED',
 	coe_on_hold  : 'ON_HOLD',
 };
+
+const DEFAULT_VALUE = 0;
+const PERCENTAGE_VALUE = 100;
+const DECIMAL_PLACE = 2;
 
 const useGetCommentRemarkCounts = ({ remarkDate, subActiveTabReject = '' }) => {
 	const [{ data = {}, loading = false }, trigger] = useRequestBf(
@@ -37,13 +41,13 @@ const useGetCommentRemarkCounts = ({ remarkDate, subActiveTabReject = '' }) => {
 		}
 	}, [trigger, remarkDate, subActiveTabReject]);
 
-	const totalRemarks: any = (Object.values(data) || []).reduce(((acc: number, value:any) => (acc + value)), 0);
+	const totalRemarks = (Object.values(data) || []).reduce(((acc, value) => (acc + value)), DEFAULT_VALUE);
 
 	const pieData = (Object.keys(data) || []).map((item) => (
 		{
 			id    : upperCase(item),
-			label : `${upperCase(item)} : ${data?.[item] || 0}`,
-			value : (((data?.[item] || 0) * 100) / totalRemarks).toFixed(2),
+			label : `${upperCase(item)} : ${data?.[item] || DEFAULT_VALUE}`,
+			value : (((data?.[item] || DEFAULT_VALUE) * PERCENTAGE_VALUE) / totalRemarks).toFixed(DECIMAL_PLACE),
 		}
 	));
 
