@@ -1,6 +1,6 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMArrowDown } from '@cogoport/icons-react';
+import { IcMArrowUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useGetPayablesByService from '../hooks/useGetPayablesByService';
@@ -498,7 +498,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 							role="presentation"
 						>
 							Show less
-							<IcMArrowDown height={15} width={15} className={styles.down} />
+							<IcMArrowUp height={15} width={15} className={styles.down} />
 						</div>
 					</div>
 				)}
