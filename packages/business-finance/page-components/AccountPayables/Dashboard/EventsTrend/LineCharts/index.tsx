@@ -62,7 +62,7 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 		})),
 	}));
 
-	const data3 = [
+	const dataForGraph = [
 		{
 			id   : isCountView ? 'Periodic Count' : 'Periodic Amount',
 			data : bardata[0].data,
@@ -73,10 +73,10 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 		},
 	];
 
-	if (showData === 'day' && data3?.[GLOBAL_CONSTANTS.zeroth_index]?.data?.length > 15) {
-		data3[GLOBAL_CONSTANTS.zeroth_index].data = data3[GLOBAL_CONSTANTS.zeroth_index].data
+	if (showData === 'day' && dataForGraph?.[GLOBAL_CONSTANTS.zeroth_index]?.data?.length > 15) {
+		dataForGraph[GLOBAL_CONSTANTS.zeroth_index].data = dataForGraph[GLOBAL_CONSTANTS.zeroth_index]?.data
 			.filter((_, index) => index % 2 === 0);
-		data3[1].data = data3[1].data.filter((_, index) => index % 2 === 0);
+		dataForGraph[1].data = dataForGraph[1]?.data?.filter((_, index) => index % 2 === 0);
 	}
 
 	const DATA1 = [];
@@ -160,7 +160,7 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 	return (
 		<div className={styles.line}>
 			<ResponsiveLine
-				data={showData === 'lastThreeMonths' ? lastThreeData : data3}
+				data={showData === 'lastThreeMonths' ? lastThreeData : dataForGraph}
 				margin={{ top: 50, right: 120, bottom: 50, left: 90 }}
 				xScale={{ type: 'point' }}
 				enableGridX={false}
