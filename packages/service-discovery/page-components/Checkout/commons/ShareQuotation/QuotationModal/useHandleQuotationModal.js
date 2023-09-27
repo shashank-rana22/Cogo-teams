@@ -1,7 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useMemo } from 'react';
@@ -22,6 +21,7 @@ const useHandleQuotationModal = ({
 	updateLoading,
 	updateCheckout = () => {},
 	bookingConfirmationMode = '',
+	setShowSuccessModal = () => {},
 }) => {
 	const { query, agent_id, partnerId } = useSelector(({ general, profile }) => ({
 		query     : general.query,
@@ -154,8 +154,6 @@ const useHandleQuotationModal = ({
 				});
 				setShowShareQuotationModal(false);
 
-				Toast.success('Email sent');
-
 				await updateCheckout({
 					values: {
 						id        : checkout_id,
@@ -164,12 +162,14 @@ const useHandleQuotationModal = ({
 					},
 				});
 
+				setShowSuccessModal(true);
+
 				if (bookingConfirmationMode === 'email') {
 					window.location.href = `/${partnerId}/sales/dashboards`;
 				}
 			} catch (err) {
 				if (err?.response) {
-					getApiErrorString(err.response?.data);
+					Toast.error('Something went wrong. Please try again later');
 				}
 			}
 		} else {

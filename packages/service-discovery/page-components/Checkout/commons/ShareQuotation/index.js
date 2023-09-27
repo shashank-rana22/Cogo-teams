@@ -1,4 +1,4 @@
-import { Button, CheckboxGroup, Popover } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
 import { dynamic } from '@cogoport/next';
 import { useContext } from 'react';
 
@@ -6,8 +6,10 @@ import { CheckoutContext } from '../../context';
 
 import EmailConfirmation from './EmailConfirmation';
 import PocDetails from './PocDetails';
+import QuotationCommunicationChannels from './QuotationCommunicationChannels';
 import QuotationModal from './QuotationModal';
 import styles from './styles.module.css';
+import SuccessModal from './SuccessModal';
 import useHandleShareQuotation from './useHandleShareQuotation';
 
 const PopoverContent = dynamic(
@@ -34,7 +36,6 @@ function ShareQuotation({ noRatesPresent = false, bookingConfirmationMode = '' }
 		showWhatsappVerificationModal,
 		setShowWhatsappVerificationModal,
 		showShareQuotationModal,
-		setSelectedModes,
 		selectedModes,
 		setShowShareQuotationModal,
 		confirmation,
@@ -42,6 +43,8 @@ function ShareQuotation({ noRatesPresent = false, bookingConfirmationMode = '' }
 		handleCopyQuoteLink,
 		showPopover,
 		setShowPopover,
+		showSuccessModal = () => {},
+		setShowSuccessModal = () => {},
 	} = useHandleShareQuotation({
 		detail,
 		updateCheckout,
@@ -50,25 +53,27 @@ function ShareQuotation({ noRatesPresent = false, bookingConfirmationMode = '' }
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.contact_details}>
-				<div className={styles.poc_details}>
-					<PocDetails
-						detail={detail}
-						bookingConfirmationMode={selectedModes}
-						showWhatsappVerificationModal={showWhatsappVerificationModal}
-						setShowWhatsappVerificationModal={setShowWhatsappVerificationModal}
-						updateCheckout={updateCheckout}
-						updateLoading={updateLoading}
-					/>
-				</div>
+			<div className={styles.poc_details}>
+				<PocDetails
+					detail={detail}
+					bookingConfirmationMode={selectedModes}
+					showWhatsappVerificationModal={showWhatsappVerificationModal}
+					setShowWhatsappVerificationModal={setShowWhatsappVerificationModal}
+					updateCheckout={updateCheckout}
+					updateLoading={updateLoading}
+				/>
 
-				<CheckboxGroup
-					className="primary md"
-					options={quotationOptions}
-					value={selectedModes || ''}
-					onChange={setSelectedModes}
+				<QuotationCommunicationChannels
+					quotationOptions={quotationOptions}
+					selectedModes={selectedModes}
 				/>
 			</div>
+
+			<SuccessModal
+				show={showSuccessModal}
+				setShow={setShowSuccessModal}
+				quotationOptions={quotationOptions}
+			/>
 
 			{showShareQuotationModal ? (
 				<QuotationModal
@@ -84,6 +89,7 @@ function ShareQuotation({ noRatesPresent = false, bookingConfirmationMode = '' }
 					updateCheckout={updateCheckout}
 					updateLoading={updateLoading}
 					bookingConfirmationMode={bookingConfirmationMode}
+					setShowSuccessModal={setShowSuccessModal}
 				/>
 			) : null}
 

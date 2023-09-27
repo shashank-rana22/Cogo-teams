@@ -7,20 +7,6 @@
 	border-radius: 8px;
 }
 
-.contact_details {
-	:global {
-		.ui_checkbox_group_container {
-			padding: 10px 0;
-			padding-bottom: unset;
-		}
-
-		.ui_checkbox_container {
-			padding-bottom: unset;
-			margin-left: unset;
-		}
-	}
-}
-
 .flex {
 	display: flex;
 	align-items: center;
@@ -52,5 +38,8 @@
 }
 
 .poc_details {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
 	margin-left: 12px;
 }
