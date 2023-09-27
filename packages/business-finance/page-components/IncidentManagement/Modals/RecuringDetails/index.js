@@ -1,6 +1,6 @@
 function RecuringDetails() {
 	return (
-		<>non recuring</>
+		<>recuring</>
 	);
 }
 export default RecuringDetails;

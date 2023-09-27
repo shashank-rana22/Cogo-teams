@@ -9,7 +9,7 @@ import allStakeHolderTimeLineData from '../../utils/formatAllStakeHolderData';
 import Details from './Details';
 import styles from './styles.module.css';
 
-function SezApprovalDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
+function ConcorPDADetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const { level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark = '' } = row || {};
 	const level0 = { ...createdBy, remark };
 	const docUrl = row?.data?.concorPdaApprovalRequest?.bookingProof[GLOBAL_CONSTANTS.zeroth_index] || '';
@@ -44,4 +44,4 @@ function SezApprovalDetails({ row = {}, setDetailsModal = () => {}, refetch = ()
 		</div>
 	);
 }
-export default SezApprovalDetails;
+export default ConcorPDADetails;
