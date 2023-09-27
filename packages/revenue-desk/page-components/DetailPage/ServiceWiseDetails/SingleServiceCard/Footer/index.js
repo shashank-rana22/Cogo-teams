@@ -46,42 +46,48 @@ function Footer({ data = {}, walletAmount = {} }) {
 			<div>
 				<ui>
 					<li>
-						Min Price:
+						<span className={styles.price_text}>Min Price :</span>
 						{' '}
-						{formatAmount({
-							amount   : data?.shipping_preferences?.min_price,
-							currency : data?.shipping_preferences?.currency,
-							options  : {
-								style                 : 'currency',
-								notation              : 'compact',
-								compactDisplay        : 'short',
-								minimumFractionDigits : 2,
-							},
-						})}
+						<span className={styles.wallet_text}>
+							{formatAmount({
+								amount   : data?.shipping_preferences?.min_price,
+								currency : data?.shipping_preferences?.currency,
+								options  : {
+									style                 : 'currency',
+									notation              : 'compact',
+									compactDisplay        : 'short',
+									minimumFractionDigits : 2,
+								},
+							})}
+						</span>
 					</li>
 					<li>
-						Max Price:
+						<span className={styles.price_text}>Max Price :</span>
 						{' '}
-						{formatAmount({
-							amount   : data?.shipping_preferences?.max_price,
-							currency : data?.shipping_preferences?.currency,
-							options  : {
-								style                 : 'currency',
-								notation              : 'compact',
-								compactDisplay        : 'short',
-								minimumFractionDigits : 2,
-							},
-						})}
+						<span className={styles.wallet_text}>
+							{formatAmount({
+								amount   : data?.shipping_preferences?.max_price,
+								currency : data?.shipping_preferences?.currency,
+								options  : {
+									style                 : 'currency',
+									notation              : 'compact',
+									compactDisplay        : 'short',
+									minimumFractionDigits : 2,
+								},
+							})}
+						</span>
 					</li>
-					<ul>
-						Preferred Shipping Lines:
-						{' '}
-						{(data?.shipping_preferences?.preferred_shipping_lines || []).map((shipping_line) => (
-							<li key={shipping_line?.id}>{shipping_line?.business_name}</li>
-						))}
-
-					</ul>
-
+					<div style={{ marginTop: '10px' }}>
+						<li>
+							<span className={styles.price_text}>Preferred Shipping Lines :</span>
+							{' '}
+							{(data?.shipping_preferences?.preferred_shipping_lines || []).map((shipping_line) => (
+								<div style={{ margin: '0 6px' }} key={shipping_line?.id}>
+									<li><span className={styles.wallet_text}>{shipping_line?.business_name}</span></li>
+								</div>
+							))}
+						</li>
+					</div>
 				</ui>
 			</div>
 		);
@@ -106,7 +112,7 @@ function Footer({ data = {}, walletAmount = {} }) {
 						Shipping Preferences:-
 
 					</span>
-					<Tooltip content={Content()}>
+					<Tooltip content={Content()} interactive style={{ width: 'fit-content' }}>
 						<div style={{ textDecoration: 'underline' }}>view</div>
 					</Tooltip>
 				</div>
