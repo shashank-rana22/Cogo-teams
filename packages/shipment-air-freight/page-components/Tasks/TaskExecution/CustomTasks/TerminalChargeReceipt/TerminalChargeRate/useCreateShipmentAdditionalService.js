@@ -14,10 +14,10 @@ const useCreateShipmentAdditionalService = ({
 	const createShipmentAdditionalService = async (values) => {
 		const { currency = '', terminalChargeReceipt = [] } = values || {};
 
-		let total_tax_price = 0;
+		let price = 0;
 
 		(terminalChargeReceipt || []).forEach((val) => {
-			total_tax_price += Number(val.total_tax_price);
+			price += Number(val.price);
 		});
 		const { id = '', all_services = [] } = shipmentData || {};
 
@@ -34,8 +34,8 @@ const useCreateShipmentAdditionalService = ({
 			state                 : 'accepted_by_importer_exporter',
 			add_to_sell_quotation : true,
 			quantity              : 1,
-			buy_price             : Number(total_tax_price),
-			price                 : Number(total_tax_price),
+			buy_price             : Number(price),
+			price                 : Number(price),
 			unit                  : 'per_shipment',
 			currency,
 			service_id            : airFreightLocalService?.id,
