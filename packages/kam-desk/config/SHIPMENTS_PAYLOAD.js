@@ -82,7 +82,6 @@ const tabPayload = {
 						status : 'pending',
 					},
 				],
-				trade_type: ['export'],
 			},
 			list_task_pending: {
 				export: [
@@ -106,31 +105,25 @@ const tabPayload = {
 						assigned_stakeholder : 'origin_booking_agent',
 					},
 				],
-				trade_type: ['import'],
 			},
 			document_approval: {
 				state               : 'in_progress',
 				bl_approval_pending : true,
-				trade_type          : ['import', 'export'],
 
 			},
 			vessel_departed: {
 				state         : 'in_progress',
 				service_state : 'vessel_departed',
-				trade_type    : ['import', 'export'],
 			},
 			vessel_arrived: {
 				state         : 'in_progress',
 				service_state : 'vessel_arrived',
-				trade_type    : ['import', 'export'],
 			},
 			completed: {
-				state      : 'completed',
-				trade_type : ['import', 'export'],
+				state: 'completed',
 			},
 			cancelled: {
-				state      : 'cancelled',
-				trade_type : ['import', 'export'],
+				state: 'cancelled',
 			},
 		},
 		fcl_customs: {
@@ -252,30 +245,20 @@ const tabPayload = {
 			bl_document_approval: {
 				state               : 'in_progress',
 				bl_approval_pending : true,
-				trade_type          : ['export'],
-			},
-			do_document_approval: {
-				state               : 'in_progress',
-				do_approval_pending : true,
-				trade_type          : ['import'],
 			},
 			vessel_departed: {
 				state         : 'in_progress',
 				service_state : 'vessel_departed',
-				trade_type    : ['import', 'export'],
 			},
 			vessel_arrived: {
 				state         : 'in_progress',
 				service_state : 'vessel_arrived',
-				trade_type    : ['import', 'export'],
 			},
 			completed: {
-				state      : 'completed',
-				trade_type : ['import', 'export'],
+				state: 'completed',
 			},
 			cancelled: {
-				state      : 'cancelled',
-				trade_type : ['import', 'export'],
+				state: 'cancelled',
 			},
 		},
 		lcl_customs: {

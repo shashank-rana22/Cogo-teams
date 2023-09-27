@@ -18,10 +18,6 @@
         "label": "BL Approval"
       },
       {
-        "value": "do_document_approval",
-        "label": "DO Approval"
-      },
-      {
         "value": "vessel_departed",
         "label": "Vessel Departed"
       },
