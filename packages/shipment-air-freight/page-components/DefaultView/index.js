@@ -144,11 +144,11 @@ function DefaultView() {
 						/>
 					)}
 
-					<Toggle
-						size="md"
-						onLabel="Old"
-						offLabel="New"
-						onChange={handleVersionChange}
+					<HandleRaiseContainer
+						shipment_data={shipment_data}
+						alarmId={alarmId}
+						setAlarmId={setAlarmId}
+						isGettingShipment={isGettingShipment}
 					/>
 
 					{is_job_closed_financially && (
@@ -159,11 +159,11 @@ function DefaultView() {
 						/>
 					)}
 
-					<HandleRaiseContainer
-						shipment_data={shipment_data}
-						alarmId={alarmId}
-						setAlarmId={setAlarmId}
-						isGettingShipment={isGettingShipment}
+					<Toggle
+						size="md"
+						onLabel="Old"
+						offLabel="New"
+						onChange={handleVersionChange}
 					/>
 
 					{conditionMapping.chat ? <ShipmentChat /> : null}
