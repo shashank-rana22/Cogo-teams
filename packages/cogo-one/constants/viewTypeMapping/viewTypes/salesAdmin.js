@@ -54,6 +54,7 @@ const SALES_ADMIN = {
 		show_shipments_stakeholders_contact_details : true,
 		restrict_mail_to_organizations              : true,
 		hide_personal_mail                          : true,
+		show_specific_subject                       : true,
 	},
 };
 

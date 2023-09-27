@@ -39,13 +39,14 @@ function Recipients({
 	showControl = '',
 	errorValue = '',
 	mailProps = {},
+	orgId = '',
+	setOrgId = () => {},
 }) {
 	const {
 		buttonType = '',
 		viewType = '',
 	} = mailProps;
 
-	const [orgId, setOrgId] = useState('');
 	const [enabledRecipients, setEnabledRecipients] = useState({
 		ccrecipients  : !isEmpty(emailState?.ccrecipients),
 		bccrecipients : !isEmpty(emailState?.bccrecipients),
