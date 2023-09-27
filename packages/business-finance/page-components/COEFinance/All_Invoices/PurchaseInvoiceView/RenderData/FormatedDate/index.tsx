@@ -11,6 +11,7 @@ import styled from './styles.module.css';
 
 interface ItemProps {
 	createdDate: Date;
+	updatedDate: Date
 	billDate: Date;
 	dueDate: Date;
 	billCurrency?: string;

@@ -37,7 +37,7 @@ const useGetCommentRemarkCounts = ({ remarkDate, subActiveTabReject = '' }) => {
 		}
 	}, [trigger, remarkDate, subActiveTabReject]);
 
-	const totalRemarks = (Object.values(data) || []).reduce(((acc, value) => acc + value), 0);
+	const totalRemarks: any = (Object.values(data) || []).reduce(((acc: number, value:any) => (acc + value)), 0);
 
 	const pieData = (Object.keys(data) || []).map((item) => (
 		{

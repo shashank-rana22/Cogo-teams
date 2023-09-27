@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { GenericObject } from '../../../commons/Interfaces';
 import List from '../../../commons/List';
@@ -13,13 +13,14 @@ import RenderViewMoreButton from '../../All_Invoices/PurchaseInvoiceView/RenderD
 import constAdvocateConfig from '../../configurations/COST_ADVOCATE_LIST';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
-import RejectedCharts from './RejectedChart';
+import RejectedCharts from './RejectedChart/index';
 import RenderActionButton from './RenderActionButton';
 import RenderTicket from './RenderTicket';
 import SegmentedFilters from './SegmentedFilters';
 
 interface ItemProps {
 	createdDate: Date;
+	updatedDate: Date;
 	billDate: Date;
 	dueDate: Date;
 	billCurrency: string;
@@ -32,6 +33,7 @@ interface ItemProps {
 	billNumber: string;
 	isProforma: boolean;
 	jobNumber: string;
+	shipmentId: string;
 	organizationName: string;
 	urgencyTag: Array<string>;
 	remarksTimeline?: Array<{
@@ -43,7 +45,7 @@ interface ItemProps {
 interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
-	subActiveTabReject: string;
+	subActiveTabReject: string | any;
 }
 
 function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
@@ -90,18 +92,10 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 
 	return (
 		<div>
-			{
-				(subActiveTabReject === 'coe_rejected' || subActiveTabReject === 'coe_on_hold') ? (
-					<div>
-						<RejectedCharts
-							filters={filters}
-							setFilters={setFilters}
-							subActiveTabReject={subActiveTabReject}
-						/>
-					</div>
-				) : null
-			}
 
+			<RejectedCharts
+				subActiveTabReject={subActiveTabReject}
+			/>
 			<SegmentedFilters
 				filters={filters}
 				setFilters={setFilters}

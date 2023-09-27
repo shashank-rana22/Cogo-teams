@@ -10,7 +10,7 @@ function MyResponsivePie({
 	title = '',
 	subActiveTabReject = '',
 	setRemarkDate = () => {},
-	remarkDate = null,
+	remarkDate = undefined,
 }) {
 	return (
 		<>
@@ -32,7 +32,6 @@ function MyResponsivePie({
 					? (
 						<div style={{ marginLeft: '20px' }}>
 							<DateRangepicker
-								placeholder="Enter Date"
 								dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
 								name="date"
 								onChange={setRemarkDate}

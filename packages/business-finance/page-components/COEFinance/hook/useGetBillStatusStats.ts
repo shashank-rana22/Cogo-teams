@@ -26,7 +26,7 @@ const useGetBillStatusStats = ({ date = new Date(), subActiveTabReject = '' }) =
 			async () => {
 				const endDate = date || new Date();
 
-				const startDate = subtractDays(endDate, NUMBER_OF_DAYS);
+				const startDate = new Date(subtractDays(endDate, NUMBER_OF_DAYS));
 				const 	payload = {
 					fromDate : format(startDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']),
 					toDate   : format(endDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']),

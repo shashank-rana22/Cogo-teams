@@ -5,7 +5,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function ResponsiveBarChart({ barData = {}, handleOnClick = () => {}, keys = [] }) {
+function ResponsiveBarChart({ barData = [], keys = [] }) {
 	return (
 		<ResponsiveBar
 			data={barData}
@@ -23,7 +23,6 @@ function ResponsiveBarChart({ barData = {}, handleOnClick = () => {}, keys = [] 
 			borderColor={{
 				from: 'color', modifiers: [['darker',	1.6]],
 			}}
-			onClick={handleOnClick}
 			axisTop={null}
 			axisRight={null}
 			innerPadding={4}
