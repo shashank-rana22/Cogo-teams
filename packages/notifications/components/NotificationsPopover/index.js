@@ -1,13 +1,15 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import navigationMapping from '@cogoport/navigation-configs/navigation-mapping-admin';
 import { useRouter } from '@cogoport/next';
-import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
 import extractNavLinks from '../../helpers/extractNavLinks';
 import notificationsRedirectLink from '../../helpers/notificationsRedirectLink';
+import useBulkUpdateCommunication from '../../hooks/useBulkUpdateCommunication';
+import useListCommunication from '../../hooks/useListCommunication';
+import useUpdateCommunication from '../../hooks/useUpdateCommunication';
 import showErrorsInToast from '../../utils/showErrorsInToast';
 
 import RenderContent from './RenderContent';
@@ -29,28 +31,18 @@ function NewNotifications({
 
 	const [dataRequired, setDataRequired] = useState(false);
 
-	const [{ data, loading }, trigger] = useRequest({
-		url    : '/list_communications',
-		method : 'get',
-	}, { manual: false });
+	const {
+		trigger = () => {},
+		formattedData = {},
+		is_not_seen_count = GLOBAL_CONSTANTS.zeroth_index,
+	} = useListCommunication();
+	const {
+		triggerCommunication = () => {},
+	} = useUpdateCommunication();
 
-	const [, triggerBulkCommunication] = useRequest({
-		url    : '/bulk_update_communications',
-		method : 'POST',
-	}, { manual: true });
-
-	const [, triggerCommunication] = useRequest({
-		url    : '/update_communication',
-		method : 'POST',
-	}, { manual: true });
-
-	const { is_not_seen_count = GLOBAL_CONSTANTS.zeroth_index, list = [] } = data || {};
-
-	const formattedData = {
-		not_seen_count: is_not_seen_count,
-		list,
-		loading,
-	};
+	const {
+		triggerBulkCommunication = () => {},
+	} = useBulkUpdateCommunication();
 
 	const updateAction = async (action) => {
 		try {
