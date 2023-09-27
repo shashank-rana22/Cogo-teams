@@ -1,1 +1,1 @@
-export { default as Welcome } from './page-components/Welcome';
+export { default as Welcome } from './page-components/EmployeeDashboard';

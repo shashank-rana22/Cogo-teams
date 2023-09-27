@@ -1,0 +1,10 @@
+.container {
+	padding: 16px;
+	background: #fff;
+	border-radius: 16px;
+}
+
+.header_title {
+	font-weight: 600;
+	color: #23262f;
+}

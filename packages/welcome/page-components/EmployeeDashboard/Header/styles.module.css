@@ -1,0 +1,81 @@
+.container {
+	padding: 24px 24px 56px;
+	color: #fff;
+	background: #21212c;
+	border-radius: 4px;
+}
+
+.header_flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header_right_flex {
+	display: flex;
+	align-items: center;
+}
+
+.header_title {
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.user_left_flex {
+	display: flex;
+	align-items: center;
+}
+
+.header_data_flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.name_avatar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	padding: 10px;
+	font-size: 20px;
+	background-color: #f68b21;
+	border-radius: 100px;
+}
+
+.user_name_text {
+	font-size: 20px;
+}
+
+.date_text {
+	font-size: 14px;
+	color: #e0e0e0;
+}
+
+.greetings {
+	margin-left: 12px;
+}
+
+.header_data_right_flex {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_button_container {
+			background-color: transparent;
+			border: 1px solid #e0e0e0;
+			border-radius: 6px;
+		}
+
+		.ui_button_container:hover {
+			background-color: transparent;
+		}
+	}
+
+	.mr_12:not(:last-child) {
+		margin-right: 12px;
+	}
+}

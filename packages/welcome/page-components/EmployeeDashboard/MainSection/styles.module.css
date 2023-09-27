@@ -1,0 +1,17 @@
+.container {
+	display: flex;
+	padding: 24px 12px;
+	margin-top: -30px;
+	background-color: #fff;
+	border-radius: 25px 25px 0 0;
+}
+
+.left_section {
+	flex: 1 0 65%;
+	padding-right: 6px;
+}
+
+.right_section {
+	flex: 1 0 35%;
+	padding-left: 6px;
+}
