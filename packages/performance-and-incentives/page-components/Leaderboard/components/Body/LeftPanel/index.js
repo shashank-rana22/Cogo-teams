@@ -9,6 +9,20 @@ import List from './List';
 import styles from './styles.module.css';
 import useGetScoringReports from './useGetAgentScoringReports';
 
+const getSecondElement = ({ location_id, channel, id }) => {
+	let secondElement = '';
+
+	if (location_id && channel) {
+		secondElement = location_id;
+	} else if (channel) {
+		secondElement = channel;
+	} else {
+		secondElement = id;
+	}
+
+	return secondElement;
+};
+
 function LeftPanel(props) {
 	const {
 		entity, params, setParams, isChannel, setIsChannel, debounceQuery, refetch: refetchStats, loading: statsLoading,
@@ -55,15 +69,7 @@ function LeftPanel(props) {
 			return curr;
 		});
 
-		let secondElement = '';
-
-		if (location_id && channel) {
-			secondElement = location_id;
-		} else if (channel) {
-			secondElement = channel;
-		} else {
-			secondElement = id;
-		}
+		const secondElement = getSecondElement({ location_id, channel, id });
 
 		setCurrLevel((prev) => [NEXT_LEVEL_MAPPING[prev[GLOBAL_CONSTANTS.zeroth_index]], secondElement]);
 	};
