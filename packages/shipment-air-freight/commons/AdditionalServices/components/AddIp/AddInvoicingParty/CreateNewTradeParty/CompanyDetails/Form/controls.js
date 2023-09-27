@@ -7,8 +7,15 @@ const controls = ({ watch = () => {} }) => {
 
 	const panPatternValue = getCountrySpecificData({
 		country_id    : watchCountryId,
-		accessorType  : 'pan_number',
+		accessorType  : 'identification_number',
 		accessor      : 'pattern',
+		isDefaultData : false,
+	});
+
+	const panLabel = getCountrySpecificData({
+		country_id    : watchCountryId,
+		accessorType  : 'identification_number',
+		accessor      : 'label',
 		isDefaultData : false,
 	});
 
@@ -26,14 +33,14 @@ const controls = ({ watch = () => {} }) => {
 		},
 		{
 			name        : 'registration_number',
-			label       : 'PAN Number',
+			label       : `${panLabel || 'PAN'}`,
 			type        : 'input',
-			placeholder : 'Enter PAN Number',
+			placeholder : `Enter ${panLabel || 'PAN'}`,
 			rules       : {
-				required : 'PAN Number is required',
+				required : `${panLabel} is required`,
 				pattern  : {
 					value   : panPatternValue,
-					message : 'PAN is invalid',
+					message : `${panLabel} is invalid`,
 				},
 			},
 		},
