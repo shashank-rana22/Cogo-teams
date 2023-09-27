@@ -1,5 +1,4 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
@@ -15,7 +14,7 @@ function TdsApprovalDetails({ row = {}, setDetailsModal = () => {}, refetch = ()
 		level2 = {},
 		level1 = {},
 		createdBy = {},
-		remark = '', data : { tdsRequest = {} },
+		remark = '', data : { tdsRequest = {} }, status = '', updatedBy = {},
 	} = row || {};
 	const docUrl = tdsRequest?.documentUrls?.[GLOBAL_CONSTANTS.zeroth_index];
 	const level0 = { ...createdBy, remark };
@@ -24,13 +23,9 @@ function TdsApprovalDetails({ row = {}, setDetailsModal = () => {}, refetch = ()
 			<div className={styles.heading}>
 				TDS Deviation
 			</div>
-			{
-			(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
-				<AllStakeHolderTimeline
-					timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3 })}
-				/>
-			)
-						}
+			<AllStakeHolderTimeline
+				timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3, status, updatedBy })}
+			/>
 			<div className={styles.request_heading}>
 
 				<h3>Request Details</h3>

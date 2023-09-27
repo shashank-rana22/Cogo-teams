@@ -1,5 +1,4 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
@@ -12,7 +11,7 @@ import styles from './styles.module.css';
 function AdvanceSecurityDepositDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const {
 		level3 = {}, level2 = {}, level1 = {},
-		createdBy = {}, remark = '', data: { advanceSecurityDeposit = {} },
+		createdBy = {}, remark = '', data: { advanceSecurityDeposit = {} }, status = '', updatedBy = {},
 	} = row || {};
 	console.log(row);
 	const docUrl = advanceSecurityDeposit?.documentUrls?.[GLOBAL_CONSTANTS.zeroth_index];
@@ -23,13 +22,9 @@ function AdvanceSecurityDepositDetails({ row = {}, setDetailsModal = () => {}, r
 			<div className={styles.heading}>
 				Advance Container Security Deposit
 			</div>
-			{
-			(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
-				<AllStakeHolderTimeline
-					timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3 })}
-				/>
-			)
-						}
+			<AllStakeHolderTimeline
+				timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3, status, updatedBy })}
+			/>
 			<div className={styles.request_heading}>
 
 				<h3>Request Details</h3>
