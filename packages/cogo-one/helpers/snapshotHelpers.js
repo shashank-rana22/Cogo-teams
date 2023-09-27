@@ -14,6 +14,8 @@ const LAST_ITEM = 1;
 const FALLBACK_VALUE = 0;
 const LIMIT = 10;
 
+const UNREAD_COUNT_PAGE_LIMIT = 100;
+
 export function snapshotCleaner({ ref }) {
 	const tempRef = ref;
 	if (tempRef.current) {
@@ -160,6 +162,7 @@ export function mountUnreadCountSnapShot({
 		...(sessionQuery || []),
 		...(queryFilters || []),
 		orderBy('new_message_sent_at', 'desc'),
+		limit(UNREAD_COUNT_PAGE_LIMIT),
 	);
 
 	snapshotRef.current = onSnapshot(
