@@ -16,7 +16,7 @@ const useUpdateEnrichmentRequest = (props) => {
 	} = useSelector((rdxState) => rdxState);
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_enrichment_request',
-		method : 'post',
+		method : 'put',
 	}, { manual: true });
 
 	const { formState: { errors }, control, handleSubmit } = useForm();
