@@ -1,8 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useHarbourRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-const useTableView = ({ props, list, refetch, isVerticalHead, setOpenEditModal }) => {
+const useTableView = ({ props, list, refetch, isVerticalHead }) => {
 	const [rating, setRating] = useState({});
 	const [feedback, setFeedback] = useState({});
 	const [showModal, setShowModal] = useState(false);
@@ -35,9 +36,7 @@ const useTableView = ({ props, list, refetch, isVerticalHead, setOpenEditModal }
 		method : 'POST',
 	}, { manual: true });
 
-	console.log('reporting_manager_id', rating);
-
-	const onSubmitFinalRating = async ({ isPublish = false }) => {
+	const onSubmitFinalRating = async (isPublish = false, ratingData = {}) => {
 		try {
 			const employee_rating_data = Object.keys(rating).map((employee_id) => ({
 				employee_id,
@@ -52,8 +51,10 @@ const useTableView = ({ props, list, refetch, isVerticalHead, setOpenEditModal }
 				reporting_manager_id : val?.reporting_manager_id,
 			}));
 
+			const updateRatingData = !isEmpty(ratingData) ? [ratingData] : vertical_head_rating_data;
+
 			const payload = {
-				employee_rating_data : isVerticalHead ? vertical_head_rating_data : employee_rating_data,
+				employee_rating_data : isVerticalHead ? updateRatingData : employee_rating_data,
 				level                : props?.activeTab === 'functional_manager'
 					? 'functional_manager' : props?.level,
 				publish_rating         : isPublish,
@@ -65,7 +66,6 @@ const useTableView = ({ props, list, refetch, isVerticalHead, setOpenEditModal }
 			setSelectedEmployees([]);
 			refetch();
 			setShowModal(false);
-			setOpenEditModal(false);
 			setIsAllSelected(false);
 		} catch (error) {
 			console.log('error :: ', error);
