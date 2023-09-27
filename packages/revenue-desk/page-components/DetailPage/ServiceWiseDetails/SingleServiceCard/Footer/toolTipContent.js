@@ -4,52 +4,69 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function ToolTipContent({ data = {} }) {
+	const { shipping_preferences } = data || {};
+	const { min_price = '', max_price = '', currency = '', preferred_shipping_lines = [] } = shipping_preferences || {};
+
 	return (
 		<div>
 			<ui>
-				<li>
-					<span className={styles.price_text}>Min Price :</span>
-					{' '}
-					<span className={styles.wallet_text}>
-						{formatAmount({
-							amount   : data?.shipping_preferences?.min_price,
-							currency : data?.shipping_preferences?.currency,
-							options  : {
-								style                 : 'currency',
-								notation              : 'compact',
-								compactDisplay        : 'short',
-								minimumFractionDigits : 2,
-							},
-						})}
-					</span>
-				</li>
-				<li>
-					<span className={styles.price_text}>Max Price :</span>
-					{' '}
-					<span className={styles.wallet_text}>
-						{formatAmount({
-							amount   : data?.shipping_preferences?.max_price,
-							currency : data?.shipping_preferences?.currency,
-							options  : {
-								style                 : 'currency',
-								notation              : 'compact',
-								compactDisplay        : 'short',
-								minimumFractionDigits : 2,
-							},
-						})}
-					</span>
-				</li>
-				<div style={{ marginTop: '10px' }}>
+				{min_price
+				&& (
 					<li>
-						<span className={styles.price_text}>Preferred Shipping Lines :</span>
+						<span className={styles.price_text}>Min Price :</span>
 						{' '}
-						{(data?.shipping_preferences?.preferred_shipping_lines || []).map((shipping_line) => (
-							<div style={{ margin: '0 6px' }} key={shipping_line?.id}>
-								<li><span className={styles.wallet_text}>{shipping_line?.business_name}</span></li>
-							</div>
-						))}
+						<span className={styles.wallet_text}>
+							{formatAmount({
+								amount  : min_price,
+								currency,
+								options : {
+									style                 : 'currency',
+									notation              : 'compact',
+									compactDisplay        : 'short',
+									minimumFractionDigits : 2,
+								},
+							})}
+						</span>
 					</li>
-				</div>
+				)}
+				{max_price
+				&& (
+					<li>
+						<span className={styles.price_text}>Max Price :</span>
+						{' '}
+						<span className={styles.wallet_text}>
+							{formatAmount({
+								amount  : max_price,
+								currency,
+								options : {
+									style                 : 'currency',
+									notation              : 'compact',
+									compactDisplay        : 'short',
+									minimumFractionDigits : 2,
+								},
+							})}
+						</span>
+					</li>
+				)}
+
+				{(preferred_shipping_lines || []).length
+					? (
+						<div style={{ marginTop: '10px' }}>
+							<li>
+								<span className={styles.price_text}>Preferred Shipping Lines :</span>
+								{' '}
+								{(preferred_shipping_lines || []).map((shipping_line) => (
+									<div style={{ margin: '0 6px' }} key={shipping_line?.id}>
+										<li>
+											<span className={styles.wallet_text}>
+												{shipping_line?.business_name}
+											</span>
+										</li>
+									</div>
+								))}
+							</li>
+						</div>
+					) : null}
 			</ui>
 		</div>
 	);
