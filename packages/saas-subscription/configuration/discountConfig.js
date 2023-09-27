@@ -1,29 +1,29 @@
-const getDiscountConfig = () => [
+const getDiscountConfig = ({ t }) => [
 	{
 		key        : 'service_name',
-		label      : 'Service Name',
+		label      : t('saasSubscription:discount_config_name'),
 		renderFunc : 'renderName',
 		width      : '22%',
 	},
 	{
 		key        : 'config_type',
-		label      : 'type',
+		label      : t('saasSubscription:discount_config_type'),
 		renderFunc : 'renderName',
 		width      : '22%',
 
 	},
 	{
 		key        : 'unit',
-		label      : 'Unit',
+		label      : t('saasSubscription:discount_config_unit'),
 		renderFunc : 'renderName',
 	},
 	{
 		key   : 'value',
-		label : 'Value',
+		label : t('saasSubscription:discount_config_val'),
 	},
 	{
 		key   : 'usage_count',
-		label : 'Usage Count',
+		label : t('saasSubscription:discount_config_count'),
 	},
 	{
 		key        : 'editor',

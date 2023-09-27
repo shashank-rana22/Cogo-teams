@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { useTranslation } from 'next-i18next';
 
 const getDefaultValue = ({ info, isCreate = false }) => {
 	const { service_name, config_type, value, usage_count, metadata, conditions, is_active } = info || {};
@@ -21,6 +22,8 @@ const getDefaultValue = ({ info, isCreate = false }) => {
 const usePlanDiscount = ({ discountModal = {}, setFeatureModal, setDiscountModal }) => {
 	const { info, isCreate = false } = discountModal || {};
 
+	const { t } = useTranslation(['saasSubscription']);
+
 	const [{ loading }, trigger] = useRequest({
 		method : 'POST',
 		url    : '/update_saas_plan_discount_config',
@@ -36,7 +39,7 @@ const usePlanDiscount = ({ discountModal = {}, setFeatureModal, setDiscountModal
 				data: payload,
 			});
 			setFeatureModal({ apiCall: true });
-			Toast.success('Updated Plan Discount');
+			Toast.success(t('saasSubscription:discount_success_toast'));
 			setDiscountModal({ open: false });
 		} catch (err) {
 			console.log(err, 'err');
@@ -58,7 +61,7 @@ const usePlanDiscount = ({ discountModal = {}, setFeatureModal, setDiscountModal
 
 			updatePlanDiscount(payload);
 		} catch (err) {
-			Toast.error('Please Enter valid JSON metadata ');
+			Toast.error(t('saasSubscription:discount_invalid_metadata'));
 		}
 	};
 

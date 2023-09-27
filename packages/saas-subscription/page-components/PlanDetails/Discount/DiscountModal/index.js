@@ -1,5 +1,6 @@
 import { cl, Modal, Button, Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import getDiscountControls from '../../../../configuration/discountControls';
 import usePlanDiscount from '../../../../hooks/usePlanDiscount';
@@ -8,9 +9,10 @@ import { getFieldController } from '../../../../utils/getFieldController';
 import styles from './styles.module.css';
 
 function ModalHeader({ service_name = '', config_type = '', isCreate = false }) {
+	const { t } = useTranslation(['saasSubscripton']);
 	return (
 		<div className={styles.modal_header}>
-			<h3 className={styles.modal_title}>Discounts</h3>
+			<h3 className={styles.modal_title}>{t('saasSubscripton:discount')}</h3>
 			{!isCreate ? (
 				<div>
 					<Pill size="sm" color="red">{startCase(service_name)}</Pill>
@@ -22,12 +24,14 @@ function ModalHeader({ service_name = '', config_type = '', isCreate = false }) 
 }
 
 function DiscountModal({ discountModal, setDiscountModal, setFeatureModal }) {
+	const { t } = useTranslation(['saasSubscripton']);
+
 	const { info, isCreate = false } = discountModal || {};
 	const { unit } = info || {};
 
 	const { loading, formHook, submitHandler } = usePlanDiscount({ discountModal, setFeatureModal, setDiscountModal });
 
-	const discountControls = getDiscountControls({ isCreate, unit });
+	const discountControls = getDiscountControls({ isCreate, unit, t });
 
 	const { control, handleSubmit } = formHook;
 
@@ -58,14 +62,20 @@ function DiscountModal({ discountModal, setDiscountModal, setFeatureModal }) {
 			</div>
 
 			<Modal.Footer>
-				<Button themeType="secondary" onClick={closeModalHandler} disabled={loading}>Cancel</Button>
+				<Button
+					themeType="secondary"
+					onClick={closeModalHandler}
+					disabled={loading}
+				>
+					{t('saasSubscripton:cancel')}
+				</Button>
 
 				<Button
 					className={styles.submit_btn}
 					loading={loading}
 					onClick={handleSubmit(submitHandler)}
 				>
-					Submit
+					{t('saasSubscripton:submit')}
 				</Button>
 			</Modal.Footer>
 

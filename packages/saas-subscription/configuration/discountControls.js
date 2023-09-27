@@ -1,10 +1,10 @@
 import { isEmpty, startCase } from '@cogoport/utils';
 
-const getDiscountControls = ({ isCreate = false, unit = '' }) => [
+const getDiscountControls = ({ isCreate = false, unit = '', t }) => [
 	{
 		name        : 'service_name',
-		label       : 'Service Name',
-		placeholder : 'Enter Value',
+		label       : t('saasSubscription:discount_control_name'),
+		placeholder : t('saasSubscription:discount_control_name_placeholder'),
 		size        : 'sm',
 		type        : 'text',
 		showEle     : isCreate,
@@ -12,8 +12,8 @@ const getDiscountControls = ({ isCreate = false, unit = '' }) => [
 	},
 	{
 		name        : 'config_type',
-		label       : 'Config Type',
-		placeholder : 'Enter Value',
+		label       : t('saasSubscription:discount_control_type'),
+		placeholder : t('saasSubscription:discount_control_type_placeholder'),
 		size        : 'sm',
 		type        : 'text',
 		showEle     : isCreate,
@@ -21,8 +21,8 @@ const getDiscountControls = ({ isCreate = false, unit = '' }) => [
 	},
 	{
 		name        : 'value',
-		label       : 'Value',
-		placeholder : 'Enter Value',
+		label       : t('saasSubscription:discount_control_val'),
+		placeholder : t('saasSubscription:discount_control_val_placeholder'),
 		suffix      : !isEmpty(unit) ? startCase(unit) : '',
 		size        : 'sm',
 		type        : 'number',
@@ -30,31 +30,31 @@ const getDiscountControls = ({ isCreate = false, unit = '' }) => [
 	},
 	{
 		name        : 'usage_count',
-		label       : 'Usage Count',
-		placeholder : 'Enter usage count',
+		label       : t('saasSubscription:discount_control_count'),
+		placeholder : t('saasSubscription:discount_control_count_placeholder'),
 		size        : 'sm',
 		type        : 'number',
 		rules       : { required: true },
 	},
 	{
 		name        : 'metadata',
-		label       : 'Metadata',
-		placeholder : 'Enter metadata',
+		label       : t('saasSubscription:discount_control_metadata'),
+		placeholder : t('saasSubscription:discount_control_metadata_placeholder'),
 		size        : 'sm',
 		type        : 'textarea',
 		rows        : 3,
 	},
 	{
 		name        : 'condition',
-		label       : 'Conditions',
-		placeholder : 'Enter Conditions',
+		label       : t('saasSubscription:discount_control_conditions'),
+		placeholder : t('saasSubscription:discount_control_conditions_placeholder'),
 		size        : 'sm',
 		rows        : 3,
 		type        : 'textarea',
 	},
 	{
 		name    : 'is_active',
-		label   : 'Status',
+		label   : t('saasSubscription:discount_control_status'),
 		type    : 'radioGroup',
 		options : [{ value: 'active', label: 'active' }, { value: 'inactive', label: 'inactive' }],
 		rules   : { required: true },

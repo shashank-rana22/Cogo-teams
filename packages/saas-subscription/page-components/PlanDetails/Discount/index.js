@@ -1,5 +1,6 @@
 import { Placeholder, Button, cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import getDiscountConfig from '../../../configuration/discountConfig';
@@ -10,22 +11,23 @@ import getItemFunction from './itemFunction';
 import styles from './styles.module.css';
 
 function Discount({ discounts = [], loading = false, setFeatureModal }) {
+	const { t } = useTranslation(['saasSubscription']);
 	const [discountModal, setDiscountModal] = useState({ open: false });
 
-	const discountConfig = getDiscountConfig();
+	const discountConfig = getDiscountConfig({ t });
 
-	const itemFunction = getItemFunction({ setDiscountModal });
+	const itemFunction = getItemFunction({ setDiscountModal, t });
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<h3>Discount</h3>
+				<h3>{t('saasSubscription:discount')}</h3>
 
 				<Button
 					themeType="secondary"
 					onClick={() => setDiscountModal({ open: true, isCreate: true })}
 				>
-					Create
+					{t('saasSubscription:create')}
 				</Button>
 			</div>
 

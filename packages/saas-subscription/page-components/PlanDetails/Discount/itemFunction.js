@@ -1,14 +1,14 @@
 import { Button } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-const getItemFunction = ({ setDiscountModal }) => ({
+const getItemFunction = ({ setDiscountModal, t }) => ({
 	renderEdit: (itemData) => (
 		<Button
 			size="sm"
 			themeType="link"
 			onClick={() => setDiscountModal({ open: true, info: itemData })}
 		>
-			Edit
+			{t('saasSubscription:edit_btn')}
 		</Button>
 	),
 	renderName: (itemData, config) => (
