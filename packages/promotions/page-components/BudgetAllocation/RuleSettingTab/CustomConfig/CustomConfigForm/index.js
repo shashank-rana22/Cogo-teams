@@ -10,6 +10,10 @@ import discountConfigControls from '../../GlobalConfig/controls/discountConfigCo
 import shipmentConfigControls from '../../GlobalConfig/controls/shipmentConfigControls';
 
 import getControls from './controls';
+import getOrganizationCreateAgentRuleData from './helpers/getOrganizationCreateAgentRuleData';
+import getOrganizationUpdateAgentRuleData from './helpers/getOrganizationUpdateAgentRuleData';
+import getShipmentCreateAgentRuleData from './helpers/getShipmentCreateAgentRuleData';
+import getShipmentUpdateAgentRuleData from './helpers/getShipmentUpdateAgentRuleData';
 import styles from './styles.module.css';
 
 const INCREMENT = 0.01;
@@ -31,61 +35,38 @@ function CustomConfigForm({
 	const { onUpdateAgentRule = () => {} } = useUpdatePromotionAgentRule();
 
 	const submitForm = async (values) => {
-		if (viewAndEditConfigData === null && data?.scope === 'organization') {
-			const { agent_id = '', ...restValues } = values;
-			await onSubmit({
-				data: {
-					agent_id,
-					discount_config: {
-						...restValues,
+		if (viewAndEditConfigData === null) {
+			if (data?.scope === 'organization') {
+				const dataMap = getOrganizationCreateAgentRuleData(values);
+				await onSubmit({
+					data: {
+						...dataMap,
+						promotion_rule_id : data?.id,
+						scope             : data?.scope,
 					},
-					promotion_rule_id : data?.id,
-					scope             : data?.scope,
-				},
-			});
-		} else if (viewAndEditConfigData === null && data?.scope !== 'organization') {
-			const { agent_id = '', shipment_price_slab_config = [] } = values;
-			const NEW_ARRAY = [];
-			shipment_price_slab_config?.forEach((slab) => {
-				NEW_ARRAY.push({
-					...slab,
-					max_allowed_discount_currency : slab.slab_unit_currency,
-					discount_limit_currency       : slab.slab_unit_currency,
 				});
-			});
-			await onSubmit({
-				data: {
-					agent_id,
-					slab_details      : NEW_ARRAY,
-					promotion_rule_id : data?.id,
-					scope             : data?.scope,
-				},
-			});
+			} else {
+				const dataMap = getShipmentCreateAgentRuleData(values);
+				await onSubmit({
+					data: {
+						...dataMap,
+						promotion_rule_id : data?.id,
+						scope             : data?.scope,
+					},
+				});
+			}
 		} else if (data?.scope === 'organization') {
-			const {
-				id = '',
-				frequency = '',
-				discount_limit_currency = '',
-				discount_limit_unit = '',
-				discount_limit_value = '',
-			} = values;
+			const dataMap = getOrganizationUpdateAgentRuleData(values);
 			await onUpdateAgentRule({
 				data: {
-					discount_config: {
-						frequency,
-						discount_limit_currency,
-						discount_limit_unit,
-						discount_limit_value,
-					},
-					id,
+					...dataMap,
 				},
 			});
 		} else {
-			const { id = '', shipment_price_slab_config = [] } = values;
+			const dataMap = getShipmentUpdateAgentRuleData(values);
 			await onUpdateAgentRule({
 				data: {
-					slab_details: shipment_price_slab_config,
-					id,
+					...dataMap,
 				},
 			});
 		}
