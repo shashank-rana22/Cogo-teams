@@ -9,7 +9,7 @@ function Notification(props) {
 		setResetSubnavs = () => {},
 	} = props || {};
 
-	return notificationPopover ? (
+	return (
 		<div className={styles.container}>
 			<NotificationsPopover
 				setNotificationPopover={setNotificationPopover}
@@ -17,7 +17,7 @@ function Notification(props) {
 				setResetSubnavs={setResetSubnavs}
 			/>
 		</div>
-	) : null;
+	);
 }
 
 export default Notification;

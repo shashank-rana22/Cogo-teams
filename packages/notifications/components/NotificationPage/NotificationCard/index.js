@@ -33,7 +33,13 @@ function Notification({
 		}
 	};
 
-	const { is_seen = false, is_clicked = false, content = '', created_at = '', is_rpa = false } = item;
+	const {
+		is_seen = false,
+		is_clicked = false,
+		content = '',
+		created_at = '',
+		is_rpa = false,
+	} = item || {};
 
 	return (
 		<div

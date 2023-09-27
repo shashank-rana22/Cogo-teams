@@ -16,7 +16,7 @@ function Body({
 
 	return (
 		<div className={styles.body_container}>
-			{list?.map((item) => (
+			{(list || []).map((item) => (
 				<Card
 					key={item?.id}
 					item={item}

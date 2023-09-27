@@ -33,6 +33,7 @@ function Card({
 		content = {},
 		created_at = '',
 		is_clicked = false,
+		is_rpa = false,
 	} = item || {};
 
 	return (
@@ -51,10 +52,12 @@ function Card({
 					</div>
 
 					<div className={styles.row} style={{ marginTop: 8 }}>
+
 						<p className={styles.time_status}>
 							{formatDistanceToNow(created_at, { addSuffix: true })}
 						</p>
-						{!item.is_rpa ? <p className={styles.time_status}>{getStatus(is_clicked, is_seen)}</p> : null}
+
+						{!is_rpa ? <p className={styles.time_status}>{getStatus(is_clicked, is_seen)}</p> : null}
 					</div>
 				</div>
 

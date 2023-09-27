@@ -13,7 +13,7 @@ function Header(props) {
 	return (
 		<div className={styles.header_container}>
 
-			<h3 style={{ margin: 0, padding: 0 }}>Notifications</h3>
+			<h3 className={styles.header}>Notifications</h3>
 
 			{!isEmpty(formattedData?.list || []) ? (
 				<div className={styles.row}>

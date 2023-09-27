@@ -9,7 +9,7 @@ const notificationsRedirectLink = ({
 
 	const isLinkValid = link?.startsWith('/');
 
-	const splittedLink = link.split('/');
+	const splittedLink = link?.split('/');
 
 	NAVIGATION_LINKS.forEach((href) => {
 		if (redirectLink) return;

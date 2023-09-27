@@ -13,10 +13,10 @@ const SESSION_DISABLED = ['logout', 'logout_all_accounts'];
 
 const TOTAL_TIME = 1000;
 const THIRTY_SECONDS = 30;
+const MAX_NOTIFICATION_COUNT = 99;
+const ZERO = 0;
 const ONE = 1;
 const TWO = 2;
-const ZERO = 0;
-const MAX_NOTIFICATION_COUNT = 99;
 
 function ProfileAvatar({ picture = '' }) {
 	return (
@@ -54,20 +54,22 @@ function SingleNav({
 	);
 }
 
-function Items({
-	item = [],
-	resetSubnavs = false,
-	setOpenPopover = () => {},
-	timeLeft = '',
-	loading = true,
-	openPopover = () => {},
-	refetch = () => {},
-	checkIfSessionExpiring = false,
-	notificationCount = ZERO,
-	notificationPopover = false,
-	setNotificationPopover = () => {},
-	mobileShow = false,
-}) {
+function Items(props) {
+	const {
+		item = [],
+		resetSubnavs = false,
+		setOpenPopover = () => {},
+		timeLeft = '',
+		loading = true,
+		openPopover = () => {},
+		refetch = () => {},
+		checkIfSessionExpiring = false,
+		notificationCount = ZERO,
+		notificationPopover = false,
+		setNotificationPopover = () => {},
+		mobileShow = false,
+	} = props || {};
+
 	const { t } = useTranslation(['common']);
 
 	const {
@@ -96,7 +98,7 @@ function Items({
 		setNotificationPopover(false);
 	};
 
-	const handleNotificationNav = () => {
+	const handleNotificationClick = () => {
 		if (mobileShow) {
 			window.location.href = `/v2/${partner_id}/notifications`;
 		} else {
@@ -228,7 +230,7 @@ function Items({
 					size="md"
 					className={styles.button_styles}
 					themeType="primary"
-					onClick={handleNotificationNav}
+					onClick={handleNotificationClick}
 					disabled={loadingState}
 				>
 					{resetSubnavs || notificationPopover ? (

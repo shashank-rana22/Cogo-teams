@@ -19,8 +19,11 @@ function NewNotifications({
 }) {
 	const { push } = useRouter();
 	const { t } = useTranslation(['notifications', 'common']); // ??
-	const { general } = useSelector((state) => state);
-	const { query: { partner_id } = {} } = general;
+
+	const { partner_id } = useSelector(({ general }) => ({
+		partner_id: general?.query?.partner_id,
+	}));
+
 	const navigationMappingAdmin = navigationMapping({ t });
 	const NAVIGATION_LINKS = extractNavLinks(navigationMappingAdmin);
 	const { zeroth_index } = GLOBAL_CONSTANTS;
@@ -66,14 +69,20 @@ function NewNotifications({
 	};
 
 	const handleNotificationClick = async (item) => {
+		const {
+			content = {},
+			is_clicked = false,
+			id = '',
+		} = item || {};
+
 		try {
-			if (item?.content?.link) {
-				notificationsRedirectLink({ link: item?.content?.link, push, partner_id, NAVIGATION_LINKS });
+			if (content?.link) {
+				notificationsRedirectLink({ link: content?.link, push, partner_id, NAVIGATION_LINKS });
 			}
 
-			if (!item?.is_clicked) {
+			if (is_clicked) {
 				const updateRes = await triggerCommunication({
-					data: { id: item?.id, is_clicked: true },
+					data: { id, is_clicked: true },
 				});
 				if (updateRes.hasError) {
 					showErrorsInToast(updateRes.messages);
@@ -92,7 +101,7 @@ function NewNotifications({
 			setNotificationPopover(false);
 			setResetSubnavs(false);
 		} catch (err) {
-			showErrorsInToast(err.data);
+			showErrorsInToast(err?.data || 'Something went wrong !');
 		}
 	};
 
