@@ -61,20 +61,8 @@ function ProfileManager({
 				setCurrentNotSeen(unReadChatsCount);
 			}
 
-			const notifyMe = () => {
-				if (!('Notification' in window)) {
-					Toast.default('This browser does not support desktop notification', { icon: false });
-				} else if (Notification.permission === 'granted') {
-					// eslint-disable-next-line no-unused-vars
-					const notification = new Notification(
-						`${unReadChatsCount} ${t('notifications:new_notifications')}`,
-					);
-				}
-			};
-
 			if (audio && unReadChatsCount > currentNotSeen && unReadChatsCount !== ZERO) {
 				audio.play();
-				notifyMe();
 				setCurrentNotSeen(unReadChatsCount);
 			}
 		} catch (err) {

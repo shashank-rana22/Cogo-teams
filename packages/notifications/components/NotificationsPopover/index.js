@@ -3,7 +3,7 @@ import navigationMapping from '@cogoport/navigation-configs/navigation-mapping-a
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import extractNavLinks from '../../helpers/extractNavLinks';
 import notificationsRedirectLink from '../../helpers/notificationsRedirectLink';
@@ -44,7 +44,7 @@ function NewNotifications({
 		triggerBulkCommunication = () => {},
 	} = useBulkUpdateCommunication();
 
-	const updateAction = async (action) => {
+	const updateAction = useCallback(async (action) => {
 		try {
 			const payload = {
 				filters     : { type: 'platform_notification' },
@@ -57,7 +57,7 @@ function NewNotifications({
 		} catch (err) {
 			showErrorsInToast(err?.data, t);
 		}
-	};
+	}, [t, triggerBulkCommunication]);
 
 	const handleNotificationClick = async (item) => {
 		const {
@@ -96,7 +96,7 @@ function NewNotifications({
 		}
 	};
 
-	const onShowToggle = async (show) => {
+	const onShowToggle = useCallback(async (show) => {
 		if (show) {
 			try {
 				setDataRequired(true);
@@ -117,7 +117,7 @@ function NewNotifications({
 				await updateAction('seen');
 			}
 		}
-	};
+	}, [is_not_seen_count, trigger, updateAction]);
 
 	const onMarkAllAsRead = async () => {
 		await updateAction('seen');
@@ -133,8 +133,7 @@ function NewNotifications({
 
 	useEffect(() => {
 		onShowToggle(notificationPopover);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [notificationPopover]);
+	}, [notificationPopover, onShowToggle]);
 
 	return (
 		<RenderContent
