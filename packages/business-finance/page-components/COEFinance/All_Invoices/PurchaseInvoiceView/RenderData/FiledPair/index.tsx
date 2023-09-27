@@ -16,6 +16,7 @@ interface ItemProps {
 	billNumber:string,
 	isProforma:boolean,
 	jobNumber:string,
+	shipmentId:string
 }
 interface Props {
 	itemData:ItemProps;
@@ -39,6 +40,7 @@ function FieldPair({
 		billNumber      : '',
 		isProforma      : false,
 		jobNumber       : '',
+		shipmentId      : '',
 	}, field = {
 		topKey    : {},
 		bottomKey : {},
