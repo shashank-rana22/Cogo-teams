@@ -43,7 +43,6 @@ const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_UR
 
 request.interceptors.request.use((oldConfig) => {
 	const newConfig = { ...oldConfig };
-
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
 
 	const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com');
