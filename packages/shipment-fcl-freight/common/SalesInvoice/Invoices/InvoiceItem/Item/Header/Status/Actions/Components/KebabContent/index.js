@@ -30,10 +30,10 @@ function KebabContent({
 	const { serial_id = '', is_cogo_assured = false } = shipment_data || {};
 
 	const showForOldShipments = serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
-	&& invoice.status === 'pending';
+	&& invoice?.status === 'pending';
 
-	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
-	|| isEmpty(invoiceData.invoice_trigger_date);
+	const disableActionCondition = ['reviewed', 'approved'].includes(invoice?.status)
+	|| isEmpty(invoiceData?.invoice_trigger_date);
 
 	let disableAction = showForOldShipments ? isIRNGenerated : disableActionCondition;
 
@@ -44,9 +44,10 @@ function KebabContent({
 	const commonActions = invoice?.status !== 'approved'
 	&& !disableAction;
 
-	const editInvoicesVisiblity = (is_cogo_assured !== true && !invoice?.is_igst)
-	|| [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
-		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
+	const editInvoicesVisiblity = ((is_cogo_assured !== true && !invoice?.is_igst && !invoice?.processing)
+	|| (invoice?.processing && invoice?.invoice_total_discounted === ZERO))
+		|| [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
+			GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
