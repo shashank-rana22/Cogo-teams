@@ -7,6 +7,7 @@ import useUpdateCostApprovalBill from '../../../hook/useUpdateCostApprovalBill';
 
 import RaiseTicketModal from './RaiseTicketModal';
 import RenderContent from './RenderContent';
+import styles from './styles.module.css';
 
 function RenderActionButton({ itemData = {}, refetch = () => {} }) {
 	const router = useRouter();
@@ -50,8 +51,9 @@ function RenderActionButton({ itemData = {}, refetch = () => {} }) {
 				onClickOutside={() => setShowPopover(false)}
 			>
 				<IcMOverflowDot
+					className={styles.icon}
 					onClick={() => setShowPopover((pre) => !pre)}
-					style={{ cursor: 'pointer', width: 16, height: 16 }}
+
 				/>
 			</Popover>
 			{showTicketModal ? (

@@ -20,7 +20,6 @@ const controls = ({
 		rules       : { required: true },
 		asyncKey    : 'default_types',
 		params      : {
-			// Audience     : 'cogoport_user',
 			RequestType  : 'shipment' || undefined,
 			Service      : shipmentData?.shipment_type || undefined,
 			TradeType    : shipmentData?.trade_type || undefined,
