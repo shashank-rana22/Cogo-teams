@@ -1,6 +1,6 @@
 import React from 'react';
 
-import formatDistanceToNow from '../../utils/formatDistanceToNow';
+import formatDistanceToNow from '../../../utils/formatDistanceToNow';
 
 import styles from './styles.module.css';
 

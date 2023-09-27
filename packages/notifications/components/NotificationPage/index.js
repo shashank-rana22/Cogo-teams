@@ -2,10 +2,9 @@ import { Tabs, TabPanel, Placeholder, cl } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import Notification from '../Notification';
-
 import Header from './Header';
 import useNotificationHooks from './hooks/useNotificationHooks';
+import NotificationCard from './NotificationCard';
 import styles from './styles.module.css';
 
 const LOADER_COUNT = 5;
@@ -58,7 +57,7 @@ function NotificationPage({
 
 						{!loading
 							? (formattedData?.list || []).map((item) => (
-								<Notification
+								<NotificationCard
 									key={item?.id}
 									item={item}
 									handleNotificationClick={handleNotificationClick}
@@ -87,7 +86,7 @@ function NotificationPage({
 						/>
 						{!loading
 							? (formattedmailData?.list || []).map((item) => (
-								<Notification
+								<NotificationCard
 									key={item?.id}
 									item={item}
 									handleNotificationClick={handleNotificationClick}

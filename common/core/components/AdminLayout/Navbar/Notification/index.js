@@ -1,4 +1,4 @@
-import { NewNotifications } from '@cogoport/notifications';
+import { NotificationsPopover } from '@cogoport/notifications';
 
 import styles from './styles.module.css';
 
@@ -11,7 +11,7 @@ function Notification(props) {
 
 	return notificationPopover ? (
 		<div className={styles.container}>
-			<NewNotifications
+			<NotificationsPopover
 				setNotificationPopover={setNotificationPopover}
 				notificationPopover={notificationPopover}
 				setResetSubnavs={setResetSubnavs}
