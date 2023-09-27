@@ -2,6 +2,14 @@ import { toastApiError } from '@cogoport/air-modules';
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
+const closeAndRefetch = ({
+	setFinJobOpenConfirmation = () => {},
+	refetch = () => {},
+}) => {
+	setFinJobOpenConfirmation(false);
+	refetch();
+};
+
 const useUpdateShipmentReopenJob = ({
 	shipment_id = '',
 	setFinJobOpenConfirmation = () => {},
@@ -23,8 +31,7 @@ const useUpdateShipmentReopenJob = ({
 				},
 			});
 			Toast.success('Shipment Reopened');
-			setFinJobOpenConfirmation(false);
-			refetch();
+			closeAndRefetch({ setFinJobOpenConfirmation, refetch });
 		} catch (err) {
 			toastApiError(err);
 		}
