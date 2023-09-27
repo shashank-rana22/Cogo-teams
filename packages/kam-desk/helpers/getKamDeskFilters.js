@@ -4,7 +4,7 @@ import tabPayload, { CRITICAL_TABS } from '../config/SHIPMENTS_PAYLOAD';
 
 import getAdditionalMethods from './getAdditionalMethods';
 
-const keyMapping = {
+const KEY_MAPPING = {
 	eta : 'schedule_arrival',
 	etd : 'schedule_departure',
 };
@@ -27,12 +27,8 @@ export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 	}
 
 	if (dateRange && startDate && date_type && endDate) {
-		finalFilters[`${keyMapping[date_type]}_greater_than`] = startDate;
-		finalFilters[`${keyMapping[date_type]}_less_than`] = endDate;
-	}
-
-	if (['import', 'export'].includes(stepperTab)) {
-		finalFilters.trade_type = stepperTab;
+		finalFilters[`${KEY_MAPPING[date_type]}_greater_than`] = startDate;
+		finalFilters[`${KEY_MAPPING[date_type]}_less_than`] = endDate;
 	}
 
 	return {
