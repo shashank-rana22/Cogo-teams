@@ -13,6 +13,7 @@ function Details({
 	setDetailsModal = () => {},
 	refetch = () => {},
 }) {
+	console.log(row);
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
 	const { status = '', id = '', data: { revokeInvoiceRequest = {} } } = row || {};
@@ -41,7 +42,7 @@ function Details({
 			<div className={styles.line} />
 			<div className={styles.invoice}>
 				<div className={styles.heading}>Invoice Number</div>
-				<div className={styles.invoice_text}>{revokeInvoiceRequest?.invoiceNumber || ''}</div>
+				<div className={styles.text}>{revokeInvoiceRequest?.invoiceNumber || ''}</div>
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>

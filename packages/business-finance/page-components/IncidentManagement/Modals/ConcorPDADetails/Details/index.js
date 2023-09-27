@@ -17,6 +17,7 @@ function Details({
 	setDetailsModal = () => {},
 	refetch = () => {},
 }) {
+	console.log(row);
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
 	const [showRejectModal, setShowRejectModal] = useState(false);
