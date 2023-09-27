@@ -42,6 +42,7 @@ const useGetPromotionRule = ({
 	return {
 		data,
 		loading,
+		refetchList: getPromotionRule,
 	};
 };
 

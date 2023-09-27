@@ -12,9 +12,54 @@
 .alloted_budget {
 	display: flex;
 	justify-content: end;
-	width: 100%;
+	width: 95%;
 	font-size: 20px;
 	font-weight: 600;
+}
+
+.progress_bar {
+	position: relative;
+	width: 95%;
+	height: 8px;
+	margin: 20px;
+	background-color: #f8aea8;
+	border-radius: 8px;
+}
+
+.promo_code_used_progress {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #bf291e;
+	border-radius: 8px;
+}
+
+.promo_code_created_progress {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #f37166;
+	border-radius: 8px;
+}
+
+.promo_code_used_dot {
+	width: 10px;
+	height: 10px;
+	margin: 0 6px 0 0;
+	background-color: #bf291e;
+	border-radius: 50%;
+}
+
+.promo_code_created_dot {
+	width: 10px;
+	height: 10px;
+	margin: 0 6px 0 0;
+	background-color: #f37166;
+	border-radius: 50%;
 }
 
 .alloted_budget_text {
@@ -32,4 +77,5 @@
 
 .bottom_container {
 	display: flex;
+	align-items: center;
 }

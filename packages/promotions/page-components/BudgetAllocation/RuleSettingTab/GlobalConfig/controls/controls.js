@@ -16,7 +16,6 @@ const controls = () => [
 		initialCall : true,
 		labelKey    : 'business_name',
 		valueKey    : 'id',
-		renderLabel : (item) => `${item?.business_name}`,
 		span        : 3,
 		isClearable : true,
 		rules       : { required: 'Cogo Entity is required' },
@@ -70,7 +69,7 @@ const controls = () => [
 	},
 	{
 		label       : 'For Organisation',
-		name        : 'organisation_id',
+		name        : 'organization_id',
 		type        : 'async_select',
 		placeholder : 'Organisation Name',
 		asyncKey    : 'organizations',

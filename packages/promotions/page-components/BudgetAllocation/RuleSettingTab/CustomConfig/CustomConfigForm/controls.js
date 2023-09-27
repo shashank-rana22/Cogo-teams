@@ -1,4 +1,4 @@
-const controls = () => [
+const controls = ({ cogo_entity_id = '' }) => [
 	{
 		name        : 'agent_id',
 		label       : 'Select Agent',
@@ -12,7 +12,10 @@ const controls = () => [
 		isClearable : true,
 		rules       : { required: 'Agent is required' },
 		size        : 'sm',
-		params      : { only_user_service_object_data_required: true },
+		params      : {
+			only_user_service_object_data_required : true,
+			filters                                : { partner_id: cogo_entity_id },
+		},
 	},
 ];
 

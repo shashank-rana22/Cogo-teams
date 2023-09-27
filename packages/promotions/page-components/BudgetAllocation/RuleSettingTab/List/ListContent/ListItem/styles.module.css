@@ -134,6 +134,10 @@
 	width: 100%;
 }
 
+.btn {
+	margin-right: 16px;
+}
+
 .accordion_container {
 	position: relative;
 	bottom: -8px;

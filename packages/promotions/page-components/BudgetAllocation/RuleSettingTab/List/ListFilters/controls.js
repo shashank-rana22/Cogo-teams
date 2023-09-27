@@ -14,8 +14,9 @@ const controls = () => [
 		asyncKey    : 'list_cogo_entity',
 		initialCall : true,
 		labelKey    : 'business_name',
-		valueKey    : 'entity_code',
+		valueKey    : 'id',
 		span        : 6,
+		isClearable : true,
 		size        : 'sm',
 	},
 	{

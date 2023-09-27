@@ -2,43 +2,24 @@ import { Button, cl } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import DiscountSlabsTable from '../../../List/ListContent/ListItem/DiscountSlabsTable';
-import ShipmentSlabsTable from '../../../List/ListContent/ListItem/ShipmentSlabsTable';
+import DiscountSlabsTable from '../../../../../../common/DiscountSlabsTable';
+import ShipmentSlabsTable from '../../../../../../common/ShipmentSlabsTable';
+import columnsWithValue from '../../../../../../helpers/getColumnMappingList';
 
 import columnsMapping from './columnsMapping';
 import styles from './styles.module.css';
 
-const LAST_INDEX = 1;
-
 function Content({ columnDetails = {}, data = {} }) {
 	const { label, getValue } = columnDetails || {};
-
 	const value = getValue(data);
 
 	return (
 		<div className={`${styles.content_container}`}>
-
 			{label ? <div className={styles.content_title}>{label}</div> : null}
 			<div className={cl`${styles.content_value} ${styles[value]}`}>{value}</div>
 		</div>
 	);
 }
-
-const columnsWithValue = ({ data = {}, list = [] }) => {
-	const NEW_MAPPING_LIST = [];
-	list.forEach((columnDetails) => {
-		const { getValue = () => {} } = columnDetails || {};
-
-		const value = getValue(data);
-
-		NEW_MAPPING_LIST.push({
-			...(columnDetails || {}),
-			value,
-		});
-	});
-
-	return NEW_MAPPING_LIST;
-};
 
 function CustomConfigListItem({
 	data = {},
@@ -53,7 +34,7 @@ function CustomConfigListItem({
 		<div className={styles.container}>
 			<div className={styles.upper}>
 				<div className={styles.grid_row}>
-					{columnsList.map((columnDetails, index) => {
+					{columnsList.map((columnDetails) => {
 						const { key } = columnDetails;
 						return (
 							<div key={key}>
@@ -61,7 +42,6 @@ function CustomConfigListItem({
 									key={key}
 									data={data}
 									columnDetails={columnDetails}
-									isLastItem={index === columnsList.length - LAST_INDEX}
 								/>
 							</div>
 						);
@@ -71,9 +51,7 @@ function CustomConfigListItem({
 							<Button
 								themeType="secondary"
 								size="md"
-								style={{
-									marginRight: '16px',
-								}}
+								className={styles.btn}
 								onClick={() => {
 									setViewAndEditConfigData(data);
 								}}

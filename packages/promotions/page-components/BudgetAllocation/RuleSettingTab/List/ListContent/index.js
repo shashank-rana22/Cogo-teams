@@ -14,7 +14,7 @@ function ListContent({
 	setFilters = () => {},
 	activeList = '',
 	refetchList = () => {},
-	setViewAndEditRuleData = () => {},
+	setViewAndEditRuleId = () => {},
 }) {
 	const { list, page_limit = 10, total_count = 1 } = data || {};
 	if (loading) {
@@ -51,7 +51,7 @@ function ListContent({
 					loading={loading}
 					activeList={activeList}
 					refetchList={refetchList}
-					setViewAndEditRuleData={setViewAndEditRuleData}
+					setViewAndEditRuleId={setViewAndEditRuleId}
 				/>
 			))}
 			<div className={styles.pagination}>
