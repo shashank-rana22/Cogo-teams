@@ -101,7 +101,7 @@ function LeaderboardFilters(props) {
 			...prev,
 			filters: {
 				...prev.filters,
-				user_id: user.id,
+				user_id: incentive_leaderboard_viewtype !== ADMIN ? user.id : undefined,
 			},
 		}));
 
