@@ -13,7 +13,7 @@ const INCREASE_MESSAGE_COUNT_BY_ONE = 1;
 
 const getPayload = ({
 	channelType, recipient, message_metadata, user_id, organization_id, service, service_id, lead_user_id, id,
-	journeyId = '',
+	journey_id = '',
 }) => ({
 	type           : channelType,
 	recipient,
@@ -26,7 +26,7 @@ const getPayload = ({
 	lead_user_id,
 	sender         : channelType === 'platform_chat' ? id : undefined,
 	sender_user_id : id,
-	journey_id     : journeyId || '',
+	journey_id     : journey_id || '',
 });
 
 const useSendMessage = ({
@@ -59,7 +59,7 @@ const useSendMessage = ({
 		messageFireBaseDoc,
 		scrollToBottom,
 	}) => {
-		const { agent_type = '', journey_id: journeyId = '' } = formattedData || {};
+		const { agent_type = '', journey_id = '' } = formattedData || {};
 
 		let service = 'user';
 		let service_id = geo.uuid.cogoverse_user_id;
@@ -90,7 +90,7 @@ const useSendMessage = ({
 					service_id,
 					lead_user_id,
 					id,
-					journeyId,
+					journey_id,
 				}),
 			});
 
@@ -98,7 +98,7 @@ const useSendMessage = ({
 				...adminChat,
 				agent_type       : agent_type || 'bot',
 				communication_id : res?.data?.id,
-				journey_id       : journeyId || '',
+				journey_id       : journey_id || '',
 			};
 
 			await addDoc(activeChatCollection, lastMessageDocument);
