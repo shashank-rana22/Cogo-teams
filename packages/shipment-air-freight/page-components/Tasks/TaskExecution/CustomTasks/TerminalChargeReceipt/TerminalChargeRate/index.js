@@ -10,6 +10,7 @@ import useCreateShipmentAirFreightConsolidatedInvoice
 	from '../../../../../../hooks/useCreateShipmentAirFreightConsolidatedInvoice';
 import useUpdateShipmentAirFreightConsolidatedInvoice
 	from '../../../../../../hooks/useUpdateShipmentAirFreightConsolidatedInvoice';
+import useUpdateShipmentTerminalServiceTask from '../../../../../../hooks/useUpdateShipmentTerminalServiceTask';
 
 import ChargeInformations from './ChargeInformations';
 import ConfirmModal from './ConfirmModal';
@@ -71,6 +72,12 @@ function TerminalChargeRate({
 		mainServicesData,
 		setSheetData,
 	});
+
+	// eslint-disable-next-line no-empty-pattern
+	const {
+		// updateShipmentTerminalServiceTask = () => {},
+		// loading: terminalServiceLoading = false,
+	} = useUpdateShipmentTerminalServiceTask();
 
 	const handleCreateProforma = (values) => {
 		createShipmentAirFreightConsolidatedInvoice(values);
