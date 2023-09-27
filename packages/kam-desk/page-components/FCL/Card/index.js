@@ -21,8 +21,6 @@ const SHIPMENT_TYPE = {
 	fcl_freight: 'fcl',
 };
 
-const STEPPER_TAB = ['import', 'export'];
-
 function Card({ data = {} }) {
 	const router = useRouter();
 	const { partner_id = '' } = router.query || {};
@@ -35,7 +33,7 @@ function Card({ data = {} }) {
 
 	const isShipmentCritical = !!getCriticalShipment({ shipment: data, shipmentType, activeTab, stepperTab });
 
-	const hrefPrefix = Object.keys(SHIPMENT_TYPE).includes(shipmentType) && STEPPER_TAB.includes(stepperTab)
+	const hrefPrefix = Object.keys(SHIPMENT_TYPE).includes(shipmentType) && stepperTab === 'export_import'
 		? `${window.location.origin}/v2/${partner_id}/booking/${SHIPMENT_TYPE[shipmentType]}/`
 		: `${window.location.origin}/${partner_id}/shipments/`;
 
