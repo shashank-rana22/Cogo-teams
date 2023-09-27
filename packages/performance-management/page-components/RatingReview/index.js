@@ -1,7 +1,5 @@
 import { TabPanel, Tabs, Loader } from '@cogoport/components';
 
-// import HeaderComponent from './HeaderComponent';
-// import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
 import useGetManagerLevel from './hooks/useGetManagerLevel';
 import MonthlyRating from './MonthlyRating';
 import styles from './styles.module.css';
@@ -9,8 +7,6 @@ import styles from './styles.module.css';
 const TABS_MAPPING = { vertical_head: 'Across All', functional_manager: 'Team View' };
 
 function PerformanceRatingReview() {
-	// const props = useGetEmployeeLevels();
-
 	const props = useGetManagerLevel();
 	const { level, loading, activeTab, setActiveTab } = props;
 
