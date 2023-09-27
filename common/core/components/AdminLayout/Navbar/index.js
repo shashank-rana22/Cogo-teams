@@ -205,13 +205,13 @@ function Navbar({
 
 				{
 					notificationPopover
-						&& (
+						? (
 							<Notification
 								notificationPopover={notificationPopover}
 								setNotificationPopover={setNotificationPopover}
 								setResetSubnavs={setResetSubnavs}
 							/>
-						)
+						) : null
 				}
 
 			</div>

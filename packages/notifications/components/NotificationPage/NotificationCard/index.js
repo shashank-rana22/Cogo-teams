@@ -1,18 +1,10 @@
 import { cl } from '@cogoport/components';
+import React, { useMemo } from 'react';
 
 import formatDistanceToNow from '../../../utils/formatDistanceToNow';
+import getStatus from '../../../utils/getNotificationStatus';
 
 import styles from './styles.module.css';
-
-const getStatus = (is_clicked = false, is_seen = false) => {
-	if (is_clicked) {
-		return 'Read';
-	}
-	if (is_seen) {
-		return 'Seen';
-	}
-	return 'Unread';
-};
 
 function Notification({
 	item = {},
@@ -41,6 +33,11 @@ function Notification({
 		is_rpa = false,
 	} = item || {};
 
+	const status = useMemo(
+		() => getStatus(is_clicked, is_seen),
+		[is_clicked, is_seen],
+	);
+
 	return (
 		<div
 			role="presentation"
@@ -62,7 +59,7 @@ function Notification({
 							{formatDistanceToNow(created_at, { addSuffix: true })}
 						</p>
 
-						{!is_rpa ? <p className={styles.time_status}>{getStatus(is_clicked, is_seen)}</p> : null}
+						{!is_rpa ? <p className={styles.time_status}>{status}</p> : null}
 					</div>
 				</div>
 			</div>

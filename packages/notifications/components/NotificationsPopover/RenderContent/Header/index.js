@@ -3,13 +3,11 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function Header(props) {
-	const {
-		formattedData = {},
-		onMarkAllAsRead = () => {},
-		onSeeAll = () => {},
-	} = props || {};
-
+function Header({
+	formattedData = {},
+	onMarkAllAsRead = () => {},
+	onSeeAll = () => {},
+}) {
 	return (
 		<div className={styles.header_container}>
 

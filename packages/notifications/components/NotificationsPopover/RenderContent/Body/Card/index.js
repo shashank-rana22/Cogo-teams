@@ -2,18 +2,9 @@ import { cl } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 
 import formatDistanceToNow from '../../../../../utils/formatDistanceToNow';
+import getStatus from '../../../../../utils/getNotificationStatus';
 
 import styles from './styles.module.css';
-
-const getStatus = (is_clicked = false, is_seen = false) => {
-	if (is_clicked) {
-		return 'Read';
-	}
-	if (is_seen) {
-		return 'Seen';
-	}
-	return 'Unread';
-};
 
 function Card({
 	item = {},

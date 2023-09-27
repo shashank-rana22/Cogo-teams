@@ -54,22 +54,20 @@ function SingleNav({
 	);
 }
 
-function Items(props) {
-	const {
-		item = [],
-		resetSubnavs = false,
-		setOpenPopover = () => {},
-		timeLeft = '',
-		loading = false,
-		openPopover = false,
-		refetch = () => {},
-		checkIfSessionExpiring = false,
-		notificationCount = ZERO,
-		notificationPopover = false,
-		setNotificationPopover = () => {},
-		mobileShow = false,
-	} = props || {};
-
+function Items({
+	item = [],
+	resetSubnavs = false,
+	setOpenPopover = () => {},
+	timeLeft = '',
+	loading = false,
+	openPopover = false,
+	refetch = () => {},
+	checkIfSessionExpiring = false,
+	notificationCount = ZERO,
+	notificationPopover = false,
+	setNotificationPopover = () => {},
+	mobileShow = false,
+}) {
 	const { t } = useTranslation(['common']);
 
 	const {
@@ -234,7 +232,7 @@ function Items(props) {
 					disabled={loadingState}
 				>
 					{resetSubnavs || notificationPopover ? (
-						`${t('common:you_have')} ${notificationCount === ZERO ? 'no' : notificationCount} 
+						`${t('common:you_have')} ${!notificationCount ? 'no' : notificationCount} 
 						${t('common:new')} ${
 							notificationCount > ONE ? t('common:notifications') : t('common:notification')
 						}`
