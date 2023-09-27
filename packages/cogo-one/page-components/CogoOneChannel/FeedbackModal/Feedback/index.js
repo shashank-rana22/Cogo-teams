@@ -13,7 +13,7 @@ const DEFAULT_PAGE = 1;
 
 function Feedback({ setModalData = () => {} }) {
 	const [showAddFeedback, setShowAddFeedback] = useState(false);
-	const [activeTab, setActiveTab] = useState('all');
+	const [activeTab, setActiveTab] = useState('open');
 	const [page, setPage] = useState(DEFAULT_PAGE);
 
 	const { feedbacks, loading, getFeedbacks, pageData } = useGetFeedbacks({ activeTab, page });
@@ -46,7 +46,7 @@ function Feedback({ setModalData = () => {} }) {
 								}}
 							>
 								<IcMPlus height={14} width={14} />
-								Create Care
+								Give Feedback
 							</Button>
 						</div>
 					</div>
