@@ -1,5 +1,5 @@
 .container {
-	padding: 16px;
+	padding: 12px 4px 0;
 	cursor: pointer;
 	border-bottom: 1px solid #e0e0e0;
 
@@ -30,4 +30,12 @@
 	height: 6px;
 	background: #cb6464;
 	border-radius: 50%;
+}
+
+.content_container {
+	width: 95%;
+}
+
+.status_container {
+	margin-top: 8px;
 }
