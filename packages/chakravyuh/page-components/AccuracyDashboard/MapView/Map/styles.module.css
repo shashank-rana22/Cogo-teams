@@ -80,7 +80,18 @@
 	justify-content: space-between;
 	width: 18px;
 	height: 180px;
-	background: linear-gradient(to top, #ffeacc, #ffc680, #f0883e, #db6d28, #bd561d, #9b4215, #762d0a, #5a1e02, #3d1300);
+	background:
+		linear-gradient(
+			to bottom,
+			#011b18,
+			#01261f,
+			#07492a,
+			#166d30,
+			#31a353,
+			#78c679,
+			#addd8e,
+			#d8f0a3
+		);
 	border-radius: 2px;
 	box-shadow: 0 0 2px #a1a1a1;
 
