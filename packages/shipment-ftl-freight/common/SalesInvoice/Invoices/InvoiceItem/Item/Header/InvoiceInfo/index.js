@@ -2,7 +2,7 @@ import { Button, cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMRefresh } from '@cogoport/icons-react';
+import { IcMRefresh, IcCError } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
@@ -18,7 +18,7 @@ const OFFSET_VALUE = 2;
 const END_INDEX_FOR_CREDIT_SOURCE = -2;
 const START_INDEX_FOR_CREDIT_SOURCE = 0;
 const FALLBACK_VALUE = 0;
-const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
+const INVOICE_STATUS = ['reviewed', 'approved', 'revoked', 'finance_rejected'];
 const API_SUCCESS_MESSAGE = {
 	reviewed : 'Invoice sent for approval to customer!',
 	approved : 'Invoice approved!,',
@@ -49,6 +49,7 @@ function InvoiceInfo({
 		id: invoiceId = '',
 		status = '',
 		is_revoked = false,
+		rejection_reason = '',
 	} = invoice || {};
 
 	const { shipment_data = {} } = useContext(ShipmentDetailContext);
@@ -165,9 +166,18 @@ function InvoiceInfo({
 			<div className={styles.invoice_container}>
 				{status
 					&& RESTRICT_REVOKED_STATUS.includes(status) ? (
-						<div className={styles.invoice_status}>
-							{startCase(status)}
-						</div>
+						<>
+							<div className={styles.invoice_status}>
+								{startCase(status)}
+							</div>
+							{(status === 'finance_rejected' && rejection_reason)
+								? (
+									<div className={styles.rejection_reason}>
+										<IcCError width={16} height={16} />
+										<span>{rejection_reason}</span>
+									</div>
+								) : null}
+						</>
 					) : null}
 
 				{isProcessing

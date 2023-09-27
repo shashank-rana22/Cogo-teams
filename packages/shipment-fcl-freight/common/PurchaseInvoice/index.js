@@ -2,6 +2,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { useContext } from 'react';
 
+import AddService from '../AdditionalServices/components/List/AddService';
 import OverviewManageServices from '../Overview/OverviewManageServices';
 
 import styles from './styles.module.css';
@@ -15,6 +16,7 @@ function PurchaseInvoice({ activeTab = '' }) {
 			<PurchaseInvoicing
 				shipmentData={shipment_data}
 				servicesData={servicesList}
+				AddService={AddService}
 			/>
 		</main>
 	);
