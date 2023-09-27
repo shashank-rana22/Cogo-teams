@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetSecurityDepositData from '../../../apisModal/useGetSecurityDeposit';
+import RejectModal from '../../../common/RejectModal/index';
 import SHIPMENT_MAPPING from '../../../Constants/SHIPMENT_MAPPING';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
 import { getFormatAmount } from '../../../utils/getformatamount';
@@ -25,6 +26,8 @@ function Details({
 	const { partner_id } = query || {};
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarkValue, setRemarkValue] = useState('');
+	const [showRejectModal, setShowRejectModal] = useState(false);
+
 	const { status = '', id = '', data: { advanceSecurityDeposit = {} } } = row || {};
 	const {
 		shipmentId = '',
@@ -127,7 +130,7 @@ function Details({
 							themeType="secondary"
 							disabled={isEmpty(remarkValue) || loading}
 							loading={loading}
-							onClick={() => getData(STATUS_MAPPING.rejected)}
+							onClick={() => setShowRejectModal(true)}
 						>
 							Reject
 						</Button>
@@ -142,6 +145,15 @@ function Details({
 							Approve
 						</Button>
 					</div>
+					{showRejectModal
+					&& (
+						<RejectModal
+							setShowRejectModal={setShowRejectModal}
+							onAction={getData}
+							showRejectModal={showRejectModal}
+							loading={loading}
+						/>
+					)}
 
 				</div>
 			) : null }

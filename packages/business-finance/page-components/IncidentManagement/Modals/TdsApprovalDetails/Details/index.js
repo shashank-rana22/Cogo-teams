@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetTdsData from '../../../apisModal/useGetTdsData';
+import RejectModal from '../../../common/RejectModal/index';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
 
 import styles from './styles.module.css';
@@ -16,6 +17,8 @@ function Details({
 	console.log(row);
 	const { t } = useTranslation(['incidentManagement']);
 	const [remark, setRemark] = useState('');
+	const [showRejectModal, setShowRejectModal] = useState(false);
+
 	const { status = '', id = '' } = row || {};
 
 	const {
@@ -110,7 +113,7 @@ function Details({
 							themeType="secondary"
 							disabled={isEmpty(remark) || loading}
 							loading={loading}
-							onClick={() => OnAction(STATUS_MAPPING.rejected)}
+							onClick={() => setShowRejectModal(true)}
 						>
 							Reject
 						</Button>
@@ -120,11 +123,20 @@ function Details({
 							themeType="primary"
 							disabled={isEmpty(remark) || loading}
 							loading={loading}
-							onClick={() => { OnAction(STATUS_MAPPING.approved); }}
+							onClick={() => OnAction(STATUS_MAPPING.approved)}
 						>
 							Approve
 						</Button>
 					</div>
+					{showRejectModal
+					&& (
+						<RejectModal
+							setShowRejectModal={setShowRejectModal}
+							onAction={OnAction}
+							showRejectModal={showRejectModal}
+							loading={loading}
+						/>
+					)}
 
 				</div>
 			) : null }

@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import useSezApproveReject from '../../../apisModal/useSezApproveReject';
 import ClipBoard from '../../../common/Clipboard';
+import RejectModal from '../../../common/RejectModal/index';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
 
 import styles from './styles.module.css';
@@ -16,6 +17,8 @@ function Details({
 }) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
+	const [showRejectModal, setShowRejectModal] = useState(false);
+
 	const { status = '', id = '', data = {} } = row || {};
 	const { sezRequest = {} } = data || {};
 
@@ -70,7 +73,7 @@ function Details({
 							themeType="secondary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => OnAction(STATUS_MAPPING.rejected)}
+							onClick={() => setShowRejectModal(true)}
 						>
 							Reject
 						</Button>
@@ -85,6 +88,15 @@ function Details({
 							Approve
 						</Button>
 					</div>
+					{showRejectModal
+					&& (
+						<RejectModal
+							setShowRejectModal={setShowRejectModal}
+							onAction={OnAction}
+							showRejectModal={showRejectModal}
+							loading={loading}
+						/>
+					)}
 
 				</div>
 			) : null }

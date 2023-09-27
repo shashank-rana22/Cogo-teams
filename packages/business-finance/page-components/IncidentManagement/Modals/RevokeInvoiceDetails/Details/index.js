@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetRevokeInvoiceData from '../../../apisModal/useGetRevokeInvoiceData';
+import RejectModal from '../../../common/RejectModal/index';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
 
 import styles from './styles.module.css';
@@ -13,9 +14,10 @@ function Details({
 	setDetailsModal = () => {},
 	refetch = () => {},
 }) {
-	console.log(row);
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
+	const [showRejectModal, setShowRejectModal] = useState(false);
+
 	const { status = '', id = '', data: { revokeInvoiceRequest = {} } } = row || {};
 
 	const { useOnAction: onAction, loading } = useGetRevokeInvoiceData({
@@ -66,7 +68,7 @@ function Details({
 							themeType="secondary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => onAction(STATUS_MAPPING.rejected)}
+							onClick={() => setShowRejectModal(true)}
 						>
 							Reject
 						</Button>
@@ -81,6 +83,15 @@ function Details({
 							Approve
 						</Button>
 					</div>
+					{showRejectModal
+					&& (
+						<RejectModal
+							setShowRejectModal={setShowRejectModal}
+							onAction={onAction}
+							showRejectModal={showRejectModal}
+							loading={loading}
+						/>
+					)}
 
 				</div>
 			) : null }

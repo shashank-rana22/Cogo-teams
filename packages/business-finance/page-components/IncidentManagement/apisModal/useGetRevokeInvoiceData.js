@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 
 const useGetRevokeInvoiceData = ({
 	refetch,
-	setShowModal,
+	setDetailsModal,
 	id,
 	reqRevokeInvoiceRequest,
 	remarks = 'Approved',
@@ -43,7 +43,7 @@ const useGetRevokeInvoiceData = ({
 			} = apiResponse;
 			if (message === 'Updated Successfully') {
 				Toast.success(t('incidentManagement:request_updated_successfully_message'));
-				setShowModal(false);
+				setDetailsModal(null);
 				refetch();
 			} else {
 				Toast.error(message);

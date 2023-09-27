@@ -5,7 +5,7 @@ import { useSelector } from '@cogoport/store';
 const useGetSecurityDepositData = ({
 	advanceSecurityDeposit,
 	refetch,
-	setShowDepositModal,
+	setDetailsModal,
 	id,
 	remarkValue,
 	t,
@@ -44,7 +44,7 @@ const useGetSecurityDepositData = ({
 			} = apiResponse;
 			if (message === 'Updated Successfully') {
 				Toast.success(t('incidentManagement:request_updated_successfully_message'));
-				setShowDepositModal(false);
+				setDetailsModal(null);
 				refetch();
 			} else {
 				Toast.error(message);

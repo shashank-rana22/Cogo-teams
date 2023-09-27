@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import useGetBankData from '../../../apisModal/useGetBankData';
 import ClipBoard from '../../../common/Clipboard';
+import RejectModal from '../../../common/RejectModal/index';
 import { getOptions } from '../constant';
 
 import styles from './styles.module.css';
@@ -43,6 +44,7 @@ function Details({
 		radioIFSC       : JSON.stringify(isIfscCodeValid) || '',
 		radioMethod     : methodOfVerification || '',
 	});
+	const [showRejectModal, setShowRejectModal] = useState(false);
 
 	const { useOnActionBank:OnAction, loading } = useGetBankData({
 		bankData: bankRequest,
@@ -196,9 +198,7 @@ function Details({
 							style={{ marginRight: '8px' }}
 							disabled={!(value?.text.length) || loading}
 							loading={loading}
-							onClick={() => {
-								OnAction('REJECTED');
-							}}
+							onClick={() => setShowRejectModal(true)}
 						>
 							Reject
 						</Button>
@@ -216,6 +216,15 @@ function Details({
 							Approve
 						</Button>
 					</div>
+					{showRejectModal
+					&& (
+						<RejectModal
+							setShowRejectModal={setShowRejectModal}
+							onAction={OnAction}
+							showRejectModal={showRejectModal}
+							loading={loading}
+						/>
+					)}
 
 				</div>
 			) : null }

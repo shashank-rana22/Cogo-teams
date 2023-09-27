@@ -7,6 +7,7 @@ import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetTdsData from '../../../apisModal/useGetTdsData';
+import RejectModal from '../../../common/RejectModal/index';
 import StyledTable from '../../../StyleTable';
 import { getFormatAmount } from '../../../utils/getformatamount';
 import ShowContent from '../ShowContent';
@@ -22,7 +23,6 @@ function Details({
 	setDetailsModal = () => {},
 	refetch = () => {},
 }) {
-	console.log(row);
 	// const { query } = useRouter();
 	// const { partner_id } = query || {};
 	const ISEDITABLE = true;
@@ -32,6 +32,8 @@ function Details({
 	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
 	const [showPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
+	const [showRejectModal, setShowRejectModal] = useState(false);
+
 	const {
 		invoiceNumber,
 		jobNumber,
@@ -212,12 +214,9 @@ function Details({
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>
-					<div className={cl`${styles.label} 
-								${styles.required_field}`}
-					>
+					<div className={cl`${styles.label} ${styles.required_field}`}>
 						Remarks
 					</div>
-
 					<Textarea
 						className={styles.textarea}
 						name="remark"
@@ -231,12 +230,9 @@ function Details({
 							themeType="secondary"
 							style={{ marginRight: '8px' }}
 							disabled={!(remarks.length) || loading
-										|| (isEmpty(creditNoteApprovalType)
-										&& isEmpty(approvalType))}
+								|| (isEmpty(creditNoteApprovalType) && isEmpty(approvalType))}
 							loading={loading}
-							onClick={() => {
-								OnAction('REJECTED');
-							}}
+							onClick={() => setShowRejectModal(true)}
 						>
 							{t('incidentManagement:reject_btn')}
 						</Button>
@@ -247,13 +243,20 @@ function Details({
 							disabled={!(remarks.length) || loading || (isEmpty(creditNoteApprovalType)
 										&& isEmpty(approvalType))}
 							loading={loading}
-							onClick={() => {
-								OnAction('APPROVED');
-							}}
+							onClick={() => OnAction('APPROVED')}
 						>
 							{t('incidentManagement:approve_btn')}
 						</Button>
 					</div>
+					{showRejectModal
+					&& (
+						<RejectModal
+							setShowRejectModal={setShowRejectModal}
+							onAction={OnAction}
+							showRejectModal={showRejectModal}
+							loading={loading}
+						/>
+					)}
 
 				</div>
 			) : null }

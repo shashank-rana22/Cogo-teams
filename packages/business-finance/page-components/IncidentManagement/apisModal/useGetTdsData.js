@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 const useGetTdsData = ({
-	refetch, setShowTdsModal, row, id,
+	refetch, setDetailsModal, row, id,
 	CNCategoryValues = { CNType: '', CNValues: '', remarks: '' },
 	remark,
 	isConsolidated = false,
@@ -70,7 +70,7 @@ const useGetTdsData = ({
 				} = apiResponse;
 				if (message === 'Updated Successfully') {
 					Toast.success(t('incidentManagement:request_updated_successfully_message'));
-					setShowTdsModal(false);
+					setDetailsModal(null);
 					refetch();
 				} else {
 					Toast.error(message);
