@@ -89,6 +89,12 @@ const constAdvocateConfig = (subActiveTabReject) => ({
 			func  : 'renderStatus',
 		},
 		{
+			label : 'Urgency',
+			span  : 1,
+			key   : 'urgencyTag',
+			func  : 'renderUrgencyTag',
+		},
+		{
 			label : 'Ticket',
 			key   : 'status',
 			span  : 0.7,
@@ -106,12 +112,6 @@ const constAdvocateConfig = (subActiveTabReject) => ({
 			span  : 0.3,
 			func  : 'renderRemarks',
 		},
-		// {
-		// 	label : 'Urgency',
-		// 	span  : 1,
-		// 	key   : 'urgencyTag',
-		// 	func  : 'renderUrgencyTag',
-		// },
 		{
 			key  : 'action',
 			span : 0.4,

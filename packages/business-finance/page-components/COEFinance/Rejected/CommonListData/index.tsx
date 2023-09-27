@@ -15,6 +15,7 @@ import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
 import RejectedCharts from './RejectedChart';
 import RenderActionButton from './RenderActionButton';
+import RenderTicket from './RenderTicket';
 import SegmentedFilters from './SegmentedFilters';
 
 interface ItemProps {
@@ -79,8 +80,8 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 		renderUrgencyTag: (itemData: ItemProps, field: FieldProps) => (
 			<RenderUrgencyTag item={itemData} field={field} />
 		),
-		renderTicket: () => (
-			<div>-</div>
+		renderTicket: (itemData: ItemProps) => (
+			<RenderTicket itemData={itemData} />
 		),
 		renderApprovalStatus: () => (
 			<div>-</div>
