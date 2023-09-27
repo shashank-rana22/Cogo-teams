@@ -26,7 +26,7 @@ const getPayload = ({
 	lead_user_id,
 	sender         : channelType === 'platform_chat' ? id : undefined,
 	sender_user_id : id,
-	journey_id     : journeyId || undefined,
+	journey_id     : journeyId || '',
 });
 
 const useSendMessage = ({
@@ -98,7 +98,7 @@ const useSendMessage = ({
 				...adminChat,
 				agent_type       : agent_type || 'bot',
 				communication_id : res?.data?.id,
-				journey_id       : journeyId || undefined,
+				journey_id       : journeyId || '',
 			};
 
 			await addDoc(activeChatCollection, lastMessageDocument);
