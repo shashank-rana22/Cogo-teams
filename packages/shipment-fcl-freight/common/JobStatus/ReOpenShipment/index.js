@@ -17,10 +17,15 @@ function ReOpenShipment({
 	const { refetch = () => {} } = useContext(ShipmentDetailContext);
 	const { id = '' } = profile?.user || {};
 
+	const closeAndRefetch = () => {
+		setFinJobOpenConfirmation(false);
+		refetch();
+	};
+
 	const {
 		loading = false,
 		handleConfirm = () => {},
-	} = useUpdateShipmentReopenJob({ setFinJobOpenConfirmation, shipment_id, refetch });
+	} = useUpdateShipmentReopenJob({ closeAndRefetch, shipment_id });
 
 	return (
 		<div>

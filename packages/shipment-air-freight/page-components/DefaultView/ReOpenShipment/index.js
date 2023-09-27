@@ -16,10 +16,14 @@ function ReOpenShipment({
 	const profile = useSelector((state) => state.profile || {});
 	const { id = '' } = profile?.user || {};
 	const { refetch = () => {} } = useContext(ShipmentDetailContext);
+	const closeAndRefetch = () => {
+		setFinJobOpenConfirmation(false);
+		refetch();
+	};
 	const {
 		loading = false,
 		handleConfirm = () => {},
-	} = useUpdateShipmentReopenJob({ setFinJobOpenConfirmation, shipment_id, refetch });
+	} = useUpdateShipmentReopenJob({ closeAndRefetch, shipment_id });
 
 	return (
 		<div className={styles.request_reopen}>
