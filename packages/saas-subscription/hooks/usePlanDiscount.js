@@ -47,11 +47,13 @@ const usePlanDiscount = ({ discountModal = {}, setFeatureModal, setDiscountModal
 	};
 
 	const submitHandler = (data) => {
-		const { metadata } = data || {};
+		const { metadata, value, is_active } = data || {};
 		try {
 			const validaMetadata = JSON.parse(metadata);
 			const payload = {
 				...data,
+				is_active    : is_active === 'active',
+				value        : +value,
 				metadata     : validaMetadata,
 				service_name : info?.service_name,
 				config_type  : info?.config_type,

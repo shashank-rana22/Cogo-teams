@@ -9,10 +9,10 @@ import { getFieldController } from '../../../../utils/getFieldController';
 import styles from './styles.module.css';
 
 function ModalHeader({ service_name = '', config_type = '', isCreate = false }) {
-	const { t } = useTranslation(['saasSubscripton']);
+	const { t } = useTranslation(['saasSubscription']);
 	return (
 		<div className={styles.modal_header}>
-			<h3 className={styles.modal_title}>{t('saasSubscripton:discount')}</h3>
+			<h3 className={styles.modal_title}>{t('saasSubscription:discount')}</h3>
 			{!isCreate ? (
 				<div>
 					<Pill size="sm" color="red">{startCase(service_name)}</Pill>
@@ -24,7 +24,7 @@ function ModalHeader({ service_name = '', config_type = '', isCreate = false }) 
 }
 
 function DiscountModal({ discountModal, setDiscountModal, setFeatureModal }) {
-	const { t } = useTranslation(['saasSubscripton']);
+	const { t } = useTranslation(['saasSubscription']);
 
 	const { info, isCreate = false } = discountModal || {};
 	const { unit } = info || {};
@@ -67,7 +67,7 @@ function DiscountModal({ discountModal, setDiscountModal, setFeatureModal }) {
 					onClick={closeModalHandler}
 					disabled={loading}
 				>
-					{t('saasSubscripton:cancel')}
+					{t('saasSubscription:cancel')}
 				</Button>
 
 				<Button
@@ -75,7 +75,7 @@ function DiscountModal({ discountModal, setDiscountModal, setFeatureModal }) {
 					loading={loading}
 					onClick={handleSubmit(submitHandler)}
 				>
-					{t('saasSubscripton:submit')}
+					{t('saasSubscription:submit')}
 				</Button>
 			</Modal.Footer>
 
