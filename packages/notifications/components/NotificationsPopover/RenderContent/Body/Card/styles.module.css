@@ -38,3 +38,11 @@
 	color: #828282;
 	letter-spacing: 0.02em;
 }
+
+.content_container {
+	width: 95%;
+}
+
+.status_container {
+	margin-top: 8px;
+}

@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 
 import formatDistanceToNow from '../../../../../utils/formatDistanceToNow';
@@ -45,13 +46,13 @@ function Card({
 		>
 			<div className={styles.space_between}>
 
-				<div style={{ width: '95%' }}>
+				<div className={styles.content_container}>
 					<div className={styles.row}>
 						{!is_seen ? <div className={styles.new_notification_style} /> : null}
 						<div dangerouslySetInnerHTML={{ __html: content?.body }} />
 					</div>
 
-					<div className={styles.row} style={{ marginTop: 8 }}>
+					<div className={cl`${styles.row} ${styles.status_container}`}>
 
 						<p className={styles.time_status}>
 							{formatDistanceToNow(created_at, { addSuffix: true })}

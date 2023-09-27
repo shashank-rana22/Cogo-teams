@@ -31,3 +31,11 @@
 	background: #cb6464;
 	border-radius: 50%;
 }
+
+.content_container {
+	width: 95%;
+}
+
+.status_container {
+	margin-top: 8px;
+}
