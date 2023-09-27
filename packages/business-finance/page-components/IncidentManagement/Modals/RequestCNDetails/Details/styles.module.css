@@ -25,7 +25,7 @@
 .display_box {
 	display: flex;
 	width: 100%;
-	padding: 60px 24px 24px;
+	padding: 36px 0 24px;
 }
 
 .company_div {
@@ -33,7 +33,6 @@
 }
 
 .line {
-	margin: 0 24px;
 	border-bottom: 1px solid #e0e0e0;
 }
 
@@ -42,11 +41,8 @@
 	margin-left: 12px;
 }
 
-.shipment_container {
-	padding: 16px 26px 6px;
-}
-
 .shipment_id {
+	font-size: var(--font-size-md);
 	font-weight: 500;
 	color: #f68b21;
 	text-decoration: underline;
@@ -85,6 +81,8 @@
 
 .flex {
 	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .rates_data {
@@ -103,4 +101,114 @@
 
 .rates {
 	font-weight: 600;
+}
+
+.display_container {
+	padding: 24px;
+}
+
+.shipment_container {
+	padding: 24px 0 16px;
+}
+
+.invoice {
+	padding: 16px 0;
+}
+
+.invoice_category {
+	padding: 16px 0 8px;
+}
+
+.value_data {
+	margin: 20px 20px 20px 0;
+}
+
+.label_value {
+	font-size: 12px;
+}
+
+.date_value {
+	font-size: var(--font-size-md);
+	font-weight: 500;
+}
+
+.credit {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.button_container_data {
+	display: flex;
+	width: fit-content;
+
+	:global {
+		.ui_select_options_relative_container {
+			.ui_select_options_container {
+				z-index: 2;
+			}
+		}
+	}
+}
+
+.icon_container {
+	display: flex;
+	align-items: center;
+	margin-left: 2px;
+}
+
+.list_container {
+	max-height: 46vh;
+	margin: 8px 0;
+	overflow: scroll;
+
+	::-webkit-scrollbar {
+		appearance: none;
+		width: 7px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: rgb(0 0 0 / 50%);
+		border-radius: 4px;
+		box-shadow: 0 0 1px rgb(255 255 255 / 50%);
+	}
+
+	:global {
+		.ui_table_head_cell {
+			min-width: 80px;
+		}
+
+		.ui_table_head_cell:first-child {
+			padding-left: 8px;
+		}
+
+		.ui_table_head_cell:last-child {
+			min-width: 120px;
+		}
+
+		.ui_table_head_container {
+			position: sticky;
+			top: 0;
+			z-index: 1;
+			background-color: #fff;
+		}
+
+		.ui_table_container {
+			padding: 0;
+		}
+	}
+
+	div:first-child {
+		padding: 0;
+	}
+}
+
+.line_item_empty {
+	font-weight: 600;
+	color: #f68b21;
+}
+
+.select_container {
+	width: 200px;
+	margin-left: 12px;
 }

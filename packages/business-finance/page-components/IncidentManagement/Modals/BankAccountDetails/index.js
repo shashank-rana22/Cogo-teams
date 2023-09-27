@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -9,7 +10,11 @@ import Details from './Details';
 import styles from './styles.module.css';
 
 function BankAccountDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
-	const { level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark = '' } = row || {};
+	const {
+		level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark = '',
+		data: { bankRequest = '' },
+	} = row || {};
+	const docUrl = bankRequest?.documentUrls?.[GLOBAL_CONSTANTS.zeroth_index];
 	const level0 = { ...createdBy, remark };
 	return (
 		<div className={styles.containerDisplay}>
@@ -30,7 +35,7 @@ function BankAccountDetails({ row = {}, setDetailsModal = () => {}, refetch = ()
 
 			</div>
 			<div className={styles.container_view}>
-				<ViewPdf row={row} />
+				<ViewPdf docUrl={docUrl} />
 				<Details
 					row={row}
 					setDetailsModal={setDetailsModal}

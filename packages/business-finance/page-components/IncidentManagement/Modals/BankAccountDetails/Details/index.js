@@ -12,8 +12,10 @@ import styles from './styles.module.css';
 function Details({
 	row = {},
 	setDetailsModal = () => {},
-	refetch = () => {},
+	refetch = () => {
+	},
 }) {
+	console.log(row);
 	const { t } = useTranslation(['incidentManagement']);
 	const { data: { bankRequest = '' }, id: bankId = '', status = '' } = row || {};
 	const {
@@ -60,23 +62,26 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>{row?.data?.organization?.businessName || ''}</div>
 				</div>
-				<div>
-					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{row?.createdBy?.name || ''}</div>
-				</div>
-				<div className={styles.invoice}>
-					<div className={styles.heading}>Organization Type</div>
-					<div className={styles.invoice_text}>{row?.data?.organization?.tradePartyType || ''}</div>
+				<div className={styles.organization_div}>
+					<div className={styles.requested_div}>
+						<div className={styles.heading}>Requested By</div>
+						<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+					</div>
+					<div className={styles.requested_div}>
+						<div className={styles.heading}>Organization Type</div>
+						<div className={styles.text}>{row?.data?.organization?.tradePartyType || ''}</div>
+					</div>
 				</div>
 			</div>
 			<div className={styles.line} />
 
-			<div>
+			<div className={styles.radio_box}>
 				<div className={styles.simple_name}>{t('incidentManagement:bank_holder_name')}</div>
 				<div className={styles.flex}>
 					<div className={styles.font_name}>{startCase(bankHolderName) || '-'}</div>
 					<div className={styles.radio}>
 						<RadioGroup
+							className={styles.radio_text}
 							options={getOptionsData}
 							onChange={(item) => setValue((prev) => ({ ...prev, radioName: item }))}
 							value={value?.radioName}
@@ -92,6 +97,7 @@ function Details({
 					<div className={styles.font_name}>{<ClipBoard data={accountNumber} /> || '-'}</div>
 					<div className={styles.radio}>
 						<RadioGroup
+							className={styles.radio_text}
 							options={getOptionsData}
 							onChange={(item) => setValue((prev) => ({
 								...prev,
@@ -115,6 +121,7 @@ function Details({
 					</div>
 					<div className={styles.radio}>
 						<RadioGroup
+							className={styles.radio_text}
 							options={getOptionsData}
 							onChange={(item) => setValue((prev) => ({
 								...prev,
@@ -138,6 +145,7 @@ function Details({
 					</div>
 					<div className={styles.radio}>
 						<RadioGroup
+							className={styles.radio_text}
 							options={getOptionsData}
 							onChange={(item) => setValue((prev) => ({
 								...prev,
@@ -149,10 +157,11 @@ function Details({
 				</div>
 
 				<div className={styles.simple_name}>{t('incidentManagement:verification_method')}</div>
-				<div className={styles.flex}>
+				<div className={styles.method_flex}>
 					<div className={styles.font_name}>{ifscCode}</div>
 					<div>
 						<RadioGroup
+							className={styles.radio_text}
 							options={getOptionsData}
 							onChange={(item) => setValue((prev) => ({
 								...prev,
@@ -173,11 +182,11 @@ function Details({
 					</div>
 
 					<Textarea
+						className={styles.textarea}
 						name="remark"
 						size="md"
 						placeholder={t('incidentManagement:remarks_placeholder')}
 						onChange={(v) => setValue((prev) => ({ ...prev, text: v }))}
-						style={{ width: '700', height: '80px', marginBottom: '12px' }}
 					/>
 					<div className={styles.button_container}>
 
