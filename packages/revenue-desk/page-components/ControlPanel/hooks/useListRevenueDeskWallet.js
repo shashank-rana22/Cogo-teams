@@ -22,8 +22,7 @@ const useListRevenueDeskWallet = () => {
 					service_type             : service_type === 'all' ? undefined : service_type,
 					page,
 					pagination_data_required : true,
-				}
-			|| {},
+				},
 			});
 		} catch (error) {
 			// console.log(error);
