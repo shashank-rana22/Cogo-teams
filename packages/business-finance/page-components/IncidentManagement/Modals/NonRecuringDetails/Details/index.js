@@ -1,12 +1,17 @@
 import { Button, cl, Textarea } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber.tsx';
-import useApproveConcor from '../../../apisModal/useApproveConcor';
+import usePostExpense from '../../../apisModal/usePostExpense';
+import RejectModal from '../../../common/RejectModal/index';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
+import StyledTable from '../../../StyleTable';
+import { getFormatAmount } from '../../../utils/getformatamount';
 
+import { overHeadConfigs } from './overheadsConfigs';
 import styles from './styles.module.css';
 
 function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
@@ -25,16 +30,18 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 		subTotalAmount = '',
 		taxTotalAmount = '',
 		grandTotalAmount = '',
+		lineItems = [],
+		currency = '',
 	} = overheadConfirmationRequest || {};
-
-	const { useOnAction: onAction, loading = false } = useApproveConcor({
+	const { useOnAction: onAction, loading } = usePostExpense({
 		refetch,
 		setDetailsModal,
 		id,
-		data,
+		remark: remarks,
 		t,
-		remarks,
 	});
+
+	const [showRejectModal, setShowRejectModal] = useState(false);
 
 	return (
 		<div className={styles.container}>
@@ -56,7 +63,9 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 				</div>
 				<div className={styles.medium}>
 					<div className={styles.title}>Category</div>
-					<div className={styles.text}>{showOverflowingNumber(categoryName, MAX_LENGTH) || '-'}</div>
+					<div className={styles.text}>
+						{showOverflowingNumber(categoryName, MAX_LENGTH) || '-'}
+					</div>
 				</div>
 				<div className={styles.small}>
 					<div className={styles.title}>Branch</div>
@@ -66,22 +75,35 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 			<div className={styles.flex}>
 				<div className={styles.small}>
 					<div className={styles.title}>Sub Total </div>
-					<div className={styles.text}>{subTotalAmount || '-'}</div>
+					<div className={styles.text}>{getFormatAmount(subTotalAmount, currency)}</div>
 				</div>
 				<div className={styles.small}>
 					<div className={styles.title}>Tax Amount</div>
-					<div className={styles.text}>{taxTotalAmount || '-'}</div>
+					<div className={styles.text}>{getFormatAmount(taxTotalAmount, currency)}</div>
 				</div>
 				<div className={styles.small}>
 					<div className={styles.title}>Grand Total</div>
-					<div className={styles.text}>{grandTotalAmount || '-'}</div>
+					<div className={styles.text}>{getFormatAmount(grandTotalAmount, currency)}</div>
 				</div>
 				<div className={styles.small}>
 					<div className={styles.title}>Ledger Grand Total </div>
-					<div className={styles.text}>{ledgerGrandTotal || '-'}</div>
+					<div className={styles.text}>{getFormatAmount(ledgerGrandTotal, currency)}</div>
 				</div>
 			</div>
 
+			{lineItems?.length > [GLOBAL_CONSTANTS.zeroth_index] ? (
+				<div className={styles.list_container}>
+					<StyledTable
+						columns={overHeadConfigs({ t })}
+						showPagination={false}
+						data={lineItems}
+					/>
+				</div>
+			) : (
+				<div className={styles.line_item_empty}>
+					{t('incidentManagement:no_line_items_available')}
+				</div>
+			)}
 			{status === 'REQUESTED' ? (
 				<div>
 					<div className={styles.remarks_div}>
@@ -106,7 +128,7 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 							themeType="secondary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => onAction(STATUS_MAPPING.rejected)}
+							onClick={() => setShowRejectModal(true)}
 						>
 							Reject
 						</Button>
@@ -116,11 +138,20 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 							themeType="primary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => { onAction(STATUS_MAPPING.approved); }}
+							onClick={() => onAction(STATUS_MAPPING.approved)}
 						>
 							Approve
 						</Button>
 					</div>
+					{showRejectModal
+					&& (
+						<RejectModal
+							setShowRejectModal={setShowRejectModal}
+							onAction={onAction}
+							showRejectModal={showRejectModal}
+							loading={loading}
+						/>
+					)}
 				</div>
 			) : null}
 		</div>

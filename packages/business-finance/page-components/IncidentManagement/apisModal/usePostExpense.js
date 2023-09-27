@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 
 const usePostExpense = ({
 	refetch = () => {},
-	setShowModal = () => {},
+	setDetailsModal = () => {},
 	id = '',
 	remark = '',
 	t = () => {},
@@ -36,7 +36,7 @@ const usePostExpense = ({
 			} = apiResponse;
 			if (message === 'Updated Successfully') {
 				Toast.success(t('incidentManagement:request_updated_successfully_message'));
-				setShowModal(false);
+				setDetailsModal(null);
 				refetch();
 			} else {
 				Toast.error(message);

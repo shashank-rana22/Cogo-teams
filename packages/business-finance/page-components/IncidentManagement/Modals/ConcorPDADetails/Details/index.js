@@ -1,10 +1,14 @@
 import { Button, cl, Textarea } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useApproveConcor from '../../../apisModal/useApproveConcor';
+import RejectModal from '../../../common/RejectModal/index';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
+import { getFormatAmount } from '../../../utils/getformatamount';
 
 import styles from './styles.module.css';
 
@@ -15,13 +19,15 @@ function Details({
 }) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
+	const [showRejectModal, setShowRejectModal] = useState(false);
+
 	const { status = '', id = '', data = {} } = row || {};
 
 	const { concorPdaApprovalRequest } = data || {};
 
 	const {
 		sid = '', totalBuyPrice = '', placeOfDestination = '', placeOfSupply = '',
-		isTaxApplicable = true, documentDate = '', dueDate = '', beneficiaryName = '',
+		isTaxApplicable = true, documentDate = '', dueDate = '', beneficiaryName = '', currency = '',
 	} = concorPdaApprovalRequest || {};
 
 	const { useOnAction: onAction, loading = false } = useApproveConcor({
@@ -65,7 +71,7 @@ function Details({
 				<div className={styles.medium}>
 					<div className={styles.title}>Total Buy Price</div>
 					<div className={styles.text}>
-						{totalBuyPrice || '-'}
+						{getFormatAmount(totalBuyPrice, currency)}
 					</div>
 				</div>
 			</div>
@@ -90,11 +96,24 @@ function Details({
 			<div className={styles.flex}>
 				<div className={styles.large}>
 					<div className={styles.title}>Document Date</div>
-					<div className={styles.text}>{documentDate || '-'}</div>
+					<div className={styles.text}>
+						{formatDate({
+							date       : documentDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
+						}) }
+					</div>
 				</div>
 				<div className={styles.medium}>
 					<div className={styles.title}>Due Date</div>
-					<div className={styles.text}>{dueDate || '-'}</div>
+					<div className={styles.text}>
+						{formatDate({
+							date       : dueDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
+						}) }
+
+					</div>
 				</div>
 			</div>
 
@@ -122,7 +141,7 @@ function Details({
 							themeType="secondary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => onAction(STATUS_MAPPING.rejected)}
+							onClick={() => setShowRejectModal(true)}
 						>
 							Reject
 						</Button>
@@ -137,6 +156,15 @@ function Details({
 							Approve
 						</Button>
 					</div>
+					{showRejectModal
+					&& (
+						<RejectModal
+							setShowRejectModal={setShowRejectModal}
+							onAction={onAction}
+							showRejectModal={showRejectModal}
+							loading={loading}
+						/>
+					)}
 
 				</div>
 			) : null }
