@@ -16,7 +16,7 @@ import styles from './styles.module.css';
 const ZERO = 0;
 
 function ProfileManager({
-	resetSubnavs = () => {},
+	resetSubnavs = false,
 	setOpenPopover = () => {},
 	openPopover = false,
 	notificationPopover = false,

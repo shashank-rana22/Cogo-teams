@@ -1,7 +1,7 @@
 const extractNavLinks = (obj = {}) => {
 	const NAV_LINKS = [];
 
-	Object.values(obj).forEach((item) => {
+	Object.values(obj || {}).forEach((item) => {
 		NAV_LINKS.push(item?.href);
 
 		if (item?.options) {

@@ -8,7 +8,7 @@ function RenderContent({
 	onMarkAllAsRead = () => {},
 	onSeeAll = () => {},
 }) {
-	const { list = [], loading } = formattedData || {};
+	const { list = [], loading = false } = formattedData || {};
 
 	return (
 		<div className={styles.container}>

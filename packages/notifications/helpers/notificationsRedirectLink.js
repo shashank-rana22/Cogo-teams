@@ -36,14 +36,16 @@ const notificationsRedirectLink = ({
 
 	if (!redirectLink) {
 		redirectLink = isLinkValid ? link : `/${link}`;
-		window.location.href = `https://admin.cogoport.com/${partner_id}${redirectLink}`;
+		const newHref = `${window.location.origin}/${partner_id}${redirectLink}`;
+		window.location.replace(newHref);
 		return;
 	}
 
 	if (isVersionTwo) {
 		push(redirectLink);
 	} else {
-		window.location.href = `https://admin.cogoport.com/${partner_id}${redirectLink}`;
+		const newHref = `${window.location.origin}/${partner_id}${redirectLink}`;
+		window.location.replace(newHref);
 	}
 };
 

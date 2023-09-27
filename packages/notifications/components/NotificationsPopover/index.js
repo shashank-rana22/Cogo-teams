@@ -26,7 +26,6 @@ function NewNotifications({
 
 	const navigationMappingAdmin = navigationMapping({ t });
 	const NAVIGATION_LINKS = extractNavLinks(navigationMappingAdmin);
-	const { zeroth_index } = GLOBAL_CONSTANTS;
 
 	const [dataRequired, setDataRequired] = useState(false);
 
@@ -45,7 +44,7 @@ function NewNotifications({
 		method : 'POST',
 	}, { manual: true });
 
-	const { is_not_seen_count = zeroth_index, list = [] } = data || {};
+	const { is_not_seen_count = GLOBAL_CONSTANTS.zeroth_index, list = [] } = data || {};
 
 	const formattedData = {
 		not_seen_count: is_not_seen_count,
@@ -64,7 +63,7 @@ function NewNotifications({
 				data: payload,
 			});
 		} catch (err) {
-			showErrorsInToast(err.data, t);
+			showErrorsInToast(err?.data, t);
 		}
 	};
 
@@ -84,8 +83,8 @@ function NewNotifications({
 				const updateRes = await triggerCommunication({
 					data: { id, is_clicked: true },
 				});
-				if (updateRes.hasError) {
-					showErrorsInToast(updateRes.messages);
+				if (updateRes?.hasError) {
+					showErrorsInToast(updateRes?.messages);
 				} else {
 					trigger({
 						params: {
@@ -122,7 +121,7 @@ function NewNotifications({
 			}
 		} else {
 			setDataRequired(false);
-			if (is_not_seen_count >= zeroth_index) {
+			if (is_not_seen_count >= GLOBAL_CONSTANTS.zeroth_index) {
 				await updateAction('seen');
 			}
 		}

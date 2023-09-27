@@ -10,7 +10,7 @@ function Body({
 	list = [],
 	handleNotificationClick = () => {},
 }) {
-	if (loading) { return <LoaderComp />; }
+	if (loading) return <LoaderComp />;
 
 	if (isEmpty(list)) return <Empty />;
 

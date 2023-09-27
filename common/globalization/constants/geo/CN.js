@@ -542,8 +542,7 @@ export default {
 			},
 		},
 	},
-	notification_polling_interval : 300000,
-	others                        : {
+	others: {
 		registration_number: {
 			label      : 'USCC',
 			pattern    : /^[0-9A-Z]{18}$/,

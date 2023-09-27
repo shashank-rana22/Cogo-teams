@@ -534,8 +534,7 @@ export default {
 			expense_non_recurring_upload_invoice_tds : true,
 		},
 	},
-	notification_polling_interval : 300000,
-	others                        : {
+	others: {
 		registration_number: {
 			label      : 'VAT',
 			pattern    : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
