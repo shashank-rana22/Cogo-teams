@@ -15,9 +15,11 @@ const useCreateShipmentAdditionalService = ({
 		const { currency = '', terminalChargeReceipt = [] } = values || {};
 
 		let price = 0;
+		let tax_price = 0;
 
 		(terminalChargeReceipt || []).forEach((val) => {
 			price += Number(val.price);
+			tax_price += Number(val.tax_price);
 		});
 		const { id = '', all_services = [] } = shipmentData || {};
 
@@ -36,6 +38,7 @@ const useCreateShipmentAdditionalService = ({
 			quantity              : 1,
 			buy_price             : Number(price),
 			price                 : Number(price),
+			tax_amount            : tax_price,
 			unit                  : 'per_shipment',
 			currency,
 			service_id            : airFreightLocalService?.id,
