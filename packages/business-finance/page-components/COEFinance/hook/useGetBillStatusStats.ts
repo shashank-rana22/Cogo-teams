@@ -7,8 +7,13 @@ import toastApiError from '../../commons/toastApiError';
 
 const NUMBER_OF_DAYS = 7;
 
-const useGetBillStatusStats = (date) => {
-	const [{ data = [] }, trigger] = useRequestBf(
+const STATUS_MAPPING = {
+	coe_rejected : 'COE_REJECTED',
+	coe_on_hold  : 'ON_HOLD',
+};
+
+const useGetBillStatusStats = ({ date = new Date(), subActiveTabReject = '' }) => {
+	const [{ data = [], loading = false }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/bills/bill-status-stats',
 			method  : 'get',
@@ -19,28 +24,33 @@ const useGetBillStatusStats = (date) => {
 	const getData = useCallback(() => {
 		(
 			async () => {
-				const startDate = subtractDays(date, NUMBER_OF_DAYS);
+				const endDate = date || new Date();
+
+				const startDate = subtractDays(endDate, NUMBER_OF_DAYS);
 				const 	payload = {
 					fromDate : format(startDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']),
-					toDate   : format(date, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']),
+					toDate   : format(endDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']),
 				};
 
 				try {
 					await trigger({
-						params: payload,
+						params: {
+							...payload,
+							status: STATUS_MAPPING[subActiveTabReject],
+						},
 					});
 				} catch (err) {
 					toastApiError(err);
 				}
 			}
 		)();
-	}, [trigger, date]);
+	}, [trigger, date, subActiveTabReject]);
 
 	useEffect(() => {
 		getData();
-	}, [date, getData]);
+	}, [getData]);
 
-	return { data };
+	return { data, loading };
 };
 
 export default useGetBillStatusStats;

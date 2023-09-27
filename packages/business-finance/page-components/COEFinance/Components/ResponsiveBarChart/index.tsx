@@ -5,11 +5,11 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function ResponsiveBarChart({ barData = {} }) {
+function ResponsiveBarChart({ barData = {}, handleOnClick = () => {}, keys = [] }) {
 	return (
 		<ResponsiveBar
 			data={barData}
-			keys={['Total Audited', 'Rejected']}
+			keys={keys}
 			indexBy="date"
 			margin={{ top: 100, right: 30, bottom: 80, left: 60 }}
 			padding={0.3}
@@ -23,6 +23,7 @@ function ResponsiveBarChart({ barData = {} }) {
 			borderColor={{
 				from: 'color', modifiers: [['darker',	1.6]],
 			}}
+			onClick={handleOnClick}
 			axisTop={null}
 			axisRight={null}
 			innerPadding={4}

@@ -3,30 +3,36 @@ import { useEffect } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
 
-const useGetConfigurationCategory = () => {
+const useGetConfigurationCategory = (shipmentData = {}) => {
 	const [{ data, loading }, trigger] = useTicketsRequest({
 		url     : '/configuration_categories',
-		method  : 'post',
+		method  : 'get',
 		authkey : 'get_tickets_configuration_categories',
 	}, { manual: true });
 
-	useEffect(() => {
-		const getConfigurationCategory = async () => {
-			try {
-				trigger({
-					params: {
-						filters: {
-							raise_by_desk: 'auditor',
-						},
-					},
-				});
-			} catch (err) {
-				toastApiError(err);
-			}
-		};
+	const getConfigurationCategory = async () => {
+		try {
+			trigger({
+				params: {
+					Service          : shipmentData?.shipment_type || undefined,
+					TradeType        : shipmentData?.trade_type || undefined,
+					RequestType      : 'shipment' || undefined,
+					CategoryDeskType : 'by_desk',
+					QFilter          : 'Auditor',
 
-		getConfigurationCategory();
-	}, [trigger]);
+				},
+			});
+		} catch (err) {
+			toastApiError(err);
+		}
+	};
+
+	useEffect(() => {
+		if (shipmentData) {
+			getConfigurationCategory();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(shipmentData)]);
 
 	return {
 		data,

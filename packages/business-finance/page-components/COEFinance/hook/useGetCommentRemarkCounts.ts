@@ -5,8 +5,13 @@ import { useCallback } from 'react';
 
 import toastApiError from '../../commons/toastApiError';
 
-const useGetCommentRemarkCounts = (remarkDate) => {
-	const [{ data = {} }, trigger] = useRequestBf(
+const REJECTION_CATEGORY_MAPPING = {
+	coe_rejected : 'COE_REJECTED',
+	coe_on_hold  : 'ON_HOLD',
+};
+
+const useGetCommentRemarkCounts = ({ remarkDate, subActiveTabReject = '' }) => {
+	const [{ data = {}, loading = false }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/bills/comment-remark-counts',
 			method  : 'get',
@@ -22,7 +27,7 @@ const useGetCommentRemarkCounts = (remarkDate) => {
 		try {
 			await trigger({
 				params: {
-					rejectedCategory : 'COE_REJECTED',
+					rejectedCategory : REJECTION_CATEGORY_MAPPING[subActiveTabReject],
 					toDate           : endDate || new Date(),
 					fromDate         : startDate || undefined,
 				},
@@ -30,7 +35,7 @@ const useGetCommentRemarkCounts = (remarkDate) => {
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [trigger, remarkDate]);
+	}, [trigger, remarkDate, subActiveTabReject]);
 
 	const totalRemarks = (Object.values(data) || []).reduce(((acc, value) => acc + value), 0);
 
@@ -42,7 +47,7 @@ const useGetCommentRemarkCounts = (remarkDate) => {
 		}
 	));
 
-	return { getData, pieData };
+	return { getData, pieData, loading };
 };
 
 export default useGetCommentRemarkCounts;

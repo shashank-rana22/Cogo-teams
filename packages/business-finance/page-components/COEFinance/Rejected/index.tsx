@@ -13,18 +13,31 @@ const tabs = [
 		key   : 'coe_rejected',
 		label : 'COE Rejected',
 	},
+	{
+		key   : 'coe_on_hold',
+		label : 'COE On Hold',
+	},
 ];
 
 const tabsKeyComponentMapping = {
 	finance_rejected : CommonListData,
 	coe_rejected     : CommonListData,
+	coe_on_hold      : CommonListData,
 };
 
 function Rejected({ statsData }) {
 	const { push } = useRouter();
 	const [filters, setFilters] = useState({});
-	const { FINANCE_REJECTED = '', COE_REJECTED = '' } = statsData || {};
+
 	const [subActiveTabReject, setSubActiveTabReject] = useState<string>('finance_rejected');
+
+	const { FINANCE_REJECTED = '', COE_REJECTED = '', ON_HOLD = '' } = statsData || {};
+
+	const statsDataMapping = {
+		finance_rejected : FINANCE_REJECTED,
+		coe_rejected     : COE_REJECTED,
+		coe_on_hold      : ON_HOLD,
+	};
 
 	const tabComponentProps = {
 		finance_rejected: {
@@ -33,6 +46,11 @@ function Rejected({ statsData }) {
 			subActiveTabReject,
 		},
 		coe_rejected: {
+			filters,
+			setFilters,
+			subActiveTabReject,
+		},
+		coe_on_hold: {
 			filters,
 			setFilters,
 			subActiveTabReject,
@@ -73,7 +91,7 @@ function Rejected({ statsData }) {
 							>
 								{tab.label}
 								<div className={styles.badge}>
-									{tab.key === 'finance_rejected' ? FINANCE_REJECTED : COE_REJECTED }
+									{statsDataMapping[tab.key]}
 								</div>
 
 							</div>

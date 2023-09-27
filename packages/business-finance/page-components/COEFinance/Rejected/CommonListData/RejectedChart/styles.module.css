@@ -51,3 +51,10 @@
 	display: flex;
 	margin-bottom: -54px;
 }
+
+.bar_chart_loader {
+	position: relative;
+	top: 150px;
+	display: flex;
+	justify-content: center;
+}

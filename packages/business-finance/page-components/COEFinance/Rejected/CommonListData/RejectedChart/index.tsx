@@ -1,7 +1,7 @@
-import { Tooltip, Datepicker } from '@cogoport/components';
+import { Tooltip, Datepicker, Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 
 import MyResponsivePie from '../../../Components/PieChart';
 import ResponsiveBarChart from '../../../Components/ResponsiveBarChart';
@@ -10,32 +10,47 @@ import useGetCommentRemarkCounts from '../../../hook/useGetCommentRemarkCounts';
 
 import styles from './styles.module.css';
 
+const TOTAL_REJECTED_KEY_MAPPING = {
+	coe_rejected : ['Total Audited', 'Rejected'],
+	on_hold      : ['Total Audited', 'Rejected'],
+};
+
 function RejectedCharts({ subActiveTabReject = '' }) {
-	const [date, setDate] = useState(new Date());
+	const [date, setDate] = useState(null);
 
 	const [remarkDate, setRemarkDate] = useState(null);
 
-	const { pieData = [], getData = () => {} } = useGetCommentRemarkCounts(remarkDate);
+	const {
+		pieData = [],
+		getData = () => {},
+		loading:pieChartLoading = false,
+	} = useGetCommentRemarkCounts({ remarkDate, subActiveTabReject });
 
-	const { data = [] } = useGetBillStatusStats(date);
+	const { data = [], loading = false } = useGetBillStatusStats({ date, subActiveTabReject });
 
 	const formateData = (data || []).map((item) => {
-		const { rejectedCount, auditedCount } = item || {};
+		const { filteredStatusCount, auditedCount } = item || {};
 		return (
 			{
 				...item,
-				Rejected        : rejectedCount,
-				'Total Audited' : auditedCount,
+				Rejected        : filteredStatusCount || 0,
+				'Total Audited' : auditedCount || 0,
 			}
 		);
 	});
 
+	const handleOnClick = (value) => {
+		if (value?.id === 'Rejected') {
+			console.log(value, 'value');
+		}
+	};
+
 	useEffect(() => {
 		getData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [remarkDate]);
+	}, [getData]);
 
 	return (
+
 		<div className={styles.container}>
 			<div className={styles.responsive_bar_chart}>
 				<div className={styles.text_filters_gap}>
@@ -62,6 +77,7 @@ function RejectedCharts({ subActiveTabReject = '' }) {
 							placement="right"
 							caret={false}
 						>
+
 							<IcMInfo height={30} />
 						</Tooltip>
 						<div style={{ marginLeft: '20px' }}>
@@ -78,19 +94,36 @@ function RejectedCharts({ subActiveTabReject = '' }) {
 					</div>
 
 				</div>
-				<ResponsiveBarChart barData={formateData} />
+				{loading ? (
+					<div className={styles.bar_chart_loader}>
+						<Loader style={{ width: '80px' }} />
+					</div>
+				) : (
+					<ResponsiveBarChart
+						barData={formateData}
+						handleOnClick={handleOnClick}
+						keys={TOTAL_REJECTED_KEY_MAPPING[subActiveTabReject]}
+					/>
+				)}
+
 			</div>
 			<div className={styles.responsive_pie}>
+				{pieChartLoading ? (
+					<div className={styles.bar_chart_loader}>
+						<Loader style={{ width: '80px' }} />
+					</div>
+				) : (
+					<MyResponsivePie
+						data={pieData}
+						title="Rejection Reason"
+						subActiveTabReject={subActiveTabReject}
+						remarkDate={remarkDate}
+						setRemarkDate={setRemarkDate}
+					/>
+				)}
 
-				<MyResponsivePie
-					data={pieData}
-					title="Rejection Reason"
-					subActiveTabReject={subActiveTabReject}
-					remarkDate={remarkDate}
-					setRemarkDate={setRemarkDate}
-				/>
 			</div>
 		</div>
 	);
 }
-export default RejectedCharts;
+export default memo(RejectedCharts);
