@@ -56,7 +56,6 @@ function List(props) {
 						user={user}
 						currLevel={currLevel}
 						setStatParams={setStatParams}
-						currentUserData={currentUserData}
 					/>
 				))}
 
@@ -67,7 +66,6 @@ function List(props) {
 							<span className={styles.dot}>.</span>
 							<span className={styles.dot}>.</span>
 						</div>
-
 						<ListItem
 							listItem={currentUserData}
 							viewType={viewType}
