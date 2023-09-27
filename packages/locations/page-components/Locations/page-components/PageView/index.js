@@ -1,22 +1,22 @@
-import { TabPanel, Tabs, Pagination } from '@cogoport/components';
+import { TabPanel, Tabs, Pagination, Table } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
 
 import getFieldsByTab from '../../../../constants/config';
 import getTabsMapping from '../../../../constants/tabs';
 import useGetLocationsList from '../../../../hooks/useGetLocationsList';
+import Filter from '../Filters';
 import Header from '../Header';
 
-import List from './List';
 import styles from './styles.module.css';
 
 function PageView({ onClickCard = () => {}, setSelectedLocation = () => {}, setSideBar = () => {} }) {
 	const { t } = useTranslation(['locations']);
 
 	const {
-		list,
+		data,
 		filters,
 		loading,
-		hookSetters,
+		setFilters,
 	} = useGetLocationsList();
 
 	const { page, page_limit, type } = filters || {};
@@ -26,16 +26,19 @@ function PageView({ onClickCard = () => {}, setSelectedLocation = () => {}, setS
 	const tabsMapping = getTabsMapping({ t });
 
 	const onTabChange = (val) => {
-		hookSetters.setFilters({ ...filters, type: val, page: 1 });
+		setFilters({ ...filters, type: val, page: 1 });
 		setSelectedLocation({});
 		setSideBar('');
 	};
 
 	const handlePageChange = (pageNumber) => {
-		hookSetters.setFilters({ ...filters, page: pageNumber });
+		setFilters({ ...filters, page: pageNumber });
 	};
 	return (
 		<div className={styles.container} id="locations_main_container">
+
+			<Header setFilters={setFilters} filters={filters} activeTab={filters.type} />
+
 			<Tabs themeType="primary" activeTab={filters.type} onChange={onTabChange} id="locations_tab_view">
 				{(tabsMapping || []).map(({
 					label = '',
@@ -43,28 +46,19 @@ function PageView({ onClickCard = () => {}, setSelectedLocation = () => {}, setS
 				}) => <TabPanel key={label} name={value} title={label} />)}
 			</Tabs>
 
-			<section className={styles.list_view} id="locations_list_view">
-				<Header columns={columns} id="locations_list_header" />
-				{(list.data || []).map((item) => (
-					<div key={item?.id}>
-						<List
-							key={item?.id}
-							id="locations_list_body"
-							loading={loading}
-							onClick={onClickCard}
-							item={item}
-							columns={columns}
-						/>
+			<Table
+				className={styles.table}
+				columns={columns}
+				data={data?.list || []}
+				loading={loading}
+				onRowClick={onClickCard}
+			/>
 
-					</div>
-
-				))}
-			</section>
 			<div className={styles.pagination_container}>
 				<Pagination
 					type="table"
 					currentPage={page}
-					totalItems={list.total}
+					totalItems={data?.total_count}
 					pageSize={page_limit}
 					onPageChange={handlePageChange}
 				/>

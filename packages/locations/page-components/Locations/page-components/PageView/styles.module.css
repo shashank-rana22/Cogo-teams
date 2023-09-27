@@ -7,3 +7,9 @@
 .list_view {
 	margin-top: 20px;
 }
+
+.table {
+	margin-top: 10px;
+	border-spacing: 3px;
+	background-color: #fff;
+}

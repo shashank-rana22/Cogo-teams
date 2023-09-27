@@ -27,11 +27,6 @@ function SideBarComponent({
 			case 'details':
 				return (
 					<div>
-						<div className={styles.btn_align}>
-							<Button>{selectedLocation.status === 'active' ? 'Deactivate' : 'Activate'}</Button>
-							<Button onClick={() => setSideBar('create')}>Update</Button>
-						</div>
-
 						<Details activeCard={selectedLocation} setSideBar={setSideBar} />
 					</div>
 				);
@@ -41,10 +36,21 @@ function SideBarComponent({
 				return null;
 		}
 	};
+
 	return (
 		<div className={styles.sidebar}>
-
-			<Modal
+			{header[sideBar]}
+			<div role="presentation" className={styles.close} onClick={onClose}>
+				&times;
+			</div>
+			<div className={styles.sidebar_body}>
+				<div className={styles.btn_align}>
+					<Button>{selectedLocation.status === 'active' ? 'Deactivate' : 'Activate'}</Button>
+					<Button onClick={() => setSideBar('create')}>Update</Button>
+				</div>
+				{renderBody()}
+			</div>
+			{/* <Modal
 				show={sideBar}
 				onClose={onClose}
 				closeOnOuterClick={setSideBar}
@@ -55,7 +61,13 @@ function SideBarComponent({
 				<Modal.Body>
 					<div>{renderBody()}</div>
 				</Modal.Body>
-			</Modal>
+				{sideBar === 'details'
+					&& (
+						<Modal.Footer>
+
+						</Modal.Footer>
+					)}
+			</Modal> */}
 		</div>
 	);
 }

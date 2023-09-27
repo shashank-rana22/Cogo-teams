@@ -1,66 +1,55 @@
 const getStatusColumns = ({ t = () => {} }) => [
 	{
-		label : t('locations:list_name_label'),
-		key   : 'name',
-		flex  : 1,
+
+		Header   : t('locations:list_name_label'),
+		accessor : (item) => <p>{(item.name)}</p>,
 	},
 	{
-		label : t('locations:list_type_label'),
-		key   : 'type',
-		flex  : 1,
+		Header   : t('locations:list_type_label'),
+		accessor : (item) => <p>{(item.type)}</p>,
 	}, {
-		label : t('locations:list_status_label'),
-		key   : 'status',
-		flex  : 1,
-	}, {
-		label : t('locations:list_created_at_label'),
-		key   : 'created_at',
-		type  : 'datetime',
-		flex  : 1,
+		Header   : t('locations:list_status_label'),
+		accessor : (item) => <p>{(item.status)}</p>,
 	},
+	// {
+	// 	Header   : t('locations:list_created_at_label'),
+	// 	accessor : (item) => <p>{(item.created_at)}</p>,
+	// },
 ];
 
 const getCountryColumns = ({ t = () => {} }) => [
 	{
-		label : t('locations:list_name_label'),
-		key   : 'name',
-		flex  : 2,
+		Header   : t('locations:list_name_label'),
+		accessor : (item) => <p>{(item.name)}</p>,
 	},
 	{
-		label : t('locations:list_type_label'),
-		key   : 'type',
-		flex  : 2,
+		Header   : t('locations:list_type_label'),
+		accessor : (item) => <p>{(item.type)}</p>,
 	},
 	{
-		label : t('locations:list_country_code_label'),
-		key   : 'country_code',
-		flex  : 2,
+		Header: t('locations:list_country_code_label'),
+
+		accessor: (item) => <p>{(item.country_code)}</p>,
 	},
-	{
-		label : t('locations:list_created_at_label'),
-		key   : 'created_at',
-		type  : 'datetime',
-		flex  : 2,
-	},
+	// {
+	// 	Header   : t('locations:list_created_at_label'),
+	// 	accessor : (item) => <p>{(item.created_at)}</p>,
+	// },
 ];
 
 const getDefaultColumns = ({ t = () => {} }) => [
 	{
-		label : t('locations:list_name_label'),
-		key   : 'name',
-		flex  : 1,
+		Header   : t('locations:list_name_label'),
+		accessor : (item) => <p>{(item.name)}</p>,
 	},
 	{
-		label : t('locations:list_type_label'),
-		key   : 'type',
-		flex  : 1,
+		Header   : t('locations:list_type_label'),
+		accessor : (item) => <p>{(item.type)}</p>,
 	},
-	{
-		label : t('locations:list_created_at_label'),
-		key   : 'created_at',
-		type  : 'datetime',
-		flex  : 1,
-	},
+	// {
+	// 	Header   : t('locations:list_created_at_label'),
+	// 	accessor : (item) => <p>{(item.created_at)}</p>,
+	// },
 ];
 
 const getFieldsByTab = ({ type, t = () => {} }) => {

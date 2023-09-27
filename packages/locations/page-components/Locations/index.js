@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import SideBarComponent from '../../common/SideBar';
 
+import Filter from './page-components/Filters';
 import PageView from './page-components/PageView';
 import styles from './styles.module.css';
 
@@ -28,17 +29,20 @@ function Locations() {
 				<h1>{t('locations:locations_heading')}</h1>
 				<Button onClick={onCreateClick}>{t('locations:create_location')}</Button>
 			</div>
+
 			<PageView
 				onClickCard={onClickCard}
 				setSideBar={setSideBar}
 				setSelectedLocation={setSelectedLocation}
 			/>
-			<SideBarComponent
-				setSideBar={setSideBar}
-				sideBar={sideBar}
-				selectedLocation={selectedLocation}
-				setSelectedLocation={setSelectedLocation}
-			/>
+			{sideBar && (
+				<SideBarComponent
+					setSideBar={setSideBar}
+					sideBar={sideBar}
+					selectedLocation={selectedLocation}
+					setSelectedLocation={setSelectedLocation}
+				/>
+			)}
 		</div>
 	);
 }

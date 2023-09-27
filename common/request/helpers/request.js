@@ -69,15 +69,26 @@ request.interceptors.request.use((oldConfig) => {
 			newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
 		}
 	}
-
 	if (PEEWEE_SERVICES.includes(serviceName) && isDevMode) {
 		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
 	}
+	if (serviceName === 'location'
+	&& (originalApiPath === 'create_location')) {
+		newConfig.baseURL = 'https://9474-2409-40c0-7b-6413-d033-fd23-719-30a7.ngrok-free.app';
+	}
 
+	if (serviceName === 'location'
+	&& (originalApiPath === 'list_locations')) {
+		newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
+		newConfig.url = 'https://9474-2409-40c0-7b-6413-d033-fd23-719-30a7.ngrok-free.app/location/list_locations';
+	}
 	return {
 		...newConfig,
 		headers: {
-			authorizationscope: 'partner', authorization: `Bearer: ${token}`, authorizationparameters,
+			'ngrok-skip-browser-warning' : true,
+			authorizationscope           : 'partner',
+			authorization                : `Bearer: ${token}`,
+			authorizationparameters,
 		},
 	};
 });
