@@ -97,6 +97,11 @@ const apis = {
 			service_name : 'saas_subscriptions_v2',
 			access_type  : 'private',
 		},
+		{
+			api          : 'update_saas_plan_discount_config',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
 
 	],
 };

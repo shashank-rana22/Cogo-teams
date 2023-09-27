@@ -1,20 +1,12 @@
-.container {
-	width: 100%;
-}
-
 .flex_box {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	padding: 14px 16px;
 
 	&.item_row {
 		border-bottom: 1px solid #fbd1a6;
 	}
-}
-
-.header_container {
-	justify-content: space-between;
-	padding: 5px 8px 10px;
 }
 
 .card_header {
@@ -26,10 +18,12 @@
 }
 
 .col {
+	width: 16.6%;
 	padding: 0 8px;
 }
 
-.scroll {
-	max-height: 300px;
-	overflow-y: scroll;
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
 }

@@ -6,6 +6,7 @@ import { useTranslation } from 'next-i18next';
 import { getFeatureMapping } from '../../constant/featureMapping';
 import useGetPlanDetails from '../../hooks/useGetPlanDetails';
 
+import Discount from './Discount';
 import Header from './Header';
 import PlanFeature from './PlanFeature';
 import Pricing from './Pricing';
@@ -18,7 +19,7 @@ function PlanDetails() {
 
 	const { loading = false, planDetails, featureModal, setFeatureModal } = useGetPlanDetails();
 
-	const { plan = {}, pricing = [], plan_features = [], add_ons = [] } = planDetails || {};
+	const { plan = {}, pricing = [], plan_features = [], add_ons = [], discounts = [] } = planDetails || {};
 
 	const featureMapping = getFeatureMapping({ add_ons, plan_features, t });
 
@@ -50,6 +51,9 @@ function PlanDetails() {
 						/>
 					</div>
 				))}
+			</div>
+			<div className={styles.cell}>
+				<Discount loading={loading} discounts={discounts} setFeatureModal={setFeatureModal} />
 			</div>
 			<UpdateFeatureModal featureModal={featureModal} setFeatureModal={setFeatureModal} planId={plan?.id} />
 		</div>
