@@ -7,42 +7,61 @@ import ServiceIcon from '../../ServiceIcon';
 
 import styles from './styles.module.css';
 
-const handleLocationDetails = (location) => (
-	<>
-		<div className={styles.port_code}>
-			<div className={`${styles.code} core_ui_port_code`}>
-				(
-				{location?.port_code || location?.postal_code}
-				)
+function HandleLocationDetails({ location = {} }) {
+	const {
+		port_code = '',
+		postal_code = '',
+		country_code = '',
+		name = '',
+		display_name = '',
+	} = location || {};
+
+	return (
+		<>
+			<div className={styles.port_code}>
+				<div className={`${styles.code} core_ui_port_code`}>
+					(
+					{port_code || postal_code}
+					)
+				</div>
+
+				<div className={`${styles.country} core_ui_country_code`}>
+					{country_code}
+				</div>
 			</div>
 
-			<div className={`${styles.country} core_ui_country_code`}>
-				{location?.country_code}
-			</div>
-		</div>
-
-		<Tooltip
-			placement="bottom"
-			theme="light"
-			interactive
-			content={location?.display_name}
-		>
-			<div className={`${styles.ellipsis_text} core_ui_loaction_name`}>{location?.name}</div>
-		</Tooltip>
-	</>
-);
+			<Tooltip
+				placement="bottom"
+				theme="light"
+				interactive
+				content={display_name}
+			>
+				<div className={`${styles.ellipsis_text} core_ui_loaction_name`}>
+					{name}
+				</div>
+			</Tooltip>
+		</>
+	);
+}
 
 const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat, null, true) : null);
 
 function PortDetails({ data = {}, icon }) {
-	const { origin, destination, schedule_arrival, schedule_departure } = data;
+	const {
+		origin = {},
+		destination = {},
+		schedule_arrival = '',
+		schedule_departure = '',
+	} = data;
 
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>
 			<ServiceIcon {...icon} />
 
 			<div className={styles.port_detail}>
-				{handleLocationDetails(origin)}
+
+				<HandleLocationDetails location={origin} />
+
 				{schedule_departure ? (
 					<div className={styles.eta_etd}>
 						ETD:
@@ -57,7 +76,9 @@ function PortDetails({ data = {}, icon }) {
 			</div>
 
 			<div className={styles.port_detail}>
-				{handleLocationDetails(destination)}
+
+				<HandleLocationDetails location={destination} />
+
 				{schedule_arrival ? (
 					<div className={styles.eta_etd}>
 						ETA:
