@@ -145,3 +145,7 @@
 		padding: 0;
 	}
 }
+
+.tooltip_title {
+	width: fit-content;
+}

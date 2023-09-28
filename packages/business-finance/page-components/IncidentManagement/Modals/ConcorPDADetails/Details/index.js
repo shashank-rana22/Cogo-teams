@@ -56,12 +56,14 @@ function Details({
 				<div className={styles.large}>
 					<div className={styles.title}>Company Name</div>
 					<div className={styles.wrapper}>
-						<Tooltip
-							interactive
-							content={(beneficiaryName)}
-						>
-							<div className={styles.wrapper}>{(beneficiaryName)}</div>
-						</Tooltip>
+						<div className={styles.tooltip_title}>
+							<Tooltip
+								interactive
+								content={(beneficiaryName || '')}
+							>
+								<div className={styles.wrapper}>{(beneficiaryName || '')}</div>
+							</Tooltip>
+						</div>
 					</div>
 				</div>
 				<div className={styles.medium}>

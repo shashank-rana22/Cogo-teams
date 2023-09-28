@@ -272,3 +272,7 @@
 		}
 	}
 }
+
+.tooltip_title {
+	width: fit-content;
+}

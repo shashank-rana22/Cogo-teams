@@ -83,12 +83,14 @@ function Details({
 					<div className={styles.company_div}>
 						<div className={styles.heading}>Company Name</div>
 						<div className={styles.text}>
-							<Tooltip
-								interactive
-								content={(tradePartyName || businessName || '')}
-							>
-								<div className={styles.wrapper}>{(tradePartyName || businessName || '')}</div>
-							</Tooltip>
+							<div className={styles.tooltip_title}>
+								<Tooltip
+									interactive
+									content={(tradePartyName || businessName || '')}
+								>
+									<div className={styles.wrapper}>{(tradePartyName || businessName || '')}</div>
+								</Tooltip>
+							</div>
 						</div>
 					</div>
 					<div>
@@ -206,7 +208,6 @@ function Details({
 						</div>
 					)}
 				</div>
-
 				{lineItems?.length > [GLOBAL_CONSTANTS.zeroth_index] ? (
 					<div className={styles.list_container}>
 						<StyledTable
@@ -220,7 +221,6 @@ function Details({
 						{t('incidentManagement:no_line_items_available')}
 					</div>
 				)}
-
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>

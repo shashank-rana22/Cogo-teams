@@ -128,3 +128,7 @@
 	font-weight: 600;
 	color: #f68b21;
 }
+
+.tooltip_title {
+	width: fit-content;
+}

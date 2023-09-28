@@ -82,3 +82,7 @@
 .post_tax_container {
 	margin-left: 1%;
 }
+
+.tooltip_title {
+	width: fit-content;
+}

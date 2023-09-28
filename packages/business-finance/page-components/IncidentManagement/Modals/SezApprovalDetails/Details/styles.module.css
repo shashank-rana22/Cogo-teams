@@ -116,3 +116,7 @@
 .company_address {
 	padding: 12px 24px;
 }
+
+.tooltip_title {
+	width: fit-content;
+}

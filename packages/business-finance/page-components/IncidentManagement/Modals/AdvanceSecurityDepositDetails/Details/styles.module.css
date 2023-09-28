@@ -138,3 +138,7 @@
 .amount_div {
 	width: 30%;
 }
+
+.tooltip_title {
+	width: fit-content;
+}

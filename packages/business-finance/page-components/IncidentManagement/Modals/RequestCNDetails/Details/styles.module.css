@@ -219,3 +219,7 @@
 	width: 200px;
 	margin-left: 12px;
 }
+
+.tooltip_title {
+	width: fit-content;
+}

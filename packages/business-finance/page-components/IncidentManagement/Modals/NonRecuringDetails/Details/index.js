@@ -13,8 +13,6 @@ import { getFormatAmount } from '../../../utils/getformatamount';
 import { overHeadConfigs } from './overheadsConfigs';
 import styles from './styles.module.css';
 
-const MAX_LENGTH = 20;
-
 function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
@@ -49,12 +47,14 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 				<div className={styles.large}>
 					<div className={styles.title}>Company Name</div>
 					<div className={styles.text}>
-						<Tooltip
-							interactive
-							content={(tradePartyName || businessName || '')}
-						>
-							<div className={styles.wrapper}>{(tradePartyName || businessName || '')}</div>
-						</Tooltip>
+						<div className={styles.tooltip_title}>
+							<Tooltip
+								interactive
+								content={(tradePartyName || businessName || '')}
+							>
+								<div className={styles.wrapper}>{(tradePartyName || businessName || '')}</div>
+							</Tooltip>
+						</div>
 					</div>
 				</div>
 				<div className={styles.medium}>

@@ -120,3 +120,7 @@
 .utr_div {
 	padding: 16px 24px 32px;
 }
+
+.tooltip {
+	width: fit-content;
+}

@@ -119,3 +119,7 @@
 	white-space: nowrap;
 	cursor: pointer;
 }
+
+.tooltip_title {
+	width: fit-content;
+}

@@ -148,8 +148,6 @@
 	margin-top: 24px;
 }
 
-.tooltipTitle {
-	font-size: 12px;
-	word-break: normal;
-	overflow-wrap: normal;
+.tooltip_title {
+	width: fit-content;
 }

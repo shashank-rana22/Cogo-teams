@@ -119,3 +119,7 @@
 	color: #f68b21;
 	text-decoration: underline;
 }
+
+.tooltip_title {
+	width: fit-content;
+}
