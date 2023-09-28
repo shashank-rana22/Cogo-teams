@@ -1,17 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 const useBlockUserBudgetAllocation = (blockAndRefetch = () => {}) => {
-	const {
-		general: { scope = '' },
-	} = useSelector((state) => state);
-
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/update_agent_budget_allocation_status',
 			method : 'POST',
-			scope,
 		},
 		{ manual: true },
 	);

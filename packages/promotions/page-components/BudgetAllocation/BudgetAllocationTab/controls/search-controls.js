@@ -11,8 +11,6 @@ const controls = (selectedDetails) => [
 		isClearable    : true,
 		defaultOptions : true,
 		params         : { filters: { role_ids: [selectedDetails?.role_id] } },
-		theme          : 'admin',
-		className      : 'primary md',
 	},
 ];
 export default controls;

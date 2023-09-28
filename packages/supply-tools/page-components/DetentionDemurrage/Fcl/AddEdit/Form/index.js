@@ -10,10 +10,7 @@ const INDEX_OFFSET = 1;
 const INCR_FREE_LIMIT_BY = 1;
 const DEFAULT_LIMIT = 0;
 
-function Form(
-	{ item = {}, handleSubmitForm = () => {}, callBack = () => {} },
-	ref,
-) {
+function Form({ item = {}, handleSubmitForm = () => {}, callBack = () => {} }, ref) {
 	const DEFAULT_VALUES = {};
 
 	const controls = getControls({ item });

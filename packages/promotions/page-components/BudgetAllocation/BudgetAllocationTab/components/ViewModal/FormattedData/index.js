@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const ZERO = 0;
 
-const formattedData = ({ promoAllocationList, refetch, selectedDetails }) => {
+const formattedData = ({ promoAllocationList = [], refetch = () => {}, selectedDetails = {} }) => {
 	const formattedDataList = (promoAllocationList || []).map((item) => ({
 		name         : <div className={styles.Title}>{item?.name}</div>,
 		total_budget : (

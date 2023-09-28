@@ -3,11 +3,13 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-const useGetPromoAllocationDetail = ({ selectedDetails = {}, filterValue = {} }) => {
+const useGetPromoAllocationDetail = ({ selectedDetails = {} }) => {
 	const {
 		general: { scope = '' },
 	} = useSelector((state) => state);
 	const [List, setList] = useState([]);
+	const [filterValue, setFilterValue] = useState('');
+
 	const [paginationData, setPaginationData] = useState({});
 	const [pagination, setPagination] = useState({ page: 1 });
 
@@ -52,6 +54,7 @@ const useGetPromoAllocationDetail = ({ selectedDetails = {}, filterValue = {} })
 		paginationData,
 		setPagination,
 		refetch,
+		setFilterValue,
 	};
 };
 

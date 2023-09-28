@@ -1,17 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 const useDeactivatePromoBudget = ({ refetch = () => {} }) => {
-	const {
-		general: { scope = '' },
-	} = useSelector((state) => state);
-
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/deactivate_promotion_budget',
 			method : 'POST',
-			scope,
 		},
 		{ manual: true },
 	);

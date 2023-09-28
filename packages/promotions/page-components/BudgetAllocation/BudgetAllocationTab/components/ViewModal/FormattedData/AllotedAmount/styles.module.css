@@ -57,22 +57,13 @@
 	align-items: center;
 }
 
-.save_close .saveicon {
+.save_close .saveicon,
+.save_close .closeicon {
 	font-size: 17px;
 	font-weight: normal;
 }
 
-.save_close .saveicon:hover {
-	z-index: 1;
-	transition: all 0.5s ease;
-	transform: scale(1.1);
-}
-
-.save_close .closeicon {
-	font-size: 14px;
-	font-weight: normal;
-}
-
+.save_close .saveicon:hover,
 .save_close .closeicon:hover {
 	z-index: 1;
 	transition: all 0.5s ease;

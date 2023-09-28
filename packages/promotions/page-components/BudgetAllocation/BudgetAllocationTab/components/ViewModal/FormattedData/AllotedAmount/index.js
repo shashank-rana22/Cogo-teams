@@ -13,7 +13,7 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 	const [showSaveLink, setShowSaveLink] = useState(false);
 
 	const [inputValue, setInputValue] = useState(ZERO);
-	const { updateBudget } = useUpdateBudgetAllocation({
+	const { updateBudget = () => {} } = useUpdateBudgetAllocation({
 		setShowSaveLink,
 		refetch,
 	});
@@ -32,8 +32,8 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 				<div className={styles.styled_div}>
 					<div className={styles.amount}>
 						{formatAmount({
-							amount   : item.budget_amount || ZERO,
-							currency : item.budget_amount_currency,
+							amount   : item?.budget_amount || ZERO,
+							currency : item?.budget_amount_currency,
 							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'symbol',
@@ -67,22 +67,18 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 						/>
 					</div>
 					<div className={styles.save_close}>
-						<div
-							role="button"
-							tabIndex={0}
+						<button
 							className={styles.link}
 							onClick={() => handleSave(item)}
 						>
 							<IcCFtick className="saveicon" />
-						</div>
-						<div
-							role="button"
-							tabIndex={0}
+						</button>
+						<button
 							className={styles.link}
 							onClick={() => setShowSaveLink(false)}
 						>
 							<IcMCross className="closeicon" />
-						</div>
+						</button>
 					</div>
 				</>
 			) : null}

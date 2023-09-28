@@ -7,16 +7,12 @@ import DeactivatePromoBudget from '../../../../hooks/useDeactivatePromoBudget';
 import styles from './styles.module.css';
 
 function ActionButtons({ item = {}, refetch = () => {} }) {
-	const { deactivateBudget, loading } = DeactivatePromoBudget({ refetch });
-	const handleDeactivate = (deactivateData) => {
-		deactivateBudget(deactivateData);
-	};
+	const { deactivateBudget = () => {}, loading = true } = DeactivatePromoBudget({ refetch });
 
 	if (item?.status === 'active') {
 		return (
 			<Button
-				onClick={() => handleDeactivate(item)}
-				style={{ width: 'fit-content' }}
+				onClick={() => deactivateBudget(item)}
 				themeType="secondary"
 				loading={loading}
 			>
@@ -26,13 +22,7 @@ function ActionButtons({ item = {}, refetch = () => {} }) {
 	}
 	if (item?.status === 'deactivated') {
 		return (
-			<div
-				style={{
-					display       : 'flex',
-					flexDirection : 'column',
-					justifyItems  : 'center',
-				}}
-			>
+			<div className={styles.container}>
 				<div className={styles.deactivate_text}>
 					Deactivated on
 					<div className={`${styles.deactivate_text} ${styles.tile_bold}`}>
@@ -47,7 +37,7 @@ function ActionButtons({ item = {}, refetch = () => {} }) {
 		);
 	}
 	return (
-		<div className={`${styles.styled_tag} '.core-ui-tag-text'`}>
+		<div className={`${styles.styled_tag}`}>
 			<Tags className="primary lg">{item?.status}</Tags>
 		</div>
 	);

@@ -1,11 +1,10 @@
 import { Table } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
-
-const ZERO = 0;
 
 function StyledTableComponent({
 	loading = false,
@@ -14,7 +13,7 @@ function StyledTableComponent({
 }) {
 	return (
 		<div>
-			{(!loading && formattedData.length === ZERO) ? (
+			{(!loading && isEmpty(formattedData)) ? (
 				<EmptyState />
 			) : (
 				<div className={styles.table}>

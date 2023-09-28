@@ -20,10 +20,6 @@
 	background: #fff;
 }
 
-.input_cont .core-ui-select__control {
-	width: 270px;
-}
-
 .input_cont {
 	display: block;
 	width: fit-content;

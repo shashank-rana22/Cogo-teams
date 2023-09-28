@@ -204,7 +204,7 @@ const getControls = ({ item = {} }) => [
 	{
 		name  : 'validity',
 		type  : 'date_range_picker',
-		value :	item?.validity_start && item?.validity_end
+		value : item?.validity_start && item?.validity_end
 			? { startDate: new Date(item?.validity_start), endDate: new Date(item?.validity_end) } : {},
 		span        : 8,
 		placeholder : 'Select Validity Range',

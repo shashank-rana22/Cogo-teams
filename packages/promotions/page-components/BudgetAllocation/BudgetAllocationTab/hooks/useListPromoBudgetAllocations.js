@@ -1,21 +1,16 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
 const useListPromoBudgetAllocation = ({ activeTab = 'active_budget', role = '' }) => {
 	const [List, setList] = useState([]);
 	const [paginationData, setPaginationData] = useState({});
 	const [pagination, setPagination] = useState({ page: 1 });
-	const {
-		general: { scope = '' },
-	} = useSelector((state) => state);
 
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/list_promotion_budget_allocations',
 			method : 'GET',
-			scope,
 			params : {
 				role_data_required : true,
 				page               : pagination?.page,

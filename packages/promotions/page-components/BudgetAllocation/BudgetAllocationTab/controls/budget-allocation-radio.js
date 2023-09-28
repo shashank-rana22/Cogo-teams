@@ -1,10 +1,8 @@
 const RadioOptions = [
 	{
-		name      : 'radio',
-		type      : 'radio',
-		className : 'primary md',
-		theme     : 'admin',
-		rules     : {
+		name  : 'radio',
+		type  : 'radio',
+		rules : {
 			required: true,
 		},
 		options: [

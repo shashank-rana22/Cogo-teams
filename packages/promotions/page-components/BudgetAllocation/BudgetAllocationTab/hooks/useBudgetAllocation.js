@@ -13,7 +13,7 @@ const useBudgetAllocation = ({
 	reset = () => {},
 	radioReset = () => {},
 }) => {
-	const formdata = FormData;
+	const formdata = FormData || {};
 
 	let payload = { ...formdata, role_ids: [formdata.role_ids] };
 
@@ -21,7 +21,6 @@ const useBudgetAllocation = ({
 		{
 			url    : '/create_promotion_budget_allocation',
 			method : 'POST',
-			scope  : 'partner',
 		},
 		{ manual: true },
 	);

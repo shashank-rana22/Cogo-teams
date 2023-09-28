@@ -7,8 +7,8 @@ function EmptyState() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.wrapper}>
-				<h4 className={styles.heading}>No records found</h4>
-				<p className={styles.content}>
+				<h4>No records found</h4>
+				<p>
 					Looks like you do not have any records for this section
 				</p>
 			</div>

@@ -1,6 +1,6 @@
 import { Modal, Pagination } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import Layout from '../../../../../common/Layout';
 import tableColumns from '../../configurations/promo-budget-details-table';
@@ -17,7 +17,6 @@ function ViewModal({
 	selectedDetails = {},
 	refetchListBudgetAllocation = () => {},
 }) {
-	const [filterValue, setFilterValue] = useState('');
 	const DEFAULT_VALUES = {};
 	const {
 		control,
@@ -28,12 +27,13 @@ function ViewModal({
 	});
 	const agent_id = watch('agent_id');
 	const {
-		loading,
-		promoAllocationList,
+		loading = true,
+		promoAllocationList = [],
 		paginationData = {},
-		setPagination,
+		setPagination = () => {},
 		refetch,
-	} = useGetPromoAllocationDetail({ selectedDetails, filterValue });
+		setFilterValue,
+	} = useGetPromoAllocationDetail({ selectedDetails });
 
 	const { page_limit = 10, total_count = 1, page = 1 } = paginationData || {};
 
@@ -54,7 +54,7 @@ function ViewModal({
 			showCloseIcon
 			onOuterClick={closeModal}
 			className="primary xl"
-			style={{ width: '80%' }}
+			style={{ width: '80vw' }}
 		>
 			<Modal.Header title={`Budget allocation for KAM: 
 			${selectedDetails.user_count} users`}
