@@ -5,6 +5,7 @@ import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
+import useGetDaysToClosure from '../../hooks/useGetDaysToClosure';
 import useShipmentBack from '../../hooks/useShipmentBack';
 
 import styles from './styles.module.css';
@@ -19,6 +20,10 @@ function ShipmentInfo() {
 	const { source = '', serial_id = '', is_cogo_assured = false, remaining_closure_days = 0 } = shipment_data || {};
 
 	const { handleShipmentsClick } = useShipmentBack();
+
+	const { data = {} } = useGetDaysToClosure({ serial_id });
+
+	console.log('useGetDaysToClosure:: ', data);
 
 	const sourceText = source === 'direct'
 		? 'Sell Without Buy'
