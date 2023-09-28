@@ -9,6 +9,7 @@ import {
 	getThisQuarterStartDate, getTodayStartDate,
 } from '../../../../utils/start-date-functions';
 import DURATION_OPTIONS from '../../../Leaderboard/configurations/get-duration-filter-options';
+import TEXT_MAPPING from '../../configurations/header-text-mapping';
 import VIEW_OPTIONS from '../../configurations/view-type-options';
 
 import styles from './styles.module.css';
@@ -50,9 +51,13 @@ function Header(props) {
 						for
 						{' '}
 						<i>
-							<b>SME Owners</b>
+							<b>{TEXT_MAPPING[view]}</b>
+
 							{' '}
-							(Team Contributions)
+							(
+							{view === 'kam_wise' ? 'Individual Contribution' : 'Team Contributions'}
+							)
+
 						</i>
 					</p>
 
@@ -75,7 +80,7 @@ function Header(props) {
 			</div>
 
 			<div className={styles.actions_container}>
-				<Select value={view} onChange={setView} options={VIEW_OPTIONS} />
+				<Select value={view} onChange={setView} options={VIEW_OPTIONS} className={styles.view_selector} />
 
 				<Button
 					type="button"

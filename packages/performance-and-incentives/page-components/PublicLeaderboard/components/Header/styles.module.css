@@ -34,3 +34,8 @@
 .actions_container {
 	display: flex;
 }
+
+.period_selector,
+.view_selector {
+	width: 150px;
+}
