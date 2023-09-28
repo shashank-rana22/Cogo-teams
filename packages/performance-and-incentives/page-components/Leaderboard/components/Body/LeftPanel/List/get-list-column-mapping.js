@@ -3,6 +3,8 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const ZERO_SCORE = 0;
+
 const getListColumnMapping = () => {
 	const LIST_COLUMN_MAPPING = [
 		{
@@ -42,7 +44,7 @@ const getListColumnMapping = () => {
 						Score
 					</div>
 				),
-			accessor: ({ total_score = 0 }) => (total_score === GLOBAL_CONSTANTS.zeroth_index
+			accessor: ({ total_score = 0 }) => (total_score === ZERO_SCORE
 				? 'NA' : <div>{total_score}</div>),
 		},
 		{
