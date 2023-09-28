@@ -48,7 +48,7 @@ function RejectedCharts({ subActiveTabReject = '', setFilters = () => {} }) {
 	});
 
 	const handleBarChartOnClick = (value) => {
-		if (value?.id === 'Rejected') {
+		if (value?.id === 'Rejected' || value?.id === 'On Hold') {
 			setFilters((pre) => ({
 				...pre,
 				updatedDateFrom : value?.indexValue,

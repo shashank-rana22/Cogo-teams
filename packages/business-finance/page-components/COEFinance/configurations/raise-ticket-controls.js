@@ -2,7 +2,6 @@ const controls = ({
 	formatRaiseToDeskOptions = [],
 	watchRaisedToDesk = '',
 	setAdditionalInfo = () => {},
-	shipmentData = {},
 	STAKEHOLDER_OPTIONS = [],
 }) => ([
 	{
@@ -30,8 +29,6 @@ const controls = ({
 		asyncKey    : 'default_types',
 		params      : {
 			RequestType  : 'shipment' || undefined,
-			Service      : shipmentData?.shipment_type || undefined,
-			TradeType    : shipmentData?.trade_type || undefined,
 			RaisedByDesk : 'Auditor' || undefined,
 			RaisedToDesk : watchRaisedToDesk || undefined,
 		},
