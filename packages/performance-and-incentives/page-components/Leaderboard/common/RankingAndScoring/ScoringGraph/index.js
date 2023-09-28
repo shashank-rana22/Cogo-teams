@@ -1,4 +1,7 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 
 import getFormattedGraphData from './get-formatted-graph-data';
 import styles from './styles.module.css';
@@ -7,6 +10,18 @@ function ScoringGraph(props) {
 	const { scoringGraphData } = props;
 
 	const graphData = getFormattedGraphData(scoringGraphData);
+
+	if (isEmpty(graphData)) {
+		return (
+			<Image
+				src={GLOBAL_CONSTANTS.image_url.empty_chart}
+				width={200}
+				height={200}
+				alt="Empty Chart"
+				className={styles.empty_img}
+			/>
+		);
+	}
 
 	return (
 		<div className={styles.scoring_container}>

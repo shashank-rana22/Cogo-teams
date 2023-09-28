@@ -43,9 +43,6 @@ function LeftPanel(props) {
 		refetch,
 	} = useGetScoringReports({ params });
 
-	console.log('currLevel :: ', currLevel);
-	console.log('levelStack :: ', levelStack);
-
 	const handlePropagation = ({ id = '', location_id, channel, name }) => {
 		setParams((prev) => ({
 			...prev,

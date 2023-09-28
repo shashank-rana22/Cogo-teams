@@ -70,8 +70,8 @@ function Header(props) {
 							value={entity}
 							onChange={setEntity}
 							options={getEntityOptions()}
-							disabled={incentive_leaderboard_viewtype !== ADMIN}
 							className={styles.entity_selector}
+							disabled={incentive_leaderboard_viewtype !== ADMIN}
 						/>
 
 						<Select
@@ -83,10 +83,11 @@ function Header(props) {
 
 						{duration === CUSTOM && (
 							<DateRangepicker
-								onChange={setDateRange}
 								value={dateRange}
 								maxDate={new Date()}
 								isPreviousDaysAllowed
+								onChange={setDateRange}
+
 							/>
 						)}
 					</div>
