@@ -14,7 +14,6 @@ function ListItem(props) {
 	const { listItem, user } = props;
 
 	const {
-		boxShadow,
 		LIST_COLUMN_MAPPING,
 		isAllowed,
 		handleClick,
@@ -24,7 +23,11 @@ function ListItem(props) {
 		<div
 			role="presentation"
 			style={user.id === listItem.user?.id ? { background: '#faf8df' } : {}}
-			className={cl`${styles.list_row} ${boxShadow} ${isAllowed ? styles.hover : ''}`}
+			className={
+				cl`${styles.list_row} 
+				${listItem.rank === GLOBAL_CONSTANTS.one ? styles.box_shadow : ''} 
+				${isAllowed ? styles.hover : ''}`
+			}
 			onClick={handleClick}
 		>
 			{LIST_COLUMN_MAPPING.map((columnItem) => {
