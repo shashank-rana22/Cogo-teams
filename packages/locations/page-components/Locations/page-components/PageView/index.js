@@ -1,23 +1,19 @@
 import { TabPanel, Tabs, Pagination, Table } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
 
-import getFieldsByTab from '../../../../constants/config';
-import getTabsMapping from '../../../../constants/tabs';
-import useGetLocationsList from '../../../../hooks/useGetLocationsList';
-import Filter from '../Filters';
-import Header from '../Header';
+import getFieldsByTab from '../../constants/config';
+import getTabsMapping from '../../constants/tabs';
 
 import styles from './styles.module.css';
 
-function PageView({ onClickCard = () => {}, setSelectedLocation = () => {}, setSideBar = () => {} }) {
+function PageView({
+	onClickCard = () => {},
+	setSelectedLocation = () => {},
+	setSideBar = () => {}, filters = {}, setFilters = () => {},
+	data = {},
+	loading = false,
+}) {
 	const { t } = useTranslation(['locations']);
-
-	const {
-		data,
-		filters,
-		loading,
-		setFilters,
-	} = useGetLocationsList();
 
 	const { page, page_limit, type } = filters || {};
 
@@ -36,8 +32,6 @@ function PageView({ onClickCard = () => {}, setSelectedLocation = () => {}, setS
 	};
 	return (
 		<div className={styles.container} id="locations_main_container">
-
-			<Header setFilters={setFilters} filters={filters} activeTab={filters.type} />
 
 			<Tabs themeType="primary" activeTab={filters.type} onChange={onTabChange} id="locations_tab_view">
 				{(tabsMapping || []).map(({

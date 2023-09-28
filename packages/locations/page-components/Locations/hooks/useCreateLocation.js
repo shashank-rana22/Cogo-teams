@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useTranslation } from 'next-i18next';
 
-const useCreateUpdate = () => {
+const useCreateLocation = () => {
 	const { t } = useTranslation(['locations']);
 
 	const [{ loading }, trigger] = useRequest({
@@ -81,4 +81,4 @@ const useCreateUpdate = () => {
 	};
 };
 
-export default useCreateUpdate;
+export default useCreateLocation;

@@ -1,16 +1,13 @@
-import { Button } from '@cogoport/components';
-import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import SideBarComponent from '../../common/SideBar';
+import useGetLocationsList from '../../hooks/useGetLocationsList';
 
-import Filter from './page-components/Filters';
+import Header from './page-components/Header';
 import PageView from './page-components/PageView';
+import SideBarComponent from './page-components/SideBar';
 import styles from './styles.module.css';
 
 function Locations() {
-	const { t } = useTranslation(['locations']);
-
 	const [sideBar, setSideBar] = useState('');
 	const [selectedLocation, setSelectedLocation] = useState({});
 
@@ -19,21 +16,25 @@ function Locations() {
 		setSelectedLocation(values);
 	};
 
-	const onCreateClick = () => {
-		setSideBar('create');
-	};
-
+	const {
+		data,
+		filters,
+		loading,
+		setFilters,
+	} = useGetLocationsList();
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
-				<h1>{t('locations:locations_heading')}</h1>
-				<Button onClick={onCreateClick}>{t('locations:create_location')}</Button>
-			</div>
+			<div className={styles.header} />
 
+			<Header setFilters={setFilters} setSideBar={setSideBar} filters={filters} activeTab={filters.type} />
 			<PageView
 				onClickCard={onClickCard}
 				setSideBar={setSideBar}
 				setSelectedLocation={setSelectedLocation}
+				data={data}
+				loading={loading}
+				filters={filters}
+				setFilters={setFilters}
 			/>
 			{sideBar && (
 				<SideBarComponent

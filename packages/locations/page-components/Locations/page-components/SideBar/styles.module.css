@@ -4,7 +4,7 @@
 	right: 0;
 	z-index: 1;
 	height: 100%;
-	padding-top: 60px;
+	padding: 13px;
 	overflow-y: scroll;
 	word-break: break-all;
 	background-color: #fff;
@@ -34,4 +34,8 @@
 	button:first-child {
 		margin-right: 8px;
 	}
+}
+
+.sidebar_title {
+	padding: 10px;
 }

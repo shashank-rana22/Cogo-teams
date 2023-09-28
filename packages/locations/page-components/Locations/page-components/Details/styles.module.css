@@ -8,3 +8,12 @@
 .description {
 	width: 50%;
 }
+
+.btn_align {
+	display: flex;
+	justify-content: flex-end;
+
+	button:first-child {
+		margin-right: 8px;
+	}
+}

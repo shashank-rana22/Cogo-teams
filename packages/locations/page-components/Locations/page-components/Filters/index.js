@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Filters from './Filter';
 import styles from './styles.module.css';
 
-function Filter({ filters = {}, setFilters = () => {}, activeTab }) {
+function Filter({ filters = {}, setFilters = () => {}, activeTab = 'create' }) {
 	const [show, setShow] = useState(false);
 
 	return (
@@ -20,7 +20,7 @@ function Filter({ filters = {}, setFilters = () => {}, activeTab }) {
 				<div className={styles.popver}>
 					<Modal
 						show={show}
-						placement="right"
+						placement="top-right"
 						closeOnOuterClick={() => setShow(false)}
 						size="sm"
 					>
@@ -34,6 +34,11 @@ function Filter({ filters = {}, setFilters = () => {}, activeTab }) {
 							/>
 
 						</Modal.Body>
+						<Modal.Footer>
+							<Button onClick={() => setShow(false)}>
+								Cancel
+							</Button>
+						</Modal.Footer>
 					</Modal>
 				</div>
 			) : null}

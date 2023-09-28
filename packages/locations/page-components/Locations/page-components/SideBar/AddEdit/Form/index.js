@@ -2,9 +2,9 @@ import { useForm } from '@cogoport/forms';
 import { useTranslation } from 'next-i18next';
 import { useImperativeHandle, forwardRef } from 'react';
 
+import Layout from '../../../../../../common/Layout';
 import controls from '../../../../configurations/create-form';
 import getShowElement from '../../../../utils/get-show-control';
-import Layout from '../../../Layout';
 
 function Form({ handleSubmitForm = () => {}, callBack = () => {}, item = {} }, ref) {
 	const DEFAULT_VALUES = {};
@@ -22,9 +22,10 @@ function Form({ handleSubmitForm = () => {}, callBack = () => {}, item = {} }, r
 	const { control, handleSubmit, formState:{ errors = {} }, watch } = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
+
 	const showElements = getShowElement({ controls: fields, formValues: watch() });
 
-	const onSubmit = (values) => handleSubmitForm({ data: values, callBack });
+	const onSubmit = (values) => handleSubmitForm({ data: { values }, callBack });
 
 	useImperativeHandle(ref, () => ({
 		formSubmit() {
@@ -32,6 +33,7 @@ function Form({ handleSubmitForm = () => {}, callBack = () => {}, item = {} }, r
 		},
 	}));
 	return (
+
 		<Layout
 			controls={fields}
 			control={control}

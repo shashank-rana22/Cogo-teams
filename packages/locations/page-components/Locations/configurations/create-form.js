@@ -188,7 +188,7 @@ const controls = ({ t = () => {} }) => [
 		validations: [{ type: 'required', message: 'Required' }],
 	},
 	{
-		name           : 'subdistrict_id',
+		name           : 'sub_district_id',
 		label          : 'Sub District',
 		type           : 'async_select',
 		asyncKey       : 'list_locations',

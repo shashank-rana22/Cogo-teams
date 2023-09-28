@@ -74,13 +74,16 @@ request.interceptors.request.use((oldConfig) => {
 	}
 	if (serviceName === 'location'
 	&& (originalApiPath === 'create_location')) {
-		newConfig.baseURL = 'https://9474-2409-40c0-7b-6413-d033-fd23-719-30a7.ngrok-free.app';
+		newConfig.baseURL = 'https://8379-103-143-39-118.ngrok-free.app';
 	}
-
+	if (serviceName === 'location'
+	&& (originalApiPath === 'update_location')) {
+		newConfig.baseURL = 'https://8379-103-143-39-118.ngrok-free.app';
+	}
 	if (serviceName === 'location'
 	&& (originalApiPath === 'list_locations')) {
 		newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
-		newConfig.url = 'https://9474-2409-40c0-7b-6413-d033-fd23-719-30a7.ngrok-free.app/location/list_locations';
+		newConfig.url = 'https://8379-103-143-39-118.ngrok-free.app/location/list_locations';
 	}
 	return {
 		...newConfig,

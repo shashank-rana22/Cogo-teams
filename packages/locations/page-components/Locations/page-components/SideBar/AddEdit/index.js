@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
 import { useRef } from 'react';
 
-import useCreateUpdate from '../../../hooks/useCreateUpdate';
+import useCreateLocation from '../../../hooks/useCreateLocation';
 
 import Form from './Form';
 
@@ -17,7 +17,8 @@ function CreateUpdateForm({ item = {} }) {
 	const {
 		loading,
 		onCreate,
-	} = useCreateUpdate();
+	} = useCreateLocation();
+
 	const handleSubmitForm = ({ data }) => {
 		onCreate({ data });
 	};
