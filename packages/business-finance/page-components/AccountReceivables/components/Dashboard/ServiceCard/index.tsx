@@ -5,6 +5,8 @@ import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
+import formatCurrency from '../../../Utils/amountFormat';
+
 import CardData from './CardData';
 import { getCardData, getServiceData } from './getCardServiceData';
 import styles from './styles.module.css';
@@ -153,17 +155,9 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 														)}
 														>
 															<div className={styles.wrapper}>
-																{formatAmount({
-																	amount   : item.amount as any,
-																	currency : item.currency,
-																	options  : {
-																		notation              : 'compact',
-																		compactDisplay        : 'short',
-																		maximumFractionDigits : 2,
-																		style                 : 'currency',
-																		currencyDisplay       : 'code',
-																	},
-																})}
+																{
+																formatCurrency(item?.currency, item?.amount)
+																}
 															</div>
 
 														</Tooltip>
@@ -233,17 +227,9 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 								</div>
 								<div>
 									<div className={styles.styled_ocean_text}>
-										{formatAmount({
-											amount   : item?.openInvoices as any,
-											currency : item?.currency,
-											options  : {
-												notation              : 'compact',
-												compactDisplay        : 'short',
-												maximumFractionDigits : 2,
-												style                 : 'currency',
-												currencyDisplay       : 'code',
-											},
-										})}
+										{
+										formatCurrency(item?.currency, item?.openInvoices)
+										}
 									</div>
 								</div>
 							</div>

@@ -1,7 +1,8 @@
 import { Tooltip } from '@cogoport/components';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
+
+import formatCurrency from '../../../../Utils/amountFormat';
 
 import styles from './styles.module.css';
 
@@ -70,30 +71,16 @@ function CardData({ tab }: CardDataProps) {
 								<div>
 									<Tooltip content={(
 										<div>
-											{formatAmount({
-												amount   :	item?.openInvoiceAmount as any,
-												currency :	item?.currency,
-												options  : {
-													style           : 'currency',
-													currencyDisplay : 'code',
-												},
-
-											})}
+											{
+											formatCurrency(item?.currency, item?.openInvoiceAmount)
+											}
 										</div>
 									)}
 									>
 										<div className={styles.wrapper}>
-											{formatAmount({
-												amount   : item?.openInvoiceAmount as any || 0,
-												currency : item?.currency,
-												options  : {
-													notation              : 'compact',
-													compactDisplay        : 'short',
-													style                 : 'currency',
-													currencyDisplay       : 'code',
-													maximumFractionDigits : 2,
-												},
-											})}
+											{
+											formatCurrency(item?.currency, item?.openInvoiceAmount)
+											}
 										</div>
 
 									</Tooltip>
