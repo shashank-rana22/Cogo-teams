@@ -22,8 +22,8 @@
 .leaderboard_users {
 	display: flex;
 	justify-content: space-between;
-	padding: 0 30px;
-	margin-top: 16px;
+	padding: 0 50px;
+	margin-top: 24px;
 	color: #4b5563;
 }
 

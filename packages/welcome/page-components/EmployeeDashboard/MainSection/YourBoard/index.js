@@ -1,6 +1,11 @@
 import React from 'react';
 
+import AttendanceStats from './AttendanceStats';
+import Holiday from './Holiday';
+import LeaveBalance from './LeaveBalance';
 import NotInOffice from './NotInOffice';
+import OrgData from './OrgData';
+import SalaryUpdate from './SalaryUpdate';
 import styles from './styles.module.css';
 import TimeSummary from './TimeSummary';
 
@@ -15,6 +20,11 @@ function YourBoard() {
 			</div>
 			<TimeSummary />
 			<NotInOffice />
+			<LeaveBalance />
+			<AttendanceStats />
+			<Holiday />
+			<SalaryUpdate />
+			<OrgData />
 		</div>
 	);
 }

@@ -1,0 +1,238 @@
+.container {
+	padding: 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 16px;
+}
+
+.header_flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.name_avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	font-weight: 600;
+	background: #ffdfdf;
+	border-radius: 50%;
+}
+
+.user_data {
+	display: flex;
+	align-items: center;
+}
+
+.user_name {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-left: 12px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #0a0a0a;
+}
+
+.designation {
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #757575;
+}
+
+.post_time_flex {
+	display: flex;
+	align-items: center;
+}
+
+.post_time {
+	display: flex;
+	align-items: center;
+	margin-right: 12px;
+	font-size: 12px;
+	color: #0a0a0a;
+}
+
+.main_post_data {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 16px 0;
+}
+
+.feed_type {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 76px;
+	height: 76px;
+	border-radius: 100px;
+}
+
+.circle1_bg {
+	font-size: 32px;
+	background-color: #f2f3fa;
+}
+
+.circle2_bg {
+	margin-left: -20px;
+	font-size: 32px;
+	color: #fff;
+	background-color: #f68b21;
+}
+
+.main_post_text {
+	font-size: 16px;
+	color: #221f20;
+}
+
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.comments_data {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 600;
+	color: #0a0a0a;
+}
+
+.user_comments {
+	display: flex;
+	align-items: center;
+	margin-right: 12px;
+}
+
+.comments_circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	font-size: 10px;
+	font-weight: 600;
+	background-color: #e0e5f2;
+	border: 3px solid #fff;
+	border-radius: 100px;
+
+	&:not(:first-child) {
+		margin-left: -10px;
+	}
+}
+
+.like_and_comment {
+	display: flex;
+	align-items: center;
+}
+
+.like_circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	background: #f5f5f5;
+	border-radius: 50px;
+}
+
+.comment_input {
+	position: relative;
+	display: inline-block;
+	width: 140px;
+	height: 32px;
+	margin: 0 12px;
+	vertical-align: bottom;
+	background: #f5f5f5;
+	border-radius: 50px;
+}
+
+.btn {
+	display: inline-block;
+	height: 32px;
+	font-size: 14px;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	user-select: none;
+	user-select: none;
+	user-select: none;
+	user-select: none;
+	background-color: #f5f5f5;
+	border-radius: 16px;
+}
+
+.btn:hover {
+	color: black;
+	background-color: #f5f5f5;
+	transition-duration: 0.2s;
+	transition-duration: 0.2s;
+	transition-duration: 0.2s;
+}
+
+.searchbutton {
+	position: absolute;
+
+	/* font-size: 22px; */
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.search:focus + .searchbutton {
+	color: black;
+	background-color: #f5f5f5;
+	transition-duration: 0.4s;
+	transition-duration: 0.4s;
+	transition-duration: 0.4s;
+}
+
+.search {
+	position: absolute;
+	left: 49px; /* Button width-1px (Not 50px/100% because that will sometimes show a 1px line between the search box and button) */
+	z-index: 10;
+	width: 0;
+	height: 100%;
+	padding: 0;
+	background-color: #f5f5f5;
+	border: none;
+	outline: none;
+	transition-duration: 0.4s;
+	transition-duration: 0.4s;
+	transition-duration: 0.4s;
+}
+
+.search:focus {
+	width: 650px; /* Bar width+1px */
+	padding: 0 16px 0 0;
+}
+
+.expandright {
+	right: 0;
+	left: auto;
+}
+
+.expandright:focus {
+	padding: 0 0 0 16px;
+	border-radius: 16px;
+}
+
+.label_flex {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}

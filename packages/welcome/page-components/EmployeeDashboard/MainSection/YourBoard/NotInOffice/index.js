@@ -8,38 +8,36 @@ function NotInOffice() {
 			<div className={styles.heading}>
 				Not in office today
 			</div>
-			<div className={styles.absent_users_flex}>
-				<div className={styles.user_data}>
-					<div className={styles.user_detail}>
-						<div className={styles.user_avatar}>
-							RD
-						</div>
-						Raghu
+			<div className={styles.user_data}>
+				<div className={styles.user_detail}>
+					<div className={styles.user_avatar}>
+						RD
 					</div>
-					<div className={styles.user_detail}>
-						<div className={styles.user_avatar}>
-							RD
-						</div>
-						Raghu
+					Raghu
+				</div>
+				<div className={styles.user_detail}>
+					<div className={styles.user_avatar}>
+						RD
 					</div>
-					<div className={styles.user_detail}>
-						<div className={styles.user_avatar}>
-							RD
-						</div>
-						Raghu
+					Raghu
+				</div>
+				<div className={styles.user_detail}>
+					<div className={styles.user_avatar}>
+						RD
 					</div>
-					<div className={styles.user_detail}>
-						<div className={styles.user_avatar}>
-							RD
-						</div>
-						Raghu
+					Raghu
+				</div>
+				<div className={styles.user_detail}>
+					<div className={styles.user_avatar}>
+						RD
 					</div>
-					<div className={styles.user_detail}>
-						<div className={styles.user_avatar}>
-							RD
-						</div>
-						Raghu
+					Raghu
+				</div>
+				<div className={styles.user_detail}>
+					<div className={styles.user_avatar}>
+						RD
 					</div>
+					Raghu
 				</div>
 				<div className={styles.more}>
 					+8
