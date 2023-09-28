@@ -11,18 +11,20 @@ import styles from './styles.module.css';
 function RevokeInvoiceDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const {
 		level3 = {}, level2 = {}, level1 = {},
-		createdBy = {}, remark = '',
+		createdBy = {}, remark = '', financeRemark = '',
 		data: { revokeInvoiceRequest = {} }, status = '', updatedBy = {},
 	} = row || {};
 	const docUrl = revokeInvoiceRequest?.documentUrls?.[GLOBAL_CONSTANTS.zeroth_index];
 	const level0 = { ...createdBy, remark };
 	return (
-		<div className={styles.containerDisplay}>
+		<div>
 			<div className={styles.heading}>
 				Revoke Invoice
 			</div>
 			<AllStakeHolderTimeline
-				timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3, status, updatedBy })}
+				timeline={allStakeHolderTimeLineData(
+					{ level0, level1, level2, level3, status, updatedBy, financeRemark },
+				)}
 			/>
 			<div className={styles.request_heading}>
 

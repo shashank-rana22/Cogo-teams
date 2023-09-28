@@ -11,18 +11,20 @@ import styles from './styles.module.css';
 function ConcorPDADetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const {
 		level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark = '',
-		status = '', updatedBy = {},
+		status = '', updatedBy = {}, financeRemark = '',
 	} = row || {};
 	const level0 = { ...createdBy, remark };
 	const docUrl = row?.data?.concorPdaApprovalRequest?.bookingProof?.[GLOBAL_CONSTANTS.zeroth_index] || '';
 
 	return (
-		<div className={styles.containerDisplay}>
+		<div>
 			<div className={styles.heading}>
 				PDA Approval
 			</div>
 			<AllStakeHolderTimeline
-				timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3, status, updatedBy })}
+				timeline={allStakeHolderTimeLineData(
+					{ level0, level1, level2, level3, status, updatedBy, financeRemark },
+				)}
 			/>
 			<div className={styles.request_heading}>
 

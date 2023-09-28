@@ -5,7 +5,7 @@ import STATUS_MAPPING from '../../Constants/status_mapping';
 
 import styles from './styles.module.css';
 
-function RejectModal({ setShowRejectModal = () => {}, onAction = () => {} }, showRejectModal = false, loading = false) {
+function RejectModal({ setShowRejectModal = () => {}, onAction = () => {}, showRejectModal = false, loading = false }) {
 	return (
 		<div>
 			<Modal show={showRejectModal} onClose={() => setShowRejectModal(false)} placement="center" size="sm">

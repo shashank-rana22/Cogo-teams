@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function AdvanceSecurityDepositRefundDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const {
-		level3 = {}, level2 = {}, level1 = {}, createdBy = {},
+		level3 = {}, level2 = {}, level1 = {}, createdBy = {}, financeRemark = '',
 		remark = '', data: { advanceSecurityDepositRefund = {} }, status = '', updatedBy = {},
 	} = row || {};
 	const docUrl = advanceSecurityDepositRefund?.uploadProof?.[GLOBAL_CONSTANTS.zeroth_index];
@@ -21,7 +21,9 @@ function AdvanceSecurityDepositRefundDetails({ row = {}, setDetailsModal = () =>
 				Advance Container Security Deposit Refund
 			</div>
 			<AllStakeHolderTimeline
-				timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3, status, updatedBy })}
+				timeline={allStakeHolderTimeLineData(
+					{ level0, level1, level2, level3, status, updatedBy, financeRemark },
+				)}
 			/>
 			<div className={styles.request_heading}>
 

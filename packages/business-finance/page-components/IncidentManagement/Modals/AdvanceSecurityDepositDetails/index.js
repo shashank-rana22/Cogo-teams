@@ -8,17 +8,20 @@ import styles from './styles.module.css';
 
 function AdvanceSecurityDepositDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const {
-		level3 = {}, level2 = {}, level1 = {},
+		level3 = {}, level2 = {}, level1 = {}, financeRemark = '',
 		createdBy = {}, remark = '', status = '', updatedBy = {},
 	} = row || {};
 	const level0 = { ...createdBy, remark };
+
 	return (
-		<div className={styles.containerDisplay}>
+		<div>
 			<div className={styles.heading}>
 				Advance Container Security Deposit
 			</div>
 			<AllStakeHolderTimeline
-				timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3, status, updatedBy })}
+				timeline={allStakeHolderTimeLineData(
+					{ level0, level1, level2, level3, status, updatedBy, financeRemark },
+				)}
 			/>
 			<div className={styles.request_heading}>
 

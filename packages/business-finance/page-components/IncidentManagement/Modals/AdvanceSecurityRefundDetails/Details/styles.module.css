@@ -1,8 +1,3 @@
-.remark {
-	display: flex;
-	margin-bottom: 8px;
-}
-
 .label {
 	padding: 0 24px;
 	margin-bottom: 6px;
@@ -38,11 +33,6 @@
 	border-bottom: 1px solid #e0e0e0;
 }
 
-.profit_container {
-	display: flex;
-	margin-left: 12px;
-}
-
 .shipment_container {
 	padding: 16px 26px;
 }
@@ -51,12 +41,6 @@
 	font-size: var(--font-size-md);
 	color: #f68b21;
 	text-decoration: underline;
-}
-
-.buy_sell_div {
-	display: flex;
-	justify-content: space-between;
-	padding: 12px 36px 24px 24px;
 }
 
 .button_container {
@@ -81,10 +65,6 @@
 .required_field::after {
 	color: var(--color-primary-error-red-2);
 	content: " *";
-}
-
-.post_tax_container {
-	margin-left: 1%;
 }
 
 .flex {

@@ -10,21 +10,20 @@ import styles from './styles.module.css';
 
 function TdsApprovalDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const {
-		level3 = {},
-		level2 = {},
-		level1 = {},
-		createdBy = {},
+		level3 = {}, level2 = {}, level1 = {}, createdBy = {}, financeRemark = '',
 		remark = '', data : { tdsRequest = {} }, status = '', updatedBy = {},
 	} = row || {};
 	const docUrl = tdsRequest?.documentUrls?.[GLOBAL_CONSTANTS.zeroth_index];
 	const level0 = { ...createdBy, remark };
 	return (
-		<div className={styles.containerDisplay}>
+		<div>
 			<div className={styles.heading}>
 				TDS Deviation
 			</div>
 			<AllStakeHolderTimeline
-				timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3, status, updatedBy })}
+				timeline={allStakeHolderTimeLineData(
+					{ level0, level1, level2, level3, status, updatedBy, financeRemark },
+				)}
 			/>
 			<div className={styles.request_heading}>
 

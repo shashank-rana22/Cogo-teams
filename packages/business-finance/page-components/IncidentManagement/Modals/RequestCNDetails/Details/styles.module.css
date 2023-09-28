@@ -1,8 +1,3 @@
-.remark {
-	display: flex;
-	margin-bottom: 8px;
-}
-
 .label {
 	padding: 0 24px;
 	margin-bottom: 6px;
@@ -79,10 +74,6 @@
 	content: " *";
 }
 
-.post_tax_container {
-	margin-left: 1%;
-}
-
 .flex {
 	display: flex;
 	align-items: center;
@@ -113,18 +104,6 @@
 
 .display_container {
 	padding: 24px 24px 0;
-}
-
-.shipment_container {
-	padding: 24px 0 16px;
-}
-
-.invoice {
-	padding: 16px 0;
-}
-
-.invoice_category {
-	padding: 16px 0 8px;
 }
 
 .value_data {
