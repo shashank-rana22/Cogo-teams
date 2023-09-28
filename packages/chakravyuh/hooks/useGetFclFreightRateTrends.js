@@ -35,7 +35,7 @@ const useGetFclFreightRateTrends = ({ filters }) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(filters), getTrends]);
 
-	return { data, loading, getTrends };
+	return { data: data?.rate_trend || [], loading, getTrends };
 };
 
 export default useGetFclFreightRateTrends;
