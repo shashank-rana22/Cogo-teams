@@ -1,4 +1,5 @@
 import { dynamic } from '@cogoport/next';
+import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useState, useEffect, useMemo } from 'react';
 
 import BookingDeskContext from '../context/BookingDeskContext';
@@ -38,6 +39,7 @@ export default function BookingDesk() {
 	if (RenderDesk) {
 		return (
 			<BookingDeskContext.Provider value={contextValues}>
+				<ShipmentChat />
 				<RenderDesk />
 			</BookingDeskContext.Provider>
 		);
