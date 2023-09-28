@@ -100,7 +100,6 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 
 	return (
 		<div>
-			<RejectedCharts subActiveTabReject={subActiveTabReject} />
 			{
 			(subActiveTabReject === 'coe_rejected' || subActiveTabReject === 'coe_on_hold') ? (
 				<RejectedCharts

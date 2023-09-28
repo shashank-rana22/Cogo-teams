@@ -48,6 +48,7 @@ const useGetCommentRemarkCounts = ({ remarkDate, subActiveTabReject = '' }) => {
 			id    : upperCase(item),
 			label : `${upperCase(item)} : ${data?.[item] || DEFAULT_VALUE}`,
 			value : (((data?.[item] || DEFAULT_VALUE) * PERCENTAGE_VALUE) / totalRemarks).toFixed(DECIMAL_PLACE),
+			key   : item,
 		}
 	));
 

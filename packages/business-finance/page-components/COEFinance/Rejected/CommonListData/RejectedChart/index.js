@@ -57,6 +57,15 @@ function RejectedCharts({ subActiveTabReject = '', setFilters = () => {} }) {
 		}
 	};
 
+	const handlePieChartOnClick = (value) => {
+		setFilters((pre) => ({
+			...pre,
+			updatedDateFrom      : remarkDate?.startDate || undefined,
+			updatedDateTo        : remarkDate?.endDate || new Date(),
+			rejectionRemarksType : value?.data?.key,
+		}));
+	};
+
 	useEffect(() => {
 		getData();
 	}, [getData]);
@@ -130,6 +139,7 @@ function RejectedCharts({ subActiveTabReject = '', setFilters = () => {} }) {
 						subActiveTabReject={subActiveTabReject}
 						remarkDate={remarkDate}
 						setRemarkDate={setRemarkDate}
+						handlePieChartOnClick={handlePieChartOnClick}
 					/>
 				)}
 

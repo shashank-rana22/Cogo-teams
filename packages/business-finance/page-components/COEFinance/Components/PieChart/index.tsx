@@ -11,6 +11,7 @@ function MyResponsivePie({
 	subActiveTabReject = '',
 	setRemarkDate = () => {},
 	remarkDate = undefined,
+	handlePieChartOnClick = () => {},
 }) {
 	return (
 		<>
@@ -47,6 +48,7 @@ function MyResponsivePie({
 
 			<ResponsivePie
 				data={data}
+				onClick={handlePieChartOnClick}
 				margin={{ top: 20, right: 10, bottom: 80, left: 300 }}
 				startAngle={-180}
 				activeOuterRadiusOffset={8}
