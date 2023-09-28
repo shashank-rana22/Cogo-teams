@@ -45,7 +45,7 @@ interface ItemProps {
 }
 interface Props {
 	filters: GenericObject;
-	setFilters: (p: object) => void;
+	setFilters: (p?: object) => void;
 	subActiveTabReject: string | undefined;
 }
 
@@ -93,10 +93,15 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 
 	return (
 		<div>
+			{
+			(subActiveTabReject === 'coe_rejected' || subActiveTabReject === 'coe_on_hold') ? (
+				<RejectedCharts
+					subActiveTabReject={subActiveTabReject}
+					setFilters={setFilters}
+				/>
+			) : null
+			}
 
-			<RejectedCharts
-				subActiveTabReject={subActiveTabReject}
-			/>
 			<SegmentedFilters
 				filters={filters}
 				setFilters={setFilters}
