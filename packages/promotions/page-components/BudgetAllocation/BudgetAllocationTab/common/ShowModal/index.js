@@ -1,7 +1,9 @@
 import { Modal, Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
 import Layout from '../../../../../common/Layout';
+import RadioOptions from '../../controls/budget-allocation-radio';
 import useBudgetAllocation from '../../hooks/useBudgetAllocation';
 
 import styles from './styles.module.css';
@@ -13,14 +15,21 @@ function ShowModal({
 	refetch = () => {},
 	showForm = () => {},
 	reset = () => {},
-	radiohandleSubmit = () => {},
-	radioErrors = {},
-	radioReset = () => {},
-	radioControl = {},
-	radioControls = {},
-	radioWatch = {},
+
 }) {
 	const [showErrorModal, setShowErrorModal] = useState(false);
+	const DEFAULT_VALUES = {};
+
+	const {
+		control: radioControl,
+		handleSubmit: radiohandleSubmit,
+		formState: { errors: radioErrors },
+		reset: radioReset,
+		watch: radioWatch,
+	} = useForm({
+		defaultValues: DEFAULT_VALUES,
+	});
+	const radioControls = RadioOptions;
 	const closeModal = () => {
 		setShowModal(false);
 		setShowErrorModal(false);
@@ -72,7 +81,7 @@ function ShowModal({
 								errors={radioErrors}
 							/>
 							{radioErrors.radio ? (
-								<div className="align-left">Select any one option</div>
+								<div className={styles.align_left}>Select any one option</div>
 							) : null}
 						</div>
 						<div className={styles.button_flex}>

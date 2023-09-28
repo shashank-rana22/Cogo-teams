@@ -9,7 +9,6 @@ import BudgetAllocate from './components/BudgetAllocate';
 import CreateAllocationCard from './components/CreateAllocationCard';
 import ViewModal from './components/ViewModal';
 import BudgetAllocationControls from './controls/budget-allocation-form-controls';
-import RadioOptions from './controls/budget-allocation-radio';
 import RoleOptions from './controls/budget-allocation-role';
 import useListPromoBudgetAllocation from './hooks/useListPromoBudgetAllocations';
 import styles from './styles.module.css';
@@ -46,17 +45,6 @@ function BudgetAllocationTab() {
 		defaultValues: DEFAULT_VALUES,
 	});
 	const controls = BudgetAllocationControls;
-
-	const {
-		control: radioControl,
-		handleSubmit: radiohandleSubmit,
-		formState: { errors: radioErrors },
-		reset: radioReset,
-		watch: radioWatch,
-	} = useForm({
-		defaultValues: DEFAULT_VALUES,
-	});
-	const radioControls = RadioOptions;
 
 	const {
 		loading,
@@ -102,7 +90,6 @@ function BudgetAllocationTab() {
 					setFormData={setFormData}
 					setShowModal={setShowModal}
 					setFormButton={setFormButton}
-					formButton={formButton}
 					control={control}
 					controls={controls}
 					handleSubmit={handleSubmit}
@@ -151,7 +138,6 @@ function BudgetAllocationTab() {
 			</div>
 			{(showViewModal && selectedDetails) ? (
 				<ViewModal
-					showViewModal={showViewModal}
 					setShowViewModal={setShowViewModal}
 					selectedDetails={selectedDetails}
 					refetchListBudgetAllocation={refetch}
@@ -165,12 +151,6 @@ function BudgetAllocationTab() {
 					refetch={refetch}
 					showForm={showForm}
 					reset={reset}
-					radiohandleSubmit={radiohandleSubmit}
-					radioErrors={radioErrors}
-					radioReset={radioReset}
-					radioControl={radioControl}
-					radioControls={radioControls}
-					radioWatch={radioWatch}
 				/>
 			) : null}
 		</div>

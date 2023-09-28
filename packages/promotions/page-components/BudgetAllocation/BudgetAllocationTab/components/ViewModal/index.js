@@ -6,14 +6,13 @@ import Layout from '../../../../../common/Layout';
 import tableColumns from '../../configurations/promo-budget-details-table';
 import controls from '../../controls/search-controls';
 import useGetPromoAllocationDetail from '../../hooks/useGetPromoAllocationDetail';
-import StyledTableComponent from '../StyledTableComponent';
+import TableView from '../TableView';
 
 import formattedData from './FormattedData';
 import styles from './styles.module.css';
 
 function ViewModal({
 	setShowViewModal = () => {},
-	showViewModal = false,
 	selectedDetails = {},
 	refetchListBudgetAllocation = () => {},
 }) {
@@ -49,7 +48,7 @@ function ViewModal({
 
 	return (
 		<Modal
-			show={showViewModal}
+			show
 			onClose={closeModal}
 			showCloseIcon
 			onOuterClick={closeModal}
@@ -78,7 +77,7 @@ function ViewModal({
 						}}
 					/>
 				</div>
-				<StyledTableComponent
+				<TableView
 					columns={tableColumns}
 					formattedData={formattedData({
 						promoAllocationList,

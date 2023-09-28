@@ -17,12 +17,15 @@ function BlockUser({ item = {}, refetch = () => {} }) {
 					UnBlock
 				</Button>
 			)}
-			<BlockUserModal
-				block={block}
-				refetch={refetch}
-				item={item}
-				setBlock={setBlock}
-			/>
+			{block
+				? (
+					<BlockUserModal
+						refetch={refetch}
+						item={item}
+						setBlock={setBlock}
+					/>
+				)
+				: null}
 		</>
 	);
 }

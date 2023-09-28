@@ -1,12 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
 const useGetPromoAllocationDetail = ({ selectedDetails = {} }) => {
-	const {
-		general: { scope = '' },
-	} = useSelector((state) => state);
 	const [List, setList] = useState([]);
 	const [filterValue, setFilterValue] = useState('');
 
@@ -17,7 +13,6 @@ const useGetPromoAllocationDetail = ({ selectedDetails = {} }) => {
 		{
 			url    : '/get_promotion_budget_allocation_detail',
 			method : 'GET',
-			scope,
 			params : {
 				page    : pagination?.page,
 				filters : {

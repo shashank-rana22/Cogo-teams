@@ -4,7 +4,7 @@ import useBlockUserBudgetAllocation from '../../../hooks/useBlockUserBudgetAlloc
 
 import styles from './styles.module.css';
 
-function BlockUserModal({ block = false, setBlock = () => {}, item = {}, refetch = () => {} }) {
+function BlockUserModal({ setBlock = () => {}, item = {}, refetch = () => {} }) {
 	const onClose = () => {
 		setBlock(false);
 	};
@@ -15,7 +15,7 @@ function BlockUserModal({ block = false, setBlock = () => {}, item = {}, refetch
 	const { loading = true, blockUserBudget = () => {} } = useBlockUserBudgetAllocation(blockAndRefetch);
 	return (
 		<Modal
-			show={block}
+			show
 			position="primary sm"
 			onOuterClick={onClose}
 			onClose={onClose}

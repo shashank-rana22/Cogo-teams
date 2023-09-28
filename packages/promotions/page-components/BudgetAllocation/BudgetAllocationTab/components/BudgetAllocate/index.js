@@ -1,7 +1,7 @@
 import { Pagination } from '@cogoport/components';
 
 import tableColumns from '../../configurations/budget-allocation-table-colum';
-import StyledTableComponent from '../StyledTableComponent';
+import TableView from '../TableView';
 
 import formattedData from './FormattedData';
 import styles from './styles.module.css';
@@ -19,7 +19,7 @@ function BudgetAllocate({
 
 	return (
 		<div className={styles.container}>
-			<StyledTableComponent
+			<TableView
 				columns={tableColumns}
 				formattedData={
 					formattedData({

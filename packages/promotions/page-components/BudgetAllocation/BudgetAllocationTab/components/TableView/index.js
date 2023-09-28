@@ -4,9 +4,7 @@ import React from 'react';
 
 import EmptyState from '../EmptyState';
 
-import styles from './styles.module.css';
-
-function StyledTableComponent({
+function TableView({
 	loading = false,
 	columns = [],
 	formattedData = [],
@@ -16,12 +14,10 @@ function StyledTableComponent({
 			{(!loading && isEmpty(formattedData)) ? (
 				<EmptyState />
 			) : (
-				<div className={styles.table}>
-					<Table loading={loading} columns={columns} data={formattedData} />
-				</div>
+				<Table loading={loading} columns={columns} data={formattedData} />
 			)}
 		</div>
 	);
 }
 
-export default StyledTableComponent;
+export default TableView;

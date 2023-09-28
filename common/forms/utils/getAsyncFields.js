@@ -698,7 +698,6 @@ function asyncListRoles() {
 		},
 	};
 }
-
 function asyncListDepartment() {
 	return {
 		labelKey    : 'department_name',
@@ -1010,18 +1009,14 @@ function asyncListOverSeasTradeParties() {
 	};
 }
 
-function asyncListAdminRole() {
+function asyncListEnrichmentSources() {
 	return {
-		valueKey    : 'id',
-		labelKey    : 'name',
-		endpoint    : 'list_roles',
-		initialCall : true,
-		params      : {
-			filters: {
-				status: true,
-			},
-			page_limit: 200,
-		},
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/list_enrichment_sources',
+		authkey      : 'get_enrichment_sources',
+		microService : 'athena',
+		initialCall  : true,
 	};
 }
 
@@ -1107,5 +1102,5 @@ export {
 	asyncListFclFreightCommodityClusters,
 	asyncListSpotSearchRateCardOperators,
 	asyncListOverSeasTradeParties,
-	asyncListAdminRole,
+	asyncListEnrichmentSources,
 };
