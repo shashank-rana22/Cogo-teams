@@ -17,14 +17,17 @@
 .calender {
 	position: absolute;
 	right: 0;
-	bottom: 150px;
-	z-index: 10;
+	bottom: 110px;
+	z-index: 99;
 	display: flex;
 	align-items: center;
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
 	cursor: pointer;
-	background: #5a88fb;
+	background-color: #5a88fb;
 	border-radius: 20px 0 0 20px;
-	transition: 0.5s ease;
+	transition: 0.5s;
 
 	&:hover {
 		width: 110px;

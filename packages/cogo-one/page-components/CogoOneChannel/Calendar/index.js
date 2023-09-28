@@ -18,8 +18,8 @@ function Calendar() {
 				<div className={styles.icon}>
 					<Image
 						src={GLOBAL_CONSTANTS.image_url.calendar}
-						height={26}
-						width={26}
+						height={28}
+						width={28}
 						alt="calender"
 					/>
 				</div>

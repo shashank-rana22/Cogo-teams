@@ -224,6 +224,10 @@ function BgCalender({ setSelectedEventData = () => {}, setAddEvents = () => {} }
 		[],
 	);
 
+	const handleMonthChange = (newDate) => {
+		console.log('newDate:', newDate);
+	};
+
 	return (
 
 		<div className={styles.container}>
@@ -239,6 +243,7 @@ function BgCalender({ setSelectedEventData = () => {}, setAddEvents = () => {} }
 				onSelectEvent={handleEventClick}
 				dayPropGetter={customDayPropGetter}
 				eventPropGetter={eventPropGetter}
+				onNavigate={handleMonthChange}
 			/>
 		</div>
 	);
