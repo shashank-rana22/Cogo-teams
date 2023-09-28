@@ -1,6 +1,5 @@
 import { dynamic } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
-import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useContext } from 'react';
 
 import Search from '../../commons/Search';
@@ -51,9 +50,7 @@ export default function FclDesk() {
 					/>
 				</div>
 
-				<ShipmentChat />
-
-				<ScopeSelect size="md" defaultValues={scopeFilters} />
+				<ScopeSelect size="md" defaultValues={scopeFilters} className={styles.scope_select_styles} />
 			</div>
 
 			<div className={styles.flex_row}>

@@ -38,13 +38,14 @@
     "i18next": "^22.4.10",
     "next": "13.1.6",
     "next-i18next": "^13.2.1",
-    "react-i18next": "^12.1.4",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-i18next": "^12.1.4"
   },
   "devDependencies": {
     "@cogoport/eslint-config": "2.0.9",
     "@cogoport/stylelint-config": "^1.0.3",
     "@svgr/webpack": "^6.5.1",
+    "dotenv": "^16.0.3",
     "eslint": "^8.42.0",
     "eslint-plugin-custom-eslint": "link:node_modules/@cogoport/eslint-config/packages/custom-eslint",
     "fs-extra": "^11.1.1",
@@ -57,8 +58,7 @@
     "postcss-preset-env": "^8.4.2",
     "stylelint": "^14.16.1",
     "turbo": "^1.10.2",
-    "turbo-darwin-64": "^1.10.3",
-    "dotenv": "^16.0.3"
+    "turbo-darwin-64": "^1.10.3"
   },
   "packageManager": "pnpm@7.15.0"
 }

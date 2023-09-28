@@ -36,6 +36,7 @@ const CONFIG_MAPPING = {
 	ftl_ground_ops        : ftlGroundOps,
 	field_service_ops     : fieldExecutiveAgent,
 	operation_manager     : adminConfig,
+	kam_admin             : bookingAgent,
 };
 
 const stakeholderConfig = ({ stakeholder, authParams = '' }) => {
