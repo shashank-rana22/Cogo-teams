@@ -15,6 +15,7 @@ import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
 import RejectedCharts from './RejectedChart/index';
 import RenderActionButton from './RenderActionButton';
+// import RenderApprovalStatus from './RenderApprovalStatus';
 import RenderTicket from './RenderTicket';
 import SegmentedFilters from './SegmentedFilters';
 
@@ -86,7 +87,8 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 			<RenderTicket itemData={itemData} />
 		),
 		renderApprovalStatus: () => (
-			<div>-</div>
+			// <RenderApprovalStatus itemData={itemData} />
+			<h1>hello</h1>
 		),
 	};
 
