@@ -1,15 +1,11 @@
-import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
-import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-function useGetListSupplier({ setViewSelectedInvoice = () => {}, setSavePayrunModal = () => {}, type = '' }) {
-	const { push } = useRouter();
-
+function useGetListSupplier() {
 	const { query: urlQuery = {} } = useSelector(({ general }) => ({
 		query: general.query,
 	}));
@@ -37,30 +33,14 @@ function useGetListSupplier({ setViewSelectedInvoice = () => {}, setSavePayrunMo
 	}, [debounceQuery, search]);
 
 	useEffect(() => {
-		try {
-			trigger({ params: { payrunId: payrun, searchType: query || undefined } });
-		} catch (e) {
-			toastApiError(e);
+		if (payrun) {
+			try {
+				trigger({ params: { payrunId: payrun, searchType: query || undefined } });
+			} catch (e) {
+				toastApiError(e);
+			}
 		}
 	}, [payrun, trigger, query]);
-
-	const handleClick = () => {
-		setViewSelectedInvoice(false);
-
-		if (payrun && type === 'audit') {
-			push(
-				'/business-finance/account-payables/audit/[payrun_id]',
-				`/business-finance/account-payables/audit/${payrun}`,
-			);
-		} else {
-			push(
-				'/business-finance/account-payables/[active_tab]',
-				'/business-finance/account-payables/payruns',
-			);
-		}
-		setSavePayrunModal(false);
-		Toast.success('Please wait while Payrun Saves...');
-	};
 
 	useEffect(() => {
 		setApiData(data);
@@ -70,9 +50,7 @@ function useGetListSupplier({ setViewSelectedInvoice = () => {}, setSavePayrunMo
 		loading,
 		setFilters,
 		suppliers: apiData,
-		trigger,
 		setApiData,
-		handleClick,
 	};
 }
 

@@ -44,6 +44,11 @@ const welcome = [
 		access_type  : 'private',
 		service_name : 'cogo_academy',
 	},
+	{
+		api          : 'update_partner_user',
+		access_type  : 'private',
+		service_name : 'partner',
+	},
 ];
 
 export default welcome;

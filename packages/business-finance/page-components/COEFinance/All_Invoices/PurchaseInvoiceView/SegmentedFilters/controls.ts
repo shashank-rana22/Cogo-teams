@@ -22,6 +22,7 @@ const controls = [
 			{ label: 'Short Transit Shipment', value: 'short_transit_shipment' },
 			{ label: 'Co-ordination Charges', value: 'coordination_charges' },
 			{ label: 'SEZ Shipment', value: 'sez_shipment' },
+			{ label: 'THC', value: 'thc' },
 		],
 	},
 ];
