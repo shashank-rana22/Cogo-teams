@@ -63,6 +63,7 @@ function ShipmentDetails() {
 		finance_superadmin       : Superadmin,
 		finops_manager           : Superadmin,
 		so1_revenue_desk         : Superadmin,
+		data_superadmin          : Superadmin,
 		default                  : () => (
 			<h1 className={styles.not_allowed}>
 				You are not allowed to visit this page!

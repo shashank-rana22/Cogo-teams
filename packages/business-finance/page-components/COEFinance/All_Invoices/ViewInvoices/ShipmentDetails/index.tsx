@@ -7,7 +7,7 @@ import {
 	IcADocumentTemplates,
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
 import useGetDocumentContent from '../../../hook/useGetDocumentContent';
@@ -181,6 +181,20 @@ function ShipmentDetails({
 
 	const [value, onChange] = useState([]);
 
+	useEffect(() => {
+		if (jobType === 'CONSOLIDATED') {
+			// clearing timeline elements that are not included in case of consolidated
+			setCheckItem((prev:any) => {
+				const newCheckItem = { ...prev };
+				newCheckItem.shipmentDetailsCheck = true;
+				delete newCheckItem?.documentsCheck;
+				delete newCheckItem?.sidDataCheck;
+				delete newCheckItem?.taggingCheck;
+				return { ...newCheckItem };
+			});
+		}
+	}, [jobType, setCheckItem]);
+
 	return (
 		<div className={styles.container}>
 			<h3>
@@ -273,6 +287,7 @@ function ShipmentDetails({
 								showTab={tab.taggingTab}
 								taggingChecked={checkItem.taggingCheck}
 								mappingsData={mappingsData}
+								setCheckItem={setCheckItem}
 							/>
 						</div>
 					) : undefined}
