@@ -1,4 +1,5 @@
 import { BarDatum, ResponsiveBar } from '@cogoport/charts/bar';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 const TOOL_TIPS_STYLE = {
@@ -11,6 +12,7 @@ const TOOL_TIPS_STYLE = {
 };
 
 interface BarchartProps {
+	currencyType?: string | number,
 	data?: BarDatum[],
 	margin?: object,
 	dsoResponse?: boolean
@@ -35,6 +37,7 @@ const getAmountInLakhCrK = (value:number) => {
 export { getAmountInLakhCrK };
 
 function BarChart({
+	currencyType,
 	data = [],
 	margin = {},
 	dsoResponse = false,
@@ -72,9 +75,18 @@ function BarChart({
 						:
 						{' '}
 						<tspan color="#000">
-							{
-							parseFloat(value.toFixed(2))
-							}
+							{!dsoResponse ? (formatAmount({
+								amount   : value,
+								currency : currencyType as string,
+								options  : {
+									currencyDisplay       : 'code',
+									compactDisplay        : 'short',
+									maximumFractionDigits : 2,
+									style                 : 'currency',
+								},
+							}))
+								: (parseFloat(value.toFixed(2)))}
+
 						</tspan>
 					</strong>
 				)}
@@ -93,8 +105,18 @@ function BarChart({
 							>
 								{' '}
 								{
-								parseFloat(bar.data.value.toFixed(2))
-								}
+								!dsoResponse ? (formatAmount({
+									amount   : bar.data.value as any,
+									currency : currencyType as string,
+									options  : {
+										notation              : 'compact',
+										currencyDisplay       : 'code',
+										compactDisplay        : 'short',
+										maximumFractionDigits : 2,
+										style                 : 'currency',
+									},
+								})) : (parseFloat(bar.data.value.toFixed(2)))
+							}
 								{' '}
 								{' '}
 							</text>
