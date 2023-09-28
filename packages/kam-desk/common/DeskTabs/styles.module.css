@@ -9,31 +9,3 @@
 	overflow-x: hidden;
 	scroll-behavior: smooth;
 }
-
-.btn_left {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 4px;
-	padding-right: 12px;
-	background: transparent;
-	border: none;
-
-	:global(.ui_buttonicon_container) {
-		background-color: #f8f5ec;
-	}
-}
-
-.btn_right {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 4px;
-	padding-left: 12px;
-	background: transparent;
-	border: none;
-
-	:global(.ui_buttonicon_container) {
-		background-color: #f8f5ec;
-	}
-}

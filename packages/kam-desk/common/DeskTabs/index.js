@@ -78,12 +78,12 @@ function DeskTabs() {
 	return (
 		<div className={styles.container}>
 
-			{ tabs_container_width > windowSize ? (
+			{tabs_container_width > windowSize ? (
 				<ButtonIcon
 					size="md"
 					icon={<IcMArrowRotateLeft width={20} height={20} />}
 					onClick={() => slide(-scrollWidth)}
-					className={styles.btn_left}
+					style={{ backgroundColor: 'transparent' }}
 				/>
 			) : null}
 
@@ -108,7 +108,7 @@ function DeskTabs() {
 					size="md"
 					icon={<IcMArrowRotateRight width={20} height={20} />}
 					onClick={() => slide(scrollWidth)}
-					className={styles.btn_right}
+					style={{ backgroundColor: 'transparent' }}
 				/>
 			) : null}
 		</div>
