@@ -98,7 +98,7 @@ const constAdvocateConfig = (subActiveTabReject) => ({
 		{
 			label      : 'Ticket',
 			key        : 'status',
-			span       : 0.8,
+			span       : 1.8,
 			func       : 'renderTicket',
 			hideColumn : subActiveTabReject === 'finance_rejected',
 		},
