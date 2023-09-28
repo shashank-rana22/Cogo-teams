@@ -17,10 +17,14 @@ const useListRevenueDeskWallet = () => {
 	const listRevenueDesk = useCallback(async () => {
 		try {
 			await trigger({
-				params: { service_type: service_type === 'all' ? undefined : service_type, status: 'active' }
-			|| {},
-				page,
-				pagination_data_required: true,
+				params: {
+					filters: {
+						status       : 'active',
+						service_type : service_type === 'all' ? undefined : service_type,
+					},
+					page,
+					pagination_data_required: true,
+				},
 			});
 		} catch (error) {
 			// console.log(error);

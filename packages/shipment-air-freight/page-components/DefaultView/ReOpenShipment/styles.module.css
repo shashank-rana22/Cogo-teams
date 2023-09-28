@@ -1,24 +1,14 @@
 .request_reopen {
 	margin: 3px 5px 0 0;
-	color: red;
+	font-weight: 600;
+
+	& span {
+		color: var(--color-primary-error-red-2);
+	}
 }
 
 .details {
 	display: flex;
-
-	& div {
-		display: flex;
-		flex-direction: column;
-		margin-right: 16px;
-	}
-
-	& span {
-		font-weight: 500;
-	}
-
-	.label {
-		font-size: var(--font-size-md);
-	}
 }
 
 .modal_footer {
