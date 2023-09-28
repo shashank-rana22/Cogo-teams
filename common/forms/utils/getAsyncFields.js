@@ -1002,7 +1002,7 @@ function asyncListOverSeasTradeParties() {
 		valueKey     : 'organizationId',
 		labelKey     : 'organizationName',
 		endpoint     : '/purchase/bills/list-overseas-trade-parties',
-		authkey      : 'list-overseas-trade-parties',
+		authkey      : 'get_purchase_bills_list_overseas_trade_parties',
 		initialCall  : false,
 		microService : 'business_finance',
 		searchByq    : true,
