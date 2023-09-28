@@ -279,6 +279,7 @@ export default {
 		cogo_one_kyc              : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
 		finance_branch_accounts   : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
 		service_ops3              : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
+		kam_admin                 : 'df6591f0-f41b-4283-9966-7d0225e1df00', // Kam Admin Vietnam
 	},
 	options: {
 		registration_types: [
