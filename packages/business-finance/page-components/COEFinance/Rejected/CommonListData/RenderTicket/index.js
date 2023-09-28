@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 const START_INDEX = 0;
 const MAX_LENGTH = 5;
 
-function RenderTicket({ itemData = {} }) {
+function RenderTicket({ itemData = {}, setModalData = () => { } }) {
 	const ticketIds = itemData?.ticketIds;
 	const router = useRouter();
 
@@ -19,19 +19,23 @@ function RenderTicket({ itemData = {} }) {
 		<div className={styles.ticket_ids}>
 			{ticketIds?.slice(START_INDEX, MAX_LENGTH)?.map((ticketId, index) => (
 				<div key={ticketId}>
-					<div>
+					<div
+						role="presentation"
+						style={{ cursor: 'pointer' }}
+						onClick={() => setModalData({ ticketId })}
+					>
 						{index > START_INDEX && ', '}
-						{ticketId }
+						{ticketId}
 					</div>
 				</div>
 			))}
 			{!isEmpty(ticketIds)
-			&& (
-				<IcMArrowNext
-					onClick={routeHandler}
-					className={styles.redirect_button}
-				/>
-			)}
+				&& (
+					<IcMArrowNext
+						onClick={routeHandler}
+						className={styles.redirect_button}
+					/>
+				)}
 		</div>
 	);
 }
