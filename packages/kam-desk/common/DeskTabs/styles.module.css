@@ -1,11 +1,35 @@
-.tabs_container {
-	:global {
-		.ui_tabs_container {
-			overflow: scroll auto;
-		}
+.container {
+	display: flex;
+	align-items: center;
+	margin-top: 12px;
+}
 
-		.ui_tabs_container::-webkit-scrollbar {
-			display: none !important;
-		}
+.tabs_container {
+	max-width: 100%;
+	overflow-x: scroll;
+	scroll-behavior: smooth;
+	white-space: nowrap;
+	scrollbar-width: none;
+
+	::-webkit-scrollbar {
+		display: none;
 	}
+}
+
+.tabs {
+	::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.btn_left {
+	margin-right: 4px;
+	background-color: #f8f5ec;
+	border: none;
+}
+
+.btn_right {
+	margin-left: 4px;
+	background-color: #f8f5ec;
+	border: none;
 }
