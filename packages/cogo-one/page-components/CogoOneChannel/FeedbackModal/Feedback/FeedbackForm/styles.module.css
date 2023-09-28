@@ -65,6 +65,10 @@
 		.ui_checkbox_container {
 			padding: 0;
 		}
+
+		.ui_upload_droparea_container {
+			margin: 0;
+		}
 	}
 }
 

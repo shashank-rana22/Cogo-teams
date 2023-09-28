@@ -15,6 +15,7 @@ function Card({
 	Status: status = '',
 	Description: description = '',
 	Data: data = {},
+	IsUrgent: isUrgent = false,
 	Type: issueType = '',
 	setModalData = () => {},
 }) {
@@ -55,6 +56,7 @@ function Card({
 				<div className={styles.footer}>
 
 					<div className={styles.date}>
+						{isUrgent ? <div className={styles.critical}>Critical</div> : null}
 						{formatDate({
 							date       : createdAt,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/mm/yyyy'],
