@@ -113,7 +113,7 @@ export default {
 			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse KAM
 			'6bd7a08c-974c-4dd0-b163-d4c31e794fba', // Vietnam KAM
 			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // Shipment Specialist
-			'1d75bd83-710c-4b63-b1a6-f0eb7f16c25a', // Vietnam KAM
+			// '1d75bd83-710c-4b63-b1a6-f0eb7f16c25a', // Vietnam KAM
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
@@ -288,7 +288,7 @@ export default {
 		cogo_one_kyc              : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
 		finance_branch_accounts   : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
 		service_ops3              : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
-		kam_admin                 : '7404d67b-bbf0-4194-87a8-9a2ebd57f398', // Kam Admin Vietnam
+		kam_admin                 : '1d75bd83-710c-4b63-b1a6-f0eb7f16c25a', // Kam Admin Vietnam
 	},
 	options: {
 		registration_types: [
