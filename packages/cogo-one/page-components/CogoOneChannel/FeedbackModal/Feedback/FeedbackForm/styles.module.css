@@ -69,6 +69,10 @@
 		.ui_upload_droparea_container {
 			margin: 0;
 		}
+
+		.ui_upload_filesuccess_container span {
+			width: 75%;
+		}
 	}
 }
 
