@@ -1,4 +1,4 @@
-import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
+import { Button, cl, Textarea } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -21,7 +21,6 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const {
 		utr = '', paymentAmount = '', currency = '',
 	} = paymentConfirmationRequest || {};
-	const { name = '' } = row?.createdBy || {};
 
 	const { onAction = () => {}, loading = false } = usePaymentConfirm({
 		refetch,
@@ -40,18 +39,11 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 					<div className={styles.title}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							<Tooltip
-								interactive
-								content={(tradePartyName || businessName || '')}
-							>
-								<div>{(tradePartyName || businessName || '')}</div>
-							</Tooltip>
+
+							{(tradePartyName || businessName || '')}
+
 						</div>
 					</div>
-				</div>
-				<div className={styles.medium}>
-					<div className={styles.title}>Requested By</div>
-					<div className={styles.text}>{name || '-'}</div>
 				</div>
 			</div>
 			<div className={styles.line} />
