@@ -127,14 +127,22 @@
 	margin: 20px 20px 32px 0;
 }
 
-.label_value {
-	font-size: 12px;
-}
-
 .date_value {
 	font-size: var(--font-size-md);
-	font-weight: 500;
-	color: #f68b21;
+	font-weight: 600;
+}
+
+.value_data:first-child {
+	.date_value {
+		font-size: var(--font-size-md);
+		font-weight: 600;
+		color: #f68b21;
+		text-decoration: underline;
+	}
+}
+
+.label_value {
+	font-size: var(--font-size-md);
 }
 
 .credit {
@@ -181,7 +189,7 @@
 
 	:global {
 		.ui_table_head_cell {
-			min-width: 80px;
+			min-width: 72px;
 		}
 
 		.ui_table_head_cell:first-child {
@@ -221,5 +229,5 @@
 }
 
 .tooltip_title {
-	width: fit-content;
+	width: 200px;
 }

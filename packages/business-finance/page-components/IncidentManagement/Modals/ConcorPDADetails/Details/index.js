@@ -61,7 +61,7 @@ function Details({
 								interactive
 								content={(beneficiaryName || '')}
 							>
-								<div className={styles.wrapper}>{(beneficiaryName || '')}</div>
+								<div>{(beneficiaryName || '')}</div>
 							</Tooltip>
 						</div>
 					</div>

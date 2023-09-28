@@ -27,7 +27,8 @@
 .container_view {
 	display: flex;
 	justify-content: space-between;
-	height: max-content;
+	height: fit-content;
+	min-height: 660px;
 	margin-top: 12px;
 }
 
@@ -36,7 +37,7 @@
 	margin-bottom: 10px;
 
 	h3 {
-		margin-bottom: 0;
+		margin: 24px 0 0;
 	}
 }
 

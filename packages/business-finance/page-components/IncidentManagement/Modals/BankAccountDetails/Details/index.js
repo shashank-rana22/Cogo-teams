@@ -68,7 +68,7 @@ function Details({
 								interactive
 								content={(tradePartyName || businessName || '')}
 							>
-								<div className={styles.wrapper}>{(tradePartyName || businessName || '')}</div>
+								<div>{(tradePartyName || businessName || '')}</div>
 							</Tooltip>
 						</div>
 					</div>
