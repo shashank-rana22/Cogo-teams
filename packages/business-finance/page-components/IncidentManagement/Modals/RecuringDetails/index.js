@@ -1,5 +1,4 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
@@ -13,7 +12,7 @@ function RecurringDetails({ row = {}, setDetailsModal = () => {}, refetch = () =
 	const {
 		level3 = {}, level2 = {}, level1 = {},
 		createdBy = {}, remark = '',
-		data: { reccuringExpenseApproval = {} },
+		data: { reccuringExpenseApproval = {} }, status = '', updatedBy = {},
 	} = row || {};
 	const docUrl = reccuringExpenseApproval?.proofDocuments?.[GLOBAL_CONSTANTS.zeroth_index];
 	const level0 = { ...createdBy, remark };
@@ -22,13 +21,9 @@ function RecurringDetails({ row = {}, setDetailsModal = () => {}, refetch = () =
 			<div className={styles.heading}>
 				Expense Configuration Approval
 			</div>
-			{
-			(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
-				<AllStakeHolderTimeline
-					timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3 })}
-				/>
-			)
-						}
+			<AllStakeHolderTimeline
+				timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3, status, updatedBy })}
+			/>
 			<div className={styles.request_heading}>
 
 				<h3>Request Details</h3>

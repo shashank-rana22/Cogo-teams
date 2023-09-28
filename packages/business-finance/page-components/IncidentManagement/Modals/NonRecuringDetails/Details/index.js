@@ -13,6 +13,8 @@ import { getFormatAmount } from '../../../utils/getformatamount';
 import { overHeadConfigs } from './overheadsConfigs';
 import styles from './styles.module.css';
 
+const MAX_LENGTH = 20;
+
 function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');

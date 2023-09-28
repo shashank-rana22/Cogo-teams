@@ -147,7 +147,7 @@ function Details({
 							themeType="primary"
 							disabled={isEmpty(remarkValue) || loading}
 							loading={loading}
-							onClick={() => { getData(STATUS_MAPPING.approved); }}
+							onClick={() => { getData(STATUS_MAPPING?.approved || ''); }}
 						>
 							Approve
 						</Button>

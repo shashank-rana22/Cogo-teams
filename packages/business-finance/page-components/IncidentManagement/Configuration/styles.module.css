@@ -100,3 +100,9 @@
 	background: var(--color-primary-yellow-4);
 	border-radius: 4px;
 }
+
+.request_header {
+	/* max-width: 150px; */
+
+	/* overflow: hidden; */
+}

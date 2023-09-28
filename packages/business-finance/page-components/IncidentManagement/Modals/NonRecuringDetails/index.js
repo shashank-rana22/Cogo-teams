@@ -1,5 +1,4 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
@@ -10,7 +9,10 @@ import Details from './Details';
 import styles from './styles.module.css';
 
 function RecuringDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
-	const { level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark = '' } = row || {};
+	const {
+		level3 = {}, level2 = {}, level1 = {}, createdBy = {},
+		remark = '', status = '', updatedBy = {},
+	} = row || {};
 	const level0 = { ...createdBy, remark };
 	const docUrl = row?.data?.overheadConfirmationRequest?.documents[GLOBAL_CONSTANTS.zeroth_index] || '';
 
@@ -19,13 +21,9 @@ function RecuringDetails({ row = {}, setDetailsModal = () => {}, refetch = () =>
 			<div className={styles.heading}>
 				Expense Approval
 			</div>
-			{
-			(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
-				<AllStakeHolderTimeline
-					timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3 })}
-				/>
-			)
-			}
+			<AllStakeHolderTimeline
+				timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3, status, updatedBy })}
+			/>
 			<div className={styles.request_heading}>
 
 				<h3>Request Details</h3>

@@ -25,8 +25,8 @@ function RenderSummary({ summary = [] }) {
 		<div className={styles.summary}>
 			{summary?.map((item) => (
 				<div key={item.title} className={styles.section}>
-					<div className={styles.title}>{item.title}</div>
-					<div className={styles.value}>{item.value}</div>
+					<div className={styles.title}>{item?.title || ''}</div>
+					<div className={styles.value}>{item?.value || ''}</div>
 				</div>
 			))}
 		</div>
@@ -34,7 +34,7 @@ function RenderSummary({ summary = [] }) {
 	);
 }
 
-const getSummaryDataOne = ({ agreementNumber, categoryName, cogoEntity, t }) => [
+const getSummaryDataOne = ({ agreementNumber = '', categoryName = '', cogoEntity = '', t }) => [
 	{
 		title : t('incidentManagement:entity_label'),
 		value : cogoEntity || '-',
@@ -50,11 +50,11 @@ const getSummaryDataOne = ({ agreementNumber, categoryName, cogoEntity, t }) => 
 ];
 
 const getSummaryDataTwo = ({
-	branchName,
-	currency,
-	maxPayoutAllowed,
-	ledgerMaxPayoutAllowed,
-	ledgerCurrency,
+	branchName = '',
+	currency = '',
+	maxPayoutAllowed = '',
+	ledgerMaxPayoutAllowed = '',
+	ledgerCurrency = '',
 	t,
 }) => [
 	{

@@ -1,5 +1,4 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
@@ -12,7 +11,7 @@ import styles from './styles.module.css';
 function SezApprovalDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const {
 		level3 = {}, level2 = {}, level1 = {},
-		createdBy = {}, remark = '', data: { sezRequest = {} },
+		createdBy = {}, remark = '', data: { sezRequest = {} }, status = '', updatedBy = {},
 	} = row || {};
 	const docUrl = sezRequest?.documentUrls?.[GLOBAL_CONSTANTS.zeroth_index];
 	const level0 = { ...createdBy, remark };
@@ -21,13 +20,9 @@ function SezApprovalDetails({ row = {}, setDetailsModal = () => {}, refetch = ()
 			<div className={styles.heading}>
 				SEZ Approval
 			</div>
-			{
-			(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
-				<AllStakeHolderTimeline
-					timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3 })}
-				/>
-			)
-						}
+			<AllStakeHolderTimeline
+				timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3, status, updatedBy })}
+			/>
 			<div className={styles.request_heading}>
 
 				<h3>Request Details</h3>
