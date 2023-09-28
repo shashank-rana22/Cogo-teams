@@ -1,25 +1,23 @@
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import Filters from '../common/Filters';
-import { IncidentDataInterface } from '../common/interface';
+import Filters from '../common/Filters/index.tsx';
 import getColumns from '../Configuration/newColumn';
-import StyledTable from '../StyledTable';
-// import getColumns from '../utils/getColumns';
+import StyledTable from '../StyleTable';
 
 function TabComponent({
-	activeTab,
-	incidentData,
-	setFilters,
-	filters,
-	isSettlementExecutive,
-	incidentLoading,
-	getIncidentData,
+	activeTab = '',
+	incidentData = {},
+	setFilters = () => {},
+	filters = {},
+	isSettlementExecutive = false,
+	incidentLoading = false,
+	getIncidentData = () => {},
 	detailsModal = {},
 	setDetailsModal = () => {},
-}:IncidentDataInterface) {
+}) {
 	const { t } = useTranslation(['incidentManagement']);
-	const [isAscendingActive, setIsAscendingActive] = useState();
+	const [isAscendingActive, setIsAscendingActive] = useState('');
 
 	const { list = [], paginationData } = incidentData || {};
 
