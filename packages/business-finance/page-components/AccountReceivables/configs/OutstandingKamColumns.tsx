@@ -60,7 +60,7 @@ export const outstandingKamColumn = ({ entityCode, t }) => [
 						{
 						formatCurrency(
 							GLOBAL_CONSTANTS.cogoport_entities[entityCode]?.currency,
-							getByKey(row, 'open_invoice_amount'),
+							getByKey(row, 'open_invoice_amount') as any,
 						)
 						}
 					</div>
@@ -93,7 +93,7 @@ export const outstandingKamColumn = ({ entityCode, t }) => [
 						{
 						formatCurrency(
 							GLOBAL_CONSTANTS.cogoport_entities[entityCode]?.currency,
-							getByKey(row, 'total_outstanding_amount'),
+							getByKey(row, 'total_outstanding_amount') as any,
 						)
 						}
 					</div>
