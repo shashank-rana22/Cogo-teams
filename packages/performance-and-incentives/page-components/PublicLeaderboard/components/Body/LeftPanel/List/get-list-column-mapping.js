@@ -2,6 +2,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const ZERO_SCORE = 0;
+
 const getListColumnMapping = (props) => {
 	const { view } = props;
 
@@ -30,7 +32,7 @@ const getListColumnMapping = (props) => {
 			key      : 'score',
 			flex     : 1.5,
 			Header   : <div className={styles.top_heading}>Score</div>,
-			accessor : ({ total_score }) => (isEmpty(total_score) ? null
+			accessor : ({ total_score }) => (total_score === ZERO_SCORE ? 'NA'
 				: <p className={styles.row_item}>{total_score}</p>),
 		},
 		{
