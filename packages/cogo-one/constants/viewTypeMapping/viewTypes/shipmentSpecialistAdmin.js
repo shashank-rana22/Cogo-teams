@@ -7,7 +7,8 @@ import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SHIPMENT_SPECIALIST_ADMIN = {
 	chat_tabs_to_be_shown : ['message', 'voice', 'firebase_emails'],
-	all_chats_base_query  : ({ userSharedEmails }) => (isEmpty(userSharedEmails) ? []
+	all_chats_base_query  : ({ userSharedEmails, agentId }) => (isEmpty(userSharedEmails)
+		? [where('support_agent_id', '==', agentId)]
 		: [where('source', 'in', userSharedEmails)]),
 	group_chats_query             : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 	session_type_query            : () => [where('session_type', '==', 'admin')],
