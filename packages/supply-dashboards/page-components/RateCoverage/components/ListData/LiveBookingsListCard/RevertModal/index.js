@@ -12,7 +12,6 @@ const MIN_CHARGEABLE_WEIGHT = 45;
 const MAX_WEIGHT_SLAB = 500;
 
 function RevertModal({
-	addRateForm, setAddRateForm,
 	modalState = {}, setModalState = () => {}, userId = '', shipmentFlashBookingRates = () => {},
 }) {
 	const { data } = modalState || {};
@@ -46,10 +45,10 @@ function RevertModal({
 
 	return (
 		<Modal
-			show={addRateForm}
+			show={modalState}
 			size="lg"
 			placement="center"
-			onClose={() => setAddRateForm({ isOpen: false, data: {} })}
+			onClose={() => setModalState(!modalState, { data: {} })}
 		>
 			<Modal.Header title="ADD PRICE" />
 			<Modal.Body>
@@ -60,10 +59,9 @@ function RevertModal({
 					<Button
 						size="md"
 						themeType="accent"
-						onClick={() => setModalState({ isOpen: false, data: {} })}
+						onClick={() => setModalState(!modalState, { data: {} })}
 					>
 						Cancel
-
 					</Button>
 					<Button
 						className={styles.button_spacing}
