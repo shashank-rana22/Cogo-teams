@@ -1,3 +1,6 @@
+import { ButtonIcon } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMDelete } from '@cogoport/icons-react';
 import { useEffect } from 'react';
 
 import useGetShipmentAirCSROCRSheetData from '../../../../../../../hooks/useGetShipmentAirCSROCRSheetData';
@@ -17,6 +20,20 @@ function ChargeInformations({
 		getCSROCRData = () => {},
 		data = {},
 	} = useGetShipmentAirCSROCRSheetData({ index, setTerminalChargeState, sheetData });
+
+	const deleteItem = (keyToDelete) => {
+		const newObj = { ...terminalChargeState };
+		delete newObj[keyToDelete];
+		const SHIFTED_OBJ = {};
+		let newIndex = 0;
+
+		Object.keys(newObj).forEach((key) => {
+			SHIFTED_OBJ[newIndex] = newObj[key];
+			newIndex += INCREMENT_BY_ONE;
+		});
+
+		setTerminalChargeState(SHIFTED_OBJ);
+	};
 
 	useEffect(() => {
 		if (terminalChargeState[index] === 'fetching_data') {
@@ -57,7 +74,12 @@ function ChargeInformations({
 					csr_data={data}
 				/>
 			) : null}
-
+			{index > GLOBAL_CONSTANTS.zeroth_index
+			&& (
+				<div className={styles.delete_button}>
+					<ButtonIcon size="xl" icon={<IcMDelete />} themeType="primary" onClick={() => deleteItem(index)} />
+				</div>
+			)}
 		</div>
 	);
 }
