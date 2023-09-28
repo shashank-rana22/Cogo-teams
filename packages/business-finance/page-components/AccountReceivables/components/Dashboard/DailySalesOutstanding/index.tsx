@@ -192,7 +192,6 @@ function DailySalesOutstanding({
 
 					<div className={styles.vertical_bar_graph}>
 						<BarChart
-							currencyType=""
 							margin={MARGIN}
 							data={dailySalesOutstandingData || []}
 							dsoResponse
