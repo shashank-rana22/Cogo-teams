@@ -4019,6 +4019,16 @@ const partner = {
 			service_name : 'haulage_freight_rate',
 		},
 		{
+			api          : 'list_air_customs_rate_sheets',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
+		},
+		{
+			api          : 'list_air_customs_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -4052,6 +4062,11 @@ const partner = {
 			api          : 'update_trailer_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'update_air_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -4092,6 +4107,11 @@ const partner = {
 			api          : 'create_trailer_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'create_air_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
 		},
 		{
 			api          : 'list_emails',
@@ -5107,6 +5127,16 @@ const partner = {
 			service_name : 'haulage_freight_rate',
 		},
 		{
+			api          : 'list_air_customs_rate_sheets',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
+		},
+		{
+			api          : 'list_air_customs_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -5140,6 +5170,11 @@ const partner = {
 			api          : 'update_trailer_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'update_air_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -5200,6 +5235,11 @@ const partner = {
 			api          : 'create_trailer_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'create_air_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
 		},
 		{
 			api          : 'list_cogo_entities',
@@ -8597,6 +8637,22 @@ const partner = {
 			service_name : 'sage',
 		},
 		{
+			api          : 'list_communication_templates',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_email_suggestions',
+			access_type  : 'private',
+			service_name : 'cogolens',
+		},
+		{
+
+			api          : 'create_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_organization_communication_logs',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -9156,6 +9212,18 @@ const partner = {
 		},
 		{
 			api         : 'post_incident_management_incident_send_overhead_mail',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_post_tax_profit',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_pre_tax_profit',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_common_job_list_service_charges',
 			access_type : 'private',
 		},
 	],
@@ -11313,6 +11381,10 @@ const partner = {
 			api         : 'post_common_tax_bulk_upload',
 			access_type : 'private',
 		},
+		{
+			api         : 'post_common_tax_change_state_product_code',
+			access_type : 'private',
+		},
 	],
 	manual_invoice: [
 		{
@@ -12795,6 +12867,31 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'list_chat_channels',
+			access_type : 'private',
+		},
+		{
+			api         : 'delete_chat_message',
+			access_type : 'private',
+		},
+		{
+			api         : 'update_chat_message',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_chat_channel',
+			access_type : 'private',
+		},
+		{
+			api         : 'create_chat_channel',
+			access_type : 'private',
+		},
+		{
+			api         : 'update_chat_channel_seen',
+			access_type : 'private',
+
+		},
+		{
 			api         : 'get_air_coe_documents_list',
 			access_type : 'private',
 		},
@@ -13443,6 +13540,11 @@ const partner = {
 			api          : 'list_platform_config_constants',
 			access_type  : 'private',
 			service_name : 'platform_config',
+		},
+		{
+			api          : 'list_cogoone_shifts',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 	],
 	analytics_dashboard: [

@@ -4,12 +4,14 @@ import React, { useState } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
 import useApproveReject from '../../../hook/useApproveReject';
+import TimeLineItemCheck from '../ShipmentDetails/TimelineItemCheck';
 
 import styles from './styles.module.css';
 
 interface BillAdditionalInterface {
 	collectionPartyId?: string;
 }
+
 interface DataInterface {
 	billAdditionalObject?: BillAdditionalInterface;
 }
@@ -18,10 +20,13 @@ interface HeaderInterface {
 	remarksVal?: RemarksValInterface;
 	overAllRemark?:string;
 	setOverAllRemark?:Function;
-	lineItem?: boolean;
 	lineItemsRemarks: object;
 	status: string;
-	jobNumber?:string
+	jobNumber?:string;
+	checkItem?: any;
+	isTagFound?: boolean;
+	currentTab?: string;
+	jobType?: string;
 }
 
 function Header({
@@ -29,16 +34,19 @@ function Header({
 	remarksVal,
 	overAllRemark,
 	setOverAllRemark,
-	lineItem,
 	lineItemsRemarks,
 	status,
 	jobNumber,
+	checkItem = {},
+	isTagFound = false,
+	currentTab = '',
+	jobType = '',
 }: HeaderInterface) {
 	const [approve, setApprove] = useState(false);
 	const [modalData, setModalData] = useState('');
 	const Router = useRouter();
 	const billId = Router?.query?.billId;
-	const { isShipment } = Router?.query || {};
+	const { isShipment, searchValue } = Router?.query || {};
 
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId || '';
 
@@ -63,6 +71,8 @@ function Header({
 	|| remarksVal?.invoiceDetailsRemark?.length > 0
 	|| remarksVal?.taggingRemark?.length > 0;
 
+	const isItemNotChecked = Object.values(checkItem).some((item) => !item);
+
 	const getRoute = () => {
 		if (isShipment) {
 			return [
@@ -71,8 +81,9 @@ function Header({
 			];
 		}
 		return [
-			`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}`,
-			`/business-finance/coe-finance/all_invoices/purchase-view?jobNumber=${jobNumber}`,
+			`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}&searchValue=${searchValue}`,
+			`/business-finance/coe-finance/all_invoices/purchase-view?jobNumber=${jobNumber}
+			&searchValue=${searchValue}`,
 		];
 	};
 
@@ -86,6 +97,7 @@ function Header({
 						getRoute()[0],
 						getRoute()[1],
 					)}
+					style={{ border: '1px solid' }}
 				>
 					Go Back
 				</Button>
@@ -94,7 +106,7 @@ function Header({
 						size="md"
 						themeType="secondary"
 						style={{ marginRight: '8px' }}
-						disabled={!lineItem || isApproveDisabled}
+						disabled={isItemNotChecked || isApproveDisabled}
 						onClick={(e: any) => handleModalData(e)}
 					>
 						Approve
@@ -111,14 +123,23 @@ function Header({
 					<Button
 						size="md"
 						style={{ marginRight: '8px' }}
-						disabled={!lineItem || !isApproveDisabled}
+						disabled={isItemNotChecked || !isApproveDisabled}
 						onClick={(e: any) => handleModalData(e)}
 					>
 						Reject
 					</Button>
 				</div>
 			</div>
-			<div className={styles.hr} />
+			<div className={styles.timeline}>
+				<TimeLineItemCheck
+					checkItem={checkItem}
+					status={status}
+					isTagFound={isTagFound}
+					currentTab={currentTab}
+					jobType={jobType}
+				/>
+			</div>
+
 			{approve && (
 				<Modal
 					size="md"

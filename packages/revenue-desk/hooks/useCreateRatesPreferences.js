@@ -13,6 +13,7 @@ const useUpdateRatesPreferences = ({
 	setShowDetailPage,
 	shipmentData,
 }) => {
+	const ZERO_VALUE = 0;
 	const API_TO_CALL = '/bulk_create_shipment_booking_confirmation_preferences';
 
 	const [{ loading }, trigger] = useRequest({
@@ -33,7 +34,11 @@ const useUpdateRatesPreferences = ({
 		}
 		const selectedRates = supplierPayload?.[service_id] || [];
 		const SERVICE_PROVIDERS = [];
+		const AMOUNT = [];
+
 		(selectedRates).forEach((provider, index) => {
+			const profit = provider?.data?.rowData?.total_profit_in_preferred_currency;
+			const preferred_currency = provider?.data?.rowData?.preferred_currency;
 			SERVICE_PROVIDERS.push({
 				priority                    : index + INCREMENT_BY_ONE,
 				rate_id                     : provider?.rate_id,
@@ -41,10 +46,37 @@ const useUpdateRatesPreferences = ({
 				validity_id                 : provider?.validity_id,
 				booking_confirmation_status : service?.service_type === 'air_freight_service' ? 'pending' : undefined,
 			});
+			AMOUNT.push({ amount: -profit, priority: index + INCREMENT_BY_ONE, currency: preferred_currency });
 		});
+
+		let mergedAmount = {
+			wallet_amount: 0,
+		};
+
+		AMOUNT.forEach((amt) => {
+			if (amt?.amount > mergedAmount?.wallet_amount) {
+				const result = {
+					wallet_amount            : amt?.amount,
+					apply_rd_wallet          : true,
+					rate_priority_for_wallet : amt?.priority,
+					wallet_currency          : amt?.currency,
+				};
+				mergedAmount = result;
+			}
+		});
+
 		const { service_type } = service;
+
+		const MAX_VALUE = mergedAmount?.wallet_amount > ZERO_VALUE;
+
 		const final_payload = {
-			service_providers               : SERVICE_PROVIDERS,
+			service_providers : SERVICE_PROVIDERS,
+			wallet_amount     : MAX_VALUE ? mergedAmount?.wallet_amount : undefined,
+			apply_rd_wallet   : MAX_VALUE ? mergedAmount?.apply_rd_wallet : undefined,
+			rate_priority_for_wallet:
+			MAX_VALUE ? mergedAmount?.rate_priority_for_wallet : undefined,
+			wallet_currency: MAX_VALUE
+				? mergedAmount?.wallet_currency : undefined,
 			booking_confirmation_docs       : [],
 			service_id                      : service_id || undefined,
 			service_type                    : service.service_type || undefined,
@@ -67,7 +99,6 @@ const useUpdateRatesPreferences = ({
 					shipment_id            : shipmentData?.id,
 					remarks                : othertext || reason,
 					revenue_desk_decisions : REVENUE_DESK_DECISION,
-
 				},
 			});
 			Toast.success('Preferences Updated');

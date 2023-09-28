@@ -1,14 +1,21 @@
 import { ResponsivePie } from '@cogoport/charts/pie/index';
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, DateRangepicker } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function MyResponsivePie({ data = [] }) {
+function MyResponsivePie({
+	data = [],
+	title = '',
+	subActiveTabReject = '',
+	setRemarkDate = () => {},
+	remarkDate = undefined,
+}) {
 	return (
 		<>
 			<div className={styles.invoice}>
-				Rejection Statistics
+				{title}
 				<Tooltip
 					content={(
 						<div className={styles.tooltip_text}>
@@ -21,6 +28,19 @@ function MyResponsivePie({ data = [] }) {
 						<IcMInfo />
 					</div>
 				</Tooltip>
+				{(subActiveTabReject === 'coe_rejected' || subActiveTabReject === 'coe_on_hold')
+					? (
+						<div style={{ marginLeft: '20px' }}>
+							<DateRangepicker
+								dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
+								name="date"
+								onChange={setRemarkDate}
+								value={remarkDate}
+								isPreviousDaysAllowed
+								maxDate={new Date()}
+							/>
+						</div>
+					) : null}
 			</div>
 
 			<div className={styles.border} />

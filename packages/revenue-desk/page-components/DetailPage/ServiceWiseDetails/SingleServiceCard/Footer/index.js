@@ -1,8 +1,15 @@
-import { format, startCase } from '@cogoport/utils';
+import { Tooltip } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { format, startCase, isEmpty } from '@cogoport/utils';
+
+import { VALUE_ZERO } from '../../../../constants';
 
 import styles from './styles.module.css';
+import ToolTipContent from './toolTipContent';
 
-function Footer({ data }) {
+function Footer({ data = {}, walletAmount = {} }) {
+	const { wallet_amount = '', currency = '' } = walletAmount || {};
+
 	const infoArray = [
 		{
 			key   : 'Cargo Readiness Date',
@@ -34,6 +41,7 @@ function Footer({ data }) {
 			value : data?.preferred_shipping_line?.business_name,
 		},
 	];
+
 	return (
 		<div className={styles.container}>
 			{infoArray.map((item) => (item.value ? (
@@ -45,7 +53,41 @@ function Footer({ data }) {
 					{item.value}
 				</div>
 			) : null))}
+			{!isEmpty(data?.shipping_preferences) && (
+				<div className={styles.text}>
+					<span
+						style={{ fontWeight: '600', fontSize: '12px' }}
+					>
+						Shipping Preferences:-
+
+					</span>
+					<Tooltip content={<ToolTipContent data={data} />} interactive style={{ width: 'fit-content' }}>
+						<div style={{ textDecoration: 'underline' }}>view</div>
+					</Tooltip>
+				</div>
+			)}
+
+			<div className={styles.wallet_container}>
+				<div className={styles.wallet_text}>
+					Wallet Balance :
+					{' '}
+					<span className={wallet_amount > VALUE_ZERO ? styles.price_text : styles.red_text}>
+						{formatAmount({
+							amount  : wallet_amount,
+							currency,
+							options : {
+								style                 : 'currency',
+								notation              : 'compact',
+								compactDisplay        : 'short',
+								minimumFractionDigits : 2,
+							},
+						})}
+					</span>
+				</div>
+			</div>
+
 		</div>
+
 	);
 }
 export default Footer;

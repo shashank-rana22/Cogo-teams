@@ -1020,6 +1020,17 @@ function asyncListOverSeasTradeParties() {
 	};
 }
 
+function asyncListEnrichmentSources() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/list_enrichment_sources',
+		authkey      : 'get_enrichment_sources',
+		microService : 'athena',
+		initialCall  : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1103,4 +1114,5 @@ export {
 	asyncListFclFreightCommodityClusters,
 	asyncListSpotSearchRateCardOperators,
 	asyncListOverSeasTradeParties,
+	asyncListEnrichmentSources,
 };

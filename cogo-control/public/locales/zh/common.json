@@ -258,5 +258,6 @@
     "ams_submission": "AMS Submission",
     "warehouse_management": "Warehouse Management",
     "demand_forecast": "Demand Forecast",
-    "performance_and_incentives": "Performance and Incentives"
+    "performance_and_incentives": "Performance and Incentives",
+    "select_language": "Select Language"
 }

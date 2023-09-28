@@ -26,6 +26,11 @@ const business_finance = {
 			service_name : 'shipment',
 		},
 		{
+			api          : 'list_shipment_container_details',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api         : 'get_purchase_bills_sid_details_by_id',
 			access_type : 'private',
 			feature     : 'coeFinance',
@@ -87,6 +92,21 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
+			api         : 'get_purchase_bills_comment_remark_counts',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'get_purchase_bills_bill_status_stats',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api          : 'get_tickets_configuration_categories',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
 			api         : 'get_purchase_bills_so2_success_rate',
 			access_type : 'private',
 			feature     : 'coeFinance',
@@ -112,12 +132,27 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
+			api         : 'get_common_job_profitability_get_quotations',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
 			api         : 'get_purchase_bills_daily_invoices_trend',
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},
 		{
 			api         : 'get_purchase_bills_stats',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'put_purchase_bills_cost_advocate_bill_approve',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'put_purchase_bills_ticket_id',
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},
