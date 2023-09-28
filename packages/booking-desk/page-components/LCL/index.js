@@ -14,8 +14,7 @@ import handleStepperTabChange from '../../helpers/handleStepperTabChange';
 import styles from './styles.module.css';
 
 const RESOLVE_DESK = {
-	export : dynamic(() => import('./Export-Import'), { ssr: false }),
-	import : dynamic(() => import('./Export-Import'), { ssr: false }),
+	freight: dynamic(() => import('./Export-Import'), { ssr: false }),
 };
 
 const STEPPER_TAB_OPTIONS = Object.entries(TABS_CONFIG).map(([key, obj]) => ({
@@ -32,7 +31,8 @@ export default function LclDesk() {
 	const contextValues = useContext(BookingDeskContext);
 	const { tabState: { stepperTab, segmentedTab }, scopeFilters } = contextValues || {};
 
-	const { tabs } = TABS_CONFIG.lcl_freight.segmented_tabs[segmentedTab];
+	const { tabs } = TABS_CONFIG.lcl_freight.segmented_tabs[segmentedTab]
+	|| TABS_CONFIG.lcl_freight.segmented_tabs.freight;
 
 	const ResolvedList = RESOLVE_DESK[segmentedTab];
 

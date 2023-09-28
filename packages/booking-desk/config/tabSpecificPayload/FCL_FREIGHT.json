@@ -1,6 +1,19 @@
 {
     "place_booking": {
-        "task_attributes":[
+        "export":[
+            {
+                "task": "mark_confirmed",
+                "state": "awaiting_service_provider_confirmation",
+                "status": "pending",
+                "assigned_stakeholder": "service_ops1"
+            },
+            {
+                "task": "mark_confirmed",
+                "state": "shipment_received",
+                "status": "completed"
+            }
+        ],
+        "import":[
             {
                 "task": ["mark_confirmed", "update_nomination_details", "choose_service_provider"],
                 "state": ["awaiting_service_provider_confirmation"],
@@ -16,7 +29,18 @@
         "booking_preference":true
     },
     "upload_bn": {
-        "task_attributes":[
+        "export":[
+            {
+                "task": "mark_confirmed",
+                "state": "awaiting_service_provider_confirmation",
+                "status": "completed"
+            },
+            {
+                "task": "upload_booking_note",
+                "status": "pending"
+            }   
+        ],
+        "import":[
             {
                 "task": ["update_nomination_details", "choose_service_provider", "mark_confirmed"],
                 "state": "awaiting_service_provider_confirmation",
@@ -29,7 +53,22 @@
         ]
     },
     "amend_bn": {
-        "task_attributes":[
+        "export":[
+            {
+                "task": "mark_confirmed",
+                "state": "awaiting_service_provider_confirmation",
+                "status": "completed"
+            },
+            {
+                "task": "upload_booking_note",
+                "status": "completed"
+            },
+            {
+                "task": "amend_booking_note",
+                "status": "pending"
+            }
+        ],
+        "import":[
             {
                 "task": ["mark_confirmed", "choose_service_provider", "update_nomination_details"],
                 "status": "completed"
@@ -45,7 +84,17 @@
         ]
     },
     "container_pick_up": {
-        "task_attributes": [
+        "export": [
+            {
+                "task": "upload_booking_note",
+                "status": "completed"
+            },
+            {
+                "task": "update_container_details",
+                "status": "pending"
+            }
+        ],
+        "import": [
             {
                 "task": "upload_booking_note",
                 "status": "completed"
@@ -55,9 +104,20 @@
                 "status": "pending"
             }
         ]
+
     },
     "completed": {
-        "task_attributes": [
+        "export": [
+            {
+                "task": "update_container_details", 
+                "status" : "completed"
+            },
+            {
+                "task": "upload_booking_note",
+                "status": "completed"
+            }
+        ],
+        "import": [
             {
                 "task": "update_container_details", 
                 "status" : "completed"
