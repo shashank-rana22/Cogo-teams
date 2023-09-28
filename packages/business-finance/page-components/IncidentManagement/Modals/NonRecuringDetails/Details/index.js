@@ -1,4 +1,4 @@
-import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
+import { Button, cl, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
@@ -18,7 +18,7 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const [remarks, setRemarks] = useState('');
 	const { status = '', id = '', data = {} } = row || {};
 
-	const { overheadConfirmationRequest, organization } = data || {};
+	const { overheadConfirmationRequest = {}, organization = {} } = data || {};
 	const { tradePartyName = '', businessName = '' } = organization || {};
 
 	const {
@@ -31,7 +31,6 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 		lineItems = [],
 		currency = '',
 	} = overheadConfirmationRequest || {};
-	const { name = '' } = row?.createdBy || {};
 	const { useOnAction: onAction, loading } = usePostExpense({
 		refetch,
 		setDetailsModal,
@@ -46,21 +45,12 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 		<div className={styles.container}>
 			<div className={styles.flex}>
 				<div className={styles.large}>
-					<div className={styles.title}>Company Name</div>
+					<div className={styles.title}>Trade Party Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							<Tooltip
-								interactive
-								content={(tradePartyName || businessName || '')}
-							>
-								<div>{(tradePartyName || businessName || '')}</div>
-							</Tooltip>
+							{(tradePartyName || '')}
 						</div>
 					</div>
-				</div>
-				<div className={styles.medium}>
-					<div className={styles.title}>Requested By</div>
-					<div className={styles.text}>{name || '-'}</div>
 				</div>
 			</div>
 			<div className={styles.line} />
@@ -68,6 +58,10 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 				<div className={styles.large}>
 					<div className={styles.title}>Invoice Number</div>
 					<div className={styles.text}>{invoiceNumber || '-'}</div>
+				</div>
+				<div className={styles.large}>
+					<div className={styles.title}>Business Name</div>
+					<div className={styles.text}>{businessName || '-'}</div>
 				</div>
 				<div className={styles.small}>
 					<div className={styles.title}>Branch</div>
@@ -140,7 +134,7 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 							themeType="primary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => onAction(STATUS_MAPPING.approved)}
+							onClick={() => onAction({ status: STATUS_MAPPING.approved })}
 						>
 							Approve
 						</Button>

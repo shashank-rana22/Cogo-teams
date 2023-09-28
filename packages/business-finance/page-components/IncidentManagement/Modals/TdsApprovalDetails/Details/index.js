@@ -1,4 +1,4 @@
-import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
+import { Button, cl, Textarea } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -30,7 +30,6 @@ function Details({
 		requestedTdsStyle = '',
 	} = tdsRequest || {};
 	const { tradePartyName = '', businessName = '' } = organization || {};
-	const { name = '' } = row?.createdBy || {};
 
 	const getRatePercentageData = [
 		{ label: t('incidentManagement:current_tds_rate'), value: currentTdsRate },
@@ -51,18 +50,9 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							<Tooltip
-								interactive
-								content={(tradePartyName || businessName || '')}
-							>
-								<div>{(tradePartyName || businessName || '')}</div>
-							</Tooltip>
+							{(tradePartyName || businessName || '')}
 						</div>
 					</div>
-				</div>
-				<div>
-					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{name || ''}</div>
 				</div>
 			</div>
 			<div className={styles.line} />
@@ -134,7 +124,7 @@ function Details({
 							themeType="primary"
 							disabled={isEmpty(remark) || loading}
 							loading={loading}
-							onClick={() => OnAction(STATUS_MAPPING.approved)}
+							onClick={() => OnAction({ status: STATUS_MAPPING.approved })}
 						>
 							Approve
 						</Button>

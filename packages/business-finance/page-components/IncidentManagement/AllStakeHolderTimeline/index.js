@@ -76,7 +76,7 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 								<div className={styles.flex}>
 									<div className={styles.center_align}>
 										<div className={styles.name_text}>
-											{pascalCase(item?.name || '')}
+											{(item?.name || '')}
 										</div>
 										<Pill
 											size="sm"

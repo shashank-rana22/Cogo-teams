@@ -9,8 +9,8 @@ import { toTitleCase } from '../utils/titleCase.ts';
 import SortIcon from './SortIcon/index.tsx';
 import styles from './styles.module.css';
 
-const INDEX = 6;
-const FIRST = 1;
+const SIXTH_SPLICE_INDEX = 6;
+const FIRST_SPLICE_INDEX = 1;
 
 function getColumns({
 	setIsAscendingActive = () => {}, setFilters = () => {},
@@ -171,7 +171,7 @@ function getColumns({
 		},
 	];
 	if (activeTab === 'requested') { return column; }
-	column.splice(INDEX, FIRST);
+	column.splice(SIXTH_SPLICE_INDEX, FIRST_SPLICE_INDEX);
 	return column;
 }
 

@@ -1,4 +1,4 @@
-import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
+import { Button, cl, Textarea } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -33,12 +33,11 @@ function Details({
 
 	const { status = '', id = '', data = {} } = row || {};
 
-	const { concorPdaApprovalRequest } = data || {};
-	const { name = '' } = row?.createdBy || {};
+	const { concorPdaApprovalRequest = {} } = data || {};
 	const {
 		sid = '', totalBuyPrice = '', placeOfDestination = '', placeOfSupply = '',
 		isTaxApplicable = true, documentDate = '', dueDate = '', beneficiaryName = '', currency = '',
-		shipmentType = '',
+		shipmentType = '', entityCode = '', registrationNumber = '', accountNumber = '', bankName = '', ifscCode = '',
 	} = concorPdaApprovalRequest || {};
 
 	const { useOnAction: onAction, loading = false } = useApproveConcor({
@@ -56,19 +55,10 @@ function Details({
 				<div className={styles.large}>
 					<div className={styles.title}>Company Name</div>
 					<div className={styles.wrapper}>
-						<div className={styles.tooltip_title}>
-							<Tooltip
-								interactive
-								content={(beneficiaryName || '')}
-							>
-								<div>{(beneficiaryName || '')}</div>
-							</Tooltip>
+						<div>
+							{(beneficiaryName || '')}
 						</div>
 					</div>
-				</div>
-				<div className={styles.medium}>
-					<div className={styles.title}>Requested By</div>
-					<div className={styles.text}>{name || '-'}</div>
 				</div>
 			</div>
 			<div className={styles.line} />
@@ -103,10 +93,22 @@ function Details({
 						{getFormatAmount(totalBuyPrice, currency)}
 					</div>
 				</div>
+				<div className={styles.large}>
+					<div className={styles.title}>Entity Code</div>
+					<div className={styles.text}>
+						{entityCode || 'N.A.'}
+					</div>
+				</div>
+				<div className={styles.medium}>
+					<div className={styles.title}>Registration Number</div>
+					<div className={styles.text}>
+						{registrationNumber || 'N.A.'}
+					</div>
+				</div>
 			</div>
-			<div className={styles.heading}>
-
-				Invoice Details
+			<div className={styles.header_row}>
+				<div className={styles.heading}>Invoice Details</div>
+				<div className={styles.tag}>Type: Advance</div>
 			</div>
 			<div className={styles.invoice_flex}>
 				<div className={styles.large}>
@@ -121,8 +123,6 @@ function Details({
 					<div className={styles.title}>Tax Applicable</div>
 					<div className={styles.text}>{isTaxApplicable ? 'Yes' : 'N/A'}</div>
 				</div>
-			</div>
-			<div className={styles.date_flex}>
 				<div className={styles.large}>
 					<div className={styles.title}>Document Date</div>
 					<div className={styles.text}>
@@ -136,6 +136,26 @@ function Details({
 
 					</div>
 				</div>
+			</div>
+
+			<div className={styles.header_row}>
+				<div className={styles.heading}>Bank Details</div>
+			</div>
+
+			<div className={styles.invoice_flex}>
+				<div className={styles.large}>
+					<div className={styles.title}>Bank Name</div>
+					<div className={styles.text}>{bankName || '-'}</div>
+				</div>
+				<div className={styles.medium}>
+					<div className={styles.title}>IFSC Code</div>
+					<div className={styles.text}>{ifscCode || '-'}</div>
+				</div>
+				<div className={styles.small}>
+					<div className={styles.title}>Account Number</div>
+					<div className={styles.text}>{accountNumber || '-'}</div>
+				</div>
+
 			</div>
 
 			{ status === 'REQUESTED' ? (
@@ -172,7 +192,7 @@ function Details({
 							themeType="primary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => { onAction(STATUS_MAPPING.approved); }}
+							onClick={() => { onAction({ status: STATUS_MAPPING.approved }); }}
 						>
 							Approve
 						</Button>

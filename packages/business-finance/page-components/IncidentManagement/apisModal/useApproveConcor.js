@@ -26,7 +26,7 @@ const useApproveConcor = ({
 		{ manual: true },
 	);
 
-	const useOnAction = async (status) => {
+	const useOnAction = async ({ status }) => {
 		try {
 			const apiResponse = await trigger({
 				data: {

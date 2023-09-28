@@ -1,4 +1,5 @@
-import { Button, cl, RadioGroup, Textarea, Tooltip } from '@cogoport/components';
+import { Button, cl, RadioGroup, Textarea } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -19,20 +20,20 @@ function Details({
 	const { t } = useTranslation(['incidentManagement']);
 	const { data: { bankRequest = '', organization = {} }, id: bankId = '', status = '' } = row || {};
 	const {
-		accountNumber,
-		bankHolderName,
-		bankName,
-		branchName,
-		ifscCode,
-		swiftCode,
+		accountNumber = '',
+		bankHolderName = '',
+		bankName = '',
+		branchName = '',
+		ifscCode = '',
+		swiftCode = '',
 		isAccountNumberValid,
 		isBankNameValid,
 		isBranchNameValid,
 		isIfscCodeValid,
-		methodOfVerification,
+		methodOfVerification = '',
 	} = bankRequest || {};
-	const { name = '' } = row?.createdBy || {};
-	const { tradePartyName = '', businessName = '', tradePartyType = '' } = organization || {};
+	const { tradePartyName = '', businessName = '', category_types = [], tradePartyType = '' } = organization || {};
+	const organizationType = category_types?.[GLOBAL_CONSTANTS.zeroth_index];
 	let isEditable = true;
 	if (status !== 'REQUESTED') {
 		isEditable = false;
@@ -65,23 +66,18 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							<Tooltip
-								interactive
-								content={(tradePartyName || businessName || '')}
-							>
-								<div>{(tradePartyName || businessName || '')}</div>
-							</Tooltip>
+							<div>{(businessName || tradePartyName || '')}</div>
 						</div>
 					</div>
 				</div>
 				<div className={styles.organization_div}>
 					<div className={styles.requested_div}>
-						<div className={styles.heading}>Requested By</div>
-						<div className={styles.text}>{name || ''}</div>
+						<div className={styles.heading}>Trade Party Type</div>
+						<div className={styles.text}>{tradePartyType || ''}</div>
 					</div>
 					<div className={styles.requested_div}>
-						<div className={styles.heading}>Organization Type</div>
-						<div className={styles.text}>{tradePartyType || ''}</div>
+						<div className={styles.heading}>Category</div>
+						<div className={styles.text}>{organizationType || ''}</div>
 					</div>
 				</div>
 			</div>
@@ -220,7 +216,7 @@ function Details({
 									|| !(value?.text.length) || loading}
 							loading={loading}
 							onClick={() => {
-								OnAction('APPROVED');
+								OnAction({ status: 'APPROVED' });
 							}}
 						>
 							Approve

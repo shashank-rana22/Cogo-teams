@@ -1,14 +1,12 @@
-import { Button, cl, Pill, Popover, Select, Textarea, Tooltip } from '@cogoport/components';
+import { Button, cl, Pill, Popover, Select, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetTdsData from '../../../apisModal/useGetTdsData';
 import RejectModal from '../../../common/RejectModal/index';
-import SHIPMENT_MAPPING from '../../../Constants/SHIPMENT_MAPPING';
 import StyledTable from '../../../StyleTable';
 import { getFormatAmount } from '../../../utils/getformatamount';
 import ShowContent from '../ShowContent';
@@ -16,21 +14,15 @@ import ShowContent from '../ShowContent';
 import {
 	creditNoteApprovalTypeOptions,
 	requestCreditNoteColumns,
+	requestConsolidatedCreditNoteColumns,
 } from './credit-note-config';
 import styles from './styles.module.css';
-
-function openPDF({ event, partnerId, id, incidentType }) {
-	event.preventDefault();
-	window.open(`/v2/${partnerId}/booking/${incidentType}/${id}`, '_blank');
-}
 
 function Details({
 	row = {},
 	setDetailsModal = () => {},
 	refetch = () => {},
 }) {
-	const { query } = useRouter();
-	const { partner_id } = query || {};
 	const { t } = useTranslation(['incidentManagement']);
 	const [showRejectModal, setShowRejectModal] = useState(false);
 	const [creditNoteApprovalType, setCreditNoteApprovalType] = useState('');
@@ -39,22 +31,23 @@ function Details({
 	const { status = '', level2 = {}, level1 = {}, data = {}, type = '', id = '' } = row || {};
 	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
 	const { creditNoteRequest = {}, consolidatedCreditNoteRequest = {}, organization = {} } = data;
-	const { name = '' } = row?.createdBy || {};
 	const {
-		invoiceNumber,
-		jobNumber,
-		subTotal,
-		taxAmount,
-		grandTotal,
-		lineItems,
-		remark,
-		creditNoteType,
-		creditNoteRemarks,
-		currency,
-		revoked,
+		creditNoteNumber = '',
+		invoiceNumber = '',
+		jobNumber = '',
+		subTotal = 0,
+		taxAmount = 0,
+		grandTotal = 0,
+		lineItems = [],
+		proformaList = [],
+		remark = '',
+		creditNoteType = '',
+		creditNoteRemarks = '',
+		currency = '',
+		revoked = false,
 		creditNoteApprovalType: approvalType,
 	} = !isEmpty(consolidatedCreditNoteRequest) ? consolidatedCreditNoteRequest : creditNoteRequest || {};
-	const { tradePartyName = '', businessName = '', id: shipmentId = '' } = organization || {};
+	const { tradePartyName = '', businessName = '' } = organization || {};
 	let isEditable = true;
 	if (status !== 'REQUESTED') {
 		isEditable = false;
@@ -85,44 +78,29 @@ function Details({
 						<div className={styles.heading}>Company Name</div>
 						<div className={styles.text}>
 							<div className={styles.tooltip_title}>
-								<Tooltip
-									interactive
-									content={(tradePartyName || businessName || '')}
-								>
-									<div>{(tradePartyName || businessName || '')}</div>
-								</Tooltip>
+								{(tradePartyName || businessName || '')}
 							</div>
 						</div>
 					</div>
 					<div>
-						<div className={styles.heading}>Requested By</div>
-						<div className={styles.text}>{name || ''}</div>
+						<div className={styles.heading}>Credit Note Number</div>
+						<div className={styles.text}>{creditNoteNumber || ''}</div>
 					</div>
 				</div>
 				<div className={styles.line} />
-				<div className={styles.flex}>
-					<div className={styles.value_data}>
-						<div className={styles.label_value}>
-							{t('incidentManagement:shipment_id')}
-						</div>
-						<div className={styles.date_value}>
-							#
-							<a
-								href={jobNumber}
-								onClick={(event) => {
-									openPDF({
-										event,
-										partnerId    : partner_id,
-										id           : shipmentId,
-										incidentType : SHIPMENT_MAPPING[row?.incidentSubtype], // to be changed
-									});
-								}}
-							>
+				<div className={isConsolidated ? styles.no_flex : styles.flex}>
+					{!isConsolidated ?	(
+						<div className={styles.value_data}>
+							<div className={styles.label_value}>
+								{t('incidentManagement:shipment_id')}
+							</div>
+							<div className={styles.date_value}>
+								#
 								{jobNumber || '-'}
-							</a>
+							</div>
 						</div>
-					</div>
-					<div className={styles.value_data}>
+					) : ''}
+					<div className={isConsolidated ? styles.no_value_data : styles.value_data}>
 						<div className={styles.label_value}>
 							{t('incidentManagement:invoice_number')}
 						</div>
@@ -213,7 +191,7 @@ function Details({
 						</div>
 					)}
 				</div>
-				{lineItems?.length > [GLOBAL_CONSTANTS.zeroth_index] ? (
+				{lineItems?.length > [GLOBAL_CONSTANTS.zeroth_index] && (
 					<div className={styles.list_container}>
 						<StyledTable
 							columns={requestCreditNoteColumns({ t })}
@@ -221,11 +199,23 @@ function Details({
 							data={lineItems}
 						/>
 					</div>
-				) : (
-					<div className={styles.line_item_empty}>
-						{t('incidentManagement:no_line_items_available')}
+				)}
+				{proformaList?.length > [GLOBAL_CONSTANTS.zeroth_index] && (
+					<div className={styles.list_container}>
+						<StyledTable
+							columns={requestConsolidatedCreditNoteColumns()}
+							showPagination={false}
+							data={proformaList}
+						/>
 					</div>
 				)}
+				{(!proformaList?.length && !lineItems?.length)
+					? (
+						<div className={styles.line_item_empty}>
+							{t('incidentManagement:no_line_items_available')}
+						</div>
+					)
+					: ''}
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>
@@ -255,7 +245,7 @@ function Details({
 							disabled={!(remarks.length) || loading || (isEmpty(creditNoteApprovalType)
 										&& isEmpty(approvalType))}
 							loading={loading}
-							onClick={() => OnAction('APPROVED')}
+							onClick={() => OnAction({ status: 'APPROVED' })}
 						>
 							{t('incidentManagement:approve_btn')}
 						</Button>

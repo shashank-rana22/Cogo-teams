@@ -117,7 +117,7 @@ function Details({
 							themeType="secondary"
 							disabled={isEmpty(remarkValue) || loading}
 							loading={loading}
-							onClick={() => getData(STATUS_MAPPING.rejected)}
+							onClick={() => getData({ status: STATUS_MAPPING.rejected })}
 						>
 							Reject
 						</Button>
@@ -127,7 +127,7 @@ function Details({
 							themeType="primary"
 							disabled={isEmpty(remarkValue) || loading}
 							loading={loading}
-							onClick={() => { getData(STATUS_MAPPING.approved); }}
+							onClick={() => getData({ status: STATUS_MAPPING.approved })}
 						>
 							Approve
 						</Button>

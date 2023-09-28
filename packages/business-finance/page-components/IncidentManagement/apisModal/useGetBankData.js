@@ -37,7 +37,7 @@ const useGetBankData = ({
 		id,
 	} = bankData || {};
 
-	const useOnActionBank = async (status) => {
+	const useOnActionBank = async ({ status }) => {
 		try {
 			const apiResponse = await trigger({
 				data: {
@@ -50,7 +50,7 @@ const useGetBankData = ({
 							isAccountNumberValid : value.radioNumber === 'true',
 							isBranchNameValid    : value.radioBranchName === 'true',
 							isIfscCodeValid      : ifscCode ? value.radioIFSC === 'true' : false,
-							methodOfVerification : value.radioMethod,
+							methodOfVerification : 'MANUAL',
 							accountNumber,
 							bankHolderName,
 							bankName,

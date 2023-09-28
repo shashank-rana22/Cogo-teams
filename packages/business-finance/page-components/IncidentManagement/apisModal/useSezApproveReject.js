@@ -3,6 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useSezApproveReject = ({
+	remarks,
 	refetch,
 	setDetailsModal,
 	id,
@@ -25,8 +26,7 @@ const useSezApproveReject = ({
 		{ manual: true },
 	);
 
-	const useOnAction = async ({ inputValues, status }) => {
-		const { remarks } = inputValues || {};
+	const useOnAction = async ({ status }) => {
 		try {
 			const apiResponse = await trigger({
 				data: {

@@ -21,11 +21,11 @@ function Details({
 
 	const { status = '', id = '', data = {} } = row || {};
 	const { sezRequest = {}, organization = {} } = data || {};
-	const { tradePartyName = '', businessName = '' } = organization || {};
-	const { name = '' } = row?.createdBy || {};
-	const { taxNumber = '', address = '' } = sezRequest || {};
+	const { tradePartyName = '', businessName = '', tradePartyType } = organization || {};
+	const { taxNumber = '', address = '', pincode = '' } = sezRequest || {};
 
 	const { useOnAction: OnAction, loading } = useSezApproveReject({
+		remarks,
 		refetch,
 		setDetailsModal,
 		id,
@@ -36,27 +36,37 @@ function Details({
 		<div className={styles.container}>
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
-					<div className={styles.heading}>Company Name</div>
+					<div className={styles.heading}>Trade Party Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
 							<Tooltip
 								interactive
-								content={(tradePartyName || businessName || '')}
+								content={(tradePartyName || '')}
 							>
-								<div>{(tradePartyName || businessName || '')}</div>
+								<div>{(tradePartyName || '')}</div>
 							</Tooltip>
 						</div>
 					</div>
 				</div>
-				<div>
-					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{name || ''}</div>
-				</div>
 			</div>
 			<div className={styles.line} />
-			<div className={styles.company_gst}>
-				<div className={styles.heading}>GST Number</div>
-				<div className={styles.text}>{<ClipBoard data={taxNumber} /> || ''}</div>
+			<div className={styles.flex_row}>
+				<div className={styles.company_gst}>
+					<div className={styles.heading}>GST Number</div>
+					<div className={styles.text}>{<ClipBoard data={taxNumber} /> || ''}</div>
+				</div>
+				<div className={styles.company_gst}>
+					<div className={styles.heading}>Trade Party Type</div>
+					<div className={styles.text}>{tradePartyType.replaceAll('_', ' ') || ''}</div>
+				</div>
+				<div className={styles.company_gst}>
+					<div className={styles.heading}>Business Name</div>
+					<div className={styles.text}>{businessName || ''}</div>
+				</div>
+				<div className={styles.company_gst}>
+					<div className={styles.heading}>Pincode</div>
+					<div className={styles.text}>{pincode || ''}</div>
+				</div>
 			</div>
 			<div className={styles.company_address}>
 				<div className={styles.heading}>Address</div>

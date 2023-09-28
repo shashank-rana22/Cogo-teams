@@ -1,4 +1,4 @@
-import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
+import { Button, cl, Textarea } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -19,7 +19,6 @@ function Details({
 	const [showRejectModal, setShowRejectModal] = useState(false);
 
 	const { status = '', id = '', data: { revokeInvoiceRequest = {} } } = row || {};
-	const { name = '' } = row?.createdBy || {};
 	const { comapny_name = '', invoiceNumber = '' } = revokeInvoiceRequest || {};
 
 	const { useOnAction: onAction, loading } = useGetRevokeInvoiceData({
@@ -38,18 +37,9 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							<Tooltip
-								interactive
-								content={(comapny_name || '')}
-							>
-								<div>{(comapny_name || '')}</div>
-							</Tooltip>
+							{(comapny_name || '')}
 						</div>
 					</div>
-				</div>
-				<div>
-					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{name || ''}</div>
 				</div>
 			</div>
 			<div className={styles.line} />
@@ -89,7 +79,7 @@ function Details({
 							themeType="primary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => { onAction(STATUS_MAPPING.approved); }}
+							onClick={() => { onAction({ status: STATUS_MAPPING.approved }); }}
 						>
 							Approve
 						</Button>

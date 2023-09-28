@@ -91,3 +91,26 @@ export const requestCreditNoteColumns = ({ t = () => {} }) => [
 		id       : 'grandTotal',
 	},
 ];
+
+export const requestConsolidatedCreditNoteColumns = () => [
+	{
+		Header   : 'Proforma Number',
+		accessor : 'proformaNumber',
+		id       : 'proformaNumber',
+	},
+	{
+		Header   : 'Shipment Id',
+		accessor : 'shipmentId',
+		id       : 'shipmentId',
+	},
+	{
+		Header   : 'Currency',
+		accessor : 'currency',
+		id       : 'currency',
+	},
+	{
+		Header   : 'Total Price',
+		accessor : 'totalPrice',
+		id       : 'totalPrice',
+	},
+];

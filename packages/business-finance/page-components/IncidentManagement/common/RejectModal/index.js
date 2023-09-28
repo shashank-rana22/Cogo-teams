@@ -25,7 +25,7 @@ function RejectModal({ setShowRejectModal = () => {}, onAction = () => {} }, sho
 							size="sm"
 							themeType="primary"
 							className={styles.formButton}
-							onClick={() => onAction(STATUS_MAPPING.rejected)}
+							onClick={() => onAction({ status: STATUS_MAPPING.rejected })}
 							disabled={loading}
 						>
 							Yes

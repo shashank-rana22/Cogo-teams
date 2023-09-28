@@ -124,17 +124,17 @@ function Details({
 	const { data = {}, id = '', status = '' } = row || {};
 	const { reccuringExpenseApproval = {}, organization = {} } = data;
 	const {
-		agreementNumber,
-		maxPayoutAllowed,
-		cogoEntity,
-		branchName,
-		categoryName,
-		currency,
-		repeatFrequency,
-		startDate,
-		endDate,
-		ledgerCurrency,
-		ledgerMaxPayoutAllowed,
+		agreementNumber = '',
+		maxPayoutAllowed = 0,
+		cogoEntity = 0,
+		branchName = '',
+		categoryName = '',
+		currency = '',
+		repeatFrequency = '',
+		startDate = '',
+		endDate = '',
+		ledgerCurrency = '',
+		ledgerMaxPayoutAllowed = 0,
 	} = reccuringExpenseApproval || {};
 	const { tradePartyName = '', businessName = '' } = organization || {};
 	const { name = '' } = row?.createdBy || {};

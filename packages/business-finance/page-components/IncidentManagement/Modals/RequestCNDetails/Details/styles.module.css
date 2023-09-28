@@ -4,7 +4,7 @@
 }
 
 .label {
-	padding: 24px 24px 0;
+	padding: 0 24px;
 	margin-bottom: 6px;
 	font-size: var(--font-size-md);
 	font-weight: 600;
@@ -89,6 +89,10 @@
 	justify-content: space-between;
 }
 
+.no_flex {
+	display: flex;
+}
+
 .rates_data {
 	display: flex;
 	flex-direction: column;
@@ -124,6 +128,11 @@
 }
 
 .value_data {
+	margin: 20px 20px 32px 0;
+}
+
+.no_value_data {
+	width: 47%;
 	margin: 20px 20px 32px 0;
 }
 

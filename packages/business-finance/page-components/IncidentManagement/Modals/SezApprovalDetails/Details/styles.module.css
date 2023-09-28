@@ -110,7 +110,12 @@
 }
 
 .company_gst {
-	padding: 24px;
+	width: 30%;
+	padding: 16px 24px 20px;
+}
+
+.company_gst:nth-child(-n+3) {
+	padding: 24px 24px 16px;
 }
 
 .company_address {
@@ -119,4 +124,9 @@
 
 .tooltip_title {
 	width: 200px;
+}
+
+.flex_row {
+	display: flex;
+	flex-wrap: wrap;
 }
