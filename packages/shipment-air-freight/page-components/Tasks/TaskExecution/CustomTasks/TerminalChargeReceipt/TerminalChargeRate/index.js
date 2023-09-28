@@ -27,7 +27,6 @@ function TerminalChargeRate({
 	const [terminalChargeState, setTerminalChargeState] = useState({ 0: 'create' });
 
 	const controls = getTerminalChargeRateControl({
-		type,
 		entityData,
 		setEntityData,
 		collectionPartyData,
@@ -61,10 +60,11 @@ function TerminalChargeRate({
 				control={control}
 				errors={errors}
 			/>
-			{Array.from(Array(Object.keys(terminalChargeState).length).keys()).map((i) => (
+			{(Object.keys(terminalChargeState)).map((i) => (
 				<div key={i}>
 					<ChargeInformations
-						index={i}
+						index={Number(i)}
+						type={type}
 						sheetData={sheetData}
 						control={control}
 						errors={errors}

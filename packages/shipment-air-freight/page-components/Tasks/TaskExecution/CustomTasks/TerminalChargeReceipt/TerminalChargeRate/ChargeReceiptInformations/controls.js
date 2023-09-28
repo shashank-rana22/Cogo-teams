@@ -20,7 +20,7 @@ const controls = (index = 0) => [
 		label       : 'Tax Price',
 		type        : 'number',
 		placeholder : 'Enter Tax Price',
-		rules       : { required: 'Price is required', min: 0 },
+		rules       : { required: 'Tax Price is required', min: 0 },
 		span        : 6,
 	},
 	{
@@ -28,7 +28,7 @@ const controls = (index = 0) => [
 		label       : 'Total Tax Price',
 		type        : 'number',
 		placeholder : 'Enter Total Tax Price',
-		rules       : { required: 'Price is required', min: 0 },
+		rules       : { required: 'Total Tax Price is required', min: 0 },
 		span        : 6,
 	},
 	{

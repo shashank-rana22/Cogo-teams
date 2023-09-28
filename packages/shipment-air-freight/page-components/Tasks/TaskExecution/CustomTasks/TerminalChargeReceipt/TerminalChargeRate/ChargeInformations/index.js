@@ -13,7 +13,7 @@ const TIME_TO_FETCH_CSR_DATA = 15000;
 const INCREMENT_BY_ONE = 1;
 
 function ChargeInformations({
-	index = 0, sheetData = {}, control = {}, errors = {}, setValue = () => {},
+	index = 0, type = 'terminal', sheetData = {}, control = {}, errors = {}, setValue = () => {},
 	setSheetData = () => {}, mainServicesData = {}, terminalChargeState = {}, setTerminalChargeState = () => {},
 }) {
 	const {
@@ -47,7 +47,9 @@ function ChargeInformations({
 	return (
 		<div>
 			<h3 className={styles.heading}>
-				Add Terminal Charge Informations
+				{type === 'terminal' ? 'Terminal' : 'Gatepass'}
+				{' '}
+				Charge Informations
 				{' '}
 				{index + INCREMENT_BY_ONE}
 			</h3>
