@@ -101,7 +101,7 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 	return (
 		<div>
 			{
-			(subActiveTabReject === 'coe_rejected' || subActiveTabReject === 'coe_on_hold') ? (
+			(['coe_rejected', 'coe_on_hold'].includes(subActiveTabReject)) ? (
 				<RejectedCharts
 					subActiveTabReject={subActiveTabReject}
 					setFilters={setFilters}
