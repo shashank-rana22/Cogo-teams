@@ -145,12 +145,6 @@ function MailBody({
 					emailStatus={emailStatus}
 				/>
 
-				<div className={styles.subject}>
-					Sub:
-					{' '}
-					{subject}
-				</div>
-
 				<div
 					className={cl`${styles.body} 
 					${expandedState ? styles.expanded_body : styles.collapsed_body}`}
