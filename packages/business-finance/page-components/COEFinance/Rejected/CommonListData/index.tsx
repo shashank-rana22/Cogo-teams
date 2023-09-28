@@ -55,7 +55,7 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 	const [showReassign, setShowReassign] = useState(false);
 	const [modalData, setModalData] = useState({});
 
-	const { data, loading, setSearchValue, searchValue, refetch } =		useGetPurchaseViewList({
+	const { data, loading, setSearchValue, searchValue, refetch } =	useGetPurchaseViewList({
 		filters,
 		setFilters,
 		sort,
