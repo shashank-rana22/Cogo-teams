@@ -37,7 +37,7 @@ function Trend({
 	const [viewType, setViewType] = useState('average_price');
 	const VALID_IDS = service_type === 'fcl' ? FCL_VALID_IDS : AIR_IDS;
 	const IDS = parent_mode ? [parent_mode] : VALID_IDS;
-	const { loading, trendsData } = useGetFclFreightRateTrends({ filters: globalFilters });
+	const { loading, data: trendsData } = useGetFclFreightRateTrends({ filters: globalFilters });
 	const filteredDataForChart = trendsData?.map((item) => {
 		const NEW_OBJ = {};
 		Object.entries(item).forEach(([key, value]) => {
