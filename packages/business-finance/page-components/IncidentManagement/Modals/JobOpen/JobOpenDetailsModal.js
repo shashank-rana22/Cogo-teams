@@ -19,7 +19,7 @@ function JobOpenDetailsModal({ row = {}, setDetailsModal = () => {}, refetch = (
 	const JOB_TYPE = row?.source.toUpperCase();
 	const {
 		level3 = {}, level2 = {}, level1 = {}, createdBy = {},
-		remark = '', status = '', updatedBy = {},
+		remark = '', status = '', updatedBy = {}, financeRemark = '',
 	} = row || {};
 	const level0 = { ...createdBy, remark };
 	const { t } = useTranslation(['incidentManagement']);
@@ -40,7 +40,9 @@ function JobOpenDetailsModal({ row = {}, setDetailsModal = () => {}, refetch = (
 				{t('incidentManagement:shipment_re_open_request')}
 			</div>
 			<AllStakeHolderTimeline
-				timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3, status, updatedBy })}
+				timeline={allStakeHolderTimeLineData(
+					{ level0, level1, level2, level3, status, updatedBy, financeRemark },
+				)}
 			/>
 			<TimeLine row={row} />
 			<CostSheet

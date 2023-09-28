@@ -23,7 +23,7 @@ const stakeholderData = (levelData) => {
 
 const stakeHolderTimeLineData = ({
 	level3 = {}, level2 = {}, level1 = {},
-	level0 = {}, status = '', updatedBy = {},
+	level0 = {}, status = '', updatedBy = {}, financeRemark = '',
 }) => {
 	const level = {
 		...level0,
@@ -45,11 +45,10 @@ const stakeHolderTimeLineData = ({
 		return stakeholderData([level, {}]);
 	}
 	const UPDATED_BY = {
-		...level0,
 		level       : 0,
 		status      : 'APPROVED',
 		stakeholder : { userEmail: updatedBy.email, userName: updatedBy.name },
-		remarks     : level0.remark,
+		remarks     : financeRemark,
 	};
 	return stakeholderData([level, UPDATED_BY]);
 };

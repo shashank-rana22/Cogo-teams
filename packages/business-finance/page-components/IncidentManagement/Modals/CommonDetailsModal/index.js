@@ -1,13 +1,13 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
+import EmptyState from '../../common/EmptyStateCommon';
 import AdvanceSecurityDeposit from '../AdvanceSecurityDepositDetails';
 import AdvanceSecurityDepositRefund from '../AdvanceSecurityRefundDetails';
 import BankAccountDetails from '../BankAccountDetails';
 import ConcorDetails from '../ConcorPDADetails';
 import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
 import NonRecuring from '../NonRecuringDetails';
-import PaymentDetails from '../PaymentDetails';
 import RecuringDetails from '../RecuringDetails';
 import RequestCNDetails from '../RequestCNDetails';
 import RevokeInvoiceDetails from '../RevokeInvoiceDetails';
@@ -19,7 +19,6 @@ import styles from './styles.module.css';
 const TYPE_COMPONENT_MAPPING = {
 	BANK_DETAIL_APPROVAL            : BankAccountDetails,
 	TDS_APPROVAL                    : TdsApprovalDetails,
-	PAYMENT_CONFIRMATION_APPROVAL   : PaymentDetails,
 	RECURRING_EXPENSE_APPROVAL      : RecuringDetails,
 	OVERHEAD_APPROVAL               : NonRecuring,
 	SEZ_APPROVAL                    : SezApprovalDetails,
@@ -39,10 +38,6 @@ function CommonDetailsModal({
 }) {
 	const Component = TYPE_COMPONENT_MAPPING[detailsModal?.type] || null;
 
-	if (!Component) {
-		return null;
-	}
-
 	return (
 		<div className={styles.containerDisplay}>
 			<Button
@@ -53,12 +48,23 @@ function CommonDetailsModal({
 			>
 				Go Back
 			</Button>
+			{ Component
+				? (
+					<Component
+						row={detailsModal}
+						setDetailsModal={setDetailsModal}
+						refetch={refetch}
+					/>
+				) : (
+					<div className={styles.emptyContainer}>
+						<div className={styles.noData}>
 
-			<Component
-				row={detailsModal}
-				setDetailsModal={setDetailsModal}
-				refetch={refetch}
-			/>
+							No Data Available
+						</div>
+
+						<EmptyState />
+					</div>
+				)}
 		</div>
 	);
 }

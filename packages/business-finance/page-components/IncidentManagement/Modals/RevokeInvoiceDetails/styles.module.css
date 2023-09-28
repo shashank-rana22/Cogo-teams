@@ -4,26 +4,6 @@
 	font-weight: 600;
 }
 
-.label {
-	padding-right: 4px;
-	font-weight: 400;
-}
-
-.bold_label {
-	padding-right: 4px;
-	font-weight: 600;
-}
-
-.textarea {
-	min-height: 80px;
-	padding: 4px;
-	margin-top: 4px;
-}
-
-.icon {
-	margin-left: 4px;
-}
-
 .container_view {
 	display: flex;
 	justify-content: space-between;

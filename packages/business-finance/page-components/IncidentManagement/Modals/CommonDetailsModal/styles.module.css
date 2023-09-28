@@ -8,3 +8,14 @@
 	border: 1px solid #221f20 !important;
 	border-radius: 4px;
 }
+
+.emptyContainer {
+	padding: 30px;
+}
+
+.noData {
+	display: flex;
+	justify-content: center;
+	padding: 50px;
+	font-size: var(--font-size-xl);
+}
