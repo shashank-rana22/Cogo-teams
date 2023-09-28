@@ -1,5 +1,7 @@
 import { Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSend, IcMAttach, IcMHappy } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { forwardRef } from 'react';
 
@@ -21,10 +23,12 @@ function SendActions({
 	setDraftUploadedFiles = () => {},
 	setDraftMessages = () => {},
 	hasUploadedFiles = false,
+	draftRoomId = '',
 }, ref) {
 	const hasNoPermissionToSend = (
 		!hasPermissionToEdit
 		|| messageLoading
+		|| !draftRoomId
 		|| (isEmpty(draftMessage?.trim()) && !hasUploadedFiles)
 	);
 
@@ -98,15 +102,24 @@ function SendActions({
 				</Popover>
 			</div>
 			<div className={styles.send_messages}>
-				<IcMSend
-					fill="#EE3425"
-					style={{ cursor: canSendMessage ? 'pointer' : 'not-allowed' }}
-					onClick={() => {
-						if (canSendMessage) {
-							sendMessage();
-						}
-					}}
-				/>
+				{!messageLoading ? (
+					<IcMSend
+						fill="#EE3425"
+						style={{ cursor: canSendMessage ? 'pointer' : 'not-allowed' }}
+						onClick={() => {
+							if (canSendMessage) {
+								sendMessage();
+							}
+						}}
+					/>
+				) :	(
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.colored_loading}
+						alt="load"
+						width={25}
+						height={25}
+					/>
+				)}
 			</div>
 		</>
 	);

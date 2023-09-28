@@ -14,6 +14,7 @@ import useCreateCogooneGroups from './useCreateCogooneGroups';
 function useSendTeamsMessage({
 	activeTab = {},
 	cleanUpFunc = () => {},
+	draftRoomId = '',
 }) {
 	const { loggedInAgentId = '' } = useSelector(({ profile }) => ({
 		loggedInAgentId: profile.user.id,
@@ -35,7 +36,7 @@ function useSendTeamsMessage({
 		try {
 			setLoading(true);
 
-			if (!draftMessage && isEmpty(attachments)) {
+			if (!draftMessage && isEmpty(attachments) && !draftRoomId) {
 				return;
 			}
 

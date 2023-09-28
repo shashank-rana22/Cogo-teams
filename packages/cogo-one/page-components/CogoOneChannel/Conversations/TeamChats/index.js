@@ -72,7 +72,9 @@ function TeamChats(props) {
 					activeTeamCard={activeTeamCard}
 					activeTab={activeTab}
 					firestore={firestore}
+					internalRoomId={group_id}
 					scrollToLastMessage={scrollToLastMessage}
+					draftRoomId={id}
 				/>
 			</div>
 		</div>

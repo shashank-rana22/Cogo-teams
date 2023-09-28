@@ -17,6 +17,8 @@ function Footer({
 	activeTab = {},
 	firestore = {},
 	scrollToLastMessage = () => {},
+	internalRoomId = '',
+	draftRoomId = '',
 }) {
 	const uploaderRef = useRef(null);
 
@@ -41,6 +43,7 @@ function Footer({
 		activeTab,
 		firestore,
 		cleanUpFunc,
+		draftRoomId,
 	});
 
 	const draftMessage = draftMessages?.[activeId] || '';
@@ -91,7 +94,7 @@ function Footer({
 									key={eachSuggestion}
 									className={styles.tag_div}
 									role="presentation"
-									style={{ cursor: sendMessageLoading ? 'not-allowed' : 'pointer' }}
+									style={{ cursor: (sendMessageLoading || !draftRoomId) ? 'not-allowed' : 'pointer' }}
 									onClick={() => {
 										sendTeamsMessage({ draftMessage: eachSuggestion });
 									}}
@@ -127,6 +130,8 @@ function Footer({
 						hasUploadedFiles={hasUploadedFiles}
 						draftUploadedFiles={draftUploadedFiles}
 						ref={uploaderRef}
+						internalRoomId={internalRoomId}
+						draftRoomId={draftRoomId}
 					/>
 				</div>
 			</div>
