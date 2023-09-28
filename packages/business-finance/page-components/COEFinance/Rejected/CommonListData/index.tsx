@@ -1,3 +1,4 @@
+import Modals from '@cogoport/ticket-management/common/Modals';
 import React, { useState } from 'react';
 
 import { GenericObject } from '../../../commons/Interfaces';
@@ -50,14 +51,15 @@ interface Props {
 
 function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 	const [sort, setSort] = useState({});
+	const [showReassign, setShowReassign] = useState(false);
+	const [modalData, setModalData] = useState({});
 
-	const {
-		data,
-		loading,
-		setSearchValue,
-		searchValue,
-		refetch,
-	} = useGetPurchaseViewList({ filters, setFilters, sort, subActiveTabReject });
+	const { data, loading, setSearchValue, searchValue, refetch } =		useGetPurchaseViewList({
+		filters,
+		setFilters,
+		sort,
+		subActiveTabReject,
+	});
 
 	const config = constAdvocateConfig(subActiveTabReject);
 
@@ -72,8 +74,10 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 		renderFormate: (itemData: ItemProps, field: FieldProps) => (
 			<FormatedDate item={itemData} field={field} />
 		),
-		renderRemarks  : (itemData: ItemProps) => <RenderRemarks item={itemData} />,
-		renderViewMore : (itemData: ItemProps) => (
+		renderRemarks: (itemData: ItemProps) => (
+			<RenderRemarks item={itemData} />
+		),
+		renderViewMore: (itemData: ItemProps) => (
 			<RenderViewMoreButton itemData={itemData} />
 		),
 		renderAction: (itemData: ItemProps) => (
@@ -83,19 +87,14 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 			<RenderUrgencyTag item={itemData} field={field} />
 		),
 		renderTicket: (itemData: ItemProps) => (
-			<RenderTicket itemData={itemData} />
+			<RenderTicket itemData={itemData} setModalData={setModalData} />
 		),
-		renderApprovalStatus: () => (
-			<div>-</div>
-		),
+		renderApprovalStatus: () => <div>-</div>,
 	};
 
 	return (
 		<div>
-
-			<RejectedCharts
-				subActiveTabReject={subActiveTabReject}
-			/>
+			<RejectedCharts subActiveTabReject={subActiveTabReject} />
 			<SegmentedFilters
 				filters={filters}
 				setFilters={setFilters}
@@ -111,10 +110,19 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 				setSort={setSort}
 				page={filters.pageIndex || 1}
 				handlePageChange={(pageValue: number) => {
-					setFilters((p: GenericObject) => ({ ...p, pageIndex: pageValue }));
+					setFilters((p: GenericObject) => ({
+						...p,
+						pageIndex: pageValue,
+					}));
 				}}
 				subActiveTab={subActiveTabReject}
 				showPagination
+			/>
+			<Modals
+				modalData={modalData}
+				setModalData={setModalData}
+				showReassign={showReassign}
+				setShowReassign={setShowReassign}
 			/>
 		</div>
 	);
