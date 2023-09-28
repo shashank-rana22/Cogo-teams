@@ -13,18 +13,19 @@ const DOTS = 3;
 
 function List(props) {
 	const {
-		loading, list, handlePropagation, viewType, currLevel, currentUserData, setStatParams,
+		listLoading, list, viewType, currLevel, setCurrLevel, setLevelStack,
+		currentUserData, isChannel,
 	} = props;
 
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping();
 
-	if (loading) {
+	if (listLoading) {
 		return <LoadingState />;
 	}
 
-	if (!loading && isEmpty(list) && isEmpty(currentUserData)) {
+	if (!listLoading && isEmpty(list) && isEmpty(currentUserData)) {
 		return (
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.empty_customer_card}
@@ -53,11 +54,12 @@ function List(props) {
 					<ListItem
 						key={listItem.id}
 						listItem={listItem}
-						handlePropagation={handlePropagation}
-						viewType={viewType}
 						user={user}
+						viewType={viewType}
 						currLevel={currLevel}
-						setStatParams={setStatParams}
+						setCurrLevel={setCurrLevel}
+						isChannel={isChannel}
+						setLevelStack={setLevelStack}
 					/>
 				))}
 
@@ -69,11 +71,12 @@ function List(props) {
 
 						<ListItem
 							listItem={currentUserData}
-							viewType={viewType}
 							user={user}
+							viewType={viewType}
 							currLevel={currLevel}
-							setStatParams={setStatParams}
-							handlePropagation={handlePropagation}
+							setCurrLevel={setCurrLevel}
+							isChannel={isChannel}
+							setLevelStack={setLevelStack}
 						/>
 					</>
 				) : null}

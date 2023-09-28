@@ -10,7 +10,7 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function RightPanel(props) {
-	const { data, loading, entity, currLevel } = props;
+	const { data, statsLoading, entity, currLevel } = props;
 
 	const {
 		block_wise_stats: activityData = {},
@@ -22,7 +22,7 @@ function RightPanel(props) {
 
 	const HEADING = getRightPanelHeading({ currLevel, entity, viewType });
 
-	if (loading) {
+	if (statsLoading) {
 		return (
 			<div className={styles.container}>
 				<LoadingState />

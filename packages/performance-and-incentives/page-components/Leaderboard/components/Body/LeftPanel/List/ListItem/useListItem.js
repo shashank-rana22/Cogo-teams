@@ -5,10 +5,29 @@ import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../../constants/leade
 import getListColumnMapping from '../get-list-column-mapping';
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
-const { AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
+const { ADMIN_REPORT, OWNER_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
+
+const getLocationOrChannel = ({ listItem, isChannel, prevLevel }) => {
+	if (prevLevel.report_type !== ADMIN_REPORT) {
+		return {};
+	}
+
+	return isChannel ? { channel: listItem.name } : { location_id: listItem.id, location_name: listItem.name };
+};
+
+const getCurrLevelUserRmIds = ({ listItem, prevLevel }) => {
+	if (isEmpty(prevLevel.user)
+	|| (listItem.report_type === AGENT_REPORT && prevLevel.user?.id === listItem.user?.id)) {
+		return prevLevel.user_rm_ids || [];
+	}
+
+	return [prevLevel.user?.id, ...(prevLevel.user_rm_ids || [])];
+};
 
 const useListItem = (props) => {
-	const { listItem = {}, viewType, currLevel, user, handlePropagation, setStatParams } = props;
+	const {
+		listItem = {}, user, viewType, currLevel, setCurrLevel, isChannel, setLevelStack,
+	} = props;
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping();
 
@@ -19,25 +38,15 @@ const useListItem = (props) => {
 
 	const handleClick = () => {
 		if (isAllowed) {
-			if (listItem.report_type === AGENT_REPORT) {
-				setStatParams((prev) => ({
-					...prev,
-					filters: {
-						...prev.filters,
-						report_view_type : undefined,
-						user_rm_ids      : undefined,
-						report_type      : AGENT_REPORT,
-						user_id          : listItem.user?.id,
-					},
-				}));
-			} else {
-				handlePropagation({
-					id          : listItem.user?.id,
-					location_id : isEmpty(listItem.user) ? listItem.id : undefined,
-					channel     : isEmpty(listItem.user) ? listItem.name : undefined,
-					name        : !isEmpty(listItem.user) ? listItem.user?.name : listItem.name,
-				});
-			}
+			setLevelStack((prev) => ([currLevel, ...prev]));
+
+			setCurrLevel((prevLevel) => ({
+				...prevLevel,
+				report_type : listItem.report_type || OWNER_REPORT,
+				...(getLocationOrChannel({ listItem, isChannel, prevLevel })),
+				user        : listItem.user || {},
+				user_rm_ids : getCurrLevelUserRmIds({ listItem, prevLevel }) || [],
+			}));
 		}
 	};
 
