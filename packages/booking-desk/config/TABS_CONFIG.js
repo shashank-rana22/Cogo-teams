@@ -96,6 +96,10 @@ const TABS_CONFIG = {
 		title: 'LCL',
 
 		segmented_tabs: {
+			freight: {
+				title : 'Freight',
+				tabs  : LCL_COMMON_TABS,
+			},
 			export: {
 				title : 'Export',
 				tabs  : LCL_COMMON_TABS,

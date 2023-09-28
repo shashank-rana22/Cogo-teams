@@ -9,6 +9,7 @@ import FCL_FREIGHT from '../config/tabSpecificPayload/FCL_FREIGHT.json';
 // import FCL_IMPORT from '../config/tabSpecificPayload/FCL_IMPORT.json';
 import FCL_LOCAL from '../config/tabSpecificPayload/FCL_LOCAL.json';
 import LCL_EXPORT from '../config/tabSpecificPayload/LCL_EXPORT.json';
+import LCL_FREIGHT from '../config/tabSpecificPayload/LCL_FREIGHT.json';
 import LCL_IMPORT from '../config/tabSpecificPayload/LCL_IMPORT.json';
 
 const timezoneOffset = new Date().getTimezoneOffset()
@@ -47,6 +48,7 @@ const SHIPMENT_SPECIFIC_PAYLOAD = {
 	fcl_freight_custom  : FCL_CUSTOM,
 	lcl_freight_export  : LCL_EXPORT,
 	lcl_freight_import  : LCL_IMPORT,
+	lcl_freight_freight : LCL_FREIGHT,
 };
 
 export default function getListBookingDeskShipmentsPayload({
