@@ -15,11 +15,12 @@ import handleStepperTabChange from '../../helpers/handleStepperTabChange';
 import styles from './styles.module.css';
 
 const RESOLVE_DESK = {
-	export : dynamic(() => import('./Export-Import'), { ssr: false }),
-	import : dynamic(() => import('./Export-Import'), { ssr: false }),
-	local  : dynamic(() => import('./FCL-Local'), { ssr: false }),
-	cfs    : dynamic(() => import('./FCL-CFS'), { ssr: false }),
-	custom : dynamic(() => import('./FCL-Custom'), { ssr: false }),
+	freight : dynamic(() => import('./Export-Import'), { ssr: false }),
+	// export  : dynamic(() => import('./Export-Import'), { ssr: false }),
+	// import  : dynamic(() => import('./Export-Import'), { ssr: false }),
+	local   : dynamic(() => import('./FCL-Local'), { ssr: false }),
+	cfs     : dynamic(() => import('./FCL-CFS'), { ssr: false }),
+	custom  : dynamic(() => import('./FCL-Custom'), { ssr: false }),
 };
 
 const STEPPER_TAB_OPTIONS = Object.entries(TABS_CONFIG).map(([key, obj]) => ({
@@ -36,7 +37,8 @@ export default function FclDesk() {
 	const contextValues = useContext(BookingDeskContext);
 	const { tabState: { stepperTab, segmentedTab }, scopeFilters } = contextValues || {};
 
-	const { tabs } = TABS_CONFIG.fcl_freight.segmented_tabs[segmentedTab];
+	const { tabs } = TABS_CONFIG.fcl_freight.segmented_tabs[segmentedTab]
+	|| TABS_CONFIG.fcl_freight.segmented_tabs.freight;
 
 	const ResolvedList = RESOLVE_DESK[segmentedTab];
 

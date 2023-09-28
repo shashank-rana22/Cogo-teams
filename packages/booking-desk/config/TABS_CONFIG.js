@@ -65,14 +65,18 @@ const TABS_CONFIG = {
 		title: 'FCL',
 
 		segmented_tabs: {
-			export: {
-				title : 'Export',
+			freight: {
+				title : 'Freight',
 				tabs  : FCL_EXPORT_TABS,
 			},
-			import: {
-				title : 'Import',
-				tabs  : FCL_EXPORT_TABS,
-			},
+			// export: {
+			// 	title : 'Export',
+			// 	tabs  : FCL_EXPORT_TABS,
+			// },
+			// import: {
+			// 	title : 'Import',
+			// 	tabs  : FCL_EXPORT_TABS,
+			// },
 			local: {
 				title : 'FCL Local',
 				tabs  : FCL_COMMON_TABS,
