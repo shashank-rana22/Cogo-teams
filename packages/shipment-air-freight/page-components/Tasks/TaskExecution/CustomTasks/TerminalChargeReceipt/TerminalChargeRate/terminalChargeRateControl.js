@@ -102,84 +102,51 @@ const getTerminalChargeRateControl = ({
 		{
 			span: 6,
 		},
-		// {
-		// 	name  : 'terminalChargeReceipt',
-		// 	label : type === 'terminal' ? 'Add Terminal Charge Informations'
-		// 		: 'Add Gatepass Charge Informations',
-		// 	span               : 6,
-		// 	type               : 'fieldArray',
-		// 	showButtons        : true,
-		// 	showHeader         : true,
-		// 	showDeleteButton   : true,
-		// 	noDeleteButtonTill : 1,
-		// 	value              : [
-		// 		{
-		// 			price           : 0,
-		// 			tax_price       : 0,
-		// 			total_tax_price : 0,
-		// 			alias           : '',
-		// 		},
-		// 	],
-		// 	controls: [
-		// 		{
-		// 			name        : 'csr_reference_number',
-		// 			label       : type === 'terminal' ? 'TC Invoice Number' : 'Gatepass Invoice Number',
-		// 			type        : 'text',
-		// 			placeholder : 'Type TC Invoice No',
-		// 			span        : 6,
-		// 			rules:
-		// 				{
-		// 					required: 'TC Invoice No. is required',
-		// 				},
-		// 		},
-		// 		{
-		// 			name       : 'terminal_charge_document',
-		// 			label      : type === 'terminal' ? 'Terminal Charge Receipt' : 'Gatepass Charge Receipt',
-		// 			type       : 'file',
-		// 			drag       : true,
-		// 			span       : 6,
-		// 			maxSize    : '10485760',
-		// 			uploadType : 'aws',
-		// 			accept     : '.pdf',
-		// 			rules      : {
-		// 				required: true,
-		// 			},
-		// 		},
-		// 		{
-		// 			name        : 'price',
-		// 			label       : 'Price',
-		// 			type        : 'number',
-		// 			placeholder : 'Enter Sell Price',
-		// 			rules       : { required: 'Price is required', min: 0 },
-		// 			span        : 6,
-		// 		},
-		// 		{
-		// 			name        : 'tax_price',
-		// 			label       : 'Tax Price',
-		// 			type        : 'number',
-		// 			placeholder : 'Enter Tax Price',
-		// 			rules       : { required: 'Price is required', min: 0 },
-		// 			span        : 6,
-		// 		},
-		// 		{
-		// 			name        : 'total_tax_price',
-		// 			label       : 'Total Tax Price',
-		// 			type        : 'number',
-		// 			placeholder : 'Enter Total Tax Price',
-		// 			rules       : { required: 'Price is required', min: 0 },
-		// 			span        : 6,
-		// 		},
-		// 		{
-		// 			name        : 'alias',
-		// 			label       : 'Alias (Optional)',
-		// 			type        : 'text',
-		// 			placeholder : 'Enter Alias (Only if required)',
-		// 			span        : 6,
-		// 		},
-		// 	],
-		// },
 	];
-	return TERMINAL_CHARGE_RATE_CONTROL;
+
+	const CHARGE_RECEIPT_INFORMATION_CONTROL = [
+		{
+			name        : 'csr_reference_number',
+			label       : 'TC Invoice Number',
+			type        : 'text',
+			placeholder : 'Type TC Invoice No',
+			span        : 6,
+			rules       : { required: 'TC Invoice No. is required' },
+		},
+		{
+			name        : 'price',
+			label       : 'Price',
+			type        : 'number',
+			placeholder : 'Enter Sell Price',
+			rules       : { required: 'Price is required', min: 0 },
+			span        : 6,
+		},
+		{
+			name        : 'tax_price',
+			label       : 'Tax Price',
+			type        : 'number',
+			placeholder : 'Enter Tax Price',
+			rules       : { required: 'Price is required', min: 0 },
+			span        : 6,
+		},
+		{
+			name        : 'total_tax_price',
+			label       : 'Total Tax Price',
+			type        : 'number',
+			placeholder : 'Enter Total Tax Price',
+			rules       : { required: 'Price is required', min: 0 },
+			span        : 6,
+		},
+		{
+			name        : 'alias',
+			label       : 'Alias (Optional)',
+			type        : 'text',
+			placeholder : 'Enter Alias (Only if required)',
+			span        : 6,
+		},
+	];
+
+	return { TERMINAL_CHARGE_RATE_CONTROL, CHARGE_RECEIPT_INFORMATION_CONTROL };
 };
 
 export default getTerminalChargeRateControl;

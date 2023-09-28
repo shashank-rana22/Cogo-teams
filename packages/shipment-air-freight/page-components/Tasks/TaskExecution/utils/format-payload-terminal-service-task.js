@@ -1,16 +1,10 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo';
-
 const DEFAULT_VALUE_FOR_TERMINAL_CHARGE = 0;
 const DEFAULT_VALUE_FOR_SHEET_INDEX = 1;
 
 const getPayload = ({
-	type: taskType = 'terminal', values = {}, mainServicesData = {}, sheetData = {},
+	type: taskType = 'terminal', task_id = '', values = {}, mainServicesData = {}, sheetData = {},
 	entityData = {}, collectionPartyData = {},
 }) => {
-	const geo = getGeoConstants();
-
-	const { id = '' } = sheetData || {};
-
 	const {
 		business_name = '', cin = '',
 		entity_code = '', registration_number = '', tan_no = '', country = {},
@@ -36,53 +30,35 @@ const getPayload = ({
 
 	const { currency = '', mawb_number = '' } = values || {};
 
-	let price = 0;
-	let tax_price = 0;
-	let total_tax_price = 0;
-
-	(values?.terminalChargeReceipt || []).forEach((val) => {
-		price += Number(val.price);
-		tax_price += Number(val.tax_price);
-		total_tax_price += Number(val.total_tax_price);
-	});
-
 	const {
-		chargeable_weight = '', airline_id = '', origin_airport_id = '',
-		destination_airport_id = '', booking_reference_number = '',
+		shipment_id = '', chargeable_weight = '', airline_id = '', origin_airport_id = '',
+		destination_airport_id = '', booking_reference_number = '', id: service_id = '',
 	} = mainServicesData || {};
 
-	const csr_data = [
-		{
-			airline_id,
-			invoice_type : 'purchase_invoice',
-			awb_number   : booking_reference_number,
-			origin_airport_id,
-			destination_airport_id,
-			line_items   : [
-				{
-					total_price     : Number(price),
-					other_price     : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
-					discount        : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
-					commission      : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
-					total_tax       : Number(tax_price),
-					weight          : Number(chargeable_weight),
-					currency,
-					tax_total_price : Number(total_tax_price),
-				},
-			],
-		},
-	];
+	const CSR_FILE_DATA = [];
+
+	(Object.keys(sheetData) || []).forEach((i) => {
+		const data = {
+			csr_sheet_id    : sheetData[i]?.id,
+			currency,
+			weight          : Number(chargeable_weight),
+			total_price     : Number(values?.[`price_${i}`]),
+			discount        : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
+			other_price     : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
+			total_tax       : Number(values?.[`tax_price_${i}`]),
+			commission      : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
+			tax_total_price : Number(values?.[`total_tax_price_${i}`]),
+		};
+		CSR_FILE_DATA.push(data);
+	});
 
 	const payload = {
-		csr_data,
-		mawb_number,
-		payment_mode           : 'cash',
-		service                : 'air_freight_local_service',
-		csr_sheet_id           : id,
-		sheet_index            : DEFAULT_VALUE_FOR_SHEET_INDEX,
-		organization_id        : geo.uuid.freight_force_org_id,
-		invoice_type_line_item : taskType === 'terminal' ? 'thc' : 'gic',
-		billing_party_detail   : {
+		shipment_id,
+		airline_id,
+		csr_file_data        : CSR_FILE_DATA,
+		service              : 'air_freight_local_service',
+		sheet_index          : DEFAULT_VALUE_FOR_SHEET_INDEX,
+		billing_party_detail : {
 			organization_id : cogo_entity_id,
 			cin,
 			entity_code,
@@ -101,13 +77,24 @@ const getPayload = ({
 				...billingAddress,
 			},
 		},
-		collection_party_detail: {
+		payment_mode            : 'cash',
+		collection_party_detail : {
 			pincode             : collectionPincode,
 			address             : collectionAddress,
 			tax_number          : collectionTaxNumber,
 			business_name       : collectionBusinessName,
 			registration_number : collectionRegistrationNumber,
 		},
+		awb_number             : booking_reference_number,
+		invoice_type           : 'purchase_invoice',
+		origin_airport_id,
+		destination_airport_id,
+		mawb_number,
+		invoice_type_line_item : taskType === 'terminal' ? 'thc' : 'gic',
+		service_id,
+		pending_task_id        : task_id,
+		name                   : 'Terminal HandlingCharges',
+		code                   : 'THC',
 	};
 	return payload;
 };

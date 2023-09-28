@@ -1,6 +1,6 @@
-const controls = () => [
+const controls = (index = 0) => [
 	{
-		name        : 'csr_reference_number',
+		name        : `csr_reference_number_${index}`,
 		label       : 'TC Invoice Number',
 		type        : 'text',
 		placeholder : 'Type TC Invoice No',
@@ -8,7 +8,7 @@ const controls = () => [
 		rules       : { required: 'TC Invoice No. is required' },
 	},
 	{
-		name        : 'price',
+		name        : `price_${index}`,
 		label       : 'Price',
 		type        : 'number',
 		placeholder : 'Enter Sell Price',
@@ -16,7 +16,7 @@ const controls = () => [
 		span        : 6,
 	},
 	{
-		name        : 'tax_price',
+		name        : `tax_price_${index}`,
 		label       : 'Tax Price',
 		type        : 'number',
 		placeholder : 'Enter Tax Price',
@@ -24,7 +24,7 @@ const controls = () => [
 		span        : 6,
 	},
 	{
-		name        : 'total_tax_price',
+		name        : `total_tax_price_${index}`,
 		label       : 'Total Tax Price',
 		type        : 'number',
 		placeholder : 'Enter Total Tax Price',
@@ -32,7 +32,7 @@ const controls = () => [
 		span        : 6,
 	},
 	{
-		name        : 'alias',
+		name        : `alias_${index}`,
 		label       : 'Alias (Optional)',
 		type        : 'text',
 		placeholder : 'Enter Alias (Only if required)',

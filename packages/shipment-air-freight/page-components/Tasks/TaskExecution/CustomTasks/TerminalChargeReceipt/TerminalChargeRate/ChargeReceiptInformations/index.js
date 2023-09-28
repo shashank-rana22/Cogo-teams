@@ -4,8 +4,10 @@ import { useEffect } from 'react';
 import controls from './controls';
 
 function ChargeReceiptInformations({
+	index = 0,
 	control = {},
 	errors = {},
+	// controls = {},
 	setValue = () => {},
 	csr_data = {},
 }) {
@@ -19,9 +21,11 @@ function ChargeReceiptInformations({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(csr_data)]);
 
+	console.log('control', control);
+
 	return (
 		<Layout
-			fields={controls()}
+			fields={controls(index)}
 			control={control}
 			errors={errors}
 		/>
