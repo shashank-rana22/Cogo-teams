@@ -14,6 +14,8 @@ const formatMailDraftMessage = ({
 	parentEmailMessage,
 	roomId,
 	body,
+	emailState,
+	showOrgSpecificMail,
 }) => ({
 	agent_type           : 'bot',
 	conversation_type    : 'received',
@@ -36,6 +38,10 @@ const formatMailDraftMessage = ({
 		to_mails          : payload?.toUserEmail || [],
 		draft_type        : buttonType,
 		draftQuillMessage : body,
+		...(showOrgSpecificMail ? {
+			custom_subject : emailState?.customSubject,
+			org_id         : emailState?.orgId,
+		} : {}),
 	},
 });
 
@@ -92,6 +98,8 @@ const updateMessage = async ({
 	isMinimize = false,
 	body = '',
 	setSendLoading = () => {},
+	emailState = {},
+	showOrgSpecificMail = false,
 }) => {
 	const updatePayload = formatMailDraftMessage({
 		communication_id,
@@ -100,6 +108,8 @@ const updateMessage = async ({
 		parentEmailMessage: parent_email_message,
 		roomId,
 		body,
+		emailState,
+		showOrgSpecificMail,
 	});
 
 	if (!isNewRoomCreated) {
@@ -178,6 +188,8 @@ const useSaveDraft = ({
 	setEmailState = () => {},
 	body = '',
 	setSendLoading = () => {},
+	emailState = {},
+	showOrgSpecificMail = false,
 }) => {
 	const agentId = useSelector((state) => state.profile?.user?.id);
 
@@ -222,6 +234,8 @@ const useSaveDraft = ({
 			isMinimize,
 			body,
 			setSendLoading,
+			emailState,
+			showOrgSpecificMail,
 		});
 	};
 

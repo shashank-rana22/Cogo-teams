@@ -1,11 +1,10 @@
 import { RTEditor, Input, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { getUserActiveMails } from '../../../../../../configurations/mail-configuration';
 import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../constants/viewTypeMapping';
 
 import Recipients from './Recipients';
 import ShipmentSubject from './ShipmentSubject';
@@ -33,9 +32,9 @@ function ComposeEmailBody(props) {
 		uploading = false,
 		setActiveMailAddress = () => {},
 		mailProps = {},
+		showOrgSpecificMail = false,
 	} = props || {};
 
-	const [orgId, setOrgId] = useState('');
 	const userActiveMails = useMemo(() => (
 		[...new Set([
 			...getUserActiveMails({ userEmailAddress, viewType }),
@@ -47,12 +46,6 @@ function ComposeEmailBody(props) {
 	const userActiveMailOptions = (userActiveMails || []).map(
 		(curr) => ({ label: curr, value: curr }),
 	);
-
-	const subjectSpecific = (
-		VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.permissions?.show_specific_subject || false
-	);
-
-	const showSpecificSubject = buttonType === 'send_mail' && subjectSpecific;
 
 	useEffect(() => {
 		if (buttonType === 'send_mail' && !activeMailAddress) {
@@ -87,19 +80,16 @@ function ComposeEmailBody(props) {
 				errorValue={errorValue}
 				setEmailState={setEmailState}
 				mailProps={mailProps}
-				orgId={orgId}
-				setOrgId={setOrgId}
+				showOrgSpecificMail={showOrgSpecificMail}
 			/>
 
 			<div className={styles.type_to}>
 				<div className={styles.sub_text}>
 					Sub:
 				</div>
-				{showSpecificSubject
+				{showOrgSpecificMail
 					? (
 						<ShipmentSubject
-							orgId={orgId}
-							setOrgId={setOrgId}
 							emailState={emailState}
 							setEmailState={setEmailState}
 						/>

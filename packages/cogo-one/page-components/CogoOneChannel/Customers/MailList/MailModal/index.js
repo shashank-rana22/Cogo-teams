@@ -3,6 +3,7 @@ import { IcMExpand } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
 import { HEADER_MAPPING } from '../../../../../constants/mailConstants';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMapping';
 import useMailEditorFunctions from '../../../../../helpers/mailEditorFunctions';
 import useListEmailTemplates from '../../../../../hooks/useListEmailTemplates';
 import mailFunction from '../../../../../utils/mailFunctions';
@@ -71,6 +72,12 @@ function MailEditorModal({
 		uploaderRef,
 	});
 
+	const restrictMailToOrganizations = (
+		VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.permissions?.restrict_mail_to_organizations || false
+	);
+
+	const showOrgSpecificMail = buttonType === 'send_mail' && restrictMailToOrganizations;
+
 	const {
 		handleSend = () => {},
 		replyLoading = false,
@@ -84,6 +91,7 @@ function MailEditorModal({
 		firestore,
 		sendLoading,
 		setSendLoading,
+		showOrgSpecificMail,
 	});
 
 	if (minimizeModal) {
@@ -135,6 +143,7 @@ function MailEditorModal({
 						setMinimizeModal={setMinimizeModal}
 						resetEmailState={resetEmailState}
 						sendLoading={sendLoading}
+						showOrgSpecificMail={showOrgSpecificMail}
 					/>
 				)}
 				className={styles.modal_header}
@@ -155,6 +164,7 @@ function MailEditorModal({
 						showControl={showControl}
 						uploading={uploading}
 						mailProps={mailProps}
+						showOrgSpecificMail={showOrgSpecificMail}
 					/>
 				) : (
 					<EmailTemplateList

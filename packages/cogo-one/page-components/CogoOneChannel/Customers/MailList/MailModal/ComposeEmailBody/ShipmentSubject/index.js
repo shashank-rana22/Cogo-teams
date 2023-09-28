@@ -2,7 +2,7 @@ import { Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import CustomSelect from '../../../../../../../common/CustomSelect';
 import { SERVICE } from '../../../../../../../constants';
@@ -61,54 +61,33 @@ function RenderLabel({ item = {}, activeTab = '' }) {
 }
 
 function ShipmentSubject({
-	orgId = '',
+	emailState = {},
 	setEmailState = () => {},
 }) {
-	const [newSubject, setNewSubject] = useState({
-		activeTab     : 'shipment',
-		serialId      : '',
-		customSubject : '',
-	});
-
 	const {
 		activityData = {},
 		activityLoading = false,
 		setQuery,
 		setSearchQuery,
 	} = useGetUserShipmentActivity({
-		organizationId : orgId,
-		activeTab      : newSubject?.activeTab,
+		organizationId : emailState?.orgId,
+		activeTab      : emailState?.customSubject?.activeTab,
 	});
 
 	const selectOptions = (getActivityListOptions({
 		activityData,
-		activeTab: newSubject?.activeTab,
+		activeTab: emailState?.customSubject?.activeTab,
 	}) || []);
 
-	const handleSelectChange = (serialId) => setNewSubject(
-		(prev) => ({ ...prev, serialId }),
+	const handleSelectChange = (serialId) => setEmailState(
+		(prev) => ({ ...prev, customSubject: { ...prev?.customSubject, serialId } }),
 	);
 	const handleChangeTab = (activeTab) => {
 		setSearchQuery('');
-		setNewSubject(
-			(prev) => ({ ...prev, activeTab, serialId: '' }),
+		setEmailState(
+			(prev) => ({ ...prev, customSubject: { ...prev?.customSubject, activeTab, serialId: '' } }),
 		);
 	};
-
-	useEffect(() => {
-		if (newSubject?.serialId && newSubject?.customSubject) {
-			setEmailState((prev) => ({
-				...prev,
-				subject: `${newSubject?.serialId} | ${newSubject?.customSubject}`,
-			}));
-			return;
-		}
-
-		setEmailState((prev) => ({
-			...prev,
-			subject: '',
-		}));
-	}, [newSubject, setEmailState]);
 
 	return (
 		<div className={styles.container}>
@@ -116,18 +95,23 @@ function ShipmentSubject({
 				className={styles.subject_select}
 				placeholder="Search Your Subject"
 				isClearable
-				value={newSubject?.serialId}
+				value={emailState?.customSubject?.serialId}
 				onChange={handleSelectChange}
-				disabled={!orgId}
+				disabled={!emailState?.orgId}
 				loading={activityLoading}
 				size="sm"
 				multiple
 				options={selectOptions}
 				onSearch={setQuery}
-				renderLabel={(item) => <RenderLabel item={item} activeTab={newSubject?.activeTab} />}
+				renderLabel={(item) => (
+					<RenderLabel
+						item={item}
+						activeTab={emailState?.customSubject?.activeTab}
+					/>
+				)}
 				optionsHeader={(
 					<CustomSelectHeader
-						activeTab={newSubject?.activeTab}
+						activeTab={emailState?.customSubject?.activeTab}
 						setActiveTab={handleChangeTab}
 					/>
 				)}
@@ -136,10 +120,16 @@ function ShipmentSubject({
 			<Input
 				className={styles.subject_input}
 				size="sm"
-				value={newSubject?.customSubject}
+				value={emailState?.customSubject?.subjectText}
 				placeholder="Write Your Subject here..."
-				onChange={(customSubject) => setNewSubject(
-					(prev) => ({ ...prev, customSubject }),
+				onChange={(subjectText) => setEmailState(
+					(prev) => ({
+						...prev,
+						customSubject: {
+							...prev?.customSubject,
+							subjectText,
+						},
+					}),
 				)}
 			/>
 		</div>

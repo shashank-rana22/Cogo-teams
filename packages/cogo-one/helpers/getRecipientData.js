@@ -111,6 +111,8 @@ export function getRecipientData({
 		message_id = '',
 		attachments = [],
 		draftQuillMessage = '',
+		custom_subject = {},
+		org_id = '',
 	} = response || {};
 
 	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
@@ -146,6 +148,8 @@ export function getRecipientData({
 					formattedData,
 					eachMessage      : parent_email_message,
 					draftMessageData : eachMessage,
+					customSubject    : custom_subject,
+					orgId            : org_id,
 				}),
 			);
 

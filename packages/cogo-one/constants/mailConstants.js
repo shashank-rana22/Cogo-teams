@@ -43,6 +43,12 @@ export const DEFAULT_EMAIL_STATE = {
 	toUserEmail   : [],
 	ccrecipients  : [],
 	bccrecipients : [],
+	orgId         : '',
+	customSubject : {
+		activeTab   : 'shipment',
+		serialId    : '',
+		subjectText : '',
+	},
 };
 
 export const BUTTON_MAPPING = [

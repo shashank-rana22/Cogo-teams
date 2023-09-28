@@ -22,17 +22,16 @@ function RenderLabel({ item = {} }) {
 }
 
 function OrgSpecificRecipients({
-	orgId = '',
-	setOrgId = () => {},
 	type = '',
 	setEmailState = () => {},
 	emailRecipientType = [],
 	recipientTypes = [],
+	emailState = {},
 }) {
-	const { orgLoading = false, orgData = {} } = useGetOrgUsers({ orgId });
+	const { orgLoading = false, orgData = {} } = useGetOrgUsers({ orgId: emailState?.orgId });
 
 	const handleChange = (val) => {
-		setOrgId(val);
+		setEmailState((prev) => ({ ...prev, orgId: val }));
 
 		setEmailState(
 			(prev) => {
@@ -61,7 +60,7 @@ function OrgSpecificRecipients({
 					asyncKey="organizations"
 					isClearable
 					initialCall
-					value={orgId}
+					value={emailState?.orgId}
 					onChange={handleChange}
 					size="sm"
 				/>
@@ -71,11 +70,11 @@ function OrgSpecificRecipients({
 				className={type === 'toUserEmail' ? styles.users_select : styles.users_cc_select}
 				placeholder="Search user"
 				isClearable
-				value={emailRecipientType}
+				value={emailRecipientType || []}
 				onChange={(val) => setEmailState(
 					(prev) => ({ ...prev, [type]: val }),
 				)}
-				disabled={!orgId || orgLoading}
+				disabled={!emailState?.orgId || orgLoading}
 				size="sm"
 				multiple
 				options={(getAllowedEmailsList({ orgData }) || [])}

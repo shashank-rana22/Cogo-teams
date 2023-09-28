@@ -17,6 +17,7 @@ function useMailEditorFunctions({
 	firestore = {},
 	sendLoading = false,
 	setSendLoading = () => {},
+	showOrgSpecificMail = false,
 }) {
 	const {
 		buttonType = '',
@@ -39,7 +40,18 @@ function useMailEditorFunctions({
 		bccrecipients = [],
 		body = '',
 		draftMessageData = {},
+		customSubject = {},
 	} = emailState || {};
+
+	let subjectToSend = subject;
+
+	if (showOrgSpecificMail) {
+		if (customSubject?.serialId && customSubject?.subjectText) {
+			subjectToSend = `${customSubject?.serialId} | ${customSubject?.subjectText}`;
+		} else {
+			subjectToSend = '';
+		}
+	}
 
 	const handlePayload = () => {
 		const emailBody = getRenderEmailBody({ html: body });
@@ -49,7 +61,7 @@ function useMailEditorFunctions({
 			toUserEmail,
 			ccrecipients,
 			bccrecipients,
-			subject,
+			subject : subjectToSend,
 			content : emailBody,
 			msgId   : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 			attachments,
@@ -67,6 +79,8 @@ function useMailEditorFunctions({
 		parentMessageData : eachMessage,
 		setEmailState,
 		body,
+		emailState,
+		showOrgSpecificMail,
 	});
 
 	const {
@@ -101,7 +115,7 @@ function useMailEditorFunctions({
 
 		const isEmptyMail = getFormatedEmailBody({ emailState });
 
-		if (isEmptyMail || !subject) {
+		if (isEmptyMail || !subjectToSend) {
 			Toast.error('Both Subject and Body are Required');
 			return;
 		}
