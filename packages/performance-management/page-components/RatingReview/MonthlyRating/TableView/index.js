@@ -78,6 +78,11 @@ function TableView({
 		setIsAllSelected(e.target.checked);
 	};
 
+	const handleSearch = (e) => {
+		setPage(GLOBAL_CONSTANTS.one);
+		setSearch(e);
+	};
+
 	const columns = getColumns({
 		rating,
 		setRating,
@@ -120,7 +125,7 @@ function TableView({
 
 				<Input
 					value={search}
-					onChange={setSearch}
+					onChange={(e) => handleSearch(e)}
 					placeholder="Search"
 					prefix={<IcMAppSearch />}
 					style={{ width: 300 }}
