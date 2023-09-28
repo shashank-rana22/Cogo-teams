@@ -32,9 +32,12 @@ function FooterChat({
 	setIsInternal = () => {},
 	handleSendComment = () => {},
 }) {
+	const { t } = useTranslation(['myTickets']);
+
 	let fileName = '';
 	const chatRef = useRef(null);
-	const { t } = useTranslation(['myTickets']);
+
+	const uploadFileRef = useRef(null);
 
 	const isMessageEmpty = isEmpty(message);
 
@@ -78,7 +81,10 @@ function FooterChat({
 							<div className={styles.file_text}>{fileName}</div>
 							<IcMCross
 								className={styles.delete_icon}
-								onClick={() => setFile('')}
+								onClick={() => {
+									setFile('');
+									uploadFileRef?.current?.externalHandleDelete?.([]);
+								}}
 							/>
 						</div>
 					)}
@@ -111,6 +117,7 @@ function FooterChat({
 						/>
 					)}
 					onChange={handleChange}
+					ref={uploadFileRef}
 				/>
 				<Textarea
 					ref={chatRef}

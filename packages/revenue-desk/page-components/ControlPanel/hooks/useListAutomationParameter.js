@@ -14,7 +14,7 @@ const useListAutomationParameter = () => {
 
 	const listAutomationParameter = useCallback(async () => {
 		try {
-			await trigger({ params: { filters }, page, pagination_data_required: true });
+			await trigger({ params: { filters, page, pagination_data_required: true } });
 		} catch (error) {
 			// console.log(error);
 		}

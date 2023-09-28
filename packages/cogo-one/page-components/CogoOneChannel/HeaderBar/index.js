@@ -137,7 +137,7 @@ function HeaderBar({
 					className={styles.feedback}
 					onClick={() => setShowFeedback(((prev) => !prev))}
 				>
-					<span>
+					<span className={styles.feedback_icon}>
 						<IcMComment />
 					</span>
 					<span className={styles.feedback_label}>

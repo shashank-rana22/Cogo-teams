@@ -415,16 +415,16 @@ export const STATUS_LABEL_MAPPING = {
 
 export const TABS_MAPPING = [
 	{
-		title : 'ALL',
-		key   : 'all',
-	},
-	{
 		title : 'OPEN',
 		key   : 'open',
 	},
 	{
 		title : 'CLOSED',
 		key   : 'closed',
+	},
+	{
+		title : 'ALL',
+		key   : 'all',
 	},
 ];
 

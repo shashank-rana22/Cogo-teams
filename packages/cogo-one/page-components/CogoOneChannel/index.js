@@ -19,7 +19,6 @@ import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
-import AndroidApp from './AndroidApp';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
@@ -110,7 +109,7 @@ function CogoOne() {
 		queryAssignedChat: assigned_chat,
 	};
 
-	const { hasNoFireBaseRoom = false, data:tabData, tab = '' } = activeTab || {};
+	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
 	const { user_id = '', lead_user_id = '' } = tabData || {};
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
 	const orgId = FIREBASE_TABS.includes(activeTab?.tab)
@@ -241,7 +240,6 @@ function CogoOne() {
 								) : null}
 						</>
 					)}
-				{tab !== 'teams' ? <AndroidApp /> : null }
 			</div>
 
 			<ModalComp
