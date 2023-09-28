@@ -2,7 +2,7 @@
 import { Button, Select, Tooltip } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
+import { format, isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import Filter from '../../../commons/Filters';
@@ -94,68 +94,68 @@ function BillTurnAroundTime({ filtersData, activeEntity }:ItemProps) {
 			</div>
 			<div className={styles.filter}>
 				<div className={styles.task_filter}>
-					<div className={styles.select_filter}>
-						Select Start Task
-						<Select
-							name="firstEvent"
-							value={firstEvent}
-							onChange={setFirstEvent}
-							placeholder="From"
-							options={options}
-							size="md"
-							isClearable
-							style={{ width: '200px' }}
-						/>
-					</div>
-					<div className={styles.select_filter}>
-						Select End Task
-						<Select
-							name="secondEvent"
-							value={secondEvent}
-							onChange={setSecondEvent}
-							placeholder="To"
-							options={options}
-							size="md"
-							isClearable
-							style={{ width: '200px' }}
-						/>
-					</div>
-					<div className={styles.select_filter}>
-						Date
-						<div>
-							<Filter controls={timeFrameControls} filters={filters} setFilters={setFilters} />
+					<div className={styles.task_filter_fields}>
+						<div className={styles.select_filter}>
+							Select Start Task
+							<Select
+								name="firstEvent"
+								value={firstEvent}
+								onChange={setFirstEvent}
+								placeholder="From"
+								options={options}
+								size="md"
+								isClearable
+								style={{ width: '200px' }}
+							/>
+						</div>
+						<div className={styles.select_filter}>
+							Select End Task
+							<Select
+								name="secondEvent"
+								value={secondEvent}
+								onChange={setSecondEvent}
+								placeholder="To"
+								options={options}
+								size="md"
+								isClearable
+								style={{ width: '200px' }}
+							/>
+						</div>
+						<div className={styles.select_filter}>
+							<div className={styles.datepicker_container}>
+								Date
+								<Filter controls={timeFrameControls} filters={filters} setFilters={setFilters} />
+							</div>
 						</div>
 					</div>
-					<Button
-						size="lg"
-						themeType="secondary"
-						style={{ marginTop: '2px' }}
-						onClick={handleSubmit(onApply)}
-						disabled={firstEvent === '' || secondEvent === ''
+					<div>
+						<Button
+							onClick={handleSubmit(onApply)}
+							disabled={firstEvent === '' || secondEvent === ''
 						|| startDate === undefined || endDate === null}
-					>
-						Apply
-
-					</Button>
+						>
+							Apply
+						</Button>
+					</div>
 				</div>
 				<div className={styles.reset_button}>
 					<Button
 						size="md"
-						themeType="linkUi"
-						style={{ color: '#F68B21', marginTop: '16px' }}
+						themeType="secondary"
 						onClick={() => {
 							setDataList([]);
 							setFirstEvent(undefined);
 							setSecondEvent(undefined);
 							setFilters({ Date: undefined });
 						}}
+						disabled={firstEvent === '' && secondEvent === ''
+						&& isEmpty(startDate) && isEmpty(endDate)}
 					>
-						Reset Table
-
+						Reset
 					</Button>
 				</div>
 			</div>
-			<StyledTable data={dataList} columns={tatColumn} loading={loading} />
+			{!isEmpty(dataList) && <StyledTable data={dataList} columns={tatColumn} loading={loading} />}
 		</div>
 	);
 }

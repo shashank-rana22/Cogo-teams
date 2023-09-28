@@ -138,7 +138,6 @@ function Footer({
 				<SavePayRunModal
 					savePayrunModal={savePayrunModal}
 					setSavePayrunModal={setSavePayrunModal}
-					setViewSelectedInvoice={setViewSelectedInvoices}
 					type={type}
 				/>
 			) : null}
