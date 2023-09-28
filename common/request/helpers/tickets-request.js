@@ -4,6 +4,7 @@ import Axios from 'axios';
 import qs from 'qs';
 
 import getAuthorizationParams from './get-final-authpipe';
+// eslint-disable-next-line custom-eslint/import-from-package-utils
 import { getCookie } from './getCookieFromCtx';
 
 const customSerializer = (params) => {
