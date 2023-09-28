@@ -17,7 +17,7 @@ const MAXIMUM_UNREAD_MESSAGES = 100;
 function GroupCard({
 	eachRoom = {},
 	activeTeamCard = {},
-	setActiveTeamCard = () => {},
+	setActiveCard = () => {},
 }) {
 	const {
 		id = '',
@@ -50,7 +50,7 @@ function GroupCard({
 		<div
 			className={cl`${styles.container} ${activeCard ? styles.active_card : ''}`}
 			role="presentation"
-			onClick={() => setActiveTeamCard(eachRoom)}
+			onClick={() => setActiveCard(eachRoom)}
 		>
 			<div className={styles.info}>
 				<div className={styles.group}>

@@ -1,10 +1,9 @@
 .header {
 	padding: 6px 0;
-	border-bottom: 1px solid #eee;
 }
 
 .list_container {
-	height: calc(100% - 210px);
+	height: calc(100% - 44px);
 	padding: 6px 10px;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -31,4 +30,8 @@
 .pinned_chats_div {
 	margin-bottom: 10px;
 	border-bottom: 0.5px solid #b0b0b0;
+}
+
+.container {
+	height: calc(100% - 100px);
 }

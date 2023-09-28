@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import useFetchTeamsRoom from '../../../../hooks/useFetchTeamsRoom';
+import useUpdateLocalTeamRooms from '../../../../hooks/useUpdateLocalTeamRooms';
 
-import CreateTeam from './CreateTeam';
 import styles from './styles.module.css';
 import TeamsBody from './TeamsBody';
 import TeamsHeader from './TeamsHeader';
@@ -25,17 +25,20 @@ function Teams(teamsProps) {
 		loading,
 	} = useFetchTeamsRoom({ firestore });
 
-	return (
-		<>
-			<div className={styles.header}>
-				<TeamsHeader
-					searchValue={searchValue}
-					setSearchValue={setSearchValue}
-					setActiveTeamCard={setActiveTeamCard}
-				/>
-				<CreateTeam />
-			</div>
+	const { readTeamsMessage = () => {} } = useUpdateLocalTeamRooms({ firestore });
 
+	const setActiveCard = (card) => {
+		readTeamsMessage({ localRoomId: card?.id });
+		setActiveTeamCard(card);
+	};
+
+	return (
+		<div className={styles.container}>
+			<TeamsHeader
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
+				setActiveTeamCard={setActiveTeamCard}
+			/>
 			<div className={styles.list_container}>
 				<TeamsBody
 					loading={loading}
@@ -43,10 +46,10 @@ function Teams(teamsProps) {
 					unpinnedChats={unpinnedChats}
 					activeTeamCard={activeTeamCard}
 					loggedInAgentId={loggedInAgentId}
-					setActiveTeamCard={setActiveTeamCard}
+					setActiveCard={setActiveCard}
 				/>
 			</div>
-		</>
+		</div>
 
 	);
 }

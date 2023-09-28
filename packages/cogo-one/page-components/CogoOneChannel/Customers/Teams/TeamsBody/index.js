@@ -16,7 +16,7 @@ function TeamsBody({
 	unpinnedChats = [],
 	activeTeamCard = {},
 	loggedInAgentId = '',
-	setActiveTeamCard = () => {},
+	setActiveCard = () => {},
 }) {
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 
@@ -54,7 +54,7 @@ function TeamsBody({
 									key={eachRoom?.id}
 									activeTeamCard={activeTeamCard}
 									loggedInUserId={loggedInAgentId}
-									setActiveTeamCard={setActiveTeamCard}
+									setActiveCard={setActiveCard}
 								/>
 							))}
 						</div>
@@ -71,7 +71,7 @@ function TeamsBody({
 							key={eachRoom?.id}
 							activeTeamCard={activeTeamCard}
 							loggedInUserId={loggedInAgentId}
-							setActiveTeamCard={setActiveTeamCard}
+							setActiveCard={setActiveCard}
 						/>
 					))}
 				</>
