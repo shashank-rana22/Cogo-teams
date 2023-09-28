@@ -1,17 +1,9 @@
 .invoice {
 	display: flex;
-	gap: 4px;
 	align-items: center;
 	padding: 20px 0 0 36px;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 600;
-
-	:global {
-		.react-datepicker__close-icon {
-			top: 4px;
-			height: 0;
-		}
-	}
 }
 
 .border {
@@ -28,7 +20,11 @@
 	cursor: pointer;
 }
 
-.tooltip_text {
-	word-break: break-word;
-	word-wrap: break-word;
+.tooltip {
+	padding: 9px 12px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	background: var(--color-secondary-5);
+	border: 1px solid var(--color-tertiary-blue-3);
+	border-radius: 6px;
 }

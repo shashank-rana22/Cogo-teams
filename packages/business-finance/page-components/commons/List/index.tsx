@@ -118,7 +118,7 @@ function List({
 					))
 				)}
 			</div>
-			{showPagination && (
+			{showPagination && (itemData?.totalRecords > 10) && (
 				<div>
 					{itemData?.totalRecords ? (
 						<div className={styles.pagination_container}>

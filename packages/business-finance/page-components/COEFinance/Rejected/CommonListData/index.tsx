@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { GenericObject } from '../../../commons/Interfaces';
 import List from '../../../commons/List';
@@ -10,13 +10,17 @@ import RenderRemarks from '../../All_Invoices/PurchaseInvoiceView/RenderData/Ren
 import RenderStatus from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderStatus';
 import RenderUrgencyTag from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderUrgencyTag';
 import RenderViewMoreButton from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderViewMoreButton';
-import PURCHASE_VIEW_CONFIG from '../../configurations/PURCHASE_VIEW_LIST';
+import constAdvocateConfig from '../../configurations/COST_ADVOCATE_LIST';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
+import RejectedCharts from './RejectedChart/index';
+import RenderActionButton from './RenderActionButton';
+import RenderTicket from './RenderTicket';
 import SegmentedFilters from './SegmentedFilters';
 
 interface ItemProps {
 	createdDate: Date;
+	updatedDate: Date;
 	billDate: Date;
 	dueDate: Date;
 	billCurrency: string;
@@ -29,6 +33,7 @@ interface ItemProps {
 	billNumber: string;
 	isProforma: boolean;
 	jobNumber: string;
+	shipmentId: string;
 	organizationName: string;
 	urgencyTag: Array<string>;
 	remarksTimeline?: Array<{
@@ -40,7 +45,7 @@ interface ItemProps {
 interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
-	subActiveTabReject: string;
+	subActiveTabReject: string | undefined;
 }
 
 function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
@@ -51,7 +56,10 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 		loading,
 		setSearchValue,
 		searchValue,
+		refetch,
 	} = useGetPurchaseViewList({ filters, setFilters, sort, subActiveTabReject });
+
+	const config = constAdvocateConfig(subActiveTabReject);
 
 	const functions: any = {
 		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,
@@ -68,12 +76,26 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 		renderViewMore : (itemData: ItemProps) => (
 			<RenderViewMoreButton itemData={itemData} />
 		),
+		renderAction: (itemData: ItemProps) => (
+			<RenderActionButton itemData={itemData} refetch={refetch} />
+		),
 		renderUrgencyTag: (itemData: ItemProps, field: FieldProps) => (
 			<RenderUrgencyTag item={itemData} field={field} />
 		),
+		renderTicket: (itemData: ItemProps) => (
+			<RenderTicket itemData={itemData} />
+		),
+		renderApprovalStatus: () => (
+			<div>-</div>
+		),
 	};
+
 	return (
 		<div>
+
+			<RejectedCharts
+				subActiveTabReject={subActiveTabReject}
+			/>
 			<SegmentedFilters
 				filters={filters}
 				setFilters={setFilters}
@@ -81,7 +103,7 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 				searchValue={searchValue}
 			/>
 			<List
-				config={PURCHASE_VIEW_CONFIG}
+				config={config}
 				itemData={data}
 				functions={functions}
 				loading={loading}
