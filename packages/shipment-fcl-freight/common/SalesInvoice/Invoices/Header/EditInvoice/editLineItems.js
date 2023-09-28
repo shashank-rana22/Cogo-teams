@@ -243,14 +243,14 @@ const useEditLineItems = ({
 	return {
 		onCreate,
 		handleSubmit,
-		controls, //
+		controls,
 		loading,
 		CUSTOM_VALUES,
 		errors,
 		control,
 		setValue,
 		watch,
-		newFormValues, //
+		newFormValues,
 	};
 };
 
