@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { useContext } from 'react';
 
 import BookingDeskContext from '../../context/BookingDeskContext';
@@ -7,7 +8,7 @@ import Loader from '../Loader';
 import List from './List';
 import styles from './styles.module.css';
 
-export default function RenderList({ tabs = [], Card, apiPrefix = '' }) {
+export default function RenderList({ tabs = [], Card = null, apiPrefix = '' }) {
 	const { tabState: { activeTab } = {} } = useContext(BookingDeskContext) || {};
 
 	const { loading, data } = useListBookingDeskShipments({ prefix: apiPrefix });
@@ -18,7 +19,7 @@ export default function RenderList({ tabs = [], Card, apiPrefix = '' }) {
 
 	return (
 		<div
-			className={`${styles.list_container} ${loading ? styles.loading : ''}`}
+			className={cl`${styles.list_container} ${loading ? styles.loading : ''}`}
 		>
 			{loading ? (
 				<Loader />
