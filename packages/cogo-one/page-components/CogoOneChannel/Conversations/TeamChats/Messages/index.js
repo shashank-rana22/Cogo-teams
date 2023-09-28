@@ -7,8 +7,9 @@ import styles from './styles.module.css';
 
 function Messages({
 	internalRoomId = '',
-
 	firestore = {},
+	conversationsDivRef = {},
+	scrollToLastMessage = () => {},
 }) {
 	if (!internalRoomId) {
 		return (
@@ -31,6 +32,8 @@ function Messages({
 		<MessagesThread
 			firestore={firestore}
 			roomId={internalRoomId}
+			conversationsDivRef={conversationsDivRef}
+			scrollToLastMessage={scrollToLastMessage}
 		/>
 	);
 }

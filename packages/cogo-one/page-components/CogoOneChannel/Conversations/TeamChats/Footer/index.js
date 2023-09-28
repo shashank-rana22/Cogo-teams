@@ -16,6 +16,7 @@ function Footer({
 	activeTeamCard = {},
 	activeTab = {},
 	firestore = {},
+	scrollToLastMessage = () => {},
 }) {
 	const uploaderRef = useRef(null);
 
@@ -30,12 +31,17 @@ function Footer({
 		setDraftMessages((prev) => ({ ...prev, [activeId]: '' }));
 		setDraftUploadedFiles((prev) => ({ ...prev, [activeId]: '' }));
 		uploaderRef?.current?.externalHandleDelete?.([]);
+		scrollToLastMessage();
 	};
 
 	const {
 		sendMessageLoading = false,
 		sendTeamsMessage = () => {},
-	} = useSendTeamsMessage({ activeTab, firestore, cleanUpFunc });
+	} = useSendTeamsMessage({
+		activeTab,
+		firestore,
+		cleanUpFunc,
+	});
 
 	const draftMessage = draftMessages?.[activeId] || '';
 
@@ -85,6 +91,7 @@ function Footer({
 									key={eachSuggestion}
 									className={styles.tag_div}
 									role="presentation"
+									style={{ cursor: sendMessageLoading ? 'not-allowed' : 'pointer' }}
 									onClick={() => {
 										sendTeamsMessage({ draftMessage: eachSuggestion });
 									}}

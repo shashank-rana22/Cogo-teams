@@ -76,7 +76,7 @@ async function createDraftRoom({
 	firestore = {},
 	loggedInAgendId = '',
 	length = 0,
-	groupName = 'DRAFT NAME', // group name todo
+	groupName = 'DRAFT NAME',
 }) {
 	const selfInternalRoomsCollection = collection(firestore, `users/${loggedInAgendId}/groups`);
 
@@ -129,6 +129,7 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 
 	const createOrGetDraftTeamRoom = async ({ userIds = [], userIdsData = [] }) => {
 		const userIdsLength = userIds.length + SELF_COUNT;
+
 		setLoading(true);
 
 		const modifiedUserIdsData = [...userIdsData, {

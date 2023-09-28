@@ -43,7 +43,12 @@ function LoadPrevMessages({
 	);
 }
 
-function MessagesThread({ firestore = {}, roomId = '' }) {
+function MessagesThread({
+	firestore = {},
+	roomId = '',
+	conversationsDivRef = {},
+	scrollToLastMessage = () => {},
+}) {
 	const {
 		firstLoadingMessages,
 		messages = [],
@@ -52,7 +57,11 @@ function MessagesThread({ firestore = {}, roomId = '' }) {
 		isLastPage = false,
 		loggedInUserId = '',
 		handleScroll = () => {},
-	} = useGetTeamsMessages({ firestore, roomId });
+	} = useGetTeamsMessages({
+		firestore,
+		roomId,
+		scrollToLastMessage,
+	});
 
 	if (firstLoadingMessages) {
 		return (
@@ -69,14 +78,18 @@ function MessagesThread({ firestore = {}, roomId = '' }) {
 	}
 
 	return (
-		<div className={styles.main_container} onScroll={handleScroll}>
+		<div
+			className={styles.main_container}
+			onScroll={handleScroll}
+			ref={conversationsDivRef}
+		>
+
 			<LoadPrevMessages
 				loadingPrevMessages={loadingPrevMessages}
 				isLastPage={isLastPage}
 				refetch={refetch}
 			/>
-
-			<div className={styles.container}>
+			<div>
 				{(messages || []).map((eachMessage) => {
 					const conversationType = eachMessage?.send_by_id === loggedInUserId ? 'sent' : 'received';
 

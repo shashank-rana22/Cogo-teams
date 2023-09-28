@@ -13,11 +13,11 @@ const getPayload = ({
 
 	const {
 		group_members_ids = [],
-		group_name = 'Draft Name',
+		search_name = 'Draft Name',
 	} = data || {};
 
 	return {
-		name        : group_name,
+		name        : search_name,
 		users       : group_members_ids,
 		action_name : 'add_to_group',
 		metadata    : {

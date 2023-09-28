@@ -1,9 +1,13 @@
+import { useCallback, useRef } from 'react';
+
 import useFetchGlobalRoom from '../../../../hooks/useFetchGlobalRoom';
 
 import Footer from './Footer';
 import Header from './Header';
 import Messages from './Messages';
 import styles from './styles.module.css';
+
+const TIMEOUT_FOR_SCROLL = 200;
 
 function TeamChats(props) {
 	const {
@@ -16,6 +20,8 @@ function TeamChats(props) {
 		activeTab = {},
 	} = props || {};
 
+	const conversationsDivRef = useRef(null);
+
 	const {
 		group_id = '',
 		id = '',
@@ -27,6 +33,15 @@ function TeamChats(props) {
 		setActiveTab,
 		draftRoomId   : id,
 	});
+
+	const scrollToLastMessage = useCallback(() => {
+		setTimeout(() => {
+			conversationsDivRef.current?.scrollTo({
+				top      : conversationsDivRef.current.scrollHeight,
+				behavior : 'smooth',
+			});
+		}, TIMEOUT_FOR_SCROLL);
+	}, []);
 
 	const hasPermissionToEdit = (id || group_id);
 
@@ -46,6 +61,8 @@ function TeamChats(props) {
 					internalRoomId={group_id}
 					firestore={firestore}
 					loading={loading}
+					conversationsDivRef={conversationsDivRef}
+					scrollToLastMessage={scrollToLastMessage}
 				/>
 			</div>
 			<div className={styles.footer}>
@@ -55,6 +72,7 @@ function TeamChats(props) {
 					activeTeamCard={activeTeamCard}
 					activeTab={activeTab}
 					firestore={firestore}
+					scrollToLastMessage={scrollToLastMessage}
 				/>
 			</div>
 		</div>

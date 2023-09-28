@@ -24,6 +24,7 @@ function newMessageSnapShot({
 	setMessagesState = () => {},
 	roomId = '',
 	setFirstLoadingMessages = () => {},
+	scrollToLastMessage = () => {},
 }) {
 	if (isEmpty(chatCollection)) {
 		return;
@@ -58,7 +59,12 @@ function newMessageSnapShot({
 					},
 				}));
 
-				setFirstLoadingMessages(false);
+				setFirstLoadingMessages((prev) => {
+					if (prev) {
+						scrollToLastMessage();
+					}
+					return false;
+				});
 			},
 		);
 	} catch (e) {
@@ -119,6 +125,7 @@ async function getNextData({
 const useGetTeamsMessages = ({
 	roomId = '',
 	firestore = {},
+	scrollToLastMessage = () => {},
 }) => {
 	const loggedInUserId = useSelector(({ profile }) => profile.user.id);
 
@@ -176,6 +183,7 @@ const useGetTeamsMessages = ({
 			setMessagesState,
 			roomId,
 			setFirstLoadingMessages,
+			scrollToLastMessage,
 		});
 
 		const unSubsribe = newMessagesRef.current;
@@ -183,7 +191,7 @@ const useGetTeamsMessages = ({
 		return () => {
 			unSubsribe?.();
 		};
-	}, [chatCollection, roomId]);
+	}, [chatCollection, roomId, scrollToLastMessage]);
 
 	return {
 		messages: sortedMessageData,
@@ -197,5 +205,3 @@ const useGetTeamsMessages = ({
 };
 
 export default useGetTeamsMessages;
-
-// integrate cogoone timeline
