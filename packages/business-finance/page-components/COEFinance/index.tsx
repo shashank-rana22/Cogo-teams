@@ -55,7 +55,7 @@ function CoeFinance() {
 						<AllInvoices statsData={statsData} />
 					</TabPanel>
 
-					<TabPanel name="rejected" title="Rejected">
+					<TabPanel name="rejected" title="Cost Advocate">
 						<Rejected statsData={statsData} />
 					</TabPanel>
 					<TabPanel name="auto_job_closure" title="Auto-Job Closure">

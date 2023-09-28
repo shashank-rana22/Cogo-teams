@@ -19,7 +19,6 @@ import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
-import AndroidApp from './AndroidApp';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
@@ -241,8 +240,6 @@ function CogoOne() {
 								) : null}
 						</>
 					)}
-				<AndroidApp />
-
 			</div>
 
 			<ModalComp
