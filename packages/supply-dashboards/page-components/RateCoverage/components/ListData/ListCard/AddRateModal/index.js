@@ -157,7 +157,6 @@ function AddRateModal({
 		filter,
 		chargeCodes,
 		setChargeCodes,
-		isAirService,
 	});
 
 	const { createRate } = useCreateFreightRate(filter?.service);
