@@ -15,9 +15,7 @@ import handleStepperTabChange from '../../helpers/handleStepperTabChange';
 import styles from './styles.module.css';
 
 const RESOLVE_DESK = {
-	freight : dynamic(() => import('./Export-Import'), { ssr: false }),
-	export  : dynamic(() => import('./Export-Import'), { ssr: false }),
-	import  : dynamic(() => import('./Export-Import'), { ssr: false }),
+	freight: dynamic(() => import('./Export-Import'), { ssr: false }),
 };
 
 const STEPPER_TAB_OPTIONS = Object.entries(TABS_CONFIG).map(([key, obj]) => ({

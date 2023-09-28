@@ -16,8 +16,6 @@ import styles from './styles.module.css';
 
 const RESOLVE_DESK = {
 	freight : dynamic(() => import('./Export-Import'), { ssr: false }),
-	// export  : dynamic(() => import('./Export-Import'), { ssr: false }),
-	// import  : dynamic(() => import('./Export-Import'), { ssr: false }),
 	local   : dynamic(() => import('./FCL-Local'), { ssr: false }),
 	cfs     : dynamic(() => import('./FCL-CFS'), { ssr: false }),
 	custom  : dynamic(() => import('./FCL-Custom'), { ssr: false }),

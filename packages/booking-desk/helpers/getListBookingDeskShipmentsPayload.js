@@ -53,7 +53,6 @@ export default function getListBookingDeskShipmentsPayload({
 
 	const { tabs } = TABS_CONFIG[stepperTab].segmented_tabs[segmentedTab] || {};
 
-	// todo :: solve critical filters
 	const isCriticalVisible = tabs.find((tab) => tab.name === activeTab).isCriticalVisible || false;
 
 	const tabSpecificPayload = (SHIPMENT_SPECIFIC_PAYLOAD[`${stepperTab}_${segmentedTab}`] || {})[activeTab] || {};
@@ -71,8 +70,6 @@ export default function getListBookingDeskShipmentsPayload({
 			state: SHIPMENT_STATES[activeTab] || SHIPMENT_STATES.in_progress,
 			...tabSpecificPayload,
 			...(selected_agent_id && { stakeholder_id: selected_agent_id }),
-
-			// todo ::solve critical filters
 			...(isCriticalVisible && isCriticalOn ? criticalPayload : {}),
 			...(q && { q }),
 			...(TRADE_TYPES.includes(segmentedTab) && { trade_type: segmentedTab }),
