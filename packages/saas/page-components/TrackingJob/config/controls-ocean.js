@@ -65,6 +65,7 @@ const formControls = ({ showUpdate }) => [
 								label        : 'Milestone',
 								name         : 'milestone',
 								type         : 'async_select',
+								isCreatable  : true,
 								asyncKey     : 'list_shipping_line_events',
 								optionsValue : 'milestone',
 								params       : {

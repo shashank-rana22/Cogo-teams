@@ -15,18 +15,20 @@ const TOTAL_SPAN = 12;
 
 function NestedFieldArray({
 	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
-	showElements = {}, customFieldArrayControls = {}, index,
+	showElements = {}, customFieldArrayControls = {}, name = '',
 }) {
-	const { controls = [], name, addButtonText = '', name:nestedName = '' } = ctrl || {};
+	const { controls = [], addButtonText = '' } = ctrl || {};
 	const { fields, append, remove } = useFieldArray({ control, name });
-	console.log(`${name}.${index}.${nestedName}`, 'NestedFieldArrayname');
 	return (
 		<div className={styles.nested_field_array}>
 			{fields.map((field, nestedIndex) => (
 				<div key={field.id} className={styles.field_container}>
 					<div className={styles.field_header}>
-						<div>{`${startCase(name || 'document')} ${index + HEADING_INDEX_OFFSET}`}</div>
-						<ButtonIcon icon={<IcMDelete />} onClick={() => remove(index, NO_OF_ELEMENTS_TO_BE_REMOVED)} />
+						<div>{`${startCase(name || 'document')} ${nestedIndex + HEADING_INDEX_OFFSET}`}</div>
+						<ButtonIcon
+							icon={<IcMDelete />}
+							onClick={() => remove(nestedIndex, NO_OF_ELEMENTS_TO_BE_REMOVED)}
+						/>
 					</div>
 
 					{controls.map((nestCtrl) => {
@@ -37,7 +39,7 @@ function NestedFieldArray({
 									<FieldArray
 										key={field.id}
 										field={field}
-										error={error?.[index]}
+										error={error?.[nestedIndex]}
 										ctrl={nestCtrl}
 										control={control}
 										index={nestedIndex}
@@ -50,7 +52,7 @@ function NestedFieldArray({
 							);
 						}
 
-						const element_name = `${name}.${index}.${ctrlItemName}`;
+						const element_name = `${name}.${nestedIndex}.${ctrlItemName}`;
 
 						const flex = getWidthPercent(span || TOTAL_SPAN);
 
@@ -67,9 +69,9 @@ function NestedFieldArray({
 									control={control}
 									type={type}
 								/>
-								{error?.[index]?.[ctrlItemName]?.message ? (
+								{error?.[nestedIndex]?.[ctrlItemName]?.message ? (
 									<p className={styles.error}>
-										{error?.[index]?.[ctrlItemName]?.message || ''}
+										{error?.[nestedIndex]?.[ctrlItemName]?.message || ''}
 									</p>
 								) : null}
 							</div>

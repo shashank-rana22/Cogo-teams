@@ -16,16 +16,16 @@ const TOTAL_SPAN = 12;
 
 function DoubleNestedFieldArray({
 	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
-	showElements = {}, customFieldArrayControls = {}, index = 0,
+	showElements = {}, customFieldArrayControls = {},
 
 }) {
 	const { controls = [], name, addButtonText = '', name:nestedName = '' } = ctrl || {};
 
 	const { fields, append, remove } = useFieldArray({ control, name });
-	console.log(`${name}.${index}.${nestedName}`, error, ctrl, 'name');
+
 	return (
 		<div className={styles.nested_field_array}>
-			{fields.map((field) => (
+			{fields.map((field, index) => (
 				<div key={field.id} className={styles.field_container}>
 					<div className={styles.field_header}>
 						<div>{`${startCase(name || 'document')} ${index + HEADING_INDEX_OFFSET}`}</div>
@@ -41,11 +41,11 @@ function DoubleNestedFieldArray({
 									<NestedFieldArray
 										key={field.id}
 										field={field}
-										error={error?.[ctrlItemName]}
+										error={error?.[name]?.[index]?.[name]?.[ctrlItemName]}
 										ctrl={nestCtrl}
 										control={control}
 										index={nestedIndex}
-										name={`${name}.${index}.${ctrlItemName}`}
+										name={`${name}.${index}.${nestedName}.${ctrlItemName}`}
 										formValues={formValues}
 										showElements={showElements}
 										customFieldArrayControls={customFieldArrayControls?.[name]}

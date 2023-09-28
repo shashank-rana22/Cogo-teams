@@ -67,7 +67,7 @@ function FormElement({ type = '', ...rest }) {
 
 	if (type === 'number') return <InputNumberController {...rest} />;
 
-	if (type === 'creatable_select') return <CreatableSelectController {...rest} />;
+	if (type === 'createable_select') return <CreatableSelectController {...rest} />;
 
 	return <InputController {...rest} type={type} />;
 }
