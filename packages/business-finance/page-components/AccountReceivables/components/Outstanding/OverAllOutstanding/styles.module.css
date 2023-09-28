@@ -62,7 +62,7 @@
 .card {
 	width: 49.5%;
 	padding: 15px;
-	background: #fff;
+	background: var(--color-secondary-5);
 	border: 2px solid #d3d3d3;
 	border-radius: 10px;
 }

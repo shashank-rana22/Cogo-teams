@@ -4,25 +4,15 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-interface Kam {
-	email?: string;
-	name?: string;
-}
-
-interface CreditController {
-	email?: string;
-	name?: string;
-}
-
-interface SalesAgent {
+interface Agent {
 	email?: string;
 	name?: string;
 }
 
 interface ItemContents {
-	kam?: Kam;
-	creditController?: CreditController;
-	salesAgent?: SalesAgent;
+	kam?: Agent;
+	creditController?: Agent;
+	salesAgent?: Agent;
 }
 
 interface ItemProps {

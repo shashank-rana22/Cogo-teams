@@ -106,7 +106,7 @@ function VisualizationData({
 								<Tabs
 									activeTab={filterValues?.view_type}
 									themeType="primary"
-									onChange={(e) => handleTabs(e)}
+									onChange={handleTabs}
 									className={styles.custom_tabs}
 								>
 									<TabPanel name="outstanding" title="Outstanding" />

@@ -82,7 +82,7 @@ function ServiceCard({ outstandingData = {}, outstandingLoading = false, entityC
 			const tradeTypeKey = TRADE_TYPE_MAPPING[el] || 'Ocean';
 			setTab({ key: el, data: outstandingServiceWise?.[tradeTypeKey]?.tradeType || [{}] });
 		}
-		setIsAccordionActive(!isAccordionActive);
+		setIsAccordionActive((prev) => !prev);
 	};
 
 	useEffect(() => {

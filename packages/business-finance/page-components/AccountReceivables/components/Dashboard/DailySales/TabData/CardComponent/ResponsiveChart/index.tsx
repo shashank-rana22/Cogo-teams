@@ -9,6 +9,8 @@ import EmptyState from '../../../../../../commons/EmptyStateDocs';
 
 import styles from './styles.module.css';
 
+const LIMIT_FOR_LEGEND = 1;
+
 interface ResponsiveChartProps {
 	data?: StreamDatum[],
 	loadingData?: boolean,
@@ -115,7 +117,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 					pointBorderColor={{ from: 'serieColor' }}
 					pointLabelYOffset={-12}
 					useMesh
-					legends={formatdata.length > 1 ? [{
+					legends={formatdata.length > LIMIT_FOR_LEGEND ? [{
 						anchor            : 'bottom-right',
 						direction         : 'column',
 						justify           : false,
