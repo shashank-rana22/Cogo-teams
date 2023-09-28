@@ -28,6 +28,7 @@ function newMessageSnapShot({
 	if (isEmpty(chatCollection)) {
 		return;
 	}
+
 	try {
 		const chatCollectionQuery = query(
 			chatCollection,
@@ -36,7 +37,7 @@ function newMessageSnapShot({
 		);
 
 		const refArg = newMessagesRef;
-
+		setFirstLoadingMessages(true);
 		refArg.current = onSnapshot(
 			chatCollectionQuery,
 			(querySnapshot) => {
