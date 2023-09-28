@@ -87,7 +87,10 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 			<RenderUrgencyTag item={itemData} field={field} />
 		),
 		renderTicket: (itemData: ItemProps) => (
-			<RenderTicket itemData={itemData} setModalData={setModalData} />
+			<RenderTicket
+				itemData={itemData}
+				setModalData={setModalData as any}
+			/>
 		),
 		renderApprovalStatus: () => <div>-</div>,
 	};
