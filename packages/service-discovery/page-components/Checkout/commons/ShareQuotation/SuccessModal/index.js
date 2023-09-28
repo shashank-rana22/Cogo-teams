@@ -17,7 +17,7 @@ function SuccessModal({ show = false, setShow = () => {}, quotationOptions = [] 
 			placement="top"
 			size="sm"
 			show={show}
-			onClose={() => setShow(true)}
+			onClose={() => setShow(false)}
 			animate
 			showCloseIcon
 			closeOnOuterClick
