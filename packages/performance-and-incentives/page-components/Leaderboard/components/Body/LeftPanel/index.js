@@ -52,6 +52,7 @@ function LeftPanel(props) {
 				viewType={viewType}
 				currLevel={currLevel}
 				setCurrLevel={setCurrLevel}
+				levelStack={levelStack}
 				setLevelStack={setLevelStack}
 				currentUserData={currentUserData}
 				isChannel={isChannel}

@@ -1,20 +1,20 @@
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
+// import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
 
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
-import useGetAgentScoringReportStats from './RightPanel/useGetAgentScoringReportStats';
 import styles from './styles.module.css';
+import useGetAgentScoringReportStats from './useGetAgentScoringReportStats';
 import useScoringReports from './useScoringReports';
 
-const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
+// const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 function Body(props) {
 	const { dateRange, entity } = props;
 
-	const { incentive_leaderboard_viewtype: viewType, user: loggedUser } = useSelector(({ profile }) => profile);
+	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 
 	const [view] = viewType.split('_');
 
@@ -24,13 +24,10 @@ function Body(props) {
 		location_id   : '',
 		location_name : '',
 		channel       : '',
-		user          : viewType === ADMIN ? {} : loggedUser,
+		user          : {},
 		user_rm_ids   : [],
 	});
 	const [isChannel, setIsChannel] = useState(false);
-
-	console.log('levelStack :: ', levelStack);
-	console.log('currLevel :: ', currLevel);
 
 	const {
 		list,
@@ -44,7 +41,7 @@ function Body(props) {
 
 	const {
 		data, statsLoading, refetchStats,
-	} = useGetAgentScoringReportStats({ dateRange, entity, currLevel });
+	} = useGetAgentScoringReportStats({ dateRange, entity, currLevel, levelStack });
 
 	return (
 		<div className={styles.container}>

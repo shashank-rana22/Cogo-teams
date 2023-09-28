@@ -11,7 +11,7 @@ import getReportViewType from '../../helpers/getReportViewType';
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
-const { ADMIN_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
+const { ADMIN_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 
 const getReportTypeFilter = ({ currLevel }) => {
 	if (currLevel.report_type === ADMIN_REPORT || !isEmpty(currLevel.user)) {
@@ -19,14 +19,6 @@ const getReportTypeFilter = ({ currLevel }) => {
 	}
 
 	return currLevel.report_type;
-};
-
-const getUserRmIdsFilter = ({ currLevel, incentive_leaderboard_viewtype }) => {
-	if (incentive_leaderboard_viewtype === ADMIN) {
-		return [currLevel.user?.id, ...(currLevel.user_rm_ids || [])];
-	}
-
-	return currLevel.user_rm_ids || [];
 };
 
 const useScoringReports = (props) => {
@@ -62,24 +54,6 @@ const useScoringReports = (props) => {
 
 	const { list = [], current_user_report: currentUserData } = data || {};
 
-	useEffect(() => {
-		setParams((previousParams) => ({
-			...previousParams,
-			filters: {
-				...(previousParams.filters || {}),
-				q                       : searchQuery || undefined,
-				created_at_greater_than : dateRange?.startDate || undefined,
-				created_at_less_than    : dateRange?.endDate || undefined,
-				partner_id              : entity || undefined,
-				report_view_type        : getReportViewType({ currLevel, isChannel }),
-				report_type             : getReportTypeFilter({ currLevel }),
-				office_location_id      : currLevel.location_id || undefined,
-				channel                 : currLevel.channel || undefined,
-				user_rm_ids             : getUserRmIdsFilter({ currLevel, incentive_leaderboard_viewtype }),
-			},
-		}));
-	}, [searchQuery, dateRange, entity, setParams, currLevel, isChannel, incentive_leaderboard_viewtype]);
-
 	const fetchList = useCallback(async () => {
 		try {
 			trigger();
@@ -95,6 +69,35 @@ const useScoringReports = (props) => {
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [setLevelStack, setCurrLevel, trigger]);
+
+	useEffect(() => {
+		if (currLevel.report_type !== AGENT_REPORT) {
+			setParams((previousParams) => ({
+				...previousParams,
+				filters: {
+					...(previousParams.filters || {}),
+					report_view_type   : getReportViewType({ currLevel, isChannel }),
+					office_location_id : currLevel.location_id || undefined,
+					channel            : currLevel.channel || undefined,
+					report_type        : getReportTypeFilter({ currLevel }),
+					user_rm_ids        : [currLevel.user?.id, ...(currLevel.user_rm_ids || [])],
+				},
+			}));
+		}
+	}, [setParams, currLevel, isChannel, incentive_leaderboard_viewtype]);
+
+	useEffect(() => {
+		setParams((previousParams) => ({
+			...previousParams,
+			filters: {
+				...(previousParams.filters || {}),
+				q                       : searchQuery || undefined,
+				created_at_greater_than : dateRange?.startDate || undefined,
+				created_at_less_than    : dateRange?.endDate || undefined,
+				partner_id              : entity || undefined,
+			},
+		}));
+	}, [searchQuery, dateRange, entity, setParams]);
 
 	useEffect(() => {
 		fetchList();

@@ -13,8 +13,8 @@ const DOTS = 3;
 
 function List(props) {
 	const {
-		listLoading, list, viewType, currLevel, setCurrLevel, setLevelStack,
-		currentUserData, isChannel,
+		listLoading, list, viewType, currLevel, setCurrLevel,
+		levelStack, setLevelStack, currentUserData, isChannel,
 	} = props;
 
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
@@ -59,6 +59,7 @@ function List(props) {
 						currLevel={currLevel}
 						setCurrLevel={setCurrLevel}
 						isChannel={isChannel}
+						levelStack={levelStack}
 						setLevelStack={setLevelStack}
 					/>
 				))}
@@ -76,6 +77,7 @@ function List(props) {
 							currLevel={currLevel}
 							setCurrLevel={setCurrLevel}
 							isChannel={isChannel}
+							levelStack={levelStack}
 							setLevelStack={setLevelStack}
 						/>
 					</>
