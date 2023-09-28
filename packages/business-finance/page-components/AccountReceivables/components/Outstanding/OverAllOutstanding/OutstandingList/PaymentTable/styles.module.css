@@ -18,3 +18,11 @@
 		opacity: 0.5;
 	}
 }
+
+.empty {
+	:global {
+		.ui_multiselectt_options_container span {
+			display: none;
+		}
+	}
+}

@@ -7,6 +7,7 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import MultiSelectController from '@cogoport/forms/page-components/Controlled/MultiSelectController';
+import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } from 'react';
 
 import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
@@ -32,28 +33,22 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 
 	const [addressOptions, setAddressOptions] = useState([]);
 	const [addressData, setAddressData] = useState([]);
-
 	const [pocNameOptions, setPocNameOptions] = useState([]);
-
 	const { control, watch, formState:{ errors = {} }, handleSubmit, setValue, resetField } = useForm();
 	const formValues = watch();
-
 	const resetMultipleFields = useCallback((fields = []) => {
 		fields?.map((field) => resetField(field));
 	}, [resetField]);
 
 	useImperativeHandle(ref, () => ({ handleSubmit }));
-
 	function Error(key) {
 		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 	}
-
 	useEffect(() => {
 		if (formValues?.registration_number) {
 			setFilters({ registration_number: formValues?.registration_number });
 		}
 	}, [formValues?.registration_number, setFilters]);
-
 	useEffect(() => {
 		setAddressOptions([]);
 		setValue('address', undefined);
@@ -63,39 +58,43 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 			setAddressData(formttedData);
 		}
 	}, [data, formValues?.registration_number, setValue]);
-
 	useEffect(() => {
 		resetMultipleFields(['name', 'pincode', 'business_name']);
-
 		if (formValues?.address) {
 			const { pocNameOptions:nameOptions, pincode, business_name } = getAddressRespectivePincodeAndPoc({
 				data    : addressData,
 				address : formValues?.address,
-
 			});
-
 			setPocNameOptions(nameOptions);
 			setValue('pincode', pincode);
 			setValue('business_name', business_name);
 		}
 	}, [formValues?.address, addressData, setValue, resetMultipleFields]);
-
 	useEffect(() => {
 		resetMultipleFields(['work_scopes', 'email', 'mobile_number']);
-
 		if (formValues?.name) {
 			const selectedName = pocNameOptions?.find((item) => item?.value === formValues?.name);
 			setValue('work_scopes', selectedName?.work_scopes || []);
 			setValue('email', selectedName?.email || '');
-
 			setValue('mobile_number', {
 				country_code : selectedName?.mobile_country_code,
 				number       : selectedName?.mobile_number,
 			});
 		}
 	}, [formValues?.name, pocNameOptions, setValue, resetMultipleFields]);
-
 	const workScopeOptions = convertObjectMappingToArray(POC_WORKSCOPE_MAPPING);
+	const countrySpecificLabel = getCountrySpecificData({
+		country_id    : formValues?.country_id,
+		accessorType  : 'identification_number',
+		accessor      : 'label',
+		isDefaultData : false,
+	});
+	const countrySpecificDocument = getCountrySpecificData({
+		country_id    : formValues?.country_id,
+		accessorType  : 'registration_number',
+		accessor      : 'label',
+		isDefaultData : false,
+	});
 
 	return (
 		<div>
@@ -115,23 +114,23 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 					</div>
 					<div className={styles.pan_number}>
 						<label className={styles.form_label}>
-							{`PAN Number / Registration Number ${
+							{`${countrySpecificLabel || 'PAN Number / Registration Number'} ${
 								['collection_party', 'paying_party'].includes(tradePartyType) ? '' : '(Optional)'}`}
 						</label>
 						<InputController
 							size="sm"
 							name="registration_number"
 							control={control}
-							placeholder="Enter Registration Number"
+							placeholder={`Enter ${countrySpecificLabel || 'Registration Number'}`}
 							rules={{
 								required : ['collection_party', 'paying_party'].includes(tradePartyType),
 								pattern  : {
 									value   : FORM_VALUE_PATTERNS.PAN_NUMBER,
-									message : 'Pan Number is invalid',
+									message : `${countrySpecificLabel || 'PAN/Registration Number'} ' is invalid'`,
 								},
 							}}
 						/>
-						{Error('registration_number')}
+						{Error(`${countrySpecificLabel || 'PAN/Registration Number'}`)}
 					</div>
 				</div>
 				<div className={styles.form_item_container}>
@@ -224,11 +223,13 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 				</div>
 				<div className={styles.checkbox}>
 					<CheckboxController name="not_reg_under_gst" control={control} />
-					<label className={styles.form_label}>Not registered under GST</label>
+					<label className={styles.form_label}>
+						{`Not registered under ${countrySpecificDocument || 'GST Number'}`}
+					</label>
 				</div>
 				<div className={styles.row}>
 					<div>
-						<label className={styles.form_label}>GST Number</label>
+						<label className={styles.form_label}>{`${countrySpecificDocument || 'GST Number'}`}</label>
 						<InputController
 							size="sm"
 							name="tax_number"
@@ -236,11 +237,11 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							rules={{
 								required: {
 									value   : !formValues.not_reg_under_gst,
-									message : 'GST Number is required',
+									message : `${countrySpecificDocument || 'GST Number'} 'is required'`,
 								},
 								pattern: {
 									value   : FORM_VALUE_PATTERNS.GST_NUMBER,
-									message : 'GST Number is invalid',
+									message : `${countrySpecificDocument || 'GST Number'} 'is invalid'`,
 								},
 							}}
 							disabled={formValues.not_reg_under_gst}
@@ -248,7 +249,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						{Error('tax_number')}
 					</div>
 					<div className={styles.upload_container}>
-						<label className={styles.form_label}>GST Proof</label>
+						<label className={styles.form_label}>{`${countrySpecificDocument || 'GST'} Proof`}</label>
 						<UploadController
 							className="tax_document"
 							name="tax_number_document_url"
@@ -257,7 +258,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							rules={{
 								required: {
 									value   : !formValues.not_reg_under_gst,
-									message : 'GST Proof is required',
+									message : `${countrySpecificDocument || 'GST'} ' Proof is required'`,
 								},
 							}}
 						/>
