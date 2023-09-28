@@ -8,8 +8,10 @@ import getMicroServiceName from './get-microservice-name';
 // eslint-disable-next-line custom-eslint/import-from-package-utils
 import { getCookie } from './getCookieFromCtx';
 
-const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate',
-	'fcl_cfs_rate', 'air_freight_rate', 'haulage_freight_rate', 'air_customs_rate'];
+const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate', 'fcl_cfs_rate',
+	'air_freight_rate', 'haulage_freight_rate', 'athena'];
+
+const ATHENA_SERVICE = 'athena';
 
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
@@ -72,11 +74,18 @@ request.interceptors.request.use((oldConfig) => {
 	if (PEEWEE_SERVICES.includes(serviceName) && isDevMode) {
 		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
 	}
+	if (serviceName === ATHENA_SERVICE) {
+		newConfig.baseURL = process.env.IHLS_BASE_URL;
+		newConfig.auth_token = process.env.DATA_PIPELINE_SECRET_KEY;
+	}
 
 	return {
 		...newConfig,
 		headers: {
-			authorizationscope: 'partner', authorization: `Bearer: ${token}`, authorizationparameters,
+			authorizationscope : 'partner',
+			authorization      : `Bearer: ${token}`,
+			authorizationparameters,
+			'auth-token'       : newConfig.auth_token || undefined,
 		},
 	};
 });
