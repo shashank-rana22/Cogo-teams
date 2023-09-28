@@ -29,17 +29,18 @@ const useGetListCoverage = () => {
 	}));
 	const { user: { id: user_id = '' } = {} } = user_data;
 
+	const [page, setPage] = useState(DEFAULT_PAGE);
+	const [source, setSource] = useState('live_bookings');
 	const [filter, setFilter] = useState({
 		service           : 'fcl_freight',
 		status            : 'pending',
+		source,
 		releventToMeValue : true,
 		daily_stats       : true,
 		assign_to_id      : '',
+		revert            : '',
+		value             : '',
 	});
-
-	const [source, setSource] = useState(null);
-	const [page, setPage] = useState(DEFAULT_PAGE);
-
 	const endPoint = API_NAME[filter?.service || 'fcl_freight'];
 	const [{ loading, data }, trigger] = useRequest({
 		url    : endPoint,

@@ -1,10 +1,12 @@
 import { Pill, Tooltip, Button } from '@cogoport/components';
 import { IcMFcl, IcMPortArrow } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
+import RevertModal from './RevertModal';
 import styles from './styles.module.css';
 
 function LiveBookingsListCard() {
+	const [addRateForm, setAddRateForm] = useState(false);
 	return (
 		<div className={styles.container}>
 			<div className={styles.head}>
@@ -97,9 +99,10 @@ function LiveBookingsListCard() {
 
 				<div className={styles.top_left_details}>
 					<Button size="sm" style={{ marginRight: '10px' }} themeType="secondary">View Details</Button>
-					<Button size="sm">Add Rate</Button>
+					<Button size="sm" onClick={() => { setAddRateForm(!addRateForm); }}>Add Rate</Button>
 				</div>
 			</div>
+			{addRateForm && <RevertModal addRateForm={addRateForm} setAddRateForm={setAddRateForm} />}
 		</div>
 	);
 }

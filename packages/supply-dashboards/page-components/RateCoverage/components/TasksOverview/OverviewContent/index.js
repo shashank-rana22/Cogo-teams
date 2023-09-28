@@ -11,7 +11,7 @@ function OverviewContent({ data = {}, statsLoading = false, filter = {}, setFilt
 
 	const handleClick = (card_detail) => {
 		setFilter((prev) => ({ ...prev, status: card_detail }));
-		setSource(null);
+		setSource(filter?.source);
 	};
 
 	return (

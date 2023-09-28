@@ -191,6 +191,34 @@ export const densityRatioOptions = [
 	},
 ];
 
+export const filterOptions = [
+	{ name: 'running', value: 'running', label: 'Running' }, { name: 'closed', value: 'closed', label: 'Closed' },
+];
+
+export const entityOptions = [
+	{
+		name  : 'all_entity',
+		value : 'all_entity',
+		label : 'All Entity',
+	}, { name: 'my_entity', value: 'my_entity', label: 'My Entity' },
+];
+
+export const revertedOptions = [
+	{
+		name  : 'reverted',
+		value : 'reverted',
+		label : 'Reverted',
+	}, { name: 'not_reverted', value: 'not_reverted', label: 'Not Reverted' },
+];
+
+export const delayedOptions = [
+	{
+		name  : 'delayed',
+		value : 'delayed',
+		label : 'Delayed',
+	}, { name: 'in_time', value: 'in_time', label: 'In Time' },
+];
+
 export const DEFAULT_VALUE = 0;
 export const FIFTY = 50;
 export const SEVENTY_FIVE = 75;

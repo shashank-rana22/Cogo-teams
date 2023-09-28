@@ -180,6 +180,7 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats
 					</div>
 				</div>
 			</div>
+
 			{showCloseModal && (
 				<CloseModal
 					setShowModal={setShowCloseModal}
@@ -190,6 +191,7 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats
 					getStats={getStats}
 				/>
 			)}
+
 			{showAddRateModal && (
 				<AddRateModal
 					showModal={showAddRateModal}
@@ -200,6 +202,7 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats
 					getListCoverage={getListCoverage}
 				/>
 			)}
+
 		</div>
 	);
 }

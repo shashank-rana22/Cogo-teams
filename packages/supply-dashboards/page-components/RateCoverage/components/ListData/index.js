@@ -145,13 +145,13 @@ function ListData({
 			{showFilters
 			&& (
 				<Filter
+					source={source}
 					filter={filter}
 					showFilters={showFilters}
 					setShowFilters={setShowFilters}
 					setFilter={setFilter}
 					setSerialId={setSerialId}
 					setShowWeekData={setShowWeekData}
-					setSource={setSource}
 				/>
 			)}
 		</div>
