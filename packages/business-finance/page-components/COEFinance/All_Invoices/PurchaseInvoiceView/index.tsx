@@ -18,6 +18,7 @@ import SegmentedFilters from './SegmentedFilters/index';
 
 interface ItemProps {
 	createdDate: Date;
+	updatedDate: Date;
 	billDate: Date;
 	dueDate: Date;
 	billCurrency: string;
@@ -30,6 +31,7 @@ interface ItemProps {
 	billNumber: string;
 	isProforma: boolean;
 	jobNumber: string;
+	shipmentId: string;
 	organizationName: string;
 	urgencyTag: Array<string>;
 	remarksTimeline?: Array<{

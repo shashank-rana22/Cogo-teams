@@ -9,6 +9,7 @@ const getListofInvoicePayload = ({
 	activePayrunTab, query,
 	selectFromDate, selectToDate,
 	sort,
+	activeEntity = '',
 }) => ({
 	pageIndex,
 	pageSize,
@@ -19,10 +20,11 @@ const getListofInvoicePayload = ({
 	dueDateSortType   : 'asc',
 	createdAtSortType : 'desc',
 	...sort,
+	entityCode        : activeEntity,
 });
 
 const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters }) => {
-	const { pageIndex, pageSize, createdAt } = globalFilters || {};
+	const { pageIndex, pageSize, createdAt, activeEntity = '' } = globalFilters || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -44,6 +46,7 @@ const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters 
 			selectFromDate,
 			selectToDate,
 			sort,
+			activeEntity,
 		});
 
 		try {
@@ -53,7 +56,7 @@ const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters 
 		} catch (err) {
 			Toast.error(err.message);
 		}
-	}, [activePayrunTab, pageIndex, pageSize, query, selectFromDate, selectToDate, sort, trigger]);
+	}, [activePayrunTab, pageIndex, pageSize, query, selectFromDate, selectToDate, sort, trigger, activeEntity]);
 
 	return {
 		getPayrunListView,

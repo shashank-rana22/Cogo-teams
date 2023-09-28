@@ -1,7 +1,7 @@
 import { Input, cl } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 
 import { LOGO } from '../../../constants/logo';
 import { applyFilter } from '../../../helpers/applyFilter';
@@ -10,14 +10,15 @@ import { sortNavs } from '../../../helpers/sortItems';
 import useGetUserSessionMappings from '../../../hooks/useGetUserSessionMappings';
 import Items from '../Items';
 
+import Notification from './Notification';
 import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
 import SwitchAccounts from './SwitchAccounts';
 // import ThemeToggle from './ThemeToggle';
 
 function Navbar({
-	className,
-	style,
+	className = '',
+	style = {},
 	nav = [],
 	partner_user_id = '',
 	pinnedNavs = [],
@@ -28,8 +29,10 @@ function Navbar({
 	firestore = {},
 }) {
 	const ref = useRef(null);
+	const navRef = useRef(null);
 	const { t } = useTranslation(['common']);
 	const userBasedNavView = formatUserBasedNavView(nav);
+
 	// eslint-disable-next-line no-undef
 	// const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
 
@@ -45,6 +48,7 @@ function Navbar({
 
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [openPopover, setOpenPopover] = useState(false);
+	const [notificationPopover, setNotificationPopover] = useState(false);
 	const [searchString, setSearchString] = useState('');
 
 	const filterdList = searchString
@@ -67,28 +71,46 @@ function Navbar({
 	);
 
 	const handleLeave = () => {
-		if (openPopover) {
+		if (openPopover || notificationPopover) {
 			setResetSubnavs(true);
 		} else {
 			setResetSubnavs(false);
 		}
 	};
 
+	const handleClickOutside = (event) => {
+		if (navRef.current && !navRef.current.contains(event.target)) {
+			setNotificationPopover(false);
+			setResetSubnavs(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('click', handleClickOutside);
+		return () => {
+			document.removeEventListener('click', handleClickOutside);
+		};
+	}, []);
+
 	return (
 		<div
 			style={style}
-			className={cl`${mobileShow ? styles.mobile_container : styles.container}${className}`}
+			className={cl`${mobileShow ? styles.mobile_container : styles.container}${className}
+			${notificationPopover ? ` ${styles.expanded}` : ''}`}
+			ref={navRef}
 		>
 			<nav
 				onMouseEnter={() => setResetSubnavs(true)}
 				onMouseLeave={handleLeave}
 			>
-				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}`} />
+				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}
+				${notificationPopover ? ` ${styles.notification_popover_bg_nav}` : ''}`}
+				/>
 				<div className={styles.inner_container}>
 					<div className={styles.brand_logo}>
 						<img
 							className={styles.logo}
-							src={resetSubnavs ? LOGO.LARGE : LOGO.SMALL}
+							src={resetSubnavs || notificationPopover ? LOGO.LARGE : LOGO.SMALL}
 							alt="Logo Cogoport"
 						/>
 					</div>
@@ -99,10 +121,13 @@ function Navbar({
 						checkIfSessionExpiring={checkIfSessionExpiring}
 						loading={loading}
 						openPopover={openPopover}
+						notificationPopover={notificationPopover}
+						setNotificationPopover={setNotificationPopover}
 						timeLeft={timeLeft}
 						refetch={refetch}
 						userId={userId}
 						firestore={firestore}
+						mobileShow={mobileShow}
 					/>
 
 					<div className={styles.search_container}>
@@ -160,6 +185,7 @@ function Navbar({
 					{/* </ul> */}
 				</div>
 			</nav>
+
 			<div
 				onMouseLeave={() => setResetSubnavs(false)}
 			>
@@ -176,7 +202,20 @@ function Navbar({
 							/>
 						)
 				}
+
+				{
+					notificationPopover
+						? (
+							<Notification
+								notificationPopover={notificationPopover}
+								setNotificationPopover={setNotificationPopover}
+								setResetSubnavs={setResetSubnavs}
+							/>
+						) : null
+				}
+
 			</div>
+
 		</div>
 
 	);

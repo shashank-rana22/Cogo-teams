@@ -1,35 +1,47 @@
-import { Toast } from '@cogoport/components';
 import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useCreateTicketActivity = ({ refetchTickets = () => {} }) => {
+const getPayload = ({ profile, message, ticketId, file }) => ({
+	UserType      : 'user',
+	PerformedByID : profile?.user?.id,
+	Description   : message,
+	Type          : 'respond',
+	TicketID      : [Number(ticketId)],
+	IsInternal    : true,
+	Status        : 'activity',
+	Data          : { Url: [file] || [] },
+});
+
+const useCreateTicketActivity = ({
+	ticketId,
+	fetchDetails,
+	scrollToBottom,
+}) => {
+	const { profile } = useSelector((state) => state);
+
 	const [{ loading }, trigger] = useTicketsRequest({
 		url     : '/activity',
 		method  : 'post',
-		authkey : 'post_tickets_actvity',
-	});
-	const { user_id = '' } = useSelector(({ profile }) => ({
-		user_id: profile?.user?.id,
-	}));
-	const createTicketActivity = async (payload = {}) => {
+		authkey : 'post_tickets_activity',
+	}, { manual: true });
+
+	const createTicketActivity = async ({ file, message }) => {
 		try {
-			const res = await trigger({
-				data: {
-					...payload,
-					UserType      : 'user',
-					PerformedByID : user_id,
-				},
+			await trigger({
+				data: getPayload({ profile, message, ticketId, file }),
 			});
-			Toast.success(res?.data || 'Ticket Activity Created Successfully!');
-			refetchTickets();
-		} catch (e) {
-			Toast.error(e?.response?.data || 'something went wrong');
+
+			fetchDetails();
+			scrollToBottom();
+		} catch (error) {
+			console.error(error?.error);
 		}
 	};
 
 	return {
 		createTicketActivity,
-		loading,
+		createLoading: loading,
 	};
 };
+
 export default useCreateTicketActivity;

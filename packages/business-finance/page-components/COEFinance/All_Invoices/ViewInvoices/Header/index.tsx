@@ -21,6 +21,7 @@ function Header({
 	checkItem = {},
 	isTagFound = false,
 	currentTab = '',
+	jobType = '',
 }: any) {
 	const [approve, setApprove] = useState(false);
 	const [modalData, setModalData] = useState('');
@@ -140,6 +141,7 @@ function Header({
 					status={status}
 					isTagFound={isTagFound}
 					currentTab={currentTab}
+					jobType={jobType}
 				/>
 			</div>
 

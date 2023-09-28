@@ -25,7 +25,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
-    ".eslintrc.js", ],
+    ".eslintrc.js", "packages/service-management/page-components/Details/Service/OptedRecommendedServices", ],
   "exclude": [
     "node_modules"
   ],
