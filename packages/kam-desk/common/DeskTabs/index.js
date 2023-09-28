@@ -1,6 +1,6 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { IcMArrowRotateLeft, IcMArrowRotateRight } from '@cogoport/icons-react';
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 import shipmentTabMapping from '../../config/SHIPMENT_TAB_MAPPING';
 import { CRITICAL_TABS } from '../../config/SHIPMENTS_PAYLOAD';
@@ -14,6 +14,8 @@ function DeskTabs() {
 	const scrollRef = useRef('');
 	const tabs_container = scrollRef.current;
 	const scrollWidth = window.innerWidth / SCROLL_DIVISOR;
+
+	const [windowSize, setWindowSize] = useState(window.innerWidth);
 
 	const { stepperTab, shipmentType, activeTab, setActiveTab, setFilters, filters } = useContext(KamDeskContext);
 
@@ -37,15 +39,27 @@ function DeskTabs() {
 		tabs_container.scrollLeft += shift;
 	};
 
+	function handleWindowResize() {
+		const windowWidth = window.innerWidth;
+
+		if (windowSize !== windowWidth) setWindowSize(windowWidth);
+	}
+	window.addEventListener('resize', handleWindowResize);
+	handleWindowResize();
+
+	const tabs_container_width = tabs_container.scrollWidth;
+
 	return (
 		<div className={styles.container}>
 
-			<button
-				onClick={() => slide(-scrollWidth)}
-				className={styles.btn_left}
-			>
-				<IcMArrowRotateLeft width={16} height={16} />
-			</button>
+			{ tabs_container_width > windowSize ? (
+				<button
+					onClick={() => slide(-scrollWidth)}
+					className={styles.btn_left}
+				>
+					<IcMArrowRotateLeft width={16} height={16} />
+				</button>
+			) : null}
 
 			<div className={styles.tabs_container} ref={scrollRef}>
 				<Tabs
@@ -64,12 +78,14 @@ function DeskTabs() {
 				</Tabs>
 			</div>
 
-			<button
-				onClick={() => slide(+scrollWidth)}
-				className={styles.btn_right}
-			>
-				<IcMArrowRotateRight width={16} height={16} />
-			</button>
+			{tabs_container_width > windowSize ? (
+				<button
+					onClick={() => slide(+scrollWidth)}
+					className={styles.btn_right}
+				>
+					<IcMArrowRotateRight width={16} height={16} />
+				</button>
+			) : null}
 		</div>
 	);
 }
