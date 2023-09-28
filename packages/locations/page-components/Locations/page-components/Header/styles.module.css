@@ -8,7 +8,7 @@
 .btn_align {
 	display: flex;
 
-	button:first-child {
+	button {
 		margin-left: 5px;
 	}
 }

@@ -16,46 +16,39 @@ const useCreateLocation = () => {
 		watch,
 	} = useForm();
 
-	const onCreate = async ({ data }) => {
-		console.log(data);
+	const onCreate = async ({ data:{ values = [] } }) => {
+		console.log(values);
 		const NEW_ALIASES = [];
-		data?.aliases_attributes.forEach((aliases) => {
-			NEW_ALIASES.push({ name: aliases.name });
+		values?.aliases_attributes?.forEach((aliases) => {
+			NEW_ALIASES.push(aliases.name);
 		});
+		const {
+			name, type,
+			address,
+			status, region_id,
+			local_languages,
+			latitude, longitude,
+			flag_icon_url, flag_image_url,
+			country_id, country_code,
+			zone_id,
+		} = values;
 		const formattedValues = {
-			aliases_attributes: NEW_ALIASES,
-			actual_location_type:
-			'sd',
-			address:
-			'sd',
-			continent_id:
-			'4de32623-213a-4023-89d0-337390fd8fc3',
-			country_id:
-			'9a28b04b-4c9f-4301-942a-fe4c6a30e84b',
-			is_icd:
-			false,
-			latitude:
-			'12',
-			local_languages:
-			'["english"]',
-			longitude:
-			'12',
-			meta_data:
-			{},
-			name:
-			's',
-			region_id:
-			'25dae478-6c15-413c-b558-4f54534c0cc3',
-			status:
-			'active',
-			trade_id:
-			'a89d24bc-715b-4d11-b2ff-d33164015fdd',
-			type:
-			'city',
-			zone_id:
-			'1ae7237e-77f5-43c0-807f-2124836c7369',
-			sub_district_id:
-'e68485e9-c0eb-40b1-86d1-1e14b9190f9a',
+			aliases_attributes : NEW_ALIASES,
+			name,
+			type,
+			address,
+			status,
+			region_id,
+			local_languages,
+			latitude,
+			longitude,
+			flag_icon_url      : flag_icon_url?.finalUrl,
+			flag_image_url     : flag_image_url?.finalUrl,
+			country_id,
+			country_code,
+			zone_id,
+			// subdistrict_id     : '',
+
 		};
 		// formattedValues.is_icd = formattedValues.is_icd === 'Yes';
 

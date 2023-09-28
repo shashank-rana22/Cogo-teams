@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import ScopeSelect from '@cogoport/scope-select';
 import { useTranslation } from 'next-i18next';
 
 import Filter from '../Filters';
@@ -12,9 +13,10 @@ function Header({ setFilters = () => {}, filters = {}, setSideBar = () => {} }) 
 
 			<h1>{t('locations:locations_heading')}</h1>
 			<div className={styles.btn_align}>
-
-				<Button onClick={() => setSideBar('create')}>{t('locations:create_location')}</Button>
 				<Filter setFilters={setFilters} filters={filters} activeTab={filters.type} />
+				<ScopeSelect size="md" showChooseAgent={false} />
+				<Button onClick={() => setSideBar('create')}>{t('locations:create_location')}</Button>
+
 			</div>
 		</div>
 	);

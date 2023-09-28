@@ -52,11 +52,11 @@ const useUpdateLocation = () => {
 			NEW_ALIASES.push({ name: aliases?.name })
 		));
 		const formattedValues = {
+			locality_id        : id,
 			id,
 			aliases_attributes : NEW_ALIASES,
 			name,
 			type,
-			locality_id        : 'sdfas',
 		};
 		// formattedValues.is_icd = formattedValues.is_icd === 'Yes';
 
@@ -65,7 +65,7 @@ const useUpdateLocation = () => {
 		try {
 			const res = await trigger({ data: formattedValues });
 			if (res?.data) {
-				Toast.success(t('locations:location_created_successfully'));
+				Toast.success(t('locations:location_updated_successfully'));
 			}
 		} catch (error) {
 			console.log(error);
