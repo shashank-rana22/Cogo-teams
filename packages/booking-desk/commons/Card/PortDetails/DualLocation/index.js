@@ -1,58 +1,21 @@
-import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
 import ServiceIcon from '../../ServiceIcon';
+import HandleLocationDetails from '../HandleLocationDetails';
 
 import styles from './styles.module.css';
 
-function HandleLocationDetails({ location = {} }) {
-	const {
-		port_code = '',
-		postal_code = '',
-		country_code = '',
-		name = '',
-		display_name = '',
-	} = location || {};
-
-	return (
-		<>
-			<div className={styles.port_code}>
-				<div className={`${styles.code} core_ui_port_code`}>
-					(
-					{port_code || postal_code}
-					)
-				</div>
-
-				<div className={`${styles.country} core_ui_country_code`}>
-					{country_code}
-				</div>
-			</div>
-
-			<Tooltip
-				placement="bottom"
-				theme="light"
-				interactive
-				content={display_name}
-			>
-				<div className={`${styles.ellipsis_text} core_ui_loaction_name`}>
-					{name}
-				</div>
-			</Tooltip>
-		</>
-	);
-}
-
 const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat, null, true) : null);
 
-function PortDetails({ data = {}, icon }) {
+function PortDetails({ data = {}, icon = {} }) {
 	const {
 		origin = {},
 		destination = {},
 		schedule_arrival = '',
 		schedule_departure = '',
-	} = data;
+	} = data || {};
 
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>
