@@ -1,4 +1,4 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, ButtonIcon } from '@cogoport/components';
 import { IcMArrowRotateLeft, IcMArrowRotateRight } from '@cogoport/icons-react';
 import { useContext, useRef, useState } from 'react';
 
@@ -79,12 +79,12 @@ function DeskTabs() {
 		<div className={styles.container}>
 
 			{ tabs_container_width > windowSize ? (
-				<button
+				<ButtonIcon
+					size="md"
+					icon={<IcMArrowRotateLeft width={20} height={20} />}
 					onClick={() => slide(-scrollWidth)}
 					className={styles.btn_left}
-				>
-					<IcMArrowRotateLeft width={20} height={20} />
-				</button>
+				/>
 			) : null}
 
 			<div className={styles.tabs_container} ref={scrollRef}>
@@ -104,12 +104,12 @@ function DeskTabs() {
 			</div>
 
 			{tabs_container_width > windowSize ? (
-				<button
-					onClick={() => slide(+scrollWidth)}
+				<ButtonIcon
+					size="md"
+					icon={<IcMArrowRotateRight width={20} height={20} />}
+					onClick={() => slide(scrollWidth)}
 					className={styles.btn_right}
-				>
-					<IcMArrowRotateRight width={20} height={20} />
-				</button>
+				/>
 			) : null}
 		</div>
 	);
