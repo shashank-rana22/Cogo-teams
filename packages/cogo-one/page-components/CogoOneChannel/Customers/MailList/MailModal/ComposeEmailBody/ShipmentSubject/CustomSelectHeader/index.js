@@ -1,6 +1,8 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import React from 'react';
 
+import { SUBJECT_MAPPING } from '../../../../../../../../constants/mailConstants';
+
 import styles from './styles.module.css';
 
 function CustomSelectHeader({
@@ -15,9 +17,13 @@ function CustomSelectHeader({
 				themeType="secondary"
 				onChange={setActiveTab}
 			>
-				<TabPanel name="shipment" title="SIDs" />
-				<TabPanel name="quotation" title="Quotations" />
-				<TabPanel name="others" title="Others" />
+				{Object.values(SUBJECT_MAPPING).map((item) => (
+					<TabPanel
+						key={item.value}
+						name={item.value}
+						title={item.title}
+					/>
+				))}
 			</Tabs>
 		</div>
 	);

@@ -105,3 +105,21 @@ export const BUTTON_KEYS_MAPPING = {
 	draft : ['preview', 'delete'],
 	mail  : ['forward', 'reply', 'reply_all'],
 };
+
+export const SUBJECT_MAPPING = {
+	shipment: {
+		title         : 'SIDs',
+		value         : 'shipment',
+		template_tags : ['shipments_rpa'],
+	},
+	quotation: {
+		title         : 'Quotations',
+		value         : 'quotation',
+		template_tags : ['quotation_rpa'],
+	},
+	others: {
+		title         : 'Others',
+		value         : 'others',
+		template_tags : [],
+	},
+};

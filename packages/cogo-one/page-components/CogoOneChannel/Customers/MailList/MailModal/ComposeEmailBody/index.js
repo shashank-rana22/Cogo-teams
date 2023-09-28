@@ -6,6 +6,7 @@ import { useEffect, useMemo } from 'react';
 import { getUserActiveMails } from '../../../../../../configurations/mail-configuration';
 import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
 
+import EmailTemplates from './EmailTemplates';
 import Recipients from './Recipients';
 import ShipmentSubject from './ShipmentSubject';
 import styles from './styles.module.css';
@@ -104,6 +105,10 @@ function ComposeEmailBody(props) {
 						/>
 					)}
 			</div>
+
+			{showOrgSpecificMail
+				? <EmailTemplates mailProps={mailProps} />
+				: null }
 
 			<div className={styles.rte_container}>
 				<RTEditor
