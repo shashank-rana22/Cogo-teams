@@ -15,7 +15,6 @@ const useEditLineItems = ({
 	invoice = {},
 	onClose = () => {},
 	refetch = () => {},
-	isAdminSuperAdmin = false,
 	shipment_data = {},
 	primary_service = {},
 	info,
@@ -74,7 +73,6 @@ const useEditLineItems = ({
 			handleChange,
 			charge: service,
 			info,
-			isAdminSuperAdmin,
 			shipment_data,
 			primary_service,
 			index,
@@ -245,14 +243,14 @@ const useEditLineItems = ({
 	return {
 		onCreate,
 		handleSubmit,
-		controls,
+		controls, //
 		loading,
 		CUSTOM_VALUES,
 		errors,
 		control,
 		setValue,
 		watch,
-		newFormValues,
+		newFormValues, //
 	};
 };
 
