@@ -1,8 +1,9 @@
-import { Button, cl, Pill } from '@cogoport/components';
+import { Button, Pill } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import DiscountSlabsTable from '../../../../../../common/DiscountSlabsTable';
+import RowContent from '../../../../../../common/RowContent';
 import ShipmentSlabsTable from '../../../../../../common/ShipmentSlabsTable';
 import UpdateModal from '../../../../../../common/UpdateModal';
 import columnsWithValue from '../../../../../../helpers/getColumnMappingList';
@@ -11,20 +12,6 @@ import useDeactivatePromotionRule from '../../../../../../hooks/useDeactivatePro
 import columnsMapping from './columnsMapping';
 import styles from './styles.module.css';
 import tagsMapping from './tagsMapping';
-
-const LAST_INDEX = 1;
-
-function Content({ columnDetails = {}, data = {} }) {
-	const { label, getValue } = columnDetails || {};
-	const value = getValue(data);
-
-	return (
-		<div className={`${styles.content_container}`}>
-			{label ? <div className={styles.content_title}>{label}</div> : null}
-			<div className={cl`${styles.content_value} ${styles[value]}`}>{value}</div>
-		</div>
-	);
-}
 
 function ListItem({
 	data = {},
@@ -56,15 +43,14 @@ function ListItem({
 					})}
 				</div>
 				<div className={styles.grid_row}>
-					{columnsList.map((columnDetails, index) => {
+					{columnsList.map((columnDetails) => {
 						const { key } = columnDetails;
 						return (
 							<div key={key}>
-								<Content
+								<RowContent
 									key={key}
 									data={data}
 									columnDetails={columnDetails}
-									isLastItem={index === columnsList.length - LAST_INDEX}
 								/>
 							</div>
 						);
@@ -80,7 +66,7 @@ function ListItem({
 						>
 							View & Edit
 						</Button>
-						{activeList === 'active' && (
+						{activeList === 'active' ? (
 							<Button
 								themeType="secondary"
 								size="md"
@@ -91,7 +77,7 @@ function ListItem({
 							>
 								Deactivate
 							</Button>
-						)}
+						) : null}
 					</div>
 				</div>
 			</div>
@@ -129,15 +115,22 @@ function ListItem({
 						</>
 					)}
 				</button>
-				{showDeactivateModal && (
+				{showDeactivateModal ? (
 					<UpdateModal
 						onClose={() => setShowDeactivateModal(false)}
 						onClickYes={() => {
-							onUpdateStatus();
+							onUpdateStatus({
+								data: {
+									id     : data.id,
+									status : 'inactive',
+								},
+								refetchList,
+							});
 							setShowDeactivateModal(false);
 						}}
+						show={showDeactivateModal}
 					/>
-				)}
+				) : null}
 			</div>
 		</div>
 	);

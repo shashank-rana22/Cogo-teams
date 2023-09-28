@@ -7,27 +7,30 @@ function UpdateModal({
 	title = 'Are you sure you want to DEACTIVE this rule?',
 	onClose = () => {},
 	onClickYes = () => {},
+	show = false,
 }) {
-	return (
-		<Modal
-			size="md"
-			show
-			onClose={onClose}
-			placement="center"
-		>
-			<Modal.Header title={title} />
-			<Modal.Footer>
-				<Button
-					themeType="secondary"
-					onClick={onClose}
-					className={styles.btn}
-				>
-					Cancel
-				</Button>
-				<Button onClick={onClickYes}>OK</Button>
-			</Modal.Footer>
-		</Modal>
-	);
+	return (show
+		? (
+			<Modal
+				size="md"
+				show={show}
+				onClose={onClose}
+				placement="center"
+			>
+				<Modal.Header title={title} />
+				<Modal.Footer>
+					<Button
+						themeType="secondary"
+						onClick={onClose}
+						className={styles.btn}
+					>
+						Cancel
+					</Button>
+					<Button onClick={onClickYes}>OK</Button>
+				</Modal.Footer>
+			</Modal>
+		)
+		: null);
 }
 
 export default UpdateModal;

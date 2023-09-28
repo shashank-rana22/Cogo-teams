@@ -11,7 +11,7 @@ const tagsMapping = [
 	},
 	{
 		key      : 'trade_type',
-		getValue : (data) => data?.trade_type,
+		getValue : (data) => startCase(data?.trade_type),
 	},
 	{
 		key      : 'rate_source',

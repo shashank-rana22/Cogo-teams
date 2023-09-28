@@ -7,7 +7,7 @@ function StatsPromoCodes({
 	title = '',
 	number = '',
 	amount = '',
-	selectedCurrency = 'USD',
+	params = {},
 }) {
 	return (
 		<div className={styles.card}>
@@ -22,7 +22,7 @@ function StatsPromoCodes({
 					<div className={styles.main_text}>
 						{formatAmount({
 							amount,
-							currency : selectedCurrency,
+							currency : params.currency,
 							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'symbol',

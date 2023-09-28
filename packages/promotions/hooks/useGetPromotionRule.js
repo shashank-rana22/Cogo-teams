@@ -4,8 +4,6 @@ import { useCallback, useEffect, useState } from 'react';
 import toastApiError from '../utils/toastApiError';
 
 const useGetPromotionRule = ({
-	viewAndEditId = '',
-	activeList = '',
 	defaultParams = {},
 }) => {
 	const [data, setData] = useState({});
@@ -15,8 +13,6 @@ const useGetPromotionRule = ({
 			url    : '/get_promotion_rule',
 			method : 'GET',
 			params : {
-				promotion_rule_id : viewAndEditId,
-				status            : activeList,
 				...(defaultParams || {}),
 			},
 		},

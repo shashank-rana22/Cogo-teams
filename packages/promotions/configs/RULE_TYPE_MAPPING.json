@@ -1,10 +1,10 @@
 [
-  {
-    "label": "Shipment",
-    "value": "shipment"
-  },
-  {
-    "label": "Organization",
-    "value": "organization"
-  }
+	{
+		"label": "Shipment",
+		"value": "shipment"
+	},
+	{
+		"label": "Organization",
+		"value": "organization"
+	}
 ]

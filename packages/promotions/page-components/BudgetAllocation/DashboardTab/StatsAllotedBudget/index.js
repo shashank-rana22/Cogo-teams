@@ -3,14 +3,14 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function StatsAllotedBudget({ amount = '', selectedCurrency = 'USD' }) {
+function StatsAllotedBudget({ amount = 0, params = {} }) {
 	return (
 		<div className={styles.card}>
 			<div className={styles.title}>Alloted Budget</div>
 			<div className={styles.main_text}>
 				{formatAmount({
 					amount,
-					currency : selectedCurrency,
+					currency : params.currency,
 					options  : {
 						style                 : 'currency',
 						currencyDisplay       : 'symbol',

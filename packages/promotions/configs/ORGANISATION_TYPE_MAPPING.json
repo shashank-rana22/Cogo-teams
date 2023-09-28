@@ -1,10 +1,10 @@
 [
-  {
-    "label": "Importer Exporter",
-    "value": "importer_exporter"
-  },
-  {
-    "label": "Channel Partner",
-    "value": "channel_partner"
-  }
+	{
+		"label": "Importer Exporter",
+		"value": "importer_exporter"
+	},
+	{
+		"label": "Channel Partner",
+		"value": "channel_partner"
+	}
 ]

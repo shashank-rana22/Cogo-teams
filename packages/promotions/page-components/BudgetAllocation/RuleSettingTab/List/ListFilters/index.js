@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 
 import Layout from '../../../../../common/Layout';
 
@@ -10,10 +10,8 @@ import styles from './styles.module.css';
 function ListFilters({
 	filters = {},
 	setFilters = () => {},
-	activeService = '',
 	setShowPopover = () => {},
 }) {
-	const DEFAULT_VALUES = {};
 	const controls = getControls();
 
 	const {
@@ -22,7 +20,7 @@ function ListFilters({
 		handleSubmit,
 		reset,
 	} = useForm({
-		defaultValues: DEFAULT_VALUES,
+		defaultValues: {},
 	});
 
 	const onClickReset = useCallback(() => {
@@ -48,10 +46,6 @@ function ListFilters({
 		setFilters({ ...filter });
 		setShowPopover(false);
 	};
-
-	useEffect(() => {
-		onClickReset();
-	}, [activeService, onClickReset]);
 
 	return (
 		<div className={styles.container}>

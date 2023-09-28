@@ -1,4 +1,5 @@
 import { Loader, Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../common/EmptyState';
 
@@ -16,7 +17,7 @@ function ListContent({
 	refetchList = () => {},
 	setViewAndEditRuleId = () => {},
 }) {
-	const { list, page_limit = 10, total_count = 1 } = data || {};
+	const { list = [], page_limit = 10, total_count = 1 } = data || {};
 	if (loading) {
 		return (
 			<div className={styles.loader}>
@@ -25,7 +26,7 @@ function ListContent({
 		);
 	}
 
-	if (!(list || []).length && !loading) {
+	if (isEmpty(list) && !loading) {
 		return <EmptyState />;
 	}
 	const { page, ...restFilters } = filters || {};

@@ -10,7 +10,7 @@ function Graph({ dataKeys = {} }) {
 		id    : 'Promo',
 		color : 'hsl(313, 70%, 50%)',
 		data  : dataKeys?.promotion_per_month?.map((item) => ({
-			x : item?.month.slice(MONTH_START_INDEX, MONTH_END_INDEX),
+			x : item?.month?.slice(MONTH_START_INDEX, MONTH_END_INDEX),
 			y : item?.discount_amount,
 		})),
 	}];

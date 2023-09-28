@@ -12,8 +12,6 @@ const useGetListPromotionRule = ({
 	const [data, setData] = useState({});
 	const [filters, setFilters] = useState({});
 
-	const { activeList: status = '', activeService: primary_service = '' } = defaultFilters || {};
-
 	const { page = 1, ...restFilters } = filters || {};
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -23,9 +21,7 @@ const useGetListPromotionRule = ({
 				page,
 				page_limit : PAGE_LIMIT,
 				filters    : {
-					primary_service,
-					categories: ['business'],
-					status,
+					...(defaultFilters || {}),
 					...restFilters,
 				},
 				...(defaultParams || {}),
@@ -50,16 +46,12 @@ const useGetListPromotionRule = ({
 		listPromotionRule();
 	}, [listPromotionRule, filters]);
 
-	const refetch = () => {
-		listPromotionRule();
-	};
-
 	return {
 		data,
 		loading,
 		filters,
 		setFilters,
-		refetch,
+		listPromotionRule,
 	};
 };
 

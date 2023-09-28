@@ -1,25 +1,14 @@
-import { Button, cl } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import DiscountSlabsTable from '../../../../../../common/DiscountSlabsTable';
+import RowContent from '../../../../../../common/RowContent';
 import ShipmentSlabsTable from '../../../../../../common/ShipmentSlabsTable';
 import columnsWithValue from '../../../../../../helpers/getColumnMappingList';
 
 import columnsMapping from './columnsMapping';
 import styles from './styles.module.css';
-
-function Content({ columnDetails = {}, data = {} }) {
-	const { label, getValue } = columnDetails || {};
-	const value = getValue(data);
-
-	return (
-		<div className={`${styles.content_container}`}>
-			{label ? <div className={styles.content_title}>{label}</div> : null}
-			<div className={cl`${styles.content_value} ${styles[value]}`}>{value}</div>
-		</div>
-	);
-}
 
 function CustomConfigListItem({
 	data = {},
@@ -38,7 +27,7 @@ function CustomConfigListItem({
 						const { key } = columnDetails;
 						return (
 							<div key={key}>
-								<Content
+								<RowContent
 									key={key}
 									data={data}
 									columnDetails={columnDetails}
@@ -46,7 +35,7 @@ function CustomConfigListItem({
 							</div>
 						);
 					})}
-					{!showCustomConfigForm && (
+					{!showCustomConfigForm ? (
 						<div className={styles.flex_content}>
 							<Button
 								themeType="secondary"
@@ -59,7 +48,7 @@ function CustomConfigListItem({
 								View & Edit
 							</Button>
 						</div>
-					)}
+					) : null}
 				</div>
 
 			</div>

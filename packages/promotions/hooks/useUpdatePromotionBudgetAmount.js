@@ -2,11 +2,7 @@ import { useRequest } from '@cogoport/request';
 
 import toastApiError from '../utils/toastApiError';
 
-const useUpdatePromotionBudgetAmount = ({
-	budgetId,
-	budgetValue,
-	refetchDashboard = () => {},
-}) => {
+const useUpdatePromotionBudgetAmount = () => {
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/update_budget_amount',
@@ -15,14 +11,10 @@ const useUpdatePromotionBudgetAmount = ({
 		{ manual: true },
 	);
 
-	const updateBudgetAmount = async () => {
-		const payload = {
-			id     : budgetId,
-			amount : parseFloat(budgetValue),
-		};
+	const updateBudgetAmount = async ({ data = {}, refetchDashboard = () => {} }) => {
 		try {
 			await trigger({
-				data: payload,
+				data,
 			});
 			refetchDashboard();
 		} catch (err) {

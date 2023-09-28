@@ -26,40 +26,38 @@
 	border-radius: 8px;
 }
 
-.promo_code_used_progress {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: #bf291e;
-	border-radius: 8px;
-}
-
+.promo_code_used_progress,
 .promo_code_created_progress {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: #f37166;
 	border-radius: 8px;
 }
 
-.promo_code_used_dot {
-	width: 10px;
-	height: 10px;
-	margin: 0 6px 0 0;
+.promo_code_used_progress {
 	background-color: #bf291e;
-	border-radius: 50%;
 }
 
+.promo_code_created_progress {
+	background-color: #f37166;
+}
+
+.promo_code_used_dot,
 .promo_code_created_dot {
 	width: 10px;
 	height: 10px;
 	margin: 0 6px 0 0;
-	background-color: #f37166;
 	border-radius: 50%;
+}
+
+.promo_code_used_dot {
+	background-color: #bf291e;
+}
+
+.promo_code_created_dot {
+	background-color: #f37166;
 }
 
 .alloted_budget_text {

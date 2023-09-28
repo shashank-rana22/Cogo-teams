@@ -5,7 +5,7 @@ const getOrganizationCreateRuleData = (values) => {
 		discount_limit_value = '',
 		frequency = '',
 		...restValues
-	} = values;
+	} = values || {};
 	return {
 		...restValues,
 		discount_config: {

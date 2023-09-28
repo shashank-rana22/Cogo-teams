@@ -10,7 +10,7 @@ const shipmentConfigControls = () => [{
 	showButtons        : true,
 	buttonText         : 'Add',
 	noDeleteButtonTill : 1,
-	...({ handleFieldArrayAddCheck }),
+	...handleFieldArrayAddCheck,
 	controls           : [
 		{
 			name     : 'slab_unit',

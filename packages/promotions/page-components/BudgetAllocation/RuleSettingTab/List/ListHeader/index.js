@@ -23,7 +23,6 @@ function ListHeader({
 	setActiveList = () => {},
 	filters = {},
 	setFilters = () => {},
-	activeService = '',
 	setShowAddRuleForm = '',
 }) {
 	const [showPopover, setShowPopover] = useState(false);
@@ -74,7 +73,6 @@ function ListHeader({
 							<ListFilters
 								filters={filters}
 								setFilters={setFilters}
-								activeService={activeService}
 								setShowPopover={setShowPopover}
 							/>
 						)}

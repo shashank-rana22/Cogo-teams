@@ -27,7 +27,7 @@ function CustomConfig({
 				) : null}
 			</div>
 
-			{(viewAndEditConfigData !== null || showCustomConfigForm) && (
+			{(viewAndEditConfigData !== null || showCustomConfigForm) ? (
 				<CustomConfigForm
 					data={data}
 					refetchList={refetchList}
@@ -35,15 +35,15 @@ function CustomConfig({
 					viewAndEditConfigData={viewAndEditConfigData}
 					setViewAndEditConfigData={setViewAndEditConfigData}
 				/>
-			)}
+			) : null}
 
-			{viewAndEditConfigData === null && (
+			{viewAndEditConfigData === null ? (
 				<CustomConfigList
 					data={data}
 					showCustomConfigForm={showCustomConfigForm}
 					setViewAndEditConfigData={setViewAndEditConfigData}
 				/>
-			)}
+			) : null}
 		</div>
 	);
 }

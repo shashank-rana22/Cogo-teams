@@ -14,10 +14,10 @@ function EditRuleForm({
 	setViewAndEditRuleId = () => {},
 }) {
 	const { data = {}, loading = {}, refetchList = () => {} } = useGetPromotionRule({
-		viewAndEditId : viewAndEditRuleId,
-		activeList,
-		defaultParams : {
-			agent_rules_data_required: true,
+		defaultParams: {
+			promotion_rule_id         : viewAndEditRuleId,
+			status                    : activeList,
+			agent_rules_data_required : true,
 		},
 	});
 

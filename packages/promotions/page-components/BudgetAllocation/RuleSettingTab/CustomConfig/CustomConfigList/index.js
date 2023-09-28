@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 import EmptyState from '../../../../../common/EmptyState';
 
 import CustomConfigListItem from './CustomConfigListItem';
@@ -8,7 +10,7 @@ function CustomConfigList({
 	setViewAndEditConfigData = () => {},
 }) {
 	const { agent_rules = [] } = data || {};
-	if (!(agent_rules || []).length) {
+	if (isEmpty(agent_rules)) {
 		return <EmptyState />;
 	}
 	return (

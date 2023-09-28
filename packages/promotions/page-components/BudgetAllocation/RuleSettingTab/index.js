@@ -1,65 +1,12 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import SERVICE_TABS_MAPPING from '../../../configs/SERVICE_TABS_MAPPING.json';
+
 import AddRuleForm from './AddRuleForm';
 import EditRuleForm from './EditRuleForm';
 import List from './List';
 import styles from './styles.module.css';
-
-const TABS_MAPPING = [
-	{
-		value : 'fcl_freight',
-		label : 'FCL',
-	},
-	{
-		value : 'lcl_freight',
-		label : 'LCL',
-	},
-	{
-		value : 'air_freight',
-		label : 'AIR',
-	},
-	{
-		value : 'ftl_freight',
-		label : 'FTL',
-	},
-	{
-		value : 'ltl_freight',
-		label : 'LTL',
-	},
-	{
-		value : 'fcl_freight_local',
-		label : 'FCL locals',
-	},
-	{
-		value : 'air_freight_local',
-		label : 'AIR locals',
-	},
-	{
-		value : 'fcl_customs',
-		label : 'FCL customs',
-	},
-	{
-		value : 'lcl_customs',
-		label : 'LCL customs',
-	},
-	{
-		value : 'air_customs',
-		label : 'AIR customs',
-	},
-	{
-		value : 'trailer_freight',
-		label : 'Trailer freight',
-	},
-	{
-		value : 'haulage_freight',
-		label : 'Haulage freight',
-	},
-	{
-		value : 'rail_domestic_freight',
-		label : 'Rail Domestic',
-	},
-];
 
 function RuleSettingTab() {
 	const [activeService, setActiveService] = useState('fcl_freight');
@@ -98,7 +45,7 @@ function RuleSettingTab() {
 						setActiveService(val);
 					}}
 				>
-					{TABS_MAPPING.map((item) => {
+					{SERVICE_TABS_MAPPING.map((item) => {
 						const { label = '', value = '' } = item;
 						return (
 							<TabPanel

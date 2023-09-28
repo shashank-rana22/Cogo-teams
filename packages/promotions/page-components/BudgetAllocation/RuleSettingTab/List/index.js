@@ -10,7 +10,11 @@ function List({
 	setViewAndEditRuleId = () => {},
 	setShowAddRuleForm = () => {},
 }) {
-	const defaultFilters = { activeList, activeService };
+	const defaultFilters = {
+		status          : activeList,
+		primary_service : activeService,
+		categories      : ['business'],
+	};
 	const DEFAULT_PARAMS = {
 		cogo_entity_data_required     : true,
 		slab_configs_data_required    : true,
@@ -18,14 +22,10 @@ function List({
 		updated_by_user_data_required : true,
 		discount_config_data_required : true,
 	};
-	const { data, loading, filters, setFilters, refetch } = useGetListPromotionRule({
+	const { data, loading, filters, setFilters, listPromotionRule } = useGetListPromotionRule({
 		defaultFilters,
 		defaultParams: DEFAULT_PARAMS,
 	});
-
-	const refetchList = () => {
-		refetch();
-	};
 
 	return (
 		<div>
@@ -34,7 +34,6 @@ function List({
 				setFilters={setFilters}
 				activeList={activeList}
 				setActiveList={setActiveList}
-				activeService={activeService}
 				setShowAddRuleForm={setShowAddRuleForm}
 			/>
 			<ListContent
@@ -43,7 +42,7 @@ function List({
 				filters={filters}
 				setFilters={setFilters}
 				activeList={activeList}
-				refetchList={refetchList}
+				refetchList={listPromotionRule}
 				setViewAndEditRuleId={setViewAndEditRuleId}
 			/>
 		</div>

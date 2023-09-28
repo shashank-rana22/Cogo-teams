@@ -1,5 +1,5 @@
 import { Loader } from '@cogoport/components';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import useGetPromotionBudgetDashboard from '../../../hooks/useGetPromotionBudgetDashboard';
 
@@ -13,12 +13,19 @@ import styles from './styles.module.css';
 const DEFAULT_AMOUNT = 0;
 
 function DashboardTab() {
-	const [selectedCurrency, setSelectedCurrency] = useState('USD');
-	const { data, loading, refetch } = useGetPromotionBudgetDashboard({
-		selectedCurrency,
-	});
+	const {
+		data = {},
+		loading = {},
+		params = {},
+		setParams = () => {},
+		fetchDashboardData = () => {},
+	} = useGetPromotionBudgetDashboard();
 	const [budgetId, setBudgetId] = useState(data.total_budget?.id);
 	const [budgetValue, setBudgetValue] = useState(data.total_budget?.amount || DEFAULT_AMOUNT);
+
+	useEffect(() => {
+		setParams((p) => ({ ...p, currency: 'USD' }));
+	}, [setParams]);
 
 	useEffect(() => {
 		setBudgetId(data.total_budget?.id);
@@ -40,15 +47,15 @@ function DashboardTab() {
 				amount={data.total_budget?.amount || DEFAULT_AMOUNT}
 				budgetValue={budgetValue}
 				setBudgetValue={setBudgetValue}
-				refetchDashboard={refetch}
-				selectedCurrency={selectedCurrency}
-				setSelectedCurrency={setSelectedCurrency}
+				refetchDashboard={fetchDashboardData}
+				params={params}
+				setParams={setParams}
 			/>
 			<div className={styles.stats}>
 				<div className={styles.stats_item}>
 					<StatsAllotedBudget
 						amount={data?.alloted_budget || DEFAULT_AMOUNT}
-						selectedCurrency={selectedCurrency}
+						params={params}
 					/>
 				</div>
 				<div className={styles.stats_item}>
@@ -56,7 +63,7 @@ function DashboardTab() {
 						title="Promo Codes Created"
 						number={data?.promocodes_created_number}
 						amount={data?.promocode_created_amount || DEFAULT_AMOUNT}
-						selectedCurrency={selectedCurrency}
+						params={params}
 					/>
 				</div>
 				<div className={styles.stats_item}>
@@ -64,7 +71,7 @@ function DashboardTab() {
 						title="Promo Codes Used"
 						number={data?.promocode_used_number}
 						amount={data?.promocode_used_amount || DEFAULT_AMOUNT}
-						selectedCurrency={selectedCurrency}
+						params={params}
 					/>
 				</div>
 			</div>
@@ -73,7 +80,7 @@ function DashboardTab() {
 				allotedBudget={data?.alloted_budget || DEFAULT_AMOUNT}
 				promoUsed={data?.promocode_used_amount || DEFAULT_AMOUNT}
 				promoCreated={data?.promocode_created_amount || DEFAULT_AMOUNT}
-				selectedCurrency={selectedCurrency}
+				params={params}
 			/>
 		</div>
 	);

@@ -1,4 +1,4 @@
-import { ButtonIcon, Select, Input } from '@cogoport/components';
+import { ButtonIcon, Select, Input, Loader } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEdit, IcMTick, IcMCross } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -18,14 +18,15 @@ function BudgetGenerator({
 	budgetValue = '',
 	setBudgetValue = () => {},
 	refetchDashboard = () => {},
-	selectedCurrency = 'USD',
-	setSelectedCurrency = () => {},
+	params = {},
+	setParams = () => {},
 }) {
 	const [isEdit, setIsEdit] = useState(false);
-	const { updateBudgetAmount = () => {} } = useUpdatePromotionBudgetAmount({
-		budgetId, budgetValue, refetchDashboard,
-	});
+	const { loading = {}, updateBudgetAmount = () => {} } = useUpdatePromotionBudgetAmount();
 
+	if (loading) {
+		return <Loader />;
+	}
 	return (
 		<div className={styles.card}>
 			<div className={styles.content}>
@@ -37,16 +38,20 @@ function BudgetGenerator({
 							size="md"
 							placeholder="Enter Budget amount"
 							value={budgetValue}
-							onChange={(e) => {
-								setBudgetValue(e);
-							}}
+							onChange={setBudgetValue}
 						/>
 						<ButtonIcon
 							size="md"
 							icon={<IcMTick />}
 							themeType="primary"
 							onClick={() => {
-								updateBudgetAmount();
+								updateBudgetAmount({
+									data: {
+										id     : budgetId,
+										amount : parseFloat(budgetValue),
+									},
+									refetchDashboard,
+								});
 								setIsEdit(false);
 							}}
 						/>
@@ -64,7 +69,7 @@ function BudgetGenerator({
 						<div className={styles.main_text}>
 							{formatAmount({
 								amount,
-								currency : selectedCurrency,
+								currency : params.currency,
 								options  : {
 									style                 : 'currency',
 									currencyDisplay       : 'symbol',
@@ -88,8 +93,8 @@ function BudgetGenerator({
 				<div className={styles.currency_text}>Currency:</div>
 				<div className={styles.currency_select}>
 					<Select
-						value={selectedCurrency}
-						onChange={(e) => { setSelectedCurrency(e); }}
+						value={params.currency}
+						onChange={(e) => { setParams({ ...params, currency: e }); }}
 						placeholder="Select Currency"
 						size="md"
 						options={options}

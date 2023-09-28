@@ -204,13 +204,14 @@ function GlobalConfig({
 				</div>
 			</div>
 			{showActivateModal
-			&& (
-				<UpdateModal
-					title="Are you sure you want to ACTIVATE this rule?"
-					onClose={() => { setShowActivateModal(false); }}
-					onClickYes={handleSubmit(activateSubmit)}
-				/>
-			)}
+				? (
+					<UpdateModal
+						title="Are you sure you want to ACTIVATE this rule?"
+						onClose={() => { setShowActivateModal(false); }}
+						onClickYes={handleSubmit(activateSubmit)}
+						show={showActivateModal}
+					/>
+				) : null}
 		</div>
 	);
 }

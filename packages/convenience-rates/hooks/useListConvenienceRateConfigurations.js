@@ -7,10 +7,7 @@ const SORT_BY = 'created_at';
 const SORT_TYPE = 'asc';
 const PAGE_LIMIT = 10;
 
-const useListConvenienceRateConfigurations = ({
-	defaultFilters = {},
-	defaultParams = {},
-}) => {
+const useListConvenienceRateConfigurations = ({ defaultFilters = {}, defaultParams = {} }) => {
 	const [data, setData] = useState({});
 	const [filters, setFilters] = useState({});
 
