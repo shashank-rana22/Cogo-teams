@@ -7,7 +7,6 @@ function ChargeReceiptInformations({
 	index = 0,
 	control = {},
 	errors = {},
-	// controls = {},
 	setValue = () => {},
 	csr_data = {},
 }) {
@@ -20,8 +19,6 @@ function ChargeReceiptInformations({
 		setValue('csr_reference_number', Number(invoice_number));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(csr_data)]);
-
-	console.log('control', control);
 
 	return (
 		<Layout

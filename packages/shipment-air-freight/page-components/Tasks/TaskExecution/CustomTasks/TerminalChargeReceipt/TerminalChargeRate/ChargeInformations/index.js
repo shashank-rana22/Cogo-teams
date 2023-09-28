@@ -10,15 +10,13 @@ const TIME_TO_FETCH_CSR_DATA = 15000;
 const INCREMENT_BY_ONE = 1;
 
 function ChargeInformations({
-	index = 0, sheetData = {}, control = {}, errors = {}, setValue = () => {}, controls = {},
+	index = 0, sheetData = {}, control = {}, errors = {}, setValue = () => {},
 	setSheetData = () => {}, mainServicesData = {}, terminalChargeState = {}, setTerminalChargeState = () => {},
 }) {
 	const {
 		getCSROCRData = () => {},
 		data = {},
 	} = useGetShipmentAirCSROCRSheetData({ index, setTerminalChargeState, sheetData });
-
-	console.log('sheetData', sheetData);
 
 	useEffect(() => {
 		if (terminalChargeState[index] === 'fetching_data') {
@@ -55,7 +53,6 @@ function ChargeInformations({
 					index={index}
 					control={control}
 					errors={errors}
-					controls={controls}
 					setValue={setValue}
 					csr_data={data}
 				/>

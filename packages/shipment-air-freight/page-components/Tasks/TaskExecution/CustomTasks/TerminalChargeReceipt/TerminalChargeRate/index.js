@@ -55,7 +55,7 @@ function TerminalChargeRate({
 	return (
 		<div>
 			<Layout
-				fields={controls.TERMINAL_CHARGE_RATE_CONTROL}
+				fields={controls}
 				control={control}
 				errors={errors}
 			/>
@@ -64,7 +64,6 @@ function TerminalChargeRate({
 					<ChargeInformations
 						index={i}
 						sheetData={sheetData}
-						controls={controls}
 						control={control}
 						errors={errors}
 						setValue={setValue}
