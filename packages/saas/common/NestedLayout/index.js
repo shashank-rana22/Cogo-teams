@@ -20,10 +20,10 @@ function Layout({
 
 	return (
 		<div className={styles.container}>
-			{finalControls.map((ctrl) => {
+			{finalControls.map((ctrl, index) => {
 				const {
 					type = '', label = '', span = 6, removeLabelMargin = false,
-					showButtons = true, ...restCtrl
+					showButtons = true, name, ...restCtrl
 				} = ctrl || {};
 				if (type === 'doubleNestedFieldArray') {
 					return (
@@ -31,6 +31,8 @@ function Layout({
 							customFieldArrayControls={customFieldArrayControls}
 							ctrl={ctrl}
 							key={ctrl.name}
+							index={index}
+							name={ctrl.name}
 							control={control}
 							error={errors}
 							formValues={formValues}

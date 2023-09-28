@@ -20,7 +20,7 @@ function FieldArray({
 		type = '',
 		showButtons = true,
 	} = ctrl || {};
-
+	console.log(`${name}.${index}.${nestedName}`, 'FieldArrayname');
 	const { fields, append, remove } = useFieldArray({ control, name: `${name}.${index}.${nestedName}` });
 	return (
 		<div className={styles.field_array}>

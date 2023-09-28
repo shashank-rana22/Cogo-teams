@@ -16,23 +16,23 @@ const TOTAL_SPAN = 12;
 
 function DoubleNestedFieldArray({
 	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
-	showElements = {}, customFieldArrayControls = {},
+	showElements = {}, customFieldArrayControls = {}, index = 0,
 
 }) {
-	const { controls = [], name, addButtonText = '' } = ctrl || {};
+	const { controls = [], name, addButtonText = '', name:nestedName = '' } = ctrl || {};
 
 	const { fields, append, remove } = useFieldArray({ control, name });
-	// console.log(controls, error);
+	console.log(`${name}.${index}.${nestedName}`, error, ctrl, 'name');
 	return (
 		<div className={styles.nested_field_array}>
-			{fields.map((field, index) => (
+			{fields.map((field) => (
 				<div key={field.id} className={styles.field_container}>
 					<div className={styles.field_header}>
 						<div>{`${startCase(name || 'document')} ${index + HEADING_INDEX_OFFSET}`}</div>
 						<ButtonIcon icon={<IcMDelete />} onClick={() => remove(index, NO_OF_ELEMENTS_TO_BE_REMOVED)} />
 					</div>
 
-					{controls.map((nestCtrl) => {
+					{controls.map((nestCtrl, nestedIndex) => {
 						const { type = '', name:ctrlItemName, span, ...restCtrl } = nestCtrl || {};
 
 						if (type === 'nestedFieldArray') {
@@ -44,8 +44,8 @@ function DoubleNestedFieldArray({
 										error={error?.[ctrlItemName]}
 										ctrl={nestCtrl}
 										control={control}
-										index={index}
-										name={name}
+										index={nestedIndex}
+										name={`${name}.${index}.${ctrlItemName}`}
 										formValues={formValues}
 										showElements={showElements}
 										customFieldArrayControls={customFieldArrayControls?.[name]}

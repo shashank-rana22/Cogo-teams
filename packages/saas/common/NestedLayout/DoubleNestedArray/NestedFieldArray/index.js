@@ -15,14 +15,14 @@ const TOTAL_SPAN = 12;
 
 function NestedFieldArray({
 	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
-	showElements = {}, customFieldArrayControls = {},
+	showElements = {}, customFieldArrayControls = {}, index,
 }) {
-	const { controls = [], name, addButtonText = '' } = ctrl || {};
+	const { controls = [], name, addButtonText = '', name:nestedName = '' } = ctrl || {};
 	const { fields, append, remove } = useFieldArray({ control, name });
-
+	console.log(`${name}.${index}.${nestedName}`, 'NestedFieldArrayname');
 	return (
 		<div className={styles.nested_field_array}>
-			{fields.map((field, index) => (
+			{fields.map((field, nestedIndex) => (
 				<div key={field.id} className={styles.field_container}>
 					<div className={styles.field_header}>
 						<div>{`${startCase(name || 'document')} ${index + HEADING_INDEX_OFFSET}`}</div>
@@ -40,7 +40,7 @@ function NestedFieldArray({
 										error={error?.[index]}
 										ctrl={nestCtrl}
 										control={control}
-										index={index}
+										index={nestedIndex}
 										name={name}
 										formValues={formValues}
 										showElements={showElements}
