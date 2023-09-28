@@ -5,18 +5,6 @@
 		.react-datepicker__input-container {
 			min-width: 300px;
 		}
-
-		.pill_container {
-			display: flex;
-			margin-right: 100px;
-		}
-
-		.pill_container::after {
-			position: absolute;
-			right: 20%;
-			height: 10px;
-			content: "hahaha";
-		}
 	}
 }
 

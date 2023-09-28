@@ -42,7 +42,6 @@ const controls = {
 					rules       : {
 						required: 'Vehicle Number is required',
 					},
-					className: 'pill_container',
 				},
 			],
 		},

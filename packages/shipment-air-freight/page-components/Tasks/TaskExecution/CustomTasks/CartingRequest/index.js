@@ -5,7 +5,7 @@ import { useForm } from '@cogoport/forms';
 import controls from './controls';
 import styles from './styles.module.css';
 
-function CartingOrderRequest({
+function CartingRequest({
 	shipmentData = {},
 	task = {},
 	refetch = () => {},
@@ -41,4 +41,4 @@ function CartingOrderRequest({
 	);
 }
 
-export default CartingOrderRequest;
+export default CartingRequest;

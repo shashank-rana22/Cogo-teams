@@ -5,7 +5,7 @@ import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import LoadingState from '../LoadingState';
 
 import {
-	MarkConfirmServices, GenerateMawb, ConfirmBookingWithAirline, CartingOrderRequest, CartingOrderApproval,
+	MarkConfirmServices, GenerateMawb, ConfirmBookingWithAirline, CartingRequest, CartingDetails, CartingApproval,
 	ConfirmSellPrice, ConfirmCargoAir, TerminalChargeReceipt, UploadChecklist, UploadShippingBill, UploadLeo,
 } from './CustomTasks';
 import UpdateCargoAir from './CustomTasks/UpdateCargoAir';
@@ -18,7 +18,6 @@ function ExecuteTask({
 	shipment_data = {}, primary_service = {}, getShipmentTimeline = () => {}, servicesLoading = false,
 
 }) {
-	console.log('task:', task);
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const incoTerm = shipment_data?.inco_term;
 	const tradeType = incoTermArray.find((x) => x.value === incoTerm)?.tradeType
@@ -30,7 +29,6 @@ function ExecuteTask({
 	const service_names = (services || []).map((serviceObj) => (serviceObj?.trade_type === 'export'
 		? `origin_${serviceObj?.service_type}`
 		: `destination_${serviceObj?.service_type}`));
-
 	(services || []).forEach((serviceObj) => {
 		service_names.push(serviceObj.service_type);
 	});
@@ -50,7 +48,6 @@ function ExecuteTask({
 		commodity_category,
 		shipment_type,
 	};
-
 	const {
 		steps = [],
 		currentStep = {},
@@ -66,13 +63,11 @@ function ExecuteTask({
 			refetch        : taskListRefetch,
 		},
 	);
-
 	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - DEFAULT_STEP_VALUE] : {};
 
 	if (loading || servicesLoading) {
 		return <div><LoadingState /></div>;
 	}
-
 	if (task?.task === 'mark_confirmed' && 	task?.service_type) {
 		const requiredService =			(services || []).filter(
 			(serviceObj) => serviceObj?.id === task?.task_field_ids[GLOBAL_CONSTANTS.zeroth_index],
@@ -216,9 +211,9 @@ function ExecuteTask({
 			/>
 		);
 	}
-	if (task?.task === 'request_carting_order' && tradeType === 'export') {
+	if (task?.task === 'upload_carting_order_details' && tradeType === 'export') {
 		return (
-			<CartingOrderRequest
+			<CartingDetails
 				shipmentData={shipment_data}
 				task={task}
 				refetch={taskListRefetch}
@@ -226,9 +221,19 @@ function ExecuteTask({
 			/>
 		);
 	}
-	if (task?.task === 'carting_order_approval' && tradeType === 'export') {
+	if (task?.task === 'request_carting_order' && tradeType === 'export') {
 		return (
-			<CartingOrderApproval
+			<CartingRequest
+				shipmentData={shipment_data}
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
+			/>
+		);
+	}
+	if (task?.task === 'upload_carting_order_approval' && tradeType === 'export') {
+		return (
+			<CartingApproval
 				shipmentData={shipment_data}
 				task={task}
 				refetch={taskListRefetch}

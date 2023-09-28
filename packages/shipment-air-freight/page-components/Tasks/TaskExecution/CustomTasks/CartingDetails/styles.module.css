@@ -1,11 +1,13 @@
-.heading {
-	font-size: 16px;
-	font-weight: 600;
-	color: #666a90;
+.main_container {
+	padding: 10px 20px;
 }
 
 .submit_button {
 	display: flex;
 	justify-content: flex-end;
 	margin: 15px 0;
+}
+
+.submit {
+	margin-left: 15px;
 }
