@@ -6,7 +6,7 @@ import OrganizationUsers from './OrganizationUsers';
 const TAB_OPTIONS = [
 	{
 		key       : 'invoice_details',
-		name      : 'Invoice Details',
+		name      : 'Audited Invoice Details',
 		component : Invoices,
 	},
 	{

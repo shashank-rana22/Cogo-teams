@@ -92,7 +92,7 @@ function AccountPayables() {
 					<TabPanel name="dashboard" title="DASHBOARD">
 						<Dashboard activeEntity={activeEntity} />
 					</TabPanel>
-					<TabPanel name="invoices" title="INVOICES">
+					<TabPanel name="invoices" title="AUDITED INVOICES">
 						<Invoices activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="advance-payment" title="ADVANCE PAYMENT">
