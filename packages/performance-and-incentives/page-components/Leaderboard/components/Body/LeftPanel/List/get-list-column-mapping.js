@@ -42,7 +42,8 @@ const getListColumnMapping = () => {
 						Score
 					</div>
 				),
-			accessor: ({ total_score }) => (isEmpty(total_score) ? null : <div>{total_score}</div>),
+			accessor: ({ total_score = 0 }) => (total_score === GLOBAL_CONSTANTS.zeroth_index
+				? 'NA' : <div>{total_score}</div>),
 		},
 		{
 			id   : 'percentile',
