@@ -63,6 +63,7 @@ function ShipmentDetails() {
 		finance_superadmin       : Superadmin,
 		finops_manager           : Superadmin,
 		so1_revenue_desk         : Superadmin,
+		data_superadmin          : Superadmin,
 		kam_admin                : Kam,
 		default                  : () => (
 			<h1 className={styles.not_allowed}>
