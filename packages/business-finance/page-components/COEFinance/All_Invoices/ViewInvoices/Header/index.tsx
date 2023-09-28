@@ -128,7 +128,7 @@ function Header({
 					</Button>
 					<Button
 						size="md"
-						// disabled={isItemNotChecked}
+						disabled={isItemNotChecked}
 						onClick={(e: any) => handleModalData(e)}
 					>
 						Reject
