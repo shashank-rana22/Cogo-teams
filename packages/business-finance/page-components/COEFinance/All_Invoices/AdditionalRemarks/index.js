@@ -18,7 +18,7 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {} }) {
 
 	return (
 		<div>
-			<div className={styles.heading}>Please Select The Rejection Reason</div>
+			<div className={styles.heading}>Please select the reason:</div>
 			<Checkbox
 				label={`Profitability ${formatReason(chosenProfitabilityReason)}`}
 				checked={remarkData?.profitability}

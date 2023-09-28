@@ -20,7 +20,7 @@
 
 .heading {
 	display: flex;
-	justify-content: center;
+	margin: 8px 12px;
 	font-size: 1.5em;
 	font-weight: 600;
 }

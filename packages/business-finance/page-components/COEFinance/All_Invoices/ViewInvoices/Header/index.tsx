@@ -152,11 +152,12 @@ function Header({
 					onClose={() => {
 						setApprove(false);
 					}}
+					closeOnOuterClick={false}
 					className={styles.modal_body_section_custom}
 				>
 					<Modal.Body>
 						{
-							modalData === 'Reject' && !isApproveDisabled ? (
+							(modalData === 'Reject' || modalData === 'Hold') && !isApproveDisabled ? (
 								<div>
 									<AdditionalRemarks
 										remarkData={remarkData}
@@ -213,6 +214,7 @@ function Header({
 											style={{ marginRight: '8px' }}
 											onClick={() => {
 												setApprove(false);
+												setOverAllRemark('');
 											}}
 										>
 											No
