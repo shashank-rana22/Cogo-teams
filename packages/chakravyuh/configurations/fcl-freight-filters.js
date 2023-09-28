@@ -31,7 +31,7 @@ const controls = [
 		className : 'filter-row-flex md',
 	},
 	{
-		name     : 'shipping_line',
+		name     : 'shipping_line_id',
 		label    : 'Shipping Line',
 		type     : 'async-select',
 		asyncKey : 'list_operators',
