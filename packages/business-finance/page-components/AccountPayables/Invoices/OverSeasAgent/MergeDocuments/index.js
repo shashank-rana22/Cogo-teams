@@ -72,6 +72,7 @@ function MergeDocuments({ setActive = () => {} }) {
 						width={16}
 						height={16}
 						onClick={() => handleDelete(itemData)}
+						className={styles.trash_invoice}
 					/>
 				);
 			}

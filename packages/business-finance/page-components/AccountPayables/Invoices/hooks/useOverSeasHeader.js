@@ -17,12 +17,14 @@ const useOverSeasHeader = ({ organizationId:organization_id = '' }) => {
 	const overseasHeaderData = useCallback(
 		async () => {
 			try {
-				await trigger();
+				if (organization_id) {
+					await trigger();
+				}
 			} catch (err) {
 				toastApiError(err);
 			}
 		},
-		[trigger],
+		[trigger, organization_id],
 	);
 
 	useEffect(() => {
