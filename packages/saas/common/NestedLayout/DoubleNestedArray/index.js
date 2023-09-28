@@ -17,8 +17,10 @@ const TOTAL_SPAN = 12;
 function DoubleNestedFieldArray({
 	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
 	showElements = {}, customFieldArrayControls = {},
+
 }) {
 	const { controls = [], name, addButtonText = '' } = ctrl || {};
+
 	const { fields, append, remove } = useFieldArray({ control, name });
 	// console.log(controls, error);
 	return (
@@ -31,14 +33,15 @@ function DoubleNestedFieldArray({
 					</div>
 
 					{controls.map((nestCtrl) => {
-						const { type = '', name:ctrlItemName, span, ...restCtrl } = nestCtrl;
+						const { type = '', name:ctrlItemName, span, ...restCtrl } = nestCtrl || {};
+
 						if (type === 'nestedFieldArray') {
 							return (
 								<div key={field.id} className={styles.nested_container}>
 									<NestedFieldArray
 										key={field.id}
 										field={field}
-										error={error}
+										error={error?.[ctrlItemName]}
 										ctrl={nestCtrl}
 										control={control}
 										index={index}
@@ -87,9 +90,10 @@ function DoubleNestedFieldArray({
 									control={control}
 									type={type}
 								/>
-								{error?.[index]?.[ctrlItemName]?.message ? (
+
+								{error?.[name]?.[index]?.[ctrlItemName]?.message ? (
 									<p className={styles.error}>
-										{error?.[ctrlItemName]?.[index]?.message || ''}
+										{error?.[name]?.[index]?.[ctrlItemName]?.message || ''}
 									</p>
 								) : null}
 							</div>

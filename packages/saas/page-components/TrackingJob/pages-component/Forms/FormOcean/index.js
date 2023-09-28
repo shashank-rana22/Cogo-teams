@@ -11,13 +11,16 @@ function Form({
 	showUpdate = {},
 }, ref) {
 	const { control, handleSubmit, formState:{ errors = {} } } = useForm();
+
 	const controls = formControls({ isDisabled: true, showUpdate });
+
 	const onSubmit = (values) => handleSubmitForm({ values });
 	useImperativeHandle(ref, () => ({
 		formSubmit() {
 			handleSubmit(onSubmit)();
 		},
 	}));
+
 	return (
 		<div className={styles.form_container}>
 			<NestedLayout control={control} controls={controls} errors={errors} />

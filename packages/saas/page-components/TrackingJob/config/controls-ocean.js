@@ -6,8 +6,8 @@ const formControls = ({ showUpdate }) => [
 		type          : 'doubleNestedFieldArray',
 		showButtons   : true,
 		addButtonText : 'Add Container',
-		value         : {},
-		controls      : [
+
+		controls: [
 			{
 				name        : 'container_no',
 				type        : 'text',
