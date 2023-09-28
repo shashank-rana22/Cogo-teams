@@ -43,7 +43,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 
 	const finalData = [
 		{
-			id   : 'Amount',
+			id   : `Amount (in ${currency})`,
 			data : AMOUNT_DATA,
 		},
 		{
@@ -54,7 +54,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 
 	const formatdata = showCount ? finalData : [
 		{
-			id   : 'Amount',
+			id   : `Amount (in ${currency})`,
 			data : AMOUNT_DATA,
 		},
 	];
@@ -74,13 +74,8 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 					enableSlices="x"
 					yScale={{ type: 'linear', min: 0, max: 'auto' }}
 					yFormat={(value) => formatAmount({
-						amount  : value as any,
+						amount: value as any,
 						currency,
-						options : {
-							currencyDisplay : 'code',
-							style           : 'currency',
-
-						},
 					})}
 					axisTop={null}
 					axisRight={null}
