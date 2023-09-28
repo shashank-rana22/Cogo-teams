@@ -5,7 +5,12 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import { getOrPublishDraft, getCommunicationPayload } from '../helpers/sendTeamMessageHelpers';
+import {
+	getCommunicationPayload,
+	getOrPublishDraft,
+} from '../helpers/sendTeamMessageHelpers';
+
+// import useCreateCogooneGroups from './useCreateCogooneGroups';
 
 function useSendTeamsMessage({ activeTab = {}, firestore = {}, cleanUpFunc = () => {} }) {
 	const { loggedInAgentId = '' } = useSelector(({ profile }) => ({
@@ -22,19 +27,22 @@ function useSendTeamsMessage({ activeTab = {}, firestore = {}, cleanUpFunc = () 
 		{ manual: true, autoCancel: false },
 	);
 
+	// const { createOrGetCogooneGroup = () => {} } = useCreateCogooneGroups({ activeTab });
+
 	const sendTeamsMessage = async ({ draftMessage = '', attachments = [] }) => {
 		try {
 			setLoading(true);
+
+			if (!draftMessage && isEmpty(attachments)) {
+				return;
+			}
 			const groupId = await getOrPublishDraft({
 				activeTab,
 				loggedInAgentId,
 				firestore,
 			});
-			console.log('groupId', groupId);
 
-			if (!draftMessage && isEmpty(attachments)) {
-				return;
-			}
+			// const groupId = await createOrGetCogooneGroup();
 
 			if (!groupId) {
 				Toast.error('Something Went Wrong');

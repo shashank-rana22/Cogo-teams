@@ -122,17 +122,11 @@ const getOrPublishDraft = async ({
 		const groupId = await createGlobalRoom({ data, firestore, hashString: group_members_hash_string });
 		const modifiedGroupMembersIds = group_members_ids?.filter((eachUserId) => eachUserId !== loggedInAgentId) || [];
 
-		const modifiedGroupMembers = group_members_data?.filter((eachUser) => eachUser?.id !== loggedInAgentId) || [];
-
-		const groupName = is_group ? joinNamesWithCount({ modifiedGroupMembers }) : '';
-
 		const createGroupMemberRoomsPromises = modifiedGroupMembersIds.map((eachId) => {
 			let searchName = group_name;
 
 			if (!is_group) {
 				searchName = group_members_data?.find((member) => member?.id !== eachId)?.name || 'user';
-			} else {
-				searchName = groupName;
 			}
 
 			return createLocalRooms(

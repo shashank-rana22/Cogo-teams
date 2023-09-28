@@ -12,7 +12,6 @@ import { useState } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { hashFunction } from '../helpers/hashFunction';
-import { joinNamesWithCount } from '../helpers/sendTeamMessageHelpers';
 
 const LIMIT = 1;
 
@@ -71,17 +70,21 @@ async function getExistingDraftRoom({ userIds = [], length = 0, firestore = {}, 
 	return { id: draftRoomData?.id, ...(draftRoomData?.data() || {}) };
 }
 
-async function createDraftRoom({ userIds = [], userIdsData = [], firestore = {}, loggedInAgendId = '', length = 0 }) {
+async function createDraftRoom({
+	userIds = [],
+	userIdsData = [],
+	firestore = {},
+	loggedInAgendId = '',
+	length = 0,
+	groupName = 'DRAFT NAME', // group name todo
+}) {
 	const selfInternalRoomsCollection = collection(firestore, `users/${loggedInAgendId}/groups`);
 
-	let searchName = '';
+	let searchName = groupName;
 	const isGroup = length > GROUP_COUNT_MIN;
 
 	if (!isGroup) {
 		searchName = userIdsData?.find((member) => member?.id !== loggedInAgendId)?.name || 'user';
-	} else {
-		const modifiedGroupMembers = userIdsData?.filter((member) => member?.id !== loggedInAgendId);
-		searchName = joinNamesWithCount({ modifiedGroupMembers });
 	}
 	const groupMembersHashString = hashFunction({ groupMemberIds: userIds });
 
@@ -128,7 +131,11 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 		const userIdsLength = userIds.length + SELF_COUNT;
 		setLoading(true);
 
-		const modifiedUserIdsData = [...userIdsData, { id: loggedInAgendId, name: loggedInAgentName }];
+		const modifiedUserIdsData = [...userIdsData, {
+			id       : loggedInAgendId,
+			name     : loggedInAgentName,
+			is_admin : true,
+		}];
 		const modifiedUserIds = [loggedInAgendId, ...userIds];
 
 		try {

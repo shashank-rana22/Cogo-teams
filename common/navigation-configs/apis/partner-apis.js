@@ -12932,6 +12932,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'update_cogoone_groups',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'create_communication_internal_chat',
 			access_type  : 'private',
 			service_name : 'communication',

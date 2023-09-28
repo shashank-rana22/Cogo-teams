@@ -62,22 +62,24 @@ function Header({
 			</div>
 			<div className={styles.buttons_flex}>
 				<ButtonGroup size="xs" options={BUTTON_GROUP_OPTIONS} />
-				<Popover
-					placement="bottom"
-					visible={showPopover}
-					render={showPopover ? (
-						<AddMembers viewType={viewType} />
-					) : null}
-				>
-					<Image
-						src={GLOBAL_CONSTANTS.image_url.groups}
-						alt="group"
-						width={28}
-						height={25}
-						onClick={() => setShowPopover((prev) => !prev)}
-						className={styles.image_styles}
-					/>
-				</Popover>
+				{isGroup ? (
+					<Popover
+						placement="bottom"
+						visible={showPopover}
+						render={showPopover ? (
+							<AddMembers viewType={viewType} />
+						) : null}
+					>
+						<Image
+							src={GLOBAL_CONSTANTS.image_url.groups}
+							alt="group"
+							width={28}
+							height={25}
+							onClick={() => setShowPopover((prev) => !prev)}
+							className={styles.image_styles}
+						/>
+					</Popover>
+				) : null}
 			</div>
 		</div>
 	);
