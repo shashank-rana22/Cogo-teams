@@ -1,4 +1,4 @@
-import { Button, cl, Textarea } from '@cogoport/components';
+import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -54,17 +54,24 @@ function Details({
 				<div className={styles.display_box}>
 					<div className={styles.company_div}>
 						<div className={styles.heading}>Company Name</div>
-						<div className={styles.text}>{tradePartyName || businessName || ''}</div>
+						<div className={styles.text}>
+							<Tooltip
+								interactive
+								content={(tradePartyName || businessName || '-')}
+							>
+								<div className={styles.wrapper}>{(tradePartyName || businessName || '-')}</div>
+							</Tooltip>
+						</div>
 					</div>
 					<div>
 						<div className={styles.heading}>Requested By</div>
-						<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+						<div className={styles.text}>{row?.createdBy?.name || '-'}</div>
 					</div>
 				</div>
 				<div className={styles.line} />
 				<div className={styles.supplier_div}>
 					<div className={styles.heading}>Supplier Name</div>
-					<div className={styles.text}>{supplierName || ''}</div>
+					<div className={styles.text}>{supplierName || '-'}</div>
 				</div>
 				<div className={styles.shipment_container}>
 					<div className={styles.heading}>Shipment Id</div>
@@ -94,7 +101,7 @@ function Details({
 					</div>
 					<div className={styles.count_div}>
 						<div className={styles.heading}>Container Count</div>
-						<div className={styles.text}>{numberOfContainers || ''}</div>
+						<div className={styles.text}>{numberOfContainers || '-'}</div>
 					</div>
 					<div className={styles.amount_div}>
 						<div className={styles.heading}>Total Amount</div>
@@ -105,7 +112,7 @@ function Details({
 				</div>
 				<div className={styles.payment_div}>
 					<div className={styles.heading}>Payment Mode</div>
-					<div className={styles.text}>{paymentMode || ''}</div>
+					<div className={styles.text}>{paymentMode || '-'}</div>
 				</div>
 			</div>
 			{ status === 'REQUESTED' ? (

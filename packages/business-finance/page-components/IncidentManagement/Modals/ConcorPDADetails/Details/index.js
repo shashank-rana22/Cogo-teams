@@ -1,4 +1,4 @@
-import { Button, cl, Textarea } from '@cogoport/components';
+import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
@@ -55,9 +55,13 @@ function Details({
 			<div className={styles.flex}>
 				<div className={styles.large}>
 					<div className={styles.title}>Company Name</div>
-					<div className={styles.text}>
-						{beneficiaryName || '-'}
-
+					<div className={styles.wrapper}>
+						<Tooltip
+							interactive
+							content={(beneficiaryName)}
+						>
+							<div className={styles.wrapper}>{(beneficiaryName)}</div>
+						</Tooltip>
 					</div>
 				</div>
 				<div className={styles.medium}>
@@ -70,7 +74,7 @@ function Details({
 
 				PDA Approval
 			</div>
-			<div className={styles.flex}>
+			<div className={styles.invoice_flex}>
 				<div className={styles.large}>
 					<div className={styles.title}>Shipment Id</div>
 					<div className={styles.link}>
@@ -102,7 +106,7 @@ function Details({
 
 				Invoice Details
 			</div>
-			<div className={styles.flex}>
+			<div className={styles.invoice_flex}>
 				<div className={styles.large}>
 					<div className={styles.title}>Destination</div>
 					<div className={styles.text}>{placeOfDestination || '-'}</div>
@@ -113,10 +117,10 @@ function Details({
 				</div>
 				<div className={styles.small}>
 					<div className={styles.title}>Tax Applicable</div>
-					<div className={styles.text}>{isTaxApplicable ? 'Yes' : 'No'}</div>
+					<div className={styles.text}>{isTaxApplicable ? 'Yes' : 'N/A'}</div>
 				</div>
 			</div>
-			<div className={styles.flex}>
+			<div className={styles.date_flex}>
 				<div className={styles.large}>
 					<div className={styles.title}>Document Date</div>
 					<div className={styles.text}>

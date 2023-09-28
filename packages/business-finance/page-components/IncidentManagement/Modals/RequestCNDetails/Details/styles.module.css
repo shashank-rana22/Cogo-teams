@@ -6,7 +6,8 @@
 .label {
 	padding: 0 24px;
 	margin-bottom: 6px;
-	font-weight: 500;
+	font-size: var(--font-size-md);
+	font-weight: 600;
 }
 
 .textarea {
@@ -43,7 +44,7 @@
 
 .shipment_id {
 	font-size: var(--font-size-md);
-	font-weight: 500;
+	font-weight: 600;
 	color: #f68b21;
 	text-decoration: underline;
 }
@@ -70,7 +71,7 @@
 
 .text {
 	font-size: var(--font-size-md);
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .required_field::after {
@@ -99,7 +100,7 @@
 }
 
 .label_text {
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .rates {
@@ -107,7 +108,7 @@
 }
 
 .display_container {
-	padding: 24px;
+	padding: 24px 24px 0;
 }
 
 .shipment_container {
@@ -123,7 +124,7 @@
 }
 
 .value_data {
-	margin: 20px 20px 20px 0;
+	margin: 20px 20px 32px 0;
 }
 
 .label_value {
@@ -140,6 +141,7 @@
 	display: flex;
 	gap: 8px;
 	align-items: center;
+	margin-bottom: 32px;
 }
 
 .button_container_data {

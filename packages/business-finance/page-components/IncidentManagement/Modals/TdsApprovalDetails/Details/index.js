@@ -1,4 +1,4 @@
-import { Button, cl, Textarea } from '@cogoport/components';
+import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -47,7 +47,14 @@ function Details({
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{tradePartyName || businessName || ''}</div>
+					<div className={styles.text}>
+						<Tooltip
+							interactive
+							content={(tradePartyName || businessName || '')}
+						>
+							<div className={styles.wrapper}>{(tradePartyName || businessName || '')}</div>
+						</Tooltip>
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>

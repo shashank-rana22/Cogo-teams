@@ -1,10 +1,9 @@
-import { Button, cl, Textarea } from '@cogoport/components';
+import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import showOverflowingNumber from '../../../../commons/showOverflowingNumber.tsx';
 import usePostExpense from '../../../apisModal/usePostExpense';
 import RejectModal from '../../../common/RejectModal/index';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
@@ -18,14 +17,13 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
 	const { status = '', id = '', data = {} } = row || {};
-	const MAX_LENGTH = 20;
 
 	const { overheadConfirmationRequest, organization } = data || {};
+	const { tradePartyName = '', businessName = '' } = organization || {};
 
 	const {
 		ledgerGrandTotal = '',
 		invoiceNumber = '',
-		categoryName = '',
 		branchName = '',
 		subTotalAmount = '',
 		taxTotalAmount = '',
@@ -48,7 +46,14 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 			<div className={styles.flex}>
 				<div className={styles.large}>
 					<div className={styles.title}>Company Name</div>
-					<div className={styles.text}>{organization.businessName || '-'}</div>
+					<div className={styles.text}>
+						<Tooltip
+							interactive
+							content={(tradePartyName || businessName || '')}
+						>
+							<div className={styles.wrapper}>{(tradePartyName || businessName || '')}</div>
+						</Tooltip>
+					</div>
 				</div>
 				<div className={styles.medium}>
 					<div className={styles.title}>Requested By</div>
@@ -60,12 +65,6 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 				<div className={styles.large}>
 					<div className={styles.title}>Invoice Number</div>
 					<div className={styles.text}>{invoiceNumber || '-'}</div>
-				</div>
-				<div className={styles.medium}>
-					<div className={styles.title}>Category</div>
-					<div className={styles.text}>
-						{showOverflowingNumber(categoryName, MAX_LENGTH) || '-'}
-					</div>
 				</div>
 				<div className={styles.small}>
 					<div className={styles.title}>Branch</div>

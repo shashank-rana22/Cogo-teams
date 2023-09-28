@@ -5,8 +5,9 @@
 
 .label {
 	padding: 0 24px;
-	margin-bottom: 6px;
-	font-weight: 500;
+	margin: 16px 0 6px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
 }
 
 .textarea {
@@ -47,7 +48,7 @@
 }
 
 .shipment_id {
-	font-weight: 500;
+	font-weight: 600;
 	color: #f68b21;
 	text-decoration: underline;
 }
@@ -74,7 +75,7 @@
 
 .text {
 	font-size: var(--font-size-md);
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .required_field::after {
@@ -101,7 +102,7 @@
 }
 
 .label_text {
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .rates {
@@ -114,7 +115,7 @@
 
 .invoice_text {
 	font-size: var(--font-size-md);
-	font-weight: 500;
+	font-weight: 600;
 	color: #f68b21;
 	text-decoration: underline;
 }
@@ -130,7 +131,7 @@
 
 .value {
 	font-size: var(--font-size-md);
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .title {
@@ -145,4 +146,10 @@
 
 .hex_cont {
 	margin-top: 24px;
+}
+
+.tooltipTitle {
+	font-size: 12px;
+	word-break: normal;
+	overflow-wrap: normal;
 }

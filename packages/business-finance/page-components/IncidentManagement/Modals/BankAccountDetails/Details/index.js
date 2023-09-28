@@ -1,4 +1,4 @@
-import { Button, cl, RadioGroup, Textarea } from '@cogoport/components';
+import { Button, cl, RadioGroup, Textarea, Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -6,7 +6,7 @@ import { useState } from 'react';
 import useGetBankData from '../../../apisModal/useGetBankData';
 import ClipBoard from '../../../common/Clipboard';
 import RejectModal from '../../../common/RejectModal/index';
-import { getOptions, getOptionsManual } from '../constant';
+import { getOptions } from '../constant';
 
 import styles from './styles.module.css';
 
@@ -62,7 +62,14 @@ function Details({
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{tradePartyName || businessName || ''}</div>
+					<div className={styles.text}>
+						<Tooltip
+							interactive
+							content={(tradePartyName || businessName || '')}
+						>
+							<div className={styles.wrapper}>{(tradePartyName || businessName || '')}</div>
+						</Tooltip>
+					</div>
 				</div>
 				<div className={styles.organization_div}>
 					<div className={styles.requested_div}>
@@ -160,11 +167,11 @@ function Details({
 
 				<div className={styles.simple_name}>{t('incidentManagement:verification_method')}</div>
 				<div className={styles.method_flex}>
-					<div className={styles.font_name}>{ifscCode}</div>
+					<div className={styles.font_name}>Manual Testing</div>
 					<div>
 						<RadioGroup
 							className={styles.radio_text}
-							options={getOptionsManual({ isEditable, t })}
+							options={getOptionsData}
 							onChange={(item) => setValue((prev) => ({
 								...prev,
 								radioMethod: item,

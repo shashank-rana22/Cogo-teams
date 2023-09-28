@@ -4,8 +4,10 @@
 }
 
 .label {
+	margin-top: 8px;
 	margin-bottom: 6px;
-	font-weight: 500;
+	font-size: var(--font-size-md);
+	font-weight: 600;
 }
 
 .textarea {
@@ -35,7 +37,7 @@
 }
 
 .shipment_id {
-	font-weight: 500;
+	font-weight: 600;
 	color: #f68b21;
 	text-decoration: underline;
 }
@@ -61,7 +63,7 @@
 
 .text {
 	font-size: var(--font-size-md);
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .required_field::after {
@@ -91,7 +93,7 @@
 }
 
 .label_text {
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .rates {
@@ -100,7 +102,7 @@
 
 .list_container {
 	max-height: 46vh;
-	margin: 40px 0;
+	margin: 40px 24px 0;
 	overflow: scroll;
 
 	::-webkit-scrollbar {

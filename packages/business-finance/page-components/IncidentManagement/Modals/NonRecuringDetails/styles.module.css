@@ -27,7 +27,7 @@
 .container_view {
 	display: flex;
 	justify-content: space-between;
-	height: max-content;
+	height: fit-content;
 	margin-top: 12px;
 }
 

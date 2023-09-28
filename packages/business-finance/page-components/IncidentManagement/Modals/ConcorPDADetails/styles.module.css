@@ -6,7 +6,6 @@
 
 .label {
 	padding-right: 4px;
-	font-weight: 400;
 }
 
 .bold_label {
@@ -27,7 +26,7 @@
 .container_view {
 	display: flex;
 	justify-content: space-between;
-	height: 660px;
+	height: fit-content;
 	margin-top: 12px;
 }
 

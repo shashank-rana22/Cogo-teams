@@ -1,4 +1,4 @@
-import { Button, cl, Textarea } from '@cogoport/components';
+import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -187,7 +187,16 @@ function Details({
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{tradePartyName || businessName || ''}</div>
+					<div className={styles.text}>
+						<Tooltip
+							interactive
+							content={(tradePartyName || businessName || '')}
+						>
+							<div className={styles.wrapper}>
+								{(tradePartyName || businessName || '')}
+							</div>
+						</Tooltip>
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>
