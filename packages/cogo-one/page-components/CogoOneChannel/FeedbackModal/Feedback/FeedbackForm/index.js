@@ -53,7 +53,7 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 			<div className={styles.header}>
 				<div className={styles.title}>
 					<IcMFeedback />
-					Create Care
+					Add Feedback
 				</div>
 
 				<Button

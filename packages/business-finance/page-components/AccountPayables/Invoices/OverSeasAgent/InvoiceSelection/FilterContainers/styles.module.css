@@ -39,3 +39,7 @@
 	display: flex;
 	margin: 4px;
 }
+
+.go_back_button {
+	white-space: nowrap;
+}

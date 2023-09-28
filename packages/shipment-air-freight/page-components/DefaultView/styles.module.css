@@ -29,12 +29,7 @@
 
 .toggle_chat {
 	display: flex;
-
-	:global {
-		.ui_toggle_container {
-			margin-right: 60px;
-		}
-	}
+	padding-right: 40px;
 }
 
 .shipment_not_found {

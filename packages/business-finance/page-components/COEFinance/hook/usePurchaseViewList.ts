@@ -35,6 +35,9 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 		if (subActiveTabReject === 'coe_rejected') {
 			return 'COE_REJECTED';
 		}
+		if (subActiveTabReject === 'coe_on_hold') {
+			return 'ON_HOLD';
+		}
 		return 'ALL';
 	};
 
@@ -164,6 +167,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 		setTab,
 		setSearchValue,
 		searchValue,
+		refetch,
 	};
 };
 
