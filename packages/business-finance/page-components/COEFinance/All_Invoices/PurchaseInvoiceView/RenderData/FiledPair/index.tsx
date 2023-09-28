@@ -89,8 +89,8 @@ function FieldPair({
 				<div
 					className={styled.sid_container}
 				>
-					<text className={styled.sid} onClick={handleOnClick}>
-						<Button themeType="linkUi">
+					<text className={styled.sid}>
+						<Button themeType="linkUi" onClick={handleOnClick}>
 							{showOverflowingNumber(jobNumber, MAX_LEN_FOR_SID_TEXT)}
 
 						</Button>
@@ -103,5 +103,3 @@ function FieldPair({
 	);
 }
 export default FieldPair;
-
-// onClick={() => Router.push(`/booking/${SHIPMENT_ROUTE_MAPPING[shipmentType]}/${shipmentId}`)}

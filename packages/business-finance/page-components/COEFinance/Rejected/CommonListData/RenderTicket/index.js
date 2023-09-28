@@ -1,16 +1,42 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMArrowNext } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 
-function RenderTicket({ itemData = {}, setModalData = () => {} }) {
+import styles from './styles.module.css';
+
+const START_INDEX = 0;
+const MAX_LENGTH = 5;
+
+function RenderTicket({ itemData = {}, setModalData = () => { } }) {
+	const ticketIds = itemData?.ticketIds;
+	const router = useRouter();
+
+	const routeHandler = () => {
+		router.push('/ticket-management/my-tickets');
+	};
+
 	return (
-		itemData?.ticketIds?.[GLOBAL_CONSTANTS.zeroth_index] ? (
-			<div
-				role="presentation"
-				style={{ cursor: 'pointer' }}
-				onClick={() => setModalData({ ticketId: itemData?.ticketIds?.[GLOBAL_CONSTANTS.zeroth_index] })}
-			>
-				{itemData?.ticketIds?.[GLOBAL_CONSTANTS.zeroth_index] || '-'}
-			</div>
-		) : '_'
+		<div className={styles.ticket_ids}>
+			{ticketIds?.slice(START_INDEX, MAX_LENGTH)?.map((ticketId, index) => (
+				<div key={ticketId}>
+					<div
+						role="presentation"
+						style={{ cursor: 'pointer' }}
+						onClick={() => setModalData({ ticketId })}
+					>
+						{index > START_INDEX && ', '}
+						{ticketId}
+					</div>
+				</div>
+			))}
+			{!isEmpty(ticketIds)
+				&& (
+					<IcMArrowNext
+						onClick={routeHandler}
+						className={styles.redirect_button}
+					/>
+				)}
+		</div>
 	);
 }
 

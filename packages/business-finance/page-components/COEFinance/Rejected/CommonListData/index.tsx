@@ -16,6 +16,7 @@ import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
 import RejectedCharts from './RejectedChart/index';
 import RenderActionButton from './RenderActionButton';
+import RenderApprovalStatus from './RenderApprovalStatus';
 import RenderTicket from './RenderTicket';
 import SegmentedFilters from './SegmentedFilters';
 
@@ -45,7 +46,7 @@ interface ItemProps {
 }
 interface Props {
 	filters: GenericObject;
-	setFilters: (p: object) => void;
+	setFilters: (p?: object) => void;
 	subActiveTabReject: string | undefined;
 }
 
@@ -92,12 +93,23 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 				setModalData={setModalData as any}
 			/>
 		),
-		renderApprovalStatus: () => <div>-</div>,
+		renderApprovalStatus: (itemData: ItemProps) => (
+			<RenderApprovalStatus itemData={itemData} />
+		),
 	};
 
 	return (
 		<div>
 			<RejectedCharts subActiveTabReject={subActiveTabReject} />
+			{
+			(subActiveTabReject === 'coe_rejected' || subActiveTabReject === 'coe_on_hold') ? (
+				<RejectedCharts
+					subActiveTabReject={subActiveTabReject}
+					setFilters={setFilters}
+				/>
+			) : null
+			}
+
 			<SegmentedFilters
 				filters={filters}
 				setFilters={setFilters}
