@@ -1,4 +1,6 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -14,6 +16,7 @@ interface ItemProps {
 	billNumber:string,
 	isProforma:boolean,
 	jobNumber:string,
+	shipmentId:string
 }
 interface Props {
 	itemData:ItemProps;
@@ -23,6 +26,8 @@ interface Props {
 		label :string
 	}
 }
+
+const { SHIPMENT_ROUTE_MAPPING } = GLOBAL_CONSTANTS;
 
 const MAX_LEN_FOR_INVOICE_TEXT = 11;
 const MAX_LEN_FOR_SID_TEXT = 10;
@@ -35,13 +40,25 @@ function FieldPair({
 		billNumber      : '',
 		isProforma      : false,
 		jobNumber       : '',
+		shipmentId      : '',
 	}, field = {
 		topKey    : {},
 		bottomKey : {},
 		label     : '',
 	},
 }:Props) {
-	const {	billType = '', billNumber = '', isProforma, billDocumentUrl, jobNumber = '', serviceType } = itemData;
+	const router = useRouter();
+	const {
+		billType = '',
+		billNumber = '',
+		isProforma, billDocumentUrl, jobNumber = '', serviceType = '', shipmentId = '',
+	} = itemData;
+
+	const handleOnClick = () => {
+		if (shipmentId) {
+			router.push(`/booking/${SHIPMENT_ROUTE_MAPPING[serviceType]}/${shipmentId}`);
+		}
+	};
 
 	return (
 		<div>
@@ -69,9 +86,14 @@ function FieldPair({
 				</div>
 			)}
 			{field?.label === 'SID' && (
-				<div>
-					<text className={styled.sid}>
-						{showOverflowingNumber(jobNumber, MAX_LEN_FOR_SID_TEXT)}
+				<div
+					className={styled.sid_container}
+				>
+					<text className={styled.sid} onClick={handleOnClick}>
+						<Button themeType="linkUi">
+							{showOverflowingNumber(jobNumber, MAX_LEN_FOR_SID_TEXT)}
+
+						</Button>
 					</text>
 
 					<div className={styled.service_type}>{startCase(serviceType)}</div>
@@ -81,3 +103,5 @@ function FieldPair({
 	);
 }
 export default FieldPair;
+
+// onClick={() => Router.push(`/booking/${SHIPMENT_ROUTE_MAPPING[shipmentType]}/${shipmentId}`)}

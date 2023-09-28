@@ -24,6 +24,10 @@ const tradePartyTypeMapping = (trade_party_type = '') => {
 		],
 		consignee: [
 			{
+				value : 'self',
+				label : 'Self',
+			},
+			{
 				value : 'trade_partner',
 				label : 'Select Trade Partner',
 			},

@@ -62,6 +62,7 @@ function TicketSummary({
 	const isSameName = agentName === name;
 
 	const isCategoryConfig = categoryDeskType === 'by_category';
+	const ticketReviewerName = ticketReviewer?.User?.Name || '';
 
 	const isTicketExpired = new Date(tat) > new Date();
 
@@ -230,13 +231,15 @@ function TicketSummary({
 						</span>
 					</div>
 				)}
-				<div className={styles.ticket_data}>
-					{t('myTickets:assigned_to')}
-					:
-					<span className={styles.updated_at}>
-						{ticketReviewer?.User?.Name}
-					</span>
-				</div>
+				{ticketReviewerName &&	(
+					<div className={styles.ticket_data}>
+						{t('myTickets:assigned_to')}
+						:
+						<span className={styles.updated_at}>
+							{ticketReviewerName}
+						</span>
+					</div>
+				)}
 				{!isEmpty(authorizers) ? (
 					<div className={styles.ticket_data}>
 						{t('myTickets:closure_authorizers')}
