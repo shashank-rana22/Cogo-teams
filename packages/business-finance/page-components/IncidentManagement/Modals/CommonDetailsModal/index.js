@@ -8,6 +8,7 @@ import BankAccountDetails from '../BankAccountDetails';
 import ConcorDetails from '../ConcorPDADetails';
 import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
 import NonRecuring from '../NonRecuringDetails';
+import PaymentDetails from '../PaymentDetails';
 import RecuringDetails from '../RecuringDetails';
 import RequestCNDetails from '../RequestCNDetails';
 import RevokeInvoiceDetails from '../RevokeInvoiceDetails';
@@ -29,6 +30,7 @@ const TYPE_COMPONENT_MAPPING = {
 	ISSUE_CREDIT_NOTE               : RequestCNDetails,
 	JOB_OPEN                        : JobOpenDetailsModal,
 	CONSOLIDATED_CREDIT_NOTE        : RequestCNDetails,
+	PAYMENT_CONFIRMATION_APPROVAL   : PaymentDetails,
 
 };
 function CommonDetailsModal({
