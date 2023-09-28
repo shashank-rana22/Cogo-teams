@@ -1,15 +1,14 @@
 import { TabPanel, Tabs, Loader } from '@cogoport/components';
 
-import HeaderComponent from './HeaderComponent';
-import useGetEmployeeLevels from './hooks/useGetEmployeeLevels';
+import useGetManagerLevel from './hooks/useGetManagerLevel';
+import MonthlyRating from './MonthlyRating';
 import styles from './styles.module.css';
 
 const TABS_MAPPING = { vertical_head: 'Across All', functional_manager: 'Team View' };
 
 function PerformanceRatingReview() {
-	const props = useGetEmployeeLevels();
-
-	const { level, activeTab, setActiveTab, loading } = props || {};
+	const props = useGetManagerLevel();
+	const { level, loading, activeTab, setActiveTab } = props;
 
 	if (loading) {
 		return (
@@ -20,29 +19,24 @@ function PerformanceRatingReview() {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<div className={styles.header}>
 				Performance Rating Review
 			</div>
 
-			{
-				level === 'vertical_head' ? (
-					<Tabs
-						activeTab={activeTab}
-						themeType="primary"
-						onChange={setActiveTab}
-					>
-						{
-						Object.keys(TABS_MAPPING).map((tab) => (
-							<TabPanel name={tab} title={TABS_MAPPING[tab]} key={tab}>
-								<HeaderComponent props={props} key={tab} />
-							</TabPanel>
-						))
-						}
-					</Tabs>
-				) : <HeaderComponent props={props} />
-			}
-
+			{['vertical_head', 'hr_admin'].includes(level) ? (
+				<Tabs
+					activeTab={activeTab}
+					themeType="primary"
+					onChange={setActiveTab}
+				>
+					{Object.keys(TABS_MAPPING).map((tab) => (
+						<TabPanel name={tab} title={TABS_MAPPING[tab]} key={tab}>
+							<MonthlyRating props={props} key={tab} />
+						</TabPanel>
+					))}
+				</Tabs>
+			) : <MonthlyRating props={props} />}
 		</div>
 	);
 }
