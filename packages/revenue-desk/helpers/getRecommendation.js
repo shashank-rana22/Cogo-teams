@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 
 const getRecommendation = ({
 	setSupplierPayload,
@@ -6,6 +7,7 @@ const getRecommendation = ({
 	currentFormatedrates,
 	systemFormatedRates,
 	singleServiceData,
+	supplierPayload,
 }) => {
 	const SERVICE_PROVIDERS = [];
 	(allPreferenceCardsData || []).forEach((data) => {
@@ -24,15 +26,20 @@ const getRecommendation = ({
 				return obj?.id === rate_id;
 			});
 		}
-		SERVICE_PROVIDERS.push({
-			rate_id,
-			id             : required_rate?.rowData?.service_provider_id,
-			preference_key : source === 'flashed' ? 'current' : 'system',
-			data           : required_rate,
-			validity_id    : required_rate?.rowData?.validity_id,
-		});
+		if (required_rate) {
+			SERVICE_PROVIDERS.push({
+				rate_id,
+				id             : required_rate?.rowData?.service_provider_id,
+				preference_key : source === 'flashed' ? 'current' : 'system',
+				data           : required_rate,
+				validity_id    : required_rate?.rowData?.validity_id,
+			});
+		}
 	});
-	setSupplierPayload((prev) => ({ ...prev, [singleServiceData?.id]: SERVICE_PROVIDERS }));
+	if (isEmpty(supplierPayload?.[singleServiceData?.id])
+	&& singleServiceData?.id === allPreferenceCardsData?.[GLOBAL_CONSTANTS.zeroth_index]?.service_id) {
+		setSupplierPayload((prev) => ({ ...prev, [singleServiceData?.id]: SERVICE_PROVIDERS }));
+	}
 };
 
 export default getRecommendation;

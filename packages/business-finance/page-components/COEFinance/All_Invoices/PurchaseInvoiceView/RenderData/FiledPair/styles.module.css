@@ -21,6 +21,13 @@
 
 .sid {
 	margin-bottom: 10px;
+
+	:global {
+		.ui_button_container {
+			height: 0;
+			padding: 7px 0;
+		}
+	}
 }
 
 .service_type {

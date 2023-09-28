@@ -1,5 +1,6 @@
 import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useSelector } from '@cogoport/store';
 import { useState, useCallback } from 'react';
 
@@ -64,6 +65,9 @@ export default function BLDoCollectionDesk() {
 						onChange={handleVersionChange}
 					/>
 				</div>
+
+				<ShipmentChat />
+
 			</div>
 			<Tabs
 				activeTab={stateProps.activeTab}

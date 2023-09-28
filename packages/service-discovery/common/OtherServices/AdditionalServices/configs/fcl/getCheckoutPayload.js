@@ -74,8 +74,9 @@ const getCheckoutPayload = ({
 	const serviceWiseValues = getServiceWisePayload({
 		additionalFormInfo,
 		detail,
-		service_name: finalServiceName,
+		service_name : finalServiceName,
 		tradeType,
+		service      : service_name,
 	});
 
 	return {

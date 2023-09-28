@@ -44,6 +44,8 @@ const CONDITION_MAPPING = {
 	document_desk : 'service_ops2',
 	'BL/DO'       : 'release_desk',
 	booking_desk  : 'service_ops1',
+	OKAM          : 'origin_booking_agent',
+	DKAM          : 'destination_booking_agent',
 };
 
 function Details({

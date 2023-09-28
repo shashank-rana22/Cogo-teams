@@ -2,6 +2,7 @@ import { Modal, Button, Placeholder } from '@cogoport/components';
 import { IcCError } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import useDeleteExcludePayrun from '../../../hooks/useDeleteExcludePayrun';
 import useGetListSupplier from '../../../hooks/useGetListSupplier';
 import ViewSupplierModal from '../ViewSupplierModal';
 
@@ -12,7 +13,6 @@ const DEFAULT_CN = 0;
 function SavePayRunModal({
 	savePayrunModal = false,
 	setSavePayrunModal = () => {},
-	setViewSelectedInvoice = () => {},
 	type = '',
 }) {
 	const [viewSupplier, showViewSupplier] = useState(null);
@@ -20,11 +20,13 @@ function SavePayRunModal({
 	const {
 		loading = false,
 		suppliers = {},
-		trigger = () => {},
 		setApiData = () => {},
 		setFilters = () => {},
-		handleClick = () => {},
-	} = useGetListSupplier({ setViewSelectedInvoice, setSavePayrunModal, type });
+	} = useGetListSupplier();
+
+	const {
+		onExclude = () => {},
+	} = useDeleteExcludePayrun({ setApiData, apiData: suppliers, type });
 
 	return (
 		<div>
@@ -54,7 +56,7 @@ function SavePayRunModal({
 					>
 						View Suppliers
 					</Button>
-					<Button onClick={handleClick}>
+					<Button onClick={onExclude}>
 						Next
 					</Button>
 				</Modal.Footer>
@@ -65,9 +67,10 @@ function SavePayRunModal({
 					viewSupplier={viewSupplier}
 					showViewSupplier={showViewSupplier}
 					setApiData={setApiData}
-					refetch={trigger}
 					setFilters={setFilters}
 					type={type}
+					onExclude={onExclude}
+					loading={loading}
 				/>
 			) : null}
 		</div>
