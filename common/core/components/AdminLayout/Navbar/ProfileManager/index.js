@@ -32,9 +32,11 @@ function ProfileManager({
 	const router = useRouter();
 	const { t } = useTranslation(['common', 'notifications']);
 
+	const isDevMode = process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('.dev.cogoport.io');
+
 	let audio = null;
 
-	if (typeof window !== 'undefined') {
+	if (typeof window !== 'undefined' && !isDevMode) {
 		audio = new Audio(getStaticPath('/mp3/notification.mp3'));
 	}
 
@@ -62,7 +64,7 @@ function ProfileManager({
 			}
 
 			if (audio && unReadChatsCount > currentNotSeen && unReadChatsCount !== ZERO) {
-				audio.play();
+				audio?.play();
 				setCurrentNotSeen(unReadChatsCount);
 			}
 		} catch (err) {
