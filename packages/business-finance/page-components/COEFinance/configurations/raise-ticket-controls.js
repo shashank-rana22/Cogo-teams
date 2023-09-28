@@ -3,6 +3,7 @@ const controls = ({
 	watchRaisedToDesk = '',
 	setAdditionalInfo = () => {},
 	shipmentData = {},
+	STAKEHOLDER_OPTIONS = [],
 }) => ([
 	{
 		label       : 'Raised To Desk',
@@ -11,6 +12,14 @@ const controls = ({
 		type        : 'select',
 		rules       : { required: true },
 		options     : formatRaiseToDeskOptions,
+	},
+	{
+		label       : 'Raised To',
+		placeholder : 'Select Raised To',
+		name        : 'raised_to',
+		type        : 'select',
+		rules       : { required: true },
+		options     : STAKEHOLDER_OPTIONS,
 	},
 	{
 		label       : 'Select issue type',

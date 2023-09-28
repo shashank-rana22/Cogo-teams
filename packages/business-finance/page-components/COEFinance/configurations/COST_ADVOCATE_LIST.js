@@ -79,7 +79,7 @@ const constAdvocateConfig = (subActiveTabReject) => ({
 			label   : 'Payment Due Date',
 			key     : 'dueDate',
 			func    : 'renderFormate',
-			span    : 2.1,
+			span    : 2.2,
 			sorting : { name: 'dueDateSortType' },
 		},
 		{
@@ -97,19 +97,19 @@ const constAdvocateConfig = (subActiveTabReject) => ({
 		{
 			label : 'Ticket',
 			key   : 'status',
-			span  : 0.7,
+			span  : 0.8,
 			func  : 'renderTicket',
 		},
 		{
 			label : 'Approval Status',
 			key   : 'status',
-			span  : 1.5,
+			span  : 1.8,
 			func  : 'renderApprovalStatus',
 		},
 		{
 			label : '',
 			key   : 'remarks',
-			span  : 0.3,
+			span  : 0.4,
 			func  : 'renderRemarks',
 		},
 		{

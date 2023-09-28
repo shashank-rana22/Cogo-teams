@@ -36,6 +36,11 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
+			api          : 'list_shipment_stakeholders',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api         : 'get_purchase_bills_by_id_bill_time_line',
 			access_type : 'private',
 			feature     : 'coeFinance',
