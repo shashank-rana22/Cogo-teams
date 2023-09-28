@@ -13,6 +13,7 @@ import getTerminalChargeRateControl from './terminalChargeRateControl';
 
 function TerminalChargeRate({
 	mainServicesData = {},
+	localServiceId = '',
 	refetch = () => {},
 	onCancel = () => {},
 	task_id = '',
@@ -43,6 +44,7 @@ function TerminalChargeRate({
 		task_id,
 		refetch,
 		mainServicesData,
+		localServiceId,
 		sheetData,
 		entityData,
 		collectionPartyData,

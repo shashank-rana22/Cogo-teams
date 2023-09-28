@@ -17,8 +17,7 @@ function ChargeReceiptInformations({
 		setValue('tax_price', Number(tax));
 		setValue('total_tax_price', Number(total_amount));
 		setValue('csr_reference_number', Number(invoice_number));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(csr_data)]);
+	}, [csr_data, setValue]);
 
 	return (
 		<Layout

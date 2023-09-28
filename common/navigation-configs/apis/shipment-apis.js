@@ -1857,6 +1857,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'update_shipment_terminal_service_task',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

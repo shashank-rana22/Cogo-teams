@@ -1,10 +1,13 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+
 const DEFAULT_VALUE_FOR_TERMINAL_CHARGE = 0;
 const DEFAULT_VALUE_FOR_SHEET_INDEX = 1;
 
 const getPayload = ({
 	type: taskType = 'terminal', task_id = '', values = {}, mainServicesData = {}, sheetData = {},
-	entityData = {}, collectionPartyData = {},
+	entityData = {}, collectionPartyData = {}, localServiceId = '',
 }) => {
+	const geo = getGeoConstants();
 	const {
 		business_name = '', cin = '',
 		entity_code = '', registration_number = '', tan_no = '', country = {},
@@ -32,7 +35,7 @@ const getPayload = ({
 
 	const {
 		shipment_id = '', chargeable_weight = '', airline_id = '', origin_airport_id = '',
-		destination_airport_id = '', booking_reference_number = '', id: service_id = '',
+		destination_airport_id = '', booking_reference_number = '',
 	} = mainServicesData || {};
 
 	const CSR_FILE_DATA = [];
@@ -56,6 +59,7 @@ const getPayload = ({
 		shipment_id,
 		airline_id,
 		csr_file_data        : CSR_FILE_DATA,
+		organization_id      : geo.uuid.freight_force_org_id,
 		service              : 'air_freight_local_service',
 		sheet_index          : DEFAULT_VALUE_FOR_SHEET_INDEX,
 		billing_party_detail : {
@@ -91,7 +95,7 @@ const getPayload = ({
 		destination_airport_id,
 		mawb_number,
 		invoice_type_line_item : taskType === 'terminal' ? 'thc' : 'gic',
-		service_id,
+		service_id             : localServiceId,
 		pending_task_id        : task_id,
 		name                   : 'Terminal HandlingCharges',
 		code                   : 'THC',
