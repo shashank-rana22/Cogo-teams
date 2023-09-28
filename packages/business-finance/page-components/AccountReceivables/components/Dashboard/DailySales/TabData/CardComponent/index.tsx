@@ -4,6 +4,7 @@ import { format } from '@cogoport/utils';
 import React from 'react';
 
 import useGetGraph from '../../../../../hooks/useGetGraph';
+import formatCurrency from '../../../../../Utils/amountFormat';
 
 import ResponsiveChart from './ResponsiveChart';
 import BarData from './ResponsiveChart/data';
@@ -29,7 +30,7 @@ function CardComponent({
 	filters, filterValue, entityCode,
 }: CardComponentProps) {
 	const { data, loading: loadingData } = useGetGraph({ filters, filterValue, subActiveTab, entityCode, toggleData });
-	const getData = () => {
+	function GetData() {
 		const getFormat = (duration) => {
 			if (filters.month) 			{
 				return format(duration, 'MMM', {}, false) || '-';
@@ -78,18 +79,9 @@ function CardComponent({
 									)}
 									>
 										<div className={styles.wrapper}>
-											{formatAmount({
-												amount   : amount || 0,
-												currency : dashboardCurrency,
-												options  : {
-													notation              : 'compact',
-													compactDisplay        : 'short',
-													currencyDisplay       : 'code',
-													maximumFractionDigits : 2,
-													style                 : 'currency',
-
-												},
-											})}
+											{
+											formatCurrency(dashboardCurrency, amount)
+											}
 										</div>
 
 									</Tooltip>
@@ -110,7 +102,7 @@ function CardComponent({
 			});
 		}
 		return [];
-	};
+	}
 
 	return (
 		<div className={styles.flex}>
@@ -122,7 +114,7 @@ function CardComponent({
 						entityCode={entityCode}
 					/>
 				</div>
-			) : getData()}
+			) : GetData()}
 
 		</div>
 	);

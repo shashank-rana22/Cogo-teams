@@ -1,4 +1,5 @@
 import { Tooltip } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
@@ -71,9 +72,15 @@ function CardData({ tab }: CardDataProps) {
 								<div>
 									<Tooltip content={(
 										<div>
-											{
-											formatCurrency(item?.currency, item?.openInvoiceAmount)
-											}
+											{formatAmount({
+												amount   :	item?.openInvoiceAmount as any,
+												currency :	item?.currency,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+
+											})}
 										</div>
 									)}
 									>

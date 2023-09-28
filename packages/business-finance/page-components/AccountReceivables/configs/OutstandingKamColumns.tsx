@@ -3,6 +3,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { getByKey } from '@cogoport/utils';
 
+import formatCurrency from '../Utils/amountFormat';
+
 import styles from './styles.module.css';
 
 export const outstandingKamColumn = ({ entityCode, t }) => [
@@ -55,18 +57,12 @@ export const outstandingKamColumn = ({ entityCode, t }) => [
 				)}
 				>
 					<div className={styles.styled_name}>
-						{formatAmount({
-							amount   :	getByKey(row, 'open_invoice_amount') as any,
-							currency :	GLOBAL_CONSTANTS.cogoport_entities[entityCode]?.currency,
-							options  : {
-								notation              : 'compact',
-								compactDisplay        : 'short',
-								maximumFractionDigits : 2,
-								style                 : 'currency',
-								currencyDisplay       : 'code',
-
-							},
-						})}
+						{
+						formatCurrency(
+							GLOBAL_CONSTANTS.cogoport_entities[entityCode]?.currency,
+							getByKey(row, 'open_invoice_amount'),
+						)
+						}
 					</div>
 
 				</Tooltip>
@@ -94,18 +90,12 @@ export const outstandingKamColumn = ({ entityCode, t }) => [
 				)}
 				>
 					<div className={styles.styled_name}>
-						{formatAmount({
-							amount   :	getByKey(row, 'total_outstanding_amount') as any,
-							currency : GLOBAL_CONSTANTS.cogoport_entities[entityCode]?.currency,
-							options  : {
-								notation              : 'compact',
-								compactDisplay        : 'short',
-								maximumFractionDigits : 2,
-								style                 : 'currency',
-								currencyDisplay       : 'code',
-
-							},
-						})}
+						{
+						formatCurrency(
+							GLOBAL_CONSTANTS.cogoport_entities[entityCode]?.currency,
+							getByKey(row, 'total_outstanding_amount'),
+						)
+						}
 					</div>
 
 				</Tooltip>
