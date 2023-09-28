@@ -1,9 +1,14 @@
-import { Button, Modal, Textarea } from '@cogoport/components';
-import { IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
+import { Pill, Button } from '@cogoport/components';
+import {
+	IcCFtick,
+	//  IcCFcrossInCircle
+} from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import List from '../Content/ItemList';
-import Services from '../Content/Services';
+import ShowOverflowingNumber from '../../../../../utils/getShowOverFlowingNumbers';
+// import List from '../Content/ItemList';
+import RemarkModal from '../Content/RemarkModal';
+// import Services from '../Content/Services';
 
 import styles from './styles.module.css';
 
@@ -12,33 +17,34 @@ export default function BuySellStatusContent({
 	columnIndex,
 	index,
 }) {
+	const [buttonClicked, setButtonClicked] = useState('');
 	const [queryModalShow, setQueryModalShow] = useState(false);
-	const [acceptModalShow, setAcceptModalShow] = useState(false);
+	// const [acceptModalShow, setAcceptModalShow] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
-	const [activeService, setActiveService] = useState('Service 1');
-	const servicesFromBackend = ['Service 1', 'Service 2', 'Service 3'];
+	// const [activeService, setActiveService] = useState('Service 1');
+	// const servicesFromBackend = ['Service 1', 'Service 2', 'Service 3'];
 	const data = [1, 2, 3, 4, 5, 6];
-	const handleServiceClick = (service) => {
-		setActiveService(service);
-	};
-	function onClose() {
-		setQueryModalShow(false);
-		setAcceptModalShow(false);
-	}
-	function handleRaiseQuery(columnIndex, index) {
-		toggleAccordion(columnIndex, index);
-		if (index != 5) {
-			toggleAccordion(columnIndex, index + 1);
-		}
-		setQueryModalShow(false);
-	}
-	function handleSubmit(columnIndex, index) {
-		toggleAccordion(columnIndex, index);
-		if (index != 5) {
-			toggleAccordion(columnIndex, index + 1);
-		}
-		setAcceptModalShow(false);
-	}
+	// const handleServiceClick = (service) => {
+	// 	setActiveService(service);
+	// };
+	// function onClose() {
+	// 	setQueryModalShow(false);
+	// 	setAcceptModalShow(false);
+	// }
+	// function handleRaiseQuery(columnIndex, index) {
+	// 	toggleAccordion(columnIndex, index);
+	// 	if (index != 5) {
+	// 		toggleAccordion(columnIndex, index + 1);
+	// 	}
+	// 	setQueryModalShow(false);
+	// }
+	// function handleSubmit(columnIndex, index) {
+	// 	toggleAccordion(columnIndex, index);
+	// 	if (index != 5) {
+	// 		toggleAccordion(columnIndex, index + 1);
+	// 	}
+	// 	setAcceptModalShow(false);
+	// }
 	return (
 		<>
 
@@ -49,20 +55,20 @@ export default function BuySellStatusContent({
 						<div>Invoice Number</div>
 					</div>
 					<div>
-						<div className={styles.regular}>Invoice Number</div>
+						<div className={styles.regular}>Trade Party</div>
 						<div>Invoice Number</div>
 					</div>
 					<div>
-						<div className={styles.regular}>Invoice Number</div>
+						<div className={styles.regular}>Invoice Date</div>
 						<div>Invoice Number</div>
 					</div>
 					<div>
-						<div className={styles.regular}>Invoice Number</div>
-						<div>Invoice Number</div>
+						<div className={styles.regular}>Invoice Amt.</div>
+						<div>{ShowOverflowingNumber(100000000000, 8, 'INR')}</div>
 					</div>
 					<div>
-						<div className={styles.regular}>Invoice Number</div>
-						<div>Invoice Number</div>
+						<div className={styles.regular}>Invoice Status</div>
+						<div><Pill color="#B4F3BE">Invoice Number</Pill></div>
 					</div>
 				</div>
 				<div className={styles.scroll}>
@@ -91,83 +97,44 @@ export default function BuySellStatusContent({
 						size="md"
 						themeType="secondary"
 						style={{ marginRight: '10px' }}
-						onClick={() => { setQueryModalShow(true); }}
+						onClick={() => { setQueryModalShow(true); setButtonClicked('Query'); }}
 					>
 						Raise Query
 					</Button>
 
-					<Modal
-						size="md"
-						show={queryModalShow}
-						onClose={() => onClose()}
-						onOuterClick={() => onClose()}
-						placement="center"
-						scroll
-					>
-						<Modal.Header title="REMARK" />
-						<Modal.Body>
-							<div>
-								Text
-							</div>
-							<Textarea
-								name="remark"
-								size="md"
-								rows={4}
-								cols={20}
-								placeholder="Enter Remarks..."
-								onChange={(e) => setRemarkValue(e)}
-							/>
-						</Modal.Body>
-						<Modal.Footer>
-							<Button
-								size="md"
-								themeType="primary"
-								onClick={() => { handleRaiseQuery(columnIndex, index); }}
-							>
-								Submit
-							</Button>
-						</Modal.Footer>
-					</Modal>
+					<RemarkModal
+						remarkValue={remarkValue}
+						setRemarkValue={setRemarkValue}
+						queryModalShow={queryModalShow}
+						setQueryModalShow={setQueryModalShow}
+						// setAcceptModalShow={setAcceptModalShow}
+						buttonClicked={buttonClicked}
+						setButtonClicked={setButtonClicked}
+						columnIndex={columnIndex}
+						index={index}
+						toggleAccordion={toggleAccordion}
+					/>
 
 					<Button
 						size="md"
 						themeType="primary"
-						onClick={() => { setAcceptModalShow(true); }}
+						onClick={() => { setQueryModalShow(true); setButtonClicked('Accept'); }}
 					>
 						Accept
 					</Button>
-					<Modal
-						size="md"
-						onClose={() => onClose()}
-						onOuterClick={() => onClose()}
-						placement="center"
-						show={acceptModalShow}
-						scroll
-					>
-						<Modal.Header title="REMARK" />
-						<Modal.Body>
-							<div>
-								Text
-							</div>
-							<Textarea
-								name="remark"
-								size="md"
-								rows={4}
-								cols={20}
-								placeholder="Enter Remarks..."
-								onChange={(e) => setRemarkValue(e)}
-							/>
-						</Modal.Body>
-						<Modal.Footer>
-							<Button
-								size="md"
-								themeType="primary"
-								onClick={() => { handleSubmit(columnIndex, index); }}
-							>
-								Approve
-							</Button>
-						</Modal.Footer>
-					</Modal>
+
+					<RemarkModal
+						remarkValue={remarkValue}
+						setRemarkValue={setRemarkValue}
+						queryModalShow={queryModalShow}
+						setQueryModalShow={setQueryModalShow}
+						// setAcceptModalShow={setAcceptModalShow}
+						buttonClicked={buttonClicked}
+						setButtonClicked={setButtonClicked}
+						columnIndex={columnIndex}
+						index={index}
+						toggleAccordion={toggleAccordion}
+					/>
 				</div>
 			</div>
 		</>

@@ -1,0 +1,23 @@
+.fix_layout {
+	width: 84px;
+}
+
+.profit_icon {
+	width: 18px;
+	color: #34c759;
+	transform: rotate(-45deg);
+	display: flex;
+    margin-right: 4px;
+}
+
+.loss_icon {
+	width: 18px;
+	color: #ed3726;
+	transform: rotate(45deg);
+	display: flex;
+    margin-right: 4px;
+}
+.flex {
+	display: flex;
+	align-items: center;
+}

@@ -70,6 +70,18 @@
 	border-radius: 8px;
 }
 
+.popover_content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	:global {
+		.ui_select_container {
+			width: 260px;
+		}
+	}
+}
+
 .tablestyle {
 	:global {
 		.ui_table_head_cell {

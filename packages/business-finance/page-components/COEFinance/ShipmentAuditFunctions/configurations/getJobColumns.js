@@ -1,12 +1,14 @@
 import { Button } from '@cogoport/components';
-import { IcMArrowNext } from '@cogoport/icons-react';
+
+import RenderTableData from '../commons/renderTableData';
+import ShowOverflowingNumber from '../utils/getShowOverFlowingNumbers';
 
 import styles from './styles.module.css';
 
 const getJobColumns = ({ handleClick }) => {
 	const columns = [
 		{
-			id     : 'sid',
+			id     : 'jobId',
 			Header : (
 				<div>SID</div>
 			),
@@ -14,33 +16,26 @@ const getJobColumns = ({ handleClick }) => {
 				const { sid = '' } = row || {};
 				return (
 					<div>
-						{sid}
+						<div className={styles.sid_link}>
+							<a href="#">
+								{`#${row?.jobNumber}`}
+							</a>
+						</div>
+						<div>
+							{row?.service}
+						</div>
 					</div>
 				);
 			},
 		},
 		{
-			id     : 'sell',
+			id     : 'estimatedRevenuePreTax',
 			Header : (
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<div className={styles.vertical_rule} />
-					<div style={{
-						display        : 'flex',
-						justifyContent : 'space-between',
-						alignItems     : 'center',
-						flexDirection  : 'column',
-						width          : '100%',
-						padding        : '0 30px',
-					}}
-					>
+					<div style={{ padding: '0 30px' }} className={styles.header_financial}>
 						<div className={styles.main_heading}>Sell</div>
-						<div style={{
-							display        : 'flex',
-							justifyContent : 'space-between',
-							alignItems     : 'center',
-							width          : '100%',
-						}}
-						>
+						<div className={styles.sub_header_financial}>
 							<div>Estimated</div>
 							<div className={styles.operationally}>Operational</div>
 							{/* <div className={styles.financial}>Financial</div> */}
@@ -54,25 +49,9 @@ const getJobColumns = ({ handleClick }) => {
 				const { estimated, operational } = sell || {};
 				return (
 
-					<div style={{
-						display        : 'flex',
-						justifyContent : 'space-between',
-						alignItems     : 'center',
-						padding        : '0 30px',
-					}}
-					>
-						<div className={styles.fix_layout}>{estimated}</div>
-						<div>
-							<div className={styles.fix_layout}>
-								{operational}
-							</div>
-							<div className={styles.profit_icon}>
-								<IcMArrowNext height="16" width="16" />
-							</div>
-							{/* <div className={styles.loss_icon}>
-								<IcMArrowNext height="16" width="16" />
-							</div> */}
-						</div>
+					<div style={{ padding: '0 30px' }} className={styles.accessor_financial}>
+						<div className={styles.fix_layout}>{ShowOverflowingNumber(row?.estimatedRevenuePreTax, 11, 'INR') }</div>
+						<RenderTableData data={row?.operationalRevenuePreTax} />
 						{/* <div>
 							<div className={styles.fix_layout}>
 								{financial}
@@ -89,26 +68,12 @@ const getJobColumns = ({ handleClick }) => {
 			},
 		},
 		{
-			id     : 'buy',
+			id     : 'estimatedCostPreTax',
 			Header : (
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-					<div style={{
-						display        : 'flex',
-						justifyContent : 'space-between',
-						alignItems     : 'center',
-						flexDirection  : 'column',
-						width          : '100%',
-						padding        : '0 30px',
-					}}
-					>
+					<div style={{ padding: '0 30px' }} className={styles.header_financial}>
 						<div className={styles.main_heading}>Buy</div>
-						<div style={{
-							display        : 'flex',
-							justifyContent : 'space-between',
-							alignItems     : 'center',
-							width          : '100%',
-						}}
-						>
+						<div className={styles.sub_header_financial}>
 							<div>Estimated</div>
 							<div className={styles.operationally}>Operational</div>
 							{/* <div className={styles.financial}>Financial</div> */}
@@ -122,25 +87,9 @@ const getJobColumns = ({ handleClick }) => {
 				const { estimated, operational } = buy || {};
 				return (
 
-					<div style={{
-						display        : 'flex',
-						justifyContent : 'space-between',
-						alignItems     : 'center',
-						padding        : '0 30px',
-					}}
-					>
-						<div className={styles.fix_layout}>{estimated}</div>
-						<div>
-							<div className={styles.fix_layout}>
-								{operational}
-							</div>
-							<div className={styles.profit_icon}>
-								<IcMArrowNext height="16" width="16" />
-							</div>
-							{/* <div className={styles.loss_icon}>
-								<IcMArrowNext height="16" width="16" />
-							</div> */}
-						</div>
+					<div style={{ padding: '0 30px' }} className={styles.accessor_financial}>
+						<div className={styles.fix_layout}>{ShowOverflowingNumber(row?.estimatedCostPreTax, 11, 'INR') }</div>
+						<RenderTableData data={row?.operationalCostPreTax} />
 						{/* <div>
 							<div className={styles.fix_layout}>
 								{financial}
@@ -157,26 +106,12 @@ const getJobColumns = ({ handleClick }) => {
 			},
 		},
 		{
-			id     : 'profitability',
+			id     : 'estimatedProfitabilityPreTax',
 			Header : (
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-					<div style={{
-						display        : 'flex',
-						justifyContent : 'space-between',
-						alignItems     : 'center',
-						flexDirection  : 'column',
-						width          : '100%',
-						padding        : '0 30px',
-					}}
-					>
+					<div style={{ padding: '0 30px' }} className={styles.header_financial}>
 						<div className={styles.main_heading}>Profitability</div>
-						<div style={{
-							display        : 'flex',
-							justifyContent : 'space-between',
-							alignItems     : 'center',
-							width          : '100%',
-						}}
-						>
+						<div className={styles.sub_header_financial}>
 							<div>Estimated</div>
 							<div className={styles.operationally}>Operational</div>
 							{/* <div className={styles.financial}>Financial</div> */}
@@ -190,25 +125,9 @@ const getJobColumns = ({ handleClick }) => {
 				const { estimated, operational } = profitability || {};
 				return (
 
-					<div style={{
-						display        : 'flex',
-						justifyContent : 'space-between',
-						alignItems     : 'center',
-						padding        : '0 30px',
-					}}
-					>
-						<div className={styles.fix_layout}>{estimated}</div>
-						<div>
-							<div className={styles.fix_layout}>
-								{operational}
-							</div>
-							<div className={styles.profit_icon}>
-								<IcMArrowNext height="16" width="16" />
-							</div>
-							{/* <div className={styles.loss_icon}>
-								<IcMArrowNext height="16" width="16" />
-							</div> */}
-						</div>
+					<div style={{ padding: '0 30px' }} className={styles.accessor_financial}>
+						<div className={styles.fix_layout}>{ShowOverflowingNumber(row?.estimatedProfitabilityPreTax, 11, 'INR') }</div>
+						<RenderTableData data={row?.operationalProfitabilityPreTax} />
 						{/* <div>
 							<div className={styles.fix_layout}>
 								{financial}
@@ -225,7 +144,7 @@ const getJobColumns = ({ handleClick }) => {
 			},
 		},
 		{
-			id       : 'estimated',
+			id       : 'jobNumber',
 			Header   : '',
 			accessor : () => (
 

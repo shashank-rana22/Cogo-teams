@@ -53,11 +53,11 @@ function CoeFinance() {
 					</TabPanel>
 
 					<TabPanel name="operational_close" title="Operational Close">
-						<ShipmentAuditFunction />
+						<ShipmentAuditFunction activeTab={activeTab} />
 					</TabPanel>
 
 					<TabPanel name="financial_close" title="Financial Close">
-						<ShipmentAuditFunction />
+						<ShipmentAuditFunction activeTab={activeTab} />
 					</TabPanel>
 
 					<TabPanel name="all_invoices" title="All Invoices">

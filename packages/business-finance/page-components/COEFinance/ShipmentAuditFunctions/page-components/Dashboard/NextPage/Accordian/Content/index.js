@@ -1,8 +1,9 @@
-import { Button, Modal, Textarea } from '@cogoport/components';
-import { IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
+import { Button } from '@cogoport/components';
+// import { IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import List from './ItemList';
+import RemarkModal from './RemarkModal';
 import Services from './Services';
 import styles from './styles.module.css';
 
@@ -12,32 +13,33 @@ export default function Content({
 	index,
 }) {
 	const [queryModalShow, setQueryModalShow] = useState(false);
-	const [acceptModalShow, setAcceptModalShow] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
 	const [activeService, setActiveService] = useState('Service 1');
+	const [buttonClicked, setButtonClicked] = useState('');
 	const servicesFromBackend = ['Service 1', 'Service 2', 'Service 3'];
-	const data = [1, 2, 3, 4, 5, 6];
+	// const data = [1, 2, 3, 4, 5, 6];
 	const handleServiceClick = (service) => {
 		setActiveService(service);
 	};
-	function onClose() {
-		setQueryModalShow(false);
-		setAcceptModalShow(false);
-	}
-	function handleRaiseQuery(columnIndex, index) {
-		toggleAccordion(columnIndex, index);
-		if (index != 5) {
-			toggleAccordion(columnIndex, index + 1);
-		}
-		setQueryModalShow(false);
-	}
-	function handleSubmit(columnIndex, index) {
-		toggleAccordion(columnIndex, index);
-		if (index != 5) {
-			toggleAccordion(columnIndex, index + 1);
-		}
-		setAcceptModalShow(false);
-	}
+	// function onClose() {
+	// 	setQueryModalShow(false);
+	// 	setAcceptModalShow(false);
+	// 	setRemarkValue('');
+	// }
+	// function handleRaiseQuery() {
+	// 	toggleAccordion(columnIndex, index);
+	// 	if (index !== 5) {
+	// 		toggleAccordion(columnIndex, index + 1);
+	// 	}
+	// 	setQueryModalShow(false);
+	// }
+	// function handleSubmit() {
+	// 	toggleAccordion(columnIndex, index);
+	// 	if (index !== 5) {
+	// 		toggleAccordion(columnIndex, index + 1);
+	// 	}
+	// 	setAcceptModalShow(false);
+	// }
 	return (
 		<>
 			<div className={styles.service_heading}>
@@ -78,83 +80,41 @@ export default function Content({
 						size="md"
 						themeType="secondary"
 						style={{ marginRight: '10px' }}
-						onClick={() => { setQueryModalShow(true); }}
+						onClick={() => { setQueryModalShow(true); setButtonClicked('Query'); }}
 					>
 						Raise Query
 					</Button>
 
-					<Modal
-						size="md"
-						show={queryModalShow}
-						onClose={() => onClose()}
-						onOuterClick={() => onClose()}
-						placement="center"
-						scroll
-					>
-						<Modal.Header title="REMARK" />
-						<Modal.Body>
-							<div>
-								Text
-							</div>
-							<Textarea
-								name="remark"
-								size="md"
-								rows={4}
-								cols={20}
-								placeholder="Enter Remarks..."
-								onChange={(e) => setRemarkValue(e)}
-							/>
-						</Modal.Body>
-						<Modal.Footer>
-							<Button
-								size="md"
-								themeType="primary"
-								onClick={() => { handleRaiseQuery(columnIndex, index); }}
-							>
-								Submit
-							</Button>
-						</Modal.Footer>
-					</Modal>
-
+					<RemarkModal
+						remarkValue={remarkValue}
+						setRemarkValue={setRemarkValue}
+						queryModalShow={queryModalShow}
+						setQueryModalShow={setQueryModalShow}
+						buttonClicked={buttonClicked}
+						setButtonClicked={setButtonClicked}
+						columnIndex={columnIndex}
+						index={index}
+						toggleAccordion={toggleAccordion}
+					/>
 					<Button
 						size="md"
 						themeType="primary"
-						onClick={() => { setAcceptModalShow(true); }}
+						onClick={() => { setQueryModalShow(true); setButtonClicked('Accept'); }}
 					>
 						Accept
 					</Button>
-					<Modal
-						size="md"
-						onClose={() => onClose()}
-						onOuterClick={() => onClose()}
-						placement="center"
-						show={acceptModalShow}
-						scroll
-					>
-						<Modal.Header title="REMARK" />
-						<Modal.Body>
-							<div>
-								Text
-							</div>
-							<Textarea
-								name="remark"
-								size="md"
-								rows={4}
-								cols={20}
-								placeholder="Enter Remarks..."
-								onChange={(e) => setRemarkValue(e)}
-							/>
-						</Modal.Body>
-						<Modal.Footer>
-							<Button
-								size="md"
-								themeType="primary"
-								onClick={() => { handleSubmit(columnIndex, index); }}
-							>
-								Approve
-							</Button>
-						</Modal.Footer>
-					</Modal>
+
+					<RemarkModal
+						remarkValue={remarkValue}
+						setRemarkValue={setRemarkValue}
+						queryModalShow={queryModalShow}
+						setQueryModalShow={setQueryModalShow}
+						buttonClicked={buttonClicked}
+						setButtonClicked={setButtonClicked}
+						columnIndex={columnIndex}
+						index={index}
+						toggleAccordion={toggleAccordion}
+					/>
 				</div>
 			</div>
 		</>

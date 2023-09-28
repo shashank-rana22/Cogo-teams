@@ -1,0 +1,75 @@
+.quantity {
+	font-weight: 600;
+	color: #f68b21;
+}
+
+.vertical_rule {
+	width: 1px;
+	height: 50px;
+	background-color: #e0e0e0;
+}
+
+.financial {
+	margin-right: 30px;
+}
+
+.operational {
+	margin-left: 8px;
+}
+
+.operationally {
+	margin-right: 16px;
+}
+
+.main_heading {
+	margin-right: 14px;
+}
+
+.fix_layout {
+	width: 84px;
+}
+
+.profit_icon {
+	width: 14px;
+	color: #34c759;
+	transform: rotate(-45deg);
+	display: flex;
+    margin-right: 4px;
+}
+
+.loss_icon {
+	width: 14px;
+	color: #ed3726;
+	transform: rotate(45deg);
+	display: flex;
+    margin-right: 4px;
+}
+.sid_link {
+	color: #F68B21;
+	text-decoration: underline;
+}
+.flex {
+	display: flex;
+	align-items: center;
+}
+.header_financial {
+	display        : flex;
+	justify-content : space-between;
+	align-items     : center;
+	flex-direction  : column;
+    width          : 100%;
+	padding        : 0 10px;
+					
+}
+.accessor_financial {
+	display        : flex;
+	justify-content : space-between;
+	align-items     : center;
+	padding        : 0 10px;
+}
+.sub_header_financial {
+	display        : flex;
+	justify-content : space-between;
+	align-items     : center;
+    width          : 100%;
+}

@@ -5,13 +5,32 @@ import NextPage from '../NextPage';
 
 import styles from './styles.module.css';
 
-function Header() {
+const OPERATIONAL_ARRAY = [[true, false, false, false, false, false],
+	[false, false, false, false, false, false],
+	[true, false, false, false, false, false],
+	[false, false, false, false, false, false]];
+
+const FINANCIAL_ARRAY = [[true, false, false, false, false, false],
+	[false, false, false, false, false, false],
+	[true, false, false, false, false, false],
+	[false, false, false, false, false, false],
+	[false, false, false, false, false, false],
+	[false, false, false, false, false, false]];
+
+function Header({ activeTab = '' }) {
 	const { push } = useRouter();
 	const handleClick = () => {
-		push(
-			'/business-finance/coe-finance/operational_close',
-			'/business-finance/coe-finance/operational_close',
-		);
+		if (activeTab === 'financial_close') {
+			push(
+				'/business-finance/coe-finance/financial_close',
+				'/business-finance/coe-finance/financial_close',
+			);
+		} else {
+			push(
+				'/business-finance/coe-finance/operational_close',
+				'/business-finance/coe-finance/operational_close',
+			);
+		}
 	};
 	return (
 		<div className={styles.main_container}>
@@ -23,7 +42,9 @@ function Header() {
 					<Button size="md" themeType="primary">Approve</Button>
 				</div>
 			</div>
-			<NextPage />
+			{!(activeTab === 'financial_close')
+				? (<NextPage initialArray={OPERATIONAL_ARRAY} />)
+				: (<NextPage initialArray={FINANCIAL_ARRAY} activeTab={activeTab} />)}
 		</div>
 	);
 }
