@@ -1,4 +1,4 @@
-import { Button, cl, Pill, Popover, Select, Textarea } from '@cogoport/components';
+import { Button, cl, Pill, Popover, Select, Textarea, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -39,6 +39,7 @@ function Details({
 	const { status = '', level2 = {}, level1 = {}, data = {}, type = '', id = '' } = row || {};
 	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
 	const { creditNoteRequest = {}, consolidatedCreditNoteRequest = {}, organization = {} } = data;
+	const { name = '' } = row?.createdBy || {};
 	const {
 		invoiceNumber,
 		jobNumber,
@@ -82,11 +83,20 @@ function Details({
 				<div className={styles.display_box}>
 					<div className={styles.company_div}>
 						<div className={styles.heading}>Company Name</div>
-						<div className={styles.text}>{tradePartyName || businessName || ''}</div>
+						<div className={styles.text}>
+							<div className={styles.tooltip_title}>
+								<Tooltip
+									interactive
+									content={(tradePartyName || businessName || '')}
+								>
+									<div>{(tradePartyName || businessName || '')}</div>
+								</Tooltip>
+							</div>
+						</div>
 					</div>
 					<div>
 						<div className={styles.heading}>Requested By</div>
-						<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+						<div className={styles.text}>{name || ''}</div>
 					</div>
 				</div>
 				<div className={styles.line} />
@@ -104,7 +114,7 @@ function Details({
 										event,
 										partnerId    : partner_id,
 										id           : shipmentId,
-										incidentType : SHIPMENT_MAPPING[row?.incidentSubtype],
+										incidentType : SHIPMENT_MAPPING[row?.incidentSubtype], // to be changed
 									});
 								}}
 							>
@@ -112,7 +122,6 @@ function Details({
 							</a>
 						</div>
 					</div>
-
 					<div className={styles.value_data}>
 						<div className={styles.label_value}>
 							{t('incidentManagement:invoice_number')}
@@ -121,36 +130,35 @@ function Details({
 							{invoiceNumber || '-'}
 						</div>
 					</div>
-
-					<div className={styles.value_data}>
-						<div className={styles.label_value}>
-							{t('incidentManagement:sub_total')}
+					{!isConsolidated ?	(
+						<div className={styles.value_data}>
+							<div className={styles.label_value}>
+								{t('incidentManagement:sub_total')}
+							</div>
+							<div className={styles.date_value}>
+								{getFormatAmount(subTotal, currency)}
+							</div>
 						</div>
-						<div className={styles.date_value}>
-							{getFormatAmount(subTotal, currency)}
+					) : ''}
+					{!isConsolidated ?	(
+						<div className={styles.value_data}>
+							<div className={styles.label_value}>
+								{t('incidentManagement:tax_amount')}
+							</div>
+							<div className={styles.date_value}>
+								{getFormatAmount(taxAmount, currency)}
+							</div>
 						</div>
-					</div>
-
-					<div className={styles.value_data}>
-						<div className={styles.label_value}>
-							{t('incidentManagement:tax_amount')}
-						</div>
-						<div className={styles.date_value}>
-							{getFormatAmount(taxAmount, currency)}
-						</div>
-					</div>
-
+					) : ''}
 					<div className={styles.value_data}>
 						<div className={styles.label_value}>
 							{t('incidentManagement:grand_total')}
 						</div>
 						<div className={styles.date_value}>
-
 							{getFormatAmount(grandTotal, currency)}
 						</div>
 					</div>
 				</div>
-
 				<div className={styles.credit}>
 					<div className={styles.button_container_data}>
 						<Popover
@@ -193,7 +201,6 @@ function Details({
 							className={styles.select_container}
 						/>
 					</div>
-
 					{typeof (revoked) === 'boolean' && (
 						<div>
 							{revoked
@@ -206,7 +213,6 @@ function Details({
 						</div>
 					)}
 				</div>
-
 				{lineItems?.length > [GLOBAL_CONSTANTS.zeroth_index] ? (
 					<div className={styles.list_container}>
 						<StyledTable
@@ -220,13 +226,10 @@ function Details({
 						{t('incidentManagement:no_line_items_available')}
 					</div>
 				)}
-
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>
-					<div className={cl`${styles.label} ${styles.required_field}`}>
-						Remarks
-					</div>
+					<div className={cl`${styles.label} ${styles.required_field}`}>Remarks</div>
 					<Textarea
 						className={styles.textarea}
 						name="remark"
@@ -246,7 +249,6 @@ function Details({
 						>
 							{t('incidentManagement:reject_btn')}
 						</Button>
-
 						<Button
 							size="md"
 							style={{ marginRight: '8px' }}
@@ -267,10 +269,8 @@ function Details({
 							loading={loading}
 						/>
 					)}
-
 				</div>
 			) : null }
-
 		</div>
 	);
 }

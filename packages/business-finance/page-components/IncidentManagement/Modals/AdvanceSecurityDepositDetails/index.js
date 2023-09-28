@@ -1,8 +1,6 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
-import ViewPdf from '../../common/ViewPdf';
 import allStakeHolderTimeLineData from '../../utils/formatAllStakeHolderData';
 
 import Details from './Details';
@@ -11,11 +9,10 @@ import styles from './styles.module.css';
 function AdvanceSecurityDepositDetails({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	const {
 		level3 = {}, level2 = {}, level1 = {}, financeRemark = '',
-		createdBy = {}, remark = '', data: { advanceSecurityDeposit = {} }, status = '', updatedBy = {},
+		createdBy = {}, remark = '', status = '', updatedBy = {},
 	} = row || {};
-	const docUrl = advanceSecurityDeposit?.documentUrls?.[GLOBAL_CONSTANTS.zeroth_index];
-
 	const level0 = { ...createdBy, remark };
+
 	return (
 		<div>
 			<div className={styles.heading}>
@@ -33,7 +30,6 @@ function AdvanceSecurityDepositDetails({ row = {}, setDetailsModal = () => {}, r
 
 			</div>
 			<div className={styles.container_view}>
-				<ViewPdf docUrl={docUrl} />
 				<Details
 					row={row}
 					setDetailsModal={setDetailsModal}

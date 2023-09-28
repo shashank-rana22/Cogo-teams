@@ -14,7 +14,7 @@ function ConcorPDADetails({ row = {}, setDetailsModal = () => {}, refetch = () =
 		status = '', updatedBy = {}, financeRemark = '',
 	} = row || {};
 	const level0 = { ...createdBy, remark };
-	const docUrl = row?.data?.concorPdaApprovalRequest?.bookingProof[GLOBAL_CONSTANTS.zeroth_index] || '';
+	const docUrl = row?.data?.concorPdaApprovalRequest?.bookingProof?.[GLOBAL_CONSTANTS.zeroth_index] || '';
 
 	return (
 		<div>

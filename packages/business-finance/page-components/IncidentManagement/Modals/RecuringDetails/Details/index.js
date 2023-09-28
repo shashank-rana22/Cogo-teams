@@ -1,12 +1,11 @@
-import { Button, cl, Textarea } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
+import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import usePostExpense from '../../../apisModal/usePostExpense';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
+import { getFormatDate } from '../../../utils/formatDate';
 import { getFormatAmount } from '../../../utils/getformatamount';
 
 import styles from './styles.module.css';
@@ -85,11 +84,7 @@ const getSummaryDataThree = ({ startDate, endDate, repeatFrequency, t }) => [
 		value : (
 			<div>
 				{startDate
-					? formatDate({
-						date       : startDate,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						formatType : 'date',
-					}) : '-'}
+					? getFormatDate(startDate) : '-'}
 			</div>
 		),
 	},
@@ -98,11 +93,7 @@ const getSummaryDataThree = ({ startDate, endDate, repeatFrequency, t }) => [
 		value : (
 			<div>
 				{endDate
-					? formatDate({
-						date       : endDate,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						formatType : 'date',
-					})
+					? getFormatDate(endDate)
 					: '-'}
 			</div>
 		),
@@ -146,6 +137,7 @@ function Details({
 		ledgerMaxPayoutAllowed,
 	} = reccuringExpenseApproval || {};
 	const { tradePartyName = '', businessName = '' } = organization || {};
+	const { name = '' } = row?.createdBy || {};
 	const { useOnAction: onAction, loading } = usePostExpense({
 		refetch,
 		setDetailsModal,
@@ -187,11 +179,20 @@ function Details({
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{tradePartyName || businessName || ''}</div>
+					<div className={styles.text}>
+						<div className={styles.tooltip_title}>
+							<Tooltip
+								interactive
+								content={(tradePartyName || businessName || '')}
+							>
+								<div>{(tradePartyName || businessName || '')}</div>
+							</Tooltip>
+						</div>
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+					<div className={styles.text}>{name || ''}</div>
 				</div>
 			</div>
 			<div className={styles.line} />

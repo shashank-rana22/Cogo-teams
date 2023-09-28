@@ -1,7 +1,8 @@
 .label {
 	padding: 0 24px;
 	margin-bottom: 6px;
-	font-weight: 500;
+	font-size: var(--font-size-md);
+	font-weight: 600;
 }
 
 .textarea {
@@ -20,7 +21,7 @@
 .display_box {
 	display: flex;
 	width: 100%;
-	padding: 60px 24px 24px;
+	padding: 60px 0 24px 24px;
 }
 
 .company_div {
@@ -29,7 +30,8 @@
 
 .organization_div {
 	display: flex;
-	width: 50%;
+	justify-content: space-between;
+	width: 80%;
 }
 
 .requested_div {
@@ -46,7 +48,7 @@
 	gap: 12px;
 	justify-content: flex-end;
 	padding: 12px;
-	margin-top: 11.5%;
+	margin-top: 12%;
 	border-radius: 0 0 10px 10px;
 	box-shadow: 0 0 8px 0 #2c3e5033;
 }
@@ -57,12 +59,85 @@
 
 .text {
 	font-size: var(--font-size-md);
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .required_field::after {
 	color: var(--color-primary-error-red-2);
 	content: " *";
+}
+
+.post_tax_container {
+	margin-left: 1%;
+}
+
+.rates_data {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	padding: 12px 24px;
+	margin: 20px 24px 20px 0;
+	border: 1px solid #c2c2c2;
+	border-radius: 4px;
+}
+
+.label_text {
+	font-weight: 600;
+}
+
+.rates {
+	font-weight: 600;
+}
+
+.invoice {
+	padding: 24px;
+}
+
+.invoice_text {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.remarks {
+	margin: 8px 0;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.name_data {
+	display: flex;
+	align-items: center;
+	margin: 8px 0;
+}
+
+.view {
+	color: #f68b21;
+	text-decoration: underline;
+	background-color: transparent;
+}
+
+.view_flex {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	color: #f68b21;
+}
+
+.name {
+	padding-left: 60px;
+	font-weight: 600;
+}
+
+.name:hover {
+	color: rgb(76 71 167);
+	text-decoration: underline;
+	cursor: pointer;
+	background-color: transparent;
 }
 
 .flex {
@@ -84,19 +159,19 @@
 
 .font_name {
 	font-size: var(--font-size-md);
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .branch_name {
 	margin: 0 4px;
 	font-size: var(--font-size-md);
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .font_name_data {
 	display: flex;
 	font-size: var(--font-size-md);
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .radio_box {
@@ -136,4 +211,8 @@
 			background-color: #f68b21;
 		}
 	}
+}
+
+.tooltip_title {
+	width: 200px;
 }

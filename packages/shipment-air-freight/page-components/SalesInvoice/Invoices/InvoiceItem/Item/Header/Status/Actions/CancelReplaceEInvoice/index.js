@@ -16,6 +16,7 @@ function CancelReplaceEInvoice({
 	bfInvoice = {},
 	invoice = {},
 	refetch = () => {},
+	company_name = '',
 }) {
 	const { control, handleSubmit } = useForm();
 
@@ -60,6 +61,7 @@ function CancelReplaceEInvoice({
 			documentUrls         : getDocumentUrl(values),
 			incidentSubType      : modalType,
 			entityId             : getIncidenceEntity(),
+			company_name,
 		});
 	};
 

@@ -1,4 +1,4 @@
-import { Button, cl, Textarea } from '@cogoport/components';
+import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -19,6 +19,7 @@ function Details({
 	const [showRejectModal, setShowRejectModal] = useState(false);
 
 	const { status = '', id = '' } = row || {};
+	const { data: { tdsRequest = {}, organization = {} } } = row || {};
 
 	const {
 		currentTdsRate,
@@ -27,8 +28,9 @@ function Details({
 		validTo = '',
 		currentTdsStyle = '',
 		requestedTdsStyle = '',
-	} = row?.data?.tdsRequest || {};
-	const { tradePartyName = '', businessName = '' } = row?.data?.organization || {};
+	} = tdsRequest || {};
+	const { tradePartyName = '', businessName = '' } = organization || {};
+	const { name = '' } = row?.createdBy || {};
 
 	const getRatePercentageData = [
 		{ label: t('incidentManagement:current_tds_rate'), value: currentTdsRate },
@@ -47,11 +49,20 @@ function Details({
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{tradePartyName || businessName || ''}</div>
+					<div className={styles.text}>
+						<div className={styles.tooltip_title}>
+							<Tooltip
+								interactive
+								content={(tradePartyName || businessName || '')}
+							>
+								<div>{(tradePartyName || businessName || '')}</div>
+							</Tooltip>
+						</div>
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+					<div className={styles.text}>{name || ''}</div>
 				</div>
 			</div>
 			<div className={styles.line} />

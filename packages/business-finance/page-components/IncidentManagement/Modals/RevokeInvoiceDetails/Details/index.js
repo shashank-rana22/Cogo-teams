@@ -1,4 +1,4 @@
-import { Button, cl, Textarea } from '@cogoport/components';
+import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -18,8 +18,9 @@ function Details({
 	const [remarks, setRemarks] = useState('');
 	const [showRejectModal, setShowRejectModal] = useState(false);
 
-	const { status = '', id = '', data: { revokeInvoiceRequest = {}, organization = {} } } = row || {};
-	const { tradePartyName = '', businessName = '' } = organization || {};
+	const { status = '', id = '', data: { revokeInvoiceRequest = {} } } = row || {};
+	const { name = '' } = row?.createdBy || {};
+	const { comapny_name = '', invoiceNumber = '' } = revokeInvoiceRequest || {};
 
 	const { useOnAction: onAction, loading } = useGetRevokeInvoiceData({
 		refetch,
@@ -35,17 +36,26 @@ function Details({
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{tradePartyName || businessName || ''}</div>
+					<div className={styles.text}>
+						<div className={styles.tooltip_title}>
+							<Tooltip
+								interactive
+								content={(comapny_name || '')}
+							>
+								<div>{(comapny_name || '')}</div>
+							</Tooltip>
+						</div>
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+					<div className={styles.text}>{name || ''}</div>
 				</div>
 			</div>
 			<div className={styles.line} />
 			<div className={styles.invoice}>
 				<div className={styles.heading}>Invoice Number</div>
-				<div className={styles.text}>{revokeInvoiceRequest?.invoiceNumber || ''}</div>
+				<div className={styles.text}>{invoiceNumber || ''}</div>
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>

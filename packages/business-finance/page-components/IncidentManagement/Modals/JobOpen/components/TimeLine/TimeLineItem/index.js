@@ -1,10 +1,10 @@
 /* eslint-disable no-nested-ternary */
 import { Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
+
+import { getFormatDate } from '../../../../../utils/formatDate';
 
 import styles from './styles.module.css';
 
@@ -43,11 +43,7 @@ function TimeLineItem({
 						{isComplete ? 'Completed On' : 'Expected'}
 
 						<div className={styles.tool_tip_item}>
-							{formatDate({
-								date       : item?.completed_on,
-								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-								formatType : 'date',
-							})}
+							{getFormatDate(item?.completed_on)}
 						</div>
 					</div>
 				) : null}
@@ -110,11 +106,7 @@ function TimeLineItem({
                     className === 'pending' ? `${styles.desc} ${styles[className]}` : styles.desc
                   }
 							>
-								{formatDate({
-									date       : item?.completed_on,
-									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-									formatType : 'date',
-								})}
+								{getFormatDate(item?.completed_on)}
 							</div>
 						) : null}
 					</div>

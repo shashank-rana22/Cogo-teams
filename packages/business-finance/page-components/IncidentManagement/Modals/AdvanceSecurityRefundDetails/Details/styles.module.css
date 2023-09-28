@@ -1,7 +1,8 @@
 .label {
 	padding: 0 24px;
 	margin-bottom: 6px;
-	font-weight: 500;
+	font-size: var(--font-size-md);
+	font-weight: 600;
 }
 
 .textarea {
@@ -37,7 +38,7 @@
 }
 
 .shipment_id {
-	font-weight: 500;
+	font-size: var(--font-size-md);
 	color: #f68b21;
 	text-decoration: underline;
 }
@@ -58,12 +59,34 @@
 
 .text {
 	font-size: var(--font-size-md);
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .required_field::after {
 	color: var(--color-primary-error-red-2);
 	content: " *";
+}
+
+.flex {
+	display: flex;
+}
+
+.rates_data {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	padding: 12px 24px;
+	margin: 20px 24px 20px 0;
+	border: 1px solid #c2c2c2;
+	border-radius: 4px;
+}
+
+.label_text {
+	font-weight: 600;
+}
+
+.rates {
+	font-weight: 600;
 }
 
 .supplier_div {
@@ -76,4 +99,8 @@
 
 .utr_div {
 	padding: 16px 24px 32px;
+}
+
+.tooltip {
+	width: 200px;
 }

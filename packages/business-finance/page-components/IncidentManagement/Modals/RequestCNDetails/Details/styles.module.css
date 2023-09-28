@@ -1,7 +1,8 @@
 .label {
-	padding: 0 24px;
+	padding: 24px 24px 0;
 	margin-bottom: 6px;
-	font-weight: 500;
+	font-size: var(--font-size-md);
+	font-weight: 600;
 }
 
 .textarea {
@@ -31,6 +32,24 @@
 	border-bottom: 1px solid #e0e0e0;
 }
 
+.profit_container {
+	display: flex;
+	margin-left: 12px;
+}
+
+.shipment_id {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	color: #f68b21;
+	text-decoration: underline;
+}
+
+.buy_sell_div {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px 36px 24px 24px;
+}
+
 .button_container {
 	display: flex;
 	gap: 12px;
@@ -47,7 +66,7 @@
 
 .text {
 	font-size: var(--font-size-md);
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .required_field::after {
@@ -61,28 +80,46 @@
 	justify-content: space-between;
 }
 
+.rates_data {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	padding: 12px 24px;
+	margin: 20px 24px 20px 0;
+	border: 1px solid #c2c2c2;
+	border-radius: 4px;
+}
+
+.label_text {
+	font-weight: 600;
+}
+
+.rates {
+	font-weight: 600;
+}
+
 .display_container {
-	padding: 24px;
+	padding: 24px 24px 0;
 }
 
 .value_data {
-	margin: 20px 20px 20px 0;
-}
-
-.label_value {
-	font-size: 12px;
+	margin: 20px 20px 32px 0;
 }
 
 .date_value {
 	font-size: var(--font-size-md);
-	font-weight: 500;
-	color: #f68b21;
+	font-weight: 600;
+}
+
+.label_value {
+	font-size: var(--font-size-md);
 }
 
 .credit {
 	display: flex;
 	gap: 8px;
 	align-items: center;
+	margin-bottom: 32px;
 }
 
 .button_container_data {
@@ -122,7 +159,7 @@
 
 	:global {
 		.ui_table_head_cell {
-			min-width: 80px;
+			min-width: 72px;
 		}
 
 		.ui_table_head_cell:first-child {
@@ -159,4 +196,8 @@
 .select_container {
 	width: 200px;
 	margin-left: 12px;
+}
+
+.tooltip_title {
+	width: 200px;
 }

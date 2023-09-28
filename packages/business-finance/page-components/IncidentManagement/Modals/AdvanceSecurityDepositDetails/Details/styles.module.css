@@ -1,18 +1,20 @@
 .label {
 	padding: 0 24px;
 	margin-bottom: 6px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
 	font-weight: 500;
 }
 
 .textarea {
-	width: 90%;
+	width: 95%;
 	min-height: 80px;
 	padding: 4px;
 	margin: 0 24px;
 }
 
 .container {
-	width: 49%;
+	width: 100%;
 	background: #fff;
 	border-radius: 10px;
 }
@@ -32,7 +34,7 @@
 }
 
 .shipment_id {
-	font-weight: 500;
+	font-size: var(--font-size-md);
 	color: #f68b21;
 	text-decoration: underline;
 }
@@ -42,7 +44,7 @@
 	gap: 12px;
 	justify-content: flex-end;
 	padding: 12px;
-	margin-top: 12%;
+	margin-top: 13%;
 	border-radius: 0 0 10px 10px;
 	box-shadow: 0 0 8px 0 #2c3e5033;
 }
@@ -53,7 +55,7 @@
 
 .text {
 	font-size: var(--font-size-md);
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .required_field::after {
@@ -61,36 +63,42 @@
 	content: " *";
 }
 
-.amount_details {
+.post_tax_container {
+	margin-left: 1%;
+}
+
+.flex {
 	display: flex;
-	gap: 40px;
-	padding: 16px 0;
+}
+
+.rates_data {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	padding: 12px 24px;
+	margin: 20px 24px 20px 0;
+	border: 1px solid #c2c2c2;
+	border-radius: 4px;
+}
+
+.label_text {
+	font-weight: 600;
+}
+
+.rates {
+	font-weight: 600;
 }
 
 .details_box {
 	padding: 24px;
 }
 
-.supplier_div {
-	padding: 24px 0 16px;
+.tooltip_title {
+	width: 200px;
 }
 
-.shipment_container {
-	padding: 16px 0;
-}
-
-.payment_div {
-	padding: 16px 0 8px;
-}
-
-.per_container_div {
-	width: 60%;
-}
-
-.count_div {
-	width: 30%;
-}
-
-.amount_div {
-	width: 30%;
+.flex_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 24px;
 }

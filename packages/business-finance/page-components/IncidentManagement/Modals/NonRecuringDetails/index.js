@@ -14,7 +14,7 @@ function RecuringDetails({ row = {}, setDetailsModal = () => {}, refetch = () =>
 		remark = '', status = '', updatedBy = {}, financeRemark = '',
 	} = row || {};
 	const level0 = { ...createdBy, remark };
-	const docUrl = row?.data?.overheadConfirmationRequest?.documents[GLOBAL_CONSTANTS.zeroth_index] || '';
+	const docUrl = row?.data?.overheadConfirmationRequest?.documents?.[GLOBAL_CONSTANTS.zeroth_index] || '';
 
 	return (
 		<div>

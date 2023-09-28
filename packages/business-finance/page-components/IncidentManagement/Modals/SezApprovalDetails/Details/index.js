@@ -1,4 +1,4 @@
-import { Button, cl, Textarea } from '@cogoport/components';
+import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -22,6 +22,8 @@ function Details({
 	const { status = '', id = '', data = {} } = row || {};
 	const { sezRequest = {}, organization = {} } = data || {};
 	const { tradePartyName = '', businessName = '' } = organization || {};
+	const { name = '' } = row?.createdBy || {};
+	const { taxNumber = '', address = '' } = sezRequest || {};
 
 	const { useOnAction: OnAction, loading } = useSezApproveReject({
 		refetch,
@@ -35,21 +37,30 @@ function Details({
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{tradePartyName || businessName || ''}</div>
+					<div className={styles.text}>
+						<div className={styles.tooltip_title}>
+							<Tooltip
+								interactive
+								content={(tradePartyName || businessName || '')}
+							>
+								<div>{(tradePartyName || businessName || '')}</div>
+							</Tooltip>
+						</div>
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+					<div className={styles.text}>{name || ''}</div>
 				</div>
 			</div>
 			<div className={styles.line} />
 			<div className={styles.company_gst}>
 				<div className={styles.heading}>GST Number</div>
-				<div className={styles.text}>{<ClipBoard data={row?.data?.sezRequest?.taxNumber} /> || ''}</div>
+				<div className={styles.text}>{<ClipBoard data={taxNumber} /> || ''}</div>
 			</div>
 			<div className={styles.company_address}>
 				<div className={styles.heading}>Address</div>
-				<div className={styles.text}>{row?.data?.sezRequest?.address || ''}</div>
+				<div className={styles.text}>{address || ''}</div>
 			</div>
 
 			{ status === 'REQUESTED' ? (
