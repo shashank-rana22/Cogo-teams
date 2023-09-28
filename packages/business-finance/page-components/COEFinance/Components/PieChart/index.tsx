@@ -53,7 +53,17 @@ function MyResponsivePie({
 				startAngle={-180}
 				activeOuterRadiusOffset={8}
 				borderWidth={1}
-				colors={['hsl(186, 26%, 55%)', 'hsl(186, 44%, 68%)', 'hsl(186, 44%, 77%)', 'hsl(186, 45%, 87%)']}
+				colors={
+					[
+						'hsl(186, 26%, 55%)',
+						'hsl(186, 44%, 68%)',
+						'hsl(186, 44%, 77%)',
+						'hsl(186, 45%, 87%)',
+						'#5f8b96',
+						'#6b9387',
+						'#1e4246',
+						'#878e95']
+					}
 				borderColor={{
 					from      : 'color',
 					modifiers : [
