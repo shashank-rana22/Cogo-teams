@@ -56,14 +56,10 @@ function ViewModal({
 			className="primary xl"
 			style={{ width: '80%' }}
 		>
-			<div className={styles.top_container}>
-				<div className={styles.header}>
-					Budget allocation for KAM:
-					<div className={styles.users}>
-						{selectedDetails.user_count}
-						users
-					</div>
-				</div>
+			<Modal.Header title={`Budget allocation for KAM: 
+			${selectedDetails.user_count} users`}
+			/>
+			<Modal.Body>
 				<div className={styles.input_cont}>
 					<Layout
 						controls={controls(selectedDetails)}
@@ -71,27 +67,38 @@ function ViewModal({
 						errors={errors}
 					/>
 				</div>
-			</div>
-			<StyledTableComponent
-				columns={tableColumns}
-				formattedData={formattedData({
-					promoAllocationList,
-					refetch,
-					selectedDetails,
-				})}
-				loading={loading}
-			/>
-			<div className={styles.pagination_container}>
-				<Pagination
-					className="md"
-					pageSize={page_limit}
-					currentPage={page}
-					totalItems={total_count}
-					onPageChange={(val) => {
-						setPagination((p) => ({ ...p, page: val }));
-					}}
+				<div className={styles.pagination_container}>
+					<Pagination
+						className="md"
+						pageSize={page_limit}
+						currentPage={page}
+						totalItems={total_count}
+						onPageChange={(val) => {
+							setPagination((p) => ({ ...p, page: val }));
+						}}
+					/>
+				</div>
+				<StyledTableComponent
+					columns={tableColumns}
+					formattedData={formattedData({
+						promoAllocationList,
+						refetch,
+						selectedDetails,
+					})}
+					loading={loading}
 				/>
-			</div>
+				<div className={styles.pagination_container}>
+					<Pagination
+						className="md"
+						pageSize={page_limit}
+						currentPage={page}
+						totalItems={total_count}
+						onPageChange={(val) => {
+							setPagination((p) => ({ ...p, page: val }));
+						}}
+					/>
+				</div>
+			</Modal.Body>
 		</Modal>
 	);
 }

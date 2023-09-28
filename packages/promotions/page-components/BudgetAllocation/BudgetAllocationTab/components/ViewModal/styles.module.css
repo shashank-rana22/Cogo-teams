@@ -20,14 +20,13 @@
 	background: #fff;
 }
 
-.top_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
-	padding: 8px 16px 16px 8px;
-}
-
 .input_cont .core-ui-select__control {
 	width: 270px;
+}
+
+.input_cont {
+	display: block;
+	width: fit-content;
+	margin-bottom: 16px;
+	margin-left: auto;
 }

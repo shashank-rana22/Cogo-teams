@@ -4,14 +4,15 @@ import useBlockUserBudgetAllocation from '../../../hooks/useBlockUserBudgetAlloc
 
 import styles from './styles.module.css';
 
-function BlockUserModal({ block, setBlock, item, refetch }) {
+function BlockUserModal({ block = false, setBlock = () => {}, item = {}, refetch = () => {} }) {
 	const onClose = () => {
 		setBlock(false);
 	};
-	const { loading, blockUserBudget } = useBlockUserBudgetAllocation({
-		setBlock,
-		refetch,
-	});
+	const blockAndRefetch = () => {
+		setBlock(false);
+		refetch();
+	};
+	const { loading = true, blockUserBudget = () => {} } = useBlockUserBudgetAllocation(blockAndRefetch);
 	return (
 		<Modal
 			show={block}
@@ -19,29 +20,26 @@ function BlockUserModal({ block, setBlock, item, refetch }) {
 			onOuterClick={onClose}
 			onClose={onClose}
 			showCloseIcon
+			placement="top"
 		>
-			<div className={styles.styled_flex}>
-				<div className={styles.styled_text}>
-					Are you sure you want to
-					<span style={{ fontWeight: '600' }}>
-						{item?.status === 'active' ? <> BLOCK </> : <> UNBLOCK </>}
-					</span>
-					this agent?
+			<Modal.Header
+				title={`Are you sure you want to
+			 ${item?.status === 'active' ? 'BLOCK' : 'UNBLOCK'} this agent?`}
+			/>
+			<Modal.Footer>
+				<div className={styles.button_flex}>
+					<Button className="secondary sm" onClick={() => setBlock(false)}>
+						No
+					</Button>
+					<Button
+						onClick={() => blockUserBudget(item)}
+						className={`primary sm ${styles.space_left}`}
+						disabled={loading}
+					>
+						Yes
+					</Button>
 				</div>
-			</div>
-
-			<div className={styles.button_flex}>
-				<Button className="secondary sm" onClick={() => setBlock(false)}>
-					No
-				</Button>
-				<Button
-					onClick={() => blockUserBudget(item)}
-					className={`primary sm ${styles.space_left}`}
-					disabled={loading}
-				>
-					Yes
-				</Button>
-			</div>
+			</Modal.Footer>
 		</Modal>
 	);
 }

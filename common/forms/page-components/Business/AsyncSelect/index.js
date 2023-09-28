@@ -106,7 +106,7 @@ const keyAsyncFieldsParamsMapping = {
 	partner_roles                        : asyncFieldsPartnerRoles,
 	segments                             : asyncFieldsCampaignSegments,
 	list_locations                       : asyncFieldsLocations,
-	list_location_clusters               : asyncListLocationClusters,
+	list_location_clusters         	     : asyncListLocationClusters,
 	commodity_clusters                   : asyncListFclFreightCommodityClusters,
 	list_locations_mapping               : asyncFieldsLocationsMapping,
 	list_operators                       : asyncFieldsListOperators,

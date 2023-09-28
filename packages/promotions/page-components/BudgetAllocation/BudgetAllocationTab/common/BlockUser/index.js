@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import BlockUserModal from './BlockUserModal';
 
-function BlockUser({ item, refetch }) {
+function BlockUser({ item = {}, refetch = () => {} }) {
 	const [block, setBlock] = useState(false);
 
 	return (

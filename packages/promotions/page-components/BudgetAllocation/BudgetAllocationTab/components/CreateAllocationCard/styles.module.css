@@ -13,63 +13,15 @@
 	width: 240px;
 }
 
-.budget {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.duration {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin: 0 50px;
-}
-
-.roles {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.flex {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	align-items: space-around;
-	justify-items: center;
-}
-
-.header {
-	margin: 6px 12px 0 0;
-	font-size: 14px;
-	font-weight: 500;
-	color: #393f70;
-}
-
-.error_text {
-	margin-top: 4px;
-	font-size: 12px;
-	font-weight: 400;
-	color: #d8000c;
-}
-
 .icon {
+	display: "flex";
+	justify-content: "flex-end";
 	height: fit-content;
 	cursor: pointer;
-}
-
-.styled_div {
-	display: flex;
 }
 
 .button_container {
 	display: flex;
 	justify-content: end;
 	margin-top: 16px;
-}
-
-.fields_div {
-	display: flex;
-	flex-direction: column;
 }

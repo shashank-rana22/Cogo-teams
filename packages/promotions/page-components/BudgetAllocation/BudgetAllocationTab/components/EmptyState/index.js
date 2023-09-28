@@ -1,3 +1,4 @@
+import { Image } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -12,18 +13,15 @@ function EmptyState() {
 				</p>
 			</div>
 			<div className={styles.iccontainer}>
-				<img
+				<Image
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-nonfunded.svg"
 					alt="empty"
-					height="100%"
-					width="100%"
+					height="300"
+					width="300"
 					style={{ marginLeft: 20 }}
 				/>
 			</div>
 		</div>
 	);
 }
-
-EmptyState.propTypes = {};
-
 export default EmptyState;

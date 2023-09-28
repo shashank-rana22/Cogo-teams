@@ -26,7 +26,7 @@ function ShowModal({
 		setShowErrorModal(false);
 		radioReset();
 	};
-	const { fetchCreateDataApi, loading = false } = useBudgetAllocation({
+	const { fetchCreateDataApi = () => {}, loading = false } = useBudgetAllocation({
 		FormData,
 		setShowErrorModal,
 		setShowModal,
