@@ -39,6 +39,7 @@ function Details({
 	const { status = '', level2 = {}, level1 = {}, data = {}, type = '', id = '' } = row || {};
 	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
 	const { creditNoteRequest = {}, consolidatedCreditNoteRequest = {}, organization = {} } = data;
+	const { name = '' } = row?.createdBy || {};
 	const {
 		invoiceNumber,
 		jobNumber,
@@ -95,7 +96,7 @@ function Details({
 					</div>
 					<div>
 						<div className={styles.heading}>Requested By</div>
-						<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+						<div className={styles.text}>{name || ''}</div>
 					</div>
 				</div>
 				<div className={styles.line} />
@@ -113,7 +114,7 @@ function Details({
 										event,
 										partnerId    : partner_id,
 										id           : shipmentId,
-										incidentType : SHIPMENT_MAPPING[row?.incidentSubtype],
+										incidentType : SHIPMENT_MAPPING[row?.incidentSubtype], // to be changed
 									});
 								}}
 							>
@@ -129,22 +130,26 @@ function Details({
 							{invoiceNumber || '-'}
 						</div>
 					</div>
-					<div className={styles.value_data}>
-						<div className={styles.label_value}>
-							{t('incidentManagement:sub_total')}
+					{!isConsolidated ?	(
+						<div className={styles.value_data}>
+							<div className={styles.label_value}>
+								{t('incidentManagement:sub_total')}
+							</div>
+							<div className={styles.date_value}>
+								{getFormatAmount(subTotal, currency)}
+							</div>
 						</div>
-						<div className={styles.date_value}>
-							{getFormatAmount(subTotal, currency)}
+					) : ''}
+					{!isConsolidated ?	(
+						<div className={styles.value_data}>
+							<div className={styles.label_value}>
+								{t('incidentManagement:tax_amount')}
+							</div>
+							<div className={styles.date_value}>
+								{getFormatAmount(taxAmount, currency)}
+							</div>
 						</div>
-					</div>
-					<div className={styles.value_data}>
-						<div className={styles.label_value}>
-							{t('incidentManagement:tax_amount')}
-						</div>
-						<div className={styles.date_value}>
-							{getFormatAmount(taxAmount, currency)}
-						</div>
-					</div>
+					) : ''}
 					<div className={styles.value_data}>
 						<div className={styles.label_value}>
 							{t('incidentManagement:grand_total')}
@@ -224,9 +229,7 @@ function Details({
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>
-					<div className={cl`${styles.label} ${styles.required_field}`}>
-						Remarks
-					</div>
+					<div className={cl`${styles.label} ${styles.required_field}`}>Remarks</div>
 					<Textarea
 						className={styles.textarea}
 						name="remark"
@@ -246,7 +249,6 @@ function Details({
 						>
 							{t('incidentManagement:reject_btn')}
 						</Button>
-
 						<Button
 							size="md"
 							style={{ marginRight: '8px' }}
@@ -267,10 +269,8 @@ function Details({
 							loading={loading}
 						/>
 					)}
-
 				</div>
 			) : null }
-
 		</div>
 	);
 }

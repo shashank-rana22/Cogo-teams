@@ -26,8 +26,12 @@ function Details({
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarkValue, setRemarkValue] = useState('');
 	const { status = '', id = '', data: { advanceSecurityDepositRefund = {}, organization = {} } } = row || {};
-	const { totalAmount = 0, currency = '' } = advanceSecurityDepositRefund || {};
+	const {
+		totalAmount = 0, currency = '', sid = '', utrNumber = '',
+		shipmentType = '', shipmentNumber = '', supplierName = '',
+	} = advanceSecurityDepositRefund || {};
 	const { tradePartyName = '', businessName = '' } = organization || {};
+	const { name = '' } = row?.createdBy || {};
 	const { getData, loading } = useGetSecurityDepositData({
 		refetch,
 		setDetailsModal,
@@ -54,30 +58,30 @@ function Details({
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+					<div className={styles.text}>{name || ''}</div>
 				</div>
 			</div>
 			<div className={styles.line} />
 			<div className={styles.supplier_div}>
 				<div className={styles.heading}>Supplier Name</div>
-				<div className={styles.text}>{advanceSecurityDepositRefund?.supplierName || ''}</div>
+				<div className={styles.text}>{supplierName || ''}</div>
 			</div>
 			<div className={styles.shipment_container}>
 				<div className={styles.heading}>Shipment Id</div>
 				<div className={styles.shipment_id}>
 					#
 					<a
-						href={advanceSecurityDepositRefund?.id}
+						href={sid}
 						onClick={(event) => {
 							openPDF({
 								event,
 								partnerId    : partner_id,
-								id           : advanceSecurityDepositRefund?.id,
-								incidentType : SHIPMENT_MAPPING[row?.incidentSubtype],
+								id           : shipmentNumber,
+								incidentType : SHIPMENT_MAPPING[shipmentType.toUpperCase()],
 							});
 						}}
 					>
-						{advanceSecurityDepositRefund?.id || ''}
+						{sid || ''}
 					</a>
 				</div>
 			</div>
@@ -89,7 +93,7 @@ function Details({
 			</div>
 			<div className={styles.utr_div}>
 				<div className={styles.heading}>UTR Number</div>
-				<div className={styles.text}>{advanceSecurityDepositRefund?.utrNumber || ''}</div>
+				<div className={styles.text}>{utrNumber || ''}</div>
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>

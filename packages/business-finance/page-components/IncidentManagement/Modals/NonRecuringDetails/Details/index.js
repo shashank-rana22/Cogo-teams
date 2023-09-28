@@ -31,6 +31,7 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 		lineItems = [],
 		currency = '',
 	} = overheadConfirmationRequest || {};
+	const { name = '' } = row?.createdBy || {};
 	const { useOnAction: onAction, loading } = usePostExpense({
 		refetch,
 		setDetailsModal,
@@ -59,7 +60,7 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 				</div>
 				<div className={styles.medium}>
 					<div className={styles.title}>Requested By</div>
-					<div className={styles.text}>{row?.createdBy?.name || '-'}</div>
+					<div className={styles.text}>{name || '-'}</div>
 				</div>
 			</div>
 			<div className={styles.line} />

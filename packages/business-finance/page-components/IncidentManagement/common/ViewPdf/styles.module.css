@@ -1,13 +1,13 @@
 .pdf_container {
 	width: 49%;
-	height: fit-content;
+	height: auto;
 	min-height: 660px;
 	border-radius: 10px;
 }
 
 .empty_state {
 	width: 49%;
-	height: fit-content;
+	height: auto;
 	min-height: 660px;
 	padding: 70px;
 	background-color: #fff;
@@ -16,7 +16,7 @@
 
 .zip_text {
 	width: 49%;
-	height: fit-content;
+	height: auto;
 	min-height: 660px;
 	padding: 50px;
 	font-size: 18px;

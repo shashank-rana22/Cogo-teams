@@ -1,6 +1,4 @@
 import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -10,6 +8,7 @@ import useApproveConcor from '../../../apisModal/useApproveConcor';
 import RejectModal from '../../../common/RejectModal/index';
 import SHIPMENT_MAPPING from '../../../Constants/SHIPMENT_MAPPING';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
+import { getFormatDate } from '../../../utils/formatDate';
 import { getFormatAmount } from '../../../utils/getformatamount';
 
 import styles from './styles.module.css';
@@ -35,10 +34,11 @@ function Details({
 	const { status = '', id = '', data = {} } = row || {};
 
 	const { concorPdaApprovalRequest } = data || {};
-
+	const { name = '' } = row?.createdBy || {};
 	const {
 		sid = '', totalBuyPrice = '', placeOfDestination = '', placeOfSupply = '',
 		isTaxApplicable = true, documentDate = '', dueDate = '', beneficiaryName = '', currency = '',
+		shipmentType = '',
 	} = concorPdaApprovalRequest || {};
 
 	const { useOnAction: onAction, loading = false } = useApproveConcor({
@@ -68,7 +68,7 @@ function Details({
 				</div>
 				<div className={styles.medium}>
 					<div className={styles.title}>Requested By</div>
-					<div className={styles.text}>{row?.createdBy?.name || '-'}</div>
+					<div className={styles.text}>{name || '-'}</div>
 				</div>
 			</div>
 			<div className={styles.line} />
@@ -88,7 +88,7 @@ function Details({
 									event,
 									partnerId    : partner_id,
 									id           : sid,
-									incidentType : SHIPMENT_MAPPING[row?.incidentSubtype], // to be changed
+									incidentType : SHIPMENT_MAPPING[shipmentType.toUpperCase()],
 								});
 							}}
 						>
@@ -126,21 +126,13 @@ function Details({
 				<div className={styles.large}>
 					<div className={styles.title}>Document Date</div>
 					<div className={styles.text}>
-						{formatDate({
-							date       : documentDate,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'date',
-						}) }
+						{getFormatDate(documentDate) }
 					</div>
 				</div>
 				<div className={styles.medium}>
 					<div className={styles.title}>Due Date</div>
 					<div className={styles.text}>
-						{formatDate({
-							date       : dueDate,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'date',
-						}) }
+						{getFormatDate(dueDate)}
 
 					</div>
 				</div>

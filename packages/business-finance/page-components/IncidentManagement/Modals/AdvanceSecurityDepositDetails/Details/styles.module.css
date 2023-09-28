@@ -12,14 +12,14 @@
 }
 
 .textarea {
-	width: 90%;
+	width: 95%;
 	min-height: 80px;
 	padding: 4px;
 	margin: 0 24px;
 }
 
 .container {
-	width: 49%;
+	width: 100%;
 	background: #fff;
 	border-radius: 10px;
 }
@@ -105,40 +105,16 @@
 	font-weight: 600;
 }
 
-.amount_details {
-	display: flex;
-	gap: 40px;
-	padding: 16px 0;
-}
-
 .details_box {
 	padding: 24px;
 }
 
-.supplier_div {
-	padding: 24px 0 16px;
-}
-
-.shipment_container {
-	padding: 16px 0;
-}
-
-.payment_div {
-	padding: 16px 0 8px;
-}
-
-.per_container_div {
-	width: 60%;
-}
-
-.count_div {
-	width: 30%;
-}
-
-.amount_div {
-	width: 30%;
-}
-
 .tooltip_title {
 	width: 200px;
+}
+
+.flex_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 24px;
 }

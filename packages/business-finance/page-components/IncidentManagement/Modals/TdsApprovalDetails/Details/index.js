@@ -19,6 +19,7 @@ function Details({
 	const [showRejectModal, setShowRejectModal] = useState(false);
 
 	const { status = '', id = '' } = row || {};
+	const { data: { tdsRequest = {}, organization = {} } } = row || {};
 
 	const {
 		currentTdsRate,
@@ -27,8 +28,9 @@ function Details({
 		validTo = '',
 		currentTdsStyle = '',
 		requestedTdsStyle = '',
-	} = row?.data?.tdsRequest || {};
-	const { tradePartyName = '', businessName = '' } = row?.data?.organization || {};
+	} = tdsRequest || {};
+	const { tradePartyName = '', businessName = '' } = organization || {};
+	const { name = '' } = row?.createdBy || {};
 
 	const getRatePercentageData = [
 		{ label: t('incidentManagement:current_tds_rate'), value: currentTdsRate },
@@ -60,7 +62,7 @@ function Details({
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+					<div className={styles.text}>{name || ''}</div>
 				</div>
 			</div>
 			<div className={styles.line} />

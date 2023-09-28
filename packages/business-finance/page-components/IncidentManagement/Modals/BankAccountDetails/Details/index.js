@@ -31,6 +31,7 @@ function Details({
 		isIfscCodeValid,
 		methodOfVerification,
 	} = bankRequest || {};
+	const { name = '' } = row?.createdBy || {};
 	const { tradePartyName = '', businessName = '', tradePartyType = '' } = organization || {};
 	let isEditable = true;
 	if (status !== 'REQUESTED') {
@@ -76,7 +77,7 @@ function Details({
 				<div className={styles.organization_div}>
 					<div className={styles.requested_div}>
 						<div className={styles.heading}>Requested By</div>
-						<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+						<div className={styles.text}>{name || ''}</div>
 					</div>
 					<div className={styles.requested_div}>
 						<div className={styles.heading}>Organization Type</div>

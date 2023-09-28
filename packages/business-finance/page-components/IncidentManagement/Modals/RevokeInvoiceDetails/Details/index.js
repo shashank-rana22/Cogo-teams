@@ -18,8 +18,9 @@ function Details({
 	const [remarks, setRemarks] = useState('');
 	const [showRejectModal, setShowRejectModal] = useState(false);
 
-	const { status = '', id = '', data: { revokeInvoiceRequest = {}, organization = {} } } = row || {};
-	const { tradePartyName = '', businessName = '' } = organization || {};
+	const { status = '', id = '', data: { revokeInvoiceRequest = {} } } = row || {};
+	const { name = '' } = row?.createdBy || {};
+	const { comapny_name = '', invoiceNumber = '' } = revokeInvoiceRequest || {};
 
 	const { useOnAction: onAction, loading } = useGetRevokeInvoiceData({
 		refetch,
@@ -39,22 +40,22 @@ function Details({
 						<div className={styles.tooltip_title}>
 							<Tooltip
 								interactive
-								content={(tradePartyName || businessName || '')}
+								content={(comapny_name || '')}
 							>
-								<div>{(tradePartyName || businessName || '')}</div>
+								<div>{(comapny_name || '')}</div>
 							</Tooltip>
 						</div>
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{row?.createdBy?.name || ''}</div>
+					<div className={styles.text}>{name || ''}</div>
 				</div>
 			</div>
 			<div className={styles.line} />
 			<div className={styles.invoice}>
 				<div className={styles.heading}>Invoice Number</div>
-				<div className={styles.text}>{revokeInvoiceRequest?.invoiceNumber || ''}</div>
+				<div className={styles.text}>{invoiceNumber || ''}</div>
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>

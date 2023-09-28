@@ -23,7 +23,7 @@ const useCancelReplaceInvoice = () => {
 	const onRevoke = async ({
 		cancelReason = '', proformaNumber = '', closeModal = () => {},
 		invoiceId = '', invoiceCombinationId = '', refetch = () => {}, documentUrls = '',
-		incidentSubType = 'CANCEL_INVOICE', entityId = '',
+		incidentSubType = 'CANCEL_INVOICE', entityId = '', company_name = '',
 	}) => {
 		try {
 			await trigger({
@@ -38,6 +38,7 @@ const useCancelReplaceInvoice = () => {
 							invoiceCombinationId : invoiceCombinationId || undefined,
 							invoiceId            : invoiceId || undefined,
 							revokedBy            : user_id,
+							company_name         : company_name || undefined,
 						},
 					},
 					source    : 'BOOKINGS',

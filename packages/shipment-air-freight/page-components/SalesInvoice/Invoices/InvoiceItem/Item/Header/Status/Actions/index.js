@@ -71,6 +71,8 @@ function Actions({
 		showReplace: geo.others.navigations.partner.bookings.invoicing.request_replace_invoice,
 	} : {};
 
+	const { company_name = '' } = shipment_data?.booking_party_details || {};
+
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
 	const firstChar = invoice_serial_id[GLOBAL_CONSTANTS.zeroth_index];
@@ -211,6 +213,7 @@ function Actions({
 					refetch={refetch}
 					showCancelModal={showCancelModal}
 					setShowCancelModal={setShowCancelModal}
+					company_name={company_name}
 				/>
 			)}
 
