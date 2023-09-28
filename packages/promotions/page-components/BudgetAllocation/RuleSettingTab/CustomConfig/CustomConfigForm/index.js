@@ -12,8 +12,7 @@ import shipmentConfigControls from '../../GlobalConfig/controls/shipmentConfigCo
 import getControls from './controls';
 import getOrganizationCreateAgentRuleData from './helpers/getOrganizationCreateAgentRuleData';
 import getOrganizationUpdateAgentRuleData from './helpers/getOrganizationUpdateAgentRuleData';
-import getShipmentCreateAgentRuleData from './helpers/getShipmentCreateAgentRuleData';
-import getShipmentUpdateAgentRuleData from './helpers/getShipmentUpdateAgentRuleData';
+import getShipmentAgentRuleData from './helpers/getShipmentAgentRuleData';
 import styles from './styles.module.css';
 
 const INCREMENT = 0.01;
@@ -27,7 +26,7 @@ function CustomConfigForm({
 	viewAndEditConfigData = {},
 	setViewAndEditConfigData = () => {},
 }) {
-	const DEFAULT_VALUES = viewAndEditConfigData === null ? {} : viewAndEditConfigData;
+	const DEFAULT_VALUES = viewAndEditConfigData || {};
 	const controls = getControls({ cogo_entity_id: data?.cogo_entity_id });
 	const discountControls = discountConfigControls({ disabledFrequency: true });
 	const shipmentControls = shipmentConfigControls();
@@ -46,7 +45,7 @@ function CustomConfigForm({
 					},
 				});
 			} else {
-				const dataMap = getShipmentCreateAgentRuleData(values);
+				const dataMap = getShipmentAgentRuleData(values);
 				await onSubmit({
 					data: {
 						...dataMap,
@@ -63,7 +62,7 @@ function CustomConfigForm({
 				},
 			});
 		} else {
-			const dataMap = getShipmentUpdateAgentRuleData(values);
+			const dataMap = getShipmentAgentRuleData(values);
 			await onUpdateAgentRule({
 				data: {
 					...dataMap,

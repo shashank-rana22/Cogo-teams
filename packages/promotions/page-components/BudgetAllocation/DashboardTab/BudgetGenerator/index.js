@@ -1,4 +1,5 @@
-import { ButtonIcon, Select, Input, Loader } from '@cogoport/components';
+import { ButtonIcon, Select, Input } from '@cogoport/components';
+import currencyCode from '@cogoport/globalization/constants/currencyCode';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEdit, IcMTick, IcMCross } from '@cogoport/icons-react';
 import React, { useState } from 'react';
@@ -8,8 +9,8 @@ import useUpdatePromotionBudgetAmount from '../../../../hooks/useUpdatePromotion
 import styles from './styles.module.css';
 
 const options = [
-	{ label: 'USD', value: 'USD' },
-	{ label: 'INR', value: 'INR' },
+	{ label: currencyCode.USD, value: currencyCode.USD },
+	{ label: currencyCode.INR, value: currencyCode.INR },
 ];
 
 function BudgetGenerator({
@@ -24,9 +25,6 @@ function BudgetGenerator({
 	const [isEdit, setIsEdit] = useState(false);
 	const { loading = {}, updateBudgetAmount = () => {} } = useUpdatePromotionBudgetAmount();
 
-	if (loading) {
-		return <Loader />;
-	}
 	return (
 		<div className={styles.card}>
 			<div className={styles.content}>
@@ -44,6 +42,7 @@ function BudgetGenerator({
 							size="md"
 							icon={<IcMTick />}
 							themeType="primary"
+							disabled={loading}
 							onClick={() => {
 								updateBudgetAmount({
 									data: {

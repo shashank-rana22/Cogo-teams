@@ -1,5 +1,6 @@
 import { Loader } from '@cogoport/components';
-import { useState, useEffect } from 'react';
+import currencyCode from '@cogoport/globalization/constants/currencyCode';
+import React, { useState, useEffect } from 'react';
 
 import useGetPromotionBudgetDashboard from '../../../hooks/useGetPromotionBudgetDashboard';
 
@@ -24,7 +25,7 @@ function DashboardTab() {
 	const [budgetValue, setBudgetValue] = useState(data.total_budget?.amount || DEFAULT_AMOUNT);
 
 	useEffect(() => {
-		setParams((p) => ({ ...p, currency: 'USD' }));
+		setParams((p) => ({ ...p, currency: currencyCode.USD }));
 	}, [setParams]);
 
 	useEffect(() => {
