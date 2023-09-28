@@ -111,6 +111,7 @@ function Header({
 					<Button
 						size="md"
 						themeType="secondary"
+						disabled={isItemNotChecked || isApproveDisabled}
 						style={{ border: '1px solid #06a106', color: '#06a106' }}
 						onClick={(e: any) => handleModalData(e)}
 					>
@@ -160,7 +161,7 @@ function Header({
 								<div>
 									<AdditionalRemarks
 										remarkData={remarkData}
-										setRemarkData={setRemarkData}
+										setRemarkData={setRemarkData as any}
 									/>
 									<div className={styles.btn_container}>
 										<Button
