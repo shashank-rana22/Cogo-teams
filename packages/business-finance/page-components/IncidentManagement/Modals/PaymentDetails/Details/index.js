@@ -102,7 +102,7 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 							themeType="primary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => onAction(STATUS_MAPPING.approved)}
+							onClick={() => onAction({ status: STATUS_MAPPING.approved })}
 						>
 							Approve
 						</Button>
