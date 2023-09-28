@@ -29,7 +29,7 @@ function useCreateShipmentAirCSRSheet({
 				},
 			});
 			setSheetData((prev) => ({
-				...prev, [index]: { ...response?.data },
+				...prev, [index]: { ...response?.data || {} },
 			}));
 			setTerminalChargeState((prev) => ({ ...prev, [index]: 'fetching_data' }));
 		} catch (err) {

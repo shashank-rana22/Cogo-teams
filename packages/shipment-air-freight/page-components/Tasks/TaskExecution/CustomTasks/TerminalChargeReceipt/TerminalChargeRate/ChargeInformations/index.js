@@ -41,8 +41,7 @@ function ChargeInformations({
 			return () => clearTimeout(timeoutId);
 		}
 		return () => {};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [terminalChargeState[index]]);
+	}, [getCSROCRData, index, terminalChargeState]);
 
 	return (
 		<div>
@@ -76,12 +75,11 @@ function ChargeInformations({
 					csr_data={data}
 				/>
 			) : null}
-			{index > GLOBAL_CONSTANTS.zeroth_index
-			&& (
+			{index > GLOBAL_CONSTANTS.zeroth_index ? (
 				<div className={styles.delete_button}>
 					<ButtonIcon size="xl" icon={<IcMDelete />} themeType="primary" onClick={() => deleteItem(index)} />
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }

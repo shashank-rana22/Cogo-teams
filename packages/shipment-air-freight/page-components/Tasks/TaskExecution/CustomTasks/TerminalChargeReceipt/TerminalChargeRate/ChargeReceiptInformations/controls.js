@@ -1,4 +1,4 @@
-const controls = (index = 0) => [
+const controls = ({ index = 0 }) => [
 	{
 		name        : `csr_reference_number_${index}`,
 		label       : 'TC Invoice Number',
