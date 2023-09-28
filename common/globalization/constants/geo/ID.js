@@ -546,7 +546,7 @@ export default {
 	others: {
 		registration_number: {
 			label      : 'NPWP',
-			pattern    : /^\d{13}$/,
+			pattern    : /^\d{15}|\d{16}$/,
 			max_length : 13,
 		},
 		banking_code: {
