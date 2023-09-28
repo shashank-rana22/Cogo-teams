@@ -24,20 +24,23 @@ const useGetUserShipmentActivity = ({
 
 	const { query: searchValue, debounceQuery } = useDebounceQuery();
 
-	const [{ loading, data }, trigger] = useRequest({
-		url    : `/${API_MAPPING[activeTab]}`,
+	const [{ loading, data = {} }, trigger] = useRequest({
+		url    : `/${API_MAPPING[activeTab] || ''}`,
 		method : 'get',
 	}, { manual: true });
 
 	const fetchActivityLogs = useCallback(async ({ orgId }) => {
 		try {
+			if (!API_MAPPING[activeTab]) {
+				return;
+			}
 			await trigger({
 				params: getParam({ orgId, searchValue: searchQuery }),
 			});
 		} catch (error) {
 			console.error(error);
 		}
-	}, [trigger, searchQuery]);
+	}, [activeTab, trigger, searchQuery]);
 
 	useEffect(() => {
 		debounceQuery(query?.trim());

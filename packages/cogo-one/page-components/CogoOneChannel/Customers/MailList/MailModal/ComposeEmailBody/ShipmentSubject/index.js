@@ -13,6 +13,10 @@ import CustomSelectHeader from './CustomSelectHeader';
 import styles from './styles.module.css';
 
 function RenderLabel({ item = {}, activeTab = '' }) {
+	if (activeTab === 'others') {
+		return item?.label;
+	}
+
 	const shipmentType = activeTab === 'quotation' ? item?.primary_service : item?.shipment_type;
 
 	const originPort = activeTab === 'quotation'
@@ -74,10 +78,10 @@ function ShipmentSubject({
 		activeTab      : emailState?.customSubject?.activeTab,
 	});
 
-	const selectOptions = (getActivityListOptions({
+	const selectOptions = getActivityListOptions({
 		activityData,
 		activeTab: emailState?.customSubject?.activeTab,
-	}) || []);
+	}) || [];
 
 	const handleSelectChange = (serialId) => setEmailState(
 		(prev) => ({ ...prev, customSubject: { ...prev?.customSubject, serialId } }),

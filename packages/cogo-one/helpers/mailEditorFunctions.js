@@ -46,7 +46,9 @@ function useMailEditorFunctions({
 	let subjectToSend = subject;
 
 	if (showOrgSpecificMail) {
-		if (customSubject?.serialId && customSubject?.subjectText) {
+		if (customSubject?.serialId === 'custom' && customSubject?.subjectText) {
+			subjectToSend = customSubject?.subjectText;
+		} else if (customSubject?.serialId && customSubject?.subjectText) {
 			subjectToSend = `${customSubject?.serialId} | ${customSubject?.subjectText}`;
 		} else {
 			subjectToSend = '';

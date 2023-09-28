@@ -1,7 +1,14 @@
 import { startCase } from '@cogoport/utils';
 
-function getActivityListOptions({ activityData = {}, activeTab }) {
+function getActivityListOptions({ activityData = {}, activeTab = '' }) {
 	const { list = [] } = activityData || {};
+
+	if (activeTab === 'others') {
+		return [{
+			value : 'custom',
+			label : 'Custom Subject',
+		}];
+	}
 
 	return list?.map(
 		(item) => ({
