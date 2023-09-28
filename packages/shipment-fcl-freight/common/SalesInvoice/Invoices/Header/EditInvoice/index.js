@@ -30,6 +30,8 @@ function EditInvoice({
 	const { role_ids } = useSelector(({ profile }) => ({
 		role_ids: profile.partner?.user_role_ids,
 	}));
+	const isAdminSuperAdmin = [geo.uuid.admin_id, geo.uuid.super_admin_id]
+		.some((ele) => role_ids?.includes(ele));
 
 	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
@@ -47,6 +49,7 @@ function EditInvoice({
 		invoice,
 		onClose,
 		refetch,
+		isAdminSuperAdmin,
 		shipment_data,
 		primary_service,
 		info: <Info />,

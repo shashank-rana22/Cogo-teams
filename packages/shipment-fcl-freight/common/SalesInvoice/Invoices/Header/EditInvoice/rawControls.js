@@ -6,16 +6,20 @@ import { isEmpty, startCase } from '@cogoport/utils';
 const MIN_ALIAS_LENGTH = 3;
 const PRICE_GREATER_THAN = 0;
 
+const handleDisableCond = (charge, isAdminSuperAdmin) => charge?.service_type === 'fcl_freight_service'
+&& !isAdminSuperAdmin;
+
 const rawControls = ({
 	handleChange,
 	charge,
 	info,
+	isAdminSuperAdmin,
 	shipment_data = {},
 	primary_service = {},
 	index,
 	TRADE_MAPPING = {},
 }) => {
-	const isFieldsDisabled = charge?.service_type === 'fcl_freight_service';
+	const isFieldsDisabled = handleDisableCond(charge, isAdminSuperAdmin);
 	const { id, shipment_type, entity_id } = shipment_data;
 
 	return {
@@ -100,7 +104,8 @@ const rawControls = ({
 				placeholder  : 'Select Currency',
 				rules        : { required: true },
 				span         : 1.5,
-				disabled     : isFieldsDisabled,
+				disabled:
+				handleDisableCond(charge, isAdminSuperAdmin),
 			},
 			{
 				label       : 'Price',
