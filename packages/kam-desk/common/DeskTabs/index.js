@@ -9,17 +9,41 @@ import KamDeskContext from '../../context/KamDeskContext';
 import styles from './styles.module.css';
 
 const SCROLL_DIVISOR = 2;
+const MIN_INDEX_FOR_SCROLL = 5;
 
 function DeskTabs() {
 	const scrollRef = useRef('');
 	const tabs_container = scrollRef.current;
 	const scrollWidth = window.innerWidth / SCROLL_DIVISOR;
 
-	const [windowSize, setWindowSize] = useState(window.innerWidth);
-
 	const { stepperTab, shipmentType, activeTab, setActiveTab, setFilters, filters } = useContext(KamDeskContext);
 
+	const [windowSize, setWindowSize] = useState(window.innerWidth);
+
 	const tabs = shipmentTabMapping[shipmentType]?.tabs || shipmentTabMapping[shipmentType]?.[stepperTab]?.tabs || [];
+
+	const totalTabs = tabs.length;
+
+	const scrollOnTabs = tabs?.map((item, index) => {
+		if (totalTabs - index < MIN_INDEX_FOR_SCROLL) {
+			return {
+				val   : item?.value,
+				shift : +scrollWidth,
+			};
+		}
+
+		if (index < MIN_INDEX_FOR_SCROLL) {
+			return {
+				val   : item?.value,
+				shift : -scrollWidth,
+			};
+		}
+		return null;
+	}).filter((item) => item !== null);
+
+	const slide = (shift) => {
+		tabs_container.scrollLeft += shift;
+	};
 
 	const handleChange = (val) => {
 		if (val !== activeTab) {
@@ -32,11 +56,13 @@ function DeskTabs() {
 				page: 1,
 				...(isCritical && filters.criticalOn ? { criticalOn: true } : {}),
 			});
-		}
-	};
 
-	const slide = (shift) => {
-		tabs_container.scrollLeft += shift;
+			const shouldScrollObject = scrollOnTabs.find((obj) => obj?.val === val);
+
+			if (shouldScrollObject) {
+				slide(shouldScrollObject?.shift);
+			}
+		}
 	};
 
 	function handleWindowResize() {
@@ -57,7 +83,7 @@ function DeskTabs() {
 					onClick={() => slide(-scrollWidth)}
 					className={styles.btn_left}
 				>
-					<IcMArrowRotateLeft width={16} height={16} />
+					<IcMArrowRotateLeft width={20} height={20} />
 				</button>
 			) : null}
 
@@ -66,7 +92,6 @@ function DeskTabs() {
 					themeType="secondary"
 					activeTab={activeTab}
 					onChange={handleChange}
-					className={styles.tabs}
 				>
 					{tabs?.map((tab) => (
 						<TabPanel
@@ -83,7 +108,7 @@ function DeskTabs() {
 					onClick={() => slide(+scrollWidth)}
 					className={styles.btn_right}
 				>
-					<IcMArrowRotateRight width={16} height={16} />
+					<IcMArrowRotateRight width={20} height={20} />
 				</button>
 			) : null}
 		</div>

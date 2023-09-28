@@ -6,30 +6,26 @@
 
 .tabs_container {
 	max-width: 100%;
-	overflow-x: scroll;
+	overflow-x: hidden;
 	scroll-behavior: smooth;
-	white-space: nowrap;
-	scrollbar-width: none;
-
-	::-webkit-scrollbar {
-		display: none;
-	}
-}
-
-.tabs {
-	::-webkit-scrollbar {
-		display: none;
-	}
 }
 
 .btn_left {
-	margin-right: 4px;
-	background-color: #f8f5ec;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px;
+	padding-right: 12px;
+	background: transparent;
 	border: none;
 }
 
 .btn_right {
-	margin-left: 4px;
-	background-color: #f8f5ec;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px;
+	padding-left: 12px;
+	background: transparent;
 	border: none;
 }
