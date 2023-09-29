@@ -57,7 +57,7 @@ const useGetUserShipmentActivity = ({
 	}, [fetchActivityLogs, organizationId]);
 
 	return {
-		activityData    : data,
+		activityData    : loading ? {} : data,
 		activityLoading : loading,
 		fetchActivityLogs,
 		query,

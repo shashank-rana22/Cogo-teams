@@ -6,11 +6,23 @@
 
 .org_select {
 	width: 40%;
+
+	:global {
+		.ui_select_options_container {
+			z-index: 999;
+		}
+	}
 }
 
 .users_select {
 	width: 60%;
 	margin-left: 10px;
+
+	:global {
+		.ui_multiselectt_options_container {
+			z-index: 999;
+		}
+	}
 }
 
 .users_cc_select {

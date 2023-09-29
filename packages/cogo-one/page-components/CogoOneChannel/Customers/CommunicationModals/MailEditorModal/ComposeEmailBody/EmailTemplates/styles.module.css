@@ -7,6 +7,7 @@
 }
 
 .label {
+	width: 40px;
 	padding-right: 4px;
 	font-size: 14px;
 	color: #828282;
@@ -46,4 +47,10 @@
 	margin-left: 4px;
 	cursor: pointer;
 	fill: #2f4d50;
+}
+
+.no_data_found {
+	align-self: center;
+	font-size: 12px;
+	white-space: nowrap;
 }

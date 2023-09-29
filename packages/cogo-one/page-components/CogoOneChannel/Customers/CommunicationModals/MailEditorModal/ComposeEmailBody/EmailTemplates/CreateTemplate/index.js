@@ -35,7 +35,6 @@ function CreateTemplate({
 					type="submit"
 					disabled={loading}
 					onClick={handleSubmit(onSubmit)}
-					themeType="secondary"
 				>
 					Create
 				</Button>

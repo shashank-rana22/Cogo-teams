@@ -31,7 +31,7 @@
 	top: 4px;
 	right: -1px;
 	left: -1px;
-	z-index: 1;
+	z-index: 9999;
 	display: block;
 	max-height: 250px;
 	padding: 8px 12px;

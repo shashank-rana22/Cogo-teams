@@ -13,7 +13,7 @@ import CustomSelectHeader from './CustomSelectHeader';
 import styles from './styles.module.css';
 
 function RenderLabel({ item = {}, activeTab = '' }) {
-	if (activeTab === 'others') {
+	if (activeTab === 'custom') {
 		return item?.label;
 	}
 

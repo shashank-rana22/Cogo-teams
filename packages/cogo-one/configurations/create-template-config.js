@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { SUBJECT_MAPPING } from '../constants/mailConstants';
@@ -22,6 +23,7 @@ const CREATE_CONFIG_TEMPLATE = [
 		controlType : 'chips',
 		value       : 'shipments_rpa',
 		options     : getTemplatesOptions(),
+		className   : cl.ns('element_styles'),
 	},
 	{
 		name        : 'name',
@@ -29,6 +31,7 @@ const CREATE_CONFIG_TEMPLATE = [
 		controlType : 'input',
 		placeholder : 'Type name here...',
 		width       : '300px',
+		className   : cl.ns('element_styles'),
 		rules       : {
 			required  : true,
 			maxLength : 64,
@@ -45,6 +48,7 @@ const CREATE_CONFIG_TEMPLATE = [
 		controlType : 'textArea',
 		placeholder : 'Type description here...',
 		width       : '300px',
+		className   : cl.ns('element_styles'),
 		rows        : 3,
 		rules       : {
 			required : true,
@@ -57,6 +61,7 @@ const CREATE_CONFIG_TEMPLATE = [
 		controlType : 'select',
 		options     : GLOBAL_CONSTANTS.languages.filter((eachLanguage) => !!eachLanguage?.code),
 		width       : '300px',
+		className   : cl.ns('element_styles'),
 		placeholder : 'Select language here...',
 		rules       : {
 			required: true,

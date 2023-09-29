@@ -2,6 +2,14 @@
 	display: flex;
 	width: calc(100% - 40px);
 	margin-left: 10px;
+
+	:global {
+		.ui_input_container {
+			&:hover {
+				z-index: unset;
+			}
+		}
+	}
 }
 
 .agent_label {
@@ -25,7 +33,7 @@
 }
 
 .subject_select {
-	width: 40% !important;
+	width: 60% !important;
 }
 
 .subject_input {

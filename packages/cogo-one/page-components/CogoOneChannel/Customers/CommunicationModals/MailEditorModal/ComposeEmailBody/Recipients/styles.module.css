@@ -10,6 +10,7 @@
 }
 
 .sub_text {
+	width: 40px;
 	font-size: 14px;
 	color: #828282;
 }
@@ -17,7 +18,7 @@
 .mail_recipient_container {
 	display: flex;
 	align-items: center;
-	width: calc(100% - 110px);
+	width: calc(100% - 106px);
 }
 
 .button_styles {

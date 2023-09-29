@@ -19,6 +19,10 @@
 		.ui_form_element_error {
 			margin-bottom: 4px;
 		}
+
+		.ui_element_styles {
+			padding-top: 2px;
+		}
 	}
 }
 

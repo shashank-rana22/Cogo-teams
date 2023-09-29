@@ -23,7 +23,6 @@ const getParams = ({ page, tags }) => ({
 
 function useListCommunicationTemplates({
 	tags = [],
-	shouldTrigger = false,
 	templateAddition = false,
 	setEmailState = () => {},
 }) {
@@ -37,7 +36,7 @@ function useListCommunicationTemplates({
 
 	const fetchEmailTemplate = useCallback(async ({ page }) => {
 		try {
-			if (isEmpty(tags) || !shouldTrigger) {
+			if (isEmpty(tags)) {
 				return;
 			}
 
@@ -61,7 +60,7 @@ function useListCommunicationTemplates({
 		} catch (error) {
 			console.error(error);
 		}
-	}, [setEmailState, shouldTrigger, tags, templateAddition, trigger]);
+	}, [setEmailState, tags, templateAddition, trigger]);
 
 	const handleScroll = (e) => {
 		const { clientWidth, scrollWidth, scrollLeft } = e.target;

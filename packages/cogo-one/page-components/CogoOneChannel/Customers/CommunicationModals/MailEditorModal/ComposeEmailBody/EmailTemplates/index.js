@@ -1,5 +1,6 @@
 import { Chips, Popover } from '@cogoport/components';
 import { IcMPlusInCircle, IcMRefresh } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { SUBJECT_MAPPING } from '../../../../../../../constants/mailConstants';
@@ -24,32 +25,37 @@ function EmailTemplates({ mailProps = {} }) {
 
 	const {
 		loading = false,
-		handleScroll = () => {},
 		templatesList = [],
+		handleScroll = () => {},
 		handleRefresh = () => {},
 	} = useListCommunicationTemplates({
-		shouldTrigger : !!(emailState?.orgId),
-		tags          : SUBJECT_MAPPING?.[emailState?.customSubject?.activeTab]?.template_tags || null,
+		tags: SUBJECT_MAPPING?.[emailState?.customSubject?.activeTab]?.template_tags || null,
 		templateAddition,
 		setEmailState,
 	});
+	// const loading = true;
+	// const	templatesList = [];
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.label}>
-				Templates:
+				Temp:
 			</div>
 
 			<div
 				className={styles.templates_list}
-				style={{ padding: templateAddition ? '0px 4px 0px 10px' : '0px 0px 0px 10px' }}
+				style={{ margin: templateAddition ? '0px 4px 0px 10px' : '0px 0px 0px 10px' }}
 				onScroll={handleScroll}
 			>
-				<Chips
-					items={templatesList || []}
-					selectedItems={singleSelected}
-					onItemChange={setSingleSelected}
-				/>
+				{isEmpty(templatesList) && !loading
+					? <div className={styles.no_data_found}>No Templates.</div>
+					: (
+						<Chips
+							items={templatesList || []}
+							selectedItems={singleSelected}
+							onItemChange={setSingleSelected}
+						/>
+					) }
 				{loading ? <LoadingState /> : null}
 			</div>
 

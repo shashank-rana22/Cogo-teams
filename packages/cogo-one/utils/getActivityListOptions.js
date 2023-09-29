@@ -3,7 +3,7 @@ import { startCase } from '@cogoport/utils';
 function getActivityListOptions({ activityData = {}, activeTab = '' }) {
 	const { list = [] } = activityData || {};
 
-	if (activeTab === 'others') {
+	if (activeTab === 'custom') {
 		return [{
 			value : 'custom',
 			label : 'Custom Subject',
