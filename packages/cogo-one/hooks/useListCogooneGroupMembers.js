@@ -1,34 +1,49 @@
 import { useRequest } from '@cogoport/request';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const getPayload = ({ groupId = '' }) => ({
 	filters: {
 		cogoone_group_id : groupId,
 		status           : 'active',
 	},
-	page_limit: 100,
+	partner_data_required : true,
+	page_limit            : 100,
 });
 
-const useListCogooneGroupMembers = () => {
-	const [{ loading, data }, trigger] = useRequest({
+const listFormatter = ({ res = {} }) => res?.data?.list || [];
+
+const useListCogooneGroupMembers = ({ globalGroupId = '' }) => {
+	const [membersList, setMembersList] = useState([]);
+
+	const [, trigger] = useRequest({
 		url    : '/list_cogoone_group_members',
 		method : 'get',
 	}, { manual: true });
 
-	const fetchPartnerId = useCallback(({ groupId }) => {
+	const listCogooneGroupMembers = useCallback(async ({ groupId = '' }) => {
 		try {
-			trigger({
+			const res = await trigger({
 				params: getPayload({ groupId }),
 			});
-		} catch (error) {
-			console.error('error', error);
+			const list = listFormatter({ res });
+			setMembersList(list);
+		} catch (e) {
+			setMembersList([]);
 		}
 	}, [trigger]);
 
+	useEffect(() => {
+		if (!globalGroupId) {
+			setMembersList([]);
+			return;
+		}
+
+		listCogooneGroupMembers({ groupId: globalGroupId });
+	}, [globalGroupId, listCogooneGroupMembers]);
+
 	return {
-		loading,
-		fetchPartnerId,
-		listData: loading ? {} : data,
+		listCogooneGroupMembers,
+		membersList,
 	};
 };
 export default useListCogooneGroupMembers;

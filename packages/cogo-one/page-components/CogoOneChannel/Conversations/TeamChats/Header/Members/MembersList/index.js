@@ -2,17 +2,16 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 
+import List from './List';
 import styles from './styles.module.css';
 
 function MembersList({
-	groupMembersList = [],
+	membersList = [],
 	setAddMembers = () => {},
 }) {
 	return (
-		<div className={styles.container}>
-			<div className={styles.list}>
-				{groupMembersList.map((eachPerson) => <div key={eachPerson?.id}>members</div>)}
-			</div>
+		<>
+			<List membersList={membersList} />
 			<div className={styles.footer_buttons}>
 				<Button
 					size="md"
@@ -44,7 +43,7 @@ function MembersList({
 					<div className={styles.button_text}>Leave</div>
 				</Button>
 			</div>
-		</div>
+		</>
 	);
 }
 export default MembersList;

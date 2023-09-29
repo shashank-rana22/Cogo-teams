@@ -115,7 +115,11 @@ function Customers({
 		},
 		teams: {
 			setActiveTeamCard: (val) => {
-				setActiveTab((prev) => ({ ...prev, data: val }));
+				setActiveTab((prev) => ({
+					...prev,
+					data      : val,
+					groupData : {},
+				}));
 			},
 			activeTeamCard  : activeTab?.data || {},
 			activeTab       : activeTab?.tab,

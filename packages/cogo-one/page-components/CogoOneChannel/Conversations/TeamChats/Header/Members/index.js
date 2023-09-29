@@ -4,7 +4,10 @@ import AddMembers from './AddMembers';
 import MembersList from './MembersList';
 import styles from './styles.module.css';
 
-function Members({ viewType = '', groupMembersList = [{}] }) {
+function Members({
+	viewType = '',
+	membersList = [],
+}) {
 	const [addMembers, setAddMembers] = useState(false);
 
 	return (
@@ -16,7 +19,7 @@ function Members({ viewType = '', groupMembersList = [{}] }) {
 				/>
 			) : (
 				<MembersList
-					groupMembersList={groupMembersList}
+					membersList={membersList}
 					setAddMembers={setAddMembers}
 				/>
 			)}

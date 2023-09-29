@@ -27,7 +27,7 @@ function TeamChats(props) {
 		id = '',
 	} = activeTeamCard || {};
 
-	const { loading = false } = useFetchGlobalRoom({
+	const { loading = false, membersList = [] } = useFetchGlobalRoom({
 		firestore,
 		globalGroupId : group_id,
 		setActiveTab,
@@ -54,6 +54,8 @@ function TeamChats(props) {
 					viewType={viewType}
 					firestore={firestore}
 					setActiveTab={setActiveTab}
+					membersList={membersList}
+					key={id}
 				/>
 			</div>
 			<div className={styles.messages}>

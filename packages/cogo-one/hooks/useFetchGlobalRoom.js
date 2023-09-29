@@ -7,12 +7,17 @@ import { useRef, useEffect, useState } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
+import useListCogooneGroupMembers from './useListCogooneGroupMembers';
+
+const FALLBACK = 0;
+
 function mountActiveRoomSnapShot({
 	activeRoomSnapshotListener,
 	globalGroupId,
 	firestore,
 	setActiveTab,
 	setLoading,
+	listCogooneGroupMembers = () => {},
 }) {
 	const snapshotRef = activeRoomSnapshotListener;
 	try {
@@ -25,10 +30,22 @@ function mountActiveRoomSnapShot({
 		);
 
 		snapshotRef.current.globalRoom = onSnapshot(activeMessageDoc, (activeMessageData) => {
-			setActiveTab((prev) => ({
-				...prev,
-				groupData: { id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
-			}));
+			setActiveTab((prev) => {
+				const newDocData = activeMessageData.data() || {};
+				const PrevLastGroupUpdatedAt = prev?.groupData?.last_group_updated_at || FALLBACK;
+
+				const lastGroupUpdatedAt = newDocData?.last_group_updated_at || FALLBACK;
+
+				if (newDocData?.is_group && ((lastGroupUpdatedAt !== PrevLastGroupUpdatedAt))) {
+					listCogooneGroupMembers({ groupId: globalGroupId });
+				}
+
+				return {
+					...prev,
+					groupData          : { id: activeMessageDoc?.id, ...(newDocData) },
+					shouldFetchMembers : false,
+				};
+			});
 		});
 	} catch (e) {
 		console.log('e', e);
@@ -74,6 +91,11 @@ function useFetchGlobalRoom({ firestore = {}, globalGroupId = '', setActiveTab =
 	const [loading, setLoading] = useState(false);
 	const activeRoomSnapshotListener = useRef({});
 
+	const {
+		listCogooneGroupMembers = () => {},
+		membersList = [],
+	} = useListCogooneGroupMembers({ globalGroupId });
+
 	useEffect(() => {
 		setLoading(true);
 		mountActiveRoomSnapShot({
@@ -82,6 +104,7 @@ function useFetchGlobalRoom({ firestore = {}, globalGroupId = '', setActiveTab =
 			globalGroupId,
 			setActiveTab,
 			setLoading,
+			listCogooneGroupMembers,
 		});
 		mountDraftActiveRoomSnapShot({
 			activeRoomSnapshotListener,
@@ -98,9 +121,9 @@ function useFetchGlobalRoom({ firestore = {}, globalGroupId = '', setActiveTab =
 			unsubscribeGlobalRoom?.();
 			unsubscribeDraftRoom?.();
 		};
-	}, [draftRoomId, firestore, globalGroupId, loggedInAgentId, setActiveTab]);
+	}, [draftRoomId, firestore, globalGroupId, listCogooneGroupMembers, loggedInAgentId, setActiveTab]);
 
-	return { activeRoomSnapshotListener, loading };
+	return { loading, membersList };
 }
 
 export default useFetchGlobalRoom;
