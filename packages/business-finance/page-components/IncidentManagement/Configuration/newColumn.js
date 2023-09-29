@@ -1,9 +1,10 @@
-import { Pill, Button } from '@cogoport/components';
+import { Pill, Button, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import ShowOverflowingNumber from '../../commons/utils/showOverflowingNumber';
 import { toTitleCase } from '../utils/titleCase.ts';
 
 import SortIcon from './SortIcon/index.tsx';
@@ -11,6 +12,7 @@ import styles from './styles.module.css';
 
 const SIXTH_SPLICE_INDEX = 6;
 const FIRST_SPLICE_INDEX = 1;
+const OVERFLOW_NUMBER = 10;
 
 function getColumns({
 	setIsAscendingActive = () => {}, setFilters = () => {},
@@ -35,6 +37,90 @@ function getColumns({
 			},
 		},
 		{
+			Header   : t('incidentManagement:company_name_header'),
+			accessor : 'company_name',
+			id       : 'company_name',
+			Cell     : ({ row: { original } }) => {
+				const { data = {} } = original || {};
+				const { organization = '' } = data || {};
+				const { interCompanyJournalVoucherRequest } = data || {};
+				const { list } = interCompanyJournalVoucherRequest || {};
+				const getList = () => (list || [{}]).map(
+					(item) => item?.tradePartyName,
+				);
+				const bankTradePartyName = data?.bankRequest && data?.organization?.tradePartyType;
+				const tdsTradePartyName = data?.tdsRequest && data?.organization?.tradePartyType;
+				function BusinessName() {
+					return (
+						<div>
+							{toTitleCase(
+								organization?.businessName || '-',
+							)}
+						</div>
+					);
+				}
+
+				return list ? (
+					<Tooltip
+						interactive
+						content={(list || [{}]).map((item) => (
+							<div className={styles.trade_party_name} key={item?.id}>
+								<div>{toTitleCase(item?.div || '-')}</div>
+							</div>
+						))}
+					>
+						<div className={styles.wrapper}>
+							{getList()[GLOBAL_CONSTANTS.zeroth_index]}
+						</div>
+					</Tooltip>
+				) : (
+					<div>
+						<Tooltip
+							interactive
+							content={
+									bankTradePartyName || tdsTradePartyName ? (
+										<div>
+											{(organization?.tradePartyType === 'SELF'
+												? organization?.businessName
+												: organization?.tradePartyName)
+												|| toTitleCase(
+													organization?.businessName || '-',
+												)}
+										</div>
+									)
+										: <BusinessName />
+								}
+						>
+							{bankTradePartyName || tdsTradePartyName ? (
+								<div className={styles.company_name}>
+									{(organization?.tradePartyType === 'SELF'
+										? organization?.businessName
+										: organization?.tradePartyName)
+											|| toTitleCase(
+												organization?.businessName || '-',
+											)}
+								</div>
+							) : (
+								<div className={styles.company_name}>
+									{toTitleCase(organization?.businessName || '-')}
+								</div>
+							)}
+						</Tooltip>
+					</div>
+				);
+			},
+		},
+		{
+			Header   : t('incidentManagement:requested_by_header'),
+			accessor : 'requested_by',
+			id       : 'requested_by',
+			Cell     : ({ row: { original } }) => {
+				const { createdBy = {} } = original || {};
+				const { name = '' } = createdBy || {};
+				return <span>{ShowOverflowingNumber(name || '-', OVERFLOW_NUMBER)}</span>;
+			},
+		},
+		{
 			Header   : t('incidentManagement:request_type_header'),
 			accessor : 'type',
 			id       : 'request_type',
@@ -46,7 +132,7 @@ function getColumns({
 				const { revoked } = creditNoteRequest || {};
 				return (
 					<div className={styles.credit}>
-						<span>
+						<div className={styles.type_request}>
 							{requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? (
 								<span>
 									{t('incidentManagement:icjv_approval')}
@@ -54,7 +140,7 @@ function getColumns({
 							)
 								: toTitleCase(requestType ? startCase(requestType) : '-')}
 
-						</span>
+						</div>
 						<span>
 							{typeof (revoked) === 'boolean' && (
 								<div>
@@ -139,12 +225,18 @@ function getColumns({
 			Cell     : ({ row: { original } }) => {
 				const { financeRemark = '', remark = '', type = '', data = {} } = original || {};
 				return (
-					<div className={styles.remark}>
-						{type === 'JOB_OPEN'
+					<Tooltip
+						interactive
+						content={type === 'JOB_OPEN'
 							? financeRemark || data?.jobOpenRequest?.remark || remark
-							: financeRemark || remark }
-
-					</div>
+							: financeRemark || remark}
+					>
+						<div className={styles.remark}>
+							{type === 'JOB_OPEN'
+								? financeRemark || data?.jobOpenRequest?.remark || remark
+								: financeRemark || remark }
+						</div>
+					</Tooltip>
 				);
 			},
 		},
@@ -160,7 +252,6 @@ function getColumns({
 			),
 			id: 'status',
 		},
-
 		{
 			accessor: (row) => (
 				<Button size="md" themeType="secondary" onClick={() => setDetailsModal(row)}>View</Button>

@@ -22,15 +22,31 @@
 }
 
 .remark {
-	width: 250px;
+	width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.type_request {
+	width: 120px;
 	hyphens: auto;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	white-space: normal;
 }
 
+.company_name {
+	width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
 .request {
-	width: 200px;
+	width: 150px;
 	hyphens: auto;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
@@ -39,6 +55,10 @@
 
 .time {
 	width: 110px;
+	hyphens: auto;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
 }
 
 .flex_reverse {
