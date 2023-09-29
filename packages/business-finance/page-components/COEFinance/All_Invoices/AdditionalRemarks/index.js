@@ -5,7 +5,7 @@ import { billedOptions, draftOptions, miscellaneousOptions, mismatchedOptions, n
 import styles from './styles.module.css';
 import { formatReason } from './utilityFunctions';
 
-function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {} }) {
+function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalData = '' }) {
 	const [active, setActive] = useState('');
 	const { notBilled = '', billed = '', draft = '' } = remarkData?.profitability || {};
 	const chosenProfitabilityReason = notBilled || billed || draft || remarkData?.profitability || '';
@@ -18,7 +18,9 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {} }) {
 
 	return (
 		<div>
-			<div className={styles.heading}>Please select the reason:</div>
+			<div className={styles.heading}>
+				{`Please select the reason to ${(modalData || '').toLowerCase()}:`}
+			</div>
 			<Checkbox
 				label={`Profitability ${formatReason(chosenProfitabilityReason)}`}
 				checked={remarkData?.profitability}
@@ -32,7 +34,7 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {} }) {
 				<div style={{ margin: '0 28px' }}>
 					<Radio
 						name="notBilled"
-						label="Sales Invoice not billed for same service"
+						label="Charges not billed for same service in sales invoice"
 						checked={remarkData?.profitability?.notBilled}
 						onChange={() => handleCategoryChange('notBilled')}
 					/>
@@ -54,7 +56,7 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {} }) {
 
 					<Radio
 						name="billed"
-						label="Sales Invoice billed for less amount for same service"
+						label="Charges billed with less amount for same service in sales invoice"
 						checked={remarkData?.profitability?.billed}
 						onChange={() => handleCategoryChange('billed')}
 					/>
