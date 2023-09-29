@@ -2,24 +2,17 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-const useGetList = ({
-	activeTab,
-}) => {
+const useGetSurfaceTrackingList = () => {
 	const [filters, setFilters] = useState({ page: 1, sort_by: 'updated_at', sort_type: 'desc' });
 	const [searchString, setSearchString] = useState('');
 	const [serialId, setSerialId] = useState('');
 
-	const APINAME = {
-		air_tracking   : '/list_untracked_air_shipments',
-		ocean_tracking : '/list_untracked_containers',
-		truck_tracking : '/list_saas_surface_shipment_details',
-	};
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : APINAME[activeTab],
+		url    : '/list_saas_surface_shipment_details',
 	});
-
 	const { query = '', debounceQuery } = useDebounceQuery();
+	const { serialIdQuery = '', serialDebounceQuery = debounceQuery } = useDebounceQuery();
 
 	const refetch = useCallback(async () => {
 		try {
@@ -27,12 +20,8 @@ const useGetList = ({
 				params: {
 					filters: {
 						...filters,
-						q         : query || undefined,
-						serial_id : serialId,
-						truck_number:
-							activeTab === 'truck_tracking' && searchString
-								? searchString
-								: undefined,
+						serial_id    : serialIdQuery,
+						truck_number : query || undefined,
 					},
 					page      : filters?.page,
 					sort_type : filters?.sort_type,
@@ -42,20 +31,10 @@ const useGetList = ({
 		} catch (err) {
 			console.log(err);
 		}
-	}, [activeTab, filters, query, trigger, searchString, serialId]);
+	}, [filters, query, trigger, serialIdQuery]);
 
-	const reset = useCallback(() => {
-		setFilters({ page: 1, sort_by: 'updated_at', sort_type: 'desc' });
-		setSearchString('');
-		setSerialId('');
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab]);
-
-	useEffect(() => {
-		reset();
-	}, [reset]);
 	useEffect(() => debounceQuery(searchString), [searchString, debounceQuery]);
-	useEffect(() => debounceQuery(serialId), [serialId, debounceQuery]);
+	useEffect(() => serialDebounceQuery(serialId), [serialId, serialDebounceQuery]);
 
 	useEffect(() => {
 		refetch();
@@ -75,4 +54,4 @@ const useGetList = ({
 	};
 };
 
-export default useGetList;
+export default useGetSurfaceTrackingList;

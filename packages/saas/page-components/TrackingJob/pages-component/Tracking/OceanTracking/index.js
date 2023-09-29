@@ -1,22 +1,33 @@
-import { Table, Modal, TabPanel, Tabs, Button } from '@cogoport/components';
+import { Table, Modal, TabPanel, Popover, Tabs, Button, Loader } from '@cogoport/components';
+import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
 import EmptyState from '../../../common/EmptyState';
+import ListPagination from '../../../common/ListPagination';
 import { columns } from '../../../config/ocean-tracking-columns';
 import useGetContainerData from '../../../hooks/useGetContainerData';
+import useGetOceanTrackingList from '../../../hooks/useGetOceanTrackingList';
+import Filters from '../../Filter';
+import SearchFilters from '../../Filter/Search/search';
 import Form from '../../Forms/FormOcean/index';
 
 import styles from './styles.module.css';
 import TrackerDetails from './TrackerDetails';
 
-function OceanTracking({
-	loading = false,
-	list = [],
-	filters = {},
-	setFilters = () => {},
-	refetch = () => {},
-}) {
+function OceanTracking() {
+	const {
+		data,
+		loading,
+		filters,
+		setFilters,
+		searchString,
+		serialId,
+		setSearchString,
+		setSerialId,
+		refetch,
+	} = useGetOceanTrackingList();
+
 	const [showUpdate, setShowUpdate] = useState({ show: false, data: {} });
 	const [activeTab, setActiveTab] = useState('add_location');
 	const handleShowModal = (item) => {
@@ -44,13 +55,48 @@ function OceanTracking({
 	const handleSubmitForm = ({ values }) => {
 		apiTrigger({ values, showUpdate, setShowUpdate });
 	};
-	if (isEmpty(list)) {
-		return <EmptyState />;
-	}
+
 	return (
 		<div>
+			<div className={styles.filter_container}>
+				<SearchFilters
+					searchString={searchString}
+					serialId={serialId}
+					setSearchString={setSearchString}
+					activeTab="ocean_tracking"
+					filters={filters}
+					setFilters={setFilters}
+					setSerialId={setSerialId}
+				/>
+				<Popover
+					placement="right"
+					theme="light"
+					interactive
+					content={(
+						<Filters
+							filters={filters}
+							setFilters={setFilters}
+						/>
+					)}
+				>
+					<Button themeType="secondary" size="lg">
+						<IcMFilter />
+						{' '}
+						FILTERS
+					</Button>
+				</Popover>
 
-			<Table columns={column} data={list || []} loading={loading} className={styles.table} />
+			</div>
+			<ListPagination filters={filters} setFilters={setFilters} data={data} />
+			{!loading && isEmpty(data?.list)
+				? <EmptyState /> : null}
+
+			{loading
+				? <Loader className={styles.loader} />
+				: null}
+			{!loading
+			&& !isEmpty(data?.list)
+				? <Table columns={column} data={data?.list || []} loading={loading} className={styles.table} /> : null}
 			<Modal
 				show={showUpdate.show}
 				onClose={() => handleCloseModal()}
@@ -100,7 +146,7 @@ function OceanTracking({
 				}
 				</Modal.Footer>
 			</Modal>
-
+			<ListPagination filters={filters} setFilters={setFilters} data={data} />
 		</div>
 	);
 }

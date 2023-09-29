@@ -1,22 +1,31 @@
-import { Table, Modal, TabPanel, Tabs, Button } from '@cogoport/components';
+import { Table, Modal, TabPanel, Tabs, Button, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
 import EmptyState from '../../../common/EmptyState';
+import ListPagination from '../../../common/ListPagination';
 import { columns } from '../../../config/air-tracking-columns';
 import useGetAirData from '../../../hooks/useGetAirData';
+import useGetAirTrackingList from '../../../hooks/useGetAirTrackingList';
+import SearchFilters from '../../Filter/Search/search';
 import Form from '../../Forms/FormAir/index';
 
 import styles from './styles.module.css';
 import TrackerDetails from './TrackerDetails';
 
-function AirTracking({
-	loading = false,
-	list = [],
-	refetch = () => {},
-	setFilters = () => {},
-	filters = {},
-}) {
+function AirTracking() {
+	const {
+		data,
+		loading,
+		filters,
+		setFilters,
+		searchString,
+		serialId,
+		setSearchString,
+		setSerialId,
+		refetch,
+	} = useGetAirTrackingList();
+
 	const [showUpdate, setShowUpdate] = useState({ show: false, data: {} });
 	const [activeTab, setActiveTab] = useState('add_location');
 	const handleShowModal = (item) => {
@@ -46,12 +55,31 @@ function AirTracking({
 	const handleSubmitForm = ({ values }) => {
 		apiTrigger({ values, showUpdate, setShowUpdate });
 	};
-	if (isEmpty(list)) {
+
+	if (!loading && isEmpty(data?.list)) {
 		return <EmptyState />;
 	}
 	return (
 		<div>
-			<Table className={styles.table} data={list || []} columns={column} loading={loading} />
+			<SearchFilters
+				searchString={searchString}
+				serialId={serialId}
+				setSearchString={setSearchString}
+				activeTab="ocean_tracking"
+				filters={filters}
+				setFilters={setFilters}
+				setSerialId={setSerialId}
+			/>
+			<ListPagination filters={filters} setFilters={setFilters} data={data} />
+			{!loading && isEmpty(data?.list)
+				? <EmptyState /> : null}
+
+			{loading
+				? <Loader className={styles.loader} />
+				: null}
+			{!loading
+			&& !isEmpty(data?.list)
+				? <Table columns={column} data={data?.list || []} loading={loading} className={styles.table} /> : null}
 			<Modal
 				show={showUpdate.show}
 				onClose={handleCloseModal}
@@ -104,7 +132,7 @@ function AirTracking({
 				}
 				</Modal.Footer>
 			</Modal>
-
+			<ListPagination filters={filters} setFilters={setFilters} data={data} />
 		</div>
 	);
 }
