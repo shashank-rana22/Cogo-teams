@@ -7,7 +7,7 @@ import TAG_COLOR_MAPPING from '../../../../../../constants/tag-color-mapping';
 
 import styles from './styles.module.css';
 
-const ZERO_SCORE = 0;
+const ZERO_RANK = 0;
 
 const { ADMIN_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 
@@ -26,7 +26,7 @@ const getListColumnMapping = ({ currLevel }) => {
 						Rank
 					</div>
 				),
-			accessor: ({ rank }) => (isEmpty(rank) ? null : (
+			accessor: ({ rank = 0 }) => (rank === ZERO_RANK ? 'NA' : (
 				<div className={styles.rank}>{rank}</div>
 			)),
 		},
@@ -50,8 +50,7 @@ const getListColumnMapping = ({ currLevel }) => {
 						Score
 					</div>
 				),
-			accessor: ({ total_score = 0 }) => (total_score === ZERO_SCORE
-				? 'NA' : <div>{total_score}</div>),
+			accessor: ({ total_score = 0 }) => <div>{total_score}</div>,
 		},
 		{
 			id   : 'percentile',
