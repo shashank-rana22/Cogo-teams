@@ -16,7 +16,7 @@ function LeftPanel(props) {
 
 	const [firstUser, secondUser, thirdUser, ...tableList] = list;
 
-	const topList = [secondUser, firstUser, thirdUser];
+	const topList = [secondUser, firstUser, thirdUser].filter((item) => !isEmpty(item));
 
 	if (loading) return <div className={styles.container}><LoadingState /></div>;
 
