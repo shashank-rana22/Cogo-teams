@@ -3,12 +3,12 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useGetSecurityDepositData = ({
-	advanceSecurityDeposit,
-	refetch,
-	setDetailsModal,
-	id,
-	remarkValue,
-	t,
+	data = {},
+	refetch = () => {},
+	setDetailsModal = () => {},
+	id = '',
+	remarkValue = '',
+	t = () => {},
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -29,9 +29,7 @@ const useGetSecurityDepositData = ({
 	const getData = async ({ status }) => {
 		try {
 			const payload = {
-				data: {
-					advanceSecurityDeposit,
-				},
+				data,
 				status,
 				remark    : remarkValue,
 				updatedBy : userId,

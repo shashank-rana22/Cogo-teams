@@ -3,10 +3,11 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 function usePaymentConfirm({
+	data = {},
 	refetch = () => {},
 	setDetailsModal = () => {},
 	id = '',
-	t,
+	t = () => {},
 	remarks = '',
 }) {
 	const { user_id:userId } = useSelector(({ profile }) => ({
@@ -34,6 +35,7 @@ function usePaymentConfirm({
 		try {
 			const apiResponse = await trigger({
 				data: {
+					data,
 					status,
 					remark    : remarks,
 					updatedBy : userId,

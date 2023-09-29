@@ -18,7 +18,7 @@ function Details({
 	const [remark, setRemark] = useState('');
 	const [showRejectModal, setShowRejectModal] = useState(false);
 
-	const { status = '', id = '' } = row || {};
+	const { status = '', id = '', data = {} } = row || {};
 	const { data: { tdsRequest = {}, organization = {} } } = row || {};
 
 	const {
@@ -36,6 +36,7 @@ function Details({
 		{ label: t('incidentManagement:requested_tds_rate'), value: requestedTdsRate },
 	];
 	const { useOnAction: OnAction, loading } = useGetTdsData({
+		data,
 		refetch,
 		setDetailsModal,
 		id,

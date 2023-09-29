@@ -3,12 +3,12 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useSezApproveReject = ({
-	remarks,
-	refetch,
-	setDetailsModal,
-	id,
-	sezRequest,
-	t,
+	data = {},
+	remarks = '',
+	refetch = () => {},
+	setDetailsModal = () => {},
+	id = '',
+	t = () => {},
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -31,11 +31,9 @@ const useSezApproveReject = ({
 			const apiResponse = await trigger({
 				data: {
 					status,
-					remark : remarks,
-					data   : {
-						sezRequest,
-					},
-					updatedBy: userId,
+					remark    : remarks,
+					data,
+					updatedBy : userId,
 				},
 			});
 			const {

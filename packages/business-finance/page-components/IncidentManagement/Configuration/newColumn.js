@@ -1,4 +1,4 @@
-import { Tooltip, Pill, Button } from '@cogoport/components';
+import { Pill, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
@@ -33,7 +33,6 @@ function getColumns({
 				const { referenceId = {} } = original || {};
 				return <span className={styles.incident_id}>{referenceId}</span>;
 			},
-			width: '10%',
 		},
 		{
 			Header   : t('incidentManagement:request_type_header'),
@@ -77,7 +76,6 @@ function getColumns({
 
 				);
 			},
-			width: '10%',
 		},
 		{
 			Header   : t('incidentManagement:request_sub_type_header'),
@@ -86,15 +84,9 @@ function getColumns({
 			Cell     : ({ row: { original } }) => {
 				const { incidentSubtype = '' } = original || {};
 				return (
-					<Tooltip
-						interactive
-						content={(incidentSubtype?.replace(/_/g, ' '))}
-					>
-						<div className={styles.wrapper}>{(incidentSubtype?.replace(/_/g, ' '))}</div>
-					</Tooltip>
+					<div className={styles.request}>{(incidentSubtype?.replace(/_/g, ' '))}</div>
 				);
 			},
-			width: '10%',
 		},
 		{
 			Header   : t('incidentManagement:source_header'),
@@ -102,9 +94,8 @@ function getColumns({
 			id       : 'source',
 			Cell     : ({ row: { original } }) => {
 				const { source = '' } = original || {};
-				return <span>{startCase(source || '-')}</span>;
+				return <div className={styles.time}>{startCase(source || '-')}</div>;
 			},
-			width: '10%',
 		},
 		{
 			Header: () => (
@@ -120,20 +111,26 @@ function getColumns({
 			accessor: (row) => {
 				const { createdAt } = row || {};
 				return (
-					<div>
-						{createdAt ? formatDate({
-							date: createdAt,
-							dateFormat:
+					<>
+						<div className={styles.time}>
+							{createdAt ? formatDate({
+								date: createdAt,
+								dateFormat:
 								GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-							formatType : 'dateTime',
-							separator  : ' ',
-						}) : '_'}
-					</div>
+								formatType: 'date',
+							}) : '_'}
+						</div>
+						<div>
+							{createdAt ? formatDate({
+								date       : createdAt,
+								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								formatType : 'time',
+							}) : '_'}
+						</div>
+					</>
 				);
 			},
-			id    : 'request_date',
-			width : '10%',
+			id: 'request_date',
 		},
 		{
 			Header   : <div className={styles.request_header}>{MAPPING[activeTab]}</div>,
@@ -141,7 +138,6 @@ function getColumns({
 			id       : 'remark',
 			Cell     : ({ row: { original } }) => {
 				const { financeRemark = '', remark = '' } = original || {};
-
 				return (
 					<div className={styles.remark}>{financeRemark || remark}</div>
 				);
@@ -157,17 +153,15 @@ function getColumns({
 					{t('incidentManagement:_pending_status')}
 				</span>
 			),
-			id    : 'status',
-			width : '10%',
+			id: 'status',
 		},
 
 		{
 			accessor: (row) => (
-				<Button size="md" themeType="secondary" onClick={() => setDetailsModal(row)}>View2</Button>
+				<Button size="md" themeType="secondary" onClick={() => setDetailsModal(row)}>View</Button>
 
 			),
-			id    : 'actionColumn',
-			width : '10%',
+			id: 'actionColumn',
 		},
 	];
 	if (activeTab === 'requested') { return column; }

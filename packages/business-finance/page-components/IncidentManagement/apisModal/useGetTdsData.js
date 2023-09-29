@@ -4,9 +4,14 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 const useGetTdsData = ({
-	refetch, setDetailsModal, row, id,
+	data = {},
+	organization = {},
+	refetch = () => {},
+	setDetailsModal = () => {},
+	row = {},
+	id = '',
 	CNCategoryValues = { CNType: '', CNValues: '', remarks: '' },
-	remark,
+	remark = '',
 	isConsolidated = false,
 	creditNoteApprovalType = '',
 	level2 = {},
@@ -45,8 +50,8 @@ const useGetTdsData = ({
 						creditNoteType         : CNType,
 						creditNoteRemarks,
 						creditNoteApprovalType : isEmpty(creditNoteApprovalType) ? null : creditNoteApprovalType,
-
 					},
+					organization,
 				},
 			}
 			: null;
@@ -59,6 +64,7 @@ const useGetTdsData = ({
 			try {
 				const apiResponse = await trigger({
 					data: {
+						data,
 						remark    : remark || 'Approved',
 						status,
 						updatedBy : userId,

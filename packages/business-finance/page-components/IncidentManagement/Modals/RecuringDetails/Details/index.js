@@ -1,4 +1,4 @@
-import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
+import { Button, cl, Textarea } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -122,7 +122,7 @@ function Details({
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarks, setRemarks] = useState('');
 	const { data = {}, id = '', status = '' } = row || {};
-	const { reccuringExpenseApproval = {}, organization = {} } = data;
+	const { reccuringExpenseApproval = {}, organization = {} } = data || {};
 	const {
 		agreementNumber = '',
 		maxPayoutAllowed = 0,
@@ -137,8 +137,8 @@ function Details({
 		ledgerMaxPayoutAllowed = 0,
 	} = reccuringExpenseApproval || {};
 	const { tradePartyName = '', businessName = '' } = organization || {};
-	const { name = '' } = row?.createdBy || {};
 	const { useOnAction: onAction, loading } = usePostExpense({
+		data,
 		refetch,
 		setDetailsModal,
 		id,
@@ -181,18 +181,9 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							<Tooltip
-								interactive
-								content={(tradePartyName || businessName || '')}
-							>
-								<div>{(tradePartyName || businessName || '')}</div>
-							</Tooltip>
+							{(tradePartyName || businessName || '')}
 						</div>
 					</div>
-				</div>
-				<div>
-					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{name || ''}</div>
 				</div>
 			</div>
 			<div className={styles.line} />

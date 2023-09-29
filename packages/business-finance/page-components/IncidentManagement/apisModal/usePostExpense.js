@@ -3,6 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const usePostExpense = ({
+	data = {},
 	refetch = () => {},
 	setDetailsModal = () => {},
 	id = '',
@@ -26,6 +27,7 @@ const usePostExpense = ({
 		try {
 			const apiResponse = await trigger({
 				data: {
+					data,
 					remark    : remark || 'Approved',
 					status,
 					updatedBy : userId,

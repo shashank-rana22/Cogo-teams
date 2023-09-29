@@ -1,4 +1,4 @@
-import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
+import { Button, cl, Textarea } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -25,14 +25,17 @@ function Details({
 	const { partner_id } = query || {};
 	const { t } = useTranslation(['incidentManagement']);
 	const [remarkValue, setRemarkValue] = useState('');
-	const { status = '', id = '', data: { advanceSecurityDepositRefund = {}, organization = {} } } = row || {};
+	const {
+		status = '', data = {}, id = '',
+		data: { advanceSecurityDepositRefund = {}, organization = {} },
+	} = row || {};
 	const {
 		totalAmount = 0, currency = '', sid = '', utrNumber = '',
 		shipmentType = '', shipmentNumber = '', supplierName = '',
 	} = advanceSecurityDepositRefund || {};
 	const { tradePartyName = '', businessName = '' } = organization || {};
-	const { name = '' } = row?.createdBy || {};
 	const { getData, loading } = useGetSecurityDepositData({
+		data,
 		refetch,
 		setDetailsModal,
 		id,
@@ -47,18 +50,9 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							<Tooltip
-								interactive
-								content={(tradePartyName || businessName || '')}
-							>
-								<div>{(tradePartyName || businessName || '')}</div>
-							</Tooltip>
+							{(tradePartyName || businessName || '')}
 						</div>
 					</div>
-				</div>
-				<div>
-					<div className={styles.heading}>Requested By</div>
-					<div className={styles.text}>{name || ''}</div>
 				</div>
 			</div>
 			<div className={styles.line} />

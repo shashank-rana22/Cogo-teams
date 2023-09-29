@@ -32,6 +32,7 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 		currency = '',
 	} = overheadConfirmationRequest || {};
 	const { useOnAction: onAction, loading } = usePostExpense({
+		data,
 		refetch,
 		setDetailsModal,
 		id,

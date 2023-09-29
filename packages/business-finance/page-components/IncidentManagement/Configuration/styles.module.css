@@ -5,14 +5,6 @@
 	border-radius: 4px;
 }
 
-.wrapper {
-	width: 150px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	cursor: pointer;
-}
-
 .incident_id {
 	padding: 0 20px;
 	font-weight: 600;
@@ -30,11 +22,23 @@
 }
 
 .remark {
-	width: 70px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	cursor: pointer;
+	width: 250px;
+	hyphens: auto;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
+}
+
+.request {
+	width: 200px;
+	hyphens: auto;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
+}
+
+.time {
+	width: 110px;
 }
 
 .flex_reverse {

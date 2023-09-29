@@ -3,12 +3,12 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useApproveConcor = ({
-	refetch,
-	setDetailsModal,
-	id,
-	data,
-	t,
-	remarks,
+	refetch = () => {},
+	setDetailsModal = () => {},
+	id = '',
+	data = {},
+	t = () => {},
+	remarks = '',
 }) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,

@@ -25,11 +25,11 @@ function Details({
 	const { taxNumber = '', address = '', pincode = '' } = sezRequest || {};
 
 	const { useOnAction: OnAction, loading } = useSezApproveReject({
+		data,
 		remarks,
 		refetch,
 		setDetailsModal,
 		id,
-		sezRequest,
 		t,
 	});
 	return (
@@ -105,7 +105,7 @@ function Details({
 							themeType="primary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => { OnAction(STATUS_MAPPING.approved); }}
+							onClick={() => { OnAction({ status: STATUS_MAPPING.approved }); }}
 						>
 							Approve
 						</Button>

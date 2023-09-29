@@ -30,7 +30,7 @@ function Details({
 	const [remarks, setRemarks] = useState('');
 	const { status = '', level2 = {}, level1 = {}, data = {}, type = '', id = '' } = row || {};
 	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
-	const { creditNoteRequest = {}, consolidatedCreditNoteRequest = {}, organization = {} } = data;
+	const { creditNoteRequest = {}, consolidatedCreditNoteRequest = {}, organization = {} } = data || {};
 	const {
 		creditNoteNumber = '',
 		invoiceNumber = '',
@@ -40,7 +40,6 @@ function Details({
 		grandTotal = 0,
 		lineItems = [],
 		proformaList = [],
-		remark = '',
 		creditNoteType = '',
 		creditNoteRemarks = '',
 		currency = '',
@@ -58,11 +57,13 @@ function Details({
 		remarks  : null,
 	});
 	const { useOnAction:OnAction, loading } = useGetTdsData({
+		data,
+		organization,
 		refetch,
 		setDetailsModal,
 		id,
 		row,
-		remark,
+		remark: remarks,
 		CNCategoryValues,
 		isConsolidated,
 		creditNoteApprovalType,

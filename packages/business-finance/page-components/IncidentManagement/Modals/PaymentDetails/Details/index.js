@@ -23,6 +23,7 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 	} = paymentConfirmationRequest || {};
 
 	const { onAction = () => {}, loading = false } = usePaymentConfirm({
+		data,
 		refetch,
 		setDetailsModal,
 		id,
@@ -39,9 +40,7 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 					<div className={styles.title}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-
 							{(tradePartyName || businessName || '')}
-
 						</div>
 					</div>
 				</div>

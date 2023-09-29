@@ -3,10 +3,10 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useGetRevokeInvoiceData = ({
-	refetch,
-	setDetailsModal,
-	id,
-	reqRevokeInvoiceRequest,
+	data = {},
+	refetch = () => {},
+	setDetailsModal = () => {},
+	id = '',
 	remarks = 'Approved',
 	t,
 }) => {
@@ -33,9 +33,7 @@ const useGetRevokeInvoiceData = ({
 					remark    : remarks,
 					status,
 					updatedBy : userId,
-					data      : {
-						revokeInvoiceRequest: reqRevokeInvoiceRequest,
-					},
+					data,
 				},
 			});
 			const {

@@ -18,14 +18,14 @@ function Details({
 	const [remarks, setRemarks] = useState('');
 	const [showRejectModal, setShowRejectModal] = useState(false);
 
-	const { status = '', id = '', data: { revokeInvoiceRequest = {} } } = row || {};
+	const { status = '', data = {}, id = '', data: { revokeInvoiceRequest = {} } } = row || {};
 	const { comapny_name = '', invoiceNumber = '' } = revokeInvoiceRequest || {};
 
 	const { useOnAction: onAction, loading } = useGetRevokeInvoiceData({
+		data,
 		refetch,
 		setDetailsModal,
 		id,
-		reqRevokeInvoiceRequest: revokeInvoiceRequest,
 		remarks,
 		t,
 	});
