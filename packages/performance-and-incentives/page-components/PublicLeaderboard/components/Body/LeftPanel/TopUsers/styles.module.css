@@ -15,12 +15,20 @@
 	align-items: center;
 	justify-content: flex-end;
 	width: 32%;
+
+	div:nth-child(2) {
+		width: 100%;
+	}
 }
 
 .name {
+	width: 100%;
+	padding: 0 8px;
 	margin-top: 16px;
+	overflow: hidden;
 	font-size: 18px;
 	font-weight: 600;
+	text-align: center;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 
