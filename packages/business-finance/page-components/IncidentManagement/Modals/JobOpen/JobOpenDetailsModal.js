@@ -18,9 +18,12 @@ function JobOpenDetailsModal({ row = {}, setDetailsModal = () => {}, refetch = (
 	const { jobNumber = '' } = row?.data?.jobOpenRequest || {};
 	const JOB_TYPE = row?.source.toUpperCase();
 	const {
-		level3 = {}, level2 = {}, level1 = {}, createdBy = {},
-		remark = '', status = '', updatedBy = {}, financeRemark = '',
+		level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark : createdRemark = '',
+		status = '', updatedBy = {}, financeRemark = '', data = {},
 	} = row || {};
+
+	const remark = data?.jobOpenRequest?.remark || createdRemark || '';
+
 	const level0 = { ...createdBy, remark };
 	const { t } = useTranslation(['incidentManagement']);
 	const {
