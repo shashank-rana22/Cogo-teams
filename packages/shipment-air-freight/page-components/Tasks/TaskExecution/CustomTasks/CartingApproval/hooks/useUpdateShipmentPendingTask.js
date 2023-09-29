@@ -8,7 +8,7 @@ const useUpdateShipmentPendingTask = ({ refetch = () => {} }) => {
 		method : 'POST',
 	});
 
-	const apiTrigger = async ({ payload }) => {
+	const apiTrigger = async ({ payload = {} }) => {
 		try {
 			await trigger({ data: payload });
 			Toast.success('Task Completed Successfully');

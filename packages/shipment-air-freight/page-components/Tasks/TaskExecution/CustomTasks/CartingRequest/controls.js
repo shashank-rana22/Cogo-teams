@@ -1,4 +1,4 @@
-const getControls = () => ({
+const controls = {
 	dateControls: [
 		{
 			label                 : 'Select Date Time Slots',
@@ -38,6 +38,6 @@ const getControls = () => ({
 			],
 		},
 	],
-});
+};
 
-export default getControls;
+export default controls;

@@ -3,7 +3,7 @@ import { Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import getControls from './getControls';
+import controls from './controls';
 import useUpdateShipmentPendingTask from './hooks/useUpdateShipmentPendingTask';
 import styles from './styles.module.css';
 
@@ -15,10 +15,8 @@ function CartingRequest({
 }) {
 	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch });
 
-	const { errors, control, watch, handleSubmit } = useForm();
+	const { errors = {}, control = {}, watch = () => {}, handleSubmit = () => {} } = useForm();
 	const formValues = watch();
-
-	const controls = getControls();
 
 	const onSubmit = () => {
 		const { vehicle_arrival_date = '' } = formValues || {};

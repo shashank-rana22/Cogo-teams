@@ -18,7 +18,7 @@ function CartingApproval({
 	refetch = () => {},
 	onCancel = () => {},
 }) {
-	const { control, handleSubmit, watch } = useForm();
+	const { control = {}, handleSubmit = () => {}, watch = () => {} } = useForm();
 
 	const { data = {}, loading: documentLoading = false } = useListShipmentDocuments({ shipmentData });
 	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch });
