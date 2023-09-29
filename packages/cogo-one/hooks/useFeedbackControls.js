@@ -55,7 +55,6 @@ const useFeedbackControls = ({
 			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
 			rules          : { required: true },
 		},
-
 		{
 			label          : <RenderLabel label="Describe Issue" />,
 			name           : 'additional_information',
@@ -67,6 +66,11 @@ const useFeedbackControls = ({
 			label          : 'Upload Supporting Document',
 			name           : 'file_url',
 			controllerType : 'uploader',
+		},
+		{
+			label          : 'Is Critical',
+			name           : 'is_critical',
+			controllerType : 'checkbox',
 		},
 	];
 };
