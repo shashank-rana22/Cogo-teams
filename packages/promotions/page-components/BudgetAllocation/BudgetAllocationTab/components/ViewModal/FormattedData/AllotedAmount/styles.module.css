@@ -40,16 +40,13 @@
 
 .edit_button .addicon {
 	font-size: 16px;
+	fill: #5936f0;
 }
 
 .edit_button .addicon:hover {
 	z-index: 1;
 	transition: all 0.5s ease;
 	transform: scale(1.1);
-}
-
-.edit_button svg path {
-	fill: #5936f0;
 }
 
 .save_close {

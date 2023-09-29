@@ -9,17 +9,14 @@ function BlockUser({ item = {}, refetch = () => {} }) {
 	return (
 		<>
 			<Button onClick={() => setBlock(true)}>
-				{item?.status === 'active' ? 'Block' : 'UnBlock'}
+				{item?.status === 'active' ? 'Block' : 'Unblock'}
 			</Button>
-			{block
-				? (
-					<BlockUserModal
-						refetch={refetch}
-						item={item}
-						setBlock={setBlock}
-					/>
-				)
-				: null}
+			<BlockUserModal
+				block={block}
+				refetch={refetch}
+				item={item}
+				setBlock={setBlock}
+			/>
 		</>
 	);
 }

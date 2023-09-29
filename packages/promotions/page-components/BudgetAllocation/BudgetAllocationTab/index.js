@@ -7,7 +7,7 @@ import Layout from '../../../common/Layout';
 import BudgetAllocate from './components/BudgetAllocate';
 import CreateAllocationCard from './components/CreateAllocationCard';
 import ViewModal from './components/ViewModal';
-import RoleOptions from './controls/budget-allocation-role';
+import RoleControls from './controls/budget-allocation-role';
 import useListPromoBudgetAllocation from './hooks/useListPromoBudgetAllocations';
 import styles from './styles.module.css';
 
@@ -20,7 +20,6 @@ const DEFAULT_VALUES = {};
 function BudgetAllocationTab() {
 	const [showAllocationCard, setShowAllocationCard] = useState(false);
 	const [showViewModal, setShowViewModal] = useState(false);
-
 	const [selectedDetails, setSelectedDetails] = useState({});
 	const [activeTab, setActiveTab] = useState('active_budget');
 	const [role, setRole] = useState('');
@@ -31,7 +30,6 @@ function BudgetAllocationTab() {
 		setValue: roleSetValue,
 		errors: roleErrors,
 	} = useForm({ defaultValues: DEFAULT_VALUES });
-	const roleControls = RoleOptions;
 
 	const {
 		loading,
@@ -75,7 +73,7 @@ function BudgetAllocationTab() {
 			/>
 			<div className={styles.tab_container}>
 				<div className={styles.select_wrapper}>
-					<Layout controls={roleControls} control={roleControl} errors={roleErrors} />
+					<Layout controls={RoleControls} control={roleControl} errors={roleErrors} />
 				</div>
 				{!showAllocationCard ? (
 					<div className={styles.allocate_button}>
@@ -102,13 +100,12 @@ function BudgetAllocationTab() {
 					))}
 				</Tabs>
 			</div>
-			{(showViewModal && selectedDetails) ? (
-				<ViewModal
-					setShowViewModal={setShowViewModal}
-					selectedDetails={selectedDetails}
-					refetchListBudgetAllocation={refetch}
-				/>
-			) : null}
+			<ViewModal
+				showViewModal={showViewModal}
+				setShowViewModal={setShowViewModal}
+				selectedDetails={selectedDetails}
+				refetchListBudgetAllocation={refetch}
+			/>
 		</div>
 	);
 }

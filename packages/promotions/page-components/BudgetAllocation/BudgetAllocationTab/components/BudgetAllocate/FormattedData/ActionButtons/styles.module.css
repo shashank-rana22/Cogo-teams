@@ -9,10 +9,6 @@
 	font-weight: 500;
 }
 
-.styled_tag .core-ui-tag-text {
-	text-transform: capitalize;
-}
-
 .container {
 	display: flex;
 	flex-direction: column;

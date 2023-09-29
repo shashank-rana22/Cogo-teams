@@ -1,6 +1,7 @@
 .top_container {
 	display: flex;
 	flex-direction: column;
+	height: 30vh;
 	padding: 20px 24px;
 	margin-top: 16px;
 	margin-bottom: 16px;
@@ -9,13 +10,9 @@
 	border-radius: 4px;
 }
 
-.top_container .core-ui-select-root {
-	width: 240px;
-}
-
 .icon {
-	display: "flex";
-	justify-content: "flex-end";
+	display: flex;
+	justify-content: flex-end;
 	height: fit-content;
 	cursor: pointer;
 }

@@ -12,6 +12,7 @@ import formattedData from './FormattedData';
 import styles from './styles.module.css';
 
 function ViewModal({
+	showViewModal = false,
 	setShowViewModal = () => {},
 	selectedDetails = {},
 	refetchListBudgetAllocation = () => {},
@@ -47,58 +48,61 @@ function ViewModal({
 	};
 
 	return (
-		<Modal
-			show
-			onClose={closeModal}
-			showCloseIcon
-			onOuterClick={closeModal}
-			className="primary xl"
-			style={{ width: '80vw' }}
-		>
-			<Modal.Header title={`Budget allocation for KAM: 
+		(showViewModal && selectedDetails) ? (
+			<Modal
+				show
+				onClose={closeModal}
+				showCloseIcon
+				onOuterClick={closeModal}
+				className="primary xl"
+				style={{ width: '80vw' }}
+			>
+				<Modal.Header title={`Budget allocation for KAM: 
 			${selectedDetails.user_count} users`}
-			/>
-			<Modal.Body>
-				<div className={styles.input_cont}>
-					<Layout
-						controls={controls(selectedDetails)}
-						control={control}
-						errors={errors}
-					/>
-				</div>
-				<div className={styles.pagination_container}>
-					<Pagination
-						className="md"
-						pageSize={page_limit}
-						currentPage={page}
-						totalItems={total_count}
-						onPageChange={(val) => {
-							setPagination((p) => ({ ...p, page: val }));
-						}}
-					/>
-				</div>
-				<TableView
-					columns={tableColumns}
-					formattedData={formattedData({
-						promoAllocationList,
-						refetch,
-						selectedDetails,
-					})}
-					loading={loading}
 				/>
-				<div className={styles.pagination_container}>
-					<Pagination
-						className="md"
-						pageSize={page_limit}
-						currentPage={page}
-						totalItems={total_count}
-						onPageChange={(val) => {
-							setPagination((p) => ({ ...p, page: val }));
-						}}
+				<Modal.Body>
+					<div className={styles.input_cont}>
+						<Layout
+							controls={controls(selectedDetails)}
+							control={control}
+							errors={errors}
+						/>
+					</div>
+					<div className={styles.pagination_container}>
+						<Pagination
+							className="md"
+							pageSize={page_limit}
+							currentPage={page}
+							totalItems={total_count}
+							onPageChange={(val) => {
+								setPagination((p) => ({ ...p, page: val }));
+							}}
+						/>
+					</div>
+					<TableView
+						columns={tableColumns}
+						formattedData={formattedData({
+							promoAllocationList,
+							refetch,
+							selectedDetails,
+						})}
+						loading={loading}
 					/>
-				</div>
-			</Modal.Body>
-		</Modal>
+					<div className={styles.pagination_container}>
+						<Pagination
+							className="md"
+							pageSize={page_limit}
+							currentPage={page}
+							totalItems={total_count}
+							onPageChange={(val) => {
+								setPagination((p) => ({ ...p, page: val }));
+							}}
+						/>
+					</div>
+				</Modal.Body>
+			</Modal>
+		) : null
+
 	);
 }
 

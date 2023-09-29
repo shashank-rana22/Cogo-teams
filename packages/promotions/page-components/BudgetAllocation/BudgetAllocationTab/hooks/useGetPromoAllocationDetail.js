@@ -5,7 +5,6 @@ import { useEffect, useState, useCallback } from 'react';
 const useGetPromoAllocationDetail = ({ selectedDetails = {} }) => {
 	const [List, setList] = useState([]);
 	const [filterValue, setFilterValue] = useState('');
-
 	const [paginationData, setPaginationData] = useState({});
 	const [pagination, setPagination] = useState({ page: 1 });
 
@@ -31,7 +30,7 @@ const useGetPromoAllocationDetail = ({ selectedDetails = {} }) => {
 			setList(list);
 			setPaginationData(paginationdata);
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(error.message);
 		}
 	}, [trigger, setList, setPaginationData]);
 

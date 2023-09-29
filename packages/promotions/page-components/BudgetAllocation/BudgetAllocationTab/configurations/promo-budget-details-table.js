@@ -1,45 +1,26 @@
-import styles from './styles.module.css';
-
 const tableColumns = [
 	{
-		Header: (
-			<div className={styles.promo_budget_details_table_heading}>NAME</div>
-		),
+		Header   : 'NAME',
 		accessor : (item) => item?.name,
 		id       : 'role_name',
 	},
 	{
-		Header: (
-			<div className={styles.promo_budget_details_table_heading}>
-				AMOUNT ALOTTED
-				{' '}
-			</div>
-		),
+		Header   : 'AMOUNT ALOTTED',
 		accessor : (item) => item?.total_budget,
 		id       : 'total_budget',
 	},
 	{
-		Header: (
-			<div className={styles.promo_budget_details_table_heading}>
-				PROMO CODES GENERATED
-			</div>
-		),
+		Header   : 'PROMO CODES GENERATED',
 		accessor : (item) => item?.total_count,
 		id       : 'total_count',
 	},
 	{
-		Header: (
-			<div className={styles.promo_budget_details_table_heading}>
-				AMOUNT UTILISED
-			</div>
-		),
+		Header   : 'AMOUNT UTILISED',
 		accessor : (item) => item?.amount_utilised,
 		id       : 'amount_utilised',
 	},
 	{
-		Header: (
-			<div className={styles.promo_budget_details_table_heading}>SHIPMENTS</div>
-		),
+		Header   : 'SHIPMENTS',
 		accessor : (item) => item?.shipment_stats,
 		id       : 'shipment_stats',
 	},

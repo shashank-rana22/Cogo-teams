@@ -38,7 +38,7 @@ function ActionButtons({ item = {}, refetch = () => {} }) {
 	}
 	return (
 		<div className={`${styles.styled_tag}`}>
-			<Tags className="primary lg">{item?.status}</Tags>
+			<Tags>{item?.status}</Tags>
 		</div>
 	);
 }

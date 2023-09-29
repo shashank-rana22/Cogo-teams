@@ -15,7 +15,7 @@ function BudgetAllocate({
 	loading = true,
 	refetch = () => {},
 }) {
-	const { page_limit = 10, total_count = 1, page = 1 } = paginationData || {};
+	const { page_limit = 0, total_count = 0, page = 0 } = paginationData;
 
 	return (
 		<div className={styles.container}>

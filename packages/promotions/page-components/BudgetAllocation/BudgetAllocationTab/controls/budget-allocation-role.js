@@ -1,4 +1,4 @@
-const RoleOptions = [
+const RoleControls = [
 	{
 		name           : 'role',
 		placeholder    : 'Search Role Name',
@@ -13,4 +13,4 @@ const RoleOptions = [
 		isClearable    : true,
 	},
 ];
-export default RoleOptions;
+export default RoleControls;

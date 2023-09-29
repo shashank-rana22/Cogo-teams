@@ -13,7 +13,7 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 	const [showSaveLink, setShowSaveLink] = useState(false);
 
 	const [inputValue, setInputValue] = useState(ZERO);
-	const { updateBudget = () => {} } = useUpdateBudgetAllocation({
+	const { updateBudget = () => {}, loading } = useUpdateBudgetAllocation({
 		setShowSaveLink,
 		refetch,
 	});
@@ -21,8 +21,8 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 		updateBudget(value, inputValue);
 	};
 
-	const handleShow = (val) => {
-		if (val.status !== 'deactivated') {
+	const handleShow = () => {
+		if (item.status !== 'deactivated') {
 			setShowSaveLink(true);
 		}
 	};
@@ -42,17 +42,16 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 						})}
 					</div>
 					{selectedDetails?.status !== 'deactivated' ? (
-						<div
+						<Button
 							className={styles.edit_button}
-							role="button"
-							tabIndex={0}
 							style={{
 								cursor: item.status === 'deactivated' ? 'no-drop' : 'pointer',
 							}}
-							onClick={() => handleShow(item)}
+							disabled={loading}
+							onClick={handleShow}
 						>
 							<IcMPlus height={21} width={21} className={styles.addicon} />
-						</div>
+						</Button>
 					) : null}
 				</div>
 			) : null}
@@ -60,7 +59,6 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 				<>
 					<div className={styles.input_styled}>
 						<Input
-							className="primary sm"
 							value={inputValue}
 							type="number"
 							onChange={(value) => setInputValue(value)}
@@ -69,16 +67,18 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 					<div className={styles.save_close}>
 						<Button
 							className={styles.link}
+							disabled={loading}
 							onClick={() => handleSave(item)}
 						>
-							<IcCFtick className="saveicon" />
+							<IcCFtick className={styles.saveicon} />
 						</Button>
-						<button
+						<Button
 							className={styles.link}
+							disabled={loading}
 							onClick={() => setShowSaveLink(false)}
 						>
-							<IcMCross className="closeicon" />
-						</button>
+							<IcMCross className={styles.closeicon} />
+						</Button>
 					</div>
 				</>
 			) : null}

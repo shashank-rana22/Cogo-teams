@@ -1,4 +1,4 @@
-const RadioOptions = [
+const RadioControls = [
 	{
 		name  : 'radio',
 		type  : 'radio',
@@ -17,4 +17,4 @@ const RadioOptions = [
 		],
 	},
 ];
-export default RadioOptions;
+export default RadioControls;

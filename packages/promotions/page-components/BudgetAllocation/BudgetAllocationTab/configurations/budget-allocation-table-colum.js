@@ -1,46 +1,34 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import styles from './styles.module.css';
-
 const tableColumns = [
 	{
-		Header   : <div className={styles.table_heading}>ROLE NAME</div>,
+		Header   : 'ROLE NAME',
 		accessor : (item) => item?.name,
 		id       : 'name',
 	},
 	{
-		Header   : <div className={styles.table_heading}>TOTAL USERS</div>,
+		Header   : 'TOTAL USERS',
 		accessor : (item) => item?.user_count,
 		id       : 'user_count',
 	},
 	{
-		Header: (
-			<div className={styles.table_heading}>
-				BUDGET (
-				{GLOBAL_CONSTANTS.currency_code.USD}
-				)
-			</div>
-		),
+		Header   : `BUDGET(${GLOBAL_CONSTANTS.currency_code.USD})`,
 		accessor : (item) => item?.total_budget,
 		id       : 'total_budget',
 	},
 	{
-		Header   : <div className={styles.table_heading}>FREQUENCY</div>,
+		Header   : 'FREQUENCY',
 		accessor : (item) => item?.frequency,
 		id       : 'frequency',
 	},
 	{
-		Header   : <div className={styles.table_heading}>CREATED DATE</div>,
+		Header   : 'CREATED DATE',
 		accessor : (item) => item?.validity_start,
 		id       : 'validity_start',
 	},
 
 	{
-		Header: (
-			<div className={styles.table_heading}>
-				<div>STATUS</div>
-			</div>
-		),
+		Header   : 'STATUS',
 		accessor : (item) => item?.status,
 		id       : 'status',
 	},

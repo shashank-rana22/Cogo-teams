@@ -21,11 +21,7 @@ const useBlockUserBudgetAllocation = (blockAndRefetch = () => {}) => {
 			await trigger({
 				data: payload,
 			});
-			if (status === 'active') {
-				Toast.success('Agent Blocked!');
-			} else {
-				Toast.success('Agent UnBlocked!');
-			}
+			Toast.success(`Agent ${(status === 'active') ? 'Blocked' : 'UnBlocked'}!`);
 			blockAndRefetch();
 		} catch (error) {
 			Toast.error(error.message);

@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
 import Layout from '../../../../../common/Layout';
-import RadioOptions from '../../controls/budget-allocation-radio';
+import RadioControls from '../../controls/budget-allocation-radio';
 import useBudgetAllocation from '../../hooks/useBudgetAllocation';
 
 import styles from './styles.module.css';
@@ -16,7 +16,6 @@ function ShowModal({
 	refetch = () => {},
 	reset = () => {},
 }) {
-	console.log(formData);
 	const [showErrorModal, setShowErrorModal] = useState(false);
 	const DEFAULT_VALUES = {};
 
@@ -29,7 +28,6 @@ function ShowModal({
 	} = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
-	const radioControls = RadioOptions;
 	const closeModal = () => {
 		setShowModal(false);
 		setShowErrorModal(false);
@@ -71,7 +69,7 @@ function ShowModal({
 								<div className={styles.error_text}>
 									Error: There is already a budget allocated to this user.
 								</div>
-								<Layout controls={radioControls} control={radioControl} errors={radioErrors} />
+								<Layout controls={RadioControls} control={radioControl} errors={radioErrors} />
 								{radioErrors.radio ? (
 									<div className={styles.align_left}>Select any one option</div>
 								) : null}

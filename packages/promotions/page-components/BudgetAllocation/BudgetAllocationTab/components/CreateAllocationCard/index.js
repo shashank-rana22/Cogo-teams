@@ -3,7 +3,6 @@ import { useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
 import Layout from '../../../../../common/Layout';
-// import ShowModal from '../../common/ShowModal';
 import ShowModal from '../../common/ShowModal';
 import BudgetAllocationControls from '../../controls/budget-allocation-form-controls';
 
@@ -29,7 +28,6 @@ function CreateAllocationCard({
 
 	const onClickAllocate = (data) => {
 		setFormData(data);
-		console.log(data);
 		setShowModal(true);
 	};
 	const onCloseModal = () => {
@@ -44,6 +42,7 @@ function CreateAllocationCard({
 					showCloseIcon
 					size="xl"
 					onClose={onCloseModal}
+					scroll={false}
 				>
 					<Modal.Header />
 					<Modal.Body>

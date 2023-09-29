@@ -30,7 +30,7 @@ const useListPromoBudgetAllocation = ({ activeTab = 'active_budget', role = '' }
 			setList(list);
 			setPaginationData(paginationdata);
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(error.message);
 		}
 	}, [trigger]);
 
