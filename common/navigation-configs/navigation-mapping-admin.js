@@ -2674,6 +2674,16 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.profile,
 			icon          : IcMAppProfile,
 		},
+		cargo_insurance: {
+			key           : 'cargo_insurance',
+			title         : 'Cargo Insurance',
+			module_type   : 'dashboards',
+			href          : '/v2/cargo-insurance',
+			as            : '/v2/cargo-insurance',
+			showInNav     : false,
+			main_apis     : [],
+			possible_apis : apis.profile,
+		},
 	};
 
 	return navigationMappingAdmin;

@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMAppFinance,
 	IcMAppInsurance,
@@ -7,8 +8,21 @@ import {
 	IcMAppMachineIntelligence,
 	IcMAppCustoms,
 } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 
 const other_services = [
+	{
+		label         : 'Cargo Insurance',
+		value         : 'insurance',
+		icon          : IcMAppInsurance,
+		is_available  : true,
+		footerContent : (
+			<>
+				Powered by
+				{' '}
+				<Image src={GLOBAL_CONSTANTS.image_url.secure_now} width={72} height={12} />
+			</>),
+	},
 	{
 		label        : 'Customs Clearance',
 		value        : 'customs',
@@ -26,12 +40,6 @@ const other_services = [
 		value        : 'licensing',
 		icon         : IcMAppLicenses,
 		is_available : false,
-	},
-	{
-		label        : 'Cargo Insurance',
-		value        : 'insurance',
-		icon         : IcMAppInsurance,
-		is_available : true,
 	},
 	{
 		label        : 'Trade Finance',

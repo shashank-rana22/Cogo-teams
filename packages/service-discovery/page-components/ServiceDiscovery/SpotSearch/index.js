@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import TryOldBanner from '../../../common/TryOldBanner';
 
 import Header from './components/Header';
+import Insurance from './components/Insurance';
 import ModeSelection from './components/ModeSelection';
 import OtherServices from './components/OtherServices';
 import Routes from './components/Routes';
@@ -104,16 +105,20 @@ function SpotSearch() {
 
 			{isEmpty(selectedService) ? null : (
 				<div className={styles.locations}>
-					<Routes
-						mode={selectedService}
-						formValues={location}
-						setFormValues={setLocation}
-						organization={organization}
-						errors={errors}
-						createSearch={createSearch}
-						createSearchLoading={loading}
-						setErrors={setErrors}
-					/>
+					{selectedService.mode_value === 'insurance'
+						? <Insurance organization={organization} />
+						: (
+							<Routes
+								mode={selectedService}
+								formValues={location}
+								setFormValues={setLocation}
+								organization={organization}
+								errors={errors}
+								createSearch={createSearch}
+								createSearchLoading={loading}
+								setErrors={setErrors}
+							/>
+						)}
 				</div>
 			)}
 		</div>
