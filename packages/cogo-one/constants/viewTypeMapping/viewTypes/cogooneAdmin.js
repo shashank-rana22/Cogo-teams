@@ -48,6 +48,7 @@ const COGOONE_ADMIN = {
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : false,
 		show_services                               : true,
+		show_rm_agent_details                       : false,
 	},
 };
 

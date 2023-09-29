@@ -162,6 +162,7 @@ function Header({
 									<AdditionalRemarks
 										remarkData={remarkData}
 										setRemarkData={setRemarkData as any}
+										modalData={modalData}
 									/>
 									<div className={styles.btn_container}>
 										<Button
@@ -186,7 +187,7 @@ function Header({
 												otherRemarks : remarkData?.other,
 											})}
 										>
-											Reject
+											{modalData}
 										</Button>
 									</div>
 								</div>

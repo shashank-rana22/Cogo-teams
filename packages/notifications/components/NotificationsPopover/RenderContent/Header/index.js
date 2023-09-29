@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
@@ -8,10 +9,12 @@ function Header({
 	onMarkAllAsRead = () => {},
 	onSeeAll = () => {},
 }) {
+	const { t } = useTranslation(['common']);
+
 	return (
 		<div className={styles.header_container}>
 
-			<h3 className={styles.header}>Notifications</h3>
+			<h3 className={styles.header}>{t('common:tab_notifications_label')}</h3>
 
 			{!isEmpty(formattedData?.list || []) ? (
 				<div className={styles.row}>
@@ -20,7 +23,7 @@ function Header({
 						role="presentation"
 						className={styles.mark_read}
 					>
-						Mark all as read
+						{t('common:mark_all_as_read')}
 					</div>
 
 					<Button
@@ -28,7 +31,7 @@ function Header({
 						themeType="primary"
 						onClick={onSeeAll}
 					>
-						SEE All
+						{t('common:see_all_button')}
 					</Button>
 				</div>
 			) : null}

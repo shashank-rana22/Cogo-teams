@@ -53,6 +53,7 @@ const SALES_ADMIN = {
 		show_lead_voice_calls                       : true,
 		show_shipments_stakeholders_contact_details : true,
 		show_services                               : false,
+		show_rm_agent_details                       : false,
 	},
 };
 

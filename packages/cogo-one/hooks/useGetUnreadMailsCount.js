@@ -9,7 +9,7 @@ import {
 	mountUnreadCountSnapShot,
 } from '../helpers/snapshotHelpers';
 
-const useGetUnreadMailsCount = ({ firestore, viewType, agentId, isBotSession }) => {
+const useGetUnreadMailsCount = ({ firestore, viewType, agentId, isBotSession, userSharedMails = [] }) => {
 	const [unReadMailsCount, setUnReadMailsCount] = useState(false);
 
 	const unreadCountSnapshotListener = useRef(null);
@@ -21,14 +21,14 @@ const useGetUnreadMailsCount = ({ firestore, viewType, agentId, isBotSession }) 
 		mountUnreadCountSnapShot({
 			unreadCountSnapshotListener,
 			omniChannelCollection : collectionGroup(firestore, 'rooms'),
-			baseQuery             : getBaseQuery?.({ agentId }) || [],
+			baseQuery             : getBaseQuery?.({ agentId, userSharedMails }) || [],
 			sessionQuery          : getSessionQuery?.({
 				sessionType: isBotSession ? 'bot' : 'admin',
 			}) || [],
 			queryFilters        : [where('channel_type', 'in', ['email'])],
 			setUnReadChatsCount : setUnReadMailsCount,
 		});
-	}, [firestore, viewType, agentId, isBotSession]);
+	}, [firestore, viewType, agentId, isBotSession, userSharedMails]);
 
 	return {
 		unReadMailsCount,

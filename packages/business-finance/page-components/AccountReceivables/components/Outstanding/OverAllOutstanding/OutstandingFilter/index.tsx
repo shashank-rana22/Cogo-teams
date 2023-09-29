@@ -5,6 +5,7 @@ import {
 	IcMArrowRotateUp,
 	IcMArrowRotateDown,
 	IcMCross,
+	IcMAppSearch,
 } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -161,6 +162,7 @@ function Filters({
 							placeholder={placeholder}
 							value={search}
 							onChange={(e) => handleChange(e)}
+							prefix={<IcMAppSearch />}
 							suffix={
 								search ? (
 									<IcMCross
@@ -170,7 +172,6 @@ function Filters({
 									/>
 								) : null
 							}
-							prefix={null}
 							className={styles.styled_input}
 						/>
 					</div>
