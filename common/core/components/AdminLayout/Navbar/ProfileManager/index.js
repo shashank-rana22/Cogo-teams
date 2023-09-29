@@ -1,8 +1,8 @@
 // import logout from '@cogoport/authentication/utils/getLogout';
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import getStaticPath from '@cogoport/notifications/utils/getStaticPath';
 import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 
@@ -32,12 +32,14 @@ function ProfileManager({
 	const router = useRouter();
 	const { t } = useTranslation(['common', 'notifications']);
 
-	const isDevMode = process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('.dev.cogoport.io');
-
 	let audio = null;
 
+	const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL?.includes('https://api.cogoport.com/');
+
 	if (typeof window !== 'undefined' && !isDevMode) {
-		audio = new Audio(getStaticPath('/mp3/notification.mp3'));
+		const url = `${process.env.STATIC_ASSETS_URL}/mp3/notification.mp3`;
+
+		audio = new Audio(url.replace(GLOBAL_CONSTANTS.regex_patterns.static_url, '$1'));
 	}
 
 	const { unReadChatsCount = 0 } = useGetUnreadMessagesCount({
