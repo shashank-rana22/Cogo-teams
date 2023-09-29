@@ -56,8 +56,6 @@ export const useFieldArrayData = ({ services = [], shipment_data = {} }) => {
 	} = useForm({ defaultValues });
 	const formValues = watch();
 
-	console.log(watch());
-
 	useEffect(() => {
 		const subscription = watch(async (value, { name }) => {
 			const index = name.split('.')[FIRST_INDEX];
