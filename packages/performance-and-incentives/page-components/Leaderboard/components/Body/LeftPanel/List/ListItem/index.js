@@ -9,17 +9,25 @@ import useListItem from './useListItem';
 
 const { AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 
-const getClassName = ({ isAllowed, listItem = {}, currLevel = {} }) => `${styles.list_row} 
+const getClassName = ({ isAllowed, listItem = {} }) => `${styles.list_row} 
 			${listItem.rank === GLOBAL_CONSTANTS.one ? styles.box_shadow : ''} 
-			${isAllowed ? styles.hover : ''}
-			${(!isEmpty(currLevel.user?.id)
-				&& currLevel.report_type === AGENT_REPORT
-				&& currLevel.user?.id === listItem.user?.id) ? styles.selected_item : ''}`;
+			${isAllowed ? styles.hover : ''}`;
 
 function conditionalWrapper({ condition, title, wrapper, children }) {
 	return condition ? wrapper(children)
 		: <div style={title === 'rank' ? { marginLeft: '38px' } : {}}>{children}</div>;
 }
+
+const selectionCheck = ({ currLevel = {}, listItem = {} }) => !isEmpty(currLevel.user?.id)
+	&& currLevel.report_type === AGENT_REPORT
+	&& currLevel.user?.id === listItem.user?.id;
+
+const getBackgroundColor = ({ listItem = {}, currLevel = {}, user = {} }) => {
+	if (selectionCheck({ currLevel, listItem })) return '#fef199';
+	if (user.id === listItem.user?.id) return '#faf8df';
+
+	return '#fff';
+};
 
 function ListItem(props) {
 	const { listItem, user, currLevel } = props;
@@ -34,8 +42,8 @@ function ListItem(props) {
 		<div
 			role="presentation"
 			onClick={handleClick}
-			className={getClassName({ isAllowed, listItem, currLevel })}
-			style={user.id === listItem.user?.id ? { background: '#faf8df' } : {}}
+			className={getClassName({ isAllowed, listItem })}
+			style={{ background: getBackgroundColor({ listItem, currLevel, user }) }}
 		>
 			{LIST_COLUMN_MAPPING.map((columnItem) => {
 				const { key, flex, accessor } = columnItem;

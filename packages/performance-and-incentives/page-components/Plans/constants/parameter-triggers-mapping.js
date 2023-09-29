@@ -75,6 +75,10 @@ const PARAM_TRIGGERS_MAPPING = {
 		provisional_trigger : 'SID creation',
 		realised_trigger    : 'IRN generation / Invoice Knockoff',
 	},
+	every_booking_primary_service: {
+		provisional_trigger : 'SID creation',
+		realised_trigger    : 'IRN generation / Invoice Knockoff',
+	},
 	quotation_sent: {
 		provisional_trigger : 'quotation_sent',
 		realised_trigger    : 'quotation_sent',

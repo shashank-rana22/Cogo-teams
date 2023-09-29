@@ -2,7 +2,7 @@ import { Toggle } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../constants/leaderboard-viewtype-constants';
 import SearchInput from '../../../../common/SearchInput';
@@ -66,7 +66,7 @@ function LeaderboardFilters(props) {
 					<div className={styles.back}>
 						<IcMArrowBack style={{ marginRight: '6px', cursor: 'pointer' }} onClick={handleBack} />
 						<div>
-							Back to
+							Back To
 							{' '}
 							{startCase(backText)}
 							{' '}

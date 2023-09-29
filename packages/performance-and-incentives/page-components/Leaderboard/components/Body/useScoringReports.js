@@ -39,10 +39,11 @@ const useScoringReports = (props) => {
 	const [view] = incentive_leaderboard_viewtype.split('_');
 
 	const [params, setParams] = useState({
-		user_data_required      : true,
-		role_data_required      : true,
-		add_current_user_report : incentive_leaderboard_viewtype !== ADMIN,
-		filters                 : {
+		user_data_required       : true,
+		role_data_required       : true,
+		pagination_data_required : false,
+		add_current_user_report  : incentive_leaderboard_viewtype !== ADMIN,
+		filters                  : {
 			report_view_type        : getReportViewType({ currLevel, isChannel }),
 			report_type             : incentive_leaderboard_viewtype !== ADMIN ? `${view}_report` : undefined,
 			q                       : searchQuery || undefined,
