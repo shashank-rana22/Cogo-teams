@@ -33,7 +33,6 @@ const service_provider = {
 			status       : 'active',
 			kyc_status   : 'verified',
 		},
-
 	},
 };
 
@@ -94,7 +93,7 @@ const getControls = ({
 		|| '';
 
 	service_provider.params.filters = {
-		...service_provider?.params?.filters || {},
+		...(service_provider?.params?.filters || {}),
 		service: SERVICE_TYPE_MAPPING[service_type],
 	};
 
