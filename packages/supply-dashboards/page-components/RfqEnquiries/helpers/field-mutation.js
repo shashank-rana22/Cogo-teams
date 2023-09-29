@@ -1,3 +1,6 @@
+/* eslint-disable custom-eslint/variables-name-check */
+/* eslint-disable custom-eslint/function-name-check */
+
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import {
 	asyncFieldsOrganization, asyncFieldsOrganizationUsers, asyncFieldsOperators,
@@ -6,12 +9,16 @@ import {
 import { merge, startCase } from '@cogoport/utils';
 
 const FieldMutation = ({
-	fields, values, data,
+	fields, values, data, service = {},
 }) => {
 	const serviceProviderOptions = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganization(),
-			{ params: { filters: { account_type: 'service_provider', kyc_status: 'verified' } } },
+			{
+				params: {
+					filters: { account_type: 'service_provider', kyc_status: 'verified', service: service?.service },
+				},
+			},
 		),
 	);
 	const shippingLineOptions = useGetAsyncOptions(merge(

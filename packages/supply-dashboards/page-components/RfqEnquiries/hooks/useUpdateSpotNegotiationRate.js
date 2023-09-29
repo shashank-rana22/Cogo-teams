@@ -1,3 +1,7 @@
+/* eslint-disable no-magic-numbers */
+/* eslint-disable max-lines-per-function */
+/* eslint-disable custom-eslint/variables-name-check */
+/* eslint-disable custom-eslint/is-empty-use-check */
 /* eslint-disable max-len */
 import { Toast } from '@cogoport/components';
 import { useForm, getApiError } from '@cogoport/forms';
@@ -53,7 +57,7 @@ const useUpdateSpotNegotiationRate = ({
 	const prefillData = useRef();
 
 	const { newField } = FieldMutation({
-		fields, values, data,
+		fields, values, data, service,
 	});
 
 	useEffect(() => {
