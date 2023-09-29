@@ -39,7 +39,7 @@ const useGetOrganizationServices = ({ orgId = '' }) => {
 		.filter((val) => (val?.key !== 'trailer_freight' && SERVICE_STATUS.includes(val?.status)));
 
 	return {
-		orgLoading: loading,
+		loading,
 		list,
 	};
 };

@@ -264,9 +264,8 @@ function AgentDetails({
 				</>
 			)}
 
-			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.show_services ? (
+			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_services && organization_id ? (
 				<AgentWiseServices orgId={organization_id} />
-
 			) : null}
 		</>
 	);

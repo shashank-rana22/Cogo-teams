@@ -1,5 +1,5 @@
-import { cl } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { cl, Placeholder } from '@cogoport/components';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import useGetOrganizationServices from '../../../../../hooks/useGetOrganizationServices';
 
@@ -11,9 +11,13 @@ const STATUS_MAPPING = {
 };
 
 function AgentWiseServices({ orgId = '' }) {
-	const { list = [] } = useGetOrganizationServices({ orgId });
+	const { list = [], loading = false } = useGetOrganizationServices({ orgId });
 
-	return (
+	if (isEmpty(list)) {
+		return null;
+	}
+
+	return loading ? <Placeholder width="100%" height="80px" margin="10px 0 0" /> : (
 		<>
 			<div className={styles.title}>Services</div>
 			<div className={styles.container}>
