@@ -1,7 +1,7 @@
 import { Tooltip, Datepicker, Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
+import { format, getYear } from '@cogoport/utils';
 import { useState, useEffect, memo } from 'react';
 
 import MyResponsivePie from '../../../Components/PieChart/index.tsx';
@@ -28,6 +28,8 @@ function RejectedCharts({ subActiveTabReject = '', setFilters = () => {} }) {
 
 	const [remarkDate, setRemarkDate] = useState(null);
 
+	const FINANCIAL_YEAR_START_DATE = `${getYear(new Date())}-04-01`;
+
 	const {
 		pieData = [],
 		getData = () => {},
@@ -52,6 +54,9 @@ function RejectedCharts({ subActiveTabReject = '', setFilters = () => {} }) {
 		if (['Rejected', 'On Hold'].includes(value?.id)) {
 			setFilters((pre) => ({
 				...pre,
+				updatedDateFrom       : undefined,
+				updatedDateTo         : undefined,
+				rejectionRemarksType  : undefined,
 				statusUpdatedDateFrom : value?.indexValue,
 				statusUpdatedDateTo   : value?.indexValue,
 			}));
@@ -61,8 +66,11 @@ function RejectedCharts({ subActiveTabReject = '', setFilters = () => {} }) {
 	const handlePieChartOnClick = (value) => {
 		setFilters((pre) => ({
 			...pre,
-			updatedDateFrom: remarkDate?.startDate
-				? format(remarkDate?.startDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']) : undefined,
+			statusUpdatedDateFrom : undefined,
+			statusUpdatedDateTo   : undefined,
+			updatedDateFrom       : remarkDate?.startDate
+				? format(remarkDate?.startDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'])
+				: FINANCIAL_YEAR_START_DATE,
 			updatedDateTo        : format(remarkDate?.endDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']),
 			rejectionRemarksType : value?.data?.key,
 		}));
