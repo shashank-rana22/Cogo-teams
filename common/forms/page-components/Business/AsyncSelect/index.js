@@ -79,6 +79,7 @@ import {
 	asyncListLocationClusters,
 	asyncListFclFreightCommodityClusters,
 	asyncListEnrichmentSources,
+	asyncListSaasPlan,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -176,6 +177,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
 	list_enrichment_sources              : asyncListEnrichmentSources,
+	list_saas_plan                       : asyncListSaasPlan,
 };
 
 const SINGLE_ENTITY = 1;

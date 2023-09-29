@@ -5,21 +5,16 @@ import { getFieldController } from '../../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-const getKey = ({ name, index, getValues }) => {
-	if (name === 'addonName') {
-		return getValues(`updateAddon[${index}]`);
-	}
-	return name;
-};
+const THRESHOLD_DELETE = 1;
 
 function Item({
-	info, controls, control, remove, errors, index, fields = [], getValues,
+	info, controls, control, remove, errors, index, fields = [], name,
 }) {
 	return (
 		<>
 			{controls.map((field) => {
 				const Element = getFieldController(field?.type);
-
+				console.log(field, 'field');
 				return (
 					<div
 						key={`${field?.name}_${info?.id}`}
@@ -31,13 +26,13 @@ function Item({
 							{...field}
 							control={control}
 							value={info[field?.name]}
-							name={`updateAddon.${index}.${field?.name}`}
-							key={getKey({ name: field?.name, index, getValues })}
+							name={`${name}.${index}.${field?.name}`}
+							key={`${name}.${index}.${field?.name}`}
 						/>
 					</div>
 				);
 			})}
-			{fields.length > 1 && (
+			{fields.length > THRESHOLD_DELETE && (
 				<div
 					className={styles.icon_container}
 					role="presentation"
@@ -47,7 +42,7 @@ function Item({
 						className={styles.delete_icon}
 						width={20}
 						height={20}
-						onClick={() => remove(index, 1)}
+						onClick={() => remove(index, THRESHOLD_DELETE)}
 					/>
 				</div>
 			)}
