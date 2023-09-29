@@ -19,7 +19,7 @@ function Details({
 	const [showRejectModal, setShowRejectModal] = useState(false);
 
 	const { status = '', data = {}, id = '', data: { revokeInvoiceRequest = {} } } = row || {};
-	const { comapny_name = '', invoiceNumber = '' } = revokeInvoiceRequest || {};
+	const { company_name = '', invoiceNumber = '' } = revokeInvoiceRequest || {};
 
 	const { useOnAction: onAction, loading } = useGetRevokeInvoiceData({
 		data,
@@ -37,7 +37,7 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							{(comapny_name || '')}
+							{(company_name || '')}
 						</div>
 					</div>
 				</div>

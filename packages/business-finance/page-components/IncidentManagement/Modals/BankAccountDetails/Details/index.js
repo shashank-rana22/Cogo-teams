@@ -66,7 +66,7 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							<div>{(businessName || tradePartyName || '')}</div>
+							<div>{(tradePartyName || businessName || '')}</div>
 						</div>
 					</div>
 				</div>

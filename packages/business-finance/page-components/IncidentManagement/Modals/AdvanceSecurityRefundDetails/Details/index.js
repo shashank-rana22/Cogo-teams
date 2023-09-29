@@ -50,7 +50,7 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							{(tradePartyName || businessName || '')}
+							{(businessName || tradePartyName || '')}
 						</div>
 					</div>
 				</div>
