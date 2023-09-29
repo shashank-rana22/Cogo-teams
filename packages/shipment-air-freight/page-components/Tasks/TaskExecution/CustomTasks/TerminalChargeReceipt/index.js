@@ -14,6 +14,9 @@ function TerminalChargeReceipt({
 	const mainServicesData = (servicesList || []).filter((item) => item?.service_type
 	=== 'air_freight_service')[GLOBAL_CONSTANTS.zeroth_index];
 
+	const localServicesData = (servicesList || []).find((item) => item?.service_type
+	=== 'air_freight_local_service');
+
 	return (
 		<div className={styles.container}>
 			<TerminalChargeRate
@@ -23,6 +26,7 @@ function TerminalChargeReceipt({
 				task_id={task?.id}
 				shipmentData={shipmentData}
 				type={type}
+				localServiceId={localServicesData?.id}
 			/>
 		</div>
 	);

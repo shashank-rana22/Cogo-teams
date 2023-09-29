@@ -1,0 +1,9 @@
+.heading {
+	color: var(--color-accent-orange-2);
+}
+
+.delete_button {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
