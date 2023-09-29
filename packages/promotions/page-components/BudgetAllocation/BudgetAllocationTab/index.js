@@ -4,11 +4,9 @@ import { useState, useEffect } from 'react';
 
 import Layout from '../../../common/Layout';
 
-import ShowModal from './common/ShowModal';
 import BudgetAllocate from './components/BudgetAllocate';
 import CreateAllocationCard from './components/CreateAllocationCard';
 import ViewModal from './components/ViewModal';
-import BudgetAllocationControls from './controls/budget-allocation-form-controls';
 import RoleOptions from './controls/budget-allocation-role';
 import useListPromoBudgetAllocation from './hooks/useListPromoBudgetAllocations';
 import styles from './styles.module.css';
@@ -17,16 +15,15 @@ const TABS = [
 	{ name: 'active_budget', title: 'Active', key: 'active_budget' },
 	{ name: 'inactive_budget', title: 'Deactivated', key: 'inactive_budget' },
 ];
+const DEFAULT_VALUES = {};
 
 function BudgetAllocationTab() {
-	const [formButton, setFormButton] = useState(false);
+	const [showAllocationCard, setShowAllocationCard] = useState(false);
 	const [showViewModal, setShowViewModal] = useState(false);
+
 	const [selectedDetails, setSelectedDetails] = useState({});
-	const [showModal, setShowModal] = useState(false);
-	const [formData, setFormData] = useState();
 	const [activeTab, setActiveTab] = useState('active_budget');
 	const [role, setRole] = useState('');
-	const DEFAULT_VALUES = {};
 
 	const {
 		control: roleControl,
@@ -35,16 +32,6 @@ function BudgetAllocationTab() {
 		errors: roleErrors,
 	} = useForm({ defaultValues: DEFAULT_VALUES });
 	const roleControls = RoleOptions;
-
-	const {
-		control,
-		handleSubmit,
-		formState: { errors = {} },
-		reset,
-	} = useForm({
-		defaultValues: DEFAULT_VALUES,
-	});
-	const controls = BudgetAllocationControls;
 
 	const {
 		loading,
@@ -67,10 +54,6 @@ function BudgetAllocationTab() {
 		role,
 	};
 
-	const showForm = () => {
-		setFormButton(!formButton);
-	};
-
 	useEffect(() => {
 		setRole('');
 		roleSetValue('role', '');
@@ -85,35 +68,18 @@ function BudgetAllocationTab() {
 
 	return (
 		<div>
-			{formButton ? (
-				<CreateAllocationCard
-					setFormData={setFormData}
-					setShowModal={setShowModal}
-					setFormButton={setFormButton}
-					control={control}
-					controls={controls}
-					handleSubmit={handleSubmit}
-					errors={errors}
-					reset={reset}
-				/>
-			) : null}
+			<CreateAllocationCard
+				showAllocationCard={showAllocationCard}
+				setShowAllocationCard={setShowAllocationCard}
+				refetch={refetch}
+			/>
 			<div className={styles.tab_container}>
 				<div className={styles.select_wrapper}>
 					<Layout controls={roleControls} control={roleControl} errors={roleErrors} />
 				</div>
-				{!formButton ? (
-					<div
-						className={styles.allocate_button}
-						style={{
-							display        : 'flex',
-							justifyContent : 'flex-end',
-							marginTop      : '10px',
-						}}
-					>
-						<Button
-							className="primary sm"
-							onClick={() => setFormButton((prev) => !prev)}
-						>
+				{!showAllocationCard ? (
+					<div className={styles.allocate_button}>
+						<Button onClick={() => setShowAllocationCard((state) => !state)}>
 							ALLOCATE
 						</Button>
 					</div>
@@ -141,16 +107,6 @@ function BudgetAllocationTab() {
 					setShowViewModal={setShowViewModal}
 					selectedDetails={selectedDetails}
 					refetchListBudgetAllocation={refetch}
-				/>
-			) : null}
-			{showModal ? (
-				<ShowModal
-					setShowModal={setShowModal}
-					FormData={formData}
-					setFormData={setFormData}
-					refetch={refetch}
-					showForm={showForm}
-					reset={reset}
 				/>
 			) : null}
 		</div>

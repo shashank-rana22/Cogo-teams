@@ -5,17 +5,15 @@ import { useRequest } from '@cogoport/request';
 import { flattenErrorToString } from '../helpers/error-helper';
 
 const useBudgetAllocation = ({
-	FormData = {},
+	formData = {},
 	setShowErrorModal = () => {},
 	setShowModal = () => {},
 	refetch = () => {},
-	showForm = () => {},
+	setShowAllocationCard = () => {},
 	reset = () => {},
 	radioReset = () => {},
 }) => {
-	const formdata = FormData || {};
-
-	let payload = { ...formdata, role_ids: [formdata.role_ids] };
+	let payload = { ...formData, role_ids: [formData.role_ids] };
 
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -43,7 +41,7 @@ const useBudgetAllocation = ({
 			setShowErrorModal(false);
 			setShowModal(false);
 			refetch();
-			showForm();
+			setShowAllocationCard((state) => !state);
 			reset();
 			radioReset();
 		} catch (error) {
@@ -54,13 +52,13 @@ const useBudgetAllocation = ({
 					reset();
 					radioReset();
 					setShowModal(false);
-					showForm();
+					setShowAllocationCard((state) => !state);
 				} else if (error?.data?.budgetRole === 'Budget Role already exist') {
 					setShowErrorModal(true);
 				} else {
 					reset();
 					radioReset();
-					showForm();
+					setShowAllocationCard((state) => !state);
 					setShowErrorModal(false);
 					setShowModal(false);
 					Toast.error(flattenErrorToString(error.error));

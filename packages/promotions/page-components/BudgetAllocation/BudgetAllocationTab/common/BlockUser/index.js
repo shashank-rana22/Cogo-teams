@@ -8,15 +8,9 @@ function BlockUser({ item = {}, refetch = () => {} }) {
 
 	return (
 		<>
-			{item?.status === 'active' ? (
-				<Button className="primary sm" onClick={() => setBlock(true)}>
-					Block
-				</Button>
-			) : (
-				<Button className="secondary sm" onClick={() => setBlock(true)}>
-					UnBlock
-				</Button>
-			)}
+			<Button onClick={() => setBlock(true)}>
+				{item?.status === 'active' ? 'Block' : 'UnBlock'}
+			</Button>
 			{block
 				? (
 					<BlockUserModal

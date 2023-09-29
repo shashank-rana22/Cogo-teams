@@ -1,4 +1,4 @@
-import { Input } from '@cogoport/components';
+import { Button, Input } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMPlus, IcMCross, IcCFtick } from '@cogoport/icons-react';
 import { useState } from 'react';
@@ -67,12 +67,12 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 						/>
 					</div>
 					<div className={styles.save_close}>
-						<button
+						<Button
 							className={styles.link}
 							onClick={() => handleSave(item)}
 						>
 							<IcCFtick className="saveicon" />
-						</button>
+						</Button>
 						<button
 							className={styles.link}
 							onClick={() => setShowSaveLink(false)}
