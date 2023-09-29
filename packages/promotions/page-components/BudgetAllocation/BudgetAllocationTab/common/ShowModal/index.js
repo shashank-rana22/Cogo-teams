@@ -24,7 +24,6 @@ function ShowModal({
 		handleSubmit: radiohandleSubmit,
 		formState: { errors: radioErrors },
 		reset: radioReset,
-		watch: radioWatch,
 	} = useForm({
 		defaultValues: DEFAULT_VALUES,
 	});
@@ -42,10 +41,9 @@ function ShowModal({
 		reset,
 		radioReset,
 	});
-	const radiohandleSubmitFunction = () => {
-		fetchCreateDataApi({ radioValue: radioWatch().radio });
+	const radiohandleSubmitFunction = (data) => {
+		fetchCreateDataApi({ radioValue: data.radio });
 	};
-
 	return (
 		showModal ? (
 			<Modal show showCloseIcon onClose={closeModal}>
@@ -56,10 +54,10 @@ function ShowModal({
 				<Modal.Footer>
 					{!showErrorModal ? (
 						<div className={styles.button_flex}>
-							<Button onClick={() => closeModal()} className="secondary md">
+							<Button onClick={() => closeModal()} disabled={loading}>
 								No
 							</Button>
-							<Button className="primary md" onClick={fetchCreateDataApi} disabled={loading}>
+							<Button onClick={fetchCreateDataApi} disabled={loading}>
 								Yes
 							</Button>
 						</div>
@@ -75,11 +73,10 @@ function ShowModal({
 								) : null}
 							</div>
 							<div className={styles.button_flex}>
-								<Button className="secondary md" onClick={closeModal}>
+								<Button onClick={closeModal}>
 									Cancel
 								</Button>
 								<Button
-									className="primary md"
 									onClick={radiohandleSubmit(radiohandleSubmitFunction)}
 									disabled={loading}
 								>
