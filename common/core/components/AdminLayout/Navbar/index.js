@@ -30,7 +30,7 @@ function Navbar({
 }) {
 	const ref = useRef(null);
 	const navRef = useRef(null);
-	const { t } = useTranslation(['common', 'notifications']);
+	const { t } = useTranslation(['common']);
 	const userBasedNavView = formatUserBasedNavView(nav);
 
 	// eslint-disable-next-line no-undef
