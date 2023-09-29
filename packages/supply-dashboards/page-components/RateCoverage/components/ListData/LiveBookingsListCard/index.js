@@ -4,10 +4,14 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMFcl, IcMPortArrow } from '@cogoport/icons-react';
 
 import useGetShipment from '../../../hooks/useGetShipment';
+import useListFreightRateFeedBacks from '../../../hooks/useListFreightRateFeedBacks';
+import useListFreightRateRequests from '../../../hooks/useListFreightRateRequests';
 import AddRateModal from '../ListCard/AddRateModal';
 
 import ServiceDetails from './Details';
 import styles from './styles.module.css';
+
+const ZERO_VALUE = 0;
 
 function LiveBookingsListCard({
 	showAddRateModal = false, setShowAddRateModal = () => {},
@@ -19,13 +23,18 @@ function LiveBookingsListCard({
 		serial_id = '', assigned_to = {}, container_type = '', container_size = '', commodity = '', source_id = '',
 	} = data || {};
 
-	const { data:shipmemnt_data, getShipment = () => {} } = useGetShipment({ source_id });
+	const { data:shipmemnt_data, getShipment = () => {}, shipment_loading = false } = useGetShipment({ source_id });
+	const { data:requestData, getRequest } = useListFreightRateRequests({ source_id, filter });
+	const { data:feedbackData, getFeedback } = useListFreightRateFeedBacks({ source_id, filter });
 
 	const handleDetailView = () => {
 		if (source === 'live_bookings') {
 			return getShipment();
 		}
-		return getListCoverage(null, source_id);
+		if (source === 'rate_feedback') {
+			return getFeedback();
+		}
+		return getRequest();
 	};
 
 	return (
@@ -157,6 +166,9 @@ function LiveBookingsListCard({
 							<ServiceDetails
 								shipmemnt_data={shipmemnt_data}
 								data={data}
+								requestData={requestData?.list[ZERO_VALUE] || []}
+								feedbackData={feedbackData?.list[ZERO_VALUE] || []}
+								shipment_loading={shipment_loading}
 							/>
 						)}
 					>

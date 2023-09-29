@@ -4907,7 +4907,13 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'bookings',
 		},
+		{
+			api          : 'list_fcl_freight_rate_requests',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
 	],
+
 	operations_dashboard: [
 		{
 			api          : 'list_organizations',

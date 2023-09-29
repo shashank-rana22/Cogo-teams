@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
 function useGetShipment({ source_id }) {
-	const [{ loading: shipmet_loading, data }, trigger] = useRequest({
+	const [{ loading: shipment_loading, data }, trigger] = useRequest({
 		url          : '/get_shipment',
 		method       : 'GET',
 		service_name : 'shipment',
@@ -21,7 +21,7 @@ function useGetShipment({ source_id }) {
 
 	return {
 		data,
-		shipmet_loading,
+		shipment_loading,
 		getShipment,
 	};
 }

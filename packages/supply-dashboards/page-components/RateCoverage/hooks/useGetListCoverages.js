@@ -50,7 +50,7 @@ const useGetListCoverage = () => {
 		method : 'GET',
 	}, { manual: true });
 
-	const getListCoverage = useCallback(async (sid, source_id) => {
+	const getListCoverage = useCallback(async (sid) => {
 		const { assign_to_id, releventToMeValue, daily_stats, start_date, end_date, ...restFilters } = filter;
 
 		const FINAL_FILTERS = {};
@@ -85,7 +85,6 @@ const useGetListCoverage = () => {
 				params: {
 					filters: {
 						...FINAL_FILTERS,
-						id        : source_id || undefined,
 						serial_id : sid ? parseInt(sid, 10) : undefined,
 						source    : source || undefined,
 						user_id   : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,

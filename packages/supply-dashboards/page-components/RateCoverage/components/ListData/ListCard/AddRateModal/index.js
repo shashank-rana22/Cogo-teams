@@ -18,6 +18,7 @@ import FieldMutation from '../../../../configurations/helpers/mutation-fields';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetFreightRate from '../../../../hooks/useGetFreightRate';
+import ServiceDetails from '../../LiveBookingsListCard/Details';
 
 import airControls from './AirControls';
 import fclControls from './FclControls';
@@ -245,6 +246,7 @@ function AddRateModal({
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
 			<Modal.Header title="Please Add Rate" />
+			<ServiceDetails />
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
 				<Layout
 					fields={finalFields}
@@ -261,7 +263,6 @@ function AddRateModal({
 				</div>
 
 			</Modal.Body>
-
 		</Modal>
 	);
 }
