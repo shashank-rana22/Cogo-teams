@@ -265,6 +265,7 @@ function CollectionPartyDetails({
 							<Button
 								size="md"
 								onClick={onConfirm}
+								disabled={isEmpty(uploadInvoiceUrl)}
 							>
 								Confirm
 							</Button>

@@ -6,6 +6,7 @@ const getPayload = ({
 	additional_information = '',
 	issue_type = '',
 	additionalFields,
+	is_critical = false,
 	category = '',
 	finalUrl = '',
 	id,
@@ -14,11 +15,12 @@ const getPayload = ({
 	PerformedByID : id || undefined,
 	Source        : 'admin',
 	UserType      : 'ticket_user',
+	IsUrgent      : is_critical || undefined,
 	Data          : {
-		...additionalFields,
-		Category    : category || undefined,
-		RequestType : 'feedback',
-		Attachment  : [finalUrl] || [],
+		AdditionalFields : { ...additionalFields },
+		Category         : category || undefined,
+		RequestType      : 'feedback',
+		Attachment       : [finalUrl] || [],
 	},
 	Type        : issue_type || undefined,
 	Description : additional_information || undefined,
@@ -43,6 +45,7 @@ const useAddFeedback = ({
 			additional_information,
 			file_url,
 			category,
+			is_critical,
 		} = val || {};
 
 		const additionalFields = Object.fromEntries(
@@ -57,6 +60,7 @@ const useAddFeedback = ({
 					id: profile?.user?.id,
 					additional_information,
 					additionalFields,
+					is_critical,
 					issue_type,
 					category,
 					finalUrl,

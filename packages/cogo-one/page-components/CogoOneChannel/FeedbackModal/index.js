@@ -8,7 +8,6 @@ import TicketChat from './TicketChat';
 
 function FeedbackModal({ showFeedback = false, setShowFeedback = () => {} }) {
 	const [modalData, setModalData] = useState({});
-	const [isInternal, setIsInternal] = useState(true);
 	const [showReassign, setShowReassign] = useState(false);
 
 	const handleClose = () => {
@@ -32,8 +31,6 @@ function FeedbackModal({ showFeedback = false, setShowFeedback = () => {} }) {
 						<TicketChat
 							modalData={modalData}
 							setModalData={setModalData}
-							isInternal={isInternal}
-							setIsInternal={setIsInternal}
 							showReassign={showReassign}
 							setShowReassign={setShowReassign}
 						/>

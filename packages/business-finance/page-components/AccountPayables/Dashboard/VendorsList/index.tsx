@@ -24,7 +24,7 @@ function VendorsList({ activeEntity }:ItemProps) {
 			<div className={styles.header}>
 				<div className={styles.heading_text}>
 					<div className={styles.text}>
-						Top 10 Vendors
+						Top 10 Outstanding Vendor Payments
 						<div className={styles.hr} />
 					</div>
 					<Tooltip

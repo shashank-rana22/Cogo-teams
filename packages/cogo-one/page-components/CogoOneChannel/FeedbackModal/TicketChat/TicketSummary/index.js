@@ -45,6 +45,7 @@ function TicketSummary({
 		Priority: priority = '',
 		Source: source = '',
 		Data: data = {},
+		IsUrgent: isUrgent = false,
 	} = ticket || {};
 
 	const { t } = useTranslation(['myTickets']);
@@ -60,6 +61,8 @@ function TicketSummary({
 		?.[STATUS_ITEMS_MAPPING[ticketStatus]] || {};
 
 	const isSameName = agentName === name;
+
+	const ticketReviewerName = ticketReviewer?.User?.Name || '';
 
 	const isCategoryConfig = categoryDeskType === 'by_category';
 
@@ -77,9 +80,13 @@ function TicketSummary({
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.title}>Care Summary</div>
-				<div className={cl`${styles.priority} ${styles[PRIORITY_LABEL_MAPPING[priority]]}`}>
-					{startCase(`${priority} ${t('myTickets:priority')}`)}
-				</div>
+				{isUrgent
+					?	<div className={styles.critical}>Critical</div>
+					: (
+						<div className={cl`${styles.priority} ${styles[PRIORITY_LABEL_MAPPING[priority]]}`}>
+							{startCase(`${priority} ${t('myTickets:priority')}`)}
+						</div>
+					)}
 			</div>
 			<div className={styles.ticket_body}>
 				<div className={styles.ticket_header}>
@@ -230,13 +237,15 @@ function TicketSummary({
 						</span>
 					</div>
 				)}
-				<div className={styles.ticket_data}>
-					{t('myTickets:assigned_to')}
-					:
-					<span className={styles.updated_at}>
-						{ticketReviewer?.User?.Name}
-					</span>
-				</div>
+				{ticketReviewerName && (
+					<div className={styles.ticket_data}>
+						{t('myTickets:assigned_to')}
+						:
+						<span className={styles.updated_at}>
+							{ticketReviewerName}
+						</span>
+					</div>
+				)}
 				{!isEmpty(authorizers) ? (
 					<div className={styles.ticket_data}>
 						{t('myTickets:closure_authorizers')}

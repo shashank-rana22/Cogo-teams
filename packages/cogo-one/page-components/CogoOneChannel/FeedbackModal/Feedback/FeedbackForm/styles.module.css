@@ -55,7 +55,7 @@
 }
 
 .field {
-	padding: 3px 0;
+	padding: 6px 0;
 
 	&:last-child {
 		border-bottom: unset;
@@ -64,6 +64,14 @@
 	:global {
 		.ui_checkbox_container {
 			padding: 0;
+		}
+
+		.ui_upload_droparea_container {
+			margin: 0;
+		}
+
+		.ui_upload_filesuccess_container span {
+			width: 75%;
 		}
 	}
 }

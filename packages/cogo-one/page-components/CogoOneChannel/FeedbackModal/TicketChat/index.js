@@ -28,14 +28,15 @@ const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 		return '100%';
 	}
 	if (isEmpty(file) && !uploading) {
-		return 'calc(100% - 82px)';
+		return 'calc(100% - 40px)';
 	}
-	return 'calc(100% - 75px)';
+
+	return 'calc(100% - 67px)';
 };
 
 function TicketChat({
 	modalData = {}, setModalData = () => {}, showReassign = false,
-	setShowReassign = () => {}, isInternal = true, setIsInternal = () => {},
+	setShowReassign = () => {},
 }) {
 	const { ticketId = '' } = modalData || {};
 
@@ -67,7 +68,7 @@ function TicketChat({
 	});
 
 	const { Ticket: ticket = {}, IsCurrentReviewer: isCurrentReviewer = false } = ticketData || {};
-	const { Status: status = '', NotifyCustomer: notifyCustomer = false } = ticket || {};
+	const { Status: status = '' } = ticket || {};
 
 	const {
 		listData = {},
@@ -103,7 +104,6 @@ function TicketChat({
 		ticketId: ticketId || '',
 		fetchDetails,
 		scrollToBottom,
-		isInternal,
 	});
 
 	const { updateTicketActivity = () => {}, updateLoading = false } = useUpdateTicketActivity({
@@ -190,10 +190,7 @@ function TicketChat({
 							uploading={uploading}
 							setMessage={setMessage}
 							setUploading={setUploading}
-							setIsInternal={setIsInternal}
 							createLoading={createLoading}
-							isInternal={isInternal}
-							notifyCustomer={notifyCustomer}
 							handleKeyPress={handleKeyPress}
 							handleSendComment={handleSendComment}
 						/>

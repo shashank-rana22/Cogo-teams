@@ -105,5 +105,22 @@
       }
     ],
     "possible_filters":["importer_exporter_id","triggered_pending_invoices","source","payment_term","tags"]
+  },
+  "haulage_freight": {
+    "tabs": [
+      {
+        "label": "Ongoing",
+        "value": "ongoing"
+      },
+      {
+        "label": "Completed",
+        "value": "completed"
+      },
+      {
+        "label": "Cancelled",
+        "value": "cancelled"
+      }
+    ],
+    "possible_filters":["importer_exporter_id","triggered_pending_invoices","source","payment_term","tags"]
   }
 }
