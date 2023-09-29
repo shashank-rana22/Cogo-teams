@@ -39,28 +39,21 @@ export function CardBody({ charge = {}, type = '' }) {
 			}`}
 		>
 			<div className={styles.layout}>
-				<div className={styles.flex}>
-					<div
-						className={styles.heading}
-						style={{ '--span': 2 }}
-					>
-						{startCase(serviceType) || 'Platform Fees'}
-					</div>
-					<div className={styles.supplier}>
-						{type === 'sell' ? 'Customer : ' : 'Service Provider : '}
-						<div className={styles.name}>
-							mayank yadav
-						</div>
-
-					</div>
+				<div
+					className={styles.heading}
+					style={{ '--span': 2 }}
+				>
+					{startCase(serviceType) || 'Platform Fees'}
 				</div>
-				<div className={styles.flexEnd}>
-					<div className={styles.expectedContainer}>
-						Expected
-					</div>
-					<div className={styles.actualContainer}>
-						Actual
-					</div>
+				<div
+					className={styles.flex}
+				>
+					Expected
+				</div>
+				<div
+					className={styles.flex}
+				>
+					Actual
 				</div>
 			</div>
 			{(SHOWFULLDETAILS ? lineItems
