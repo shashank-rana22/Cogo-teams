@@ -24,10 +24,13 @@ const getStep0Controls = [
 			required: { value: true, message: 'Service Provider is required' },
 		},
 		params: {
-			account_type : 'service_provider',
-			status       : 'active',
-			kyc_status   : 'verified',
-			service      : ['fcl_freight'],
+			filters: {
+				account_type : 'service_provider',
+				status       : 'active',
+				kyc_status   : 'verified',
+				service      : ['fcl_freight'],
+			},
+
 		},
 	},
 	{
@@ -57,10 +60,12 @@ const getStep0Controls = [
 			required: { value: true, message: 'Service Provider is required' },
 		},
 		params: {
-			account_type : 'service_provider',
-			status       : 'active',
-			kyc_status   : 'verified',
-			service      : ['fcl_freight_local_agent'],
+			filters: {
+				account_type : 'service_provider',
+				status       : 'active',
+				kyc_status   : 'verified',
+				service      : ['fcl_freight_local_agent'],
+			},
 		},
 	},
 ];

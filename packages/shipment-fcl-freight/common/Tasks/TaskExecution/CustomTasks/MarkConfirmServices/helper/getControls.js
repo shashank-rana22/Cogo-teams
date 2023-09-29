@@ -28,9 +28,12 @@ const service_provider = {
 	placeholder    : 'Select Service Provider',
 	rules          : { required: 'Service Provider is Required' },
 	params         : {
-		account_type : 'service_provider',
-		status       : 'active',
-		kyc_status   : 'verified',
+		filters: {
+			account_type : 'service_provider',
+			status       : 'active',
+			kyc_status   : 'verified',
+		},
+
 	},
 };
 
@@ -90,8 +93,8 @@ const getControls = ({
 		|| service_rendered?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider?.id
 		|| '';
 
-	service_provider.params = {
-		...service_provider.params,
+	service_provider.params.filters = {
+		...service_provider?.params?.filters || {},
 		service: SERVICE_TYPE_MAPPING[service_type],
 	};
 
