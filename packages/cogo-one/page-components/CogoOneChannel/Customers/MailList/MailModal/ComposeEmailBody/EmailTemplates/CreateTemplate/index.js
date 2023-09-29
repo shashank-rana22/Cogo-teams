@@ -9,9 +9,7 @@ import useCreateEmailTemplate from '../../../../../../../../hooks/useCreateEmail
 import styles from './styles.module.css';
 
 function CreateTemplate({
-	templateTags = [],
 	setShowCreation = () => {},
-	setTemplateData = () => {},
 }) {
 	const {
 		control,
@@ -22,7 +20,7 @@ function CreateTemplate({
 	const {
 		createTemplate,
 		loading,
-	} = useCreateEmailTemplate({ templateTags, setShowCreation, setTemplateData });
+	} = useCreateEmailTemplate({ setShowCreation });
 
 	const onSubmit = (data) => {
 		createTemplate({ data });

@@ -117,9 +117,9 @@ export const SUBJECT_MAPPING = {
 		value         : 'quotation',
 		template_tags : ['quotation_rpa'],
 	},
-	others: {
+	custom: {
 		title         : 'Others',
-		value         : 'others',
-		template_tags : [],
+		value         : 'custom',
+		template_tags : ['custom_rpa'],
 	},
 };

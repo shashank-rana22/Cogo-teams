@@ -1,5 +1,5 @@
 import { Chips, Popover } from '@cogoport/components';
-import { IcMPlusInCircle } from '@cogoport/icons-react';
+import { IcMPlusInCircle, IcMRefresh } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import { SUBJECT_MAPPING } from '../../../../../../../constants/mailConstants';
@@ -7,32 +7,32 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../constants/viewTyp
 import useListCommunicationTemplates from '../../../../../../../hooks/useListCommunicationTemplates';
 
 import CreateTemplate from './CreateTemplate';
-import getTemplateChipOptions from './getTemplateChipOptions';
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
-import TemplateEditor from './TemplateEditor';
 
 function EmailTemplates({ mailProps = {} }) {
 	const {
 		emailState = {},
 		viewType = '',
+		setEmailState = () => {},
 	} = mailProps || {};
 
 	const [singleSelected, setSingleSelected] = useState('');
-	const [templateData, setTemplateData] = useState(null);
 	const [showCreation, setShowCreation] = useState(false);
 
 	const templateAddition = VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.permissions?.allow_adding_mail_template || false;
 
 	const {
-		data = {},
 		loading = false,
 		handleScroll = () => {},
+		templatesList = [],
+		handleRefresh = () => {},
 	} = useListCommunicationTemplates({
 		shouldTrigger : !!(emailState?.orgId),
-		tags          : SUBJECT_MAPPING?.[emailState?.customSubject?.activeTab]?.template_tags,
+		tags          : SUBJECT_MAPPING?.[emailState?.customSubject?.activeTab]?.template_tags || null,
+		templateAddition,
+		setEmailState,
 	});
-
-	const options = getTemplateChipOptions({ data });
 
 	return (
 		<div className={styles.container}>
@@ -45,17 +45,16 @@ function EmailTemplates({ mailProps = {} }) {
 				style={{ padding: templateAddition ? '0px 4px 0px 10px' : '0px 0px 0px 10px' }}
 				onScroll={handleScroll}
 			>
-				{loading ? 'Loading' : (
-					<Chips
-						items={options || []}
-						selectedItems={singleSelected}
-						onItemChange={setSingleSelected}
-					/>
-				)}
+				<Chips
+					items={templatesList || []}
+					selectedItems={singleSelected}
+					onItemChange={setSingleSelected}
+				/>
+				{loading ? <LoadingState /> : null}
 			</div>
 
 			{templateAddition ? (
-				<div className={styles.add_icon}>
+				<div className={styles.icons_container}>
 					<Popover
 						interactive
 						placement="left"
@@ -65,18 +64,17 @@ function EmailTemplates({ mailProps = {} }) {
 							<CreateTemplate
 								templateTags={SUBJECT_MAPPING?.[emailState?.customSubject?.activeTab]?.template_tags}
 								setShowCreation={setShowCreation}
-								setTemplateData={setTemplateData}
 							/>
 						) : null}
 					>
 						<IcMPlusInCircle
+							className={styles.add_icon}
 							onClick={() => setShowCreation((prev) => !prev)}
 						/>
 					</Popover>
+					<IcMRefresh className={styles.refresh_icon} onClick={handleRefresh} />
 				</div>
 			) : null}
-
-			<TemplateEditor templateData={templateData} setTemplateData={setTemplateData} />
 		</div>
 	);
 }

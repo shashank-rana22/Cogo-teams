@@ -1,6 +1,28 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import { SUBJECT_MAPPING } from '../constants/mailConstants';
+
+const getTemplatesOptions = () => Object.values(SUBJECT_MAPPING).reduce(
+	(acc, itm) => {
+		if (itm?.template_tags?.[GLOBAL_CONSTANTS.zeroth_index]) {
+			return [...acc, {
+				children : itm.value,
+				key      : itm?.template_tags?.[GLOBAL_CONSTANTS.zeroth_index],
+			}];
+		}
+		return acc;
+	},
+	[],
+);
+
 const CREATE_CONFIG_TEMPLATE = [
+	{
+		label       : 'Type',
+		name        : 'rpa_template_type',
+		controlType : 'chips',
+		value       : 'shipments_rpa',
+		options     : getTemplatesOptions(),
+	},
 	{
 		name        : 'name',
 		label       : 'Name',

@@ -115,9 +115,11 @@ export function getRecipientData({
 		org_id = '',
 	} = response || {};
 
-	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
-	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
-	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
+	const filteredRecipientData = recipientData?.filter(
+		(itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase(),
+	) || [];
+	const filteredCcData = ccData?.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase()) || [];
+	const filteredBccData = bccData?.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase()) || [];
 
 	const handleClick = ({
 		buttonType: newButtonType = '',

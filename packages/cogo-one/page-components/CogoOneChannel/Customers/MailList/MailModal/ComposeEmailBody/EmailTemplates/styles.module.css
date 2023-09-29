@@ -13,18 +13,37 @@
 }
 
 .templates_list {
+	display: flex;
 	flex-grow: 1;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
-.add_icon {
+.icons_container {
 	display: flex;
 	align-items: center;
 	padding: 0 6px;
 
-	svg {
-		width: 20px;
-		height: 20px;
-		cursor: pointer;
-		fill: #2f4d50;
+	>div {
+		display: flex;
+		align-items: center;
 	}
+}
+
+.add_icon {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	fill: #2f4d50;
+}
+
+.refresh_icon {
+	width: 16px;
+	height: 16px;
+	margin-left: 4px;
+	cursor: pointer;
+	fill: #2f4d50;
 }
