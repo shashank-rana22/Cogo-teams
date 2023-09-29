@@ -3,12 +3,15 @@ import currencies from '@cogoport/air-modules/helpers/currencies';
 import { startCase } from '@cogoport/utils';
 
 const COMMON_SHOW_SOURCE = ['task', 'overview', 'purchase', 'add_sell_price', 'charge_code'];
+const SPLIT_SERVICE_TEXT = 2;
 
 const controls = ({ serviceData = {}, source = '' }) => {
 	const UNIT_OPTIONS = [];
 	if (serviceData?.units) {
 		serviceData?.units?.forEach((unit) => { UNIT_OPTIONS.push({ label: startCase(unit), value: unit }); });
 	} else UNIT_OPTIONS.push({ label: startCase(serviceData?.unit), value: serviceData?.unit });
+
+	const serviceType = serviceData?.service_type?.split('_', SPLIT_SERVICE_TEXT).join('_');
 
 	const formControl = [
 		{
@@ -62,6 +65,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 				filters: {
 					account_type : 'service_provider',
 					kyc_status   : 'verified',
+					service      : serviceType,
 				},
 			},
 			show        : source === 'purchase',
