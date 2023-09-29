@@ -1,5 +1,6 @@
-import { Tooltip, Button } from '@cogoport/components';
+import { Tooltip, Button, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMCopy } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -60,6 +61,12 @@ function FieldPair({
 		}
 	};
 
+	const handleCopy = (val) => {
+		navigator.clipboard
+			.writeText(val)
+			.then(Toast.info('Copied Successfully !!', { autoClose: 1000 }));
+	};
+
 	return (
 		<div>
 			{field?.label === 'Invoice No.' && (
@@ -90,6 +97,10 @@ function FieldPair({
 					className={styled.sid_container}
 				>
 					<text className={styled.sid}>
+						<IcMCopy
+							onClick={() => handleCopy(jobNumber)}
+							className={styled.copy_icon}
+						/>
 						<Button themeType="linkUi" onClick={handleOnClick}>
 							{showOverflowingNumber(jobNumber, MAX_LEN_FOR_SID_TEXT)}
 

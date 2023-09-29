@@ -16,9 +16,9 @@ const useListStakeholders = ({ shipmentId = '' }) => {
 		},
 	}, { manual: true });
 
-	const apiTrigger = useCallback(async () => {
+	const apiTrigger = useCallback(() => {
 		try {
-			await trigger();
+			trigger();
 		} catch (err) {
 			toastApiError(err);
 		}
