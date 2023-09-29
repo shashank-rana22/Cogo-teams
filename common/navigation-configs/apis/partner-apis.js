@@ -12972,6 +12972,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'list_cogoone_group_members',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'update_cogoone_groups',
 			access_type  : 'private',
 			service_name : 'communication',

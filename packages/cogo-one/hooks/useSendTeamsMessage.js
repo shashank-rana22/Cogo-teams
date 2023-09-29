@@ -24,7 +24,7 @@ function useSendTeamsMessage({
 
 	const [, trigger] = useRequest(
 		{
-			url    : '/create_communication',
+			url    : '/create_communication_internal_chat',
 			method : 'post',
 		},
 		{ manual: true, autoCancel: false },

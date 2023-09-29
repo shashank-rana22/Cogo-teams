@@ -3,8 +3,8 @@ import { AsyncSelect } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import getCommonAgentType from '../../../../../../utils/getCommonAgentType';
-import UserCard from '../UserCard';
+import getCommonAgentType from '../../../../../../../utils/getCommonAgentType';
+import UserCard from '../../UserCard';
 
 import styles from './styles.module.css';
 

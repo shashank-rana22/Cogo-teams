@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 
 import { BUTTON_GROUP_OPTIONS } from '../../../../../constants/teamsHeaderMappings';
 
-import AddMembers from './AddMembers';
+import Members from './Members';
 import styles from './styles.module.css';
 import ToUser from './ToUsers';
 
@@ -62,12 +62,12 @@ function Header({
 			</div>
 			<div className={styles.buttons_flex}>
 				<ButtonGroup size="xs" options={BUTTON_GROUP_OPTIONS} />
-				{isGroup ? (
+				{!isGroup ? (
 					<Popover
 						placement="bottom"
 						visible={showPopover}
 						render={showPopover ? (
-							<AddMembers viewType={viewType} />
+							<Members viewType={viewType} />
 						) : null}
 					>
 						<Image
