@@ -64,10 +64,12 @@ function Card({
 				placeholder="Select Service Provider"
 				size="sm"
 				params={{
-					account_type : 'service_provider',
-					status       : 'active',
-					kyc_status   : 'verified',
-					service      : ['fcl_freight', 'fcl_freight_local_agent'],
+					filters: {
+						account_type : 'service_provider',
+						status       : 'active',
+						kyc_status   : 'verified',
+						service      : ['fcl_freight_local_agent'],
+					},
 				}}
 			/>
 
