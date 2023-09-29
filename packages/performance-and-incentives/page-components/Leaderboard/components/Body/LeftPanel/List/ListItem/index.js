@@ -1,9 +1,20 @@
-import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
+
+import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../../../../constants/leaderboard-reporttype-constants';
 
 import styles from './styles.module.css';
 import useListItem from './useListItem';
+
+const { AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
+
+const getClassName = ({ isAllowed, listItem = {}, currLevel = {} }) => `${styles.list_row} 
+			${listItem.rank === GLOBAL_CONSTANTS.one ? styles.box_shadow : ''} 
+			${isAllowed ? styles.hover : ''}
+			${(!isEmpty(currLevel.user?.id)
+				&& currLevel.report_type === AGENT_REPORT
+				&& currLevel.user?.id === listItem.user?.id) ? styles.selected_item : ''}`;
 
 function conditionalWrapper({ condition, title, wrapper, children }) {
 	return condition ? wrapper(children)
@@ -11,7 +22,7 @@ function conditionalWrapper({ condition, title, wrapper, children }) {
 }
 
 function ListItem(props) {
-	const { listItem, user } = props;
+	const { listItem, user, currLevel } = props;
 
 	const {
 		LIST_COLUMN_MAPPING,
@@ -22,13 +33,9 @@ function ListItem(props) {
 	return (
 		<div
 			role="presentation"
-			style={user.id === listItem.user?.id ? { background: '#faf8df' } : {}}
-			className={
-				cl`${styles.list_row} 
-				${listItem.rank === GLOBAL_CONSTANTS.one ? styles.box_shadow : ''} 
-				${isAllowed ? styles.hover : ''}`
-			}
 			onClick={handleClick}
+			className={getClassName({ isAllowed, listItem, currLevel })}
+			style={user.id === listItem.user?.id ? { background: '#faf8df' } : {}}
 		>
 			{LIST_COLUMN_MAPPING.map((columnItem) => {
 				const { key, flex, accessor } = columnItem;
