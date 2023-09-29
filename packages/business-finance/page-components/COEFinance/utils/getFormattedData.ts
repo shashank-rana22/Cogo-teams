@@ -16,31 +16,20 @@ const getFormattedData = (data:FormattedInterface) => {
 	const sellSevices = sellQuotation.serviceCharges?.map((item) => (item.serviceType || 'Platform Fees')) || [];
 	const buySevices = buyQuotation.serviceCharges?.map((item) => (item.serviceType || 'Platform Fees')) || [];
 	const commonServices = sellSevices.filter((value) => buySevices?.includes(value));
-
-	const buyQuotationData = buyQuotation.serviceCharges
-		?.map((item) => ({ ...item, serviceType: item.serviceType || '' }));
-
-	const uniqueServices = [...new Set(commonServices)];
-
-	const commonBuyData = uniqueServices?.map((service) => {
-		const filterData = buyQuotationData?.filter((item) => (item?.serviceType === service));
-		return filterData;
-	}).flat();
-
-	const remainingBuyData = buyQuotationData
-		?.filter((item) => (!uniqueServices?.includes(item?.serviceType))) || [];
-
-	const commonSellData = uniqueServices?.map((service) => {
-		const filterData = sellQuotationData?.filter((item) => (item?.serviceType === service));
-		return filterData;
-	}).flat();
-
-	const remainingSellData = sellQuotationData
-		?.filter((item) => (!uniqueServices?.includes(item?.serviceType))) || [];
-
+	const commonBuyData = buyQuotation.serviceCharges
+		?.filter((item) => (commonServices?.includes(item?.serviceType))) || [];
+	const remainingBuyData = buyQuotation.serviceCharges
+		?.filter((item) => (!commonServices?.includes(item?.serviceType))) || [];
+	const remainingSellData = 	sellQuotation.serviceCharges
+		?.filter((item) => (!commonServices?.includes(item?.serviceType))) || [];
+	const formattedSellData = commonBuyData?.map((items) => {
+		const { serviceType } = items;
+		const filterData = sellQuotationData?.filter((item) => (item.serviceType === serviceType)) || [];
+		return filterData[0];
+	});
 	return {
 		formattedBuyData  : [...commonBuyData, ...remainingBuyData],
-		sellQuotationData : [...commonSellData, ...remainingSellData],
+		sellQuotationData : [...formattedSellData, ...remainingSellData],
 	} || [];
 };
 export default getFormattedData;
