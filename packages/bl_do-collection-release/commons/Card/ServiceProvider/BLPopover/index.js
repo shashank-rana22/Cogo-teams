@@ -24,11 +24,15 @@ export default function BLPopver({ bl_do = '', blDoDetails = [] }) {
 				<div className={cl`${styles.text} ${styles.title}`}>Collected By</div>
 			</div>
 			{(blDoDetails || []).map((item) => {
-				const { collection_details, collection_mode = '-', bl_number = '-', do_number = '-' } = item || {};
+				const { collection_details, collection_mode = '-', bl_number = '-', do_number = '-', document } = item || {};
 				const { name = '-' } = collection_details || {};
+				const { document_url = ''} = document || {};
 				return (
 					<div className={cl`${styles.container} ${styles.card}`} key={bl_number}>
-						<div className={styles.item_content}>{bl_do === 'bl' ? bl_number : do_number}</div>
+						<div className={document_url ? cl`${styles.item_content} ${styles.underline}` : undefined} onClick={() => window.open(
+									document_url,
+									'_blank',
+								)}>{bl_do === 'bl' ? bl_number : do_number}</div>
 						<div className={styles.item_content}>
 							{COLLECTION_MODE[collection_mode]}
 						</div>
