@@ -5,9 +5,9 @@ import formatDateTime from '../utils/timezoneSpecificTime';
 
 const getPayload = ({ startDate = '', endDate = '' }) => ({
 	filters: {
-		startDate : formatDateTime({ date: startDate, dateformat: 'isoUtcDateTime' }),
-		endDate   : formatDateTime({ date: endDate, dateformat: 'isoUtcDateTime' }),
-		status    : ['active', 'in_meting', 'completed'],
+		validity_start_less_than    : formatDateTime({ date: startDate, dateformat: 'isoUtcDateTime' }),
+		validity_start_greater_than : formatDateTime({ date: endDate, dateformat: 'isoUtcDateTime' }),
+		status                      : ['active', 'in_meting', 'completed'],
 	},
 	page_limit_required: false,
 });
@@ -21,7 +21,7 @@ const useListCogooneSchedules = () => {
 	const getEvents = useCallback(async ({ startDate = '', endDate = '' }) => {
 		try {
 			const payload = getPayload({ startDate, endDate });
-			await trigger({ data: payload });
+			await trigger({ params: payload });
 		} catch (error) {
 			console.error(error);
 		}

@@ -1,7 +1,9 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPlusInCircle, IcMCancel } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { startCase } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import CreateEvent from './CreateEvent';
 import styles from './styles.module.css';
@@ -22,22 +24,38 @@ function Events({ addEvents = true, setAddEvents = () => {}, selectedEventData =
 		separator  : ',',
 	});
 
+	useEffect(() => {
+		setEventDetails((prevEventDetails) => ({
+			...prevEventDetails,
+			event_type: 'call_customer',
+		}));
+	}, [eventDetails?.category]);
+
 	return (
 		<>
-			<div className={styles.header}>
-				<div className={styles.title}>
-					Total Events
+			{addEvents ? (
+				<div className={styles.header}>
+					<div className={styles.title}>
+						Total Events
+					</div>
+					<div className={styles.count}>
+						123
+					</div>
 				</div>
-				<div className={styles.count}>
-					123
-				</div>
-			</div>
-			<div className={styles.container}>
+			) : null}
+
+			<div className={cl`${styles.container} ${!addEvents ? styles.cancel_events : styles.add_events}`}>
 				{addEvents ? (
 					<div className={styles.selectable_date}>
 						{date}
 					</div>
-				) : null}
+				) : (
+					<div className={styles.sedual_event}>
+						Schedule
+						{' '}
+						{startCase(eventDetails?.category)}
+					</div>
+				)}
 
 				{addEvents ? <UserEvents selectedEventData={selectedEventData} /> : (
 					<CreateEvent
@@ -51,7 +69,14 @@ function Events({ addEvents = true, setAddEvents = () => {}, selectedEventData =
 					<div
 						className={styles.text}
 						role="presentation"
-						onClick={() => setAddEvents((prev) => !prev)}
+						onClick={() => {
+							setEventDetails((prevEventDetails) => ({
+								...prevEventDetails,
+								category   : 'event',
+								event_type : 'call_customer',
+							}));
+							setAddEvents((prev) => !prev);
+						}}
 					>
 						{addEvents ? 'Add Events' : 'Cancel Event'}
 					</div>

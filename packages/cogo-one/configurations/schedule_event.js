@@ -1,34 +1,36 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const scheduleEvents = ({ orgId = '' }) => ({
+import SelectableAgentsUserCard from '../common/SelectableAgentsUserCard';
+
+const EVENTS_ROWS = 2;
+const MEETINGS_ROWS = 5;
+
+const scheduleEvents = ({ orgId = '', category = '' }) => ({
 	start_date: {
 		name        : 'start_date',
 		isClearable : true,
 		minDate     : new Date(),
 		placeholder : 'Start Date',
-		dateFormat  : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+		dateFormat  : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 	},
 	start_time: {
 		name       : 'start_time',
-		maxDate    : new Date(),
-		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm aaa'],
 	},
 	end_date: {
 		name        : 'end_date',
-		minDate     : new Date(),
 		placeholder : 'End Date',
-		dateFormat  : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+		minDate     : new Date(),
+		dateFormat  : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 	},
 	end_time: {
 		name       : 'end_time',
-		maxDate    : new Date(),
-		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm aaa'],
 	},
 	organization: {
 		label       : 'Select Customer',
 		name        : 'organization_id',
 		placeholder : 'Select here...',
-		controlType : 'asyncSelect',
 		isClearable : true,
 		valueKey    : 'id',
 		rules       : { required: 'customer is required' },
@@ -44,7 +46,6 @@ const scheduleEvents = ({ orgId = '' }) => ({
 	organization_user: {
 		name        : 'organization_user_id',
 		label       : 'Select POC',
-		controlType : 'asyncSelect',
 		placeholder : 'Select here...',
 		rules       : { required: 'poc is required' },
 		asyncKey    : 'list_organization_users',
@@ -56,21 +57,26 @@ const scheduleEvents = ({ orgId = '' }) => ({
 		},
 		initialCall: true,
 	},
-	participate_users: {
-		name        : 'participate_users',
-		label       : 'Select Participates',
-		controlType : 'asyncSelect',
+	participants_users: {
+		name        : 'participants_users',
+		label       : 'Select Participants',
 		placeholder : 'Select here...',
 		rules       : { required: 'Participates is required' },
-		asyncKey    : 'partner_users',
-		value       : [],
+		asyncKey    : 'list_chat_agents',
+		multiple    : true,
+		renderLabel : (item) => <SelectableAgentsUserCard item={item} />,
+	},
+	title: {
+		name        : 'title',
+		label       : 'Add Title',
+		placeholder : 'Add Title...',
+		rules       : { required: 'Title is required' },
 	},
 	remarks: {
 		name        : 'remarks',
 		label       : 'Remarks',
-		controlType : 'textarea',
 		placeholder : 'Enter Remarks...',
-		rows        : 2,
+		rows        : category === 'event' ? EVENTS_ROWS : MEETINGS_ROWS,
 		show        : true,
 		rules       : { required: 'remarks is required' },
 	},

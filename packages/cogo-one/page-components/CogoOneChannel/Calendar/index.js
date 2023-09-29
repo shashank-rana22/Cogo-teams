@@ -13,7 +13,7 @@ function Calendar() {
 			<div
 				className={styles.calender}
 				role="presentation"
-				onClick={() => setEventValendar(true)}
+				onClick={() => setEventValendar((prev) => !prev)}
 			>
 				<div className={styles.icon}>
 					<Image

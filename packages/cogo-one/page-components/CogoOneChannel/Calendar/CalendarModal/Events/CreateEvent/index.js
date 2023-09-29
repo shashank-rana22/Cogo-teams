@@ -5,11 +5,12 @@ import {
 	TextAreaController,
 	AsyncSelectController,
 	CheckboxController,
-	MultiselectController,
 	TimepickerController,
+	InputController,
 } from '@cogoport/forms';
 import { IcMCall, IcMShip, IcMSettings, IcMArrowNext } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import scheduleEvents from '../../../../../../configurations/schedule_event';
 import useCreateCogooneCalendar from '../../../../../../hooks/useCreateCogooneCalendar';
@@ -21,15 +22,15 @@ const TABS = ['event', 'meeting'];
 const EVENT_TYPES = [
 	{
 		key  : 'call_customer',
-		icon : <IcMCall width={10} height={10} />,
+		icon : <IcMCall width={12} height={12} />,
 	},
 	{
 		key  : 'send_quotation',
-		icon : <IcMShip width={10} height={10} />,
+		icon : <IcMShip width={12} height={12} />,
 	},
 	{
 		key  : 'others',
-		icon : <IcMSettings width={10} height={10} />,
+		icon : <IcMSettings width={12} height={12} />,
 	},
 ];
 
@@ -42,48 +43,60 @@ function CreateEvent({
 		handleSubmit,
 		watch,
 		formState : { errors = {} },
+		reset,
 	} = useForm({
 		defaultValues: {
 			start_date : new Date(),
 			end_date   : new Date(),
+			start_time : new Date(),
+			end_time   : new Date(),
 		},
 	});
-	const formValues = watch();
 
-	const { createEvent = () => {}, loading = false } = useCreateCogooneCalendar({ setEventDetails, eventDetails });
+	const formValues = watch();
+	const { category = '', event_type: eventType = '' } = eventDetails || {};
+	const { createEvent = () => {}, loading = false } = useCreateCogooneCalendar({
+		setEventDetails,
+		eventDetails,
+		reset,
+	});
 	const { organization_id = '' } = formValues || {};
-	const controls = scheduleEvents({ orgId: organization_id, category: eventDetails?.category });
+
+	const controls = scheduleEvents({ orgId: organization_id, category });
+
 	const {
 		start_date, start_time, end_date, end_time,
-		participate_users,
+		participants_users,
 		organization, organization_user, remarks, mark_important_event,
+		title,
 	} = controls;
-
-	const { category = '', event_type: eventType = '' } = eventDetails || {};
 
 	const handleEvents = (values) => {
 		createEvent(values);
 	};
 
+	useEffect(() => {
+		reset();
+	}, [category, reset]);
+
 	return (
 		<div className={styles.container}>
+			<div className={styles.tabs}>
+				{(TABS || []).map((itm) => (
+					<div
+						key={itm}
+						className={cl`${styles.tab} ${category === itm ? styles.active_tab : ''}`}
+						onClick={() => setEventDetails((prevEventDetails) => ({
+							...prevEventDetails,
+							category: itm,
+						}))}
+						role="presentation"
+					>
+						{startCase(itm)}
+					</div>
+				))}
+			</div>
 			<div className={styles.form}>
-				<div className={styles.tabs}>
-					{(TABS || []).map((itm) => (
-						<div
-							key={itm}
-							className={cl`${styles.tab} ${category === itm ? styles.active_tab : ''}`}
-							onClick={() => setEventDetails((prevEventDetails) => ({
-								...prevEventDetails,
-								category: itm,
-							}))}
-							role="presentation"
-						>
-							{startCase(itm)}
-						</div>
-					))}
-				</div>
-
 				{category === 'event' ? (
 					<>
 						<div className={styles.label}>Select Type of Event</div>
@@ -106,6 +119,19 @@ function CreateEvent({
 
 						</Tabs>
 					</>
+				) : null}
+
+				{category === 'meeting' ? (
+					<div className={styles.error_container}>
+						<div className={styles.label}>{title?.label}</div>
+						<InputController
+							{...title}
+							control={control}
+						/>
+						<div className={styles.error_text}>
+							{errors?.title?.message}
+						</div>
+					</div>
 				) : null}
 
 				<div className={styles.form_container}>
@@ -140,13 +166,13 @@ function CreateEvent({
 
 					{category === 'meeting' ? (
 						<div className={styles.error_container}>
-							<div className={styles.label}>{participate_users?.label}</div>
-							<MultiselectController
-								{...participate_users}
+							<div className={styles.label}>{participants_users?.label}</div>
+							<AsyncSelectController
+								{...participants_users}
 								control={control}
 							/>
 							<div className={styles.error_text}>
-								{errors?.participate_users?.message}
+								{errors?.participants_users?.message}
 							</div>
 						</div>
 					) : null}

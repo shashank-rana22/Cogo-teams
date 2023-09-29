@@ -9,6 +9,10 @@
 			border: none;
 		}
 
+		.rbc-btn-group {
+			display: none;
+		}
+
 		.rbc-month-row {
 			cursor: pointer;
 			border-right: 1px  solid #ddd;

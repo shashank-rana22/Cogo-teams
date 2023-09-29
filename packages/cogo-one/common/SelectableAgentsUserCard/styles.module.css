@@ -1,0 +1,44 @@
+.user_list_container {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_avatar_text {
+			background: none !important;
+		}
+
+		.ui_multiselect_option_item {
+			padding: 8px 0 !important;
+			margin-top: 20px;
+		}
+	}
+}
+
+.agent_label {
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.lower_label {
+	font-size: 12px;
+	color: #838080;
+}
+
+.over_text {
+	max-width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.styled_avatar {
+	margin-right: 6px;
+	background: #ffd761;
+	border-radius: 50% !important;
+}
+
+.child_wrapper {
+	width: calc(100% - 35px);
+}
