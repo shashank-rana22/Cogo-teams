@@ -24,14 +24,14 @@
 .hover {
 	&:hover {
 		cursor: pointer;
-		background: #fef199;
+		box-shadow:
+			0 2px 4px 0 rgb(252 220 0 / 40%),
+			0 -2px 4px 0 rgb(252 220 0 / 40%),
+			2px 0 4px 0 rgb(252 220 0 / 40%),
+			-2px 0 4px 0 rgb(252 220 0 / 40%);
 	}
 }
 
 .selected_item {
-	box-shadow:
-		0 2px 2px 0 rgb(252 220 0 / 40%),
-		0 -2px 2px 0 rgb(252 220 0 / 40%),
-		2px 0 2px 0 rgb(252 220 0 / 40%),
-		-2px 0 2px 0 rgb(252 220 0 / 40%);
+	background: #fef199;
 }
