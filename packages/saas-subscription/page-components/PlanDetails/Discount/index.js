@@ -10,8 +10,9 @@ import DiscountModal from './DiscountModal';
 import getItemFunction from './itemFunction';
 import styles from './styles.module.css';
 
-function Discount({ discounts = [], loading = false, setFeatureModal }) {
+function Discount({ planId = '', discounts = [], loading = false, setFeatureModal }) {
 	const { t } = useTranslation(['saasSubscription']);
+
 	const [discountModal, setDiscountModal] = useState({ open: false });
 
 	const discountConfig = getDiscountConfig({ t });
@@ -25,7 +26,7 @@ function Discount({ discounts = [], loading = false, setFeatureModal }) {
 
 				<Button
 					themeType="secondary"
-					onClick={() => setDiscountModal({ open: true, isCreate: true })}
+					onClick={() => setDiscountModal({ open: true, isCreate: true, planId })}
 				>
 					{t('saasSubscription:create')}
 				</Button>

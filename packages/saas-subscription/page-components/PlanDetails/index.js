@@ -52,9 +52,11 @@ function PlanDetails() {
 					</div>
 				))}
 			</div>
+
 			<div className={styles.cell}>
-				<Discount loading={loading} discounts={discounts} setFeatureModal={setFeatureModal} />
+				<Discount planId={plan?.id} loading={loading} discounts={discounts} setFeatureModal={setFeatureModal} />
 			</div>
+
 			<UpdateFeatureModal featureModal={featureModal} setFeatureModal={setFeatureModal} planId={plan?.id} />
 		</div>
 	);

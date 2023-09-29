@@ -1,8 +1,7 @@
 import { cl, Modal, Button, Pill } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
-import getDiscountControls from '../../../../configuration/discountControls';
 import usePlanDiscount from '../../../../hooks/usePlanDiscount';
 import { getFieldController } from '../../../../utils/getFieldController';
 
@@ -27,11 +26,11 @@ function DiscountModal({ discountModal, setDiscountModal, setFeatureModal }) {
 	const { t } = useTranslation(['saasSubscription']);
 
 	const { info, isCreate = false } = discountModal || {};
-	const { unit } = info || {};
 
-	const { loading, formHook, submitHandler } = usePlanDiscount({ discountModal, setFeatureModal, setDiscountModal });
-
-	const discountControls = getDiscountControls({ isCreate, unit, t });
+	const {
+		loading, formHook, submitHandler,
+		discountControls,
+	} = usePlanDiscount({ discountModal, setFeatureModal, setDiscountModal });
 
 	const { control, handleSubmit } = formHook;
 
@@ -46,14 +45,17 @@ function DiscountModal({ discountModal, setDiscountModal, setFeatureModal }) {
 			<div className={styles.modal_body}>
 				<div className={styles.form_container}>
 					{discountControls.map((config) => {
-						const { name, label, type, showEle = true } = config;
+						const { name, label, type, rules, showEle = true } = config;
 						const Element = getFieldController(type);
 
 						if (!showEle) return null;
 
 						return (
 							<div key={name} className={cl`${styles.col} ${styles[config.name]}`}>
-								<p>{label}</p>
+								<div className={styles.label_container}>
+									<p>{label}</p>
+									{isEmpty(rules) ? <p className={styles.opt_text}>(Optional)</p> : null}
+								</div>
 								<Element control={control} {...config} />
 							</div>
 						);

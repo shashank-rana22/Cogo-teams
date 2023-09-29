@@ -56,3 +56,14 @@
 		margin: 0;
 	}
 }
+
+.label_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.opt_text {
+	font-size: 10px;
+	color: #f68b21;
+}

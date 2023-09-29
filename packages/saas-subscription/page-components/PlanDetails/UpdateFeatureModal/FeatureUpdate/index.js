@@ -17,6 +17,7 @@ function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submit
 		handleSubmit,
 		getValues,
 		formState: { errors },
+		watch,
 	} = useForm({
 		defaultValues: defaultValue,
 	});
@@ -30,6 +31,7 @@ function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submit
 		append(appendValue);
 	};
 
+	console.log(watch(), 'watch()', name);
 	return (
 		<>
 			<div className={cl`${styles.container} ${styles.header}`}>
