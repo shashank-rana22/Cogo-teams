@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 
 import toastApiError from '../utils/toastApiError';
 
-const useUpdatePromotionRule = () => {
+const useUpdatePromotionRule = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/update_promotion_rule',
@@ -13,9 +13,8 @@ const useUpdatePromotionRule = () => {
 
 	const onUpdateAgentRule = async ({ data = {} }) => {
 		try {
-			await trigger({
-				data,
-			});
+			await trigger({ data });
+			refetch();
 		} catch (err) {
 			toastApiError(err);
 		}

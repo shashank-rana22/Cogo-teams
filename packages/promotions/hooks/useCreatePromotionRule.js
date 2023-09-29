@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 
 import toastApiError from '../utils/toastApiError';
 
-const useCreatePromotionRule = () => {
+const useCreatePromotionRule = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/create_promotion_rule',
@@ -13,9 +13,8 @@ const useCreatePromotionRule = () => {
 
 	const onSubmit = async ({ data = {} }) => {
 		try {
-			await trigger({
-				data,
-			});
+			await trigger({ data });
+			refetch();
 		} catch (err) {
 			toastApiError(err);
 		}

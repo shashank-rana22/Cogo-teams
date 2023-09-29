@@ -1,4 +1,4 @@
-const getShipmentCreateRuleData = (values) => {
+const getShipmentCreateRuleData = ({ values = {} }) => {
 	const { shipment_price_slab_config = [], ...restValues } = values || {};
 	const slab_details = shipment_price_slab_config?.map((slab) => ({
 		...slab,

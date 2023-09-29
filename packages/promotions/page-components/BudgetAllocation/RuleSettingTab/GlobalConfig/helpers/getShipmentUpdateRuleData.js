@@ -1,4 +1,4 @@
-const getShipmentUpdateRuleData = (values) => {
+const getShipmentUpdateRuleData = ({ values = {} }) => {
 	const {
 		id = '',
 		cogo_entity_id = '',

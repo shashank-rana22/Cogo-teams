@@ -1,4 +1,4 @@
-const getOrganizationCreateRuleData = (values) => {
+const getOrganizationCreateRuleData = ({ values = {} }) => {
 	const {
 		discount_limit_currency = '',
 		discount_limit_unit = '',

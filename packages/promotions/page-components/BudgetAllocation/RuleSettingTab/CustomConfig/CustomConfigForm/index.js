@@ -56,18 +56,10 @@ function CustomConfigForm({
 			}
 		} else if (data?.scope === 'organization') {
 			const dataMap = getOrganizationUpdateAgentRuleData(values);
-			await onUpdateAgentRule({
-				data: {
-					...dataMap,
-				},
-			});
+			await onUpdateAgentRule({ data: dataMap });
 		} else {
 			const dataMap = getShipmentAgentRuleData(values);
-			await onUpdateAgentRule({
-				data: {
-					...dataMap,
-				},
-			});
+			await onUpdateAgentRule({ data: dataMap });
 		}
 		refetchList();
 		setShowCustomConfigForm(false);

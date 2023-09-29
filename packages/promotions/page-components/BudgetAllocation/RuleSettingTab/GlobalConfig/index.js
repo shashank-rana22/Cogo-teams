@@ -2,20 +2,14 @@ import { Button, ButtonIcon } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import Layout from '../../../../common/Layout';
 import UpdateModal from '../../../../common/UpdateModal';
-import useCreatePromotionRule from '../../../../hooks/useCreatePromotionRule';
-import useUpdatePromotionRule from '../../../../hooks/useUpdatePromotionRule';
 
 import getControls from './controls/controls';
 import discountConfigControls from './controls/discountConfigControls';
 import shipmentConfigControls from './controls/shipmentConfigControls';
-import getOrganizationCreateRuleData from './helpers/getOrganizationCreateRuleData';
-import getOrganizationUpdateRuleData from './helpers/getOrganizationUpdateRuleData';
-import getShipmentCreateRuleData from './helpers/getShipmentCreateRuleData';
-import getShipmentUpdateRuleData from './helpers/getShipmentUpdateRuleData';
 import styles from './styles.module.css';
 
 const INCREMENT = 0.01;
@@ -23,90 +17,20 @@ const ZERO = 0;
 const ONE = 1;
 
 function GlobalConfig({
+	loading = {},
 	activeList = '',
-	activeService = '',
 	setShowAddRuleForm = () => {},
 	data = {},
 	setViewAndEditRuleId = () => {},
+	handleSubmitForm = () => {},
+	handleActivateRule = () => {},
+	showActivateModal = false,
+	setShowActivateModal = () => {},
 }) {
-	const [showActivateModal, setShowActivateModal] = useState(false);
 	const DEFAULT_VALUES = data === null ? {} : data;
 	const controls = getControls();
 	const discountControls = discountConfigControls({ disabledFrequency: false });
 	const shipmentControls = shipmentConfigControls();
-	const { onSubmit = () => {} } = useCreatePromotionRule();
-	const { onUpdateAgentRule = () => {} } = useUpdatePromotionRule();
-
-	const submitForm = async (values) => {
-		if (activeList !== 'active') {
-			setShowActivateModal(true);
-			return;
-		}
-		if (data === null) {
-			if (values?.scope === 'organization') {
-				const dataMap = getOrganizationCreateRuleData(values);
-				await onSubmit({
-					data: {
-						...dataMap,
-						primary_service: activeService,
-					},
-				});
-			} else {
-				const dataMap = getShipmentCreateRuleData(values);
-				await onSubmit({
-					data: {
-						...dataMap,
-						primary_service: activeService,
-					},
-				});
-			}
-		} else if (values?.scope === 'organization') {
-			const dataMap = getOrganizationUpdateRuleData(values);
-			await onUpdateAgentRule({
-				data: {
-					...dataMap,
-					primary_service: activeService,
-				},
-			});
-		} else {
-			const dataMap = getShipmentUpdateRuleData(values);
-			await onUpdateAgentRule({
-				data: {
-					...dataMap,
-					primary_service: activeService,
-				},
-			});
-		}
-
-		setShowAddRuleForm(false);
-		setViewAndEditRuleId(null);
-		setShowActivateModal(false);
-	};
-
-	const activateSubmit = async (values) => {
-		if (values?.scope === 'organization') {
-			const dataMap = getOrganizationUpdateRuleData(values);
-			await onUpdateAgentRule({
-				data: {
-					...dataMap,
-					primary_service : activeService,
-					status          : 'active',
-				},
-			});
-		} else {
-			const dataMap = getShipmentUpdateRuleData(values);
-			await onUpdateAgentRule({
-				data: {
-					...dataMap,
-					primary_service : activeService,
-					status          : 'active',
-				},
-			});
-		}
-		setShowAddRuleForm(false);
-		setViewAndEditRuleId(null);
-		setShowActivateModal(false);
-	};
 
 	DEFAULT_VALUES.category = 'business';
 	DEFAULT_VALUES.for_service = 'fcl_customs';
@@ -197,7 +121,8 @@ function GlobalConfig({
 					<Button
 						className={styles.btn}
 						size="md"
-						onClick={handleSubmit(submitForm)}
+						onClick={handleSubmit(handleSubmitForm)}
+						disabled={loading}
 					>
 						{activeList === 'active' ? 'SAVE' : 'Activate'}
 					</Button>
@@ -208,7 +133,7 @@ function GlobalConfig({
 					<UpdateModal
 						title="Are you sure you want to ACTIVATE this rule?"
 						onClose={() => { setShowActivateModal(false); }}
-						onClickYes={handleSubmit(activateSubmit)}
+						onClickYes={handleSubmit(handleActivateRule)}
 						show={showActivateModal}
 					/>
 				) : null}

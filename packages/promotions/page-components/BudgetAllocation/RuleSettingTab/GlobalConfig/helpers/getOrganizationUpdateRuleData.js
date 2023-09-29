@@ -1,4 +1,4 @@
-const getOrganizationUpdateRuleData = (values) => {
+const getOrganizationUpdateRuleData = ({ values = {} }) => {
 	const {
 		id = '',
 		cogo_entity_id = '',

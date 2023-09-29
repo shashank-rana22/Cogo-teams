@@ -11,30 +11,27 @@ const useListConvenienceRateConfigurations = ({ defaultFilters = {}, defaultPara
 	const [data, setData] = useState({});
 	const [filters, setFilters] = useState({});
 
-	const { activeList: status = '', activeService: service_type = '' } = defaultFilters || {};
+	const { activeList:status = '', activeService:service_type = '' } = defaultFilters || {};
 
 	const { page = 1, ...restFilters } = filters || {};
-	const [{ loading }, trigger] = useRequest(
-		{
-			url    : '/list_convenience_rate_configurations',
-			method : 'GET',
-			params : {
-				filters: {
-					service_type,
-					status,
-					...(defaultFilters || {}),
-					...restFilters,
-				},
-				page_limit               : PAGE_LIMIT,
-				sort_by                  : SORT_BY,
-				sort_type                : SORT_TYPE,
-				pagination_data_required : true,
-				page,
-				...(defaultParams || {}),
+	const [{ loading }, trigger] = useRequest({
+		url    : '/list_convenience_rate_configurations',
+		method : 'GET',
+		params : {
+			filters: {
+				service_type,
+				status,
+				...(defaultFilters || {}),
+				...restFilters,
 			},
+			page_limit               : PAGE_LIMIT,
+			sort_by                  : SORT_BY,
+			sort_type                : SORT_TYPE,
+			pagination_data_required : true,
+			page,
+			...(defaultParams || {}),
 		},
-		{ manual: true },
-	);
+	}, { manual: true });
 
 	const listConvenienceRate = useCallback(async () => {
 		try {
