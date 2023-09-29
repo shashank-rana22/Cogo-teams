@@ -1,13 +1,11 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const SERVICE_STATUS = ['active', 'inactive'];
-
 const getParams = ({ orgId = '' }) => ({
 	organization_id: orgId,
 });
 
-const useGetOrganizationServices = ({ orgId = '' }) => {
+const useGetOrganizationServices = ({ orgId = '', toggleState = false }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_organization_services',
 		method : 'get',
@@ -29,18 +27,11 @@ const useGetOrganizationServices = ({ orgId = '' }) => {
 
 	useEffect(() => {
 		getOrgService();
-	}, [getOrgService]);
-
-	const list = Object?.entries(data || {})
-		?.map(([key, val]) => ({
-			...val,
-			key,
-		}))
-		.filter((val) => (val?.key !== 'trailer_freight' && SERVICE_STATUS.includes(val?.status)));
+	}, [getOrgService, toggleState]);
 
 	return {
 		loading,
-		list,
+		data,
 	};
 };
 
