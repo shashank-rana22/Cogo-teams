@@ -1,21 +1,22 @@
 import { useRequest } from '@cogoport/request';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 const getPayload = ({ groupId = '' }) => ({
 	filters: {
 		cogoone_group_id : groupId,
 		status           : 'active',
 	},
-	page_limit: 100,
+	partner_data_required : true,
+	page_limit            : 100,
 });
 
-const useListCogooneGroupMembers = () => {
+const useListCogooneGroupMembers = ({ groupId = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_cogoone_group_members',
 		method : 'get',
 	}, { manual: true });
 
-	const fetchPartnerId = useCallback(({ groupId }) => {
+	const fetchPartnerId = useCallback(() => {
 		try {
 			trigger({
 				params: getPayload({ groupId }),
@@ -23,7 +24,11 @@ const useListCogooneGroupMembers = () => {
 		} catch (error) {
 			console.error('error', error);
 		}
-	}, [trigger]);
+	}, [groupId, trigger]);
+
+	useEffect(() => {
+		fetchPartnerId();
+	}, [fetchPartnerId]);
 
 	return {
 		loading,

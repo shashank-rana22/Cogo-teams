@@ -46,6 +46,7 @@ function CogoOne() {
 			channel_type,
 		} : {},
 	});
+
 	const [viewType, setViewType] = useState('');
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });

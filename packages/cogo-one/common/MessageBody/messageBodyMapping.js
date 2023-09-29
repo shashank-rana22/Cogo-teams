@@ -5,6 +5,7 @@ import { IcMUserAllocations, IcMEyeclose } from '@cogoport/icons-react';
 import whatsappTextFormatting from '../../helpers/whatsappTextFormatting';
 
 import CustomFileDiv from './CustomFileDiv';
+import MultiMediaMessage from './MultiMediaMessage';
 import Order from './Order';
 import styles from './styles.module.css';
 import UserActivityMessages from './UserActivityMessages';
@@ -171,4 +172,5 @@ export const MESSAGE_TYPE_WISE_MAPPING = {
 	event       : UserActivityMessages,
 	order       : Order,
 	default     : ShowMessage,
+	media       : MultiMediaMessage,
 };
