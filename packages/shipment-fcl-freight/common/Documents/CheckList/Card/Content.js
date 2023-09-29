@@ -64,7 +64,9 @@ function Content({
 	const isRestrictedImportBlDo = (uploadedItem?.document_type === 'bill_of_lading' && tradeType === 'import'
 	&& isEmpty(do_details) && activeStakeholder !== 'document_control_manager');
 
-	const { document_type, state } = uploadedItem;
+	const { document_type, state, document_url = '' } = uploadedItem;
+
+	const isBlHold = document_type === 'bill_of_lading' && isEmpty(document_url);
 
 	function GetUploadButton() {
 		if (showUploadText.length && canEditDocuments) {
@@ -198,6 +200,7 @@ function Content({
 									<Button
 										themeType="link"
 										onClick={() => handleView(uploadedItem?.document_url)}
+										disabled={isBlHold}
 									>
 										View
 									</Button>
