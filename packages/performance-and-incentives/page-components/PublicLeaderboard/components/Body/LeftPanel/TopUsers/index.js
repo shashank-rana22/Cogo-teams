@@ -1,3 +1,5 @@
+import { Tooltip } from '@cogoport/components';
+
 import Avatar from '../../../../common/Avatar';
 
 import styles from './styles.module.css';
@@ -7,6 +9,8 @@ const RANK_SIZE_MAPPING = {
 	2 : 'md',
 	3 : 'sm',
 };
+
+const VIEWS = ['owner_wise', 'manager_wise', 'kam_wise'];
 
 function TopUsers(props) {
 	const { topList, view } = props;
@@ -22,10 +26,18 @@ function TopUsers(props) {
 					<div key={id} className={styles.top_user_container}>
 						<Avatar user={user} size={size} rank={rank} />
 
-						<p className={styles.name}>
-							{['owner_wise', 'manager_wise', 'kam_wise'].includes(view)
-								? user?.name : name}
-						</p>
+						<Tooltip content={(
+							<p>
+								{VIEWS.includes(view)
+									? user?.name : name}
+							</p>
+						)}
+						>
+							<p className={styles.name}>
+								{VIEWS.includes(view)
+									? user?.name : name}
+							</p>
+						</Tooltip>
 
 						<div className={styles.bottom_panel}>
 							<span>{total_score}</span>

@@ -1,3 +1,7 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
+
 import LoadingState from '../../../../../common/LoadingState';
 
 import Block from './Block';
@@ -13,6 +17,18 @@ function RightPanel(props) {
 
 	if (loading) {
 		return <div className={styles.container}><LoadingState /></div>;
+	}
+
+	if (isEmpty(activityData)) {
+		return (
+			<Image
+				src={GLOBAL_CONSTANTS.image_url.empty_chart}
+				width={300}
+				height={300}
+				alt="Empty Chart"
+				className={styles.empty_img}
+			/>
+		);
 	}
 
 	return (
