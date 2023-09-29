@@ -34,9 +34,9 @@ function ProfileManager({
 
 	let audio = null;
 
-	const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL?.includes('https://api.cogoport.com/');
+	const isProdMode = process.env.NEXT_PUBLIC_REST_BASE_API_URL?.includes('https://api.cogoport.com/');
 
-	if (typeof window !== 'undefined' && !isDevMode) {
+	if (typeof window !== 'undefined' && isProdMode) {
 		const url = `${process.env.STATIC_ASSETS_URL}/mp3/notification.mp3`;
 
 		audio = new Audio(url.replace(GLOBAL_CONSTANTS.regex_patterns.static_url, '$1'));
