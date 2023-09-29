@@ -12,8 +12,6 @@ import styles from './styles.module.css';
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
-const OFFSET = 1;
-
 function LeaderboardFilters(props) {
 	const {
 		debounceQuery,
@@ -33,7 +31,7 @@ function LeaderboardFilters(props) {
 
 	const { incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
 
-	const { report_type: beforeLevel = '' } = levelStack[levelStack.length - OFFSET] || [];
+	const { report_type: beforeLevel = '' } = levelStack[GLOBAL_CONSTANTS.zeroth_index] || [];
 
 	const [backText] = beforeLevel.split('_') || [];
 
@@ -81,8 +79,8 @@ function LeaderboardFilters(props) {
 
 			<div className={styles.inner_container}>
 				<RefreshResults
-					loading={listLoading}
-					refetch={listRefetch}
+					listLoading={listLoading}
+					listRefetch={listRefetch}
 					refetchStats={refetchStats}
 					statsLoading={statsLoading}
 				/>

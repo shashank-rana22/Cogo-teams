@@ -22,7 +22,7 @@ const getLeftPanelHeading = ({ currLevel, entity, viewType, selfRoleData, levelS
 		}
 	}
 
-	const { report_type, user, location_name } = actualCurrLevel;
+	const { report_type, user, location_name, channel } = actualCurrLevel;
 
 	const { name: roleName = '' } = selfRoleData || {};
 
@@ -36,7 +36,11 @@ const getLeftPanelHeading = ({ currLevel, entity, viewType, selfRoleData, levelS
 				heading = getEntityNameById(entity);
 			} else if (report_type === OWNER_REPORT) {
 				if (isEmpty(user)) {
-					heading = `${startCase(location_name || '')} Team`;
+					if (location_name) {
+						heading = `${startCase(location_name || '')} Team`;
+					} else if (channel) {
+						heading = `${channel.toUpperCase()} Team`;
+					}
 				} else {
 					heading = `${name}'s Team`;
 				}
