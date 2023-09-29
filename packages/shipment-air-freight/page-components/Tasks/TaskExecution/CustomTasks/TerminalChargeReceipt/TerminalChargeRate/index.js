@@ -5,82 +5,52 @@ import {
 } from '@cogoport/forms';
 import { useState } from 'react';
 
-import useCreateShipmentAirCSRSheet from '../../../../../../hooks/useCreateShipmentAirCSRSheet';
-import useCreateShipmentAirFreightConsolidatedInvoice
-	from '../../../../../../hooks/useCreateShipmentAirFreightConsolidatedInvoice';
-import useUpdateShipmentAirFreightConsolidatedInvoice
-	from '../../../../../../hooks/useUpdateShipmentAirFreightConsolidatedInvoice';
+import useUpdateShipmentTerminalServiceTask from '../../../../../../hooks/useUpdateShipmentTerminalServiceTask';
 
-import ConfirmModal from './ConfirmModal';
+import ChargeInformations from './ChargeInformations';
 import styles from './styles.module.css';
 import getTerminalChargeRateControl from './terminalChargeRateControl';
-import useCreateShipmentAdditionalService from './useCreateShipmentAdditionalService';
 
 function TerminalChargeRate({
 	mainServicesData = {},
+	localServiceId = '',
 	refetch = () => {},
 	onCancel = () => {},
 	task_id = '',
-	shipmentData = {},
 	type = 'terminal',
 }) {
 	const [entityData, setEntityData] = useState({});
-	const [irnGenerated, setIRNGenerated] = useState(true);
+
 	const [collectionPartyData, setCollectionPartyData] = useState({});
 	const [sheetData, setSheetData] = useState({});
-	const [showConfirm, setShowConfirm] = useState(false);
+
+	const [terminalChargeState, setTerminalChargeState] = useState({ 0: 'create' });
 
 	const controls = getTerminalChargeRateControl({
-		type,
 		entityData,
 		setEntityData,
 		collectionPartyData,
 		setCollectionPartyData,
 	});
 
-	const { formState:{ errors }, control, handleSubmit } = useForm();
-
-	const { createShipmentAdditionalService } =	useCreateShipmentAdditionalService({
-		shipmentData,
-		setIRNGenerated,
-		setShowConfirm,
-	});
+	const { formState:{ errors }, control, handleSubmit, setValue } = useForm();
 
 	const {
-		createShipmentAirFreightConsolidatedInvoice,
-		loading, updateLoading,
-		data:invoiceData,
-	} = useCreateShipmentAirFreightConsolidatedInvoice({
+		updateShipmentTerminalServiceTask = () => {},
+		loading: terminalServiceLoading = false,
+	} = useUpdateShipmentTerminalServiceTask({
 		type,
-		sheetData,
+		task_id,
+		refetch,
 		mainServicesData,
+		localServiceId,
+		sheetData,
 		entityData,
 		collectionPartyData,
-		createShipmentAdditionalService,
 	});
-
-	const {
-		updateShipmentAirFreightConsolidatedInvoice = () => {},
-		loading: updateConsolidatedLoading,
-		updateLoading: taskUpdateLoading,
-	} = 	useUpdateShipmentAirFreightConsolidatedInvoice({ refetch, onCancel, task_id, invoiceData });
-
-	const { createShipmentAirCSRSheet = () => {}, csrCreateLoading = false } = useCreateShipmentAirCSRSheet({
-		mainServicesData,
-		setSheetData,
-	});
-
-	const handleCreateProforma = (values) => {
-		createShipmentAirFreightConsolidatedInvoice(values);
-	};
-
-	const handleIRNGeneration = () => {
-		updateShipmentAirFreightConsolidatedInvoice();
-	};
 
 	const handleUpload = (values) => {
-		setShowConfirm(true);
-		createShipmentAirCSRSheet(values);
+		updateShipmentTerminalServiceTask(values);
 	};
 
 	return (
@@ -90,32 +60,51 @@ function TerminalChargeRate({
 				control={control}
 				errors={errors}
 			/>
+			{(Object.keys(terminalChargeState)).map((i) => (
+				<div key={i}>
+					<ChargeInformations
+						index={Number(i)}
+						type={type}
+						sheetData={sheetData}
+						control={control}
+						errors={errors}
+						setValue={setValue}
+						setSheetData={setSheetData}
+						mainServicesData={mainServicesData}
+						terminalChargeState={terminalChargeState}
+						setTerminalChargeState={setTerminalChargeState}
+					/>
+				</div>
+			))}
+
+			<Button
+				size="sm"
+				themeType="secondary"
+				onClick={() => {
+					setTerminalChargeState((prev) => ({
+						...prev,
+						[[Object.keys(prev).length]]: 'create',
+					}));
+				}}
+				className={styles.add_button}
+			>
+				+ Add
+			</Button>
+
 			<div className={styles.button_container}>
+				<div style={{ margin: '0 10px 0 0' }}>
+					<Button onClick={onCancel} themeType="secondary" disabled={terminalServiceLoading}>
+						Cancel
+					</Button>
+				</div>
+
 				<Button
 					onClick={handleSubmit(handleUpload)}
-					disabled={loading || updateLoading || !irnGenerated}
+					disabled={terminalServiceLoading}
 				>
-					Create Proforma
-				</Button>
-				<Button
-					onClick={() => { handleIRNGeneration(); }}
-					disabled={irnGenerated || updateConsolidatedLoading || taskUpdateLoading}
-				>
-					IRN Generated
+					Submit
 				</Button>
 			</div>
-			{showConfirm ? (
-				<ConfirmModal
-					showConfirm={showConfirm}
-					setShowConfirm={setShowConfirm}
-					handleSubmit={handleSubmit}
-					handleCreateProforma={handleCreateProforma}
-					loading={loading}
-					updateLoading={updateLoading}
-					irnGenerated={irnGenerated}
-					csrCreateLoading={csrCreateLoading}
-				/>
-			) : null}
 		</div>
 
 	);

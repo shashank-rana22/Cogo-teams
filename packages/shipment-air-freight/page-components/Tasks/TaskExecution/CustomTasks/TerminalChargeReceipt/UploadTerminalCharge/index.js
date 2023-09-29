@@ -6,10 +6,15 @@ import {
 
 import useCreateShipmentAirCSRSheet from '../../../../../../hooks/useCreateShipmentAirCSRSheet';
 
+import styles from './styles.module.css';
 import UPLOAD_TERMINAL_CHARGE_CONTROL from './uploadTerminalChargeControl';
 
-function UploadTerminalCharge({ setTerminalChargeState = () => {}, mainServicesData = {}, setSheetData = () => {} }) {
+function UploadTerminalCharge({
+	index = 0, setTerminalChargeState = () => {},
+	mainServicesData = {}, setSheetData = () => {},
+}) {
 	const { createShipmentAirCSRSheet, csrCreateLoading = false } = useCreateShipmentAirCSRSheet({
+		index,
 		setTerminalChargeState,
 		mainServicesData,
 		setSheetData,
@@ -22,8 +27,7 @@ function UploadTerminalCharge({ setTerminalChargeState = () => {}, mainServicesD
 	};
 
 	return (
-		<div>
-			<div>Upload Terminal Charge Receipt </div>
+		<div className={styles.upload_layout_container}>
 			<Layout
 				fields={UPLOAD_TERMINAL_CHARGE_CONTROL}
 				control={control}
