@@ -53,7 +53,7 @@ function CardColumn({
 					isMobile ? styles.is_mobile : ''
 				}`}
 			>
-				{fields.filter((itm) => !itm.hideColumn).map((field) => {
+				{(fields || []).filter((itm) => !itm?.hideColumn).map((field) => {
 					const itemStyle = field.styles || {};
 					return (
 						<div
