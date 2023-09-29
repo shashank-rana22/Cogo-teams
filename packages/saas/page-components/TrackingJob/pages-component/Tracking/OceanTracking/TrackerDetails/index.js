@@ -3,7 +3,7 @@ import useGetContainerMilestones from '../../../../hooks/useGetContainerMileston
 import styles from './styles.module.css';
 import TrackingInfo from './TrackingInfo';
 
-function TrackerDetails({ id = null, trackingType }) {
+function TrackerDetails({ id = null, trackingType = 'ocean' }) {
 	const { loading, data, refetch } = useGetContainerMilestones({ id });
 
 	return (

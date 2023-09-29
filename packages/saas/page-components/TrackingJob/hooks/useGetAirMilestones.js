@@ -1,14 +1,13 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetAirMilestones = ({ id = null, trackingType }) => {
-	const SHIPMENT_DATA_URL = {
-		ocean : '/get_saas_container_subscription',
-		air   : '/get_saas_air_subscription',
-	};
+import toastApiError from '../utlis/toastApiError';
+
+const useGetAirMilestones = ({ id = null }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
-		url    : SHIPMENT_DATA_URL[trackingType],
+		url    : '/get_saas_air_subscription',
+
 	});
 
 	const getMilestones = useCallback(async () => {
@@ -17,7 +16,7 @@ const useGetAirMilestones = ({ id = null, trackingType }) => {
 				params: { id },
 			});
 		} catch (err) {
-			console.log(err);
+			toastApiError(err);
 		}
 	}, [id, trigger]);
 

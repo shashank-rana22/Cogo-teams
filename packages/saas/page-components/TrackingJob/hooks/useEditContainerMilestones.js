@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
+import toastApiError from '../utlis/toastApiError';
+
 const useEditContainerMilestones = ({ refetch }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
@@ -8,14 +10,18 @@ const useEditContainerMilestones = ({ refetch }) => {
 	});
 
 	const updateMilestoneData = async ({ id, values }) => {
-		await trigger({
-			data: {
-				saas_container_timeline_detail_id : id,
-				data                              : values,
-			},
-		});
-		refetch();
-		Toast.success('MileStone Updated Sucessfully!');
+		try {
+			await trigger({
+				data: {
+					saas_container_timeline_detail_id : id,
+					data                              : values,
+				},
+			});
+			refetch();
+			Toast.success('MileStone Updated Sucessfully!');
+		} catch (err) {
+			toastApiError(err);
+		}
 	};
 
 	return {

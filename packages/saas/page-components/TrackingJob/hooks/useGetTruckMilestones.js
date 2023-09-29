@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
+import toastApiError from '../utlis/toastApiError';
+
 const useGetTruckMilestones = ({ id = null }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
@@ -13,7 +15,7 @@ const useGetTruckMilestones = ({ id = null }) => {
 				params: { trip_id: id },
 			});
 		} catch (err) {
-			console.log(err);
+			toastApiError(err);
 		}
 	}, [id, trigger]);
 

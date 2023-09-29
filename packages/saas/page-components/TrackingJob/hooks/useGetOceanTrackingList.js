@@ -2,6 +2,8 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
+import toastApiError from '../utlis/toastApiError';
+
 const useGetOceanTrackingList = () => {
 	const [filters, setFilters] = useState({ page: 1, sort_by: 'updated_at', sort_type: 'desc' });
 	const [searchString, setSearchString] = useState('');
@@ -30,7 +32,7 @@ const useGetOceanTrackingList = () => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			toastApiError(err);
 		}
 	}, [filters, query, trigger, serialIdQuery]);
 
