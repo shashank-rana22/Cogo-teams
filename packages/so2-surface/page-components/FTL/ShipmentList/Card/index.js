@@ -13,6 +13,10 @@ import styles from './styles.module.css';
 const ICON_MAPPING = {
 	ftl_freight: { Icon: IcMFftl, text: 'FTL' },
 };
+
+const SHIPMENT_TYPES = {
+	ftl_freight: 'ftl',
+};
 const INVOICE_TYPES = ['purchase_invoice', 'proforma_invoice'];
 export default function Card({
 	item = {}, checkedRows = {}, setCheckedRows = () => {},
@@ -20,9 +24,14 @@ export default function Card({
 	isSelectable = false,
 }) {
 	const router = useRouter();
+	const { shipment_type = '' } = item || {};
 
 	const clickCard = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
+		let newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
+		if (shipment_type in SHIPMENT_TYPES) {
+			newUrl = `${window.location.origin}/v2/${router?.query?.partner_id}/booking/${
+				SHIPMENT_TYPES[shipment_type]}/${item?.id}`;
+		}
 
 		window.sessionStorage.setItem('prev_nav', newUrl);
 		window.location.href = newUrl;

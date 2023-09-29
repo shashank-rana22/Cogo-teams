@@ -14,7 +14,7 @@ function KebabContent({
 		<div className={styles.dialog_box}>
 			{commonActions ? (
 				<>
-					{editInvoicesVisiblity ? (
+					{editInvoicesVisiblity || true ? (
 						<div style={{ width: '100%' }}>
 							<ClickableDiv
 								className={styles.text}
