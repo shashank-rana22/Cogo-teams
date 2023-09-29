@@ -33,6 +33,7 @@ function ListData({
 }) {
 	const [serialId, setSerialId] = useState('');
 	const [showFilters, setShowFilters] = useState(false);
+	const [showAddRateModal, setShowAddRateModal] = useState(false);
 	const { statistics = {} } = statsData;
 	const { list = [] } = data;
 	const { dynamic_statistics = {} } = statsData;
@@ -103,33 +104,50 @@ function ListData({
 						style={{ marginTop: '10px' }}
 					/>
 				))}
-				{source === 'live_bookings' ? <LiveBookingsListCard />
-					: (
-						<div>
-							{(!isEmpty(list) && !listLoading) && (
-								<>
-									{(list || []).map((list_data) => (
-										<ListCard
-											data={list_data}
-											key={list_data?.id}
-											getListCoverage={getListCoverage}
-											filter={filter}
-											getStats={getStats}
-											source={source}
-										/>
-									))}
-									<div className={styles.pagination}>
-										<Pagination
-											type="table"
-											currentPage={page}
-											totalItems={dynamic_statistics[source] || statistics[filter?.status]}
-											pageSize={10}
-											onPageChange={(pageNumber) => { setPage(pageNumber); }}
-										/>
-									</div>
-								</>
-							)}
-							{(isEmpty(list) && !listLoading)
+				<div>
+					{(!isEmpty(list) && !listLoading) && (
+						<>
+							{(list || []).map((list_data) => (
+								<div key={list_data?.id}>
+
+									{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
+										? (
+											<LiveBookingsListCard
+												showAddRateModal={showAddRateModal}
+												setShowAddRateModal={setShowAddRateModal}
+												data={list_data}
+												getListCoverage={getListCoverage}
+												filter={filter}
+												getStats={getStats}
+												source={source}
+											/>
+										)
+										:											(
+											<ListCard
+												data={list_data}
+												key={list_data?.id}
+												getListCoverage={getListCoverage}
+												filter={filter}
+												getStats={getStats}
+												source={source}
+												showAddRateModal={showAddRateModal}
+												setShowAddRateModal={setShowAddRateModal}
+											/>
+										)}
+								</div>
+							))}
+							<div className={styles.pagination}>
+								<Pagination
+									type="table"
+									currentPage={page}
+									totalItems={dynamic_statistics[source] || statistics[filter?.status]}
+									pageSize={10}
+									onPageChange={(pageNumber) => { setPage(pageNumber); }}
+								/>
+							</div>
+						</>
+					)}
+					{(isEmpty(list) && !listLoading)
 						&& (
 							<EmptyState
 								height={220}
@@ -138,8 +156,8 @@ function ListData({
 								textSize="20px"
 							/>
 						)}
-						</div>
-					)}
+				</div>
+
 			</div>
 
 			{showFilters

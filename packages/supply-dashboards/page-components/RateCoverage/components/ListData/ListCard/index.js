@@ -13,7 +13,10 @@ import styles from './styles.module.css';
 
 const ITEM_LIST = ['container_size', 'container_type', 'commodity', 'weight_slabs'];
 
-function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats = () => {} }) {
+function ListCard({
+	data = {}, getListCoverage = () => {}, filter = {}, getStats = () => {}, showAddRateModal = false,
+	setShowAddRateModal = () => {},
+}) {
 	const { sources = [] } = data;
 	const service = filter?.service === 'air_freight' ? 'AIR' : 'FCL';
 
@@ -25,7 +28,6 @@ function ListCard({ data = {}, getListCoverage = () => {}, filter = {}, getStats
 	}));
 
 	const [showCloseModal, setShowCloseModal] = useState(false);
-	const [showAddRateModal, setShowAddRateModal] = useState(false);
 
 	const handleAddRate = () => {
 		setShowAddRateModal((prev) => !prev);

@@ -19,14 +19,14 @@ export const CARDS_MAPPING = {
 		status       : 'live_bookings',
 		showViewMore : true,
 	},
-	disliked_rates: {
+	rate_feedback: {
 		title        : 'Disliked Rates',
-		status       : 'disliked_rates',
+		status       : 'rate_feedback',
 		showViewMore : true,
 	},
-	missing_rates: {
+	rate_request: {
 		title        : 'Missing Rates',
-		status       : 'missing_rates',
+		status       : 'rate_request',
 		showViewMore : true,
 	},
 	critical_ports: {

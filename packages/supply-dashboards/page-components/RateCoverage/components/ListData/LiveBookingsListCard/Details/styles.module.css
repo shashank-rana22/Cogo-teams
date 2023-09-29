@@ -1,0 +1,28 @@
+.container {
+	width: 600px;
+}
+
+.pill {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.line {
+	height: 2px;
+	margin-top: 10px;
+	border: 1px #bdbdbd dashed;
+}
+
+.label {
+	color: #828282;
+}
+
+.value {
+	color: #221f20;
+}
+
+.content {
+	display: flex;
+	width: 300px;
+	padding: 6px;
+}

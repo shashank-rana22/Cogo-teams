@@ -1,20 +1,58 @@
-import { Pill, Tooltip, Button } from '@cogoport/components';
+import { Pill, Tooltip, Button, Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMFcl, IcMPortArrow } from '@cogoport/icons-react';
-import React, { useState } from 'react';
 
-import RevertModal from './RevertModal';
+import useGetShipment from '../../../hooks/useGetShipment';
+import AddRateModal from '../ListCard/AddRateModal';
+
+import ServiceDetails from './Details';
 import styles from './styles.module.css';
 
-function LiveBookingsListCard() {
-	const [modalState, setModalState] = useState({ data: {} });
+function LiveBookingsListCard({
+	showAddRateModal = false, setShowAddRateModal = () => {},
+	data = {}, filter = {}, getStats = () => {}, getListCoverage = () => {},
+	source,
+}) {
+	const {
+		created_at = '', updated_at = '', shipping_line = {},
+		serial_id = '', assigned_to = {}, container_type = '', container_size = '', commodity = '', source_id = '',
+	} = data || {};
+
+	const { data:shipmemnt_data, getShipment = () => {} } = useGetShipment({ source_id });
+
+	const handleDetailView = () => {
+		if (source === 'live_bookings') {
+			return getShipment();
+		}
+		return getListCoverage(null, source_id);
+	};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.head}>
-				<div>Booked On : 12 Aug 2023 </div>
-				<div>
-					Created At : 12 Aug 2023, 10:20AM
-				</div>
+				{updated_at && (
+					<div>
+						Booked On :
+						{' '}
+						{formatDate({
+							date       : updated_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+							formatType : 'date',
+						})}
+					</div>
+				)}
+				{created_at && (
+					<div>
+						Created At :
+						{' '}
+						{formatDate({
+							date       : created_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+							formatType : 'date',
+						})}
+					</div>
+				)}
 			</div>
 
 			<div className={styles.body}>
@@ -30,18 +68,24 @@ function LiveBookingsListCard() {
 					</div>
 					<div>
 						<Pill size="md" color="blue">
-							Shipping Line : Maersk
+							Shipping Line :
+							{' '}
+							{shipping_line?.short_name}
 						</Pill>
 					</div>
 				</div>
 				<div>
 					<Pill size="md" color="orange">
-						TID: 12345
+						TID:
+						{' '}
+						{serial_id}
 					</Pill>
 				</div>
 				<div>
 					<Pill size="md" color="blue">
-						Assigned to: Himanshu Gupta
+						Assigned to:
+						{' '}
+						{assigned_to?.name}
 					</Pill>
 				</div>
 			</div>
@@ -52,7 +96,7 @@ function LiveBookingsListCard() {
 						<Tooltip
 							content={(
 								<div>
-									1234
+									{data?.origin_port?.name || data?.origin_airport?.name}
 								</div>
 							)}
 							placement="top"
@@ -60,9 +104,11 @@ function LiveBookingsListCard() {
 							<p className={styles.port_name}>
 								<div className={styles.column}>
 									<p className={styles.port_code_color}>
-										CNSHA
+										&#40;
+										{data?.origin_port?.port_code || data?.origin_airport?.port_code}
+										&#41;
 									</p>
-									<p>Shanghai , China</p>
+									<p>{data?.origin_port?.name || data?.origin_airport?.name}</p>
 								</div>
 							</p>
 						</Tooltip>
@@ -70,7 +116,7 @@ function LiveBookingsListCard() {
 						<Tooltip
 							content={(
 								<div>
-									123
+									{data?.destination_port?.name || data?.destination_airport?.name}
 								</div>
 							)}
 							placement="top"
@@ -78,11 +124,11 @@ function LiveBookingsListCard() {
 							<p className={styles.port_name}>
 								<div className={styles.column}>
 									<p className={styles.port_code_color}>
-										(INNSA),
+										&#40;
+										{data?.destination_port?.port_code || data?.destination_airport?.port_code }
+										&#41;
 									</p>
-									<p>
-										Jawaharlal Nehru, India
-									</p>
+									<p>{data?.destination_port?.name || data?.destination_airport?.name}</p>
 								</div>
 							</p>
 						</Tooltip>
@@ -91,19 +137,52 @@ function LiveBookingsListCard() {
 				<div className={styles.vertical_line} />
 
 				<div className={styles.top_left_details}>
-					<div><Pill>40 ft HC</Pill></div>
-					<div><Pill>Standard (Dry)</Pill></div>
-					<div><Pill>White Goods</Pill></div>
+					<div>
+						<Pill>
+							{container_size}
+							{' '}
+							ft
+						</Pill>
+					</div>
+					<div><Pill>{container_type}</Pill></div>
+					<div><Pill>{commodity}</Pill></div>
 				</div>
 
 				<div className={styles.vertical_line} />
-
 				<div className={styles.top_left_details}>
-					<Button size="sm" style={{ marginRight: '10px' }} themeType="secondary">View Details</Button>
-					<Button size="sm" onClick={() => setModalState(!modalState)}>Add Rate</Button>
+					<Popover
+						placement="left"
+						size="md"
+						render={(
+							<ServiceDetails
+								shipmemnt_data={shipmemnt_data}
+								data={data}
+							/>
+						)}
+					>
+						<Button
+							size="sm"
+							style={{ marginRight: '10px' }}
+							themeType="secondary"
+							onClick={handleDetailView}
+						>
+							View Details
+						</Button>
+					</Popover>
+					<Button size="sm" onClick={() => setShowAddRateModal(!showAddRateModal)}>Add Rate</Button>
 				</div>
+
 			</div>
-			{modalState && <RevertModal modalState={modalState} setModalState={setModalState} />}
+			{showAddRateModal && (
+				<AddRateModal
+					showModal={showAddRateModal}
+					setShowModal={setShowAddRateModal}
+					filter={filter}
+					data={data}
+					getStats={getStats}
+					getListCoverage={getListCoverage}
+				/>
+			)}
 		</div>
 	);
 }

@@ -4892,6 +4892,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'air_freight_rate',
 		},
+		{
+			api          : 'list_haulage_freight_rate_jobs',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'list_fcl_customs_rate_jobs',
+			access_type  : 'private',
+			service_name : 'fcl_customs_rate',
+		},
+		{
+			api          : 'get_shipment',
+			access_type  : 'private',
+			service_name : 'bookings',
+		},
 	],
 	operations_dashboard: [
 		{

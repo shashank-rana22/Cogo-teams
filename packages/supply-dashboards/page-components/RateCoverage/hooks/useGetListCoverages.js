@@ -3,8 +3,10 @@ import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
 const API_NAME = {
-	fcl_freight : 'list_fcl_freight_rate_jobs',
-	air_freight : 'list_air_freight_rate_jobs',
+	fcl_freight     : 'list_fcl_freight_rate_jobs',
+	air_freight     : 'list_air_freight_rate_jobs',
+	haulage_freight : 'list_haulage_freight_rate_jobs',
+	fcl_customs     : 'list_fcl_customs_rate_jobs',
 };
 
 const FCL_PARAMS_MAPPING = {
@@ -34,7 +36,7 @@ const useGetListCoverage = () => {
 	const [filter, setFilter] = useState({
 		service           : 'fcl_freight',
 		status            : 'pending',
-		source,
+		source            : '',
 		releventToMeValue : true,
 		daily_stats       : true,
 		assign_to_id      : '',
@@ -42,12 +44,13 @@ const useGetListCoverage = () => {
 		value             : '',
 	});
 	const endPoint = API_NAME[filter?.service || 'fcl_freight'];
+
 	const [{ loading, data }, trigger] = useRequest({
 		url    : endPoint,
 		method : 'GET',
 	}, { manual: true });
 
-	const getListCoverage = useCallback(async (sid) => {
+	const getListCoverage = useCallback(async (sid, source_id) => {
 		const { assign_to_id, releventToMeValue, daily_stats, start_date, end_date, ...restFilters } = filter;
 
 		const FINAL_FILTERS = {};
@@ -82,6 +85,7 @@ const useGetListCoverage = () => {
 				params: {
 					filters: {
 						...FINAL_FILTERS,
+						id        : source_id || undefined,
 						serial_id : sid ? parseInt(sid, 10) : undefined,
 						source    : source || undefined,
 						user_id   : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,

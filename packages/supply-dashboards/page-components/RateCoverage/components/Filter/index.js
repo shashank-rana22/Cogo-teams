@@ -64,10 +64,10 @@ function Filter({
 			/>
 
 			<Modal.Body>
-				{(source === 'disliked_rates' || source === 'missing_rates')
+				{(source === 'rate_feedback' || source === 'rate_request')
 				&& (
 					<div className={styles.radio}>
-						{`Total ${source === 'disliked_rates' ? 'Disliked' : 'Missing'} Rates`}
+						{`Total ${source === 'rate_feedback' ? 'Disliked' : 'Missing'} Rates`}
 						<RadioGroup
 							options={filterOptions}
 							onChange={(val) => setFilter((prevFilters) => ({
@@ -130,7 +130,7 @@ function Filter({
 						/>
 					</div>
 				</div>
-				{(source === 'live_bookings' || source === 'disliked_rates' || source === 'missing_rates')
+				{(source === 'live_bookings' || source === 'rate_feedback' || source === 'rate_request')
 				&& (
 					<div className={styles.radio}>
 						<div style={{ marginTop: '20px' }}>Entity</div>
