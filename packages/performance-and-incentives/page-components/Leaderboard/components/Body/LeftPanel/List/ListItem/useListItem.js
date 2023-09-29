@@ -33,7 +33,7 @@ const useListItem = (props) => {
 		listItem = {}, user, viewType, currLevel, setCurrLevel, isChannel, levelStack, setLevelStack,
 	} = props;
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping();
+	const LIST_COLUMN_MAPPING = getListColumnMapping({ currLevel });
 
 	const isAllowed = !isEmpty(levelStack)
 		|| (user.id === listItem.user?.id && viewType !== AGENT) || viewType === ADMIN;

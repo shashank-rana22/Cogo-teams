@@ -19,7 +19,7 @@ function List(props) {
 
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping();
+	const LIST_COLUMN_MAPPING = getListColumnMapping({ currLevel });
 
 	if (listLoading) {
 		return <LoadingState />;
