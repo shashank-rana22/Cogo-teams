@@ -15,11 +15,12 @@ function RenderLabel({ label = '' }) {
 const useFeedbackControls = ({
 	watchCategory = '',
 	setAdditionalInfo = () => {},
+	setDefaultTypeId = () => {},
 }) => {
 	const categoryOptions = useGetAsyncTicketOptions({
 		...asyncTicketsCategory(),
 		params: {
-			Audience    : 'cogoport_user',
+			Audience    : 'cogoone_demand',
 			RequestType : 'feedback',
 		},
 	});
@@ -28,7 +29,7 @@ const useFeedbackControls = ({
 		...asyncFieldsTicketTypes(),
 		params: {
 			RequestType : 'feedback',
-			Audience    : 'cogoport_user',
+			Audience    : 'cogoone_demand',
 			Category    : watchCategory || undefined,
 		},
 	});
@@ -52,8 +53,11 @@ const useFeedbackControls = ({
 			placeholder    : 'Select Type',
 			isClearable    : true,
 			defaultOptions : true,
-			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
-			rules          : { required: true },
+			onChange       : (_, val) => {
+				setAdditionalInfo(val?.AdditionalInfo);
+				setDefaultTypeId(val?.ID);
+			},
+			rules: { required: true },
 		},
 		{
 			label          : <RenderLabel label="Describe Issue" />,
