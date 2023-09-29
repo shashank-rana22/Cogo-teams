@@ -28,7 +28,7 @@ function Card({ data = {} }) {
 			newUrl = `${window.location.origin}/v2/${router?.query?.partner_id}/booking/${
 				SHIPMENT_TYPES[shipment_type]}/${id}`;
 		}
-
+		newUrl = `${newUrl}?navigation=coe-shipment_surface`;
 		window.sessionStorage.setItem('prev_nav', newUrl);
 		window.location.href = newUrl;
 	};
