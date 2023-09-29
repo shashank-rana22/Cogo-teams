@@ -3,7 +3,6 @@ import {
 	IcMSearchdark,
 	IcMDocument,
 	IcMShip,
-	IcMTicket,
 	IcMProfile,
 	IcMServices,
 	IcMCrossInCircle,
@@ -93,12 +92,6 @@ const iconMapping = ({ expandSideBar = false }) => [
 			width={20}
 			height={20}
 		/>,
-	},
-	{
-		name    : 'tickets',
-		content : 'Tickets',
-		icon    : <IcMTicket width={22} height={22} />,
-
 	},
 	{
 		name    : 'spot_search',

@@ -1002,10 +1002,21 @@ function asyncListOverSeasTradeParties() {
 		valueKey     : 'organizationId',
 		labelKey     : 'organizationName',
 		endpoint     : '/purchase/bills/list-overseas-trade-parties',
-		authkey      : 'list-overseas-trade-parties',
+		authkey      : 'get_purchase_bills_list_overseas_trade_parties',
 		initialCall  : false,
 		microService : 'business_finance',
 		searchByq    : true,
+	};
+}
+
+function asyncListEnrichmentSources() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/list_enrichment_sources',
+		authkey      : 'get_enrichment_sources',
+		microService : 'athena',
+		initialCall  : true,
 	};
 }
 
@@ -1091,4 +1102,5 @@ export {
 	asyncListFclFreightCommodityClusters,
 	asyncListSpotSearchRateCardOperators,
 	asyncListOverSeasTradeParties,
+	asyncListEnrichmentSources,
 };

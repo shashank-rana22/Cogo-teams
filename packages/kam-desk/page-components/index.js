@@ -1,4 +1,5 @@
 import { dynamic } from '@cogoport/next';
+import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useState, useMemo } from 'react';
 
 import KamDeskContext from '../context/KamDeskContext';
@@ -42,6 +43,7 @@ function KamDesk() {
 
 	return (
 		<KamDeskContext.Provider value={contextValues}>
+			<ShipmentChat />
 			{shipmentType ? <RenderDesk activeTab={activeTab} /> : null}
 		</KamDeskContext.Provider>
 	);

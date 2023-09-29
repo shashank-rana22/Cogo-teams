@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import { where } from 'firebase/firestore';
 
 import { getShipmentSpecialistButtons } from '../../../helpers/viewTypeFunctions';
@@ -5,8 +6,10 @@ import { COGOVERSE_AGENT_MAPPINGS } from '../../../utils/getViewTypeFromWorkPref
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SHIPMENT_SPECIALIST_ADMIN = {
-	chat_tabs_to_be_shown         : ['message', 'voice', 'firebase_emails'],
-	all_chats_base_query          : ({ agentId }) => [where('support_agent_id', '==', agentId)],
+	chat_tabs_to_be_shown : ['message', 'voice', 'firebase_emails'],
+	all_chats_base_query  : ({ userSharedEmails, agentId }) => (isEmpty(userSharedEmails)
+		? [where('support_agent_id', '==', agentId)]
+		: [where('source', 'in', userSharedEmails)]),
 	group_chats_query             : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 	session_type_query            : () => [where('session_type', '==', 'admin')],
 	chat_sub_tabs_access          : ['all', 'teams', 'groups', 'hidden_filter'],
@@ -48,6 +51,7 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : true,
 		hide_personal_mail                          : true,
+		show_rm_agent_details                       : false,
 	},
 };
 
