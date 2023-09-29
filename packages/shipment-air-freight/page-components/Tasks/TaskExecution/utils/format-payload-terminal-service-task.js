@@ -97,8 +97,8 @@ const getPayload = ({
 		invoice_type_line_item : taskType === 'terminal' ? 'thc' : 'gic',
 		service_id             : localServiceId,
 		pending_task_id        : task_id,
-		name                   : 'Terminal HandlingCharges',
-		code                   : 'THC',
+		name                   : taskType === 'terminal' ? 'Terminal HandlingCharges' : 'Gatepass Charges',
+		code                   : taskType === 'terminal' ? 'THC' : 'GIC',
 	};
 	return payload;
 };

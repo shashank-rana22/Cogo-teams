@@ -1,7 +1,7 @@
-const UPLOAD_TERMINAL_CHARGE_CONTROL = [
+const uploadTerminalChargeControl = ({ type = 'terminal' }) => ([
 	{
 		name       : 'terminal_charge_document',
-		label      : 'Terminal Charge Receipt',
+		label      : `${type === 'terminal' ? 'Terminal' : 'Gatepass'} Charge Receipt`,
 		type       : 'file',
 		drag       : true,
 		span       : 6,
@@ -12,6 +12,5 @@ const UPLOAD_TERMINAL_CHARGE_CONTROL = [
 			required: true,
 		},
 	},
-
-];
-export default UPLOAD_TERMINAL_CHARGE_CONTROL;
+]);
+export default uploadTerminalChargeControl;

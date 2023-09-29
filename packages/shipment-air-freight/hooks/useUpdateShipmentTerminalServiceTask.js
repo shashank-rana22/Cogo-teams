@@ -7,6 +7,7 @@ function useUpdateShipmentTerminalServiceTask({
 	type = 'terminal',
 	task_id = '',
 	refetch = () => {},
+	onCancel = () => {},
 	localServiceId = '',
 	mainServicesData = {},
 	sheetData = {},
@@ -35,6 +36,7 @@ function useUpdateShipmentTerminalServiceTask({
 				data: additionalServicePayload,
 			});
 			refetch();
+			onCancel();
 		} catch (err) {
 			toastApiError(err);
 		}
