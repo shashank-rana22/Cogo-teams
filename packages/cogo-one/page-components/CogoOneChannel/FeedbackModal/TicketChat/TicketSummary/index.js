@@ -45,6 +45,7 @@ function TicketSummary({
 		Priority: priority = '',
 		Source: source = '',
 		Data: data = {},
+		IsUrgent: isUrgent = false,
 	} = ticket || {};
 
 	const { t } = useTranslation(['myTickets']);
@@ -79,9 +80,13 @@ function TicketSummary({
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.title}>Care Summary</div>
-				<div className={cl`${styles.priority} ${styles[PRIORITY_LABEL_MAPPING[priority]]}`}>
-					{startCase(`${priority} ${t('myTickets:priority')}`)}
-				</div>
+				{isUrgent
+					?	<div className={styles.critical}>Critical</div>
+					: (
+						<div className={cl`${styles.priority} ${styles[PRIORITY_LABEL_MAPPING[priority]]}`}>
+							{startCase(`${priority} ${t('myTickets:priority')}`)}
+						</div>
+					)}
 			</div>
 			<div className={styles.ticket_body}>
 				<div className={styles.ticket_header}>
