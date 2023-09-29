@@ -40,7 +40,13 @@ function Header(props) {
 		}));
 	};
 
-	const HEADING = getLeftPanelHeading({ currLevel, entity, viewType: incentive_leaderboard_viewtype, selfRoleData });
+	const HEADING = getLeftPanelHeading({
+		currLevel,
+		entity,
+		viewType: incentive_leaderboard_viewtype,
+		selfRoleData,
+		levelStack,
+	});
 
 	return (
 		<>

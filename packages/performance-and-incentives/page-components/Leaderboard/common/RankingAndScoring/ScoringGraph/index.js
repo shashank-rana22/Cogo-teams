@@ -11,7 +11,7 @@ function ScoringGraph(props) {
 
 	const graphData = getFormattedGraphData(scoringGraphData);
 
-	if (isEmpty(graphData?.data)) {
+	if (isEmpty(graphData[GLOBAL_CONSTANTS.zeroth_index]?.data)) {
 		return (
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.empty_chart}

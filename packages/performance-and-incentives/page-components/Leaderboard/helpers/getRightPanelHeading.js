@@ -31,14 +31,20 @@ const getRightPanelHeading = ({ currLevel, entity, viewType }) => {
 			}
 			break;
 		case OWNER:
-			if (report_type === OWNER_REPORT || report_type === MANAGER_REPORT) {
+			if (report_type === OWNER_REPORT) {
 				heading = 'Your Team';
-			} else {
+			} else if (report_type === MANAGER_REPORT) {
 				heading = `${name}'s Team`;
+			} else {
+				heading = user.name;
 			}
 			break;
 		case MANAGER:
-			heading = 'Your Team';
+			if (report_type === MANAGER_REPORT) {
+				heading = 'Your Team';
+			} else {
+				heading = user.name;
+			}
 			break;
 		default:
 			heading = 'Your Activity';
