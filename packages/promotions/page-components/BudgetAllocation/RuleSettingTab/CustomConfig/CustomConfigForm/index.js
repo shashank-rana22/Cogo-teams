@@ -30,8 +30,8 @@ function CustomConfigForm({
 	const controls = getControls({ cogo_entity_id: data?.cogo_entity_id });
 	const discountControls = discountConfigControls({ disabledFrequency: true });
 	const shipmentControls = shipmentConfigControls();
-	const { onSubmit = () => {} } = useCreatePromotionAgentRule();
-	const { onUpdateAgentRule = () => {} } = useUpdatePromotionAgentRule();
+	const { loading = {}, onSubmit = () => {} } = useCreatePromotionAgentRule();
+	const { loading: updateAgentRuleLoading = {}, onUpdateAgentRule = () => {} } = useUpdatePromotionAgentRule();
 
 	const submitForm = async (values) => {
 		if (viewAndEditConfigData === null) {
@@ -173,6 +173,7 @@ function CustomConfigForm({
 						className={styles.btn}
 						size="md"
 						onClick={handleSubmit(submitForm)}
+						disabled={loading || updateAgentRuleLoading}
 					>
 						SAVE
 					</Button>
