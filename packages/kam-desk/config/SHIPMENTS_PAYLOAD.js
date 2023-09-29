@@ -17,39 +17,24 @@ const scheduleArrivalToday = { schedule_arrival_less_than: TODAY };
 
 export const CRITICAL_TABS = {
 	fcl_freight: {
-		export: {
+		export_import: {
 			mark_confirmed           : scheduleDepartureInThreeDays,
 			upload_booking_note      : scheduleDepartureInThreeDays,
 			update_container_details : scheduleDepartureInThreeDays,
+			confirm_with_shipper     : scheduleDepartureInThreeDays,
 			list_task_pending        : scheduleDepartureYesterday,
 			document_approval        : scheduleDepartureTomorrow,
 			vessel_departed          : scheduleArrivalToday,
 			vessel_arrived           : { detention_days: 2 },
 		},
-		import: {
-			mark_confirmed        : scheduleDepartureInThreeDays,
-			verify_shipper        : scheduleDepartureInThreeDays,
-			upload_shipping_order : scheduleDepartureInThreeDays,
-			list_task_pending     : scheduleDepartureYesterday,
-			document_approval     : scheduleDepartureTomorrow,
-			vessel_departed       : scheduleArrivalToday,
-			vessel_arrived        : { detention_days: 2 },
-		},
 	},
 	lcl_freight: {
-		export: {
+		export_import: {
 			confirm_booking      : scheduleDepartureInThreeDays,
 			list_task_pending    : scheduleDepartureYesterday,
 			upload_carting_order : scheduleDepartureInThreeDays,
-			document_approval    : scheduleDepartureTomorrow,
-			vessel_departed      : scheduleArrivalToday,
-			vessel_arrived       : { detention_days: 2 },
-		},
-		import: {
-			confirm_booking      : scheduleDepartureInThreeDays,
-			list_task_pending    : scheduleDepartureYesterday,
-			upload_carting_order : scheduleDepartureInThreeDays,
-			document_approval    : scheduleDepartureTomorrow,
+			bl_document_approval : scheduleDepartureTomorrow,
+			do_document_approval : scheduleDepartureTomorrow,
 			vessel_departed      : scheduleArrivalToday,
 			vessel_arrived       : { detention_days: 2 },
 		},
@@ -58,10 +43,17 @@ export const CRITICAL_TABS = {
 
 const tabPayload = {
 	fcl_freight: {
-		export: {
+		export_import: {
 			mark_confirmed: {
-				state           : ['shipment_received'],
-				task_attributes : [
+				state  : ['shipment_received'],
+				export : [
+					{
+						task                 : 'mark_confirmed',
+						status               : 'pending',
+						assigned_stakeholder : 'booking_agent',
+					},
+				],
+				import: [
 					{
 						task                 : 'mark_confirmed',
 						status               : 'pending',
@@ -70,7 +62,13 @@ const tabPayload = {
 				],
 			},
 			upload_booking_note: {
-				task_attributes: [
+				export: [
+					{
+						task   : 'upload_booking_note',
+						status : 'pending',
+					},
+				],
+				import: [
 					{
 						task   : 'upload_booking_note',
 						status : 'pending',
@@ -78,7 +76,7 @@ const tabPayload = {
 				],
 			},
 			update_container_details: {
-				task_attributes: [
+				export: [
 					{
 						task   : 'update_container_details',
 						status : 'pending',
@@ -86,79 +84,47 @@ const tabPayload = {
 				],
 			},
 			list_task_pending: {
-				task_attributes: [
+				export: [
+					{
+						task   : ['upload_packing_list', 'upload_si', 'upload_invoice'],
+						status : 'pending',
+					},
+				],
+				import: [
 					{
 						task   : ['upload_packing_list', 'upload_si', 'upload_invoice'],
 						status : 'pending',
 					},
 				],
 			},
-			document_approval: {
-				state               : 'in_progress',
-				bl_approval_pending : true,
-			},
-			vessel_departed: {
-				state         : 'in_progress',
-				service_state : 'vessel_departed',
-			},
-			vessel_arrived: {
-				state         : 'in_progress',
-				service_state : 'vessel_arrived',
-			},
-			completed : { state: 'completed' },
-			cancelled : { state: 'cancelled' },
-		},
-		import: {
-			mark_confirmed: {
-				state           : ['shipment_received'],
-				task_attributes : [
+			confirm_with_shipper: {
+				import: [
 					{
-						task                 : 'mark_confirmed',
-						status               : 'pending',
-						assigned_stakeholder : 'booking_agent',
-					},
-				],
-			},
-			verify_shipper: {
-				state           : ['shipment_received'],
-				task_attributes : [
-					{
-						task                 : 'verify_shipper_details',
+						task                 : 'confirm_with_shipper',
 						status               : ['pending'],
 						assigned_stakeholder : 'origin_booking_agent',
 					},
 				],
 			},
-			upload_shipping_order: {
-				task_attributes: [
-					{
-						task   : 'upload_booking_note',
-						status : 'pending',
-					},
-				],
-			},
-			list_task_pending: {
-				task_attributes: [
-					{
-						task   : ['upload_packing_list', 'upload_si', 'upload_invoice'],
-						status : 'pending',
-					},
-				],
-			},
 			document_approval: {
+				state               : ['in_progress', 'confirmed_by_importer_exporter'],
 				bl_approval_pending : true,
-				state               : 'in_progress',
+
 			},
 			vessel_departed: {
-				service_state : 'vessel_departed',
 				state         : 'in_progress',
+				service_state : 'vessel_departed',
 			},
 			vessel_arrived: {
-				service_state : 'vessel_arrived',
 				state         : 'in_progress',
+				service_state : 'vessel_arrived',
 			},
-			completed : { trade_type: 'import', state: 'completed' },
-			cancelled : { trade_type: 'import', state: 'cancelled' },
+			completed: {
+				state: 'completed',
+			},
+			cancelled: {
+				state: 'cancelled',
+			},
 		},
 		fcl_customs: {
 			mark_confirmed: {
@@ -230,10 +196,17 @@ const tabPayload = {
 	},
 
 	lcl_freight: {
-		export: {
+		export_import: {
 			confirm_booking: {
-				state           : ['shipment_received'],
-				task_attributes : [
+				state  : ['shipment_received'],
+				export : [
+					{
+						task                 : 'confirm_booking',
+						status               : 'pending',
+						assigned_stakeholder : 'booking_agent',
+					},
+				],
+				import: [
 					{
 						task                 : 'confirm_booking',
 						status               : 'pending',
@@ -242,7 +215,13 @@ const tabPayload = {
 				],
 			},
 			list_task_pending: {
-				task_attributes: [
+				export: [
+					{
+						task   : ['upload_si', 'upload_invoice'],
+						status : 'pending',
+					},
+				],
+				import: [
 					{
 						task   : ['upload_si', 'upload_invoice'],
 						status : 'pending',
@@ -250,14 +229,20 @@ const tabPayload = {
 				],
 			},
 			upload_carting_order: {
-				task_attributes: [
+				export: [
+					{
+						task   : 'upload_carting_order',
+						status : 'pending',
+					},
+				],
+				import: [
 					{
 						task   : 'upload_carting_order',
 						status : 'pending',
 					},
 				],
 			},
-			document_approval: {
+			bl_document_approval: {
 				state               : 'in_progress',
 				bl_approval_pending : true,
 			},
@@ -269,50 +254,12 @@ const tabPayload = {
 				state         : 'in_progress',
 				service_state : 'vessel_arrived',
 			},
-			completed : { state: 'completed' },
-			cancelled : { state: 'cancelled' },
-		},
-		import: {
-			confirm_booking: {
-				state           : ['shipment_received'],
-				task_attributes : [
-					{
-						task                 : 'confirm_booking',
-						status               : 'pending',
-						assigned_stakeholder : 'booking_agent',
-					},
-				],
+			completed: {
+				state: 'completed',
 			},
-			list_task_pending: {
-				task_attributes: [
-					{
-						task   : ['upload_si', 'upload_invoice'],
-						status : 'pending',
-					},
-				],
+			cancelled: {
+				state: 'cancelled',
 			},
-			upload_carting_order: {
-				task_attributes: [
-					{
-						task   : 'upload_carting_order',
-						status : 'pending',
-					},
-				],
-			},
-			document_approval: {
-				state               : 'in_progress',
-				do_approval_pending : true,
-			},
-			vessel_departed: {
-				state         : 'in_progress',
-				service_state : 'vessel_departed',
-			},
-			vessel_arrived: {
-				state         : 'in_progress',
-				service_state : 'vessel_arrived',
-			},
-			completed : { state: 'completed' },
-			cancelled : { state: 'cancelled' },
 		},
 		lcl_customs: {
 			mark_confirmed: {
@@ -535,6 +482,13 @@ const tabPayload = {
 			invoice_approved    : { invoice_status: 'approved' },
 			completed           : { state: 'completed' },
 			cancelled           : { state: 'cancelled' },
+		},
+		haulage_freight: {
+			ongoing: {
+				state: ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
+			},
+			completed : { state: 'completed' },
+			cancelled : { state: 'cancelled' },
 		},
 	},
 

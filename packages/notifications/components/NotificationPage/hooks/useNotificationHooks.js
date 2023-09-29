@@ -17,7 +17,6 @@ const useNotificationHooks = () => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/recent_notification',
 		method : 'GET',
-		// { encodeParams: false},
 		params : {
 			record_per_page: 10,
 		},

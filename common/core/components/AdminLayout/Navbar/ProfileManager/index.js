@@ -1,46 +1,74 @@
 // import logout from '@cogoport/authentication/utils/getLogout';
+import { Toast } from '@cogoport/components';
 import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
+import getStaticPath from '@cogoport/notifications/utils/getStaticPath';
 import { useTranslation } from 'next-i18next';
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import useGetAllActions from '../../../../hooks/useGetAllActions';
 import useRemoveUserSessions from '../../../../hooks/useRemoveUserSessions';
 
+import useGetUnreadMessagesCount from './helpers/useGetUnreadMessageCount';
 import Items from './Items';
 import styles from './styles.module.css';
 
+const ZERO = 0;
+
 function ProfileManager({
-	resetSubnavs,
+	resetSubnavs = false,
 	setOpenPopover = () => {},
-	openPopover,
-	timeLeft,
+	openPopover = false,
+	notificationPopover = false,
+	setNotificationPopover = () => {},
+	timeLeft = '',
 	refetch = () => {},
-	loading,
-	checkIfSessionExpiring,
+	loading = false,
+	checkIfSessionExpiring = false,
+	userId = '',
+	firestore = {},
+	mobileShow = false,
 }) {
 	const router = useRouter();
-	const { t } = useTranslation(['common']);
-	const { general } = useSelector((state) => state);
-	const { scope } = general;
+	const { t } = useTranslation(['common', 'notifications']);
 
-	const [notificationPopover, setNotificationPopover] = useState(false);
+	let audio = null;
 
-	const [{ data }, trigger] = useRequest({
-		url    : '/list_communications',
-		method : 'get',
-		params : {
-			data_required                  : true,
-			not_seen_count_required        : true,
-			pagination_data_required       : true,
-			page                           : 1,
-			communication_content_required : true,
-			filters                        : { type: 'platform_notification' },
-		},
-		scope,
-	}, { manual: false });
+	if (typeof window !== 'undefined') {
+		audio = new Audio(getStaticPath('/mp3/notification.mp3'));
+	}
+
+	const { unReadChatsCount = 0 } = useGetUnreadMessagesCount({
+		firestore,
+		userId,
+	});
+
+	const [currentNotSeen, setCurrentNotSeen] = useState(unReadChatsCount);
+
+	useEffect(() => {
+		try {
+			if (Notification && Notification.permission !== 'granted') {
+				Notification.requestPermission();
+			}
+		} catch (err) {
+			Toast.default(err, { hideAfter: 3 });
+		}
+	}, []);
+
+	useEffect(() => {
+		try {
+			if (unReadChatsCount < currentNotSeen) {
+				setCurrentNotSeen(unReadChatsCount);
+			}
+
+			if (audio && unReadChatsCount > currentNotSeen && unReadChatsCount !== ZERO) {
+				audio.play();
+				setCurrentNotSeen(unReadChatsCount);
+			}
+		} catch (err) {
+			Toast.error(err, { hideAfter: 3 });
+		}
+	}, [audio, unReadChatsCount, currentNotSeen, t]);
 
 	const routerFunction = () => {
 		router.push('/my-profile');
@@ -84,10 +112,6 @@ function ProfileManager({
 
 	];
 
-	useEffect(() => {
-		trigger();
-	}, [trigger]);
-
 	return (
 		<ul className={styles.list_container}>
 			<Items
@@ -101,7 +125,8 @@ function ProfileManager({
 				openPopover={openPopover}
 				notificationPopover={notificationPopover}
 				setNotificationPopover={setNotificationPopover}
-				notificationCount={data?.is_not_seen_count}
+				notificationCount={unReadChatsCount}
+				mobileShow={mobileShow}
 			/>
 		</ul>
 	);

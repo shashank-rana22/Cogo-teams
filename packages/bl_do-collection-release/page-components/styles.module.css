@@ -75,6 +75,7 @@
 }
 
 .header_text {
+	flex-basis: 84%;
 	margin-bottom: 12px;
 	font-size: 20px;
 	font-weight: 600;
@@ -84,5 +85,4 @@
 .header_container {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 }

@@ -1,4 +1,4 @@
-const TABWISE_FILTERS = ({ activeTab }) => {
+const tabwiseFilters = ({ activeTab }) => {
 	const mapping = {
 		in_progress: {
 			state: [
@@ -21,7 +21,7 @@ const TABWISE_FILTERS = ({ activeTab }) => {
 const CRITICAL_TABS = {};
 
 const cfsMapping = {
-	TABWISE_FILTERS,
+	tabwiseFilters,
 	CRITICAL_TABS,
 };
 

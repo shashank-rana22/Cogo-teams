@@ -19,19 +19,24 @@ export const STATE_INVOICE_CONFIG = {
 	},
 	fields: [
 		{
+			label : 'Name',
+			key   : 'name',
+			span  : 3,
+		},
+		{
 			label : 'Job Number',
 			key   : 'jobNumber',
-			span  : 4,
+			span  : 3,
 		},
 		{
 			label : 'Bill Number',
 			key   : 'billNumber',
-			span  : 4,
+			span  : 3,
 		},
 		{
 			label : 'State',
 			key   : 'state',
-			span  : 4,
+			span  : 3,
 		},
 	],
 };

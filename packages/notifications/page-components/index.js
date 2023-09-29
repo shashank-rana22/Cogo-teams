@@ -6,68 +6,12 @@ import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import NotificationsPage from '../components/NotificationPage';
+import extractNavLinks from '../helpers/extractNavLinks';
+import notificationsRedirectLink from '../helpers/notificationsRedirectLink';
 import showErrorsInToast from '../utils/showErrorsInToast';
 
 const ZERO_COUNT = 0;
 const INITIAL_PAGE = 1;
-
-const extractNavLinks = (obj) => {
-	const NAV_LINKS = [];
-
-	Object.values(obj).forEach((item) => {
-		NAV_LINKS.push(item.href);
-
-		if (item?.options) {
-			item?.options.forEach((option) => NAV_LINKS.push(option?.href));
-		}
-	});
-
-	return NAV_LINKS.filter((item) => item);
-};
-
-const notificationRedirect = ({ link, push, partner_id, NAVIGATION_LINKS }) => {
-	let isVersionTwo = false;
-	let redirectLink = null;
-
-	const isLinkValid = link?.startsWith('/');
-
-	const splittedLink = link.split('/');
-
-	NAVIGATION_LINKS.forEach((href) => {
-		if (redirectLink) return;
-
-		isVersionTwo = href.includes('/v2/');
-
-		let tempHref = href;
-		if (isVersionTwo) {
-			tempHref = tempHref.replace('/v2/', '/');
-		}
-
-		const splittedHref = tempHref.split('/');
-
-		const isLinkMatched = splittedHref.every((hrefItem, index) => {
-			if (hrefItem.startsWith('[')) return true;
-
-			return hrefItem === splittedLink[index];
-		});
-
-		if (!isLinkMatched) return;
-
-		redirectLink = isLinkValid ? link : `/${link}`;
-	});
-
-	if (!redirectLink) {
-		redirectLink = isLinkValid ? link : `/${link}`;
-		window.location.href = `https://admin.cogoport.com/${partner_id}${redirectLink}`;
-		return;
-	}
-
-	if (isVersionTwo) {
-		push(redirectLink);
-	} else {
-		window.location.href = `https://admin.cogoport.com/${partner_id}${redirectLink}`;
-	}
-};
 
 function Notifications() {
 	const { push } = useRouter();
@@ -141,12 +85,12 @@ function Notifications() {
 	};
 
 	const onMarkAllAsRead = () => {
-		updateAction('clicked');
+		updateAction('seen');
 	};
 
 	const handleNotificationClick = async (item) => {
 		if (item.is_rpa && item.content.redirect_url) {
-			notificationRedirect({ link: item.content.redirect_url, push, partner_id, NAVIGATION_LINKS });
+			notificationsRedirectLink({ link: item.content.redirect_url, push, partner_id, NAVIGATION_LINKS });
 
 			return;
 		}
@@ -167,7 +111,7 @@ function Notifications() {
 			}
 
 			if (item?.content?.link) {
-				notificationRedirect({ link: item?.content?.link, push, partner_id, NAVIGATION_LINKS });
+				notificationsRedirectLink({ link: item?.content?.link, push, partner_id, NAVIGATION_LINKS });
 				return;
 			}
 
@@ -178,7 +122,9 @@ function Notifications() {
 			setDisabled(false);
 		}
 	};
+
 	return (
+
 		<NotificationsPage
 			formattedData={formattedData}
 			onPageChange={setPage}
@@ -188,6 +134,7 @@ function Notifications() {
 			disabled={disabled}
 			setDisabled={setDisabled}
 		/>
+
 	);
 }
 export default Notifications;

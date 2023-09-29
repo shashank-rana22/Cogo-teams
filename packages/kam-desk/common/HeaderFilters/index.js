@@ -6,7 +6,10 @@ import KamDeskContext from '../../context/KamDeskContext';
 function HeaderFilters() {
 	const { scopeFilters = {} } = useContext(KamDeskContext);
 
-	return <ScopeSelect size="md" defaultValues={scopeFilters} />;
+	return (
+		<ScopeSelect size="md" defaultValues={scopeFilters} />
+
+	);
 }
 
 export default HeaderFilters;

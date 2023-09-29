@@ -9,7 +9,8 @@ export default {
 			code   : 'IDR',
 			symbol : 'Rp',
 		},
-		mobile_country_code: '+62',
+		mobile_country_code       : '+62',
+		invoice_allowed_languages : ['english'],
 	},
 	formats: {
 		amount: {
@@ -277,6 +278,9 @@ export default {
 		finops                    : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
 		cogo_one_kyc              : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
 		finance_branch_accounts   : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
+		service_ops3              : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
+		data_superadmin           : 'df340ea2-91b5-4cbc-80ab-d11cec21f040',
+		kam_admin                 : 'df6591f0-f41b-4283-9966-7d0225e1df00', // Kam Admin Vietnam
 	},
 	options: {
 		registration_types: [
@@ -543,7 +547,7 @@ export default {
 	others: {
 		registration_number: {
 			label      : 'NPWP',
-			pattern    : /^\d{13}$/,
+			pattern    : /^\d{15}|\d{16}$/,
 			max_length : 13,
 		},
 		banking_code: {
@@ -577,6 +581,9 @@ export default {
 						request_cancel_invoice  : false,
 						request_replace_invoice : false,
 						request_credit_note     : false,
+					},
+					pending_tasks: {
+						is_booking_agent_filter_required: true,
 					},
 				},
 				common: {

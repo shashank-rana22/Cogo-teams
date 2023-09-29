@@ -38,12 +38,6 @@ function AccountPayables() {
 	const entity = getDefaultEntityCode(partnerId);
 
 	const handleTabChange = (v) => {
-		if (
-			['payruns', 'invoices'].includes(v)
-		) {
-			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
-			return;
-		}
 		setActivePayables(v);
 		push(
 			'/business-finance/account-payables/[active_tab]',
@@ -98,7 +92,7 @@ function AccountPayables() {
 					<TabPanel name="dashboard" title="DASHBOARD">
 						<Dashboard activeEntity={activeEntity} />
 					</TabPanel>
-					<TabPanel name="invoices" title="INVOICES">
+					<TabPanel name="invoices" title="AUDITED INVOICES">
 						<Invoices activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="advance-payment" title="ADVANCE PAYMENT">

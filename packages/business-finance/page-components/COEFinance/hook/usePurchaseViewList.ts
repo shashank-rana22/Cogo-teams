@@ -14,15 +14,16 @@ interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 	sort: NestedObj;
-	subActiveTabReject?:string
-	jobNumber?:string
+	subActiveTabReject?: string;
+	jobNumber?: string;
+	previouslySearched?: string;
 }
 
 interface Profile {
 	profile?: { partner: { id: string } };
 }
 
-const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject, jobNumber }: Props) => {
+const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject, previouslySearched = '' }: Props) => {
 	const profile: Profile = useSelector((state) => state);
 
 	const entityCode = getEntityCode(profile?.profile?.partner?.id);
@@ -34,13 +35,16 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 		if (subActiveTabReject === 'coe_rejected') {
 			return 'COE_REJECTED';
 		}
+		if (subActiveTabReject === 'coe_on_hold') {
+			return 'ON_HOLD';
+		}
 		return 'ALL';
 	};
 
 	const [currentTab, setCurrentTab] = useState(getStatus());
 	const [tab, setTab] = useState('ALL');
 	const { debounceQuery, query } = useDebounceQuery();
-	const [searchValue, setSearchValue] = useState(jobNumber || '');
+	const [searchValue, setSearchValue] = useState(previouslySearched || '');
 
 	const showFilter = () => {
 		if (filters?.billType === 'PURCHASE') {
@@ -163,6 +167,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 		setTab,
 		setSearchValue,
 		searchValue,
+		refetch,
 	};
 };
 

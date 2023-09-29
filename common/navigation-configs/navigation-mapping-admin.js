@@ -896,8 +896,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'business_finance-cogo_book',
 					title         : t('common:cogo_books'),
-					href          : '/business-finance/cogo-book/[active_tab]/[view]',
-					as            : '/business-finance/cogo-book/accruals/dashboard',
+					href          : '/v2/business-finance/cogo-book/[active_tab]/[view]',
+					as            : '/v2/business-finance/cogo-book/accruals/dashboard',
 					type          : 'link',
 					main_apis     : [],
 					possible_apis : apis.cogo_book,
@@ -1322,8 +1322,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key       : 'coe-bl_do',
 					title     : t('common:authority_desk'),
-					href      : '/bl-do',
-					as        : '/bl-do',
+					href      : '/v2/bl-do',
+					as        : '/v2/bl-do',
 					type      : 'link',
 					main_apis : [
 						'list_authority_desk_bl_documents',
@@ -1403,7 +1403,9 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/kam-desk',
 					type          : 'link',
 					main_apis     : ['list_kam_desk_shipments'],
-					possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens, ...apis.shipment],
+					possible_apis : [...apis.kam_desk, ...apis.search,
+						...apis.cogolens, ...apis.shipment, ...apis.feedback,
+						...apis.sales_invoice, ...apis.cargo_insurance],
 				},
 				{
 					key           : 'coe-document_desk',
@@ -1929,6 +1931,16 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.ground_ops,
 			module_type   : 'dashboards',
 		},
+		ams_submission: {
+			key           : 'ams_submission',
+			title         : t('common:ams_submission'),
+			href          : '/v2/ams-submission',
+			as            : '/v2/ams-submission',
+			type          : 'link',
+			main_apis     : [],
+			possible_apis : apis.ams_submission,
+			module_type   : 'dashboards',
+		},
 		printing_desk: {
 			key           : 'printing_desk',
 			title         : t('common:printing_desk'),
@@ -2298,8 +2310,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'ihls-lead_data_pipeline',
 					title         : t('common:lead_enrichment_dashboard'),
-					href          : '/ihls/lead-data-pipeline',
-					as            : '/ihls/lead-data-pipeline',
+					href          : '/v2/ihls/lead-data-pipeline',
+					as            : '/v2/ihls/lead-data-pipeline',
 					type          : 'link',
 					possible_apis : [],
 					icon          : IcMDataPipeline,
@@ -2566,7 +2578,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/employee-dashboard',
 			type          : 'link',
 			icon          : IcMDashboard,
-			possible_apis : apis.employee_performance_dashboard,
+			possible_apis : [...apis.employee_performance_dashboard, ...apis.separation],
 			main_apis     : [],
 			module_type   : 'dashboards',
 		},
@@ -2645,7 +2657,10 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/attendance-leave-management',
 			type          : 'link',
 			module_type   : 'dashboards',
-			possible_apis : apis.attendance_leave_management,
+			possible_apis : [
+				...apis.attendance_leave_management,
+				...apis.separation,
+			],
 		},
 
 		profile: {
