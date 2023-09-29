@@ -9,9 +9,7 @@ function ServiceContent({ toggleState = false, list = [] }) {
 		<div className={styles.container}>
 			<div className={styles.column_name}>
 				<div className={styles.service}>Service Type</div>
-				{!toggleState
-					? <div className={styles.reasons}>Reason</div>
-					: <div className={styles.reasons}>Updated At</div> }
+				<div className={styles.reasons}>{!toggleState ? 'Reason' : 'Updated At'}</div>
 			</div>
 
 			{isEmpty(list) ? <div className={styles.empty_data}>No data </div> : (
@@ -22,21 +20,15 @@ function ServiceContent({ toggleState = false, list = [] }) {
 						return (
 							<div className={styles.each_row} key={`${key}_${status}`}>
 								<div className={styles.service}>{startCase(key)}</div>
-								{!toggleState ? (
-									<div className={styles.reasons}>
-										{rejection_reason || '-'}
-									</div>
-								) : (
-									<div className={styles.reasons}>
-										{
-									formatDate({
-										date       : updated_at,
-										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-										formatType : 'date',
-									})
-								}
-									</div>
-								)}
+								<div className={styles.reasons}>
+									{!toggleState
+										? rejection_reason || '-'
+										: formatDate({
+											date       : updated_at,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+											formatType : 'date',
+										})}
+								</div>
 							</div>
 						);
 					})}

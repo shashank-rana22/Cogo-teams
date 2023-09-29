@@ -1,5 +1,5 @@
 import { Placeholder, Toggle } from '@cogoport/components';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import useGetOrganizationServices from '../../../../../hooks/useGetOrganizationServices';
 
@@ -9,15 +9,18 @@ import styles from './styles.module.css';
 function AgentWiseServices({ orgId = '' }) {
 	const [toggleState, setToggleState] = useState(false);
 
-	const { data = {}, loading = false } = useGetOrganizationServices({ orgId, toggleState });
+	const { data = {}, loading = false } = useGetOrganizationServices({ orgId });
 
-	const list = Object?.entries(data || {})
-		?.map(([key, val]) => ({
-			...val,
-			key,
-		}))
-		.filter((val) => (val?.key !== 'trailer_freight'
-		&& !toggleState ? val?.status === 'inactive' : val?.status === 'active'));
+	const list = useMemo(
+		() => Object?.entries(data || {})
+			?.map(([key, val]) => ({
+				...val,
+				key,
+			}))
+			.filter((val) => (val?.key !== 'trailer_freight'
+		&& !toggleState ? val?.status === 'inactive' : val?.status === 'active')),
+		[data, toggleState],
+	);
 
 	return (
 		<>

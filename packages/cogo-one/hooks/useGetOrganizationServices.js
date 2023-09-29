@@ -5,7 +5,7 @@ const getParams = ({ orgId = '' }) => ({
 	organization_id: orgId,
 });
 
-const useGetOrganizationServices = ({ orgId = '', toggleState = false }) => {
+const useGetOrganizationServices = ({ orgId = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_organization_services',
 		method : 'get',
@@ -27,7 +27,7 @@ const useGetOrganizationServices = ({ orgId = '', toggleState = false }) => {
 
 	useEffect(() => {
 		getOrgService();
-	}, [getOrgService, toggleState]);
+	}, [getOrgService]);
 
 	return {
 		loading,
