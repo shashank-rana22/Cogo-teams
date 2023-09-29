@@ -1,6 +1,3 @@
-/* eslint-disable custom-eslint/variables-name-check */
-/* eslint-disable custom-eslint/function-name-check */
-
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import {
 	asyncFieldsOrganization, asyncFieldsOrganizationUsers, asyncFieldsOperators,
