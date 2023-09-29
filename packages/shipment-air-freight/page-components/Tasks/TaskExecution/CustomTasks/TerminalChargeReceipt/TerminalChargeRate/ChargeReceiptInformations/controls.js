@@ -1,7 +1,7 @@
 const controls = ({ index = 0 }) => [
 	{
 		name        : `csr_reference_number_${index}`,
-		label       : 'TC Invoice Number',
+		label       : 'Invoice Number',
 		type        : 'text',
 		placeholder : 'Type TC Invoice No',
 		span        : 6,
