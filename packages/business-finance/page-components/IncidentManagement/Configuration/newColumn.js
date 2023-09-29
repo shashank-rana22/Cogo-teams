@@ -137,9 +137,14 @@ function getColumns({
 			accessor : 'financeRemark',
 			id       : 'remark',
 			Cell     : ({ row: { original } }) => {
-				const { financeRemark = '', remark = '' } = original || {};
+				const { financeRemark = '', remark = '', type = '', data = {} } = original || {};
 				return (
-					<div className={styles.remark}>{financeRemark || remark}</div>
+					<div className={styles.remark}>
+						{type === 'JOB_OPEN'
+							? financeRemark || data?.jobOpenRequest?.remark || remark
+							: financeRemark || remark }
+
+					</div>
 				);
 			},
 		},
