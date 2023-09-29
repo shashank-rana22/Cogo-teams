@@ -5923,6 +5923,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'get_organization_restricted_settings_config',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'sales',
+		},
 	],
 	notifications: [
 		{
