@@ -60,6 +60,10 @@
 		.ui_select_container {
 			width: 220px;
 		}
+
+		.ui_tab_list_container {
+			height: 100%;
+		}
 	}
 }
 
@@ -70,6 +74,8 @@
 
 .style_radio {
 	flex-direction: column;
+	height: 300px;
+	overflow-y: scroll;
 }
 
 .style_filter_button {

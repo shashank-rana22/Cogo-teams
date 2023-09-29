@@ -8,11 +8,17 @@ import {
 } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMFilter } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { SERVICE_TYPE } from '../../constants/index.ts';
 
 import styles from './styles.module.css';
+
+const isDisabled = ({ filters = {} }) => (isEmpty(filters?.services)
+	&& isEmpty(filters?.invoiceDate)
+	&& isEmpty(filters?.dueDate)
+	&& isEmpty(filters?.currency));
 
 function Content({
 	clearFilter = () => {},
@@ -33,6 +39,7 @@ function Content({
 							<Button
 								themeType="secondary"
 								size="sm"
+								disabled={isDisabled({ filters })}
 								onClick={() => {
 									clearFilter();
 									refetch();
@@ -45,6 +52,7 @@ function Content({
 						<Button
 							themeType="primary"
 							size="sm"
+							disabled={isDisabled({ filters })}
 							onClick={() => {
 								setShow(false);
 								refetch(filters);

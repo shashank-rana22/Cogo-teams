@@ -1,12 +1,34 @@
-import { asyncFieldsPartnerRoles, asyncFieldsPartnerUsers, useGetAsyncOptions } from '@cogoport/forms';
+import {
+	asyncFieldsPartnerRoles,
+	asyncFieldsPartnerUsers,
+	useGetAsyncOptions,
+	useGetAsyncOptionsMicroservice,
+} from '@cogoport/forms';
 
-const ASYNC_OPTION_MAPPING = {
-	'partner-roles' : asyncFieldsPartnerRoles(),
-	'partner-users' : asyncFieldsPartnerUsers(),
-};
+export const useReassignTicketsControls = ({
+	t = () => {},
+	watchType = '',
+	setUserData = () => {},
+}) => {
+	const rolesOptions = useGetAsyncOptionsMicroservice({
+		...{
+			...asyncFieldsPartnerRoles(),
+			params: {
+				filters: {
+					entity_types: ['cogoport'],
+				},
+			},
+		},
+	});
 
-export const useReassignTicketsControls = ({ t, watchType, setUserData }) => {
-	const assignToOptions = useGetAsyncOptions({ ...ASYNC_OPTION_MAPPING[watchType] });
+	const usersOptions = useGetAsyncOptions({ ...asyncFieldsPartnerUsers() });
+
+	const ASYNC_OPTION_MAPPING = {
+		'partner-roles' : rolesOptions,
+		'partner-users' : usersOptions,
+	};
+
+	const assignToOptions = ASYNC_OPTION_MAPPING[watchType];
 
 	return [
 		{
