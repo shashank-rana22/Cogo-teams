@@ -1,4 +1,5 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format } from '@cogoport/utils';
 import React from 'react';
@@ -61,9 +62,9 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 		})),
 	}));
 
-	const data3 = [
+	const dataForGraph = [
 		{
-			id   : isCountView ? 'Count' : 'Amount',
+			id   : isCountView ? 'Periodic Count' : 'Periodic Amount',
 			data : bardata[0].data,
 		},
 		{
@@ -71,6 +72,12 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 			data : showData === 'lastThreeMonths' ? [] : bardata1[0].data,
 		},
 	];
+
+	if (showData === 'day' && dataForGraph?.[GLOBAL_CONSTANTS.zeroth_index]?.data?.length > 15) {
+		dataForGraph[GLOBAL_CONSTANTS.zeroth_index].data = dataForGraph[GLOBAL_CONSTANTS.zeroth_index]?.data
+			.filter((_, index) => index % 2 === 0);
+		dataForGraph[1].data = dataForGraph[1]?.data?.filter((_, index) => index % 2 === 0);
+	}
 
 	const DATA1 = [];
 	const DATA1OBJ = {};
@@ -153,7 +160,7 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 	return (
 		<div className={styles.line}>
 			<ResponsiveLine
-				data={showData === 'lastThreeMonths' ? lastThreeData : data3}
+				data={showData === 'lastThreeMonths' ? lastThreeData : dataForGraph}
 				margin={{ top: 50, right: 120, bottom: 50, left: 90 }}
 				xScale={{ type: 'point' }}
 				enableGridX={false}
@@ -177,7 +184,6 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 				axisBottom={{
 					tickSize       : 5,
 					tickPadding    : 10,
-					tickRotation   : showData === 'month' || showData === 'lastThreeMonths' ? 0 : 36,
 					legend         : showData === 'month' ? 'Month' : 'Date',
 					legendOffset   : 44,
 					legendPosition : 'middle',

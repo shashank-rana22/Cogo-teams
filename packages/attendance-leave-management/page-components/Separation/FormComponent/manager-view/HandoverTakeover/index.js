@@ -152,7 +152,7 @@ function HandoverTakeover({ data = {}, refetch = () => {} }) {
 				</div>
 			</div>
 
-			{!is_complete
+			{is_complete === false
 				? (
 					<div className={styles.button_container}>
 						<Button onClick={handleSubmit(() => setShowModal(true))}>

@@ -8,7 +8,6 @@ import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
 
-import AccessorComponent from './AccessorComponent';
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
@@ -16,10 +15,7 @@ export const requestColumn = ({
 	setIsAscendingActive,
 	setFilters,
 	isAscendingActive,
-	getIncidentData,
 	t,
-	detailsModal = {},
-	setDetailsModal = () => {},
 }) => [
 	{
 		Header   : t('incidentManagement:incident_id_header'),
@@ -44,8 +40,8 @@ export const requestColumn = ({
 			const getList = () => (list || [{}]).map(
 				(item: TooltipInterface) => item?.tradePartyName,
 			);
-			const bankTradePartyName =				data?.bankRequest && data?.organization?.tradePartyType;
-			const tdsTradePartyName =				data?.tdsRequest && data?.organization?.tradePartyType;
+			const bankTradePartyName = data?.bankRequest && data?.organization?.tradePartyType;
+			const tdsTradePartyName = data?.tdsRequest && data?.organization?.tradePartyType;
 			const BusinessName = (
 				<div>
 					{toTitleCase(
@@ -72,27 +68,27 @@ export const requestColumn = ({
 					<Tooltip
 						interactive
 						content={
-							bankTradePartyName || tdsTradePartyName ? (
-								<div>
-									{(organization?.tradePartyType === 'SELF'
-										? organization?.businessName
-										: organization?.tradePartyName)
-										|| toTitleCase(
-											organization?.businessName || '-',
-										)}
-								</div>
-							)
-								: BusinessName
-}
+								bankTradePartyName || tdsTradePartyName ? (
+									<div>
+										{(organization?.tradePartyType === 'SELF'
+											? organization?.businessName
+											: organization?.tradePartyName)
+											|| toTitleCase(
+												organization?.businessName || '-',
+											)}
+									</div>
+								)
+									: BusinessName
+							}
 					>
 						{bankTradePartyName || tdsTradePartyName ? (
 							<div className={styles.wrapper}>
 								{(organization?.tradePartyType === 'SELF'
 									? organization?.businessName
 									: organization?.tradePartyName)
-									|| toTitleCase(
-										organization?.businessName || '-',
-									)}
+										|| toTitleCase(
+											organization?.businessName || '-',
+										)}
 							</div>
 						) : (
 							<div className={styles.wrapper}>
@@ -128,10 +124,10 @@ export const requestColumn = ({
 				<div className={styles.credit}>
 					<span>
 						{requestType
-						=== 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? (
-							<span>
-								{t('incidentManagement:icjv_approval')}
-							</span>
+								=== 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? (
+									<span>
+										{t('incidentManagement:icjv_approval')}
+									</span>
 							) : (
 								toTitleCase(startCase(requestType || '-'))
 							)}
@@ -164,9 +160,9 @@ export const requestColumn = ({
 			return (
 				<Tooltip
 					interactive
-					content={(incidentSubtype.replace(/_/g, ' '))}
+					content={(incidentSubtype?.replace(/_/g, ' '))}
 				>
-					<div className={styles.wrapper}>{(incidentSubtype.replace(/_/g, ' '))}</div>
+					<div className={styles.wrapper}>{(incidentSubtype?.replace(/_/g, ' '))}</div>
 				</Tooltip>
 			);
 		},
@@ -198,14 +194,14 @@ export const requestColumn = ({
 					{formatDate({
 						date: createdAt,
 						dateFormat:
-							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						formatType: 'date',
 					})}
 					<div>
 						{formatDate({
 							date: createdAt,
 							timeFormat:
-								GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+									GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 							formatType: 'time',
 						})}
 					</div>
@@ -226,17 +222,6 @@ export const requestColumn = ({
 		),
 		id: 'status',
 	},
-	{
-		accessor: (row) => (
-			<AccessorComponent
-				row={row}
-				getIncidentData={getIncidentData}
-				detailsModal={detailsModal}
-				setDetailsModal={setDetailsModal}
-			/>
-		),
-		id: 'action',
-	},
 
 	{
 		Header   : '',
@@ -249,8 +234,8 @@ export const requestColumn = ({
 						{deadlineTag === 'RED' && (
 							<div
 								className={
-									deadlineTag === 'RED' && styles.ribbon_red
-								}
+										deadlineTag === 'RED' && styles.ribbon_red
+									}
 							>
 								{t('incidentManagement:urgent')}
 							</div>
@@ -258,9 +243,9 @@ export const requestColumn = ({
 						{deadlineTag === 'ORANGE' && (
 							<div
 								className={
-									deadlineTag === 'ORANGE'
-									&& styles.ribbon_orange
-								}
+										deadlineTag === 'ORANGE'
+										&& styles.ribbon_orange
+									}
 							>
 								{t('incidentManagement:urgent')}
 							</div>

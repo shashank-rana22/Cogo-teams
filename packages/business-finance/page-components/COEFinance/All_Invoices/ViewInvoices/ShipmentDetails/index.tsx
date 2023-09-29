@@ -7,7 +7,7 @@ import {
 	IcADocumentTemplates,
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
 import useGetDocumentContent from '../../../hook/useGetDocumentContent';
@@ -106,7 +106,6 @@ interface ShipmentDetailsInterface {
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
 	status: string;
 	jobType?:string;
-	billId?:string;
 	setCheckItem?: React.Dispatch<React.SetStateAction<{}>>,
 	lineItemsCheck?: boolean;
 	checkItem?: { shipmentDetailsCheck?: boolean,
@@ -115,10 +114,10 @@ interface ShipmentDetailsInterface {
 		sidDataCheck?: boolean,
 	};
 	isTagFound?: boolean;
-	setIsTagFound?: any;
 	setCurrentTab?: any;
 	setCombinedRemarks?: Function;
 	jobNumberByQuery?: string;
+	mappingsData?: any;
 }
 
 function ShipmentDetails({
@@ -129,15 +128,14 @@ function ShipmentDetails({
 	setLineItemsRemarks = () => {},
 	status = '',
 	jobType = '',
-	billId = '',
 	lineItemsCheck = false,
 	checkItem = {},
 	setCheckItem = (prop) => (prop),
 	isTagFound = false,
-	setIsTagFound = () => {},
 	setCurrentTab = () => {},
 	setCombinedRemarks = () => {},
 	jobNumberByQuery = '',
+	mappingsData = {},
 }: ShipmentDetailsInterface) {
 	const [showVariance, setShowVariance] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
@@ -182,6 +180,20 @@ function ShipmentDetails({
 	};
 
 	const [value, onChange] = useState([]);
+
+	useEffect(() => {
+		if (jobType === 'CONSOLIDATED') {
+			// clearing timeline elements that are not included in case of consolidated
+			setCheckItem((prev:any) => {
+				const newCheckItem = { ...prev };
+				newCheckItem.shipmentDetailsCheck = true;
+				delete newCheckItem?.documentsCheck;
+				delete newCheckItem?.sidDataCheck;
+				delete newCheckItem?.taggingCheck;
+				return { ...newCheckItem };
+			});
+		}
+	}, [jobType, setCheckItem]);
 
 	return (
 		<div className={styles.container}>
@@ -268,14 +280,14 @@ function ShipmentDetails({
 					{isTagFound ? (
 						<div className={styles.tagging}>
 							<Tagging
-								billId={billId}
 								setRemarksVal={setRemarksVal}
 								status={status}
 								onTabClick={onTabClick}
 								onAccept={onAccept}
 								showTab={tab.taggingTab}
 								taggingChecked={checkItem.taggingCheck}
-								setIsTagFound={setIsTagFound}
+								mappingsData={mappingsData}
+								setCheckItem={setCheckItem}
 							/>
 						</div>
 					) : undefined}

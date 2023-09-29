@@ -10,7 +10,7 @@ import { FieldProps } from './interfaces/index';
 import FieldPair from './RenderData/FiledPair/index';
 import FormatedDate from './RenderData/FormatedDate/index';
 import RenderCustomer from './RenderData/RenderCustomer/index';
-import RenderRemarks from './RenderData/RenderRemarks/index';
+import RenderRemarks from './RenderData/RenderRemarks';
 import RenderStatus from './RenderData/RenderStatus/index';
 import RenderUrgencyTag from './RenderData/RenderUrgencyTag/index';
 import RenderViewMoreButton from './RenderData/RenderViewMoreButton/index';
@@ -18,6 +18,7 @@ import SegmentedFilters from './SegmentedFilters/index';
 
 interface ItemProps {
 	createdDate: Date;
+	updatedDate: Date;
 	billDate: Date;
 	dueDate: Date;
 	billCurrency: string;
@@ -30,6 +31,7 @@ interface ItemProps {
 	billNumber: string;
 	isProforma: boolean;
 	jobNumber: string;
+	shipmentId: string;
 	organizationName: string;
 	urgencyTag: Array<string>;
 	remarksTimeline?: Array<{
@@ -95,6 +97,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 				currentTab={currentTab}
 				setCurrentTab={setCurrentTab}
 			/>
+
 			<List
 				config={PURCHASE_VIEW_CONFIG}
 				itemData={data}
