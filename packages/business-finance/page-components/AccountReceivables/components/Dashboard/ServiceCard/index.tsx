@@ -154,15 +154,15 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 														>
 															<div className={styles.wrapper}>
 																{formatAmount({
-																	amount   : item.amount as any,
-																	currency : item.currency,
+																	amount   : item?.amount as any,
+																	currency : item?.currency,
 																	options  : {
 																		notation              : 'compact',
 																		compactDisplay        : 'short',
 																		maximumFractionDigits : 2,
 																		style                 : 'currency',
 																		currencyDisplay       : 'code',
-																		currencyWise          : item.currency,
+																		currencyWise          : item?.currency,
 																	},
 																})}
 															</div>
