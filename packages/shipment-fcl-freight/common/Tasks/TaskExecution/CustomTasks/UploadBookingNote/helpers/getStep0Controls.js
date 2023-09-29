@@ -60,7 +60,7 @@ const getStep0Controls = [
 			account_type : 'service_provider',
 			status       : 'active',
 			kyc_status   : 'verified',
-			service      : ['fcl_freight', 'fcl_freight_local_agent'],
+			service      : ['fcl_freight_local_agent'],
 		},
 	},
 ];
