@@ -37,7 +37,7 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							{(company_name || '')}
+							{(company_name || '-')}
 						</div>
 					</div>
 				</div>
@@ -45,7 +45,7 @@ function Details({
 			<div className={styles.line} />
 			<div className={styles.invoice}>
 				<div className={styles.heading}>Invoice Number</div>
-				<div className={styles.text}>{invoiceNumber || ''}</div>
+				<div className={styles.text}>{invoiceNumber || '-'}</div>
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>
