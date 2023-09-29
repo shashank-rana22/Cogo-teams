@@ -533,8 +533,8 @@ const saas = {
 		},
 		{
 			api          : 'get_sea_route',
-			access_type  : 'public',
-			service_name : 'location',
+			access_type  : 'private',
+			service_name : 'public_location',
 		},
 	],
 	app_saas_air_schedules: [
@@ -1180,6 +1180,11 @@ const saas = {
 			access_type : 'private',
 			module      : 'Quotation',
 			feature     : 'Quotation',
+		},
+		{
+			api          : 'get_sea_route',
+			access_type  : 'private',
+			service_name : 'public_location',
 		},
 	],
 	app_saas_cogopoint: [
@@ -1999,6 +2004,11 @@ const saas = {
 			module      : 'dutiesTaxes',
 			feature     : 'dutiesTaxes',
 		},
+		{
+			api          : 'get_sea_route',
+			access_type  : 'private',
+			service_name : 'public_location',
+		},
 	],
 	app_saas_trader_eligibilty_check: [
 		{
@@ -2500,6 +2510,11 @@ const saas = {
 			access_type : 'private',
 			module      : 'product-catalogue',
 			feature     : 'product-catalogue',
+		},
+		{
+			api          : 'get_sea_route',
+			access_type  : 'private',
+			service_name : 'public_location',
 		},
 	],
 	app_saas_live_vessel_tracking: [
