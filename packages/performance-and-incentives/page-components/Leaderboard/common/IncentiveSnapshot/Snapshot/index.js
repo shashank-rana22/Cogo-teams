@@ -39,9 +39,9 @@ function Snapshot(props) {
 			<div className={styles.amount_container}>
 				{/* <p className={styles.amount}>$ 5000</p> */}
 
-				<b className={styles.cmg_soon}>Coming Soon!</b>
+				<div className={styles.cmg_soon}>Coming Soon!</div>
 
-				<p className={styles.body_text}>until today</p>
+				{/* <p className={styles.body_text}>until today</p> */}
 			</div>
 
 			{/* <p className={styles.footer_text}>+$20 than this date last month</p> */}
