@@ -1,6 +1,7 @@
 import { Tooltip, Datepicker, Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
+import { format } from '@cogoport/utils';
 import { useState, useEffect, memo } from 'react';
 
 import MyResponsivePie from '../../../Components/PieChart/index.tsx';
@@ -60,8 +61,9 @@ function RejectedCharts({ subActiveTabReject = '', setFilters = () => {} }) {
 	const handlePieChartOnClick = (value) => {
 		setFilters((pre) => ({
 			...pre,
-			updatedDateFrom      : remarkDate?.startDate || undefined,
-			updatedDateTo        : remarkDate?.endDate || new Date(),
+			updatedDateFrom: remarkDate?.startDate
+				? format(remarkDate?.startDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']) : undefined,
+			updatedDateTo        : format(remarkDate?.endDate, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']),
 			rejectionRemarksType : value?.data?.key,
 		}));
 	};
