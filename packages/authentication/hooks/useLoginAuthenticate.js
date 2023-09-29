@@ -14,7 +14,6 @@ import redirections from '../utils/redirections';
 const EMPTY_PATH = '/empty';
 
 const COOKIE_EXPIRY = -1;
-
 const getFormattedPayload = ({ mobileNumber = {}, otpId = '', otpValue = '' }) => ({
 	id                  : otpId,
 	mobile_otp          : otpValue,
@@ -116,6 +115,17 @@ const useLoginAuthenticate = ({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [profile, router, source]);
 
+	const loginError = (response) => {
+		if (isEmpty(response)) {
+			return null;
+		}
+		const keyValuePairs = Object.keys(response).map((key) => ({ key, value: response[key] }));
+		const ERROR = [];
+		keyValuePairs.forEach((pair) => {
+			ERROR.push(`${pair.key} ${pair.value}`);
+		});
+		return ERROR[GLOBAL_CONSTANTS.zeroth_index];
+	};
 	const onSubmit = async (values, e) => {
 		e?.preventDefault();
 		try {
@@ -201,7 +211,7 @@ const useLoginAuthenticate = ({
 				window.location.href = '/';
 			}
 		} catch (err) {
-			Toast.error(err?.response?.data.error || t('login:failed_to_login_toast_error'));
+			Toast.error(loginError(err?.response?.data) || t('login:failed_to_login_toast_error'));
 		}
 	};
 
