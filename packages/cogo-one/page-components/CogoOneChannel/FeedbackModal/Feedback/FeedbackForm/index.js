@@ -14,6 +14,7 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 	const { t } = useTranslation(['myTickets']);
 
 	const [additionalInfo, setAdditionalInfo] = useState([]);
+	const [defaultTypeId, setDefaultTypeId] = useState('');
 
 	const formProps = useForm();
 
@@ -32,9 +33,10 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 		getFeedbacks,
 		additionalInfo,
 		setShowAddFeedback,
+		defaultTypeId,
 	});
 
-	const defaultControls = useRaiseTicketcontrols({ setAdditionalInfo, watchCategory });
+	const defaultControls = useRaiseTicketcontrols({ setAdditionalInfo, watchCategory, setDefaultTypeId });
 
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label          : item,

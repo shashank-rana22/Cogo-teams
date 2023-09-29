@@ -121,3 +121,9 @@
 	border: 1px solid #cfcfcf;
 	border-radius: 20px;
 }
+
+.critical {
+	font-size: 14px;
+	font-weight: 600;
+	color: #f37166;
+}

@@ -1,4 +1,4 @@
-const FCL_COMMON_TABS = [
+const FCL_OTHER_TABS = [
 	{
 		name  : 'place_booking',
 		title : 'Place Booking',
@@ -29,7 +29,7 @@ const LCL_COMMON_TABS = [
 	},
 ];
 
-const FCL_EXPORT_TABS = [
+const FCL_FREIGHT_TABS = [
 	{
 		name              : 'place_booking',
 		title             : 'Place Booking',
@@ -65,25 +65,21 @@ const TABS_CONFIG = {
 		title: 'FCL',
 
 		segmented_tabs: {
-			export: {
-				title : 'Export',
-				tabs  : FCL_EXPORT_TABS,
-			},
-			import: {
-				title : 'Import',
-				tabs  : FCL_EXPORT_TABS,
+			freight: {
+				title : 'Freight',
+				tabs  : FCL_FREIGHT_TABS,
 			},
 			local: {
-				title : 'FCL Local',
-				tabs  : FCL_COMMON_TABS,
+				title : 'Local',
+				tabs  : FCL_OTHER_TABS,
 			},
 			cfs: {
-				title : 'FCL CFS',
-				tabs  : FCL_COMMON_TABS,
+				title : 'CFS',
+				tabs  : FCL_OTHER_TABS,
 			},
 			custom: {
-				title : 'FCL Custom',
-				tabs  : FCL_COMMON_TABS,
+				title : 'Custom',
+				tabs  : FCL_OTHER_TABS,
 			},
 		},
 	},
@@ -92,12 +88,8 @@ const TABS_CONFIG = {
 		title: 'LCL',
 
 		segmented_tabs: {
-			export: {
-				title : 'Export',
-				tabs  : LCL_COMMON_TABS,
-			},
-			import: {
-				title : 'Import',
+			freight: {
+				title : 'Freight',
 				tabs  : LCL_COMMON_TABS,
 			},
 		},

@@ -4,11 +4,9 @@ import NUMERICAL_VALUES from '../config/NUMERICAL_VALUES.json';
 import TABS_CONFIG from '../config/TABS_CONFIG';
 import FCL_CFS from '../config/tabSpecificPayload/FCL_CFS.json';
 import FCL_CUSTOM from '../config/tabSpecificPayload/FCL_CUSTOM.json';
-import FCL_EXPORT from '../config/tabSpecificPayload/FCL_EXPORT.json';
-import FCL_IMPORT from '../config/tabSpecificPayload/FCL_IMPORT.json';
+import FCL_FREIGHT from '../config/tabSpecificPayload/FCL_FREIGHT.json';
 import FCL_LOCAL from '../config/tabSpecificPayload/FCL_LOCAL.json';
-import LCL_EXPORT from '../config/tabSpecificPayload/LCL_EXPORT.json';
-import LCL_IMPORT from '../config/tabSpecificPayload/LCL_IMPORT.json';
+import LCL_FREIGHT from '../config/tabSpecificPayload/LCL_FREIGHT.json';
 
 const timezoneOffset = new Date().getTimezoneOffset()
 	* NUMERICAL_VALUES.SECONDS_IN_ONE_MINUTE
@@ -33,18 +31,14 @@ const SHIPMENT_STATES = {
 	cancelled: ['cancelled'],
 };
 
-const TRADE_TYPES = ['import', 'export'];
-
 SHIPMENT_STATES.completed = [...SHIPMENT_STATES.in_progress, 'completed'];
 
 const SHIPMENT_SPECIFIC_PAYLOAD = {
-	fcl_freight_export : FCL_EXPORT,
-	fcl_freight_import : FCL_IMPORT,
-	fcl_freight_local  : FCL_LOCAL,
-	fcl_freight_cfs    : FCL_CFS,
-	fcl_freight_custom : FCL_CUSTOM,
-	lcl_freight_export : LCL_EXPORT,
-	lcl_freight_import : LCL_IMPORT,
+	fcl_freight_freight : FCL_FREIGHT,
+	fcl_freight_local   : FCL_LOCAL,
+	fcl_freight_cfs     : FCL_CFS,
+	fcl_freight_custom  : FCL_CUSTOM,
+	lcl_freight_freight : LCL_FREIGHT,
 };
 
 export default function getListBookingDeskShipmentsPayload({
@@ -76,7 +70,6 @@ export default function getListBookingDeskShipmentsPayload({
 			...(selected_agent_id && { stakeholder_id: selected_agent_id }),
 			...(isCriticalVisible && isCriticalOn ? criticalPayload : {}),
 			...(q && { q }),
-			...(TRADE_TYPES.includes(segmentedTab) && { trade_type: segmentedTab }),
 		},
 		page,
 		additional_methods : ['pagination'],

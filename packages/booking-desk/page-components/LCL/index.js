@@ -1,6 +1,5 @@
 import { dynamic } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
-import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useContext } from 'react';
 
 import Search from '../../commons/Search';
@@ -15,8 +14,7 @@ import handleStepperTabChange from '../../helpers/handleStepperTabChange';
 import styles from './styles.module.css';
 
 const RESOLVE_DESK = {
-	export : dynamic(() => import('./Export-Import'), { ssr: false }),
-	import : dynamic(() => import('./Export-Import'), { ssr: false }),
+	freight: dynamic(() => import('./Export-Import'), { ssr: false }),
 };
 
 const STEPPER_TAB_OPTIONS = Object.entries(TABS_CONFIG).map(([key, obj]) => ({
@@ -33,7 +31,8 @@ export default function LclDesk() {
 	const contextValues = useContext(BookingDeskContext);
 	const { tabState: { stepperTab, segmentedTab }, scopeFilters } = contextValues || {};
 
-	const { tabs } = TABS_CONFIG.lcl_freight.segmented_tabs[segmentedTab];
+	const { tabs } = TABS_CONFIG.lcl_freight.segmented_tabs[segmentedTab]
+	|| TABS_CONFIG.lcl_freight.segmented_tabs.freight;
 
 	const ResolvedList = RESOLVE_DESK[segmentedTab];
 
@@ -48,9 +47,7 @@ export default function LclDesk() {
 					/>
 				</div>
 
-				<ShipmentChat />
-
-				<ScopeSelect size="md" defaultValues={scopeFilters} />
+				<ScopeSelect size="md" defaultValues={scopeFilters} className={styles.scope_select_styles} />
 			</div>
 
 			<div className={styles.flex_row}>
