@@ -1,3 +1,4 @@
+import Modals from '@cogoport/ticket-management/common/Modals';
 import React, { useState } from 'react';
 
 import { GenericObject } from '../../../commons/Interfaces';
@@ -15,6 +16,7 @@ import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
 import RejectedCharts from './RejectedChart/index';
 import RenderActionButton from './RenderActionButton';
+import RenderApprovalStatus from './RenderApprovalStatus';
 import RenderTicket from './RenderTicket';
 import SegmentedFilters from './SegmentedFilters';
 
@@ -44,20 +46,23 @@ interface ItemProps {
 }
 interface Props {
 	filters: GenericObject;
-	setFilters: (p: object) => void;
+	setFilters: (p?: object) => void;
 	subActiveTabReject: string | undefined;
 }
 
+const CHART_INCLUDED_TABS = ['coe_rejected', 'coe_on_hold'];
+
 function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 	const [sort, setSort] = useState({});
+	const [showReassign, setShowReassign] = useState(false);
+	const [modalData, setModalData] = useState({});
 
-	const {
-		data,
-		loading,
-		setSearchValue,
-		searchValue,
-		refetch,
-	} = useGetPurchaseViewList({ filters, setFilters, sort, subActiveTabReject });
+	const { data, loading, setSearchValue, searchValue, refetch } =	useGetPurchaseViewList({
+		filters,
+		setFilters,
+		sort,
+		subActiveTabReject,
+	});
 
 	const config = constAdvocateConfig(subActiveTabReject);
 
@@ -72,8 +77,10 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 		renderFormate: (itemData: ItemProps, field: FieldProps) => (
 			<FormatedDate item={itemData} field={field} />
 		),
-		renderRemarks  : (itemData: ItemProps) => <RenderRemarks item={itemData} />,
-		renderViewMore : (itemData: ItemProps) => (
+		renderRemarks: (itemData: ItemProps) => (
+			<RenderRemarks item={itemData} />
+		),
+		renderViewMore: (itemData: ItemProps) => (
 			<RenderViewMoreButton itemData={itemData} />
 		),
 		renderAction: (itemData: ItemProps) => (
@@ -83,19 +90,27 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 			<RenderUrgencyTag item={itemData} field={field} />
 		),
 		renderTicket: (itemData: ItemProps) => (
-			<RenderTicket itemData={itemData} />
+			<RenderTicket
+				itemData={itemData}
+				setModalData={setModalData as any}
+			/>
 		),
-		renderApprovalStatus: () => (
-			<div>-</div>
+		renderApprovalStatus: (itemData: ItemProps) => (
+			<RenderApprovalStatus itemData={itemData} />
 		),
 	};
 
 	return (
 		<div>
+			{
+			(CHART_INCLUDED_TABS.includes(subActiveTabReject)) ? (
+				<RejectedCharts
+					subActiveTabReject={subActiveTabReject}
+					setFilters={setFilters}
+				/>
+			) : null
+			}
 
-			<RejectedCharts
-				subActiveTabReject={subActiveTabReject}
-			/>
 			<SegmentedFilters
 				filters={filters}
 				setFilters={setFilters}
@@ -111,10 +126,19 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 				setSort={setSort}
 				page={filters.pageIndex || 1}
 				handlePageChange={(pageValue: number) => {
-					setFilters((p: GenericObject) => ({ ...p, pageIndex: pageValue }));
+					setFilters((p: GenericObject) => ({
+						...p,
+						pageIndex: pageValue,
+					}));
 				}}
 				subActiveTab={subActiveTabReject}
 				showPagination
+			/>
+			<Modals
+				modalData={modalData}
+				setModalData={setModalData}
+				showReassign={showReassign}
+				setShowReassign={setShowReassign}
 			/>
 		</div>
 	);
