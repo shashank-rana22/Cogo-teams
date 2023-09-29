@@ -7,6 +7,10 @@ import getErrorMessage from '../getErrorMessage';
 import getAsyncFields from './getAsyncKeys';
 import styles from './styles.module.css';
 
+const MAX_SPAN = 12;
+const MAX_WIDTH = 100;
+const MIN_VALUE = 1;
+
 function Item(props) {
 	const {
 		type = '',
@@ -51,7 +55,7 @@ function Item(props) {
 
 	const Element = getElementController(newProps.type);
 
-	const flex = ((span || 12) / 12) * 100 - 1;
+	const flex = ((span || MAX_SPAN) / MAX_SPAN) * MAX_WIDTH - MIN_VALUE;
 
 	if (formValues?.booking_reference_proof?.fileName === '') {
 		const element = document.querySelector('.ui_upload_filesuccess_container');
@@ -60,7 +64,13 @@ function Item(props) {
 
 	return (
 		<div className={cl`${styles.element} ${className}`} style={{ width: `${flex}%` }}>
-			{label && source !== 'edit_line_items' ? (<h4 className={styles.label}>{label}</h4>) : null}
+			{label && source !== 'edit_line_items' ? (
+				<h4 className={cl`${styles.label} 
+			${rules?.required ? styles.required_field : ''}`}
+				>
+					{label}
+				</h4>
+			) : null}
 
 			{Element
 				? (
