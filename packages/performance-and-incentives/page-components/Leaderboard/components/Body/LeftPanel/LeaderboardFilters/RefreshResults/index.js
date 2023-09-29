@@ -6,8 +6,6 @@ import styles from './styles.module.css';
 function RefreshResults(props) {
 	const { listLoading, listRefetch, refetchStats, statsLoading } = props;
 
-	console.log('listRefetch :: ', listRefetch);
-
 	const fetchData = () => {
 		try {
 			listRefetch();
