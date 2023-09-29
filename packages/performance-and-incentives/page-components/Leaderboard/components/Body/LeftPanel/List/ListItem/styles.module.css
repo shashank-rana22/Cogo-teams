@@ -27,3 +27,11 @@
 		background: #fef199;
 	}
 }
+
+.selected_item {
+	box-shadow:
+		0 2px 2px 0 rgb(252 220 0 / 40%),
+		0 -2px 2px 0 rgb(252 220 0 / 40%),
+		2px 0 2px 0 rgb(252 220 0 / 40%),
+		-2px 0 2px 0 rgb(252 220 0 / 40%);
+}
