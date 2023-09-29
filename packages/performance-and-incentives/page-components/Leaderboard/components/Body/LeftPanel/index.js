@@ -16,7 +16,6 @@ function LeftPanel(props) {
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 
 	const [searchValue, setSearchValue] = useState('');
-	const [isExpanded, setIsExpanded] = useState(false);
 
 	return (
 		<div className={styles.container}>
@@ -24,9 +23,9 @@ function LeftPanel(props) {
 				params={params}
 				setParams={setParams}
 				levelStack={levelStack}
+				setLevelStack={setLevelStack}
 				currLevel={currLevel}
-				isExpanded={isExpanded}
-				setIsExpanded={setIsExpanded}
+				setCurrLevel={setCurrLevel}
 				entity={entity}
 			/>
 
@@ -36,8 +35,8 @@ function LeftPanel(props) {
 				setSearchValue={setSearchValue}
 				levelStack={levelStack}
 				setLevelStack={setLevelStack}
+				currLevel={currLevel}
 				setCurrLevel={setCurrLevel}
-				isExpanded={isExpanded}
 				isChannel={isChannel}
 				setIsChannel={setIsChannel}
 				listLoading={listLoading}

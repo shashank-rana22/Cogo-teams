@@ -26,6 +26,7 @@ function Body(props) {
 		channel       : '',
 		user          : {},
 		user_rm_ids   : [],
+		isExpanded    : false,
 	});
 	const [isChannel, setIsChannel] = useState(false);
 
@@ -69,6 +70,7 @@ function Body(props) {
 				statsLoading={statsLoading}
 				entity={entity}
 				currLevel={currLevel}
+				levelStack={levelStack}
 			/>
 		</div>
 	);

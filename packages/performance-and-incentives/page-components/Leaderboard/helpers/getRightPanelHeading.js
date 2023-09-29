@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../constants/leaderboard-reporttype-constants';
@@ -7,8 +8,11 @@ import getEntityNameById from '../../../utils/get-entity-name-by-id';
 const { ADMIN, OWNER, MANAGER } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 const { ADMIN_REPORT, OWNER_REPORT, MANAGER_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 
-const getRightPanelHeading = ({ currLevel, entity, viewType }) => {
-	const { report_type, user, location_name } = currLevel;
+const getRightPanelHeading = ({ currLevel, entity, viewType, levelStack }) => {
+	const actualCurrLevel = (currLevel.isExpanded && isEmpty(currLevel.user))
+		? levelStack[GLOBAL_CONSTANTS.zeroth_index] : currLevel;
+
+	const { report_type, user, location_name, isExpanded } = actualCurrLevel || {};
 
 	const { name } = user || {};
 
@@ -25,7 +29,11 @@ const getRightPanelHeading = ({ currLevel, entity, viewType }) => {
 					heading = `${name}'s Team`;
 				}
 			} else if (report_type === AGENT_REPORT) {
-				heading = user.name;
+				if (isExpanded) {
+					heading = user.name;
+				} else {
+					heading = `${name}'s Team`;
+				}
 			} else {
 				heading = `${name}'s Team`;
 			}

@@ -40,7 +40,7 @@ const useListItem = (props) => {
 
 	const handleClick = () => {
 		if (isAllowed) {
-			if (currLevel.report_type !== AGENT_REPORT) {
+			if (currLevel.report_type !== AGENT_REPORT || (currLevel.isExpanded && isEmpty(currLevel.user))) {
 				setLevelStack((prev) => ([currLevel, ...prev]));
 			}
 

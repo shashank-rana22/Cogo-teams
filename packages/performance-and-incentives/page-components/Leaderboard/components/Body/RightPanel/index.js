@@ -10,7 +10,7 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function RightPanel(props) {
-	const { data, statsLoading, entity, currLevel } = props;
+	const { data, statsLoading, entity, currLevel, levelStack } = props;
 
 	const {
 		block_wise_stats: activityData = {},
@@ -20,7 +20,7 @@ function RightPanel(props) {
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 
-	const HEADING = getRightPanelHeading({ currLevel, entity, viewType });
+	const HEADING = getRightPanelHeading({ currLevel, entity, viewType, levelStack });
 
 	if (statsLoading) {
 		return (

@@ -41,20 +41,23 @@ function useGetAgentScoringReportStats(props) {
 	}, { manual: false });
 
 	useEffect(() => {
-		setStatParams((previousParams) => ({
-			...previousParams,
-			filters: {
-				...(previousParams.filters || {}),
-				created_at_greater_than : dateRange?.startDate || undefined,
-				created_at_less_than    : dateRange?.endDate || undefined,
-				partner_id              : entity || undefined,
-				report_type             : currLevel.report_type === ADMIN_REPORT ? undefined : currLevel.report_type,
-				office_location_id      : currLevel.location_id || undefined,
-				channel                 : currLevel.channel || undefined,
-				user_id                 : getUserIdFilter({ currLevel, levelStack, loggedInUser, viewType }),
-				user_rm_ids             : isEmpty(currLevel.user_rm_ids) ? undefined : currLevel.user_rm_ids,
-			},
-		}));
+		if (!currLevel.isExpanded || !isEmpty(currLevel.user)) {
+			setStatParams((previousParams) => ({
+				...previousParams,
+				filters: {
+					...(previousParams.filters || {}),
+					created_at_greater_than : dateRange?.startDate || undefined,
+					created_at_less_than    : dateRange?.endDate || undefined,
+					partner_id              : entity || undefined,
+					report_type             : currLevel.report_type === ADMIN_REPORT
+						? undefined : currLevel.report_type,
+					office_location_id : currLevel.location_id || undefined,
+					channel            : currLevel.channel || undefined,
+					user_id            : getUserIdFilter({ currLevel, levelStack, loggedInUser, viewType }),
+					user_rm_ids        : isEmpty(currLevel.user_rm_ids) ? undefined : currLevel.user_rm_ids,
+				},
+			}));
+		}
 	}, [dateRange, entity, currLevel, levelStack, loggedInUser, viewType]);
 
 	return {

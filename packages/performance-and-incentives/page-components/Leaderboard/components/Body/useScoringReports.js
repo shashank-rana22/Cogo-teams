@@ -21,6 +21,14 @@ const getReportTypeFilter = ({ currLevel }) => {
 	return currLevel.report_type;
 };
 
+const getUserRmIdsFilter = ({ currLevel, levelStack }) => {
+	if (currLevel.isExpanded) {
+		return [levelStack[GLOBAL_CONSTANTS.zeroth_index]?.user?.id, ...(currLevel.user_rm_ids || [])];
+	}
+
+	return [currLevel.user?.id, ...(currLevel.user_rm_ids || [])];
+};
+
 const useScoringReports = (props) => {
 	const { currLevel, setCurrLevel, dateRange, entity, isChannel, levelStack, setLevelStack } = props;
 
@@ -71,20 +79,21 @@ const useScoringReports = (props) => {
 	}, [setLevelStack, setCurrLevel, trigger]);
 
 	useEffect(() => {
-		if (currLevel.report_type !== AGENT_REPORT) {
+		if (currLevel.report_type !== AGENT_REPORT || (currLevel.isExpanded && isEmpty(currLevel.user))) {
 			setParams((previousParams) => ({
 				...previousParams,
-				filters: {
+				is_expanded_view : (currLevel.isExpanded && isEmpty(currLevel.user)) ? true : undefined,
+				filters          : {
 					...(previousParams.filters || {}),
 					report_view_type   : getReportViewType({ currLevel, isChannel }),
 					office_location_id : currLevel.location_id || undefined,
 					channel            : currLevel.channel || undefined,
 					report_type        : getReportTypeFilter({ currLevel }),
-					user_rm_ids        : [currLevel.user?.id, ...(currLevel.user_rm_ids || [])],
+					user_rm_ids        : getUserRmIdsFilter({ currLevel, levelStack }),
 				},
 			}));
 		}
-	}, [setParams, currLevel, isChannel, incentive_leaderboard_viewtype]);
+	}, [setParams, currLevel, levelStack, isChannel, incentive_leaderboard_viewtype]);
 
 	useEffect(() => {
 		setParams((previousParams) => ({

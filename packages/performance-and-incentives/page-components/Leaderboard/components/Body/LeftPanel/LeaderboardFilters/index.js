@@ -21,8 +21,8 @@ function LeaderboardFilters(props) {
 		setSearchValue,
 		levelStack,
 		setLevelStack,
+		currLevel,
 		setCurrLevel,
-		isExpanded,
 		isChannel,
 		setIsChannel,
 		listLoading,
@@ -64,7 +64,7 @@ function LeaderboardFilters(props) {
 					/>
 				) : null}
 
-				{!isEmpty(levelStack) && !isExpanded ? (
+				{!isEmpty(levelStack) && !currLevel.isExpanded ? (
 					<div className={styles.back}>
 						<IcMArrowBack style={{ marginRight: '6px', cursor: 'pointer' }} onClick={handleBack} />
 						<div>

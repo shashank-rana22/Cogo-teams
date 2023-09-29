@@ -9,8 +9,18 @@ const { ADMIN, OWNER, MANAGER } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 const { ADMIN_REPORT, OWNER_REPORT, MANAGER_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 
 const getLeftPanelHeading = ({ currLevel, entity, viewType, selfRoleData, levelStack }) => {
-	const actualCurrLevel = currLevel.report_type === AGENT_REPORT
-		? levelStack[GLOBAL_CONSTANTS.zeroth_index] : currLevel;
+	let actualCurrLevel = currLevel;
+
+	if (actualCurrLevel.report_type === AGENT_REPORT) {
+		let i = 0;
+		while (i < levelStack?.length) {
+			actualCurrLevel = levelStack[i];
+			if (actualCurrLevel.report_type !== AGENT_REPORT) {
+				break;
+			}
+			i += GLOBAL_CONSTANTS.one;
+		}
+	}
 
 	const { report_type, user, location_name } = actualCurrLevel;
 
