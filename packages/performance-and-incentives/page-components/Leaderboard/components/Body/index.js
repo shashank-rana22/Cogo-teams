@@ -1,11 +1,15 @@
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
+// import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
+
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
-import useGetAgentScoringReportStats from './RightPanel/useGetAgentScoringReportStats';
 import styles from './styles.module.css';
+import useGetAgentScoringReportStats from './useGetAgentScoringReportStats';
 import useScoringReports from './useScoringReports';
+
+// const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 function Body(props) {
 	const { dateRange, entity } = props;
@@ -14,37 +18,59 @@ function Body(props) {
 
 	const [view] = viewType.split('_');
 
-	const [currLevel, setCurrLevel] = useState({ report_type: `${view}_report`, rm_id: null, name: null });
+	const [levelStack, setLevelStack] = useState([]);
+	const [currLevel, setCurrLevel] = useState({
+		report_type   : `${view}_report`,
+		location_id   : '',
+		location_name : '',
+		channel       : '',
+		user          : {},
+		user_rm_ids   : [],
+	});
+	const [isChannel, setIsChannel] = useState(false);
 
-	const { params, setParams, debounceQuery, isChannel, setIsChannel } = useScoringReports(props);
+	const {
+		list,
+		listLoading,
+		currentUserData,
+		params,
+		setParams,
+		debounceQuery,
+		listRefetch,
+	} = useScoringReports({ currLevel, setCurrLevel, dateRange, entity, isChannel, levelStack, setLevelStack });
 
-	const { data, loading, refetch, setStatParams } = useGetAgentScoringReportStats({ params, dateRange, entity });
+	const {
+		data, statsLoading, refetchStats,
+	} = useGetAgentScoringReportStats({ dateRange, entity, currLevel, levelStack });
 
 	return (
 		<div className={styles.container}>
 			<LeftPanel
-				dateRange={dateRange}
-				entity={entity}
+				list={list}
+				listLoading={listLoading}
+				currentUserData={currentUserData}
+				listRefetch={listRefetch}
 				params={params}
 				setParams={setParams}
-				debounceQuery={debounceQuery}
+				entity={entity}
 				isChannel={isChannel}
 				setIsChannel={setIsChannel}
-				refetch={refetch}
-				loading={loading}
-				setStatParams={setStatParams}
+				debounceQuery={debounceQuery}
+				refetchStats={refetchStats}
+				statsLoading={statsLoading}
 				currLevel={currLevel}
 				setCurrLevel={setCurrLevel}
+				levelStack={levelStack}
+				setLevelStack={setLevelStack}
 			/>
 
 			<RightPanel
 				data={data}
-				loading={loading}
+				statsLoading={statsLoading}
 				entity={entity}
 				currLevel={currLevel}
 			/>
 		</div>
-
 	);
 }
 

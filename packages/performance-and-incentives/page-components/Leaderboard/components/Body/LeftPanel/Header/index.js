@@ -15,7 +15,7 @@ const { ADMIN, OWNER } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 const MIN_LENGTH = 1;
 
 function Header(props) {
-	const { params, currLevel, setParams, isExpanded, setIsExpanded, entity, levelStack } = props;
+	const { params, setParams, levelStack, currLevel, isExpanded, setIsExpanded, entity } = props;
 
 	const { incentive_leaderboard_viewtype, auth_role_data: selfRoleData } = useSelector(({ profile }) => profile);
 
