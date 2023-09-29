@@ -2,8 +2,6 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 
-import TAG_COLOR_MAPPING from '../../../../../../../constants/tag-color-mapping';
-
 import styles from './styles.module.css';
 import useListItem from './useListItem';
 
@@ -20,8 +18,6 @@ function ListItem(props) {
 		isAllowed,
 		handleClick,
 	} = useListItem(props);
-
-	const [report] = (listItem.report_type || '').split('_');
 
 	return (
 		<div
@@ -64,14 +60,6 @@ function ListItem(props) {
 					</div>
 				);
 			})}
-
-			<div
-				className={styles.tag}
-				style={{ backgroundColor: TAG_COLOR_MAPPING[listItem?.report_type] }}
-			>
-				{report.toUpperCase()}
-
-			</div>
 
 		</div>
 
