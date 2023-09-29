@@ -18,13 +18,21 @@ const useGetLocationsList = () => {
 	const apiTrigger = async () => {
 		await trigger({
 			params: {
-				includes : { status: true, locality_id: true, created_at: true, default_params_required: true },
+				includes: {
+					status                  : true,
+					locality_id             : true,
+					created_at              : true,
+					city_id                 : true,
+					address                 : true,
+					local_languages         : true,
+					default_params_required : true,
+				},
+				filters: {
+					...restFilters,
+				},
 				page,
 				page_limit,
-				filters  : {
-					status: 'active',
-					...(restFilters || {}),
-				},
+
 			},
 		});
 	};

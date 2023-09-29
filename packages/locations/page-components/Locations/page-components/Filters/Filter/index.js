@@ -7,7 +7,7 @@ import getFilterControls from '../filter-control';
 
 import styles from './styles.module.css';
 
-function Filters({ filters = {}, setFilters = () => {}, setShow = () => {}, activeTab }) {
+function Filters({ filters = {}, setFilters = () => {}, setShow = () => {}, activeTab = 'continent' }) {
 	const { page, ...restFilters } = filters || {};
 
 	const { t } = useTranslation(['locations']);

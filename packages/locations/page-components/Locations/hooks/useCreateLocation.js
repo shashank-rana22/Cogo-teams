@@ -3,6 +3,8 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useTranslation } from 'next-i18next';
 
+import getPayload from '../helpers/getFormattedValue';
+
 const useCreateLocation = () => {
 	const { t } = useTranslation(['locations']);
 
@@ -17,45 +19,10 @@ const useCreateLocation = () => {
 	} = useForm();
 
 	const onCreate = async ({ data:{ values = [] } }) => {
-		console.log(values);
-		const NEW_ALIASES = [];
-		values?.aliases_attributes?.forEach((aliases) => {
-			NEW_ALIASES.push(aliases.name);
-		});
-		const {
-			name, type,
-			address,
-			status, region_id,
-			local_languages,
-			latitude, longitude,
-			flag_icon_url, flag_image_url,
-			country_id, country_code,
-			zone_id,
-		} = values;
-		const formattedValues = {
-			aliases_attributes : NEW_ALIASES,
-			name,
-			type,
-			address,
-			status,
-			region_id,
-			local_languages,
-			latitude,
-			longitude,
-			flag_icon_url      : flag_icon_url?.finalUrl,
-			flag_image_url     : flag_image_url?.finalUrl,
-			country_id,
-			country_code,
-			zone_id,
-			// subdistrict_id     : '',
-
-		};
-		// formattedValues.is_icd = formattedValues.is_icd === 'Yes';
-
-		// const payload = { ...formattedValues:formattedValues };
+		const payload = getPayload({ values });
 
 		try {
-			const res = await trigger({ data: formattedValues });
+			const res = await trigger({ data: payload });
 			if (res?.data) {
 				Toast.success(t('locations:location_created_successfully'));
 			}

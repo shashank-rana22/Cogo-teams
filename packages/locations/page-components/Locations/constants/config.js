@@ -11,10 +11,6 @@ const getStatusColumns = ({ t = () => {} }) => [
 		Header   : t('locations:list_status_label'),
 		accessor : (item) => <p>{(item.status)}</p>,
 	},
-	// {
-	// 	Header   : t('locations:list_created_at_label'),
-	// 	accessor : (item) => <p>{(item.created_at)}</p>,
-	// },
 ];
 
 const getCountryColumns = ({ t = () => {} }) => [
@@ -31,10 +27,6 @@ const getCountryColumns = ({ t = () => {} }) => [
 
 		accessor: (item) => <p>{(item.country_code)}</p>,
 	},
-	// {
-	// 	Header   : t('locations:list_created_at_label'),
-	// 	accessor : (item) => <p>{(item.created_at)}</p>,
-	// },
 ];
 
 const getDefaultColumns = ({ t = () => {} }) => [
@@ -46,10 +38,6 @@ const getDefaultColumns = ({ t = () => {} }) => [
 		Header   : t('locations:list_type_label'),
 		accessor : (item) => <p>{(item.type)}</p>,
 	},
-	// {
-	// 	Header   : t('locations:list_created_at_label'),
-	// 	accessor : (item) => <p>{(item.created_at)}</p>,
-	// },
 ];
 
 const getFieldsByTab = ({ type, t = () => {} }) => {

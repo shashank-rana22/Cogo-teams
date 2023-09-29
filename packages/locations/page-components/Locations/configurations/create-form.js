@@ -89,14 +89,6 @@ const controls = ({ t = () => {} }) => [
 		rules       : { required: t('locations:controls_currency_code_rules_required') },
 	},
 	{
-		name        : 'country_code',
-		label       : t('locations:controls_country_code_label'),
-		type        : 'text',
-		placeholder : t('locations:controls_country_code_placeholder'),
-		condition   : { type: ['country'] },
-		rules       : { required: t('locations:controls_country_code_rules_required') },
-	},
-	{
 		name           : 'country_code',
 		label          : t('locations:controls_mobile_country_code_label'),
 		type           : 'country_select',
@@ -200,6 +192,7 @@ const controls = ({ t = () => {} }) => [
 		isClearable    : true,
 		condition      : {
 			type: [
+				'city',
 				'seaport',
 				'airport',
 				'pincode',
@@ -228,6 +221,7 @@ const controls = ({ t = () => {} }) => [
 		placeholder : t('locations:controls_pincode_id_placeholder'),
 		type        : 'async_select',
 		asyncKey    : 'list_locations',
+		isClearable : true,
 		params      : { filters: { type: ['pincode'] } },
 		condition   : {
 			type: [
@@ -239,7 +233,7 @@ const controls = ({ t = () => {} }) => [
 				'warehouse',
 			],
 		},
-		rules: { required: t('locations:controls_pincode_id_rules_required') },
+		// rules: { required: t('locations:controls_pincode_id_rules_required') },
 	},
 	{
 		name        : 'cfs_code',

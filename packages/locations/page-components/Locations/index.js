@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import useGetLocationsList from '../../hooks/useGetLocationsList';
-
+import useGetLocationsList from './hooks/useGetLocationsList';
 import Header from './page-components/Header';
 import PageView from './page-components/PageView';
 import SideBarComponent from './page-components/SideBar';

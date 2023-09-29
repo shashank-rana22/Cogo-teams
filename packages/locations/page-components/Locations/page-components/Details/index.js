@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useTranslation } from 'next-i18next';
 
 import getDetails from '../../constants/details';
@@ -9,8 +9,6 @@ import styles from './styles.module.css';
 const excludeFromUpdate = ['country', 'continent', 'trade'];
 function Details({ activeCard = {}, setSideBar = () => {} }) {
 	const { t } = useTranslation(['locations']);
-
-	const formatDate = (date) => format(date, 'dd MMM yy | hh:mm a');
 
 	const details = getDetails({ t });
 
@@ -42,7 +40,11 @@ function Details({ activeCard = {}, setSideBar = () => {} }) {
 						<div key={item.key} className={styles.active_content}>
 							<h4>{item.label}</h4>
 							<div className={styles.description}>
-								{item.type === 'date' ? formatDate(activeCard[item.key]) : activeCard[item.key]}
+
+								{item.type === 'date' ? formatDate({
+									date   : activeCard[item.key],
+									format : 'dd MMM yy | hh:mm a',
+								}) : activeCard[item.key]}
 							</div>
 						</div>
 					);
