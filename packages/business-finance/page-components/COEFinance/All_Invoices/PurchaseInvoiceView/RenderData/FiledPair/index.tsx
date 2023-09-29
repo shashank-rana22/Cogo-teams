@@ -2,7 +2,7 @@ import { Tooltip, Button, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCopy } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
+import { startCase, copyToClipboard } from '@cogoport/utils';
 import React from 'react';
 
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
@@ -62,9 +62,8 @@ function FieldPair({
 	};
 
 	const handleCopy = (val) => {
-		navigator.clipboard
-			.writeText(val)
-			.then(Toast.info('Copied Successfully !!', { autoClose: 1000 }));
+		copyToClipboard(val)
+			.then(Toast.info('Copied Successfully !!'));
 	};
 
 	return (
