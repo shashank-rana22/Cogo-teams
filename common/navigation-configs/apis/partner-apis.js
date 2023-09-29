@@ -13546,6 +13546,17 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'create_cogoone_calendar',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_cogoone_schedules',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+
 	],
 	analytics_dashboard: [
 		{

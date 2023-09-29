@@ -6,12 +6,18 @@ import React, { useState, useMemo } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import useListCogooneSchedules from '../../../../../hooks/useListCogooneSchedules';
+
 import CustomCard from './CustomCard';
 import styles from './styles.module.css';
 
 const localizer = momentLocalizer(moment);
 
 function BgCalender({ setSelectedEventData = () => {}, setAddEvents = () => {} }) {
+	const { loading = false, data = {}, getEvents = () => {} } = useListCogooneSchedules();
+	console.log('loading:', loading);
+	console.log('data:', data);
+
 	const myEventsList = [
 		{
 			marked_events: [
@@ -225,7 +231,9 @@ function BgCalender({ setSelectedEventData = () => {}, setAddEvents = () => {} }
 	);
 
 	const handleMonthChange = (newDate) => {
-		console.log('newDate:', newDate);
+		const startDate = moment(newDate || new Date()).startOf('month').toDate();
+		const endDate = moment(newDate || new Date()).endOf('month').toDate();
+		getEvents({ startDate, endDate });
 	};
 
 	return (

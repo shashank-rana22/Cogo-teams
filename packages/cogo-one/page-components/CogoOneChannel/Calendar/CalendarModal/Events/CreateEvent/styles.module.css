@@ -1,12 +1,17 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	height: 460px;
+	height: 500px;
 	transition: 0.3s ease;
 
 	:global {
 		.ui_tabs_list_title {
-			font-size: 10px;
+			font-size: 9px;
+		}
+
+		.ui_tab_list_container {
+			width: 96%;
+			border-radius: none;
 		}
 
 		.ui_tab_container {
@@ -27,20 +32,40 @@
 			color: #4f4f4f;
 		}
 
-		.styles_container__5_MLn {
-			padding: 0;
-		}
-
-		.styles_each_element__Ui_7a {
-			padding: 2px;
-		}
-
 		.ui_checkbox_container {
 			padding: 0;
 		}
 
+		.ui_time_display_container {
+			width: 120px;
+			height: 30px;
+			margin-left: 4px;
+		}
+
+		.react-datepicker__input-container {
+			height: 30px;
+		}
+
 		.ui_select_display_container {
+			width: 260px;
 			height: 30px !important;
+		}
+
+		.ui_text_area_container {
+			width: 96%;
+		}
+
+		.ui_multiselect_display_container {
+			width: 260px;
+			height: 30px !important;
+		}
+
+		.react-datepicker__input-container input {
+			height: 30px !important;
+		}
+
+		.ui_select_input_control {
+			font-size: 14px;
 		}
 	}
 }
@@ -49,31 +74,31 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 75%;
+	width: 96%;
 	background: #fff;
 	border: none;
-	border: 1px solid #e3e3e3;
-	border-radius: 8px;
+	box-shadow: rgb(0 0 0 / 10%) 0 4px 12px;
+	transition: 0.3s ease-in-out;
 }
 
 .tab {
 	display: flex;
 	justify-content: center;
-	width: 75%;
-	padding: 5px 0;
+	width: 96%;
+	padding: 8px 0;
 	font-size: 12px;
 	font-weight: 600;
 	cursor: pointer;
-	border-radius: 8px;
+	transition: 0.3s ease-in-out;
 }
 
 .active_tab {
-	color: #fff;
-	background: var(--link-blue, #034afd);
+	color: var(--color-primary-error-red-2);
+	background-color: var(--color-primary-error-red-5);
 }
 
 .label {
-	margin: 6px 0;
+	margin: 6px 0 3px;
 	font-size: 13px;
 	font-weight: 500;
 	color: #221f20;
@@ -91,15 +116,48 @@
 .form_container {
 	display: flex;
 	flex-direction: column;
-	margin-top: 8px;
+	margin-top: 20px;
 }
 
 .button_styles {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	margin-top: 8px;
 }
 
 .form {
-	margin-top: 10px;
+	/* margin-top: 10px; */
+}
+
+.dates_container {
+	display: flex;
+	align-items: center;
+}
+
+.arrow_down {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 6px 0;
+	transform: 0.3s ease;
+}
+
+.icon {
+	transform: rotate(90deg);
+}
+
+.error_container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.error_text {
+	height: 10px;
+	margin-top: 2px;
+	font-size: 10px;
+	color: #ee3425;
+	text-align: left;
+	transition: 0.3s ease;
 }

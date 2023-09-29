@@ -1,4 +1,3 @@
-import { DateRangepicker } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPlusInCircle, IcMCancel } from '@cogoport/icons-react';
@@ -12,7 +11,6 @@ function Events({ addEvents = true, setAddEvents = () => {}, selectedEventData =
 	const [eventDetails, setEventDetails] = useState({
 		category   : 'event',
 		event_type : 'call_customer',
-		event_date : { startDate: new Date(), endDate: new Date() },
 	});
 
 	const { start = '' } = selectedEventData || {};
@@ -39,20 +37,7 @@ function Events({ addEvents = true, setAddEvents = () => {}, selectedEventData =
 					<div className={styles.selectable_date}>
 						{date}
 					</div>
-				) : (
-					<div className={styles.create_event}>
-						<div className={styles.create_label}>
-							Select Date
-						</div>
-						<DateRangepicker
-							name="date"
-							onChange={(val) => setEventDetails((prev) => ({ ...prev, event_date: val }))}
-							value={eventDetails?.event_date}
-							showTimeSelect
-							isClearable={false}
-						/>
-					</div>
-				)}
+				) : null}
 
 				{addEvents ? <UserEvents selectedEventData={selectedEventData} /> : (
 					<CreateEvent
