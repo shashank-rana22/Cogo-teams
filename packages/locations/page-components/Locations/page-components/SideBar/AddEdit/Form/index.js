@@ -25,7 +25,7 @@ function Form({ handleSubmitForm = () => {}, callBack = () => {}, item = {} }, r
 
 	const showElements = getShowElement({ controls: fields, formValues: watch() });
 
-	const onSubmit = (values) => handleSubmitForm({ data: { values }, callBack });
+	const onSubmit = (values) => handleSubmitForm({ values, callBack });
 
 	useImperativeHandle(ref, () => ({
 		formSubmit() {

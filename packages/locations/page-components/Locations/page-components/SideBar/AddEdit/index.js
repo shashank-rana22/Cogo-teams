@@ -6,7 +6,7 @@ import useCreateLocation from '../../../hooks/useCreateLocation';
 
 import Form from './Form';
 
-function CreateUpdateForm({ item = {} }) {
+function CreateUpdateForm({ item = {}, refetch = () => {}, setSideBar = () => {} }) {
 	const { t } = useTranslation(['locations']);
 
 	const formRef = useRef(null);
@@ -17,10 +17,15 @@ function CreateUpdateForm({ item = {} }) {
 	const {
 		loading,
 		onCreate,
-	} = useCreateLocation();
+	} = useCreateLocation({
+		refetch: () => {
+			refetch();
+			setSideBar('');
+		},
+	});
 
-	const handleSubmitForm = ({ data }) => {
-		onCreate({ data });
+	const handleSubmitForm = ({ values }) => {
+		onCreate({ values });
 	};
 
 	return (

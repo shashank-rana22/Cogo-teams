@@ -4,8 +4,9 @@ import { useRequest } from '@cogoport/request';
 import { useTranslation } from 'next-i18next';
 
 import getPayload from '../helpers/getFormattedValue';
+import toastApiError from '../utils/toastApiError';
 
-const useCreateLocation = () => {
+const useCreateLocation = ({ refetch = () => {} }) => {
 	const { t } = useTranslation(['locations']);
 
 	const [{ loading }, trigger] = useRequest({
@@ -18,16 +19,18 @@ const useCreateLocation = () => {
 		watch,
 	} = useForm();
 
-	const onCreate = async ({ data:{ values = [] } }) => {
+	const onCreate = async ({ values }) => {
 		const payload = getPayload({ values });
 
 		try {
 			const res = await trigger({ data: payload });
+
 			if (res?.data) {
 				Toast.success(t('locations:location_created_successfully'));
 			}
+			refetch();
 		} catch (error) {
-			console.log(error);
+			toastApiError(error);
 		}
 	};
 

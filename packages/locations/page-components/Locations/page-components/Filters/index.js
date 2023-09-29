@@ -16,33 +16,28 @@ function Filter({ filters = {}, setFilters = () => {}, activeTab = 'create' }) {
 				FILTERS
 			</Button>
 
-			{show ? (
-				<div className={styles.popver}>
-					<Modal
-						show={show}
-						placement="top-right"
-						closeOnOuterClick={() => setShow(false)}
-						size="sm"
-					>
-						<Modal.Body>
+			<Modal
+				show={show}
+				placement="top-right"
+				closeOnOuterClick={() => setShow(!show)}
+				size="sm"
+				onClose={() => setShow(!show)}
+			>
+				<Modal.Header title="Apply Filter" />
+				<Modal.Body>
 
-							<Filters
-								filters={filters}
-								setFilters={setFilters}
-								setShow={setShow}
-								activeTab={activeTab}
-							/>
+					<Filters
+						filters={filters}
+						setFilters={setFilters}
+						setShow={setShow}
+						activeTab={activeTab}
+					/>
 
-						</Modal.Body>
-						<Modal.Footer>
-							<Button onClick={() => setShow(false)}>
-								Cancel
-							</Button>
-						</Modal.Footer>
-					</Modal>
-				</div>
-			) : null}
+				</Modal.Body>
+
+			</Modal>
 		</div>
+
 	);
 }
 

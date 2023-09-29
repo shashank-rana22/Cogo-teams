@@ -1,6 +1,7 @@
-import { TabPanel, Tabs, Pagination, Table } from '@cogoport/components';
+import { TabPanel, Tabs, Table } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
 
+import ListPagination from '../../../../common/ListPagination';
 import getFieldsByTab from '../../constants/config';
 import getTabsMapping from '../../constants/tabs';
 
@@ -15,21 +16,17 @@ function PageView({
 }) {
 	const { t } = useTranslation(['locations']);
 
-	const { page, page_limit, type } = filters || {};
-
+	const { type } = filters || {};
 	const columns = getFieldsByTab({ type, t });
 
 	const tabsMapping = getTabsMapping({ t });
 
 	const onTabChange = (val) => {
-		setFilters({ ...filters, type: val, page: 1 });
+		setFilters({ type: val, page: 1 });
 		setSelectedLocation({});
 		setSideBar('');
 	};
 
-	const handlePageChange = (pageNumber) => {
-		setFilters({ ...filters, page: pageNumber });
-	};
 	return (
 		<div className={styles.container} id="locations_main_container">
 
@@ -48,15 +45,11 @@ function PageView({
 				onRowClick={onClickCard}
 			/>
 
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={data?.total_count}
-					pageSize={page_limit}
-					onPageChange={handlePageChange}
-				/>
-			</div>
+			<ListPagination
+				filters={filters}
+				setFilters={setFilters}
+				data={data}
+			/>
 
 		</div>
 	);

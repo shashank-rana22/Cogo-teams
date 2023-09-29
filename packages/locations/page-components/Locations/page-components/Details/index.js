@@ -1,22 +1,35 @@
 import { Button } from '@cogoport/components';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useTranslation } from 'next-i18next';
+import { useState } from 'react';
 
 import getDetails from '../../constants/details';
+import AddMainPorts from '../AddMainPorts';
 
 import styles from './styles.module.css';
 
 const excludeFromUpdate = ['country', 'continent', 'trade'];
-function Details({ activeCard = {}, setSideBar = () => {} }) {
+function Details({ activeCard = {}, setSideBar = () => {}, loading = false, apiTrigger = () => {} }) {
 	const { t } = useTranslation(['locations']);
-
+	const [showMapping, setShowMapping] = useState(false);
 	const details = getDetails({ t });
 
 	return (
 		<div style={{ marginTop: 20 }}>
 
 			<div className={styles.btn_align}>
-				<Button>{activeCard.status === 'active' ? 'Deactivate' : 'Activate'}</Button>
+				<Button
+					onClick={() => apiTrigger({
+						values: {
+							status: activeCard.status === 'active' ? 'Deactivate' : 'Activate',
+						},
+						id: activeCard.id,
+					})}
+					disabled={loading}
+				>
+					{activeCard.status === 'active' ? 'Deactivate' : 'Activate'}
+
+				</Button>
 				<Button
 					onClick={() => setSideBar('update')}
 					disabled={excludeFromUpdate.includes(activeCard?.type)}
@@ -26,7 +39,7 @@ function Details({ activeCard = {}, setSideBar = () => {} }) {
 				</Button>
 				{activeCard.is_icd ? (
 					<Button
-							// onClick={() => setShowMapping(activeCard)}
+						onClick={() => setShowMapping(activeCard)}
 						className="small"
 						style={{ marginLeft: 16 }}
 					>
@@ -34,23 +47,33 @@ function Details({ activeCard = {}, setSideBar = () => {} }) {
 					</Button>
 				) : null}
 			</div>
-			{(details || []).map((item) => {
-				if (activeCard[item.key]) {
-					return (
-						<div key={item.key} className={styles.active_content}>
-							<h4>{item.label}</h4>
-							<div className={styles.description}>
+			<div className={styles.details_container}>
 
-								{item.type === 'date' ? formatDate({
-									date   : activeCard[item.key],
-									format : 'dd MMM yy | hh:mm a',
-								}) : activeCard[item.key]}
+				{(details || []).map((item) => {
+					if (activeCard[item.key]) {
+						return (
+							<div key={item.key} className={styles.active_content}>
+								<h4>{item.label}</h4>
+								<div className={styles.description}>
+
+									{item.type === 'date' ? formatDate({
+										date   : activeCard[item.key],
+										format : 'dd MMM yy | hh:mm a',
+									}) : activeCard[item.key]}
+								</div>
 							</div>
-						</div>
-					);
-				}
-				return null;
-			})}
+						);
+					}
+					return null;
+				})}
+			</div>
+			{showMapping ? (
+				<AddMainPorts
+					show={!!showMapping}
+					onClose={() => setShowMapping(null)}
+					location={showMapping}
+				/>
+			) : null}
 		</div>
 	);
 }

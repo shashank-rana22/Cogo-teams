@@ -15,6 +15,7 @@ function SideBarComponent({
 	setSideBar = () => {},
 	selectedLocation = {},
 	setSelectedLocation = () => {},
+	refetch = () => {},
 }) {
 	const { t } = useTranslation(['locations']);
 
@@ -25,6 +26,7 @@ function SideBarComponent({
 	const { loading, apiTrigger } = useUpdateLocation({
 		refetch: () => {
 			setSideBar('');
+			refetch();
 		},
 	});
 	const editRef = useRef(null);
@@ -43,16 +45,22 @@ function SideBarComponent({
 			case 'details':
 				return (
 					<div>
-						<Details activeCard={selectedLocation} setSideBar={setSideBar} />
+						<Details
+							loading={loading}
+							apiTrigger={apiTrigger}
+							activeCard={selectedLocation}
+							setSideBar={setSideBar}
+						/>
 					</div>
 				);
 			case 'create':
-				return <CreateUpdateForm item={selectedLocation} />;
+				return <CreateUpdateForm setSideBar={setSideBar} refetch={refetch} item={selectedLocation} />;
 			case 'update':
 				return (
 					<div>
 						<Form
 							item={selectedLocation}
+							refetch={refetch}
 							ref={editRef}
 							handleSubmitForm={handleEditSubmit}
 							callBack={callBack}

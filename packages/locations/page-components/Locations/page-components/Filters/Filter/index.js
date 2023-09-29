@@ -11,7 +11,6 @@ function Filters({ filters = {}, setFilters = () => {}, setShow = () => {}, acti
 	const { page, ...restFilters } = filters || {};
 
 	const { t } = useTranslation(['locations']);
-
 	const { control, watch } = useForm({ defaultValues: restFilters });
 	const controls = getFilterControls({ t });
 

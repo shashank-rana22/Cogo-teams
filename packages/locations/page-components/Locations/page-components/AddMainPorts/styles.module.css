@@ -1,7 +1,6 @@
-.button_container {
+.btn_align {
 	display: flex;
 	justify-content: flex-end;
-	margin-bottom: 8px;
 
 	button:first-child {
 		margin-right: 8px;

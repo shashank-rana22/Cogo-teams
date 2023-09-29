@@ -35,6 +35,7 @@ const CountrySelectController = dynamic(
 	() => import('@cogoport/forms').then((module) => module.CountrySelectController),
 	{ ssr: false },
 );
+
 function FormElement({ type = '', ...rest }) {
 	if (type === 'select') return <SelectController {...rest} />;
 

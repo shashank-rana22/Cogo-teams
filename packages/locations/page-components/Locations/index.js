@@ -20,6 +20,7 @@ function Locations() {
 		filters,
 		loading,
 		setFilters,
+		refetch,
 	} = useGetLocationsList();
 	return (
 		<div className={styles.container}>
@@ -37,6 +38,7 @@ function Locations() {
 			/>
 			{sideBar && (
 				<SideBarComponent
+					refetch={refetch}
 					setSideBar={setSideBar}
 					sideBar={sideBar}
 					selectedLocation={selectedLocation}

@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const useGetLocationsList = () => {
 	const [filters, setFilters] = useState({
@@ -8,38 +8,34 @@ const useGetLocationsList = () => {
 		type       : 'continent',
 	});
 
-	const { page, page_limit, ...restFilters } = filters;
-
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_locations',
 		method : 'GET',
 
 	});
-	const apiTrigger = async () => {
+
+	const apiTrigger = useCallback(async () => {
 		await trigger({
 			params: {
 				includes: {
 					status                  : true,
 					locality_id             : true,
-					created_at              : true,
 					city_id                 : true,
-					address                 : true,
-					local_languages         : true,
 					default_params_required : true,
 				},
 				filters: {
-					...restFilters,
+					...filters,
 				},
-				page,
-				page_limit,
+				page       : filters?.page,
+				page_limit : filters?.page_limit,
 
 			},
 		});
-	};
+	}, [trigger, filters]);
+
 	useEffect(() => {
 		apiTrigger();
-		// eslint-disable-next-line
-	}, [filters]);
+	}, [apiTrigger, filters]);
 
 	return {
 		loading,
