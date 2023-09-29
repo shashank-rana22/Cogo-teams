@@ -14,109 +14,38 @@ const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 const OFFSET = 1;
 
-function containsOnlyLetters(inputString) {
-	const PATTERN = GLOBAL_CONSTANTS.regex_patterns.alphabets;
-	return PATTERN.test(inputString);
-}
-
-const getFilters = ({ beforeLevel, id }) => {
-	const obj = { report_type: beforeLevel, user_rm_ids: undefined };
-
-	if (beforeLevel === 'owner_report') {
-		if (containsOnlyLetters(id)) {
-			return {
-				...obj,
-				channel: id,
-			};
-		}
-
-		return {
-			...obj,
-			office_location_id: id,
-		};
-	}
-
-	return {
-		report_type: beforeLevel,
-	};
-};
-
 function LeaderboardFilters(props) {
 	const {
-		setParams,
 		debounceQuery,
 		searchValue,
 		setSearchValue,
 		levelStack,
-		setCurrLevel,
 		setLevelStack,
+		setCurrLevel,
 		isExpanded,
 		isChannel,
 		setIsChannel,
-		loading,
-		refetch,
+		listLoading,
+		listRefetch,
 		refetchStats,
 		statsLoading,
-		setStatParams,
 	} = props;
 
-	const { incentive_leaderboard_viewtype, user } = useSelector(({ profile }) => profile);
+	const { incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
 
-	const [view] = incentive_leaderboard_viewtype.split('_');
-
-	const {
-		report_type: beforeLevel = '',
-		rm_id = '', name: rm_name = '',
-	} = levelStack[levelStack.length - OFFSET] || [];
+	const { report_type: beforeLevel = '' } = levelStack[levelStack.length - OFFSET] || [];
 
 	const [backText] = beforeLevel.split('_') || [];
 
 	const handleBack = () => {
-		setParams((prev) => ({
-			...prev,
-
-			...((levelStack.length === OFFSET && incentive_leaderboard_viewtype === ADMIN)
-				? { add_current_user_report: false, current_user_id: undefined } : {}),
-
-			filters: {
-				...prev.filters,
-				user_rm_ids: rm_id ? [rm_id] : undefined,
-
-				...(levelStack.length === OFFSET ? {
-
-					...(incentive_leaderboard_viewtype === ADMIN
-						? {
-							report_view_type: isChannel
-								? 'channel_wise' : 'location_wise',
-						} : { report_view_type: `${view}_wise` }),
-
-					office_location_id: undefined,
-
-					channel: undefined,
-
-					...(incentive_leaderboard_viewtype === ADMIN
-						? { report_type: undefined } : { report_type: `${view}_report` }),
-
-				} : getFilters({ beforeLevel, rm_id })),
-			},
-		}));
-
-		setStatParams((prev) => ({
-			...prev,
-			filters: {
-				...prev.filters,
-				user_id: incentive_leaderboard_viewtype !== ADMIN ? user.id : undefined,
-			},
-		}));
+		setCurrLevel(levelStack[GLOBAL_CONSTANTS.zeroth_index]);
 
 		setLevelStack((prev) => {
 			const curr = [...prev];
-			curr.pop();
+			curr.shift();
 
 			return curr;
 		});
-
-		setCurrLevel({ report_type: beforeLevel, rm_id, name: rm_name });
 	};
 
 	return (
@@ -152,8 +81,8 @@ function LeaderboardFilters(props) {
 
 			<div className={styles.inner_container}>
 				<RefreshResults
-					loading={loading}
-					refetch={refetch}
+					loading={listLoading}
+					refetch={listRefetch}
 					refetchStats={refetchStats}
 					statsLoading={statsLoading}
 				/>
