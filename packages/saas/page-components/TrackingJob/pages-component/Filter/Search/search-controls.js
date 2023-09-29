@@ -1,5 +1,5 @@
 const control = ({ setSearchString = () => {}, serialId, searchString }) => {
-	console.log('control', serialId, searchString);
+	console.log('searchcontrol', { serialId }, { searchString });
 	return (
 		[
 
@@ -8,15 +8,15 @@ const control = ({ setSearchString = () => {}, serialId, searchString }) => {
 				type        : 'text',
 				placeholder : 'Search By Airway/Bill No.',
 				span        : 12,
-				value       : searchString,
-				onchange    : (e) => setSearchString(e),
+				value       : searchString || '',
+				onChange    : (value) => setSearchString(value || ''),
 			},
 			{
 				name        : 'container_bill_no',
 				type        : 'text',
 				placeholder : 'Search By Container/Bill No.',
-				value       : searchString,
-				onchange    : (e) => setSearchString(e),
+				value       : searchString || '',
+				onChange    : (value) => setSearchString(value || ''),
 				span        : 12,
 
 			},
@@ -24,8 +24,8 @@ const control = ({ setSearchString = () => {}, serialId, searchString }) => {
 				name        : 'truck_no',
 				type        : 'text',
 				placeholder : 'Search By Truck No.',
-				value       : searchString,
-				onchange    : (e) => setSearchString(e),
+				value       : searchString || '',
+				onChange    : (value) => setSearchString(value || ''),
 				span        : 12,
 
 			},

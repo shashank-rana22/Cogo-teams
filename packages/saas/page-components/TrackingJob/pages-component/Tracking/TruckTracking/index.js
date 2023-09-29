@@ -13,6 +13,7 @@ function TruckTracking({
 	list = [],
 	filters = {},
 	setFilters = () => {},
+	refetch = () => {},
 }) {
 	const [showUpdate, setShowUpdate] = useState({ show: false, data: {} });
 
@@ -50,6 +51,7 @@ function TruckTracking({
 					<TrackingInfo
 						id={showUpdate?.data?.trip_id}
 						trackingType="surface"
+						refetch={refetch}
 					/>
 				</Modal.Body>
 				<Modal.Footer>

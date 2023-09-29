@@ -2,8 +2,8 @@ import { useForm } from '@cogoport/forms';
 import { useImperativeHandle, forwardRef } from 'react';
 
 import NestedLayout from '../../../../../common/NestedLayout';
-import controls from '../../../config/controls-air';
 
+import controls from './controls-air';
 import styles from './styles.module.css';
 
 function Form({ handleSubmitForm = () => {} }, ref) {

@@ -17,14 +17,14 @@ function NestedFieldArray({
 	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
 	showElements = {}, customFieldArrayControls = {}, name = '',
 }) {
-	const { controls = [], addButtonText = '' } = ctrl || {};
+	const { controls = [], addButtonText = '',	name:nestedName = '' } = ctrl || {};
 	const { fields, append, remove } = useFieldArray({ control, name });
 	return (
 		<div className={styles.nested_field_array}>
 			{fields.map((field, nestedIndex) => (
 				<div key={field.id} className={styles.field_container}>
 					<div className={styles.field_header}>
-						<div>{`${startCase(name || 'document')} ${nestedIndex + HEADING_INDEX_OFFSET}`}</div>
+						<div>{`${startCase(nestedName || 'document')} ${nestedIndex + HEADING_INDEX_OFFSET}`}</div>
 						<ButtonIcon
 							icon={<IcMDelete />}
 							onClick={() => remove(nestedIndex, NO_OF_ELEMENTS_TO_BE_REMOVED)}

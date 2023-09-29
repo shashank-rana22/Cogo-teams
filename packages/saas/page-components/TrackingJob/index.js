@@ -27,85 +27,88 @@ function TrackingJob() {
 		activeTab,
 	});
 
+	const onTabChange = (name) => {
+		setActiveTab(name);
+		setSearchString('');
+		setSerialId('');
+	};
 	return (
-		<div>
-			<div style={{ margin: 20 }}>
 
-				<div className={styles.filter_container}>
-					<div>
-						<h1>Tracking Job</h1>
-					</div>
-					<div className={styles.filter}>
+		<div className={styles.main_container}>
 
-						<SearchFilters
-							searchString={searchString}
-							serialId={serialId}
-							setSearchString={setSearchString}
-							activeTab={activeTab}
-							filters={filters}
-							setFilters={setFilters}
-							setSerialId={setSerialId}
-						/>
-						{activeTab === 'ocean_tracking' && (
-
-							<Popover
-								placement="auto-end"
-								theme="light"
-								interactive
-								content={(
-									<Filters
-										activeTab={activeTab}
-										filters={filters}
-										setFilters={setFilters}
-									/>
-								)}
-							>
-								<Button themeType="secondary" size="lg">
-									<IcMFilter />
-									{' '}
-									FILTERS
-								</Button>
-							</Popover>
-
-						)}
-					</div>
+			<div className={styles.filter_container}>
+				<div>
+					<h1>Tracking Job</h1>
 				</div>
+				<div className={styles.filter}>
 
-				<ListPagination filters={filters} setFilters={setFilters} data={data} />
-				<Tabs
-					activeTab={activeTab}
-					themeType="primary"
-					onChange={setActiveTab}
-				>
-					<TabPanel name="air_tracking" title="Air Tracking">
-						<AirTracking
-							list={data?.list}
-							loading={loading}
-							refetch={refetch}
-							filters={filters}
-							setFilters={setFilters}
-						/>
-					</TabPanel>
-					<TabPanel name="ocean_tracking" title="Ocean Tracking">
-						<OceanTracking
-							list={data?.list}
-							loading={loading}
-							refetch={refetch}
-							filters={filters}
-							setFilters={setFilters}
-						/>
-					</TabPanel>
-					<TabPanel name="truck_tracking" title="Surface Tracking">
-						<TruckTracking
-							list={data?.list}
-							loading={loading}
-							refetch={refetch}
-							filters={filters}
-							setFilters={setFilters}
-						/>
-					</TabPanel>
-				</Tabs>
+					<SearchFilters
+						searchString={searchString}
+						serialId={serialId}
+						setSearchString={setSearchString}
+						activeTab={activeTab}
+						filters={filters}
+						setFilters={setFilters}
+						setSerialId={setSerialId}
+					/>
+					{activeTab === 'ocean_tracking' && (
+
+						<Popover
+							placement="right-end"
+							theme="light"
+							interactive
+							content={(
+								<Filters
+									filters={filters}
+									setFilters={setFilters}
+								/>
+							)}
+						>
+							<Button themeType="secondary" size="lg">
+								<IcMFilter />
+								{' '}
+								FILTERS
+							</Button>
+						</Popover>
+
+					)}
+				</div>
 			</div>
+
+			<ListPagination filters={filters} setFilters={setFilters} data={data} />
+			<Tabs
+				activeTab={activeTab}
+				themeType="primary"
+				onChange={onTabChange}
+			>
+				<TabPanel name="air_tracking" title="Air Tracking">
+					<AirTracking
+						list={data?.list}
+						loading={loading}
+						refetch={refetch}
+						filters={filters}
+						setFilters={setFilters}
+					/>
+				</TabPanel>
+				<TabPanel name="ocean_tracking" title="Ocean Tracking">
+					<OceanTracking
+						list={data?.list}
+						loading={loading}
+						refetch={refetch}
+						filters={filters}
+						setFilters={setFilters}
+					/>
+				</TabPanel>
+				<TabPanel name="truck_tracking" title="Surface Tracking">
+					<TruckTracking
+						list={data?.list}
+						loading={loading}
+						refetch={refetch}
+						filters={filters}
+						setFilters={setFilters}
+					/>
+				</TabPanel>
+			</Tabs>
 		</div>
 	);
 }

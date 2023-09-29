@@ -36,7 +36,7 @@ const formControls = ({ showUpdate }) => [
 						rules       : { required: 'This is required' },
 					},
 					{
-						name               : 'margin_values',
+						name               : 'milestones',
 						label              : 'Mile Stone',
 						type               : 'fieldArray',
 						addButtonText      : 'Add MileStone',
@@ -64,7 +64,7 @@ const formControls = ({ showUpdate }) => [
 							{
 								label        : 'Milestone',
 								name         : 'milestone',
-								type         : 'async_select',
+								type         : 'createable_select',
 								isCreatable  : true,
 								asyncKey     : 'list_shipping_line_events',
 								optionsValue : 'milestone',

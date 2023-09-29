@@ -1,20 +1,29 @@
 import { useForm } from '@cogoport/forms';
-import React, { useImperativeHandle, forwardRef } from 'react';
+import React, { useImperativeHandle, forwardRef, useState, useEffect } from 'react';
 
 import NestedLayout from '../../../../../common/NestedLayout';
-import formControls from '../../../config/controls-ocean';
 
+import formControls from './controls-ocean';
 import styles from './styles.module.css';
 
 function Form({
 	handleSubmitForm = () => {},
 	showUpdate = {},
 }, ref) {
+	const [isDisabled, setDisabled] = useState(false);
+	useEffect(() => {
+		if (showUpdate?.data?.search_type === 'CONTAINER_NO') {
+			setDisabled(true);
+		} else {
+			setDisabled(false);
+		}
+	}, [showUpdate]);
 	const { control, handleSubmit, formState:{ errors = {} } } = useForm();
 
-	const controls = formControls({ isDisabled: true, showUpdate });
+	const controls = formControls({ isDisabled, showUpdate });
 
 	const onSubmit = (values) => handleSubmitForm({ values });
+
 	useImperativeHandle(ref, () => ({
 		formSubmit() {
 			handleSubmit(onSubmit)();

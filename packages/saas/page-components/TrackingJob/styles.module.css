@@ -6,3 +6,7 @@
 .filter {
 	display: flex;
 }
+
+.main_container {
+	margin: 20px;
+}

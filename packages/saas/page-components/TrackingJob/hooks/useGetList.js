@@ -8,6 +8,7 @@ const useGetList = ({
 	const [filters, setFilters] = useState({ page: 1, sort_by: 'updated_at', sort_type: 'desc' });
 	const [searchString, setSearchString] = useState('');
 	const [serialId, setSerialId] = useState('');
+
 	const APINAME = {
 		air_tracking   : '/list_untracked_air_shipments',
 		ocean_tracking : '/list_untracked_containers',
@@ -43,14 +44,18 @@ const useGetList = ({
 		}
 	}, [activeTab, filters, query, trigger, searchString, serialId]);
 
-	useEffect(() => debounceQuery(searchString), [searchString, debounceQuery]);
-	useEffect(() => debounceQuery(serialId), [serialId, debounceQuery]);
-
-	useEffect(() => {
+	const reset = useCallback(() => {
 		setFilters({ page: 1, sort_by: 'updated_at', sort_type: 'desc' });
 		setSearchString('');
 		setSerialId('');
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
+
+	useEffect(() => {
+		reset();
+	}, [reset]);
+	useEffect(() => debounceQuery(searchString), [searchString, debounceQuery]);
+	useEffect(() => debounceQuery(serialId), [serialId, debounceQuery]);
 
 	useEffect(() => {
 		refetch();

@@ -28,18 +28,19 @@ function TrackingInfo({ id = null, trackingType = 'surface' }) {
 	return (
 
 		<div className={styles.info_container}>
-			<p>
 
-				Expected Arrival Time
-				{' '}
-				{formatDate({
-					date       : intugine_eta,
-					formatType : 'dateTime',
-					separator  : ' ',
-				})}
-
-			</p>
 			<div className={styles.milestone_container}>
+				<p>
+
+					Expected Arrival Time
+					{' '}
+					{formatDate({
+						date       : intugine_eta,
+						formatType : 'dateTime',
+						separator  : ' ',
+					})}
+
+				</p>
 				<MilestoneStepper
 					combineMileStoneList={combineMileStoneList}
 					trackingType="surface"

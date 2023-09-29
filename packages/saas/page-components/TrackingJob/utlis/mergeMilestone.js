@@ -27,7 +27,15 @@ const checkForMerging = (curr, next) => {
 const mergeOceanMilestone = (list = []) => {
 	const RESULT = [];
 
-	const sortedList = list.sort(
+	const filteredList = list?.filter((item) => {
+		const { is_deleted = false } = item || {};
+
+		if (!is_deleted) {
+			return true;
+		}
+		return false;
+	});
+	const sortedList = filteredList.sort(
 		(curr, next) => new Date(curr.actual_date) - new Date(next.actual_date),
 	);
 
@@ -69,9 +77,9 @@ const mergeSurfaceMilestone = (list = []) => {
 		(curr, next) => new Date(curr.eta) - new Date(next.eta),
 	);
 
-	const uniqueStations = [...new Set(sortedList?.map((item) => item?.station))];
+	const uniqueStations = [...new Set(sortedList?.map((item) => item?.city))];
 
-	const result = uniqueStations.map((station) => sortedList.filter((item) => item.station === station));
+	const result = uniqueStations.map((city) => sortedList.filter((item) => item.city === city));
 
 	return result;
 };

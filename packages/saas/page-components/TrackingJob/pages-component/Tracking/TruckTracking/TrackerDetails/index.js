@@ -4,7 +4,6 @@ import styles from './styles.module.css';
 import TrackingInfo from './TrackingInfo';
 
 function TrackerDetails({ id = null, trackingType = 'surface' }) {
-	console.log(id);
 	const { loading, data } = useGetTruckMilestones({ id, trackingType });
 
 	return (

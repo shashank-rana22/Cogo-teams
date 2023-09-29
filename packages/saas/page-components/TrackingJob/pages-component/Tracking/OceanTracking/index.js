@@ -15,6 +15,7 @@ function OceanTracking({
 	list = [],
 	filters = {},
 	setFilters = () => {},
+	refetch = () => {},
 }) {
 	const [showUpdate, setShowUpdate] = useState({ show: false, data: {} });
 	const [activeTab, setActiveTab] = useState('add_location');
@@ -33,6 +34,7 @@ function OceanTracking({
 	const { apiTrigger, createLoading } = useGetContainerData({
 		refetch: () => {
 			setShowUpdate({ show: false, data: {} });
+			refetch();
 		},
 	});
 	const onSubmit = () => {
@@ -67,7 +69,6 @@ function OceanTracking({
 					>
 						<TabPanel name="add_location" title="Add Location">
 							<Form
-							// refetch={refetch}
 								ref={formRef}
 								handleSubmitForm={handleSubmitForm}
 								showUpdate={showUpdate}

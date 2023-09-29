@@ -21,7 +21,11 @@ function TrackingInfo({ id = null }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.info_container}>
-				<p>{data?.shipment_details?.[GLOBAL_CONSTANTS.zeroth_index]?.container_no}</p>
+				<p>
+					Container No:
+					{' '}
+					{data?.shipment_details?.[GLOBAL_CONSTANTS.zeroth_index]?.container_no}
+				</p>
 				<div className={styles.milestone_container}>
 					<MilestoneStepper
 						combineMileStoneList={combineMileStoneList}
