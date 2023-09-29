@@ -13,7 +13,13 @@
         "can_edit": ["notifying_party", "collection_party"],
         "can_add_service_provider_poc": true,
         "add_external_import_poc": true,
-        "add_external_export_poc": true
+        "add_external_export_poc": true,
+        "hidden_poc": [
+            "booking_agent",
+            "origin_booking_agent",
+            "destination_booking_agent",
+            "consignee_shipper_booking_agent"
+        ]
     },
     "booking_desk_manager": {
         "trade_parties": ["collection_party"],
@@ -31,7 +37,13 @@
         "edit_internal_poc": ["service_ops1"],
         "can_add_service_provider_poc": true,
         "add_external_import_poc": true,
-        "add_external_export_poc": true
+        "add_external_export_poc": true,
+        "hidden_poc": [
+            "booking_agent",
+            "origin_booking_agent",
+            "destination_booking_agent",
+            "consignee_shipper_booking_agent"
+        ]
     },
     "document_desk": {
         "trade_parties": ["collection_party"],
@@ -45,7 +57,13 @@
             "consignee"
         ],
         "can_edit": ["notifying_party", "collection_party"],
-        "can_add_service_provider_poc": true
+        "can_add_service_provider_poc": true,
+        "hidden_poc": [
+            "booking_agent",
+            "origin_booking_agent",
+            "destination_booking_agent",
+            "consignee_shipper_booking_agent"
+        ]
     },
     "supplier_relations_head": {
         "trade_parties": ["collection_party"],
@@ -76,7 +94,13 @@
         ],
         "can_edit": ["notifying_party", "collection_party"],
         "edit_internal_poc": ["service_ops2"],
-        "can_add_service_provider_poc": true
+        "can_add_service_provider_poc": true,
+        "hidden_poc": [
+            "booking_agent",
+            "origin_booking_agent",
+            "destination_booking_agent",
+            "consignee_shipper_booking_agent"
+        ]
     },
     "superadmin": {
         "trade_parties": [
@@ -313,7 +337,14 @@
         ],
         "add_external_import_poc": true,
         "add_external_export_poc": true,
-        "edit_internal_poc": ["booking_agent", "entity_manager"]
+        "edit_internal_poc": ["booking_agent", "entity_manager"],
+        "hidden_poc": [
+            "service_ops1",
+            "service_ops2",
+            "service_ops3",
+            "lastmile_ops",
+            "costbooking_ops"
+        ]
     },
     "consignee_shipper_booking_agent": {
         "trade_parties": [
@@ -351,7 +382,14 @@
             "destination_cha"
         ],
         "add_external_import_poc": true,
-        "add_external_export_poc": true
+        "add_external_export_poc": true,
+        "hidden_poc": [
+            "service_ops1",
+            "service_ops2",
+            "service_ops3",
+            "lastmile_ops",
+            "costbooking_ops"
+        ]
     },
     "prod_process_owner": {
         "trade_parties": ["collection_party"],
@@ -451,7 +489,13 @@
             "collection_party"
         ],
         "can_edit": ["collection_party", "notifying_party"],
-        "can_add_service_provider_poc": true
+        "can_add_service_provider_poc": true,
+        "hidden_poc": [
+            "booking_agent",
+            "origin_booking_agent",
+            "destination_booking_agent",
+            "consignee_shipper_booking_agent"
+        ]
     },
     "costbooking_manager": {
         "trade_parties": ["collection_party"],
@@ -464,7 +508,13 @@
         ],
         "can_edit": ["collection_party", "notifying_party"],
         "edit_internal_poc": ["costbooking_ops"],
-        "can_add_service_provider_poc": true
+        "can_add_service_provider_poc": true,
+        "hidden_poc": [
+            "booking_agent",
+            "origin_booking_agent",
+            "destination_booking_agent",
+            "consignee_shipper_booking_agent"
+        ]
     },
     "lastmile_ops": {
         "trade_parties": ["origin_cha", "collection_party"],
@@ -477,7 +527,13 @@
             "consignee"
         ],
         "can_edit": ["origin_cha", "service_provider"],
-        "can_add_service_provider_poc": true
+        "can_add_service_provider_poc": true,
+        "hidden_poc": [
+            "booking_agent",
+            "origin_booking_agent",
+            "destination_booking_agent",
+            "consignee_shipper_booking_agent"
+        ]
     },
     "lastmile_ops_manager": {
         "trade_parties": ["origin_cha", "collection_party"],
@@ -497,7 +553,13 @@
             "service_provider"
         ],
         "edit_internal_poc": ["lastmile_ops"],
-        "can_add_service_provider_poc": true
+        "can_add_service_provider_poc": true,
+        "hidden_poc": [
+            "booking_agent",
+            "origin_booking_agent",
+            "destination_booking_agent",
+            "consignee_shipper_booking_agent"
+        ]
     },
     "so1_so2_ops": {
         "trade_parties": ["collection_party"],
@@ -511,7 +573,13 @@
             "consignee"
         ],
         "can_edit": ["collection_party", "notifying_party"],
-        "can_add_service_provider_poc": true
+        "can_add_service_provider_poc": true,
+        "hidden_poc": [
+            "booking_agent",
+            "origin_booking_agent",
+            "destination_booking_agent",
+            "consignee_shipper_booking_agent"
+        ]
     },
     "corporate_owner": {
         "trade_parties": [
