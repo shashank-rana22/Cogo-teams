@@ -33,8 +33,6 @@ function EmailTemplates({ mailProps = {} }) {
 		templateAddition,
 		setEmailState,
 	});
-	// const loading = true;
-	// const	templatesList = [];
 
 	return (
 		<div className={styles.container}>

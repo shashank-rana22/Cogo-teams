@@ -110,16 +110,19 @@ export const SUBJECT_MAPPING = {
 	shipment: {
 		title         : 'SIDs',
 		value         : 'shipment',
+		preText       : 'SID:',
 		template_tags : ['shipments_rpa'],
 	},
 	quotation: {
 		title         : 'Quotations',
 		value         : 'quotation',
+		preText       : 'Quotation ID:',
 		template_tags : ['quotation_rpa'],
 	},
 	custom: {
 		title         : 'Others',
 		value         : 'custom',
+		preText       : '',
 		template_tags : ['custom_rpa'],
 	},
 };

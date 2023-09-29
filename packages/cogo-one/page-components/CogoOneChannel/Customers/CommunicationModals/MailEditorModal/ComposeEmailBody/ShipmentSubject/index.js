@@ -2,7 +2,7 @@ import { Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import CustomSelect from '../../../../../../../common/CustomSelect';
 import { SERVICE } from '../../../../../../../constants';
@@ -78,18 +78,35 @@ function ShipmentSubject({
 		activeTab      : emailState?.customSubject?.activeTab,
 	});
 
-	const selectOptions = getActivityListOptions({
-		activityData,
-		activeTab: emailState?.customSubject?.activeTab,
-	}) || [];
+	const selectOptions = useMemo(
+		() => getActivityListOptions({
+			activityData,
+			activeTab: emailState?.customSubject?.activeTab,
+		}) || [],
+		[activityData, emailState?.customSubject?.activeTab],
+	);
 
 	const handleSelectChange = (serialId) => setEmailState(
-		(prev) => ({ ...prev, customSubject: { ...prev?.customSubject, serialId } }),
+		(prev) => ({
+			...prev,
+			customSubject: {
+				...prev?.customSubject,
+				serialId,
+			},
+		}),
 	);
+
 	const handleChangeTab = (activeTab) => {
 		setSearchQuery('');
 		setEmailState(
-			(prev) => ({ ...prev, customSubject: { ...prev?.customSubject, activeTab, serialId: '' } }),
+			(prev) => ({
+				...prev,
+				customSubject: {
+					...prev?.customSubject,
+					activeTab,
+					serialId: '',
+				},
+			}),
 		);
 	};
 
@@ -102,7 +119,9 @@ function ShipmentSubject({
 				value={emailState?.customSubject?.serialId}
 				onChange={handleSelectChange}
 				disabled={!emailState?.orgId}
-				loading={activityLoading}
+				loading={emailState?.customSubject?.activeTab !== 'custom'
+					? activityLoading
+					: false}
 				size="sm"
 				multiple
 				options={selectOptions}
