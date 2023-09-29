@@ -17,7 +17,7 @@ const getFormattedData = (data) => {
 	const uniqueServices = [...new Set(commonServices)];
 
 	const commonBuyData = uniqueServices?.map((service) => {
-		const filterData = buyQuotationData?.filter((item) => (item.serviceType === service));
+		const filterData = buyQuotationData?.filter((item) => (item?.serviceType === service));
 		return filterData;
 	}).flat();
 
@@ -25,7 +25,7 @@ const getFormattedData = (data) => {
 		?.filter((item) => (!uniqueServices?.includes(item?.serviceType))) || [];
 
 	const commonSellData = uniqueServices?.map((service) => {
-		const filterData = sellQuotationData?.filter((item) => (item.serviceType === service));
+		const filterData = sellQuotationData?.filter((item) => (item?.serviceType === service));
 		return filterData;
 	}).flat();
 
