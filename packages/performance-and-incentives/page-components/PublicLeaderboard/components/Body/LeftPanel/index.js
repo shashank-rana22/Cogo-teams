@@ -36,11 +36,12 @@ function LeftPanel(props) {
 
 	return (
 		<div className={styles.container}>
-			{/* <p className={styles.heading}>LEADER BOARD</p> */}
 
 			<TopUsers topList={topList} view={view} />
 
-			<List tableList={tableList} view={view} />
+			{isEmpty(tableList) ? <p className={styles.empty_list}>No more standings...</p>
+				: <List tableList={tableList} view={view} />}
+
 		</div>
 	);
 }

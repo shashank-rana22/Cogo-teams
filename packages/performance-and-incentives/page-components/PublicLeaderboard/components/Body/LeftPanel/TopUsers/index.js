@@ -1,4 +1,5 @@
 import { Tooltip } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
 import Avatar from '../../../../common/Avatar';
 
@@ -29,13 +30,13 @@ function TopUsers(props) {
 						<Tooltip content={(
 							<p>
 								{VIEWS.includes(view)
-									? user?.name : name}
+									? user?.name : startCase(name)}
 							</p>
 						)}
 						>
 							<p className={styles.name}>
 								{VIEWS.includes(view)
-									? user?.name : name}
+									? user?.name : startCase(name)}
 							</p>
 						</Tooltip>
 

@@ -13,11 +13,6 @@ const getClassName = ({ isAllowed, listItem = {} }) => `${styles.list_row}
 			${listItem.rank === GLOBAL_CONSTANTS.one ? styles.box_shadow : ''} 
 			${isAllowed ? styles.hover : ''}`;
 
-function conditionalWrapper({ condition, title, wrapper, children }) {
-	return condition ? wrapper(children)
-		: <div style={title === 'rank' ? { marginLeft: '38px' } : {}}>{children}</div>;
-}
-
 const selectionCheck = ({ currLevel = {}, listItem = {} }) => !isEmpty(currLevel.user?.id)
 	&& currLevel.report_type === AGENT_REPORT
 	&& currLevel.user?.id === listItem.user?.id;
@@ -28,6 +23,11 @@ const getBackgroundColor = ({ listItem = {}, currLevel = {}, user = {} }) => {
 
 	return '#fff';
 };
+
+function conditionalWrapper({ condition, title, wrapper, children }) {
+	return condition ? wrapper(children)
+		: <div style={title === 'rank' ? { marginLeft: '38px' } : {}}>{children}</div>;
+}
 
 function ListItem(props) {
 	const { listItem, user, currLevel } = props;

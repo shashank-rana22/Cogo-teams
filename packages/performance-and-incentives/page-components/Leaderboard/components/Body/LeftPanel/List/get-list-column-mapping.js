@@ -26,17 +26,19 @@ const getListColumnMapping = ({ currLevel }) => {
 						Rank
 					</div>
 				),
+
 			accessor: ({ rank = 0 }) => (rank === ZERO_RANK ? 'NA' : (
 				<div className={styles.rank}>{rank}</div>
 			)),
 		},
 		{
-			id       : 'name',
-			key      : 'name',
-			flex     : 2,
-			Header   : <div className={styles.top_heading}>Name</div>,
-			accessor : ({ user = {}, name = '' }) => ((isEmpty(user.name) && isEmpty(name))
-				? null : <div className={styles.name}>{user.name || startCase(name)}</div>),
+			id     : 'name',
+			key    : 'name',
+			flex   : 2,
+			Header : <div className={styles.top_heading}>Name</div>,
+
+			accessor: ({ user = {}, name = '' }) => ((isEmpty(user.name) && isEmpty(name))
+				? null : <div className={styles.name}>{user.name || (name === 'sme' ? 'SME' : startCase(name))}</div>),
 		},
 		{
 			id   : 'total_score',
@@ -50,6 +52,7 @@ const getListColumnMapping = ({ currLevel }) => {
 						Score
 					</div>
 				),
+
 			accessor: ({ total_score = 0 }) => <div>{total_score}</div>,
 		},
 		{
@@ -64,6 +67,7 @@ const getListColumnMapping = ({ currLevel }) => {
 						%ile
 					</div>
 				),
+
 			accessor: ({ percentile }) => (isEmpty(percentile) ? null : (
 				<div>
 					{percentile.toFixed(GLOBAL_CONSTANTS.two)}
