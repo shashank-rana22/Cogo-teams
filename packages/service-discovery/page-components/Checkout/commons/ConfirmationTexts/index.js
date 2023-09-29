@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 const PROGRESS = 53;
 
 const BL_STATUS_MAPPING = {
-	import : 'B/L release in 24hrs of ETA.',
-	export : 'B/L release in 24hrs of ETD.',
+	import : 'B/L release in 48hrs of ETA.',
+	export : 'B/L release in 48hrs of ETD.',
 };
 
 function ConfirmationTexts({
