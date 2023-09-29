@@ -39,10 +39,10 @@ export default function BLPopver({ bl_do = '', blDoDetails = [] }) {
 							className={document_url ? cl`${styles.item_content} ${styles.underline}` : undefined}
 							role="button"
 							tabIndex={0}
-							onClick={() => window.open(
+							onClick={() => (document_url ? window.open(
 								document_url,
 								'_blank',
-							)}
+							) : undefined)}
 						>
 							{bl_do === 'bl' ? bl_number : do_number}
 

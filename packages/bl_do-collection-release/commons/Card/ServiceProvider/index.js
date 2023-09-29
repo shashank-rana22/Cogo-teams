@@ -108,7 +108,7 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 											className={styles.tooltip_container}
 											role="button"
 											tabIndex={0}
-											onClick={() => window.open(doc_url, '_blank')}
+											onClick={() => (doc_url ? window.open(doc_url, '_blank') : undefined)}
 										>
 											{doc_number}
 										</div>
