@@ -67,7 +67,7 @@ function ViewModal({
 							errors={errors}
 						/>
 					</div>
-					<TablePagination setPagination={setPagination} paginationData={paginationData} />
+					<TablePagination setFilters={setPagination} data={paginationData} />
 					<TableView
 						columns={tableColumns}
 						formattedData={formattedData({
@@ -77,7 +77,7 @@ function ViewModal({
 						})}
 						loading={loading}
 					/>
-					<TablePagination setPagination={setPagination} paginationData={paginationData} />
+					<TablePagination setFilters={setPagination} data={paginationData} />
 				</Modal.Body>
 			</Modal>
 		) : null

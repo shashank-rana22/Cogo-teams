@@ -61,7 +61,7 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 						<Input
 							value={inputValue}
 							type="number"
-							onChange={(value) => setInputValue(value)}
+							onChange={setInputValue}
 						/>
 					</div>
 					<div className={styles.save_close}>

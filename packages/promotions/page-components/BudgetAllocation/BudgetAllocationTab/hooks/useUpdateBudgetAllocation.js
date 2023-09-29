@@ -1,7 +1,6 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-import { flattenErrorToString } from '../helpers/error-helper';
+import toastApiError from '../utils/toastApiError';
 
 const useUpdateBudgetAllocation = ({ setShowSaveLink = () => {}, refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest(
@@ -25,7 +24,7 @@ const useUpdateBudgetAllocation = ({ setShowSaveLink = () => {}, refetch = () =>
 			refetch();
 			setShowSaveLink(false);
 		} catch (error) {
-			Toast.error(flattenErrorToString(error.error));
+			toastApiError(error);
 		}
 	};
 

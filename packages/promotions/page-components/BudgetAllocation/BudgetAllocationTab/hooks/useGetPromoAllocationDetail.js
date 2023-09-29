@@ -27,6 +27,8 @@ const useGetPromoAllocationDetail = ({ selectedDetails = {} }) => {
 		try {
 			const { data } = await trigger();
 			const { list = [], ...paginationdata } = data;
+			console.log('%%%%%%%%%%%%%%%%%');
+			console.log(list);
 			setList(list);
 			setPaginationData(paginationdata);
 		} catch (error) {

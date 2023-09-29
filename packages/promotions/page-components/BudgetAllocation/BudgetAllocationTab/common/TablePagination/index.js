@@ -2,11 +2,11 @@ import { Pagination } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function TablePagination({ paginationData = {}, setPagination = () => {} }) {
-	const { page_limit = 10, total_count = 0, page = 0 } = paginationData || {};
+function TablePagination({ data = {}, setFilters = () => {} }) {
+	const { page_limit = 10, total_count = 1, page = 0 } = data || {};
 
 	const onClick = (currentPage) => {
-		setPagination((state) => ({ ...state, page: currentPage }));
+		setFilters((state) => ({ ...state, page: currentPage }));
 	};
 	return (
 		<div className={styles.pagination}>

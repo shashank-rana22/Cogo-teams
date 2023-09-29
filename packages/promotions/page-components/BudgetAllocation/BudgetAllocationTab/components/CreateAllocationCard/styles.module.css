@@ -1,7 +1,6 @@
 .top_container {
 	display: flex;
 	flex-direction: column;
-	height: 30vh;
 	padding: 20px 24px;
 	margin-top: 16px;
 	margin-bottom: 16px;

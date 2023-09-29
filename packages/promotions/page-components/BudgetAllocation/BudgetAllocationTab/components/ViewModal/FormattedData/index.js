@@ -7,6 +7,16 @@ import styles from './styles.module.css';
 
 const ZERO = 0;
 
+const customFormatAmount = (amount = ZERO, budget_amount_currency = '') => formatAmount({
+	amount,
+	currency : budget_amount_currency,
+	options  : {
+		style                 : 'currency',
+		currencyDisplay       : 'code',
+		maximumFractionDigits : 0,
+	},
+});
+
 const formattedData = ({ promoAllocationList = [], refetch = () => {}, selectedDetails = {} }) => {
 	const formattedDataList = (promoAllocationList || []).map((item) => ({
 		name         : <div className={styles.Title}>{item?.name}</div>,
@@ -22,31 +32,13 @@ const formattedData = ({ promoAllocationList = [], refetch = () => {}, selectedD
 		total_count: (
 			<div className={styles.title}>
 				{item?.total_count}
-				{' '}
 				total worth
-				{' '}
-				{formatAmount({
-					amount   : item?.total_generated || ZERO,
-					currency : item?.budget_amount_currency,
-					options  : {
-						style                 : 'currency',
-						currencyDisplay       : 'code',
-						maximumFractionDigits : 0,
-					},
-				})}
+				{customFormatAmount(item?.total_generated, item?.budget_amount_currency)}
 			</div>
 		),
 		amount_utilised: (
 			<div className={styles.title}>
-				{formatAmount({
-					amount   : item?.amount_utilised || ZERO,
-					currency : item?.budget_amount_currency,
-					options  : {
-						style                 : 'currency',
-						currencyDisplay       : 'code',
-						maximumFractionDigits : 0,
-					},
-				})}
+				{customFormatAmount(item?.amount_utilised, item?.budget_amount_currency)}
 			</div>
 		),
 		shipment_stats:

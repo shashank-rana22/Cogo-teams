@@ -32,17 +32,27 @@ function ShowModal({
 		setShowErrorModal(false);
 		radioReset();
 	};
-	const { fetchCreateDataApi = () => {}, loading = false } = useBudgetAllocation({
-		formData,
-		setShowErrorModal,
-		setShowModal,
-		refetch,
-		setShowAllocationCard,
-		reset,
-		radioReset,
-	});
+	const useBudgetAllocationRefetch = () => {
+		setShowErrorModal(false);
+		setShowModal(false);
+		refetch();
+		setShowAllocationCard((state) => !state);
+		reset();
+		radioReset();
+	};
+
+	const { fetchCreateDataApi = () => {}, loading = false } = useBudgetAllocation(
+		useBudgetAllocationRefetch,
+	);
 	const radiohandleSubmitFunction = (data) => {
-		fetchCreateDataApi({ radioValue: data.radio });
+		let payload = { ...formData, role_ids: [formData.role_ids] };
+		if (data.radio === 'allocate_budget_after_completion_of_active_budget') {
+			payload = { ...payload, overlap_save: 'activate_later' };
+		}
+		if (data.radio === 'deactivate_the_active_budget_and_allocate') {
+			payload = { ...payload, overlap_save: 'activate_now' };
+		}
+		fetchCreateDataApi({ payload });
 	};
 	return (
 		showModal ? (

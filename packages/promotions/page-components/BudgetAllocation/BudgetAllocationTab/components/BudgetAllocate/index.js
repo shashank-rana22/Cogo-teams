@@ -28,7 +28,7 @@ function BudgetAllocate({
 				}
 				loading={loading}
 			/>
-			<TablePagination setPagination={setPagination} paginationData={paginationData} />
+			<TablePagination setFilters={setPagination} data={paginationData} />
 		</div>
 	);
 }

@@ -1,18 +1,14 @@
 const BudgetAllocationControls = [
 	{
-		name          : 'budget_amount',
-		label         : 'Budget to be allocated',
-		type          : 'number',
-		placeholder   : 'Amount',
-		isShowStepper : false,
-		showLabel     : false,
-		span          : 3,
-		style         : { width: '229px' },
-		rules         : {
+		name        : 'budget_amount',
+		label       : 'Budget to be allocated',
+		type        : 'number',
+		placeholder : 'Amount',
+		showLabel   : false,
+		span        : 3,
+		rules       : {
 			required: 'Amount is required',
 		},
-		theme     : 'admin',
-		className : 'primary md',
 	},
 	{
 		name        : 'frequency',
@@ -41,8 +37,6 @@ const BudgetAllocationControls = [
 				value : 'quarter',
 			},
 		],
-		theme     : 'admin',
-		className : 'primary md',
 	},
 	{
 		name        : 'role_ids',
@@ -60,9 +54,7 @@ const BudgetAllocationControls = [
 		rules: {
 			required: 'Role is required',
 		},
-		defaultOptions : true,
-		theme          : 'admin',
-		className      : 'primary md',
+		defaultOptions: true,
 	},
 ];
 export default BudgetAllocationControls;
