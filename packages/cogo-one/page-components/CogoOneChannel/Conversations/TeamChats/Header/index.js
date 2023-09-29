@@ -61,14 +61,15 @@ function Header({
 				<div className={styles.name}>{startCase(search_name?.toLowerCase() || '')}</div>
 			</div>
 			<div className={styles.buttons_flex}>
-				<ButtonGroup size="xs" options={BUTTON_GROUP_OPTIONS} />
 				{!isGroup ? (
 					<Popover
-						placement="bottom"
+						placement="bottom-end"
 						visible={showPopover}
 						render={showPopover ? (
 							<Members viewType={viewType} />
 						) : null}
+						caret={false}
+						className={styles.popover_styles}
 					>
 						<Image
 							src={GLOBAL_CONSTANTS.image_url.groups}
@@ -80,6 +81,7 @@ function Header({
 						/>
 					</Popover>
 				) : null}
+				<ButtonGroup size="xs" options={BUTTON_GROUP_OPTIONS} />
 			</div>
 		</div>
 	);

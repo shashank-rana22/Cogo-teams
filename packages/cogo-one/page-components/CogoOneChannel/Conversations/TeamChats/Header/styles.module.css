@@ -50,8 +50,14 @@
 	align-items: center;
 	justify-content: space-evenly;
 	width: 120px;
+}
 
-	>:last-child {
-		height: 100%;
+.popover_styles {
+	width: 200px;
+	padding: 0 !important;
+
+	>div {
+		width: 100%;
+		padding: 0 !important;
 	}
 }

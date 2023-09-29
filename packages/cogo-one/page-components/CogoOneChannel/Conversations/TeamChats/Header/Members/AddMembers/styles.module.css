@@ -1,14 +1,15 @@
 .container {
 	display: flex;
 	flex-direction: column;
+	padding: 8px;
 
 	:global {
 		.ui_multiselect_display_container {
-			width: 220px !important;
+			width: 100% !important;
 		}
 
 		.ui_multiselect_container {
-			width: 220px;
+			width: 100% !important;
 		}
 
 		.ui_multiselect_input_control {
