@@ -29,7 +29,7 @@ function RenderActionButton({ itemData = {}, refetch = () => {} }) {
 			`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}
 				&billNumber=${itemData?.billNumber}&orgId=${itemData?.organizationId}&jobNumber=${itemData?.jobNumber}
 				&status=${itemData?.status}&billType=${itemData?.billType}
-				&isProforma=${itemData?.isProforma}&jobType=${itemData?.jobType}`,
+				&isProforma=${itemData?.isProforma}&jobType=${itemData?.jobType}&view=${query?.view}`,
 		);
 	};
 

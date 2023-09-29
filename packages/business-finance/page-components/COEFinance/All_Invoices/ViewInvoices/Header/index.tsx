@@ -46,7 +46,7 @@ function Header({
 	const [modalData, setModalData] = useState('');
 	const Router = useRouter();
 	const billId = Router?.query?.billId;
-	const { isShipment, searchValue } = Router?.query || {};
+	const { isShipment, searchValue, active_tab:activeTab, view } = Router?.query || {};
 
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId || '';
 
@@ -74,6 +74,12 @@ function Header({
 	const isItemNotChecked = Object.values(checkItem).some((item) => !item);
 
 	const getRoute = () => {
+		if (activeTab === 'rejected') {
+			return [
+				'/business-finance/coe-finance/[active_tab]/[view]',
+				`/business-finance/coe-finance/rejected/${view}`,
+			];
+		}
 		if (isShipment) {
 			return [
 				`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}`,
