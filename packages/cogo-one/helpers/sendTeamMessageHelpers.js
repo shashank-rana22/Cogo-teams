@@ -152,7 +152,7 @@ const getOrPublishDraft = async ({
 
 const getCommunicationPayload = ({
 	loggedInAgentId = '', groupId = '', activeTab = {}, draftMessage = '',
-	// attachments = [],todo
+	attachments = [],
 }) => {
 	const { data = {}, groupData } = activeTab || {};
 
@@ -176,9 +176,10 @@ const getCommunicationPayload = ({
 		recipient         : groupId,
 		service_id        : loggedInAgentId,
 		message_metadata  : {
-			message_type : 'text', // todo
+			message_type : isEmpty(attachments) ? 'text' : 'media',
 			text         : draftMessage,
 			user_ids     : filteredGroupMembers,
+			media_url    : attachments,
 		},
 	};
 };

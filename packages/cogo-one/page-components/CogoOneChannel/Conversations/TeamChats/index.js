@@ -74,7 +74,6 @@ function TeamChats(props) {
 					firestore={firestore}
 					internalRoomId={group_id}
 					scrollToLastMessage={scrollToLastMessage}
-					draftRoomId={id}
 				/>
 			</div>
 		</div>

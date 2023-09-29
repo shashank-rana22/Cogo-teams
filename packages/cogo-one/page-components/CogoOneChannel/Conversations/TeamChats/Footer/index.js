@@ -18,20 +18,19 @@ function Footer({
 	firestore = {},
 	scrollToLastMessage = () => {},
 	internalRoomId = '',
-	draftRoomId = '',
 }) {
 	const uploaderRef = useRef(null);
 
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
-	const { room_id = '', id: draftId = '' } = activeTeamCard;
+	const { group_id = '', id: draftId = '' } = activeTeamCard;
 
-	const activeId = draftId || room_id;
+	const activeId = group_id || draftId;
 
 	const cleanUpFunc = () => {
 		setDraftMessages((prev) => ({ ...prev, [activeId]: '' }));
-		setDraftUploadedFiles((prev) => ({ ...prev, [activeId]: '' }));
+		setDraftUploadedFiles((prev) => ({ ...prev, [activeId]: [] }));
 		uploaderRef?.current?.externalHandleDelete?.([]);
 		scrollToLastMessage();
 	};
@@ -43,7 +42,7 @@ function Footer({
 		activeTab,
 		firestore,
 		cleanUpFunc,
-		draftRoomId,
+		draftRoomId: draftId,
 	});
 
 	const draftMessage = draftMessages?.[activeId] || '';
@@ -55,7 +54,10 @@ function Footer({
 	const hasUploadedFiles = !isEmpty(draftUploadedFiles?.[activeId]);
 
 	const sendMessage = () => {
-		sendTeamsMessage({ draftMessage, attachments: uploadedFiles });
+		sendTeamsMessage({
+			draftMessage,
+			attachments: uploadedFiles,
+		});
 	};
 
 	const handleKeyPress = (event) => {
@@ -71,7 +73,6 @@ function Footer({
 
 	return (
 		<>
-
 			<FooterHead
 				uploading={uploading}
 				roomId={activeId}
@@ -94,7 +95,7 @@ function Footer({
 									key={eachSuggestion}
 									className={styles.tag_div}
 									role="presentation"
-									style={{ cursor: (sendMessageLoading || !draftRoomId) ? 'not-allowed' : 'pointer' }}
+									style={{ cursor: (sendMessageLoading || !draftId) ? 'not-allowed' : 'pointer' }}
 									onClick={() => {
 										sendTeamsMessage({ draftMessage: eachSuggestion });
 									}}
@@ -131,7 +132,7 @@ function Footer({
 						draftUploadedFiles={draftUploadedFiles}
 						ref={uploaderRef}
 						internalRoomId={internalRoomId}
-						draftRoomId={draftRoomId}
+						draftRoomId={draftId}
 					/>
 				</div>
 			</div>
