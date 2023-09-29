@@ -18,7 +18,7 @@ function NotificationPage({
 	disabled = false,
 	setDisabled = () => {},
 }) {
-	const { t } = useTranslation(['notifications']);
+	const { t } = useTranslation(['common']);
 
 	const {
 		activeTab,
@@ -44,7 +44,7 @@ function NotificationPage({
 				>
 					<TabPanel
 						name="notifications"
-						title={t('notifications:tab_notifications_label')}
+						title={t('common:tab_notifications_label')}
 						className={styles.tab_panel}
 					>
 						<Header
@@ -74,7 +74,7 @@ function NotificationPage({
 					</TabPanel>
 					<TabPanel
 						name="mails"
-						title={t('notifications:tab_mails_label')}
+						title={t('common:tab_mails_label')}
 						className={styles.tab_panel}
 					>
 						<Header
