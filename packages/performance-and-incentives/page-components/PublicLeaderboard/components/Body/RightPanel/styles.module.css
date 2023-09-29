@@ -56,9 +56,8 @@
 	}
 }
 
-.empty_state_container {
-	display: flex;
-	align-items: center;
-	height: 100vh;
+.empty_img {
+	display: block;
 	margin: 0 auto;
+	margin-top: 50px;
 }

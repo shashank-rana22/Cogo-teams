@@ -47,19 +47,25 @@
 .block_container {
 	display: flex;
 	flex-wrap: wrap;
-	padding-left: 32px;
 }
 
 .activity_container {
 	display: flex;
-	flex-basis: 30%;
 	align-items: center;
+	justify-content: center;
+	width: 33%;
+
+	div:nth-child(2) {
+		width: 65%;
+	}
 }
 
 .value {
+	width: 35%;
 	margin-right: 8px;
 	font-size: 18px;
 	font-weight: 600;
+	text-align: end;
 
 	@media (min-width: 2560px) {
 		margin-right: 24px;
@@ -68,7 +74,6 @@
 }
 
 .activity {
-	width: 120px;
 	overflow: hidden;
 	color: #828282;
 	text-overflow: ellipsis;
