@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Toast } from '@cogoport/components';
 import { useForm, getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
