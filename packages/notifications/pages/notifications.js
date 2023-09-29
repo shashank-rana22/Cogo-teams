@@ -5,7 +5,7 @@ export { default } from '@cogoport/notifications/page-components';
 export async function getServerSideProps({ locale }) {
 	return {
 		props: {
-			...(await serverSideTranslations(locale, ['common', 'notifications'])),
+			...(await serverSideTranslations(locale, ['common'])),
 		},
 	};
 }
