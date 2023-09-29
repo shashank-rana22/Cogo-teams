@@ -21,13 +21,16 @@ function RightPanel(props) {
 
 	if (isEmpty(activityData)) {
 		return (
-			<Image
-				src={GLOBAL_CONSTANTS.image_url.empty_chart}
-				width={300}
-				height={300}
-				alt="Empty Chart"
-				className={styles.empty_img}
-			/>
+			<div className={styles.empty_state_container}>
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.empty_chart}
+					width={300}
+					height={300}
+					alt="Empty Chart"
+					className={styles.empty_img}
+				/>
+			</div>
+
 		);
 	}
 
