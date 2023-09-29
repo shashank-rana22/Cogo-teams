@@ -22,9 +22,8 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 		: docs?.[GLOBAL_CONSTANTS.zeroth_index]?.do_number;
 
 	const doc_url = stateProps.activeTab === 'bl'
-	? docs?.[GLOBAL_CONSTANTS.zeroth_index]?.document?.document_url
-	: docs?.[GLOBAL_CONSTANTS.zeroth_index]?.document?.document_url;
-
+		? docs?.[GLOBAL_CONSTANTS.zeroth_index]?.document?.document_url
+		: docs?.[GLOBAL_CONSTANTS.zeroth_index]?.document?.document_url;
 
 	return (
 		<div className={styles.container}>
@@ -105,10 +104,14 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 										</Tooltip>
 									)
 									:								(
-									<div className={styles.tooltip_container} 
-										onClick={() => window.open(doc_url, '_blank')}>
-										{doc_number}
-									</div>
+										<div
+											className={styles.tooltip_container}
+											role="button"
+											tabIndex={0}
+											onClick={() => window.open(doc_url, '_blank')}
+										>
+											{doc_number}
+										</div>
 									)}
 							</div>
 						) : (
