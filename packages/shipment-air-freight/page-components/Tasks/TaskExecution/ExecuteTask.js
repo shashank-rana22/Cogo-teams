@@ -231,7 +231,7 @@ function ExecuteTask({
 			/>
 		);
 	}
-	if (task?.task === '"upload_carting_order_approval"' && tradeType === 'export') {
+	if (task?.task === 'upload_carting_order_approval' && tradeType === 'export') {
 		return (
 			<CartingApproval
 				shipmentData={shipment_data}

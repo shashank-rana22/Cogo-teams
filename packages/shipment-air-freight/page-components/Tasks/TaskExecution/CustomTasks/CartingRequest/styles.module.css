@@ -2,6 +2,7 @@
 	padding: 10px 20px;
 
 	:global {
+		.ui_dateRange_content_start,
 		.react-datepicker__input-container {
 			min-width: 300px;
 		}

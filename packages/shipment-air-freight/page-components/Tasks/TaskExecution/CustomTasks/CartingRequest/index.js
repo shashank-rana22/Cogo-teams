@@ -1,6 +1,7 @@
 import { Layout } from '@cogoport/air-modules';
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import getControls from './getControls';
 import useUpdateShipmentPendingTask from './hooks/useUpdateShipmentPendingTask';
@@ -13,13 +14,38 @@ function CartingRequest({
 	onCancel = () => {},
 }) {
 	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch });
+
 	const { errors, control, watch, handleSubmit } = useForm();
 	const formValues = watch();
-	const controls = getControls({ formValues });
+
+	const controls = getControls();
+
 	const onSubmit = () => {
-		console.log('formValues: ', formValues);
-		// apiTrigger({ payload });
+		const { vehicle_arrival_date = '' } = formValues || {};
+		const { startDate = '', endDate = '' } = vehicle_arrival_date || {};
+
+		if ((endDate.getDate() === startDate.getDate() && endDate.getTime() <= startDate.getTime())
+		|| (endDate.getDate() < startDate.getDate())) {
+			Toast.error('Start dateTime value cannot exceed End dateTime value');
+			return;
+		}
+
+		const airFreightServiceId = (shipmentData?.all_services || []).filter(
+			(item) => item?.display_service_type === 'air_freight_service',
+		);
+
+		const payload = {
+			id   : task?.id,
+			data : {
+				air_freight_service: {
+					id                    : [airFreightServiceId?.[GLOBAL_CONSTANTS.zeroth_index]?.id || ''],
+					carting_order_details : formValues,
+				},
+			},
+		};
+		apiTrigger({ payload });
 	};
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.heading}>Add Vehicle Arrivals Slots</div>

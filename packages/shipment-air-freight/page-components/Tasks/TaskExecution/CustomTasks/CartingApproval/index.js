@@ -1,9 +1,16 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 
 import DocCard from './DocCard';
+import useListShipmentDocuments from './hooks/useListShipmentDocuments';
 import useUpdateShipmentPendingTask from './hooks/useUpdateShipmentPendingTask';
 import styles from './styles.module.css';
+
+const LAST_INDEX = -1;
+
+const getFileName = (item) => item?.split('/')?.splice(LAST_INDEX)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 function CartingApproval({
 	shipmentData = {},
@@ -11,80 +18,61 @@ function CartingApproval({
 	refetch = () => {},
 	onCancel = () => {},
 }) {
-	console.log('refetch:', refetch);
-	console.log('shipmentData:', shipmentData);
-	console.log('task:', task);
-	const { control, handleSubmit } = useForm();
-	const list = [
-		{
-			id       : 1,
-			filename : 'test.png',
-			fileurl  : 'sdfas.com',
+	const { control, handleSubmit, watch } = useForm();
 
-		},
-		{
-			id       : 2,
-			filename : 'test.png',
-			fileurl  : 'sdfas.com',
+	const { data = {}, loading: documentLoading = false } = useListShipmentDocuments({ shipmentData });
+	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch });
 
-		},
-		{
-			id       : 3,
-			filename : 'test.png',
-			fileurl  : 'sdfas.com',
-
-		},
-		{
-			id       : 4,
-			filename : 'test.png',
-			fileurl  : 'sdfas.com',
-
-		},
-		{
-			id       : 5,
-			filename : 'test.png',
-			fileurl  : 'sdfas.com',
-
-		},
-		{
-			id       : 6,
-			filename : 'test.png',
-			fileurl  : 'sdfas.com',
-
-		},
-		{
-			id       : 7,
-			filename : 'test.png',
-			fileurl  : 'sdfas.com',
-
-		},
-		{
-			id       : 8,
-			filename : 'test.png',
-			fileurl  : 'sdfas.com',
-
-		},
-	];
-
-	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask();
-	console.log('apiTrigger:', apiTrigger);
+	const formValues = watch();
 
 	const onSubmit = () => {
-		console.log('hahahaha');
-		// apiTrigger(payload);
+		const documents = (Object.values(formValues) || []).reduce((prev, item) => {
+			const { fileName = '', finalUrl = '' } = item || {};
+			return [...prev, {
+				document_type : 'carting_order',
+				file_name     : !isEmpty(fileName) ? fileName : getFileName(item),
+				document_url  : !isEmpty(finalUrl) ? finalUrl : item,
+				data          : {
+					description: '',
+				},
+			}];
+		}, []);
+
+		const payload = {
+			id   : task?.id,
+			data : {
+				documents,
+			},
+		};
+
+		apiTrigger({ payload });
 	};
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.heading}>Uploaded Documents</div>
 			<div className={styles.doc_container}>
-				{(list || []).map((item) => <DocCard key={item?.id} item={item} control={control} />)}
+				{(data?.list || []).map((item) => (
+					<DocCard
+						key={item?.id}
+						item={item}
+						control={control}
+					/>
+				))}
 			</div>
 			<div className={styles.submit_button}>
-				<Button themeType="secondary" onClick={onCancel} disabled={loading}>
+				<Button
+					themeType="secondary"
+					onClick={onCancel}
+					disabled={loading || documentLoading}
+				>
 					Cancel
 				</Button>
-				<Button className={styles.submit} onClick={handleSubmit(onSubmit)} disabled={loading}>
+				<Button
+					className={styles.submit}
+					onClick={handleSubmit(onSubmit)}
+					disabled={loading || documentLoading || task?.status === 'completed'}
+				>
 					{loading ? 'Submitting...' : 'Submit'}
 				</Button>
 			</div>

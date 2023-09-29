@@ -4,12 +4,6 @@
 	color: #666a90;
 }
 
-.submit_button {
-	display: flex;
-	justify-content: flex-end;
-	margin: 15px 0;
-}
-
 .main_container {
 	padding: 20px;
 }
@@ -17,6 +11,12 @@
 .doc_container {
 	display: flex;
 	flex-wrap: wrap;
+}
+
+.submit_button {
+	display: flex;
+	justify-content: flex-end;
+	margin: 15px 0;
 }
 
 .submit {

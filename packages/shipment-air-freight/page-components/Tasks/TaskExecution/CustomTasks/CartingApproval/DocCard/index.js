@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import { UploadController } from '@cogoport/forms';
 
 import styles from './styles.module.css';
@@ -9,9 +9,23 @@ function DocCard({
 }) {
 	return (
 		<div className={styles.card_container}>
-			<div className={styles.filename}>{item?.filename}</div>
+			<div className={styles.tooltip}>
+				<Tooltip
+					content={item?.file_name}
+					placement="top"
+				>
+					<div className={styles.filename}>{item?.file_name}</div>
+				</Tooltip>
+			</div>
+
 			<div className={styles.button_container}>
-				<Button size="sm" onClick={() => window.open(item?.fileurl, '_blank')}>View</Button>
+				<Button
+					size="sm"
+					onClick={() => window.open(item?.document_url, '_blank')}
+				>
+					View
+				</Button>
+
 				<UploadController
 					key={item?.id}
 					className="upload_controller_documents"

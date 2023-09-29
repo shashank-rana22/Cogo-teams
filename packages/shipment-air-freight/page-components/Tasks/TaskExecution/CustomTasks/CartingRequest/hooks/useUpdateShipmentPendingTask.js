@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateShipmentPendingTask = ({ refetch }) => {
+const useUpdateShipmentPendingTask = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_pending_task',
 		method : 'POST',
