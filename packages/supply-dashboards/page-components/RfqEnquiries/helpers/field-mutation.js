@@ -6,12 +6,16 @@ import {
 import { merge, startCase } from '@cogoport/utils';
 
 const FieldMutation = ({
-	fields, values, data,
+	fields, values, data, service = {},
 }) => {
 	const serviceProviderOptions = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganization(),
-			{ params: { filters: { account_type: 'service_provider', kyc_status: 'verified' } } },
+			{
+				params: {
+					filters: { account_type: 'service_provider', kyc_status: 'verified', service: service?.service },
+				},
+			},
 		),
 	);
 	const shippingLineOptions = useGetAsyncOptions(merge(
