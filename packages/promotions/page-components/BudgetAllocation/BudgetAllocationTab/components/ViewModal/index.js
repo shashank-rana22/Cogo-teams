@@ -1,8 +1,9 @@
-import { Modal, Pagination } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useEffect } from 'react';
 
 import Layout from '../../../../../common/Layout';
+import TablePagination from '../../common/TablePagination';
 import tableColumns from '../../configurations/promo-budget-details-table';
 import controls from '../../controls/search-controls';
 import useGetPromoAllocationDetail from '../../hooks/useGetPromoAllocationDetail';
@@ -35,8 +36,6 @@ function ViewModal({
 		setFilterValue,
 	} = useGetPromoAllocationDetail({ selectedDetails });
 
-	const { page_limit = 10, total_count = 1, page = 1 } = paginationData || {};
-
 	useEffect(() => {
 		setFilterValue(agent_id || '');
 		setPagination({ page: 1 });
@@ -68,17 +67,7 @@ function ViewModal({
 							errors={errors}
 						/>
 					</div>
-					<div className={styles.pagination_container}>
-						<Pagination
-							className="md"
-							pageSize={page_limit}
-							currentPage={page}
-							totalItems={total_count}
-							onPageChange={(val) => {
-								setPagination((p) => ({ ...p, page: val }));
-							}}
-						/>
-					</div>
+					<TablePagination setPagination={setPagination} paginationData={paginationData} />
 					<TableView
 						columns={tableColumns}
 						formattedData={formattedData({
@@ -88,17 +77,7 @@ function ViewModal({
 						})}
 						loading={loading}
 					/>
-					<div className={styles.pagination_container}>
-						<Pagination
-							className="md"
-							pageSize={page_limit}
-							currentPage={page}
-							totalItems={total_count}
-							onPageChange={(val) => {
-								setPagination((p) => ({ ...p, page: val }));
-							}}
-						/>
-					</div>
+					<TablePagination setPagination={setPagination} paginationData={paginationData} />
 				</Modal.Body>
 			</Modal>
 		) : null

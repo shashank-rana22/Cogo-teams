@@ -1,5 +1,4 @@
-import { Pagination } from '@cogoport/components';
-
+import TablePagination from '../../common/TablePagination';
 import tableColumns from '../../configurations/budget-allocation-table-colum';
 import TableView from '../TableView';
 
@@ -15,8 +14,6 @@ function BudgetAllocate({
 	loading = true,
 	refetch = () => {},
 }) {
-	const { page_limit = 0, total_count = 0, page = 0 } = paginationData;
-
 	return (
 		<div className={styles.container}>
 			<TableView
@@ -31,17 +28,7 @@ function BudgetAllocate({
 				}
 				loading={loading}
 			/>
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="table"
-					pageSize={page_limit}
-					currentPage={page}
-					totalItems={total_count}
-					onPageChange={(val) => {
-						setPagination((p) => ({ ...p, page: val }));
-					}}
-				/>
-			</div>
+			<TablePagination setPagination={setPagination} paginationData={paginationData} />
 		</div>
 	);
 }
