@@ -2,7 +2,7 @@ import { Toggle } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../constants/leaderboard-viewtype-constants';
 import SearchInput from '../../../../common/SearchInput';
@@ -11,8 +11,6 @@ import RefreshResults from './RefreshResults';
 import styles from './styles.module.css';
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
-
-const OFFSET = 1;
 
 function LeaderboardFilters(props) {
 	const {
@@ -32,10 +30,6 @@ function LeaderboardFilters(props) {
 	} = props;
 
 	const { incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
-
-	const { report_type: beforeLevel = '' } = levelStack[levelStack.length - OFFSET] || [];
-
-	const [backText] = beforeLevel.split('_') || [];
 
 	const handleBack = () => {
 		setCurrLevel(levelStack[GLOBAL_CONSTANTS.zeroth_index]);
@@ -68,11 +62,7 @@ function LeaderboardFilters(props) {
 					<div className={styles.back}>
 						<IcMArrowBack style={{ marginRight: '6px', cursor: 'pointer' }} onClick={handleBack} />
 						<div>
-							Back to
-							{' '}
-							{startCase(backText)}
-							{' '}
-							Leaderboard
+							Back
 						</div>
 					</div>
 				) : null}
