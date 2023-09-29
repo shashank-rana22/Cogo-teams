@@ -12,7 +12,7 @@ const getRightPanelHeading = ({ currLevel, entity, viewType, levelStack }) => {
 	const actualCurrLevel = (currLevel.isExpanded && isEmpty(currLevel.user))
 		? levelStack[GLOBAL_CONSTANTS.zeroth_index] : currLevel;
 
-	const { report_type, user, location_name, isExpanded } = actualCurrLevel || {};
+	const { report_type, user, location_name, channel } = actualCurrLevel || {};
 
 	const { name } = user || {};
 
@@ -24,12 +24,16 @@ const getRightPanelHeading = ({ currLevel, entity, viewType, levelStack }) => {
 				heading = getEntityNameById(entity);
 			} else if (report_type === OWNER_REPORT) {
 				if (isEmpty(user)) {
-					heading = `${startCase(location_name || '')} Team`;
+					if (location_name) {
+						heading = `${startCase(location_name || '')} Team`;
+					} else if (channel) {
+						heading = `${channel.toUpperCase()} Team`;
+					}
 				} else {
 					heading = `${name}'s Team`;
 				}
 			} else if (report_type === AGENT_REPORT) {
-				if (isExpanded) {
+				if (!isEmpty(user)) {
 					heading = user.name;
 				} else {
 					heading = `${name}'s Team`;

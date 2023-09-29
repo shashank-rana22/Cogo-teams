@@ -2,7 +2,7 @@ import { Toggle } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../constants/leaderboard-viewtype-constants';
 import SearchInput from '../../../../common/SearchInput';
@@ -30,6 +30,10 @@ function LeaderboardFilters(props) {
 	} = props;
 
 	const { incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
+
+	const { report_type: beforeLevel = '' } = levelStack[GLOBAL_CONSTANTS.zeroth_index] || [];
+
+	const [backText] = beforeLevel.split('_') || [];
 
 	const handleBack = () => {
 		setCurrLevel(levelStack[GLOBAL_CONSTANTS.zeroth_index]);
@@ -62,7 +66,11 @@ function LeaderboardFilters(props) {
 					<div className={styles.back}>
 						<IcMArrowBack style={{ marginRight: '6px', cursor: 'pointer' }} onClick={handleBack} />
 						<div>
-							Back
+							Back To
+							{' '}
+							{startCase(backText)}
+							{' '}
+							Leaderboard
 						</div>
 					</div>
 				) : null}
@@ -71,8 +79,8 @@ function LeaderboardFilters(props) {
 
 			<div className={styles.inner_container}>
 				<RefreshResults
-					loading={listLoading}
-					refetch={listRefetch}
+					listLoading={listLoading}
+					listRefetch={listRefetch}
 					refetchStats={refetchStats}
 					statsLoading={statsLoading}
 				/>

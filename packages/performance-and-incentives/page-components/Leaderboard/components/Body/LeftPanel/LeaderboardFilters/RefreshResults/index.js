@@ -3,13 +3,12 @@ import { IcMRefresh } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function RefreshResults({
-	loading: getLoading = false,
-	refetch = () => {}, refetchStats = () => {}, statsLoading = false,
-}) {
+function RefreshResults(props) {
+	const { listLoading, listRefetch, refetchStats, statsLoading } = props;
+
 	const fetchData = () => {
 		try {
-			refetch();
+			listRefetch();
 			refetchStats();
 		} catch {
 			Toast.error('Something went wrong!');
@@ -20,7 +19,7 @@ function RefreshResults({
 		<Button
 			size="md"
 			themeType="secondary"
-			disabled={getLoading || statsLoading}
+			disabled={listLoading || statsLoading}
 			onClick={fetchData}
 			className={styles.refresh}
 		>

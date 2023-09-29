@@ -54,7 +54,7 @@ const useScoringReports = (props) => {
 		},
 	});
 
-	const [{ data, loading }, trigger, refetch] = useAllocationRequest({
+	const [{ data, loading }, trigger] = useAllocationRequest({
 		url     : '/reports',
 		method  : 'GET',
 		authkey : 'get_agent_scoring_reports',
@@ -120,7 +120,7 @@ const useScoringReports = (props) => {
 		params,
 		setParams,
 		debounceQuery,
-		listRefetch : refetch,
+		listRefetch : trigger,
 	};
 };
 
