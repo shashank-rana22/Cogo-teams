@@ -41,6 +41,7 @@ function ReceiveComponent({
 				<div className={styles.message_card}>
 					<MessageBody
 						response={response}
+						message_type={response?.message_type || 'text'}
 					/>
 				</div>
 			</div>
