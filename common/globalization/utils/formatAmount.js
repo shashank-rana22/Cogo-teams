@@ -31,7 +31,9 @@ const isAmountValid = ({ amount }) => !(
         || isNaN(amount)
 );
 
-const getCurrencyLocale = ({ currency }) => {
+const getCurrencyLocale = ({ currency, options }) => {
+	const { currencyWise = '' } = options || {};
+
 	let scope;
 	try {
 		scope = getCookie('scope');
@@ -41,7 +43,7 @@ const getCurrencyLocale = ({ currency }) => {
 
 	const geoCurrencyLocale = getByKey(geo, `formats.amount.scope[${scope}].locale`);
 	if (geoCurrencyLocale) {
-		return geoCurrencyLocale;
+		return GLOBAL_CONSTANTS.currency_locale[currencyWise] || geoCurrencyLocale;
 	}
 
 	let tempCurrency = geo.country.currency.code;
@@ -49,7 +51,7 @@ const getCurrencyLocale = ({ currency }) => {
 		tempCurrency = currency;
 	}
 
-	return GLOBAL_CONSTANTS.currency_locale[tempCurrency];
+	return GLOBAL_CONSTANTS.currency_locale[currencyWise] || GLOBAL_CONSTANTS.currency_locale[tempCurrency];
 };
 
 const formatCurrency = ({ amount, locale, options }) => {
@@ -92,17 +94,16 @@ const formatAmount = ({ amount = '', currency = '', options = {} }) => {
 	if (!isAmountValid({ amount })) {
 		return null;
 	}
-	const { currencyWise = '' } = options || {};
+
 	const UPPERCASE_CURRENCY = (
 		currency || geo.country.currency.code
 	).toUpperCase();
 
 	return format({
-		locale: GLOBAL_CONSTANTS.currency_locale[currencyWise]
-		|| getCurrencyLocale({ currency: UPPERCASE_CURRENCY }),
+		locale   : getCurrencyLocale({ currency: UPPERCASE_CURRENCY, options }),
 		amount,
 		options,
-		currency: UPPERCASE_CURRENCY,
+		currency : UPPERCASE_CURRENCY,
 	});
 };
 

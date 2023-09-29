@@ -18,6 +18,11 @@ import styles from './styles.module.css';
 const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
 
+const userIds = [
+	GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
+	GLOBAL_CONSTANTS.uuid.hk_user_id,
+	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id];
+
 const SEARCH_PLACEHOLDER = 'Search by Invoice number / SID';
 
 const getStyle = ({
@@ -151,7 +156,7 @@ function InvoiceTable({
 						/>
 					</div>
 					<div className={styles.filter_container}>
-						{(GLOBAL_CONSTANTS.role_ids.includes(profile?.user?.id)) ? (
+						{(userIds.includes(profile?.user?.id)) ? (
 							<div
 								className={styles.send_report}
 								onClick={() => {
