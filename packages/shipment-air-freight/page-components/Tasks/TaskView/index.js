@@ -51,7 +51,6 @@ function TaskView() {
 
 	const handleDisableTaskButton = () => (tasksList || []).map((item) => {
 		const element = item;
-		console.log('element:', element);
 
 		if (
 			element?.service_type === 'air_freight_service'
@@ -91,11 +90,20 @@ function TaskView() {
 				);
 			}
 			if (
-				element?.task === 'upload_carting_order_details'
+				element?.task === 'request_carting_order'
 				&& tradeType === 'export'
 			) {
 				element.disabled = (tasksList || []).some(
-					(task) => ['request_carting_order', 'upload_carting_order_approval'].includes(task?.task)
+					(task) => task?.task === 'upload_carting_order'
+					&& task?.status === 'pending',
+				);
+			}
+			if (
+				element?.task === 'upload_carting_order_approval'
+				&& tradeType === 'export'
+			) {
+				element.disabled = (tasksList || []).some(
+					(task) => ['request_carting_order', 'upload_carting_order'].includes(task?.task)
 					&& task?.status === 'pending',
 				);
 			}

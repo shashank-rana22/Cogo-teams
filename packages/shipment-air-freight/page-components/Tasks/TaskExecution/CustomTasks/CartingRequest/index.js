@@ -2,7 +2,8 @@ import { Layout } from '@cogoport/air-modules';
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import controls from './controls';
+import getControls from './getControls';
+import useUpdateShipmentPendingTask from './hooks/useUpdateShipmentPendingTask';
 import styles from './styles.module.css';
 
 function CartingRequest({
@@ -11,13 +12,14 @@ function CartingRequest({
 	refetch = () => {},
 	onCancel = () => {},
 }) {
-	console.log('onCancel:', onCancel);
-	console.log('refetch:', refetch);
-	console.log('shipmentData:', shipmentData);
-	console.log('task:', task);
-	const { errors, control, watch } = useForm();
+	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch });
+	const { errors, control, watch, handleSubmit } = useForm();
 	const formValues = watch();
-	console.log('formValues:', formValues);
+	const controls = getControls({ formValues });
+	const onSubmit = () => {
+		console.log('formValues: ', formValues);
+		// apiTrigger({ payload });
+	};
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.heading}>Add Vehicle Arrivals Slots</div>
@@ -35,7 +37,20 @@ function CartingRequest({
 				/>
 			</div>
 			<div className={styles.submit_button}>
-				<Button>Submit</Button>
+				<Button
+					themeType="secondary"
+					onClick={onCancel}
+					disabled={loading}
+				>
+					Cancel
+				</Button>
+				<Button
+					className={styles.submit}
+					onClick={handleSubmit(onSubmit)}
+					disabled={loading || task?.status === 'completed'}
+				>
+					{loading ? 'Submitting...' : 'Submit'}
+				</Button>
 			</div>
 		</div>
 	);

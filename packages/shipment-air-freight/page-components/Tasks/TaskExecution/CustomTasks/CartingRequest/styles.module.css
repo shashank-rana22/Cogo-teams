@@ -27,3 +27,7 @@
 	justify-content: flex-end;
 	margin: 15px 0;
 }
+
+.submit {
+	margin-left: 15px;
+}
