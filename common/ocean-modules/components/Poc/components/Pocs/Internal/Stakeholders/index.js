@@ -43,6 +43,8 @@ function Stakeholders({
 					id,
 				} = item || {};
 
+				if (rolesPermission?.hidden_poc?.includes(stakeholder_type)) return null;
+
 				if (!mapping[stakeholder_type]) return null;
 
 				const contact_number = `${mobile_country_code} ${mobile_number}`;
