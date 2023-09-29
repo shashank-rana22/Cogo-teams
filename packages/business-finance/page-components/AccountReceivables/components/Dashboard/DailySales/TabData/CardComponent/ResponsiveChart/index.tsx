@@ -6,7 +6,6 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useTranslation } from 'next-i18next';
 
 import EmptyState from '../../../../../../commons/EmptyStateDocs';
-import formatCurrency from '../../../../../../Utils/amountFormat';
 
 import styles from './styles.module.css';
 
@@ -95,7 +94,17 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 						legend         : t('amount'),
 						legendOffset   : -84,
 						legendPosition : 'middle',
-						format         : (value) => formatCurrency(currency, value),
+						format         : (value) => formatAmount({
+							amount  :	value as any,
+							currency,
+							options : {
+								currencyDisplay : 'code',
+								style           : 'currency',
+								notation        : 'compact',
+								compactDisplay  : 'short',
+								currencyWise    : currency,
+							},
+						}),
 					}}
 					pointSize={5}
 					pointBorderWidth={2}

@@ -4,8 +4,6 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import formatCurrency from '../../../Utils/amountFormat';
-
 import styles from './styles.module.css';
 
 interface OverallStats {
@@ -64,13 +62,19 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 										)}
 										>
 											<div className={styles.wrapper}>
-												{
-												formatCurrency(
-													overallStats?.dashboardCurrency,
-													overallStats?.openInvoicesAmount,
-												)
-
-												}
+												{formatAmount({
+													amount   : overallStats?.openInvoicesAmount as any || 0,
+													currency : overallStats?.dashboardCurrency || currency,
+													options  : {
+														notation              : 'compact',
+														compactDisplay        : 'short',
+														maximumFractionDigits : 2,
+														style                 : 'currency',
+														currencyDisplay       : 'code',
+														currencyWise:
+														overallStats?.dashboardCurrency || currency,
+													},
+												})}
 											</div>
 
 										</Tooltip>
@@ -121,12 +125,19 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 										)}
 										>
 											<div className={styles.wrapper}>
-												{
-												formatCurrency(
-													overallStats?.dashboardCurrency,
-													overallStats?.onAccountAmount,
-												)
-												}
+												{formatAmount({
+													amount   : overallStats?.onAccountAmount as any || 0,
+													currency :	overallStats?.dashboardCurrency || currency,
+													options  :	{
+														notation              : 'compact',
+														compactDisplay        : 'short',
+														maximumFractionDigits : 2,
+														style                 : 'currency',
+														currencyDisplay       : 'code',
+														currencyWise:
+														overallStats?.dashboardCurrency || currency,
+													},
+												})}
 											</div>
 
 										</Tooltip>
@@ -166,12 +177,19 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 										)}
 										>
 											<div className={styles.wrapper}>
-												{
-												formatCurrency(
-													overallStats?.dashboardCurrency,
-													overallStats?.totalOutstandingAmount,
-												)
-												}
+												{formatAmount({
+													amount   : overallStats?.totalOutstandingAmount as any || 0,
+													currency : overallStats?.dashboardCurrency || currency,
+													options  : {
+														notation              : 'compact',
+														compactDisplay        : 'short',
+														maximumFractionDigits : 2,
+														style                 : 'currency',
+														currencyDisplay       : 'code',
+														currencyWise:
+														overallStats?.dashboardCurrency || currency,
+													},
+												})}
 											</div>
 
 										</Tooltip>

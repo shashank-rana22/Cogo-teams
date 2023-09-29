@@ -1,7 +1,6 @@
 import { BarDatum, ResponsiveBar } from '@cogoport/charts/bar';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
-
-import formatCurrency from '../../Utils/amountFormat';
 
 const TOOL_TIPS_STYLE = {
 	fontSize     : '10px',
@@ -77,7 +76,17 @@ function BarChart({
 						{' '}
 						<tspan color="#000">
 							{!dsoResponse ? (
-								formatCurrency(currencyType as string, value)
+								formatAmount({
+									amount   : value,
+									currency : currencyType as string,
+									options  : {
+										currencyDisplay       : 'code',
+										compactDisplay        : 'short',
+										maximumFractionDigits : 2,
+										style                 : 'currency',
+										currencyWise          : currencyType as string,
+									},
+								})
 							)
 								: (parseFloat(value.toFixed(2)))}
 
@@ -100,7 +109,18 @@ function BarChart({
 								{' '}
 								{
 								!dsoResponse ? (
-									formatCurrency(currencyType as string, bar?.data?.value)
+									formatAmount({
+										amount   : bar.data.value as any,
+										currency : currencyType as string,
+										options  : {
+											notation              : 'compact',
+											currencyDisplay       : 'code',
+											compactDisplay        : 'short',
+											maximumFractionDigits : 2,
+											style                 : 'currency',
+											currencyWise          : currencyType as string,
+										},
+									})
 								) : (parseFloat(bar?.data?.value.toFixed(2)))
 							}
 								{' '}

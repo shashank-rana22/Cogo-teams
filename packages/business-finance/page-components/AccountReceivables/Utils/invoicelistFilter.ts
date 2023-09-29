@@ -3,10 +3,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const geo = getGeoConstants();
 
-const VALID_IDS = ['6d713339-c528-4696-9f7b-c01f86887ac1', '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44'];
-
 export const invoiceFilter = ({ profile = {} }) => {
-	const selectedOption = VALID_IDS.includes(profile?.user?.id)
+	const selectedOption = GLOBAL_CONSTANTS.role_ids.includes(profile?.user?.id)
 		? geo.options.invoice_status
 		: geo.options.invoice_status_new;
 	return [

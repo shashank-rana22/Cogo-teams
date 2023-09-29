@@ -46,6 +46,8 @@ const GLOBAL_CONSTANTS = {
 		CN : '1b94734e-7d51-4e94-9dd2-ef96aee64a8f',
 	},
 
+	role_ids: ['6d713339-c528-4696-9f7b-c01f86887ac1', '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44'],
+
 	platform_supported_country_codes: ['IN', 'VN', 'SG', 'ID', 'TH', 'CN'],
 
 	currency_code   : CURRENCY_CODE,
@@ -58,6 +60,7 @@ const GLOBAL_CONSTANTS = {
 		IDR : 'id-ID',
 		THB : 'th-TH',
 		CNY : 'zh-CN',
+		EUR : 'en-EU',
 	},
 	currency_symbol: {
 		USD : '$',

@@ -18,6 +18,7 @@ const LOCALE_CURRENCY_ABBR_MAPPING = {
 		replace_key : {
 			Tr : 'M',
 			T  : 'B',
+			N  : 'K',
 		},
 	},
 };
@@ -91,16 +92,17 @@ const formatAmount = ({ amount = '', currency = '', options = {} }) => {
 	if (!isAmountValid({ amount })) {
 		return null;
 	}
-
+	const { currencyWise = '' } = options || {};
 	const UPPERCASE_CURRENCY = (
 		currency || geo.country.currency.code
 	).toUpperCase();
 
 	return format({
-		locale   : getCurrencyLocale({ currency: UPPERCASE_CURRENCY }),
+		locale: GLOBAL_CONSTANTS.currency_locale[currencyWise]
+		|| getCurrencyLocale({ currency: UPPERCASE_CURRENCY }),
 		amount,
 		options,
-		currency : UPPERCASE_CURRENCY,
+		currency: UPPERCASE_CURRENCY,
 	});
 };
 

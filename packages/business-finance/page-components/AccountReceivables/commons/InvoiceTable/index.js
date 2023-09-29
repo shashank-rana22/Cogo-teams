@@ -1,4 +1,5 @@
 import { cl, Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
@@ -16,7 +17,6 @@ import styles from './styles.module.css';
 
 const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
-const VALID_IDS = ['6d713339-c528-4696-9f7b-c01f86887ac1', '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44'];
 
 const SEARCH_PLACEHOLDER = 'Search by Invoice number / SID';
 
@@ -151,7 +151,7 @@ function InvoiceTable({
 						/>
 					</div>
 					<div className={styles.filter_container}>
-						{(VALID_IDS.includes(profile?.user?.id)) ? (
+						{(GLOBAL_CONSTANTS.role_ids.includes(profile?.user?.id)) ? (
 							<div
 								className={styles.send_report}
 								onClick={() => {

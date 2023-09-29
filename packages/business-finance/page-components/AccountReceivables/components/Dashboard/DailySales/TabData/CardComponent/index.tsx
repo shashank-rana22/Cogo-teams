@@ -4,7 +4,6 @@ import { format } from '@cogoport/utils';
 import React from 'react';
 
 import useGetGraph from '../../../../../hooks/useGetGraph';
-import formatCurrency from '../../../../../Utils/amountFormat';
 
 import ResponsiveChart from './ResponsiveChart';
 import BarData from './ResponsiveChart/data';
@@ -79,9 +78,18 @@ function CardComponent({
 									)}
 									>
 										<div className={styles.wrapper}>
-											{
-											formatCurrency(dashboardCurrency, amount)
-											}
+											{formatAmount({
+												amount   : amount || 0,
+												currency : dashboardCurrency,
+												options  : {
+													notation              : 'compact',
+													compactDisplay        : 'short',
+													currencyDisplay       : 'code',
+													maximumFractionDigits : 2,
+													style                 : 'currency',
+													currencyWise          : dashboardCurrency,
+												},
+											})}
 										</div>
 
 									</Tooltip>

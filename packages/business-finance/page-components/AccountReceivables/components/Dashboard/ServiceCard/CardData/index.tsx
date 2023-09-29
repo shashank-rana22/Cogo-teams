@@ -3,8 +3,6 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
-import formatCurrency from '../../../../Utils/amountFormat';
-
 import styles from './styles.module.css';
 
 interface DataProps {
@@ -85,9 +83,18 @@ function CardData({ tab }: CardDataProps) {
 									)}
 									>
 										<div className={styles.wrapper}>
-											{
-											formatCurrency(item?.currency, item?.openInvoiceAmount)
-											}
+											{formatAmount({
+												amount   : item?.openInvoiceAmount as any || 0,
+												currency : item?.currency,
+												options  : {
+													notation              : 'compact',
+													compactDisplay        : 'short',
+													style                 : 'currency',
+													currencyDisplay       : 'code',
+													maximumFractionDigits : 2,
+													currencyWise          : item?.currency,
+												},
+											})}
 										</div>
 
 									</Tooltip>
