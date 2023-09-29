@@ -52,8 +52,8 @@ function RejectedCharts({ subActiveTabReject = '', setFilters = () => {} }) {
 		if (['Rejected', 'On Hold'].includes(value?.id)) {
 			setFilters((pre) => ({
 				...pre,
-				updatedDateFrom : value?.indexValue,
-				updatedDateTo   : value?.indexValue,
+				statusUpdatedDateFrom : value?.indexValue,
+				statusUpdatedDateTo   : value?.indexValue,
 			}));
 		}
 	};

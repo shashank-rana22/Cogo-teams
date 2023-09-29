@@ -1,5 +1,5 @@
 import { ResponsivePie } from '@cogoport/charts/pie/index';
-import { Tooltip, DateRangepicker } from '@cogoport/components';
+import { Tooltip, SingleDateRange } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 
@@ -32,13 +32,14 @@ function MyResponsivePie({
 				{(subActiveTabReject === 'coe_rejected' || subActiveTabReject === 'coe_on_hold')
 					? (
 						<div style={{ marginLeft: '20px' }}>
-							<DateRangepicker
+							<SingleDateRange
 								dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
 								name="date"
 								onChange={setRemarkDate}
 								value={remarkDate}
 								isPreviousDaysAllowed
 								maxDate={new Date()}
+								placeholder="Enter Date Range"
 							/>
 						</div>
 					) : null}

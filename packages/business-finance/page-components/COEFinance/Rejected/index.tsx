@@ -68,7 +68,6 @@ function Rejected({ statsData }) {
 			'/business-finance/coe-finance/[active_tab]/[view]',
 			`/business-finance/coe-finance/rejected/${subActiveTabReject}`,
 		);
-		setFilters({});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [subActiveTabReject]);
 
