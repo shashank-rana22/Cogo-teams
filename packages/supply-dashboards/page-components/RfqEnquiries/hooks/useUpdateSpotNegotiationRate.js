@@ -1,8 +1,3 @@
-/* eslint-disable no-magic-numbers */
-/* eslint-disable max-lines-per-function */
-/* eslint-disable custom-eslint/variables-name-check */
-/* eslint-disable custom-eslint/is-empty-use-check */
-/* eslint-disable max-len */
 import { Toast } from '@cogoport/components';
 import { useForm, getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
