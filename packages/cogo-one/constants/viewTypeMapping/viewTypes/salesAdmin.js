@@ -55,6 +55,8 @@ const SALES_ADMIN = {
 		restrict_mail_to_organizations              : true,
 		hide_personal_mail                          : true,
 		allow_adding_mail_template                  : true,
+		show_services                               : false,
+		show_rm_agent_details                       : false,
 	},
 };
 

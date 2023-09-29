@@ -11,6 +11,8 @@ import Recipients from './Recipients';
 import ShipmentSubject from './ShipmentSubject';
 import styles from './styles.module.css';
 
+const DISABLED_SUBJECT = ['reply_all', 'reply'];
+
 function ComposeEmailBody(props) {
 	const {
 		handleKeyPress = () => {},
@@ -47,6 +49,7 @@ function ComposeEmailBody(props) {
 	const userActiveMailOptions = (userActiveMails || []).map(
 		(curr) => ({ label: curr, value: curr }),
 	);
+	const isDisabledSubject = ((DISABLED_SUBJECT || []).includes(buttonType));
 
 	useEffect(() => {
 		if (buttonType === 'send_mail' && !activeMailAddress) {
@@ -102,6 +105,7 @@ function ComposeEmailBody(props) {
 							size="xs"
 							placeholder="Enter your Subject"
 							className={styles.styled_input}
+							disabled={isDisabledSubject}
 						/>
 					)}
 			</div>

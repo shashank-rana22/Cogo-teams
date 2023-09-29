@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -133,7 +134,9 @@ function Child({
 
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
-								<h4 className={styles.label}>
+								<h4 className={cl`${styles.label}
+								${controlItem?.rules?.required ? styles.required_field : ''}`}
+								>
 									{controlItem?.label}
 								</h4>
 

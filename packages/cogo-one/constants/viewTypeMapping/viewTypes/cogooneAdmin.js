@@ -49,6 +49,8 @@ const COGOONE_ADMIN = {
 		show_shipments_stakeholders_contact_details : false,
 		restrict_mail_to_organizations              : true,
 		allow_adding_mail_template                  : true,
+		show_services                               : true,
+		show_rm_agent_details                       : false,
 	},
 };
 

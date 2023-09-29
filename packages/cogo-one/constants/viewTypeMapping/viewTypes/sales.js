@@ -58,6 +58,8 @@ const SALES = {
 		show_shipments_stakeholders_contact_details : true,
 		restrict_mail_to_organizations              : true,
 		hide_personal_mail                          : true,
+		show_services                               : false,
+		show_rm_agent_details                       : false,
 	},
 };
 

@@ -52,8 +52,8 @@ function MailBody({
 	formattedData = {},
 	mailProps = {},
 	deleteMessage = () => {},
+	isTheFirstMessageId = '',
 }) {
-	const [expandedState, setExpandedState] = useState(false);
 	const { source = '' } = formattedData || {};
 
 	const {
@@ -63,7 +63,11 @@ function MailBody({
 		media_url = [],
 		is_draft: isDraft = false,
 		email_status: emailStatus = '',
+		communication_id = '',
 	} = eachMessage || {};
+
+	const isFirstMessage = isTheFirstMessageId === communication_id;
+	const [expandedState, setExpandedState] = useState(isFirstMessage);
 
 	const {
 		subject = '',
@@ -146,12 +150,6 @@ function MailBody({
 				/>
 
 				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
-
-				<div className={styles.subject}>
-					Sub:
-					{' '}
-					{subject}
-				</div>
 
 				<div
 					className={cl`${styles.body} 
