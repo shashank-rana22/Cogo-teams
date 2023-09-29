@@ -76,14 +76,6 @@
 	padding: 24px 0 8px;
 }
 
-.label_text {
-	font-weight: 600;
-}
-
-.rates {
-	font-weight: 600;
-}
-
 .link {
 	font-size: var(--font-size-md);
 	color: #f68b21;

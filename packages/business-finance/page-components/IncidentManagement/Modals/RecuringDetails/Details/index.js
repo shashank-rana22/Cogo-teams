@@ -24,8 +24,8 @@ function RenderSummary({ summary = [] }) {
 		<div className={styles.summary}>
 			{summary?.map((item) => (
 				<div key={item.title} className={styles.section}>
-					<div className={styles.title}>{item?.title || ''}</div>
-					<div className={styles.value}>{item?.value || ''}</div>
+					<div className={styles.title}>{item?.title || '-'}</div>
+					<div className={styles.value}>{item?.value || '-'}</div>
 				</div>
 			))}
 		</div>
@@ -181,7 +181,7 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							{(businessName || tradePartyName || '')}
+							{(businessName || tradePartyName || '-')}
 						</div>
 					</div>
 				</div>

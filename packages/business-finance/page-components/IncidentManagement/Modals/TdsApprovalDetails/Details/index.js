@@ -35,7 +35,7 @@ function Details({
 		{ label: t('incidentManagement:current_tds_rate'), value: currentTdsRate },
 		{ label: t('incidentManagement:requested_tds_rate'), value: requestedTdsRate },
 	];
-	const { useOnAction: OnAction, loading } = useGetTdsData({
+	const { useOnAction: onAction, loading } = useGetTdsData({
 		data,
 		refetch,
 		setDetailsModal,
@@ -51,7 +51,7 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							{(businessName || tradePartyName || '')}
+							{(businessName || tradePartyName || '-')}
 						</div>
 					</div>
 				</div>
@@ -83,13 +83,13 @@ function Details({
 					<div className={styles.heading}>
 						Current TDS Style
 					</div>
-					<div className={styles.text}>{startCase(currentTdsStyle) || ''}</div>
+					<div className={styles.text}>{startCase(currentTdsStyle) || '-'}</div>
 				</div>
 				<div>
 					<div className={styles.heading}>
 						New TDS Style Requested
 					</div>
-					<div className={styles.requested_tds_text}>{startCase(requestedTdsStyle) || ''}</div>
+					<div className={styles.requested_tds_text}>{startCase(requestedTdsStyle) || '-'}</div>
 				</div>
 			</div>
 
@@ -125,7 +125,7 @@ function Details({
 							themeType="primary"
 							disabled={isEmpty(remark) || loading}
 							loading={loading}
-							onClick={() => OnAction({ status: STATUS_MAPPING.approved })}
+							onClick={() => onAction({ status: STATUS_MAPPING.approved })}
 						>
 							Approve
 						</Button>
@@ -134,7 +134,7 @@ function Details({
 					&& (
 						<RejectModal
 							setShowRejectModal={setShowRejectModal}
-							onAction={OnAction}
+							onAction={onAction}
 							showRejectModal={showRejectModal}
 							loading={loading}
 						/>

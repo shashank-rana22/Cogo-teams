@@ -1,4 +1,4 @@
-export const getOptions = ({ isEditable, t = () => {} }) => [
+export const getOptions = ({ isEditable = false, t = () => {} }) => [
 	{
 		label    : t('incidentManagement:approve_btn'),
 		value    : 'true',

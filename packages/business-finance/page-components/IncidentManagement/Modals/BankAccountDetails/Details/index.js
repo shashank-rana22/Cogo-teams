@@ -48,7 +48,7 @@ function Details({
 	});
 	const [showRejectModal, setShowRejectModal] = useState(false);
 
-	const { useOnActionBank:OnAction, loading } = useGetBankData({
+	const { useOnActionBank:onAction, loading } = useGetBankData({
 		bankData: bankRequest,
 		setDetailsModal,
 		refetch,
@@ -57,7 +57,7 @@ function Details({
 		t,
 	});
 
-	const getOptionsData = getOptions({ isEditable, t });
+	const optionsData = getOptions({ isEditable, t });
 
 	return (
 		<div className={styles.container}>
@@ -66,18 +66,18 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							<div>{(tradePartyName || businessName || '')}</div>
+							<div>{(tradePartyName || businessName || '-')}</div>
 						</div>
 					</div>
 				</div>
 				<div className={styles.organization_div}>
 					<div className={styles.requested_div}>
 						<div className={styles.heading}>Trade Party Type</div>
-						<div className={styles.text}>{tradePartyType || ''}</div>
+						<div className={styles.text}>{tradePartyType || '-'}</div>
 					</div>
 					<div className={styles.requested_div}>
 						<div className={styles.heading}>Category</div>
-						<div className={styles.text}>{organizationType || ''}</div>
+						<div className={styles.text}>{organizationType || '-'}</div>
 					</div>
 				</div>
 			</div>
@@ -90,7 +90,7 @@ function Details({
 					<div className={styles.radio}>
 						<RadioGroup
 							className={styles.radio_text}
-							options={getOptionsData}
+							options={optionsData}
 							onChange={(item) => setValue((prev) => ({ ...prev, radioName: item }))}
 							value={value?.radioName}
 						/>
@@ -106,7 +106,7 @@ function Details({
 					<div className={styles.radio}>
 						<RadioGroup
 							className={styles.radio_text}
-							options={getOptionsData}
+							options={optionsData}
 							onChange={(item) => setValue((prev) => ({
 								...prev,
 								radioNumber: item,
@@ -130,7 +130,7 @@ function Details({
 					<div className={styles.radio}>
 						<RadioGroup
 							className={styles.radio_text}
-							options={getOptionsData}
+							options={optionsData}
 							onChange={(item) => setValue((prev) => ({
 								...prev,
 								radioBranchName: item,
@@ -149,12 +149,12 @@ function Details({
 				<div className={styles.flex}>
 					<div className={styles.font_name}>
 						{ifscCode ? <ClipBoard data={ifscCode} /> || '-'
-							: <ClipBoard data={swiftCode} /> || ''}
+							: <ClipBoard data={swiftCode} /> || '-'}
 					</div>
 					<div className={styles.radio}>
 						<RadioGroup
 							className={styles.radio_text}
-							options={getOptionsData}
+							options={optionsData}
 							onChange={(item) => setValue((prev) => ({
 								...prev,
 								radioIFSC: item,
@@ -170,7 +170,7 @@ function Details({
 					<div>
 						<RadioGroup
 							className={styles.radio_text}
-							options={getOptionsData}
+							options={optionsData}
 							onChange={(item) => setValue((prev) => ({
 								...prev,
 								radioMethod: item,
@@ -216,7 +216,7 @@ function Details({
 									|| !(value?.text.length) || loading}
 							loading={loading}
 							onClick={() => {
-								OnAction({ status: 'APPROVED' });
+								onAction({ status: 'APPROVED' });
 							}}
 						>
 							Approve
@@ -226,7 +226,7 @@ function Details({
 					&& (
 						<RejectModal
 							setShowRejectModal={setShowRejectModal}
-							onAction={OnAction}
+							onAction={onAction}
 							showRejectModal={showRejectModal}
 							loading={loading}
 						/>

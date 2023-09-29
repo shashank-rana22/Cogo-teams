@@ -84,24 +84,6 @@
 	display: flex;
 }
 
-.rates_data {
-	display: flex;
-	flex-direction: column;
-	width: fit-content;
-	padding: 12px 24px;
-	margin: 20px 24px 20px 0;
-	border: 1px solid #c2c2c2;
-	border-radius: 4px;
-}
-
-.label_text {
-	font-weight: 600;
-}
-
-.rates {
-	font-weight: 600;
-}
-
 .display_container {
 	padding: 24px 24px 0;
 }

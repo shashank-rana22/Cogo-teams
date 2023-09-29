@@ -58,7 +58,7 @@ function Details({
 						<div className={styles.heading}>Company Name</div>
 						<div className={styles.text}>
 							<div className={styles.tooltip_title}>
-								{(businessName || tradePartyName || '')}
+								{(businessName || tradePartyName || '-')}
 							</div>
 						</div>
 					</div>
@@ -84,7 +84,7 @@ function Details({
 									});
 								}}
 							>
-								{shipmentId || ''}
+								{shipmentId || '-'}
 							</a>
 						</div>
 					</div>

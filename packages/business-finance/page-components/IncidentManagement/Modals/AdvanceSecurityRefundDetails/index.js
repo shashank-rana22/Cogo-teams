@@ -16,7 +16,7 @@ function AdvanceSecurityDepositRefundDetails({ row = {}, setDetailsModal = () =>
 	const docUrl = advanceSecurityDepositRefund?.uploadProof?.[GLOBAL_CONSTANTS.zeroth_index];
 	const level0 = { ...createdBy, remark };
 	return (
-		<div className={styles.containerDisplay}>
+		<div>
 			<div className={styles.heading}>
 				Advance Container Security Deposit Refund
 			</div>

@@ -40,7 +40,7 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 					<div className={styles.title}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							{(businessName || tradePartyName || '')}
+							{(businessName || tradePartyName || '-')}
 						</div>
 					</div>
 				</div>

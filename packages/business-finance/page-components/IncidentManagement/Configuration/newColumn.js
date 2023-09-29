@@ -133,7 +133,7 @@ function getColumns({
 			id: 'request_date',
 		},
 		{
-			Header   : <div className={styles.request_header}>{MAPPING[activeTab]}</div>,
+			Header   : <div>{MAPPING[activeTab]}</div>,
 			accessor : 'financeRemark',
 			id       : 'remark',
 			Cell     : ({ row: { original } }) => {

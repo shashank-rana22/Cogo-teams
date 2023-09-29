@@ -56,7 +56,7 @@ function Details({
 					<div className={styles.title}>Company Name</div>
 					<div className={styles.wrapper}>
 						<div>
-							{(beneficiaryName || '')}
+							{(beneficiaryName || '-')}
 						</div>
 					</div>
 				</div>
@@ -96,13 +96,13 @@ function Details({
 				<div className={styles.large}>
 					<div className={styles.title}>Entity Code</div>
 					<div className={styles.text}>
-						{entityCode || 'N.A.'}
+						{entityCode || '-'}
 					</div>
 				</div>
 				<div className={styles.medium}>
 					<div className={styles.title}>Registration Number</div>
 					<div className={styles.text}>
-						{registrationNumber || 'N.A.'}
+						{registrationNumber || '-'}
 					</div>
 				</div>
 			</div>

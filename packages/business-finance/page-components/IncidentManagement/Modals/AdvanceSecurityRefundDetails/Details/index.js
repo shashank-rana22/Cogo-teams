@@ -50,7 +50,7 @@ function Details({
 					<div className={styles.heading}>Company Name</div>
 					<div className={styles.text}>
 						<div className={styles.tooltip_title}>
-							{(businessName || tradePartyName || '')}
+							{(businessName || tradePartyName || '-')}
 						</div>
 					</div>
 				</div>
@@ -58,7 +58,7 @@ function Details({
 			<div className={styles.line} />
 			<div className={styles.supplier_div}>
 				<div className={styles.heading}>Supplier Name</div>
-				<div className={styles.text}>{supplierName || ''}</div>
+				<div className={styles.text}>{supplierName || '-'}</div>
 			</div>
 			<div className={styles.shipment_container}>
 				<div className={styles.heading}>Shipment Id</div>
@@ -75,7 +75,7 @@ function Details({
 							});
 						}}
 					>
-						{sid || ''}
+						{sid || '-'}
 					</a>
 				</div>
 			</div>
@@ -87,7 +87,7 @@ function Details({
 			</div>
 			<div className={styles.utr_div}>
 				<div className={styles.heading}>UTR Number</div>
-				<div className={styles.text}>{utrNumber || ''}</div>
+				<div className={styles.text}>{utrNumber || '-'}</div>
 			</div>
 			{ status === 'REQUESTED' ? (
 				<div>

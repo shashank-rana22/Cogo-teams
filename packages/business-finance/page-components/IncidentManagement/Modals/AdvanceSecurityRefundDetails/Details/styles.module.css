@@ -48,7 +48,7 @@
 	gap: 12px;
 	justify-content: flex-end;
 	padding: 12px;
-	margin-top: 12%;
+	margin-top: 13%;
 	border-radius: 0 0 10px 10px;
 	box-shadow: 0 0 8px 0 #2c3e5033;
 }
@@ -69,24 +69,6 @@
 
 .flex {
 	display: flex;
-}
-
-.rates_data {
-	display: flex;
-	flex-direction: column;
-	width: fit-content;
-	padding: 12px 24px;
-	margin: 20px 24px 20px 0;
-	border: 1px solid #c2c2c2;
-	border-radius: 4px;
-}
-
-.label_text {
-	font-weight: 600;
-}
-
-.rates {
-	font-weight: 600;
 }
 
 .supplier_div {

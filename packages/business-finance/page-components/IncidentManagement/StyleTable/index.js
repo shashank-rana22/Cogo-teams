@@ -1,5 +1,5 @@
 import { Pagination, Table } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../common/EmptyStateCommon';
@@ -20,7 +20,7 @@ function StyledTable({
 				{...rest}
 			/>
 
-			{data.length === [GLOBAL_CONSTANTS.zeroth_index] && <EmptyState />}
+			{isEmpty(data.length) && <EmptyState />}
 
 			{showPagination && (
 				<div className={styles.pagination_container}>

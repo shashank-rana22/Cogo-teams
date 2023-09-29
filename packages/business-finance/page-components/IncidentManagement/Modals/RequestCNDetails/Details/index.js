@@ -1,5 +1,4 @@
 import { Button, cl, Pill, Popover, Select, Textarea } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
@@ -56,7 +55,7 @@ function Details({
 		CNValues : null,
 		remarks  : null,
 	});
-	const { useOnAction:OnAction, loading } = useGetTdsData({
+	const { useOnAction:onAction, loading } = useGetTdsData({
 		data,
 		organization,
 		refetch,
@@ -79,13 +78,13 @@ function Details({
 						<div className={styles.heading}>Company Name</div>
 						<div className={styles.text}>
 							<div className={styles.tooltip_title}>
-								{(businessName || tradePartyName || '')}
+								{(businessName || tradePartyName || '-')}
 							</div>
 						</div>
 					</div>
 					<div>
 						<div className={styles.heading}>Credit Note Number</div>
-						<div className={styles.text}>{creditNoteNumber || ''}</div>
+						<div className={styles.text}>{creditNoteNumber || '-'}</div>
 					</div>
 				</div>
 				<div className={styles.line} />
@@ -110,24 +109,24 @@ function Details({
 						</div>
 					</div>
 					{!isConsolidated ?	(
-						<div className={styles.value_data}>
-							<div className={styles.label_value}>
-								{t('incidentManagement:sub_total')}
+						<>
+							<div className={styles.value_data}>
+								<div className={styles.label_value}>
+									{t('incidentManagement:sub_total')}
+								</div>
+								<div className={styles.date_value}>
+									{getFormatAmount(subTotal, currency)}
+								</div>
 							</div>
-							<div className={styles.date_value}>
-								{getFormatAmount(subTotal, currency)}
+							<div className={styles.value_data}>
+								<div className={styles.label_value}>
+									{t('incidentManagement:tax_amount')}
+								</div>
+								<div className={styles.date_value}>
+									{getFormatAmount(taxAmount, currency)}
+								</div>
 							</div>
-						</div>
-					) : ''}
-					{!isConsolidated ?	(
-						<div className={styles.value_data}>
-							<div className={styles.label_value}>
-								{t('incidentManagement:tax_amount')}
-							</div>
-							<div className={styles.date_value}>
-								{getFormatAmount(taxAmount, currency)}
-							</div>
-						</div>
+						</>
 					) : ''}
 					<div className={styles.value_data}>
 						<div className={styles.label_value}>
@@ -192,7 +191,7 @@ function Details({
 						</div>
 					)}
 				</div>
-				{lineItems?.length > [GLOBAL_CONSTANTS.zeroth_index] && (
+				{!isEmpty(lineItems) && (
 					<div className={styles.list_container}>
 						<StyledTable
 							columns={requestCreditNoteColumns({ t })}
@@ -201,7 +200,7 @@ function Details({
 						/>
 					</div>
 				)}
-				{proformaList?.length > [GLOBAL_CONSTANTS.zeroth_index] && (
+				{!isEmpty(proformaList) && (
 					<div className={styles.list_container}>
 						<StyledTable
 							columns={requestConsolidatedCreditNoteColumns()}
@@ -210,7 +209,7 @@ function Details({
 						/>
 					</div>
 				)}
-				{(!proformaList?.length && !lineItems?.length)
+				{(isEmpty(proformaList) && isEmpty(lineItems))
 					? (
 						<div className={styles.line_item_empty}>
 							{t('incidentManagement:no_line_items_available')}
@@ -246,7 +245,7 @@ function Details({
 							disabled={!(remarks.length) || loading || (isEmpty(creditNoteApprovalType)
 										&& isEmpty(approvalType))}
 							loading={loading}
-							onClick={() => OnAction({ status: 'APPROVED' })}
+							onClick={() => onAction({ status: 'APPROVED' })}
 						>
 							{t('incidentManagement:approve_btn')}
 						</Button>
@@ -255,7 +254,7 @@ function Details({
 					&& (
 						<RejectModal
 							setShowRejectModal={setShowRejectModal}
-							onAction={OnAction}
+							onAction={onAction}
 							showRejectModal={showRejectModal}
 							loading={loading}
 						/>

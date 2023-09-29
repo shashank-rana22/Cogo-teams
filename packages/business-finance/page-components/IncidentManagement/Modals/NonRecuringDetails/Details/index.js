@@ -1,5 +1,4 @@
 import { Button, cl, Textarea } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
@@ -9,6 +8,7 @@ import RejectModal from '../../../common/RejectModal/index';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
 import StyledTable from '../../../StyleTable';
 import { getFormatAmount } from '../../../utils/getformatamount';
+import { GetLabelAndValue } from '../../../utils/getLabelAndValue';
 
 import { overHeadConfigs } from './overheadsConfigs';
 import styles from './styles.module.css';
@@ -57,38 +57,31 @@ function Details({ row = {}, setDetailsModal = () => {}, refetch = () => {} }) {
 			<div className={styles.line} />
 			<div className={styles.flex}>
 				<div className={styles.large}>
-					<div className={styles.title}>Invoice Number</div>
-					<div className={styles.text}>{invoiceNumber || '-'}</div>
+					<GetLabelAndValue value={invoiceNumber} label="Invoice Number" />
 				</div>
 				<div className={styles.large}>
-					<div className={styles.title}>Business Name</div>
-					<div className={styles.text}>{businessName || '-'}</div>
+					<GetLabelAndValue value={businessName} label="Business Name" />
 				</div>
 				<div className={styles.small}>
-					<div className={styles.title}>Branch</div>
-					<div className={styles.text}>{branchName || '-'}</div>
+					<GetLabelAndValue value={branchName} label="Branch" />
 				</div>
 			</div>
 			<div className={styles.flex}>
 				<div className={styles.small}>
-					<div className={styles.title}>Sub Total </div>
-					<div className={styles.text}>{getFormatAmount(subTotalAmount, currency)}</div>
+					<GetLabelAndValue value={getFormatAmount(subTotalAmount, currency)} label="Sub Total" />
 				</div>
 				<div className={styles.small}>
-					<div className={styles.title}>Tax Amount</div>
-					<div className={styles.text}>{getFormatAmount(taxTotalAmount, currency)}</div>
+					<GetLabelAndValue value={getFormatAmount(taxTotalAmount, currency)} label="Tax Amount" />
 				</div>
 				<div className={styles.small}>
-					<div className={styles.title}>Grand Total</div>
-					<div className={styles.text}>{getFormatAmount(grandTotalAmount, currency)}</div>
+					<GetLabelAndValue value={getFormatAmount(grandTotalAmount, currency)} label="Grand Total" />
 				</div>
 				<div className={styles.small}>
-					<div className={styles.title}>Ledger Grand Total </div>
-					<div className={styles.text}>{getFormatAmount(ledgerGrandTotal, currency)}</div>
+					<GetLabelAndValue value={getFormatAmount(ledgerGrandTotal, currency)} label="Ledger Grand Total" />
 				</div>
 			</div>
 
-			{lineItems?.length > [GLOBAL_CONSTANTS.zeroth_index] ? (
+			{!isEmpty(lineItems) ? (
 				<div className={styles.list_container}>
 					<StyledTable
 						columns={overHeadConfigs({ t })}

@@ -24,7 +24,7 @@ function Details({
 	const { tradePartyName = '', businessName = '', tradePartyType } = organization || {};
 	const { taxNumber = '', address = '', pincode = '' } = sezRequest || {};
 
-	const { useOnAction: OnAction, loading } = useSezApproveReject({
+	const { useOnAction: onAction, loading } = useSezApproveReject({
 		data,
 		remarks,
 		refetch,
@@ -41,9 +41,9 @@ function Details({
 						<div className={styles.tooltip_title}>
 							<Tooltip
 								interactive
-								content={(tradePartyName || '')}
+								content={(tradePartyName || '-')}
 							>
-								<div>{(tradePartyName || '')}</div>
+								<div>{(tradePartyName || '-')}</div>
 							</Tooltip>
 						</div>
 					</div>
@@ -53,24 +53,24 @@ function Details({
 			<div className={styles.flex_row}>
 				<div className={styles.company_gst}>
 					<div className={styles.heading}>GST Number</div>
-					<div className={styles.text}>{<ClipBoard data={taxNumber} /> || ''}</div>
+					<div className={styles.text}>{<ClipBoard data={taxNumber} /> || '-'}</div>
 				</div>
 				<div className={styles.company_gst}>
 					<div className={styles.heading}>Trade Party Type</div>
-					<div className={styles.text}>{tradePartyType.replaceAll('_', ' ') || ''}</div>
+					<div className={styles.text}>{tradePartyType.replaceAll('_', ' ') || '-'}</div>
 				</div>
 				<div className={styles.company_gst}>
 					<div className={styles.heading}>Business Name</div>
-					<div className={styles.text}>{businessName || ''}</div>
+					<div className={styles.text}>{businessName || '-'}</div>
 				</div>
 				<div className={styles.company_gst}>
 					<div className={styles.heading}>Pincode</div>
-					<div className={styles.text}>{pincode || ''}</div>
+					<div className={styles.text}>{pincode || '-'}</div>
 				</div>
 			</div>
 			<div className={styles.company_address}>
 				<div className={styles.heading}>Address</div>
-				<div className={styles.text}>{address || ''}</div>
+				<div className={styles.text}>{address || '-'}</div>
 			</div>
 
 			{ status === 'REQUESTED' ? (
@@ -105,7 +105,7 @@ function Details({
 							themeType="primary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => { OnAction({ status: STATUS_MAPPING.approved }); }}
+							onClick={() => { onAction({ status: STATUS_MAPPING.approved }); }}
 						>
 							Approve
 						</Button>
@@ -114,7 +114,7 @@ function Details({
 					&& (
 						<RejectModal
 							setShowRejectModal={setShowRejectModal}
-							onAction={OnAction}
+							onAction={onAction}
 							showRejectModal={showRejectModal}
 							loading={loading}
 						/>
