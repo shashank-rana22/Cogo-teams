@@ -55,10 +55,10 @@ function MyResponsivePie({
 				borderWidth={1}
 				colors={
 					[
-						'hsl(186, 26%, 55%)',
-						'hsl(186, 44%, 68%)',
-						'hsl(186, 44%, 77%)',
-						'hsl(186, 45%, 87%)',
+						'#6ea4aa',
+						'#89cad1',
+						'#abd9de',
+						'#cfeaed',
 						'#5f8b96',
 						'#6b9387',
 						'#1e4246',

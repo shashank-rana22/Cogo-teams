@@ -86,12 +86,10 @@ function RejectedCharts({ subActiveTabReject = '', setFilters = () => {} }) {
 							content={(
 								<div className={styles.text_styles}>
 									Showing rejection/on-hold of pre-payment
-									{' '}
 									<br />
 									audit on daily basis
 									<br />
 									Bucketing of reasons for rejection/on-hold of
-									{' '}
 									<br />
 									pre-payment audit 1st April onwards.
 								</div>

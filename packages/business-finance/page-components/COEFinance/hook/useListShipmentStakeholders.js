@@ -6,6 +6,7 @@ import toastApiError from '../../commons/toastApiError.ts';
 const useListStakeholders = ({ shipmentId = '' }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_shipment_stakeholders',
+		method : 'get',
 		params : {
 			filters: {
 				shipment_id: shipmentId,

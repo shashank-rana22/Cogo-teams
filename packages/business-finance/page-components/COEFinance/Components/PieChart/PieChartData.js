@@ -9,7 +9,7 @@ export const pieChartData = (pieData = {}) => {
 		invoiceDetailsRejectCount, wrongLineItems,
 	} = pieData || {};
 
-	const totalData = (Object.values(pieData) || []).reduce(((acc, value) => (acc + value)), DEFAULT_VALUE);
+	const totalData = (Object.values(pieData) || []).reduce(((acc, value) => (acc + Number(value))), DEFAULT_VALUE);
 
 	return [
 		{

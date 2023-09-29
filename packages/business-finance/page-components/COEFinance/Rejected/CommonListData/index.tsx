@@ -50,6 +50,8 @@ interface Props {
 	subActiveTabReject: string | undefined;
 }
 
+const CHART_INCLUDED_TABS = ['coe_rejected', 'coe_on_hold'];
+
 function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 	const [sort, setSort] = useState({});
 	const [showReassign, setShowReassign] = useState(false);
@@ -101,7 +103,7 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 	return (
 		<div>
 			{
-			(['coe_rejected', 'coe_on_hold'].includes(subActiveTabReject)) ? (
+			(CHART_INCLUDED_TABS.includes(subActiveTabReject)) ? (
 				<RejectedCharts
 					subActiveTabReject={subActiveTabReject}
 					setFilters={setFilters}
