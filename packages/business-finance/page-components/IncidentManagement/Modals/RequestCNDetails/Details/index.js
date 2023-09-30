@@ -218,7 +218,7 @@ function Details({
 					: ''}
 			</div>
 			{ status === 'REQUESTED' ? (
-				<div>
+				<div className={styles.remark_box}>
 					<div className={cl`${styles.label} ${styles.required_field}`}>Remarks</div>
 					<Textarea
 						className={styles.textarea}
