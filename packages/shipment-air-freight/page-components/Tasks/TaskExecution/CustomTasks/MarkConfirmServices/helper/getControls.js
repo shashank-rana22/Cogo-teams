@@ -16,7 +16,7 @@ const air_lines = {
 	commodityType : 'air_freight',
 	rules         : { required: 'Air Line Details is Required' },
 };
-const serviceProvider = ({ serviceType = '' }) => ({
+const getServiceProvider = ({ serviceType = '' }) => ({
 	name        : 'service_provider_id',
 	type        : 'async-select',
 	asyncKey    : 'organizations',
@@ -59,7 +59,8 @@ const getControls = ({
 		);
 	}
 
-	serviceProvider({ serviceType }).value =		subsidiary_service_rendered?.service_provider?.id
+	const service_provider = getServiceProvider({ serviceType });
+	service_provider.value = subsidiary_service_rendered?.service_provider?.id
 		|| service_rendered?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id
 		|| '';
 	const CONTROLS = [];
@@ -73,7 +74,7 @@ const getControls = ({
 		CONTROLS.push(air_lines);
 	}
 
-	CONTROLS.push(serviceProvider({ serviceType }));
+	CONTROLS.push(service_provider);
 
 	return CONTROLS;
 };
