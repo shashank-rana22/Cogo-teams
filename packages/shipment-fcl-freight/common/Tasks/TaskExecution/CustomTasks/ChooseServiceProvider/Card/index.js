@@ -11,9 +11,9 @@ import cardValues from './cardValues';
 import styles from './styles.module.css';
 
 function Card({
-	item, priority, similarServiceIds,
-	selectedCard,
-	setSelectedCard, handleUpdateTask,
+	item = {}, priority = '', similarServiceIds = [],
+	selectedCard = [],
+	setSelectedCard = () => {}, handleUpdateTask = () => {},
 }) {
 	const ONE = 1;
 	const dataArr = Array.isArray(item?.data) ? item?.data : [item?.data];
@@ -36,9 +36,9 @@ function Card({
 				<div className={styles.priority_text}>
 					(
 					{priority}
-					&nbsp;
+					{' '}
 					Priority)
-					&nbsp;
+					{' '}
 				</div>
 				<div>
 					{`${startCase(dataArr?.[GLOBAL_CONSTANTS.zeroth_index]?.source)} Booking Note`}
@@ -54,7 +54,6 @@ function Card({
 			</div>
 
 			<div className={styles.text}>Choose Service Provider (Fcl Freight Local)</div>
-
 			<AsyncSelect
 				name="id"
 				asyncKey="organizations"
@@ -64,6 +63,14 @@ function Card({
 				value={serviceProvider}
 				placeholder="Select Service Provider"
 				size="sm"
+				params={{
+					filters: {
+						account_type : 'service_provider',
+						status       : 'active',
+						kyc_status   : 'verified',
+						service      : ['fcl_freight_local_agent'],
+					},
+				}}
 			/>
 
 			<div className={styles.button_wrap}>

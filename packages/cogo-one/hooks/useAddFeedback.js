@@ -6,6 +6,7 @@ const getPayload = ({
 	additional_information = '',
 	issue_type = '',
 	additionalFields,
+	defaultTypeId = '',
 	is_critical = false,
 	category = '',
 	finalUrl = '',
@@ -22,11 +23,13 @@ const getPayload = ({
 		RequestType      : 'feedback',
 		Attachment       : [finalUrl] || [],
 	},
-	Type        : issue_type || undefined,
-	Description : additional_information || undefined,
+	Type                : issue_type || undefined,
+	TicketDefaultTypeID : defaultTypeId || undefined,
+	Description         : additional_information || undefined,
 });
 
 const useAddFeedback = ({
+	defaultTypeId = '',
 	additionalInfo = [],
 	getFeedbacks = () => {},
 	setShowAddFeedback = () => {},
@@ -60,6 +63,7 @@ const useAddFeedback = ({
 					id: profile?.user?.id,
 					additional_information,
 					additionalFields,
+					defaultTypeId,
 					is_critical,
 					issue_type,
 					category,

@@ -16,7 +16,7 @@ const INITIAL_PAGE = 1;
 function Notifications() {
 	const { push } = useRouter();
 
-	const { t } = useTranslation(['notifications', 'common']);
+	const { t } = useTranslation(['common']);
 
 	const { general } = useSelector((state) => state);
 	const [page, setPage] = useState(INITIAL_PAGE);

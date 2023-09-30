@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, format } from '@cogoport/utils';
@@ -104,7 +105,7 @@ function GetData({ SALES_INVOICE = [],	filters = {},	entityCode = 0 }) {
 									)?.[GLOBAL_CONSTANTS.zeroth_index]?.dashboardCurrency || currency,
 								})}
 							</div>
-							<div className={styles.styled_credit}>
+							<div className={cl`${styles.styled_credit} ${styles.negative_credit}`}>
 								{customAmount({
 									amount:	getDataFromDuration(CREDIT_NOTE_ARRAY, DURATIONS[val])
 										?.[GLOBAL_CONSTANTS.zeroth_index]?.amount || DEFAULT_AMOUNT,

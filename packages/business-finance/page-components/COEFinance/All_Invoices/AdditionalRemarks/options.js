@@ -1,59 +1,59 @@
 export const notBilledOptions = [
 	{
 		name  : 'R1',
-		value : 'Service should have bill to customer',
-		label : 'Service should have bill to customer',
+		value : 'Charges should be billed to customer',
+		label : 'Charges should be billed to customer',
 	},
 	{
 		name  : 'R2',
-		value : 'Incidental service; should add to sell quotation',
-		label : 'Incidental service; should add to sell quotation',
+		value : 'Incidental charges; should be added to sell quotation',
+		label : 'Incidental charges; should be added to sell quotation',
 	},
 	{
 		name  : 'R3',
-		value : 'Detention charges; should add to sell quotation',
-		label : 'Detention charges; should add to sell quotation',
+		value : 'Detention charges; should be added to sell quotation',
+		label : 'Detention charges; should be added to sell quotation',
 	},
 	{
 		name  : 'R4',
-		value : 'Rates should be disputed as inflated by supplier',
-		label : 'Rates should be disputed as inflated by supplier',
+		value : 'Rates inflated by supplier and should be disputed',
+		label : 'Rates inflated by supplier and should be disputed',
 	},
 ];
 
 export const billedOptions = [
 	{
 		name  : 'rates',
-		value : 'Rates inflated from supplier',
-		label : 'Rates inflated from supplier',
+		value : 'Rates inflated by supplier',
+		label : 'Rates inflated by supplier',
 	},
 	{
 		name  : 'sell',
-		value : 'Sell-side charged less than buy quotation',
-		label : 'Sell-side charged less than buy quotation',
+		value : 'Charges in Sales Invoice charged less than sell quotation.',
+		label : 'Charges in Sales Invoice charged less than sell quotation.',
 	},
 	{
 		name  : 'system',
-		value : 'System error from RMS Sell quotation generated wrong',
-		label : 'System error from RMS Sell quotation generated wrong',
+		value : 'Incorrect RMS/Platform rates',
+		label : 'Incorrect RMS/Platform rates',
 	},
 	{
 		name  : 'locals',
-		value : 'Cogo assured bookings RMS sell quotation not generated for locals',
-		label : 'Cogo assured bookings RMS sell quotation not generated for locals',
+		value : 'Cogo-assured bookings RMS sell quotation not generated for locals',
+		label : 'Cogo-assured bookings RMS sell quotation not generated for locals',
 	},
 ];
 
 export const draftOptions = [
 	{
 		name  : 'raised',
-		value : 'Invoice raised more than or equals to buy',
-		label : 'Invoice raised more than or equals to buy',
+		value : 'Invoice raised with rates more than or equals to buy',
+		label : 'Invoice raised with rates more than or equals to buy',
 	},
 	{
 		name  : 'partial',
-		value : 'Invoice raised of partial amount of buy',
-		label : 'Invoice raised of partial amount of buy',
+		value : 'Invoice raised with rates partial amount of buy',
+		label : 'Invoice raised with rates partial amount of buy',
 	},
 	{
 		name  : 'incidental',
@@ -72,6 +72,11 @@ export const mismatchedOptions = [
 		name  : 'bill',
 		value : 'Bill of lading number',
 		label : 'Bill of lading number',
+	},
+	{
+		name  : 'reference',
+		value : 'Booking Reference Number',
+		label : 'Booking Reference Number',
 	},
 	{
 		name  : 'lorry',
@@ -97,9 +102,19 @@ export const miscellaneousOptions = [
 		label : 'Invoice not billed to cogoport',
 	},
 	{
+		name  : 'tagged',
+		value : 'Proforma Invoice should be tagged',
+		label : 'Proforma Invoice should be tagged',
+	},
+	{
 		name  : 'uploaded',
 		value : 'Invoice uploaded in wrong SID',
 		label : 'Invoice uploaded in wrong SID',
+	},
+	{
+		name  : 'duplicateInvoiceNumber',
+		value : 'Duplicate Invoice number; Should ask for revised invoice with new invoice number',
+		label : 'Duplicate Invoice number; Should ask for revised invoice with new invoice number',
 	},
 	{
 		name  : 'revised',

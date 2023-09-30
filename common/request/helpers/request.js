@@ -75,7 +75,6 @@ request.interceptors.request.use((oldConfig) => {
 		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
 	}
 	if (serviceName === ATHENA_SERVICE) {
-		newConfig.baseURL = process.env.IHLS_BASE_URL;
 		newConfig.auth_token = process.env.DATA_PIPELINE_SECRET_KEY;
 	}
 

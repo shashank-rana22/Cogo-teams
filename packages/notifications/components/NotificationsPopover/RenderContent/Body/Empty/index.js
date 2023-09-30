@@ -4,11 +4,11 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function Empty() {
-	const { t } = useTranslation(['notifications']);
+	const { t } = useTranslation(['common']);
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.load_heading}>{t('notifications:notifications_empty_label')}</div>
+			{t('common:notifications_empty_label')}
 		</div>
 	);
 }
