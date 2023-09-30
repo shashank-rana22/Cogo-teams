@@ -16,6 +16,7 @@ const getPayload = ({ orgId = '', userId = '', searchQuery = '' }) => ({
 
 const useGetOrgUsers = ({ orgId = '', userId = '' }) => {
 	const [query, setQuery] = useState('');
+	const [initialLoad, setInitialLoad] = useState(true);
 
 	const { query: searchQuery, debounceQuery } = useDebounceQuery();
 
@@ -29,6 +30,7 @@ const useGetOrgUsers = ({ orgId = '', userId = '' }) => {
 			await trigger({
 				params: getPayload({ orgId, userId, searchQuery }),
 			});
+			setInitialLoad(false);
 		} catch (error) {
 			console.error(error);
 		}
@@ -51,6 +53,7 @@ const useGetOrgUsers = ({ orgId = '', userId = '' }) => {
 		isOrgUserIdPresent,
 		orgData    : data,
 		setQuery,
+		initialLoad,
 	};
 };
 

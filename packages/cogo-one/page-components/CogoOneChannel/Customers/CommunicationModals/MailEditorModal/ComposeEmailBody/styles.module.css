@@ -97,15 +97,12 @@
 
 .select_container {
 	width: 80%;
+	padding-right: 3px;
 	margin-left: 10px;
 
 	:global {
 		.ui_select_container {
 			width: 100%;
-		}
-
-		.ui_select_options_container {
-			z-index: 9999;
 		}
 	}
 }

@@ -73,6 +73,7 @@ function ComposeEmailBody(props) {
 					/>
 				</div>
 			</div>
+
 			<Recipients
 				emailState={emailState}
 				handleChange={handleChange}
@@ -91,6 +92,7 @@ function ComposeEmailBody(props) {
 				<div className={styles.sub_text}>
 					Sub:
 				</div>
+
 				{showOrgSpecificMail
 					? (
 						<ShipmentSubject

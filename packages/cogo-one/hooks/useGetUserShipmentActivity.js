@@ -18,6 +18,7 @@ const getParam = ({ orgId, searchValue }) => ({
 const useGetUserShipmentActivity = ({
 	organizationId = '',
 	activeTab = '',
+	setInitialLoad = () => {},
 }) => {
 	const [query, setQuery] = useState('');
 	const [searchQuery, setSearchQuery] = useState('');
@@ -37,10 +38,11 @@ const useGetUserShipmentActivity = ({
 			await trigger({
 				params: getParam({ orgId, searchValue: searchQuery }),
 			});
+			setInitialLoad(false);
 		} catch (error) {
 			console.error(error);
 		}
-	}, [activeTab, trigger, searchQuery]);
+	}, [activeTab, trigger, searchQuery, setInitialLoad]);
 
 	useEffect(() => {
 		debounceQuery(query?.trim());

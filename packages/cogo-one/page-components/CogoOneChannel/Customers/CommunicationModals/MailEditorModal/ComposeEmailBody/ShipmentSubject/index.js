@@ -2,7 +2,7 @@ import { Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import CustomSelect from '../../../../../../../common/CustomSelect';
 import { SERVICE } from '../../../../../../../constants';
@@ -68,6 +68,7 @@ function ShipmentSubject({
 	emailState = {},
 	setEmailState = () => {},
 }) {
+	const [initialLoad, setInitialLoad] = useState(true);
 	const {
 		activityData = {},
 		activityLoading = false,
@@ -76,6 +77,7 @@ function ShipmentSubject({
 	} = useGetUserShipmentActivity({
 		organizationId : emailState?.orgId,
 		activeTab      : emailState?.customSubject?.activeTab,
+		setInitialLoad,
 	});
 
 	const selectOptions = useMemo(
@@ -113,6 +115,7 @@ function ShipmentSubject({
 	return (
 		<div className={styles.container}>
 			<CustomSelect
+				key={initialLoad ? activityLoading : ''}
 				className={styles.subject_select}
 				placeholder="Search Your Subject"
 				isClearable

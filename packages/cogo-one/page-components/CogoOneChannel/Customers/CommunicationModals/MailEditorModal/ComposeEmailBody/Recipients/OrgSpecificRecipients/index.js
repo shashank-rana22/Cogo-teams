@@ -28,7 +28,7 @@ function OrgSpecificRecipients({
 	recipientTypes = [],
 	emailState = {},
 }) {
-	const { orgLoading = false, orgData = {} } = useGetOrgUsers({ orgId: emailState?.orgId });
+	const { orgLoading = false, orgData = {}, initialLoad = false } = useGetOrgUsers({ orgId: emailState?.orgId });
 
 	const handleChange = (val) => {
 		setEmailState((prev) => ({ ...prev, orgId: val }));
@@ -67,6 +67,7 @@ function OrgSpecificRecipients({
 			) : null}
 
 			<MultiSelect
+				key={initialLoad ? orgLoading : ''}
 				className={type === 'toUserEmail' ? styles.users_select : styles.users_cc_select}
 				placeholder="Search user"
 				isClearable
