@@ -6,6 +6,12 @@
 	display: flex;
 	justify-content: space-between;
 	margin: 8px;
+
+	:global {
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
+	}
 }
 
 .close_popover {

@@ -1,16 +1,5 @@
 export const invoiceFilters = [
 	{
-		name        : 'invoiceView',
-		span        : 1,
-		type        : 'select',
-		placeholder : 'Invoice View',
-		options     : [
-			{ label: 'All', value: 'all' },
-			{ label: 'Migrated', value: 'migrated' },
-			{ label: 'COE Accepted', value: 'coe_accepted' },
-		],
-	},
-	{
 		name        : 'category',
 		span        : 1,
 		type        : 'select',
