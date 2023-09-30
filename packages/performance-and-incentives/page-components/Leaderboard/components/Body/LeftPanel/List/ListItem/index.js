@@ -60,7 +60,7 @@ function ListItem(props) {
 							wrapper   : (children) => (
 								<div className={styles.rank_container}>
 									<Image
-										src={GLOBAL_CONSTANTS.image_url.badge}
+										src={GLOBAL_CONSTANTS.image_url.performance_leaderboard_ranking_badge}
 										width={30}
 										height={30}
 										alt="Badge"

@@ -7,7 +7,7 @@ function ImpressiveConfetti() {
 	return (
 		<div className={styles.container}>
 			<Image
-				src={GLOBAL_CONSTANTS.image_url.confetti}
+				src={GLOBAL_CONSTANTS.image_url.performance_leaderboard_confetti}
 				alt="Confetti"
 				width={500}
 				height={400}
