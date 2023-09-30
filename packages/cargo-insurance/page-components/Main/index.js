@@ -1,11 +1,20 @@
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
+import Header from '../../common/Header';
+
+import styles from './styles.module.css';
+
 function Insurance() {
 	const { query } = useRouter();
-	console.log(query, 'query');
+	const formValues = JSON.parse(query?.data);
+	console.log(formValues, 'formValues');
+
 	return (
-		<div>Insurance</div>
+		<div className={styles.container}>
+			<h2>Cargo Insurance</h2>
+			<Header data={formValues} />
+		</div>
 	);
 }
 
