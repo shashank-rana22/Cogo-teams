@@ -108,7 +108,6 @@ function Header(props) {
 					)}
 				</div>
 			</div>
-
 			<Announcement />
 		</div>
 	);

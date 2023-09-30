@@ -8,8 +8,8 @@ const performanceAndIncentives = {
 		isMainNav  : true,
 	},
 	'/[partner_id]/performance-and-incentives/public-leaderboard': {
-		navigation : 'performance_and_incentives-leaderboard',
-		isMainNav  : false,
+		navigation : 'performance_and_incentives-public_leaderboard',
+		isMainNav  : true,
 	},
 };
 
