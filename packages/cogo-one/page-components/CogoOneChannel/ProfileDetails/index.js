@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { FIREBASE_TABS, ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR } from '../../../constants';
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
@@ -38,7 +38,7 @@ function ProfileDetails({
 	const [activeSelect, setActiveSelect] = useState(
 		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.default_side_nav || 'profile',
 	);
-	const [showMore, setShowMore] = useState(false);
+
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
 
 	const { lead_user_id: leadUserId } = formattedMessageData || {};
@@ -71,10 +71,6 @@ function ProfileDetails({
 	const expandedSideBar = (ENABLE_SIDE_BAR.includes(chatsConfig?.data?.channel_type)
 		|| (ENABLE_EXPAND_SIDE_BAR.includes(chatsConfig?.data?.channel_type) && chatsConfig?.expandSideBar));
 
-	useEffect(() => {
-		setShowMore(false);
-	}, [activeSelect]);
-
 	return (
 		<div className={styles.profile_div}>
 			{expandedSideBar ? (
@@ -100,8 +96,6 @@ function ProfileDetails({
 							getOrgDetails={getOrgDetails}
 							activeRoomLoading={activeRoomLoading}
 							setActiveSelect={setActiveSelect}
-							showMore={showMore}
-							setShowMore={setShowMore}
 							setRaiseTicketModal={setRaiseTicketModal}
 							zippedTicketsData={zippedTicketsData}
 							quotationSentData={quotationEmailSentAt}

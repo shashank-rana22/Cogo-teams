@@ -184,6 +184,7 @@ function ExecuteTask({
 			uiConfig={taskConfigData?.task_config?.ui_config[currentStep]}
 			selectedMail={selectedMail}
 			serviceIdMapping={serviceIdMapping}
+			refetchServices={refetchServices}
 		/>
 	);
 }

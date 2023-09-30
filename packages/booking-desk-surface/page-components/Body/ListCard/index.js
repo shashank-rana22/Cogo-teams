@@ -13,13 +13,22 @@ import {
 
 import styles from './styles.module.css';
 
+const SHIPMENT_TYPES = {
+	ftl_freight: 'ftl',
+};
+
 function Card({ data = {} }) {
 	const router = useRouter();
+	const { shipment_type = '', id = '' } = data || {};
 
 	const handleCardClick = (e) => {
 		if (e.target?.type === 'checkbox') { return; }
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}`;
-
+		let newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${id}`;
+		if (shipment_type in SHIPMENT_TYPES) {
+			newUrl = `${window.location.origin}/v2/${router?.query?.partner_id}/booking/${
+				SHIPMENT_TYPES[shipment_type]}/${id}`;
+		}
+		newUrl = `${newUrl}?navigation=coe-shipment_surface`;
 		window.sessionStorage.setItem('prev_nav', newUrl);
 		window.location.href = newUrl;
 	};
