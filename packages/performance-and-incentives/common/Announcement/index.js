@@ -18,11 +18,11 @@ function Announcement() {
 							className={styles.announcement}
 							role="presentation"
 						>
-							Get
+							Any new announcements related to
 							{' '}
-							<b>10 New Leads</b>
+							<b>Performance, Incentives and Rewards</b>
 							{' '}
-							on Conversion of 2 New Accounts
+							will be displayed here!
 						</div>
 					</div>
 
