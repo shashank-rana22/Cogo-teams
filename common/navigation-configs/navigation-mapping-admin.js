@@ -624,7 +624,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/saas/tracking',
 			type          : 'link',
 			main_apis     : [],
-			// possible_apis : apis.app_saas_tracking,
 			possible_apis : [
 				...apis.app_saas_tracking,
 				...apis.app_saas_air_tracking,
@@ -632,16 +631,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			],
 			module_type: 'crm',
 		},
-		// saas_air_tracking: {
-		// 	key           : 'saas_air_tracking',
-		// 	title         : t('common:air_tracking'),
-		// 	href          : '/saas/tracking',
-		// 	as            : '/saas/tracking',
-		// 	type          : 'link',
-		// 	main_apis     : [],
-		// 	possible_apis : apis.app_saas_air_tracking,
-		// 	module_type   : 'crm',
-		// },
 		saas_schedules: {
 			key           : 'saas_schedules',
 			title         : t('common:ocean_schedules'),
