@@ -1,7 +1,7 @@
 import { Tooltip, Datepicker, Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
-import { format, getYear } from '@cogoport/utils';
+import { format, getMonth, getYear } from '@cogoport/utils';
 import { useState, useEffect, memo } from 'react';
 
 import MyResponsivePie from '../../../Components/PieChart/index.tsx';
@@ -12,6 +12,8 @@ import useGetCommentRemarkCounts from '../../../hook/useGetCommentRemarkCounts';
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
+const APRIL = 3;
+const BEFORE_APRIL = 1;
 
 const TOTAL_REJECTED_KEY_MAPPING = {
 	coe_rejected : ['Total Audited', 'Rejected'],
@@ -28,7 +30,10 @@ function RejectedCharts({ subActiveTabReject = '', setFilters = () => {} }) {
 
 	const [remarkDate, setRemarkDate] = useState(null);
 
-	const FINANCIAL_YEAR_START_DATE = `${getYear(new Date())}-04-01`;
+	const PRESENT_MONTH = getMonth(new Date());
+	const PRESENT_YEAR = getYear(new Date());
+
+	const FINANCIAL_YEAR_START_DATE = `${PRESENT_MONTH < APRIL ? PRESENT_YEAR - BEFORE_APRIL : PRESENT_MONTH}-04-01`;
 
 	const {
 		pieData = [],
