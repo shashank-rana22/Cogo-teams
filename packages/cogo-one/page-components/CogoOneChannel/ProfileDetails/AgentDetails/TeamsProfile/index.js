@@ -1,20 +1,16 @@
-import React from 'react';
-
-import useListCogooneGroupMembers from '../../../../../hooks/useListCogooneGroupMembers';
+import React, { useEffect } from 'react';
 
 import GroupMemberView from './GroupMemberView';
 import SingleMemberView from './SingleMemberView';
 
-function TeamsProfile({ activeMessageCard = {} }) {
-	const {
-		group_members_data = [], is_group = false, group_id: groupId = '',
-		is_draft = false,
-	} = activeMessageCard || {};
+function TeamsProfile({ activeMessageCard = {}, membersList = [], listCogooneGroupMembers = () => {} }) {
+	const { group_members_data = [], is_group = false, is_draft = false } = activeMessageCard || {};
 
-	const { listData = {} } = useListCogooneGroupMembers({ groupId });
-	const { list = [] } = listData || {};
+	const groupMembersData = is_draft ? group_members_data : membersList;
 
-	const groupMembersData = is_draft ? group_members_data : list;
+	useEffect(() => {
+		listCogooneGroupMembers();
+	}, [listCogooneGroupMembers]);
 
 	if (is_group) {
 		return <GroupMemberView groupMembersData={groupMembersData} />;

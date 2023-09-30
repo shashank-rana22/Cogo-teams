@@ -17,6 +17,7 @@ function Header({
 	viewType = '',
 	firestore = {},
 	setActiveTab = () => {},
+	membersList = [],
 }) {
 	const [showPopover, setShowPopover] = useState(false);
 
@@ -61,14 +62,22 @@ function Header({
 				<div className={styles.name}>{startCase(search_name?.toLowerCase() || '')}</div>
 			</div>
 			<div className={styles.buttons_flex}>
-				<ButtonGroup size="xs" options={BUTTON_GROUP_OPTIONS} />
-				{!isGroup ? (
+				<ButtonGroup
+					size="xs"
+					options={BUTTON_GROUP_OPTIONS}
+				/>
+				{isGroup ? (
 					<Popover
-						placement="bottom"
+						placement="bottom-end"
 						visible={showPopover}
 						render={showPopover ? (
-							<Members viewType={viewType} />
+							<Members
+								viewType={viewType}
+								membersList={membersList}
+							/>
 						) : null}
+						caret={false}
+						className={styles.popover_styles}
 					>
 						<Image
 							src={GLOBAL_CONSTANTS.image_url.groups}

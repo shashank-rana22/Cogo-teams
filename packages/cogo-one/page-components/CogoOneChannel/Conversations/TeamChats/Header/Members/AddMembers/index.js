@@ -8,7 +8,7 @@ import UserCard from '../../UserCard';
 
 import styles from './styles.module.css';
 
-function AddMembers({ viewType = '' }) {
+function AddMembers({ viewType = '', setAddMembers = () => {} }) {
 	const [selectedMembers, setSelectedMembers] = useState([]);
 	const isNoSelectedUsers = isEmpty(selectedMembers);
 
@@ -34,10 +34,19 @@ function AddMembers({ viewType = '' }) {
 					},
 					sort_by: 'agent_type',
 				}}
+				size="sm"
 				renderLabel={(item) => <UserCard item={item} />}
 			/>
 
 			<div className={styles.action}>
+				<Button
+					size="md"
+					themeType="tertiary"
+					onClick={() => setAddMembers(false)}
+				>
+					cancel
+
+				</Button>
 				<Button disabled={isNoSelectedUsers} size="md" themeType="primary">Add</Button>
 			</div>
 		</div>

@@ -4,17 +4,23 @@ import AddMembers from './AddMembers';
 import MembersList from './MembersList';
 import styles from './styles.module.css';
 
-function Members({ viewType = '' }) {
+function Members({
+	viewType = '',
+	membersList = [],
+}) {
 	const [addMembers, setAddMembers] = useState(false);
-	console.log('setAddMembers', setAddMembers);
 
 	return (
 		<div className={styles.container}>
 			{addMembers ? (
-				<AddMembers />
+				<AddMembers
+					viewType={viewType}
+					setAddMembers={setAddMembers}
+				/>
 			) : (
 				<MembersList
-					viewType={viewType}
+					membersList={membersList}
+					setAddMembers={setAddMembers}
 				/>
 			)}
 		</div>

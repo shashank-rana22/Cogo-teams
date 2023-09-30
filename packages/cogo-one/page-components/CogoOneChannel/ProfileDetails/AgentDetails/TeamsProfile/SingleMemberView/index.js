@@ -10,7 +10,7 @@ import { profileBasicDetailsMapping } from '../../../../../../utils/getProfileBa
 import styles from './styles.module.css';
 
 function SingleMemberView({ groupMembersData = [], status = '' }) {
-	const otherActiveMemberData = groupMembersData.find((item) => item.access_type === 'user');
+	const otherActiveMemberData = groupMembersData.find((item) => !item?.is_admin || item.access_type === 'user');
 	const loginUserData = groupMembersData.find((item) => item.is_admin || item.access_type === 'owner');
 
 	const { name = '', partner = {} } = otherActiveMemberData || {};

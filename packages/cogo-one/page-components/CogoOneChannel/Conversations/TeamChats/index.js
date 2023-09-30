@@ -18,6 +18,8 @@ function TeamChats(props) {
 		firestore = {},
 		setActiveTab = () => {},
 		activeTab = {},
+		listCogooneGroupMembers = () => {},
+		membersList = [],
 	} = props || {};
 
 	const conversationsDivRef = useRef(null);
@@ -32,6 +34,8 @@ function TeamChats(props) {
 		globalGroupId : group_id,
 		setActiveTab,
 		draftRoomId   : id,
+		listCogooneGroupMembers,
+		membersList,
 	});
 
 	const scrollToLastMessage = useCallback(() => {
@@ -54,6 +58,8 @@ function TeamChats(props) {
 					viewType={viewType}
 					firestore={firestore}
 					setActiveTab={setActiveTab}
+					membersList={membersList}
+					key={id}
 				/>
 			</div>
 			<div className={styles.messages}>

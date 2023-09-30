@@ -5,15 +5,20 @@ const getCreateGlobalRoomPayload = ({ data = {}, groupMemberRooms = [] }) => {
 		group_members_ids = [],
 		group_members_count = 0,
 		group_members_hash_string = '',
+		is_group = false,
+		search_name,
 	} = data || {};
 
 	const payload = {
 		group_members_ids,
 		group_members_count,
-		created_at          : Date.now(),
-		updated_at          : Date.now(),
+		created_at            : Date.now(),
+		updated_at            : Date.now(),
 		group_members_hash_string,
-		group_members_rooms : groupMemberRooms,
+		group_members_rooms   : groupMemberRooms,
+		last_group_updated_at : Date.now(),
+		is_group,
+		search_name,
 	};
 
 	return {
