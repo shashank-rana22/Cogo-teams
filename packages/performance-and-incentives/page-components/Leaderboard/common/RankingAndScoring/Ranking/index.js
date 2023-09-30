@@ -26,6 +26,7 @@ function Ranking(props) {
 								{current_user_rank}
 								{' '}
 								/
+								{' '}
 								{total_report_count}
 							</h3>
 							<p className={styles.label}>{startCase(label)}</p>
