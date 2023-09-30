@@ -51,7 +51,7 @@ const getControls = ({
 
 	let subsidiary_service_rendered = {};
 
-	const serviceType = service_type?.split('_', SPLIT_SERVICE_TEXT).join('_');
+	const serviceType = service_type?.split('_', SPLIT_SERVICE_TEXT)?.join('_');
 
 	if (service_type === 'subsidiary_service') {
 		subsidiary_service_rendered = (service_rendered || []).find(

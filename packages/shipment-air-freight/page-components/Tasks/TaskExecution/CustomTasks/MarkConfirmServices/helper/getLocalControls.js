@@ -12,7 +12,7 @@ const getLocalControls = (service_type, formattedRate, shipment_data) => {
 		.find((serviceObj) => serviceObj?.service_type.includes('air_freight_local_service')
 		&& serviceObj?.trade_type === 'import');
 
-	const serviceType = service_type?.split('_', SPLIT_SERVICE_TEXT).join('_');
+	const serviceType = service_type?.split('_', SPLIT_SERVICE_TEXT)?.join('_');
 
 	const controlMapping = {
 		air_freight_service: [

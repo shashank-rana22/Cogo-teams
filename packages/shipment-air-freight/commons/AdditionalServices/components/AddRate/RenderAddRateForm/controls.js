@@ -11,7 +11,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 		serviceData?.units?.forEach((unit) => { UNIT_OPTIONS.push({ label: startCase(unit), value: unit }); });
 	} else UNIT_OPTIONS.push({ label: startCase(serviceData?.unit), value: serviceData?.unit });
 
-	const serviceType = serviceData?.service_type?.split('_', SPLIT_SERVICE_TEXT).join('_');
+	const serviceType = serviceData?.service_type?.split('_', SPLIT_SERVICE_TEXT)?.join('_');
 
 	const formControl = [
 		{
