@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useAuthRequest } from '@cogoport/request';
@@ -115,17 +116,6 @@ const useLoginAuthenticate = ({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [profile, router, source]);
 
-	const loginError = (response) => {
-		if (isEmpty(response)) {
-			return null;
-		}
-		const keyValuePairs = Object.keys(response).map((key) => ({ key, value: response[key] }));
-		const ERROR = [];
-		keyValuePairs.forEach((pair) => {
-			ERROR.push(`${pair.key} ${pair.value}`);
-		});
-		return ERROR[GLOBAL_CONSTANTS.zeroth_index];
-	};
 	const onSubmit = async (values, e) => {
 		e?.preventDefault();
 		try {
@@ -211,7 +201,7 @@ const useLoginAuthenticate = ({
 				window.location.href = '/';
 			}
 		} catch (err) {
-			Toast.error(loginError(err?.response?.data) || t('login:failed_to_login_toast_error'));
+			Toast.error(getApiErrorString(err?.response?.data) || t('login:failed_to_login_toast_error'));
 		}
 	};
 
