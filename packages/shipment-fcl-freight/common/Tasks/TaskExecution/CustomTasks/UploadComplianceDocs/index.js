@@ -74,9 +74,7 @@ function UploadComplianceDocs({
 	}
 
 	const uniq_doc_code = [...new Set(
-		totalDocsList?.map((doc) => doc?.docCode || JSON.parse(
-			totalDocsList?.[GLOBAL_CONSTANTS.zeroth_index]?.data,
-		)?.doc_code),
+		totalDocsList?.map((doc) => doc?.docCode || JSON.parse(doc?.data)?.doc_code),
 	)];
 
 	const uniq_doc_state = [...new Set(totalDocsList?.map((doc) => doc?.state))];
