@@ -33,6 +33,7 @@ function useListChats({
 	listOnlyMails = false,
 	activeFolder = '',
 	sidFilters = '',
+	mailsToBeShown = [],
 }) {
 	const snapshotListener = useRef(null);
 	const pinSnapshotListener = useRef(null);
@@ -73,8 +74,10 @@ function useListChats({
 			listOnlyMails,
 			activeFolder,
 			sidFilters,
+			mailsToBeShown,
 		}),
-		[userId, appliedFilters, isBotSession, viewType, activeSubTab, listOnlyMails, activeFolder, sidFilters],
+		[userId, appliedFilters, isBotSession, viewType, activeSubTab, listOnlyMails,
+			activeFolder, sidFilters, mailsToBeShown],
 	);
 
 	const queryForSearch = useMemo(() => {

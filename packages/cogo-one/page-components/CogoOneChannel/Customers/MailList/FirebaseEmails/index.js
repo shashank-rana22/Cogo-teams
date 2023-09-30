@@ -24,6 +24,7 @@ function FirebaseEmails(messageProps) {
 		isBotSession = false,
 		setIsBotSession = () => {},
 		workPrefernceLoading = false,
+		mailsToBeShown = [],
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
@@ -48,6 +49,7 @@ function FirebaseEmails(messageProps) {
 		listOnlyMails : true,
 		activeFolder,
 		sidFilters    : activeTab?.hiddenFilters?.sid || '',
+		mailsToBeShown,
 	});
 
 	const setActiveSubTab = (val) => {

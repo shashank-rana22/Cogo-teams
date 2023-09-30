@@ -8,8 +8,10 @@ import Layout from '../../../../../commons/Layout/index.tsx';
 import controls from '../../../../configurations/raise-ticket-controls';
 import useGetConfigurationCategory from '../../../../hook/useGetConfigurationCategory';
 import useListShipment from '../../../../hook/useListShipment.ts';
+import useListStakeholders from '../../../../hook/useListShipmentStakeholders';
 import useRaiseTicket from '../../../../hook/useRaiseTicket';
 import useUpdateBillsTicketId from '../../../../hook/useUpdateBIllsTicketId';
+import getStakeholderData from '../../../../utils/getStakeholderData';
 
 import styles from './styles.module.css';
 
@@ -36,6 +38,11 @@ function RaiseTicketModal({
 
 	const shipmentData = data?.list[GLOBAL_CONSTANTS.zeroth_index];
 
+	const {
+		data:stakeholderData = [],
+		loading:stakeholderLoading,
+	} = useListStakeholders({ shipmentId: shipmentData?.id });
+
 	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({
 		additionalInfo,
 		updateBillsTicketId,
@@ -53,11 +60,14 @@ function RaiseTicketModal({
 		value : item?.name,
 	}));
 
+	const STAKEHOLDER_OPTIONS = getStakeholderData(stakeholderData) || {};
+
 	const fields = controls({
 		formatRaiseToDeskOptions,
 		watchRaisedToDesk,
 		setAdditionalInfo,
 		shipmentData,
+		STAKEHOLDER_OPTIONS,
 	});
 
 	return (
@@ -112,7 +122,7 @@ function RaiseTicketModal({
 			<Modal.Footer style={{ padding: 12 }}>
 				<Button
 					size="md"
-					disabled={loading || updateLoading || shipmentLoading}
+					disabled={loading || updateLoading || shipmentLoading || stakeholderLoading}
 					onClick={handleSubmit(raiseTickets)}
 				>
 					Submit

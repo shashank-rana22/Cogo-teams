@@ -157,6 +157,7 @@ export default {
 			'dc5e8695-c30e-4350-9de9-8218ed1abfc4', // CCS Manager - Enterprise
 
 		],
+		cp_program_manager               : '122c2266-6c55-4b97-9f61-1056f87b53a7',
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		freight_force_org_id             : '36cee6fb-eeaf-4643-9db5-397544339635',
 
