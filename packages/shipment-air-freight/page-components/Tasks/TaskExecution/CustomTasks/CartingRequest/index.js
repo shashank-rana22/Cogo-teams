@@ -13,7 +13,7 @@ function CartingRequest({
 	refetch = () => {},
 	onCancel = () => {},
 }) {
-	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch });
+	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch, onCancel });
 
 	const { errors = {}, control = {}, watch = () => {}, handleSubmit = () => {} } = useForm();
 	const formValues = watch();

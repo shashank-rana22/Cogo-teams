@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { UploadController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
@@ -21,7 +21,7 @@ function CartingApproval({
 	const { control = {}, handleSubmit = () => {}, watch = () => {} } = useForm();
 
 	const { data = {}, loading: documentLoading = false } = useListShipmentDocuments({ shipmentData });
-	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch });
+	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch, onCancel });
 
 	const formValues = watch();
 
@@ -52,13 +52,26 @@ function CartingApproval({
 		<div className={styles.main_container}>
 			<div className={styles.heading}>Uploaded Documents</div>
 			<div className={styles.doc_container}>
-				{(data?.list || []).map((item) => (
-					<DocCard
-						key={item?.id}
-						item={item}
+				{isEmpty(data?.list) ? (
+					<UploadController
+						name="carting_order_approval_url"
+						key="carting_order_approval_url"
+						className="upload_controller_documents"
 						control={control}
+						rules={{
+							required: {
+								message: 'Document is required',
+							},
+						}}
 					/>
-				))}
+				)
+					: (data?.list || []).map((item) => (
+						<DocCard
+							key={item?.id}
+							item={item}
+							control={control}
+						/>
+					))}
 			</div>
 			<div className={styles.submit_button}>
 				<Button
