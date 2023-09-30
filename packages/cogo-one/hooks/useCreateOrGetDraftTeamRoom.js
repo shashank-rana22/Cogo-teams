@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import {
@@ -11,7 +12,8 @@ import {
 import { useState } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
-import { hashFunction } from '../helpers/hashFunction';
+
+import useHashFunction from './useHashFunction';
 
 const LIMIT = 1;
 
@@ -19,10 +21,10 @@ const SELF_COUNT = 1;
 
 const GROUP_COUNT_MIN = 2;
 
-async function getExistingGlobalRoom({ userIds = [], length = 0, firestore = {}, loggedInAgendId }) {
+async function getExistingGlobalRoom({
+	length = 0, firestore = {}, loggedInAgendId, groupMembersHashString = '',
+}) {
 	const internalRoomsCollection = collection(firestore, FIRESTORE_PATH.internal_rooms);
-
-	const groupMembersHashString = hashFunction({ groupMemberIds: userIds });
 
 	const collectionQuery = query(
 		internalRoomsCollection,
@@ -49,10 +51,13 @@ async function getExistingGlobalRoom({ userIds = [], length = 0, firestore = {},
 	};
 }
 
-async function getExistingDraftRoom({ userIds = [], length = 0, firestore = {}, loggedInAgendId = '' }) {
+async function getExistingDraftRoom({
+	length = 0,
+	firestore = {},
+	loggedInAgendId = '',
+	groupMembersHashString = '',
+}) {
 	const selfInternalRoomsCollection = collection(firestore, `users/${loggedInAgendId}/groups`);
-
-	const groupMembersHashString = hashFunction({ groupMemberIds: userIds });
 
 	const collectionQuery = query(
 		selfInternalRoomsCollection,
@@ -77,6 +82,7 @@ async function createDraftRoom({
 	loggedInAgendId = '',
 	length = 0,
 	groupName = 'DRAFT NAME',
+	groupMembersHashString = '',
 }) {
 	const selfInternalRoomsCollection = collection(firestore, `users/${loggedInAgendId}/groups`);
 
@@ -86,7 +92,6 @@ async function createDraftRoom({
 	if (!isGroup) {
 		searchName = userIdsData?.find((member) => member?.id !== loggedInAgendId)?.name || 'user';
 	}
-	const groupMembersHashString = hashFunction({ groupMemberIds: userIds });
 
 	const draftRoomPayload = {
 		group_members_ids         : userIds,
@@ -117,6 +122,8 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 
 	const [loading, setLoading] = useState(false);
 
+	const { hashFunction } = useHashFunction();
+
 	const setActiveRoom = ({ val = {} }) => {
 		setActiveTab((prev) => ({
 			...prev,
@@ -131,6 +138,7 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 		const userIdsLength = userIds.length + SELF_COUNT;
 
 		setLoading(true);
+		const groupMembersHashString = await hashFunction({ groupMemberIds: userIds });
 
 		const modifiedUserIdsData = [...userIdsData, {
 			id       : loggedInAgendId,
@@ -141,7 +149,7 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 
 		try {
 			const globalRoomData = await getExistingGlobalRoom(
-				{ userIds: modifiedUserIds, length: userIdsLength, firestore, loggedInAgendId },
+				{ userIds: modifiedUserIds, length: userIdsLength, firestore, loggedInAgendId, groupMembersHashString },
 			);
 
 			if (globalRoomData?.group_id) {
@@ -150,7 +158,7 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 			}
 
 			const draftRoomData = await getExistingDraftRoom(
-				{ userIds: modifiedUserIds, length: userIdsLength, firestore, loggedInAgendId },
+				{ userIds: modifiedUserIds, length: userIdsLength, firestore, loggedInAgendId, groupMembersHashString },
 			);
 
 			if (draftRoomData?.id) {
@@ -164,11 +172,13 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 				firestore,
 				loggedInAgendId,
 				length      : userIdsLength,
+				groupMembersHashString,
 			});
 
 			setActiveRoom({ val: res });
 		} catch (e) {
 			console.error('e', e);
+			Toast.error('Something Went Wrong');
 		} finally {
 			setLoading(false);
 		}

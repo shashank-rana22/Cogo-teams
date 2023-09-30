@@ -7,7 +7,10 @@ const getPayload = ({
 	activeTab = {},
 	loggedInAgentId = '',
 }) => {
-	const payloadData = getPublishRoomPayload({ activeTab, loggedInAgentId });
+	const payloadData = getPublishRoomPayload({
+		activeTab,
+		loggedInAgentId,
+	});
 
 	const { data = {} } = activeTab || {};
 

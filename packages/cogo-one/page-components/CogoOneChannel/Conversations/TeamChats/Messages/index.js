@@ -34,6 +34,7 @@ function Messages({
 			roomId={internalRoomId}
 			conversationsDivRef={conversationsDivRef}
 			scrollToLastMessage={scrollToLastMessage}
+			key={internalRoomId}
 		/>
 	);
 }
