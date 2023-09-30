@@ -9,6 +9,12 @@
 	border-top-right-radius: 8px;
 }
 
+.inner_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .entity_tag {
 	display: flex;
 	align-items: center;
@@ -23,4 +29,13 @@
 	margin-right: 8px;
 	background: #565a85;
 	border-radius: 0 4px 4px 0;
+}
+
+.label {
+	color: #828282;
+}
+
+.label span {
+	font-weight: 600;
+	color: #000;
 }

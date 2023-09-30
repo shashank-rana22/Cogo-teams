@@ -1,5 +1,5 @@
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import Activity from '../../../common/Activity';
 import IncentiveSnapshot from '../../../common/IncentiveSnapshot';
@@ -34,10 +34,39 @@ function RightPanel(props) {
 	return (
 		<div className={styles.container}>
 			{!isEmpty(HEADING) && (
-				<div className={styles.entity_tag}>
-					<div className={styles.badge} />
+				<div className={styles.inner_container}>
 
-					<div>{HEADING}</div>
+					<div className={styles.entity_tag}>
+						<div className={styles.badge} />
+
+						<div>{HEADING}</div>
+					</div>
+
+					{Object.entries(rankData)?.map(([label, value]) => {
+						const { current_user_rank, total_report_count } = value || {};
+
+						if (isEmpty(value)) return null;
+
+						return (
+							<div className={styles.rank_item} key={label}>
+								<p className={styles.label}>
+									{startCase(label)}
+									{' '}
+									:
+									{' '}
+									<span>
+										{current_user_rank}
+										{' '}
+										/
+										{' '}
+										{total_report_count}
+									</span>
+
+								</p>
+							</div>
+						);
+					})}
+
 				</div>
 			)}
 
