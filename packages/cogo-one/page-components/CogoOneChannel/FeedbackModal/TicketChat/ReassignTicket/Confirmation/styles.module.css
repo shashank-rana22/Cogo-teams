@@ -1,0 +1,19 @@
+.confirmation {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.confirmation_label {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.action {
+	display: flex;
+}
+
+.submit_button {
+	margin-left: 8px;
+}

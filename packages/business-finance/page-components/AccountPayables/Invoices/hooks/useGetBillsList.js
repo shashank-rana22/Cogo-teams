@@ -6,6 +6,8 @@ import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
+const COE_ACCEPTED_INVOICES = 'coe_accepted';
+
 function formatToTimeStamp(dateString = '') {
 	const date = new Date(dateString);
 	const formatedDate = formatDate({
@@ -24,15 +26,14 @@ function useGetBillsList({
 	showElement = false,
 }) {
 	const [billsFilters, setBillsFilters] = useState({
-		invoiceView : 'coe_accepted',
-		entity      : activeEntity,
-		pageSize    : 10,
-		pageIndex   : 1,
+		entity    : activeEntity,
+		pageSize  : 10,
+		pageIndex : 1,
 	});
 	const [orderBy, setOrderBy] = useState({});
 
 	const {
-		search = '', pageSize = 10, pageIndex = 1, invoiceView = '', category = '', currency = '',
+		search = '', pageSize = 10, pageIndex = 1, category = '', currency = '',
 		invoiceType = '', urgencyTag = '', services = '', invoiceDate = {}, dueDate = {}, updatedDate = {},
 	} = billsFilters || {};
 
@@ -66,7 +67,7 @@ function useGetBillsList({
 						pageIndex          : pageIndex || undefined,
 						pageSize           : pageSize || undefined,
 						category           : category || undefined,
-						invoiceView        : invoiceView || undefined,
+						invoiceView        : COE_ACCEPTED_INVOICES,
 						currency           : currency || undefined,
 						invoiceType        : invoiceType || undefined,
 						entity             : activeEntity || undefined,
@@ -89,7 +90,7 @@ function useGetBillsList({
 		},
 		[pageIndex, pageSize,
 			query, currency, urgencyTag, invoiceType,
-			invoiceView, category, dueDateSortType, services, startDate,
+			category, dueDateSortType, services, startDate,
 			endDate, fromBillDate,
 			toBillDate, fromUploadBillDate,
 			toUploadBillDate, billsTrigger, activeTab, organizationId, activeEntity],

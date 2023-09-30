@@ -256,5 +256,16 @@
     "supply_allocation": "Supply Allocation",
     "ams_submission": "AMS Submission",
     "warehouse_management": "Warehouse Management",
-    "demand_forecast": "Demand Forecast"
+    "demand_forecast": "Demand Forecast",
+    "select_language": "Select Language",
+    "default_error_toast": "แอปพลิเคชันพบข้อผิดพลาดที่ไม่รู้จัก ทีมของเรากำลังสำรวจสถานการณ์นี้อย่างเร่งรีบ โปรดลองอีกครั้งหลังจากบางเวลา หากปัญหายังคงอยู่โปรดติดต่อเราผ่านการแชท",
+    "tab_notifications_label": "การแจ้งเตือน",
+    "tab_mails_label": "อีเมล",
+    "mark_all_as_read": "ทำเครื่องหมายว่าอ่านทั้งหมด",
+    "new_notifications": "การแจ้งเตือนใหม่จาก cogoport!",
+    "loading": "กำลังโหลด..",
+    "chips_notifications_label": "การแจ้งเตือน",
+    "chips_mails_label": "อีเมล",
+    "see_all_button": "ดูทั้งหมด",
+    "notifications_empty_label": "คุณไม่มีการแจ้งเตือนใหม่"
 }

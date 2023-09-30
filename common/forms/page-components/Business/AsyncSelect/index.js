@@ -51,6 +51,7 @@ import {
 	asyncListRoles,
 	asyncListDepartment,
 	asyncFieldsTicketTypes,
+	asyncTicketsCategory,
 	asyncInsuranceCommoditiesList,
 	asyncListDunningTemplates,
 	asyncListOrganizationStakeholders,
@@ -64,6 +65,7 @@ import {
 	asyncFieldsLeadOrganization,
 	asyncListResources,
 	asyncFieldsLocationsMapping,
+	asyncListAllocationObjectives,
 	asyncListCompanyLocations,
 	asyncListOverSeasTradeParties,
 	asyncListPricingZones,
@@ -77,6 +79,7 @@ import {
 	asyncListLocationClusters,
 	asyncListFclFreightCommodityClusters,
 	asyncListSaasPlan,
+	asyncListEnrichmentSources,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -115,6 +118,7 @@ const keyAsyncFieldsParamsMapping = {
 	allot_bank                           : asyncAllotBanks,
 	shipping_lines                       : asyncShippingLines,
 	list_vendors                         : listVendors,
+	configuration_categories             : asyncTicketsCategory,
 	list_cogo_entity                     : asyncListCogoEntity,
 	expertise_configuration              : asyncFieldsExpertiseConfigurations,
 	badge_name                           : asyncFieldsExpertiseBadgeName,
@@ -162,6 +166,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_lead_organizations              : asyncFieldsLeadOrganization,
 	list_truck_types                     : asyncListTruckTypes,
 	resources                            : asyncListResources,
+	allocation_objectives                : asyncListAllocationObjectives,
 	list_company_locations               : asyncListCompanyLocations,
 	list_overseas_trade_parties          : asyncListOverSeasTradeParties,
 	list_pricing_zones                   : asyncListPricingZones,
@@ -172,6 +177,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
 	list_saas_plan                       : asyncListSaasPlan,
+	list_enrichment_sources              : asyncListEnrichmentSources,
 };
 
 const SINGLE_ENTITY = 1;

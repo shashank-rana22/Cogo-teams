@@ -1,19 +1,7 @@
-const UPLOAD_TERMINAL_CHARGE_CONTROL = [
-	{
-		name        : 'csr_reference_number',
-		label       : 'TC Invoice Number',
-		type        : 'text',
-		placeholder : 'Type TC Invoice No',
-		span        : 6,
-		rules:
-			{
-				required: 'TC Invoice No. is required',
-			},
-
-	},
+const uploadTerminalChargeControl = ({ type = 'terminal' }) => ([
 	{
 		name       : 'terminal_charge_document',
-		label      : 'Terminal Charge Receipt',
+		label      : `${type === 'terminal' ? 'Terminal' : 'Gatepass'} Charge Receipt`,
 		type       : 'file',
 		drag       : true,
 		span       : 6,
@@ -24,6 +12,5 @@ const UPLOAD_TERMINAL_CHARGE_CONTROL = [
 			required: true,
 		},
 	},
-
-];
-export default UPLOAD_TERMINAL_CHARGE_CONTROL;
+]);
+export default uploadTerminalChargeControl;

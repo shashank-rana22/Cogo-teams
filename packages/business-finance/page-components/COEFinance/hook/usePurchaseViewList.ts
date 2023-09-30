@@ -35,6 +35,9 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 		if (subActiveTabReject === 'coe_rejected') {
 			return 'COE_REJECTED';
 		}
+		if (subActiveTabReject === 'coe_on_hold') {
+			return 'ON_HOLD';
+		}
 		return 'ALL';
 	};
 
@@ -120,8 +123,8 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 				billDateTo      : billToData,
 				dueDateFrom     : dueFromData,
 				dueDateTo       : dueToData,
-				updatedDateFrom : updatedFromData,
-				updatedDateTo   : updatedToData,
+				updatedDateFrom : updatedFromData || filters?.updatedDateFrom || undefined,
+				updatedDateTo   : updatedToData || filters?.updatedDateTo || undefined,
 				urgencyTag      : filters?.urgencyTag || undefined,
 				billType        : showFilter(),
 				jobType        	: showConsolidated,
@@ -164,6 +167,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 		setTab,
 		setSearchValue,
 		searchValue,
+		refetch,
 	};
 };
 

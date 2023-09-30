@@ -3,16 +3,10 @@ const getAdditionalMethods = ({ shipmentType, activeTab, stepperTab }) => {
 
 	const mapping = {
 		fcl_freight: {
-			export: {
-				mark_confirmed        : [...addtionalMethod, 'booking_preference'],
-				upload_booking_note   : [...addtionalMethod, 'booking_preference', 'booking_status'],
-				upload_shipping_order : [...addtionalMethod, 'booking_preference'],
-				list_task_pending     : [...addtionalMethod, 'tasks'],
-			},
-			import: {
-				mark_confirmed        : [...addtionalMethod, 'booking_preference'],
-				upload_shipping_order : [...addtionalMethod, 'booking_preference'],
-				list_task_pending     : [...addtionalMethod, 'tasks'],
+			export_import: {
+				mark_confirmed      : [...addtionalMethod, 'booking_preference'],
+				upload_booking_note : [...addtionalMethod, 'booking_preference', 'booking_status'],
+				list_task_pending   : [...addtionalMethod, 'tasks'],
 			},
 			fcl_customs: {
 				mark_confirmed: [...addtionalMethod, 'booking_preference'],
