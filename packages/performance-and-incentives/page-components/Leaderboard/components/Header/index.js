@@ -53,14 +53,14 @@ function Header(props) {
 		<div className={styles.container}>
 			<div className={styles.head_container}>
 				<div>
-					<h2 className={styles.heading}>
+					<h2>
 						Welcome,
 						{' '}
 						{user.name}
 					</h2>
 
 					<div className={styles.filter_container}>
-						<div className={styles.subheading}>
+						<div>
 							You are viewing Incentive and Scoring Analytics
 							{' '}
 							<span className={styles.light}>for</span>

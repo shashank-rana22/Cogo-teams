@@ -1857,6 +1857,15 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'update_shipment_terminal_service_task',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api         : 'get_common_job_get_remaining_days_to_job_closure',
+		access_type : 'private',
+	},
 ];
 
 export default apis;

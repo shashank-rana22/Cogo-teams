@@ -608,7 +608,6 @@ const GLOBAL_CONSTANTS = {
 		otp                        : /[^0-9]/g,
 		hyphen_characters          : /-/g,
 		text_pattern_classifier    : /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
-		alphabets                  : /^[A-Za-z]+$/,
 	},
 	zeroth_index                 : 0,
 	one                          : 1,

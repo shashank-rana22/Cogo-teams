@@ -22,10 +22,14 @@
 }
 
 .name {
+	width: 68%;
 	padding-left: 4px;
+	overflow: hidden;
 	font-size: 12px;
 	font-weight: 500;
-	color: #221f20;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .type {
