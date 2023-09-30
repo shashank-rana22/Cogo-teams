@@ -76,7 +76,7 @@ export const useFieldArrayData = ({ services = [], shipment_data = {} }) => {
 				const ewbNumber = ewayBillData[index]?.eway_bill_number;
 				const res = await updateEwayBillNumber(ewbNumber);
 
-				setValue(`documents.${index}.url`, res?.data?.pdf_url);
+				setValue(`documents.${index}.url`, res?.data?.pdf_url || value?.documents?.[index]?.url);
 				setValue(`documents.${index}.ewb_validity`, res?.data?.data?.data?.ewb?.validUpto);
 				setValue(`documents.${index}.eway_bill_generation_date`, res?.data?.data?.data?.ewb?.ewayBillDate);
 			}

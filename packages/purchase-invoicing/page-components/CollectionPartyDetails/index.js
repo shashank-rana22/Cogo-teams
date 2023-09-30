@@ -56,7 +56,6 @@ function CollectionPartyDetails({
 		stakeholders = [],
 		stakeholder_types = [],
 		source = '',
-		all_services = [],
 		importer_exporter_id = '',
 		is_job_closed = false,
 		is_job_closed_financially = false,
@@ -126,7 +125,7 @@ function CollectionPartyDetails({
 	});
 
 	if (shipment_type === 'ftl_freight') {
-		disableInvoice = !all_services?.some(
+		disableInvoice = !servicesData?.some(
 			(item) => item?.service_type === 'ftl_freight_service'
 				&& (item?.lr_numbers || []).length,
 		);

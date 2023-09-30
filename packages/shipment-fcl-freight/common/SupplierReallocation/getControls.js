@@ -18,6 +18,7 @@ export default function getControls({
 
 	const showAllControls = isEmpty(documents) && !isAdditional && `${shipment_type}_service` === service_type;
 	const serviceType = serviceObj?.service_type?.split('_', SPLIT_SERVICE_TEXT).join('_');
+
 	const shipmentType = shipment_type?.split('_', SPLIT_SERVICE_TEXT).join('_');
 	let services = [];
 
@@ -55,7 +56,7 @@ export default function getControls({
 				filters: {
 					account_type : 'service_provider',
 					kyc_status   : 'verified',
-					service      : Array.isArray(services)
+					service      : !isEmpty(services)
 						? services : serviceType,
 				},
 			},

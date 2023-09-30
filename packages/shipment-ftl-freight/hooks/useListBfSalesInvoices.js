@@ -15,7 +15,7 @@ const useListBfSalesInvoices = () => {
 			method  : 'GET',
 			authKey : 'get_sales_invoice_shipment_list',
 		},
-		{ autoCancel: false },
+		{ autoCancel: false, manual: true },
 	);
 
 	const listApi = useCallback(async () => {

@@ -52,6 +52,7 @@ const MARKETING = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : false,
+		show_services                               : false,
 		show_rm_agent_details                       : false,
 	},
 };
