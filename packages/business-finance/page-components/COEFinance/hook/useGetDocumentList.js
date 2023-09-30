@@ -1,4 +1,6 @@
 import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 // import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
@@ -8,6 +10,12 @@ import toastApiError from '../../commons/toastApiError.ts';
 // import { getFormatDate } from '../ShipmentAuditFunctions/utils/getFormatDate';
 // import {getFormatDates}
 // const INITIAL_BAL = 0;
+
+const getFormatDate = (date = '') => formatDate({
+	date,
+	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+	formatType : 'date',
+});
 const useGetDocumentList = ({
 	paginationFilters = {},
 	search,
@@ -84,29 +92,39 @@ const useGetDocumentList = ({
 			// console.log(filters, 'gwvh');
 			const {
 				Service = '', Entity = '',
-				// operationalClosedDate = '', creationDate = '',
+				operationalClosedDate = '', creationDate = '',
 				walletUsed = '', tradeType = '',
 				//  page = '1', pageLimit = 10,
 			} = filters || {};
+			const {
+				startDate : creationStartDate = '', endDate : creationEndDate = '',
+			} = creationDate || '';
+			const {
+				startDate : opeerationalClosedStartDate = '', endDate : operationalClosedEndDate = '',
+			} = operationalClosedDate || '';
 			try {
 				await trigger({
 					params: {
-						currentState : CLOSING_STATUS,
-						pageIndex    : page,
-						pageSize     : pageLimit,
-						serviceType  : Service || undefined,
-						entityCode   : Entity || undefined,
-						tradeType    : tradeType || undefined,
-						// operationalClosedDate : operationalClosedDate || undefined,
-						// operationalClosedDate:
-						// (operationalClosedDate && getFormatDate(operationalClosedDate)) || undefined,
-						// creationDate : (creationDate && getFormatDate(creationDate)) || undefined,
-						// docType      : docType || undefined,
-						query        : query || undefined,
-						walletUsed   : walletUsed || undefined,
+						currentState      : CLOSING_STATUS,
+						pageIndex         : page,
+						pageSize          : pageLimit,
+						serviceType       : Service || undefined,
+						entityCode        : Entity || undefined,
+						tradeType         : tradeType || undefined,
+						creationStartDate : (creationStartDate && creationEndDate && getFormatDate(creationStartDate))
+						|| undefined,
+						creationEndDate: (creationStartDate && creationEndDate && getFormatDate(creationEndDate))
+						|| undefined,
+						operationalClosedStartDate: (opeerationalClosedStartDate && operationalClosedEndDate
+							&& getFormatDate(opeerationalClosedStartDate)) || undefined,
+						operationalClosedEndDate: (opeerationalClosedStartDate && operationalClosedEndDate
+							&& getFormatDate(operationalClosedEndDate)) || undefined,
+						query      : query || undefined,
+						walletUsed : walletUsed || undefined,
 					},
 				});
 			} catch (error) {
+				console.log(error, 'er');
 				toastApiError(error);
 			}
 		})();
@@ -173,9 +191,9 @@ const useGetDocumentList = ({
 	// 		setSelectedData([]);
 	// 		setSettleConfirmation(false);
 	// 		Toast.success('Settle successfully');
-	// 	} catch (error) {
-	// 		Toast.error(error?.response?.data?.message || error?.message || 'Something went wrong');
-	// 	}
+	// catch (error) {
+	// 	Toast.error(error?.response?.data?.message || error?.message || 'Something went wrong');
+	// }
 	// };
 
 	useEffect(() => {

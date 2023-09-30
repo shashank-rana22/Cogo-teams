@@ -12,46 +12,8 @@ import getFinancialCloseColumns from './configurations/getFinancialCloseColumns'
 import getJobColumns from './configurations/getJobColumns';
 import styles from './styles.module.css';
 
-// const list = [
-// 	{
-// 		sid  : '1234567890',
-// 		sell : {
-// 			estimated   : 101.919,
-// 			operational : 20000000000,
-// 			financial   : 20000000000,
-// 		},
-// 		buy: {
-// 			estimated   : 20000,
-// 			operational : 20000,
-// 			financial   : 20000,
-// 		},
-// 		profitability: {
-// 			estimated   : 2000000000,
-// 			operational : 2000000000,
-// 			financial   : 2000000000,
-// 		},
-// 	},
-// 	{
-// 		sid  : '1234567891',
-// 		sell : {
-// 			estimated   : 20000000,
-// 			operational : 20000000,
-// 			financial   : 20000000,
-// 		},
-// 		buy: {
-// 			estimated   : 20000000000,
-// 			operational : 20000000000,
-// 			financial   : 20000000000,
-// 		},
-// 		profitability: {
-// 			estimated   : 200,
-// 			operational : 200,
-// 			financial   : 200,
-// 		},
-// 	},
-// ];
-
 function ShipmentAuditFunction({ activeTab }) {
+	// const router = useRouter();
 	const { push } = useRouter();
 	const [date, setDate] = useState('');
 	const [tradeTab, setTradeTab] = useState('');
@@ -79,17 +41,31 @@ function ShipmentAuditFunction({ activeTab }) {
 	const onPageChange = (val) => {
 		setPaginationFilters((prev) => ({ ...prev, page: val }));
 	};
-	const handleClick = () => {
-		push(
-			'/business-finance/coe-finance/next-page',
-			'/business-finance/coe-finance/next-page',
-		);
+	// const handleClick = (jobId) => {
+	// 	push(
+	// 		'/business-finance/coe-finance/next-page',
+	// 		'/business-finance/coe-finance/next-page',
+	// 	);
+	// };
+	// const handleFinancialTabClick = (jobId) => {
+	// 	push(
+	// 		'/business-finance/coe-finance/finance-close-next-page',
+	// 		'/business-finance/coe-finance/finance-close-next-page',
+	// 	);
+	// };
+
+	const handleClick = (jobId) => {
+		push({
+			pathname : '/business-finance/coe-finance/next-page',
+			query    : { jobId },
+		});
 	};
-	const handleFinancialTabClick = () => {
-		push(
-			'/business-finance/coe-finance/finance-close-next-page',
-			'/business-finance/coe-finance/finance-close-next-page',
-		);
+
+	const handleFinancialTabClick = (jobId) => {
+		push({
+			pathname : '/business-finance/coe-finance/finance-close-next-page',
+			query    : { jobId },
+		});
 	};
 
 	const rest = { onClickOutside: () => setShow(false) };

@@ -146,10 +146,10 @@ const getJobColumns = ({ handleClick }) => {
 		{
 			id       : 'jobNumber',
 			Header   : '',
-			accessor : () => (
+			accessor : (row) => (
 
 				<div>
-					<Button themeType="secondary" onClick={() => handleClick()}>Audit</Button>
+					<Button themeType="secondary" onClick={() => handleClick(row?.jobId)}>Audit</Button>
 				</div>
 			),
 		},

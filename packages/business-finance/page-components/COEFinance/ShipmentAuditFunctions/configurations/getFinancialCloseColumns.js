@@ -120,10 +120,10 @@ const getFinancialCloseColumns = ({ handleFinancialTabClick }) => {
 		{
 			id       : 'estimated',
 			Header   : '',
-			accessor : () => (
+			accessor : (row) => (
 
 				<div>
-					<Button themeType="secondary" onClick={() => handleFinancialTabClick()}>Audit</Button>
+					<Button themeType="secondary" onClick={() => handleFinancialTabClick(row?.jobId)}>Audit</Button>
 				</div>
 			),
 		},
