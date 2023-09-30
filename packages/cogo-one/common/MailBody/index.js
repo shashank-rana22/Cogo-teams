@@ -56,6 +56,8 @@ function MailBody({
 }) {
 	const { source = '' } = formattedData || {};
 
+	const { viewType } = mailProps;
+
 	const {
 		response,
 		send_by = '',
@@ -86,7 +88,7 @@ function MailBody({
 		loading = false,
 	} = useGetMailContent({ messageId: message_id, source, setExpandedState });
 
-	const { signature } = useGetSignature();
+	const { signature } = useGetSignature({ viewType });
 
 	const { createReplyAllDraft } = useCreateReplyAllDraft();
 	const { createReplyDraft } = useCreateReplyDraft();

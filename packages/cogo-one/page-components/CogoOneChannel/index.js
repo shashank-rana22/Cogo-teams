@@ -70,7 +70,7 @@ function CogoOne() {
 		viewType: initialViewType = '', loading: workPrefernceLoading = false, userSharedMails = [],
 	} = useAgentWorkPrefernce();
 	const { fetchWorkStatus = () => {}, agentWorkStatus = {}, preferenceLoading = false } = useGetAgentPreference();
-	const { signature } = useGetSignature();
+	const { signature } = useGetSignature({ viewType });
 	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
