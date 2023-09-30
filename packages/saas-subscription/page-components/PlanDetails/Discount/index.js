@@ -1,5 +1,5 @@
 import { Placeholder, Button, cl } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
@@ -18,6 +18,10 @@ function Discount({ planId = '', discounts = [], loading = false, setFeatureModa
 	const discountConfig = getDiscountConfig({ t });
 
 	const itemFunction = getItemFunction({ setDiscountModal, t });
+
+	if (isEmpty(discounts)) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>

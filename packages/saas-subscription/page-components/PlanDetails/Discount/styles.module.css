@@ -18,8 +18,19 @@
 }
 
 .col {
-	width: 16.6%;
+	width: 14%;
 	padding: 0 8px;
+
+	> div {
+		margin: 0 !important;
+	}
+
+	:global {
+		.ui_legend_container,
+		.ui_legend_item {
+			margin: 0;
+		}
+	}
 }
 
 .header {

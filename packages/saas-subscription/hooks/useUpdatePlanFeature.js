@@ -82,7 +82,6 @@ const useUpdatePlanFeature = ({ planId = '', setFeatureModal }) => {
 	};
 
 	const updateFeatureHandler = async (data) => {
-		console.log(data, 'data');
 		try {
 			await trigger({
 				data: {

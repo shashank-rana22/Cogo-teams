@@ -53,7 +53,9 @@ const usePlanDiscount = ({ discountModal = {}, setFeatureModal, setDiscountModal
 				data: payload,
 			});
 
-			Toast.success(t('saasSubscription:discount_success_toast'));
+			Toast.success(isCreate ? t('saasSubscription:discount_create_success_toast')
+				: t('saasSubscription:discount_success_toast'));
+
 			setFeatureModal({ apiCall: true });
 			setDiscountModal({ open: false });
 		} catch (err) {

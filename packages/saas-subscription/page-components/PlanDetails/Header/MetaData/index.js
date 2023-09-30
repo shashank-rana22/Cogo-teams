@@ -1,8 +1,8 @@
-import { Button, Modal, Textarea } from '@cogoport/components';
+import { Button, Modal, Textarea, Toast } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
-import usePlanMetaData from '../../../../hooks/usePlanMetaData';
+import useUpdatePlanData from '../../../../hooks/useUpdatePlanData';
 
 import styles from './styles.module.css';
 
@@ -13,7 +13,24 @@ function MetaDataModal({ metaData, setMetaData, setFeatureModal }) {
 
 	const [newMetaData, setNewMetaData] = useState(jsonMetaData);
 
-	const { loading, submitHandler, closeModalHandler } = usePlanMetaData({ metaData, setMetaData, setFeatureModal });
+	const { loading, submitHandler } = useUpdatePlanData();
+
+	const closeModalHandler = () => {
+		setMetaData({ open: false });
+	};
+
+	const formSubmitHandler = async (data) => {
+		try {
+			const validJson = JSON.parse(data);
+			await submitHandler({ payload: { id: metaData?.id, metadata: validJson } });
+
+			Toast.success(t('saasSubscription:update_meta_data'));
+			setFeatureModal({ apiCall: true });
+			closeModalHandler();
+		} catch (e) {
+			Toast.error(t('saasSubscription:valid_json'));
+		}
+	};
 
 	return (
 		<Modal show={metaData.open} onClose={closeModalHandler} closeOnOuterClick>
@@ -40,7 +57,7 @@ function MetaDataModal({ metaData, setMetaData, setFeatureModal }) {
 					themeType="accent"
 					loading={loading}
 					disabled={newMetaData === jsonMetaData}
-					onClick={() => submitHandler(newMetaData)}
+					onClick={() => formSubmitHandler(newMetaData)}
 				>
 					{t('saasSubscription:save')}
 				</Button>
