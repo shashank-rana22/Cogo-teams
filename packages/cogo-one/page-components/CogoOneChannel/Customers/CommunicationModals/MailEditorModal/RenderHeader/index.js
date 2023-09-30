@@ -1,6 +1,6 @@
 import { cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMSend, IcMAttach, IcMArrowBack, IcMMinus } from '@cogoport/icons-react';
+import { IcMSend, IcMAttach, IcMArrowBack, IcMMinus, IcMCross } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
 import CustomFileUploader from '../../../../../../common/CustomFileUploader';
@@ -44,17 +44,6 @@ function RenderHeader({
 	return (
 		<div className={styles.mail_modal_header}>
 			<div className={styles.header}>
-				<div className={styles.left_container}>
-					<Button
-						size="md"
-						themeType="link"
-						onClick={handleClose}
-						disabled={replyLoading || sendLoading}
-					>
-						Cancel
-					</Button>
-				</div>
-
 				<div
 					className={styles.title}
 					role="presentation"
@@ -63,11 +52,33 @@ function RenderHeader({
 				</div>
 
 				<div className={styles.right_container}>
-					<div className={styles.minimize_button} title="minimize">
+
+					<div
+						className={cl`${styles.minimize_button} 
+						${(replyLoading || sendLoading) ? styles.disable_icon : ''}`}
+						title="minimize"
+					>
 						<IcMMinus onClick={() => {
+							if (replyLoading || sendLoading) {
+								return;
+							}
 							handleSaveDraft({ isMinimize: true });
 							setMinimizeModal(true);
 						}}
+						/>
+					</div>
+					<div
+						className={cl`${styles.minimize_button} 
+						${(replyLoading || sendLoading) ? styles.disable_icon : ''}`}
+						title="Cancel"
+					>
+						<IcMCross
+							onClick={() => {
+								if (replyLoading || sendLoading) {
+									return;
+								}
+								handleClose();
+							}}
 						/>
 					</div>
 				</div>

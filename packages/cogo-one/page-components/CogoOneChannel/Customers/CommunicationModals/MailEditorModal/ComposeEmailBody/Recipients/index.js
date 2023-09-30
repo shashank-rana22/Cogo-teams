@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import MailRecipientType from '../../../../../../../common/MailRecipientType';
 
+import OrgSpecificRecipients from './OrgSpecificRecipients';
 import styles from './styles.module.css';
 
 const EMAIL_RECIPIENTS = [
@@ -21,6 +22,11 @@ const EMAIL_RECIPIENTS = [
 	},
 ];
 
+const ACTIVE_RECIPIENTS_COMP = {
+	specific : OrgSpecificRecipients,
+	default  : MailRecipientType,
+};
+
 function Recipients({
 	emailState = {},
 	handleChange = () => {},
@@ -31,6 +37,7 @@ function Recipients({
 	setEmailState = () => {},
 	showControl = '',
 	errorValue = '',
+	showOrgSpecificMail = false,
 }) {
 	const [enabledRecipients, setEnabledRecipients] = useState({
 		ccrecipients  : !isEmpty(emailState?.ccrecipients),
@@ -51,17 +58,20 @@ function Recipients({
 					return null;
 				}
 
+				const ActiveRecipientComp = ACTIVE_RECIPIENTS_COMP?.[showOrgSpecificMail ? 'specific' : 'default'];
+
 				return (
 					<div
 						className={styles.type_to}
 						key={itm.value}
+						style={{ borderBottom: showOrgSpecificMail ? 'unset' : '1px solid #e0e0e0' }}
 					>
 						<div className={styles.mail_recipient_container}>
 							<div className={styles.sub_text}>
 								{itm.label}
 								:
 							</div>
-							<MailRecipientType
+							<ActiveRecipientComp
 								emailRecipientType={emailState?.[itm.value]}
 								handleDelete={handleDelete}
 								showControl={showControl}
@@ -71,8 +81,12 @@ function Recipients({
 								handleKeyPress={handleKeyPress}
 								handleCancel={handleCancel}
 								handleEdit={handleEdit}
+								emailState={emailState}
+								setEmailState={setEmailState}
+								recipientTypes={EMAIL_RECIPIENTS}
 							/>
 						</div>
+
 						<div className={styles.button_styles}>
 							{itm.value === 'toUserEmail' ? (
 								<>

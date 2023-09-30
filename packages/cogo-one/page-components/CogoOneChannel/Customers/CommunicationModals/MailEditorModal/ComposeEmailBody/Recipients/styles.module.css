@@ -6,11 +6,11 @@
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	padding: 14px 0 0;
-	border-bottom: 1px solid #e0e0e0;
+	padding: 4px 0;
 }
 
 .sub_text {
+	width: 40px;
 	font-size: 14px;
 	color: #828282;
 }
@@ -18,6 +18,7 @@
 .mail_recipient_container {
 	display: flex;
 	align-items: center;
+	width: calc(100% - 106px);
 }
 
 .button_styles {

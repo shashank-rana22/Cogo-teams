@@ -5,8 +5,11 @@ import { useEffect, useMemo } from 'react';
 
 import { getUserActiveMails } from '../../../../../../configurations/mail-configuration';
 import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
+import getRenderEmailBody from '../../../../../../helpers/getRenderEmailBody';
 
+import EmailTemplates from './EmailTemplates';
 import Recipients from './Recipients';
+import ShipmentSubject from './ShipmentSubject';
 import styles from './styles.module.css';
 
 const DISABLED_SUBJECT = ['reply_all', 'reply'];
@@ -32,6 +35,9 @@ function ComposeEmailBody(props) {
 		showControl = null,
 		uploading = false,
 		setActiveMailAddress = () => {},
+		mailProps = {},
+		showOrgSpecificMail = false,
+		signature = '',
 	} = props || {};
 
 	const userActiveMails = useMemo(() => (
@@ -69,6 +75,7 @@ function ComposeEmailBody(props) {
 					/>
 				</div>
 			</div>
+
 			<Recipients
 				emailState={emailState}
 				handleChange={handleChange}
@@ -79,26 +86,42 @@ function ComposeEmailBody(props) {
 				showControl={showControl}
 				errorValue={errorValue}
 				setEmailState={setEmailState}
+				mailProps={mailProps}
+				showOrgSpecificMail={showOrgSpecificMail}
 			/>
 
 			<div className={styles.type_to}>
 				<div className={styles.sub_text}>
 					Sub:
 				</div>
-				<Input
-					value={emailState?.subject}
-					onChange={(val) => setEmailState((p) => ({ ...p, subject: val }))}
-					size="xs"
-					placeholder="Enter your Subject"
-					className={styles.styled_input}
-					disabled={isDisabledSubject}
-				/>
+
+				{showOrgSpecificMail
+					? (
+						<ShipmentSubject
+							emailState={emailState}
+							setEmailState={setEmailState}
+						/>
+					)
+					: (
+						<Input
+							value={emailState?.subject}
+							onChange={(val) => setEmailState((p) => ({ ...p, subject: val }))}
+							size="xs"
+							placeholder="Enter your Subject"
+							className={styles.styled_input}
+							disabled={isDisabledSubject}
+						/>
+					)}
 			</div>
+
+			{showOrgSpecificMail
+				? <EmailTemplates mailProps={mailProps} />
+				: null }
 
 			<div className={styles.rte_container}>
 				<RTEditor
-					value={emailState?.body}
-					onChange={(val) => setEmailState((p) => ({ ...p, body: val }))}
+					value={emailState?.rteContent}
+					onChange={(val) => setEmailState((prev) => ({ ...prev, rteContent: val }))}
 					className={styles.styled_editor}
 					modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
 				/>
@@ -143,6 +166,19 @@ function ComposeEmailBody(props) {
 							);
 						},
 					)}
+				</div>
+
+				<div className={styles.preview_container}>
+					<div className={styles.preview_label}>
+						Signature:
+					</div>
+
+					<div
+						className={styles.preview_body}
+						dangerouslySetInnerHTML={{
+							__html: getRenderEmailBody({ html: signature }),
+						}}
+					/>
 				</div>
 			</div>
 		</>

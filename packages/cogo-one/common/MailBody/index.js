@@ -56,6 +56,8 @@ function MailBody({
 }) {
 	const { source = '' } = formattedData || {};
 
+	const { viewType } = mailProps;
+
 	const {
 		response,
 		send_by = '',
@@ -86,7 +88,7 @@ function MailBody({
 		loading = false,
 	} = useGetMailContent({ messageId: message_id, source, setExpandedState });
 
-	const { signature } = useGetSignature();
+	const { signature } = useGetSignature({ viewType });
 
 	const { createReplyAllDraft } = useCreateReplyAllDraft();
 	const { createReplyDraft } = useCreateReplyDraft();
@@ -148,7 +150,9 @@ function MailBody({
 					isDraft={isDraft}
 					emailStatus={emailStatus}
 				/>
+
 				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
+
 				<div
 					className={cl`${styles.body} 
 					${expandedState ? styles.expanded_body : styles.collapsed_body}`}

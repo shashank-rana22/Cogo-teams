@@ -2,11 +2,11 @@
 	display: flex;
 	align-items: center;
 	width: 100%;
-	padding: 4px 0 10px;
-	border-bottom: 1px solid #e0e0e0;
+	padding: 4px 0;
 }
 
 .sub_text {
+	width: 40px;
 	font-size: 14px;
 	color: #828282;
 }
@@ -20,7 +20,6 @@
 }
 
 .rte_container {
-	position: relative;
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
@@ -32,15 +31,12 @@
 			display: flex;
 			flex-direction: column;
 			flex-grow: 1;
-			max-height: 390px !important;
+			min-height: 35vh;
+			max-height: 80vh !important;
 		}
 
 		.ql-editor {
-			max-height: 330px !important;
-		}
-
-		.ui_rich_text_editor {
-			min-height: 180px;
+			max-height: 45vh !important;
 		}
 
 		.ql-tooltip {
@@ -98,15 +94,25 @@
 
 .select_container {
 	width: 80%;
+	padding-right: 3px;
 	margin-left: 10px;
 
 	:global {
 		.ui_select_container {
 			width: 100%;
 		}
-
-		.ui_select_options_container {
-			z-index: 9999;
-		}
 	}
+}
+
+.preview_container {
+	margin-top: 4px;
+}
+
+.preview_label {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.preview_body {
+	margin-top: 2px;
 }
