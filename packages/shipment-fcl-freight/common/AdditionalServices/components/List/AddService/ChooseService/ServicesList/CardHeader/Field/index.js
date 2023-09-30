@@ -14,7 +14,7 @@ function Field({ field = {} }) {
 				{field?.tooltip ? (
 					<Tooltip theme="light" content={field?.tooltip} placement="top">
 						<span>
-							{field.label}
+							{field?.label}
 							<IcMInfo />
 						</span>
 					</Tooltip>
