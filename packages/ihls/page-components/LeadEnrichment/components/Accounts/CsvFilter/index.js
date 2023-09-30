@@ -21,10 +21,10 @@ function CsvFilter({
 				...previousParams,
 				filters: {
 					...(previousParams.filters || {}),
-					csv_filter: val?.upload_question?.finalUrl,
+					csv_filter: val?.upload_question?.finalUrl || val?.upload_question,
 				},
 			}));
-			setFileName(val?.upload_question?.fileName);
+			setFileName(val?.upload_question?.fileName || val?.upload_question);
 			onClickCancel();
 			reset();
 		} catch (error) {

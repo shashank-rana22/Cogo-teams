@@ -1,5 +1,4 @@
-import { Button, Modal, Pagination, Popover } from '@cogoport/components';
-import { IcMEyeopen } from '@cogoport/icons-react';
+import { Button, Pagination, Popover } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -24,7 +23,7 @@ function LeadInfo({
 	onChangeTableHeadCheckbox = () => {},
 	onChangeBodyCheckbox = () => {},
 }) {
-	const [showModal, setShowModal] = useState(null);
+	const [showModal, setShowModal] = useState('');
 	const [visible, setVisible] = useState(false);
 	const [leadId, setLeadId] = useState(null);
 	const [allocationLeadId, setAllocationLeadId] = useState(null);
@@ -37,13 +36,37 @@ function LeadInfo({
 		setAllocationLeadId,
 	});
 
-	const onClose = () => setAllocationLeadId(null);
-
-	const onCloseLogs = () => setLeadId(null);
-
 	const onPageChange = (pageNumber) => setParams((p) => ({ ...p, page: pageNumber }));
 
 	const onCloseModal = () => setShowModal(null);
+
+	function ActionComponent() {
+		if (showModal === 'enrichment') {
+			return (
+				<EnrichmentRequestModal
+					checkedRowsId={checkedRowsId}
+					params={params}
+					showRequest={showModal === 'enrichment'}
+					onCloseModal={onCloseModal}
+					lead_count={paginationData.count}
+				/>
+			);
+		}
+
+		if (showModal === 'ingestion') {
+			return (
+				<PustToCrm
+					checkedRowsId={checkedRowsId}
+					params={params}
+					showRequest={showModal === 'ingestion'}
+					onCloseModal={onCloseModal}
+					lead_count={paginationData.count}
+				/>
+			);
+		}
+
+		return null;
+	}
 
 	if (!loading && isEmpty(response)) {
 		return (
@@ -101,64 +124,16 @@ function LeadInfo({
 				/>
 			</div>
 
-			{allocationLeadId
+			{allocationLeadId ? (
+				<ObjectiveInfo
+					allocationLeadId={allocationLeadId}
+					setAllocationLeadId={setAllocationLeadId}
+				/>
+			) : null}
 
-				? (
-					<Modal style={{ width: '70%' }} show={allocationLeadId} onClose={onClose} placement="center">
-						<Modal.Header title={(
-							<>
-								<IcMEyeopen className={styles.eye_icon} />
-								<span>
-									View Objectives
-								</span>
-							</>
-						)}
-						/>
-						<Modal.Body className={styles.modal_body}>
-							<ObjectiveInfo allocationLeadId={allocationLeadId} />
-						</Modal.Body>
-						<Modal.Footer>
-							<Button onClick={onClose}>Close</Button>
-						</Modal.Footer>
-					</Modal>
-				) : null}
-			{leadId
-				? (
-					<Modal style={{ width: '60%' }} show={leadId} onClose={onCloseLogs} placement="center">
-						<Modal.Header title={(
-							<>
-								<IcMEyeopen className={styles.eye_icon} />
-								<span>
-									Enrichment History
-								</span>
-							</>
-						)}
-						/>
-						<Modal.Body>
-							<LeadEnrichmentLogs lead_id={leadId} />
-						</Modal.Body>
-						<Modal.Footer>
-							<Button onClick={onCloseLogs}>Close</Button>
-						</Modal.Footer>
-					</Modal>
-				) : null}
+			{leadId ? <LeadEnrichmentLogs leadId={leadId} setLeadId={setLeadId} /> : null}
 
-			<EnrichmentRequestModal
-				checkedRowsId={checkedRowsId}
-				params={params}
-				showRequest={showModal === 'enrichment'}
-				onCloseModal={onCloseModal}
-				lead_count={paginationData.count}
-			/>
-
-			<PustToCrm
-				checkedRowsId={checkedRowsId}
-				params={params}
-				showRequest={showModal === 'ingestion'}
-				onCloseModal={onCloseModal}
-				lead_count={paginationData.count}
-			/>
-
+			<ActionComponent />
 		</div>
 	);
 }
