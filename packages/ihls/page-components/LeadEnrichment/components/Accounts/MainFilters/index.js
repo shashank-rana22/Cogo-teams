@@ -16,6 +16,7 @@ function MainFilters({
 	debounceQuery = '',
 	setParams = () => {},
 	params = {},
+	setFileName = () => {},
 }) {
 	const [show, setShow] = useState(false);
 
@@ -32,6 +33,7 @@ function MainFilters({
 			...p,
 			filters: {},
 		}));
+		setFileName(null);
 	};
 
 	return (

@@ -5,3 +5,8 @@
 .error_msg {
 	color: red;
 }
+
+.modal_footer {
+	display: flex;
+	gap: 8px;
+}

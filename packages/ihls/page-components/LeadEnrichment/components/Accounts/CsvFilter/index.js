@@ -3,10 +3,17 @@ import { UploadController, useForm } from '@cogoport/forms';
 
 import styles from './styles.module.css';
 
-function CsvFilter({ setParams = () => {}, loading = false, showCsv = {}, setShowCsv = () => {} }) {
+function CsvFilter({
+	setFileName = () => {},
+	setParams = () => {},
+	showCsv = {},
+	setShowCsv = () => {},
+}) {
 	const onClickCancel = () => setShowCsv(false);
 
-	const { formState: { errors }, control, handleSubmit } = useForm();
+	const { formState: { errors }, control, reset, watch, handleSubmit } = useForm();
+
+	const is_file_uploaded = watch('upload_question');
 
 	const onClickUpload = async (val) => {
 		try {
@@ -17,7 +24,9 @@ function CsvFilter({ setParams = () => {}, loading = false, showCsv = {}, setSho
 					csv_filter: val?.upload_question?.finalUrl,
 				},
 			}));
+			setFileName(val?.upload_question?.fileName);
 			onClickCancel();
+			reset();
 		} catch (error) {
 			Toast.error(error);
 		}
@@ -25,13 +34,19 @@ function CsvFilter({ setParams = () => {}, loading = false, showCsv = {}, setSho
 
 	return (
 		<Modal size="md" show={showCsv} onClose={onClickCancel} placement="center">
-			<Modal.Header title="More filters" />
-			{/* <div className={styles.modal_container}> */}
+			<Modal.Header title="Registration number filter" />
 			<Modal.Body>
+				<ul>
+					<li>
+						Please specify column header as
+						{' '}
+						<b>registration_number</b>
+					</li>
+				</ul>
 				<UploadController
 					control={control}
 					name="upload_question"
-					accept=".csv, .xlsx"
+					accept=".csv"
 					rules={{ required: 'File is required.' }}
 				/>
 				{errors.upload_question && (
@@ -40,11 +55,10 @@ function CsvFilter({ setParams = () => {}, loading = false, showCsv = {}, setSho
 					</div>
 				)}
 			</Modal.Body>
-			{/* </div> */}
 			<Modal.Footer>
 				<div className={styles.modal_footer}>
 					<Button
-						disabled={loading}
+						disabled={!is_file_uploaded}
 						onClick={handleSubmit(onClickUpload)}
 						size="md"
 						themeType="primary"

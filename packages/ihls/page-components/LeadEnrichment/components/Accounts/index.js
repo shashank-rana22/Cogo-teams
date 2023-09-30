@@ -1,8 +1,9 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import FileFilter from '../../commons/FileFilter';
 import { STATISTICS_HEAD, STATISTICS_HEAD_LIMIT_INDEX } from '../../helpers/constants';
 import useGetLeadData from '../../hooks/useGetLeadData';
 import LeadInfo from '../LeadInfo';
@@ -14,6 +15,7 @@ import styles from './styles.module.css';
 
 function Accounts() {
 	const [showUsers, setShowUsers] = useState(false);
+	const [fileName, setFileName] = useState(null);
 	const [showCsv, setShowCsv] = useState(false);
 
 	const {
@@ -31,21 +33,47 @@ function Accounts() {
 		paginationData = {},
 	} = useGetLeadData();
 
+	const onRemoveCsvFilter = () => {
+		try {
+			setParams((previousParams) => ({
+				...previousParams,
+				filters: {
+					...(previousParams.filters || {}),
+					csv_filter: undefined,
+				},
+			}));
+			setFileName(null);
+		} catch (error) {
+			Toast.error(error);
+		}
+	};
+
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.header}>
 				<div>Leads Statistics</div>
-				<Button onClick={() => setShowCsv(true)}>
-					Upload CSV
-				</Button>
+				{fileName
+					? (
+						<FileFilter
+							fileName={fileName}
+							onRemoveCsvFilter={onRemoveCsvFilter}
+						/>
+					) : (
+						<Button onClick={() => setShowCsv(true)}>
+							Upload CSV
+						</Button>
+					)}
 
-				<CsvFilter
-					setParams={setParams}
-					loading={loading}
-					showCsv={showCsv}
-					setShowCsv={setShowCsv}
-				/>
+				{showCsv
+					? (
+						<CsvFilter
+							setFileName={setFileName}
+							setParams={setParams}
+							showCsv={showCsv}
+							setShowCsv={setShowCsv}
+						/>
+					) : null}
 			</div>
 
 			<div className={styles.filterContainer}>
@@ -57,6 +85,7 @@ function Accounts() {
 					debounceQuery={debounceQuery}
 					params={params}
 					setParams={setParams}
+					setFileName={setFileName}
 				/>
 			</div>
 
