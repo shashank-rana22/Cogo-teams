@@ -17,6 +17,7 @@ import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
 import useGetSignature from '../../hooks/useGetSignature';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
+import useListCogooneGroupMembers from '../../hooks/useListCogooneGroupMembers';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
 import Conversations from './Conversations';
@@ -46,6 +47,7 @@ function CogoOne() {
 			channel_type,
 		} : {},
 	});
+
 	const [viewType, setViewType] = useState('');
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
@@ -74,6 +76,14 @@ function CogoOne() {
 	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
+
+	const { group_id = '' } = activeTab?.data || {};
+
+	const {
+		listCogooneGroupMembers = () => {},
+		membersList = [],
+	} = useListCogooneGroupMembers({ globalGroupId: group_id });
+
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
 
@@ -206,6 +216,8 @@ function CogoOne() {
 									setActiveTab={setActiveTab}
 									suggestions={suggestions}
 									setModalType={setModalType}
+									listCogooneGroupMembers={listCogooneGroupMembers}
+									membersList={membersList}
 								/>
 							</div>
 							{(
@@ -233,6 +245,8 @@ function CogoOne() {
 										orgId={orgId}
 										mailProps={mailProps}
 										chatsConfig={activeTab}
+										listCogooneGroupMembers={listCogooneGroupMembers}
+										membersList={membersList}
 									/>
 									{(hasNoFireBaseRoom && !user_id && !lead_user_id)
 									&& <div className={styles.overlay_div} />}

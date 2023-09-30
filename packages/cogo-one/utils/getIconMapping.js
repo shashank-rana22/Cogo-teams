@@ -139,12 +139,16 @@ const getIconMapping = ({
 	viewType = '',
 	expandSideBar = false,
 	channelType = '',
-}) => iconMapping({ expandSideBar }).filter(
-	(eachIcon) => [
+}) => {
+	const CHANNEL_WISE_NAV_MAPPING = channelType === 'teams' ? ['profile'] : [
 		...COMMON_ACCESIBLE_NAVIGATIONS,
 		...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.extra_side_bar_navs_access || []),
 		...(ENABLE_EXPAND_SIDE_BAR.includes(channelType) ? SIDEBAR_CONTROLS : []),
-	].includes(eachIcon.name),
-);
+	];
+
+	return iconMapping({ expandSideBar }).filter(
+		(eachIcon) => CHANNEL_WISE_NAV_MAPPING.includes(eachIcon.name),
+	);
+};
 
 export default getIconMapping;

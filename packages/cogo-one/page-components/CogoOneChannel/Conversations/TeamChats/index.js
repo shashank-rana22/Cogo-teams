@@ -18,6 +18,8 @@ function TeamChats(props) {
 		firestore = {},
 		setActiveTab = () => {},
 		activeTab = {},
+		listCogooneGroupMembers = () => {},
+		membersList = [],
 	} = props || {};
 
 	const conversationsDivRef = useRef(null);
@@ -27,11 +29,13 @@ function TeamChats(props) {
 		id = '',
 	} = activeTeamCard || {};
 
-	const { loading = false, membersList = [] } = useFetchGlobalRoom({
+	const { loading = false } = useFetchGlobalRoom({
 		firestore,
 		globalGroupId : group_id,
 		setActiveTab,
 		draftRoomId   : id,
+		listCogooneGroupMembers,
+		membersList,
 	});
 
 	const scrollToLastMessage = useCallback(() => {

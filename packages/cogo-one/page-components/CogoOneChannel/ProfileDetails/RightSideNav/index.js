@@ -84,6 +84,15 @@ function RightSideNav({
 					expandSideBar: !prev?.expandSideBar,
 				};
 			});
+		} else if (activeTab === 'teams') {
+			setActiveTab((prev) => {
+				setActiveSelect(!prev?.expandSideBar ? 'profile' : '');
+
+				return {
+					...prev,
+					expandSideBar: !prev?.expandSideBar,
+				};
+			});
 		} else {
 			setActiveSelect(val);
 

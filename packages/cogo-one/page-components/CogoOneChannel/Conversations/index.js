@@ -23,6 +23,8 @@ function Conversations({
 	setActiveTab = () => {},
 	suggestions = [],
 	setModalType = () => {},
+	listCogooneGroupMembers = () => {},
+	membersList = [],
 }) {
 	const componentPropsMapping = {
 		message: {
@@ -63,6 +65,8 @@ function Conversations({
 			firestore,
 			setActiveTab,
 			activeTab,
+			listCogooneGroupMembers,
+			membersList,
 		},
 	};
 

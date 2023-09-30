@@ -7,8 +7,6 @@ import { useRef, useEffect, useState } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
-import useListCogooneGroupMembers from './useListCogooneGroupMembers';
-
 const FALLBACK = 0;
 
 function mountActiveRoomSnapShot({
@@ -85,16 +83,14 @@ function mountDraftActiveRoomSnapShot({
 	}
 }
 
-function useFetchGlobalRoom({ firestore = {}, globalGroupId = '', setActiveTab = () => {}, draftRoomId = '' }) {
+function useFetchGlobalRoom({
+	firestore = {}, globalGroupId = '', setActiveTab = () => {}, draftRoomId = '',
+	listCogooneGroupMembers = () => {}, membersList = [],
+}) {
 	const loggedInAgentId = useSelector(({ profile }) => profile?.user?.id);
 
 	const [loading, setLoading] = useState(false);
 	const activeRoomSnapshotListener = useRef({});
-
-	const {
-		listCogooneGroupMembers = () => {},
-		membersList = [],
-	} = useListCogooneGroupMembers({ globalGroupId });
 
 	useEffect(() => {
 		setLoading(true);

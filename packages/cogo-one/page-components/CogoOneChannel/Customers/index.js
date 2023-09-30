@@ -117,7 +117,7 @@ function Customers({
 			setActiveTeamCard: (val) => {
 				setActiveTab((prev) => ({
 					...prev,
-					data      : val,
+					data      : { ...val, channel_type: 'teams' },
 					groupData : {},
 				}));
 			},

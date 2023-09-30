@@ -1,0 +1,50 @@
+.styled_avatar {
+	margin-right: 6px;
+	border-radius: 50% !important;
+
+	:global {
+		.ui_avatar_text {
+			color: #4f4f4f;
+			background: #ced1ed;
+		}
+	}
+}
+
+.section_one {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.ic_tick_icon {
+	position: absolute;
+	top: 18px;
+	right: 2px;
+}
+
+.group_title {
+	margin: 16px 0;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.row_direction {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.group_member_name {
+	color: #4f4f4f;
+
+	span {
+		margin: 0 4px;
+		font-size: 12px;
+		font-weight: 500;
+	}
+}
+
+.group_member_designation {
+	color: #828282;
+}

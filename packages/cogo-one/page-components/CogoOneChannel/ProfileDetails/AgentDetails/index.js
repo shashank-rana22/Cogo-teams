@@ -12,6 +12,7 @@ import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGroupChat from '../../../../hooks/useGroupChat';
 import useListPartnerUsers from '../../../../hooks/useListPartnerUsers';
+import { dataMapping } from '../../../../utils/channelWiseDataMapping';
 
 import AddGroupMember from './AddGroupMember';
 import AgentQuickActions from './AgentQuickActions';
@@ -22,6 +23,7 @@ import GroupMembers from './GroupMembers';
 import GroupMembersRequests from './GroupMembersRequests';
 import Profile from './Profile';
 import styles from './styles.module.css';
+import TeamsProfile from './TeamsProfile';
 import VoiceCallComponent from './VoiceCallComponent';
 
 const handleClick = ({ id, channel_type }) => {
@@ -47,6 +49,8 @@ function AgentDetails({
 	mailProps = {},
 	userData = {},
 	getUserLoading = false,
+	listCogooneGroupMembers = () => {},
+	membersList = [],
 }) {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
@@ -88,33 +92,18 @@ function AgentDetails({
 	|| user_details?.mobile_number_eformat || lead_user_details?.whatsapp_number_eformat
 	|| lead_user_details?.mobile_number_eformat;
 
-	const DATA_MAPPING = {
-		voice: {
-			userId        : user_data?.id,
-			name          : user_data?.name,
-			userEmail     : user_data?.email,
-			mobile_number : user_number,
-			orgId         : voiceOrgId,
-			leadUserId    : null,
-		},
-		message: {
-			userId        : user_id,
-			name          : messageName || lead_user_details?.name,
-			userEmail     : email || lead_user_details?.email,
-			mobile_number : userMessageMobileNumber,
-			orgId         : organization_id,
-			leadUserId    : lead_user_id || lead_user_details?.lead_user_id,
-		},
-		firebase_emails: {
-			userId        : user_id,
-			name          : messageName || lead_user_details?.name,
-			userEmail     : email || lead_user_details?.email,
-			mobile_number : userMessageMobileNumber,
-			orgId         : organization_id,
-			leadUserId    : lead_user_id || lead_user_details?.lead_user_id,
-		},
-	};
-
+	const DATA_MAPPING = dataMapping({
+		user_data,
+		user_number,
+		voiceOrgId,
+		user_id,
+		messageName,
+		userMessageMobileNumber,
+		lead_user_details,
+		email,
+		organization_id,
+		lead_user_id,
+	});
 	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab] || {};
 	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({
 		setShowError,
@@ -145,6 +134,16 @@ function AgentDetails({
 	};
 
 	const handleSummary = () => { setShowMore(true); setActiveSelect('user_activity'); };
+
+	if (activeTab === 'teams') {
+		return (
+			<TeamsProfile
+				activeMessageCard={activeMessageCard}
+				membersList={membersList}
+				listCogooneGroupMembers={listCogooneGroupMembers}
+			/>
+		);
+	}
 
 	const setActiveMessage = (val) => { switchUserChats({ val, firestore, setActiveTab }); };
 	if (!userId && !leadUserId && !mobile_no) {
@@ -177,6 +176,7 @@ function AgentDetails({
 			</>
 		);
 	}
+
 	return (
 		<>
 			<div className={styles.top_div}>
