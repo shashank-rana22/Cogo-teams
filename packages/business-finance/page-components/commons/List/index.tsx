@@ -71,6 +71,8 @@ function List({
 		general: { isMobile = false },
 	}: any = useSelector((state: object) => state);
 
+	const dataList = isEmpty(list) ? [1, 2, 3, 4, 5] : list;
+
 	return (
 		<section>
 			{showHeader && !isMobile && (
@@ -95,7 +97,7 @@ function List({
 						/>
 					</div>
 				) : (
-					(list || [1, 2, 3, 4, 5]).map((singleitem) => (
+					(dataList).map((singleitem) => (
 						<React.Fragment key={singleitem?.id || singleitem?.objectId || singleitem?.billId}>
 							<CardColumn
 								fields={fields}
