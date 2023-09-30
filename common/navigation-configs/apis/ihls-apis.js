@@ -75,6 +75,11 @@ const ihls = {
 			access_type  : 'public',
 			service_name : 'athena',
 		},
+		{
+			api          : 'create_ingestion_request_platform',
+			access_type  : 'public',
+			service_name : 'athena',
+		},
 	],
 };
 

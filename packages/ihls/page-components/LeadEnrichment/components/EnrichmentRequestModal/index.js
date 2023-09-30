@@ -13,7 +13,7 @@ function EnrichmentRequestModal({
 	lead_count = null,
 	checkedRowsId = [],
 	showRequest = false,
-	setShowRequest = () => {}, params = {},
+	onCloseModal = () => {}, params = {},
 }) {
 	const {
 		loading,
@@ -23,7 +23,7 @@ function EnrichmentRequestModal({
 		watch,
 		reset,
 		onSave = () => {},
-	} = useCreateEnrichmentRequest({ setShowRequest, params, checkedRowsId });
+	} = useCreateEnrichmentRequest({ onCloseModal, params, checkedRowsId });
 
 	const mode = watch('mode');
 	const select_first = watch('select_first');
@@ -42,12 +42,12 @@ function EnrichmentRequestModal({
 	};
 
 	const onCloseRequest = () => {
-		setShowRequest(false);
+		onCloseModal();
 		reset();
 	};
 
 	return (
-		<Modal size="sm" show={showRequest} onClose={onCloseRequest} placement="center">
+		<Modal style={{ width: '35%' }} show={showRequest} onClose={onCloseRequest} placement="center">
 			<Modal.Header title={(
 				<div className={styles.modal_header}>
 					<div>
@@ -61,51 +61,53 @@ function EnrichmentRequestModal({
 			)}
 			/>
 			<Modal.Body>
-				{!enriched_filter_present
-					? (
-						<div className={styles.info_message}>
-							**The list may contain enriched leads, apply filter to get not enriched leads.
-						</div>
-					)
-					: null}
-				{(enrichment_request_controls || []).map((item) => {
-					const { name, type, displayName } = item;
-					if (name === 'select_first' && mode !== 'select_first') {
-						return null;
-					}
-					const Element = getFieldController(type);
-					if (!Element) return null;
-					return (
-						<div key={name} className={styles.input_field}>
-							{displayName}
-							<Element
-								{...item}
-								name={name}
-								isClearable
-								prefix={null}
-								control={control}
-								key={name}
-								size="sm"
-							/>
-							{!isEmpty(errors) ? (
-								<div className={styles.error_message}>
-									{errors[name]?.message}
-								</div>
-							) : null}
-						</div>
-					);
-				})}
-				<div className={styles.field_array}>
-					Add Constraints
-					<FieldArray
-						name="constraints"
-						control={control}
-						controls={constraint_controls}
-						error={errors}
-						showElement
-						buttonText=""
-						size="sm"
-					/>
+				<div className={styles.body_container}>
+					{!enriched_filter_present
+						? (
+							<div className={styles.info_message}>
+								**The list may contain enriched leads, apply filter to get not enriched leads.
+							</div>
+						)
+						: null}
+					{(enrichment_request_controls || []).map((item) => {
+						const { name, type, displayName } = item;
+						if (name === 'select_first' && mode !== 'select_first') {
+							return null;
+						}
+						const Element = getFieldController(type);
+						if (!Element) return null;
+						return (
+							<div key={name} className={styles.input_field}>
+								{displayName}
+								<Element
+									{...item}
+									name={name}
+									isClearable
+									prefix={null}
+									control={control}
+									key={name}
+									size="sm"
+								/>
+								{!isEmpty(errors) ? (
+									<div className={styles.error_message}>
+										{errors[name]?.message}
+									</div>
+								) : null}
+							</div>
+						);
+					})}
+					<div className={styles.field_array}>
+						Add Constraints
+						<FieldArray
+							name="constraints"
+							control={control}
+							controls={constraint_controls}
+							error={errors}
+							showElement
+							buttonText=""
+							size="sm"
+						/>
+					</div>
 				</div>
 			</Modal.Body>
 			<Modal.Footer>

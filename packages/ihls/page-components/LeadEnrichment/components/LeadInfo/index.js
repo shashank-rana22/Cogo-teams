@@ -1,4 +1,4 @@
-import { Button, Modal, Pagination, Popover, Tooltip } from '@cogoport/components';
+import { Button, Modal, Pagination, Popover } from '@cogoport/components';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -8,6 +8,7 @@ import LeadTable from '../../commons/LeadTable';
 import EnrichmentRequestModal from '../EnrichmentRequestModal';
 import LeadEnrichmentLogs from '../LeadEnrichmentLogs';
 import ObjectiveInfo from '../ObjectiveInfo';
+import PustToCrm from '../PushToCrm';
 
 import getLeadInfoColumns from './getLeadInfoColumns';
 import styles from './styles.module.css';
@@ -23,7 +24,7 @@ function LeadInfo({
 	onChangeTableHeadCheckbox = () => {},
 	onChangeBodyCheckbox = () => {},
 }) {
-	const [showRequest, setShowRequest] = useState(false);
+	const [showModal, setShowModal] = useState(null);
 	const [visible, setVisible] = useState(false);
 	const [leadId, setLeadId] = useState(null);
 	const [allocationLeadId, setAllocationLeadId] = useState(null);
@@ -41,6 +42,8 @@ function LeadInfo({
 	const onCloseLogs = () => setLeadId(null);
 
 	const onPageChange = (pageNumber) => setParams((p) => ({ ...p, page: pageNumber }));
+
+	const onCloseModal = () => setShowModal(null);
 
 	if (!loading && isEmpty(response)) {
 		return (
@@ -63,26 +66,20 @@ function LeadInfo({
 								className={styles.popover_buttons}
 								size="md"
 								themeType="primary"
-								onClick={() => { setShowRequest(true); setVisible(false); }}
+								onClick={() => { setShowModal('enrichment'); setVisible(false); }}
 							>
 								Send to Enrichment
 
 							</Button>
-							<Tooltip
-								content="Feature coming soon"
-								placement="bottom"
-								caret={false}
+							<Button
+								className={styles.popover_buttons}
+								size="md"
+								themeType="primary"
+								onClick={() => { setShowModal('ingestion'); setVisible(false); }}
 							>
-								<Button
-									className={styles.popover_buttons}
-									size="md"
-									themeType="primary"
-									disabled
-								>
-									Push to CRM
+								Push to CRM
 
-								</Button>
-							</Tooltip>
+							</Button>
 
 						</>
 					)}
@@ -145,8 +142,16 @@ function LeadInfo({
 			<EnrichmentRequestModal
 				checkedRowsId={checkedRowsId}
 				params={params}
-				showRequest={showRequest}
-				setShowRequest={setShowRequest}
+				showRequest={showModal === 'enrichment'}
+				onCloseModal={onCloseModal}
+				lead_count={paginationData.count}
+			/>
+
+			<PustToCrm
+				checkedRowsId={checkedRowsId}
+				params={params}
+				showRequest={showModal === 'ingestion'}
+				onCloseModal={onCloseModal}
 				lead_count={paginationData.count}
 			/>
 

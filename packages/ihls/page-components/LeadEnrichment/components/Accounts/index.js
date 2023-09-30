@@ -8,11 +8,14 @@ import useGetLeadData from '../../hooks/useGetLeadData';
 import LeadInfo from '../LeadInfo';
 import Statistics from '../Statistics';
 
+import CsvFilter from './CsvFilter';
 import MainFilters from './MainFilters';
 import styles from './styles.module.css';
 
 function Accounts() {
 	const [showUsers, setShowUsers] = useState(false);
+	const [showCsv, setShowCsv] = useState(false);
+
 	const {
 		loading,
 		response,
@@ -31,7 +34,19 @@ function Accounts() {
 	return (
 		<div className={styles.container}>
 
-			<div className={styles.header}>Leads Statistics</div>
+			<div className={styles.header}>
+				<div>Leads Statistics</div>
+				<Button onClick={() => setShowCsv(true)}>
+					Upload CSV
+				</Button>
+
+				<CsvFilter
+					setParams={setParams}
+					loading={loading}
+					showCsv={showCsv}
+					setShowCsv={setShowCsv}
+				/>
+			</div>
 
 			<div className={styles.filterContainer}>
 				<MainFilters

@@ -1,0 +1,7 @@
+.container {
+	display: flex;
+}
+
+.error_msg {
+	color: red;
+}
