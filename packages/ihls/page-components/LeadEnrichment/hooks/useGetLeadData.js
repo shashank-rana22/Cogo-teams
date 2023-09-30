@@ -104,8 +104,8 @@ const useGetLeadData = () => {
 					},
 					shipment_filters: {
 						...(previousParams.filters.shipment_filters || undefined),
-						origin_country_id      : origin_country_port || undefined,
-						destination_country_id : destination_country_port || undefined,
+						origin_port_id      : origin_country_port || undefined,
+						destination_port_id : destination_country_port || undefined,
 					},
 					services: (services === 'null' ? null : (services || undefined)),
 				},
