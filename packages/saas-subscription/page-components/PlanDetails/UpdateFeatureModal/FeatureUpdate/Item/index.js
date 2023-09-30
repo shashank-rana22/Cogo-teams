@@ -14,7 +14,6 @@ function Item({
 		<>
 			{controls.map((field) => {
 				const Element = getFieldController(field?.type);
-				console.log(field, 'field');
 				return (
 					<div
 						key={`${field?.name}_${info?.id}`}

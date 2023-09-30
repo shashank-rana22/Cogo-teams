@@ -78,8 +78,8 @@ import {
 	asyncListSpotSearchRateCardOperators,
 	asyncListLocationClusters,
 	asyncListFclFreightCommodityClusters,
-	asyncListEnrichmentSources,
 	asyncListSaasPlan,
+	asyncListEnrichmentSources,
 } from '../../../utils/getAsyncFields';
 
 /**

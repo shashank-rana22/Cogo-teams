@@ -42,6 +42,7 @@ function TerminalChargeRate({
 		type,
 		task_id,
 		refetch,
+		onCancel,
 		mainServicesData,
 		localServiceId,
 		sheetData,

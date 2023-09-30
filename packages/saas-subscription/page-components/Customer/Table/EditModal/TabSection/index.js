@@ -6,6 +6,7 @@ import FuturePlanDetails from '../FuturePlanDetails';
 import PlanApproval from '../PlanApproval';
 import QuotaDetails from '../QuotaDetails';
 
+import Logs from './Logs';
 import PromotionCancellation from './PromotionCancellation';
 import styles from './styles.module.css';
 
@@ -15,6 +16,7 @@ const TAB_MAPPING = {
 	utr          : PlanApproval,
 	promotion    : PromotionCancellation,
 	cancellation : PromotionCancellation,
+	logs         : Logs,
 };
 
 function TabSection({ subInfo = {}, editModalChangeHandler, setEditModal }) {

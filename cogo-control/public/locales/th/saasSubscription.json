@@ -124,6 +124,7 @@
     "discount_config_unit":"หน่วย",
     "discount_config_val":"ค่า",
     "discount_config_count":"จำนวนการใช้งาน",
+    "discount_config_status":"Status",
     "submit":"ส่ง",
     "discount_control_name":"ชื่อบริการ",
     "discount_control_name_placeholder":"ป้อนชื่อบริการ",
@@ -140,5 +141,12 @@
     "discount_control_status":"สถานะ",
     "discount_success_toast":"อัปเดตส่วนลดแผน",
     "discount_invalid_metadata":"โปรดป้อนข้อมูลเมตา JSON ที่ถูกต้อง",
-    "edit_btn":"แก้ไข"
+    "edit_btn":"แก้ไข",
+    "discount_create_success_toast":"สร้างส่วนลดแผน",
+    "status_active":"คล่องแคล่ว",
+    "status_inactive":"ไม่ทำงาน",
+    "log_control_name":"วางแผนชื่อ",
+    "log_control_event":"เหตุการณ์",
+    "log_control_created_at":"สร้างขึ้นที่",
+    "log_controls_updated_at":"อัปเดตที่"
 }

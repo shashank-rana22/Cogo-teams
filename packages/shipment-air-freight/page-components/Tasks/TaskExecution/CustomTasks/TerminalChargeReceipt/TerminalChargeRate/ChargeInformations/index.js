@@ -56,6 +56,7 @@ function ChargeInformations({
 				? (
 					<UploadTerminalCharge
 						index={index}
+						type={type}
 						setTerminalChargeState={setTerminalChargeState}
 						mainServicesData={mainServicesData}
 						setSheetData={setSheetData}

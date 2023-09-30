@@ -19,6 +19,7 @@ const useRaiseTicket = ({
 			supporting_document,
 			describe_issue,
 			raised_to_desk,
+			raised_to,
 		} = val || {};
 		const { finalUrl = '' } = supporting_document || {};
 
@@ -37,6 +38,7 @@ const useRaiseTicket = ({
 					UserType         : 'ticket_user',
 					Description      : describe_issue,
 					Type             : issue_type || undefined,
+					TicketReviewerID : raised_to,
 					RaisedByDesk     : 'Auditor' || undefined,
 					RaisedToDesk     : raised_to_desk || undefined,
 					CategoryDeskType : 'by_desk',
