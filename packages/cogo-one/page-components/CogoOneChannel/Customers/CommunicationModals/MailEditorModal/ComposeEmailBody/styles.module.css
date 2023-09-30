@@ -31,15 +31,12 @@
 			display: flex;
 			flex-direction: column;
 			flex-grow: 1;
-			max-height: 390px !important;
+			min-height: 35vh;
+			max-height: 80vh !important;
 		}
 
 		.ql-editor {
-			max-height: 330px !important;
-		}
-
-		.ui_rich_text_editor {
-			min-height: 180px;
+			max-height: 45vh !important;
 		}
 
 		.ql-tooltip {
@@ -105,4 +102,17 @@
 			width: 100%;
 		}
 	}
+}
+
+.preview_container {
+	margin-top: 4px;
+}
+
+.preview_label {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.preview_body {
+	margin-top: 2px;
 }

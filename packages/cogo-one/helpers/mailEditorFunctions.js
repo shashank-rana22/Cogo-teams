@@ -5,7 +5,7 @@ import useReplyMail from '../hooks/useReplyMail';
 import useSaveDraft from '../hooks/useSaveDraft';
 import useSendOmnichannelMail from '../hooks/useSendOmnichannelMail';
 
-import getFormatedEmailBody from './getFormatedEmailBody';
+import getFormattedEmailBody from './getFormatedEmailBody';
 import getRenderEmailBody from './getRenderEmailBody';
 
 function useMailEditorFunctions({
@@ -41,6 +41,7 @@ function useMailEditorFunctions({
 		body = '',
 		draftMessageData = {},
 		customSubject = {},
+		rteContent = '',
 	} = emailState || {};
 
 	let subjectToSend = subject;
@@ -56,7 +57,7 @@ function useMailEditorFunctions({
 	}
 
 	const handlePayload = () => {
-		const emailBody = getRenderEmailBody({ html: body });
+		const emailBody = getRenderEmailBody({ html: `${rteContent}<br/>${body}` });
 
 		return {
 			sender  : from_mail || activeMailAddress,
@@ -115,7 +116,7 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		const isEmptyMail = getFormatedEmailBody({ emailState });
+		const isEmptyMail = getFormattedEmailBody({ emailState });
 
 		if (isEmptyMail || !subjectToSend) {
 			Toast.error('Both Subject and Body are Required');
@@ -134,7 +135,6 @@ function useMailEditorFunctions({
 					data       : eachMessage,
 				},
 				emailState,
-				dataForFirebase: payload,
 			});
 			return;
 		}
@@ -151,7 +151,7 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		const isEmptyMail = getFormatedEmailBody({ emailState });
+		const isEmptyMail = getFormattedEmailBody({ emailState });
 
 		if (isEmptyMail && isEmpty(attachments)) {
 			Toast.error('There is nothing in email body to save as draft');

@@ -59,7 +59,7 @@ function PocUser({
 		setEmailState(
 			(prev) => ({
 				...prev,
-				body          : '',
+				rteContent    : '',
 				subject       : '',
 				toUserEmail   : user?.email ? [user?.email] : [],
 				ccrecipients  : [],

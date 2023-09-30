@@ -20,7 +20,7 @@ function TemplateList({
 
 	const handleSelect = ({ item }) => {
 		setEmailTemplate((prev) => ({ ...prev, emailData: item, isTemplateView: false }));
-		setEmailState((p) => ({ ...p, body: item?.html_template }));
+		setEmailState((prev) => ({ ...prev, rteContent: item?.html_template }));
 	};
 
 	if (isEmpty(list)) {

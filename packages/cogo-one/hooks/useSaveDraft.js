@@ -8,14 +8,13 @@ import updateEmailState from '../helpers/updateEmailState';
 const INCREASE_MESSAGE_COUNT_BY_ONE = 1;
 
 const formatMailDraftMessage = ({
-	communication_id,
-	payload,
-	buttonType,
-	parentEmailMessage,
-	roomId,
-	body,
-	emailState,
-	showOrgSpecificMail,
+	communication_id = '',
+	payload = {},
+	buttonType = '',
+	parentEmailMessage = {},
+	roomId = '',
+	emailState = {},
+	showOrgSpecificMail = false,
 }) => ({
 	agent_type           : 'bot',
 	conversation_type    : 'received',
@@ -37,10 +36,13 @@ const formatMailDraftMessage = ({
 		subject           : payload?.subject || '',
 		to_mails          : payload?.toUserEmail || [],
 		draft_type        : buttonType,
-		draftQuillMessage : body,
+		draftQuillMessage : {
+			rteContent : emailState?.rteContent || '',
+			body       : emailState?.body || '',
+		},
 		...(showOrgSpecificMail ? {
-			custom_subject : emailState?.customSubject,
-			org_id         : emailState?.orgId,
+			custom_subject : emailState?.customSubject || '',
+			org_id         : emailState?.orgId || '',
 		} : {}),
 	},
 });
@@ -51,7 +53,7 @@ const createDraftRoom = async ({
 	communication_id = '',
 	rteEditorPayload = {},
 	buttonType = '',
-	body = '',
+	emailState = {},
 }) => {
 	const emailCollection = collection(
 		firestore,
@@ -73,7 +75,7 @@ const createDraftRoom = async ({
 			buttonType,
 			payload : rteEditorPayload,
 			roomId  : '',
-			body,
+			emailState,
 		}),
 	};
 
@@ -96,7 +98,6 @@ const updateMessage = async ({
 	isNewRoomCreated = false,
 	setEmailState = () => {},
 	isMinimize = false,
-	body = '',
 	setSendLoading = () => {},
 	emailState = {},
 	showOrgSpecificMail = false,
@@ -107,7 +108,6 @@ const updateMessage = async ({
 		buttonType,
 		parentEmailMessage: parent_email_message,
 		roomId,
-		body,
 		emailState,
 		showOrgSpecificMail,
 	});
@@ -186,7 +186,6 @@ const useSaveDraft = ({
 	rteEditorPayload = {},
 	parentMessageData = {},
 	setEmailState = () => {},
-	body = '',
 	setSendLoading = () => {},
 	emailState = {},
 	showOrgSpecificMail = false,
@@ -213,7 +212,7 @@ const useSaveDraft = ({
 				communication_id,
 				rteEditorPayload,
 				buttonType,
-				body,
+				emailState,
 			});
 		}
 
@@ -232,7 +231,6 @@ const useSaveDraft = ({
 			isNewRoomCreated     : !roomId,
 			setEmailState,
 			isMinimize,
-			body,
 			setSendLoading,
 			emailState,
 			showOrgSpecificMail,

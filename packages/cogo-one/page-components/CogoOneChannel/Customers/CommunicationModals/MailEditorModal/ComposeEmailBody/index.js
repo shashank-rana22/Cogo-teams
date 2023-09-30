@@ -5,6 +5,7 @@ import { useEffect, useMemo } from 'react';
 
 import { getUserActiveMails } from '../../../../../../configurations/mail-configuration';
 import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
+import getRenderEmailBody from '../../../../../../helpers/getRenderEmailBody';
 
 import EmailTemplates from './EmailTemplates';
 import Recipients from './Recipients';
@@ -36,6 +37,7 @@ function ComposeEmailBody(props) {
 		setActiveMailAddress = () => {},
 		mailProps = {},
 		showOrgSpecificMail = false,
+		signature = '',
 	} = props || {};
 
 	const userActiveMails = useMemo(() => (
@@ -118,8 +120,8 @@ function ComposeEmailBody(props) {
 
 			<div className={styles.rte_container}>
 				<RTEditor
-					value={emailState?.body}
-					onChange={(val) => setEmailState((p) => ({ ...p, body: val }))}
+					value={emailState?.rteContent}
+					onChange={(val) => setEmailState((prev) => ({ ...prev, rteContent: val }))}
 					className={styles.styled_editor}
 					modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
 				/>
@@ -164,6 +166,19 @@ function ComposeEmailBody(props) {
 							);
 						},
 					)}
+				</div>
+
+				<div className={styles.preview_container}>
+					<div className={styles.preview_label}>
+						Signature:
+					</div>
+
+					<div
+						className={styles.preview_body}
+						dangerouslySetInnerHTML={{
+							__html: getRenderEmailBody({ html: signature }),
+						}}
+					/>
 				</div>
 			</div>
 		</>

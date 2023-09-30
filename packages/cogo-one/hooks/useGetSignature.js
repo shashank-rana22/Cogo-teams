@@ -4,10 +4,6 @@ import { useMemo } from 'react';
 
 const getSignatureText = ({ userName }) => (
 	`
-	<br>
-	<br>
-	<br>
-	<br>
 	<p>
 		<p>Regards</p>
 		<p>${userName}</p>

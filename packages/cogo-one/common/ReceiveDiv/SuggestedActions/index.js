@@ -83,7 +83,7 @@ function SuggestedActions({ formattedData = {}, viewType = '', mailProps = {} })
 		setEmailState(
 			(prev) => ({
 				...prev,
-				body          : '',
+				rteContent    : '',
 				subject       : '',
 				toUserEmail   : [userData?.email],
 				ccrecipients  : [],

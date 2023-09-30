@@ -44,6 +44,7 @@ export const DEFAULT_EMAIL_STATE = {
 	ccrecipients  : [],
 	bccrecipients : [],
 	orgId         : '',
+	rteContent    : '',
 	customSubject : {
 		activeTab   : 'shipment',
 		serialId    : '',

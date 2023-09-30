@@ -110,7 +110,7 @@ export function getRecipientData({
 		bcc_mails = [],
 		message_id = '',
 		attachments = [],
-		draftQuillMessage = '',
+		draftQuillMessage = {},
 		custom_subject = {},
 		org_id = '',
 	} = response || {};
@@ -141,7 +141,8 @@ export function getRecipientData({
 				(prev) => ({
 					...prev,
 					emailVia,
-					body             : draftQuillMessage || body || '',
+					rteContent       : draftQuillMessage?.rteContent || body || '',
+					body             : draftQuillMessage?.body || '',
 					from_mail        : sender || '',
 					subject          : draftSubject || '',
 					toUserEmail      : to_mails || [],

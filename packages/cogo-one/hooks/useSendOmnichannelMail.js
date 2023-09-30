@@ -44,7 +44,7 @@ const useSendOmnichannelMail = ({
 				data: getCommunicationPayload({
 					userId,
 					formattedData,
-					draftMessage: emailState?.body,
+					draftMessage: `${emailState?.rteContent}<br/>${emailState?.body}`,
 					uploadedFiles,
 					emailState,
 					mailActions,

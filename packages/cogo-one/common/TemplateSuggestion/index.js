@@ -72,7 +72,7 @@ function TemplateSuggestion({
 						...(prev.customSubject || {}),
 						subjectText: subject,
 					},
-					body: html_template,
+					rteContent: html_template,
 				}),
 			)}
 		>

@@ -93,6 +93,7 @@ function CogoOne() {
 		},
 		userId,
 		userName,
+		signature,
 		resetEmailState: () => {
 			setEmailState({ ...DEFAULT_EMAIL_STATE, body: signature });
 			setMailAttachments([]);
