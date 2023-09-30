@@ -156,7 +156,7 @@ function MessagesThread(
 						hasPermissionToEdit={hasPermissionToEdit}
 						mailProps={mailProps}
 						deleteMessage={deleteMessage}
-						isTheFirstMessageId={isTheFirstMessageId?.communication_id}
+						isTheFirstMessageId={isTheFirstMessageId?.id}
 					/>
 				);
 			})}

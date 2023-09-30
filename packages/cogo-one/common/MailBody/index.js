@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { getRecipientData } from '../../helpers/getRecipientData';
 import useCreateReplyAllDraft from '../../hooks/useCreateReplyAllDraft ';
@@ -65,11 +65,12 @@ function MailBody({
 		media_url = [],
 		is_draft: isDraft = false,
 		email_status: emailStatus = '',
-		communication_id = '',
+		id = '',
 	} = eachMessage || {};
 
-	const isFirstMessage = isTheFirstMessageId === communication_id;
-	const [expandedState, setExpandedState] = useState(isFirstMessage);
+	const isFirstMessage = isTheFirstMessageId === id;
+
+	const [expandedState, setExpandedState] = useState(false);
 
 	const {
 		subject = '',
@@ -128,6 +129,15 @@ function MailBody({
 	};
 
 	const emailBorderColor = getEmailBorder({ isDraft, emailStatus });
+
+	useEffect(() => {
+		if (isFirstMessage) {
+			if (!bodyMessage && !isDraft) {
+				getEmailBody();
+			}
+			setExpandedState(true);
+		}
+	}, [bodyMessage, getEmailBody, isDraft, isFirstMessage]);
 
 	return (
 		<div className={styles.email_container}>
