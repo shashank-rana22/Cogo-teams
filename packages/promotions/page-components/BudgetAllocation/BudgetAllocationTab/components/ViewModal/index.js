@@ -35,7 +35,7 @@ function ViewModal({
 	} = useGetPromoAllocationDetail({ selectedDetails, setFilters, filters });
 
 	useEffect(() => {
-		const subscription = watch((agent_id) => {
+		const subscription = watch(({ agent_id }) => {
 			setFilters((state) => ({ ...state, agent_id: agent_id || '', page: 1 }));
 		});
 		return () => subscription.unsubscribe();
@@ -53,7 +53,6 @@ function ViewModal({
 				onClose={closeModal}
 				showCloseIcon
 				onOuterClick={closeModal}
-				className="primary xl"
 				style={{ width: '80vw' }}
 			>
 				<Modal.Header title={`Budget allocation for KAM: 
