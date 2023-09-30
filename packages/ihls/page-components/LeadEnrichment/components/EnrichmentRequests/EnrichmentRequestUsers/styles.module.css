@@ -1,0 +1,14 @@
+.button_div {
+	display: flex;
+	gap: 8px;
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.search {
+	display: flex;
+	justify-content: space-between;
+}

@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { IcMArrowRight, IcMArrowLeft } from '@cogoport/icons-react';
 import { forwardRef } from 'react';
 
@@ -8,24 +7,33 @@ const scrollHorizontal = (scrollOffset, ref) => {
 	const tableRootElement = ref.current.querySelector('.overlay_section');
 	tableRootElement.scrollLeft += scrollOffset;
 };
-function ScrollBar({ rightOffSet = 0, leftOffSet = 0 }, ref) {
+function ScrollBar({ rightOffSet = 0, leftOffSet = 0, left = true, right = true }, ref) {
 	return (
-		<div className={styles.arrow_container}>
-			<Button
-				className="secondary sm"
-				onClick={() => scrollHorizontal(leftOffSet, ref)}
-			>
-				<IcMArrowLeft width={20} height={20} fill="#ffffff" />
-			</Button>
-
-			<div className={styles.scroll_text}>SCROLL</div>
-
-			<Button
-				className="secondary sm"
-				onClick={() => scrollHorizontal(rightOffSet, ref)}
-			>
-				<IcMArrowRight width={20} height={20} fill="#ffffff" />
-			</Button>
+		<div className={styles.container}>
+			{left && (
+				<div
+					onClick={() => scrollHorizontal(leftOffSet, ref)}
+					role="presentation"
+					className={styles.scroll_left}
+				>
+					<IcMArrowLeft
+						width={20}
+						height={20}
+					/>
+				</div>
+			)}
+			{right && (
+				<div
+					onClick={() => scrollHorizontal(rightOffSet, ref)}
+					role="presentation"
+					className={styles.scroll_right}
+				>
+					<IcMArrowRight
+						width={20}
+						height={20}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -12,6 +12,7 @@ const getAdvancePaymentPayload = ({
 	cogoBankId,
 	selectFromDate,
 	selectToDate,
+	activeEntity = '',
 }) => ({
 	pageIndex,
 	pageSize,
@@ -20,10 +21,11 @@ const getAdvancePaymentPayload = ({
 	startDate  : selectFromDate || undefined,
 	endDate    : selectToDate || undefined,
 	cogoBankId : cogoBankId || undefined,
+	cogoEntity : activeEntity,
 });
 
 const useGetPaidAdvanceList = ({ activePayrunTab, query, globalFilters }) => {
-	const { pageIndex, pageSize, selectDate, cogoBankId } = globalFilters || {};
+	const { pageIndex, pageSize, selectDate, cogoBankId, activeEntity = '' } = globalFilters || {};
 
 	const [{ data, loading }, paidAdvanceListTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill/list-paid-advance-doc',
@@ -42,6 +44,7 @@ const useGetPaidAdvanceList = ({ activePayrunTab, query, globalFilters }) => {
 			cogoBankId,
 			selectFromDate,
 			selectToDate,
+			activeEntity,
 		});
 		try {
 			paidAdvanceListTrigger({
@@ -50,7 +53,8 @@ const useGetPaidAdvanceList = ({ activePayrunTab, query, globalFilters }) => {
 		} catch (err) {
 			Toast.error(err.message, 'Somthing Went wrong');
 		}
-	}, [activePayrunTab, cogoBankId, pageIndex, pageSize, paidAdvanceListTrigger, query, selectFromDate, selectToDate]);
+	}, [activePayrunTab, cogoBankId, pageIndex, pageSize, paidAdvanceListTrigger,
+		query, selectFromDate, selectToDate, activeEntity]);
 
 	return {
 		getAdvancePaidData,

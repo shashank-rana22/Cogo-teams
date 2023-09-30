@@ -28,6 +28,13 @@
 	font-weight: 600;
 }
 
+.critical {
+	font-size: 10px;
+	font-weight: 600;
+	color: #f37166;
+	text-transform: uppercase;
+}
+
 .high { color: #ee3425; }
 
 .medium { color: #f68b21; }

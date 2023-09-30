@@ -33,7 +33,7 @@ const controls = [
 	{
 		name        : 'terms_and_conditions',
 		type        : 'textarea',
-		label       : 'Terms and conditions:',
+		label       : 'Additional Terms and conditions:',
 		placeholder : '',
 		rows        : 6,
 	},
