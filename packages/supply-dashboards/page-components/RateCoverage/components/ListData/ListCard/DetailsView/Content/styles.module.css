@@ -23,6 +23,7 @@
 
 .content {
 	display: flex;
-	width: 300px;
+	flex-wrap: wrap;
+	width: 290px;
 	padding: 6px;
 }

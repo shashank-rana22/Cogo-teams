@@ -2,9 +2,8 @@
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
 
-import { currencyOptions, rateTypeOptions } from '../../../../configurations/helpers/constants';
-
-import styles from './styles.module.css';
+import { currencyOptions, rateTypeOptions } from '../../../../../configurations/helpers/constants';
+import styles from '../styles.module.css';
 
 const fclControls = ({
 	data,

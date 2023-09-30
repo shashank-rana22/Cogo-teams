@@ -4,8 +4,15 @@ import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 const API_NAME = {
-	fcl_freight : 'delete_fcl_freight_rate_job',
-	air_freight : 'delete_air_freight_rate_job',
+	fcl_freight     : 'delete_fcl_freight_rate_job',
+	air_freight     : 'delete_air_freight_rate_job',
+	fcl_customs     : 'delete_fcl_customs_rate_job',
+	haulage_freight : 'delete_haulage_freight_rate_job',
+	lcl_freight     : 'delete_lcl_freight_rate_job',
+	lcl_customs     : 'delete_lcl_customs_rate_job',
+	air_customs     : 'delete_air_customs_rate_job',
+	trailer_freight : 'delete_trailer_freight_rate_job',
+	ltl_freight     : 'delete_ltl_freight_rate_job',
 };
 
 const useDeleteRateJob = (service) => {

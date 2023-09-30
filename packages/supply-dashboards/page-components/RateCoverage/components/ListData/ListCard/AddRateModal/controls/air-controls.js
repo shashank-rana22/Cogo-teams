@@ -5,9 +5,8 @@ import {
 	densityRatioOptions,
 	flighOperationTypeOptions,
 	handlingtypeOptions, packagingTypeOptions, priceTypeOptions, rateTypeOptions,
-} from '../../../../configurations/helpers/constants';
-
-import styles from './styles.module.css';
+} from '../../../../../configurations/helpers/constants';
+import styles from '../styles.module.css';
 
 const airControls = ({
 	data, listPartnerUserOptions, user_id, originLocationOptions, destinationLocationOptions,

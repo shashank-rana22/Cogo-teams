@@ -4,6 +4,11 @@ import { useCallback, useEffect, useState } from 'react';
 
 const API_NAME = {
 	fcl_freight     : 'list_fcl_freight_rate_jobs',
+	lcl_freight     : 'list_lcl_freight_rate_jobs',
+	lcl_customs     : 'list_lcl_customs_rate_jobs',
+	air_customs     : 'list_air_customs_rate_jobs',
+	trailer_freight : 'list_trailer_freight_rate_jobs',
+	ltl_freight     : 'list_ltl_freight_rate_jobs',
 	air_freight     : 'list_air_freight_rate_jobs',
 	haulage_freight : 'list_haulage_freight_rate_jobs',
 	fcl_customs     : 'list_fcl_customs_rate_jobs',

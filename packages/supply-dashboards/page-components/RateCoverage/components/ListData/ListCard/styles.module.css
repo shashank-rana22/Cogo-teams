@@ -1,8 +1,32 @@
-.header {
+.head {
+	display: flex;
+	justify-content: space-between;
+	color: #4f4f4f;
+}
+
+.body {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 24px;
+	margin-top: 14px;
+}
+
+.top_left_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.service_icon {
+	display: flex;
+	align-items: center;
+}
+
+.service_name {
+	margin-right: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #4f4f4f;
 }
 
 .footer {
@@ -66,12 +90,6 @@
 	}
 }
 
-.top_left_details {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
 .port_code_color {
 	color: #f2761b;
 }
@@ -85,18 +103,4 @@
 	display: flex;
 	width: 100%;
 	margin-bottom: 8px;
-}
-
-.service_icon {
-	display: flex;
-	align-items: center;
-}
-
-.pill {
-	margin-right: 20px;
-}
-
-.pill_container {
-	display: flex;
-	align-items: center;
 }

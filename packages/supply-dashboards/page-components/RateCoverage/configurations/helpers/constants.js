@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMAir, IcMFcl } from '@cogoport/icons-react';
+import { IcMAir, IcMFcl, IcCFlclCustoms, IcMFhaulage } from '@cogoport/icons-react';
 
 export const STAT_CARDS_MAPPING = {
 	pending   : { title: 'Today\'s Pending', color: '#FF5733', status: 'pending' },
@@ -46,8 +46,10 @@ export const CARDS_MAPPING = {
 	},
 };
 export const SERVICE_ICON_MAPPING = {
-	FCL : <IcMFcl />,
-	AIR : <IcMAir />,
+	fcl_freight     : <IcMFcl height={20} width={20} />,
+	air_freight     : <IcMAir height={20} width={20} />,
+	fcl_customs     : <IcCFlclCustoms height={20} width={20} />,
+	haulage_freight : <IcMFhaulage height={20} width={20} />,
 };
 
 export const CLOSE_REASON_OPTIONS = [
@@ -61,16 +63,36 @@ export const serviceOptions = [
 		value : 'fcl_freight',
 	},
 	{
+		label : 'LCL Freight',
+		value : 'lcl_freight',
+	},
+	{
 		label : 'AIR Freight',
 		value : 'air_freight',
 	},
 	{
-		label : 'Haulage',
+		label : 'FCL Customs',
+		value : 'fcl_customs',
+	},
+	{
+		label : 'LCL Customs',
+		value : 'lcl_customs',
+	},
+	{
+		label : 'AIR Customs',
+		value : 'air_customs',
+	},
+	{
+		label : 'Haulage Freight',
 		value : 'haulage_freight',
 	},
 	{
-		label : 'FCL Customs',
-		value : 'fcl_customs',
+		label : 'Trailer Freight',
+		value : 'trailer_freight',
+	},
+	{
+		label : 'Ltl Freight',
+		value : 'ltl_freight',
 	},
 ];
 

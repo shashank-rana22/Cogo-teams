@@ -9,7 +9,6 @@ import Filter from '../Filter';
 import Card from '../TasksOverview/OverviewContent/Card';
 
 import ListCard from './ListCard';
-import LiveBookingsListCard from './LiveBookingsListCard';
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
@@ -109,31 +108,16 @@ function ListData({
 						<>
 							{(list || []).map((list_data) => (
 								<div key={list_data?.id}>
-
-									{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
-										? (
-											<LiveBookingsListCard
-												showAddRateModal={showAddRateModal}
-												setShowAddRateModal={setShowAddRateModal}
-												data={list_data}
-												getListCoverage={getListCoverage}
-												filter={filter}
-												getStats={getStats}
-												source={source}
-											/>
-										)
-										:											(
-											<ListCard
-												data={list_data}
-												key={list_data?.id}
-												getListCoverage={getListCoverage}
-												filter={filter}
-												getStats={getStats}
-												source={source}
-												showAddRateModal={showAddRateModal}
-												setShowAddRateModal={setShowAddRateModal}
-											/>
-										)}
+									<ListCard
+										data={list_data}
+										key={list_data?.id}
+										getListCoverage={getListCoverage}
+										filter={filter}
+										getStats={getStats}
+										source={source}
+										showAddRateModal={showAddRateModal}
+										setShowAddRateModal={setShowAddRateModal}
+									/>
 								</div>
 							))}
 							<div className={styles.pagination}>

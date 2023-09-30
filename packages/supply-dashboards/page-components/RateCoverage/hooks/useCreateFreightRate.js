@@ -4,8 +4,15 @@ import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
 const API_NAME = {
-	fcl_freight : '/create_fcl_freight_rate',
-	air_freight : '/create_air_freight_rate',
+	fcl_freight     : '/create_fcl_freight_rate',
+	air_freight     : '/create_air_freight_rate',
+	fcl_customs     : '/create_fcl_customs_rate',
+	haulage_freight : '/create_haulage_freight_rate',
+	lcl_freight     : '/create_lcl_freight_rate',
+	lcl_customs     : '/create_lcl_customs_rate',
+	air_customs     : '/create_air_customs_rate',
+	trailer_freight : '/create_trailer_freight_rate',
+	ltl_freight     : '/create_ltl_freight_rate',
 };
 
 const useCreateFreightRate = (service) => {

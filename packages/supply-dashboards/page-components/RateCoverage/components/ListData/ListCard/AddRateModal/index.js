@@ -1,15 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Modal, Toast } from '@cogoport/components';
 import {
-	asyncFieldsListOperators,
-	asyncFieldsLocations,
-	asyncFieldsPartnerUsersIds,
 	useForm,
-	useGetAsyncOptions,
 } from '@cogoport/forms';
-import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { useSelector } from '@cogoport/store';
-import { isEmpty, merge, startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import Layout from '../../../../../RfqEnquiries/Layout';
@@ -18,33 +13,9 @@ import FieldMutation from '../../../../configurations/helpers/mutation-fields';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetFreightRate from '../../../../hooks/useGetFreightRate';
-import ServiceDetails from '../../LiveBookingsListCard/Details';
 
-import airControls from './AirControls';
-import fclControls from './FclControls';
+import useControls from './controls';
 import styles from './styles.module.css';
-
-const getCommodityOptions = (container_type = 'standard') => {
-	const commodities = FREIGHT_CONTAINER_COMMODITY_MAPPINGS[container_type];
-	return (commodities || []).map((commodity) => ({
-		label : (commodity.split('-') || []).map((item) => parseFloat(item) || startCase(item)).join(' '),
-		value : commodity,
-	}));
-};
-
-const getDefaultValues = (oldfields) => {
-	const DEFAULT_VALUES = {};
-	const newfields = oldfields.map((field) => {
-		const { value, ...rest } = field;
-		if (field.type === 'fieldArray') {
-			DEFAULT_VALUES[field.name] = value || [];
-		} else {
-			DEFAULT_VALUES[field.name] = value || '';
-		}
-		return rest;
-	});
-	return { DEFAULT_VALUES, fields: newfields };
-};
 
 function AddRateModal({
 	showModal = true,
@@ -54,7 +25,6 @@ function AddRateModal({
 	getStats = () => {},
 	getListCoverage = () => {},
 }) {
-	const isAirService = filter?.service === 'air_freight';
 	const { user_data } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
@@ -62,82 +32,12 @@ function AddRateModal({
 
 	const { user: { id: user_id = '' } = {} } = user_data;
 
-	const type = (isAirService) ? 'airport' : 'seaport';
-	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params   : { filters: { type } },
-		includes : { default_params_required: true },
-		labelKey : 'display_name',
-	}));
-	const destinationLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params   : { filters: { type } },
-		includes : { default_params_required: true },
-		labelKey : 'display_name',
-	}));
-
-	const listShippingLineOptions = useGetAsyncOptions(
-		merge(
-			asyncFieldsListOperators(),
-			{
-				params: {
-					filters: {
-						operator_type : 'shipping_line',
-						status        : 'active',
-					},
-				},
-			},
-		),
-	);
-
-	const listAirLineOptions = useGetAsyncOptions(
-		merge(
-			asyncFieldsListOperators(),
-			{
-				params: {
-					filters: {
-						operator_type : 'airline',
-						status        : 'active',
-					},
-				},
-			},
-		),
-	);
-
-	const listPartnerUserOptions = useGetAsyncOptions(
-		merge(
-			asyncFieldsPartnerUsersIds(),
-			{
-				params: {
-					filters: {
-						status: 'active',
-					},
-				},
-			},
-		),
-	);
-
-	const fclCommodityOptions = getCommodityOptions(data?.container_type);
-
-	const finalControls = !isAirService ? fclControls({
-		data,
-		listShippingLineOptions,
-		originLocationOptions,
-		destinationLocationOptions,
-		fclCommodityOptions,
-	}) : airControls({
-		data,
-		listPartnerUserOptions,
-		user_id,
-		originLocationOptions,
-		destinationLocationOptions,
-		listAirLineOptions,
-	});
-
-	const { DEFAULT_VALUES, fields } = getDefaultValues(finalControls);
-
 	const showElements = {
 		origin_main_port_id      : data?.origin_port?.is_icd,
 		destination_main_port_id : data?.destination_port?.is_icd,
 	};
+
+	const { DEFAULT_VALUES, fields } = useControls({ data, user_id, filter });
 
 	const {
 		control,
@@ -162,7 +62,6 @@ function AddRateModal({
 
 	const { createRate } = useCreateFreightRate(filter?.service);
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
-
 	const handleSubmitData = async (formData) => {
 		const rate_id = await createRate(formData);
 		if (!rate_id) {
@@ -178,23 +77,22 @@ function AddRateModal({
 
 	const freeWeight = values?.free_weight;
 	const weightSlabs = values?.weight_slabs;
-
 	const weightSlabsJSON = JSON.stringify(weightSlabs);
 
 	useEffect(() => {
-		if (!isAirService) {
-			(weightSlabs || []).forEach((slab, index) => {
+		if (filter?.service_type === 'fcl_freight' || filter?.service_type === 'haulage_freight') {
+			weightSlabs.forEach((obj, index) => {
 				if (index === DEFAULT_VALUE) {
-					setValue('weight_slabs.0.lower_limit', Number(freeWeight) + DELTA_VALUE || DELTA_VALUE);
+					setValue('weight_slabs.0.lower_limit', Number(freeWeight) + DELTA_VALUE || DEFAULT_VALUE);
 				} else {
 					setValue(
 						`weight_slabs.${index}.lower_limit`,
-						Number(weightSlabs[index - VALUE_ONE].upper_limit) + DELTA_VALUE || DELTA_VALUE,
+						Number(weightSlabs[index - VALUE_ONE].upper_limit) + DELTA_VALUE,
 					);
 				}
 			});
 		}
-	}, [weightSlabsJSON, weightSlabs, isAirService, freeWeight, setValue]);
+	}, [weightSlabsJSON, weightSlabs, freeWeight, setValue]);
 
 	useEffect(() => {
 		let prefillFreightCodes = [];
@@ -246,7 +144,6 @@ function AddRateModal({
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
 			<Modal.Header title="Please Add Rate" />
-			<ServiceDetails />
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
 				<Layout
 					fields={finalFields}
@@ -261,7 +158,6 @@ function AddRateModal({
 						Submit
 					</Button>
 				</div>
-
 			</Modal.Body>
 		</Modal>
 	);

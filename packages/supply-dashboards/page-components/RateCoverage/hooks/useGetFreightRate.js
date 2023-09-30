@@ -3,8 +3,15 @@ import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 const API_NAME = {
-	fcl_freight : 'get_fcl_freight_rate',
-	air_freight : 'get_air_freight_rate',
+	fcl_freight     : 'get_fcl_freight_rate',
+	air_freight     : 'get_air_freight_rate',
+	lcl_freight     : 'get_lcl_freight_rate',
+	lcl_customs     : 'get_lcl_customs_rate',
+	air_customs     : 'get_air_customs_rate',
+	trailer_freight : 'get_trailer_freight_rate',
+	ltl_freight     : 'get_ltl_freight_rate',
+	haulage_freight : 'get_haulage_freight_rate',
+	fcl_customs     : 'get_fcl_customs_rate',
 };
 
 const useGetFreightRate = ({ filter, formValues, cardData }) => {
