@@ -124,6 +124,7 @@
     "discount_config_unit":"单元",
     "discount_config_val":"价值",
     "discount_config_count":"用法计数",
+    "discount_config_status":"地位",
     "submit":"提交",
     "discount_control_name":"服务名称",
     "discount_control_name_placeholder":"输入服务名称",
@@ -140,5 +141,8 @@
     "discount_control_status":"地位",
     "discount_success_toast":"更新计划折扣",
     "discount_invalid_metadata":"请输入有效的JSON元数据",
-    "edit_btn":"编辑"
+    "edit_btn":"编辑",
+    "discount_create_success_toast":"创建计划折扣",
+    "status_active":"积极的",
+    "status_inactive":"不活动"
 }

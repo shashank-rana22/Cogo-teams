@@ -124,6 +124,7 @@
     "discount_config_unit":"Satuan",
     "discount_config_val":"Nilai",
     "discount_config_count":"Hitungan penggunaan",
+    "discount_config_status":"status",
     "submit":"Kirim",
     "discount_control_name":"Nama layanan",
     "discount_control_name_placeholder":"Masukkan nama layanan",
@@ -140,5 +141,8 @@
     "discount_control_status":"status",
     "discount_success_toast":"Diskon rencana yang diperbarui",
     "discount_invalid_metadata":"Harap masukkan metadata JSON yang valid",
-    "edit_btn":"edit"
+    "edit_btn":"edit",
+    "discount_create_success_toast":"Diskon rencana yang dibuat",
+    "status_active":"Aktif",
+    "status_inactive":"Tidak aktif"
 }

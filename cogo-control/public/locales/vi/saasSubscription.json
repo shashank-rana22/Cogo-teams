@@ -124,6 +124,7 @@
     "discount_config_unit":"Đơn vị",
     "discount_config_val":"Giá trị",
     "discount_config_count":"Số lượng sử dụng",
+    "discount_config_status":"Trạng thái",
     "submit":"Nộp",
     "discount_control_name":"Tên dịch vụ",
     "discount_control_name_placeholder":"Nhập tên dịch vụ",
@@ -140,5 +141,8 @@
     "discount_control_status":"Trạng thái",
     "discount_success_toast":"Cập nhật chương trình giảm giá",
     "discount_invalid_metadata":"Vui lòng nhập siêu dữ liệu JSON hợp lệ",
-    "edit_btn":"Biên tập"
+    "edit_btn":"Biên tập",
+    "discount_create_success_toast":"Tạo ra chương trình giảm giá",
+    "status_active":"Tích cực",
+    "status_inactive":"Không hoạt động"
 }
