@@ -5,7 +5,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useCallback, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import { SORT_OPTIONS } from '../../../../constants/map_constants';
+import { FILTER_OPTIONS } from '../../../../constants/map_constants';
 import Heading from '../../Heading';
 
 import GeoCoder from './GeoCoder';
@@ -100,7 +100,7 @@ function SidePanel({
 						<Select
 							size="sm"
 							placeholder="Filter by"
-							options={SORT_OPTIONS}
+							options={FILTER_OPTIONS}
 							style={{ width: '140px' }}
 							value={filterBy}
 							onChange={(val) => setFilterBy(val)}

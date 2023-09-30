@@ -17,29 +17,9 @@ export const COLORS = [
 	{ fillColor: '#F7FAEF', color: '#849E4C', fillOpacity: 1, opacity: 0.8, accuracy: 'good' },
 ];
 
-export const SELECT_AGGREGATE = {
-	SUM: [
-		'liked',
-		'disliked',
-		'spot_search',
-		'checkout',
-		'shipment_completed',
-		'shipment_cancelled',
-		'shipment_aborted',
-		'shipment_confirmed_by_importer_exporter',
-		'shipment_in_progress',
-		'shipment_received',
-		'revenue_desk_visit',
-		'so1_visit',
-		'so1_select',
-	],
-	AVG: [
-		'bas_standard_price_accuracy',
-	],
-};
-
-export const SORT_OPTIONS = [
-	{ label: 'Accuracy', value: 'bas_standard_price_accuracy' },
+export const FILTER_OPTIONS = [
+	{ label: 'Avg Standard Price', value: 'average_standard_price' },
+	{ label: 'Avg Accuracy', value: 'bas_standard_price_accuracy' },
 	{ label: 'Likes', value: 'liked' },
 	{ label: 'Dislikes', value: 'disliked' },
 	{ label: 'Spot Search', value: 'spot_search' },
@@ -53,6 +33,8 @@ export const SORT_OPTIONS = [
 	{ label: 'Revenue Desk Visit', value: 'revenue_desk_visit' },
 	{ label: 'SO1 Visit', value: 'so1_visit' },
 	{ label: 'SO1 Select', value: 'so1_select' },
+	{ label: 'Rate requests created', value: 'rate_requests_created' },
+	{ label: 'Rate requests reverted', value: 'rate_requests_reverted' },
 ];
 
 export const MAX_BOUNDS = [

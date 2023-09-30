@@ -117,43 +117,66 @@ const COMMON_END_COLUMNS = [
 	},
 	{
 		Header   : 'BOOKINGS',
-		accessor : ({ aggregate_bookings_created = '' }) => (
-			<div className={styles.row_commodity_cell}>
-				<div className={styles.percent}>
-					{`${aggregate_bookings_created || GLOBAL_CONSTANTS.zeroth_index}` }
+		accessor : ({ aggregate_bookings_created = '' }) => {
+			const value = aggregate_bookings_created || GLOBAL_CONSTANTS.zeroth_index;
+			return (
+				<div className={styles.row_commodity_cell}>
+					<Tooltip content={value} placement="bottom">
+						<div className={styles.percent}>
+							{`${formatBigNumbers(value)}` }
+						</div>
+					</Tooltip>
 				</div>
-			</div>
-		),
+			);
+		},
 	},
 	{
 		Header   : 'CHECKOUT COUNT',
-		accessor : ({ aggregate_checkout_count = '' }) => (
-			<div className={styles.row_commodity_cell}>
-				<div className={styles.percent}>{`${aggregate_checkout_count || GLOBAL_CONSTANTS.zeroth_index}` }</div>
-			</div>
-		),
+		accessor : ({ aggregate_checkout_count = '' }) => {
+			const value = aggregate_checkout_count || GLOBAL_CONSTANTS.zeroth_index;
+			return (
+				<div className={styles.row_commodity_cell}>
+					<Tooltip content={value} placement="bottom">
+						<div className={styles.percent}>
+							{`${formatBigNumbers(value)}` }
+						</div>
+					</Tooltip>
+				</div>
+			);
+		},
 	},
 	{
 		Header   : 'DEVIATION',
-		accessor : ({ aggregate_rate_deviation_from_booking_rate = '' }) => (
-			<div className={styles.row_commodity_cell}>
-				<div className={styles.percent}>
-					{`${formatBigNumbers(aggregate_rate_deviation_from_booking_rate)}$` }
+		accessor : ({ aggregate_rate_deviation_from_booking_rate = '' }) => {
+			const value = aggregate_rate_deviation_from_booking_rate || GLOBAL_CONSTANTS.zeroth_index;
+			return (
+				<div className={styles.row_commodity_cell}>
+					<Tooltip content={`$ ${value}`} placement="bottom">
+						<div className={styles.percent}>
+							{`$ ${formatBigNumbers(value)}` }
+						</div>
+					</Tooltip>
 				</div>
-			</div>
-		),
+			);
+		},
 	},
 	{
 		Header   : 'SPOT SEARCH',
-		accessor : ({ aggregate_spot_search_count = '' }) => (
-			<div className={styles.row_commodity_cell}>
-				<div className={styles.percent}>
-					{`${aggregate_spot_search_count || GLOBAL_CONSTANTS.zeroth_index}%` }
+		accessor : ({ aggregate_spot_search_count = '' }) => {
+			const value = aggregate_spot_search_count || GLOBAL_CONSTANTS.zeroth_index;
+			return (
+				<div className={styles.row_commodity_cell}>
+					<Tooltip content={value} placement="bottom">
+						<div className={styles.percent}>
+							{`${formatBigNumbers(value)}` }
+						</div>
+					</Tooltip>
 				</div>
-			</div>
-		),
+			);
+		},
 	},
 ];
+
 function getListConfig(rate_type = 'fcl', activeParent = '') {
 	if (rate_type === 'fcl') {
 		return {

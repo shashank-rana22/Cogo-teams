@@ -1,7 +1,7 @@
 import containerSize from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
 
-import { MODE_OPTIONS } from '../constants/air_commodities_mapping';
+import { PARENT_RATE_MODE_OPTIONS, MODE_OPTIONS, PARENT_MODE_OPTIONS } from '../constants/air_commodities_mapping';
 import { RATE_TYPES_OPTIONS } from '../constants/dashboard_filter_controls';
 
 const controls = [
@@ -14,8 +14,24 @@ const controls = [
 		size    : 'md',
 	},
 	{
+		name      : 'parent_rate_mode',
+		type      : 'pills',
+		label     : 'Parent Rate Source',
+		options   : PARENT_RATE_MODE_OPTIONS,
+		span      : 12,
+		className : 'filter-row-flex md',
+	},
+	{
 		name      : 'parent_mode',
 		type      : 'pills',
+		label     : 'Group rate source',
+		options   : PARENT_MODE_OPTIONS,
+		span      : 12,
+		className : 'filter-row-flex md',
+	},
+	{
+		name      : 'mode',
+		type      : 'select',
 		label     : 'Rate Source',
 		options   : MODE_OPTIONS,
 		span      : 12,
@@ -24,7 +40,7 @@ const controls = [
 	{
 		name      : 'container_size',
 		type      : 'pills',
-		label     : 'Container Size',
+		label     : 'Container size',
 		options   : containerSize,
 		span      : 12,
 		value     : '20',
@@ -50,7 +66,7 @@ const controls = [
 	},
 	{
 		name      : 'container_type',
-		type      : 'pills',
+		type      : 'select',
 		label     : 'Container Type',
 		options   : containerTypes,
 		span      : 12,

@@ -1,6 +1,6 @@
 import { Loader } from '@cogoport/components';
 import { CogoMaps, FeatureGroup, GeoJSON } from '@cogoport/maps';
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import MapTooltip from '../../../../common/MapTooltip';
@@ -29,7 +29,6 @@ export const COLORS = [
 ];
 
 function BirdsEyeView({ countMapping = {}, maxCount = 0, minCount = 0, loading = false }) {
-	const [map, setMap] = useState(null);
 	const { data = [] } = useGetSimplifiedGeometry({ type: 'country' });
 
 	const range = K + (maxCount - minCount) / COLORS.length;
@@ -62,7 +61,6 @@ function BirdsEyeView({ countMapping = {}, maxCount = 0, minCount = 0, loading =
 	return (
 		<CogoMaps
 			style={{ height: '550px', width: '100%' }}
-			setMap={setMap}
 			zoom={1}
 			key={data?.length}
 			maxBounds={MAX_BOUNDS}
@@ -73,12 +71,7 @@ function BirdsEyeView({ countMapping = {}, maxCount = 0, minCount = 0, loading =
 			attributionControl={false}
 		>
 			<FeatureGroup
-				eventHandlers={{
-					add: (e) => {
-						if (!map) return;
-						map.fitBounds(e.target.getBoudns());
-					},
-				}}
+				key={`${minCount} ${maxCount}`}
 			>
 				{data.map((item) => (
 					<GeoJSON

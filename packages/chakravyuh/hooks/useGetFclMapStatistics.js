@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import { LOCATION_KEYS, SELECT_AGGREGATE } from '../constants/map_constants';
+import { LOCATION_KEYS } from '../constants/map_constants';
 import getFormattedPayload from '../utils/getFormattedPayload';
 import toastApiError from '../utils/toastApiError';
 
@@ -47,16 +47,7 @@ const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 		return acc;
 	}, {});
 
-	const [[aggregate_type]] = Object.entries(SELECT_AGGREGATE).filter(
-		([, value]) => {
-			if (value.includes(filterBy)) {
-				return true;
-			}
-			return false;
-		},
-	);
-
-	filters.select_aggregate = { count: `${[aggregate_type]}(${filterBy})` };
+	filters.select_aggregate = { count: filterBy };
 
 	useEffect(() => {
 		const { service_type } = globalFilters;

@@ -36,10 +36,10 @@ const useGetQuickViewStatistics = ({ activeTab = null, trade_type = 'import', gl
 	let maxCount = 0;
 	let minCount = Infinity;
 
-	const countMapping = (data?.statistics || []).reduce((acc, { rate_count, country_id }) => {
-		acc[country_id] = rate_count;
-		maxCount = Math.max(maxCount, rate_count);
-		minCount = Math.min(minCount, rate_count);
+	const countMapping = (data?.statistics || []).reduce((acc, { count, country_id }) => {
+		acc[country_id] = count;
+		maxCount = Math.max(maxCount, count);
+		minCount = Math.min(minCount, count);
 		return acc;
 	}, {});
 
