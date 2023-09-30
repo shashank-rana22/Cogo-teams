@@ -14,6 +14,7 @@ import getRpaMappings from '../utils/get-rpa-mappings';
 const shipmentRefetchTasks = [
 	'confirm_booking',
 	'mark_confirmed',
+	'upload_lorry_receipt',
 ];
 
 const TRUCKING_TASK = [
@@ -41,7 +42,7 @@ function useHandleSubmit({
 	const {
 		shipment_data,
 		primary_service,
-		getShipment,
+		refetch: getShipment,
 		getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
 

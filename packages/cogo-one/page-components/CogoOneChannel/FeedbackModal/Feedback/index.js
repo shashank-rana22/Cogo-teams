@@ -42,7 +42,7 @@ function Feedback({ setModalData = () => {} }) {
 								themeType="accent"
 								onClick={() => {
 									setShowAddFeedback(true);
-									setActiveTab('all');
+									setActiveTab('open');
 								}}
 							>
 								<IcMPlus height={14} width={14} />

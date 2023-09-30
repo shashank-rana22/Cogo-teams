@@ -5,12 +5,13 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function ResponsiveBarChart({ barData = [], keys = [] }) {
+function ResponsiveBarChart({ barData = [], keys = [], handleBarChartOnClick = () => {} }) {
 	return (
 		<ResponsiveBar
 			data={barData}
 			keys={keys}
 			indexBy="date"
+			onClick={handleBarChartOnClick}
 			margin={{ top: 100, right: 30, bottom: 80, left: 60 }}
 			padding={0.3}
 			valueScale={{ type: 'linear' }}

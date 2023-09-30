@@ -97,6 +97,16 @@
 .styled_input {
 	width: 300px;
 	font-size: 14px;
+
+	:global {
+		.ui_input_control {
+			padding: 0 0 0 4px;
+		}
+
+		.ui_input_suffix {
+			padding-right: 5px;
+		}
+	}
 }
 
 .icon_style {

@@ -35,6 +35,7 @@ function MessageList(messageProps) {
 		setAutoAssignChats = () => {},
 		workPrefernceLoading,
 		setSendBulkTemplates = () => {},
+		mailsToBeShown = [],
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
@@ -60,6 +61,7 @@ function MessageList(messageProps) {
 		activeSubTab: subTab,
 		setCarouselState,
 		workPrefernceLoading,
+		mailsToBeShown,
 	});
 
 	const setActiveSubTab = (val) => {

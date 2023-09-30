@@ -3,6 +3,7 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import AGENT_CONFIG_MAPPING from '../../../../../constants/agentConfigMapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMapping';
 import useListAgentStatus from '../../../../../hooks/useListAgentStatus';
 import useListChatAgents from '../../../../../hooks/useListChatAgents';
 import getCommonAgentType from '../../../../../utils/getCommonAgentType';
@@ -61,6 +62,8 @@ function ConfigModal({
 		headerText = '',
 	} = TAB_CONFIG_MAPPING[activeCard] || TAB_CONFIG_MAPPING.list_agents;
 
+	const showRmAgentsDetails = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_rm_agent_details;
+
 	const {
 		getListChatAgents = () => { },
 		loading = false,
@@ -73,6 +76,7 @@ function ConfigModal({
 		isInActive = false,
 	} = hookToBeUsed({
 		agentType  : getCommonAgentType({ viewType }),
+		showRmAgentsDetails,
 		activeCard : activeCard || 'default',
 	}) || {};
 

@@ -5,14 +5,14 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function LoaderComp() {
-	const { t } = useTranslation(['notifications']);
+	const { t } = useTranslation(['common']);
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.loader}>
-				<IcMRadioLoader />
-			</div>
-			<div className={styles.load_heading}>{t('notifications:loading')}</div>
+
+			<IcMRadioLoader className={styles.loader} />
+
+			<div className={styles.load_heading}>{t('common:loading')}</div>
 		</div>
 	);
 }

@@ -1,13 +1,13 @@
 .responsive_pie {
-	min-width: 49%;
-	height: 420px;
+	width: 49%;
+	height: 340px;
 	background: var(--color-secondary-5);
 	border-radius: 8px;
 }
 
 .responsive_bar_chart {
-	min-width: 50%;
-	height: 420px;
+	width: 50%;
+	height: 340px;
 	background: var(--color-secondary-5);
 	border-radius: 8px;
 
