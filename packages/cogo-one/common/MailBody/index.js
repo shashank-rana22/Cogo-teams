@@ -8,6 +8,7 @@ import { getRecipientData } from '../../helpers/getRecipientData';
 import useCreateReplyAllDraft from '../../hooks/useCreateReplyAllDraft ';
 import useCreateReplyDraft from '../../hooks/useCreateReplyDraft';
 import useGetMailContent from '../../hooks/useGetMailContent';
+import useGetSignature from '../../hooks/useGetSignature';
 
 import MailActions from './mailActions';
 import MailAttachments from './MailAttachments';
@@ -51,8 +52,8 @@ function MailBody({
 	formattedData = {},
 	mailProps = {},
 	deleteMessage = () => {},
+	isTheFirstMessageId = '',
 }) {
-	const [expandedState, setExpandedState] = useState(false);
 	const { source = '' } = formattedData || {};
 
 	const {
@@ -62,7 +63,11 @@ function MailBody({
 		media_url = [],
 		is_draft: isDraft = false,
 		email_status: emailStatus = '',
+		communication_id = '',
 	} = eachMessage || {};
+
+	const isFirstMessage = isTheFirstMessageId === communication_id;
+	const [expandedState, setExpandedState] = useState(isFirstMessage);
 
 	const {
 		subject = '',
@@ -80,6 +85,8 @@ function MailBody({
 		message: bodyMessage = '',
 		loading = false,
 	} = useGetMailContent({ messageId: message_id, source, setExpandedState });
+
+	const { signature } = useGetSignature();
 
 	const { createReplyAllDraft } = useCreateReplyAllDraft();
 	const { createReplyDraft } = useCreateReplyDraft();
@@ -107,6 +114,7 @@ function MailBody({
 		deleteMessage,
 		createReplyDraft,
 		createReplyAllDraft,
+		signature,
 	});
 
 	const handleExpandClick = () => {
@@ -140,13 +148,7 @@ function MailBody({
 					isDraft={isDraft}
 					emailStatus={emailStatus}
 				/>
-
-				<div className={styles.subject}>
-					Sub:
-					{' '}
-					{subject}
-				</div>
-
+				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
 				<div
 					className={cl`${styles.body} 
 					${expandedState ? styles.expanded_body : styles.collapsed_body}`}
@@ -159,8 +161,6 @@ function MailBody({
 						isDraft={isDraft}
 					/>
 				) : null}
-
-				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
 
 				<div className={styles.extra_controls}>
 					<div

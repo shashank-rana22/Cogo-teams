@@ -71,3 +71,12 @@
 .shipping_line_name {
 	font-size: 16px;
 }
+
+.is_nvocc {
+	padding: 2px 6px;
+	margin-left: 8px;
+	font-size: 12px;
+	background: #fef199;
+	border: 1px solid #fcdc00;
+	border-radius: 8px;
+}

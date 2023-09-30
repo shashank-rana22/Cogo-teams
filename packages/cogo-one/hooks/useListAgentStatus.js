@@ -1,21 +1,25 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback, useState } from 'react';
 
 const PAGE_LIMIT = 10;
 const DEFAULT_PAGE = 1;
 
-const getParams = ({ agentType, page, query }) => ({
+const getParams = ({ agentType, page, query, userId = '', showRmAgentsDetails = false }) => ({
 	filters: {
-		q          : query || undefined,
-		agent_type : agentType || undefined,
-		status_not : ['inactive'],
+		q                 : query || undefined,
+		agent_type        : agentType || undefined,
+		sales_agent_rm_id : showRmAgentsDetails ? userId : undefined,
 	},
 	page,
-	page_limit: PAGE_LIMIT,
+	page_limit             : PAGE_LIMIT,
+	cogoone_shift_required : true,
 });
 
-function useListAgentStatus({ agentType = '' }) {
+function useListAgentStatus({ agentType = '', showRmAgentsDetails = false }) {
+	const userId = useSelector((state) => state?.profile?.user?.id || {});
+
 	const [paramsState, setParamsState] = useState({
 		page  : DEFAULT_PAGE,
 		query : '',
@@ -38,12 +42,14 @@ function useListAgentStatus({ agentType = '' }) {
 					agentType,
 					page  : paramsState?.page,
 					query : debounceSearchQuery,
+					userId,
+					showRmAgentsDetails,
 				}),
 			});
 		} catch (error) {
 			console.error(error);
 		}
-	}, [trigger, agentType, paramsState?.page, debounceSearchQuery]);
+	}, [trigger, agentType, paramsState?.page, debounceSearchQuery, userId, showRmAgentsDetails]);
 
 	useEffect(() => {
 		debounceQuery(paramsState?.query);

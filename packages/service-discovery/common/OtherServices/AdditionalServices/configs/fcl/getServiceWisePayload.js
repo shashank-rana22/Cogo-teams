@@ -1,7 +1,7 @@
 import { FCL_CUSTOMS_CONTAINER_COMMODITY_MAPPING, HAZ_CLASSES } from '@cogoport/globalization/constants/commodities';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', tradeType = '' }) => {
+const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', tradeType = '', service = '' }) => {
 	const {
 		origin_warehouse_id = '',
 		destination_warehouse_id = '',
@@ -85,22 +85,41 @@ const getServiceWisePayload = ({ additionalFormInfo, detail, service_name = '', 
 			trade_type,
 			// cargo_handling_type,
 		})),
-		haulage_freight: primaryServicesObj.map((item) => ({
-			...trade_type === 'export'
-				? { origin_location_id: detail?.origin_port_id }
-				: { destination_location_id: detail?.destination_port_id },
-			container_size : item.container_size,
-			container_type : item.container_type,
-			commodity      : item?.commodity && HAZ_CLASSES.includes(item.commodity)
-				? item.commodity : null,
-			containers_count           : item.containers_count,
-			cargo_weight_per_container : item.cargo_weight_per_container,
-			haulage_type               : haulage_type || 'carrier',
-			status                     : 'active',
-			trade_type,
-			service_type               : 'trailer_freight',
-			transport_mode             : 'rail',
-		})),
+		haulage_freight: primaryServicesObj.map((item) => {
+			let serviceType = '';
+
+			if (service === 'export_haulage_freight' || !detail?.checkout_id) {
+				serviceType = 'haulage_freight';
+			} else {
+				serviceType = 'trailer_freight';
+			}
+
+			const location_export_haulage = serviceType === 'haulage_freight' && tradeType === 'export'
+				? undefined
+				: detail?.origin_port_id;
+
+			const location_import_haulage =	serviceType === 'haulage_freight' && tradeType === 'import'
+				? undefined
+				: detail?.destination_port_id;
+
+			return {
+				origin_location_id: tradeType === 'export' ? origin_warehouse_id || detail?.origin_port_id
+					: location_import_haulage || detail?.destination_main_port_id,
+				destination_location_id: tradeType === 'export' ? location_export_haulage || detail?.origin_main_port_id
+					: destination_warehouse_id || detail?.destination_port_id,
+				container_size : item.container_size,
+				container_type : item.container_type,
+				commodity      : item?.commodity && HAZ_CLASSES.includes(item.commodity)
+					? item.commodity : null,
+				containers_count           : item.containers_count,
+				cargo_weight_per_container : item.cargo_weight_per_container,
+				haulage_type               : haulage_type || 'carrier',
+				status                     : 'active',
+				trade_type,
+				service_type               : service ? serviceType : undefined,
+				transport_mode             : 'rail',
+			};
+		}),
 		fcl_cfs: primaryServicesObj.map((item) => {
 			const commodities = FCL_CUSTOMS_CONTAINER_COMMODITY_MAPPING[item.container_type] || [];
 

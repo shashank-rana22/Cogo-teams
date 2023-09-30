@@ -31,7 +31,7 @@ export const moreFilters = [
 		isClearable    : true,
 		multiple       : true,
 		defaultOptions : false,
-		selectWidth    : '178px',
+		selectWidth    : '260px',
 		placeholder    : ' Select Service',
 		span           : 3,
 		options        : [
@@ -53,7 +53,7 @@ export const moreFilters = [
 		label          : 'Urgency Tag',
 		name           : 'urgencyTag',
 		type           : 'multiSelect',
-		selectWidth    : '174px',
+		selectWidth    : '250px',
 		isClearable    : true,
 		multiple       : true,
 		defaultOptions : false,
@@ -74,6 +74,7 @@ export const moreFilters = [
 			{ label: 'ODEX', value: 'odex' },
 			{ label: 'Short Transit Shipment', value: 'short_transit_shipment' },
 			{ label: 'Co-ordination Charges', value: 'coordination_charges' },
+			{ label: 'THC', value: 'thc' },
 			{
 				label: (
 					<>
@@ -88,22 +89,6 @@ export const moreFilters = [
 				value: 'sez_shipment',
 			},
 		],
-	},
-	{
-		label          : 'Entity',
-		name           : 'entity',
-		type           : 'asyncSelect',
-		placeholder    : 'Entity',
-		isClearable    : true,
-		span           : 3,
-		asyncKey       : 'list_cogo_entity',
-		defaultOptions : true,
-		valueKey       : 'entity_code',
-		renderLabel    : (item) => (`${item?.entity_code} - ${item?.business_name}`),
-		initialCall    : true,
-		style          : { width: '170px' },
-		labelKey       : 'entity_code',
-		disabled       : true,
 	},
 	{
 		label                 : 'Invoice Date',

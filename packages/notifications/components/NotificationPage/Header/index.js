@@ -12,10 +12,10 @@ function Header({
 	onMarkAllAsRead = () => {},
 	formattedData = {},
 	onPageChange = () => {},
-	activeTab,
-	disabled,
+	activeTab = '',
+	disabled = false,
 }) {
-	const { t } = useTranslation(['notifications']);
+	const { t } = useTranslation(['common']);
 
 	return (
 		<div className={styles.container}>
@@ -31,7 +31,7 @@ function Header({
 						style={disabled ? { pointerEvents: 'none' } : {}}
 						onClick={onMarkAllAsRead}
 					>
-						{t('notifications:mark_all_as_read')}
+						{t('common:mark_all_as_read')}
 					</Button>
 					<div>
 						<Pagination

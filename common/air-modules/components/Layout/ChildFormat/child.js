@@ -21,6 +21,7 @@ function Child({
 	index = '',
 	name = '',
 	remove = '',
+	label = '',
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
 	field = {},
@@ -86,7 +87,7 @@ function Child({
 	return (
 		<div className={styles.fieldarray} key={field.id}>
 			<h3 className={styles.heading}>
-				{startCase(name || 'document')}
+				{startCase(label || 'document')}
 				&nbsp;
 				{index + INCREMENT_BY_ONE}
 			</h3>

@@ -1,6 +1,5 @@
 .created_container {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 }
 
@@ -41,5 +40,4 @@
 
 .created_date {
 	display: flex;
-	flex-direction: row;
 }

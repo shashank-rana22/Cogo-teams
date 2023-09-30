@@ -20,8 +20,14 @@ const CONTROLS_MAPPING = {
 };
 
 function RaiseTicketsForm({
-	watch = () => {}, control = {}, formState = {}, additionalInfo = [], resetField = () => {},
-	setAdditionalInfo = () => {}, setValue = () => {},
+	watch = () => {},
+	control = {},
+	formState = {},
+	additionalInfo = [],
+	resetField = () => {},
+	setAdditionalInfo = () => {},
+	setValue = () => {},
+	setDefaultTypeId = () => {},
 }) {
 	const { errors = {} } = formState || {};
 
@@ -64,6 +70,7 @@ function RaiseTicketsForm({
 		setAdditionalInfo,
 		watchRequestType,
 		watchSubCategory,
+		setDefaultTypeId,
 		watchTradeType,
 		watchCategory,
 		watchService,
@@ -84,10 +91,6 @@ function RaiseTicketsForm({
 		.filter((val) => CONTROLS_MAPPING[watchRequestType || 'shipment']?.includes(val.name));
 
 	const controls = filteredControls?.concat(additionalControls);
-
-	const DISABLE_MAPPING = {
-		issue_type: [watchRequestType],
-	};
 
 	useEffect(() => {
 		if (!isEmpty(watchIssueType) && REQUEST_TYPES.includes(watchRequestType)) {
@@ -139,7 +142,6 @@ function RaiseTicketsForm({
 							key={name}
 							control={control}
 							id={`${name}_input`}
-							disabled={DISABLE_MAPPING[name]?.some(isEmpty)}
 						/>
 						<div className={styles.error}>
 							{errors?.[controlItem.name] && t('myTickets:required')}

@@ -257,5 +257,16 @@
     "supply_allocation": "Supply Allocation",
     "ams_submission": "AMS Submission",
     "warehouse_management": "Warehouse Management",
-    "demand_forecast": "Demand Forecast"
+    "demand_forecast": "Demand Forecast",
+    "select_language": "Select Language",
+    "default_error_toast": "The application has encountered an unknown error. Our team is looking into this with the utmost urgency. Please try again after some time. If the issue persists, please contact us via chat.",
+    "tab_notifications_label": "Notifications",
+    "tab_mails_label": "Mail",
+    "mark_all_as_read": "Mark all as read",
+    "new_notifications": "New Notifications from Cogoport!",
+    "loading": "Loading...",
+    "chips_notifications_label": "Notifications",
+    "chips_mails_label": "Mails",
+    "see_all_button": "See All",
+    "notifications_empty_label": "You have no new notifications."
 }

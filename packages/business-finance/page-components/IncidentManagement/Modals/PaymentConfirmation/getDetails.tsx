@@ -40,7 +40,7 @@ function getDetails(paymentConfirmationRequest, organization, t) {
 							<a target="_blank" href={item} className={styles.file_link} rel="noreferrer">
 								{t('incidentManagement:view_doc_link')}
 							</a>
-							<div className={styles.eye}><IcMEyeopen /></div>
+							<div className={styles.eye}><IcMEyeopen fill="#f68b21" /></div>
 						</div>
 					))}
 				</div>

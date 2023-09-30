@@ -27,7 +27,7 @@ const useRaiseTicketcontrols = ({
 	watchRequestType = '', resetField = () => {}, setAdditionalInfo = () => {}, setValue = () => {},
 	formattedSubCategories = [], setSubCategories = () => {}, watchSubCategory = '',
 	t = () => {}, setRaiseToDesk = () => {}, formatRaiseToDeskOptions = [],
-	watchRaisedByDesk = '', watchRaisedToDesk = '',
+	watchRaisedByDesk = '', watchRaisedToDesk = '', setDefaultTypeId = () => {},
 }) => {
 	const { rolesArr } = useSelector(({ profile }) => ({ rolesArr: profile?.auth_role_data?.role_functions || [] }));
 
@@ -60,6 +60,8 @@ const useRaiseTicketcontrols = ({
 			RequestType      : watchRequestType || undefined,
 			Category         : watchCategory || undefined,
 			Subcategory      : watchSubCategory || undefined,
+			Service          : watchService || undefined,
+			TradeType        : watchTradeType || undefined,
 			RaisedByDesk     : watchRaisedByDesk || undefined,
 			RaisedToDesk     : watchRaisedToDesk || undefined,
 			CategoryDeskType : isOperation ? 'by_desk' : 'by_category',
@@ -129,6 +131,7 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			options        : GLOBAL_CONSTANTS.shipment_types,
 			isClearable    : true,
+			disabled       : true,
 			visible        : true,
 		},
 		{
@@ -137,6 +140,7 @@ const useRaiseTicketcontrols = ({
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_trade_type'),
 			rules          : { required: true },
+			disabled       : true,
 			options        : GLOBAL_CONSTANTS.trade_types,
 			isClearable    : true,
 			visible        : true,
@@ -199,9 +203,12 @@ const useRaiseTicketcontrols = ({
 			isClearable    : true,
 			rules          : { required: true },
 			defaultOptions : true,
-			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
-			visible        : true,
-			renderLabel    : (item) => <CustomIssueLabel optionsLabel={item} />,
+			onChange       : (_, val) => {
+				setAdditionalInfo(val?.AdditionalInfo);
+				setDefaultTypeId(val?.ID);
+			},
+			visible     : true,
+			renderLabel : (item) => <CustomIssueLabel optionsLabel={item} />,
 		},
 		{
 			label          : <RenderLabel label={t('myTickets:describe_issue')} />,

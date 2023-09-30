@@ -36,6 +36,7 @@ export { default as MultiEmailInput } from './page-components/Business/MultiEmai
 export { default as RatingController } from './page-components/Controlled/RatingController';
 export { default as useInterval } from './hooks/useInterval';
 export { default as useGetAsyncOptions } from './hooks/useGetAsyncOptions';
+export { default as useGetAsyncOptionsMicroservice } from './hooks/useGetAsyncOptionsMicroservice';
 export { default as useDebounceQuery } from './hooks/useDebounceQuery';
 
 export { default as getApiError } from './utils/getApiError';

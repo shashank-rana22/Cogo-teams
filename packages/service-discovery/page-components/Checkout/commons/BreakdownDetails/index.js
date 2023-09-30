@@ -5,6 +5,7 @@ import { useContext } from 'react';
 
 import { CheckoutContext } from '../../context';
 import { displayTotal, convertCurrencyValue } from '../../helpers/dynamic-values';
+import ServiceIcons from '../../page-components/FclCheckout/commons/ServiceIcons';
 
 import AddLineItemModal from './components/AddLineItemModal';
 import BreakdownDetailsHeader from './components/BreakdownDetailsHeader';
@@ -37,6 +38,7 @@ function BreakdownDetails({
 		checkout_id,
 		loading,
 		shouldEditMargin = true,
+		primaryService,
 	} = useContext(CheckoutContext);
 
 	const {
@@ -63,6 +65,13 @@ function BreakdownDetails({
 	return (
 		<>
 			<BreakdownDetailsHeader disableForm={disableForm} resetMargins={resetMargins} rateDetails={rateDetails} />
+
+			<ServiceIcons
+				primaryService={primaryService}
+				detailedServices={detail.services}
+				primary_service={primary_service}
+				source={source}
+			/>
 
 			{rateDetails.map((item, index) => {
 				const { id = '' } = item || {};

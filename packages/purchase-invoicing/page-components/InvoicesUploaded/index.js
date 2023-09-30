@@ -17,7 +17,6 @@ function InvoicesUploaded({
 	setOpenComparision = () => {},
 	setStep = () => {},
 }) {
-	const titleCard = <div>Invoice List & Tagging</div>;
 	const [activeTab, setActiveTab] = useState('uploaded_invoices');
 
 	const viewDetails = {
@@ -44,11 +43,11 @@ function InvoicesUploaded({
 	return (
 		<div className={styles.invoicescontainer}>
 			<span className={styles.headings}>Invoices Uploaded</span>
-			<AccordianView title={titleCard} fullwidth>
+			<AccordianView title="Invoice List & Tagging" fullwidth>
 				<div className={styles.tabscontainer}>
 					<Tabs
 						activeTab={activeTab}
-						themeType="tertiary"
+						themeType="primary"
 						onChange={setActiveTab}
 					>
 						<TabPanel name="uploaded_invoices" title="Uploaded Invoices">

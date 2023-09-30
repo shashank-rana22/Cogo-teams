@@ -1,4 +1,4 @@
-import { Input } from '@cogoport/components';
+import { Input, Button } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -23,6 +23,20 @@ function SegmentedFilters({
 	filters,
 	setFilters,
 }: SegmentFilterProps) {
+	const showFilterButton = !!filters?.statusUpdatedDateFrom
+								|| !!filters?.statusUpdatedDateTo || !!filters?.rejectionRemarksType;
+
+	const handleOnClickClearFilter = () => {
+		setFilters((pre) => ({
+			...pre,
+			statusUpdatedDateFrom : undefined,
+			statusUpdatedDateTo   : undefined,
+			rejectionRemarksType  : undefined,
+			updatedDateFrom       : undefined,
+			updatedDateTo         : undefined,
+		}));
+	};
+
 	return (
 		<div className={styled.main}>
 			<div className={styled.segment}>
@@ -33,6 +47,19 @@ function SegmentedFilters({
 						setFilters={setFilters}
 					/>
 				</div>
+				<FilterModal setFilters={setFilters} />
+				{showFilterButton ? (
+					<Button
+						className={styled.clear_filter}
+						size="md"
+						themeType="secondary"
+						onClick={handleOnClickClearFilter}
+					>
+						Clear Filter
+
+					</Button>
+				) : null }
+
 			</div>
 
 			<div className={styled.search_filter}>
@@ -51,7 +78,6 @@ function SegmentedFilters({
 					/>
 				</div>
 
-				<FilterModal setFilters={setFilters} filters={filters} />
 			</div>
 		</div>
 	);

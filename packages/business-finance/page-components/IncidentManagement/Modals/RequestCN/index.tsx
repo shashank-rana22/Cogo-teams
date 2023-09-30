@@ -199,7 +199,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 			</div>
 			{showTdsModal && (
 				<Modal
-					size="xl"
+					size="lg"
 					show={showTdsModal}
 					onClose={() => {
 						setShowTdsModal(false);
@@ -349,16 +349,18 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 						</div>
 
 						<div className={styles.document_flex}>
-							<div className={styles.document}>{`${t('incidentManagement:remarks')} -`}</div>
-							{remark?.length > MAX_LEN ? (
-								<Tooltip
-									className={styles.tooltip}
-									interactive
-									content={remark || '-'}
-								>
-									<div className={styles.wrapper}>{ remark || '-'}</div>
-								</Tooltip>
-							) : remark || '-'}
+							<div>{`${t('incidentManagement:remarks')} -`}</div>
+							<div className={styles.remark_content}>
+								{remark?.length > MAX_LEN ? (
+									<Tooltip
+										className={styles.tooltip}
+										interactive
+										content={remark || '-'}
+									>
+										<div className={styles.wrapper}>{ remark || '-'}</div>
+									</Tooltip>
+								) : remark || '-'}
+							</div>
 						</div>
 
 						<div className={styles.document_flex}>
@@ -401,7 +403,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									size="md"
 									placeholder={t('incidentManagement:remarks_placeholder')}
 									onChange={(value: string) => setRemarks(value)}
-									style={{ width: '700', height: '100px', marginBottom: '12px' }}
+									style={{ width: '700', height: '80px', marginBottom: '12px' }}
 								/>
 							</>
 						) }

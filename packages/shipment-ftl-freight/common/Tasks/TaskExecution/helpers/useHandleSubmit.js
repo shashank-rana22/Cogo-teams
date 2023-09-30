@@ -14,6 +14,7 @@ import getRpaMappings from '../utils/get-rpa-mappings';
 const shipmentRefetchTasks = [
 	'confirm_booking',
 	'mark_confirmed',
+	'upload_lorry_receipt',
 ];
 
 const TRUCKING_TASK = [
@@ -23,6 +24,9 @@ const TRUCKING_TASK = [
 	'upload_ftl_eway_bill_copy',
 	'upload_ftl_commercial_invoice',
 	'confirmation_on_services_taken',
+	'upload_service_provider_proof_of_delivery',
+	'pod_sent_to_shipper',
+	'upload_invoice_submission_acknowledgement',
 ];
 
 function useHandleSubmit({
@@ -35,14 +39,14 @@ function useHandleSubmit({
 	isLastStep = 0,
 	getApisData,
 }) {
-	const [isLoading, setIsLoading] = useState();
-
 	const {
 		shipment_data,
 		primary_service,
-		getShipment,
+		refetch: getShipment,
 		getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
+
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : finalConfig.end_point || '/update_shipment_pending_task',

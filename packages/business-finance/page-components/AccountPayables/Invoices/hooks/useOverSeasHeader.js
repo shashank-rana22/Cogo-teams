@@ -26,7 +26,9 @@ const useOverSeasHeader = ({ organizationId:organization_id = '' }) => {
 	);
 
 	useEffect(() => {
-		overseasHeaderData();
+		if (organization_id) {
+			overseasHeaderData();
+		}
 	}, [overseasHeaderData, organization_id]);
 
 	return {
