@@ -41,6 +41,16 @@
 	max-height: 216px;
 }
 
+.container > .section:last-of-type {
+	display: flex;
+	flex-direction: column;
+	flex-grow: unset;
+
+	/* width: 216px; */
+	margin-right: 30px;
+	white-space: nowrap;
+}
+
 .lastContainer {
 	display: flex;
 	flex-direction: column;

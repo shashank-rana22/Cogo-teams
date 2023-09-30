@@ -9,13 +9,9 @@ import RejectModal from '../../../common/RejectModal/index';
 import SHIPMENT_MAPPING from '../../../Constants/SHIPMENT_MAPPING';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
 import { getFormatAmount } from '../../../utils/getformatamount';
+import openLink from '../../../utils/openShipmentLink';
 
 import styles from './styles.module.css';
-
-function openLink({ event, partnerId, id, incidentType }) {
-	event.preventDefault();
-	window.open(`/v2/${partnerId}/booking/${incidentType}/${id}`, '_blank');
-}
 
 function Details({
 	row = {},

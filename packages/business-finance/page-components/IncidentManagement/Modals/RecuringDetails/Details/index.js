@@ -1,108 +1,14 @@
 import { Button, cl, Textarea } from '@cogoport/components';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import usePostExpense from '../../../apisModal/usePostExpense';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
-import { getFormatDate } from '../../../utils/formatDate';
-import { getFormatAmount } from '../../../utils/getformatamount';
+import { getSummaryDataOne, getSummaryDataThree, getSummaryDataTwo } from '../contants';
+import RenderSummary from '../RenderSummary';
 
 import styles from './styles.module.css';
-
-export const DURATION_MAPPING = {
-	WEEK      : 'Weekly',
-	TWO_WEEKS : 'Two Weeks',
-	MONTH     : 'Monthly',
-	QUARTER   : 'Quarterly',
-	YEAR      : 'Yearly',
-};
-
-function RenderSummary({ summary = [] }) {
-	return (
-
-		<div className={styles.summary}>
-			{summary?.map((item) => (
-				<div key={item.title} className={styles.section}>
-					<div className={styles.title}>{item?.title || '-'}</div>
-					<div className={styles.value}>{item?.value || '-'}</div>
-				</div>
-			))}
-		</div>
-
-	);
-}
-
-const getSummaryDataOne = ({ agreementNumber = '', categoryName = '', cogoEntity = '', t }) => [
-	{
-		title : t('incidentManagement:entity_label'),
-		value : cogoEntity || '-',
-	},
-	{
-		title : t('incidentManagement:expense_category_title'),
-		value : startCase(categoryName),
-	},
-	{
-		title : t('incidentManagement:agreement_number_title'),
-		value : agreementNumber || '-',
-	},
-];
-
-const getSummaryDataTwo = ({
-	branchName = '',
-	currency = '',
-	maxPayoutAllowed = '',
-	ledgerMaxPayoutAllowed = '',
-	ledgerCurrency = '',
-	t,
-}) => [
-	{
-		title : t('incidentManagement:branch_title'),
-		value : branchName || '-',
-	},
-	{
-		title: t('incidentManagement:max_payout_title'),
-		value:
-			currency && maxPayoutAllowed ? (
-				<div>
-					{getFormatAmount(maxPayoutAllowed, currency)}
-				</div>
-			) : (
-				'-'
-			),
-	},
-	{
-		title: t('incidentManagement:ledger_account_title'),
-		value:
-			getFormatAmount(ledgerMaxPayoutAllowed, ledgerCurrency),
-	},
-];
-
-const getSummaryDataThree = ({ startDate, endDate, repeatFrequency, t }) => [
-	{
-		title : t('incidentManagement:start_date_title'),
-		value : (
-			<div>
-				{startDate
-					? getFormatDate(startDate) : '-'}
-			</div>
-		),
-	},
-	{
-		title : t('incidentManagement:end_date_title'),
-		value : (
-			<div>
-				{endDate
-					? getFormatDate(endDate)
-					: '-'}
-			</div>
-		),
-	},
-	{
-		title : t('incidentManagement:repeat_frequency_title'),
-		value : DURATION_MAPPING[repeatFrequency] || '-',
-	},
-];
 
 const summeryMappings = ({
 	summaryDataFirst,

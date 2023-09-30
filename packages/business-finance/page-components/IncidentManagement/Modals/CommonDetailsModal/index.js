@@ -1,73 +1,66 @@
-import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
+import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
 import EmptyState from '../../common/EmptyStateCommon';
-import AdvanceSecurityDeposit from '../AdvanceSecurityDepositDetails';
-import AdvanceSecurityDepositRefund from '../AdvanceSecurityRefundDetails';
-import BankAccountDetails from '../BankAccountDetails';
-import ConcorDetails from '../ConcorPDADetails';
-import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
-import NonRecuring from '../NonRecuringDetails';
-import PaymentDetails from '../PaymentDetails';
-import RecuringDetails from '../RecuringDetails';
-import RequestCNDetails from '../RequestCNDetails';
-import RevokeInvoiceDetails from '../RevokeInvoiceDetails';
-import SezApprovalDetails from '../SezApprovalDetails';
-import TdsApprovalDetails from '../TdsApprovalDetails';
+import ViewPdf from '../../common/ViewPdf';
+import allStakeHolderTimeLineData from '../../utils/formatAllStakeHolderData';
 
+import { DOCUMENT_MAPPING, HEADER_MAPPING, REQUEST_MAPPING, TYPE_COMPONENT_MAPPING } from './contants';
 import styles from './styles.module.css';
 
-const TYPE_COMPONENT_MAPPING = {
-	BANK_DETAIL_APPROVAL            : BankAccountDetails,
-	TDS_APPROVAL                    : TdsApprovalDetails,
-	RECURRING_EXPENSE_APPROVAL      : RecuringDetails,
-	OVERHEAD_APPROVAL               : NonRecuring,
-	SEZ_APPROVAL                    : SezApprovalDetails,
-	CONCOR_PDA_APPROVAL             : ConcorDetails,
-	REVOKE_INVOICE                  : RevokeInvoiceDetails,
-	ADVANCE_SECURITY_DEPOSIT        : AdvanceSecurityDeposit,
-	ADVANCE_SECURITY_DEPOSIT_REFUND : AdvanceSecurityDepositRefund,
-	ISSUE_CREDIT_NOTE               : RequestCNDetails,
-	JOB_OPEN                        : JobOpenDetailsModal,
-	CONSOLIDATED_CREDIT_NOTE        : RequestCNDetails,
-	PAYMENT_CONFIRMATION_APPROVAL   : PaymentDetails,
+function CommonPage({ row = {}, setDetailsModal = () => {}, refetch = () => {}, header = '' }) {
+	const {
+		level3 = {}, level2 = {}, level1 = {}, createdBy = {},
+		remark = '', status = '', updatedBy = {}, financeRemark = '',
+	} = row || {};
+	const level0 = { ...createdBy, remark };
+	const request = REQUEST_MAPPING[header];
+	const document = DOCUMENT_MAPPING[header];
 
-};
-function CommonDetailsModal({
-	setDetailsModal = () => {},
-	detailsModal = {},
-	refetch = () => {},
-}) {
-	const Component = TYPE_COMPONENT_MAPPING[detailsModal?.type] || null;
+	const docUrl = row?.data?.[request]?.[document]?.[GLOBAL_CONSTANTS.zeroth_index] || '';
+
+	const Component = TYPE_COMPONENT_MAPPING[header] || null;
+
+	if (!Component) {
+		return (
+			<div className={styles.emptyContainer}>
+				<div className={styles.noData}>
+
+					No Data Available
+				</div>
+
+				<EmptyState />
+			</div>
+		);
+	}
 
 	return (
-		<div className={styles.containerDisplay}>
-			<Button
-				size="md"
-				themeType="secondary"
-				onClick={() => setDetailsModal(null)}
-				className={styles.go_back_button}
-			>
-				Go Back
-			</Button>
-			{ Component
-				? (
-					<Component
-						row={detailsModal}
-						setDetailsModal={setDetailsModal}
-						refetch={refetch}
-					/>
-				) : (
-					<div className={styles.emptyContainer}>
-						<div className={styles.noData}>
-
-							No Data Available
-						</div>
-
-						<EmptyState />
-					</div>
+		<div>
+			<div className={styles.heading}>
+				{HEADER_MAPPING[header]}
+			</div>
+			<AllStakeHolderTimeline
+				timeline={allStakeHolderTimeLineData(
+					{ level0, level1, level2, level3, status, updatedBy, financeRemark },
 				)}
+			/>
+			<div className={styles.request_heading}>
+
+				<h3>Request Details</h3>
+				<div className={styles.red_line} />
+
+			</div>
+			<div className={styles.container_view}>
+				{header !== 'ADVANCE_SECURITY_DEPOSIT' &&	<ViewPdf docUrl={docUrl} /> }
+				<Component
+					row={row}
+					setDetailsModal={setDetailsModal}
+					refetch={refetch}
+				/>
+			</div>
+
 		</div>
 	);
 }
-export default CommonDetailsModal;
+export default CommonPage;

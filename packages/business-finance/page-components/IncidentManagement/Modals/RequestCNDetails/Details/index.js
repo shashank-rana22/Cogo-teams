@@ -50,7 +50,7 @@ function Details({
 	if (status !== 'REQUESTED') {
 		isEditable = false;
 	}
-	const [CNCategoryValues, setCNCategoryValues] = useState({
+	const [cNCategoryValues, setCNCategoryValues] = useState({
 		CNType   : null,
 		CNValues : null,
 		remarks  : null,
@@ -63,7 +63,7 @@ function Details({
 		id,
 		row,
 		remark: remarks,
-		CNCategoryValues,
+		cNCategoryValues,
 		isConsolidated,
 		creditNoteApprovalType,
 		level2,
@@ -151,7 +151,7 @@ function Details({
 									status={status}
 									creditNoteRemarks={creditNoteRemarks}
 									setShowPopover={setShowPopover}
-									CNCategoryValues={CNCategoryValues}
+									cNCategoryValues={cNCategoryValues}
 									setCNCategoryValues={setCNCategoryValues}
 								/>
 							)}

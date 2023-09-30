@@ -11,30 +11,30 @@ import styles from './styles.module.css';
 function ShowContent({
 	creditNoteType = '', isEditable = false, level1 = {},
 	t = () => {}, status = '', creditNoteRemarks = '', setShowPopover = () => {},
-	CNCategoryValues = {}, setCNCategoryValues = () => {},
+	cNCategoryValues = {}, setCNCategoryValues = () => {},
 }) {
 	const CN_VALUES_DATA = ['revenueOthers', 'nonRevenueOthers'];
-	const RevenueImpacting =	CNCategoryValues?.CNType === 'REVENUE_IMPACTING'
+	const revenueImpacting =	cNCategoryValues?.CNType === 'REVENUE_IMPACTING'
 	|| creditNoteType === 'REVENUE_IMPACTING';
-	const NonRevenueImpacting =	CNCategoryValues?.CNType === 'NON_REVENUE_IMPACTING'
+	const nonRevenueImpacting =	cNCategoryValues?.CNType === 'NON_REVENUE_IMPACTING'
 	|| creditNoteType === 'NON_REVENUE_IMPACTING';
 	const STATUS_LIST = ['APPROVED', 'REJECTED'];
 
 	useEffect(() => {
 		setCNCategoryValues({
-			CNType   : CNCategoryValues?.CNType,
+			CNType   : cNCategoryValues?.CNType,
 			CNValues : null,
 			remarks  : null,
 		});
-	}, [CNCategoryValues?.CNType, setCNCategoryValues]);
+	}, [cNCategoryValues?.CNType, setCNCategoryValues]);
 
 	useEffect(() => {
 		setCNCategoryValues({
-			CNType   : CNCategoryValues?.CNType,
-			CNValues : CNCategoryValues?.CNValues,
+			CNType   : cNCategoryValues?.CNType,
+			CNValues : cNCategoryValues?.CNValues,
 			remarks  : null,
 		});
-	}, [CNCategoryValues?.CNValues, CNCategoryValues?.CNType, setCNCategoryValues]);
+	}, [cNCategoryValues?.CNValues, cNCategoryValues?.CNType, setCNCategoryValues]);
 
 	return (
 		<div className={styles.container}>
@@ -44,47 +44,47 @@ function ShowContent({
 					<Select
 						className="primary md"
 						placeholder={`${t('incidentManagement:cn_category_type')}..`}
-						value={creditNoteType || CNCategoryValues?.CNType}
+						value={creditNoteType || cNCategoryValues?.CNType}
 						disabled={!isEditable || level1?.status === 'APPROVED'}
-						onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNType: e })}
+						onChange={(e) => setCNCategoryValues({ ...cNCategoryValues, CNType: e })}
 						options={categoryOptions({ t })}
 					/>
 				</div>
 			</div>
-			{(CNCategoryValues?.CNType
+			{(cNCategoryValues?.CNType
             || STATUS_LIST.includes(status)) && (
 	<div>
-		{RevenueImpacting && (
+		{revenueImpacting && (
 			<div className={styles.texts}>
 				{`${t('incidentManagement:revenue_impacting')}*`}
 			</div>
 		)}
-		{NonRevenueImpacting && (
+		{nonRevenueImpacting && (
 			<div className={styles.texts}>
 				{`${t('incidentManagement:non_revenue_impacting')}*`}
 			</div>
 		)}
 		<div className={styles.select_container}>
-			{RevenueImpacting && (
+			{revenueImpacting && (
 				<Select
 					className="primary md"
 					placeholder={t('incidentManagement:type_here_placeholder')}
-					value={creditNoteRemarks || CNCategoryValues?.CNValues}
+					value={creditNoteRemarks || cNCategoryValues?.CNValues}
 					disabled={!isEditable || level1?.status === 'APPROVED'}
-					onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNValues: e })}
+					onChange={(e) => setCNCategoryValues({ ...cNCategoryValues, CNValues: e })}
 					options={creditNoteRemarks
 						? [...(revenueOptions({ t })), { label: creditNoteRemarks, value: creditNoteRemarks }]
 						: revenueOptions({ t })}
 				/>
 			)}
-			{NonRevenueImpacting && (
+			{nonRevenueImpacting && (
 				<Select
 					className="primary md"
 					placeholder={t('incidentManagement:type_here_placeholder')}
 					value={NON_REVENUE_DATA.includes(creditNoteRemarks) ? creditNoteRemarks
-						: creditNoteRemarks || CNCategoryValues?.CNValues}
+						: creditNoteRemarks || cNCategoryValues?.CNValues}
 					disabled={!isEditable || level1?.status === 'APPROVED'}
-					onChange={(e) => setCNCategoryValues({ ...CNCategoryValues, CNValues: e })}
+					onChange={(e) => setCNCategoryValues({ ...cNCategoryValues, CNValues: e })}
 					options={creditNoteRemarks ? [
 						...(nonRevenueOptions({ t })),
 						{ label: creditNoteRemarks, value: creditNoteRemarks }]
@@ -94,15 +94,15 @@ function ShowContent({
 		</div>
 	</div>
 			)}
-			{CN_VALUES_DATA.includes(CNCategoryValues?.CNValues) && (
+			{CN_VALUES_DATA.includes(cNCategoryValues?.CNValues) && (
 				<div>
 					<div className={styles.texts}>{t('incidentManagement:remarks')}</div>
 
 					<Textarea
-						value={CNCategoryValues?.remarks}
+						value={cNCategoryValues?.remarks}
 						disabled={!isEditable}
 						onChange={(e) => setCNCategoryValues({
-							...CNCategoryValues,
+							...cNCategoryValues,
 							remarks: e,
 						})}
 						placeholder={t('incidentManagement:remarks_placeholder')}

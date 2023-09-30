@@ -35,13 +35,17 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 					if (item?.status === 'REQUESTED BY') {
 						flag = true;
 					}
+
 					const isStakeholderActive = !index
 					|| ['APPROVED', 'REQUESTED BY'].includes(stakeHolders[index - FIRST]?.status);
 					return (
 						<div
-							className={cl`${index < stakeHolders.length - FIRST
-								? styles.section : styles.lastContainer}
-							 ${!isStakeholderActive ? styles.faded_text : ''}`}
+							// className={cl`${index < stakeHolders.length - FIRST
+							// 	? styles.section : styles.lastContainer}
+							//  ${!isStakeholderActive ? styles.faded_text : ''}`}
+							className={!isStakeholderActive
+								? cl`${styles.faded_text} ${styles.section}`
+								: cl`${styles.section}`}
 							key={item?.key}
 						>
 							<div className={styles.inner_div}>

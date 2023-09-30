@@ -5,12 +5,13 @@ import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import ShowOverflowingNumber from '../../commons/utils/showOverflowingNumber';
+import { MAPPING } from '../Constants/tab_mapping';
 import { toTitleCase } from '../utils/titleCase.ts';
 
 import SortIcon from './SortIcon/index.tsx';
 import styles from './styles.module.css';
 
-const SIXTH_SPLICE_INDEX = 6;
+const SIXTH_SPLICE_INDEX = 8;
 const FIRST_SPLICE_INDEX = 1;
 const OVERFLOW_NUMBER = 10;
 
@@ -20,12 +21,6 @@ function getColumns({
 	setDetailsModal = () => { },
 	activeTab = 'requested',
 }) {
-	const MAPPING = {
-		requested : 'Request Remarks',
-		approved  : 'Approval Remarks',
-		rejected  : 'Rejection Remarks',
-	};
-
 	const column = 		[
 		{
 			Header   : t('incidentManagement:incident_id_header'),
@@ -117,7 +112,9 @@ function getColumns({
 			Cell     : ({ row: { original } }) => {
 				const { createdBy = {} } = original || {};
 				const { name = '' } = createdBy || {};
-				return <span>{ShowOverflowingNumber(name || '-', OVERFLOW_NUMBER)}</span>;
+				return (
+					<ShowOverflowingNumber value={name} maxLength={OVERFLOW_NUMBER} />
+				);
 			},
 		},
 		{
@@ -139,7 +136,6 @@ function getColumns({
 								</span>
 							)
 								: toTitleCase(requestType ? startCase(requestType) : '-')}
-
 						</div>
 						<span>
 							{typeof (revoked) === 'boolean' && (
@@ -159,7 +155,6 @@ function getColumns({
 							)}
 						</span>
 					</div>
-
 				);
 			},
 		},
@@ -241,7 +236,7 @@ function getColumns({
 			},
 		},
 		{
-			Header   : t('incidentManagement:status_header'),
+			Header   : activeTab === 'requested' && t('incidentManagement:status_header'),
 			accessor : ({ currentLevel = 0 }) => (
 				<span className={styles.status_level}>
 					{t('incidentManagement:levels_label')}

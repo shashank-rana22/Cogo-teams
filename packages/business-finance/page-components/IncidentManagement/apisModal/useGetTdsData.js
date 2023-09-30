@@ -10,7 +10,7 @@ const useGetTdsData = ({
 	setDetailsModal = () => {},
 	row = {},
 	id = '',
-	CNCategoryValues = { CNType: '', CNValues: '', remarks: '' },
+	cNCategoryValues = { CNType: '', CNValues: '', remarks: '' },
 	remark = '',
 	isConsolidated = false,
 	creditNoteApprovalType = '',
@@ -21,7 +21,7 @@ const useGetTdsData = ({
 		user_id: profile?.user?.id,
 	}));
 
-	const { CNType, CNValues, remarks } = CNCategoryValues || {};
+	const { CNType, CNValues, remarks } = cNCategoryValues || {};
 
 	const creditNoteRemarks = CNValues === 'revenueOthers' || CNValues === 'nonRevenueOthers'
 		? remarks

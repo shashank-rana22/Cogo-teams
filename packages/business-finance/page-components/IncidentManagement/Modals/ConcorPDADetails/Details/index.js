@@ -10,13 +10,9 @@ import SHIPMENT_MAPPING from '../../../Constants/SHIPMENT_MAPPING';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
 import { getFormatDate } from '../../../utils/formatDate';
 import { getFormatAmount } from '../../../utils/getformatamount';
+import openLink from '../../../utils/openShipmentLink';
 
 import styles from './styles.module.css';
-
-function openLink({ event, partnerId, id, incidentType }) {
-	event.preventDefault();
-	window.open(`/v2/${partnerId}/booking/${incidentType}/${id}`, '_blank');
-}
 
 function Details({
 	row = {},
@@ -37,7 +33,7 @@ function Details({
 	const {
 		sid = '', totalBuyPrice = '', placeOfDestination = '', placeOfSupply = '',
 		isTaxApplicable = true, documentDate = '', dueDate = '', beneficiaryName = '', currency = '',
-		shipmentType = '', entityCode = '', registrationNumber = '', accountNumber = '', bankName = '', ifscCode = '',
+		shipmentType = '', entity = '', registrationNo = '', accountNumber = '', bankName = '', ifscCode = '',
 	} = concorPdaApprovalRequest || {};
 
 	const { useOnAction: onAction, loading = false } = useApproveConcor({
@@ -96,13 +92,13 @@ function Details({
 				<div className={styles.large}>
 					<div className={styles.title}>Entity Code</div>
 					<div className={styles.text}>
-						{entityCode || '-'}
+						{entity || '-'}
 					</div>
 				</div>
 				<div className={styles.medium}>
 					<div className={styles.title}>Registration Number</div>
 					<div className={styles.text}>
-						{registrationNumber || '-'}
+						{registrationNo || '-'}
 					</div>
 				</div>
 			</div>
