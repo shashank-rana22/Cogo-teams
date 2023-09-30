@@ -88,7 +88,7 @@ function BarChart({
 									},
 								})
 							)
-								: (parseFloat(value.toFixed(2)))}
+								: (parseFloat(value?.toFixed(2)))}
 
 						</tspan>
 					</strong>
@@ -121,7 +121,7 @@ function BarChart({
 											currencyWise          : true,
 										},
 									})
-								) : (parseFloat(bar?.data?.value.toFixed(2)))
+								) : (parseFloat(bar?.data?.value?.toFixed(2)))
 							}
 								{' '}
 								{' '}

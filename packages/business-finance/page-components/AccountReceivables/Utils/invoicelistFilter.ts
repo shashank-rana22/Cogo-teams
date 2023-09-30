@@ -3,13 +3,13 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const geo = getGeoConstants();
 
-const userIds = [
+const USER_IDS = [
 	GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
 	GLOBAL_CONSTANTS.uuid.hk_user_id,
 	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id];
 
 export const invoiceFilter = ({ profile = {} }) => {
-	const selectedOption = userIds.includes(profile?.user?.id)
+	const selectedOption = USER_IDS.includes(profile?.user?.id)
 		? geo.options.invoice_status
 		: geo.options.invoice_status_new;
 	return [

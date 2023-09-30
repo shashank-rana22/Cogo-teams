@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
 
-const userIds = [
+const USER_IDS = [
 	GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
 	GLOBAL_CONSTANTS.uuid.hk_user_id,
 	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id];
@@ -156,7 +156,7 @@ function InvoiceTable({
 						/>
 					</div>
 					<div className={styles.filter_container}>
-						{(userIds.includes(profile?.user?.id)) ? (
+						{(USER_IDS.includes(profile?.user?.id)) ? (
 							<div
 								className={styles.send_report}
 								onClick={() => {
