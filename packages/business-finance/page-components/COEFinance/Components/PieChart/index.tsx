@@ -1,14 +1,22 @@
 import { ResponsivePie } from '@cogoport/charts/pie/index';
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, SingleDateRange } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function MyResponsivePie({ data = [] }) {
+function MyResponsivePie({
+	data = [],
+	title = '',
+	subActiveTabReject = '',
+	setRemarkDate = () => {},
+	remarkDate = undefined,
+	handlePieChartOnClick = () => {},
+}) {
 	return (
 		<>
 			<div className={styles.invoice}>
-				Rejection Statistics
+				{title}
 				<Tooltip
 					content={(
 						<div className={styles.tooltip_text}>
@@ -21,17 +29,42 @@ function MyResponsivePie({ data = [] }) {
 						<IcMInfo />
 					</div>
 				</Tooltip>
+				{(subActiveTabReject === 'coe_rejected' || subActiveTabReject === 'coe_on_hold')
+					? (
+						<div style={{ marginLeft: '20px' }}>
+							<SingleDateRange
+								dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
+								name="date"
+								onChange={setRemarkDate}
+								value={remarkDate}
+								isPreviousDaysAllowed
+								maxDate={new Date()}
+								placeholder="Enter Date Range"
+							/>
+						</div>
+					) : null}
 			</div>
 
 			<div className={styles.border} />
 
 			<ResponsivePie
 				data={data}
-				margin={{ top: 40, right: 10, bottom: 80, left: 300 }}
+				onClick={handlePieChartOnClick}
+				margin={{ top: 20, right: 10, bottom: 80, left: 300 }}
 				startAngle={-180}
 				activeOuterRadiusOffset={8}
 				borderWidth={1}
-				colors={['hsl(186, 26%, 55%)', 'hsl(186, 44%, 68%)', 'hsl(186, 44%, 77%)', 'hsl(186, 45%, 87%)']}
+				colors={
+					[
+						'#6ea4aa',
+						'#89cad1',
+						'#abd9de',
+						'#cfeaed',
+						'#5f8b96',
+						'#6b9387',
+						'#1e4246',
+						'#878e95']
+					}
 				borderColor={{
 					from      : 'color',
 					modifiers : [
@@ -41,6 +74,7 @@ function MyResponsivePie({ data = [] }) {
 						],
 					],
 				}}
+				arcLabel={(value) => `${value?.value || 0}%`}
 				sortByValue
 				arcLinkLabelsSkipAngle={10}
 				arcLinkLabelsTextColor="#ffff"
@@ -85,7 +119,7 @@ function MyResponsivePie({ data = [] }) {
 						translateY    : 20,
 						itemsSpacing  : 0,
 						itemWidth     : 100,
-						itemHeight    : 30,
+						itemHeight    : 25,
 						itemTextColor : '#999',
 						itemDirection : 'left-to-right',
 						itemOpacity   : 1,

@@ -29,6 +29,7 @@ import governance_manager from './governance-manager-apis';
 import HRMS from './hrms-apis';
 import igm_desk from './igm-desk-apis';
 import igm_shipment from './igm-shipment-apis';
+import ihls from './ihls-apis';
 import ingestion from './ingestion-apis';
 import cargo_insurance from './insurance-apis';
 import kam_desk from './kam-desk-apis';
@@ -175,6 +176,7 @@ const apis = {
 	supply_allocation,
 	centralised_customer_service,
 	...authApis,
+	...ihls,
 	ssr,
 	service_discovery,
 };

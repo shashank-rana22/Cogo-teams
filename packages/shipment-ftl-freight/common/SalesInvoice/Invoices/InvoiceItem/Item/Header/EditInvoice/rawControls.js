@@ -5,15 +5,14 @@ import { startCase, isEmpty } from '@cogoport/utils';
 const PRICE_GREATER_THAN = 0;
 const MIN_ALIAS_LENGTH = 3;
 
-const rawControls = (
+const rawControls = ({
 	handleChange,
 	charge,
 	info,
-	isFclFreight,
 	shipment_data,
 	index,
 	TRADE_MAPPING = {},
-) => ({
+}) => ({
 	type         : 'edit_service_charges',
 	name         : `${charge?.service_id}:${index}`,
 	service_name : charge?.service_type,
@@ -47,9 +46,7 @@ const rawControls = (
 			span        : 2,
 			handleChange,
 			placeholder : 'select line item',
-			disabled:
-				!isFclFreight,
-			rules: { required: 'Required' },
+			rules       : { required: 'Required' },
 		},
 		{
 
@@ -65,8 +62,7 @@ const rawControls = (
 			rules       : {
 				validate: (v) => v?.length >= MIN_ALIAS_LENGTH || isEmpty(v) || 'Characters should be >= 3',
 			},
-			disabled : !isFclFreight,
-			span     : 2,
+			span: 2,
 		},
 		{
 			label   : 'Unit',
@@ -84,8 +80,7 @@ const rawControls = (
 			placeholder    : 'Select Currency',
 			rules          : { required: 'currency is required' },
 			span           : 1.5,
-			disabled:
-				!isFclFreight,
+
 		},
 		{
 			label       : 'Price',
@@ -97,7 +92,6 @@ const rawControls = (
 				required : 'Price is Required',
 				validate : (v) => v > PRICE_GREATER_THAN || 'Price must be greater than 0',
 			},
-			disabled: !isFclFreight,
 		},
 		{
 			label       : 'Quantity',
@@ -106,8 +100,6 @@ const rawControls = (
 			placeholder : 'enter quantity',
 			rules       : { required: 'Required', min: 1 },
 			span        : 1,
-			disabled:
-				!isFclFreight,
 		},
 		{
 			label  : 'Amount (Tax Excl.)',

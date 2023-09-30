@@ -26,6 +26,10 @@
 	:last-child {
 		border-bottom: none;
 	}
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .list_item_styles {

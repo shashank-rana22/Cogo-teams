@@ -337,12 +337,6 @@ export const FILTER_KEYS_MAPPING = {
 	closed     : { Statuses: 'closed,overdue' },
 };
 
-export const PRIORITY_MAPPING = {
-	medium : '#F68B21',
-	high   : '#EE3425',
-	low    : '#FCDC00',
-};
-
 export const ICON_MAPPING = {
 	incoming : GLOBAL_CONSTANTS.image_url.incoming_green_svg,
 	outgoing : GLOBAL_CONSTANTS.image_url.outgoing_orange_svg,
@@ -415,16 +409,16 @@ export const STATUS_LABEL_MAPPING = {
 
 export const TABS_MAPPING = [
 	{
-		title : 'ALL',
-		key   : 'all',
-	},
-	{
 		title : 'OPEN',
 		key   : 'open',
 	},
 	{
 		title : 'CLOSED',
 		key   : 'closed',
+	},
+	{
+		title : 'ALL',
+		key   : 'all',
 	},
 ];
 

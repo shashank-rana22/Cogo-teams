@@ -1,5 +1,8 @@
-import { Tooltip } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { Tooltip, Button, Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMCopy } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
+import { startCase, copyToClipboard } from '@cogoport/utils';
 import React from 'react';
 
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
@@ -14,6 +17,7 @@ interface ItemProps {
 	billNumber:string,
 	isProforma:boolean,
 	jobNumber:string,
+	shipmentId:string
 }
 interface Props {
 	itemData:ItemProps;
@@ -23,6 +27,8 @@ interface Props {
 		label :string
 	}
 }
+
+const { SHIPMENT_ROUTE_MAPPING } = GLOBAL_CONSTANTS;
 
 const MAX_LEN_FOR_INVOICE_TEXT = 11;
 const MAX_LEN_FOR_SID_TEXT = 10;
@@ -35,13 +41,30 @@ function FieldPair({
 		billNumber      : '',
 		isProforma      : false,
 		jobNumber       : '',
+		shipmentId      : '',
 	}, field = {
 		topKey    : {},
 		bottomKey : {},
 		label     : '',
 	},
 }:Props) {
-	const {	billType = '', billNumber = '', isProforma, billDocumentUrl, jobNumber = '', serviceType } = itemData;
+	const router = useRouter();
+	const {
+		billType = '',
+		billNumber = '',
+		isProforma, billDocumentUrl, jobNumber = '', serviceType = '', shipmentId = '',
+	} = itemData;
+
+	const handleOnClick = () => {
+		if (shipmentId) {
+			router.push(`/booking/${SHIPMENT_ROUTE_MAPPING[serviceType]}/${shipmentId}`);
+		}
+	};
+
+	const handleCopy = (val) => {
+		copyToClipboard(val)
+			.then(Toast.info('Copied Successfully !!'));
+	};
 
 	return (
 		<div>
@@ -69,9 +92,18 @@ function FieldPair({
 				</div>
 			)}
 			{field?.label === 'SID' && (
-				<div>
+				<div
+					className={styled.sid_container}
+				>
 					<text className={styled.sid}>
-						{showOverflowingNumber(jobNumber, MAX_LEN_FOR_SID_TEXT)}
+						<IcMCopy
+							onClick={() => handleCopy(jobNumber)}
+							className={styled.copy_icon}
+						/>
+						<Button themeType="linkUi" onClick={handleOnClick}>
+							{showOverflowingNumber(jobNumber, MAX_LEN_FOR_SID_TEXT)}
+
+						</Button>
 					</text>
 
 					<div className={styled.service_type}>{startCase(serviceType)}</div>

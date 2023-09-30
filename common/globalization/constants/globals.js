@@ -120,10 +120,10 @@ const GLOBAL_CONSTANTS = {
 		+ 'cogo-assured-rate-sheet-sample.csv',
 	},
 	upload_utr_sample_file: {
-		normal_payment: 'https://cogoport-testing.sgp1.digitaloceanspaces.com/06679b4fca57a312ee8f3fe0ded72246/'
-		+ 'UTRuploadSampleFile.xlsx',
-		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/0af71f459488aae59e95d4e38a4271ff/'
-		+ 'UTRuploadSampleFileForAdvancePayment.xlsx',
+		normal_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/94addc4adc90598c259ccb9042021efb/'
+		+ 'UTRuploadSampleFileWithAccNumber.xlsx',
+		advance_payment: 'https://cogoport-production.sgp1.digitaloceanspaces.com/8ada7aec57e6c3b0a068efed43814e1f/'
+		+ 'UTRuploadSampleFileForAdvancePaymentNew.xlsx',
 	},
 
 	cogoport_agent_email_id: 'agentid@cogoport.com',
@@ -471,8 +471,8 @@ const GLOBAL_CONSTANTS = {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
 		+ '45773ab4048f606ce6ef06fa1d083352/'
 		+ 'Book%201%20-%20Copy.xlsx',
-		bulk_jv_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
-		+ 'ae3740f2c19b22161257c6e416cd2f5a/JVUploadSampleExcel.xlsx',
+		bulk_jv_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/81afabc7ffea4be1540099612af2ffd1/'
+		+ 'JVBulkUploadSampleExcel.xlsx',
 	},
 
 	urls: {
@@ -825,7 +825,7 @@ const GLOBAL_CONSTANTS = {
 		cogoport_support         : 'support@cogoport.com',
 	},
 	mobile_number: {
-		cogoone_sales_contact_no: '+91-8069182176',
+		cogoone_sales_contact_no: '+91-8069195810',
 	},
 	websites: {
 		cogoport : 'www.cogoport.com',
