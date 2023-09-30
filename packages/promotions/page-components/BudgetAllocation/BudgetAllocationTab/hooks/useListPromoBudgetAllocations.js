@@ -2,10 +2,9 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-const useListPromoBudgetAllocation = ({ activeTab = 'active_budget', role = '' }) => {
+const useListPromoBudgetAllocation = ({ filters, setFilters }) => {
 	const [List, setList] = useState([]);
 	const [paginationData, setPaginationData] = useState({});
-	const [pagination, setPagination] = useState({ page: 1 });
 
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -13,10 +12,10 @@ const useListPromoBudgetAllocation = ({ activeTab = 'active_budget', role = '' }
 			method : 'GET',
 			params : {
 				role_data_required : true,
-				page               : pagination?.page,
+				page               : filters.page,
 				filters            : {
-					status  : activeTab === 'active_budget' ? 'active' : 'deactivated',
-					role_id : role || undefined,
+					status  : filters.activeTab === 'active_budget' ? 'active' : 'deactivated',
+					role_id : filters.role || undefined,
 				},
 			},
 		},
@@ -35,23 +34,22 @@ const useListPromoBudgetAllocation = ({ activeTab = 'active_budget', role = '' }
 	}, [trigger]);
 
 	const refetch = () => {
-		setPagination({ page: 1 });
+		setFilters((state) => ({ ...state, page: 1 }));
 		ListPromoBudget();
 	};
 
 	useEffect(() => {
 		ListPromoBudget();
-	}, [pagination.page, activeTab, role, ListPromoBudget]);
+	}, [filters.page, filters.activeTab, filters.role, ListPromoBudget]);
 
 	useEffect(() => {
-		setPagination((p) => ({ ...p, page: 1 }));
-	}, [role]);
+		setFilters((state) => ({ ...state, page: 1 }));
+	}, [filters.role, setFilters]);
 
 	return {
 		loading,
 		promoBudgetList: List,
 		paginationData,
-		setPagination,
 		refetch,
 	};
 };

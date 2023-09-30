@@ -21,8 +21,7 @@ function BudgetAllocationTab() {
 	const [showAllocationCard, setShowAllocationCard] = useState(false);
 	const [showViewModal, setShowViewModal] = useState(false);
 	const [selectedDetails, setSelectedDetails] = useState({});
-	const [activeTab, setActiveTab] = useState('active_budget');
-	const [role, setRole] = useState('');
+	const [filters, setFilters] = useState({ activeTab: 'active_budget', role: '', page: 1 });
 
 	const {
 		control: roleControl,
@@ -35,31 +34,28 @@ function BudgetAllocationTab() {
 		loading,
 		promoBudgetList,
 		paginationData,
-		setPagination,
 		refetch,
-	} = useListPromoBudgetAllocation({ activeTab, role });
+	} = useListPromoBudgetAllocation({ filters, setFilters });
 
 	const budgetAllocateProps = {
 		setSelectedDetails,
 		setShowViewModal,
 		promoBudgetList,
 		paginationData,
-		setPagination,
-		activeTab,
+		filters,
+		setFilters,
 		loading,
 		refetch,
-		setRole,
-		role,
 	};
 
 	useEffect(() => {
-		setRole('');
 		roleSetValue('role', '');
-	}, [activeTab, roleSetValue]);
+		setFilters((state) => ({ ...state, role: '' }));
+	}, [filters.activeTab, roleSetValue]);
 
 	useEffect(() => {
 		const subscription = roleWatch((val) => {
-			setRole(val.role);
+			setFilters((state) => ({ ...state, role: val.role }));
 		});
 		return () => subscription.unsubscribe();
 	}, [roleWatch]);
@@ -83,9 +79,8 @@ function BudgetAllocationTab() {
 					</div>
 				) : null}
 				<Tabs
-					activeTab={activeTab}
-					onChange={setActiveTab}
-					className="horizontal four"
+					activeTab={filters.activeTab}
+					onChange={(val) => (setFilters((state) => ({ ...state, activeTab: val })))}
 					themeType="tertiary"
 				>
 					{TABS.map((item) => (
@@ -93,7 +88,6 @@ function BudgetAllocationTab() {
 							key={item.key}
 							name={item.name}
 							title={item.title}
-							className="horizontal four"
 						>
 							<BudgetAllocate {...budgetAllocateProps} />
 						</TabPanel>

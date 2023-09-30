@@ -2,21 +2,19 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-const useGetPromoAllocationDetail = ({ selectedDetails = {} }) => {
+const useGetPromoAllocationDetail = ({ selectedDetails = {}, filters, setFilters }) => {
 	const [List, setList] = useState([]);
-	const [filterValue, setFilterValue] = useState('');
 	const [paginationData, setPaginationData] = useState({});
-	const [pagination, setPagination] = useState({ page: 1 });
 
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/get_promotion_budget_allocation_detail',
 			method : 'GET',
 			params : {
-				page    : pagination?.page,
+				page    : filters?.page,
 				filters : {
 					role_id  : selectedDetails?.role_id,
-					agent_id : filterValue || undefined,
+					agent_id : filters.agent_id || undefined,
 				},
 			},
 		},
@@ -27,8 +25,6 @@ const useGetPromoAllocationDetail = ({ selectedDetails = {} }) => {
 		try {
 			const { data } = await trigger();
 			const { list = [], ...paginationdata } = data;
-			console.log('%%%%%%%%%%%%%%%%%');
-			console.log(list);
 			setList(list);
 			setPaginationData(paginationdata);
 		} catch (error) {
@@ -38,19 +34,17 @@ const useGetPromoAllocationDetail = ({ selectedDetails = {} }) => {
 
 	useEffect(() => {
 		getAllocationDetail();
-	}, [pagination.page, filterValue, getAllocationDetail]);
+	}, [filters.page, filters.agent_id, getAllocationDetail]);
 
 	const refetch = () => {
-		setPagination({ page: 1 });
+		setFilters({ ...filters, page: 1 });
 		getAllocationDetail();
 	};
 	return {
 		loading,
 		promoAllocationList: List,
 		paginationData,
-		setPagination,
 		refetch,
-		setFilterValue,
 	};
 };
 

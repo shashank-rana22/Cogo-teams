@@ -10,7 +10,8 @@ function BudgetAllocate({
 	setShowViewModal = () => {},
 	promoBudgetList = [],
 	paginationData = {},
-	setPagination = () => {},
+	filters = {},
+	setFilters = () => {},
 	loading = true,
 	refetch = () => {},
 }) {
@@ -28,7 +29,7 @@ function BudgetAllocate({
 				}
 				loading={loading}
 			/>
-			<TablePagination setFilters={setPagination} data={paginationData} />
+			<TablePagination filters={filters} setFilters={setFilters} data={paginationData} />
 		</div>
 	);
 }
