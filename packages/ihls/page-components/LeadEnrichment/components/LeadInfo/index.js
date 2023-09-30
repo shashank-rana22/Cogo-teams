@@ -104,23 +104,27 @@ function LeadInfo({
 				/>
 			</div>
 
-			<Modal style={{ width: '70%' }} show={allocationLeadId} onClose={onClose} placement="center">
-				<Modal.Header title={(
-					<>
-						<IcMEyeopen className={styles.eye_icon} />
-						<span>
-							View Objectives
-						</span>
-					</>
-				)}
-				/>
-				<Modal.Body className={styles.modal_body}>
-					<ObjectiveInfo allocationLeadId={allocationLeadId} />
-				</Modal.Body>
-				<Modal.Footer>
-					<Button onClick={onClose}>Close</Button>
-				</Modal.Footer>
-			</Modal>
+			{allocationLeadId
+
+				? (
+					<Modal style={{ width: '70%' }} show={allocationLeadId} onClose={onClose} placement="center">
+						<Modal.Header title={(
+							<>
+								<IcMEyeopen className={styles.eye_icon} />
+								<span>
+									View Objectives
+								</span>
+							</>
+						)}
+						/>
+						<Modal.Body className={styles.modal_body}>
+							<ObjectiveInfo allocationLeadId={allocationLeadId} />
+						</Modal.Body>
+						<Modal.Footer>
+							<Button onClick={onClose}>Close</Button>
+						</Modal.Footer>
+					</Modal>
+				) : null}
 			{leadId
 				? (
 					<Modal style={{ width: '60%' }} show={leadId} onClose={onCloseLogs} placement="center">
@@ -142,13 +146,16 @@ function LeadInfo({
 					</Modal>
 				) : null}
 
-			<EnrichmentRequestModal
-				checkedRowsId={checkedRowsId}
-				params={params}
-				showRequest={showRequest}
-				setShowRequest={setShowRequest}
-				lead_count={paginationData.count}
-			/>
+			{showRequest
+				? (
+					<EnrichmentRequestModal
+						checkedRowsId={checkedRowsId}
+						params={params}
+						showRequest={showRequest}
+						setShowRequest={setShowRequest}
+						lead_count={paginationData.count}
+					/>
+				) : null }
 
 		</div>
 	);
