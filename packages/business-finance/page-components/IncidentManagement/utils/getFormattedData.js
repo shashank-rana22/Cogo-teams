@@ -7,11 +7,11 @@ const getFormattedData = (data) => {
 	const sellQuotationData = sellQuotation.serviceCharges
 		?.map((item) => ({ ...item, serviceType: item.serviceType || 'Platform Fees' }));
 
-	const sellSevices = sellQuotation.serviceCharges?.map((item) => (item.serviceType || 'Platform Fees')) || [];
-	const buySevices = buyQuotation.serviceCharges?.map((item) => (item.serviceType || 'Platform Fees')) || [];
+	const sellSevices = sellQuotation?.serviceCharges?.map((item) => (item.serviceType || 'Platform Fees')) || [];
+	const buySevices = buyQuotation?.serviceCharges?.map((item) => (item.serviceType || 'Platform Fees')) || [];
 	const commonServices = sellSevices.filter((value) => buySevices?.includes(value));
 
-	const buyQuotationData = buyQuotation.serviceCharges
+	const buyQuotationData = buyQuotation?.serviceCharges
 		?.map((item) => ({ ...item, serviceType: item.serviceType || '' }));
 
 	const uniqueServices = [...new Set(commonServices)];

@@ -1,23 +1,17 @@
-interface ChargeInterface {
-	serviceType?:string
-}
-interface CommonInterface {
-	serviceCharges?:Array<ChargeInterface>
-}
-interface FormattedInterface {
-	sell_quotation?:CommonInterface
-	buy_quotation?:CommonInterface
-}
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const getFormattedData = (data:FormattedInterface) => {
+const SPLICE_FACTOR = 1;
+
+const getFormattedData = (data) => {
 	const { sell_quotation:sellQuotation = {}, buy_quotation:buyQuotation = {} } = data || {};
-	const sellQuotationData = sellQuotation.serviceCharges
+	const sellQuotationData = sellQuotation?.serviceCharges
 		?.map((item) => ({ ...item, serviceType: item.serviceType || 'Platform Fees' }));
-	const sellSevices = sellQuotation.serviceCharges?.map((item) => (item.serviceType || 'Platform Fees')) || [];
-	const buySevices = buyQuotation.serviceCharges?.map((item) => (item.serviceType || 'Platform Fees')) || [];
+
+	const sellSevices = sellQuotation?.serviceCharges?.map((item) => (item.serviceType || 'Platform Fees')) || [];
+	const buySevices = buyQuotation?.serviceCharges?.map((item) => (item.serviceType || 'Platform Fees')) || [];
 	const commonServices = sellSevices.filter((value) => buySevices?.includes(value));
 
-	const buyQuotationData = buyQuotation.serviceCharges
+	const buyQuotationData = buyQuotation?.serviceCharges
 		?.map((item) => ({ ...item, serviceType: item.serviceType || '' }));
 
 	const uniqueServices = [...new Set(commonServices)];
@@ -45,11 +39,11 @@ const getFormattedData = (data:FormattedInterface) => {
 };
 export default getFormattedData;
 
-export const toTitleCase = (str:string) => {
+export const toTitleCase = (str) => {
 	const titleCase = str
 		.toLowerCase()
 		.split(' ')
-		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.map((word) => word.charAt(GLOBAL_CONSTANTS.zeroth_index).toUpperCase() + word.slice(SPLICE_FACTOR))
 		.join(' ');
 
 	return titleCase;
