@@ -1,8 +1,6 @@
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
-export const formatDate = (
-	date,
-	dateformat,
-	options,
-	utcInput,
-) => format(date, dateformat, options, utcInput);
+export const getFormatDate = (date) => formatDate(
+	{ date, dateformat: GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'], formatType: 'date' },
+);
