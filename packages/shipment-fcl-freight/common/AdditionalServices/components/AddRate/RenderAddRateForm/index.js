@@ -1,7 +1,10 @@
 import { SelectController, InputController, AsyncSelectController } from '@cogoport/forms';
+import UNIT_VALUE_MAPPING from '@cogoport/ocean-modules/constants/UNIT_VALUE_MAPPING';
 
 import controls from './controls';
 import styles from './styles.module.css';
+
+const PREFILL_QUANTITY_ONE = 1;
 
 const controlTypeMapping = {
 	select      : SelectController,
@@ -29,8 +32,20 @@ function RenderAddRateForm({
 	errors = {},
 	serviceData = {},
 	source = '',
+	watch = () => {},
+	setValue = () => {},
 }) {
 	const { formControl = [] } = controls({ serviceData, source });
+
+	let { services = [] } = serviceData || {};
+	const { service_type = '' } = serviceData || {};
+	services = services?.find((service) => service?.service_type === service_type);
+
+	const selectedUnit = watch('unit');
+	const prefillValue = UNIT_VALUE_MAPPING?.[selectedUnit];
+	const prefillQuantity = selectedUnit === 'per_shipment' ? PREFILL_QUANTITY_ONE : services?.[prefillValue];
+
+	setValue('quantity', prefillQuantity);
 
 	return (
 		<form className={styles.form_container}>
