@@ -149,7 +149,7 @@ const getAdditionalControls = ({ afterParameterOptions }) => ([
 	{
 		name        : 'after_duration_threshold',
 		type        : 'number',
-		label       : <div>Duration Threshold</div>,
+		label       : 'Duration Threshold',
 		placeholder : 'Type',
 		style       : {
 			parent_style: {

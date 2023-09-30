@@ -4,12 +4,15 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import LoadingState from '../../../../../../common/LoadingState';
+import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../../../constants/leaderboard-reporttype-constants';
 
 import getListColumnMapping from './get-list-column-mapping';
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 
 const DOTS = 3;
+
+const { ADMIN_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 
 function List(props) {
 	const {
@@ -19,7 +22,7 @@ function List(props) {
 
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping({ currLevel });
+	const LIST_COLUMN_MAPPING = getListColumnMapping();
 
 	if (listLoading) {
 		return <LoadingState />;
@@ -42,6 +45,8 @@ function List(props) {
 			<div className={styles.list_header_container}>
 				{LIST_COLUMN_MAPPING.map((item) => {
 					const { key, Header, flex } = item;
+
+					if (key === 'report_type' && currLevel?.report_type === ADMIN_REPORT) return null;
 
 					if (!Header) return <div />;
 

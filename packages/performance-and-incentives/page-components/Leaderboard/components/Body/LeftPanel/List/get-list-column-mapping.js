@@ -2,16 +2,13 @@ import { Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../../../constants/leaderboard-reporttype-constants';
 import TAG_COLOR_MAPPING from '../../../../../../constants/tag-color-mapping';
 
 import styles from './styles.module.css';
 
 const ZERO_RANK = 0;
 
-const { ADMIN_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
-
-const getListColumnMapping = ({ currLevel }) => {
+const getListColumnMapping = () => {
 	const LIST_COLUMN_MAPPING = [
 		{
 			id   : 'rank',
@@ -75,30 +72,27 @@ const getListColumnMapping = ({ currLevel }) => {
 				</div>
 			)),
 		},
+		{
+			id   : 'report_type',
+			key  : 'report_type',
+			flex : 1.25,
+			Header:
+				(
+					<div
+						className={styles.top_heading}
+					>
+						Report Type
+					</div>
+				),
 
-		...(currLevel.report_type !== ADMIN_REPORT ? [
-			{
-				id   : 'report_type',
-				key  : 'report_type',
-				flex : 1.25,
-				Header:
-					(
-						<div
-							className={styles.top_heading}
-						>
-							Report Type
-						</div>
-					),
+			accessor: ({ report_type = '' }) => {
+				if (isEmpty(report_type)) return null;
 
-				accessor: ({ report_type = '' }) => {
-					if (isEmpty(report_type)) return null;
+				const [report] = report_type.split('_');
 
-					const [report] = report_type.split('_');
-
-					return <Pill size="sm" color={TAG_COLOR_MAPPING[report_type]}>{report.toUpperCase()}</Pill>;
-				},
+				return <Pill size="sm" color={TAG_COLOR_MAPPING[report_type]}>{report.toUpperCase()}</Pill>;
 			},
-		] : []),
+		},
 	];
 
 	return LIST_COLUMN_MAPPING;

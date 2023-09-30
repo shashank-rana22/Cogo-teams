@@ -80,18 +80,11 @@ function ProgreeBar() {
 
 				<div className={styles.progress_bar}>
 					<Tooltip content={(
-						<>
-							{/* <p>
-								Realized till now:
-								{' '}
-								<b>1250</b>
-							</p> */}
-							<p>
-								Provisional till now:
-								{' '}
-								<b>{date_range_points_achieved}</b>
-							</p>
-						</>
+						<p>
+							Provisional till now:
+							{' '}
+							<b>{date_range_points_achieved}</b>
+						</p>
 					)}
 					>
 						<div

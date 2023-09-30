@@ -63,68 +63,78 @@ function AdditionalControlsModal({
 		<Modal size="xl" show onClose={handleClose} placement="center">
 			<Modal.Header title="Additional Controls" />
 
-			<Modal.Body key={loading}>
-				{fields.map((field, index) => (
-					<div key={field.id} className={styles.container}>
-						<div className={styles.controls_container}>
-							{controls.map((controlItem) => {
-								const { type, label, name, style, ...rest } = controlItem || {};
-								const Element = getFieldController(type);
+			<form onSubmit={handleSubmit(handleSave)}>
+				<Modal.Body key={loading}>
+					{fields.map((field, index) => (
+						<div key={field.id} className={styles.container}>
+							<div className={styles.controls_container}>
+								{controls.map((controlItem) => {
+									const { type, label, name, style, ...rest } = controlItem || {};
+									const Element = getFieldController(type);
 
-								if (!Element || (paramScoringType === 'absolute'
+									if (!Element || (paramScoringType === 'absolute'
                                     && ['fixed_percentage_value', 'variable_percentage_value'].includes(name))
                                     || (paramScoringType === 'percentage' && name === 'base_score')) return null;
 
-								return (
-									<div
-										className={styles.control_item}
-										key={name}
-										style={style?.parent_style}
-									>
-										<p className={styles.label}>{label}</p>
+									return (
+										<div
+											className={styles.control_item}
+											key={name}
+											style={style?.parent_style}
+										>
+											<p className={styles.label}>{label}</p>
 
-										<Element
-											control={control}
-											{...rest}
-											style={style?.child_style}
-											name={`additional_controls.${index}.${name}`}
-										/>
+											<Element
+												control={control}
+												{...rest}
+												style={style?.child_style}
+												name={`additional_controls.${index}.${name}`}
+											/>
 
-										{errors?.additional_controls?.[index]?.[name]
-											? (
-												<p className={styles.err_msg}>
-													Required
-												</p>
-											) : null}
-									</div>
-								);
-							})}
+											{errors?.additional_controls?.[index]?.[name]
+												? (
+													<p className={styles.err_msg}>
+														Required
+													</p>
+												) : null}
+										</div>
+									);
+								})}
+							</div>
+
+							<div
+								role="presentation"
+								className={styles.add_icon}
+								onClick={() => remove(index)}
+							>
+								<IcMDelete height={16} width={16} />
+							</div>
 						</div>
+					))}
 
-						<div
-							role="presentation"
-							className={styles.add_icon}
-							onClick={() => remove(index)}
-						>
-							<IcMDelete height={16} width={16} />
-						</div>
+					<div
+						role="presentation"
+						className={styles.add_icon}
+						onClick={() => append(CHILD_EMPTY_VALUES)}
+					>
+						<IcMPlusInCircle height={24} width={24} />
 					</div>
-				))}
 
-				<div
-					role="presentation"
-					className={styles.add_icon}
-					onClick={() => append(CHILD_EMPTY_VALUES)}
-				>
-					<IcMPlusInCircle height={24} width={24} />
-				</div>
+				</Modal.Body>
 
-			</Modal.Body>
+				<Modal.Footer>
+					<Button
+						type="button"
+						themeType="secondary"
+						onClick={handleClose}
+						style={{ marginRight: '6px' }}
+					>
+						Cancel
 
-			<Modal.Footer>
-				<Button themeType="secondary" onClick={handleClose} style={{ marginRight: '6px' }}>Cancel</Button>
-				<Button onClick={handleSubmit(handleSave)}>Save</Button>
-			</Modal.Footer>
+					</Button>
+					<Button type="submit">Save</Button>
+				</Modal.Footer>
+			</form>
 		</Modal>
 	);
 }

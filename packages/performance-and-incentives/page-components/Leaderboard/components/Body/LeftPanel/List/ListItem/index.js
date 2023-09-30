@@ -7,7 +7,7 @@ import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../../../../constants/le
 import styles from './styles.module.css';
 import useListItem from './useListItem';
 
-const { AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
+const { AGENT_REPORT, ADMIN_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 
 const getClassName = ({ isAllowed, listItem = {} }) => `${styles.list_row} 
 			${listItem.rank === GLOBAL_CONSTANTS.one ? styles.box_shadow : ''} 
@@ -47,6 +47,8 @@ function ListItem(props) {
 		>
 			{LIST_COLUMN_MAPPING.map((columnItem) => {
 				const { key, flex, accessor } = columnItem;
+
+				if (key === 'report_type' && currLevel?.report_type === ADMIN_REPORT) return null;
 
 				return (
 					<div

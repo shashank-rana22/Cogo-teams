@@ -53,7 +53,6 @@ function ActivationModal({
 		>
 
 			<Modal.Body>
-
 				<div className={styles.body}>
 
 					<h3>Select Activation Date for Config</h3>
@@ -72,12 +71,19 @@ function ActivationModal({
 					</div>
 
 				</div>
-
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button themeType="secondary" onClick={handleClose} style={{ marginRight: '6px' }}>Cancel</Button>
-				<Button onClick={handleActivate}>Activate</Button>
+				<Button
+					themeType="secondary"
+					type="button"
+					onClick={handleClose}
+					style={{ marginRight: '6px' }}
+				>
+					Cancel
+
+				</Button>
+				<Button type="button" onClick={handleActivate}>Activate</Button>
 			</Modal.Footer>
 		</Modal>
 	);
