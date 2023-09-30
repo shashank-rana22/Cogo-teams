@@ -33,10 +33,6 @@
 	width: 160px;
 	margin-right: 12px;
 
-	span {
-		display: none;
-	}
-
 	input {
 		height: 40px !important;
 	}

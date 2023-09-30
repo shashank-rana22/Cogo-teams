@@ -167,5 +167,13 @@ export const remainControls = ({ t = () => {}, isSettlementExecutive = false }:P
 			isClearable           : true,
 			className             : styles.date,
 		},
+		{
+			name      : 'isMyTaskOnly',
+			type      : 'toggle',
+			size      : 'sm',
+			onLabel   : t('incidentManagement:toggle_label'),
+			offLabel  : '',
+			className : styles.toggle,
+		},
 	];
 };

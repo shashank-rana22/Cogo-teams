@@ -13,15 +13,15 @@ import styles from './styles.module.css';
 
 const SIXTH_SPLICE_INDEX = 8;
 const FIRST_SPLICE_INDEX = 1;
-const OVERFLOW_NUMBER = 10;
+const OVERFLOW_NUMBER = 14;
 
 function getColumns({
-	setIsAscendingActive = () => {}, setFilters = () => {},
+	setIsAscendingActive = () => { }, setFilters = () => { },
 	isAscendingActive = '', t,
 	setDetailsModal = () => { },
 	activeTab = 'requested',
 }) {
-	const column = 		[
+	const column = [
 		{
 			Header   : t('incidentManagement:incident_id_header'),
 			accessor : 'incident_id',
@@ -54,7 +54,6 @@ function getColumns({
 						</div>
 					);
 				}
-
 				return list ? (
 					<Tooltip
 						interactive
@@ -73,27 +72,25 @@ function getColumns({
 						<Tooltip
 							interactive
 							content={
-									bankTradePartyName || tdsTradePartyName ? (
-										<div>
-											{(organization?.tradePartyType === 'SELF'
-												? organization?.businessName
-												: organization?.tradePartyName)
-												|| toTitleCase(
-													organization?.businessName || '-',
-												)}
-										</div>
-									)
-										: <BusinessName />
-								}
+								bankTradePartyName || tdsTradePartyName ? (
+									<div>
+										{(organization?.tradePartyType === 'SELF'
+											? organization?.businessName
+											: organization?.tradePartyName)
+											|| toTitleCase(
+												organization?.businessName || '-',
+											)}
+									</div>
+								)
+									: <BusinessName />
+							}
 						>
 							{bankTradePartyName || tdsTradePartyName ? (
 								<div className={styles.company_name}>
 									{(organization?.tradePartyType === 'SELF'
 										? organization?.businessName
 										: organization?.tradePartyName)
-											|| toTitleCase(
-												organization?.businessName || '-',
-											)}
+										|| toTitleCase(organization?.businessName || '-')}
 								</div>
 							) : (
 								<div className={styles.company_name}>
@@ -123,9 +120,8 @@ function getColumns({
 			id       : 'request_type',
 			Cell     : ({ row: { original } }) => {
 				const { type: requestType = '', data } = original || {};
-
-				const { creditNoteRequest } = data || {};
-
+				const { creditNoteRequest, jobOpenRequest } = data || {};
+				const { jobNumber } = jobOpenRequest || {};
 				const { revoked } = creditNoteRequest || {};
 				return (
 					<div className={styles.credit}>
@@ -140,18 +136,22 @@ function getColumns({
 						<span>
 							{typeof (revoked) === 'boolean' && (
 								<div>
-									{revoked
-										? (
-											<Pill size="md" color="#C4DC91">
-												{t('incidentManagement:fully_revoked')}
-											</Pill>
-										)
-										: (
-											<Pill size="md" color="#FEF199">
-												{ t('incidentManagement:partial_revoked')}
-											</Pill>
-										)}
+									{revoked ? (
+										<Pill size="md" color="#f8aea8">
+											{t('incidentManagement:fully_revoked')}
+										</Pill>
+									) : (
+										<Pill size="md" color="#FEF199">
+											{t('incidentManagement:partial_revoked')}
+										</Pill>
+									)}
 								</div>
+							)}
+							{requestType === 'JOB_OPEN' && (
+								<span>
+									SID-
+									{jobNumber || ''}
+								</span>
 							)}
 						</span>
 					</div>
@@ -197,7 +197,7 @@ function getColumns({
 							{createdAt ? formatDate({
 								date: createdAt,
 								dateFormat:
-								GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 								formatType: 'date',
 							}) : '_'}
 						</div>
@@ -229,7 +229,7 @@ function getColumns({
 						<div className={styles.remark}>
 							{type === 'JOB_OPEN'
 								? financeRemark || data?.jobOpenRequest?.remark || remark
-								: financeRemark || remark }
+								: financeRemark || remark}
 						</div>
 					</Tooltip>
 				);
@@ -240,7 +240,6 @@ function getColumns({
 			accessor : ({ currentLevel = 0 }) => (
 				<span className={styles.status_level}>
 					{t('incidentManagement:levels_label')}
-					{' '}
 					{currentLevel}
 					{t('incidentManagement:_pending_status')}
 				</span>
