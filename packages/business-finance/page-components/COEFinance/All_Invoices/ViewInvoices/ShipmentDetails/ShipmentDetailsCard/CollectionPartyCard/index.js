@@ -22,7 +22,7 @@ function CollectionPartyCard({
 	handleClickReject = () => {},
 	handleClick = () => {},
 	status = '',
-	docContent = '',
+	docContent = {},
 	setCheckItem = (prop) => (prop),
 	onAccept = () => {},
 	onTabClick = () => {},
@@ -148,7 +148,11 @@ function CollectionPartyCard({
 								{' '}
 								<span
 									style={{
-										color: getDetailValueColor({ value: valueText, docContent }),
+										color: getDetailValueColor({
+											detectKey : item?.detectKey,
+											value     : valueText,
+											docContent,
+										}),
 									}}
 								>
 									{valueText}

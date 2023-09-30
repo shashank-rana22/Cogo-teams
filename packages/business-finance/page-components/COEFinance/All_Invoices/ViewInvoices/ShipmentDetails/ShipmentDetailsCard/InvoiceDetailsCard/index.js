@@ -30,7 +30,7 @@ function InvoiceDetailsCard({
 	billAdditionalObject = {},
 	advancedPaymentObj = {},
 	setShowHighAdvancedModal = (prop) => prop,
-	docContent = '',
+	docContent = {},
 	setCheckItem = (prop) => (prop),
 	onAccept = () => {},
 	onTabClick = () => {},
@@ -165,7 +165,13 @@ function InvoiceDetailsCard({
 						Invoice Number -
 						{' '}
 						<span
-							style={{ color: getDetailValueColor({ value: billNumber, docContent }) }}
+							style={{
+								color: getDetailValueColor({
+									detectKey : 'billing_number',
+									value     : billNumber,
+									docContent,
+								}),
+							}}
 						>
 							{billNumber}
 						</span>
@@ -174,7 +180,13 @@ function InvoiceDetailsCard({
 						Invoice Type -
 						{' '}
 						<span
-							style={{ color: getDetailValueColor({ value: invoiceType, docContent }) }}
+							style={{
+								color: getDetailValueColor({
+									detectKey : 'invoice_type',
+									value     : invoiceType,
+									docContent,
+								}),
+							}}
 						>
 							{invoiceType}
 
@@ -184,7 +196,13 @@ function InvoiceDetailsCard({
 						Supplier name -
 						{' '}
 						<span
-							style={{ color: getDetailValueColor({ value: organizationName, docContent }) }}
+							style={{
+								color: getDetailValueColor({
+									detectKey : 'service_provider',
+									value     : organizationName,
+									docContent,
+								}),
+							}}
 						>
 							{organizationName}
 
