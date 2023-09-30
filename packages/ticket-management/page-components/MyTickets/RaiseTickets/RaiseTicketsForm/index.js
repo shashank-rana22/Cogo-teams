@@ -20,8 +20,14 @@ const CONTROLS_MAPPING = {
 };
 
 function RaiseTicketsForm({
-	watch = () => {}, control = {}, formState = {}, additionalInfo = [], resetField = () => {},
-	setAdditionalInfo = () => {}, setValue = () => {},
+	watch = () => {},
+	control = {},
+	formState = {},
+	additionalInfo = [],
+	resetField = () => {},
+	setAdditionalInfo = () => {},
+	setValue = () => {},
+	setDefaultTypeId = () => {},
 }) {
 	const { errors = {} } = formState || {};
 
@@ -64,6 +70,7 @@ function RaiseTicketsForm({
 		setAdditionalInfo,
 		watchRequestType,
 		watchSubCategory,
+		setDefaultTypeId,
 		watchTradeType,
 		watchCategory,
 		watchService,
