@@ -72,14 +72,18 @@ function CategoryForm({
 									value={data?.offers_discounts === 'active'}
 									control={control}
 								/>
-								Receive offers and discounts.
+								<div className={styles.description}>
+									Receive offers and discounts.
+								</div>
 								<CheckboxController
 									name="subscriber_special"
 									label="Subscriber Special"
 									value={data?.subscriber_special === 'active'}
 									control={control}
 								/>
-								Receive exclusive subscriber communications.
+								<div className={styles.description}>
+									Receive exclusive subscriber communications.
+								</div>
 							</Card>
 							<Card title="Product and Services">
 								<CheckboxController
@@ -88,14 +92,18 @@ function CategoryForm({
 									value={data?.new_product_service_launches_and_updates === 'active'}
 									control={control}
 								/>
-								Get information on latest product launches and updates.
+								<div className={styles.description}>
+									Get information on latest product launches and updates.
+								</div>
 								<CheckboxController
 									name="product_service_explainers"
 									label="Product/service Explainers"
 									value={data?.product_service_explainers === 'active'}
 									control={control}
 								/>
-								Receive detailed product explanations.
+								<div className={styles.description}>
+									Receive detailed product explanations.
+								</div>
 							</Card>
 							<Card title="Subscriptions">
 								<CheckboxController
@@ -104,14 +112,18 @@ function CategoryForm({
 									value={data?.newsletter === 'active'}
 									control={control}
 								/>
-								Get latest newsletters and services.
+								<div className={styles.description}>
+									Get latest newsletters and services.
+								</div>
 								<CheckboxController
 									name="general_news"
 									label="General News"
 									value={data?.general_news === 'active'}
 									control={control}
 								/>
-								Receive relevant news and information.
+								<div className={styles.description}>
+									Receive relevant news and information.
+								</div>
 							</Card>
 						</div>
 						<Button

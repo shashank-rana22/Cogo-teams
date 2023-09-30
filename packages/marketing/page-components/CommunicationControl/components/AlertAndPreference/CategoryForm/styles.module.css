@@ -25,3 +25,15 @@
 .btn {
 	font-weight: 700;
 }
+
+.categories {
+	:global {
+		.ui_checkbox_label {
+			font-weight: 700;
+		}
+	}
+}
+
+.description {
+	margin-left: 38px;
+}
