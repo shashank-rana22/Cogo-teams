@@ -7,7 +7,7 @@ function useUpdateCogooneGroup({ activeTab = {}, setAddMembers = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_cogoone_groups',
 		method : 'post',
-	}, { manual: true });
+	}, { manual: true, autoCancel: false });
 
 	const { groupData = {} } = activeTab || {};
 
