@@ -8,7 +8,7 @@ import getLeftPanelHeading from '../../../../helpers/getLeftPanelHeading';
 
 import styles from './styles.module.css';
 
-const { AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
+const { MANAGER_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 const { ADMIN, OWNER } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 const MIN_LENGTH = 1;
@@ -67,7 +67,7 @@ function Header(props) {
 
 				{(!currLevel.isExpanded && (
 					(viewType === ADMIN || (viewType === OWNER && levelStack?.length === MIN_LENGTH))
-					&& (currLevel.report_type !== AGENT_REPORT))) && (
+					&& (![MANAGER_REPORT, AGENT_REPORT].includes(currLevel.report_type)))) && (
 						<Button type="button" size="md" themeType="linkUi" onClick={handleExpandAll}>
 							Expand All
 							{' '}
