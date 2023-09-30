@@ -14,8 +14,8 @@ const { START_PAGE, MOBILE_SCREEN_SIZE } = CONSTANTS;
 const TIMEOUT_TIME = 1000;
 const SCROLLING_LIMIT = 10;
 
-function Render({ loading = false, finalList = {}, fields = [], functions = {}, isMobile = false }) {
-	if (loading || finalList.length) {
+function Render({ loading = false, finalList = [], fields = [], functions = {}, isMobile = false }) {
+	if (loading || finalList?.length) {
 		return (finalList || []).map((singleitem) => (
 			<ListItem
 				key={singleitem.id}
