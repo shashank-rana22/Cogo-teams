@@ -15,6 +15,8 @@ const ACTIVITY_ICON_MAPPING = {
 	[SHIPMENTS]  : IcMShipment,
 };
 
+const MIN_VALUE = 0;
+
 // const BACKGROUND_COLOR_MAPPING = {
 // 	[ENGAGEMENT] : '#f8aea8',
 // 	[ACCOUNTS]   : '#ddebc0',
@@ -45,7 +47,10 @@ function Block(props) {
 
 					return (
 						<div key={activity} className={styles.activity_container}>
-							<p className={styles.value}>{count}</p>
+							<div className={styles.value_text_container}>
+								<p className={styles.value_text}>{count || MIN_VALUE}</p>
+							</div>
+
 							<Tooltip content={<p>{isEmpty(name) ? '' : startCase(name)}</p>}>
 								<p className={styles.activity}>{isEmpty(name) ? '' : startCase(name)}</p>
 							</Tooltip>

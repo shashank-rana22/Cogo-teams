@@ -2672,6 +2672,14 @@ const navigationMapping = ({ t = () => {} }) => {
 					type          : 'link',
 					possible_apis : apis.performance_and_incentives_leaderboard,
 				},
+				{
+					key           : 'performance_and_incentives-public_leaderboard',
+					title         : 'Public Leaderboard',
+					href          : '/v2/performance-and-incentives/public-leaderboard',
+					as            : '/v2/performance-and-incentives/public-leaderboard',
+					type          : 'link',
+					possible_apis : apis.performance_public_leaderboard,
+				},
 			],
 		},
 		attendance_leave_management: {

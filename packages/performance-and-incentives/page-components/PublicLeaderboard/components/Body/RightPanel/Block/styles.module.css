@@ -51,12 +51,17 @@
 
 .activity_container {
 	display: flex;
-	align-items: center;
 	justify-content: center;
 	width: 33%;
 
 	div:nth-child(2) {
-		width: 65%;
+		width: 75%;
+		margin-top: 4px;
+		margin-left: 8px;
+
+		@media (min-width: 2560px) {
+			margin-top: 12px;
+		}
 	}
 }
 
@@ -74,6 +79,34 @@
 }
 
 .activity {
+	overflow: hidden;
+	color: #828282;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	@media (min-width: 2560px) {
+		font-size: 38px;
+	}
+}
+
+.value_text_container {
+	display: flex;
+	align-self: stretch;
+	justify-content: flex-end;
+	width: 25%;
+}
+
+.value_text {
+	font-size: 18px;
+	font-weight: 600;
+
+	@media (min-width: 2560px) {
+		margin-right: 24px;
+		font-size: 56px;
+	}
+}
+
+.label_text {
 	overflow: hidden;
 	color: #828282;
 	text-overflow: ellipsis;
