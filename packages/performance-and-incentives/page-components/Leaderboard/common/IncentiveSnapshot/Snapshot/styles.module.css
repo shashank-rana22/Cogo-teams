@@ -14,21 +14,8 @@
 
 .heading {
 	margin: 0;
-
-	/* font-size: 1.15em; */
 	font-size: var(--font-size-xl);
 	color: #828282;
-
-	/* @media (min-width: 1024px) {
-		font-size: 1.25em;
-	}
-	@media (min-width: 1440px) {
-		font-size: 1.35em;
-	} */
-
-	/* @media (min-width: 2560px) {
-		font-size: 1.55em;
-	} */
 }
 
 .icon_background {
@@ -42,62 +29,6 @@
 .icon {
 	position: absolute;
 	right: 4px;
-}
-
-.amount {
-	margin: 0;
-	font-size: var(--font-size-xl);
-
-	/* font-size: 1.15em; */
-	font-weight: 600;
-
-	/* @media (min-width: 1024px) {
-		font-size: 1.25em;
-	}
-	@media (min-width: 1440px) {
-		font-size: 1.35em;
-	} */
-
-	/* @media (min-width: 2560px) {
-		font-size: 1.55em;
-	} */
-}
-
-.body_text {
-	font-size: var(--font-size-lg);
-
-	/* font-size: 1em; */
-	color: #828282;
-
-	/* @media (min-width: 1024px) {
-		font-size: 1.1em;
-	}
-	@media (min-width: 1440px) {
-		font-size: 1.2em;
-	} */
-
-	/* @media (min-width: 2560px) {
-		font-size: 1.4em;
-	} */
-}
-
-.footer_text {
-	margin-top: 24px;
-	font-size: var(--font-size-md);
-
-	/* font-size: 0.7em; */
-	color: #828282;
-
-	/* @media (min-width: 1024px) {
-		font-size: 0.8em;
-	}
-	@media (min-width: 1440px) {
-		font-size: 0.9em;
-	} */
-
-	/* @media (min-width: 2560px) {
-		font-size: 1.1em;
-	} */
 }
 
 .cmg_soon {

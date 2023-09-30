@@ -1,15 +1,11 @@
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-// import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
-
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import styles from './styles.module.css';
 import useGetAgentScoringReportStats from './useGetAgentScoringReportStats';
 import useScoringReports from './useScoringReports';
-
-// const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 function Body(props) {
 	const { dateRange, entity } = props;

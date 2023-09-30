@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function IncentiveSnapshot() {
 	return (
 		<div className={styles.container}>
-			<h3 className={styles.heading}>Incentive Snapshot</h3>
+			<h3>Incentive Snapshot</h3>
 
 			<div className={styles.snapshot_container}>
 				{Object.values(INCENTIVE_SNAPSHOT_CONSTANTS).map((stage) => (

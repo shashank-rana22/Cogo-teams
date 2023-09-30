@@ -1,8 +1,6 @@
 import { Button, Toast } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
 
-import styles from './styles.module.css';
-
 function RefreshResults(props) {
 	const { listLoading, listRefetch, refetchStats, statsLoading } = props;
 
@@ -21,7 +19,7 @@ function RefreshResults(props) {
 			themeType="secondary"
 			disabled={listLoading || statsLoading}
 			onClick={fetchData}
-			className={styles.refresh}
+			style={{ marginRight: '8px' }}
 		>
 			<IcMRefresh
 				width={16}

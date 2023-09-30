@@ -21,14 +21,6 @@
 	margin: 0;
 	font-size: var(--font-size-xl);
 
-	/* font-size: 1em; */
-
-	/* @media (min-width: 1024px) {
-		font-size: 1.1em;
-	}
-	@media (min-width: 1440px) {
-		font-size: 1.2em;
-	} */
 	@media (min-width: 2560px) {
 		font-size: 1.4em;
 	}
@@ -63,18 +55,9 @@
 
 .value_text {
 	margin-right: 8px;
-
-	/* font-size: 1em; */
 	font-size: var(--font-size-xl);
 	font-weight: 600;
 
-	/* @media (min-width: 1024px) {
-		font-size: 1.1em;
-	} */
-
-	/* @media (min-width: 1440px) {
-		font-size: 1.2em;
-	} */
 	@media (min-width: 2560px) {
 		font-size: 1.4em;
 	}
@@ -82,18 +65,9 @@
 
 .label_text {
 	width: 80%;
-
-	/* font-size: 1em; */
 	font-size: var(--font-size-lg);
 	color: #828282;
 
-	/* @media (min-width: 1024px) {
-		font-size: 1.1em;
-	} */
-
-	/* @media (min-width: 1440px) {
-		font-size: 1.2em;
-	} */
 	@media (min-width: 2560px) {
 		font-size: 1.4em;
 	}
