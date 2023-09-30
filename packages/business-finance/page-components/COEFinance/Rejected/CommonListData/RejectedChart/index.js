@@ -12,7 +12,7 @@ import useGetCommentRemarkCounts from '../../../hook/useGetCommentRemarkCounts';
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
-const APRIL = 3;
+const APRIL = 4;
 const BEFORE_APRIL = 1;
 
 const TOTAL_REJECTED_KEY_MAPPING = {
@@ -33,7 +33,7 @@ function RejectedCharts({ subActiveTabReject = '', setFilters = () => {} }) {
 	const PRESENT_MONTH = getMonth(new Date());
 	const PRESENT_YEAR = getYear(new Date());
 
-	const FINANCIAL_YEAR_START_DATE = `${PRESENT_MONTH < APRIL ? PRESENT_YEAR - BEFORE_APRIL : PRESENT_MONTH}-04-01`;
+	const FINANCIAL_YEAR_START_DATE = `${PRESENT_MONTH < APRIL ? PRESENT_YEAR - BEFORE_APRIL : PRESENT_YEAR}-04-01`;
 
 	const {
 		pieData = [],
