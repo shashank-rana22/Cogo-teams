@@ -24,8 +24,7 @@ function useGetAgentScoringReportStats(props) {
 	const { incentive_leaderboard_viewtype: viewType, user: loggedInUser } = useSelector(({ profile }) => profile);
 
 	const [statParams, setStatParams] = useState({
-		pagination_data_required : false,
-		filters                  : {
+		filters: {
 			created_at_greater_than : dateRange?.startDate || undefined,
 			created_at_less_than    : dateRange?.endDate || undefined,
 			partner_id              : entity || undefined,

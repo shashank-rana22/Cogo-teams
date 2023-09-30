@@ -24,7 +24,7 @@ function useGetLeaderbordList(props) {
 		params,
 	}, { manual: false });
 
-	const { list = [] } = data || {};
+	const { list = [], total_report_count } = data || {};
 
 	useEffect(() => {
 		setParams((previousParams) => ({
@@ -43,6 +43,7 @@ function useGetLeaderbordList(props) {
 	return {
 		list,
 		loading,
+		total_report_count,
 	};
 }
 

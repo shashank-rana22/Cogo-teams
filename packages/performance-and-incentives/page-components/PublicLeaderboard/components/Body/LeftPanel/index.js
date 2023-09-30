@@ -12,7 +12,7 @@ import useGetLeaderbordList from './useGetLeaderbordList';
 function LeftPanel(props) {
 	const { view, dateRange } = props;
 
-	const { list, loading } = useGetLeaderbordList({ view, dateRange });
+	const { list, loading, total_report_count: totalReportCount } = useGetLeaderbordList({ view, dateRange });
 
 	const [firstUser, secondUser, thirdUser, ...tableList] = list;
 
@@ -40,7 +40,7 @@ function LeftPanel(props) {
 			<TopUsers topList={topList} view={view} />
 
 			{isEmpty(tableList) ? <p className={styles.empty_list}>No more standings...</p>
-				: <List tableList={tableList} view={view} />}
+				: <List tableList={tableList} view={view} totalReportCount={totalReportCount} />}
 
 		</div>
 	);

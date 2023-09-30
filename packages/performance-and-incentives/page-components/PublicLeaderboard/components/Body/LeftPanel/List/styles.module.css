@@ -66,3 +66,12 @@
 		font-size: 42px;
 	}
 }
+
+.info_text {
+	margin-top: 14px;
+	text-align: right;
+
+	@media (min-width: 2560px) {
+		font-size: 20px;
+	}
+}

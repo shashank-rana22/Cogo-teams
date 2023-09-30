@@ -1,8 +1,12 @@
+import TEXT_MAPPING from '../../../../configurations/header-text-mapping';
+
 import getListColumnMapping from './get-list-column-mapping';
 import styles from './styles.module.css';
 
+const MAX_LIST_ITEMS = 8;
+
 function List(props) {
-	const { tableList, view } = props;
+	const { tableList, view, totalReportCount } = props;
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({ view });
 
@@ -37,6 +41,18 @@ function List(props) {
 					</div>
 				))}
 			</div>
+
+			{ totalReportCount > MAX_LIST_ITEMS ? (
+				<p className={styles.info_text}>
+					+
+					{totalReportCount - MAX_LIST_ITEMS}
+					{' '}
+					More
+					{' '}
+					{TEXT_MAPPING[view]}
+				</p>
+			) : null}
+
 		</div>
 	);
 }
