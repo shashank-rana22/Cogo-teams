@@ -14,9 +14,25 @@ const { START_PAGE, MOBILE_SCREEN_SIZE } = CONSTANTS;
 const TIMEOUT_TIME = 1000;
 const SCROLLING_LIMIT = 10;
 
+function Render({ loading = false, finalList = {}, fields = [], functions = {}, isMobile = false }) {
+	if (loading || finalList.length) {
+		return (finalList || []).map((singleitem) => (
+			<ListItem
+				key={singleitem.id}
+				singleitem={singleitem}
+				fields={fields}
+				functions={functions}
+				isMobile={isMobile}
+			/>
+		));
+	}
+	return <EmptyState />;
+}
+
 function List({
 	fields = [],
-	data:listData = {},
+	list = [],
+	totalCount = 0,
 	loading = false,
 	page = 1,
 	setPage = () => {},
@@ -26,7 +42,6 @@ function List({
 	status = '',
 }) {
 	const [isMobile, setIsMobile] = useState(false);
-	const { list = [], totalRecords:totalCount } = listData;
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
@@ -35,21 +50,6 @@ function List({
 			}
 		}, TIMEOUT_TIME);
 	}, [loading, setPage]);
-
-	const render = () => {
-		if (loading || finalList.length) {
-			return (finalList || []).map((singleitem) => (
-				<ListItem
-					key={singleitem.id}
-					singleitem={singleitem}
-					fields={fields}
-					functions={functions}
-					isMobile={isMobile}
-				/>
-			));
-		}
-		return <EmptyState />;
-	};
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -95,7 +95,15 @@ function List({
 					useWindow={false}
 					threshold={600}
 				>
-					<div>{render()}</div>
+					<div>
+						<Render
+							loading={loading}
+							finalList={finalList}
+							fields={fields}
+							functions={functions}
+							isMobile={isMobile}
+						/>
+					</div>
 				</InfiniteScroll>
 				{
 					loading && (

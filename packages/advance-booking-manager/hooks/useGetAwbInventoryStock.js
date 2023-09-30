@@ -6,6 +6,11 @@ import CONSTANTS from '../constants/constants';
 
 const { START_PAGE } = CONSTANTS;
 
+const STATE_MAPPING = {
+	inventory_stock : 'awb_inventory_stock',
+	awb_leakage     : 'awb_leakage_stock',
+};
+
 const useGetInventoryStock = ({ activeTab = '', filterData = {} }) => {
 	const [page, setPage] = useState(START_PAGE);
 	const [finalList, setFinalList] = useState([]);
@@ -31,13 +36,14 @@ const useGetInventoryStock = ({ activeTab = '', filterData = {} }) => {
 					airlineId    : airline || undefined,
 					airportId    : origin || undefined,
 					procuredById : procured || undefined,
+					state        : STATE_MAPPING[activeTab],
 					page,
 				},
 			});
 		} catch (err) {
 			console.error(err);
 		}
-	}), [page, trigger, filterData]);
+	}), [filterData, trigger, activeTab, page]);
 
 	useEffect(() => {
 		setFinalList([]);
