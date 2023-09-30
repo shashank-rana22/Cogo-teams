@@ -1,7 +1,7 @@
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
 
-import PARAM_TRIGGERS_MAPPING from '../../../../../../constants/parameter-triggers-mapping';
+import PARAM_TRIGGERS_MAPPING from '../../../../../constants/parameter-triggers-mapping';
 
 const useBlockParameters = (props) => {
 	const {

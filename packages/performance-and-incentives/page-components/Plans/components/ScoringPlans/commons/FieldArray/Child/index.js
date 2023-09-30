@@ -1,6 +1,6 @@
 import { IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
 
-import { getFieldController } from '../../getFieldController';
+import { getFieldController } from '../../../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
 import useBlockParameters from './useBlockParameters';
