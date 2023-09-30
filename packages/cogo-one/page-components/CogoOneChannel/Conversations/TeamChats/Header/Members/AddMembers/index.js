@@ -8,7 +8,12 @@ import UserCard from '../../UserCard';
 
 import styles from './styles.module.css';
 
-function AddMembers({ viewType = '', setAddMembers = () => {} }) {
+function AddMembers({
+	viewType = '',
+	setAddMembers = () => {},
+	updateCogooneGroup = () => {},
+	loading = false,
+}) {
 	const [selectedMembers, setSelectedMembers] = useState([]);
 	const isNoSelectedUsers = isEmpty(selectedMembers);
 
@@ -43,11 +48,23 @@ function AddMembers({ viewType = '', setAddMembers = () => {} }) {
 					size="md"
 					themeType="tertiary"
 					onClick={() => setAddMembers(false)}
+					disabled={loading}
 				>
 					cancel
-
 				</Button>
-				<Button disabled={isNoSelectedUsers} size="md" themeType="primary">Add</Button>
+				<Button
+					disabled={isNoSelectedUsers}
+					size="md"
+					themeType="primary"
+					loading={loading}
+					onClick={() => {
+						updateCogooneGroup(
+							{ actionName: 'ADD_TO_GROUP', userIds: selectedMembers },
+						);
+					}}
+				>
+					Add
+				</Button>
 			</div>
 		</div>
 	);

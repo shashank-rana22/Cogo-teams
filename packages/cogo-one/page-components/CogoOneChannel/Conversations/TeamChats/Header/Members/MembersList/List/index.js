@@ -6,13 +6,20 @@ import {
 
 import styles from './styles.module.css';
 
-function EachMember({ eachPerson = {} }) {
+function EachMember({
+	eachPerson = {},
+	isDraft = false,
+	hasPermissionToEdit = false,
+	updateCogooneGroup = () => {},
+}) {
 	const {
-		partner = '',
+		partner = {},
+		name :draftName = '',
+		user_id = '',
 	} = eachPerson || {};
 	const { name = '' } = partner || {};
 
-	const formattedName = startCase(name);
+	const formattedName = startCase(isDraft ? draftName : name);
 
 	return (
 		<div className={styles.each_member}>
@@ -26,20 +33,33 @@ function EachMember({ eachPerson = {} }) {
 					{startCase(formattedName)}
 				</div>
 			</div>
-			<IcMCross
-				className={styles.cross_styles}
-			/>
+			{(!isDraft && hasPermissionToEdit) ? (
+				<IcMCross
+					className={styles.cross_styles}
+					onClick={() => {
+						updateCogooneGroup({ actionName: 'REMOVE_FROM_GROUP', userIds: [user_id] });
+					}}
+				/>
+			) : null}
 		</div>
 	);
 }
 
-function List({ membersList = [] }) {
+function List({
+	membersList = [],
+	isDraft = false,
+	hasPermissionToEdit = false,
+	updateCogooneGroup = () => {},
+}) {
 	return (
 		<div className={styles.list}>
 			{membersList?.map((eachPerson) => (
 				<EachMember
 					key={eachPerson?.user_id}
 					eachPerson={eachPerson}
+					isDraft={isDraft}
+					hasPermissionToEdit={hasPermissionToEdit}
+					updateCogooneGroup={updateCogooneGroup}
 				/>
 			))}
 		</div>

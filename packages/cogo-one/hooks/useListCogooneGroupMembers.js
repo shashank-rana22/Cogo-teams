@@ -20,17 +20,17 @@ const useListCogooneGroupMembers = ({ globalGroupId = '' }) => {
 		method : 'get',
 	}, { manual: true });
 
-	const listCogooneGroupMembers = useCallback(async ({ groupId = '' }) => {
+	const listCogooneGroupMembers = useCallback(async () => {
 		try {
 			const res = await trigger({
-				params: getPayload({ groupId }),
+				params: getPayload({ groupId: globalGroupId }),
 			});
 			const list = listFormatter({ res });
 			setMembersList(list);
 		} catch (e) {
 			setMembersList([]);
 		}
-	}, [trigger]);
+	}, [globalGroupId, trigger]);
 
 	useEffect(() => {
 		if (!globalGroupId) {
@@ -38,7 +38,7 @@ const useListCogooneGroupMembers = ({ globalGroupId = '' }) => {
 			return;
 		}
 
-		listCogooneGroupMembers({ groupId: globalGroupId });
+		listCogooneGroupMembers();
 	}, [globalGroupId, listCogooneGroupMembers]);
 
 	return {

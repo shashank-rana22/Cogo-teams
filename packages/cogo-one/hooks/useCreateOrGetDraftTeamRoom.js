@@ -138,7 +138,6 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 		const userIdsLength = userIds.length + SELF_COUNT;
 
 		setLoading(true);
-		const groupMembersHashString = await hashFunction({ groupMemberIds: userIds });
 
 		const modifiedUserIdsData = [...userIdsData, {
 			id       : loggedInAgendId,
@@ -146,6 +145,7 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 			is_admin : true,
 		}];
 		const modifiedUserIds = [loggedInAgendId, ...userIds];
+		const groupMembersHashString = await hashFunction({ groupMemberIds: modifiedUserIds });
 
 		try {
 			const globalRoomData = await getExistingGlobalRoom(

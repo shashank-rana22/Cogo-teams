@@ -108,7 +108,8 @@ function Footer({
 				) : null}
 				<Textarea
 					rows={5}
-					placeholder="Type your message here..."
+					placeholder={hasPermissionToEdit
+						? 'Type your message here...' : 'You don\'t have permission to chat'}
 					className={styles.text_area}
 					value={draftMessage || ''}
 					onChange={(val) => setDraftMessages((prev) => ({ ...prev, [activeId]: val }))}

@@ -24,10 +24,17 @@ function TeamChats(props) {
 
 	const conversationsDivRef = useRef(null);
 
+	const { data = {}, groupData = {} } = activeTab || {};
+
 	const {
 		group_id = '',
 		id = '',
-	} = activeTeamCard || {};
+		is_draft = false,
+	} = data || {};
+
+	const { group_members_ids = [] } = groupData || {};
+
+	const hasPermissionToEdit = (id || group_id) && (is_draft || group_members_ids?.includes(loggedInUserId));
 
 	const { loading = false } = useFetchGlobalRoom({
 		firestore,
@@ -35,7 +42,6 @@ function TeamChats(props) {
 		setActiveTab,
 		draftRoomId   : id,
 		listCogooneGroupMembers,
-		membersList,
 	});
 
 	const scrollToLastMessage = useCallback(() => {
@@ -46,8 +52,6 @@ function TeamChats(props) {
 			});
 		}, TIMEOUT_FOR_SCROLL);
 	}, []);
-
-	const hasPermissionToEdit = (id || group_id);
 
 	return (
 		<div className={styles.container}>
@@ -60,6 +64,8 @@ function TeamChats(props) {
 					setActiveTab={setActiveTab}
 					membersList={membersList}
 					key={id}
+					activeTab={activeTab}
+					hasPermissionToEdit={hasPermissionToEdit}
 				/>
 			</div>
 			<div className={styles.messages}>

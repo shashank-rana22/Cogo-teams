@@ -13,14 +13,13 @@ function ToUser({
 	viewType = '',
 	firestore = {},
 	setActiveTab = () => {},
-	hashFunction = () => {},
 }) {
 	const [users, setUsers] = useState({ userIds: [], userData: [] });
 
 	const {
 		createOrGetDraftTeamRoom = () => {},
 		loading = false,
-	} = useCreateOrGetDraftTeamRoom({ firestore, setActiveTab, hashFunction });
+	} = useCreateOrGetDraftTeamRoom({ firestore, setActiveTab });
 
 	const handleSave = () => {
 		const { userIds = [], userData = [] } = users || {};

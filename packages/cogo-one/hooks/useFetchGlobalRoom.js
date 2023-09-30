@@ -30,17 +30,18 @@ function mountActiveRoomSnapShot({
 		snapshotRef.current.globalRoom = onSnapshot(activeMessageDoc, (activeMessageData) => {
 			setActiveTab((prev) => {
 				const newDocData = activeMessageData.data() || {};
+
 				const PrevLastGroupUpdatedAt = prev?.groupData?.last_group_updated_at || FALLBACK;
 
 				const lastGroupUpdatedAt = newDocData?.last_group_updated_at || FALLBACK;
 
-				if (newDocData?.is_group && ((lastGroupUpdatedAt !== PrevLastGroupUpdatedAt))) {
-					listCogooneGroupMembers({ groupId: globalGroupId });
+				if (newDocData?.is_group && ((lastGroupUpdatedAt > PrevLastGroupUpdatedAt))) {
+					listCogooneGroupMembers();
 				}
 
 				return {
 					...prev,
-					groupData          : { id: activeMessageDoc?.id, ...(newDocData) },
+					groupData          : { id: activeMessageData?.id, ...newDocData },
 					shouldFetchMembers : false,
 				};
 			});
@@ -73,7 +74,7 @@ function mountDraftActiveRoomSnapShot({
 		snapshotRef.current.draftRoom = onSnapshot(activeDraftRoomDoc, (snapshotData) => {
 			setActiveTab((prev) => ({
 				...prev,
-				data: { ...(prev?.data || {}), id: snapshotData?.id, ...(snapshotData.data() || {}) },
+				data: { id: snapshotData?.id, ...(snapshotData.data() || {}) },
 			}));
 		});
 	} catch (e) {
@@ -85,7 +86,7 @@ function mountDraftActiveRoomSnapShot({
 
 function useFetchGlobalRoom({
 	firestore = {}, globalGroupId = '', setActiveTab = () => {}, draftRoomId = '',
-	listCogooneGroupMembers = () => {}, membersList = [],
+	listCogooneGroupMembers = () => {},
 }) {
 	const loggedInAgentId = useSelector(({ profile }) => profile?.user?.id);
 
@@ -119,7 +120,7 @@ function useFetchGlobalRoom({
 		};
 	}, [draftRoomId, firestore, globalGroupId, listCogooneGroupMembers, loggedInAgentId, setActiveTab]);
 
-	return { loading, membersList };
+	return { loading };
 }
 
 export default useFetchGlobalRoom;

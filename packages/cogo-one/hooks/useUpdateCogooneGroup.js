@@ -1,45 +1,42 @@
-import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError'; import { useRequest } from '@cogoport/request';
 
-// const getPayload = ({
-// 	activeTab = {},
-// 	loggedInAgentId = '',
-// }) => {
-// 	const payloadData = getPublishRoomPayload({ activeTab, loggedInAgentId });
+import GROUP_PAYLOAD_FUNC_MAPPING from '../helpers/updateGroupHelper';
 
-// 	const { data = {} } = activeTab || {};
-
-// 	const {
-// 		group_members_ids = [],
-// 		search_name = 'Draft Name',
-// 	} = data || {};
-
-// 	return {
-// 		name        : search_name,
-// 		users       : group_members_ids,
-// 		action_name : 'add_to_group',
-// 		metadata    : {
-// 			data: payloadData,
-// 		},
-// 	};
-// };
-
-function useUpdateCogooneGroup({ activeTab = {} }) {
-	console.log('activeTab', activeTab);
-	const loggedInAgentId = useSelector(({ profile }) => profile?.user?.id);
-	console.log('loggedInAgentId', loggedInAgentId);
-
-	const [, trigger] = useRequest({
+function useUpdateCogooneGroup({ activeTab = {}, setAddMembers = () => {} }) {
+	const [{ loading }, trigger] = useRequest({
 		url    : '/update_cogoone_groups',
 		method : 'post',
 	}, { manual: true });
 
-	const updateCogooneGroup = async () => {
-		await trigger();
+	const { groupData = {} } = activeTab || {};
+
+	const updateCogooneGroup = async ({ actionName = '', userIds = [] }) => {
+		const { getPayload } = GROUP_PAYLOAD_FUNC_MAPPING[actionName];
+
+		if (!getPayload) {
+			return;
+		}
+
+		try {
+			await trigger({
+				data: getPayload({
+					userIds,
+					groupData,
+				}),
+			});
+			setAddMembers(false);
+		} catch (error) {
+			Toast.error(
+				getApiErrorString(error?.response?.data)
+				|| 'Something Went Wrong',
+			);
+		}
 	};
 
 	return {
 		updateCogooneGroup,
+		loading,
 	};
 }
 

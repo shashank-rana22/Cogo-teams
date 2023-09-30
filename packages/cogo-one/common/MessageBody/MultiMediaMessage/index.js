@@ -1,6 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
 import React from 'react';
 
 import whatsappTextFormatting from '../../../helpers/whatsappTextFormatting';
@@ -10,13 +9,16 @@ import styles from './styles.module.css';
 const { renderURLText, renderBoldText } = whatsappTextFormatting();
 
 const DEFAULT_URL_LENGTH = 0;
+
 const NEGATIVE_NUMBER = 1;
+
+const EXTENTION_ORDER = {
+	jpg: 1, png: 2, gif: 3, jpeg: 4, bmp: 5, svg: 6, webp: 7, xlsx: 8, docx: 9,
+};
 
 function sortByFileExtension(a, b) {
 	const getExtension = (url) => url.split('.').pop();
-	const EXTENTION_ORDER = {
-		jpg: 1, png: 2, gif: 3, jpeg: 4, bmp: 5, svg: 6, webp: 7, xlsx: 8, docx: 9,
-	};
+
 	const extA = getExtension(a).toLowerCase();
 	const extB = getExtension(b).toLowerCase();
 
@@ -61,13 +63,14 @@ function VideoMessage({ item = '' }) {
 		/>
 	);
 }
+
 function ImageDocument({ item = '' }) {
 	return (
-		<Image
+		<img
 			src={item}
 			width={200}
 			height={200}
-			alt="image alt"
+			alt="attachment"
 			style={{ margin: '4px 4px 8px 4px', boxShadow: '0 0 4px 0 #627fac40' }}
 		/>
 	);
@@ -95,7 +98,28 @@ function ShowMessage({ messageType = '', message = '' }) {
 	);
 }
 
-function MultiMediaMessage({ message = '', response = {}, messageType = '' }) {
+const EXTENSION_WISE_MAPPINGS = {
+	png  : ImageDocument,
+	jpg  : ImageDocument,
+	gif  : ImageDocument,
+	jpeg : ImageDocument,
+	bmp  : ImageDocument,
+	svg  : ImageDocument,
+	webp : ImageDocument,
+	pdf  : Document,
+	xlsx : Document,
+	mp4  : VideoMessage,
+	mkv  : VideoMessage,
+	mov  : VideoMessage,
+	webm : VideoMessage,
+	avi  : VideoMessage,
+};
+
+function MultiMediaMessage({
+	message = '',
+	response = {},
+	messageType = '',
+}) {
 	const { media_url = [] } = response || {};
 
 	const sortedMediaUrls = (media_url || []).sort(sortByFileExtension);
@@ -108,24 +132,12 @@ function MultiMediaMessage({ message = '', response = {}, messageType = '' }) {
 				const fileArray = fileNameFromUrl.split('.') || [];
 				const extension = fileArray.pop();
 
-				const extensioWiseMapping = {
-					png  : <ImageDocument item={item} />,
-					jpg  : <ImageDocument item={item} />,
-					gif  : <ImageDocument item={item} />,
-					jpeg : <ImageDocument item={item} />,
-					bmp  : <ImageDocument item={item} />,
-					svg  : <ImageDocument item={item} />,
-					webp : <ImageDocument item={item} />,
-					pdf  : <Document item={item} />,
-					xlsx : <Document item={item} />,
-					mp4  : <VideoMessage />,
-					mkv  : <VideoMessage />,
-					mov  : <VideoMessage />,
-					webm : <VideoMessage />,
-					avi  : <VideoMessage />,
-				};
+				const Comp = EXTENSION_WISE_MAPPINGS[extension] || EXTENSION_WISE_MAPPINGS.pdf;
 
-				return extensioWiseMapping[extension] || <Document item={item} />;
+				if (!Comp) {
+					return null;
+				}
+				return <Comp item={item} key={item} />;
 			})}
 			<ShowMessage messageType={messageType} message={message} />
 		</>

@@ -16,7 +16,7 @@
 .common_flex {
 	display: flex;
 	align-items: center;
-	width: calc(100% - 120px);
+	width: calc(100% - 140px);
 }
 
 .actions {
@@ -41,15 +41,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 0 8px;
 	cursor: pointer;
 }
 
 .buttons_flex {
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
-	width: 120px;
+	justify-content: flex-end;
+	width: 140px;
+	padding-right: 14px;
 }
 
 .popover_styles {
@@ -60,4 +60,11 @@
 		width: 100%;
 		padding: 0 !important;
 	}
+}
+
+.count {
+	margin: 0 14px 0 4px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
 }

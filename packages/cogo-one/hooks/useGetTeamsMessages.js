@@ -137,7 +137,7 @@ const useGetTeamsMessages = ({
 
 	const newMessagesRef = useRef(null);
 
-	const [firstLoadingMessages, setFirstLoadingMessages] = useState(false);
+	const [firstLoadingMessages, setFirstLoadingMessages] = useState(true);
 
 	const [loadingPrevMessages, setLoadingPrevMessages] = useState(false);
 
