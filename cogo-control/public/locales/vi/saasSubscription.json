@@ -144,5 +144,9 @@
     "edit_btn":"Biên tập",
     "discount_create_success_toast":"Tạo ra chương trình giảm giá",
     "status_active":"Tích cực",
-    "status_inactive":"Không hoạt động"
+    "status_inactive":"Không hoạt động",
+    "log_control_name":"Tên kế hoạch",
+    "log_control_event":"Sự kiện",
+    "log_control_created_at":"Được tạo ra tại",
+    "log_controls_updated_at":"Cập nhật tại"
 }

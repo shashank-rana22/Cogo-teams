@@ -144,5 +144,9 @@
     "edit_btn":"Edit",
     "discount_create_success_toast":"Created Plan Discount",
     "status_active":"Active",
-    "status_inactive":"Inactive"
+    "status_inactive":"Inactive",
+    "log_control_name":"Plan Name",
+    "log_control_event":"Event",
+    "log_control_created_at":"Created at",
+    "log_controls_updated_at":"Updated at"
 }
