@@ -42,6 +42,14 @@ const UNSAVED_FIELDS = [
 	'totalPackagesCount',
 ];
 
+const NULL_VALUE = 0;
+const DECIMAL_NULL_VALUE = 0.0;
+const TO_FIXED_DECIMAL_PLACES = 2;
+const INCH_CM_FACTOR = 2.54;
+const VOLUME_FACTOR = 166.67;
+const PRECISION_VALUE = 1000000;
+const LENGTH_INDEX = 1;
+
 interface NestedObj {
 	[key: string]: NestedObj | React.FC ;
 }
@@ -94,8 +102,8 @@ function GenerateMAWB({
 
 	const [chargeableWeight, setChargeableWeight] = useState(Number((Math.max(
 		+formValues.weight,
-		(+taskItem.volume * 166.67),
-	) || 0.0).toFixed(2)));
+		(+taskItem.volume * VOLUME_FACTOR),
+	) || DECIMAL_NULL_VALUE).toFixed(TO_FIXED_DECIMAL_PLACES)));
 
 	const {
 		data: airportData = {},
@@ -240,7 +248,7 @@ function GenerateMAWB({
 					? {
 						...hawbItem,
 						documentNo: activeHawb.documentNo ? activeHawb.documentNo
-							: `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`,
+							: `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - LENGTH_INDEX] + LENGTH_INDEX}`,
 					}
 					: hawbItem))
 			));
@@ -260,7 +268,11 @@ function GenerateMAWB({
 
 	useEffect(() => {
 		if (!viewDoc && formValues.class !== 'm') {
-			setValue('amount', ((formValues.chargeableWeight * formValues.ratePerKg) || 0.0).toFixed(2));
+			setValue(
+				'amount',
+				((formValues.chargeableWeight * formValues.ratePerKg)
+				|| DECIMAL_NULL_VALUE).toFixed(TO_FIXED_DECIMAL_PLACES),
+			);
 		}
 
 		if (formValues.class === 'a') {
@@ -375,26 +387,27 @@ function GenerateMAWB({
 			return;
 		}
 
-		let totalVolume:number = 0;
-		let totalPackage:number = 0;
+		let totalVolume:number = NULL_VALUE;
+		let totalPackage:number = NULL_VALUE;
 		(formValues.dimension || []).forEach((dimensionObj) => {
 			if (dimensionObj?.unit === 'inch') {
 				totalVolume
-				+= (Number(dimensionObj?.length) * 2.54
-				* Number(dimensionObj?.width) * 2.54
-				* Number(dimensionObj?.height) * 2.54
-				* Number(dimensionObj?.packages_count)) || 0;
+				+= (Number(dimensionObj?.length) * INCH_CM_FACTOR
+				* Number(dimensionObj?.width) * INCH_CM_FACTOR
+				* Number(dimensionObj?.height) * INCH_CM_FACTOR
+				* Number(dimensionObj?.packages_count)) || NULL_VALUE;
 			} else if (dimensionObj?.unit === 'cms') {
 				totalVolume
 				+= (Number(dimensionObj?.length)
 				* Number(dimensionObj?.width)
 				* Number(dimensionObj?.height)
-				* Number(dimensionObj?.packages_count)) || 0;
+				* Number(dimensionObj?.packages_count)) || NULL_VALUE;
 			}
-			totalPackage += Number(dimensionObj?.packages_count) || 0;
+			totalPackage += Number(dimensionObj?.packages_count) || NULL_VALUE;
 		});
 		setValue('volumetricWeight', viewDoc ? taskItem.volumetricWeight
-			: Number(((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
+			: Number(((+totalVolume * VOLUME_FACTOR)
+			|| DECIMAL_NULL_VALUE) / PRECISION_VALUE).toFixed(TO_FIXED_DECIMAL_PLACES));
 		setValue('totalPackagesCount', totalPackage || taskItem.totalPackagesCount);
 	}, [JSON.stringify(formValues.dimension), formValues.weight]);
 
