@@ -84,7 +84,7 @@ function BarChart({
 										compactDisplay        : 'short',
 										maximumFractionDigits : 2,
 										style                 : 'currency',
-										currencyWise          : currencyType as string,
+										currencyWise          : true,
 									},
 								})
 							)
@@ -118,7 +118,7 @@ function BarChart({
 											compactDisplay        : 'short',
 											maximumFractionDigits : 2,
 											style                 : 'currency',
-											currencyWise          : currencyType as string,
+											currencyWise          : true,
 										},
 									})
 								) : (parseFloat(bar?.data?.value.toFixed(2)))

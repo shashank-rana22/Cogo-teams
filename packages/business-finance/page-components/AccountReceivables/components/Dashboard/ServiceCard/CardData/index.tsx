@@ -92,7 +92,7 @@ function CardData({ tab }: CardDataProps) {
 													style                 : 'currency',
 													currencyDisplay       : 'code',
 													maximumFractionDigits : 2,
-													currencyWise          : item?.currency,
+													currencyWise          : true,
 												},
 											})}
 										</div>

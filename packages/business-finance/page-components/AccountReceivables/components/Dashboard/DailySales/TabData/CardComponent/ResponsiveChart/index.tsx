@@ -104,7 +104,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 								style           : 'currency',
 								notation        : 'compact',
 								compactDisplay  : 'short',
-								currencyWise    : currency,
+								currencyWise    : true,
 							},
 						}),
 					}}

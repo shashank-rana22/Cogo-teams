@@ -32,7 +32,10 @@ const isAmountValid = ({ amount }) => !(
 );
 
 const getCurrencyLocale = ({ currency, options }) => {
-	const { currencyWise = '' } = options || {};
+	const { currencyWise = false } = options || {};
+	if (currencyWise) {
+		return GLOBAL_CONSTANTS.currency_locale[currency];
+	}
 
 	let scope;
 	try {
@@ -43,7 +46,7 @@ const getCurrencyLocale = ({ currency, options }) => {
 
 	const geoCurrencyLocale = getByKey(geo, `formats.amount.scope[${scope}].locale`);
 	if (geoCurrencyLocale) {
-		return GLOBAL_CONSTANTS.currency_locale[currencyWise] || geoCurrencyLocale;
+		return geoCurrencyLocale;
 	}
 
 	let tempCurrency = geo.country.currency.code;
@@ -51,7 +54,7 @@ const getCurrencyLocale = ({ currency, options }) => {
 		tempCurrency = currency;
 	}
 
-	return GLOBAL_CONSTANTS.currency_locale[currencyWise] || GLOBAL_CONSTANTS.currency_locale[tempCurrency];
+	return GLOBAL_CONSTANTS.currency_locale[tempCurrency];
 };
 
 const formatCurrency = ({ amount, locale, options }) => {

@@ -87,7 +87,7 @@ function CardComponent({
 													currencyDisplay       : 'code',
 													maximumFractionDigits : 2,
 													style                 : 'currency',
-													currencyWise          : dashboardCurrency,
+													currencyWise          : true,
 												},
 											})}
 										</div>

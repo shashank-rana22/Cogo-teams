@@ -64,7 +64,7 @@ export const outstandingKamColumn = ({ entityCode, t }) => [
 								maximumFractionDigits : 2,
 								style                 : 'currency',
 								currencyDisplay       : 'code',
-								currencyWise          : GLOBAL_CONSTANTS.cogoport_entities[entityCode]?.currency,
+								currencyWise          : true,
 							},
 						})}
 					</div>
@@ -103,7 +103,7 @@ export const outstandingKamColumn = ({ entityCode, t }) => [
 								maximumFractionDigits : 2,
 								style                 : 'currency',
 								currencyDisplay       : 'code',
-								currencyWise          : GLOBAL_CONSTANTS.cogoport_entities[entityCode]?.currency,
+								currencyWise          : true,
 							},
 						})}
 					</div>

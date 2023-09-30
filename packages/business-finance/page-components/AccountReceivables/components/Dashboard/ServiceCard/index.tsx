@@ -178,7 +178,7 @@ function ServiceCard({ outstandingData = {}, outstandingLoading = false, entityC
 																		maximumFractionDigits : 2,
 																		style                 : 'currency',
 																		currencyDisplay       : 'code',
-																		currencyWise          : item?.currency,
+																		currencyWise          : true,
 																	},
 																})}
 															</div>
@@ -259,7 +259,7 @@ function ServiceCard({ outstandingData = {}, outstandingLoading = false, entityC
 												maximumFractionDigits : 2,
 												style                 : 'currency',
 												currencyDisplay       : 'code',
-												currencyWise          : item?.currency,
+												currencyWise          : true,
 											},
 										})}
 									</div>
