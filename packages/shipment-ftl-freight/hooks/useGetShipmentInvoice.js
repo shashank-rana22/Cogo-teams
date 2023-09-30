@@ -32,6 +32,9 @@ const useGetShipmentInvoice = () => {
 				},
 			});
 		} catch (error) {
+			if (error?.name === 'CanceledError') {
+				return;
+			}
 			toastApiError(error?.data);
 		}
 	}, [shipment_id, trigger]);

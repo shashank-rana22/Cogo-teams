@@ -34,7 +34,7 @@ function Header({
 
 	const Router = useRouter();
 	const billId = Router?.query?.billId;
-	const { isShipment, searchValue } = Router?.query || {};
+	const { isShipment, searchValue, active_tab:activeTab, view } = Router?.query || {};
 
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId || '';
 
@@ -62,6 +62,12 @@ function Header({
 	const isItemNotChecked = Object.values(checkItem).some((item) => !item);
 
 	const getRoute = () => {
+		if (activeTab === 'rejected') {
+			return [
+				'/business-finance/coe-finance/[active_tab]/[view]',
+				`/business-finance/coe-finance/rejected/${view}`,
+			];
+		}
 		if (isShipment) {
 			return [
 				`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}`,
@@ -162,6 +168,7 @@ function Header({
 									<AdditionalRemarks
 										remarkData={remarkData}
 										setRemarkData={setRemarkData as any}
+										modalData={modalData}
 									/>
 									<div className={styles.btn_container}>
 										<Button
@@ -186,7 +193,7 @@ function Header({
 												otherRemarks : remarkData?.other,
 											})}
 										>
-											Reject
+											{modalData}
 										</Button>
 									</div>
 								</div>

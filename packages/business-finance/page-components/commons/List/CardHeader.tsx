@@ -32,7 +32,7 @@ function Header({
 	return (
 		<header className={styles.header} style={headerStyles}>
 
-			{fields?.map((field) => (
+			{(fields || []).filter((itm) => !itm?.hideColumn).map((field) => (
 				<div
 					className={`${styles.col} ${field.className || ''}`}
 					style={{

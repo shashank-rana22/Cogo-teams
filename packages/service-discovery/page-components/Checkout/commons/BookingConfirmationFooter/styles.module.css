@@ -63,3 +63,9 @@
 	font-weight: 600;
 	color: #f00;
 }
+
+.cart_icon {
+	width: 18px;
+	height: 18px;
+	margin-left: 6px;
+}

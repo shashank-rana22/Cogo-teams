@@ -20,6 +20,7 @@
 }
 
 .sid {
+	display: flex;
 	margin-bottom: 10px;
 
 	:global {
@@ -32,4 +33,11 @@
 
 .service_type {
 	margin-top: 4px;
+}
+
+.copy_icon {
+	width: 20;
+	height: 20;
+	margin-left: 4;
+	cursor: pointer;
 }

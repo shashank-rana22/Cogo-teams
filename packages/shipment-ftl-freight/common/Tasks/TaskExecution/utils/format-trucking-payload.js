@@ -80,6 +80,7 @@ const formatTruckingPayload = (
 			rawValues.documents.forEach((documentItem) => {
 				if (documentItem.service_id === item.id) {
 					eachTruckPayload.data.lr_numbers.push(documentItem.lr_number);
+					eachTruckPayload.data.lr_date = documentItem?.lr_date;
 				}
 			});
 			payload.service_data.push(eachTruckPayload);
