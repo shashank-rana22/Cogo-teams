@@ -12,9 +12,8 @@ import {
 	TextAreaController,
 	CheckboxController,
 	InputNumberController,
+	AsyncSelectController,
 } from '@cogoport/forms';
-
-import AsyncSelectController from './components/Controlled/AsyncSelectController';
 
 const controlTypeControllerMapping = {
 	text               : InputController,

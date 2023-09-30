@@ -3,7 +3,7 @@ import { SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import FieldArray from '../../../commons/Form/FieldArray';
+import FieldArray from '../../../commons/FieldArray';
 
 import AdditionalControlsModal from './AdditionalControlsModal';
 import styles from './styles.module.css';
