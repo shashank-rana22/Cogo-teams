@@ -37,7 +37,7 @@ interface ShipmentDetailsCardInterface {
 		lineItemsTab?: boolean,
 	};
 	setCombinedRemarks?: Function;
-	docContent?: string;
+	docContent?: any;
 	chargesTable?: any;
 }
 
@@ -58,7 +58,7 @@ function ShipmentDetailsCard({
 	onTabClick = () => {},
 	tab = {},
 	setCombinedRemarks = () => {},
-	docContent = '',
+	docContent = {},
 	chargesTable = [],
 }: ShipmentDetailsCardInterface) {
 	const [showValue, setShowValue] = useState([]);
@@ -170,10 +170,22 @@ function ShipmentDetailsCard({
 
 		if (id === 1) {
 			setRemarksVal({ ...remarksVal, collectionPartyRemark: [] });
+			setCheckedValue({
+				...checkedValue,
+				collectionPartyRemark: [],
+			});
 		} else if (id === 2) {
 			setRemarksVal({ ...remarksVal, billingPartyRemark: [] });
+			setCheckedValue({
+				...checkedValue,
+				billingPartyRemark: [],
+			});
 		} else if (id === 3) {
 			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: [] });
+			setCheckedValue({
+				...checkedValue,
+				invoiceDetailsRemark: [],
+			});
 		}
 	};
 

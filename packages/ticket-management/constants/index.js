@@ -121,6 +121,7 @@ export const getTicketActionLabel = ({ t, type }) => {
 
 	return ACTIONS[type];
 };
+
 export const REQUEST_TYPE_OPTIONS = [
 	{ label: 'Shipment', value: 'shipment' },
 	{ label: 'Rate', value: 'rate' },

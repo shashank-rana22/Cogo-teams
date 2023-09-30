@@ -19,12 +19,20 @@ import isSingleLocation from '../../../utils/checkSingleLocation';
 
 import styles from './styles.module.css';
 
+const SHIPMENT_TYPE = {
+	ftl_freight: 'ftl',
+};
+
 function Card({ data = {}, activeTab = '' }) {
 	const router = useRouter();
+	const { partner_id = '' } = router?.query || {};
 
 	const { stepperTab } = useContext(KamDeskContext);
 
-	let href = `${window.location.origin}/${router?.query?.partner_id}/shipments`;
+	let href = `${window.location.origin}/${partner_id}/shipments`;
+	if (stepperTab in SHIPMENT_TYPE) {
+		href = `${window.location.origin}/v2/${partner_id}/booking/${SHIPMENT_TYPE[stepperTab]}`;
+	}
 	href += `/${data?.id}?${CONSTANTS.url_navigation_params}`;
 
 	const handleCardClick = (e) => {

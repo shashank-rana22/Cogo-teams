@@ -14,4 +14,11 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+
+	:global {
+		.react-datepicker__input-container {
+			display: flex;
+			width: 125%;
+		}
+	}
 }

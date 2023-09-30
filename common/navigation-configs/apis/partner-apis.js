@@ -4019,6 +4019,16 @@ const partner = {
 			service_name : 'haulage_freight_rate',
 		},
 		{
+			api          : 'list_air_customs_rate_sheets',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
+		},
+		{
+			api          : 'list_air_customs_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -4052,6 +4062,11 @@ const partner = {
 			api          : 'update_trailer_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'update_air_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -4092,6 +4107,11 @@ const partner = {
 			api          : 'create_trailer_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'create_air_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
 		},
 		{
 			api          : 'list_emails',
@@ -5262,6 +5282,16 @@ const partner = {
 			service_name : 'haulage_freight_rate',
 		},
 		{
+			api          : 'list_air_customs_rate_sheets',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
+		},
+		{
+			api          : 'list_air_customs_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -5295,6 +5325,11 @@ const partner = {
 			api          : 'update_trailer_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'update_air_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -5355,6 +5390,11 @@ const partner = {
 			api          : 'create_trailer_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'create_air_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
 		},
 		{
 			api          : 'list_cogo_entities',
@@ -6037,6 +6077,12 @@ const partner = {
 			api          : 'list_organization_exchange_rate_configurations',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'get_organization_restricted_settings_config',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'sales',
 		},
 	],
 	notifications: [
@@ -12982,6 +13028,31 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'list_chat_channels',
+			access_type : 'private',
+		},
+		{
+			api         : 'delete_chat_message',
+			access_type : 'private',
+		},
+		{
+			api         : 'update_chat_message',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_chat_channel',
+			access_type : 'private',
+		},
+		{
+			api         : 'create_chat_channel',
+			access_type : 'private',
+		},
+		{
+			api         : 'update_chat_channel_seen',
+			access_type : 'private',
+
+		},
+		{
 			api         : 'get_air_coe_documents_list',
 			access_type : 'private',
 		},
@@ -13635,6 +13706,11 @@ const partner = {
 			api          : 'list_cogoone_shifts',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'get_organization_services',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 	analytics_dashboard: [
