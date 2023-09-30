@@ -37,9 +37,9 @@ function GroupMemberView({ groupMembersData = {} }) {
 				const { name = '', is_admin = false, partner = {}, access_type = '' } = item || {};
 				const { name: userName = '', roles_data = [] } = partner || {};
 				const { name: roleName = '' } = roles_data?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-
+				// fix key
 				return (
-					<div key={name} className={styles.row_direction}>
+					<div key={name || userName} className={styles.row_direction}>
 						<Avatar
 							personName={name || userName}
 							alt="name"

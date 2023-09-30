@@ -4,8 +4,8 @@ import { IcCFtick, IcMTimer } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { USER_CURRENT_STATUS_WITH_ICON_MAPPING } from '../../../../../../constants/teamStatusMapping';
-import { profileBasicDetailsMapping } from '../../../../../../utils/getProfileBasicDetailsMapping';
+import { USER_CURRENT_STATUS_WITH_ICON_MAPPING } from '../../../../../constants/teamStatusMapping';
+import { profileBasicDetailsMapping } from '../../../../../utils/getProfileBasicDetailsMapping';
 
 import styles from './styles.module.css';
 

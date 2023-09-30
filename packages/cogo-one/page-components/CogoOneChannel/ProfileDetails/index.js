@@ -40,6 +40,7 @@ function ProfileDetails({
 	const [activeSelect, setActiveSelect] = useState(
 		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.default_side_nav || 'profile',
 	);
+
 	const [showMore, setShowMore] = useState(false);
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
 
@@ -70,8 +71,10 @@ function ProfileDetails({
 		{ orgId },
 	);
 	const quotationEmailSentAt = quotationSentData?.quotation_email_sent_at;
-	const expandedSideBar = (ENABLE_SIDE_BAR.includes(chatsConfig?.data?.channel_type)
-		|| (ENABLE_EXPAND_SIDE_BAR.includes(chatsConfig?.data?.channel_type) && chatsConfig?.expandSideBar));
+	const expandedSideBar = (ENABLE_SIDE_BAR.includes(chatsConfig?.data?.channel_type || activeTab)
+		|| (ENABLE_EXPAND_SIDE_BAR.includes(
+			chatsConfig?.data?.channel_type || activeTab,
+		) && chatsConfig?.expandSideBar));
 
 	useEffect(() => {
 		setShowMore(false);

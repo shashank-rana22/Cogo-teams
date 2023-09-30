@@ -41,8 +41,7 @@ function mountActiveRoomSnapShot({
 
 				return {
 					...prev,
-					groupData          : { id: activeMessageData?.id, ...newDocData },
-					shouldFetchMembers : false,
+					groupData: { id: activeMessageData?.id, ...newDocData },
 				};
 			});
 		});

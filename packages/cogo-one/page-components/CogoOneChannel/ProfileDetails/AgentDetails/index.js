@@ -23,7 +23,6 @@ import GroupMembers from './GroupMembers';
 import GroupMembersRequests from './GroupMembersRequests';
 import Profile from './Profile';
 import styles from './styles.module.css';
-import TeamsProfile from './TeamsProfile';
 import VoiceCallComponent from './VoiceCallComponent';
 
 const handleClick = ({ id, channel_type }) => {
@@ -49,8 +48,6 @@ function AgentDetails({
 	mailProps = {},
 	userData = {},
 	getUserLoading = false,
-	listCogooneGroupMembers = () => {},
-	membersList = [],
 }) {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
@@ -134,16 +131,6 @@ function AgentDetails({
 	};
 
 	const handleSummary = () => { setShowMore(true); setActiveSelect('user_activity'); };
-
-	if (activeTab === 'teams') {
-		return (
-			<TeamsProfile
-				activeMessageCard={activeMessageCard}
-				membersList={membersList}
-				listCogooneGroupMembers={listCogooneGroupMembers}
-			/>
-		);
-	}
 
 	const setActiveMessage = (val) => { switchUserChats({ val, firestore, setActiveTab }); };
 	if (!userId && !leadUserId && !mobile_no) {

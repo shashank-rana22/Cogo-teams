@@ -133,14 +133,20 @@ const iconMapping = ({ expandSideBar = false }) => [
 			height={22}
 		/>,
 	},
+	{
+		name    : 'teams_profile',
+		content : 'teams Profile',
+		icon    : <IcMProfile width={20} height={20} />,
+	},
 ];
 
 const getIconMapping = ({
 	viewType = '',
 	expandSideBar = false,
 	channelType = '',
+	isTeams = false,
 }) => {
-	const CHANNEL_WISE_NAV_MAPPING = channelType === 'teams' ? ['profile'] : [
+	const CHANNEL_WISE_NAV_MAPPING = isTeams ? ['teams_profile'] : [
 		...COMMON_ACCESIBLE_NAVIGATIONS,
 		...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.extra_side_bar_navs_access || []),
 		...(ENABLE_EXPAND_SIDE_BAR.includes(channelType) ? SIDEBAR_CONTROLS : []),

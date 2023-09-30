@@ -126,8 +126,10 @@ function CogoOne() {
 		? formattedMessageData?.organization_id
 		: activeTab?.data?.organization_id;
 	const expandedSideBar = (ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
-		|| (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) && activeTab?.expandSideBar));
-	const collapsedSideBar = ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
+		|| ((ENABLE_EXPAND_SIDE_BAR.includes(
+			activeTab?.data?.channel_type || activeTab?.tab,
+		)) && activeTab?.expandSideBar));
+	const collapsedSideBar = ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type || activeTab?.tab)
 								&& !activeTab?.expandSideBar;
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
@@ -223,6 +225,7 @@ function CogoOne() {
 							{(
 								ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
 								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
+								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.tab)
 							) ? (
 								<div className={cl`${styles.user_profile_layout} 
 								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}

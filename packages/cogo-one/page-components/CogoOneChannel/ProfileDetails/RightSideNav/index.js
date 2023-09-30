@@ -49,7 +49,8 @@ function RightSideNav({
 	const ICON_MAPPING = getIconMapping({
 		viewType,
 		expandSideBar,
-		channelType: formattedMessageData?.channel_type,
+		channelType : formattedMessageData?.channel_type,
+		isTeams     : activeTab === 'teams',
 	}) || [];
 
 	const check = () => {
@@ -84,24 +85,18 @@ function RightSideNav({
 					expandSideBar: !prev?.expandSideBar,
 				};
 			});
-		} else if (activeTab === 'teams') {
-			setActiveTab((prev) => {
-				setActiveSelect(!prev?.expandSideBar ? 'profile' : '');
-
-				return {
-					...prev,
-					expandSideBar: !prev?.expandSideBar,
-				};
-			});
 		} else {
-			setActiveSelect(val);
+			setActiveSelect((prev) => {
+				if (prev === val) {
+					return '';
+				}
 
-			if (!expandSideBar) {
-				setActiveTab((prev) => ({
-					...prev,
-					expandSideBar: true,
-				}));
-			}
+				return val;
+			});
+			setActiveTab((prev) => ({
+				...prev,
+				expandSideBar: !prev?.expandSideBar,
+			}));
 		}
 	};
 
