@@ -87,7 +87,7 @@ function EditDetailsHeader({
 				service_type,
 				...organization,
 				...locationValues,
-				formValues: { ...loadValues, ftlFormData },
+				formValues: { ...loadValues, ftlFormData, touch_points },
 			},
 		});
 

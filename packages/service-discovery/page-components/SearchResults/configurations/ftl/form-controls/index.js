@@ -1,26 +1,31 @@
 import { addDays } from '@cogoport/utils';
 
-import CARGO_GROSS_CONTROLS from './gross-controls';
-import CARGO_PACKAGE_CONTROLS from './package-controls';
-import TRUCKS_CONTROLS from './trucks-controls';
+import getGrossControls from './gross-controls';
+import getPerPackageControls from './package-controls';
+import getTrucksControls from './trucks-controls';
 
 const DATE_RANGE = 1;
 const tomorrow = addDays(new Date(), DATE_RANGE);
 
 const CONTROLS_MAPPING = {
-	truck             : TRUCKS_CONTROLS,
-	cargo_gross       : CARGO_GROSS_CONTROLS,
-	cargo_per_package : CARGO_PACKAGE_CONTROLS,
+	truck             : getTrucksControls,
+	cargo_gross       : getGrossControls,
+	cargo_per_package : getPerPackageControls,
 };
 
-const ftlControls = ({ activeTab = '', cargoType = '' }) => {
+const ftlControls = ({ activeTab = '', cargoType = '', formValues = {}, setValue = () => {} }) => {
 	const activeControls = activeTab === 'truck' ? activeTab : cargoType;
 
-	const controls = CONTROLS_MAPPING[activeControls] || [];
+	const controlProps = {
+		formValues,
+		setValue,
+	};
+
+	const controls = CONTROLS_MAPPING[activeControls]?.(controlProps) || [];
 
 	const COMMON_CONTROLS = [
 		{
-			name  : 'cargo_clearance_date',
+			name  : 'cargo_readiness_date',
 			label : 'Cargo Readiness Date',
 			type  : 'datepicker',
 			value : tomorrow,

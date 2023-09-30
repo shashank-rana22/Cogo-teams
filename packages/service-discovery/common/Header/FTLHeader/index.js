@@ -51,6 +51,7 @@ function FTLHeader({
 					// setInfoBanner={setInfoBanner}
 					// isGuideViewed={isGuideViewed}
 					setRouterLoading={setRouterLoading}
+					touch_points={touch_points}
 				/>
 
 				<Wallet

@@ -64,7 +64,7 @@ function LoadItem({
 				) : null}
 			</div>
 
-			{commodity ? (
+			{commodity && !truck_type ? (
 				<div className={cl`${styles.load_item} ${styles.horizontal_margin}`}>
 					<span className={styles.text}>
 						{startCase(commodity)}

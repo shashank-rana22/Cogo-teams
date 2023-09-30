@@ -18,8 +18,13 @@ function Load({
 	setInfoBanner = () => {},
 	setRouterLoading = () => {},
 	isGuideViewed = false,
+	touch_points = {},
 }) {
 	const [showModal, setShowModal] = useState(false);
+
+	if (isEmpty(data)) {
+		return null;
+	}
 
 	const { service_details, services } = data || {};
 
@@ -64,7 +69,7 @@ function Load({
 								const margin = !index ? index : '8px 0 0 0';
 
 								return (
-									<Load
+									<LoadItem
 										key={loadItem.id}
 										isAllowedToEdit={false}
 										setInfoBanner={setInfoBanner}
@@ -80,7 +85,7 @@ function Load({
 						</div>
 					)}
 				>
-					<div className={styles.more_tag}>{`+${load.length} More`}</div>
+					<div className={styles.more_tag}>{`+${remainingLoadObjects.length} More`}</div>
 				</Tooltip>
 			) : null}
 
@@ -90,6 +95,7 @@ function Load({
 					data={data}
 					setShow={setShowModal}
 					setRouterLoading={setRouterLoading}
+					touch_points={touch_points}
 				/>
 			) : null}
 		</div>

@@ -1,8 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 import getPrefillForm from '../../../../../page-components/SearchResults/utils/getPrefillForm';
 import getLocationInfo from '../../../../../page-components/SearchResults/utils/locations-search';
@@ -11,53 +10,82 @@ import useCreateSearch from '../../../../../page-components/ServiceDiscovery/Spo
 import FormModal from './FormModal';
 import styles from './styles.module.css';
 
-// const DEFAULT_VALUE = 1;
+const DEFAULT_VALUE = 1;
 const SERVICE_KEY = 'search_type';
 const SERVICE = 'ftl_freight';
 
-// const getTabWisePrefilledValues = (activeTab, values = {}) => {
-// 	let formValues = {};
-// 	if (activeTab === 'cargo_gross') {
-// 		const { total_quantity = 1, total_volume = 1, total_weight = 1, packing_list, packages = [] } = values || {};
+const ACTIVETAB_VALUE_MAPPING = {
+	truck             : 'truck',
+	cargo_gross       : 'cargo',
+	cargo_per_package : 'cargo',
+};
 
-// 		formValues = {
-// 			total_quantity : total_quantity || DEFAULT_VALUE,
-// 			total_weight   : total_weight || DEFAULT_VALUE,
-// 			total_volume   : total_volume || DEFAULT_VALUE,
-// 			handling_type  : packages?.[GLOBAL_CONSTANTS.zeroth_index]?.handling_type || 'stackable',
-// 			packing_type   : packages?.[GLOBAL_CONSTANTS.zeroth_index]?.packing_type || 'box',
-// 			packing_list,
-// 		};
-// 	}
+const getTabWisePrefilledValues = (activeTab, values = {}) => {
+	let formValues = {};
 
-// 	if (activeTab === 'cargo_per_package') {
-// 		const { packages:packagesData = [] } = values || {};
+	if (activeTab === 'truck') {
+		const { trucks:trucksData = [] } = values || {};
 
-// 		formValues = {
-// 			packages: [
-// 				...(packagesData || []).map((packageItem) => ({
-// 					packages_count  : packageItem.packages_count || DEFAULT_VALUE,
-// 					packing_type    : packageItem.packing_type || 'box',
-// 					length          : packageItem.length || DEFAULT_VALUE,
-// 					width           : packageItem.width || DEFAULT_VALUE,
-// 					height          : packageItem.height || DEFAULT_VALUE,
-// 					package_weight  : packageItem.package_weight || DEFAULT_VALUE,
-// 					handling_type   : packageItem.handling_type || 'stackable',
-// 					dimensions_unit : 'cm',
-// 					weight_unit     : 'kg_unit',
-// 				})),
-// 			],
-// 		};
-// 	}
+		formValues = {
+			trucks: [
+				...(trucksData || []).map(({ truck_type = '', trucks_count = 1 }) => ({
+					truck_type,
+					trucks_count,
+				})),
+			],
+		};
+	}
 
-// 	return formValues;
-// };
+	if (activeTab === 'cargo_gross') {
+		const { packages = [], volume = 0 } = values || {};
+
+		const [packagesData] = packages;
+
+		formValues = {
+			packing_type   : packagesData.packing_type || 'box',
+			packages_count : packagesData.packages_count || DEFAULT_VALUE,
+			package_weight : packagesData.package_weight || DEFAULT_VALUE,
+			dimensions     : {
+				length : packagesData.length || packagesData.dimensions?.length || DEFAULT_VALUE,
+				width  : packagesData.width || packagesData.dimensions?.width || DEFAULT_VALUE,
+				height : packagesData.height || packagesData.dimensions?.height || DEFAULT_VALUE,
+			},
+			volume,
+			handling_type : packagesData.handling_type || 'stackable',
+			unit          : 'ton',
+		};
+	}
+
+	if (activeTab === 'cargo_per_package') {
+		const { packages:packagesData = [] } = values || {};
+
+		formValues = {
+			packages: [
+				...(packagesData || []).map((packageItem) => ({
+					packing_type   : packageItem.packing_type || 'box',
+					packages_count : packageItem.packages_count || DEFAULT_VALUE,
+					dimensions     : {
+						length : packageItem.length || packageItem.dimensions?.length || DEFAULT_VALUE,
+						width  : packageItem.width || packageItem.dimensions?.width || DEFAULT_VALUE,
+						height : packageItem.height || packageItem.dimensions?.height || DEFAULT_VALUE,
+					},
+					package_weight : packageItem.package_weight || DEFAULT_VALUE,
+					handling_type  : packageItem.handling_type || 'stackable',
+					unit           : 'ton',
+				})),
+			],
+		};
+	}
+
+	return formValues;
+};
 
 function EditLoad({
 	show = false,
 	setShow = () => {},
 	setRouterLoading = () => {},
 	data = {},
+	touch_points = {},
 }) {
 	const router = useRouter();
 
@@ -65,7 +93,10 @@ function EditLoad({
 
 	const defaultValues = useMemo(() => getPrefillForm(data, SERVICE_KEY), [data]);
 
-	const [activeTab, setActiveTab] = useState(defaultValues?.load_selection_type); // cargo and truck
+	const { load_selection_type = '' } = defaultValues;
+
+	const [activeTab, setActiveTab] = useState(ACTIVETAB_VALUE_MAPPING[load_selection_type]);
+	const [cargoType, setCargoType] = useState(activeTab === 'truck' ? 'cargo_per_package' : load_selection_type);
 
 	const {
 		control,
@@ -73,10 +104,19 @@ function EditLoad({
 		watch,
 		handleSubmit,
 		setValue,
-		// reset,
+		// setErrors,
 	} = useForm();
 
 	const { origin = {}, destination = {} } = getLocationInfo(data, {}, SERVICE_KEY);
+
+	const getLoadType = () => {
+		if (activeTab === 'truck') {
+			return activeTab;
+		}
+		return cargoType;
+	};
+
+	const loadType = getLoadType();
 
 	const handleApply = async (finalValues) => {
 		const requiredParams = {
@@ -87,12 +127,19 @@ function EditLoad({
 			destination,
 		};
 
+		const { trip_type = '' } = defaultValues;
+
 		const spot_search_id = await createSearch({
 			action : 'edit',
 			values : {
 				service_type : SERVICE,
 				...requiredParams,
-				formValues   : { ...finalValues, load_selection_type: activeTab },
+				formValues   : {
+					...finalValues,
+					load_selection_type: loadType,
+					trip_type,
+					touch_points,
+				},
 			},
 		});
 
@@ -107,72 +154,21 @@ function EditLoad({
 		}
 	};
 
-	// useEffect(() => {
-	// 	if (activeTab !== defaultValues?.load_selection_type) {
-	// 		reset();
-	// 		return;
-	// 	}
+	useEffect(() => {
+		const prefillingValuesObj = getTabWisePrefilledValues(
+			load_selection_type,
+			defaultValues,
+		);
 
-	// 	const prefillingValuesObj = getTabWisePrefilledValues(activeTab, defaultValues);
+		Object.entries(prefillingValuesObj).forEach(([key, value]) => {
+			setValue(key, value);
+		});
 
-	// 	Object.entries(prefillingValuesObj).forEach(([key, value]) => {
-	// 		setValue(key, value);
-	// 	});
+		const { cargo_readiness_date = '', commodity = '' } = defaultValues;
 
-	// 	const { cargo_clearance_date = '', commodity = '', commodity_details = [] } = defaultValues;
-
-	// 	const {
-	// 		commodity_class = {},
-	// 		commodity_type = '',
-	// 		commodity_subtype = '',
-	// 		temp_controlled_range = '',
-	// 		temp_controlled_type = '',
-	// 	} = commodity_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-
-	// 	const commodityPrefill = () => {
-	// 		if (commodity === 'general') {
-	// 			return commodity;
-	// 		}
-	// 		return commodity_type;
-	// 	};
-
-	// 	const commoditySubTypePrefill = () => {
-	// 		if (commodity === 'general') {
-	// 			return commodity_subtype || commodity_type;
-	// 		}
-	// 		if (commodity === 'special_consideration' && commodity_type === 'other_special') {
-	// 			return commodity_subtype;
-	// 		}
-	// 		if (commodity === 'special_consideration' && commodity_type === 'dangerous') {
-	// 			let classDescription = '';
-
-	// 			Object.keys(CLASS_MAPPING).forEach((element) => {
-	// 				const newElement = CLASS_MAPPING[element];
-	// 				if (
-	// 					newElement?.class_id === commodity_class?.class_id
-	// 					&& newElement?.subclass_id === commodity_class?.subclass_id
-	// 					&& newElement?.subclass_codes?.toString()
-	// 						=== commodity_class?.subclass_codes?.toString()
-	// 				) { classDescription = element; }
-	// 			});
-
-	// 			return classDescription;
-	// 		}
-	// 		if (commodity === 'special_consideration' && commodity_type === 'temp_controlled') {
-	// 			const tempControlled = `${temp_controlled_type}-${temp_controlled_range}`;
-	// 			return tempControlled;
-	// 		}
-
-	// 		return null;
-	// 	};
-
-	// 	const commodityData = commodityPrefill();
-	// 	const subCommodityData = commoditySubTypePrefill();
-
-	// 	// setValue('cargo_clearance_date', new Date(cargo_clearance_date));
-	// 	// setValue('commodity_type', commodityData);
-	// 	setValue('commodity_subtype', subCommodityData);
-	// }, [activeTab, defaultValues, reset, setValue]);
+		setValue('cargo_readiness_date', new Date(cargo_readiness_date));
+		setValue('commodity', commodity);
+	}, [defaultValues, load_selection_type, setValue, loadType]);
 
 	return (
 		<Modal
@@ -192,6 +188,9 @@ function EditLoad({
 					setValue={setValue}
 					activeTab={activeTab}
 					setActiveTab={setActiveTab}
+					cargoType={cargoType}
+					setCargoType={setCargoType}
+					commodity_type={data?.commodity_type}
 				/>
 			</Modal.Body>
 

@@ -29,13 +29,13 @@ function Child({
 	isSubControl = false,
 	fieldArrayValues = {},
 }) {
-	const ON_CHANGE_MAPPING = {
-		container_type: {
-			onChange: () => {
-				setValue(`container[${index}].commodity`, '');
-			},
-		},
-	};
+	// const ON_CHANGE_MAPPING = {
+	// 	container_type: {
+	// 		onChange: () => {
+	// 			setValue(`container[${index}].commodity`, '');
+	// 		},
+	// 	},
+	// };
 
 	return (
 		<div className={styles.form_container}>
@@ -133,9 +133,14 @@ function Child({
 								control={control}
 								id={`create_form_${newControl.name}_${index}`}
 								{...newControl}
-								{...ON_CHANGE_MAPPING[controlName] || {}}
+								// {...ON_CHANGE_MAPPING[controlName] || {}}
 								disabled={disabled}
 								name={`${name}[${index}].${newControl.name}`}
+								onChange={(val, obj) => {
+									if (typeof newControl?.onChange === 'function') {
+										newControl?.onChange(index, val, obj);
+									}
+								}}
 							/>
 							{subLabel ? (
 								<div className={styles.sub_label}>{subLabel}</div>

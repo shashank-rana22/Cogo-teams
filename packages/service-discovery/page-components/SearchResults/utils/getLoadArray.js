@@ -37,7 +37,6 @@ const getLoadArray = (search_type, serviceDetails) => {
 					load_selection_type  : service.load_selection_type,
 					commodity            : service.commodity,
 					cargo_readiness_date : service.cargo_readiness_date,
-
 				});
 			} else if (service.service_type === 'ltl_freight') {
 				LOAD.push({

@@ -92,8 +92,8 @@ const DEFAULT_VALUE = {
 	special_consideration : 'gases-2.1',
 };
 
-function CommodityControl({ control = () => {}, errors = {} }) {
-	const [activeCommodityType, setActiveCommodityType] = useState('general_cargo');
+function CommodityControl({ control = () => {}, errors = {}, commodity_type = '' }) {
+	const [activeCommodityType, setActiveCommodityType] = useState(commodity_type || 'general_cargo');
 
 	const COMMODITY_CONTROL = useMemo(() => [{
 		name    : 'commodity',

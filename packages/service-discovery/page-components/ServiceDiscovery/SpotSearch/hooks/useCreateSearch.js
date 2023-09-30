@@ -36,7 +36,11 @@ const useCreateSearch = () => {
 
 				payload = { ...defaultPayload };
 			} else if (['edit', 'quick-search'].includes(action)) {
-				const editPayload = getEditPayload(service_type, { origin, destination, formValues });
+				const editPayload = getEditPayload(service_type, {
+					origin,
+					destination,
+					formValues,
+				});
 
 				payload = { ...editPayload };
 			}
