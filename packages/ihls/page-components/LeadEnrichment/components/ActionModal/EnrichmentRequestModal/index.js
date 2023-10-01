@@ -25,8 +25,8 @@ function EnrichmentRequestModal({
 		onSave = () => {},
 	} = useCreateEnrichmentRequest({ onCloseModal, params, checkedRowsId });
 
-	const mode = watch('mode');
-	const select_first = watch('select_first');
+	const { mode, select_first } = watch();
+
 	const enriched_filter_present = params?.filters?.is_user_enriched === false;
 
 	const countValue = () => {

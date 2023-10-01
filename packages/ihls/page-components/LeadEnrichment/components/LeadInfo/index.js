@@ -5,10 +5,10 @@ import { useState } from 'react';
 import EmptyState from '../../../../commons/EmptyState';
 import LeadTable from '../../commons/LeadTable';
 import ActionModal from '../ActionModal';
-import LeadEnrichmentLogs from '../LeadEnrichmentLogs';
-import ObjectiveInfo from '../ObjectiveInfo';
 
 import getLeadInfoColumns from './getLeadInfoColumns';
+import LeadEnrichmentLogs from './LeadEnrichmentLogs';
+import ObjectiveInfo from './ObjectiveInfo';
 import styles from './styles.module.css';
 
 function LeadInfo({
@@ -22,7 +22,7 @@ function LeadInfo({
 	onChangeTableHeadCheckbox = () => {},
 	onChangeBodyCheckbox = () => {},
 }) {
-	const [showModal, setShowModal] = useState('');
+	const [showRequestModal, setShowRequestModal] = useState('');
 	const [visible, setVisible] = useState(false);
 	const [leadId, setLeadId] = useState(null);
 	const [allocationLeadId, setAllocationLeadId] = useState(null);
@@ -36,8 +36,6 @@ function LeadInfo({
 	});
 
 	const onPageChange = (pageNumber) => setParams((p) => ({ ...p, page: pageNumber }));
-
-	const onCloseModal = () => setShowModal(null);
 
 	if (!loading && isEmpty(response)) {
 		return (
@@ -60,7 +58,7 @@ function LeadInfo({
 								className={styles.popover_buttons}
 								size="md"
 								themeType="primary"
-								onClick={() => { setShowModal('enrichment'); setVisible(false); }}
+								onClick={() => { setShowRequestModal('enrichment'); setVisible(false); }}
 							>
 								Send to Enrichment
 
@@ -69,7 +67,7 @@ function LeadInfo({
 								className={styles.popover_buttons}
 								size="md"
 								themeType="primary"
-								onClick={() => { setShowModal('ingestion'); setVisible(false); }}
+								onClick={() => { setShowRequestModal('ingestion'); setVisible(false); }}
 							>
 								Push to CRM
 
@@ -107,8 +105,8 @@ function LeadInfo({
 			<ActionModal
 				checkedRowsId={checkedRowsId}
 				params={params}
-				showModal={showModal}
-				onCloseModal={onCloseModal}
+				showModal={showRequestModal}
+				setShowRequestModal={setShowRequestModal}
 				lead_count={paginationData.count}
 			/>
 		</div>

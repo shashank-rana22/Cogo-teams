@@ -3,9 +3,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import React from 'react';
 
-import EmptyState from '../../../../commons/EmptyState';
-import SearchInput from '../../../../commons/SearchInput';
-import useGetObjectiveInfo from '../../hooks/useGetObjectiveInfo';
+import EmptyState from '../../../../../commons/EmptyState';
+import SearchInput from '../../../../../commons/SearchInput';
+import useGetObjectiveInfo from '../../../hooks/useGetObjectiveInfo';
 
 import LoadingState from './components/LoadingState';
 import ObjectiveTable from './components/ObjectiveTable';

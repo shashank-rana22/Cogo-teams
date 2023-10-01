@@ -1,13 +1,16 @@
 import EnrichmentRequestModal from './EnrichmentRequestModal';
-import PustToCrm from './PushToCrm';
+import PushToCrm from './PushToCrm';
 
 function ActionModal(props) {
-	const { showModal, ...rest } = props;
+	const { showModal, setShowRequestModal, ...rest } = props;
+
+	const onCloseModal = () => setShowRequestModal('');
 
 	if (showModal === 'enrichment') {
 		return (
 			<EnrichmentRequestModal
 				showRequest={showModal === 'enrichment'}
+				onCloseModal={onCloseModal}
 				{...rest}
 			/>
 		);
@@ -15,8 +18,9 @@ function ActionModal(props) {
 
 	if (showModal === 'ingestion') {
 		return (
-			<PustToCrm
+			<PushToCrm
 				showRequest={showModal === 'ingestion'}
+				onCloseModal={onCloseModal}
 				{...rest}
 			/>
 		);

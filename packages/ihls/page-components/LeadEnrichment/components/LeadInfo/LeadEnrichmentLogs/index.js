@@ -3,8 +3,8 @@ import { IcMEyeopen } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import LeadTable from '../../commons/LeadTable';
-import useGetLeadEnrichmentLogs from '../../hooks/useGetLeadEnrichmentLogs';
+import LeadTable from '../../../commons/LeadTable';
+import useGetLeadEnrichmentLogs from '../../../hooks/useGetLeadEnrichmentLogs';
 
 import getEnrichmentColumns from './getEnrichmentLogs';
 import styles from './styles.module.css';

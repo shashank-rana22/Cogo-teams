@@ -7,7 +7,7 @@ import useCreateIngestionRequest from '../../../hooks/useCreateIngestionRequest'
 
 import styles from './styles.module.css';
 
-function PustToCrm({
+function PushToCrm({
 	lead_count = null,
 	checkedRowsId = [],
 	showRequest = false,
@@ -23,8 +23,8 @@ function PustToCrm({
 		onSave = () => {},
 	} = useCreateIngestionRequest({ onCloseModal, params, checkedRowsId });
 
-	const mode = watch('mode');
-	const select_first = watch('select_first');
+	const { mode, select_first } = watch();
+
 	const enriched_filter_present = params?.filters?.is_user_enriched === true;
 
 	const countValue = () => {
@@ -106,4 +106,4 @@ function PustToCrm({
 	);
 }
 
-export default PustToCrm;
+export default PushToCrm;
