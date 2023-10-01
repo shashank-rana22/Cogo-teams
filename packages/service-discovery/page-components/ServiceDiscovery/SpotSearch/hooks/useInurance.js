@@ -12,8 +12,11 @@ const useInsurance = ({ activeTab, organization = {} }) => {
 	const { watch, setValue, setError, clearErrors } = formHook;
 
 	const { origin_point, destination_point } = watch();
+	console.log(formValueRef, 'formValueRef');
 
 	const onSubmit = (data) => {
+		const { origin_point: refOrigin, destination_point: refDestination } = formValueRef.current || {};
+
 		if (isEmpty(organization?.organization_id)) {
 			Toast.error('Please Select Organization');
 			return;
@@ -22,7 +25,13 @@ const useInsurance = ({ activeTab, organization = {} }) => {
 			Toast.error('Please Select User');
 			return;
 		}
-		const queryData = { ...data, type: activeTab, orgDetails: organization };
+		const queryData = {
+			...data,
+			originName      : refOrigin?.display_name,
+			destinationName : refDestination?.display_name,
+			type            : activeTab,
+			orgDetails      : organization,
+		};
 		push(`/cargo-insurance?data=${JSON.stringify(queryData)}`);
 	};
 
