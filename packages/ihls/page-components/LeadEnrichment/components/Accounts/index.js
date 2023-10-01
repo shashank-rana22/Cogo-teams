@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 
 function Accounts() {
 	const [showUsers, setShowUsers] = useState(false);
-	const [fileName, setFileName] = useState(null);
+	const [fileName, setFileName] = useState('');
 	const [showCsv, setShowCsv] = useState(false);
 
 	const {
@@ -42,7 +42,7 @@ function Accounts() {
 					csv_filter: undefined,
 				},
 			}));
-			setFileName(null);
+			setFileName('');
 		} catch (error) {
 			Toast.error(error);
 		}

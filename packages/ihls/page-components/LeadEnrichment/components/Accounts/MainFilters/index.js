@@ -33,7 +33,7 @@ function MainFilters({
 			...p,
 			filters: {},
 		}));
-		setFileName(null);
+		setFileName('');
 	};
 
 	return (
