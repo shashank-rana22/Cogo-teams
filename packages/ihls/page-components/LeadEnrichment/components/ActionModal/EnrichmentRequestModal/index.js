@@ -27,7 +27,7 @@ function EnrichmentRequestModal({
 
 	const { mode, select_first } = watch();
 
-	const enriched_filter_present = params?.filters?.is_user_enriched === false;
+	const enriched_filter_present = !params?.filters?.is_user_enriched;
 
 	const countValue = () => {
 		let show_count = checkedRowsId.length || lead_count || null;
