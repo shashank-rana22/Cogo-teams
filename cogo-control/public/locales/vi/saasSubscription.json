@@ -148,5 +148,6 @@
     "log_control_name":"Tên kế hoạch",
     "log_control_event":"Sự kiện",
     "log_control_created_at":"Được tạo ra tại",
-    "log_controls_updated_at":"Cập nhật tại"
+    "log_controls_updated_at":"Cập nhật tại",
+    "plan_status":"Trạng thái kế hoạch"
 }

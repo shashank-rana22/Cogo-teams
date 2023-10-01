@@ -6,7 +6,10 @@ import { useTranslation } from 'next-i18next';
 import getDiscountControls from '../configuration/discountControls';
 
 const getDefaultValue = ({ info, isCreate = false }) => {
-	const { service_name, config_type, value, usage_count, metadata, conditions, is_active } = info || {};
+	const {
+		service_name = '', config_type = '', value = '',
+		usage_count = '', metadata = {}, conditions = '', is_active = false,
+	} = info || {};
 
 	if (isCreate) return {};
 

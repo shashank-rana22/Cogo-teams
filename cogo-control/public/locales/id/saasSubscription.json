@@ -148,5 +148,6 @@
     "log_control_name":"Nama rencana",
     "log_control_event":"Peristiwa",
     "log_control_created_at":"Dibuat di",
-    "log_controls_updated_at":"Diperbarui di"
+    "log_controls_updated_at":"Diperbarui di",
+    "plan_status":"Status Rencana"
 }
