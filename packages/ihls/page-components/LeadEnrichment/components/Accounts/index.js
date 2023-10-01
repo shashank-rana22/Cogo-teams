@@ -1,6 +1,6 @@
 import { Button, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMArrowRotateUp, IcMCloudUpload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import FileFilter from '../../commons/FileFilter';
@@ -60,7 +60,8 @@ function Accounts() {
 							onRemoveCsvFilter={onRemoveCsvFilter}
 						/>
 					) : (
-						<Button onClick={() => setShowCsv(true)}>
+						<Button themeType="secondary" className={styles.upload_btn} onClick={() => setShowCsv(true)}>
+							<IcMCloudUpload style={{ width: '20px', height: 'auto' }} />
 							Upload CSV
 						</Button>
 					)}

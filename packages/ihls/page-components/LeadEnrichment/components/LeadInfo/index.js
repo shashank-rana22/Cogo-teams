@@ -57,16 +57,16 @@ function LeadInfo({
 							<Button
 								className={styles.popover_buttons}
 								size="md"
-								themeType="primary"
+								themeType="secondary"
 								onClick={() => { setShowRequestModal('enrichment'); setVisible(false); }}
 							>
-								Send to Enrichment
+								Enrichment Request
 
 							</Button>
 							<Button
 								className={styles.popover_buttons}
 								size="md"
-								themeType="primary"
+								themeType="secondary"
 								onClick={() => { setShowRequestModal('ingestion'); setVisible(false); }}
 							>
 								Push to CRM
@@ -77,7 +77,9 @@ function LeadInfo({
 					)}
 					visible={visible}
 				>
-					<Button themeType="secondary" onClick={() => setVisible(!visible)}>Action</Button>
+					<Button themeType="primary" onClick={() => setVisible(!visible)}>
+						Action
+					</Button>
 				</Popover>
 			</div>
 

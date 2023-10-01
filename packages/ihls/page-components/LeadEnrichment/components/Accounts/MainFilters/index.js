@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { IcMFilter, IcMUndo } from '@cogoport/icons-react';
+import { IcMFilter, IcMRefresh } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import { getFieldController } from '../../../../../commons/Form/getFieldController';
@@ -107,7 +107,7 @@ function MainFilters({
 					className={styles.icmUndo}
 					onClick={onClickReset}
 				>
-					<IcMUndo style={{ width: '16px', height: 'auto' }} />
+					<IcMRefresh style={{ width: '16px', height: 'auto' }} />
 				</Button>
 			</div>
 		</div>

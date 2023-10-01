@@ -10,6 +10,12 @@
 	color: var(--color-secondary-greyscale-1);
 }
 
+.upload_btn {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+
 .account_table {
 	margin-top: 16px;
 }
