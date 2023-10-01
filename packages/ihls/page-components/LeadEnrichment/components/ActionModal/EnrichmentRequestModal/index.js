@@ -1,11 +1,11 @@
 import { Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import FieldArray from '../../../../commons/Form/FieldArray';
-import { getFieldController } from '../../../../commons/Form/getFieldController';
-import constraint_controls from '../../configurations/enrichment-request-constraint-controls';
-import enrichment_request_controls from '../../configurations/enrichment-request-controls';
-import useCreateEnrichmentRequest from '../../hooks/useCreateEnrichmentRequest';
+import FieldArray from '../../../../../commons/Form/FieldArray';
+import { getFieldController } from '../../../../../commons/Form/getFieldController';
+import constraint_controls from '../../../configurations/enrichment-request-constraint-controls';
+import enrichment_request_controls from '../../../configurations/enrichment-request-controls';
+import useCreateEnrichmentRequest from '../../../hooks/useCreateEnrichmentRequest';
 
 import styles from './styles.module.css';
 

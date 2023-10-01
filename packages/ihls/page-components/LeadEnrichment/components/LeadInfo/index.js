@@ -4,10 +4,9 @@ import { useState } from 'react';
 
 import EmptyState from '../../../../commons/EmptyState';
 import LeadTable from '../../commons/LeadTable';
-import EnrichmentRequestModal from '../EnrichmentRequestModal';
+import ActionModal from '../ActionModal';
 import LeadEnrichmentLogs from '../LeadEnrichmentLogs';
 import ObjectiveInfo from '../ObjectiveInfo';
-import PustToCrm from '../PushToCrm';
 
 import getLeadInfoColumns from './getLeadInfoColumns';
 import styles from './styles.module.css';
@@ -39,34 +38,6 @@ function LeadInfo({
 	const onPageChange = (pageNumber) => setParams((p) => ({ ...p, page: pageNumber }));
 
 	const onCloseModal = () => setShowModal(null);
-
-	function ActionComponent() {
-		if (showModal === 'enrichment') {
-			return (
-				<EnrichmentRequestModal
-					checkedRowsId={checkedRowsId}
-					params={params}
-					showRequest={showModal === 'enrichment'}
-					onCloseModal={onCloseModal}
-					lead_count={paginationData.count}
-				/>
-			);
-		}
-
-		if (showModal === 'ingestion') {
-			return (
-				<PustToCrm
-					checkedRowsId={checkedRowsId}
-					params={params}
-					showRequest={showModal === 'ingestion'}
-					onCloseModal={onCloseModal}
-					lead_count={paginationData.count}
-				/>
-			);
-		}
-
-		return null;
-	}
 
 	if (!loading && isEmpty(response)) {
 		return (
@@ -133,7 +104,13 @@ function LeadInfo({
 
 			{leadId ? <LeadEnrichmentLogs leadId={leadId} setLeadId={setLeadId} /> : null}
 
-			<ActionComponent />
+			<ActionModal
+				checkedRowsId={checkedRowsId}
+				params={params}
+				showModal={showModal}
+				onCloseModal={onCloseModal}
+				lead_count={paginationData.count}
+			/>
 		</div>
 	);
 }

@@ -1,9 +1,9 @@
 import { Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import { getFieldController } from '../../../../commons/Form/getFieldController';
-import ingestion_request_controls from '../../configurations/push-to-crm-controls';
-import useCreateIngestionRequest from '../../hooks/useCreateIngestionRequest';
+import { getFieldController } from '../../../../../commons/Form/getFieldController';
+import ingestion_request_controls from '../../../configurations/push-to-crm-controls';
+import useCreateIngestionRequest from '../../../hooks/useCreateIngestionRequest';
 
 import styles from './styles.module.css';
 
