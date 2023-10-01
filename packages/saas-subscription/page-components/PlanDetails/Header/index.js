@@ -57,7 +57,7 @@ function Header({ plan = {}, loading = false, setFeatureModal }) {
 
 				<div className={cl`${styles.flex_box} ${styles.second_sec}`}>
 					<div>
-						<p className={styles.title}>Plan Status</p>
+						<p className={styles.title}>{t('saasSubscription:plan_status')}</p>
 						<Toggle
 							size="sm"
 							onLabel="Active"
