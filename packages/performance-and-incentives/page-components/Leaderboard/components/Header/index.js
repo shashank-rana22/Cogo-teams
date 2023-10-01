@@ -12,18 +12,20 @@ import {
 	getTodayStartDate,
 	getThisMonthStartDate,
 	getThisQuarterStartDate,
+	getLastMonthFirstAndLastDates,
 } from '../../../../utils/start-date-functions';
 import DURATION_OPTIONS from '../../configurations/get-duration-filter-options';
 
 import ProgressBar from './ProgressBar';
 import styles from './styles.module.css';
 
-const { TODAY, THIS_MONTH, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
+const { TODAY, LAST_MONTH, THIS_MONTH, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 const GET_START_DATE_FUNCTION_MAPPING = {
 	[TODAY]        : getTodayStartDate,
+	[LAST_MONTH]   : getLastMonthFirstAndLastDates,
 	[THIS_MONTH]   : getThisMonthStartDate,
 	[THIS_QUARTER] : getThisQuarterStartDate,
 	[THIS_YEAR]    : getThisAseessYearStartDate,
@@ -40,10 +42,16 @@ function Header(props) {
 
 	const onChangeDuration = (selectedDuration) => {
 		if (typeof GET_START_DATE_FUNCTION_MAPPING[selectedDuration] === 'function') {
-			setDateRange({
-				startDate : GET_START_DATE_FUNCTION_MAPPING[selectedDuration](),
-				endDate   : new Date(),
-			});
+			if (selectedDuration === LAST_MONTH) {
+				const { startDate, endDate } = GET_START_DATE_FUNCTION_MAPPING[selectedDuration]();
+
+				setDateRange({ startDate, endDate });
+			} else {
+				setDateRange({
+					startDate : GET_START_DATE_FUNCTION_MAPPING[selectedDuration](),
+					endDate   : new Date(),
+				});
+			}
 		}
 
 		setDuration(selectedDuration);

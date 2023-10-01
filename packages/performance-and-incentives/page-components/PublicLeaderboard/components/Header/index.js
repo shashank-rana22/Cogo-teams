@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import DURATION_CONSTANTS from '../../../../constants/duration-constants';
 import {
-	getThisAseessYearStartDate, getThisMonthStartDate,
+	getThisAseessYearStartDate, getLastMonthFirstAndLastDates, getThisMonthStartDate,
 	getThisQuarterStartDate, getTodayStartDate,
 } from '../../../../utils/start-date-functions';
 import DURATION_OPTIONS from '../../../Leaderboard/configurations/get-duration-filter-options';
@@ -14,10 +14,11 @@ import VIEW_OPTIONS from '../../configurations/view-type-options';
 
 import styles from './styles.module.css';
 
-const { TODAY, THIS_MONTH, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
+const { TODAY, LAST_MONTH, THIS_MONTH, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
 
 const GET_START_DATE_FUNCTION_MAPPING = {
 	[TODAY]        : getTodayStartDate,
+	[LAST_MONTH]   : getLastMonthFirstAndLastDates,
 	[THIS_MONTH]   : getThisMonthStartDate,
 	[THIS_QUARTER] : getThisQuarterStartDate,
 	[THIS_YEAR]    : getThisAseessYearStartDate,
@@ -32,10 +33,16 @@ function Header(props) {
 
 	const onChangeDuration = (selectedDuration) => {
 		if (typeof GET_START_DATE_FUNCTION_MAPPING[selectedDuration] === 'function') {
-			setDateRange({
-				startDate : GET_START_DATE_FUNCTION_MAPPING[selectedDuration](),
-				endDate   : new Date(),
-			});
+			if (selectedDuration === LAST_MONTH) {
+				const { startDate, endDate } = GET_START_DATE_FUNCTION_MAPPING[selectedDuration]();
+
+				setDateRange({ startDate, endDate });
+			} else {
+				setDateRange({
+					startDate : GET_START_DATE_FUNCTION_MAPPING[selectedDuration](),
+					endDate   : new Date(),
+				});
+			}
 		}
 
 		setDuration(selectedDuration);

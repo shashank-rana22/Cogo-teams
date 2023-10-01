@@ -8,6 +8,7 @@ const DECEMBER = 11;
 const MARCH = 2;
 const ADD_MONTH = 1;
 const ZERO = 0;
+const TOTAL_HOURS = 24;
 
 export const getTodayStartDate = () => {
 	const currentDate = new Date();
@@ -20,6 +21,22 @@ export const getThisMonthStartDate = () => {
 	currentDate.setDate(START_DATE);
 	currentDate.setHours(ZERO, ZERO, ZERO, ZERO);
 	return currentDate;
+};
+
+export const getLastMonthFirstAndLastDates = () => {
+	const currentDate = new Date();
+	const currentYear = currentDate.getFullYear();
+	const currentMonth = currentDate.getMonth();
+
+	const startDate = new Date(currentYear, currentMonth - OFFSET, START_DATE);
+
+	const endDate = new Date(currentYear, currentMonth, ZERO);
+	endDate.setHours(TOTAL_HOURS, ZERO, ZERO, -OFFSET);
+
+	return {
+		startDate,
+		endDate,
+	};
 };
 
 export const getThisMonthLastDate = () => {
