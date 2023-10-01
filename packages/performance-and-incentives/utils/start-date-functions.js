@@ -9,11 +9,16 @@ const MARCH = 2;
 const ADD_MONTH = 1;
 const ZERO = 0;
 
-export const getTodayStartDate = () => new Date();
+export const getTodayStartDate = () => {
+	const currentDate = new Date();
+	currentDate.setHours(ZERO, ZERO, ZERO, ZERO);
+	return currentDate;
+};
 
 export const getThisMonthStartDate = () => {
 	const currentDate = new Date();
 	currentDate.setDate(START_DATE);
+	currentDate.setHours(ZERO, ZERO, ZERO, ZERO);
 	return currentDate;
 };
 
@@ -27,6 +32,7 @@ export const getThisQuarterStartDate = () => {
 	const currentDate = new Date();
 
 	currentDate.setDate(START_DATE);
+	currentDate.setHours(ZERO, ZERO, ZERO, ZERO);
 
 	const currentMonth = currentDate.getMonth();
 
@@ -46,6 +52,8 @@ export const getThisQuarterStartDate = () => {
 
 export const getThisAseessYearStartDate = () => {
 	const currentDate = new Date();
+	currentDate.setHours(ZERO, ZERO, ZERO, ZERO);
+
 	if (currentDate.getMonth() < APRIL) {
 		currentDate.setFullYear(currentDate.getFullYear() - OFFSET);
 	}
