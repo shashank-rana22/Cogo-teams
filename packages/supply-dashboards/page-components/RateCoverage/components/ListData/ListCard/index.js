@@ -130,7 +130,7 @@ function ListCard({
 				</div>
 			)}
 
-			{['critical_ports', 'spot_search', 'cancelled_shipments']?.includes(source)
+			{['critical_ports', 'expiring_rates', 'cancelled_shipments']?.includes(source)
 			&& (
 				<CardContent data={data} filter={filter} service={service} />
 			)}
@@ -214,7 +214,7 @@ function ListCard({
 									<DetailsView data={data} source={source} filter={filter} />
 								)}
 
-						{['critical_ports', 'spot_search', 'cancelled_shipments']?.includes(source)
+						{['critical_ports', 'expiring_rates', 'cancelled_shipments']?.includes(source)
 							&& (
 								<div>
 									{!['aborted', 'completed'].includes(filter?.status) && (

@@ -34,9 +34,9 @@ export const CARDS_MAPPING = {
 		status       : 'critical_ports',
 		showViewMore : true,
 	},
-	spot_search: {
-		title        : 'Spot Searches',
-		status       : 'spot_search',
+	expiring_rates: {
+		title        : 'Expiring Rates',
+		status       : 'expiring_rates',
 		showViewMore : true,
 	},
 	cancelled_shipments: {

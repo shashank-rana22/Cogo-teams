@@ -170,7 +170,7 @@ function Filter({
 
 						</div>
 					)}
-				{ (source === 'critical_ports' || source === 'spot_search' || source === 'cancelled_shipments') && (
+				{ (source === 'critical_ports' || source === 'expiring_rates' || source === 'cancelled_shipments') && (
 					<div>
 						<div className={styles.details}>
 							<div>
