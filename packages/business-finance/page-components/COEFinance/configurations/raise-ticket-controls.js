@@ -47,7 +47,7 @@ const controls = ({
 		type       : 'file',
 		themeType  : 'secondary',
 		drag       : true,
-		label      : 'Upload Supporting Document',
+		label      : 'Upload Supporting Document(Optional)',
 		uploadType : 'aws',
 	},
 ]);
