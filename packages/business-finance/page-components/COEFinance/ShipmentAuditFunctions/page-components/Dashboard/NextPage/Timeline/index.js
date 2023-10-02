@@ -9,13 +9,13 @@ import Title from './Title';
 
 const ZERO_VALUE = 0;
 const SECOND_COLUMN = 2;
-export default function Accordian({
+export default function Timeline({
 	isOpen = false,
-	toggleAccordion,
-	columnIndex,
-	index,
-	income,
-	profitability,
+	toggleAccordion = () => {},
+	columnIndex = '',
+	index = '',
+	income = '',
+	profitability = '',
 }) {
 	return (
 	// <Accordion
@@ -39,7 +39,7 @@ export default function Accordian({
 				</div>
 
 				<div className={`${isOpen ? styles.nothing : styles.other_title}`}>
-					<div className={styles.regular}>Income :</div>
+					<div className={styles.regular}>Income : </div>
 					<div>
 						{/* {income} */}
 						{formatAmount({

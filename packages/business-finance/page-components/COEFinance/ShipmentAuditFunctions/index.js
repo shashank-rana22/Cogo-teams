@@ -12,8 +12,7 @@ import getFinancialCloseColumns from './configurations/getFinancialCloseColumns'
 import getJobColumns from './configurations/getJobColumns';
 import styles from './styles.module.css';
 
-function ShipmentAuditFunction({ activeTab }) {
-	// const router = useRouter();
+function ShipmentAuditFunction({ activeTab = '' }) {
 	const { push } = useRouter();
 	const [date, setDate] = useState('');
 	const [tradeTab, setTradeTab] = useState('');
@@ -35,18 +34,15 @@ function ShipmentAuditFunction({ activeTab }) {
 
 	const { data, loading, refetch } = useGetDocumentList({ paginationFilters, search, activeTab });
 	const { list = [] } = data || {};
-	// console.log(data, 'list');
-	console.log(filters, 'tab');
 
 	const onPageChange = (val) => {
 		setPaginationFilters((prev) => ({ ...prev, page: val }));
 	};
-	// const handleClick = (jobId) => {
-	// 	push(
-	// 		'/business-finance/coe-finance/next-page',
-	// 		'/business-finance/coe-finance/next-page',
-	// 	);
-	// };
+	const handleClick = (jobId) => {
+		push(
+			`/business-finance/coe-finance/next-page?job_id=${jobId}`,
+		);
+	};
 	// const handleFinancialTabClick = (jobId) => {
 	// 	push(
 	// 		'/business-finance/coe-finance/finance-close-next-page',
@@ -54,12 +50,12 @@ function ShipmentAuditFunction({ activeTab }) {
 	// 	);
 	// };
 
-	const handleClick = (jobId) => {
-		push({
-			pathname : '/business-finance/coe-finance/next-page',
-			query    : { jobId },
-		});
-	};
+	// const handleClick = (jobId) => {
+	// 	push({
+	// 		pathname : '/business-finance/coe-finance/next-page',
+	// 		query    : { jobId },
+	// 	});
+	// };
 
 	const handleFinancialTabClick = (jobId) => {
 		push({
@@ -71,8 +67,6 @@ function ShipmentAuditFunction({ activeTab }) {
 	const rest = { onClickOutside: () => setShow(false) };
 	const columns = getJobColumns({ handleClick });
 	const columns2 = getFinancialCloseColumns({ handleFinancialTabClick });
-	// console.log(filters);
-	// console.log(search);
 
 	useEffect(() => {
 		setPaginationFilters((prev) => ({ ...prev, page: 1 }));
@@ -141,8 +135,8 @@ function ShipmentAuditFunction({ activeTab }) {
 					/>
 				</div>
 				{/* <div className={styles.tabs_container}>
-				<Button onClick={handleClick}>Go to Next Page</Button>
-			</div> */}
+					<Button onClick={handleClick}>Go to Next Page</Button>
+				</div> */}
 
 			</main>
 			<div className={styles.list_container}>

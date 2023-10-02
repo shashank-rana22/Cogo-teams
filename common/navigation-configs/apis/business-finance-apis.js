@@ -272,6 +272,11 @@ const business_finance = {
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},
+		{
+			api         : 'get_common_job_milestone_job_audits',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
 	],
 
 };

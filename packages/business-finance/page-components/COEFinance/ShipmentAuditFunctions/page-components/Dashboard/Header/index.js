@@ -17,7 +17,7 @@ const FINANCIAL_ARRAY = [[true, false, false, false, false, false],
 	[false, false, false, false, false, false],
 	[false, false, false, false, false, false]];
 
-function Header({ activeTab = '', jobId }) {
+function Header({ activeTab = '', jobId = '' }) {
 	const { push } = useRouter();
 	const handleClick = () => {
 		if (activeTab === 'financial_close') {
