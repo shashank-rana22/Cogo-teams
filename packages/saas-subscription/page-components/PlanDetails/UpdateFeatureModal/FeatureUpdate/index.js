@@ -15,7 +15,6 @@ function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submit
 	const {
 		control,
 		handleSubmit,
-		getValues,
 		formState: { errors },
 	} = useForm({
 		defaultValues: defaultValue,
@@ -43,6 +42,7 @@ function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submit
 			</div>
 			<div className={styles.content_body}>
 				<div className={styles.table}>
+
 					<div className={cl`${styles.card_header} ${styles.flex_box}`}>
 						{configs.map((config) => (
 							<div
@@ -54,10 +54,12 @@ function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submit
 							</div>
 						))}
 					</div>
-					<div className={styles.scroll_container}>
+
+					<div key={name} className={styles.scroll_container}>
 						{(fields || []).map((field, index) => (
 							<div key={field?.id} className={cl`${styles.flex_box} ${styles.item_row}`}>
 								<Item
+									name={name}
 									info={field}
 									control={control}
 									controls={formControls[GLOBAL_CONSTANTS.zeroth_index].controls}
@@ -65,7 +67,6 @@ function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submit
 									errors={errors}
 									fields={fields}
 									index={index}
-									getValues={getValues}
 								/>
 							</div>
 						))}
@@ -77,6 +78,7 @@ function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submit
 					</div>
 				</div>
 			</div>
+
 			<div className={cl`${styles.container} ${styles.footer}`}>
 				<Button
 					type="button"

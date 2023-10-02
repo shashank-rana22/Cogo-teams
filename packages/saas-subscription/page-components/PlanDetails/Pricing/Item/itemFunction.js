@@ -1,4 +1,5 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { startCase } from '@cogoport/utils';
 
 import EditPrice from './EditPrice';
 
@@ -16,6 +17,9 @@ const itemFunction = ({ isEditPrice, setIsEditPrice }) => ({
 				},
 			})}
 		</span>
+	),
+	renderPeriod: (item, config) => (
+		`${startCase(item?.[config?.key])}ly`
 	),
 
 });
