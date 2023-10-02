@@ -277,6 +277,11 @@ const business_finance = {
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},
+		{
+			api         : 'get_common_job_pre_post_shipment_quotation',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
 	],
 
 };
