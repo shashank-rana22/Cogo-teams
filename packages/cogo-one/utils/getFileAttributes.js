@@ -37,7 +37,14 @@ const MEDIA_EXTENSION_TYPES = {
 };
 
 export function getFileAttributes({ fileName = '', finalUrl = '' }) {
-	const splitFileName = fileName.split('.');
+	let tempFileName = fileName;
+
+	if (!fileName && finalUrl) {
+		const decodedUrl = decodeURI(finalUrl);
+		tempFileName = decodedUrl?.substring(decodedUrl.lastIndexOf('/') + DOT_AFTER_SLASH);
+	}
+
+	const splitFileName = tempFileName.split('.');
 	let extension = '';
 	let name = '';
 
