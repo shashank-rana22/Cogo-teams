@@ -16,8 +16,8 @@ interface SegmentFilterProps {
 	setSearchValue: any;
 	searchValue: string;
 	currentTab: string;
-	statsData?:object
-	tab:string;
+	statsData?: object;
+	tab: string;
 	setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
 	setTab: React.Dispatch<React.SetStateAction<string>>;
 	filters: GenericObject;
@@ -47,11 +47,9 @@ function SegmentedFilters({
 						background="#FFFAEB"
 					/>
 				</div>
-
 			</div>
 			<div className={styled.main}>
 				<div className={styled.segment}>
-
 					<div className={styled.filter_data_urgent}>
 						<SegmentedControl
 							options={filtersUrgentData(statsData)}
@@ -68,7 +66,7 @@ function SegmentedFilters({
 							setFilters={setFilters}
 						/>
 					</div>
-					<FilterModal setFilters={setFilters} filters={{}}/>
+					<FilterModal setFilters={setFilters} />
 				</div>
 				<div className={styled.search_filter}>
 					<div className={styled.search}>
@@ -78,15 +76,18 @@ function SegmentedFilters({
 							value={searchValue}
 							onChange={(e: any) => setSearchValue(e)}
 							placeholder="Search by Invoice No./Shipment ID/Supplier name..."
-							suffix={<IcMSearchlight height={17} width={17} style={{ margin: '0 8px' }} />}
-
+							suffix={(
+								<IcMSearchlight
+									height={17}
+									width={17}
+									style={{ margin: '0 8px' }}
+								/>
+							)}
 						/>
 					</div>
 				</div>
-
 			</div>
 		</>
-
 	);
 }
 
