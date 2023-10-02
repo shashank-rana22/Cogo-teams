@@ -1,21 +1,18 @@
+.main_container {
+	padding: 10px 20px;
+}
+
 .heading {
+	margin-bottom: 10px;
 	font-size: 16px;
 	font-weight: 600;
 	color: #666a90;
 }
 
-.main_container {
-	padding: 20px;
-}
-
-.doc_container {
+.doc_card {
 	display: flex;
-	flex-wrap: wrap;
-}
-
-.placeholder {
-	width: 44%;
-	margin: 10px 50px 10px 10px;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .submit_button {

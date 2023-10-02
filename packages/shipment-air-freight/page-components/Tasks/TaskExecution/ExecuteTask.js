@@ -7,10 +7,21 @@ import LoadingState from '../LoadingState';
 import {
 	MarkConfirmServices, GenerateMawb, ConfirmBookingWithAirline, CartingRequest, CartingDetails, CartingApproval,
 	ConfirmSellPrice, ConfirmCargoAir, TerminalChargeReceipt, UploadChecklist, UploadShippingBill, UploadLeo,
+	UploadGatePass,
 } from './CustomTasks';
 import UpdateCargoAir from './CustomTasks/UpdateCargoAir';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
+
+const exportTradeTypeTasks = {
+	upload_carting_order          : CartingDetails,
+	request_carting_order         : CartingRequest,
+	upload_carting_order_approval : CartingApproval,
+	upload_shipping_bill          : UploadShippingBill,
+	upload_leo                    : UploadLeo,
+	upload_checklist              : UploadChecklist,
+	upload_gate_pass              : UploadGatePass,
+};
 
 const DEFAULT_STEP_VALUE = 1;
 function ExecuteTask({
@@ -65,9 +76,12 @@ function ExecuteTask({
 	);
 	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - DEFAULT_STEP_VALUE] : {};
 
+	const Component = exportTradeTypeTasks?.[task?.task];
+
 	if (loading || servicesLoading) {
 		return <div><LoadingState /></div>;
 	}
+
 	if (task?.task === 'mark_confirmed' && 	task?.service_type) {
 		const requiredService =			(services || []).filter(
 			(serviceObj) => serviceObj?.id === task?.task_field_ids[GLOBAL_CONSTANTS.zeroth_index],
@@ -91,6 +105,7 @@ function ExecuteTask({
 			/>
 		);
 	}
+
 	if (task?.task === 'upload_mawb_freight_certificate') {
 		return (
 			<GenerateMawb
@@ -105,6 +120,7 @@ function ExecuteTask({
 
 		);
 	}
+
 	if (task?.task === 'confirm_service_provider' && task?.service_type === 'air_freight_service') {
 		return (
 			<ConfirmBookingWithAirline
@@ -117,6 +133,7 @@ function ExecuteTask({
 
 		);
 	}
+
 	if (task?.task === 'approve_sell_price' && task?.shipment_type === 'air_freight') {
 		return (
 			<ConfirmSellPrice
@@ -127,6 +144,7 @@ function ExecuteTask({
 			/>
 		);
 	}
+
 	if (task?.task === 'update_flight_details'
 		&& task?.shipment_type === 'air_freight'
 		&& tradeType === 'import'
@@ -143,6 +161,7 @@ function ExecuteTask({
 			/>
 		);
 	}
+
 	if (
 		task?.task === 'update_flight_departure_and_flight_arrival'
 		&& tradeType === 'import'
@@ -159,36 +178,7 @@ function ExecuteTask({
 			/>
 		);
 	}
-	if (task?.task === 'upload_checklist' && tradeType === 'export') {
-		return (
-			<UploadChecklist
-				shipmentData={shipment_data}
-				task={task}
-				refetch={taskListRefetch}
-				onCancel={onCancel}
-			/>
-		);
-	}
-	if (task?.task === 'upload_leo' && tradeType === 'export') {
-		return (
-			<UploadLeo
-				shipmentData={shipment_data}
-				task={task}
-				refetch={taskListRefetch}
-				onCancel={onCancel}
-			/>
-		);
-	}
-	if (task?.task === 'upload_shipping_bill' && tradeType === 'export') {
-		return (
-			<UploadShippingBill
-				shipmentData={shipment_data}
-				task={task}
-				refetch={taskListRefetch}
-				onCancel={onCancel}
-			/>
-		);
-	}
+
 	if (task?.task === 'upload_terminal_handling_charge_receipt') {
 		return (
 			<TerminalChargeReceipt
@@ -200,6 +190,7 @@ function ExecuteTask({
 			/>
 		);
 	}
+
 	if (task?.task === 'upload_gate_pass_charge_receipt') {
 		return (
 			<TerminalChargeReceipt
@@ -211,29 +202,11 @@ function ExecuteTask({
 			/>
 		);
 	}
-	if (task?.task === 'upload_carting_order' && tradeType === 'export') {
+
+	if (tradeType === 'export' && Component) {
 		return (
-			<CartingDetails
-				shipmentData={shipment_data}
-				task={task}
-				refetch={taskListRefetch}
-				onCancel={onCancel}
-			/>
-		);
-	}
-	if (task?.task === 'request_carting_order' && tradeType === 'export') {
-		return (
-			<CartingRequest
-				shipmentData={shipment_data}
-				task={task}
-				refetch={taskListRefetch}
-				onCancel={onCancel}
-			/>
-		);
-	}
-	if (task?.task === 'upload_carting_order_approval' && tradeType === 'export') {
-		return (
-			<CartingApproval
+			<Component
+				primaryService={primary_service}
 				shipmentData={shipment_data}
 				task={task}
 				refetch={taskListRefetch}

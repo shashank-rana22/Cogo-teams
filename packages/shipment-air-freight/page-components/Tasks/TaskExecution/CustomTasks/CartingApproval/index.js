@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Placeholder, Toast } from '@cogoport/components';
 import { UploadController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
@@ -9,6 +9,7 @@ import useUpdateShipmentPendingTask from './hooks/useUpdateShipmentPendingTask';
 import styles from './styles.module.css';
 
 const LAST_INDEX = -1;
+const NUMBER_OF_PLACEHOLDERS = 6;
 
 const getFileName = (item) => item?.split('/')?.splice(LAST_INDEX)?.[GLOBAL_CONSTANTS.zeroth_index];
 
@@ -28,7 +29,7 @@ function CartingApproval({
 	const onSubmit = () => {
 		const documents = (Object.values(formValues) || []).reduce((prev, item) => {
 			const { fileName = '', finalUrl = '' } = item || {};
-			return [...prev, {
+			return isEmpty(item) ? Toast.error('Please approve all documents') : [...prev, {
 				document_type : 'carting_order',
 				file_name     : !isEmpty(fileName) ? fileName : getFileName(item),
 				document_url  : !isEmpty(finalUrl) ? finalUrl : item,
@@ -52,7 +53,13 @@ function CartingApproval({
 		<div className={styles.main_container}>
 			<div className={styles.heading}>Uploaded Documents</div>
 			<div className={styles.doc_container}>
-				{isEmpty(data?.list) ? (
+				{documentLoading ? [...Array(NUMBER_OF_PLACEHOLDERS)].map((idx) => (
+					<Placeholder
+						key={idx}
+						className={styles.placeholder}
+					/>
+				)) : null}
+				{!documentLoading && isEmpty(data?.list) ? (
 					<UploadController
 						name="carting_order_approval_url"
 						key="carting_order_approval_url"

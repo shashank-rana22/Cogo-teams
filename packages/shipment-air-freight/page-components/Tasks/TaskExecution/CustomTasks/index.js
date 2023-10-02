@@ -10,3 +10,4 @@ export { default as UploadLeo } from './UploadLeo';
 export { default as CartingRequest } from './CartingRequest';
 export { default as CartingApproval } from './CartingApproval';
 export { default as CartingDetails } from './CartingDetails';
+export { default as UploadGatePass } from './UploadGatePass';

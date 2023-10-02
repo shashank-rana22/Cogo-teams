@@ -19,6 +19,9 @@ const DISABLE_TASK = [
 	'upload_hawb_freight_certificate',
 ];
 
+const UPLOAD_GATE_PASS_REQ_TASKS = ['request_carting_order', 'upload_carting_order', 'upload_carting_order_approval'];
+const CARTING_APPROVAL_REQ_TASKS = ['request_carting_order', 'upload_carting_order'];
+
 function TaskView() {
 	const {
 		shipment_data = {},
@@ -27,6 +30,7 @@ function TaskView() {
 		getShipmentTimeline = () => {},
 		isGettingShipment = false,
 	} = useContext(ShipmentDetailContext);
+	console.log('primary_service:', primary_service);
 
 	const incoTerm = shipment_data?.inco_term;
 	const tradeType = GLOBAL_CONSTANTS.options.inco_term[incoTerm]?.trade_type
@@ -103,7 +107,16 @@ function TaskView() {
 				&& tradeType === 'export'
 			) {
 				element.disabled = (tasksList || []).some(
-					(task) => ['request_carting_order', 'upload_carting_order'].includes(task?.task)
+					(task) => CARTING_APPROVAL_REQ_TASKS.includes(task?.task)
+					&& task?.status === 'pending',
+				);
+			}
+			if (
+				element?.task === 'upload_gate_pass'
+				&& tradeType === 'export'
+			) {
+				element.disabled = (tasksList || []).some(
+					(task) => UPLOAD_GATE_PASS_REQ_TASKS.includes(task?.task)
 					&& task?.status === 'pending',
 				);
 			}
