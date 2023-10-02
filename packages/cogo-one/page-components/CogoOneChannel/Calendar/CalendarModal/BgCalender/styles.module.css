@@ -9,9 +9,9 @@
 			border: none;
 		}
 
-		.rbc-btn-group {
+		/* .rbc-btn-group {
 			display: none;
-		}
+		} */
 
 		.rbc-month-row {
 			cursor: pointer;
@@ -56,5 +56,33 @@
 			font-weight: 600 !important;
 			pointer-events: none;
 		}
+
+		.ui_button_container {
+			padding: 0;
+		}
+	}
+}
+
+.label {
+	width: 180px;
+	font-size: 18px;
+	font-size: 600;
+	text-align: center;
+}
+
+.header_container {
+	display: flex;
+	align-items: center;
+}
+
+.icon_styles {
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+	transform: 0.3s ease-in-out;
+
+	&:hover {
+		transition: 0.3s  ease-in-out;
+		transform: scale(1.2);
 	}
 }

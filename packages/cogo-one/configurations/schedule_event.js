@@ -49,6 +49,7 @@ const scheduleEvents = ({ orgId = '', category = '' }) => ({
 		placeholder : 'Select here...',
 		rules       : { required: 'poc is required' },
 		asyncKey    : 'list_organization_users',
+		valueKey    : 'user_id',
 		isClearable : true,
 		params      : {
 			filters: {

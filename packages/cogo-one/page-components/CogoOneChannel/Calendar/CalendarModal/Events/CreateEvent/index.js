@@ -37,6 +37,8 @@ const EVENT_TYPES = [
 function CreateEvent({
 	eventDetails = {},
 	setEventDetails = () => {},
+	getEvents = () => {},
+	month = '',
 }) {
 	const {
 		control,
@@ -59,6 +61,8 @@ function CreateEvent({
 		setEventDetails,
 		eventDetails,
 		reset,
+		getEvents,
+		month,
 	});
 	const { organization_id = '' } = formValues || {};
 
