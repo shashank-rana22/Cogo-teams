@@ -12,24 +12,28 @@ import {
 	getTodayStartDate,
 	getThisMonthStartDate,
 	getThisQuarterStartDate,
-	getLastMonthFirstAndLastDates,
+	getLastMonthStartAndEndDates,
+	getLastQuarterStartAndEndDates,
 } from '../../../../utils/start-date-functions';
 import DURATION_OPTIONS from '../../configurations/get-duration-filter-options';
 
 import ProgressBar from './ProgressBar';
 import styles from './styles.module.css';
 
-const { TODAY, LAST_MONTH, THIS_MONTH, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
+const { TODAY, LAST_MONTH, THIS_MONTH, LAST_QUARTER, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 const GET_START_DATE_FUNCTION_MAPPING = {
 	[TODAY]        : getTodayStartDate,
-	[LAST_MONTH]   : getLastMonthFirstAndLastDates,
+	[LAST_MONTH]   : getLastMonthStartAndEndDates,
 	[THIS_MONTH]   : getThisMonthStartDate,
+	[LAST_QUARTER] : getLastQuarterStartAndEndDates,
 	[THIS_QUARTER] : getThisQuarterStartDate,
 	[THIS_YEAR]    : getThisAseessYearStartDate,
 };
+
+const previousEntries = [LAST_MONTH, LAST_QUARTER];
 
 function Header(props) {
 	const { dateRange, setDateRange, entity, setEntity } = props;
@@ -42,7 +46,7 @@ function Header(props) {
 
 	const onChangeDuration = (selectedDuration) => {
 		if (typeof GET_START_DATE_FUNCTION_MAPPING[selectedDuration] === 'function') {
-			if (selectedDuration === LAST_MONTH) {
+			if (previousEntries.includes(selectedDuration)) {
 				const { startDate, endDate } = GET_START_DATE_FUNCTION_MAPPING[selectedDuration]();
 
 				setDateRange({ startDate, endDate });
@@ -74,13 +78,14 @@ function Header(props) {
 							<span className={styles.light}>for</span>
 						</div>
 
-						<Select
-							value={entity}
-							onChange={setEntity}
-							options={getEntityOptions()}
-							className={styles.entity_selector}
-							disabled={incentive_leaderboard_viewtype !== ADMIN}
-						/>
+						{incentive_leaderboard_viewtype === ADMIN ? (
+							<Select
+								value={entity}
+								onChange={setEntity}
+								options={getEntityOptions()}
+								className={styles.entity_selector}
+							/>
+						) : null}
 
 						<Select
 							value={duration}

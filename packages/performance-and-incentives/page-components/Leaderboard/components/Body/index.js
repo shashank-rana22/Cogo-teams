@@ -4,6 +4,7 @@ import { useState } from 'react';
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import styles from './styles.module.css';
+import useGetAgentScoringIncentiveUserStats from './useGetAgentScoringIncentiveUserStats';
 import useGetAgentScoringReportStats from './useGetAgentScoringReportStats';
 import useScoringReports from './useScoringReports';
 
@@ -40,6 +41,11 @@ function Body(props) {
 		data, statsLoading, refetchStats,
 	} = useGetAgentScoringReportStats({ dateRange, entity, currLevel, levelStack });
 
+	const {
+		userIncentiveData,
+		userIncentiveStatsLoading,
+	} = useGetAgentScoringIncentiveUserStats({ dateRange, entity, currLevel, levelStack });
+
 	return (
 		<div className={styles.container}>
 			<LeftPanel
@@ -67,6 +73,8 @@ function Body(props) {
 				entity={entity}
 				currLevel={currLevel}
 				levelStack={levelStack}
+				userIncentiveData={userIncentiveData}
+				userIncentiveStatsLoading={userIncentiveStatsLoading}
 			/>
 		</div>
 	);

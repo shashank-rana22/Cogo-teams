@@ -1,13 +1,16 @@
 const OFFSET = 1;
 const START_DATE = 1;
-const APRIL = 3;
-const JULY = 6;
-const AUGUST = 7;
-const NOVEMBER = 10;
-const DECEMBER = 11;
+const JANUARY = 0;
 const MARCH = 2;
+const APRIL = 3;
+const JUNE = 5;
+const JULY = 6;
+const SEPTEMBER = 8;
+const OCTOBER = 9;
 const ADD_MONTH = 1;
 const ZERO = 0;
+const MONTHS = 12;
+const MONTHS_IN_QUARTER = 3;
 const TOTAL_HOURS = 24;
 
 export const getTodayStartDate = () => {
@@ -23,7 +26,7 @@ export const getThisMonthStartDate = () => {
 	return currentDate;
 };
 
-export const getLastMonthFirstAndLastDates = () => {
+export const getLastMonthStartAndEndDates = () => {
 	const currentDate = new Date();
 	const currentYear = currentDate.getFullYear();
 	const currentMonth = currentDate.getMonth();
@@ -45,24 +48,55 @@ export const getThisMonthLastDate = () => {
 	return new Date(currentDate.getFullYear(), currentDate.getMonth() + ADD_MONTH, ZERO);
 };
 
-export const getThisQuarterStartDate = () => {
+export const getLastQuarterStartAndEndDates = () => {
 	const currentDate = new Date();
 
-	currentDate.setDate(START_DATE);
+	const currentMonth = currentDate.getMonth();
+
+	const lastQuarterStartMonth = (currentMonth - MONTHS_IN_QUARTER + MONTHS) % MONTHS;
+	const lastQuarterEndMonth = (currentMonth - OFFSET + MONTHS) % MONTHS;
+
+	const lastQuarterStartDate = new Date(
+		currentDate.getFullYear(),
+		lastQuarterStartMonth,
+		OFFSET,
+		ZERO,
+		ZERO,
+		ZERO,
+		ZERO,
+	);
+	const lastQuarterEndDate = new Date(
+		currentDate.getFullYear(),
+		lastQuarterEndMonth + OFFSET,
+		ZERO,
+		TOTAL_HOURS,
+		ZERO,
+		ZERO,
+		-OFFSET,
+	);
+
+	return {
+		startDate : lastQuarterStartDate.toISOString(),
+		endDate   : lastQuarterEndDate.toISOString(),
+	};
+};
+
+export const getThisQuarterStartDate = () => {
+	const currentDate = new Date();
 	currentDate.setHours(ZERO, ZERO, ZERO, ZERO);
 
 	const currentMonth = currentDate.getMonth();
 
-	if (currentMonth >= APRIL && currentMonth <= JULY) {
+	if (currentMonth >= JANUARY && currentMonth <= MARCH) {
+		currentDate.setMonth(JANUARY);
+	} else if (currentMonth >= APRIL && currentMonth <= JUNE) {
 		currentDate.setMonth(APRIL);
-	} else if (currentMonth >= AUGUST && currentMonth <= NOVEMBER) {
-		currentDate.setMonth(AUGUST);
+	} else if (currentMonth >= JULY && currentMonth <= SEPTEMBER) {
+		currentDate.setMonth(JULY);
 	} else {
-		if (currentMonth <= MARCH) {
-			currentDate.setFullYear(currentDate.getFullYear - OFFSET);
-		}
-		currentDate.setMonth(DECEMBER);
+		currentDate.setMonth(OCTOBER);
 	}
+	currentDate.setDate(START_DATE);
 
 	return currentDate;
 };
@@ -71,11 +105,8 @@ export const getThisAseessYearStartDate = () => {
 	const currentDate = new Date();
 	currentDate.setHours(ZERO, ZERO, ZERO, ZERO);
 
-	if (currentDate.getMonth() < APRIL) {
-		currentDate.setFullYear(currentDate.getFullYear() - OFFSET);
-	}
+	currentDate.setMonth(JANUARY);
 	currentDate.setDate(START_DATE);
-	currentDate.setMonth(APRIL);
 
 	return currentDate;
 };

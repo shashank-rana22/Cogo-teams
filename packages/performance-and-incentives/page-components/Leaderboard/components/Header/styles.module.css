@@ -46,5 +46,11 @@
 }
 
 .period_selector {
-	width: 150px;
+	width: 220px;
+
+	:global {
+		.ui_select_option_item span {
+			width: 100%;
+		}
+	}
 }

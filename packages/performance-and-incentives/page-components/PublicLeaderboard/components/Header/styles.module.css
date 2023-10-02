@@ -35,7 +35,16 @@
 	display: flex;
 }
 
-.period_selector,
 .view_selector {
 	width: 150px;
+}
+
+.period_selector {
+	width: 220px;
+
+	:global {
+		.ui_select_option_item span {
+			width: 100%;
+		}
+	}
 }

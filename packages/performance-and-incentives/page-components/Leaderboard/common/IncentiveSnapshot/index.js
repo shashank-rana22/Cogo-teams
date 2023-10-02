@@ -3,7 +3,12 @@ import INCENTIVE_SNAPSHOT_CONSTANTS from '../../constants/incentive-snapshot-con
 import Snapshot from './Snapshot';
 import styles from './styles.module.css';
 
-function IncentiveSnapshot() {
+function IncentiveSnapshot(props) {
+	const {
+		userIncentiveData,
+		userIncentiveStatsLoading,
+	} = props;
+
 	return (
 		<div className={styles.container}>
 			<h3>Incentive Snapshot</h3>
@@ -13,6 +18,8 @@ function IncentiveSnapshot() {
 					<Snapshot
 						key={stage}
 						stage={stage}
+						userIncentiveData={userIncentiveData}
+						userIncentiveStatsLoading={userIncentiveStatsLoading}
 					/>
 				))}
 			</div>

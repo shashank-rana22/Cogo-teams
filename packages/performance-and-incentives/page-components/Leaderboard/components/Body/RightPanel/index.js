@@ -10,13 +10,12 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function RightPanel(props) {
-	const { data, statsLoading, entity, currLevel, levelStack } = props;
+	const { data, statsLoading, entity, currLevel, levelStack, userIncentiveData, userIncentiveStatsLoading } = props;
 
 	const {
 		block_wise_stats: activityData = {},
 		graph_data: scoringGraphData = {},
 		rank_data: rankData = {},
-		incentive_snapshot: incentiveSnapshotData = {},
 	} = data || {};
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
@@ -72,7 +71,10 @@ function RightPanel(props) {
 
 			<RankingAndScoring rankData={rankData} scoringGraphData={scoringGraphData} />
 
-			<IncentiveSnapshot incentiveSnapshotData={incentiveSnapshotData} />
+			<IncentiveSnapshot
+				userIncentiveData={userIncentiveData}
+				userIncentiveStatsLoading={userIncentiveStatsLoading}
+			/>
 
 			<Activity activityData={activityData} />
 		</div>

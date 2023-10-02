@@ -63,6 +63,11 @@ const performance_and_incentives = {
 			service_name : 'agent_scoring',
 		},
 		{
+			api          : 'get_agent_scoring_incentive_user_stats',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+		{
 			api          : 'get_agent_scoring_user_progress',
 			access_type  : 'private',
 			service_name : 'agent_scoring',
