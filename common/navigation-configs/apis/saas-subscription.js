@@ -1,11 +1,6 @@
 const apis = {
 	saas_subscription_customer: [
 		{
-			api          : 'get_saas_subscription_user_stats',
-			service_name : 'saas_subscriptions_v2',
-			access_type  : 'private',
-		},
-		{
 			api          : 'list_saas_subscription_customers',
 			service_name : 'saas_subscriptions_v2',
 			access_type  : 'private',
@@ -60,6 +55,11 @@ const apis = {
 			service_name : 'saas_subscriptions_v2',
 			access_type  : 'private',
 		},
+		{
+			api          : 'list_saas_plans',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
 	],
 	saas_subscription_plan: [
 		{
@@ -92,6 +92,22 @@ const apis = {
 			service_name : 'saas_subscriptions_v2',
 			access_type  : 'private',
 		},
+		{
+			api          : 'update_saas_plan',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'update_saas_plan_discount_config',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'create_saas_plan_discount_config',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+
 	],
 };
 
