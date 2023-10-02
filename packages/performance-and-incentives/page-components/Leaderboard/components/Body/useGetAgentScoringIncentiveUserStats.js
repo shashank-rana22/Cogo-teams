@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../constants/leaderboard-reporttype-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
@@ -23,6 +23,8 @@ function useGetAgentScoringIncentiveUserStats(props) {
 	const { currLevel, dateRange, entity, levelStack } = props;
 
 	const { incentive_leaderboard_viewtype: viewType, user: loggedInUser } = useSelector(({ profile }) => profile);
+
+	const [userIncentiveData, setUserIncentiveData] = useState({});
 
 	const [{ data, loading }, refetch] = useAllocationRequest({
 		url     : '/incentive_user_stats',
@@ -52,13 +54,21 @@ function useGetAgentScoringIncentiveUserStats(props) {
 	}, [currLevel, dateRange, entity, levelStack, loggedInUser, refetch, viewType]);
 
 	useEffect(() => {
+		setUserIncentiveData({});
+	}, [currLevel]);
+
+	useEffect(() => {
+		setUserIncentiveData(data);
+	}, [data]);
+
+	useEffect(() => {
 		if ((!currLevel.isExpanded || !isEmpty(currLevel.user)) && currLevel.report_type === AGENT_REPORT) {
 			userIncentiveStats();
 		}
 	}, [currLevel.isExpanded, currLevel.report_type, currLevel.user, userIncentiveStats]);
 
 	return {
-		userIncentiveData         : data,
+		userIncentiveData,
 		userIncentiveStatsLoading : loading,
 		refetchUserIncentiveStats : refetch,
 	};
