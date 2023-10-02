@@ -1,5 +1,6 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -9,6 +10,9 @@ import Details from '../Details';
 import styles from './styles.module.css';
 
 function Header({ serviceData = [], invoicing_parties = [] }) {
+	const { partner } = useSelector(({ profile }) => ({
+		partner: profile?.auth_role_data?.name,
+	}));
 	const [showDetails, setShowDetails] = useState(true);
 
 	const { state, shipment_type, service_provider, payment_term } = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
@@ -24,7 +28,12 @@ function Header({ serviceData = [], invoicing_parties = [] }) {
 
 				<div className={cl`${styles[state]} ${styles.service_details}`}>
 					<div className={styles.service_name}>{startCase(shipment_type)}</div>
-					<div className={styles.service_provider}>{service_provider?.business_name}</div>
+					{!partner.includes('KAM') ? (
+						<div className={styles.service_provider}>
+							{': '}
+							{service_provider?.business_name}
+						</div>
+					) : null}
 				</div>
 
 				<div className={styles.secondary_details}>

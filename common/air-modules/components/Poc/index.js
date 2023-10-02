@@ -1,5 +1,6 @@
 import { Loader } from '@cogoport/components';
 import ShipmentDetailContext from '@cogoport/context/page-components/ShipmentDetailContext';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useContext } from 'react';
 
@@ -18,6 +19,9 @@ import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
 function Poc({ shipment_data = {}, servicesList = [] }) {
+	const { partner } = useSelector(({ profile }) => ({
+		partner: profile?.auth_role_data?.name,
+	}));
 	const { id:shipment_id, importer_exporter_id, services } = shipment_data || {};
 
 	const { stakeholderConfig } = useContext(ShipmentDetailContext);
@@ -94,7 +98,7 @@ function Poc({ shipment_data = {}, servicesList = [] }) {
 							/>
 						) : null}
 
-						{rolesViewPermission?.includes('service_provider') ? (
+						{rolesViewPermission?.includes('service_provider') && !partner.includes('KAM') ? (
 							<ServiceProvider
 								tradePartnersData={data}
 								setAddPoc={setAddPoc}

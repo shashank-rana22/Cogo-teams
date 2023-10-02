@@ -1,3 +1,4 @@
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -25,6 +26,10 @@ function Poc({
 	primary_service = {},
 	getShipmentRefetch = () => {},
 }) {
+	const { partner } = useSelector(({ profile }) => ({
+		partner: profile?.auth_role_data?.name,
+	}));
+
 	const {
 		id:shipment_id, importer_exporter_id, services,
 	} = shipment_data || {};
@@ -103,7 +108,7 @@ function Poc({
 							/>
 						) : null}
 
-						{rolesViewPermission?.includes('service_provider') ? (
+						{(rolesViewPermission?.includes('service_provider') && !partner.includes('KAM')) ? (
 							<ServiceProvider
 								tradePartnersData={data}
 								setAddPoc={setAddPoc}

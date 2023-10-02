@@ -1,6 +1,7 @@
 import { cl, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
@@ -10,6 +11,9 @@ import Details from '../Details';
 import styles from './styles.module.css';
 
 function Header({ serviceData = [], containerDetails = [] }) {
+	const { partner } = useSelector(({ profile }) => ({
+		partner: profile?.auth_role_data?.name,
+	}));
 	const { stakeholderConfig } = useContext(ShipmentDetailContext);
 
 	const can_edit_cancel_service = !!stakeholderConfig?.overview?.can_edit_cancel_service;
@@ -29,10 +33,13 @@ function Header({ serviceData = [], containerDetails = [] }) {
 					<span className={styles.service_name}>
 						{display_label}
 					</span>
-					{': '}
-					<span className={styles.service_provider}>
-						{service_provider?.business_name}
-					</span>
+					{!partner.includes('KAM') ? (
+						<span className={styles.service_provider}>
+							{': '}
+							{service_provider?.business_name}
+						</span>
+					)
+						: null}
 				</div>
 
 				<div className={styles.secondary_details}>
