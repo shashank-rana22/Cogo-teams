@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 function PlatformCards() {
 	const { t } = useTranslation(['welcome']);
 
-	const data = getPlatformCardsData(t);
+	const data = getPlatformCardsData({ t });
 
 	return (
 		<div className={styles.container}>

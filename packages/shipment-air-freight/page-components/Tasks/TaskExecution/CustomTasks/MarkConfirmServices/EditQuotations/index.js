@@ -1,13 +1,15 @@
 import { Layout } from '@cogoport/air-modules';
+import UNIT_VALUE_MAPPING from '@cogoport/air-modules/constants/UNIT_VALUE_MAPPING';
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import ConfirmModal from './ConfirmModal';
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE_FOR_NULL_HANDLING = 0;
+const QUANTITY_ONE = 1;
 const USD_LIMIT = 5000;
 const INR_LIMIT = 500000;
 
@@ -22,12 +24,39 @@ function EditQuotations({
 }) {
 	const [confirmModal, setConfirmModal] = useState(false);
 
+	const { service_charges_with_trade = [] } = data || {};
+
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 	const formProps = useForm({ defaultValues });
 	const {
 		control, handleSubmit, formState:{ errors = {} } = {},
-		watch, loading, confirmLoading,
+		watch, loading, confirmLoading, setValue,
 	} = formProps || {};
+
+	useEffect(() => {
+		const subscription = watch((value, { name }) => {
+			const [service_id, index, unit] = name.split('.');
+			if (unit === 'unit') {
+				const finalValue = value[service_id]?.map((val, idx) => {
+					if (idx === +index) {
+						const { service_detail = [] } = (service_charges_with_trade || [])
+							.find((element) => element.service_id === service_id);
+						const prefillKey = UNIT_VALUE_MAPPING?.[val?.unit];
+						const prefillValue = service_detail[GLOBAL_CONSTANTS.zeroth_index]?.[prefillKey]
+						|| (val?.unit === 'per_shipment' ? QUANTITY_ONE : '');
+						return {
+							...val,
+							quantity: prefillValue,
+						};
+					}
+					return val;
+				});
+				setValue(service_id, finalValue);
+			}
+		});
+		return () => subscription.unsubscribe();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [watch]);
 
 	const CUSTOM_VALUES = {};
 	const formValues = watch();

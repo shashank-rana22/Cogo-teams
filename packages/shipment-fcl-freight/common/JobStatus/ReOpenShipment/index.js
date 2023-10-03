@@ -1,7 +1,8 @@
 import { Button, Modal } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import useUpdateShipmentReopenJob from '../../../hooks/useUpdateShipmentReopenJob';
 
@@ -13,12 +14,18 @@ function ReOpenShipment({
 	setFinJobOpenConfirmation = () => {},
 }) {
 	const profile = useSelector((state) => state.profile || {});
+	const { refetch = () => {} } = useContext(ShipmentDetailContext);
 	const { id = '' } = profile?.user || {};
+
+	const closeAndRefetch = () => {
+		setFinJobOpenConfirmation(false);
+		refetch();
+	};
 
 	const {
 		loading = false,
 		handleConfirm = () => {},
-	} = useUpdateShipmentReopenJob({ setFinJobOpenConfirmation, shipment_id });
+	} = useUpdateShipmentReopenJob({ closeAndRefetch, shipment_id });
 
 	return (
 		<div>

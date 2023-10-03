@@ -1,9 +1,11 @@
+import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { format, startCase } from '@cogoport/utils';
+import { format, startCase, isEmpty } from '@cogoport/utils';
 
 import { VALUE_ZERO } from '../../../../constants';
 
 import styles from './styles.module.css';
+import ToolTipContent from './toolTipContent';
 
 function Footer({ data = {}, walletAmount = {} }) {
 	const { wallet_amount = '', currency = '' } = walletAmount || {};
@@ -51,6 +53,19 @@ function Footer({ data = {}, walletAmount = {} }) {
 					{item.value}
 				</div>
 			) : null))}
+			{!isEmpty(data?.shipping_preferences) && (
+				<div className={styles.text}>
+					<span
+						style={{ fontWeight: '600', fontSize: '12px' }}
+					>
+						Shipping Preferences:-
+
+					</span>
+					<Tooltip content={<ToolTipContent data={data} />} interactive style={{ width: 'fit-content' }}>
+						<div style={{ textDecoration: 'underline' }}>view</div>
+					</Tooltip>
+				</div>
+			)}
 
 			<div className={styles.wallet_container}>
 				<div className={styles.wallet_text}>

@@ -112,7 +112,6 @@ function OverSeasAgent() {
 				setShowSaveAsDraft={setShowSaveAsDraft}
 				setBLData={setBLData}
 				setShowHeader={setShowHeader}
-				showHeader={showHeader}
 				setShowPayableAmount={setShowPayableAmount}
 			/>
 

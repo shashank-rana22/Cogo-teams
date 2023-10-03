@@ -70,10 +70,10 @@ const useFieldServiceOpsHelper = ({ shipment_data = {} }) => {
 	const selectedTruckNumber = truckNumber[TRUCK_STATE_KEYS.SELECTED_TRUCK_NUMBER];
 
 	useEffect(() => {
-		if (truckNumber[TRUCK_STATE_KEYS.SELECTED_TRUCK_NUMBER]) {
-			getDetails(truckNumber[TRUCK_STATE_KEYS.SELECTED_TRUCK_NUMBER]);
+		if (selectedTruckNumber) {
+			getDetails(selectedTruckNumber);
 		}
-	}, [selectedTruckNumber, getDetails, truckNumber]);
+	}, [selectedTruckNumber, getDetails]);
 
 	return {
 		viewType,

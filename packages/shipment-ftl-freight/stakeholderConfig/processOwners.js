@@ -19,7 +19,7 @@ export default {
 		'purchase',
 	],
 	shipment_info: {
-		job_open_request: false,
+		job_open_request: true,
 	},
 	shipment_header: {
 		add_po_number: true,

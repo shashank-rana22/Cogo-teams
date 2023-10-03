@@ -19,7 +19,6 @@ import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
-import AndroidApp from './AndroidApp';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
@@ -71,7 +70,7 @@ function CogoOne() {
 		viewType: initialViewType = '', loading: workPrefernceLoading = false, userSharedMails = [],
 	} = useAgentWorkPrefernce();
 	const { fetchWorkStatus = () => {}, agentWorkStatus = {}, preferenceLoading = false } = useGetAgentPreference();
-	const { signature } = useGetSignature();
+	const { signature } = useGetSignature({ viewType });
 	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
@@ -94,6 +93,7 @@ function CogoOne() {
 		},
 		userId,
 		userName,
+		signature,
 		resetEmailState: () => {
 			setEmailState({ ...DEFAULT_EMAIL_STATE, body: signature });
 			setMailAttachments([]);
@@ -241,8 +241,6 @@ function CogoOne() {
 								) : null}
 						</>
 					)}
-				<AndroidApp />
-
 			</div>
 
 			<ModalComp

@@ -7,7 +7,7 @@ import {
 	IcADocumentTemplates,
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
 import useGetDocumentContent from '../../../hook/useGetDocumentContent';
@@ -160,7 +160,7 @@ function ShipmentDetails({
 		lineItemsTab       : false,
 	});
 
-	const { docContent = '', chargesTable = [] } = useGetDocumentContent({ data });
+	const { docContent = {}, chargesTable = [] } = useGetDocumentContent({ data });
 
 	const onTabClick = ({ tabName = '' }) => {
 		setTab(
@@ -180,6 +180,20 @@ function ShipmentDetails({
 	};
 
 	const [value, onChange] = useState([]);
+
+	useEffect(() => {
+		if (jobType === 'CONSOLIDATED') {
+			// clearing timeline elements that are not included in case of consolidated
+			setCheckItem((prev:any) => {
+				const newCheckItem = { ...prev };
+				newCheckItem.shipmentDetailsCheck = true;
+				delete newCheckItem?.documentsCheck;
+				delete newCheckItem?.sidDataCheck;
+				delete newCheckItem?.taggingCheck;
+				return { ...newCheckItem };
+			});
+		}
+	}, [jobType, setCheckItem]);
 
 	return (
 		<div className={styles.container}>
@@ -241,7 +255,7 @@ function ShipmentDetails({
 						</div>
 						{tab.documentsTab && <div className={styles.hr} />}
 						<div className={styles.documents}>
-							{tab.documentsTab && <Documents shipmentId={shipmentId} docContent={docContent} />}
+							{tab.documentsTab && <Documents shipmentId={shipmentId} />}
 							{' '}
 						</div>
 						{tab.documentsTab && (

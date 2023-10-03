@@ -1,7 +1,6 @@
-import { Checkbox, Textarea, Tooltip, Loader, cl } from '@cogoport/components';
+import { Textarea, Loader, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
-	IcMInfo,
 	IcMSend,
 	IcMAttach,
 	IcMCross,
@@ -25,15 +24,15 @@ function FooterChat({
 	file = '',
 	setFile = () => {},
 	uploading = false,
-	isInternal = true,
 	createLoading = false,
-	notifyCustomer = false,
 	setUploading = () => {},
-	setIsInternal = () => {},
 	handleSendComment = () => {},
 }) {
 	let fileName = '';
 	const chatRef = useRef(null);
+
+	const uploadFileRef = useRef(null);
+
 	const { t } = useTranslation(['myTickets']);
 
 	const isMessageEmpty = isEmpty(message);
@@ -78,26 +77,16 @@ function FooterChat({
 							<div className={styles.file_text}>{fileName}</div>
 							<IcMCross
 								className={styles.delete_icon}
-								onClick={() => setFile('')}
+								onClick={() => {
+									setFile('');
+									uploadFileRef?.current?.externalHandleDelete?.([]);
+								}}
 							/>
 						</div>
 					)}
 				</div>
 			)}
-			<div className={styles.is_internal}>
-				<Checkbox
-					label={t('myTickets:internal_activity')}
-					checked={isInternal}
-					disabled={!notifyCustomer}
-					onChange={() => setIsInternal((prev) => !prev)}
-				/>
-				<Tooltip
-					content={t('myTickets:internal_activity_tooltip_content')}
-					placement="top"
-				>
-					<IcMInfo className={styles.is_internal_info} />
-				</Tooltip>
-			</div>
+
 			<div className={styles.bot_footer}>
 				<CustomFileUploader
 					handleProgress={handleProgress}
@@ -111,6 +100,7 @@ function FooterChat({
 						/>
 					)}
 					onChange={handleChange}
+					ref={uploadFileRef}
 				/>
 				<Textarea
 					ref={chatRef}

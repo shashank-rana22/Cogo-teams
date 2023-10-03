@@ -1,4 +1,6 @@
 import { cl, Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
 import Filters from '../../../commons/Filters/index.tsx';
@@ -16,6 +18,11 @@ import styles from './styles.module.css';
 const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
 
+const USER_IDS = [
+	GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
+	GLOBAL_CONSTANTS.uuid.hk_user_id,
+	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id];
+
 const SEARCH_PLACEHOLDER = 'Search by Invoice number / SID';
 
 const getStyle = ({
@@ -32,6 +39,7 @@ function InvoiceTable({
 	showFilters = true,
 	limit = 10,
 }) {
+	const { profile } = useSelector((state) => state);
 	const [checkedRows, setCheckedRows] = useState([]);
 	const [isHeaderChecked, setIsHeaderChecked] = useState(false);
 
@@ -138,7 +146,7 @@ function InvoiceTable({
 						<Filters
 							filters={invoiceFilters}
 							setFilters={setinvoiceFilters}
-							controls={invoiceFilter()}
+							controls={invoiceFilter({ profile })}
 						/>
 						<FilterPopover
 							filters={invoiceFilters}
@@ -148,15 +156,17 @@ function InvoiceTable({
 						/>
 					</div>
 					<div className={styles.filter_container}>
-						<div
-							className={styles.send_report}
-							onClick={() => {
-								sendReport();
-							}}
-							role="presentation"
-						>
-							Send Report
-						</div>
+						{(USER_IDS.includes(profile?.user?.id)) ? (
+							<div
+								className={styles.send_report}
+								onClick={() => {
+									sendReport();
+								}}
+								role="presentation"
+							>
+								Send Report
+							</div>
+						) : null}
 
 						<SearchInput
 							value={invoiceFilters.search || ''}

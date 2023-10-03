@@ -73,6 +73,11 @@ const common_apis = {
 			service_name : 'checkout',
 		},
 		{
+			api          : 'update_checkout',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
 			api          : 'create_spot_search',
 			access_type  : 'private',
 			service_name : 'spot_search',
@@ -309,6 +314,11 @@ const common_apis = {
 			api          : 'create_haulage_freight_rate_sheet',
 			access_type  : 'private',
 			service_name : 'haulage_freight_rate',
+		},
+		{
+			api          : 'create_air_customs_rate_sheet',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
 		},
 		{
 			api          : 'update_organization',

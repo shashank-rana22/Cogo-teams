@@ -1002,10 +1002,33 @@ function asyncListOverSeasTradeParties() {
 		valueKey     : 'organizationId',
 		labelKey     : 'organizationName',
 		endpoint     : '/purchase/bills/list-overseas-trade-parties',
-		authkey      : 'list-overseas-trade-parties',
+		authkey      : 'get_purchase_bills_list_overseas_trade_parties',
 		initialCall  : false,
 		microService : 'business_finance',
 		searchByq    : true,
+	};
+}
+
+function asyncListSaasPlan() {
+	return {
+		labelKey : 'display_name',
+		valueKey : 'id',
+		endpoint : '/list_saas_plans',
+		params   : {
+			filters    : { is_active: true, plan_type: 'P' },
+			page_limit : 50,
+		},
+	};
+}
+
+function asyncListEnrichmentSources() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/list_enrichment_sources',
+		authkey      : 'get_enrichment_sources',
+		microService : 'athena',
+		initialCall  : true,
 	};
 }
 
@@ -1091,4 +1114,6 @@ export {
 	asyncListFclFreightCommodityClusters,
 	asyncListSpotSearchRateCardOperators,
 	asyncListOverSeasTradeParties,
+	asyncListSaasPlan,
+	asyncListEnrichmentSources,
 };

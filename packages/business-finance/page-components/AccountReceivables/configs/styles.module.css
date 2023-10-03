@@ -145,3 +145,18 @@
 	justify-content: space-between;
 	width: 80%;
 }
+
+.credit {
+	color: #4f4f4f;
+	background-color: #b8debe;
+}
+
+.debit {
+	background-color: #f55;
+
+	:global {
+		.ui_pill_text {
+			color: #fff;
+		}
+	}
+}
