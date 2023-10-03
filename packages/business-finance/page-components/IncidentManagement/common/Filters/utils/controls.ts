@@ -6,10 +6,11 @@ interface Props {
 	t?: Function;
 	isSettlementExecutive?: boolean;
 	activeTab?: string
+	entityCode?: string;
 }
-export const requestControls = ({ t = () => {}, activeTab = 'REQUESTED' }:Props) => [
+export const requestControls = ({ t = () => {}, entityCode = '', activeTab = 'REQUESTED' }:Props) => [
 	{
-		name        : 'Request Type',
+		name        : 'category',
 		placeholder : t('incidentManagement:select_category_placeholder'),
 		type        : 'asyncSelect',
 		caret       : true,
@@ -18,7 +19,20 @@ export const requestControls = ({ t = () => {}, activeTab = 'REQUESTED' }:Props)
 		searchByq   : true,
 		renderLabel : ({ value }) => startCase(value),
 		initialCall : true,
-		params      : { status: activeTab },
+		params      : { status: activeTab, entityCode },
+		className   : styles.category_section,
+	},
+	{
+		name        : 'category',
+		placeholder : t('incidentManagement:select_request_sub_type_placeholder'),
+		type        : 'asyncSelect',
+		caret       : true,
+		isClearable : true,
+		asyncKey    : 'list_incident_types',
+		searchByq   : true,
+		renderLabel : ({ value }) => startCase(value),
+		initialCall : true,
+		params      : { status: activeTab, type: 'incidentSubtype', entityCode },
 		className   : styles.category_section,
 	},
 	{
@@ -52,7 +66,7 @@ export const requestControls = ({ t = () => {}, activeTab = 'REQUESTED' }:Props)
 	},
 ];
 
-export const remainControls = ({ t = () => {}, activeTab = '' }:Props) => [
+export const remainControls = ({ t = () => {}, entityCode = '', activeTab = '' }:Props) => [
 	{
 		name        : 'category',
 		placeholder : t('incidentManagement:select_category_placeholder'),
@@ -67,6 +81,19 @@ export const remainControls = ({ t = () => {}, activeTab = '' }:Props) => [
 		className   : styles.category_section,
 	},
 	{
+		name        : 'category',
+		placeholder : t('incidentManagement:select_request_sub_type_placeholder'),
+		type        : 'asyncSelect',
+		caret       : true,
+		isClearable : true,
+		asyncKey    : 'list_incident_types',
+		searchByq   : true,
+		renderLabel : ({ value }) => startCase(value),
+		initialCall : true,
+		params      : { status: activeTab, type: 'incidentSubtype', entityCode },
+		className   : styles.category_section,
+	},
+	{
 		name                  : 'date',
 		placeholder           : t('incidentManagement:select_date_placeholder'),
 		type                  : 'singleDateRange',
@@ -74,5 +101,14 @@ export const remainControls = ({ t = () => {}, activeTab = '' }:Props) => [
 		isPreviousDaysAllowed : true,
 		isClearable           : true,
 		className             : styles.date,
+		style                 : { width: '170px' },
+	},
+	{
+		name      : 'isMyTaskOnly',
+		type      : 'toggle',
+		size      : 'sm',
+		onLabel   : t('incidentManagement:toggle_label'),
+		offLabel  : '',
+		className : styles.toggle,
 	},
 ];

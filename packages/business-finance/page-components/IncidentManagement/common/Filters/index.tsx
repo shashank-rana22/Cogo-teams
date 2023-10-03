@@ -15,6 +15,7 @@ interface Props {
 	activeTab?:string
 	filters: FilterProps;
 	onChangeFilters: (v: object) => void;
+	entityCode?: string;
 }
 
 function Filters({
@@ -22,10 +23,11 @@ function Filters({
 	activeTab,
 	filters,
 	onChangeFilters = (v) => v,
+	entityCode = '',
 }: Props) {
 	const { search } = filters || {};
 	const { t } = useTranslation(['incidentManagement']);
-	const filterControls = getFilterControls({ activeTab, isSettlementExecutive, t });
+	const filterControls = getFilterControls({ activeTab, isSettlementExecutive, t, entityCode });
 
 	return (
 		<section className={styles.container} id="filters">
