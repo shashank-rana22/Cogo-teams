@@ -17,7 +17,7 @@ function UploadGatePass({
 	const { carting_order_details = {} } = primaryService || {};
 	const { vehicle_number_details = {} } = carting_order_details || {};
 
-	const { control = {}, handleSubmit = () => {}, watch = () => {} } = useForm();
+	const { control = {}, handleSubmit = () => {} } = useForm();
 
 	const routeBack = () => {
 		refetch();
@@ -26,10 +26,8 @@ function UploadGatePass({
 
 	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ routeBack });
 
-	const formValues = watch();
-
-	const onSubmit = () => {
-		const documents = (Object.values(formValues) || []).reduce((prev, item) => {
+	const onSubmit = (values) => {
+		const documents = (Object.values(values) || []).reduce((prev, item) => {
 			const { fileName = '', finalUrl = '' } = item || {};
 			return [...prev, {
 				document_type : 'gate_out_pass',

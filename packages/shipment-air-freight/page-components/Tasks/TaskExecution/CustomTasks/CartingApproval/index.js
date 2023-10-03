@@ -19,7 +19,7 @@ function CartingApproval({
 	refetch = () => {},
 	onCancel = () => {},
 }) {
-	const { control = {}, handleSubmit = () => {}, watch = () => {} } = useForm();
+	const { control = {}, handleSubmit = () => {} } = useForm();
 
 	const { data = {}, loading: documentLoading = false } = useListShipmentDocuments({ shipmentData });
 
@@ -30,10 +30,8 @@ function CartingApproval({
 
 	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ routeBack });
 
-	const formValues = watch();
-
-	const onSubmit = () => {
-		const documents = (Object.values(formValues) || []).reduce((prev, item) => {
+	const onSubmit = (values) => {
+		const documents = (Object.values(values) || []).reduce((prev, item) => {
 			const { fileName = '', finalUrl = '' } = item || {};
 			return [...prev, {
 				document_type : 'carting_order',
@@ -65,7 +63,7 @@ function CartingApproval({
 		<div className={styles.main_container}>
 			<div className={styles.heading}>Uploaded Documents</div>
 			<div className={styles.doc_container}>
-				{documentLoading ? [...Array(NUMBER_OF_PLACEHOLDERS)].keys().map((idx) => (
+				{documentLoading ? [...Array(NUMBER_OF_PLACEHOLDERS).keys()].map((idx) => (
 					<Placeholder
 						key={idx}
 						className={styles.placeholder}

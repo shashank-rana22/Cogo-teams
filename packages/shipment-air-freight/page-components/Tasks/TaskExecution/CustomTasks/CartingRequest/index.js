@@ -13,8 +13,7 @@ function CartingRequest({
 	refetch = () => {},
 	onCancel = () => {},
 }) {
-	const { errors = {}, control = {}, watch = () => {}, handleSubmit = () => {} } = useForm();
-	const formValues = watch();
+	const { errors = {}, control = {}, handleSubmit = () => {} } = useForm();
 
 	const routeBack = () => {
 		refetch();
@@ -23,8 +22,8 @@ function CartingRequest({
 
 	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ routeBack });
 
-	const onSubmit = () => {
-		const { vehicle_arrival_date = '' } = formValues || {};
+	const onSubmit = (values) => {
+		const { vehicle_arrival_date = '' } = values || {};
 		const { startDate = '', endDate = '' } = vehicle_arrival_date || {};
 
 		if ((endDate.getDate() === startDate.getDate() && endDate.getTime() <= startDate.getTime())
@@ -42,7 +41,7 @@ function CartingRequest({
 			data : {
 				air_freight_service: {
 					id                    : [airFreightServiceId?.[GLOBAL_CONSTANTS.zeroth_index]?.id || ''],
-					carting_order_details : formValues,
+					carting_order_details : values,
 				},
 			},
 		};

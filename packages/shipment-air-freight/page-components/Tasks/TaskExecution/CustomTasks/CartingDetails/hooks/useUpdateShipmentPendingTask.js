@@ -8,7 +8,7 @@ const useUpdateShipmentPendingTask = ({
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_pending_task',
 		method : 'POST',
-	});
+	}, { manual: true });
 
 	const apiTrigger = async ({ payload = {} }) => {
 		try {

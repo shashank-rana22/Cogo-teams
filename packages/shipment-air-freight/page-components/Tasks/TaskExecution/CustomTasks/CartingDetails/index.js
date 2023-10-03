@@ -27,11 +27,10 @@ function CartingDetails({
 
 	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ routeBack });
 
-	const { watch = () => {}, control = {}, errors = {}, handleSubmit = () => {} } = useForm();
-	const formValues = watch();
+	const { control = {}, errors = {}, handleSubmit = () => {} } = useForm();
 
-	const onSubmit = () => {
-		const { document_number = '', url = [] } = formValues || {};
+	const onSubmit = (values) => {
+		const { document_number = '', url = [] } = values || {};
 		if (booking_reference_number !== document_number) {
 			Toast.error('MAWB Number did not match');
 			return;
