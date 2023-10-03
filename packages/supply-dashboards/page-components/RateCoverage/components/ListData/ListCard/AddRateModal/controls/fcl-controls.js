@@ -210,16 +210,22 @@ const fclControls = ({
 		rules: { required: 'shipment type is required' },
 	},
 	{
-		name       : 'weight_slabs',
-		heading    : 'Weight Slabs',
-		type       : 'fieldArray',
+		name               : 'weight_slabs',
+		heading            : 'Weight Slabs',
+		type               : 'fieldArray',
+		noDeleteButtonTill : 0,
+		value              : [{
+			lower_limit : '',
+			upper_limit : '',
+			currency    : '',
+			price       : '',
+		}],
 		buttonText : 'Add Weight Slabs',
 		controls   : [
 			{
 				name        : 'lower_limit',
 				type        : 'number',
 				span        : 4,
-				disabled    : true,
 				placeholder : 'Lower Limit (in MT)',
 				rules       : { required: 'lower limit is required' },
 			},

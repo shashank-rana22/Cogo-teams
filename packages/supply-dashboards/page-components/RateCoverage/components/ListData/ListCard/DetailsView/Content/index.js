@@ -66,7 +66,7 @@ function ServiceDetailsContent({
 		{ label: 'Preferred Shipping', value: shipping_line?.short_name },
 		{
 			label : 'feedbacks',
-			value : (feedbacks || []).map((val) => startCase(val)).join(', '),
+			value : feedbacks && (feedbacks || []).map((val) => startCase(val)).join(', '),
 		},
 		{ label: 'Closing Remarks', value: closing_remarks && startCase(closing_remarks) },
 	];
@@ -142,7 +142,7 @@ function ServiceDetailsContent({
 							<div className={styles.content}>
 								<div className={styles.label}>
 									Status :
-									<Pill color={status === 'inactive' ? 'red' : 'green'}>
+									<Pill size="sm" color={status === 'inactive' ? 'red' : 'green'}>
 										{startCase(status)}
 									</Pill>
 								</div>

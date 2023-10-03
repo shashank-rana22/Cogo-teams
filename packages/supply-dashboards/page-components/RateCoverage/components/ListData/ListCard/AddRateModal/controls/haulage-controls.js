@@ -151,9 +151,15 @@ const haulageControls = ({
 		showOptional : false,
 	},
 	{
-		name       : 'weight_slabs',
-		heading    : 'Weight Slabs',
-		type       : 'fieldArray',
+		name    : 'weight_slabs',
+		heading : 'Weight Slabs',
+		type    : 'fieldArray',
+		value   : [{
+			lower_limit : '',
+			upper_limit : '',
+			currency    : '',
+			price       : '',
+		}],
 		buttonText : 'Add Weight Slabs',
 		controls   : [
 			{

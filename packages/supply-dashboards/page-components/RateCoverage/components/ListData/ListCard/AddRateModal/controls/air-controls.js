@@ -184,11 +184,16 @@ const airControls = ({
 		rules       : { required: 'density ratio is required' },
 	},
 	{
-		name               : 'weight_slabs',
-		type               : 'fieldArray',
-		heading            : 'Weight Slabs',
-		showButtons        : true,
-		buttonText         : 'Add',
+		name        : 'weight_slabs',
+		type        : 'fieldArray',
+		heading     : 'Weight Slabs',
+		showButtons : true,
+		buttonText  : 'Add',
+		value       : [{
+			lower_limit    : '',
+			upper_limit    : '',
+			price_per_unit : '',
+		}],
 		noDeleteButtonTill : 1,
 		controls           : [
 			{
