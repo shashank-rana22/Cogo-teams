@@ -1,3 +1,4 @@
+import Insurance from '@cogoport/insurance-form';
 import { useRouter } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
 import { isEmpty } from '@cogoport/utils';
@@ -6,7 +7,6 @@ import React, { useState } from 'react';
 import TryOldBanner from '../../../common/TryOldBanner';
 
 import Header from './components/Header';
-import Insurance from './components/Insurance';
 import ModeSelection from './components/ModeSelection';
 import OtherServices from './components/OtherServices';
 import Routes from './components/Routes';

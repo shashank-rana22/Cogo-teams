@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 function Insurance() {
 	const { query } = useRouter();
 	const formValues = JSON.parse(query?.data);
-	console.log(formValues, 'formValues');
 
 	return (
 		<div className={styles.container}>

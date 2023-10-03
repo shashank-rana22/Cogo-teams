@@ -3,12 +3,71 @@
 	align-items: center;
 }
 
+.info_container {
+	justify-content: space-between;
+	width: 95%;
+}
+
+.port_info {
+	justify-content: space-around;
+	width: 65%;
+	padding: 0 20px;
+	border-right: 1px solid #d3d3d3;
+	border-left: 1px solid #d3d3d3;
+}
+
 .container {
 	padding: 16px;
 	background-color: #fff;
+	box-shadow: 0 1px 6px 0 #a9bcdaa6;
+}
+
+.border {
+	border-bottom: 1px solid #f68b21;
 }
 
 .back_container {
-	width: 10%;
-	border-right: 1px solid #f2f2f2;
+	width: 3%;
+	cursor: pointer;
+
+	>svg {
+		vertical-align: middle;
+	}
+}
+
+.rest_port_name {
+	color: #f68b21;
+}
+
+.type_container {
+	width: 21%;
+	font-weight: 600;
+	color: #356efd;
+
+	.type {
+		margin: 0 5px;
+	}
+
+	>svg {
+		vertical-align: middle;
+	}
+}
+
+.extra_info {
+	justify-content: space-between;
+	width: 35%;
+	padding: 0 25px;
+}
+
+.drill_content {
+	max-height: 0;
+	overflow: hidden;
+	background-color: #fff;
+	transition: 0.3s ease-in;
+}
+
+.show_drill_content {
+	max-height: 450px;
+	padding: 20px;
+	transition: 0.3s ease-in;
 }

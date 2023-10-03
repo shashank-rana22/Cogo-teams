@@ -1,5 +1,5 @@
-import { Button, Tabs, TabPanel } from '@cogoport/components';
-import { IcMFsea, IcMFairport, IcMFland } from '@cogoport/icons-react';
+import { Button, Tabs, TabPanel, cl } from '@cogoport/components';
+import { IcMFsea, IcMFairport, IcMFland, IcMCross } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import getInsuranceControls from '../../configuration/insuranceControls';
@@ -8,7 +8,7 @@ import useInsurance from '../../hooks/useInsurance';
 
 import styles from './styles.module.css';
 
-function Insurance({ organization = {} }) {
+function Insurance({ organization = {}, src = '', showFormFn = () => {} }) {
 	const [activeTab, setActiveTab] = useState('ocean');
 
 	const { formHook, onSubmit, formValueRef } = useInsurance({ activeTab, organization });
@@ -17,19 +17,27 @@ function Insurance({ organization = {} }) {
 	const { control, handleSubmit, formState:{ errors } } = formHook;
 
 	return (
-		<div className={styles.container}>
+		<>
 			<div className={styles.header}>
-				<h3>Select Service</h3>
+				<div>
 
-				<Tabs
-					activeTab={activeTab}
-					themeType="tertiary"
-					onChange={setActiveTab}
-				>
-					<TabPanel name="ocean" title="Ocean" icon={<IcMFsea />} />
-					<TabPanel name="air" title="Air" icon={<IcMFairport />} />
-					<TabPanel name="surface" title="Surface" icon={<IcMFland />} />
-				</Tabs>
+					<h3>Select Service</h3>
+
+					<Tabs
+						activeTab={activeTab}
+						themeType="tertiary"
+						onChange={setActiveTab}
+					>
+						<TabPanel name="ocean" title="Ocean" icon={<IcMFsea />} />
+						<TabPanel name="air" title="Air" icon={<IcMFairport />} />
+						<TabPanel name="surface" title="Surface" icon={<IcMFland />} />
+					</Tabs>
+				</div>
+				{src === 'cargo_insurance' ? (
+					<div className={styles.close_icon} role="presentation" onClick={() => showFormFn(false)}>
+						<IcMCross />
+					</div>
+				) : null}
 			</div>
 
 			<div className={styles.form_container}>
@@ -38,7 +46,11 @@ function Insurance({ organization = {} }) {
 					const Element = getFieldController(type);
 
 					return (
-						<div key={name} className={styles.col}>
+						<div
+							key={name}
+							className={cl`${styles.col}
+						${src === 'cargo_insurance' ? styles.new_col : ''}`}
+						>
 							<p>{label}</p>
 							<Element
 								{...config}
@@ -54,7 +66,7 @@ function Insurance({ organization = {} }) {
 			<div className={styles.footer}>
 				<Button size="lg" themeType="accent" onClick={handleSubmit(onSubmit)}>Search Rates</Button>
 			</div>
-		</div>
+		</>
 	);
 }
 
