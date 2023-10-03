@@ -21,3 +21,10 @@
 	font-size: 16px;
 	color: #828282;
 }
+
+.recent_text {
+	font-size: 10px;
+	font-weight: 600;
+	color: #828282;
+	user-select: none;
+}
