@@ -2,7 +2,6 @@ import { Layout } from '@cogoport/air-modules';
 import { Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
 
 import controls from './controls';
 import useUpdateShipmentPendingTask from './hooks/useUpdateShipmentPendingTask';
@@ -36,8 +35,8 @@ function CartingDetails({
 			const { fileName = '', finalUrl = '' } = item || {};
 			return [...prev, {
 				document_type : 'carting_order',
-				file_name     : !isEmpty(fileName) ? fileName : getFileName(item),
-				document_url  : !isEmpty(finalUrl) ? finalUrl : item,
+				file_name     : fileName || getFileName(item),
+				document_url  : finalUrl || item,
 				data          : {
 					description: '',
 				},

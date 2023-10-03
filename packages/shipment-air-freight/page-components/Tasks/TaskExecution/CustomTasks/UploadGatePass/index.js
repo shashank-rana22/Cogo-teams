@@ -1,7 +1,6 @@
 import { Button, Toast } from '@cogoport/components';
 import { UploadController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty } from '@cogoport/utils';
 
 import useUpdateShipmentPendingTask from './hooks/useUpdateShipmentPendingTask';
 import styles from './styles.module.css';
@@ -28,8 +27,8 @@ function UploadGatePass({
 			const { fileName = '', finalUrl = '' } = item || {};
 			return [...prev, {
 				document_type : 'gate_out_pass',
-				file_name     : !isEmpty(fileName) ? fileName : getFileName(item),
-				document_url  : !isEmpty(finalUrl) ? finalUrl : item,
+				file_name     : fileName || getFileName(item),
+				document_url  : finalUrl || item,
 				data          : {
 					description: '',
 				},

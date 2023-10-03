@@ -31,8 +31,8 @@ function CartingApproval({
 			const { fileName = '', finalUrl = '' } = item || {};
 			return [...prev, {
 				document_type : 'carting_order',
-				file_name     : !isEmpty(fileName) ? fileName : getFileName(item),
-				document_url  : !isEmpty(finalUrl) ? finalUrl : item,
+				file_name     : fileName || getFileName(item),
+				document_url  : finalUrl || item,
 				data          : {
 					description: '',
 				},
@@ -59,7 +59,7 @@ function CartingApproval({
 		<div className={styles.main_container}>
 			<div className={styles.heading}>Uploaded Documents</div>
 			<div className={styles.doc_container}>
-				{documentLoading ? [...Array(NUMBER_OF_PLACEHOLDERS)].map((idx) => (
+				{documentLoading ? [...Array(NUMBER_OF_PLACEHOLDERS)].keys().map((idx) => (
 					<Placeholder
 						key={idx}
 						className={styles.placeholder}
