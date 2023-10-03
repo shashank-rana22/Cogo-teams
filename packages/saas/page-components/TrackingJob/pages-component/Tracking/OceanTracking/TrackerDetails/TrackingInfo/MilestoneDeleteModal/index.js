@@ -1,18 +1,15 @@
 import { Modal, Button } from '@cogoport/components';
 import React from 'react';
 
-// import useDeleteContainerMilestones from '../../../../../hooks/useDeleteContainerMilestones';
-
 import useDeleteContainerMilestones from '../../../../../../hooks/useDeleteContainerMilestones';
 
-// import { H3, ButtonContainer } from './styles';
 import styles from './styles.module.css';
 
 function DeleteModal({
-	deleteModal,
-	setDeleteModal,
-	deleteId,
-	refetch,
+	deleteModal = false,
+	setDeleteModal = () => {},
+	deleteId = '',
+	refetch = () => {},
 }) {
 	const { deleteMileStones = () => {}, loading = false } = useDeleteContainerMilestones({
 		refetch: () => {

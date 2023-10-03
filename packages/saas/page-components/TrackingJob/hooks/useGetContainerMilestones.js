@@ -11,9 +11,11 @@ const useGetContainerMilestones = ({ id = '' }) => {
 
 	const getMilestones = useCallback(async () => {
 		try {
-			await trigger({
-				params: { id },
-			});
+			if (id) {
+				await trigger({
+					params: { id },
+				});
+			}
 		} catch (err) {
 			toastApiError(err);
 		}

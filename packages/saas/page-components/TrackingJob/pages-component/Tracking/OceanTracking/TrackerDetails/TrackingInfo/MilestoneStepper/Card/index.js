@@ -5,7 +5,7 @@ import { IcMDelete, IcMEdit, IcMInfo } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useState } from 'react';
 
-import getMappingObject from '../../../../../../../config/card';
+import getMappingObject from '../../../../../../../config/milestone-card-mapping';
 import DeleteModal from '../../MilestoneDeleteModal';
 import EditModal from '../../MilestoneEditModal';
 
@@ -13,7 +13,7 @@ import Stepper from './Stepper';
 import styles from './styles.module.css';
 
 const INVALID_VESSEL_NAME = ['N/A'];
-
+const THIRTY_FIVE = 35;
 const WIDTH_PROP = {
 	VESSEL : 35,
 	TRUCK  : 55,
@@ -46,7 +46,7 @@ function MilestoneName({ milestone = '', vessel_name = '' }) {
 
 function Card({
 	combineList = [], trackingType = 'ocean', isCurrentMilestone = false,
-	milestoneSubIndex = null, refetch,
+	milestoneSubIndex = null, refetch = () => {},
 }) {
 	const {
 		location = '', station = '',
@@ -77,7 +77,7 @@ function Card({
 				<h3 className={styles.title}>{location || station}</h3>
 				<Image
 					src={url}
-					width={WIDTH_PROP?.[transport_mode] || 35}
+					width={WIDTH_PROP?.[transport_mode] || THIRTY_FIVE}
 					height={35}
 					alt="logo"
 				/>
@@ -153,12 +153,10 @@ function Card({
 			</div>
 			{deleteModal && (
 				<DeleteModal
-					// getMilestones={getMilestones}
 					deleteModal={deleteModal}
 					setDeleteModal={setDeleteModal}
 					deleteId={deleteId}
 					refetch={refetch}
-					// containerSubscriptionId={containerSubscriptionId}
 				/>
 
 			)}
@@ -168,11 +166,7 @@ function Card({
 					editModal={editModal}
 					setEditModal={setEditModal}
 					refetch={refetch}
-					// showUpdate={showUpdate}
-					// setShowUpdate={setShowUpdate}
-					// isDisabled={isDisabled}
 					editDetail={editDetail}
-					// shipping_line_id={shipping_line_id}
 				/>
 			)}
 		</div>

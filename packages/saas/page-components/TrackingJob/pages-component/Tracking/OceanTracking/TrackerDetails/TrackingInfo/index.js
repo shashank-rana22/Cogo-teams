@@ -1,5 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 
+import EmptyState from '../../../../../common/EmptyState';
 import useGetCurrentInfo from '../../../../../hooks/useCurrentInfo';
 import useGetContainerMilestones from '../../../../../hooks/useGetContainerMilestones';
 import Loader from '../../../Loader';
@@ -17,7 +19,11 @@ function TrackingInfo({ id = null }) {
 	if (loading) {
 		return <Loader type="air" />;
 	}
-
+	if (isEmpty(combineMileStoneList)) {
+		return (
+			<EmptyState />
+		);
+	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.info_container}>

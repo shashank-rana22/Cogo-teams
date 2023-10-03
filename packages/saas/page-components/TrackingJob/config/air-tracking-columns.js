@@ -6,9 +6,9 @@ import SortColumns from './sort-columns';
 import styles from './styles.module.css';
 
 export const columns = ({
-	handleShowModal,
+	handleShowModal = () => {},
 	setFilters = () => {},
-	filters,
+	filters = {},
 }) => [
 	{
 		id       : 'airway_bill_no',

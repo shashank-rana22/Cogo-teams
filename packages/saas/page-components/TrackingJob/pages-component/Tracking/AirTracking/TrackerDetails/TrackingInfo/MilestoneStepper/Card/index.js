@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { Image } from '@cogoport/next';
 
-import getMappingObject from '../../../../../../../config/card';
+import getMappingObject from '../../../../../../../config/milestone-card-mapping';
 import MilestoneName from '../../../MileStoneName/MileStoneName';
 
 import Stepper from './Stepper';

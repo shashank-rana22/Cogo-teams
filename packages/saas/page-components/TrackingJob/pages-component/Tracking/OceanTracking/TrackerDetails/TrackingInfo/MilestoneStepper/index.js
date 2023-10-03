@@ -8,7 +8,7 @@ import { isCurrentDate, isFutureDate } from '../../../../../../utlis/dateCompare
 import Card from './Card';
 import styles from './styles.module.css';
 
-function MilestoneStepper({ combineMileStoneList = [], trackingType = 'air', refetch }) {
+function MilestoneStepper({ combineMileStoneList = [], trackingType = 'air', refetch = () => {} }) {
 	const scrollRef = useRef({});
 
 	const {

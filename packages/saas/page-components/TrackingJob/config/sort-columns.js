@@ -11,11 +11,11 @@ function SortColumns({ filters = {}, setFilters = () => {}, sortType = '' }) {
 
 	return (
 		<p>
-			{sortType === 'created_at' && (
+			{sortType === 'created_at' ? (
 				<span>
 					Created At
 					{' '}
-					{(isAscending && filters.sort_by !== 'updated_at') && (
+					{(isAscending && filters.sort_by !== 'updated_at') ? (
 						<IcMArrowRotateUp
 							onClick={() => handleSorting('created_at', 'desc')}
 							className={styles.sort_icon_active}
@@ -25,8 +25,8 @@ function SortColumns({ filters = {}, setFilters = () => {}, sortType = '' }) {
 								marginLeft : '8px',
 							}}
 						/>
-					)}
-					{(isDescending || filters.sort_by === 'updated_at') && (
+					) : null}
+					{(isDescending || filters.sort_by === 'updated_at') ? (
 						<IcMArrowRotateDown
 							onClick={() => handleSorting('created_at', 'asc')}
 							className={styles.sort_icon_active}
@@ -36,14 +36,14 @@ function SortColumns({ filters = {}, setFilters = () => {}, sortType = '' }) {
 								marginLeft : '8px',
 							}}
 						/>
-					)}
+					) : null}
 				</span>
-			)}
-			{sortType === 'updated_at' && (
+			) : null}
+			{sortType === 'updated_at' ? (
 				<span>
 					Updated At
 					{' '}
-					{(isAscending && filters.sort_by !== 'created_at') && (
+					{(isAscending && filters.sort_by !== 'created_at') ? (
 						<IcMArrowRotateUp
 							onClick={() => handleSorting('updated_at', 'desc')}
 							className={styles.sort_icon_active}
@@ -53,8 +53,8 @@ function SortColumns({ filters = {}, setFilters = () => {}, sortType = '' }) {
 								marginLeft : '8px',
 							}}
 						/>
-					)}
-					{(isDescending || filters.sort_by === 'created_at') && (
+					) : null}
+					{(isDescending || filters.sort_by === 'created_at') ? (
 						<IcMArrowRotateDown
 							onClick={() => handleSorting('updated_at', 'asc')}
 							className={styles.sort_icon_active}
@@ -64,9 +64,9 @@ function SortColumns({ filters = {}, setFilters = () => {}, sortType = '' }) {
 								marginLeft : '8px',
 							}}
 						/>
-					)}
+					) : null}
 				</span>
-			)}
+			) : null}
 		</p>
 	);
 }
