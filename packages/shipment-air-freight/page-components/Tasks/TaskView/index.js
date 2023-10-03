@@ -30,7 +30,6 @@ function TaskView() {
 		getShipmentTimeline = () => {},
 		isGettingShipment = false,
 	} = useContext(ShipmentDetailContext);
-	console.log('primary_service:', primary_service);
 
 	const incoTerm = shipment_data?.inco_term;
 	const tradeType = GLOBAL_CONSTANTS.options.inco_term[incoTerm]?.trade_type

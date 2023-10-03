@@ -1,4 +1,4 @@
-import { Button, Loader, Toast } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import { UploadController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
@@ -11,7 +11,6 @@ const getFileName = (item) => item?.split('/')?.splice(LAST_INDEX)?.[GLOBAL_CONS
 
 function UploadGatePass({
 	primaryService = {},
-	// shipmentData = {},
 	task = {},
 	refetch = () => {},
 	onCancel = () => {},
@@ -27,7 +26,7 @@ function UploadGatePass({
 	const onSubmit = () => {
 		const documents = (Object.values(formValues) || []).reduce((prev, item) => {
 			const { fileName = '', finalUrl = '' } = item || {};
-			return isEmpty(item) ? Toast.error('Please upload all documents') : [...prev, {
+			return [...prev, {
 				document_type : 'gate_out_pass',
 				file_name     : !isEmpty(fileName) ? fileName : getFileName(item),
 				document_url  : !isEmpty(finalUrl) ? finalUrl : item,
@@ -37,6 +36,8 @@ function UploadGatePass({
 			}];
 		}, []);
 
+		const status = (documents || []).some((item) => !item?.document_url);
+
 		const payload = {
 			id   : task?.id,
 			data : {
@@ -44,37 +45,39 @@ function UploadGatePass({
 			},
 		};
 
-		apiTrigger({ payload });
+		if (status) {
+			Toast.error('Please upload all documents');
+		} else {
+			apiTrigger({ payload });
+		}
 	};
 
 	return (
 		<div className={styles.main_container}>
-			{loading ? <Loader /> : (
-				<div>
-					<div className={styles.heading}>Vehicle Number: </div>
-					{(vehicle_number_details || []).map((item) => (
-						<div
-							key={item?.vehicle_number}
-							className={styles.doc_card}
-						>
-							<div>
-								{item?.vehicle_number}
-							</div>
-							<UploadController
-								name={`upload_gate_pass_url_${item?.vehicle_number}`}
-								key={`upload_gate_pass_url_${item?.vehicle_number}`}
-								className="upload_gate_pass_documents"
-								control={control}
-								rules={{
-									required: {
-										message: 'Document is required',
-									},
-								}}
-							/>
+			<div>
+				<div className={styles.heading}>Vehicle Number: </div>
+				{(vehicle_number_details || []).map((item) => (
+					<div
+						key={item}
+						className={styles.doc_card}
+					>
+						<div className={styles.vehicle_name}>
+							{item?.vehicle_number}
 						</div>
-					))}
-				</div>
-			)}
+						<UploadController
+							name={`upload_gate_pass_url_${item?.vehicle_number}`}
+							key={`upload_gate_pass_url_${item?.vehicle_number}`}
+							className="upload_controller_documents"
+							control={control}
+							rules={{
+								required: {
+									message: 'Document is required',
+								},
+							}}
+						/>
+					</div>
+				))}
+			</div>
 
 			<div className={styles.submit_button}>
 				<Button

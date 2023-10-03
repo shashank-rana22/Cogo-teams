@@ -29,7 +29,7 @@ function CartingApproval({
 	const onSubmit = () => {
 		const documents = (Object.values(formValues) || []).reduce((prev, item) => {
 			const { fileName = '', finalUrl = '' } = item || {};
-			return isEmpty(item) ? Toast.error('Please approve all documents') : [...prev, {
+			return [...prev, {
 				document_type : 'carting_order',
 				file_name     : !isEmpty(fileName) ? fileName : getFileName(item),
 				document_url  : !isEmpty(finalUrl) ? finalUrl : item,
@@ -39,6 +39,8 @@ function CartingApproval({
 			}];
 		}, []);
 
+		const status = (documents || []).some((item) => !item?.document_url);
+
 		const payload = {
 			id   : task?.id,
 			data : {
@@ -46,7 +48,11 @@ function CartingApproval({
 			},
 		};
 
-		apiTrigger({ payload });
+		if (status) {
+			Toast.error('Please approve all documents');
+		} else {
+			apiTrigger({ payload });
+		}
 	};
 
 	return (
