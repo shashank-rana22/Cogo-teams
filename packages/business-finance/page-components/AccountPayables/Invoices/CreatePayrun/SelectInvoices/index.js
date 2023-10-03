@@ -35,8 +35,10 @@ const updateApiData = ({
 		newValue.list[index][key] = value;
 
 		if (key === 'tdsAmount' && index >= MIN_AMOUNT) {
-			newValue.list[index].payableAmount = newValue.list[index].payableValue - value;
-			newValue.list[index].inputAmount = newValue.list[index].payableValue - value;
+			newValue.list[index].payableAmount = newValue.list[index].invoiceAmount - value
+				- newValue.list[index].paidAmount;
+			newValue.list[index].inputAmount = newValue.list[index].invoiceAmount - value
+				- newValue.list[index].paidAmount;
 		}
 	}
 	return newValue;
@@ -94,6 +96,7 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 	const renderHeaderCheckbox = () => GetTableHeaderCheckbox({ apiData, data, loading, setApiData });
 
 	const setEditedValue = ({ itemData = {}, value = '', key = '', checked = false }) => {
+		console.log(value, 'value');
 		setApiData((prevApiData) => {
 			const index = prevApiData?.list?.findIndex((item) => item?.id === itemData?.id);
 			const {
