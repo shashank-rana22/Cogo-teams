@@ -12,7 +12,7 @@ import getFinancialCloseColumns from './configurations/getFinancialCloseColumns'
 import getJobColumns from './configurations/getJobColumns';
 import styles from './styles.module.css';
 
-function ShipmentAuditFunction({ activeTab = '' }) {
+function ShipmentAuditFunction({ activeTab = '', tax = '' }) {
 	const { push } = useRouter();
 	const [date, setDate] = useState('');
 	const [tradeTab, setTradeTab] = useState('');
@@ -44,29 +44,16 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 			`/business-finance/coe-finance/next-page?job_id=${jobId}`,
 		);
 	};
-	// const handleFinancialTabClick = (jobId) => {
-	// 	push(
-	// 		'/business-finance/coe-finance/finance-close-next-page',
-	// 		'/business-finance/coe-finance/finance-close-next-page',
-	// 	);
-	// };
-
-	// const handleClick = (jobId) => {
-	// 	push({
-	// 		pathname : '/business-finance/coe-finance/next-page',
-	// 		query    : { jobId },
-	// 	});
-	// };
 
 	const handleFinancialTabClick = (jobId) => {
 		push(
-			`/business-finance/coe-finance/next-page?job_id=${jobId}`,
+			`/business-finance/coe-finance/finance-close-next-page?job_id=${jobId}`,
 		);
 	};
 
 	const rest = { onClickOutside: () => setShow(false) };
 	const columns = getJobColumns({ handleClick });
-	const columns2 = getFinancialCloseColumns({ handleFinancialTabClick });
+	const columns2 = getFinancialCloseColumns({ handleFinancialTabClick, activeTab: 'financial_close', tax });
 
 	useEffect(() => {
 		setPaginationFilters((prev) => ({ ...prev, page: 1 }));

@@ -1,4 +1,4 @@
-import { TabPanel, Tabs } from '@cogoport/components';
+import { TabPanel, Tabs, Toggle } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
@@ -15,6 +15,7 @@ function CoeFinance() {
 	const [filters, setFilters] = useState({ timePeriod: 'day' });
 	const { statsData, statsCOEApprovedData, statsLoading } = usePurchaseViewStats({ filters });
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
+	const [tax, setTax] = useState('Pre');
 	const handleTabChange = (tab:string) => {
 		setActiveTab(tab);
 		push(
@@ -23,13 +24,24 @@ function CoeFinance() {
 		);
 	};
 
+	const handlePrePostChange = () => {
+		setTax((prev) => ((prev === 'Pre') ? 'Post' : 'Pre'));
+	};
+
 	return (
 		<div>
 			<div className={styles.header}>
 				<div className={styles.header_style}>
 					Shipment Audit Function
-
 				</div>
+				<Toggle
+					name="prePostToggle"
+					size="md"
+					onLabel="Pre"
+					offLabel="Post"
+					checked={tax === 'Pre'}
+					onChange={handlePrePostChange}
+				/>
 			</div>
 			<div className={styles.tabs_container}>
 				<Tabs
@@ -53,11 +65,11 @@ function CoeFinance() {
 					</TabPanel>
 
 					<TabPanel name="operational_close" title="Operational Close">
-						<ShipmentAuditFunction activeTab={activeTab} />
+						<ShipmentAuditFunction activeTab={activeTab} tax={tax} />
 					</TabPanel>
 
 					<TabPanel name="financial_close" title="Financial Close">
-						<ShipmentAuditFunction activeTab={activeTab} />
+						<ShipmentAuditFunction activeTab={activeTab} tax={tax} />
 					</TabPanel>
 
 					<TabPanel name="all_invoices" title="All Invoices">

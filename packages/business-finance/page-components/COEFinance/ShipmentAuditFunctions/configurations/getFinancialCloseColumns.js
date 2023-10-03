@@ -9,6 +9,7 @@ const ELEVEN = 11;
 
 const getFinancialCloseColumns = ({
 	handleFinancialTabClick = () => {},
+	tax = '',
 }) => {
 	const columns = [
 		{
@@ -52,15 +53,23 @@ const getFinancialCloseColumns = ({
 				const { sell = {} } = row || {};
 				const { estimated, operational, financial } = sell || {};
 				return (
-
 					<div className={styles.accessor_financial}>
 						<div className={styles.fix_layout}>
+							{console.log('tax', tax)}
 							{/* {estimated} */}
 							{/* {getFormatAmount(estimated, 'INR')} */}
 							{ShowOverflowingNumber(row?.estimatedRevenuePreTax, ELEVEN, 'INR') }
 						</div>
-						<RenderTableData data={row?.operationalRevenuePreTax} />
-						<RenderTableData data={row?.financialRevenuePreTax} />
+						<RenderTableData
+							data={row?.operationalRevenuePreTax}
+							percent={tax === 'Pre' ? row?.operationalSellDeviationToEstimatedPreTax
+								: row?.operationalSellDeviationToEstimatedPostTax}
+						/>
+						<RenderTableData
+							data={row?.financialRevenuePreTax}
+							percent={tax === 'Pre' ? row?.financialSellDeviationToEstimatedPreTax
+								: row?.financialSellDeviationToEstimatedPostTax}
+						/>
 					</div>
 				);
 			},
@@ -89,8 +98,16 @@ const getFinancialCloseColumns = ({
 						<div className={styles.fix_layout}>
 							{ShowOverflowingNumber(row?.estimatedCostPreTax, 11, 'INR') }
 						</div>
-						<RenderTableData data={row?.operationalCostPreTax} />
-						<RenderTableData data={row?.financialCostPreTax} />
+						<RenderTableData
+							data={row?.operationalCostPreTax}
+							percent={tax === 'Pre' ? row?.operationalBuyDeviationToEstimatedPreTax
+								: row?.operationalBuyDeviationToEstimatedPostTax}
+						/>
+						<RenderTableData
+							data={row?.financialCostPreTax}
+							percent={tax === 'Pre' ? row?.financialBuyDeviationToEstimatedPreTax
+								: row?.financialBuyDeviationToEstimatedPreTax}
+						/>
 					</div>
 				);
 			},
@@ -120,8 +137,16 @@ const getFinancialCloseColumns = ({
 							{ShowOverflowingNumber(row?.estimatedProfitabilityPreTax, 11, 'INR') }
 
 						</div>
-						<RenderTableData data={row?.operationalProfitabilityPreTax} />
-						<RenderTableData data={row?.financialProfitabilityPreTax} />
+						<RenderTableData
+							data={row?.operationalProfitabilityPreTax}
+							percent={tax === 'Pre' ? row?.operationalProfitabilityDeviationToPreTax
+								: row?.operationalProfitabilityDeviationToPostTax}
+						/>
+						<RenderTableData
+							data={row?.financialProfitabilityPreTax}
+							percent={tax === 'Pre' ? row?.financialProfitabilityDeviationToPreTax
+								: row?.financialProfitabilityDeviationToPostTax}
+						/>
 					</div>
 				);
 			},
