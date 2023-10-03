@@ -32,11 +32,11 @@ function mountActiveRoomSnapShot({
 			setActiveTab((prev) => {
 				const newDocData = activeMessageData.data() || {};
 
-				const PrevLastGroupUpdatedAt = prev?.groupData?.last_group_updated_at || FALLBACK;
+				const prevLastGroupUpdatedAt = prev?.groupData?.last_group_updated_at || FALLBACK;
 
 				const lastGroupUpdatedAt = newDocData?.last_group_updated_at || FALLBACK;
 
-				if (newDocData?.is_group && PrevLastGroupUpdatedAt && (lastGroupUpdatedAt > PrevLastGroupUpdatedAt)) {
+				if (newDocData?.is_group && prevLastGroupUpdatedAt && (lastGroupUpdatedAt > prevLastGroupUpdatedAt)) {
 					listCogooneGroupMembers();
 				}
 

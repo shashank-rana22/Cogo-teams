@@ -152,9 +152,9 @@ const getIconMapping = ({
 		...(ENABLE_EXPAND_SIDE_BAR.includes(channelType) ? SIDEBAR_CONTROLS : []),
 	];
 
-	return iconMapping({ expandSideBar }).filter(
+	return iconMapping({ expandSideBar })?.filter(
 		(eachIcon) => CHANNEL_WISE_NAV_MAPPING.includes(eachIcon.name),
-	);
+	) || [];
 };
 
 export default getIconMapping;
