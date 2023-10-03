@@ -9,8 +9,6 @@ import formatIps from '../common/SalesInvoice/helpers/format-ips';
 
 import useUpdateInvoiceCombination from './useUpdateInvoiceCombination';
 
-// const EXPORT_SERVICES_TYPES = 'fcl_freight_service';
-
 const INVOICE_INDEX_GREATER_THAN = 0;
 
 const UNIQ_IGST_VAL_LENGTH = 1;
@@ -28,11 +26,6 @@ const useEditInvoicePref = ({
 }) => {
 	const { importer_exporter_id = '' } = shipment_data;
 	const { inco_term = '' } = primary_service || {};
-
-	// console.log('shipment data::', shipment_data);
-	// console.log('primary service::', primary_service);
-	// console.log('servicesList::', servicesList);
-	// console.log('invoicing_parties ::', invoicing_parties);
 
 	const updateExportInvoices = getTradeTypeByIncoTerm(inco_term) === 'export';
 	const ALL_SERVICE_LINE_ITEMS = [];
@@ -121,20 +114,11 @@ const useEditInvoicePref = ({
 				NEW_SELECT_PARTIES.push(updateParty);
 			});
 
-			// let isBasicFreightInvService = {};
 			NEW_SELECT_PARTIES[currentInvoiceIndex].services = newServices?.map(
 				(service) => {
 					const itemsService = ALL_SERVICE_LINE_ITEMS.find(
 						(item) => item.serviceKey === service,
 					);
-
-					// const isBasicFreight = (itemsService?.line_items || []).find(
-					// 	(item) => item?.code === 'BAS',
-					// );
-
-					// if (!isEmpty(isBasicFreight)) {
-					// 	isBasicFreightInvService = itemsService;
-					// }
 
 					const currentService = invoicing_parties?.services?.find(
 						(serv) => serv?.id === service?.split(':')?.[GLOBAL_CONSTANTS.zeroth_index],
@@ -180,20 +164,6 @@ const useEditInvoicePref = ({
 			);
 			const uniq_igst_val = new Set(igstArray || []);
 			const allowServiceMerge = uniq_igst_val?.length === UNIQ_IGST_VAL_LENGTH;
-
-			// let isBasicFreight = false;
-			// if (!isEmpty(isBasicFreightInvService)) {
-			// 	(finalNewSelectParties || []).forEach((party) => {
-			// 		const BFLineItem = (party?.services || []).some(
-			// 			(service) => service.serviceKey === isBasicFreightInvService.serviceKey
-			// 				&& EXPORT_SERVICES_TYPES === isBasicFreightInvService.service_type,
-			// 		);
-
-			// 		if (party?.services?.length > PARTY_SERVICES_LENGTH_GREATER_THAN && BFLineItem) {
-			// 			isBasicFreight = true;
-			// 		}
-			// 	});
-			// }
 
 			const is_invoice_mergeable = getByKey(
 				ENTITY_IDS_MAPPING[shipment_data?.entity_id] || {},
