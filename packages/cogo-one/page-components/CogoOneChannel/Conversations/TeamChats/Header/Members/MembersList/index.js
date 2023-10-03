@@ -17,7 +17,6 @@ function MembersList({
 	loggedInAgentId = '',
 }) {
 	const { is_draft = false, group_members_data = [] } = activeTeamCard || {};
-	console.log('activeTeamCard', activeTeamCard);
 
 	const modifiedMembersList = is_draft ? group_members_data : membersList;
 
