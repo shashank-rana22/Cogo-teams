@@ -1,8 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMDocument } from '@cogoport/icons-react';
 import React from 'react';
 
 import whatsappTextFormatting from '../../../helpers/whatsappTextFormatting';
+import CustomFileDiv from '../CustomFileDiv';
 
 import styles from './styles.module.css';
 
@@ -16,9 +16,9 @@ const EXTENTION_ORDER = {
 	jpg: 1, png: 2, gif: 3, jpeg: 4, bmp: 5, svg: 6, webp: 7, xlsx: 8, docx: 9,
 };
 
-function sortByFileExtension(a, b) {
-	const getExtension = (url) => url.split('.').pop();
+const getExtension = (url) => url.split('.').pop();
 
+function sortByFileExtension(a, b) {
 	const extA = getExtension(a).toLowerCase();
 	const extB = getExtension(b).toLowerCase();
 
@@ -30,27 +30,6 @@ const renderText = (txt = '') => {
 	newTxt = renderBoldText(newTxt);
 	return newTxt;
 };
-
-function Document({ item = '' }) {
-	const urlArray = decodeURI(item)?.split('/');
-	const fileNameFromUrl = urlArray[(urlArray?.length || DEFAULT_URL_LENGTH) - NEGATIVE_NUMBER] || '';
-	const fileArray = fileNameFromUrl.split('.') || [];
-	const extension = fileArray.pop();
-	const fileName = fileArray.join('.');
-
-	return (
-		<div
-			className={styles.container}
-			role="presentation"
-			onClick={() => {
-				window.open(item, '_blank', 'noreferrer');
-			}}
-		>
-			<IcMDocument width={22} height={22} className={styles.img_styles} />
-			<div className={styles.file_name}>{`${fileName}${extension ? `.${extension}` : ''}`}</div>
-		</div>
-	);
-}
 
 function VideoMessage({ item = '' }) {
 	return (
@@ -106,8 +85,8 @@ const EXTENSION_WISE_MAPPINGS = {
 	bmp  : ImageDocument,
 	svg  : ImageDocument,
 	webp : ImageDocument,
-	pdf  : Document,
-	xlsx : Document,
+	pdf  : CustomFileDiv,
+	xlsx : CustomFileDiv,
 	mp4  : VideoMessage,
 	mkv  : VideoMessage,
 	mov  : VideoMessage,
@@ -137,7 +116,7 @@ function MultiMediaMessage({
 				if (!Comp) {
 					return null;
 				}
-				return <Comp item={item} key={item} />;
+				return <Comp item={item} key={item} mediaUrl={item} />;
 			})}
 			<ShowMessage messageType={messageType} message={message} />
 		</>

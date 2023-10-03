@@ -460,6 +460,8 @@ const GLOBAL_CONSTANTS = {
 		cogoport_login_logo : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
 		edit_square         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/edit_square_light.png',
 		new_conversation    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/new-message.png',
+		teams               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/teams.png',
+		groups              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/group.png',
 	},
 
 	video_call_ring_tone_url:

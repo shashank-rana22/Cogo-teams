@@ -5,7 +5,6 @@ import { IcMUserAllocations, IcMEyeclose } from '@cogoport/icons-react';
 import whatsappTextFormatting from '../../helpers/whatsappTextFormatting';
 
 import CustomFileDiv from './CustomFileDiv';
-import MultiMediaMessage from './MultiMediaMessage';
 import Order from './Order';
 import styles from './styles.module.css';
 import UserActivityMessages from './UserActivityMessages';
@@ -156,6 +155,75 @@ function CustomContacts({ message = '' }) {
 				)}
 			</div>
 		</div>
+	);
+}
+
+const EXTENSION_WISE_MAPPINGS = {
+	png  : CustomImage,
+	jpg  : CustomImage,
+	gif  : CustomImage,
+	jpeg : CustomImage,
+	bmp  : CustomImage,
+	svg  : CustomImage,
+	webp : CustomImage,
+	pdf  : CustomFileDiv,
+	xlsx : CustomFileDiv,
+	mp4  : CustomVideo,
+	mkv  : CustomVideo,
+	mov  : CustomVideo,
+	webm : CustomVideo,
+	avi  : CustomVideo,
+};
+
+const DEFAULT_URL_LENGTH = 0;
+
+const NEGATIVE_NUMBER = 1;
+
+const EXTENTION_ORDER = {
+	jpg: 1, png: 2, gif: 3, jpeg: 4, bmp: 5, svg: 6, webp: 7, xlsx: 8, docx: 9,
+};
+
+const getExtension = (url) => url?.split('.').pop();
+
+function sortByFileExtension(first, second) {
+	const extA = getExtension(first).toLowerCase();
+	const extB = getExtension(second).toLowerCase();
+	console.log('EXTENTION_ORDER[extA] - EXTENTION_ORDER[extB];', EXTENTION_ORDER[extA] - EXTENTION_ORDER[extB]);
+	return EXTENTION_ORDER[extA] - EXTENTION_ORDER[extB];
+}
+
+function MultiMediaMessage({
+	message = '',
+	response = {},
+	messageType = '',
+}) {
+	const { media_url = [] } = response || {};
+
+	const sortedMediaUrls = (media_url || []).sort(sortByFileExtension);
+
+	return (
+		<>
+			{(sortedMediaUrls || []).map((item) => {
+				const urlArray = decodeURI(item)?.split('/');
+				const fileNameFromUrl = urlArray[(urlArray?.length || DEFAULT_URL_LENGTH) - NEGATIVE_NUMBER] || '';
+				const fileArray = fileNameFromUrl.split('.') || [];
+				const extension = fileArray.pop();
+
+				const Comp = EXTENSION_WISE_MAPPINGS[extension] || EXTENSION_WISE_MAPPINGS.pdf;
+
+				if (!Comp) {
+					return null;
+				}
+				return (
+					<Comp
+						item={item}
+						key={item}
+						mediaUrl={item}
+					/>
+				);
+			})}
+			<ShowMessage messageType={messageType} message={message} />
+		</>
 	);
 }
 
