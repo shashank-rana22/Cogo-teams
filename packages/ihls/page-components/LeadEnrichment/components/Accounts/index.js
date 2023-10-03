@@ -3,13 +3,13 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMCloudUpload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import FileFilter from '../../commons/FileFilter';
 import { STATISTICS_HEAD, STATISTICS_HEAD_LIMIT_INDEX } from '../../helpers/constants';
 import useGetLeadData from '../../hooks/useGetLeadData';
 import LeadInfo from '../LeadInfo';
 import Statistics from '../Statistics';
 
 import CsvFilter from './CsvFilter';
+import CsvReport from './CsvReport';
 import MainFilters from './MainFilters';
 import styles from './styles.module.css';
 
@@ -55,9 +55,10 @@ function Accounts() {
 				<div>Leads Statistics</div>
 				{fileName
 					? (
-						<FileFilter
+						<CsvReport
 							fileName={fileName}
 							onRemoveCsvFilter={onRemoveCsvFilter}
+							params={params}
 						/>
 					) : (
 						<Button themeType="secondary" className={styles.upload_btn} onClick={() => setShowCsv(true)}>

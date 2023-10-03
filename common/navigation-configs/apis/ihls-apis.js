@@ -31,6 +31,11 @@ const ihls = {
 			service_name : 'athena',
 		},
 		{
+			api          : 'get_registration_status',
+			access_type  : 'public',
+			service_name : 'athena',
+		},
+		{
 			api          : 'get_objective_list',
 			access_type  : 'public',
 			service_name : 'athena',
