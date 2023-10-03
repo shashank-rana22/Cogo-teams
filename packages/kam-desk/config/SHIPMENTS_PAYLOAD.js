@@ -107,7 +107,7 @@ const tabPayload = {
 				],
 			},
 			document_approval: {
-				state               : 'in_progress',
+				state               : ['in_progress', 'confirmed_by_importer_exporter'],
 				bl_approval_pending : true,
 
 			},

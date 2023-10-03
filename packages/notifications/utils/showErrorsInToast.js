@@ -5,7 +5,7 @@ const showErrorsInToast = (messages, t = () => {}) => {
 		Object.keys(messages || {})
 			?.map((_) => messages[_])
 			?.join(', ')
-			|| t('notifications:default_error_toast'),
+			|| t('common:default_error_toast'),
 		{ hideAfter: 6 },
 	);
 };

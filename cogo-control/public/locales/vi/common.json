@@ -169,7 +169,7 @@
     "authority_desk": "Authority Desk",
     "cost_booking_desk": "Cost Booking Desk",
     "cancellation_policies": "Cancellation Policies",
-    "communcation": "Communcation",
+    "communication": "Communication",
     "ltl_run_sheets": "LTL Run Sheets",
     "kam_payments_dashboard": "KAM Payments Dashboard",
     "ltl_operations": "LTL Operations",
@@ -257,5 +257,15 @@
     "ams_submission": "AMS Submission",
     "warehouse_management": "Warehouse Management",
     "demand_forecast": "Demand Forecast",
-    "select_language": "Chọn ngôn ngữ"
+    "select_language": "Chọn ngôn ngữ",
+     "default_error_toast": "Ứng dụng đã gặp phải một lỗi không xác định. Đội của chúng tôi đang xem xét vấn đề này với sự cấp bách tối đa. Vui lòng thử lại sau một thời gian. Nếu vấn đề vẫn tiếp tục, vui lòng liên hệ chúng tôi qua cuộc trò chuyện.",
+    "tab_notifications_label": "Thông báo",
+    "tab_mails_label": "Thư",
+    "mark_all_as_read": "Đánh dấu tất cả là đã đọc",
+    "new_notifications": "Thông báo mới từ cogoport!",
+    "loading": "Đang tải..",
+    "chips_notifications_label": "Thông báo",
+    "chips_mails_label": "Thư",
+    "see_all_button": "Xem Tất cả",
+    "notifications_empty_label": "Bạn không có thông báo mới."
 }

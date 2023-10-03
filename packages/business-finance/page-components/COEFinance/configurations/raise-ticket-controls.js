@@ -2,7 +2,7 @@ const controls = ({
 	formatRaiseToDeskOptions = [],
 	watchRaisedToDesk = '',
 	setAdditionalInfo = () => {},
-	shipmentData = {},
+	STAKEHOLDER_OPTIONS = [],
 }) => ([
 	{
 		label       : 'Raised To Desk',
@@ -13,6 +13,14 @@ const controls = ({
 		options     : formatRaiseToDeskOptions,
 	},
 	{
+		label       : 'Raised To',
+		placeholder : 'Select Raised To',
+		name        : 'raised_to',
+		type        : 'select',
+		rules       : { required: true },
+		options     : STAKEHOLDER_OPTIONS,
+	},
+	{
 		label       : 'Select issue type',
 		placeholder : 'Select issue type',
 		name        : 'issue_type',
@@ -21,8 +29,6 @@ const controls = ({
 		asyncKey    : 'default_types',
 		params      : {
 			RequestType  : 'shipment' || undefined,
-			Service      : shipmentData?.shipment_type || undefined,
-			TradeType    : shipmentData?.trade_type || undefined,
 			RaisedByDesk : 'Auditor' || undefined,
 			RaisedToDesk : watchRaisedToDesk || undefined,
 		},
@@ -41,7 +47,7 @@ const controls = ({
 		type       : 'file',
 		themeType  : 'secondary',
 		drag       : true,
-		label      : 'Upload Supporting Document',
+		label      : 'Upload Supporting Document(Optional)',
 		uploadType : 'aws',
 	},
 ]);

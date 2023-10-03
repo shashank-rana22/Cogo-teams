@@ -11,12 +11,6 @@ const TRADE_MAPPING = {
 	export : 'Origin',
 };
 const INITIAL_STATE = 0;
-const LABELS = {};
-const CHARGECODES = {};
-const CUSTOM_VALUES = {};
-const FIELD_VALUE = {};
-const DEFAULT_VALUES = {};
-const PAYLOAD = [];
 
 const useEditLineItems = ({
 	invoice = {},
@@ -42,9 +36,11 @@ const useEditLineItems = ({
 	};
 
 	const generateDefaultValues = ({ values }) => {
+		const DEFAULT_VALUES = {};
 		values.forEach((control) => {
 			if (control.type === 'edit_service_charges') {
 				DEFAULT_VALUES[control.name] = control.value.map((value) => {
+					const FIELD_VALUE = {};
 					control.controls.forEach((subControl) => {
 						FIELD_VALUE[subControl.name] = value[subControl.name] || INITIAL_STATE;
 					});
@@ -65,14 +61,14 @@ const useEditLineItems = ({
 	);
 
 	const controls = services.map((service, index) => ({
-		...rawControls(
+		...rawControls({
 			handleChange,
-			service,
+			charge: service,
 			info,
 			shipment_data,
 			index,
 			TRADE_MAPPING,
-		),
+		}),
 		onOptionsChange : handleOptionsChange,
 		value           : (service?.line_items || []).map((item) => {
 			const {
@@ -130,6 +126,10 @@ const useEditLineItems = ({
 	};
 
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
+
+	const LABELS = {};
+	const CUSTOM_VALUES = {};
+
 	Object.keys(controls?.[GLOBAL_CONSTANTS.zeroth_index]).forEach((key) => {
 		CUSTOM_VALUES[key] = {
 			formValues : newFormValues[key],
@@ -139,11 +139,13 @@ const useEditLineItems = ({
 	});
 
 	const onCreate = async (values) => {
+		const PAYLOAD = [];
 		try {
 			Object.keys(values).forEach((key) => {
 				const currentService = services.find(
 					(serviceItem, index) => `${serviceItem.service_id}:${index}` === key,
 				);
+				const CHARGECODES = {};
 				(allChargeCodes[currentService?.service_type] || []).forEach(
 					(chgCode) => {
 						CHARGECODES[chgCode.code] = chgCode;

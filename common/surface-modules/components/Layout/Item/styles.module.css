@@ -24,6 +24,11 @@
 	color: var(--color-primary-error-red-2);
 }
 
+.required_field::after {
+	color: var(--color-primary-error-red-2);
+	content: " *";
+}
+
 .element {
 	padding: 4px;
 

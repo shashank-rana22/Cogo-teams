@@ -1,25 +1,24 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import getServiceNameforTableColumn from '../../../../helpers/getServiceNameforTableColumn';
 
-export const InvoiceTable = (serviceItem = {}) => {
-	const currencyLocale = GLOBAL_CONSTANTS.currency_locale.INR;
+const DEFAULT_VALUE = 0;
 
-	const trade_type = serviceItem?.trade_type;
+export const invoiceTable = (serviceItem = {}) => {
+	const { trade_type = '', truck_number = '' } = serviceItem || {};
 
-	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, trade_type);
+	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, trade_type, truck_number);
 
 	return [
 		{
 			label  : serviceName,
 			render : (item) => item?.name || '-',
-			span   : 2.0,
+			span   : 2,
 		},
 		{
 			label  : 'Alias Name',
 			render : (item) => item?.alias || '-',
-			span   : 1.0,
+			span   : 1,
 		},
 		{
 			label  : 'Currency',
@@ -28,43 +27,71 @@ export const InvoiceTable = (serviceItem = {}) => {
 		},
 		{
 			label  : 'Rate',
-			render : (item) => Number(item?.price_discounted || 0).toLocaleString(currencyLocale) || 0,
-			span   : 1,
+			render : (item) => formatAmount({
+				amount   : item?.price_discounted,
+				currency : item?.currency,
+				options  : {
+					style                 : 'decimal',
+					maximumFractionDigits : 2,
+				},
+			}),
+			span: 1,
 		},
 		{
 			label  : 'Quantity',
-			render : (item) => Number(item?.quantity || 0).toLocaleString(currencyLocale) || 0,
-			span   : 1,
+			render : (item) => formatAmount({
+				amount   : item?.quantity,
+				currency : item?.currency,
+				options  : {
+					style                 : 'decimal',
+					maximumFractionDigits : 2,
+				},
+			}),
+			span: 1,
 		},
 		{
 			label  : 'Discount',
-			render : (item) => Number(item?.discount_price || 0).toLocaleString(currencyLocale) || 'NA',
-			span   : 1,
+			render : (item) => formatAmount({
+				amount   : item?.discount_price,
+				currency : item?.currency,
+				options  : {
+					style                 : 'decimal',
+					maximumFractionDigits : 2,
+				},
+			}),
+			span: 1,
 		},
 
 		{
 			label  : 'Exc. Rate',
-			render : (item) => Number(item?.exchange_rate || 0).toLocaleString(currencyLocale) || 'NA',
-			span   : 1,
+			render : (item) => formatAmount({
+				amount   : item?.exchange_rate,
+				currency : item?.currency,
+				options  : {
+					style                 : 'decimal',
+					maximumFractionDigits : 2,
+				},
+			}),
+			span: 1,
 		},
 		{
 			label  : 'Tax Amt.',
 			render : (item) => `${formatAmount({
-				amount   : item?.tax_price_discounted || 0,
+				amount   : item?.tax_price_discounted || DEFAULT_VALUE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'currency',
 					currencyDisplay       : 'code',
 					maximumFractionDigits : 2,
 				},
-			})} (${item?.tax_percent || 0}%)`,
+			})} (${item?.tax_percent || DEFAULT_VALUE}%)`,
 
 			span: 1,
 		},
 		{
 			label  : 'Amt. with Tax',
 			render : (item) => formatAmount({
-				amount   : item?.tax_total_price_discounted || 0,
+				amount   : item?.tax_total_price_discounted || DEFAULT_VALUE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'currency',

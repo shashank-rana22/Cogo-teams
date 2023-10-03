@@ -5,6 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import Filter from '../../../commons/Filters';
+import { GenericObject } from '../../../commons/Interfaces';
 import { FILTERS } from '../../configurations/filters_config';
 import { CURRENCY_DATA } from '../../constants/constant';
 
@@ -12,9 +13,10 @@ import styles from './styles.module.css';
 
 interface Props {
 	setFilters: (p: object) => void;
+	filters: GenericObject;
 }
 
-function FilterModal({ setFilters = () => {} }: Props) {
+function FilterModal({ setFilters = () => {}, filters = {} }: Props) {
 	const [modalFilters, setModalFilters] = useState({
 		currency    : [],
 		serviceType : [],
@@ -43,6 +45,11 @@ function FilterModal({ setFilters = () => {} }: Props) {
 	const isFilterEmpty = Object.keys(modalFilters)?.length === 2
 	&& isEmpty(modalFilters?.currency)
 	&& isEmpty(modalFilters?.serviceType);
+
+	const showRedDot = !isEmpty(filters?.currency)
+						|| !isEmpty(filters?.serviceType)
+							|| !!filters?.billDate || !!filters?.dueDate
+							|| !!filters?.updateDate || !!filters?.billType;
 
 	const clearFilters = () => {
 		setModalFilters({
@@ -163,13 +170,13 @@ function FilterModal({ setFilters = () => {} }: Props) {
 				<span className={styles.icon}>
 					<IcMFilter />
 				</span>
-				{isFilterEmpty ? null : (
+				{showRedDot ? (
 					<IcCRedCircle
 						height={8}
 						width={8}
 						style={{ marginBottom: '12px' }}
 					/>
-				)}
+				) : null }
 			</div>
 		</div>
 	);

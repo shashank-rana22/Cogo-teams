@@ -94,6 +94,8 @@ function MessagesThread(
 		? [...(messagesData || [])].reverse()
 		: messagesData;
 
+	const isTheFirstMessageId = messagesArray.find((item) => ['sent', 'received'].includes(item.conversation_type));
+
 	useEffect(() => {
 		if (
 			!isEmpty(messagesData)
@@ -154,6 +156,7 @@ function MessagesThread(
 						hasPermissionToEdit={hasPermissionToEdit}
 						mailProps={mailProps}
 						deleteMessage={deleteMessage}
+						isTheFirstMessageId={isTheFirstMessageId?.id}
 					/>
 				);
 			})}

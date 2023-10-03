@@ -6,7 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 const getPayload = ({
 	id, priority, finalUrl, selectedServices, issue_type, additional_information,
 	notify_customer, additionalData, request_type, category, serial_id, sub_category,
-	service, trade_type, raised_by_desk, raised_to_desk, isOperation,
+	service, trade_type, raised_by_desk, raised_to_desk, isOperation, defaultTypeId,
 }) => ({
 	UserID        : id || undefined,
 	PerformedByID : id || undefined,
@@ -22,13 +22,14 @@ const getPayload = ({
 		TradeType   : trade_type || undefined,
 		Service     : service || undefined,
 	},
-	Type             : issue_type || undefined,
-	Description      : additional_information || undefined,
-	NotifyCustomer   : notify_customer || undefined,
-	Subcategory      : sub_category || undefined,
-	RaisedByDesk     : raised_by_desk || undefined,
-	RaisedToDesk     : raised_to_desk || undefined,
-	CategoryDeskType : isOperation ? 'by_desk' : 'by_category',
+	Type                : issue_type || undefined,
+	TicketDefaultTypeID : defaultTypeId || undefined,
+	Description         : additional_information || undefined,
+	NotifyCustomer      : notify_customer || undefined,
+	Subcategory         : sub_category || undefined,
+	RaisedByDesk        : raised_by_desk || undefined,
+	RaisedToDesk        : raised_to_desk || undefined,
+	CategoryDeskType    : isOperation ? 'by_desk' : 'by_category',
 	...additionalData,
 });
 
@@ -37,6 +38,7 @@ const useRaiseTicket = ({
 	additionalInfo = [],
 	setRefreshList = () => {},
 	reset = () => {},
+	defaultTypeId = '',
 }) => {
 	const { profile } = useSelector((state) => state);
 	const { auth_role_data = {} } = profile || {};
@@ -100,6 +102,7 @@ const useRaiseTicket = ({
 					trade_type,
 					category,
 					priority,
+					defaultTypeId,
 					sub_category,
 					raised_by_desk,
 					raised_to_desk,

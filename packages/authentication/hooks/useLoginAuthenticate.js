@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useAuthRequest } from '@cogoport/request';
@@ -14,7 +15,6 @@ import redirections from '../utils/redirections';
 const EMPTY_PATH = '/empty';
 
 const COOKIE_EXPIRY = -1;
-
 const getFormattedPayload = ({ mobileNumber = {}, otpId = '', otpValue = '' }) => ({
 	id                  : otpId,
 	mobile_otp          : otpValue,
@@ -201,7 +201,7 @@ const useLoginAuthenticate = ({
 				window.location.href = '/';
 			}
 		} catch (err) {
-			Toast.error(err?.response?.data.error || t('login:failed_to_login_toast_error'));
+			Toast.error(getApiErrorString(err?.response?.data) || t('login:failed_to_login_toast_error'));
 		}
 	};
 
