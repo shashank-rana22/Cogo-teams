@@ -5,7 +5,9 @@ import ShowOverflowingNumber from '../utils/getShowOverFlowingNumbers';
 
 import styles from './styles.module.css';
 
-const getFinancialCloseColumns = ({ handleFinancialTabClick }) => {
+const getFinancialCloseColumns = ({
+	handleFinancialTabClick = () => {},
+}) => {
 	const columns = [
 		{
 			id     : 'jobId',
@@ -110,7 +112,10 @@ const getFinancialCloseColumns = ({ handleFinancialTabClick }) => {
 				return (
 
 					<div className={styles.accessor_financial}>
-						<div className={styles.fix_layout}>{ShowOverflowingNumber(row?.estimatedProfitabilityPreTax, 11, 'INR') }</div>
+						<div className={styles.fix_layout}>
+							{ShowOverflowingNumber(row?.estimatedProfitabilityPreTax, 11, 'INR') }
+
+						</div>
 						<RenderTableData data={row?.operationalProfitabilityPreTax} />
 						<RenderTableData data={row?.financialProfitabilityPreTax} />
 					</div>

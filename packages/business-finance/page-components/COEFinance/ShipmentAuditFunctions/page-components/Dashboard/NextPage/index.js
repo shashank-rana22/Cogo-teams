@@ -1,12 +1,12 @@
-import { IcMDummyCircle } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useGetClosedTasks from '../../../../hook/useGetClosedTasks';
+import useGetPrePostShipmentQuotation from '../../../../hook/useGetPrePostShipmentQuotation';
 
+import GenerateColumn from './GenerateColumn';
 import Headings from './Headings';
 import styles from './styles.module.css';
-import Timeline from './Timeline';
 
 const ZEROTH_INDEX = 0;
 const FIRST_INDEX = 1;
@@ -15,58 +15,24 @@ const THIRD_INDEX = 3;
 const FOURTH_INDEX = 4;
 const FIFTH_INDEX = 5;
 
-function NextPage({ initialArray = [], activeTab = '' }) {
+function NextPage({ initialArray = [], activeTab = '12' }) {
 	const { query = {} } = useRouter();
 	const [accordionStates, setAccordionStates] = useState(initialArray);
 
-	const { data = {}, loading = true } = useGetClosedTasks({ job_id: query?.job_id, activeTab });
+	const {
+		data: taskData = {},
+		loading: taskDataLoading = true,
+	} = useGetClosedTasks({ job_id: query?.job_id, activeTab });
+	const {
+		data: quoteData = {},
+		loading: quoteLoading = true,
+	} = useGetPrePostShipmentQuotation({ job_id: query?.job_id });
 
 	const toggleAccordion = (rowIndex, index) => {
 		const newAccordionStates = [...accordionStates];
 		newAccordionStates[rowIndex][index] = !newAccordionStates[rowIndex][index];
 		setAccordionStates(newAccordionStates);
 	};
-
-	console.log('accordionStates', accordionStates);
-
-	const GenerateColumn = (columnIndex) => accordionStates[columnIndex].map((isOpen, index) => (
-		<div key={`${columnIndex},${index}`}>
-			{/* <div className={styles.status_accordian}>
-				<Pill color="#B4F3BE">Approved</Pill>
-			</div> */}
-			<div key={`${columnIndex},${index}`} style={{ display: 'flex', width: '100%' }}>
-				<div className={styles.vertical_timeline}>
-
-					{ index !== FIFTH_INDEX
-						? (
-							<>
-								<IcMDummyCircle
-									fill="#EE3425"
-									height="20"
-									width="20"
-								/>
-								<div className={styles.vertical_rule} />
-							</>
-						)
-						: (
-							<IcMDummyCircle
-								fill="#EE3425"
-								height="20"
-								width="20"
-								style={{ marginBottom: '24px' }}
-							/>
-						) }
-				</div>
-				<Timeline
-					isOpen={isOpen}
-					toggleAccordion={toggleAccordion}
-					columnIndex={columnIndex}
-					index={index}
-					data={data}
-				/>
-			</div>
-		</div>
-	));
 
 	return (
 		<div className={styles.row}>
@@ -75,21 +41,39 @@ function NextPage({ initialArray = [], activeTab = '' }) {
 					<div className={styles.header}>
 						<Headings heaadingText="Sell Quotation" />
 					</div>
-					{GenerateColumn(ZEROTH_INDEX)}
+					<GenerateColumn
+						columnIndex={ZEROTH_INDEX}
+						accordionStates={accordionStates}
+						data={quoteData?.SELL}
+						loading={quoteLoading}
+						toggleAccordion={toggleAccordion}
+					/>
 				</div>
 
 				<div className={styles.accordion}>
 					<div className={styles.header}>
 						<Headings heaadingText="Operationally Closed Sell" />
 					</div>
-					{GenerateColumn(FIRST_INDEX)}
+					<GenerateColumn
+						columnIndex={FIRST_INDEX}
+						accordionStates={accordionStates}
+						data={taskData?.SELL}
+						loading={taskDataLoading}
+						toggleAccordion={toggleAccordion}
+					/>
 				</div>
 				{activeTab === 'financial_close' ? (
 					<div className={styles.accordion}>
 						<div className={styles.header}>
 							<Headings heaadingText="Financially Closed Sell" />
 						</div>
-						{GenerateColumn(FOURTH_INDEX)}
+						<GenerateColumn
+							columnIndex={FOURTH_INDEX}
+							accordionStates={accordionStates}
+							data={taskData?.SELL}
+							loading={taskDataLoading}
+							toggleAccordion={toggleAccordion}
+						/>
 					</div>
 				) : null }
 			</div>
@@ -98,20 +82,38 @@ function NextPage({ initialArray = [], activeTab = '' }) {
 					<div className={styles.header}>
 						<Headings heaadingText="Buy Quotation" />
 					</div>
-					{GenerateColumn(SECOND_INDEX)}
+					<GenerateColumn
+						columnIndex={SECOND_INDEX}
+						accordionStates={accordionStates}
+						data={quoteData?.BUY}
+						loading={quoteLoading}
+						toggleAccordion={toggleAccordion}
+					/>
 				</div>
 				<div className={styles.accordion}>
 					<div className={styles.header}>
 						<Headings heaadingText="Operationally Closed Buy" />
 					</div>
-					{GenerateColumn(THIRD_INDEX)}
+					<GenerateColumn
+						columnIndex={THIRD_INDEX}
+						accordionStates={accordionStates}
+						data={taskData?.BUY}
+						loading={taskDataLoading}
+						toggleAccordion={toggleAccordion}
+					/>
 				</div>
 				{activeTab === 'financial_close' ? (
 					<div className={styles.accordion}>
 						<div className={styles.header}>
 							<Headings heaadingText="Financially Closed Buy" />
 						</div>
-						{GenerateColumn(FIFTH_INDEX)}
+						<GenerateColumn
+							columnIndex={FIFTH_INDEX}
+							accordionStates={accordionStates}
+							data={taskData?.BUY}
+							loading={taskDataLoading}
+							toggleAccordion={toggleAccordion}
+						/>
 					</div>
 				) : null }
 

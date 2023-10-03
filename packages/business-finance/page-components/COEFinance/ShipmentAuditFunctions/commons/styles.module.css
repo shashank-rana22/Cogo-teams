@@ -3,20 +3,21 @@
 }
 
 .profit_icon {
+	display: flex;
 	width: 18px;
+	margin-right: 4px;
 	color: #34c759;
 	transform: rotate(-45deg);
-	display: flex;
-    margin-right: 4px;
 }
 
 .loss_icon {
+	display: flex;
 	width: 18px;
+	margin-right: 4px;
 	color: #ed3726;
 	transform: rotate(45deg);
-	display: flex;
-    margin-right: 4px;
 }
+
 .flex {
 	display: flex;
 	align-items: center;

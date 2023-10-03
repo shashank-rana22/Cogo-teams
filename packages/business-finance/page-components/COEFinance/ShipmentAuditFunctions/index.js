@@ -24,6 +24,7 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 		creationDate          : null,
 		tradeType             : '',
 	});
+
 	const [paginationFilters, setPaginationFilters] = useState({
 		page      : 1,
 		pageLimit : 10,
@@ -58,10 +59,9 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 	// };
 
 	const handleFinancialTabClick = (jobId) => {
-		push({
-			pathname : '/business-finance/coe-finance/finance-close-next-page',
-			query    : { jobId },
-		});
+		push(
+			`/business-finance/coe-finance/next-page?job_id=${jobId}`,
+		);
 	};
 
 	const rest = { onClickOutside: () => setShow(false) };

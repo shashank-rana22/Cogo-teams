@@ -60,12 +60,14 @@
 		.ui_select_container {
 			width: 220px;
 		}
-        .ui_tabs_tabpanel {
-            margin-left: 10px;
-        }
-        .ui_tab_container {
-            padding: 4px 8px;
-        }
+
+		.ui_tabs_tabpanel {
+			margin-left: 10px;
+		}
+
+		.ui_tab_container {
+			padding: 4px 8px;
+		}
 	}
 }
 
@@ -76,14 +78,16 @@
 
 .style_radio {
 	flex-direction: column;
-	height:236px;
+	height: 236px;
 	overflow-y: scroll;
 	white-space: nowrap;
+
 	:global {
 		.react-datepicker__input-container {
-			width: 120%;
 			display: flex;
+			width: 120%;
 		}
+
 		.react-datepicker__close-icon {
 			background-color: transparent;
 		}
@@ -95,6 +99,6 @@
 }
 
 .trade_type {
-    display: flex;
-    padding:10px;
+	display: flex;
+	padding: 10px;
 }

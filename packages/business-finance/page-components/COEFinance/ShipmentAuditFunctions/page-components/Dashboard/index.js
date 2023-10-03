@@ -8,7 +8,7 @@ function Dashboard() {
 	const { jobId } = router.query;
 	return (
 		<div className={styles.container}>
-			<Header jobId={jobId} />
+			<Header activeTab="" jobId={jobId} />
 		</div>
 	);
 }

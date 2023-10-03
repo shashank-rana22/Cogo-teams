@@ -11,13 +11,13 @@ import styles from './styles.module.css';
 
 function Content({
 	filters,
-	setFilters,
+	setFilters = () => {},
 	receivables,
-	setReceivables,
+	setReceivables = () => {},
 	// setShow,
-	refetch,
+	refetch = () => {},
 	tradeTab,
-	setTradeTab,
+	setTradeTab = () => {},
 }) {
 	const onChange = (val, name) => {
 		setFilters((p) => ({ ...p, [name]: val }));
@@ -66,7 +66,6 @@ function Content({
 							size="sm"
 							onClick={() => {
 								// setShow(false);
-								// console.log(filters, 'fikt');
 								refetch(filters);
 							}}
 						>

@@ -15,7 +15,7 @@ const useGetPrePostShipmentQuotation = ({
 		{ manual: true },
 	);
 
-	const getPrePostShipmentQuots = useCallback(async () => {
+	const getPrePostShipmentQuotes = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -28,13 +28,13 @@ const useGetPrePostShipmentQuotation = ({
 	}, [job_id, trigger]);
 
 	useEffect(() => {
-		getPrePostShipmentQuots();
-	}, [getPrePostShipmentQuots]);
+		getPrePostShipmentQuotes();
+	}, [getPrePostShipmentQuotes]);
 
 	return {
 		data,
 		loading,
-		getPrePostShipmentQuots,
+		getPrePostShipmentQuotes,
 	};
 };
 
