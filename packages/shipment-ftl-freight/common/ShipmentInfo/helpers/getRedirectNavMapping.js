@@ -41,7 +41,7 @@ export const getRedirectNavMapping = (allNavs, navigation = '') => {
 		navToRedirect = { href: '/', as: '/' };
 	}
 	if (navigation !== '') {
-		navToRedirect = coe_navs.find((nav) => nav.key === navigation);
+		navToRedirect = coe_navs.find((nav) => nav.key === navigation) || {};
 	}
 	const version = (navToRedirect.href || '').includes('v2') ? 'v2' : 'v1';
 
