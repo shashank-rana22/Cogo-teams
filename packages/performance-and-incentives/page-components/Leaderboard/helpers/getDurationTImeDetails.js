@@ -1,6 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const OFFSET = 1;
+const TOTAL_MONTHS = 12;
 const QUARTER_START = 0;
 const QUARTER_END = 2;
 const MONTHS_IN_QUARTER = 3;
@@ -15,7 +16,24 @@ const quarterMonths = GLOBAL_CONSTANTS.months.reduce((result, month, index) => {
 	return result;
 }, { startMonths: [], endMonths: [] });
 
-const getCurrentQuarter = () => {
+export const getMonthDetails = () => {
+	const currentDate = new Date();
+
+	const currentMonth = currentDate.getMonth();
+
+	return {
+		currMonth : GLOBAL_CONSTANTS.months[currentMonth],
+		lastMonth : GLOBAL_CONSTANTS.months[(currentMonth - OFFSET + TOTAL_MONTHS) % TOTAL_MONTHS],
+	};
+};
+
+export const getCurrentYear = () => {
+	const currentYear = (new Date()).getFullYear();
+
+	return { currentYear };
+};
+
+export const getCurrentQuarter = () => {
 	const currentDate = new Date();
 
 	const currentMonth = currentDate.getMonth();
@@ -28,7 +46,7 @@ const getCurrentQuarter = () => {
 	return { quarterStartMonth, quarterEndMonth };
 };
 
-const getLastQuarter = () => {
+export const getLastQuarter = () => {
 	const currentDate = new Date();
 
 	const currentMonth = currentDate.getMonth();
@@ -40,5 +58,3 @@ const getLastQuarter = () => {
 
 	return { lastQuarterStartMonth, lastQuarterEndMonth };
 };
-
-export { getCurrentQuarter, getLastQuarter };

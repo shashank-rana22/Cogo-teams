@@ -1,7 +1,5 @@
 import DURATION_CONSTANTS from '../../../constants/duration-constants';
-import getCurrentYear from '../../../utils/get-current-year';
-import getMonthDetails from '../../../utils/get-month-details';
-import { getCurrentQuarter, getLastQuarter } from '../../../utils/get-quarter-details';
+import { getCurrentQuarter, getCurrentYear, getLastQuarter, getMonthDetails } from '../helpers/getDurationTImeDetails';
 
 const { TODAY, LAST_MONTH, THIS_MONTH, LAST_QUARTER, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
 
