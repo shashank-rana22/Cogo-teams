@@ -1,5 +1,3 @@
-// import { cl } from '@cogoport/components';
-
 import CardLoadingState from '../../../../../../../../common/LoadingState/CardLoadingState';
 
 import styles from './styles.module.css';

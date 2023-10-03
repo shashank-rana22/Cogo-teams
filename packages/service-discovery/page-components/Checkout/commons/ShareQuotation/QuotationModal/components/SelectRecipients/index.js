@@ -140,7 +140,7 @@ function SelectRecipients({
 	return (
 		<div className={styles.container}>
 			<div className={styles.form_container}>
-				{recipients.length && (
+				{recipients.length ? (
 					<div className={styles.flex}>
 						<div>
 							To:
@@ -153,9 +153,9 @@ function SelectRecipients({
 							control={control}
 						/>
 					</div>
-				)}
+				) : null}
 
-				{(ccRecipientsOptions || []).length && (
+				{(ccRecipientsOptions || []).length ? (
 					<div className={cl`${styles.flex} ${styles.cc_user_ids}`}>
 						<div>
 							CC:
@@ -167,7 +167,7 @@ function SelectRecipients({
 							control={control}
 						/>
 					</div>
-				)}
+				) : null}
 			</div>
 
 			<EmailPreview
