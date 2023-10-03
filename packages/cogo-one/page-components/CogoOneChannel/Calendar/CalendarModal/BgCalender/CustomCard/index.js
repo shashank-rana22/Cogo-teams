@@ -57,7 +57,7 @@ function CustomCard({ event = {} }) {
 				{(updatedHeader || []).map((item) => {
 					const eventData = HEADER_MAPPING[item?.subject] || HEADER_MAPPING?.default;
 
-					if (isEmpty(updatedHeader)) {
+					if (isEmpty(eventData)) {
 						return null;
 					}
 
@@ -85,6 +85,7 @@ function CustomCard({ event = {} }) {
 							}}
 						>
 							{startCase(item?.subject)}
+
 						</div>
 					</div>
 				))}
