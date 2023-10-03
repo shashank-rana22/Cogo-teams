@@ -1,3 +1,5 @@
+import { cl } from '@cogoport/components';
+
 import { getFieldController } from '../../utils/getFieldController';
 
 import styles from './styles.module.css';
@@ -9,7 +11,7 @@ function FormLayout({
 	showElements = {},
 }) {
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${cl.ns('form_container')}`}>
 			{controls.map((eachControl) => {
 				const { controlType, name, label, width = '50%', customStyles = {} } = eachControl || {};
 				const Element = getFieldController(controlType);
@@ -21,12 +23,26 @@ function FormLayout({
 				}
 
 				return (
-					<div className={styles.each_element} key={name} style={{ width }}>
-						<label className={styles.label_styles}>{label}</label>
-						<Element control={control} {...eachControl} error={errors?.[name]} style={customStyles} />
-						<div className={styles.error_text}>
-							{controlType !== 'fieldArray'
-							&& (errors?.[name] && (errors[name]?.message || 'This is Required'))}
+					<div
+						className={cl`${styles.each_element} ${cl.ns('form_element')}`}
+						key={name}
+						style={{ width }}
+					>
+						<label className={cl`${styles.label_styles} ${cl.ns('form_element_label')}`}>
+							{label}
+						</label>
+						<Element
+							control={control}
+							{...eachControl}
+							error={errors?.[name]}
+							style={customStyles}
+						/>
+						<div className={cl`${styles.error_text} ${cl.ns('form_element_error')}`}>
+							{
+								(controlType !== 'fieldArray' && errors?.[name])
+									? (errors[name]?.message || 'This is Required')
+									: ''
+							}
 						</div>
 					</div>
 				);

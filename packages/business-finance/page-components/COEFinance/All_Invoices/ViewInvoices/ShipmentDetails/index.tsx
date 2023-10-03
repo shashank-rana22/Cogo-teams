@@ -160,7 +160,7 @@ function ShipmentDetails({
 		lineItemsTab       : false,
 	});
 
-	const { docContent = '', chargesTable = [] } = useGetDocumentContent({ data });
+	const { docContent = {}, chargesTable = [] } = useGetDocumentContent({ data });
 
 	const onTabClick = ({ tabName = '' }) => {
 		setTab(
@@ -255,7 +255,7 @@ function ShipmentDetails({
 						</div>
 						{tab.documentsTab && <div className={styles.hr} />}
 						<div className={styles.documents}>
-							{tab.documentsTab && <Documents shipmentId={shipmentId} docContent={docContent} />}
+							{tab.documentsTab && <Documents shipmentId={shipmentId} />}
 							{' '}
 						</div>
 						{tab.documentsTab && (

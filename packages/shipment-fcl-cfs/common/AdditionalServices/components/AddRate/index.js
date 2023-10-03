@@ -63,6 +63,7 @@ function AddRate({
 		control,
 		formState: { errors },
 		setValue,
+		watch,
 	} = useForm();
 
 	useEffect(() => {
@@ -141,6 +142,8 @@ function AddRate({
 
 			<RenderAddRateForm
 				handleSubmit={handleSubmit}
+				watch={watch}
+				setValue={setValue}
 				onSubmit={onAddRate}
 				control={control}
 				errors={errors}
