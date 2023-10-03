@@ -25,6 +25,7 @@ function MembersList({
 				isDraft={is_draft}
 				updateCogooneGroup={updateCogooneGroup}
 				hasPermissionToEdit={hasPermissionToEdit}
+				loading={loading}
 			/>
 			<div className={styles.footer_buttons}>
 				<Button

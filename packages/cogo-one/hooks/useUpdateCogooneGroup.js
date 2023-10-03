@@ -7,14 +7,14 @@ function useUpdateCogooneGroup({ activeTab = {}, setAddMembers = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_cogoone_groups',
 		method : 'post',
-	}, { manual: true, autoCancel: false });
+	}, { manual: true });
 
 	const { groupData = {} } = activeTab || {};
 
 	const updateCogooneGroup = async ({ actionName = '', userIds = [] }) => {
 		const { getPayload } = GROUP_PAYLOAD_FUNC_MAPPING[actionName];
 
-		if (!getPayload) {
+		if (!getPayload || loading) {
 			return;
 		}
 

@@ -11,6 +11,7 @@ function EachMember({
 	isDraft = false,
 	hasPermissionToEdit = false,
 	updateCogooneGroup = () => {},
+	loading = false,
 }) {
 	const {
 		partner = {},
@@ -36,6 +37,7 @@ function EachMember({
 			{(!isDraft && hasPermissionToEdit) ? (
 				<IcMCross
 					className={styles.cross_styles}
+					style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
 					onClick={() => {
 						updateCogooneGroup({ actionName: 'REMOVE_FROM_GROUP', userIds: [user_id] });
 					}}
@@ -50,6 +52,7 @@ function List({
 	isDraft = false,
 	hasPermissionToEdit = false,
 	updateCogooneGroup = () => {},
+	loading = false,
 }) {
 	return (
 		<div className={styles.list}>
@@ -60,6 +63,7 @@ function List({
 					isDraft={isDraft}
 					hasPermissionToEdit={hasPermissionToEdit}
 					updateCogooneGroup={updateCogooneGroup}
+					loading={loading}
 				/>
 			))}
 		</div>

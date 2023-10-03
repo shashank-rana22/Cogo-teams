@@ -18,7 +18,7 @@ const getPublishRoomPayload = ({
 	const {
 		group_members_ids = [],
 		group_members_data = [],
-		group_name = 'Draft Name',
+		search_name = '',
 		is_group = false,
 		id = '',
 	} = data || {};
@@ -33,7 +33,7 @@ const getPublishRoomPayload = ({
 
 	if (is_group) {
 		createLocalRoomPayload = createLocalGroupRooms({
-			groupName : group_name,
+			groupName : search_name,
 			userIds   : modifiedGroupMembersIds,
 			isGroup   : is_group,
 			groupMemberRooms,

@@ -81,7 +81,7 @@ async function createDraftRoom({
 	firestore = {},
 	loggedInAgendId = '',
 	length = 0,
-	groupName = 'DRAFT NAME',
+	groupName = '',
 	groupMembersHashString = '',
 }) {
 	const selfInternalRoomsCollection = collection(firestore, `users/${loggedInAgendId}/groups`);
@@ -114,7 +114,11 @@ async function createDraftRoom({
 	return { id: res?.id, ...draftRoomPayload };
 }
 
-function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }) {
+function useCreateOrGetDraftTeamRoom({
+	firestore = {},
+	setActiveTab = () => {},
+	setShowGroupError = () => {},
+}) {
 	const { loggedInAgendId, loggedInAgentName } = useSelector(({ profile }) => ({
 		loggedInAgendId   : profile.user.id,
 		loggedInAgentName : profile.user.name,
@@ -134,7 +138,7 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 		}));
 	};
 
-	const createOrGetDraftTeamRoom = async ({ userIds = [], userIdsData = [] }) => {
+	const createOrGetDraftTeamRoom = async ({ userIds = [], userIdsData = [], groupName = '' }) => {
 		const userIdsLength = userIds.length + SELF_COUNT;
 
 		setLoading(true);
@@ -166,6 +170,11 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 				return;
 			}
 
+			if (!groupName && userIdsLength > GROUP_COUNT_MIN) {
+				setShowGroupError(true);
+				return;
+			}
+
 			const res = await createDraftRoom({
 				userIds     : modifiedUserIds,
 				userIdsData : modifiedUserIdsData,
@@ -173,6 +182,7 @@ function useCreateOrGetDraftTeamRoom({ firestore = {}, setActiveTab = () => {} }
 				loggedInAgendId,
 				length      : userIdsLength,
 				groupMembersHashString,
+				groupName,
 			});
 
 			setActiveRoom({ val: res });

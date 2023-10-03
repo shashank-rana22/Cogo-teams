@@ -34,12 +34,10 @@ function Header({
 
 	if (is_draft && newDraft) {
 		return (
-			<div className={styles.container}>
-				<ToUser
-					firestore={firestore}
-					setActiveTab={setActiveTab}
-				/>
-			</div>
+			<ToUser
+				firestore={firestore}
+				setActiveTab={setActiveTab}
+			/>
 		);
 	}
 

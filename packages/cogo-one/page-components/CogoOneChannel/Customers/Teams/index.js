@@ -12,7 +12,6 @@ function Teams(teamsProps) {
 		firestore = {},
 		setActiveTeamCard = () => {},
 		activeTeamCard = {},
-		// viewType = '',
 		loggedInAgentId = '',
 	} = teamsProps;
 
@@ -20,7 +19,7 @@ function Teams(teamsProps) {
 
 	const {
 		unpinnedChats = [],
-		// handleScroll, // add  on scroll
+		handleScroll,
 		pinnedChats = [],
 		loading,
 	} = useFetchTeamsRoom({ firestore });
@@ -39,7 +38,10 @@ function Teams(teamsProps) {
 				setSearchValue={setSearchValue}
 				setActiveTeamCard={setActiveTeamCard}
 			/>
-			<div className={styles.list_container}>
+			<div
+				className={styles.list_container}
+				onScroll={handleScroll}
+			>
 				<TeamsBody
 					loading={loading}
 					pinnedChats={pinnedChats}
