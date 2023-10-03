@@ -24,6 +24,5 @@
 .content {
 	display: flex;
 	flex-wrap: wrap;
-	width: 290px;
 	padding: 6px;
 }

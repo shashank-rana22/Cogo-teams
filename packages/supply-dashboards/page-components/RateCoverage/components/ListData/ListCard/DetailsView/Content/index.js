@@ -65,13 +65,8 @@ function ServiceDetailsContent({
 		},
 		{ label: 'Preferred Shipping', value: shipping_line?.short_name },
 		{
-			label: 'feedbacks',
-			value:
-	<ul style={{ padding: '2px' }}>
-		{feedbacks.map((feedback) => (
-			<li key={feedback}>{startCase(feedback)}</li>
-		))}
-	</ul>,
+			label : 'feedbacks',
+			value : (feedbacks || []).map((val) => startCase(val)).join(', '),
 		},
 		{ label: 'Closing Remarks', value: closing_remarks && startCase(closing_remarks) },
 	];
