@@ -1,7 +1,10 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMCall, IcMShip, IcMSettings, IcMAgentManagement } from '@cogoport/icons-react';
+import {
+	IcMCall, IcMShip, IcMSettings, IcMAgentManagement,
+	IcMTick, IcMAppDelete, IcMEdit,
+} from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
@@ -11,6 +14,7 @@ import EmptyList from '../EmptyList';
 import styles from './styles.module.css';
 
 const LAST_INDEX = 1;
+
 const ICON_MAPPING = {
 	call_customer: {
 		icon  : <IcMCall width={16} height={16} />,
@@ -30,6 +34,21 @@ const ICON_MAPPING = {
 	},
 };
 
+const ACTIONS = [
+	{
+		key  : 'tick',
+		icon : <IcMTick width={20} height={20} fill="#27ae60" />,
+	},
+	{
+		key  : 'edit',
+		icon : <IcMEdit width={14} height={14} fill="#34495e" />,
+	},
+	{
+		key  : 'delete',
+		icon : <IcMAppDelete width={16} height={16} fill="#e74c3c" />,
+	},
+];
+
 function UserEvents({ selectedEventData = {} }) {
 	const { eventsList: markedEvents = [] } = selectedEventData || {};
 
@@ -47,7 +66,7 @@ function UserEvents({ selectedEventData = {} }) {
 				const {
 					subject = '', description = '', metadata = {},
 					is_important = false, validity_start = '', category = '', validity_end = '',
-					participants = [],
+					participants = [], status = '',
 				} = singleEvent || {};
 
 				const { organization_data = {}, user_data = {}	} = metadata || {};
@@ -67,11 +86,12 @@ function UserEvents({ selectedEventData = {} }) {
 				});
 
 				const icons = ICON_MAPPING[subject] || ICON_MAPPING?.default;
-
+				const isImportant = is_important && status !== 'completed';
 				return (
 					<div
-						className={cl`${styles.card} 
-					${is_important ? styles.important_event : styles.not_important_event}
+						className={cl`${styles.card}
+					${isImportant ? styles.important_event : styles.not_important_event}
+					${status === 'completed' ? styles.expired_event : ''}
 					`}
 						key={singleEvent?.id}
 					>
@@ -142,11 +162,16 @@ function UserEvents({ selectedEventData = {} }) {
 									</div>
 								</>
 							) : null}
+							<div className={styles.actions}>
+								{(Object.values(ACTIONS) || []).map((value) => (
+									<div className={styles.single_action} key={value?.key}>{value.icon}</div>
+								))}
+							</div>
 						</div>
 					</div>
+
 				);
 			})}
-
 		</div>
 	);
 }

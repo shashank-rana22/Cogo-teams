@@ -87,7 +87,7 @@ function Events({
 							setAddEvents((prev) => !prev);
 						}}
 					>
-						{addEvents ? 'Add Events' : 'Cancel Event'}
+						{addEvents ? 'Add Reminder' : 'Cancel'}
 					</div>
 				</div>
 			</div>
