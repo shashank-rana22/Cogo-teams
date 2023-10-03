@@ -9,11 +9,11 @@ interface FilterControlsInterface {
 export const getFilterControls = ({ activeTab, isSettlementExecutive, t = () => {} }: FilterControlsInterface) => {
 	switch (activeTab) {
 		case 'requested':
-			return requestControls({ t, isSettlementExecutive });
+			return requestControls({ t, isSettlementExecutive, activeTab: 'REQUESTED' });
 		case 'approved':
-			return remainControls({ t, isSettlementExecutive });
+			return remainControls({ t, isSettlementExecutive, activeTab: 'APPROVED' });
 		case 'rejected':
-			return remainControls({ t, isSettlementExecutive });
+			return remainControls({ t, isSettlementExecutive, activeTab: 'REJECTED' });
 		default:
 			return [{}];
 	}

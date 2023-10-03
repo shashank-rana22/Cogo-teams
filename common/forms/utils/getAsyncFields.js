@@ -1009,6 +1009,18 @@ function asyncListOverSeasTradeParties() {
 	};
 }
 
+function asyncListSaasPlan() {
+	return {
+		labelKey : 'display_name',
+		valueKey : 'id',
+		endpoint : '/list_saas_plans',
+		params   : {
+			filters    : { is_active: true, plan_type: 'P' },
+			page_limit : 50,
+		},
+	};
+}
+
 function asyncListEnrichmentSources() {
 	return {
 		labelKey     : 'name',
@@ -1017,6 +1029,18 @@ function asyncListEnrichmentSources() {
 		authkey      : 'get_enrichment_sources',
 		microService : 'athena',
 		initialCall  : true,
+	};
+}
+
+function asyncListIncidentTypes() {
+	return {
+		labelKey     : 'value',
+		valueKey     : 'value',
+		endpoint     : '/incident-management/incident/listIncidentTypes',
+		authkey      : 'get_incident_types',
+		microService : 'business_finance',
+		initialCall  : true,
+		searchByq    : true,
 	};
 }
 
@@ -1102,5 +1126,7 @@ export {
 	asyncListFclFreightCommodityClusters,
 	asyncListSpotSearchRateCardOperators,
 	asyncListOverSeasTradeParties,
+	asyncListSaasPlan,
 	asyncListEnrichmentSources,
+	asyncListIncidentTypes,
 };

@@ -1,0 +1,11 @@
+.container {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_placeholder_skeleton_loader {
+			margin: 0 4px;
+			border-radius: 2px;
+		}
+	}
+}

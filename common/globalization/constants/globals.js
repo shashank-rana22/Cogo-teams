@@ -456,7 +456,8 @@ const GLOBAL_CONSTANTS = {
 		fcl_container_icon_s2c  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg',
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
-		cogoport_login_logo: 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
+		edit_square_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/edit_square.png',
+		cogoport_login_logo : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
 	},
 
 	video_call_ring_tone_url:
@@ -583,6 +584,7 @@ const GLOBAL_CONSTANTS = {
 		enclosed_within_forward_slashes   : /<p>(<[/]p>)/g,
 		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
 		occurrences_of_line_breaks        : /(\r\n|\r|\n)/g,
+		email_template_name_pattern       : /^[a-zA-Z0-9_ -]+$/g,
 		url_match_regex:
 		/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/,
 		ends_with_star_space       : /\* /,
@@ -796,6 +798,10 @@ const GLOBAL_CONSTANTS = {
 		export_rates             : 'Export.rates@cogoport.com',
 		cogoport_ftl_collections : 'ftl.collections@cogoport.com',
 		cogoport_support         : 'support@cogoport.com',
+		hr                       : 'hr@cogoport.com',
+		internal_supply          : 'internal.supply@cogoport.com',
+		internal_operations      : 'internal.operations@cogoport.com',
+		internal_service         : 'internal.customer@cogoport.com',
 	},
 	mobile_number: {
 		cogoone_sales_contact_no: '+91-8069195810',
