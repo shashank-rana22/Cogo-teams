@@ -28,7 +28,7 @@ const useEditInvoicePref = ({
 	const { inco_term = '' } = primary_service || {};
 
 	const updateExportInvoices = getTradeTypeByIncoTerm(inco_term) === 'export';
-	// console.log('inco term::',inco_term);
+
 	const ALL_SERVICE_LINE_ITEMS = [];
 	invoicing_parties?.forEach((p) => {
 		const { invoice_currency, is_igst, invoice_language } = p || {};
@@ -164,23 +164,14 @@ const useEditInvoicePref = ({
 				(service) => service?.is_igst,
 			);
 
-			// console.log('changedip::', changedIP );
-			// console.log('services::',changedIP?.services);
 			const uniq_igst_val = new Set(igstArray || []);
 
-			// console.log('isigst::',igstArray, uniq_igst_val);
 			const allowServiceMerge = uniq_igst_val?.size === UNIQ_IGST_VAL_LENGTH;
 
-			// console.log('length::', uniq_igst_val?.length);
 			const is_invoice_mergeable = getByKey(
 				ENTITY_IDS_MAPPING[shipment_data?.entity_id] || {},
 				'others.navigations.bookings.invoicing.is_invoice_mergeable',
 			);
-			// console.log('key::', ENTITY_IDS_MAPPING[shipment_data?.entity_id],
-			// is_invoice_mergeable,shipment_data?.entity_id );
-
-			// console.log('results::', updateExportInvoices,
-			// !allowServiceMerge, !is_invoice_mergeable);
 
 			if (updateExportInvoices
 				&& !allowServiceMerge
