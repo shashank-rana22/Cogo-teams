@@ -96,7 +96,6 @@ function SelectInvoices({ apiData = {}, setApiData = () => {} }, ref) {
 	const renderHeaderCheckbox = () => GetTableHeaderCheckbox({ apiData, data, loading, setApiData });
 
 	const setEditedValue = ({ itemData = {}, value = '', key = '', checked = false }) => {
-		console.log(value, 'value');
 		setApiData((prevApiData) => {
 			const index = prevApiData?.list?.findIndex((item) => item?.id === itemData?.id);
 			const {
