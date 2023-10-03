@@ -49,7 +49,7 @@ function PushToCrm({
 			<Modal.Header title={(
 				<div className={styles.modal_header}>
 					<div>
-						Enrichment Request
+						Create ingestion request
 					</div>
 					<div className={styles.lead_count_div}>
 						Total leads: -
