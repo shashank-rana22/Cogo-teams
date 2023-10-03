@@ -1,12 +1,10 @@
-import { Modal, Button } from '@cogoport/components';
-import { useForm, useFieldArray } from '@cogoport/forms';
+import { Modal, Button, ButtonIcon } from '@cogoport/components';
 import { IcMPlusInCircle, IcMDelete } from '@cogoport/icons-react';
-import { useEffect, useMemo } from 'react';
 
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
-import getAdditionalControls from '../../../../../../configurations/get-additional-controls';
 
 import styles from './styles.module.css';
+import useGetAdditionalControls from './useGetAdditionalControls';
 import useGetAgentScoringParameters from './useGetAgentScoringParameters';
 
 function AdditionalControlsModal({
@@ -20,44 +18,25 @@ function AdditionalControlsModal({
 }) {
 	const { data : { list = [] }, loading } = useGetAgentScoringParameters({ subBlockId: watchSubBlock });
 
-	const afterParameterOptions = useMemo(() => list.map((item) => ({
-		label : item.display_name,
-		value : item.id,
-	})), [list]);
-
-	const controls = getAdditionalControls({ afterParameterOptions });
-
-	const { control, getValues, formState: { errors }, handleSubmit, setValue } = useForm();
-
-	const { fields, append, remove } = useFieldArray({
+	const {
+		fields,
+		append,
+		remove,
+		errors,
 		control,
-		name: 'additional_controls',
+		controls,
+		handleSave,
+		handleClose,
+		handleSubmit,
+		CHILD_EMPTY_VALUES,
+	} = useGetAdditionalControls({
+		list,
+		param,
+		setParam,
+		additionalControls,
+		setParamScoringType,
+		setAdditionalControls,
 	});
-
-	const CHILD_EMPTY_VALUES = {};
-	controls.forEach((controlItem) => {
-		CHILD_EMPTY_VALUES[controlItem.name] = '';
-	});
-
-	const handleClose = () => {
-		setParamScoringType('');
-		setParam(null);
-	};
-
-	const handleSave = () => {
-		setAdditionalControls((prev) => {
-			const currValues = { ...prev };
-			currValues[param] = getValues().additional_controls;
-
-			return currValues;
-		});
-
-		setParam(null);
-	};
-
-	useEffect(() => {
-		setValue('additional_controls', additionalControls[param]);
-	}, [additionalControls, param, setValue]);
 
 	return (
 		<Modal size="xl" show onClose={handleClose} placement="center">
@@ -102,23 +81,21 @@ function AdditionalControlsModal({
 								})}
 							</div>
 
-							<div
-								role="presentation"
-								className={styles.add_icon}
+							<ButtonIcon
+								size="lg"
+								icon={<IcMDelete />}
 								onClick={() => remove(index)}
-							>
-								<IcMDelete height={16} width={16} />
-							</div>
+								themeType="primary"
+							/>
 						</div>
 					))}
 
-					<div
-						role="presentation"
-						className={styles.add_icon}
+					<ButtonIcon
+						size="xl"
+						icon={<IcMPlusInCircle />}
 						onClick={() => append(CHILD_EMPTY_VALUES)}
-					>
-						<IcMPlusInCircle height={24} width={24} />
-					</div>
+						themeType="primary"
+					/>
 
 				</Modal.Body>
 

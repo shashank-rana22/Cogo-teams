@@ -10,7 +10,10 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function RightPanel(props) {
-	const { data, statsLoading, entity, currLevel, levelStack, userIncentiveData, userIncentiveStatsLoading } = props;
+	const {
+		data, statsLoading, entity, currLevel, levelStack, incentiveMonth,
+		setIncentiveMonth, userIncentiveData, userIncentiveStatsLoading,
+	} = props;
 
 	const {
 		block_wise_stats: activityData = {},
@@ -72,6 +75,9 @@ function RightPanel(props) {
 			<RankingAndScoring rankData={rankData} scoringGraphData={scoringGraphData} />
 
 			<IncentiveSnapshot
+				currLevel={currLevel}
+				incentiveMonth={incentiveMonth}
+				setIncentiveMonth={setIncentiveMonth}
 				userIncentiveData={userIncentiveData}
 				userIncentiveStatsLoading={userIncentiveStatsLoading}
 			/>

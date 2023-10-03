@@ -19,12 +19,6 @@
 	align-items: center;
 }
 
-.add_icon {
-	width: fit-content;
-	margin-top: 20px;
-	cursor: pointer;
-}
-
 .err_msg {
 	color: #cb6464;
 }

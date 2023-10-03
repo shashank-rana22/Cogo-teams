@@ -47,7 +47,6 @@ function SubBlock(props) {
 	} = useSubBlockCreation({
 		subBlockWiseParameterOptions,
 		subBlockType,
-		name,
 		watch,
 		blockIndex,
 		subBlockIndex,

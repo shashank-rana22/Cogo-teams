@@ -29,7 +29,6 @@ const useSubBlockCreation = (props) => {
 	const {
 		subBlockWiseParameterOptions,
 		watch,
-		name,
 		blockIndex,
 		subBlockIndex,
 		refetch,
@@ -47,7 +46,7 @@ const useSubBlockCreation = (props) => {
 
 	const formValues = watch();
 
-	const watchSubBlock = watch(`${name}.sub_block_id`);
+	const watchSubBlock = formValues.blocks?.[blockIndex]?.sub_blocks?.[subBlockIndex]?.sub_block_id;
 
 	const { updateScoringAttributes, loading } = usePostAgentScoringAttributes();
 

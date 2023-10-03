@@ -8,6 +8,8 @@ import { useState, useEffect, useCallback } from 'react';
 import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../constants/leaderboard-reporttype-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
 
+const OFFSET = 1;
+
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 const { AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 
@@ -19,12 +21,37 @@ const getUserIdFilter = ({ currLevel, levelStack, loggedInUser, viewType }) => {
 	return currLevel.user?.id;
 };
 
+function getFirstAndLastDateOfMonth({ incentiveMonth }) {
+	const [month, year] = incentiveMonth.split('-');
+
+	const currentDate = new Date();
+	const currentYear = currentDate.getFullYear();
+	const currentMonth = currentDate.getMonth();
+
+	if (month === currentMonth.toString() && year === currentYear.toString()) {
+		return {
+			firstDate : new Date(currentYear, currentMonth, OFFSET),
+			lastDate  : new Date(),
+		};
+	}
+
+	const firstDate = new Date(year, month, OFFSET);
+
+	const nextMonth = new Date(year, month + OFFSET, OFFSET);
+	const lastDate = new Date(nextMonth.getTime() - OFFSET);
+
+	return { firstDate, lastDate };
+}
+
 function useGetAgentScoringIncentiveUserStats(props) {
-	const { currLevel, dateRange, entity, levelStack } = props;
+	const { currLevel, entity, levelStack } = props;
 
 	const { incentive_leaderboard_viewtype: viewType, user: loggedInUser } = useSelector(({ profile }) => profile);
 
-	const [userIncentiveData, setUserIncentiveData] = useState({});
+	const currentDate = new Date();
+	const defaultIncentiveMonth = `${currentDate.getMonth()}-${currentDate.getFullYear()}`;
+
+	const [incentiveMonth, setIncentiveMonth] = useState(defaultIncentiveMonth);
 
 	const [{ data, loading }, refetch] = useAllocationRequest({
 		url     : '/incentive_user_stats',
@@ -33,6 +60,8 @@ function useGetAgentScoringIncentiveUserStats(props) {
 	}, { manual: true });
 
 	const userIncentiveStats = useCallback(async () => {
+		const { firstDate, lastDate } = getFirstAndLastDateOfMonth({ incentiveMonth });
+
 		try {
 			await refetch({
 				params: {
@@ -43,23 +72,15 @@ function useGetAgentScoringIncentiveUserStats(props) {
 						loggedInUser,
 						viewType,
 					}),
-					cycle_start_date_greater_than : dateRange?.startDate || undefined,
-					cycle_end_date_less_than      : dateRange?.endDate || undefined,
+					cycle_start_date_greater_than : firstDate || undefined,
+					cycle_end_date_less_than      : lastDate || undefined,
 				},
 
 			});
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
-	}, [currLevel, dateRange, entity, levelStack, loggedInUser, refetch, viewType]);
-
-	useEffect(() => {
-		setUserIncentiveData({});
-	}, [currLevel]);
-
-	useEffect(() => {
-		setUserIncentiveData(data);
-	}, [data]);
+	}, [currLevel, entity, incentiveMonth, levelStack, loggedInUser, refetch, viewType]);
 
 	useEffect(() => {
 		if ((!currLevel.isExpanded || !isEmpty(currLevel.user)) && currLevel.report_type === AGENT_REPORT) {
@@ -68,8 +89,10 @@ function useGetAgentScoringIncentiveUserStats(props) {
 	}, [currLevel.isExpanded, currLevel.report_type, currLevel.user, userIncentiveStats]);
 
 	return {
-		userIncentiveData,
-		userIncentiveStatsLoading: loading,
+		userIncentiveData         : data,
+		userIncentiveStatsLoading : loading,
+		incentiveMonth,
+		setIncentiveMonth,
 	};
 }
 

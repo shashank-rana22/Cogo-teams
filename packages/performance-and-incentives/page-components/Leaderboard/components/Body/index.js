@@ -44,7 +44,9 @@ function Body(props) {
 	const {
 		userIncentiveData,
 		userIncentiveStatsLoading,
-	} = useGetAgentScoringIncentiveUserStats({ dateRange, entity, currLevel, levelStack });
+		incentiveMonth,
+		setIncentiveMonth,
+	} = useGetAgentScoringIncentiveUserStats({ entity, currLevel, levelStack });
 
 	return (
 		<div className={styles.container}>
@@ -73,6 +75,8 @@ function Body(props) {
 				entity={entity}
 				currLevel={currLevel}
 				levelStack={levelStack}
+				incentiveMonth={incentiveMonth}
+				setIncentiveMonth={setIncentiveMonth}
 				userIncentiveData={userIncentiveData}
 				userIncentiveStatsLoading={userIncentiveStatsLoading}
 			/>
