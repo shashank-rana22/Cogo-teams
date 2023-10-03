@@ -69,6 +69,13 @@ function FTLRouteForm({
 		});
 	}, [formValues]);
 
+	useEffect(() => {
+		setFtlFormData((prev) => ({
+			...prev,
+			typeOfJourney: 'one_way',
+		}));
+	}, [mode, setFtlFormData]);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex}>
