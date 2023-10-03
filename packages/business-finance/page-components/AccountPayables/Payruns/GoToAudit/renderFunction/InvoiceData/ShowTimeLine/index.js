@@ -157,6 +157,7 @@ function ShowTimeLine({ data = [], loading = false }) {
 													currencyDisplay       : 'code',
 													maximumFractionDigits : 0,
 													notation              : 'compact',
+													currencyWise          : true,
 												},
 											})}
 										</div>
