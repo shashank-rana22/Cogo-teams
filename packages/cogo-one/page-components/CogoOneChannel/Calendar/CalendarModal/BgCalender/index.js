@@ -37,7 +37,6 @@ function BgCalender({
 	const [myEvents, setEvents] = useState({});
 
 	const formatedEventsList = getFormatedEventsData({ data: eventsData });
-	console.log('formatedEventsList:', formatedEventsList);
 
 	const handleSelectSlot = (event) => {
 		const { start, end } = event || {};

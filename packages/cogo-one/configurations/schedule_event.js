@@ -12,7 +12,7 @@ const scheduleEvents = ({ orgId = '', startDateField = {} }) => ({
 		isClearable : true,
 		minDate     : NEW_DATE,
 		placeholder : 'Start Date',
-		dateFormat  : GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
+		dateFormat  : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 	},
 	start_time: {
 		name       : 'start_time',

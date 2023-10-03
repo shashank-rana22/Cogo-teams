@@ -31,6 +31,13 @@ function Events({
 		separator  : ',',
 	});
 
+	const ACTIVE_COMPONENT = {
+		true  : UserEvents,
+		false : CreateEvent,
+	};
+
+	const ActiveComponent = ACTIVE_COMPONENT[addEvents];
+
 	useEffect(() => {
 		setEventDetails((prevEventDetails) => ({
 			...prevEventDetails,
@@ -64,14 +71,13 @@ function Events({
 					</div>
 				)}
 
-				{addEvents ? <UserEvents selectedEventData={selectedEventData} /> : (
-					<CreateEvent
-						eventDetails={eventDetails}
-						setEventDetails={setEventDetails}
-						getEvents={getEvents}
-						month={month}
-					/>
-				)}
+				<ActiveComponent
+					selectedEventData={selectedEventData}
+					getEvents={getEvents}
+					month={month}
+					eventDetails={eventDetails}
+					setEventDetails={setEventDetails}
+				/>
 
 				<div className={styles.footer}>
 					{addEvents ? <IcMPlusInCircle fill="#034AFD" /> : <IcMCancel fill="#034AFD" />}

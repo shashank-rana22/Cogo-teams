@@ -1,0 +1,16 @@
+.container {
+	:global {
+		.ui_modal_body_container {
+			border: none;
+		}
+
+		.ui_modal_footer_container {
+			padding: 0 16px 16px 0;
+			box-shadow: none;
+		}
+
+		.ui_modal_header_container {
+			padding: 6px 16px 0 0;
+		}
+	}
+}

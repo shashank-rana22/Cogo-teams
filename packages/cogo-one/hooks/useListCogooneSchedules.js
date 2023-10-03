@@ -7,7 +7,7 @@ const getPayload = ({ startDate = '', endDate = '' }) => ({
 	filters: {
 		schedule_start_greater_than : formatDateTime({ date: startDate, dateformat: 'isoUtcDateTime' }),
 		schedule_start_less_than    : formatDateTime({ date: endDate, dateformat: 'isoUtcDateTime' }),
-		status                      : ['active', 'in_progress', 'completed'],
+		exclude_status              : 'inactive',
 	},
 	page_limit_required    : false,
 	calendar_data_required : true,

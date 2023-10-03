@@ -16,10 +16,20 @@ const getFormatedEventsData = ({ data = {} }) => {
 			GROUPPED_DATA[key] = {
 				start      : new Date(item.schedule_start),
 				end        : new Date(item.schedule_start),
-				eventsList : [item.calendar],
+				eventsList : [
+					{
+						schedule_id : item.id,
+						main_status : item.status,
+						...item.calendar,
+					},
+				],
 			};
 		} else {
-			GROUPPED_DATA[key].eventsList.push(item.calendar);
+			GROUPPED_DATA[key].eventsList.push({
+				id          : item.id,
+				main_status : item.status,
+				...item.calendar,
+			});
 		}
 	});
 

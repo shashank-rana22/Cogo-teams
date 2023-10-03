@@ -1,28 +1,42 @@
-// import { Toast } from '@cogoport/components';
-// import getApiErrorString from '@cogoport/forms/utils/getApiError';
-// import { useRequest } from '@cogoport/request';
+import { Toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
+import moment from 'moment';
 
-// const useUpdateCogooneSchedule = () => {
-// 	const [{ loading }, trigger] = useRequest({
-// 		url    : '/list_cogoone_schedules',
-// 		method : 'post',
-// 	}, { manual: true });
+const getPayload = ({ value = {}, actionStatus = '' }) => ({
+	schedule_id : value?.schedule_id,
+	status      : actionStatus,
+});
 
-// 	const updateCogooneSchedule = async () => {
-// 		try {
-// 			await trigger({
-// 				data: getPayload({ profile, actionType, id, description }),
-// 			});
+const useUpdateCogooneSchedule = ({
+	actionModal = {},
+	handleClose = () => {},
+	getEvents = () => {},
+	month = '',
+}) => {
+	const { value = {},	actionStatus = '' } = actionModal || {};
 
-// 			refreshTickets();
-// 			fetchTickets();
-// 			Toast.success('Ticket Status Updated Successfully!');
-// 		} catch (e) {
-// 			Toast.error(e?.response?.data || 'something went wrong');
-// 		}
-// 	};
+	const startDate = moment(month).startOf('month').toDate();
+	const endDate = moment(month).endOf('month').toDate();
 
-// 	return { loading, updateCogooneSchedule };
-// };
+	const [{ loading }, trigger] = useRequest({
+		url    : '/update_cogoone_schedule',
+		method : 'post',
+	}, { manual: true });
 
-// export default useUpdateCogooneSchedule;
+	const updateCogooneSchedule = async () => {
+		try {
+			await trigger({
+				params: getPayload({ value, actionStatus }),
+			});
+			handleClose();
+			getEvents({ startDate, endDate });
+			Toast.success('Updated Successfully!');
+		} catch (e) {
+			Toast.error(e?.response?.data || 'something went wrong');
+		}
+	};
+
+	return { loading, updateCogooneSchedule };
+};
+
+export default useUpdateCogooneSchedule;
