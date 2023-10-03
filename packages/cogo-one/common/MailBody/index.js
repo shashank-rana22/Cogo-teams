@@ -46,7 +46,7 @@ const getEmailBorder = ({ isDraft = false, emailStatus = '' }) => {
 	return '#EE3425';
 };
 
-const formatEmailBody = ({ message }) => message.replace(
+const formatEmailBody = ({ message = '' }) => message?.replace(
 	GLOBAL_CONSTANTS.regex_patterns.line_break_regex,
 	'<br>',
 );

@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
-const getSignatureText = ({ userName, designation, contactNumber }) => (
+const getSignatureText = ({ userName = '', designation = '', contactNumber = '' }) => (
 	`
 	<p>
 		<p>Regards</p>
