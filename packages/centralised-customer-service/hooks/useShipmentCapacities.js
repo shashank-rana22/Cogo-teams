@@ -56,7 +56,10 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 				setValue(`${index}-${serviceValue}`, subItem.shipment_capacity);
 
 				if (index === GLOBAL_CONSTANTS.zeroth_index) {
-					setValue(`${item.service}-release_trigger`, subItem.release_trigger);
+					setValue(
+						`${item.service}-release_trigger`,
+						isEmpty(subItem.release_trigger) ? ['trigger'] : subItem.release_trigger,
+					);
 				}
 			});
 		});
