@@ -166,6 +166,7 @@ function BarChart({ data }:ItemProps) {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												minimumFractionDigits : 2,
+												currencyWise          : true,
 											},
 										})}
 									</text>

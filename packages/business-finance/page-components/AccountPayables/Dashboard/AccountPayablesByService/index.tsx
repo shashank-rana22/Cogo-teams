@@ -99,7 +99,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 													notation              : 'compact',
 													compactDisplay        : 'short',
 													minimumFractionDigits : 2,
-
+													currencyWise          : true,
 												},
 											})}
 										</div>
@@ -135,7 +135,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 													notation              : 'compact',
 													compactDisplay        : 'short',
 													minimumFractionDigits : 2,
-
+													currencyWise          : true,
 												},
 											})}
 										</div>
@@ -171,7 +171,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 													notation              : 'compact',
 													compactDisplay        : 'short',
 													minimumFractionDigits : 2,
-
+													currencyWise          : true,
 												},
 											})}
 										</div>
@@ -207,7 +207,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 													notation              : 'compact',
 													compactDisplay        : 'short',
 													minimumFractionDigits : 2,
-
+													currencyWise          : true,
 												},
 											})}
 										</div>
@@ -253,7 +253,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												minimumFractionDigits : 2,
-
+												currencyWise          : true,
 											},
 										})}
 
@@ -288,7 +288,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												minimumFractionDigits : 2,
-
+												currencyWise          : true,
 											},
 										})}
 
@@ -335,7 +335,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												minimumFractionDigits : 2,
-
+												currencyWise          : true,
 											},
 										})}
 
@@ -370,6 +370,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												minimumFractionDigits : 2,
+												currencyWise          : true,
 											},
 										})}
 
@@ -416,6 +417,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												minimumFractionDigits : 2,
+												currencyWise          : true,
 											},
 										})}
 
