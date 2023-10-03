@@ -1,0 +1,51 @@
+.image_container {
+	position: relative;
+	display: flex;
+}
+
+.rank {
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	font-size: 18px;
+	background-color: #fcdc00;
+	border-radius: 50%;
+
+	@media (min-width: 2560px) {
+		width: 84px;
+		height: 84px;
+		font-size: 56px;
+	}
+}
+
+.image {
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	border-radius: 50%;
+	outline: 4px solid #fcdc00;
+}
+
+.persona {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	font-size: 250%;
+	font-weight: 700;
+	color: #fff;
+	background-color: #2c3e50;
+	border-radius: 50%;
+	outline: 4px solid #fcdc00;
+
+	@media (max-width: 768px) {
+		font-size: 100%;
+	}
+	@media (min-width: 2560px) {
+		font-size: 500%;
+	}
+}
