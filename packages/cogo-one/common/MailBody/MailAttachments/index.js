@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 function MailAttachments({ mediaUrls = [] }) {
 	const [activeAttachmentData, setActiveAttachmentData] = useState({});
 
-	const formatedFiles = formatFileAttributes({ uploadedFiles: mediaUrls });
+	const formattedFiles = formatFileAttributes({ uploadedFiles: mediaUrls });
 
 	if (isEmpty(mediaUrls)) {
 		return null;
@@ -19,7 +19,7 @@ function MailAttachments({ mediaUrls = [] }) {
 
 	return (
 		<div className={styles.container}>
-			{(formatedFiles || []).map(
+			{(formattedFiles || []).map(
 				(file = {}) => (
 					<div className={styles.preview_wrapper} key={file?.fileUrl}>
 						{file?.fileIcon || null}

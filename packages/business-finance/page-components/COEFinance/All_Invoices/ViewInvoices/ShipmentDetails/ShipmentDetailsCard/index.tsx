@@ -37,7 +37,7 @@ interface ShipmentDetailsCardInterface {
 		lineItemsTab?: boolean,
 	};
 	setCombinedRemarks?: Function;
-	docContent?: string;
+	docContent?: any;
 	chargesTable?: any;
 }
 
@@ -58,7 +58,7 @@ function ShipmentDetailsCard({
 	onTabClick = () => {},
 	tab = {},
 	setCombinedRemarks = () => {},
-	docContent = '',
+	docContent = {},
 	chargesTable = [],
 }: ShipmentDetailsCardInterface) {
 	const [showValue, setShowValue] = useState([]);
