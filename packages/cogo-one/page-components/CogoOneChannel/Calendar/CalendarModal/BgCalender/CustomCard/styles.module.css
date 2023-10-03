@@ -1,11 +1,13 @@
 .container {
 	display: flex;
 	flex-direction: column;
+	width: 70px;
 }
 
 .header {
 	display: flex;
 	align-items: center;
+	width: 68px;
 	margin-top: 2px;
 	overflow-x: auto;
 

@@ -13,10 +13,9 @@ function CalendarModal({
 	const [addEvents, setAddEvents] = useState(true);
 	const [month, setMonth] = useState(new Date());
 
-	const { data = {}, getEvents = () => {} } = useListCogooneSchedules();
+	const { data = {}, getEvents = () => {}, loading = false } = useListCogooneSchedules();
 
 	const [selectedEventData, setSelectedEventData] = useState({});
-	console.log('selectedEventData:', selectedEventData);
 
 	return (
 		<div className={styles.main_container}>
@@ -42,6 +41,7 @@ function CalendarModal({
 							setMonth={setMonth}
 							eventsData={data}
 							getEvents={getEvents}
+							loading={loading}
 						/>
 					</div>
 				</div>

@@ -12,7 +12,7 @@ import CustomCard from './CustomCard';
 import styles from './styles.module.css';
 
 const localizer = momentLocalizer(moment);
-const MONTHS = 12;
+
 function CustomToolbar({ label = '', onNavigate = () => {} }) {
 	return (
 		<div className="rbc-toolbar">
@@ -32,6 +32,7 @@ function CustomToolbar({ label = '', onNavigate = () => {} }) {
 function BgCalender({
 	setSelectedEventData = () => {}, setAddEvents = () => {}, month = {}, setMonth = () => {},
 	eventsData = {}, getEvents = () => {},
+	loading = false,
 }) {
 	const [myEvents, setEvents] = useState({});
 
@@ -66,20 +67,6 @@ function BgCalender({
 		const selectedDate = myEvents?.start?.getDate();
 		const selectedMonth = myEvents?.start?.getMonth();
 		const showSelectedDate = currentDate === selectedDate && currentMonth === selectedMonth;
-
-		const currentYear = date?.getFullYear();
-		const today = new Date();
-		const currentYearMonth = today.getFullYear() * MONTHS + today.getMonth();
-		const dateYearMonth = currentYear * MONTHS + currentMonth;
-		const isNotCurrentMonth = currentYearMonth !== dateYearMonth && currentYear !== dateYearMonth;
-
-		if (isNotCurrentMonth) {
-			return {
-				onClick: (e) => {
-					e.preventDefault();
-				},
-			};
-		}
 
 		if (showSelectedDate) {
 			return {
@@ -118,7 +105,7 @@ function BgCalender({
 		<div className={styles.container}>
 			<Calendar
 				localizer={localizer}
-				events={formatedEventsList}
+				events={loading ? [] : formatedEventsList}
 				startAccessor="start"
 				endAccessor="end"
 				style={{ height: 600, width: 630 }}
