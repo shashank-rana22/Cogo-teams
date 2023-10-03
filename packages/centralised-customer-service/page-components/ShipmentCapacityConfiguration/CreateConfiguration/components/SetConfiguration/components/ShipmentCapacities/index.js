@@ -140,7 +140,7 @@ function ShipmentCapacities(props, ref) {
 
 								</div>
 
-								<div className={styles.trigger} key={releaseTriggerOptions}>
+								<div className={styles.trigger}>
 									<MultiselectController
 										name={`${service.value}-release_trigger`}
 										control={control}
