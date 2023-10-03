@@ -13,9 +13,10 @@ const useGetRegistrationStatus = ({ file_url }) => {
 		{ manual: false },
 	);
 
+	const { file_url: url } = data || {};
+
 	const downloadTemplate = () => {
 		try {
-			const { file_url: url } = data || {};
 			if (url) window.open(url);
 		} catch (e) {
 			Toast.error(e?.response?.data?.message || 'Failed to Download');
@@ -24,6 +25,7 @@ const useGetRegistrationStatus = ({ file_url }) => {
 
 	return {
 		loading,
+		url,
 		downloadTemplate,
 	};
 };

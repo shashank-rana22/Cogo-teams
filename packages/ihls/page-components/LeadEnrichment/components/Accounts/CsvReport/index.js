@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function CsvReport({ fileName = '', onRemoveCsvFilter = () => {}, params = {} }) {
 	const file_url = params?.filters?.csv_filter;
-	const { loading, downloadTemplate } = useGetRegistrationStatus({ file_url });
+	const { loading, url, downloadTemplate } = useGetRegistrationStatus({ file_url });
 
 	return (
 		<div className={styles.container}>
@@ -21,6 +21,7 @@ function CsvReport({ fileName = '', onRemoveCsvFilter = () => {}, params = {} })
 			<div>
 				<Button
 					loading={loading}
+					disabled={!url}
 					className="primary"
 					onClick={() => downloadTemplate()}
 				>
