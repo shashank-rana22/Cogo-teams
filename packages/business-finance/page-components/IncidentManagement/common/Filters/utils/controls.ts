@@ -24,7 +24,7 @@ export const requestControls = ({ t = () => {}, entityCode = '', activeTab = 'RE
 		className   : styles.category_section,
 	},
 	{
-		name        : 'categorySubType',
+		name        : 'subType',
 		placeholder : t('incidentManagement:select_request_sub_type_placeholder'),
 		type        : 'asyncSelect',
 		caret       : true,
