@@ -16,6 +16,7 @@ function CalendarModal({
 	const { data = {}, getEvents = () => {} } = useListCogooneSchedules();
 
 	const [selectedEventData, setSelectedEventData] = useState({});
+	console.log('selectedEventData:', selectedEventData);
 
 	return (
 		<div className={styles.main_container}>

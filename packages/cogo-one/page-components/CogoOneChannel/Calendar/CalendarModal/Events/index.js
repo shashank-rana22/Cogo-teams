@@ -9,6 +9,8 @@ import CreateEvent from './CreateEvent';
 import styles from './styles.module.css';
 import UserEvents from './UserEvents';
 
+const ZERO_COUNT = 0;
+
 function Events({
 	addEvents = true, setAddEvents = () => {}, selectedEventData = {},
 	getEvents = () => {},
@@ -20,6 +22,7 @@ function Events({
 	});
 
 	const { start = '' } = selectedEventData || {};
+	const eventsCount = selectedEventData?.eventsList?.length || ZERO_COUNT;
 
 	const date = formatDate({
 		date       : start || new Date(),
@@ -43,7 +46,7 @@ function Events({
 						Total Events
 					</div>
 					<div className={styles.count}>
-						123
+						{eventsCount}
 					</div>
 				</div>
 			) : null}
