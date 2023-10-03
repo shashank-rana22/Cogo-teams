@@ -6,10 +6,6 @@ export const getTaxLabels = (entityCode = '') => [
 		valueKey : 'registrationNumber',
 	},
 	{
-		label    : ENTITY_FEATURE_MAPPING[entityCode]?.labels?.sage_label,
-		valueKey : 'sageId',
-	},
-	{
 		label           : 'Company Type',
 		valueKey        : 'companyType',
 		defaultValueKey : '-',
