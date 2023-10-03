@@ -46,6 +46,13 @@ const useFilterData = ({
 		debounceQuery(search);
 	}, [debounceQuery, search]);
 
+	useEffect(() => {
+		setGlobalFilters((prev) => ({
+			...prev,
+			pageIndex: 1,
+		}));
+	}, [overseasData]);
+
 	const { configMapping, payrunStats, country_code } = useGetConfigDataMapping({
 		activePayrunTab,
 		overseasData,
