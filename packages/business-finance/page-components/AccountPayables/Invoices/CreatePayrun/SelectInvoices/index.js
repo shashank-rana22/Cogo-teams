@@ -60,8 +60,6 @@ const calculateErrorStatus = ({
 		maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
 		lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
 	} else if (key === 'tdsAmount') {
-		maxValueCrossed = +payableAmount > +payableValue;
-		lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
 		maxTdsValueCrossed = +value + +tdsDeducted > +checkAmount;
 		lessTdsValueCrossed = Number.parseInt(value, 10) < MIN_AMOUNT;
 	} else {
