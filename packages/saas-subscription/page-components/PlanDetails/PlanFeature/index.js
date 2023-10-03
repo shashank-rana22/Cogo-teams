@@ -26,25 +26,29 @@ function PlanFeature({ title, list = [], configs, loading = false, setFeatureMod
 				</Button>
 			</div>
 
-			<div>
-				<div className={cl`${styles.card_header} ${styles.flex_box}`}>
-					{configs.map((config) => (
-						<div key={config.key} className={styles.col} style={{ width: config.width }}>
-							{config?.title}
-						</div>
-					))}
-				</div>
-				{(updateList || [])?.map((feature) => (
-					<div key={feature?.display_name} className={cl`${styles.flex_box} ${styles.item_row}`}>
-						{configs.map((config) => (
-							<div key={config.key} className={styles.col} style={{ width: config.width }}>
-								{loading ? <Placeholder /> : getValues({ itemData: feature, config, itemFunctions })}
-							</div>
-						))}
+			<div className={cl`${styles.card_header} ${styles.flex_box}`}>
+				{configs.map((config) => (
+					<div key={config.key} className={styles.col} style={{ width: config.width }}>
+						{config?.title}
 					</div>
 				))}
-
 			</div>
+
+			<div className={styles.scroll}>
+				{(updateList || [])?.map((feature) => (
+					<div key={feature?.display_name} className={cl`${styles.flex_box} ${styles.item_row}`}>
+
+						{configs.map((config) => (
+							<div key={config.key} className={styles.col} style={{ width: config.width }}>
+								{loading ? <Placeholder />
+									: getValues({ itemData: feature, config, itemFunctions })}
+							</div>
+						))}
+
+					</div>
+				))}
+			</div>
+
 		</div>
 	);
 }

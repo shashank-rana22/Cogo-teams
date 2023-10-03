@@ -5,14 +5,6 @@
 	border-radius: 4px;
 }
 
-.wrapper {
-	width: 100px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	cursor: pointer;
-}
-
 .incident_id {
 	padding: 0 20px;
 	font-weight: 600;
@@ -30,11 +22,43 @@
 }
 
 .remark {
-	width: 70px;
+	width: 100px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	cursor: pointer;
+}
+
+.type_request {
+	width: 120px;
+	hyphens: auto;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
+}
+
+.company_name {
+	width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.request {
+	width: 150px;
+	hyphens: auto;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
+}
+
+.time {
+	width: 110px;
+	hyphens: auto;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
 }
 
 .flex_reverse {

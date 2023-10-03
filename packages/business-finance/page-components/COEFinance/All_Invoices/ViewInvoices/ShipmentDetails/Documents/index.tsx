@@ -9,16 +9,14 @@ import List from '../../../../../commons/List/index';
 import { formatDate } from '../../../../../commons/utils/formatDate';
 import config from '../../../../configurations/SHIPMENT_DOCUMENTS_CONFIG';
 import useShipmentDocument from '../../../../hook/useShipmentDocument';
-import { getDetailValueColor } from '../../../../utils/getDetailValueColor';
 
 import styles from './styles.module.css';
 
 interface DocumentsInterface {
 	shipmentId: string;
-	docContent?: string;
 }
 
-function Documents({ shipmentId = '', docContent = '' }: DocumentsInterface) {
+function Documents({ shipmentId = '' }: DocumentsInterface) {
 	const { data: documentData, loading } = useShipmentDocument(shipmentId);
 
 	const functions = {
@@ -34,9 +32,7 @@ function Documents({ shipmentId = '', docContent = '' }: DocumentsInterface) {
 			const documentNumber = formattedData?.document_number || '';
 
 			return (
-				<p
-					style={{ color: getDetailValueColor({ value: documentNumber, docContent }) }}
-				>
+				<p>
 					{startCase(documentNumber) || ''}
 				</p>
 			);
