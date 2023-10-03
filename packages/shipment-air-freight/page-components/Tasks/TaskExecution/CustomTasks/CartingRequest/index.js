@@ -13,10 +13,15 @@ function CartingRequest({
 	refetch = () => {},
 	onCancel = () => {},
 }) {
-	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch, onCancel });
-
 	const { errors = {}, control = {}, watch = () => {}, handleSubmit = () => {} } = useForm();
 	const formValues = watch();
+
+	const routeBack = () => {
+		refetch();
+		onCancel();
+	};
+
+	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ routeBack });
 
 	const onSubmit = () => {
 		const { vehicle_arrival_date = '' } = formValues || {};

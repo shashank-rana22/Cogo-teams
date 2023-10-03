@@ -19,7 +19,13 @@ function CartingDetails({
 }) {
 	const { booking_reference_number = '' } = shipmentData || {};
 	const { id = '' } = task || {};
-	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch, onCancel });
+
+	const routeBack = () => {
+		refetch();
+		onCancel();
+	};
+
+	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ routeBack });
 
 	const { watch = () => {}, control = {}, errors = {}, handleSubmit = () => {} } = useForm();
 	const formValues = watch();

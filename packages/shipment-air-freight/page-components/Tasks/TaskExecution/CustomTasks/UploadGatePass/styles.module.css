@@ -4,7 +4,7 @@
 
 .heading {
 	margin-bottom: 10px;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 600;
 	color: #666a90;
 }
@@ -15,7 +15,7 @@
 	justify-content: space-between;
 	padding: 15px;
 	margin: 20px 0;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 500;
 	box-shadow: rgb(0 0 0 / 16%) 0 1px 4px;
 
@@ -45,14 +45,14 @@
 
 		.ui_upload_droparea_heading {
 			margin-left: 5px;
-			font-size: 12px;
+			font-size: var(--font-size-md);
 			font-weight: 600;
 		}
 
 		.ui_upload_filesuccess_container {
 			max-width: 48%;
 			overflow: hidden;
-			font-size: 12px;
+			font-size: var(--font-size-md);
 			text-overflow: ellipsis;
 			white-space: nowrap;
 

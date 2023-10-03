@@ -3,8 +3,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateShipmentPendingTask = ({
-	refetch = () => {},
-	onCancel = () => {},
+	routeBack = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_pending_task',
@@ -15,8 +14,7 @@ const useUpdateShipmentPendingTask = ({
 		try {
 			await trigger({ data: payload });
 			Toast.success('Task Completed Successfully');
-			refetch();
-			onCancel();
+			routeBack();
 		} catch (err) {
 			toastApiError(err);
 		}

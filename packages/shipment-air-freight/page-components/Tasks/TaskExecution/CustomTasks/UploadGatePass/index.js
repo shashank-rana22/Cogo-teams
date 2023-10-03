@@ -18,7 +18,13 @@ function UploadGatePass({
 	const { vehicle_number_details = {} } = carting_order_details || {};
 
 	const { control = {}, handleSubmit = () => {}, watch = () => {} } = useForm();
-	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch, onCancel });
+
+	const routeBack = () => {
+		refetch();
+		onCancel();
+	};
+
+	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ routeBack });
 
 	const formValues = watch();
 

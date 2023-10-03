@@ -22,7 +22,13 @@ function CartingApproval({
 	const { control = {}, handleSubmit = () => {}, watch = () => {} } = useForm();
 
 	const { data = {}, loading: documentLoading = false } = useListShipmentDocuments({ shipmentData });
-	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ refetch, onCancel });
+
+	const routeBack = () => {
+		refetch();
+		onCancel();
+	};
+
+	const { loading = false, apiTrigger = () => {} } = useUpdateShipmentPendingTask({ routeBack });
 
 	const formValues = watch();
 

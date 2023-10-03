@@ -46,14 +46,14 @@
 
 		.ui_upload_droparea_heading {
 			margin-left: 5px;
-			font-size: 12px;
+			font-size: var(--font-size-md);
 			font-weight: 600;
 		}
 
 		.ui_upload_filesuccess_container {
 			max-width: 48%;
 			overflow: hidden;
-			font-size: 12px;
+			font-size: var(--font-size-md);
 			text-overflow: ellipsis;
 			white-space: nowrap;
 
