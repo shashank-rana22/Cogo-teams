@@ -69,8 +69,7 @@ function useGetAgentScoringIncentiveUserStats(props) {
 
 	return {
 		userIncentiveData,
-		userIncentiveStatsLoading : loading,
-		refetchUserIncentiveStats : refetch,
+		userIncentiveStatsLoading: loading,
 	};
 }
 

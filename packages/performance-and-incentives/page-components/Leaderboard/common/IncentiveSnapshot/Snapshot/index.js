@@ -36,6 +36,20 @@ function Snapshot(props) {
 
 	const { Icon, heading, key } = COMPONENT_MAPPING[stage] || {};
 
+	let content = null;
+
+	if (userIncentiveStatsLoading) {
+		content = <Placeholder height="14px" style={{ marginTop: '20px' }} />;
+	} else if (isEmpty(userIncentiveData)) {
+		content = <div className={styles.cmg_soon}>Coming Soon!</div>;
+	} else {
+		content = (
+			<h3>
+				{`${GLOBAL_CONSTANTS.currency_symbol[incentive_currency]}${userIncentiveData[key] || ZERO_INCENTIVE}`}
+			</h3>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -46,18 +60,7 @@ function Snapshot(props) {
 				</div>
 			</div>
 
-			{userIncentiveStatsLoading ? <Placeholder height="14px" style={{ marginTop: '20px' }} /> : null}
-
-			{!userIncentiveStatsLoading && isEmpty(userIncentiveData)
-				? <div className={styles.cmg_soon}>Coming Soon!</div> : null}
-
-			{!userIncentiveStatsLoading && !isEmpty(userIncentiveData) ? (
-				<h3>
-					{GLOBAL_CONSTANTS.currency_symbol[incentive_currency]}
-					{userIncentiveData[key] || ZERO_INCENTIVE}
-				</h3>
-			) : null}
-
+			{content}
 		</div>
 	);
 }
