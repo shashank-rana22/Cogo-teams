@@ -1045,7 +1045,7 @@ function asyncListEnrichmentSources() {
 
 function asyncListIncidentTypes() {
 	return {
-		labelKey     : 'value',
+		labelKey     : 'label',
 		valueKey     : 'value',
 		endpoint     : '/incident-management/incident/listIncidentTypes',
 		authkey      : 'get_incident_types',

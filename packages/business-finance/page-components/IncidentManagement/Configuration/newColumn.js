@@ -1,4 +1,4 @@
-import { Pill, Button } from '@cogoport/components';
+import { Pill, Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 const SIXTH_SPLICE_INDEX = 8;
 const FIRST_SPLICE_INDEX = 1;
-const OVERFLOW_NUMBER_2 = 40;
+const OVERFLOW_NUMBER = 40;
 
 function getColumns({
 	setIsAscendingActive = () => { }, setFilters = () => { },
@@ -43,45 +43,31 @@ function getColumns({
 				const getList = () => (list || [{}]).map(
 					(item) => item?.tradePartyName,
 				);
+				const companyName = getList()?.[GLOBAL_CONSTANTS.zeroth_index];
 				const bankTradePartyName = data?.bankRequest && data?.organization?.tradePartyType;
 				const tdsTradePartyName = data?.tdsRequest && data?.organization?.tradePartyType;
 				return list ? (
-					<div className={styles.company_name}>
+					<div className={cl`${styles.company_name} ${styles.common}`}>
 						<ShowOverflowingNumber
-							value={toTitleCase(getList()[GLOBAL_CONSTANTS.zeroth_index])}
-							maxLength={OVERFLOW_NUMBER_2}
+							value={toTitleCase(companyName)}
+							maxLength={OVERFLOW_NUMBER}
 						/>
 					</div>
 				) : (
 					<div>
 						{bankTradePartyName || tdsTradePartyName ? (
-							<div className={styles.company_name}>
-								{(organization?.tradePartyType === 'SELF'
-									? 									(
-										<ShowOverflowingNumber
-											value={toTitleCase(organization?.businessName)}
-											maxLength={OVERFLOW_NUMBER_2}
-										/>
-									)
-									: 									(
-										<ShowOverflowingNumber
-											value={toTitleCase(organization?.tradePartyName)}
-											maxLength={OVERFLOW_NUMBER_2}
-										/>
-									)
-								)
-										|| (
-											<ShowOverflowingNumber
-												value={toTitleCase(organization?.businessName)}
-												maxLength={OVERFLOW_NUMBER_2}
-											/>
-										)}
+							<div className={cl`${styles.company_name} ${styles.common}`}>
+								<ShowOverflowingNumber
+									value={toTitleCase((organization?.tradePartyType === 'SELF'
+										? organization?.businessName : organization?.tradePartyName))}
+									maxLength={OVERFLOW_NUMBER}
+								/>
 							</div>
 						) : (
-							<div className={styles.company_name}>
+							<div className={cl`${styles.company_name} ${styles.common}`}>
 								<ShowOverflowingNumber
 									value={toTitleCase(organization?.businessName)}
-									maxLength={OVERFLOW_NUMBER_2}
+									maxLength={OVERFLOW_NUMBER}
 								/>
 							</div>
 						)}
@@ -98,8 +84,8 @@ function getColumns({
 				const { createdBy = {} } = original || {};
 				const { name = '' } = createdBy || {};
 				return (
-					<div className={styles.requested_by}>
-						<ShowOverflowingNumber value={name} maxLength={OVERFLOW_NUMBER_2} />
+					<div className={cl`${styles.requested_by} ${styles.common}`}>
+						<ShowOverflowingNumber value={name} maxLength={OVERFLOW_NUMBER} />
 					</div>
 				);
 			},
@@ -115,7 +101,7 @@ function getColumns({
 				const { revoked } = creditNoteRequest || {};
 				return (
 					<div className={styles.credit}>
-						<div className={styles.type_request}>
+						<div className={cl`${styles.type_request} ${styles.common}`}>
 							{requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? (
 								<span>
 									{t('incidentManagement:icjv_approval')}
@@ -124,7 +110,7 @@ function getColumns({
 								: (
 									<ShowOverflowingNumber
 										value={toTitleCase(startCase(requestType))}
-										maxLength={OVERFLOW_NUMBER_2}
+										maxLength={OVERFLOW_NUMBER}
 									/>
 								)}
 						</div>
@@ -142,12 +128,12 @@ function getColumns({
 									)}
 								</div>
 							)}
-							{requestType === 'JOB_OPEN' && (
+							{requestType === 'JOB_OPEN' ? (
 								<div className={styles.job_open}>
 									SID-
 									{jobNumber || ''}
 								</div>
-							)}
+							) : null}
 						</span>
 					</div>
 				);
@@ -160,10 +146,10 @@ function getColumns({
 			Cell     : ({ row: { original } }) => {
 				const { incidentSubtype = '' } = original || {};
 				return (
-					<div className={styles.request}>
+					<div className={cl`${styles.company_name} ${styles.common}`}>
 						<ShowOverflowingNumber
 							value={toTitleCase(incidentSubtype?.replace(/_/g, ' '))}
-							maxLength={OVERFLOW_NUMBER_2}
+							maxLength={OVERFLOW_NUMBER}
 						/>
 					</div>
 				);
@@ -175,7 +161,7 @@ function getColumns({
 			id       : 'source',
 			Cell     : ({ row: { original } }) => {
 				const { source = '' } = original || {};
-				return <div className={styles.source}>{startCase(source || '-')}</div>;
+				return <div className={cl`${styles.source} ${styles.common}`}>{startCase(source || '-')}</div>;
 			},
 		},
 		{

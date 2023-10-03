@@ -4,7 +4,7 @@ import React from 'react';
 import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
 import EmptyState from '../../common/EmptyStateCommon';
 import ViewPdf from '../../common/ViewPdf';
-import allStakeHolderTimeLineData from '../../utils/formatAllStakeHolderData';
+import allStakeHolderTimeLineData from '../../utils/useFormatAllStakeHolderData';
 
 import { DOCUMENT_MAPPING, HEADER_MAPPING, REQUEST_MAPPING, TYPE_COMPONENT_MAPPING } from './contants';
 import styles from './styles.module.css';

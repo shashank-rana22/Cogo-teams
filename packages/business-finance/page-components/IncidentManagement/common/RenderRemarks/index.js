@@ -1,21 +1,38 @@
 import { Popover } from '@cogoport/components';
 import { IcMProvision } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useMemo } from 'react';
+
+import DATA_PATH_TO_REMARKS from '../../Constants/DATA_PATH_TO_REMARKS';
+import TYPE_TO_DATA_PATH from '../../Constants/TYPE_TO_DATA_PATH';
 
 import styles from './styles.module.css';
 
 const DEFAULT_LAST = 1;
+const DEFAULT_VALUE = '';
 
-const stakeholderData = (levelData) => {
+function PopoverRemarks({ value = [] }) {
+	return (
+		<div>
+			<Popover
+				placement="top"
+				render={value}
+			>
+				<div className={styles.remarks_div}>
+					<IcMProvision width="20px" height="20px" color="#F68B21" />
+				</div>
+			</Popover>
+		</div>
+	);
+}
+
+const getStakeholderData = (levelData) => {
 	const data = (levelData || []).map((item, idx) => {
 		const { stakeholder = {}, status = '', remarks = '' } = item || {};
 		const { userName = '' } = stakeholder || {};
 		return (
 			<div className={styles.timeline_wrapper} key={item?.remark}>
-				<div className={styles.left_content}>
-					<div>{userName}</div>
-				</div>
+				<div className={styles.left_content}>{userName}</div>
 				<div className={styles.path}>
 					<div className={styles.circle} />
 					{idx !== (levelData || []).length - DEFAULT_LAST ? (
@@ -50,20 +67,13 @@ function RenderRemarks({
 		level3 = {}, level2 = {}, level1 = {}, status = '', updatedBy = {}, financeRemark = '', remark = '',
 		createdBy = {}, type = '', data = '',
 	} = remarksDetails || {};
-	let otherRemark = remark;
-	if (type === 'JOB_OPEN') {
-		otherRemark = data?.jobOpenRequest?.remark || '';
-	} else if (type === 'REVOKE_INVOICE') {
-		otherRemark = data?.revokeInvoiceRequest?.cancelReason || '';
-	} else if (type === 'ISSUE_CREDIT_NOTE') {
-		otherRemark = data?.creditNoteRequest?.remark || '';
-	} else if (type === 'CONSOLIDATED_CREDIT_NOTE') {
-		otherRemark = data?.consolidatedCreditNoteRequest?.remark || '';
-	} else if (type === 'OVERHEAD_APPROVAL') {
-		otherRemark = data?.overheadConfirmationRequest?.remarks || '';
-	} else if (type === 'ADVANCE_SECURITY_DEPOSIT') {
-		otherRemark = data?.advanceSecurityDeposit?.remark || '';
-	}
+
+	const otherRemark = useMemo(() => {
+		const dataPath = TYPE_TO_DATA_PATH[type];
+		const additionalPath = DATA_PATH_TO_REMARKS[type];
+		return dataPath ? data?.[dataPath]?.[additionalPath] || DEFAULT_VALUE : DEFAULT_VALUE;
+	}, [type, data]);
+
 	const level = {
 		level       : 0,
 		status      : 'REQUESTED',
@@ -72,58 +82,22 @@ function RenderRemarks({
 	};
 	if (!isEmpty(level3)) {
 		return (
-			<div>
-				<Popover
-					placement="top"
-					render={level
-						? stakeholderData([level, level1, level2, level3]) : 'No remark found'}
-				>
-					<div className={styles.remarks_div}>
-						<IcMProvision width="20px" height="20px" color="#F68B21" />
-					</div>
-				</Popover>
-			</div>
+			<PopoverRemarks value={getStakeholderData([level, level1, level2, level3])} />
 		);
 	}
 	if (!isEmpty(level2)) {
 		return (
-			<div>
-				<Popover
-					placement="top"
-					render={level
-						? stakeholderData([level, level1, level2]) : 'No remark found'}
-				>
-					<div className={styles.remarks_div}>
-						<IcMProvision width="20px" height="20px" color="#F68B21" />
-					</div>
-				</Popover>
-			</div>
+			<PopoverRemarks value={getStakeholderData([level, level1, level2])} />
 		);
 	}
 	if (!isEmpty(level1)) {
 		return (
-			<div>
-				<Popover
-					placement="top"
-					render={level
-						? stakeholderData([level, level1]) : 'No remark found'}
-				>
-					<div className={styles.remarks_div}>
-						<IcMProvision width="20px" height="20px" color="#F68B21" />
-					</div>
-				</Popover>
-			</div>
+			<PopoverRemarks value={getStakeholderData([level, level1])} />
 		);
 	}
 	if (status === 'REQUESTED') {
 		return (
-			<div>
-				<Popover placement="top" render={level ? stakeholderData([level, {}]) : 'No remark found'}>
-					<div className={styles.remarks_div}>
-						<IcMProvision width="20px" height="20px" color="#F68B21" />
-					</div>
-				</Popover>
-			</div>
+			<PopoverRemarks value={getStakeholderData([level, {}])} />
 		);
 	}
 	const UPDATED_BY = {
@@ -133,17 +107,7 @@ function RenderRemarks({
 		remarks     : financeRemark,
 	};
 	return (
-		<div>
-			<Popover
-				placement="top"
-				render={level
-					? stakeholderData([level, UPDATED_BY]) : 'No remark found'}
-			>
-				<div className={styles.remarks_div}>
-					<IcMProvision width="20px" height="20px" color="#F68B21" />
-				</div>
-			</Popover>
-		</div>
+		<PopoverRemarks value={getStakeholderData([level, UPDATED_BY])} />
 	);
 }
 
