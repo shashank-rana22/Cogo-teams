@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMArrowRotateUp, IcMCloudUpload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import { STATISTICS_HEAD, STATISTICS_HEAD_LIMIT_INDEX } from '../../helpers/constants';
@@ -8,11 +8,16 @@ import useGetLeadData from '../../hooks/useGetLeadData';
 import LeadInfo from '../LeadInfo';
 import Statistics from '../Statistics';
 
+import CsvFilter from './CsvFilter';
+import CsvReport from './CsvReport';
 import MainFilters from './MainFilters';
 import styles from './styles.module.css';
 
 function Accounts() {
 	const [showUsers, setShowUsers] = useState(false);
+	const [fileName, setFileName] = useState('');
+	const [showCsv, setShowCsv] = useState(false);
+
 	const {
 		loading,
 		response,
@@ -28,10 +33,50 @@ function Accounts() {
 		paginationData = {},
 	} = useGetLeadData();
 
+	const onRemoveCsvFilter = () => {
+		try {
+			setParams((previousParams) => ({
+				...previousParams,
+				filters: {
+					...(previousParams.filters || {}),
+					csv_filter: undefined,
+				},
+			}));
+			setFileName('');
+		} catch (error) {
+			Toast.error(error);
+		}
+	};
+
 	return (
 		<div className={styles.container}>
 
-			<div className={styles.header}>Leads Statistics</div>
+			<div className={styles.header}>
+				<div>Leads Statistics</div>
+				{fileName
+					? (
+						<CsvReport
+							fileName={fileName}
+							onRemoveCsvFilter={onRemoveCsvFilter}
+							params={params}
+						/>
+					) : (
+						<Button themeType="secondary" className={styles.upload_btn} onClick={() => setShowCsv(true)}>
+							<IcMCloudUpload style={{ width: '20px', height: 'auto' }} />
+							Upload CSV
+						</Button>
+					)}
+
+				{showCsv
+					? (
+						<CsvFilter
+							setFileName={setFileName}
+							setParams={setParams}
+							showCsv={showCsv}
+							setShowCsv={setShowCsv}
+						/>
+					) : null}
+			</div>
 
 			<div className={styles.filterContainer}>
 				<MainFilters
@@ -42,6 +87,7 @@ function Accounts() {
 					debounceQuery={debounceQuery}
 					params={params}
 					setParams={setParams}
+					setFileName={setFileName}
 				/>
 			</div>
 

@@ -4,8 +4,12 @@
 
 .template {
 	display: flex;
-	justify-content: flex-end;
+	align-items: center;
+	justify-content: space-between;
 	margin-bottom: 16px;
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-1);
 }
 
 .logContainer {
