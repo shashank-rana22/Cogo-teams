@@ -11,11 +11,11 @@ import useCsvUpload from '../../../../hooks/useCsvUpload';
 
 import styles from './styles.module.css';
 
-const downloadSampleHandler = ({ trackingType }) => {
+const downloadSampleHandler = ({ trackingType = '' }) => {
 	window.open(CSV_SAMPLE_FILE[trackingType], '_self');
 };
 
-function ImportCsvModal({ csvModal, setCsvModal, trackingType = 'ocean', operatorData = {} }) {
+function ImportCsvModal({ csvModal = false, setCsvModal = () => {}, trackingType = 'ocean', operatorData = {} }) {
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
 	const controls = csvUploadControls({ trackingType, operatorData, t });
@@ -23,6 +23,8 @@ function ImportCsvModal({ csvModal, setCsvModal, trackingType = 'ocean', operato
 
 	const closeModalHandler = () => setCsvModal(false);
 	const { loading, submitHandler } = useCsvUpload({ trackingType, closeModalHandler });
+
+	if (!csvModal) return null;
 
 	return (
 		<Modal show={csvModal} onClose={closeModalHandler} closeOnOuterClick showCloseIcon>
@@ -45,7 +47,6 @@ function ImportCsvModal({ csvModal, setCsvModal, trackingType = 'ocean', operato
 					})}
 
 					<Button
-						type="button"
 						themeType="linkUi"
 						onClick={() => downloadSampleHandler({ trackingType })}
 					>
@@ -53,7 +54,6 @@ function ImportCsvModal({ csvModal, setCsvModal, trackingType = 'ocean', operato
 					</Button>
 
 					<Button
-						type="button"
 						themeType="accent"
 						className={styles.footer_btn}
 						onClick={handleSubmit(submitHandler)}

@@ -9,7 +9,7 @@
     "air_ocean_tracking_fetching_data_text_1":"ดึงข้อมูลเกี่ยวกับเรื่องนี้",
     "air_ocean_tracking_fetching_data_text_2":"ใช้เวลานานกว่าปกติเราจะแจ้งให้คุณทราบทันทีที่มีอยู่",
     "air_ocean_tracking_delete_tracker":"ลบตัวติดตาม",
-    "air_ocean_tracking_fetching_data_text":"การดึงข้อมูลเกี่ยวกับคอนเทนเนอร์ / การจัดส่งนี้ใช้เวลานานกว่าปกติเราจะแจ้งให้คุณทราบทันทีที่มีอยู่",
+    "air_ocean_tracking_fetching_data_text":"Fetching data on this container / shipment is taking longer than usual. We will inform you as soon as it's available.",
     "air_ocean_tracking_back_button_label":"กลับไปติดตาม",
     "air_ocean_tracking_delete_button_label":"ลบตัวติดตามและกู้คืนสมดุล",
     "air_ocean_tracking_download_button_label":"ดาวน์โหลดไฟล์ตัวอย่างที่นี่",

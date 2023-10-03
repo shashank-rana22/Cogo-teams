@@ -48,16 +48,21 @@ function Map({
 			{loading && (
 				<div className={styles.loader_container}>
 					<div className={styles.loading_content}>
-						<Image src={GLOBAL_CONSTANTS.image_url.loading} width={100} height={100} alt="loading" />
+						<Image
+							src={GLOBAL_CONSTANTS.image_url.cargo_insurance_loader}
+							width={100}
+							height={100}
+							alt="loading"
+						/>
 					</div>
 					<div className={styles.modal} />
 				</div>
 			)}
-			{/* {isEmpty(points) && (
+			{isEmpty(points) && (
 				<div className={styles.empty_state}>
 					<h3>Unable to load map for this shipment</h3>
 				</div>
-			)} */}
+			)}
 		</div>
 	);
 }

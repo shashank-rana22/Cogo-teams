@@ -1,5 +1,7 @@
 import { useRequest } from '@cogoport/request';
 
+import toastApiError from '../../../utils/toastApiError';
+
 const getSubmitCsatPayload = ({ feedback = {}, serviceName = '', csatInfo = {}, details = {} }) => {
 	const { selectedOptions = [], reason = '', rating } = feedback || {};
 
@@ -26,11 +28,11 @@ const useSubmitCsat = (props) => {
 				data: payload,
 			});
 		} catch (e) {
-			console.error(e);
+			toastApiError(e);
 		}
 	};
 
-	return ({ submitCsat, loading, data });
+	return { submitCsat, loading, data };
 };
 
 export default useSubmitCsat;

@@ -1,40 +1,20 @@
 import { cl, Button, Select } from '@cogoport/components';
-import { IcAOceanTracking, IcAAirTracking } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import getField from '../../../constant/getField';
 import useCreateTracker from '../../../hooks/useCreateTracker';
 import useGetOperatorList from '../../../hooks/useGetOperatorList';
 
+import { getOptions } from './getOptions';
 import ImportCsvModal from './ImportCsvModal';
 import OrTag from './OrTag';
 import styles from './styles.module.css';
 
-const getOptions = ({ t }) => [
-	{
-		value : 'ocean',
-		label : (
-			<div className={styles.options_container}>
-				<IcAOceanTracking width={25} height={25} />
-				<div className={styles.option_text}>{t('airOceanTracking:ocean_toggle_label')}</div>
-			</div>
-		),
-	},
-	{
-		value : 'air',
-		label : (
-			<div className={styles.options_container}>
-				<IcAAirTracking width={25} height={25} />
-				<div className={styles.option_text}>{t('airOceanTracking:air_toggle_label')}</div>
-			</div>
-		),
-	},
-];
-
 function Header() {
 	const { t } = useTranslation(['common', 'airOceanTracking']);
-	const options = getOptions({ t });
+
+	const options = useMemo(() => getOptions({ t }), [t]);
 
 	const [csvModal, setCsvModal] = useState(false);
 
@@ -88,7 +68,6 @@ function Header() {
 					<div className={styles.col}>
 						<Button
 							size="lg"
-							type="button"
 							themeType="accent"
 							className={styles.heading_btn}
 							disabled={loading}
@@ -100,14 +79,14 @@ function Header() {
 				</div>
 
 			</div>
-			{csvModal && (
+			{csvModal ? (
 				<ImportCsvModal
 					csvModal={csvModal}
 					setCsvModal={setCsvModal}
 					trackingType={trackingType}
 					operatorData={operatorData}
 				/>
-			)}
+			) : null}
 		</div>
 	);
 }

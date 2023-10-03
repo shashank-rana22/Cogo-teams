@@ -37,7 +37,7 @@ function CustomizeAlert({ closeHandler = () => {}, shipmentId = '', activeTab = 
 			{loading ? (
 				<Image
 					className={styles.loader}
-					src={GLOBAL_CONSTANTS.image_url.loading}
+					src={GLOBAL_CONSTANTS.image_url.cargo_insurance_loader}
 					alt="loading"
 					width={100}
 					height={100}

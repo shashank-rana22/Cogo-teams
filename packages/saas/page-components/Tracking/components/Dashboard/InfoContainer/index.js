@@ -9,15 +9,13 @@ import useRedirectFn from '../../../hooks/useRedirectFn';
 
 import styles from './styles.module.css';
 
-// const LOADING_ARR = getLoadingArr(3);
-
 const LOADING_ROWS = 3;
 
 const URL_INDEX = 2;
 const MIN_URL_LENGTH = 3;
 
-const newsClickHandler = ({ content }) => {
-	const matches = content.match(GLOBAL_CONSTANTS.regex_patterns.extract_url_from_html_string);
+const newsClickHandler = ({ content = '' }) => {
+	const matches = content?.match(GLOBAL_CONSTANTS.regex_patterns.extract_url_from_html_string);
 
 	if (matches && matches.length >= MIN_URL_LENGTH) {
 		const hrefUrl = matches[URL_INDEX];
@@ -28,9 +26,9 @@ const newsClickHandler = ({ content }) => {
 function InfoContainer() {
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
-	const { loading, data = [] } = useGetNews();
+	const { loading = false, data = [] } = useGetNews();
 
-	const { redirectToNotifications } = useRedirectFn();
+	const { redirectToNotifications = () => {} } = useRedirectFn();
 
 	const newData = loading ? [...Array(LOADING_ROWS).keys()] : data;
 
@@ -40,7 +38,7 @@ function InfoContainer() {
 			<div className={styles.card}>
 				<h3 className={styles.title}>{t('airOceanTracking:important_news_text')}</h3>
 
-				{newData.map((news, index) => (
+				{newData?.map((news, index) => (
 					<div
 						key={news?._id || news}
 						className={cl`${styles.row}
@@ -67,7 +65,6 @@ function InfoContainer() {
 								<Button
 									themeType="linkUi"
 									onClick={() => newsClickHandler({ content: news?.content })}
-									type="button"
 								>
 									{t('airOceanTracking:click_here_href_text')}
 
@@ -77,7 +74,7 @@ function InfoContainer() {
 						)}
 					</div>
 				))}
-				<Button themeType="linkUi" onClick={redirectToNotifications} type="button">
+				<Button themeType="linkUi" onClick={redirectToNotifications}>
 					{t('airOceanTracking:show_more_button_label')}
 				</Button>
 			</div>

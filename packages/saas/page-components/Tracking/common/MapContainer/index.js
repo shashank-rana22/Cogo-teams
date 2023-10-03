@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image, dynamic } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 
 import { getLoadingText, LOADING_TEXT_COUNT } from '../../constant/loadingText';
 import useGetMapRoute from '../../hooks/useGetMapRoute';
@@ -17,11 +17,11 @@ function MapContainer({ height = '60vh', data = {}, activeTab }) {
 
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
-	const LOADING_TEXT = getLoadingText({ t });
+	const loadingText = useMemo(() => getLoadingText({ t }), [t]);
 
 	const [count, setCount] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
-	const { loading, allRoute } = useGetMapRoute({ trackingInfo: list, type: activeTab });
+	const { loading = false, allRoute = [] } = useGetMapRoute({ trackingInfo: list, type: activeTab });
 
 	useEffect(() => {
 		if (loading && count >= GLOBAL_CONSTANTS.zeroth_index) {
@@ -42,15 +42,15 @@ function MapContainer({ height = '60vh', data = {}, activeTab }) {
 	return (
 		<div className={styles.container}>
 			<CogoMaps height={height} allPoints={allRoute} type={activeTab} />
-			{loading && (
+			{loading ? (
 				<div className={styles.loader_container}>
 					<div className={styles.loading_content}>
 						<Image src={GLOBAL_CONSTANTS.image_url.tracking_loader} width={200} height={40} alt="loading" />
-						<p>{LOADING_TEXT[count]}</p>
+						<p>{loadingText[count]}</p>
 					</div>
 					<div className={styles.modal} />
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }

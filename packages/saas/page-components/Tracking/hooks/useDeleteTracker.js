@@ -63,7 +63,8 @@ const useDeleteTracker = ({
 	};
 
 	return {
-		loading, deleteArchiveHandler,
+		loading,
+		deleteArchiveHandler,
 	};
 };
 

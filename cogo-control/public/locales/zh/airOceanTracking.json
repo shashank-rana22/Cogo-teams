@@ -9,7 +9,7 @@
     "air_ocean_tracking_fetching_data_text_1":"获取有关此的数据",
     "air_ocean_tracking_fetching_data_text_2":"花比平常更长。我们将尽快通知您。",
     "air_ocean_tracking_delete_tracker":"删除跟踪器",
-    "air_ocean_tracking_fetching_data_text":"在此容器 /装运上获取数据的时间比平常更长。我们将尽快通知您。",
+    "air_ocean_tracking_fetching_data_text":"Fetching data on this container / shipment is taking longer than usual. We will inform you as soon as it's available.",
     "air_ocean_tracking_back_button_label":"回去继续跟踪",
     "air_ocean_tracking_delete_button_label":"删除跟踪器和恢复余额",
     "air_ocean_tracking_download_button_label":"在这里下载示例文件",

@@ -6,11 +6,6 @@ function Route({ positions, pathOption }) {
 			key={positions}
 			positions={positions}
 			pathOptions={pathOption}
-			// eventHandlers={{
-			// 	add: (e) => {
-			// 		if (map) map?.fitBounds(e.target?.getBounds());
-			// 	},
-			// }}
 		/>
 	);
 }

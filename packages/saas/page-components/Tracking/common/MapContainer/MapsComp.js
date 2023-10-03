@@ -11,8 +11,8 @@ import Route from './Route';
 const getLatLng = ({ route = [] }) => {
 	const routeLength = route?.length;
 	const 	origin = {
-		lat : route[GLOBAL_CONSTANTS.zeroth_index]?.lat,
-		lng : route[GLOBAL_CONSTANTS.zeroth_index]?.lng,
+		lat : route?.[GLOBAL_CONSTANTS.zeroth_index]?.lat,
+		lng : route?.[GLOBAL_CONSTANTS.zeroth_index]?.lng,
 	};
 	const	destination = {
 		lat : route[routeLength - GLOBAL_CONSTANTS.one]?.lat,
@@ -37,7 +37,7 @@ function MapComp({ height = '60vh', allPoints = [], type = 'ocean' }) {
 		>
 			{(allPoints || []).map((points) => {
 				const { route = [] } = points || {};
-				const { origin, destination } = getLatLng({ route });
+				const { origin = {}, destination = {} } = getLatLng({ route });
 				if (isEmpty(route)) return null;
 				return (
 					<>

@@ -1,5 +1,6 @@
 import { cl } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
+import React, { useMemo } from 'react';
 
 import getMappingObject from '../../constant/card';
 
@@ -8,9 +9,9 @@ import styles from './styles.module.css';
 function CardInfo({ activeTab = '', type = '', input = '', referenceNo = '', serialId = '' }) {
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
-	const GET_MAPPING = getMappingObject({ t });
+	const getMapping = useMemo(() => getMappingObject({ t }), [t]);
 
-	const { CARD_TITLE } = GET_MAPPING?.[activeTab] || {};
+	const { CARD_TITLE = '' } = getMapping?.[activeTab] || {};
 
 	return (
 		<div className={styles.container}>
@@ -23,15 +24,15 @@ function CardInfo({ activeTab = '', type = '', input = '', referenceNo = '', ser
 				{input}
 			</div>
 
-			{referenceNo && (
+			{referenceNo ? (
 				<div className={cl`${styles.tag} ${styles.reference_no}`}>
 					Ref No. :
 					{' '}
 					{referenceNo}
 				</div>
-			)}
+			) : null}
 
-			{serialId &&	(
+			{serialId ?	(
 				<div className={styles.book_cogo_tag}>
 					<div className={cl`${styles.tag} ${styles.book_cogo}`}>
 						{t('airOceanTracking:air_ocean_tracking_card_info_text_1')}
@@ -42,7 +43,7 @@ function CardInfo({ activeTab = '', type = '', input = '', referenceNo = '', ser
 						{serialId}
 					</div>
 				</div>
-			)}
+			) : null}
 
 		</div>
 

@@ -9,7 +9,7 @@
     "air_ocean_tracking_fetching_data_text_1":"Tìm nạp dữ liệu về điều này",
     "air_ocean_tracking_fetching_data_text_2":"đang mất nhiều thời gian hơn bình thường.Chúng tôi sẽ thông báo cho bạn ngay khi nó có sẵn.",
     "air_ocean_tracking_delete_tracker":"Xóa theo dõi",
-    "air_ocean_tracking_fetching_data_text":"Tìm nạp dữ liệu trên container / lô hàng này mất nhiều thời gian hơn bình thường.Chúng tôi sẽ thông báo cho bạn ngay khi nó có sẵn.",
+    "air_ocean_tracking_fetching_data_text":"Fetching data on this container / shipment is taking longer than usual. We will inform you as soon as it's available.",
     "air_ocean_tracking_back_button_label":"Quay lại và tiếp tục theo dõi",
     "air_ocean_tracking_delete_button_label":"Xóa theo dõi & khôi phục cân bằng",
     "air_ocean_tracking_download_button_label":"Tải xuống tệp mẫu tại đây",

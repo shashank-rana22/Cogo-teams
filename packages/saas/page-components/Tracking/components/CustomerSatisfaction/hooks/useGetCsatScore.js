@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
+import toastApiError from '../../../utils/toastApiError';
+
 const NEGATIVE_INDEX = -1;
 
 const NULL_ITEM = [NEGATIVE_INDEX, null];
@@ -22,7 +24,7 @@ const useGetCsatScore = ({ serviceName = '' }) => {
 			});
 			setShowRateUs(NULL_ITEM.includes(resp?.data?.achieved_rating));
 		} catch (e) {
-			console.error(e);
+			toastApiError(e);
 		}
 	}, [serviceName, trigger]);
 

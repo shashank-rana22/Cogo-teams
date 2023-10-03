@@ -10,11 +10,12 @@ function ArchiveDelete({
 	shipmentId = '',
 	closeHandler = () => {},
 	activeTab = 'ocean',
-	refetchTrackerList = () => {}, src = '',
+	refetchTrackerList = () => {},
+	src = '',
 }) {
 	const { t } = useTranslation(['commmon', 'airOceanTracking']);
 
-	const { loading, deleteArchiveHandler } = useDeleteTracker({
+	const { loading = false, deleteArchiveHandler = () => {} } = useDeleteTracker({
 		name,
 		id: shipmentId,
 		closeHandler,

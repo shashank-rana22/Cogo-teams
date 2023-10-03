@@ -1,4 +1,5 @@
 import { useTranslation } from 'next-i18next';
+import React, { useMemo } from 'react';
 
 import { getServiceNameTitleMapping } from '../../constants/service-name-title-mapping';
 
@@ -7,7 +8,7 @@ import styles from './styles.module.css';
 function Title({ serviceName = '' }) {
 	const { t } = useTranslation(['common']);
 
-	const SERVICE_NAME_TITLE_MAPPING = getServiceNameTitleMapping({ t });
+	const serviceNameTitleMapping = useMemo(() => getServiceNameTitleMapping({ t }), [t]);
 
 	return (
 		<div>
@@ -15,7 +16,7 @@ function Title({ serviceName = '' }) {
 				{t('common:csat_title')}
 			</div>
 			<div className={styles.title_2}>
-				{SERVICE_NAME_TITLE_MAPPING[serviceName]}
+				{serviceNameTitleMapping[serviceName]}
 			</div>
 		</div>
 	);

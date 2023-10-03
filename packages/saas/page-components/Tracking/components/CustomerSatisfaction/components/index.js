@@ -35,6 +35,8 @@ function CustomerSatisfactionModal({
 		setShowRateUs(false);
 	};
 
+	if (!show) return null;
+
 	return (
 		<Modal show={show} size="sm" className={styles.modal} showCloseIcon={false}>
 			<Modal.Header title={<Title serviceName={serviceName} />} />

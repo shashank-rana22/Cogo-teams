@@ -1,21 +1,21 @@
 import { ButtonIcon, Modal } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import getMappingObject from '../../constant/card';
 import ArchiveDelete from '../ArchiveDelete';
 
 import styles from './styles.module.css';
 
-function EmptyCard({ activeTab = '', type = '', input = '', shipmentId = '', refetchTrackerList }) {
+function EmptyCard({ activeTab = '', type = '', input = '', shipmentId = '', refetchTrackerList = () => {} }) {
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
 	const [openModal, setOpenModal] = useState(false);
 
-	const GET_MAPPING = getMappingObject({ t });
+	const getMapping = useMemo(() => getMappingObject({ t }), [t]);
 
-	const { CARD_TITLE, EMPTY_STATE_INFO } = GET_MAPPING?.[activeTab] || {};
+	const { CARD_TITLE, EMPTY_STATE_INFO } = getMapping?.[activeTab] || {};
 
 	const closeHandler = () => setOpenModal(false);
 
