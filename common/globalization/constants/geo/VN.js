@@ -422,7 +422,6 @@ export default {
 			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
 			{ label: 'E-Invoice Failed', value: 'IRN_FAILED' },
 			{ label: 'E-Invoice Cancelled', value: 'IRN_CANCELLED' },
-			{ label: 'Requested', value: 'REQUESTED' },
 		],
 
 		freight_container_types: [
