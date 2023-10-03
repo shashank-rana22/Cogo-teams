@@ -34,6 +34,8 @@ const stakeHolderTimeLineData = ({
 		otherRemark = data?.consolidatedCreditNoteRequest?.remark || '';
 	} else if (type === 'OVERHEAD_APPROVAL') {
 		otherRemark = data?.overheadConfirmationRequest?.remarks || '';
+	} else if (type === 'ADVANCE_SECURITY_DEPOSIT') {
+		otherRemark = data?.advanceSecurityDeposit?.remark || '';
 	}
 	const level = {
 		...level0,
