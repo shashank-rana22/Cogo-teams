@@ -58,6 +58,7 @@ const GLOBAL_CONSTANTS = {
 		IDR : 'id-ID',
 		THB : 'th-TH',
 		CNY : 'zh-CN',
+		EUR : 'en-EU',
 	},
 	currency_symbol: {
 		USD : '$',
@@ -216,6 +217,7 @@ const GLOBAL_CONSTANTS = {
 		vinod_talapa_user_id    : '6d713339-c528-4696-9f7b-c01f86887ac1',
 		manoj_mahapatra_user_id : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		santram_gurjar_user_id 	: '039a0141-e6f3-43b0-9c51-144b22b9fc84',
+		abhishek_kumar_user_id  : 'fa0dcd74-4b68-4783-a2f9-81dfab26008a',
 		local_charge_providers  : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 			GB : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
