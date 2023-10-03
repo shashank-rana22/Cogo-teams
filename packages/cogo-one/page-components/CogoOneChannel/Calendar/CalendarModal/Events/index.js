@@ -20,7 +20,11 @@ function Events({
 		category   : 'event',
 		event_type : 'call_customer',
 	});
-
+	const [actionModal, setActionModal] = useState({
+		status       : false,
+		value        : {},
+		actionStatus : '',
+	});
 	const { start = '' } = selectedEventData || {};
 	const eventsCount = selectedEventData?.eventsList?.length || ZERO_COUNT;
 
@@ -37,6 +41,15 @@ function Events({
 	};
 
 	const ActiveComponent = ACTIVE_COMPONENT[addEvents];
+
+	const handleClose = () => {
+		setActionModal((prevEventDetails) => ({
+			...prevEventDetails,
+			status       : false,
+			value        : {},
+			actionStatus : '',
+		}));
+	};
 
 	useEffect(() => {
 		setEventDetails((prevEventDetails) => ({
@@ -77,6 +90,11 @@ function Events({
 					month={month}
 					eventDetails={eventDetails}
 					setEventDetails={setEventDetails}
+					actionModal={actionModal}
+					setActionModal={setActionModal}
+					updateEventDetails={actionModal?.value}
+					setAddEvents={setAddEvents}
+					handleClose={handleClose}
 				/>
 
 				<div className={styles.footer}>
@@ -91,6 +109,7 @@ function Events({
 								event_type : 'call_customer',
 							}));
 							setAddEvents((prev) => !prev);
+							handleClose();
 						}}
 					>
 						{addEvents ? 'Add Reminder' : 'Cancel'}

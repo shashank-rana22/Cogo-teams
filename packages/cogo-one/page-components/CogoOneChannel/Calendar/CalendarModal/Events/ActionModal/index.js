@@ -6,8 +6,8 @@ import useUpdateCogooneSchedule from '../../../../../../hooks/useUpdateCogooneSc
 import styles from './styles.module.css';
 
 function ActionModal({
-	actionModal = {}, setActionModal = () => {}, getEvents = () => {},
-	month = '',
+	actionModal = {}, getEvents = () => {},
+	month = '', handleClose = () => {},
 }) {
 	const { status = false, value = {}, actionStatus = '' } = actionModal || {};
 	const { category = '', subject = '' } = value || {};
@@ -19,15 +19,6 @@ function ActionModal({
 		inactive: `Are you sure you want to marks as inactive this ${startCase(subject)}
 		${startCase(category)}
 		?`,
-	};
-
-	const handleClose = () => {
-		setActionModal((prevEventDetails) => ({
-			...prevEventDetails,
-			status       : false,
-			value        : {},
-			actionStatus : '',
-		}));
 	};
 
 	const { loading = false, updateCogooneSchedule = () => {} } = useUpdateCogooneSchedule({

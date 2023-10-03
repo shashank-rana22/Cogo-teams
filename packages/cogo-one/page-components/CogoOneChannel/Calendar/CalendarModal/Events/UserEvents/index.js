@@ -8,7 +8,6 @@ import {
 import { Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
 
 import ActionModal from '../ActionModal';
 import EmptyList from '../EmptyList';
@@ -38,41 +37,40 @@ const ICON_MAPPING = {
 
 function UserEvents({
 	selectedEventData = {}, getEvents = () => {},
-	month = '',
+	month = '', actionModal = {}, setActionModal = () => {},
+	setAddEvents = () => {}, handleClose = () => {},
 }) {
 	const { userId = '' } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
-	const [actionModal, setActionModal] = useState({
-		status       : false,
-		value        : {},
-		actionStatus : '',
-	});
 
 	const { eventsList: markedEvents = [] } = selectedEventData || {};
+
+	const handleSelect = ({ singleEvent = {}, key = '' }) => {
+		setActionModal((prevEventDetails) => ({
+			...prevEventDetails,
+			status       : key !== 'edit',
+			value        : singleEvent,
+			actionStatus : key,
+		}));
+	};
 
 	const ACTIONS = [
 		{
 			key    : 'completed',
 			icon   : <IcMTick width={20} height={20} fill="#27ae60" />,
-			action : ({ singleEvent = {}, key = '' }) => setActionModal((prevEventDetails) => ({
-				...prevEventDetails,
-				status       : true,
-				value        : singleEvent,
-				actionStatus : key,
-			})),
+			action : ({ singleEvent = {}, key = '' }) => { handleSelect({ singleEvent, key }); },
 		},
 		{
-			key  : 'edit',
-			icon : <IcMEdit width={14} height={14} fill="#34495e" />,
+			key    : 'edit',
+			icon   : <IcMEdit width={14} height={14} fill="#34495e" />,
+			action : ({ singleEvent = {}, key = '' }) => {
+				handleSelect({ singleEvent, key });
+				setAddEvents((p) => !p);
+			},
 		},
 		{
 			key    : 'inactive',
 			icon   : <IcMAppDelete width={16} height={16} fill="#e74c3c" />,
-			action : ({ singleEvent = {}, key = '' }) => setActionModal((prevEventDetails) => ({
-				...prevEventDetails,
-				status       : true,
-				value        : singleEvent,
-				actionStatus : key,
-			})),
+			action : ({ singleEvent = {}, key = '' }) => { handleSelect({ singleEvent, key }); },
 		},
 	];
 
@@ -204,7 +202,6 @@ function UserEvents({
 												onClick={() => value?.action({ singleEvent, key: value?.key })}
 											>
 												{value.icon}
-
 											</div>
 										))}
 									</div>
@@ -219,9 +216,9 @@ function UserEvents({
 
 			<ActionModal
 				actionModal={actionModal}
-				setActionModal={setActionModal}
 				getEvents={getEvents}
 				month={month}
+				handleClose={handleClose}
 			/>
 		</>
 	);
