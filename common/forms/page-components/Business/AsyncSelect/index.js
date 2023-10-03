@@ -79,7 +79,9 @@ import {
 	asyncListLocationClusters,
 	asyncListFclFreightCommodityClusters,
 	asyncListShippingLineEvents,
+	asyncListSaasPlan,
 	asyncListEnrichmentSources,
+	asyncAllocationEligibleRoles,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -177,7 +179,9 @@ const keyAsyncFieldsParamsMapping = {
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
 	list_shipping_line_events            : asyncListShippingLineEvents,
+	list_saas_plan                       : asyncListSaasPlan,
 	list_enrichment_sources              : asyncListEnrichmentSources,
+	agent_scoring_eligible_roles         : asyncAllocationEligibleRoles,
 };
 
 const SINGLE_ENTITY = 1;

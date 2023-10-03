@@ -29,6 +29,7 @@ function TooltipAmount({ amount, currencyType }) {
 						style                 : 'currency',
 						notation              : 'compact',
 						minimumFractionDigits : 2,
+						currencyWise          : true,
 					},
 				})}
 			</div>

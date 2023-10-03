@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -29,7 +30,7 @@ function AddRate({
 	setAddSellPrice = () => {},
 	refetch = () => {},
 	onCancel = () => {},
-	filters,
+	filters = {},
 	setShowChargeCodes = () => {},
 	source = '',
 	isSeller = false,
@@ -62,6 +63,7 @@ function AddRate({
 		control,
 		formState: { errors },
 		setValue,
+		watch,
 	} = useForm();
 
 	useEffect(() => {
@@ -133,14 +135,16 @@ function AddRate({
 			{SHOW_REMARK_STATUS.includes(status?.status) ? (
 				<p style={{ marginTop: '8px' }}>
 					<strong> Comment:</strong>
-					&nbsp;
-					{item?.remarks[0]}
+					{' '}
+					{item?.remarks[GLOBAL_CONSTANTS.zeroth_index]}
 				</p>
 			) : null}
 
 			<RenderAddRateForm
 				handleSubmit={handleSubmit}
 				onSubmit={onAddRate}
+				setValue={setValue}
+				watch={watch}
 				control={control}
 				errors={errors}
 				serviceData={item}

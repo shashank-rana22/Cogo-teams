@@ -42,7 +42,8 @@ function AwbInventoryStockReport({
 
 			<List
 				fields={fields}
-				data={data}
+				list={data?.data?.awbInventoryData}
+				totalCount={data?.data?.stats?.awbInventoryStockCount}
 				loading={loading}
 				functions={functions}
 				page={page}

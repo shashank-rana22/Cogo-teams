@@ -13,7 +13,7 @@ import useGetIncidentData from './common/hooks/useGetIncidentData';
 import { IncidentDataInterface } from './common/interface';
 import { getTabs } from './Constants/getTabs';
 import Controller from './Controller';
-import CommonDetailsModal from './Modals/CommonDetailsModal';
+import CommonDetailsModal from './Modals';
 import styles from './styles.module.css';
 import TabComponent from './TabComponent';
 

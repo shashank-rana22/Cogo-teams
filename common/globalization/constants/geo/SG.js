@@ -407,7 +407,6 @@ export default {
 			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
 			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
 			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
-			{ label: 'Requested', value: 'REQUESTED' },
 		],
 		freight_container_types: [
 			{

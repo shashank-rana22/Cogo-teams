@@ -914,6 +914,17 @@ function asyncListTruckTypes() {
 	};
 }
 
+function asyncAllocationEligibleRoles() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/eligible_roles',
+		authkey      : 'get_agent_scoring_eligible_roles',
+		microService : 'agent_scoring',
+		initialCall  : true,
+	};
+}
+
 function asyncListUserShipments() {
 	return {
 		labelKey    : 'serial_id',
@@ -1020,6 +1031,18 @@ function asyncListShippingLineEvents() {
 		},
 	};
 }
+function asyncListSaasPlan() {
+	return {
+		labelKey : 'display_name',
+		valueKey : 'id',
+		endpoint : '/list_saas_plans',
+		params   : {
+			filters    : { is_active: true, plan_type: 'P' },
+			page_limit : 50,
+		},
+	};
+}
+
 function asyncListEnrichmentSources() {
 	return {
 		labelKey     : 'name',
@@ -1106,6 +1129,7 @@ export {
 	asyncListPricingZones,
 	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
+	asyncAllocationEligibleRoles,
 	asyncListUserShipments,
 	asyncFieldsOrganizationOnCall,
 	asyncListSaasHsCodes,
@@ -1114,5 +1138,6 @@ export {
 	asyncListSpotSearchRateCardOperators,
 	asyncListOverSeasTradeParties,
 	asyncListShippingLineEvents,
+	asyncListSaasPlan,
 	asyncListEnrichmentSources,
 };
