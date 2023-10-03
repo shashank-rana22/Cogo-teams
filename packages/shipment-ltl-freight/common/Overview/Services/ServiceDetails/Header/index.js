@@ -29,7 +29,7 @@ function Header({ serviceData = [] }) {
 
 				<div className={cl`${styles[state]} ${styles.service_details}`}>
 					<div className={styles.service_name}>{startCase(shipment_type)}</div>
-					{!partner.includes('KAM') ? (
+					{!partner?.includes('KAM') ? (
 						<div className={styles.service_provider}>
 							{': '}
 							{service_provider?.business_name}

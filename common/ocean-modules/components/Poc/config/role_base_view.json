@@ -313,7 +313,6 @@
         "can_view": [
             "notifying_party",
             "invoicing_party",
-            "service_provider",
             "pocs",
             "self",
             "shipper",

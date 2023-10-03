@@ -20,7 +20,7 @@ function Header({ serviceData = [], showDetails = false, setShowDetails = () => 
 		<div className={styles.container}>
 			<div className={cl`${styles[state]} ${styles.service_details}`}>
 				<div className={styles.service_name}>{display_label}</div>
-				{!partner.includes('KAM') ? (
+				{!partner?.includes('KAM') ? (
 					<div className={styles.service_provider}>
 						{service_provider?.business_name}
 					</div>

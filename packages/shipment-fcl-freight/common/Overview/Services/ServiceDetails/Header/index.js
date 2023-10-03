@@ -33,7 +33,7 @@ function Header({ serviceData = [], containerDetails = [] }) {
 					<span className={styles.service_name}>
 						{display_label}
 					</span>
-					{!partner.includes('KAM') ? (
+					{!partner?.includes('KAM') ? (
 						<span className={styles.service_provider}>
 							{': '}
 							{service_provider?.business_name}
