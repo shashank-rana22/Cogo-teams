@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { cl, Tabs, TabPanel, Button } from '@cogoport/components';
 import {
 	useForm,
@@ -45,7 +46,16 @@ function CreateEvent({
 	setEventDetails = () => {},
 	getEvents = () => {},
 	month = '',
+	updateEventDetails = {},
 }) {
+	const {
+		category: updateCategory = '', subject = '', id = '',
+		validity_start = '', validity_end = '', description = '',
+		is_important = false, metadata = {}, participants = [],
+		frequency = '',
+	} = updateEventDetails || {};
+	const { organization_id: orgId = '', user_id = '' } = metadata || {};
+
 	const [eventOccurence, setEventOccurence] = useState({
 		showModal     : false,
 		eventData     : {},
@@ -60,6 +70,7 @@ function CreateEvent({
 		watch,
 		formState : { errors = {} },
 		reset,
+		setValue,
 	} = useForm({
 		defaultValues: {
 			start_date : new Date(),
@@ -98,6 +109,30 @@ function CreateEvent({
 	useEffect(() => {
 		reset();
 	}, [category, reset]);
+
+	useEffect(() => {
+		const formatParticipant = (participants || []).map((itm) => ([itm?.user_id]))?.flat();
+
+		if (id) {
+			setEventDetails(() => ({
+				event_type : subject,
+				category   : updateCategory === 'reminder' ? 'event' : 'meeting',
+			}));
+			setValue('start_date', new Date(validity_start));
+			setValue('start_time', new Date(validity_start));
+			setValue('end_date', new Date(validity_end));
+			setValue('end_time', new Date(validity_end));
+			setValue('remarks', description);
+			setValue('mark_important_event', is_important);
+			setValue('organization_id', orgId);
+			setValue('organization_user_id', user_id);
+			setValue('title', subject);
+			setValue('participants_users', formatParticipant);
+			setValue('occurence_event', frequency);
+		}
+	}, [id, setEventDetails, updateCategory, subject, setValue,
+		description, is_important, validity_end, validity_start,
+		orgId, user_id, participants, frequency]);
 
 	return (
 		<div className={styles.container}>

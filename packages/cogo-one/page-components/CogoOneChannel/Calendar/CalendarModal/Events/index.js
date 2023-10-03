@@ -20,6 +20,7 @@ function Events({
 		category   : 'event',
 		event_type : 'call_customer',
 	});
+	const [updateEventDetails, setEventUpdateDetails] = useState({});
 
 	const { start = '' } = selectedEventData || {};
 	const eventsCount = selectedEventData?.eventsList?.length || ZERO_COUNT;
@@ -64,12 +65,19 @@ function Events({
 					</div>
 				)}
 
-				{addEvents ? <UserEvents selectedEventData={selectedEventData} /> : (
+				{addEvents ? (
+					<UserEvents
+						selectedEventData={selectedEventData}
+						setEventUpdateDetails={setEventUpdateDetails}
+						setAddEvents={setAddEvents}
+					/>
+				) : (
 					<CreateEvent
 						eventDetails={eventDetails}
 						setEventDetails={setEventDetails}
 						getEvents={getEvents}
 						month={month}
+						updateEventDetails={updateEventDetails}
 					/>
 				)}
 
@@ -85,6 +93,7 @@ function Events({
 								event_type : 'call_customer',
 							}));
 							setAddEvents((prev) => !prev);
+							setEventUpdateDetails({});
 						}}
 					>
 						{addEvents ? 'Add Reminder' : 'Cancel'}

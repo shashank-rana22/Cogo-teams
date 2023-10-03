@@ -49,8 +49,13 @@ const ACTIONS = [
 	},
 ];
 
-function UserEvents({ selectedEventData = {} }) {
+function UserEvents({ selectedEventData = {}, setAddEvents = () => {}, setEventUpdateDetails = () => {} }) {
 	const { eventsList: markedEvents = [] } = selectedEventData || {};
+
+	const handleClick = (itm) => {
+		setEventUpdateDetails(itm);
+		setAddEvents((prev) => !prev);
+	};
 
 	if (isEmpty(markedEvents)) {
 		return (
@@ -163,8 +168,15 @@ function UserEvents({ selectedEventData = {} }) {
 								</>
 							) : null}
 							<div className={styles.actions}>
-								{(Object.values(ACTIONS) || []).map((value) => (
-									<div className={styles.single_action} key={value?.key}>{value.icon}</div>
+								{(ACTIONS || []).map((value) => (
+									<div
+										className={styles.single_action}
+										role="presentation"
+										key={value?.key}
+										onClick={() => handleClick(singleEvent)}
+									>
+										{value.icon}
+									</div>
 								))}
 							</div>
 						</div>
