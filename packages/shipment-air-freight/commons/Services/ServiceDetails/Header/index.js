@@ -1,17 +1,22 @@
 import { Button, cl } from '@cogoport/components';
+import ShipmentDetailContext from '@cogoport/context/page-components/ShipmentDetailContext';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
+import { useContext } from 'react';
 
 import EditCancelService from '../../../../page-components/EditCancelService';
 
 import styles from './styles.module.css';
 
 function Header({ serviceData = [], showDetails = false, setShowDetails = () => {} }) {
-	const { partner } = useSelector(({ profile }) => ({
-		partner: profile?.auth_role_data?.name,
-	}));
 	const service = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
+	const { stakeholderConfig } = useContext(ShipmentDetailContext);
+
+	const rolesPermission = stakeholderConfig?.pocs || {};
+
+	const rolesViewPermission = rolesPermission?.can_view || [];
+
 	const { state, display_label, service_provider, payment_term } = service || {};
 
 	const statusText = state === 'init' ? 'Not Allocated' : startCase(state);
@@ -20,7 +25,7 @@ function Header({ serviceData = [], showDetails = false, setShowDetails = () => 
 		<div className={styles.container}>
 			<div className={cl`${styles[state]} ${styles.service_details}`}>
 				<div className={styles.service_name}>{display_label}</div>
-				{!partner.includes('KAM') ? (
+				{rolesViewPermission?.includes('service_provider') ? (
 					<div className={styles.service_provider}>
 						{': '}
 						{service_provider?.business_name}
