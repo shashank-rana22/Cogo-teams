@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react';
-
 import { functions } from '../../commons/Functions';
 import Layout from '../../commons/Layout';
 import List from '../../commons/List';
 import controls from '../../configurations/add-awb-inventory-stock-controls';
-import { AwbInventoryStockReportFields } from '../../configurations/awb-inventory-stock-report-fields';
+import awbLeakageFields from '../../configurations/awb-leakage-fields.json';
 
 import styles from './styles.module.css';
 
-function AwbInventoryStockReport({
+function AwbLeakage({
 	data = {},
 	loading = false,
 	page = 1,
@@ -19,19 +17,13 @@ function AwbInventoryStockReport({
 	errors = {},
 	setFilterData = () => {},
 }) {
-	const [filter, setFilter] = useState({});
-	const inventory_stock_controls = controls(setFilter);
-	const { fields } = AwbInventoryStockReportFields;
-
-	useEffect(() => {
-		setFilterData(filter);
-	}, [filter, setFilterData]);
+	const inventory_stock_controls = controls(setFilterData);
 
 	return (
-		<div className={styles.stock_report_container}>
+		<div className={styles.awb_leakage_container}>
 
 			<header className={styles.header_container}>
-				Inventory Stock
+				AWB Leakage
 			</header>
 
 			<Layout
@@ -41,9 +33,9 @@ function AwbInventoryStockReport({
 			/>
 
 			<List
-				fields={fields}
+				fields={awbLeakageFields}
 				list={data?.data?.awbInventoryData}
-				totalCount={data?.data?.stats?.awbInventoryStockCount}
+				totalCount={data?.data?.stats?.awbLeakageStockCount}
 				loading={loading}
 				functions={functions}
 				page={page}
@@ -55,4 +47,4 @@ function AwbInventoryStockReport({
 
 	);
 }
-export default AwbInventoryStockReport;
+export default AwbLeakage;
