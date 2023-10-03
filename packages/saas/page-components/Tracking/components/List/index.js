@@ -6,7 +6,6 @@ import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetListTracker from '../../hooks/useGetListTracker';
-import CustomerSatisfaction from '../CustomerSatisfaction';
 
 import AirCard from './AirCard';
 import Header from './Header';
@@ -84,10 +83,6 @@ function List() {
 					/>
 				</div>
 			)}
-
-			<div className={styles.csat}>
-				<CustomerSatisfaction serviceName="track_and_trace" position="center" />
-			</div>
 
 			<ModalList
 				modalInfo={modalInfo}
