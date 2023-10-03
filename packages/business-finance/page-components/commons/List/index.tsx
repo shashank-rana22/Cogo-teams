@@ -97,7 +97,7 @@ function List({
 						/>
 					</div>
 				) : (
-					(dataList).map((singleitem) => (
+					(dataList || []).map((singleitem) => (
 						<React.Fragment key={singleitem?.id || singleitem?.objectId || singleitem?.billId}>
 							<CardColumn
 								fields={fields}
