@@ -1,4 +1,6 @@
 import { Button, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
 import EditCancelService from '../../../../EditCancelService';
@@ -6,7 +8,10 @@ import EditCancelService from '../../../../EditCancelService';
 import styles from './styles.module.css';
 
 function Header({ serviceData = [], showDetails = false, setShowDetails = () => {} }) {
-	const service = serviceData?.[0] || {};
+	const { partner } = useSelector(({ profile }) => ({
+		partner: profile?.auth_role_data?.name,
+	}));
+	const service = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { state, display_label, service_provider, payment_term } = service || {};
 
 	const statusText = state === 'init' ? 'Not Allocated' : startCase(state);
@@ -15,8 +20,11 @@ function Header({ serviceData = [], showDetails = false, setShowDetails = () => 
 		<div className={styles.container}>
 			<div className={cl`${styles[state]} ${styles.service_details}`}>
 				<div className={styles.service_name}>{display_label}</div>
-
-				<div className={styles.service_provider}>{service_provider?.business_name}</div>
+				{!partner?.includes('KAM') ? (
+					<div className={styles.service_provider}>
+						{service_provider?.business_name}
+					</div>
+				) : null}
 			</div>
 
 			<div className={styles.secondary_details}>

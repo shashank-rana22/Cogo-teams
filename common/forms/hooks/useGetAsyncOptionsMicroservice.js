@@ -14,6 +14,7 @@ const REQUEST_HOOK_MAPPING = {
 	tickets          : useTicketsRequest,
 	auth             : useAuthRequest,
 	cx_automation    : useCxAutomationRequest,
+	agent_scoring    : useAllocationRequest,
 };
 
 function getOptions({ data = [] }) {

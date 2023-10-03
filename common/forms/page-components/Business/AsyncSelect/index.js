@@ -80,6 +80,7 @@ import {
 	asyncListFclFreightCommodityClusters,
 	asyncListSaasPlan,
 	asyncListEnrichmentSources,
+	asyncAllocationEligibleRoles,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -178,6 +179,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
 	list_saas_plan                       : asyncListSaasPlan,
 	list_enrichment_sources              : asyncListEnrichmentSources,
+	agent_scoring_eligible_roles         : asyncAllocationEligibleRoles,
 };
 
 const SINGLE_ENTITY = 1;

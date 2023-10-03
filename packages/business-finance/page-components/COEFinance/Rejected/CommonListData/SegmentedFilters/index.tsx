@@ -27,14 +27,7 @@ function SegmentedFilters({
 								|| !!filters?.statusUpdatedDateTo || !!filters?.rejectionRemarksType;
 
 	const handleOnClickClearFilter = () => {
-		setFilters((pre) => ({
-			...pre,
-			statusUpdatedDateFrom : undefined,
-			statusUpdatedDateTo   : undefined,
-			rejectionRemarksType  : undefined,
-			updatedDateFrom       : undefined,
-			updatedDateTo         : undefined,
-		}));
+		setFilters({});
 	};
 
 	return (
@@ -47,7 +40,7 @@ function SegmentedFilters({
 						setFilters={setFilters}
 					/>
 				</div>
-				<FilterModal setFilters={setFilters} />
+				<FilterModal setFilters={setFilters} filters={filters} />
 				{showFilterButton ? (
 					<Button
 						className={styled.clear_filter}
