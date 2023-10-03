@@ -42,18 +42,23 @@ const getPayload = ({ eventDetails = {}, values = {}, eventData = {} }) => {
 		yearly_month,
 		yearly_on_date,
 		custom_on_date,
-	});
+	}) || null;
+
+	const isMeetingOneTime = category === 'meeting' && occurence_event !== 'one_time';
 
 	return {
 		validity_start: combineDateAndTime({
-			date : category === 'meeting' ? startDate : start_date,
+			date : isMeetingOneTime ? startDate : start_date,
 			time : start_time,
 		}),
-		start_time      : combineDateAndTime({ time: start_time, date: start_date }),
-		end_time        : combineDateAndTime({ time: end_time, date: end_date }),
-		category        : category === 'event' ? 'reminder' : category,
-		is_important    : mark_important_event,
-		validity_end    : combineDateAndTime({ date: category === 'meeting' ? endDate : end_date, time: end_time }),
+		start_time   : combineDateAndTime({ time: start_time, date: start_date }),
+		end_time     : combineDateAndTime({ time: end_time, date: end_date }),
+		category     : category === 'event' ? 'reminder' : category,
+		is_important : mark_important_event,
+		validity_end : combineDateAndTime({
+			date : isMeetingOneTime ? endDate : end_date,
+			time : end_time,
+		}),
 		description     : remarks,
 		subject         : category === 'event' ? event_type : title,
 		frequency       : category === 'event' ? 'one_time' : occurence_event,
