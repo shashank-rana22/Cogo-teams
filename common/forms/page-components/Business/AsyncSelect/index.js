@@ -78,6 +78,7 @@ import {
 	asyncListSpotSearchRateCardOperators,
 	asyncListLocationClusters,
 	asyncListFclFreightCommodityClusters,
+	asyncListSaasPlan,
 	asyncListEnrichmentSources,
 	asyncAllocationEligibleRoles,
 } from '../../../utils/getAsyncFields';
@@ -176,6 +177,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_organizations_on_call           : asyncFieldsOrganizationOnCall,
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
+	list_saas_plan                       : asyncListSaasPlan,
 	list_enrichment_sources              : asyncListEnrichmentSources,
 	agent_scoring_eligible_roles         : asyncAllocationEligibleRoles,
 };

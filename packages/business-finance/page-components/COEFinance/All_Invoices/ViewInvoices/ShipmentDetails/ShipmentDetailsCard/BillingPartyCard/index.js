@@ -22,7 +22,7 @@ function BillingPartyCard({
 	handleClickReject = () => {},
 	handleClick = () => {},
 	status = '',
-	docContent = '',
+	docContent = {},
 	setCheckItem = () => {},
 	onAccept = () => {},
 	onTabClick = () => {},
@@ -139,7 +139,11 @@ function BillingPartyCard({
 								{' '}
 								<span
 									style={{
-										color: getDetailValueColor({ value: valueText, docContent }),
+										color: getDetailValueColor({
+											detectKey : item?.detectKey,
+											value     : valueText,
+											docContent,
+										}),
 									}}
 								>
 									{valueText}

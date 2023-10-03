@@ -1353,7 +1353,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-communication',
-					title         : t('common:communcation'),
+					title         : t('common:communication'),
 					href          : '/communication',
 					as            : '/communication',
 					type          : 'link',
