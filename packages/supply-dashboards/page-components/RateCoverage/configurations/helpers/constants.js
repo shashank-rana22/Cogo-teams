@@ -241,6 +241,18 @@ export const delayedOptions = [
 	}, { name: 'in_time', value: 'in_time', label: 'In Time' },
 ];
 
+export const filterOption = {
+	fcl_freight     : ['seaport'],
+	lcl_freight     : ['seaport'],
+	air_freight     : ['airport'],
+	fcl_customs     : ['seaport'],
+	lcl_customs     : ['seaport'],
+	air_customs     : ['airport'],
+	haulage_freight : ['pincode', 'seaport'],
+	trailer_freight : ['pincode', 'seaport'],
+	ftl_freight     : ['pincode', 'seaport'],
+};
+
 export const DEFAULT_VALUE = 0;
 export const FIFTY = 50;
 export const SEVENTY_FIVE = 75;

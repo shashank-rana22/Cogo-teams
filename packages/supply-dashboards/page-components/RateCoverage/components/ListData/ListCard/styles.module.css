@@ -25,7 +25,6 @@
 .service_name {
 	margin-right: 10px;
 	font-size: 16px;
-	font-weight: 600;
 	color: #4f4f4f;
 }
 
@@ -45,7 +44,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 40%;
 
 	:global(.ui_button_childeren) {
 		width: max-content;

@@ -37,3 +37,12 @@
 		}
 	}
 }
+
+.body {
+	:global {
+		.ui_modal_body_container {
+			max-height: fit-content;
+			overflow-x: visible;
+		}
+	}
+}

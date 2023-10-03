@@ -53,7 +53,7 @@ function Filter({
 	});
 
 	return (
-		<Modal size="md" show={showFilters} onClose={setShowFilters} placement="right">
+		<Modal size="md" show={showFilters} onClose={() => setShowFilters(!showFilters)} placement="right">
 			<Modal.Header title={(
 				<HeaderComponent
 					setSerialId={setSerialId}
@@ -63,8 +63,9 @@ function Filter({
 			)}
 			/>
 
-			<Modal.Body>
-				{(source === 'rate_feedback' || source === 'rate_request')
+			<div className={styles.body}>
+				<Modal.Body>
+					{(source === 'rate_feedback' || source === 'rate_request')
 				&& (
 					<div className={styles.radio}>
 						{`Total ${source === 'rate_feedback' ? 'Disliked' : 'Missing'} Rates`}
@@ -79,58 +80,58 @@ function Filter({
 						/>
 					</div>
 				)}
-				<div>
-					<p>Service</p>
-					<Select
-						placeholder="select"
-						options={serviceOptions}
-						value={filter?.service}
-						style={{ width: '250px' }}
-						onChange={(value) => {
-							setFilter({
-								service           : value,
-								status            : 'pending',
-								releventToMeValue : true,
-								daily_stats       : true,
-								assign_to_id      : '',
-							});
-							setShowWeekData(false);
-						}}
-					/>
-				</div>
-				<div className={styles.details}>
 					<div>
-						<p>Origin</p>
+						<p>Service</p>
 						<Select
-							placeholder="Country / Port Pair"
-							{...originLocationOptions}
-							value={filter?.origin_location}
+							placeholder="select"
+							options={serviceOptions}
+							value={filter?.service}
 							style={{ width: '250px' }}
-							isClearable
-							onChange={(val) => {
-								setFilter((prevFilters) => ({ ...prevFilters, origin_location: val, page: 1 }));
+							onChange={(value) => {
+								setFilter({
+									service           : value,
+									status            : 'pending',
+									releventToMeValue : true,
+									daily_stats       : true,
+									assign_to_id      : '',
+								});
+								setShowWeekData(false);
 							}}
 						/>
 					</div>
+					<div className={styles.details}>
+						<div>
+							<p>Origin</p>
+							<Select
+								placeholder="Country / Port Pair"
+								{...originLocationOptions}
+								value={filter?.origin_location}
+								style={{ width: '250px' }}
+								isClearable
+								onChange={(val) => {
+									setFilter((prevFilters) => ({ ...prevFilters, origin_location: val, page: 1 }));
+								}}
+							/>
+						</div>
 
-					<div>
-						<p>Destination</p>
-						<Select
-							placeholder="Country / Port Pair"
-							{...destinationLocationOptions}
-							value={filter?.destination_location}
-							isClearable
-							onChange={(val) => {
-								setFilter((prevFilters) => ({
-									...prevFilters,
-									destination_location : val,
-									page                 : 1,
-								}));
-							}}
-						/>
+						<div>
+							<p>Destination</p>
+							<Select
+								placeholder="Country / Port Pair"
+								{...destinationLocationOptions}
+								value={filter?.destination_location}
+								isClearable
+								onChange={(val) => {
+									setFilter((prevFilters) => ({
+										...prevFilters,
+										destination_location : val,
+										page                 : 1,
+									}));
+								}}
+							/>
+						</div>
 					</div>
-				</div>
-				{(source === 'live_bookings' || source === 'rate_feedback' || source === 'rate_request')
+					{(source === 'live_bookings' || source === 'rate_feedback' || source === 'rate_request')
 				&& (
 					<div className={styles.radio}>
 						<div style={{ marginTop: '20px' }}>Entity</div>
@@ -145,7 +146,7 @@ function Filter({
 						/>
 					</div>
 				)}
-				{(source === 'live_bookings')
+					{(source === 'live_bookings')
 					&& (
 						<div className={styles.radio}>
 							<RadioGroup
@@ -170,65 +171,72 @@ function Filter({
 
 						</div>
 					)}
-				{ (source === 'critical_ports' || source === 'expiring_rates' || source === 'cancelled_shipments') && (
-					<div>
-						<div className={styles.details}>
-							<div>
-								<p>{(isAirService) ? 'Air Line' : 'Shipping Line'}</p>
-								<Select
-									placeholder="Search here"
-									{...shippingLineOptions}
-									value={filter?.operater_type}
-									isClearable
-									onChange={(val) => {
-										setFilter((prevFilters) => ({ ...prevFilters, operater_type: val, page: 1 }));
-									}}
-								/>
+					{ (source === 'critical_ports' || source === 'expiring_rates'
+					|| source === 'cancelled_shipments') && (
+						<div>
+							<div className={styles.details}>
+								<div>
+									<p>{(isAirService) ? 'Air Line' : 'Shipping Line'}</p>
+									<Select
+										placeholder="Search here"
+										{...shippingLineOptions}
+										value={filter?.operater_type}
+										isClearable
+										onChange={(val) => {
+											setFilter((prevFilters) => ({
+												...prevFilters,
+												operater_type:
+												val,
+												page: 1,
+											}));
+										}}
+									/>
+								</div>
+								<div>
+									<p>Commodity Type</p>
+									<Select
+										placeholder="Search here"
+										value={filter?.commodity}
+										options={isAirService ? commodityOptions : FCL_COMMODITY_OPTIONS}
+										isClearable
+										onChange={(val) => {
+											setFilter((prevFilters) => ({ ...prevFilters, commodity: val, page: 1 }));
+										}}
+									/>
+								</div>
 							</div>
-							<div>
-								<p>Commodity Type</p>
-								<Select
-									placeholder="Search here"
-									value={filter?.commodity}
-									options={isAirService ? commodityOptions : FCL_COMMODITY_OPTIONS}
-									isClearable
-									onChange={(val) => {
-										setFilter((prevFilters) => ({ ...prevFilters, commodity: val, page: 1 }));
-									}}
-								/>
-							</div>
-						</div>
 
-						<div className={styles.details}>
-							<div>
-								<p>Task Status</p>
-								<Select
-									placeholder="Search here"
-									value={filter?.status}
-									options={taskStatusOptions}
-									onChange={(val) => {
-										setFilter((prevFilters) => ({ ...prevFilters, status: val, page: 1 }));
-									}}
-								/>
-							</div>
-							<div>
-								<p>Date Range</p>
-								<DateRangepicker
-									style={{ width: '250px' }}
-									value={{ startDate: filter?.start_date, endDate: filter?.end_date }}
-									onChange={(val) => {
-										setFilter((prev) => ({
-											...prev, start_date: val?.startDate, end_date: val?.endDate, page: 1,
-										}));
-									}}
-									isPreviousDaysAllowed
-									maxDate={new Date()}
-								/>
+							<div className={styles.details}>
+								<div>
+									<p>Task Status</p>
+									<Select
+										placeholder="Search here"
+										value={filter?.status}
+										options={taskStatusOptions}
+										onChange={(val) => {
+											setFilter((prevFilters) => ({ ...prevFilters, status: val, page: 1 }));
+										}}
+									/>
+								</div>
+								<div>
+									<p>Date Range</p>
+									<DateRangepicker
+										style={{ width: '250px' }}
+										value={{ startDate: filter?.start_date, endDate: filter?.end_date }}
+										onChange={(val) => {
+											setFilter((prev) => ({
+												...prev, start_date: val?.startDate, end_date: val?.endDate, page: 1,
+											}));
+										}}
+										isPreviousDaysAllowed
+										maxDate={new Date()}
+									/>
+								</div>
 							</div>
 						</div>
-					</div>
-				)}
-			</Modal.Body>
+					)}
+				</Modal.Body>
+			</div>
 		</Modal>
 	);
 }

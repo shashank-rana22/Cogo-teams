@@ -12,14 +12,12 @@ function TasksOverview({
 	setShowWeekData = () => {},
 	filter = {},
 	setFilter = () => {},
-	setSource = () => {},
 }) {
 	const handleClick = () => {
 		setFilter((prevFilters) => ({ ...prevFilters, daily_stats: !prevFilters.daily_stats }));
 		setShowWeekData((prev) => !prev);
 	};
 
-	console.log(filter, 'filter:::');
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.swipe_button}>
@@ -34,7 +32,6 @@ function TasksOverview({
 							statsLoading={statsLoading}
 							filter={filter}
 							setFilter={setFilter}
-							setSource={setSource}
 						/>
 					)}
 			</div>

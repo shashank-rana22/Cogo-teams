@@ -49,7 +49,7 @@ function ListCard({
 			|| data?.destination_location
 	)?.name;
 
-	const { sources = [], container_size, container_type, commodity, weight_slabs } = data;
+	const { sources = [], container_size, container_type, commodity, weight_slabs, stacking_type, price_type } = data;
 	const service = filter?.service;
 
 	const ITEM_LIST = [
@@ -57,6 +57,8 @@ function ListCard({
 		{ label: container_size && `${container_size}ft` },
 		{ label: container_type && startCase(container_type) },
 		{ label: weight_slabs && startCase(weight_slabs) },
+		{ label: stacking_type && startCase(stacking_type) },
+		{ label: price_type && `Price Type : ${startCase(price_type)}` },
 	];
 
 	const handleAddRate = () => {
@@ -97,20 +99,17 @@ function ListCard({
 						<div className={styles.top_left_details}>
 							<div className={styles.service_icon}>
 								<div style={{ margin: '5px 5px 0 0' }}>{SERVICE_ICON_MAPPING[service]}</div>
-								<div className={styles.service_name}>{startCase(service?.replace('_freight', ''))}</div>
+								<div className={styles.service_name}>{startCase(service)}</div>
 							</div>
-							<div>
-								<Pill size="md" color="orange">
-									Import
-								</Pill>
-							</div>
-							<div>
-								<Pill size="md" color="blue">
-									Shipping Line :
-									{' '}
-									{data?.shipping_line?.short_name}
-								</Pill>
-							</div>
+							{data?.shipping_line?.short_name && (
+								<div>
+									<Pill size="md" color="blue">
+										{(filter?.service === 'air_freight' || filter?.service === 'air_customs')
+											? 'Air Line:' : 'Shipping Line:'}
+										{data?.shipping_line?.short_name}
+									</Pill>
+								</div>
+							)}
 						</div>
 						<div>
 							<Pill size="md" color="orange">

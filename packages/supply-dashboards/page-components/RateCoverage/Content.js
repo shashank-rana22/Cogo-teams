@@ -98,7 +98,6 @@ function RateCoverageContent() {
 				setShowWeekData={setShowWeekData}
 				filter={filter}
 				setFilter={setFilter}
-				setSource={setSource}
 			/>
 			<ListData
 				data={data}

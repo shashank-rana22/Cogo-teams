@@ -7,6 +7,8 @@ import {
 import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { merge, startCase } from '@cogoport/utils';
 
+import { filterOption } from '../../../../../configurations/helpers/constants';
+
 import airControls from './air-controls';
 import fclControls from './fcl-controls';
 import fclCustomsControls from './fcl-customs';
@@ -16,16 +18,15 @@ import lclControls from './lcl-controls';
 import lclCustomsControls from './lcl-customs-controls';
 import trailerControls from './trailer_control';
 
-const filterOption = {
-	fcl_freight     : ['seaport'],
-	lcl_freight     : ['seaport'],
-	air_freight     : ['airport'],
-	fcl_customs     : ['seaport'],
-	lcl_customs     : ['seaport'],
-	air_customs     : ['airport'],
-	haulage_freight : ['pincode', 'seaport'],
-	trailer_freight : ['pincode', 'seaport'],
-	ftl_freight     : ['pincode', 'seaport'],
+const serviceControlsMap = {
+	fcl_freight     : fclControls,
+	air_freight     : airControls,
+	haulage_freight : haulageControls,
+	fcl_customs     : fclCustomsControls,
+	lcl_freight     : lclControls,
+	lcl_customs     : lclCustomsControls,
+	trailer_freight : trailerControls,
+	ftl_controls    : ftlControls,
 };
 
 const getDefaultValues = (oldfields) => {
@@ -108,77 +109,14 @@ function useControls({
 	const fclCommodityOptions = getCommodityOptions(data?.container_type);
 
 	let CONTROL = [];
-	if (filter?.service === 'fcl_freight') {
-		CONTROL = fclControls({
+	const selectedService = filter?.service;
+	if (selectedService && serviceControlsMap[selectedService]) {
+		CONTROL = serviceControlsMap[selectedService]({
 			data,
 			listShippingLineOptions,
-			originLocationOptions,
-			destinationLocationOptions,
-			fclCommodityOptions,
-		});
-	}
-	if (filter?.service === 'air_freight') {
-		CONTROL = airControls({
-			data,
-			listPartnerUserOptions,
 			user_id,
-			originLocationOptions,
-			destinationLocationOptions,
-			listAirLineOptions,
-		});
-	}
-	if (filter?.service === 'haulage_freight') {
-		CONTROL = haulageControls({
-			data,
 			listPartnerUserOptions,
-			user_id,
-			originLocationOptions,
-			destinationLocationOptions,
 			listAirLineOptions,
-		});
-	}
-	if (filter?.service === 'fcl_customs') {
-		CONTROL = fclCustomsControls({
-			data,
-			listShippingLineOptions,
-			fclCommodityOptions,
-			originLocationOptions,
-			destinationLocationOptions,
-		});
-	}
-	if (filter?.service === 'lcl_freight') {
-		CONTROL = lclControls({
-			data,
-			fclCommodityOptions,
-			originLocationOptions,
-			destinationLocationOptions,
-		});
-	}
-	if (filter?.service === 'fcl_customs') {
-		CONTROL = fclCustomsControls({
-			data,
-			fclCommodityOptions,
-			originLocationOptions,
-		});
-	}
-	if (filter?.service === 'lcl_customs') {
-		CONTROL = lclCustomsControls({
-			data,
-			fclCommodityOptions,
-			originLocationOptions,
-		});
-	}
-	if (filter?.service === 'trailer_freight') {
-		CONTROL = trailerControls({
-			data,
-			fclCommodityOptions,
-			originLocationOptions,
-			destinationLocationOptions,
-		});
-	}
-	if (filter?.service === 'ftlControls') {
-		CONTROL = ftlControls({
-			data,
 			fclCommodityOptions,
 			originLocationOptions,
 			destinationLocationOptions,

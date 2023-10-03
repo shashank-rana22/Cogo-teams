@@ -1,7 +1,7 @@
 import { Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import React from 'react';
+import { startCase } from '@cogoport/utils';
 
 import { SERVICE_ICON_MAPPING } from '../../../../configurations/helpers/constants';
 
@@ -13,7 +13,7 @@ function CardContent({ data = {}, filter = {}, service = {} }) {
 			<div className={styles.top_left_details}>
 				<div className={styles.service_icon}>
 					<div style={{ margin: '5px 5px 0 0' }}>{SERVICE_ICON_MAPPING[service]}</div>
-					<div>{service}</div>
+					<div>{startCase(service)}</div>
 				</div>
 				<div className={styles.vertical_line} />
 				<div>
@@ -22,7 +22,6 @@ function CardContent({ data = {}, filter = {}, service = {} }) {
 						{data?.shipping_line?.short_name || data?.airline?.short_name}
 					</Pill>
 				</div>
-				s
 				<div className={styles.vertical_line} />
 				<div>
 					{data?.service_provider?.business_name || data?.service_provider?.name}
