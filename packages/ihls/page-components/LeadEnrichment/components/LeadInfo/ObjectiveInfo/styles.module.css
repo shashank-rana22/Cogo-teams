@@ -11,7 +11,6 @@
 }
 
 .tableContainer {
-	/* width: 1000px; */
 	overflow-x: scroll;
 }
 
@@ -38,4 +37,10 @@
 
 .list_header {
 	margin-left: 36px;
+}
+
+.modal_header {
+	display: flex;
+	gap: 8px;
+	align-items: center;
 }

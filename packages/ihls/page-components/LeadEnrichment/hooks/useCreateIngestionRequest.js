@@ -5,19 +5,23 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
-const useCreateEnrichmentRequest = (props) => {
+const useCreateIngestionRequest = (props) => {
 	const {
 		profile: {
 			user: {
-				id: performed_by_id = '',
+				id: user_id = '',
+			},
+			partner: {
+				partner_user_id,
 			},
 		},
 	} = useSelector((rdxState) => rdxState);
+
 	const { onCloseModal, params: listParams = {}, checkedRowsId = [] } = props;
 	const [params, setParams] = useState({});
 
 	const api = useRequest({
-		url    : '/create_enrichment_request',
+		url    : '/create_ingestion_request_platform',
 		method : 'post',
 	}, { manual: true });
 	const [{ loading }, trigger] = api;
@@ -27,22 +31,32 @@ const useCreateEnrichmentRequest = (props) => {
 	const onSave = async (formValues) => {
 		const {
 			mode,
-			name,
-			constraints,
+			file_name,
+			description,
+			ingestion_partner_id,
+			account_type,
+			agent_id,
 			select_first,
-			enrichment_source_id,
 		} = formValues || {};
 
 		const payloadMode = mode === 'select_first' ? 'api_call' : mode;
 
+		const is_channel_partner = account_type === 'channel_partner';
+
+		const formatted_account_type = account_type === 'service_provider' ? 'service_provider' : 'importer_exporter';
+
 		try {
 			const payload = {
+				file_name,
+				ingestion_partner_id,
+				user_id,
+				partner_user_id,
+				agent_id,
+				is_channel_partner,
+				ingestion_type    : 'lead',
 				mode              : payloadMode,
-				name,
-				constraints,
-				enrichment_source_id,
-				performed_by_id,
-				performed_by_type : 'admin',
+				description       : description || undefined,
+				account_type      : formatted_account_type,
 				list_lead_filters : {
 					...listParams.filters,
 					allocation_lead_ids : mode === 'checked' ? checkedRowsId : undefined,
@@ -54,11 +68,11 @@ const useCreateEnrichmentRequest = (props) => {
 
 			onCloseModal();
 			reset();
-			Toast.success('Enrichment request raised successfully!');
+			Toast.success('Ingestion request raised successfully!');
 		} catch (err) {
 			Toast.error(
 				getApiErrorString(err?.response?.data)
-					|| 'enrichment: save_error_default',
+					|| 'ingestion: save_error_default',
 			);
 		}
 	};
@@ -91,4 +105,4 @@ const useCreateEnrichmentRequest = (props) => {
 	};
 };
 
-export default useCreateEnrichmentRequest;
+export default useCreateIngestionRequest;
