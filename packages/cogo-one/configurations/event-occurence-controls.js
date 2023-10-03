@@ -1,7 +1,4 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import { addDays } from '@cogoport/utils';
-
-// const ADD_DAY = 1;
 
 const eventOccurenceControls = {
 	daily: [
@@ -21,7 +18,6 @@ const eventOccurenceControls = {
 			name                  : 'end_date',
 			isClearable           : true,
 			minDate               : new Date(),
-			// maxDate               : addDays(new Date(), ADD_DAY),
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			showTimeSelect        : false,
 			isPreviousDaysAllowed : false,
@@ -50,13 +46,13 @@ const eventOccurenceControls = {
 			multiple    : true,
 			rules       : { required: '*required' },
 			options     : [
-				{ label: 'Sunday', value: 1 },
-				{ label: 'Monday', value: 2 },
-				{ label: 'Tuesday', value: 3 },
-				{ label: 'Wednesday', value: 4 },
-				{ label: 'Thursday', value: 5 },
-				{ label: 'Friday', value: 6 },
-				{ label: 'Saturday', value: 7 },
+				{ label: 'Sunday', value: 'sunday' },
+				{ label: 'Monday', value: 'monday' },
+				{ label: 'Tuesday', value: 'tuesday' },
+				{ label: 'Wednesday', value: 'wednesday' },
+				{ label: 'Thursday', value: 'thursday' },
+				{ label: 'Friday', value: 'friday' },
+				{ label: 'Saturday', value: 'saturday' },
 			],
 		},
 		{
@@ -64,7 +60,6 @@ const eventOccurenceControls = {
 			name                  : 'end_date',
 			isClearable           : true,
 			minDate               : new Date(),
-			// maxDate               : addDays(new Date(), ADD_DAY),
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			showTimeSelect        : false,
 			isPreviousDaysAllowed : false,
@@ -102,7 +97,6 @@ const eventOccurenceControls = {
 			name                  : 'end_date',
 			isClearable           : true,
 			minDate               : new Date(),
-			// maxDate               : addDays(new Date(), ADD_DAY),
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			showTimeSelect        : false,
 			isPreviousDaysAllowed : false,
@@ -169,7 +163,6 @@ const eventOccurenceControls = {
 			name                  : 'end_date',
 			isClearable           : true,
 			minDate               : new Date(),
-			// maxDate               : addDays(new Date(), ADD_DAY),
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			showTimeSelect        : false,
 			isPreviousDaysAllowed : false,
@@ -223,7 +216,6 @@ const eventOccurenceControls = {
 			name                  : 'end_date',
 			isClearable           : true,
 			minDate               : new Date(),
-			// maxDate               : addDays(new Date(), ADD_DAY),
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			showTimeSelect        : false,
 			isPreviousDaysAllowed : false,

@@ -66,7 +66,9 @@ function CreateEvent({
 	});
 
 	const formValues = watch();
+
 	const { category = '', event_type: eventType = '' } = eventDetails || {};
+
 	const { createEvent = () => {}, loading = false } = useCreateCogooneCalendar({
 		setEventDetails,
 		eventDetails,
@@ -86,7 +88,7 @@ function CreateEvent({
 	} = controls;
 
 	const handleEvents = (values) => {
-		createEvent({ values, eventData, type: 'meeting' });
+		createEvent({ values, eventData });
 	};
 
 	useEffect(() => {

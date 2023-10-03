@@ -1,7 +1,10 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { addDays } from '@cogoport/utils';
 
 import SelectableAgentsUserCard from '../common/SelectableAgentsUserCard';
 
+const ADD_DAY = 1;
+const NEW_DATE = new Date();
 const EVENTS_ROWS = 2;
 const MEETINGS_ROWS = 5;
 
@@ -9,7 +12,7 @@ const scheduleEvents = ({ orgId = '', category = '' }) => ({
 	start_date: {
 		name        : 'start_date',
 		isClearable : true,
-		minDate     : new Date(),
+		minDate     : NEW_DATE,
 		placeholder : 'Start Date',
 		dateFormat  : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 	},
@@ -20,7 +23,8 @@ const scheduleEvents = ({ orgId = '', category = '' }) => ({
 	end_date: {
 		name        : 'end_date',
 		placeholder : 'End Date',
-		minDate     : new Date(),
+		minDate     : NEW_DATE,
+		maxDate     : addDays(NEW_DATE, ADD_DAY),
 		dateFormat  : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 	},
 	end_time: {

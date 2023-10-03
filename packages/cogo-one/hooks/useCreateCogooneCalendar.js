@@ -9,6 +9,7 @@ import {
 	getWeeklyRecurrence,
 	getYearlyRecurrence,
 } from '../helpers/formatFreqCalendarPayload';
+import combineDateAndTime from '../utils/combineDateAndTime';
 
 const RECURRENCE_RULE_MAPPING = {
 	daily   : getDailyRecurrence,
@@ -18,7 +19,7 @@ const RECURRENCE_RULE_MAPPING = {
 	custom  : getCustomRecurrence,
 };
 
-const getPayload = ({ eventDetails = {}, values = {}, eventData = {}, type = '' }) => {
+const getPayload = ({ eventDetails = {}, values = {}, eventData = {} }) => {
 	const { category = '', event_type = '' } = eventDetails || {};
 	const {
 		end_date = '', end_time = '', mark_important_event = false, organization_id = '',
@@ -41,17 +42,18 @@ const getPayload = ({ eventDetails = {}, values = {}, eventData = {}, type = '' 
 		yearly_month,
 		yearly_on_date,
 		custom_on_date,
-		startDate,
-		endDate,
 	});
 
 	return {
-		validity_start  : type !== 'meeting' ? start_date : undefined,
-		start_time,
-		end_time,
+		validity_start: combineDateAndTime({
+			date : category === 'meeting' ? startDate : start_date,
+			time : start_time,
+		}),
+		start_time      : combineDateAndTime({ time: start_time, date: start_date }),
+		end_time        : combineDateAndTime({ time: end_time, date: end_date }),
 		category        : category === 'event' ? 'reminder' : category,
 		is_important    : mark_important_event,
-		validity_end    : type !== 'meeting' ? end_date : undefined,
+		validity_end    : combineDateAndTime({ date: category === 'meeting' ? endDate : end_date, time: end_time }),
 		description     : remarks,
 		subject         : category === 'event' ? event_type : title,
 		frequency       : occurence_event,
@@ -75,12 +77,12 @@ const useCreateCogooneCalendar = ({
 		url    : '/create_cogoone_calendar',
 	}, { manual: true });
 
-	const createEvent = async ({ values = {}, eventData = {}, type = '' }) => {
+	const createEvent = async ({ values = {}, eventData = {} }) => {
 		const startDate = moment(month).startOf('month').toDate();
 		const endDate = moment(month).endOf('month').toDate();
 
 		try {
-			const payload = getPayload({ eventDetails, values, eventData, type });
+			const payload = getPayload({ eventDetails, values, eventData });
 			await trigger({ data: payload });
 			setEventDetails({
 				category   : 'event',
