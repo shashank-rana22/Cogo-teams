@@ -1,5 +1,5 @@
 import { useSelector } from '@cogoport/store';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 
 import Activity from '../../../common/Activity';
 import IncentiveSnapshot from '../../../common/IncentiveSnapshot';
@@ -17,6 +17,8 @@ function RightPanel(props) {
 		graph_data: scoringGraphData = {},
 		rank_data: rankData = {},
 	} = data || {};
+
+	const { across_user_in_entity: { current_user_rank = 0, total_report_count = 0 } = {} } = rankData || {};
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 
@@ -41,35 +43,25 @@ function RightPanel(props) {
 						<div>{HEADING}</div>
 					</div>
 
-					{Object.entries(rankData)?.map(([label, value]) => {
-						const { current_user_rank, total_report_count } = value || {};
-
-						if (isEmpty(value)) return null;
-
-						return (
-							<div className={styles.rank_item} key={label}>
-								<p className={styles.label}>
-									{startCase(label)}
-									{' '}
-									:
-									{' '}
-									<span>
-										{current_user_rank}
-										{' '}
-										/
-										{' '}
-										{total_report_count}
-									</span>
-
-								</p>
-							</div>
-						);
-					})}
-
+					{ current_user_rank ? (
+						<p className={styles.label}>
+							Across User In Entity
+							{' '}
+							:
+							{' '}
+							<span>
+								{current_user_rank}
+								{' '}
+								/
+								{' '}
+								{total_report_count}
+							</span>
+						</p>
+					) : null}
 				</div>
 			)}
 
-			<RankingAndScoring rankData={rankData} scoringGraphData={scoringGraphData} />
+			<RankingAndScoring scoringGraphData={scoringGraphData} />
 
 			<IncentiveSnapshot
 				userIncentiveData={userIncentiveData}
