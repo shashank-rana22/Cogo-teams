@@ -47,7 +47,7 @@ function ListCard({
 		loading: feedback_loading,
 	}	= 	useListFreightRateFeedBacks({ source_id, filter });
 
-	const originCode = (origin_port || origin_airport || port || origin_location)?.port_code;
+	const originCode = (origin_port || origin_airport || port || origin_location || location)?.port_code;
 
 	const originName = (origin_port || origin_airport || port || origin_location || location || airport)?.name;
 
@@ -149,45 +149,60 @@ function ListCard({
 			<div className={styles.footer}>
 				<div className={styles.port_details}>
 					<div className={styles.row}>
-						<Tooltip
-							content={(
-								<div>
-									{originName}
-								</div>
-							)}
-							placement="top"
-						>
-							<p className={styles.port_name}>
-								<div className={styles.column}>
-									<p className={styles.port_code_color}>
-										&#40;
-										{originCode}
-										&#41;
+						{originName
+						&& (
+							<Tooltip
+								content={(
+									<div>
+										{originName}
+									</div>
+								)}
+								placement="top"
+							>
+								<p className={styles.port_name}>
+									<div className={styles.column}>
+										{originCode
+											&& (
+												<p className={styles.port_code_color}>
+													&#40;
+													{originCode}
+													&#41;
+												</p>
+											)}
+										<p>{originName}</p>
+									</div>
+								</p>
+							</Tooltip>
+						)}
+
+						{destinationName
+						&& (
+							<>
+								<IcMPortArrow style={{ margin: '0 100' }} />
+								<Tooltip
+									content={(
+										<div>
+											{destinationName}
+										</div>
+									)}
+									placement="top"
+								>
+									<p className={styles.port_name}>
+										<div className={styles.column}>
+											{destinationCode
+											&& (
+												<p className={styles.port_code_color}>
+													&#40;
+													{destinationCode}
+													&#41;
+												</p>
+											)}
+											<p>{destinationName}</p>
+										</div>
 									</p>
-									<p>{originName}</p>
-								</div>
-							</p>
-						</Tooltip>
-						<IcMPortArrow style={{ margin: '0 100' }} />
-						<Tooltip
-							content={(
-								<div>
-									{destinationName}
-								</div>
-							)}
-							placement="top"
-						>
-							<p className={styles.port_name}>
-								<div className={styles.column}>
-									<p className={styles.port_code_color}>
-										&#40;
-										{destinationCode}
-										&#41;
-									</p>
-									<p>{destinationName}</p>
-								</div>
-							</p>
-						</Tooltip>
+								</Tooltip>
+							</>
+						)}
 						<div className={styles.line} />
 					</div>
 				</div>
@@ -205,7 +220,6 @@ function ListCard({
 										</Pill>
 									)}
 								</div>
-
 							))}
 						</div>
 						{!isEmpty(sources) && (
