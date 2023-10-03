@@ -29,9 +29,7 @@ const useGetFclFreightRateTrends = ({ filters }) => {
 
 	useEffect(() => {
 		const params = getFormattedPayload(filters);
-		if (service_type === 'fcl') {
-			getTrends(params);
-		}
+		getTrends(params);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(filters), getTrends]);
 

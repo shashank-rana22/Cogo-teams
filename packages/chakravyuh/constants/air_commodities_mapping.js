@@ -27,8 +27,8 @@ export const PARENT_RATE_MODE_OPTIONS = [
 		label : 'Predicted',
 	},
 	{
-		value : 'Disliked Rate',
-		label : 'disliked_rate',
+		value : 'disliked_rate',
+		label : 'Disliked Rate',
 	},
 ];
 

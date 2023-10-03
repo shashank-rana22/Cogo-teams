@@ -18,14 +18,14 @@ const MAX_BOUNDS = [
 	[MAX_LNG, MAX_LAT]];
 
 export const COLORS = [
-	'#011b18',
-	'#01261f',
-	'#07492a',
-	'#166d30',
-	'#31a353',
-	'#78c679',
-	'#addd8e',
 	'#d8f0a3',
+	'#addd8e',
+	'#78c679',
+	'#31a353',
+	'#166d30',
+	'#07492a',
+	'#01261f',
+	'#011b18',
 ];
 
 function BirdsEyeView({ countMapping = {}, maxCount = 0, minCount = 0, loading = false }) {
