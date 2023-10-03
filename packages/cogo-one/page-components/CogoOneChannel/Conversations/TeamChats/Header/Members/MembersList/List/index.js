@@ -10,17 +10,21 @@ function EachMember({
 	eachPerson = {},
 	isDraft = false,
 	hasPermissionToEdit = false,
-	updateCogooneGroup = () => {},
 	loading = false,
+	updateGroup = () => {},
+	loggedInAgentId = '',
 }) {
 	const {
 		partner = {},
 		name :draftName = '',
 		user_id = '',
+		id :draftUserId = '',
 	} = eachPerson || {};
 	const { name = '' } = partner || {};
 
 	const formattedName = startCase(isDraft ? draftName : name);
+
+	const modifiedUserId = isDraft ? draftUserId : user_id;
 
 	return (
 		<div className={styles.each_member}>
@@ -34,12 +38,12 @@ function EachMember({
 					{startCase(formattedName)}
 				</div>
 			</div>
-			{(!isDraft && hasPermissionToEdit) ? (
+			{ (hasPermissionToEdit && loggedInAgentId !== modifiedUserId) ? (
 				<IcMCross
 					className={styles.cross_styles}
 					style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
 					onClick={() => {
-						updateCogooneGroup({ actionName: 'REMOVE_FROM_GROUP', userIds: [user_id] });
+						updateGroup({ userId: modifiedUserId });
 					}}
 				/>
 			) : null}
@@ -51,8 +55,9 @@ function List({
 	membersList = [],
 	isDraft = false,
 	hasPermissionToEdit = false,
-	updateCogooneGroup = () => {},
 	loading = false,
+	updateGroup = () => {},
+	loggedInAgentId = '',
 }) {
 	return (
 		<div className={styles.list}>
@@ -62,8 +67,9 @@ function List({
 					eachPerson={eachPerson}
 					isDraft={isDraft}
 					hasPermissionToEdit={hasPermissionToEdit}
-					updateCogooneGroup={updateCogooneGroup}
 					loading={loading}
+					updateGroup={updateGroup}
+					loggedInAgentId={loggedInAgentId}
 				/>
 			))}
 		</div>

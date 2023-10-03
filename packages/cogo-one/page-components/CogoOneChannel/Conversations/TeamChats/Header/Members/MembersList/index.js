@@ -13,19 +13,40 @@ function MembersList({
 	hasPermissionToEdit = false,
 	loggedInUserId = '',
 	loading = false,
+	updateDraftLocalCogooneGroup = () => {},
+	loggedInAgentId = '',
 }) {
 	const { is_draft = false, group_members_data = [] } = activeTeamCard || {};
+	console.log('activeTeamCard', activeTeamCard);
 
 	const modifiedMembersList = is_draft ? group_members_data : membersList;
+
+	const updateGroup = ({ userId = '' }) => {
+		if (is_draft) {
+			updateDraftLocalCogooneGroup(
+				{
+					actionName : 'REMOVE_FROM_GROUP',
+					userIds    : [userId],
+				},
+			);
+			return;
+		}
+
+		updateCogooneGroup({
+			actionName : 'REMOVE_FROM_GROUP',
+			userIds    : [userId],
+		});
+	};
 
 	return (
 		<>
 			<List
 				membersList={modifiedMembersList}
 				isDraft={is_draft}
-				updateCogooneGroup={updateCogooneGroup}
 				hasPermissionToEdit={hasPermissionToEdit}
 				loading={loading}
+				updateGroup={updateGroup}
+				loggedInAgentId={loggedInAgentId}
 			/>
 			<div className={styles.footer_buttons}>
 				<Button
@@ -33,7 +54,7 @@ function MembersList({
 					themeType="tertiary"
 					className={styles.button_styles}
 					onClick={() => setAddMembers(true)}
-					disabled={is_draft}
+					disabled={!hasPermissionToEdit || loading}
 				>
 					<Image
 						src={GLOBAL_CONSTANTS.image_url.groups}
@@ -41,7 +62,6 @@ function MembersList({
 						width={22}
 						height={20}
 						className={styles.image_styles}
-						disabled={hasPermissionToEdit || loading}
 					/>
 					<div className={styles.button_text}>Add People</div>
 				</Button>
@@ -50,12 +70,7 @@ function MembersList({
 						size="md"
 						themeType="tertiary"
 						className={styles.button_styles}
-						onClick={() => {
-							updateCogooneGroup({
-								actionName : 'REMOVE_FROM_GROUP',
-								userIds    : [loggedInUserId],
-							});
-						}}
+						onClick={() => updateGroup({ userId: loggedInUserId })}
 						disabled={loading}
 					>
 						<Image

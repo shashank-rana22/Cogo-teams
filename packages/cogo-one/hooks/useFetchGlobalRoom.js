@@ -36,7 +36,7 @@ function mountActiveRoomSnapShot({
 
 				const lastGroupUpdatedAt = newDocData?.last_group_updated_at || FALLBACK;
 
-				if (newDocData?.is_group && ((lastGroupUpdatedAt > PrevLastGroupUpdatedAt))) {
+				if (newDocData?.is_group && PrevLastGroupUpdatedAt && (lastGroupUpdatedAt > PrevLastGroupUpdatedAt)) {
 					listCogooneGroupMembers();
 				}
 

@@ -60,7 +60,7 @@ function useSendTeamsMessage({
 			});
 			cleanUpFunc();
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			Toast.error(getApiErrorString(error?.response?.data) || 'Something Went Wrong');
 		} finally {
 			setLoading(false);
 		}

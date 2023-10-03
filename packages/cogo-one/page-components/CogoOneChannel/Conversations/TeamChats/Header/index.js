@@ -1,15 +1,13 @@
 import { ButtonGroup, Popover, Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import { BUTTON_GROUP_OPTIONS } from '../../../../../constants/teamsHeaderMappings';
 
 import Members from './Members';
 import styles from './styles.module.css';
 import ToUser from './ToUsers';
-
-const ZERO_USERS = 0;
 
 function Header({
 	activeTeamCard = {},
@@ -22,15 +20,15 @@ function Header({
 	loggedInUserId = '',
 }) {
 	const {
-		group_members_count = 0,
 		is_draft = false,
 		is_group: isGroup = false,
 		search_name = '',
 		id = '',
 		group_id = '',
+		group_members_ids = [],
 	} = activeTeamCard || {};
 
-	const newDraft = !(group_members_count > ZERO_USERS);
+	const newDraft = isEmpty(group_members_ids);
 
 	if (is_draft && newDraft) {
 		return (
@@ -75,6 +73,8 @@ function Header({
 									activeTab={activeTab}
 									hasPermissionToEdit={hasPermissionToEdit}
 									loggedInUserId={loggedInUserId}
+									firestore={firestore}
+									isDraft={is_draft}
 								/>
 							)}
 							caret={false}
@@ -88,7 +88,10 @@ function Header({
 								className={styles.image_styles}
 							/>
 						</Popover>
-						<div className={styles.count}>{membersList?.length || ''}</div>
+						<div className={styles.count}>
+							{is_draft
+								? group_members_ids?.length : membersList?.length || ''}
+						</div>
 					</>
 				) : null}
 				<ButtonGroup

@@ -36,7 +36,7 @@ function useUpdateCogooneGroup({ activeTab = {}, setAddMembers = () => {} }) {
 
 	return {
 		updateCogooneGroup,
-		loading,
+		globalLoading: loading,
 	};
 }
 

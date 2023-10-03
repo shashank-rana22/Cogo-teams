@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import useUpdateCogooneGroup from '../../../../../../hooks/useUpdateCogooneGroup';
+import useUpdateDraftLocalCogooneGroup from '../../../../../../hooks/useUpdateDraftLocalCogooneGroup';
 
 import AddMembers from './AddMembers';
 import MembersList from './MembersList';
@@ -13,10 +14,23 @@ function Members({
 	activeTab = {},
 	hasPermissionToEdit = false,
 	loggedInUserId = '',
+	firestore = {},
+	isDraft = false,
 }) {
 	const [addMembers, setAddMembers] = useState(false);
 
-	const { updateCogooneGroup = () => {}, loading = false } = useUpdateCogooneGroup({ activeTab, setAddMembers });
+	const {
+		updateCogooneGroup = () => {},
+		globalLoading = false,
+	} = useUpdateCogooneGroup({ activeTab, setAddMembers });
+
+	const {
+		updateDraftLocalCogooneGroup,
+		draftUpdateLoading = false,
+		loggedInAgentId = '',
+	} = useUpdateDraftLocalCogooneGroup({ activeTab, setAddMembers, firestore });
+
+	const loading = isDraft ? draftUpdateLoading : globalLoading;
 
 	return (
 		<div className={styles.container}>
@@ -26,6 +40,8 @@ function Members({
 					setAddMembers={setAddMembers}
 					updateCogooneGroup={updateCogooneGroup}
 					loading={loading}
+					updateDraftLocalCogooneGroup={updateDraftLocalCogooneGroup}
+					isDraft={isDraft}
 				/>
 			) : (
 				<MembersList
@@ -36,6 +52,8 @@ function Members({
 					hasPermissionToEdit={hasPermissionToEdit}
 					loggedInUserId={loggedInUserId}
 					loading={loading}
+					updateDraftLocalCogooneGroup={updateDraftLocalCogooneGroup}
+					loggedInAgentId={loggedInAgentId}
 				/>
 			)}
 		</div>

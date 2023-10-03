@@ -15,7 +15,7 @@ function SingleMemberView({ groupMembersData = [], status = '' }) {
 
 	const { name = '', partner = {} } = otherActiveMemberData || {};
 	const { name: userName = '', roles_data = [], department = '' } = partner || {};
-	const { name: roleName = '' } = roles_data[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const { name: roleName = '' } = roles_data?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { name: adminName = '', partner : partnerData = '' } = loginUserData || {};
 	const { name: loggedAdminName = '' } = partnerData || {};

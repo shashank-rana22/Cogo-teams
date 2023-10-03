@@ -13,9 +13,31 @@ function AddMembers({
 	setAddMembers = () => {},
 	updateCogooneGroup = () => {},
 	loading = false,
+	updateDraftLocalCogooneGroup = () => {},
+	isDraft = false,
 }) {
-	const [selectedMembers, setSelectedMembers] = useState([]);
+	const [selectedMembersData, setSelectedMembersData] = useState({ userIds: [], userIdsData: [] });
+
+	const selectedMembers = selectedMembersData?.userIds;
+
 	const isNoSelectedUsers = isEmpty(selectedMembers);
+
+	const updateGroup = () => {
+		if (isDraft) {
+			updateDraftLocalCogooneGroup(
+				{
+					actionName  : 'ADD_TO_GROUP',
+					userIds     : selectedMembers,
+					userIdsData : selectedMembersData?.userIdsData,
+				},
+			);
+			return;
+		}
+
+		updateCogooneGroup(
+			{ actionName: 'ADD_TO_GROUP', userIds: selectedMembers },
+		);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -27,7 +49,9 @@ function AddMembers({
 				multiple
 				value={selectedMembers}
 				placeholder="Enter a name or email"
-				onChange={setSelectedMembers}
+				onChange={(val, obj) => {
+					setSelectedMembersData({ userIds: val, userIdsData: obj });
+				}}
 				isClearable
 				asyncKey="list_chat_agents"
 				initialCall
@@ -57,11 +81,7 @@ function AddMembers({
 					size="md"
 					themeType="primary"
 					loading={loading}
-					onClick={() => {
-						updateCogooneGroup(
-							{ actionName: 'ADD_TO_GROUP', userIds: selectedMembers },
-						);
-					}}
+					onClick={updateGroup}
 				>
 					Add
 				</Button>

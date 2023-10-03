@@ -249,7 +249,6 @@ function CogoOne() {
 										orgId={orgId}
 										mailProps={mailProps}
 										chatsConfig={activeTab}
-										listCogooneGroupMembers={listCogooneGroupMembers}
 										membersList={membersList}
 									/>
 									{(hasNoFireBaseRoom && !user_id && !lead_user_id)

@@ -17,18 +17,13 @@ import useHashFunction from './useHashFunction';
 
 const LIMIT = 1;
 
-const SELF_COUNT = 1;
+const GROUP_COUNT_MIN = 1;
 
-const GROUP_COUNT_MIN = 2;
-
-async function getExistingGlobalRoom({
-	length = 0, firestore = {}, loggedInAgendId, groupMembersHashString = '',
-}) {
+async function getExistingGlobalRoom({ firestore = {}, loggedInAgendId, groupMembersHashString = '' }) {
 	const internalRoomsCollection = collection(firestore, FIRESTORE_PATH.internal_rooms);
 
 	const collectionQuery = query(
 		internalRoomsCollection,
-		where('group_members_count', '==', length),
 		where('group_members_hash_string', '==', groupMembersHashString),
 		orderBy('new_message_sent_at', 'desc'),
 		limit(LIMIT),
@@ -50,7 +45,6 @@ async function getExistingGlobalRoom({
 }
 
 async function getExistingDraftRoom({
-	length = 0,
 	firestore = {},
 	loggedInAgendId = '',
 	groupMembersHashString = '',
@@ -60,7 +54,6 @@ async function getExistingDraftRoom({
 	const collectionQuery = query(
 		selfInternalRoomsCollection,
 		where('is_draft', '==', true),
-		where('group_members_count', '==', length),
 		where('group_members_hash_string', '==', groupMembersHashString),
 		orderBy('created_at', 'desc'),
 		limit(LIMIT),
@@ -101,7 +94,6 @@ async function createDraftRoom({
 		group_id                  : null,
 		new_message_sent_at       : Date.now(),
 		self_has_unread_messages  : false,
-		group_members_count       : length,
 		is_group                  : isGroup,
 		search_name               : searchName?.toUpperCase(),
 		group_members_hash_string : groupMembersHashString,
@@ -137,8 +129,6 @@ function useCreateOrGetDraftTeamRoom({
 	};
 
 	const createOrGetDraftTeamRoom = async ({ userIds = [], userIdsData = [], groupName = '' }) => {
-		const userIdsLength = userIds.length + SELF_COUNT;
-
 		setLoading(true);
 
 		const modifiedUserIdsData = [...userIdsData, {
@@ -151,7 +141,7 @@ function useCreateOrGetDraftTeamRoom({
 
 		try {
 			const globalRoomData = await getExistingGlobalRoom(
-				{ userIds: modifiedUserIds, length: userIdsLength, firestore, loggedInAgendId, groupMembersHashString },
+				{ userIds: modifiedUserIds, firestore, loggedInAgendId, groupMembersHashString },
 			);
 
 			if (globalRoomData?.group_id) {
@@ -160,7 +150,7 @@ function useCreateOrGetDraftTeamRoom({
 			}
 
 			const draftRoomData = await getExistingDraftRoom(
-				{ userIds: modifiedUserIds, length: userIdsLength, firestore, loggedInAgendId, groupMembersHashString },
+				{ userIds: modifiedUserIds, firestore, loggedInAgendId, groupMembersHashString },
 			);
 
 			if (draftRoomData?.id) {
@@ -168,7 +158,7 @@ function useCreateOrGetDraftTeamRoom({
 				return;
 			}
 
-			if (!groupName && userIdsLength > GROUP_COUNT_MIN) {
+			if (!groupName && userIds?.length > GROUP_COUNT_MIN) {
 				setShowGroupError(true);
 				return;
 			}
@@ -178,18 +168,17 @@ function useCreateOrGetDraftTeamRoom({
 				userIdsData : modifiedUserIdsData,
 				firestore,
 				loggedInAgendId,
-				length      : userIdsLength,
 				groupMembersHashString,
 				groupName,
 			});
 
 			setActiveRoom({ val: res });
+			setShowGroupError(false);
 		} catch (e) {
 			console.error('e', e);
 			Toast.error('Something Went Wrong');
 		} finally {
 			setLoading(false);
-			setShowGroupError(false);
 		}
 	};
 

@@ -1,37 +1,25 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
-
-import { getPublishRoomPayload } from '../helpers/cogooneGroupPayloadHelper';
 
 const getPayload = ({
 	activeTab = {},
-	loggedInAgentId = '',
 }) => {
-	const payloadData = getPublishRoomPayload({
-		activeTab,
-		loggedInAgentId,
-	});
-
 	const { data = {} } = activeTab || {};
 
 	const {
 		group_members_ids = [],
-		search_name = 'Draft Name',
+		search_name = '',
+		id = '',
 	} = data || {};
 
 	return {
-		name        : search_name,
-		users       : group_members_ids,
-		action_name : 'add_to_group',
-		metadata    : {
-			data: payloadData,
-		},
+		name           : search_name,
+		users          : group_members_ids,
+		action_name    : 'add_to_group',
+		draft_group_id : id,
 	};
 };
 
 function useCreateCogooneGroups({ activeTab = {} }) {
-	const loggedInAgentId = useSelector(({ profile }) => profile?.user?.id);
-
 	const [, trigger] = useRequest({
 		url    : '/update_cogoone_groups',
 		method : 'post',
@@ -49,7 +37,7 @@ function useCreateCogooneGroups({ activeTab = {} }) {
 		}
 
 		const res = await trigger({
-			data: getPayload({ activeTab, loggedInAgentId }),
+			data: getPayload({ activeTab }),
 		});
 
 		return res?.data?.id;

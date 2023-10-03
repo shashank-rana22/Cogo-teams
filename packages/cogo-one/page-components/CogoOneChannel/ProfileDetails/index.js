@@ -29,7 +29,6 @@ function ProfileDetails({
 	orgId = '',
 	mailProps = {},
 	chatsConfig = {},
-	listCogooneGroupMembers = () => {},
 	membersList = [],
 }) {
 	const customerId = (FIREBASE_TABS.includes(activeTab) ? activeMessageCard : activeVoiceCard)?.id;
@@ -111,7 +110,6 @@ function ProfileDetails({
 							userData={(getUserLoading || !customerUserId) ? {} : userData}
 							getUserLoading={getUserLoading}
 							organizationData={organizationData}
-							listCogooneGroupMembers={listCogooneGroupMembers}
 							membersList={membersList}
 						/>
 					)}
