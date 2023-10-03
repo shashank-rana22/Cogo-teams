@@ -1,4 +1,4 @@
-import convertMinutestoHours from '../../../../../../../../../utils/convertMinutestoHours';
+import convertMinutesToHoursOrDays from '../../../../../../../../../utils/convertMinutesToHoursOrDays';
 
 import styles from './styles.module.css';
 
@@ -8,7 +8,7 @@ function JourneyLine({
 	return (
 		<div className={styles.container}>
 			<span className={styles.transit_time}>
-				{convertMinutestoHours(scheduleData?.transit_time)}
+				{convertMinutesToHoursOrDays(scheduleData?.transit_time)}
 			</span>
 
 			<span className={styles.journey_line}>
