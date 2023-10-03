@@ -32,7 +32,6 @@ function ListData({
 }) {
 	const [serialId, setSerialId] = useState('');
 	const [showFilters, setShowFilters] = useState(false);
-	const [showAddRateModal, setShowAddRateModal] = useState(false);
 	const { statistics = {} } = statsData;
 	const { list = [] } = data;
 	const { dynamic_statistics = {} } = statsData;
@@ -115,8 +114,6 @@ function ListData({
 										filter={filter}
 										getStats={getStats}
 										source={source}
-										showAddRateModal={showAddRateModal}
-										setShowAddRateModal={setShowAddRateModal}
 									/>
 								</div>
 							))}

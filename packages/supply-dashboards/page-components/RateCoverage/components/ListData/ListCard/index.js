@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -6,6 +7,9 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { SERVICE_ICON_MAPPING } from '../../../configurations/helpers/constants';
+import useGetShipment from '../../../hooks/useGetShipment';
+import useListFreightRateFeedBacks from '../../../hooks/useListFreightRateFeedBacks';
+import useListFreightRateRequests from '../../../hooks/useListFreightRateRequests';
 
 import AddRateModal from './AddRateModal';
 import CardContent from './CardContent';
@@ -14,42 +18,43 @@ import DetailsView from './DetailsView';
 import styles from './styles.module.css';
 
 function ListCard({
-	data = {}, getListCoverage = () => {}, filter = {}, getStats = () => {}, showAddRateModal = false,
-	setShowAddRateModal = () => {}, source = {},
+	data = {}, getListCoverage = () => {}, filter = {}, getStats = () => {},
+	source = {},
 }) {
 	const [showCloseModal, setShowCloseModal] = useState(false);
+	const [showAddRateModal, setShowAddRateModal] = useState(false);
+	const {
+		sources = [], container_size, container_type,
+		commodity, weight_slabs, stacking_type, price_type, source_id = '',
+		origin_port,
+		origin_airport,
+		port,
+		origin_location,
+		location,
+		airport,
+		destination_port,
+		destination_airport,
+		destination_location,
+	} = data;
 
-	const originCode = (
-		data?.origin_port
-			|| data?.origin_airport
-			|| data?.port
-			|| data?.origin_location
-	)?.port_code;
+	const { data:shipmemnt_data, getShipment = () => {}, shipment_loading = false } = useGetShipment({
+		source_id,
+	});
 
-	const originName = (
-		data?.origin_port
-			|| data?.origin_airport
-			|| data?.port
-			|| data?.origin_location
-			|| data?.location
-			|| data?.airport
-	)?.name;
+	const { data:requestData, getRequest, loading:request_loading } = useListFreightRateRequests({ source_id, filter });
+	const {
+		data:feedbackData, getFeedback,
+		loading: feedback_loading,
+	}	= 	useListFreightRateFeedBacks({ source_id, filter });
 
-	const destinationCode = (
-		data?.destination_port
-			|| data?.destination_airport
-			|| data?.port
-			|| data?.destination_location
-	)?.port_code;
+	const originCode = (origin_port || origin_airport || port || origin_location)?.port_code;
 
-	const destinationName = (
-		data?.destination_port
-			|| data?.destination_airport
-			|| data?.port
-			|| data?.destination_location
-	)?.name;
+	const originName = (origin_port || origin_airport || port || origin_location || location || airport)?.name;
 
-	const { sources = [], container_size, container_type, commodity, weight_slabs, stacking_type, price_type } = data;
+	const destinationCode = (destination_port || destination_airport || port || destination_location)?.port_code;
+
+	const destinationName = (destination_port || destination_airport || port || destination_location)?.name;
+
 	const service = filter?.service;
 
 	const ITEM_LIST = [
@@ -63,6 +68,13 @@ function ListCard({
 
 	const handleAddRate = () => {
 		setShowAddRateModal((prev) => !prev);
+		if (source === 'live_bookings') {
+			return getShipment();
+		}
+		if (source === 'rate_feedback') {
+			return getFeedback();
+		}
+		return getRequest();
 	};
 
 	return (
@@ -210,7 +222,20 @@ function ListCard({
 					<div className={styles.button_grp}>
 						{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
 								&& (
-									<DetailsView data={data} source={source} filter={filter} />
+									<DetailsView
+										data={data}
+										source={source}
+										filter={filter}
+										shipment_loading={shipment_loading}
+										request_loading={request_loading}
+										feedback_loading={feedback_loading}
+										shipmemnt_data={shipmemnt_data}
+										requestData={requestData}
+										feedbackData={feedbackData}
+										getShipment={getShipment}
+										getFeedback={getFeedback}
+										getRequest={getRequest}
+									/>
 								)}
 
 						{['critical_ports', 'expiring_rates', 'cancelled_shipments']?.includes(source)
@@ -251,8 +276,15 @@ function ListCard({
 					setShowModal={setShowAddRateModal}
 					filter={filter}
 					data={data}
+					source={source}
 					getStats={getStats}
 					getListCoverage={getListCoverage}
+					shipmemnt_data={shipmemnt_data}
+					requestData={requestData}
+					feedbackData={feedbackData}
+					shipment_loading={shipment_loading}
+					request_loading={request_loading}
+					feedback_loading={feedback_loading}
 				/>
 			)}
 

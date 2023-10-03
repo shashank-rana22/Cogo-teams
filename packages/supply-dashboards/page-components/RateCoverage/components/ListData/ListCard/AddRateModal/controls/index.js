@@ -8,7 +8,6 @@ import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/co
 import { merge, startCase } from '@cogoport/utils';
 
 import { filterOption } from '../../../../../configurations/helpers/constants';
-import useGetWeightSlabs from '../../../../../hooks/useGetWeightSlabs';
 
 import airControls from './air-controls';
 import fclControls from './fcl-controls';
@@ -47,8 +46,6 @@ const getDefaultValues = (oldfields) => {
 function useControls({
 	data, user_id, filter,
 }) {
-	const { slabs_data } = useGetWeightSlabs();
-	console.log(slabs_data, 'slabs_data');
 	const getCommodityOptions = (container_type = 'standard') => {
 		const commodities = FREIGHT_CONTAINER_COMMODITY_MAPPINGS[container_type];
 		return (commodities || []).map((commodity) => ({

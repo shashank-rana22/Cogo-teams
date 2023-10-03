@@ -13,17 +13,26 @@ import FieldMutation from '../../../../configurations/helpers/mutation-fields';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetFreightRate from '../../../../hooks/useGetFreightRate';
+import ServiceDetailsContent from '../DetailsView/Content';
 
 import useControls from './controls';
 import styles from './styles.module.css';
 
+const ZERO_VALUE = 0;
 function AddRateModal({
 	showModal = true,
 	setShowModal = () => {},
 	filter = {},
 	data = {},
+	source = {},
 	getStats = () => {},
 	getListCoverage = () => {},
+	shipmemnt_data = {},
+	requestData,
+	feedbackData,
+	shipment_loading = false,
+	request_loading = false,
+	feedback_loading = false,
 }) {
 	const { user_data } = useSelector(({ profile }) => ({
 		user_data: profile || {},
@@ -143,8 +152,22 @@ function AddRateModal({
 
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
+			{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
+			&& (
+				<div className={styles.service_content}>
+					<ServiceDetailsContent
+						shipmemnt_data={shipmemnt_data}
+						data={data}
+						requestData={requestData?.list?.[ZERO_VALUE] || null}
+						feedbackData={feedbackData?.list?.[ZERO_VALUE] || null}
+						shipment_loading={shipment_loading}
+						request_loading={request_loading}
+						feedback_loading={feedback_loading}
+					/>
+				</div>
+			)}
 			<Modal.Header title="Please Add Rate" />
-			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
+			<Modal.Body>
 				<Layout
 					fields={finalFields}
 					control={control}
