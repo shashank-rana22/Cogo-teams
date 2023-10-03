@@ -8,7 +8,7 @@ import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-vi
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
-const { ADMIN_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
+const { ADMIN_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 
 const getUserIdFilter = ({ currLevel, levelStack, loggedInUser, viewType }) => {
 	if (viewType !== ADMIN && isEmpty(levelStack)) {
@@ -50,7 +50,7 @@ function useGetAgentScoringReportStats(props) {
 					created_at_less_than    : dateRange?.endDate || undefined,
 					partner_id              : entity || undefined,
 					report_type             : currLevel.report_type === ADMIN_REPORT
-						? undefined : currLevel.report_type,
+						? AGENT_REPORT : currLevel.report_type,
 					office_location_id : currLevel.location_id || undefined,
 					channel            : currLevel.channel || undefined,
 					user_id            : getUserIdFilter({ currLevel, levelStack, loggedInUser, viewType }),
