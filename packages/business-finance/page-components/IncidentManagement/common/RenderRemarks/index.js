@@ -48,13 +48,25 @@ function RenderRemarks({
 }) {
 	const {
 		level3 = {}, level2 = {}, level1 = {}, status = '', updatedBy = {}, financeRemark = '', remark = '',
-		createdBy = {},
+		createdBy = {}, type = '', data = '',
 	} = remarksDetails || {};
+	let otherRemark = remark;
+	if (type === 'JOB_OPEN') {
+		otherRemark = data?.jobOpenRequest?.remark || '';
+	} else if (type === 'REVOKE_INVOICE') {
+		otherRemark = data?.revokeInvoiceRequest?.cancelReason || '';
+	} else if (type === 'ISSUE_CREDIT_NOTE') {
+		otherRemark = data?.creditNoteRequest?.remark || '';
+	} else if (type === 'CONSOLIDATED_CREDIT_NOTE') {
+		otherRemark = data?.consolidatedCreditNoteRequest?.remark || '';
+	} else if (type === 'OVERHEAD_APPROVAL') {
+		otherRemark = data?.overheadConfirmationRequest?.remarks || '';
+	}
 	const level = {
 		level       : 0,
 		status      : 'REQUESTED',
-		stakeholder : { userEmail: createdBy.email, userName: createdBy.name },
-		remarks     : remark,
+		stakeholder : { userEmail: createdBy?.email, userName: createdBy?.name },
+		remarks     : otherRemark || remark,
 	};
 	if (!isEmpty(level3)) {
 		return (

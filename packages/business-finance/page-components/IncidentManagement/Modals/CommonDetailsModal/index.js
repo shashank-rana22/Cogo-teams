@@ -13,6 +13,7 @@ function CommonPage({ row = {}, setDetailsModal = () => {}, refetch = () => {}, 
 	const {
 		level3 = {}, level2 = {}, level1 = {}, createdBy = {},
 		remark = '', status = '', updatedBy = {}, financeRemark = '',
+		type = '', data = {},
 	} = row || {};
 	const level0 = { ...createdBy, remark };
 	const request = REQUEST_MAPPING[header];
@@ -42,7 +43,9 @@ function CommonPage({ row = {}, setDetailsModal = () => {}, refetch = () => {}, 
 			</div>
 			<AllStakeHolderTimeline
 				timeline={allStakeHolderTimeLineData(
-					{ level0, level1, level2, level3, status, updatedBy, financeRemark },
+					{
+						level0, level1, level2, level3, status, updatedBy, financeRemark, type, data,
+					},
 				)}
 			/>
 			<div className={styles.request_heading}>

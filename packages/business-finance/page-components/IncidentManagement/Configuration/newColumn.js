@@ -6,7 +6,6 @@ import React from 'react';
 
 import ShowOverflowingNumber from '../../commons/utils/showOverflowingNumber';
 import RenderRemarks from '../common/RenderRemarks';
-import { MAPPING } from '../Constants/tab_mapping';
 import { toTitleCase } from '../utils/titleCase.ts';
 
 import SortIcon from './SortIcon/index.tsx';
@@ -215,7 +214,7 @@ function getColumns({
 			id: 'request_date',
 		},
 		{
-			Header   : <div>{MAPPING[activeTab]}</div>,
+			Header   : <div>Remark</div>,
 			accessor : 'financeRemark',
 			id       : 'remark',
 			Cell     : ({ row: { original } }) => (
