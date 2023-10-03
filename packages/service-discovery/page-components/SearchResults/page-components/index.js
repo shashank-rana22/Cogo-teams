@@ -100,24 +100,15 @@ function SearchResults() {
 		setSelectedCard,
 		selectedCard,
 		page = 1,
-		// rates = [],
+		rates = [],
 	} = useGetSpotSearch({ setComparisonRates });
 
-	// const {
-	// 	spot_search_detail:detail = {},
-	// 	contract_detail = {},
-	// 	possible_subsidiary_services = [],
-	// 	total_count,
-	// 	page_limit,
-	// } = data || {};
-
 	const {
-		detail = {},
+		spot_search_detail:detail = {},
 		contract_detail = {},
 		possible_subsidiary_services = [],
 		total_count,
 		page_limit,
-		rates = [],
 		touch_points = {},
 	} = data || {};
 

@@ -26,7 +26,6 @@ function FTLResults({
 	isGuideViewed = false,
 	routerLoading = false,
 	setRouterLoading = () => {},
-	possible_subsidiary_services = [], // remove later when api is reeady
 }) {
 	const SCREENS_MAPPING = {
 		listRateCard: {
@@ -68,11 +67,7 @@ function FTLResults({
 		selectedCardScreen: {
 			component : SelectedRateCard,
 			props     : {
-				detail,
-				rates,
-				refetch,
 				setRouterLoading,
-				possible_subsidiary_services,
 			},
 		},
 	};

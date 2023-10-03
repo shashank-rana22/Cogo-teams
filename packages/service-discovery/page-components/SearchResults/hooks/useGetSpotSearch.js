@@ -20,14 +20,9 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 	});
 	const [rates, setRates] = useState([]);
 
-	// const [{ loading, data }, trigger] = useRequest({
-	// 	method : 'GET',
-	// 	url    : '/list_spot_search_rate_cards',
-	// }, { manual: true });
-
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
-		url    : '/get_spot_search',
+		url    : '/list_spot_search_rate_cards',
 	}, { manual: true });
 
 	const getSearch = useCallback(async ({ show_more = false } = {}) => {
@@ -44,20 +39,13 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 
 		try {
 			const { data:rateData } = await trigger({
-				// params: {
-				// 	spot_search_id,
-				// 	page       : show_more ? page + ONE : page,
-				// 	page_limit : 10,
-				// 	filters    : { ...finalFilters, status: 'active' },
-				// },
 				params: {
-					id                   : spot_search_id,
-					// page       : show_more ? page + ONE : page,
-					// page_limit : 10,
-					intent               : 'discovery',
-					importer_exporter_id : 'e0c1ce39-299a-44c4-b5e8-03c25bde387e',
-					// filters    : { ...finalFilters, status: 'active' },
+					spot_search_id,
+					page       : show_more ? page + ONE : page,
+					page_limit : 10,
+					filters    : { ...finalFilters, status: 'active' },
 				},
+
 			});
 
 			if (show_more) {
