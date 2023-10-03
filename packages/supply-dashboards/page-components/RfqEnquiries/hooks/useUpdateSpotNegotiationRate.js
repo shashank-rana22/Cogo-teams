@@ -53,7 +53,7 @@ const useUpdateSpotNegotiationRate = ({
 	const prefillData = useRef();
 
 	const { newField } = FieldMutation({
-		fields, values, data,
+		fields, values, data, service,
 	});
 
 	useEffect(() => {

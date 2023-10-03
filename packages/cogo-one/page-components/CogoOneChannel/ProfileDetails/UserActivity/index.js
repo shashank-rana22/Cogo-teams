@@ -28,7 +28,7 @@ function Loader({ activityTab = '' }) {
 
 function UserActivities(props) {
 	const {
-		activeTab = '', activeVoiceCard = {}, customerId, formattedMessageData, activeMessageCard, showMore,
+		activeTab = '', activeVoiceCard = {}, customerId, formattedMessageData, activeMessageCard,
 		setRaiseTicketModal = () => {},
 		viewType = '',
 		setActiveTab = () => {},
@@ -161,13 +161,6 @@ function UserActivities(props) {
 	} else {
 		emptyCheck = isEmpty(timeLineList);
 	}
-
-	useEffect(() => {
-		if (showMore) {
-			setActivityTab('communication');
-			setActiveSubTab('summary');
-		}
-	}, [showMore]);
 
 	return (
 		<div className={styles.container}>

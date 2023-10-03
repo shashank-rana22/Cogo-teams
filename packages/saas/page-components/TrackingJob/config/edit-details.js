@@ -31,14 +31,15 @@ const editOceanFormControls = ({ editDetail = {}, shipping_line_id = '' }) => [
 	},
 
 	{
-		label          : 'Milestone',
-		name           : 'milestone',
-		type           : 'creatable_select',
-		value          : editDetail?.milestone,
-		placeholder    : 'Milestone',
-		optionsListKey : 'milestone_select',
-		params         : {
+		label       : 'Milestone',
+		name        : 'milestone',
+		type        : 'aync_create_select',
+		value       : editDetail?.milestone,
+		placeholder : 'Milestone',
+		asyncKey    : 'list_shipping_line_events',
+		params      : {
 			shipping_line_id,
+			source: 'tracking_job',
 		},
 		span  : 4,
 		rules : { required: 'This is required' },

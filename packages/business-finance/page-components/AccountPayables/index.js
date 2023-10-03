@@ -89,26 +89,26 @@ function AccountPayables() {
 					themeType="primary"
 					onChange={handleTabChange}
 				>
-					<TabPanel name="dashboard" title="DASHBOARD">
+					<TabPanel name="dashboard" title="Dashboard">
 						<Dashboard activeEntity={activeEntity} />
 					</TabPanel>
-					<TabPanel name="invoices" title="AUDITED INVOICES">
+					<TabPanel name="invoices" title="Audited Invoices">
 						<Invoices activeEntity={activeEntity} />
 					</TabPanel>
-					<TabPanel name="advance-payment" title="ADVANCE PAYMENT">
+					<TabPanel name="advance-payment" title="Advance Payment">
 						<AdvancePayment activeEntity={activeEntity} />
 					</TabPanel>
-					<TabPanel name="payruns" title="PAYRUN">
+					<TabPanel name="payruns" title="Payrun">
 						<Payruns activeEntity={activeEntity} />
 					</TabPanel>
-					<TabPanel name="outstanding" title="OUTSTANDING">
+					<TabPanel name="outstanding" title="Outstanding">
 						<Outstanding
 							entityCode={activeEntity}
 							setSelectedOrg={setSelectedOrg}
 							selectedOrg={selectedOrg}
 						/>
 					</TabPanel>
-					<TabPanel name="treasury-chest" title="TREASURY">
+					<TabPanel name="treasury-chest" title="Treasury">
 						<Treasury currentEntity={activeEntity} setActiveEntity={setActiveEntity} />
 					</TabPanel>
 				</Tabs>

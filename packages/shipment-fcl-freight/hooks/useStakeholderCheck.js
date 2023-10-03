@@ -11,7 +11,7 @@ export const useStakeholderCheck = () => {
 	}));
 
 	const stakeholderMap = [
-		{ role_ids: geo.uuid.kam_manager_ids, stakeholder: 'booking_agent_manager' },
+		{ role_ids: [geo.uuid.kam_manager_ids, geo.uuid.cp_program_manager], stakeholder: 'booking_agent_manager' },
 		{
 			role_ids: [...geo.uuid.kam_ids,
 				...geo.uuid.centralised_customer_support,

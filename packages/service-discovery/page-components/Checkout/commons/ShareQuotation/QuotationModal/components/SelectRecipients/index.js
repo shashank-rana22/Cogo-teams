@@ -10,6 +10,7 @@ import { useMemo, useEffect } from 'react';
 import getDistinctOptions from '../../../../../helpers/getDistinctOptions';
 
 import controls from './controls';
+import EmailPreview from './EmailPreview';
 import styles from './styles.module.css';
 
 const ONE = 1;
@@ -37,6 +38,7 @@ function SelectRecipients({
 	orgUsersData = {},
 	emailWatch = '',
 	emailContent = {},
+	loading = false,
 }) {
 	const {
 		query: { partner_id },
@@ -161,31 +163,12 @@ function SelectRecipients({
 				)}
 			</div>
 
-			<div className={cl`${styles.label} ${styles.email_preview}`}>
-				Email preview
-				{' '}
-				<span style={{ fontWeight: '500' }}>
-					(sent from
-					{' '}
-					{agent_email}
-					)
-				</span>
-			</div>
-			<div className={styles.text}>
-				Subject -
-				{' '}
-				{emailWatch()?.subject
-					|| emailPreviews?.[selected?.tax_number]?.template?.subject
-					|| emailPreviews?.main?.template?.subject
-					|| 'Subject is required'}
-			</div>
-			<div
-				className={styles.content}
-				dangerouslySetInnerHTML={{
-					__html:
-						emailPreviews?.[selected?.tax_number]?.template
-						|| emailPreviews?.main?.template,
-				}}
+			<EmailPreview
+				emailPreviews={emailPreviews}
+				emailWatch={emailWatch}
+				loading={loading}
+				agent_email={agent_email}
+				selected={selected}
 			/>
 		</div>
 	);

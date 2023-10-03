@@ -4,12 +4,15 @@ import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import getShipmentTypeFromUrl from '../../../../helpers/getShipmentTypeFromUrl';
 import useBookShipment from '../../hooks/useBookShipment';
 import useControlBookingApproval from '../../hooks/useControlBookingApproval';
 import useSendWhatsappBooking from '../../hooks/useSendWhatsappBooking';
+import handleTimer from '../../utils/handleTimer';
+
+const SECOND_TO_MILLISECOND = 1000;
 
 const URL_MAPPING = {
 	fcl_freight : 'fcl',
@@ -30,6 +33,8 @@ const useHandleBookingConfirmationFooter = ({
 	noRatesPresent = false,
 	isKycPending,
 }) => {
+	const timerRef = useRef(null);
+
 	const { push } = useRouter();
 
 	const {
@@ -161,7 +166,7 @@ const useHandleBookingConfirmationFooter = ({
 	useEffect(() => {
 		if (isAssistedBookingNotAllowed) {
 			setError(`You are not allowed to book this shipment. 
-			Kindly ask the customer to book from Partners Platform`);
+			Kindly ask the customer to book from the Platform`);
 			return;
 		}
 
@@ -208,6 +213,26 @@ const useHandleBookingConfirmationFooter = ({
 		isKycPending,
 	]);
 
+	useEffect(() => {
+		let time;
+
+		if (!hasExpired) {
+			const interval = setInterval(() => {
+				time = handleTimer(validity_end);
+
+				if (time) {
+					timerRef.current.innerText = time;
+				}
+			}, SECOND_TO_MILLISECOND);
+
+			if (!validity_end) {
+				return () => clearInterval(interval);
+			}
+			return () => clearInterval(interval);
+		}
+		return () => {};
+	}, [hasExpired, validity_end]);
+
 	return {
 		handleSubmit,
 		onClickSubmitOtp,
@@ -224,6 +249,7 @@ const useHandleBookingConfirmationFooter = ({
 		whatsappLoading,
 		showMarginModal,
 		setShowMarginModal,
+		timerRef,
 	};
 };
 

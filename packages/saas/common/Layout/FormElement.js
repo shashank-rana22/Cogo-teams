@@ -40,6 +40,7 @@ function FormElement({ type = '', ...rest }) {
 	if (type === 'select') return <SelectController {...rest} />;
 
 	if (type === 'async_select') return <AsyncSelectController {...rest} />;
+	if (type === 'async_create_select') return <AsyncSelectController type={type} {...rest} />;
 
 	if (type === 'date_range_picker') return <DateRangePickerController {...rest} />;
 

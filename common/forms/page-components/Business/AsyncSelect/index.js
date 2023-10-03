@@ -1,4 +1,4 @@
-import { MultiSelect, Select } from '@cogoport/components';
+import { MultiSelect, Select, CreatableMultiSelect, CreatableSelect } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
@@ -182,6 +182,22 @@ const keyAsyncFieldsParamsMapping = {
 
 const SINGLE_ENTITY = 1;
 
+const getElement = ({ type = '', multiple = false }) => {
+	if (type === 'async_create_select' && multiple) {
+		return CreatableMultiSelect;
+	}
+
+	if (type === 'async_create_select') {
+		return CreatableSelect;
+	}
+
+	if (multiple) {
+		return MultiSelect;
+	}
+
+	return Select;
+};
+
 function AsyncSelect(props) {
 	const {
 		params,
@@ -193,6 +209,7 @@ function AsyncSelect(props) {
 		microService = '',
 		onOptionsChange,
 		isSingleEntity,
+		type,
 		...rest
 	} = props;
 
@@ -231,7 +248,7 @@ function AsyncSelect(props) {
 		getSelectedOption(selectedOption[GLOBAL_CONSTANTS.zeroth_index]);
 	}
 
-	const Element = multiple ? MultiSelect : Select;
+	const Element = getElement({ type, multiple });
 
 	return (
 		<Element

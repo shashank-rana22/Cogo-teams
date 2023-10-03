@@ -64,17 +64,16 @@ const formControls = ({ showUpdate }) => [
 							{
 								label        : 'Milestone',
 								name         : 'milestone',
-								type         : 'createable_select',
-								isCreatable  : true,
+								type         : 'async_create_select',
+								placeholder  : 'Milestone',
 								asyncKey     : 'list_shipping_line_events',
 								optionsValue : 'milestone',
 								params       : {
 									shipping_line_id : showUpdate?.data?.shipping_line_id,
 									source           : 'tracking_job',
 								},
-								placeholder : 'Milestone',
-								span        : 6,
-								rules       : { required: 'This is required' },
+								span  : 6,
+								rules : { required: 'This is required' },
 							},
 							{
 								label       : 'Transport Mode',
