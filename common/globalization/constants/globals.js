@@ -613,6 +613,7 @@ const GLOBAL_CONSTANTS = {
 		static_url                 : /([^:]\/)\/+/g,
 		gst_number                 : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 		otp                        : /[^0-9]/g,
+		line_break_regex           : /(?:\r\n|\r|\n)/g,
 		hyphen_characters          : /-/g,
 		text_pattern_classifier    : /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
 	},
