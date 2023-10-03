@@ -7,14 +7,16 @@ import {
 	CheckboxController,
 	TimepickerController,
 	InputController,
+	SelectController,
 } from '@cogoport/forms';
 import { IcMCall, IcMShip, IcMSettings, IcMArrowNext } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import scheduleEvents from '../../../../../../configurations/schedule_event';
 import useCreateCogooneCalendar from '../../../../../../hooks/useCreateCogooneCalendar';
 
+import EventOccurence from './EventOccurence';
 import styles from './styles.module.css';
 
 const TABS = ['event', 'meeting'];
@@ -38,6 +40,14 @@ function CreateEvent({
 	eventDetails = {},
 	setEventDetails = () => {},
 }) {
+	const [eventOccurence, setEventOccurence] = useState({
+		showModal     : false,
+		eventData     : {},
+		frequencyType : '',
+	});
+
+	const { frequencyType = '', eventData = {} } = eventOccurence || {};
+
 	const {
 		control,
 		handleSubmit,
@@ -68,11 +78,11 @@ function CreateEvent({
 		start_date, start_time, end_date, end_time,
 		participants_users,
 		organization, organization_user, remarks, mark_important_event,
-		title,
+		title, occurence_event,
 	} = controls;
 
 	const handleEvents = (values) => {
-		createEvent(values);
+		createEvent({ values, eventData, type: 'meeting' });
 	};
 
 	useEffect(() => {
@@ -86,10 +96,16 @@ function CreateEvent({
 					<div
 						key={itm}
 						className={cl`${styles.tab} ${category === itm ? styles.active_tab : ''}`}
-						onClick={() => setEventDetails((prevEventDetails) => ({
-							...prevEventDetails,
-							category: itm,
-						}))}
+						onClick={() => {
+							setEventDetails((prevEventDetails) => ({
+								...prevEventDetails,
+								category: itm,
+							}));
+							setEventOccurence(() => ({
+								showModal : false,
+								eventData : null,
+							}));
+						}}
 						role="presentation"
 					>
 						{startCase(itm)}
@@ -174,6 +190,19 @@ function CreateEvent({
 							<div className={styles.error_text}>
 								{errors?.participants_users?.message}
 							</div>
+							<div className={styles.label}>{occurence_event?.label}</div>
+							<SelectController
+								{...occurence_event}
+								control={control}
+								onChange={(val) => setEventOccurence((pre) => ({
+									...pre,
+									showModal     : true,
+									frequencyType : val,
+								}))}
+							/>
+							<div className={styles.error_text}>
+								{errors?.occurence_event?.message}
+							</div>
 						</div>
 					) : null}
 
@@ -232,7 +261,9 @@ function CreateEvent({
 					</Button>
 				</div>
 			</div>
-
+			{frequencyType !== 'one_time'
+				? <EventOccurence eventOccurence={eventOccurence} setEventOccurence={setEventOccurence} />
+				: null}
 		</div>
 	);
 }

@@ -3,30 +3,60 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 
-const getPayload = ({ eventDetails = {}, values = {} }) => {
+import {
+	getCustomRecurrence, getDailyRecurrence, getMonthlyRecurrence,
+	getWeeklyRecurrence,
+	getYearlyRecurrence,
+} from '../helpers/formatFreqCalendarPayload';
+
+const RECURRENCE_RULE_MAPPING = {
+	daily   : getDailyRecurrence,
+	weekly  : getWeeklyRecurrence,
+	monthly : getMonthlyRecurrence,
+	yearly  : getYearlyRecurrence,
+	custom  : getCustomRecurrence,
+};
+
+const getPayload = ({ eventDetails = {}, values = {}, eventData = {}, type = '' }) => {
 	const { category = '', event_type = '' } = eventDetails || {};
 	const {
 		end_date = '', end_time = '', mark_important_event = false, organization_id = '',
 		organization_user_id = '', remarks = '', start_date = '', start_time = '',
-		participants_users,
+		participants_users, occurence_event = '',
 		title,
 	} = values || {};
 
+	const {
+		start_date: startDate = '', end_date: endDate = '',
+		weekly_repeat_on = [],
+		month_on_date = 0, yearly_month = 0,
+		yearly_on_date,
+		custom_on_date = 0,
+	} = eventData || {};
+
+	const recurrenceRule = RECURRENCE_RULE_MAPPING[occurence_event]?.({
+		weekly_repeat_on,
+		month_on_date,
+		yearly_month,
+		yearly_on_date,
+		custom_on_date,
+		startDate,
+		endDate,
+	});
+
 	return {
-		validity_start  : start_date,
+		validity_start  : type !== 'meeting' ? start_date : undefined,
 		start_time,
 		end_time,
 		category        : category === 'event' ? 'reminder' : category,
 		is_important    : mark_important_event,
-		validity_end    : end_date,
+		validity_end    : type !== 'meeting' ? end_date : undefined,
 		description     : remarks,
 		subject         : category === 'event' ? event_type : title,
-		frequency       : 'one_time',
-		recurrence_rule : {
-			type: 'normal',
-		},
-		participants : category === 'meeting' ? participants_users : undefined,
-		metadata     : category === 'event' ? {
+		frequency       : occurence_event,
+		recurrence_rule : recurrenceRule,
+		participants    : category === 'meeting' ? participants_users : undefined,
+		metadata        : category === 'event' ? {
 			organization_id,
 			user_id: organization_user_id,
 		} : undefined,
@@ -39,9 +69,9 @@ const useCreateCogooneCalendar = ({ setEventDetails = () => {}, eventDetails = {
 		url    : '/create_cogoone_calendar',
 	}, { manual: true });
 
-	const createEvent = async (values) => {
+	const createEvent = async ({ values = {}, eventData = {}, type = '' }) => {
 		try {
-			const payload = getPayload({ eventDetails, values });
+			const payload = getPayload({ eventDetails, values, eventData, type });
 			await trigger({ data: payload });
 			setEventDetails({
 				category   : 'event',
