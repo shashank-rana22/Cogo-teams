@@ -43,18 +43,13 @@ function CustomCard({ event = {} }) {
 	const firstTwoEvents = (eventsList || []).slice([GLOBAL_CONSTANTS.zeroth_index], MORE_THEN);
 
 	const isShowMore = (eventsList || []).length > MORE_THEN;
-	const firstEvent = firstTwoEvents?.[GLOBAL_CONSTANTS.zeroth_index]?.subject;
+	const firstEvent = [firstTwoEvents?.[GLOBAL_CONSTANTS.zeroth_index]];
 	const moreCount = eventsList.length - MORE_THEN;
-	const checkSameType = (firstTwoEvents || []).length === MORE_THEN
-		? (firstTwoEvents || []).every((item) => item?.subject
-	=== firstEvent) : false;
-
-	const updatedHeader = checkSameType ? [firstTwoEvents?.[GLOBAL_CONSTANTS.zeroth_index]] : firstTwoEvents;
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				{(updatedHeader || []).map((item) => {
+				{(firstEvent || []).map((item) => {
 					const eventData = HEADER_MAPPING[item?.subject] || HEADER_MAPPING?.default;
 
 					if (isEmpty(eventData)) {

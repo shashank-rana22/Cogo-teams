@@ -5,10 +5,8 @@ import SelectableAgentsUserCard from '../common/SelectableAgentsUserCard';
 
 const ADD_DAY = 1;
 const NEW_DATE = new Date();
-const EVENTS_ROWS = 2;
-const MEETINGS_ROWS = 5;
 
-const scheduleEvents = ({ orgId = '', category = '' }) => ({
+const scheduleEvents = ({ orgId = '' }) => ({
 	start_date: {
 		name        : 'start_date',
 		isClearable : true,
@@ -81,7 +79,6 @@ const scheduleEvents = ({ orgId = '', category = '' }) => ({
 		name        : 'remarks',
 		label       : 'Remarks',
 		placeholder : 'Enter Remarks...',
-		rows        : category === 'event' ? EVENTS_ROWS : MEETINGS_ROWS,
 		show        : true,
 		rules       : { required: 'remarks is required' },
 	},

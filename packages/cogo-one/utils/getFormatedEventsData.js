@@ -1,18 +1,21 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 const getFormatedEventsData = ({ data = {} }) => {
 	const { list = [] } = data || {};
 
+	const formatedList = (list || []).map((item) => ({
+		...item,
+		start : new Date(item.schedule_start),
+		end   : new Date(item?.schedule_end),
+	}));
+
 	const GROUPPED_DATA = {};
 
-	(list || []).forEach((item) => {
-		const key = `${item.schedule_start.split('T')[GLOBAL_CONSTANTS.zeroth_index]}-${item
-			.schedule_end.split('T')[GLOBAL_CONSTANTS.zeroth_index]}`;
+	(formatedList || []).forEach((item) => {
+		const key = `${item.start.getDate() - item.start.getMonth()}-${item.start.getDate() - item.start.getMonth()}`;
 
 		if (!GROUPPED_DATA[key]) {
 			GROUPPED_DATA[key] = {
 				start      : new Date(item.schedule_start),
-				end        : new Date(item.schedule_end),
+				end        : new Date(item.schedule_start),
 				eventsList : [item.calendar],
 			};
 		} else {

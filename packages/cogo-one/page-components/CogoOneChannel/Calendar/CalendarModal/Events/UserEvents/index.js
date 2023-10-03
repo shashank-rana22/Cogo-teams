@@ -10,6 +10,7 @@ import EmptyList from '../EmptyList';
 
 import styles from './styles.module.css';
 
+const LAST_INDEX = 1;
 const ICON_MAPPING = {
 	call_customer: {
 		icon  : <IcMCall width={16} height={16} />,
@@ -46,7 +47,9 @@ function UserEvents({ selectedEventData = {} }) {
 				const {
 					subject = '', description = '', metadata = {},
 					is_important = false, validity_start = '', category = '', validity_end = '',
+					participants = [],
 				} = singleEvent || {};
+
 				const { organization_data = {}, user_data = {}	} = metadata || {};
 
 				const USER_CONTACT_DETAILS = [user_data?.name, user_data?.email];
@@ -116,15 +119,28 @@ function UserEvents({ selectedEventData = {} }) {
 							) : null}
 
 							{category === 'meeting' ? (
-								<div className={styles.meeting_times}>
-									Start at
-									{' '}
-									{startTime}
-									{' '}
-									and end at
-									{' '}
-									{endTime}
-								</div>
+								<>
+									Partispants :
+									<div className={styles.partispants}>
+										{(participants || []).map((item, index) => (
+											<div key={item?.id}>
+												{item?.user_data?.name}
+												{index < participants.length - LAST_INDEX && ','}
+												{' '}
+											</div>
+										))}
+									</div>
+
+									<div className={styles.meeting_times}>
+										Start at
+										{' '}
+										{startTime}
+										{' '}
+										and end at
+										{' '}
+										{endTime}
+									</div>
+								</>
 							) : null}
 						</div>
 					</div>

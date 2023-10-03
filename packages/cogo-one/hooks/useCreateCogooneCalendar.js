@@ -56,9 +56,9 @@ const getPayload = ({ eventDetails = {}, values = {}, eventData = {} }) => {
 		validity_end    : combineDateAndTime({ date: category === 'meeting' ? endDate : end_date, time: end_time }),
 		description     : remarks,
 		subject         : category === 'event' ? event_type : title,
-		frequency       : occurence_event,
-		recurrence_rule : recurrenceRule,
-		participants    : category === 'meeting' ? participants_users : undefined,
+		frequency       : category === 'event' ? 'one_time' : occurence_event,
+		recurrence_rule : category === 'event' ? { type: 'normal' } : recurrenceRule,
+		participants    : category === 'meeting' ? { user_ids: participants_users } : undefined,
 		metadata        : category === 'event' ? {
 			organization_id,
 			user_id: organization_user_id,

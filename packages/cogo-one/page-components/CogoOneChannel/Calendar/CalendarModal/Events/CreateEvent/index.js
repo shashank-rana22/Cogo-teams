@@ -21,6 +21,10 @@ import styles from './styles.module.css';
 
 const TABS = ['event', 'meeting'];
 
+const LABEL = {
+	event   : 'Reminder',
+	meeting : 'Meeting',
+};
 const EVENT_TYPES = [
 	{
 		key  : 'call_customer',
@@ -114,7 +118,7 @@ function CreateEvent({
 						}}
 						role="presentation"
 					>
-						{startCase(itm)}
+						{LABEL[itm]}
 					</div>
 				))}
 			</div>
