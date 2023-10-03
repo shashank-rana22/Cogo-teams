@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 interface Props {
 	setFilters: (p: object) => void;
-	filters: GenericObject;
+	filters?: GenericObject;
 }
 
 function FilterModal({ setFilters = () => {}, filters = {} }: Props) {
