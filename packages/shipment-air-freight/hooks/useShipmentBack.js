@@ -13,7 +13,7 @@ export default function useShipmentBack() {
 	const { permissions_navigations = {}, email = '' } = profileData;
 
 	const [isBackAllowed, setIsBackAllowed] = useState();
-	console.log({ isBackAllowed });
+
 	const router = useRouter();
 
 	const { navigation = '' } = router.query;
@@ -22,11 +22,9 @@ export default function useShipmentBack() {
 		const { nav_items: { partner: allSideBarNavs } } = getSideBarConfigs({
 			userData: { permissions_navigations, email },
 		});
-		console.log({ allSideBarNavs });
+
 		return getRedirectNavMapping(allSideBarNavs, navigation);
 	}, [permissions_navigations, email, navigation]);
-
-	console.log({ version });
 
 	useEffect(() => {
 		setIsBackAllowed(() => {
@@ -43,21 +41,17 @@ export default function useShipmentBack() {
 			window.removeEventListener('beforeunload', eventListener);
 		};
 	}, [router.components]);
-	console.log('version', version);
 
 	const handleShipmentsClick = (e) => {
 		e.preventDefault();
 
 		if (isBackAllowed) {
-			console.log('hello1');
 			router.back();
 		} else if (version === 'v2') {
-			console.log('hello2');
 			const REMOVE_V2 = '/v2';
 			const routerPushURL = navToRedirect?.href?.slice(REMOVE_V2.length);
 			router.push(routerPushURL, routerPushURL);
 		} else {
-			console.log('version', version);
 			const newUrl = `${window.location.origin}/${router?.query?.partner_id}/${navToRedirect.href}`;
 
 			window.location.href = newUrl;
