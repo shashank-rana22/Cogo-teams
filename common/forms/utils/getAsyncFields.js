@@ -914,6 +914,17 @@ function asyncListTruckTypes() {
 	};
 }
 
+function asyncAllocationEligibleRoles() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/eligible_roles',
+		authkey      : 'get_agent_scoring_eligible_roles',
+		microService : 'agent_scoring',
+		initialCall  : true,
+	};
+}
+
 function asyncListUserShipments() {
 	return {
 		labelKey    : 'serial_id',
@@ -1119,6 +1130,7 @@ export {
 	asyncListPricingZones,
 	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
+	asyncAllocationEligibleRoles,
 	asyncListUserShipments,
 	asyncFieldsOrganizationOnCall,
 	asyncListSaasHsCodes,

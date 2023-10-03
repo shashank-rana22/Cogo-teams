@@ -81,6 +81,7 @@ import {
 	asyncListSaasPlan,
 	asyncListEnrichmentSources,
 	asyncListIncidentTypes,
+	asyncAllocationEligibleRoles,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -180,6 +181,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_saas_plan                       : asyncListSaasPlan,
 	list_enrichment_sources              : asyncListEnrichmentSources,
 	list_incident_types                  : asyncListIncidentTypes,
+	agent_scoring_eligible_roles         : asyncAllocationEligibleRoles,
 };
 
 const SINGLE_ENTITY = 1;
