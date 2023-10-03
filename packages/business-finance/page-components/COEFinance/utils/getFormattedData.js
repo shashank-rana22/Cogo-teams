@@ -2,35 +2,33 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const SPLICE_FACTOR = 1;
 
+const getServices = (data) => data?.map((item) => (item?.serviceType || '')) || [];
+
+const commonData = (data, services) => services?.map((service) => {
+	const filterData = data?.filter((item) => (item?.serviceType === service));
+	return filterData;
+}).flat() || [];
+
+const remainingData = (data, services) => data?.filter((item) => (!services?.includes(item?.serviceType))) || [];
+
 const getFormattedData = (data) => {
 	const { sell_quotation:sellQuotation = {}, buy_quotation:buyQuotation = {} } = data || {};
-	const sellQuotationData = sellQuotation?.serviceCharges
-		?.map((item) => ({ ...item, serviceType: item.serviceType || 'Platform Fees' }));
 
-	const sellSevices = sellQuotation?.serviceCharges?.map((item) => (item.serviceType || 'Platform Fees')) || [];
-	const buySevices = buyQuotation?.serviceCharges?.map((item) => (item.serviceType || 'Platform Fees')) || [];
+	const sellQuotationData = sellQuotation.serviceCharges
+		?.map((item) => ({ ...item, serviceType: item?.serviceType || 'Platform Fees' }));
+	const buyQuotationData = buyQuotation?.serviceCharges || [];
+
+	const sellSevices = getServices(sellQuotationData);
+	const buySevices = getServices(buyQuotationData);
+
 	const commonServices = sellSevices.filter((value) => buySevices?.includes(value));
-
-	const buyQuotationData = buyQuotation?.serviceCharges
-		?.map((item) => ({ ...item, serviceType: item.serviceType || '' }));
-
 	const uniqueServices = [...new Set(commonServices)];
 
-	const commonBuyData = uniqueServices?.map((service) => {
-		const filterData = buyQuotationData?.filter((item) => (item?.serviceType === service));
-		return filterData;
-	}).flat();
+	const commonBuyData = commonData(buyQuotationData, uniqueServices);
+	const remainingBuyData = remainingData(buyQuotationData, uniqueServices);
 
-	const remainingBuyData = buyQuotationData
-		?.filter((item) => (!uniqueServices?.includes(item?.serviceType))) || [];
-
-	const commonSellData = uniqueServices?.map((service) => {
-		const filterData = sellQuotationData?.filter((item) => (item?.serviceType === service));
-		return filterData;
-	}).flat();
-
-	const remainingSellData = sellQuotationData
-		?.filter((item) => (!uniqueServices?.includes(item?.serviceType))) || [];
+	const commonSellData = commonData(sellQuotationData, uniqueServices);
+	const remainingSellData = remainingData(sellQuotationData, uniqueServices);
 
 	return {
 		formattedBuyData  : [...commonBuyData, ...remainingBuyData],
