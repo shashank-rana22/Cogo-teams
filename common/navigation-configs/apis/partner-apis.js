@@ -13708,6 +13708,11 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'update_communication_template',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'get_organization_services',
 			access_type  : 'private',
 			service_name : 'organization',
