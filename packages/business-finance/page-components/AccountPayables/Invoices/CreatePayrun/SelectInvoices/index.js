@@ -36,9 +36,9 @@ const updateApiData = ({
 
 		if (key === 'tdsAmount' && index >= MIN_AMOUNT) {
 			newValue.list[index].payableAmount = (newValue?.list?.[index]?.invoiceAmount || MIN_AMOUNT) - value
-				- newValue.list[index].paidAmount;
+				- (newValue?.list?.[index]?.paidAmount || MIN_AMOUNT);
 			newValue.list[index].inputAmount = (newValue?.list?.[index]?.invoiceAmount || MIN_AMOUNT) - value
-				- newValue.list[index].paidAmount;
+				- (newValue?.list?.[index]?.paidAmount || MIN_AMOUNT);
 		}
 	}
 	return newValue;
