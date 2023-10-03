@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
+import moment from 'moment';
 
 import {
 	getCustomRecurrence, getDailyRecurrence, getMonthlyRecurrence,
@@ -63,13 +64,21 @@ const getPayload = ({ eventDetails = {}, values = {}, eventData = {}, type = '' 
 	};
 };
 
-const useCreateCogooneCalendar = ({ setEventDetails = () => {}, eventDetails = {}, reset = () => {} }) => {
+const useCreateCogooneCalendar = ({
+	setEventDetails = () => {}, eventDetails = {},
+	reset = () => {},
+	getEvents = () => {},
+	month = '',
+}) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/create_cogoone_calendar',
 	}, { manual: true });
 
 	const createEvent = async ({ values = {}, eventData = {}, type = '' }) => {
+		const startDate = moment(month).startOf('month').toDate();
+		const endDate = moment(month).endOf('month').toDate();
+
 		try {
 			const payload = getPayload({ eventDetails, values, eventData, type });
 			await trigger({ data: payload });
@@ -79,6 +88,7 @@ const useCreateCogooneCalendar = ({ setEventDetails = () => {}, eventDetails = {
 			});
 			Toast.success(`${startCase(eventDetails?.category)} Scheduled Successfully`);
 			reset();
+			getEvents({ startDate, endDate });
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data));
 		}

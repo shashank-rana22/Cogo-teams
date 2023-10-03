@@ -1,7 +1,8 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMCall, IcMShip, IcMSettings } from '@cogoport/icons-react';
+import { IcMCall, IcMShip, IcMSettings, IcMAgentManagement } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -22,18 +23,14 @@ const ICON_MAPPING = {
 		icon  : <IcMSettings width={16} height={16} />,
 		color : '#F3FAFA',
 	},
+	default: {
+		icon  : <IcMAgentManagement width={16} height={16} />,
+		color : '#F3FAFA',
+	},
 };
 
 function UserEvents({ selectedEventData = {} }) {
-	const { marked_events: markedEvents = [], start = '' } = selectedEventData || {};
-
-	const USER_CONTACT_DETAILS = ['Ramesh Naidu', '+91 7893486780', 'ramesh.naidu@gmail.com'];
-
-	const sedualTime = formatDate({
-		date       : start || new Date(),
-		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aa'],
-		formatType : 'time',
-	});
+	const { eventsList: markedEvents = [] } = selectedEventData || {};
 
 	if (isEmpty(markedEvents)) {
 		return (
@@ -47,50 +44,88 @@ function UserEvents({ selectedEventData = {} }) {
 		<div className={styles.container}>
 			{(markedEvents || []).map((singleEvent) => {
 				const {
-					event_types = '', customer = '', remarks = '',
-					end = '', important = false,
+					subject = '', description = '', metadata = {},
+					is_important = false, validity_start = '', category = '', validity_end = '',
 				} = singleEvent || {};
+				const { organization_data = {}, user_data = {}	} = metadata || {};
 
-				const isNotActiveEvents = new Date(end)?.getTime() < new Date().getTime();
+				const USER_CONTACT_DETAILS = [user_data?.name, user_data?.email];
 
-				const icons = ICON_MAPPING[event_types];
+				const startTime = formatDate({
+					date       : new Date(validity_start),
+					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aa'],
+					formatType : 'time',
+				});
+
+				const endTime = formatDate({
+					date       : new Date(validity_end),
+					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aa'],
+					formatType : 'time',
+				});
+
+				const icons = ICON_MAPPING[subject] || ICON_MAPPING?.default;
 
 				return (
 					<div
 						className={cl`${styles.card} 
-					${isNotActiveEvents ? styles.expired_event : ''}
-					${important ? styles.important_event : styles.not_important_event}
+					${is_important ? styles.important_event : styles.not_important_event}
 					`}
 						key={singleEvent?.id}
 					>
+						{category === 'meeting' ? (
+							<div className={styles.meeting}>
+								<Image
+									src={GLOBAL_CONSTANTS.image_url.meetings}
+									width={20}
+									height={20}
+									alt="logo"
+								/>
+							</div>
+						) : null}
+
 						<div className={styles.avatar_container}>
 							<div className={styles.avatar} style={{ background: `${icons?.color}` }}>
 								{icons?.icon}
 							</div>
-							<div className={styles.time}>
-								{sedualTime}
-							</div>
+							{category === 'reminder' ? (
+								<div className={styles.time}>
+									{startTime}
+								</div>
+							) : null}
 						</div>
 						<div className={styles.details}>
 							<div className={styles.business_name}>
-								{startCase(customer)}
+								{startCase(organization_data?.business_name) || subject}
 							</div>
 							<div className={styles.description}>
-								{remarks}
+								{description}
 							</div>
-							<div className={styles.poc_details}>
-								<div className={styles.name}>
-									POC :
+							{category === 'reminder' ? (
+								<div className={styles.poc_details}>
+									<div className={styles.name}>
+										POC:
+									</div>
+									<div className={styles.poc_data}>
+										{(USER_CONTACT_DETAILS || []).map((item) => (
+											<div className={styles.contact_details} key={item}>
+												{item}
+											</div>
+										))}
+									</div>
 								</div>
-								<div className={styles.poc_data}>
-									{(USER_CONTACT_DETAILS || []).map((item) => (
-										<div className={styles.contact_details} key={item}>
-											{item}
-										</div>
-									))}
+							) : null}
 
+							{category === 'meeting' ? (
+								<div className={styles.meeting_times}>
+									Start at
+									{' '}
+									{startTime}
+									{' '}
+									and end at
+									{' '}
+									{endTime}
 								</div>
-							</div>
+							) : null}
 						</div>
 					</div>
 				);

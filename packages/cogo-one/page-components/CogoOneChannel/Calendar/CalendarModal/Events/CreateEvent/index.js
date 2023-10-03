@@ -39,6 +39,8 @@ const EVENT_TYPES = [
 function CreateEvent({
 	eventDetails = {},
 	setEventDetails = () => {},
+	getEvents = () => {},
+	month = '',
 }) {
 	const [eventOccurence, setEventOccurence] = useState({
 		showModal     : false,
@@ -69,6 +71,8 @@ function CreateEvent({
 		setEventDetails,
 		eventDetails,
 		reset,
+		getEvents,
+		month,
 	});
 	const { organization_id = '' } = formValues || {};
 

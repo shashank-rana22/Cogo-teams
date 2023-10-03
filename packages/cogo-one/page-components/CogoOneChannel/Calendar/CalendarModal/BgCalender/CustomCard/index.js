@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMCall, IcMShip } from '@cogoport/icons-react';
+import { IcMCall, IcMShip, IcMSettings, IcMAgentManagement } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -9,6 +9,7 @@ const COLORS_MAPPING = {
 	call_customer  : '#F37166',
 	send_quotation : '#88CAD1',
 	other          : '#FCEEDF',
+	default        : '#88CAD1',
 };
 
 const HEADER_MAPPING = {
@@ -18,8 +19,18 @@ const HEADER_MAPPING = {
 		color : '#FCEEDF',
 	},
 	send_quotation: {
-		title : 'shipping',
+		title : 'Shipping',
 		icon  : <IcMShip width={10} height={10} />,
+		color : '#F3FAFA',
+	},
+	other: {
+		title : 'Other',
+		icon  : <IcMSettings width={10} height={10} />,
+		color : '#FCEEDF',
+	},
+	default: {
+		title : 'Meeting',
+		icon  : <IcMAgentManagement width={10} height={10} />,
 		color : '#F3FAFA',
 	},
 };
@@ -27,23 +38,26 @@ const HEADER_MAPPING = {
 const MORE_THEN = 2;
 
 function CustomCard({ event = {} }) {
-	const { marked_events = [], start = '', end = '' } = event || {};
-	console.log('end:', end);
-	console.log('start:', start);
+	const { eventsList = [] } = event || {};
 
-	const firstTwoEvents = (marked_events || []).slice([GLOBAL_CONSTANTS.zeroth_index], MORE_THEN);
+	const firstTwoEvents = (eventsList || []).slice([GLOBAL_CONSTANTS.zeroth_index], MORE_THEN);
 
-	const isShowMore = (marked_events || []).length > MORE_THEN;
+	const isShowMore = (eventsList || []).length > MORE_THEN;
+	const firstEvent = firstTwoEvents?.[GLOBAL_CONSTANTS.zeroth_index]?.subject;
+	const moreCount = eventsList.length - MORE_THEN;
+	const checkSameType = (firstTwoEvents || []).length === MORE_THEN
+		? (firstTwoEvents || []).every((item) => item?.subject
+	=== firstEvent) : false;
 
-	const moreCount = marked_events.length - MORE_THEN;
+	const updatedHeader = checkSameType ? [firstTwoEvents?.[GLOBAL_CONSTANTS.zeroth_index]] : firstTwoEvents;
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				{(firstTwoEvents || []).map((item) => {
-					const eventData = HEADER_MAPPING[item?.event_types];
+				{(updatedHeader || []).map((item) => {
+					const eventData = HEADER_MAPPING[item?.subject] || HEADER_MAPPING?.default;
 
-					if (isEmpty(eventData)) {
+					if (isEmpty(updatedHeader)) {
 						return null;
 					}
 
@@ -65,9 +79,12 @@ function CustomCard({ event = {} }) {
 					<div className={styles.remarks_container} key={item?.id}>
 						<div
 							className={styles.remarks}
-							style={{ borderLeft: `2px solid ${COLORS_MAPPING[item?.event_types]}` }}
+							style={{
+								borderLeft: `2px solid ${COLORS_MAPPING[item?.subject]
+								|| COLORS_MAPPING?.default}`,
+							}}
 						>
-							{startCase(item?.event_types)}
+							{startCase(item?.subject)}
 						</div>
 					</div>
 				))}

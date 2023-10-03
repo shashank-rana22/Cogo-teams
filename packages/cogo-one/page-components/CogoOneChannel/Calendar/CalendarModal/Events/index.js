@@ -9,7 +9,11 @@ import CreateEvent from './CreateEvent';
 import styles from './styles.module.css';
 import UserEvents from './UserEvents';
 
-function Events({ addEvents = true, setAddEvents = () => {}, selectedEventData = {} }) {
+function Events({
+	addEvents = true, setAddEvents = () => {}, selectedEventData = {},
+	getEvents = () => {},
+	month = '',
+}) {
 	const [eventDetails, setEventDetails] = useState({
 		category   : 'event',
 		event_type : 'call_customer',
@@ -61,6 +65,8 @@ function Events({ addEvents = true, setAddEvents = () => {}, selectedEventData =
 					<CreateEvent
 						eventDetails={eventDetails}
 						setEventDetails={setEventDetails}
+						getEvents={getEvents}
+						month={month}
 					/>
 				)}
 

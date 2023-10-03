@@ -6,14 +6,14 @@ import CalendarModal from './CalendarModal';
 import styles from './styles.module.css';
 
 function Calendar() {
-	const [eventClender, setEventValendar] = useState(false);
+	const [eventClender, setEventCalendar] = useState(false);
 
 	return (
 		<>
 			<div
 				className={styles.calender}
 				role="presentation"
-				onClick={() => setEventValendar((prev) => !prev)}
+				onClick={() => setEventCalendar((prev) => !prev)}
 			>
 				<div className={styles.icon}>
 					<Image
@@ -28,7 +28,7 @@ function Calendar() {
 					Calendar
 				</div>
 			</div>
-			{eventClender ? <CalendarModal eventClender={eventClender} setEventValendar={setEventValendar} /> : null}
+			{eventClender ? <CalendarModal eventClender={eventClender} setEventCalendar={setEventCalendar} /> : null}
 		</>
 	);
 }
