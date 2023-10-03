@@ -20,7 +20,10 @@ function RateAddition({ globalFilters = {}, dateString = '' }) {
 			<div className={cl`${styles.chart_container}`}>
 				{(loading || !isEmpty(list))
 					? (
-						<ColumnChart data={list} loading={loading} />
+						<ColumnChart
+							data={list}
+							loading={loading}
+						/>
 					)
 					: <NoDataState flow="column" />}
 			</div>
