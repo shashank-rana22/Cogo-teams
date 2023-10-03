@@ -5923,6 +5923,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'get_organization_restricted_settings_config',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'sales',
+		},
 	],
 	notifications: [
 		{
@@ -13565,6 +13571,16 @@ const partner = {
 			api          : 'list_cogoone_shifts',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'update_communication_template',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_organization_services',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 	analytics_dashboard: [

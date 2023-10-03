@@ -13,6 +13,7 @@ const REJECTION_CATEGORY_MAPPING = {
 const DEFAULT_VALUE = 0;
 const PERCENTAGE_VALUE = 100;
 const DECIMAL_PLACE = 2;
+const DENOMINATOR = 1;
 
 const useGetCommentRemarkCounts = ({ remarkDate, subActiveTabReject = '' }) => {
 	const [{ data = {}, loading = false }, trigger] = useRequestBf(
@@ -41,13 +42,15 @@ const useGetCommentRemarkCounts = ({ remarkDate, subActiveTabReject = '' }) => {
 		}
 	}, [trigger, remarkDate, subActiveTabReject]);
 
-	const totalRemarks = (Object.values(data) || []).reduce(((acc, value) => (acc + value)), DEFAULT_VALUE);
+	const totalRemarks = (Object.values(data) || []).reduce(((acc, value) => (acc + Number(value))), DEFAULT_VALUE);
 
 	const pieData = (Object.keys(data) || []).map((item) => (
 		{
 			id    : upperCase(item),
 			label : `${upperCase(item)} : ${data?.[item] || DEFAULT_VALUE}`,
-			value : (((data?.[item] || DEFAULT_VALUE) * PERCENTAGE_VALUE) / totalRemarks).toFixed(DECIMAL_PLACE),
+			value : (((data?.[item] || DEFAULT_VALUE) * PERCENTAGE_VALUE) / (totalRemarks || DENOMINATOR))
+				.toFixed(DECIMAL_PLACE),
+			key: item,
 		}
 	));
 

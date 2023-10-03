@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import { FIREBASE_TABS } from '../../../../constants';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
 import { getHasAccessToEditGroup, switchUserChats } from '../../../../helpers/agentDetailsHelpers';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
@@ -16,9 +17,9 @@ import { dataMapping } from '../../../../utils/channelWiseDataMapping';
 
 import AddGroupMember from './AddGroupMember';
 import AgentQuickActions from './AgentQuickActions';
+import AgentWiseServices from './AgentWiseServices';
 import ContactVerification from './ContactVerification';
 import ConversationContainer from './ConversationContainer';
-import ExecutiveSummary from './ExecutiveSummary';
 import GroupMembers from './GroupMembers';
 import GroupMembersRequests from './GroupMembersRequests';
 import Profile from './Profile';
@@ -38,9 +39,6 @@ function AgentDetails({
 	formattedMessageData = {},
 	setModalType = () => {},
 	activeRoomLoading = false,
-	activeSelect = '',
-	setActiveSelect = () => {},
-	setShowMore = () => {},
 	firestore = {},
 	userId: agentId = '',
 	viewType = '',
@@ -129,8 +127,6 @@ function AgentDetails({
 	const handleRoute = () => {
 		window.open(`/${partnerId}/lead-organization/${lead_user_details?.lead_organization_id}`, '_blank');
 	};
-
-	const handleSummary = () => { setShowMore(true); setActiveSelect('user_activity'); };
 
 	const setActiveMessage = (val) => { switchUserChats({ val, firestore, setActiveTab }); };
 	if (!userId && !leadUserId && !mobile_no) {
@@ -255,15 +251,9 @@ function AgentDetails({
 				</>
 			)}
 
-			<ExecutiveSummary
-				handleSummary={handleSummary}
-				mobile_no={mobile_no}
-				sender={sender}
-				user_id={user_id}
-				lead_user_id={lead_user_id}
-				channel_type={channel_type}
-				activeSelect={activeSelect}
-			/>
+			{VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_services && organization_id ? (
+				<AgentWiseServices orgId={organization_id} />
+			) : null}
 		</>
 	);
 }

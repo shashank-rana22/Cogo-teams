@@ -63,6 +63,7 @@ function MailsList({
 					appliedFilters={appliedFilters}
 					setAppliedFilters={setAppliedFilters}
 					activeTab={activeTab}
+					mailsToBeShown={mailsToBeShown}
 				/>
 			</div>
 		</div>

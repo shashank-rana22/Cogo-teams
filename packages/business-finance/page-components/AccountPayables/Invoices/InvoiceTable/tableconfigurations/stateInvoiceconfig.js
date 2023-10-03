@@ -21,6 +21,7 @@ export const STATE_INVOICE_CONFIG = {
 		{
 			label : 'Name',
 			key   : 'name',
+			func  : 'renderStateName',
 			span  : 3,
 		},
 		{

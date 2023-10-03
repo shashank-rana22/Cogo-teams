@@ -204,7 +204,6 @@ function MessageCardData({
 				)}
 			</div>
 		</div>
-
 	);
 }
 

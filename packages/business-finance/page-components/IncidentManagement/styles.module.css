@@ -74,3 +74,12 @@
 .nodisplay {
 	display: none;
 }
+
+.title {
+	font-size: var(--font-size-md);
+}
+
+.text {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}

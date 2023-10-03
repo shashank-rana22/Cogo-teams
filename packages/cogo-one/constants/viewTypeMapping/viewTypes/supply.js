@@ -58,6 +58,8 @@ const SUPPLY = {
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : false,
 		hide_personal_mail                          : true,
+		show_services                               : true,
+		show_rm_agent_details                       : false,
 	},
 };
 

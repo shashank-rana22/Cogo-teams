@@ -3,6 +3,12 @@
 	border-radius: 4px;
 }
 
+.visualization_header_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .chart_container {
 	display: flex;
 	align-items: center;
@@ -46,6 +52,7 @@
 .tab_container {
 	display: flex;
 	justify-content: center;
+	padding-left: 10px;
 	margin-top: 12px;
 
 	:global {

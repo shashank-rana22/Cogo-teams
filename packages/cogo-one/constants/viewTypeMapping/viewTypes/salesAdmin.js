@@ -5,7 +5,7 @@ import { COGOVERSE_AGENT_MAPPINGS } from '../../../utils/getViewTypeFromWorkPref
 import { COMMON_AGENT_TYPES, COMMON_ADMIN_ACCESIBLE_BUTTONS } from '../defaultViewOptions';
 
 const SALES_ADMIN = {
-	chat_tabs_to_be_shown   : ['message', 'voice', 'outlook', 'teams'],
+	chat_tabs_to_be_shown   : ['message', 'voice', 'firebase_emails', 'teams'],
 	all_chats_base_query    : () => [where('agent_type', 'in', ['sales'])],
 	group_chats_query       : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 	teams_chats_base_query  : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
@@ -52,6 +52,11 @@ const SALES_ADMIN = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : true,
 		show_shipments_stakeholders_contact_details : true,
+		restrict_mail_to_organizations              : true,
+		hide_personal_mail                          : true,
+		allow_adding_mail_template                  : true,
+		show_services                               : false,
+		show_rm_agent_details                       : false,
 	},
 };
 
