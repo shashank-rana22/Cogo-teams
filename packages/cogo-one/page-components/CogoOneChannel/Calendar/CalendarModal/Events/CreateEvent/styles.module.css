@@ -65,7 +65,11 @@
 		}
 
 		.ui_select_input_control {
-			font-size: 14px;
+			font-size: 12px;
+		}
+
+		.ui_multiselect_input_control {
+			font-size: 12px !important;
 		}
 
 		.ui_input_container {

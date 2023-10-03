@@ -86,6 +86,22 @@ const scheduleEvents = ({ orgId = '', category = '' }) => ({
 		name        : 'mark_important_event',
 		controlType : 'checkbox',
 	},
+	occurence_event: {
+		label       : 'Select Event Occurence',
+		name        : 'occurence_event',
+		controlType : 'select',
+		isClearable : true,
+		value       : 'one_time',
+		rules       : { required: 'Occurence is required' },
+		options     : [
+			{ label: 'One Time', value: 'one_time' },
+			{ label: 'Daily', value: 'daily' },
+			{ label: 'Weekly', value: 'weekly' },
+			{ label: 'Monthly', value: 'monthly' },
+			{ label: 'Yearly', value: 'yearly' },
+			{ label: 'Custom', value: 'custom' },
+		],
+	},
 });
 
 export default scheduleEvents;
