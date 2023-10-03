@@ -1,4 +1,5 @@
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import {
 	onSnapshot,
 	doc,
@@ -46,7 +47,7 @@ function mountActiveRoomSnapShot({
 			});
 		});
 	} catch (e) {
-		console.log('e', e);
+		console.error('error:group', e);
 	} finally {
 		setLoading(false);
 	}
@@ -71,13 +72,19 @@ function mountDraftActiveRoomSnapShot({
 		);
 
 		snapshotRef.current.draftRoom = onSnapshot(activeDraftRoomDoc, (snapshotData) => {
+			const snapShotdata = snapshotData.data() || {};
+
+			if (isEmpty(snapShotdata)) {
+				return;
+			}
+
 			setActiveTab((prev) => ({
 				...prev,
-				data: { id: snapshotData?.id, ...(snapshotData.data() || {}) },
+				data: { id: snapshotData?.id, ...(snapShotdata) },
 			}));
 		});
 	} catch (e) {
-		console.log('e', e);
+		console.error('error:draft', e);
 	} finally {
 		setLoading(false);
 	}
