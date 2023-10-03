@@ -3,6 +3,7 @@ import {
 	InputController,
 	RadioGroupController,
 	SelectController,
+	TextAreaController,
 } from '@cogoport/forms';
 
 const controlTypeControllerMapping = {
@@ -11,6 +12,7 @@ const controlTypeControllerMapping = {
 	select      : SelectController,
 	radioGroup  : RadioGroupController,
 	asyncSelect : AsyncSelectController,
+	textarea    : TextAreaController,
 };
 
 export const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;

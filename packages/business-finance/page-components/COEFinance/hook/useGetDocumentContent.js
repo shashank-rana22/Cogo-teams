@@ -39,7 +39,7 @@ const useGetDocumentContent = ({ data }) => {
 
 	return {
 		contentLoading,
-		docContent   : JSON.stringify(apiData?.data)?.toLowerCase(),
+		docContent   : apiData?.data,
 		chargesTable : (apiData?.data?.charges_table),
 	};
 };

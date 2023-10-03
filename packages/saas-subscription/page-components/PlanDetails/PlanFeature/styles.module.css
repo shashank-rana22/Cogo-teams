@@ -28,3 +28,8 @@
 .col {
 	padding: 0 8px;
 }
+
+.scroll {
+	max-height: 300px;
+	overflow-y: scroll;
+}

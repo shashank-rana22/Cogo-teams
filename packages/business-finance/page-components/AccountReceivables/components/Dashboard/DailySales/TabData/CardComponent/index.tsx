@@ -29,7 +29,7 @@ function CardComponent({
 	filters, filterValue, entityCode,
 }: CardComponentProps) {
 	const { data, loading: loadingData } = useGetGraph({ filters, filterValue, subActiveTab, entityCode, toggleData });
-	const getData = () => {
+	function GetData() {
 		const getFormat = (duration) => {
 			if (filters.month) 			{
 				return format(duration, 'MMM', {}, false) || '-';
@@ -87,7 +87,7 @@ function CardComponent({
 													currencyDisplay       : 'code',
 													maximumFractionDigits : 2,
 													style                 : 'currency',
-
+													currencyWise          : true,
 												},
 											})}
 										</div>
@@ -110,7 +110,7 @@ function CardComponent({
 			});
 		}
 		return [];
-	};
+	}
 
 	return (
 		<div className={styles.flex}>
@@ -122,7 +122,7 @@ function CardComponent({
 						entityCode={entityCode}
 					/>
 				</div>
-			) : getData()}
+			) : GetData()}
 
 		</div>
 	);

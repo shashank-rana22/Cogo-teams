@@ -42,17 +42,20 @@ function MailConversation({ mailProps = {} }) {
 
 	const { content = '' } = body || {};
 
-	const allAttachements = attachmentData?.value || [];
+	const allAttachments = attachmentData?.value || [];
 
-	const newContent = allAttachements.reduce((prevContent, attachment) => prevContent.replaceAll(
-		`cid:${attachment.contentId}`,
-		`data:${attachment.contentType};base64,${attachment.contentBytes}`,
-	), content);
+	const newContent = allAttachments.reduce(
+		(prevContent, attachment) => prevContent.replaceAll(
+			`cid:${attachment.contentId}`,
+			`data:${attachment.contentType};base64,${attachment.contentBytes}`,
+		),
+		content,
+	);
 
 	const senderAddress = sender?.emailAddress?.address;
-	const recipientData = (toRecipients || []).map((item) => item?.emailAddress?.address);
-	const ccData = (ccRecipients || []).map((item) => item?.emailAddress?.address);
-	const bccData = (bccRecipients || []).map((item) => item?.emailAddress?.address);
+	const recipientData = (toRecipients || [])?.map((item) => item?.emailAddress?.address);
+	const ccData = (ccRecipients || [])?.map((item) => item?.emailAddress?.address);
+	const bccData = (bccRecipients || [])?.map((item) => item?.emailAddress?.address);
 
 	return (
 		<div className={styles.container}>
