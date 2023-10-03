@@ -14,7 +14,7 @@ const controls = [
 		name  : 'url',
 		span  : 6,
 		type  : 'file',
-		label : 'Upload Image',
+		label : 'Upload Carting Document',
 		rules : {
 			required: 'Document is required',
 		},
