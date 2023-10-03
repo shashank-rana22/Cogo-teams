@@ -40,9 +40,7 @@ async function getExistingGlobalRoom({
 
 	const roomData = globalRoomDataDoc?.data() || {};
 
-	const selfRoomId = roomData?.group_members_rooms?.find(
-		(member) => member?.user_id === loggedInAgendId,
-	)?.internal_group_id || '';
+	const selfRoomId = roomData?.group_members_rooms?.[loggedInAgendId] || '';
 
 	return {
 		group_id : globalRoomDataDoc?.id,
@@ -191,6 +189,7 @@ function useCreateOrGetDraftTeamRoom({
 			Toast.error('Something Went Wrong');
 		} finally {
 			setLoading(false);
+			setShowGroupError(false);
 		}
 	};
 

@@ -4,18 +4,28 @@ const getCreateGlobalRoomPayload = ({ data = {}, groupMemberRooms = [] }) => {
 	const {
 		group_members_ids = [],
 		group_members_count = 0,
-		group_members_hash_string = '',
 		is_group = false,
 		search_name,
 	} = data || {};
+
+	const formattedGroupMemberRooms = groupMemberRooms?.reduce(
+		(
+			acc,
+			item,
+		) => (
+			{
+				...acc,
+				[item?.user_id]: item?.internal_group_id,
+			}),
+		{},
+	);
 
 	const payload = {
 		group_members_ids,
 		group_members_count,
 		created_at            : Date.now(),
 		updated_at            : Date.now(),
-		group_members_hash_string,
-		group_members_rooms   : groupMemberRooms,
+		group_members_rooms   : formattedGroupMemberRooms,
 		last_group_updated_at : Date.now(),
 		is_group,
 		search_name,
@@ -73,17 +83,21 @@ const createLocalGroupRooms = ({
 		is_draft                   : false,
 	};
 
-	const userRoomMappings = userIds?.map(
-		(eachId) => {
-			const generatedRoomId = uuid();
-			groupMemberRooms.push({ user_id: eachId, internal_group_id: generatedRoomId });
+	const userRoomMappings = userIds?.reduce((
+		acc,
+		eachId,
+	) => {
+		const generatedRoomId = uuid();
+		groupMemberRooms.push({
+			user_id           : eachId,
+			internal_group_id : generatedRoomId,
+		});
 
-			return {
-				user_id : eachId,
-				room_id : generatedRoomId,
-			};
-		},
-	);
+		return {
+			...acc,
+			[eachId]: generatedRoomId,
+		};
+	}, {});
 
 	return {
 		action_name         : 'set_bulk_local_room',
@@ -111,4 +125,6 @@ const updateSelfUserRoom = ({
 	};
 };
 
-export { updateSelfUserRoom, createLocalGroupRooms, getCreateGlobalRoomPayload, createLocalNonGroupRoom };
+export {
+	updateSelfUserRoom, createLocalGroupRooms, getCreateGlobalRoomPayload, createLocalNonGroupRoom,
+};

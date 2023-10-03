@@ -23,14 +23,16 @@ function removeFromGroup({
 	groupData = {},
 	userIds = [],
 }) {
-	const { group_members_rooms = [], id = '' } = groupData || {};
+	const { group_members_rooms = {}, id = '' } = groupData || {};
 
-	const userRoomMappings = group_members_rooms?.filter?.((
-		eachPerson,
-	) => userIds?.includes(eachPerson?.user_id))?.map((eachroom) => ({
-		user_id : eachroom?.user_id,
-		room_id : eachroom?.internal_group_id,
-	}));
+	const userRoomMappings = userIds?.reduce(
+		(
+			acc,
+			item,
+		) => (
+			{ ...acc, [item]: group_members_rooms?.[item] || null }),
+		{},
+	);
 
 	const metadata = {
 		data: [{
@@ -81,37 +83,6 @@ function removeOwnerToGroup({ userIds = [], groupId = '' }) {
 	return payload;
 }
 
-function updateGroupName({ groupId = '', groupName = '', groupMemberRooms = [] }) {
-	const userRoomMappings = groupMemberRooms?.map((eachroom) => ({
-		user_id : eachroom?.userId,
-		room_id : eachroom?.internal_group_id,
-	}));
-
-	const metadata = {
-		data: [{
-			action_name : 'set_global_room',
-			payload     : { search_name: groupName },
-		},
-		{
-			action_name        : 'set_bulk_local_room',
-			user_room_mappings : userRoomMappings,
-			payload            : {
-				search_name : groupName,
-				updated_at  : Date.now(),
-			},
-		},
-		],
-	};
-
-	const payload = {
-		name        : groupName,
-		group_id    : groupId,
-		action_name : 'update_group_name',
-		metadata,
-	};
-	return payload;
-}
-
 const GROUP_PAYLOAD_FUNC_MAPPING = {
 	ADD_TO_GROUP: {
 		getPayload: addToGroupPayload,
@@ -126,7 +97,7 @@ const GROUP_PAYLOAD_FUNC_MAPPING = {
 		getPayload: addOwnerToGroup, // todo
 	},
 	UPDATE_GROUP_NAME: {
-		getPayload: updateGroupName, // todo
+		getPayload: () => {}, // todo
 	},
 };
 
