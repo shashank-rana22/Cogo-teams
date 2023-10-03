@@ -1,5 +1,3 @@
-import { ShipmentChat } from '@cogoport/shipment-chat';
-
 import AppliedFilters from '../../common/AppliedFilters';
 import CriticalAndSearch from '../../common/CriticalAndSearch';
 import DeskTabs from '../../common/DeskTabs';
@@ -21,8 +19,6 @@ function LclFreight() {
 				<div className={styles.stepper_container}>
 					<Stepper />
 				</div>
-
-				<ShipmentChat />
 
 				<Filters />
 			</div>

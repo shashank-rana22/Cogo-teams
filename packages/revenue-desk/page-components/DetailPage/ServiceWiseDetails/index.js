@@ -164,6 +164,7 @@ function ServiceWiseDetails({
 						setReason={setReason}
 						othertext={othertext}
 						setOthertext={setOthertext}
+						supplierPayload={supplierPayload}
 					/>
 				) : null}
 		</div>
