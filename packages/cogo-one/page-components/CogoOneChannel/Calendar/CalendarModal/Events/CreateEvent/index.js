@@ -80,9 +80,9 @@ function CreateEvent({
 		getEvents,
 		month,
 	});
-	const { organization_id = '' } = formValues || {};
+	const { organization_id = '', start_date: startDateField } = formValues || {};
 
-	const controls = scheduleEvents({ orgId: organization_id, category });
+	const controls = scheduleEvents({ orgId: organization_id, category, startDateField });
 
 	const {
 		start_date, start_time, end_date, end_time,
