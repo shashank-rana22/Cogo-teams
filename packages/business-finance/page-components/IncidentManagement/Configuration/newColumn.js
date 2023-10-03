@@ -1,10 +1,11 @@
-import { Pill, Button, Tooltip } from '@cogoport/components';
+import { Pill, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import ShowOverflowingNumber from '../../commons/utils/showOverflowingNumber';
+import RenderRemarks from '../common/RenderRemarks';
 import { MAPPING } from '../Constants/tab_mapping';
 import { toTitleCase } from '../utils/titleCase.ts';
 
@@ -13,7 +14,7 @@ import styles from './styles.module.css';
 
 const SIXTH_SPLICE_INDEX = 8;
 const FIRST_SPLICE_INDEX = 1;
-const OVERFLOW_NUMBER = 14;
+const OVERFLOW_NUMBER_2 = 40;
 
 function getColumns({
 	setIsAscendingActive = () => { }, setFilters = () => { },
@@ -45,59 +46,47 @@ function getColumns({
 				);
 				const bankTradePartyName = data?.bankRequest && data?.organization?.tradePartyType;
 				const tdsTradePartyName = data?.tdsRequest && data?.organization?.tradePartyType;
-				function BusinessName() {
-					return (
-						<div>
-							{toTitleCase(
-								organization?.businessName || '-',
-							)}
-						</div>
-					);
-				}
 				return list ? (
-					<Tooltip
-						interactive
-						content={(list || [{}]).map((item) => (
-							<div className={styles.trade_party_name} key={item?.id}>
-								<div>{toTitleCase(item?.div || '-')}</div>
-							</div>
-						))}
-					>
-						<div className={styles.wrapper}>
-							{getList()[GLOBAL_CONSTANTS.zeroth_index]}
-						</div>
-					</Tooltip>
+					<div className={styles.company_name}>
+						<ShowOverflowingNumber
+							value={toTitleCase(getList()[GLOBAL_CONSTANTS.zeroth_index])}
+							maxLength={OVERFLOW_NUMBER_2}
+						/>
+					</div>
 				) : (
 					<div>
-						<Tooltip
-							interactive
-							content={
-								bankTradePartyName || tdsTradePartyName ? (
-									<div>
-										{(organization?.tradePartyType === 'SELF'
-											? organization?.businessName
-											: organization?.tradePartyName)
-											|| toTitleCase(
-												organization?.businessName || '-',
-											)}
-									</div>
+						{bankTradePartyName || tdsTradePartyName ? (
+							<div className={styles.company_name}>
+								{(organization?.tradePartyType === 'SELF'
+									? 									(
+										<ShowOverflowingNumber
+											value={toTitleCase(organization?.businessName)}
+											maxLength={OVERFLOW_NUMBER_2}
+										/>
+									)
+									: 									(
+										<ShowOverflowingNumber
+											value={toTitleCase(organization?.tradePartyName)}
+											maxLength={OVERFLOW_NUMBER_2}
+										/>
+									)
 								)
-									: <BusinessName />
-							}
-						>
-							{bankTradePartyName || tdsTradePartyName ? (
-								<div className={styles.company_name}>
-									{(organization?.tradePartyType === 'SELF'
-										? organization?.businessName
-										: organization?.tradePartyName)
-										|| toTitleCase(organization?.businessName || '-')}
-								</div>
-							) : (
-								<div className={styles.company_name}>
-									{toTitleCase(organization?.businessName || '-')}
-								</div>
-							)}
-						</Tooltip>
+										|| (
+											<ShowOverflowingNumber
+												value={toTitleCase(organization?.businessName)}
+												maxLength={OVERFLOW_NUMBER_2}
+											/>
+										)}
+							</div>
+						) : (
+							<div className={styles.company_name}>
+								<ShowOverflowingNumber
+									value={toTitleCase(organization?.businessName)}
+									maxLength={OVERFLOW_NUMBER_2}
+								/>
+							</div>
+						)}
+
 					</div>
 				);
 			},
@@ -110,7 +99,9 @@ function getColumns({
 				const { createdBy = {} } = original || {};
 				const { name = '' } = createdBy || {};
 				return (
-					<ShowOverflowingNumber value={name} maxLength={OVERFLOW_NUMBER} />
+					<div className={styles.requested_by}>
+						<ShowOverflowingNumber value={name} maxLength={OVERFLOW_NUMBER_2} />
+					</div>
 				);
 			},
 		},
@@ -131,7 +122,12 @@ function getColumns({
 									{t('incidentManagement:icjv_approval')}
 								</span>
 							)
-								: toTitleCase(requestType ? startCase(requestType) : '-')}
+								: (
+									<ShowOverflowingNumber
+										value={toTitleCase(startCase(requestType))}
+										maxLength={OVERFLOW_NUMBER_2}
+									/>
+								)}
 						</div>
 						<span>
 							{typeof (revoked) === 'boolean' && (
@@ -148,10 +144,10 @@ function getColumns({
 								</div>
 							)}
 							{requestType === 'JOB_OPEN' && (
-								<span>
+								<div className={styles.job_open}>
 									SID-
 									{jobNumber || ''}
-								</span>
+								</div>
 							)}
 						</span>
 					</div>
@@ -165,7 +161,12 @@ function getColumns({
 			Cell     : ({ row: { original } }) => {
 				const { incidentSubtype = '' } = original || {};
 				return (
-					<div className={styles.request}>{(incidentSubtype?.replace(/_/g, ' '))}</div>
+					<div className={styles.request}>
+						<ShowOverflowingNumber
+							value={toTitleCase(incidentSubtype?.replace(/_/g, ' '))}
+							maxLength={OVERFLOW_NUMBER_2}
+						/>
+					</div>
 				);
 			},
 		},
@@ -175,7 +176,7 @@ function getColumns({
 			id       : 'source',
 			Cell     : ({ row: { original } }) => {
 				const { source = '' } = original || {};
-				return <div className={styles.time}>{startCase(source || '-')}</div>;
+				return <div className={styles.source}>{startCase(source || '-')}</div>;
 			},
 		},
 		{
@@ -217,23 +218,9 @@ function getColumns({
 			Header   : <div>{MAPPING[activeTab]}</div>,
 			accessor : 'financeRemark',
 			id       : 'remark',
-			Cell     : ({ row: { original } }) => {
-				const { financeRemark = '', remark = '', type = '', data = {} } = original || {};
-				return (
-					<Tooltip
-						interactive
-						content={type === 'JOB_OPEN'
-							? financeRemark || data?.jobOpenRequest?.remark || remark
-							: financeRemark || remark}
-					>
-						<div className={styles.remark}>
-							{type === 'JOB_OPEN'
-								? financeRemark || data?.jobOpenRequest?.remark || remark
-								: financeRemark || remark}
-						</div>
-					</Tooltip>
-				);
-			},
+			Cell     : ({ row: { original } }) => (
+				<RenderRemarks remarksDetails={original} />
+			),
 		},
 		{
 			Header   : activeTab === 'requested' && t('incidentManagement:status_header'),
@@ -249,7 +236,6 @@ function getColumns({
 		{
 			accessor: (row) => (
 				<Button size="md" themeType="secondary" onClick={() => setDetailsModal(row)}>View</Button>
-
 			),
 			id: 'actionColumn',
 		},

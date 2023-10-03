@@ -7,7 +7,7 @@ function ShowOverflowingNumber({ value = '-', maxLength = 0 }) {
 	if (String(newValue).length > maxLength) {
 		return (
 			<Tooltip content={newValue} interactive>
-				<div style={{ width: '100px' }}>
+				<div>
 					{(newValue).substring(GLOBAL_CONSTANTS.zeroth_index, maxLength)}
 					...
 				</div>

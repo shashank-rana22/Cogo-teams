@@ -31,8 +31,17 @@
 
 .type_request {
 	width: 140px;
-	height: 16px;
 	hyphens: auto;
+	line-height: 16px;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
+}
+
+.requested_by {
+	width: 110px;
+	hyphens: auto;
+	line-height: 16px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	white-space: normal;
@@ -40,24 +49,40 @@
 
 .company_name {
 	width: 150px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	cursor: pointer;
+	hyphens: auto;
+	line-height: 16px;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
 }
 
 .request {
 	width: 150px;
 	hyphens: auto;
+	line-height: 16px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	white-space: normal;
+}
+
+.job_open {
+	margin-top: -5px;
 }
 
 .time {
 	width: 110px;
 	height: 16px;
 	hyphens: auto;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
+}
+
+.source {
+	width: 110px;
+	height: 16px;
+	hyphens: auto;
+	line-height: 16px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	white-space: normal;
