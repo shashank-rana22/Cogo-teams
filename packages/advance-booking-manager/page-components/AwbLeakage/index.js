@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-
 import { functions } from '../../commons/Functions';
 import Layout from '../../commons/Layout';
 import List from '../../commons/List';
@@ -19,12 +17,7 @@ function AwbLeakage({
 	errors = {},
 	setFilterData = () => {},
 }) {
-	const [filter, setFilter] = useState({});
-	const inventory_stock_controls = controls(setFilter);
-
-	useEffect(() => {
-		setFilterData(filter);
-	}, [filter, setFilterData]);
+	const inventory_stock_controls = controls(setFilterData);
 
 	return (
 		<div className={styles.awb_leakage_container}>
