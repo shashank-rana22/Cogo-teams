@@ -25,7 +25,7 @@ function ListFilters({
 
 	const onClickReset = useCallback(() => {
 		setShowPopover(false);
-		const existingSerialId = filters.serial_id;
+		const existingSerialId = filters?.serial_id;
 		if (existingSerialId) {
 			setFilters({ serial_id: existingSerialId });
 		} else {
@@ -35,7 +35,7 @@ function ListFilters({
 	}, [setShowPopover, filters.serial_id, reset, setFilters]);
 
 	const onSave = (values) => {
-		const existingSerialId = filters.serial_id;
+		const existingSerialId = filters?.serial_id;
 		const filter = Object.fromEntries(
 			Object.entries(values).filter(([, value]) => value),
 		);

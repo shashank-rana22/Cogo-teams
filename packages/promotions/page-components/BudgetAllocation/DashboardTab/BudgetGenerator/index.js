@@ -4,7 +4,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEdit, IcMTick, IcMCross } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import useUpdatePromotionBudgetAmount from '../../../../hooks/useUpdatePromotionBudgetAmount';
+import useUpdateBudgetAmount from '../../../../hooks/useUpdateBudgetAmount';
 
 import styles from './styles.module.css';
 
@@ -23,7 +23,7 @@ function BudgetGenerator({
 	setParams = () => {},
 }) {
 	const [isEdit, setIsEdit] = useState(false);
-	const { loading = {}, updateBudgetAmount = () => {} } = useUpdatePromotionBudgetAmount();
+	const { loading = {}, updateBudgetAmount = () => {} } = useUpdateBudgetAmount();
 
 	return (
 		<div className={styles.card}>
@@ -57,6 +57,7 @@ function BudgetGenerator({
 						<ButtonIcon
 							size="md"
 							icon={<IcMCross />}
+							disabled={loading}
 							themeType="primary"
 							onClick={() => {
 								setIsEdit(false);
@@ -79,7 +80,6 @@ function BudgetGenerator({
 						<ButtonIcon
 							size="md"
 							icon={<IcMEdit />}
-							disabled={false}
 							themeType="primary"
 							onClick={() => {
 								setIsEdit(true);

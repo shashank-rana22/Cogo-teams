@@ -24,7 +24,7 @@ function RuleSettingTab() {
 		);
 	}
 
-	if (viewAndEditRuleId !== null) {
+	if (viewAndEditRuleId) {
 		return (
 			<EditRuleForm
 				activeService={activeService}

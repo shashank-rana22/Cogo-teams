@@ -4,13 +4,13 @@ import handleFieldArrayAddCheck from '../helpers/checkShipmentSlabConfig';
 
 const MIN_DISCOUNT_PRICE = 0;
 
-const shipmentConfigControls = () => [{
+const getShipmentConfigControls = () => [{
 	name               : 'shipment_price_slab_config',
 	type               : 'fieldArray',
 	showButtons        : true,
 	buttonText         : 'Add',
 	noDeleteButtonTill : 1,
-	...handleFieldArrayAddCheck,
+	handleFieldArrayAddCheck,
 	controls           : [
 		{
 			name     : 'slab_unit',
@@ -99,4 +99,4 @@ const shipmentConfigControls = () => [{
 	],
 }];
 
-export default shipmentConfigControls;
+export default getShipmentConfigControls;

@@ -16,7 +16,7 @@ function CustomConfig({
 		<div className={styles.container}>
 			<div className={styles.head}>
 				<div className={styles.heading}>Custom Configuration</div>
-				{!showCustomConfigForm && viewAndEditConfigData === null ? (
+				{!showCustomConfigForm && !viewAndEditConfigData ? (
 					<Button
 						onClick={() => {
 							setShowCustomConfigForm(true);
@@ -27,7 +27,7 @@ function CustomConfig({
 				) : null}
 			</div>
 
-			{(viewAndEditConfigData !== null || showCustomConfigForm) ? (
+			{(viewAndEditConfigData || showCustomConfigForm) ? (
 				<CustomConfigForm
 					data={data}
 					refetchList={refetchList}
@@ -37,7 +37,7 @@ function CustomConfig({
 				/>
 			) : null}
 
-			{viewAndEditConfigData === null ? (
+			{!viewAndEditConfigData ? (
 				<CustomConfigList
 					data={data}
 					showCustomConfigForm={showCustomConfigForm}

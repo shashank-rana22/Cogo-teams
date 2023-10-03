@@ -7,7 +7,7 @@ import RowContent from '../../../../../../common/RowContent';
 import ShipmentSlabsTable from '../../../../../../common/ShipmentSlabsTable';
 import UpdateModal from '../../../../../../common/UpdateModal';
 import columnsWithValue from '../../../../../../helpers/getColumnMappingList';
-import useDeactivatePromotionRule from '../../../../../../hooks/useDeactivatePromotionRule';
+import useUpdatePromotionRule from '../../../../../../hooks/useUpdatePromotionRule';
 
 import columnsMapping from './columnsMapping';
 import styles from './styles.module.css';
@@ -24,7 +24,7 @@ function ListItem({
 	const [showDeactivateModal, setShowDeactivateModal] = useState(false);
 	const tagsList = columnsWithValue({ data, list: tagsMapping });
 	const columnsList = columnsWithValue({ data, list: columnsMapping });
-	const { onUpdateStatus = () => {} } = useDeactivatePromotionRule({ data, refetchList });
+	const { onUpdateAgentRule = () => {} } = useUpdatePromotionRule({ refetch: refetchList });
 
 	return (
 		<div className={styles.container}>
@@ -99,7 +99,8 @@ function ListItem({
 						</div>
 					</div>
 				) : null }
-				<button
+				<Button
+					themeType="linkUi"
 					className={styles.accordion_container}
 					onClick={() => setOpen(!open)}
 				>
@@ -114,17 +115,16 @@ function ListItem({
 							<IcMArrowRotateDown />
 						</>
 					)}
-				</button>
+				</Button>
 				{showDeactivateModal ? (
 					<UpdateModal
 						onClose={() => setShowDeactivateModal(false)}
 						onClickYes={() => {
-							onUpdateStatus({
+							onUpdateAgentRule({
 								data: {
 									id     : data.id,
 									status : 'inactive',
 								},
-								refetchList,
 							});
 							setShowDeactivateModal(false);
 						}}

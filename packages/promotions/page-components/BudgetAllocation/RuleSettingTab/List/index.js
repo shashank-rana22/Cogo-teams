@@ -1,4 +1,4 @@
-import useGetListPromotionRule from '../../../../hooks/useGetListPromotionRule';
+import useListPromotionRules from '../../../../hooks/useListPromotionRules';
 
 import ListContent from './ListContent';
 import ListHeader from './ListHeader';
@@ -22,7 +22,7 @@ function List({
 		updated_by_user_data_required : true,
 		discount_config_data_required : true,
 	};
-	const { data, loading, filters, setFilters, listPromotionRule } = useGetListPromotionRule({
+	const { data, loading, filters, setFilters, listPromotionRule } = useListPromotionRules({
 		defaultFilters,
 		defaultParams: DEFAULT_PARAMS,
 	});

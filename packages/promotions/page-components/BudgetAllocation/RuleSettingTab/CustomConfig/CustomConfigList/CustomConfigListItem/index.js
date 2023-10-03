@@ -24,7 +24,7 @@ function CustomConfigListItem({
 			<div className={styles.upper}>
 				<div className={styles.grid_row}>
 					{columnsList.map((columnDetails) => {
-						const { key } = columnDetails;
+						const { key } = columnDetails || {};
 						return (
 							<div key={key}>
 								<RowContent
@@ -70,7 +70,8 @@ function CustomConfigListItem({
 						</div>
 					</div>
 				) : null }
-				<button
+				<Button
+					themeType="linkUi"
 					className={styles.accordion_container}
 					onClick={() => setOpen(!open)}
 				>
@@ -85,7 +86,7 @@ function CustomConfigListItem({
 							<IcMArrowRotateDown />
 						</>
 					)}
-				</button>
+				</Button>
 			</div>
 		</div>
 	);

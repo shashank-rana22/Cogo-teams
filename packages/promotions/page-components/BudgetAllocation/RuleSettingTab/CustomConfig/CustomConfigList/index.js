@@ -17,7 +17,7 @@ function CustomConfigList({
 		<div>
 			{agent_rules?.map((item) => (
 				<CustomConfigListItem
-					key={item.id}
+					key={item?.id}
 					data={item}
 					type={data.scope}
 					showCustomConfigForm={showCustomConfigForm}

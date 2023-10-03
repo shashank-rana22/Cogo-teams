@@ -1,8 +1,9 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 import toastApiError from '../utils/toastApiError';
 
-const useCreatePromotionAgentRule = () => {
+const useCreatePromotionAgentRule = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/create_promotion_agent_rule',
@@ -13,9 +14,9 @@ const useCreatePromotionAgentRule = () => {
 
 	const onSubmit = async ({ data = {} }) => {
 		try {
-			await trigger({
-				data,
-			});
+			await trigger({ data });
+			Toast.success('Created Successfully');
+			refetch();
 		} catch (err) {
 			toastApiError(err);
 		}

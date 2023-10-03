@@ -9,7 +9,7 @@ import UpdateModal from '../../../../common/UpdateModal';
 
 import getControls from './controls/controls';
 import discountConfigControls from './controls/discountConfigControls';
-import shipmentConfigControls from './controls/shipmentConfigControls';
+import getShipmentConfigControls from './controls/shipmentConfigControls';
 import styles from './styles.module.css';
 
 const INCREMENT = 0.01;
@@ -27,18 +27,20 @@ function GlobalConfig({
 	showActivateModal = false,
 	setShowActivateModal = () => {},
 }) {
-	const DEFAULT_VALUES = data === null ? {} : data;
+	const DEFAULT_VALUES = {
+		...(data || {}),
+		category            : 'business',
+		for_service         : 'fcl_customs',
+		discount_limit_unit : 'flat',
+	};
 	const controls = getControls();
 	const discountControls = discountConfigControls({ disabledFrequency: false });
-	const shipmentControls = shipmentConfigControls();
+	const shipmentControls = getShipmentConfigControls();
 
-	DEFAULT_VALUES.category = 'business';
-	DEFAULT_VALUES.for_service = 'fcl_customs';
-	DEFAULT_VALUES.discount_limit_unit = 'flat';
-	if (data === null) {
+	if (!data) {
 		DEFAULT_VALUES.scope = 'shipment';
 	} else {
-		const { slab_configs = [], discount_config = [] } = data;
+		const { slab_configs = [], discount_config = [] } = data || {};
 		DEFAULT_VALUES.shipment_price_slab_config = slab_configs;
 		DEFAULT_VALUES.discount_limit_currency = discount_config[GLOBAL_CONSTANTS.zeroth_index]
 			?.discount_limit_currency;
@@ -50,10 +52,11 @@ function GlobalConfig({
 		control, formState: { errors = {} } = {}, handleSubmit, watch, setValue,
 	} = useForm({ defaultValues: DEFAULT_VALUES });
 	const formValues = watch();
+	const { organization_id = '' } = formValues;
 
 	const SHOW_ELEMENTS = {
-		organisation_type     : formValues?.organization_id === '' || formValues?.organization_id === undefined,
-		organisation_sub_type : formValues?.organization_id === '' || formValues?.organization_id === undefined,
+		organisation_type     : !organization_id,
+		organisation_sub_type : !organization_id,
 	};
 
 	const { shipment_price_slab_config = [] } = formValues;
@@ -64,7 +67,7 @@ function GlobalConfig({
 			} else {
 				setValue(
 					`shipment_price_slab_config.${index}.slab_lower_limit`,
-					Number(shipment_price_slab_config[index - ONE].slab_upper_limit) + INCREMENT,
+					Number(shipment_price_slab_config[index - ONE]?.slab_upper_limit) + INCREMENT,
 				);
 			}
 			setValue(`shipment_price_slab_config.${index}.slab_unit`, 'shipment_value');
@@ -84,7 +87,6 @@ function GlobalConfig({
 					<ButtonIcon
 						size="lg"
 						icon={<IcMCross />}
-						disabled={false}
 						onClick={() => {
 							setShowAddRuleForm(false);
 							setViewAndEditRuleId(null);

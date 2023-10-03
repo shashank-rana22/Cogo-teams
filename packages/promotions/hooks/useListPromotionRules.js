@@ -5,7 +5,7 @@ import toastApiError from '../utils/toastApiError';
 
 const PAGE_LIMIT = 10;
 
-const useGetListPromotionRule = ({
+const useListPromotionRules = ({
 	defaultFilters = {},
 	defaultParams = {},
 }) => {
@@ -55,4 +55,4 @@ const useGetListPromotionRule = ({
 	};
 };
 
-export default useGetListPromotionRule;
+export default useListPromotionRules;

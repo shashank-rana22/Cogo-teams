@@ -22,7 +22,7 @@ function StatsPromoCodes({
 					<div className={styles.main_text}>
 						{formatAmount({
 							amount,
-							currency : params.currency,
+							currency : params?.currency,
 							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'symbol',

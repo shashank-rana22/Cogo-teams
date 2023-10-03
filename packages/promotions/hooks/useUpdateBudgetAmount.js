@@ -1,8 +1,9 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 import toastApiError from '../utils/toastApiError';
 
-const useUpdatePromotionBudgetAmount = () => {
+const useUpdateBudgetAmount = () => {
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/update_budget_amount',
@@ -16,6 +17,7 @@ const useUpdatePromotionBudgetAmount = () => {
 			await trigger({
 				data,
 			});
+			Toast.success('Budget Updated');
 			refetchDashboard();
 		} catch (err) {
 			toastApiError(err);
@@ -27,4 +29,4 @@ const useUpdatePromotionBudgetAmount = () => {
 	};
 };
 
-export default useUpdatePromotionBudgetAmount;
+export default useUpdateBudgetAmount;

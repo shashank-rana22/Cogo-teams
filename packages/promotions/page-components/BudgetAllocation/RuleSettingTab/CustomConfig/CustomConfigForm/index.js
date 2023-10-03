@@ -26,18 +26,30 @@ function CustomConfigForm({
 	viewAndEditConfigData = {},
 	setViewAndEditConfigData = () => {},
 }) {
-	const DEFAULT_VALUES = viewAndEditConfigData || {};
+	const DEFAULT_VALUES = {
+		...(viewAndEditConfigData || {}),
+		discount_limit_unit: 'flat',
+	};
 	const controls = getControls({ cogo_entity_id: data?.cogo_entity_id });
 	const discountControls = discountConfigControls({ disabledFrequency: true });
 	const shipmentControls = shipmentConfigControls();
-	const { loading = {}, onSubmit = () => {} } = useCreatePromotionAgentRule();
-	const { loading: updateAgentRuleLoading = {}, onUpdateAgentRule = () => {} } = useUpdatePromotionAgentRule();
 
-	const submitForm = async (values) => {
+	const refetch = () => {
+		refetchList();
+		setShowCustomConfigForm(false);
+		setViewAndEditConfigData(null);
+	};
+
+	const { loading = {}, onSubmit = () => {} } = useCreatePromotionAgentRule({ refetch });
+	const { loading: updateAgentRuleLoading = {}, onUpdateAgentRule = () => {} } = useUpdatePromotionAgentRule({
+		refetch,
+	});
+
+	const submitForm = (values) => {
 		if (viewAndEditConfigData === null) {
 			if (data?.scope === 'organization') {
 				const dataMap = getOrganizationCreateAgentRuleData(values);
-				await onSubmit({
+				onSubmit({
 					data: {
 						...dataMap,
 						promotion_rule_id : data?.id,
@@ -46,7 +58,7 @@ function CustomConfigForm({
 				});
 			} else {
 				const dataMap = getShipmentAgentRuleData(values);
-				await onSubmit({
+				onSubmit({
 					data: {
 						...dataMap,
 						promotion_rule_id : data?.id,
@@ -56,34 +68,27 @@ function CustomConfigForm({
 			}
 		} else if (data?.scope === 'organization') {
 			const dataMap = getOrganizationUpdateAgentRuleData(values);
-			await onUpdateAgentRule({ data: dataMap });
+			onUpdateAgentRule({ data: dataMap });
 		} else {
 			const dataMap = getShipmentAgentRuleData(values);
-			await onUpdateAgentRule({ data: dataMap });
+			onUpdateAgentRule({ data: dataMap });
 		}
-		refetchList();
-		setShowCustomConfigForm(false);
-		setViewAndEditConfigData(null);
 	};
 
-	const deactiveRule = async (values) => {
-		const { id = '' } = values;
-		await onUpdateAgentRule({
+	const deactiveRule = (values) => {
+		const { id = '' } = values || {};
+		onUpdateAgentRule({
 			data: {
 				id,
 				status: 'inactive',
 			},
 		});
-		refetchList();
-		setShowCustomConfigForm(false);
-		setViewAndEditConfigData(null);
 	};
 
-	DEFAULT_VALUES.discount_limit_unit = 'flat';
-	if (viewAndEditConfigData === null) {
+	if (!viewAndEditConfigData) {
 		DEFAULT_VALUES.frequency = data?.discount_config[GLOBAL_CONSTANTS.zeroth_index]?.frequency;
 	} else {
-		const { slab_configs = {}, discount_config = {} } = viewAndEditConfigData === null ? {} : viewAndEditConfigData;
+		const { slab_configs = [], discount_config = [] } = viewAndEditConfigData || {};
 		DEFAULT_VALUES.shipment_price_slab_config = slab_configs;
 		DEFAULT_VALUES.discount_limit_currency = discount_config[GLOBAL_CONSTANTS.zeroth_index]
 			?.discount_limit_currency;
@@ -120,7 +125,7 @@ function CustomConfigForm({
 	return (
 		<div>
 			<div className={styles.container}>
-				{viewAndEditConfigData !== null && (
+				{viewAndEditConfigData ? (
 					<div className={styles.close_btn}>
 						<Button
 							className={styles.btn}
@@ -131,7 +136,7 @@ function CustomConfigForm({
 							DEACTIVATE
 						</Button>
 					</div>
-				)}
+				) : null}
 				<Layout
 					controls={controls}
 					control={control}
@@ -162,6 +167,7 @@ function CustomConfigForm({
 						className={styles.btn}
 						size="md"
 						themeType="secondary"
+						disabled={loading || updateAgentRuleLoading}
 						onClick={() => {
 							setViewAndEditConfigData(null);
 							setShowCustomConfigForm(false);

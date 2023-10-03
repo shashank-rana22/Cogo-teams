@@ -21,16 +21,16 @@ function DashboardTab() {
 		setParams = () => {},
 		fetchDashboardData = () => {},
 	} = useGetPromotionBudgetDashboard();
-	const [budgetId, setBudgetId] = useState(data.total_budget?.id);
-	const [budgetValue, setBudgetValue] = useState(data.total_budget?.amount || DEFAULT_AMOUNT);
+	const [budgetId, setBudgetId] = useState(data?.total_budget?.id);
+	const [budgetValue, setBudgetValue] = useState(data?.total_budget?.amount || DEFAULT_AMOUNT);
 
 	useEffect(() => {
 		setParams((p) => ({ ...p, currency: currencyCode.USD }));
 	}, [setParams]);
 
 	useEffect(() => {
-		setBudgetId(data.total_budget?.id);
-		setBudgetValue(data.total_budget?.amount || DEFAULT_AMOUNT);
+		setBudgetId(data?.total_budget?.id);
+		setBudgetValue(data?.total_budget?.amount || DEFAULT_AMOUNT);
 	}, [data]);
 
 	if (loading) {
@@ -45,7 +45,7 @@ function DashboardTab() {
 		<div>
 			<BudgetGenerator
 				budgetId={budgetId}
-				amount={data.total_budget?.amount || DEFAULT_AMOUNT}
+				amount={data?.total_budget?.amount || DEFAULT_AMOUNT}
 				budgetValue={budgetValue}
 				setBudgetValue={setBudgetValue}
 				refetchDashboard={fetchDashboardData}

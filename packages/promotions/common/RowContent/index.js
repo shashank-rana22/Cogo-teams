@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 function RowContent({ columnDetails = {}, data = {} }) {
 	const { label = '', getValue = () => {} } = columnDetails || {};
-	const value = getValue(data);// .toLowerCase();
+	const value = getValue(data);
 
 	return (
 		<div className={`${styles.content_container}`}>
