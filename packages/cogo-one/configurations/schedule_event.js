@@ -8,24 +8,25 @@ const NEW_DATE = new Date();
 const EVENTS_ROWS = 2;
 const MEETINGS_ROWS = 5;
 
-const scheduleEvents = ({ orgId = '', category = '' }) => ({
+const scheduleEvents = ({ orgId = '', category = '', startDateField = {} }) => ({
 	start_date: {
 		name        : 'start_date',
 		isClearable : true,
 		minDate     : NEW_DATE,
 		placeholder : 'Start Date',
-		dateFormat  : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		dateFormat  : GLOBAL_CONSTANTS.formats.date['dd/MMM/yyyy'],
 	},
 	start_time: {
 		name       : 'start_time',
 		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm aaa'],
 	},
 	end_date: {
-		name        : 'end_date',
-		placeholder : 'End Date',
-		minDate     : NEW_DATE,
-		maxDate     : addDays(NEW_DATE, ADD_DAY),
-		dateFormat  : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		name                  : 'end_date',
+		placeholder           : 'End Date',
+		minDate               : startDateField,
+		maxDate               : addDays(new Date(startDateField), ADD_DAY),
+		dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		isPreviousDaysAllowed : true,
 	},
 	end_time: {
 		name       : 'end_time',
