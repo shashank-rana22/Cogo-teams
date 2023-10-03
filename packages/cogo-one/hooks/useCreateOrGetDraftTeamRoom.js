@@ -170,6 +170,7 @@ function useCreateOrGetDraftTeamRoom({
 				loggedInAgendId,
 				groupMembersHashString,
 				groupName,
+				length      : userIds?.length,
 			});
 
 			setActiveRoom({ val: res });
