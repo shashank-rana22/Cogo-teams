@@ -4,11 +4,11 @@ import { IcMPlus } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping';
-import MailEditorModal from '../MailList/MailModal';
 import NewWhatsappMessage from '../NewWhatsappMessage';
 
 import DialCallModal from './DialCallModal';
 import { ICONS_MAPPING } from './iconsMappings';
+import MailEditorModal from './MailEditorModal';
 import styles from './styles.module.css';
 
 const ICON_STYLES = ['position_1', 'position_2', 'position_3', 'position_4', 'position_5'];

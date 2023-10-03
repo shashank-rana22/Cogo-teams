@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
@@ -20,10 +22,17 @@ import usePackingList from './Helpers/hooks/usePackingList';
 import styles from './styles.module.css';
 
 const AGENT_OTHER_CHARGES_CODE = [{ code: 'AWB', price: '150' }, { code: 'PCA', price: '250' }];
-const CARRIER_OTHER_CHARGES_CODE = [{ code: 'FSC', chargeType: 'chargeable_wt', price: '' },
-	{ code: 'SSC', chargeType: 'chargeable_wt', price: '' }, { code: 'XRAY', chargeType: 'chargeable_wt', price: '' },
-	{ code: 'AWC', chargeType: 'chargeable_wt', price: '' }, { code: 'AMS', chargeType: 'chargeable_wt', price: '' }];
-const UNSAVED_FIELDS = ['document_number',
+
+const CARRIER_OTHER_CHARGES_CODE = [
+	{ code: 'FSC', chargeType: 'chargeable_wt', price: '' },
+	{ code: 'SSC', chargeType: 'chargeable_wt', price: '' },
+	{ code: 'XRAY', chargeType: 'chargeable_wt', price: '' },
+	{ code: 'AWC', chargeType: 'chargeable_wt', price: '' },
+	{ code: 'AMS', chargeType: 'chargeable_wt', price: '' },
+];
+
+const UNSAVED_FIELDS = [
+	'document_number',
 	'consigneeAddress',
 	'shipperName',
 	'shipperAddress',
@@ -32,6 +41,14 @@ const UNSAVED_FIELDS = ['document_number',
 	'remark',
 	'totalPackagesCount',
 ];
+
+const NULL_VALUE = 0;
+const DECIMAL_NULL_VALUE = 0.0;
+const TO_FIXED_DECIMAL_PLACES = 2;
+const INCH_CM_FACTOR = 2.54;
+const VOLUME_FACTOR = 166.67;
+const PRECISION_VALUE = 1000000;
+const LENGTH_INDEX = 1;
 
 interface NestedObj {
 	[key: string]: NestedObj | React.FC ;
@@ -51,17 +68,43 @@ function GenerateMAWB({
 	viewDoc = false,
 	setViewDoc = () => {},
 	item = {},
-	edit,
+	edit = false,
 	setEdit = () => {},
 	setItem = () => {},
 	setGenerate = () => {},
 }:Props) {
 	const [back, setBack] = useState(false);
 	const [editCopies, setEditCopies] = useState(null);
-	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
+	const [disableClass, setDisableClass] = useState(false);
+	const [hawbDetails, setHawbDetails] = useState([
+		{ id: uuid(), documentNo: null, isNew: true },
+	]);
+
+	const [activeHawb, setActiveHawb] = useState(hawbDetails[GLOBAL_CONSTANTS.zeroth_index]);
+	const [activeKey, setActiveKey] = useState('basic');
+
+	const [customHawbNumber, setCustomHawbNumber] = useState(false);
+
+	const [taskItem, setTaskItem] = useState({
+		...item,
+		...item?.documentData,
+	});
+
+	const [activeCategory, setActiveCategory] = useState('mawb');
+
+	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 	const formValues = watch();
-	const [unitDefaultValue, setUnitDefaultValue] = useState(formValues?.dimension?.[0]?.unit);
+
+	const [unitDefaultValue, setUnitDefaultValue] = useState(
+		formValues?.dimension?.[GLOBAL_CONSTANTS.zeroth_index]?.unit,
+	);
+
+	const [chargeableWeight, setChargeableWeight] = useState(Number((Math.max(
+		+formValues.weight,
+		(+taskItem.volume * VOLUME_FACTOR),
+	) || DECIMAL_NULL_VALUE).toFixed(TO_FIXED_DECIMAL_PLACES)));
+
 	const {
 		data: airportData = {},
 		listAirport,
@@ -74,20 +117,19 @@ function GenerateMAWB({
 	const {
 		data: organizationData = {},
 		listOrganization,
-	} = 	GetOrganization({ importerExporterIds: item.importerExporterId });
+	} = GetOrganization({ importerExporterIds: item.importerExporterId });
 	const { list: organizationList = [] } = organizationData;
+	const category = item?.blCategory;
+	const mawbId = item?.documentId;
+	const pendingTaskId = item?.id || item?.taskId;
 
-	const [disableClass, setDisableClass] = useState(false);
-	const [hawbDetails, setHawbDetails] = useState([
-		{ id: uuid(), documentNo: null, isNew: true },
-	]);
-
-	const [activeHawb, setActiveHawb] = useState(hawbDetails[0]);
-	const [activeKey, setActiveKey] = useState('basic');
-
-	const [customHawbNumber, setCustomHawbNumber] = useState(false);
-
-	const fields = mawbControls(disableClass, !customHawbNumber, unitDefaultValue);
+	const packageDisableCheck = category === 'hawb' && activeCategory === 'mawb';
+	const fields = mawbControls({
+		disableClass,
+		editHawbNumberCondition: !customHawbNumber,
+		unitDefaultValue,
+		packageDisableCheck,
+	});
 
 	const { packingData, packingList } = usePackingList();
 
@@ -98,28 +140,12 @@ function GenerateMAWB({
 
 	const { hawbData, getHawb, hawbSuccess, setHawbSuccess, loading } = useGetHawb();
 
-	const [taskItem, setTaskItem] = useState({
-		...item,
-		...item?.documentData,
-	});
-
-	const category = item.blCategory;
-	const mawbId = item.documentId;
-	const pendingTaskId = item?.id || item?.taskId || undefined;
-
-	const [activeCategory, setActiveCategory] = useState('mawb');
-
 	const finalFields = [
 		...fields.hawb_controls,
 		...fields.basic,
 		...fields.package,
 		...fields.handling,
 	];
-
-	const [chargeableWeight, setChargeableWeight] = useState(Number((Math.max(
-		+formValues.weight,
-		(+taskItem.volume * 166.67),
-	) || 0.0).toFixed(2)));
 
 	const { data:hawbDataList = {}, loading:hawbListLoading, getHawbList } = useGetHawbList(item.shipmentId);
 
@@ -170,15 +196,22 @@ function GenerateMAWB({
 		}
 
 		if (hawbSuccess) {
+			const newDimensions = (hawbData?.data?.hawbDetails || []).reduce((prev, hawbItem) => {
+				const dimension = hawbItem?.documentData?.dimension || [];
+				return [...prev, ...dimension];
+			}, []);
+
 			setTaskItem({
 				...taskItem,
 				...hawbData.data,
 				...hawbData.data?.data,
 				originAirportId   : item.originAirportId,
 				serviceProviderId : item.serviceProviderId,
+				dimension         : !isEmpty(newDimensions) ? newDimensions : hawbData?.data?.data?.dimension,
 			});
 			setHawbSuccess(false);
 		}
+
 		finalFields.forEach((c) => {
 			if (activeCategory === 'hawb' && activeHawb.isNew && UNSAVED_FIELDS.includes(c.name)) {
 				setValue(c.name, '');
@@ -215,7 +248,7 @@ function GenerateMAWB({
 					? {
 						...hawbItem,
 						documentNo: activeHawb.documentNo ? activeHawb.documentNo
-							: `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`,
+							: `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - LENGTH_INDEX] + LENGTH_INDEX}`,
 					}
 					: hawbItem))
 			));
@@ -235,7 +268,11 @@ function GenerateMAWB({
 
 	useEffect(() => {
 		if (!viewDoc && formValues.class !== 'm') {
-			setValue('amount', ((formValues.chargeableWeight * formValues.ratePerKg) || 0.0).toFixed(2));
+			setValue(
+				'amount',
+				((formValues.chargeableWeight * formValues.ratePerKg)
+				|| DECIMAL_NULL_VALUE).toFixed(TO_FIXED_DECIMAL_PLACES),
+			);
 		}
 
 		if (formValues.class === 'a') {
@@ -246,30 +283,30 @@ function GenerateMAWB({
 	}, [formValues.chargeableWeight, formValues.ratePerKg, formValues.class]);
 
 	useEffect(() => {
-		if (operatorList.length > 0 && !edit) {
+		if (!isEmpty(operatorList) && !edit) {
 			setTaskItem((prev) => ({
 				...prev,
-				airline         : operatorList[0]?.business_name,
-				airlineIataCode : operatorList[0]?.iata_code,
+				airline         : operatorList[GLOBAL_CONSTANTS.zeroth_index]?.business_name,
+				airlineIataCode : operatorList[GLOBAL_CONSTANTS.zeroth_index]?.iata_code,
 			}));
-			setValue('airline', operatorList[0]?.business_name);
-			setValue('airlineIataCode', operatorList[0]?.iata_code);
+			setValue('airline', operatorList[GLOBAL_CONSTANTS.zeroth_index]?.business_name);
+			setValue('airlineIataCode', operatorList[GLOBAL_CONSTANTS.zeroth_index]?.iata_code);
 		}
 	}, [operatorList]);
 
 	useEffect(() => {
-		if (organizationList.length > 0 && !edit) {
+		if (!isEmpty(organizationList) && !edit) {
 			setTaskItem((prev) => ({
 				...prev,
-				customer_name: organizationList[0]?.business_name,
+				customer_name: organizationList[GLOBAL_CONSTANTS.zeroth_index]?.business_name,
 			}));
-			setValue('customer_name', organizationList[0]?.business_name);
-			setValue('shipperSignature', organizationList[0]?.business_name);
+			setValue('customer_name', organizationList[GLOBAL_CONSTANTS.zeroth_index]?.business_name);
+			setValue('shipperSignature', organizationList[GLOBAL_CONSTANTS.zeroth_index]?.business_name);
 		}
 	}, [organizationList]);
 
 	useEffect(() => {
-		if (airportList.length > 0 && !edit) {
+		if (!isEmpty(airportList) && !edit) {
 			(airportList || []).forEach((airItem) => {
 				if (airItem.id === item.originAirportId) {
 					setTaskItem((prev) => ({
@@ -349,31 +386,33 @@ function GenerateMAWB({
 		if (edit && activeCategory === 'hawb') {
 			return;
 		}
-		let totalVolume:number = 0;
-		let totalPackage:number = 0;
+
+		let totalVolume:number = NULL_VALUE;
+		let totalPackage:number = NULL_VALUE;
 		(formValues.dimension || []).forEach((dimensionObj) => {
-			if (dimensionObj.unit === 'inch') {
+			if (dimensionObj?.unit === 'inch') {
 				totalVolume
-				+= Number(dimensionObj.length) * 2.54
-				* Number(dimensionObj.width) * 2.54
-				* Number(dimensionObj.height) * 2.54
-				* Number(dimensionObj.packages_count);
-			} else if (dimensionObj.unit === 'cms') {
+				+= (Number(dimensionObj?.length) * INCH_CM_FACTOR
+				* Number(dimensionObj?.width) * INCH_CM_FACTOR
+				* Number(dimensionObj?.height) * INCH_CM_FACTOR
+				* Number(dimensionObj?.packages_count)) || NULL_VALUE;
+			} else if (dimensionObj?.unit === 'cms') {
 				totalVolume
-				+= Number(dimensionObj.length)
-				* Number(dimensionObj.width)
-				* Number(dimensionObj.height)
-				* Number(dimensionObj.packages_count);
+				+= (Number(dimensionObj?.length)
+				* Number(dimensionObj?.width)
+				* Number(dimensionObj?.height)
+				* Number(dimensionObj?.packages_count)) || NULL_VALUE;
 			}
-			totalPackage += Number(dimensionObj.packages_count);
+			totalPackage += Number(dimensionObj?.packages_count) || NULL_VALUE;
 		});
 		setValue('volumetricWeight', viewDoc ? taskItem.volumetricWeight
-			: Number(((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
+			: Number(((+totalVolume * VOLUME_FACTOR)
+			|| DECIMAL_NULL_VALUE) / PRECISION_VALUE).toFixed(TO_FIXED_DECIMAL_PLACES));
 		setValue('totalPackagesCount', totalPackage || taskItem.totalPackagesCount);
 	}, [JSON.stringify(formValues.dimension), formValues.weight]);
 
 	useEffect(() => {
-		setUnitDefaultValue(formValues?.dimension?.[0]?.unit);
+		setUnitDefaultValue(formValues?.dimension?.[GLOBAL_CONSTANTS.zeroth_index]?.unit);
 	}, [JSON.stringify(formValues?.dimension)]);
 
 	return (
