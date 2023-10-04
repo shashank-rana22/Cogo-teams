@@ -11,14 +11,14 @@ import { useState } from 'react';
 
 import {
 	SORTBY_OPTION,
-} from '../../../../constants/index.ts';
+} from '../../../../constants';
 
 import CallPriorityModal from './CallPriorityModal';
-import FilterpopOver from './FilterpopOver/index.tsx';
+import FilterpopOver from './FilterpopOver';
 import styles from './styles.module.css';
 
 function Filters({
-	handleChange = () => { },
+	handleChange = {},
 	handleInputReset = () => { },
 	setOrderBy = () => { },
 	orderBy = { key: '', order: '', label: '' },
@@ -162,6 +162,7 @@ function Filters({
 							placeholder={placeholder}
 							value={search}
 							onChange={(e) => handleChange(e)}
+							prefix={<IcMAppSearch />}
 							suffix={
 								search ? (
 									<IcMCross
@@ -169,9 +170,8 @@ function Filters({
 										cursor="pointer"
 										className={styles.icon_style}
 									/>
-								) : <IcMAppSearch />
+								) : null
 							}
-							prefix={null}
 							className={styles.styled_input}
 						/>
 					</div>

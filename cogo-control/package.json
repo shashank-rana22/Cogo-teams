@@ -1,4 +1,3 @@
-
 {
   "name": "cogo-control",
   "version": "0.1.0",
@@ -24,7 +23,7 @@
     "@cogoport/bn-salvage": "workspace:0.1.0",
     "@cogoport/booking-desk": "workspace:0.1.0",
     "@cogoport/booking-desk-air": "workspace:1.0.0",
-    "@cogoport/business-finance": "workspace:0.1.0", 
+    "@cogoport/business-finance": "workspace:0.1.0",
     "@cogoport/chakravyuh": "workspace:0.1.0",
     "@cogoport/chro": "workspace:0.1.0",
     "@cogoport/cogo-academy": "workspace:0.1.0",
@@ -105,7 +104,6 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
-    "typescript": "^4.9.5",
     "@cogoport/byod-dashboards" : "workspace:0.1.0",
     "@cogoport/employee-dashboard": "workspace:0.1.0",
     "@cogoport/manager-dashboard": "workspace:0.1.0",
@@ -129,9 +127,5 @@
   },
   "browserslist": [
     "defaults"
-  ],
-  "devDependencies": {
-    "@types/node": "^18.16.18",
-    "@types/react": "^18.2.12"
-  }
+  ]
 }
