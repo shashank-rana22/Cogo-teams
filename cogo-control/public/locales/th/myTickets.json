@@ -130,5 +130,15 @@
     "raised_to_desk": "ยกไปยังโต๊ะ",
     "request_type": "ประเภทคำขอ",
     "select_sid": "เลือก SID",
-    "select_request_ype": "เลือกประเภทคำขอ"
+    "select_request_ype": "เลือกประเภทคำขอ",
+    "by_category": "ตามหมวดหมู่",
+    "by_desk": "โดยโต๊ะทำงาน",
+    "select_raised_by_desk": "เลือกยกขึ้นโดยโต๊ะทำงาน",
+    "select_raised_to_desk": "เลือกยกไปที่โต๊ะทำงาน",
+    "organization": "องค์กร",
+    "sid": "รหัส SID",
+    "service": "บริการ",
+    "trade_type": "ประเภทการซื้อขาย",
+    "category": "หมวดหมู่",
+    "sub_category": "หมวดหมู่ย่อย"
 }

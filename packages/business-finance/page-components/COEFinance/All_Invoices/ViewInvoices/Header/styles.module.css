@@ -25,3 +25,20 @@
 	margin: 20px;
 	font-weight: 600;
 }
+
+.timeline {
+	margin-top: -30px;
+}
+
+.btn_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modal_body_section_custom {
+	:global {
+		.ui_modal_body_container {
+			max-height: 90vh;
+		}
+	}
+}

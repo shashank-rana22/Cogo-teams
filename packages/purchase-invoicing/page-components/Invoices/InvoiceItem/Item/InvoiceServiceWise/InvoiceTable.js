@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import getFormattedAmount from '../../../../../common/helpers/formatAmount';
+import getFormattedAmount from '../../../../../helpers/getformattedAmount';
 import getServiceNameforTableColumn from '../../../../../helpers/getServiceNameforTableColumn';
 
 const { zeroth_index } = GLOBAL_CONSTANTS;

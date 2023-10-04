@@ -2,11 +2,11 @@ import { cl } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
 
 import { getFeatureMapping } from '../../constant/featureMapping';
 import useGetPlanDetails from '../../hooks/useGetPlanDetails';
 
+import Discount from './Discount';
 import Header from './Header';
 import PlanFeature from './PlanFeature';
 import Pricing from './Pricing';
@@ -17,10 +17,9 @@ function PlanDetails() {
 	const { back } = useRouter();
 	const { t } = useTranslation(['saasSubscription']);
 
-	const [featureModal, setFeatureModal] = useState({});
+	const { loading = false, planDetails, featureModal, setFeatureModal } = useGetPlanDetails();
 
-	const { loading = false, planDetails } = useGetPlanDetails({ featureModal });
-	const { plan = {}, pricing = [], plan_features = [], add_ons = [] } = planDetails || {};
+	const { plan = {}, pricing = [], plan_features = [], add_ons = [], discounts = [] } = planDetails || {};
 
 	const featureMapping = getFeatureMapping({ add_ons, plan_features, t });
 
@@ -32,7 +31,7 @@ function PlanDetails() {
 			</div>
 
 			<div className={styles.cell}>
-				<Header plan={plan} loading={loading} />
+				<Header plan={plan} loading={loading} setFeatureModal={setFeatureModal} />
 			</div>
 
 			<div className={styles.cell}>
@@ -53,6 +52,11 @@ function PlanDetails() {
 					</div>
 				))}
 			</div>
+
+			<div className={styles.cell}>
+				<Discount planId={plan?.id} loading={loading} discounts={discounts} setFeatureModal={setFeatureModal} />
+			</div>
+
 			<UpdateFeatureModal featureModal={featureModal} setFeatureModal={setFeatureModal} planId={plan?.id} />
 		</div>
 	);

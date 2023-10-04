@@ -4,9 +4,9 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useContext, useEffect, useCallback } from 'react';
 
-const SHOW_ALL_TASKS = ['manager', 'admin'];
+const SHOW_ALL_TASKS = ['manager', 'admin', 'coe_head'];
 
-const STAKEHOLDER_MAPPINGS = {
+const STAKEHOLDER_MAPPING = {
 	booking_desk                    : 'service_ops',
 	lastmile_ops                    : 'lastmile_ops',
 	document_desk                   : 'service_ops',
@@ -15,7 +15,6 @@ const STAKEHOLDER_MAPPINGS = {
 	booking_agent_manager           : 'booking_agent',
 	sales_agent                     : 'sales_agent',
 	consignee_shipper_booking_agent : 'booking_agent',
-	coe_head                        : 'booking_agent',
 };
 
 function useListTasks({
@@ -27,7 +26,7 @@ function useListTasks({
 }) {
 	let showOnlyMyTasks = showMyTasks;
 	const { profile } = useSelector((state) => state);
-	const { refetchServices = () => {}, shipment_data = {} } = useContext(ShipmentDetailContext);
+	const { refetchServices = () => { }, shipment_data = {} } = useContext(ShipmentDetailContext);
 
 	const { stakeholders = [] } = shipment_data || {};
 
@@ -50,7 +49,7 @@ function useListTasks({
 
 	const user_id = profile?.user?.id;
 
-	const stakeholder = STAKEHOLDER_MAPPINGS[updatedActiveStakeholder] || '';
+	const stakeholder = STAKEHOLDER_MAPPING[updatedActiveStakeholder] || '';
 
 	let showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
 

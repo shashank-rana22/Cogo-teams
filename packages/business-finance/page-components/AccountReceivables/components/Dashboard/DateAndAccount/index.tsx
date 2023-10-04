@@ -71,6 +71,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 														maximumFractionDigits : 2,
 														style                 : 'currency',
 														currencyDisplay       : 'code',
+														currencyWise          : true,
 													},
 												})}
 											</div>
@@ -132,7 +133,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 														maximumFractionDigits : 2,
 														style                 : 'currency',
 														currencyDisplay       : 'code',
-
+														currencyWise          : true,
 													},
 												})}
 											</div>
@@ -183,7 +184,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 														maximumFractionDigits : 2,
 														style                 : 'currency',
 														currencyDisplay       : 'code',
-
+														currencyWise          : true,
 													},
 												})}
 											</div>

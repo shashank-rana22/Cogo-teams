@@ -12,6 +12,7 @@ function RaiseTickets({ showRaiseTicket = false, setShowRaiseTicket = () => {}, 
 	const { t } = useTranslation(['myTickets']);
 
 	const [additionalInfo, setAdditionalInfo] = useState([]);
+	const [defaultTypeId, setDefaultTypeId] = useState('');
 
 	const formProps = useForm({
 		defaultValues: {
@@ -29,8 +30,10 @@ function RaiseTickets({ showRaiseTicket = false, setShowRaiseTicket = () => {}, 
 
 	const { raiseTickets, loading } = useRaiseTicket({
 		handleClose,
+		defaultTypeId,
 		additionalInfo,
 		setRefreshList,
+		reset,
 	});
 
 	return (
@@ -48,6 +51,7 @@ function RaiseTickets({ showRaiseTicket = false, setShowRaiseTicket = () => {}, 
 				<Modal.Body>
 					<RaiseTicketsForm
 						{...formProps}
+						setDefaultTypeId={setDefaultTypeId}
 						additionalInfo={additionalInfo}
 						setAdditionalInfo={setAdditionalInfo}
 					/>

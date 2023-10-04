@@ -48,6 +48,7 @@ function getFireStoreQuery({
 	listOnlyMails = false,
 	activeFolder = '',
 	sidFilters = '',
+	mailsToBeShown = [],
 }) {
 	const filterId = appliedFilters.assigned_to === 'me'
 		? userId
@@ -76,7 +77,8 @@ function getFireStoreQuery({
 
 	const tabWiseQuery = (
 		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.[TAB_WISE_QUERY_KEY_MAPPING[activeSubTab]]?.({
-			agentId: userId,
+			userSharedEmails : mailsToBeShown,
+			agentId          : userId,
 		}) || []
 	);
 

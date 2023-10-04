@@ -55,21 +55,14 @@ const getPrefilledValues = (detail, agent_id) => {
 		air_customs: `Here is the quotation for your requested Air Customs rates at ${main_service_details?.airport?.name}`,
 	};
 
-	const TERMS_AND_CONDITIONS = {
-		fcl_freight:
-			'Rates are per actuals from Shipping Lines, they might be subject to change before shipment confirmation',
-	};
 	const cc_user_ids = [...new Set(agent_id)];
 
 	return {
-		body    : body[main_service_details?.service_type],
-		subject : subjects[main_service_details?.service_type],
-		closing : CLOSING.fcl_freight,
+		body                 : body[main_service_details?.service_type],
+		subject              : subjects[main_service_details?.service_type],
+		closing              : CLOSING.fcl_freight,
 		cc_user_ids,
-		terms_and_conditions:
-			detail?.terms_and_conditions?.[GLOBAL_CONSTANTS.zeroth_index]
-			|| TERMS_AND_CONDITIONS[main_service_details?.service_type]
-			|| '',
+		terms_and_conditions : '',
 	};
 };
 

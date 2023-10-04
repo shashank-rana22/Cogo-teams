@@ -22,7 +22,20 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 	const functions = {
 		DocumentTypeFunc: (item) => {
 			const { document_type: DocumentType } = item || {};
-			return <p>{startCase(DocumentType)}</p>;
+			return <p>{startCase(DocumentType) || ''}</p>;
+		},
+		DocumentNumberFunc: (item) => {
+			let formattedData = item?.data;
+			if (typeof formattedData === 'string') {
+				formattedData = JSON.parse(item?.data || '');
+			}
+			const documentNumber = formattedData?.document_number || '';
+
+			return (
+				<p>
+					{startCase(documentNumber) || ''}
+				</p>
+			);
 		},
 		ServiceTypeFunc: (item) => {
 			const { service_type: serviceType } = item || {};
@@ -80,30 +93,25 @@ function Documents({ shipmentId = '' }: DocumentsInterface) {
 		},
 	};
 
-	const getDocumentData = () => {
-		if (loading) {
-			return (
-				<div className={styles.loader_main}>
-					<Loader className={styles.loader} />
-				</div>
-			);
-		}
-		if (isEmpty(documentData)) {
-			return <EmptyStateDocs />;
-		}
+	if (loading) {
 		return (
+			<div className={styles.loader_main}>
+				<Loader className={styles.loader} />
+			</div>
+		);
+	}
+	if (isEmpty(documentData)) {
+		return <EmptyStateDocs />;
+	}
+
+	return (
+		<div className={styles.list}>
 			<List
 				config={config}
 				itemData={documentData}
 				functions={functions}
 				loading={loading}
 			/>
-		);
-	};
-
-	return (
-		<div className={styles.list}>
-			{getDocumentData()}
 		</div>
 	);
 }

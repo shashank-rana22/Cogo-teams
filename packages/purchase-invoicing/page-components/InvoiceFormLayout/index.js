@@ -93,6 +93,9 @@ function InvoiceFormLayout({
 			=== (purchaseInvoiceValues?.billing_party),
 	);
 
+	const urgencyTagOptions = shipment_data?.shipment_type === 'air_freight'
+		? [...URGENCY_TAG_OPTIONS, { label: 'THC', value: 'thc' }] : URGENCY_TAG_OPTIONS;
+
 	useEffect(() => {
 		if (initialValueBP && Object.keys(billingParty || {}).length === GLOBAL_CONSTANTS.zeroth_index) {
 			setBillingParty({
@@ -197,7 +200,7 @@ function InvoiceFormLayout({
 			</div>
 			<div className={styles.formlayout}>
 				<div className={styles.select}>
-					<SelectController name="urgency_tag" control={control} options={URGENCY_TAG_OPTIONS} isClearable />
+					<SelectController name="urgency_tag" control={control} options={urgencyTagOptions} isClearable />
 				</div>
 
 				<AccordianView title="Select Invoice Type" fullwidth open={isEdit || isJobClosed}>

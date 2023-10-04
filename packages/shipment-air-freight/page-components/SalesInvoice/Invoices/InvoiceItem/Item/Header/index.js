@@ -86,7 +86,7 @@ function Header({
 	&& !invoice.is_revoked
 	&& !RESTRICT_REVOKED_STATUS.includes(invoice.status)
 	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
-	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note && !IS_JOB_CLOSED
+	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note
 	&& !invoice?.processing;
 
 	return (

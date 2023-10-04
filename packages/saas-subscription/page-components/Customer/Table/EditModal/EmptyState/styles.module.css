@@ -1,0 +1,10 @@
+.empty_state {
+	display: block;
+	margin: 25px auto;
+}
+
+.empty_ctn {
+	padding: 16px;
+	border: 1px solid #fbd1a6;
+	border-radius: 12px;
+}
