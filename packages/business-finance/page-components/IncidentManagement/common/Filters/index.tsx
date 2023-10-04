@@ -27,7 +27,7 @@ function Filters({
 }: Props) {
 	const { search } = filters || {};
 	const { t } = useTranslation(['incidentManagement']);
-	const filterControls = getFilterControls({ activeTab, isSettlementExecutive, t, entityCode });
+	const filterControls = getFilterControls({ activeTab, isSettlementExecutive, t, entityCode, filters });
 
 	return (
 		<section className={styles.container} id="filters">

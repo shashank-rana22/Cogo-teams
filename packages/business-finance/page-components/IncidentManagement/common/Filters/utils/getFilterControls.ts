@@ -1,3 +1,5 @@
+import { FilterProps } from '../../interface';
+
 import { remainControls, requestControls } from './controls';
 
 interface FilterControlsInterface {
@@ -5,19 +7,20 @@ interface FilterControlsInterface {
 	isSettlementExecutive:boolean
 	t?:Function;
 	entityCode?: string;
+	filters: FilterProps;
 }
 
 export const getFilterControls = ({
 	activeTab, isSettlementExecutive, t = () => {},
-	entityCode = '',
+	entityCode = '', filters,
 }: FilterControlsInterface) => {
 	switch (activeTab) {
 		case 'requested':
-			return requestControls({ t, isSettlementExecutive, entityCode, activeTab: 'REQUESTED' });
+			return requestControls({ t, isSettlementExecutive, entityCode, activeTab: 'REQUESTED', filters });
 		case 'approved':
-			return remainControls({ t, isSettlementExecutive, entityCode, activeTab: 'APPROVED' });
+			return remainControls({ t, isSettlementExecutive, entityCode, activeTab: 'APPROVED', filters });
 		case 'rejected':
-			return remainControls({ t, isSettlementExecutive, entityCode, activeTab: 'REJECTED' });
+			return remainControls({ t, isSettlementExecutive, entityCode, activeTab: 'REJECTED', filters });
 		default:
 			return [{}];
 	}

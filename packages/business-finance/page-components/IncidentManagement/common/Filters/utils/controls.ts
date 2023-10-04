@@ -1,3 +1,5 @@
+import { FilterProps } from '../../interface';
+
 import styles from './styles.module.css';
 
 interface Props {
@@ -5,9 +7,10 @@ interface Props {
 	isSettlementExecutive?: boolean;
 	activeTab?: string
 	entityCode?: string;
+	filters: FilterProps;
 }
 
-export const requestControls = ({ t = () => {}, entityCode = '', activeTab = 'REQUESTED' }:Props) => [
+export const requestControls = ({ t = () => {}, entityCode = '', activeTab = 'REQUESTED', filters }:Props) => [
 	{
 		name        : 'category',
 		placeholder : t('incidentManagement:select_category_placeholder'),
@@ -29,7 +32,7 @@ export const requestControls = ({ t = () => {}, entityCode = '', activeTab = 'RE
 		asyncKey    : 'list_incident_types',
 		searchByq   : true,
 		initialCall : true,
-		params      : { status: activeTab, type: 'incidentSubtype', entityCode },
+		params      : { status: activeTab, type: 'incidentSubtype', requestCategory: filters?.category, entityCode },
 		className   : styles.category_section,
 	},
 	{
@@ -63,7 +66,7 @@ export const requestControls = ({ t = () => {}, entityCode = '', activeTab = 'RE
 	},
 ];
 
-export const remainControls = ({ t = () => {}, entityCode = '', activeTab = '' }:Props) => [
+export const remainControls = ({ t = () => {}, entityCode = '', activeTab = '', filters }:Props) => [
 	{
 		name        : 'category',
 		placeholder : t('incidentManagement:select_category_placeholder'),
@@ -85,7 +88,7 @@ export const remainControls = ({ t = () => {}, entityCode = '', activeTab = '' }
 		asyncKey    : 'list_incident_types',
 		searchByq   : true,
 		initialCall : true,
-		params      : { status: activeTab, type: 'incidentSubtype', entityCode },
+		params      : { status: activeTab, type: 'incidentSubtype', requestCategory: filters?.category, entityCode },
 		className   : styles.category_section,
 	},
 	{

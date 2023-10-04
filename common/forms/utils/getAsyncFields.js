@@ -1047,8 +1047,8 @@ function asyncListIncidentTypes() {
 	return {
 		labelKey     : 'label',
 		valueKey     : 'value',
-		endpoint     : '/incident-management/incident/listIncidentTypes',
-		authkey      : 'get_incident_types',
+		endpoint     : '/incident-management/incident/list_incident_types',
+		authkey      : 'get_incident_management_incident_list_incident_types',
 		microService : 'business_finance',
 		initialCall  : true,
 		searchByq    : true,
