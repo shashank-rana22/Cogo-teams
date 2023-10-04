@@ -17,6 +17,7 @@ function Content({
 	refetch = () => {},
 	tradeTab = '',
 	setTradeTab = () => {},
+	setShow = () => {},
 }) {
 	const onChange = (val = '', name = '') => {
 		setFilters((p) => ({ ...p, [name]: val }));
@@ -54,7 +55,7 @@ function Content({
 								onClick={() => {
 									clearFilter();
 									setTradeTab('');
-									refetch();
+									refetch({ setShow });
 								}}
 							>
 								RESET
@@ -64,7 +65,7 @@ function Content({
 							themeType="primary"
 							size="sm"
 							onClick={() => {
-								refetch(filters);
+								refetch({ filters, setShow });
 							}}
 						>
 							APPLY

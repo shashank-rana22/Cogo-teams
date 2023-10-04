@@ -28,8 +28,9 @@ const useGetDocumentList = ({
 
 	const { query = '', debounceQuery = () => {} } = useDebounceQuery();
 	const { page = 1, pageLimit = 10 } = paginationFilters || {};
-	const refetch = useCallback((filters = {}) => {
-		(async () => {
+
+	const refetch = useCallback(({ filters = {}, setShow = () => {} }) => {
+		const func = async () => {
 			const {
 				Service = '', Entity = '',
 				operationalClosedDate = '', creationDate = '',
@@ -62,10 +63,12 @@ const useGetDocumentList = ({
 						walletUsed : walletUsed || undefined,
 					},
 				});
+				setShow(false);
 			} catch (error) {
 				toastApiError(error);
 			}
-		})();
+		};
+		func();
 	}, [CLOSING_STATUS, page, pageLimit, query, trigger]);
 
 	useEffect(() => {
@@ -73,7 +76,7 @@ const useGetDocumentList = ({
 	}, [search, debounceQuery]);
 
 	useEffect(() => {
-		refetch();
+		refetch({});
 	}, [refetch, query]);
 	return {
 		data,

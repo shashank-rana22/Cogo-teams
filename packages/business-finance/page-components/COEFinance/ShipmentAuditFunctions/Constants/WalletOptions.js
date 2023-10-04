@@ -10,13 +10,13 @@ export const walletType = [
 		name  : 'KAM',
 	},
 	{
-		label : 'All',
-		value : 'All',
-		name  : 'All',
+		label : 'BOTH',
+		value : 'BOTH',
+		name  : 'BOTH',
 	},
 	{
-		label : 'None',
-		value : 'None',
-		name  : 'None',
+		label : 'NONE',
+		value : 'NONE',
+		name  : 'NONE',
 	},
 ];

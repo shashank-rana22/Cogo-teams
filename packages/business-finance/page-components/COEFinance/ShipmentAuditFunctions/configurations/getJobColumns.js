@@ -127,9 +127,9 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 
 					<div style={{ padding: '0 30px' }} className={styles.accessor_financial}>
 						<div className={styles.fix_layout}>
-							{ShowOverflowingNumber(dataEstimated, OVERFLOW_LENGTH, 'INR') }
+							{`${dataEstimated}%`}
 						</div>
-						<RenderTableData data={dataOperational} profit={dataProfitPercent} />
+						<RenderTableData data={dataOperational} profit={dataProfitPercent} category="Profitability" />
 					</div>
 				);
 			},

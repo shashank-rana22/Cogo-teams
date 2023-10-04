@@ -27,7 +27,8 @@ export default function RenderTableData({ data = 0, profit = 0, category = '' })
 	return (
 		<div>
 			<div className={styles.fix_layout}>
-				{ShowOverflowingNumber(data, SHOW_LENGTH, 'INR') }
+
+				{category === 'Profitability' ? `${data}%` : ShowOverflowingNumber(data, SHOW_LENGTH, 'INR') }
 			</div>
 			<div className={styles.flex}>
 				<div className={check(profit, category) ? styles.profit_icon : styles.loss_icon}>
