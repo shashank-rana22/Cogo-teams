@@ -272,6 +272,7 @@ function UserEvents({
 				handleClose={handleClose}
 				handleUpdatedState={handleUpdatedState}
 				activeTab={activeTab}
+				handleCallApi={handleCallApi}
 			/>
 		</>
 	);

@@ -8,6 +8,7 @@ const getPayload = ({ startDate = '', endDate = '' }) => ({
 		validity_start_greater_than : formatDateTime({ date: startDate, dateformat: 'isoUtcDateTime' }),
 		validity_end_greater_than   : formatDateTime({ date: endDate, dateformat: 'isoUtcDateTime' }),
 	},
+
 	schedule_data_required : false,
 	metadata_required      : true,
 });
