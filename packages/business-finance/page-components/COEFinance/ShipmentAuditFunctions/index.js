@@ -45,6 +45,7 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 	const onPageChange = (val) => {
 		setPaginationFilters((prev) => ({ ...prev, page: val }));
 	};
+
 	const handleClick = (jobId) => {
 		push(
 			`/business-finance/coe-finance/${activeTab}/audit?job_id=${jobId}`,

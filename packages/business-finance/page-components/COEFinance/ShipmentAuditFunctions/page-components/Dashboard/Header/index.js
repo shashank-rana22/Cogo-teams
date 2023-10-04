@@ -17,15 +17,16 @@ const FINANCIAL_ARRAY = [[true, false, false, false, false, false],
 	[false, false, false, false, false, false],
 	[false, false, false, false, false, false]];
 
-function Header({ activeTab = '', jobId = '' }) {
-	const router = useRouter();
+function Header({ jobId = '' }) {
+	const { query: { active_tab = '' }, push = () => {} } = useRouter();
+	// console.log('aaaa', router);
 	const handleClick = () => {
-		if (activeTab === 'financial_close') {
-			router.push(
+		if (active_tab === 'financial_close') {
+			push(
 				'/business-finance/coe-finance/financial_close',
 			);
 		} else {
-			router.push(
+			push(
 				'/business-finance/coe-finance/operational_close',
 			);
 		}
@@ -40,9 +41,9 @@ function Header({ activeTab = '', jobId = '' }) {
 					<Button size="md" themeType="primary">Approve</Button>
 				</div>
 			</div>
-			{(activeTab === 'financial_close')
-				? (<NextPage initialArray={FINANCIAL_ARRAY} activeTab={activeTab} jobId={jobId} />)
-				: (<NextPage initialArray={OPERATIONAL_ARRAY} jobId={jobId} activeTab={activeTab} />)}
+			{(active_tab === 'financial_close')
+				? (<NextPage initialArray={FINANCIAL_ARRAY} activeTab={active_tab} jobId={jobId} />)
+				: (<NextPage initialArray={OPERATIONAL_ARRAY} jobId={jobId} activeTab={active_tab} />)}
 		</div>
 	);
 }

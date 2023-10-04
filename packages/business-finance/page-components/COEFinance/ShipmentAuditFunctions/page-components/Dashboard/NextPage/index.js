@@ -15,18 +15,18 @@ const THIRD_INDEX = 3;
 const FOURTH_INDEX = 4;
 const FIFTH_INDEX = 5;
 
-function NextPage({ initialArray = [], activeTab = '12' }) {
-	const { query = {} } = useRouter();
+function NextPage({ initialArray = [], activeTab = '' }) {
+	const { query: { job_id = '' } } = useRouter();
 	const [accordionStates, setAccordionStates] = useState(initialArray);
 
 	const {
 		data: taskData = {},
 		loading: taskDataLoading = true,
-	} = useGetClosedTasks({ job_id: query?.job_id, activeTab });
+	} = useGetClosedTasks({ job_id, activeTab });
 	const {
 		data: quoteData = {},
 		loading: quoteLoading = true,
-	} = useGetPrePostShipmentQuotation({ job_id: query?.job_id });
+	} = useGetPrePostShipmentQuotation({ job_id });
 
 	const toggleAccordion = (rowIndex, index) => {
 		const newAccordionStates = [...accordionStates];
