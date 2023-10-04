@@ -199,7 +199,7 @@ function ShipmentDetails({
 			// timeline checks to be removed for all jobType that are not showing timeline
 			setCheckItem((prev:any) => {
 				const newCheckItem = { ...prev };
-				delete newCheckItem.shipmentDetailsCheck;
+				delete newCheckItem?.shipmentDetailsCheck;
 				delete newCheckItem?.documentsCheck;
 				delete newCheckItem?.sidDataCheck;
 				delete newCheckItem?.taggingCheck;
