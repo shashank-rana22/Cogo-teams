@@ -9,10 +9,10 @@ const getParams = ({ startDate = '', endDate = '' }) => ({
 		validity_end_less_than      : formatDateTime({ date: endDate, dateformat: 'isoUtcDateTime' }),
 		status                      : 'active',
 	},
-
-	schedule_data_required : false,
-	metadata_required      : true,
-	page_limit             : 100,
+	schedule_data_required    : false,
+	metadata_required         : true,
+	participant_data_required : true,
+	page_limit                : 100,
 });
 
 const useListCogooneCalendars = () => {

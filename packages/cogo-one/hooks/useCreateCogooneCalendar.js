@@ -19,7 +19,7 @@ const RECURRENCE_RULE_MAPPING = {
 	custom  : getCustomRecurrence,
 };
 
-const getPayload = ({ eventDetails = {}, values = {}, eventData = {} }) => {
+const getPayload = ({ eventDetails = {}, values = {}, eventData = {}, id = '', updatedId = {} }) => {
 	const { category = '', event_type = '' } = eventDetails || {};
 	const {
 		end_date = '', end_time = '', mark_important_event = false, organization_id = '',
@@ -36,6 +36,8 @@ const getPayload = ({ eventDetails = {}, values = {}, eventData = {} }) => {
 		custom_on_date = 0,
 	} = eventData || {};
 
+	const { addedIds = [], removedIds = [] } = updatedId || {};
+
 	const recurrenceRule = RECURRENCE_RULE_MAPPING[occurence_event]?.({
 		weekly_repeat_on,
 		month_on_date,
@@ -47,8 +49,8 @@ const getPayload = ({ eventDetails = {}, values = {}, eventData = {} }) => {
 	const isMeetingOneTime = category === 'meeting' && occurence_event !== 'one_time';
 
 	return {
-
-		validity_start: combineDateAndTime({
+		calendar_id    : id || undefined,
+		validity_start : combineDateAndTime({
 			date : isMeetingOneTime ? startDate : start_date,
 			time : start_time,
 		}),
@@ -69,6 +71,8 @@ const getPayload = ({ eventDetails = {}, values = {}, eventData = {} }) => {
 			organization_id,
 			user_id: organization_user_id,
 		} : undefined,
+		added_user_ids   : addedIds || undefined,
+		removed_user_ids : removedIds || undefined,
 	};
 };
 
@@ -77,16 +81,22 @@ const useCreateCogooneCalendar = ({
 	reset = () => {},
 	getEvents = () => {},
 	month = '',
+	id = '',
+	updatedId = {},
 }) => {
+	const getUrl = id ? '/update_cogoone_calendar' : '/create_cogoone_calendar';
+
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/create_cogoone_calendar',
+		url    : getUrl,
 	}, { manual: true });
 
 	const createEvent = async ({ values = {}, eventData = {} }) => {
 		const { startDate, endDate } = getMonthStartAndEnd({ month });
+
 		try {
-			const payload = getPayload({ eventDetails, values, eventData });
+			const payload = getPayload({ eventDetails, values, eventData, id, updatedId });
+			console.log('payload:', payload);
 			await trigger({ data: payload });
 			setEventDetails({
 				category   : 'event',
@@ -96,6 +106,7 @@ const useCreateCogooneCalendar = ({
 			reset();
 			getEvents({ startDate, endDate });
 		} catch (err) {
+			console.log('err:', err);
 			Toast.error(getApiErrorString(err?.response?.data));
 		}
 	};
