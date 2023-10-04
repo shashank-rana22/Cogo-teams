@@ -2,11 +2,13 @@ import { Button, Placeholder, Popover } from '@cogoport/components';
 import {
 	IcMArrowBack,
 	IcMArrowDown,
+	IcMArrowRight,
 } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React from 'react';
 
+import EmptyState from '../../common/EmptyState';
 import useGetEmployeeDetails from '../../hooks/useGetEmployeeData';
 import { getEmployeeData } from '../../utils/constants';
 import TabsPanel from '../TabsPanel';
@@ -14,17 +16,44 @@ import TabsPanel from '../TabsPanel';
 import styles from './styles.module.css';
 
 function EmployeeProfile() {
+	const router = useRouter();
 	const { profile: { user } } = useSelector((state) => ({
 		profile: state?.profile,
 	}));
-	const { loading, data } = useGetEmployeeDetails(user.id);
+
+	let user_id;
+	if (router.query.user_id) {
+		user_id = router.query.user_id;
+	} else {
+		user_id = user.id;
+	}
+
+	const { loading, data } = useGetEmployeeDetails(user_id);
 
 	const { employee_detail } = data || {};
 	const employeeData = getEmployeeData(employee_detail);
-	const router = useRouter();
+
 	return (
 		<div className={styles.main_container}>
-			{(data || loading) && (
+			{!loading && router.query.user_id ? (
+				<div className={styles.back_container}>
+					<div className={styles.top_text}>
+						<span className={styles.back}>Employee Directory</span>
+						<IcMArrowRight width={16} height={16} />
+						<span className={styles.arrow}>{employee_detail?.name}</span>
+					</div>
+					<div className={styles.dark_heading}>
+						<div aria-hidden onClick={() => router.back()} className={styles.icon_container}>
+							<IcMArrowBack
+								width={20}
+								height={20}
+							/>
+						</div>
+						<span className={styles.employee_profile}>Employee Directory</span>
+					</div>
+				</div>
+			) : null}
+			{(data || loading) ? (
 				<div className={styles.profile_container}>
 					<div className={styles.profile_flex}>
 						<div className={styles.left_image} />
@@ -111,7 +140,7 @@ function EmployeeProfile() {
 					</div>
 					<TabsPanel data={data} loading={loading} />
 				</div>
-			)}
+			) : (<EmptyState height={250} width={450} />)}
 		</div>
 	);
 }
