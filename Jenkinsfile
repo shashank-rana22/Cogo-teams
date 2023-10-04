@@ -45,7 +45,7 @@ pipeline {
                     lockFile = "/home/${SERVER_NAME}/.admin.lock"
                     
                     // Use SSH to check if the lock file exists
-                    sshCommand = "ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} 'test -e ${remoteLockFile} || touch ${remoteLockFile}'"
+                    sshCommand = "ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} 'test -e ${lockFile} || touch ${lockFile}'"
                     
                     exitCode = sh(script: sshCommand, returnStatus: true)
 
