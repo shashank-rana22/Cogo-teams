@@ -2793,6 +2793,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'update_user_contact',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_organization_user_communication_preferences',
 			access_type  : 'private',
 			service_name : 'organization',
