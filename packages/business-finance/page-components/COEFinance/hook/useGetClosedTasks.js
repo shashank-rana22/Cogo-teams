@@ -20,7 +20,7 @@ const useGetClosedTasks = ({
 		try {
 			await trigger({
 				params: {
-					milestone : (activeTab === '' ? 'OPR_CLOSED' : 'CLOSED'),
+					milestone : (activeTab === 'financial_close' ? 'CLOSED' : 'OPR_CLOSED'),
 					jobId     : job_id,
 				},
 			});
