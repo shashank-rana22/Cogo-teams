@@ -1,15 +1,13 @@
 import { IcMCall, IcMVideoCall } from '@cogoport/icons-react';
 
-const BUTTON_GROUP_OPTIONS = [{
+const getButtonGroups = ({ onClickFun = () => {} }) => [{
 	children: (<IcMCall
 		width={18}
 		height={18}
 		fill="#777"
 	/>
 	),
-	onClick: () => {
-		console.log('Left Button');
-	},
+	onClick: onClickFun,
 
 }, {
 	children: (<IcMVideoCall
@@ -18,10 +16,7 @@ const BUTTON_GROUP_OPTIONS = [{
 		fill="#777"
 	/>
 	),
-	onClick: () => {
-		console.log('Right Button');
-	},
-
+	onClick: onClickFun,
 }];
 
-export { BUTTON_GROUP_OPTIONS };
+export { getButtonGroups };

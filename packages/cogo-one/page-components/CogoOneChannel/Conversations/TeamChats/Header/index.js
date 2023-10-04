@@ -1,13 +1,12 @@
-import { ButtonGroup, Popover, Avatar } from '@cogoport/components';
+import { Popover, Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import { BUTTON_GROUP_OPTIONS } from '../../../../../constants/teamsHeaderMappings';
-
 import Members from './Members';
 import styles from './styles.module.css';
 import ToUser from './ToUsers';
+import VideoCalling from './VideoCalling';
 
 function Header({
 	activeTeamCard = {},
@@ -94,11 +93,7 @@ function Header({
 						</div>
 					</>
 				) : null}
-				<ButtonGroup
-					size="xs"
-					options={BUTTON_GROUP_OPTIONS}
-					disabled={!hasPermissionToEdit}
-				/>
+				{(hasPermissionToEdit && !isGroup) ? <VideoCalling activeTab={activeTab} /> : null}
 			</div>
 		</div>
 	);
