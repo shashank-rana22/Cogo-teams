@@ -20,6 +20,10 @@ export const createAdvancePaymentDoc = (values, extraData, callback) => {
 		calculatedValues = {},
 	} = extraData || {};
 
+	if (shipment_data?.shipment_type !== 'ftl_freight') {
+		return;
+	}
+
 	const is_hight_advance_payment_proof = checkHighAdvancePaymentProof(formValues, calculatedValues);
 
 	if (is_hight_advance_payment_proof && formValues?.advanced_payment_proof?.fileUrl) {
