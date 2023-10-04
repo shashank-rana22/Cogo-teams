@@ -1,7 +1,6 @@
 import { Modal, Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
 
 import eventOccurenceControls from '../../../../../../../configurations/event-occurence-controls';
 import { getFieldController } from '../../../../../../../utils/getFieldController';
@@ -12,12 +11,17 @@ function EventOccurence({
 	setEventOccurence = () => {},
 	eventOccurence = {},
 	startDateField = {},
+	validity_start = {},
+	validity_end = {},
+	id = '',
+	recurrence_rule = {},
 }) {
 	const {
 		showModal = false,
-		// eventData = {},
 		frequencyType = '',
 	} = eventOccurence || {};
+
+	const { days_of_week = [], date_of_month = 0, month_of_year = 0, repeat_after = 0 } = recurrence_rule || {};
 
 	const {
 		control,
@@ -25,14 +29,17 @@ function EventOccurence({
 		watch,
 		formState : { errors = {} },
 		reset,
-		setValue,
 	} = useForm({
 		defaultValues: {
-			start_date : startDateField,
-			end_date   : new Date(),
+			start_date       : id ? new Date(validity_start) : startDateField,
+			end_date         : id ? new Date(validity_end) : startDateField,
+			weekly_repeat_on : days_of_week,
+			month_on_date    : date_of_month,
+			yearly_month     : month_of_year,
+			yearly_on_date   : date_of_month,
+			custom_on_date   : repeat_after,
 		},
 	});
-
 	const controls = eventOccurenceControls({ frequencyType, startDateField, watch });
 
 	const onSave = (val) => {
@@ -52,10 +59,6 @@ function EventOccurence({
 			showModal : false,
 		}));
 	};
-
-	useEffect(() => {
-		setValue('start_date', startDateField);
-	}, [setValue, startDateField]);
 
 	return (
 		<Modal

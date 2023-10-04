@@ -6,7 +6,7 @@ import {
 	CheckboxController,
 	SelectController,
 } from '@cogoport/forms';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 import scheduleEvents from '../../../../../../configurations/schedule_event';
 import useCreateCogooneCalendar from '../../../../../../hooks/useCreateCogooneCalendar';
@@ -28,7 +28,7 @@ function CreateEvent({
 		category: updateCategory = '', subject = '', id = '',
 		validity_start = '', validity_end = '', description = '',
 		is_important = false, metadata = {}, participants = [],
-		frequency = '',
+		frequency = '', recurrence_rule = {},
 	} = updateEventDetails || {};
 
 	const { organization_id: orgId = '', user_id = '' } = metadata || {};
@@ -39,7 +39,15 @@ function CreateEvent({
 		frequencyType : '',
 	});
 
-	const { frequencyType = '', eventData = {} } = eventOccurence || {};
+	const selectedIds = useMemo(() => ((participants || []).map((itm) => ([itm?.user_id]))?.flat()), [participants]);
+	console.log('selectedIds:', selectedIds);
+
+	const [updatedId, setUpdateId] = useState({
+		addedIds   : [],
+		removedIds : [],
+	});
+	console.log(updatedId, 'updatedId');
+	const { frequencyType = '', eventData = {}, showModal = false } = eventOccurence || {};
 
 	const {
 		control,
@@ -47,13 +55,20 @@ function CreateEvent({
 		watch,
 		formState : { errors = {} },
 		reset,
-		setValue,
+		// setValue,
 	} = useForm({
 		defaultValues: {
-			start_date : new Date(),
-			end_date   : new Date(),
-			start_time : new Date(),
-			end_time   : new Date(),
+			start_date           : id ? new Date(validity_start) : new Date(),
+			end_date             : id ? new Date(validity_end) : new Date(),
+			start_time           : id ? new Date(validity_start) : new Date(),
+			end_time             : id ? new Date(validity_end) : new Date(),
+			title                : subject,
+			remarks              : description,
+			mark_important_event : is_important,
+			organization_id      : orgId,
+			organization_user_id : user_id,
+			occurence_event      : frequency,
+			participants_users   : selectedIds,
 		},
 	});
 
@@ -67,6 +82,8 @@ function CreateEvent({
 		reset,
 		getEvents,
 		month,
+		id,
+		updatedId,
 	});
 	const { organization_id = '', start_date: startDateField } = formValues || {};
 
@@ -80,7 +97,18 @@ function CreateEvent({
 	} = controls;
 
 	const handleEvents = (values) => {
+		console.log('values:', values);
 		createEvent({ values, eventData });
+	};
+
+	const handleChange = (val) => {
+		const addedIds = val.filter((newId) => !selectedIds.includes(newId));
+		const removedIds = selectedIds.filter((oldId) => !selectedIds.includes(oldId));
+		setUpdateId((pre) => ({
+			...pre,
+			addedIds   : addedIds || [],
+			removedIds : removedIds || [],
+		}));
 	};
 
 	useEffect(() => {
@@ -88,28 +116,14 @@ function CreateEvent({
 	}, [category, reset]);
 
 	useEffect(() => {
-		const formatParticipant = (participants || []).map((itm) => ([itm?.user_id]))?.flat();
-
 		if (id) {
 			setEventDetails(() => ({
 				event_type : subject,
 				category   : updateCategory === 'reminder' ? 'event' : 'meeting',
 			}));
-			setValue('start_date', new Date(validity_start));
-			setValue('start_time', new Date(validity_start));
-			setValue('end_date', new Date(validity_end));
-			setValue('end_time', new Date(validity_end));
-			setValue('remarks', description);
-			setValue('mark_important_event', is_important);
-			setValue('organization_id', orgId);
-			setValue('organization_user_id', user_id);
-			setValue('title', subject);
-			setValue('participants_users', formatParticipant);
-			setValue('occurence_event', frequency);
+			// setValue('', formatParticipant);
 		}
-	}, [id, setEventDetails, updateCategory, subject, setValue,
-		description, is_important, validity_end, validity_start,
-		orgId, user_id, participants, frequency]);
+	}, [id, setEventDetails, updateCategory, subject]);
 
 	return (
 		<div className={styles.container}>
@@ -138,6 +152,7 @@ function CreateEvent({
 							<AsyncSelectController
 								{...participants_users}
 								control={control}
+								onChange={(val) => handleChange(val)}
 							/>
 							<div className={styles.error_text}>
 								{errors?.participants_users?.message}
@@ -214,11 +229,15 @@ function CreateEvent({
 				</div>
 			</div>
 
-			{!frequencyType || frequencyType === 'one_time' ? null : (
+			{((showModal && (!frequencyType || frequencyType === 'one_time'))) ? null : (
 				<EventOccurence
 					eventOccurence={eventOccurence}
 					setEventOccurence={setEventOccurence}
 					startDateField={startDateField}
+					validity_start={validity_start}
+					validity_end={validity_end}
+					id={id}
+					recurrence_rule={recurrence_rule}
 				/>
 			)}
 		</div>
