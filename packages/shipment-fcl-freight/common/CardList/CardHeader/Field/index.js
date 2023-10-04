@@ -1,10 +1,11 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-const stylesCol = {
+const STYLES_COL = {
 	display    : 'flex',
 	flex       : 1,
 	alignItems : 'center',
@@ -36,14 +37,14 @@ function Field({
 		setShow(!show);
 	};
 
-	const sortingKey = field.sorting ? Object?.keys(field.sorting)?.[0] : null;
+	const sortingKey = field.sorting ? Object?.keys(field.sorting)?.[GLOBAL_CONSTANTS.zeroth_index] : null;
 
 	const showSortingType =	field.sorting && field.sorting[sortingKey]
-	&& field.sorting[sortingKey] === Object?.keys(sort)?.[0];
+	&& field.sorting[sortingKey] === Object?.keys(sort)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	return (
 		<div
-			style={field.hasStyle ? field.styles : stylesCol}
+			style={field.hasStyle ? field.styles : STYLES_COL}
 			key={field?.key || field?.label}
 		>
 			<div className={styles.card_title}>
