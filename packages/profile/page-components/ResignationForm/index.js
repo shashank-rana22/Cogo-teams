@@ -8,7 +8,7 @@ import useGetEmployeeApplicationProcessDetails from './useGetEmployeeApplication
 function ResignationForm() {
 	const router = useRouter();
 	const { data, refetch = () => {}, loading = false } = useGetEmployeeApplicationProcessDetails();
-	if (router.query.employee_id) {
+	if (router.query?.employee_id) {
 		refetch(router.query.employee_id, 'hrbp');
 	}
 

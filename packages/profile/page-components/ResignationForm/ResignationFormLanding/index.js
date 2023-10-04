@@ -1,7 +1,7 @@
 import { Button, Modal, Placeholder } from '@cogoport/components';
 import { CheckboxController, useForm } from '@cogoport/forms';
 import { IcMArrowDown, IcMArrowRight, IcMFtick } from '@cogoport/icons-react';
-import { useRouter } from 'next/router';
+import { useRouter } from '@cogoport/next';
 import React, { useState, useEffect } from 'react';
 
 import ResignEmployeeDetails from '../ResignEmployeeDetails';
@@ -58,7 +58,7 @@ function ResignationFormLanding({ refetch = () => {} }) {
 			action_performed_by  : '',
 		};
 
-		if (router.query.employee_id) {
+		if (router.query?.employee_id) {
 			payload = {
 				...payload,
 				employee_user_id    : router.query.employee_id,
