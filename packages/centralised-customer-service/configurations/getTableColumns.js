@@ -9,18 +9,19 @@ const getTableColumns = ({ slabData = [] }) => {
 				Header: `${slab.slab_lower_limit}${
 					slab.slab_upper_limit === MAX_UPPER_LIMIT ? '+' : `-${slab.slab_upper_limit}`
 				} ${slab.slab_unit}s`,
+				id: `slab_${index}_capacity`,
 
-				id       : `slab_${index}_capacity`,
-				accessor : ({ [`slab_${index}_capacity`]: capacity = '' }) => (
-					<div>{capacity !== '' ? capacity : '-'}</div>
+				accessor: ({ [`slab_${index}_capacity`]: capacity = '' }) => (
+					<div>{capacity || '-'}</div>
 				),
 			};
 
 			const neqColumn = {
-				Header   : '',
-				id       : `slab_${index}_NEQ`,
-				accessor : ({ [`slab_${index}_NEQ`]: NEQ = '' }) => (
-					<div>{NEQ !== '' ? NEQ : '-'}</div>
+				Header : '',
+				id     : `slab_${index}_NEQ`,
+
+				accessor: ({ [`slab_${index}_NEQ`]: NEQ = '' }) => (
+					<div>{NEQ || '-'}</div>
 				),
 			};
 
