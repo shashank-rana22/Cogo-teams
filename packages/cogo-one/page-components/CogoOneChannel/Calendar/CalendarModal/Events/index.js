@@ -9,31 +9,37 @@ import CreateEvent from './CreateEvent';
 import styles from './styles.module.css';
 import UserEvents from './UserEvents';
 
-const ZERO_COUNT = 0;
-
 function Events({
-	addEvents = true, setAddEvents = () => {}, selectedEventData = {},
+	addEvents = true, setAddEvents = () => {},
 	getEvents = () => {},
 	month = '',
-	handleUpdatedState = () => {},
 	setActiveTab = () => {},
+	formatedEventsList = [],
 	activeTab = '',
+	events = {},
 }) {
 	const [eventDetails, setEventDetails] = useState({
 		category   : 'event',
 		event_type : 'call_customer',
 	});
+
 	const [actionModal, setActionModal] = useState({
 		status       : false,
 		value        : {},
 		actionStatus : '',
 	});
 
-	const { start = '' } = selectedEventData || {};
-	const eventsCount = selectedEventData?.eventsList?.length || ZERO_COUNT;
+	const setDefaultDate = new Date(month).getMonth() === new Date().getMonth();
+
+	const { start : startEvent = setDefaultDate ? new Date() : '' } = events || {};
+
+	const selectedEventData = (formatedEventsList || []).find(
+		(item) => (item?.start?.getDate() === startEvent?.getDate?.())
+		&& item?.start?.getMonth() === startEvent?.getMonth(),
+	);
 
 	const date = formatDate({
-		date       : start || new Date(),
+		date       : startEvent,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['MMMM dd, YYYY'],
 		formatType : 'date',
 		separator  : ',',
@@ -41,7 +47,7 @@ function Events({
 
 	const activeMonth = formatDate({
 		date       : month || new Date(),
-		dateFormat : GLOBAL_CONSTANTS.formats.date['MMM yyyy'],
+		dateFormat : GLOBAL_CONSTANTS.formats.date['MMMM, YYYY'],
 		formatType : 'date',
 		separator  : ',',
 	});
@@ -73,18 +79,15 @@ function Events({
 		<>
 			{addEvents ? (
 				<div className={styles.header}>
-					<div className={styles.title}>
-						Total Events
-					</div>
-					<div className={styles.count}>
-						{eventsCount}
-					</div>
+					Calendar
 				</div>
 			) : null}
 
 			<div className={cl`${styles.container} ${!addEvents ? styles.cancel_events : styles.add_events}`}>
 				{addEvents ? (
-					<div className={styles.selectable_date}>
+					<div className={cl`${styles.selectable_date} ${!date && activeTab === 'schedules'
+						? styles.no_selected_date : ''}`}
+					>
 						{activeTab === 'schedules' ? date : activeMonth}
 					</div>
 				) : (
@@ -106,7 +109,6 @@ function Events({
 					updateEventDetails={actionModal?.value}
 					setAddEvents={setAddEvents}
 					handleClose={handleClose}
-					handleUpdatedState={handleUpdatedState}
 					setActiveTab={setActiveTab}
 					activeTab={activeTab}
 				/>
@@ -124,6 +126,7 @@ function Events({
 							}));
 							setAddEvents((prev) => !prev);
 							handleClose();
+							setActiveTab('schedules');
 						}}
 					>
 						{addEvents ? 'Add Reminder' : 'Cancel'}

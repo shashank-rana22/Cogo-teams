@@ -1,5 +1,4 @@
 import { IcMCross } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useListCogooneSchedules from '../../../../hooks/useListCogooneSchedules';
@@ -14,43 +13,25 @@ function CalendarModal({
 }) {
 	const [addEvents, setAddEvents] = useState(true);
 	const [month, setMonth] = useState(new Date());
-	const [selectedEventData, setSelectedEventData] = useState({});
-	const [myEvents, setEvents] = useState({});
+	const [myEvents, setMyEvents] = useState({});
 	const [activeTab, setActiveTab] = useState('schedules');
-
 	const { data = {}, getEvents = () => {}, loading = false } = useListCogooneSchedules();
+
 	const formatedEventsList = getFormatedEventsData({ data });
 
 	const handleSelectSlot = (event) => {
 		const { start, end } = event || {};
-		const events = ((formatedEventsList || []).find((item) => (item?.start?.getDate() === start?.getDate())
-		&& item?.start?.getMonth() === start?.getMonth()));
-		setEvents({ start, end });
+		setMyEvents({ start, end });
 		setActiveTab('schedules');
-		if (isEmpty(events)) {
-			setSelectedEventData({ start, end });
-		} else {
-			setSelectedEventData(events);
-		}
 		setAddEvents(true);
 	};
 
 	const handleEventClick = (event, e) => {
 		const { start, end } = event || {};
-		setEvents({ start, end });
+		setMyEvents({ start, end });
 		setActiveTab('schedules');
-		setSelectedEventData((formatedEventsList || []).find((item) => (item?.start?.getDate() === start?.getDate())
-		&& item?.start?.getMonth() === start?.getMonth()));
 		e.preventDefault();
 		setAddEvents(true);
-	};
-
-	const handleUpdatedState = () => {
-		if (!loading) {
-			const { start } = myEvents;
-			setSelectedEventData((formatedEventsList || []).find((item) => (item?.start?.getDate() === start?.getDate())
-		&& item?.start?.getMonth() === start?.getMonth()));
-		}
 	};
 
 	return (
@@ -63,18 +44,17 @@ function CalendarModal({
 					<Events
 						addEvents={addEvents}
 						setAddEvents={setAddEvents}
-						selectedEventData={selectedEventData}
 						month={month}
+						events={myEvents}
 						getEvents={getEvents}
-						handleUpdatedState={handleUpdatedState}
 						setActiveTab={setActiveTab}
 						activeTab={activeTab}
+						formatedEventsList={formatedEventsList}
 					/>
 				</div>
 				<div className={styles.calendar}>
 					<div className={styles.calendar_container}>
 						<BgCalender
-							setSelectedEventData={setSelectedEventData}
 							setAddEvents={setAddEvents}
 							month={month}
 							setMonth={setMonth}
@@ -84,6 +64,8 @@ function CalendarModal({
 							handleEventClick={handleEventClick}
 							myEvents={myEvents}
 							formatedEventsList={formatedEventsList}
+							setMyEvents={setMyEvents}
+							setActiveTab={setActiveTab}
 						/>
 					</div>
 				</div>

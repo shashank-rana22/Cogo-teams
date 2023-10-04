@@ -12,15 +12,31 @@ import styles from './styles.module.css';
 
 const localizer = momentLocalizer(moment);
 
-function CustomToolbar({ label = '', onNavigate = () => {} }) {
+function CustomToolbar({
+	label = '', onNavigate = () => {}, setMyEvents = () => {}, setActiveTab = () => {},
+}) {
 	return (
 		<div className="rbc-toolbar">
 			<div className={styles.header_container}>
-				<div role="presentation" onClick={() => onNavigate('PREV')}>
+				<div
+					role="presentation"
+					onClick={() => {
+						onNavigate('PREV');
+						setMyEvents({});
+						setActiveTab('schedules');
+					}}
+				>
 					<IcMArrowLeft className={styles.icon_styles} />
 				</div>
 				<div className={styles.label}>{label}</div>
-				<div role="presentation" onClick={() => onNavigate('NEXT')}>
+				<div
+					role="presentation"
+					onClick={() => {
+						onNavigate('NEXT');
+						setMyEvents({});
+						setActiveTab('schedules');
+					}}
+				>
 					<IcMArrowRight className={styles.icon_styles} />
 				</div>
 			</div>
@@ -33,6 +49,7 @@ function BgCalender({
 	getEvents = () => {},
 	loading = false,
 	handleSelectSlot = () => {}, handleEventClick = () => {}, myEvents = {}, formatedEventsList = [],
+	setMyEvents = () => {}, setActiveTab = () => {},
 }) {
 	const customDayPropGetter = (date) => {
 		const currentDate = date?.getDate();
@@ -57,10 +74,16 @@ function BgCalender({
 		() => ({
 			components: {
 				event   : CustomCard,
-				toolbar : CustomToolbar,
+				toolbar : (props) => (
+					<CustomToolbar
+						{...props}
+						setMyEvents={setMyEvents}
+						setActiveTab={setActiveTab}
+					/>
+				),
 			},
 		}),
-		[],
+		[setActiveTab, setMyEvents],
 	);
 
 	const handleMonthChange = useCallback((newDate) => {

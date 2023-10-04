@@ -10,10 +10,10 @@ import styles from './styles.module.css';
 
 function ActionModal({
 	actionModal = {}, getEvents = () => {},
-	month = '', handleClose = () => {}, handleUpdatedState = () => {},
+	month = '', handleClose = () => {}, activeTab = '', handleCallApi = () => {},
 }) {
 	const { status = false, value = {}, actionStatus = '' } = actionModal || {};
-	const { category = '', subject = '', schedule_id = '' } = value || {};
+	const { category = '', subject = '', schedule_id = '', id = '' } = value || {};
 
 	const {
 		control,
@@ -42,7 +42,8 @@ function ActionModal({
 		handleClose,
 		getEvents,
 		month,
-		handleUpdatedState,
+		activeTab,
+		handleCallApi,
 	});
 
 	const onSubmit = (val = {}) => {
@@ -52,8 +53,9 @@ function ActionModal({
 
 		if (actionStatus !== 'edit') {
 			payload = {
-				schedule_id,
-				status: actionStatus,
+				schedule_id : activeTab === 'schedules' ? schedule_id : undefined,
+				calendar_id : activeTab === 'calendars' ? id : undefined,
+				status      : actionStatus,
 			};
 		} else {
 			payload = {

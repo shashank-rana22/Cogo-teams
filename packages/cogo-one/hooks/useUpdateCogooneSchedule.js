@@ -1,19 +1,21 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import moment from 'moment';
+
+import getMonthStartAndEnd from '../utils/getMonthStartAndEnd';
 
 const useUpdateCogooneSchedule = ({
 	handleClose = () => {},
 	getEvents = () => {},
 	month = '',
-	handleUpdatedState = () => {},
+	activeTab = '',
+	handleCallApi = () => {},
 }) => {
-	const startDate = moment(month).startOf('month').toDate();
-	const endDate = moment(month).endOf('month').toDate();
+	const getUrl = activeTab === 'schedules' ? '/update_cogoone_schedule' : '/update_cogoone_calendar';
+	const { startDate, endDate } = getMonthStartAndEnd({ month });
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_cogoone_schedule',
+		url    : getUrl,
 		method : 'post',
 	}, { manual: true });
 
@@ -23,8 +25,10 @@ const useUpdateCogooneSchedule = ({
 				params: payload,
 			});
 			handleClose();
-			getEvents({ startDate, endDate });
-			handleUpdatedState();
+			await getEvents({ startDate, endDate });
+			if (activeTab === 'calendars') {
+				handleCallApi();
+			}
 			Toast.success('Updated Successfully!');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
