@@ -73,7 +73,7 @@ export const remainControls = ({ t = () => {}, entityCode = '', activeTab = '' }
 		initialCall : true,
 		asyncKey    : 'list_incident_types',
 		searchByq   : true,
-		params      : { status: activeTab },
+		params      : { status: activeTab, entityCode },
 		className   : styles.category_section,
 	},
 	{
