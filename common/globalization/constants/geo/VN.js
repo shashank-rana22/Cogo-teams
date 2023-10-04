@@ -423,7 +423,14 @@ export default {
 			{ label: 'E-Invoice Failed', value: 'IRN_FAILED' },
 			{ label: 'E-Invoice Cancelled', value: 'IRN_CANCELLED' },
 		],
-
+		invoice_status_new: [
+			{ label: 'Draft', value: 'DRAFT' },
+			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
+			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
+			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
+			{ label: 'E-Invoice Failed', value: 'IRN_FAILED' },
+			{ label: 'E-Invoice Cancelled', value: 'IRN_CANCELLED' },
+		],
 		freight_container_types: [
 			{
 				label : 'Standard(Dry)',

@@ -35,8 +35,10 @@ const updateApiData = ({
 		newValue.list[index][key] = value;
 
 		if (key === 'tdsAmount' && index >= MIN_AMOUNT) {
-			newValue.list[index].payableAmount = newValue.list[index].payableValue - value;
-			newValue.list[index].inputAmount = newValue.list[index].payableValue - value;
+			newValue.list[index].payableAmount = (newValue?.list?.[index]?.invoiceAmount || MIN_AMOUNT) - value
+				- (newValue?.list?.[index]?.paidAmount || MIN_AMOUNT);
+			newValue.list[index].inputAmount = (newValue?.list?.[index]?.invoiceAmount || MIN_AMOUNT) - value
+				- (newValue?.list?.[index]?.paidAmount || MIN_AMOUNT);
 		}
 	}
 	return newValue;
@@ -58,8 +60,6 @@ const calculateErrorStatus = ({
 		maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
 		lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;
 	} else if (key === 'tdsAmount') {
-		maxValueCrossed = +payableAmount > +payableValue;
-		lessValueCrossed = Number.parseInt(payableAmount, 10) <= MIN_AMOUNT;
 		maxTdsValueCrossed = +value + +tdsDeducted > +checkAmount;
 		lessTdsValueCrossed = Number.parseInt(value, 10) < MIN_AMOUNT;
 	} else {
