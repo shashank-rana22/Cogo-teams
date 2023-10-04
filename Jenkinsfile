@@ -35,7 +35,7 @@ pipeline {
         }
         stage("Acquire lock"){
                 when {
-                expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#deploy_on') }
+                expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#ritik') }
                 }
                 steps{
                     script {
@@ -60,7 +60,7 @@ pipeline {
         }
         stage('Build'){
             when {
-                expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#deploy_on') }
+                expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#ritik') }
             }
             steps {
                 office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Starting to build admin for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** for user **${PUSHER_NAME}**", color: '#3366ff'
@@ -96,7 +96,7 @@ pipeline {
         }
         stage('Deploy') {
             when {
-                expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#deploy_on') }
+                expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#ritik') }
             }
 
             steps {
