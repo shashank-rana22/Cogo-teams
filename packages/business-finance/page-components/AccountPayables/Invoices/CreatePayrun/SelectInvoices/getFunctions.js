@@ -31,7 +31,7 @@ const getFunctions = ({
 		<RenderUrgency itemData={itemData} field={field} />
 	),
 	renderAction: (itemData) => (
-		<RenderAction itemData={itemData} />
+		<RenderAction itemData={itemData} hideIcDot />
 	),
 	renderEditableTds: (itemData, field) => (
 		<EditableTdsInput itemData={itemData} field={field} setEditedValue={setEditedValue} />

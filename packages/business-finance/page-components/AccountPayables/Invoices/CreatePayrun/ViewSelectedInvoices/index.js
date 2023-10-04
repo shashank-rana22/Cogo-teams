@@ -26,7 +26,7 @@ const getFunctions = ({ getInvoices = () => {} }) => ({
 		<RenderUrgency itemData={itemData} field={field} />
 	),
 	renderAction: (itemData) => (
-		<RenderAction itemData={itemData} />
+		<RenderAction itemData={itemData} hideIcDot />
 	),
 	renderBankDetails : (itemData) => (<BankDetails itemData={itemData} />),
 	renderDelete      : (itemData) => (<Delete itemData={itemData} refetch={getInvoices} />),

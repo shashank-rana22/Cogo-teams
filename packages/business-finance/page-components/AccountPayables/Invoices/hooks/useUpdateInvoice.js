@@ -40,8 +40,8 @@ function useUpdateInvoice({
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
-	const user = user_profile?.user;
-	const { organization_id: organizationId } = query;
+	const user = user_profile?.user || {};
+	const { organization_id: organizationId } = query || {};
 
 	const updateInvoice = async (val = '', remarks = '') => {
 		const params = {

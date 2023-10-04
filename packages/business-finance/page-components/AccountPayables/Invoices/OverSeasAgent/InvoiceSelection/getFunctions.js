@@ -40,7 +40,7 @@ const getFunctions = ({
 		/>
 	),
 	renderAction: (itemData) => (
-		<RenderAction itemData={itemData} />
+		<RenderAction itemData={itemData} hideIcDot />
 	),
 	renderEditableTds: (itemData, field) => (
 		<EditableTdsInput

@@ -11,7 +11,7 @@ import RemarkContent from './RemarkContent';
 import RemarksModal from './RemarksModal';
 import styles from './styles.module.css';
 
-function Remark({ itemData = {}, checkRelease = false, refetch = () => {} }) {
+function Remark({ itemData = {}, checkRelease = false, refetch = () => {}, hideIcDot = false }) {
 	const {
 		remarkLoading,
 		fetchRemarkHistory,
@@ -65,7 +65,7 @@ function Remark({ itemData = {}, checkRelease = false, refetch = () => {} }) {
 				</Button>
 			) : null}
 
-			{!checkRelease && isActionsButtonAllowed ? (
+			{!checkRelease && isActionsButtonAllowed && !hideIcDot ? (
 				<Popover
 					interactive
 					placement="left"
