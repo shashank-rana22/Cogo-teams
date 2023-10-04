@@ -74,7 +74,7 @@ function Content({
 	const isBlDocVisiblityAllowed = document_type === 'bill_of_lading' && isEmpty(document_url);
 
 	function GetUploadButton() {
-		if (showUploadText.length
+		if (showUploadText?.length
 			&& canEditDocuments && GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id === user_id) {
 			return (
 				<Button
