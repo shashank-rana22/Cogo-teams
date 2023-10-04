@@ -25,7 +25,11 @@ function RaiseTicketModal({
 }) {
 	const [additionalInfo, setAdditionalInfo] = useState([]);
 
+	let disableButton = false;
+
 	const { control, watch, handleSubmit, formState:{ errors = {} } = {} } = useForm();
+
+	const formValues = watch();
 
 	const watchRaisedToDesk = watch('raised_to_desk');
 
@@ -68,6 +72,12 @@ function RaiseTicketModal({
 		setAdditionalInfo,
 		shipmentData,
 		STAKEHOLDER_OPTIONS,
+	});
+
+	(fields || []).forEach((item) => {
+		if (item?.rules?.required && !formValues[item?.name]) {
+			disableButton = true;
+		}
 	});
 
 	return (
@@ -122,7 +132,7 @@ function RaiseTicketModal({
 			<Modal.Footer style={{ padding: 12 }}>
 				<Button
 					size="md"
-					disabled={loading || updateLoading || shipmentLoading || stakeholderLoading}
+					disabled={loading || updateLoading || shipmentLoading || stakeholderLoading || disableButton}
 					onClick={handleSubmit(raiseTickets)}
 				>
 					Submit

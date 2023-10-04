@@ -17,3 +17,23 @@
 .col_value {
 	font-weight: 600;
 }
+
+.first_sec {
+	width: 72%;
+}
+
+.second_sec {
+	justify-content: space-evenly;
+	width: 25%;
+	border-left: 1px solid #cdcdcd;
+
+	:global {
+		.ui_toggle_container {
+			padding-top: 0;
+		}
+	}
+}
+
+.plan_label {
+	font-size: 12px;
+}

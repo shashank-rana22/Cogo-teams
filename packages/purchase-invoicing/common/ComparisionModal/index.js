@@ -7,6 +7,9 @@ import Step2 from '../../page-components/Step2';
 
 import styles from './styles.module.css';
 
+const STEPONE = 1;
+const STEPTWO = 2;
+
 function ComparisionModal({
 	uploadInvoiceUrl = '',
 	setUploadInvoiceUrl = () => {},
@@ -17,6 +20,7 @@ function ComparisionModal({
 	step = 1,
 	setStep = () => {},
 	onClose = () => {},
+	jobClosed = false,
 }) {
 	const [purchaseInvoiceValues, setPurchaseInvoiceValues] = useState(getEditData(editData));
 
@@ -33,14 +37,14 @@ function ComparisionModal({
 
 	const contentText = (
 		<span className={styles.headingmodal}>
-			{step === 2 ? 'STEP 2a - Match and Lock Items with Live Invoice'
+			{step === STEPTWO ? 'STEP 2a - Match and Lock Items with Live Invoice'
 				: 'STEP 1 - Match Purchase Invoice With Cogo Invoice'}
 		</span>
 	);
 
 	const closeModal = () => {
 		setOpenComparision(false);
-		setStep(1);
+		setStep(STEPONE);
 		setErrMszs({});
 	};
 
@@ -52,7 +56,7 @@ function ComparisionModal({
 			placement="center"
 			className={styles.modal_container}
 		>
-			{step === 1 ? (
+			{step === STEPONE ? (
 				<Step1
 					contentText={contentText}
 					uploadInvoiceUrl={openComparision?.invoice_url || uploadInvoiceUrl}
@@ -85,7 +89,7 @@ function ComparisionModal({
 				/>
 			) : null}
 
-			{step === 2 ? (
+			{step === STEPTWO ? (
 				<Step2
 					contentText={contentText}
 					purchaseInvoiceValues={purchaseInvoiceValues}
@@ -101,6 +105,7 @@ function ComparisionModal({
 					onClose={onClose}
 					closeModal={closeModal}
 					formValues={purchaseInvoiceValues}
+					jobClosed={jobClosed}
 				/>
 			) : null}
 		</Modal>

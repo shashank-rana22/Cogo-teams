@@ -14,17 +14,11 @@ export const requestControls = ({ t = () => {}, isSettlementExecutive = false }:
 		optionsVal = [
 			{ value: 'TDS_APPROVAL', label: t('incidentManagement:tds_deviation') },
 			{ value: 'BANK_DETAIL_APPROVAL', label: t('incidentManagement:bank_acc_add_edit') },
-			{ value: 'SETTLEMENT_APPROVAL', label: t('incidentManagement:settlement_label') },
-			{ value: 'JOURNAL_VOUCHER_APPROVAL', label: t('incidentManagement:journal_voucher_label') },
 			{ value: 'REVOKE_INVOICE', label: t('incidentManagement:invoice_revoke') },
 			{ value: 'ISSUE_CREDIT_NOTE', label: t('incidentManagement:credit_note_request') },
 			{
 				value : 'CONSOLIDATED_CREDIT_NOTE',
 				label : t('incidentManagement:consolidated_credit_note_request'),
-			},
-			{
-				value : 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL',
-				label : t('incidentManagement:inter_comp_jv_approval'),
 			},
 			{
 				value : 'CONCOR_PDA_APPROVAL',
@@ -113,17 +107,11 @@ export const remainControls = ({ t = () => {}, isSettlementExecutive = false }:P
 		optionsVal = [
 			{ value: 'TDS_APPROVAL', label: t('incidentManagement:tds_deviation') },
 			{ value: 'BANK_DETAIL_APPROVAL', label: t('incidentManagement:bank_acc_add_edit') },
-			{ value: 'SETTLEMENT_APPROVAL', label: t('incidentManagement:settlement_label') },
-			{ value: 'JOURNAL_VOUCHER_APPROVAL', label: t('incidentManagement:journal_voucher_label') },
 			{ value: 'REVOKE_INVOICE', label: t('incidentManagement:invoice_revoke') },
 			{ value: 'ISSUE_CREDIT_NOTE', label: t('incidentManagement:credit_note_request') },
 			{
 				value : 'CONSOLIDATED_CREDIT_NOTE',
 				label : t('incidentManagement:consolidated_credit_note_request'),
-			},
-			{
-				value : 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL',
-				label : t('incidentManagement:inter_comp_jv_approval'),
 			},
 			{
 				value : 'CONCOR_PDA_APPROVAL',

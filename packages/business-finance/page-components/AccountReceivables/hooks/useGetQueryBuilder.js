@@ -88,7 +88,6 @@ const useGetQueryBuilder = ({
 
 		return dateData;
 	}, [barGraphData, getSplitDates, indexValue, pageNumber, period_type]);
-	console.log(entityCode, 'entityCode');
 	const getQueryBuilder = useCallback(() => {
 		const barId = !Number.isNaN(Number(id)) ? [id] : ['301', '101'];
 		const formattedPayload = {

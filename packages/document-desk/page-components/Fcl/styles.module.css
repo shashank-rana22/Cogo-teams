@@ -1,6 +1,9 @@
 .filters {
 	display: flex;
-	justify-content: flex-end;
-	margin-top: -58px;
-	margin-bottom: 20px;
+}
+
+.header_container {
+	display: flex;
+	justify-content: space-between;
+	padding-right: 60px;
 }
