@@ -85,7 +85,7 @@ function getColumns({
 				const { name = '' } = createdBy || {};
 				return (
 					<div className={cl`${styles.requested_by} ${styles.common}`}>
-						<ShowOverflowingNumber value={name} maxLength={OVERFLOW_NUMBER} />
+						<ShowOverflowingNumber value={toTitleCase(name)} maxLength={OVERFLOW_NUMBER} />
 					</div>
 				);
 			},
