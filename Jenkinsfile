@@ -25,7 +25,8 @@ pipeline {
             }
         }
         stage("Acquire lock"){
-                script {
+                steps{
+                    script {
                     SERVER_NAME = sh (script: "git log -1 --pretty=%B ${COMMIT_ID} | awk \'{print \$NF}\'", returnStdout:true).trim()
                 
                     def isBlocked = isJobBlocked("Deploy Admin to ${SERVER_NAME}")
@@ -39,6 +40,7 @@ pipeline {
                             scanQueueFor: "BLOCKED"])
                     }
             }
+        }
 
         }
         
