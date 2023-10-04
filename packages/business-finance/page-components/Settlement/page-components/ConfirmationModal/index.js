@@ -1,32 +1,10 @@
 import { Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
-interface ListItem {
-	id: string;
-	jvNum: string;
-	category: string;
-	transactionDate: string;
-	currency: string;
-	entityCode: string;
-	jvCodeNum: string;
-	exchangeRate: string;
-	ledCurrency: string;
-	status: string;
-}
-
-interface Props {
-	item: ListItem;
-	showConfirm: boolean | string;
-	setShowConfirm: Dispatch<SetStateAction<string | boolean>>;
-	post: (id: string) => void;
-	deleteJv: (id: string) => void;
-	loading: boolean;
-}
-
-function ConfirmationModal({ showConfirm, setShowConfirm, post, item, deleteJv, loading }: Props) {
+function ConfirmationModal({ showConfirm, setShowConfirm, post, item, deleteJv, loading }) {
 	const context = showConfirm === 'post' ? 'Post To Sage' : 'Delete';
 	return (
 		<Modal

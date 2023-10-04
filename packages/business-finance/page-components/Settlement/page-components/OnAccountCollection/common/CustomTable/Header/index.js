@@ -1,32 +1,7 @@
 import { Checkbox } from '@cogoport/components';
-import { ChangeEvent } from 'react';
 
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
-
-interface GlobalInterface {
-	page?: number;
-	pageLimit?: number;
-	accMode?: string;
-	search?: string;
-	date?: {
-		startDate?: Date;
-		endDate?: Date;
-	};
-	paymentDocumentStatus?: string;
-	docType?: string;
-	sortBy?: string;
-	sortType?: string;
-}
-
-interface HeaderInterface {
-	setGlobalFilters?: React.Dispatch<React.SetStateAction<GlobalInterface>>;
-	globalFilters?: GlobalInterface;
-	onChangeTableHeaderCheckbox: (event: ChangeEvent<HTMLInputElement>) => void;
-	isAllChecked: boolean;
-	showHeaderCheckbox: boolean;
-	loading?: boolean;
-}
 
 function Header(
 	{
@@ -36,7 +11,7 @@ function Header(
 		isAllChecked,
 		showHeaderCheckbox,
 		loading,
-	}: HeaderInterface,
+	},
 ) {
 	return (
 		<div className={styles.header}>

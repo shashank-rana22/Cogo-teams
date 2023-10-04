@@ -3,23 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect } from 'react';
 
-interface FormData {
-	cogoEntityId?: string;
-	creditController?: string[];
-	serviceType?: string[];
-	ageingBucket?: string;
-	totalDueOutstanding?: number | string;
-	dueOutstandingCurrency?: string;
-	pageIndex?: number | string;
-}
-
-interface Props {
-	formData?: FormData;
-	search?: string;
-	setFormData?: Function;
-}
-
-const useGetCustomerList = ({ formData, search, setFormData }:Props) => {
+const useGetCustomerList = ({ formData, search, setFormData }) => {
 	const {
 		cogoEntityId, creditController, serviceType,
 		ageingBucket, totalDueOutstanding, dueOutstandingCurrency,

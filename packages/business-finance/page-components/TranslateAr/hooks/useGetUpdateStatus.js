@@ -2,17 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface Props {
-	uploadProof?: string;
-	setOpen?:(v:boolean)=>void;
-	itemData?: {
-		id?: string,
-		[key: string]: string
-	};
-	refetch: Function;
-}
-
-const useUpdateStatus = ({ uploadProof, setOpen, itemData = {}, refetch }: Props) => {
+const useUpdateStatus = ({ uploadProof, setOpen, itemData = {}, refetch }) => {
 	const profile = useSelector((state) => state);
 	const { profile:{ user } } = profile || {};
 	const { id: partnerId } = user || {};

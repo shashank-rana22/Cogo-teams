@@ -10,19 +10,6 @@ import { formatPayload, powerControls } from './helper';
 import useExchangeRate from './useExchangeRate';
 import useVender from './useVender';
 
-interface SelectedInterface {
-	entityType?:string
-	tradePartyMappingId?:string
-	taggedOrganizationId?:string
-	id?:string
-	paymentCode?:string
-	transactionDate?:Date
-}
-
-interface BankInterface {
-	bankAccountNumber?:string
-	bankName?:string
-}
 const useCreateManualEntry = ({
 	setShowModal,
 	isEdit = false,
@@ -31,7 +18,7 @@ const useCreateManualEntry = ({
 	itemData,
 }) => {
 	const [errors, setErrors] = useState({});
-	const profile = useSelector((state:{ profile?:{ user?:{ id?:string, name?:string } } }) => state.profile || {});
+	const profile = useSelector((state) => state.profile || {});
 	const { id:profileId = '', name:profileName = '' } = profile?.user || {};
 	const [editMode, setEditMode] = useState(false);
 	const [showBprNumber, setShowBprNumber] = useState({ sage_organization_id: '' });
@@ -44,9 +31,9 @@ const useCreateManualEntry = ({
 		id,
 		paymentCode,
 		transactionDate,
-	}:SelectedInterface = selectedItem;
+	} = selectedItem;
 
-	const [bankDetails, setBankDetails] = useState<BankInterface>();
+	const [bankDetails, setBankDetails] = useState();
 	const [venderDataValue, setVenderDataValue] = useState({ id: '', organization_id: '' });
 	const { bankAccountNumber, bankName } = bankDetails || {};
 	const isVenderExists = tradePartyMappingId || venderDataValue?.id;

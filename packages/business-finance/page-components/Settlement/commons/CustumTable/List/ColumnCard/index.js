@@ -13,30 +13,12 @@ import Details from './Details';
 import styles from './styles.module.css';
 import ToolTipWrapper from './ToolTipWrapper';
 
-interface ListItem {
-	id: string;
-	jvNum: string;
-	category: string;
-	transactionDate: string;
-	currency: string;
-	entityCode: string;
-	jvCodeNum: string;
-	exchangeRate: string;
-	ledCurrency: string;
-	status: string;
-}
-
-interface Props {
-	item: ListItem;
-	refetch: () => void;
-}
-
 const STATUS = ['APPROVED', 'POSTING_FAILED'];
 
-function ColumnCard({ item, refetch }: Props) {
+function ColumnCard({ item, refetch }) {
 	const [showDetails, setShowDetails] = useState(false);
 
-	const [showConfirm, setShowConfirm] = useState<boolean | string>(false);
+	const [showConfirm, setShowConfirm] = useState(false);
 
 	const { post, loading: postloading } = usePostToSage({ setShowConfirm, refetch });
 

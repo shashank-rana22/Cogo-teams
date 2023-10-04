@@ -9,50 +9,12 @@ import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 
 import styles from './styles.module.css';
 
-interface Summary {
-	title?: string;
-	value?: any;
-}
-
-interface Entity {
-	entity_code?: number | string;
-	id?: string;
-}
-
-interface Data {
-	vendorName?: string;
-	transactionDate?: Date;
-	paymentMode?: string;
-	uploadedInvoice?: string;
-	periodOfTransaction?: string;
-	expenseCategory?: string;
-	expenseSubCategory?: string;
-	branch?: string;
-	entityObject?: Entity;
-	invoiceDate?: Date;
-	stakeholderName?: string;
-	invoiceCurrency?: string;
-	vendorID?: number | string;
-	payableAmount?: number | string;
-	startDate?: Date;
-	endDate?: Date;
-	repeatEvery?: string;
-	agreementNumber?: number;
-	currency?: string;
-	categoryName?: string;
-}
-
-interface Props {
-	recurringData?: Data;
-	setRecurringData?: (p: any) => void;
-}
-
 const MAX_LENGTH = 18;
 
 function RenderSummaryData({ summary = [] }) {
 	return (
 		<div style={{ display: 'flex' }}>
-			{summary?.map((item: Summary) => (
+			{summary?.map((item) => (
 				<div key={item.title} className={styles.section}>
 					<div className={styles.title}>{item.title}</div>
 					<div className={styles.value}>{item.value}</div>
@@ -169,7 +131,7 @@ const summeryMappings = ({ summaryDataFirst, summaryDataSecond, summaryDataThird
 function RecurringSummary({
 	recurringData = {},
 	setRecurringData = () => {},
-}: Props) {
+}) {
 	const {
 		vendorName,
 		branch,
@@ -192,7 +154,7 @@ function RecurringSummary({
 
 	useEffect(() => {
 		if (!isEmpty(tradePartyData)) {
-			setRecurringData((prev: object) => ({
+			setRecurringData((prev) => ({
 				...prev,
 				tradeParty: tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index],
 			}));

@@ -1,14 +1,13 @@
 import { Button, Modal } from '@cogoport/components';
 
 import useCreateManualEntry from '../../../../hooks/useCreateManualEntry';
-import { UploadFileInterface } from '../../interface';
 
 import CreateRequest from './CreateRequest';
 import styles from './styles.module.css';
 
 function ManualEntry({
 	showModal, setShowModal = () => {}, refetch, isEdit, show, setShow = () => {}, selectedItem, itemData,
-}:UploadFileInterface) {
+}) {
 	const {
 		controls,
 		control,

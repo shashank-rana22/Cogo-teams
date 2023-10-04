@@ -2,13 +2,7 @@ import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-interface FilterPropsInterface {
-	filters?:{ sortType?:string, sortBy?:string };
-	setFilters?: React.Dispatch<React.SetStateAction<{}>>;
-	sortingKey?:string;
-}
-
-function SortIcon({ setFilters, sortingKey, filters }:FilterPropsInterface) {
+function SortIcon({ setFilters, sortingKey, filters }) {
 	const sortEle = () => {
 		let newSortType = '';
 		if (filters?.sortBy === sortingKey || !filters?.sortBy) {

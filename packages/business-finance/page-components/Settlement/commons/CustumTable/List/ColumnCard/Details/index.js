@@ -8,23 +8,6 @@ import ToolTipWrapper from '../ToolTipWrapper';
 import LineItemsHeader from './LineItemsHeader';
 import styles from './styles.module.css';
 
-interface ListItem {
-	id: string;
-	jvNum: string;
-	category: string;
-	transactionDate: string;
-	currency: string;
-	entityCode: string;
-	jvCodeNum: string;
-	exchangeRate: string;
-	ledCurrency: string;
-	status: string;
-}
-
-interface Props {
-	item: ListItem;
-}
-
 const DEFAULT_VAL = {
 	status          : '',
 	id              : '',
@@ -38,7 +21,7 @@ const DEFAULT_VAL = {
 	ledCurrency     : '',
 };
 
-function Details({ item = DEFAULT_VAL }: Props) {
+function Details({ item = DEFAULT_VAL }) {
 	const { data: list = [], loading } = useGetJvLineItems({ parentJVId: item?.id });
 	const listTotal = list?.length;
 

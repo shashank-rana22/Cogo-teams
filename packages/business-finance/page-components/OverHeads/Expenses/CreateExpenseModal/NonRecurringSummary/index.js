@@ -9,11 +9,6 @@ import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 
 import styles from './styles.module.css';
 
-interface Entity {
-	entity_code?: number | string;
-	id?: string;
-}
-
 function RenderSummaryData({ summary = [] }) {
 	return (
 		<div style={{ display: 'flex' }}>
@@ -25,33 +20,6 @@ function RenderSummaryData({ summary = [] }) {
 			))}
 		</div>
 	);
-}
-
-interface Data {
-	vendorName?: string;
-	transactionDate?: Date;
-	paymentMode?: string;
-	uploadedInvoice?: string;
-	periodOfTransaction?: string;
-	expenseCategory?: string;
-	expenseSubCategory?: string;
-	branch?: string;
-	entityObject?: Entity;
-	invoiceDate?: Date;
-	totalPayable?: number | string;
-	stakeholderName?: string;
-	invoiceCurrency?: string;
-	vendorID?: number | string;
-	payableAmount?: number;
-	remarks?: string;
-	categoryName?: string;
-	dueDate?: Date;
-}
-
-interface Props {
-	nonRecurringData?: Data;
-	setNonRecurringData?: (obj) => void;
-	tradePartyData?: object;
 }
 
 const MAX_LENGTH = 18;
@@ -90,7 +58,7 @@ const summaryDataTwo = ({
 		value : (
 			<div>
 				{formatAmount({
-					amount   : payableAmount as any,
+					amount   : payableAmount,
 					currency : invoiceCurrency,
 					options  : {
 						style           : 'currency',
@@ -193,7 +161,7 @@ function NonRecurringSummary({
 	nonRecurringData = {},
 	setNonRecurringData = () => {},
 	tradePartyData = {},
-}: Props) {
+}) {
 	const {
 		periodOfTransaction,
 		vendorName,
@@ -214,7 +182,7 @@ function NonRecurringSummary({
 
 	useEffect(() => {
 		if (!isEmpty(tradePartyData)) {
-			setNonRecurringData((prev: object) => ({
+			setNonRecurringData((prev) => ({
 				...prev,
 				tradeParty: tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index],
 			}));

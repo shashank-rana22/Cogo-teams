@@ -11,15 +11,12 @@ import Expenses from './Expenses/index';
 import styles from './styles.module.css';
 import Vendors from './Vendors/index';
 
-interface ProfileProps {
-	profile?: { partner?: { id?: string } };
-}
 function Overheads() {
 	const { query } = useRouter();
 	const { push } = useRouter();
 
 	const profile = useSelector((state) => state);
-	const { profile: { partner } }:ProfileProps = profile || {};
+	const { profile: { partner } } = profile || {};
 	const { id: partnerId } = partner || {};
 
 	const { entityLoading = true, entityData = [] } = useListCogoEntities();
@@ -35,7 +32,7 @@ function Overheads() {
 	const [activeTab, setActiveTab] = useState(query?.active_tab || 'vendors');
 	const [entityCode, setEntityCode] = useState(defaultEntityId);
 
-	const handleChange = (tab:any) => {
+	const handleChange = (tab) => {
 		setActiveTab(tab);
 		push(
 			'/business-finance/overheads/[active_tab]',

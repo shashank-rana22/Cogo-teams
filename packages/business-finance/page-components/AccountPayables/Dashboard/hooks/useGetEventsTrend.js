@@ -2,17 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-interface FilterProps {
-	service?: string,
-	currency?: string,
-}
-interface ItemProps {
-	showData: string;
-	filtersData: FilterProps;
-	activeEntity: string;
-}
-
-const useGetEventsTrend = ({ showData, filtersData, activeEntity }:ItemProps) => {
+const useGetEventsTrend = ({ showData, filtersData, activeEntity }) => {
 	const [filters, setFilters] = useState({
 		events: 'so2UploadTrend',
 	});

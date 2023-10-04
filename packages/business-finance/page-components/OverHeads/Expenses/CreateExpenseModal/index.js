@@ -9,15 +9,6 @@ import CreateExpenseForm from './CreateExpenseForm';
 import MailTemplate from './MailTemplate';
 import styles from './styles.module.css';
 
-interface Props {
-	setShowModal: any;
-	showModal?: boolean;
-	createExpenseType?: string;
-	getList?: (p: any) => void;
-	getRecurringList?: (p: any) => void;
-	setShowWarning?: (p: any) => void;
-}
-
 const getMonthOptions = (minMonth) => {
 	const date = minMonth ? new Date(minMonth) : new Date();
 	const options = MONTH_OPTIONS.filter(
@@ -33,7 +24,7 @@ function CreateExpenseModal({
 	getList = () => {},
 	getRecurringList = () => {},
 	setShowWarning = () => {},
-}: Props) {
+}) {
 	const [mailModal, setMailModal] = useState(false);
 	const [recurringData, setRecurringData] = useState({
 		repeatEvery: 'week',
@@ -63,14 +54,14 @@ function CreateExpenseModal({
 		setActive(timeline[current - 1]);
 	};
 
-	let headerTitle: string;
+	let headerTitle;
 	if (createExpenseType === 'recurring') {
 		headerTitle = 'RECORD - Recurring';
 	} else if (createExpenseType === 'nonRecurring') {
 		headerTitle = ' - Non Recurring';
 	}
 
-	let mailData: object;
+	let mailData;
 
 	if (createExpenseType === 'recurring') {
 		mailData = recurringData;

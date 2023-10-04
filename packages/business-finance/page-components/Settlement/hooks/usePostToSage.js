@@ -2,17 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface Props {
-	refetch: () => void;
-	setShowConfirm: React.Dispatch<React.SetStateAction<string | boolean>>;
-}
-
-interface Profile {
-	profile?: { user:{ id:string } }
-}
-
-const usePostToSage = ({ setShowConfirm, refetch }: Props) => {
-	const profile:Profile = useSelector((state) => state);
+const usePostToSage = ({ setShowConfirm, refetch }) => {
+	const profile = useSelector((state) => state);
 	const { profile: { user } } = profile || {};
 	const { id: profileid } = user || {};
 	const [{ loading }, trigger] = useRequestBf(

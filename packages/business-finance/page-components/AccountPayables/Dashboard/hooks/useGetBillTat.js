@@ -3,17 +3,6 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useState } from 'react';
 
-interface FilterProps {
-	currency?: string,
-	service?: string,
-}
-interface ItemProps {
-	filtersData: FilterProps,
-	firstEvent: string,
-	secondEvent: string,
-	activeEntity: string,
-}
-
 const useGetBillTat = ({ filtersData, firstEvent, secondEvent, activeEntity }:ItemProps) => {
 	const [filters, setFilters] = useState({
 		Date: undefined,
@@ -47,10 +36,10 @@ const useGetBillTat = ({ filtersData, firstEvent, secondEvent, activeEntity }:It
 				firstEvent  : firstEvent || undefined,
 				secondEvent : secondEvent || undefined,
 				entity      : activeEntity,
-				from        : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
+				from        : startDate ? format(startDate, 'yyyy-MM-dd 00:00:00', {}, false)
 					: undefined,
 				to: endDate
-					? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
+					? format(endDate, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
 			};
 			await trigger({ params: payload });
 		} catch (e) {

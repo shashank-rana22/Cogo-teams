@@ -8,57 +8,6 @@ import { recurringExpenseDetails } from '../../../Controls/recurringExpenseDetai
 import { officeLocations } from '../../../utils/officeLocations';
 import useListCogoEntities from '../../hooks/useListCogoEntities';
 
-interface ObjInt {
-	category?: string;
-	sub_category?: string;
-	cogoport_office_id?: string | number;
-	cogo_entity_id?: string;
-}
-
-interface VendorObject {
-	services?: ObjInt[];
-	business_name?: string;
-	registration_number?: string | number;
-	id?: string | number;
-	serial_id?: number | string;
-}
-
-interface FormData {
-	transactionDate?: Date | number;
-	vendorData?: any;
-	vendorName?: string;
-	invoiceDate?: Date;
-	periodOfTransaction?: string;
-	entityObject?: object;
-	registrationNumber?: number | string;
-	expenseCategory?: string;
-	expenseSubCategory?: string;
-	branch?: any;
-	paymentMode?: string;
-	payableAmount?: string | number;
-	currency?: string;
-	repeatEvery?: string;
-	startDate?: Date;
-	endDate?: Date;
-	agreementNumber?: number | string;
-	description?: string;
-	uploadedInvoice?: string[];
-}
-interface Props {
-	formData?: FormData;
-	setFormData?: (p: object) => void;
-	createExpenseType?: string;
-	categoryOptions?: object[];
-	setCategoryOptions?: (p: object) => void;
-	setSubCategoryOptions?: (p: object) => void;
-	setBranchOptions?: (p: object) => void;
-	setEntityOptions?: (p: object) => void;
-	subCategoryOptions?: object[];
-	branchOptions?: object[];
-	entityOptions?: object[];
-	setIsFormValidated?: (p: boolean) => void;
-}
-
 function ExpenseDetailsForm({
 	formData,
 	setFormData,
@@ -72,7 +21,7 @@ function ExpenseDetailsForm({
 	subCategoryOptions,
 	entityOptions,
 	setIsFormValidated,
-}: Props) {
+}) {
 	const {
 		transactionDate: date,
 		vendorName,
@@ -98,12 +47,12 @@ function ExpenseDetailsForm({
 
 	useEffect(() => {
 		if (date) {
-			setFormData((prev: object) => ({
+			setFormData((prev) => ({
 				...prev,
 				periodOfTransaction: months[getMonth(date) + 1],
 			}));
 		} else {
-			setFormData((prev: object) => ({
+			setFormData((prev) => ({
 				...prev,
 				periodOfTransaction: null,
 			}));
@@ -193,14 +142,14 @@ function ExpenseDetailsForm({
 		uploadedInvoice,
 	]);
 
-	let expenseControls: any;
+	let expenseControls;
 	if (createExpenseType === 'recurring') {
 		expenseControls = recurringExpenseDetails;
 	} else if (createExpenseType === 'nonRecurring') {
 		expenseControls = nonRecurringExpenseDetails;
 	}
 
-	const handleVendorChange = (obj: VendorObject) => {
+	const handleVendorChange = (obj) => {
 		const {
 			services,
 			business_name: BUSINESS_NAME,
@@ -241,7 +190,7 @@ function ExpenseDetailsForm({
 			setBranchOptions([...BRANCHES]);
 		}
 
-		setFormData((prev: object) => ({
+		setFormData((prev) => ({
 			...prev,
 			vendorName         : BUSINESS_NAME,
 			registrationNumber : REGISTRATION_NUMBER,

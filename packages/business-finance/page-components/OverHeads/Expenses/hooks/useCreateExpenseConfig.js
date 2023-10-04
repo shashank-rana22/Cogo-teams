@@ -34,7 +34,7 @@ const useCreateExpenseConfig = ({
 	const { id: cogoEntityId } = entityObject || {};
 	const { organization_trade_party_detail_id: tradePartyDetailId } =		tradeParty || {};
 
-	const { profile } = useSelector((state: any) => state);
+	const { profile } = useSelector((state) => state);
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{

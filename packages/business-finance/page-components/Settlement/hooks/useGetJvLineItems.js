@@ -1,11 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-interface Props {
-	parentJVId: string;
-}
-
-const useGetJvLineItems = ({ parentJVId }:Props) => {
+const useGetJvLineItems = ({ parentJVId }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/payments/journal-voucher/jv-line-items-list',

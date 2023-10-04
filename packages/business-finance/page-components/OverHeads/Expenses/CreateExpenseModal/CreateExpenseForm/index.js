@@ -7,16 +7,6 @@ import NonRecurringSummary from '../NonRecurringSummary';
 import RecurringSummary from '../RecurringSummary';
 import UploadInvoiceForm from '../UploadInvoiceForm';
 
-interface Props {
-	active: string;
-	createExpenseType: string;
-	recurringData?: object;
-	setRecurringData?: (obj: any) => void;
-	nonRecurringData?: any;
-	setNonRecurringData?: (obj: any) => void;
-	setIsFormValidated?: (obj: any) => void;
-}
-
 function CreateExpenseForm({
 	active = '',
 	createExpenseType = '',
@@ -25,7 +15,7 @@ function CreateExpenseForm({
 	nonRecurringData = {},
 	setNonRecurringData = () => {},
 	setIsFormValidated = () => {},
-}: Props) {
+}) {
 	const [categoryOptions, setCategoryOptions] = useState([]);
 	const [subCategoryOptions, setSubCategoryOptions] = useState([]);
 	const [taxOptions, setTaxOptions] = useState([]);
@@ -33,8 +23,8 @@ function CreateExpenseForm({
 	const [entityOptions, setEntityOptions] = useState([]);
 	const [isUploadConfirm, setIsUploadConfirm] = useState(false);
 
-	let formData: any;
-	let setFormData: any;
+	let formData;
+	let setFormData;
 	if (createExpenseType === 'recurring') {
 		formData = recurringData;
 		setFormData = setRecurringData;

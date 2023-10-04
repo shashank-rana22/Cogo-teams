@@ -8,7 +8,6 @@ import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
-import { ListDataProps } from '../../AccountPayables/commons/Interfaces';
 import Filter from '../../commons/Filters';
 import SegmentedControl from '../../commons/SegmentedControl';
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
@@ -33,35 +32,6 @@ import {
 import WarningModal from './WarningModal';
 
 const DEFAULT_COUNT = 1;
-
-interface ItemDataInterface {
-	expensePeriod?: string;
-	recurringAmount?: number | string;
-	grandTotal?: number;
-	paidAmount?: number;
-	dueDate?: Date;
-	billDate?: Date;
-	createdDate?: Date;
-	status?: string;
-	approvedByUser?: { id?: string | number; name?: string };
-	billNumber?: string | number;
-	billDocumentUrl?: string;
-	startDate?: Date;
-	endDate?: Date;
-	maxPayoutAllowed?: number;
-	currency?: string;
-	updatedAt?: Date;
-	proofDocuments?: string[];
-	createdAt?: Date;
-	category?: string;
-	billCurrency?: string;
-	approvedByName?: string;
-	payableTds?: number;
-	incidentId?: string;
-	categoryName?: string;
-	payableAmount?: string;
-	paymentStatus?: string;
-}
 
 const MIN_AMOUNT = 0;
 
@@ -128,14 +98,14 @@ function ExpenseComponent() {
 		},
 	];
 
-	const handleChange = (e: string) => {
+	const handleChange = (e) => {
 		setExpenseFilters((previousState) => ({
 			...previousState,
 			searchValue: e,
 		}));
 	};
 
-	const handleAddExpense = (itemData: object) => {
+	const handleAddExpense = (itemData) => {
 		setShowExpenseModal(true);
 		setRowData(itemData);
 	};
@@ -171,7 +141,7 @@ function ExpenseComponent() {
 							placeholder={`Search by Vendor Name/${geo?.others?.identification_number?.label}/Organization ID/Sage ID`}
 							suffix={<IcMSearchlight />}
 							value={expenseFilters.searchValue}
-							onChange={(e: any) => handleChange(e)}
+							onChange={(e) => handleChange(e)}
 							className={styles.search}
 						/>
 					</div>
@@ -194,7 +164,7 @@ function ExpenseComponent() {
 	}
 
 	const functions = {
-		addExpense: (itemData: ItemDataInterface) => (
+		addExpense: (itemData) => (
 			<Button
 				themeType="secondary"
 				disabled={itemData?.status !== 'ACCEPTED'}
@@ -205,7 +175,7 @@ function ExpenseComponent() {
 				Add Expense
 			</Button>
 		),
-		renderCategory: (itemData: ItemDataInterface) => {
+		renderCategory: (itemData) => {
 			const { categoryName = '', category = '' } = itemData || {};
 			return (
 				<div style={{ fontSize: '14px' }}>
@@ -213,9 +183,9 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
-		renderExpensePeriod: (itemData: ItemDataInterface) => {
+		renderExpensePeriod: (itemData) => {
 			const { startDate, endDate } = itemData || {};
-			let difference: string = '';
+			let difference = '';
 			if (startDate && endDate) {
 				const date1 = new Date(startDate);
 				const date2 = new Date(endDate);
@@ -267,14 +237,14 @@ function ExpenseComponent() {
 			}
 			return <div>-</div>;
 		},
-		renderRecurringAmount: (itemData: ItemDataInterface) => {
+		renderRecurringAmount: (itemData) => {
 			const { maxPayoutAllowed, currency = '' } = itemData || {};
 			return (
 				<div className={styles.data_container}>
 					<div className={styles.recurring_amount_data}>
 						<div>
 							{formatAmount({
-								amount  : maxPayoutAllowed as any,
+								amount  : maxPayoutAllowed,
 								currency,
 								options : {
 									style           : 'currency',
@@ -312,7 +282,7 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
-		getPayable: (itemData: ItemDataInterface) => {
+		getPayable: (itemData) => {
 			const {
 				grandTotal,
 				paidAmount,
@@ -336,7 +306,7 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
-		getInvoiceDates: (itemData: ItemDataInterface) => {
+		getInvoiceDates: (itemData) => {
 			const { dueDate, billDate, createdDate } = itemData || {};
 			return (
 				<div style={{ fontSize: '10px' }}>
@@ -383,7 +353,7 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
-		getApprovedByRecurring: (itemData: ItemDataInterface) => {
+		getApprovedByRecurring: (itemData) => {
 			const { updatedAt, status, approvedByName } = itemData || {};
 			return (
 				<div>
@@ -431,7 +401,7 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
-		showAgreement: (itemData: ItemDataInterface) => {
+		showAgreement: (itemData) => {
 			const { proofDocuments = [] } = itemData || {};
 			const proofCount = proofDocuments.length;
 			if (proofCount === 1) {
@@ -449,7 +419,7 @@ function ExpenseComponent() {
 			function ShowDocuments() {
 				return (
 					<div>
-						{proofDocuments.map((proof: string) => (
+						{proofDocuments.map((proof) => (
 							<div key={proof}>
 								{proof && (
 									<a
@@ -480,7 +450,7 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
-		getCreatedOn: (itemData: ItemDataInterface) => {
+		getCreatedOn: (itemData) => {
 			const { createdAt } = itemData || {};
 			return (
 				<div>
@@ -497,7 +467,7 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
-		getInvoiceNumber: (itemData: ItemDataInterface) => {
+		getInvoiceNumber: (itemData) => {
 			const { billNumber, billDocumentUrl = '' } = itemData || {};
 			return (
 				<div>
@@ -518,10 +488,10 @@ function ExpenseComponent() {
 				</div>
 			);
 		},
-		renderInvoiceAmount: (itemData: ItemDataInterface) => {
+		renderInvoiceAmount: (itemData) => {
 			const { grandTotal, billCurrency = '' } = itemData || {};
 			const amount = formatAmount({
-				amount   : grandTotal as any,
+				amount   : grandTotal,
 				currency : billCurrency,
 				options  : {
 					style           : 'currency',
@@ -530,10 +500,10 @@ function ExpenseComponent() {
 			});
 			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
-		renderTds: (itemData: ItemDataInterface) => {
+		renderTds: (itemData) => {
 			const { payableTds, billCurrency = '' } = itemData || {};
 			const amount = formatAmount({
-				amount   : payableTds as any,
+				amount   : payableTds,
 				currency : billCurrency,
 				options  : {
 					style           : 'currency',
@@ -542,14 +512,14 @@ function ExpenseComponent() {
 			});
 			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
-		renderPaid: (itemData: ItemDataInterface) => {
+		renderPaid: (itemData) => {
 			const {
 				paidAmount,
 				billCurrency = '',
 				paymentStatus,
 			} = itemData || {};
 			const amount = formatAmount({
-				amount   : paidAmount as any,
+				amount   : paidAmount,
 				currency : billCurrency,
 				options  : {
 					style           : 'currency',
@@ -577,7 +547,7 @@ function ExpenseComponent() {
 		),
 	};
 
-	function ShowDropDown(singleItem: { id?: string; incidentId?: string }) {
+	function ShowDropDown(singleItem) {
 		const { id, incidentId } = singleItem || {};
 
 		if (recurringState === 'recurring') {
@@ -592,9 +562,9 @@ function ExpenseComponent() {
 		return null;
 	}
 
-	let listConfig: any;
-	let listItemData: ListDataProps;
-	let loading: boolean;
+	let listConfig;
+	let listItemData;
+	let loading;
 
 	if (recurringState === 'recurring') {
 		listConfig = expenseRecurringConfig;
@@ -628,7 +598,7 @@ function ExpenseComponent() {
 					setSort={setSort}
 					page={expenseFilters.pageIndex || DEFAULT_COUNT}
 					pageSize={expenseFilters.pageSize}
-					handlePageChange={(pageValue: number) => {
+					handlePageChange={(pageValue) => {
 						setExpenseFilters((p) => ({
 							...p,
 							pageIndex: pageValue,

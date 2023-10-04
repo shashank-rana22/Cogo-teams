@@ -9,30 +9,13 @@ import useCreateExpenseConfig from '../../hooks/useCreateExpenseConfig';
 import Details from './Details';
 import styles from './styles.module.css';
 
-interface Data {
-	uploadedInvoice?: any;
-	vendorName?: string;
-	expenseCategory?: string;
-	stakeholderEmail?: string;
-	categoryName?: string;
-	kycStatus?: string;
-}
-
-interface Props {
-	mailData?: Data;
-	setShowModal?: (p: any) => void;
-	getList?: (p: any) => void;
-	getRecurringList?: (p: any) => void;
-	createExpenseType?: string;
-}
-
 function MailTemplate({
 	mailData = {},
 	setShowModal = () => {},
 	getList = () => {},
 	getRecurringList = () => {},
 	createExpenseType = '',
-}: Props) {
+}) {
 	const {
 		uploadedInvoice,
 		vendorName = '-',

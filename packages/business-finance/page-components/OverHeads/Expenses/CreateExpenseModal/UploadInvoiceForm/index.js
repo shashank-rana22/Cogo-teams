@@ -10,24 +10,6 @@ import LineItemsForm from '../../LineItemsForm';
 
 import styles from './styles.module.css';
 
-interface FilterInterface {
-	uploadedInvoice?: string;
-	repeatEvery?: string;
-	invoiceCurrency?: string;
-	invoiceNumber?: string;
-	lineItemsList?: any;
-}
-interface Props {
-	formData: FilterInterface;
-	setFormData: (p: object) => void;
-	isUploadConfirm?: boolean;
-	setIsUploadConfirm?: (p: any) => void;
-	taxOptions?: object[];
-	setTaxOptions?: (p: any) => void;
-	setIsFormValidated?: (p: boolean) => void;
-	isTaxApplicable?: boolean;
-}
-
 function UploadInvoiceForm({
 	formData,
 	setFormData,
@@ -37,7 +19,7 @@ function UploadInvoiceForm({
 	setTaxOptions,
 	setIsFormValidated,
 	isTaxApplicable,
-}: Props) {
+}) {
 	const {
 		invoiceCurrency,
 		invoiceNumber,
@@ -75,7 +57,7 @@ function UploadInvoiceForm({
 				<div className={styles.select}>
 					<Select
 						value={formData?.invoiceCurrency}
-						onChange={(val: string) => setFormData({ ...formData, invoiceCurrency: val })}
+						onChange={(val) => setFormData({ ...formData, invoiceCurrency: val })}
 						placeholder="Currency*"
 						options={getCurrencyOptions()}
 						size="sm"
@@ -87,7 +69,7 @@ function UploadInvoiceForm({
 						size="sm"
 						placeholder="Unique invoice no."
 						value={formData?.invoiceNumber}
-						onChange={(e: string) => setFormData({ ...formData, invoiceNumber: e })}
+						onChange={(e) => setFormData({ ...formData, invoiceNumber: e })}
 					/>
 				</div>
 			</div>

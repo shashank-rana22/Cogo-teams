@@ -7,11 +7,7 @@ import useGetPayablesByService from '../hooks/useGetPayablesByService';
 
 import styles from './styles.module.css';
 
-interface ItemProps {
-	activeEntity: string;
-}
-
-function AccountPayablesByService({ activeEntity }:ItemProps) {
+function AccountPayablesByService({ activeEntity }) {
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 	const [activeBox, setActiveBox] = useState(null);
 	const handleClick = (item) => {
