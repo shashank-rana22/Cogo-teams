@@ -1,17 +1,15 @@
 import {
-	ButtonIcon, Tabs, TabPanel, cl, Button, Popover,
+	ButtonIcon, Tabs, TabPanel, cl, Button,
 } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import React from 'react';
 
 import { getTabMapping, getViewMapping } from '../../../constant/tabMapping';
 import useExportData from '../../../hooks/useExportData';
-import useGetDsrList from '../../../hooks/useGetDsrList';
 import useRedirectFn from '../../../hooks/useRedirectFn';
 
-import DailyReport from './DailyReport';
 import FilterSection from './FilterSection';
 import styles from './styles.module.css';
 
@@ -25,15 +23,11 @@ function Header(props) {
 
 	const VIEW_MAPPING = getViewMapping({ t });
 
-	const [showConfigure, setShowConfigure] = useState(false);
-
 	const { isArchived = false } = query || {};
 	const { activeTab = '', search_type = '' } = globalFilter;
 
 	const { redirectArchivedList, redirectToDashboard, redirectToList } = useRedirectFn();
 	const { loading, getTrackingData } = useExportData();
-
-	const dsrListValue = useGetDsrList({ showConfigure });
 
 	const backHandler = () => {
 		if (isArchived) {
@@ -68,38 +62,13 @@ function Header(props) {
 
 				<div className={cl`${styles.flex_box} ${styles.archived_section}`}>
 					{!isArchived && (
-						<>
-							<Button
-								type="button"
-								themeType="linkUi"
-								onClick={() => redirectArchivedList(activeTab)}
-							>
-								{t('airOceanTracking:tracking_list_button_label')}
-							</Button>
-
-							{activeTab === 'ocean' && (
-								<Popover
-									caret={false}
-									visible={showConfigure}
-									content={(
-										<DailyReport
-											activeTab={activeTab}
-											dsrListValue={dsrListValue}
-											setShowConfigure={setShowConfigure}
-										/>
-									)}
-									placement="bottom-end"
-								>
-									<Button
-										themeType="secondary"
-										type="button"
-										onClick={() => setShowConfigure((prev) => !prev)}
-									>
-										{t('airOceanTracking:tracking_list_daily_status_report_button_label')}
-									</Button>
-								</Popover>
-							)}
-						</>
+						<Button
+							type="button"
+							themeType="linkUi"
+							onClick={() => redirectArchivedList(activeTab)}
+						>
+							{t('airOceanTracking:tracking_list_button_label')}
+						</Button>
 					)}
 					{activeTab === 'ocean' && (
 						<Button

@@ -18,7 +18,7 @@ const useGetListTracker = () => {
 	const { query: routerQuery } = useRouter();
 	const { debounceQuery, query } = useDebounceQuery();
 
-	const { branch_id, isArchived = false, trackingType = '' } = routerQuery || {};
+	const { isArchived = false, trackingType = '', partner_id } = routerQuery || {};
 
 	const [filter, setFilter] = useState({
 		inputValue  : null,
@@ -45,8 +45,8 @@ const useGetListTracker = () => {
 				params: {
 					filters: {
 						...globalFilter,
-						status                 : isArchived ? 'completed' : 'active',
-						organization_branch_id : branch_id,
+						status: isArchived ? 'completed' : 'active',
+						partner_id,
 					},
 					page       : globalFilter.page,
 					page_limit : 10,
@@ -55,7 +55,7 @@ const useGetListTracker = () => {
 		} catch (err) {
 			console.error(err);
 		}
-	}, [globalFilter, branch_id, trigger, isArchived]);
+	}, [trigger, globalFilter, isArchived, partner_id]);
 
 	const selectValueChangeHandler = (value) => {
 		const stats = data?.stats;

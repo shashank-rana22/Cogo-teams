@@ -1,5 +1,6 @@
 .container {
 	margin-bottom: 30px;
+	background-color: #fff;
 	border-radius: 8px;
 	box-shadow: 0 0 16px rgb(98 127 172 / 20%);
 }
@@ -7,6 +8,7 @@
 .main_body {
 	display: flex;
 	justify-content: space-between;
+	background-color: #fff;
 
 	.stepper_container {
 		width: 65%;
