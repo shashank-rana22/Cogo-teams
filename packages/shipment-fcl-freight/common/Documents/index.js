@@ -16,8 +16,7 @@ import Wallet from './Wallet';
 
 function RenderContent({
 	loading = true, activeToggle = true, canEditDocuments = true, filteredTaskList = [], emailList = [],
-	completedDocs = {},
-	// setShowDoc = () => {}, setShowApproved = () => {},
+	completedDocs = {}, setShowDoc = () => {}, setShowApproved = () => {},
 	showIgmDocs = false, refetch = () => {}, activeStakeholder = '',
 	bl_details = [], do_details = [], activeWallet = '', orgDocService = '',
 }) {
@@ -30,9 +29,9 @@ function RenderContent({
 				taskList={filteredTaskList}
 				emailDocs={emailList}
 				completedDocs={completedDocs?.list}
-				// setShowDoc={setShowDoc}
-				// setShowApproved={setShowApproved}
-				// canEditDocuments={canEditDocuments}
+				setShowDoc={setShowDoc}
+				setShowApproved={setShowApproved}
+				canEditDocuments={canEditDocuments}
 				showIgmDocs={showIgmDocs}
 				shipmentDocumentRefetch={refetch}
 				activeStakeholder={activeStakeholder}
@@ -148,8 +147,8 @@ function Documents() {
 				canEditDocuments={canEditDocuments}
 				filteredTaskList={filteredTaskList}
 				emailList={emailList}
-				// setShowDoc={setShowDoc}
-				// setShowApproved={setShowApproved}
+				setShowDoc={setShowDoc}
+				setShowApproved={setShowApproved}
 				activeStakeholder={activeStakeholder}
 				showIgmDocs={showIgmDocs}
 				completedDocs={completedDocs}

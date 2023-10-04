@@ -2,6 +2,7 @@ import { Button, Modal, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCError } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -35,16 +36,20 @@ function Content({
 	handleView = () => {},
 	primary_service = {},
 	receivedViaEmail = false,
-	// showUploadText = false,
-	// canEditDocuments = true,
-	// setShowDoc = () => {},
-	// setShowApproved = () => {},
-	// docType = '',
+	showUploadText = false,
+	canEditDocuments = true,
+	setShowDoc = () => {},
+	setShowApproved = () => {},
+	docType = '',
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
 	bl_details = [],
 	do_details = [],
 }) {
+	const { user_id = '' } = useSelector(({ profile }) => ({
+		user_id: profile?.user?.id,
+	}));
+
 	const [siReviewState, setSiReviewState] = useState(false);
 	const [printDoc, setPrintDoc] = useState(false);
 	const [updateFreightCertificate, setUpdateFreightCertificate] = useState(false);
@@ -68,33 +73,34 @@ function Content({
 
 	const isBlDocVisiblityAllowed = document_type === 'bill_of_lading' && isEmpty(document_url);
 
-	// function GetUploadButton() {
-	// 	if (showUploadText.length && canEditDocuments) {
-	// 		return (
-	// 			<Button
-	// 				themeType="link"
-	// 				className="primary md text"
-	// 				onClick={() => (
-	// 					receivedViaEmail
-	// 						? setShowApproved({
-	// 							...item,
-	// 							document_type   : docType,
-	// 							document_url    : uploadedItem?.file_url,
-	// 							mail_id         : uploadedItem?.id,
-	// 							organization_id : shipment_data?.importer_exporter_id,
-	// 							type            : 'task',
-	// 						})
-	// 						: setShowDoc({
-	// 							...item,
-	// 							document_type: docType,
-	// 						}))}
-	// 			>
-	// 				{receivedViaEmail ? 'Approve Document' : showUploadText}
-	// 			</Button>
-	// 		);
-	// 	}
-	// 	return null;
-	// }
+	function GetUploadButton() {
+		if (showUploadText.length
+			&& canEditDocuments && GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id === user_id) {
+			return (
+				<Button
+					themeType="link"
+					className="primary md text"
+					onClick={() => (
+						receivedViaEmail
+							? setShowApproved({
+								...item,
+								document_type   : docType,
+								document_url    : uploadedItem?.file_url,
+								mail_id         : uploadedItem?.id,
+								organization_id : shipment_data?.importer_exporter_id,
+								type            : 'task',
+							})
+							: setShowDoc({
+								...item,
+								document_type: docType,
+							}))}
+				>
+					{receivedViaEmail ? 'Approve Document' : showUploadText}
+				</Button>
+			);
+		}
+		return null;
+	}
 
 	const SI_REVIEW_CONDITION = document_type === 'si' && state === 'document_accepted';
 
@@ -214,7 +220,7 @@ function Content({
 							) }
 
 					</div>
-				) : null}
+				) : <GetUploadButton />}
 
 			</div>
 

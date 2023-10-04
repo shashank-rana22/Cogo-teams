@@ -15,9 +15,9 @@ const Card = ({
 	emailDocs = [],
 	shipment_data = {},
 	primary_service = {},
-	// setShowDoc = () => {},
-	// setShowApproved = () => {},
-	// canEditDocuments = true,
+	setShowDoc = () => {},
+	setShowApproved = () => {},
+	canEditDocuments = true,
 	showIgmDocs = false,
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
@@ -61,26 +61,26 @@ const Card = ({
 		return allUploadedDocs.map((uploadedItem) => {
 			const isChecked = uploadedItem?.document_type === docType;
 			const receivedViaEmail = !isChecked && uploadedItem?.entity_type === docType;
-			// const showUploadText = item?.pendingItem ? 'Upload' : '';
+			const showUploadText = item?.pendingItem ? 'Upload' : '';
 
 			return (
 				<Content
 					key={uploadedItem?.id || docType}
 					uploadedItem={uploadedItem}
 					receivedViaEmail={receivedViaEmail}
-					// showUploadText={showUploadText}
+					showUploadText={showUploadText}
 					idx={idx}
 					taskList={updatedTaskList}
 					isChecked={isChecked}
 					shipment_data={shipment_data}
 					item={item}
-					// docType={docType}
+					docType={docType}
 					handleView={handleView}
 					handleSave={handleSave}
 					primary_service={primary_service}
-					// setShowDoc={setShowDoc}
-					// setShowApproved={setShowApproved}
-					// canEditDocuments={canEditDocuments}
+					setShowDoc={setShowDoc}
+					setShowApproved={setShowApproved}
+					canEditDocuments={canEditDocuments}
 					shipmentDocumentRefetch={shipmentDocumentRefetch}
 					activeStakeholder={activeStakeholder}
 					bl_details={bl_details}
