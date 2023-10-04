@@ -1,6 +1,6 @@
 import { cl, Tabs, TabPanel, Select, Button } from '@cogoport/components';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { getTabMapping, DASHBOARD_VIEW_MAPPING } from '../../../constant/tabMapping';
 import useGetSummary from '../../../hooks/useGetSummary';
@@ -17,12 +17,12 @@ const selectOpt = [
 function MainContainer() {
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
-	const TAB_MAPPING = getTabMapping({ t });
+	const TAB_MAPPING = useMemo(() => getTabMapping({ t }), [t]);
 
 	const [view, setView] = useState('list');
 	const { redirectToList } = useRedirectFn();
 	const summaryHook = useGetSummary();
-	const { globalFilter, setGlobalFilter } = summaryHook;
+	const { globalFilter = {}, setGlobalFilter = () => {} } = summaryHook || {};
 
 	return (
 		<div className={styles.container}>

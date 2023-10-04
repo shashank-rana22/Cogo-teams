@@ -1,6 +1,7 @@
 import { cl } from '@cogoport/components';
 import { Image } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
+import React, { useMemo } from 'react';
 
 import getMappingObject from '../../../../constant/card';
 import { getMilestone } from '../../../../utils/getMilestone';
@@ -16,7 +17,7 @@ function Stepper({ activeTab, lineInfo = {}, airCargoDetails = {} }) {
 
 	const MILESTONE_MAPPING = getMilestone({ airCargoDetails, t });
 
-	const GET_MAPPING = getMappingObject({ t });
+	const GET_MAPPING = useMemo(() => getMappingObject({ t }), [t]);
 
 	const { DEFAULT_STATUS } = GET_MAPPING?.[activeTab] || {};
 

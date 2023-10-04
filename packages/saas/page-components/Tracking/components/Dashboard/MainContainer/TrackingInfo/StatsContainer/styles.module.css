@@ -1,5 +1,6 @@
 .container {
 	display: flex;
+	background-color: #fff;
 	border: 1px solid #daf9ff;
 
 	@media screen and (max-width: 767px) {

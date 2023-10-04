@@ -21,7 +21,7 @@ function AirCard({
 	refetchTrackerList = () => {},
 }) {
 	const [showPopover, setShowPopover] = useState(false);
-	const { redirectToTracker } = useRedirectFn();
+	const { redirectToTracker = () => {} } = useRedirectFn();
 
 	const {
 		id = '', input = '', air_cargo_details = {}, airline = {}, last_updated_at = '',

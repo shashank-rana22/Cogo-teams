@@ -44,7 +44,7 @@ function Footer({ lastUpdated = '', milestones = {}, action = {} }) {
 					</span>
 				</div>
 
-				{milestone && (
+				{milestone ? (
 					<div className={styles.next_milestone}>
 						{renderTitle({ next_milestone })}
 						{' '}
@@ -56,7 +56,7 @@ function Footer({ lastUpdated = '', milestones = {}, action = {} }) {
 							formatType : 'date',
 						})}`}
 					</div>
-				)}
+				) : null}
 			</div>
 
 			<div>

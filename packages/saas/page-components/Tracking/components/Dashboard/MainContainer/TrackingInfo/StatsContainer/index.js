@@ -1,17 +1,18 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import getStatsMapping from '../../../../../constant/statsMapping';
 
 import styles from './styles.module.css';
 
-function StatsContainer({ stats: statsData = {}, globalFilter, setGlobalFilter }) {
-	const { shipment_status: prevStatus } = globalFilter;
+function StatsContainer({ stats: statsData = {}, globalFilter = '', setGlobalFilter = () => {} }) {
+	const { shipment_status: prevStatus } = globalFilter || {};
 
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
-	const STATS_MAPPING = getStatsMapping({ t });
+	const STATS_MAPPING = useMemo(() => getStatsMapping({ t }), [t]);
 
 	const clickHandler = (key) => {
 		if (key === prevStatus) {
@@ -32,18 +33,20 @@ function StatsContainer({ stats: statsData = {}, globalFilter, setGlobalFilter }
 			{STATS_MAPPING.map((stats) => (
 				<div
 					key={stats?.dashboardKey}
-					className={cl`${styles.card} ${styles?.[stats.dashboardKey]}
-					${prevStatus === stats.dashboardKey ? styles.selected : ''}`}
+					className={cl`${styles.card} ${styles?.[stats?.dashboardKey]}
+					${prevStatus === stats?.dashboardKey ? styles.selected : ''}`}
 					role="presentation"
-					onClick={() => clickHandler(stats.dashboardKey)}
+					onClick={() => clickHandler(stats?.dashboardKey)}
 				>
 					<div className={styles.icon_container}>
-						{stats.icon}
+						{stats?.icon}
 					</div>
 
 					<div className={styles.info_container}>
-						<p className={styles.text}>{stats.label}</p>
-						<p className={styles.num}>{statsData?.[stats.dashboardKey] || GLOBAL_CONSTANTS.zeroth_index}</p>
+						<p className={styles.text}>{stats?.label}</p>
+						<p className={styles.num}>
+							{statsData?.[stats?.dashboardKey] || GLOBAL_CONSTANTS.zeroth_index}
+						</p>
 					</div>
 				</div>
 			))}

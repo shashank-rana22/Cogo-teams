@@ -1,20 +1,18 @@
 import { Placeholder, cl } from '@cogoport/components';
 import { IcMAlert } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import getMappingObject from '../../../../constant/card';
 
 import styles from './styles.module.css';
 
-function ShipmentInfo({ activeTab, loading, shipmentInfo = {}, airCargoDetails = {} }) {
+function ShipmentInfo({ activeTab = '', loading = false, shipmentInfo = {}, airCargoDetails = {} }) {
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
-	const GET_MAPPING = getMappingObject({ t });
+	const GET_MAPPING = useMemo(() => getMappingObject({ t }), [t]);
 
-	const MAPPING = GET_MAPPING?.[activeTab];
-
-	const { SHIPMENT_TITLE, SHIPMENT_INFO, LOADING_ICON } = MAPPING;
+	const { SHIPMENT_TITLE, SHIPMENT_INFO, LOADING_ICON } = GET_MAPPING?.[activeTab] || {};
 
 	const tableData = useMemo(() => {
 		const { commodity = '', hs_code = '' } = shipmentInfo || {};

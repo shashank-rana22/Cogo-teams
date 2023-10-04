@@ -5,6 +5,7 @@
 .card {
 	padding: 20px;
 	margin-bottom: 20px;
+	background-color: #fff;
 	box-shadow: 0 0 16px 0 #627fac33;
 
 	:global {

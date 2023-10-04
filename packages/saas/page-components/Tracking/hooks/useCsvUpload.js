@@ -38,7 +38,7 @@ const useCsvUpload = ({ trackingType = 'ocean', closeModalHandler }) => {
 		const { fileValue = '', operatorLine = '' } = formData || {};
 
 		const payload = {
-			file_url                    : fileValue,
+			file_url                    : fileValue?.finalUrl || fileValue,
 			[KEY_MAPPING[trackingType]] : operatorLine,
 		};
 

@@ -13,8 +13,8 @@ import StatsContainer from './StatsContainer';
 import styles from './styles.module.css';
 
 function TrackingInfo({ summaryHook = {}, view = 'list' }) {
-	const { data, loading, globalFilter, setGlobalFilter } = summaryHook;
-	const { activeTab } = globalFilter;
+	const { data, loading, globalFilter, setGlobalFilter } = summaryHook || {};
+	const { activeTab = '', page = 1 } = globalFilter || {};
 	const {
 		page_limit = 0, total_count = 0, on_track = 0,
 		delayed = 0, attention_required = 0, list = [],
@@ -22,7 +22,7 @@ function TrackingInfo({ summaryHook = {}, view = 'list' }) {
 
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
-	const { redirectToTracker } = useRedirectFn();
+	const { redirectToTracker = () => {} } = useRedirectFn();
 
 	const itmFunction = {
 		redirectToTracker,
@@ -54,7 +54,7 @@ function TrackingInfo({ summaryHook = {}, view = 'list' }) {
 						isScroll
 					/>
 
-					{isEmpty(list) && !loading && (
+					{(isEmpty(list) && !loading) && (
 						<div className={styles.empty_state}>
 							<Image
 								src={GLOBAL_CONSTANTS.image_url.container_icon}
@@ -76,7 +76,7 @@ function TrackingInfo({ summaryHook = {}, view = 'list' }) {
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="compact"
-						currentPage={globalFilter.page}
+						currentPage={page}
 						totalItems={total_count}
 						pageSize={page_limit}
 						onPageChange={(e) => setGlobalFilter((prev) => ({ ...prev, page: e }))}
