@@ -46,6 +46,7 @@ const useGetQuickViewStatistics = ({ activeTab = null, trade_type = 'import', gl
 	useEffect(() => {
 		const filters = {
 			trade_type,
+			service_type,
 			location_type: 'country',
 		};
 
