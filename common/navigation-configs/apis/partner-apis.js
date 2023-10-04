@@ -13979,7 +13979,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'payments_dunning_customer_outstanding_and_on_account',
+			api         : 'get_payments_dunning_customer_outstanding_and_on_account',
 			access_type : 'private',
 		},
 		{
@@ -13991,7 +13991,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_payments_dunning_create_exceptions',
+			api         : 'post_payments_dunning_create_exceptions',
 			access_type : 'private',
 		},
 		{
@@ -14007,7 +14007,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_payments_dunning_delete_master_exception',
+			api         : 'post_payments_dunning_delete_master_exception',
 			access_type : 'private',
 		},
 		{
