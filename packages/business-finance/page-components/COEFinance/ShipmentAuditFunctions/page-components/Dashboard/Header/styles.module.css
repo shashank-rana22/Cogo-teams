@@ -1,0 +1,20 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 0 12px;
+}
+
+.main_container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 11%;
+}
