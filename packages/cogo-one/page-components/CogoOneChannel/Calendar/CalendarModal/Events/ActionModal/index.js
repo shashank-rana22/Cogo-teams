@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function ActionModal({
 	actionModal = {}, getEvents = () => {},
-	month = '', handleClose = () => {},
+	month = '', handleClose = () => {}, handleUpdatedState = () => {},
 }) {
 	const { status = false, value = {}, actionStatus = '' } = actionModal || {};
 	const { category = '', subject = '' } = value || {};
@@ -26,6 +26,7 @@ function ActionModal({
 		handleClose,
 		getEvents,
 		month,
+		handleUpdatedState,
 	});
 
 	const handleSubmit = () => {

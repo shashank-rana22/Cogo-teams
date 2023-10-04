@@ -13,6 +13,7 @@ const useUpdateCogooneSchedule = ({
 	handleClose = () => {},
 	getEvents = () => {},
 	month = '',
+	handleUpdatedState = () => {},
 }) => {
 	const { value = {},	actionStatus = '' } = actionModal || {};
 
@@ -31,6 +32,7 @@ const useUpdateCogooneSchedule = ({
 			});
 			handleClose();
 			getEvents({ startDate, endDate });
+			handleUpdatedState();
 			Toast.success('Updated Successfully!');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));

@@ -2,7 +2,6 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import moment from 'moment';
 
 import {
 	getCustomRecurrence, getDailyRecurrence, getMonthlyRecurrence,
@@ -10,6 +9,7 @@ import {
 	getYearlyRecurrence,
 } from '../helpers/formatFreqCalendarPayload';
 import combineDateAndTime from '../utils/combineDateAndTime';
+import getMonthStartAndEnd from '../utils/getMonthStartAndEnd';
 
 const RECURRENCE_RULE_MAPPING = {
 	daily   : getDailyRecurrence,
@@ -88,9 +88,7 @@ const useCreateCogooneCalendar = ({
 	}, { manual: true });
 
 	const createEvent = async ({ values = {}, eventData = {} }) => {
-		const startDate = moment(month).startOf('month').toDate();
-		const endDate = moment(month).endOf('month').toDate();
-
+		const { startDate, endDate } = getMonthStartAndEnd({ month });
 		try {
 			const payload = getPayload({ eventDetails, values, eventData, schedule_id });
 			await trigger({ data: payload });

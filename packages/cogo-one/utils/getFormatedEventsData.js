@@ -26,7 +26,7 @@ const getFormatedEventsData = ({ data = {} }) => {
 			};
 		} else {
 			GROUPPED_DATA[key].eventsList.push({
-				id          : item.id,
+				schedule_id : item.id,
 				main_status : item.status,
 				...item.calendar,
 			});

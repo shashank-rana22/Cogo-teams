@@ -1,12 +1,11 @@
 // eslint-disable-next-line custom-eslint/import-from-react
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { IcMArrowRight, IcMArrowLeft } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import moment from 'moment';
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useMemo, useEffect, useCallback } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 
-import getFormatedEventsData from '../../../../../utils/getFormatedEventsData';
+import getMonthStartAndEnd from '../../../../../utils/getMonthStartAndEnd';
 
 import CustomCard from './CustomCard';
 import styles from './styles.module.css';
@@ -30,37 +29,11 @@ function CustomToolbar({ label = '', onNavigate = () => {} }) {
 }
 
 function BgCalender({
-	setSelectedEventData = () => {}, setAddEvents = () => {}, month = {}, setMonth = () => {},
-	eventsData = {}, getEvents = () => {},
+	month = {}, setMonth = () => {},
+	getEvents = () => {},
 	loading = false,
+	handleSelectSlot = () => {}, handleEventClick = () => {}, myEvents = {}, formatedEventsList = [],
 }) {
-	const [myEvents, setEvents] = useState({});
-
-	const formatedEventsList = getFormatedEventsData({ data: eventsData });
-
-	const handleSelectSlot = (event) => {
-		const { start, end } = event || {};
-		const events = ((formatedEventsList || []).find((item) => (item?.start?.getDate() === start?.getDate())
-		&& item?.start?.getMonth() === start?.getMonth()));
-		setEvents({ start, end });
-
-		if (isEmpty(events)) {
-			setSelectedEventData({ start, end });
-		} else {
-			setSelectedEventData(events);
-		}
-		setAddEvents(true);
-	};
-
-	const handleEventClick = (event, e) => {
-		const { start, end } = event || {};
-		setEvents({ start, end });
-		setSelectedEventData((formatedEventsList || []).find((item) => (item?.start?.getDate() === start?.getDate())
-		&& item?.start?.getMonth() === start?.getMonth()));
-		e.preventDefault();
-		setAddEvents(true);
-	};
-
 	const customDayPropGetter = (date) => {
 		const currentDate = date?.getDate();
 		const currentMonth = date?.getMonth();
@@ -91,8 +64,7 @@ function BgCalender({
 	);
 
 	const handleMonthChange = useCallback((newDate) => {
-		const startDate = moment(newDate || new Date()).startOf('month').toDate();
-		const endDate = moment(newDate || new Date()).endOf('month').toDate();
+		const { startDate, endDate } = getMonthStartAndEnd({ month: newDate });
 		getEvents({ startDate, endDate });
 	}, [getEvents]);
 
