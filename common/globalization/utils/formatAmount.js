@@ -18,6 +18,7 @@ const LOCALE_CURRENCY_ABBR_MAPPING = {
 		replace_key : {
 			Tr : 'M',
 			T  : 'B',
+			N  : 'K',
 		},
 	},
 };
@@ -30,7 +31,12 @@ const isAmountValid = ({ amount }) => !(
         || isNaN(amount)
 );
 
-const getCurrencyLocale = ({ currency }) => {
+const getCurrencyLocale = ({ currency, options }) => {
+	const { currencyWise = false } = options || {};
+	if (currencyWise) {
+		return GLOBAL_CONSTANTS.currency_locale[currency];
+	}
+
 	let scope;
 	try {
 		scope = getCookie('scope');
@@ -97,7 +103,7 @@ const formatAmount = ({ amount = '', currency = '', options = {} }) => {
 	).toUpperCase();
 
 	return format({
-		locale   : getCurrencyLocale({ currency: UPPERCASE_CURRENCY }),
+		locale   : getCurrencyLocale({ currency: UPPERCASE_CURRENCY, options }),
 		amount,
 		options,
 		currency : UPPERCASE_CURRENCY,

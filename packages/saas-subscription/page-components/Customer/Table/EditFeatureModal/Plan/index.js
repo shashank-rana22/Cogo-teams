@@ -11,13 +11,14 @@ const getOptions = (data = []) => (
 	}))
 );
 
-function Plan({ subscriptionId = '', modalChangeHandler }) {
+function Plan({ featureInfo = {}, modalChangeHandler }) {
 	const { t } = useTranslation(['saasSubscription']);
 	const [planId, setPlanId] = useState('');
+
 	const {
 		loading = false,
 		changePlanHandler, listData = {},
-	} = useUpdatePlan({ planId, subscriptionId, modalChangeHandler });
+	} = useUpdatePlan({ planId, featureInfo, modalChangeHandler });
 
 	const { list = [] } = listData || {};
 	const options = getOptions(list);

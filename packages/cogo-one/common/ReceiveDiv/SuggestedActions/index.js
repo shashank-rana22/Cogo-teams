@@ -16,6 +16,8 @@ const COUNTRY_CODE_END = 2;
 function SuggestedActions({ formattedData = {}, viewType = '', mailProps = {} }) {
 	const dispatch = useDispatch();
 
+	const { setButtonType, setEmailState, buttonType, signature } = mailProps || {};
+
 	const [modalType, setModalType] = useState('');
 
 	const geo = getGeoConstants();
@@ -71,8 +73,6 @@ function SuggestedActions({ formattedData = {}, viewType = '', mailProps = {} })
 			return;
 		}
 
-		const { setButtonType, setEmailState, buttonType } = mailProps;
-
 		if (buttonType) {
 			Toast.warn('Email compose is already in progress');
 			return;
@@ -83,7 +83,8 @@ function SuggestedActions({ formattedData = {}, viewType = '', mailProps = {} })
 		setEmailState(
 			(prev) => ({
 				...prev,
-				body          : '',
+				body          : signature,
+				rteContent    : '',
 				subject       : '',
 				toUserEmail   : [userData?.email],
 				ccrecipients  : [],

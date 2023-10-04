@@ -58,6 +58,7 @@ const GLOBAL_CONSTANTS = {
 		IDR : 'id-ID',
 		THB : 'th-TH',
 		CNY : 'zh-CN',
+		EUR : 'en-EU',
 	},
 	currency_symbol: {
 		USD : '$',
@@ -217,6 +218,7 @@ const GLOBAL_CONSTANTS = {
 		vinod_talapa_user_id    : '6d713339-c528-4696-9f7b-c01f86887ac1',
 		manoj_mahapatra_user_id : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		santram_gurjar_user_id 	: '039a0141-e6f3-43b0-9c51-144b22b9fc84',
+		abhishek_kumar_user_id  : 'fa0dcd74-4b68-4783-a2f9-81dfab26008a',
 		local_charge_providers  : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 			GB : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
@@ -470,7 +472,13 @@ const GLOBAL_CONSTANTS = {
 		destination_map_pointer : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/map_destination.svg',
 		extract_data            : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/Data-extraction.jpg',
 		map_loading             : 'https://cogoport-maps.s3.ap-south-1.amazonaws.com/world+(2).svg',
-		cogoport_login_logo     : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
+		performance_leaderboard_confetti:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti_svg.svg',
+		cogoport_login_logo:
+		'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
+		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
+		edit_square_icon:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/edit_square.png',
 	},
 
 	video_call_ring_tone_url:
@@ -599,6 +607,7 @@ const GLOBAL_CONSTANTS = {
 		words_prefixed_by_digits          : /(\d+)([a-z]+)/i,
 		occurrences_of_line_breaks        : /(\r\n|\r|\n)/g,
 		extract_url_from_html_string      : /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/,
+		email_template_name_pattern       : /^[a-zA-Z0-9_ -]+$/g,
 		url_match_regex:
 		/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/,
 		ends_with_star_space       : /\* /,
@@ -620,6 +629,7 @@ const GLOBAL_CONSTANTS = {
 		static_url                 : /([^:]\/)\/+/g,
 		gst_number                 : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 		otp                        : /[^0-9]/g,
+		line_break_regex           : /(?:\r\n|\r|\n)/g,
 		hyphen_characters          : /-/g,
 		text_pattern_classifier    : /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
 		airway_bill_number         : /^\d{3}-\d{8}$/,
@@ -813,9 +823,14 @@ const GLOBAL_CONSTANTS = {
 		export_rates             : 'Export.rates@cogoport.com',
 		cogoport_ftl_collections : 'ftl.collections@cogoport.com',
 		cogoport_support         : 'support@cogoport.com',
+		hr                       : 'hr@cogoport.com',
+		internal_supply          : 'internal.supply@cogoport.com',
+		internal_operations      : 'internal.operations@cogoport.com',
+		internal_service         : 'internal.customer@cogoport.com',
 	},
 	mobile_number: {
-		cogoone_sales_contact_no: '+91-8069195810',
+		cogoone_sales_contact_no  : '+918069195810',
+		cogoone_supply_contact_no : '+918069195980',
 	},
 	websites: {
 		cogoport : 'www.cogoport.com',
