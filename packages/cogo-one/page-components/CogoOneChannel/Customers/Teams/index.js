@@ -22,7 +22,7 @@ function Teams(teamsProps) {
 		handleScroll,
 		pinnedChats = [],
 		loading,
-	} = useFetchTeamsRoom({ firestore });
+	} = useFetchTeamsRoom({ firestore, searchValue });
 
 	const { readTeamsMessage = () => {} } = useUpdateLocalTeamRooms({ firestore });
 

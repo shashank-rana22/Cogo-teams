@@ -1,14 +1,11 @@
 import {
 	Input,
-	Popover,
 } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
-	IcMFilter,
 	IcMSearchlight,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -18,8 +15,6 @@ function TeamsHeader({
 	setActiveTeamCard = () => {},
 
 }) {
-	const [filterVisible, setFilterVisible] = useState(false);
-
 	const newConversation = () => {
 		setActiveTeamCard({ group_id: '', is_draft: true });
 	};
@@ -36,18 +31,7 @@ function TeamsHeader({
 					arrow={false}
 				/>
 			</div>
-			<div className={styles.styled_popover}>
-				<Popover
-					placement="right"
-					render="will be add"
-					visible={filterVisible}
-				>
-					<IcMFilter
-						onClick={() => setFilterVisible((prev) => !prev)}
-						className={styles.filter_icon}
-					/>
-				</Popover>
-			</div>
+
 			<Image
 				className={styles.edit_icon}
 				width={20}

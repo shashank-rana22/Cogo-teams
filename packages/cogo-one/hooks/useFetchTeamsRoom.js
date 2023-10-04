@@ -1,3 +1,4 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
 import {
 	collection,
@@ -13,13 +14,29 @@ const LAST_ITEM = 1;
 const MAX_DISTANCE_FROM_BOTTOM = 150;
 const FALLBACK_VALUE = 0;
 
-function fetchTeamsRoomsUnpinned({ snapshotRef, activeAgent, setLoading, roomsCollection, filterQuery, setListData }) {
+function sortChats({ messagesListData = {} }) {
+	return Object.keys(messagesListData || {}).sort((a, b) => Number(
+		messagesListData[b]?.new_message_sent_at,
+	) - Number(
+		messagesListData[a]?.new_message_sent_at,
+	)).map((eachKey) => messagesListData[eachKey]);
+}
+function fetchTeamsRoomsUnpinned({
+	snapshotRef,
+	activeAgent, setLoading, roomsCollection, filterQuery, setListData, queryForSearch,
+}) {
 	if (activeAgent) {
 		try {
+			setListData({
+				messagesListData     : {},
+				lastMessageTimeStamp : Date.now(),
+				isLastPage           : false,
+			});
 			setLoading((prev) => ({ ...prev, unpinnedLoading: true }));
 
 			const collectionQuery = query(
 				roomsCollection,
+				...queryForSearch,
 				...filterQuery,
 				where('is_pinned', '==', false),
 				orderBy('new_message_sent_at', 'desc'),
@@ -59,13 +76,16 @@ function fetchTeamsRoomsPinned({
 	roomsCollection,
 	filterQuery,
 	setPinnedChats,
+	queryForSearch,
 }) {
 	if (activeAgent) {
 		try {
+			setPinnedChats([]);
 			setLoading((prev) => ({ ...prev, pinnedLoading: true }));
 
 			const collectionQuery = query(
 				roomsCollection,
+				...queryForSearch,
 				...filterQuery,
 				where('is_pinned', '==', true),
 				orderBy('message_pinned_at', 'desc'),
@@ -128,7 +148,7 @@ async function prevTeamRooms({
 	}
 }
 
-function useFetchTeamsRoom({ firestore = {} }) {
+function useFetchTeamsRoom({ firestore = {}, searchValue = '' }) {
 	const loggedInUserId = useSelector(({ profile }) => profile?.user?.id);
 
 	const snapshotRef = useRef({});
@@ -144,7 +164,20 @@ function useFetchTeamsRoom({ firestore = {} }) {
 		{ unpinnedLoading: false, pinnedLoading: false },
 	);
 
-	const filterQuery = useMemo(() => getTeamsFilterQuery(), []); // todo add filter queries here
+	const filterQuery = useMemo(() => getTeamsFilterQuery(), []);
+	const { query: searchQuery, debounceQuery } = useDebounceQuery();
+
+	const queryForSearch = useMemo(() => {
+		if (!searchQuery) {
+			return [];
+		}
+
+		return [
+			where('search_name', '>=', searchQuery),
+			where('search_name', '<=', `${searchQuery}\\uf8ff`),
+			orderBy('search_name', 'asc'),
+		];
+	}, [searchQuery]);
 
 	const roomsCollection = useMemo(() => {
 		if (!activeAgent) {
@@ -170,6 +203,10 @@ function useFetchTeamsRoom({ firestore = {} }) {
 	}, [loggedInUserId]);
 
 	useEffect(() => {
+		debounceQuery(searchValue?.trim()?.toUpperCase());
+	}, [debounceQuery, searchValue]);
+
+	useEffect(() => {
 		fetchTeamsRoomsUnpinned({
 			snapshotRef,
 			activeAgent,
@@ -177,6 +214,7 @@ function useFetchTeamsRoom({ firestore = {} }) {
 			roomsCollection,
 			filterQuery,
 			setListData,
+			queryForSearch,
 		});
 		fetchTeamsRoomsPinned({
 			snapshotRef,
@@ -184,6 +222,7 @@ function useFetchTeamsRoom({ firestore = {} }) {
 			setLoading,
 			roomsCollection,
 			filterQuery,
+			queryForSearch,
 			setPinnedChats,
 		});
 
@@ -194,7 +233,7 @@ function useFetchTeamsRoom({ firestore = {} }) {
 			unsubscribeUnpinned?.();
 			unsubscribePinned?.();
 		};
-	}, [activeAgent, filterQuery, roomsCollection]);
+	}, [activeAgent, filterQuery, queryForSearch, roomsCollection]);
 
 	return {
 		loading       : loading?.unpinnedLoading || loading?.pinnedLoading,
@@ -202,7 +241,7 @@ function useFetchTeamsRoom({ firestore = {} }) {
 		activeAgent,
 		handleScroll,
 		pinnedChats,
-		unpinnedChats : Object.values(messagesListData || {}), // sort by new_message_sent_at-todo,
+		unpinnedChats : sortChats({ messagesListData: messagesListData || {} }),
 	};
 }
 
