@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Loader({ forModal }) {
+function Loader({ forModal = false }) {
 	let width = '291px';
 	let height = '90px';
 
