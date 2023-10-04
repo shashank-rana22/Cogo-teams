@@ -95,13 +95,3 @@
 .reset_btn {
 	margin-right: 10px;
 }
-
-.trigger {
-	:global {
-		.ui_multiselectt_options_container {
-			li:last-child {
-				display: none;
-			}
-		}
-	}
-}
