@@ -47,8 +47,7 @@ function GenerateColumn({
 					columnIndex={columnIndex}
 					index={index}
 					loading={loading}
-					income={data?.[index]?.grand_total}
-					profitability={data?.[index]?.profitability}
+					data={data[index]}
 				/>
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-import { Pill, Button } from '@cogoport/components';
+import { Pill, Button, Placeholder } from '@cogoport/components';
 import {
 	IcCFtick,
 	//  IcCFcrossInCircle
@@ -12,39 +12,26 @@ import RemarkModal from '../Content/RemarkModal';
 
 import styles from './styles.module.css';
 
+const SIX = 6;
+const OVERFLOW_LIMIT = 8;
+
 export default function BuySellStatusContent({
-	toggleAccordion,
-	columnIndex,
-	index,
+	toggleAccordion = () => {},
+	columnIndex = '',
+	index = '',
+	data = {},
+	loading = false,
+	timeLineData = {},
 }) {
 	const [buttonClicked, setButtonClicked] = useState('');
 	const [queryModalShow, setQueryModalShow] = useState(false);
-	// const [acceptModalShow, setAcceptModalShow] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
-	// const [activeService, setActiveService] = useState('Service 1');
-	// const servicesFromBackend = ['Service 1', 'Service 2', 'Service 3'];
-	const data = [1, 2, 3, 4, 5, 6];
-	// const handleServiceClick = (service) => {
-	// 	setActiveService(service);
-	// };
-	// function onClose() {
-	// 	setQueryModalShow(false);
-	// 	setAcceptModalShow(false);
-	// }
-	// function handleRaiseQuery(columnIndex, index) {
-	// 	toggleAccordion(columnIndex, index);
-	// 	if (index != 5) {
-	// 		toggleAccordion(columnIndex, index + 1);
-	// 	}
-	// 	setQueryModalShow(false);
-	// }
-	// function handleSubmit(columnIndex, index) {
-	// 	toggleAccordion(columnIndex, index);
-	// 	if (index != 5) {
-	// 		toggleAccordion(columnIndex, index + 1);
-	// 	}
-	// 	setAcceptModalShow(false);
-	// }
+	const {
+		grand_total: income = '', document_number = '',
+		trade_party = '', document_date = '', status = '',
+	} = data || {};
+	const { timelineDetail = [] } = timeLineData;
+
 	return (
 		<>
 
@@ -52,42 +39,43 @@ export default function BuySellStatusContent({
 				<div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '50px' }}>
 					<div>
 						<div className={styles.regular}>Invoice Number</div>
-						<div>Invoice Number</div>
+						<div>{document_number}</div>
 					</div>
 					<div>
 						<div className={styles.regular}>Trade Party</div>
-						<div>Invoice Number</div>
+						<div>{trade_party}</div>
 					</div>
 					<div>
 						<div className={styles.regular}>Invoice Date</div>
-						<div>Invoice Number</div>
+						<div>{document_date}</div>
 					</div>
 					<div>
 						<div className={styles.regular}>Invoice Amt.</div>
-						<div>{ShowOverflowingNumber(100000000000, 8, 'INR')}</div>
+						<div>{ShowOverflowingNumber(income, OVERFLOW_LIMIT, 'INR')}</div>
 					</div>
 					<div>
 						<div className={styles.regular}>Invoice Status</div>
-						<div><Pill color="#B4F3BE">Invoice Number</Pill></div>
+						<div><Pill color="#B4F3BE">{status}</Pill></div>
 					</div>
 				</div>
-				<div className={styles.scroll}>
+				<div className={styles.timeline_container}>
 					<div className={styles.timeline_heading}>Timeline</div>
-					<div className={styles.timeline}>
-						{data.map((item, index) => (
-							<div key={index} style={{ width: '200px' }}>
-								<div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-									<IcCFtick height="20" width="20" />
-									{item !== 6 ? (<div className={styles.horizontal_rule} />) : null}
+					{loading ? <Placeholder height="60px" /> : (
+						<div className={styles.timeline}>
+							{timelineDetail.map((item) => (
+								<div key={item?.occurredAt} style={{ width: '200px' }}>
+									<div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+										<IcCFtick height="20" width="20" />
+										{item !== SIX ? (<div className={styles.horizontal_rule} />) : null}
+									</div>
+									<div>
+										<div>{item?.eventName}</div>
+										<div>{item?.occurredAt}</div>
+									</div>
 								</div>
-								<div>
-									<div>Finance Accepted</div>
-									<div>Data</div>
-									<div>Data</div>
-								</div>
-							</div>
-						))}
-					</div>
+							))}
+						</div>
+					)}
 				</div>
 			</div>
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>

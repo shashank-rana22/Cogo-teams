@@ -3,6 +3,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 
+import useGetInvoiceTimeline from '../../../../../hook/useGetinvoiceTimeline';
+
 import BuySellStatusContent from './BuySellStatusContent';
 import Content from './Content';
 import styles from './styles.module.css';
@@ -16,9 +18,20 @@ export default function Timeline({
 	loading = false,
 	columnIndex = '',
 	index = '',
-	income = '',
-	profitability = '',
+	data = {},
 }) {
+	const { grand_total: income = '', profitability = '', id = '' } = data || {};
+
+	const {
+		data: timeLineData = {},
+		loading: timeLineLoading = false, getInvoiceDetailsApi = () => {},
+	} = useGetInvoiceTimeline({ id });
+
+	const callTimeLineApi = () => {
+		toggleAccordion(columnIndex, index);
+		getInvoiceDetailsApi();
+	};
+
 	return (
 		<div className={styles.custom_accordion}>
 			{loading ? <Placeholder /> : (
@@ -58,7 +71,7 @@ export default function Timeline({
 							: (
 								<IcMArrowRotateDown
 									style={{ cursor: 'pointer' }}
-									onClick={() => toggleAccordion(columnIndex, index)}
+									onClick={callTimeLineApi}
 								/>
 							)}
 					</div>
@@ -102,6 +115,9 @@ export default function Timeline({
 									toggleAccordion={toggleAccordion}
 									columnIndex={columnIndex}
 									index={index}
+									data={data}
+									loading={timeLineLoading}
+									timeLineData={timeLineData}
 								/>
 							)}
 					</div>
