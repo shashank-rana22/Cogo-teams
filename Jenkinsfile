@@ -1,7 +1,7 @@
 pipeline {
     agent { 
     label 'ec2-fleet' 
-	}
+    }
 
     environment {
         AWS_DEFAULT_REGION = 'ap-south-1'
@@ -9,8 +9,8 @@ pipeline {
         SSH_PORT = credentials('dev-instance-ssh-port')
         TEAMS_WEBHOOK_URL = credentials('teams-webhook-url')
         NPMRC = credentials('cogo_product_npmrc')
-		ENV_FILE = credentials('dev_cogo_admin_env')
-		ECR_USERNAME = credentials('aws-dev-ecr-user')
+        ENV_FILE = credentials('dev_cogo_admin_env')
+        ECR_USERNAME = credentials('aws-dev-ecr-user')
         ECR_URL = credentials('aws-dev-ecr-url')
     }
     
@@ -28,19 +28,22 @@ pipeline {
                 steps{
                     script {
                     SERVER_NAME = sh (script: "git log -1 --pretty=%B ${COMMIT_ID} | awk \'{print \$NF}\'", returnStdout:true).trim()
-                
-                    def isBlocked = isJobBlocked("Deploy Admin to ${SERVER_NAME}")
-                    if (isBlocked) {
-				    office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployment failed for user **${PUSHER_NAME}** because another deployment is going on for cogo-admin in the specified server.", color: '#3366ff'
-                        currentBuild.result = 'ABORTED' // Mark the build as aborted
-                        error("Deployment aborted due to a blocked job.")
-                    }else{
+
+                    def queueItems = Jenkins.instance.queue.getItems()
+    
+                    for (item in queueItems) {
+                        def blockedJobName = item.task.name
+                        if (blockedJobName == "Deploy Admin to ${SERVER_NAME}") {
+                            office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployment failed for user **${PUSHER_NAME}** because another deployment is going on for cogo-admin in the specified server.", color: '#3366ff'
+                            currentBuild.result = 'ABORTED' // Mark the build as aborted
+                            error("Deployment aborted due to a blocked job.")
+                        }
+                    }
                     build([$class: 'BuildBlockerProperty',
                             blockingJobs: "Deploy Admin to ${SERVER_NAME}",
                             scanQueueFor: "BLOCKED"])
-                    }
+                }
             }
-        }
 
         }
         
@@ -57,36 +60,36 @@ pipeline {
                 expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#deploy_on') }
             }
             steps {
-				office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Starting to build admin for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** for user **${PUSHER_NAME}**", color: '#3366ff'
+                office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Starting to build admin for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** for user **${PUSHER_NAME}**", color: '#3366ff'
 
-				script {
+                script {
                     SERVER_NAME = sh (script: "git log -1 --pretty=%B ${COMMIT_ID} | awk \'{print \$NF}\'", returnStdout:true).trim()
                     SERVER_IP = sh (script: "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${SERVER_NAME}\" --query \"Reservations[*].Instances[*].PrivateIpAddress\" --output text", returnStdout:true).trim()
                 }
 
-				cache(caches: [arbitraryFileCache(path: 'node_modules')], defaultBranch: 'feat/jenkinsfile', maxCacheSize: 3000) {
-					nodejs(nodeJSInstallationName: 'node-18') {
+                cache(caches: [arbitraryFileCache(path: 'node_modules')], defaultBranch: 'feat/jenkinsfile', maxCacheSize: 3000) {
+                    nodejs(nodeJSInstallationName: 'node-18') {
                         sh "scp -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} -P ${SSH_PORT} ${SERVER_NAME}@${SERVER_IP}:/home/${SERVER_NAME}/.env.admin .env"
-						sh "sed -i '/NODE_ENV=production/d' .env"
+                        sh "sed -i '/NODE_ENV=production/d' .env"
                         sh (script: "echo ${NPMRC} >> .npmrc")
-						sh 'pnpm i --frozen-lockfile'
-					}
-				}
+                        sh 'pnpm i --frozen-lockfile'
+                    }
+                }
 
-				cache(caches: [arbitraryFileCache(path: 'cogo-control/.next')], defaultBranch: 'feat/jenkinsfile', maxCacheSize: 6000) {
-					nodejs(nodeJSInstallationName: 'node-18') {
-						sh 'pnpm run build'
-					}
-				}
+                cache(caches: [arbitraryFileCache(path: 'cogo-control/.next')], defaultBranch: 'feat/jenkinsfile', maxCacheSize: 6000) {
+                    nodejs(nodeJSInstallationName: 'node-18') {
+                        sh 'pnpm run build'
+                    }
+                }
 
-				// build docker image for admin site and push to ecr
-				script {
-					sh "docker image build -t ${ECR_URL}/admin:${COMMIT_ID} --target admin ."
-					sh "aws ecr get-login-password --region ap-south-1 | docker login --username ${ECR_USERNAME} --password-stdin ${ECR_URL}"
-					sh "docker image push ${ECR_URL}/admin:${COMMIT_ID}"
-					sh "docker image rm ${ECR_URL}/admin:${COMMIT_ID}"
-				}
-			}
+                // build docker image for admin site and push to ecr
+                script {
+                    sh "docker image build -t ${ECR_URL}/admin:${COMMIT_ID} --target admin ."
+                    sh "aws ecr get-login-password --region ap-south-1 | docker login --username ${ECR_USERNAME} --password-stdin ${ECR_URL}"
+                    sh "docker image push ${ECR_URL}/admin:${COMMIT_ID}"
+                    sh "docker image rm ${ECR_URL}/admin:${COMMIT_ID}"
+                }
+            }
         }
         stage('Deploy') {
             when {
@@ -110,14 +113,14 @@ pipeline {
             }
             post {
                 failure {
-			        office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Admin deployment failed for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** on server ${SERVER_NAME} for user **${PUSHER_NAME}**", color: '#ff0000'
+                    office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Admin deployment failed for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** on server ${SERVER_NAME} for user **${PUSHER_NAME}**", color: '#ff0000'
                 }
 
-		        success {
-			        office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Admin Successfully deployed for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** on server **${SERVER_NAME} for user **${PUSHER_NAME}****", color:  '#66ff66'
-		        }
+                success {
+                    office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Admin Successfully deployed for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** on server **${SERVER_NAME} for user **${PUSHER_NAME}****", color:  '#66ff66'
+                }
             }
             
-		}
+        }
     }
 }
