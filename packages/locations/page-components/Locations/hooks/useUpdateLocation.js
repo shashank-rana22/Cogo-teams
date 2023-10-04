@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 import getPayload from '../helpers/getFormattedValue';
@@ -10,11 +9,6 @@ const useUpdateLocation = ({ refetch }) => {
 		url    : '/update_location',
 		method : 'post',
 	}, { manual: true });
-
-	const {
-		handleSubmit, control, formState: { errors },
-		watch,
-	} = useForm();
 
 	const apiTrigger = async ({ values = {}, id }) => {
 		try {
@@ -30,10 +24,7 @@ const useUpdateLocation = ({ refetch }) => {
 	};
 
 	return {
-		handleSubmit,
-		errors,
-		watch,
-		control,
+
 		loading,
 		apiTrigger,
 	};

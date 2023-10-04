@@ -11,8 +11,7 @@ const useGetLocationsList = () => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_locations',
 		method : 'GET',
-
-	});
+	}, { manual: true });
 
 	const apiTrigger = useCallback(async () => {
 		await trigger({

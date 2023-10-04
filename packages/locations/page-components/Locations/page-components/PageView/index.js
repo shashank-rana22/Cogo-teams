@@ -37,6 +37,12 @@ function PageView({
 				}) => <TabPanel key={label} name={value} title={label} />)}
 			</Tabs>
 
+			<ListPagination
+				filters={filters}
+				setFilters={setFilters}
+				data={data}
+			/>
+
 			<Table
 				className={styles.table}
 				columns={columns}

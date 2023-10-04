@@ -1,5 +1,5 @@
 const getFunction = {
-	type: (condition, formValues) => condition?.type.includes(formValues?.type),
+	type: (condition, formValues) => condition?.type?.includes(formValues?.type),
 };
 
 const getShowElement = ({ controls = [], formValues = {} }) => {

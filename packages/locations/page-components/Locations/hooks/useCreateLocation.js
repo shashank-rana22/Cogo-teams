@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useTranslation } from 'next-i18next';
 
@@ -13,11 +12,6 @@ const useCreateLocation = ({ refetch = () => {} }) => {
 		url    : '/create_location',
 		method : 'post',
 	}, { manual: true });
-
-	const {
-		handleSubmit, control, formState: { errors },
-		watch,
-	} = useForm();
 
 	const onCreate = async ({ values }) => {
 		const payload = getPayload({ values });
@@ -35,10 +29,6 @@ const useCreateLocation = ({ refetch = () => {} }) => {
 	};
 
 	return {
-		handleSubmit,
-		errors,
-		watch,
-		control,
 		loading,
 		onCreate,
 	};

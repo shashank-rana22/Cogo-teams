@@ -23,7 +23,7 @@ function SideBarComponent({
 		setSideBar('');
 		setSelectedLocation({});
 	};
-	const { loading, apiTrigger } = useUpdateLocation({
+	const { loading = false, apiTrigger = () => {} } = useUpdateLocation({
 		refetch: () => {
 			setSideBar('');
 			refetch();
@@ -33,7 +33,7 @@ function SideBarComponent({
 	const onEditSubmit = () => {
 		editRef.current.formSubmit();
 	};
-	const handleEditSubmit = ({ data }) => {
+	const handleEditSubmit = ({ data = {} }) => {
 		apiTrigger({ data, id: selectedLocation?.id });
 	};
 	const callBack = () => setSideBar(null);

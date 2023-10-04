@@ -16,11 +16,11 @@ function Locations() {
 	};
 
 	const {
-		data,
-		filters,
-		loading,
-		setFilters,
-		refetch,
+		data = {},
+		filters = {},
+		loading = false,
+		setFilters = () => {},
+		refetch = () => {},
 	} = useGetLocationsList();
 	return (
 		<div className={styles.container}>
@@ -36,7 +36,7 @@ function Locations() {
 				filters={filters}
 				setFilters={setFilters}
 			/>
-			{sideBar && (
+			{sideBar ? (
 				<SideBarComponent
 					refetch={refetch}
 					setSideBar={setSideBar}
@@ -44,7 +44,7 @@ function Locations() {
 					selectedLocation={selectedLocation}
 					setSelectedLocation={setSelectedLocation}
 				/>
-			)}
+			) : null}
 		</div>
 	);
 }

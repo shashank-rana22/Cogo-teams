@@ -11,7 +11,7 @@ function Form({ handleSubmitForm = () => {}, callBack = () => {}, item = {} }, r
 	const { t } = useTranslation(['locations']);
 	let fields = controls({ t, item });
 	if (item) {
-		fields = fields.map((data) => ({ ...data, value: item[data.name] }));
+		fields = fields?.map((data) => ({ ...data, value: item[data.name] }));
 	}
 	fields.forEach((ctrl) => {
 		if (ctrl?.value) {

@@ -15,8 +15,8 @@ function CreateUpdateForm({ item = {}, refetch = () => {}, setSideBar = () => {}
 		formRef.current.formSubmit();
 	};
 	const {
-		loading,
-		onCreate,
+		loading = false,
+		onCreate = () => {},
 	} = useCreateLocation({
 		refetch: () => {
 			refetch();

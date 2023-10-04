@@ -1,5 +1,4 @@
 const getPayload = ({ values = {}, id }) => {
-	const NEW_ALIASES = [];
 	const {
 		name,
 		display_name,
@@ -25,11 +24,9 @@ const getPayload = ({ values = {}, id }) => {
 		subdistrict_id,
 		local_languages,
 		country_id,
-	} = values;
+	} = values || {};
 
-	values?.aliases_attributes?.map((aliases) => (
-		NEW_ALIASES.push({ name: aliases?.name })
-	));
+	const NEW_ALIASES = values?.aliases_attributes?.map((aliases) => ({ name: aliases?.name }));
 	const formattedValues = {
 		locality_id          : id,
 		id                   : id || undefined,

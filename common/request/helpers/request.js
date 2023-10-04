@@ -72,23 +72,6 @@ request.interceptors.request.use((oldConfig) => {
 	if (PEEWEE_SERVICES.includes(serviceName) && isDevMode) {
 		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
 	}
-	if (serviceName === 'location'
-	&& (originalApiPath === 'create_location')) {
-		newConfig.baseURL = 'https://3d15-103-143-39-118.ngrok-free.app';
-	}
-	if (serviceName === 'location'
-	&& (originalApiPath === 'update_location')) {
-		newConfig.baseURL = 'https://3d15-103-143-39-118.ngrok-free.app';
-	}
-	if (serviceName === 'location'
-	&& (originalApiPath === 'create_location_mapping')) {
-		newConfig.baseURL = 'https://3d15-103-143-39-118.ngrok-free.app';
-	}
-	if (serviceName === 'location'
-	&& (originalApiPath === 'list_locations')) {
-		newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
-		newConfig.baseURL = 'https://3d15-103-143-39-118.ngrok-free.app';
-	}
 	return {
 		...newConfig,
 		headers: {

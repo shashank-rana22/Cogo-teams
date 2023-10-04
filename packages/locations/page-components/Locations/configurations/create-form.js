@@ -1,5 +1,4 @@
-import LOCAL_LANGUAGES from './localLanguages.json';
-
+import LANGUAGE_OPTIONS from '@cogoport/globalization/constants/languageMapping';
 // eslint-disable-next-line max-lines-per-function
 const controls = ({ t = () => {} }) => [
 	{
@@ -144,8 +143,7 @@ const controls = ({ t = () => {} }) => [
 		params      : { filters: { type: ['city'] } },
 		placeholder : t('locations:controls_city_id_placeholder'),
 		condition   : {
-			type: [
-				'seaport',
+			type: ['seaport',
 				'airport',
 				'pincode',
 				'cfs',
@@ -233,7 +231,6 @@ const controls = ({ t = () => {} }) => [
 				'warehouse',
 			],
 		},
-		// rules: { required: t('locations:controls_pincode_id_rules_required') },
 	},
 	{
 		name        : 'cfs_code',
@@ -279,7 +276,7 @@ const controls = ({ t = () => {} }) => [
 		type           : 'multi_select',
 		placeholder    : t('locations:controls_local_languages_placeholder'),
 		optionsListKey : 'languages',
-		options        : LOCAL_LANGUAGES,
+		options        : LANGUAGE_OPTIONS,
 
 	},
 	{

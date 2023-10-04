@@ -3,13 +3,13 @@ import { useForm } from '@cogoport/forms';
 import React from 'react';
 
 import Layout from '../../../../common/Layout';
+import useCreateMapping from '../../hooks/useCreateMapping';
 
 import controls from './control';
 import styles from './styles.module.css';
-import useCreateMapping from './useCreateMapping';
 
 function AddMainPorts({ show = false, onClose = () => {}, location = {} }) {
-	const { createMapping } = useCreateMapping({ location, onClose });
+	const { loading, createMapping = () => {} } = useCreateMapping({ location, onClose });
 
 	const { control, handleSubmit, formState:{ errors = {} } } = useForm();
 
@@ -18,8 +18,6 @@ function AddMainPorts({ show = false, onClose = () => {}, location = {} }) {
 			<Modal
 				show={show}
 				onClose={onClose}
-				className="primary sm"
-				styles={{ dialog: { overflow: 'visible' } }}
 				size="md"
 			>
 
@@ -38,6 +36,7 @@ function AddMainPorts({ show = false, onClose = () => {}, location = {} }) {
 						<Button
 							onClick={handleSubmit(createMapping)}
 							style={{ marginLeft: 16 }}
+							disabled={loading}
 						>
 							Submit
 						</Button>
