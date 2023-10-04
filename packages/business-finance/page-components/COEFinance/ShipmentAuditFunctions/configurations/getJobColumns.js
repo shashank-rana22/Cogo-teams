@@ -5,6 +5,8 @@ import ShowOverflowingNumber from '../utils/getShowOverFlowingNumbers';
 
 import styles from './styles.module.css';
 
+const ELEVEN = 11;
+
 const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 	const columns = [
 		{
@@ -51,7 +53,7 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 
 					<div style={{ padding: '0 30px' }} className={styles.accessor_financial}>
 						<div className={styles.fix_layout}>
-							{ShowOverflowingNumber(row?.estimatedRevenuePreTax, 11, 'INR') }
+							{ShowOverflowingNumber(row?.estimatedRevenuePreTax, ELEVEN, 'INR') }
 						</div>
 						<RenderTableData
 							data={row?.operationalRevenuePreTax}
@@ -95,7 +97,7 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 
 					<div style={{ padding: '0 30px' }} className={styles.accessor_financial}>
 						<div className={styles.fix_layout}>
-							{ShowOverflowingNumber(row?.estimatedCostPreTax, 11, 'INR') }
+							{ShowOverflowingNumber(row?.estimatedCostPreTax, ELEVEN, 'INR') }
 						</div>
 						<RenderTableData
 							data={row?.operationalCostPreTax}
@@ -139,7 +141,7 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 
 					<div style={{ padding: '0 30px' }} className={styles.accessor_financial}>
 						<div className={styles.fix_layout}>
-							{ShowOverflowingNumber(row?.estimatedProfitabilityPreTax, 11, 'INR') }
+							{ShowOverflowingNumber(row?.estimatedProfitabilityPreTax, ELEVEN, 'INR') }
 						</div>
 						<RenderTableData
 							data={row?.operationalProfitabilityPreTax}
