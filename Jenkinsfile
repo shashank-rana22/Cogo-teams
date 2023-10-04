@@ -40,20 +40,22 @@ pipeline {
                 steps{
                     script {
                     SERVER_NAME = sh (script: "git log -1 --pretty=%B ${COMMIT_ID} | awk \'{print \$NF}\'", returnStdout:true).trim()
+                    SERVER_IP = sh (script: "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${SERVER_NAME}\" --query \"Reservations[*].Instances[*].PrivateIpAddress\" --output text", returnStdout:true).trim()
+                    
+                    lockFile = "/home/${SERVER_NAME}/.admin.lock"
+                    
+                    // Use SSH to check if the lock file exists
+                    sshCommand = "ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} test -e ${lockFile} || touch ${lockFile}"
+                    
+                    exitCode = sh(script: sshCommand, returnStatus: true)
 
-                    def queueItems = Jenkins.instance.queue.getItems()
-    
-                    for (item in queueItems) {
-                        def blockedJobName = item.task.name
-                        if (blockedJobName == "Deploy Admin to ${SERVER_NAME}") {
-                            office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployment failed for user **${PUSHER_NAME}** because another deployment is going on for cogo-admin in the specified server.", color: '#3366ff'
-                            currentBuild.result = 'ABORTED' // Mark the build as aborted
-                            error("Deployment aborted due to a blocked job.")
-                        }
+                    if (exitCode == 0) {
+                        echo "Acquired lock on remote server."
+                    } else {
+                        office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployment failed for user **${PUSHER_NAME}** because another deployment is going on for cogo-admin in the specified server.", color: '#3366ff'
+                        currentBuild.result = 'ABORTED'
+                        error("Failed to acquire lock on remote server. Lock is already acquired.")
                     }
-                    build([$class: 'BuildBlockerProperty',
-                            blockingJobs: "Deploy Admin to ${SERVER_NAME}",
-                            scanQueueFor: "BLOCKED"])
                 }
             }
 
@@ -64,12 +66,6 @@ pipeline {
             }
             steps {
                 office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Starting to build admin for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** for user **${PUSHER_NAME}**", color: '#3366ff'
-
-                script {
-                    SERVER_NAME = sh (script: "git log -1 --pretty=%B ${COMMIT_ID} | awk \'{print \$NF}\'", returnStdout:true).trim()
-                    SERVER_IP = sh (script: "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${SERVER_NAME}\" --query \"Reservations[*].Instances[*].PrivateIpAddress\" --output text", returnStdout:true).trim()
-                }
-
                 cache(caches: [arbitraryFileCache(path: 'node_modules')], defaultBranch: 'feat/jenkinsfile', maxCacheSize: 3000) {
                     nodejs(nodeJSInstallationName: 'node-18') {
                         sh "scp -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} -P ${SSH_PORT} ${SERVER_NAME}@${SERVER_IP}:/home/${SERVER_NAME}/.env.admin .env"
@@ -105,7 +101,8 @@ pipeline {
                 // ssh into server ip and run deploy commands
                 sh """ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} \" sed -i \'/^ADMIN_TAG/s/=.*\$/=${COMMIT_ID}/g\' /home/${SERVER_NAME}/.env.front && \
                 aws ecr get-login-password --region ap-south-1 | docker login --username ${ECR_USERNAME} --password-stdin ${ECR_URL} && \
-                docker compose --env-file /home/${SERVER_NAME}/.env.front -f /home/${SERVER_NAME}/docker-compose-frontend.yaml up admin -d
+                docker compose --env-file /home/${SERVER_NAME}/.env.front -f /home/${SERVER_NAME}/docker-compose-frontend.yaml up admin -d && \
+                rm /home/${SERVER_NAME}/.admin.lock
                 \""""
 
                 script{
