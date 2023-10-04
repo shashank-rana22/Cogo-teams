@@ -12,18 +12,23 @@ const options = [
 	{ label: currencyCode.USD, value: currencyCode.USD },
 	{ label: currencyCode.INR, value: currencyCode.INR },
 ];
+const DEFAULT_AMOUNT = 0;
 
 function BudgetGenerator({
 	budgetId = '',
-	amount = '',
-	budgetValue = '',
-	setBudgetValue = () => {},
+	amount = 0,
 	refetchDashboard = () => {},
 	params = {},
 	setParams = () => {},
 }) {
 	const [isEdit, setIsEdit] = useState(false);
-	const { loading = {}, updateBudgetAmount = () => {} } = useUpdateBudgetAmount();
+	const [budgetValue, setBudgetValue] = useState(amount || DEFAULT_AMOUNT);
+	const { loading = {}, updateBudgetAmount = () => {} } = useUpdateBudgetAmount({
+		refetch: () => {
+			refetchDashboard();
+			setIsEdit(false);
+		},
+	});
 
 	return (
 		<div className={styles.card}>
@@ -49,9 +54,7 @@ function BudgetGenerator({
 										id     : budgetId,
 										amount : parseFloat(budgetValue),
 									},
-									refetchDashboard,
 								});
-								setIsEdit(false);
 							}}
 						/>
 						<ButtonIcon

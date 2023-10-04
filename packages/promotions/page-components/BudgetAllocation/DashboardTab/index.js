@@ -1,6 +1,5 @@
 import { Loader } from '@cogoport/components';
 import currencyCode from '@cogoport/globalization/constants/currencyCode';
-import React, { useState, useEffect } from 'react';
 
 import useGetPromotionBudgetDashboard from '../../../hooks/useGetPromotionBudgetDashboard';
 
@@ -20,18 +19,11 @@ function DashboardTab() {
 		params = {},
 		setParams = () => {},
 		fetchDashboardData = () => {},
-	} = useGetPromotionBudgetDashboard();
-	const [budgetId, setBudgetId] = useState(data?.total_budget?.id);
-	const [budgetValue, setBudgetValue] = useState(data?.total_budget?.amount || DEFAULT_AMOUNT);
-
-	useEffect(() => {
-		setParams((p) => ({ ...p, currency: currencyCode.USD }));
-	}, [setParams]);
-
-	useEffect(() => {
-		setBudgetId(data?.total_budget?.id);
-		setBudgetValue(data?.total_budget?.amount || DEFAULT_AMOUNT);
-	}, [data]);
+	} = useGetPromotionBudgetDashboard({
+		defaultParams: {
+			currency: currencyCode.USD,
+		},
+	});
 
 	if (loading) {
 		return (
@@ -44,10 +36,8 @@ function DashboardTab() {
 	return (
 		<div>
 			<BudgetGenerator
-				budgetId={budgetId}
+				budgetId={data?.total_budget?.id}
 				amount={data?.total_budget?.amount || DEFAULT_AMOUNT}
-				budgetValue={budgetValue}
-				setBudgetValue={setBudgetValue}
 				refetchDashboard={fetchDashboardData}
 				params={params}
 				setParams={setParams}

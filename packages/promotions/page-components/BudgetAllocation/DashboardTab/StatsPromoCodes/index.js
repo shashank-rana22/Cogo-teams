@@ -5,8 +5,8 @@ import styles from './styles.module.css';
 
 function StatsPromoCodes({
 	title = '',
-	number = '',
-	amount = '',
+	number = 0,
+	amount = 0,
 	params = {},
 }) {
 	return (

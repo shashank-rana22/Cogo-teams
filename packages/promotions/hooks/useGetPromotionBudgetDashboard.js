@@ -3,15 +3,23 @@ import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useGetPromotionBudgetDashboard = () => {
+const useGetPromotionBudgetDashboard = ({
+	defaultParams = {},
+}) => {
 	const [data, setData] = useState({});
-	const [params, setParams] = useState({});
+	const { currency = '' } = defaultParams || {};
+	const [params, setParams] = useState({
+		currency,
+	});
 
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/get_promotion_budget_dashboard',
 			method : 'GET',
-			params,
+			params : {
+				...(defaultParams || {}),
+				...(params || {}),
+			},
 		},
 		{ manual: true },
 	);
@@ -30,7 +38,7 @@ const useGetPromotionBudgetDashboard = () => {
 
 	useEffect(() => {
 		fetchDashboardData();
-	}, [fetchDashboardData, params]);
+	}, [fetchDashboardData, params, setParams]);
 
 	return {
 		data,

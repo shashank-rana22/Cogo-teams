@@ -22,7 +22,7 @@ function List({
 		updated_by_user_data_required : true,
 		discount_config_data_required : true,
 	};
-	const { data, loading, filters, setFilters, listPromotionRule } = useListPromotionRules({
+	const { data, loading, filters, setFilters, getListRules } = useListPromotionRules({
 		defaultFilters,
 		defaultParams: DEFAULT_PARAMS,
 	});
@@ -42,7 +42,7 @@ function List({
 				filters={filters}
 				setFilters={setFilters}
 				activeList={activeList}
-				refetchList={listPromotionRule}
+				refetchList={getListRules}
 				setViewAndEditRuleId={setViewAndEditRuleId}
 			/>
 		</div>

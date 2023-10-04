@@ -3,7 +3,10 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function StatsAllotedBudget({ amount = 0, params = {} }) {
+function StatsAllotedBudget({
+	amount = 0,
+	params = {},
+}) {
 	return (
 		<div className={styles.card}>
 			<div className={styles.title}>Alloted Budget</div>

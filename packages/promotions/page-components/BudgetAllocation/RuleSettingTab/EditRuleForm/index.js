@@ -33,17 +33,14 @@ function EditRuleForm({
 		},
 	});
 
-	const handleSubmitForm = (values) => {
-		if (activeList !== 'active') {
-			setShowActivateModal(true);
-			return;
-		}
+	const apiTrigger = ({ values = {}, status = '' }) => {
 		if (values?.scope === 'organization') {
 			const dataMap = getOrganizationUpdateRuleData({ values });
 			onUpdateAgentRule({
 				data: {
 					...dataMap,
 					primary_service: activeService,
+					...(status ? { status } : {}),
 				},
 			});
 		} else {
@@ -52,31 +49,22 @@ function EditRuleForm({
 				data: {
 					...dataMap,
 					primary_service: activeService,
+					...(status ? { status } : {}),
 				},
 			});
 		}
 	};
 
-	const handleActivateRule = (values) => {
-		if (values?.scope === 'organization') {
-			const dataMap = getOrganizationUpdateRuleData({ values });
-			onUpdateAgentRule({
-				data: {
-					...dataMap,
-					primary_service : activeService,
-					status          : 'active',
-				},
-			});
-		} else {
-			const dataMap = getShipmentUpdateRuleData({ values });
-			onUpdateAgentRule({
-				data: {
-					...dataMap,
-					primary_service : activeService,
-					status          : 'active',
-				},
-			});
+	const handleSubmitForm = (values) => {
+		if (activeList !== 'active') {
+			setShowActivateModal(true);
+			return;
 		}
+		apiTrigger({ values });
+	};
+
+	const handleActivateRule = (values) => {
+		apiTrigger({ values, status: 'active' });
 	};
 
 	if (loading) {
