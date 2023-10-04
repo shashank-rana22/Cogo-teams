@@ -1,43 +1,23 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const eventOccurenceControls = {
-	daily: [
+const eventOccurenceControls = ({ frequencyType = '', startDateField = {}, watch = () => {} }) => {
+	const { start_date, end_date } = watch();
+
+	const controls = [
 		{
 			label                 : 'Start Date',
 			name                  : 'start_date',
 			isClearable           : true,
-			minDate               : new Date(),
+			minDate               : startDateField,
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			showTimeSelect        : false,
-			isPreviousDaysAllowed : false,
-			rules                 : { required: '*required' },
+			isPreviousDaysAllowed : true,
 			controlType           : 'datePicker',
-		},
-		{
-			label                 : 'End Date',
-			name                  : 'end_date',
-			isClearable           : true,
-			minDate               : new Date(),
-			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-			showTimeSelect        : false,
-			isPreviousDaysAllowed : false,
-			shouldCloseOnSelect   : true,
-			rules                 : { required: '*required' },
-			controlType           : 'datePicker',
-		},
-	],
-	weekly: [
-		{
-			label                 : 'Start Date',
-			name                  : 'start_date',
-			isClearable           : true,
-			minDate               : new Date(),
-			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-			showTimeSelect        : false,
-			isPreviousDaysAllowed : false,
-			rules                 : { required: '*required' },
-			controlType           : 'datePicker',
-			shouldCloseOnSelect   : true,
+			show                  : ['daily', 'weekly', 'monthly', 'yearly', 'custom'],
+			rules                 : {
+				required : '*required',
+				validate : (value) => (value > end_date ? 'Cannot be greater than end time' : true),
+			},
 		},
 		{
 			label       : 'Repeat On',
@@ -45,41 +25,8 @@ const eventOccurenceControls = {
 			controlType : 'multi-select',
 			multiple    : true,
 			rules       : { required: '*required' },
-			options     : [
-				{ label: 'Sunday', value: 'sunday' },
-				{ label: 'Monday', value: 'monday' },
-				{ label: 'Tuesday', value: 'tuesday' },
-				{ label: 'Wednesday', value: 'wednesday' },
-				{ label: 'Thursday', value: 'thursday' },
-				{ label: 'Friday', value: 'friday' },
-				{ label: 'Saturday', value: 'saturday' },
-			],
-		},
-		{
-			label                 : 'End Date',
-			name                  : 'end_date',
-			isClearable           : true,
-			minDate               : new Date(),
-			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-			showTimeSelect        : false,
-			isPreviousDaysAllowed : false,
-			shouldCloseOnSelect   : true,
-			rules                 : { required: '*required' },
-			controlType           : 'datePicker',
-		},
-	],
-	monthly: [
-		{
-			label                 : 'Start Date',
-			name                  : 'start_date',
-			isClearable           : true,
-			minDate               : new Date(),
-			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-			showTimeSelect        : false,
-			isPreviousDaysAllowed : false,
-			rules                 : { required: '*required' },
-			controlType           : 'datePicker',
-			shouldCloseOnSelect   : true,
+			options     : GLOBAL_CONSTANTS.days_with_value,
+			show        : ['weekly'],
 		},
 		{
 			label       : 'On date',
@@ -91,32 +38,7 @@ const eventOccurenceControls = {
 			step        : 1,
 			arrow       : false,
 			rules       : { required: '*required' },
-		},
-		{
-			label                 : 'End Date',
-			name                  : 'end_date',
-			isClearable           : true,
-			minDate               : new Date(),
-			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-			showTimeSelect        : false,
-			isPreviousDaysAllowed : false,
-			shouldCloseOnSelect   : true,
-			rules                 : { required: '*required' },
-			controlType           : 'datePicker',
-		},
-	],
-	yearly: [
-		{
-			label                 : 'Start Date',
-			name                  : 'start_date',
-			isClearable           : true,
-			minDate               : new Date(),
-			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-			showTimeSelect        : false,
-			isPreviousDaysAllowed : false,
-			rules                 : { required: '*required' },
-			controlType           : 'datePicker',
-			shouldCloseOnSelect   : true,
+			show        : ['monthly'],
 		},
 		{
 			label         : 'Repeat On',
@@ -129,21 +51,8 @@ const eventOccurenceControls = {
 					controlType : 'select',
 					placeholder : 'select',
 					rules       : { required: '*required' },
-					options     : [
-						{ label: 'January', value: 1 },
-						{ label: 'February', value: 2 },
-						{ label: 'March', value: 3 },
-						{ label: 'April', value: 4 },
-						{ label: 'May', value: 5 },
-						{ label: 'June', value: 6 },
-						{ label: 'July', value: 7 },
-						{ label: 'August', value: 8 },
-						{ label: 'September', value: 9 },
-						{ label: 'October', value: 10 },
-						{ label: 'November', value: 11 },
-						{ label: 'December', value: 12 },
-					],
-					style: { marginRight: '8px' },
+					options     : GLOBAL_CONSTANTS.months_with_value,
+					style       : { marginRight: '8px' },
 				},
 				{
 					label       : '',
@@ -157,32 +66,7 @@ const eventOccurenceControls = {
 					rules       : { required: '*required' },
 				},
 			],
-		},
-		{
-			label                 : 'End Date',
-			name                  : 'end_date',
-			isClearable           : true,
-			minDate               : new Date(),
-			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-			showTimeSelect        : false,
-			isPreviousDaysAllowed : false,
-			shouldCloseOnSelect   : true,
-			rules                 : { required: '*required' },
-			controlType           : 'datePicker',
-		},
-	],
-	custom: [
-		{
-			label                 : 'Start Date',
-			name                  : 'start_date',
-			isClearable           : true,
-			minDate               : new Date(),
-			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-			showTimeSelect        : false,
-			isPreviousDaysAllowed : false,
-			rules                 : { required: '*required' },
-			controlType           : 'datePicker',
-			shouldCloseOnSelect   : true,
+			show: ['yearly'],
 		},
 		{
 			label         : 'Repeat On',
@@ -210,6 +94,7 @@ const eventOccurenceControls = {
 					rules       : { required: '*required' },
 				},
 			],
+			show: ['custom'],
 		},
 		{
 			label                 : 'End Date',
@@ -220,10 +105,16 @@ const eventOccurenceControls = {
 			showTimeSelect        : false,
 			isPreviousDaysAllowed : false,
 			shouldCloseOnSelect   : true,
-			rules                 : { required: '*required' },
 			controlType           : 'datePicker',
+			show                  : ['daily', 'weekly', 'monthly', 'yearly', 'custom'],
+			rules                 : {
+				required : '*required',
+				validate : (value) => (value < start_date ? 'Cannot be greater than start time' : true),
+			},
 		},
-	],
+	];
+
+	return controls?.filter((eachItem) => eachItem?.show?.includes(frequencyType));
 };
 
 export default eventOccurenceControls;

@@ -1,6 +1,7 @@
 import { Modal, Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import eventOccurenceControls from '../../../../../../../configurations/event-occurence-controls';
 import { getFieldController } from '../../../../../../../utils/getFieldController';
@@ -10,6 +11,7 @@ import styles from './styles.module.css';
 function EventOccurence({
 	setEventOccurence = () => {},
 	eventOccurence = {},
+	startDateField = {},
 }) {
 	const {
 		showModal = false,
@@ -20,21 +22,20 @@ function EventOccurence({
 	const {
 		control,
 		handleSubmit,
-		// watch,
+		watch,
 		formState : { errors = {} },
 		reset,
+		setValue,
 	} = useForm({
 		defaultValues: {
-			start_date : new Date(),
+			start_date : startDateField,
 			end_date   : new Date(),
 		},
 	});
 
-	const controls = eventOccurenceControls[frequencyType];
+	const controls = eventOccurenceControls({ frequencyType, startDateField, watch });
 
 	const onSave = (val) => {
-		// reset();
-
 		setEventOccurence((prev) => ({
 			...prev,
 			eventData : val,
@@ -51,6 +52,10 @@ function EventOccurence({
 			showModal : false,
 		}));
 	};
+
+	useEffect(() => {
+		setValue('start_date', startDateField);
+	}, [setValue, startDateField]);
 
 	return (
 		<Modal
