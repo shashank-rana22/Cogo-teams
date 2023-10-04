@@ -9232,6 +9232,10 @@ const partner = {
 			api         : 'get_common_job_list_service_charges',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_incident_management_incident_list_incident_types',
+			access_type : 'private',
+		},
 	],
 	vietnam_account_receivables: [
 		{
