@@ -136,13 +136,13 @@ function MailBody({
 	const emailBorderColor = getEmailBorder({ isDraft, emailStatus });
 
 	useEffect(() => {
-		if (isFirstMessage) {
+		if (isFirstMessage && !expandedState) {
 			if (!bodyMessage && !isDraft) {
 				getEmailBody();
 			}
 			setExpandedState(true);
 		}
-	}, [bodyMessage, getEmailBody, isDraft, isFirstMessage]);
+	}, [bodyMessage, expandedState, getEmailBody, isDraft, isFirstMessage]);
 
 	return (
 		<div className={styles.email_container}>
