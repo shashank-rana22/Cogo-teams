@@ -22,12 +22,16 @@ function Events({
 		category   : 'event',
 		event_type : 'call_customer',
 	});
+
 	const [actionModal, setActionModal] = useState({
 		status       : false,
 		value        : {},
 		actionStatus : '',
 	});
-	const { start :startEvent = '' } = events || {};
+
+	const setDefaultDate = new Date(month).getMonth() === new Date().getMonth();
+
+	const { start : startEvent = setDefaultDate ? new Date() : '' } = events || {};
 
 	const selectedEventData = (formatedEventsList || []).find(
 		(item) => (item?.start?.getDate() === startEvent?.getDate?.())
