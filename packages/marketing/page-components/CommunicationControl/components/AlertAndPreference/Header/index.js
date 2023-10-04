@@ -1,4 +1,4 @@
-import { Select } from '@cogoport/components';
+import { AsyncSelect } from '@cogoport/forms';
 
 import styles from './styles.module.css';
 
@@ -6,8 +6,17 @@ const START_INDEX = 0;
 const WORD_LENGTH = 1;
 
 function Header({
-	orgName = '', options = {}, user = '', setUser = () => {},
+	orgName = '', user = '', setUser = () => {}, orgId = '',
 }) {
+	const params = {
+		page_limit : 100,
+		filters    : {
+			organization_id: orgId,
+		},
+	};
+	const onChange = (val) => {
+		setUser(val);
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.company}>
@@ -16,12 +25,17 @@ function Header({
 			</div>
 			<div className={styles.input_container}>
 				<h3 className={styles.user_title}>Select Users</h3>
-				<Select
+				<AsyncSelect
+					name="user_select"
+					asyncKey="organization_users"
+					labelKey="name"
+					valueKey="id"
+					initialCall
 					value={user}
-					options={options}
-					onChange={setUser}
+					onChange={onChange}
 					label="Select Users"
-					placeholder="select your fav"
+					placeholder="Select All"
+					params={params}
 				/>
 			</div>
 		</div>

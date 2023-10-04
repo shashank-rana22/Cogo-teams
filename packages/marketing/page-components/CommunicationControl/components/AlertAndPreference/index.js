@@ -2,7 +2,6 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import useGetOrganizationUsers from '../../hooks/useGetOrganizationUsers';
 import useGetPreferences from '../../hooks/useGetPreferences';
 import useUpdatePreference from '../../hooks/useUpdatePreference';
 
@@ -15,14 +14,6 @@ function AlertAndPreference() {
 	const { org_name = '', company_id = '' } = router?.query || {};
 
 	const [user, setUser] = useState('');
-
-	const { list = [] } = useGetOrganizationUsers({ orgId: company_id, setUser });
-	const userOptions = list?.map((item) => ({
-		label : item?.name,
-		value : item?.user_id,
-	})) || [];
-
-	const listUserOptions = [{ label: 'Select All', value: '' }, ...userOptions];
 
 	const DEFAULT_PARAMS = {
 		companyId : company_id,
@@ -50,9 +41,9 @@ function AlertAndPreference() {
 			</div>
 			<Header
 				orgName={org_name}
-				options={listUserOptions}
 				user={user}
 				setUser={setUser}
+				orgId={company_id}
 			/>
 			{!getPreferencesLoading ? (
 				<CategoryForm
