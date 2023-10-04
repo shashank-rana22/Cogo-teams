@@ -24,6 +24,15 @@ pipeline {
                 cleanWs()
             }
         }
+                
+        stage ('Checkout') {
+            steps {
+                echo "Branch name: ${BRANCH_NAME}"
+                echo "Commit id: ${COMMIT_ID}"
+                echo "Commit message: ${COMMIT_MESSAGE}"
+                checkout scmGit(branches: [[name: "${BRANCH_NAME}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'cogo-dev-github-app', url: 'https://github.com/Cogoport/cogo-admin.git']])
+            }
+        }
         stage("Acquire lock"){
                 when {
                 expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#deploy_on') }
@@ -48,15 +57,6 @@ pipeline {
                 }
             }
 
-        }
-        
-        stage ('Checkout') {
-            steps {
-                echo "Branch name: ${BRANCH_NAME}"
-                echo "Commit id: ${COMMIT_ID}"
-                echo "Commit message: ${COMMIT_MESSAGE}"
-                checkout scmGit(branches: [[name: "${BRANCH_NAME}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'cogo-dev-github-app', url: 'https://github.com/Cogoport/cogo-admin.git']])
-            }
         }
         stage('Build'){
             when {
