@@ -7,7 +7,7 @@ import DeleteModal from '../accessorComponent/DeleteModal';
 import StatusName from '../accessorComponent/StatusName';
 import ViewRequested from '../accessorComponent/ViewRequested';
 
-import SortData from './SortData.tsx';
+import SortData from './SortData';
 import styles from './styles.module.css';
 
 const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refetch }) => [

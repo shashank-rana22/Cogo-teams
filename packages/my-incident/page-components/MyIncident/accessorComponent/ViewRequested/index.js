@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 
-import useRaisedAgain from '../../hooks/useRaisedAgain.ts';
-import useSave from '../../hooks/useSave.ts';
+import useRaisedAgain from '../../hooks/useRaisedAgain.js';
+import useSave from '../../hooks/useSave.js';
 import NonRecuringModal from '../NonRecuringModal';
 import RecuringModal from '../RecuringModal';
 
-import AdvanceSecurityDepositModal from './AdvanceSecurityDepositModal/index.tsx';
-import AdvanceSecurityDepositRefundModal from './AdvanceSecurityDepositRefundModal/index.tsx';
-import BankDatailsModal from './BankDetailsModal/index.tsx';
-import IcJvApproval from './IcJvApproval/index.tsx';
-import JobOpenModal from './JobOpenModal/index.tsx';
-import JournalVoucher from './JournalVoucher/index.tsx';
-import PaymentConfirmation from './PaymentConfirmation/index.tsx';
-import RequestCN from './RequestCN/index.tsx';
-import SettlementModal from './SettlementModal/index.tsx';
-import TdsDeviationModal from './TdsDeviationModal/index.tsx';
+import AdvanceSecurityDepositModal from './AdvanceSecurityDepositModal/index.js';
+import AdvanceSecurityDepositRefundModal from './AdvanceSecurityDepositRefundModal/index.js';
+import BankDatailsModal from './BankDetailsModal/index.js';
+import IcJvApproval from './IcJvApproval/index.js';
+import JobOpenModal from './JobOpenModal/index.js';
+import JournalVoucher from './JournalVoucher/index.js';
+import PaymentConfirmation from './PaymentConfirmation/index.js';
+import RequestCN from './RequestCN/index.js';
+import SettlementModal from './SettlementModal/index.js';
+import TdsDeviationModal from './TdsDeviationModal/index.js';
 
 const TYPE_COMPONENT_MAPPING = {
 	BANK_DETAIL_APPROVAL                   : BankDatailsModal,

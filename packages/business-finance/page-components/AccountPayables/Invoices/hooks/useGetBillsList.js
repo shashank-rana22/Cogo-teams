@@ -4,7 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError.js';
 
 const COE_ACCEPTED_INVOICES = 'coe_accepted';
 

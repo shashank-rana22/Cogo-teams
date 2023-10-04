@@ -4,9 +4,9 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import OutStandingVisualization from './OutStandingVisualization';
-import OverAllOutstanding from './OverAllOutstanding/index.tsx';
+import OverAllOutstanding from './OverAllOutstanding/index.js';
 import styles from './styles.module.css';
-import ViewOrganizationDetails from './ViewOrganizationDetails/index.tsx';
+import ViewOrganizationDetails from './ViewOrganizationDetails/index.js';
 
 function Outstanding({
 	entityCode = '',

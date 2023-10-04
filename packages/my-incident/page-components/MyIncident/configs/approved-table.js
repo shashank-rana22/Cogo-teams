@@ -7,7 +7,7 @@ import DateName from '../accessorComponent/DateName';
 import Remarks from '../accessorComponent/Remarks';
 import ViewRequested from '../accessorComponent/ViewRequested';
 
-import SortData from './SortData.tsx';
+import SortData from './SortData';
 import styles from './styles.module.css';
 
 interface PropsType {

@@ -4,7 +4,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useCallback } from 'react';
 
-import toastApiError from '../../commons/toastApiError.ts';
+import toastApiError from '../../commons/toastApiError.js';
 import { getFormatDates } from '../utils/getFormatDate';
 
 const INITIAL_BAL = 0;

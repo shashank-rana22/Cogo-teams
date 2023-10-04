@@ -4,8 +4,8 @@ import { IcMSearchdark } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import Filter from '../../commons/Filters/index.tsx';
-import List from '../../commons/List/index.tsx';
+import Filter from '../../commons/Filters/index.js';
+import List from '../../commons/List/index.js';
 
 import { invoiceFilters } from './configurations';
 import GetState from './GetState';

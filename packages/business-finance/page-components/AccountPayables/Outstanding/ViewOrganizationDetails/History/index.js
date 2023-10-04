@@ -3,9 +3,9 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import Filter from '../../../../commons/Filters/index.tsx';
-import CustomTable from '../../../../Settlement/page-components/History/CustomTable/index.tsx';
-import EmptyStateDocs from '../../commons/EmptyStateDocs/index.tsx';
+import Filter from '../../../../commons/Filters/index.js';
+import CustomTable from '../../../../Settlement/page-components/History/CustomTable/index.js';
+import EmptyStateDocs from '../../commons/EmptyStateDocs/index.js';
 
 import styles from './styles.module.css';
 

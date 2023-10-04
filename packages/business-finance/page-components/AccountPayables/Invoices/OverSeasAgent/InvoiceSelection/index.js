@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import List from '../../../../commons/List/index.tsx';
+import List from '../../../../commons/List/index.js';
 import useGetInvoiceSelection from '../../hooks/useInvoiceSelection';
 import useListGetSelectedPayrun from '../../hooks/useListGetSelectedPayrun';
 import usePostInvoicePurchasePayrun from '../../hooks/usePostInvoicePurchasePayrun';

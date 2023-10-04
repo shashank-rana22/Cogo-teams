@@ -3,15 +3,15 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
-import Filters from '../../../commons/Filters/index.tsx';
-import completedColumn from '../../configs/Completed_table.tsx';
-import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate.ts';
-import useGetOutstandingCard from '../../hooks/useGetoutstandingCard.ts';
-import { invoiceFilter } from '../../Utils/invoicelistFilter.ts';
+import Filters from '../../../commons/Filters/index.js';
+import completedColumn from '../../configs/Completed_table.js';
+import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate.js';
+import useGetOutstandingCard from '../../hooks/useGetoutstandingCard.js';
+import { invoiceFilter } from '../../Utils/invoicelistFilter.js';
 import FilterPopover from '../FilterPopover';
 import FooterCard from '../FooterCard';
-import SearchInput from '../searchInput/index.tsx';
-import StyledTable from '../styledTable/index.tsx';
+import SearchInput from '../searchInput/index.js';
+import StyledTable from '../styledTable/index.js';
 
 import styles from './styles.module.css';
 

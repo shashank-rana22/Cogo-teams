@@ -3,7 +3,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import showOverflowingNumber from '../../../../../commons/showOverflowingNumber.tsx';
+import showOverflowingNumber from '../../../../../commons/showOverflowingNumber.js';
 import stakeHolderTimeLineData from '../../../../../IncidentManagement/utils/formatStakeHolderData';
 import useGetExpenseConfig from '../../../hooks/useGetExpenseConfig';
 import StakeHolderTimeline from '../../StakeHolderTimeline';

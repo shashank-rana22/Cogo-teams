@@ -9,7 +9,7 @@ import DateName from '../accessorComponent/DateName';
 import Remarks from '../accessorComponent/Remarks';
 import StatusName from '../accessorComponent/StatusName';
 
-import SortData from './SortData.tsx';
+import SortData from './SortData';
 import styles from './styles.module.css';
 
 interface PropsType {

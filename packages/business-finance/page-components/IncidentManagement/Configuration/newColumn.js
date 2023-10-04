@@ -6,9 +6,9 @@ import React from 'react';
 
 import ShowOverflowingNumber from '../../commons/utils/showOverflowingNumber';
 import { MAPPING } from '../Constants/tab_mapping';
-import { toTitleCase } from '../utils/titleCase.ts';
+import { toTitleCase } from '../utils/titleCase.js';
 
-import SortIcon from './SortIcon/index.tsx';
+import SortIcon from './SortIcon/index.js';
 import styles from './styles.module.css';
 
 const SIXTH_SPLICE_INDEX = 8;

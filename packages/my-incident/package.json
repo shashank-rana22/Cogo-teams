@@ -5,7 +5,7 @@
   "private": true,
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
-  "types": "dist/types/index.d.ts",
+  "types": "dist/types/index.d.js",
   "dependencies": {
     "@cogoport/components": "^1.0.432",
     "@cogoport/forms": "workspace:0.1.0",

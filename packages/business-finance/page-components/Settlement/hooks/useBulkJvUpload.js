@@ -3,7 +3,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import toastApiError from '../../commons/toastApiError.ts';
+import toastApiError from '../../commons/toastApiError.js';
 
 const useBulkJvUpload = ({ fileValue = '', setShowBulkJV = () => {} }) => {
 	const { profile } = useSelector((state) => state || {});

@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 
 import useGetJVList from '../../../hooks/useGetJvsList';
 import usePaymentsSettlementCheck from '../../../hooks/usePaymentsSettlementCheck';
-import CreateJvModal from '../../JournalVoucher/CreateJvModal/index.tsx';
+import CreateJvModal from '../../JournalVoucher/CreateJvModal/index.js';
 
 import Header from './Header';
 import getLineItems from './LineItems';

@@ -3,16 +3,16 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import CustomList from '../../../commons/CustomList/index.tsx';
-import showOverflowingNumber from '../../../commons/showOverflowingNumber.tsx';
+import CustomList from '../../../commons/CustomList/index.js';
+import showOverflowingNumber from '../../../commons/showOverflowingNumber.js';
 
 import ActionModal from './ActionModal';
 import { CYCLE_LIST_CONFIG } from './config/cycleListConfig';
-import CreateCycleForm from './CreateCycleForm/index.tsx';
-import FilterHeaders from './FilterHeaders/index.tsx';
+import CreateCycleForm from './CreateCycleForm/index.js';
+import FilterHeaders from './FilterHeaders/index.js';
 import useListDunningCycles from './hooks/useListDunningCycles';
-import RenderActions from './RenderActions/index.tsx';
-import RenderViewMore from './RenderViewMore/index.tsx';
+import RenderActions from './RenderActions/index.js';
+import RenderViewMore from './RenderViewMore/index.js';
 import ShowExecutions from './ShowExecutions';
 import styles from './styles.module.css';
 
