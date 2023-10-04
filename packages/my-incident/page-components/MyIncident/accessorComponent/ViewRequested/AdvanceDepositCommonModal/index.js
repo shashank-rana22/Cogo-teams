@@ -5,25 +5,13 @@ import ApproveAndRejectHeader from '../../ApproveAndRejectHeader';
 
 import styles from './styles.module.css';
 
-interface DetailsInterface {
-	title?:string,
-	value?:any,
-}
-interface Props {
-	itemData?: object,
-	showModal?: boolean,
-	setShowModal?:React.Dispatch<React.SetStateAction<boolean>>,
-	type?:string,
-	securityDepositDetails?: DetailsInterface[],
-}
-
 function AdvanceDepositCommonModal({
 	securityDepositDetails,
 	itemData,
 	showModal,
 	setShowModal,
 	type,
-}:Props) {
+}) {
 	return (
 		<Modal
 			size="md"

@@ -1,12 +1,10 @@
 import { Table } from '@cogoport/components';
 import React from 'react';
 
-import { TableProps } from '../Interfaces/index';
-
 import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
-function StyledTable({ id, imageFind, className, columns, data, ...rest }:TableProps) {
+function StyledTable({ id, imageFind, className, columns, data, ...rest }) {
 	const { loading } = rest || {};
 
 	return (

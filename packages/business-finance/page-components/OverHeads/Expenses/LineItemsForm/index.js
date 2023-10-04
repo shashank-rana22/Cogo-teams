@@ -48,7 +48,7 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions, isTax
 
 	const watchFieldArray = watch('line_items');
 	const geo = getGeoConstants();
-	const controlledFields = fields.map((field: any, index: number) => ({
+	const controlledFields = fields.map((field, index) => ({
 		...field,
 		...watchFieldArray[index],
 	}));
@@ -57,7 +57,7 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions, isTax
 
 	useEffect(() => {
 		if (!isEmpty(watchFieldArray)) {
-			setFormData((prev: object) => ({
+			setFormData((prev) => ({
 				...prev,
 				lineItemsList: watchFieldArray,
 			}));
@@ -113,7 +113,7 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions, isTax
 		geo,
 	]);
 
-	const getSum = (columnName: string) => {
+	const getSum = (columnName) => {
 		const sum = watchFieldArray?.reduce((acc, curr) => {
 			const columnVal = curr?.[columnName];
 			if (!Number.isNaN(+columnVal)) {
@@ -143,7 +143,7 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions, isTax
 
 	useEffect(() => {
 		if (payableAmount) {
-			setFormData((prev: object) => ({ ...prev, payableAmount }));
+			setFormData((prev) => ({ ...prev, payableAmount }));
 		}
 	}, [payableAmount, setFormData]);
 

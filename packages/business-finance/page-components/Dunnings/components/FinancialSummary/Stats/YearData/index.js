@@ -2,12 +2,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface Props {
-	years?: string[];
-	onClickFinancialYear?: Function;
-}
-
-function YearData({ years = [], onClickFinancialYear = () => {} }:Props) {
+function YearData({ years = [], onClickFinancialYear = () => {} }) {
 	return (
 		<div>
 			{years.map((year) => (

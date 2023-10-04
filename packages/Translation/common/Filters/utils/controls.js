@@ -1,6 +1,4 @@
-import { FilterItem } from '../../interfaces';
-
-export const filterControls: FilterItem[] = [
+export const filterControls = [
 	{
 		name        : 'serviceName',
 		placeholder : 'Service',

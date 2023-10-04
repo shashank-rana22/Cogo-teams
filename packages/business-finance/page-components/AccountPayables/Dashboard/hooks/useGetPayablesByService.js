@@ -2,10 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-interface ItemPorps {
-	activeEntity: string;
-}
-const useGetPayablesByService = ({ activeEntity }:ItemPorps) => {
+const useGetPayablesByService = ({ activeEntity }) => {
 	const [
 		{ data, loading },
 		trigger,

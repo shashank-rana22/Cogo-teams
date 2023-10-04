@@ -3,15 +3,7 @@ import { useCallback, useEffect } from 'react';
 
 import { getStatsParams } from '../utils/getStatsParams';
 
-interface Props {
-	statsFilter?:string;
-	filters?: {
-		service?: string[];
-		entity?: string[];
-	};
-}
-
-function useGetMonthwiseStats({ statsFilter, filters }:Props) {
+function useGetMonthwiseStats({ statsFilter, filters }) {
 	const { service, entity } = filters || {};
 	const [
 		{ data, loading },

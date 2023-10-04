@@ -1,4 +1,4 @@
-import { Bar, BarDatum } from '@cogoport/charts/bar';
+import { Bar } from '@cogoport/charts/bar';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
@@ -6,12 +6,7 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
-interface Props {
-	barData?: BarDatum[];
-	currency?: string;
-}
-
-function BarGraphView({ barData = [], currency = '' }:Props) {
+function BarGraphView({ barData = [], currency = '' }) {
 	const keys = ['Collected Amount', 'Outstanding Amount'];
 
 	return (

@@ -5,25 +5,7 @@ import AdvanceDepositCommonModal from '../AdvanceDepositCommonModal';
 
 import securityDepositData from './securityDepositData';
 
-interface DepositInterface {
-	advanceDocumentId?: string,
-	amountPerContainer?:number,
-	numberOfContainers?:number,
-	totalAmountToBePaid?:number,
-	paymentMode?: string,
-	remark?: string,
-	supplierName?: string,
-}
-interface ItemInterface {
-	status?:string,
-	data?:{ advanceSecurityDeposit?: DepositInterface },
-}
-interface Props {
-	itemData?:ItemInterface,
-	showModal?: boolean,
-	setShowModal?:React.Dispatch<React.SetStateAction<boolean>>,
-}
-function AdvanceSecurityDepositModal({ itemData, showModal, setShowModal }:Props) {
+function AdvanceSecurityDepositModal({ itemData, showModal, setShowModal }) {
 	const { status, data } = itemData || {};
 	const { advanceSecurityDeposit } = data || {};
 

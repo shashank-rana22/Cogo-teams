@@ -13,11 +13,7 @@ import StatsLoader from './StatsLoader';
 import styles from './styles.module.css';
 import YearData from './YearData';
 
-interface Props {
-	filters?: object;
-}
-
-function Stats({ filters = {} }:Props) {
+function Stats({ filters = {} }) {
 	const [isGraphView, setIsGraphView] = useState(true);
 	const [inputValue, setInputValue] = useState('');
 	const [showYear, setShowYear] = useState(false);

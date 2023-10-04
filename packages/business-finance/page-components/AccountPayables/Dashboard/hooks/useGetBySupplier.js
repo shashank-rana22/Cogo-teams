@@ -2,12 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-interface FilterProps {
-	showVendorsList: string,
-	activeEntity: string,
-}
-
-const useGetBySupplier = ({ showVendorsList, activeEntity }:FilterProps) => {
+const useGetBySupplier = ({ showVendorsList, activeEntity }) => {
 	const [
 		{ data, loading },
 		trigger,

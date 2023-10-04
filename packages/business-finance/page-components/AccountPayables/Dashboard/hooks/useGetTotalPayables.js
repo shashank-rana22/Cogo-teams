@@ -2,16 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-interface FilterProps {
-	currency?: string,
-	service?: string,
-}
-interface ItemProps {
-	filtersData: FilterProps;
-	activeEntity: string,
-}
-
-const useGetTotalPayables = ({ filtersData, activeEntity }:ItemProps) => {
+const useGetTotalPayables = ({ filtersData, activeEntity }) => {
 	const {
 		service,
 		currency,

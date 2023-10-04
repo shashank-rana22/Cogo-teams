@@ -29,7 +29,7 @@ const lineItemColumns = ({
 		{
 			Header   : 'Item',
 			id       : 'itemName',
-			accessor : (row: any, index: number) => (
+			accessor : (row, index) => (
 				<div className={styles.widthselect}>
 					<InputController
 						key={row?.id}
@@ -45,7 +45,7 @@ const lineItemColumns = ({
 		{
 			Header   : 'Amount before tax',
 			id       : 'amount_before_tax',
-			accessor : (row: any, index: number) => (
+			accessor : (row, index) => (
 				<div className={styles.widthselect}>
 					<InputController
 						key={row?.id}
@@ -62,7 +62,7 @@ const lineItemColumns = ({
 		{
 			Header   : 'Tax',
 			id       : 'tax',
-			accessor : (row: any, index: number) => (
+			accessor : (row, index) => (
 				<div className={cl`${styles.select} ${styles.widthselect}`}>
 					<SelectController
 						key={row?.id}
@@ -79,7 +79,7 @@ const lineItemColumns = ({
 		{
 			Header   : 'Amount after tax',
 			id       : 'amount_after_tax',
-			accessor : (row: any, index: number) => (
+			accessor : (row, index) => (
 				<div className={styles.inputwidth}>
 					<InputController
 						key={row?.id}
@@ -95,7 +95,7 @@ const lineItemColumns = ({
 		{
 			Header   : 'TDS',
 			id       : 'tds',
-			accessor : (row: any, index: number) => (
+			accessor : (row, index) => (
 				<div className={cl`${styles.select} ${styles.tdswidth}`}>
 					<SelectController
 						key={row?.id}
@@ -112,7 +112,7 @@ const lineItemColumns = ({
 		{
 			Header   : 'Payable Amount',
 			id       : 'payable_amount',
-			accessor : (row: any, index: number) => (
+			accessor : (row, index) => (
 				<div className={styles.inputwidth}>
 					<InputController
 						key={row?.id}
@@ -128,7 +128,7 @@ const lineItemColumns = ({
 		{
 			Header   : '',
 			id       : 'delete',
-			accessor : (row: any, index: number) => (
+			accessor : (row, index) => (
 				<div>
 					{index !== GLOBAL_CONSTANTS.zeroth_index && (
 						<IcMDelete

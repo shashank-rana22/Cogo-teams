@@ -2,22 +2,10 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface Props {
-	getDunningList?: Function;
-}
-
-interface StateInterface {
-	profile?: {
-		user?: {
-			id?: string | number;
-		};
-	};
-}
-
-function useUpdateStatus({ getDunningList }:Props) {
+function useUpdateStatus({ getDunningList }) {
 	const {
 		profile,
-	} = useSelector((state: StateInterface) => state);
+	} = useSelector((state) => state);
 
 	const [
 		{ data, loading },

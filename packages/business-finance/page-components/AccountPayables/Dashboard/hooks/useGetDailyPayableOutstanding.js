@@ -2,16 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-interface FilterProps {
-	currency?: string,
-	service?: string,
-}
-interface ItemProps {
-	isQuarterView: boolean,
-	filters: FilterProps,
-	activeEntity: string,
-}
-const useGetDailyPayableOutstanding = ({ isQuarterView, filters, activeEntity }:ItemProps) => {
+const useGetDailyPayableOutstanding = ({ isQuarterView, filters, activeEntity }) => {
 	const [
 		{ data, loading },
 		trigger,

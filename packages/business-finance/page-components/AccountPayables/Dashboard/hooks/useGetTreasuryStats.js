@@ -3,11 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
-interface ItemProps {
-	activeEntity:string;
-}
-
-const useGetTreasuryStats = ({ activeEntity }:ItemProps) => {
+const useGetTreasuryStats = ({ activeEntity }) => {
 	const [filters, setFilters] = useState({
 		Date: undefined,
 	});
@@ -35,10 +31,10 @@ const useGetTreasuryStats = ({ activeEntity }:ItemProps) => {
 			try {
 				await trigger({
 					params: {
-						fromDate: startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
+						fromDate: startDate ? format(startDate, 'yyyy-MM-dd 00:00:00', {}, false)
 							: undefined,
 						toDate: endDate
-							? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
+							? format(endDate, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
 						entityCode: [activeEntity],
 					},
 				});

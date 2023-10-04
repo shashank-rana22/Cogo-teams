@@ -2,11 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-interface ItemProps {
-	activeEntity: string,
-}
-
-const useGetInvoiceAmount = ({ activeEntity }:ItemProps) => {
+const useGetInvoiceAmount = ({ activeEntity }) => {
 	const [
 		{ data, loading },
 		trigger,

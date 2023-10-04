@@ -1,4 +1,4 @@
-import { ResponsiveLine, LineSvgProps } from '@cogoport/charts/line';
+import { ResponsiveLine } from '@cogoport/charts/line';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
@@ -6,12 +6,7 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
-interface Props {
-	linearData?: LineSvgProps['data'];
-	currency?: string;
-}
-
-function LinearGraphView({ linearData = [], currency = '' }: Props) {
+function LinearGraphView({ linearData = [], currency = '' }) {
 	const [totalOutstanding] = linearData;
 	const { data } = totalOutstanding || {};
 
