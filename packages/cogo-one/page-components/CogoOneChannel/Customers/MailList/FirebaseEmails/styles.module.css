@@ -1,5 +1,5 @@
 .main_container {
-	width: calc(100% - 43px);
+	width: calc(100% - 47px);
 	height: 100%;
 	padding: 4px 0 0;
 }
@@ -52,6 +52,7 @@
 }
 
 .list_container {
+	width: 100%;
 	height: calc(100% - 80px);
 	overflow-x: hidden;
 	overflow-y: auto;

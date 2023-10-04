@@ -1,10 +1,9 @@
-import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
 import useGetShipmentCostSheet from '../../hooks/useGetShipmentCostSheet';
-import allStakeHolderTimeLineData from '../../utils/formatAllStakeHolderData';
+import allStakeHolderTimeLineData from '../../utils/useFormatAllStakeHolderData';
 
 import CostSheet from './components/CostSheet';
 import Details from './components/Details';
@@ -18,7 +17,13 @@ function JobOpenDetailsModal({ row = {}, setDetailsModal = () => {}, refetch = (
 	const shipmentId = row?.data?.jobOpenRequest?.id;
 	const { jobNumber = '' } = row?.data?.jobOpenRequest || {};
 	const JOB_TYPE = row?.source.toUpperCase();
-	const { level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark = '' } = row || {};
+	const {
+		level3 = {}, level2 = {}, level1 = {}, createdBy = {}, remark : createdRemark = '',
+		status = '', updatedBy = {}, financeRemark = '', data = {},
+	} = row || {};
+
+	const remark = data?.jobOpenRequest?.remark || createdRemark || '';
+
 	const level0 = { ...createdBy, remark };
 	const { t } = useTranslation(['incidentManagement']);
 	const {
@@ -37,13 +42,11 @@ function JobOpenDetailsModal({ row = {}, setDetailsModal = () => {}, refetch = (
 			<div className={styles.heading}>
 				{t('incidentManagement:shipment_re_open_request')}
 			</div>
-			{
-			(!isEmpty(level1) || !isEmpty(level2) || !isEmpty(level3)) && (
-				<AllStakeHolderTimeline
-					timeline={allStakeHolderTimeLineData({ level0, level1, level2, level3 })}
-				/>
-			)
-						}
+			<AllStakeHolderTimeline
+				timeline={allStakeHolderTimeLineData(
+					{ level0, level1, level2, level3, status, updatedBy, financeRemark },
+				)}
+			/>
 			<TimeLine row={row} />
 			<CostSheet
 				selldata={selldata}

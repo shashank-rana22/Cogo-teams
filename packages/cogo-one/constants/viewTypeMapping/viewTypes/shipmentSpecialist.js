@@ -22,6 +22,7 @@ const SHIPMENT_SPECIALIST = {
 	to_show_agent_activity_graph : false,
 	configurations_to_be_shown   : ['agents_status'],
 	shift_view_default_type      : '',
+	email_signature_designation  : 'Customer Support',
 	group_agents_api_filter      : ['shipment_specialist',
 		'support', 'shipment_specialist_admin', ...COGOVERSE_AGENT_MAPPINGS.sales],
 	accessible_new_communications : ['new_mail'],

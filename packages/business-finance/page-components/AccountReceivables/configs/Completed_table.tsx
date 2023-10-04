@@ -382,16 +382,16 @@ const completedColumn = ({
 										className={styles.tool_tip}
 									>
 										{startCase(getStatus({
-											entityCode,
-											invoiceStatus: row?.invoiceStatus,
+											entityCode    : row?.entityCode,
+											invoiceStatus : row?.invoiceStatus,
 										}))}
 									</div>
 								)}
 							>
 								<text className={styles.style_text}>
 									{`${startCase(getStatus({
-										entityCode,
-										invoiceStatus: row?.invoiceStatus,
+										entityCode    : row?.entityCode,
+										invoiceStatus : row?.invoiceStatus,
 									})).substring(
 										MIN_NAME_STRING,
 										NINE,

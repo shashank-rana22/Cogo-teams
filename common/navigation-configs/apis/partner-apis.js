@@ -761,6 +761,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'get_organization_restricted_settings_config',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -9232,6 +9237,10 @@ const partner = {
 			api         : 'get_common_job_list_service_charges',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_incident_management_incident_list_incident_types',
+			access_type : 'private',
+		},
 	],
 	vietnam_account_receivables: [
 		{
@@ -13549,6 +13558,11 @@ const partner = {
 		},
 		{
 			api          : 'list_cogoone_shifts',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_communication_template',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

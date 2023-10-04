@@ -59,29 +59,32 @@ function UploadComplianceDocs({
 	const serviceTradeType = servicesList?.filter((service) => service?.id === task?.service_id)
 		?.[GLOBAL_CONSTANTS.zeroth_index]?.trade_type;
 
-	const EXCULDE_DOCS_LIST = excludeDocs?.[serviceTradeType || '']?.map((item) => item.doc_code);
+	const EXCULDE_DOCS_LIST = excludeDocs?.[serviceTradeType || '']?.map((item) => item?.doc_code);
 
 	const REQUIRED_DOCS = docs?.filter((doc) => !EXCULDE_DOCS_LIST?.includes(doc?.docCode)
 	&& doc?.tradeType === TRADETYPE_MAPPING[serviceTradeType]);
 
-	const uploadedDocs = allUploadedDocs?.list?.filter((item) => item.state === 'document_uploaded');
+	const uploadedDocs = allUploadedDocs?.list?.filter((item) => item?.state === 'document_uploaded');
 
 	let totalDocsList = [];
 	if (task.task === 'upload_compliance_documents') {
 		totalDocsList = REQUIRED_DOCS;
-	} else if (['approve_compliance_documents', 'amend_compliance_documents'].includes(task.task)) {
+	} else if (['approve_compliance_documents', 'amend_compliance_documents'].includes(task?.task)) {
 		totalDocsList = allUploadedDocs?.list;
 	}
 
-	const uniq_doc_code = [...new Set(totalDocsList?.map((doc) => doc.docCode))];
-	const uniq_doc_state = [...new Set(totalDocsList?.map((doc) => doc.state))];
+	const uniq_doc_code = [...new Set(
+		totalDocsList?.map((doc) => doc?.docCode || JSON.parse(doc?.data)?.doc_code),
+	)];
+
+	const uniq_doc_state = [...new Set(totalDocsList?.map((doc) => doc?.state))];
 
 	const disableSubmitForKam = uniq_doc_code?.length === uploadedDocs?.length;
 
 	const disableSubmitForSO = uniq_doc_state?.length === LENGTH_CHECK
 	&& uniq_doc_state?.[GLOBAL_CONSTANTS.zeroth_index] === 'document_accepted';
 
-	const disableSubmit = !(task.task === 'upload_compliance_documents'
+	const disableSubmit = !(task?.task === 'upload_compliance_documents'
 		? disableSubmitForKam : disableSubmitForSO);
 
 	return loading || docLoading ? (

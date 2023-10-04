@@ -1,0 +1,8 @@
+.container {
+	display: flex;
+	height: calc(100% - 122px);
+
+	@media (min-width: 2560px) {
+		height: calc(100% - 332px);
+	}
+}

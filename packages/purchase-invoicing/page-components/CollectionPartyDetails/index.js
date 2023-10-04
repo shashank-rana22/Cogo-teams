@@ -61,6 +61,8 @@ function CollectionPartyDetails({
 		is_job_closed_financially = false,
 	} = shipment_data || {};
 
+	const jobClosed = is_job_closed || is_job_closed_financially;
+
 	const [showModal, setShowModal] = useState(false);
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
 	const [openComparision, setOpenComparision] = useState(false);
@@ -295,6 +297,7 @@ function CollectionPartyDetails({
 						editData={openComparision}
 						step={step}
 						setStep={setStep}
+						jobClosed={jobClosed}
 						onClose={() => {
 							onClose();
 							refetch();

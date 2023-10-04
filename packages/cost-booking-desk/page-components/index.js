@@ -1,4 +1,5 @@
 import { dynamic } from '@cogoport/next';
+import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useState, useMemo } from 'react';
 
 import CostBookingDeskContext from '../context/CostBookingDeskContext';
@@ -41,6 +42,7 @@ function CostBookingDesk() {
 
 	return (
 		<CostBookingDeskContext.Provider value={contextValues}>
+			<ShipmentChat />
 			{shipmentType in ResolveCostBookingDesk ? <RenderDesk /> : null}
 		</CostBookingDeskContext.Provider>
 	);
