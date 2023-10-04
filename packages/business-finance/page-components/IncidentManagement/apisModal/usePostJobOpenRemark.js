@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 const usePostJobOpenRemark = ({
 	id = '',
 	remarks = '',
-	setShowModal = () => {},
+	setDetailsModal = () => {},
 	refetch = () => {},
 }) => {
 	const { t } = useTranslation(['incidentManagement']);
@@ -40,7 +40,7 @@ const usePostJobOpenRemark = ({
 				Toast.success(t('incidentManagement:request_updated_successfully_message'));
 			}
 
-			setShowModal(null);
+			setDetailsModal(null);
 
 			refetch();
 		} catch (err) {

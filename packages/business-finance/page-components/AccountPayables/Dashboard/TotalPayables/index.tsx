@@ -69,6 +69,7 @@ function TotalPayables({
 													currencyDisplay : 'code',
 													style           : 'currency',
 													notation        : 'compact',
+													currencyWise    : true,
 												},
 											})}
 											<div className={styles.inline_style}>
@@ -116,6 +117,7 @@ function TotalPayables({
 													style           : 'currency',
 													notation        : 'compact',
 													compactDisplay  : 'short',
+													currencyWise    : true,
 												},
 											})}
 											<div className={styles.inline_style}>
@@ -163,6 +165,7 @@ function TotalPayables({
 													style           : 'currency',
 													notation        : 'compact',
 													compactDisplay  : 'short',
+													currencyWise    : true,
 												},
 											})}
 											<div className={styles.inline_style}>

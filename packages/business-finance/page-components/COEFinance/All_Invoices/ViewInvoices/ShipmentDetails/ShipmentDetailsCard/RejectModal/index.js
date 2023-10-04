@@ -85,13 +85,19 @@ function RejectModal({
 	}, []);
 
 	const onCheckboxChange = (event) => {
-		setCheckedValue(
-			{ ...checkedValue, [CHECKED_VALUE_MAPPING[rejectedId]]: [...event] },
-		);
-		if (event?.length === allOptions?.length) {
+		const isAllSelected = event?.length === allOptions?.length;
+
+		if (isAllSelected) {
 			setExtraCheck('All');
+			setCheckedValue((p) => ({
+				...p,
+				[CHECKED_VALUE_MAPPING[rejectedId]]: ['All'],
+			}));
 		} else {
 			setExtraCheck('');
+			setCheckedValue(
+				{ ...checkedValue, [CHECKED_VALUE_MAPPING[rejectedId]]: [...event] },
+			);
 		}
 	};
 
@@ -122,7 +128,7 @@ function RejectModal({
 								if (e?.target?.checked) {
 									setCheckedValue((p) => ({
 										...p,
-										[CHECKED_VALUE_MAPPING[rejectedId]]: [...allOptions],
+										[CHECKED_VALUE_MAPPING[rejectedId]]: ['All'],
 									}));
 									setExtraCheck('All');
 								} else {
@@ -135,12 +141,16 @@ function RejectModal({
 							}}
 							className={styles.extra_checks}
 						/>
-						<CheckboxGroup
-							options={basicOptions[rejectedId]}
-							onChange={onCheckboxChange}
-							value={checkedValue[CHECKED_VALUE_MAPPING[rejectedId]]}
-							style={{ display: 'flex', flexDirection: 'column' }}
-						/>
+
+						{isEmpty(extraCheck) ? (
+							<CheckboxGroup
+								options={basicOptions[rejectedId]}
+								onChange={onCheckboxChange}
+								value={checkedValue[CHECKED_VALUE_MAPPING[rejectedId]]}
+								style={{ display: 'flex', flexDirection: 'column' }}
+							/>
+						) : null}
+
 						<Checkbox
 							checked={extraCheck === 'Other'}
 							label="Other"

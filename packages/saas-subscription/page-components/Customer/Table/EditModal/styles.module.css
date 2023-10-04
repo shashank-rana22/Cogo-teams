@@ -30,14 +30,6 @@
 	margin-bottom: 15px;
 }
 
-.title {
-	margin: 0;
-}
-
-.cancel_btn {
-	margin-left: 12px;
-}
-
 .details_container {
 	justify-content: flex-start;
 	margin-bottom: 35px;
@@ -72,12 +64,7 @@
 	}
 }
 
-.header_title {
-	font-weight: 300;
-	color: #615858;
-}
-
-.header_value {
-	margin-left: 6px;
-	font-weight: 600;
+.tab_section {
+	padding: 20px 10px;
+	border-top: 1px solid #c3c3c3;
 }

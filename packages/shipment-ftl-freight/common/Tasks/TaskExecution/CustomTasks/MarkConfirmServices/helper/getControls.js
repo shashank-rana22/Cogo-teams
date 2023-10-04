@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const service_provider = {
 	name           : 'service_provider_id',
 	type           : 'select',
@@ -6,6 +8,13 @@ const service_provider = {
 	optionsListKey : 'verified-service-providers',
 	placeholder    : 'Select Service Provider',
 	rules          : { required: 'Service Provider is Required' },
+	params         : {
+		filters: {
+			account_type : 'service_provider',
+			status       : 'active',
+			kyc_status   : 'verified',
+		},
+	},
 };
 
 const getControls = ({
@@ -26,13 +35,22 @@ const getControls = ({
 	}
 
 	service_provider.value =		subsidiary_service_rendered?.service_provider?.id
-		|| service_rendered?.[0]?.service_provider_id
+		|| service_rendered?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id
 		|| '';
 
-	const controls = [];
+	service_provider.params = {
+		...(service_provider.params || {}),
+		filters: {
+			...(service_provider?.params?.filters || {}),
+			service: 'ftl_freight',
+		},
 
-	controls.push(service_provider);
+	};
 
-	return controls;
+	const CONTROLS = [];
+
+	CONTROLS.push(service_provider);
+
+	return CONTROLS;
 };
 export default getControls;

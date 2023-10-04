@@ -27,7 +27,7 @@ const useRaiseTicketcontrols = ({
 	watchRequestType = '', resetField = () => {}, setAdditionalInfo = () => {}, setValue = () => {},
 	formattedSubCategories = [], setSubCategories = () => {}, watchSubCategory = '',
 	t = () => {}, setRaiseToDesk = () => {}, formatRaiseToDeskOptions = [],
-	watchRaisedByDesk = '', watchRaisedToDesk = '',
+	watchRaisedByDesk = '', watchRaisedToDesk = '', setDefaultTypeId = () => {},
 }) => {
 	const { rolesArr } = useSelector(({ profile }) => ({ rolesArr: profile?.auth_role_data?.role_functions || [] }));
 
@@ -203,9 +203,12 @@ const useRaiseTicketcontrols = ({
 			isClearable    : true,
 			rules          : { required: true },
 			defaultOptions : true,
-			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
-			visible        : true,
-			renderLabel    : (item) => <CustomIssueLabel optionsLabel={item} />,
+			onChange       : (_, val) => {
+				setAdditionalInfo(val?.AdditionalInfo);
+				setDefaultTypeId(val?.ID);
+			},
+			visible     : true,
+			renderLabel : (item) => <CustomIssueLabel optionsLabel={item} />,
 		},
 		{
 			label          : <RenderLabel label={t('myTickets:describe_issue')} />,

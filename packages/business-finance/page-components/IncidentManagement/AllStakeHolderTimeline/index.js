@@ -35,11 +35,17 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 					if (item?.status === 'REQUESTED BY') {
 						flag = true;
 					}
+
 					const isStakeholderActive = !index
 					|| ['APPROVED', 'REQUESTED BY'].includes(stakeHolders[index - FIRST]?.status);
 					return (
 						<div
-							className={cl`${styles.section} ${!isStakeholderActive ? styles.faded_text : ''}`}
+							// className={cl`${index < stakeHolders.length - FIRST
+							// 	? styles.section : styles.lastContainer}
+							//  ${!isStakeholderActive ? styles.faded_text : ''}`}
+							className={!isStakeholderActive
+								? cl`${styles.faded_text} ${styles.section}`
+								: cl`${styles.section}`}
 							key={item?.key}
 						>
 							<div className={styles.inner_div}>
@@ -74,7 +80,7 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 								<div className={styles.flex}>
 									<div className={styles.center_align}>
 										<div className={styles.name_text}>
-											{pascalCase(item?.name || '-')}
+											{(item?.name || '')}
 										</div>
 										<Pill
 											size="sm"
@@ -88,12 +94,13 @@ function AllStakeHolderTimeline({ timeline = [] }) {
 										</Pill>
 									</div>
 								</div>
-								{item?.email || '-'}
-								{ showTimeline && (
+								{item?.email || ''}
+								{ showTimeline && item?.remarks && (
 									<div className={styles.remark_section}>
 										<div className={styles.remark_heading}>{t('incidentManagement:remarks')}</div>
 										<div className={styles.remarks_text}>
-											{item?.remarks || '-' }
+											{item?.remarks || '' }
+
 										</div>
 									</div>
 								)}

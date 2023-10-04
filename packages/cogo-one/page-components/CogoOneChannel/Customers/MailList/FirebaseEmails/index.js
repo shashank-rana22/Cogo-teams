@@ -5,7 +5,9 @@ import {
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import ViewAttachmentsModal from '../../../../../common/ViewAttachmentsModal';
 import useListChats from '../../../../../hooks/useListChats';
+import getDownloadFiles from '../../../../../utils/getDownloadFiles';
 import LoadingState from '../../LoadingState';
 
 import Header from './Header';
@@ -24,9 +26,11 @@ function FirebaseEmails(messageProps) {
 		isBotSession = false,
 		setIsBotSession = () => {},
 		workPrefernceLoading = false,
+		mailsToBeShown = [],
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
+	const [activeAttachmentData, setActiveAttachmentData] = useState({});
 	const [searchValue, setSearchValue] = useState('');
 
 	const {
@@ -48,6 +52,7 @@ function FirebaseEmails(messageProps) {
 		listOnlyMails : true,
 		activeFolder,
 		sidFilters    : activeTab?.hiddenFilters?.sid || '',
+		mailsToBeShown,
 	});
 
 	const setActiveSubTab = (val) => {
@@ -119,6 +124,7 @@ function FirebaseEmails(messageProps) {
 													activeTab={activeTab}
 													viewType={viewType}
 													activeFolder={activeFolder}
+													setActiveAttachmentData={setActiveAttachmentData}
 												/>
 											),
 										)}
@@ -142,6 +148,7 @@ function FirebaseEmails(messageProps) {
 									activeTab={activeTab}
 									viewType={viewType}
 									activeFolder={activeFolder}
+									setActiveAttachmentData={setActiveAttachmentData}
 								/>
 							),
 						)}
@@ -149,6 +156,12 @@ function FirebaseEmails(messageProps) {
 						{loadingState?.chatsLoading && <LoadingState />}
 					</div>
 				)}
+			<ViewAttachmentsModal
+				activeAttachmentData={activeAttachmentData}
+				setActiveAttachmentData={setActiveAttachmentData}
+				urlType="urlBased"
+				handleDownload={getDownloadFiles}
+			/>
 		</div>
 	);
 }

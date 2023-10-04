@@ -9,6 +9,8 @@ import EmptyState from '../../../../../../commons/EmptyStateDocs';
 
 import styles from './styles.module.css';
 
+const LIMIT_FOR_LEGEND = 1;
+
 interface ResponsiveChartProps {
 	data?: StreamDatum[],
 	loadingData?: boolean,
@@ -43,7 +45,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 
 	const finalData = [
 		{
-			id   : 'Amount',
+			id   : `Amount (in ${currency})`,
 			data : AMOUNT_DATA,
 		},
 		{
@@ -54,7 +56,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 
 	const formatdata = showCount ? finalData : [
 		{
-			id   : 'Amount',
+			id   : `Amount (in ${currency})`,
 			data : AMOUNT_DATA,
 		},
 	];
@@ -74,13 +76,8 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 					enableSlices="x"
 					yScale={{ type: 'linear', min: 0, max: 'auto' }}
 					yFormat={(value) => formatAmount({
-						amount  : value as any,
+						amount: value as any,
 						currency,
-						options : {
-							currencyDisplay : 'code',
-							style           : 'currency',
-
-						},
 					})}
 					axisTop={null}
 					axisRight={null}
@@ -107,6 +104,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 								style           : 'currency',
 								notation        : 'compact',
 								compactDisplay  : 'short',
+								currencyWise    : true,
 							},
 						}),
 					}}
@@ -115,7 +113,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 					pointBorderColor={{ from: 'serieColor' }}
 					pointLabelYOffset={-12}
 					useMesh
-					legends={[{
+					legends={formatdata.length > LIMIT_FOR_LEGEND ? [{
 						anchor            : 'bottom-right',
 						direction         : 'column',
 						justify           : false,
@@ -133,7 +131,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 							on    : 'hover',
 							style : { itemBackground: 'rgba(0, 0, 0, .03)', itemOpacity: 1 },
 						}],
-					}]}
+					}] : []}
 				/>
 			)
 	);
