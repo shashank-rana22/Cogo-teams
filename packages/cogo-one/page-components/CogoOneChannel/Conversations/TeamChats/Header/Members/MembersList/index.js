@@ -47,29 +47,13 @@ function MembersList({
 				updateGroup={updateGroup}
 				loggedInAgentId={loggedInAgentId}
 			/>
-			<div className={styles.footer_buttons}>
-				<Button
-					size="md"
-					themeType="tertiary"
-					className={styles.button_styles}
-					onClick={() => setAddMembers(true)}
-					disabled={!hasPermissionToEdit || loading}
-				>
-					<Image
-						src={GLOBAL_CONSTANTS.image_url.groups}
-						alt="group"
-						width={22}
-						height={20}
-						className={styles.image_styles}
-					/>
-					<div className={styles.button_text}>Add People</div>
-				</Button>
-				{!is_draft && hasPermissionToEdit ? (
+			{hasPermissionToEdit ? 	(
+				<div className={styles.footer_buttons}>
 					<Button
 						size="md"
 						themeType="tertiary"
 						className={styles.button_styles}
-						onClick={() => updateGroup({ userId: loggedInUserId })}
+						onClick={() => setAddMembers(true)}
 						disabled={loading}
 					>
 						<Image
@@ -79,10 +63,28 @@ function MembersList({
 							height={20}
 							className={styles.image_styles}
 						/>
-						<div className={styles.button_text}>Leave</div>
+						<div className={styles.button_text}>Add People</div>
 					</Button>
-				) : null}
-			</div>
+					{!is_draft ? (
+						<Button
+							size="md"
+							themeType="tertiary"
+							className={styles.button_styles}
+							onClick={() => updateGroup({ userId: loggedInUserId })}
+							disabled={loading}
+						>
+							<Image
+								src={GLOBAL_CONSTANTS.image_url.groups}
+								alt="group"
+								width={22}
+								height={20}
+								className={styles.image_styles}
+							/>
+							<div className={styles.button_text}>Leave</div>
+						</Button>
+					) : null}
+				</div>
+			) : null}
 		</>
 	);
 }
