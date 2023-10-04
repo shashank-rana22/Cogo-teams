@@ -52,8 +52,8 @@ function ShipmentAuditFunction({ activeTab = '', tax = '' }) {
 	};
 
 	const rest = { onClickOutside: () => setShow(false) };
-	const columns = getJobColumns({ handleClick });
-	const columns2 = getFinancialCloseColumns({ handleFinancialTabClick, activeTab: 'financial_close', tax });
+	const columns = getJobColumns({ handleClick, tax });
+	const columns2 = getFinancialCloseColumns({ handleFinancialTabClick, tax });
 
 	useEffect(() => {
 		setPaginationFilters((prev) => ({ ...prev, page: 1 }));
@@ -131,7 +131,7 @@ function ShipmentAuditFunction({ activeTab = '', tax = '' }) {
 				activeTab === 'operational_close'
 					? (<Table columns={columns} data={list} className={styles.tablestyle} loading={loading} />)
 					: (<Table columns={columns2} data={list} className={styles.tablestyle} loading={loading} />)
-		}
+				}
 
 				{!isEmpty(list)
 					? (

@@ -5,7 +5,7 @@ import ShowOverflowingNumber from '../utils/getShowOverFlowingNumbers';
 
 import styles from './styles.module.css';
 
-const getJobColumns = ({ handleClick }) => {
+const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 	const columns = [
 		{
 			id     : 'jobId',
@@ -50,8 +50,14 @@ const getJobColumns = ({ handleClick }) => {
 				return (
 
 					<div style={{ padding: '0 30px' }} className={styles.accessor_financial}>
-						<div className={styles.fix_layout}>{ShowOverflowingNumber(row?.estimatedRevenuePreTax, 11, 'INR') }</div>
-						<RenderTableData data={row?.operationalRevenuePreTax} />
+						<div className={styles.fix_layout}>
+							{ShowOverflowingNumber(row?.estimatedRevenuePreTax, 11, 'INR') }
+						</div>
+						<RenderTableData
+							data={row?.operationalRevenuePreTax}
+							percent={tax === 'Pre' ? row?.operationalSellDeviationToEstimatedPreTax
+								: row?.operationalSellDeviationToEstimatedPostTax}
+						/>
 						{/* <div>
 							<div className={styles.fix_layout}>
 								{financial}
@@ -88,8 +94,14 @@ const getJobColumns = ({ handleClick }) => {
 				return (
 
 					<div style={{ padding: '0 30px' }} className={styles.accessor_financial}>
-						<div className={styles.fix_layout}>{ShowOverflowingNumber(row?.estimatedCostPreTax, 11, 'INR') }</div>
-						<RenderTableData data={row?.operationalCostPreTax} />
+						<div className={styles.fix_layout}>
+							{ShowOverflowingNumber(row?.estimatedCostPreTax, 11, 'INR') }
+						</div>
+						<RenderTableData
+							data={row?.operationalCostPreTax}
+							percent={tax === 'Pre' ? row?.operationalBuyDeviationToEstimatedPreTax
+								: row?.operationalBuyDeviationToEstimatedPostTax}
+						/>
 						{/* <div>
 							<div className={styles.fix_layout}>
 								{financial}
@@ -126,8 +138,14 @@ const getJobColumns = ({ handleClick }) => {
 				return (
 
 					<div style={{ padding: '0 30px' }} className={styles.accessor_financial}>
-						<div className={styles.fix_layout}>{ShowOverflowingNumber(row?.estimatedProfitabilityPreTax, 11, 'INR') }</div>
-						<RenderTableData data={row?.operationalProfitabilityPreTax} />
+						<div className={styles.fix_layout}>
+							{ShowOverflowingNumber(row?.estimatedProfitabilityPreTax, 11, 'INR') }
+						</div>
+						<RenderTableData
+							data={row?.operationalProfitabilityPreTax}
+							percent={tax === 'Pre' ? row?.operationalProfitabilityDeviationToPreTax
+								: row?.operationalProfitabilityDeviationToPostTax}
+						/>
 						{/* <div>
 							<div className={styles.fix_layout}>
 								{financial}
