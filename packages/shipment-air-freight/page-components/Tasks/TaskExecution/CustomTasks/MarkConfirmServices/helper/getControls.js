@@ -28,7 +28,7 @@ const getServiceProvider = ({ serviceType = '' }) => ({
 			account_type : 'service_provider',
 			status       : 'active',
 			kyc_status   : 'verified',
-			service      : serviceType,
+			service      : serviceType === 'subsidiary_service' ? 'air_freight' : serviceType,
 		},
 	},
 	rules: {
@@ -52,6 +52,8 @@ const getControls = ({
 	let subsidiary_service_rendered = {};
 
 	const serviceType = service_type?.split('_', SPLIT_SERVICE_TEXT)?.join('_');
+
+	console.log('serviceType', serviceType);
 
 	if (service_type === 'subsidiary_service') {
 		subsidiary_service_rendered = (service_rendered || []).find(
