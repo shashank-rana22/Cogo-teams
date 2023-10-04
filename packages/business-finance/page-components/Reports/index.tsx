@@ -53,7 +53,7 @@ function Reports() {
 	|| !value.dateRange?.startDate
 	|| !value.dateRange?.endDate
 	|| isDisabledForAccountType()
-	|| !value.activeEntity;
+	|| !value?.activeEntity;
 
 	const disable = isDateOptional ? loading : isSubmitDisabled;
 
@@ -106,8 +106,8 @@ function Reports() {
 						<div>
 							<Select
 								name="activeEntity"
-								value={value.activeEntity}
-								onChange={(e:any) => setValue((p) => ({ ...p, activeEntity: e }))}
+								value={value?.activeEntity}
+								onChange={(e:any) => setValue((prev) => ({ ...prev, activeEntity: e }))}
 								placeholder="Select Entity"
 								options={entityOptions}
 							/>
