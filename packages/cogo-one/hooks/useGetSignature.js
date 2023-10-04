@@ -4,13 +4,13 @@ import { useMemo } from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
-const getSignatureText = ({ userName, designation }) => (
+const getSignatureText = ({ userName = '', designation = '', contactNumber = '' }) => (
 	`
 	<p>
 		<p>Regards</p>
 		<p>${userName}</p>
 		<p>${designation}</p>
-		<p>${GLOBAL_CONSTANTS.mobile_number.cogoone_sales_contact_no}</p>
+		<p>${contactNumber}</p>
 	</p>
 	`
 );
@@ -20,13 +20,18 @@ function useGetSignature({ viewType = '' }) {
 
 	const designation = VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.email_signature_designation || 'CogoOne Advisor';
 
+	const contactNumber = (
+		VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.contact_number
+		|| GLOBAL_CONSTANTS.mobile_number.cogoone_sales_contact_no
+	);
+
 	const addSignature = () => {
-		const signature = getSignatureText({ userName, designation });
+		const signature = getSignatureText({ userName, designation, contactNumber });
 
 		return signature;
 	};
 
-	const signature = useMemo(addSignature, [designation, userName]);
+	const signature = useMemo(addSignature, [designation, contactNumber, userName]);
 
 	return {
 		signature,

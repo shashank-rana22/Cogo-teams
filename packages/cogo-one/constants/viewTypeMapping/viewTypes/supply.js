@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { where } from 'firebase/firestore';
 
 import {
@@ -34,6 +35,8 @@ const SUPPLY = {
 	bulk_assign_features          : ['bulk_send_templates'],
 	configurations_to_be_shown    : [],
 	shift_view_default_type       : '',
+	email_signature_designation   : 'CogoOne Supply Advisor',
+	contact_number                : GLOBAL_CONSTANTS.mobile_number.cogoone_supply_contact_no,
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts'],
 	group_agents_api_filter       : ['supply', 'supply_admin'],
 	permissions                   : {

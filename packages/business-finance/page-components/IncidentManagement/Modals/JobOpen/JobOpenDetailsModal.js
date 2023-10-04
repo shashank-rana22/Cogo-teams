@@ -3,7 +3,7 @@ import React from 'react';
 
 import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
 import useGetShipmentCostSheet from '../../hooks/useGetShipmentCostSheet';
-import allStakeHolderTimeLineData from '../../utils/formatAllStakeHolderData';
+import allStakeHolderTimeLineData from '../../utils/useFormatAllStakeHolderData';
 
 import CostSheet from './components/CostSheet';
 import Details from './components/Details';
