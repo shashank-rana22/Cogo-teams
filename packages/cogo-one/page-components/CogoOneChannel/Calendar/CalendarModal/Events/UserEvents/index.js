@@ -277,6 +277,7 @@ function UserEvents({
 				month={month}
 				handleClose={handleClose}
 				handleUpdatedState={handleUpdatedState}
+				activeTab={activeTab}
 			/>
 		</>
 	);

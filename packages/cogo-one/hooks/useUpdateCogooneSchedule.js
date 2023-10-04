@@ -31,7 +31,7 @@ const useUpdateCogooneSchedule = ({
 				params: getPayload({ value, actionStatus }),
 			});
 			handleClose();
-			getEvents({ startDate, endDate });
+			await getEvents({ startDate, endDate });
 			handleUpdatedState();
 			Toast.success('Updated Successfully!');
 		} catch (error) {

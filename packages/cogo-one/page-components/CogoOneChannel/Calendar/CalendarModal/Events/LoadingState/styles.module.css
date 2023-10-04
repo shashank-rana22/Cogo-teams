@@ -10,3 +10,9 @@
 	border: 1.5px solid #eeeeeefe;
 	border-radius: 5px;
 }
+
+.content_loader {
+	display: flex;
+	flex-direction: column;
+	margin-left: 16px;
+}

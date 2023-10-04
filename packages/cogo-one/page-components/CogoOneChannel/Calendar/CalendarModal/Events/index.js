@@ -28,7 +28,6 @@ function Events({
 		value        : {},
 		actionStatus : '',
 	});
-
 	const { start = '' } = selectedEventData || {};
 	const eventsCount = selectedEventData?.eventsList?.length || ZERO_COUNT;
 
