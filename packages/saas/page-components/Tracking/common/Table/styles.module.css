@@ -8,7 +8,6 @@
 }
 
 .horizontal_scroll {
-	max-height: 300px;
 	overflow: scroll;
 
 	@media screen and (max-width: 767px) {
