@@ -15,6 +15,9 @@ function Events({
 	addEvents = true, setAddEvents = () => {}, selectedEventData = {},
 	getEvents = () => {},
 	month = '',
+	handleUpdatedState = () => {},
+	setActiveTab = () => {},
+	activeTab = '',
 }) {
 	const [eventDetails, setEventDetails] = useState({
 		category   : 'event',
@@ -25,12 +28,20 @@ function Events({
 		value        : {},
 		actionStatus : '',
 	});
+
 	const { start = '' } = selectedEventData || {};
 	const eventsCount = selectedEventData?.eventsList?.length || ZERO_COUNT;
 
 	const date = formatDate({
 		date       : start || new Date(),
 		dateFormat : GLOBAL_CONSTANTS.formats.date['MMMM dd, YYYY'],
+		formatType : 'date',
+		separator  : ',',
+	});
+
+	const activeMonth = formatDate({
+		date       : month || new Date(),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['MMM yyyy'],
 		formatType : 'date',
 		separator  : ',',
 	});
@@ -74,7 +85,7 @@ function Events({
 			<div className={cl`${styles.container} ${!addEvents ? styles.cancel_events : styles.add_events}`}>
 				{addEvents ? (
 					<div className={styles.selectable_date}>
-						{date}
+						{activeTab === 'schedules' ? date : activeMonth}
 					</div>
 				) : (
 					<div className={styles.sedual_event}>
@@ -95,6 +106,9 @@ function Events({
 					updateEventDetails={actionModal?.value}
 					setAddEvents={setAddEvents}
 					handleClose={handleClose}
+					handleUpdatedState={handleUpdatedState}
+					setActiveTab={setActiveTab}
+					activeTab={activeTab}
 				/>
 
 				<div className={styles.footer}>

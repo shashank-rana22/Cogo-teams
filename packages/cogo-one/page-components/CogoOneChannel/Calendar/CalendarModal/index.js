@@ -1,7 +1,9 @@
 import { IcMCross } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useListCogooneSchedules from '../../../../hooks/useListCogooneSchedules';
+import getFormatedEventsData from '../../../../utils/getFormatedEventsData';
 
 import BgCalender from './BgCalender';
 import Events from './Events';
@@ -12,10 +14,44 @@ function CalendarModal({
 }) {
 	const [addEvents, setAddEvents] = useState(true);
 	const [month, setMonth] = useState(new Date());
+	const [selectedEventData, setSelectedEventData] = useState({});
+	const [myEvents, setEvents] = useState({});
+	const [activeTab, setActiveTab] = useState('schedules');
 
 	const { data = {}, getEvents = () => {}, loading = false } = useListCogooneSchedules();
+	const formatedEventsList = getFormatedEventsData({ data });
 
-	const [selectedEventData, setSelectedEventData] = useState({});
+	const handleSelectSlot = (event) => {
+		const { start, end } = event || {};
+		const events = ((formatedEventsList || []).find((item) => (item?.start?.getDate() === start?.getDate())
+		&& item?.start?.getMonth() === start?.getMonth()));
+		setEvents({ start, end });
+		setActiveTab('schedules');
+		if (isEmpty(events)) {
+			setSelectedEventData({ start, end });
+		} else {
+			setSelectedEventData(events);
+		}
+		setAddEvents(true);
+	};
+
+	const handleEventClick = (event, e) => {
+		const { start, end } = event || {};
+		setEvents({ start, end });
+		setActiveTab('schedules');
+		setSelectedEventData((formatedEventsList || []).find((item) => (item?.start?.getDate() === start?.getDate())
+		&& item?.start?.getMonth() === start?.getMonth()));
+		e.preventDefault();
+		setAddEvents(true);
+	};
+
+	const handleUpdatedState = () => {
+		if (!loading) {
+			const { start } = myEvents;
+			setSelectedEventData((formatedEventsList || []).find((item) => (item?.start?.getDate() === start?.getDate())
+		&& item?.start?.getMonth() === start?.getMonth()));
+		}
+	};
 
 	return (
 		<div className={styles.main_container}>
@@ -30,6 +66,9 @@ function CalendarModal({
 						selectedEventData={selectedEventData}
 						month={month}
 						getEvents={getEvents}
+						handleUpdatedState={handleUpdatedState}
+						setActiveTab={setActiveTab}
+						activeTab={activeTab}
 					/>
 				</div>
 				<div className={styles.calendar}>
@@ -39,9 +78,12 @@ function CalendarModal({
 							setAddEvents={setAddEvents}
 							month={month}
 							setMonth={setMonth}
-							eventsData={data}
 							getEvents={getEvents}
 							loading={loading}
+							handleSelectSlot={handleSelectSlot}
+							handleEventClick={handleEventClick}
+							myEvents={myEvents}
+							formatedEventsList={formatedEventsList}
 						/>
 					</div>
 				</div>
