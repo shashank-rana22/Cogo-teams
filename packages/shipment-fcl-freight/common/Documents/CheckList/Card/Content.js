@@ -35,11 +35,11 @@ function Content({
 	handleView = () => {},
 	primary_service = {},
 	receivedViaEmail = false,
-	showUploadText = false,
-	canEditDocuments = true,
-	setShowDoc = () => {},
-	setShowApproved = () => {},
-	docType = '',
+	// showUploadText = false,
+	// canEditDocuments = true,
+	// setShowDoc = () => {},
+	// setShowApproved = () => {},
+	// docType = '',
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
 	bl_details = [],
@@ -68,33 +68,33 @@ function Content({
 
 	const isBlDocVisiblityAllowed = document_type === 'bill_of_lading' && isEmpty(document_url);
 
-	function GetUploadButton() {
-		if (showUploadText.length && canEditDocuments) {
-			return (
-				<Button
-					themeType="link"
-					className="primary md text"
-					onClick={() => (
-						receivedViaEmail
-							? setShowApproved({
-								...item,
-								document_type   : docType,
-								document_url    : uploadedItem?.file_url,
-								mail_id         : uploadedItem?.id,
-								organization_id : shipment_data?.importer_exporter_id,
-								type            : 'task',
-							})
-							: setShowDoc({
-								...item,
-								document_type: docType,
-							}))}
-				>
-					{receivedViaEmail ? 'Approve Document' : showUploadText}
-				</Button>
-			);
-		}
-		return null;
-	}
+	// function GetUploadButton() {
+	// 	if (showUploadText.length && canEditDocuments) {
+	// 		return (
+	// 			<Button
+	// 				themeType="link"
+	// 				className="primary md text"
+	// 				onClick={() => (
+	// 					receivedViaEmail
+	// 						? setShowApproved({
+	// 							...item,
+	// 							document_type   : docType,
+	// 							document_url    : uploadedItem?.file_url,
+	// 							mail_id         : uploadedItem?.id,
+	// 							organization_id : shipment_data?.importer_exporter_id,
+	// 							type            : 'task',
+	// 						})
+	// 						: setShowDoc({
+	// 							...item,
+	// 							document_type: docType,
+	// 						}))}
+	// 			>
+	// 				{receivedViaEmail ? 'Approve Document' : showUploadText}
+	// 			</Button>
+	// 		);
+	// 	}
+	// 	return null;
+	// }
 
 	const SI_REVIEW_CONDITION = document_type === 'si' && state === 'document_accepted';
 
@@ -214,7 +214,7 @@ function Content({
 							) }
 
 					</div>
-				) : <GetUploadButton />}
+				) : null}
 
 			</div>
 

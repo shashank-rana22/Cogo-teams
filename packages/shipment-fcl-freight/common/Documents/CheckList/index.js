@@ -8,9 +8,9 @@ function CheckList({
 	taskList = [],
 	emailDocs = [],
 	completedDocs = [],
-	setShowDoc = () => {},
-	setShowApproved = () => {},
-	canEditDocuments = true,
+	// setShowDoc = () => {},
+	// setShowApproved = () => {},
+	// canEditDocuments = true,
 	showIgmDocs = false,
 	shipmentDocumentRefetch = () => {},
 	activeStakeholder = '',
@@ -27,9 +27,9 @@ function CheckList({
 				emailDocs={emailDocs}
 				shipment_data={shipment_data}
 				primary_service={primary_service}
-				setShowDoc={setShowDoc}
-				setShowApproved={setShowApproved}
-				canEditDocuments={canEditDocuments}
+				// setShowDoc={setShowDoc}
+				// setShowApproved={setShowApproved}
+				// canEditDocuments={canEditDocuments}
 				showIgmDocs={showIgmDocs}
 				shipmentDocumentRefetch={shipmentDocumentRefetch}
 				activeStakeholder={activeStakeholder}
