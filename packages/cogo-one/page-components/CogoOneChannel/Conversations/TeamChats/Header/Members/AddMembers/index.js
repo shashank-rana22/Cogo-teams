@@ -25,9 +25,12 @@ function AddMembers({
 	const updateGroup = () => {
 		if (isDraft) {
 			const modifiedUserData = selectedMembersData?.userIdsData?.map((eachUser) => ({
-				id       : eachUser?.agent_id,
-				name     : eachUser?.name,
-				is_admin : false,
+				id              : eachUser?.agent_id || null,
+				name            : eachUser?.name || null,
+				is_admin        : false,
+				partner         : eachUser?.partner || null,
+				agent_data      : eachUser?.agent_data || null,
+				office_location : eachUser?.partner?.office_location || null,
 			})) || [];
 
 			updateDraftLocalCogooneGroup(

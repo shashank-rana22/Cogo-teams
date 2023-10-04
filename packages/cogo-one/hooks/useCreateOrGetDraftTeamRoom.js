@@ -109,9 +109,15 @@ function useCreateOrGetDraftTeamRoom({
 	setActiveTab = () => {},
 	setShowGroupError = () => {},
 }) {
-	const { loggedInAgendId, loggedInAgentName } = useSelector(({ profile }) => ({
+	const { loggedInAgendId, loggedInAgentName, agentData } = useSelector(({ profile }) => ({
 		loggedInAgendId   : profile.user.id,
 		loggedInAgentName : profile.user.name,
+		agentData         : {
+			id            : profile?.user?.id,
+			email         : profile?.user?.email,
+			mobile_number : profile?.user?.mobile_number,
+			name          : profile.user.name,
+		},
 	}));
 
 	const [loading, setLoading] = useState(false);
@@ -132,9 +138,10 @@ function useCreateOrGetDraftTeamRoom({
 		setLoading(true);
 
 		const modifiedUserIdsData = [...userIdsData, {
-			id       : loggedInAgendId,
-			name     : loggedInAgentName,
-			is_admin : true,
+			id         : loggedInAgendId,
+			name       : loggedInAgentName,
+			is_admin   : true,
+			agent_data : agentData,
 		}];
 		const modifiedUserIds = [loggedInAgendId, ...userIds];
 		const groupMembersHashString = await hashFunction({ groupMemberIds: modifiedUserIds });

@@ -1,109 +1,77 @@
 import { Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcCFtick, IcMTimer } from '@cogoport/icons-react';
-import { format, startCase } from '@cogoport/utils';
+import { IcMLocation } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import React from 'react';
-
-import { USER_CURRENT_STATUS_WITH_ICON_MAPPING } from '../../../../../constants/teamStatusMapping';
-import { profileBasicDetailsMapping } from '../../../../../utils/getProfileBasicDetailsMapping';
 
 import styles from './styles.module.css';
 
 function SingleMemberView({
-	groupMembersData = [],
-	status = '',
-	isDraft = false,
+	userData = {},
 }) {
-	console.log('isDraft', isDraft);
-	const otherActiveMemberData = groupMembersData.find(
-		(item) => !item?.is_admin || item.access_type === 'user',
-	);
-	const loginUserData = groupMembersData.find((item) => item.is_admin || item.access_type === 'owner');
-
-	const { name = '', partner = {} } = otherActiveMemberData || {};
-	const { name: userName = '', roles_data = [], department = '' } = partner || {};
-	const { name: roleName = '' } = roles_data?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-
-	const { name: adminName = '', partner : partnerData = '' } = loginUserData || {};
-	const { name: loggedAdminName = '' } = partnerData || {};
-
-	const statusIcon = USER_CURRENT_STATUS_WITH_ICON_MAPPING[status]?.icon || null;
-	const userCurrentStatus = USER_CURRENT_STATUS_WITH_ICON_MAPPING[status]?.status || null;
-
-	const PROFILE_BASIC_DETAILS_MAPPING = profileBasicDetailsMapping({ partner });
+	const {
+		name = '',
+		email = '',
+		location = '',
+		designation = '',
+	} = userData || {};
 
 	return (
-		<div>
-			<div className={styles.section_one}>
+		<div className={styles.container}>
+			<div className={styles.heading}>
+				Profile
+			</div>
+			<div className={styles.profile_user_details}>
 				<Avatar
-					personName={adminName || loggedAdminName}
-					alt="name"
-					size="38px"
 					className={styles.styled_avatar}
+					personName={name}
 				/>
-				<IcCFtick className={styles.ic_tick_icon} />
+				<div className={styles.details_wrapper}>
+					<div className={styles.user_name}>{name}</div>
+					<div className={styles.email_styles}>{email || '-'}</div>
+					<div className={styles.email_styles}>{designation || '-'}</div>
+				</div>
 			</div>
-
-			<div className={styles.profile_title}>Profile</div>
-			<div className={styles.user_profile_info}>
-				<div className={styles.section_third_left_avtar}>
-					<Avatar
-						personName={name || userName}
-						alt="name"
-						size="48px"
-						className={styles.styled_avatar}
+			<div className={styles.contact_information}>
+				<div className={styles.flex_contacts}>
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.organization}
+						alt="organization"
+						width={20}
+						height={20}
 					/>
-					<IcCFtick className={styles.section_third_left_ic_tick_icon} />
+					<div className={styles.data_wrapper}>
+						<div className={styles.contact_heading}>
+							Company
+						</div>
+						<div className={styles.contact_value}>
+							Cogoport
+						</div>
+					</div>
+					<div className={styles.data_wrapper}>
+						<div className={styles.contact_heading}>
+							Designation
+						</div>
+						<div className={styles.contact_value}>
+							{designation}
+						</div>
+					</div>
 				</div>
-				<div>
-					<div className={styles.profile_title}>{startCase(name || userName)}</div>
-					<div className={styles.profile_key_details}>{roleName || '-'}</div>
-					{department ? <div className={styles.profile_key_details}>{department}</div> : null}
+				<div className={styles.location}>
+					<IcMLocation
+						width={20}
+						height={20}
+					/>
+					<div className={styles.data_wrapper}>
+						<div className={styles.contact_heading}>
+							Location
+						</div>
+						<div className={styles.contact_value}>
+							{location || '-'}
+						</div>
+					</div>
 				</div>
 			</div>
-
-			{userCurrentStatus ? (
-				<div className={styles.user_profile_status}>
-					<div className={styles.status_with_time_container}>
-						<div className={styles.row_direction}>
-							{statusIcon || null}
-							<span className={styles.user_current_status}>{userCurrentStatus}</span>
-						</div>
-						<div className={styles.row_direction}>
-							<div className={styles.dot_notation} />
-							<div className={styles.user_until_free}>
-								Free until
-								{format(new Date(), GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}
-							</div>
-						</div>
-					</div>
-					<div className={styles.timezone}>
-						<IcMTimer width={16} height={16} className={styles.timer_icon} />
-						{format(new Date(), GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}
-						-
-						<span>Same time zone as you</span>
-					</div>
-				</div>
-			) : null}
-
-			{(PROFILE_BASIC_DETAILS_MAPPING || []).map((item) => {
-				const { title = '', icon = '', subTitle = '', subTextColor = '' } = item || {};
-
-				return (
-					<div key={item?.name} className={styles.profile_basic_details_notes}>
-						{icon}
-						<div>
-							<div className={styles.profile_basic_details_note_title}>{title}</div>
-							<div
-								className={styles.profile_basic_details_note_sub_title}
-								style={{ color: subTextColor }}
-							>
-								{subTitle || '-'}
-							</div>
-						</div>
-					</div>
-				);
-			})}
 		</div>
 	);
 }

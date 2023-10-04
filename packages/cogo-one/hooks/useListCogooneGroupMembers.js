@@ -14,6 +14,7 @@ const listFormatter = ({ res = {} }) => res?.data?.list || [];
 
 const useListCogooneGroupMembers = ({ globalGroupId = '' }) => {
 	const [membersList, setMembersList] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	const [, trigger] = useRequest({
 		url    : '/list_cogoone_group_members',
@@ -27,6 +28,7 @@ const useListCogooneGroupMembers = ({ globalGroupId = '' }) => {
 			});
 			const list = listFormatter({ res });
 			setMembersList(list);
+			setLoading(false);
 		} catch (e) {
 			setMembersList([]);
 		}
@@ -37,13 +39,14 @@ const useListCogooneGroupMembers = ({ globalGroupId = '' }) => {
 			setMembersList([]);
 			return;
 		}
-
+		setLoading(true);
 		listCogooneGroupMembers();
 	}, [globalGroupId, listCogooneGroupMembers]);
 
 	return {
 		listCogooneGroupMembers,
 		membersList,
+		groupMembersLoading: loading,
 	};
 };
 export default useListCogooneGroupMembers;

@@ -31,6 +31,7 @@ function ProfileDetails({
 	chatsConfig = {},
 	membersList = [],
 	teamsSideBarCheck = false,
+	groupMembersLoading = false,
 }) {
 	const customerId = (FIREBASE_TABS.includes(activeTab) ? activeMessageCard : activeVoiceCard)?.id;
 
@@ -38,7 +39,7 @@ function ProfileDetails({
 		? formattedMessageData?.user_id : activeVoiceCard?.user_data?.id;
 
 	const [activeSelect, setActiveSelect] = useState(
-		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.default_side_nav || 'profile',
+		activeTab === 'teams' ? 'teams_profile' : VIEW_TYPE_GLOBAL_MAPPING[viewType]?.default_side_nav || 'profile',
 	);
 
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
@@ -113,6 +114,7 @@ function ProfileDetails({
 							organizationData={organizationData}
 							membersList={membersList}
 							chatsConfig={chatsConfig}
+							groupMembersLoading={groupMembersLoading}
 						/>
 					)}
 				</div>

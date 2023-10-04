@@ -86,7 +86,7 @@ function RightSideNav({
 				};
 			});
 		} else if (activeTab === 'teams') {
-			setActiveSelect((prev) => ((prev === val) ? '' : val));
+			setActiveSelect((prev) => (((prev === val) && expandSideBar) ? '' : val));
 			setActiveTab((prev) => ({
 				...prev,
 				expandSideBar: !prev?.expandSideBar,

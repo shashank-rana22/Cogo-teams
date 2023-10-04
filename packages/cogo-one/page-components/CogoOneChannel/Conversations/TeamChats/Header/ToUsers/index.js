@@ -31,9 +31,11 @@ function ToUser({
 	const handleSave = () => {
 		const { userIds = [], userData = [] } = users || {};
 		const modifiedUserData = userData?.map((eachUser) => ({
-			id       : eachUser?.agent_id,
-			name     : eachUser?.name,
-			is_admin : false,
+			id              : eachUser?.agent_id,
+			name            : eachUser?.name,
+			is_admin        : false,
+			agent_data      : eachUser?.agent_data || null,
+			office_location : eachUser?.partner?.office_location || null,
 		})) || [];
 
 		createOrGetDraftTeamRoom({

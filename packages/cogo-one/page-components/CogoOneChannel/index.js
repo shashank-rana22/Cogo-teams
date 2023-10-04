@@ -81,7 +81,7 @@ function CogoOne() {
 
 	const {
 		listCogooneGroupMembers = () => {},
-		membersList = [],
+		membersList = [], groupMembersLoading,
 	} = useListCogooneGroupMembers({ globalGroupId: group_id });
 
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
@@ -252,6 +252,7 @@ function CogoOne() {
 										chatsConfig={activeTab}
 										membersList={membersList}
 										teamsSideBarCheck={teamsSideBarCheck}
+										groupMembersLoading={groupMembersLoading}
 									/>
 									{(hasNoFireBaseRoom && !user_id && !lead_user_id)
 									&& <div className={styles.overlay_div} />}
