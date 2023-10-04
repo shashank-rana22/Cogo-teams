@@ -103,8 +103,6 @@ function ShipmentCapacities(props, ref) {
 						const releaseTriggerOptions = [...getReleaseTriggerOptions({ service }),
 							DEFAULT_RELEASE_TRIGGER_OPTION];
 
-						console.log(releaseTriggerOptions, 'hello8');
-
 						return (
 							<div className={styles.service_item} key={service.value}>
 

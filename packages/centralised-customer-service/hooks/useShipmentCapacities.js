@@ -13,7 +13,7 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 		createShipmentCapacities,
 	} = useCreateShipmentCapacities({ data, setActiveItem, source });
 
-	const { control, formState: { errors }, handleSubmit, setValue, getValues, watch, unregister } = useForm();
+	const { control, formState: { errors }, handleSubmit, setValue, getValues, unregister } = useForm();
 
 	const handleReset = useCallback(() => {
 		const registeredFieldNames = Object.keys(getValues());
@@ -68,7 +68,6 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 	return {
 		control,
 		errors,
-		watch,
 		handleSubmit,
 		handleReset,
 		createShipmentLoading,

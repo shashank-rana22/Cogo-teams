@@ -25,7 +25,7 @@ function SelectController(props) {
 						}
 						onChange(val, obj);
 					}}
-					value={newValue || value}
+					value={newValue}
 					onBlur={onBlur}
 					data-test-value={value}
 				/>
