@@ -7,7 +7,7 @@ export const dateFormatter = (date) => {
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
 		formatType : 'dateTime',
-		separator  : ' ',
+		separator  : 'T',
 	};
 
 	const selectFromDate = formatDate({ date: date.startDate, ...formatOptions });

@@ -6,10 +6,6 @@ export const getTaxLabels = (entityCode = '') => [
 		valueKey : 'registrationNumber',
 	},
 	{
-		label    : ENTITY_FEATURE_MAPPING[entityCode]?.labels?.sage_label,
-		valueKey : 'sageId',
-	},
-	{
 		label           : 'Company Type',
 		valueKey        : 'companyType',
 		defaultValueKey : '-',
@@ -124,14 +120,9 @@ export const SORTBY_OPTION = [
 		name  : 'openInvoiceNotDueLedgerAmount',
 	},
 	{
-		label : '1-30 Days',
+		label : '0-30 Days',
 		value : 'openInvoiceThirtyLedgerAmount',
 		name  : 'openInvoiceThirtyLedgerAmount',
-	},
-	{
-		label : '31-45 Days',
-		value : 'openInvoiceFortyFiveLedgerAmount',
-		name  : 'openInvoiceFortyFiveLedgerAmount',
 	},
 	{
 		label : '31-60 Days',
@@ -149,9 +140,14 @@ export const SORTBY_OPTION = [
 		name  : 'openInvoiceOneEightyLedgerAmount',
 	},
 	{
-		label : '181+ Days',
-		value : 'openInvoiceOneEightyPlusLedgerAmount',
-		name  : 'openInvoiceOneEightyPlusLedgerAmount',
+		label : '181-365 Days',
+		value : 'openInvoiceThreeSixtyFiveLedgerAmount',
+		name  : 'openInvoiceThreeSixtyFiveLedgerAmount',
+	},
+	{
+		label : '365+ Days',
+		value : 'openInvoiceThreeSixtyFivePlusLedgerAmount',
+		name  : 'openInvoiceThreeSixtyFivePlusLedgerAmount',
 	},
 	{
 		label : 'Total Outstanding Amount',
@@ -211,27 +207,27 @@ export const StatsKeyMapping = [
 	},
 	{
 		label     : '31-60 DAYS',
-		valueKey  : 'fortyFive',
-		textColor : '#cb6464',
-	},
-	{
-		label     : '61-90 DAYS',
 		valueKey  : 'sixty',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '91-180 DAYS',
+		label     : '61-90 DAYS',
 		valueKey  : 'ninety',
 		textColor : '#cb6464',
 	},
 	{
-		label     : '181-365 DAYS',
+		label     : '91-180 DAYS',
 		valueKey  : 'oneEighty',
 		textColor : '#cb6464',
 	},
 	{
+		label     : '181-365 DAYS',
+		valueKey  : 'threeSixtyFive',
+		textColor : '#cb6464',
+	},
+	{
 		label     : '365+ DAYS',
-		valueKey  : 'oneEightyPlus',
+		valueKey  : 'threeSixtyFivePlus',
 		textColor : '#cb6464',
 	},
 ];
@@ -248,12 +244,7 @@ export const StatsKeyMappingPayment = [
 		textColor : '#cb6464',
 	},
 	{
-		label     : '31-45 DAYS',
-		valueKey  : 'fortyFive',
-		textColor : '#cb6464',
-	},
-	{
-		label     : '46-60 DAYS',
+		label     : '31-60 DAYS',
 		valueKey  : 'sixty',
 		textColor : '#cb6464',
 	},
@@ -268,8 +259,13 @@ export const StatsKeyMappingPayment = [
 		textColor : '#cb6464',
 	},
 	{
-		label     : '180+ DAYS',
-		valueKey  : 'oneEightyPlus',
+		label     : '181-365 DAYS',
+		valueKey  : 'threeSixtyFive',
+		textColor : '#cb6464',
+	},
+	{
+		label     : '365+ DAYS',
+		valueKey  : 'threeSixtyFivePlus',
 		textColor : '#cb6464',
 	},
 ];

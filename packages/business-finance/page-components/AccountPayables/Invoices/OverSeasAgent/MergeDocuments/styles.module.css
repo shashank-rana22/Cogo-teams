@@ -85,7 +85,7 @@
 
 .merge_btn_container {
 	display: flex;
-	justify-content: end;
+	justify-content: flex-end;
 	padding: 16px 0;
 }
 
@@ -107,6 +107,6 @@
 	margin-top: 10px;
 }
 
-.delete {
+.trash_invoice {
 	cursor: pointer;
 }

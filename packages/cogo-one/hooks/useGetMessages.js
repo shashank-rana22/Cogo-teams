@@ -7,17 +7,26 @@ import {
 	limit,
 	where,
 	getDocs,
+	doc,
+	deleteDoc,
+	collection,
 } from 'firebase/firestore';
 import { useState, useEffect, useRef } from 'react';
 
+import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 import useListCogooneTimeline from './useListCogooneTimeline';
 
 const PAGE_LIMIT = 10;
 const LAST_INDEX_FROM_END = 1;
+const ZERO_MESSAGES = 0;
+const QUERY_LIMIT = 1;
 
-const useGetMessages = ({ activeChatCollection, id, viewType }) => {
+const useGetMessages = ({
+	activeChatCollection, id, viewType, firestore = {},
+	channel_type = '', setActiveTab = () => {},
+}) => {
 	const [messagesState, setMessagesState] = useState({});
 
 	const firstMessages = useRef(null);
@@ -61,7 +70,14 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 				let prevMessageData = {};
 				querySnapshot.forEach((mes) => {
 					const timeStamp = mes.data()?.created_at;
-					prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
+
+					prevMessageData = {
+						...prevMessageData,
+						[timeStamp]: {
+							...(mes.data() || {}),
+							id: mes.id,
+						},
+					};
 				});
 
 				getCogooneTimeline({
@@ -102,9 +118,17 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 			|| GLOBAL_CONSTANTS.zeroth_index) - LAST_INDEX_FROM_END]?.data()?.created_at;
 		const islastPage = prevMessages?.length < PAGE_LIMIT;
 		let prevMessageData = {};
+
 		prevMessages.forEach((mes) => {
 			const timeStamp = mes.data()?.created_at;
-			prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
+
+			prevMessageData = {
+				...prevMessageData,
+				[timeStamp]: {
+					...(mes.data() || {}),
+					id: mes.id,
+				},
+			};
 		});
 
 		getCogooneTimeline({
@@ -115,6 +139,66 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 			islastPage,
 		});
 		setLoadingPrevMessages(false);
+	};
+
+	const deleteMessage = async ({ timestamp = '', messageDocId = '' }) => {
+		setMessagesState((prev) => {
+			const { [id]: currentDocument, ...rest } = prev;
+
+			const { [timestamp]: del, ...restDocuments } = currentDocument?.messagesData || {};
+			return {
+				...rest,
+				[id]: {
+					...currentDocument,
+					messagesData: {
+						...restDocuments,
+					},
+				},
+			};
+		});
+
+		try {
+			const messageDoc = doc(
+				firestore,
+				`${FIRESTORE_PATH[channel_type]}/${id}/messages/${messageDocId}`,
+			);
+
+			deleteDoc(messageDoc);
+
+			const messagesCollection = collection(
+				firestore,
+				`${FIRESTORE_PATH[channel_type]}/${id}/messages`,
+			);
+
+			const messagesCollectionQuery = query(
+				messagesCollection,
+				limit(QUERY_LIMIT),
+			);
+
+			const messagesDocs = await getDocs(messagesCollectionQuery);
+
+			const hasMessages = messagesDocs?.size > ZERO_MESSAGES;
+
+			if (hasMessages) {
+				return;
+			}
+
+			const roomDoc = doc(
+				firestore,
+				`${FIRESTORE_PATH[channel_type]}/${id}`,
+			);
+
+			setActiveTab({
+				tab               : 'firebase_emails',
+				subTab            : 'all',
+				hasNoFireBaseRoom : false,
+				expandSideBar     : false,
+				data              : {},
+			});
+			deleteDoc(roomDoc);
+		} catch (e) {
+			console.error('e', e);
+		}
 	};
 
 	useEffect(() => {
@@ -138,6 +222,8 @@ const useGetMessages = ({ activeChatCollection, id, viewType }) => {
 		firstLoadingMessages : firstLoadingMessages || firstTimeLineLoading,
 		loadingPrevMessages  : loadingPrevMessages || timeLineLoading,
 		messagesState,
+		mountSnapShot,
+		deleteMessage,
 	};
 };
 

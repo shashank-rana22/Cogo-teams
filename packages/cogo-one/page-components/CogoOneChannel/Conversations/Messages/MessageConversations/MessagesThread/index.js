@@ -50,6 +50,7 @@ function LoadPrevMessages({
 		</div>
 	);
 }
+
 function MessagesThread(
 	{
 		loadingPrevMessages = false,
@@ -68,6 +69,7 @@ function MessagesThread(
 		hasPermissionToEdit = false,
 		mailProps = {},
 		latestMessagesAtTop = false,
+		deleteMessage = () => {},
 	},
 	messageRef,
 ) {
@@ -91,6 +93,8 @@ function MessagesThread(
 	const messagesArray = latestMessagesAtTop
 		? [...(messagesData || [])].reverse()
 		: messagesData;
+
+	const isTheFirstMessageId = messagesArray.find((item) => ['sent', 'received'].includes(item.conversation_type));
 
 	useEffect(() => {
 		if (
@@ -151,6 +155,8 @@ function MessagesThread(
 						viewType={viewType}
 						hasPermissionToEdit={hasPermissionToEdit}
 						mailProps={mailProps}
+						deleteMessage={deleteMessage}
+						isTheFirstMessageId={isTheFirstMessageId?.id}
 					/>
 				);
 			})}

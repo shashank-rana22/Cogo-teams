@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { upperCase } from '@cogoport/utils';
+import { isEmpty, upperCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
@@ -13,6 +13,7 @@ import useGetIncidentData from './common/hooks/useGetIncidentData';
 import { IncidentDataInterface } from './common/interface';
 import { getTabs } from './Constants/getTabs';
 import Controller from './Controller';
+import CommonDetailsModal from './Modals';
 import styles from './styles.module.css';
 import TabComponent from './TabComponent';
 
@@ -36,7 +37,7 @@ function IncidentManagement() {
 
 	const { t } = useTranslation(['incidentManagement']);
 
-	const { profile }:Profile = useSelector((state) => state);
+	const { profile }: Profile = useSelector((state) => state);
 
 	const { partner } = profile || {};
 
@@ -47,6 +48,8 @@ function IncidentManagement() {
 	const { loading, entityData = [] } = useListCogoEntities();
 
 	const [entityCode, setEntityCode] = useState(entity);
+
+	const [detailsModal, setDetailsModal] = useState({});
 
 	const entityDataCount = entityData.length;
 	const tabsMappingData = getTabs({ t });
@@ -60,8 +63,9 @@ function IncidentManagement() {
 			value : listEntityCode,
 		};
 	});
-	const [activeTab, setActiveTab] = useState<string>(
+	const [activeTab, setActiveTab] = useState(
 		query.activeTab || tabsMappingData[GLOBAL_CONSTANTS.zeroth_index].key,
+
 	);
 	const {
 		incidentData,
@@ -88,6 +92,8 @@ function IncidentManagement() {
 			isSettlementExecutive,
 			incidentLoading,
 			getIncidentData,
+			detailsModal,
+			setDetailsModal,
 		},
 		approved: {
 			activeTab,
@@ -97,6 +103,8 @@ function IncidentManagement() {
 			isSettlementExecutive,
 			incidentLoading,
 			getIncidentData,
+			detailsModal,
+			setDetailsModal,
 		},
 		rejected: {
 			activeTab,
@@ -106,6 +114,8 @@ function IncidentManagement() {
 			isSettlementExecutive,
 			incidentLoading,
 			getIncidentData,
+			detailsModal,
+			setDetailsModal,
 		},
 	};
 	const ActiveTabComponent = tabsKeyComponentMapping[activeTab] || null;
@@ -139,47 +149,56 @@ function IncidentManagement() {
 
 	return (
 		<div>
-			<div className={styles.header}>
-				<div className={styles.header_style}>{t('incidentManagement:incident_management')}</div>
-				{loading ? (
-					<Placeholder width="200px" height="30px" />
-				) : (
-					<div className={styles.input}>
-						<Select
-							name="business_name"
-							onChange={(entityVal: string) => setEntityCode(entityVal)}
-							value={entityCode}
-							options={entityOptions}
-							placeholder={t('incidentManagement:select_entity') || ''}
-							size="sm"
-							disabled={entityDataCount <= 1}
-						/>
-					</div>
-				)}
+			<div className={isEmpty(detailsModal) ? styles.nodisplay : null}>
+				<CommonDetailsModal
+					setDetailsModal={setDetailsModal as any}
+					detailsModal={detailsModal}
+					refetch={getIncidentData}
+				/>
 			</div>
-			<div className={styles.tabs_container}>
-				<Tabs
-					activeTab={activeTab}
-					onChange={(tab: string) => onChange(tab)}
-					fullWidth
-					themeType="primary"
-				>
-					{tabsMappingData.map(({ key = '', label = '' }) => (
-						<TabPanel
-							name={key}
-							key={key}
-							title={label}
-							{...statProps(key)}
-						>
-							{ActiveTabComponent && (
-								<ActiveTabComponent
-									key={key}
-									{...tabComponentProps[key]}
-								/>
-							)}
-						</TabPanel>
-					))}
-				</Tabs>
+			<div className={!isEmpty(detailsModal) ? styles.nodisplay : null}>
+				<div className={styles.header}>
+					<div className={styles.header_style}>{t('incidentManagement:incident_management')}</div>
+					{loading ? (
+						<Placeholder width="200px" height="30px" />
+					) : (
+						<div className={styles.input}>
+							<Select
+								name="business_name"
+								onChange={(entityVal: string) => setEntityCode(entityVal)}
+								value={entityCode}
+								options={entityOptions}
+								placeholder={t('incidentManagement:select_entity') || ''}
+								size="sm"
+								disabled={entityDataCount <= 1}
+							/>
+						</div>
+					)}
+				</div>
+				<div className={styles.tabs_container}>
+					<Tabs
+						activeTab={activeTab}
+						onChange={(tab: string) => onChange(tab)}
+						fullWidth
+						themeType="primary"
+					>
+						{tabsMappingData.map(({ key = '', label = '' }) => (
+							<TabPanel
+								name={key}
+								key={key}
+								title={label}
+								{...statProps(key)}
+							>
+								{ActiveTabComponent && (
+									<ActiveTabComponent
+										key={key}
+										{...tabComponentProps[key]}
+									/>
+								)}
+							</TabPanel>
+						))}
+					</Tabs>
+				</div>
 			</div>
 		</div>
 	);

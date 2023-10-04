@@ -2,7 +2,6 @@ import { Input } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import React from 'react';
 
-import Filter from '../../../../commons/Filters/index.tsx';
 import List from '../../../../commons/List/index.tsx';
 import { RenderAction } from '../../../Invoices/InvoiceTable/RenderFunctions/RenderAction';
 import { RenderInvoiceDates } from '../../../Invoices/InvoiceTable/RenderFunctions/RenderInvoiceDates';
@@ -15,20 +14,6 @@ import styles from './styles.module.css';
 
 const FIRST_PAGE = 1;
 const DEFAULT_FILTER_LEN = 4;
-
-export const invoiceFilters = [
-	{
-		name        : 'invoiceView',
-		span        : 1,
-		type        : 'select',
-		placeholder : 'Invoice View',
-		options     : [
-			{ label: 'All', value: 'all' },
-			{ label: 'Migrated', value: 'migrated' },
-			{ label: 'COE Accepted', value: 'coe_accepted' },
-		],
-	},
-];
 
 function Invoices({
 	billsData = {},
@@ -58,7 +43,6 @@ function Invoices({
 
 			<div className={styles.filters}>
 				<div className={styles.filtercontainer}>
-					<Filter controls={invoiceFilters} filters={billsFilters} setFilters={setBillsFilters} />
 					<FilterModal filters={billsFilters} setFilters={setBillsFilters} filterlen={DEFAULT_FILTER_LEN} />
 				</div>
 				<div className={styles.search_filter}>

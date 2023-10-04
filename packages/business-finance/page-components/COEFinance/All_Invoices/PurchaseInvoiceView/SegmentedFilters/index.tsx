@@ -1,5 +1,5 @@
 import { Input } from '@cogoport/components';
-import { IcMSearchdark } from '@cogoport/icons-react';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import React from 'react';
 
 import Filter from '../../../../commons/Filters';
@@ -16,8 +16,8 @@ interface SegmentFilterProps {
 	setSearchValue: any;
 	searchValue: string;
 	currentTab: string;
-	statsData?:object
-	tab:string;
+	statsData?: object;
+	tab: string;
 	setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
 	setTab: React.Dispatch<React.SetStateAction<string>>;
 	filters: GenericObject;
@@ -47,11 +47,9 @@ function SegmentedFilters({
 						background="#FFFAEB"
 					/>
 				</div>
-
 			</div>
 			<div className={styled.main}>
 				<div className={styled.segment}>
-
 					<div className={styled.filter_data_urgent}>
 						<SegmentedControl
 							options={filtersUrgentData(statsData)}
@@ -79,17 +77,17 @@ function SegmentedFilters({
 							onChange={(e: any) => setSearchValue(e)}
 							placeholder="Search by Invoice No./Shipment ID/Supplier name..."
 							suffix={(
-								<div style={{ margin: '4px', display: 'flex' }}>
-									<IcMSearchdark height={15} width={15} />
-								</div>
+								<IcMSearchlight
+									height={17}
+									width={17}
+									style={{ margin: '0 8px' }}
+								/>
 							)}
 						/>
 					</div>
 				</div>
-
 			</div>
 		</>
-
 	);
 }
 

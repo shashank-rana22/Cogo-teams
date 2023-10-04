@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMEdit, IcMAppDelete } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
 export const SEARCH_QUERY_LIMIT = 50;
@@ -13,7 +14,7 @@ export const HEADER_MAPPING = {
 
 export const MAIL_FOLDER_OPTIONS = {
 	inbox      : 'Inbox',
-	draft      : 'Drafts',
+	drafts     : 'Drafts',
 	sent_items : 'Sent Items',
 	spam       : 'Junk Email',
 };
@@ -42,6 +43,13 @@ export const DEFAULT_EMAIL_STATE = {
 	toUserEmail   : [],
 	ccrecipients  : [],
 	bccrecipients : [],
+	orgId         : '',
+	rteContent    : '',
+	customSubject : {
+		activeTab   : 'shipment',
+		serialId    : '',
+		subjectText : '',
+	},
 };
 
 export const BUTTON_MAPPING = [
@@ -76,4 +84,46 @@ export const BUTTON_MAPPING = [
 		/>,
 		key: 'forward',
 	},
+	{
+		buttonName : 'Preview',
+		icon       : <IcMEdit
+			width={20}
+			height={20}
+		/>,
+		key: 'preview',
+	},
+	{
+		buttonName : 'delete',
+		icon       : (<IcMAppDelete
+			width={20}
+			height={20}
+		/>),
+		key: 'delete',
+	},
 ];
+
+export const BUTTON_KEYS_MAPPING = {
+	draft : ['preview', 'delete'],
+	mail  : ['forward', 'reply', 'reply_all'],
+};
+
+export const SUBJECT_MAPPING = {
+	shipment: {
+		title         : 'SIDs',
+		value         : 'shipment',
+		preText       : 'SID:',
+		template_tags : ['shipments_rpa'],
+	},
+	quotation: {
+		title         : 'Quotations',
+		value         : 'quotation',
+		preText       : 'Quotation ID:',
+		template_tags : ['quotation_rpa'],
+	},
+	custom: {
+		title         : 'Others',
+		value         : 'custom',
+		preText       : '',
+		template_tags : ['custom_rpa'],
+	},
+};

@@ -74,7 +74,7 @@ function TabData({
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	return (
-		<div>
+		<div className={styles.main_container}>
 
 			<div className={styles.container}>
 

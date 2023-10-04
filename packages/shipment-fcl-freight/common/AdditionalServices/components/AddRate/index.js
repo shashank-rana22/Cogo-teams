@@ -64,6 +64,8 @@ function AddRate({
 		handleSubmit,
 		control,
 		formState: { errors },
+		watch = () => {},
+		setValue = () => {},
 	} = useForm({ defaultValues: item });
 
 	const afterAddRate = () => {
@@ -136,6 +138,8 @@ function AddRate({
 				control={control}
 				errors={errors}
 				serviceData={item}
+				watch={watch}
+				setValue={setValue}
 				source={source}
 			/>
 

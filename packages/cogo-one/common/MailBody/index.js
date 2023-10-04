@@ -1,10 +1,14 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import { getRecipientData } from '../../helpers/getRecipientData';
+import useCreateReplyAllDraft from '../../hooks/useCreateReplyAllDraft ';
+import useCreateReplyDraft from '../../hooks/useCreateReplyDraft';
 import useGetMailContent from '../../hooks/useGetMailContent';
+import useGetSignature from '../../hooks/useGetSignature';
 
 import MailActions from './mailActions';
 import MailAttachments from './MailAttachments';
@@ -26,16 +30,52 @@ const getEmailText = ({
 	return 'Expand';
 };
 
+const getEmailBorder = ({ isDraft = false, emailStatus = '' }) => {
+	if (!isDraft) {
+		return '#e0e0e0';
+	}
+
+	if (!emailStatus) {
+		return '#F9AE64';
+	}
+
+	if (emailStatus === 'delivered') {
+		return '#ABCD62';
+	}
+
+	return '#EE3425';
+};
+
+const formatEmailBody = ({ message = '' }) => message?.replace(
+	GLOBAL_CONSTANTS.regex_patterns.line_break_regex,
+	'<br>',
+);
+
 function MailBody({
 	eachMessage = {},
 	hasPermissionToEdit = false,
 	formattedData = {},
 	mailProps = {},
+	deleteMessage = () => {},
+	isTheFirstMessageId = '',
 }) {
-	const [expandedState, setExpandedState] = useState(false);
 	const { source = '' } = formattedData || {};
 
-	const { response, send_by = '', created_at = '', media_url = [] } = eachMessage || {};
+	const { viewType } = mailProps;
+
+	const {
+		response,
+		send_by = '',
+		created_at = '',
+		media_url = [],
+		is_draft: isDraft = false,
+		email_status: emailStatus = '',
+		id = '',
+	} = eachMessage || {};
+
+	const isFirstMessage = isTheFirstMessageId === id;
+
+	const [expandedState, setExpandedState] = useState(false);
 
 	const {
 		subject = '',
@@ -45,6 +85,7 @@ function MailBody({
 		to_mails: recipientData = [],
 		cc_mails: ccData = [],
 		bcc_mails: bccData = [],
+		attachments = [],
 	} = response || {};
 
 	const {
@@ -52,6 +93,11 @@ function MailBody({
 		message: bodyMessage = '',
 		loading = false,
 	} = useGetMailContent({ messageId: message_id, source, setExpandedState });
+
+	const { signature } = useGetSignature({ viewType });
+
+	const { createReplyAllDraft } = useCreateReplyAllDraft();
+	const { createReplyDraft } = useCreateReplyDraft();
 
 	const date = created_at && formatDate({
 		date       : new Date(created_at),
@@ -70,57 +116,70 @@ function MailBody({
 		formattedData,
 		eachMessage,
 		activeMailAddress : source,
-		isDraft           : false,
+		isDraft,
 		subject,
 		emailVia          : 'firebase_emails',
+		deleteMessage,
+		createReplyDraft,
+		createReplyAllDraft,
+		signature,
 	});
 
 	const handleExpandClick = () => {
-		if (!expandedState && !bodyMessage) {
+		if (!expandedState && !bodyMessage && !isDraft) {
 			getEmailBody();
 			return;
 		}
 		setExpandedState((prev) => !prev);
 	};
 
+	const emailBorderColor = getEmailBorder({ isDraft, emailStatus });
+
+	useEffect(() => {
+		if (isFirstMessage) {
+			if (!bodyMessage && !isDraft) {
+				getEmailBody();
+			}
+			setExpandedState(true);
+		}
+	}, [bodyMessage, getEmailBody, isDraft, isFirstMessage]);
+
 	return (
-		<div>
+		<div className={styles.email_container}>
 			<div className={styles.send_by_name}>
-				Replied by
+				{isDraft ? 'Created' : 'Replied'}
+				{' '}
+				by
 				{' '}
 				{send_by || 'user'}
 				,
 				<span className={styles.time_stamp}>{date || ''}</span>
 			</div>
-			<div
-				className={styles.container}
-			>
+
+			<div className={styles.container} style={{ border: `1px solid ${emailBorderColor}` }}>
 				<MailHeader
 					eachMessage={eachMessage}
 					handleClick={handleClick}
 					hasPermissionToEdit={hasPermissionToEdit}
 					handleExpandClick={handleExpandClick}
+					isDraft={isDraft}
+					emailStatus={emailStatus}
 				/>
 
-				<div className={styles.subject}>
-					Sub:
-					{' '}
-					{subject}
-				</div>
+				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
 
 				<div
 					className={cl`${styles.body} 
 					${expandedState ? styles.expanded_body : styles.collapsed_body}`}
-					dangerouslySetInnerHTML={{ __html: bodyMessage || body }}
+					dangerouslySetInnerHTML={{ __html: formatEmailBody({ message: bodyMessage || body }) }}
 				/>
 
 				{hasPermissionToEdit ? (
 					<MailActions
 						handleClick={handleClick}
+						isDraft={isDraft}
 					/>
 				) : null}
-
-				<MailAttachments mediaUrls={media_url} />
 
 				<div className={styles.extra_controls}>
 					<div

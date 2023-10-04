@@ -1,0 +1,52 @@
+{
+    "service":[
+        {
+            "label" : "FCL FREIGHT",
+            "value" : "fcl_freight"
+        },
+        {
+            "label" : "FTL FREIGHT",
+            "value" : "ftl_freight"
+        },
+        {
+            "label" : "HAULAGE FREIGHT",
+            "value" : "haulage_freight"
+        },
+        {
+            "label" : "FCL CUSTOMS",
+            "value" : "fcl_customs"
+        },
+        {
+            "label" : "AIR FREIGHT",
+            "value" : "air_freight"
+        },
+        {
+            "label" : "AIR CUSTOMS",
+            "value" : "air_customs"
+        },
+        {
+            "label" : "LCL FREIGHT",
+            "value" : "lcl_freight"
+        },
+        {
+            "label" : "LCL CUSTOMS",
+            "value" : "lcl_customs"
+        },
+        {
+            "label" : "LTL FREIGHT",
+            "value" : "ltl_freight"
+        },
+        {
+            "label" : "FCL CFS",
+            "value" : "fcl_cfs"
+        },
+        {
+            "label" : "FCL FREIGHT LOCAL",
+            "value" : "fcl_freight_local"
+        },
+        {
+            "label" : "LCL FREIGHT LOCAL",
+            "value" : "lcl_freight_local"
+        }
+    ]
+}

@@ -75,16 +75,21 @@ function BarChart({
 						:
 						{' '}
 						<tspan color="#000">
-							{formatAmount({
-								amount   : value,
-								currency : currencyType as string,
-								options  : {
-									currencyDisplay       : 'code',
-									compactDisplay        : 'short',
-									maximumFractionDigits : 2,
-									style                 : 'currency',
-								},
-							})}
+							{!dsoResponse ? (
+								formatAmount({
+									amount   : value,
+									currency : currencyType as string,
+									options  : {
+										currencyDisplay       : 'code',
+										compactDisplay        : 'short',
+										maximumFractionDigits : 2,
+										style                 : 'currency',
+										currencyWise          : true,
+									},
+								})
+							)
+								: (parseFloat(value?.toFixed(2)))}
+
 						</tspan>
 					</strong>
 				)}
@@ -102,17 +107,22 @@ function BarChart({
 								style={{ dominantBaseline: 'central', fontWeight: '600', fontSize: 11, fill: '#333' }}
 							>
 								{' '}
-								{formatAmount({
-									amount   : bar.data.value as any,
-									currency : currencyType as string,
-									options  : {
-										notation              : 'compact',
-										currencyDisplay       : 'code',
-										compactDisplay        : 'short',
-										maximumFractionDigits : 2,
-										style                 : 'currency',
-									},
-								})}
+								{
+								!dsoResponse ? (
+									formatAmount({
+										amount   : bar.data.value as any,
+										currency : currencyType as string,
+										options  : {
+											notation              : 'compact',
+											currencyDisplay       : 'code',
+											compactDisplay        : 'short',
+											maximumFractionDigits : 2,
+											style                 : 'currency',
+											currencyWise          : true,
+										},
+									})
+								) : (parseFloat(bar?.data?.value?.toFixed(2)))
+							}
 								{' '}
 								{' '}
 							</text>

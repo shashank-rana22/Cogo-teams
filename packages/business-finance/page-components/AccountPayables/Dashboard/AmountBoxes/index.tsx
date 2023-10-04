@@ -80,6 +80,7 @@ function AmountBoxes({ activeEntity }:ItemProps) {
 													notation              : 'compact',
 													compactDisplay        : 'short',
 													minimumFractionDigits : 2,
+													currencyWise          : true,
 												},
 											})}
 										</div>
@@ -94,8 +95,9 @@ function AmountBoxes({ activeEntity }:ItemProps) {
 										Open Invoices -
 										{' '}
 										{openInvoicesCount}
-										{' '}
-										| Organizations -
+									</div>
+									<div className={styles.invoices_org}>
+										Organizations -
 										{' '}
 										{organizationsCount}
 									</div>
@@ -135,7 +137,7 @@ function AmountBoxes({ activeEntity }:ItemProps) {
 															notation              : 'compact',
 															compactDisplay        : 'short',
 															minimumFractionDigits : 2,
-
+															currencyWise          : true,
 														},
 													})
 												}

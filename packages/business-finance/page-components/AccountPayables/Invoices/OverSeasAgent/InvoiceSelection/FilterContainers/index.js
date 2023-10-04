@@ -12,8 +12,6 @@ function FilterContainers({
 	filters = '',
 	setFilters = () => {},
 	goBack = () => {},
-	active = '',
-	showHeader = '',
 	setShowHeader = () => {},
 	viewSelectedInvoice = false,
 	onClear = () => {},
@@ -60,8 +58,8 @@ function FilterContainers({
 						onClear();
 						setShowHeader(true);
 					}}
+					className={styles.go_back_button}
 					style={{ width: '100px', margin: '0px 10px', height: '40px' }}
-					disabled={active !== 'invoice_selection' || showHeader}
 				>
 					Go Back
 				</Button>

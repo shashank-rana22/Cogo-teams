@@ -1,4 +1,4 @@
-import { cl, Avatar } from '@cogoport/components';
+import { cl, Avatar, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCPin, IcMPin } from '@cogoport/icons-react';
@@ -8,9 +8,11 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import updatePin from '../../../../../../helpers/updatePin';
 import getActiveCardDetails from '../../../../../../utils/getActiveCardDetails';
 
+import DisplayAttachments from './DisplayAttachments';
 import styles from './styles.module.css';
 
 const LAST_UPDATED_PIN_TIME = 0;
+const TOOLTIP_RESPONSE_TIME = 500;
 
 function MessageCardData({
 	item = {},
@@ -19,6 +21,7 @@ function MessageCardData({
 	setActiveMessage = () => {},
 	firestore = {},
 	activeFolder = '',
+	setActiveAttachmentData = () => {},
 }) {
 	const formattedData = getActiveCardDetails(item) || {};
 
@@ -34,11 +37,13 @@ function MessageCardData({
 		new_message_count = 0,
 		last_inbound_document = null,
 		last_outbound_document = null,
+		last_draft_document = null,
 	} = formattedData || {};
 
 	const reqLastDocumentMapping = {
 		sent_items : last_outbound_document,
 		inbox      : last_inbound_document,
+		drafts     : last_draft_document,
 	};
 
 	const lastMessageVar = isEmpty(reqLastDocumentMapping[activeFolder])
@@ -51,9 +56,14 @@ function MessageCardData({
 		subject = '',
 		body = '',
 		body_preview: bodyPreview = '',
+		to_mails = [],
+		sender = '',
+		media_url: mediaUrls = [],
 	} = response || {};
 
 	const isImportant = chat_tags?.includes('important') || false;
+
+	const mailToBeShown = activeFolder === 'inbox' ? [sender] : to_mails;
 
 	const checkActiveCard = activeTab?.data?.id === id;
 
@@ -88,9 +98,21 @@ function MessageCardData({
 				/>
 
 				<div className={styles.header_title}>
-					<div className={styles.user_name_title}>
-						{startCase(search_user_name) || 'User'}
-					</div>
+					<Tooltip
+						interactive
+						className={styles.tooltip_container}
+						placement="bottom"
+						delay={[TOOLTIP_RESPONSE_TIME, null]}
+						content={(
+							<div className={styles.tooltip_body}>
+								{mailToBeShown.map((mailId) => <div key={mailId}>{mailId}</div>)}
+							</div>
+						)}
+					>
+						<div className={styles.user_name_title}>
+							{startCase(search_user_name) || 'User'}
+						</div>
+					</Tooltip>
 
 					<div className={styles.header_time}>
 						{formatDate({
@@ -111,6 +133,11 @@ function MessageCardData({
 			<div
 				className={styles.message_content}
 				dangerouslySetInnerHTML={{ __html: bodyPreview || body }}
+			/>
+
+			<DisplayAttachments
+				mediaUrls={mediaUrls}
+				setActiveAttachmentData={setActiveAttachmentData}
 			/>
 
 			{isImportant ? (

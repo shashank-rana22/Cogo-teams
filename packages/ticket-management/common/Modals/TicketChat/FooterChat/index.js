@@ -9,6 +9,7 @@ import {
 	IcMPdf,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect, useRef } from 'react';
 
 import CustomFileUploader from '../../../CustomFileUploader';
@@ -31,8 +32,12 @@ function FooterChat({
 	setIsInternal = () => {},
 	handleSendComment = () => {},
 }) {
+	const { t } = useTranslation(['myTickets']);
+
 	let fileName = '';
 	const chatRef = useRef(null);
+
+	const uploadFileRef = useRef(null);
 
 	const isMessageEmpty = isEmpty(message);
 
@@ -63,7 +68,7 @@ function FooterChat({
 			{(!isEmpty(file) || uploading) && (
 				<div className={styles.file_div}>
 					{uploading ? (
-						<div className={styles.file_details}>Uploading....</div>
+						<div className={styles.file_details}>{t('myTickets:uploading')}</div>
 					) : (
 						<div className={styles.file_details}>
 							<div className={styles.file_icon_holder}>
@@ -76,7 +81,10 @@ function FooterChat({
 							<div className={styles.file_text}>{fileName}</div>
 							<IcMCross
 								className={styles.delete_icon}
-								onClick={() => setFile('')}
+								onClick={() => {
+									setFile('');
+									uploadFileRef?.current?.externalHandleDelete?.([]);
+								}}
 							/>
 						</div>
 					)}
@@ -84,14 +92,13 @@ function FooterChat({
 			)}
 			<div className={styles.is_internal}>
 				<Checkbox
-					label="Internal Activity"
+					label={t('myTickets:internal_activity')}
 					checked={isInternal}
 					disabled={!notifyCustomer}
 					onChange={() => setIsInternal((prev) => !prev)}
 				/>
 				<Tooltip
-					content="This activity is for internal users only
-					and will not be visible on the chat screen of customer"
+					content={t('myTickets:internal_activity_tooltip_content')}
 					placement="top"
 				>
 					<IcMInfo className={styles.is_internal_info} />
@@ -110,11 +117,12 @@ function FooterChat({
 						/>
 					)}
 					onChange={handleChange}
+					ref={uploadFileRef}
 				/>
 				<Textarea
 					ref={chatRef}
 					className={styles.chat_input}
-					placeholder="Type here ..."
+					placeholder={t('myTickets:chat_input_type_here')}
 					onChange={(val) => setMessage(val)}
 					onKeyDown={(e) => handleKeyPress(e)}
 					value={message}
@@ -126,7 +134,6 @@ function FooterChat({
 								className={cl`${styles.send_icon} ${isMessageEmpty ? styles.disabled_icon : ''}`}
 								onClick={handleSendComment}
 								cursor="pointer"
-
 							/>
 						)}
 				</div>

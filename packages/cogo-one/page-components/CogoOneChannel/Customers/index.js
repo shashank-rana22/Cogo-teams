@@ -68,6 +68,7 @@ function Customers({
 		viewType,
 		agentId: userId,
 		isBotSession,
+		userSharedMails,
 	});
 
 	const { data = {}, fetchUnreadCall = () => {} } = useGetUnreadCallsCount({ activeTab });
@@ -89,6 +90,7 @@ function Customers({
 			setAutoAssignChats,
 			workPrefernceLoading,
 			setSendBulkTemplates,
+			mailsToBeShown: userSharedMails,
 		},
 		voice: {
 			setActiveVoiceCard: (val) => {
@@ -219,6 +221,7 @@ function Customers({
 				viewType={viewType}
 				setOpenKamContacts={setOpenKamContacts}
 				setSendBulkTemplates={setSendBulkTemplates}
+				firestore={firestore}
 			/>
 		</div>
 	);
