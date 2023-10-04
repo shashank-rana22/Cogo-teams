@@ -1,15 +1,14 @@
+/* eslint-disable max-lines-per-function */
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import {
-	IcMCall, IcMShip, IcMSettings, IcMAgentManagement,
-	IcMTick, IcMAppDelete, IcMEdit,
-} from '@cogoport/icons-react';
+import { IcMTick, IcMAppDelete, IcMEdit } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
+import { ICON_MAPPING } from '../../../../../../constants/CALENDAR_CONSTANTS';
 import useListCogooneCalendars from '../../../../../../hooks/useListCogooneCalendars';
 import getMonthStartAndEnd from '../../../../../../utils/getMonthStartAndEnd';
 import ActionModal from '../ActionModal';
@@ -20,25 +19,6 @@ import styles from './styles.module.css';
 
 const LAST_INDEX = 1;
 const TABS = ['schedules', 'calendars'];
-
-const ICON_MAPPING = {
-	call_customer: {
-		icon  : <IcMCall width={16} height={16} />,
-		color : '#FCEEDF',
-	},
-	send_quotation: {
-		icon  : <IcMShip width={16} height={16} />,
-		color : '#F3FAFA',
-	},
-	other: {
-		icon  : <IcMSettings width={16} height={16} />,
-		color : '#F3FAFA',
-	},
-	default: {
-		icon  : <IcMAgentManagement width={16} height={16} />,
-		color : '#F3FAFA',
-	},
-};
 
 function UserEvents({
 	selectedEventData = {}, getEvents = () => {},
@@ -68,6 +48,15 @@ function UserEvents({
 		}));
 	};
 
+	const handleEdit = ({ singleEvent = {}, key = '' }) => {
+		setActionModal((prevEventDetails) => ({
+			...prevEventDetails,
+			status       : key === 'edit',
+			value        : singleEvent,
+			actionStatus : key,
+		}));
+	};
+
 	const actions = ({ category = '' }) => [
 		{
 			key    : 'completed',
@@ -79,8 +68,12 @@ function UserEvents({
 			key    : 'edit',
 			icon   : <IcMEdit width={14} height={14} fill="#34495e" />,
 			action : ({ singleEvent = {}, key = '' }) => {
-				handleSelect({ singleEvent, key });
-				setAddEvents((p) => !p);
+				if (activeTab === 'calendars') {
+					handleSelect({ singleEvent, key });
+					setAddEvents((p) => !p);
+				} else {
+					handleEdit({ singleEvent, key });
+				}
 			},
 			show: true,
 		},
@@ -112,7 +105,7 @@ function UserEvents({
 					<div
 						key={itm}
 						className={cl`${styles.tab} ${activeTab === itm ? styles.active_tab : ''}`}
-						onClick={() => { setActiveTab(itm); }}
+						onClick={() => setActiveTab(itm)}
 						role="presentation"
 					>
 						{startCase(itm)}
@@ -137,6 +130,7 @@ function UserEvents({
 								is_important = false, validity_start = '', category = '', validity_end = '',
 								participants = [], performed_by_id = '', main_status, status = '',
 							} = singleEvent || {};
+
 							const isOwner = userId === performed_by_id;
 							const checkStatus = activeTab === 'schedules' ? main_status : status;
 							const { organization_data = {}, user_data = {}	} = metadata || {};

@@ -28,7 +28,7 @@ function CreateEvent({
 		category: updateCategory = '', subject = '', id = '',
 		validity_start = '', validity_end = '', description = '',
 		is_important = false, metadata = {}, participants = [],
-		frequency = '', schedule_id = '',
+		frequency = '',
 	} = updateEventDetails || {};
 
 	const { organization_id: orgId = '', user_id = '' } = metadata || {};
@@ -67,7 +67,6 @@ function CreateEvent({
 		reset,
 		getEvents,
 		month,
-		schedule_id,
 	});
 	const { organization_id = '', start_date: startDateField } = formValues || {};
 

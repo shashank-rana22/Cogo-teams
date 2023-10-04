@@ -1,0 +1,24 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.each_row {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	width: 48%;
+}
+
+.error_text {
+	margin-top: 2px;
+	font-size: 10px;
+	color: #ee3425;
+}

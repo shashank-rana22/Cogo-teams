@@ -8,8 +8,8 @@ const getPayload = ({ startDate = '', endDate = '' }) => ({
 		validity_start_greater_than : formatDateTime({ date: startDate, dateformat: 'isoUtcDateTime' }),
 		validity_end_greater_than   : formatDateTime({ date: endDate, dateformat: 'isoUtcDateTime' }),
 	},
-
-	metadata_required: true,
+	schedule_data_required : false,
+	metadata_required      : true,
 });
 
 const useListCogooneCalendars = () => {
@@ -18,10 +18,9 @@ const useListCogooneCalendars = () => {
 		url    : '/list_cogoone_calendars',
 	}, { manual: true });
 
-	const getListCalenders = useCallback(async ({ startDate, endDate }) => {
+	const getListCalenders = useCallback(({ startDate, endDate }) => {
 		try {
-			const payload = getPayload({ startDate, endDate });
-			await trigger({ params: payload });
+			trigger({ params: getPayload({ startDate, endDate }) });
 		} catch (error) {
 			console.error(error);
 		}
