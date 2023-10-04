@@ -53,7 +53,7 @@ function SingleMemberView({
 							Designation
 						</div>
 						<div className={styles.contact_value}>
-							{designation}
+							{designation || '-'}
 						</div>
 					</div>
 				</div>

@@ -7,6 +7,7 @@ import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import { togglePinChat } from '../../../../../helpers/teamsPinChatHelpers';
 import dateTimeConverter from '../../../../../utils/dateTimeConverter';
 
 import styles from './styles.module.css';
@@ -18,6 +19,8 @@ function GroupCard({
 	eachRoom = {},
 	activeTeamCard = {},
 	setActiveCard = () => {},
+	loggedInUserId = '',
+	firestore = {},
 }) {
 	const {
 		id = '',
@@ -43,7 +46,7 @@ function GroupCard({
 
 	const updatePinnedChats = (e, type) => {
 		e.stopPropagation();
-		console.log('type:', type);
+		togglePinChat({ firestore, loggedInAgentId: loggedInUserId, roomId: id, type });
 	};
 
 	return (
@@ -70,7 +73,7 @@ function GroupCard({
 						/>
 					)}
 					<div className={styles.type}>
-						{startCase(search_name)}
+						{startCase(search_name?.toLowerCase() || '')}
 					</div>
 					{self_unread_messages_count > DEFAULT_UNREAD_MESSAGES && (
 						<div className={styles.new_message_count}>

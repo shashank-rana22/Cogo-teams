@@ -28,3 +28,9 @@
 	color: #828282;
 	user-select: none;
 }
+
+.icon {
+	width: 10px;
+	height: 10px;
+	fill: #828282;
+}

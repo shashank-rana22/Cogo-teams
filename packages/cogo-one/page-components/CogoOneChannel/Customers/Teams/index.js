@@ -49,6 +49,7 @@ function Teams(teamsProps) {
 					activeTeamCard={activeTeamCard}
 					loggedInAgentId={loggedInAgentId}
 					setActiveCard={setActiveCard}
+					firestore={firestore}
 				/>
 			</div>
 		</div>
