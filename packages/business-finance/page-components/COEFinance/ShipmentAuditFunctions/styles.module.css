@@ -3,15 +3,6 @@
 	margin: 8px 0;
 }
 
-.date_picker {
-	:global {
-		.react-datepicker__input-container button {
-			background: transparent;
-			border-right: 1px solid #e0e0e0;
-		}
-	}
-}
-
 .container {
 	display: flex;
 	align-items: center;

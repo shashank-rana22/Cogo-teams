@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 const OVERFLOW_LENGTH = 11;
 
 const getFinancialCloseColumns = ({
-	handleFinancialTabClick = () => {},
+	handleClick = () => {},
 	tax = '',
 }) => {
 	const columns = [
@@ -173,7 +173,7 @@ const getFinancialCloseColumns = ({
 			accessor : (row) => (
 
 				<div>
-					<Button themeType="secondary" onClick={() => handleFinancialTabClick(row?.jobId)}>Audit</Button>
+					<Button themeType="secondary" onClick={() => handleClick(row?.jobId)}>Audit</Button>
 				</div>
 			),
 		},
