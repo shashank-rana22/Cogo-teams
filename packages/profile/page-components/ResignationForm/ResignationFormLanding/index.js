@@ -22,7 +22,11 @@ function ResignationFormLanding({ refetch = () => {} }) {
 	const CANCEL_REQUEST = 'cancellation_requested';
 	const router = useRouter();
 
-	const { data:dataItems = {}, loading = false, refetchApplicationDetails } = useGetEmployeeDetails();
+	const {
+		data: dataItems = {}, loading = false,
+		refetchApplicationDetails,
+	} = useGetEmployeeDetails(router.query?.employee_id);
+
 	const [show, setShow] = useState(false);
 
 	const [showModal, setShowModal] = useState(false);

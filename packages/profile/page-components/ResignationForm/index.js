@@ -7,14 +7,16 @@ import useGetEmployeeApplicationProcessDetails from './useGetEmployeeApplication
 
 function ResignationForm() {
 	const router = useRouter();
-	const { data, refetch = () => {}, loading = false } = useGetEmployeeApplicationProcessDetails();
-	if (router.query?.employee_id) {
-		refetch(router.query.employee_id, 'hrbp');
-	}
+	const {
+		data,
+		refetch = () => {}, loading = false,
+	} = useGetEmployeeApplicationProcessDetails(router.query.employee_id);
 
 	const { application_exist } = data || {};
 
-	if (application_exist) return <ResignationProgress data={data} loading={loading} />;
+	if (application_exist) {
+		return <ResignationProgress data={data} loading={loading} />;
+	}
 
 	return 	<ResignationFormLanding refetch={refetch} />;
 }

@@ -5,6 +5,7 @@ import {
 	IcMArrowRight,
 } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import EmptyState from '../../common/EmptyState';
@@ -16,7 +17,13 @@ import styles from './styles.module.css';
 
 function EmployeeProfile() {
 	const router = useRouter();
-	const user_id = router.query?.employee_id;
+	const employee_id = router.query?.employee_id;
+
+	const { profile: { user } } = useSelector((state) => ({
+		profile: state?.profile,
+	}));
+
+	const user_id = employee_id || user.id;
 
 	const { loading, data } = useGetEmployeeDetails(user_id);
 
@@ -25,7 +32,7 @@ function EmployeeProfile() {
 
 	return (
 		<div className={styles.main_container}>
-			{!loading && user_id ? (
+			{!loading && employee_id ? (
 				<div className={styles.back_container}>
 					<div className={styles.top_text}>
 						<span className={styles.back}>Employee Directory</span>
@@ -101,10 +108,10 @@ function EmployeeProfile() {
 											render={(
 												<Button
 													onClick={() => {
-														if (user_id) {
+														if (employee_id) {
 															router.push(
-																`/apply-resignation?user_id=
-																${user_id}`,
+																`/apply-resignation?employee_id=
+																${employee_id}`,
 															);
 														} else {
 															router.push('/apply-resignation');

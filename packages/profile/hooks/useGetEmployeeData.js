@@ -1,14 +1,9 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 const useGetEmployeeDetails = (user_id = '') => {
-	const { profile: { user } } = useSelector((state) => ({
-		profile: state?.profile,
-	}));
-
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/get_employee_directory',
@@ -16,9 +11,9 @@ const useGetEmployeeDetails = (user_id = '') => {
 
 	const getEmployeeDetails = useCallback(() => {
 		trigger({
-			params: { user_id: user_id || user?.id },
+			params: { user_id },
 		});
-	}, [trigger, user_id, user?.id]);
+	}, [trigger, user_id]);
 
 	useEffect(() => {
 		if (user_id) {
