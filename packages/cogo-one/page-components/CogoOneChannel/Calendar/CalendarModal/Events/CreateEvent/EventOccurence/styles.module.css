@@ -14,7 +14,12 @@
 
 	:global {
 		.ui_input_number_container {
-			width: 20%;
+			width: 44%;
+		}
+
+		.ui_multiselect_display_container {
+			min-width: 120px;
+			max-width: 163px;
 		}
 	}
 }
