@@ -8,18 +8,33 @@ import styles from './styles.module.css';
 const SHOW_LENGTH = 11;
 const NO_PROFIT = 0;
 
-export default function RenderTableData({ data = '', percent = '' }) {
+function check(profit = 0, category = '') {
+	if (profit >= NO_PROFIT) {
+		if (category === 'BUY') {
+			return false;
+		}
+		return true;
+	}
+
+	if (category === 'BUY') {
+		return true;
+	}
+	return false;
+}
+
+export default function RenderTableData({ data = 0, profit = 0, category = '' }) {
+	const absoluteProfit = Math.abs(profit);
 	return (
 		<div>
 			<div className={styles.fix_layout}>
 				{ShowOverflowingNumber(data, SHOW_LENGTH, 'INR') }
 			</div>
 			<div className={styles.flex}>
-				<div className={percent >= NO_PROFIT ? styles.profit_icon : styles.loss_icon}>
+				<div className={check(profit, category) ? styles.profit_icon : styles.loss_icon}>
 					<IcMArrowNext height="20" width="20" />
 				</div>
 				<div>
-					{percent >= NO_PROFIT ? `+${percent}%` : `${percent}%`}
+					{`${absoluteProfit}%`}
 				</div>
 			</div>
 		</div>

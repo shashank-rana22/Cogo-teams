@@ -3,31 +3,30 @@ import {
 } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import { entityType } from '../../Constants/EntityOptions';
-import { serviceType } from '../../Constants/FilterOptions';
-import { walletType } from '../../Constants/WalletOptions';
+import { entityType } from '../../constants/entityOptions';
+import { serviceType } from '../../constants/filterOptions';
+import { walletType } from '../../constants/walletOptions';
 
 import styles from './styles.module.css';
 
 function Content({
-	filters,
+	filters = {},
 	setFilters = () => {},
-	receivables,
+	receivables = '',
 	setReceivables = () => {},
-	// setShow,
 	refetch = () => {},
-	tradeTab,
+	tradeTab = '',
 	setTradeTab = () => {},
 }) {
-	const onChange = (val, name) => {
+	const onChange = (val = '', name = '') => {
 		setFilters((p) => ({ ...p, [name]: val }));
 	};
 
-	const handleChange = (val) => {
+	const handleChange = (val = '') => {
 		setReceivables(val);
 	};
 
-	const handleTradeTabChange = (val) => {
+	const handleTradeTabChange = (val = '') => {
 		setTradeTab(val);
 		setFilters((p) => ({ ...p, tradeType: val }));
 	};
@@ -65,7 +64,6 @@ function Content({
 							themeType="primary"
 							size="sm"
 							onClick={() => {
-								// setShow(false);
 								refetch(filters);
 							}}
 						>
@@ -79,54 +77,6 @@ function Content({
 					themeType="primary-vertical"
 					style={{ display: 'flex', width: '440px' }}
 				>
-					{/* <TabPanel name="kamOwner" title="KAM Owner">
-                        <div className={styles.tabpanel_style}>
-                            <AsyncSelect
-                                name="user_id"
-                                asyncKey="partner_users"
-                                valueKey="user_id"
-                                initialCall={false}
-                                onChange={(userId: string) => onChange(userId, 'kamId')}
-                                value={filters.kamId}
-                                placeholder="Select Kam Owner"
-                                size="sm"
-                                isClearable
-                            />
-                        </div>
-                    </TabPanel>
-                    <TabPanel name="salesAgent" title="Sales Agent">
-                        <div className={styles.tabpanel_style}>
-                            <AsyncSelect
-                                name="user_id"
-                                asyncKey="partner_users"
-                                valueKey="user_id"
-                                initialCall={false}
-                                onChange={(userId: string) => onChange(userId, 'salesAgentId')}
-                                value={filters.salesAgentId}
-                                placeholder="Select Sales Agent User"
-                                size="sm"
-                                isClearable
-                            />
-                        </div>
-                    </TabPanel>
-                    <TabPanel
-                        name="creditController"
-                        title="Credit Controller"
-                    >
-                        <div className={styles.tabpanel_style}>
-                            <AsyncSelect
-                                name="credit_controller_id"
-                                asyncKey="partner_users"
-                                valueKey="user_id"
-                                initialCall={false}
-                                onChange={(userId: string) => onChange(userId, 'creditControllerId')}
-                                value={filters.creditControllerId}
-                                placeholder="Select Credit Controller User"
-                                size="sm"
-                                isClearable
-                            />
-                        </div>
-                    </TabPanel> */}
 					<TabPanel name="Service" title="Service">
 						<div className={styles.style_radio}>
 							<Tabs
@@ -138,8 +88,6 @@ function Content({
 								<TabPanel name="EXPORT" title="Export" />
 								<TabPanel name="LOCAL" title="Local" />
 								<TabPanel name="DOMESTIC" title="Domestic" />
-								{/* <TabPanel name="Local" title="Local" />
-								<TabPanel name="Domestic" title="Domestic" /> */}
 							</Tabs>
 							<RadioGroup
 								options={serviceType}
@@ -171,13 +119,6 @@ function Content({
 					</TabPanel>
 					<TabPanel name="Operational Closed Date" title="Operational Closed Date">
 						<div className={styles.style_radio}>
-							{/* <Datepicker
-								placeholder="Select Date"
-								dateFormat="MM/dd/yyyy"
-								name="date"
-								onChange={(val) => onChange(val, 'operationalClosedDate')}
-								value={filters?.operationalClosedDate}
-							/> */}
 							<SingleDateRange
 								placeholder="Select Date"
 								dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
@@ -191,13 +132,6 @@ function Content({
 					</TabPanel>
 					<TabPanel name="Creation Date" title="Creation Date">
 						<div className={styles.style_radio}>
-							{/* <Datepicker
-								placeholder="Select Date"
-								dateFormat="MM/dd/yyyy"
-								name="date"
-								onChange={(val) => onChange(val, 'creationDate')}
-								value={filters?.creationDate}
-							/> */}
 							<SingleDateRange
 								placeholder="Select Date"
 								dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}

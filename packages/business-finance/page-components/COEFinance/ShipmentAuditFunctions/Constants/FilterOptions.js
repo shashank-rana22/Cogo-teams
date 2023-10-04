@@ -24,14 +24,4 @@ export const serviceType = [
 		value : 'FTL_FREIGHT',
 		name  : 'FTL Freight',
 	},
-	// {
-	// 	label : 'FTL Freight',
-	// 	value : 'FTL Freight',
-	// 	name  : 'FTL Freight',
-	// },
-	// {
-	// 	label : 'FTL Freight',
-	// 	value : 'FTL Freight',
-	// 	name  : 'FTL Freight',
-	// },
 ];

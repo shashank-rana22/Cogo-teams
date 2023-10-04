@@ -5,7 +5,7 @@ import ShowOverflowingNumber from '../utils/getShowOverFlowingNumbers';
 
 import styles from './styles.module.css';
 
-const ELEVEN = 11;
+const OVERFLOW_LENGTH = 11;
 
 const getFinancialCloseColumns = ({
 	handleFinancialTabClick = () => {},
@@ -17,21 +17,18 @@ const getFinancialCloseColumns = ({
 			Header : (
 				<div>SID</div>
 			),
-			accessor: (row) => {
-				const { sid = '' } = row || {};
-				return (
-					<div>
-						<div className={styles.sid_link}>
-							<a href="#">
-								{`#${row?.jobNumber}`}
-							</a>
-						</div>
-						<div>
-							{row?.service}
-						</div>
+			accessor: (row) => (
+				<div>
+					<div className={styles.sid_link}>
+
+						{`#${row?.jobNumber}`}
+
 					</div>
-				);
-			},
+					<div>
+						{row?.service}
+					</div>
+				</div>
+			),
 		},
 		{
 			id     : 'estimatedRevenuePreTax',
@@ -50,25 +47,29 @@ const getFinancialCloseColumns = ({
 				</div>
 			),
 			accessor: (row) => {
-				const { sell = {} } = row || {};
-				const { estimated, operational, financial } = sell || {};
+				const {
+					estimatedRevenuePreTax = 0, estimatedRevenuePostTax = 0,
+					operationalRevenuePreTax = 0, operationalRevenuePostTax = 0,
+					actualRevenuePreTax = 0, actualRevenuePostTax = 0,
+					operationalSellDeviationToEstimatedPreTax = 0, operationalSellDeviationToEstimatedPostTax = 0,
+					financialSellDeviationToEstimatedPreTax = 0, financialSellDeviationToEstimatedPostTax = 0,
+				} = row || {};
+				const dataOperational = tax === 'Pre' ? operationalRevenuePreTax : operationalRevenuePostTax;
+				const dataEstimated = tax === 'Pre' ? estimatedRevenuePreTax : estimatedRevenuePostTax;
+				const dataProfitPercent = tax === 'Pre' ? operationalSellDeviationToEstimatedPreTax
+					: operationalSellDeviationToEstimatedPostTax;
+				const dataFinancial = tax === 'Pre' ? actualRevenuePreTax : actualRevenuePostTax;
+				const financeProfit = tax === 'Pre' ? financialSellDeviationToEstimatedPreTax
+					: financialSellDeviationToEstimatedPostTax;
 				return (
 					<div className={styles.accessor_financial}>
 						<div className={styles.fix_layout}>
-							{console.log('tax', tax)}
-							{/* {estimated} */}
-							{/* {getFormatAmount(estimated, 'INR')} */}
-							{ShowOverflowingNumber(row?.estimatedRevenuePreTax, ELEVEN, 'INR') }
+							{ShowOverflowingNumber(dataEstimated, OVERFLOW_LENGTH, 'INR') }
 						</div>
+						<RenderTableData data={dataOperational} profit={dataProfitPercent} />
 						<RenderTableData
-							data={row?.operationalRevenuePreTax}
-							percent={tax === 'Pre' ? row?.operationalSellDeviationToEstimatedPreTax
-								: row?.operationalSellDeviationToEstimatedPostTax}
-						/>
-						<RenderTableData
-							data={row?.financialRevenuePreTax}
-							percent={tax === 'Pre' ? row?.financialSellDeviationToEstimatedPreTax
-								: row?.financialSellDeviationToEstimatedPostTax}
+							data={dataFinancial}
+							profit={financeProfit}
 						/>
 					</div>
 				);
@@ -90,23 +91,30 @@ const getFinancialCloseColumns = ({
 				</div>
 			),
 			accessor: (row) => {
-				const { buy = {} } = row || {};
-				const { estimated, operational, financial } = buy || {};
+				const {
+					estimatedCostPreTax = 0, estimatedCostPostTax = 0,
+					operationalCostPreTax = 0, operationalCostPostTax = 0,
+					actualCostPreTax = 0, actualCostPostTax = 0,
+					operationalBuyDeviationToEstimatedPreTax = 0, operationalBuyDeviationToEstimatedPostTax = 0,
+					financialBuyDeviationToEstimatedPreTax = 0, financialBuyDeviationToEstimatedPostTax = 0,
+				} = row || {};
+				const dataOperational = tax === 'Pre' ? operationalCostPreTax : operationalCostPostTax;
+				const dataEstimated = tax === 'Pre' ? estimatedCostPreTax : estimatedCostPostTax;
+				const dataProfitPercent = tax === 'Pre' ? operationalBuyDeviationToEstimatedPreTax
+					: operationalBuyDeviationToEstimatedPostTax;
+				const dataFinancial = tax === 'Pre' ? actualCostPreTax : actualCostPostTax;
+				const financeProfit = tax === 'Pre' ? financialBuyDeviationToEstimatedPreTax
+					: financialBuyDeviationToEstimatedPostTax;
 				return (
 
 					<div className={styles.accessor_financial}>
 						<div className={styles.fix_layout}>
-							{ShowOverflowingNumber(row?.estimatedCostPreTax, 11, 'INR') }
+							{ShowOverflowingNumber(dataEstimated, OVERFLOW_LENGTH, 'INR') }
 						</div>
+						<RenderTableData data={dataOperational} profit={dataProfitPercent} />
 						<RenderTableData
-							data={row?.operationalCostPreTax}
-							percent={tax === 'Pre' ? row?.operationalBuyDeviationToEstimatedPreTax
-								: row?.operationalBuyDeviationToEstimatedPostTax}
-						/>
-						<RenderTableData
-							data={row?.financialCostPreTax}
-							percent={tax === 'Pre' ? row?.financialBuyDeviationToEstimatedPreTax
-								: row?.financialBuyDeviationToEstimatedPreTax}
+							data={dataFinancial}
+							profit={financeProfit}
 						/>
 					</div>
 				);
@@ -128,24 +136,32 @@ const getFinancialCloseColumns = ({
 				</div>
 			),
 			accessor: (row) => {
-				const { profitability = {} } = row || {};
-				const { estimated, operational, financial } = profitability || {};
+				const {
+					estimatedProfitabilityPreTax = 0, estimatedProfitabilityPostTax = 0,
+					operationalProfitabilityPreTax = 0, operationalProfitabilityPostTax = 0,
+					actualProfitabilityPreTax = 0, actualProfitabilityPostTax = 0,
+					operationalProfitabilityDeviationToPreTax = 0, operationalProfitabilityDeviationToPostTax = 0,
+					financialProfitabilityDeviationToPreTax = 0, financialProfitabilityDeviationToPostTax = 0,
+				} = row || {};
+				const dataOperational = tax === 'Pre'
+					? operationalProfitabilityPreTax : operationalProfitabilityPostTax;
+				const dataEstimated = tax === 'Pre' ? estimatedProfitabilityPreTax : estimatedProfitabilityPostTax;
+				const dataProfitPercent = tax === 'Pre' ? operationalProfitabilityDeviationToPreTax
+					: operationalProfitabilityDeviationToPostTax;
+				const dataFinancial = tax === 'Pre' ? actualProfitabilityPreTax : actualProfitabilityPostTax;
+				const financeProfit = tax === 'Pre' ? financialProfitabilityDeviationToPreTax
+					: financialProfitabilityDeviationToPostTax;
 				return (
 
 					<div className={styles.accessor_financial}>
 						<div className={styles.fix_layout}>
-							{ShowOverflowingNumber(row?.estimatedProfitabilityPreTax, 11, 'INR') }
+							{ShowOverflowingNumber(dataEstimated, OVERFLOW_LENGTH, 'INR') }
 
 						</div>
+						<RenderTableData data={dataOperational} profit={dataProfitPercent} />
 						<RenderTableData
-							data={row?.operationalProfitabilityPreTax}
-							percent={tax === 'Pre' ? row?.operationalProfitabilityDeviationToPreTax
-								: row?.operationalProfitabilityDeviationToPostTax}
-						/>
-						<RenderTableData
-							data={row?.financialProfitabilityPreTax}
-							percent={tax === 'Pre' ? row?.financialProfitabilityDeviationToPreTax
-								: row?.financialProfitabilityDeviationToPostTax}
+							data={dataFinancial}
+							profit={financeProfit}
 						/>
 					</div>
 				);

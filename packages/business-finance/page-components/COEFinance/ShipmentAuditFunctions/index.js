@@ -1,5 +1,6 @@
-import { Datepicker, Button, Input, Table, Pagination, Popover } from '@cogoport/components';
-// import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import {
+	Datepicker, Button, Input, Table, Pagination, Popover, Toggle,
+} from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
@@ -12,10 +13,11 @@ import getFinancialCloseColumns from './configurations/getFinancialCloseColumns'
 import getJobColumns from './configurations/getJobColumns';
 import styles from './styles.module.css';
 
-function ShipmentAuditFunction({ activeTab = '', tax = '' }) {
+function ShipmentAuditFunction({ activeTab = '' }) {
 	const { push } = useRouter();
 	const [date, setDate] = useState('');
 	const [tradeTab, setTradeTab] = useState('');
+	const [tax, setTax] = useState('Pre');
 	const [filters, setFilters] = useState({
 		Service               : null,
 		Entity                : null,
@@ -24,7 +26,6 @@ function ShipmentAuditFunction({ activeTab = '', tax = '' }) {
 		creationDate          : null,
 		tradeType             : '',
 	});
-
 	const [paginationFilters, setPaginationFilters] = useState({
 		page      : 1,
 		pageLimit : 10,
@@ -35,6 +36,10 @@ function ShipmentAuditFunction({ activeTab = '', tax = '' }) {
 
 	const { data, loading, refetch } = useGetDocumentList({ paginationFilters, search, activeTab });
 	const { list = [] } = data || {};
+
+	const handlePrePostChange = () => {
+		setTax((prev) => ((prev === 'Pre') ? 'Post' : 'Pre'));
+	};
 
 	const onPageChange = (val) => {
 		setPaginationFilters((prev) => ({ ...prev, page: val }));
@@ -53,7 +58,7 @@ function ShipmentAuditFunction({ activeTab = '', tax = '' }) {
 
 	const rest = { onClickOutside: () => setShow(false) };
 	const columns = getJobColumns({ handleClick, tax });
-	const columns2 = getFinancialCloseColumns({ handleFinancialTabClick, tax });
+	const columns2 = getFinancialCloseColumns({ handleFinancialTabClick, activeTab: 'financial_close', tax });
 
 	useEffect(() => {
 		setPaginationFilters((prev) => ({ ...prev, page: 1 }));
@@ -112,7 +117,16 @@ function ShipmentAuditFunction({ activeTab = '', tax = '' }) {
 						</Popover>
 					</div>
 				</div>
+
 				<div className={styles.search}>
+					<Toggle
+						name="prePostToggle"
+						size="md"
+						onLabel="Post"
+						offLabel="Pre"
+						checked={tax === 'Post'}
+						onChange={handlePrePostChange}
+					/>
 					<Input
 						size="md"
 						placeholder="Search"
@@ -121,17 +135,16 @@ function ShipmentAuditFunction({ activeTab = '', tax = '' }) {
 						onChange={(val) => setSearch(val)}
 					/>
 				</div>
-				{/* <div className={styles.tabs_container}>
-					<Button onClick={handleClick}>Go to Next Page</Button>
-				</div> */}
 
 			</main>
 			<div className={styles.list_container}>
-				{
-				activeTab === 'operational_close'
-					? (<Table columns={columns} data={list} className={styles.tablestyle} loading={loading} />)
-					: (<Table columns={columns2} data={list} className={styles.tablestyle} loading={loading} />)
-				}
+
+				<Table
+					columns={activeTab === 'operational_close' ? columns : columns2}
+					data={list}
+					className={styles.tablestyle}
+					loading={loading}
+				/>
 
 				{!isEmpty(list)
 					? (
