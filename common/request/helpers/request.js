@@ -71,8 +71,23 @@ request.interceptors.request.use((oldConfig) => {
 		}
 	}
 
+	if (serviceName === 'location') {
+		newConfig.baseURL = 'https://api.cogoport.com';
+		newConfig.url = `/public_location/${originalApiPath}`;
+		newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
+	}
+
+	if (apiPath === 'get_user_interactions') {
+		newConfig.baseURL = 'https://12f6-103-143-39-118.ngrok-free.app';
+		newConfig.url = `/location/${originalApiPath}`;
+		newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
+	}
+
 	if (PEEWEE_SERVICES.includes(serviceName) && isDevMode) {
-		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
+		newConfig.baseURL = 'https://d597-2409-40c0-1077-fdf6-b0ab-1d0d-fa72-fc70.ngrok-free.app/';
+	}
+	if (serviceName === ATHENA_SERVICE) {
+		newConfig.auth_token = process.env.DATA_PIPELINE_SECRET_KEY;
 	}
 	if (serviceName === ATHENA_SERVICE) {
 		newConfig.auth_token = process.env.DATA_PIPELINE_SECRET_KEY;
@@ -81,10 +96,11 @@ request.interceptors.request.use((oldConfig) => {
 	return {
 		...newConfig,
 		headers: {
-			authorizationscope : 'partner',
-			authorization      : `Bearer: ${token}`,
+			authorizationscope           : 'partner',
+			authorization                : `Bearer: ${token}`,
 			authorizationparameters,
-			'auth-token'       : newConfig.auth_token || undefined,
+			'auth-token'                 : newConfig.auth_token || undefined,
+			'ngrok-skip-browser-warning' : '*',
 		},
 	};
 });
