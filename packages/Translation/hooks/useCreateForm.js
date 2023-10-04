@@ -4,24 +4,14 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-import { SingleData } from '../common/interfaces';
 import { controls } from '../configs/create-update-fields';
-
-interface Props {
-	status: string;
-	refetch: Function;
-	setShowCreateRoleModal: Function;
-	row: SingleData;
-	showEdit: boolean;
-
-}
 
 const useCreateRequest = ({
 	status, refetch, setShowCreateRoleModal, row, showEdit,
-}: Props) => {
+}) => {
 	const {
 		profile: profileData = {},
-	} = useSelector((state: object) => state);
+	} = useSelector((state) => state);
 	const formProps = useForm();
 	const { watch } = formProps;
 	const translatedValue = watch('translatedText');
@@ -44,7 +34,7 @@ const useCreateRequest = ({
 		setShowCreateRoleModal(false);
 	};
 
-	const onSubmit = async (values: object) => {
+	const onSubmit = async (values) => {
 		const fetch = showEdit ? update : trigger;
 		if (!values) return;
 		try {

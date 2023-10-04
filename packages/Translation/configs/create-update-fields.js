@@ -1,11 +1,4 @@
-import { ControlProps, SingleData } from '../common/interfaces';
-
-interface Props {
-	status: string;
-	row: SingleData;
-}
-
-export const controls: ControlProps = ({ status, row }:Props) => [
+export const controls = ({ status, row }) => [
 	{
 		name        : 'serviceName',
 		label       : 'Service Name',

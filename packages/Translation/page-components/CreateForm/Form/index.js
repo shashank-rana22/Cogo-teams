@@ -1,20 +1,15 @@
 import { useFormContext } from '@cogoport/forms';
 import React from 'react';
 
-import { ControlItem } from '../../../common/interfaces';
 import { getElementController } from '../../../utils/typeMappings';
 
 import styles from './styles.module.css';
 
-interface Props {
-	controls: ControlItem[];
-}
-
-function Form({ controls = [] }: Props) {
+function Form({ controls = [] }) {
 	const { formState: { errors } } = useFormContext() || {};
 	return (
 		<section className={styles.flex}>
-			{controls.map((controlItem: ControlItem) => {
+			{controls.map((controlItem) => {
 				const { span, show = true } = controlItem || {};
 				const el = { ...controlItem };
 				const Element = getElementController(el.type);

@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 function BulkUploadTranslation({ show, setShow, refetch }) {
 	const { loading, fileUrl, setFileUrl, bulkUpload } = useBulkUpload({ refetch, setShow });
 
-	const handleChange = (info: string) => {
+	const handleChange = (info) => {
 		setFileUrl(info);
 	};
 

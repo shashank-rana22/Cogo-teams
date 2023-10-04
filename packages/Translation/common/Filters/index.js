@@ -3,25 +3,17 @@ import React, { useState } from 'react';
 import BulkUploadTranslation from '../../page-components/BulkUpload';
 import CreateRoleModal from '../../page-components/CreateForm';
 import { getElements } from '../../utils/getElements';
-import { FilterProps } from '../interfaces';
 import SearchInput from '../SearchInput';
 
 import styles from './styles.module.css';
 import { filterControls } from './utils/controls';
 
-interface Props {
-	filters: FilterProps;
-	status: string;
-	onChangeFilters: (v: object) => void;
-	refetch: Function;
-}
-
 function Filters({
-	filters,
+	filters = {},
 	onChangeFilters = (v) => v,
-	status,
-	refetch,
-}: Props) {
+	status = '',
+	refetch = () => {},
+}) {
 	const { search } = filters || {};
 	const [show, setShow] = useState(false);
 

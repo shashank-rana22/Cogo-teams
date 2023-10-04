@@ -2,22 +2,13 @@ import { Modal, Button } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { SingleData } from '../../common/interfaces';
 import useCreateRequest from '../../hooks/useCreateForm';
 
 import CreateRequest from './CreateRequest';
 import Heading from './Header';
 import styles from './styles.module.css';
 
-interface Props {
-	status?: string;
-	refetch?: Function;
-	row?: SingleData;
-	showEdit?: boolean;
-
-}
-
-function CreateRequestModal({ status, refetch, row, showEdit }: Props) {
+function CreateRequestModal({ status, refetch, row, showEdit }) {
 	const [showCreateRoleModal, setShowCreateRoleModal] = useState(false);
 
 	const {

@@ -3,17 +3,12 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-interface Props {
-	refetch: () => void;
-	setShow: (p: boolean) => void;
-}
-
-const useBulkUpload = ({ refetch, setShow }: Props) => {
+const useBulkUpload = ({ refetch, setShow }) => {
 	const [fileUrl, setFileUrl] = useState(null);
 
 	const {
 		profile: profileData = {},
-	} = useSelector((state: object) => state);
+	} = useSelector((state) => state);
 
 	const [{ loading }, trigger] = useRequestBf({
 		url     : '/translation/translate/bulk-translations',
