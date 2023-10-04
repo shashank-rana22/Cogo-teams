@@ -1,4 +1,4 @@
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
@@ -16,7 +16,7 @@ function OutStandingStatsCommonCard({
 		<div className={styles.invoices_card}>
 			<div className={styles.left_container}>
 				<div className={styles.heading_styled}>{label}</div>
-				<div className={styles.amount} style={{ color: amountColor }}>
+				<div className={styles.common_amount} style={{ color: amountColor }}>
 					{statsLoading ? <Placeholder />
 						: formatAmount({
 							amount   : totalLedAmount || GLOBAL_CONSTANTS.zeroth_index,
@@ -38,8 +38,8 @@ function OutStandingStatsCommonCard({
 				{(amountValue || [])?.map((val) => (
 					<div className={styles.due_ageing} key={val?.label}>
 						<div
-							className={item[val?.valueKey] > [GLOBAL_CONSTANTS.zeroth_index]
-								? styles.amount : styles.credit_note_amount}
+							className={cl`${item[val?.valueKey] > GLOBAL_CONSTANTS.zeroth_index
+								? styles.amount : styles.credit_note_amount} ${styles.common_amount}`}
 						>
 							{ statsLoading ? <Placeholder /> : formatAmount({
 								amount   : item[val?.valueKey] || GLOBAL_CONSTANTS.zeroth_index,

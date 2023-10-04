@@ -15,11 +15,10 @@
 	font-weight: 600;
 }
 
-.amount {
+.common_amount {
 	margin-top: 2px;
 	font-size: 12px;
 	font-weight: 600;
-	color: #ed3726;
 	word-break: break-word;
 }
 
@@ -93,9 +92,9 @@
 }
 
 .credit_note_amount {
-	margin-top: 2px;
-	font-size: 12px;
-	font-weight: 600;
 	color: #29cc6a;
-	word-break: break-word;
+}
+
+.amount {
+	color: #ed3726;
 }

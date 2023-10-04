@@ -10,6 +10,8 @@ import {
 import styles from './styles.module.css';
 
 const DEFAULT_AMOUNT = 0;
+const FLAG = ['ON ACCOUNT PAYMENTS',
+	'CREDIT NOTES'];
 
 function StatsOutstanding({ item = {}, showOutStanding = true }) {
 	const {
@@ -58,85 +60,87 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 					))}
 				</div>
 				{
-					invoiceContainer.map((invoiceObject) => (
-						<div
-							className={styles.invoices_card}
-							key={invoiceObject.name}
-						>
-							<div className={styles.left_container}>
-								<div className={styles.styled_heading}>
-									{invoiceObject.name}
-									{' '}
-								</div>
-								<div className={(invoiceObject.name === 'ON ACCOUNT PAYMENTS'
-								|| invoiceObject.name === 'CREDIT NOTES')
-								&& invoiceObject.LedgerAmount?.ledgerAmount <= [GLOBAL_CONSTANTS.zeroth_index]
-									? styles.amount_open : styles.amount_close}
-								>
-									{formatAmount({
-										amount:
+					invoiceContainer.map((invoiceObject) => {
+						const invoiceType = FLAG.includes(invoiceObject?.name);
+						return (
+							<div
+								className={styles.invoices_card}
+								key={invoiceObject.name}
+							>
+								<div className={styles.left_container}>
+									<div className={styles.styled_heading}>
+										{invoiceObject.name}
+										{' '}
+									</div>
+									<div className={invoiceType
+									&& invoiceObject.LedgerAmount?.ledgerAmount <= GLOBAL_CONSTANTS.zeroth_index
+										? styles.amount_open : styles.amount_close}
+									>
+										{formatAmount({
+											amount:
 											invoiceObject.LedgerAmount
 												?.ledgerAmount || DEFAULT_AMOUNT,
-										currency:
+											currency:
 											invoiceObject.LedgerAmount
 												?.ledgerCurrency || currency,
-										options: {
-											style                 : 'currency',
-											currencyDisplay       : 'code',
-											maximumFractionDigits : DEFAULT_AMOUNT,
-										},
-									})}
-									<div className={styles.count_open}>
-										(
-										{invoiceObject.LedgerAmount?.ledgerCount}
-										)
-									</div>
-								</div>
-							</div>
-							<div className={styles.flex}>
-								{(invoiceObject.statsKey || []).map((val) => (
-									<div key={val.label} className={styles.label}>
-										<div className={cl`${(invoiceObject.name === 'ON ACCOUNT PAYMENTS'
-										|| invoiceObject.name === 'CREDIT NOTES')
-										&& invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount
-										<= [GLOBAL_CONSTANTS.zeroth_index]
-											? styles.account : styles.amount}`}
-										>
-											{formatAmount({
-												amount:
-													invoiceObject.ageingBucket[
-														val.valueKey
-													]?.ledgerAmount || DEFAULT_AMOUNT,
-												currency:
-													invoiceObject.ageingBucket[
-														val.valueKey
-													]?.ledgerCurrency || currency,
-												options: {
-													style                 : 'currency',
-													currencyDisplay       : 'code',
-													maximumFractionDigits : DEFAULT_AMOUNT,
-												},
-											})}
-										</div>
-										<div className={styles.count}>
+											options: {
+												style                 : 'currency',
+												currencyDisplay       : 'code',
+												maximumFractionDigits : DEFAULT_AMOUNT,
+											},
+										})}
+										<div className={styles.count_open}>
 											(
-											{invoiceObject.ageingBucket[
-												val.valueKey
-											]?.ledgerCount || DEFAULT_AMOUNT}
+											{invoiceObject.LedgerAmount?.ledgerCount}
 											)
 										</div>
 									</div>
-								))}
+								</div>
+								<div className={styles.flex}>
+									{(invoiceObject.statsKey || []).map((val) => (
+										<div key={val.label} className={styles.label}>
+											<div className={cl`${invoiceType
+										&& invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount
+										<= GLOBAL_CONSTANTS.zeroth_index
+												? styles.account : styles.amount}`}
+											>
+												{formatAmount({
+													amount:
+													invoiceObject.ageingBucket[
+														val.valueKey
+													]?.ledgerAmount || DEFAULT_AMOUNT,
+													currency:
+													invoiceObject.ageingBucket[
+														val.valueKey
+													]?.ledgerCurrency || currency,
+													options: {
+														style                 : 'currency',
+														currencyDisplay       : 'code',
+														maximumFractionDigits : DEFAULT_AMOUNT,
+													},
+												})}
+											</div>
+											<div className={styles.count}>
+												(
+												{invoiceObject.ageingBucket[
+													val.valueKey
+												]?.ledgerCount || DEFAULT_AMOUNT}
+												)
+											</div>
+										</div>
+									))}
+								</div>
 							</div>
-						</div>
-					))
+						);
+					})
 				}
 				{
 					!showOutStanding ? (
 						<div className={styles.outstanding}>
 							<div className={styles.headings}>Total Outstanding</div>
-							<div className={totalOutstanding.ledgerAmount > [GLOBAL_CONSTANTS.zeroth_index]
-								? styles.totaloutstanding : styles.negative_totaloutstanding}
+							<div className={cl`${totalOutstanding.ledgerAmount > GLOBAL_CONSTANTS.zeroth_index
+								? styles.totaloutstanding
+								: styles.negative_totaloutstanding} ${styles.common_totaloutstanding}`}
 							>
 								{formatAmount({
 									amount: totalOutstanding.ledgerAmount || DEFAULT_AMOUNT,
@@ -162,8 +166,9 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 					>
 						<div className={styles.flex_column}>
 							<div className={styles.label_outstanding}>Total Outstanding</div>
-							<div className={totalOutstanding.ledgerAmount
-								> [GLOBAL_CONSTANTS.zeroth_index] ? styles.amountout : styles.negative_amountout}
+							<div className={cl`${totalOutstanding.ledgerAmount
+								> [GLOBAL_CONSTANTS.zeroth_index] ? styles.amountout
+								: styles.negative_amountout} ${styles.common_amountout}`}
 							>
 								{formatAmount({
 									amount: totalOutstanding.ledgerAmount || DEFAULT_AMOUNT,

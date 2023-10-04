@@ -1,4 +1,4 @@
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
@@ -55,8 +55,8 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 			</div>
 			<div className={styles.outstanding_card}>
 				<div className={styles.total_outstanding_label}>Total Outstanding</div>
-				<div className={totalLedAmount > [GLOBAL_CONSTANTS.zeroth_index]
-					? styles.amount : styles.credit_note_amount}
+				<div className={cl`${totalLedAmount > GLOBAL_CONSTANTS.zeroth_index
+					? styles.amount : styles.credit_note_amount} ${styles.common_amount}`}
 				>
 					{statsLoading ? <Placeholder /> : formatAmount({
 						amount   : totalLedAmount || GLOBAL_CONSTANTS.zeroth_index,
