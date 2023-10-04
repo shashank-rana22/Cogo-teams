@@ -10,7 +10,7 @@ import {
 import styles from './styles.module.css';
 
 const DEFAULT_AMOUNT = 0;
-const FLAG = ['ON ACCOUNT PAYMENTS',
+const INVOICE_TYPE_LIST = ['ON ACCOUNT PAYMENTS',
 	'CREDIT NOTES'];
 
 function StatsOutstanding({ item = {}, showOutStanding = true }) {
@@ -61,7 +61,7 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 				</div>
 				{
 					invoiceContainer.map((invoiceObject) => {
-						const invoiceType = FLAG.includes(invoiceObject?.name);
+						const invoiceType = INVOICE_TYPE_LIST.includes(invoiceObject?.name);
 						return (
 							<div
 								className={styles.invoices_card}
@@ -73,7 +73,7 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 										{' '}
 									</div>
 									<div className={invoiceType
-									&& invoiceObject.LedgerAmount?.ledgerAmount <= GLOBAL_CONSTANTS.zeroth_index
+									&& invoiceObject.LedgerAmount?.ledgerAmount <= DEFAULT_AMOUNT
 										? styles.amount_open : styles.amount_close}
 									>
 										{formatAmount({
@@ -101,8 +101,7 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 										<div key={val.label} className={styles.label}>
 											<div className={cl`${invoiceType
 										&& invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount
-										<= GLOBAL_CONSTANTS.zeroth_index
-												? styles.account : styles.amount}`}
+										<= DEFAULT_AMOUNT ? styles.account : styles.amount}`}
 											>
 												{formatAmount({
 													amount:
@@ -138,9 +137,9 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 					!showOutStanding ? (
 						<div className={styles.outstanding}>
 							<div className={styles.headings}>Total Outstanding</div>
-							<div className={cl`${totalOutstanding.ledgerAmount > GLOBAL_CONSTANTS.zeroth_index
-								? styles.totaloutstanding
-								: styles.negative_totaloutstanding} ${styles.common_totaloutstanding}`}
+							<div className={cl`${totalOutstanding.ledgerAmount
+							> DEFAULT_AMOUNT ? styles.totaloutstanding : styles.negative_totaloutstanding} 
+							${styles.common_totaloutstanding}`}
 							>
 								{formatAmount({
 									amount: totalOutstanding.ledgerAmount || DEFAULT_AMOUNT,
@@ -167,7 +166,7 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 						<div className={styles.flex_column}>
 							<div className={styles.label_outstanding}>Total Outstanding</div>
 							<div className={cl`${totalOutstanding.ledgerAmount
-								> [GLOBAL_CONSTANTS.zeroth_index] ? styles.amountout
+								> DEFAULT_AMOUNT ? styles.amountout
 								: styles.negative_amountout} ${styles.common_amountout}`}
 							>
 								{formatAmount({

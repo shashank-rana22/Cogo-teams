@@ -38,7 +38,7 @@ function OutStandingStatsCommonCard({
 				{(amountValue || [])?.map((val) => (
 					<div className={styles.due_ageing} key={val?.label}>
 						<div
-							className={cl`${item[val?.valueKey] > GLOBAL_CONSTANTS.zeroth_index
+							className={cl`${item[val?.valueKey] > DEFAULT_COUNT
 								? styles.amount : styles.credit_note_amount} ${styles.common_amount}`}
 						>
 							{ statsLoading ? <Placeholder /> : formatAmount({

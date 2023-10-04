@@ -11,6 +11,8 @@ import {
 import OutStandingStatsCommonCard from './OutStandingStatsCommonCard';
 import styles from './styles.module.css';
 
+const DEFAULT_AMOUNT = 0;
+
 function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 	const { openInvoiceBucket, onAccountBucket, totalOutstandingBucket, creditNoteBucket } = item || {};
 	const { totalLedAmount, ledCurrency } = totalOutstandingBucket || {};
@@ -49,7 +51,7 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 						amountValue={OVERALL_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
 						amountColor={creditNoteBucket?.totalLedAmount
-							<= [GLOBAL_CONSTANTS.zeroth_index] ? '#29CC6A' : '#FC5555'}
+							<= DEFAULT_AMOUNT ? '#29CC6A' : '#FC5555'}
 					/>
 				</div>
 			</div>
