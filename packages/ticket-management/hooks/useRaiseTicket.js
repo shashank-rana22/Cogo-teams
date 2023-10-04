@@ -6,7 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 const getPayload = ({
 	id, priority, finalUrl, selectedServices, issue_type, additional_information,
 	notify_customer, additionalData, request_type, category, serial_id, sub_category,
-	service, trade_type,
+	service, trade_type, raised_by_desk, raised_to_desk, isOperation, defaultTypeId,
 }) => ({
 	UserID        : id || undefined,
 	PerformedByID : id || undefined,
@@ -22,10 +22,14 @@ const getPayload = ({
 		TradeType   : trade_type || undefined,
 		Service     : service || undefined,
 	},
-	Type           : issue_type || undefined,
-	Description    : additional_information || undefined,
-	NotifyCustomer : notify_customer || undefined,
-	Subcategory    : sub_category || undefined,
+	Type                : issue_type || undefined,
+	TicketDefaultTypeID : defaultTypeId || undefined,
+	Description         : additional_information || undefined,
+	NotifyCustomer      : notify_customer || undefined,
+	Subcategory         : sub_category || undefined,
+	RaisedByDesk        : raised_by_desk || undefined,
+	RaisedToDesk        : raised_to_desk || undefined,
+	CategoryDeskType    : isOperation ? 'by_desk' : 'by_category',
 	...additionalData,
 });
 
@@ -33,8 +37,14 @@ const useRaiseTicket = ({
 	handleClose = () => {},
 	additionalInfo = [],
 	setRefreshList = () => {},
+	reset = () => {},
+	defaultTypeId = '',
 }) => {
 	const { profile } = useSelector((state) => state);
+	const { auth_role_data = {} } = profile || {};
+	const { role_functions: roleFunctions = [] } = auth_role_data || {};
+
+	const isOperation = roleFunctions?.includes('operations');
 
 	const [{ loading }, trigger] = useTicketsRequest({
 		url     : '/ticket',
@@ -57,6 +67,8 @@ const useRaiseTicket = ({
 			trade_type,
 			category,
 			sub_category,
+			raised_by_desk,
+			raised_to_desk,
 			...rest
 		} = val || {};
 		const { finalUrl = '' } = file_url || {};
@@ -90,9 +102,14 @@ const useRaiseTicket = ({
 					trade_type,
 					category,
 					priority,
+					defaultTypeId,
 					sub_category,
+					raised_by_desk,
+					raised_to_desk,
+					isOperation,
 				}),
 			});
+
 			Toast.success('Successfully Created');
 			setRefreshList((prev) => ({
 				...prev,
@@ -101,7 +118,7 @@ const useRaiseTicket = ({
 				Escalated : false,
 				Closed    : false,
 			}));
-
+			reset();
 			handleClose();
 		} catch (error) {
 			Toast.error(error?.response?.data);

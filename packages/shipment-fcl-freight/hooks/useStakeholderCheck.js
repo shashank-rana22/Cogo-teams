@@ -11,7 +11,7 @@ export const useStakeholderCheck = () => {
 	}));
 
 	const stakeholderMap = [
-		{ role_ids: geo.uuid.kam_manager_ids, stakeholder: 'booking_agent_manager' },
+		{ role_ids: [...geo.uuid.kam_manager_ids, geo.uuid.cp_program_manager], stakeholder: 'booking_agent_manager' },
 		{
 			role_ids: [...geo.uuid.kam_ids,
 				...geo.uuid.centralised_customer_support,
@@ -40,6 +40,7 @@ export const useStakeholderCheck = () => {
 		{ role_ids: geo.uuid.operation_manager, stakeholder: 'operation_manager' },
 		{ role_ids: [...geo.uuid.finance_head, geo.uuid.finops_credit_controller], stakeholder: 'finance_superadmin' },
 		{ role_ids: geo.uuid.so1_revenue_desk, stakeholder: 'so1_revenue_desk' },
+		{ role_ids: geo.uuid.kam_admin, stakeholder: 'kam_admin' },
 		{
 			role_ids    : [geo.uuid.supplier_relations_head_id, geo.uuid.supply_relation_manager_role_id],
 			stakeholder : 'supplier_relations_head',
@@ -58,6 +59,7 @@ export const useStakeholderCheck = () => {
 				geo.uuid.vietnam_business_heads, geo.uuid.business_heads],
 			stakeholder: 'superadmin',
 		},
+		{ role_ids: geo.uuid.data_superadmin, stakeholder: 'data_superadmin' },
 	];
 
 	const matchingStakeholders = stakeholderMap

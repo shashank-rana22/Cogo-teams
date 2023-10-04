@@ -12,7 +12,7 @@ const userLoggedIn = ({ shipment_data = {} }) => {
 	});
 
 	return {
-		kamLoggedIn,
+		kamLoggedIn: kamLoggedIn || 'booking_agent',
 	};
 };
 

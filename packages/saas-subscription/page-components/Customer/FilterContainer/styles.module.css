@@ -5,12 +5,20 @@
 }
 
 .input_box {
-	width: 70%;
-	margin-right: 12px;
+	width: 60%;
 }
 
 .flex_box {
 	display: flex;
 	justify-content: space-between;
 	width: 30%;
+}
+
+.filter_container {
+	:global {
+		.ui_button_container {
+			min-width: auto;
+			padding: 7px 10px;
+		}
+	}
 }

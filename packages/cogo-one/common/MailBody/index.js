@@ -1,12 +1,14 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import { getRecipientData } from '../../helpers/getRecipientData';
 import useCreateReplyAllDraft from '../../hooks/useCreateReplyAllDraft ';
 import useCreateReplyDraft from '../../hooks/useCreateReplyDraft';
 import useGetMailContent from '../../hooks/useGetMailContent';
+import useGetSignature from '../../hooks/useGetSignature';
 
 import MailActions from './mailActions';
 import MailAttachments from './MailAttachments';
@@ -44,15 +46,22 @@ const getEmailBorder = ({ isDraft = false, emailStatus = '' }) => {
 	return '#EE3425';
 };
 
+const formatEmailBody = ({ message = '' }) => message?.replace(
+	GLOBAL_CONSTANTS.regex_patterns.line_break_regex,
+	'<br>',
+);
+
 function MailBody({
 	eachMessage = {},
 	hasPermissionToEdit = false,
 	formattedData = {},
 	mailProps = {},
 	deleteMessage = () => {},
+	isTheFirstMessageId = '',
 }) {
-	const [expandedState, setExpandedState] = useState(false);
 	const { source = '' } = formattedData || {};
+
+	const { viewType } = mailProps;
 
 	const {
 		response,
@@ -61,7 +70,12 @@ function MailBody({
 		media_url = [],
 		is_draft: isDraft = false,
 		email_status: emailStatus = '',
+		id = '',
 	} = eachMessage || {};
+
+	const isFirstMessage = isTheFirstMessageId === id;
+
+	const [expandedState, setExpandedState] = useState(false);
 
 	const {
 		subject = '',
@@ -71,6 +85,7 @@ function MailBody({
 		to_mails: recipientData = [],
 		cc_mails: ccData = [],
 		bcc_mails: bccData = [],
+		attachments = [],
 	} = response || {};
 
 	const {
@@ -78,6 +93,8 @@ function MailBody({
 		message: bodyMessage = '',
 		loading = false,
 	} = useGetMailContent({ messageId: message_id, source, setExpandedState });
+
+	const { signature } = useGetSignature({ viewType });
 
 	const { createReplyAllDraft } = useCreateReplyAllDraft();
 	const { createReplyDraft } = useCreateReplyDraft();
@@ -105,6 +122,7 @@ function MailBody({
 		deleteMessage,
 		createReplyDraft,
 		createReplyAllDraft,
+		signature,
 	});
 
 	const handleExpandClick = () => {
@@ -116,6 +134,15 @@ function MailBody({
 	};
 
 	const emailBorderColor = getEmailBorder({ isDraft, emailStatus });
+
+	useEffect(() => {
+		if (isFirstMessage) {
+			if (!bodyMessage && !isDraft) {
+				getEmailBody();
+			}
+			setExpandedState(true);
+		}
+	}, [bodyMessage, getEmailBody, isDraft, isFirstMessage]);
 
 	return (
 		<div className={styles.email_container}>
@@ -139,16 +166,12 @@ function MailBody({
 					emailStatus={emailStatus}
 				/>
 
-				<div className={styles.subject}>
-					Sub:
-					{' '}
-					{subject}
-				</div>
+				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
 
 				<div
 					className={cl`${styles.body} 
 					${expandedState ? styles.expanded_body : styles.collapsed_body}`}
-					dangerouslySetInnerHTML={{ __html: bodyMessage || body }}
+					dangerouslySetInnerHTML={{ __html: formatEmailBody({ message: bodyMessage || body }) }}
 				/>
 
 				{hasPermissionToEdit ? (
@@ -157,8 +180,6 @@ function MailBody({
 						isDraft={isDraft}
 					/>
 				) : null}
-
-				<MailAttachments mediaUrls={media_url} />
 
 				<div className={styles.extra_controls}>
 					<div

@@ -8,11 +8,13 @@ import updateEmailState from '../helpers/updateEmailState';
 const INCREASE_MESSAGE_COUNT_BY_ONE = 1;
 
 const formatMailDraftMessage = ({
-	communication_id,
-	payload,
-	buttonType,
-	parentEmailMessage,
-	roomId,
+	communication_id = '',
+	payload = {},
+	buttonType = '',
+	parentEmailMessage = {},
+	roomId = '',
+	emailState = {},
+	showOrgSpecificMail = false,
 }) => ({
 	agent_type           : 'bot',
 	conversation_type    : 'received',
@@ -25,15 +27,23 @@ const formatMailDraftMessage = ({
 	draft_type           : buttonType,
 	parent_email_message : parentEmailMessage || {},
 	response             : {
-		attachments : payload?.attachments || [],
-		bcc_mails   : payload?.bccrecipients || [],
-		body        : payload?.content || '',
-		cc_mails    : payload?.ccrecipients || [],
-		message_id  : payload?.msgId || '',
-		sender      : payload?.sender || '',
-		subject     : payload?.subject || '',
-		to_mails    : payload?.toUserEmail || [],
-		draft_type  : buttonType,
+		attachments       : payload?.attachments || [],
+		bcc_mails         : payload?.bccrecipients || [],
+		body              : payload?.content || '',
+		cc_mails          : payload?.ccrecipients || [],
+		message_id        : payload?.msgId || '',
+		sender            : payload?.sender || '',
+		subject           : payload?.subject || '',
+		to_mails          : payload?.toUserEmail || [],
+		draft_type        : buttonType,
+		draftQuillMessage : {
+			rteContent : emailState?.rteContent || '',
+			body       : emailState?.body || '',
+		},
+		...(showOrgSpecificMail ? {
+			custom_subject : emailState?.customSubject || '',
+			org_id         : emailState?.orgId || '',
+		} : {}),
 	},
 });
 
@@ -43,6 +53,7 @@ const createDraftRoom = async ({
 	communication_id = '',
 	rteEditorPayload = {},
 	buttonType = '',
+	emailState = {},
 }) => {
 	const emailCollection = collection(
 		firestore,
@@ -62,8 +73,9 @@ const createDraftRoom = async ({
 		last_draft_document : formatMailDraftMessage({
 			communication_id,
 			buttonType,
-			rteEditorPayload,
-			roomId: '',
+			payload : rteEditorPayload,
+			roomId  : '',
+			emailState,
 		}),
 	};
 
@@ -86,6 +98,9 @@ const updateMessage = async ({
 	isNewRoomCreated = false,
 	setEmailState = () => {},
 	isMinimize = false,
+	setSendLoading = () => {},
+	emailState = {},
+	showOrgSpecificMail = false,
 }) => {
 	const updatePayload = formatMailDraftMessage({
 		communication_id,
@@ -93,6 +108,8 @@ const updateMessage = async ({
 		buttonType,
 		parentEmailMessage: parent_email_message,
 		roomId,
+		emailState,
+		showOrgSpecificMail,
 	});
 
 	if (!isNewRoomCreated) {
@@ -132,6 +149,8 @@ const updateMessage = async ({
 			await updateEmailState({ roomId, messageId: res?.id, firestore, setEmailState });
 		}
 
+		setSendLoading(false);
+
 		return { roomId, messageId: res?.id };
 	}
 
@@ -154,6 +173,8 @@ const updateMessage = async ({
 		});
 	}
 
+	setSendLoading(false);
+
 	return { roomId, messageId };
 };
 
@@ -165,6 +186,9 @@ const useSaveDraft = ({
 	rteEditorPayload = {},
 	parentMessageData = {},
 	setEmailState = () => {},
+	setSendLoading = () => {},
+	emailState = {},
+	showOrgSpecificMail = false,
 }) => {
 	const agentId = useSelector((state) => state.profile?.user?.id);
 
@@ -174,6 +198,7 @@ const useSaveDraft = ({
 		newComposeDraftMsgId = '',
 		isMinimize = false,
 	} = {}) => {
+		setSendLoading(true);
 		const { id: roomId, no_of_drafts = 0 } = roomData || {};
 
 		const { is_draft = false, id = '' } = draftMessageData || {};
@@ -187,6 +212,7 @@ const useSaveDraft = ({
 				communication_id,
 				rteEditorPayload,
 				buttonType,
+				emailState,
 			});
 		}
 
@@ -205,6 +231,9 @@ const useSaveDraft = ({
 			isNewRoomCreated     : !roomId,
 			setEmailState,
 			isMinimize,
+			setSendLoading,
+			emailState,
+			showOrgSpecificMail,
 		});
 	};
 

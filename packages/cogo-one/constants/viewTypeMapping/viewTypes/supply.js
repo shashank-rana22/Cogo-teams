@@ -8,7 +8,7 @@ import {
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SUPPLY = {
-	chat_tabs_to_be_shown     : ['message', 'voice', 'outlook'],
+	chat_tabs_to_be_shown     : ['message', 'voice', 'firebase_emails'],
 	all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 	teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
@@ -31,9 +31,12 @@ const SUPPLY = {
 	get_accesible_assign_buttons  : getSupplyAgentButtons,
 	default_side_nav              : 'flash_shipment_bookings',
 	show_relevant_templates       : ['supply'],
-	mails_to_be_shown             : [GLOBAL_CONSTANTS.emails.import_rates, GLOBAL_CONSTANTS.emails.export_rates],
+	mails_to_be_shown             : [],
 	bulk_assign_features          : ['bulk_send_templates'],
 	configurations_to_be_shown    : [],
+	shift_view_default_type       : '',
+	email_signature_designation   : 'CogoOne Supply Advisor',
+	contact_number                : GLOBAL_CONSTANTS.mobile_number.cogoone_supply_contact_no,
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'sp_contacts'],
 	group_agents_api_filter       : ['supply', 'supply_admin'],
 	permissions                   : {
@@ -57,6 +60,9 @@ const SUPPLY = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : false,
+		hide_personal_mail                          : true,
+		show_services                               : true,
+		show_rm_agent_details                       : false,
 	},
 };
 

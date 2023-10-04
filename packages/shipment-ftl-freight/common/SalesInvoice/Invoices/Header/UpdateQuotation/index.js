@@ -12,10 +12,11 @@ function UpdateQuotation({
 	refetch = () => {},
 	invoiceData = {},
 }) {
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
+
 	const [show, setShow] = useState(false);
 
-	const { shipment_data = {} } = useContext(ShipmentDetailContext);
-	const { source = '' } = shipment_data;
+	const { source = '', is_job_closed_financially = false } = shipment_data || {};
 
 	const invoiceStatus = invoiceData?.invoicing_parties.some(
 		(item) => item?.status === 'pending',
@@ -35,7 +36,7 @@ function UpdateQuotation({
 				<Button
 					size="sm"
 					onClick={() => setShow(true)}
-					disabled={loading}
+					disabled={loading || is_job_closed_financially}
 					themeType="primary"
 				>
 					Refetch Contract Rates

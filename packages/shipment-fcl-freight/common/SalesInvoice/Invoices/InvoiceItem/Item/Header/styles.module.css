@@ -202,22 +202,11 @@
 
 .invoice_container {
 	width: 26%;
+	padding: 0 8px;
 
 	@media (max-width: 768px) {
 		display: none;
 	}
-}
-
-.invoice_status_cross_entity {
-	width: 26%;
-	padding: 4px 7px;
-	margin-bottom: 6px;
-	font-size: var(--font-size-sm);
-	line-height: 16px;
-	color: var(--color-secondary-greyscale-2);
-	white-space: nowrap;
-	background-color: #fbe6e6;
-	border-radius: 4px;
 }
 
 .invoice_status {
@@ -230,6 +219,11 @@
 	white-space: nowrap;
 	background-color: #fbe6e6;
 	border-radius: 4px;
+}
+
+.invoice_rejection_reason {
+	font-size: var(--font-size-sm);
+	color: var(--color-primary-error-red-2);
 }
 
 .flex_container {

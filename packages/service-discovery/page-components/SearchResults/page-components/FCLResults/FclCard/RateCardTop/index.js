@@ -167,6 +167,12 @@ function RateCardTop({
 						</strong>
 					) : null}
 				</div>
+
+				{!isCogoAssured ? (
+					<span className={styles.is_nvocc}>
+						{shipping_line?.is_nvocc ? 'NVOCC' : 'Main Line'}
+					</span>
+				) : null}
 			</div>
 
 			<div style={{ display: 'flex', marginRight: 20, alignItems: 'center' }}>

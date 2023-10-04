@@ -1,5 +1,4 @@
-import { Button, Toggle } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
+import { Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import { ModalInterface } from '../interface';
@@ -14,24 +13,13 @@ interface HeaderInterface {
 	control?:object;
 }
 function Header({ refetch, control }:HeaderInterface) {
-	const { query } = useRouter();
 	const [showModal, setShowModal] = useState<ModalInterface>({
 		upload_file     : false,
 		manual_entry    : false,
 		download_format : false,
 	});
-	const handleVersionChange = () => {
-		window.location.href = `/${query.partner_id}/business-finance/settlement/onAccountCollection`;
-	};
 	return (
 		<div className={styles.header_container}>
-			<Toggle
-				name="toggle"
-				size="md"
-				onLabel="Old"
-				offLabel="New"
-				onChange={handleVersionChange}
-			/>
 			<div>
 				<Button
 					type="button"

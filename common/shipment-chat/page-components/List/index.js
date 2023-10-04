@@ -17,28 +17,34 @@ import styles from './styles.module.css';
 const STATUS_MAPPING = {
 	inactive : 'inactive',
 	active   : 'active',
-	recent   : 'active',
+	unread   : 'unread',
 };
 
 function List({
 	setShow = () => { },
 	messageContentArr = [],
 	user_id = '',
-	setSeenLoading = () => { },
+	setSeenLoading = () => {},
 }) {
 	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
 	const refOuter = useRef(null);
+
 	const [id, setId] = useState('');
+
 	const [showUnreadChat, setShowUnreadChat] = useState(false);
+
 	const [status, setStatus] = useState('active');
+
 	const [list, setList] = useState({
 		data       : [],
 		total      : 0,
 		total_page : 0,
 	});
+
 	const [filters, setFilters] = useState({ page: 1, q: shipment_data?.serial_id });
-	const { page = 1, q } = filters || {};
+
+	const { page = 1, q = '' } = filters || {};
 
 	const getListPayload = {
 		page,
@@ -47,18 +53,22 @@ function List({
 			status            : STATUS_MAPPING[status],
 			q,
 		},
-		sort_by: status === 'recent' ? 'created_at' : undefined,
 	};
+
 	const states = { list, setList };
+
 	const { listData, total_page, loading } = useGetShipmentChatList({ payload: getListPayload, states });
 
 	const defaultChannel = listData?.find((obj) => obj?.source_id === shipment_data?.id);
+
 	const channelId = defaultChannel ? defaultChannel?.id : listData[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
-	const updateSeenPayload = { id, showUnreadChat };
+	const updateSeenPayload = { id, showUnreadChat, status };
+
 	const { loading: seenLoading } = useUpdateSeen({ payload: updateSeenPayload });
 
 	const getChannelPayload = { id };
+
 	const {
 		loadingChannel,
 		getChannel,
@@ -76,8 +86,19 @@ function List({
 
 	let unSeenMsg = [];
 	unSeenMsg = messageContentArr.filter((item) => item[user_id]);
+
 	const unreadDataList = unSeenMsg?.map((obj) => obj?.channel_details);
-	const channelList = showUnreadChat ? unreadDataList : listData;
+	(unreadDataList || []).sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+
+	let filteredUnreadList = unreadDataList || [];
+
+	if (q) {
+		filteredUnreadList = (unreadDataList || []).filter(
+			(item) => item?.channel_name?.toLowerCase()?.includes(q?.toString()?.toLowerCase()),
+		);
+	}
+
+	const channelList = showUnreadChat || status === 'unread' ? filteredUnreadList : listData;
 
 	const handleClick = () => {
 		refOuter.current.scrollTop = 0;

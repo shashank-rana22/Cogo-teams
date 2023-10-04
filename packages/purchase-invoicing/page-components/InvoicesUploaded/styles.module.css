@@ -10,7 +10,6 @@
 }
 
 .tablecontainer {
-	max-height: 600px;
 	margin-top: 16px;
 	overflow: auto;
 }
@@ -25,8 +24,9 @@
 
 .tabscontainer {
 	:global {
-		.ui_tab_list_container {
-			max-height: 34px;
+		.ui_tab_container {
+			padding-right: 12px;
+			padding-left: 12px;
 		}
 	}
 }

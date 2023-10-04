@@ -121,6 +121,7 @@ export const getTicketActionLabel = ({ t, type }) => {
 
 	return ACTIONS[type];
 };
+
 export const REQUEST_TYPE_OPTIONS = [
 	{ label: 'Shipment', value: 'shipment' },
 	{ label: 'Rate', value: 'rate' },
@@ -130,7 +131,8 @@ export const REQUEST_TYPE_OPTIONS = [
 
 export const SHIPMENT_RATE_KEYS = ['request_type', 'organization_id', 'user_id',
 	'serial_id', 'service', 'trade_type', 'category', 'sub_category', 'issue_type',
-	'additional_information', 'priority', 'file_url', 'notify_customer'];
+	'additional_information', 'priority', 'file_url', 'notify_customer', 'raised_by_desk',
+	'toggle_value', 'raised_to_desk'];
 
 export const FINANCE_PLATFORM_KEYS = ['request_type', 'category', 'sub_category', 'issue_type',
 	'additional_information', 'priority',

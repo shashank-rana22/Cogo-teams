@@ -9,8 +9,6 @@ import formatIps from '../common/SalesInvoice/helpers/format-ips';
 
 import useUpdateInvoiceCombination from './useUpdateInvoiceCombination';
 
-const EXPORT_SERVICES_TYPES = 'fcl_freight_service';
-
 const INVOICE_INDEX_GREATER_THAN = 0;
 
 const UNIQ_IGST_VAL_LENGTH = 1;
@@ -30,12 +28,14 @@ const useEditInvoicePref = ({
 	const { inco_term = '' } = primary_service || {};
 
 	const updateExportInvoices = getTradeTypeByIncoTerm(inco_term) === 'export';
+
 	const ALL_SERVICE_LINE_ITEMS = [];
 	invoicing_parties?.forEach((p) => {
-		const { invoice_currency, is_igst } = p || {};
+		const { invoice_currency, is_igst, invoice_language } = p || {};
 		const allServices = (p?.services || []).map((service) => ({
 			...service,
 			invoice_currency,
+			invoice_language,
 			is_igst,
 		}));
 		ALL_SERVICE_LINE_ITEMS.push(...allServices);
@@ -86,6 +86,7 @@ const useEditInvoicePref = ({
 				tax_mechanism,
 			},
 			invoice_currency : geo.country.currency.code,
+			invoice_language : geo.country?.language || '',
 			services         : [],
 			is_active        : true,
 			invoice_source   : '',
@@ -93,7 +94,10 @@ const useEditInvoicePref = ({
 		setSelectedParties([newParty, ...selectedParties]);
 	};
 
-	const handleServiceChange = (inv, { service_ids: newServices, invoice_currency: new_ic }) => {
+	const handleServiceChange = (inv, {
+		service_ids: newServices,
+		invoice_currency: new_ic, invoice_language: new_il,
+	}) => {
 		const currentInvoiceIndex = selectedParties?.findIndex(
 			(party) => party.id === inv.id,
 		);
@@ -111,20 +115,11 @@ const useEditInvoicePref = ({
 				NEW_SELECT_PARTIES.push(updateParty);
 			});
 
-			let isBasicFreightInvService = {};
 			NEW_SELECT_PARTIES[currentInvoiceIndex].services = newServices?.map(
 				(service) => {
 					const itemsService = ALL_SERVICE_LINE_ITEMS.find(
 						(item) => item.serviceKey === service,
 					);
-
-					const isBasicFreight = (itemsService?.line_items || []).find(
-						(item) => item?.code === 'BAS',
-					);
-
-					if (!isEmpty(isBasicFreight)) {
-						isBasicFreightInvService = itemsService;
-					}
 
 					const currentService = invoicing_parties?.services?.find(
 						(serv) => serv?.id === service?.split(':')?.[GLOBAL_CONSTANTS.zeroth_index],
@@ -152,6 +147,7 @@ const useEditInvoicePref = ({
 				},
 			);
 			NEW_SELECT_PARTIES[currentInvoiceIndex].invoice_currency = new_ic;
+			NEW_SELECT_PARTIES[currentInvoiceIndex].invoice_language = new_il;
 
 			let finalNewSelectParties = [...NEW_SELECT_PARTIES];
 			if (finalNewSelectParties?.length > PARTY_SERVICES_LENGTH_GREATER_THAN) {
@@ -167,36 +163,22 @@ const useEditInvoicePref = ({
 			const igstArray = (changedIP?.services || []).map(
 				(service) => service?.is_igst,
 			);
+
 			const uniq_igst_val = new Set(igstArray || []);
-			const allowServiceMerge = uniq_igst_val?.length === UNIQ_IGST_VAL_LENGTH;
 
-			let isBasicFreight = false;
-			if (!isEmpty(isBasicFreightInvService)) {
-				(finalNewSelectParties || []).forEach((party) => {
-					const BFLineItem = (party?.services || []).some(
-						(service) => service.serviceKey === isBasicFreightInvService.serviceKey
-							&& EXPORT_SERVICES_TYPES === isBasicFreightInvService.service_type,
-					);
-
-					if (party?.services?.length > PARTY_SERVICES_LENGTH_GREATER_THAN && BFLineItem) {
-						isBasicFreight = true;
-					}
-				});
-			}
+			const allowServiceMerge = uniq_igst_val?.size === UNIQ_IGST_VAL_LENGTH;
 
 			const is_invoice_mergeable = getByKey(
 				ENTITY_IDS_MAPPING[shipment_data?.entity_id] || {},
 				'others.navigations.bookings.invoicing.is_invoice_mergeable',
 			);
 
-			if (
-				isBasicFreight
-				&& updateExportInvoices
+			if (updateExportInvoices
 				&& !allowServiceMerge
 				&& !is_invoice_mergeable
 			) {
 				Toast.error(
-					'Basic Freight or IGST invoices cannot be merged with other services',
+					'IGST invoices cannot be merged with other services',
 				);
 			} else {
 				setSelectedParties([...finalNewSelectParties]);

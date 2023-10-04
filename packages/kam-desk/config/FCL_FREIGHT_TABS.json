@@ -1,13 +1,17 @@
 {
-    "export":{
+    "export_import":{
         "tabs":[
             {
                 "value":"mark_confirmed",
                 "label":"Confirm Booking"
             },
             {
+                "label":"Confirm with Shipper",
+                "value":"confirm_with_shipper"
+            },
+            {
                 "value":"upload_booking_note",
-                "label":"Waiting for BN"
+                "label":"Waiting for BN/SO"
             },
             {
                 "value":"update_container_details",
@@ -40,47 +44,7 @@
         ],
         "possible_filters":["importer_exporter_id","triggered_pending_invoices","date_type","source","tags"]
     },
-    "import":{
-        "tabs":[
-            {
-                "label":"Confirm Booking",
-                "value":"mark_confirmed"
-            },
-            {
-                "label":"Verify Shipper",
-                "value":"verify_shipper"
-            },
-            {
-                "label":"Waiting for SO",
-                "value":"upload_shipping_order"
-            },
-            {
-                "label":"Packing/Commercial/SI",
-                "value":"list_task_pending"
-            },
-            {
-                "label":"BL Approval",
-                "value":"document_approval"
-            },
-            {
-                "label":"Vessel Departed",
-                "value":"vessel_departed"
-            },
-            {
-                "label":"Vessel Arrived",
-                "value":"vessel_arrived"
-            },
-            {
-                "label":"Completed",
-                "value":"completed"
-            }, 
-            {
-                "label":"Cancelled",
-                "value":"cancelled"
-            }
-        ],
-        "possible_filters":["importer_exporter_id","triggered_pending_invoices","date_type","source","tags"]
-    },
+
     "fcl_customs":{
         "tabs":[
             {

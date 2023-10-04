@@ -5,6 +5,17 @@
 	padding: 20px 0 0 36px;
 	font-size: 16px;
 	font-weight: 600;
+
+	:global {
+		.react-datepicker__close-icon {
+			top: 4px;
+			height: 0;
+		}
+
+		.react-datepicker-popper {
+			z-index: 20;
+		}
+	}
 }
 
 .border {

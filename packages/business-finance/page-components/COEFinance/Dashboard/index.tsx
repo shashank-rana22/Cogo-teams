@@ -5,10 +5,11 @@ import { useState } from 'react';
 import Filter from '../../commons/Filters';
 import StyledTable from '../../commons/StyledTable';
 import MyResponsivePie from '../Components/PieChart';
-import { PieChartData } from '../Components/PieChart/PieChartData';
+import { pieChartData } from '../Components/PieChart/PieChartData';
 import MyResponsiveBar from '../Components/ResponsiveBar';
 import BarData from '../Components/ResponsiveBar/BarData';
 import useGetDashboardData from '../hook/useGetDashboardData';
+import useGetPieChartData from '../hook/useGetPieChartData';
 import useJobStats from '../hook/useJobStats';
 import useServiceOpsStats from '../hook/useServiceOpsStats';
 
@@ -44,6 +45,8 @@ function Dashboard({
 	const { dashboardData = [{}], loading } = useGetDashboardData(filters);
 	const { LOCKED = 0, ALL_APPROVED_BILLS = 0, COE_REJECTED = 0, FINANCE_REJECTED = 0 } = statsData || {};
 	const { PAYRUN_BILL_APPROVED = 0	} = statsCOEApprovedData || {};
+
+	const { pieData } = useGetPieChartData(filters);
 
 	const Status = [
 		{ id: 1, label: 'Pending', value: LOCKED },
@@ -128,7 +131,7 @@ function Dashboard({
 				</div>
 
 				<div className={styles.responsive_pie}>
-					<MyResponsivePie data={PieChartData(filters)} />
+					<MyResponsivePie data={pieChartData(pieData)} title="Rejection Statics" />
 				</div>
 			</div>
 			<div className={styles.stats}>

@@ -1,4 +1,5 @@
 import { Pill, Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import getPillsFormat from '../../../helpers/getPillsFormat';
@@ -7,12 +8,13 @@ import PopoverContent from './PopoverContent';
 import styles from './styles.module.css';
 
 const KEY_FROM_ITEM = ['inco_term', 'trade_type', 'free_days_detention_destination', 'container_size', 'container_type',
-	'commodity', 'inco_term', 'containers_count', 'cargo_weight_per_container', 'destination_cargo_handling_type'];
+	'commodity', 'inco_term', 'containers_count', 'cargo_weight_per_container', 'destination_cargo_handling_type',
+	'haulage_type'];
 
 const MINIMUM_COUNT_FOR_PLURAL = 1;
 
 function CargoPills({ data = {} }) {
-	const { cargo_details = [] } = data || {};
+	const { cargo_details = [], freight_services = [] } = data || {};
 
 	const [initialPills = {}, ...restPills] = cargo_details;
 
@@ -21,6 +23,16 @@ function CargoPills({ data = {} }) {
 			initialPills[itemKey] = data?.[itemKey];
 		}
 	});
+
+	if (!isEmpty(freight_services)) {
+		const serviceData = freight_services[GLOBAL_CONSTANTS.zeroth_index] || {};
+
+		KEY_FROM_ITEM.forEach((itemKey) => {
+			if (serviceData?.[itemKey]) {
+				initialPills[itemKey] = serviceData?.[itemKey];
+			}
+		});
+	}
 
 	return (
 		<div className={styles.container} style={data?.fm_rejection_reason ? { flex: 1 } : {}}>

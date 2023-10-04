@@ -2,7 +2,7 @@ import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCWaitForTimeSlots } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
@@ -10,18 +10,30 @@ import { PRIORITY_MAPPING, STATUS_MAPPING, getStatusLabelMapping } from '../../.
 import useGetCountdown from '../../../../hooks/useGetCountdown';
 import TicketLoader from '../../../TicketStructure/TicketStructureLoader';
 
+import ConfigDetails from './ConfigDetails';
 import styles from './styles.module.css';
 
 function TicketSummary({
 	Ticket: ticket = {}, ClosureAuthorizers: closureAuthorizers = false, TicketUser: ticketUser = {},
 	TicketReviewer: ticketReviewer = {}, IsCurrentReviewer: isCurrentReviewer = false,
 	TicketStatus: ticketStatus = '', AgentName: agentName = '',
-	detailsLoading = false,
+	detailsLoading = false, TicketConfiguration: ticketConfiguration = {},
+	OrganizationData: organizationData = {},
 }) {
 	const {
-		Name: name = '', Email: email = '', MobileCountryCode: mobileCountryCode = '',
+		Name: name = '', Email: email = '',
+		MobileCountryCode: mobileCountryCode = '',
 		MobileNumber: mobileNumber = '',
 	} = ticketUser || {};
+	const {
+		Category : category = '',
+		Subcategory: subCategory = '',
+		RaisedByDesk: raisedByDesk = '',
+		RaisedToDesk: raisedToDesk = '',
+		CategoryDeskType: categoryDeskType = '',
+	} = ticketConfiguration || {};
+
+	const { ShortName: shortName = '' } = organizationData || {};
 
 	const {
 		ID: id = '',
@@ -38,9 +50,7 @@ function TicketSummary({
 	const { t } = useTranslation(['myTickets']);
 
 	const {
-		SerialID: serialId,
-		Service: service,
-		TradeType: tradeType,
+		SerialID: serialId, Service: service, TradeType: tradeType,
 		RequestType: requestType,
 	} = data || {};
 
@@ -50,6 +60,9 @@ function TicketSummary({
 		?.[STATUS_MAPPING[ticketStatus]] || {};
 
 	const isSameName = agentName === name;
+
+	const isCategoryConfig = categoryDeskType === 'by_category';
+	const ticketReviewerName = ticketReviewer?.User?.Name || '';
 
 	const isTicketExpired = new Date(tat) > new Date();
 
@@ -143,33 +156,58 @@ function TicketSummary({
 						</span>
 					</div>
 				)}
-				<div className={styles.ticket_data}>
-					{t('myTickets:email')}
-					:
-					<span className={styles.updated_at}>
-						{email}
-					</span>
-				</div>
-				<div className={styles.ticket_data}>
-					{t('myTickets:contact_no')}
-					:
-					<span className={styles.updated_at}>
-						{mobileCountryCode}
-						{' '}
-						{mobileNumber}
-					</span>
-				</div>
+				{shortName && (
+					<div className={styles.ticket_data}>
+						{t('myTickets:organization')}
+						:
+						<span className={styles.updated_at}>
+							{shortName}
+						</span>
+					</div>
+				)}
+				{email ? (
+					<div className={styles.ticket_data}>
+						{t('myTickets:email')}
+						:
+						<span className={styles.updated_at}>
+							{email}
+						</span>
+					</div>
+				)
+					: null}
+				{mobileNumber ? (
+					<div className={styles.ticket_data}>
+						{t('myTickets:contact_no')}
+						:
+						<span className={styles.updated_at}>
+							{mobileCountryCode}
+							{' '}
+							{mobileNumber}
+						</span>
+					</div>
+				)
+					: null}
 				{requestType && (
 					<div className={styles.ticket_data}>
-						Request Type:
+						{t('myTickets:request_type')}
+						:
 						<span className={styles.updated_at}>
 							{startCase(requestType)}
 						</span>
 					</div>
 				)}
+				<ConfigDetails
+					t={t}
+					category={category}
+					subCategory={subCategory}
+					raisedToDesk={raisedToDesk}
+					raisedByDesk={raisedByDesk}
+					isCategoryConfig={isCategoryConfig}
+				/>
 				{serialId && (
 					<div className={styles.ticket_data}>
-						SID:
+						{t('myTickets:sid')}
+						:
 						<span className={styles.updated_at}>
 							{serialId}
 						</span>
@@ -177,7 +215,8 @@ function TicketSummary({
 				)}
 				{service && (
 					<div className={styles.ticket_data}>
-						Service:
+						{t('myTickets:service')}
+						:
 						<span className={styles.updated_at}>
 							{startCase(service)}
 						</span>
@@ -185,26 +224,32 @@ function TicketSummary({
 				)}
 				{tradeType && (
 					<div className={styles.ticket_data}>
-						Trade Type:
+						{t('myTickets:trade_type')}
+						:
 						<span className={styles.updated_at}>
 							{startCase(tradeType)}
 						</span>
 					</div>
 				)}
-				<div className={styles.ticket_data}>
-					{t('myTickets:assigned_to')}
-					:
-					<span className={styles.updated_at}>
-						{ticketReviewer?.User?.Name}
-					</span>
-				</div>
-				<div className={styles.ticket_data}>
-					{t('myTickets:closure_authorizers')}
-					:
-					<span className={styles.updated_at}>
-						{authorizers.map((item) => item).join(', ') || '-'}
-					</span>
-				</div>
+				{ticketReviewerName &&	(
+					<div className={styles.ticket_data}>
+						{t('myTickets:assigned_to')}
+						:
+						<span className={styles.updated_at}>
+							{ticketReviewerName}
+						</span>
+					</div>
+				)}
+				{!isEmpty(authorizers) ? (
+					<div className={styles.ticket_data}>
+						{t('myTickets:closure_authorizers')}
+						:
+						<span className={styles.updated_at}>
+							{authorizers.map((item) => item).join(', ') || '-'}
+						</span>
+					</div>
+				)
+					: null}
 			</div>
 		</div>
 	);

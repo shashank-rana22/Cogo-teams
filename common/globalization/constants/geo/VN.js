@@ -10,7 +10,8 @@ export default {
 			code   : 'VND',
 			symbol : '₫',
 		},
-		mobile_country_code: '+84',
+		mobile_country_code       : '+84',
+		invoice_allowed_languages : ['english', 'vietnamese'],
 	},
 	formats: {
 		amount: {
@@ -230,6 +231,7 @@ export default {
 			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
 			'dc5e8695-c30e-4350-9de9-8218ed1abfc4', // CCS Manager - Enterprise
 		],
+		cp_program_manager    : '122c2266-6c55-4b97-9f61-1056f87b53a7',
 		prod_kam_ie_manager   : 'f9905d33-24d7-48ca-99cd-eeca13a90d5a',
 		prod_kam_ie           : '0bc8c199-09ed-4a85-b3a3-a855f05a2716',
 		portfolio_manager_id  : '46f33843-8f73-45c0-89c8-248aa1698bb0',
@@ -287,6 +289,9 @@ export default {
 		finops                    : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
 		cogo_one_kyc              : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
 		finance_branch_accounts   : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
+		service_ops3              : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
+		data_superadmin           : 'df340ea2-91b5-4cbc-80ab-d11cec21f040',
+		kam_admin                 : 'df6591f0-f41b-4283-9966-7d0225e1df00', // Kam Admin Vietnam
 	},
 	options: {
 		registration_types: [
@@ -417,9 +422,15 @@ export default {
 			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
 			{ label: 'E-Invoice Failed', value: 'IRN_FAILED' },
 			{ label: 'E-Invoice Cancelled', value: 'IRN_CANCELLED' },
-			{ label: 'Requested', value: 'REQUESTED' },
 		],
-
+		invoice_status_new: [
+			{ label: 'Draft', value: 'DRAFT' },
+			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
+			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
+			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
+			{ label: 'E-Invoice Failed', value: 'IRN_FAILED' },
+			{ label: 'E-Invoice Cancelled', value: 'IRN_CANCELLED' },
+		],
 		freight_container_types: [
 			{
 				label : 'Standard(Dry)',

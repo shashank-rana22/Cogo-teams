@@ -22,12 +22,14 @@ const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
 const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
 
-const remarkRender = ({ invoice }) => (
-	<div className={styles.remarkcontainer}>
-		<div className={styles.title}>Invoice Remarks</div>
-		<div className={styles.value}>{invoice.remarks}</div>
-	</div>
-);
+function RemarkRender({ invoice = {} }) {
+	return (
+		<div className={styles.remarkcontainer}>
+			<div className={styles.title}>Invoice Remarks</div>
+			<div className={styles.value}>{invoice?.remarks}</div>
+		</div>
+	);
+}
 
 function Actions({
 	invoice = {},
@@ -54,9 +56,10 @@ function Actions({
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
-	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true
+	const editInvoicesVisiblity = !shipment_data?.is_job_closed_financially
+		&& ((shipment_data?.is_cogo_assured !== true
 		&& !invoice?.is_igst && !!invoice?.edit_invoice
-	) || isAuthorized;
+		) || isAuthorized);
 
 	const modalComponents = {
 		changeCurrency: <ChangeCurrency
@@ -120,6 +123,7 @@ function Actions({
 									commonActions={commonActions}
 									editInvoicesVisiblity={editInvoicesVisiblity}
 									invoice={invoice}
+									is_job_closed_financially={shipment_data?.is_job_closed_financially}
 								/>
 							)}
 							theme="light"
@@ -135,7 +139,7 @@ function Actions({
 						)}
 
 					{!isEmpty(invoice.remarks) ? (
-						<Tooltip placement="bottom" content={remarkRender({ invoice })}>
+						<Tooltip placement="bottom" content={<RemarkRender invoice={invoice} />}>
 							<div className={styles.icon_more_wrapper}>
 								<IcMInfo fill="#DDEBC0" />
 							</div>

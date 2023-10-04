@@ -1,4 +1,5 @@
-import { Loader, Placeholder, Pill, Accordion } from '@cogoport/components';
+import { Loader, Accordion, Button } from '@cogoport/components';
+import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowRotateDown,
@@ -6,24 +7,22 @@ import {
 	IcADocumentTemplates,
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
+import useGetDocumentContent from '../../../hook/useGetDocumentContent';
 import useGetVariance from '../../../hook/useGetVariance';
-import useGetWallet from '../../../hook/useGetWallet';
 import useListShipment from '../../../hook/useListShipment';
+import Tagging from '../Taggings';
 
 import ConsolidatedShipmentDetail from './ConsolidatedShipmentDetails/index';
-import Details from './Details/index';
+import DetailsCard from './DetailsCard';
 import Documents from './Documents/index';
-// eslint-disable-next-line import/no-cycle
 import PdfDisplay from './PdfDisplay/index';
-// eslint-disable-next-line import/no-cycle
 import POC from './POC/index';
-// eslint-disable-next-line import/no-cycle, import/no-named-as-default
 import ShipmentDetailsCard from './ShipmentDetailsCard/index';
+import SIDView from './SIDView';
 import styles from './styles.module.css';
-import TimeLineItemCheck from './TimelineItemCheck/index';
 import VarianceView from './VarianceView/index';
 
 interface BuyerDetailInterface {
@@ -70,6 +69,7 @@ interface BillInterface {
 
 interface JobInterface {
 	jobNumber: string;
+	referenceId: string;
 }
 
 interface BillAdditionalObjectInterface {
@@ -82,6 +82,7 @@ interface BillAdditionalObjectInterface {
 	advancedAmountCurrency? : string;
 	serialId?: string,
 	advancedAmount?: string,
+	urgencyTag?: string,
 }
 export interface DataInterface {
 	job?: JobInterface;
@@ -93,7 +94,8 @@ export interface DataInterface {
 	bill?: BillInterface;
 	consolidatedShipmentIds?:Array<string>;
 	organizationId?: string;
-	serviceProviderDetail?: any
+	serviceProviderDetail?: any;
+	remarks?: Array<object>;
 }
 
 interface ShipmentDetailsInterface {
@@ -102,57 +104,97 @@ interface ShipmentDetailsInterface {
 	setRemarksVal: any;
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
-	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
-	lineItem?: boolean;
 	status: string;
 	jobType?:string;
+	setCheckItem?: React.Dispatch<React.SetStateAction<{}>>,
+	lineItemsCheck?: boolean;
+	checkItem?: { shipmentDetailsCheck?: boolean,
+		documentsCheck?: boolean,
+		taggingCheck?: boolean,
+		sidDataCheck?: boolean,
+	};
+	isTagFound?: boolean;
+	setCurrentTab?: any;
+	setCombinedRemarks?: Function;
+	jobNumberByQuery?: string;
+	mappingsData?: any;
 }
+
 function ShipmentDetails({
 	data = {},
 	remarksVal = {},
 	setRemarksVal = () => {},
 	lineItemsRemarks = {},
 	setLineItemsRemarks = () => {},
-	setLineItem = () => {},
-	lineItem = false,
 	status = '',
 	jobType = '',
+	lineItemsCheck = false,
+	checkItem = {},
+	setCheckItem = (prop) => (prop),
+	isTagFound = false,
+	setCurrentTab = () => {},
+	setCombinedRemarks = () => {},
+	jobNumberByQuery = '',
+	mappingsData = {},
 }: ShipmentDetailsInterface) {
-	const [showDetails, setShowDetails] = useState(false);
-	const [showDocuments, setShowDocuments] = useState(true);
 	const [showVariance, setShowVariance] = useState(false);
-	const [itemCheck, setItemCheck] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
 	const { job, consolidatedShipmentIds = [] } = data || {};
-	const { jobNumber } = job || {};
+	const { jobNumber, referenceId = '' } = job || {};
+
 	const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
 	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
 	const dataList = shipmentData?.list[GLOBAL_CONSTANTS.zeroth_index] || {};
-	const { source, trade_type: tradeType } = dataList;
 	const shipmentId = dataList?.id || '';
-	const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
-	const { data: dataWallet } = useGetWallet(shipmentId);
-	const {
-		agent_data: agentData,
-		agent_role_data: agentRoleData,
-		amount,
-		amount_currency: amountCurrency,
-	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
-
-	function GetPills() {
-		if (loadingShipment) {
-			return <Placeholder height="20px" width="80px" />;
-		}
-		if (sourceText) {
-			return <Pill color="blue">{sourceText}</Pill>;
-		}
-		if (tradeType) {
-			return <Pill color="yellow">{startCase(tradeType)}</Pill>;
-		}
-		return <div>NO DATA FOUND</div>;
-	}
 
 	const jobTypeValue = jobType?.toLowerCase();
+
+	const [tab, setTab] = useState({
+		shipmentDetailsTab : true,
+		documentsTab       : false,
+		taggingTab         : false,
+		sidDataTab         : false,
+		collectionPartyTab : false,
+		billingPartyTab    : false,
+		invoiceDetailsTab  : false,
+		lineItemsTab       : false,
+	});
+
+	const { docContent = {}, chargesTable = [] } = useGetDocumentContent({ data });
+
+	const onTabClick = ({ tabName = '' }) => {
+		setTab(
+			(prev: any) => ({ ...prev, [tabName]: !prev[tabName] }),
+		);
+		setCurrentTab(tabName);
+	};
+
+	const onAccept = ({ tabName = '', tabToOpen = '', timelineItem = '' }) => {
+		setTab(
+			(prev: any) => ({ ...prev, [tabToOpen]: true, [tabName]: !prev[tabName] }),
+		);
+		setCurrentTab(tabToOpen);
+		setCheckItem(
+			(prev: any) => ({ ...prev, [timelineItem]: true }),
+		);
+	};
+
+	const [value, onChange] = useState([]);
+
+	useEffect(() => {
+		if (jobType === 'CONSOLIDATED') {
+			// clearing timeline elements that are not included in case of consolidated
+			setCheckItem((prev:any) => {
+				const newCheckItem = { ...prev };
+				newCheckItem.shipmentDetailsCheck = true;
+				delete newCheckItem?.documentsCheck;
+				delete newCheckItem?.sidDataCheck;
+				delete newCheckItem?.taggingCheck;
+				return { ...newCheckItem };
+			});
+		}
+	}, [jobType, setCheckItem]);
+
 	return (
 		<div className={styles.container}>
 			<h3>
@@ -176,71 +218,22 @@ function ShipmentDetails({
 
 			{jobType === 'SHIPMENT' && (
 				<>
-					<div className={styles.card}>
-						<div
-							className={styles.card_upper}
-							onClick={() => {
-								setShowDetails(!showDetails);
-							}}
-							role="presentation"
-						>
-							<div className={styles.sub_container}>
-								Details
-								<div className={styles.tags_container}>
-									<GetPills />
-								</div>
-								{dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] && (
-									<div className={styles.data}>
-										<div className={styles.kam_data}>KAM -</div>
-										<div>
-											{agentData?.name}
-											(
-											{agentRoleData?.name}
-											)
-										</div>
-										<div className={styles.kam_data}>Wallet Usage - </div>
-										<div>
-											{amountCurrency || ''}
-
-											{amount || 0}
-										</div>
-									</div>
-								)}
-							</div>
-
-							<div
-								className={styles.caret}
-								onClick={() => {
-									setShowDetails(!showDetails);
-								}}
-								role="presentation"
-							>
-								{showDetails ? (
-									<IcMArrowRotateUp height="17px" width="17px" />
-								) : (
-									<IcMArrowRotateDown height="17px" width="17px" />
-								)}
-							</div>
-						</div>
-						{showDetails && <div className={styles.hr} />}
-						<div className={styles.details}>
-							{showDetails && (
-								<Details
-									dataList={dataList}
-									shipmentId={shipmentId}
-								/>
-							)}
-						</div>
-					</div>
-
+					<DetailsCard
+						onTabClick={onTabClick as any}
+						loadingShipment={loadingShipment}
+						onAccept={onAccept as any}
+						shipmentDetailsTab={tab.shipmentDetailsTab}
+						shipmentDetailsCheck={checkItem.shipmentDetailsCheck}
+						dataList={dataList}
+					/>
 					<div
 						className={styles.card}
-						onClick={() => {
-							setShowDocuments(!showDocuments);
-						}}
-						role="presentation"
 					>
-						<div className={styles.card_upper}>
+						<div
+							className={styles.card_upper}
+							onClick={() => onTabClick({ tabName: 'documentsTab' })}
+							role="presentation"
+						>
 							<div className={styles.sub_container}>
 								Shipment Documents
 								<IcADocumentTemplates height="17px" width="17px" />
@@ -251,24 +244,63 @@ function ShipmentDetails({
 
 							<div
 								className={styles.caret}
-								onClick={() => {
-									setShowDocuments(!showDocuments);
-								}}
 								role="presentation"
 							>
-								{showDocuments ? (
+								{tab.documentsTab ? (
 									<IcMArrowRotateUp height="17px" width="17px" />
 								) : (
 									<IcMArrowRotateDown height="17px" width="17px" />
 								)}
 							</div>
 						</div>
-						{showDocuments && <div className={styles.hr} />}
+						{tab.documentsTab && <div className={styles.hr} />}
 						<div className={styles.documents}>
-							{showDocuments && <Documents shipmentId={shipmentId} />}
+							{tab.documentsTab && <Documents shipmentId={shipmentId} />}
 							{' '}
 						</div>
+						{tab.documentsTab && (
+							<div className={styles.apply_section}>
+								<Button
+									size="md"
+									themeType="secondary"
+									style={{ marginRight: '8px' }}
+									disabled={checkItem.documentsCheck}
+									onClick={() => onAccept({
+										tabName      : 'documentsTab',
+										tabToOpen    : isTagFound ? 'taggingTab' : 'sidDataTab',
+										timelineItem : 'documentsCheck',
+									})}
+									className={styles.approve_button}
+								>
+									Approve
+								</Button>
+							</div>
+						)}
 					</div>
+					{isTagFound ? (
+						<div className={styles.tagging}>
+							<Tagging
+								setRemarksVal={setRemarksVal}
+								status={status}
+								onTabClick={onTabClick}
+								onAccept={onAccept}
+								showTab={tab.taggingTab}
+								taggingChecked={checkItem.taggingCheck}
+								mappingsData={mappingsData}
+								setCheckItem={setCheckItem}
+							/>
+						</div>
+					) : undefined}
+
+					<SIDView
+						shipmentId={jobNumber}
+						onTabClick={onTabClick as any}
+						onAccept={onAccept as any}
+						showTab={tab.sidDataTab}
+						sidDataChecked={checkItem.sidDataCheck}
+						jobNumberByQuery={jobNumberByQuery}
+					/>
+
 				</>
 			)}
 			<div>
@@ -277,38 +309,63 @@ function ShipmentDetails({
 						<Accordion
 							type="text"
 							title="Shipment Details"
+							animate
 						>
 							<div className={styles.line} />
 							<ConsolidatedShipmentDetail consolidatedSids={consolidatedShipmentIds} />
 						</Accordion>
 					</div>
 				)}
-				{collectionPartyId ? (
-					<div className={styles.variance}>
-						<div>
-							VARIANCE -
-							{loading
-								? 'Getting......'
-								: `${varianceFullData?.currency || '--'}${' '}
+				<div className={styles.poc_aligned}>
+					<div className={styles.container_number}>
+						{collectionPartyId ? (
+							<div className={styles.variance}>
+								<div>
+									<span className={styles.variance_margin}>VARIANCE:</span>
+									{loading
+										? 'Getting......'
+										: `${varianceFullData?.currency || '--'}${' '}
 					${varianceFullData?.total_variance || '--'}`}
-						</div>
-						{varianceFullData?.data ? (
-							<div
-								className={styles.view_more}
-								onClick={() => setShowVariance(true)}
-								role="presentation"
-							>
-								View More
+								</div>
+								{varianceFullData?.data ? (
+									<div
+										className={styles.view_more}
+										onClick={() => setShowVariance(true)}
+										role="presentation"
+									>
+										View More
+									</div>
+								) : (
+									<div>NO DATA FOUND</div>
+								)}
 							</div>
-						) : (
-							<div>NO DATA FOUND</div>
-						)}
+						) : null}
+						<div className={styles.select_filter}>
+							<AsyncSelect
+								params={{
+									filters: {
+										shipment_id: referenceId,
+									},
+								}}
+								value={value}
+								onChange={onChange}
+								multiple
+								placeholder="Container Numbers"
+								isClearable
+								style={{ width: '250px' }}
+								size="md"
+								intialCall
+								asyncKey="shipment_container_details"
+								labelKey="container_number"
+								valueKey="container_number"
+							/>
+						</div>
 					</div>
-				) : null}
-				<POC itemData={data} />
+					<POC itemData={data} />
+				</div>
 			</div>
 
-			{showVariance ? (
+			{showVariance && (
 				<VarianceView
 					show={showVariance}
 					loading={loading}
@@ -316,13 +373,7 @@ function ShipmentDetails({
 					data={varianceFullData?.data}
 					currency={varianceFullData?.currency}
 				/>
-			) : null}
-
-			<TimeLineItemCheck
-				itemCheck={itemCheck}
-				lineItem={lineItem}
-				status={status}
-			/>
+			)}
 
 			<div className={styles.shipment_details_footer}>
 				<div className={styles.pdf_display}>
@@ -335,9 +386,15 @@ function ShipmentDetails({
 						setRemarksVal={setRemarksVal}
 						lineItemsRemarks={lineItemsRemarks}
 						setLineItemsRemarks={setLineItemsRemarks}
-						setItemCheck={setItemCheck}
-						setLineItem={setLineItem}
 						invoiceStatus={status}
+						lineItemsCheck={lineItemsCheck}
+						setCheckItem={setCheckItem}
+						onAccept={onAccept}
+						onTabClick={onTabClick}
+						tab={tab}
+						setCombinedRemarks={setCombinedRemarks}
+						docContent={docContent}
+						chargesTable={chargesTable}
 					/>
 				</div>
 			</div>

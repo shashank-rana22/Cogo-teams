@@ -2,8 +2,8 @@ import { Tooltip, Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCError } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
-import Image from 'next/image';
 import { useContext, useState } from 'react';
 
 import useUpdateShipmentFaultAlarm from '../../../../hooks/useUpdateShipmentFaultAlarm';
