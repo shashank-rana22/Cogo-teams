@@ -12,7 +12,7 @@ const getTableColumns = ({ slabData = [] }) => {
 				id: `slab_${index}_capacity`,
 
 				accessor: ({ [`slab_${index}_capacity`]: capacity = '' }) => (
-					<div>{capacity || '-'}</div>
+					<div>{capacity !== '' ? capacity : '-'}</div>
 				),
 			};
 
@@ -21,7 +21,7 @@ const getTableColumns = ({ slabData = [] }) => {
 				id     : `slab_${index}_NEQ`,
 
 				accessor: ({ [`slab_${index}_NEQ`]: NEQ = '' }) => (
-					<div>{NEQ || '-'}</div>
+					<div>{NEQ !== '' ? NEQ : '-'}</div>
 				),
 			};
 
