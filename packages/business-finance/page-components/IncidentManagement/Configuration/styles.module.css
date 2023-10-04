@@ -8,7 +8,6 @@
 .incident_id {
 	padding: 0 20px;
 	font-weight: 600;
-	color: #f68b21;
 }
 
 .flex {
@@ -21,44 +20,37 @@
 	overflow-wrap: break-word;
 }
 
-.remark {
-	width: 100px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	cursor: pointer;
+.common {
+	hyphens: auto;
+	line-height: 16px;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
 }
 
 .type_request {
 	width: 120px;
-	hyphens: auto;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	white-space: normal;
+}
+
+.requested_by {
+	width: 110px;
 }
 
 .company_name {
 	width: 150px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	cursor: pointer;
 }
 
-.request {
-	width: 150px;
-	hyphens: auto;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	white-space: normal;
+.sub_type {
+	width: 120px;
 }
 
-.time {
-	width: 110px;
-	hyphens: auto;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	white-space: normal;
+.job_open {
+	margin-top: -5px;
+}
+
+.source {
+	width: 90px;
+	height: 16px;
 }
 
 .flex_reverse {
@@ -123,4 +115,13 @@
 	padding: 4px 8px;
 	background: var(--color-primary-yellow-4);
 	border-radius: 4px;
+}
+
+.time {
+	width: 90px;
+	height: 16px;
+	hyphens: auto;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
 }
