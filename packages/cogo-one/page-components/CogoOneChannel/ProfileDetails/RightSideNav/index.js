@@ -85,18 +85,14 @@ function RightSideNav({
 					expandSideBar: !prev?.expandSideBar,
 				};
 			});
-		} else {
-			setActiveSelect((prev) => {
-				if (prev === val) {
-					return '';
-				}
-
-				return val;
-			});
+		} else if (activeTab === 'teams') {
+			setActiveSelect((prev) => ((prev === val) ? '' : val));
 			setActiveTab((prev) => ({
 				...prev,
 				expandSideBar: !prev?.expandSideBar,
 			}));
+		} else {
+			setActiveSelect(val);
 		}
 	};
 
@@ -104,7 +100,7 @@ function RightSideNav({
 		<>
 			<div className={styles.right_container}>
 				{ICON_MAPPING.map((item) => {
-					const { icon, name, content } = item;
+					const { icon, name, content } = item || {};
 
 					const showDocumentCount = activeSelect !== 'documents' && name === 'documents'
 				&& !!documentsCount && !checkConditions;

@@ -120,6 +120,7 @@ function CogoOne() {
 		queryAssignedChat: assigned_chat,
 	};
 
+	const teamsSideBarCheck = (activeTab?.tab === 'teams' && !!activeTab?.data?.id);
 	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
 	const { user_id = '', lead_user_id = '' } = tabData || {};
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
@@ -128,9 +129,9 @@ function CogoOne() {
 		: activeTab?.data?.organization_id;
 	const expandedSideBar = (ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
 		|| ((ENABLE_EXPAND_SIDE_BAR.includes(
-			activeTab?.data?.channel_type || activeTab?.tab,
-		)) && activeTab?.expandSideBar));
-	const collapsedSideBar = ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type || activeTab?.tab)
+			activeTab?.data?.channel_type,
+		) || teamsSideBarCheck) && activeTab?.expandSideBar));
+	const collapsedSideBar = (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) || teamsSideBarCheck)
 								&& !activeTab?.expandSideBar;
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
@@ -226,7 +227,7 @@ function CogoOne() {
 							{(
 								ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
 								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
-								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.tab)
+								|| teamsSideBarCheck
 							) ? (
 								<div className={cl`${styles.user_profile_layout} 
 								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}
@@ -250,6 +251,7 @@ function CogoOne() {
 										mailProps={mailProps}
 										chatsConfig={activeTab}
 										membersList={membersList}
+										teamsSideBarCheck={teamsSideBarCheck}
 									/>
 									{(hasNoFireBaseRoom && !user_id && !lead_user_id)
 									&& <div className={styles.overlay_div} />}

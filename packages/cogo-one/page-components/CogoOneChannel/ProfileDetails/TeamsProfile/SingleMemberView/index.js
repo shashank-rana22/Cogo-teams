@@ -9,8 +9,15 @@ import { profileBasicDetailsMapping } from '../../../../../utils/getProfileBasic
 
 import styles from './styles.module.css';
 
-function SingleMemberView({ groupMembersData = [], status = '' }) {
-	const otherActiveMemberData = groupMembersData.find((item) => !item?.is_admin || item.access_type === 'user');
+function SingleMemberView({
+	groupMembersData = [],
+	status = '',
+	isDraft = false,
+}) {
+	console.log('isDraft', isDraft);
+	const otherActiveMemberData = groupMembersData.find(
+		(item) => !item?.is_admin || item.access_type === 'user',
+	);
 	const loginUserData = groupMembersData.find((item) => item.is_admin || item.access_type === 'owner');
 
 	const { name = '', partner = {} } = otherActiveMemberData || {};

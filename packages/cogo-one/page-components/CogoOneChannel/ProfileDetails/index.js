@@ -30,6 +30,7 @@ function ProfileDetails({
 	mailProps = {},
 	chatsConfig = {},
 	membersList = [],
+	teamsSideBarCheck = false,
 }) {
 	const customerId = (FIREBASE_TABS.includes(activeTab) ? activeMessageCard : activeVoiceCard)?.id;
 
@@ -69,10 +70,10 @@ function ProfileDetails({
 		{ orgId },
 	);
 	const quotationEmailSentAt = quotationSentData?.quotation_email_sent_at;
-	const expandedSideBar = (ENABLE_SIDE_BAR.includes(chatsConfig?.data?.channel_type || activeTab)
-		|| (ENABLE_EXPAND_SIDE_BAR.includes(
-			chatsConfig?.data?.channel_type || activeTab,
-		) && chatsConfig?.expandSideBar));
+	const expandedSideBar = (ENABLE_SIDE_BAR.includes(chatsConfig?.data?.channel_type)
+		|| ((ENABLE_EXPAND_SIDE_BAR.includes(
+			chatsConfig?.data?.channel_type,
+		) || teamsSideBarCheck) && chatsConfig?.expandSideBar));
 
 	return (
 		<div className={styles.profile_div}>
@@ -111,6 +112,7 @@ function ProfileDetails({
 							getUserLoading={getUserLoading}
 							organizationData={organizationData}
 							membersList={membersList}
+							chatsConfig={chatsConfig}
 						/>
 					)}
 				</div>

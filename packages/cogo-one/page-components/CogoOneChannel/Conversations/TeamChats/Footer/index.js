@@ -1,4 +1,4 @@
-import { Textarea } from '@cogoport/components';
+import { Textarea, cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
@@ -83,7 +83,7 @@ function Footer({
 				hasPermissionToEdit={hasPermissionToEdit}
 			/>
 
-			<div className={styles.text_area_div}>
+			<div className={cl`${styles.text_area_div} ${!hasPermissionToEdit ? styles.disabled : ''}`}>
 				{!isEmpty(suggestions) ? (
 					<div className={styles.suggestions_div}>
 						<div className={styles.flex_container}>
@@ -136,6 +136,7 @@ function Footer({
 						draftRoomId={draftId}
 					/>
 				</div>
+				{!hasPermissionToEdit ? <div className={styles.overlay_div} /> : null}
 			</div>
 		</>
 	);

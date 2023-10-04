@@ -27,7 +27,6 @@ function Header({
 		group_id = '',
 		group_members_ids = [],
 	} = activeTeamCard || {};
-	console.log('activeTeamCard', activeTeamCard);
 
 	const newDraft = isEmpty(group_members_ids);
 
