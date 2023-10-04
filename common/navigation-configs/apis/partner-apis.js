@@ -2788,12 +2788,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'update_user_whatsapp_number',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'update_user_mobile_number',
+			api          : 'update_user_contact',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
