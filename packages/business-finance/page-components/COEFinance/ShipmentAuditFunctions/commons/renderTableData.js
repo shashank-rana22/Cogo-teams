@@ -22,13 +22,13 @@ function check(profit = 0, category = '') {
 	return false;
 }
 
-export default function RenderTableData({ data = 0, profit = 0, category = '' }) {
+export default function RenderTableData({ data = 0, profit = 0, category = '', currency = '' }) {
 	const absoluteProfit = Math.abs(profit);
 	return (
 		<div>
 			<div className={styles.fix_layout}>
 
-				{category === 'Profitability' ? `${data}%` : ShowOverflowingNumber(data, SHOW_LENGTH, 'INR') }
+				{category === 'Profitability' ? `${data}%` : ShowOverflowingNumber(data, SHOW_LENGTH, currency) }
 			</div>
 			<div className={styles.flex}>
 				<div className={check(profit, category) ? styles.profit_icon : styles.loss_icon}>

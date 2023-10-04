@@ -53,6 +53,7 @@ const getFinancialCloseColumns = ({
 					actualRevenuePreTax = 0, actualRevenuePostTax = 0,
 					operationalSellDeviationToEstimatedPreTax = 0, operationalSellDeviationToEstimatedPostTax = 0,
 					financialSellDeviationToEstimatedPreTax = 0, financialSellDeviationToEstimatedPostTax = 0,
+					currency = '',
 				} = row || {};
 				const dataOperational = tax === 'Pre' ? operationalRevenuePreTax : operationalRevenuePostTax;
 				const dataEstimated = tax === 'Pre' ? estimatedRevenuePreTax : estimatedRevenuePostTax;
@@ -64,12 +65,13 @@ const getFinancialCloseColumns = ({
 				return (
 					<div className={styles.accessor_financial}>
 						<div className={styles.fix_layout}>
-							{ShowOverflowingNumber(dataEstimated, OVERFLOW_LENGTH, 'INR') }
+							{ShowOverflowingNumber(dataEstimated, OVERFLOW_LENGTH, currency) }
 						</div>
-						<RenderTableData data={dataOperational} profit={dataProfitPercent} />
+						<RenderTableData data={dataOperational} profit={dataProfitPercent} currency={currency} />
 						<RenderTableData
 							data={dataFinancial}
 							profit={financeProfit}
+							currency={currency}
 						/>
 					</div>
 				);
@@ -97,6 +99,7 @@ const getFinancialCloseColumns = ({
 					actualCostPreTax = 0, actualCostPostTax = 0,
 					operationalBuyDeviationToEstimatedPreTax = 0, operationalBuyDeviationToEstimatedPostTax = 0,
 					financialBuyDeviationToEstimatedPreTax = 0, financialBuyDeviationToEstimatedPostTax = 0,
+					currency = '',
 				} = row || {};
 				const dataOperational = tax === 'Pre' ? operationalCostPreTax : operationalCostPostTax;
 				const dataEstimated = tax === 'Pre' ? estimatedCostPreTax : estimatedCostPostTax;
@@ -109,12 +112,13 @@ const getFinancialCloseColumns = ({
 
 					<div className={styles.accessor_financial}>
 						<div className={styles.fix_layout}>
-							{ShowOverflowingNumber(dataEstimated, OVERFLOW_LENGTH, 'INR') }
+							{ShowOverflowingNumber(dataEstimated, OVERFLOW_LENGTH, currency) }
 						</div>
-						<RenderTableData data={dataOperational} profit={dataProfitPercent} />
+						<RenderTableData data={dataOperational} profit={dataProfitPercent} currency={currency} />
 						<RenderTableData
 							data={dataFinancial}
 							profit={financeProfit}
+							currency={currency}
 						/>
 					</div>
 				);

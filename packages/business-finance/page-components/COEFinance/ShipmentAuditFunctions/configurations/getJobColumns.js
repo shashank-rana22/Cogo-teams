@@ -47,6 +47,7 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 					estimatedRevenuePreTax, estimatedRevenuePostTax,
 					operationalRevenuePreTax, operationalRevenuePostTax,
 					operationalSellDeviationToEstimatedPreTax, operationalSellDeviationToEstimatedPostTax,
+					currency = '',
 				} = row || {};
 				const dataOperational = tax === 'Pre' ? operationalRevenuePreTax : operationalRevenuePostTax;
 				const dataEstimated = tax === 'Pre' ? estimatedRevenuePreTax : estimatedRevenuePostTax;
@@ -56,9 +57,9 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 
 					<div style={{ padding: '0 30px' }} className={styles.accessor_financial}>
 						<div className={styles.fix_layout}>
-							{ShowOverflowingNumber(dataEstimated, OVERFLOW_LENGTH, 'INR') }
+							{ShowOverflowingNumber(dataEstimated, OVERFLOW_LENGTH, currency) }
 						</div>
-						<RenderTableData data={dataOperational} profit={dataProfitPercent} />
+						<RenderTableData data={dataOperational} profit={dataProfitPercent} currency={currency} />
 					</div>
 				);
 			},
@@ -82,6 +83,7 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 					estimatedCostPreTax, estimatedCostPostTax,
 					operationalCostPreTax, operationalCostPostTax,
 					operationalBuyDeviationToEstimatedPreTax, operationalBuyDeviationToEstimatedPostTax,
+					currency = '',
 				} = row || {};
 				const dataOperational = tax === 'Pre' ? operationalCostPreTax : operationalCostPostTax;
 				const dataEstimated = tax === 'Pre' ? estimatedCostPreTax : estimatedCostPostTax;
@@ -91,9 +93,14 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 
 					<div style={{ padding: '0 30px' }} className={styles.accessor_financial}>
 						<div className={styles.fix_layout}>
-							{ShowOverflowingNumber(dataEstimated, OVERFLOW_LENGTH, 'INR') }
+							{ShowOverflowingNumber(dataEstimated, OVERFLOW_LENGTH, currency) }
 						</div>
-						<RenderTableData data={dataOperational} profit={dataProfitPercent} category="BUY" />
+						<RenderTableData
+							data={dataOperational}
+							profit={dataProfitPercent}
+							category="BUY"
+							currency={currency}
+						/>
 					</div>
 				);
 			},
@@ -129,7 +136,11 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 						<div className={styles.fix_layout}>
 							{`${dataEstimated}%`}
 						</div>
-						<RenderTableData data={dataOperational} profit={dataProfitPercent} category="Profitability" />
+						<RenderTableData
+							data={dataOperational}
+							profit={dataProfitPercent}
+							category="Profitability"
+						/>
 					</div>
 				);
 			},
