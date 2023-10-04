@@ -101,6 +101,12 @@ pipeline {
                 aws ecr get-login-password --region ap-south-1 | docker login --username ${ECR_USERNAME} --password-stdin ${ECR_URL} && \
                 docker compose --env-file /home/${SERVER_NAME}/.env.front -f /home/${SERVER_NAME}/docker-compose-frontend.yaml up admin -d
                 \""""
+
+                script{
+                build([$class: 'BuildBlockerProperty',
+                               blockingJobs: "Deploy Admin to ${SERVER_NAME}",
+                               scanQueueFor: "UNBLOCKED"])
+                }
             }
             post {
                 failure {
@@ -111,11 +117,7 @@ pipeline {
 			        office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Admin Successfully deployed for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** on server **${SERVER_NAME} for user **${PUSHER_NAME}****", color:  '#66ff66'
 		        }
             }
-            script{
-                build([$class: 'BuildBlockerProperty',
-                               blockingJobs: "Deploy Admin to ${SERVER_NAME}",
-                               scanQueueFor: "UNBLOCKED"])
-            }
+            
 		}
     }
 }
