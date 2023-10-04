@@ -55,43 +55,47 @@ function AddEditRule(
 	};
 
 	return (
-		<Modal
-			show={showAddModal}
-			onClose={() => { setShowAddModal(false); }}
-			placement="top"
-		>
-			<Modal.Header title={`${title} Rule`} />
-			<Modal.Body
-				style={{ minHeight: 350 }}
-			>
-				<Layout
-					control={control}
-					controls={modifiedControls}
-					errors={errors}
-					showElements={SHOW_ELEMENTS}
-				/>
-			</Modal.Body>
-			<Modal.Footer>
-				<Button
-					themeType="secondary"
-					style={{ marginRight: 5 }}
-					onClick={() => {
-						setShowAddModal(false);
-						reset();
-					}}
+		<div>
+			{showAddModal ? (
+				<Modal
+					show={showAddModal}
+					onClose={() => { setShowAddModal(false); }}
+					placement="top"
 				>
-					CANCEL
-				</Button>
-				<Button
-					onClick={
+					<Modal.Header title={`${title} Rule`} />
+					<Modal.Body
+						style={{ minHeight: 350 }}
+					>
+						<Layout
+							control={control}
+							controls={modifiedControls}
+							errors={errors}
+							showElements={SHOW_ELEMENTS}
+						/>
+					</Modal.Body>
+					<Modal.Footer>
+						<Button
+							themeType="secondary"
+							style={{ marginRight: 5 }}
+							onClick={() => {
+								setShowAddModal(false);
+								reset();
+							}}
+						>
+							CANCEL
+						</Button>
+						<Button
+							onClick={
 						handleSubmit(onSubmit)
 					}
-					disabled={loading}
-				>
-					SAVE
-				</Button>
-			</Modal.Footer>
-		</Modal>
+							disabled={loading}
+						>
+							SAVE
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			) : null}
+		</div>
 	);
 }
 export default AddEditRule;

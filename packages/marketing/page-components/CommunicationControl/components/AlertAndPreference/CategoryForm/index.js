@@ -29,21 +29,13 @@ function CategoryForm({
 	}, [formValues, data]);
 
 	const handleSelectAll = (e) => {
-		if (e.target.checked) {
-			setValue('offers_discounts', true);
-			setValue('subscriber_special', true);
-			setValue('new_product_service_launches_and_updates', true);
-			setValue('product_service_explainers', true);
-			setValue('newsletter', true);
-			setValue('general_news', true);
-		} else if (!e.target.checked) {
-			setValue('offers_discounts', false);
-			setValue('subscriber_special', false);
-			setValue('new_product_service_launches_and_updates', false);
-			setValue('product_service_explainers', false);
-			setValue('newsletter', false);
-			setValue('general_news', false);
-		}
+		const check = e.target.checked;
+		setValue('offers_discounts', check);
+		setValue('subscriber_special', check);
+		setValue('new_product_service_launches_and_updates', check);
+		setValue('product_service_explainers', check);
+		setValue('newsletter', check);
+		setValue('general_news', check);
 	};
 	if (preferencesLoading) {
 		return (<Loader themeType="primary" />);

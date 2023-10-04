@@ -3,7 +3,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const columns = ({
+const getColumns = ({
 	control = {},
 }) => [
 	{
@@ -67,4 +67,4 @@ const columns = ({
 		),
 	},
 ];
-export default columns;
+export default getColumns;

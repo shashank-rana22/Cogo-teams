@@ -3,9 +3,11 @@ import { useEffect, useState, useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useGetChannelControls = ({ pagination = 1 }) => {
-	const [data, setData] = useState({});
+const PAGE_ONE = 1;
 
+const useGetChannelControls = () => {
+	const [data, setData] = useState({});
+	const [pagination, setPagination] = useState(PAGE_ONE);
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_communication_channel_controls',
 		method : 'GET',
@@ -31,6 +33,8 @@ const useGetChannelControls = ({ pagination = 1 }) => {
 		list: data?.list,
 		loading,
 		getChannelControls,
+		pagination,
+		setPagination,
 	};
 };
 

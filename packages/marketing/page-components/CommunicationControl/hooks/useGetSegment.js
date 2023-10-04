@@ -3,9 +3,12 @@ import { useEffect, useState, useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useGetSegment = ({ statusFilter = '', pagination = 1 }) => {
+const PAGE_ONE = 1;
+
+const useGetSegment = ({ statusFilter = '' }) => {
 	const [data, setData] = useState({});
 	const [filters, setFilters] = useState({});
+	const [pagination, setPagination] = useState(PAGE_ONE);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_communication_segment_controls',
@@ -37,6 +40,8 @@ const useGetSegment = ({ statusFilter = '', pagination = 1 }) => {
 		loading,
 		setFilters,
 		getSegmentData,
+		pagination,
+		setPagination,
 	};
 };
 

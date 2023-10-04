@@ -8,7 +8,6 @@ const selectAllAlertsHelper = (formValues) => {
 		}
 	});
 
-	console.log({ trueCount });
 	return (trueCount === TOTAL_FIELDS);
 };
 export default selectAllAlertsHelper;

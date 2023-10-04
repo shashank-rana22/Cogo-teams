@@ -15,7 +15,7 @@ function Header({
 				<h2 className={styles.name}>{orgName}</h2>
 			</div>
 			<div className={styles.input_container}>
-				<h3 style={{ marginBottom: 0 }}>Select Users</h3>
+				<h3 className={styles.user_title}>Select Users</h3>
 				<Select
 					value={user}
 					options={options}

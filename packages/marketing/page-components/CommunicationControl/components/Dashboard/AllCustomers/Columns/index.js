@@ -10,13 +10,14 @@ import OptionPopoverContent from './OptionPopoverContent';
 const PAGE_OFFSET = 1;
 const INDEX_OFFSET = 1;
 
-const columns = ({
+const getColumns = ({
 	data = {},
 }) => [
 	{
 		id       : 'serial_no',
 		Header   : 'No.',
-		accessor : (item, index) => ((data.page - PAGE_OFFSET) * data.page_limit + index + INDEX_OFFSET),
+		accessor : (item, index) => (
+			((data?.page || PAGE_OFFSET) - PAGE_OFFSET) * data.page_limit + index + INDEX_OFFSET),
 	},
 	{
 		id       : 'business_name',
@@ -52,4 +53,4 @@ const columns = ({
 		),
 	},
 ];
-export default columns;
+export default getColumns;

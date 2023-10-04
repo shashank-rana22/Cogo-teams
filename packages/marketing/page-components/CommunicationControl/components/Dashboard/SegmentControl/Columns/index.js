@@ -37,7 +37,7 @@ function PopoverItem(
 	);
 }
 
-const columns = (
+const getColumns = (
 	{
 		page = 1, pageLimit = 10, setShowDeleteModal = () => {}, statusFilter = '',
 		setItemData = () => {}, updateSegment = () => {}, updateLoading = '',
@@ -115,4 +115,4 @@ const columns = (
 	}
 	return withOutActions;
 };
-export default columns;
+export default getColumns;

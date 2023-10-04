@@ -9,16 +9,18 @@ import getControls from '../../../configurations/all-customers-filter-controls';
 import useGetCustomers from '../../../hooks/useGetCustomers';
 import removeObjEmptyValue from '../../../utils/removeObjEmptyValue';
 
-import columns from './Columns';
+import getColumns from './Columns';
 import styles from './styles.module.css';
 
 const FIRST_PAGE = 1;
 
 function AllCustomers() {
 	const [isOpen, setIsOpen] = useState(false);
-	const [pagination, setPagination] = useState(FIRST_PAGE);
-	const { data = {}, loading = false, setFilters = () => {} } = useGetCustomers({ pagination });
-	const cols = columns({ data });
+	const {
+		data = {}, loading = false, setFilters = () => {},
+		pagination = FIRST_PAGE, setPagination = () => {},
+	} = useGetCustomers();
+	const cols = getColumns({ data });
 
 	const loadingColumn = [
 		{
@@ -29,12 +31,10 @@ function AllCustomers() {
 		},
 	];
 
-	const { control, watch, formState:{ errors }, reset } = useForm();
+	const { control, formState:{ errors }, reset, handleSubmit } = useForm();
 
-	const formValues = watch();
-
-	const onSubmit = () => {
-		setFilters(removeObjEmptyValue(formValues));
+	const onSubmit = (values) => {
+		setFilters(removeObjEmptyValue(values));
 		setIsOpen(false);
 	};
 	const onReset = () => {
@@ -70,13 +70,13 @@ function AllCustomers() {
 										themeType="secondary"
 										size="sm"
 										style={{ marginRight: 5 }}
-										onClick={() => { onReset(); }}
+										onClick={() => onReset()}
 									>
 										RESET FORM
 									</Button>
 									<Button
 										size="sm"
-										onClick={() => { onSubmit(); }}
+										onClick={() => handleSubmit(onSubmit)()}
 									>
 										SHOW RESULTS
 									</Button>

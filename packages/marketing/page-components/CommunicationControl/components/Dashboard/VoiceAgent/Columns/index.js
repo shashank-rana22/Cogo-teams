@@ -32,7 +32,7 @@ function PopoverItem({
 	);
 }
 
-const columns = ({
+const getColumns = ({
 	checkedRowsSerialId = [],
 	setCheckedRowsSerialId = () => {},
 	listServetalAgent = () => {},
@@ -95,4 +95,4 @@ const columns = ({
 		]
 	);
 };
-export default columns;
+export default getColumns;

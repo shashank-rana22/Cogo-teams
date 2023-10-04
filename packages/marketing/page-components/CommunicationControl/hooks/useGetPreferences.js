@@ -3,15 +3,14 @@ import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useGetPreferences = ({ companyId, userId }) => {
+const useGetPreferences = ({ DEFAULT_PARAMS = {} }) => {
 	const [data, setData] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/get_user_alert_preference',
 		method : 'GET',
 		params : {
-			organization_id : companyId,
-			user_id         : userId,
+			...DEFAULT_PARAMS,
 		},
 	}, { manual: true });
 
@@ -23,6 +22,8 @@ const useGetPreferences = ({ companyId, userId }) => {
 			toastApiError(error);
 		}
 	}, [trigger]);
+
+	const { userId } = DEFAULT_PARAMS;
 
 	useEffect(() => {
 		if (userId) {

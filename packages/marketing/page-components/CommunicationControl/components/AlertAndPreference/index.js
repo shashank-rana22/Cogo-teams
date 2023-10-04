@@ -17,20 +17,25 @@ function AlertAndPreference() {
 	const [user, setUser] = useState('');
 
 	const { list = [] } = useGetOrganizationUsers({ orgId: company_id, setUser });
-	const userOptions = list.map((item) => ({
+	const userOptions = list?.map((item) => ({
 		label : item?.name,
 		value : item?.user_id,
-	}));
+	})) || [];
+
 	const listUserOptions = [{ label: 'Select All', value: '' }, ...userOptions];
 
-	const { preferences = {}, loading:getPreferencesLoading = '' } = useGetPreferences({
+	const DEFAULT_PARAMS = {
 		companyId : company_id,
 		userId    : user,
+	};
+
+	const { preferences = {}, loading:getPreferencesLoading = '' } = useGetPreferences({
+		DEFAULT_PARAMS,
 	});
 	const { updatePreference, loading:updateLoading } = useUpdatePreference();
 
-	const handleSave = async (PAYLOAD) => {
-		await updatePreference({ ...PAYLOAD, user_id: user });
+	const handleSave = async (payload) => {
+		await updatePreference({ ...(payload || {}), user_id: user });
 		router?.back();
 	};
 

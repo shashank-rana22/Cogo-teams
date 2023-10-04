@@ -5,18 +5,16 @@ import toastApiError from '../utils/toastApiError';
 
 const PAGE_ONE = 1;
 
-const useGetCommunicationChannel = ({ pagination = PAGE_ONE, channel = '', emailType }) => {
+const useGetCommunicationChannel = ({ DEFAULT_PARAMS = {} }) => {
 	const [data, setData] = useState({});
+	const [pagination, setPagination] = useState(PAGE_ONE);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_communication_channel_view',
 		method : 'GET',
 		params : {
-			filters: {
-				email_type: emailType || undefined,
-			},
+			...DEFAULT_PARAMS,
 			page: pagination,
-			channel,
 		},
 	}, { manual: true });
 
@@ -29,6 +27,8 @@ const useGetCommunicationChannel = ({ pagination = PAGE_ONE, channel = '', email
 		}
 	}, [trigger]);
 
+	const { emailType = '' } = DEFAULT_PARAMS;
+
 	useEffect(() => {
 		getChannelConfig();
 	}, [pagination, emailType, getChannelConfig]);
@@ -37,6 +37,8 @@ const useGetCommunicationChannel = ({ pagination = PAGE_ONE, channel = '', email
 		data,
 		loading,
 		getChannelConfig,
+		pagination,
+		setPagination,
 	};
 };
 export default useGetCommunicationChannel;

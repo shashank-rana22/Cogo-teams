@@ -9,7 +9,7 @@ import OptionPopoverContent from './OptionPopoverContent';
 const PAGE_OFFSET = 1;
 const INDEX_OFFSET = 1;
 
-const columns = ({
+const getColumns = ({
 	page = 1,
 	pageLimit = 10,
 	updateStatus = () => {},
@@ -24,13 +24,13 @@ const columns = ({
 	{
 		id       : 'key',
 		Header   : 'Email',
-		accessor : (item) => (item?.email),
+		accessor : (item) => (item?.email || '--'),
 		width    : 10,
 	},
 	{
 		id       : 'type',
 		Header   : 'Email Type',
-		accessor : (item) => (getEmailType(item).map((val) => val).join(', ')),
+		accessor : (item) => (getEmailType(item)?.map((val) => val).join(', ') || '--'),
 	},
 	{
 		id       : 'status',
@@ -42,7 +42,7 @@ const columns = ({
 	{
 		id       : 'count',
 		Header   : 'Assigned users',
-		accessor : (item) => (item?.assigned_users),
+		accessor : (item) => (item?.assigned_users || '--'),
 	},
 	{
 		id       : 'update_details',
@@ -64,4 +64,4 @@ const columns = ({
 		),
 	},
 ];
-export default columns;
+export default getColumns;

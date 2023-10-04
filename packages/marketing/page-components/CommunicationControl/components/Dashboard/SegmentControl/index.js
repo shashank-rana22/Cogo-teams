@@ -7,7 +7,7 @@ import useGetSegment from '../../../hooks/useGetSegment';
 import useUpdateSegment from '../../../hooks/useUpdateSegment';
 
 import AddEditRule from './AddEditRule';
-import columns from './Columns';
+import getColumns from './Columns';
 import DeleteRule from './DeleteRule';
 import Filters from './Filters';
 import styles from './styles.module.css';
@@ -19,18 +19,17 @@ function SegmentControl() {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [showAddModal, setShowAddModal] = useState(false);
 	const [itemData, setItemData] = useState({});
-	const [pagination, setPagination] = useState(PAGE_ONE);
 
 	const {
 		data = {}, loading = '', getSegmentData = () => {},
-		setFilters = () => {},
-	} = useGetSegment({ statusFilter, pagination });
+		setFilters = () => {}, pagination = PAGE_ONE, setPagination = () => {},
+	} = useGetSegment({ statusFilter });
 
 	const { createSegment = () => {}, createSegmentLoading = '' } = useCreateSegment({ getSegmentData });
 
 	const { updateSegment = () => {}, updateLoading = '' } = useUpdateSegment({ getSegmentData });
 
-	const cols = columns({
+	const cols = getColumns({
 		page      : data?.page,
 		pageLimit : data?.page_limit,
 		setShowDeleteModal,

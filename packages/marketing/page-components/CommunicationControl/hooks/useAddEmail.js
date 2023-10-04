@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 import toastApiError from '../utils/toastApiError';
 
-const useAddEmail = ({ getChannelConfig, setEmail, emailType }) => {
+const useAddEmail = ({ refetch = () => {}, emailType = '' }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_campaign_email_configuration',
 		method : 'POST',
@@ -27,8 +27,7 @@ const useAddEmail = ({ getChannelConfig, setEmail, emailType }) => {
 			});
 
 			Toast.success('Email Added Successfully');
-			setEmail('');
-			getChannelConfig();
+			refetch();
 		} catch (error) {
 			toastApiError(error);
 		}

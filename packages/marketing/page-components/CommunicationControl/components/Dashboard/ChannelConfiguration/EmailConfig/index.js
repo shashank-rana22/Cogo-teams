@@ -6,7 +6,7 @@ import useAddEmail from '../../../../hooks/useAddEmail';
 import useGetCommunicationChannel from '../../../../hooks/useGetCommunicationChannel';
 import useUpdateStatus from '../../../../hooks/useUpdateStatus';
 
-import columns from './Columns';
+import getColumns from './Columns';
 import styles from './styles.module.css';
 
 const PAGE_ONE = 1;
@@ -19,25 +19,34 @@ const EMAIL_TYPE = [
 
 function EmailConfig() {
 	const [emailType, setEmailType] = useState('is_sender');
-	const [pagination, setPagination] = useState(PAGE_ONE);
 	const [showModal, setShowModal] = useState(false);
 	const [email, setEmail] = useState('');
+
+	const DEFAULT_PARAMS = {
+		filters: {
+			email_type: emailType || undefined,
+		},
+		channel: 'email',
+	};
 	const {
 		data = {}, loading = true, getChannelConfig = () => {},
-	} = useGetCommunicationChannel({ pagination, channel: 'email', emailType });
+		pagination = PAGE_ONE, setPagination = () => {},
+	} = useGetCommunicationChannel({ DEFAULT_PARAMS });
 
 	const { updateStatus, updateStatusLoading } = useUpdateStatus({
 		getChannelConfig,
 		channel: 'email',
 	});
-
+	const refetch = () => {
+		setEmail('');
+		getChannelConfig();
+	};
 	const { addEmail, addEmailLoading } = useAddEmail({
-		getChannelConfig,
+		refetch,
 		emailType,
-		setEmail,
 	});
 
-	const cols = columns({
+	const cols = getColumns({
 		page      : data?.page,
 		pageLimit : data?.page_limit,
 		updateStatus,

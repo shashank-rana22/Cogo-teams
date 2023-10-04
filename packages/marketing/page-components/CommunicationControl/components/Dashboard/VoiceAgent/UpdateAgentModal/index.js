@@ -25,37 +25,41 @@ function UpdateAgentModal({
 		await updateAgent({ payload, action: 'update_agent' });
 	};
 	return (
-		<Modal
-			show={showUpdateModal}
-			placement="top"
-			onClose={() => setShowUpdateModal(false)}
-		>
-			<Modal.Header title={`Update Agent (${item?.agent_data?.name})`} />
-			<Modal.Body
-				style={{ minHeight: 400 }}
-			>
-				<Layout
-					control={control}
-					controls={controls}
-					errors={errors}
-				/>
-			</Modal.Body>
-			<Modal.Footer>
-				<Button
-					themeType="secondary"
-					style={{ marginRight: 5 }}
-					onClick={() => setShowUpdateModal(false)}
+		<div>
+			{showUpdateModal ? (
+				<Modal
+					show={showUpdateModal}
+					placement="top"
+					onClose={() => setShowUpdateModal(false)}
 				>
-					CANCEL
-				</Button>
-				<Button
-					disabled={loading}
-					onClick={handleSubmit(onSubmit)}
-				>
-					SUBMIT
-				</Button>
-			</Modal.Footer>
-		</Modal>
+					<Modal.Header title={`Update Agent (${item?.agent_data?.name})`} />
+					<Modal.Body
+						style={{ minHeight: 400 }}
+					>
+						<Layout
+							control={control}
+							controls={controls}
+							errors={errors}
+						/>
+					</Modal.Body>
+					<Modal.Footer>
+						<Button
+							themeType="secondary"
+							style={{ marginRight: 5 }}
+							onClick={() => setShowUpdateModal(false)}
+						>
+							CANCEL
+						</Button>
+						<Button
+							disabled={loading}
+							onClick={handleSubmit(onSubmit)}
+						>
+							SUBMIT
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			) : null}
+		</div>
 	);
 }
 export default UpdateAgentModal;

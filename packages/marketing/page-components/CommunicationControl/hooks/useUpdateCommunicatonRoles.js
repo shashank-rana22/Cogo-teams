@@ -4,8 +4,7 @@ import { useRequest } from '@cogoport/request';
 import toastApiError from '../utils/toastApiError';
 
 const useUpdateCommunicatonRoles = ({
-	getChannelConfig = () => {},
-	setShow = () => {},
+	refetch = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_communication_channel_management',
@@ -19,8 +18,7 @@ const useUpdateCommunicatonRoles = ({
 			});
 
 			Toast.success('Assigned Successfully');
-			getChannelConfig();
-			setShow(false);
+			refetch();
 		} catch (error) {
 			toastApiError(error);
 		}

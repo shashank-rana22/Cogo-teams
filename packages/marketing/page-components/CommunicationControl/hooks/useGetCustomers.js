@@ -3,9 +3,12 @@ import { useEffect, useState, useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useGetCustomers = ({ pagination = 1 }) => {
+const FIRST_PAGE = 1;
+
+const useGetCustomers = () => {
 	const [data, setData] = useState({});
 	const [filters, setFilters] = useState({});
+	const [pagination, setPagination] = useState(FIRST_PAGE);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_organizations',
@@ -34,6 +37,8 @@ const useGetCustomers = ({ pagination = 1 }) => {
 		loading,
 		setFilters,
 		getCustomers,
+		pagination,
+		setPagination,
 	};
 };
 

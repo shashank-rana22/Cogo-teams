@@ -41,38 +41,42 @@ function CreateAgentModal({
 		setShowCreateModal(false);
 	};
 	return (
-		<Modal
-			show={showCreateModal}
-			placement="top"
-			onClose={() => setShowCreateModal(false)}
-		>
-			<Modal.Header title="Create an Agent" />
-			<Modal.Body
-				style={{ minHeight: 400 }}
-			>
-				<Layout
-					control={control}
-					controls={controls}
-					errors={errors}
-					showElements={SHOW_ELEMENTS}
-				/>
-			</Modal.Body>
-			<Modal.Footer>
-				<Button
-					themeType="secondary"
-					style={{ marginRight: 5 }}
-					onClick={() => setShowCreateModal(false)}
+		<div>
+			{showCreateModal ? (
+				<Modal
+					show={showCreateModal}
+					placement="top"
+					onClose={() => setShowCreateModal(false)}
 				>
-					CANCEL
-				</Button>
-				<Button
-					onClick={handleSubmit(onSubmit)}
-					disabled={loading}
-				>
-					SUBMIT
-				</Button>
-			</Modal.Footer>
-		</Modal>
+					<Modal.Header title="Create an Agent" />
+					<Modal.Body
+						style={{ minHeight: 400 }}
+					>
+						<Layout
+							control={control}
+							controls={controls}
+							errors={errors}
+							showElements={SHOW_ELEMENTS}
+						/>
+					</Modal.Body>
+					<Modal.Footer>
+						<Button
+							themeType="secondary"
+							style={{ marginRight: 5 }}
+							onClick={() => setShowCreateModal(false)}
+						>
+							CANCEL
+						</Button>
+						<Button
+							onClick={handleSubmit(onSubmit)}
+							disabled={loading}
+						>
+							SUBMIT
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			) : null}
+		</div>
 	);
 }
 export default CreateAgentModal;

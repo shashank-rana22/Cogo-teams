@@ -8,7 +8,7 @@ import useBulkUpdateServetalAgents from '../../../hooks/useBulkUpdateServetalAge
 import useCreateServetalAgent from '../../../hooks/useCreateServetalAgent';
 import useGetListServetalAgent from '../../../hooks/useGetListServetalAgent';
 
-import columns from './Columns';
+import getColumns from './Columns';
 import CreateAgentModal from './CreateAgentModal';
 import DeleteAgentsModal from './DeleteAgentsModal';
 import styles from './styles.module.css';
@@ -47,7 +47,7 @@ function VoiceAgent() {
 
 	const { servetalAgent = () => {}, createServetalAgentloading = '' } = useCreateServetalAgent({ listServetalAgent });
 
-	const cols = columns({
+	const cols = getColumns({
 		checkedRowsSerialId,
 		setCheckedRowsSerialId,
 		listServetalAgent,

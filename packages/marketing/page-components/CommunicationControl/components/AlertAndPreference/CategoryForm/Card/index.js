@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-function Card({ children = {}, title = '' }) {
+function Card({ children = null, title = '' }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>{title}</div>

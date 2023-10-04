@@ -1518,8 +1518,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'marketing-marketing_segmentation',
 					title         : t('common:segmentation'),
-					href          : '/v2/marketing/segmentation',
-					as            : '/v2/marketing/segmentation',
+					href          : '/marketing/segmentation',
+					as            : '/marketing/segmentation',
 					type          : 'link',
 					main_apis     : [],
 					possible_apis : apis.segmentation,
@@ -1527,8 +1527,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'marketing-marketing_campaign-dashboard',
 					title         : t('common:campaign_dashboard'),
-					href          : '/v2/marketing/campaign-dashboard',
-					as            : '/v2/marketing/campaign-dashboard',
+					href          : '/marketing/campaign-dashboard',
+					as            : '/marketing/campaign-dashboard',
 					icon          : 'ic-campaign',
 					type          : 'link',
 					main_apis     : [],

@@ -2,28 +2,23 @@ import { Button, Tooltip, Table, Placeholder } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import getPayloadChannelControl from '../../../helpers/getPayloadChannelControl';
 import useGetChannelControls from '../../../hooks/useGetChannelControls';
 import useUpdateChannelControls from '../../../hooks/useUpdateChannelControls';
 
-import columns from './Columns';
+import getColumns from './Columns';
 import styles from './styles.module.css';
 
-const PAGE_ONE = 1;
-
 function ChannelControl() {
-	const [pagination, setPagination] = useState(PAGE_ONE);
-
-	const { list = [], loading = '', getChannelControls = () => {} } = useGetChannelControls(
-		{ pagination, setPagination },
-	);
+	const {
+		list = [], loading = '', getChannelControls = () => {},
+	} = useGetChannelControls();
 
 	const { control, watch } = useForm();
 	const formValues = watch();
 
-	const cols = columns({ control });
+	const cols = getColumns({ control });
 
 	const {
 		updateChannelControl = () => {},
