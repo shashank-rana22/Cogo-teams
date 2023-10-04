@@ -1,5 +1,3 @@
-import { startCase } from '@cogoport/utils';
-
 import styles from './styles.module.css';
 
 interface Props {
@@ -74,7 +72,6 @@ export const remainControls = ({ t = () => {}, entityCode = '', activeTab = '' }
 		isClearable : true,
 		initialCall : true,
 		asyncKey    : 'list_incident_types',
-		renderLabel : ({ value }) => startCase(value),
 		searchByq   : true,
 		params      : { status: activeTab },
 		className   : styles.category_section,
@@ -87,7 +84,6 @@ export const remainControls = ({ t = () => {}, entityCode = '', activeTab = '' }
 		isClearable : true,
 		asyncKey    : 'list_incident_types',
 		searchByq   : true,
-		renderLabel : ({ value }) => startCase(value),
 		initialCall : true,
 		params      : { status: activeTab, type: 'incidentSubtype', entityCode },
 		className   : styles.category_section,
