@@ -11,7 +11,7 @@ const getPayload = ({
 		if (curr.includes('trigger')) return acc;
 
 		const [index, ...rest] = curr.split('-');
-		const [service_type, service_duration_type, service_trade_type] = rest;
+		const [service_type, service_trade_type, service_duration_type] = rest;
 
 		const releaseTrigger = rest.join('-');
 

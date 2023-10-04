@@ -39,8 +39,8 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 			const filteredData = data.shipment_capacities?.filter((item) => (
 				[
 					item.service_type,
-					item.service_transit_type,
 					item.service_trade_type,
+					item.service_transit_type,
 				].filter(Boolean).join('-') === service.value)) || [];
 
 			return {

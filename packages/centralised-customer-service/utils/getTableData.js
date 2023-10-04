@@ -6,9 +6,9 @@ const DEFAULT_VALUE = 0;
 
 const getTableData = ({ data = {} }) => {
 	const serviceWiseData = services?.map((service) => {
-		const filteredData = data.shipment_capacities?.filter((item) => ([item.service_type, item.service_transit_type,
-			item.service_trade_type]
-			.filter(Boolean).join('-') === service.value)) || [];
+		const filteredData = data.shipment_capacities?.filter((item) => (
+			[item.service_type, item.service_trade_type, item.service_transit_type]
+				.filter(Boolean).join('-') === service.value)) || [];
 
 		return {
 			service : service.label,
