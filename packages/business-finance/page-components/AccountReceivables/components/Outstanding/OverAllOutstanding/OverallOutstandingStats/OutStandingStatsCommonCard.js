@@ -12,7 +12,6 @@ function OutStandingStatsCommonCard({
 	amountColor = '',
 }) {
 	const { totalLedAmount, totalCount, ledCurrency } = item || {};
-
 	return (
 		<div className={styles.invoices_card}>
 			<div className={styles.left_container}>
@@ -39,8 +38,8 @@ function OutStandingStatsCommonCard({
 				{(amountValue || [])?.map((val) => (
 					<div className={styles.due_ageing} key={val?.label}>
 						<div
-							style={{ color: val?.textColor }}
-							className={styles.amount}
+							className={item[val?.valueKey] > [GLOBAL_CONSTANTS.zeroth_index]
+								? styles.amount : styles.credit_note_amount}
 						>
 							{ statsLoading ? <Placeholder /> : formatAmount({
 								amount   : item[val?.valueKey] || GLOBAL_CONSTANTS.zeroth_index,

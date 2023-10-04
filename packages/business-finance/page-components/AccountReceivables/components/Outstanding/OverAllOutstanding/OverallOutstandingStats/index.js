@@ -48,13 +48,16 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 						item={creditNoteBucket}
 						amountValue={OVERALL_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
-						amountColor="#FC5555"
+						amountColor={creditNoteBucket?.totalLedAmount
+							<= [GLOBAL_CONSTANTS.zeroth_index] ? '#29CC6A' : '#FC5555'}
 					/>
 				</div>
 			</div>
 			<div className={styles.outstanding_card}>
 				<div className={styles.total_outstanding_label}>Total Outstanding</div>
-				<div className={styles.amount}>
+				<div className={totalLedAmount > [GLOBAL_CONSTANTS.zeroth_index]
+					? styles.amount : styles.credit_note_amount}
+				>
 					{statsLoading ? <Placeholder /> : formatAmount({
 						amount   : totalLedAmount || GLOBAL_CONSTANTS.zeroth_index,
 						currency : ledCurrency,

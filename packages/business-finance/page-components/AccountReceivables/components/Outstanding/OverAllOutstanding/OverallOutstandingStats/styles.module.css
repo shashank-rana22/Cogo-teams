@@ -91,3 +91,11 @@
 	font-size: 12px;
 	font-weight: 600;
 }
+
+.credit_note_amount {
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #29cc6a;
+	word-break: break-word;
+}

@@ -68,7 +68,11 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 									{invoiceObject.name}
 									{' '}
 								</div>
-								<div className={styles.amount_open}>
+								<div className={(invoiceObject.name === 'ON ACCOUNT PAYMENTS'
+								|| invoiceObject.name === 'CREDIT NOTES')
+								&& invoiceObject.LedgerAmount?.ledgerAmount <= [GLOBAL_CONSTANTS.zeroth_index]
+									? styles.amount_open : styles.amount_close}
+								>
 									{formatAmount({
 										amount:
 											invoiceObject.LedgerAmount
@@ -92,7 +96,10 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 							<div className={styles.flex}>
 								{(invoiceObject.statsKey || []).map((val) => (
 									<div key={val.label} className={styles.label}>
-										<div className={cl`${invoiceObject?.name === 'ON ACCOUNT PAYMENTS'
+										<div className={cl`${(invoiceObject.name === 'ON ACCOUNT PAYMENTS'
+										|| invoiceObject.name === 'CREDIT NOTES')
+										&& invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount
+										<= [GLOBAL_CONSTANTS.zeroth_index]
 											? styles.account : styles.amount}`}
 										>
 											{formatAmount({
@@ -128,7 +135,9 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 					!showOutStanding ? (
 						<div className={styles.outstanding}>
 							<div className={styles.headings}>Total Outstanding</div>
-							<div className={styles.totaloutstanding}>
+							<div className={totalOutstanding.ledgerAmount > [GLOBAL_CONSTANTS.zeroth_index]
+								? styles.totaloutstanding : styles.negative_totaloutstanding}
+							>
 								{formatAmount({
 									amount: totalOutstanding.ledgerAmount || DEFAULT_AMOUNT,
 									currency:
@@ -153,7 +162,9 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 					>
 						<div className={styles.flex_column}>
 							<div className={styles.label_outstanding}>Total Outstanding</div>
-							<div className={styles.amountout}>
+							<div className={totalOutstanding.ledgerAmount
+								> [GLOBAL_CONSTANTS.zeroth_index] ? styles.amountout : styles.negative_amountout}
+							>
 								{formatAmount({
 									amount: totalOutstanding.ledgerAmount || DEFAULT_AMOUNT,
 									currency:
