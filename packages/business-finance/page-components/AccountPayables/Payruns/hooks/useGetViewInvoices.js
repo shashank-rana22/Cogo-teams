@@ -11,7 +11,7 @@ const viewInvoicePayload = ({ id, batchNo, pageIndex, pageSize, activePayrunTab,
 	dueDateSortType    : 'asc',
 	createdAtSortType  : 'desc',
 	status             : activePayrunTab === 'COMPLETED' ? 'COMPLETED' : undefined,
-	q                  : query !== '' ? query : undefined,
+	query              : query || undefined,
 });
 
 const useGetViewInvoices = ({ activePayrunTab, globalFilters, selectedPayrun, query }) => {

@@ -10,27 +10,27 @@
 }
 
 .chat_container_booking_desk {
-	top: 30px;
-	right: 120px;
+	top: 24px;
+	right: 20px;
 }
 
 .chat_container_kam_desk {
-	top: 30px;
-	right: 260px;
+	top: 24px;
+	right: 20px;
 }
 
 .chat_container_cost_booking_desk {
 	top: 30px;
-	right: 240px;
+	right: 20px;
 }
 
 .chat_container_document_desk {
-	top: 70px;
+	top: 38px;
 	right: 20px;
 }
 
 .chat_container_last_mile_desk {
-	top: 86px;
+	top: 40px;
 	right: 20px;
 }
 

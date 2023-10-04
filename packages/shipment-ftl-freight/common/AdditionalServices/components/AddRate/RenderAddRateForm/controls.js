@@ -66,7 +66,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			type        : 'number',
 			placeholder : 'Enter Sell Price',
 			rules       : { required: 'Price is required', min: 0 },
-			show        : ['overview'].includes(source),
+			show        : !['purchase'].includes(source),
 			size        : 'sm',
 		},
 		{
@@ -79,6 +79,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 				filters: {
 					account_type : 'service_provider',
 					kyc_status   : 'verified',
+					service      : 'ftl_freight',
 				},
 			},
 			size  : 'sm',

@@ -1,32 +1,69 @@
-import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
-import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
+import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
+import EmptyState from '../../common/EmptyStateCommon';
+import ViewPdf from '../../common/ViewPdf';
+import allStakeHolderTimeLineData from '../../utils/useFormatAllStakeHolderData';
 
+import { DOCUMENT_MAPPING, HEADER_MAPPING, REQUEST_MAPPING, TYPE_COMPONENT_MAPPING } from './contants';
 import styles from './styles.module.css';
 
-function CommonDetailsModal({ setDetailsModal = () => {}, detailsModal = {}, refetch = () => {} }) {
+function CommonPage({ row = {}, setDetailsModal = () => {}, refetch = () => {}, header = '' }) {
+	const {
+		level3 = {}, level2 = {}, level1 = {}, createdBy = {},
+		remark = '', status = '', updatedBy = {}, financeRemark = '',
+		type = '', data = {},
+	} = row || {};
+	const level0 = { ...createdBy, remark };
+	const request = REQUEST_MAPPING[header];
+	const document = DOCUMENT_MAPPING[header];
+
+	const docUrl = row?.data?.[request]?.[document]?.[GLOBAL_CONSTANTS.zeroth_index] || '';
+
+	const Component = TYPE_COMPONENT_MAPPING[header] || null;
+
+	if (!Component) {
+		return (
+			<div className={styles.emptyContainer}>
+				<div className={styles.noData}>
+
+					No Data Available
+				</div>
+
+				<EmptyState />
+			</div>
+		);
+	}
+
 	return (
-		<div className={styles.containerDisplay}>
-			<Button
-				size="md"
-				themeType="secondary"
-				onClick={() => setDetailsModal(null)}
-				className={styles.go_back_button}
-			>
-				Go Back
+		<div>
+			<div className={styles.heading}>
+				{HEADER_MAPPING[header]}
+			</div>
+			<AllStakeHolderTimeline
+				timeline={allStakeHolderTimeLineData(
+					{
+						level0, level1, level2, level3, status, updatedBy, financeRemark, type, data,
+					},
+				)}
+			/>
+			<div className={styles.request_heading}>
 
-			</Button>
+				<h3>Request Details</h3>
+				<div className={styles.red_line} />
 
-			{ detailsModal?.type === 'JOB_OPEN' ? (
-				<JobOpenDetailsModal
-					row={detailsModal}
+			</div>
+			<div className={styles.container_view}>
+				{header !== 'ADVANCE_SECURITY_DEPOSIT' &&	<ViewPdf docUrl={docUrl} /> }
+				<Component
+					row={row}
 					setDetailsModal={setDetailsModal}
 					refetch={refetch}
 				/>
-			) : null }
+			</div>
 
 		</div>
 	);
 }
-export default CommonDetailsModal;
+export default CommonPage;

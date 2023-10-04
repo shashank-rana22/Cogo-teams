@@ -25,6 +25,7 @@ export const automationDeskServiceOptions = [
 ];
 
 export const serviceOptions = [
+	{ label: 'ALL', value: 'all' },
 	{ label: 'FCL Freight', value: 'fcl_freight_service' },
 	{ label: 'Air Freight', value: 'air_freight_service' },
 	{ label: 'Lcl Freight', value: 'lcl_freight_service' },

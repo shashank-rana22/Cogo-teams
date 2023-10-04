@@ -10,6 +10,7 @@ import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
 import bookingDeskAir from './config/booking-desk-air';
 import bookingDeskSurface from './config/booking-desk-surface';
+import business from './config/business';
 import businessFinance from './config/business-finance';
 import byodDashboard from './config/byod-dashboard';
 import cancellationPolicies from './config/cancellation-policies';
@@ -44,10 +45,12 @@ import lastMileDesk from './config/last-mile-desk';
 import liabilityDashboard from './config/liability-dashboard';
 import locations from './config/location';
 import managerDashboard from './config/manager-dashboard';
+import margins from './config/margins';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
 import notifications from './config/notifications';
+import performanceAndIncentives from './config/performance-and-incentives';
 import PERFORMANCE_MANAGEMENT from './config/performance-management';
 import printingDesk from './config/printing-desk';
 import profile from './config/profile';
@@ -62,6 +65,7 @@ import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import schedules from './config/schedules';
 import serviceDiscovery from './config/service-discovery';
+import serviceManagement from './config/service-management';
 import shipmentAirCustoms from './config/shipment-air-customs';
 import shipmentAirFreight from './config/shipment-air-freight';
 import shipmentAirFreightLocal from './config/shipment-air-freight-local';
@@ -79,6 +83,7 @@ import so2Surface from './config/so2-surface';
 import supplyAllocation from './config/supply-allocation';
 import supplyDashboard from './config/supply-dashboards';
 import supplyTools from './config/supply-tools';
+import termsAndConditions from './config/terms-and-conditions';
 import ticketManagement from './config/ticket-management';
 import tradeParties from './config/trade-parties';
 import unifiedDashboard from './config/unified-dashboard';
@@ -94,6 +99,7 @@ const routeConfig = {
 	...allocations,
 	...supplyDashboard,
 	...contracts,
+	...business,
 	...businessFinance,
 	...unifiedDashboard,
 	...vendorRM,
@@ -169,12 +175,16 @@ const routeConfig = {
 	...attendanceLeaveManagement,
 	...centralisedCustomerService,
 	...resource,
+	...termsAndConditions,
 	...serviceDiscovery,
 	...supplyTools,
 	...profile,
+	...performanceAndIncentives,
 	...amsSubmission,
 	...tradeParties,
+	...margins,
 	...saas,
+	...serviceManagement,
 };
 
 export default routeConfig;

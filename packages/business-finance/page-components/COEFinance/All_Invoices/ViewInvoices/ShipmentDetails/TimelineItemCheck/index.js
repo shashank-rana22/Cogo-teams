@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function TimeLineItemCheck({ checkItem = {}, status = '', isTagFound = false, currentTab = '' }) {
+function TimeLineItemCheck({ checkItem = {}, status = '', isTagFound = false, currentTab = '', jobType = '' }) {
 	const isInvoiceApproved = status === 'FINANCE_ACCEPTED';
 
 	const ITEMS = {
@@ -21,6 +21,13 @@ function TimeLineItemCheck({ checkItem = {}, status = '', isTagFound = false, cu
 	if (!isTagFound) {
 		delete ITEMS.taggingCheck;
 	}
+
+	if (jobType === 'CONSOLIDATED') { // removing timeline items that are not present in case of consolidated invoices
+		delete ITEMS.documentsCheck;
+		delete ITEMS.sidDataCheck;
+		delete ITEMS.taggingCheck;
+	}
+
 	const updatedCurrentTab = currentTab.replace('Tab', 'Check');
 	return (
 		<div className={styles.timeline}>

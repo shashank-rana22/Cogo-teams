@@ -5,7 +5,7 @@ import useReplyMail from '../hooks/useReplyMail';
 import useSaveDraft from '../hooks/useSaveDraft';
 import useSendOmnichannelMail from '../hooks/useSendOmnichannelMail';
 
-import getFormatedEmailBody from './getFormatedEmailBody';
+import getFormattedEmailBody from './getFormatedEmailBody';
 import getRenderEmailBody from './getRenderEmailBody';
 
 function useMailEditorFunctions({
@@ -15,6 +15,9 @@ function useMailEditorFunctions({
 	userId = '',
 	mailProps = {},
 	firestore = {},
+	sendLoading = false,
+	setSendLoading = () => {},
+	showOrgSpecificMail = false,
 }) {
 	const {
 		buttonType = '',
@@ -23,6 +26,7 @@ function useMailEditorFunctions({
 		setEmailState = () => {},
 		setButtonType = () => {},
 		resetEmailState = () => {},
+		setMailAttachments = () => {},
 	} = mailProps || {};
 
 	const {
@@ -36,17 +40,31 @@ function useMailEditorFunctions({
 		bccrecipients = [],
 		body = '',
 		draftMessageData = {},
+		customSubject = {},
+		rteContent = '',
 	} = emailState || {};
 
+	let subjectToSend = subject;
+
+	if (showOrgSpecificMail) {
+		if (customSubject?.serialId === 'custom' && customSubject?.subjectText) {
+			subjectToSend = customSubject?.subjectText;
+		} else if (customSubject?.serialId && customSubject?.subjectText) {
+			subjectToSend = `${customSubject?.serialId} | ${customSubject?.subjectText}`;
+		} else {
+			subjectToSend = '';
+		}
+	}
+
 	const handlePayload = () => {
-		const emailBody = getRenderEmailBody({ html: body });
+		const emailBody = getRenderEmailBody({ html: `${rteContent}<br/>${body}` });
 
 		return {
 			sender  : from_mail || activeMailAddress,
 			toUserEmail,
 			ccrecipients,
 			bccrecipients,
-			subject,
+			subject : subjectToSend,
 			content : emailBody,
 			msgId   : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 			attachments,
@@ -55,6 +73,7 @@ function useMailEditorFunctions({
 	};
 
 	const { saveDraft = () => {} } = useSaveDraft({
+		setSendLoading,
 		firestore,
 		draftMessageData,
 		buttonType,
@@ -63,6 +82,8 @@ function useMailEditorFunctions({
 		parentMessageData : eachMessage,
 		setEmailState,
 		body,
+		emailState,
+		showOrgSpecificMail,
 	});
 
 	const {
@@ -77,11 +98,11 @@ function useMailEditorFunctions({
 		setEmailState,
 		setButtonType,
 		saveDraft,
+		setMailAttachments,
 	});
 
 	const handleSend = () => {
-		const isEmptyMail = getFormatedEmailBody({ emailState });
-		if (replyLoading || mailLoading) {
+		if (replyLoading || mailLoading || sendLoading) {
 			return;
 		}
 
@@ -95,8 +116,10 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		if (isEmptyMail || !subject) {
-			Toast.error('Both Subject and Body are Requied');
+		const isEmptyMail = getFormattedEmailBody({ emailState });
+
+		if (isEmptyMail || !subjectToSend) {
+			Toast.error('Both Subject and Body are Required');
 			return;
 		}
 
@@ -112,7 +135,6 @@ function useMailEditorFunctions({
 					data       : eachMessage,
 				},
 				emailState,
-				dataForFirebase: payload,
 			});
 			return;
 		}
@@ -120,12 +142,16 @@ function useMailEditorFunctions({
 	};
 
 	const handleSaveDraft = async ({ isMinimize = false } = {}) => {
-		const isEmptyMail = getFormatedEmailBody({ emailState });
+		if (sendLoading) {
+			return;
+		}
 
 		if (uploading) {
 			Toast.error('Files are uploading...');
 			return;
 		}
+
+		const isEmptyMail = getFormattedEmailBody({ emailState });
 
 		if (isEmptyMail && isEmpty(attachments)) {
 			Toast.error('There is nothing in email body to save as draft');

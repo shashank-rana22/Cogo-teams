@@ -15,6 +15,7 @@ const getIncidentReOpenJobPayload = ({ values = {}, shipmentData = {}, user_id =
 			businessName: shipmentData?.importer_exporter?.business_name,
 		},
 	},
+	entityId                : shipmentData?.importer_exporter?.cogo_entity_id || shipmentData?.entity_id,
 	description             : values?.remark,
 	toWhomToSendForApproval : LEVELS_FOR_APPROVAL,
 	createdBy               : user_id,

@@ -9,11 +9,7 @@
 	margin: 20px;
 
 	&.first {
-		margin-top: 10px;
-	}
-
-	&:hover {
-		box-shadow: 0 0 8px #b7dbff;
+		margin-top: 0;
 	}
 
 	:global {

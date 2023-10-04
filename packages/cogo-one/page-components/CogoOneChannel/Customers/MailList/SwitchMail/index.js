@@ -1,6 +1,8 @@
 import { Avatar, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState, useEffect } from 'react';
 
 import getUserNameFromEmail from '../../../../../helpers/getUserNameFromEmail';
 
@@ -19,6 +21,12 @@ function SwitchMail({
 	const [showPopover, setShowPopover] = useState(false);
 
 	const { shortName, userName } = getUserNameFromEmail({ query: activeMailAddress });
+
+	useEffect(() => {
+		if (!activeMailAddress && !isEmpty(mailsToBeShown)) {
+			setActiveMailAddress(mailsToBeShown?.[GLOBAL_CONSTANTS.zeroth_index]);
+		}
+	}, [activeMailAddress, mailsToBeShown, setActiveMailAddress]);
 
 	return (
 		<Tooltip

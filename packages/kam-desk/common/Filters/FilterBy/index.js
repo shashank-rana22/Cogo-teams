@@ -9,6 +9,7 @@ import ShipmentTabMapping from '../../../config/SHIPMENT_TAB_MAPPING';
 import KamDeskContext from '../../../context/KamDeskContext';
 import convertArrayToOptions from '../../../utils/convertArrayToOptions';
 
+import SHIPMENT_TYPE_OPTIONS from './shipmentTypeOptions.json';
 import styles from './styles.module.css';
 
 const PARTNER_PARAMS = {
@@ -21,6 +22,29 @@ const PARTNER_PARAMS = {
 	},
 };
 
+const TRADE_TYPE_OPTIONS = [
+	{ label: 'Import', value: 'import' },
+	{ label: 'Export', value: 'export' },
+];
+
+const handleShipmentTypeChange = ({ setPopoverFilter = () => {}, val = '' }) => {
+	setPopoverFilter((prev) => ({ ...prev, shipment_type: val }));
+};
+
+const handleTradeTypeChange = ({
+	setPopoverFilter = () => {},
+	popoverFilter = {},
+	dynamicShipmentType = '',
+	val = '',
+}) => {
+	setPopoverFilter({
+		...popoverFilter,
+		[`${dynamicShipmentType}_service`]: {
+			trade_type: val,
+		},
+	});
+};
+
 function FilterBy({
 	setPopoverFilter = () => {},
 	popoverFilter = {},
@@ -29,6 +53,8 @@ function FilterBy({
 	const { filters = {}, setFilters, shipmentType, stepperTab } = useContext(KamDeskContext);
 
 	const { date_type, dateRange = '' } = popoverFilter || {};
+
+	const dynamicShipmentType = popoverFilter?.shipment_type;
 
 	const possibleFilters = shipmentType === 'all'
 		? ShipmentTabMapping.all.possible_filters
@@ -112,7 +138,6 @@ function FilterBy({
 					/>
 				</div>
 			) : null}
-
 			{possibleFilters?.includes('triggered_pending_invoices') ? (
 				<div className={styles.pending_invoice}>
 					<Checkbox
@@ -125,7 +150,6 @@ function FilterBy({
 					<div className={styles.filter_heading}>Pending Invoices</div>
 				</div>
 			) : null}
-
 			{possibleFilters?.includes('date_type') ? (
 				<div className={styles.filter_container}>
 					<div className={styles.filter_heading}>Date Type</div>
@@ -153,11 +177,9 @@ function FilterBy({
 					</div>
 				</div>
 			) : null}
-
 			{date_type ? (
 				<div className={styles.filter_container}>
 					<div className={styles.filter_heading}>{upperCase(date_type)}</div>
-
 					<div className={styles.date_range_container}>
 						{Object.keys(DATE_RANGE_MAPPING).map((dateKey) => (
 							<div
@@ -177,7 +199,6 @@ function FilterBy({
 								</Button>
 							</div>
 						))}
-
 						<div className={cl`${dateRange === 'custom' ? styles.active : styles.inactive}
 							${styles.filter_by_buttons}`}
 						>
@@ -195,7 +216,6 @@ function FilterBy({
 							</Button>
 						</div>
 					</div>
-
 					{dateRange === 'custom' ? (
 						<div className={styles.filter_container}>
 							<DateRangepicker
@@ -207,7 +227,18 @@ function FilterBy({
 					) : null}
 				</div>
 			) : null}
-
+			{shipmentType === 'all' ? (
+				<div className={styles.channel_partner}>
+					<div className={styles.filter_heading}>Shipment Type</div>
+					<Select
+						options={SHIPMENT_TYPE_OPTIONS}
+						value={popoverFilter?.shipment_type}
+						onChange={(val) => { handleShipmentTypeChange({ setPopoverFilter, val }); }}
+						size="sm"
+						isClearable
+					/>
+				</div>
+			) : null}
 			{possibleFilters?.includes('source') ? (
 				<div className={styles.channel_partner}>
 					<div className={styles.filter_heading}>Source</div>
@@ -220,7 +251,6 @@ function FilterBy({
 					/>
 				</div>
 			) : null}
-
 			{possibleFilters?.includes('payment_term') ? (
 				<div className={styles.channel_partner}>
 					<div className={styles.filter_heading}>Payment Type</div>
@@ -246,6 +276,22 @@ function FilterBy({
 					/>
 				</div>
 			) : null}
+			{
+				popoverFilter?.shipment_type ? (
+					<div className={styles.channel_partner}>
+						<div className={styles.filter_heading}>Trade Type</div>
+						<Select
+							options={TRADE_TYPE_OPTIONS}
+							value={popoverFilter?.[`${dynamicShipmentType}_service`]?.trade_type}
+							onChange={(val) => {
+								handleTradeTypeChange({ setPopoverFilter, popoverFilter, dynamicShipmentType, val });
+							}}
+							size="sm"
+							isClearable
+						/>
+					</div>
+				) : null
+			}
 		</div>
 	);
 }

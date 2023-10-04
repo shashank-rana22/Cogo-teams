@@ -1,5 +1,7 @@
 .container {
+	max-height: 400px;
 	margin: 10px 0;
+	overflow: scroll;
 	background-color: #fff;
 	border-radius: 8px;
 }

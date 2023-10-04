@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 function getFormatedEmailBody({ emailState }) {
-	const emailBody = emailState?.body || '';
+	const emailBody = emailState?.rteContent || '';
 
 	const checkRegex = GLOBAL_CONSTANTS?.regex_patterns?.para_html_tag_text || '';
 	const checkH1Regex = GLOBAL_CONSTANTS?.regex_patterns?.h1_html_tag_text || '';
