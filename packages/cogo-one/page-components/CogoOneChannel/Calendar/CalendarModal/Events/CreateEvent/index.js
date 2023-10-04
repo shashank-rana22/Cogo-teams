@@ -26,6 +26,7 @@ const LABEL = {
 	event   : 'Reminder',
 	meeting : 'Meeting',
 };
+
 const EVENT_TYPES = [
 	{
 		key  : 'call_customer',
@@ -52,8 +53,9 @@ function CreateEvent({
 		category: updateCategory = '', subject = '', id = '',
 		validity_start = '', validity_end = '', description = '',
 		is_important = false, metadata = {}, participants = [],
-		frequency = '',
+		frequency = '', schedule_id = '',
 	} = updateEventDetails || {};
+
 	const { organization_id: orgId = '', user_id = '' } = metadata || {};
 
 	const [eventOccurence, setEventOccurence] = useState({
@@ -90,6 +92,7 @@ function CreateEvent({
 		reset,
 		getEvents,
 		month,
+		schedule_id,
 	});
 	const { organization_id = '', start_date: startDateField } = formValues || {};
 
@@ -302,7 +305,7 @@ function CreateEvent({
 						onClick={handleSubmit(handleEvents)}
 						loading={loading}
 					>
-						Save
+						{id ? 'Update' : 'Save'}
 					</Button>
 				</div>
 			</div>

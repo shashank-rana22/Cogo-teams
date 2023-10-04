@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import moment from 'moment';
 
@@ -31,8 +32,8 @@ const useUpdateCogooneSchedule = ({
 			handleClose();
 			getEvents({ startDate, endDate });
 			Toast.success('Updated Successfully!');
-		} catch (e) {
-			Toast.error(e?.response?.data || 'something went wrong');
+		} catch (error) {
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 

@@ -33,8 +33,6 @@ function EventOccurence({
 	const controls = eventOccurenceControls[frequencyType];
 
 	const onSave = (val) => {
-		reset();
-
 		setEventOccurence((prev) => ({
 			...prev,
 			eventData : val,

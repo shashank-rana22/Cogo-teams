@@ -19,7 +19,7 @@ const RECURRENCE_RULE_MAPPING = {
 	custom  : getCustomRecurrence,
 };
 
-const getPayload = ({ eventDetails = {}, values = {}, eventData = {} }) => {
+const getPayload = ({ eventDetails = {}, values = {}, eventData = {}, schedule_id = '' }) => {
 	const { category = '', event_type = '' } = eventDetails || {};
 	const {
 		end_date = '', end_time = '', mark_important_event = false, organization_id = '',
@@ -47,7 +47,9 @@ const getPayload = ({ eventDetails = {}, values = {}, eventData = {} }) => {
 	const isMeetingOneTime = category === 'meeting' && occurence_event !== 'one_time';
 
 	return {
-		validity_start: combineDateAndTime({
+
+		schedule_id    : schedule_id || undefined,
+		validity_start : combineDateAndTime({
 			date : isMeetingOneTime ? startDate : start_date,
 			time : start_time,
 		}),
@@ -76,10 +78,13 @@ const useCreateCogooneCalendar = ({
 	reset = () => {},
 	getEvents = () => {},
 	month = '',
+	schedule_id = '',
 }) => {
+	const getUrl = schedule_id ? '/update_cogoone_schedule' : '/create_cogoone_calendar';
+
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/create_cogoone_calendar',
+		url    : getUrl,
 	}, { manual: true });
 
 	const createEvent = async ({ values = {}, eventData = {} }) => {
@@ -87,7 +92,7 @@ const useCreateCogooneCalendar = ({
 		const endDate = moment(month).endOf('month').toDate();
 
 		try {
-			const payload = getPayload({ eventDetails, values, eventData });
+			const payload = getPayload({ eventDetails, values, eventData, schedule_id });
 			await trigger({ data: payload });
 			setEventDetails({
 				category   : 'event',
