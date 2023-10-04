@@ -22,7 +22,7 @@ function RenderPort({ name = '' }) {
 		}
 	});
 	return (
-		<div style={{ margin: '0 15px' }}>
+		<div style={{ maxWidth: '40%', margin: '0 15px' }}>
 			<span>{portName}</span>
 			<span className={styles.rest_port_name}>{restName}</span>
 		</div>
@@ -34,11 +34,11 @@ function Header({ data = {} }) {
 
 	const [showForm, setShowForm] = useState(false);
 
-	const { originName, destinationName, orgDetails = {}, hsCode, value, currency, type } = data || {};
+	const { originName, destinationName, orgDetails = {}, hsCode, cargoValue, currency, type } = data || {};
 
 	return (
 		<>
-			<div className={cl`${styles.container} ${styles.flex_box} ${showForm ? styles.border : ''}`}>
+			<div className={cl`${styles.container} ${styles.flex_box}`}>
 				<div className={styles.back_container}>
 					<IcMArrowBack width={20} height={20} onClick={back} />
 				</div>
@@ -51,7 +51,7 @@ function Header({ data = {} }) {
 							<span className={styles.type}>{startCase(type)}</span>
 						</div>
 
-						<div className={styles.flex_box}>
+						<div className={cl`${styles.flex_box} ${styles.port_pair}`}>
 							<RenderPort name={originName} />
 							<IcMPortArrow width={25} height={25} />
 							<RenderPort name={destinationName} />
@@ -68,7 +68,7 @@ function Header({ data = {} }) {
 
 							<Pill color="#ebd9fc" size="lg">
 								{formatAmount({
-									amount  : value,
+									amount  : cargoValue,
 									currency,
 									options : {
 										style           : 'currency',

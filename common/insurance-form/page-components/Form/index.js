@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 function Insurance({ organization = {}, src = '', showFormFn = () => {} }) {
 	const [activeTab, setActiveTab] = useState('ocean');
 
-	const { formHook, onSubmit, formValueRef } = useInsurance({ activeTab, organization });
+	const { formHook, loading, onSubmit, formValueRef } = useInsurance({ activeTab, organization });
 	const insuranceControls = getInsuranceControls({ activeTab });
 
 	const { control, handleSubmit, formState:{ errors } } = formHook;
@@ -64,7 +64,14 @@ function Insurance({ organization = {}, src = '', showFormFn = () => {} }) {
 			</div>
 
 			<div className={styles.footer}>
-				<Button size="lg" themeType="accent" onClick={handleSubmit(onSubmit)}>Search Rates</Button>
+				<Button
+					size="lg"
+					loading={loading}
+					themeType="accent"
+					onClick={handleSubmit(onSubmit)}
+				>
+					Search Rates
+				</Button>
 			</div>
 		</>
 	);

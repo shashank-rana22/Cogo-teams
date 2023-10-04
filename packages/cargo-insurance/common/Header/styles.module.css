@@ -19,11 +19,8 @@
 .container {
 	padding: 16px;
 	background-color: #fff;
+	border-bottom: 1px solid #a9bcdaa6;
 	box-shadow: 0 1px 6px 0 #a9bcdaa6;
-}
-
-.border {
-	border-bottom: 1px solid #f68b21;
 }
 
 .back_container {
@@ -40,7 +37,7 @@
 }
 
 .type_container {
-	width: 21%;
+	width: 20%;
 	font-weight: 600;
 	color: #356efd;
 
@@ -70,4 +67,12 @@
 	max-height: 450px;
 	padding: 20px;
 	transition: 0.3s ease-in;
+}
+
+.port_pair {
+	justify-content: space-around;
+
+	>svg {
+		width: 10%;
+	}
 }

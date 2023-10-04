@@ -83,7 +83,7 @@ const getInsuranceControls = ({ activeTab = 'ocean' }) => [
 		rules       : { required: true },
 	},
 	{
-		name        : 'value',
+		name        : 'cargoValue',
 		label       : 'Invoice Value',
 		placeholder : 'Enter Invoice Value',
 		type        : 'number',

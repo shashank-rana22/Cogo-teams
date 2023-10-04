@@ -1,8 +1,22 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
+import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useRef } from 'react';
+
+const getPayload = ({ data = {}, formValueRef }) => {
+	const { cargoValue, currency, hsCode } = data || {};
+	const { origin_point: refOrigin, destination_point: refDestination } = formValueRef.current || {};
+
+	return {
+		hsCode,
+		cargoValue,
+		cargoCurrency        : currency,
+		originCountryId      : refOrigin?.country_id,
+		destinationCountryId : refDestination?.country_id,
+	};
+};
 
 const useInsurance = ({ activeTab, organization = {} }) => {
 	const { push } = useRouter();
@@ -13,9 +27,36 @@ const useInsurance = ({ activeTab, organization = {} }) => {
 
 	const { origin_point, destination_point } = watch();
 
-	const onSubmit = (data) => {
+	const [{ loading }, trigger] = useRequestBf({
+		method  : 'get',
+		url     : '/saas/insurance/v2/rate',
+		authKey : 'get_saas_insurance_v2_rate',
+	}, { manual: true });
+
+	const verifyDetails = async (data) => {
+		const payload = getPayload({ data, formValueRef });
 		const { origin_point: refOrigin, destination_point: refDestination } = formValueRef.current || {};
 
+		try {
+			await trigger({
+				params: payload,
+			});
+			const queryData = {
+				...data,
+				originName           : refOrigin?.display_name,
+				destinationName      : refDestination?.display_name,
+				originCountryId      : refOrigin?.country_id,
+				destinationCountryId : refDestination?.country_id,
+				type                 : activeTab,
+				orgDetails           : organization,
+			};
+			push(`/cargo-insurance?data=${JSON.stringify(queryData)}`);
+		} catch (err) {
+			Toast.error(err.response?.data?.message);
+		}
+	};
+
+	const onSubmit = (data) => {
 		if (isEmpty(organization?.organization_id)) {
 			Toast.error('Please Select Organization');
 			return;
@@ -24,14 +65,7 @@ const useInsurance = ({ activeTab, organization = {} }) => {
 			Toast.error('Please Select User');
 			return;
 		}
-		const queryData = {
-			...data,
-			originName      : refOrigin?.display_name,
-			destinationName : refDestination?.display_name,
-			type            : activeTab,
-			orgDetails      : organization,
-		};
-		push(`/cargo-insurance?data=${JSON.stringify(queryData)}`);
+		verifyDetails(data);
 	};
 
 	useEffect(() => {
@@ -63,7 +97,7 @@ const useInsurance = ({ activeTab, organization = {} }) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [destination_point, origin_point, setError]);
 
-	return { formHook, onSubmit, formValueRef };
+	return { formHook, onSubmit, formValueRef, loading };
 };
 
 export default useInsurance;

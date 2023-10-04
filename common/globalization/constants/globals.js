@@ -459,6 +459,8 @@ const GLOBAL_CONSTANTS = {
 		secure_now          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/secureNow.png',
 		edit_square_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/edit_square.png',
 		cogoport_login_logo : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
+		insurance_pkg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pkg.png',
+		bajaj_insurance     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Bajaj_Insurance_.png',
 	},
 
 	video_call_ring_tone_url:

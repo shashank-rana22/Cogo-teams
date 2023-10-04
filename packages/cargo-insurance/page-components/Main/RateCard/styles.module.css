@@ -1,0 +1,81 @@
+.main_container {
+	width: 100%;
+}
+
+.flex_box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.scroll_container {
+	max-height: 65vh;
+	overflow-y: scroll;
+}
+
+.container {
+	margin-bottom: 20px;
+}
+
+.card {
+	display: flex;
+	width: 95%;
+	padding: 16px;
+	border: 1px solid #e9f1f1;
+	border-radius: 12px;
+}
+
+.img_container {
+	position: relative;
+	width: 20%;
+	padding-right: 10px;
+	border-right: 1px solid #e0e0e0;
+
+	.pkg_img {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		mix-blend-mode: multiply;
+		transform: translate(-50%, -50%);
+	}
+}
+
+.info_container {
+	width: 80%;
+	padding: 8px 30px;
+}
+
+.sub_title {
+	font-size: 12px;
+	color: #828282;
+}
+
+.total_price {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.header {
+	padding-bottom: 16px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.line_items {
+	margin-top: 20px;
+}
+
+.line_item_header {
+	font-weight: 600;
+}
+
+.row {
+	margin: 8px 0;
+	color: #333;
+}
+
+.selected_card {
+	background-color: #fff9f8;
+	border: 1px solid #f8aea8;
+	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px -1px rgb(0 0 0 / 10%);
+}
