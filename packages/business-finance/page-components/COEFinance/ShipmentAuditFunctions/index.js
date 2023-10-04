@@ -41,7 +41,7 @@ function ShipmentAuditFunction({ activeTab = '', tax = '' }) {
 	};
 	const handleClick = (jobId) => {
 		push(
-			`/business-finance/coe-finance/next-page?job_id=${jobId}`,
+			`/business-finance/coe-finance/${activeTab}/audit?job_id=${jobId}`,
 		);
 	};
 
