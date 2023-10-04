@@ -4,15 +4,16 @@ import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
 const API_NAME = {
-	fcl_freight     : '/create_fcl_freight_rate',
-	air_freight     : '/create_air_freight_rate',
-	fcl_customs     : '/create_fcl_customs_rate',
-	haulage_freight : '/create_haulage_freight_rate',
-	lcl_freight     : '/create_lcl_freight_rate',
-	lcl_customs     : '/create_lcl_customs_rate',
-	air_customs     : '/create_air_customs_rate',
-	trailer_freight : '/create_trailer_freight_rate',
-	ltl_freight     : '/create_ltl_freight_rate',
+	fcl_freight : 'create_fcl_freight_rate',
+	air_freight : 'create_air_freight_rate',
+	fcl_customs : 'create_fcl_customs_rate',
+	haulage     : 'create_haulage_freight_rate',
+	lcl_freight : 'create_lcl_freight_rate',
+	lcl_customs : 'create_lcl_customs_rate',
+	air_customs : 'create_air_customs_rate',
+	trailer     : 'create_trailer_freight_rate',
+	ltl_freight : 'create_ltl_freight_rate',
+	ftl_freight : 'create_ftl_freight_rate',
 };
 
 const useCreateFreightRate = (service) => {
@@ -27,6 +28,7 @@ const useCreateFreightRate = (service) => {
 	}, { manual: true });
 
 	const createRate = async (data) => {
+		console.log(data, 'data');
 		const weight_slabs = (data?.weight_slabs || []).map((item) => ({
 			lower_limit  : item?.lower_limit,
 			upper_limit  : item?.upper_limit,
@@ -78,6 +80,8 @@ const useCreateFreightRate = (service) => {
 					origin_main_port_id      : data?.origin_main_port_id,
 					destination_main_port_id : data?.destination_main_port_id,
 					schedule_type            : data?.schedule_type,
+					transit_time             : data?.transit_time,
+					number_of_stops          : data?.number_of_stops,
 				},
 			});
 			if (resp?.data) { return resp?.data?.id; }

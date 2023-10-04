@@ -89,7 +89,7 @@ function AddRateModal({
 	const weightSlabsJSON = JSON.stringify(weightSlabs);
 
 	useEffect(() => {
-		if (filter?.service_type === 'fcl_freight' || filter?.service_type === 'haulage_freight') {
+		if (filter?.service_type === 'fcl_freight' || filter?.service_type === 'haulage') {
 			weightSlabs.forEach((obj, index) => {
 				if (index === DEFAULT_VALUE) {
 					setValue('weight_slabs.0.lower_limit', Number(freeWeight) + DELTA_VALUE || DEFAULT_VALUE);

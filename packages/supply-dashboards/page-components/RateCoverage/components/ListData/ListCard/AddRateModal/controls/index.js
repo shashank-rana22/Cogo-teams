@@ -19,14 +19,14 @@ import lclCustomsControls from './lcl-customs-controls';
 import trailerControls from './trailer_control';
 
 const serviceControlsMap = {
-	fcl_freight     : fclControls,
-	air_freight     : airControls,
-	haulage_freight : haulageControls,
-	fcl_customs     : fclCustomsControls,
-	lcl_freight     : lclControls,
-	lcl_customs     : lclCustomsControls,
-	trailer_freight : trailerControls,
-	ftl_controls    : ftlControls,
+	fcl_freight  : fclControls,
+	air_freight  : airControls,
+	haulage      : haulageControls,
+	fcl_customs  : fclCustomsControls,
+	lcl_freight  : lclControls,
+	lcl_customs  : lclCustomsControls,
+	trailer      : trailerControls,
+	ftl_controls : ftlControls,
 };
 
 const getDefaultValues = (oldfields) => {

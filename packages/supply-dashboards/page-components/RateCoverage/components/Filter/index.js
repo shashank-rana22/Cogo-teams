@@ -1,4 +1,4 @@
-import { DateRangepicker, Select, Modal, RadioGroup, CheckboxGroup } from '@cogoport/components';
+import { DateRangepicker, Select, Modal, RadioGroup } from '@cogoport/components';
 import {	asyncFieldsLocations, asyncFieldsOperators, useGetAsyncOptions } from '@cogoport/forms';
 import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { merge, startCase } from '@cogoport/utils';
@@ -139,10 +139,10 @@ function Filter({
 							options={entityOptions}
 							onChange={(val) => setFilter((prevFilters) => ({
 								...prevFilters,
-								value : val,
-								page  : 1,
+								cogo_entity_id : val,
+								page           : 1,
 							}))}
-							value={filter?.value}
+							value={filter?.cogo_entity_id}
 						/>
 					</div>
 				)}
@@ -153,24 +153,27 @@ function Filter({
 								options={revertedOptions}
 								onChange={(val) => setFilter((prevFilters) => ({
 									...prevFilters,
-									revert : val,
-									page   : 1,
+									is_flash_booking_reverted : val,
+									page                      : 1,
 								}))}
-								value={filter?.revert}
+								value={filter?.is_flash_booking_reverted}
 							/>
 
-							<CheckboxGroup
-								options={delayedOptions}
-								onChange={(val) => setFilter((prevFilters) => ({
-									...prevFilters,
-									opt  : val,
-									page : 1,
-								}))}
-								value={filter?.opt}
-							/>
-
+							{filter?.is_flash_booking_reverted === 'not_reverted'
+							&& (
+								<RadioGroup
+									options={delayedOptions}
+									onChange={(val) => setFilter((prevFilters) => ({
+										...prevFilters,
+										is_flash_booking_delayed : val,
+										page                     : 1,
+									}))}
+									value={filter?.is_flash_booking_delayed}
+								/>
+							)}
 						</div>
 					)}
+
 					{ (source === 'critical_ports' || source === 'expiring_rates'
 					|| source === 'cancelled_shipments') && (
 						<div>

@@ -46,10 +46,10 @@ export const CARDS_MAPPING = {
 	},
 };
 export const SERVICE_ICON_MAPPING = {
-	fcl_freight     : <IcMFcl height={20} width={20} />,
-	air_freight     : <IcMAir height={20} width={20} />,
-	fcl_customs     : <IcCFlclCustoms height={20} width={20} />,
-	haulage_freight : <IcMFhaulage height={20} width={20} />,
+	fcl_freight : <IcMFcl height={20} width={20} />,
+	air_freight : <IcMAir height={20} width={20} />,
+	fcl_customs : <IcCFlclCustoms height={20} width={20} />,
+	haulage     : <IcMFhaulage height={20} width={20} />,
 };
 
 export const CLOSE_REASON_OPTIONS = [
@@ -71,6 +71,14 @@ export const serviceOptions = [
 		value : 'air_freight',
 	},
 	{
+		label : 'Ltl Freight',
+		value : 'ltl_freight',
+	},
+	{
+		label : 'ftl Freight',
+		value : 'ftl_freight',
+	},
+	{
 		label : 'FCL Customs',
 		value : 'fcl_customs',
 	},
@@ -84,15 +92,11 @@ export const serviceOptions = [
 	},
 	{
 		label : 'Haulage Freight',
-		value : 'haulage_freight',
+		value : 'haulage',
 	},
 	{
 		label : 'Trailer Freight',
-		value : 'trailer_freight',
-	},
-	{
-		label : 'Ltl Freight',
-		value : 'ltl_freight',
+		value : 'trailer',
 	},
 ];
 
@@ -218,39 +222,30 @@ export const filterOptions = [
 ];
 
 export const entityOptions = [
-	{
-		name  : 'all_entity',
-		value : 'all_entity',
-		label : 'All Entity',
-	}, { name: 'my_entity', value: 'my_entity', label: 'My Entity' },
+	{ name: 'all_entity', value: 'no_cogo_entity_id', label: 'All Entity' },
+	{ name: 'my_entity', value: 'cogo_entity_id', label: 'My Entity' },
 ];
 
 export const revertedOptions = [
-	{
-		name  : 'reverted',
-		value : 'reverted',
-		label : 'Reverted',
-	}, { name: 'not_reverted', value: 'not_reverted', label: 'Not Reverted' },
+	{ name: 'reverted', value: 'reverted', label: 'Reverted' },
+	{ name: 'not_reverted', value: 'not_reverted', label: 'Not Reverted' },
 ];
 
 export const delayedOptions = [
-	{
-		name  : 'delayed',
-		value : 'delayed',
-		label : 'Delayed',
-	}, { name: 'in_time', value: 'in_time', label: 'In Time' },
+	{ name: 'delayed', value: 'delayed', label: 'Delayed' },
+	{ name: 'in_time', value: 'in_time', label: 'In Time' },
 ];
 
 export const filterOption = {
-	fcl_freight     : ['seaport'],
-	lcl_freight     : ['seaport'],
-	air_freight     : ['airport'],
-	fcl_customs     : ['seaport'],
-	lcl_customs     : ['seaport'],
-	air_customs     : ['airport'],
-	haulage_freight : ['pincode', 'seaport'],
-	trailer_freight : ['pincode', 'seaport'],
-	ftl_freight     : ['pincode', 'seaport'],
+	fcl_freight : ['seaport'],
+	lcl_freight : ['seaport'],
+	air_freight : ['airport'],
+	fcl_customs : ['seaport'],
+	lcl_customs : ['seaport'],
+	air_customs : ['airport'],
+	haulage     : ['pincode', 'seaport'],
+	trailer     : ['pincode', 'seaport'],
+	ftl_freight : ['pincode', 'seaport'],
 };
 
 export const DEFAULT_VALUE = 0;

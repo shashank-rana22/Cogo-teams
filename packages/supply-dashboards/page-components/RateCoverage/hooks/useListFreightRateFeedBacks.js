@@ -3,15 +3,16 @@ import { useCallback } from 'react';
 
 const useListFreightRateFeedBacks = ({ filter = {}, source_id }) => {
 	const API = {
-		fcl_freight     : 'list_fcl_freight_rate_feedbacks',
-		air_freight     : 'list_air_freight_rate_feedbacks',
-		fcl_customs     : 'list_fcl_customs_rate_feedbacks',
-		haulage_freight : 'list_haulage_freight_rate_feedbacks',
-		lcl_freight     : 'list_lcl_freight_rate_feedbacks',
-		lcl_customs     : 'list_lcl_customs_rate_feedbacks',
-		air_customs     : 'list_air_customs_rate_feedbacks',
-		trailer_freight : 'list_trailer_freight_rate_feedbacks',
-		ltl_freight     : 'list_ltl_freight_rate_feedbacks',
+		fcl_freight : 'list_fcl_freight_rate_feedbacks',
+		air_freight : 'list_air_freight_rate_feedbacks',
+		fcl_customs : 'list_fcl_customs_rate_feedbacks',
+		haulage     : 'list_haulage_freight_rate_feedbacks',
+		lcl_freight : 'list_lcl_freight_rate_feedbacks',
+		lcl_customs : 'list_lcl_customs_rate_feedbacks',
+		air_customs : 'list_air_customs_rate_feedbacks',
+		trailer     : 'list_trailer_freight_rate_feedbacks',
+		ltl_freight : 'list_ltl_freight_rate_feedbacks',
+		ftl_freight : 'list_ftl_freight_rate_feedbacks',
 	};
 
 	const apiName = API[filter?.service];

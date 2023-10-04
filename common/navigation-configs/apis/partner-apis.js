@@ -4920,6 +4920,11 @@ const partner = {
 			service_name : 'fcl_customs_rate',
 		},
 		{
+			api          : 'get_ftl_freight_rate_job_csv_url',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
+		},
+		{
 			api          : 'delete_fcl_freight_rate_job',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
@@ -4965,6 +4970,11 @@ const partner = {
 			service_name : 'ltl_freight_rate',
 		},
 		{
+			api          : 'delete_ftl_freight_rate_job',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
+		},
+		{
 			api          : 'list_fcl_freight_rate_jobs',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
@@ -4987,12 +4997,12 @@ const partner = {
 		{
 			api          : 'list_lcl_freight_rate_jobs',
 			access_type  : 'private',
-			service_name : 'lcl_freight_rate',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'list_lcl_customs_rate_jobs',
 			access_type  : 'private',
-			service_name : 'lcl_customs_rate',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'list_air_customs_rate_jobs',
@@ -5007,14 +5017,18 @@ const partner = {
 		{
 			api          : 'list_ltl_freight_rate_jobs',
 			access_type  : 'private',
-			service_name : 'ltl_freight_rate',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'list_fcl_freight_rate_requests',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},
-
+		{
+			api          : 'list_ftl_freight_rate_jobs',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
 		{
 			api          : 'get_fcl_freight_rate_job_stats',
 			access_type  : 'private',
@@ -5039,12 +5053,12 @@ const partner = {
 		{
 			api          : 'get_lcl_freight_rate_job_stats',
 			access_type  : 'private',
-			service_name : 'lcl_freight_rate',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'get_lcl_customs_rate_job_stats',
 			access_type  : 'private',
-			service_name : 'lcl_customs_rate',
+			service_name : 'fcl_customs_rate',
 		},
 		{
 			api          : 'get_air_customs_rate_job_stats',
@@ -5059,7 +5073,12 @@ const partner = {
 		{
 			api          : 'get_ltl_freight_rate_job_stats',
 			access_type  : 'private',
-			service_name : 'ltl_freight_rate',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_ftl_freight_rate_jobs_stats',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'get_shipment',

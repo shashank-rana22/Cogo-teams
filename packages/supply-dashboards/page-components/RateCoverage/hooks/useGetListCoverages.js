@@ -3,15 +3,16 @@ import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
 const API_NAME = {
-	fcl_freight     : 'list_fcl_freight_rate_jobs',
-	lcl_freight     : 'list_lcl_freight_rate_jobs',
-	lcl_customs     : 'list_lcl_customs_rate_jobs',
-	air_customs     : 'list_air_customs_rate_jobs',
-	trailer_freight : 'list_trailer_freight_rate_jobs',
-	ltl_freight     : 'list_ltl_freight_rate_jobs',
-	air_freight     : 'list_air_freight_rate_jobs',
-	haulage_freight : 'list_haulage_freight_rate_jobs',
-	fcl_customs     : 'list_fcl_customs_rate_jobs',
+	fcl_freight : 'list_fcl_freight_rate_jobs',
+	lcl_freight : 'list_lcl_freight_rate_jobs',
+	lcl_customs : 'list_lcl_customs_rate_jobs',
+	air_customs : 'list_air_customs_rate_jobs',
+	trailer     : 'list_trailer_freight_rate_jobs',
+	ltl_freight : 'list_ltl_freight_rate_jobs',
+	air_freight : 'list_air_freight_rate_jobs',
+	haulage     : 'list_haulage_freight_rate_jobs',
+	fcl_customs : 'list_fcl_customs_rate_jobs',
+	ftl_freight : 'list_ftl_freight_rate_jobs',
 };
 
 const FCL_PARAMS_MAPPING = {
@@ -34,19 +35,21 @@ const useGetListCoverage = () => {
 	const { user_data } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
+
 	const { user: { id: user_id = '' } = {} } = user_data;
 
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [source, setSource] = useState('live_bookings');
 	const [filter, setFilter] = useState({
-		service           : 'fcl_freight',
-		status            : 'pending',
+		service                   : 'fcl_freight',
+		status                    : 'pending',
 		source,
-		releventToMeValue : true,
-		daily_stats       : true,
-		assign_to_id      : '',
-		revert            : '',
-		value             : '',
+		releventToMeValue         : true,
+		daily_stats               : true,
+		assign_to_id              : '',
+		is_flash_booking_reverted : '',
+		is_flash_booking_delayed  : '',
+		cogo_entity_id            : '',
 	});
 	const endPoint = API_NAME[filter?.service || 'fcl_freight'];
 
@@ -86,22 +89,35 @@ const useGetListCoverage = () => {
 		if (filter?.end_date) { DATE_PARAMS.end_date = filter?.end_date; }
 
 		try {
+			let is_flash_booking_reverted;
+			let is_flash_booking_delayed;
+			if (filter?.is_flash_booking_reverted) {
+				is_flash_booking_reverted = filter?.is_flash_booking_reverted === 'reverted';
+			}
+			if (filter?.is_flash_booking_delayed) {
+				is_flash_booking_delayed = filter?.is_flash_booking_delayed === 'delayed';
+			}
+
 			await trigger({
 				params: {
 					filters: {
 						...FINAL_FILTERS,
-						serial_id : sid ? parseInt(sid, 10) : undefined,
-						source    : source || undefined,
-						user_id   : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
+						serial_id      : sid ? parseInt(sid, 10) : undefined,
+						source         : source || undefined,
+						user_id        : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
+						cogo_entity_id : filter?.cogo_entity_id === 'cogo_entity_id'
+							? user_data?.partner?.id : undefined,
+						is_flash_booking_reverted,
+						is_flash_booking_delayed,
 						...DATE_PARAMS,
 					},
 					page,
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
-	}, [trigger, user_id, filter, source, page]);
+	}, [filter, trigger, source, user_id, user_data?.partner?.id, page]);
 
 	useEffect(() => {
 		getListCoverage();

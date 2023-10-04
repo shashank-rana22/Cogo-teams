@@ -2,6 +2,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { currencyOptions } from '../../../../../configurations/helpers/constants';
+import styles from '../styles.module.css';
 
 const lclControls = ({
 	data,
@@ -84,25 +85,40 @@ const lclControls = ({
 		showOptional : false,
 	},
 	{
-		name        : 'validity',
-		type        : 'datepicker',
-		span        : 4,
-		pickerType  : 'range',
-		placeholder : 'Date Validty',
+		name        : 'validity_start',
+		heading     : 'Validty Start',
+		type        : 'date_picker',
+		placeholder : 'Validity Start',
+		span        : 3,
 		minDate     : new Date(),
+		className   : styles.date_filter,
 		rules       : {
-			required: 'Validity End date is required',
+			required: 'validity start date is required',
 		},
 	},
-
+	{
+		name        : 'validity_end',
+		heading     : 'Validity End',
+		type        : 'date_picker',
+		className   : styles.date_filter,
+		placeholder : 'Validity End',
+		span        : 3,
+		minDate     : new Date(),
+		rules       : {
+			required: 'validity end date is required',
+		},
+	},
 	{
 		name        : 'departure_dates',
 		type        : 'departure-dates',
 		span        : 4,
 		placeholder : 'Enter Departure Dates',
 		className   : 'primary sm',
-		datePair    : {},
-		rules       : { required: 'This is required' },
+		datePair    : {
+			startDate : data?.validity_start,
+			endDate   : data?.validity_end,
+		},
+		rules: { required: 'This is required' },
 	},
 	{
 		name        : 'number_of_stops',
