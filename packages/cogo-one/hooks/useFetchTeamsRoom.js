@@ -78,73 +78,77 @@ function fetchTeamsRoomsPinned({
 	setPinnedChats,
 	queryForSearch,
 }) {
-	if (activeAgent) {
-		try {
-			setPinnedChats([]);
-			setLoading((prev) => ({ ...prev, pinnedLoading: true }));
+	if (!activeAgent) {
+		return;
+	}
 
-			const collectionQuery = query(
-				roomsCollection,
-				...queryForSearch,
-				...filterQuery,
-				where('is_pinned', '==', true),
-				orderBy('message_pinned_at', 'desc'),
-			);
+	try {
+		setPinnedChats([]);
+		setLoading((prev) => ({ ...prev, pinnedLoading: true }));
 
-			const snapshotRefArg = snapshotRef;
+		const collectionQuery = query(
+			roomsCollection,
+			...queryForSearch,
+			...filterQuery,
+			where('is_pinned', '==', true),
+			orderBy('message_pinned_at', 'desc'),
+		);
 
-			snapshotRefArg.current.pinned = onSnapshot(collectionQuery, (roomCollection) => {
-				const formattedChats = pinnedChatsFormatter(roomCollection);
+		const snapshotRefArg = snapshotRef;
 
-				setPinnedChats(formattedChats);
+		snapshotRefArg.current.pinned = onSnapshot(collectionQuery, (roomCollection) => {
+			const formattedChats = pinnedChatsFormatter(roomCollection);
 
-				setLoading((prev) => ({ ...prev, pinnedLoading: false }));
-			});
-		} catch (e) {
-			console.log('e', e);
-		}
+			setPinnedChats(formattedChats);
+
+			setLoading((prev) => ({ ...prev, pinnedLoading: false }));
+		});
+	} catch (e) {
+		console.error('e', e);
 	}
 }
 
 async function prevTeamRooms({
 	activeAgent, setLoading, roomsCollection, filterQuery, setListData, listData,
 }) {
-	if (activeAgent) {
-		try {
-			setLoading((prev) => ({ ...prev, unpinnedLoading: true }));
+	if (!activeAgent) {
+		return;
+	}
 
-			const collectionQuery = query(
-				roomsCollection,
-				...filterQuery,
-				where('is_pinned', '==', false),
-				where(
-					'new_message_sent_at',
-					'<=',
-					Number(listData?.lastMessageTimeStamp),
-				),
-				orderBy('new_message_sent_at', 'desc'),
-				limit(LIMIT),
-			);
+	try {
+		setLoading((prev) => ({ ...prev, unpinnedLoading: true }));
 
-			const prevChats = await getDocs(collectionQuery);
+		const collectionQuery = query(
+			roomsCollection,
+			...filterQuery,
+			where('is_pinned', '==', false),
+			where(
+				'new_message_sent_at',
+				'<=',
+				Number(listData?.lastMessageTimeStamp),
+			),
+			orderBy('new_message_sent_at', 'desc'),
+			limit(LIMIT),
+		);
 
-			const prevChatsSize = prevChats.size;
+		const prevChats = await getDocs(collectionQuery);
 
-			const resultList = dataFormatter(prevChats);
+		const prevChatsSize = prevChats.size;
 
-			const lastMessageTimeStamp = prevChats?.docs?.[
-				(prevChatsSize || FALLBACK_VALUE) - LAST_ITEM]?.data()?.new_message_sent_at;
+		const resultList = dataFormatter(prevChats);
 
-			const isLastPage = prevChatsSize < LIMIT;
+		const lastMessageTimeStamp = prevChats?.docs?.[
+			(prevChatsSize || FALLBACK_VALUE) - LAST_ITEM]?.data()?.new_message_sent_at;
 
-			setListData((prev) => ({
-				messagesListData: { ...(prev?.messagesListData || {}), ...resultList },
-				isLastPage,
-				lastMessageTimeStamp,
-			}));
-		} catch (e) {
-			console.log('e', e);
-		}
+		const isLastPage = prevChatsSize < LIMIT;
+
+		setListData((prev) => ({
+			messagesListData: { ...(prev?.messagesListData || {}), ...resultList },
+			isLastPage,
+			lastMessageTimeStamp,
+		}));
+	} catch (e) {
+		console.error('e', e);
 	}
 }
 

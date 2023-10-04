@@ -186,10 +186,10 @@ const useGetTeamsMessages = ({
 			scrollToLastMessage,
 		});
 
-		const unSubsribe = newMessagesRef.current;
+		const unSubscribe = newMessagesRef.current;
 
 		return () => {
-			unSubsribe?.();
+			unSubscribe?.();
 		};
 	}, [chatCollection, roomId, scrollToLastMessage]);
 

@@ -2,7 +2,6 @@ import { Textarea, cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
-import RTE_TOOL_BAR_CONFIG from '../../../../../constants/rteToolBarConfig';
 import useSendTeamsMessage from '../../../../../hooks/useSendTeamsMessage';
 import { formatFileAttributes } from '../../../../../utils/getFileAttributes';
 
@@ -115,8 +114,6 @@ function Footer({
 					onChange={(val) => setDraftMessages((prev) => ({ ...prev, [activeId]: val }))}
 					style={{ cursor: hasPermissionToEdit ? 'text' : 'not-allowed' }}
 					onKeyDown={handleKeyPress}
-					modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
-					showToolbar={false}
 				/>
 				<div className={styles.flex_space_between}>
 					<SendActions

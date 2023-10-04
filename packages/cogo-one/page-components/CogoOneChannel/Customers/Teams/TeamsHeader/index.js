@@ -36,6 +36,7 @@ function TeamsHeader({
 				className={styles.edit_icon}
 				width={20}
 				height={20}
+				alt="new"
 				src={GLOBAL_CONSTANTS.image_url.edit_square}
 				onClick={newConversation}
 			/>

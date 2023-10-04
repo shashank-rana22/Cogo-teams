@@ -2,10 +2,10 @@ function dataFormatter(list) {
 	let resultList = {};
 
 	list?.forEach((item) => {
-		const { created_at, updated_at, new_message_count, ...rest } = item.data() || {};
+		const { created_at, new_message_count, ...rest } = item.data() || {};
 		const userData = {
 			id         : item?.id,
-			created_at : item.data().created_at || Date.now(),
+			created_at : created_at || Date.now(),
 			new_message_count,
 			...rest,
 		};

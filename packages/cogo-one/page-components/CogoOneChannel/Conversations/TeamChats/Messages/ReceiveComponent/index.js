@@ -13,13 +13,13 @@ function ReceiveComponent({
 }) {
 	const { created_at = {}, send_by = '', response = {} } = eachMessage || {};
 
-	const date = created_at && formatDate({
+	const date = created_at ? formatDate({
 		date       : new Date(created_at),
 		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
 		formatType : 'dateTime',
 		separator  : ' ',
-	});
+	}) : null;
 
 	return (
 		<div className={styles.container}>

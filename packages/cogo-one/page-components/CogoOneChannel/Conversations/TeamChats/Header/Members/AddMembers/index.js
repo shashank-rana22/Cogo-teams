@@ -83,7 +83,7 @@ function AddMembers({
 					onClick={() => setAddMembers(false)}
 					disabled={loading}
 				>
-					cancel
+					Cancel
 				</Button>
 				<Button
 					disabled={isNoSelectedUsers}

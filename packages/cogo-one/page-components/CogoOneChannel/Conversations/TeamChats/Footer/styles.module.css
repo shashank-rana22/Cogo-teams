@@ -5,26 +5,6 @@
 	border: none !important;
 	outline: none;
 
-	:global {
-		.notranslate {
-			min-height: 100px;
-			max-height: 200px;
-			overflow: auto;
-		}
-
-		.ql-toolbar {
-			border: 0;
-			border-bottom: 1px solid #e0e0e0;
-		}
-
-		.ql-container {
-			min-height: 100px;
-			max-height: 300px;
-			overflow-y: auto;
-			border: 0;
-		}
-	}
-
 	>div {
 		border: none !important;
 	}
@@ -100,11 +80,6 @@
 	padding: 5px 0;
 	overflow-x: auto;
 	border-bottom: 1px solid #fbd1a6;
-}
-
-.styled_div {
-	position: relative;
-	height: 100%;
 }
 
 .disabled {

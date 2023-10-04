@@ -186,9 +186,11 @@ function MultiMediaMessage({
 }) {
 	const { media_url = [] } = response || {};
 
+	const formattedMediaUrl = typeof media_url === 'string' ? [media_url] : media_url || [];
+
 	return (
 		<>
-			{(media_url || []).map((item) => {
+			{(formattedMediaUrl || []).map((item) => {
 				const urlArray = decodeURI(item)?.split('/');
 				const fileNameFromUrl = urlArray[(urlArray?.length || DEFAULT_URL_LENGTH) - NEGATIVE_NUMBER] || '';
 				const fileArray = fileNameFromUrl.split('.') || [];
