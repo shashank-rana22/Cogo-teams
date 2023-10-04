@@ -820,6 +820,29 @@ const GLOBAL_CONSTANTS = {
 
 	default_preferred_language : 'english',
 	supplier_entity_mapping    : supplierEntityMapping.shippingCompanies,
+	months_with_value          : [
+		{ label: 'January', value: 1 },
+		{ label: 'February', value: 2 },
+		{ label: 'March', value: 3 },
+		{ label: 'April', value: 4 },
+		{ label: 'May', value: 5 },
+		{ label: 'June', value: 6 },
+		{ label: 'July', value: 7 },
+		{ label: 'August', value: 8 },
+		{ label: 'September', value: 9 },
+		{ label: 'October', value: 10 },
+		{ label: 'November', value: 11 },
+		{ label: 'December', value: 12 },
+	],
+	days_with_value: [
+		{ label: 'Monday', value: 'monday' },
+		{ label: 'Tuesday', value: 'tuesday' },
+		{ label: 'Wednesday', value: 'wednesday' },
+		{ label: 'Thursday', value: 'thursday' },
+		{ label: 'Friday', value: 'friday' },
+		{ label: 'Saturday', value: 'saturday' },
+		{ label: 'Sunday', value: 'sunday' },
+	],
 };
 
 export default GLOBAL_CONSTANTS;

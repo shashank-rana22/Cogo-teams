@@ -3,20 +3,12 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import moment from 'moment';
 
-const getPayload = ({ value = {}, actionStatus = '' }) => ({
-	schedule_id : value?.schedule_id,
-	status      : actionStatus,
-});
-
 const useUpdateCogooneSchedule = ({
-	actionModal = {},
 	handleClose = () => {},
 	getEvents = () => {},
 	month = '',
 	handleUpdatedState = () => {},
 }) => {
-	const { value = {},	actionStatus = '' } = actionModal || {};
-
 	const startDate = moment(month).startOf('month').toDate();
 	const endDate = moment(month).endOf('month').toDate();
 
@@ -25,10 +17,10 @@ const useUpdateCogooneSchedule = ({
 		method : 'post',
 	}, { manual: true });
 
-	const updateCogooneSchedule = async () => {
+	const updateCogooneSchedule = async ({ payload }) => {
 		try {
 			await trigger({
-				params: getPayload({ value, actionStatus }),
+				params: payload,
 			});
 			handleClose();
 			await getEvents({ startDate, endDate });

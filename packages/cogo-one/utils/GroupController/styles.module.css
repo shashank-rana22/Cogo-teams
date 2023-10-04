@@ -1,7 +1,7 @@
 .container {
 	display: flex;
 	align-items: center;
-	width: 50%;
+	width: 60%;
 
 	:global {
 		.ui_select_container {
@@ -10,7 +10,7 @@
 		}
 
 		.ui_input_number_container {
-			width: 20%;
+			width: 30% !important;
 		}
 	}
 }
