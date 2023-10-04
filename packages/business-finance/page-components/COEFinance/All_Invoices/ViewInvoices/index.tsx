@@ -67,8 +67,13 @@ function ViewInvoices() {
 
 	useEffect(() => {
 		if (!isTagFound && !loading) {
+			// deleting tagging check if there is no tagging data
 			setCheckItem(
-				(prev: any) => ({ ...prev, taggingCheck: true }),
+				(prev: any) => {
+					const newCheckItem = { ...prev };
+					delete newCheckItem.taggingCheck;
+					return ({ ...newCheckItem });
+				},
 			);
 		}
 	}, [isTagFound, loading]);
