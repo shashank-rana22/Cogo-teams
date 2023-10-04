@@ -72,8 +72,6 @@ function CollectionPartyDetails({
 
 	const [isDocumentVerified, setIsDocumentVerified] = useState(false);
 
-	console.log('isDocumentVerified', isDocumentVerified);
-
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
 	);
