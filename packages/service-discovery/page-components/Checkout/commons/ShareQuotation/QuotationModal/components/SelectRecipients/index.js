@@ -123,7 +123,9 @@ function SelectRecipients({
 		false : ccRecipients,
 	};
 
-	const ccRecipientsOptions = CC_RECIPIENTS_MAPPING[organization?.sub_type === 'enterprise'] || ccRecipients;
+	const showAdditionalRecipients = organization?.sub_type === 'enterprise' || organization?.tags?.includes('partner');
+
+	const ccRecipientsOptions = CC_RECIPIENTS_MAPPING[showAdditionalRecipients] || ccRecipients;
 
 	useEffect(() => {
 		const finalKey = selected === 'main' ? 'main' : selected.tax_number;
