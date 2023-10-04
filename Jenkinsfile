@@ -24,6 +24,23 @@ pipeline {
                 cleanWs()
             }
         }
+        stage("Acquire lock"){
+                script {
+                    SERVER_NAME = sh (script: "git log -1 --pretty=%B ${COMMIT_ID} | awk \'{print \$NF}\'", returnStdout:true).trim()
+                
+                    def isBlocked = isJobBlocked("Deploy Admin to ${SERVER_NAME}")
+                    if (isBlocked) {
+				    office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployment failed for user **${PUSHER_NAME}** because another deployment is going on for cogo-admin in the specified server.", color: '#3366ff'
+                        currentBuild.result = 'ABORTED' // Mark the build as aborted
+                        error("Deployment aborted due to a blocked job.")
+                    }else{
+                    build([$class: 'BuildBlockerProperty',
+                            blockingJobs: "Deploy Admin to ${SERVER_NAME}",
+                            scanQueueFor: "BLOCKED"])
+                    }
+            }
+
+        }
         
         stage ('Checkout') {
             steps {
@@ -77,11 +94,6 @@ pipeline {
             steps {
                 echo 'Deploying....'
 
-                script {
-                    SERVER_NAME = sh (script: "git log -1 --pretty=%B ${COMMIT_ID} | awk \'{print \$NF}\'", returnStdout:true).trim()
-                }
-
-
                 // ssh into server ip and run deploy commands
                 sh """ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} \" sed -i \'/^ADMIN_TAG/s/=.*\$/=${COMMIT_ID}/g\' /home/${SERVER_NAME}/.env.front && \
                 aws ecr get-login-password --region ap-south-1 | docker login --username ${ECR_USERNAME} --password-stdin ${ECR_URL} && \
@@ -96,6 +108,11 @@ pipeline {
 		        success {
 			        office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Admin Successfully deployed for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** on server **${SERVER_NAME} for user **${PUSHER_NAME}****", color:  '#66ff66'
 		        }
+            }
+            script{
+                build([$class: 'BuildBlockerProperty',
+                               blockingJobs: "Deploy Admin to ${SERVER_NAME}",
+                               scanQueueFor: "UNBLOCKED"])
             }
 		}
     }
