@@ -1,6 +1,7 @@
 import { Button, Modal, Placeholder } from '@cogoport/components';
 import { CheckboxController, useForm } from '@cogoport/forms';
 import { IcMArrowDown, IcMArrowRight, IcMFtick } from '@cogoport/icons-react';
+import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 
 import ResignEmployeeDetails from '../ResignEmployeeDetails';
@@ -19,6 +20,7 @@ const TERMS_AND_CONDITIONS = `By clicking on Initiate Separation, you agree to s
 
 function ResignationFormLanding({ refetch = () => {} }) {
 	const CANCEL_REQUEST = 'cancellation_requested';
+	const router = useRouter();
 
 	const { data:dataItems = {}, loading = false, refetchApplicationDetails } = useGetEmployeeDetails();
 	const [show, setShow] = useState(false);
@@ -45,14 +47,25 @@ function ResignationFormLanding({ refetch = () => {} }) {
 	const { requestCancellation } = useUpdateOffBoarding({ refetch: refetchApplicationDetails });
 
 	const onSubmit = async (values = {}) => {
-		const payload = {
+		let payload = {
 			reason               : values?.reason_of_leaving,
 			mobile_number        : values?.mobile_number.number,
 			mobile_country_code  : values?.mobile_number.country_code,
 			email                : values?.personal_email,
 			last_working_day     : values?.date,
 			terms_and_conditions : TERMS_AND_CONDITIONS,
+			employee_user_id     : '',
+			action_performed_by  : '',
 		};
+
+		if (router.query.user_id) {
+			payload = {
+				...payload,
+				employee_user_id    : router.query.user_id,
+				action_performed_by : 'hrbp',
+			};
+		}
+
 		postApplicationDetails({ payload });
 	};
 	const cancelRequest = () => {

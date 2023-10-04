@@ -90,8 +90,7 @@ function EmployeeProfile() {
 									}
 									</span>
 									<div className={styles.buttons_flex}>
-										{
-										loading ? <Placeholder width="50px" height="33px" />
+										{loading ? <Placeholder width="50px" height="33px" />
 											: (
 												<div>
 													{(employee_detail?.status === 'active')
@@ -106,12 +105,21 @@ function EmployeeProfile() {
 															</div>
 														)}
 												</div>
-											)
-									}
+											)}
 										<Popover
 											placement="left"
 											render={(
-												<Button onClick={() => router.push('/apply-resignation')}>
+												<Button
+													onClick={() => {
+														if (router.query.user_id) {
+															router.push(
+																`/apply-resignation?user_id=${router.query.user_id}`,
+															);
+														} else {
+															router.push('/apply-resignation');
+														}
+													}}
+												>
 													Apply for Resignation
 												</Button>
 											)}
