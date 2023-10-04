@@ -1,7 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 
-export const extraLineItems = ({ serviceProvider = {} }) => {
-	const { shipment_type = '' } = serviceProvider || {};
+export const extraLineItems = ({ serviceProvider = {}, shipment_data = {} }) => {
+	const { shipment_type = '' } = shipment_data || {};
 	const truckList = (serviceProvider?.service_charges || []).reduce((acc, item) => {
 		if (item?.service_type === 'ftl_freight_service') {
 			acc.push({

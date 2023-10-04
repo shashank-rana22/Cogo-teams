@@ -313,6 +313,7 @@ function InvoiceFormLayout({
 					primary_service={primary_service}
 					serviceProvider={serviceProvider}
 					formValues={formValues}
+					calculatedValues={calculatedValues}
 				/>
 				<Taggings
 					showTagings={showTaggings}
