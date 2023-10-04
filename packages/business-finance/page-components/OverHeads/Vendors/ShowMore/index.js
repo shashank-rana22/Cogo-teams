@@ -17,11 +17,7 @@ import configs from '../utils/config';
 
 import styles from './styles.module.css';
 
-interface Props {
-	vendorId?: number | string;
-}
-
-function ShowMore({ vendorId }: Props) {
+function ShowMore({ vendorId }) {
 	const [moreData, setMoreData] = useState(false);
 	const [pageIndex, setPageIndex] = useState(1);
 	const [expenseType, setExpenseType] = useState('RECURRING');
@@ -31,7 +27,7 @@ function ShowMore({ vendorId }: Props) {
 
 	const { EXPENSE_CONFIG } = configs();
 
-	const handlePageChange = (pageValue: number) => {
+	const handlePageChange = (pageValue) => {
 		setPageIndex(pageValue);
 	};
 
@@ -47,7 +43,7 @@ function ShowMore({ vendorId }: Props) {
 	];
 
 	const functions = {
-		renderCategory: (itemData: any) => {
+		renderCategory: (itemData) => {
 			const { category = '' } = itemData || {};
 			return (
 				<div style={{ fontSize: '14px' }}>
@@ -55,7 +51,7 @@ function ShowMore({ vendorId }: Props) {
 				</div>
 			);
 		},
-		getPayable: (itemData: any) => {
+		getPayable: (itemData) => {
 			const {
 				grandTotal,
 				paidAmount,
@@ -77,7 +73,7 @@ function ShowMore({ vendorId }: Props) {
 				</div>
 			);
 		},
-		getInvoiceDates: (itemData: any) => {
+		getInvoiceDates: (itemData) => {
 			const { dueDate, billDate, createdDate } = itemData || {};
 			return (
 				<div style={{ fontSize: '10px' }}>
@@ -108,7 +104,7 @@ function ShowMore({ vendorId }: Props) {
 				</div>
 			);
 		},
-		getApprovedByRecurring: (itemData: any) => {
+		getApprovedByRecurring: (itemData) => {
 			const { updatedAt, approvedByUser, status } = itemData || {};
 			const { name = '' } = approvedByUser || {};
 			return (
@@ -133,7 +129,7 @@ function ShowMore({ vendorId }: Props) {
 				</div>
 			);
 		},
-		getInvoiceNumber: (itemData: any) => {
+		getInvoiceNumber: (itemData) => {
 			const { billNumber, billDocumentUrl = '' } = itemData || {};
 			return (
 				<div>
@@ -154,7 +150,7 @@ function ShowMore({ vendorId }: Props) {
 				</div>
 			);
 		},
-		renderInvoiceAmount: (itemData: any) => {
+		renderInvoiceAmount: (itemData) => {
 			const { grandTotal, billCurrency = '' } = itemData || {};
 			const amount = formatAmount({
 				amount   : grandTotal,
@@ -166,7 +162,7 @@ function ShowMore({ vendorId }: Props) {
 			});
 			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
-		renderTds: (itemData: any) => {
+		renderTds: (itemData) => {
 			const { payableTds, billCurrency = '' } = itemData || {};
 			const amount = formatAmount({
 				amount   : payableTds,
@@ -178,7 +174,7 @@ function ShowMore({ vendorId }: Props) {
 			});
 			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
-		renderPaid: (itemData: any) => {
+		renderPaid: (itemData) => {
 			const { paidAmount, billCurrency = '' } = itemData || {};
 			const amount = formatAmount({
 				amount   : paidAmount,

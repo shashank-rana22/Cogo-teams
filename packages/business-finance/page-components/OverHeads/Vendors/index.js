@@ -22,20 +22,6 @@ import styles from './styles.module.css';
 import configs from './utils/config';
 import Controls from './utils/controls';
 
-interface ItemProps {
-	createdDate?: String;
-	venderSerialId?: Number;
-	kycStatus?: String;
-	name?: String;
-	pan?: String;
-	tax?: String;
-	category?: String;
-	payments?: Number;
-	openInvoices?: Number;
-	organizationName?: string;
-	createdAt?: Date;
-}
-
 function VenderComponent() {
 	const router = useRouter();
 	const geo = getGeoConstants();
@@ -59,7 +45,7 @@ function VenderComponent() {
 	const [showModal, setShowModal] = useState(false);
 	const { listData, loading } = useListVendors({ filters, sort });
 
-	const handleChange = (e: any, value: string | number) => {
+	const handleChange = (e, value) => {
 		setFilters((previousState) => ({
 			...previousState,
 			...{ [value]: e },
@@ -86,7 +72,7 @@ function VenderComponent() {
 							<Select
 								key={key}
 								value={filters?.[key]}
-								onChange={(e: any) => handleChange(e, value)}
+								onChange={(e) => handleChange(e, value)}
 								placeholder={placeholder}
 								options={options}
 								className={styles.select}
@@ -102,7 +88,7 @@ function VenderComponent() {
 						placeholder={`Search by Vendor Name/${val}/Organization ID/Sage ID`}
 						suffix={<IcMSearchlight />}
 						value={filters.searchValue}
-						onChange={(e: any) => handleChange(e, 'searchValue')}
+						onChange={(e) => handleChange(e, 'searchValue')}
 						className={styles.search}
 					/>
 					<Button
@@ -118,7 +104,7 @@ function VenderComponent() {
 		);
 	}
 
-	function RenderKYCStatus(item: any) {
+	function RenderKYCStatus(item) {
 		const { item: itemData = {} } = item;
 
 		const { kycStatus = '' } = itemData;
@@ -156,7 +142,7 @@ function VenderComponent() {
 		);
 	}
 
-	function RenderPayments(item: any) {
+	function RenderPayments(item) {
 		const { item: itemData = {} } = item;
 		const {
 			totalPaidAmount = 0,
@@ -213,25 +199,25 @@ function VenderComponent() {
 		);
 	}
 
-	function RenderDropdown(vendorId: number | string) {
+	function RenderDropdown(vendorId) {
 		return <ShowMore vendorId={vendorId} />;
 	}
 
-	const functions: any = {
-		renderKYCStatus: (itemData: ItemProps) => (
+	const functions = {
+		renderKYCStatus: (itemData) => (
 			<RenderKYCStatus item={itemData} />
 		),
-		renderPayments: (itemData: ItemProps) => (
+		renderPayments: (itemData) => (
 			<RenderPayments item={itemData} />
 		),
-		renderInvoice: (itemData: ItemProps) => (
+		renderInvoice: (itemData) => (
 			<RenderInvoice item={itemData} />
 		),
-		renderName: (itemData: ItemProps) => {
+		renderName: (itemData) => {
 			const { organizationName = '' } = itemData || {};
 			return <div>{showOverflowingNumber(organizationName, 15)}</div>;
 		},
-		rendeDate: (itemData: ItemProps) => {
+		rendeDate: (itemData) => {
 			const { createdAt } = itemData || {};
 			return (
 				<div>
@@ -239,7 +225,7 @@ function VenderComponent() {
 				</div>
 			);
 		},
-		renderCategory: (itemData: ItemProps) => {
+		renderCategory: (itemData) => {
 			const { category = '' } = itemData || {};
 			return <div>{category.replaceAll('_', ' ')}</div>;
 		},
@@ -256,7 +242,7 @@ function VenderComponent() {
 				sort={sort}
 				setSort={setSort}
 				functions={functions}
-				handlePageChange={(pageValue: number) => {
+				handlePageChange={(pageValue) => {
 					setFilters((p) => ({ ...p, page: pageValue }));
 				}}
 				showPagination

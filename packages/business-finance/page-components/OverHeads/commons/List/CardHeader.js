@@ -1,30 +1,19 @@
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
-import React, { ReactNode } from 'react';
-
-import { NestedObj, FieldType } from '../Interfaces/index';
+import React from 'react';
 
 import styles from './styles.module.css';
 
-export interface Props {
-	fields: FieldType[];
-	sort?: NestedObj;
-	setSort?: React.Dispatch<React.SetStateAction<NestedObj>>;
-	headerStyles?: React.CSSProperties;
-	showHeaderCheckbox?:boolean;
-	renderHeaderCheckbox?:()=>(ReactNode | '');
-}
-
 function Header({
 	fields, sort, setSort = () => [], headerStyles, renderHeaderCheckbox = () => '', showHeaderCheckbox = false,
-}:Props) {
-	const handleOnChangeUp = (item: FieldType) => {
-		const fieldType = item.sorting!.name;
+}) {
+	const handleOnChangeUp = (item) => {
+		const fieldType = item.sorting.name;
 		setSort(() => ({
 			[fieldType]: sort?.[fieldType] === 'asc' ? 'asc' : 'asc',
 		}));
 	};
-	const handleOnChangeDown = (item: FieldType) => {
-		const fieldType = item.sorting!.name;
+	const handleOnChangeDown = (item) => {
+		const fieldType = item.sorting.name;
 		setSort(() => ({
 			[fieldType]: sort?.[fieldType] === 'desc' ? 'desc' : 'desc',
 		}));
@@ -35,7 +24,7 @@ function Header({
 			{fields.map((field) => (
 				<div
 					className={`${styles.col} ${field.className || ''}`}
-					style={{ '--span': field.span || 1 } as React.CSSProperties}
+					style={{ '--span': field.span || 1 }}
 				>
 					{field.label}
 					{field.sorting && (

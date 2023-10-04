@@ -1,15 +1,10 @@
 import { Modal, Button } from '@cogoport/components';
 import React from 'react';
 
-interface Props {
-	setShowModal:any,
-	showModal?:boolean
-}
-
 function CreateVendorModal({
 	setShowModal,
 	showModal = false,
-}:Props) {
+}) {
 	return (
 		<Modal size="md" show={showModal} onClose={() => setShowModal(false)} placement="center">
 			<Modal.Header title="Create Vendor" />

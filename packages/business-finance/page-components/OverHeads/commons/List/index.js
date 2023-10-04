@@ -1,36 +1,13 @@
 import { Pagination } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
-import React, { ReactNode } from 'react';
-
-import {
-	ConfigType,
-	NestedObj,
-	FunctionObjects,
-	ListDataProps,
-} from '../Interfaces/index';
+import React from 'react';
 
 import CardColumn from './CardColumn';
 import Header from './CardHeader';
 import commonFunctions from './commonFunctions';
 import styles from './styles.module.css';
 
-export interface Props {
-	config: ConfigType;
-	sort?: NestedObj;
-	setSort?: React.Dispatch<React.SetStateAction<NestedObj>>;
-	itemData: ListDataProps;
-	renderHeaderCheckbox?: () => ReactNode | '';
-	functions?: FunctionObjects;
-	loading?: boolean;
-	page?: number;
-	handlePageChange?: (currentPage: number) => void;
-	pageSize?: number;
-	showPagination?: boolean;
-	renderDropdown?: (p: any) => JSX.Element | null;
-	showRibbon?: boolean;
-}
-
-export const toTitleCase = (str: string) => {
+export const toTitleCase = (str) => {
 	const titleCase = str
 		.toLowerCase()
 		.split(' ')
@@ -54,7 +31,7 @@ function List({
 	showPagination = true,
 	renderDropdown = () => null,
 	showRibbon = false,
-}: Props) {
+}) {
 	const {
 		showHeader = true,
 		fields,
@@ -67,7 +44,7 @@ function List({
 
 	const {
 		general: { isMobile = false },
-	}: any = useSelector((state: object) => state);
+	} = useSelector((state) => state);
 
 	const isListEmpty = !itemData || list?.length === 0;
 
