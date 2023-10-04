@@ -43,9 +43,10 @@ function InvoiceFormLayout({
 	collectionParty = {},
 	setCollectionParty = () => {},
 	purchaseInvoiceValues = {},
-	billId,
+	billId = '',
 	editData = {},
 }, ref) {
+	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 	const [codes, setCodes] = useState(purchaseInvoiceValues?.codes || {});
 
 	const [showTaggings, setShowTaggings] = useState(false);
@@ -53,7 +54,7 @@ function InvoiceFormLayout({
 	const [selectedProforma, setSelectedProforma] = useState([]);
 	const [showCollectionParty, setShowCollectionParty] = useState(false);
 	const [showBankform, setShowBankForm] = useState(false);
-	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
+
 	const isJobClosed = shipment_data?.is_job_closed;
 	const { billing_addresses: billingAddresses = [], other_addresses: otherAddresses = [] } = collectionParty || {};
 	const allAddresses = [...billingAddresses, ...otherAddresses];
@@ -158,6 +159,7 @@ function InvoiceFormLayout({
 		codes,
 		shipment_data,
 		activeTab       : billCatogory,
+		calculatedValues,
 	}));
 
 	const isTagDissable = () => {

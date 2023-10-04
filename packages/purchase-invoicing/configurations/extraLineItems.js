@@ -25,8 +25,9 @@ export const extraLineItems = ({ serviceProvider = {}, shipment_data = {} }) => 
 		return [
 			{
 				name        : 'truck_number',
+				key         : 'truck_number',
 				type        : 'select',
-				span        : 1.5,
+				span        : 3.6,
 				rules       : { required: 'Truck Number is Required' },
 				options     : truckList,
 				placeholder : 'Enter',

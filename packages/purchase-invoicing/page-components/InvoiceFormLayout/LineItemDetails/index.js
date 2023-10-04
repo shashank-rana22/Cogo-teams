@@ -100,6 +100,7 @@ function LineItemDetails({
 												shipment_type  : shipment_data?.shipment_type,
 												job_created_at : shipment_data?.created_at,
 											},
+											options: field?.options || [],
 											errors,
 											setCodes,
 											shipmentId,
