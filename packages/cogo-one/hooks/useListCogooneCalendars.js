@@ -3,14 +3,16 @@ import { useCallback } from 'react';
 
 import formatDateTime from '../utils/timezoneSpecificTime';
 
-const getPayload = ({ startDate = '', endDate = '' }) => ({
+const getParams = ({ startDate = '', endDate = '' }) => ({
 	filters: {
 		validity_start_greater_than : formatDateTime({ date: startDate, dateformat: 'isoUtcDateTime' }),
-		validity_end_greater_than   : formatDateTime({ date: endDate, dateformat: 'isoUtcDateTime' }),
+		validity_end_less_than      : formatDateTime({ date: endDate, dateformat: 'isoUtcDateTime' }),
+		status                      : 'active',
 	},
 
 	schedule_data_required : false,
 	metadata_required      : true,
+	page_limit             : 100,
 });
 
 const useListCogooneCalendars = () => {
@@ -21,7 +23,7 @@ const useListCogooneCalendars = () => {
 
 	const getListCalenders = useCallback(({ startDate, endDate }) => {
 		try {
-			trigger({ params: getPayload({ startDate, endDate }) });
+			trigger({ params: getParams({ startDate, endDate }) });
 		} catch (error) {
 			console.error(error);
 		}
