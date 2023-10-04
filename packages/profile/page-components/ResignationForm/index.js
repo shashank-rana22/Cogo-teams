@@ -8,8 +8,8 @@ import useGetEmployeeApplicationProcessDetails from './useGetEmployeeApplication
 function ResignationForm() {
 	const router = useRouter();
 	const { data, refetch = () => {}, loading = false } = useGetEmployeeApplicationProcessDetails();
-	if (router.query.user_id) {
-		refetch(router.query.user_id, 'hrbp');
+	if (router.query.employee_id) {
+		refetch(router.query.employee_id, 'hrbp');
 	}
 
 	const { application_exist } = data || {};

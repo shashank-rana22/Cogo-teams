@@ -20,7 +20,6 @@
 	display: flex;
 	align-items: center;
 	font-size: 12px;
-	line-height: 133.333%;
 	color: #4f4f4f;
 }
 
@@ -29,7 +28,7 @@
 }
 
 .arrow {
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .top_text > :not(:last-child) {
@@ -52,7 +51,7 @@
 
 .employee_profile {
 	font-size: 24px;
-	font-weight: 500;
+	font-weight: 600;
 	color: #221f20;
 }
 

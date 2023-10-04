@@ -177,7 +177,7 @@ const useGetColumns = ({
 					icon={<IcMEyeopen />}
 					themeType="primary"
 					onClick={() => {
-						router.push(`/profile?user_id=${item.user_id}`);
+						router.push(`/profile?employee_id=${item.user_id}`);
 					}}
 				/>
 			),

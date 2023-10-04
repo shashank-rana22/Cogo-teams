@@ -58,10 +58,10 @@ function ResignationFormLanding({ refetch = () => {} }) {
 			action_performed_by  : '',
 		};
 
-		if (router.query.user_id) {
+		if (router.query.employee_id) {
 			payload = {
 				...payload,
-				employee_user_id    : router.query.user_id,
+				employee_user_id    : router.query.employee_id,
 				action_performed_by : 'hrbp',
 			};
 		}
