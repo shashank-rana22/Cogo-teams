@@ -72,3 +72,8 @@ export const SERVICE_TYPE = [
 	{ value: 'air_customs', label: 'AIR Customs' },
 	{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
 ];
+
+export const REMARKS = [
+	{ name: 'MARK DISPUTED', value: 'DISPUTE' },
+	{ name: 'PUSH TO COE FINANCE', value: 'PUSH TO COE FINANCE' },
+];

@@ -31,21 +31,6 @@ const TABS = [
 
 const FIRST_PAGE = 1;
 
-const FUNCTIONS = {
-	renderToolTip: (itemData, field) => (
-		<RenderToolTip itemData={itemData} field={field} />
-	),
-	renderInvoiceDates: (itemData, field) => (
-		<RenderInvoiceDates itemData={itemData} field={field} />
-	),
-	renderUrgencyTag: (itemData, field) => (
-		<RenderUrgency itemData={itemData} field={field} />
-	),
-	renderAction: (itemData) => (
-		<RenderAction itemData={itemData} />
-	),
-};
-
 function Invoices({ activeEntity = '' }) {
 	const ELIGIBLE_ENITY_PAYRUN = ENTITY_FEATURE_MAPPING[activeEntity]?.feature_supported?.includes('create_payrun');
 	const { query } = useRouter();
@@ -60,6 +45,7 @@ function Invoices({ activeEntity = '' }) {
 		setBillsFilters,
 		orderBy,
 		setOrderBy,
+		refetch = () => {},
 	} = useGetBillsList({ activeTab, activeEntity, showElement: true });
 
 	const { stats = {} } = billsData || {};
@@ -71,6 +57,21 @@ function Invoices({ activeEntity = '' }) {
 
 	const handleVersionChange = () => {
 		window.location.href = `/${query.partner_id}/business-finance/account-payables/invoices`;
+	};
+
+	const functions = {
+		renderToolTip: (itemData, field) => (
+			<RenderToolTip itemData={itemData} field={field} />
+		),
+		renderInvoiceDates: (itemData, field) => (
+			<RenderInvoiceDates itemData={itemData} field={field} />
+		),
+		renderUrgencyTag: (itemData, field) => (
+			<RenderUrgency itemData={itemData} field={field} />
+		),
+		renderAction: (itemData) => (
+			<RenderAction itemData={itemData} activeTab={activeTab} refetch={refetch} />
+		),
 	};
 
 	return (
@@ -144,7 +145,7 @@ function Invoices({ activeEntity = '' }) {
 					itemData={billsData}
 					loading={billsLoading}
 					config={ALL_INVOICE_CONFIG}
-					functions={FUNCTIONS}
+					functions={functions}
 					sort={orderBy}
 					setSort={setOrderBy}
 					page={billsFilters?.pageIndex || FIRST_PAGE}
