@@ -146,7 +146,7 @@ function getColumns({
 			Cell     : ({ row: { original } }) => {
 				const { incidentSubtype = '' } = original || {};
 				return (
-					<div className={cl`${styles.company_name} ${styles.common}`}>
+					<div className={cl`${styles.sub_type} ${styles.common}`}>
 						<ShowOverflowingNumber
 							value={toTitleCase(incidentSubtype?.replace(/_/g, ' '))}
 							maxLength={OVERFLOW_NUMBER}
@@ -223,6 +223,38 @@ function getColumns({
 				<Button size="md" themeType="secondary" onClick={() => setDetailsModal(row)}>View</Button>
 			),
 			id: 'actionColumn',
+		},
+		{
+			Header   : '',
+			id       : 'ribbon',
+			accessor : (row) => {
+				const { deadlineTag } = row;
+				return (
+					deadlineTag && (
+						<div>
+							{deadlineTag === 'RED' && (
+								<div
+									className={
+											deadlineTag === 'RED' && styles.ribbon_red
+										}
+								>
+									{t('incidentManagement:urgent')}
+								</div>
+							)}
+							{deadlineTag === 'ORANGE' && (
+								<div
+									className={
+											deadlineTag === 'ORANGE'
+											&& styles.ribbon_orange
+										}
+								>
+									{t('incidentManagement:urgent')}
+								</div>
+							)}
+						</div>
+					)
+				);
+			},
 		},
 	];
 	if (activeTab === 'requested') { return column; }

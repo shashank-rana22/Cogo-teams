@@ -29,7 +29,7 @@
 }
 
 .type_request {
-	width: 140px;
+	width: 120px;
 }
 
 .requested_by {
@@ -40,12 +40,16 @@
 	width: 150px;
 }
 
+.sub_type {
+	width: 120px;
+}
+
 .job_open {
 	margin-top: -5px;
 }
 
 .source {
-	width: 110px;
+	width: 90px;
 	height: 16px;
 }
 
@@ -114,7 +118,7 @@
 }
 
 .time {
-	width: 110px;
+	width: 90px;
 	height: 16px;
 	hyphens: auto;
 	word-wrap: break-word;
