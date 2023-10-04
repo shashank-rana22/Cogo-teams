@@ -1,4 +1,4 @@
-import { Table, Placeholder, Button, Popover } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMFilter } from '@cogoport/icons-react';
 import { useState } from 'react';
@@ -22,15 +22,6 @@ function AllCustomers() {
 	} = useGetCustomers();
 	const cols = getColumns({ data });
 
-	const loadingColumn = [
-		{
-			Header   : 'LOADING...',
-			accessor : (item) => (
-				<Placeholder key={item?.id} height="50px" />
-			),
-		},
-	];
-
 	const { control, formState:{ errors }, reset, handleSubmit } = useForm();
 
 	const onSubmit = (values) => {
@@ -42,17 +33,6 @@ function AllCustomers() {
 		setFilters({});
 		setIsOpen(false);
 	};
-
-	if (loading) {
-		return (
-			<div className={styles.table_container}>
-				<Table
-					columns={loadingColumn}
-					data={[{}, {}, {}]}
-				/>
-			</div>
-		);
-	}
 
 	return (
 		<div className={styles.container}>

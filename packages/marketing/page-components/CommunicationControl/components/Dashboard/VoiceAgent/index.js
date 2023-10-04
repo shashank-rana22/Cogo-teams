@@ -1,4 +1,4 @@
-import { Button, Placeholder, Table } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -53,15 +53,6 @@ function VoiceAgent() {
 		listServetalAgent,
 	});
 
-	const loadingColumn = [
-		{
-			Header   : 'LOADING...',
-			accessor : (item) => (
-				<Placeholder key={item?.id} height="50px" />
-			),
-		},
-	];
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -104,22 +95,13 @@ function VoiceAgent() {
 					/>
 				</div>
 			</div>
-			{loading ? (
-				<div className={styles.table_container}>
-					<Table
-						columns={loadingColumn}
-						data={[{}, {}, {}]}
-					/>
-				</div>
-			) : (
-				<TableView
-					columns={cols}
-					data={data}
-					pagination={pagination}
-					setPagination={setPagination}
-					loading={loading}
-				/>
-			)}
+			<TableView
+				columns={cols}
+				data={data}
+				pagination={pagination}
+				setPagination={setPagination}
+				loading={loading}
+			/>
 		</div>
 	);
 }

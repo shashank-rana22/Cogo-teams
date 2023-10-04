@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 const TOTAL_PAGE = 0;
 const PAGE_LIMIT = 10;
 
-function TableView({ columns = {}, data = {}, pagination = 1, setPagination = () => {} }) {
+function TableView({ columns = {}, data = {}, pagination = 1, setPagination = () => {}, loading = '' }) {
 	const onPageChange = (pageNumber) => {
 		setPagination(pageNumber);
 	};
@@ -21,7 +21,7 @@ function TableView({ columns = {}, data = {}, pagination = 1, setPagination = ()
 				/>
 			</div>
 			<div className={styles.table_container}>
-				<Table columns={columns} data={data?.list || []} />
+				<Table columns={columns} data={data?.list || []} loading={loading} />
 			</div>
 			<div className={styles.pagination}>
 				<Pagination

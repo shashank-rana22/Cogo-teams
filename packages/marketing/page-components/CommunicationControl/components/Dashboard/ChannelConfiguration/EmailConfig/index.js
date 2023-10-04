@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Button, Table, Placeholder, Modal, Input } from '@cogoport/components';
+import { Tabs, TabPanel, Button, Modal, Input } from '@cogoport/components';
 import { useState } from 'react';
 
 import TableView from '../../../../common/TableView';
@@ -53,15 +53,6 @@ function EmailConfig() {
 		updateStatusLoading,
 		getChannelConfig,
 	});
-	const loadingColumn = [
-		{
-			Header   : 'LOADING...',
-			accessor : (item) => (
-				<Placeholder key={item?.id} height="50px" />
-			),
-		},
-	];
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -86,22 +77,13 @@ function EmailConfig() {
 					ADD NEW
 				</Button>
 			</div>
-			{loading ? (
-				<div className={styles.table_container}>
-					<Table
-						columns={loadingColumn}
-						data={[{}, {}, {}]}
-					/>
-				</div>
-			) : (
-				<TableView
-					columns={cols}
-					data={data}
-					pagination={pagination}
-					setPagination={setPagination}
-					loading={loading}
-				/>
-			)}
+			<TableView
+				columns={cols}
+				data={data}
+				pagination={pagination}
+				setPagination={setPagination}
+				loading={loading}
+			/>
 			<Modal
 				placement="top"
 				show={showModal}

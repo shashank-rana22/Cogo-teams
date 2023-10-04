@@ -1,4 +1,4 @@
-import { Button, Tooltip, Table, Placeholder } from '@cogoport/components';
+import { Button, Tooltip, Table } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -33,25 +33,6 @@ function ChannelControl() {
 		updateChannelControl({ list: res });
 	};
 
-	const loadingColumn = [
-		{
-			Header   : 'LOADING...',
-			accessor : (item) => (
-				<Placeholder key={item?.id} height="50px" />
-			),
-		},
-	];
-	if (loading) {
-		return (
-			<div className={styles.table_container}>
-				<Table
-					columns={loadingColumn}
-					data={[{}, {}, {}]}
-				/>
-			</div>
-		);
-	}
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -79,6 +60,7 @@ function ChannelControl() {
 				<Table
 					columns={cols}
 					data={list}
+					loading={loading}
 				/>
 			</div>
 		</div>

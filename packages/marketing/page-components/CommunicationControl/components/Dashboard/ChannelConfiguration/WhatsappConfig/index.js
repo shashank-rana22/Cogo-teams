@@ -1,4 +1,3 @@
-import { Placeholder, Table } from '@cogoport/components';
 import { useState } from 'react';
 
 import TableView from '../../../../common/TableView';
@@ -34,33 +33,15 @@ function WhatsappConfig() {
 		getChannelConfig,
 	});
 
-	const loadingColumn = [
-		{
-			Header   : 'LOADING...',
-			accessor : (item) => (
-				<Placeholder key={item?.id} height="50px" />
-			),
-		},
-	];
-
 	return (
 		<div className={styles.container}>
-			{loading ? (
-				<div className={styles.table_container}>
-					<Table
-						columns={loadingColumn}
-						data={[{}, {}, {}]}
-					/>
-				</div>
-			) : (
-				<TableView
-					columns={cols}
-					data={data}
-					pagination={pagination}
-					setPagination={setPagination}
-					loading={loading}
-				/>
-			)}
+			<TableView
+				columns={cols}
+				data={data}
+				pagination={pagination}
+				setPagination={setPagination}
+				loading={loading}
+			/>
 		</div>
 	);
 }
