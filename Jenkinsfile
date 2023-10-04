@@ -25,6 +25,9 @@ pipeline {
             }
         }
         stage("Acquire lock"){
+                when {
+                expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#deploy_on') }
+                }
                 steps{
                     script {
                     SERVER_NAME = sh (script: "git log -1 --pretty=%B ${COMMIT_ID} | awk \'{print \$NF}\'", returnStdout:true).trim()
