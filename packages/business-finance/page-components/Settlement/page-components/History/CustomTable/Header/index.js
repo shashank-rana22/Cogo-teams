@@ -4,19 +4,10 @@ import React from 'react';
 import Sort from './Sort';
 import styles from './styles.module.css';
 
-interface Props {
-	setFilters: React.Dispatch<React.SetStateAction<{}>>;
-	filters: { sortType? :string };
-	loading: boolean;
-	showHeaderCheckbox: boolean;
-	isAllChecked: boolean;
-	onChangeTableHeaderCheckbox: (event: object) => void;
-}
-
 function Header({
 	setFilters, filters,
 	isAllChecked, onChangeTableHeaderCheckbox, showHeaderCheckbox, loading,
-}:Props) {
+}) {
 	return (
 		<div className={styles.header}>
 			<div className={styles.checkbox}>

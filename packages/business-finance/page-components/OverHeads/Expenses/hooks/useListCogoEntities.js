@@ -1,11 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-interface Props {
-	cogoEntityId?:string | number,
-}
-
-const useListCogoEntities = ({ cogoEntityId }:Props) => {
+const useListCogoEntities = ({ cogoEntityId }) => {
 	const [{ data }, trigger] = useRequest(
 		{
 			url    : 'list_cogo_entities',

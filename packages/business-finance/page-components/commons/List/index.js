@@ -2,40 +2,12 @@ import { Pagination } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import React, { ReactNode } from 'react';
-
-import {
-	ConfigType,
-	NestedObj,
-	FunctionObjects,
-	ListDataProps,
-} from '../Interfaces/index';
+import React from 'react';
 
 import CardColumn from './CardColumn';
 import Header from './CardHeader';
 import commonFunctions from './commonFunctions';
 import styles from './styles.module.css';
-
-export interface Props {
-	config: ConfigType;
-	sort?: NestedObj;
-	setSort?: React.Dispatch<React.SetStateAction<NestedObj>>;
-	itemData: ListDataProps;
-	renderHeaderCheckbox?: () => ReactNode | '';
-	functions?: FunctionObjects;
-	loading?: boolean;
-	page?: number;
-	handlePageChange?: (currentPage: number) => void;
-	pageSize?: number;
-	showPagination?: boolean;
-	subActiveTab?: string;
-	width?: string;
-	rowStyle?: string;
-	idKey?: string;
-	showId?: string;
-	RenderAccordianData?: any;
-	paginationType?: 'number' | 'table' | 'page' | 'compact';
-}
 
 function List({
 	config = { fields: [] },
@@ -56,7 +28,7 @@ function List({
 	width = null,
 	rowStyle = null,
 	paginationType = 'table',
-}: Props) {
+}) {
 	const {
 		showHeader = true,
 		fields,
@@ -69,7 +41,7 @@ function List({
 
 	const {
 		general: { isMobile = false },
-	}: any = useSelector((state: object) => state);
+	} = useSelector((state) => state);
 
 	const dataList = (Array.isArray(list) && !isEmpty(list)) ? list : [1, 2, 3, 4, 5];
 

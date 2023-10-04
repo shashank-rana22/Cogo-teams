@@ -2,16 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface PostSettlementProps {
-	refetch: ()=> void;
-	setCheckedRows?: (p: object)=> void;
-}
-
-const usePostSettlementToSage = ({ refetch, setCheckedRows = () => {} } :PostSettlementProps) => {
-	interface Profile {
-		profile?: { user: { id: string } }
-	}
-	const profile: Profile = useSelector((state) => state);
+const usePostSettlementToSage = ({ refetch, setCheckedRows = () => {} }) => {
+	const profile = useSelector((state) => state);
 	const { profile: { user } } = profile || {};
 	const { id: profileid } = user || {};
 

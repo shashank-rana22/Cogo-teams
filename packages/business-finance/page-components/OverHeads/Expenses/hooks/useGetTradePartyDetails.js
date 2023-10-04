@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetTradePartyDetails = (vendorID:string | number) => {
+const useGetTradePartyDetails = (vendorID) => {
 	const [{ data }, trigger] = useRequest(
 		{
 			url    : '/list_organization_trade_parties',

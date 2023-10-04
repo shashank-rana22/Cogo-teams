@@ -3,37 +3,8 @@ import { useState, useCallback, useEffect } from 'react';
 
 import toastApiError from '../../commons/toastApiError';
 
-interface StatsDataInterface {
-	bookedShipmentCount?: number
-	accruedShipmentCount?: number
-	bookedProfitPercentage?: number
-	bookedProfit?: number
-	actualProfit?: number
-	actualProfitPercentage?: number
-	variance?: number
-	variancePercentage?: number
-	varianceExpense?: number
-	varianceIncome?: number
-	expenseCurrency?: string
-	expenseBookedSum?: number
-	expenseAccruedSum?: number
-	incomeBookedSum?: number
-	incomeAccruedSum?: number
-	expenseBilledSum?: number
-	expenseUnbilledSum?: number
-	incomeBilledSum?: number
-	incomeUnbilledSum?: number
-	incomeCurrency?: string
-	varianceCurrency?: string
-}
-interface StatsInterface {
-	month?:string
-	year?:string
-	entityCode?:string
-}
-
-const useShipmentIdStats = ({ month, year, entityCode }:StatsInterface) => {
-	const [statsData, setStatsData] = useState<StatsDataInterface>({});
+const useShipmentIdStats = ({ month, year, entityCode }) => {
+	const [statsData, setStatsData] = useState({});
 
 	const [
 		{ data, loading:statsLoading },

@@ -3,11 +3,7 @@ import { useEffect } from 'react';
 
 import toastApiError from '../../commons/toastApiError';
 
-interface FilterInterface {
-	serviceType?:string
-	timePeriod?:string
-}
-const useGetDashboardData = (filters :FilterInterface) => {
+const useGetDashboardData = (filters) => {
 	const { serviceType = '', timePeriod } = filters || {};
 
 	const [{ data:dashboardData, loading }, trigger] = useRequestBf(

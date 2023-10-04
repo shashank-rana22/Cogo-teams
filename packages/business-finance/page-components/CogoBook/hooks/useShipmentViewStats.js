@@ -3,12 +3,7 @@ import { useCallback, useEffect } from 'react';
 
 import toastApiError from '../../commons/toastApiError';
 
-interface ShipmentInterface {
-	month?:string
-	year?:string
-	entityCode?:string
-}
-const useShipmentViewStats = ({ year, month, entityCode }:ShipmentInterface) => {
+const useShipmentViewStats = ({ year, month, entityCode }) => {
 	const [
 		{ data:shipmentViewData, loading:shipmentViewLoading },
 		trigger,

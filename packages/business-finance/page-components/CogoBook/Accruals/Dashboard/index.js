@@ -22,17 +22,12 @@ const GET_YEAR_DETAILS = optionsYear?.[0]?.value;
 
 const COLORS = ['#57C6D1', '#ADCC6A'];
 
-interface DashboardFilterInterface {
-	month?:string
-	year?:string
-}
-
 function Dashboard() {
 	const { control, watch } = useForm();
 
 	const entityCode = watch('entityCode');
 
-	const [dashboardFilters, setDashboardFilters] = useState<DashboardFilterInterface>();
+	const [dashboardFilters, setDashboardFilters] = useState();
 
 	const [toggle, setToggle] = useState(false);
 

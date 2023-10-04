@@ -1,12 +1,10 @@
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import { GenericObject } from '../../../commons/Interfaces/index';
 import List from '../../../commons/List/index';
 import PURCHASE_VIEW_CONFIG from '../../configurations/PURCHASE_VIEW_LIST';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
-import { FieldProps } from './interfaces/index';
 import FieldPair from './RenderData/FiledPair/index';
 import FormatedDate from './RenderData/FormatedDate/index';
 import RenderCustomer from './RenderData/RenderCustomer/index';
@@ -16,38 +14,7 @@ import RenderUrgencyTag from './RenderData/RenderUrgencyTag/index';
 import RenderViewMoreButton from './RenderData/RenderViewMoreButton/index';
 import SegmentedFilters from './SegmentedFilters/index';
 
-interface ItemProps {
-	createdDate: Date;
-	updatedDate: Date;
-	billDate: Date;
-	dueDate: Date;
-	billCurrency: string;
-	subTotal: number;
-	grandTotal: number;
-	status: string;
-	billType: string;
-	billDocumentUrl: string;
-	serviceType: string;
-	billNumber: string;
-	isProforma: boolean;
-	jobNumber: string;
-	shipmentId: string;
-	organizationName: string;
-	urgencyTag: Array<string>;
-	remarksTimeline?: Array<{
-		billStatus: string;
-		remark: string;
-		createdAt: Date;
-	}>;
-}
-interface Props {
-	filters: GenericObject;
-	setFilters: (p: object) => void;
-	subActiveTab: string;
-	statsData?:object
-}
-
-function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props) {
+function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }) {
 	const { query } = useRouter();
 	const { searchValue:previouslySearched } = query || {};
 
@@ -65,21 +32,21 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 	} = useGetPurchaseViewList({ filters, setFilters, sort, previouslySearched });
 
 	const functions = {
-		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,
-		renderFieldPair : (itemData: ItemProps, field: FieldProps) => (
+		renderStatus    : (itemData) => <RenderStatus item={itemData} />,
+		renderFieldPair : (itemData, field) => (
 			<FieldPair itemData={itemData} field={field} />
 		),
-		renderCustomer: (itemData: ItemProps, field: FieldProps) => (
+		renderCustomer: (itemData, field) => (
 			<RenderCustomer itemData={itemData} field={field} />
 		),
-		renderFormate: (itemData: ItemProps, field: FieldProps) => (
+		renderFormate: (itemData, field) => (
 			<FormatedDate item={itemData} field={field} />
 		),
-		renderRemarks  : (itemData: ItemProps) => <RenderRemarks item={itemData} />,
-		renderViewMore : (itemData: ItemProps) => (
+		renderRemarks  : (itemData) => <RenderRemarks item={itemData} />,
+		renderViewMore : (itemData) => (
 			<RenderViewMoreButton itemData={itemData} searchValue={searchValue} />
 		),
-		renderUrgencyTag: (itemData: ItemProps, field: FieldProps) => (
+		renderUrgencyTag: (itemData, field) => (
 			<RenderUrgencyTag item={itemData} field={field} />
 		),
 	};
@@ -106,8 +73,8 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 				sort={sort}
 				setSort={setSort}
 				page={filters.pageIndex || 1}
-				handlePageChange={(pageValue: number) => {
-					setFilters((p: GenericObject) => ({ ...p, pageIndex: pageValue }));
+				handlePageChange={(pageValue) => {
+					setFilters((p) => ({ ...p, pageIndex: pageValue }));
 				}}
 				subActiveTab={subActiveTab}
 				showPagination

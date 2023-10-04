@@ -4,18 +4,7 @@ import { useEffect } from 'react';
 
 import { getFormatDate } from '../utils/getFormatDate';
 
-interface FilterInterface {
-	serviceType?:string
-	timePeriod?:string
-	dateRange?:DateInterface
-	rest?:any
-}
-
-interface DateInterface {
-	startDate?:Date
-	endDate?:Date
-}
-const useJobStats = (filters :FilterInterface) => {
+const useJobStats = (filters) => {
 	const [{ data:jobStatsData, loading }, trigger] = useRequestBf(
 		{
 			url     : '/common/job/shipment-stats',

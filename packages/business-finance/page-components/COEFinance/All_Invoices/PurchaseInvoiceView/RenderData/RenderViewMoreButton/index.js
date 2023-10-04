@@ -4,25 +4,10 @@ import React from 'react';
 
 import styled from './styles.module.css';
 
-interface Props {
-	itemData?: any;
-	searchValue?: string;
-}
-
-interface ItemTypes {
-	billNumber?:string;
-	billId?:string;
-	organizationId?:string;
-	status?:string;
-	billType?:string;
-	jobNumber?:string;
-	isProforma?:string;
-	jobType?:string
-}
-function RenderViewMoreButton({ itemData = {}, searchValue = '' }: Props) {
+function RenderViewMoreButton({ itemData = {}, searchValue = '' }) {
 	const router = useRouter();
 
-	const handleChange = (item: ItemTypes) => {
+	const handleChange = (item) => {
 		router.push(
 			`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${item?.billId}
 			&billNumber=${item?.billNumber}&orgId=${item?.organizationId}&jobNumber=${item?.jobNumber}

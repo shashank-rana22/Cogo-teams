@@ -11,20 +11,12 @@ import useListCogoEntities from '../AccountPayables/Dashboard/hooks/useListCogoE
 import tabPanelMapping from './configurations/tab-mappings';
 import styles from './styles.module.css';
 
-interface ItemProps {
-	business_name: string;
-	entity_code: string;
-}
-interface Profile {
-	profile?: { partner: { id: string } };
-}
-
 function Settlement() {
 	const geo = getGeoConstants();
 
 	const { query, push } = useRouter();
 
-	const { profile }:Profile = useSelector((state) => state);
+	const { profile } = useSelector((state) => state);
 
 	const { partner } = profile || {};
 

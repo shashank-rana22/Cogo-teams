@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function ToolTipWrapper({ text }: { text: string }) {
+function ToolTipWrapper({ text }) {
 	const render = text?.length > 100;
 	return (
 		render ? (

@@ -2,14 +2,9 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-import { GenericObject } from '../../commons/Interfaces';
 import getFormattedData from '../utils/getFormattedData';
 
-interface Params {
-	query?: GenericObject
-}
-
-const useGetShipmentCostSheet = ({ query }:Params) => {
+const useGetShipmentCostSheet = ({ query }) => {
 	const { shipment_id:ShipmentId, jobNumber, jobSource, jobType } = query || {};
 
 	const [{ data:postTaxData, loading:postTaxLoading }, postTaxFetch] = useRequestBf(
@@ -76,8 +71,10 @@ const useGetShipmentCostSheet = ({ query }:Params) => {
 		postTaxFetch();
 		preTaxFetch();
 	}, [ShipmentId, sellTrigger, buyTrigger, postTaxFetch, preTaxFetch]);
-	const { formattedBuyData, sellQuotationData }:
-	any	= getFormattedData({ sell_quotation: sellData, buy_quotation: buyData });
+	const {
+		formattedBuyData,
+		sellQuotationData,
+	} =	getFormattedData({ sell_quotation: sellData, buy_quotation: buyData });
 
 	return {
 		selldata   : sellQuotationData,

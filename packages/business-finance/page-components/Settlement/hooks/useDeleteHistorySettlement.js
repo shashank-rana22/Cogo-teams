@@ -2,15 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface Profile {
-	profile?: { user: { id: string } };
-}
-interface Props {
-	refetch?: Function;
-	setShowDeleteConfirmationModal?: React.Dispatch<React.SetStateAction<boolean>>;
-}
-const useDeleteHistorySettlement = ({ refetch = () => {}, setShowDeleteConfirmationModal = () => {} }:Props) => {
-	const { profile }:Profile = useSelector((state) => state || {});
+const useDeleteHistorySettlement = ({ refetch = () => {}, setShowDeleteConfirmationModal = () => {} }) => {
+	const { profile } = useSelector((state) => state || {});
 
 	const [{ loading: deleteHistoryLoading }, deleteHistoryTriggerApi] = useRequestBf(
 		{

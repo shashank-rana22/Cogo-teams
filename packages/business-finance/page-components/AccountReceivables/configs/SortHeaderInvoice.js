@@ -3,21 +3,12 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface SortHeaderProps {
-	invoiceFilter?: object,
-	setInvoiceFilter?: (p: object) => void,
-	setOrderBy?: (p: object) => void,
-	sortStyleDesc?: string,
-	sortStyleAsc?: string
-	type?: string
-}
-
 function SortHeaderInvoice({
 	invoiceFilter,
 	setInvoiceFilter,
 	setOrderBy, sortStyleDesc,
 	sortStyleAsc, type,
-}: SortHeaderProps) {
+}) {
 	return (
 		<div
 			role="presentation"

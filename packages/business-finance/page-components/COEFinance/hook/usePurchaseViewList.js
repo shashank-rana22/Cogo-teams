@@ -8,23 +8,8 @@ import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import { GenericObject, NestedObj } from '../../commons/Interfaces/index';
-
-interface Props {
-	filters: GenericObject;
-	setFilters: (p: object) => void;
-	sort: NestedObj;
-	subActiveTabReject?: string;
-	jobNumber?: string;
-	previouslySearched?: string;
-}
-
-interface Profile {
-	profile?: { partner: { id: string } };
-}
-
-const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject, previouslySearched = '' }: Props) => {
-	const profile: Profile = useSelector((state) => state);
+const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject, previouslySearched = '' }) => {
+	const profile = useSelector((state) => state);
 
 	const entityCode = getEntityCode(profile?.profile?.partner?.id);
 
@@ -146,7 +131,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 	}, [searchValue]);
 
 	useEffect(() => {
-		setFilters((prev: GenericObject) => ({
+		setFilters((prev) => ({
 			...prev,
 			q         : query || undefined,
 			pageIndex : 1,

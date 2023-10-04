@@ -4,23 +4,11 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
-interface ChartDataInterface {
-	expenseBilledSum?: number;
-	expenseUnbilledSum?: number;
-	expenseCurrency?: string;
-	incomeBilledSum?: number;
-	incomeUnbilledSum?: number;
-	incomeCurrency?: string;
-	statsLoading?: boolean;
-	COLORS?: Array<string>;
-	data?: Array<object>;
-	dataExpense?: Array<object>;
-}
 function ChartData({
 	expenseBilledSum, expenseUnbilledSum, expenseCurrency, incomeBilledSum, incomeUnbilledSum,
 	incomeCurrency, statsLoading, COLORS, data, dataExpense,
-}:ChartDataInterface) {
-	function CenteredMetric({ centerX, centerY }:{ centerX?:number, centerY?:number }) {
+}) {
+	function CenteredMetric({ centerX, centerY }) {
 		return (
 			<text
 				x={centerX}
@@ -35,7 +23,7 @@ function ChartData({
 		);
 	}
 
-	function CenteredMetricExpense({ centerX, centerY }:{ centerX?:number, centerY?:number }) {
+	function CenteredMetricExpense({ centerX, centerY }) {
 		return (
 			<text
 				x={centerX}

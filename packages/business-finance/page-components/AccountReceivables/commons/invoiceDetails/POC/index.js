@@ -1,19 +1,6 @@
 import styles from './styles.module.css';
 
-type POCObject = {
-	salesAgent?: string,
-	kamAgent?: string
-};
-
-interface POCDetails {
-	pocDetails?: POCObject
-}
-
-interface POCInterface {
-	data?: POCDetails
-}
-
-function Poc({ data }: POCInterface) {
+function Poc({ data }) {
 	const { pocDetails } = data || {};
 
 	return (

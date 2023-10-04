@@ -6,13 +6,7 @@ import ConfirmationModal from '../ConfirmationModal';
 
 import styles from './styles.module.css';
 
-interface FooterCardProps {
-	checkedRows?: object;
-	refetch: ()=> void;
-	setCheckedRows: (p: object)=> void;
-}
-
-function FooterCard({ checkedRows, refetch, setCheckedRows } : FooterCardProps) {
+function FooterCard({ checkedRows, refetch, setCheckedRows }) {
 	const [confirmation, setConfirmation] = useState(false);
 	const {
 		bulkPostToSageAction,

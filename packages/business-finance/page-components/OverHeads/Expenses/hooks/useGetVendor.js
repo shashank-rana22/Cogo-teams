@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetVendor = (vendorId:string | number) => {
+const useGetVendor = (vendorId) => {
 	const [{ loading, data }, trigger] = useRequest(
 		{
 			url    : '/list_vendors',

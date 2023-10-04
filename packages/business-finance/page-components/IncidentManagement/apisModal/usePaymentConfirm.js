@@ -2,24 +2,12 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface Props {
-	status?:string,
-	inputValues?:{ remarks?:string },
-}
-
-interface PropsData {
-	refetch?:()=>void,
-	setShowModal?:(p:boolean)=>void,
-	id?: string | number,
-	t?: Function,
-}
-
 const usePaymentConfirm = ({
 	refetch,
 	setShowModal,
 	id,
 	t,
-}:PropsData) => {
+}) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));

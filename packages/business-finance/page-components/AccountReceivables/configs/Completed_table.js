@@ -41,27 +41,6 @@ const INVOICE_STATUS_MAPPING = {
 };
 
 const IRN_GENERATEABLE_STATUSES = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
-
-interface InvoiceTable {
-	entityCode ?: string,
-	refetch?: Function,
-	showName?: boolean,
-	setSort?: (p: object)=>void,
-	sortStyleGrandTotalAsc?: string,
-	sortStyleGrandTotalDesc?: string,
-	sortStyleInvoiceDateAsc?: string,
-	sortStyleInvoiceDateDesc?: string,
-	sortStyleDueDateAsc?: string,
-	sortStyleDueDateDesc?: string,
-	invoiceFilters?: object,
-	setinvoiceFilters?: (p:object) => void,
-	checkedRows?:object[],
-	setCheckedRows?:Function,
-	totalRows?:object[],
-	isHeaderChecked?:boolean,
-	setIsHeaderChecked?:Function,
-	showFilters?: boolean,
-}
 const MIN_NAME_STRING = 0;
 const MAX_NAME_STRING = 12;
 const NINE = 9;
@@ -85,7 +64,7 @@ const completedColumn = ({
 	setIsHeaderChecked,
 	entityCode,
 	showFilters = true,
-}: InvoiceTable) => [
+}) => [
 	{
 		Header: <HeaderCheckbox
 			isHeaderChecked={isHeaderChecked}
@@ -96,7 +75,7 @@ const completedColumn = ({
 		/>,
 		span     : 1,
 		id       : 'checkbox',
-		accessor : (row?:object) => (
+		accessor : (row) => (
 			<CheckboxItem
 				IRN_GENERATEABLE_STATUSES={IRN_GENERATEABLE_STATUSES}
 				checkedRows={checkedRows}
@@ -111,14 +90,14 @@ const completedColumn = ({
 		accessor : (row) => (
 			showName
 			&& (
-				(getByKey(row, 'organizationName') as string).length > MAX_NAME_STRING ? (
+				(getByKey(row, 'organizationName')).length > MAX_NAME_STRING ? (
 					<Tooltip
 						interactive
 						placement="top"
-						content={<div className={styles.tool_tip}>{getByKey(row, 'organizationName') as string}</div>}
+						content={<div className={styles.tool_tip}>{getByKey(row, 'organizationName')}</div>}
 					>
 						<text className={styles.cursor}>
-							{`${(getByKey(row, 'organizationName') as string).substring(
+							{`${(getByKey(row, 'organizationName')).substring(
 								MIN_NAME_STRING,
 								MAX_NAME_STRING,
 							)}...`}
@@ -127,7 +106,7 @@ const completedColumn = ({
 				)
 					: (
 						<div>
-							{getByKey(row, 'organizationName') as string}
+							{getByKey(row, 'organizationName')}
 						</div>
 					)
 			)
@@ -215,8 +194,8 @@ const completedColumn = ({
 					<div>
 						{
 						formatAmount({
-							amount   : getByKey(row, 'invoiceAmount') as any,
-							currency : getByKey(row, 'invoiceCurrency') as string,
+							amount   : getByKey(row, 'invoiceAmount'),
+							currency : getByKey(row, 'invoiceCurrency'),
 							options  : {
 								style           : 'currency',
 								currencyDisplay : 'code',
@@ -229,22 +208,22 @@ const completedColumn = ({
 				<div
 					className={styles.styled_pills}
 					style={{
-						'--color': STATUS[(getByKey(row, 'status') as string)],
-					} as any}
+						'--color': STATUS[(getByKey(row, 'status'))],
+					}}
 				>
 
-					{startCase(getByKey(row, 'status') as string).length > 10 ? (
+					{startCase(getByKey(row, 'status')).length > 10 ? (
 						<Tooltip
 							interactive
 							placement="top"
 							content={(
 								<div className={styles.tool_tip}>
-									{startCase(getByKey(row, 'status') as string)}
+									{startCase(getByKey(row, 'status'))}
 								</div>
 							)}
 						>
 							<text className={styles.style_text}>
-								{`${startCase(getByKey(row, 'status') as string).substring(
+								{`${startCase(getByKey(row, 'status')).substring(
 									0,
 									10,
 								)}...`}
@@ -253,7 +232,7 @@ const completedColumn = ({
 					)
 						: (
 							<div className={styles.style_text}>
-								{startCase(getByKey(row, 'status') as string)}
+								{startCase(getByKey(row, 'status'))}
 							</div>
 						)}
 				</div>
@@ -269,8 +248,8 @@ const completedColumn = ({
 				<div>
 					{
 					formatAmount({
-						amount   : getByKey(row, 'ledgerAmount') as any,
-						currency : getByKey(row, 'ledgerCurrency') as string,
+						amount   : getByKey(row, 'ledgerAmount'),
+						currency : getByKey(row, 'ledgerCurrency'),
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -288,8 +267,8 @@ const completedColumn = ({
 				<div>
 					{
 						formatAmount({
-							amount   : getByKey(row, 'balanceAmount') as any,
-							currency : getByKey(row, 'invoiceCurrency') as string,
+							amount   : getByKey(row, 'balanceAmount'),
+							currency : getByKey(row, 'invoiceCurrency'),
 							options  : {
 								style           : 'currency',
 								currencyDisplay : 'code',
@@ -319,7 +298,7 @@ const completedColumn = ({
 		),
 		accessor: (row) => (
 			<div>
-				<div>{format(getByKey(row, 'invoiceDate') as Date, 'dd MMM yy', {}, false)}</div>
+				<div>{format(getByKey(row, 'invoiceDate'), 'dd MMM yy', {}, false)}</div>
 
 			</div>
 		),
@@ -344,7 +323,7 @@ const completedColumn = ({
 		),
 		accessor: (row) => (
 			<div>
-				<div>{format(getByKey(row, 'dueDate') as Date, 'dd MMM yy', {}, false)}</div>
+				<div>{format(getByKey(row, 'dueDate'), 'dd MMM yy', {}, false)}</div>
 
 			</div>
 		),
@@ -356,7 +335,7 @@ const completedColumn = ({
 		Header   : 'Overdue',
 		accessor : (row) => (
 			<div>
-				{getByKey(row, 'overDueDays') as number}
+				{getByKey(row, 'overDueDays')}
 			</div>
 		),
 	},
@@ -368,8 +347,8 @@ const completedColumn = ({
 			<div
 				className={styles.styled_pills}
 				style={{
-					'--color': INVOICE_STATUS_MAPPING[(getByKey(row, 'invoiceStatus') as string)],
-				} as any}
+					'--color': INVOICE_STATUS_MAPPING[(getByKey(row, 'invoiceStatus'))],
+				}}
 			>
 				{row?.isFinalPosted ? <text className={styles.style_text}>FINAL POSTED</text> : (
 					<div>

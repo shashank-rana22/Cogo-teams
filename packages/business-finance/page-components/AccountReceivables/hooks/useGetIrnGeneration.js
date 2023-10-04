@@ -3,14 +3,7 @@ import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeat
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface IrnGenerationProps {
-	id?: string,
-	refetch?: Function
-	entityCode: string
-
-}
-
-const useGetIrnGeneration = ({ id, refetch, entityCode }: IrnGenerationProps) => {
+const useGetIrnGeneration = ({ id, refetch, entityCode }) => {
 	const { profile = {} } = useSelector((state) => state || {});
 
 	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;

@@ -8,7 +8,7 @@ const useHistorySingleDataList = () => {
 		pageLimit : 5,
 	});
 
-	const onPageChange = (val:number) => {
+	const onPageChange = (val) => {
 		setGlobalFilters({ ...globalFilters, page: val });
 	};
 

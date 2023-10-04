@@ -2,8 +2,6 @@ import { Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format, startCase, getByKey } from '@cogoport/utils';
 
-import { GenericObject } from '../commons/Interfaces';
-
 import SortHeader from './SortHeader';
 import styles from './styles.module.css';
 
@@ -15,22 +13,13 @@ const INVOICE_STATUS = {
 	PARTIAL_UTILIZED : '#b8debe',
 };
 
-interface PaymentTable {
-	paymentFilters?: GenericObject,
-	setPaymentFilters?: (p: object) => void,
-	setOrderBy?: (p: object) => void,
-	sortStyleDesc?: string,
-	sortStyleAsc?: string
-	entityCode?: string
-}
-
 const invoicePaymentList = ({
 	paymentFilters,
 	setPaymentFilters,
 	setOrderBy,
 	sortStyleDesc,
 	sortStyleAsc,
-}: PaymentTable) => ([
+}) => ([
 
 	{
 		Header   : 'Payment Number',
@@ -38,7 +27,7 @@ const invoicePaymentList = ({
 		accessor : (row) => (
 			<div>
 				<div>
-					{getByKey(row, 'paymentNumber') as string}
+					{getByKey(row, 'paymentNumber')}
 				</div>
 				<Pill size="sm" className={row?.signFlag === SIGN_FLAG ? styles.debit : styles.credit}>
 					{row?.signFlag === SIGN_FLAG ? 'DEBIT' : 'CREDIT'}
@@ -81,8 +70,8 @@ const invoicePaymentList = ({
 			<div>
 				<div>
 					{formatAmount({
-						amount   :	getByKey(row, 'paymentAmount') as string,
-						currency :	getByKey(row, 'currency') as string,
+						amount   :	getByKey(row, 'paymentAmount'),
+						currency :	getByKey(row, 'currency'),
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -102,8 +91,8 @@ const invoicePaymentList = ({
 			<div>
 				<div>
 					{formatAmount({
-						amount   :	getByKey(row, 'utilizedAmount') as any,
-						currency :	getByKey(row, 'currency') as string,
+						amount   :	getByKey(row, 'utilizedAmount'),
+						currency :	getByKey(row, 'currency'),
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -133,7 +122,7 @@ const invoicePaymentList = ({
 		),
 		accessor: (row) => (
 			<div>
-				<div>{format(getByKey(row, 'transactionDate') as Date, 'dd MMM yy', {}, false)}</div>
+				<div>{format(getByKey(row, 'transactionDate'), 'dd MMM yy', {}, false)}</div>
 
 			</div>
 		),
@@ -145,8 +134,8 @@ const invoicePaymentList = ({
 		Header   : 'Utilized status',
 		accessor : (row) => (
 			<div>
-				<Pill size="md" color={INVOICE_STATUS[(getByKey(row, 'utilizationStatus') as string)]}>
-					{startCase(getByKey(row, 'utilizationStatus') as string)}
+				<Pill size="md" color={INVOICE_STATUS[(getByKey(row, 'utilizationStatus'))]}>
+					{startCase(getByKey(row, 'utilizationStatus'))}
 				</Pill>
 			</div>
 		),

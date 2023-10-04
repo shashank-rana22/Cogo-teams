@@ -4,17 +4,7 @@ import React from 'react';
 import QuotationCard from './quotationCard/index';
 import styles from './styles.module.css';
 
-interface DataProps {
-	sell_quotation?:Object,
-	buy_quotation?:Object
-}
-
-interface QuotationParams {
-	data?: DataProps,
-	loading?: boolean
-}
-
-function Quotation({ data = {}, loading = false }: QuotationParams) {
+function Quotation({ data = {}, loading = false }) {
 	const { sell_quotation:sellQuotation = {}, buy_quotation:buyQuotation = {} } = data || {};
 
 	return (

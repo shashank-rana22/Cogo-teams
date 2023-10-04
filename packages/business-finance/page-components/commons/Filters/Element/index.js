@@ -16,40 +16,13 @@ import {
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import React, { CSSProperties, useState } from 'react';
+import React, { useState } from 'react';
 
 import freightMapping from '../../Constants/freight-mappings';
 import CostView from '../../costView/index';
-import { Options, RadioOptions } from '../../Interfaces';
 import SegmentedControl from '../../SegmentedControl';
 
 import styles from './styles.module.css';
-
-type SelectedProp = {
-	startDate?: Date | null;
-	endDate?: Date | null;
-};
-interface ElementProps {
-	type?: string;
-	value?: any;
-	className?: string;
-	url?: string;
-	href?: string;
-	key?: string;
-	name?: string;
-	onChange?: (val: any) => void;
-	radioOptions?: RadioOptions[];
-	options?: Options[];
-	setFilters: (p: object) => void;
-	filters: object;
-	[key: string]:
-	| string
-	| undefined
-	| ((val: any) => void)
-	| Options[]
-	| object
-	| CSSProperties;
-}
 
 function Element({
 	type,
@@ -62,12 +35,12 @@ function Element({
 	checkboxLabel = '',
 	radioOptions,
 	...rest
-}: ElementProps) {
+}) {
 	const [show, setShow] = useState(false);
 	const { style, selectWidth, options, onlyNumbersAllowed = false } = rest;
 	const { setFilters } = rest;
-	const tagClick = (val: Options) => {
-		setFilters((prev: object) => ({
+	const tagClick = (val) => {
+		setFilters((prev) => ({
 			...prev,
 			[name]    : val.value,
 			pageIndex : 1,
@@ -78,7 +51,7 @@ function Element({
 		switch (type) {
 			case 'tags':
 				return (
-					<div className={styles.flex} style={style as CSSProperties}>
+					<div className={styles.flex} style={style}>
 						{rest?.options?.map((val) => (
 							<div
 								role="presentation"
@@ -87,7 +60,7 @@ function Element({
 								onClick={() => tagClick(val)}
 							>
 								<div
-									className={val.value === filters[name as keyof typeof filters]
+									className={val.value === filters[name]
 										? styles.active
 										: styles.normal}
 								>
@@ -99,9 +72,9 @@ function Element({
 				);
 			case 'href':
 				return (
-					<div style={style as CSSProperties}>
+					<div style={style}>
 						<div role="presentation" className={styles.url_container} onClick={() => setShow(true)}>
-							{value as string}
+							{value}
 						</div>
 						{show && href && (
 							<Modal
@@ -120,20 +93,20 @@ function Element({
 					<div>
 						<div
 							className={styles.url_container}
-							style={style as CSSProperties}
+							style={style}
 							onClick={() => window.open(url, '_blank')}
 							role="presentation"
 						>
-							{(value as string)!.length > 15 ? (
-								<Tooltip interactive placement="top" content={value as string}>
+							{(value).length > 15 ? (
+								<Tooltip interactive placement="top" content={value}>
 									<div
 										className={styles.text_div}
 									>
-										{`${(value as string)!.substring(0, 15)}...`}
+										{`${(value).substring(0, 15)}...`}
 									</div>
 								</Tooltip>
 							) : (
-								<div className={styles.text_div}>{value as string}</div>
+								<div className={styles.text_div}>{value}</div>
 							)}
 						</div>
 					</div>
@@ -146,7 +119,7 @@ function Element({
 								size="sm"
 								color="yellow"
 								className={className}
-								style={style as CSSProperties}
+								style={style}
 								key={val?.label}
 							>
 								{val?.label || ''}
@@ -161,13 +134,13 @@ function Element({
 						className={styles.select_container}
 						style={{
 							'--width': selectWidth || '200px',
-						} as CSSProperties}
+						}}
 					>
 						<Select
-							value={value as string}
+							value={value}
 							className={className}
 							options={options || []}
-							style={style as CSSProperties}
+							style={style}
 							{...rest}
 						/>
 					</div>
@@ -178,13 +151,13 @@ function Element({
 						className={styles.select_container}
 						style={{
 							'--width': selectWidth || '200px',
-						} as CSSProperties}
+						}}
 					>
 						<MultiSelect
-							value={value as string[]}
+							value={value}
 							className={className}
 							options={options || []}
-							style={style as CSSProperties}
+							style={style}
 							{...rest}
 						/>
 					</div>
@@ -192,8 +165,8 @@ function Element({
 			case 'input':
 				return (
 					<Input
-						value={value as string}
-						style={style as CSSProperties}
+						value={value}
+						style={style}
 						className={className}
 						prefix={<IcMSearchlight height={15} width={15} />}
 						type={onlyNumbersAllowed ? 'number' : 'text'}
@@ -205,8 +178,8 @@ function Element({
 					<div className={styles.single_date}>
 						<Datepicker
 							name="date"
-							value={value as Date}
-							style={style as CSSProperties}
+							value={value}
+							style={style}
 							{...rest}
 						/>
 					</div>
@@ -217,8 +190,8 @@ function Element({
 					<div className={styles.single_date}>
 						<SingleDateRange
 							name="date"
-							value={value as SelectedProp}
-							style={style as CSSProperties}
+							value={value}
+							style={style}
 							{...rest}
 						/>
 					</div>
@@ -227,8 +200,8 @@ function Element({
 				return (
 					<DateRangepicker
 						name="date"
-						value={value as SelectedProp}
-						style={style as CSSProperties}
+						value={value}
+						style={style}
 						{...rest}
 					/>
 				);
@@ -236,7 +209,7 @@ function Element({
 			case 'serviceType':
 				return (
 					<div className={className} {...rest}>
-						{freightMapping[value as keyof typeof freightMapping]?.name.replace(
+						{freightMapping[value]?.name.replace(
 							'_',
 							'',
 						) || '-'}
@@ -245,25 +218,20 @@ function Element({
 			case 'segmented':
 				return (
 					<SegmentedControl
-						options={rest?.options as {
-							label: string;
-							value: string;
-							icon?: JSX.Element;
-							badge?: number;
-						}[]}
-						activeTab={(value as string) || ''}
-						setActiveTab={(val: string) => {
-							setFilters((p: object) => ({ ...p, [name]: val }));
+						options={rest?.options || []}
+						activeTab={(value) || ''}
+						setActiveTab={(val) => {
+							setFilters((p) => ({ ...p, [name]: val }));
 						}}
-						style={style as CSSProperties}
+						style={style}
 						{...rest}
 					/>
 				);
 			case 'textarea':
 				return (
 					<Textarea
-						value={value as string}
-						style={style as CSSProperties}
+						value={value}
+						style={style}
 						className={className}
 						{...rest}
 					/>
@@ -272,7 +240,7 @@ function Element({
 				return (
 					<FileUploader
 						className={className}
-						style={style as CSSProperties}
+						style={style}
 						value={value}
 						name={name}
 						{...rest}
@@ -283,7 +251,7 @@ function Element({
 					<AsyncSelect
 						className={className}
 						value={value}
-						style={style as CSSProperties}
+						style={style}
 						{...rest}
 					/>
 				);
@@ -291,7 +259,7 @@ function Element({
 				return (
 					<RadioGroup
 						className={className}
-						style={style as CSSProperties}
+						style={style}
 						value={value}
 						options={radioOptions}
 						id={String(rest?.id)}
@@ -303,7 +271,7 @@ function Element({
 				return (
 					<Checkbox
 						className={className}
-						style={style as CSSProperties}
+						style={style}
 						value={value}
 						label={String(checkboxLabel)}
 						{...rest}
@@ -313,7 +281,7 @@ function Element({
 				return (
 					<Timepicker
 						className={className}
-						style={style as CSSProperties}
+						style={style}
 						value={value}
 						{...rest}
 					/>
@@ -321,7 +289,7 @@ function Element({
 			default:
 				return (
 					<div className={className} {...rest}>
-						{value as string}
+						{value}
 					</div>
 				);
 		}

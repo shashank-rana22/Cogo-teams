@@ -4,21 +4,13 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface Props {
-	showDeleteConfirmationModal?: boolean;
-	deleteHistoryLoading?: boolean;
-	deleteHistory?: Function;
-	setShowDeleteConfirmationModal?: React.Dispatch<React.SetStateAction<boolean>>;
-	item?: object;
-}
-
 function DeleteSettlement({
 	showDeleteConfirmationModal = false,
 	setShowDeleteConfirmationModal = () => {},
 	deleteHistoryLoading = false,
 	deleteHistory = () => {},
 	item = {},
-}:Props) {
+}) {
 	const onClose = () => {
 		setShowDeleteConfirmationModal(false);
 	};

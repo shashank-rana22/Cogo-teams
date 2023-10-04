@@ -2,23 +2,13 @@ import { Toast } from '@cogoport/components';
 import { useRequest, useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import { GenericObject } from '../../commons/Interfaces';
-
-interface Params {
-	shipmentData?: GenericObject;
-	query?: GenericObject;
-	showButton?: boolean;
-	showFinal?: boolean;
-	setShowButton: Function;
-	setShowFinal: Function;
-}
 const useUpdateJob = ({
 	query,
 	setShowButton,
 	showButton,
 	setShowFinal,
 	showFinal,
-}: Params) => {
+}) => {
 	const { shipmentId, jobNumber, jobSource, jobType } = query || {};
 
 	const { user_data: userData } = useSelector(({ profile }: any) => ({

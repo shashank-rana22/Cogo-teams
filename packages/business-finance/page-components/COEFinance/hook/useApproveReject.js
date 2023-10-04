@@ -3,24 +3,13 @@ import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import { RemarksValInterface } from '../../commons/Interfaces/index';
-
-interface ApproveRejectInterface {
-	collectionPartyId?:string
-	remarksVal?:RemarksValInterface
-	overAllRemark?:string
-	modalData?:string
-	setApprove: React.Dispatch<React.SetStateAction<boolean>>,
-	billId?:string,
-	lineItemsRemarks?:object
-}
 
 const useApproveReject = ({
 	remarksVal, overAllRemark,
 	lineItemsRemarks, modalData, setApprove, billId,
-}:ApproveRejectInterface) => {
+}) => {
 	const router = useRouter();
-	const { user_data:userData } = useSelector(({ profile }:any) => ({
+	const { user_data:userData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
 

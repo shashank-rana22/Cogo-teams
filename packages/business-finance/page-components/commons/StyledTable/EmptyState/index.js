@@ -3,11 +3,6 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface ItemProps {
-	imageFind:string,
-	imgHeight?:string,
-}
-
 const imageData = {
 	NoDataImage      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no-incident-data.svg',
 	FinanceDashboard : 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
@@ -16,7 +11,7 @@ const imageData = {
 	NoDataFound   : GLOBAL_CONSTANTS.image_url.list_no_result_found,
 };
 
-function EmptyState({ imageFind, imgHeight }:ItemProps) {
+function EmptyState({ imageFind, imgHeight }) {
 	return (
 		<div className={styles.container}>
 			<img

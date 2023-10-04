@@ -5,18 +5,12 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import Filter from '../../../commons/Filters';
-import { GenericObject } from '../../../commons/Interfaces';
 import { FILTERS } from '../../configurations/filters_config';
 import { CURRENCY_DATA } from '../../constants/constant';
 
 import styles from './styles.module.css';
 
-interface Props {
-	setFilters: (p: object) => void;
-	filters?: GenericObject;
-}
-
-function FilterModal({ setFilters = () => {}, filters = {} }: Props) {
+function FilterModal({ setFilters = () => {}, filters = {} }) {
 	const [modalFilters, setModalFilters] = useState({
 		currency    : [],
 		serviceType : [],
@@ -81,10 +75,8 @@ function FilterModal({ setFilters = () => {}, filters = {} }: Props) {
 			>
 				<Modal.Header
 					title={
-            (
-	<div className={styles.heading_container}>FILTERS</div>
-            ) as never as string
-          }
+						<div className={styles.heading_container}>FILTERS</div>
+				}
 				/>
 
 				<Modal.Body>
@@ -100,7 +92,7 @@ function FilterModal({ setFilters = () => {}, filters = {} }: Props) {
 							<div className={styles.select_input}>
 								<MultiSelect
 									value={modalFilters?.currency}
-									onChange={(val:string[]) => setModalFilters((prev) => ({ ...prev, currency: val }))}
+									onChange={(val) => setModalFilters((prev) => ({ ...prev, currency: val }))}
 									placeholder="Select Currency"
 									options={getCurrencyOptions()}
 									size="md"

@@ -5,36 +5,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface LineItems {
-	name?: string;
-	code?: string;
-	tax_total_price_discounted?: number;
-	tax_total_price?: number;
-	currency?: string;
-	actual_price?: number;
-	actual_price_currency?: string;
-}
-
-interface ServiceCharge {
-	service_type?: string;
-	id?: string;
-	line_items?: Array<LineItems>;
-}
-
-interface Quotation {
-	service_charges?: Array<ServiceCharge>;
-	actual_total_price?: number;
-	actual_total_price_currency?: string;
-	net_total_price_discounted?: number;
-	net_total_price_currency?: string;
-}
-
-interface QuotationCardParams {
-	quotation?: Quotation,
-	isBuyQuotation?: boolean
-}
-
-function QuotationCard({ quotation, isBuyQuotation } : QuotationCardParams) {
+function QuotationCard({ quotation, isBuyQuotation }) {
 	const {
 		actual_total_price: actualTotalPrice = 0,
 		actual_total_price_currency: actualTotalPriceCurrency = '',
@@ -71,7 +42,7 @@ function QuotationCard({ quotation, isBuyQuotation } : QuotationCardParams) {
 						</div>
 						<div className={styles.header_hr} />
 
-						{line_items.map((serviceItem: LineItems) => {
+						{line_items.map((serviceItem) => {
 							const {
 								name = '',
 								code = '',
@@ -94,7 +65,7 @@ function QuotationCard({ quotation, isBuyQuotation } : QuotationCardParams) {
 									<div className={styles.custom_flex}>
 										{formatAmount(
 											{
-												amount   :	(taxTotalPriceDiscounted || taxTotalPrice) as any,
+												amount   :	(taxTotalPriceDiscounted || taxTotalPrice),
 												currency :	currency || GLOBAL_CONSTANTS.currency_code.INR,
 												options  : {
 													style           : 'currency',
@@ -106,7 +77,7 @@ function QuotationCard({ quotation, isBuyQuotation } : QuotationCardParams) {
 
 									<div className={styles.custom_flex}>
 										{formatAmount({
-											amount   :	actualPrice as any,
+											amount   :	actualPrice,
 											currency :	actualPriceCurrency || GLOBAL_CONSTANTS.currency_code.INR,
 											options  : {
 												style           : 'currency',
@@ -130,7 +101,7 @@ function QuotationCard({ quotation, isBuyQuotation } : QuotationCardParams) {
 				<div className={styles.show_price_container}>
 					<div>
 						{formatAmount({
-							amount   :	netTotalPriceDiscounted as any,
+							amount   :	netTotalPriceDiscounted,
 							currency :	netTotalPriceCurrency || GLOBAL_CONSTANTS.currency_code.INR,
 							options  : {
 								style           : 'currency',
@@ -143,7 +114,7 @@ function QuotationCard({ quotation, isBuyQuotation } : QuotationCardParams) {
 				<div className={styles.show_price_container}>
 					<div>
 						{formatAmount({
-							amount   : actualTotalPrice as any,
+							amount   : actualTotalPrice,
 							currency :	actualTotalPriceCurrency || GLOBAL_CONSTANTS.currency_code.INR,
 							options  : {
 								style           : 'currency',

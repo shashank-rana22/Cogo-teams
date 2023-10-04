@@ -1,22 +1,9 @@
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
-interface UseSelectorProps {
-	general?: any;
-	profile?: object;
-}
-
-interface ListInterface {
-	data: Array<object>,
-	total: number,
-	total_page: number,
-	fullResponse: any,
-	reverted: number,
-}
-
-const useGetFiniteList = (hook: any, params = {}) => {
+const useGetFiniteList = (hook, params = {}) => {
 	const { pathname } = useSelector(
-		({ general, profile }: UseSelectorProps) => ({
+		({ general, profile }) => ({
 			...general,
 			user_profile: profile,
 		}),
@@ -26,7 +13,7 @@ const useGetFiniteList = (hook: any, params = {}) => {
 	const [loading, setLoading] = useState(true);
 	const [initialPath] = useState(pathname);
 	const [filters, setFilters] = useState({ page: 1 });
-	const [list, setList] = useState<ListInterface>({
+	const [list, setList] = useState({
 		data         : [],
 		total        : 0,
 		total_page   : 0,
@@ -38,7 +25,7 @@ const useGetFiniteList = (hook: any, params = {}) => {
 	const refetch = () => {
 		setLoading(true);
 		hook(restFilters, page)
-			.then((res: any) => {
+			.then((res) => {
 				const { data = { list: [], total: 0 } } = res;
 				setList(() => ({
 					data         : data?.list || [],

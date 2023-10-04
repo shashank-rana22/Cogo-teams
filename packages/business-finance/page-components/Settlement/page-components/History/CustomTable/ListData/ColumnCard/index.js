@@ -10,31 +10,7 @@ import useHistorySingleDataList from '../../../../../hooks/useHistorySingleDataL
 import Details from './Details';
 import styles from './styles.module.css';
 
-interface ListItem {
-	id: string;
-	documentValue: string;
-	documentAmount: number;
-	settledAmount: number;
-	balanceAmount: number;
-	transactionDate: string;
-	lastEditedDate: string;
-	currency: string;
-	documentNo: string;
-	accountType: string;
-	accMode: string;
-	notPostedSettlementIds: Array<number>;
-	ledCurrency: string;
-}
-
-interface Props {
-	item: ListItem;
-	getTableBodyCheckbox?: Function;
-	refetch: () => void
-	source?: string;
-
-}
-
-function ColumnCard({ item, getTableBodyCheckbox = () => { }, refetch, source }: Props) {
+function ColumnCard({ item, getTableBodyCheckbox = () => { }, refetch, source }) {
 	const [showDetails, setShowDetails] = useState(false);
 
 	const Icon = showDetails ? IcMArrowRotateUp : IcMArrowRotateDown;

@@ -9,36 +9,14 @@ import quotationConfig from '../configurations/ShipmentIdView/quotationConfig.js
 import useGetFiniteList from './useGetFiniteList';
 import useGetQuotation from './useGetQuotationBill';
 
-interface DataType {
-	currentPage: number;
-	restFilters: any;
-	pageIndex: number;
-}
-interface AllParams {
-	billId?: number;
-	billNumber?: number;
-	orgId?: number;
-	jobNumber?: string;
-	jobType?:string;
-	status?: string;
-	amountTab?: string;
-	setDataCard:Function;
-	isCheckoutQuote?:boolean;
-}
-interface Profile {
-	authorizationparameters?: string;
-}
-interface UseSelectorProps {
-	profile?: Profile;
-}
 const useListBills = (allParams) => {
 	const [q, setQ] = useState('');
 
-	const { ...params }: AllParams = allParams || {};
+	const { ...params } = allParams || {};
 	delete params.status;
 
 	const { authorizationparameters } = useSelector(
-		({ profile }: UseSelectorProps) => ({
+		({ profile }) => ({
 			authorizationparameters: profile?.authorizationparameters,
 		}),
 	);
@@ -50,7 +28,6 @@ const useListBills = (allParams) => {
 
 	if (authorizationparameters?.split(':')?.[1] === 'across_all') {
 		let check = true;
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		check = false;
 	}
 
@@ -78,10 +55,7 @@ const useListBills = (allParams) => {
 		{ autoCancel: false },
 	);
 
-	const listExpenseInvoicesApi = (
-		restFilters: DataType,
-		currentPage: DataType,
-	) => listExpenseInvoicesTrigger({
+	const listExpenseInvoicesApi = (restFilters, currentPage) => listExpenseInvoicesTrigger({
 		params: {
 			jobNumbers    : params.jobNumber ? [params?.jobNumber] : undefined,
 			jobSource     : 'LOGISTICS',
@@ -95,10 +69,7 @@ const useListBills = (allParams) => {
 		},
 	});
 
-	const listSalesInvoicesApi = (
-		restFilters: DataType,
-		currentPage: DataType,
-	) => listSalesInvoicesTrigger({
+	const listSalesInvoicesApi = (restFilters, currentPage) => listSalesInvoicesTrigger({
 		params: {
 			jobNumber                 : params?.jobNumber,
 			jobSource                 : 'LOGISTICS',

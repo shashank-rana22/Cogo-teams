@@ -14,28 +14,6 @@ import FinalPostModal from './FinalPostModal';
 import InvoiceModal from './InvoiceModal';
 import styles from './styles.module.css';
 
-type Itemdata = {
-	id?: string;
-	invoiceStatus?: string;
-	entityCode?: string;
-	daysLeftForAutoIrnGeneration?: string;
-	isFinalPosted?:boolean;
-	invoiceType?:string;
-};
-interface Content {
-	itemData?: Itemdata;
-	refetch?: Function;
-}
-
-interface RootState {
-	profile?: {
-		partner?: {
-			id?: string;
-		};
-		permissions_navigations?: object;
-	};
-}
-
 const INVOICE_STATUS = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 const POSTED_STATUS = ['POSTED'];
 const IRN_FAILED_STATUS = ['IRN_FAILED'];
@@ -49,8 +27,8 @@ const PERMISSION_BUTTON = {
 	},
 };
 
-function FinanceRejectContent({ itemData, refetch }: Content) {
-	const { profile = {} }: RootState = useSelector((state) => state);
+function FinanceRejectContent({ itemData, refetch }) {
+	const { profile = {} } = useSelector((state) => state);
 	const [openReject, setOpenReject] = useState(false);
 	const [uploadInvoice, setUploadInvoice] = useState(false);
 	const [textValue, setTextValue] = useState('');

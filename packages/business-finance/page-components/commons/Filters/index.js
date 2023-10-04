@@ -1,20 +1,8 @@
 import { Button, cl } from '@cogoport/components';
 import React from 'react';
 
-import { ControlProps } from '../Interfaces';
-
 import Element from './Element/index';
 import styles from './styles.module.css';
-
-interface FilterProps {
-	controls?: ControlProps[],
-	filters: object,
-	setFilters: (p:object) => void,
-	showClearBtn?:boolean,
-	clearFilters?:()=>void,
-	types?: string,
-	pageKey?:string,
-}
 
 function Filter({
 	controls = [],
@@ -23,20 +11,20 @@ function Filter({
 	showClearBtn = false,
 	clearFilters,
 	pageKey = 'pageIndex',
-}:FilterProps) {
-	const getElement = (singlecontrol:ControlProps) => {
+}) {
+	const getElement = (singlecontrol) => {
 		const {
 			span = 0, name = '', type = '', groupby, showlabel = false, label, show = true, ...rest
 		} = singlecontrol || {};
 		const customiseControl = {
 			id       : `filter-${name}`,
-			value    : filters?.[name as keyof typeof filters] || '',
-			onChange : (val:string) => {
-				let value:string;
+			value    : filters?.[name] || '',
+			onChange : (val) => {
+				let value;
 				if (type === 'input') value = val;
 				else if (type === 'datepicker' || type === 'singleDateRange') value = val;
 				else value = val;
-				setFilters((prev:object) => ({
+				setFilters((prev) => ({
 					...prev,
 					[name]                   : value,
 					[pageKey || 'pageIndex'] : 1,
@@ -57,10 +45,10 @@ function Filter({
 				className={styles.col}
 				style={{
 					'--width': `${(span || 1) * (100 / 12)}%`,
-				} as React.CSSProperties}
+				}}
 			>
 				<div>
-					{!showlabel && <div className={styles.showlabel}>{label as string}</div>}
+					{!showlabel && <div className={styles.showlabel}>{label}</div>}
 					<Element key={name} {...customiseControl} />
 				</div>
 			</div>

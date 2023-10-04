@@ -1,11 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-interface Props {
-	id?: string
-}
-
-const useInvoiceDetails = ({ id }: Props) => {
+const useInvoiceDetails = ({ id }) => {
 	const [
 		{ data, loading },
 		trigger,

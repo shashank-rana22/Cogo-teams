@@ -17,53 +17,6 @@ import DeleteSettlement from './DeleteSettlement';
 import LineItemsHeader from './LineItemsHeader';
 import styles from './styles.module.css';
 
-interface ListItem {
-	id: string;
-	documentValue: string;
-	documentAmount: number;
-	settledAmount: number;
-	balanceAmount: number;
-	transactionDate: string;
-	lastEditedDate: string;
-	currency: string;
-	documentNo: string;
-	accountType: string;
-	accMode: string;
-	notPostedSettlementIds: Array<number>;
-	ledCurrency: string;
-}
-
-interface List {
-	id: string;
-	documentValue: string;
-	sid?: string;
-	documentAmount?: number;
-	currency?: string;
-	settledAmount?: number;
-	tds?: number;
-	nostroAmount?: number;
-	currentBalance?: number;
-	transactionDate?: string;
-	status?: string;
-	settlementStatus?: string;
-	accMode?: string;
-}
-
-interface SettlementData {
-	list: List[];
-	pageNo: number;
-	totalRecords: number;
-}
-
-interface Props {
-	item: ListItem;
-	refetch: () => void;
-	data: SettlementData;
-	loading: boolean;
-	onPageChange: (val: number) => void;
-	source?: string;
-}
-
 const DEFAULT_VALUE = {
 	id                     : '',
 	documentValue          : '',
@@ -92,7 +45,7 @@ function Details({
 	loading = false,
 	onPageChange = () => {},
 	source = '',
-}: Props) {
+}) {
 	const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
 	const { notPostedSettlementIds = [], ledCurrency = '' } = item || {};
 

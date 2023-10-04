@@ -1,32 +1,14 @@
 import { Button, Pagination } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, ReactFragment, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useGetUsers from '../../hooks/useGetUsers';
 
 import EmptyState from './EmptyState';
-import { FunctionObjects, FieldType, ListDataType } from './Interfaces';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 import styles from './styles.module.css';
-
-interface Props {
-	fields: FieldType[];
-	data: ListDataType;
-	loading?: boolean;
-	page?: number;
-	setPage?: Function;
-	functions?: FunctionObjects;
-	activeTab?: string;
-	Child?: ReactFragment;
-	setViewDoc?: Function;
-	setItem?: Function;
-	listAPI?: Function;
-	edit?: boolean | string;
-	setEdit?: Function;
-	setGenerate?: Function;
-}
 
 function List({
 	fields = [],
@@ -43,7 +25,7 @@ function List({
 	edit = false,
 	setEdit = () => {},
 	setGenerate = () => {},
-} :Props) {
+}) {
 	const { data = {} } = listData;
 	const { stakeholderIds = [], shipmentPendingTasks = [] } = data;
 	const [isOpen, setIsOpen] = useState(null);
@@ -100,7 +82,7 @@ function List({
 					/>
 					{singleitem.blCategory === 'hawb' && ['approval_pending', 'approved_awb'].includes(activeTab) && (
 						<div
-							style={{ '--length': isOpen ? 0 : '-16px' } as React.CSSProperties}
+							style={{ '--length': isOpen ? 0 : '-16px' }}
 							className={styles.accordian_style}
 						>
 							{isOpen === singleitem.id ? (
@@ -122,7 +104,7 @@ function List({
 					)}
 					{activeTab === 'amendment' && (
 						<div
-							style={{ '--length': isOpen ? 0 : '-20px' } as React.CSSProperties}
+							style={{ '--length': isOpen ? 0 : '-20px' }}
 							className={styles.amaendment_accordian_style}
 						>
 							{isOpen === singleitem.id ? (

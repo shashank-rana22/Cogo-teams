@@ -4,13 +4,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
-export interface BarDatum {
-	[key: string]: string | number;
-}
-interface MonthlyBarChartInterface {
-	monthlyData?: Array<BarDatum>
-}
-function MonthBarChart({ monthlyData }:MonthlyBarChartInterface) {
+function MonthBarChart({ monthlyData }) {
 	return (
 		<div className={styles.container}>
 			<ResponsiveBar

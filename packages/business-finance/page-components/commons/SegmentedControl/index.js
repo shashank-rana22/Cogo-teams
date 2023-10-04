@@ -2,16 +2,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface Props {
-	options:{ label:string, value:string, icon?: JSX.Element, badge?:number | string }[];
-	activeTab:string;
-	setActiveTab:Function;
-	color?: string;
-	background?:string;
-	style?:React.CSSProperties;
-}
-
-function SegmentedControl(props:Props) {
+function SegmentedControl(props) {
 	const {
 		options: optionsProp,
 		activeTab,
@@ -35,21 +26,21 @@ function SegmentedControl(props:Props) {
 						<div
 							key={value}
 							className={`${styles.segmented_option} ${isActive ? styles.activeoption : ''}`}
-							style={{ '--background': background } as React.CSSProperties}
+							style={{ '--background': background }}
 							onClick={() => setActiveTab(value)}
 							role="presentation"
 						>
 							{icon && (
 								<div
 									className={`${styles.segmented_icon} ${isActive ? styles.active : ''}`}
-									style={{ '--color': color } as React.CSSProperties}
+									style={{ '--color': color }}
 								>
 									{icon}
 								</div>
 							)}
 							<div
 								className={`${styles.segmented_label} ${isActive ? styles.active : ''}`}
-								style={{ '--color': color } as React.CSSProperties}
+								style={{ '--color': color }}
 							>
 								{label}
 							</div>
@@ -57,7 +48,7 @@ function SegmentedControl(props:Props) {
 								<div
 									className={`${styles.segmented_badge}
 									${isActive ? styles.activebadge : styles.atvbadge}`}
-									style={{ '--color': color } as React.CSSProperties}
+									style={{ '--color': color }}
 								>
 									{badge}
 								</div>

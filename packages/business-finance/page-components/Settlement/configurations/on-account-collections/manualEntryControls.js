@@ -143,24 +143,6 @@ const controls = [
 	},
 ];
 
-interface ControlInterface {
-	isEdit?:boolean
-	entityType?:string
-	setLedgerCurrency?: React.Dispatch<(prevState: undefined) => undefined>
-	setEditMode?: React.Dispatch<React.SetStateAction<boolean>>
-	setTradeId?: React.Dispatch<(prevState: undefined) => undefined>
-	itemData?:{
-		bankName?:string
-		transactionDate?:Date
-		payMode?:string
-	}
-	docTypeValue?:string
-	setShowBprNumber?: React.Dispatch<React.SetStateAction<{
-		sage_organization_id: string;
-	}>>
-	accountMode?:string
-}
-
 const getControls = ({
 	isEdit = false,
 	entityType,
@@ -170,7 +152,7 @@ const getControls = ({
 	setShowBprNumber,
 	itemData,
 	docTypeValue,
-}:ControlInterface) => controls.map((control) => {
+}) => controls.map((control) => {
 	const { name } = control;
 	if (name === 'entityType' && isEdit) {
 		return {

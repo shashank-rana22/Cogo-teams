@@ -10,24 +10,6 @@ import { handleBillType } from '../../../../utils/getHandleBillType';
 
 import styled from './styles.module.css';
 
-interface ItemProps {
-	billType:string,
-	billDocumentUrl:string,
-	serviceType:string,
-	billNumber:string,
-	isProforma:boolean,
-	jobNumber:string,
-	shipmentId:string
-}
-interface Props {
-	itemData:ItemProps;
-	field:{
-		topKey:object,
-		bottomKey:object,
-		label :string
-	}
-}
-
 const { SHIPMENT_ROUTE_MAPPING } = GLOBAL_CONSTANTS;
 
 const MAX_LEN_FOR_INVOICE_TEXT = 11;
@@ -47,7 +29,7 @@ function FieldPair({
 		bottomKey : {},
 		label     : '',
 	},
-}:Props) {
+}) {
 	const router = useRouter();
 	const {
 		billType = '',

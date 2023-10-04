@@ -1,11 +1,4 @@
-interface StatsDataInterface {
-	LOCKED?:string
-	FINANCE_ACCEPTED?:string
-	ON_HOLD?:string
-	POSTED?:string
-	FAILED?:string
-}
-function filtersData(statsData:StatsDataInterface) {
+function filtersData(statsData) {
 	const { LOCKED = '', FINANCE_ACCEPTED = '', ON_HOLD = '', POSTED = '', FAILED = '' } = statsData || {};
 
 	const ALL = Object.values(statsData || {}).reduce((total, value) => total + value, 0);

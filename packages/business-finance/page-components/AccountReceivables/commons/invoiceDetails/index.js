@@ -43,7 +43,7 @@ function InvoiceDetails({
 	};
 
 	const handleDropdown = (key = '') => {
-		setDropDownData((previousActions: object) => ({
+		setDropDownData((previousActions) => ({
 			...previousActions,
 			[key]: !previousActions[key],
 		}));

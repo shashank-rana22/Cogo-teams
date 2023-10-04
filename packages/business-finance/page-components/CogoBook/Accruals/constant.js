@@ -8,7 +8,6 @@ import React from 'react';
 
 import SortIcon from '../common/SortIcon';
 
-import { ColumnInterface } from './interface';
 import styles from './styles.module.css';
 import DeleteModal from './ViewSelectedInvoice/DeleteModal';
 
@@ -29,11 +28,10 @@ export const MONTH_DATA = {
 
 export const getEntityOptions = () => {
 	const filteredEntity = Object.entries(ENTITY_FEATURE_MAPPING).filter(
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		([_, value]: any) => value.feature_supported.includes('cogo_books'),
+		([_, value]) => value.feature_supported.includes('cogo_books'),
 	);
 
-	const ENTITY_OPTIONS = (filteredEntity || []).map(([key]: any) => (
+	const ENTITY_OPTIONS = (filteredEntity || []).map(([key]) => (
 		{
 			label : Number(key),
 			value : Number(key),
@@ -101,7 +99,7 @@ export const bookedColumn = (
 		setOpenDeleteModal,
 		filters,
 		setFilters,
-	}:ColumnInterface,
+	},
 ) => {
 	const handleDelete = (key = '') => {
 		setOpenDeleteModal((previousActions) => ({
@@ -218,7 +216,7 @@ export const bookedColumn = (
 							{' '}
 							<div className={quotationDiff >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
 								{formatAmount({
-									amount   :	quotationDiff as any,
+									amount   :	quotationDiff,
 									currency : expenseCurrency,
 									options  : {
 										style           : 'currency',
@@ -290,7 +288,7 @@ export const bookedColumn = (
 							{' '}
 							<div className={quotationDiff >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
 								{formatAmount({
-									amount   :	quotationDiff as any,
+									amount   :	quotationDiff,
 									currency : sellQuotationCurrency,
 									options  : {
 										style           : 'currency',
@@ -451,7 +449,7 @@ export const bookedColumn = (
 		{
 			Header   : '',
 			id       : 'ribbon',
-			accessor : (row:{ shipmentType?:string }) => {
+			accessor : (row) => {
 				const { shipmentType } = row || {};
 				return (
 					<div>
@@ -471,7 +469,7 @@ export const bookedColumn = (
 export const column = ({
 	getTableBodyCheckbox,
 	getTableHeaderCheckbox, deleteSelected, openDeleteModal, setOpenDeleteModal, filters, setFilters,
-}:ColumnInterface) => {
+}) => {
 	const handleDelete = (key = '') => {
 		setOpenDeleteModal((previousActions) => ({ ...previousActions, [key]: !previousActions[key] }));
 	}; return [{
@@ -727,7 +725,7 @@ export const column = ({
 	{
 		Header   : '',
 		id       : 'ribbon',
-		accessor : (row:{ shipmentType?:string }) => {
+		accessor : (row) => {
 			const { shipmentType } = row || {};
 			return (
 				<div>

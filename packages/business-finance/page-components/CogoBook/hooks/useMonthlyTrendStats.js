@@ -3,12 +3,7 @@ import { useCallback, useEffect } from 'react';
 
 import toastApiError from '../../commons/toastApiError';
 
-interface MonthlyStatsInterface {
-	month?:string
-	year?:string
-	entityCode?:string
-}
-const useMonthlyTrendStats = ({ month, year, entityCode }:MonthlyStatsInterface) => {
+const useMonthlyTrendStats = ({ month, year, entityCode }) => {
 	const [
 		{ data:monthlyData, loading:monthlyLoading },
 		trigger,

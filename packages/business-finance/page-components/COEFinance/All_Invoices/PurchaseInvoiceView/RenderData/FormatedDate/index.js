@@ -9,26 +9,7 @@ import showOverflowingNumber from '../../../../../commons/showOverflowingNumber'
 
 import styled from './styles.module.css';
 
-interface ItemProps {
-	createdDate: Date;
-	updatedDate: Date
-	billDate: Date;
-	dueDate: Date;
-	billCurrency?: string;
-	subTotal?: number;
-	grandTotal?: number;
-}
-interface Props {
-	item: ItemProps;
-	field: {
-		key: string;
-		topKey: object;
-		bottomKey: object;
-		label: string;
-	};
-}
-
-function FormatedDate({ item, field }: Props) {
+function FormatedDate({ item, field }) {
 	const { createdDate, billDate, dueDate, subTotal, billCurrency, grandTotal, updatedDate } = item || {};
 	const getCreatedDate = format(createdDate, 'dd MMM, yyyy', {}, false);
 	const getCreatedDateTime = format(createdDate, 'h:mm:aa', {}, false);
@@ -43,8 +24,8 @@ function FormatedDate({ item, field }: Props) {
 				Pre Tax :
 				<text className={styled.pre_tax_amount}>
 					{formatAmount({
-						amount   :	subTotal as any,
-						currency : billCurrency!,
+						amount   :	subTotal,
+						currency : billCurrency,
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -56,8 +37,8 @@ function FormatedDate({ item, field }: Props) {
 				Post Tax:
 				<text className={styled.post_tax_amount}>
 					{formatAmount({
-						amount   : grandTotal as any,
-						currency : billCurrency!,
+						amount   : grandTotal,
+						currency : billCurrency,
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -69,7 +50,7 @@ function FormatedDate({ item, field }: Props) {
 	);
 
 	const formattedAmount = formatAmount({
-		amount   :	grandTotal as any,
+		amount   :	grandTotal,
 		currency :	billCurrency,
 		options  : {
 			style           : 'currency',

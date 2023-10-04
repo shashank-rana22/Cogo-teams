@@ -13,26 +13,6 @@ import CustomTable from './CustomTable';
 import SelectState from './SelectState';
 import styles from './styles.module.css';
 
-interface ListItem {
-	id: string;
-	documentValue: string;
-	documentAmount: number;
-	settledAmount: number;
-	balanceAmount: number;
-	transactionDate: string;
-	lastEditedDate: string;
-	currency: string;
-	documentNo: string;
-	accountType: string;
-	accMode: string;
-	notPostedSettlementIds : Array<number>;
-	ledCurrency: string;
-}
-
-interface DataInterface {
-	list: ListItem[],
-}
-
 function History() {
 	const { query } = useRouter();
 
@@ -40,13 +20,13 @@ function History() {
 
 	const { data, loading, filters, setFilters, apiData, refetch } = useHistorySettlemet();
 
-	const { list = [] } = (apiData as DataInterface) || {};
+	const { list = [] } = apiData || {};
 
 	const handleVersionChange = () => {
 		window.location.href = `/${query.partner_id}/business-finance/settlement/history`;
 	};
 
-	const onPageChange = (val:number) => {
+	const onPageChange = (val) => {
 		setFilters({ ...filters, page: val });
 	};
 

@@ -2,10 +2,6 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface Props {
-	item: string | number | Date | object | null | React.FC ;
-}
-
 function formatDate(date) {
 	if (date) {
 		return new Date(date).toLocaleDateString('en-GB', {
@@ -21,7 +17,7 @@ function formatDate(date) {
 	});
 }
 
-function RenderRibbon({ item }:Props) {
+function RenderRibbon({ item }) {
 	const today = new Date();
 	const scheduleDeparture = new Date(item?.scheduleDeparture);
 	const beforeScheduleDeparture = new Date(scheduleDeparture);

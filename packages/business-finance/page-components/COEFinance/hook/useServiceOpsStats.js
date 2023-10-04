@@ -4,18 +4,7 @@ import { useEffect } from 'react';
 
 import { getFormatDate } from '../utils/getFormatDate';
 
-interface FilterInterface {
-	serviceType?:string
-	timePeriod?:string
-	dateRange?:DateInterface
-	rest?:any
-}
-
-interface DateInterface {
-	startDate?:Date
-	endDate?:Date
-}
-const useServiceOpsStats = (filters :FilterInterface) => {
+const useServiceOpsStats = (filters) => {
 	const [{ data:So2statsData, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/bills/so2-success-rate',

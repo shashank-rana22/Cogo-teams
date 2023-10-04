@@ -2,20 +2,7 @@ import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-interface DataInterface {
-	data?: {
-		cancelledEInvoiceDetails?: AggreementFile;
-	}
-}
-
-interface AggreementFile {
-	cancelledAgreementNumber?: string;
-	cancelledAgreementDate?: string;
-	cancelledAgreementDocument?: string;
-	cancelledEInvoiceForm04?: string;
-}
-
-function CancellationAgreement({ data }: DataInterface) {
+function CancellationAgreement({ data }) {
 	const {
 		cancelledEInvoiceDetails: {
 			cancelledAgreementNumber = '',

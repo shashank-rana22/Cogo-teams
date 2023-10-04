@@ -1,27 +1,10 @@
 import { Placeholder } from '@cogoport/components';
-import React, { ReactNode, ReactFragment, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
-import { FieldType, FunctionObjects, NestedObj } from '../Interfaces/index';
 import RenderRibbon from '../RenderRibbon';
 import styles from '../styles.module.css';
 
 import getValue from './getValue';
-
-export interface Props {
-	fields: FieldType[];
-	singleitem?: NestedObj;
-	functions?: FunctionObjects;
-	loading?: boolean;
-	isMobile?: boolean;
-	isOpen?: string;
-	Child?: ReactFragment;
-	setViewDoc?: Function;
-	setItem?: Function;
-	listAPI?: Function;
-	edit?: boolean | string;
-	setEdit?: Function;
-	setGenerate?:Function;
-}
 
 function CardItem({
 	fields,
@@ -37,7 +20,7 @@ function CardItem({
 	edit = false,
 	setEdit = () => {},
 	setGenerate = () => {},
-}:Props) {
+}) {
 	const expirationTime = new Date(singleitem.scheduleDeparture).getTime();
 	const showTime = useCallback(() => {
 		let formatted = {
@@ -50,13 +33,12 @@ function CardItem({
 		if (singleitem.scheduleDeparture) {
 			const currentTime = new Date().getTime();
 			const distanceToDate = expirationTime - currentTime;
-			type TypeDate = string | number | Date | null | React.FC ;
-			const days:TypeDate | number = Math.floor(distanceToDate / (1000 * 60 * 60 * 24)) || '0';
+			const days = Math.floor(distanceToDate / (1000 * 60 * 60 * 24)) || '0';
 			const h = Math.abs(Math.floor((distanceToDate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))) || 0;
 			const m = Math.abs(Math.floor((distanceToDate % (1000 * 60 * 60)) / (1000 * 60))) || 0;
 			const s = Math.abs(Math.floor((distanceToDate % (1000 * 60)) / 1000)) || 0;
 
-			let hours:TypeDate = '';
+			let hours = '';
 			if (h > 0 && h < 10) {
 				hours = `0${h}`;
 			} else if (h > 9 && h < 24) {
@@ -65,7 +47,7 @@ function CardItem({
 				hours = '00';
 			}
 
-			let minutes:TypeDate = '';
+			let minutes = '';
 			if (m > 0 && m < 10) {
 				minutes = `0${m}`;
 			} else if (m > 9 && m < 59) {
@@ -74,7 +56,7 @@ function CardItem({
 				minutes = '00';
 			}
 
-			let seconds:TypeDate = '';
+			let seconds = '';
 			if (s > 0 && s < 10) {
 				seconds = `0${s}`;
 			} else if (s > 9 && s < 59) {
@@ -119,14 +101,14 @@ function CardItem({
 				className={styles.list_container}
 				style={{
 					'--open-margin': isOpen ? 0 : '16px',
-				} as React.CSSProperties}
+				}}
 			>
 				<div
 					className={`${styles.row} ${
 						isMobile ? styles.is_mobile : ''
 					}`}
 				>
-					{fields.map((field:FieldType) => {
+					{fields.map((field) => {
 						const itemStyle = field.styles || {};
 						return (
 							<div
@@ -136,7 +118,7 @@ function CardItem({
 								style={{
 									'--span': (field.span || 1),
 									...itemStyle,
-								} as React.CSSProperties}
+								}}
 								key={field.key}
 							>
 								{isMobile && (
@@ -155,7 +137,7 @@ function CardItem({
 												field,
 												functions,
 												'-',
-											) as ReactNode }
+											)}
 										</div>
 									)}
 

@@ -2,13 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-interface AllParams {
-	entityCode?: number;
-	organizationId?: string;
-}
-
 const useGetVendorDetails = (allParams = {}) => {
-	const { ...params }: AllParams = allParams || {};
+	const { ...params } = allParams || {};
 
 	const [
 		{ data: vendorDetailsData, loading: apiLoading },

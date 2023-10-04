@@ -5,19 +5,7 @@ import showOverflowingNumber from '../../../../../commons/showOverflowingNumber'
 
 import styled from './styles.module.css';
 
-interface ItemProps {
-	urgencyTag:Array<string>
-}
-interface Props {
-	item:ItemProps;
-	field: {
-		key: string;
-		topKey: object;
-		bottomKey: object;
-		label: string;
-	};
-}
-function RenderUrgencyTag({ item, field }:Props) {
+function RenderUrgencyTag({ item, field }) {
 	return (
 		<div>
 			{item?.urgencyTag && field?.key === 'urgencyTag' ? (

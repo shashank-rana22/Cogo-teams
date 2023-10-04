@@ -2,10 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-interface UseGetVarianceInterface {
-	collectionPartyId?:string
-}
-const useGetVariance = ({ collectionPartyId }:UseGetVarianceInterface) => {
+const useGetVariance = ({ collectionPartyId }) => {
 	const [{ data: varianceFullData, loading }, trigger] = useRequest(
 		{
 			url    : '/get_collection_party_variance',

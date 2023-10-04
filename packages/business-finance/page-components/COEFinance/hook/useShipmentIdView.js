@@ -3,33 +3,11 @@ import { useSelector } from '@cogoport/store';
 
 import useGetFiniteList from './useGetFiniteList';
 
-interface DataType {
-	currentPage: number;
-	restFilters: FilterTypes;
-}
-interface FilterTypes {
-	serviceType?:string,
-	jobState?:string,
-}
-interface Profile {
-	authorizationparameters?: string;
-}
-
-interface UseSelectorProps {
-	profile?: Profile;
-}
-
-interface AllParams {
-	shipmentId?:string;
-	pendingApproval?: string;
-	jobNumberByQuery?: string;
-}
-
-const useShipmentIdView = (allParams?: {}) => {
-	const { jobNumberByQuery, ...params }: AllParams = allParams || {};
+const useShipmentIdView = (allParams) => {
+	const { jobNumberByQuery, ...params } = allParams || {};
 
 	const { authorizationparameters } = useSelector(
-		({ profile }: UseSelectorProps) => ({
+		({ profile }) => ({
 			authorizationparameters: profile?.authorizationparameters,
 		}),
 	);
@@ -42,13 +20,13 @@ const useShipmentIdView = (allParams?: {}) => {
 		},
 	);
 
-	const listAPi = (restFilters: FilterTypes, currentPage: DataType) => {
+	const listAPi = (restFilters, currentPage) => {
 		const allFilters = {
 			...(restFilters || {}),
 			...params,
 		};
 
-		const FINAL_FILTERS: any = {};
+		const FINAL_FILTERS = {};
 		Object.keys(allFilters).forEach((filter) => {
 			if (allFilters[filter]) {
 				FINAL_FILTERS[filter] = allFilters[filter];

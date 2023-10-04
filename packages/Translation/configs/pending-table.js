@@ -1,12 +1,11 @@
 import { startCase } from '@cogoport/utils';
 
-import { Refetch } from '../common/interfaces';
 import CreateRoleModal from '../page-components/CreateForm';
 import ToolTipWrapper from '../page-components/ListComponents/ToolTipWrapper';
 
 import styles from './styles.module.css';
 
-const requestedColumns = (refetch: Refetch) => [
+const requestedColumns = (refetch) => [
 	{
 		Header   : 'Service Name',
 		id       : 'name',

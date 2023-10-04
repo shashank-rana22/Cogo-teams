@@ -3,7 +3,6 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import React from 'react';
 
 import Filter from '../../../../commons/Filters';
-import { GenericObject } from '../../../../commons/Interfaces/index';
 import SegmentedControl from '../../../../commons/SegmentedControl/index';
 import FilterModal from '../../../Components/FilterModal/index';
 import filtersData from '../../../constants/purchase-list-filters';
@@ -11,18 +10,6 @@ import filtersUrgentData from '../../../constants/purchase-list-segments';
 
 import controls from './controls';
 import styled from './styles.module.css';
-
-interface SegmentFilterProps {
-	setSearchValue: any;
-	searchValue: string;
-	currentTab: string;
-	statsData?: object;
-	tab: string;
-	setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
-	setTab: React.Dispatch<React.SetStateAction<string>>;
-	filters: GenericObject;
-	setFilters: (p: object) => void;
-}
 
 function SegmentedFilters({
 	setCurrentTab,
@@ -34,7 +21,7 @@ function SegmentedFilters({
 	searchValue,
 	filters,
 	setFilters,
-}: SegmentFilterProps) {
+}) {
 	return (
 		<>
 			<div className={styled.filter_input}>
@@ -74,7 +61,7 @@ function SegmentedFilters({
 							name="q"
 							size="sm"
 							value={searchValue}
-							onChange={(e: any) => setSearchValue(e)}
+							onChange={(e) => setSearchValue(e)}
 							placeholder="Search by Invoice No./Shipment ID/Supplier name..."
 							suffix={(
 								<IcMSearchlight

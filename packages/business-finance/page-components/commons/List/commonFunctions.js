@@ -4,8 +4,6 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { getByKey } from '@cogoport/utils';
 import React from 'react';
 
-import { FunctionObjects, FieldType, GenericObject } from '../Interfaces';
-
 import FieldPair from './RenderFunctions/FiledPair';
 
 const getFormattedAmount = ({ amount, currency }) => formatAmount({
@@ -18,9 +16,9 @@ const getFormattedAmount = ({ amount, currency }) => formatAmount({
 	},
 });
 
-const commonFunctions = (functions: { functions?: FunctionObjects }) => {
-	const newFunctions: any = {
-		renderName: (itemData: GenericObject, field: FieldType) => (
+const commonFunctions = (functions) => {
+	const newFunctions = {
+		renderName: (itemData, field) => (
 			<div>{itemData[field.key]}</div>
 		),
 		renderFieldPair: (itemData, field) => (

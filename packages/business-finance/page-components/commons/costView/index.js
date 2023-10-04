@@ -3,11 +3,7 @@ import React, { useEffect } from 'react';
 
 import Quotation from './quotation/index';
 
-interface CostViewProps {
-	shipment_id?: string;
-}
-
-function CostView({ shipment_id = '' }: CostViewProps) {
+function CostView({ shipment_id = '' }) {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_shipment_cost_sheet',
 		method : 'get',

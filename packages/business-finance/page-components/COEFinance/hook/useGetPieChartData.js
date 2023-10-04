@@ -4,19 +4,7 @@ import { useEffect } from 'react';
 import toastApiError from '../../commons/toastApiError';
 import { getFormatDate } from '../utils/getFormatDate';
 
-interface FilterInterface {
-	serviceType?:string
-	timePeriod?:string
-	dateRange?:DateInterface
-	rest?:any
-}
-
-interface DateInterface {
-	startDate?:Date
-	endDate?:Date
-}
-
-const useGetPieChartData = (filters :FilterInterface) => {
+const useGetPieChartData = (filters) => {
 	const [{ data:pieData, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/bills/bill-rejection-stats',

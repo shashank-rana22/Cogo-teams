@@ -9,28 +9,6 @@ import Header from './Header';
 import ListData from './ListData';
 import styles from './styles.module.css';
 
-interface ListItem {
-	id: string;
-	documentValue: string;
-	documentAmount: number;
-	settledAmount: number;
-	balanceAmount: number;
-	transactionDate: string;
-	lastEditedDate: string;
-	currency: string;
-	documentNo: string;
-	accountType: string;
-	accMode: string;
-	notPostedSettlementIds: Array<number>;
-	ledCurrency: string;
-}
-
-interface DataInterface {
-	list: ListItem[];
-	pageNo: number;
-	totalRecords: number;
-}
-
 function CustomTable({
 	apiData = {},
 	onPageChange,
@@ -46,12 +24,12 @@ function CustomTable({
 	setCheckedRows,
 	showFooter = true,
 	source = '',
-}: any) {
+}) {
 	const {
 		list = [],
 		pageNo = 1,
 		totalRecords = 0,
-	} = (apiData as DataInterface) || {};
+	} = apiData || {};
 
 	return (
 		<div className={styles.table}>

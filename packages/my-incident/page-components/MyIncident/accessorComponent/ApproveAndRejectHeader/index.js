@@ -5,17 +5,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-interface RowInterface {
-	status?: string;
-	updatedBy?: { name?: string };
-	remark?: string;
-	updatedAt?: Date;
-	data?: object;
-}
-interface Props {
-	row?: RowInterface;
-}
-function ApproveAndRejectHeader({ row = {} }: Props) {
+function ApproveAndRejectHeader({ row = {} }) {
 	const { status, updatedBy, updatedAt, remark } = row || {};
 
 	return (

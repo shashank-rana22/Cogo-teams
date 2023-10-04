@@ -9,16 +9,11 @@ import Layout from '../Air/commons/Layout';
 import filterControls from './filter-controls';
 import styles from './styles.module.css';
 
-interface Props {
-	setFilters: Function;
-	filters: object;
-}
-
-function Filters({ setFilters = () => {}, filters = {} }:Props) {
+function Filters({ setFilters = () => {}, filters = {} }) {
 	const [visible, setVisible] = useState(false);
 	const { control, handleSubmit, reset, setValue, formState:{ errors } } = useForm();
 
-	const onSubmit = (formValues: object) => {
+	const onSubmit = (formValues) => {
 		const finalValues = {};
 		Object.keys(formValues).forEach((key) => {
 			if (formValues[key] === '') {
@@ -27,7 +22,7 @@ function Filters({ setFilters = () => {}, filters = {} }:Props) {
 				finalValues[key] = formValues[key];
 			}
 		});
-		setFilters((prev?:object) => ({ ...prev, ...finalValues }));
+		setFilters((prev) => ({ ...prev, ...finalValues }));
 		setVisible(false);
 	};
 	const handleClear = () => {
@@ -60,7 +55,7 @@ function Filters({ setFilters = () => {}, filters = {} }:Props) {
 					themeType="secondary"
 					size="md"
 					className={styles.filter_svg}
-					onClick={() => setVisible((prev: boolean) => !prev)}
+					onClick={() => setVisible((prev) => !prev)}
 				>
 					Filters
 					{' '}

@@ -2,14 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-interface AllParams {
-	billId?: number;
-	billNumber?: number;
-	orgId?: number;
-}
-
 const useGetBill = (allParams = {}) => {
-	const { ...params }: AllParams = allParams || {};
+	const { ...params } = allParams || {};
 
 	const [{ data, loading: apiLoading }, trigger] = useRequestBf(
 		{

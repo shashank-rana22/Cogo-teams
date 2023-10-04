@@ -4,20 +4,7 @@ import { useState } from 'react';
 
 import FinanceRejectContent from './FinanceRejectContent';
 
-type Itemdata = {
-	id?: string;
-	invoiceStatus?: string;
-	entityCode?: string;
-	daysLeftForAutoIrnGeneration?: string;
-	isFinalPosted?:boolean;
-	invoiceType?:string;
-};
-interface IRNGeneration {
-	itemData?: Itemdata;
-	refetch?: Function;
-}
-
-function IRNGenerate({ itemData = {}, refetch = () => {} }: IRNGeneration) {
+function IRNGenerate({ itemData = {}, refetch = () => {} }) {
 	const [visible, setVisible] = useState(false);
 
 	const rest = {

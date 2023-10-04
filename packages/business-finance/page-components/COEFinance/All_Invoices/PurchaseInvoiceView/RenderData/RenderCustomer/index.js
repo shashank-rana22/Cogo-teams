@@ -1,17 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import React from 'react';
 
-interface ItemProps {
-	organizationName:string,
-}
-interface Props {
-	itemData:ItemProps;
-	field:{
-		key :string
-	}
-}
-
-const renderCustomer = ({ itemData, field }:Props) => {
+const renderCustomer = ({ itemData, field }) => {
 	const {	organizationName = '' } = itemData || {};
 
 	return (

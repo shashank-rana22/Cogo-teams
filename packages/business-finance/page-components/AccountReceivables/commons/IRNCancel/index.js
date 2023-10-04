@@ -11,24 +11,7 @@ import styles from './styles.module.css';
 
 const TIME_VALUE = 86400000;
 
-type InvoiceAdditionals = {
-	reqCancelReason?:string
-};
-
-type ItemData = {
-	id?: string;
-	invoiceStatus?: string;
-	entityCode?: number;
-	irnGeneratedAt?: string;
-	isRevoked?: boolean;
-	invoiceAdditionals?: InvoiceAdditionals
-};
-interface INRCancel {
-	itemData?: ItemData;
-	refetch?: Function;
-}
-
-function IRNCancel({ itemData, refetch }: INRCancel) {
+function IRNCancel({ itemData, refetch }) {
 	const [showCancellationModal, setShowCancellationModal] = useState(false);
 	const [show, setShow] = useState(false);
 

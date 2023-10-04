@@ -3,24 +3,13 @@ import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeat
 import CancelEinvoice from './CancellationMapping/CancelEinvoice';
 import CancelIrn from './CancellationMapping/CancelIrn';
 
-type Item = {
-	entityCode?: number;
-};
-interface CancelModal {
-	itemData?: Item;
-	showCancellationModal?: boolean;
-	setShowCancellationModal?: Function;
-	irnLabel?: string;
-	refetch?: Function;
-}
-
 function CancellationModal({
 	itemData,
 	showCancellationModal,
 	setShowCancellationModal,
 	irnLabel,
 	refetch,
-}: CancelModal) {
+}) {
 	const { entityCode } = itemData || {};
 
 	const CANCEL_IRN = ENTITY_FEATURE_MAPPING[entityCode]?.feature_supported?.includes('cancel_irn');

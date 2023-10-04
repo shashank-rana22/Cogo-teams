@@ -4,19 +4,12 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface InvoiceModalParams {
-	uploadInvoice?: boolean;
-	setUploadInvoice?: (p: boolean) => void;
-	uploadEInvoice?: Function;
-	loading?: boolean;
-}
-
 function InvoiceModal({
 	uploadInvoice,
 	setUploadInvoice,
 	uploadEInvoice,
 	loading,
-}: InvoiceModalParams) {
+}) {
 	const {
 		handleSubmit,
 		control,

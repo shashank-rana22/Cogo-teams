@@ -1,28 +1,10 @@
 import { Placeholder } from '@cogoport/components';
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import RenderRibbon from '../../COEFinance/All_Invoices/PurchaseInvoiceView/RenderData/RenderRibbon';
-import { FieldType, FunctionObjects, ConfigType } from '../Interfaces/index';
 
 import getValue from './getValue';
 import styles from './styles.module.css';
-
-interface ItemTypes {
-	objectId?: string;
-}
-export interface Props {
-	fields: FieldType[];
-	itemStyles?: React.CSSProperties;
-	singleitem?: ItemTypes;
-	functions?: FunctionObjects;
-	config: ConfigType;
-	isMobile?: boolean;
-	loading?: boolean;
-	subActiveTab?: string;
-	width?: string;
-	rowStyle?:string;
-	viewId?:null
-}
 
 function CardColumn({
 	fields,
@@ -36,7 +18,7 @@ function CardColumn({
 	width,
 	rowStyle,
 	viewId,
-}: Props) {
+}) {
 	const { clickable } = config;
 	const tableWidth = { minWidth: width } || {};
 	let className = styles.row;
@@ -65,7 +47,7 @@ function CardColumn({
 								'--span' : field.span || 1,
 								width    : `${((field.span || 1) * (100 / 12))}px`,
 								...itemStyle,
-							} as React.CSSProperties}
+							}}
 						>
 							{isMobile && (
 								<div className={styles.tablelabel}>{field.label}</div>
@@ -74,7 +56,7 @@ function CardColumn({
 								<Placeholder />
 							) : (
 								<div className={styles.flex}>
-									{getValue(singleitem, field, functions, '-') as ReactNode}
+									{getValue(singleitem, field, functions, '-')}
 								</div>
 							)}
 						</div>

@@ -1,12 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-interface RefreshInterface {
-	id?: string,
-	refetch?: Function
-}
-
-const useGetRefresh = ({ id, refetch }: RefreshInterface) => {
+const useGetRefresh = ({ id, refetch }) => {
 	const [
 		{ data, loading },
 		trigger,

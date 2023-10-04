@@ -3,13 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface SortProps {
-	sortBy: string;
-	setFilters: React.Dispatch<React.SetStateAction<{}>>;
-	filters: { sortType? :string };
-}
-
-function Sort({ sortBy, filters, setFilters }: SortProps) {
+function Sort({ sortBy, filters, setFilters }) {
 	return (
 		<div className={styles.sorticons}>
 			<IcMArrowRotateUp
