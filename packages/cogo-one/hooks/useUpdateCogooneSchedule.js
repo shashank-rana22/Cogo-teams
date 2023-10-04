@@ -8,7 +8,6 @@ const useUpdateCogooneSchedule = ({
 	handleClose = () => {},
 	getEvents = () => {},
 	month = '',
-	handleUpdatedState = () => {},
 	activeTab = '',
 	handleCallApi = () => {},
 }) => {
@@ -27,7 +26,6 @@ const useUpdateCogooneSchedule = ({
 			});
 			handleClose();
 			await getEvents({ startDate, endDate });
-			handleUpdatedState();
 			if (activeTab === 'calendars') {
 				handleCallApi();
 			}

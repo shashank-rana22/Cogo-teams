@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function ActionModal({
 	actionModal = {}, getEvents = () => {},
-	month = '', handleClose = () => {}, handleUpdatedState = () => {}, activeTab = '', handleCallApi = () => {},
+	month = '', handleClose = () => {}, activeTab = '', handleCallApi = () => {},
 }) {
 	const { status = false, value = {}, actionStatus = '' } = actionModal || {};
 	const { category = '', subject = '', schedule_id = '', id = '' } = value || {};
@@ -42,7 +42,6 @@ function ActionModal({
 		handleClose,
 		getEvents,
 		month,
-		handleUpdatedState,
 		activeTab,
 		handleCallApi,
 	});

@@ -46,10 +46,6 @@ function CustomCard({ event = {} }) {
 	const firstEvent = [firstTwoEvents?.[GLOBAL_CONSTANTS.zeroth_index]];
 	const moreCount = eventsList.length - MORE_THEN;
 
-	if (isEmpty(eventsList)) {
-		return <div>hello</div>;
-	}
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
