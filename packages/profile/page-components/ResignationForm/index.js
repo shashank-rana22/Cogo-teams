@@ -10,7 +10,7 @@ function ResignationForm() {
 	const {
 		data,
 		refetch = () => {}, loading = false,
-	} = useGetEmployeeApplicationProcessDetails(router.query.employee_id);
+	} = useGetEmployeeApplicationProcessDetails(router.query?.employee_id);
 
 	const { application_exist } = data || {};
 

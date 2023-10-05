@@ -28,7 +28,7 @@ function EducationDetails({ data = {}, loading = false }) {
 				{
 					!isEmpty(employee_education_details) ? (
 						<div className={styles.info_container}>
-							{info.map(({ heading, details }) => (
+							{info?.map(({ heading, details }) => (
 								<DetailsCard
 									heading={heading}
 									details={details}
