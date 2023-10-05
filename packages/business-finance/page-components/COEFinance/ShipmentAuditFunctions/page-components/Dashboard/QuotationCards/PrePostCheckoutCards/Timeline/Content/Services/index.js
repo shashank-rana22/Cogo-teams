@@ -58,7 +58,8 @@ export default function Services(
 						</div>
 						<div>
 							{getFormatAmount(servicesFromBackend?.[service]?.[GLOBAL_CONSTANTS.zeroth_index]
-								?.grandTotal, 'INR')}
+								?.grandTotal, servicesFromBackend?.[service]?.[GLOBAL_CONSTANTS.zeroth_index]
+								?.currency || 'INR')}
 						</div>
 					</div>
 				</div>

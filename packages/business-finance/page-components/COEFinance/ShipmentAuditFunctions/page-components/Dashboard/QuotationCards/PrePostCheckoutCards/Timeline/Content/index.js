@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import React, { useState } from 'react';
 
 import List from './ItemList';
@@ -67,7 +68,13 @@ export default function Content({
 										Modified At
 									</div>
 									<div className={styles.modify_content}>
-										{item?.modifiedAt}
+										{formatDate({
+											date       : item?.modifiedAt,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+											// timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+											formatType : 'date',
+											// separator  : 'T',
+										})}
 									</div>
 								</div>
 							</div>
