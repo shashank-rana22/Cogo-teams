@@ -14,6 +14,7 @@ pipeline {
         ECR_URL = credentials('aws-dev-ecr-url')
         SERVER_NAME = ''
         SERVER_IP = ''
+        exitCode = 0
     }
     
     options {
@@ -46,7 +47,7 @@ pipeline {
                     lockFile = "/home/${SERVER_NAME}/.admin.lock"
                     // Use SSH to check if the lock file exists
                     def sshCommand = "ssh -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} test -e ${lockFile}"
-                    def exitCode = sh(script: sshCommand, returnStatus: true)
+                    exitCode = sh(script: sshCommand, returnStatus: true)
                     echo "${exitCode}"
                     if (exitCode == 1) {
                      sh "ssh -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} touch ${lockFile}"
@@ -119,7 +120,10 @@ pipeline {
     post{//remove lock
         always{
             script{
-                sh "ssh -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} rm /home/${SERVER_NAME}/.admin.lock"
+                if(exitCode = 0)
+                {
+                    sh "ssh -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} rm /home/${SERVER_NAME}/.admin.lock"
+                }
             }
         }
     }
