@@ -12,12 +12,16 @@ const useGetEmployeeDetails = (user_id = '') => {
 	const getApplicationDetails = useCallback(
 		() => {
 			try {
-				trigger({
-					params: {
-						employee_user_id    : user_id,
-						action_performed_by : user_id ? 'hrbp' : '',
-					},
-				});
+				if (!user_id) {
+					trigger();
+				} else {
+					trigger({
+						params: {
+							employee_user_id    : user_id,
+							action_performed_by : 'hrbp',
+						},
+					});
+				}
 			} catch (error) {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}

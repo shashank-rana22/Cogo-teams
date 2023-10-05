@@ -58,8 +58,6 @@ function ResignationFormLanding({ refetch = () => {} }) {
 			email                : values?.personal_email,
 			last_working_day     : values?.date,
 			terms_and_conditions : TERMS_AND_CONDITIONS,
-			employee_user_id     : '',
-			action_performed_by  : '',
 		};
 
 		if (router.query?.employee_id) {
