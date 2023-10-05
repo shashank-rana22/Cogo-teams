@@ -12,16 +12,14 @@ const useGetEmployeeApplicationProcessDetails = (user_id = '') => {
 	const getEmployeeApplicationProcessDetails = useCallback(
 		() => {
 			try {
-				if (!user_id) {
-					trigger();
-				} else {
-					trigger({
-						params: {
-							employee_user_id    : user_id,
-							action_performed_by : 'hrbp',
-						},
-					});
-				}
+				const params = !user_id ? {} : {
+					params: {
+						employee_user_id    : user_id,
+						action_performed_by : 'hrbp',
+					},
+				};
+
+				trigger(params);
 			} catch (error) {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
