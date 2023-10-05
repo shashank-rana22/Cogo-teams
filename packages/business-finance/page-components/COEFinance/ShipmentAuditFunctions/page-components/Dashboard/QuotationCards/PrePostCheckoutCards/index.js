@@ -14,6 +14,7 @@ function PrePostCheckoutCards({
 	toggleAccordion,
 	setAccordionState = () => {},
 	category,
+	getPrePostShipmentQuotes,
 }) {
 	return (
 		<div style={{ width: '100%' }}>
@@ -35,6 +36,7 @@ function PrePostCheckoutCards({
 							toggleAccordion={toggleAccordion}
 							setAccordionState={setAccordionState}
 							category={category}
+							getPrePostShipmentQuotes={getPrePostShipmentQuotes}
 						/>
 					)}
 			</div>

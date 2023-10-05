@@ -3,14 +3,10 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import React, { useState } from 'react';
 
-import RemarkModal from '../../../../../../commons/RemarkModal';
+// import RemarkModal from '../../../../../../commons/RemarkModal';
 import getServiceColumns from '../../../../../../configurations/getServiceColumns';
 
-// import RemarkModal from '../../../../../../commons/RemarkModal';
-// import List from './ItemList';
-// import RemarkModal from './RemarkModal';
-
-// import RemarkModal from './RemarkModal';
+import RemarkModal from './RemarkModal';
 import Services from './Services';
 import styles from './styles.module.css';
 
@@ -18,12 +14,11 @@ const NEXT = 1;
 const TABLE_COLUMNS = getServiceColumns();
 
 export default function Content({
-	// data,
-	// loading,
 	services,
 	currentKey,
 	accordionState,
 	toggleAccordion,
+	getPrePostShipmentQuotes,
 }) {
 	const keys = Object.keys(accordionState);
 	const nextIndex = keys.indexOf(currentKey) + NEXT;
@@ -36,6 +31,7 @@ export default function Content({
 	const handleServiceClick = (service) => {
 		setActiveService(service);
 	};
+	// console.log({ services });
 	return (
 		<>
 			<div className={styles.service_heading}>
@@ -56,7 +52,7 @@ export default function Content({
 			Array.isArray(services?.[activeService])
 			&& ((activeService?.includes('service') || activeService?.includes('platform_fee')))
 				? services?.[activeService]?.map((item) => (
-					<div key={item?.id}>
+					<div key={item?.id} className={styles.quotation}>
 						<div className={styles.table}>
 							<Table columns={TABLE_COLUMNS} data={item?.lineItems || []} />
 						</div>
@@ -88,52 +84,58 @@ export default function Content({
 									</div>
 								</div>
 							)
-							: (
+							: null}
+
+						{(!item?.modifiedBy && item?.quotationState !== 'APPROVED') ? (
+							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+								<div />
 								<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-									<div />
-									<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-										<Button
-											size="md"
-											themeType="secondary"
-											style={{ marginRight: '10px' }}
-											onClick={() => { setQueryModalShow(true); setButtonClicked('Query'); }}
-										>
-											Raise Query
-										</Button>
+									<Button
+										size="md"
+										themeType="secondary"
+										style={{ marginRight: '10px' }}
+										onClick={() => { setQueryModalShow(true); setButtonClicked('Query'); }}
+									>
+										Raise Query
+									</Button>
 
-										<RemarkModal
-											remarkValue={remarkValue}
-											setRemarkValue={setRemarkValue}
-											queryModalShow={queryModalShow}
-											setQueryModalShow={setQueryModalShow}
-											buttonClicked={buttonClicked}
-											setButtonClicked={setButtonClicked}
-											toggleAccordion={toggleAccordion}
-											currentKey={currentKey}
-											nextKey={nextItem}
-										/>
-										<Button
-											size="md"
-											themeType="primary"
-											onClick={() => { setQueryModalShow(true); setButtonClicked('Accept'); }}
-										>
-											Accept
-										</Button>
+									<RemarkModal
+										remarkValue={remarkValue}
+										setRemarkValue={setRemarkValue}
+										queryModalShow={queryModalShow}
+										setQueryModalShow={setQueryModalShow}
+										buttonClicked={buttonClicked}
+										setButtonClicked={setButtonClicked}
+										toggleAccordion={toggleAccordion}
+										currentKey={currentKey}
+										nextKey={nextItem}
+										item={item}
+										getPrePostShipmentQuotes={getPrePostShipmentQuotes}
+									/>
+									<Button
+										size="md"
+										themeType="primary"
+										onClick={() => { setQueryModalShow(true); setButtonClicked('Accept'); }}
+									>
+										Accept
+									</Button>
 
-										<RemarkModal
-											remarkValue={remarkValue}
-											setRemarkValue={setRemarkValue}
-											queryModalShow={queryModalShow}
-											setQueryModalShow={setQueryModalShow}
-											buttonClicked={buttonClicked}
-											setButtonClicked={setButtonClicked}
-											toggleAccordion={toggleAccordion}
-											currentKey={currentKey}
-											nextKey={nextItem}
-										/>
-									</div>
+									<RemarkModal
+										remarkValue={remarkValue}
+										setRemarkValue={setRemarkValue}
+										queryModalShow={queryModalShow}
+										setQueryModalShow={setQueryModalShow}
+										buttonClicked={buttonClicked}
+										setButtonClicked={setButtonClicked}
+										toggleAccordion={toggleAccordion}
+										currentKey={currentKey}
+										nextKey={nextItem}
+										item={item}
+										getPrePostShipmentQuotes={getPrePostShipmentQuotes}
+									/>
 								</div>
-							)}
+							</div>
+						) : null}
 
 					</div>
 				))

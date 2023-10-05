@@ -1,6 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 // import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 // import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -8,6 +9,7 @@ import Content from './Content';
 import styles from './styles.module.css';
 
 const SLICE_LENGTH = 2;
+const ZERO_VALUE = 0;
 
 export default function Timeline({
 	loading = false,
@@ -18,10 +20,11 @@ export default function Timeline({
 	toggleAccordion,
 	// setAccordionState,
 	category,
+	getPrePostShipmentQuotes,
 }) {
 	const isOpen = accordionState[`${category}_${title}`];
 	const currentKey = `${category}_${title}`;
-
+	// console.log({ title });
 	return (
 		<div className={styles.custom_accordion}>
 			{loading ? <Placeholder /> : (
@@ -31,25 +34,29 @@ export default function Timeline({
 							{startCase(title.slice(SLICE_LENGTH))}
 						</div>
 
-						{/* <div className={`${isOpen ? styles.nothing : styles.other_title}`}>
-							<div className={styles.regular}>Income : </div>
-							<div>
-								{formatAmount({
-									amount   : income,
-									currency : 'INR',
-									options  : {
-										currencyDisplay : 'code',
-										style           : 'currency',
-									},
-								})}
+						{!title.includes('MODIFIED') && (
+							<div style={{ display: 'flex', width: '50%', justifyContent: 'space-between' }}>
+								<div className={`${isOpen ? styles.nothing : styles.other_title}`}>
+									<div className={styles.regular}>Income : </div>
+									<div>
+										{formatAmount({
+											amount   : services?.grandTotal || ZERO_VALUE,
+											currency : services?.currency === 'null' ? 'INR' : services?.currency,
+											options  : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+											},
+										})}
+									</div>
+								</div>
+								{/* <div className={`${isOpen ? styles.nothing : styles.other_title}`}>
+									<div className={styles.regular}>Profitability :</div>
+									<div className={`${PROFITABILITY > ZERO_VALUE ? styles.green : styles.red}`}>
+										10
+									</div>
+								</div> */}
 							</div>
-						</div>
-						<div className={`${isOpen ? styles.nothing : styles.other_title}`}>
-							<div className={styles.regular}>Profitability :</div>
-							<div className={`${profitability > ZERO_VALUE ? styles.green : styles.red}`}>
-								{profitability}
-							</div>
-						</div> */}
+						)}
 						{isOpen ? (
 							<IcMArrowRotateUp
 								style={{ cursor: 'pointer' }}
@@ -64,30 +71,31 @@ export default function Timeline({
 							)}
 					</div>
 					<div className={`${!isOpen ? styles.nothing : styles.content}`}>
-						{/* <div style={{ display: 'flex', alignItems: 'center', marginBottom: '24px' }}>
-							<div className={`${!isOpen ? styles.nothing : styles.margin}`}>
-								<div className={styles.regular}>Income </div>
-								<div>
-									{formatAmount({
-										amount   : income,
-										currency : 'INR',
-										options  : {
-											currencyDisplay : 'code',
-											style           : 'currency',
-										},
-									})}
+						{!title.includes('MODIFIED')
+						&& (
+							<div style={{ display: 'flex', alignItems: 'center', marginBottom: '24px' }}>
+								<div className={`${!isOpen ? styles.nothing : styles.margin}`}>
+									<div className={styles.regular}>Income </div>
+									<div>
+										{formatAmount({
+											amount   : services?.grandTotal || ZERO_VALUE,
+											currency : services?.currency === 'null' ? 'INR' : services?.currency,
+											options  : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+											},
+										})}
+									</div>
 								</div>
+								{/* <div className={`${!isOpen ? styles.nothing : styles.margin}`}>
+									<div className={styles.regular}>Profitability </div>
+									<div className={`${PROFITABILITY > ZERO_VALUE ? styles.green : styles.red}`}>
+										10
+									</div>
+								</div> */}
 							</div>
-							<div className={`${!isOpen ? styles.nothing : styles.margin}`}>
-								<div className={styles.regular}>Profitability </div>
-								<div className={`${profitability > ZERO_VALUE
-									? styles.green : styles.red}`}
-								>
-									{profitability}
+						)}
 
-								</div>
-							</div>
-						</div> */}
 						<Content
 							data={data}
 							loading={loading}
@@ -95,6 +103,7 @@ export default function Timeline({
 							currentKey={currentKey}
 							toggleAccordion={toggleAccordion}
 							accordionState={accordionState}
+							getPrePostShipmentQuotes={getPrePostShipmentQuotes}
 						/>
 
 					</div>

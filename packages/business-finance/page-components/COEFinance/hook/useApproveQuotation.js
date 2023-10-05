@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
@@ -18,6 +19,7 @@ const useApproveQuotation = ({
 	id = '',
 	status = '',
 	remarks = '',
+	source = 'Quotation',
 }) => {
 	const [{ loading = false }, trigger] = useRequestBf(
 		{
@@ -28,15 +30,18 @@ const useApproveQuotation = ({
 		{ manual: true },
 	);
 
-	const approveQuotation = useCallback(async () => {
+	const approveQuotation = useCallback(async (cb, refetch) => {
 		try {
 			await trigger({
 				data: getParams({ id, status, remarks }),
 			});
+			Toast.success(`${source} updated succesfully`);
+			cb();
+			refetch();
 		} catch (error) {
 			toastApiError(error);
 		}
-	}, [trigger, id, status, remarks]);
+	}, [trigger, id, status, remarks, source]);
 
 	return {
 		approveQuotation,

@@ -35,7 +35,7 @@
 }
 
 .modification {
-	margin-right: 16px;
+	margin-right: 20px;
 	margin-bottom: 10px;
 }
 
@@ -101,4 +101,8 @@
 			background: #2d2d2d;
 		}
 	}
+}
+
+.quotation {
+	margin-bottom: 14px;
 }

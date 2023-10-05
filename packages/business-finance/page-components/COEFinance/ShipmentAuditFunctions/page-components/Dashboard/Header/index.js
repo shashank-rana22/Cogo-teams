@@ -97,6 +97,7 @@ function Header({ jobId = '' }) {
 						toggleAccordion={toggleAccordion}
 						setAccordionState={setAccordionState}
 						category="SELL"
+						getPrePostShipmentQuotes={getPrePostShipmentQuotes}
 					/>
 					<PrePostCheckoutCards
 						data={quoteData?.BUY}
@@ -106,6 +107,7 @@ function Header({ jobId = '' }) {
 						toggleAccordion={toggleAccordion}
 						setAccordionState={setAccordionState}
 						category="BUY"
+						getPrePostShipmentQuotes={getPrePostShipmentQuotes}
 					/>
 				</div>
 

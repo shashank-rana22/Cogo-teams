@@ -114,11 +114,17 @@ const getFinancialCloseColumns = ({
 						<div className={styles.fix_layout}>
 							{ShowOverflowingNumber(dataEstimated, OVERFLOW_LENGTH, currency) }
 						</div>
-						<RenderTableData data={dataOperational} profit={dataProfitPercent} currency={currency} />
+						<RenderTableData
+							data={dataOperational}
+							profit={dataProfitPercent}
+							currency={currency}
+							category="BUY"
+						/>
 						<RenderTableData
 							data={dataFinancial}
 							profit={financeProfit}
 							currency={currency}
+							category="BUY"
 						/>
 					</div>
 				);

@@ -15,6 +15,7 @@ function GenerateColumn({
 	setAccordionState,
 	category,
 	accordionState,
+	getPrePostShipmentQuotes,
 }) {
 	return Object.keys(data).map((key, index) => (
 		<div key={key}>
@@ -51,6 +52,7 @@ function GenerateColumn({
 					toggleAccordion={toggleAccordion}
 					setAccordionState={setAccordionState}
 					category={category}
+					getPrePostShipmentQuotes={getPrePostShipmentQuotes}
 				/>
 			</div>
 		</div>
