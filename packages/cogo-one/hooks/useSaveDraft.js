@@ -42,7 +42,7 @@ const formatMailDraftMessage = ({
 		},
 		...(showOrgSpecificMail ? {
 			custom_subject : emailState?.customSubject || '',
-			org_id         : emailState?.orgId || '',
+			orgData        : emailState?.orgData || {},
 		} : {}),
 	},
 });

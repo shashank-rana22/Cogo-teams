@@ -5,8 +5,14 @@ import { useEffect, useCallback, useState } from 'react';
 
 const PAGE_LIMIT = 100;
 
-const getPayload = ({ orgId = '', userId = '', searchQuery = '' }) => ({
+const API_MAPPING = {
+	organizations      : 'list_organization_users',
+	lead_organizations : 'list_lead_organization_users',
+};
+
+const getPayload = ({ orgId = '', userId = '', searchQuery = '', orgType = '' }) => ({
 	filters: {
+		status          : orgType === 'list_organization_users' ? 'active' : undefined,
 		organization_id : orgId,
 		user_id         : userId || undefined,
 		q               : searchQuery || undefined,
@@ -14,27 +20,30 @@ const getPayload = ({ orgId = '', userId = '', searchQuery = '' }) => ({
 	page_limit: PAGE_LIMIT,
 });
 
-const useGetOrgUsers = ({ orgId = '', userId = '' }) => {
+const useGetOrgUsers = ({ orgId = '', userId = '', orgType = '' }) => {
 	const [query, setQuery] = useState('');
 	const [initialLoad, setInitialLoad] = useState(true);
 
 	const { query: searchQuery, debounceQuery } = useDebounceQuery();
 
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/list_organization_users',
+		url    : `/${API_MAPPING[orgType] || ''}`,
 		method : 'get',
 	}, { manual: true });
 
 	const fetchUser = useCallback(async () => {
 		try {
+			if (!API_MAPPING[orgType]) {
+				return;
+			}
 			await trigger({
-				params: getPayload({ orgId, userId, searchQuery }),
+				params: getPayload({ orgId, userId, searchQuery, orgType }),
 			});
 			setInitialLoad(false);
 		} catch (error) {
 			console.error(error);
 		}
-	}, [orgId, searchQuery, trigger, userId]);
+	}, [orgId, orgType, searchQuery, trigger, userId]);
 
 	useEffect(() => {
 		if (orgId) {

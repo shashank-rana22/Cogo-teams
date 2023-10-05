@@ -15,7 +15,7 @@ function CustomSelect({
 		labelKey = 'label',
 		onChange = () => {},
 		value = '',
-		renderLabel = () => {},
+		renderLabel = null,
 		disabled = false,
 		onSearch = () => {},
 		optionsHeader = null,
@@ -40,6 +40,7 @@ function CustomSelect({
 		const handleClickOutside = (e) => {
 			if (rootRef.current && !rootRef.current.contains(e.target)) {
 				setIsOpen(false);
+				onSearch('');
 			}
 		};
 
@@ -48,7 +49,7 @@ function CustomSelect({
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
-	}, [rootRef]);
+	}, [onSearch, rootRef]);
 
 	return (
 		<div
@@ -87,7 +88,7 @@ function CustomSelect({
 										<li>
 											<span className={styles.list_item}>No Results</span>
 										</li>
-									) : options.map(
+									) : (options || [])?.map(
 										(option) => (
 											<li
 												role="option"
@@ -96,6 +97,7 @@ function CustomSelect({
 												onClick={() => {
 													onChange(option?.[valueKey], option);
 													setIsOpen(false);
+													onSearch('');
 												}}
 												aria-selected={option?.[valueKey] === value}
 											>
