@@ -14,7 +14,7 @@ import KycStatusTabs from './KycStatusTabs';
 import styles from './styles.module.css';
 import TabularSection from './TabularSection';
 
-const PAGE_LEN = 10;
+const PAGE_LEN = 0;
 
 function ListVendors() {
 	const router = useRouter();
@@ -153,7 +153,7 @@ function ListVendors() {
 			{list?.length > PAGE_LEN && (
 				<div className={styles.pagination_container}>
 					<Pagination
-						type="number"
+						type="table"
 						currentPage={params?.page}
 						totalItems={total_count}
 						pageSize={pageLimit}
