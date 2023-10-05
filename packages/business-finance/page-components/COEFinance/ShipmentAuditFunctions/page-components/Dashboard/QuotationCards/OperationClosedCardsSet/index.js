@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 function OperationClosedCardsSet({
 	job_id = '',
+	setQuotationsData = () => {},
 }) {
 	const {
 		data: taskData = {},
@@ -26,7 +27,9 @@ function OperationClosedCardsSet({
 			});
 			setOperationCardOpen(INITIAL_STATE);
 		}
-	}, [taskData]);
+
+		setQuotationsData((prev) => ({ ...prev, oprClosedData: taskData }));
+	}, [taskData, setQuotationsData]);
 	return (
 		<div className={styles.task_specific_container}>
 			<OperationalClosedCards

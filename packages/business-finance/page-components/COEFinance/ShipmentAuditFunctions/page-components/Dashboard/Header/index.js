@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 import useGetPrePostShipmentQuotation from '../../../../hook/useGetPrePostShipmentQuotation';
 import useUpdateJobAuditStatus from '../../../../hook/useUpdateJobAuditStatus';
+import getApproveJobAuditBttnCondition from '../../../utils/getApproveJobAuditButtonCondition';
 import FinanceClosedCardsSet from '../QuotationCards/FinanceClosedCardsSet';
 import OperationClosedCardsSet from '../QuotationCards/OperationClosedCardsSet';
 import PrePostCheckoutCards from '../QuotationCards/PrePostCheckoutCards';
@@ -13,6 +14,11 @@ import styles from './styles.module.css';
 
 function Header({ jobId = '' }) {
 	const { query: { active_tab = '', job_id = '' }, push = () => {} } = useRouter();
+	const [quotationsData, setQuotationsData] = useState({
+		prePostCheckoutData : {},
+		oprClosedData       : {},
+		financialClosedData : {},
+	});
 	const {
 		data: quoteData = {},
 		loading: quoteLoading = true,
@@ -27,6 +33,8 @@ function Header({ jobId = '' }) {
 			});
 		});
 		setAccordionState(INITIAL_STATE);
+
+		setQuotationsData((prev) => ({ ...prev, prePostCheckoutData: quoteData }));
 	}, [quoteData]);
 
 	const toggleAccordion = (key) => {
@@ -45,6 +53,8 @@ function Header({ jobId = '' }) {
 	};
 
 	const { apiTrigger, loading } = useUpdateJobAuditStatus();
+
+	const { bttnDisableCondition } = getApproveJobAuditBttnCondition({ quotationsData });
 
 	return (
 		<div className={styles.main_container}>
@@ -67,6 +77,7 @@ function Header({ jobId = '' }) {
 						<Button
 							size="md"
 							themeType="primary"
+							disabled={!bttnDisableCondition || loading}
 							onClick={() => apiTrigger({ jobId, status: 'AUDITED' })}
 						>
 							Approve
@@ -97,10 +108,10 @@ function Header({ jobId = '' }) {
 					/>
 				</div>
 
-				<OperationClosedCardsSet job_id={job_id} />
+				<OperationClosedCardsSet job_id={job_id} setQuotationsData={setQuotationsData} />
 
 				{active_tab === 'financial_close' && (
-					<FinanceClosedCardsSet job_id={job_id} />
+					<FinanceClosedCardsSet job_id={job_id} setQuotationsData={setQuotationsData} />
 				)}
 			</div>
 		</div>

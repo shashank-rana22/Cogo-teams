@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 function FinanceClosedCardsSet({
 	job_id = '',
+	setQuotationsData = () => {},
 }) {
 	const {
 		data: taskData = {},
@@ -25,8 +26,11 @@ function FinanceClosedCardsSet({
 				});
 			});
 			setFinanceCardOpen(INITIAL_STATE);
+
+			setQuotationsData((prev) => ({ ...prev, financialClosedData: taskData }));
 		}
-	}, [taskData]);
+	}, [taskData, setQuotationsData]);
+
 	return (
 		<div className={styles.task_specific_container}>
 			<FinancialClosedCards
