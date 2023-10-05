@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 export default function Services(
 	{
 		activeService,
-		servicesFromBackend,
+		services,
 		handleServiceClick,
 		// firstService,
 		defaultSelectedService,
@@ -20,26 +20,29 @@ export default function Services(
 ) {
 	return (
 		<>
-			{Object.keys(servicesFromBackend).map((service) => (
-				<div
-					key={service}
-					role="presentation"
-					className={cl`${styles.services} ${
-						activeService === service ? styles.active : ''
-					}`}
-					onClick={() => {
-						if (activeService === service) {
-							handleServiceClick(defaultSelectedService);
-						} else {
-							handleServiceClick(service);
-						}
-					}}
-				>
-					{/* {console.log(servicesFromBackend?.[service]?.[0]?.grandTotal)} */}
-					<div>
-						<div className={styles.service_title}>
-							{startCase(service)}
-							{/* {console.log(startCase(service).substr(0, 10))}
+			{Object.keys(services).map((service) => (
+
+				service.includes('service') || service.includes('platform_fee')
+					? (
+						<div
+							key={service}
+							role="presentation"
+							className={cl`${styles.services} ${
+								activeService === service ? styles.active : ''
+							}`}
+							onClick={() => {
+								if (activeService === service) {
+									handleServiceClick(defaultSelectedService);
+								} else {
+									handleServiceClick(service);
+								}
+							}}
+						>
+							{/* {console.log(servicesFromBackend?.[service]?.[0]?.grandTotal)} */}
+							<div>
+								<div className={styles.service_title}>
+									{startCase(service)}
+									{/* {console.log(startCase(service).substr(0, 10))}
 							<Tooltip
 								content={(
 									<div>
@@ -54,14 +57,16 @@ export default function Services(
 										: startCase(service)) || '-'}
 								</div>
 							</Tooltip> */}
+								</div>
+								<div>
+									{getFormatAmount(services?.[service]?.[GLOBAL_CONSTANTS.zeroth_index]
+										?.grandTotal, services?.[service]?.[GLOBAL_CONSTANTS.zeroth_index]
+										?.currency || 'INR')}
+								</div>
+							</div>
 						</div>
-						<div>
-							{getFormatAmount(servicesFromBackend?.[service]?.[GLOBAL_CONSTANTS.zeroth_index]
-								?.grandTotal, servicesFromBackend?.[service]?.[GLOBAL_CONSTANTS.zeroth_index]
-								?.currency || 'INR')}
-						</div>
-					</div>
-				</div>
+					)
+					: null
 			))}
 
 		</>

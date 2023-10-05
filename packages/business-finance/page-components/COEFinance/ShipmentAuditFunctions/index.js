@@ -133,7 +133,7 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 					loading={loading}
 				/>
 
-				{!isEmpty(list) && list?.length > DEFAULT_PAGE_LIMIT
+				{!isEmpty(list) && list?.length >= DEFAULT_PAGE_LIMIT
 					? (
 						<Pagination
 							className={styles.pagination}

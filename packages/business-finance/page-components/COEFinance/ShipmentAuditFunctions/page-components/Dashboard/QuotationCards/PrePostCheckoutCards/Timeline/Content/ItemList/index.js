@@ -11,7 +11,7 @@ export default function List({
 	const TABLE_COLUMNS = getServiceColumns();
 	return (
 		<div className={styles.table}>
-			<Table columns={TABLE_COLUMNS} data={data.lineItems} />
+			<Table columns={TABLE_COLUMNS} data={data?.lineItems} />
 		</div>
 	);
 }

@@ -1,14 +1,21 @@
-import { Button } from '@cogoport/components';
+import { Table, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import React, { useState } from 'react';
 
-import List from './ItemList';
-import RemarkModal from './RemarkModal';
+import RemarkModal from '../../../../../../commons/RemarkModal';
+import getServiceColumns from '../../../../../../configurations/getServiceColumns';
+
+// import RemarkModal from '../../../../../../commons/RemarkModal';
+// import List from './ItemList';
+// import RemarkModal from './RemarkModal';
+
+// import RemarkModal from './RemarkModal';
 import Services from './Services';
 import styles from './styles.module.css';
 
 const NEXT = 1;
+const TABLE_COLUMNS = getServiceColumns();
 
 export default function Content({
 	// data,
@@ -37,7 +44,7 @@ export default function Content({
 				</div>
 				<div className={styles.service_component}>
 					<Services
-						servicesFromBackend={services}
+						services={services}
 						handleServiceClick={handleServiceClick}
 						activeService={activeService}
 						defaultSelectedService={defaultSelectedService}
@@ -45,88 +52,93 @@ export default function Content({
 				</div>
 			</div>
 
-			{services?.[activeService]?.map((item) => (
-				<div key={item.id}>
-					<div>
-						<List activeService={activeService} data={item} />
-					</div>
+			{
+			Array.isArray(services?.[activeService])
+			&& ((activeService?.includes('service') || activeService?.includes('platform_fee')))
+				? services?.[activeService]?.map((item) => (
+					<div key={item?.id}>
+						<div className={styles.table}>
+							<Table columns={TABLE_COLUMNS} data={item?.lineItems || []} />
+						</div>
 
-					{item?.modifiedBy
-						? (
-							<div style={{ display: 'flex' }}>
-								<div className={styles.modification}>
-									<div className={styles.modify_heading}>
-										Modified By
+						{item?.modifiedBy
+							? (
+								<div style={{ display: 'flex' }}>
+									<div className={styles.modification}>
+										<div className={styles.modify_heading}>
+											Modified By
+										</div>
+										<div className={styles.modify_content}>
+											{item?.modifiedBy}
+										</div>
 									</div>
-									<div className={styles.modify_content}>
-										{item?.modifiedBy}
-									</div>
-								</div>
-								<div className={styles.modification}>
-									<div className={styles.modify_heading}>
-										Modified At
-									</div>
-									<div className={styles.modify_content}>
-										{formatDate({
-											date       : item?.modifiedAt,
-											dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-											// timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-											formatType : 'date',
+									<div className={styles.modification}>
+										<div className={styles.modify_heading}>
+											Modified At
+										</div>
+										<div className={styles.modify_content}>
+											{formatDate({
+												date       : item?.modifiedAt,
+												dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+												// timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+												formatType : 'date',
 											// separator  : 'T',
-										})}
+											})}
+										</div>
 									</div>
 								</div>
-							</div>
-						)
-						: (
-							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-								<div />
+							)
+							: (
 								<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-									<Button
-										size="md"
-										themeType="secondary"
-										style={{ marginRight: '10px' }}
-										onClick={() => { setQueryModalShow(true); setButtonClicked('Query'); }}
-									>
-										Raise Query
-									</Button>
+									<div />
+									<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+										<Button
+											size="md"
+											themeType="secondary"
+											style={{ marginRight: '10px' }}
+											onClick={() => { setQueryModalShow(true); setButtonClicked('Query'); }}
+										>
+											Raise Query
+										</Button>
 
-									<RemarkModal
-										remarkValue={remarkValue}
-										setRemarkValue={setRemarkValue}
-										queryModalShow={queryModalShow}
-										setQueryModalShow={setQueryModalShow}
-										buttonClicked={buttonClicked}
-										setButtonClicked={setButtonClicked}
-										toggleAccordion={toggleAccordion}
-										currentKey={currentKey}
-										nextKey={nextItem}
-									/>
-									<Button
-										size="md"
-										themeType="primary"
-										onClick={() => { setQueryModalShow(true); setButtonClicked('Accept'); }}
-									>
-										Accept
-									</Button>
+										<RemarkModal
+											remarkValue={remarkValue}
+											setRemarkValue={setRemarkValue}
+											queryModalShow={queryModalShow}
+											setQueryModalShow={setQueryModalShow}
+											buttonClicked={buttonClicked}
+											setButtonClicked={setButtonClicked}
+											toggleAccordion={toggleAccordion}
+											currentKey={currentKey}
+											nextKey={nextItem}
+										/>
+										<Button
+											size="md"
+											themeType="primary"
+											onClick={() => { setQueryModalShow(true); setButtonClicked('Accept'); }}
+										>
+											Accept
+										</Button>
 
-									<RemarkModal
-										remarkValue={remarkValue}
-										setRemarkValue={setRemarkValue}
-										queryModalShow={queryModalShow}
-										setQueryModalShow={setQueryModalShow}
-										buttonClicked={buttonClicked}
-										setButtonClicked={setButtonClicked}
-										toggleAccordion={toggleAccordion}
-										currentKey={currentKey}
-										nextKey={nextItem}
-									/>
+										<RemarkModal
+											remarkValue={remarkValue}
+											setRemarkValue={setRemarkValue}
+											queryModalShow={queryModalShow}
+											setQueryModalShow={setQueryModalShow}
+											buttonClicked={buttonClicked}
+											setButtonClicked={setButtonClicked}
+											toggleAccordion={toggleAccordion}
+											currentKey={currentKey}
+											nextKey={nextItem}
+										/>
+									</div>
 								</div>
-							</div>
-						)}
+							)}
 
-				</div>
-			))}
+					</div>
+				))
+				: null
+		}
 		</>
 	);
 }
