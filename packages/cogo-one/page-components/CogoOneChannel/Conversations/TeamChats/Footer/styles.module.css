@@ -48,40 +48,6 @@
 	}
 }
 
-.flex_container {
-	display: flex;
-	align-items: center;
-}
-
-.tag_div {
-	max-width: 200px;
-	padding: 5px;
-	margin: 0 3px;
-	font-size: 12px;
-	color: #221f20;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	cursor: pointer;
-	user-select: none;
-	background: #f3fafa;
-	border-radius: 6px;
-}
-
-.suggestions_text {
-	font-size: 12px;
-	color: #bdbdbd;
-}
-
-.suggestions_div {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	min-height: 30px;
-	padding: 5px 0;
-	overflow-x: auto;
-	border-bottom: 1px solid #fbd1a6;
-}
-
 .disabled {
 	pointer-events: none;
 }

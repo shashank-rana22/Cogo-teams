@@ -10,7 +10,6 @@ import SendActions from './SendActions';
 import styles from './styles.module.css';
 
 function Footer({
-	suggestions = [],
 	hasPermissionToEdit = false,
 	activeTeamCard = {},
 	activeTab = {},
@@ -81,30 +80,7 @@ function Footer({
 				uploaderRef={uploaderRef}
 				hasPermissionToEdit={hasPermissionToEdit}
 			/>
-
 			<div className={cl`${styles.text_area_div} ${!hasPermissionToEdit ? styles.disabled : ''}`}>
-				{!isEmpty(suggestions) ? (
-					<div className={styles.suggestions_div}>
-						<div className={styles.flex_container}>
-							<div className={styles.suggestions_text}>
-								Suggestions:
-							</div>
-							{(suggestions || []).map((eachSuggestion) => (
-								<div
-									key={eachSuggestion}
-									className={styles.tag_div}
-									role="presentation"
-									style={{ cursor: (sendMessageLoading || !draftId) ? 'not-allowed' : 'pointer' }}
-									onClick={() => {
-										sendTeamsMessage({ draftMessage: eachSuggestion });
-									}}
-								>
-									{eachSuggestion}
-								</div>
-							))}
-						</div>
-					</div>
-				) : null}
 				<Textarea
 					rows={5}
 					placeholder={hasPermissionToEdit
