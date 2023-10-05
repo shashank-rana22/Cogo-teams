@@ -22,6 +22,7 @@ function Header({ jobId = '' }) {
 	const {
 		data: quoteData = {},
 		loading: quoteLoading = true,
+		getPrePostShipmentQuotes,
 	} = useGetPrePostShipmentQuotation({ jobId });
 
 	const [accordionState, setAccordionState] = useState({});
@@ -52,7 +53,7 @@ function Header({ jobId = '' }) {
 		}
 	};
 
-	const { apiTrigger, loading } = useUpdateJobAuditStatus();
+	const { apiTrigger, loading } = useUpdateJobAuditStatus({ getPrePostShipmentQuotes });
 
 	const { bttnDisableCondition } = getApproveJobAuditBttnCondition({ quotationsData });
 

@@ -4,7 +4,7 @@ import { useRequestBf } from '@cogoport/request';
 
 import toastApiError from '../../commons/toastApiError.ts';
 
-const useUpdateJobAuditStatus = () => {
+const useUpdateJobAuditStatus = ({ getPrePostShipmentQuotes = () => {} }) => {
 	// const { user_data: userData } = useSelector(({ profile }) => ({
 	// 	user_data: profile || {},
 	// }));
@@ -23,6 +23,7 @@ const useUpdateJobAuditStatus = () => {
 				data: { ...params },
 			});
 			Toast.success('Success');
+			getPrePostShipmentQuotes();
 		} catch (err) {
 			toastApiError(err);
 		}
