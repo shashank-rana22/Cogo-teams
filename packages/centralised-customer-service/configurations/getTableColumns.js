@@ -39,13 +39,13 @@ const getTableColumns = ({ slabData = [] }) => {
 	);
 
 	columns.push({
-		Header   : 'RELEASE TRIGGER',
-		id       : 'release_trigger',
-		accessor : ({ release_trigger = [] }) => {
-			if (isEmpty(release_trigger)) {
+		Header   : 'RELEASE TRIGGERS',
+		id       : 'release_triggers',
+		accessor : ({ release_triggers = [] }) => {
+			if (isEmpty(release_triggers)) {
 				return <div>Mark Shipment As Complete</div>;
 			}
-			return release_trigger?.map((trigger) => (
+			return release_triggers?.map((trigger) => (
 				<div key={trigger}>
 					{startCase(trigger)}
 				</div>

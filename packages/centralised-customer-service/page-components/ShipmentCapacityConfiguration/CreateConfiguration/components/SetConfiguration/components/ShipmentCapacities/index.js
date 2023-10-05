@@ -95,7 +95,7 @@ function ShipmentCapacities(props, ref) {
 							</div>
 						</div>
 
-						<div className={styles.trigger}>Release Trigger</div>
+						<div className={styles.trigger}>Release Triggers</div>
 
 					</div>
 
@@ -140,7 +140,7 @@ function ShipmentCapacities(props, ref) {
 
 								<div className={styles.trigger}>
 									<MultiselectController
-										name={`${service.value}-release_trigger`}
+										name={`${service.value}-release_triggers`}
 										control={control}
 										options={releaseTriggerOptions}
 										rules={{
@@ -148,10 +148,10 @@ function ShipmentCapacities(props, ref) {
 										}}
 									/>
 
-									{errors?.[`${service.value}-release_trigger`]?.message
+									{errors?.[`${service.value}-release_triggers`]?.message
 										? (
 											<p className={styles.err_msg}>
-												{errors?.[`${service.value}-release_trigger`]?.message}
+												{errors?.[`${service.value}-release_triggers`]?.message}
 											</p>
 										) : null}
 

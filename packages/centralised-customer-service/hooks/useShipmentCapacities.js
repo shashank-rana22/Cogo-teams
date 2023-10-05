@@ -21,7 +21,7 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 		registeredFieldNames?.forEach((fieldName) => {
 			unregister(fieldName);
 
-			if (fieldName.includes('release_trigger')) {
+			if (fieldName.includes('release_triggers')) {
 				setValue(fieldName, ['trigger']);
 			} else {
 				setValue(fieldName, '');
@@ -39,7 +39,7 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 			const filteredData = data.shipment_capacities?.filter((item) => (
 				[
 					item.service_type,
-					item.service_trade_type,
+					item.trade_type,
 					item.service_transit_type,
 				].filter(Boolean).join('-') === service.value)) || [];
 
@@ -57,8 +57,8 @@ const useShipmentCapacities = ({ data = {}, setActiveItem = () => {}, source = '
 
 				if (index === GLOBAL_CONSTANTS.zeroth_index) {
 					setValue(
-						`${item.service}-release_trigger`,
-						isEmpty(subItem.release_trigger) ? ['trigger'] : subItem.release_trigger,
+						`${item.service}-release_triggers`,
+						isEmpty(subItem.release_triggers) ? ['trigger'] : subItem.release_triggers,
 					);
 				}
 			});
