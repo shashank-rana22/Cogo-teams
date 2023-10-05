@@ -175,11 +175,11 @@ function ExecuteTask({
 		);
 	}
 
-	let isSeaway = false;
+	let isSeawayAndMarkConfirm = false;
 	if (task?.task === 'mark_confirmed'
 		&& primary_service?.bl_type === 'seaway'
 		&& task?.state === 'shipment_received') {
-		isSeaway = true;
+		isSeawayAndMarkConfirm = true;
 	}
 
 	return (
@@ -196,7 +196,7 @@ function ExecuteTask({
 			uiConfig={taskConfigData?.task_config?.ui_config?.[currentStep]}
 			selectedMail={selectedMail}
 			serviceIdMapping={serviceIdMapping}
-			isSeaway={isSeaway}
+			isSeawayAndMarkConfirm={isSeawayAndMarkConfirm}
 		/>
 	);
 }

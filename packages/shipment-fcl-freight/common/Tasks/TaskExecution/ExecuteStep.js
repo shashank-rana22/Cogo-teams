@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import useGetCommodityOptions from '../../../hooks/useGetCommodityOptions';
 
@@ -25,7 +25,7 @@ function ExecuteStep({
 	getApisData = {},
 	selectedMail = [],
 	serviceIdMapping = [],
-	isSeaway = false,
+	isSeawayAndMarkConfirm = false,
 }) {
 	const [showApprovalModal, setShowApprovalModal] = useState(false);
 	const [approvalChanges, setApprovalChanges] = useState({});
@@ -109,6 +109,12 @@ function ExecuteStep({
 			handleApiSubmit();
 		}
 	};
+	useEffect(() => {
+		if (isSeawayAndMarkConfirm) {
+			console.log('setvalue is called');
+			setValue('bl_type', 'seaway');
+		}
+	}, [isSeawayAndMarkConfirm, setValue]);
 
 	if (restrictTask) {
 		return (
@@ -136,7 +142,7 @@ function ExecuteStep({
 					showElements={showElements}
 					formValues={watch()}
 					shipment_id={task?.shipment_id}
-					isSeaway={isSeaway}
+					isSeawayAndMarkConfirm={isSeawayAndMarkConfirm}
 					setValue={setValue}
 				/>
 
