@@ -11,11 +11,14 @@ import styles from './styles.module.css';
 
 const LAST_INDEX = 1;
 
-function ListCard({ finalList = [], activeTab = '', actions = () => {} }) {
+function ListCard({
+	finalList = [], activeTab = '', actions = () => {},
+}) {
 	const { userId = '' } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
 
 	return (
 		<div>
+
 			{(finalList || []).map((singleEvent) => {
 				const {
 					subject = '',
@@ -29,7 +32,9 @@ function ListCard({ finalList = [], activeTab = '', actions = () => {} }) {
 					performed_by_id = '',
 					main_status,
 					status = '',
+					invite_link = 'gcwvdhjhgwu gfdgwhjdwj ydgbwjnk',
 				} = singleEvent || {};
+				const meetLink = invite_link;
 
 				const isOwner = userId === performed_by_id;
 				const checkStatus = activeTab === 'schedules' ? main_status : status;
@@ -74,6 +79,7 @@ function ListCard({ finalList = [], activeTab = '', actions = () => {} }) {
 				const isImportant = is_important && main_status !== 'completed';
 
 				return (
+
 					<div
 						className={cl`${styles.card}
               ${isImportant ? styles.important_event : styles.not_important_event}
@@ -83,7 +89,12 @@ function ListCard({ finalList = [], activeTab = '', actions = () => {} }) {
 					>
 						{category === 'meeting' ? (
 							<div className={styles.meeting}>
-								<Image src={GLOBAL_CONSTANTS.image_url.meetings} width={20} height={20} alt="logo" />
+								<Image
+									src={GLOBAL_CONSTANTS.image_url.meetings}
+									width={20}
+									height={20}
+									alt="logo"
+								/>
 							</div>
 						) : null}
 
@@ -131,7 +142,13 @@ function ListCard({ finalList = [], activeTab = '', actions = () => {} }) {
 											</div>
 										))}
 									</div>
-
+									<div
+										className={styles.invite_link}
+										onClick={() => window.open(meetLink, '_blank')}
+										role="presentation"
+									>
+										{invite_link}
+									</div>
 									<div className={styles.meeting_times}>
 										{TIME_MAPPING[activeTab]}
 									</div>

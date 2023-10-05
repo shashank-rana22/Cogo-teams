@@ -6,8 +6,8 @@ import SelectableAgentsUserCard from '../common/SelectableAgentsUserCard';
 const ADD_DAY = 1;
 const NEW_DATE = new Date();
 
-const scheduleEvents = ({ orgId = '', startDateField = {}, watch }) => {
-	const { start_date, end_date } = watch();
+const scheduleEvents = ({ orgId = '', startDateField = {}, watch = () => {} }) => {
+	const { start_date, end_date, end_time, start_time } = watch();
 
 	return ({
 		start_date: {
@@ -17,7 +17,7 @@ const scheduleEvents = ({ orgId = '', startDateField = {}, watch }) => {
 			placeholder : 'Start Date',
 			dateFormat  : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			rules       : {
-				validate: (value) => (value > end_date ? 'Cannot be greater than end time' : true),
+				validate: (value) => (value > end_date ? 'Cannot be greater than end date' : true),
 			},
 		},
 		start_time: {
@@ -32,7 +32,8 @@ const scheduleEvents = ({ orgId = '', startDateField = {}, watch }) => {
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			isPreviousDaysAllowed : true,
 			rules                 : {
-				validate: (value) => (value < start_date ? 'Cannot be less than start time' : true),
+				validate: (value) => (((value.getDate() === start_date.getDate() && end_time < start_time))
+					? 'Cannot be less than start time' : true),
 			},
 		},
 		end_time: {

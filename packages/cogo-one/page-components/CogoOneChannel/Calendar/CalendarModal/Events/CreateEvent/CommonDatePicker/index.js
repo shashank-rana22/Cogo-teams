@@ -4,30 +4,31 @@ import { IcMArrowNext } from '@cogoport/icons-react';
 import styles from './styles.module.css';
 
 function CommonDatePicker({
-	start_date = {},
-	start_time = {},
+	startDate = {},
+	startTime = {},
 	control = {},
-	end_date = {},
-	end_time = {},
+	endDate = {},
+	endTime = {},
+	errors = {},
 }) {
 	return (
 		<>
 			<div className={styles.dates_container}>
 				<DatepickerController
-					{...start_date}
+					{...startDate}
 					control={control}
 				/>
 				<TimepickerController
-					{...start_time}
+					{...startTime}
 					control={control}
 				/>
-				{/* {errors?.start_date
-							? (
-								<div className={styles.error_text}>
-									{errors?.start_date?.message}
-								</div>
-							) : null } */}
 			</div>
+			{errors?.start_date
+				? (
+					<div className={styles.error_text}>
+						{errors?.start_date?.message}
+					</div>
+				) : null }
 			<div className={styles.arrow_down}>
 				<IcMArrowNext
 					width={18}
@@ -38,14 +39,20 @@ function CommonDatePicker({
 			</div>
 			<div className={styles.dates_container}>
 				<DatepickerController
-					{...end_date}
+					{...endDate}
 					control={control}
 				/>
 				<TimepickerController
-					{...end_time}
+					{...endTime}
 					control={control}
 				/>
 			</div>
+			{errors?.end_date
+				? (
+					<div className={styles.error_text}>
+						{errors?.end_date?.message}
+					</div>
+				) : null }
 		</>
 	);
 }

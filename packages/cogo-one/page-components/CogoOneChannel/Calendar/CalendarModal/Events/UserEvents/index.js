@@ -1,8 +1,7 @@
-/* eslint-disable max-lines-per-function */
-import { cl } from '@cogoport/components';
-import { IcMTick, IcMAppDelete, IcMEdit } from '@cogoport/icons-react';
+import { cl, Input } from '@cogoport/components';
+import { IcMTick, IcMAppDelete, IcMEdit, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useEffect, useCallback } from 'react';
+import { useState } from 'react';
 
 import useListCogooneCalendars from '../../../../../../hooks/useListCogooneCalendars';
 import getMonthStartAndEnd from '../../../../../../utils/getMonthStartAndEnd';
@@ -23,12 +22,14 @@ function UserEvents({
 	activeTab = '',
 	schedulesLoading = false,
 }) {
+	const [searchValue, setSearchValue] = useState('');
+
 	const { startDate, endDate } = getMonthStartAndEnd({ month });
 	const {
 		calendersLoading = false,
 		calendersData = {},
 		getListCalenders = () => {},
-	} = useListCogooneCalendars({ startDate, endDate });
+	} = useListCogooneCalendars({ startDate, endDate, searchValue, month });
 
 	const { list: calendarList = [], total_count = 0 } = calendersData || {};
 
@@ -92,17 +93,6 @@ function UserEvents({
 		},
 	];
 
-	const handleCallApi = useCallback(() => {
-		getListCalenders({ startDate, endDate });
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	useEffect(() => {
-		if (activeTab === 'calendars') {
-			handleCallApi();
-		}
-	}, [activeTab, handleCallApi]);
-
 	const finalList = activeTab === 'schedules' ? markedEvents : calendarList;
 
 	return (
@@ -132,6 +122,16 @@ function UserEvents({
 			</div>
 
 			<div className={styles.container}>
+				{activeTab === 'calendars' ? (
+					<Input
+						size="sm"
+						prefix={<IcMSearchlight width={18} height={18} />}
+						placeholder="Search here..."
+						value={searchValue}
+						onChange={(val) => setSearchValue(val)}
+					/>
+				) : null}
+
 				{(calendersLoading || schedulesLoading) ? <LoadingState /> : null}
 
 				{!calendersLoading && isEmpty(finalList) ? (
@@ -141,7 +141,11 @@ function UserEvents({
 				) : null}
 
 				{!calendersLoading && !isEmpty(finalList) ? (
-					<ListCard finalList={finalList} activeTab={activeTab} actions={actions} />
+					<ListCard
+						finalList={finalList}
+						activeTab={activeTab}
+						actions={actions}
+					/>
 				) : null}
 			</div>
 
@@ -151,7 +155,7 @@ function UserEvents({
 				month={month}
 				handleClose={handleClose}
 				activeTab={activeTab}
-				handleCallApi={handleCallApi}
+				handleCallApi={getListCalenders}
 			/>
 		</>
 	);

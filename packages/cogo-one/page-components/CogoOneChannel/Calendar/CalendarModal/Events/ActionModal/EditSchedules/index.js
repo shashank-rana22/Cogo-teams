@@ -21,44 +21,50 @@ function EditSchedules({ value = {}, errors = {}, control = {}, setValue = () =>
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.each_row}>
-				<div className={styles.content}>
-					<div className={styles.label}>Start Date</div>
-					<DatepickerController
-						{...start_date}
-						control={control}
-					/>
-				</div>
-				<div className={styles.content}>
-					<div>Start Time</div>
-					<TimepickerController
-						{...start_time}
-						control={control}
-					/>
+			<div>
+				<div className={styles.each_row}>
+					<div className={styles.content}>
+						<div className={styles.label}>Start Date</div>
+						<DatepickerController
+							{...start_date}
+							control={control}
+						/>
+					</div>
+					<div className={styles.content}>
+						<div>Start Time</div>
+						<TimepickerController
+							{...start_time}
+							control={control}
+						/>
+					</div>
 				</div>
 				<div className={styles.error_text}>
 					{errors?.start_date?.message}
 				</div>
 			</div>
-			<div className={styles.each_row}>
-				<div className={styles.content}>
-					<div>Start Date</div>
-					<DatepickerController
-						{...end_date}
-						control={control}
-					/>
-				</div>
-				<div className={styles.content}>
-					<div>Start Time</div>
-					<TimepickerController
-						{...end_time}
-						control={control}
-					/>
+
+			<div>
+				<div className={styles.each_row}>
+					<div className={styles.content}>
+						<div>Start Date</div>
+						<DatepickerController
+							{...end_date}
+							control={control}
+						/>
+					</div>
+					<div className={styles.content}>
+						<div>Start Time</div>
+						<TimepickerController
+							{...end_time}
+							control={control}
+						/>
+					</div>
 				</div>
 				<div className={styles.error_text}>
 					{errors?.end_date?.message}
 				</div>
 			</div>
+
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -68,6 +68,8 @@ function ActionModal({
 		updateCogooneSchedule({ payload });
 	};
 
+	const showInfoIcon = actionStatus !== 'edit';
+
 	return (
 		<Modal
 			size="sm"
@@ -78,8 +80,8 @@ function ActionModal({
 		>
 			<Modal.Header title={actionStatus === 'edit' ? 'Update Schedule' : null} />
 			<Modal.Body>
-				<div className={styles.body}>
-					{actionStatus !== 'edit' ?	<IcMInfo className={styles.info_icon} fill="#d63031" /> : null}
+				<div className={cl`${styles.body} ${showInfoIcon ? styles.conform : ''}`}>
+					{showInfoIcon ?	<IcMInfo className={styles.info_icon} fill="#d63031" /> : null}
 					<div className={styles.label}>{INFO_MAPPING[actionStatus]}</div>
 				</div>
 			</Modal.Body>

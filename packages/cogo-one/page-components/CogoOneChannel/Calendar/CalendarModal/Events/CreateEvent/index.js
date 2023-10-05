@@ -145,11 +145,12 @@ function CreateEvent({
 
 				<div className={styles.form_container}>
 					<CommonDatePicker
-						start_date={start_date}
-						start_time={start_time}
+						startDate={start_date}
+						startTime={start_time}
 						control={control}
-						end_date={end_date}
-						end_time={end_time}
+						endDate={end_date}
+						endTime={end_time}
+						errors={errors}
 					/>
 					{category === 'meeting' ? (
 						<div className={styles.error_container}>

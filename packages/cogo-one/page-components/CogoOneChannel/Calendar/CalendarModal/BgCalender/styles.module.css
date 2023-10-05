@@ -9,10 +9,6 @@
 			border: none;
 		}
 
-		/* .rbc-btn-group {
-			display: none;
-		} */
-
 		.rbc-month-row {
 			cursor: pointer;
 			border-right: 1px  solid #ddd;
@@ -32,10 +28,10 @@
 		}
 
 		.rbc-selected {
-			border-color: #fff !important;
-			outline: none;
+			border: none !important;
 
 			&:focus {
+				border: none !important;
 				outline: none;
 			}
 		}

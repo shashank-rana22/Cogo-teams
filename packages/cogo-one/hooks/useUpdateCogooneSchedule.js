@@ -25,7 +25,7 @@ const useUpdateCogooneSchedule = ({
 				params: payload,
 			});
 			handleClose();
-			await getEvents({ startDate, endDate });
+			getEvents({ startDate, endDate });
 			if (activeTab === 'calendars') {
 				handleCallApi();
 			}

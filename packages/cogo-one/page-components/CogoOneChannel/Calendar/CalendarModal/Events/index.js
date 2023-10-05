@@ -2,8 +2,9 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPlusInCircle, IcMCancel } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
+
+import { LABEL } from '../../../../../constants/CALENDAR_CONSTANTS';
 
 import CreateEvent from './CreateEvent';
 import styles from './styles.module.css';
@@ -97,7 +98,7 @@ function Events({
 					<div className={styles.sedual_event}>
 						Schedule
 						{' '}
-						{startCase(eventDetails?.category)}
+						{LABEL[eventDetails?.category]}
 					</div>
 				)}
 

@@ -26,3 +26,12 @@
 .icon {
 	transform: rotate(90deg);
 }
+
+.error_text {
+	height: 10px;
+	margin-top: 2px;
+	font-size: 10px;
+	color: #ee3425;
+	text-align: left;
+	transition: 0.3s ease;
+}
