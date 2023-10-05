@@ -48,7 +48,10 @@ function TicketsSectionPart({
 		});
 	};
 
-	const { updateTicketActivity } = useUpdateTicketActivity({
+	const {
+		updateTicketActivity = () => {},
+		updateLoading = false,
+	} = useUpdateTicketActivity({
 		refreshTickets,
 		fetchTickets,
 	});
@@ -65,6 +68,7 @@ function TicketsSectionPart({
 				listLoading={listLoading}
 				setModalData={setModalData}
 				handleScroll={handleScroll}
+				updateLoading={updateLoading}
 				updateTicketActivity={updateTicketActivity}
 				reachedBottom={reachedBottom}
 			/>
