@@ -1,0 +1,29 @@
+.heading {
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+	color: #666a90;
+}
+
+.main_container {
+	padding: 20px;
+}
+
+.doc_container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.placeholder {
+	width: 44%;
+	margin: 10px 50px 10px 10px;
+}
+
+.submit_button {
+	display: flex;
+	justify-content: flex-end;
+	margin: 15px 0;
+}
+
+.submit {
+	margin-left: 15px;
+}
