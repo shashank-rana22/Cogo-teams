@@ -31,10 +31,14 @@
 }
 
 .name {
+	width: calc(100% - 30px);
 	padding-left: 8px;
+	overflow: hidden;
 	font-size: 14px;
 	font-weight: 600;
 	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .image_styles {

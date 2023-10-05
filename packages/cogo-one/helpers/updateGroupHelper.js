@@ -6,6 +6,7 @@ function addToGroupPayload({
 		users       : userIds,
 		group_id    : groupData?.id,
 		action_name : 'add_to_group',
+		name        : groupData?.search_name,
 	};
 
 	return payload;
