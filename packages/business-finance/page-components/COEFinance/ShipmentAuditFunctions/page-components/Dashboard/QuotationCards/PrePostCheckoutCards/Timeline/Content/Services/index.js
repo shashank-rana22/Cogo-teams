@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { Pill, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -63,6 +63,15 @@ export default function Services(
 										?.grandTotal, services?.[service]?.[GLOBAL_CONSTANTS.zeroth_index]
 										?.currency || 'INR')}
 								</div>
+								{services?.[service]?.[GLOBAL_CONSTANTS.zeroth_index]
+									?.quotationState === 'APPROVED'
+									? (
+										<div>
+											<Pill size="sm" color="#B4F3BE">Approved</Pill>
+										</div>
+									)
+									: null}
+
 							</div>
 						</div>
 					)

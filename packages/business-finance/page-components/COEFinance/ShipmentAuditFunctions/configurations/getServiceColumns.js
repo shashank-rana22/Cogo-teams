@@ -1,13 +1,10 @@
 import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import ShowOverflowingNumber from '../utils/getShowOverFlowingNumbers';
-
-import styles from './styles.module.css';
-
 const DOC_LENGTH = 6;
-const CONCAT_LENGTH = 3;
+// const CONCAT_LENGTH = 3;
 const ZERO_PRICE = 0;
+const TRUNCATED_UPTO = 2;
 
 const getServiceColumns = () => {
 	const columns = [
@@ -45,10 +42,10 @@ const getServiceColumns = () => {
 		{
 			id     : 'quantity',
 			Header : (
-				<div className={styles.quantity}>Qty.</div>
+				<div>Qty.</div>
 			),
 			accessor: (row) => (
-				<div className={styles.quantity}>
+				<div>
 					{row?.quantity}
 				</div>
 			),
@@ -84,7 +81,8 @@ const getServiceColumns = () => {
 			),
 			accessor: (row) => (
 				<div>
-					{ShowOverflowingNumber(row?.price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) }
+					{/* {ShowOverflowingNumber(row?.price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) } */}
+					{row?.price?.toFixed(TRUNCATED_UPTO) || ZERO_PRICE}
 				</div>
 			),
 		},
@@ -95,7 +93,8 @@ const getServiceColumns = () => {
 			),
 			accessor: (row) => (
 				<div>
-					{ShowOverflowingNumber(row?.margin_price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) }
+					{/* {ShowOverflowingNumber(row?.margin_price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) } */}
+					{row?.margin_price?.toFixed(TRUNCATED_UPTO) || ZERO_PRICE}
 				</div>
 			),
 		},
@@ -106,7 +105,7 @@ const getServiceColumns = () => {
 			),
 			accessor: (row) => (
 				<div>
-					{row?.exchange_rate}
+					{row?.exchange_rate?.toFixed(TRUNCATED_UPTO)}
 				</div>
 			),
 		},
@@ -117,7 +116,8 @@ const getServiceColumns = () => {
 			),
 			accessor: (row) => (
 				<div>
-					{ShowOverflowingNumber(row?.tax_total_price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) }
+					{/* {ShowOverflowingNumber(row?.tax_total_price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) } */}
+					{row?.tax_total_price?.toFixed(TRUNCATED_UPTO) || ZERO_PRICE}
 				</div>
 			),
 		},
@@ -128,12 +128,27 @@ const getServiceColumns = () => {
 			),
 			accessor: (row) => (
 				<div>
-					{ShowOverflowingNumber(
+					{/* {ShowOverflowingNumber(
 						row?.tax_total_price_discounted || ZERO_PRICE,
 						CONCAT_LENGTH,
 
 						row?.currency,
-					) }
+					) } */}
+					{row?.tax_total_price_discounted?.toFixed(TRUNCATED_UPTO) || ZERO_PRICE}
+				</div>
+			),
+		},
+		{
+			id     : 'currency',
+			Header : (
+				<div>Currency</div>
+			),
+			accessor: (row) => (
+				<div>
+					{
+
+						row?.currency
+					}
 				</div>
 			),
 		},

@@ -1,5 +1,5 @@
-/* eslint-disable react/no-array-index-key */
 // import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Pill } from '@cogoport/components';
 import { IcMDummyCircle } from '@cogoport/icons-react';
 
 import Timeline from '../Timeline';
@@ -22,10 +22,15 @@ function GenerateColumn({
 			{/* <div className={styles.status_accordian}>
 	                <Pill color="#B4F3BE">Approved</Pill>
 	            </div> */}
-
+			{/* {console.log(data?.[key].finalStatus)} */}
+			{data?.[key].finalStatus ? (
+				<div className={styles.status_accordian}>
+					<Pill color="#B4F3BE">Approved</Pill>
+				</div>
+			) : null }
 			<div style={{ display: 'flex', width: '100%' }}>
 				<div className={styles.vertical_timeline}>
-					{ (index !== (Object.keys(data).length - PREV_INDEX)) ? (
+					{ (index !== (Object.keys(data).length - PREV_INDEX) && !data?.[key].finalStatus) ? (
 						<>
 							<IcMDummyCircle
 								fill="#EE3425"
