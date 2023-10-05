@@ -17,8 +17,7 @@
 .calender {
 	position: absolute;
 	right: 0;
-	bottom: 110px;
-	z-index: 99;
+	bottom: 50px;
 	display: flex;
 	align-items: center;
 	width: 40px;
