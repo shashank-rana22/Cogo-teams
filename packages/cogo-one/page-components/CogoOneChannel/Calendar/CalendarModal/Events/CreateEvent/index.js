@@ -8,7 +8,7 @@ import {
 } from '@cogoport/forms';
 import { useEffect, useState, useMemo } from 'react';
 
-import scheduleEvents from '../../../../../../configurations/schedule_event';
+import scheduleEvents from '../../../../../../configurations/schedule-event';
 import useCreateCogooneCalendar from '../../../../../../hooks/useCreateCogooneCalendar';
 
 import CommonDatePicker from './CommonDatePicker';

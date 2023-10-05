@@ -18,7 +18,6 @@ function ListCard({
 
 	return (
 		<div>
-
 			{(finalList || []).map((singleEvent) => {
 				const {
 					subject = '',
