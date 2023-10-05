@@ -3,8 +3,8 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { upperCase } from '@cogoport/utils';
 
-import useGetBillTimeline from '../../../../../hook/useGetBillTimeline';
-import useGetInvoiceTimeline from '../../../../../hook/useGetinvoiceTimeline';
+import useGetBillTimeline from '../../../hook/useGetBillTimeline';
+import useGetInvoiceTimeline from '../../../hook/useGetinvoiceTimeline';
 
 import BuySellStatusContent from './BuySellStatusContent';
 import styles from './styles.module.css';

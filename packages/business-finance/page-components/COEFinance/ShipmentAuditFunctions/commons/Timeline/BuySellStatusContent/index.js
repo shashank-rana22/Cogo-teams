@@ -1,7 +1,7 @@
 import { Pill, Button, Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import ShowOverflowingNumber from '../../../../../utils/getShowOverFlowingNumbers';
+import ShowOverflowingNumber from '../../../utils/getShowOverFlowingNumbers';
 // import RemarkModal from '../Content/RemarkModal';
 
 import DocumentFlow from './DocumentFlow';

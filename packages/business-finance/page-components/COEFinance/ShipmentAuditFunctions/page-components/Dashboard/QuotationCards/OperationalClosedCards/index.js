@@ -1,7 +1,7 @@
 import { IcMDummyCircle } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import Timeline from '../Timeline';
+import Timeline from '../../../../commons/Timeline';
 
 import styles from './styles.module.css';
 
