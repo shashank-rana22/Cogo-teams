@@ -55,7 +55,7 @@ function ExecuteTask({
 
 	const {
 		steps = [],
-		currentStep = {},
+		currentStep = 0,
 		setCurrentStep = () => {},
 		serviceIdMapping = [],
 	} = useTaskExecution({ task, taskConfigData });
