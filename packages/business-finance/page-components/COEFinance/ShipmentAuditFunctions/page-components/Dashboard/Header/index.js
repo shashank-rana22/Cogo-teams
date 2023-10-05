@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 import { useState, useEffect } from 'react';
 
 import useGetPrePostShipmentQuotation from '../../../../hook/useGetPrePostShipmentQuotation';
+import useUpdateJobAuditStatus from '../../../../hook/useUpdateJobAuditStatus';
 import FinanceClosedCardsSet from '../QuotationCards/FinanceClosedCardsSet';
 import OperationClosedCardsSet from '../QuotationCards/OperationClosedCardsSet';
 import PrePostCheckoutCards from '../QuotationCards/PrePostCheckoutCards';
@@ -43,6 +44,8 @@ function Header({ jobId = '' }) {
 		}
 	};
 
+	const { apiTrigger, loading } = useUpdateJobAuditStatus();
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.container}>
@@ -50,10 +53,25 @@ function Header({ jobId = '' }) {
 
 				<div className={styles.actions}>
 					<div>
-						<Button size="md" themeType="secondary">Save Changes</Button>
+						<Button
+							size="md"
+							themeType="secondary"
+							disabled={loading}
+							onClick={() => apiTrigger({ jobId, status: 'PARTIALLY_AUDITED' })}
+						>
+							Save Changes
+
+						</Button>
 					</div>
 					<div className={styles.header_button}>
-						<Button size="md" themeType="primary">Approve</Button>
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={() => apiTrigger({ jobId, status: 'AUDITED' })}
+						>
+							Approve
+
+						</Button>
 					</div>
 				</div>
 			</div>
