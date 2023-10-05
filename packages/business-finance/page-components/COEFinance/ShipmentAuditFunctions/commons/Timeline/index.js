@@ -105,7 +105,6 @@ export default function Timeline({
 							data={data}
 							loading={type === 'sell' ? timeLineLoading : billTimeLineLoading}
 							timeLineData={type === 'sell' ? timeLineData?.timelineDetail : billTimeLineData}
-							source={source}
 						/>
 					</div>
 				</div>

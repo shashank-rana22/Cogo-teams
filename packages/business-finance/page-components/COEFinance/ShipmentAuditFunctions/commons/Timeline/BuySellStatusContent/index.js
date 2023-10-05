@@ -1,8 +1,8 @@
 import { Pill, Button, Placeholder } from '@cogoport/components';
-import React from 'react';
+import React, { useState } from 'react';
 
 import ShowOverflowingNumber from '../../../utils/getShowOverFlowingNumbers';
-// import RemarkModal from '../Content/RemarkModal';
+import RemarkModal from '../../RemarkModal';
 
 import DocumentFlow from './DocumentFlow';
 import styles from './styles.module.css';
@@ -14,12 +14,14 @@ export default function BuySellStatusContent({
 	loading = false,
 	timeLineData = [],
 }) {
-	// const [buttonClicked, setButtonClicked] = useState('');
-	// const [queryModalShow, setQueryModalShow] = useState(false);
-	// const [remarkValue, setRemarkValue] = useState('');
+	const [buttonClicked, setButtonClicked] = useState('');
+	const [queryModalShow, setQueryModalShow] = useState(false);
+	const [remarkValue, setRemarkValue] = useState('');
 	const {
 		grand_total: income = '', document_number = '',
-		trade_party = '', document_date = '', document_status = '',
+		trade_party = '', document_date = '',
+		document_status = '', id = '',
+		quotation_state = '',
 	} = data || {};
 
 	return (
@@ -75,30 +77,27 @@ export default function BuySellStatusContent({
 						setQueryModalShow={setQueryModalShow}
 						buttonClicked={buttonClicked}
 						setButtonClicked={setButtonClicked}
-						columnIndex={columnIndex}
-						index={index}
-						toggleAccordion={toggleAccordion}
 					/> */}
 
-					<Button
-						size="md"
-						themeType="primary"
-						// onClick={() => { setQueryModalShow(true); setButtonClicked('Accept'); }}
-					>
-						Accept
-					</Button>
+					{quotation_state !== 'APPROVED' && (
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={() => { setQueryModalShow(true); setButtonClicked('Accept'); }}
+						>
+							Accept
+						</Button>
+					)}
 
-					{/* <RemarkModal
+					<RemarkModal
 						remarkValue={remarkValue}
 						setRemarkValue={setRemarkValue}
 						queryModalShow={queryModalShow}
 						setQueryModalShow={setQueryModalShow}
 						buttonClicked={buttonClicked}
 						setButtonClicked={setButtonClicked}
-						columnIndex={columnIndex}
-						index={index}
-						toggleAccordion={toggleAccordion}
-					/> */}
+						id={id}
+					/>
 				</div>
 			</div>
 		</>
