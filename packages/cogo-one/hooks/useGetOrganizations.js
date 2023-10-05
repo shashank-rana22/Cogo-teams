@@ -82,7 +82,6 @@ const useGetOrganizations = ({
 
 	useEffect(() => {
 		if (type === 'toUserEmail' && allowedOrgs.includes(activeTab)) {
-			console.log(activeTab, allowedOrgs, type);
 			getOrganizations();
 		}
 	}, [activeTab, allowedOrgs, getOrganizations, type]);
