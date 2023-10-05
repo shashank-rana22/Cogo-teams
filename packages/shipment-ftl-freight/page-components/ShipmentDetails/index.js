@@ -43,6 +43,7 @@ const VIEW_MAPPING = {
 
 function ShipmentDetails() {
 	const router = useRouter();
+	const { navigation = '' } = router.query;
 	const prof = useSelector(
 		({ profile }) => profile,
 	);
@@ -68,10 +69,12 @@ function ShipmentDetails() {
 	const { servicesGet = {} } = useServiceList();
 
 	const handleVersionChange = useCallback(() => {
-		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
+		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}${
+			navigation ? `?navigation=${navigation}` : ''
+		}`;
 		window.location.replace(newHref);
 		window.sessionStorage.setItem('prev_nav', newHref);
-	}, [router?.query?.partner_id, shipment_data?.id]);
+	}, [router?.query?.partner_id, shipment_data?.id, navigation]);
 
 	const contextValues = useMemo(() => {
 		let stakeholder = activeStakeholder;
