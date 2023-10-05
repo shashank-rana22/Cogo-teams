@@ -3,11 +3,23 @@ import { useCallback } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
 
-const useGetDocumentList = ({
+const getParams = ({
 	id = '',
 	status = '',
+	remarks = '',
+
+}) => ({
+	id,
+	status,
+	remarks,
+});
+
+const useApproveQuotation = ({
+	id = '',
+	status = '',
+	remarks = '',
 }) => {
-	const [{ approveQuotationLoading }, approveQuotationTrigger] = useRequestBf(
+	const [{ loading = false }, trigger] = useRequestBf(
 		{
 			url     : '/common/job/update-shipment-quotation-status',
 			authKey : 'post_common_job_update_shipment_quotation_status',
@@ -16,26 +28,19 @@ const useGetDocumentList = ({
 		{ manual: true },
 	);
 
-	const approveQuotation = useCallback(() => {
-		const params = {
-			id     : id || undefined,
-			status : status || undefined,
-		};
-		const func = async () => {
-			try {
-				await approveQuotationTrigger({
-					data: params,
-				});
-			} catch (error) {
-				toastApiError(error);
-			}
-		};
-		func();
-	}, [approveQuotationTrigger, id, status]);
+	const approveQuotation = useCallback(async () => {
+		try {
+			await trigger({
+				data: getParams({ id, status, remarks }),
+			});
+		} catch (error) {
+			toastApiError(error);
+		}
+	}, [trigger, id, status, remarks]);
 
 	return {
 		approveQuotation,
-		approveQuotationLoading,
+		approveQuotationLoading: loading,
 	};
 };
-export default useGetDocumentList;
+export default useApproveQuotation;
