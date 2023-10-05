@@ -111,7 +111,6 @@ function ExecuteStep({
 	};
 	useEffect(() => {
 		if (isSeawayAndMarkConfirm) {
-			console.log('setvalue is called');
 			setValue('bl_type', 'seaway');
 		}
 	}, [isSeawayAndMarkConfirm, setValue]);
