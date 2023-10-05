@@ -103,7 +103,6 @@ const scheduleEvents = ({ orgId = '', startDateField = {}, watch }) => {
 			controlType : 'select',
 			isClearable : true,
 			placeholder : 'Select Event',
-			// value       : 'one_time',
 			rules       : { required: 'Occurence is required' },
 			options     : [
 				{ label: 'One Time', value: 'one_time' },

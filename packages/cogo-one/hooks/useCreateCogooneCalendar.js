@@ -7,16 +7,18 @@ import {
 	getCustomRecurrence, getDailyRecurrence, getMonthlyRecurrence,
 	getWeeklyRecurrence,
 	getYearlyRecurrence,
+	getOneTimeRecurrence,
 } from '../helpers/formatFreqCalendarPayload';
 import combineDateAndTime from '../utils/combineDateAndTime';
 import getMonthStartAndEnd from '../utils/getMonthStartAndEnd';
 
 const RECURRENCE_RULE_MAPPING = {
-	daily   : getDailyRecurrence,
-	weekly  : getWeeklyRecurrence,
-	monthly : getMonthlyRecurrence,
-	yearly  : getYearlyRecurrence,
-	custom  : getCustomRecurrence,
+	one_time : getOneTimeRecurrence,
+	daily    : getDailyRecurrence,
+	weekly   : getWeeklyRecurrence,
+	monthly  : getMonthlyRecurrence,
+	yearly   : getYearlyRecurrence,
+	custom   : getCustomRecurrence,
 };
 
 const getPayload = ({ eventDetails = {}, values = {}, eventData = {}, id = '', updatedId = {} }) => {
