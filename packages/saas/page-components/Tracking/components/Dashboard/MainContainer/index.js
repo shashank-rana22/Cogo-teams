@@ -9,15 +9,15 @@ import useRedirectFn from '../../../hooks/useRedirectFn';
 import styles from './styles.module.css';
 import TrackingInfo from './TrackingInfo';
 
-const selectOpt = [
-	{ label: 'Last 30 days', value: '30' },
-	{ label: 'Last 100 days', value: '100' },
-];
-
 function MainContainer() {
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
 	const TAB_MAPPING = useMemo(() => getTabMapping({ t }), [t]);
+
+	const selectOpt = [
+		{ label: t('airOceanTracking:last_30_days'), value: '30' },
+		{ label: t('airOceanTracking:last_100_days'), value: '100' },
+	];
 
 	const [view, setView] = useState('list');
 	const { redirectToList } = useRedirectFn();

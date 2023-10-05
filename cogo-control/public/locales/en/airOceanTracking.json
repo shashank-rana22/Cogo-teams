@@ -199,5 +199,9 @@
     "tracking_alerts_created_toast":"Alerts Created Successfully",
     "tracking_alerts_select_consignee_toast":"Please select either shipper or consignee",
     "tracking_succesfully_created_contact_toast":"Successfully Created Contact",
-    "tracking_updated_reference_number_toast":"Updated Reference Number"
+    "tracking_updated_reference_number_toast":"Updated Reference Number",
+    "last_30_days": "Last 30 Days",
+    "last_100_days": "Last 100 Days",
+    "next_milestone": "Next Milestone",
+    "current_milestone": "Current Milestone"
 }

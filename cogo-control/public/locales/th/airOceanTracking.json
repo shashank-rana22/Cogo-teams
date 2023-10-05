@@ -199,5 +199,9 @@
     "tracking_alerts_created_toast":"การแจ้งเตือนที่สร้างขึ้นสำเร็จ",
     "tracking_alerts_select_consignee_toast":"โปรดเลือกผู้ส่งหรือผู้รับ",
     "tracking_succesfully_created_contact_toast":"สร้างการติดต่อสำเร็จ",
-    "tracking_updated_reference_number_toast":"อัปเดตหมายเลขอ้างอิงr"
+    "tracking_updated_reference_number_toast":"อัปเดตหมายเลขอ้างอิงr",
+    "last_30_days": "30 วันสุดท้าย",
+    "last_100_days": "100 วันสุดท้าย",
+    "next_milestone": "เหตุการณ์สำคัญครั้งต่อไป",
+    "current_milestone": "เหตุการณ์สำคัญในปัจจุบัน"
 }

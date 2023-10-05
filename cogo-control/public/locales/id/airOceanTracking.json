@@ -199,5 +199,9 @@
     "tracking_alerts_created_toast":"Peringatan dibuat dengan sukses ",
     "tracking_alerts_select_consignee_toast":"Pilih pengirim atau penerima ",
     "tracking_succesfully_created_contact_toast":"Berhasil membuat kontak ",
-    "tracking_updated_reference_number_toast":"Nomor referensi yang diperbarui"
+    "tracking_updated_reference_number_toast":"Nomor referensi yang diperbarui",
+    "last_30_days": "30 hari terakhir",
+    "last_100_days": "100 hari terakhir",
+    "next_milestone": "Tonggak sejarah berikutnya",
+    "current_milestone": "Tonggak sejarah saat ini"
 }

@@ -199,5 +199,9 @@
     "tracking_alerts_created_toast":"Cảnh báo đã tạo ra thành công",
     "tracking_alerts_select_consignee_toast":"Vui lòng chọn một người giao hàng hoặc người nhận hàng",
     "tracking_succesfully_created_contact_toast":"Đã tạo thành công liên hệ",
-    "tracking_updated_reference_number_toast":"Cập nhật số tham chiếu"
+    "tracking_updated_reference_number_toast":"Cập nhật số tham chiếu",
+    "last_30_days": "30 ngày trước",
+    "last_100_days": "100 ngày qua",
+    "next_milestone": "Cột mốc tiếp theo",
+    "current_milestone": "Quan trọng hiện tại"
 }

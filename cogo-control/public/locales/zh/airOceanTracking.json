@@ -199,5 +199,9 @@
     "tracking_alerts_created_toast":"警报成功创建了",
     "tracking_alerts_select_consignee_toast":"请选择托运人或收货人",
     "tracking_succesfully_created_contact_toast":"成功创建的联系人",
-    "tracking_updated_reference_number_toast":"更新的参考号r"
+    "tracking_updated_reference_number_toast":"更新的参考号r",
+    "last_30_days": "最近30天",
+    "last_100_days": "最近100天",
+    "next_milestone": "下一个里程碑",
+    "current_milestone": "当前的里程碑"
 }

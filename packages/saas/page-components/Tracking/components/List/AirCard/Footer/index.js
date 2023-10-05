@@ -8,13 +8,14 @@ import { SEVERITY_MAPPING } from '../../../../constant/card';
 
 import styles from './styles.module.css';
 
-const renderTitle = ({ next_milestone = '' }) => {
-	if (next_milestone) return 'Next Milestone';
-	return 'Current Milestone';
-};
-
 function Footer({ lastUpdated = '', milestones = {}, action = {} }) {
 	const { t } = useTranslation(['common', 'airOceanTracking']);
+
+	const renderTitle = ({ next_milestone = '' }) => {
+		if (next_milestone) return t('airOceanTracking:next_milestone');
+		return t('airOceanTracking:current_milestone');
+	};
+
 	const { next_milestone } = milestones || {};
 
 	const { severity = '' } = action || {};
