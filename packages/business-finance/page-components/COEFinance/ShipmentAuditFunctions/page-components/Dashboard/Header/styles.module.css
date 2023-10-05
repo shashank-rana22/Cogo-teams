@@ -17,4 +17,14 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 11%;
+	margin-right: 50px;
+}
+
+.pre_post_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.header_button {
+	margin-left: 10px;
 }

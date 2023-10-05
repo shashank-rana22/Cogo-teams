@@ -4,7 +4,7 @@ import { useCallback, useEffect } from 'react';
 import toastApiError from '../../commons/toastApiError.ts';
 
 const useGetPrePostShipmentQuotation = ({
-	job_id = '',
+	jobId = '',
 }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -19,13 +19,13 @@ const useGetPrePostShipmentQuotation = ({
 		try {
 			await trigger({
 				params: {
-					jobId: job_id,
+					jobId,
 				},
 			});
 		} catch (error) {
 			toastApiError(error);
 		}
-	}, [job_id, trigger]);
+	}, [jobId, trigger]);
 
 	useEffect(() => {
 		getPrePostShipmentQuotes();

@@ -1,25 +1,42 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
+import { useState, useEffect } from 'react';
 
-import NextPage from '../NextPage';
+import useGetPrePostShipmentQuotation from '../../../../hook/useGetPrePostShipmentQuotation';
+import PrePostCheckoutCards from '../QuotationCards/PrePostCheckoutCards';
 
 import styles from './styles.module.css';
 
-const OPERATIONAL_ARRAY = [[true, false, false, false, false, false],
-	[false, false, false, false, false, false],
-	[true, false, false, false, false, false],
-	[false, false, false, false, false, false]];
-
-const FINANCIAL_ARRAY = [[true, false, false, false, false, false],
-	[false, false, false, false, false, false],
-	[true, false, false, false, false, false],
-	[false, false, false, false, false, false],
-	[false, false, false, false, false, false],
-	[false, false, false, false, false, false]];
-
 function Header({ jobId = '' }) {
 	const { query: { active_tab = '' }, push = () => {} } = useRouter();
-	// console.log('aaaa', router);
+	const {
+		data: quoteData = {},
+		loading: quoteLoading = true,
+	} = useGetPrePostShipmentQuotation({ jobId });
+
+	console.log({ quoteData });
+
+	const [accordionState, setAccordionState] = useState({});
+	// console.log({ initialState, accordionState });
+	useEffect(() => {
+		const INITIAL_STATE = {};
+		// let check = 0;
+		Object.keys(quoteData).forEach((category) => {
+			Object.keys(quoteData[category]).forEach((subCategory, index) => {
+			// console.log(`${category}_${subCategory}`, 'hipp', index);
+			// check = -1;
+				INITIAL_STATE[`${category}_${subCategory}`] = (index === GLOBAL_CONSTANTS.zeroth_index);
+			});
+		});
+		setAccordionState(INITIAL_STATE);
+	}, [quoteData]);
+
+	console.log({ accordionState });
+
+	const toggleAccordion = (key) => {
+		setAccordionState((prev) => ({ ...prev, [key]: !prev[key] }));
+	};
 	const handleClick = () => {
 		if (active_tab === 'financial_close') {
 			push(
@@ -37,13 +54,34 @@ function Header({ jobId = '' }) {
 				<Button themeType="secondary" size="md" onClick={handleClick}>Go Back</Button>
 
 				<div className={styles.actions}>
-					<Button size="md" themeType="secondary">Hold</Button>
-					<Button size="md" themeType="primary">Approve</Button>
+					<div>
+						<Button size="md" themeType="secondary">Hold</Button>
+					</div>
+					<div className={styles.header_button}>
+						<Button size="md" themeType="primary">Approve</Button>
+					</div>
 				</div>
 			</div>
-			{(active_tab === 'financial_close')
-				? (<NextPage initialArray={FINANCIAL_ARRAY} activeTab={active_tab} jobId={jobId} />)
-				: (<NextPage initialArray={OPERATIONAL_ARRAY} jobId={jobId} activeTab={active_tab} />)}
+			<div className={styles.pre_post_container}>
+				<PrePostCheckoutCards
+					data={quoteData?.SELL}
+					loading={quoteLoading}
+					type="SELL Quotation"
+					accordionState={accordionState}
+					toggleAccordion={toggleAccordion}
+					setAccordionState={setAccordionState}
+					category="SELL"
+				/>
+				<PrePostCheckoutCards
+					data={quoteData?.BUY}
+					loading={quoteLoading}
+					type="BUY Quotation"
+					accordionState={accordionState}
+					toggleAccordion={toggleAccordion}
+					setAccordionState={setAccordionState}
+					category="BUY"
+				/>
+			</div>
 		</div>
 	);
 }

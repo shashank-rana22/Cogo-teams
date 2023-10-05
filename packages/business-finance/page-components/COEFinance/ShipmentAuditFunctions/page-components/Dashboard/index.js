@@ -5,10 +5,10 @@ import styles from './styles.module.css';
 
 function Dashboard() {
 	const router = useRouter();
-	const { jobId } = router.query;
+	const { job_id } = router.query;
 	return (
 		<div className={styles.container}>
-			<Header activeTab="" jobId={jobId} />
+			<Header activeTab="" jobId={job_id} />
 		</div>
 	);
 }

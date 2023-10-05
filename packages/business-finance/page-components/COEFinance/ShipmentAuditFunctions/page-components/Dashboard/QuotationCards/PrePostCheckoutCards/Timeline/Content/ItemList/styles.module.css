@@ -1,0 +1,8 @@
+.table {
+	:global {
+		.ui_table_head_cell {
+			color: white;
+			background: #2d2d2d;
+		}
+	}
+}

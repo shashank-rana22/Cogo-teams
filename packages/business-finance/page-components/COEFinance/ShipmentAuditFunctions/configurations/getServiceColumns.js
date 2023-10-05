@@ -7,11 +7,12 @@ import styles from './styles.module.css';
 
 const DOC_LENGTH = 6;
 const CONCAT_LENGTH = 3;
+const ZERO_PRICE = 0;
 
 const getServiceColumns = () => {
 	const columns = [
 		{
-			id     : 'documentValue1',
+			id     : 'code',
 			Header : (
 				<div>Name</div>
 			),
@@ -20,15 +21,15 @@ const getServiceColumns = () => {
 					<Tooltip
 						content={(
 							<div>
-								{row?.document1 || ''}
+								{row?.name || ''}
 							</div>
 						)}
 						interactive
 					>
 						<div>
-							{(row?.document1 && row?.document1?.length > DOC_LENGTH
-								? `${row?.document1?.substr(GLOBAL_CONSTANTS.zeroth_index, DOC_LENGTH)}...`
-								: row?.document1) || '-'}
+							{(row?.code && row?.code?.length > DOC_LENGTH
+								? `${row?.code?.substr(GLOBAL_CONSTANTS.zeroth_index, DOC_LENGTH)}...`
+								: row?.code) || '-'}
 						</div>
 						{/* <Pill
 								size="sm"
@@ -42,18 +43,18 @@ const getServiceColumns = () => {
 			),
 		},
 		{
-			id     : 'documentValue2',
+			id     : 'quantity',
 			Header : (
 				<div className={styles.quantity}>Qty.</div>
 			),
 			accessor: (row) => (
 				<div className={styles.quantity}>
-					{row?.document2}
+					{row?.quantity}
 				</div>
 			),
 		},
 		{
-			id     : 'documentValue3',
+			id     : 'unit',
 			Header : (
 				<div>Unit</div>
 			),
@@ -62,72 +63,77 @@ const getServiceColumns = () => {
 					<Tooltip
 						content={(
 							<div>
-								{row?.document3 || ''}
+								{row?.unit || ''}
 							</div>
 						)}
 						interactive
 					>
 						<div>
-							{(row?.document3 && row?.document3?.length > DOC_LENGTH
-								? `${row?.document3?.substr(GLOBAL_CONSTANTS.zeroth_index, DOC_LENGTH)}...`
-								: row?.document3) || '-'}
+							{(row?.unit && row?.unit?.length > DOC_LENGTH
+								? `${row?.unit?.substr(GLOBAL_CONSTANTS.zeroth_index, DOC_LENGTH)}...`
+								: row?.unit) || '-'}
 						</div>
 					</Tooltip>
 				</div>
 			),
 		},
 		{
-			id     : 'documentValue4',
+			id     : 'price',
 			Header : (
 				<div>Price</div>
 			),
 			accessor: (row) => (
 				<div>
-					{ShowOverflowingNumber(row?.document4, CONCAT_LENGTH, 'INR') }
+					{ShowOverflowingNumber(row?.price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) }
 				</div>
 			),
 		},
 		{
-			id     : 'documentValue5',
+			id     : 'margin_price',
 			Header : (
 				<div>Margin</div>
 			),
 			accessor: (row) => (
 				<div>
-					{ShowOverflowingNumber(row?.document5, CONCAT_LENGTH, 'INR') }
+					{ShowOverflowingNumber(row?.margin_price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) }
 				</div>
 			),
 		},
 		{
-			id     : 'documentValue6',
+			id     : 'exchange_rate',
 			Header : (
 				<div>Ex. Rate</div>
 			),
 			accessor: (row) => (
 				<div>
-					{row?.document6}
+					{row?.exchange_rate}
 				</div>
 			),
 		},
 		{
-			id     : 'documentValue7',
+			id     : 'tax_total_price',
 			Header : (
 				<div>Tax</div>
 			),
 			accessor: (row) => (
 				<div>
-					{ShowOverflowingNumber(row?.document7, CONCAT_LENGTH, 'INR') }
+					{ShowOverflowingNumber(row?.tax_total_price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) }
 				</div>
 			),
 		},
 		{
-			id     : 'documentValue8',
+			id     : 'tax_total_price_discounted',
 			Header : (
-				<div>Cost</div>
+				<div>Total</div>
 			),
 			accessor: (row) => (
 				<div>
-					{ShowOverflowingNumber(row?.document8, CONCAT_LENGTH, 'INR') }
+					{ShowOverflowingNumber(
+						row?.tax_total_price_discounted || ZERO_PRICE,
+						CONCAT_LENGTH,
+
+						row?.currency,
+					) }
 				</div>
 			),
 		},
