@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 
 import useGetDocumentList from '../hook/useGetDocumentList';
 
+import EmptyState from './commons/EmptyState';
 import Content from './commons/FiltersContent';
 import getFinancialCloseColumns from './configurations/getFinancialCloseColumns';
 import getJobColumns from './configurations/getJobColumns';
@@ -126,12 +127,22 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 			</main>
 			<div className={styles.list_container}>
 
-				<Table
-					columns={activeTab === 'operational_close' ? columns : columns2}
-					data={list}
-					className={styles.tablestyle}
-					loading={loading}
-				/>
+				{isEmpty(list) ? (
+					<>
+						<div className={styles.empty_container}>
+							<EmptyState height={315} width={482} text="" />
+						</div>
+						<div style={{ height: '80px' }} />
+					</>
+				)
+					: (
+						<Table
+							columns={activeTab === 'operational_close' ? columns : columns2}
+							data={list}
+							className={styles.tablestyle}
+							loading={loading}
+						/>
+					)}
 
 				{!isEmpty(list) && list?.length >= DEFAULT_PAGE_LIMIT
 					? (
