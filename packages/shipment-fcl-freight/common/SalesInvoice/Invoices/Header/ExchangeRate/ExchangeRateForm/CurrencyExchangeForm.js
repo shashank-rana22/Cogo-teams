@@ -47,7 +47,8 @@ function CurrencyExchangeForm({
 		}
 		handleFormSubmit(EXCHANGE_CURRENCY_HASH);
 	};
-
+	console.log('controls :: ', controls);
+	console.log('defaultValues :: ', defaultValues);
 	return (
 		<Modal
 			show={open}
