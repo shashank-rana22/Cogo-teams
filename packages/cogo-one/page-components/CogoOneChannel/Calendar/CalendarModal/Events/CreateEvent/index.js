@@ -133,7 +133,12 @@ function CreateEvent({
 
 	return (
 		<div className={styles.container}>
-			<Header setEventDetails={setEventDetails} setEventOccurence={setEventOccurence} category={category} />
+			<Header
+				setEventDetails={setEventDetails}
+				id={id}
+				setEventOccurence={setEventOccurence}
+				category={category}
+			/>
 			<div className={styles.form}>
 				<EventTypes
 					eventType={eventType}
