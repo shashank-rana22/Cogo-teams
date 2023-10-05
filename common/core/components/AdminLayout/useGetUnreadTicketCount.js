@@ -8,7 +8,7 @@ const getParams = ({ id = '' }) => ({
 	Statuses      : 'unresolved',
 });
 
-const useGetUnreadTicketCount = () => {
+const useGetUnreadTicketCount = ({ isTicketAllowed = false }) => {
 	const { id = '' } = useSelector((state) => state?.profile?.user);
 
 	const [{ data, loading }, trigger] = useTicketsRequest({
@@ -28,8 +28,10 @@ const useGetUnreadTicketCount = () => {
 	}, [id, trigger]);
 
 	useEffect(() => {
-		ticketCount();
-	}, [ticketCount]);
+		if (isTicketAllowed) {
+			ticketCount();
+		}
+	}, [ticketCount, isTicketAllowed]);
 
 	return {
 		loading,
