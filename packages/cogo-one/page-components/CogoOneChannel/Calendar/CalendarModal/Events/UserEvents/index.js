@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { cl } from '@cogoport/components';
 import { IcMTick, IcMAppDelete, IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';

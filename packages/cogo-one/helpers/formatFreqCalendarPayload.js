@@ -6,24 +6,27 @@ export const getDailyRecurrence = () => ({
 	unit         : 'day',
 });
 
-export const getWeeklyRecurrence = ({ weekly_repeat_on = [] }) => ({
+export const getWeeklyRecurrence = ({ weekly_repeat_on = [], days_of_week = [], id = '' }) => ({
 	type         : 'normal',
-	days_of_week : weekly_repeat_on || [],
+	days_of_week : !id ? weekly_repeat_on : days_of_week,
 });
 
-export const getMonthlyRecurrence = ({ month_on_date = 0 }) => ({
+export const getMonthlyRecurrence = ({ month_on_date = 0, date_of_month = 0, id = '' }) => ({
 	type          : 'normal',
-	date_of_month : month_on_date,
+	date_of_month : !id ? month_on_date : date_of_month,
 });
 
-export const getYearlyRecurrence = ({ yearly_month = 0, yearly_on_date = 0 }) => ({
-	month_of_year : yearly_month,
+export const getYearlyRecurrence = ({
+	yearly_month = 0, yearly_on_date = 0,
+	month_of_year = 0, date_of_month = 0, id = '',
+}) => ({
+	month_of_year : !id ? yearly_month : month_of_year,
 	type          : 'normal',
-	date_of_month : yearly_on_date,
+	date_of_month : yearly_on_date || date_of_month,
 });
 
-export const getCustomRecurrence = ({ custom_on_date = 0 }) => ({
+export const getCustomRecurrence = ({ custom_on_date = 0, repeat_after = 0, id = '' }) => ({
 	type         : 'normal',
-	repeat_after : custom_on_date,
+	repeat_after : !id ? custom_on_date : repeat_after,
 	unit         : 'day',
 });
