@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import Filter from '../../commons/Filters/index.tsx';
 import List from '../../commons/List/index.tsx';
 
+import RenderInvoiceNumber from './commons/RenderInvoiceNumber';
 import { invoiceFilters } from './configurations';
 import GetState from './GetState';
 import useGetBillsList from './hooks/useGetBillsList';
@@ -71,6 +72,9 @@ function Invoices({ activeEntity = '' }) {
 		),
 		renderAction: (itemData) => (
 			<RenderAction itemData={itemData} activeTab={activeTab} refetch={refetch} />
+		),
+		renderInvoiceNumber: (itemData, field) => (
+			<RenderInvoiceNumber itemData={itemData} field={field} />
 		),
 	};
 

@@ -3,6 +3,7 @@ import { Link } from '@cogoport/next';
 import React from 'react';
 
 import List from '../../../../commons/List/index.tsx';
+import RenderInvoiceNumber from '../../commons/RenderInvoiceNumber';
 import useGetSelectedInvoices from '../../hooks/useGetSelectedInvoices';
 import { RenderAction } from '../../InvoiceTable/RenderFunctions/RenderAction';
 import { RenderInvoiceDates } from '../../InvoiceTable/RenderFunctions/RenderInvoiceDates';
@@ -28,8 +29,11 @@ const getFunctions = ({ getInvoices = () => {} }) => ({
 	renderAction: (itemData) => (
 		<RenderAction itemData={itemData} hideIcDot />
 	),
-	renderBankDetails : (itemData) => (<BankDetails itemData={itemData} />),
-	renderDelete      : (itemData) => (<Delete itemData={itemData} refetch={getInvoices} />),
+	renderBankDetails   : (itemData) => (<BankDetails itemData={itemData} />),
+	renderDelete        : (itemData) => (<Delete itemData={itemData} refetch={getInvoices} />),
+	renderInvoiceNumber : (itemData, field) => (
+		<RenderInvoiceNumber itemData={itemData} field={field} />
+	),
 });
 
 function ViewSelectedInvoices({ apiData = {}, setApiData = () => {}, setViewSelectedInvoices = () => {} }) {

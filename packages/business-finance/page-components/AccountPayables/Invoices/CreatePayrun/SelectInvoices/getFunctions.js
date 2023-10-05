@@ -1,3 +1,4 @@
+import RenderInvoiceNumber from '../../commons/RenderInvoiceNumber';
 import { RenderAction } from '../../InvoiceTable/RenderFunctions/RenderAction';
 import { RenderInvoiceDates } from '../../InvoiceTable/RenderFunctions/RenderInvoiceDates';
 import { RenderToolTip } from '../../InvoiceTable/RenderFunctions/RenderToolTip';
@@ -49,6 +50,9 @@ const getFunctions = ({
 			field={field}
 			setEditedValue={setEditedValue}
 		/>
+	),
+	renderInvoiceNumber: (itemData, field) => (
+		<RenderInvoiceNumber itemData={itemData} field={field} />
 	),
 });
 

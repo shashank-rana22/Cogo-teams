@@ -29,9 +29,10 @@ export const ALL_INVOICE_CONFIG = {
 		{
 			label  : 'Invoice Number',
 			key    : 'invoice_number',
-			func   : 'renderFieldPair',
+			func   : 'renderInvoiceNumber',
 			span   : 1.2,
 			topKey : {
+				maxLength   : 12,
 				key         : 'invoiceNumber',
 				type        : 'href',
 				redirectKey : 'documentUrl',
