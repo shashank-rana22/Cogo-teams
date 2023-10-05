@@ -54,27 +54,22 @@ function useUpdateInvoice({
 		};
 
 		try {
-			let resp = null;
-
 			if (actionType === 'RELEASE') {
-				resp = await releaseTrigger({
+				await releaseTrigger({
 					data: { ...params },
 				});
 			} else if (actionType === 'DISPUTE') {
-				resp = await disputeTrigger({
+				await disputeTrigger({
 					data: { ...params },
 				});
 			} else {
-				resp = await pushTrigger({
+				await pushTrigger({
 					data: { ...params },
 				});
 			}
-
-			if (!resp.hasError) {
-				setRemarksModal(false);
-				Toast.success('Successfully Updated');
-				refetch();
-			}
+			setRemarksModal(false);
+			Toast.success('Successfully Updated');
+			refetch();
 		} catch (err) {
 			Toast.error(err?.response?.data?.message || 'Oops, Something Went Wrong');
 		}
