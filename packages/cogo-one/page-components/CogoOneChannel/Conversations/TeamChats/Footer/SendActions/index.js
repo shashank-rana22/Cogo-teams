@@ -6,9 +6,9 @@ import { isEmpty } from '@cogoport/utils';
 import { forwardRef } from 'react';
 
 import CustomFileUploader from '../../../../../../common/CustomFileUploader';
+import EmojisBody from '../../../../../../common/EmojisBody';
 import { ACCEPT_FILE_MAPPING } from '../../../../../../constants';
 import useGetEmojiList from '../../../../../../hooks/useGetEmojis';
-import EmojisBody from '../EmojisBody';
 
 import styles from './styles.module.css';
 
