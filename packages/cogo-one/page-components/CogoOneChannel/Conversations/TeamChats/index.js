@@ -12,7 +12,6 @@ const TIMEOUT_FOR_SCROLL = 200;
 function TeamChats(props) {
 	const {
 		activeTeamCard = {},
-		suggestions = [],
 		viewType = '',
 		loggedInUserId = '',
 		firestore = {},
@@ -79,7 +78,6 @@ function TeamChats(props) {
 			</div>
 			<div className={styles.footer}>
 				<Footer
-					suggestions={suggestions}
 					hasPermissionToEdit={hasPermissionToEdit}
 					activeTeamCard={activeTeamCard}
 					activeTab={activeTab}

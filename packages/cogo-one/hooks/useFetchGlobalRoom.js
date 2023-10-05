@@ -45,10 +45,10 @@ function mountActiveRoomSnapShot({
 					groupData: { id: activeMessageData?.id, ...newDocData },
 				};
 			});
+			setLoading(false);
 		});
 	} catch (e) {
 		console.error('error:group', e);
-	} finally {
 		setLoading(false);
 	}
 }
@@ -82,10 +82,10 @@ function mountDraftActiveRoomSnapShot({
 				...prev,
 				data: { id: snapshotData?.id, ...(snapShotdata) },
 			}));
+			setLoading(false);
 		});
 	} catch (e) {
 		console.error('error:draft', e);
-	} finally {
 		setLoading(false);
 	}
 }
@@ -96,7 +96,8 @@ function useFetchGlobalRoom({
 }) {
 	const loggedInAgentId = useSelector(({ profile }) => profile?.user?.id);
 
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
+
 	const activeRoomSnapshotListener = useRef({});
 
 	useEffect(() => {
