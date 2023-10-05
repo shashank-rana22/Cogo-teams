@@ -21,7 +21,7 @@ const useGetOrganizations = ({
 }) => {
 	const [query, setQuery] = useState('');
 	const [searchQuery, setSearchQuery] = useState('');
-
+	const [initialLoad, setInitialLoad] = useState(true);
 	const { query: searchValue = '', debounceQuery } = useDebounceQuery();
 
 	const [{ loading, data = {} }, trigger] = useRequest({
@@ -37,6 +37,7 @@ const useGetOrganizations = ({
 			await trigger({
 				params: getParam({ orgId, searchValue: searchQuery }),
 			});
+			setInitialLoad(false);
 		} catch (error) {
 			console.error(error);
 		}
@@ -61,6 +62,7 @@ const useGetOrganizations = ({
 		query,
 		setQuery,
 		setSearchQuery,
+		initialLoad,
 	};
 };
 

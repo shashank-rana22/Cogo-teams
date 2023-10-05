@@ -24,10 +24,8 @@ function CustomSelect({
 	const [isOpen, setIsOpen] = useState(false);
 	const rootRef = useRef(null);
 
-	const selectRef = useRef(null);
-
 	const handleClickOpen = () => {
-		if (!disabled && !isOpen) {
+		if (!disabled) {
 			setIsOpen((prev) => !prev);
 		}
 
@@ -37,17 +35,17 @@ function CustomSelect({
 	};
 
 	useEffect(() => {
-		const handleClickOutside = (e) => {
+		const handleOuterClick = (e) => {
 			if (rootRef.current && !rootRef.current.contains(e.target)) {
 				setIsOpen(false);
 				onSearch('');
 			}
 		};
 
-		document.addEventListener('mousedown', handleClickOutside);
+		document.addEventListener('mouseup', handleOuterClick);
 
 		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
+			document.removeEventListener('mouseup', handleOuterClick);
 		};
 	}, [onSearch, rootRef]);
 
@@ -63,12 +61,13 @@ function CustomSelect({
 			>
 				<Select
 					{...props}
-					ref={selectRef}
+					key={disabled}
 					onSearch={onSearch}
 				/>
 			</div>
 
-			<div className={cl`${styles.select_options_container} 
+			<div
+				className={cl`${styles.select_options_container} 
 				${isOpen ? styles.select_options_container_open : ''}`}
 			>
 				<div className={cl`${styles.custom_header} ${cl.ns('custom_header')}`}>

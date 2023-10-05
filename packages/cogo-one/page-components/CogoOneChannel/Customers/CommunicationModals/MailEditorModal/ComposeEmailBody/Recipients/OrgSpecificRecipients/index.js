@@ -24,6 +24,47 @@ function RenderLabel({ item = {} }) {
 	);
 }
 
+function resetEmailRecipientData({
+	prev = {},
+	recipientTypes = [],
+	orgId = '',
+	orgType = '',
+}) {
+	let newValues = {};
+
+	recipientTypes.forEach(
+		(itm) => {
+			newValues = {
+				...newValues,
+				[itm?.value]: [],
+			};
+		},
+	);
+
+	let customSubject = {
+		...(prev?.customSubject || {}),
+		serialId: '',
+	};
+
+	if (orgType === 'lead_organizations') {
+		customSubject = {
+			...(prev?.customSubject || {}),
+			activeTab : 'custom',
+			serialId  : 'custom',
+		};
+	}
+
+	return {
+		...prev,
+		...newValues,
+		customSubject,
+		orgData: {
+			orgType: orgType || prev?.orgData?.orgType,
+			orgId,
+		},
+	};
+}
+
 function OrgSpecificRecipients({
 	type = '',
 	setEmailState = () => {},
@@ -44,6 +85,7 @@ function OrgSpecificRecipients({
 		organizationData = {},
 		setQuery,
 		setSearchQuery,
+		initialLoad: orgInitialLoad = false,
 		organizationsLoading = false,
 	} = useGetOrganizations({
 		activeTab : emailState?.orgData?.orgType,
@@ -53,19 +95,18 @@ function OrgSpecificRecipients({
 	const selectOptions = useMemo(
 		() => getOrgListOptions({
 			organizationData,
-		}) || [],
+		}) || null,
 		[organizationData],
 	);
 
 	const handleChangeTab = (activeTab) => {
 		setSearchQuery('');
 		setEmailState(
-			(prev) => ({
-				...prev,
-				orgData: {
-					orgId   : '',
-					orgType : activeTab,
-				},
+			(prev) => resetEmailRecipientData({
+				prev,
+				recipientTypes,
+				orgType : activeTab,
+				orgId   : '',
 			}),
 		);
 	};
@@ -73,29 +114,15 @@ function OrgSpecificRecipients({
 	const handleSelectChange = (val) => {
 		setEmailState(
 			(prev) => {
-				let newValues = {};
+				if (val === prev?.orgData?.orgId) {
+					return prev;
+				}
 
-				recipientTypes.forEach(
-					(itm) => {
-						newValues = {
-							...newValues,
-							[itm?.value]: [],
-						};
-					},
-				);
-
-				return {
-					...prev,
-					...newValues,
-					customSubject: {
-						...(prev?.customSubject || {}),
-						serialId: '',
-					},
-					orgData: {
-						...(prev?.orgData || {}),
-						orgId: val,
-					},
-				};
+				return resetEmailRecipientData({
+					prev,
+					recipientTypes,
+					orgId: val,
+				});
 			},
 		);
 	};
@@ -112,6 +139,7 @@ function OrgSpecificRecipients({
 					size="sm"
 					loading={organizationsLoading}
 					options={selectOptions}
+					disabled={orgInitialLoad}
 					onSearch={setQuery}
 					optionsHeader={(
 						<CustomSelectHeader
