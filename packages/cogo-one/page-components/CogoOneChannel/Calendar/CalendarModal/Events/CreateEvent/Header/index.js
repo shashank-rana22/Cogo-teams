@@ -8,14 +8,22 @@ function Header({
 	setEventOccurence = () => {},
 	category = '',
 	setEventDetails = () => {},
+	id = '',
 }) {
 	return (
 		<div className={styles.tabs}>
 			{(TABS || []).map((itm) => (
 				<div
 					key={itm}
-					className={cl`${styles.tab} ${category === itm ? styles.active_tab : ''}`}
+					className={cl`${styles.tab} 
+					${category === itm ? styles.active_tab : ''}
+					${id ? styles.disabled : ''}
+					`}
 					onClick={() => {
+						if (id) {
+							return;
+						}
+
 						setEventDetails((prevEventDetails) => ({
 							...prevEventDetails,
 							category: itm,

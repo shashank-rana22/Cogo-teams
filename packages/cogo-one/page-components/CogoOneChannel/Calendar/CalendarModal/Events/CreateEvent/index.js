@@ -42,7 +42,7 @@ function CreateEvent({
 		frequencyType : '',
 	});
 
-	const [updatedId, setUpdateId] = useState({
+	const [updatedIds, setUpdateIds] = useState({
 		addedIds   : [],
 		removedIds : [],
 	});
@@ -86,10 +86,11 @@ function CreateEvent({
 		getEvents,
 		month,
 		id,
-		updatedId,
+		updatedIds,
 		setMonth,
 		setAddEvents,
 		setMyEvents,
+		updateEventDetails,
 	});
 	const { organization_id = '', start_date: startDateField } = formValues || {};
 
@@ -110,7 +111,7 @@ function CreateEvent({
 		const addedIds = val.filter((newId) => !selectedIds.includes(newId));
 		const removedIds = selectedIds.filter((oldId) => !val?.includes(oldId));
 
-		setUpdateId((pre) => ({
+		setUpdateIds((pre) => ({
 			...pre,
 			addedIds   : addedIds || [],
 			removedIds : removedIds || [],
@@ -132,7 +133,12 @@ function CreateEvent({
 
 	return (
 		<div className={styles.container}>
-			<Header setEventDetails={setEventDetails} setEventOccurence={setEventOccurence} category={category} />
+			<Header
+				setEventDetails={setEventDetails}
+				id={id}
+				setEventOccurence={setEventOccurence}
+				category={category}
+			/>
 			<div className={styles.form}>
 				<EventTypes
 					eventType={eventType}

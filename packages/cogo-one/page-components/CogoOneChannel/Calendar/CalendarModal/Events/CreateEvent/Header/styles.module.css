@@ -25,3 +25,7 @@
 	color: var(--color-primary-error-red-2);
 	background-color: var(--color-primary-error-red-5);
 }
+
+.disabled {
+	cursor: not-allowed;
+}

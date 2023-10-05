@@ -118,21 +118,30 @@ function ListCard({
 							</div>
 							<div className={styles.description}>{description}</div>
 							{category === 'reminder' ? (
-								<div className={styles.poc_details}>
-									<div className={styles.name}>POC:</div>
-									<div className={styles.poc_data}>
-										{(USER_CONTACT_DETAILS || []).map((item) => (
-											<div className={styles.contact_details} key={item}>
-												{item}
-											</div>
-										))}
+								<>
+									<div className={styles.schedules_details}>
+										<div className={styles.name}>
+											Schedule at:
+											{' '}
+											{startDate}
+										</div>
 									</div>
-								</div>
+									<div className={styles.poc_details}>
+										<div className={styles.name}>POC:</div>
+										<div className={styles.poc_data}>
+											{(USER_CONTACT_DETAILS || []).map((item) => (
+												<div className={styles.contact_details} key={item}>
+													{item}
+												</div>
+											))}
+										</div>
+									</div>
+								</>
 							) : null}
 
 							{category === 'meeting' ? (
 								<>
-									<div className={styles.title}>Partispants :</div>
+									<div className={styles.title}>Participants :</div>
 									<div className={styles.partispants}>
 										{(participants || []).map((item, index) => (
 											<div key={item?.id} className={styles.partispants_users}>

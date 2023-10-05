@@ -63,6 +63,12 @@
 	color: #221f20;
 }
 
+.schedules_details {
+	display: flex;
+	align-items: center;
+	margin: 6px 0;
+}
+
 .poc_details {
 	display: flex;
 }
