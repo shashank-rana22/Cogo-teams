@@ -20,19 +20,20 @@ export default function Timeline({
 	type = '',
 	source = '',
 }) {
-	const { grand_total: income = '', profitability = '', id = '' } = data || {};
+	const { grand_total: income = '', profitability = '', id = '', document_id = '' } = data || {};
+
 	const key = `${upperCase(type)}_${id}`;
 	const isOpen = source === 'OPR' ? operationCardOpen?.[key] : financeCardOpen?.[key];
 
 	const {
 		data: timeLineData = {},
 		loading: timeLineLoading = false, getInvoiceDetailsApi = () => {},
-	} = useGetInvoiceTimeline({ id });
+	} = useGetInvoiceTimeline({ id: document_id });
 
 	const {
 		data: billTimeLineData = [],
 		loading: billTimeLineLoading = false, getBillTimeLine = () => {},
-	} = useGetBillTimeline({ id });
+	} = useGetBillTimeline({ id: document_id });
 
 	const callTimeLineApi = (currentState) => {
 		if (source === 'OPR') {

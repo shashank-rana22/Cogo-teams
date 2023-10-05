@@ -19,7 +19,7 @@ export default function BuySellStatusContent({
 	// const [remarkValue, setRemarkValue] = useState('');
 	const {
 		grand_total: income = '', document_number = '',
-		trade_party = '', document_date = '', status = '',
+		trade_party = '', document_date = '', document_status = '',
 	} = data || {};
 
 	return (
@@ -44,7 +44,7 @@ export default function BuySellStatusContent({
 					</div>
 					<div>
 						<div className={styles.regular}>Invoice Status</div>
-						<div><Pill color="#B4F3BE">{status}</Pill></div>
+						<div><Pill color="#B4F3BE">{document_status}</Pill></div>
 					</div>
 				</div>
 				<div className={styles.timeline_container}>
