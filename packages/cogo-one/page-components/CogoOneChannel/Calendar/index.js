@@ -11,7 +11,11 @@ function Calendar() {
 
 	useEffect(() => {
 		const handleClickOutside = (event) => {
-			if (cardRef.current && !cardRef.current.contains(event.target)) {
+			if (
+				cardRef.current
+			&& !cardRef.current.contains(event.target)
+			&& !eventClender
+			) {
 				setEventCalendar(false);
 			}
 		};
@@ -20,7 +24,7 @@ function Calendar() {
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
-	}, []);
+	}, [eventClender]);
 
 	return (
 		<>

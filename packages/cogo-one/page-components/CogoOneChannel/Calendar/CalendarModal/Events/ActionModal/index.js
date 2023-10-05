@@ -34,7 +34,7 @@ function ActionModal({
 	const INFO_MAPPING = {
 		completed: `Are you sure you want to marks as completed this
 		${startCase(category)} ?`,
-		inactive: `Are you sure you want to marks as inactive this ${startCase(subject)}
+		inactive: `Are you sure you want to marks as inactive ${startCase(subject)}
 		${startCase(category)} ?`,
 		edit: <EditSchedules value={value} control={control} errors={errors} watch={watch} setValue={setValue} />,
 	};

@@ -5,7 +5,7 @@ const NEW_DATE = new Date();
 const ADD_DAY = 1;
 
 const editScheduleControl = ({ watch = () => {} }) => {
-	const { start_date, end_date } = watch();
+	const { start_date, end_date, end_time, start_time } = watch();
 	return ({
 		start_date: {
 			name        : 'start_date',
@@ -29,7 +29,8 @@ const editScheduleControl = ({ watch = () => {} }) => {
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			isPreviousDaysAllowed : true,
 			rules                 : {
-				validate: (value) => (value < start_date ? 'Cannot be less than start time' : true),
+				validate: (value) => (((value.getDate() === start_date.getDate() && end_time < start_time))
+					? 'Cannot be less than start time' : true),
 			},
 		},
 		end_time: {
