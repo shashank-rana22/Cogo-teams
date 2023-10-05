@@ -15,7 +15,7 @@ const useGetUnreadTicketCount = ({ isTicketAllowed = false }) => {
 		url     : '/unread_count',
 		method  : 'get',
 		authkey : 'get_tickets_unread_count',
-	}, { manual: false });
+	}, { manual: true });
 
 	const ticketCount = useCallback(() => {
 		try {
