@@ -45,7 +45,11 @@ const business_finance = {
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},
-
+		{
+			api         : 'get_sales_invoice_timeline_by_id',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
 		{
 			api          : 'get_collection_party_variance',
 			access_type  : 'private',

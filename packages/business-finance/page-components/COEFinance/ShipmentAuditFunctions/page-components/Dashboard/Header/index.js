@@ -1,38 +1,34 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import useGetClosedTasks from '../../../../hook/useGetClosedTasks';
 import useGetPrePostShipmentQuotation from '../../../../hook/useGetPrePostShipmentQuotation';
+import FinanceClosedCardsSet from '../QuotationCards/FinanceClosedCardsSet';
+import OperationalClosedCards from '../QuotationCards/OperationalClosedCards';
 import PrePostCheckoutCards from '../QuotationCards/PrePostCheckoutCards';
 
 import styles from './styles.module.css';
 
 function Header({ jobId = '' }) {
-	const { query: { active_tab = '' }, push = () => {} } = useRouter();
+	const { query: { active_tab = '', job_id = '' }, push = () => {} } = useRouter();
 	const {
 		data: quoteData = {},
 		loading: quoteLoading = true,
 	} = useGetPrePostShipmentQuotation({ jobId });
 
-	// console.log({ quoteData });
-
 	const [accordionState, setAccordionState] = useState({});
-	// console.log({ initialState, accordionState });
 	useEffect(() => {
 		const INITIAL_STATE = {};
-		// let check = 0;
 		Object.keys(quoteData).forEach((category) => {
 			Object.keys(quoteData[category]).forEach((subCategory, index) => {
-			// console.log(`${category}_${subCategory}`, 'hipp', index);
-			// check = -1;
 				INITIAL_STATE[`${category}_${subCategory}`] = (index === GLOBAL_CONSTANTS.zeroth_index);
 			});
 		});
 		setAccordionState(INITIAL_STATE);
 	}, [quoteData]);
-
-	// console.log({ accordionState });
 
 	const toggleAccordion = (key) => {
 		setAccordionState((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -48,6 +44,25 @@ function Header({ jobId = '' }) {
 			);
 		}
 	};
+	const {
+		data: taskData = {},
+		// loading: taskDataLoading = true,
+	} = useGetClosedTasks({ job_id, activeTab: 'operational_close' });
+
+	const [operationCardOpen, setOperationCardOpen] = useState({});
+
+	useEffect(() => {
+		if (!isEmpty(Object.keys(taskData))) {
+			const INITIAL_STATE = {};
+			Object.keys(taskData).forEach((category) => {
+				taskData?.[category]?.forEach((subCategory) => {
+					INITIAL_STATE[`${category}_${subCategory?.id}`] = false;
+				});
+			});
+			setOperationCardOpen(INITIAL_STATE);
+		}
+	}, [taskData]);
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.container}>
@@ -81,6 +96,32 @@ function Header({ jobId = '' }) {
 					setAccordionState={setAccordionState}
 					category="BUY"
 				/>
+			</div>
+			<div className={styles.all_task_container}>
+				<div className={styles.task_specific_container}>
+					{taskData?.SELL && (
+						<OperationalClosedCards
+							jobId={jobId}
+							data={taskData?.SELL}
+							type="sell"
+							operationCardOpen={operationCardOpen}
+							setOperationCardOpen={setOperationCardOpen}
+						/>
+					)}
+
+					{taskData?.BUY && (
+						<OperationalClosedCards
+							jobId={jobId}
+							data={taskData?.BUY}
+							type="buy"
+							operationCardOpen={operationCardOpen}
+							setOperationCardOpen={setOperationCardOpen}
+						/>
+					)}
+				</div>
+				{active_tab === 'financial_close' && (
+					<FinanceClosedCardsSet job_id={job_id} />
+				)}
 			</div>
 		</div>
 	);

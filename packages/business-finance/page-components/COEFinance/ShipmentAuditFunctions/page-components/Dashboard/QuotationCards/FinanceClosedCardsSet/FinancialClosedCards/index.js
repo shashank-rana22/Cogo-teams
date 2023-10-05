@@ -1,15 +1,15 @@
 import { IcMDummyCircle } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import Timeline from '../Timeline';
+import Timeline from '../../Timeline';
 
 import styles from './styles.module.css';
 
-function OperationalClosedCards({
+function FinancialClosedCards({
 	type = '',
 	data = {},
-	operationCardOpen = {},
-	setOperationCardOpen = () => {},
+	financeCardOpen = {},
+	setFinanceCardOpen = () => {},
 }) {
 	return (
 		<div className={styles.single_card}>
@@ -18,7 +18,7 @@ function OperationalClosedCards({
 					<div className={styles.accordion}>
 						<div className={styles.header}>
 							<div className={styles.headings}>
-								{`Operationally Closed ${startCase(type)}`}
+								{`Financially Closed ${startCase(type)}`}
 								<div className={styles.line} />
 							</div>
 						</div>
@@ -35,9 +35,9 @@ function OperationalClosedCards({
 								<Timeline
 									data={item}
 									type={type}
-									source="OPR"
-									operationCardOpen={operationCardOpen}
-									setOperationCardOpen={setOperationCardOpen}
+									financeCardOpen={financeCardOpen}
+									source="FIN"
+									setFinanceCardOpen={setFinanceCardOpen}
 								/>
 							</div>
 						))}
@@ -48,4 +48,4 @@ function OperationalClosedCards({
 	);
 }
 
-export default OperationalClosedCards;
+export default FinancialClosedCards;

@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useGetInvoiceTimeline = ({ id = '' }) => {
 	const [
@@ -14,13 +15,13 @@ const useGetInvoiceTimeline = ({ id = '' }) => {
 		{ manual: true },
 	);
 
-	const getInvoiceDetailsApi = async () => {
+	const getInvoiceDetailsApi = useCallback(async () => {
 		try {
-			await trigger({});
+			await trigger();
 		} catch (err) {
-			Toast.error('INVOICE DETAILS DOES NOT EXIST');
+			Toast.error(err?.message);
 		}
-	};
+	}, [trigger]);
 
 	return {
 		loading,

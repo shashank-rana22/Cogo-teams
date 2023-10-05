@@ -1,0 +1,7 @@
+.horizontal_rule {
+	width: 200px;
+	height: 2px;
+	margin-right: -2px;
+	margin-left: -2px;
+	background-color: #67c676;
+}
