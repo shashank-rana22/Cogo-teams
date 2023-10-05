@@ -91,6 +91,7 @@ function InvoiceModal({
 				const codeData = chargeCodes[item?.code] || {};
 				return {
 					serial_number       : index + SERIAL_INCREMENT,
+					truck_number        : item?.truck_number,
 					code                : item?.code,
 					product_description : codeData?.actualname,
 					sac                 : codeData?.sac_code,
@@ -101,11 +102,10 @@ function InvoiceModal({
 					tax_percent         : `${codeData?.tax_percent}%`,
 					taxable_amount      : Number(item?.tax_amt || DEFAULT_AMOUNT_TAXABLE),
 					total               : Number(item?.cost || DEFAULT_AMOUNT_TOTAL),
-					truck_number        : formValues?.truck_number,
 				};
 			},
 		),
-		[calculatedValues.newItems, chargeCodes, formValues],
+		[calculatedValues.newItems, chargeCodes],
 	);
 	const { listEntities, entitiesLoading } = useGetEntities();
 

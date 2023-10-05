@@ -19,7 +19,12 @@ function InputNumberController(props) {
 					{...rest}
 					id={name}
 					key={rest.id}
-					onChange={onChange}
+					onChange={(e) => {
+						if (typeof rest?.onChange === 'function') {
+							rest?.onChange(e);
+						}
+						onChange(e);
+					}}
 					value={newValue || ''}
 					arrow={arrow}
 					onBlur={(event) => {

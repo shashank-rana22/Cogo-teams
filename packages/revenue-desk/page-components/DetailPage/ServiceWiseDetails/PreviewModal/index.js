@@ -2,14 +2,14 @@ import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import { DEFAULT_INDEX, VALUE_ZERO, VALUE_ONE, PERCENTAGE_CHECK, VALUE_TWO } from '../../../constants';
+import { DEFAULT_INDEX, VALUE_ZERO, VALUE_ONE, VALUE_TWO } from '../../../constants';
 
 import Header from './Header';
 import PreviewSelectedCards from './PreviewSelectedCards';
 
 function PreviewModal({
 	modalStep, setModalStep,
-	groupedShowServicesData, supplierPayload, shipmentData, updateTrigger,
+	groupedShowServicesData, supplierPayload, shipmentData,
 }) {
 	const NEW_FILTERED_GROUPED_SHOW_SERVICES_DATA = {};
 
@@ -39,21 +39,9 @@ function PreviewModal({
 	);
 
 	const [previewActiveTab, setPreviewActiveTab] = useState(previewTabsKey[DEFAULT_INDEX]);
-	let hasNegativeProfitability = false;
-	Object.values(supplierPayload).forEach((rates) => {
-		rates.forEach((rate) => {
-			if (rate?.data?.rowData?.profit_percentage < PERCENTAGE_CHECK) {
-				hasNegativeProfitability = true;
-			}
-		});
-	});
 
 	const handleSumbit = () => {
-		if (hasNegativeProfitability) {
-			setModalStep(VALUE_TWO);
-		} else {
-			updateTrigger();
-		}
+		setModalStep(VALUE_TWO);
 	};
 	return (
 		<>

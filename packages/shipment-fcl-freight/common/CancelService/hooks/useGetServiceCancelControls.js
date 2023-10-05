@@ -22,9 +22,13 @@ export default function useGetServiceCancelControls({
 	closeModal = () => {},
 	service_type = '',
 }) {
+	const {
+		servicesList = [], refetchServices = () => {},
+		shipment_data = {}, activeStakeholder = '',
+	} = useContext(ShipmentDetailContext);
+
 	const [selectedReason, setSelectedReason] = useState(null);
 
-	const { servicesList, refetchServices, shipment_data, activeStakeholder } = useContext(ShipmentDetailContext);
 	const refetchFuncs = () => {
 		closeModal();
 		refetchServices();

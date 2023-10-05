@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import LoadingState from '../LoadingState';
 
@@ -19,7 +21,7 @@ function ExecuteTask({
 		serviceIdMapping = [],
 	} = useTaskExecution({ task, taskConfigData });
 
-	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - 1] : {};
+	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - GLOBAL_CONSTANTS.one] : {};
 
 	if (loading) {
 		return <div><LoadingState /></div>;
@@ -31,7 +33,7 @@ function ExecuteTask({
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			isLastStep={currentStep === steps.length - 1}
+			isLastStep={currentStep === steps.length - GLOBAL_CONSTANTS.one}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}

@@ -483,7 +483,6 @@ export default {
 			{ label: 'Irn Cancelled', value: 'IRN_CANCELLED' },
 			{ label: 'Posted to Sage', value: 'POSTED' },
 			{ label: 'Post to Sage Failed', value: 'FAILED' },
-			{ label: 'Requested', value: 'REQUESTED' },
 		],
 		invoice_status_new: [
 			{ label: 'Draft', value: 'DRAFT' },
@@ -492,7 +491,6 @@ export default {
 			{ label: 'Irn Generated', value: 'IRN_GENERATED' },
 			{ label: 'Irn Failed', value: 'IRN_FAILED' },
 			{ label: 'Irn Cancelled', value: 'IRN_CANCELLED' },
-			{ label: 'Requested', value: 'REQUESTED' },
 		],
 		freight_container_types: [
 			{

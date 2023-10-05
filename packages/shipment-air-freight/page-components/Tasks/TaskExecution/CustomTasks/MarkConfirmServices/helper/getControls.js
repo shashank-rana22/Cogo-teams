@@ -28,7 +28,7 @@ const getServiceProvider = ({ serviceType = '' }) => ({
 			account_type : 'service_provider',
 			status       : 'active',
 			kyc_status   : 'verified',
-			service      : serviceType,
+			service      : serviceType === 'subsidiary_service' ? 'air_freight' : serviceType,
 		},
 	},
 	rules: {

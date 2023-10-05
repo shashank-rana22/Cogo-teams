@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function FilterService({ setFilters, filters, uniqueServices }) {
+function FilterService({ setFilters = () => {}, filters = {}, uniqueServices = [] }) {
 	return (
 		<div className={styles.container}>
 			<Select

@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const NUMBER_OF_LOADING_ROWS = 5;
 
-function List({ fields, data, loading }) {
+function List({ fields = [], data = [], loading = false }) {
 	if (loading) {
 		return (
 			<div className={styles.container}>

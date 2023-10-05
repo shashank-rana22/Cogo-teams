@@ -19,7 +19,7 @@ const useAddUploadList = ({
 		{
 			url     : '/payments/dunning/create-exceptions',
 			method  : 'post',
-			authKey : 'get_payments_dunning_create_exceptions',
+			authKey : 'post_payments_dunning_create_exceptions',
 		},
 		{ manual: true },
 	);
