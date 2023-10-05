@@ -43,24 +43,24 @@ function useUpdateInvoice({
 	const user = user_profile?.user || {};
 	const { organization_id: organizationId } = query || {};
 
-	const updateInvoice = async (val = '', remarks = '') => {
+	const updateInvoice = async (val = '', actionType = '') => {
 		const params = {
 			remarks         : val,
 			organization_id : organizationId,
 			performedByName : user?.name,
 			performedBy     : user?.id,
 			performedType   : user_profile?.session_type,
-			action          : remarks,
+			action          : actionType,
 		};
 
 		try {
 			let resp = null;
 
-			if (remarks === 'RELEASE') {
+			if (actionType === 'RELEASE') {
 				resp = await releaseTrigger({
 					data: { ...params },
 				});
-			} else if (remarks === 'DISPUTE') {
+			} else if (actionType === 'DISPUTE') {
 				resp = await disputeTrigger({
 					data: { ...params },
 				});

@@ -20,16 +20,16 @@ function Remark({ itemData = {}, checkRelease = false, refetch = () => {}, hideI
 		itemData,
 	});
 	const [remarksModal, setRemarksModal] = useState(false);
-	const [remarks, setRemarks] = useState('');
+	const [actionType, setActionType] = useState('');
 	const { invoiceNumber = '' } = itemData || {};
 
 	const { isConditionMatches } = useGetPermission();
 	const isReleaseButtonAllowed = isConditionMatches(CC.SEE_RELEASE_ACTION);
 	const isActionsButtonAllowed = isConditionMatches(CC.SEE_ACTIONS, 'or');
 
-	const onChange = (remark = '') => {
+	const onChange = (action = '') => {
 		setRemarksModal(true);
-		setRemarks(remark);
+		setActionType(action);
 	};
 
 	return (
@@ -86,7 +86,7 @@ function Remark({ itemData = {}, checkRelease = false, refetch = () => {}, hideI
 
 			{remarksModal ? (
 				<RemarksModal
-					remarks={remarks}
+					actionType={actionType}
 					setRemarksModal={setRemarksModal}
 					invoiceNumber={invoiceNumber}
 					refetch={refetch}

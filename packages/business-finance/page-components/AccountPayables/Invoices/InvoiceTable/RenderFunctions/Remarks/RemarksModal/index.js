@@ -6,7 +6,7 @@ import useUpdateInvoice from '../../../../hooks/useUpdateInvoice';
 import styles from './styles.module.css';
 
 function RemarksModal({
-	remarks = '',
+	actionType = '',
 	setRemarksModal = () => {},
 	invoiceNumber = '',
 	refetch = () => {},
@@ -25,7 +25,7 @@ function RemarksModal({
 			<Modal.Body>
 				<div className={styles.bold}>
 					REMARK FOR
-					<span className={styles.span}>{remarks || ''}</span>
+					<span className={styles.span}>{actionType || ''}</span>
 				</div>
 				<div className={styles.invoice}>
 					Invoice No.
@@ -33,7 +33,7 @@ function RemarksModal({
 				</div>
 				<Textarea
 					value={remark}
-					onChange={(e) => setRemark(e)}
+					onChange={setRemark}
 					size="md"
 					placeholder="Remarks....."
 				/>
@@ -45,7 +45,7 @@ function RemarksModal({
 						Back
 					</Button>
 					<Button
-						onClick={() => { updateInvoice(remark, remarks); }}
+						onClick={() => updateInvoice(remark, actionType)}
 						disabled={!remark || remarksLoading}
 						className={styles.send_button}
 					>

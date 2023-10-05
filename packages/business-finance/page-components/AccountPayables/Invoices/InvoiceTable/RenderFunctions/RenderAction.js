@@ -4,8 +4,10 @@ import InvoiceDetailsTimeLine from './InvoiceDetailsTimeLine';
 import Remarks from './Remarks';
 import styles from './styles.module.css';
 
+const POSSIBLE_ACTIVE_TAB = ['disputed'];
+
 export function RenderAction({ itemData = {}, activeTab = '', refetch = () => {}, hideIcDot = false }) {
-	const checkRelease = ['disputed'].includes(activeTab);
+	const checkRelease = POSSIBLE_ACTIVE_TAB.includes(activeTab);
 
 	return (
 		<div className={styles.flex}>
