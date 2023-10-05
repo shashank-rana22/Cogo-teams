@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError'; import { useR
 
 import GROUP_PAYLOAD_FUNC_MAPPING from '../helpers/updateGroupHelper';
 
-function useUpdateCogooneGroup({ activeTab = {}, setAddMembers = () => {} }) {
+function useUpdateCogooneGroup({ activeTab = {}, setAddMembers = () => {}, cleanUpFunc = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_cogoone_groups',
 		method : 'post',
@@ -11,7 +11,7 @@ function useUpdateCogooneGroup({ activeTab = {}, setAddMembers = () => {} }) {
 
 	const { groupData = {} } = activeTab || {};
 
-	const updateCogooneGroup = async ({ actionName = '', userIds = [] }) => {
+	const updateCogooneGroup = async ({ actionName = '', userIds = [], groupName = '' }) => {
 		const { getPayload } = GROUP_PAYLOAD_FUNC_MAPPING[actionName];
 
 		if (!getPayload || loading) {
@@ -23,9 +23,11 @@ function useUpdateCogooneGroup({ activeTab = {}, setAddMembers = () => {} }) {
 				data: getPayload({
 					userIds,
 					groupData,
+					groupName,
 				}),
 			});
 			setAddMembers(false);
+			cleanUpFunc();
 		} catch (error) {
 			Toast.error(
 				getApiErrorString(error?.response?.data)

@@ -10,6 +10,9 @@ import styles from './styles.module.css';
 function EditName({
 	searchName = '',
 	isGroup = false,
+	firestore = {},
+	activeTab = {},
+	isDraft = false,
 }) {
 	const [openPopover, setOpenPopover] = useState(false);
 
@@ -21,7 +24,15 @@ function EditName({
 			<div className={styles.popover_container}>
 				{isGroup ? (
 					<Popover
-						render={openPopover ? <EditGroupName /> : null}
+						render={openPopover ? (
+							<EditGroupName
+								firestore={firestore}
+								activeTab={activeTab}
+								searchName={searchName}
+								setOpenPopover={setOpenPopover}
+								isDraft={isDraft}
+							/>
+						) : null}
 						trigger="mouseenter"
 						placement="bottom"
 						visible={openPopover}

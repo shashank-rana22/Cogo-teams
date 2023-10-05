@@ -58,7 +58,13 @@ function Header({
 					/>
 				)}
 				<div className={styles.name}>
-					<EditName searchName={search_name} isGroup={isGroup} />
+					<EditName
+						searchName={search_name}
+						isGroup={isGroup}
+						firestore={firestore}
+						activeTab={activeTab}
+						isDraft={is_draft}
+					/>
 				</div>
 			</div>
 			<div className={styles.buttons_flex}>

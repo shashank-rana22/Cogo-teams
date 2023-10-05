@@ -44,6 +44,16 @@ function removeOwnerToGroup({ userIds = [], groupData = {} }) {
 	return payload;
 }
 
+function updateGroupName({ groupData = {}, groupName = '' }) {
+	const payload = {
+		group_id    : groupData?.id,
+		action_name : 'update_group_name',
+		name        : groupName,
+	};
+
+	return payload;
+}
+
 const GROUP_PAYLOAD_FUNC_MAPPING = {
 	ADD_TO_GROUP: {
 		getPayload: addToGroupPayload,
@@ -58,7 +68,7 @@ const GROUP_PAYLOAD_FUNC_MAPPING = {
 		getPayload: addOwnerToGroup, // todo
 	},
 	UPDATE_GROUP_NAME: {
-		getPayload: () => {}, // todo
+		getPayload: updateGroupName,
 	},
 };
 

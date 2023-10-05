@@ -52,9 +52,16 @@ const PAYLOAD_MAPPING = {
 			group_members_data : updatedGroupMembersData,
 		};
 	},
+
+	UPDATE_GROUP_NAME: ({ groupName = '' }) => ({
+		search_name: groupName,
+	}),
 };
 
-function useUpdateDraftLocalCogooneGroup({ activeTab = {}, setAddMembers = () => {}, firestore = {} }) {
+function useUpdateDraftLocalCogooneGroup({
+	activeTab = {}, setAddMembers = () => {},
+	firestore = {}, cleanUpFunc = () => {},
+}) {
 	const loggedInAgentId = useSelector(({ profile }) => profile?.user?.id);
 
 	const [loading, setLoading] = useState(false);
@@ -65,7 +72,8 @@ function useUpdateDraftLocalCogooneGroup({ activeTab = {}, setAddMembers = () =>
 	const updateDraftLocalCogooneGroup = async ({
 		actionName = '',
 		userIds = [],
-		userIdsData,
+		userIdsData = [],
+		groupName = '',
 	}) => {
 		try {
 			setLoading(true);
@@ -78,11 +86,12 @@ function useUpdateDraftLocalCogooneGroup({ activeTab = {}, setAddMembers = () =>
 			const roomDoc = doc(firestore, `users/${loggedInAgentId}/groups/${id}`);
 
 			const payload = payloadFunc?.(
-				{ data, userIds, userIdsData },
+				{ data, userIds, userIdsData, groupName },
 			);
 
 			await updateDoc(roomDoc, payload);
 
+			cleanUpFunc();
 			setAddMembers(false);
 		} catch (error) {
 			Toast.error('Something Went Wrong');
