@@ -1,7 +1,9 @@
 import { Button, Checkbox, Modal, Toast } from '@cogoport/components';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { CLOSE_REASON_OPTIONS } from '../../../../configurations/helpers/constants';
+import useDeleteFreightRateFeedbacks from '../../../../hooks/useDeleteFreightRateFeedbacks';
+import useDeleteFreightRateRequests from '../../../../hooks/useDeleteFreightRateRequests';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 
 import styles from './styles.module.css';
@@ -13,22 +15,49 @@ function CloseModal({
 	getListCoverage = () => {},
 	filter = {},
 	getStats = () => {},
+	source = {},
 }) {
+	const [checkboxValue, setCheckboxValue] = useState('');
 	const {
 		loading,
 		deleteRateJob,
-		checkboxValue,
-		setCheckboxValue,
 	} = useDeleteRateJob(filter?.service);
-
+	const { deleteRequest } = useDeleteFreightRateRequests(filter?.service);
+	const { deleteFeedbackRequest } = useDeleteFreightRateFeedbacks(filter?.service);
+	const handelSucessAction = () => {
+		Toast.success('closed successfully');
+		setShowModal(false);
+		getStats();
+		getListCoverage();
+	};
 	const handleSubmit = async () => {
 		if (!checkboxValue) return;
-		const id = await deleteRateJob({ service: filter?.service, id: data?.id });
-		if (id) {
-			Toast.success('closed successfully');
-			setShowModal(false);
-			getStats();
-			getListCoverage();
+		if (source === 'rate_feedback') {
+			const resp = await deleteFeedbackRequest({
+				id              : data?.source_id,
+				closing_remarks : data?.closing_remarks,
+				checkboxValue,
+			});
+			if (resp) {
+				handelSucessAction();
+			}
+		}
+		if (source === 'rate_request') {
+			const resp = await deleteRequest({
+				id              : data?.source_id,
+				closing_remarks : data?.closing_remarks,
+				checkboxValue,
+			});
+			if (resp) {
+				handelSucessAction();
+			}
+		}
+		if (['critical_ports', 'expiring_rates', 'cancelled_shipments']
+			?.includes(source)) {
+			const resp = await deleteRateJob({ service: filter?.service, id: data?.id, checkboxValue });
+			if (resp) {
+				handelSucessAction();
+			}
 		}
 	};
 	return (

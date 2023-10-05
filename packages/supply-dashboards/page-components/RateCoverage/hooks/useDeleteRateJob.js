@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
 
 const API_NAME = {
 	fcl_freight : 'delete_fcl_freight_rate_job',
@@ -24,14 +23,12 @@ const useDeleteRateJob = (service) => {
 	}));
 	const { user: { id: user_id = '' } = {} } = user_data;
 
-	const [checkboxValue, setCheckboxValue] = useState('');
-
 	const [{ loading }, trigger] = useRequest({
 		url    : endPoint,
 		method : 'POST',
 	}, { manual: true });
 
-	const deleteRateJob = async ({ rate_id, data = {}, id }) => {
+	const deleteRateJob = async ({ rate_id, data = {}, id, checkboxValue }) => {
 		const weight_slabs = (data?.weight_slabs || []).map((item) => ({
 			lower_limit  : item?.lower_limit,
 			upper_limit  : item?.upper_limit,
@@ -103,8 +100,6 @@ const useDeleteRateJob = (service) => {
 	return {
 		loading,
 		deleteRateJob,
-		checkboxValue,
-		setCheckboxValue,
 	};
 };
 

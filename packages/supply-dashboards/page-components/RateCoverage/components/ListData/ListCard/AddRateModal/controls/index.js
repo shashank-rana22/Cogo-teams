@@ -17,6 +17,7 @@ import ftlControls from './ftl-controls';
 import haulageControls from './haulage-controls';
 import lclControls from './lcl-controls';
 import lclCustomsControls from './lcl-customs-controls';
+import ltlControls from './ltl-controls';
 import trailerControls from './trailer-control';
 
 const serviceControlsMap = {
@@ -29,6 +30,7 @@ const serviceControlsMap = {
 	lcl_customs : lclCustomsControls,
 	trailer     : trailerControls,
 	ftl_freight : ftlControls,
+	ltl_freight : ltlControls,
 };
 
 const getDefaultValues = (oldfields) => {

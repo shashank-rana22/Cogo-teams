@@ -5058,7 +5058,7 @@ const partner = {
 		{
 			api          : 'get_lcl_customs_rate_job_stats',
 			access_type  : 'private',
-			service_name : 'fcl_customs_rate',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'get_air_customs_rate_job_stats',

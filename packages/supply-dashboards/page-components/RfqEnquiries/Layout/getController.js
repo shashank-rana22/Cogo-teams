@@ -5,6 +5,7 @@ import {
 	DatepickerController,
 	UploadController,
 	AsyncSelectController,
+	InputGroupController,
 } from '@cogoport/forms';
 
 import DepartureDateSelectController from './DepartureDateSelect/index';
@@ -34,6 +35,9 @@ const getElementController = (type = 'text') => {
 
 		case 'async_select':
 			return AsyncSelectController;
+
+		case 'input-group':
+			return InputGroupController;
 
 		default:
 			return null;

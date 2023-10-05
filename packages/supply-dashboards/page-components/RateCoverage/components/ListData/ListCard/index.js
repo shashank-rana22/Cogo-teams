@@ -252,7 +252,7 @@ function ListCard({
 									/>
 								)}
 
-						{['critical_ports', 'expiring_rates', 'cancelled_shipments']?.includes(source)
+						{!['live_bookings']?.includes(source)
 							&& (
 								<div>
 									{!['aborted', 'completed'].includes(filter?.status) && (
@@ -281,6 +281,7 @@ function ListCard({
 					getListCoverage={getListCoverage}
 					filter={filter}
 					getStats={getStats}
+					source={source}
 				/>
 			)}
 

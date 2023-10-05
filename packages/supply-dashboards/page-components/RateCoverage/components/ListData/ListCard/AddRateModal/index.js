@@ -11,8 +11,11 @@ import Layout from '../../../../../RfqEnquiries/Layout';
 import { DEFAULT_VALUE, DELTA_VALUE, VALUE_ONE } from '../../../../configurations/helpers/constants';
 import FieldMutation from '../../../../configurations/helpers/mutation-fields';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
+import useDeleteFreightRateFeedbacks from '../../../../hooks/useDeleteFreightRateFeedbacks';
+import useDeleteFreightRateRequests from '../../../../hooks/useDeleteFreightRateRequests';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetFreightRate from '../../../../hooks/useGetFreightRate';
+import useUpdateFlashBookingRate from '../../../../hooks/useUpdateFlashBookingRate';
 import ServiceDetailsContent from '../DetailsView/Content';
 
 import useControls from './controls';
@@ -71,17 +74,47 @@ function AddRateModal({
 
 	const { createRate } = useCreateFreightRate(filter?.service);
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
+	const { deleteRequest } = useDeleteFreightRateRequests(filter?.service);
+	const { deleteFeedbackRequest } = useDeleteFreightRateFeedbacks(filter?.service);
+	const { updateFlashBookingRate } = useUpdateFlashBookingRate();
+
+	const handleSuccessActions = () => {
+		Toast.success('Rate added successfully');
+		setShowModal(false);
+		getStats();
+		getListCoverage();
+	};
+
 	const handleSubmitData = async (formData) => {
 		const rate_id = await createRate(formData);
 		if (!rate_id) {
 			return;
 		}
-		const id = await deleteRateJob({ rate_id, data: formData, id: data?.id });
-		if (!id) { return; }
-		Toast.success('Rate added successfully');
-		setShowModal(false);
-		getStats();
-		getListCoverage();
+		if (source === 'rate_feedback') {
+			const id = await deleteFeedbackRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
+			if (id) {
+				handleSuccessActions();
+			}
+		}
+		if (source === 'rate_request') {
+			const id = await deleteRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
+			if (id) {
+				handleSuccessActions();
+			}
+		}
+		if (source === 'live_bookings') {
+			const id = await updateFlashBookingRate({ data });
+			if (id) {
+				handleSuccessActions();
+			}
+		}
+		if (['critical_ports', 'expiring_rates', 'cancelled_shipments']
+			?.includes(source)) {
+			const id = await deleteRateJob({ rate_id, data: formData, id: data?.id });
+			if (id) {
+				handleSuccessActions();
+			}
+		}
 	};
 
 	const freeWeight = values?.free_weight;
