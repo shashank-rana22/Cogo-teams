@@ -78,55 +78,56 @@ export default function Content({
 									</div>
 								</div>
 							</div>
-						) : null}
+						)
+						: (
+							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+								<div />
+								<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+									<Button
+										size="md"
+										themeType="secondary"
+										style={{ marginRight: '10px' }}
+										onClick={() => { setQueryModalShow(true); setButtonClicked('Query'); }}
+									>
+										Raise Query
+									</Button>
+
+									<RemarkModal
+										remarkValue={remarkValue}
+										setRemarkValue={setRemarkValue}
+										queryModalShow={queryModalShow}
+										setQueryModalShow={setQueryModalShow}
+										buttonClicked={buttonClicked}
+										setButtonClicked={setButtonClicked}
+										toggleAccordion={toggleAccordion}
+										currentKey={currentKey}
+										nextKey={nextItem}
+									/>
+									<Button
+										size="md"
+										themeType="primary"
+										onClick={() => { setQueryModalShow(true); setButtonClicked('Accept'); }}
+									>
+										Accept
+									</Button>
+
+									<RemarkModal
+										remarkValue={remarkValue}
+										setRemarkValue={setRemarkValue}
+										queryModalShow={queryModalShow}
+										setQueryModalShow={setQueryModalShow}
+										buttonClicked={buttonClicked}
+										setButtonClicked={setButtonClicked}
+										toggleAccordion={toggleAccordion}
+										currentKey={currentKey}
+										nextKey={nextItem}
+									/>
+								</div>
+							</div>
+						)}
 
 				</div>
 			))}
-
-			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-				<div />
-				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-					<Button
-						size="md"
-						themeType="secondary"
-						style={{ marginRight: '10px' }}
-						onClick={() => { setQueryModalShow(true); setButtonClicked('Query'); }}
-					>
-						Raise Query
-					</Button>
-
-					<RemarkModal
-						remarkValue={remarkValue}
-						setRemarkValue={setRemarkValue}
-						queryModalShow={queryModalShow}
-						setQueryModalShow={setQueryModalShow}
-						buttonClicked={buttonClicked}
-						setButtonClicked={setButtonClicked}
-						toggleAccordion={toggleAccordion}
-						currentKey={currentKey}
-						nextKey={nextItem}
-					/>
-					<Button
-						size="md"
-						themeType="primary"
-						onClick={() => { setQueryModalShow(true); setButtonClicked('Accept'); }}
-					>
-						Accept
-					</Button>
-
-					<RemarkModal
-						remarkValue={remarkValue}
-						setRemarkValue={setRemarkValue}
-						queryModalShow={queryModalShow}
-						setQueryModalShow={setQueryModalShow}
-						buttonClicked={buttonClicked}
-						setButtonClicked={setButtonClicked}
-						toggleAccordion={toggleAccordion}
-						currentKey={currentKey}
-						nextKey={nextItem}
-					/>
-				</div>
-			</div>
 		</>
 	);
 }

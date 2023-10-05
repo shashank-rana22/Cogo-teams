@@ -55,7 +55,7 @@ function Header({ jobId = '' }) {
 
 				<div className={styles.actions}>
 					<div>
-						<Button size="md" themeType="secondary">Hold</Button>
+						<Button size="md" themeType="secondary">Save Changes</Button>
 					</div>
 					<div className={styles.header_button}>
 						<Button size="md" themeType="primary">Approve</Button>

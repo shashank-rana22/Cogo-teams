@@ -16,8 +16,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 11%;
-	margin-right: 50px;
+
+	/* width: 16%; */
+	margin-right: 20px;
 }
 
 .pre_post_container {
