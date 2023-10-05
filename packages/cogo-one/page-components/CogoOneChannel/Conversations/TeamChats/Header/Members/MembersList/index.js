@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMCrossInCircle } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
 import List from './List';
@@ -73,12 +74,8 @@ function MembersList({
 							onClick={() => updateGroup({ userId: loggedInUserId })}
 							disabled={loading}
 						>
-							<Image
-								src={GLOBAL_CONSTANTS.image_url.groups}
-								alt="group"
-								width={22}
-								height={20}
-								className={styles.image_styles}
+							<IcMCrossInCircle
+								className={styles.leave_icon}
 							/>
 							<div className={styles.button_text}>Leave</div>
 						</Button>
