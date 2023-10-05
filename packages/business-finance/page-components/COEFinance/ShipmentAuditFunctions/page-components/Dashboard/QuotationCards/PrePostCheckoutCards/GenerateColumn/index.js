@@ -24,7 +24,6 @@ function GenerateColumn({
 
 			<div style={{ display: 'flex', width: '100%' }}>
 				<div className={styles.vertical_timeline}>
-					{/* {console.log({ data })} */}
 					{ (index !== (Object.keys(data).length - PREV_INDEX)) ? (
 						<>
 							<IcMDummyCircle

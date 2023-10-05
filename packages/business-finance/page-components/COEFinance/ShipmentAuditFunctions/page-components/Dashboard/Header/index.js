@@ -99,25 +99,22 @@ function Header({ jobId = '' }) {
 			</div>
 			<div className={styles.all_task_container}>
 				<div className={styles.task_specific_container}>
-					{taskData?.SELL && (
-						<OperationalClosedCards
-							jobId={jobId}
-							data={taskData?.SELL}
-							type="sell"
-							operationCardOpen={operationCardOpen}
-							setOperationCardOpen={setOperationCardOpen}
-						/>
-					)}
+					<OperationalClosedCards
+						jobId={jobId}
+						data={taskData?.SELL}
+						type="sell"
+						operationCardOpen={operationCardOpen}
+						setOperationCardOpen={setOperationCardOpen}
+					/>
 
-					{taskData?.BUY && (
-						<OperationalClosedCards
-							jobId={jobId}
-							data={taskData?.BUY}
-							type="buy"
-							operationCardOpen={operationCardOpen}
-							setOperationCardOpen={setOperationCardOpen}
-						/>
-					)}
+					<OperationalClosedCards
+						jobId={jobId}
+						data={taskData?.BUY}
+						type="buy"
+						operationCardOpen={operationCardOpen}
+						setOperationCardOpen={setOperationCardOpen}
+					/>
+
 				</div>
 				{active_tab === 'financial_close' && (
 					<FinanceClosedCardsSet job_id={job_id} />

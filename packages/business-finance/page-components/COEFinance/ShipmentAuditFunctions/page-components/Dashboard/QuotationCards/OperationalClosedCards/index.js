@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function OperationalClosedCards({
 	type = '',
-	data = {},
+	data = [],
 	operationCardOpen = {},
 	setOperationCardOpen = () => {},
 }) {

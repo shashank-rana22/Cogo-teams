@@ -18,7 +18,6 @@ export default function Services(
 		defaultSelectedService,
 	},
 ) {
-	console.log({ servicesFromBackend });
 	return (
 		<>
 			{Object.keys(servicesFromBackend).map((service) => (

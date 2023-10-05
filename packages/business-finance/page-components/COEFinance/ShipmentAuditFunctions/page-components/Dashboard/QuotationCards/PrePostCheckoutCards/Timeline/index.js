@@ -20,7 +20,6 @@ export default function Timeline({
 	category,
 }) {
 	const isOpen = accordionState[`${category}_${title}`];
-	// console.log({ services, data });
 	const currentKey = `${category}_${title}`;
 
 	return (

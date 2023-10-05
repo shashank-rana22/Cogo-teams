@@ -12,13 +12,12 @@ function PrePostCheckoutCards({
 	type = '',
 	accordionState,
 	toggleAccordion,
-	setAccordionState,
+	setAccordionState = () => {},
 	category,
 }) {
 	return (
 		<div style={{ width: '100%' }}>
 			<div>
-				{/* {console.log({ data })} */}
 				<div>
 					<Headings heaadingText={type} />
 				</div>

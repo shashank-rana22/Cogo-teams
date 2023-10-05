@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function FinancialClosedCards({
 	type = '',
-	data = {},
+	data = [],
 	financeCardOpen = {},
 	setFinanceCardOpen = () => {},
 }) {

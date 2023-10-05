@@ -29,25 +29,22 @@ function FinanceClosedCardsSet({
 	}, [taskData]);
 	return (
 		<div className={styles.task_specific_container}>
-			{taskData?.SELL && (
-				<FinancialClosedCards
-					jobId={job_id}
-					data={taskData?.SELL}
-					type="sell"
-					financeCardOpen={financeCardOpen}
-					setFinanceCardOpen={setFinanceCardOpen}
-				/>
-			)}
+			<FinancialClosedCards
+				jobId={job_id}
+				data={taskData?.SELL}
+				type="sell"
+				financeCardOpen={financeCardOpen}
+				setFinanceCardOpen={setFinanceCardOpen}
+			/>
 
-			{taskData?.SELL && (
-				<FinancialClosedCards
-					jobId={job_id}
-					data={taskData?.BUY}
-					type="buy"
-					financeCardOpen={financeCardOpen}
-					setFinanceCardOpen={setFinanceCardOpen}
-				/>
-			)}
+			<FinancialClosedCards
+				jobId={job_id}
+				data={taskData?.BUY}
+				type="buy"
+				financeCardOpen={financeCardOpen}
+				setFinanceCardOpen={setFinanceCardOpen}
+			/>
+
 		</div>
 	);
 }
