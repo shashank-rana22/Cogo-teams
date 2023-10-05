@@ -38,7 +38,7 @@ pipeline {
         }
         stage("Acquire lock"){ //avoid concurrent deployments
                 when {
-                expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#ritik') }
+                expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#deploy_on') }
                 }
                 steps{
                     script {
@@ -63,7 +63,7 @@ pipeline {
         }
         stage('Build'){
             when {
-                expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#ritik') }
+                expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#deploy_on') }
             }
             steps {
                 office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Starting to build admin for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** for user **${PUSHER_NAME}**", color: '#3366ff'
@@ -94,7 +94,7 @@ pipeline {
         }
         stage('Deploy') {
             when {
-                expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#ritik') }
+                expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#deploy_on') }
             }
             steps {
                 echo 'Deploying....'
@@ -120,7 +120,7 @@ pipeline {
     post{//remove lock
         always{
             script{
-                if(exitCode == 0)
+                if(exitCode == 1)
                 {
                     sh "ssh -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} rm /home/${SERVER_NAME}/.admin.lock"
                 }
