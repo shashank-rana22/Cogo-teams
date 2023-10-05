@@ -253,6 +253,7 @@ function CogoOne() {
 										membersList={membersList}
 										teamsSideBarCheck={teamsSideBarCheck}
 										groupMembersLoading={groupMembersLoading}
+										userName={userName}
 									/>
 									{(hasNoFireBaseRoom && !user_id && !lead_user_id)
 									&& <div className={styles.overlay_div} />}

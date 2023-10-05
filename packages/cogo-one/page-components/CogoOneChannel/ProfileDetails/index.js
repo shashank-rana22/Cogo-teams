@@ -32,6 +32,7 @@ function ProfileDetails({
 	membersList = [],
 	teamsSideBarCheck = false,
 	groupMembersLoading = false,
+	userName = '',
 }) {
 	const customerId = (FIREBASE_TABS.includes(activeTab) ? activeMessageCard : activeVoiceCard)?.id;
 
@@ -115,6 +116,7 @@ function ProfileDetails({
 							membersList={membersList}
 							chatsConfig={chatsConfig}
 							groupMembersLoading={groupMembersLoading}
+							userName={userName}
 						/>
 					)}
 				</div>

@@ -13,6 +13,7 @@ function TeamsProfile({
 	chatsConfig = {},
 	userId :loggedInAgentId = '',
 	groupMembersLoading = false,
+	userName = '',
 }) {
 	const { data = {} } = chatsConfig || {};
 	const { group_members_data = [], is_group = false, is_draft = false } = data || {};
@@ -44,7 +45,7 @@ function TeamsProfile({
 		<div className={styles.container}>
 			<div className={styles.name_container}>
 				<Avatar
-					personName={loggedInAgentData?.name}
+					personName={loggedInAgentData?.name || userName}
 					alt="name"
 					size="38px"
 					className={styles.styled_avatar}

@@ -21,20 +21,24 @@ function MembersList({
 
 	const modifiedMembersList = is_draft ? group_members_data : membersList;
 
-	const updateGroup = ({ userId = '' }) => {
+	const isAgentAdmin = is_draft ? true : membersList?.find(
+		(eachPerson) => eachPerson?.user_id === loggedInAgentId,
+	)?.access_type === 'owner';
+
+	const updateGroup = ({ userId = '', actionName = '' }) => {
 		if (is_draft) {
 			updateDraftLocalCogooneGroup(
 				{
-					actionName : 'REMOVE_FROM_GROUP',
-					userIds    : [userId],
+					actionName,
+					userIds: [userId],
 				},
 			);
 			return;
 		}
 
 		updateCogooneGroup({
-			actionName : 'REMOVE_FROM_GROUP',
-			userIds    : [userId],
+			actionName,
+			userIds: [userId],
 		});
 	};
 
@@ -47,6 +51,7 @@ function MembersList({
 				loading={loading}
 				updateGroup={updateGroup}
 				loggedInAgentId={loggedInAgentId}
+				isAgentAdmin={isAgentAdmin}
 			/>
 			{hasPermissionToEdit ? 	(
 				<div className={styles.footer_buttons}>
@@ -71,7 +76,7 @@ function MembersList({
 							size="md"
 							themeType="tertiary"
 							className={styles.button_styles}
-							onClick={() => updateGroup({ userId: loggedInUserId })}
+							onClick={() => updateGroup({ userId: loggedInUserId, actionName: 'REMOVE_FROM_GROUP' })}
 							disabled={loading}
 						>
 							<IcMCrossInCircle

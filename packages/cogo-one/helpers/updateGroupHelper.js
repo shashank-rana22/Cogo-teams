@@ -62,10 +62,10 @@ const GROUP_PAYLOAD_FUNC_MAPPING = {
 		getPayload: removeFromGroup,
 	},
 	REMOVE_OWNER_FROM_GROUP: {
-		getPayload: removeOwnerToGroup, // todo
+		getPayload: removeOwnerToGroup,
 	},
 	ADD_OWNER_TO_GROUP: {
-		getPayload: addOwnerToGroup, // todo
+		getPayload: addOwnerToGroup,
 	},
 	UPDATE_GROUP_NAME: {
 		getPayload: updateGroupName,

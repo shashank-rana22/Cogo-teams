@@ -36,10 +36,10 @@
 }
 
 .name {
-	max-width: 90px;
+	max-width: 100px;
 	overflow: hidden;
 	font-size: 12px;
-	text-overflow: ellipsis;
+	word-break: break-word;
 }
 
 .flex_name {
@@ -54,4 +54,12 @@
 	height: 18px;
 	cursor: pointer;
 	fill: #4f4f4f;
+}
+
+.admin {
+	width: 14px;
+	height: 14px;
+	margin-left: 6px;
+	color: #828282;
+	cursor: pointer;
 }
