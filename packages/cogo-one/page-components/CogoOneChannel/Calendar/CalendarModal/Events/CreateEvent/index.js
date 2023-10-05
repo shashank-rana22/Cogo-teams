@@ -42,14 +42,16 @@ function CreateEvent({
 		frequencyType : '',
 	});
 
-	const selectedIds = useMemo(() => ((participants || []).map((itm) => ([itm?.user_id]))?.flat()), [participants]);
-
 	const [updatedId, setUpdateId] = useState({
 		addedIds   : [],
 		removedIds : [],
 	});
 
 	const { frequencyType = '', eventData = {}, showModal = false } = eventOccurence || {};
+
+	const selectedIds = useMemo(() => (
+		(participants || []).map((itm) => ([itm?.user_id]))?.flat()
+	), [participants]);
 
 	const {
 		control,
@@ -106,7 +108,8 @@ function CreateEvent({
 
 	const handleChange = (val) => {
 		const addedIds = val.filter((newId) => !selectedIds.includes(newId));
-		const removedIds = selectedIds.filter((oldId) => !selectedIds.includes(oldId));
+		const removedIds = selectedIds.filter((oldId) => !val?.includes(oldId));
+
 		setUpdateId((pre) => ({
 			...pre,
 			addedIds   : addedIds || [],

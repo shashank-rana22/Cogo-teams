@@ -1,3 +1,5 @@
+export const getOneTimeRecurrence = () => ({ type: 'normal' });
+
 export const getDailyRecurrence = () => ({
 	type         : 'normal',
 	repeat_after : 1,
