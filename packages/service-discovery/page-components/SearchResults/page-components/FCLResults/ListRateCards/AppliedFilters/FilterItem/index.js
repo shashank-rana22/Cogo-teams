@@ -1,7 +1,7 @@
 import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import { FILTERS_DEFAULT_VALUES } from '../../Filters/FilterContent/extra-filter-controls';
+import { FILTERS_DEFAULT_VALUES } from '../../../../../common/Filters/FilterContent/extra-filter-controls';
 
 import styles from './styles.module.css';
 

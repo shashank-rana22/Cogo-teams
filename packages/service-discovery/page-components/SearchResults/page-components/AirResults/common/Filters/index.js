@@ -15,7 +15,7 @@ const checkIfFiltersChanged = (defaultValues, finalValues) => {
 			if (value && finalValues[key] && !isSameDay(value, finalValues[key])) {
 				isApplied = true;
 			}
-		} else if (key === 'shipping_line_id') {
+		} else if (key === 'airline_id') {
 			if (!isEmpty(finalValues[key])) {
 				isApplied = true;
 			}
@@ -37,6 +37,7 @@ function Filters({
 	setOpenAccordian = () => {},
 	showFilterModal = false,
 	setShowFilterModal = () => {},
+	airlines = [],
 }) {
 	const filtersApplied = checkIfFiltersChanged(FILTERS_DEFAULT_VALUES, filters);
 
@@ -76,6 +77,7 @@ function Filters({
 					loading={loading}
 					DEFAULT_VALUES={FILTERS_DEFAULT_VALUES}
 					openAccordian={openAccordian}
+					airlines={airlines}
 				/>
 			) : null}
 		</div>

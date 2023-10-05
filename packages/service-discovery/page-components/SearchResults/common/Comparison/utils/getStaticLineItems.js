@@ -58,7 +58,7 @@ function HandleBookValue({
 	};
 
 	return (
-		<div>
+		<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 			{isCogoAssured || isMultiContainer ? null : (
 				<Button
 					size="md"

@@ -34,6 +34,7 @@ function OrganisationForm({
 
 	const USER_PARAMS = useMemo(() => (
 		{
+			page_limit               : 1000,
 			pagination_data_required : false,
 			filters                  : {
 				status                 : 'active',
@@ -123,7 +124,7 @@ function OrganisationForm({
 					name="organization_id"
 					placeholder="Select Organisation"
 					asyncKey="organizations"
-					initialCall={rest.action !== 'edit'}
+					initialCall={rest.action !== 'edit' && !organization?.organization_id}
 					isClearable
 					params={ORG_PARAMS}
 					value={organization?.organization_id}

@@ -1,5 +1,6 @@
-import { Checkbox, cl, Popover } from '@cogoport/components';
+import { Checkbox, cl, Popover, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
 
 import InfoBannerContent from '../../../../../../../../../common/InfoBannerContent';
 import LikeDislike from '../../../../../../../common/LikeDislike';
@@ -26,7 +27,14 @@ function Header({
 	showGuide = false,
 	setInfoBanner = () => {},
 }) {
-	const { airline = {}, id: card_id, source = '' } = rate;
+	const {
+		airline = {},
+		id: card_id,
+		source = '',
+		rate_type = '',
+		is_minimum_threshold_rate = false,
+		price_type = '',
+	} = rate;
 
 	const selectedCardIDs = Object.keys(comparisonRates);
 
@@ -54,8 +62,18 @@ function Header({
 
 	return (
 		<div className={styles.container}>
-			<div className={cl`${styles.source_tag} ${styles[source]}`}>
-				{RATE_SOURCE_MAPPING[source] || 'System Rates'}
+			<div className={styles.header}>
+				<span className={cl`${styles.tag} ${styles[source]}`}>
+					{RATE_SOURCE_MAPPING[source] || 'System Rates'}
+				</span>
+
+				{rate_type && rate_type !== 'general' ? (
+					<span className={cl`${styles.tag} ${styles.rate_type}`}>{startCase(rate_type)}</span>
+				) : null}
+
+				{is_minimum_threshold_rate ? (
+					<span className={cl`${styles.tag} ${styles.min_price}`}>Min. Price</span>
+				) : null}
 			</div>
 
 			<div className={styles.left_section}>
@@ -89,9 +107,21 @@ function Header({
 						height={30}
 					/>
 
-					<div className={styles.airline_name}>
-						{rate?.airline?.short_name}
-					</div>
+					<div className={styles.airline_name}>{rate?.airline?.short_name}</div>
+
+					<Tooltip
+						placement="top"
+						content={`Basic freight is ${
+							price_type === 'all_in' ? 'inclusive' : 'exclusive'
+						} of surcharges`}
+
+					>
+						{price_type === 'all_in' ? (
+							<span className={styles.pill}>All Inclusive</span>
+						) : (
+							<span className={styles.pill}>Net - Net</span>
+						)}
+					</Tooltip>
 				</div>
 			</div>
 

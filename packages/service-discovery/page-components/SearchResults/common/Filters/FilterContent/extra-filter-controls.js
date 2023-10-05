@@ -177,7 +177,7 @@ export const getExtraFilters = ({ item, id }) => {
 						},
 						{
 							label : 'Trans-Shipment',
-							value : 'trans',
+							value : 'transhipment',
 						},
 					],
 				},

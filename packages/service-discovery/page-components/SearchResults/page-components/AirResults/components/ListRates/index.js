@@ -2,14 +2,14 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { Router } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 import DotLoader from '../../../../../../common/LoadingState/DotLoader';
-import AppliedFilters from '../../../../common/AppliedFilters';
 import ContractAd from '../../../../common/ContractAd';
 import RequestRate from '../../../../common/RequestRate';
 import Schedules from '../../../../common/Schedules';
 
+import AppliedFilters from './components/AppliedFilters';
 import ComparisonHeader from './components/ComparisonHeader';
 import EmptyState from './components/EmptyState';
 import Header from './components/Header';
@@ -44,6 +44,11 @@ function ListRates({
 
 	const { total_count, page_limit, page } = paginationProps;
 
+	const airlines = useMemo(() => {
+		const uniqueAirlineIds = new Set((rates || []).map(({ airline_id = '' } = {}) => airline_id));
+		return Array.from(uniqueAirlineIds);
+	}, [rates]);
+
 	useEffect(() => {
 		Router.events.on('routeChangeComplete', () => {
 			setRouterLoading(false);
@@ -61,6 +66,7 @@ function ListRates({
 				setShowFilterModal={setShowFilterModal}
 				setOpenAccordian={setOpenAccordian}
 				openAccordian={openAccordian}
+				airlines={airlines}
 			/>
 		);
 	}
@@ -89,6 +95,7 @@ function ListRates({
 						openAccordian={openAccordian}
 						setOpenAccordian={setOpenAccordian}
 						setRouterLoading={setRouterLoading}
+						airlines={airlines}
 					/>
 
 					{showComparison ? (

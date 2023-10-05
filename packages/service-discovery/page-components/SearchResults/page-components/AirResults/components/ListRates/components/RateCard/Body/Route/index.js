@@ -10,18 +10,11 @@ import styles from './styles.module.css';
 const LAST_INDEX = -1;
 const SECOND_TO_LAST_INDEX = -2;
 
-const format = ({ value = '', type = '' }) => {
-	const TYPE_MAPPING = {
-		date : GLOBAL_CONSTANTS.formats.date['dd MMM'],
-		time : GLOBAL_CONSTANTS.formats.date['HH:mm'],
-	};
-
-	return formatDate({
-		date       : value,
-		dateFormat : TYPE_MAPPING[type] || '',
-		formatType : type,
-	});
-};
+const format = (date = '', dateFormat = 'dd MMM yyyy') => formatDate({
+	date,
+	dateFormat : GLOBAL_CONSTANTS.formats.date[dateFormat],
+	formatType : 'date',
+});
 
 function Route({ detail = {}, rate = {} }) {
 	const { transit_time = 0, schedules = {}, schedule_source = '' } = rate;
@@ -29,10 +22,8 @@ function Route({ detail = {}, rate = {} }) {
 	const { arrival = '', departure = '' } = schedules || {};
 
 	const scheduleData = {
-		arrival: `${format({ value: arrival, type: 'time' })}, 
-                  ${format({ value: arrival, type: 'date' })}`,
-		departure: `${format({ value: departure, type: 'time' })}, 
-                  ${format({ value: departure, type: 'date' })}`,
+		arrival   : format(arrival),
+		departure : format(departure),
 		transit_time,
 		schedule_source,
 	};

@@ -1,5 +1,6 @@
 import { Accordion } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCross } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
@@ -25,14 +26,28 @@ function FilterContent(props) {
 			handleReset(name);
 		};
 
+		const getValue = (value) => {
+			if (value instanceof Date) {
+				return formatDate({
+					date       : value,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MMM-yy'],
+					formatType : 'date',
+				});
+			}
+			if (typeof filters[name] === 'object') {
+				return `${value.length} Selected`;
+			}
+
+			return startCase(value);
+		};
+
 		return (
 			<div className={styles.label_container}>
 				{label}
 
-				{filters[name] && !isEmpty(filters[name]) ? (
+				{filters[name] && ((filters[name] instanceof Date) || !isEmpty(filters[name])) ? (
 					<span className={styles.filter_value_pill}>
-						{typeof filters[name] === 'object'
-							? `${filters[name].length} Selected` : startCase(filters[name])}
+						{getValue(filters[name])}
 
 						<IcMCross className={styles.cross_icon} onClick={onReset} />
 					</span>

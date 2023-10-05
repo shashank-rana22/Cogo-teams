@@ -6,13 +6,13 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import DotLoader from '../../../../../common/LoadingState/DotLoader';
-import AppliedFilters from '../../../common/AppliedFilters';
 import ContractAd from '../../../common/ContractAd';
 import RequestRate from '../../../common/RequestRate';
 import Schedules from '../../../common/Schedules';
 import CogoAssuredCard from '../CogoAssuredCard';
 import FclCard from '../FclCard';
 
+import AppliedFilters from './AppliedFilters';
 import ComparisonHeader from './ComparisonHeader';
 import EmptyState from './EmptyState';
 import Header from './Header';

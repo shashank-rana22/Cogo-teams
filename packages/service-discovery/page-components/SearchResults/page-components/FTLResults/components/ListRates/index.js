@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import DotLoader from '../../../../../../common/LoadingState/DotLoader';
-import AppliedFilters from '../../../../common/AppliedFilters';
+// import AppliedFilters from '../../../../common/AppliedFilters';
 import ContractAd from '../../../../common/ContractAd';
 import RequestRate from '../../../../common/RequestRate';
 import Schedules from '../../../../common/Schedules';
@@ -112,12 +112,12 @@ function ListRates({
 				loading={loading}
 			/>
 
-			<AppliedFilters
+			{/* <AppliedFilters
 				setShowFilterModal={setShowFilterModal}
 				setOpenAccordian={setOpenAccordian}
 				filters={filters}
 				setFilters={setFilters}
-			/>
+			/> */}
 
 			{(rates || []).map((rateItem, index) => (
 				<div key={rateItem.id}>

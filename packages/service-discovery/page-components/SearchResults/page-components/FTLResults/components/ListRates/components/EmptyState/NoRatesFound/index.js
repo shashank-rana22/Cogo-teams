@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import AppliedFilters from '../../../../../../../common/AppliedFilters';
+// import AppliedFilters from '../../../../../../../common/AppliedFilters';
 // import Filters from '../../../../../common/Filters';
 
 import Reset from './Reset';
@@ -8,18 +8,18 @@ import styles from './styles.module.css';
 
 function NoRatesFound({
 	// details = {},
-	filters = {},
+	// filters = {},
 	setFilters = () => {},
-	filtersRef = {},
-	setOpenAccordian = () => {},
-	setShowFilterModal = () => {},
+	// filtersRef = {},
+	// setOpenAccordian = () => {},
+	// setShowFilterModal = () => {},
 	// openAccordian = '',
 	// showFilterModal = false,
 }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_section}>
-				<div className={styles.applied_filters}>
+				{/* <div className={styles.applied_filters}>
 					<AppliedFilters
 						filtersRef={filtersRef}
 						filters={filters}
@@ -27,7 +27,7 @@ function NoRatesFound({
 						setShowFilterModal={setShowFilterModal}
 						setOpenAccordian={setOpenAccordian}
 					/>
-				</div>
+				</div> */}
 
 				<div className={styles.buttons_container}>
 					{/* <Filters

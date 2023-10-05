@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import AppliedFilters from '../../../../../../../common/AppliedFilters';
 import Filters from '../../../../../common/Filters';
+import AppliedFilters from '../../AppliedFilters';
 
 import Reset from './Reset';
 import styles from './styles.module.css';
@@ -15,6 +15,7 @@ function NoRatesFound({
 	setShowFilterModal = () => {},
 	openAccordian = '',
 	showFilterModal = false,
+	airlines = [],
 }) {
 	return (
 		<div className={styles.container}>
@@ -38,6 +39,7 @@ function NoRatesFound({
 						setFilters={setFilters}
 						openAccordian={openAccordian}
 						setOpenAccordian={setOpenAccordian}
+						airlines={airlines}
 					/>
 
 					<Reset setFilters={setFilters} />

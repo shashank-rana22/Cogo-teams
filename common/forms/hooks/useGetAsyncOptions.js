@@ -12,6 +12,7 @@ function useGetAsyncOptions({
 	labelKey = '',
 	params = {},
 	onOptionsChange = () => {},
+	onSearch:onSearchValue = () => {},
 	getModifiedOptions,
 	searchByKey = 'q',
 }) {
@@ -54,6 +55,9 @@ function useGetAsyncOptions({
 	}, [listData?.list, handleOptions]);
 
 	const onSearch = (inputValue) => {
+		if (typeof onSearchValue === 'function') {
+			onSearchValue(inputValue);
+		}
 		debounceQuery(inputValue);
 	};
 

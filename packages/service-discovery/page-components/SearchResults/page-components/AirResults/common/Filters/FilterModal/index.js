@@ -1,9 +1,9 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import { useState } from 'react';
 
-import { FILTER_CONTROLS as controls } from '../filter-controls';
+import { getControls } from '../filter-controls';
 
 import FilterContent from './FilterContent';
 import styles from './styles.module.css';
@@ -16,7 +16,16 @@ function FilterModal({
 	loading = false,
 	DEFAULT_VALUES = {},
 	openAccordian = '',
+	airlines = [],
 }) {
+	const [airlineParams, setAirlineParams] = useState({
+		filters: {
+			id: airlines,
+		},
+	});
+
+	const controls = getControls({ airlines, airlineParams, setAirlineParams });
+
 	const defaultValues = { ...DEFAULT_VALUES, ...filters };
 
 	const {
