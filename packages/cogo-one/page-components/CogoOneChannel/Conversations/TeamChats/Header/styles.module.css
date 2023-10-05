@@ -31,14 +31,11 @@
 }
 
 .name {
+	display: flex;
+	align-items: flex-end;
 	width: calc(100% - 30px);
 	padding-left: 8px;
-	overflow: hidden;
 	font-size: 14px;
-	font-weight: 600;
-	color: #4f4f4f;
-	text-overflow: ellipsis;
-	white-space: nowrap;
 }
 
 .image_styles {
@@ -71,4 +68,20 @@
 	font-size: 12px;
 	font-weight: 600;
 	color: #000;
+}
+
+.name_display {
+	max-width: calc(100% - 30px);
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.edit_icon {
+	margin: 0 0 4px 4px;
+	color: #4f4f4f;
+	cursor: pointer;
 }

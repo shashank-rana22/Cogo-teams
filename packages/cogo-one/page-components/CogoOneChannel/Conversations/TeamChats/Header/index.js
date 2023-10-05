@@ -1,5 +1,6 @@
 import { Popover, Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMEdit } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { startCase, isEmpty } from '@cogoport/utils';
 
@@ -56,7 +57,12 @@ function Header({
 						className={styles.styled_avatar}
 					/>
 				)}
-				<div className={styles.name}>{startCase(search_name?.toLowerCase() || '')}</div>
+				<div className={styles.name}>
+					<div className={styles.name_display}>
+						{startCase(search_name?.toLowerCase() || '')}
+					</div>
+					<IcMEdit className={styles.edit_icon} />
+				</div>
 			</div>
 			<div className={styles.buttons_flex}>
 				{isGroup ? (

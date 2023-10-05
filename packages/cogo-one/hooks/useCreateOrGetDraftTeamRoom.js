@@ -183,6 +183,7 @@ function useCreateOrGetDraftTeamRoom({
 			setActiveRoom({ val: res });
 			setShowGroupError(false);
 		} catch (e) {
+			console.error('e', e);
 			Toast.error('Something Went Wrong');
 		} finally {
 			setLoading(false);
