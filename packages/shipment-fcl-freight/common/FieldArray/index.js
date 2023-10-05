@@ -12,7 +12,7 @@ function FieldArray(props) {
 		controls,
 		error,
 		showElements,
-		buttonText,
+		buttonText = '',
 		showButtons = true,
 		disabled = false,
 		...rest
@@ -28,11 +28,6 @@ function FieldArray(props) {
 			append({});
 		}
 	}, [append, fields]);
-
-	// const CHILD_EMPTY_VALUES = {};
-	// controls.forEach((controlItem) => {
-	// 	CHILD_EMPTY_VALUES[controlItem.name] = '';
-	// });
 
 	return (
 		<div>

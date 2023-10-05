@@ -1,5 +1,4 @@
 const TEN_PERCENT = 0.1;
-const DEFAULT_VALUES = {};
 
 function validateExchangeRate(value, AVAILABLE_CURRENCY_CONVERSION, currency) {
 	const initialConversion = AVAILABLE_CURRENCY_CONVERSION?.[currency];
@@ -14,11 +13,48 @@ function validateExchangeRate(value, AVAILABLE_CURRENCY_CONVERSION, currency) {
 	return true;
 }
 
+export const CONTROLS = [{
+	name             : 'currency_control',
+	type             : 'fieldArray',
+	showButtons      : false,
+	showDeleteButton : false,
+	controls         : [
+		{
+			name        : 'from_currency',
+			label       : 'From',
+			placeholder : 'Currency',
+			type        : 'text',
+			disabled    : true,
+			size        : 'sm',
+		},
+		{
+			name        : 'to_currency',
+			label       : 'To',
+			placeholder : 'Currency',
+			type        : 'text',
+			disabled    : true,
+			size        : 'sm',
+		},
+		{
+			name        : 'exchange_rate',
+			label       : 'Exchange rate',
+			placeholder : 'Enter rate',
+			type        : 'number',
+			size        : 'sm',
+			// rules       : {
+			// 	required : 'Exchange Rate is required',
+			// 	validate : (value) => validateExchangeRate(value, AVAILABLE_CURRENCY_CONVERSION, currency),
+			// },
+		},
+	],
+}];
+
 export const getCurrencyControls = ({
 	invoiceCurrency,
 	DIFFERENT_CURRENCIES_HASH,
 	AVAILABLE_CURRENCY_CONVERSION,
 }) => {
+	const DEFAULT_VALUES = [];
 	const controls = Object.keys(DIFFERENT_CURRENCIES_HASH || {}).map(
 		(currency) => ({
 			name             : `currency_control_${currency}`,
@@ -65,8 +101,10 @@ export const getCurrencyControls = ({
 			],
 		}),
 	);
+
 	controls.forEach((ctrl) => {
-		DEFAULT_VALUES[ctrl.name] = ctrl.value;
+		DEFAULT_VALUES.push(...ctrl.value);
 	});
+
 	return { controls, DEFAULT_VALUES };
 };

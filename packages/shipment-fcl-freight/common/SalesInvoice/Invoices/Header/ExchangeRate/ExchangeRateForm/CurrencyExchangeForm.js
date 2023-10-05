@@ -3,9 +3,9 @@ import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
-import FieldArrayItem from '../FieldArrayItem';
+import FieldArray from '../../../../../FieldArray';
 
-import { getCurrencyControls } from './getCurrencyControls';
+import { getCurrencyControls, CONTROLS } from './getCurrencyControls';
 
 const EXCHANGE_CURRENCY_HASH = {};
 
@@ -18,7 +18,7 @@ function CurrencyExchangeForm({
 	handleFormSubmit = () => {},
 	loading = false,
 }) {
-	const { controls, defaultValues } = getCurrencyControls({
+	const { DEFAULT_VALUES } = getCurrencyControls({
 		invoiceCurrency,
 		DIFFERENT_CURRENCIES_HASH,
 		AVAILABLE_CURRENCY_CONVERSION,
@@ -28,7 +28,11 @@ function CurrencyExchangeForm({
 		handleSubmit,
 		formState: { errors },
 		control,
-	} = useForm({ defaultValues });
+	} = useForm({
+		defaultValues: {
+			currency_control: DEFAULT_VALUES,
+		},
+	});
 
 	const handleAddRate = async (value) => {
 		const currencyData = value;
@@ -47,8 +51,7 @@ function CurrencyExchangeForm({
 		}
 		handleFormSubmit(EXCHANGE_CURRENCY_HASH);
 	};
-	console.log('controls :: ', controls);
-	console.log('defaultValues :: ', defaultValues);
+
 	return (
 		<Modal
 			show={open}
@@ -58,14 +61,16 @@ function CurrencyExchangeForm({
 		>
 			<Modal.Header title="Modify Exchange Rate" />
 			<Modal.Body>
-				{controls.map((ctrl) => (
-					<FieldArrayItem
-						key={ctrl.name}
+
+				{CONTROLS?.map((item) => (
+					<FieldArray
+						key={item.name}
 						control={control}
-						controls={ctrl}
-						errors={errors?.[ctrl.name]}
+						errors={errors?.[item.name]}
+						{...item}
 					/>
 				))}
+
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
