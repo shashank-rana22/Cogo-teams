@@ -15,7 +15,7 @@ function Header({ jobId = '' }) {
 		loading: quoteLoading = true,
 	} = useGetPrePostShipmentQuotation({ jobId });
 
-	console.log({ quoteData });
+	// console.log({ quoteData });
 
 	const [accordionState, setAccordionState] = useState({});
 	// console.log({ initialState, accordionState });
@@ -32,7 +32,7 @@ function Header({ jobId = '' }) {
 		setAccordionState(INITIAL_STATE);
 	}, [quoteData]);
 
-	console.log({ accordionState });
+	// console.log({ accordionState });
 
 	const toggleAccordion = (key) => {
 		setAccordionState((prev) => ({ ...prev, [key]: !prev[key] }));
