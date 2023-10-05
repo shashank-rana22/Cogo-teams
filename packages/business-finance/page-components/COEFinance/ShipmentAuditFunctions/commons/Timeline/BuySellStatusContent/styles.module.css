@@ -26,6 +26,7 @@
 	display: flex;
 	align-items: center;
 	font-size: 12px;
+	font-weight: light;
 	color: #828282;
 }
 
@@ -68,4 +69,28 @@
 	margin-right: -2px;
 	margin-left: -2px;
 	background-color: #67c676;
+}
+
+.regular_content {
+	font-size: 13px;
+}
+
+.invoice_container {
+	width: 130px;
+}
+
+.trade_party_container {
+	width: 145px;
+}
+
+.invoice_date_container {
+	width: 75px;
+}
+
+.invoice_amount_container {
+	width: 90px;
+}
+
+.invoice_status_container {
+	width: 85px;
 }

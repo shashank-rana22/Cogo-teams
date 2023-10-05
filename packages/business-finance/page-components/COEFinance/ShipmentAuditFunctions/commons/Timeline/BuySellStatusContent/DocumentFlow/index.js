@@ -20,7 +20,7 @@ function DocumentFlow({
 					</div>
 					<div>
 						<div>{item?.eventName}</div>
-						<div>
+						<div className={styles.occured_at}>
 							{format(item?.occurredAt, GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'])}
 						</div>
 					</div>

@@ -5,3 +5,8 @@
 	margin-left: -2px;
 	background-color: #67c676;
 }
+
+.occured_at {
+	font-size: 12px;
+	font-weight: light;
+}
