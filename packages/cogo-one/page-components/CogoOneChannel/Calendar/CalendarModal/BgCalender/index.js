@@ -47,7 +47,7 @@ function CustomToolbar({
 function BgCalender({
 	month = {}, setMonth = () => {},
 	getEvents = () => {},
-	loading = false,
+	schedulesLoading = false,
 	handleSelectSlot = () => {}, handleEventClick = () => {}, myEvents = {}, formatedEventsList = [],
 	setMyEvents = () => {}, setActiveTab = () => {},
 }) {
@@ -96,11 +96,17 @@ function BgCalender({
 		handleMonthChange(currentDate);
 	}, [handleMonthChange]);
 
+	useEffect(() => {
+		const { startDate, endDate } = getMonthStartAndEnd({ month });
+		getEvents({ startDate, endDate });
+	}, [getEvents, month]);
+
 	return (
 		<div className={styles.container}>
 			<Calendar
+				key={month}
 				localizer={localizer}
-				events={loading ? [] : formatedEventsList}
+				events={schedulesLoading ? [] : formatedEventsList}
 				startAccessor="start"
 				endAccessor="end"
 				style={{ height: 600, width: 630 }}

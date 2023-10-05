@@ -23,7 +23,7 @@ function EditSchedules({ value = {}, errors = {}, control = {}, setValue = () =>
 		<div className={styles.container}>
 			<div className={styles.each_row}>
 				<div className={styles.content}>
-					<div>Start Date</div>
+					<div className={styles.label}>Start Date</div>
 					<DatepickerController
 						{...start_date}
 						control={control}

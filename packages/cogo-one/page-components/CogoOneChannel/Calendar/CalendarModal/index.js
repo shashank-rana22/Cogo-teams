@@ -15,7 +15,7 @@ function CalendarModal({
 	const [month, setMonth] = useState(new Date());
 	const [myEvents, setMyEvents] = useState({});
 	const [activeTab, setActiveTab] = useState('schedules');
-	const { data = {}, getEvents = () => {}, loading = false } = useListCogooneSchedules();
+	const { data = {}, getEvents = () => {}, loading: schedulesLoading = false } = useListCogooneSchedules();
 
 	const formatedEventsList = getFormatedEventsData({ data });
 
@@ -50,6 +50,9 @@ function CalendarModal({
 						setActiveTab={setActiveTab}
 						activeTab={activeTab}
 						formatedEventsList={formatedEventsList}
+						schedulesLoading={schedulesLoading}
+						setMonth={setMonth}
+						setMyEvents={setMyEvents}
 					/>
 				</div>
 				<div className={styles.calendar}>
@@ -59,7 +62,7 @@ function CalendarModal({
 							month={month}
 							setMonth={setMonth}
 							getEvents={getEvents}
-							loading={loading}
+							schedulesLoading={schedulesLoading}
 							handleSelectSlot={handleSelectSlot}
 							handleEventClick={handleEventClick}
 							myEvents={myEvents}

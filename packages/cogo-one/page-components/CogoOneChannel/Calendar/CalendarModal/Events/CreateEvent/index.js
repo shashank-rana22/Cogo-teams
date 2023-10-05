@@ -23,6 +23,9 @@ function CreateEvent({
 	getEvents = () => {},
 	month = '',
 	updateEventDetails = {},
+	setMonth = () => {},
+	setAddEvents = () => {},
+	setMyEvents = () => {},
 }) {
 	const {
 		category: updateCategory = '', subject = '', id = '',
@@ -40,13 +43,12 @@ function CreateEvent({
 	});
 
 	const selectedIds = useMemo(() => ((participants || []).map((itm) => ([itm?.user_id]))?.flat()), [participants]);
-	console.log('selectedIds:', selectedIds);
 
 	const [updatedId, setUpdateId] = useState({
 		addedIds   : [],
 		removedIds : [],
 	});
-	console.log(updatedId, 'updatedId');
+
 	const { frequencyType = '', eventData = {}, showModal = false } = eventOccurence || {};
 
 	const {
@@ -55,7 +57,6 @@ function CreateEvent({
 		watch,
 		formState : { errors = {} },
 		reset,
-		// setValue,
 	} = useForm({
 		defaultValues: {
 			start_date           : id ? new Date(validity_start) : new Date(),
@@ -84,6 +85,9 @@ function CreateEvent({
 		month,
 		id,
 		updatedId,
+		setMonth,
+		setAddEvents,
+		setMyEvents,
 	});
 	const { organization_id = '', start_date: startDateField } = formValues || {};
 
@@ -97,7 +101,6 @@ function CreateEvent({
 	} = controls;
 
 	const handleEvents = (values) => {
-		console.log('values:', values);
 		createEvent({ values, eventData });
 	};
 
@@ -121,7 +124,6 @@ function CreateEvent({
 				event_type : subject,
 				category   : updateCategory === 'reminder' ? 'event' : 'meeting',
 			}));
-			// setValue('', formatParticipant);
 		}
 	}, [id, setEventDetails, updateCategory, subject]);
 

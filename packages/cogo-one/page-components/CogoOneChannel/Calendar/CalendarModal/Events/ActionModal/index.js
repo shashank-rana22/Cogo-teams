@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { IcMInfo } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import useUpdateCogooneSchedule from '../../../../../../hooks/useUpdateCogooneSchedule';
@@ -77,7 +78,10 @@ function ActionModal({
 		>
 			<Modal.Header title={actionStatus === 'edit' ? 'Update Schedule' : null} />
 			<Modal.Body>
-				{INFO_MAPPING[actionStatus]}
+				<div className={styles.body}>
+					{actionStatus !== 'edit' ?	<IcMInfo className={styles.info_icon} fill="#d63031" /> : null}
+					<div className={styles.label}>{INFO_MAPPING[actionStatus]}</div>
+				</div>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button size="md" themeType="tertiary" onClick={handleClose}>Cancel</Button>

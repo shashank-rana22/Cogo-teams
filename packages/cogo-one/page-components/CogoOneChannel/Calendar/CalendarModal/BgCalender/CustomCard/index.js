@@ -1,7 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMCall, IcMShip, IcMSettings, IcMAgentManagement } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
+
+import { HEADER_MAPPING } from '../../../../../../constants/CALENDAR_CONSTANTS';
 
 import styles from './styles.module.css';
 
@@ -10,29 +11,6 @@ const COLORS_MAPPING = {
 	send_quotation : '#88CAD1',
 	other          : '#FCEEDF',
 	default        : '#88CAD1',
-};
-
-const HEADER_MAPPING = {
-	call_customer: {
-		title : 'Call',
-		icon  : <IcMCall width={10} height={10} />,
-		color : '#FCEEDF',
-	},
-	send_quotation: {
-		title : 'Shipping',
-		icon  : <IcMShip width={10} height={10} />,
-		color : '#F3FAFA',
-	},
-	other: {
-		title : 'Other',
-		icon  : <IcMSettings width={10} height={10} />,
-		color : '#FCEEDF',
-	},
-	default: {
-		title : 'Meeting',
-		icon  : <IcMAgentManagement width={10} height={10} />,
-		color : '#F3FAFA',
-	},
 };
 
 const MORE_THEN = 2;
@@ -64,11 +42,12 @@ function CustomCard({ event = {} }) {
 						>
 							{eventData?.icon}
 							{' '}
-							{eventData?.title}
+							<span className={styles.label}>{eventData?.title}</span>
 						</div>
 					);
 				})}
 			</div>
+
 			<div className={styles.events}>
 				{(firstTwoEvents || []).map((item) => (
 					<div className={styles.remarks_container} key={item?.id}>

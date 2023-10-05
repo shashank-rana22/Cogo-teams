@@ -21,6 +21,7 @@ function UserEvents({
 	setAddEvents = () => {}, handleClose = () => {},
 	setActiveTab = () => {},
 	activeTab = '',
+	schedulesLoading = false,
 }) {
 	const { startDate, endDate } = getMonthStartAndEnd({ month });
 	const {
@@ -131,7 +132,7 @@ function UserEvents({
 			</div>
 
 			<div className={styles.container}>
-				{calendersLoading ? <LoadingState /> : null}
+				{(calendersLoading || schedulesLoading) ? <LoadingState /> : null}
 
 				{!calendersLoading && isEmpty(finalList) ? (
 					<div className={styles.empty_container}>

@@ -83,6 +83,9 @@ const useCreateCogooneCalendar = ({
 	month = '',
 	id = '',
 	updatedId = {},
+	setMonth = () => {},
+	setAddEvents = () => {},
+	setMyEvents = () => {},
 }) => {
 	const getUrl = id ? '/update_cogoone_calendar' : '/create_cogoone_calendar';
 
@@ -96,17 +99,18 @@ const useCreateCogooneCalendar = ({
 
 		try {
 			const payload = getPayload({ eventDetails, values, eventData, id, updatedId });
-			console.log('payload:', payload);
 			await trigger({ data: payload });
 			setEventDetails({
 				category   : 'event',
 				event_type : 'call_customer',
 			});
+			setMonth(new Date(values?.start_date || eventData?.start_date));
+			setMyEvents({ start: (values?.start_date || eventData?.start_date) });
+			setAddEvents(true);
 			Toast.success(`${startCase(eventDetails?.category)} Scheduled Successfully`);
 			reset();
 			getEvents({ startDate, endDate });
 		} catch (err) {
-			console.log('err:', err);
 			Toast.error(getApiErrorString(err?.response?.data));
 		}
 	};

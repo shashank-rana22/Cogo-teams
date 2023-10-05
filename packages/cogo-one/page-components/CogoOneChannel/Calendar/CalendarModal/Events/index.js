@@ -17,6 +17,9 @@ function Events({
 	formatedEventsList = [],
 	activeTab = '',
 	events = {},
+	schedulesLoading = false,
+	setMonth = () => {},
+	setMyEvents = () => {},
 }) {
 	const [eventDetails, setEventDetails] = useState({
 		category   : 'event',
@@ -111,6 +114,9 @@ function Events({
 					handleClose={handleClose}
 					setActiveTab={setActiveTab}
 					activeTab={activeTab}
+					schedulesLoading={schedulesLoading}
+					setMonth={setMonth}
+					setMyEvents={setMyEvents}
 				/>
 
 				<div className={styles.footer}>
