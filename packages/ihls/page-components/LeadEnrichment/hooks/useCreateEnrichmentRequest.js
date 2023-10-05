@@ -13,7 +13,7 @@ const useCreateEnrichmentRequest = (props) => {
 			},
 		},
 	} = useSelector((rdxState) => rdxState);
-	const { setShowRequest, params: listParams = {}, checkedRowsId = [] } = props;
+	const { onCloseModal, params: listParams = {}, checkedRowsId = [] } = props;
 	const [params, setParams] = useState({});
 
 	const api = useRequest({
@@ -52,7 +52,7 @@ const useCreateEnrichmentRequest = (props) => {
 
 			await trigger({ data: payload });
 
-			setShowRequest(false);
+			onCloseModal();
 			reset();
 			Toast.success('Enrichment request raised successfully!');
 		} catch (err) {

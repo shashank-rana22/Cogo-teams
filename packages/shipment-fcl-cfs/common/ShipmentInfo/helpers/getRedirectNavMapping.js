@@ -1,10 +1,12 @@
+const ROUTER_COMPONENTS_LENGTH_DEFAULT = 2;
+
 const BOOKING_LIST_PRIORITY_ARRAY = [
-	{ name: 'coe-shipments', version: 'v1' },
-	{ name: 'coe-booking_desk', version: 'v2' },
-	{ name: 'coe-bl_do_collection_release', version: 'v1' },
-	{ name: 'coe-kam_desk', version: 'v1' },
-	{ name: 'coe-document_desk', version: 'v1' },
-	{ name: 'coe-last_mile', version: 'v1' },
+	{ name: 'coe-shipments' },
+	{ name: 'coe-booking_desk' },
+	{ name: 'coe-bl_do_collection_release' },
+	{ name: 'coe-kam_desk' },
+	{ name: 'coe-document_desk' },
+	{ name: 'coe-last_mile' },
 ];
 
 export const eventListener = () => {
@@ -15,7 +17,7 @@ export const backAllowed = (routerComponents) => {
 	const prev_nav_restricted = window.sessionStorage.getItem('prev_nav_restricted');
 	const prev_nav = window.sessionStorage.getItem('prev_nav');
 	const just_refreshed = prev_nav === window.location.href;
-	const isDirect = Object.keys(routerComponents || {}).length <= 2;
+	const isDirect = Object.keys(routerComponents || {}).length <= ROUTER_COMPONENTS_LENGTH_DEFAULT;
 
 	let isBackAllowed = !isDirect || just_refreshed;
 	if (typeof prev_nav_restricted === 'string') {
@@ -24,15 +26,13 @@ export const backAllowed = (routerComponents) => {
 	return isBackAllowed;
 };
 
-export const getRedirectNavMapping = (allNavs) => {
+export const getRedirectNavMapping = (allNavs, navigation = '') => {
 	const coe_navs = (allNavs || []).find((nav) => nav.key === 'coe')?.options || [];
 
 	let navToRedirect = false;
-	let version = 'v1';
 
 	BOOKING_LIST_PRIORITY_ARRAY.some((prNav) => {
 		navToRedirect = coe_navs.find((nav) => nav.key === prNav.name) ?? false;
-		version = prNav.version;
 
 		return navToRedirect !== false;
 	});
@@ -40,6 +40,11 @@ export const getRedirectNavMapping = (allNavs) => {
 	if (navToRedirect === false) {
 		navToRedirect = { href: '/', as: '/' };
 	}
+
+	if (navigation !== '') {
+		navToRedirect = coe_navs.find((nav) => nav.key === navigation) || {};
+	}
+	const version = (navToRedirect.href || '').includes('v2') ? 'v2' : 'v1';
 
 	return { navToRedirect, version };
 };

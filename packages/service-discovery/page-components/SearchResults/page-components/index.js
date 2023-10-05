@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 
 import Header from '../../../common/Header';
 import DotLoader from '../../../common/LoadingState/DotLoader';
-import TryOldBanner from '../../../common/TryOldBanner';
+// import TryOldBanner from '../../../common/TryOldBanner';
 import useGetSpotSearch from '../hooks/useGetSpotSearch';
 import getRedirectionDetails from '../utils/getRedirectionDetails';
 
@@ -187,7 +187,6 @@ function SearchResults() {
 				}
 				className={styles.children}
 			>
-				<TryOldBanner />
 
 				<ActiveComponent
 					rates={rates}

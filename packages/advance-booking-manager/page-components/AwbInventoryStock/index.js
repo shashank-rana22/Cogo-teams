@@ -6,6 +6,7 @@ import useGetInventoryStock from '../../hooks/useGetAwbInventoryStock';
 import useGetClearanceDateReport from '../../hooks/useGetClearanceDateReport';
 import AddAwbNumber from '../AddAwbNumber';
 import AwbInventoryStockReport from '../AwbInventoryStockReport';
+import AwbLeakage from '../AwbLeakage';
 import ClearanceDateReport from '../ClearanceDateReport';
 import Filters from '../Filters';
 
@@ -21,6 +22,11 @@ const TABS_COMPONENT_MAPPING = {
 		name      : 'clearance_date_confirmation',
 		title     : 'Clearance Date Confirmation',
 		Component : ClearanceDateReport,
+	},
+	awb_leakage: {
+		name      : 'awb_leakage',
+		title     : 'AWB Leakage',
+		Component : AwbLeakage,
 	},
 };
 
@@ -41,7 +47,7 @@ function AwbInventoryStock() {
 		errors,
 	} = useGetInventoryStock({ activeTab, filterData });
 
-	const { totalRecords:totalRecordsInventoryStock } = data;
+	const { awbInventoryStockCount = 0, awbLeakageStockCount = 0 } = data?.data?.stats || {};
 
 	const {
 		loading: ClearanceReportLoading,
@@ -59,6 +65,12 @@ function AwbInventoryStock() {
 
 	const { totalRecords:totalRecordsClearanceDateReport } = ClearanceReportData;
 
+	const STATS_MAPPING = {
+		inventory_stock             : awbInventoryStockCount,
+		clearance_date_confirmation : totalRecordsClearanceDateReport,
+		awb_leakage                 : awbLeakageStockCount,
+	};
+
 	return (
 		<Tabs
 			activeTab={activeTab}
@@ -74,9 +86,7 @@ function AwbInventoryStock() {
 						key={name}
 						name={name}
 						title={title}
-						badge={name === 'inventory_stock'
-							? totalRecordsInventoryStock
-							: totalRecordsClearanceDateReport}
+						badge={STATS_MAPPING[name]}
 					>
 
 						{activeTab === 'clearance_date_confirmation' && (
@@ -157,6 +167,21 @@ function AwbInventoryStock() {
 										setFilterData={setFilterData}
 									/>
 								</>
+							)
+						}
+						{
+							activeTab === 'awb_leakage' && (
+								<Component
+									loading={loading}
+									data={data}
+									page={page}
+									setPage={setPage}
+									finalList={finalList}
+									setFinalList={setFinalList}
+									control={control}
+									errors={errors}
+									setFilterData={setFilterData}
+								/>
 							)
 						}
 					</TabPanel>
