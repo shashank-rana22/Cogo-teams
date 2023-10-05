@@ -160,3 +160,5 @@ out/
 !/cogo-control/pages/v2/index.js
 
 .data-store
+
+pnpm-lock.yaml
