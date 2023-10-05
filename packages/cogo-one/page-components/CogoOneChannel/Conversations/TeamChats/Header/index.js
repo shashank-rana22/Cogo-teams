@@ -1,9 +1,9 @@
 import { Popover, Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMEdit } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 
+import EditName from './EditName';
 import Members from './Members';
 import styles from './styles.module.css';
 import ToUser from './ToUsers';
@@ -58,10 +58,7 @@ function Header({
 					/>
 				)}
 				<div className={styles.name}>
-					<div className={styles.name_display}>
-						{startCase(search_name?.toLowerCase() || '')}
-					</div>
-					<IcMEdit className={styles.edit_icon} />
+					<EditName searchName={search_name} isGroup={isGroup} />
 				</div>
 			</div>
 			<div className={styles.buttons_flex}>

@@ -1,9 +1,41 @@
-function EditIcon() {
+import { Popover } from '@cogoport/components';
+import { IcMEdit } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
+
+import EditGroupName from '../EditGroupName';
+
+import styles from './styles.module.css';
+
+function EditName({
+	searchName = '',
+	isGroup = false,
+}) {
+	const [openPopover, setOpenPopover] = useState(false);
+
 	return (
-		<div>
-			hi
-		</div>
+		<>
+			<div className={styles.name_display}>
+				{startCase(searchName?.toLowerCase() || '')}
+			</div>
+			<div className={styles.popover_container}>
+				{isGroup ? (
+					<Popover
+						render={openPopover ? <EditGroupName /> : null}
+						trigger="mouseenter"
+						placement="bottom"
+						visible={openPopover}
+						interactive
+					>
+						<IcMEdit
+							className={styles.edit_icon}
+							onClick={() => setOpenPopover((prev) => !prev)}
+						/>
+					</Popover>
+				) : null}
+			</div>
+		</>
 	);
 }
 
-export default EditIcon;
+export default EditName;
