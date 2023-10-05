@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 
 import { getFieldController } from '../getFieldController';
@@ -5,13 +6,14 @@ import { getFieldController } from '../getFieldController';
 import styles from './styles.module.css';
 
 const ONE = 1;
+
 function Child(props) {
 	const {
-		controls,
+		controls = [],
 		control,
-		index,
-		name,
-		remove,
+		index = 0,
+		name = '',
+		remove = () => {},
 		showDeleteButton = true,
 		noDeleteButtonTill = 0,
 		disabled = false,
@@ -26,7 +28,7 @@ function Child(props) {
 				if (!Element) return null;
 
 				return (
-					<div className={styles.list} key={controlItem?.name}>
+					<div className={styles.list} key={controlItem.name}>
 						<div className={styles.label}>{controlItem.label}</div>
 
 						<Element
@@ -38,7 +40,7 @@ function Child(props) {
 						/>
 
 						<div className={styles.error_message}>
-							{error?.[controlItem?.name]?.message}
+							{error?.[controlItem.name]?.message}
 						</div>
 					</div>
 				);
@@ -46,16 +48,11 @@ function Child(props) {
 
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<IcMDelete
-					className={`form-fieldArray-${name}-remove`}
+					className={cl`form-fieldArray-${name}-remove ${styles.icon}`}
 					onClick={() => remove(index, ONE)}
-					style={{
-						height    : '20px',
-						width     : '20px',
-						marginTop : '24px',
-						cursor    : 'pointer',
-					}}
 				/>
 			) : null}
+
 		</div>
 	);
 }

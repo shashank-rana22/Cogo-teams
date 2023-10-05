@@ -4,14 +4,14 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import Child from './Child';
+import styles from './styles.module.css';
 
 function FieldArray(props) {
 	const {
-		name,
+		name = '',
 		control,
-		controls,
+		controls = [],
 		error,
-		showElements,
 		buttonText = '',
 		showButtons = true,
 		disabled = false,
@@ -42,7 +42,6 @@ function FieldArray(props) {
 					name={name}
 					remove={remove}
 					error={error?.[index]}
-					showElements={showElements?.[index]}
 					disabled={disabled}
 				/>
 			))}
@@ -51,13 +50,14 @@ function FieldArray(props) {
 				<Button
 					themeType="secondary"
 					onClick={() => append({})}
-					style={{ margin: '16px 0px' }}
+					classname={styles.add_button}
 				>
 					+
 					{' '}
 					{buttonText}
 				</Button>
 			) : null}
+
 		</div>
 	);
 }

@@ -3,8 +3,9 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
 import FieldArray from '../../../../../FieldArray';
+import validateExchangeRate from '../../../../helpers/validateExchangeRate';
 
-import { getCurrencyControls, CONTROLS } from './getCurrencyControls';
+import { getCurrencyControls } from './getCurrencyControls';
 
 const EXCHANGE_CURRENCY_HASH = {};
 
@@ -17,7 +18,7 @@ function CurrencyExchangeForm({
 	handleFormSubmit = () => {},
 	loading = false,
 }) {
-	const { DEFAULT_VALUES } = getCurrencyControls({
+	const { DEFAULT_VALUES, CURRENCY_CONTROLS } = getCurrencyControls({
 		invoiceCurrency,
 		DIFFERENT_CURRENCIES_HASH,
 		AVAILABLE_CURRENCY_CONVERSION,
@@ -34,7 +35,19 @@ function CurrencyExchangeForm({
 	});
 
 	const handleAddRate = async (value) => {
+		let checkValidation = true;
+
 		value?.currency_control?.forEach((conversions) => {
+			const validationResult = validateExchangeRate({
+				value    : Number(conversions?.exchange_rate),
+				currency : conversions?.from_currency,
+				AVAILABLE_CURRENCY_CONVERSION,
+			});
+
+			if (!validationResult) {
+				checkValidation = false;
+			}
+
 			const conversion = `${conversions?.from_currency}_${conversions?.to_currency}`;
 			EXCHANGE_CURRENCY_HASH[conversion] = Number(conversions?.exchange_rate);
 		});
@@ -42,7 +55,10 @@ function CurrencyExchangeForm({
 		if (isEmpty(EXCHANGE_CURRENCY_HASH)) {
 			Toast.error('Please fill atleast one field !');
 		}
-		handleFormSubmit(EXCHANGE_CURRENCY_HASH);
+
+		if (checkValidation && !isEmpty(EXCHANGE_CURRENCY_HASH)) {
+			handleFormSubmit(EXCHANGE_CURRENCY_HASH);
+		}
 	};
 
 	return (
@@ -55,7 +71,7 @@ function CurrencyExchangeForm({
 			<Modal.Header title="Modify Exchange Rate" />
 			<Modal.Body>
 
-				{CONTROLS?.map((item) => (
+				{CURRENCY_CONTROLS?.map((item) => (
 					<FieldArray
 						key={item.name}
 						control={control}
