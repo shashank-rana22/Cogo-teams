@@ -37,6 +37,9 @@ function RemarksModal({
 					size="md"
 					placeholder="Remarks....."
 				/>
+
+			</Modal.Body>
+			<Modal.Footer>
 				<div className={styles.footer_button}>
 					<Button
 						themeType="secondary"
@@ -51,11 +54,8 @@ function RemarksModal({
 					>
 						Send Remark
 					</Button>
-
 				</div>
-
-			</Modal.Body>
-
+			</Modal.Footer>
 		</Modal>
 	);
 }
