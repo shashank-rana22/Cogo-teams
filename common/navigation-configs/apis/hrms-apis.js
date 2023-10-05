@@ -823,11 +823,6 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
-		{
-			api          : 'get_employee_application_details',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
 	],
 };
 

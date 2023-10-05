@@ -57,7 +57,6 @@ function EmployeeProfile() {
 						<div className={styles.cover}>
 							<div className={styles.flex}>
 								<div className={styles.left_text}>
-									<IcMArrowBack width={16} height={16} />
 									<div className={styles.name_designation}>
 										<span className={styles.name}>
 											{loading
@@ -118,7 +117,7 @@ function EmployeeProfile() {
 														}
 													}}
 												>
-													Apply for Resignation
+													{employee_id ? 'Initiate Separation' : 'Apply for Resignation'}
 												</Button>
 											)}
 										>
