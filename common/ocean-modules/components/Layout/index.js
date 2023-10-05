@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 
 import EditServiceCharges from '../EditServiceCharges';
 
@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function Layout({
 	control = {}, fields = [], showElements = {}, errors = {}, customValues = {}, formValues = {},
-	disabledProps = false,
+	disabledProps = false, isSeaway = false, setValue = () => {},
 }) {
 	const { TOTAL_FIELDS = [] } = getTotalFields({ fields, showElements });
 
@@ -18,6 +18,12 @@ function Layout({
 		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
 		[TOTAL_FIELDS.length],
 	);
+
+	useEffect(() => {
+		if (isSeaway) {
+			setValue('bl_type', 'seaway');
+		}
+	}, [isSeaway, setValue]);
 
 	return (
 		<main className={styles.layout}>
@@ -56,6 +62,28 @@ function Layout({
 										{...field}
 									/>
 								</section>
+							);
+						}
+
+						if (isSeaway && name === 'bl_type' && type === 'pills') {
+							const mutatedOptions = [
+								...(field?.options || []),
+								{
+									label : 'Seaway',
+									value : 'seaway',
+								},
+							];
+
+							return (
+								<Item
+									{...field}
+									key={field?.name}
+									control={control}
+									error={errors?.[name]}
+									formValues={formValues}
+									disabled
+									options={mutatedOptions}
+								/>
 							);
 						}
 

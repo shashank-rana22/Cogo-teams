@@ -25,6 +25,7 @@ function ExecuteStep({
 	getApisData = {},
 	selectedMail = [],
 	serviceIdMapping = [],
+	isSeaway = false,
 }) {
 	const [showApprovalModal, setShowApprovalModal] = useState(false);
 	const [approvalChanges, setApprovalChanges] = useState({});
@@ -47,7 +48,7 @@ function ExecuteStep({
 		allCommodity,
 	});
 
-	const { control, formState: { errors }, handleSubmit, watch } = formProps;
+	const { control, formState: { errors }, handleSubmit, watch, setValue } = formProps;
 
 	const { editBookingParams } = showElements || {};
 
@@ -135,6 +136,8 @@ function ExecuteStep({
 					showElements={showElements}
 					formValues={watch()}
 					shipment_id={task?.shipment_id}
+					isSeaway={isSeaway}
+					setValue={setValue}
 				/>
 
 				{isShipmentRolloverable && editBookingParams ? (
