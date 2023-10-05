@@ -9,7 +9,6 @@ pipeline {
         SSH_PORT = credentials('dev-instance-ssh-port')
         TEAMS_WEBHOOK_URL = credentials('teams-webhook-url')
         NPMRC = credentials('cogo_product_npmrc')
-        ENV_FILE = credentials('dev_cogo_admin_env')
         ECR_USERNAME = credentials('aws-dev-ecr-user')
         ECR_URL = credentials('aws-dev-ecr-url')
         SERVER_NAME = ''
