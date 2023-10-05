@@ -12,7 +12,7 @@ function OperationClosedCardsSet({
 }) {
 	const {
 		data: taskData = {},
-		// loading: taskDataLoading = true,
+		loading: taskDataLoading = true,
 	} = useGetClosedTasks({ job_id, activeTab: 'operational_close' });
 
 	const [operationCardOpen, setOperationCardOpen] = useState({});
@@ -38,6 +38,7 @@ function OperationClosedCardsSet({
 				type="sell"
 				operationCardOpen={operationCardOpen}
 				setOperationCardOpen={setOperationCardOpen}
+				loading={taskDataLoading}
 			/>
 
 			<OperationalClosedCards
@@ -46,6 +47,7 @@ function OperationClosedCardsSet({
 				type="buy"
 				operationCardOpen={operationCardOpen}
 				setOperationCardOpen={setOperationCardOpen}
+				loading={taskDataLoading}
 			/>
 		</div>
 	);

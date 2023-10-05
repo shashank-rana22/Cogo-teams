@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import { IcMDummyCircle } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -10,6 +11,7 @@ function FinancialClosedCards({
 	data = [],
 	financeCardOpen = {},
 	setFinanceCardOpen = () => {},
+	loading = false,
 }) {
 	return (
 		<div className={styles.single_card}>
@@ -22,7 +24,7 @@ function FinancialClosedCards({
 								<div className={styles.line} />
 							</div>
 						</div>
-						{data?.map((item) => (
+						{loading ? <Placeholder height="60px" /> : data?.map((item) => (
 							<div key={item?.id} style={{ display: 'flex', alignItems: 'center' }}>
 								<div className={styles.vertical_timeline}>
 									<IcMDummyCircle
