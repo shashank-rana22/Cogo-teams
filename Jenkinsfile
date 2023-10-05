@@ -119,6 +119,7 @@ pipeline {
     }
     post{//remove lock
         always{
+             echo "Server IP: ${SERVER_IP}"
             script{
                 sh "ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${env.SERVER_NAME}@${env.SERVER_IP} -p ${env.SSH_PORT} rm /home/${env.SERVER_NAME}/.admin.lock"
             }
