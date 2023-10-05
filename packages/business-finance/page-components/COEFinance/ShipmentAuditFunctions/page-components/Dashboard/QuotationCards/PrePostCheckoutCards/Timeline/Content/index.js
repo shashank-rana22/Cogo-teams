@@ -11,7 +11,6 @@ import Services from './Services';
 import styles from './styles.module.css';
 
 const NEXT = 1;
-const TABLE_COLUMNS = getServiceColumns();
 
 export default function Content({
 	services,
@@ -20,6 +19,8 @@ export default function Content({
 	toggleAccordion,
 	getPrePostShipmentQuotes,
 }) {
+	// console.log({ currentKey });
+	const TABLE_COLUMNS = getServiceColumns({ currentKey });
 	const keys = Object.keys(accordionState);
 	const nextIndex = keys.indexOf(currentKey) + NEXT;
 	const nextItem = (nextIndex < (keys.length - NEXT)) ? keys[nextIndex] : '';
@@ -54,7 +55,11 @@ export default function Content({
 				? services?.[activeService]?.map((item) => (
 					<div key={item?.id} className={styles.quotation}>
 						<div className={styles.table}>
-							<Table columns={TABLE_COLUMNS} data={item?.lineItems || []} />
+							<Table
+								columns={TABLE_COLUMNS}
+								data={currentKey.includes('MODIFIED')
+									? item?.changedItems || [] : item?.lineItems || []}
+							/>
 						</div>
 
 						{item?.modifiedBy

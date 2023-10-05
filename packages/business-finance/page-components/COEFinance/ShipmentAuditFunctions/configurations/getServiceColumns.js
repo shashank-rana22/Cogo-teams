@@ -1,12 +1,15 @@
 import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import styles from './styles.module.css';
+
 const DOC_LENGTH = 6;
 // const CONCAT_LENGTH = 3;
-const ZERO_PRICE = 0;
+// const ZERO_PRICE = 0;
 const TRUNCATED_UPTO = 2;
 
-const getServiceColumns = () => {
+const getServiceColumns = ({ currentKey = '' }) => {
+	const isModified = currentKey.includes('MODIFIED');
 	const columns = [
 		{
 			id     : 'code',
@@ -18,12 +21,12 @@ const getServiceColumns = () => {
 					<Tooltip
 						content={(
 							<div>
-								{row?.name || ''}
+								{isModified ? row?.code || '' : row?.name || ''}
 							</div>
 						)}
 						interactive
 					>
-						<div>
+						<div className={(isModified && row?.code) ? styles.changed : ''}>
 							{(row?.code && row?.code?.length > DOC_LENGTH
 								? `${row?.code?.substr(GLOBAL_CONSTANTS.zeroth_index, DOC_LENGTH)}...`
 								: row?.code) || '-'}
@@ -45,8 +48,8 @@ const getServiceColumns = () => {
 				<div>Qty.</div>
 			),
 			accessor: (row) => (
-				<div>
-					{row?.quantity}
+				<div className={isModified && row?.quantity ? styles.changed : ''}>
+					{row?.quantity || '-'}
 				</div>
 			),
 		},
@@ -65,7 +68,7 @@ const getServiceColumns = () => {
 						)}
 						interactive
 					>
-						<div>
+						<div className={isModified && row?.unit ? styles.changed : ''}>
 							{(row?.unit && row?.unit?.length > DOC_LENGTH
 								? `${row?.unit?.substr(GLOBAL_CONSTANTS.zeroth_index, DOC_LENGTH)}...`
 								: row?.unit) || '-'}
@@ -75,14 +78,28 @@ const getServiceColumns = () => {
 			),
 		},
 		{
+			id     : 'currency',
+			Header : (
+				<div>Currency</div>
+			),
+			accessor: (row) => (
+				<div className={isModified && row?.currency ? styles.changed : ''}>
+					{
+
+						row?.currency || '-'
+					}
+				</div>
+			),
+		},
+		{
 			id     : 'price',
 			Header : (
 				<div>Price</div>
 			),
 			accessor: (row) => (
-				<div>
+				<div className={isModified && row?.price ? styles.changed : ''}>
 					{/* {ShowOverflowingNumber(row?.price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) } */}
-					{row?.price?.toFixed(TRUNCATED_UPTO) || ZERO_PRICE}
+					{row?.price?.toFixed(TRUNCATED_UPTO) || '-'}
 				</div>
 			),
 		},
@@ -92,9 +109,9 @@ const getServiceColumns = () => {
 				<div>Margin</div>
 			),
 			accessor: (row) => (
-				<div>
+				<div className={isModified && row?.margin_price ? styles.changed : ''}>
 					{/* {ShowOverflowingNumber(row?.margin_price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) } */}
-					{row?.margin_price?.toFixed(TRUNCATED_UPTO) || ZERO_PRICE}
+					{row?.margin_price?.toFixed(TRUNCATED_UPTO) || '-'}
 				</div>
 			),
 		},
@@ -104,7 +121,7 @@ const getServiceColumns = () => {
 				<div>Ex. Rate</div>
 			),
 			accessor: (row) => (
-				<div>
+				<div className={isModified && row?.exchange_rate ? styles.changed : ''}>
 					{row?.exchange_rate?.toFixed(TRUNCATED_UPTO)}
 				</div>
 			),
@@ -115,9 +132,9 @@ const getServiceColumns = () => {
 				<div>Tax</div>
 			),
 			accessor: (row) => (
-				<div>
+				<div className={isModified && row?.tax_total_price ? styles.changed : ''}>
 					{/* {ShowOverflowingNumber(row?.tax_total_price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) } */}
-					{row?.tax_total_price?.toFixed(TRUNCATED_UPTO) || ZERO_PRICE}
+					{row?.tax_total_price?.toFixed(TRUNCATED_UPTO) || '-'}
 				</div>
 			),
 		},
@@ -127,28 +144,14 @@ const getServiceColumns = () => {
 				<div>Total</div>
 			),
 			accessor: (row) => (
-				<div>
+				<div className={isModified && row?.tax_total_price_discounted ? styles.changed : ''}>
 					{/* {ShowOverflowingNumber(
 						row?.tax_total_price_discounted || ZERO_PRICE,
 						CONCAT_LENGTH,
 
 						row?.currency,
 					) } */}
-					{row?.tax_total_price_discounted?.toFixed(TRUNCATED_UPTO) || ZERO_PRICE}
-				</div>
-			),
-		},
-		{
-			id     : 'currency',
-			Header : (
-				<div>Currency</div>
-			),
-			accessor: (row) => (
-				<div>
-					{
-
-						row?.currency
-					}
+					{row?.tax_total_price_discounted?.toFixed(TRUNCATED_UPTO) || '-'}
 				</div>
 			),
 		},
