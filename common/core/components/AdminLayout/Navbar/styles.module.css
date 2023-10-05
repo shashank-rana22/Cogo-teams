@@ -324,6 +324,10 @@
 	margin-bottom: 8px;
 }
 
+.hide {
+	display: none;
+}
+
 .count {
 	width: fit-content;
 	height: 20px;

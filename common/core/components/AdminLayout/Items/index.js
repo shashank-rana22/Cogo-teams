@@ -1,4 +1,5 @@
-import { Loader } from '@cogoport/components';
+import { Loader, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown, IcMDefault, IcMPin, IcCPin } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
@@ -12,9 +13,13 @@ const FIRST_INDEX = 1;
 const SLICE_START_INDEX = 2;
 const SLICE_END_INDEX = 5;
 
-function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys, showPin, inCall = false }) {
+function Items({
+	isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys, showPin, inCall = false, ticketCount = 0,
+}) {
 	const router = useRouter();
 	const { query, asPath } = router;
+
+	const { options = [] } = item || {};
 
 	const [showSubNav, setShowSubNav] = useState(false);
 	const {
@@ -26,7 +31,6 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 
 	const splitAspath = asPath.split('/')?.[FIRST_INDEX];
 
-	const { options = [] } = item || {};
 	const openNewTab = (as = '', href = '') => {
 		// eslint-disable-next-line no-undef
 		window.open(
@@ -70,13 +74,13 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 	const singleNav = (
 		<div
 			className={`
-			${!isEmpty(item.options) ? styles.has_options : ''}
+			${!isEmpty(options) ? styles.has_options : ''}
 			${isHref ? `${styles.list_item_inner} ${styles.active_item}` : styles.list_item_inner}`}
 			role="button"
 			tabIndex={0}
 			onClick={() => handleClickOnItem(item)}
 		>
-			{!isEmpty(item.options) && (
+			{!isEmpty(options) && (
 				<IcMArrowRotateDown
 					className={`${styles.icon} ${showSubNav ? styles.active : ''}`}
 				/>
@@ -86,6 +90,14 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 			<span>
 				{item.title}
 			</span>
+			{item?.title === 'Ticket Management' && !showSubNav
+				? (
+					<div className={cl`${ticketCount === GLOBAL_CONSTANTS.zeroth_index
+						? styles.hide : styles.count}`}
+					>
+						{ticketCount}
+					</div>
+				) : null}
 
 			{showPin
 				&& (!newPinUnpinLoading ? (
@@ -126,7 +138,13 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 								{singleOption.title}
 							</span>
 							{singleOption.title === 'My Tickets'
-								? <div className={styles.count}>{100}</div> : null}
+								? (
+									<div className={cl`${ticketCount === GLOBAL_CONSTANTS.zeroth_index
+										? styles.hide : styles.count}`}
+									>
+										{ticketCount}
+									</div>
+								) : null}
 						</div>
 					</li>
 				);

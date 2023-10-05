@@ -18,6 +18,7 @@ import TnC from './newTnC';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
+import useGetUnreadTicketCount from './useGetUnreadTicketCount';
 import VideoCall from './VideoCall';
 import VoiceCall from './VoiceCall';
 
@@ -67,6 +68,8 @@ function AdminLayout({
 		pinListLoading = false,
 	} = useFetchPinnedNavs({ user_id, partner_id, setPinnedNavKeys, setAnnouncements });
 
+	const { data = 0 } = useGetUnreadTicketCount();
+
 	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
 	const firestore = getFirestore(app);
 
@@ -112,6 +115,7 @@ function AdminLayout({
 					inCall={inCall}
 					userId={user_id}
 					firestore={firestore}
+					ticketCount={data}
 				/>
 			) : null}
 			<VoiceCall
