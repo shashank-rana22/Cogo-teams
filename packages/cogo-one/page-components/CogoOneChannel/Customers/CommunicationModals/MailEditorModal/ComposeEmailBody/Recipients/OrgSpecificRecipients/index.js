@@ -1,8 +1,9 @@
 import { MultiSelect } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useMemo } from 'react';
 
 import CustomSelect from '../../../../../../../../common/CustomSelect';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../../constants/viewTypeMapping';
 import useGetOrganizations from '../../../../../../../../hooks/useGetOrganizations';
 import useGetOrgUsers from '../../../../../../../../hooks/useGetOrgUsers';
 import getAllowedEmailsList from '../../../../../../../../utils/getAllowedEmailsList';
@@ -43,7 +44,7 @@ function resetEmailRecipientData({
 
 	let customSubject = {
 		...(prev?.customSubject || {}),
-		serialId: '',
+		serialId: prev?.orgData?.orgType === 'lead_organizations' ? 'custom' : '',
 	};
 
 	if (orgType === 'lead_organizations') {
@@ -71,7 +72,14 @@ function OrgSpecificRecipients({
 	emailRecipientType = [],
 	recipientTypes = [],
 	emailState = {},
+	viewType = '',
 }) {
+	const allowedOrgs = useMemo(() => (
+		isEmpty(VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.allowed_organizations)
+			? ['organizations', 'lead_organizations']
+			: VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.allowed_organizations
+	), [viewType]);
+
 	const {
 		orgLoading = false,
 		orgData = {},
@@ -90,13 +98,16 @@ function OrgSpecificRecipients({
 	} = useGetOrganizations({
 		activeTab : emailState?.orgData?.orgType,
 		orgId     : emailState?.orgData?.orgId || emailState?.orgId,
+		type,
+		allowedOrgs,
+		setEmailState,
 	});
 
 	const selectOptions = useMemo(
 		() => getOrgListOptions({
-			organizationData,
+			organizationData, viewType,
 		}) || null,
-		[organizationData],
+		[organizationData, viewType],
 	);
 
 	const handleChangeTab = (activeTab) => {
@@ -145,6 +156,7 @@ function OrgSpecificRecipients({
 						<CustomSelectHeader
 							activeTab={emailState?.orgData?.orgType}
 							setActiveTab={handleChangeTab}
+							allowedOrgs={allowedOrgs}
 						/>
 					)}
 				/>

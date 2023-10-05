@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 function CustomSelectHeader({
 	setActiveTab = () => {},
 	activeTab = '',
+	allowedOrgs = [],
 }) {
 	return (
 		<div className={styles.container}>
@@ -17,12 +18,12 @@ function CustomSelectHeader({
 				themeType="secondary"
 				onChange={setActiveTab}
 			>
-				{Object.values(ORGS_MAPPING).map(
+				{allowedOrgs?.map(
 					(item) => (
 						<TabPanel
-							key={item.value}
-							name={item.value}
-							title={item.title}
+							key={ORGS_MAPPING?.[item]?.value}
+							name={ORGS_MAPPING?.[item]?.value}
+							title={ORGS_MAPPING?.[item]?.title}
 						/>
 					),
 				)}
