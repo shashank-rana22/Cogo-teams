@@ -761,6 +761,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'get_organization_restricted_settings_config',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -2784,6 +2789,11 @@ const partner = {
 		},
 		{
 			api          : 'update_organization_asset',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_user_contact',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -13994,7 +14004,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'payments_dunning_customer_outstanding_and_on_account',
+			api         : 'get_payments_dunning_customer_outstanding_and_on_account',
 			access_type : 'private',
 		},
 		{
@@ -14006,7 +14016,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_payments_dunning_create_exceptions',
+			api         : 'post_payments_dunning_create_exceptions',
 			access_type : 'private',
 		},
 		{
@@ -14022,7 +14032,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_payments_dunning_delete_master_exception',
+			api         : 'post_payments_dunning_delete_master_exception',
 			access_type : 'private',
 		},
 		{

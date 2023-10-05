@@ -18,6 +18,7 @@ function AdditionalDetails({
 	primary_service = {},
 	serviceProvider = {},
 	formValues = {},
+	calculatedValues = {},
 }) {
 	const { origin, destination } = getLocationConfig(primary_service);
 
@@ -197,6 +198,7 @@ function AdditionalDetails({
 							control={control}
 							shipment_data={shipment_data}
 							formValues={formValues}
+							calculatedValues={calculatedValues}
 						/>
 					)}
 

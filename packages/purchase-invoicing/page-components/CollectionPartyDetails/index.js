@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Checkbox } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
@@ -69,6 +69,8 @@ function CollectionPartyDetails({
 	const [open, setOpen] = useState(false);
 	const [step, setStep] = useState(DEFAULT_STEP);
 	const [generateInvoiceModal, setGenerateInvoiceModal] = useState(false);
+
+	const [isDocumentVerified, setIsDocumentVerified] = useState(false);
 
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
@@ -249,6 +251,27 @@ function CollectionPartyDetails({
 									draggable
 									uploadIcon={<IcMUpload height={40} width={40} />}
 								/>
+								<hr />
+								{
+									shipment_type === 'ftl_freight' ? (
+										<Checkbox
+											label={(
+												<div>
+													<strong>
+														Have you verified all the uploaded documents?
+													</strong>
+													<div>
+														Changes would not be possible after uploading invoice.
+														Also kindly check the TDS % configured in supply CRM.
+													</div>
+												</div>
+											)}
+											checked={isDocumentVerified}
+											onChange={() => setIsDocumentVerified(!isDocumentVerified)}
+										/>
+									) : null
+								}
+
 							</section>
 						</Modal.Body>
 						<Modal.Footer>
@@ -266,7 +289,9 @@ function CollectionPartyDetails({
 							<Button
 								size="md"
 								onClick={onConfirm}
-								disabled={isEmpty(uploadInvoiceUrl)}
+								disabled={shipment_type === 'ftl_freight'
+									? (isEmpty(uploadInvoiceUrl) || isDocumentVerified === false)
+									: isEmpty(uploadInvoiceUrl)}
 							>
 								Confirm
 							</Button>
