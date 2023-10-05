@@ -48,7 +48,7 @@ pipeline {
                     def sshCommand = "ssh -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} test -e ${lockFile}"
                     def exitCode = sh(script: sshCommand, returnStatus: true)
                     echo "${exitCode}"
-                    if (exitCode == 0) {
+                    if (exitCode == 1) {
                         sh("scp -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} -P ${SSH_PORT} .admin.lock ${SERVER_NAME}@${SERVER_IP}:/home/${SERVER_NAME}")
                         echo "Acquired lock on remote server."
                     } else {
