@@ -12,8 +12,8 @@ pipeline {
         ENV_FILE = credentials('dev_cogo_admin_env')
         ECR_USERNAME = credentials('aws-dev-ecr-user')
         ECR_URL = credentials('aws-dev-ecr-url')
-        SERVER_NAME = sh(script: "git log -1 --pretty=%B ${COMMIT_ID} | awk '{print \$NF}'", returnStdout: true).trim()
-        SERVER_IP = sh(script: "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${SERVER_NAME}\" --query \"Reservations[*].Instances[*].PrivateIpAddress\" --output text", returnStdout: true).trim()
+        SERVER_NAME = ''
+        SERVER_IP = ''
     }
     
     options {
@@ -41,6 +41,8 @@ pipeline {
                 }
                 steps{
                     script {
+                    SERVER_NAME = 'sh(script: "git log -1 --pretty=%B ${COMMIT_ID} | awk '{print \$NF}'", returnStdout: true).trim()'
+                    SERVER_IP = sh(script: "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${SERVER_NAME}\" --query \"Reservations[*].Instances[*].PrivateIpAddress\" --output text", returnStdout: true).trim()
                     lockFile = "/home/${SERVER_NAME}/.admin.lock"
                     // Use SSH to check if the lock file exists
                     sshCommand = "ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} test -e ${lockFile}"   
@@ -81,9 +83,11 @@ pipeline {
 
                 // build docker image for admin site and push to ecr
                 script {
-                    sh "docker image build -t ${ECR_URL}/admin:${COMMIT_ID} --target admin ."
+                    sh "docker image build -t ${ECR_URL}/admin:${COMMIT_ID} -t ${ECR_URL}/admin:latest-stage --target admin ."
                     sh "aws ecr get-login-password --region ap-south-1 | docker login --username ${ECR_USERNAME} --password-stdin ${ECR_URL}"
                     sh "docker image push ${ECR_URL}/admin:${COMMIT_ID}"
+                    sh "docker image push ${ECR_URL}/admin:latest-stage"
+                    sh "docker image rm ${ECR_URL}/admin:latest-stage"
                     sh "docker image rm ${ECR_URL}/admin:${COMMIT_ID}"
                 }
             }
@@ -92,22 +96,14 @@ pipeline {
             when {
                 expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#ritik') }
             }
-
             steps {
                 echo 'Deploying....'
-
                 // ssh into server ip and run deploy commands, then remove lock
                 sh """ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} \" sed -i \'/^ADMIN_TAG/s/=.*\$/=${COMMIT_ID}/g\' /home/${SERVER_NAME}/.env.front && \
                 aws ecr get-login-password --region ap-south-1 | docker login --username ${ECR_USERNAME} --password-stdin ${ECR_URL} && \
                 docker compose --env-file /home/${SERVER_NAME}/.env.front -f /home/${SERVER_NAME}/docker-compose-frontend.yaml up admin -d && \
                 rm /home/${SERVER_NAME}/.admin.lock
                 \""""
-
-                script{
-                build([$class: 'BuildBlockerProperty',
-                               blockingJobs: "Deploy Admin to ${SERVER_NAME}",
-                               scanQueueFor: "UNBLOCKED"])
-                }
             }
             post {
                 failure {
