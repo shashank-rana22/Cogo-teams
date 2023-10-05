@@ -37,7 +37,9 @@ function GroupCard({
 
 	const lastActive = new Date(new_message_sent_at);
 
-	const lastMessage = last_message_document?.response?.message || '';
+	const mediaText = last_message_document?.response?.message_type === 'media' ? 'media' : '';
+
+	const lastMessage = last_message_document?.response?.message || mediaText;
 
 	const { renderTime } = dateTimeConverter(
 		Date.now() - Number(lastActive),

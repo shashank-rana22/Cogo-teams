@@ -21,9 +21,11 @@ function sortChats({ messagesListData = {} }) {
 		messagesListData[a]?.new_message_sent_at,
 	)).map((eachKey) => messagesListData[eachKey]);
 }
+
 function fetchTeamsRoomsUnpinned({
-	snapshotRef,
-	activeAgent, setLoading, roomsCollection, filterQuery, setListData, queryForSearch,
+	snapshotRef = {},
+	activeAgent = '', setLoading = false, roomsCollection = {}, filterQuery = [],
+	setListData = () => {}, queryForSearch = '',
 }) {
 	if (activeAgent) {
 		try {
@@ -64,19 +66,19 @@ function fetchTeamsRoomsUnpinned({
 				setLoading((prev) => ({ ...prev, unpinnedLoading: false }));
 			});
 		} catch (e) {
-			console.log('e', e);
+			console.error('e', e);
 		}
 	}
 }
 
 function fetchTeamsRoomsPinned({
-	snapshotRef,
-	activeAgent,
-	setLoading,
-	roomsCollection,
-	filterQuery,
-	setPinnedChats,
-	queryForSearch,
+	snapshotRef = {},
+	activeAgent = '',
+	setLoading = false,
+	roomsCollection = {},
+	filterQuery = [],
+	setPinnedChats = () => {},
+	queryForSearch = '',
 }) {
 	if (!activeAgent) {
 		return;
@@ -109,7 +111,12 @@ function fetchTeamsRoomsPinned({
 }
 
 async function prevTeamRooms({
-	activeAgent, setLoading, roomsCollection, filterQuery, setListData, listData,
+	activeAgent = '',
+	setLoading = false,
+	roomsCollection = {},
+	filterQuery = [],
+	setListData = () => {},
+	listData = {},
 }) {
 	if (!activeAgent) {
 		return;
@@ -149,6 +156,8 @@ async function prevTeamRooms({
 		}));
 	} catch (e) {
 		console.error('e', e);
+	} finally {
+		setLoading((prev) => ({ ...prev, unpinnedLoading: false }));
 	}
 }
 
@@ -211,6 +220,13 @@ function useFetchTeamsRoom({ firestore = {}, searchValue = '' }) {
 	}, [debounceQuery, searchValue]);
 
 	useEffect(() => {
+		setPinnedChats([]);
+		setListData({
+			messagesListData     : {},
+			lastMessageTimeStamp : Date.now(),
+			isLastPage           : false,
+		});
+
 		fetchTeamsRoomsUnpinned({
 			snapshotRef,
 			activeAgent,

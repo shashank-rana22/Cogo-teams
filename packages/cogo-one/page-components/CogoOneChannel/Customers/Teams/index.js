@@ -23,7 +23,6 @@ function Teams(teamsProps) {
 		pinnedChats = [],
 		loading,
 	} = useFetchTeamsRoom({ firestore, searchValue });
-
 	const { readTeamsMessage = () => {} } = useUpdateLocalTeamRooms({ firestore });
 
 	const setActiveCard = (card) => {

@@ -23,7 +23,7 @@ function useCreateCogooneGroups({ activeTab = {} }) {
 	const [, trigger] = useRequest({
 		url    : '/update_cogoone_groups',
 		method : 'post',
-	}, { manual: true });
+	}, { manual: true, autoCancel: false });
 
 	const createOrGetCogooneGroup = async () => {
 		const { data = {} } = activeTab || {};
