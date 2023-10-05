@@ -9,6 +9,7 @@ const getTabMappings = ({
 	unReadMailsCount = 0,
 	unReadMissedCallCount = 0,
 	viewType = '',
+	unreadTeamsCount = 0,
 }) => {
 	const geo = getGeoConstants();
 	const tabsToBeShown = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.chat_tabs_to_be_shown || [];
@@ -41,6 +42,7 @@ const getTabMappings = ({
 			label : 'Teams',
 			value : 'teams',
 			show  : true,
+			badge : unreadTeamsCount > MAX_COUNT ? '99+' : unreadTeamsCount,
 		},
 	];
 

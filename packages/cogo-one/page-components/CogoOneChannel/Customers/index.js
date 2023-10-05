@@ -9,6 +9,7 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useGetUnreadCallsCount from '../../../hooks/useGetUnreadCallsCount';
 import useGetUnreadMailsCount from '../../../hooks/useGetUnreadMailsCount';
 import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
+import useGetUnreadTeamsCount from '../../../hooks/useGetUnreadTeamsCount';
 
 import AgentSettings from './AgentSettings';
 import CommunicationModals from './CommunicationModals';
@@ -73,6 +74,8 @@ function Customers({
 		userSharedMails,
 	});
 
+	const { unreadTeamsCount = 0 } = useGetUnreadTeamsCount({ firestore });
+
 	const { data = {}, fetchUnreadCall = () => {} } = useGetUnreadCallsCount({ activeTab });
 
 	const unReadMissedCallCount = data?.total_missed_call_count;
@@ -136,6 +139,7 @@ function Customers({
 		unReadMissedCallCount,
 		unReadMailsCount,
 		viewType,
+		unreadTeamsCount,
 	});
 
 	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
