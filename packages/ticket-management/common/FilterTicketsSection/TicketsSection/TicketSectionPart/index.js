@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 function TicketsSectionPart({
 	label = '', status = '', searchParams = {}, spectatorType = '', refreshList = {}, setRefreshList = () => {},
 	isAdmin = false, setModalData = () => {}, isUpdated = false, setIsUpdated = () => {}, date = {},
+	sortBy = '',
 }) {
 	const { t } = useTranslation(['myTickets']);
 
@@ -25,6 +26,7 @@ function TicketsSectionPart({
 		listLoading = false,
 		handleScroll = () => {}, fetchTickets = () => {}, reachedBottom = false,
 	} = useListTickets({
+		sortBy,
 		searchParams,
 		spectatorType,
 		status,
