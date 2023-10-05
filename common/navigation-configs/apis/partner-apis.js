@@ -4952,7 +4952,7 @@ const partner = {
 		{
 			api          : 'delete_lcl_freight_rate_job',
 			access_type  : 'private',
-			service_name : 'lcl_freight_rate',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'delete_air_customs_rate_job',

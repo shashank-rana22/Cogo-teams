@@ -3,7 +3,7 @@ import { currencyOptions } from '../../../../../configurations/helpers/constants
 const lclCustomsControls = ({
 	data,
 	fclCommodityOptions,
-	originLocationOptions,
+	// originLocationOptions,
 }) => [
 	{
 		name    : 'service_provicer_details',
@@ -30,21 +30,40 @@ const lclCustomsControls = ({
 	},
 	{
 		name         : 'location_details',
-		label        : 'Location Details',
+		heading      : 'Location Details',
 		span         : 12,
 		showOptional : false,
 	},
 	{
-		name        : 'origin_location_id',
-		heading     : 'Origin Location',
-		type        : 'select',
-		placeholder : 'Origin Location',
+		name        : 'location_id',
 		span        : 4,
 		value       : data?.origin_port?.id,
-		disabled	   : data?.origin_port?.id,
-		...originLocationOptions,
-		rules       : { required: 'origin location is required' },
+		asyncKey    : 'list_locations',
+		type        : 'async_select',
+		disabled    : !!data?.origin_port?.id,
+		isClearable : true,
+		placeholder : 'Origin Location',
+		rules       : { required: 'This is required' },
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit      : 20,
+			includes        : { city: true, country: true, default_params_required: true },
+			recommendations : true,
+		},
 	},
+	// {
+	// 	name        : 'origin_location_id',
+	// 	heading     : 'Origin Location',
+	// 	type        : 'select',
+	// 	placeholder : 'Origin Location',
+	// 	span        : 4,
+	// 	value       : data?.origin_port?.id,
+	// 	disabled	   : data?.origin_port?.id,
+	// 	...originLocationOptions,
+	// 	rules       : { required: 'origin location is required' },
+	// },
 	{
 		name        : 'trade_type',
 		placeholder : 'Select Trade Type',
@@ -68,13 +87,12 @@ const lclCustomsControls = ({
 	},
 	{
 		name         : 'container_details',
-		label        : 'Commodity',
+		heading      : 'Commodity',
 		span         : 12,
 		showOptional : false,
 	},
 	{
 		name        : 'commodity',
-		heading     : 'Commodity',
 		type        : 'select',
 		placeholder : 'Commodity',
 		span        : 3,
@@ -85,7 +103,7 @@ const lclCustomsControls = ({
 	},
 	{
 		name         : 'line_items',
-		label        : 'Line Items',
+		heading      : 'Line Items',
 		span         : 12,
 		showOptional : false,
 	},

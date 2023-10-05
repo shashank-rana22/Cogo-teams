@@ -4,10 +4,13 @@ import containerTypes from '@cogoport/constants/container-types.json';
 
 import { currencyOptions } from '../../../../../configurations/helpers/constants';
 
+const TOTAL_HOURS = 24;
 const trailerControls = ({
 	data,
 	fclCommodityOptions,
 	originLocationOptions, destinationLocationOptions,
+	transit_time_type,
+	transit_time_value,
 }) => {
 	const controls = [
 		{
@@ -63,14 +66,6 @@ const trailerControls = ({
 			disabled	   : data?.origin_port?.id,
 			...originLocationOptions,
 			rules       : { required: 'origin location is required' },
-		},
-		{
-			name        : 'origin_main_port_id',
-			type        : 'select',
-			heading     : 'Origin Main port',
-			placeholder : 'Origin Main port',
-			span        : 4,
-			rules       : { required: 'origin main port is required' },
 		},
 		{
 			name        : 'destination_location_id',
@@ -206,8 +201,11 @@ const trailerControls = ({
 			span      : 4,
 			className : 'primary lg',
 			value     : {
-				transit_time_type  : 'hrs',
-				transit_time_value : '',
+				transit_time_type: 'hrs',
+				transit_time_value:
+					transit_time_type === 'days'
+						? transit_time_value * TOTAL_HOURS
+						: transit_time_value,
 			},
 			inputControls: [
 				{

@@ -1,12 +1,11 @@
 /* eslint-disable max-lines-per-function */
 import containerSizes from '@cogoport/constants/container-sizes.json';
+import containerTypes from '@cogoport/constants/container-types.json';
 
 import { currencyOptions, rateTypeOptions } from '../../../../../configurations/helpers/constants';
 
 const fclCustomsControls = ({
 	data,
-	fclCommodityOptions,
-	originLocationOptions,
 }) => [
 	{
 		name    : 'service_provicer_details',
@@ -34,36 +33,65 @@ const fclCustomsControls = ({
 
 	{
 		name         : 'location_details',
-		label        : 'Location Details',
+		heading      : 'Location Details',
 		span         : 12,
 		showOptional : false,
 	},
+	// {
+	// 	name        : 'location_id',
+	// 	type        : 'select',
+	// 	value       : data?.location?.id,
+	// 	disabled    : data?.location?.id,
+	// 	caret       : true,
+	// 	span        : 4,
+	// 	params      : { filters: { type: ['seaport'] } },
+	// 	placeholder : 'Search country/port...',
+	// 	countryType : 'country',
+	// 	rules       : { required: 'This is required' },
+	// },
+
 	{
-		name        : 'origin_location_id',
-		heading     : 'Origin Location',
-		type        : 'select',
-		placeholder : 'Origin Location',
+		name        : 'location_id',
 		span        : 4,
-		value       : data?.origin_port?.id,
-		disabled	   : data?.origin_port?.id,
-		...originLocationOptions,
-		rules       : { required: 'origin location is required' },
+		value       : data?.location_id,
+		asyncKey    : 'list_locations',
+		type        : 'async_select',
+		disabled    : !!data?.location_id,
+		isClearable : true,
+		placeholder : 'Origin Location',
+		rules       : { required: 'This is required' },
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit      : 20,
+			includes        : { city: true, country: true, default_params_required: true },
+			recommendations : true,
+		},
 	},
 	{
-		name           : 'trade_type',
-		placeholder    : 'Select Trade Type',
-		value          : data?.trade_type,
-		disabled       : data?.trade_type,
-		optionsListKey : 'trade-types',
-		type           : 'select',
-		span           : 4,
-		className      : 'primary lg',
-		caret          : true,
-		rules          : { required: 'This is required' },
+		name        : 'trade_type',
+		placeholder : 'Select Trade Type',
+		value       : data?.trade_type,
+		options     : [
+			{
+				label : 'Export',
+				value : 'export',
+			},
+			{
+				label : 'Import',
+				value : 'import',
+			},
+		],
+		type      : 'select',
+		span      : 4,
+		className : 'primary lg',
+		caret     : true,
+		rules     : { required: 'This is required' },
 	},
 	{
 		name         : 'container_details',
-		label        : 'Container Details',
+		heading      : 'Container Details',
 		span         : 12,
 		showOptional : false,
 	},
@@ -79,27 +107,28 @@ const fclCustomsControls = ({
 		rules       : { required: 'container size is required' },
 	},
 	{
-		name        : 'commodity',
-		heading     : 'Commodity',
+		name        : 'container_type',
+		heading     : 'Container Type',
 		type        : 'select',
-		placeholder : 'Commodity',
-		span        : 3,
-		value       : data?.commodity,
-		disabled    : data?.commodity,
-		options     : fclCommodityOptions,
-		rules       : { required: 'commodity is required' },
+		span        : 4,
+		value       : data?.container_type || 'standard',
+		className   : 'primary lg',
+		placeholder : 'Container Type',
+		rules       : { required: 'This is required' },
+		options     : containerTypes,
 	},
 
 	{
-		name        : 'commodity',
-		heading     : 'Commodity',
-		type        : 'select',
-		placeholder : 'Commodity',
-		span        : 3,
-		value       : data?.commodity,
-		disabled    : data?.commodity,
-		options     : fclCommodityOptions,
-		rules       : { required: 'commodity is required' },
+		heading          : 'Commodity',
+		name             : 'commodity',
+		type             : 'select',
+		span             : 4,
+		value            : data?.commodity || 'general',
+		placeholder      : 'Commodity',
+		className        : 'primary lg',
+		commodityType    : 'fcl_customs',
+		containerTypeKey : 'container_type',
+		rules            : { required: 'This is required' },
 	},
 	{
 		name        : 'rate_type',
@@ -113,7 +142,7 @@ const fclCustomsControls = ({
 		},
 	},
 	{
-		label        : 'Line Items',
+		heading      : 'Line Items',
 		name         : 'line_item',
 		showOptional : false,
 		span         : 12,
@@ -121,7 +150,6 @@ const fclCustomsControls = ({
 	{
 		label      : 'Add Custom Line Items',
 		type       : 'fieldArray',
-		heading    : 'Line Items',
 		name       : 'line_items',
 		buttonText : 'Add Line Items',
 		controls   : [
@@ -163,7 +191,7 @@ const fclCustomsControls = ({
 
 	{
 		name         : 'cfs_items',
-		label        : 'CFS Items',
+		heading      : 'CFS Items',
 		span         : 12,
 		showOptional : false,
 	},

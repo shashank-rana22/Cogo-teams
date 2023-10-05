@@ -56,7 +56,7 @@ const fclControls = ({
 		placeholder : 'Origin Location',
 		span        : 4,
 		value       : data?.origin_port?.id,
-		disabled	   : data?.origin_port?.id,
+		disabled  	 : data?.origin_port?.id,
 		...originLocationOptions,
 		rules       : { required: 'origin location is required' },
 	},
@@ -213,7 +213,7 @@ const fclControls = ({
 		name               : 'weight_slabs',
 		heading            : 'Weight Slabs',
 		type               : 'fieldArray',
-		noDeleteButtonTill : 0,
+		noDeleteButtonTill : 1,
 		value              : [{
 			lower_limit : '',
 			upper_limit : '',

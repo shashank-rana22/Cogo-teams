@@ -6,9 +6,7 @@ import { currencyOptions } from '../../../../../configurations/helpers/constants
 
 const haulageControls = ({
 	data,
-	listShippingLineOptions,
 	fclCommodityOptions,
-	originLocationOptions, destinationLocationOptions,
 }) => [
 	{
 		name    : 'service_provicer_details',
@@ -32,51 +30,6 @@ const haulageControls = ({
 		value       : data?.sourced_by_id,
 		span        : 4,
 		rules       : { required: 'rate provided by user is required' },
-	},
-	{
-		name        : 'shipping_line_id',
-		heading     : 'Shipping Line',
-		type        : 'select',
-		placeholder : 'Shipping Line',
-		span        : 4,
-		value       : data?.shipping_line_id,
-		...listShippingLineOptions,
-		rules       : { required: 'shipping line is required' },
-	},
-	{
-		heading : 'Location Details',
-		name    : 'location_details',
-		span    : 12,
-	},
-	{
-		name        : 'origin_location_id',
-		heading     : 'Origin Location',
-		type        : 'select',
-		placeholder : 'Origin Location',
-		span        : 4,
-		value       : data?.origin_port?.id,
-		disabled	   : data?.origin_port?.id,
-		...originLocationOptions,
-		rules       : { required: 'origin location is required' },
-	},
-	{
-		name        : 'origin_main_port_id',
-		type        : 'select',
-		heading     : 'Origin Main port',
-		placeholder : 'Origin Main port',
-		span        : 4,
-		rules       : { required: 'origin main port is required' },
-	},
-	{
-		name        : 'destination_location_id',
-		type        : 'select',
-		heading     : 'Destination Location',
-		span        : 4,
-		value       : data?.destination_port?.id,
-		disabled    : data?.destination_port?.id,
-		...destinationLocationOptions,
-		placeholder : 'Destination Location',
-		rules       : { required: 'destination location is required' },
 	},
 	{
 		heading : 'Container Details',
@@ -147,7 +100,7 @@ const haulageControls = ({
 	{
 		name         : 'line_item',
 		span         : 12,
-		label        : 'Line Items',
+		heading      : 'Line Items',
 		showOptional : false,
 	},
 	{
@@ -166,9 +119,9 @@ const haulageControls = ({
 				name        : 'lower_limit',
 				type        : 'number',
 				span        : 4,
-				disabled    : true,
+				// disabled    : true,
 				placeholder : 'Lower Limit (in MT)',
-				rules       : { required: 'lower limit is required' },
+				// rules       : { required: 'lower limit is required' },
 			},
 			{
 				name        : 'upper_limit',

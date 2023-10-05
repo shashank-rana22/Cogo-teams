@@ -24,19 +24,6 @@ const ftlControls = ({
 			rules       : { required: 'service provider is required' },
 		},
 		{
-			name           : 'rate_provided',
-			placeholder    : 'Rate Provided By LSP',
-			label          : 'Rate Provided By LSP User',
-			optionsListKey : 'organization-users',
-			isClearable    : true,
-			valueKey       : 'user_id',
-			defaultOptions : true,
-			span           : 4,
-			type           : 'select',
-			rules          : { required: true },
-			className      : 'primary lg',
-		},
-		{
 			name        : 'sourced_by_id',
 			heading     : 'Rate Provided by user',
 			type        : 'select',
@@ -45,7 +32,6 @@ const ftlControls = ({
 			span        : 4,
 			rules       : { required: 'rate provided by user is required' },
 		},
-
 		{
 			heading : 'Location Details',
 			name    : 'location_details',
@@ -92,7 +78,7 @@ const ftlControls = ({
 		{
 			name        : 'truck_type',
 			placeholder : 'Select Truck Type',
-			label       : 'Truck Type',
+			heading     : 'Truck Type',
 			type        : 'select',
 			options     : truck_types,
 			className   : 'primary lg',
@@ -114,7 +100,7 @@ const ftlControls = ({
 		{
 			name        : 'body_type',
 			placeholder : 'Select Body Type',
-			label       : 'Body Type',
+			heading     : 'Body Type',
 			type        : 'select',
 			className   : 'primary lg',
 			value       : data?.truck_body_type,
@@ -130,7 +116,7 @@ const ftlControls = ({
 		},
 		{
 			name      : 'transit_time',
-			label     : 'Transit time',
+			heading   : 'Transit time',
 			type      : 'input-group',
 			span      : 4,
 			className : 'primary lg',
@@ -169,7 +155,7 @@ const ftlControls = ({
 		},
 		{
 			name      : 'detention_free_time',
-			label     : 'Detention Free time',
+			heading   : 'Detention Free time',
 			type      : 'input-group',
 			span      : 4,
 			className : 'primary lg',
@@ -210,7 +196,7 @@ const ftlControls = ({
 			name        : 'date_range',
 			placeholder : 'Select Range',
 			type        : 'datepicker',
-			label       : 'Validity of Rate',
+			heading     : 'Validity of Rate',
 			span        : 4,
 			minDate     : new Date(),
 			pickerType  : 'range',
@@ -223,7 +209,7 @@ const ftlControls = ({
 			type        : 'select',
 			span        : 4,
 			value       : data?.unit,
-			label       : 'Unit',
+			heading     : 'Unit',
 			options     : [
 				{
 					label : 'Per Truck',
@@ -240,7 +226,7 @@ const ftlControls = ({
 		},
 		{
 			name        : 'min_chargeable_weight',
-			label       : 'Min Chargeable Weight',
+			heading     : 'Min Chargeable Weight',
 			type        : 'number',
 			placeholder : 'Select Min Chargeable Weight',
 			span        : 4,
@@ -250,7 +236,7 @@ const ftlControls = ({
 		},
 		{
 			name          : 'price_per_truck',
-			label         : 'Basic Freight Rate',
+			heading       : 'Basic Freight Rate',
 			type          : 'input-group',
 			span          : 4,
 			className     : 'primary lg',
@@ -276,7 +262,7 @@ const ftlControls = ({
 		},
 		{
 			name          : 'fuel_surcharge',
-			label         : 'Fuel Surcharge',
+			heading       : 'Fuel Surcharge',
 			type          : 'input-group',
 			span          : 4,
 			className     : 'primary lg',
@@ -318,7 +304,7 @@ const ftlControls = ({
 			placeholder : 'Enter Remarks',
 			type        : 'textarea',
 			span        : 3.8,
-			label       : 'Remarks',
+			heading     : 'Remarks',
 			className   : 'primary lg ',
 		},
 	];

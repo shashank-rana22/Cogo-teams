@@ -10,23 +10,25 @@ import { merge, startCase } from '@cogoport/utils';
 import { filterOption } from '../../../../../configurations/helpers/constants';
 
 import airControls from './air-controls';
+import airCustomsControls from './air-customs-controls';
 import fclControls from './fcl-controls';
 import fclCustomsControls from './fcl-customs';
 import ftlControls from './ftl-controls';
 import haulageControls from './haulage-controls';
 import lclControls from './lcl-controls';
 import lclCustomsControls from './lcl-customs-controls';
-import trailerControls from './trailer_control';
+import trailerControls from './trailer-control';
 
 const serviceControlsMap = {
-	fcl_freight  : fclControls,
-	air_freight  : airControls,
-	haulage      : haulageControls,
-	fcl_customs  : fclCustomsControls,
-	lcl_freight  : lclControls,
-	lcl_customs  : lclCustomsControls,
-	trailer      : trailerControls,
-	ftl_controls : ftlControls,
+	fcl_freight : fclControls,
+	air_freight : airControls,
+	air_customs : airCustomsControls,
+	haulage     : haulageControls,
+	fcl_customs : fclCustomsControls,
+	lcl_freight : lclControls,
+	lcl_customs : lclCustomsControls,
+	trailer     : trailerControls,
+	ftl_freight : ftlControls,
 };
 
 const getDefaultValues = (oldfields) => {

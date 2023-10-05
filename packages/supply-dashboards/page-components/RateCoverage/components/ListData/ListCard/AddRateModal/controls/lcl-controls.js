@@ -34,7 +34,6 @@ const lclControls = ({
 	},
 	{
 		heading : 'Location Details',
-		name    : 'location_details',
 		span    : 12,
 	},
 	{
@@ -51,20 +50,14 @@ const lclControls = ({
 
 	{
 		name        : 'destination_location_id',
-		type        : 'select',
 		heading     : 'Destination Location',
+		type        : 'select',
 		span        : 4,
 		value       : data?.destination_port?.id,
 		disabled    : data?.destination_port?.id,
 		...destinationLocationOptions,
 		placeholder : 'Destination Location',
 		rules       : { required: 'destination location is required' },
-	},
-	{
-		label        : 'Commodity',
-		name         : 'commodities',
-		showOptional : false,
-		span         : 12,
 	},
 	{
 		name        : 'commodity',
@@ -79,7 +72,7 @@ const lclControls = ({
 	},
 
 	{
-		name         : 'others',
+		heading      : 'others',
 		span         : 12,
 		label        : 'Others',
 		showOptional : false,
@@ -110,22 +103,20 @@ const lclControls = ({
 	},
 	{
 		name        : 'departure_dates',
-		type        : 'departure-dates',
+		type        : 'departure_date',
+		heading     : 'Departure Dates',
 		span        : 4,
 		placeholder : 'Enter Departure Dates',
 		className   : 'primary sm',
-		datePair    : {
-			startDate : data?.validity_start,
-			endDate   : data?.validity_end,
-		},
-		rules: { required: 'This is required' },
+		datePair    : {},
+		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'number_of_stops',
 		type        : 'number',
 		placeholder : 'Enter No. of Stops',
 		className   : 'primary lg',
-		span        : 2,
+		span        : 4,
 		rules       : { required: 'This is required' },
 	},
 
@@ -134,16 +125,9 @@ const lclControls = ({
 		type        : 'number',
 		placeholder : 'Enter Transit time (days)',
 		className   : 'primary lg',
-		span        : 2,
+		span        : 4,
 		rules       : { required: 'This is required' },
 	},
-	{
-		label        : 'Line Items',
-		name         : 'line_item',
-		showOptional : false,
-		span         : 12,
-	},
-
 	{
 		type               : 'fieldArray',
 		showButtons        : true,
