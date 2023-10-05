@@ -141,5 +141,7 @@
     "service": "Dịch vụ",
     "trade_type": "Loại giao dịch",
     "category": "Danh mục",
-    "sub_category": "Danh mục con"
+    "sub_category": "Danh mục con",
+    "created_at": "Tạo lúc",
+    "updated_at": "Cập nhật lúc"
 }

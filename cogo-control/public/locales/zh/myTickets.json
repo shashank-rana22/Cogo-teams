@@ -141,5 +141,7 @@
     "service": "服务",
     "trade_type": "交易类型",
     "category": "类别",
-    "sub_category": "子类别"
+    "sub_category": "子类别",
+    "created_at": "创建于",
+    "updated_at": "更新于"
 }

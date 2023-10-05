@@ -141,5 +141,7 @@
     "service": "Layanan",
     "trade_type": "Jenis Perdagangan",
     "category": "Kategori",
-    "sub_category": "Sub Kategori"
+    "sub_category": "Sub Kategori",
+    "created_at": "Dibuat Pada",
+    "updated_at": "Diperbarui Pada"
 }

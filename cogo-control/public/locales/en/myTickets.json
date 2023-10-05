@@ -141,5 +141,7 @@
     "service": "Service",
     "trade_type": "Trade Type",
     "category": "Category",
-    "sub_category": "Sub Category"
+    "sub_category": "Sub Category",
+    "created_at": "Created At",
+    "updated_at": "Updated At"
 }
