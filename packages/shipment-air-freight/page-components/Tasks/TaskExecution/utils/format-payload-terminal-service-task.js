@@ -1,4 +1,6 @@
+import { Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import { isEmpty } from '@cogoport/utils';
 
 const DEFAULT_VALUE_FOR_TERMINAL_CHARGE = 0;
 const DEFAULT_VALUE_FOR_SHEET_INDEX = 1;
@@ -54,6 +56,11 @@ const getPayload = ({
 		};
 		CSR_FILE_DATA.push(data);
 	});
+
+	if (isEmpty(CSR_FILE_DATA)) {
+		Toast.error(`Add atleast one ${taskType === 'terminal' ? 'Terminal' : 'Gatepass'} Information`);
+		return null;
+	}
 
 	const payload = {
 		shipment_id,
