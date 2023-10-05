@@ -41,7 +41,7 @@ pipeline {
                 }
                 steps{
                     script {
-                    SERVER_NAME = 'sh(script: "git log -1 --pretty=%B ${COMMIT_ID} | awk '{print \$NF}'", returnStdout: true).trim()'
+                    SERVER_NAME = sh(script: "git log -1 --pretty=%B ${COMMIT_ID} | awk '{print \$NF}'", returnStdout: true).trim()
                     SERVER_IP = sh(script: "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${SERVER_NAME}\" --query \"Reservations[*].Instances[*].PrivateIpAddress\" --output text", returnStdout: true).trim()
                     lockFile = "/home/${SERVER_NAME}/.admin.lock"
                     // Use SSH to check if the lock file exists
