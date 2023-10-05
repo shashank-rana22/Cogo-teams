@@ -49,7 +49,7 @@ pipeline {
                     def exitCode = sh(script: sshCommand, returnStatus: true)
                     echo "${exitCode}"
                     if (exitCode == 1) {
-                        sh("scp -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} -P ${SSH_PORT} .admin.lock ${SERVER_NAME}@${SERVER_IP}:/home/${SERVER_NAME}")
+                     sh "ssh -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} touch ${lockFile}"
                         echo "Acquired lock on remote server."
                     } else {
                         office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployment failed for user **${PUSHER_NAME}** because another deployment is going on for cogo-admin in the specified server.", color: '#3366ff'
@@ -80,7 +80,6 @@ pipeline {
                         sh 'pnpm run build'
                     }
                 }
-
                 // build docker image for admin site and push to ecr
                 script {
                     sh "docker image build -t ${ECR_URL}/admin:${COMMIT_ID} -t ${ECR_URL}/admin:latest-stage --target admin ."
@@ -119,7 +118,6 @@ pipeline {
     }
     post{//remove lock
         always{
-             echo "Server IP: ${SERVER_IP}"
             script{
                 sh "ssh -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} rm /home/${SERVER_NAME}/.admin.lock"
             }
