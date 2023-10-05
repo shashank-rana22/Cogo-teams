@@ -18,6 +18,7 @@ function Child(props) {
 		noDeleteButtonTill = 0,
 		disabled = false,
 		error = {},
+
 	} = props;
 
 	return (
