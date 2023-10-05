@@ -1,4 +1,3 @@
-import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useContext } from 'react';
 
 import AppliedFilters from '../../common/AppliedFilters';
@@ -24,8 +23,6 @@ function FclFreight() {
 				<div className={styles.stepper_container}>
 					<Stepper />
 				</div>
-
-				<ShipmentChat />
 
 				{activeTab !== SECURITY_DEPOSIT_TAB ? <Filters /> : null}
 

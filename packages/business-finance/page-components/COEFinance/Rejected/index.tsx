@@ -6,16 +6,16 @@ import styles from './styles.module.css';
 
 const tabs = [
 	{
-		key   : 'finance_rejected',
-		label : 'Finance Rejected',
-	},
-	{
 		key   : 'coe_rejected',
 		label : 'COE Rejected',
 	},
 	{
 		key   : 'coe_on_hold',
 		label : 'COE On Hold',
+	},
+	{
+		key   : 'finance_rejected',
+		label : 'Finance Rejected',
 	},
 ];
 
@@ -29,7 +29,7 @@ function Rejected({ statsData }) {
 	const { push } = useRouter();
 	const [filters, setFilters] = useState({});
 
-	const [subActiveTabReject, setSubActiveTabReject] = useState<string>('finance_rejected');
+	const [subActiveTabReject, setSubActiveTabReject] = useState<string>('coe_rejected');
 
 	const { FINANCE_REJECTED = '', COE_REJECTED = '', ON_HOLD = '' } = statsData || {};
 

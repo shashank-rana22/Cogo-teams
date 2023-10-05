@@ -8,8 +8,10 @@ import Layout from '../../../../../commons/Layout/index.tsx';
 import controls from '../../../../configurations/raise-ticket-controls';
 import useGetConfigurationCategory from '../../../../hook/useGetConfigurationCategory';
 import useListShipment from '../../../../hook/useListShipment.ts';
+import useListStakeholders from '../../../../hook/useListShipmentStakeholders';
 import useRaiseTicket from '../../../../hook/useRaiseTicket';
 import useUpdateBillsTicketId from '../../../../hook/useUpdateBIllsTicketId';
+import getStakeholderData from '../../../../utils/getStakeholderData';
 
 import styles from './styles.module.css';
 
@@ -23,7 +25,11 @@ function RaiseTicketModal({
 }) {
 	const [additionalInfo, setAdditionalInfo] = useState([]);
 
+	let disableButton = false;
+
 	const { control, watch, handleSubmit, formState:{ errors = {} } = {} } = useForm();
+
+	const formValues = watch();
 
 	const watchRaisedToDesk = watch('raised_to_desk');
 
@@ -35,6 +41,11 @@ function RaiseTicketModal({
 	const { data, loading:shipmentLoading } = useListShipment(itemData?.jobNumber);
 
 	const shipmentData = data?.list[GLOBAL_CONSTANTS.zeroth_index];
+
+	const {
+		data:stakeholderData = [],
+		loading:stakeholderLoading,
+	} = useListStakeholders({ shipmentId: shipmentData?.id });
 
 	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({
 		additionalInfo,
@@ -53,11 +64,20 @@ function RaiseTicketModal({
 		value : item?.name,
 	}));
 
+	const STAKEHOLDER_OPTIONS = getStakeholderData(stakeholderData) || {};
+
 	const fields = controls({
 		formatRaiseToDeskOptions,
 		watchRaisedToDesk,
 		setAdditionalInfo,
 		shipmentData,
+		STAKEHOLDER_OPTIONS,
+	});
+
+	(fields || []).forEach((item) => {
+		if (item?.rules?.required && !formValues[item?.name]) {
+			disableButton = true;
+		}
 	});
 
 	return (
@@ -112,7 +132,7 @@ function RaiseTicketModal({
 			<Modal.Footer style={{ padding: 12 }}>
 				<Button
 					size="md"
-					disabled={loading || updateLoading || shipmentLoading}
+					disabled={loading || updateLoading || shipmentLoading || stakeholderLoading || disableButton}
 					onClick={handleSubmit(raiseTickets)}
 				>
 					Submit

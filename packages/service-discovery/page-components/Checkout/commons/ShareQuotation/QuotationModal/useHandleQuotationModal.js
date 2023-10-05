@@ -1,7 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useMemo } from 'react';
@@ -22,6 +21,7 @@ const useHandleQuotationModal = ({
 	updateLoading,
 	updateCheckout = () => {},
 	bookingConfirmationMode = '',
+	setShowSuccessModal = () => {},
 }) => {
 	const { query, agent_id, partnerId } = useSelector(({ general, profile }) => ({
 		query     : general.query,
@@ -37,7 +37,7 @@ const useHandleQuotationModal = ({
 	const [selected, setSelected] = useState('main');
 	const [confirmation, setConfirmation] = useState(false);
 
-	const { quotation_type, checkout_ids } = detail || {};
+	const { quotation_type, checkout_ids, tags = [] } = detail || {};
 
 	const { checkout_id, shipment_id } = query || {};
 
@@ -46,12 +46,13 @@ const useHandleQuotationModal = ({
 		agent_id,
 	]);
 
-	const org_id =		selected === 'main'
+	const org_id = selected === 'main'
 		? detail?.importer_exporter_id
 		: selected?.organization_id;
 
 	const orgUsersParams = {
-		page_limit : 100,
+		page_limit : 1000,
+		status     : 'active',
 		filters    : {
 			organization_id: org_id,
 		},
@@ -154,16 +155,22 @@ const useHandleQuotationModal = ({
 				});
 				setShowShareQuotationModal(false);
 
-				Toast.success('Email sent');
+				await updateCheckout({
+					values: {
+						id        : checkout_id,
+						is_locked : true,
+						tags      : [...new Set([...tags, 'added_to_cart'])],
+					},
+				});
 
-				await updateCheckout({ values: { id: checkout_id, is_locked: true } });
+				setShowSuccessModal(true);
 
 				if (bookingConfirmationMode === 'email') {
 					window.location.href = `/${partnerId}/sales/dashboards`;
 				}
 			} catch (err) {
 				if (err?.response) {
-					getApiErrorString(err.response?.data);
+					Toast.error('Something went wrong. Please try again later');
 				}
 			}
 		} else {
@@ -176,7 +183,8 @@ const useHandleQuotationModal = ({
 		Object.keys(values || {}).forEach((key) => {
 			const value = values[key];
 			if (value && key === 'attachment_file_urls') {
-				const urls = (value || []).map((item) => item?.url);
+				const urls = (value || []).map((item) => item?.finalUrl || item || '');
+
 				NEW_VALUES[key] = urls;
 			} else if (value && key === 'terms_and_conditions') {
 				NEW_VALUES[key] = [value];
@@ -213,6 +221,8 @@ const useHandleQuotationModal = ({
 			const values = emailWatch();
 			if (values) {
 				onSave(formatEmailValues(values), false);
+
+				emailSetValue('attachment_file_urls', []);
 
 				if (activeState === 'customize') {
 					setActiveState('select_recipient');
@@ -288,6 +298,7 @@ const useHandleQuotationModal = ({
 				orgUsersData,
 				emailWatch,
 				emailContent,
+				loading,
 			},
 			buttons: [
 				{
@@ -309,10 +320,6 @@ const useHandleQuotationModal = ({
 			],
 		},
 	};
-
-	useEffect(() => {
-		getEmailPreview({ ...getEmailPreviewProps, emailContentNew: {} });
-	}, [getEmailPreviewProps]);
 
 	return {
 		activeState,

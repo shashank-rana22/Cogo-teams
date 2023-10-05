@@ -15,7 +15,12 @@ const convertObjectMappingToArray = (obj) => Object.keys(obj).map((item) => ({
 	label : obj[item],
 }));
 
-const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) => ({
+const mawbControls = ({
+	disableClass = false,
+	editHawbNumberCondition = false,
+	unitDefaultValue = '',
+	packageDisableCheck = false,
+}) => ({
 	hawb_controls: [
 		{
 			name        : 'document_number',
@@ -195,6 +200,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 			span               : 12,
 			showButtons        : true,
 			noDeleteButtonTill : 1,
+			disabled           : packageDisableCheck,
 			value              : [
 				{
 					length  : '',
@@ -211,6 +217,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 					label       : 'Length',
 					type        : 'number',
 					className   : 'primary lg',
+					disabled    : packageDisableCheck,
 					span        : 1.25,
 					rules       : {
 						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
@@ -221,6 +228,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 					placeholder : 'Width',
 					label       : 'Width',
 					type        : 'number',
+					disabled    : packageDisableCheck,
 					className   : 'primary lg',
 					span        : 1.25,
 					rules       : {
@@ -231,6 +239,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 					name        : 'height',
 					placeholder : 'Height',
 					label       : 'Height',
+					disabled    : packageDisableCheck,
 					type        : 'number',
 					className   : 'primary lg',
 					span        : 1.5,
@@ -244,6 +253,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 					label       : 'Number of Packages',
 					type        : 'number',
 					className   : 'primary lg',
+					disabled    : packageDisableCheck,
 					span        : 2,
 					rules       : {
 						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
@@ -253,6 +263,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 					label       : 'Unit',
 					type        : 'select',
 					placeholder : 'select',
+					disabled    : packageDisableCheck,
 					span        : 1.25,
 					options     : [
 						{ label: 'Cm', value: 'cms' },
@@ -268,6 +279,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 			type      : 'number',
 			className : 'primary lg',
 			label     : 'Volumetric Weight',
+			disabled  : packageDisableCheck,
 			span      : 5,
 			rules     : {
 				required: 'Volumetric Weight is Required',
@@ -285,6 +297,7 @@ const mawbControls = (disableClass, editHawbNumberCondition, unitDefaultValue) =
 			name        : 'totalPackagesCount',
 			placeholder : 'Package Count',
 			label       : 'Package Count',
+			disabled    : packageDisableCheck,
 			type        : 'number',
 			className   : 'primary lg',
 			span        : 2,

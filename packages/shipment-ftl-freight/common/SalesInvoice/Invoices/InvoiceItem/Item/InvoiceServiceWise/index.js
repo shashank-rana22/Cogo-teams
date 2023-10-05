@@ -3,7 +3,7 @@ import React from 'react';
 
 import CardList from '../../../../commons/CardList';
 
-import { InvoiceTable } from './InvoiceTable';
+import { invoiceTable } from './InvoiceTable';
 import styles from './styles.module.css';
 
 const BILLED_ITEMS_CODE = ['BookingCONV', 'BookingNOST'];
@@ -39,7 +39,7 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 		<div className={styles.container}>
 			<CardList
 				loading={loading}
-				fields={InvoiceTable(item)}
+				fields={invoiceTable(item)}
 				data={line_items || [{}]}
 				detail={detail}
 			/>

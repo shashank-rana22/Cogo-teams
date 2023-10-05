@@ -1,5 +1,15 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+const SERVICE_TYPE_MAPPING = {
+	fcl_freight_local_service : 'fcl_freight_local_agent',
+	fcl_freight_service       : 'fcl_freight',
+	haulage_freight_service   : 'haulage_freight',
+	fcl_customs_service       : 'fcl_customs',
+	ftl_freight_service       : 'ftl_freight',
+	trailer_freight_service   : 'trailer_freight',
+	fcl_cfs_service           : 'fcl_cfs',
+};
+
 const shipping_line = {
 	name           : 'shipping_line_id',
 	label          : 'Shipping Line',
@@ -9,7 +19,6 @@ const shipping_line = {
 	className      : 'primary sm',
 	rules          : { required: 'Shipping Line is Required' },
 };
-
 const service_provider = {
 	name           : 'service_provider_id',
 	type           : 'select',
@@ -18,6 +27,13 @@ const service_provider = {
 	optionsListKey : 'verified-service-providers',
 	placeholder    : 'Select Service Provider',
 	rules          : { required: 'Service Provider is Required' },
+	params         : {
+		filters: {
+			account_type : 'service_provider',
+			status       : 'active',
+			kyc_status   : 'verified',
+		},
+	},
 };
 
 const getControls = ({
@@ -75,6 +91,11 @@ const getControls = ({
 		|| service_rendered?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id
 		|| service_rendered?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider?.id
 		|| '';
+
+	service_provider.params.filters = {
+		...(service_provider?.params?.filters || {}),
+		service: SERVICE_TYPE_MAPPING[service_type],
+	};
 
 	const CONTROLS = [];
 

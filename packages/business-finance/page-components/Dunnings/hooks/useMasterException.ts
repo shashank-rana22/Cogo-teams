@@ -58,7 +58,7 @@ const useMasterException = ({
 		{
 			url     : '/payments/dunning/delete-master-exception',
 			method  : 'post',
-			authKey : 'get_payments_dunning_delete_master_exception',
+			authKey : 'post_payments_dunning_delete_master_exception',
 		},
 		{ manual: true },
 	);

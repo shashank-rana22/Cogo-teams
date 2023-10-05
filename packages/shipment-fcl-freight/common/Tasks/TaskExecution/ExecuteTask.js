@@ -55,7 +55,7 @@ function ExecuteTask({
 
 	const {
 		steps = [],
-		currentStep = {},
+		currentStep = 0,
 		setCurrentStep = () => {},
 		serviceIdMapping = [],
 	} = useTaskExecution({ task, taskConfigData });
@@ -186,7 +186,7 @@ function ExecuteTask({
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}
-			uiConfig={taskConfigData?.task_config?.ui_config[currentStep]}
+			uiConfig={taskConfigData?.task_config?.ui_config?.[currentStep]}
 			selectedMail={selectedMail}
 			serviceIdMapping={serviceIdMapping}
 		/>

@@ -35,9 +35,7 @@ function Fcl() {
 
 			<AppliedFilters />
 
-			<div className={styles.tabs_container}>
-				<DeskTabs />
-			</div>
+			<DeskTabs />
 
 			{loading
 				? <Loader />

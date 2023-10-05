@@ -71,7 +71,7 @@ function EditFeatureModal({ editModal, setEditModal }) {
 					{editPlan && (
 						<Plan
 							modalChangeHandler={modalChangeHandler}
-							subscriptionId={featureInfo}
+							featureInfo={featureInfo}
 						/>
 					)}
 				</div>

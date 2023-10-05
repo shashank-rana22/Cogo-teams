@@ -47,7 +47,7 @@ function PocUser({
 
 	const hasVoiceCallAccess = geo.others.navigations.cogo_one.has_voice_call_access;
 
-	const { setButtonType, setEmailState, buttonType } = mailProps;
+	const { setButtonType, setEmailState, buttonType, signature } = mailProps;
 
 	const handleSendEmail = ({ user = {} }) => {
 		if (buttonType) {
@@ -59,7 +59,8 @@ function PocUser({
 		setEmailState(
 			(prev) => ({
 				...prev,
-				body          : '',
+				body          : signature,
+				rteContent    : '',
 				subject       : '',
 				toUserEmail   : user?.email ? [user?.email] : [],
 				ccrecipients  : [],

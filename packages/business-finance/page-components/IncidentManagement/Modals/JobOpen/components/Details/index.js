@@ -1,4 +1,4 @@
-import { Button, cl, Textarea } from '@cogoport/components';
+import { Button, cl, Textarea, Tooltip } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -47,12 +47,22 @@ function Details({
 		profitMargin = 0,
 		id: jobOpenId = '',
 	} = row?.data?.jobOpenRequest || {};
+	const { tradePartyName = '', businessName = '' } = row?.data?.organization || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_box}>
 				<div className={styles.company_div}>
 					<div className={styles.heading}>Company Name</div>
-					<div className={styles.text}>{row?.data?.organization?.businessName || ''}</div>
+					<div className={styles.text}>
+						<div className={styles.tooltip_title}>
+							<Tooltip
+								interactive
+								content={(tradePartyName || businessName || '')}
+							>
+								<div>{(tradePartyName || businessName || '')}</div>
+							</Tooltip>
+						</div>
+					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Requested By</div>

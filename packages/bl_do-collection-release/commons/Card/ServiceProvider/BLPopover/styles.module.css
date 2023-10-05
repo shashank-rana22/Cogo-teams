@@ -44,3 +44,7 @@
 .item_content {
 	min-width: 150px;
 }
+
+.underline {
+	text-decoration: underline;
+}
