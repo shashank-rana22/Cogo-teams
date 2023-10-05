@@ -1,11 +1,16 @@
 import { Loader } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMDefault, IcMPin, IcCPin } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import styles from '../Navbar/styles.module.css';
 
 import useAddRemovePin from './useAddRemovePin';
+
+const FIRST_INDEX = 1;
+const SLICE_START_INDEX = 2;
+const SLICE_END_INDEX = 5;
 
 function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys, showPin, inCall = false }) {
 	const router = useRouter();
@@ -19,7 +24,7 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 
 	useEffect(() => { setShowSubNav(false); }, [resetSubnavs]);
 
-	const splitAspath = asPath.split('/')?.[1];
+	const splitAspath = asPath.split('/')?.[FIRST_INDEX];
 
 	const { options = [] } = item || {};
 	const openNewTab = (as = '', href = '') => {
@@ -31,7 +36,7 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 		);
 	};
 	const handleClickOnItem = (itemdata) => {
-		if (itemdata.options?.length > 0) {
+		if (!isEmpty(itemdata?.options)) {
 			setShowSubNav(!showSubNav);
 		} else if (itemdata?.href?.includes('/v2')) {
 			const replaceHref = itemdata?.href?.replace('/v2', '');
@@ -54,7 +59,7 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 			router.push(itemdata.href, itemdata.as);
 		}
 	};
-	const pathWithoutPartnerId = `/${asPath.split('/').slice(2, 5).join('/')}`;
+	const pathWithoutPartnerId = `/${asPath.split('/').slice(SLICE_START_INDEX, SLICE_END_INDEX).join('/')}`;
 
 	const isSubActive = options?.some((singleOption) => singleOption.as?.replace('/v2', '') === pathWithoutPartnerId);
 
@@ -65,13 +70,13 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 	const singleNav = (
 		<div
 			className={`
-			${item.options?.length > 0 ? styles.has_options : ''}
+			${!isEmpty(item.options) ? styles.has_options : ''}
 			${isHref ? `${styles.list_item_inner} ${styles.active_item}` : styles.list_item_inner}`}
 			role="button"
 			tabIndex={0}
 			onClick={() => handleClickOnItem(item)}
 		>
-			{item.options?.length > 0 && (
+			{!isEmpty(item.options) && (
 				<IcMArrowRotateDown
 					className={`${styles.icon} ${showSubNav ? styles.active : ''}`}
 				/>
@@ -120,6 +125,8 @@ function Items({ isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys
 							<span>
 								{singleOption.title}
 							</span>
+							{singleOption.title === 'My Tickets'
+								? <div className={styles.count}>{100}</div> : null}
 						</div>
 					</li>
 				);
