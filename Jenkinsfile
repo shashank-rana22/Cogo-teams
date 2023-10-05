@@ -12,6 +12,8 @@ pipeline {
         ENV_FILE = credentials('dev_cogo_admin_env')
         ECR_USERNAME = credentials('aws-dev-ecr-user')
         ECR_URL = credentials('aws-dev-ecr-url')
+        SERVER_NAME = sh(script: "git log -1 --pretty=%B ${COMMIT_ID} | awk '{print \$NF}'", returnStdout: true).trim()
+        SERVER_IP = sh(script: "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${SERVER_NAME}\" --query \"Reservations[*].Instances[*].PrivateIpAddress\" --output text", returnStdout: true).trim()
     }
     
     options {
@@ -39,17 +41,13 @@ pipeline {
                 }
                 steps{
                     script {
-                    SERVER_NAME = sh (script: "git log -1 --pretty=%B ${COMMIT_ID} | awk \'{print \$NF}\'", returnStdout:true).trim()
-                    SERVER_IP = sh (script: "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${SERVER_NAME}\" --query \"Reservations[*].Instances[*].PrivateIpAddress\" --output text", returnStdout:true).trim()
-                    
                     lockFile = "/home/${SERVER_NAME}/.admin.lock"
-                    
                     // Use SSH to check if the lock file exists
-                    sshCommand = "ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} 'test -e ${lockFile} || touch ${lockFile}'"
-                    
+                    sshCommand = "ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} test -e ${lockFile}"   
                     exitCode = sh(script: sshCommand, returnStatus: true)
-
+                    echo exitCode
                     if (exitCode == 0) {
+                        sh("scp -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} -P ${SSH_PORT} .admin.lock ${SERVER_NAME}@${SERVER_IP}:/home/${SERVER_NAME}")
                         echo "Acquired lock on remote server."
                     } else {
                         office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployment failed for user **${PUSHER_NAME}** because another deployment is going on for cogo-admin in the specified server.", color: '#3366ff'
@@ -121,6 +119,11 @@ pipeline {
                 }
             }
             
+        }
+    }
+    post{//remove lock
+        script{
+            sh "ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} rm /home/${SERVER_NAME}/.admin.lock"
         }
     }
 }
