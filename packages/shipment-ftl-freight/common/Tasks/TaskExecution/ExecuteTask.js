@@ -77,7 +77,7 @@ function ExecuteTask({
 			<MarkConfirmServices
 				task={task}
 				onCancel={onCancel}
-				taskListRefetch={taskListRefetch}
+				refetch={taskListRefetch}
 				primaryService={primary_service}
 				shipment_data={shipment_data}
 				servicesList={servicesList}
@@ -181,7 +181,7 @@ function ExecuteTask({
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}
-			uiConfig={taskConfigData?.task_config?.ui_config[currentStep]}
+			uiConfig={taskConfigData?.task_config?.ui_config?.[currentStep]}
 			selectedMail={selectedMail}
 			serviceIdMapping={serviceIdMapping}
 			refetchServices={refetchServices}

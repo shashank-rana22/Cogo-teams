@@ -669,7 +669,8 @@ const GLOBAL_CONSTANTS = {
 			orissa_metaliks  : 'AAACO8663L',
 			varun_beverages  : 'AAACV2678L',
 		},
-		ftl_disable_backdate_date: '2023-06-13T00:00:00',
+		ftl_disable_backdate_date            : '2023-06-13T00:00:00',
+		percentage_factor_for_advance_amount : 0.8,
 	},
 	freight_unit_mapping: {
 		per_container         : '/Ctr.',
