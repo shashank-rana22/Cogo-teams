@@ -45,11 +45,11 @@ pipeline {
                     SERVER_IP = sh(script: "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${SERVER_NAME}\" --query \"Reservations[*].Instances[*].PrivateIpAddress\" --output text", returnStdout: true).trim()
                     lockFile = "/home/${SERVER_NAME}/.admin.lock"
                     // Use SSH to check if the lock file exists
-                    sshCommand = "ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} test -e ${lockFile}"   
-                    exitCode = sh(script: sshCommand, returnStatus: true)
+                    def sshCommand = "ssh -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} test -e ${lockFile}"
+                    def exitCode = sh(script: sshCommand, returnStatus: true)
                     echo exitCode
                     if (exitCode == 0) {
-                        sh("scp -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} -P ${SSH_PORT} .admin.lock ${SERVER_NAME}@${SERVER_IP}:/home/${SERVER_NAME}")
+                        sh("scp -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} -P ${SSH_PORT} .admin.lock ${SERVER_NAME}@${SERVER_IP}:/home/${SERVER_NAME}")
                         echo "Acquired lock on remote server."
                     } else {
                         office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployment failed for user **${PUSHER_NAME}** because another deployment is going on for cogo-admin in the specified server.", color: '#3366ff'
