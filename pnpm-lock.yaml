@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@cogoport/eslint-config': 2.0.9
+      '@cogoport/eslint-config': 2.0.10
       '@cogoport/maps': ^1.0.3
       '@cogoport/stylelint-config': ^1.0.3
       '@sentry/nextjs': ^7.54.0
@@ -41,7 +41,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-i18next: 12.3.1_spyi3zqm3bqfobczid2f6jym6y
     devDependencies:
-      '@cogoport/eslint-config': 2.0.9_eslint@8.48.0
+      '@cogoport/eslint-config': 2.0.10_eslint@8.48.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
       '@svgr/webpack': 6.5.1
       dotenv: 16.3.1
@@ -863,10 +863,10 @@ importers:
       date-fns: ^2.29.3
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
+      '@cogoport/components': 1.0.442_434chb7tbeieycp76dfs74etje
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/icons-react': 1.0.98_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
@@ -888,10 +888,10 @@ importers:
       cookies-next: ^2.1.1
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.442_hicsc7ykyii55b7aewtacg7hfe
+      '@cogoport/components': 1.0.442_434chb7tbeieycp76dfs74etje
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.98_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/icons-react': 1.0.98_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
@@ -4867,8 +4867,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/eslint-config/2.0.9_eslint@8.48.0:
-    resolution: {integrity: sha512-q0SG6KN845IdIAQytFVRmXHDgRG7sT8ndxJhqX2pfaZRyAmp3rEbc1G/W7DNQKmj8c6RxqW8X/vIbib756DerA==}
+  /@cogoport/eslint-config/2.0.10_eslint@8.48.0:
+    resolution: {integrity: sha512-VgqwO8EE/mD3C3IVkTFxUi7Du/V6CFzHBlX3QUhNFmWPfMMSaufHVkeFCSQSrrNKGVHdNAjPPWe/NZerePrSWw==}
     peerDependencies:
       eslint: ^8.23.0
     dependencies:
