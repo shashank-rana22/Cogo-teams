@@ -1,6 +1,5 @@
 import { Button, Modal, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import FieldArray from '../../../../../FieldArray';
@@ -35,18 +34,12 @@ function CurrencyExchangeForm({
 	});
 
 	const handleAddRate = async (value) => {
-		const currencyData = value;
-
-		Object.keys(value || {}).forEach((val) => {
-			const key = `${currencyData[val]?.[GLOBAL_CONSTANTS.zeroth_index]?.from_currency}`
-			+ `_${currencyData?.[val]?.[GLOBAL_CONSTANTS.zeroth_index]?.to_currency}`;
-			if (currencyData?.[val]?.[GLOBAL_CONSTANTS.zeroth_index]?.exchange_rate) {
-				EXCHANGE_CURRENCY_HASH[key] = Number(
-					currencyData?.[val]?.[GLOBAL_CONSTANTS.zeroth_index]?.exchange_rate,
-				);
-			}
+		value?.currency_control?.forEach((conversions) => {
+			const conversion = `${conversions?.from_currency}_${conversions?.to_currency}`;
+			EXCHANGE_CURRENCY_HASH[conversion] = Number(conversions?.exchange_rate);
 		});
-		if (Object.keys(EXCHANGE_CURRENCY_HASH).length === GLOBAL_CONSTANTS.zeroth_index) {
+
+		if (isEmpty(EXCHANGE_CURRENCY_HASH)) {
 			Toast.error('Please fill atleast one field !');
 		}
 		handleFormSubmit(EXCHANGE_CURRENCY_HASH);
