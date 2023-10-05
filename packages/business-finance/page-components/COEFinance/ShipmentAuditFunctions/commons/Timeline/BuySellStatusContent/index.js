@@ -1,4 +1,4 @@
-import { Pill, Button, Placeholder } from '@cogoport/components';
+import { Pill, Button, Placeholder, Tooltip } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import ShowOverflowingNumber from '../../../utils/getShowOverFlowingNumbers';
@@ -32,10 +32,20 @@ export default function BuySellStatusContent({
 						<div className={styles.regular}>Invoice Number</div>
 						<div className={styles.regular_content}>{document_number}</div>
 					</div>
-					<div className={styles.trade_party_container}>
-						<div className={styles.regular}>Trade Party</div>
-						<div className={styles.regular_content}>{trade_party}</div>
-					</div>
+					<Tooltip
+						content={(
+							<div className={styles.trade_party_container}>
+								<div className={styles.regular}>Trade Party</div>
+								<div className={styles.regular_content}>{trade_party}</div>
+							</div>
+						)}
+						placement="top"
+					>
+						<div className={styles.trade_party_container}>
+							<div className={styles.regular}>Trade Party</div>
+							<div className={styles.regular_content}>{trade_party}</div>
+						</div>
+					</Tooltip>
 					<div className={styles.invoice_date_container}>
 						<div className={styles.regular}>Invoice Date</div>
 						<div className={styles.regular_content}>{document_date}</div>
