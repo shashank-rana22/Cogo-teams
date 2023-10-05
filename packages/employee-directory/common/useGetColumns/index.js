@@ -1,7 +1,7 @@
 import { Checkbox, Pill, Tooltip, ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMEyeopen } from '@cogoport/icons-react';
+import { IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { getByKey, startCase } from '@cogoport/utils';
 import React from 'react';
@@ -10,7 +10,7 @@ import { EMPLOYEE_STATUS } from '../../page-components/utils/constants';
 
 import styles from './styles.module.css';
 
-function GetStatus({ employeeStatus }) {
+function GetStatus({ employeeStatus = '' }) {
 	if (employeeStatus === null) {
 		return '-';
 	}
@@ -20,10 +20,10 @@ function GetStatus({ employeeStatus }) {
 	return <Pill {...pillData} size="md">{pillData?.label}</Pill>;
 }
 
-const useGetColumns = ({
+function useGetColumns({
 	bulkEdit, handleAllSelect, handleSelectId, selectedIds,
 	dataArr, handleEmployeeId,
-}) => {
+}) {
 	const router = useRouter();
 
 	const columns = [
@@ -172,14 +172,22 @@ const useGetColumns = ({
 		{
 			Header   : '',
 			accessor : (item) => (
-				<ButtonIcon
-					size="md"
-					icon={<IcMEyeopen />}
-					themeType="primary"
-					onClick={() => {
-						router.push(`/profile?employee_id=${item.user_id}`);
-					}}
-				/>
+				<div className={styles.button_container}>
+					<ButtonIcon
+						size="md"
+						icon={<IcMEdit />}
+						themeType="primary"
+						onClick={() => handleEmployeeId(item)}
+					/>
+					<ButtonIcon
+						size="md"
+						icon={<IcMEyeopen />}
+						themeType="primary"
+						onClick={() => {
+							router.push(`/profile?employee_id=${item.user_id}`);
+						}}
+					/>
+				</div>
 			),
 			id: 'view',
 		},
@@ -202,6 +210,6 @@ const useGetColumns = ({
 	];
 
 	return bulkEdit ? [...checkBoxColumn, ...columns] : columns;
-};
+}
 
 export default useGetColumns;
