@@ -6,7 +6,6 @@ import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { GenericObject } from '../../commons/Interfaces';
 import Details from '../All_Invoices/ViewInvoices/ShipmentDetails/Details';
 import Documents from '../All_Invoices/ViewInvoices/ShipmentDetails/Documents';
 import useGetShipmentCostSheet from '../hook/useGetShipmentCostSheet';
@@ -128,7 +127,7 @@ function CostSheet() {
 							</span>
 							{loadingShipment && <Loader />}
 						</span>
-					) as unknown as string
+				)
 				}
 				style={{
 					backgroundColor : '#FFFFFF',
@@ -140,28 +139,26 @@ function CostSheet() {
 			</Accordion>
 			<Accordion
 				type="text"
-				title={
-					(
-						<span className={styles.details}>
-							Shipment Details
-							<div className={styles.tags_container}>
-								{GetPills({ loadingShipment, sourceText, tradeType })}
+				title={(
+					<span className={styles.details}>
+						Shipment Details
+						<div className={styles.tags_container}>
+							{GetPills({ loadingShipment, sourceText, tradeType })}
+						</div>
+
+						<div className={styles.sid}>
+							{' '}
+							SID
+							{' '}
+							<div className={styles.job}>
+								#
+								{jobNumber}
 							</div>
 
-							<div className={styles.sid}>
-								{' '}
-								SID
-								{' '}
-								<div className={styles.job}>
-									#
-									{jobNumber}
-								</div>
+						</div>
 
-							</div>
-
-						</span>
-					) as unknown as string
-				}
+					</span>
+				)}
 				style={{
 					backgroundColor : '#FFFFFF',
 					borderRadius    : '8px',
@@ -255,7 +252,7 @@ function CostSheet() {
 							<Placeholder key={val} margin="20px" width="96%" height="220px" />
 						))}
 					{!apiloading
-						&& selldata.map((charge: GenericObject) => (
+						&& selldata.map((charge) => (
 							<CardBody charge={charge} key={charge?.service_type} type="sell" />
 						))}
 				</div>
@@ -309,7 +306,7 @@ function CostSheet() {
 							<Placeholder key={val} margin="20px" width="96%" height="220px" />
 						))}
 					{!apiloading
-						&& buydata.map((charge: GenericObject) => (
+						&& buydata.map((charge) => (
 							<CardBody
 								charge={charge}
 								key={charge?.service_type}

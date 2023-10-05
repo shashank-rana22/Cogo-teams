@@ -2,15 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-interface GlobalInterface {
-	serviceType?:string[],
-	date?:Date,
-}
-interface Props {
-	globalFilters?:GlobalInterface;
-	entityTabFilters?:string
-}
-const useGetTodayStats = ({ globalFilters, entityTabFilters }:Props) => {
+const useGetTodayStats = ({ globalFilters, entityTabFilters }) => {
 	const { serviceType } = globalFilters || {};
 	const [{ data, loading }, trigger] = useRequestBf(
 		{

@@ -3,22 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface ItemTypes {
-	organizationName?: string;
-	createdByName?: string;
-	buyerDetails?: BusinessNameTypes;
-}
-
-interface BusinessNameTypes {
-	businessName: string;
-}
-
-interface PropsType {
-	item: ItemTypes;
-	field: any;
-}
-
-function ModifiedName({ item, field }: PropsType) {
+function ModifiedName({ item, field }) {
 	const { organizationName = '', createdByName, buyerDetails } = item || {};
 
 	const { businessName = '' } = buyerDetails || {};
@@ -64,7 +49,7 @@ function ModifiedName({ item, field }: PropsType) {
 
 			{field?.key === 'createdByName' && (
 				<div className={styles.size}>
-					{createdByName!?.length > 10 ? (
+					{createdByName?.length > 10 ? (
 						<Tooltip
 							interactive
 							placement="top"

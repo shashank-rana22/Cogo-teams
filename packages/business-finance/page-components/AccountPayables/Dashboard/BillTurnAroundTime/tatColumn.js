@@ -9,7 +9,7 @@ const tatColumn = [
 		accessor : (row) => (
 
 			<div className={styles.reference_id}>
-				{startCase(getByKey(row, 'firstEvent') as string)}
+				{startCase(getByKey(row, 'firstEvent'))}
 			</div>
 
 		),
@@ -19,7 +19,7 @@ const tatColumn = [
 		id       : 'secondEvent',
 		accessor : (row) => (
 			<div className={styles.reference_id}>
-				{startCase(getByKey(row, 'secondEvent') as string)}
+				{startCase(getByKey(row, 'secondEvent'))}
 			</div>
 		),
 	},
@@ -42,7 +42,7 @@ const tatColumn = [
 		id       : 'hours',
 		accessor : (row) => (
 			<div className={styles.count}>
-				{(getByKey(row, 'hours') as number)?.toFixed(2) }
+				{(getByKey(row, 'hours'))?.toFixed(2) }
 				{' '}
 				{' '}
 				hours

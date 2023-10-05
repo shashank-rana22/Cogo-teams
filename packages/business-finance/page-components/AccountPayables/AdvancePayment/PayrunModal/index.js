@@ -8,13 +8,7 @@ import useGetCreatePayRunType from '../hooks/useGetCreatePayRunType';
 import PayRunTypeModal from './PayRunTypeModal';
 import styles from './styles.module.css';
 
-interface Props {
-	activeEntity:string,
-	show:boolean,
-	setShow:Function,
-}
-
-function PayRunModal({ show, setShow, activeEntity }:Props) {
+function PayRunModal({ show, setShow, activeEntity }) {
 	const [currencyValue, setCurrencyValue] = useState(CURRENCY_DATA[0]);
 	const [payRunType, setPayRunType] = useState(false);
 	const { text = '', id = '' } = currencyValue || {};
@@ -59,7 +53,7 @@ function PayRunModal({ show, setShow, activeEntity }:Props) {
 					</div>
 					<div>
 						{Object.entries(GLOBAL_CONSTANTS.cogoport_entities).map(([key, value]) => {
-							const { name, icon: Icon } = value as { name: string; icon: React.ElementType } || {};
+							const { name, icon: Icon } = value || {};
 							return (
 								<div key={key}>
 									{key === activeEntity && (

@@ -4,19 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface ItemProps {
-	userIncidentStatus:string;
-	referenceId:string;
-	id:string;
-	linkedIncidentId:string;
-}
-interface PropsType {
-	itemData:ItemProps;
-	setActiveTab:Function;
-	setPayload:Function;
-}
-
-function ClickableIncidentId({ itemData, setActiveTab, setPayload }:PropsType) {
+function ClickableIncidentId({ itemData, setActiveTab, setPayload }) {
 	const { userIncidentStatus, referenceId, linkedIncidentId } = itemData || {};
 	const { push } = useRouter();
 	const {

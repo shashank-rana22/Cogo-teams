@@ -4,10 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface ItemProps {
-	entityCode:string;
-}
-function Entity({ entityCode }:ItemProps) {
+function Entity({ entityCode }) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const { icon : Icon } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};

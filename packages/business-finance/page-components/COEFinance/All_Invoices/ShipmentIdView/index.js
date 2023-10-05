@@ -9,35 +9,6 @@ import Filters from './Filters';
 import LoadingState from './LoadingState/index';
 import styles from './styles.module.css';
 
-export interface ItemDataProps {
-	jobId: string;
-	jobNumber: string;
-	jobStatus: string;
-	quotationProfitability: number;
-	tentativeProfitability: number;
-	incomeCount: number;
-	incomeTotalAmount: number;
-	expenseCount: number;
-	expenseTotalAmount: string;
-	sellQuoteCount?: number;
-	sellQuoteTotalAmount?: string;
-	buyQuoteCount?: number;
-	buyQuoteTotalAmount?: string;
-	serviceType: string;
-	discountAppliedKam: number;
-	discountAppliedRevenueDesk: number;
-	pendingApprovalCount: number;
-	urgentCount: number;
-	urgentTotalAmount: number;
-	creditNoteCount: number;
-	creditNoteTotalAmount: number;
-	buyQuotationCount?: number;
-	buyQuotationTotalAmount?: number;
-	sellQuotationCount?: number;
-	sellQuotationTotalAmount?: number;
-	amountCurrency?: string;
-}
-
 function ShipmentIdView() {
 	const [currentOpenSID, setCurrentOpenSID] = useState('');
 	const [pendingApproval, setPendingApproval] = useState('all');
@@ -70,7 +41,7 @@ function ShipmentIdView() {
 		}
 		return (
 			<div>
-				{data?.map((item: ItemDataProps) => (
+				{data?.map((item) => (
 					<AccordianCards
 						itemData={item}
 						currentOpenSID={currentOpenSID}
@@ -99,7 +70,7 @@ function ShipmentIdView() {
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={pageNo}
-							onPageChange={(val: number) => hookSetters.setFilters({
+							onPageChange={(val) => hookSetters.setFilters({
 								...filters,
 								page: val,
 							})}

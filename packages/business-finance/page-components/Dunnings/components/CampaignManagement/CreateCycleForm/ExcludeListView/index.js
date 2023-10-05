@@ -7,14 +7,7 @@ import useGetCustomerList from '../../hooks/useGetCustomerList';
 import ExcludeList from './ExcludeList';
 import styles from './styles.module.css';
 
-interface Props {
-	uncheckedRows?: string[];
-	setUncheckedRows?: React.Dispatch<React.SetStateAction<string[]>>;
-	formData?: object;
-	setFormData?: React.Dispatch<React.SetStateAction<object>>;
-}
-
-function ExcludeListView({ uncheckedRows, setUncheckedRows, formData, setFormData }:Props) {
+function ExcludeListView({ uncheckedRows, setUncheckedRows, formData, setFormData }) {
 	const [search, setSearch] = useState('');
 	const { customerList, loading } = useGetCustomerList({ formData, search, setFormData });
 
@@ -33,7 +26,7 @@ function ExcludeListView({ uncheckedRows, setUncheckedRows, formData, setFormDat
 						placeholder="Search By Customer Name"
 						suffix={<IcMSearchlight />}
 						value={search}
-						onChange={(e:string) => setSearch(e)}
+						onChange={(e) => setSearch(e)}
 						className={styles.search}
 					/>
 				</div>

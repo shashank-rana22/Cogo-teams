@@ -2,20 +2,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMFdollar, IcMFdong, IcMFeuro, IcMFpound, IcMFrupee, IcMFsingaporeDollar,
 } from '@cogoport/icons-react';
-import { ComponentType } from 'react';
-
-type IconProps = {
-	width: number;
-	height: number;
-};
-
-  type IconType = ComponentType<IconProps>;
-interface Mapping {
-	[key: string]: IconType | undefined;
-}
-
-  type ContentMapping = (args: { width: number;height: number;mapping: Mapping;
-  }) => Record<string, JSX.Element>;
 
 const CURRENCY_ICON_MAPPING = {
 	[GLOBAL_CONSTANTS.currency_code.INR] : IcMFrupee,
@@ -26,8 +12,7 @@ const CURRENCY_ICON_MAPPING = {
 	[GLOBAL_CONSTANTS.currency_code.VND] : IcMFdong,
 };
 
-const getContentMapping:
-ContentMapping = ({ width, height, mapping }) => Object.entries(mapping).reduce((pv, [key, Icon]) => ({
+const getContentMapping = ({ width, height, mapping }) => Object.entries(mapping).reduce((pv, [key, Icon]) => ({
 	...pv,
 	...(Icon && {
 		[key]: <Icon width={width} height={height} />,

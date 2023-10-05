@@ -1,11 +1,7 @@
 import Organization from './Organization';
 import styles from './styles.module.css';
 
-interface Props {
-	data: object,
-	loading: boolean
-}
-function PopoverContent({ data = {}, loading }: Props) {
+function PopoverContent({ data = {}, loading }) {
 	return (
 		<div className={styles.overall_container}>
 			<Organization data={data} loading={loading} />

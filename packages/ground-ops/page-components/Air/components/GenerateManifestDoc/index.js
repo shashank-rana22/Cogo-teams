@@ -8,15 +8,11 @@ import useGetManifest from '../../hooks/useGetManifest';
 import styles from './styles.module.css';
 import { stylesTHC } from './stylesTHC';
 
-interface NestedObj {
-	[key: string]: string;
-}
-
 function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 	const { data, getManifest, loading:manifestLoading } = useGetManifest();
 	const { createManifest, loading:createManifestLoading } = useCreateManifest();
 
-	let mawbData:NestedObj = {};
+	let mawbData = {};
 	const hawbData = [];
 
 	(data.list || []).forEach((item) => {

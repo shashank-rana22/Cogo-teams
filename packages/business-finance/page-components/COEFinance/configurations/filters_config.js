@@ -1,6 +1,4 @@
-import { ControlProps } from '../../commons/Interfaces';
-
-export const FILTERS : ControlProps[] = [
+export const FILTERS = [
 	{
 		name    : 'Services',
 		span    : 12,

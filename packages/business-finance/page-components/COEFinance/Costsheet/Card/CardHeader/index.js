@@ -3,13 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface Props {
-	header?: string;
-	value?: string | number;
-	loading?:boolean;
-}
-
-function CardHeader({ header, value, loading }:Props) {
+function CardHeader({ header, value, loading }) {
 	return (
 		<div className={styles.header}>
 			<span className={styles.font}>{header}</span>

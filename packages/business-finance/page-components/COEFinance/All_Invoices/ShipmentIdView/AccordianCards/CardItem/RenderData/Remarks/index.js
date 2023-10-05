@@ -7,21 +7,7 @@ import { formatDate } from '../../../../../../../commons/utils/formatDate';
 
 import styles from './styles.module.css';
 
-interface ItemTypes {
-	remarksTimeline?: [];
-	remarks?: string;
-}
-interface ItemProps {
-	billStatus?:string;
-	createdAt?:Date;
-	remark?:string;
-}
-
-interface PropsType {
-	itemData: ItemTypes;
-}
-
-function Remarks({ itemData }: PropsType) {
+function Remarks({ itemData }) {
 	const { remarksTimeline } = itemData || {};
 	const remarkData = remarksTimeline;
 
@@ -29,13 +15,13 @@ function Remarks({ itemData }: PropsType) {
 		if (isEmpty(remarksTimeline)) {
 			return <div>No Remarks</div>;
 		}
-		return (remarkData || []).map((item:ItemProps, idx: number) => {
+		return (remarkData || []).map((item, idx) => {
 			const { billStatus, createdAt, remark } = item || {};
 			return (
 				<div className={styles.timeline_wrapper}>
 					<div className={styles.left_content}>
-						{formatDate(createdAt!, 'dd-MMM-yy', {}, true)}
-						<div>{formatDate(createdAt!, ' hh:mm a', {}, true)}</div>
+						{formatDate(createdAt, 'dd-MMM-yy', {}, true)}
+						<div>{formatDate(createdAt, ' hh:mm a', {}, true)}</div>
 					</div>
 					<div className={styles.path}>
 						<div className={styles.circle} />
@@ -45,7 +31,7 @@ function Remarks({ itemData }: PropsType) {
 					</div>
 
 					<div className={styles.right_content}>
-						<div className={styles.status_content}>{startCase(billStatus!)}</div>
+						<div className={styles.status_content}>{startCase(billStatus)}</div>
 						<div>{remark}</div>
 					</div>
 				</div>

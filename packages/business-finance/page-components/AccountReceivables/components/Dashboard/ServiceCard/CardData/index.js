@@ -5,21 +5,7 @@ import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
-interface DataProps {
-	currency?: string,
-	key?: string,
-	name?: string,
-	openInvoiceAmount?: number
-}
-interface TabProps {
-	key?: string,
-	data?: DataProps[]
-}
-interface CardDataProps {
-	tab?: TabProps
-}
-
-function CardData({ tab }: CardDataProps) {
+function CardData({ tab }) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	return (
@@ -71,7 +57,7 @@ function CardData({ tab }: CardDataProps) {
 									<Tooltip content={(
 										<div>
 											{formatAmount({
-												amount   :	item?.openInvoiceAmount as any,
+												amount   :	item?.openInvoiceAmount,
 												currency :	item?.currency,
 												options  : {
 													style           : 'currency',
@@ -84,7 +70,7 @@ function CardData({ tab }: CardDataProps) {
 									>
 										<div className={styles.wrapper}>
 											{formatAmount({
-												amount   : item?.openInvoiceAmount as any || 0,
+												amount   : item?.openInvoiceAmount || 0,
 												currency : item?.currency,
 												options  : {
 													notation              : 'compact',

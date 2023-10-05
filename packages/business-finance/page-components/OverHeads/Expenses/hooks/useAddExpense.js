@@ -7,17 +7,6 @@ import { useEffect, useState } from 'react';
 
 import getPayload from '../utils/getPayload';
 
-interface AddressInterface {
-	pincode?: number | string;
-	address?: string;
-	cityName?: string;
-	countryName?: string;
-	countryCode?: number | string;
-	countryId?: number | string;
-	taxNumber?: number | string;
-	branchId?: number | string;
-}
-
 const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 	const {
 		vendorId: vendorID,
@@ -28,8 +17,8 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		categoryName,
 	} = rowData || {};
 
-	const [addressData, setAddressData] = useState<AddressInterface>({});
-	const { profile } = useSelector((state: any) => state);
+	const [addressData, setAddressData] = useState({});
+	const { profile } = useSelector((state) => state);
 
 	const {
 		stakeholderId,

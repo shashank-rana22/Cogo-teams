@@ -4,21 +4,7 @@ import { CURRENCY, PAYMENT_STATUS, SHIPMENT_TYPE } from '../constants';
 
 import styles from './styles.module.css';
 
-interface Global {
-	status?:string,
-	services?:string[],
-	invoiceDate?:{ startDate?:Date, endDate?:Date },
-	dueDate?:{ startDate?:Date, endDate?:Date },
-	currency?:string,
-}
-
-interface Props {
-	globalFilters?:Global,
-	setGlobalFilters?:Function,
-	setVisible?:Function
-}
-
-function PopoverFilters({ globalFilters, setGlobalFilters, setVisible }:Props) {
+function PopoverFilters({ globalFilters, setGlobalFilters, setVisible }) {
 	return (
 		<div className={styles.filter_popover}>
 			<div className={styles.filter_section}>

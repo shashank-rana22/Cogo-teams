@@ -2,12 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useState } from 'react';
 
-interface FilterProps {
-	activeEntity?: string;
-	currency?:string;
-	selectedPayRunId?:string;
-}
-const useGetCreatePayRunType = ({ activeEntity, currency, selectedPayRunId }:FilterProps) => {
+const useGetCreatePayRunType = ({ activeEntity, currency, selectedPayRunId }) => {
 	const [filters, setFilters] = useState({
 		pageIndex: 1,
 	});

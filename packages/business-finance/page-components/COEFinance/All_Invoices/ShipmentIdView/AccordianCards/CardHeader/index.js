@@ -8,21 +8,6 @@ import { toTitleCase } from '../../../../utils/getFormattedData';
 
 import styles from './styles.module.css';
 
-interface ItemProps {
-	discountAppliedKam?:number;
-	discountAppliedRevenueDesk?:number;
-	jobStatus?: string,
-}
-interface PropsType {
-	itemData: ItemProps;
-	amountTab: string;
-	setAmountTab: Function;
-	showTab?: boolean;
-	shipmentIdView?: boolean;
-	isCheckoutQuote?: boolean;
-	setIsCheckoutQuote?: any;
-}
-
 function CardHeader({
 	amountTab = '',
 	setAmountTab = () => {},
@@ -31,7 +16,7 @@ function CardHeader({
 	shipmentIdView = true,
 	isCheckoutQuote = false,
 	setIsCheckoutQuote = () => {},
-}: PropsType) {
+}) {
 	const {
 		discountAppliedKam,
 		discountAppliedRevenueDesk,
@@ -64,7 +49,7 @@ function CardHeader({
 					</div>
 					<div className={styles.value_text}>
 						{formatAmount({
-							amount   :	discountAppliedKam as any,
+							amount   :	discountAppliedKam,
 							currency :	GLOBAL_CONSTANTS.currency_code.INR,
 							options  : {
 								style           : 'currency',
@@ -79,7 +64,7 @@ function CardHeader({
 					</div>
 					<div className={styles.value_text}>
 						{formatAmount({
-							amount   :	discountAppliedRevenueDesk as any,
+							amount   :	discountAppliedRevenueDesk,
 							currency :	GLOBAL_CONSTANTS.currency_code.INR,
 							options  : {
 								style           : 'currency',

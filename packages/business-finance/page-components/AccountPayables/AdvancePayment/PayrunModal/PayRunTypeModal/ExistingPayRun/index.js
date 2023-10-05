@@ -12,38 +12,6 @@ import InvoiceCount from './renderFunction/InvoiceCount';
 import Ribbon from './renderFunction/Ribbon';
 import styles from './styles.module.css';
 
-interface DataTypes {
-	list: object[];
-	pageIndex?: number;
-	totalPage?: number;
-	totalRecords?: number;
-
-}
-
-interface FiltterProps {
-	pageIndex?:number,
-}
-interface Props {
-	exitPayRun:boolean,
-	setExitPayRun:Function,
-	data:DataTypes,
-	loading:boolean,
-	filters:FiltterProps,
-	setFilters:Function,
-	currency:string,
-	activeEntity:string,
-}
-interface ItemProps {
-	type:string;
-	currency:string;
-	totalValue:number;
-	invoiceCount:number;
-	createdAt:string,
-}
-interface ItemType {
-	id: string;
-}
-
 function ExitingPayRun({
 	exitPayRun,
 	setExitPayRun,
@@ -53,7 +21,7 @@ function ExitingPayRun({
 	setFilters,
 	currency,
 	activeEntity,
-}:Props) {
+}) {
 	const { push } = useRouter();
 	const { pageIndex, list = [] } = data || {};
 	const listLength = list.length;
@@ -68,7 +36,7 @@ function ExitingPayRun({
 	};
 
 	const functions = {
-		renderRadio: (itemData:ItemType) => {
+		renderRadio: (itemData) => {
 			const { id } = itemData || {};
 			const handleRadioChange = () => {
 				if (value) {
@@ -88,16 +56,16 @@ function ExitingPayRun({
 				</div>
 			);
 		},
-		renderRibbon: (itemData:ItemProps) => (
+		renderRibbon: (itemData) => (
 			<Ribbon itemData={itemData} />
 		),
-		renderAmountWithCurrency: (itemData:ItemProps) => (
+		renderAmountWithCurrency: (itemData) => (
 			<AmountWithCurrency itemData={itemData} />
 		),
-		renderInvoiceCount: (itemData:ItemProps) => (
+		renderInvoiceCount: (itemData) => (
 			<InvoiceCount itemData={itemData} />
 		),
-		renderDateWithTime: (itemData:ItemProps) => (
+		renderDateWithTime: (itemData) => (
 			<DateWithTime itemData={itemData} />
 		),
 	};
@@ -118,7 +86,7 @@ function ExitingPayRun({
 								functions={functions}
 								page={pageIndex}
 								pageSize={10}
-								handlePageChange={(val: number) => setFilters({
+								handlePageChange={(val) => setFilters({
 									...filters,
 									pageIndex: val,
 								})}

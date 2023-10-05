@@ -2,16 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-interface GlobalInterface {
-	serviceType?:string[],
-	date?:Date,
-}
-interface Props {
-	globalFilters?:GlobalInterface;
-	yearFilters?:string[];
-	entityTabFilters?:string;
-}
-const useGetIncomeExpense = ({ globalFilters, yearFilters, entityTabFilters }:Props) => {
+const useGetIncomeExpense = ({ globalFilters, yearFilters, entityTabFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/finance-income-expense',

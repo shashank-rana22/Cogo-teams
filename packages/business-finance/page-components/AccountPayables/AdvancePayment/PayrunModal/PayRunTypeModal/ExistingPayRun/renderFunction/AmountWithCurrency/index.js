@@ -1,15 +1,7 @@
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import React from 'react';
 
-interface ItemTypes {
-	currency:string;
-	totalValue:number;
-}
-interface PropsType {
-	itemData:ItemTypes,
-}
-
-function AmountWithCurrency({ itemData }:PropsType) {
+function AmountWithCurrency({ itemData }) {
 	const { currency, totalValue } = itemData || {};
 	return (
 		<div>

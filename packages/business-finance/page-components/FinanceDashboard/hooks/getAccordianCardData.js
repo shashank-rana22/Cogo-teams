@@ -3,18 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-interface DateInterface {
-	startDate?:Date
-	endDate?:Date
-}
-interface GlobalInterface {
-	date?: DateInterface
-}
-interface Props {
-	globalFilters?:GlobalInterface;
-	entityTabFilters?:string;
-}
-const useGetAccordianCardData = ({ globalFilters, entityTabFilters }:Props) => {
+const useGetAccordianCardData = ({ globalFilters, entityTabFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/finance-service-wise-rec-pay',
@@ -31,10 +20,10 @@ const useGetAccordianCardData = ({ globalFilters, entityTabFilters }:Props) => {
 				trigger({
 					params: {
 						entityCode : entityTabFilters,
-						startDate  : startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false)
+						startDate  : startDate ? format(startDate, 'yyyy-MM-dd', {}, false)
 							: undefined,
 						endDate: endDate
-							? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined,
+							? format(endDate, 'yyyy-MM-dd', {}, false) : undefined,
 					},
 				});
 			} catch (e) {

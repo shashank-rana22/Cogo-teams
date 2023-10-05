@@ -3,20 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-interface DateInterface {
-	startDate?:Date
-	endDate?:Date
-}
-interface GlobalInterface {
-	serviceType?:string[],
-	date?: DateInterface
-}
-interface Props {
-	globalFilters?:GlobalInterface;
-	entityTabFilters?:string
-}
-
-const useGetReceivablesList = ({ globalFilters, entityTabFilters }:Props) => {
+const useGetReceivablesList = ({ globalFilters, entityTabFilters }) => {
 	const { startDate, endDate } = globalFilters?.date || {};
 	const [recievablesTab, setRecievablesTab] = useState('all');
 
@@ -44,10 +31,10 @@ const useGetReceivablesList = ({ globalFilters, entityTabFilters }:Props) => {
 						serviceTypes : globalFilters?.serviceType,
 						accountMode  : 'AR',
 						buyerType    : buyerTypeFilter(),
-						startDate    : startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false)
+						startDate    : startDate ? format(startDate, 'yyyy-MM-dd', {}, false)
 							: undefined,
 						endDate: endDate
-							? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined,
+							? format(endDate, 'yyyy-MM-dd', {}, false) : undefined,
 					},
 				});
 			} catch (e) {

@@ -3,17 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect } from 'react';
 
-interface Props {
-	filters?: {
-		search?: string;
-		pageIndex?: number;
-		service?: string[];
-		entity?: string[];
-	};
-	setFilters?: Function;
-}
-
-function useGetCustomerList({ filters, setFilters }:Props) {
+function useGetCustomerList({ filters, setFilters }) {
 	const { search, pageIndex, service, entity } = filters || {};
 
 	const [

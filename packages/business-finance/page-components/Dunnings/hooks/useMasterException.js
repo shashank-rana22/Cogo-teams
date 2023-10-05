@@ -5,29 +5,11 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
-interface ExceptionFiltersInterface {
-	category?: string;
-	creditDays?: string ;
-	cycleStatus?: string;
-	pageIndex?: number;
-	entities?: string[];
-}
-interface Props {
-	exceptionFilter?: ExceptionFiltersInterface;
-	subTabsValue?: string;
-	setShowConfirmationModal?: React.Dispatch<React.SetStateAction<boolean>>;
-	setExceptionFilter?: React.Dispatch<React.SetStateAction<object>>;
-}
-
-interface Profile {
-	profile?: { user: { id: string } }
-}
-
 const useMasterException = ({
 	exceptionFilter, subTabsValue = '',
 	setShowConfirmationModal, setExceptionFilter,
-}:Props) => {
-	const profile: Profile = useSelector((state) => state);
+}) => {
+	const profile = useSelector((state) => state);
 	const [searchValue, setSearchValue] = useState('');
 	const { category = '', cycleStatus = '', pageIndex, entities } = exceptionFilter || {};
 	const { profile: { user } } = profile || {};

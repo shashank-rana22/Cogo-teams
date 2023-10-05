@@ -4,10 +4,8 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-import { FilterProps, StatusObject } from '../common/interfaces';
-
-const useGetShipmentInvoices = ({ status }: StatusObject) => {
-	const [shipmentFilters, setShipmentFilters] = useState<FilterProps>({
+const useGetShipmentInvoices = ({ status }) => {
+	const [shipmentFilters, setShipmentFilters] = useState({
 		page        : 1,
 		pageLimit   : 10,
 		status,

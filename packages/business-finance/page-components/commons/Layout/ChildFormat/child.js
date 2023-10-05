@@ -6,10 +6,6 @@ import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
 
-export interface NestedObj {
-	[key: string]: string;
-}
-
 function Child({
 	controls,
 	control,
@@ -59,7 +55,7 @@ function Child({
 							rules : controlItem?.rules,
 							label : controlItem?.label,
 						});
-						const EXTRA_PROPS:NestedObj = {};
+						const EXTRA_PROPS = {};
 						if (controlItem.customProps?.options) {
 							EXTRA_PROPS.options = controlItem.customProps.options[index];
 						}

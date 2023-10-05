@@ -1,24 +1,14 @@
 /* eslint-disable max-len */
 import { cl } from '@cogoport/components';
-import React, { ReactFragment } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
-
-interface NestedObj {
-	[key: string]: ReactFragment;
-}
-
-interface Props {
-	formData?: NestedObj;
-	chargeableWeight?: number;
-	whiteout?:boolean;
-}
 
 function ContainerDetails({
 	formData = {},
 	chargeableWeight,
 	whiteout = false,
-}:Props) {
+}) {
 	const { dimension = [] } = formData;
 
 	let tempColor = '#333';
@@ -35,7 +25,7 @@ function ContainerDetails({
 						${styles.block_flex_border} 
 						${styles.handling_information} 
 					`}
-					style={{ '--temp-color': tempColor } as React.CSSProperties}
+					style={{ '--temp-color': tempColor }}
 				>
 					<div className={cl`
 						${styles.flex_col} 
@@ -64,7 +54,7 @@ function ContainerDetails({
 							${styles.flex} 
 							${styles.sci_text_style}
 						`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<p style={{ fontSize: 10, color: tempColor }}>SCI</p>
 						</div>
@@ -78,7 +68,7 @@ function ContainerDetails({
 						${styles.block_flex_border} 
 						${styles.container_section} 
 					`}
-					style={{ '--temp-color': tempColor } as React.CSSProperties}
+					style={{ '--temp-color': tempColor }}
 				>
 					<div
 						className={cl`
@@ -86,7 +76,7 @@ function ContainerDetails({
 						${styles.border_right_solid}
 						${styles.block_a_container_section}
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div
 							className={cl`
@@ -95,7 +85,7 @@ function ContainerDetails({
 							${styles.flex_in_flex}
 							${styles.block_a_container_section_rcp}
 						`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<p style={{ fontSize: 7, color: tempColor }}>No. of Pieces RCP</p>
 						</div>
@@ -108,7 +98,7 @@ function ContainerDetails({
 							${styles.flex_in_flex_b}
 							${styles.flex_justify_end}
 						`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<div className={cl`
 								${styles.flex} 
@@ -192,7 +182,7 @@ function ContainerDetails({
 						${styles.border_right_solid}
 						${styles.block_b_container_section}
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div
 							className={cl`
@@ -201,7 +191,7 @@ function ContainerDetails({
 							${styles.flex_in_flex}
 							${styles.flex_justify_center}
 						`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<div className={cl`
 								${styles.flex} 
@@ -219,7 +209,7 @@ function ContainerDetails({
 								${styles.flex_in_flex_b}
 								${styles.flex_justify_end}
 							`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<div className={cl`
 								${styles.flex} 
@@ -252,7 +242,7 @@ function ContainerDetails({
 						${styles.border_right_solid}
 						${styles.block_c_container_section}
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div
 							className={cl`
@@ -260,7 +250,7 @@ function ContainerDetails({
 								${styles.flex_border_solid}
 								${styles.flex_in_flex_empty_top}
 							`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<p style={{ fontSize: 8 }} />
 						</div>
@@ -278,7 +268,7 @@ function ContainerDetails({
 						${styles.flex_row} 
 						${styles.block_dfhjl_container_section} 
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<p style={{ fontSize: 11 }}> </p>
 					</div>
@@ -289,7 +279,7 @@ function ContainerDetails({
 						${styles.border_right_solid}
 						${styles.block_egi_container_section}
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div className={cl`
 							${styles.flex_col} 
@@ -314,7 +304,7 @@ function ContainerDetails({
 									${styles.flex_in_flex_empty_top}
 									${styles.block_e_container_commodity_empty_section}
 								`}
-									style={{ '--temp-color': tempColor } as React.CSSProperties}
+									style={{ '--temp-color': tempColor }}
 								/>
 								<div
 									className={cl`
@@ -324,7 +314,7 @@ function ContainerDetails({
 									${styles.flex_in_flex_empty_bottom}
 									${styles.block_e_container_commodity_text_section}
 								`}
-									style={{ '--temp-color': tempColor } as React.CSSProperties}
+									style={{ '--temp-color': tempColor }}
 								>
 									<p style={{ fontSize: 7, color: tempColor }}>
 										Commodity
@@ -352,7 +342,7 @@ function ContainerDetails({
 								${styles.flex_in_flex_empty_top}
 								${styles.block_e_container_q_section}
 							`}
-								style={{ '--temp-color': tempColor } as React.CSSProperties}
+								style={{ '--temp-color': tempColor }}
 							>
 								<p style={{ fontSize: 13, textTransform: 'uppercase' }}>{formData.class}</p>
 							</div>
@@ -371,7 +361,7 @@ function ContainerDetails({
 						${styles.flex_row} 
 						${styles.block_dfhjl_container_section} 
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<p style={{ fontSize: 7 }}> </p>
 					</div>
@@ -382,7 +372,7 @@ function ContainerDetails({
 							${styles.border_right_solid}
 							${styles.block_egi_container_section}
 						`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div
 							className={cl`
@@ -391,7 +381,7 @@ function ContainerDetails({
 								${styles.flex_justify_center}
 								${styles.flex_in_flex_empty_top}
 							`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<div className={cl`
 								${styles.flex} 
@@ -432,7 +422,7 @@ function ContainerDetails({
 						${styles.flex_row} 
 						${styles.block_dfhjl_container_section} 
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<p style={{ fontSize: 7 }}> </p>
 					</div>
@@ -443,7 +433,7 @@ function ContainerDetails({
 							${styles.border_right_solid}
 							${styles.block_egi_container_section}
 						`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div
 							className={cl`
@@ -452,7 +442,7 @@ function ContainerDetails({
 								${styles.flex_justify_center}
 								${styles.flex_in_flex_empty_top}
 							`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<div className={cl`
 								${styles.flex} 
@@ -484,7 +474,7 @@ function ContainerDetails({
 						${styles.flex_row} 
 						${styles.block_dfhjl_container_section} 
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<p style={{ fontSize: 7 }}> </p>
 					</div>
@@ -495,7 +485,7 @@ function ContainerDetails({
 							${styles.border_right_solid}
 							${styles.block_k_container_section}
 						`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div
 							className={cl`
@@ -504,7 +494,7 @@ function ContainerDetails({
 								${styles.flex_in_flex}
 								${styles.flex_justify_center}
 							`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<div className={cl`
 								${styles.flex} 
@@ -522,7 +512,7 @@ function ContainerDetails({
 								${styles.flex_in_flex_b}
 								${styles.flex_justify_end}
 							`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<div className={cl`
 								${styles.flex} 
@@ -556,7 +546,7 @@ function ContainerDetails({
 						${styles.flex_row} 
 						${styles.block_dfhjl_container_section} 
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<p style={{ fontSize: 7 }}> </p>
 					</div>
@@ -573,7 +563,7 @@ function ContainerDetails({
 								${styles.flex_justify_center}
 								${styles.flex_in_flex_empty_top}
 							`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<div className={cl`
 								${styles.flex} 

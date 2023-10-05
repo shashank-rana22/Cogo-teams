@@ -3,11 +3,10 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
-import { TableProps } from '../Interfaces/index';
 
 import styles from './styles.module.css';
 
-function StyledTable({ id, className, columns, data, loading, ...rest }:TableProps) {
+function StyledTable({ id, className, columns, data, loading, ...rest }) {
 	return (
 		<div className={styles.table}>
 			{(!isEmpty(data) || loading) && (

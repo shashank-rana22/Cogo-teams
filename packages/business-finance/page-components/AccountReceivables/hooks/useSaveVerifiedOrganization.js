@@ -1,16 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-import { Refetch } from '../commons/Interfaces';
-
-interface SaveVerified {
-	setOrgData : Function;
-	refetch : Refetch;
-}
-
 const useSaveVerifiedOrganization = ({
 	setOrgData, refetch,
-} : SaveVerified) => {
+}) => {
 	const [
 		{ loading },
 		trigger,

@@ -1,15 +1,10 @@
 import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 
-interface Props {
-	setGenerate?:Function;
-	setEdit?:Function;
-}
-
 const useUpdateIndividualEditing = ({
 	setGenerate = () => {},
 	setEdit = () => {},
-}:Props) => {
+}) => {
 	const [{ loading }, trigger] = useRequestAir(
 		{
 			url     : '/air-coe/document-copy',

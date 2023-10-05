@@ -12,11 +12,7 @@ import useShipmentDocument from '../../../../hook/useShipmentDocument';
 
 import styles from './styles.module.css';
 
-interface DocumentsInterface {
-	shipmentId: string;
-}
-
-function Documents({ shipmentId = '' }: DocumentsInterface) {
+function Documents({ shipmentId = '' }) {
 	const { data: documentData, loading } = useShipmentDocument(shipmentId);
 
 	const functions = {

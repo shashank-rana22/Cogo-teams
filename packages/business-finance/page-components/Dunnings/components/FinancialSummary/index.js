@@ -7,15 +7,8 @@ import ListView from './ListView';
 import Stats from './Stats';
 import styles from './styles.module.css';
 
-interface FilterInterface {
-	service?: string[];
-	entity?: string[];
-	search?: string;
-	pageIndex?: number;
-}
-
 function FinancialSummary() {
-	const [filters, setFilters] = useState<FilterInterface>({});
+	const [filters, setFilters] = useState({});
 	const serviceOptions = GLOBAL_CONSTANTS.shipment_types;
 	const entityOptions = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map((entity) => (
 		{ label: String(entity), value: String(entity) }

@@ -26,44 +26,6 @@ import ModifiedName from './renderFunction/ModifiedName';
 import SIDnumber from './renderFunction/SIDnumber';
 import styles from './styles.module.css';
 
-interface OrganizationTypes {
-	organizationName:string,
-}
-interface ByProps {
-	name:string
-}
-interface NameType {
-	name:string,
-}
-interface BankType {
-	accountNumber:string,
-	bankName:string,
-	ifscCode:string,
-}
-interface ItemProps {
-	advanceDocumentSellerAddress:OrganizationTypes,
-	advanceDocumentId?:string,
-	advanceDocumentNo:string,
-	approvedAt:Date,
-	approvedBy:NameType,
-	organizationName:string,
-	id:string,
-	requestedAt:Date,
-	requestedBy:ByProps,
-	jobNumber:string,
-	sid:string,
-	serviceType:string,
-	payableAmount:number,
-	currency:string,
-	advanceDocumentSellerBankDetail:BankType,
-	incidentRefNo:string,
-	bankDetail?: Array<{
-		account_number: string;
-		beneficiary_name: string;
-		ifsc_code: string;
-	}>;
-}
-
 function CreateNewPayRun() {
 	const [sort, setSort] = useState({});
 	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
@@ -103,40 +65,40 @@ function CreateNewPayRun() {
 	}, [getAdvancedPayment, selectedPayRunId]);
 
 	const functions = {
-		renderCheckbox    : (itemData:ItemProps) => getTableBodyCheckbox(itemData),
-		renderBankDetails : (itemData:ItemProps) => <BankDetails itemData={itemData} />,
-		renderIcDelete    : (itemData:ItemProps) => (
+		renderCheckbox    : (itemData) => getTableBodyCheckbox(itemData),
+		renderBankDetails : (itemData) => <BankDetails itemData={itemData} />,
+		renderIcDelete    : (itemData) => (
 			<DeleteModal
 				itemData={itemData}
 				deleteSelecteInvoiceLoading={deleteSelecteInvoiceLoading}
 				deleteInvoices={deleteInvoices}
 			/>
 		),
-		renderAmountWithCurrency: (itemData:ItemProps) => (
+		renderAmountWithCurrency: (itemData) => (
 			<AmountWithCurrency itemData={itemData} />
 		),
-		renderIncidentNumber: (itemData:ItemProps) => (
+		renderIncidentNumber: (itemData) => (
 			<IncidentNumber itemData={itemData} />
 		),
-		renderSIDnumber: (itemData:ItemProps) => (
+		renderSIDnumber: (itemData) => (
 			<SIDnumber itemData={itemData} />
 		),
-		renderOrganization: (itemData:ItemProps) => (
+		renderOrganization: (itemData) => (
 			<OrganizationName itemData={itemData} />
 		),
-		renderRequestedBy: (itemData:ItemProps) => (
+		renderRequestedBy: (itemData) => (
 			<RequestedBy itemData={itemData} />
 		),
-		renderApprovedBy: (itemData:ItemProps) => (
+		renderApprovedBy: (itemData) => (
 			<ApprovedBy itemData={itemData} />
 		),
-		renderModifiedName: (itemData:ItemProps) => (
+		renderModifiedName: (itemData) => (
 			<ModifiedName itemData={itemData} />
 		),
-		renderBankData: (itemData:ItemProps) => (
+		renderBankData: (itemData) => (
 			<BankData itemData={itemData} />
 		),
-		renderDocNumber: (itemData:ItemProps) => (
+		renderDocNumber: (itemData) => (
 			<DocumentNumber itemData={itemData} />
 		),
 	};
@@ -247,7 +209,7 @@ function CreateNewPayRun() {
 							setSort={setSort}
 							page={pageIndex}
 							pageSize={10}
-							handlePageChange={(val: number) => setFilters({
+							handlePageChange={(val) => setFilters({
 								...filters,
 								pageIndex: val,
 							})}

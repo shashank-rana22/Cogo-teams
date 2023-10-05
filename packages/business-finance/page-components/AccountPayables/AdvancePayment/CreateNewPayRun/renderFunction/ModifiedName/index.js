@@ -3,16 +3,9 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface ItemTypes {
-	organizationName:string,
-}
-
-interface PropsType {
-	itemData:ItemTypes,
-}
 const ORGANIZATION_NAME_LENGTH = 16;
 const SUBSTRING_END_LENGTH = 16;
-function ModifiedName({ itemData }:PropsType) {
+function ModifiedName({ itemData }) {
 	const { organizationName = '' } = itemData || {};
 	const nameLength = organizationName.length > ORGANIZATION_NAME_LENGTH;
 	return (

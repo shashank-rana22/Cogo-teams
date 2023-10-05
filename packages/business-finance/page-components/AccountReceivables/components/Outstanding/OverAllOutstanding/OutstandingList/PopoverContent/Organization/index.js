@@ -8,18 +8,7 @@ import Reporting from './Reporting';
 import styles from './styles.module.css';
 import UserCard from './UserCard';
 
-interface Data {
-	reporting_managers?:object[],
-	user?:object,
-	reportees?:object[],
-}
-
-interface Props {
-	data?:Data,
-	loading?:boolean,
-}
-
-function Organization({ data = {}, loading }:Props) {
+function Organization({ data = {}, loading }) {
 	const { reporting_managers:reportingManagers = [], user = {}, reportees = [] } = data;
 
 	if (loading) {

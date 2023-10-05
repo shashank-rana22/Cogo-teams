@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useState } from 'react';
 
-const useGetBillTat = ({ filtersData, firstEvent, secondEvent, activeEntity }:ItemProps) => {
+const useGetBillTat = ({ filtersData, firstEvent, secondEvent, activeEntity }) => {
 	const [filters, setFilters] = useState({
 		Date: undefined,
 	});

@@ -16,33 +16,6 @@ import Status from './RenderData/Status/index';
 import ViewInvoice from './RenderData/ViewInvoice/index';
 import styles from './styles.module.css';
 
-interface ItemTypes {
-	jobNumber?: string;
-	jobType?:string;
-	discountAppliedKam?:number;
-	discountAppliedRevenueDesk?:number;
-	jobStatus?: string,
-	quotationType?: string,
-}
-interface PropsType {
-	cardData: ItemTypes;
-	currentOpenSID: string;
-	setCurrentOpenSID: Function;
-	amountTab: string;
-	setAmountTab: Function;
-	setDataCard: Function;
-	onAccept?: Function;
-	showTab?: boolean;
-	sidDataChecked?: boolean;
-	shipmentIdView?: boolean;
-}
-
-interface FullResponseProps {
-	totalRecords?: number;
-	pageIndex?: number;
-	list?: object[];
-}
-
 const PRESENT_TAB = 'sidDataTab';
 const TAB_TO_OPEN = 'collectionPartyTab';
 
@@ -57,7 +30,7 @@ function CardItem({
 	showTab = false,
 	sidDataChecked = false,
 	shipmentIdView = true,
-}: PropsType) {
+}) {
 	const [isCheckoutQuote, setIsCheckoutQuote] = useState(false);
 
 	const { jobNumber, jobType } = cardData || {};
@@ -101,24 +74,24 @@ function CardItem({
 		return '-';
 	};
 
-	const { pageIndex = 1 }: FullResponseProps = fullResponse || {};
+	const { pageIndex = 1 } = fullResponse || {};
 
 	const functions = {
-		renderInvoiceNumber: (item: {}, field: {}) => (
+		renderInvoiceNumber: (item, field) => (
 			<InvoiceNumber item={item} field={field} />
 		),
-		renderDates: (item: {}, field: {}) => (
+		renderDates: (item, field) => (
 			<FormatedDate item={item} field={field} />
 		),
-		renderName: (item: {}, field: {}) => (
+		renderName: (item, field) => (
 			<ModifiedName item={item} field={field} />
 		),
-		renderAmount: (item: {}, field: {}) => (
+		renderAmount: (item, field) => (
 			<AmountWithCurrency item={item} field={field} />
 		),
-		renderStatus              : (item: {}) => <Status item={item} />,
-		renderInvoices            : (item: {}, field: object) => <ViewInvoice item={item} field={field} />,
-		renderRemarks             : (item: {}) => <Remarks itemData={item} />,
+		renderStatus              : (item) => <Status item={item} />,
+		renderInvoices            : (item, field) => <ViewInvoice item={item} field={field} />,
+		renderRemarks             : (item) => <Remarks itemData={item} />,
 		renderQuotationName       : ({ name = '' }) => showOverflowingNumber(name, 30),
 		renderLineItemUnit        : ({ unit = '' }) => getLineItemData(unit),
 		renderLineItemServiceType : ({ service_type = '' }) => getLineItemData(service_type),
@@ -156,12 +129,12 @@ function CardItem({
 				<List
 					config={config}
 					itemData={getResponseData()}
-					functions={functions as any}
+					functions={functions}
 					loading={loading}
 					page={pageIndex}
 					pageSize={10}
 					showPagination
-					handlePageChange={(val: number) => hookSetters.setFilters({
+					handlePageChange={(val) => hookSetters.setFilters({
 						...filters,
 						page: val,
 					})}

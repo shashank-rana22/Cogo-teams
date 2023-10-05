@@ -5,7 +5,7 @@ import { useSelector } from '@cogoport/store';
 const AGENT_CONDITION = ['partner', 'micro_service'];
 
 const useCreateManifest = () => {
-	const { user_data:userData } = useSelector(({ profile }:any) => ({
+	const { user_data:userData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
 

@@ -6,29 +6,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface OverallStats {
-	customersCount?: number,
-	dashboardCurrency?: string,
-	onAccountAmount?: number,
-	onAccountAmountForPastSevenDaysPercentage?: number,
-	openInvoiceAmountForPastSevenDaysPercentage?: number,
-	openInvoicesAmount?: number,
-	openInvoicesCount?: number,
-	totalOutstandingAmount?: number
-}
-
-interface OutsatndingProps {
-	outstandingServiceWise?: object,
-	overallStats?: OverallStats,
-}
-
-interface DateAndAccountProps {
-	outstandingData?: OutsatndingProps,
-	outstandingLoading?: boolean,
-	entityCode?: string,
-}
-
-function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: DateAndAccountProps) {
+function DateAndAccount({ outstandingData, outstandingLoading, entityCode }) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const {
@@ -51,7 +29,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 										<Tooltip content={(
 											<div>
 												{formatAmount({
-													amount   : overallStats?.openInvoicesAmount as any || 0,
+													amount   : overallStats?.openInvoicesAmount || 0,
 													currency : overallStats?.dashboardCurrency || currency,
 													options  : {
 														style           : 'currency',
@@ -63,7 +41,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 										>
 											<div className={styles.wrapper}>
 												{formatAmount({
-													amount   : overallStats?.openInvoicesAmount as any || 0,
+													amount   : overallStats?.openInvoicesAmount || 0,
 													currency : overallStats?.dashboardCurrency || currency,
 													options  : {
 														notation              : 'compact',
@@ -113,7 +91,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 										<Tooltip content={(
 											<div>
 												{formatAmount({
-													amount   : overallStats?.onAccountAmount as any || 0,
+													amount   : overallStats?.onAccountAmount || 0,
 													currency : overallStats?.dashboardCurrency || currency,
 													options  : {
 														style           : 'currency',
@@ -125,7 +103,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 										>
 											<div className={styles.wrapper}>
 												{formatAmount({
-													amount   : overallStats?.onAccountAmount as any || 0,
+													amount   : overallStats?.onAccountAmount || 0,
 													currency :	overallStats?.dashboardCurrency || currency,
 													options  :	{
 														notation              : 'compact',
@@ -164,7 +142,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 										<Tooltip content={(
 											<div>
 												{formatAmount({
-													amount   : overallStats?.totalOutstandingAmount as any || 0,
+													amount   : overallStats?.totalOutstandingAmount || 0,
 													currency : overallStats?.dashboardCurrency || currency,
 													options  : {
 														style           : 'currency',
@@ -176,7 +154,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 										>
 											<div className={styles.wrapper}>
 												{formatAmount({
-													amount   : overallStats?.totalOutstandingAmount as any || 0,
+													amount   : overallStats?.totalOutstandingAmount || 0,
 													currency : overallStats?.dashboardCurrency || currency,
 													options  : {
 														notation              : 'compact',

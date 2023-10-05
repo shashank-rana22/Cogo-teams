@@ -15,65 +15,31 @@ import SIDnumber from './renderFunction/SIDnumber';
 import SelectFilters from './SelectFilters';
 import styles from './styles.module.css';
 
-interface EntityType {
-	entityCode:string
-}
-interface ItemProps {
-	activeEntity:string;
-}
-interface OrganizationTypes {
-	organizationName:string,
-}
-interface NameType {
-	name:string,
-}
-interface ByProps {
-	name:string
-}
-
-interface PropsType {
-	advanceDocumentBuyerAddress:EntityType,
-	advanceDocumentSellerAddress:OrganizationTypes,
-	advanceDocumentId?:string,
-	approvedAt:Date,
-	approvedBy:NameType,
-	organizationName:string,
-	id:string,
-	requestedAt:Date,
-	requestedBy:ByProps,
-	jobNumber:string,
-	sid:string,
-	serviceType:string,
-	payableAmount:number,
-	currency:string,
-	incidentRefNo:string,
-}
-
-function AdvancePayment({ activeEntity }:ItemProps) {
+function AdvancePayment({ activeEntity }) {
 	const [sort, setSort] = useState({});
 	const { filters, setFilters, data, loading } = useGetAdvancePaymentList({ activeEntity, sort });
 	const { pageIndex, list = [] } = data || {};
 	const listLength = list.length;
 	const functions = {
-		renderAmountWithCurrency: (itemData:PropsType) => (
+		renderAmountWithCurrency: (itemData) => (
 			<AmountWithCurrency itemData={itemData} />
 		),
-		renderIncidentNumber: (itemData:PropsType) => (
+		renderIncidentNumber: (itemData) => (
 			<IncidentNumber itemData={itemData} />
 		),
-		renderSIDnumber: (itemData:PropsType) => (
+		renderSIDnumber: (itemData) => (
 			<SIDnumber itemData={itemData} />
 		),
-		renderOrganization: (itemData:PropsType) => (
+		renderOrganization: (itemData) => (
 			<OrganizationName itemData={itemData} />
 		),
-		renderRequestedBy: (itemData:PropsType) => (
+		renderRequestedBy: (itemData) => (
 			<RequestedBy itemData={itemData} />
 		),
-		renderApprovedBy: (itemData:PropsType) => (
+		renderApprovedBy: (itemData) => (
 			<ApprovedBy itemData={itemData} />
 		),
-		renderEntityCode: (itemData:PropsType) => (
+		renderEntityCode: (itemData) => (
 			<Entity itemData={itemData} />
 		),
 	};
@@ -100,7 +66,7 @@ function AdvancePayment({ activeEntity }:ItemProps) {
 							setSort={setSort}
 							page={pageIndex}
 							pageSize={10}
-							handlePageChange={(val: number) => setFilters({
+							handlePageChange={(val) => setFilters({
 								...filters,
 								pageIndex: val,
 							})}

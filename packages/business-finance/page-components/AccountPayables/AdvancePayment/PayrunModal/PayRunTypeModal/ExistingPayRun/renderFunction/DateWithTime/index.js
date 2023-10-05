@@ -1,12 +1,6 @@
 import React from 'react';
 
-interface ItemTypes {
-	createdAt:string,
-}
-interface PropsType {
-	itemData:ItemTypes;
-}
-function DateWithTime({ itemData }:PropsType) {
+function DateWithTime({ itemData }) {
 	const { createdAt } = itemData || {};
 	return (
 		<div>

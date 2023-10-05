@@ -6,24 +6,6 @@ import { v4 as uuid } from 'uuid';
 
 import useGetHawb from '../Helpers/hooks/useGetHawb';
 
-interface NestedObj {
-	[key: string]: string | number | boolean;
-}
-
-interface Props {
-	edit?: boolean | string;
-	setGenerate?:Function;
-	setEdit?:Function;
-	activeCategory?: string;
-	hawbDetails?: Array<NestedObj>;
-	setHawbDetails?: Function;
-	setActiveHawb?: Function;
-	setActiveKey?: Function;
-	handleClick?: Function;
-	getHawb?: Function;
-	activeHawb?: NestedObj;
-}
-
 const useCreateShipmentDocument = ({
 	edit = false,
 	setGenerate = () => {},
@@ -35,7 +17,7 @@ const useCreateShipmentDocument = ({
 	setActiveKey = () => {},
 	handleClick = () => {},
 	activeHawb = {},
-}:Props) => {
+}) => {
 	let authKey = 'post_air_coe_documents';
 	let method = 'POST';
 
@@ -56,7 +38,7 @@ const useCreateShipmentDocument = ({
 
 	useEffect(() => {
 		if (hawbSuccess) {
-			const updatedDetails = (hawbDetails || []).map((item:any) => {
+			const updatedDetails = (hawbDetails || []).map((item) => {
 				if (item.id === activeHawb.id) {
 					return {
 						...item,

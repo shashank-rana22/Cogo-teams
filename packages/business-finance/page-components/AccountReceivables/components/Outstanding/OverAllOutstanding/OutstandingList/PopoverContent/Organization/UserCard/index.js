@@ -4,21 +4,6 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface UserDataItems {
-	block_access?:string,
-	name?:string,
-	role?: { name?:string },
-	email?:string,
-	mobile_number?:string,
-	mobile_country_code?:string,
-	picture?:string,
-
-}
-interface Props {
-	userData?: UserDataItems;
-	type?: string;
-}
-
 const getColor = () => {
 	const colorArr = ['#DCE1D8', '#FCE4BF', '#CFDAE8', '#DED7FC', '#E1DEEC'];
 	const index = Math.floor(Math.random() * (+(colorArr?.length || 0) + 1));
@@ -84,7 +69,7 @@ function UserCard({ userData = {}, type = '' }:Props) {
 
 			<div
 				className={userData?.block_access ? styles.card_container_isblock : styles.card_container}
-				style={{ '--active-color': activeColor } as React.CSSProperties}
+				style={{ '--active-color': activeColor }}
 
 			>
 				<div

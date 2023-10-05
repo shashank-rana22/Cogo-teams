@@ -24,43 +24,6 @@ const options = [
 ];
 
 const DECIMAL_PLACE = 2;
-interface NestedObj {
-	[key: string]: string | number ;
-}
-
-interface FieldType {
-	basic?: Array<object>;
-	handling?: Array<object>;
-	hawb_controls?: Array<object>;
-	package?: Array<object>;
-}
-
-interface Props {
-	back: boolean;
-	setBack?:Function;
-	setEdit?:Function;
-	edit?: boolean | string;
-	activeCategory?: string;
-	hawbDetails?: Array<NestedObj>;
-	setHawbDetails?: Function;
-	setActiveHawb?: Function;
-	setActiveKey?: (key: string) => void;
-	activeHawb?: { [key: string]: boolean | string };
-	packingData?:{ [key: string]: Array<string> | Array<URL> };
-	fields?:FieldType;
-	control?:object;
-	errors?:object;
-	setValue?:Function;
-	item?: NestedObj;
-	setGenerate?:Function;
-	handleSubmit?: Function;
-	category?: string;
-	activeKey?: string;
-	taskItem?: NestedObj;
-	formValues?: { [key: string]: Array<NestedObj> };
-	setCustomHawbNumber?: Function;
-	cogoSeriesNumber?: Array<number>
-}
 
 function FormContainer({
 	back = false,
@@ -87,7 +50,7 @@ function FormContainer({
 	formValues = {},
 	setCustomHawbNumber = () => {},
 	cogoSeriesNumber = [],
-}:Props) {
+}) {
 	const [value, onChange] = useState('manual');
 	const [confirmDelete, setConfirmDelete] = useState(false);
 
@@ -153,7 +116,7 @@ function FormContainer({
 
 	const calculateCharges = () => {
 		const updatedCharges = (formValues.carrierOtherCharges || []).map((charge) => {
-			let price:number = 0;
+			let price = 0;
 			price = Number(
 				(Number(charge.chargeUnit) * Number(charge.quantity))
 					.toFixed(DECIMAL_PLACE),

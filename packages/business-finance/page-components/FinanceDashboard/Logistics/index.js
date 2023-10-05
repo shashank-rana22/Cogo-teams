@@ -12,14 +12,9 @@ import styles from './styles.module.css';
 import TotalPayablesRecievables from './TotalPayablesRecievavles';
 import TreasuryStatistics from './TreasuryStatistics';
 
-interface ItemProps {
-	key?: string;
-	label?: string;
-	icon?: JSX.Element;
-}
 function Logistics() {
 	const [globalFilters, setGlobalFilters] = useState({});
-	const [entityTabFilters, setEntityTabFilters] = useState<string>();
+	const [entityTabFilters, setEntityTabFilters] = useState();
 
 	const entityTab = [
 		{

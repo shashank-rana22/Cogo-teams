@@ -3,16 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface ItemProps {
-	jobNumber:string,
-	sid:string,
-	serviceType:string,
-}
-interface PropsType {
-	itemData:ItemProps,
-}
-
-function SIDnumber({ itemData }:PropsType) {
+function SIDnumber({ itemData }) {
 	const { jobNumber, sid, serviceType } = itemData || {};
 	return (
 		<div>

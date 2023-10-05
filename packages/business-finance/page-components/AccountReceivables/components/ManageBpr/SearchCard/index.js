@@ -2,23 +2,12 @@ import { Button } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import React, { useState } from 'react';
 
-import { Refetch } from '../../../commons/Interfaces';
 import useSaveVerifiedOrganization from '../../../hooks/useSaveVerifiedOrganization';
 
 import styles from './styles.module.css';
 
-interface OrgData {
-	serial_id: number;
-	legal_business_name: string;
-	id: string;
-}
-
-interface RefetchInterface {
-	refetch: Refetch;
-}
-
-function SearchCard({ refetch } : RefetchInterface) {
-	const [orgData, setOrgData] = useState<OrgData>();
+function SearchCard({ refetch }) {
+	const [orgData, setOrgData] = useState();
 	const { createBpr, loadingOnSave } = useSaveVerifiedOrganization({ setOrgData, refetch });
 
 	return (

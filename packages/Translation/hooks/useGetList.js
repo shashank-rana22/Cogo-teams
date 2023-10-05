@@ -5,13 +5,11 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
-import { FilterProps, Translates } from '../common/interfaces';
-
-const useGetList = ({ status, myTranslates }: Translates) => {
+const useGetList = ({ status, myTranslates }) => {
 	const {
 		profile: profileData = {},
-	} = useSelector((state: object) => state);
-	const [filters, setFilters] = useState<FilterProps>({
+	} = useSelector((state) => state);
+	const [filters, setFilters] = useState({
 		pageIndex   : 1,
 		pageLimit   : 10,
 		status,

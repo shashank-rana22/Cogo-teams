@@ -5,18 +5,6 @@ import { urgencyOptions } from '../controls';
 
 import styles from './styles.module.css';
 
-interface AddUrgencyTagInterface {
-	billId?: string;
-	remark?: string;
-	showAddTag?: boolean;
-	serviceType?: string;
-	tagValue?: string;
-	getBillRefetch?: () => void;
-	setShowAddTag: React.Dispatch<React.SetStateAction<boolean>>;
-	setTagValue: React.Dispatch<React.SetStateAction<string>>;
-	setRemark: React.Dispatch<React.SetStateAction<string>>;
-}
-
 function AddUrgencyTag({
 	billId = '',
 	showAddTag = false,
@@ -27,7 +15,7 @@ function AddUrgencyTag({
 	setRemark,
 	setTagValue,
 	getBillRefetch = () => {},
-}: AddUrgencyTagInterface) {
+}) {
 	if (serviceType === 'air_freight') {
 		urgencyOptions.push({ label: 'Airlines DO Payments', value: 'air_do' });
 	}
@@ -53,14 +41,14 @@ function AddUrgencyTag({
 					className="primary lg"
 					placeholder="Select the urgency Tag"
 					value={tagValue}
-					onChange={(e: any) => setTagValue(e)}
+					onChange={(e) => setTagValue(e)}
 					options={urgencyOptions}
 				/>
 
 				{tagValue === 'urgent' ? (
 					<Textarea
 						value={remark}
-						onChange={(e: any) => setRemark(e)}
+						onChange={(e) => setRemark(e)}
 						placeholder="Enter Urgent Remarks..."
 					/>
 				) : null}

@@ -1,20 +1,10 @@
 import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import { Refetch } from '../../../common/interfaces';
-
 import styles from './styles.module.css';
 import UploadInvoiceModal from './UploadInvoiceModel';
 
-type Props = {
-	itemData: {
-		id?: string,
-		[key: string]: string
-	};
-	refetch: Refetch;
-};
-
-function UploadInvoice({ itemData, refetch }: Props) {
+function UploadInvoice({ itemData, refetch }) {
 	const [openUpload, setOpenUpload] = useState(false);
 	const [uploadProof, setUploadProof] = useState();
 	return (

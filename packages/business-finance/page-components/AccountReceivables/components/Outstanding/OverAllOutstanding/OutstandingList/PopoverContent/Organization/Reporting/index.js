@@ -4,10 +4,7 @@ import UserCard from '../UserCard';
 
 import styles from './styles.module.css';
 
-interface Props {
-	reportingManagers? : object[],
-}
-function Reporting({ reportingManagers = [] }: Props) {
+function Reporting({ reportingManagers = [] }) {
 	return (
 		<div className={styles.container}>
 			{(reportingManagers || []).map((item) => (

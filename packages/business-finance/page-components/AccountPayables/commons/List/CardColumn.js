@@ -1,20 +1,7 @@
 import { Placeholder } from '@cogoport/components';
-import React, { ReactNode } from 'react';
-
-import { FieldType, FunctionObjects, ConfigType } from '../Interfaces/index';
 
 import getValue from './getValue';
 import styles from './styles.module.css';
-
-export interface Props {
-	fields: FieldType[];
-	itemStyles?: React.CSSProperties;
-	singleitem?: number | object;
-	functions?: FunctionObjects;
-	config: ConfigType;
-	isMobile?: boolean;
-	loading?: boolean;
-}
 
 function CardColumn({
 	fields,
@@ -24,7 +11,7 @@ function CardColumn({
 	config,
 	isMobile,
 	loading,
-}:Props) {
+}) {
 	const { clickable } = config || {};
 	return (
 		<section style={itemStyles}>
@@ -43,7 +30,7 @@ function CardColumn({
 							style={{
 								'--span': (field.span || 1),
 								...itemStyle,
-							} as React.CSSProperties}
+							}}
 						>
 							{isMobile && (
 								<div className={styles.tablelabel}>{field.label}</div>
@@ -56,7 +43,7 @@ function CardColumn({
 											field,
 											functions,
 											'-',
-										) as ReactNode}
+										)}
 									</div>
 								)}
 						</div>

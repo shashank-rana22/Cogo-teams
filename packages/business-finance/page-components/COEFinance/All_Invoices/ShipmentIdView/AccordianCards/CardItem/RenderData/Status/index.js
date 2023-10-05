@@ -4,17 +4,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface ItemTypes {
-	status?: string;
-	rejectionReason?: string;
-}
-
-interface PropsType {
-	item: ItemTypes;
-}
-
-function Status({ item }: PropsType) {
-	const { rejectionReason = '', status }: ItemTypes = item;
+function Status({ item }) {
+	const { rejectionReason = '', status } = item;
 	if (status === 'FINANCE_ACCEPTED') {
 		return <div className={styles.finance_accepted}>Finance Accepted</div>;
 	}
@@ -51,7 +42,7 @@ function Status({ item }: PropsType) {
 
 	return (
 		<div className={styles.draft}>
-			{startCase(status!)}
+			{startCase(status)}
 			{' '}
 		</div>
 	);

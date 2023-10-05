@@ -1,7 +1,6 @@
 import { Placeholder } from '@cogoport/components';
-import React, { ReactNode } from 'react';
+import React from 'react';
 
-import { FieldType } from '../../../commons/List/Interfaces/index';
 import getValue from '../../../commons/List/ListItem/getValue';
 import styles from '../styles.module.css';
 
@@ -11,7 +10,7 @@ function HawbListItem({ fields, item, loading, functions }) {
 			<div
 				className={styles.row}
 			>
-				{fields.map((field:FieldType) => {
+				{fields.map((field) => {
 					const itemStyle = field.styles || {};
 					return (
 						<div
@@ -19,7 +18,7 @@ function HawbListItem({ fields, item, loading, functions }) {
 							style={{
 								'--span': (field.span || 1),
 								...itemStyle,
-							} as React.CSSProperties}
+							}}
 						>
 							{loading ? <Placeholder /> : (
 								<div className={styles.flex}>
@@ -28,7 +27,7 @@ function HawbListItem({ fields, item, loading, functions }) {
 										field,
 										functions,
 										'-',
-									) as ReactNode }
+									)}
 								</div>
 							)}
 						</div>

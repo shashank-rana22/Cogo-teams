@@ -11,67 +11,6 @@ import EditIcon from '../RevenueBifurcation/EditIcon';
 
 import styles from './styles.module.css';
 
-interface SalaryInterface {
-	refetchSalary?: () => Promise<void>
-	globalStepper?: string
-	setGlobalStepper?: React.Dispatch<React.SetStateAction<string>>
-	setSalaryVolume?: React.Dispatch<React.SetStateAction<{}>>
-	salaryVolume?: {}
-	oceanSalaryData?: {
-		name: string;
-		value: string;
-	}[]
-	airSalaryData?: {
-		name: string;
-		value: string;
-	}[]
-	salaryVolumeAir?: {}
-	setSalaryVolumeAir?: React.Dispatch<React.SetStateAction<{}>>
-	surfaceSalaryData?: {
-		name: string;
-		value: string;
-	}[]
-	setSalaryVolumeSurface?: React.Dispatch<React.SetStateAction<{}>>
-	salaryVolumeSurface?: {}
-	railSalaryData?: {
-		name: string;
-		value: string;
-	}[]
-	salaryVolumeRail?: {}
-	setSalaryVolumeRail?: React.Dispatch<React.SetStateAction<{}>>
-	oceanSalaryDataValue?: {
-		name: string;
-		value: string;
-	}[]
-	salaryValue?: {}
-	setSalaryValue?: React.Dispatch<React.SetStateAction<{}>>
-	airSalaryDataValue?: {
-		name: string;
-		value: string;
-	}[]
-	salaryValueAir?: {}
-	setSalaryValueAir?: React.Dispatch<React.SetStateAction<{}>>
-	surfaceSalaryDataValue?: {
-		name: string;
-		value: string;
-	}[]
-	salaryValueSurface?: {}
-	setSalaryValueSurface?: React.Dispatch<React.SetStateAction<{}>>
-	railSalaryDataValue?: {
-		name: string;
-		value: string;
-	}[]
-	salaryValueRail: {}
-	setSalaryValueRail?: React.Dispatch<React.SetStateAction<{}>>
-	OceanSum?:boolean
-	AirSum?:boolean
-	SurfaceSum?:boolean,
-	RailSum?:boolean,
-	OceanSumValue?:boolean,
-	SurfaceSumValue?:boolean,
-	RailSumValue?:boolean,
-	AirSumValue?:boolean,
-}
 function SalaryAndRent({
 	globalStepper,
 	OceanSum,
@@ -106,7 +45,7 @@ function SalaryAndRent({
 	railSalaryDataValue,
 	salaryValueRail,
 	setSalaryValueRail,
-}:SalaryInterface) {
+}) {
 	const [dropDownData, setDropDownData] = useState({});
 
 	useEffect(() => { refetchSalary(); }, [refetchSalary]);

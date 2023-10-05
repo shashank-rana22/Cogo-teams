@@ -9,33 +9,7 @@ import { urgencyOptions } from './controls';
 import RemoveTagConfirmation from './RemoveTagConfirmation/index';
 import styles from './styles.module.css';
 
-interface BillInterFace {
-	grandTotal: number;
-	billCurrency: string;
-	id?: string;
-	recurringState?:string,
-	billType: string;
-	isProforma: boolean;
-}
-interface BillAdditionalObject {
-	collectionPartyId?: string;
-	urgencyTag?: string;
-	urgencyRemarks?: string;
-}
-interface RemarkObj {
-	remarks?: [];
-}
-interface DataProps {
-	bill: BillInterFace;
-	billAdditionalObject?: BillAdditionalObject;
-	remarks?: Array<RemarkObj>;
-	serviceType?: string;
-}
-interface Props {
-	data: DataProps;
-	getBillRefetch: () => void;
-}
-function InvoiceDetails({ data, getBillRefetch }: Props) {
+function InvoiceDetails({ data, getBillRefetch }) {
 	const [remark, setRemark] = useState('');
 	const { bill, remarks = [], serviceType, billAdditionalObject } = data || {};
 	const { urgencyTag, urgencyRemarks } = billAdditionalObject || {};
@@ -147,7 +121,7 @@ function InvoiceDetails({ data, getBillRefetch }: Props) {
 					{' '}
 					<span className={styles.amount}>
 						{formatAmount({
-							amount   :	grandTotal as any,
+							amount   :	grandTotal,
 							currency :	billCurrency,
 							options  : {
 								style           : 'currency',

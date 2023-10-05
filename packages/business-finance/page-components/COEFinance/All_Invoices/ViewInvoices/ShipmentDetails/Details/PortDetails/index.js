@@ -5,17 +5,11 @@ import React from 'react';
 
 import getLocations from '../../../../../../../utils/getLocationConfig';
 import GetServiceInfo from '../../../../../../commons/GetServiceInfo';
-import { DetailInterface } from '../../../../../../commons/Interfaces/index';
 import { formatDate } from '../../../../../../commons/utils/formatDate';
 
 import styles from './styles.module.css';
 
-interface Props {
-	data: DetailInterface;
-	showDate?: boolean;
-}
-
-function PortDetails({ data, showDate = false }: Props) {
+function PortDetails({ data, showDate = false }) {
 	if (isEmpty(data)) {
 		return null;
 	}

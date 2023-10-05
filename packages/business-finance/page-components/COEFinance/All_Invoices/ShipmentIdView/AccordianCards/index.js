@@ -9,17 +9,6 @@ import React, { useState } from 'react';
 import CardItem from './CardItem/index';
 import styles from './styles.module.css';
 
-interface ListData {
-	itemData: any;
-	currentOpenSID: string;
-	setCurrentOpenSID: Function;
-	shipmentIdView?: boolean;
-	onTabClick?: Function;
-	onAccept?: Function;
-	showTab?: boolean;
-	sidDataChecked?: boolean;
-}
-
 const PRESENT_TAB = 'sidDataTab';
 
 function AccordianCards({
@@ -31,7 +20,7 @@ function AccordianCards({
 	onAccept = () => {},
 	showTab = false,
 	sidDataChecked = false,
-}: ListData) {
+}) {
 	const {
 		jobId = '',
 		jobNumber = '',
@@ -113,7 +102,7 @@ function AccordianCards({
 								</div>
 								<div className={styles.expense_value_text}>
 									{formatAmount({
-										amount   :	expenseTotalAmount as string,
+										amount   :	expenseTotalAmount,
 										currency :	GLOBAL_CONSTANTS.currency_code.INR,
 										options  : {
 											style           : 'currency',
@@ -180,7 +169,7 @@ function AccordianCards({
 								<div className={styles.expense_value_text}>
 									{formatAmount(
 										{
-											amount   :	incomeTotalAmount as any,
+											amount   :	incomeTotalAmount,
 											currency :	amountCurrency,
 											options  : {
 												style           : 'currency',

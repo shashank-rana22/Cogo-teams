@@ -3,14 +3,13 @@ import React from 'react';
 
 import EmptyState from '../../common/EmptyState';
 import Filters from '../../common/Filters';
-import { Translates } from '../../common/interfaces';
 import useGetList from '../../hooks/useGetList';
 import getColumns from '../../utils/getColumns';
 import StyledTable from '../Table';
 
 import styles from './styles.module.css';
 
-function StatusComponent({ status, myTranslates }: Translates) {
+function StatusComponent({ status, myTranslates }) {
 	const {
 		loading, data = [], setFilters,
 		filters, refetch,

@@ -9,25 +9,7 @@ import PayRunModal from '../PayrunModal';
 import { filterControls } from './filterControls';
 import styles from './styles.module.css';
 
-interface DateRangeProps {
-	startDate?: Date,
-	endDate?: Date
-}
-
-interface FilterProps {
-	search?:string,
-	documentType?:string,
-	dateRange?:DateRangeProps
-}
-
-interface Props {
-	filters:FilterProps,
-	setFilters: (p:object) => void,
-	activeEntity?:string;
-	createButton?:string;
-}
-
-function SelectFilters({ filters = {}, setFilters = () => {}, activeEntity = '', createButton = '' }:Props) {
+function SelectFilters({ filters = {}, setFilters = () => {}, activeEntity = '', createButton = '' }) {
 	const [showPayRunModal, setshowPayRunModal] = useState(false);
 	const {
 		search = '', documentType = '',
@@ -74,7 +56,7 @@ function SelectFilters({ filters = {}, setFilters = () => {}, activeEntity = '',
 				<div>
 					<Input
 						value={search || ''}
-						onChange={(value:string) => setFilters({
+						onChange={(value) => setFilters({
 							...filters,
 							search: value || undefined,
 						})}

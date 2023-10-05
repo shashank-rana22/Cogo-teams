@@ -1,5 +1,4 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import { StreamDatum } from '@cogoport/charts/stream/index';
 import { Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
@@ -11,14 +10,7 @@ import styles from './styles.module.css';
 
 const LIMIT_FOR_LEGEND = 1;
 
-interface ResponsiveChartProps {
-	data?: StreamDatum[],
-	loadingData?: boolean,
-	entityCode?: string,
-	showCount?: boolean,
-}
-
-function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true }: ResponsiveChartProps) {
+function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true }) {
 	data?.sort((a, b) => {
 		const dateA = new Date(`${a.year}-${a.date} 00:00:00`);
 		const dateB = new Date(`${b.year}-${b.date} 00:00:00`);
@@ -76,7 +68,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 					enableSlices="x"
 					yScale={{ type: 'linear', min: 0, max: 'auto' }}
 					yFormat={(value) => formatAmount({
-						amount: value as any,
+						amount: value,
 						currency,
 					})}
 					axisTop={null}
@@ -97,7 +89,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 						legendOffset   : -84,
 						legendPosition : 'middle',
 						format         : (value) => formatAmount({
-							amount  :	value as any,
+							amount  :	value,
 							currency,
 							options : {
 								currencyDisplay : 'code',

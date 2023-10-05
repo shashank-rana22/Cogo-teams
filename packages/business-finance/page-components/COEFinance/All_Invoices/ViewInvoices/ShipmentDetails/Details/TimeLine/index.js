@@ -6,11 +6,7 @@ import useGetShipmentTimeLine from '../../../../../hook/useGetShipmentTimeLine';
 import styles from './styles.module.css';
 import TimeLineItem from './TimeLineItem/index';
 
-interface ItemProps {
-	shipmentId:string,
-}
-
-function TimeLine({ shipmentId }:ItemProps) {
+function TimeLine({ shipmentId }) {
 	const { data: timelineData, loading } = useGetShipmentTimeLine(shipmentId);
 
 	const shipmentData = {};

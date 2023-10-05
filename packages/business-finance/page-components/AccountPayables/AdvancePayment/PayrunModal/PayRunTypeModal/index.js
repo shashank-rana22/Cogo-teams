@@ -7,34 +7,6 @@ import useGetCreateNewPayRun from '../../hooks/useGetCreateNewPayRun';
 import ExitingPayRun from './ExistingPayRun';
 import styles from './styles.module.css';
 
-interface CreateNewPayRunResponse {
-	data?: {
-		id: string;
-	};
-}
-
-interface DataTypes {
-	list: object[];
-	pageIndex?: number;
-	totalPage?: number;
-	totalRecords?: number;
-
-}
-interface FiltersProps {
-	pageIndex:number,
-}
-interface Props {
-	payRunType:boolean,
-	setPayRunType:Function,
-	data:DataTypes,
-	loading:boolean,
-	filters:FiltersProps,
-	setFilters:Function,
-	activeEntity:string,
-	currency:string,
-	setShow:Function,
-}
-
 function PayRunTypeModal({
 	payRunType,
 	setPayRunType,
@@ -45,14 +17,14 @@ function PayRunTypeModal({
 	activeEntity,
 	currency,
 	setShow,
-}:Props) {
+}) {
 	const { push } = useRouter();
 	const { totalRecords } = data || {};
 	const [exitPayRun, setExitPayRun] = useState(false);
 	const { getCreateNewPayRun } = useGetCreateNewPayRun({ activeEntity, currency });
 	const buttonDisabled = loading || totalRecords < 1;
 	const handleClick = async () => {
-		const resp: CreateNewPayRunResponse = await getCreateNewPayRun();
+		const resp = await getCreateNewPayRun();
 		push(`/business-finance/account-payables/advance-payment/create-new-payrun?payrun=${resp?.data?.id}
 		&currency=${currency}&entity=${activeEntity}`);
 

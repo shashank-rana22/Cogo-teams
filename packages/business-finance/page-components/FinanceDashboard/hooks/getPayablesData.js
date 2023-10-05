@@ -3,19 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-interface DateInterface {
-	startDate?:Date
-	endDate?:Date
-}
-interface GlobalInterface {
-	serviceType?:string[],
-	date?: DateInterface
-}
-interface Props {
-	globalFilters?:GlobalInterface;
-	entityTabFilters?:string
-}
-const useGetPayablesList = ({ globalFilters, entityTabFilters }:Props) => {
+const useGetPayablesList = ({ globalFilters, entityTabFilters }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : 'payments/dashboard/finance-receivable-payable',
@@ -33,10 +21,10 @@ const useGetPayablesList = ({ globalFilters, entityTabFilters }:Props) => {
 						entityCode   : entityTabFilters,
 						serviceTypes : globalFilters?.serviceType,
 						accountMode  : 'AP',
-						startDate    : startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false)
+						startDate    : startDate ? format(startDate, 'yyyy-MM-dd', {}, false)
 							: undefined,
 						endDate: endDate
-							? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined,
+							? format(endDate, 'yyyy-MM-dd', {}, false) : undefined,
 					},
 				});
 			} catch (e) {

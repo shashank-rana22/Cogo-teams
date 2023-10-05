@@ -11,19 +11,7 @@ import styles from './styles.module.css';
 
 const DEFAULT_PAGE_INDEX = 1;
 
-interface Props {
-	filters?: {
-		search?: string;
-		pageIndex?: number;
-	};
-	setFilters?: Function;
-	data?: {
-		list: object[];
-	};
-	loading?: boolean;
-}
-
-function ListView({ filters = {}, setFilters = () => {}, data = { list: [] }, loading = false }:Props) {
+function ListView({ filters = {}, setFilters = () => {}, data = { list: [] }, loading = false }) {
 	const { sendMail, mailSendLoading } = useSendMail();
 
 	return (
@@ -53,7 +41,7 @@ function ListView({ filters = {}, setFilters = () => {}, data = { list: [] }, lo
 					loading={loading}
 					page={filters.pageIndex || DEFAULT_PAGE_INDEX}
 					handlePageChange={(pageValue) => {
-						setFilters((prev:object) => ({
+						setFilters((prev) => ({
 							...prev,
 							pageIndex: pageValue,
 						}));

@@ -4,12 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../commons/utils/toastApiError';
 
-interface Props {
-	manageExceptionFilter?: { pageIndex?: number };
-	cycleListId?: string;
-	setManageExceptionFilter?: React.Dispatch<React.SetStateAction<object>>;
-}
-const useManageExceptionList = ({ manageExceptionFilter, cycleListId, setManageExceptionFilter }:Props) => {
+const useManageExceptionList = ({ manageExceptionFilter, cycleListId, setManageExceptionFilter }) => {
 	const [searchValue, setSearchValue] = useState('');
 	const { pageIndex = 1 } = manageExceptionFilter || {};
 	const [{ data:manageExceptionData, loading:manageExceptionLoading }, trigger] = useRequestBf(

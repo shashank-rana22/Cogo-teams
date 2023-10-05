@@ -6,17 +6,11 @@ import useUpdateTag from '../../../../hook/useUpdateTag';
 
 import styles from './styles.module.css';
 
-interface RemoveTageInterface {
-	billId?: string;
-	getBillRefetch?: () => void;
-
-	setRemoveTag: React.Dispatch<React.SetStateAction<boolean>>;
-}
 function RemoveTagConfirmation({
 	setRemoveTag = () => {},
 	getBillRefetch = () => {},
 	billId = '',
-}: RemoveTageInterface) {
+}) {
 	const onClose = () => {
 		setRemoveTag(false);
 		getBillRefetch();

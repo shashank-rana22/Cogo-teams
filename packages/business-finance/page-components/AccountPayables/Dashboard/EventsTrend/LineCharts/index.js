@@ -8,22 +8,7 @@ import { dateDay } from '../../Constants';
 
 import styles from './styles.module.css';
 
-interface ObjectProps {
-	amount?: number,
-	date?: Date,
-	count?: number,
-	smaOfAmount:number,
-	smaOfCount:number,
-}
-
-interface ItemProps {
-	data: ObjectProps[][],
-	isCountView: boolean;
-	showData: string,
-	currency: string,
-}
-
-function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
+function LineCharts({ data, isCountView, showData, currency }) {
 	const sales = data?.[0] || [];
 	const sales1 = data?.[1] || [];
 	const sales2 = data?.[2] || [];
@@ -173,7 +158,7 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 					max  : 'auto',
 				}}
 				yFormat={isCountView ? ' >-.2f' : (value) => formatAmount({
-					amount  : value as any,
+					amount  : value,
 					currency,
 					options : {
 						currencyDisplay : 'code',

@@ -1,37 +1,12 @@
 /* eslint-disable no-nested-ternary */
 import { Tooltip } from '@cogoport/components';
 import { IcMFtick } from '@cogoport/icons-react';
-import startCase from '@cogoport/utils/src/utilities/startCase';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import { formatDate } from '../../../../../../../commons/utils/formatDate';
 
 import styles from './styles.module.css';
-
-interface ItemInt {
-	service_type: string;
-	completed_on?: any;
-	is_sub: boolean;
-	milestone: string;
-}
-
-interface ShipmentInt {
-	services?: string[];
-}
-
-interface ObjInt {
-	completed_on: string;
-}
-
-interface TimeLineProps {
-	item: ItemInt;
-	isLast: boolean;
-	shipmentData: ShipmentInt;
-	timeLine: ObjInt[];
-	index: number;
-	isCompleted: any;
-	isNextMain: any;
-}
 
 function TimeLineItem({
 	item,
@@ -41,7 +16,7 @@ function TimeLineItem({
 	index,
 	isCompleted,
 	isNextMain,
-}: TimeLineProps) {
+}) {
 	const checkService = (shipmentData?.services || []).includes(
 		item?.service_type,
 	);

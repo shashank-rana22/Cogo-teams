@@ -3,21 +3,10 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface OrganizationTypes {
-	organizationName:string,
-}
-
-interface PropsType {
-	advanceDocumentSellerAddress:OrganizationTypes,
-}
-
-interface ItemPropsType {
-	itemData:PropsType
-}
 const ORGANIZATION_NAME_LENGTH = 16;
 const SUBSTRING_END_LENGNTH = 16;
 
-function OrganizationName({ itemData }:ItemPropsType) {
+function OrganizationName({ itemData }) {
 	const { advanceDocumentSellerAddress } = itemData || {};
 	const { organizationName = '' } = advanceDocumentSellerAddress || {};
 	const nameLength = organizationName.length > ORGANIZATION_NAME_LENGTH;

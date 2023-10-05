@@ -3,17 +3,12 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
-import { DetailInterface } from '../../../../../commons/Interfaces/index';
 import CargoDetailPills from '../cargo-details/index';
 
 import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 import TimeLine from './TimeLine/index';
 
-interface DetailsInterface {
-	dataList: DetailInterface;
-	shipmentId: string;
-}
 const { SHIPMENT_ROUTE_MAPPING } = GLOBAL_CONSTANTS;
 
 const DEFAULT_VALUE = {
@@ -51,7 +46,7 @@ const DEFAULT_VALUE = {
 	drop                        : null,
 };
 
-function Details({ dataList = DEFAULT_VALUE, shipmentId = '' }: DetailsInterface) {
+function Details({ dataList = DEFAULT_VALUE, shipmentId = '' }) {
 	const { importer_exporter: importerExporter } = dataList || {};
 	const Router = useRouter();
 

@@ -6,21 +6,13 @@ import styles from './styles.module.css';
 const SPLICE_FROM = 2;
 const SEVERITY_MAIL_POSITION = 1;
 
-interface Props {
-	text?: string;
-	isBody?: boolean;
-	bodyData?: string[];
-	severityData?: object;
-	severityLevel?: string;
-}
-
 function Details({
 	text = '',
 	isBody = false,
 	bodyData = [],
 	severityData = {},
 	severityLevel = '',
-}:Props) {
+}) {
 	const combinedData = [...bodyData];
 
 	if (combinedData?.[SEVERITY_MAIL_POSITION] === '{{severity_mail}}') {

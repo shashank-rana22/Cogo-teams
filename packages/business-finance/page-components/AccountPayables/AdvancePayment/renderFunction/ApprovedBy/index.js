@@ -3,18 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface NameType {
-	name:string,
-}
-interface Props {
-	approvedAt:Date,
-	approvedBy:NameType,
-}
-interface PropsType {
-	itemData:Props,
-}
-
-function ApprovedBy({ itemData }:PropsType) {
+function ApprovedBy({ itemData }) {
 	const { approvedAt, approvedBy } = itemData || {};
 	const { name } = approvedBy || {};
 	return (

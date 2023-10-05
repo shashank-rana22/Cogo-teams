@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { FunctionObjects } from '../Interfaces/index';
-
-const commonFunctions = (functions: { functions?: FunctionObjects }) => {
-	const newFunctions: any = {
+const commonFunctions = (functions) => {
+	const newFunctions = {
 		renderTag: () => (<div>tag</div>),
 		...(functions || {}),
 

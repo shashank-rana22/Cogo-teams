@@ -8,35 +8,7 @@ import { defaultersControls } from './controls';
 import PopoverFilters from './PopoverFilters';
 import styles from './styles.module.css';
 
-interface Global {
-
-	status?:string
-
-	services?:string[]
-
-	invoiceDate?:{ startDate?:Date, endDate?:Date }
-
-	dueDate?:{ startDate?:Date, endDate?:Date }
-
-	currency?:string
-
-	search?:string
-
-}
-
-interface Props {
-
-	globalFilters?: Global,
-
-	setGlobalFilters?:(p: object) => void,
-
-	isClear?:boolean,
-
-	clearFilters?:Function
-
-}
-
-function DefaultersFilters({ globalFilters, setGlobalFilters, isClear, clearFilters }:Props) {
+function DefaultersFilters({ globalFilters, setGlobalFilters, isClear, clearFilters }) {
 	const [visible, setVisible] = useState(false);
 
 	const control = defaultersControls({ globalFilters });
@@ -87,7 +59,7 @@ function DefaultersFilters({ globalFilters, setGlobalFilters, isClear, clearFilt
 				<div className={styles.search}>
 					<Input
 						value={globalFilters?.search}
-						onChange={(value) => { setGlobalFilters((prev:object) => ({ ...prev, search: value })); }}
+						onChange={(value) => { setGlobalFilters((prev) => ({ ...prev, search: value })); }}
 						placeholder="Search by Customer Name /Invoice number /SID"
 						suffix={(
 							<div style={{ margin: '4px', display: 'flex' }}>

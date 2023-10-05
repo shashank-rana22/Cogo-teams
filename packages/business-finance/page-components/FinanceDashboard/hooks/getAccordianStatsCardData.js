@@ -26,10 +26,10 @@ const useGetAccordianStatsData = ({ globalFilters, entityTabFilters }) => {
 		try {
 			trigger({
 				params: {
-					startDate: startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false)
+					startDate: startDate ? format(startDate, 'yyyy-MM-dd', {}, false)
 						: undefined,
 					endDate: endDate
-						? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined,
+						? format(endDate, 'yyyy-MM-dd', {}, false) : undefined,
 					interfaceType : servicemapping[serviceName] || undefined,
 					tradeType     : tradeTypeMapping(),
 					entityCode    : entityTabFilters,

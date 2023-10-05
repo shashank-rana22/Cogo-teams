@@ -4,23 +4,10 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-interface GenericObject {
-	[key: string]: any;
-}
-interface Props {
-	tabs?:string,
-	jobsFilters?:string,
-	filters: GenericObject;
-	setFilters: (p: object) => void;
-	globalFilters:GenericObject
-	entityTabFilters?:string
-	sort?:string
-}
-
 const useGetProfitabillityShipmentList = (
-	{ tabs, filters, setFilters, jobsFilters, globalFilters, entityTabFilters, sort }:Props,
+	{ tabs, filters, setFilters, jobsFilters, globalFilters, entityTabFilters, sort },
 ) => {
-	const [searchValue, setSearchValue] = useState<string>('');
+	const [searchValue, setSearchValue] = useState('');
 
 	const apiUrl = {
 		shipment : '/payments/dashboard/finance-profitability-shipment',
@@ -42,8 +29,8 @@ const useGetProfitabillityShipmentList = (
 	const { query, debounceQuery } = useDebounceQuery();
 	const { startDate, endDate } = globalFilters?.date || {};
 
-	const startDateFilter = startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false) : undefined;
-	const endDateFilters = endDate ? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined;
+	const startDateFilter = startDate ? format(startDate, 'yyyy-MM-dd', {}, false) : undefined;
+	const endDateFilters = endDate ? format(endDate, 'yyyy-MM-dd', {}, false) : undefined;
 	const sortingHandle = sort === 'Asc' || sort === 'Desc';
 	useEffect(() => {
 		const refetch = () => {

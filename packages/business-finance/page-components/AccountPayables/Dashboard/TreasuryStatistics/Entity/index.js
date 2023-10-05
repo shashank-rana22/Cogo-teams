@@ -3,10 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface ItemProps {
-	entityCode:string;
-}
-function Entity({ entityCode }:ItemProps) {
+function Entity({ entityCode }) {
 	const { icon : Icon } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	return (

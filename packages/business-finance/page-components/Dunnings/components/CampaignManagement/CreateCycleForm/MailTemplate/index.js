@@ -6,16 +6,7 @@ import useGetSeverityTemplates from '../../hooks/useGetSeverityTemplates';
 import Details from './Details';
 import styles from './styles.module.css';
 
-interface FormData {
-	severityLevel?: string;
-	templateData?: { name?: string; subject?: string; body?: string[] };
-}
-interface Props {
-	setFormData?: Function;
-	formData?: FormData;
-}
-
-function MailTemplate({ formData = {}, setFormData = () => {} }:Props) {
+function MailTemplate({ formData = {}, setFormData = () => {} }) {
 	const { severityTemplate } = useGetSeverityTemplates();
 	return (
 		<div className={styles.container}>
@@ -39,7 +30,7 @@ function MailTemplate({ formData = {}, setFormData = () => {} }:Props) {
 								value : 'HIGH',
 							}]}
 						activeTab={formData?.severityLevel}
-						setActiveTab={(val:string) => { setFormData({ ...formData, severityLevel: val }); }}
+						setActiveTab={(val) => { setFormData({ ...formData, severityLevel: val }); }}
 						color="#ED3726"
 						background="#FFEAAD"
 					/>

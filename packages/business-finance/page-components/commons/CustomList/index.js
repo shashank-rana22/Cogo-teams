@@ -1,40 +1,14 @@
 import { Pagination } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import React, { ReactNode } from 'react';
+import React from 'react';
 
-import {
-	ConfigType,
-	NestedObj,
-	FunctionObjects,
-	ListDataProps,
-} from '../Interfaces/index';
 import EmptyState from '../StyledTable/EmptyState';
 
 import CardColumn from './CardColumn';
 import Header from './CardHeader';
 import commonFunctions from './commonFunctions';
 import styles from './styles.module.css';
-
-export interface Props {
-	config: ConfigType;
-	sort?: NestedObj;
-	setSort?: React.Dispatch<React.SetStateAction<NestedObj>>;
-	itemData: ListDataProps;
-	renderHeaderCheckbox?: () => ReactNode | '';
-	functions?: FunctionObjects;
-	loading?: boolean;
-	page?: number;
-	handlePageChange?: (currentPage: number) => void;
-	pageSize?: number;
-	renderDropdown?: (p:any) => JSX.Element | null ;
-}
-
-interface StateInterface {
-	general?: {
-		isMobile?: boolean;
-	};
-}
 
 function CustomList({
 	config,
@@ -48,7 +22,7 @@ function CustomList({
 	handlePageChange = () => {},
 	pageSize = 10,
 	renderDropdown = () => null,
-}: Props) {
+}) {
 	const {
 		showHeader = true,
 		fields,
@@ -61,7 +35,7 @@ function CustomList({
 
 	const {
 		general: { isMobile = false },
-	} = useSelector((state: StateInterface) => state);
+	} = useSelector((state) => state);
 
 	const isListEmpty = isEmpty(itemData) || isEmpty(list);
 

@@ -1,4 +1,4 @@
-import { BarDatum, ResponsiveBar } from '@cogoport/charts/bar';
+import { ResponsiveBar } from '@cogoport/charts/bar';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
@@ -11,14 +11,7 @@ const TOOL_TIPS_STYLE = {
 	color        : '#000',
 };
 
-interface BarchartProps {
-	currencyType?: string | number,
-	data?: BarDatum[],
-	margin?: object,
-	dsoResponse?: boolean
-}
-
-const getAmountInLakhCrK = (value:number) => {
+const getAmountInLakhCrK = (value) => {
 	const val = Math.abs(value);
 
 	let formatedAmount = '';
@@ -41,7 +34,7 @@ function BarChart({
 	data = [],
 	margin = {},
 	dsoResponse = false,
-}: BarchartProps) {
+}) {
 	const AXIS_PADDING = {
 		tickSize    : 0,
 		tickPadding : 12,
@@ -78,7 +71,7 @@ function BarChart({
 							{!dsoResponse ? (
 								formatAmount({
 									amount   : value,
-									currency : currencyType as string,
+									currency : currencyType,
 									options  : {
 										currencyDisplay       : 'code',
 										compactDisplay        : 'short',
@@ -110,8 +103,8 @@ function BarChart({
 								{
 								!dsoResponse ? (
 									formatAmount({
-										amount   : bar.data.value as any,
-										currency : currencyType as string,
+										amount   : bar.data.value,
+										currency : currencyType,
 										options  : {
 											notation              : 'compact',
 											currencyDisplay       : 'code',

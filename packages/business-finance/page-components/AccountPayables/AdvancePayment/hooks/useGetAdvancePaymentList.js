@@ -7,39 +7,11 @@ import { useCallback, useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
-interface ItemProps {
-	advanceDocumentId?: string;
-}
-
-interface Target {
-	checked: boolean;
-}
-
-interface EventDataType {
-	target: Target;
-}
-
-interface NewDataListProps {
-	payableAmount: string;
-	tdsAmount: string;
-	invoiceAmount: string;
-}
-
-interface NestedObj {
-	[key: string]: string;
-}
-
-interface FilterProps {
-	activeEntity?: string;
-	sort: NestedObj;
-	viewSelectedInvoice?: boolean;
-}
-
 const useGetAdvancePaymentList = ({
 	activeEntity,
 	sort,
 	viewSelectedInvoice,
-}: FilterProps) => {
+}) => {
 	const { user_data: UserData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
@@ -120,7 +92,7 @@ const useGetAdvancePaymentList = ({
 		const newData = { ...data };
 		const { list = [] } = newData || {};
 		if (newData.list) {
-			newData.list = list.map((item: NewDataListProps) => {
+			newData.list = list.map((item) => {
 				const {
 					payableAmount = '',
 					tdsAmount = '',
@@ -311,7 +283,7 @@ const useGetAdvancePaymentList = ({
 		viewSelectedInvoice,
 	]);
 
-	const deleteInvoices = async (id: string) => {
+	const deleteInvoices = async (id) => {
 		try {
 			await deleteSelectedInvoiceTrigger({
 				data: {
@@ -326,7 +298,7 @@ const useGetAdvancePaymentList = ({
 		}
 	};
 
-	const onChangeTableHeaderCheckbox = (event: EventDataType) => {
+	const onChangeTableHeaderCheckbox = (event) => {
 		setApiData((prevData) => {
 			const { list = [] } = prevData || {};
 			const newList = list.map((item) => ({
@@ -350,7 +322,7 @@ const useGetAdvancePaymentList = ({
 		);
 	}
 
-	const onChangeTableBodyCheckbox = (itemData: ItemProps) => {
+	const onChangeTableBodyCheckbox = (itemData) => {
 		const { advanceDocumentId = '' } = itemData || {};
 		setApiData((prevData) => {
 			const index = (prevData.list || []).findIndex(
@@ -370,7 +342,7 @@ const useGetAdvancePaymentList = ({
 			return prevData;
 		});
 	};
-	function TableBodyCheckbox(itemData: ItemProps) {
+	function TableBodyCheckbox(itemData) {
 		const { advanceDocumentId = '' } = itemData || {};
 		const { list = [] } = apiData || {};
 		const isChecked = list.find(

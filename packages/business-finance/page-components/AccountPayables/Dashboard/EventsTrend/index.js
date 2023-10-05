@@ -11,18 +11,7 @@ import { filterControls } from './filterControl';
 import LineCharts from './LineCharts';
 import styles from './styles.module.css';
 
-interface FilterProps {
-	service?: string,
-	currency?: string,
-}
-interface ItemProps {
-	showData: string;
-	setShowData: Function;
-	filtersData: FilterProps;
-	activeEntity: string;
-}
-
-function EventsTrend({ showData, setShowData, filtersData, activeEntity }:ItemProps) {
+function EventsTrend({ showData, setShowData, filtersData, activeEntity }) {
 	const [isCountView, setIsCountView] = useState(false);
 	const {
 		data,
@@ -64,7 +53,7 @@ function EventsTrend({ showData, setShowData, filtersData, activeEntity }:ItemPr
 							name="count_view"
 							size="md"
 							showOnOff
-							value={isCountView as unknown as string}
+							value={isCountView}
 							onChange={() => setIsCountView(!isCountView)}
 							disabled={false}
 						/>

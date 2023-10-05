@@ -3,21 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface ItemProps {
-	activeTab:string,
-	setActiveTab:Function,
-	data:StashProps,
-	push: (a: string, b: string) => void,
-}
-interface StashProps {
-	statsData:Props,
-}
-interface Props {
-	REQUESTED:number,
-	REJECTED:number,
-	APPROVED:number,
-}
-function Headers({ activeTab, setActiveTab, data, push }:ItemProps) {
+function Headers({ activeTab, setActiveTab, data, push }) {
 	const { statsData } = data || {};
 	const { REQUESTED, REJECTED, APPROVED } = statsData || {};
 	const handleTabChange = (v) => {

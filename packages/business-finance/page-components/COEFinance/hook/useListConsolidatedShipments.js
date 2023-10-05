@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-const useListConsolidatedShipments = (serialIds:Array<string>) => {
+const useListConsolidatedShipments = (serialIds) => {
 	const [pageFilters, setPageFilters] = useState({ page: 1 });
 	const [{ data, loading }, trigger] = useRequest(
 		{

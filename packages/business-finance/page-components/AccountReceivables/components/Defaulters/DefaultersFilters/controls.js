@@ -1,15 +1,10 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 
-interface Options {
-	label:string,
-	value:string
-}
-
 export const defaultersControls = ({ globalFilters }) => {
 	const geo = getGeoConstants();
 
-	const MIGRATE_STATUS:Options[] | any = geo.options.migration_status;
-	const INVOICE_STATUSES:Options[] | any = geo.options.invoice_status;
+	const MIGRATE_STATUS = geo.options.migration_status;
+	const INVOICE_STATUSES = geo.options.invoice_status;
 
 	const { migrated, invoiceStatus } = globalFilters || {};
 

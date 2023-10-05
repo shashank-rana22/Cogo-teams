@@ -14,16 +14,7 @@ import styles from './styles.module.css';
 import tatColumn from './tatColumn';
 import { timeFrameControls } from './timeFrameControls';
 
-interface FilterProps {
-	currency:string,
-	service:string,
-}
-interface ItemProps {
-	filtersData: FilterProps,
-	activeEntity: string;
-}
-
-function BillTurnAroundTime({ filtersData, activeEntity }:ItemProps) {
+function BillTurnAroundTime({ filtersData, activeEntity }) {
 	const [firstEvent, setFirstEvent] = useState('');
 	const [secondEvent, setSecondEvent] = useState('');
 

@@ -10,11 +10,6 @@ import Document from './Document/index';
 import InvoiceDetail from './InvoiceDetail/index';
 import styles from './styles.module.css';
 
-export interface ShipmentDataProps {
-	id: string,
-	serial_id: string,
-}
-
 function ShipmentCard({ shipmentData }) {
 	const router = useRouter();
 	const [dropDown, setDropDown] = useState('closed');

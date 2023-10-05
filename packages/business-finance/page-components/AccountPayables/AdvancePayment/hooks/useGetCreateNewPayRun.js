@@ -2,11 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface FilterProps {
-	activeEntity: string;
-	currency:string;
-}
-const useGetCreateNewPayRun = ({ activeEntity, currency }:FilterProps) => {
+const useGetCreateNewPayRun = ({ activeEntity, currency }) => {
 	const {
 		user_data:UserData,
 	} = useSelector(({ profile }) => ({

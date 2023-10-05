@@ -6,35 +6,7 @@ import PopoverContent from '../PopoverContent';
 
 import styles from './styles.module.css';
 
-interface AgentProps {
-	id?: string;
-	name?: string;
-	email?: string;
-}
-
-interface ItemProps {
-	creditController?: AgentProps;
-	salesAgent?: AgentProps;
-	businessName?: string;
-	collectionPartyType?: string[];
-	serialId?: string;
-	countryCode?: string;
-	organizationSerialId?: string;
-	updatedAt?: Date;
-	selfOrganizationName?: string;
-	organizationId?: string;
-	selfOrganizationId?: string;
-	kam?: AgentProps;
-}
-
-interface PopoverProps {
-	data?: object;
-	loading?: boolean;
-	handleClick?: Function;
-	item?: ItemProps;
-}
-
-function PopoverTags({ data = {}, loading = false, handleClick = () => {}, item = {} }: PopoverProps) {
+function PopoverTags({ data = {}, loading = false, handleClick = () => {}, item = {} }) {
 	const { kam = {}, creditController = {}, salesAgent = {} } = item || {};
 
 	const { id = '', name = '', email = '' } = kam;

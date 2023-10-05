@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetShipmentTimeLine = (shipmentId:string) => {
+const useGetShipmentTimeLine = (shipmentId) => {
 	const [{ data, loading }, trigger] = useRequest(
 		{
 			url    : '/shipment/get_service_timeline',

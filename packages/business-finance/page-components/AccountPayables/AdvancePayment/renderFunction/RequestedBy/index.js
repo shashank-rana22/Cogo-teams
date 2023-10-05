@@ -3,18 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface ByProps {
-	name:string
-}
-interface Props {
-	requestedAt:Date,
-	requestedBy:ByProps,
-}
-interface PropsType {
-	itemData:Props,
-}
-
-function RequestedBy({ itemData }:PropsType) {
+function RequestedBy({ itemData }) {
 	const { requestedAt, requestedBy } = itemData || {};
 	const { name } = requestedBy || {};
 	return (

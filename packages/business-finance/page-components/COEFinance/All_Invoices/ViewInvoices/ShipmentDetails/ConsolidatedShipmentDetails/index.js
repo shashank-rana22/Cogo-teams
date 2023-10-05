@@ -7,18 +7,9 @@ import LoadingState from './LoadingState/index';
 import ShipmentCard from './ShipmentCard/index';
 import styles from './styles.module.css';
 
-export interface ConsolidatedSidsInterace {
-	consolidatedSids: Array<string>,
-}
-
-export interface ItemDataProps {
-	id: string,
-	serial_id: string,
-}
-
 const CARD_ARRAY = [1, 2, 3, 4];
 
-function ShipmentIdView({ consolidatedSids }: ConsolidatedSidsInterace) {
+function ShipmentIdView({ consolidatedSids }) {
 	const {
 		loading,
 		data,
@@ -46,7 +37,7 @@ function ShipmentIdView({ consolidatedSids }: ConsolidatedSidsInterace) {
 				{ list?.map((item) => <ShipmentCard key={item?.serial_id} shipmentData={item} />)}
 				<Pagination
 					currentPage={page}
-					onPageChange={(val: number) => setPageFilters({
+					onPageChange={(val) => setPageFilters({
 						...pageFilters,
 						page: val,
 					})}

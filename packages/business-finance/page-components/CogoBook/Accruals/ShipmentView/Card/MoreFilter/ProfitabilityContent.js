@@ -1,22 +1,15 @@
 import { Select, RadioGroup, Input } from '@cogoport/components';
 
-import { FilterInterface } from '../../../interface';
 import { optionsData, optionsRadio } from '../../constant';
 
 import styles from './styles.module.css';
 
-interface Props {
-	filters:FilterInterface
-	setFilters: React.Dispatch<React.SetStateAction<FilterInterface>>
-	profitNumber?:string
-	setProfitNumber: React.Dispatch<React.SetStateAction<string>>
-}
 function ProfitabilityContent({
 	filters = {},
 	setFilters = () => {},
 	profitNumber = '',
 	setProfitNumber = () => {},
-}:Props) {
+}) {
 	const { profitType = '', range = '' } = filters || {};
 	const getPlaceHolder = () => {
 		if (profitType === 'percentage' && range === '<=x=<') {

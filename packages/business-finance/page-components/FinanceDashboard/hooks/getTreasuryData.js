@@ -3,12 +3,8 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-interface Props {
-	[key:string]:any,
-}
-
-const useGetTreasuryStats = (tabs:string) => {
-	const [treasuryFilters, setTreasuryFilters] = useState<Props>({
+const useGetTreasuryStats = (tabs) => {
+	const [treasuryFilters, setTreasuryFilters] = useState({
 	});
 	const { startDate, endDate } = treasuryFilters?.date || {};
 
@@ -27,10 +23,10 @@ const useGetTreasuryStats = (tabs:string) => {
 				trigger({
 					params: {
 						entityCode : tabs === 'all' ? ['101', '301'] : tabs,
-						fromDate   : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
+						fromDate   : startDate ? format(startDate, 'yyyy-MM-dd 00:00:00', {}, false)
 							: undefined,
 						toDate: endDate
-							? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
+							? format(endDate, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
 					},
 				});
 			} catch (err) {

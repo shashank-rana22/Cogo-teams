@@ -4,23 +4,7 @@ import { handleBillType } from '../../../../../../utils/getHandleBillType';
 
 import styles from './styles.module.css';
 
-interface ItemTypes {
-	billDocumentUrl?: string;
-	billType?: string,
-	isProforma?: boolean,
-	billNumber?: string;
-	invoicePdfUrl?: string;
-	proformaPdfUrl?: string;
-	invoiceNumber?: string;
-	proformaNumber?: string;
-}
-
-interface PropsType {
-	item: ItemTypes;
-	field: any;
-}
-
-function InvoiceNumber({ item, field }: PropsType) {
+function InvoiceNumber({ item, field }) {
 	const {
 		billDocumentUrl,
 		billType = '',

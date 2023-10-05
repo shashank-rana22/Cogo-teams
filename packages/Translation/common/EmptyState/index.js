@@ -1,20 +1,12 @@
 import styles from './styles.module.css';
 
-interface Props {
-	height?: number;
-	width?: number;
-	emptyText?: string;
-	flexDirection?: 'row' | 'column';
-	textSize?: string;
-}
-
 function EmptyState({
 	height = 350,
 	width = 600,
 	emptyText = 'Data not found',
 	flexDirection = 'column',
 	textSize = '16px',
-}: Props) {
+}) {
 	return (
 		<div className={`${styles.container} ${styles[flexDirection]}`}>
 			<img

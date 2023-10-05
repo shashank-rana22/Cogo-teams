@@ -2,18 +2,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface ObjectInterface {
-	name: String,
-	value:String
-}
-
-interface TabInterface {
-	options: Array<ObjectInterface>;
-	value: String,
-	setValue: React.SetStateAction<any>
-}
-
-function TabSelect({ options, value, setValue } :TabInterface) {
+function TabSelect({ options, value, setValue }) {
 	return (
 		<div className={styles.container}>
 			{(options || []).map((item) => (

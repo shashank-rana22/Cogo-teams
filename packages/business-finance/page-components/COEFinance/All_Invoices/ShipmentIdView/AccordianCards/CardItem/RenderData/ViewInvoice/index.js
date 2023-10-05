@@ -3,28 +3,10 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface ItemTypes {
-	urgencyTag?: string;
-	billId?:string;
-	billNumber?:string;
-	organizationId?:string;
-	jobNumber?: string;
-	status?: string;
-	invoicePdfUrl?: string;
-	proformaPdfUrl?: string;
-	jobType?:string
-}
-
-interface PropsType {
-	item: ItemTypes;
-	field: { isIncome?:boolean }
-
-}
-
-function ViewInvoice({ item, field }: PropsType) {
+function ViewInvoice({ item, field }) {
 	const { isIncome } = field || {};
 	const router = useRouter();
-	const handleChange = (itemData:ItemTypes) => {
+	const handleChange = (itemData) => {
 		const {
 			billId, billNumber, organizationId, jobNumber, status, invoicePdfUrl, proformaPdfUrl, jobType,
 		} = itemData || {};

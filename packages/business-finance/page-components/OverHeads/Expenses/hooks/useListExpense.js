@@ -5,37 +5,6 @@ import { useContext, useCallback } from 'react';
 
 import { EntityContext } from '../../commons/Contexts';
 
-interface DateFormat {
-	startDate?: Date;
-	endDate?: Date;
-}
-interface Filters {
-	branch?: string | number;
-	expenseCategory?: string;
-	searchValue?: string;
-	pageSize?: number;
-	pageIndex?: number;
-	uploadDate?: DateFormat;
-	dueDate?: DateFormat;
-	billDate?: DateFormat;
-	paymentStatus?: string;
-}
-
-interface Sort {
-	invoiceAmountSortType?: string;
-	tdsSortType?: string;
-	payableSortType?: string;
-	paidAmountSortType?: string;
-}
-interface Filter {
-	expenseFilters?: Filters;
-	id?: string | number;
-	expenseType?: string;
-	sort?: Sort;
-	pageIndexVal?: number;
-	pageSizeVal?: number;
-}
-
 const formatedDate = (date) => formatDate({
 	date,
 	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
@@ -51,7 +20,7 @@ const useListExpense = ({
 	sort,
 	pageIndexVal,
 	pageSizeVal,
-}: Filter) => {
+}) => {
 	const {
 		paymentStatus = '',
 		expenseCategory = '',

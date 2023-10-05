@@ -1,20 +1,13 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
-
-interface ModalProps {
-	onClose?: () => void;
-	children?: ReactNode;
-	onOutsideClick?: boolean;
-	style?: React.CSSProperties;
-}
 
 function Modal({
 	style,
 	children = null,
 	onClose = () => {},
 	onOutsideClick = true,
-}:ModalProps) {
+}) {
 	const handleBackdropClick = () => {
 		if (onOutsideClick) {
 			onClose();

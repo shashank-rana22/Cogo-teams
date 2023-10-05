@@ -1,4 +1,3 @@
-import { BarDatum } from '@cogoport/charts/bar';
 import { Tooltip, Toggle } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
@@ -10,18 +9,6 @@ import DashboardLoader from '../../../commons/DashboardLoader';
 
 import styles from './styles.module.css';
 
-interface QuaterlyProps {
-	quarter?: string,
-	qsoForQuarter?: number,
-	currency?: string
-}
-interface DailySalesProps {
-	dailySalesOutstandingData?: BarDatum[],
-	dailySalesOutstandingApiLoading?: boolean,
-	quaterly?: QuaterlyProps[],
-	quaterlyLoading?: boolean
-}
-
 const MARGIN = {
 	top    : 10,
 	right  : 0,
@@ -32,7 +19,7 @@ const MARGIN = {
 function DailySalesOutstanding({
 	dailySalesOutstandingData,
 	dailySalesOutstandingApiLoading, quaterly, quaterlyLoading,
-}: DailySalesProps) {
+}) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const [params, onChangeParams] = useState({
@@ -118,7 +105,7 @@ function DailySalesOutstanding({
 								name="quarter_toggle"
 								size="md"
 								value={params.quarterView}
-								onChange={(e) => onChangeParams((pv:any) => ({
+								onChange={(e) => onChangeParams((pv) => ({
 									...pv,
 									quarterView: e?.target?.checked ? 'quarterView' : 'normalView',
 
@@ -133,7 +120,7 @@ function DailySalesOutstanding({
 								name="graph_toggle"
 								size="md"
 								value={params.graphView}
-								onChange={(e) => onChangeParams((pv:any) => ({
+								onChange={(e) => onChangeParams((pv) => ({
 									...pv,
 									graphView: e?.target?.checked ? 'graphView' : pv.quarterView,
 
