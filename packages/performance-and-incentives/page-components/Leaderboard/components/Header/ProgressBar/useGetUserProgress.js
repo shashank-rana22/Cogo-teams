@@ -15,7 +15,7 @@ function useGetUserProgress() {
 	}, { manual: false });
 
 	return {
-		progressData: data,
+		progressData: data?.target,
 	};
 }
 
