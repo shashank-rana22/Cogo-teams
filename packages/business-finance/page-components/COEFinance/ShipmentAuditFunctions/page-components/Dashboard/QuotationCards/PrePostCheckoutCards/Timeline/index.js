@@ -15,12 +15,12 @@ export default function Timeline({
 	loading = false,
 	data = {},
 	title = '',
-	services,
-	accordionState,
-	toggleAccordion,
+	services = '',
+	accordionState = {},
+	toggleAccordion = '',
 	// setAccordionState,
-	category,
-	getPrePostShipmentQuotes,
+	category = '',
+	getPrePostShipmentQuotes = {},
 }) {
 	const isOpen = accordionState[`${category}_${title}`];
 	const currentKey = `${category}_${title}`;
@@ -37,7 +37,7 @@ export default function Timeline({
 						{!title.includes('MODIFIED') && (
 							<div style={{ display: 'flex', width: '50%', justifyContent: 'space-between' }}>
 								<div className={`${isOpen ? styles.nothing : styles.other_title}`}>
-									<div className={styles.regular}>Income : </div>
+									<div className={styles.regular}>{category === 'BUY' ? 'Expense' : 'Income'}</div>
 									<div>
 										{formatAmount({
 											amount   : services?.grandTotal || ZERO_VALUE,
@@ -75,7 +75,9 @@ export default function Timeline({
 						&& (
 							<div style={{ display: 'flex', alignItems: 'center', marginBottom: '24px' }}>
 								<div className={`${!isOpen ? styles.nothing : styles.margin}`}>
-									<div className={styles.regular}>Income </div>
+									<div className={styles.regular}>
+										{category === 'BUY' ? 'Expense' : 'Income'}
+									</div>
 									<div>
 										{formatAmount({
 											amount   : services?.grandTotal || ZERO_VALUE,

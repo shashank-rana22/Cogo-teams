@@ -10,11 +10,11 @@ function PrePostCheckoutCards({
 	data = {},
 	loading = false,
 	type = '',
-	accordionState,
-	toggleAccordion,
+	accordionState = false,
+	toggleAccordion = '',
 	setAccordionState = () => {},
-	category,
-	getPrePostShipmentQuotes,
+	category = '',
+	getPrePostShipmentQuotes = {},
 }) {
 	return (
 		<div style={{ width: '100%' }}>

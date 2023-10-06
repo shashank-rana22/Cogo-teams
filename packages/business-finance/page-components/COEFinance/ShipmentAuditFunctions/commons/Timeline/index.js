@@ -69,7 +69,7 @@ export default function Timeline({
 						</div>
 
 						<div className={`${isOpen ? styles.nothing : styles.other_title}`}>
-							<div className={styles.regular}>Income : </div>
+							<div className={styles.regular}>{type === 'buy' ? 'Expense: ' : 'Income: '}</div>
 							<div>
 								{formatAmount({
 									amount   : income,
