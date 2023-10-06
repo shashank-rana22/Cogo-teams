@@ -122,8 +122,9 @@ export const invoiceconfig = ({ utrData = [], utrLoading = false }) => [
 					<Tooltip
 						theme="light"
 						interactive
+						placement="left"
 						content={(
-							<div>
+							<div className={styles.contentutr}>
 								{(utrDetailsBills || []).map(({ transactionRef, createdAt, billId }) => (
 									<>
 										<div key={billId} className={styles.utrval}>{transactionRef}</div>
