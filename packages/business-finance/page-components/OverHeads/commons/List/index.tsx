@@ -71,6 +71,20 @@ function List({
 
 	const isListEmpty = !itemData || list?.length === 0;
 
+	const myRibbonStyle = (status) => {
+		if (status === 'ACCEPTED' || status === 'FINANCE_ACCEPTED') {
+			return `${styles.ribbon} ${styles.ribbon_accepted}`;
+		}
+		if (status === 'INITIATED' || status === 'LOCKED') {
+			return `${styles.ribbon} ${styles.ribbon_pending}`;
+		}
+		if (status === 'REJECTED' || status === 'FINANCE_REJECTED') {
+			return `${styles.ribbon} ${styles.ribbon_rejected}`;
+		}
+
+		return `${styles.ribbon}`;
+	};
+
 	return (
 		<section>
 			{showHeader && !isMobile && (
@@ -100,7 +114,7 @@ function List({
 								isMobile={isMobile}
 							/>
 							{showRibbon ? (
-								<div className={styles.ribbon}>
+								<div className={myRibbonStyle(singleitem?.status)}>
 									{toTitleCase(singleitem?.status || '')}
 								</div>
 							) : null}

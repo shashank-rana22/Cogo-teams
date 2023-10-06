@@ -1,5 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { Select, Button, Input, Tooltip } from '@cogoport/components';
+import { Button, Input, Tooltip } from '@cogoport/components';
+import { AsyncSelect } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
@@ -9,6 +10,7 @@ import {
 	IcMInfo,
 } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
@@ -20,7 +22,6 @@ import useListVendors from './hooks/useListVendors';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
 import configs from './utils/config';
-import Controls from './utils/controls';
 
 interface ItemProps {
 	createdDate?: String;
@@ -44,15 +45,13 @@ function VenderComponent() {
 	const { VENDOR_CONFIG } = configs();
 
 	const [filters, setFilters] = useState({
-		paymentStatus : '',
-		CATEGORY      : '',
-		searchValue   : '',
-		page          : 1,
-		pageLimit     : 10,
+		CATEGORY    : '',
+		searchValue : '',
+		page        : 1,
+		pageLimit   : 10,
 	});
 
 	const [sort, setSort] = useState({
-		paymentSortType     : null,
 		openInvoiceSortType : null,
 		createdAtSortType   : null,
 	});
@@ -63,6 +62,7 @@ function VenderComponent() {
 		setFilters((previousState) => ({
 			...previousState,
 			...{ [value]: e },
+			page: 1,
 		}));
 	};
 
@@ -76,25 +76,17 @@ function VenderComponent() {
 		return (
 			<div className={styles.header_container}>
 				<div className={styles.left_container}>
-					{Object.keys(Controls).map((key) => {
-						const {
-							options = [],
-							placeholder = '',
-							value = '',
-						} = Controls[key];
-						return (
-							<Select
-								key={key}
-								value={filters?.[key]}
-								onChange={(e: any) => handleChange(e, value)}
-								placeholder={placeholder}
-								options={options}
-								className={styles.select}
-								size="sm"
-								isClearable
-							/>
-						);
-					})}
+					<AsyncSelect
+						name="Category"
+						onChange={(e: any) => handleChange(e, 'CATEGORY')}
+						placeholder="Category"
+						asyncKey="list_expense_category"
+						renderLabel={(item) => startCase(item.categoryName)}
+						valueKey="id"
+						value={filters.CATEGORY}
+						initialCall
+						isClearable
+					/>
 				</div>
 				<div className={styles.right_container}>
 					<Input
@@ -256,6 +248,8 @@ function VenderComponent() {
 				sort={sort}
 				setSort={setSort}
 				functions={functions}
+				page={filters.page}
+				pageSize={filters.pageLimit}
 				handlePageChange={(pageValue: number) => {
 					setFilters((p) => ({ ...p, page: pageValue }));
 				}}

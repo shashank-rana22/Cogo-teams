@@ -83,3 +83,25 @@
 	align-items: center;
 	margin-right: 12px;
 }
+
+.segmented_control {
+	display: flex;
+	align-items: center;
+}
+
+.filtercont {
+	margin-left: 24px;
+
+	.react-datepicker__input-container {
+		height: 34px !important;
+	}
+
+	.react-datepicker-wrapper {
+		height: 34px !important;
+	}
+
+	input {
+		height: 34px !important;
+		font-size: 10px !important;
+	}
+}

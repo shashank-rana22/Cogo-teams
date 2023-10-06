@@ -131,7 +131,8 @@ function ExpenseComponent() {
 	const handleChange = (e: string) => {
 		setExpenseFilters((previousState) => ({
 			...previousState,
-			searchValue: e,
+			searchValue : e,
+			pageIndex   : 1,
 		}));
 	};
 

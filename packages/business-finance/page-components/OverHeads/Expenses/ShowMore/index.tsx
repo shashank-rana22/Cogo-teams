@@ -7,6 +7,8 @@ import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
+import Filter from '../../../commons/Filters';
+import filtersconfig from '../../Vendors/filtersconfig';
 import ViewRecurringSummery from '../CreateExpenseModal/ViewRecurringSummery';
 import useListExpense from '../hooks/useListExpense';
 import useSendEmail from '../hooks/useSendEmail';
@@ -16,14 +18,15 @@ import styles from './styles.module.css';
 function ShowMore({ id, showExpenseModal, incidentId }) {
 	const [moreData, setMoreData] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
+	const [expenseFilters, setExpenseFilters] = useState({});
 	const { getList, listData, listLoading } = useListExpense({
+		expenseFilters,
 		id,
 		expenseType  : 'RECURRING',
 		pageIndexVal : currentPage,
 		pageSizeVal  : 5,
 	});
 	const totalRecords = listData?.totalRecords || 0;
-
 	const billList = listData?.list;
 
 	const { sendMail, loading: mailLoading } = useSendEmail();
@@ -34,7 +37,7 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 		} else {
 			setCurrentPage(1);
 		}
-	}, [getList, moreData]);
+	}, [getList, moreData, expenseFilters]);
 
 	useEffect(() => {
 		if (showExpenseModal === true) {
@@ -93,6 +96,15 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 					<div className={styles.list_container}>
 						{!isEmpty(billList) ? (
 							<div>
+								<div className={styles.segmented_control}>
+									<div className={styles.filtercont}>
+										<Filter
+											controls={filtersconfig}
+											filters={expenseFilters}
+											setFilters={setExpenseFilters}
+										/>
+									</div>
+								</div>
 								{billList?.map((bill) => {
 									const {
 										billNumber,

@@ -24,7 +24,7 @@ interface Props {
 function ShowMore({ vendorId }: Props) {
 	const [moreData, setMoreData] = useState(false);
 	const [pageIndex, setPageIndex] = useState(1);
-	const [expenseType, setExpenseType] = useState('RECURRING');
+	const [expenseType, setExpenseType] = useState('NON_RECURRING');
 	const [filters, setFilters] = useState({});
 
 	const { getList, listData, listLoading } = useListExpense({ filters });

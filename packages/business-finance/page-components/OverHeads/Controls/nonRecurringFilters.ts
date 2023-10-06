@@ -86,28 +86,4 @@ export const recurringFilters = [
 		size           : 'sm',
 		options        : REPEAT_FREQUENCY,
 	},
-	{
-		name                  : 'uploadDate',
-		type                  : 'singleDateRange',
-		placeholder           : 'Upload Date',
-		isPreviousDaysAllowed : true,
-		span                  : 1.5,
-		isClearable           : true,
-	},
-	{
-		name                  : 'dueDate',
-		type                  : 'singleDateRange',
-		placeholder           : 'Due Date',
-		isPreviousDaysAllowed : true,
-		span                  : 1.5,
-		isClearable           : true,
-	},
-	{
-		name                  : 'billDate',
-		type                  : 'singleDateRange',
-		isPreviousDaysAllowed : true,
-		placeholder           : 'Bill Date',
-		span                  : 1.5,
-		isClearable           : true,
-	},
 ];
