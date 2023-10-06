@@ -132,6 +132,7 @@ export const getSpectatorTypeOptions = ({ t }) => [
 	{ label: t('myTickets:spectator_type_2'), value: 'agent' },
 	{ label: t('myTickets:spectator_type_3'), value: 'closure_authorizer' },
 	{ label: t('myTickets:spectator_type_4'), value: 'configuration_owner' },
+	{ label: t('myTickets:spectator_type_5'), value: 'user_manager' },
 ];
 
 export const getTicketActionLabel = ({ t, type }) => {
