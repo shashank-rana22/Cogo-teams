@@ -46,7 +46,7 @@ function PortPair({ portPair, fromDetails }) {
 					<div>
 						<div className={styles.code}>{`(${singlePortCode})`}</div>
 						<div className={styles.name}>
-							<Tooltip content={originName}>
+							<Tooltip content={singlePortName}>
 								<div className={styles.subname}>{`${singlePortName}`}</div>
 							</Tooltip>
 							<div className={styles.country}>{`,${singlePortCountry}`}</div>
