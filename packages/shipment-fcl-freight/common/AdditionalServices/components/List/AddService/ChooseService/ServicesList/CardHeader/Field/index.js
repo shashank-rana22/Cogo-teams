@@ -4,22 +4,22 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
-function Field({ field }) {
+function Field({ field = {} }) {
 	return (
 		<div
 			key={field?.key || field?.label}
 			className={styles.header_col}
 		>
 			<div className={styles.card_title}>
-				{field.tooltip ? (
-					<Tooltip theme="light" content={field.tooltip} placement="top">
+				{field?.tooltip ? (
+					<Tooltip theme="light" content={field?.tooltip} placement="top">
 						<span>
-							{field.label}
+							{field?.label}
 							<IcMInfo />
 						</span>
 					</Tooltip>
 				) : (
-					field.label
+					field?.label
 				)}
 			</div>
 		</div>

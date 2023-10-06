@@ -118,6 +118,7 @@ function useGetBillsList({
 		setBillsFilters,
 		orderBy,
 		setOrderBy,
+		refetch,
 	};
 }
 

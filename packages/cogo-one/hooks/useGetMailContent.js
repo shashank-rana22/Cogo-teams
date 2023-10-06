@@ -57,9 +57,10 @@ function useGetMailContent({
 
 			const newContent = formatBody({ mailResData, attachmentResData });
 			setMessage(newContent);
-			setExpandedState(true);
 		} catch (err) {
 			console.error(err);
+		} finally {
+			setExpandedState(true);
 		}
 	}, [combinedLoading, message, trigger, messageId, source, attachmentTrigger, setExpandedState]);
 

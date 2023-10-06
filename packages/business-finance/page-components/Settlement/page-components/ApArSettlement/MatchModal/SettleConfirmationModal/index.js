@@ -11,6 +11,7 @@ export default function ConfirmSettle({
 	date = '',
 	fileValue = {},
 	settleLoading = false,
+	setJvSearch = () => {},
 	t = () => {},
 }) {
 	return (
@@ -45,6 +46,7 @@ export default function ConfirmSettle({
 						themeType="primary"
 						onClick={() => {
 							submitSettleMatch({ updatedData, date, fileValue, setSettleConfirmation });
+							setJvSearch('');
 						}}
 						disabled={settleLoading}
 					>

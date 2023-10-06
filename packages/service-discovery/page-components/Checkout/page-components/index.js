@@ -6,7 +6,6 @@ import { isEmpty } from '@cogoport/utils';
 import Header from '../../../common/Header';
 import { LoadingState } from '../../../common/LoadingState';
 import DotLoader from '../../../common/LoadingState/DotLoader';
-import TryOldBanner from '../../../common/TryOldBanner';
 import { CheckoutContext } from '../context';
 import getRedirectionDetails from '../utils/getRedirectionDetails';
 
@@ -123,8 +122,6 @@ function Checkout({ checkout_type = '' }) {
 						/>
 					))}
 				</Breadcrumb>
-
-				<TryOldBanner />
 
 				<div className={styles.children}>
 					<ActiveComponent

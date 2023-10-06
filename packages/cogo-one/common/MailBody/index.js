@@ -60,7 +60,7 @@ function MailBody({
 	isTheFirstMessageId = '',
 }) {
 	const { source = '' } = formattedData || {};
-
+	const [initialLoad, setInitialLoad] = useState(true);
 	const { viewType } = mailProps;
 
 	const {
@@ -136,13 +136,14 @@ function MailBody({
 	const emailBorderColor = getEmailBorder({ isDraft, emailStatus });
 
 	useEffect(() => {
-		if (isFirstMessage) {
+		if (isFirstMessage && !expandedState && initialLoad) {
 			if (!bodyMessage && !isDraft) {
 				getEmailBody();
 			}
 			setExpandedState(true);
+			setInitialLoad(false);
 		}
-	}, [bodyMessage, getEmailBody, isDraft, isFirstMessage]);
+	}, [bodyMessage, expandedState, getEmailBody, initialLoad, isDraft, isFirstMessage]);
 
 	return (
 		<div className={styles.email_container}>

@@ -761,6 +761,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'get_organization_restricted_settings_config',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -2784,6 +2789,11 @@ const partner = {
 		},
 		{
 			api          : 'update_organization_asset',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_user_contact',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -9232,6 +9242,10 @@ const partner = {
 			api         : 'get_common_job_list_service_charges',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_incident_management_incident_list_incident_types',
+			access_type : 'private',
+		},
 	],
 	vietnam_account_receivables: [
 		{
@@ -9363,6 +9377,10 @@ const partner = {
 		},
 		{
 			api         : 'get_muneem_reports_invoice_payment_status_mismatch',
+			access_type : 'private',
+		},
+		{
+			api         : 'list_cogo_entities',
 			access_type : 'private',
 		},
 	],
@@ -9759,6 +9777,10 @@ const partner = {
 			api          : 'list_shipment_collection_party',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+		{
+			api         : 'post_purchase_bills_utr_details',
+			access_type : 'private',
 		},
 		{
 			api          : 'get_incident_management_incident_job_reopen_incident_exists',
@@ -12978,6 +13000,26 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'get_channel_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_lead_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'list_channel_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_lead_channel_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'create_draft_reply_all_html',
 			access_type  : 'private',
 			service_name : 'cogolens',
@@ -13970,7 +14012,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'payments_dunning_customer_outstanding_and_on_account',
+			api         : 'get_payments_dunning_customer_outstanding_and_on_account',
 			access_type : 'private',
 		},
 		{
@@ -13982,7 +14024,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_payments_dunning_create_exceptions',
+			api         : 'post_payments_dunning_create_exceptions',
 			access_type : 'private',
 		},
 		{
@@ -13998,7 +14040,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_payments_dunning_delete_master_exception',
+			api         : 'post_payments_dunning_delete_master_exception',
 			access_type : 'private',
 		},
 		{
