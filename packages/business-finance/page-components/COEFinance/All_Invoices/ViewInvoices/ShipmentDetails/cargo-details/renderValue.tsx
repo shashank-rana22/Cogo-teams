@@ -1,23 +1,16 @@
-import { Tooltip } from '@cogoport/components';
-import { IcMOpenlink } from '@cogoport/icons-react';
-import { startCase, upperCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDateValue from '@cogoport/globalization/utils/formatDate';
+import { isEmpty, startCase, upperCase } from '@cogoport/utils';
 import React from 'react';
 
 import { formatDate } from '../../../../../commons/utils/formatDate';
 
-import styles from './styles.module.css';
-
-interface PocDetailsInt {
-	name?: string;
-	mobile_country_code?: string;
-	mobile_number?: string;
-	email?: string;
-}
-
-interface ShipperDetailsInt {
-	name?: string;
-	address?: string;
-}
+import CommodityDetails from './CommodityDetails';
+import FormatCertificate from './FormatCertificate';
+import FormatPocData from './FormatPocData';
+import FormatShipperDetails from './FormatShipperDetails';
+import PackageDetails from './PackageDetails';
+import PrintTruckTypes from './PrintTruckTypes';
 
 export const renderValue = (label: string, detail: any) => {
 	const { packages = [] } = detail || [{}];
@@ -26,7 +19,10 @@ export const renderValue = (label: string, detail: any) => {
 	const isLTL = detail?.service_type === 'ltl_freight_service'
     || detail?.services?.includes('ltl_freight_service');
 
-	const valueForInput = Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
+	const commodityDataDetails = detail?.commodity_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
+	const valueForInput = Array.isArray(packages) && !isEmpty(packages?.length)
+		? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
 
 	const chargableWeight = isLTL
 		? detail?.chargable_weight || detail?.weight
@@ -46,67 +42,6 @@ export const renderValue = (label: string, detail: any) => {
 	const ewayBillNumber = detail?.eway_bill_number;
 
 	const volume = ` ${detail.volume} ${isLTL ? 'cc' : 'cbm'}`;
-
-	const packageDetails = () => {
-		if (packages?.length > 1) {
-			return (
-				<Tooltip
-					placement="bottom"
-					content={(
-						<div style={{ fontSize: '10px' }}>
-							{(packages || []).map((item) => {
-								const values = item
-									? `${item.packages_count} Pkg, (${item?.length}cm X ${
-										item?.width
-									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
-									: '';
-								return <div>{values}</div>;
-							})}
-						</div>
-					)}
-				>
-					<div className="cargo-details-info">
-						{`Package: ${inputValue} + ${packages.length - 1} more`}
-					</div>
-				</Tooltip>
-			);
-		}
-		return `Package: ${inputValue}`;
-	};
-
-	const formatPocData = (pocDetails: PocDetailsInt) => (
-		<div>
-			<div>{pocDetails?.name}</div>
-			<div>
-				{pocDetails?.mobile_country_code}
-				-
-				{pocDetails?.mobile_number}
-			</div>
-			<div>{pocDetails?.email}</div>
-		</div>
-	);
-
-	const formatShipperDetails = (shipperDetails: ShipperDetailsInt) => (
-		<div>
-			<div>{shipperDetails?.name}</div>
-			<div>{shipperDetails?.address}</div>
-		</div>
-	);
-
-	const formatCertificate = (certificates: any) => (
-		<div className={styles.certificate_container}>
-			{(certificates || []).map((item, key) => (
-				<a href={item} target="_blank" rel="noreferrer">
-					Click to view certificate
-					{' '}
-					{key + 1}
-					{' '}
-					<IcMOpenlink />
-					<br />
-				</a>
-			))}
-		</div>
-	);
 
 	switch (label) {
 		case 'container_size':
@@ -146,21 +81,29 @@ export const renderValue = (label: string, detail: any) => {
 			return `${detail.trucks_count} Trucks`;
 		case 'truck_type':
 			return startCase(detail.truck_type || '');
+		case 'truck_types':
+			return <PrintTruckTypes detail={detail} />;
 		case 'container_type':
 			return startCase(detail.container_type || '');
 		case 'trade_type':
 			return startCase(detail.trade_type || '');
 		case 'commodity':
-			return startCase(detail.commodity || '');
+			return <CommodityDetails isAir={isAir} detail={detail} commodityDataDetails={commodityDataDetails} />;
 		case 'payment_term':
 			return startCase(detail.payment_term || '');
 		case 'inco_term':
 			return `Inco - ${upperCase(detail.inco_term || '')}`;
+		case 'awb_execution_date':
+			return `AWB Execution Date - ${formatDateValue({
+				date       : detail?.awb_execution_date,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			})}`;
 		case 'packages':
-			if (packages?.length === 0) {
+			if (isEmpty(packages)) {
 				return null;
 			}
-			return packageDetails();
+			return <PackageDetails packages={packages} inputValue={inputValue} />;
 
 		case 'volume':
 			return ` ${volume} ${
@@ -186,6 +129,13 @@ export const renderValue = (label: string, detail: any) => {
 				return `HAWB Number: ${detail?.house_airway_bill_number || ''}`;
 			}
 			return '';
+		case 'is_minimum_price_shipment':
+			if (isAir) {
+				return 'Min. Price';
+			}
+			return '';
+		case 'price_type':
+			return `Price Type: ${startCase(detail?.price_type || '')}`;
 		case 'eway_bill_number':
 			if (isLTL) {
 				return `Eway Bill Number : ${ewayBillNumber || ''}`;
@@ -300,9 +250,9 @@ export const renderValue = (label: string, detail: any) => {
 				true,
 			);
 		case 'iip_certificates':
-			return formatCertificate(detail?.iip_certificates || []);
+			return <FormatCertificate certificates={detail?.iip_certificates} />;
 		case 'msds_certificates':
-			return formatCertificate(detail?.msds_certificates || []);
+			return <FormatCertificate certificates={detail?.msds_certificates} />;
 		case 'bl_category':
 			return upperCase(detail.bl_category);
 		case 'bl_type':
@@ -315,15 +265,25 @@ export const renderValue = (label: string, detail: any) => {
 				true,
 			);
 		case 'supplier_poc':
-			return formatPocData(detail?.supplier_poc || {});
+			return <FormatPocData pocDetails={detail?.supplier_poc} />;
 		case 'origin_oversea_agent':
-			return formatPocData(detail?.origin_oversea_agent || {});
+			return <FormatPocData pocDetails={detail?.origin_oversea_agent} />;
 		case 'shipper_details':
-			return formatShipperDetails(detail?.shipper_details || {});
+			return <FormatShipperDetails shipperDetails={detail?.shipper_details} />;
 		case 'buy_quotation_agreed_rates':
 			return `${detail?.buy_quotation_agreed_rates.toFixed(2)} USD`;
 		case 'hs_code':
 			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
+
+		case 'delivery_date':
+			return formatDateValue({
+				date       : detail?.delivery_date,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			});
+
+		case 'container_load_type':
+			return startCase(detail?.container_load_type);
 
 		default:
 			return detail[label] || null;
