@@ -17,7 +17,7 @@ const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refe
 		accessor : (row) => (
 			<div>
 				<div className={styles.reference_id}>
-					{getByKey(row, 'referenceId') as string}
+					{getByKey(row, 'referenceId')}
 				</div>
 			</div>
 		),
@@ -37,7 +37,7 @@ const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refe
 		accessor : (row) => (
 
 			<div className={styles.request_type}>
-				{startCase(getByKey(row, 'type') as string)}
+				{startCase(getByKey(row, 'type'))}
 			</div>
 
 		),

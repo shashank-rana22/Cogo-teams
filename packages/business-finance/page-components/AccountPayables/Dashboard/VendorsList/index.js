@@ -9,11 +9,7 @@ import useGetBySupplier from '../hooks/useGetBySupplier';
 import styles from './styles.module.css';
 import vendorsColumn from './vendorsColumn';
 
-interface ItemProps {
-	activeEntity: string,
-}
-
-function VendorsList({ activeEntity }:ItemProps) {
+function VendorsList({ activeEntity }) {
 	const [showVendorsList, setShowVendorsList] = useState(undefined);
 
 	const { data, loading } = useGetBySupplier({ showVendorsList, activeEntity });

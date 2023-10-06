@@ -31,7 +31,7 @@ function IcJvApproval({
 							</div>
 
 							<div className={styles.amount_value}>
-								<div>{getPrice(totalDebit as number, currency || 'INR' as string)}</div>
+								<div>{getPrice(totalDebit, currency || 'INR')}</div>
 							</div>
 
 						</div>
@@ -41,7 +41,7 @@ function IcJvApproval({
 							</div>
 
 							<div className={styles.amount_value}>
-								<div>{getPrice(totalCredit as number, currency || 'INR' as string)}</div>
+								<div>{getPrice(totalCredit, currency || 'INR')}</div>
 							</div>
 
 						</div>

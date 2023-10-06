@@ -13,13 +13,13 @@ export const outstandingKamColumn = ({ entityCode, t }) => [
 
 			<div>
 
-				{	(getByKey(row, 'kam_owners') as string).length > 15 ? (
+				{	(getByKey(row, 'kam_owners')).length > 15 ? (
 					<Tooltip
 						placement="top"
-						content={getByKey(row, 'kam_owners') as string}
+						content={getByKey(row, 'kam_owners')}
 					>
 						<text className={styles.wrapper}>
-							{`${(getByKey(row, 'kam_owners') as string).substring(
+							{`${(getByKey(row, 'kam_owners')).substring(
 								0,
 								20,
 							)}...`}
@@ -29,7 +29,7 @@ export const outstandingKamColumn = ({ entityCode, t }) => [
 
 					: (
 						<div className={styles.styled_name}>
-							{getByKey(row, 'kam_owners') as string}
+							{getByKey(row, 'kam_owners')}
 						</div>
 					)}
 			</div>
@@ -44,7 +44,7 @@ export const outstandingKamColumn = ({ entityCode, t }) => [
 				<Tooltip content={(
 					<div className={styles.wrapper}>
 						{formatAmount({
-							amount   : getByKey(row, 'open_invoice_amount') as any,
+							amount   : getByKey(row, 'open_invoice_amount'),
 							currency :	GLOBAL_CONSTANTS.cogoport_entities[entityCode]?.currency,
 							options  : {
 								style           : 'currency',
@@ -56,7 +56,7 @@ export const outstandingKamColumn = ({ entityCode, t }) => [
 				>
 					<div className={styles.styled_name}>
 						{formatAmount({
-							amount   :	getByKey(row, 'open_invoice_amount') as any,
+							amount   :	getByKey(row, 'open_invoice_amount'),
 							currency :	GLOBAL_CONSTANTS.cogoport_entities[entityCode]?.currency,
 							options  : {
 								notation              : 'compact',
@@ -83,7 +83,7 @@ export const outstandingKamColumn = ({ entityCode, t }) => [
 				<Tooltip content={(
 					<div className={styles.wrapper}>
 						{formatAmount({
-							amount   : getByKey(row, 'total_outstanding_amount') as any,
+							amount   : getByKey(row, 'total_outstanding_amount'),
 							currency :	GLOBAL_CONSTANTS.cogoport_entities[entityCode]?.currency,
 							options  : {
 								style           : 'currency',
@@ -95,7 +95,7 @@ export const outstandingKamColumn = ({ entityCode, t }) => [
 				>
 					<div className={styles.styled_name}>
 						{formatAmount({
-							amount   :	getByKey(row, 'total_outstanding_amount') as any,
+							amount   :	getByKey(row, 'total_outstanding_amount'),
 							currency : GLOBAL_CONSTANTS.cogoport_entities[entityCode]?.currency,
 							options  : {
 								notation              : 'compact',

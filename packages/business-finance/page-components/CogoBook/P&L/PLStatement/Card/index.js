@@ -41,7 +41,7 @@ function Card({
 		refetchDelete,
 	} = useSaveCustomList({ setCustomModal });
 
-	const entityOptions = getEntityOptions() as any;
+	const entityOptions = getEntityOptions();
 
 	const content = () => (
 		<div className={styles.content_container}>

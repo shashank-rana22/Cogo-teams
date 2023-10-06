@@ -15,40 +15,7 @@ const TRADE_TYPE_MAPPING = {
 	Surface : 'surface',
 };
 
-interface OverallStats {
-	customersCount?: number,
-	dashboardCurrency?: string,
-	onAccountAmount?: number,
-	onAccountAmountForPastSevenDaysPercentage?: number,
-	openInvoiceAmountForPastSevenDaysPercentage?: number,
-	openInvoicesAmount?: number,
-	openInvoicesCount?: number,
-	totalOutstandingAmount?: number
-}
-
-interface OceanProps {
-	currency?: string,
-	openInvoiceAmount?: number,
-	tradeType?: object[]
-}
-interface OutstandingServiceWise {
-	ocean?: OceanProps,
-	air?: OceanProps,
-	surface?: OceanProps
-}
-
-interface OutsatndingProps {
-	outstandingServiceWise?: OutstandingServiceWise,
-	overallStats?: OverallStats,
-}
-
-interface ServiceCardProps {
-	outstandingData?: OutsatndingProps,
-	outstandingLoading?: boolean,
-	entityCode?: string,
-}
-
-function ServiceCard({ outstandingData = {}, outstandingLoading = false, entityCode = '' }: ServiceCardProps) {
+function ServiceCard({ outstandingData = {}, outstandingLoading = false, entityCode = '' }) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const { outstandingServiceWise = {} } = outstandingData || {};
@@ -158,7 +125,7 @@ function ServiceCard({ outstandingData = {}, outstandingLoading = false, entityC
 														<Tooltip content={(
 															<div>
 																{formatAmount({
-																	amount   : item.amount as any,
+																	amount   : item.amount,
 																	currency : item.currency,
 																	options  : {
 																		style           : 'currency',
@@ -170,7 +137,7 @@ function ServiceCard({ outstandingData = {}, outstandingLoading = false, entityC
 														>
 															<div className={styles.wrapper}>
 																{formatAmount({
-																	amount   : item?.amount as any,
+																	amount   : item?.amount,
 																	currency : item?.currency,
 																	options  : {
 																		notation              : 'compact',
@@ -251,7 +218,7 @@ function ServiceCard({ outstandingData = {}, outstandingLoading = false, entityC
 								<div>
 									<div className={styles.styled_ocean_text}>
 										{formatAmount({
-											amount   : item?.openInvoices as any,
+											amount   : item?.openInvoices,
 											currency : item?.currency,
 											options  : {
 												notation              : 'compact',

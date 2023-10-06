@@ -8,7 +8,7 @@ const SettlementColumn = [
 		accessor : (row) => (
 			<div>
 				<div>
-					{startCase(getByKey(row, 'documentValue') as string)}
+					{startCase(getByKey(row, 'documentValue'))}
 				</div>
 			</div>
 		),
@@ -18,7 +18,7 @@ const SettlementColumn = [
 		id       : 'amount',
 		accessor : (row) => (
 			<div>
-				<div>{getPrice(getByKey(row, 'documentAmount') as number, getByKey(row, 'currency') as string)}</div>
+				<div>{getPrice(getByKey(row, 'documentAmount'), getByKey(row, 'currency'))}</div>
 			</div>
 
 		),
@@ -29,7 +29,7 @@ const SettlementColumn = [
 		id       : 'exc_rate',
 		accessor : (row) => (
 			<div>
-				{getByKey(row, 'exchangeRate') as string}
+				{getByKey(row, 'exchangeRate')}
 			</div>
 
 		),
@@ -39,7 +39,7 @@ const SettlementColumn = [
 		id       : 'tds',
 		accessor : (row) => (
 			<div>
-				<div>{getPrice(getByKey(row, 'amount') as number, getByKey(row, 'currency') as string)}</div>
+				<div>{getPrice(getByKey(row, 'amount'), getByKey(row, 'currency'))}</div>
 			</div>
 
 		),
@@ -48,7 +48,7 @@ const SettlementColumn = [
 		Header   : <div>Nostro</div>,
 		id       : 'category',
 		accessor : (row) => (
-			<div>{getPrice(getByKey(row, 'nostroAmount') as number, getByKey(row, 'currency') as string)}</div>
+			<div>{getPrice(getByKey(row, 'nostroAmount'), getByKey(row, 'currency'))}</div>
 
 		),
 	},
@@ -57,7 +57,7 @@ const SettlementColumn = [
 		id       : 'settled_tds',
 		accessor : (row) => (
 			<div>
-				<div>{getPrice(getByKey(row, 'settledTds') as number, getByKey(row, 'currency') as string)}</div>
+				<div>{getPrice(getByKey(row, 'settledTds'), getByKey(row, 'currency'))}</div>
 			</div>
 
 		),
@@ -67,7 +67,7 @@ const SettlementColumn = [
 		id       : 'balance_amount',
 		accessor : (row) => (
 			<div>
-				<div>{getPrice(getByKey(row, 'balanceAmount') as number, getByKey(row, 'currency') as string)}</div>
+				<div>{getPrice(getByKey(row, 'balanceAmount'), getByKey(row, 'currency'))}</div>
 			</div>
 
 		),
@@ -77,7 +77,7 @@ const SettlementColumn = [
 		id       : 'allocation',
 		accessor : (row) => (
 			<div>
-				<div>{getPrice(getByKey(row, 'allocationAmount') as number, getByKey(row, 'currency') as string)}</div>
+				<div>{getPrice(getByKey(row, 'allocationAmount'), getByKey(row, 'currency'))}</div>
 			</div>
 
 		),
@@ -89,8 +89,8 @@ const SettlementColumn = [
 			<div>
 				<div>
 					{getPrice(
-						getByKey(row, 'balanceAfterAllocation') as number,
-						getByKey(row, 'currency') as string,
+						getByKey(row, 'balanceAfterAllocation'),
+						getByKey(row, 'currency'),
 					)}
 
 				</div>

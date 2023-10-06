@@ -3,23 +3,10 @@ import React, { ReactFragment } from 'react';
 
 import styles from './styles.module.css';
 
-interface NestedObj {
-	[key: string]: ReactFragment;
-}
-interface Props {
-	formData?: NestedObj;
-	taskItem?: NestedObj;
-	whiteout?:boolean;
-	activeCategory?: string;
-	edit?: boolean | string;
-	viewDoc?: boolean;
-	activeHawb?: NestedObj;
-}
-
 function ShipperConsigneeDetails({
 	formData = {}, taskItem = {}, whiteout = false,
 	activeCategory = '', edit, viewDoc = false, activeHawb = {},
-}:Props) {
+}) {
 	let tempColor = '#333';
 	if (whiteout) {
 		tempColor = 'transparent';

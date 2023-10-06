@@ -8,13 +8,7 @@ import { outstandingKamColumn } from '../../../configs/OutstandingKamColumns';
 
 import styles from './styles.module.css';
 
-interface OutsatndingKamProps {
-	kamOutstandingData?: object[],
-	kamOutstandingLoading?: boolean
-	entityCode?: string
-}
-
-function OutStandingKam({ kamOutstandingData, kamOutstandingLoading, entityCode }: OutsatndingKamProps) {
+function OutStandingKam({ kamOutstandingData, kamOutstandingLoading, entityCode }) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	return (

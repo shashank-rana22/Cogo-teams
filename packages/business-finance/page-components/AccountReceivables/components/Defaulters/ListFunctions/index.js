@@ -18,35 +18,35 @@ const listFunctions = ({ refetch, entityCode }) => ({
 	showOrgName       : ({ organizationName }) => (<div>{showOverflowingNumber(organizationName || '-', 10)}</div>),
 	showInvoiceNumber : (row) => (
 		<div>
-			{(getDocumentNumber({ itemData: row }) as string)?.length > 10 ? (
+			{(getDocumentNumber({ itemData: row }))?.length > 10 ? (
 				<Tooltip
 					interactive
 					placement="top"
 					content={(
 						<div className={styles.tool_tip}>
-							{getDocumentNumber({ itemData: row }) as string}
+							{getDocumentNumber({ itemData: row })}
 						</div>
 					)}
 				>
 					<text
 						className={styles.link}
-						onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
+						onClick={() => window.open(getDocumentUrl({ itemData: row }), '_blank')}
 						role="presentation"
 					>
-						{`${(getDocumentNumber({ itemData: row }) as string).substring(0, 10)}...`}
+						{`${(getDocumentNumber({ itemData: row })).substring(0, 10)}...`}
 					</text>
 				</Tooltip>
 			) : (
 				<div
 					className={styles.link}
-					onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
+					onClick={() => window.open(getDocumentUrl({ itemData: row }), '_blank')}
 					role="presentation"
 				>
-					{getDocumentNumber({ itemData: row }) as string}
+					{getDocumentNumber({ itemData: row })}
 				</div>
 			)}
 			<div>
-				<Pill size="sm" color={INVOICE_TYPE[(row?.invoiceType as string)]}>
+				<Pill size="sm" color={INVOICE_TYPE[(row?.invoiceType)]}>
 
 					{row?.eInvoicePdfUrl ? 'E-INVOICE' : startCase(row?.invoiceType)}
 
@@ -77,7 +77,7 @@ const listFunctions = ({ refetch, entityCode }) => ({
 				className={styles.styled_pills}
 				style={{
 					'--color': STATUS_MAPPING[row?.status],
-				} as any}
+				}}
 			>
 
 				{row?.status?.length > 10 ? (
@@ -165,7 +165,7 @@ const listFunctions = ({ refetch, entityCode }) => ({
 			className={styles.styled_pills}
 			style={{
 				'--color': INVOICE_STATUS_MAPPING[row?.invoiceStatus],
-			} as any}
+			}}
 		>
 			{row?.isFinalPosted ? <text className={styles.style_text}>FINAL POSTED</text> : (
 				<div>

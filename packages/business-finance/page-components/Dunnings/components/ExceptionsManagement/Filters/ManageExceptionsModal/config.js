@@ -37,7 +37,7 @@ export const config = (
 					interactive
 				>
 					<div className={styles.customer_name}>
-						{(row?.tradePartyName as string).substring(0, 12)}
+						{(row?.tradePartyName).substring(0, 12)}
 						...
 					</div>
 				</Tooltip>

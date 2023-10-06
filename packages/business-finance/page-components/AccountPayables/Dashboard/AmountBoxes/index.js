@@ -7,11 +7,7 @@ import useGetInvoiceAmount from '../hooks/useGetInvoiceAmount';
 
 import styles from './styles.module.css';
 
-interface ItemProps {
-	activeEntity: string,
-}
-
-function AmountBoxes({ activeEntity }:ItemProps) {
+function AmountBoxes({ activeEntity }) {
 	const {
 		data,
 		loading,
@@ -107,7 +103,7 @@ function AmountBoxes({ activeEntity }:ItemProps) {
 				</div>
 
 				{MAPPING_DATA.map((item) => (
-					<div className={styles.box} key={item as any}>
+					<div className={styles.box} key={item}>
 						{loading ? <Placeholder className={styles.loader} />
 							: (
 								<div className={styles.sub_container}>

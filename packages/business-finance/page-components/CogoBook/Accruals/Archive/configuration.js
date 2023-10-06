@@ -108,7 +108,7 @@ export const ARCHIVE_MONTH_BOOKED = [
 							{' '}
 							<span className={styles.amount}>
 								{formatAmount({
-									amount   :	(actualExpense - (expenseBilled + expenseUnbilled)) as any,
+									amount   :	(actualExpense - (expenseBilled + expenseUnbilled)),
 									currency : expenseCurrency,
 									options  : {
 										style           : 'currency',
@@ -126,7 +126,7 @@ export const ARCHIVE_MONTH_BOOKED = [
 							{' '}
 							<span className={styles.amount}>
 								{formatAmount({
-									amount   :	(actualIncome - (incomeBilled + incomeUnbilled)) as any,
+									amount   :	(actualIncome - (incomeBilled + incomeUnbilled)),
 									currency : expenseCurrency,
 									options  : {
 										style           : 'currency',
@@ -403,7 +403,7 @@ export const ARCHIVE_MONTH_ACCRUED = [
 
 								{formatAmount({
 									amount:	(
-										actualExpense - (expenseBilled + expenseUnbilled)) as any,
+										actualExpense - (expenseBilled + expenseUnbilled)),
 									currency : expenseCurrency,
 									options  : {
 										style           : 'currency',
@@ -421,7 +421,7 @@ export const ARCHIVE_MONTH_ACCRUED = [
 							{' '}
 							<span className={styles.amount}>
 								{formatAmount({
-									amount   :	(actualIncome - (incomeBilled + incomeUnbilled)) as any,
+									amount   :	(actualIncome - (incomeBilled + incomeUnbilled)),
 									currency :	expenseCurrency,
 									options  : {
 										style           : 'currency',

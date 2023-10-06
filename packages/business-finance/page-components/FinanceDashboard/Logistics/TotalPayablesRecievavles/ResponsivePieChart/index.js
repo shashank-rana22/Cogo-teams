@@ -35,7 +35,7 @@ function ResponsivePieChart({ pieData }) {
 						:
 						<div className={styles.toolTip_amount}>
 							{formatAmount({
-								amount   :	value as any,
+								amount   :	value,
 								currency : GLOBAL_CONSTANTS.currency_code.INR,
 								options  : {
 									style           : 'currency',

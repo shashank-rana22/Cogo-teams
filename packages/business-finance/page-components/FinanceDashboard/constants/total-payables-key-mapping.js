@@ -10,7 +10,7 @@ const totalPayablesKeyMappings = ({ payablesData }) => {
 		{
 			label    : '0-30 Days ',
 			valueKey : formatAmount({
-				amount   : Math.abs(thirtyDayOverdue) as any,
+				amount   : Math.abs(thirtyDayOverdue),
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
 				options  : {
 					style           : 'currency',
@@ -23,7 +23,7 @@ const totalPayablesKeyMappings = ({ payablesData }) => {
 		{
 			label    : '30-60 Days ',
 			valueKey : formatAmount({
-				amount   :	Math.abs(threeSixtyDayOverdue) as any,
+				amount   :	Math.abs(threeSixtyDayOverdue),
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
 				options  : {
 					style           : 'currency',
@@ -36,7 +36,7 @@ const totalPayablesKeyMappings = ({ payablesData }) => {
 		{
 			label    : '60-90 Days ',
 			valueKey : formatAmount({
-				amount   :	Math.abs(sixtyDayOverdue) as any,
+				amount   :	Math.abs(sixtyDayOverdue),
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
 				options  : {
 					style           : 'currency',
@@ -49,7 +49,7 @@ const totalPayablesKeyMappings = ({ payablesData }) => {
 		{
 			label    : '90-180 Days ',
 			valueKey : formatAmount({
-				amount   :	Math.abs(ninetyDayOverdue) as any,
+				amount   :	Math.abs(ninetyDayOverdue),
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
 				options  : {
 					style           : 'currency',
@@ -62,7 +62,7 @@ const totalPayablesKeyMappings = ({ payablesData }) => {
 		{
 			label    : '180-365 Days',
 			valueKey : formatAmount({
-				amount   :	Math.abs(oneEightyDayOverdue) as any,
+				amount   :	Math.abs(oneEightyDayOverdue),
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
 				options  : {
 					style           : 'currency',
@@ -75,7 +75,7 @@ const totalPayablesKeyMappings = ({ payablesData }) => {
 		{
 			label    : '365+ Days ',
 			valueKey : formatAmount({
-				amount   :	Math.abs(threeSixtyPlusDayOverdue) as any,
+				amount   :	Math.abs(threeSixtyPlusDayOverdue),
 				currency : GLOBAL_CONSTANTS.currency_code.INR,
 				options  : {
 					style           : 'currency',

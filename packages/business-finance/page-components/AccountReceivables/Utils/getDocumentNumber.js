@@ -1,12 +1,10 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, getByKey } from '@cogoport/utils';
 
-import { Object } from '../commons/Interfaces';
-
 const FIRST = 1;
 const SECOND = 2;
 
-export const getDocumentNumber = ({ itemData }: Object) => {
+export const getDocumentNumber = ({ itemData }) => {
 	const isPresent = ['irnNumber', 'invoiceNumber'].some((item) => !isEmpty(getByKey(itemData, item)));
 
 	let key = 'proformaNumber';
@@ -14,10 +12,10 @@ export const getDocumentNumber = ({ itemData }: Object) => {
 	if (isPresent) {
 		key = itemData?.eInvoicePdfUrl ? 'irnNumber' : 'invoiceNumber';
 	}
-	return getByKey(itemData, key) as string;
+	return getByKey(itemData, key);
 };
 
-export const getDocumentUrl = ({ itemData }: Object) => {
+export const getDocumentUrl = ({ itemData }) => {
 	const isPresent = ['eInvoicePdfUrl', 'invoicePdf'].some((item) => !isEmpty(getByKey(itemData, item)));
 
 	let key = 'proformaPdfUrl';
@@ -28,7 +26,7 @@ export const getDocumentUrl = ({ itemData }: Object) => {
 	return getByKey(itemData, key);
 };
 
-export const getDocumentInfo = ({ itemData }: Object) => {
+export const getDocumentInfo = ({ itemData }) => {
 	const {
 		irnNumber = '', invoiceNumber = '', proformaNumber = '',
 		invoiceAdditionals: { cancelledEInvoicePdfUrl = '', cancelledIrnNumber = '' },

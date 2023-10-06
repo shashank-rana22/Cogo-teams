@@ -13,18 +13,9 @@ import Invoice from './Invoice';
 import ManageBpr from './ManageBpr';
 import Outstanding from './Outstanding';
 import styles from './styles.module.css';
-
-interface ItemProps {
-	business_name: string;
-	entity_code: string;
-}
-interface Profile {
-	profile?: { partner: { id: string } };
-}
-
 function AccountReceivables() {
 	const { push, query } = useRouter();
-	const { profile }:Profile = useSelector((state) => state);
+	const { profile } = useSelector((state) => state);
 	const [selectedOrgId, setSelectedOrgId] = useState({});
 	const { partner } = profile || {};
 

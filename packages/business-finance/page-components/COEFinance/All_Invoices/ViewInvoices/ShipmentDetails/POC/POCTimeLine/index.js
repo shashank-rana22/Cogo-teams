@@ -6,16 +6,7 @@ import React, { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-interface DataInterface {
-	eventName: string;
-	occurredAt: string;
-}
-interface POCTimeLineInterface {
-	loading: boolean;
-	data: Array<DataInterface>;
-}
-
-function formatAMPM(date: any) {
+function formatAMPM(date) {
 	let hours = date.getHours();
 	let minutes = date.getMinutes();
 	const ampm = hours >= 12 ? 'pm' : 'am';
@@ -26,7 +17,7 @@ function formatAMPM(date: any) {
 	return strTime;
 }
 
-function POCTimeLine({ data, loading }: POCTimeLineInterface) {
+function POCTimeLine({ data, loading }) {
 	const [complete, setComplete] = useState(false);
 
 	const timeLine = data;
@@ -97,7 +88,7 @@ function POCTimeLine({ data, loading }: POCTimeLineInterface) {
 				<div className={styles.sub_container}>{timeLineInitialStage()}</div>
 			)}
 
-			{(gettimeLineData() || []).map((item: any) => {
+			{(gettimeLineData() || []).map((item) => {
 				const { id, eventName, occurredAt, performedByUser, userEmail, payingAmount } = item || {};
 
 				const dateWithTime = occurredAt?.split(' ') || '';

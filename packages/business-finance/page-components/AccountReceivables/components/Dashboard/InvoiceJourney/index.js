@@ -9,12 +9,7 @@ import useGetInvoiceJourney from '../../../hooks/useGetInvoiceJourney';
 
 import styles from './styles.module.css';
 
-interface InvoiceJourneyProps {
-	filterValue?: object
-	entityCode?: string
-}
-
-function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
+function InvoiceJourney({ filterValue, entityCode }) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const {
@@ -59,7 +54,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 		},
 	];
 
-	const onChange = (val:string, key:string) => {
+	const onChange = (val, key) => {
 		setDateFilter((p) => ({ ...p, [key]: val }));
 	};
 	return (
@@ -124,7 +119,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 					<div className={styles.margin_right}>
 						<Select
 							value={dateFilter.month}
-							onChange={(val:string) => onChange(val, 'month')}
+							onChange={(val) => onChange(val, 'month')}
 							placeholder={t('by_month_placeholder')}
 							options={getSalesFunnelOptions(t)}
 							isClearable
@@ -133,7 +128,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 
 					<Select
 						value={dateFilter.year}
-						onChange={(val:string) => onChange(val, 'year')}
+						onChange={(val) => onChange(val, 'year')}
 						placeholder={t('by_year_placeholder')}
 						options={optionsVal()}
 						isClearable

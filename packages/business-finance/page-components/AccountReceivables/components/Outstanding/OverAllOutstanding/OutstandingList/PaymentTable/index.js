@@ -9,12 +9,8 @@ import useGetPaymentTable from '../../../../../hooks/useGetPaymentTable';
 
 import styles from './styles.module.css';
 
-interface Props {
-	organizationId: string,
-	entityCode?: string
-}
 const STATUS_FILTER_MAX_LEN = 3;
-function PaymentTable({ organizationId = '', entityCode = '' }: Props) {
+function PaymentTable({ organizationId = '', entityCode = '' }) {
 	const {
 		paymentList,
 		paymentLoading,
@@ -26,11 +22,11 @@ function PaymentTable({ organizationId = '', entityCode = '' }: Props) {
 
 	const { list = [], pageNo, totalRecords } = paymentList || {};
 
-	const onChange = (val: string, name: string) => {
+	const onChange = (val, name) => {
 		setPaymentFilters((p) => ({ ...p, [name]: val }));
 	};
 
-	const onChangeStatus = (val: string[], name: string) => {
+	const onChangeStatus = (val, name) => {
 		setPaymentFilters((p) => ({ ...p, [name]: val }));
 	};
 
@@ -57,7 +53,7 @@ function PaymentTable({ organizationId = '', entityCode = '' }: Props) {
 				<MultiSelect
 					placeholder="Select Status"
 					value={paymentFilters.statusList}
-					onChange={(val: string[]) => onChangeStatus(val, 'statusList')}
+					onChange={(val) => onChangeStatus(val, 'statusList')}
 					options={UTILIZATION_STATUS}
 					style={{ width: 200, marginRight: '16px' }}
 				/>
@@ -65,7 +61,7 @@ function PaymentTable({ organizationId = '', entityCode = '' }: Props) {
 					className="primary md"
 					placeholder="Search by Payment Number / Sage Reference Number"
 					value={paymentFilters.query}
-					onChange={(val: string) => onChange(val, 'query')}
+					onChange={(val) => onChange(val, 'query')}
 					prefix={(
 						<IcMSearchdark />
 					)}

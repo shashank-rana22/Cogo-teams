@@ -10,7 +10,7 @@ const IcJvApproval = [
 		accessor : (row) => (
 			<div>
 				<div className={styles.reference_id}>
-					{getByKey(row, 'jvNum') as string}
+					{getByKey(row, 'jvNum')}
 				</div>
 			</div>
 		),
@@ -21,7 +21,7 @@ const IcJvApproval = [
 		accessor : (row) => (
 			<div>
 				<div>
-					{getByKey(row, 'entityCode') as string}
+					{getByKey(row, 'entityCode')}
 				</div>
 			</div>
 		),
@@ -32,7 +32,7 @@ const IcJvApproval = [
 		accessor : (row) => (
 			<div>
 				<div>
-					{startCase(getByKey(row, 'tradePartyName') as string)}
+					{startCase(getByKey(row, 'tradePartyName'))}
 				</div>
 			</div>
 		),
@@ -43,7 +43,7 @@ const IcJvApproval = [
 		accessor : (row) => (
 			<div>
 				<div>
-					{getByKey(row, 'category') as string}
+					{getByKey(row, 'category')}
 				</div>
 			</div>
 		),
@@ -54,7 +54,7 @@ const IcJvApproval = [
 		accessor : (row) => (
 			<div>
 				<div>
-					{startCase(getByKey(row, 'type') as string)}
+					{startCase(getByKey(row, 'type'))}
 				</div>
 			</div>
 		),
@@ -65,7 +65,7 @@ const IcJvApproval = [
 		id       : 'currency',
 		accessor : (row) => (
 			<div>
-				{getByKey(row, 'currency') as string}
+				{getByKey(row, 'currency')}
 			</div>
 		),
 	},
@@ -75,7 +75,7 @@ const IcJvApproval = [
 		id       : 'exc_rate',
 		accessor : (row) => (
 			<div>
-				{getByKey(row, 'exchangeRate') as string}
+				{getByKey(row, 'exchangeRate')}
 			</div>
 
 		),
@@ -85,7 +85,7 @@ const IcJvApproval = [
 		id       : 'amount',
 		accessor : (row) => (
 			<div>
-				<div>{getPrice(getByKey(row, 'amount') as number, getByKey(row, 'currency') as string)}</div>
+				<div>{getPrice(getByKey(row, 'amount'), getByKey(row, 'currency'))}</div>
 			</div>
 
 		),
@@ -95,7 +95,7 @@ const IcJvApproval = [
 		id       : 'description',
 		accessor : (row) => (
 			<div>
-				{getByKey(row, 'description') as string}
+				{getByKey(row, 'description')}
 
 			</div>
 

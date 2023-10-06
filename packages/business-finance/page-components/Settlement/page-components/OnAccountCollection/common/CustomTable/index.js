@@ -9,36 +9,6 @@ import Header from './Header';
 import List from './List';
 import styles from './styles.module.css';
 
-interface GlobalInterface {
-	page?: number;
-	pageLimit?: number;
-	accMode?: string;
-	search?: string;
-	date?: {
-		startDate?: Date;
-		endDate?: Date;
-	};
-	paymentDocumentStatus?: string;
-	docType?: string;
-	sortBy?: string;
-	sortType?: string;
-}
-
-interface CustomInterface {
-	data?: {
-		list?: Array<{ id: string }>;
-		page?: number;
-		totalRecords?: number;
-	};
-	onPageChange?: (val: number) => void;
-	refetch?: () => void;
-	loading?: boolean;
-	globalFilters?: GlobalInterface;
-	setGlobalFilters?: React.Dispatch<React.SetStateAction<GlobalInterface>>;
-	checkedRows?: string[];
-	setCheckedRows?: React.Dispatch<React.SetStateAction<object>>;
-}
-
 function CustomTable(
 	{
 		data = {},
@@ -49,7 +19,7 @@ function CustomTable(
 		globalFilters,
 		checkedRows,
 		setCheckedRows,
-	}: CustomInterface,
+	},
 ) {
 	const GET_STATUS = ['POSTED', 'CREATED', 'APPROVED', 'POSTING_FAILED'];
 

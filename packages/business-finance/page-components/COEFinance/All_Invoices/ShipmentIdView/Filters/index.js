@@ -9,15 +9,6 @@ import { APPROVAL as ApprovalOption } from '../../../constants/shipmentListFilte
 import controls from './controls';
 import styles from './styles.module.css';
 
-interface PropsType {
-	hookSetters: { setFilters };
-	filters: {};
-	pendingApproval: string;
-	setPendingApproval: Function;
-	serialId:string;
-	setSerialId:Function;
-}
-
 function Filters({
 	hookSetters,
 	filters,
@@ -25,8 +16,7 @@ function Filters({
 	setPendingApproval,
 	serialId,
 	setSerialId,
-
-}: PropsType) {
+}) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.segmented}>
@@ -50,7 +40,7 @@ function Filters({
 						name="serialId"
 						size="sm"
 						value={serialId}
-						onChange={(e: any) => setSerialId(e)}
+						onChange={(e) => setSerialId(e)}
 						placeholder="Search by Shipment ID"
 						suffix={<IcMSearchlight height={17} width={17} style={{ margin: '0 8px' }} />}
 					/>

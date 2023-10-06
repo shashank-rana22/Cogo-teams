@@ -47,7 +47,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 
 	const { page } = globalFilters || {};
 
-	const entityOptions = getEntityOptions() as any;
+	const entityOptions = getEntityOptions();
 
 	const subComponent = (itemData) => {
 		const {

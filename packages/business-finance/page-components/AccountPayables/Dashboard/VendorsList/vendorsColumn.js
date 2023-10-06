@@ -44,7 +44,7 @@ const vendorsColumn = (currency) => ([
 				<div>
 					<Tooltip
 						content={formatAmount({
-							amount  : getByKey(row, 'openInvoiceLedgerAmount') as any,
+							amount  : getByKey(row, 'openInvoiceLedgerAmount'),
 							currency,
 							options : {
 								currencyDisplay : 'code',
@@ -79,7 +79,7 @@ const vendorsColumn = (currency) => ([
 		id       : 'openInvoiceCount',
 		accessor : (row) => (
 			<div className={styles.count}>
-				{getByKey(row, 'openInvoiceCount') as string}
+				{getByKey(row, 'openInvoiceCount')}
 			</div>
 
 		),

@@ -2,16 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-interface FilterInterface {
-	serviceType?:string
-	companyType?:string
-}
-interface ParamsInterface {
-	filterValue?:FilterInterface
-	entityCode?: string
-}
-
-const useGetInvoiceJourney = ({ filterValue, entityCode }:ParamsInterface) => {
+const useGetInvoiceJourney = ({ filterValue, entityCode }) => {
 	const { serviceType = '', companyType = '' } = filterValue || {};
 
 	const CurrentDate = new Date();

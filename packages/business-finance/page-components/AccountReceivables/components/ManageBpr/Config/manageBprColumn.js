@@ -1,7 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { getByKey } from '@cogoport/utils';
 
-import { Refetch } from '../../../commons/Interfaces';
 import RemoveBpr from '../RemoveBpr';
 
 import styles from './styles.module.css';
@@ -9,16 +8,12 @@ import styles from './styles.module.css';
 const START_POSITION_BUSINESS_NAME = 0;
 const END_POSITION_BUSINESS_NAME = 40;
 
-interface RefetchInterface {
-	refetch: Refetch
-}
-
-export const manageBprColumn = ({ refetch } : RefetchInterface) => [
+export const manageBprColumn = ({ refetch }) => [
 	{
 		Header   : 'Serail Id',
 		accessor : (row) => (
 			<div>
-				{getByKey(row, 'tradePartyDetailSerialId') as number}
+				{getByKey(row, 'tradePartyDetailSerialId')}
 			</div>
 		),
 		id: 'serial_id',
@@ -27,7 +22,7 @@ export const manageBprColumn = ({ refetch } : RefetchInterface) => [
 		Header   : 'Sage Org Id',
 		accessor : (row) => (
 			<div>
-				{getByKey(row, 'sageOrgId') as number}
+				{getByKey(row, 'sageOrgId')}
 			</div>
 		),
 		id: 'sageOrg_id',
@@ -37,14 +32,14 @@ export const manageBprColumn = ({ refetch } : RefetchInterface) => [
 		id       : 'name',
 		accessor : (row) => (
 
-			(getByKey(row, 'businessName') as string)?.length > END_POSITION_BUSINESS_NAME ? (
+			(getByKey(row, 'businessName'))?.length > END_POSITION_BUSINESS_NAME ? (
 				<Tooltip
 					interactive
 					placement="top"
-					content={<div className={styles.tool_tip}>{getByKey(row, 'businessName') as string}</div>}
+					content={<div className={styles.tool_tip}>{getByKey(row, 'businessName')}</div>}
 				>
 					<text className={styles.cursor}>
-						{`${(getByKey(row, 'businessName') as string).substring(
+						{`${(getByKey(row, 'businessName')).substring(
 							START_POSITION_BUSINESS_NAME,
 							END_POSITION_BUSINESS_NAME,
 						)}...`}
@@ -53,7 +48,7 @@ export const manageBprColumn = ({ refetch } : RefetchInterface) => [
 			)
 				: (
 					<div>
-						{getByKey(row, 'businessName') as string}
+						{getByKey(row, 'businessName')}
 					</div>
 				)
 		),

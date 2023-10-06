@@ -2,11 +2,7 @@ import React from 'react';
 
 import InvoiceTable from '../../commons/InvoiceTable';
 
-interface Params {
-	entityCode?: string;
-}
-
-function Invoice({ entityCode }: Params) {
+function Invoice({ entityCode }) {
 	return (
 		<InvoiceTable organizationId="" entityCode={entityCode} showName />
 	);

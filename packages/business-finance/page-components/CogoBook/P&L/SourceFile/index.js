@@ -20,7 +20,7 @@ function SourceFile() {
 
 	const { ListData, refetch, ListDataLoading } = useList({ filters });
 
-	const entityOptions = getEntityOptions() as any;
+	const entityOptions = getEntityOptions();
 
 	useEffect(() => { refetch(); }, [refetch]);
 

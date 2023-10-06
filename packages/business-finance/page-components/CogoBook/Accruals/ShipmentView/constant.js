@@ -231,7 +231,7 @@ export const accrualColumn = (
 						{' '}
 						<div className={quotationDiff >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
 							{formatAmount({
-								amount   :	quotationDiff as any,
+								amount   :	quotationDiff,
 								currency : expenseCurrency,
 								options  : {
 									style           : 'currency',
@@ -305,7 +305,7 @@ export const accrualColumn = (
 						{' '}
 						<div className={quotationDiff >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
 							{formatAmount({
-								amount   :	quotationDiff as any,
+								amount   :	quotationDiff,
 								currency : sellQuotationCurrency,
 								options  : {
 									style           : 'currency',

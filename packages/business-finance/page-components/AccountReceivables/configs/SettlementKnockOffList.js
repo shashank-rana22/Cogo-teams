@@ -12,7 +12,7 @@ const settlementKnockOffList = [
 		id       : 'name',
 		accessor : (row) => (
 			<div>
-				{getByKey(row, 'documentValue') as string}
+				{getByKey(row, 'documentValue')}
 			</div>
 		),
 
@@ -24,7 +24,7 @@ const settlementKnockOffList = [
 			<div
 				className={styles.sid}
 			>
-				{getByKey(row, 'sid') as string}
+				{getByKey(row, 'sid')}
 
 			</div>
 
@@ -37,8 +37,8 @@ const settlementKnockOffList = [
 			<div className={styles.amount}>
 				<div>
 					{formatAmount({
-						amount   :	getByKey(row, 'documentAmount') as any,
-						currency :	getByKey(row, 'currency') as string,
+						amount   :	getByKey(row, 'documentAmount'),
+						currency :	getByKey(row, 'currency'),
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -56,8 +56,8 @@ const settlementKnockOffList = [
 			<div className={styles.amount}>
 				<div>
 					{formatAmount({
-						amount   :	getByKey(row, 'settledAmount') as any,
-						currency :	getByKey(row, 'currency') as string,
+						amount   :	getByKey(row, 'settledAmount'),
+						currency :	getByKey(row, 'currency'),
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -76,8 +76,8 @@ const settlementKnockOffList = [
 			<div className={styles.amount}>
 				<div>
 					{formatAmount({
-						amount   :	getByKey(row, 'tds') as any,
-						currency :	getByKey(row, 'currency') as string,
+						amount   :	getByKey(row, 'tds'),
+						currency :	getByKey(row, 'currency'),
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -96,8 +96,8 @@ const settlementKnockOffList = [
 			<div className={styles.amount}>
 				<div>
 					{formatAmount({
-						amount   :	getByKey(row, 'nostroAmount') as any,
-						currency :	getByKey(row, 'currency') as string,
+						amount   :	getByKey(row, 'nostroAmount'),
+						currency :	getByKey(row, 'currency'),
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -116,8 +116,8 @@ const settlementKnockOffList = [
 			<div className={styles.amount}>
 				<div>
 					{formatAmount({
-						amount   :	getByKey(row, 'balanceAmount') as any,
-						currency :	getByKey(row, 'currency') as string,
+						amount   :	getByKey(row, 'balanceAmount'),
+						currency :	getByKey(row, 'currency'),
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',
@@ -151,8 +151,8 @@ const settlementKnockOffList = [
 		Header   : 'Status',
 		accessor : (row) => (
 			<div>
-				<Pill size="md" color={INVOICE_STATUS[(getByKey(row, 'status') as string)]}>
-					{startCase(getByKey(row, 'status') as string)}
+				<Pill size="md" color={INVOICE_STATUS[(getByKey(row, 'status'))]}>
+					{startCase(getByKey(row, 'status'))}
 				</Pill>
 			</div>
 		),

@@ -8,7 +8,7 @@ function TooltipAmount({ amount, currencyType }) {
 	return (
 		<Tooltip
 			content={formatAmount({
-				amount   : amount as any,
+				amount   : amount,
 				currency : currencyType,
 				options  : {
 					currencyDisplay : 'code',
@@ -22,7 +22,7 @@ function TooltipAmount({ amount, currencyType }) {
 			<div className={styles.value}>
 				{' '}
 				{formatAmount({
-					amount   : amount as any,
+					amount   : amount,
 					currency : currencyType,
 					options  : {
 						currencyDisplay       : 'code',

@@ -14,14 +14,14 @@ function ShipmentView({ row }) {
 	return (
 		<div className={styles.field_pair}>
 
-			{(getByKey(row, 'sidNo') as string)?.length > CHECK_MAX_VALUE ? (
+			{(getByKey(row, 'sidNo'))?.length > CHECK_MAX_VALUE ? (
 				<Tooltip
 					interactive
 					placement="top"
-					content={<div className={styles.tool_tip}>{getByKey(row, 'sidNo') as string}</div>}
+					content={<div className={styles.tool_tip}>{getByKey(row, 'sidNo')}</div>}
 				>
 					<text className={styles.sid}>
-						{`${(getByKey(row, 'sidNo') as string)?.substring(
+						{`${(getByKey(row, 'sidNo'))?.substring(
 							CHECK_MIN_VALUE,
 							CHECK_MAX_VALUE,
 						)}...`}
@@ -31,7 +31,7 @@ function ShipmentView({ row }) {
 				: (
 					<div>
 						<div role="presentation" className={styles.sid} onClick={() => setShow(true)}>
-							{getByKey(row, 'sidNo') as string}
+							{getByKey(row, 'sidNo')}
 						</div>
 						{show && (
 							<Modal
@@ -42,25 +42,25 @@ function ShipmentView({ row }) {
 							>
 								<Modal.Header title="COST SHEET" />
 								<Modal.Body>
-									<CostView shipment_id={getByKey(row, 'shipmentId') as string} />
+									<CostView shipment_id={getByKey(row, 'shipmentId')} />
 								</Modal.Body>
 							</Modal>
 						)}
 					</div>
 				)}
 
-			{startCase(getByKey(row, 'serviceType') as string)?.length > CHECK_MAX_VALUE ? (
+			{startCase(getByKey(row, 'serviceType'))?.length > CHECK_MAX_VALUE ? (
 				<Tooltip
 					interactive
 					placement="top"
 					content={(
 						<div className={styles.tool_tip}>
-							{startCase(getByKey(row, 'serviceType') as string)}
+							{startCase(getByKey(row, 'serviceType'))}
 						</div>
 					)}
 				>
 					<text className={styles.cursor}>
-						{`${startCase(getByKey(row, 'serviceType') as string)?.substring(
+						{`${startCase(getByKey(row, 'serviceType'))?.substring(
 							CHECK_MIN_VALUE,
 							CHECK_MAX_VALUE,
 						)}...`}
@@ -69,7 +69,7 @@ function ShipmentView({ row }) {
 			)
 				: (
 					<div className={styles.cursor}>
-						{startCase(getByKey(row, 'serviceType') as string)}
+						{startCase(getByKey(row, 'serviceType'))}
 					</div>
 				)}
 		</div>

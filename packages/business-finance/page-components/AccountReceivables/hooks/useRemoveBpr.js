@@ -1,14 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-import { Refetch } from '../commons/Interfaces';
-
-interface RemoveBpr {
-	refetch : Refetch;
-	id?: string;
-}
-
-const useRemoveBpr = ({ refetch, id } : RemoveBpr) => {
+const useRemoveBpr = ({ refetch, id }) => {
 	const [
 		{ loading },
 		trigger,

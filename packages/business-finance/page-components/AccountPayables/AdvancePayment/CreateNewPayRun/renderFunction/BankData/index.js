@@ -3,23 +3,11 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface BankType {
-	accountNumber: string;
-	bankName: string;
-	ifscCode: string;
-}
-
-interface PropsType {
-	advanceDocumentSellerBankDetail: BankType;
-}
-interface ItemProps {
-	itemData: PropsType;
-}
 const MAX_LENGTH = 16;
 
-function BankData({ itemData }: ItemProps) {
+function BankData({ itemData }) {
 	const { advanceDocumentSellerBankDetail } = itemData || {};
-	const renderTooltip = (content: string, maxLength: number) => {
+	const renderTooltip = (content, maxLength) => {
 		if (content.length > maxLength) {
 			return (
 				<Tooltip interactive placement="top" content={content}>

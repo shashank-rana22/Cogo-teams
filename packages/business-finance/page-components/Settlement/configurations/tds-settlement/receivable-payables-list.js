@@ -28,7 +28,7 @@ function receivablesPayablesColumn() {
 								interactive
 							>
 								<div>
-									{(row?.documentType as string).substring(0, 12)}
+									{(row?.documentType).substring(0, 12)}
 									...
 								</div>
 							</Tooltip>

@@ -6,27 +6,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect } from 'react';
 
-interface Global {
-	search?:string,
-	zone?:string,
-	dueDate?:{ startDate?:Date, endDate?:Date },
-	invoiceStatus?:string,
-	status?:string,
-	services?:string[],
-	pageIndex?:number,
-	migrated?:boolean | string,
-	invoiceDate?:{ startDate?:Date, endDate?:Date },
-	currency?:string,
-	pageLimit?:string | number
-}
-interface Props {
-	globalFilters?:Global
-	activeTab?: string,
-	sort?:object
-	entityCode?:number | string,
-}
-
-const useGetDefaulters = ({ globalFilters, activeTab, sort, entityCode }:Props) => {
+const useGetDefaulters = ({ globalFilters, activeTab, sort, entityCode }) => {
 	const {
 		search, zone, dueDate, invoiceStatus, status, services, pageIndex, migrated,
 		invoiceDate, currency, pageLimit, ...rest
@@ -68,7 +48,7 @@ const useGetDefaulters = ({ globalFilters, activeTab, sort, entityCode }:Props) 
 	const stringifiedRest = JSON.stringify(rest);
 	const stringifiedQuery = JSON.stringify(query);
 
-	const formatProvidedDate = (date:string | Date) => {
+	const formatProvidedDate = (date) => {
 		if (date) {
 			return formatDate(
 				{

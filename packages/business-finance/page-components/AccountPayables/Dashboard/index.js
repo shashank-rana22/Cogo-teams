@@ -13,11 +13,7 @@ import TotalPayables from './TotalPayables';
 import TreasuryStatistics from './TreasuryStatistics';
 import VendorsList from './VendorsList';
 
-interface ItemProps {
-	activeEntity: string,
-}
-
-function Dashboard({ activeEntity }:ItemProps) {
+function Dashboard({ activeEntity }) {
 	const [showData, setShowData] = useState('day');
 	const { data, filters, setFilters, loading } = useGetAgePayable({ activeEntity });
 

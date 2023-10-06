@@ -8,28 +8,10 @@ import { getSalesFunnelOptions } from '../../../constants';
 
 import styles from './styles.module.css';
 
-interface SalesFunnelData {
-	draftInvoicesCount?: string,
-	draftToFinanceAcceptedPercentage?: string,
-	financeAcceptedInvoiceCount?: string,
-	financeToIrnPercentage?: string,
-	irnGeneratedInvoicesCount?: string,
-	settledInvoicesCount?: string,
-	settledPercentage?: string
-}
-
-interface SalesFunnelProps {
-	salesFunnelData?: SalesFunnelData,
-	salesFunnelMonth?: string,
-	setSalesFunnelMonth?: (p:string)=>void,
-	salesFunnelLoading?: boolean
-	entityCode?: string
-}
-
 function SalesFunnel({
 	salesFunnelData, salesFunnelMonth, setSalesFunnelMonth,
 	salesFunnelLoading, entityCode,
-}: SalesFunnelProps) {
+}) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const {
@@ -70,7 +52,7 @@ function SalesFunnel({
 		},
 	];
 
-	const onChange = (val:string) => {
+	const onChange = (val) => {
 		setSalesFunnelMonth(val);
 	};
 	return (
@@ -105,7 +87,7 @@ function SalesFunnel({
 				<div>
 					<Select
 						value={salesFunnelMonth}
-						onChange={(val:string) => onChange(val)}
+						onChange={(val) => onChange(val)}
 						placeholder={t('by_month_placeholder')}
 						options={getSalesFunnelOptions(t)}
 						isClearable

@@ -7,19 +7,10 @@ import useGetTotalPayables from '../hooks/useGetTotalPayables';
 import ProgressLine from './ProgressLine';
 import styles from './styles.module.css';
 
-interface FilterProps {
-	currency?: string,
-	service?: string,
-}
-interface ItemProps {
-	filtersData: FilterProps;
-	activeEntity:string,
-}
-
 function TotalPayables({
 	filtersData,
 	activeEntity,
-}:ItemProps) {
+}) {
 	const { data, loading } = useGetTotalPayables({ filtersData, activeEntity });
 
 	const {

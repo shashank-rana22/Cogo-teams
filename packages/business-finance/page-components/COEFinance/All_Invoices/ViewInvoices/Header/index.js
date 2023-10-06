@@ -167,7 +167,7 @@ function Header({
 								<div>
 									<AdditionalRemarks
 										remarkData={remarkData}
-										setRemarkData={setRemarkData as any}
+										setRemarkData={setRemarkData}
 										modalData={modalData}
 									/>
 									<div className={styles.btn_container}>

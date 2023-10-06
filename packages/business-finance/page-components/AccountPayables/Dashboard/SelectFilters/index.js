@@ -5,12 +5,7 @@ import Filter from '../../../commons/Filters';
 import { filterControls } from './filterControls';
 import styles from './styles.module.css';
 
-interface FilterProps {
-	filters:object,
-	setFilters: (p:object) => void,
-}
-
-function SelectFilters({ filters, setFilters }:FilterProps) {
+function SelectFilters({ filters, setFilters }) {
 	return (
 		<div className={styles.container}>
 			<Filter

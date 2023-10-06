@@ -6,23 +6,11 @@ function generateArrayOfYears() {
 
 const optionsVal = () => generateArrayOfYears().map((item) => ({ value: item.toString(), label: item.toString() }));
 
-interface DisabledConfigProps {
-	date?: boolean,
-	month?: boolean,
-	year?: boolean
-}
-
-interface ObjectProps {
-	date?: Date,
-	month?: string,
-	year?: string
-}
-
 export const filterControls = (
-	toggleData: boolean,
-	disabledConfig: DisabledConfigProps,
-	filters: ObjectProps,
-	t: (key: string) => string,
+	toggleData,
+	disabledConfig,
+	filters,
+	t,
 ) => {
 	const today = new Date();
 

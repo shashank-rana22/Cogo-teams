@@ -112,7 +112,7 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 									return (
 										<div
 											className={styles.data_div}
-											key={bill as any}
+											key={bill}
 										>
 											<div className={styles.section}>
 												<div>Invoice No.</div>
@@ -136,7 +136,7 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 												<div className={styles.element}>
 													{formatAmount({
 														amount: (grandTotal
-															- payableTds) as any,
+															- payableTds),
 														currency : billCurrency,
 														options  : {
 															style: 'currency',
@@ -164,7 +164,7 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 												<div>Paid</div>
 												<div className={styles.element}>
 													{formatAmount({
-														amount   : paidAmount as any,
+														amount   : paidAmount,
 														currency : billCurrency,
 														options  : {
 															style: 'currency',

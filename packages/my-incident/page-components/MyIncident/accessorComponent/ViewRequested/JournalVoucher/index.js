@@ -77,7 +77,7 @@ function JournalVoucher({
 								Amount
 							</div>
 							<div className={styles.label}>
-								{getPrice((amount) as number, (currency) as string)}
+								{getPrice((amount), (currency))}
 							</div>
 						</div>
 						<div className={styles.subcontainer}>

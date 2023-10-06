@@ -2,16 +2,7 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-interface GetOrgParams {
-	page : number;
-	pageLimit : number;
-}
-
-interface Pagination {
-	pagination : GetOrgParams;
-}
-
-const useGetOrganizationList = ({ pagination } : Pagination) => {
+const useGetOrganizationList = ({ pagination }) => {
 	const { page = 1, pageLimit = 10 } = pagination || {};
 	const { query, debounceQuery } = useDebounceQuery();
 

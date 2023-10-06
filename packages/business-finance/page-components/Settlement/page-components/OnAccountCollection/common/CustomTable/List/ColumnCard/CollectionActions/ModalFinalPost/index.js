@@ -7,14 +7,9 @@ import styles from './styles.module.css';
 const CALC_NAME_LEN = 20;
 const AMOUNT_LENGTH = 6;
 
-interface ModalFinalInterface {
-	sagePaymentInfo?: object
-	platformPaymentInfo?:object
-}
-
 function ModalFinalPost({
 	sagePaymentInfo, platformPaymentInfo,
-}:ModalFinalInterface) {
+}) {
 	return (
 		<div className={styles.card_style}>
 			{(getFinalDetails(sagePaymentInfo, platformPaymentInfo) || []).map((item) => {

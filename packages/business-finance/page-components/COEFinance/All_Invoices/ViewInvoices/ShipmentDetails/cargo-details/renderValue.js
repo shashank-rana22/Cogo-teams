@@ -7,19 +7,7 @@ import { formatDate } from '../../../../../commons/utils/formatDate';
 
 import styles from './styles.module.css';
 
-interface PocDetailsInt {
-	name?: string;
-	mobile_country_code?: string;
-	mobile_number?: string;
-	email?: string;
-}
-
-interface ShipperDetailsInt {
-	name?: string;
-	address?: string;
-}
-
-export const renderValue = (label: string, detail: any) => {
+export const renderValue = (label, detail) => {
 	const { packages = [] } = detail || [{}];
 	const isAir = detail?.service_type === 'air_freight_service'
     || detail?.service_type === 'domestic_air_freight_service';
@@ -74,7 +62,7 @@ export const renderValue = (label: string, detail: any) => {
 		return `Package: ${inputValue}`;
 	};
 
-	const formatPocData = (pocDetails: PocDetailsInt) => (
+	const formatPocData = (pocDetails) => (
 		<div>
 			<div>{pocDetails?.name}</div>
 			<div>
@@ -86,14 +74,14 @@ export const renderValue = (label: string, detail: any) => {
 		</div>
 	);
 
-	const formatShipperDetails = (shipperDetails: ShipperDetailsInt) => (
+	const formatShipperDetails = (shipperDetails) => (
 		<div>
 			<div>{shipperDetails?.name}</div>
 			<div>{shipperDetails?.address}</div>
 		</div>
 	);
 
-	const formatCertificate = (certificates: any) => (
+	const formatCertificate = (certificates) => (
 		<div className={styles.certificate_container}>
 			{(certificates || []).map((item, key) => (
 				<a href={item} target="_blank" rel="noreferrer">

@@ -3,30 +3,13 @@ import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeat
 import { useRequestBf } from '@cogoport/request';
 import { useState } from 'react';
 
-interface InvoiceAdditionals {
-	reqCancelReason?: string
-	reqCancelDocumentUrl?: string
-	reqReplaceDocumentUrl?:string
-}
-interface InvoiceData {
-	invoiceAdditionals?: InvoiceAdditionals
-}
-
-interface IrnCancellationProps {
-	id?: string;
-	entityCode?: string;
-	setShowCancellationModal?: Function;
-	refetch?: Function;
-	itemData?: InvoiceData
-}
-
 const useGetIrnCancellation = ({
 	id,
 	setShowCancellationModal,
 	refetch,
 	entityCode,
 	itemData = {},
-}: IrnCancellationProps) => {
+}) => {
 	const [response, setResponse] = useState({
 		remarks           : itemData?.invoiceAdditionals?.reqCancelReason,
 		value             : '',

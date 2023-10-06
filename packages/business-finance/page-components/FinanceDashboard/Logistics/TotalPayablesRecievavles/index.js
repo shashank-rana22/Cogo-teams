@@ -181,7 +181,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 									<div>
 										{showInTooltop(
 											formatAmount({
-												amount   :	Math.abs(progressDataReceivables) as any,
+												amount   :	Math.abs(progressDataReceivables),
 												currency : GLOBAL_CONSTANTS.currency_code.INR,
 												options  : {
 													style           : 'currency',
@@ -189,7 +189,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 												},
 											}),
 											formatAmount({
-												amount   :	Math.abs(progressDataReceivables) as any,
+												amount   :	Math.abs(progressDataReceivables),
 												currency :	GLOBAL_CONSTANTS.currency_code.INR,
 												options  : {
 													style           : 'currency',
@@ -231,7 +231,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 										<span>
 											{showInTooltop(
 												formatAmount({
-													amount   :	onAccountReceivable as any,
+													amount   :	onAccountReceivable,
 													currency : GLOBAL_CONSTANTS.currency_code.INR,
 													options  : {
 														style           : 'currency',
@@ -239,7 +239,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 													},
 												}),
 												formatAmount({
-													amount   :	onAccountReceivable as any,
+													amount   :	onAccountReceivable,
 													currency :	GLOBAL_CONSTANTS.currency_code.INR,
 													options  : {
 														style           : 'currency',
@@ -288,7 +288,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 										<span>
 											{showInTooltop(
 												formatAmount({
-													amount   :	outstandingReceivable as any,
+													amount   :	outstandingReceivable,
 													currency : GLOBAL_CONSTANTS.currency_code.INR,
 													options  : {
 														style           : 'currency',
@@ -296,7 +296,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 													},
 												}),
 												formatAmount({
-													amount   :	outstandingReceivable as any,
+													amount   :	outstandingReceivable,
 													currency :	GLOBAL_CONSTANTS.currency_code.INR,
 													options  : {
 														style           : 'currency',

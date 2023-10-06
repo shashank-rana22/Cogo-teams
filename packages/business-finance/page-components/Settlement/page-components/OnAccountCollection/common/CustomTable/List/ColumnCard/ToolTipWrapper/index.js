@@ -1,13 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import React from 'react';
 
-interface WrapperInterface {
-	text?:string
-	maxlength?:number
-	maxWidth?:number
-}
-
-function ToolTipWrapper({ text = '', maxlength = 12, maxWidth = 500 }:WrapperInterface) {
+function ToolTipWrapper({ text = '', maxlength = 12, maxWidth = 500 }) {
 	if (text?.length > maxlength) {
 		return (
 			<Tooltip content={text} maxWidth={maxWidth} placement="top-start" interactive>

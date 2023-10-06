@@ -6,31 +6,12 @@ import ColumnCard from './ColumnCard';
 import RenderRibbon from './RenderRibbon';
 import styles from './styles.module.css';
 
-interface ItemInterface {
-	customerName?: string;
-	accCode?: string;
-	bankAccountNumber?: string;
-	orgSerialId?: string;
-	bankName?: string;
-	paymentNumValue?: string;
-	amount?: string;
-	utr?: string;
-	entityType?: string;
-	currency?: string;
-	id?: string;
-}
-interface ListInterface {
-	list?: Array<ItemInterface>;
-	refetch?: () => void;
-	loading?: boolean;
-	getTableBodyCheckbox: (item: object) => React.JSX.Element;
-}
 function List({
 	list = [],
 	refetch,
 	loading,
 	getTableBodyCheckbox,
-}: ListInterface) {
+}) {
 	return loading ? (
 		<Loader />
 	) : (

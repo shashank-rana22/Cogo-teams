@@ -4,26 +4,12 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-interface Outstanding {
-	page?: number;
-	pageLimit?: number;
-	search?: string;
-	organizationSerialId?: string;
-	q?: string;
-	sageId?: string;
-	tradePartySerialId?: string;
-}
-
-interface GetOrgOutstanding {
-	entityCode?: string;
-}
-
-const useGetOrgOutstanding = ({ entityCode = '' }: GetOrgOutstanding) => {
+const useGetOrgOutstanding = ({ entityCode = '' }) => {
 	const {
 		profile: { authorizationparameters, selected_agent_id: selectedAgentId },
 	} = useSelector((state) => state);
 
-	const [outStandingFilters, setoutStandingFilters] = useState<Outstanding>({
+	const [outStandingFilters, setoutStandingFilters] = useState({
 		page      : 1,
 		pageLimit : 10,
 	});

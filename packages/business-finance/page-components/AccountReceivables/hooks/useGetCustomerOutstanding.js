@@ -2,11 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-interface GetOrgOutstanding {
-	orgSerialId?: string;
-}
-
-const useGetCustomerOutstanding = ({ orgSerialId }: GetOrgOutstanding) => {
+const useGetCustomerOutstanding = ({ orgSerialId }) => {
 	const [
 		{ data, loading },
 		trigger,

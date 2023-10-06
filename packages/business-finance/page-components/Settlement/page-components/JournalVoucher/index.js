@@ -88,7 +88,7 @@ function JournalVoucher({ entityCode }) {
 				/>
 			) : null}
 			{showBulkJV ? (
-				<BulkJvUpload showBulkJV={showBulkJV} setShowBulkJV={setShowBulkJV as any} />
+				<BulkJvUpload showBulkJV={showBulkJV} setShowBulkJV={setShowBulkJV} />
 			) : null}
 		</div>
 	);

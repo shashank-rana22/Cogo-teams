@@ -1,22 +1,11 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import { Refetch } from '../../../commons/Interfaces';
 import useRemoveBpr from '../../../hooks/useRemoveBpr';
 
 import styles from './styles.module.css';
 
-interface Row {
-	id?: string;
-	businessName?: string;
-}
-
-interface RemoveBprParams {
-	refetch: Refetch;
-	row: Row;
-}
-
-function RemoveBpr({ refetch, row } : RemoveBprParams) {
+function RemoveBpr({ refetch, row }) {
 	const { id = '', businessName = 'N/A' } = row || {};
 	const [showModal, setShowModal] = useState(false);
 	const { dataRemove, loadingOnDelete } = useRemoveBpr({ refetch, id });

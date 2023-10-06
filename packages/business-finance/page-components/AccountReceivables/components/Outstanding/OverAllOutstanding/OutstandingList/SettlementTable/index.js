@@ -10,12 +10,7 @@ import useGetSettlementTable from '../../../../../hooks/useGetSettlementTable';
 
 import styles from './styles.module.css';
 
-interface Props {
-	organizationId: string,
-	entityCode?: string,
-}
-
-function SettlementTable({ organizationId = '', entityCode = '' }: Props) {
+function SettlementTable({ organizationId = '', entityCode = '' }) {
 	const {
 		data = {}, loading = false, filters = { accountType: '', query: '' },
 		setFilters = () => { }, apiData = {}, refetch = () => { },
@@ -25,7 +20,7 @@ function SettlementTable({ organizationId = '', entityCode = '' }: Props) {
 		setFilters((p) => ({ ...p, page: val }));
 	};
 
-	const onChange = (val: string, name: string) => {
+	const onChange = (val, name) => {
 		setFilters((p) => ({ ...p, [name]: val }));
 	};
 

@@ -9,27 +9,8 @@ import DefaultersFilters from './DefaultersFilters';
 import listFunctions from './ListFunctions';
 import styles from './styles.module.css';
 
-interface GlobalInterface {
-	page?:number,
-	type?:string,
-	migrated?:boolean | string,
-	pageIndex?:number,
-	pageLimit?:number,
-	invoiceStatus?: string,
-	status?: string,
-	services?: string[],
-	invoiceDate?: { startDate?: Date, endDate?: Date },
-	dueDate?: { startDate?: Date, endDate?: Date },
-	currency?: string,
-	zone?:string,
-}
-
-interface Props {
-	entityCode?:number | string
-}
-
-function Defaulters({ entityCode }:Props) {
-	const [globalFilters, setGlobalFilters] = useState<GlobalInterface>({
+function Defaulters({ entityCode }) {
+	const [globalFilters, setGlobalFilters] = useState({
 		pageIndex : 1,
 		pageLimit : 10,
 	});
@@ -123,7 +104,7 @@ function Defaulters({ entityCode }:Props) {
 					setSort={setSort}
 					page={globalFilters.pageIndex || 1}
 					pageSize={globalFilters.pageLimit || 10}
-					handlePageChange={(pageValue:number) => {
+					handlePageChange={(pageValue) => {
 						setGlobalFilters((p) => ({ ...p, pageIndex: pageValue }));
 					}}
 					showPagination

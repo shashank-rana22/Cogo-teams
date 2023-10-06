@@ -5,22 +5,6 @@ import OtherChargeDetails from './OtherChargeDetails';
 import styles from './styles.module.css';
 import WeightChargeDetails from './WeightChargeDetails';
 
-interface NestedObj {
-	[key: string]: string | number;
-}
-
-interface Props {
-	taskItem?: NestedObj;
-	footerValues?: Array<string>;
-	formData?: NestedObj;
-	data?:NestedObj;
-	whiteout?:boolean;
-	activeCategory?: String;
-	edit?: boolean | string;
-	viewDoc?: boolean;
-	activeHawb?: NestedObj;
-}
-
 const FOOTER_MAPPING = {
 	copy_12    : 'COPY 12(FOR CUSTOMS)',
 	copy_11    : 'COPY 11(EXTRA COPY FOR CARRIER)',
@@ -72,7 +56,7 @@ function ChargeDetails({
 					viewDoc={viewDoc}
 				/>
 			</div>
-			<div className={styles.block} style={{ '--temp-color': tempColor } as React.CSSProperties} id="footer">
+			<div className={styles.block} style={{ '--temp-color': tempColor }} id="footer">
 				<p style={{ fontSize: 13, color: tempColor }}>
 					{FOOTER_MAPPING[taskItem?.copyType] || 'ORIGINAL 1 (FOR ISSUING CARRIER)'}
 				</p>

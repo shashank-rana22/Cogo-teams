@@ -3,16 +3,8 @@ import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeat
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface Props {
-	getOrganizationInvoices?:Function,
-	checkedRows?:string[],
-	setCheckedRows?:Function,
-	setIsHeaderChecked?:Function,
-	entityCode?:string,
-}
-
 const useBulkIrnGenerate = (
-	{ entityCode = '', getOrganizationInvoices, checkedRows, setCheckedRows, setIsHeaderChecked }:Props,
+	{ entityCode = '', getOrganizationInvoices, checkedRows, setCheckedRows, setIsHeaderChecked },
 ) => {
 	const { user_profile: userProfile = {} } = useSelector(({ profile }) => ({
 		user_profile: profile,

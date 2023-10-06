@@ -21,7 +21,7 @@ function UploadModal({ uploadModal, setUploadModal }) {
 		sourceFileUploadLoading,
 	} =	 useSourceFile({ modalData, uploader, setUploadModal });
 
-	const entityOptions = getEntityOptions() as any;
+	const entityOptions = getEntityOptions();
 
 	const onClickViewSampleFile = () => {
 		window.open(

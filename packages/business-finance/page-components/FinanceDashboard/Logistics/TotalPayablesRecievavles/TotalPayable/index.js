@@ -80,7 +80,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 						<span className={styles.current_amount_style}>
 							{showInTooltop(
 								formatAmount({
-									amount   :	Math.abs(payNonOverdueAmount) as any,
+									amount   :	Math.abs(payNonOverdueAmount),
 									currency : GLOBAL_CONSTANTS.currency_code.INR,
 									options  : {
 										style           : 'currency',
@@ -88,7 +88,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 									},
 								}),
 								formatAmount({
-									amount   :	Math.abs(payNonOverdueAmount) as any,
+									amount   :	Math.abs(payNonOverdueAmount),
 									currency : GLOBAL_CONSTANTS.currency_code.INR,
 									options  : {
 										style           : 'currency',
@@ -102,7 +102,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 							<span className={styles.current_amount_style}>
 								{showInTooltop(
 									formatAmount({
-										amount   :	Math.abs(payOverdueAmount) as any,
+										amount   :	Math.abs(payOverdueAmount),
 										currency : GLOBAL_CONSTANTS.currency_code.INR,
 										options  : {
 											style           : 'currency',
@@ -110,7 +110,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 										},
 									}),
 									formatAmount({
-										amount   :	Math.abs(payOverdueAmount) as any,
+										amount   :	Math.abs(payOverdueAmount),
 										currency : GLOBAL_CONSTANTS.currency_code.INR,
 										options  : {
 											style           : 'currency',
@@ -145,7 +145,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 							<div>
 								{showInTooltop(
 									formatAmount({
-										amount   :	Math.abs(progressPayableData) as any,
+										amount   :	Math.abs(progressPayableData),
 										currency :	GLOBAL_CONSTANTS.currency_code.INR,
 										options  : {
 											style           : 'currency',
@@ -153,7 +153,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 										},
 									}),
 									formatAmount({
-										amount   :	Math.abs(progressPayableData) as any,
+										amount   :	Math.abs(progressPayableData),
 										currency :	GLOBAL_CONSTANTS.currency_code.INR,
 										options  : {
 											style           : 'currency',
@@ -195,7 +195,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 								<span>
 									{showInTooltop(
 										formatAmount({
-											amount   :	onAccountPayable as any,
+											amount   :	onAccountPayable,
 											currency : GLOBAL_CONSTANTS.currency_code.INR,
 											options  : {
 												style           : 'currency',
@@ -203,7 +203,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 											},
 										}),
 										formatAmount({
-											amount   :	onAccountPayable as any,
+											amount   :	onAccountPayable,
 											currency : GLOBAL_CONSTANTS.currency_code.INR,
 											options  : {
 												style           : 'currency',
@@ -253,7 +253,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 								<span>
 									{showInTooltop(
 										formatAmount({
-											amount   :	outstandingPayable as any,
+											amount   :	outstandingPayable,
 											currency : GLOBAL_CONSTANTS.currency_code.INR,
 											options  : {
 												style           : 'currency',
@@ -261,7 +261,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 											},
 										}),
 										formatAmount({
-											amount   :	outstandingPayable as any,
+											amount   :	outstandingPayable,
 											currency : GLOBAL_CONSTANTS.currency_code.INR,
 											options  : {
 												style           : 'currency',

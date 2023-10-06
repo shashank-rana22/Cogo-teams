@@ -36,7 +36,7 @@ const profitabillityColumn = (sort, setSort) => [
 					interactive
 				>
 					<div>
-						{(row?.businessName as string).substring(0, 12)}
+						{(row?.businessName).substring(0, 12)}
 						...
 					</div>
 				</Tooltip>
@@ -64,7 +64,7 @@ const profitabillityColumn = (sort, setSort) => [
 			<div className={styles.expense_text_style}>
 				{formatAmount(
 					{
-						amount   :	Math.abs(row?.income) as any,
+						amount   :	Math.abs(row?.income),
 						currency : GLOBAL_CONSTANTS.currency_code.INR,
 						options  : {
 							style           : 'currency',

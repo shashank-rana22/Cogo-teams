@@ -8,10 +8,7 @@ import { monthControls } from './monthControls';
 import styles from './styles.module.css';
 import TooltipAmount from './TooltipAmount';
 
-interface ItemProps {
-	activeEntity:string,
-}
-function TreasuryStatistics({ activeEntity }:ItemProps) {
+function TreasuryStatistics({ activeEntity }) {
 	const {
 		data,
 		filters,

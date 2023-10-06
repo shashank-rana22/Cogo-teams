@@ -25,7 +25,7 @@ const customerProfitabillityColumn = (sort, setSort) => [
 					interactive
 				>
 					<div>
-						{(row?.businessName as string).substring(0, 12)}
+						{(row?.businessName).substring(0, 12)}
 						...
 					</div>
 				</Tooltip>
