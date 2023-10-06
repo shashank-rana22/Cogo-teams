@@ -79,7 +79,7 @@ const getCreateControls = ({
 			},
 		},
 		{
-			label          : t('myTicket:service_type'),
+			label          : <RenderLabel label={t('myTicket:service_type')} />,
 			name           : 'service_type',
 			placeholder    : 'Select service type',
 			controllerType : 'select',

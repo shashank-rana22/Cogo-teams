@@ -31,7 +31,7 @@ const useRaiseTicketcontrols = ({
 	const categoryDeskOptions = useGetAsyncTicketOptions({
 		...asyncTicketsCategory(),
 		params: {
-			Service          : watchService || undefined,
+			Service          : watchServiceType || watchService || undefined,
 			TradeType        : watchTradeType || undefined,
 			RequestType      : watchRequestType || undefined,
 			CategoryDeskType : isOperation ? 'by_desk' : 'by_category',
