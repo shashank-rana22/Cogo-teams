@@ -13,7 +13,7 @@ function PackageDetails({ packages = [], inputValue = '' }) {
 					<div style={{ fontSize: '10px' }}>
 						{(packages).map((item) => {
 							const values = item
-								? `${item.packages_count} Pkg, (${item?.length}cm X ${
+								? `${item?.packages_count} Pkg, (${item?.length}cm X ${
 									item?.width
 								}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 								: '';

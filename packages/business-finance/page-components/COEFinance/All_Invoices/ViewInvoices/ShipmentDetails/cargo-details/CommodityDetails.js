@@ -1,5 +1,5 @@
 import { Tooltip } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 function CommodityDetails({ isAir = false, detail = {}, commodityDataDetails = {} }) {
@@ -9,7 +9,7 @@ function CommodityDetails({ isAir = false, detail = {}, commodityDataDetails = {
 		return (
 			<div>
 				{`${startCase(commodity)}, ${startCase(
-					commodity_type || commodity_type,
+					commodity_type,
 				)}, ${startCase(
 					commodity_subtype || commodity_sub_type,
 				)}`}
@@ -23,16 +23,12 @@ function CommodityDetails({ isAir = false, detail = {}, commodityDataDetails = {
 				placement="bottom"
 				content={(
 					<div>
-						{(commodity_type
-								|| commodity_type) && (
-									<div>
-										Commodity Type:
-										{startCase(
-											commodity_type
-											|| commodity_type,
-										)}
-									</div>
-						)}
+						{!isEmpty(commodity_type) ? (
+							<div>
+								Commodity Type:
+								{startCase(commodity_type)}
+							</div>
+						) : null}
 						{(commodity_subtype
 								|| commodity_sub_type) && (
 									<div>
