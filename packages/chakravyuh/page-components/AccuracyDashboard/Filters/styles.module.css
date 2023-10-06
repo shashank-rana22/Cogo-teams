@@ -9,6 +9,10 @@
 		height: 40px;
 	}
 
+	:global .ui_select_options_container {
+		z-index: 2;
+	}
+
 	.filter_btn {
 		height: 38px;
 	}

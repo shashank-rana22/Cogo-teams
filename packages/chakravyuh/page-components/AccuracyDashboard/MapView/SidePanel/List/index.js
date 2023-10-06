@@ -68,7 +68,6 @@ function List({ loading = false, finalList = [], setActiveId = () => {}, originN
 									{filterBy.includes('accuracy')
 										? count.toFixed(DECIMAL)
 										: formatBigNumbers(count)}
-
 								</h4>
 							</Tooltip>
 						</div>

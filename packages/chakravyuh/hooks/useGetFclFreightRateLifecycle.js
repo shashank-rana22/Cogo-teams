@@ -29,6 +29,7 @@ const useGetFclFreightRateLifecycle = ({ globalFilters = {} }) => {
 	return {
 		graphs: data?.graph,
 		loading,
+		getFclFreightRateLifecycle,
 	};
 };
 

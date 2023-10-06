@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { IcMRefresh } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import { generateSVGPaths } from '../../../../utils/generateSVGPaths';
@@ -19,6 +20,7 @@ function GraphLayout({
 	graph = {},
 	activeParent = null,
 	setActiveParent = () => {},
+	reloadLifecycle = () => {},
 }) {
 	const { paths } = generateSVGPaths({
 		graph,
@@ -39,7 +41,10 @@ function GraphLayout({
 
 	return (
 		<div className={cl`${styles.container} ${styles[`parent_zoom_level_${DEFAULT_ZOOM_LEVEL}`]}`}>
-			<h3>{startCase(title)}</h3>
+			<h3>
+				<span>{startCase(title)}</span>
+				<IcMRefresh className={styles.reload_btn} onClick={reloadLifecycle} />
+			</h3>
 			<div
 				className={cl`${styles.graph_layout} ${styles.zoom_child}`}
 				style={{ height: `${maxY - minY + EXTRA_HEIGHT}px` }}

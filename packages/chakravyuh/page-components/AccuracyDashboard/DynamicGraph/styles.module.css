@@ -5,7 +5,6 @@
 		position: absolute;
 		top: 180px;
 		right: 40px;
-		z-index: 1;
 
 		> div {
 			display: flex;
@@ -74,19 +73,40 @@
 
 	> h3 {
 		position: relative;
-		top: 50px;
+		top: 60px;
 		left: 50px;
 		z-index: 1;
-		width: 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: calc(100vw - 250px);
 		height: 0;
 		font-size: 20px;
 		text-transform: uppercase;
 		white-space: nowrap;
 	}
+
+	.reload_btn {
+		position: absolute;
+		right: 0;
+		transition: all 300ms ease-in-out;
+
+		&:hover {
+			cursor: pointer;
+			scale: 1.15;
+		}
+
+		&:active {
+			transition: all 100ms ease-in-out;
+			scale: 1.15;
+			transform: rotate(-45deg);
+		}
+	}
 }
 
 .graph_layout {
 	position: relative;
+	z-index: 0;
 	margin-top: 16px;
 	overflow-y: auto;
 	background-color: #fff;

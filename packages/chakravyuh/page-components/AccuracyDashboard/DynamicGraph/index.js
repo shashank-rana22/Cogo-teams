@@ -7,7 +7,7 @@ import GraphLayout from './GraphLayout';
 import styles from './styles.module.css';
 
 const PLACEHOLDER_LENGTH = 3;
-function DynamicGraph({ globalFilters = {} }) {
+function DynamicGraph({ globalFilters = {}, setGlobalFilters = () => {} }) {
 	const [activeParent, setActiveParent] = useState(null);
 	const { loading, graphs } = useGetFclFreightRateLifecycle({ globalFilters });
 
@@ -15,6 +15,10 @@ function DynamicGraph({ globalFilters = {} }) {
 		title,
 		graph: value,
 	})) || [];
+
+	const reloadLifecycle = () => {
+		setGlobalFilters((prev) => ({ ...prev }));
+	};
 
 	return (
 		<>
@@ -25,6 +29,7 @@ function DynamicGraph({ globalFilters = {} }) {
 					title={title}
 					activeParent={activeParent}
 					setActiveParent={setActiveParent}
+					reloadLifecycle={reloadLifecycle}
 				/>
 			))}
 			{loading
