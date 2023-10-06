@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import React, { useState } from 'react';
 
-// import RemarkModal from '../../../../../../commons/RemarkModal';
 import getServiceColumns from '../../../../../../configurations/getServiceColumns';
 
 import RemarkModal from './RemarkModal';
@@ -13,13 +12,12 @@ import styles from './styles.module.css';
 const NEXT = 1;
 
 export default function Content({
-	services,
-	currentKey,
-	accordionState,
-	toggleAccordion,
-	getPrePostShipmentQuotes,
+	services = {},
+	currentKey = '',
+	accordionState = {},
+	toggleAccordion = () => {},
+	getPrePostShipmentQuotes = () => {},
 }) {
-	// console.log({ currentKey });
 	const TABLE_COLUMNS = getServiceColumns({ currentKey });
 	const keys = Object.keys(accordionState);
 	const nextIndex = keys.indexOf(currentKey) + NEXT;
@@ -81,9 +79,7 @@ export default function Content({
 											{formatDate({
 												date       : item?.modifiedAt,
 												dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-												// timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
 												formatType : 'date',
-											// separator  : 'T',
 											})}
 										</div>
 									</div>
@@ -92,9 +88,9 @@ export default function Content({
 							: null}
 
 						{(!item?.modifiedBy && item?.quotationState !== 'APPROVED') ? (
-							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+							<div className={styles.flex_content}>
 								<div />
-								<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+								<div className={styles.flex_content}>
 									<Button
 										size="md"
 										themeType="secondary"

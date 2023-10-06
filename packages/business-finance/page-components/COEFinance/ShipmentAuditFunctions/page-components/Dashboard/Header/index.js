@@ -20,24 +20,13 @@ function Header({ jobId = '' }) {
 		oprClosedData       : {},
 		financialClosedData : {},
 	});
-	const {
-		data: quoteData = {},
-		loading: quoteLoading = true,
-		getPrePostShipmentQuotes,
-	} = useGetPrePostShipmentQuotation({ jobId });
 
 	const [accordionState, setAccordionState] = useState({});
-	useEffect(() => {
-		const INITIAL_STATE = {};
-		Object.keys(quoteData).forEach((category) => {
-			Object.keys(quoteData[category]).forEach((subCategory, index) => {
-				INITIAL_STATE[`${category}_${subCategory}`] = (index === GLOBAL_CONSTANTS.zeroth_index);
-			});
-		});
-		setAccordionState(INITIAL_STATE);
-
-		setQuotationsData((prev) => ({ ...prev, prePostCheckoutData: quoteData }));
-	}, [quoteData]);
+	const {
+		data: quoteData = {},
+		loading: quoteLoading = false,
+		getPrePostShipmentQuotes = () => {},
+	} = useGetPrePostShipmentQuotation({ jobId });
 
 	const toggleAccordion = (key) => {
 		setAccordionState((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -57,6 +46,18 @@ function Header({ jobId = '' }) {
 	const { apiTrigger, loading } = useUpdateJobAuditStatus({ getPrePostShipmentQuotes });
 
 	const { bttnDisableCondition } = getApproveJobAuditBttnCondition({ quotationsData });
+
+	useEffect(() => {
+		const INITIAL_STATE = {};
+		Object.keys(quoteData).forEach((category) => {
+			Object.keys(quoteData[category]).forEach((subCategory, index) => {
+				INITIAL_STATE[`${category}_${subCategory}`] = (index === GLOBAL_CONSTANTS.zeroth_index);
+			});
+		});
+		setAccordionState(INITIAL_STATE);
+
+		setQuotationsData((prev) => ({ ...prev, prePostCheckoutData: quoteData }));
+	}, [quoteData]);
 
 	return (
 		<div className={styles.main_container}>
@@ -90,6 +91,7 @@ function Header({ jobId = '' }) {
 			<div className={styles.all_task_container}>
 				<div className={styles.task_specific_container}>
 					<PrePostCheckoutCards
+						getPrePostShipmentQuotes={getPrePostShipmentQuotes}
 						data={quoteData?.SELL}
 						loading={quoteLoading}
 						type="SELL Quotation"
@@ -97,7 +99,6 @@ function Header({ jobId = '' }) {
 						toggleAccordion={toggleAccordion}
 						setAccordionState={setAccordionState}
 						category="SELL"
-						getPrePostShipmentQuotes={getPrePostShipmentQuotes}
 					/>
 					<PrePostCheckoutCards
 						data={quoteData?.BUY}

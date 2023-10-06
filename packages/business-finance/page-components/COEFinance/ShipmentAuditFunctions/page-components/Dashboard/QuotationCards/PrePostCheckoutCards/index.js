@@ -1,8 +1,8 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import GenerateColumn from './GenerateColumn';
 import Headings from './Headings';
+import Milestones from './Milestones';
 
 const PLACEHOLDER_ARRAY_LENGTH = 4;
 
@@ -29,7 +29,7 @@ function PrePostCheckoutCards({
 						</div>
 					))
 					: (
-						<GenerateColumn
+						<Milestones
 							data={data}
 							loading={loading}
 							accordionState={accordionState}

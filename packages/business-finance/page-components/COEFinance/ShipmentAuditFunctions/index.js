@@ -6,7 +6,7 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import useGetDocumentList from '../hook/useGetDocumentList';
+import useGetJobList from '../hook/useGetJobList';
 
 import EmptyState from './commons/EmptyState';
 import Content from './commons/FiltersContent';
@@ -36,7 +36,11 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 	const [show, setShow] = useState(false);
 	const [search, setSearch] = useState('');
 
-	const { data, loading, refetch } = useGetDocumentList({ paginationFilters, search, activeTab });
+	const {
+		data = {},
+		loading = false,
+		refetch = () => {},
+	} =	 useGetJobList({ paginationFilters, search, activeTab });
 	const { list = [] } = data || {};
 
 	const handlePrePostChange = () => {
@@ -54,8 +58,8 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 	};
 
 	const rest = { onClickOutside: () => setShow(false) };
-	const columns = getJobColumns({ handleClick, tax });
-	const columns2 = getFinancialCloseColumns({ handleClick, activeTab: 'financial_close', tax });
+	const operationColumns = getJobColumns({ handleClick, tax });
+	const financeColumns = getFinancialCloseColumns({ handleClick, tax });
 
 	useEffect(() => {
 		setPaginationFilters((prev) => ({ ...prev, page: 1 }));
@@ -83,7 +87,6 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 									setFilters={setFilters}
 									receivables={receivables}
 									setReceivables={setReceivables}
-									show={show}
 									setShow={setShow}
 									refetch={refetch}
 									tradeTab={tradeTab}
@@ -128,16 +131,16 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 			<div className={styles.list_container}>
 
 				{isEmpty(list) ? (
-					<>
+					<div>
 						<div className={styles.empty_container}>
-							<EmptyState height={315} width={482} text="" />
+							<EmptyState height={315} width={482} text="Please Select Filters" />
 						</div>
 						<div style={{ height: '80px' }} />
-					</>
+					</div>
 				)
 					: (
 						<Table
-							columns={activeTab === 'operational_close' ? columns : columns2}
+							columns={activeTab === 'operational_close' ? operationColumns : financeColumns}
 							data={list}
 							className={styles.tablestyle}
 							loading={loading}

@@ -3,20 +3,19 @@ import { cl } from '@cogoport/components';
 import { IcMDummyCircle } from '@cogoport/icons-react';
 
 import { getTimelineClassNames, getCircleColor } from '../../../../../utils/getStyleAttributes';
-import CardContent from '../CardContent';
+import MilestoneCardContent from '../MilestoneCardContent';
 
 import styles from './styles.module.css';
 
 const PREV_INDEX = 1;
 
-function GenerateColumn({
+function Milestones({
 	data = {},
 	loading = false,
-	toggleAccordion,
-	setAccordionState,
+	toggleAccordion = () => {},
 	category = '',
-	accordionState,
-	getPrePostShipmentQuotes,
+	accordionState = {},
+	getPrePostShipmentQuotes = () => {},
 }) {
 	return Object.keys(data).map((key, index) => (
 		<div key={key}>
@@ -56,14 +55,13 @@ function GenerateColumn({
 					) }
 
 				</div>
-				<CardContent
+				<MilestoneCardContent
 					loading={loading}
 					data={data}
 					title={key}
 					services={data?.[key]}
 					accordionState={accordionState}
 					toggleAccordion={toggleAccordion}
-					setAccordionState={setAccordionState}
 					category={category}
 					getPrePostShipmentQuotes={getPrePostShipmentQuotes}
 				/>
@@ -72,4 +70,4 @@ function GenerateColumn({
 	));
 }
 
-export default GenerateColumn;
+export default Milestones;

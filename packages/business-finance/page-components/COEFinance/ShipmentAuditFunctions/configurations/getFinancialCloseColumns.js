@@ -33,7 +33,7 @@ const getFinancialCloseColumns = ({
 		{
 			id     : 'estimatedRevenuePreTax',
 			Header : (
-				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+				<div className={styles.common_header_styling}>
 					<div className={styles.vertical_rule} />
 					<div className={styles.header_financial}>
 						<div className={styles.main_heading}>Sell</div>
@@ -80,7 +80,7 @@ const getFinancialCloseColumns = ({
 		{
 			id     : 'buy',
 			Header : (
-				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+				<div className={styles.common_header_styling}>
 					<div className={styles.header_financial}>
 						<div className={styles.main_heading}>Buy</div>
 						<div className={styles.sub_header_financial}>
@@ -133,7 +133,7 @@ const getFinancialCloseColumns = ({
 		{
 			id     : 'estimatedProfitabilityPreTax',
 			Header : (
-				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+				<div className={styles.common_header_styling}>
 					<div className={styles.header_financial}>
 						<div className={styles.main_heading}>Profitability</div>
 						<div className={styles.sub_header_financial}>

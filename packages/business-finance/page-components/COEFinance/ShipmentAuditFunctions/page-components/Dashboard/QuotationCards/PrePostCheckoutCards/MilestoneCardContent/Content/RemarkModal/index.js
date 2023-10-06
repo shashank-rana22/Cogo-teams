@@ -1,31 +1,25 @@
 import { Button, Modal, Textarea } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import useApproveQuotation from '../../../../../../../../hook/useApproveQuotation';
 
 import styles from './styles.module.css';
 
-// const LAST_INDEX = 5;
-// const NEXT_INDEX = 1;
-const ZERO_VAL = 0;
-
 export default function RemarkModal({
 	remarkValue = '',
-	setRemarkValue,
-	queryModalShow,
-	setQueryModalShow,
-	buttonClicked,
-	setButtonClicked,
-	// columnIndex,
-	// index,
-	toggleAccordion,
-	currentKey,
-	nextKey,
-	item,
-	getPrePostShipmentQuotes,
+	setRemarkValue = () => {},
+	queryModalShow = false,
+	setQueryModalShow = () => {},
+	buttonClicked = '',
+	setButtonClicked = () => {},
+	toggleAccordion = () => {},
+	currentKey = '',
+	nextKey = '',
+	item = {},
+	getPrePostShipmentQuotes = () => {},
 
 }) {
-	// console.log({ remarkValue });
 	function onClose() {
 		setQueryModalShow(false);
 		setRemarkValue('');
@@ -100,7 +94,7 @@ export default function RemarkModal({
 						onClick={() => {
 							approveQuotation(handleSubmit, getPrePostShipmentQuotes);
 						}}
-						disabled={remarkValue.length === ZERO_VAL}
+						disabled={isEmpty(remarkValue)}
 					>
 						Approve
 					</Button>

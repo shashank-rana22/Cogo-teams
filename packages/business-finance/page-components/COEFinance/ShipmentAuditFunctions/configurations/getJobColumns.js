@@ -30,7 +30,7 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 		{
 			id     : 'estimatedRevenuePreTax',
 			Header : (
-				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+				<div className={styles.common_header_styling}>
 					<div className={styles.vertical_rule} />
 					<div style={{ padding: '0 30px' }} className={styles.header_financial}>
 						<div className={styles.main_heading}>Sell</div>
@@ -67,7 +67,7 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 		{
 			id     : 'estimatedCostPreTax',
 			Header : (
-				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+				<div className={styles.common_header_styling}>
 					<div style={{ padding: '0 30px' }} className={styles.header_financial}>
 						<div className={styles.main_heading}>Buy</div>
 						<div className={styles.sub_header_financial}>
@@ -108,7 +108,7 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 		{
 			id     : 'estimatedProfitabilityPreTax',
 			Header : (
-				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+				<div className={styles.common_header_styling}>
 					<div style={{ padding: '0 30px' }} className={styles.header_financial}>
 						<div className={styles.main_heading}>Profitability</div>
 						<div className={styles.sub_header_financial}>

@@ -1,30 +1,26 @@
 import { Placeholder } from '@cogoport/components';
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcCFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+
+import { getFormatAmount } from '../../../../../utils/getFormatAmount';
 
 import Content from './Content';
 import styles from './styles.module.css';
 
 const SLICE_LENGTH = 2;
-const ZERO_VALUE = 0;
 
-export default function CardContent({
+export default function MilestoneCardContent({
 	loading = false,
 	data = {},
 	title = '',
 	services = '',
 	accordionState = {},
 	toggleAccordion = '',
-	// setAccordionState,
 	category = '',
 	getPrePostShipmentQuotes = {},
 }) {
 	const isOpen = accordionState[`${category}_${title}`];
 	const currentKey = `${category}_${title}`;
-	// console.log({ title });
 	return (
 		<div className={styles.custom_accordion}>
 			{loading ? <Placeholder /> : (
@@ -32,7 +28,7 @@ export default function CardContent({
 					<div className={styles.accord_title}>
 						<div className={styles.status_card}>
 							<div className={styles.title}>
-								{startCase(title.slice(SLICE_LENGTH))}
+								{startCase(title?.slice(SLICE_LENGTH))}
 							</div>
 							{services?.finalStatus ? <IcCFtick /> : null}
 						</div>
@@ -42,14 +38,10 @@ export default function CardContent({
 								<div className={`${isOpen ? styles.nothing : styles.other_title}`}>
 									<div className={styles.regular}>{category === 'BUY' ? 'Expense' : 'Income'}</div>
 									<div>
-										{formatAmount({
-											amount   : services?.grandTotal || ZERO_VALUE,
-											currency : services?.currency === 'null' ? 'INR' : services?.currency,
-											options  : {
-												currencyDisplay : 'code',
-												style           : 'currency',
-											},
-										})}
+										{getFormatAmount(
+											services?.grandTotal,
+											services?.currency === 'null' ? 'INR' : services?.currency,
+										)}
 									</div>
 								</div>
 								{/* <div className={`${isOpen ? styles.nothing : styles.other_title}`}>
@@ -62,13 +54,13 @@ export default function CardContent({
 						)}
 						{isOpen ? (
 							<IcMArrowRotateUp
-								style={{ cursor: 'pointer' }}
+								className={styles.cursor}
 								onClick={() => toggleAccordion(`${category}_${title}`)}
 							/>
 						)
 							: (
 								<IcMArrowRotateDown
-									style={{ cursor: 'pointer' }}
+									className={styles.cursor}
 									onClick={() => toggleAccordion(`${category}_${title}`)}
 								/>
 							)}
@@ -82,14 +74,10 @@ export default function CardContent({
 										{category === 'BUY' ? 'Expense' : 'Income'}
 									</div>
 									<div>
-										{formatAmount({
-											amount   : services?.grandTotal || ZERO_VALUE,
-											currency : services?.currency === 'null' ? 'INR' : services?.currency,
-											options  : {
-												currencyDisplay : 'code',
-												style           : 'currency',
-											},
-										})}
+										{getFormatAmount(
+											services?.grandTotal,
+											services?.currency === 'null' ? 'INR' : services?.currency,
+										)}
 									</div>
 								</div>
 								{/* <div className={`${!isOpen ? styles.nothing : styles.margin}`}>

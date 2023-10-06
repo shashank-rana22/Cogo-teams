@@ -13,7 +13,6 @@ export default function Services(
 		activeService = '',
 		services = {},
 		handleServiceClick = () => {},
-		// firstService,
 		defaultSelectedService = () => {},
 	},
 ) {
@@ -21,7 +20,7 @@ export default function Services(
 		<>
 			{Object.keys(services).map((service) => (
 
-				service.includes('service') || service.includes('platform_fee')
+				service?.includes('service') || service?.includes('platform_fee')
 					? (
 						<div
 							key={service}

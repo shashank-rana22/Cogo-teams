@@ -11,7 +11,7 @@ const getFormatDate = (date = '') => formatDate({
 	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 	formatType : 'date',
 });
-const useGetDocumentList = ({
+const useGetJobList = ({
 	paginationFilters = {},
 	search = '',
 	activeTab = '',
@@ -85,4 +85,4 @@ const useGetDocumentList = ({
 		refetch,
 	};
 };
-export default useGetDocumentList;
+export default useGetJobList;
