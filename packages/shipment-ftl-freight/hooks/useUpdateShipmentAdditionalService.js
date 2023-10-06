@@ -51,7 +51,7 @@ const useUpdateShipmentAdditionalService = ({
 		}
 
 		const payload = {
-			id      : item.id,
+			id      : item?.id,
 			state   : 'amendment_requested_by_importer_exporter',
 			remarks : [remarks],
 		};
@@ -61,7 +61,7 @@ const useUpdateShipmentAdditionalService = ({
 
 	const handleBuyPriceReRequest = () => {
 		const payload = {
-			id    : item.id,
+			id    : item?.id,
 			state : 'requested_for_service_provider',
 		};
 
@@ -72,7 +72,7 @@ const useUpdateShipmentAdditionalService = ({
 		if (!remarks) Toast.error('Please provide cancellation remarks');
 
 		const payload = {
-			id      : item.id,
+			id      : item?.id,
 			state   : 'cancelled',
 			remarks : [remarks],
 		};
@@ -84,7 +84,7 @@ const useUpdateShipmentAdditionalService = ({
 		if (!remarks) Toast.error('Please provide cancellation remarks');
 
 		const payload = {
-			id      : item.id,
+			id      : item?.id,
 			state   : 'cancelled_by_supplier',
 			remarks : [remarks],
 		};
@@ -94,7 +94,7 @@ const useUpdateShipmentAdditionalService = ({
 
 	const handleAddInvoicingParty = () => {
 		const payload = {
-			id                 : item.serviceListItem.id,
+			id                 : item?.id,
 			invoice_preference : {},
 		};
 
@@ -103,7 +103,7 @@ const useUpdateShipmentAdditionalService = ({
 
 	const requestRateFromTechops = () => {
 		const payload = {
-			id                : item.serviceListItem.id,
+			id                : item?.id,
 			is_rate_available : false,
 			state             : 'requested_for_importer_exporter',
 		};
@@ -123,7 +123,7 @@ const useUpdateShipmentAdditionalService = ({
 		} = billing_address;
 
 		const payload = {
-			id                 : item.serviceListItem.id,
+			id                 : item?.id,
 			invoice_preference : {
 				billing_address: {
 					tax_number,
@@ -152,7 +152,7 @@ const useUpdateShipmentAdditionalService = ({
 				add_to_sell_quotation: value === 'bill',
 				state:
 					value === 'not_bill' ? 'accepted_by_importer_exporter' : undefined,
-				id: item.serviceListItem.id,
+				id: item?.id,
 			};
 
 			await handleSubmit(payload);

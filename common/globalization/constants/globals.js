@@ -465,6 +465,9 @@ const GLOBAL_CONSTANTS = {
 		airline_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png',
 		edit_square_icon: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/edit_square.png',
+		performance_leaderboard_confetti:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti_svg.svg',
+		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
 	},
 
 	video_call_ring_tone_url:
@@ -613,6 +616,7 @@ const GLOBAL_CONSTANTS = {
 		static_url                 : /([^:]\/)\/+/g,
 		gst_number                 : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 		otp                        : /[^0-9]/g,
+		line_break_regex           : /(?:\r\n|\r|\n)/g,
 		hyphen_characters          : /-/g,
 		text_pattern_classifier    : /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
 	},
@@ -668,7 +672,8 @@ const GLOBAL_CONSTANTS = {
 			orissa_metaliks  : 'AAACO8663L',
 			varun_beverages  : 'AAACV2678L',
 		},
-		ftl_disable_backdate_date: '2023-06-13T00:00:00',
+		ftl_disable_backdate_date            : '2023-06-13T00:00:00',
+		percentage_factor_for_advance_amount : 0.8,
 	},
 	freight_unit_mapping: {
 		per_container         : '/Ctr.',
@@ -833,7 +838,8 @@ const GLOBAL_CONSTANTS = {
 		internal_service         : 'internal.customer@cogoport.com',
 	},
 	mobile_number: {
-		cogoone_sales_contact_no: '+91-8069195810',
+		cogoone_sales_contact_no  : '+918069195810',
+		cogoone_supply_contact_no : '+918069195980',
 	},
 	websites: {
 		cogoport : 'www.cogoport.com',

@@ -914,6 +914,17 @@ function asyncListTruckTypes() {
 	};
 }
 
+function asyncAllocationEligibleRoles() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/eligible_roles',
+		authkey      : 'get_agent_scoring_eligible_roles',
+		microService : 'agent_scoring',
+		initialCall  : true,
+	};
+}
+
 function asyncListUserShipments() {
 	return {
 		labelKey    : 'serial_id',
@@ -1032,6 +1043,18 @@ function asyncListEnrichmentSources() {
 	};
 }
 
+function asyncListIncidentTypes() {
+	return {
+		labelKey     : 'label',
+		valueKey     : 'value',
+		endpoint     : '/incident-management/incident/list_incident_types',
+		authkey      : 'get_incident_management_incident_list_incident_types',
+		microService : 'business_finance',
+		initialCall  : true,
+		searchByq    : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1107,6 +1130,7 @@ export {
 	asyncListPricingZones,
 	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
+	asyncAllocationEligibleRoles,
 	asyncListUserShipments,
 	asyncFieldsOrganizationOnCall,
 	asyncListSaasHsCodes,
@@ -1116,4 +1140,5 @@ export {
 	asyncListOverSeasTradeParties,
 	asyncListSaasPlan,
 	asyncListEnrichmentSources,
+	asyncListIncidentTypes,
 };

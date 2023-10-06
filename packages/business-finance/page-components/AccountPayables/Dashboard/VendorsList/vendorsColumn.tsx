@@ -4,7 +4,7 @@ import { getByKey } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const VendorsColumn = (currency) => ([
+const vendorsColumn = (currency) => ([
 	{
 		Header   : <div>Vendor Name</div>,
 		id       : 'businessName',
@@ -64,6 +64,7 @@ const VendorsColumn = (currency) => ([
 									style           : 'currency',
 									notation        : 'compact',
 									compactDisplay  : 'short',
+									currencyWise    : true,
 								},
 							})}
 						</div>
@@ -85,4 +86,4 @@ const VendorsColumn = (currency) => ([
 	},
 
 ]);
-export default VendorsColumn;
+export default vendorsColumn;

@@ -1,6 +1,6 @@
 import { Toast, Input, Button, cl } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { IcMSearchlight, IcMCross, IcMArrowLeft, IcMFeedback } from '@cogoport/icons-react';
+import { IcMSearchlight, IcMCross, IcMArrowLeft } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -17,9 +17,9 @@ function Header({
 	setQuestion = () => {},
 	showHistory = false,
 	setShowHistory = () => {},
-	setShowFeedback = () => {},
-	setModalData = () => {},
-	showFeedback = '',
+	// setShowFeedback = () => {},
+	// setModalData = () => {},
+	// showFeedback = '',
 	setShowNotificationContent = () => {},
 	showNotificationContent = false,
 	refetch = () => {},
@@ -79,21 +79,21 @@ function Header({
 		},
 	};
 
-	const handleFeedback = () => {
-		setTopic(null);
-		setModalData({});
-		setQuestion(null);
-		setShowHistory(false);
-		setShowNotificationContent(false);
-		setShowFeedback((prev) => !prev);
-	};
+	// const handleFeedback = () => {
+	// 	setTopic(null);
+	// 	setModalData({});
+	// 	setQuestion(null);
+	// 	setShowHistory(false);
+	// 	setShowNotificationContent(false);
+	// 	setShowFeedback((prev) => !prev);
+	// };
 
 	return (
 
 		<div className={cl`${styles.container} ${styles[from]}`}>
 
 			<div className={styles.wrapper}>
-				{!showFeedback && (
+				{/* {!showFeedback && (
 					<Button
 						size="sm"
 						themeType="accent"
@@ -103,7 +103,7 @@ function Header({
 						<IcMFeedback />
 						Feedback
 					</Button>
-				)}
+				)} */}
 
 				{from !== 'test_module' ? (
 					<div className={styles.heading_container}>

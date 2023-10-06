@@ -147,6 +147,7 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 				compactDisplay  : 'short',
 				currencyDisplay : 'code',
 				notation        : 'compact',
+				currencyWise    : true,
 			},
 
 		});

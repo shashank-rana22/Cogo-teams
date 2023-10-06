@@ -1,13 +1,17 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf, useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
+import { createAdvancePaymentDoc } from '../helpers/createAdvancePaymentDoc';
 import {
 	formatCollectionPartyPayload,
 	validateData,
 } from '../helpers/format-cp-data';
 import toastApiError from '../utils/toastApiError';
+
+import useCreateShipmentDocument from './useCreateShipmentDocument';
 
 const useCreateColletctionParty = ({
 	onCreate = () => {},
@@ -19,6 +23,8 @@ const useCreateColletctionParty = ({
 	} = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
+
+	const [loading, setLoading] = useState(false);
 
 	const [{ data }] = useRequest({
 		url    : '/list_organization_invoicing_parties',
@@ -40,9 +46,7 @@ const useCreateColletctionParty = ({
 		organization: serviceProviderOrg,
 		entity_code,
 		country,
-	} = data?.list?.[0] || {};
-
-	const [loading, setLoading] = useState(false);
+	} = data?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const [{ data:createBillData }, createBillsApi] = useRequestBf({
 		url     : '/purchase/bills',
@@ -55,6 +59,8 @@ const useCreateColletctionParty = ({
 		method  : 'put',
 		authKey : 'put_purchase_bills',
 	}, { manual: true });
+
+	const { createShipmentDocument } = useCreateShipmentDocument();
 
 	const createCp = async (values, extraData) => {
 		const formatdata = formatCollectionPartyPayload(values, extraData);
@@ -77,6 +83,7 @@ const useCreateColletctionParty = ({
 						billId  : res?.data?.billId,
 						partyId : res?.data?.collectionPartyId,
 					});
+					createAdvancePaymentDoc(values, extraData, createShipmentDocument);
 					setLoading(false);
 					onCreate();
 				}
