@@ -12996,6 +12996,26 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'get_channel_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_lead_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'list_channel_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_lead_channel_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'create_draft_reply_all_html',
 			access_type  : 'private',
 			service_name : 'cogolens',
