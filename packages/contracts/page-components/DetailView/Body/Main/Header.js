@@ -36,14 +36,14 @@ function Header({ activePair, handleUpdateContract, stats }) {
 	const destinationCode = activePair?.destination_code;
 	const destinationName = activePair?.destination?.split('(')[0];
 	const singlePortCode = activePair?.single_port_code;
-	const SinglePortName = activePair?.single_port?.split('(')[0];
+	const singlePortName = activePair?.single_port?.split('(')[0];
 	return (
 		<div className={styles.heading}>
 			<div className={styles.port_pair}>
 
 				{singlePortCode ? (
 					<div>
-						{`${SinglePortName}(${singlePortCode})`}
+						{`${singlePortName}(${singlePortCode})`}
 					</div>
 				) : (
 					<>

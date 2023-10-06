@@ -38,8 +38,6 @@ function StatsTabs({ data, state, setState, setServiceType }) {
 			prefix   : servicesMapping[item].icon,
 		})));
 
-	console.log(options);
-
 	return (
 		<div className={styles.filters}>
 			<Chips
