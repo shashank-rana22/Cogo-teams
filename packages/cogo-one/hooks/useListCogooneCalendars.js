@@ -9,7 +9,7 @@ const getParams = ({ startDate = '', endDate = '', searchQuery }) => ({
 	filters: {
 		validity_start_greater_than : formatDateTime({ date: startDate, dateformat: 'isoUtcDateTime' }),
 		validity_end_less_than      : formatDateTime({ date: endDate, dateformat: 'isoUtcDateTime' }),
-		status                      : 'active',
+		status                      : ['active', 'expired'],
 		q                           : searchQuery || undefined,
 
 	},

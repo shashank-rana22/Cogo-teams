@@ -55,7 +55,7 @@ function ListCard({
 				});
 
 				const startDate = formatDate({
-					date       : validity_start,
+					date       : new Date(validity_start) || new Date(),
 					dateFormat : GLOBAL_CONSTANTS.formats.date['MMMM dd, YYYY'],
 					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 					formatType : 'dateTime',
@@ -63,7 +63,7 @@ function ListCard({
 				});
 
 				const endDate = formatDate({
-					date       : new Date(validity_end),
+					date       : new Date(validity_end) || new Date(),
 					dateFormat : GLOBAL_CONSTANTS.formats.date['MMMM dd, YYYY'],
 					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 					formatType : 'dateTime',

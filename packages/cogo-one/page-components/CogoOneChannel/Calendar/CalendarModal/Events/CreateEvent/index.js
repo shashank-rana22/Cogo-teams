@@ -53,7 +53,7 @@ function CreateEvent({
 	const { frequencyType = '', eventData = {}, showModal = false } = eventOccurence || {};
 
 	const selectedIds = useMemo(() => (
-		(participants || []).map((itm) => ([itm?.user_id]))?.flat()
+		(participants || []).map((itm) => ([itm?.source_id]))?.flat()
 	), [participants]);
 
 	const participantIds = (selectedIds.filter((item) => item !== userId));
