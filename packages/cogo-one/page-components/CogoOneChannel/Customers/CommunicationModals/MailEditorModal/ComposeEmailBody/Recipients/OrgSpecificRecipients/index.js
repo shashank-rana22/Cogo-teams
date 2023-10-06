@@ -1,5 +1,5 @@
 import { MultiSelect } from '@cogoport/components';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React, { useMemo } from 'react';
 
 import CustomSelect from '../../../../../../../../common/CustomSelect';
@@ -9,62 +9,8 @@ import useGetOrgUsers from '../../../../../../../../hooks/useGetOrgUsers';
 import getAllowedEmailsList from '../../../../../../../../utils/getAllowedEmailsList';
 
 import CustomSelectHeader from './CustomSelectHeader';
-import getOrgListOptions from './getOrgListOptions';
+import { getOrgListOptions, RenderLabel, RenderOrgLabel, resetEmailRecipientData } from './orgSpecificFunctions';
 import styles from './styles.module.css';
-
-function RenderLabel({ item = {} }) {
-	return (
-		<div>
-			<div className={styles.agent_label}>
-				{startCase(item?.label)}
-			</div>
-			<div className={styles.lower_label}>
-				{item?.value}
-			</div>
-		</div>
-	);
-}
-
-function resetEmailRecipientData({
-	prev = {},
-	recipientTypes = [],
-	orgId = '',
-	orgType = '',
-}) {
-	let newValues = {};
-
-	recipientTypes.forEach(
-		(itm) => {
-			newValues = {
-				...newValues,
-				[itm?.value]: [],
-			};
-		},
-	);
-
-	let customSubject = {
-		...(prev?.customSubject || {}),
-		serialId: prev?.orgData?.orgType === 'lead_organizations' ? 'custom' : '',
-	};
-
-	if (orgType === 'lead_organizations') {
-		customSubject = {
-			...(prev?.customSubject || {}),
-			activeTab : 'custom',
-			serialId  : 'custom',
-		};
-	}
-
-	return {
-		...prev,
-		...newValues,
-		customSubject,
-		orgData: {
-			orgType: orgType || prev?.orgData?.orgType,
-			orgId,
-		},
-	};
-}
 
 function OrgSpecificRecipients({
 	type = '',
@@ -152,6 +98,8 @@ function OrgSpecificRecipients({
 					options={selectOptions}
 					disabled={orgInitialLoad}
 					onSearch={setQuery}
+					keyProp={emailState?.orgData?.orgType}
+					renderLabel={(item) => <RenderOrgLabel item={item} />}
 					optionsHeader={(
 						<CustomSelectHeader
 							activeTab={emailState?.orgData?.orgType}
@@ -174,7 +122,7 @@ function OrgSpecificRecipients({
 				disabled={!(emailState?.orgData?.orgId || emailState?.orgId) || orgLoading}
 				size="sm"
 				multiple
-				options={(getAllowedEmailsList({ orgData }) || [])}
+				options={getAllowedEmailsList({ orgData, orgType: emailState?.orgData?.orgType }) || []}
 				renderLabel={(item) => <RenderLabel item={item} />}
 			/>
 		</div>

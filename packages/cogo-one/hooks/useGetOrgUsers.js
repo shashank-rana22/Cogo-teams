@@ -7,15 +7,16 @@ const PAGE_LIMIT = 100;
 
 const API_MAPPING = {
 	organizations      : 'list_organization_users',
-	lead_organizations : 'list_lead_organization_users',
+	lead_organizations : 'list_lead_users',
 };
 
 const getPayload = ({ orgId = '', userId = '', searchQuery = '', orgType = '' }) => ({
 	filters: {
-		status          : orgType === 'list_organization_users' ? 'active' : undefined,
-		organization_id : orgId,
-		user_id         : userId || undefined,
-		q               : searchQuery || undefined,
+		status               : orgType === 'organizations' ? 'active' : undefined,
+		organization_id      : orgType === 'organizations' ? orgId || undefined : undefined,
+		user_id              : userId || undefined,
+		q                    : searchQuery || undefined,
+		lead_organization_id : orgType === 'lead_organizations' ? orgId || undefined : undefined,
 	},
 	page_limit: PAGE_LIMIT,
 });

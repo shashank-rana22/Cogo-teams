@@ -19,13 +19,14 @@ function CustomSelect({
 		disabled = false,
 		onSearch = () => {},
 		optionsHeader = null,
+		keyProp = '',
 	} = props || {};
 
 	const [isOpen, setIsOpen] = useState(false);
 	const rootRef = useRef(null);
 
 	const handleClickOpen = () => {
-		if (!disabled) {
+		if (!disabled && !isOpen) {
 			setIsOpen((prev) => !prev);
 		}
 
@@ -61,7 +62,7 @@ function CustomSelect({
 			>
 				<Select
 					{...props}
-					key={disabled}
+					key={`${disabled}_${keyProp}_${!isOpen ? loading : ''}`}
 					onSearch={onSearch}
 				/>
 			</div>
