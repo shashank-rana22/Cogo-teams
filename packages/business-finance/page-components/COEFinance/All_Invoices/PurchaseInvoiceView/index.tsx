@@ -64,11 +64,9 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 		setCurrentTab,
 	} = useGetPurchaseViewList({ filters, setFilters, sort, previouslySearched });
 
-	const { data:statsData, loading:statsLoading } = useGetListStats();
+	const { data:statsData, loading:statsLoading } = useGetListStats({ filters, searchValue });
 
 	const { stat = {} } = statsData || {};
-
-	console.log(statsData, 'statsData');
 
 	const functions = {
 		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,
@@ -101,6 +99,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 				tab={tab}
 				setTab={setTab}
 				currentTab={currentTab}
+				itemData={data}
 				setCurrentTab={setCurrentTab}
 			/>
 
