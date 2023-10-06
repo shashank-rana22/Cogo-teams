@@ -36,7 +36,7 @@ const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 
 function TicketChat({
 	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign = false,
-	setShowReassign = () => {}, isInternal = true, setIsInternal = () => {},
+	setShowReassign = () => {}, isInternal = true, setIsInternal = () => {}, partnerId = '',
 }) {
 	const { ticketId = '' } = modalData || {};
 
@@ -194,7 +194,7 @@ function TicketChat({
 							)}
 				{doesTicketsExists && (
 					<div className={styles.sub_modal_container}>
-						<TicketSummary {...ticketData} detailsLoading={detailsLoading} />
+						<TicketSummary {...ticketData} detailsLoading={detailsLoading} partnerId={partnerId} />
 					</div>
 				)}
 
