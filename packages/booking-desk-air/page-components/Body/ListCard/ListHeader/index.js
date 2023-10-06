@@ -54,7 +54,14 @@ function ListHeader({ item = {} }) {
 						: startCase(source)}
 				</span>
 			) }
-			{tags.map((tag) => TAGS.includes(tag) && <span key={tag} className={styles[tag]}>{startCase(tag)}</span>)}
+			{(tags || []).map((tag) => TAGS.includes(tag) && (
+				<span
+					key={tag}
+					className={styles[tag]}
+				>
+					{startCase(tag)}
+				</span>
+			))}
 		</div>
 	);
 }

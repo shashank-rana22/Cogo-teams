@@ -140,12 +140,11 @@ function DefaultView() {
 			<div className={styles.top_header}>
 				<ShipmentInfo />
 				<div className={styles.toggle_chat}>
-					{shipment_data?.is_job_closed && (
-						<JobStatus
-							shipment_data={shipment_data}
-							isJobOpenAllowed={job_open_request}
-						/>
-					)}
+
+					<JobStatus
+						shipment_data={shipment_data}
+						isJobOpenAllowed={job_open_request}
+					/>
 
 					<HandleRaiseContainer
 						shipment_data={shipment_data}

@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { billedOptions, draftOptions, miscellaneousOptions, mismatchedOptions, notBilledOptions } from './options';
 import styles from './styles.module.css';
-import { formatReason } from './utilityFunctions';
+import formatReason from './utilityFunctions';
 
 const NOT_BILLED_LABEL = 'Charges not billed for same service in sales invoice';
 const BILLED_LABEL = 'Charges billed with less amount for same service in sales invoice';
@@ -26,7 +26,7 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 				{`Please select the reason to ${(modalData || '').toLowerCase()}:`}
 			</div>
 			<Checkbox
-				label={`Profitability ${formatReason(chosenProfitabilityReason)}`}
+				label={`Profitability ${formatReason({ reason: chosenProfitabilityReason })}`}
 				checked={remarkData?.profitability}
 				onChange={() => {
 					setRemarkData((prev) => ({ ...prev, profitability: prev?.profitability ? undefined : {} }));
@@ -160,7 +160,10 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 			) : undefined}
 
 			<Checkbox
-				label={`Document number mismatched ${formatReason(chosenMismatchedReason)}`}
+				label={formatReason({
+					reason         : chosenMismatchedReason,
+					isMainCategory : true,
+				}) || 'Document number mismatched'}
 				checked={remarkData?.mismatched}
 				onChange={() => {
 					setRemarkData((prev) => ({ ...prev, mismatched: prev?.mismatched ? undefined : true }));
@@ -173,7 +176,10 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 					<RadioGroup
 						options={mismatchedOptions}
 						onChange={(val) => {
-							setRemarkData((prev) => ({ ...prev, mismatched: val }));
+							setRemarkData((prev) => ({
+								...prev,
+								mismatched: `Document number mismatched - ${val}`,
+							}));
 							setActive('');
 						}}
 						value={typeof (remarkData?.mismatched) === 'string'
@@ -184,7 +190,7 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 			</div>
 
 			<Checkbox
-				label={`Miscellaneous ${formatReason(chosenMiscReason)}`}
+				label={`Miscellaneous ${formatReason({ reason: chosenMiscReason })}`}
 				checked={remarkData?.miscellaneous}
 				onChange={() => {
 					setRemarkData((prev) => ({ ...prev, miscellaneous: prev?.miscellaneous ? undefined : true }));

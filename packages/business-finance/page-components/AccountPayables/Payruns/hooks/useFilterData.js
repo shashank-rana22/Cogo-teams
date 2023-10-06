@@ -108,12 +108,12 @@ const useFilterData = ({
 		setCheckedRow(null);
 		setSelectedIds([]);
 		setGlobalFilters({
-			search    : undefined,
+			search,
 			pageIndex : 1,
 			pageSize  : 10,
 			activeEntity,
 		});
-	}, [activePayrunTab, setCheckedRow, setOverseasData, setViewId, activeEntity]);
+	}, [activePayrunTab, setCheckedRow, setOverseasData, setViewId, activeEntity, search]);
 
 	return {
 		data    : apiData.listData,

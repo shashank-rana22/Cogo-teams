@@ -30,6 +30,7 @@ function TrackApplication({ data = {} }) {
 			});
 		}
 	}, []);
+
 	useEffect(() => {
 		applicationStatusStepper(data);
 	}, [applicationStatusStepper, data]);

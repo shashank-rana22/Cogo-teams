@@ -13,6 +13,7 @@ function TicketStructure({
 	setModalData = () => {},
 	label = '',
 	updateTicketActivity = () => {},
+	updateLoading = false,
 	listLoading = false,
 	reachedBottom = false,
 }) {
@@ -39,6 +40,7 @@ function TicketStructure({
 						key={item.id}
 						data={item}
 						setModalData={setModalData}
+						updateLoading={updateLoading}
 						updateTicketActivity={updateTicketActivity}
 					/>
 				))

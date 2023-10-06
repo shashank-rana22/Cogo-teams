@@ -9379,6 +9379,10 @@ const partner = {
 			api         : 'get_muneem_reports_invoice_payment_status_mismatch',
 			access_type : 'private',
 		},
+		{
+			api         : 'list_cogo_entities',
+			access_type : 'private',
+		},
 	],
 	cogo_financials: [
 		{
@@ -9773,6 +9777,10 @@ const partner = {
 			api          : 'list_shipment_collection_party',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+		{
+			api         : 'post_purchase_bills_utr_details',
+			access_type : 'private',
 		},
 		{
 			api          : 'get_incident_management_incident_job_reopen_incident_exists',
@@ -13010,6 +13018,26 @@ const partner = {
 			api          : 'create_communication_internal_chat',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'get_channel_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_lead_users',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'list_channel_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_lead_channel_partners',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api          : 'create_draft_reply_all_html',
