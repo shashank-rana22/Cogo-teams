@@ -25,7 +25,6 @@ function StatsTabs({ data, state, setState, setServiceType }) {
 			portPairs = totalPortPair.filter((item) => item.service_type === val);
 			service = val;
 		}
-		console.log(service, portPairs, totalPortPair);
 		setServiceType(service);
 		setState(portPairs);
 	};

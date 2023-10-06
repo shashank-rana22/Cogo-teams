@@ -19,7 +19,6 @@ const ZERO = 0; const
 	MINUS_ONE = -1;
 
 function PortPair({ portPair, fromDetails }) {
-	console.log('portpair', portPair);
 	const originCode = portPair?.origin_code;
 	const originName = portPair?.origin?.split('(')[ZERO];
 	const originCountry = portPair?.origin?.split(' ')?.slice(MINUS_ONE);
