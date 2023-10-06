@@ -1,4 +1,4 @@
-import { startCase, upperCase } from '@cogoport/utils';
+import { upperCase } from '@cogoport/utils';
 import React from 'react';
 
 import LineItemTable from '../../common/LineItemTable';
@@ -30,7 +30,7 @@ function PurchaseLineItemDetails({
 		<div>
 			<div className={styles.borderbottom}>
 				<div className={styles.heading}>
-					{upperCase(startCase(purchaseInvoiceValues?.invoice_type))
+					{upperCase(purchaseInvoiceValues?.invoice_type)
 				|| 'PURCHASE INVOICE'}
 
 				</div>
