@@ -31,7 +31,7 @@ function ReOpenShipment({
 		<div>
 			{[GLOBAL_CONSTANTS.uuid.hk_user_id, GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id].includes(id) && (
 				<Button
-					themeType="link"
+					themeType="secondary"
 					size="md"
 					className={styles.request_reopen}
 					onClick={() => setFinJobOpenConfirmation(true)}
