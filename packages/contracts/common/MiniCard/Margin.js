@@ -1,9 +1,11 @@
 import styles from './styles.module.css';
 
-const serviceToUnit = {
-	fcl_freight : 'ctr',
-	lcl_freight : 'CBM',
-	air_freight : 'Kgs',
+const UNIT_MAPPING = {
+	fcl_freight       : 'ctr',
+	lcl_freight       : 'CBM',
+	air_freight       : 'Kgs',
+	fcl_freight_local : 'ctr',
+	lcl_freight_local : 'CBM',
 };
 function Margin({ heading = '', value = '', service = 'fcl_freight' }) {
 	return (
@@ -14,7 +16,7 @@ function Margin({ heading = '', value = '', service = 'fcl_freight' }) {
 					$
 					{value}
 					/
-					{serviceToUnit[service]}
+					{UNIT_MAPPING[service]}
 				</div>
 			</div>
 		</div>

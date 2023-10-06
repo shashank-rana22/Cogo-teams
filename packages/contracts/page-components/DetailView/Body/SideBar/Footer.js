@@ -1,9 +1,11 @@
 import styles from './styles.module.css';
 
-const serviceToUnit = {
-	fcl_freight : 'ctr',
-	lcl_freight : 'CBM',
-	air_freight : 'Kgs',
+const UNIT_MAPPING = {
+	fcl_freight       : 'ctr',
+	lcl_freight       : 'CBM',
+	air_freight       : 'Kgs',
+	fcl_freight_local : 'ctr',
+	lcl_freight_local : 'CBM',
 };
 
 function Footer({ statsData, index, portPair }) {
@@ -29,7 +31,7 @@ function Footer({ statsData, index, portPair }) {
 				<div className={styles.value}>
 					{statsData?.port_pairs_data?.[index]?.price
 						? `$ ${statsData?.port_pairs_data?.[index]?.price.toFixed(2)}/ 
-						${serviceToUnit[portPair?.service_type]} ` : '-'}
+						${UNIT_MAPPING[portPair?.service_type]} ` : '-'}
 				</div>
 			</div>
 			<div className={styles.sub_container}>
