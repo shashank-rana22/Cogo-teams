@@ -89,7 +89,7 @@ function OrganisationForm({
 		const { list = [] } = userData || {};
 
 		const finalOptions = list.map((item) => ({
-			label : item.name,
+			label : item.name || '',
 			value : item.user_id,
 		}));
 
@@ -153,7 +153,7 @@ function OrganisationForm({
 					name="user_id"
 					placeholder="Select User"
 					value={organization?.user_id}
-					options={organization?.organization_id ? userOptions : []}
+					options={organization?.organization_id ? userOptions || [] : []}
 					onChange={(val) => {
 						handleUserChange(val);
 					}}
