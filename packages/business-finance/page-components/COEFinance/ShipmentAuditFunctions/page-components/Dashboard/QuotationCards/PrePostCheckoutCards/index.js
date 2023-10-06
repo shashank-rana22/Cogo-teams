@@ -20,7 +20,7 @@ function PrePostCheckoutCards({
 		<div style={{ width: '100%' }}>
 			<div>
 				<div>
-					<Headings heaadingText={type} />
+					<Headings headingText={type} />
 				</div>
 				{loading
 					? Array(PLACEHOLDER_ARRAY_LENGTH).fill('').map((item) => (

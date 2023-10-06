@@ -2,10 +2,10 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-export default function Headings({ heaadingText = '' }) {
+export default function Headings({ headingText = '' }) {
 	return (
 		<div className={styles.headings}>
-			{heaadingText}
+			{headingText}
 			<div className={styles.line} />
 		</div>
 	);

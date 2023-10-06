@@ -11,5 +11,16 @@
 	height: 100%;
 	margin-top: 6px;
 	margin-bottom: -10px;
-	background-color: #ee3425;
+}
+
+.red {
+	background: #ee3425;
+}
+
+.black {
+	background: #000;
+}
+
+.grey {
+	background: #808080;
 }

@@ -1,5 +1,6 @@
-import { Pill, cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcCFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -7,15 +8,13 @@ import { getFormatAmount } from '../../../../../../../utils/getFormatAmount';
 
 import styles from './styles.module.css';
 
-// const MAX_LEN = 15;
-
 export default function Services(
 	{
-		activeService,
-		services,
-		handleServiceClick,
+		activeService = '',
+		services = {},
+		handleServiceClick = () => {},
 		// firstService,
-		defaultSelectedService,
+		defaultSelectedService = () => {},
 	},
 ) {
 	return (
@@ -38,39 +37,21 @@ export default function Services(
 								}
 							}}
 						>
-							{/* {console.log(servicesFromBackend?.[service]?.[0]?.grandTotal)} */}
 							<div>
 								<div className={styles.service_title}>
 									{startCase(service)}
-									{/* {console.log(startCase(service).substr(0, 10))}
-							<Tooltip
-								content={(
-									<div>
-										{startCase(service) || '-'}
-									</div>
-								)}
-								interactive
-							>
-								<div>
-									{(startCase(service)?.length > MAX_LEN
-										? `${(startCase(service))?.substr(GLOBAL_CONSTANTS.zeroth_index, MAX_LEN)}...`
-										: startCase(service)) || '-'}
 								</div>
-							</Tooltip> */}
-								</div>
+
+								{services?.[service]?.[GLOBAL_CONSTANTS.zeroth_index]?.quotationState === 'APPROVED'
+									? (
+										<IcCFtick />
+									)
+									: null}
 								<div>
 									{getFormatAmount(services?.[service]?.[GLOBAL_CONSTANTS.zeroth_index]
 										?.grandTotal, services?.[service]?.[GLOBAL_CONSTANTS.zeroth_index]
 										?.currency || 'INR')}
 								</div>
-								{services?.[service]?.[GLOBAL_CONSTANTS.zeroth_index]
-									?.quotationState === 'APPROVED'
-									? (
-										<div>
-											<Pill size="sm" color="#B4F3BE">Approved</Pill>
-										</div>
-									)
-									: null}
 
 							</div>
 						</div>
