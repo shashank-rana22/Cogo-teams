@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
@@ -78,7 +79,7 @@ const useGetDocumentList = ({
 		(async () => {
 			try {
 				if (tradeParty && entityCode) {
-					if (jvSearch !== '') {
+					if (!isEmpty(jvSearch)) {
 						await trigger({
 							params: {
 								page      : 1,

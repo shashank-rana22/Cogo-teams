@@ -104,7 +104,7 @@ function ApArSettlement() {
 			setSelectedData(updatedSelectedData);
 			setFromCreateJv(false);
 		}
-	}, [data.list, fromCreateJv, selectedData]);
+	}, [data?.list, fromCreateJv, selectedData]);
 
 	return (
 		<div>
