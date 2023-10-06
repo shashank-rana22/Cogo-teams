@@ -1,14 +1,10 @@
 import { Toast } from '@cogoport/components';
-import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
 import { useRequestBf } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback, useMemo } from 'react';
 
 import { getFormatDate } from '../utils/getFormatDate';
 
 const usePurchaseViewStats = ({ filters }) => {
-	const profile = useSelector((state) => state);
-	const entityCode = getEntityCode(profile?.profile?.partner?.id);
 	const [{ loading: statsLoading, data: statsData }, statsTrigger] = useRequestBf(
 		{
 			url     : '/purchase/bills/stats',
@@ -45,15 +41,12 @@ const usePurchaseViewStats = ({ filters }) => {
 	const getStatsData = useCallback(() => {
 		try {
 			statsTrigger({
-				params: {
-					cogoEntity      : entityCode,
-					jobTypeShipment : false,
-				},
+				params: Payload,
 			});
 		} catch (err) {
 			Toast.error('stats data not present');
 		}
-	}, [statsTrigger, entityCode]);
+	}, [statsTrigger, Payload]);
 
 	const getCOEAprrovedData = useCallback(() => {
 		try {
