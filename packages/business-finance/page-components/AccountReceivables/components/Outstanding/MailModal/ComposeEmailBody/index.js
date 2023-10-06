@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 
 import RTE_TOOL_BAR_CONFIG from '../mailConstants/rteToolBarConfig';
 
-// eslint-disable-next-line import/no-unresolved
 // eslint-disable-next-line custom-eslint/import-from-react
 import 'suneditor/dist/css/suneditor.min.css';
 import Recipients from './Recipients';
