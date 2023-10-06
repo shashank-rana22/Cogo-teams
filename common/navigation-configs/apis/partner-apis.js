@@ -9379,6 +9379,10 @@ const partner = {
 			api         : 'get_muneem_reports_invoice_payment_status_mismatch',
 			access_type : 'private',
 		},
+		{
+			api         : 'list_cogo_entities',
+			access_type : 'private',
+		},
 	],
 	cogo_financials: [
 		{
