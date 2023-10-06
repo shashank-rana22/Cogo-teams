@@ -74,6 +74,7 @@
 
 .style_radio {
 	flex-direction: column;
+	width: 100%;
 	height: 300px;
 	overflow-y: scroll;
 }

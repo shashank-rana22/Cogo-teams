@@ -1,4 +1,4 @@
-const headerStyle = {
+const HEADER_STYLE = {
 	borderRadius : '8px 8px 0px 0px',
 	borderBottom : '2px solid var(--color-accent-orange-2)',
 	background   : 'white',
@@ -10,7 +10,7 @@ const headerStyle = {
 	padding      : '32px 0px',
 };
 
-const bodyStyles = {
+const BODY_STYLE = {
 	color      : ' #333333',
 	fontWeight : '400',
 	fontSize   : '12px',
@@ -21,8 +21,8 @@ const bodyStyles = {
 
 export const invoiceListConfig = () => ({
 	showHeader   : true,
-	headerStyles : headerStyle,
-	bodyStyles,
+	headerStyles : HEADER_STYLE,
+	bodyStyles   : BODY_STYLE,
 	fields       : [
 		{
 			label : 'Name',
@@ -46,15 +46,17 @@ export const invoiceListConfig = () => ({
 			span  : 0.5,
 		},
 		{
-			label   : 'Invoice Amount',
-			span    : 1,
-			func    : 'showInvoiceAmount',
-			sorting : { name: 'grandTotal' },
+			label : 'Invoice Amount',
+			span  : 1,
+			func  : 'showInvoiceAmount',
+
 		},
 		{
-			label : 'Ledger Amount',
-			span  : 1,
-			func  : 'showLedgerAmount',
+			label   : 'Ledger Amount',
+			span    : 1,
+			func    : 'showLedgerAmount',
+			sorting : { name: 'ledgerTotal' },
+
 		},
 		{
 			label : 'Balance Amount',
