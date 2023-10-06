@@ -1353,7 +1353,7 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					key           : 'coe-communication',
-					title         : t('common:communcation'),
+					title         : t('common:communication'),
 					href          : '/communication',
 					as            : '/communication',
 					type          : 'link',
@@ -2673,6 +2673,16 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/profile',
 			possible_apis : apis.profile,
 			icon          : IcMAppProfile,
+		},
+		cargo_insurance: {
+			key           : 'cargo_insurance',
+			title         : 'Cargo Insurance',
+			module_type   : 'dashboards',
+			href          : '/v2/cargo-insurance',
+			as            : '/v2/cargo-insurance',
+			showInNav     : false,
+			main_apis     : [],
+			possible_apis : apis.cargo_insurance,
 		},
 	};
 

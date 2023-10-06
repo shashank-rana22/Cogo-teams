@@ -1,0 +1,35 @@
+.container {
+	min-height: 80vh;
+	padding: 20px 30px;
+	background-color: #fff;
+}
+
+.flex_box {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.rate_card {
+	width: 70%;
+}
+
+.personal_detail {
+	width: 27%;
+}
+
+.empty_state {
+	display: flex;
+	align-items: center;
+	margin: 52px 0;
+
+	>div {
+		margin: 0 12px;
+	}
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+	margin: 40px 0;
+}

@@ -1,0 +1,12 @@
+.container {
+	display: block;
+}
+
+.modal_body {
+	border-top: 1px solid #dedede;
+	border-bottom: 1px solid #dedede;
+}
+
+.card_container {
+	margin: 20px;
+}

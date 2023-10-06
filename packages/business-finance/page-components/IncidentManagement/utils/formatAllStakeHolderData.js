@@ -21,7 +21,10 @@ const stakeholderData = (levelData) => {
 	return data;
 };
 
-const stakeHolderTimeLineData = ({ level3 = {}, level2 = {}, level1 = {}, level0 = {} }) => {
+const stakeHolderTimeLineData = ({
+	level3 = {}, level2 = {}, level1 = {},
+	level0 = {}, status = '', updatedBy = {}, financeRemark = '',
+}) => {
 	const level = {
 		...level0,
 		level       : 0,
@@ -35,7 +38,19 @@ const stakeHolderTimeLineData = ({ level3 = {}, level2 = {}, level1 = {}, level0
 	if (!isEmpty(level2)) {
 		return stakeholderData([level, level1, level2]);
 	}
-	return stakeholderData([level, level1]);
+	if (!isEmpty(level1)) {
+		return stakeholderData([level, level1]);
+	}
+	if (status === 'REQUESTED') {
+		return stakeholderData([level, {}]);
+	}
+	const UPDATED_BY = {
+		level       : 0,
+		status      : 'APPROVED',
+		stakeholder : { userEmail: updatedBy.email, userName: updatedBy.name },
+		remarks     : financeRemark,
+	};
+	return stakeholderData([level, UPDATED_BY]);
 };
 
 export default stakeHolderTimeLineData;
