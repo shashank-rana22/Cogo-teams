@@ -142,5 +142,7 @@
     "category": "หมวดหมู่",
     "sub_category": "หมวดหมู่ย่อย",
     "missing": "รหัสที่ขาดหายไป",
-    "dislike": "ไม่ชอบ ID"
+    "dislike": "ไม่ชอบ ID",
+    "id_type": "พิมพ์ id",
+    "service_type": "ประเภทบริการ"
 }

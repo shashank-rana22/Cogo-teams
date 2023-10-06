@@ -142,5 +142,7 @@
     "category": "Kategori",
     "sub_category": "Sub Kategori",
     "missing": "ID yang hilang",
-    "dislike": "ID tidak suka"
+    "dislike": "ID tidak suka",
+    "id_type": "Tipe id",
+    "service_type": "Jenis Layanan"
 }

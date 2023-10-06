@@ -142,5 +142,7 @@
     "category": "Category",
     "sub_category": "Sub Category",
     "missing": "Missing ID",
-    "dislike": "Dislike ID"
+    "dislike": "Dislike ID",
+    "id_type": "ID Type",
+    "service_type": "Service Type"
 }

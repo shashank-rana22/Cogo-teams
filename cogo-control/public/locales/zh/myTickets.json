@@ -142,5 +142,7 @@
     "category": "类别",
     "sub_category": "子类别",
     "missing": "缺少ID",
-    "dislike": "不喜欢ID"
+    "dislike": "不喜欢ID",
+    "id_type": "ID类型",
+    "service_type": "服务类型"
 }
