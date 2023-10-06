@@ -9779,6 +9779,10 @@ const partner = {
 			service_name : 'shipment',
 		},
 		{
+			api         : 'post_purchase_bills_utr_details',
+			access_type : 'private',
+		},
+		{
 			api          : 'get_incident_management_incident_job_reopen_incident_exists',
 			access_type  : 'private',
 			service_name : 'incident-management',
