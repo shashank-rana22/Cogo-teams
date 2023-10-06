@@ -3,26 +3,17 @@ import { IcMSearchdark } from '@cogoport/icons-react';
 import React from 'react';
 
 import Filter from '../../../../commons/Filters';
-import { GenericObject } from '../../../../commons/Interfaces/index';
 import FilterModal from '../../../Components/FilterModal/index';
 
 import controls from './controls';
 import styled from './styles.module.css';
 
-interface SegmentFilterProps {
-	setSearchValue: any;
-	searchValue: string;
-	filters: GenericObject;
-	setFilters: (p: object) => void;
-}
-
 function SegmentedFilters({
-
 	setSearchValue,
 	searchValue,
 	filters,
 	setFilters,
-}: SegmentFilterProps) {
+}) {
 	const showFilterButton = !!filters?.statusUpdatedDateFrom
 								|| !!filters?.statusUpdatedDateTo || !!filters?.rejectionRemarksType;
 
@@ -61,7 +52,7 @@ function SegmentedFilters({
 						name="q"
 						size="sm"
 						value={searchValue}
-						onChange={(e: any) => setSearchValue(e)}
+						onChange={(e) => setSearchValue(e)}
 						placeholder="Search by Invoice No./Shipment ID/Supplier name..."
 						suffix={(
 							<div style={{ margin: '4px', display: 'flex' }}>

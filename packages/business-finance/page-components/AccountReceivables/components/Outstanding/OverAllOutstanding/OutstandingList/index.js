@@ -13,48 +13,13 @@ import styles from './styles.module.css';
 import TabsOptions from './TabOptions';
 import UserDetails from './UserDetails';
 
-interface CreditController {
-	id?: string;
-	name?: string;
-	email?: string;
-}
-
-interface SalesAgent {
-	id?: string;
-	name?: string;
-	email?: string;
-}
-interface ItemProps {
-	creditController?: CreditController;
-	salesAgent?: SalesAgent;
-	businessName?: string;
-	collectionPartyType?: string[];
-	serialId?: string;
-	countryCode?: string;
-	organizationSerialId?: string;
-	lastUpdatedAt?: Date;
-	selfOrganizationName?: string;
-	organizationId?: string;
-	selfOrganizationId?: string;
-}
-interface OutstandingListProps {
-	item?: ItemProps;
-	entityCode?: string;
-	showElement?: boolean;
-	orderBy?: object;
-	outStandingFilters?: object;
-	formFilters?: object;
-	organizationId?: string;
-	setSelectedOrgId?: any;
-}
-
 function OutstandingList({
 	item = {},
 	entityCode = '',
 	showElement = false,
 	organizationId = '',
 	setSelectedOrgId = () => {},
-}: OutstandingListProps) {
+}) {
 	const [activeTab, setActiveTab] = useState('invoice_details');
 	const [showLedgerModal, setShowLedgerModal] = useState(false);
 

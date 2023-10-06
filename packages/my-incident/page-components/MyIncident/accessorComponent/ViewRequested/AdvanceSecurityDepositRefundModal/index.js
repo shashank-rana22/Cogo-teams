@@ -5,29 +5,11 @@ import AdvanceDepositCommonModal from '../AdvanceDepositCommonModal';
 
 import SecurityDepositRefundData from './securityDeositRefundData';
 
-interface DepositInterface {
-	utrNumber?: string,
-	totalAmount?:number,
-	sid?: string,
-	remark?: string,
-	supplierName?: string,
-	uploadProof?: object[],
-}
-interface ItemInterface {
-	status?:string,
-	data?:{ advanceSecurityDepositRefund?: DepositInterface },
-}
-interface Props {
-	itemData?:ItemInterface,
-	showModal?: boolean,
-	setShowModal?:React.Dispatch<React.SetStateAction<boolean>>,
-}
-
 function AdvanceSecurityDepositRefundModal({
 	itemData,
 	showModal,
 	setShowModal,
-}:Props) {
+}) {
 	const { status, data } = itemData || {};
 	const { advanceSecurityDepositRefund } = data || {};
 

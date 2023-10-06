@@ -4,22 +4,7 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-interface Agent {
-	email?: string;
-	name?: string;
-}
-
-interface ItemContents {
-	kam?: Agent;
-	creditController?: Agent;
-	salesAgent?: Agent;
-}
-
-interface ItemProps {
-	item?: ItemContents;
-}
-
-function UserDetails({ item = {} }: ItemProps) {
+function UserDetails({ item = {} }) {
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
 	const { kam = {}, salesAgent = {}, creditController = {} } = item || {};
 	const data = [

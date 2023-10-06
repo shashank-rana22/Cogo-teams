@@ -3,17 +3,7 @@ import React, { ReactFragment } from 'react';
 
 import styles from './styles.module.css';
 
-interface NestedObj {
-	[key: string]: ReactFragment;
-}
-
-interface Props {
-	formData?: NestedObj;
-	whiteout?:boolean;
-	taskItem?: NestedObj;
-}
-
-function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Props) {
+function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }) {
 	let tempColor = '#333';
 	if (whiteout) {
 		tempColor = 'transparent';
@@ -32,7 +22,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 					${styles.blockcol_minheight}
 					${styles.carrier_information}
 				`}
-					style={{ '--temp-color': tempColor } as React.CSSProperties}
+					style={{ '--temp-color': tempColor }}
 				>
 					<div
 						className={cl`
@@ -42,7 +32,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 						${styles.flex_in_flex_b} 
 						${styles.input_issuing_agent} 
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<p style={{ fontSize: 10, color: tempColor }}>Issuing Carrier&apos;s Agent Name and City</p>
 						<div className={cl`
@@ -65,7 +55,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 							${styles.blockrow_border}
 							${styles.agent_iata_accounting_info}
 						`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div
 							className={cl`
@@ -73,7 +63,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 								${styles.flex_border_right} 
 								${styles.flex_in_flex} 
 							`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<p style={{ fontSize: 10 }}>
 								{' '}
@@ -106,7 +96,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 						${styles.agent_iata_accounting_info}
 						${styles.accounting_information}
 					`}
-					style={{ '--temp-color': tempColor } as React.CSSProperties}
+					style={{ '--temp-color': tempColor }}
 				>
 					<div className={cl`
 						${styles.flex} 
@@ -142,14 +132,14 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 					${styles.block_col}
 					${styles.blockcol_in_flex}
 				`}
-					style={{ '--temp-color': tempColor } as React.CSSProperties}
+					style={{ '--temp-color': tempColor }}
 				>
 					<div
 						className={cl`
 							${styles.block}
 							${styles.departure_airport}
 						`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<p style={{ fontSize: 10 }}>
 							<span style={{ color: tempColor }}>
@@ -179,7 +169,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 					${styles.blockcol_in_flex}
 					${styles.referrence_block}
 				`}
-					style={{ '--temp-color': tempColor } as React.CSSProperties}
+					style={{ '--temp-color': tempColor }}
 				>
 					<div
 						className={cl`
@@ -187,7 +177,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 							${styles.blockcol_border}
 							${styles.referrence_optional}
 						`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div className={cl`
 								${styles.flex_row}
@@ -213,7 +203,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 									${styles.flex_in_flex}
 									${styles.trapezium}
 								`}
-								style={{ '--temp-color': tempColor } as React.CSSProperties}
+								style={{ '--temp-color': tempColor }}
 							>
 								<div className={cl`
 					${styles.flex}
@@ -241,7 +231,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 								${styles.flex_border_right}
 								${styles.flex_in_flex_c}
 							`}
-								style={{ '--temp-color': tempColor } as React.CSSProperties}
+								style={{ '--temp-color': tempColor }}
 							>
 								<p style={{ fontSize: 9 }} />
 							</div>
@@ -251,7 +241,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 								${styles.flex_border_right}
 								${styles.referrence_optional_bottom_middle}
 							`}
-								style={{ '--temp-color': tempColor } as React.CSSProperties}
+								style={{ '--temp-color': tempColor }}
 							>
 								<p style={{ fontSize: 9 }} />
 							</div>
@@ -274,7 +264,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 					${styles.blockcol_in_flex}
 					${styles.routing_block}
 				`}
-					style={{ '--temp-color': tempColor } as React.CSSProperties}
+					style={{ '--temp-color': tempColor }}
 				>
 					<div
 						className={cl`
@@ -282,7 +272,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 						${styles.blockrow_border}
 						${styles.currency_declared_value_to_by_flight}
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div
 							className={cl`
@@ -292,7 +282,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 							${styles.blockrow_in_flex}
 							${styles.to_by_first_carrier}
 						`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<div
 								className={cl`
@@ -300,7 +290,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 									${styles.flex_border_right}
 									${styles.destination_portcode}
 								`}
-								style={{ '--temp-color': tempColor } as React.CSSProperties}
+								style={{ '--temp-color': tempColor }}
 							>
 								<p style={{ fontSize: 8 }}>
 									<span style={{ color: tempColor }}>To</span>
@@ -355,7 +345,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 										${styles.flex} 
 										${styles.trapezium}
 									`}
-										style={{ '--temp-color': tempColor } as React.CSSProperties}
+										style={{ '--temp-color': tempColor }}
 									>
 										<p style={{
 											fontSize : 9,
@@ -376,7 +366,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 							${styles.blockrow_border}
 							${styles.to_by_to}
 						`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<div
 								className={cl`
@@ -385,7 +375,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 									${styles.flex_padding_left}
 									${styles.to_by}
 								`}
-								style={{ '--temp-color': tempColor } as React.CSSProperties}
+								style={{ '--temp-color': tempColor }}
 							>
 								<p style={{ fontSize: 9 }}>
 									<span style={{ color: tempColor }}>to</span>
@@ -407,7 +397,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 								${styles.flex_padding_left}
 								${styles.to_by}
 							`}
-								style={{ '--temp-color': tempColor } as React.CSSProperties}
+								style={{ '--temp-color': tempColor }}
 							>
 								<p style={{ fontSize: 9 }}>
 									<span style={{ color: tempColor }}>by</span>
@@ -429,7 +419,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 								${styles.flex_padding_left}
 								${styles.to_by}
 							`}
-								style={{ '--temp-color': tempColor } as React.CSSProperties}
+								style={{ '--temp-color': tempColor }}
 							>
 								<p style={{ fontSize: 9 }}>
 									<span style={{ color: tempColor }}>to</span>
@@ -472,7 +462,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 							${styles.blockrow_border}
 							${styles.currency_declared_value_to_by_flight}
 						`}
-					style={{ '--temp-color': tempColor, borderBottom: `1px solid ${tempColor}` } as React.CSSProperties}
+					style={{ '--temp-color': tempColor, borderBottom: `1px solid ${tempColor}` }}
 				>
 					<div
 						className={cl`
@@ -481,7 +471,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 						${styles.flex_in_flex_c}
 						${styles.currency_section}
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div
 							className={cl`
@@ -489,7 +479,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 								${styles.flex_border_right}
 								${styles.currency_top_chgs}
 							`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 							<div
 								className={cl`
@@ -497,17 +487,17 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 									${styles.flexcol_border_right}
 									${styles.currency}
 								`}
-								style={{ '--temp-color': tempColor } as React.CSSProperties}
+								style={{ '--temp-color': tempColor }}
 							>
 								<div className={cl`
-					${styles.flex} 
+					${styles.flex}
 					${styles.currency_top_chgs}
 				`}
 								>
 									<p style={{ fontSize: 9, color: tempColor }}>Currency</p>
 								</div>
 								<div className={cl`
-					${styles.flex} 
+					${styles.flex}
 					${styles.flex_font_bold}
 					${styles.flex_justify_center}
 					${styles.flex_in_flex_d}
@@ -535,7 +525,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 									${styles.flexcol_border_right}
 									${styles.flexcol_in_flex}
 								`}
-								style={{ '--temp-color': tempColor } as React.CSSProperties}
+								style={{ '--temp-color': tempColor }}
 							>
 								<div
 									className={cl`
@@ -544,7 +534,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 										${styles.optional_shipping_text}
 										${styles.wtval_top}
 									`}
-									style={{ '--temp-color': tempColor } as React.CSSProperties}
+									style={{ '--temp-color': tempColor }}
 								>
 									<p style={{ fontSize: 9, color: tempColor }}>WT/VAL</p>
 								</div>
@@ -559,7 +549,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 											${styles.flexcol_border_right}
 											${styles.flexcol_in_flex}
 										`}
-										style={{ '--temp-color': tempColor } as React.CSSProperties}
+										style={{ '--temp-color': tempColor }}
 									>
 										<div className={cl`
 					${styles.flex} 
@@ -626,7 +616,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 										${styles.optional_shipping_text}
 										${styles.other_top}
 									`}
-									style={{ '--temp-color': tempColor } as React.CSSProperties}
+									style={{ '--temp-color': tempColor }}
 								>
 									<p style={{ fontSize: 9, color: tempColor }}>Other</p>
 								</div>
@@ -642,7 +632,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 											${styles.flexcol_border_right}
 											${styles.flexcol_in_flex}
 										`}
-										style={{ '--temp-color': tempColor } as React.CSSProperties}
+										style={{ '--temp-color': tempColor }}
 									>
 
 										<div className={cl`
@@ -708,7 +698,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 							${styles.declared_carriage}
 							${styles.declared_carriage_box}
 						`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<p style={{ fontSize: 8.3, color: tempColor }}>Declared Value for Carriage</p>
 						{formData.declaredValueForCarriage}
@@ -720,7 +710,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 							${styles.flex_in_flex_c}
 							${styles.flex_border_right}
 						`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div className={styles.flex_col}>
 							<p style={{ fontSize: 8.3, color: tempColor }}>Declared Value for Customs</p>
@@ -737,7 +727,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 						${styles.blockrow_border}
 						${styles.blockrow_in_flex}
 					`}
-					style={{ '--temp-color': tempColor, borderLeft: `1px solid ${tempColor}` } as React.CSSProperties}
+					style={{ '--temp-color': tempColor, borderLeft: `1px solid ${tempColor}` }}
 				>
 					<div
 						className={cl`
@@ -746,7 +736,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 						${styles.flex_border_right}
 						${styles.flex_in_flex}
 					`}
-						style={{ '--temp-color': tempColor, paddingLeft: 5, paddingRight: 5 } as React.CSSProperties}
+						style={{ '--temp-color': tempColor, paddingLeft: 5, paddingRight: 5 }}
 					>
 						<p style={{ fontSize: 9 }}>
 							<span style={{ color: tempColor }}>Airport of Destination</span>
@@ -773,7 +763,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 							${styles.blockcol_in_flex}
 							${styles.blockcol_border}
 						`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div className={cl`
 								${styles.flex_row} 
@@ -792,7 +782,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 									${styles.flex_in_flex}
 									${styles.trapezium}
 								`}
-								style={{ '--temp-color': tempColor } as React.CSSProperties}
+								style={{ '--temp-color': tempColor }}
 							>
 								<div className={cl`
 										${styles.flex} 
@@ -819,7 +809,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 										${styles.flex_border_right}
 										${styles.flex_in_flex}
 									`}
-								style={{ '--temp-color': tempColor } as React.CSSProperties}
+								style={{ '--temp-color': tempColor }}
 							/>
 							<div className={cl`
 										${styles.flex} 
@@ -837,7 +827,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 							${styles.blockrow_border}
 							${styles.blockrow_in_flex}
 						`}
-					style={{ '--temp-color': tempColor } as React.CSSProperties}
+					style={{ '--temp-color': tempColor }}
 				>
 					<div
 						className={cl`
@@ -848,7 +838,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 						style={{
 							'--temp-color' : tempColor,
 							borderLeft     : `1px solid ${tempColor}`,
-						} as React.CSSProperties}
+						}}
 					>
 						<div className={cl`
 					${styles.flex} 
@@ -874,7 +864,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 							${styles.flex_padding_left}
 							${styles.insurance}
 						`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<p style={{ fontSize: 8, color: tempColor }} className="text">
 							INSURANCE - If carrier offers insurance, and such insurance is

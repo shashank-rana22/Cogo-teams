@@ -4,22 +4,9 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface CustomerDetailsInterface {
-	id: string;
-	customerName: string;
-	customerOutstandingAmount: number;
-	customerOutstandingAmountOnSid: number;
-}
-interface DataInterface {
-	customerDetails?: Array<CustomerDetailsInterface>;
-}
-type CustomerInformationInterface = {
-	data: DataInterface;
-};
-
 function CustomerInformation({
 	data,
-}: CustomerInformationInterface): JSX.Element {
+}) {
 	const { customerDetails } = data || {};
 
 	return (
@@ -44,7 +31,7 @@ function CustomerInformation({
 							Total Outstanding -
 							<span style={{ fontWeight: 600 }}>
 								{formatAmount({
-									amount   :	customerOutstandingAmount as any,
+									amount   :	customerOutstandingAmount,
 									currency :	GLOBAL_CONSTANTS.currency_code.INR,
 									options  : {
 										style           : 'currency',
@@ -58,7 +45,7 @@ function CustomerInformation({
 							On Account Payments -
 							<span style={{ fontWeight: 600 }}>
 								{formatAmount({
-									amount   :	customerOutstandingAmountOnSid as any,
+									amount   :	customerOutstandingAmountOnSid,
 									currency : GLOBAL_CONSTANTS.currency_code.INR,
 									options  : {
 										style           : 'currency',

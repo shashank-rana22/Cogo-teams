@@ -2,38 +2,6 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface PermissionInterface {
-	show?:boolean
-	id?:string
-	isDelete?:boolean
-}
-interface SelectedInterface {
-	id?:string
-}
-interface CollectionActionInterface {
-	closePermissionModal?:() => void
-	permissionModal?: PermissionInterface
-	refetch?: () => void
-	itemData?:{
-		customerName?:string
-		accCode?:string
-		bankAccountNumber?:string
-		orgSerialId?:string
-		bankName?:string
-		paymentNumValue?:string
-		amount?:string
-		utr?:string
-		entityType?:string
-		currency?:string
-		id?:string
-		paymentDocumentStatus?:string
-		accMode?:string
-		paymentCode?:string
-		sageOrganizationId?:string
-	}
-	setSelectedId?: React.Dispatch<React.SetStateAction<SelectedInterface>>
-	setModalFinalPost?: React.Dispatch<React.SetStateAction<boolean>>
-}
 const useCollectionActions = ({
 	closePermissionModal,
 	permissionModal,
@@ -41,7 +9,7 @@ const useCollectionActions = ({
 	itemData,
 	setSelectedId,
 	setModalFinalPost,
-}:CollectionActionInterface) => {
+}) => {
 	const { accMode, paymentCode, entityType, paymentNumValue } = itemData || {};
 
 	const [{ loading:deleteApiLoading }, deleteApiTrigger] = useRequestBf(
@@ -89,13 +57,13 @@ const useCollectionActions = ({
 		{ manual: true },
 	);
 
-	const { user_data:userData } = useSelector(({ profile }:{ profile?:{ user?:{ id?:string, name?:string } } }) => ({
+	const { user_data:userData } = useSelector(({ profile }) => ({
 		user_data: profile?.user || {},
 	}));
 	const { isDelete } = permissionModal || {};
 	const apiTrigger = isDelete ? deleteApiTrigger : postApiTrigger;
 	const isCheck = isDelete ? 'Deleted Successfully' : 'Approved Successfully';
-	const entryAction = async (id:string) => {
+	const entryAction = async (id) => {
 		try {
 			const apiData = isDelete
 				? {
@@ -125,7 +93,7 @@ const useCollectionActions = ({
 		}
 	};
 
-	const PostToSageAction = async (id:string) => {
+	const PostToSageAction = async (id) => {
 		try {
 			const resp = await postToSageApiTrigger({
 				data: {
@@ -145,7 +113,7 @@ const useCollectionActions = ({
 			closePermissionModal();
 		}
 	};
-	const finalPostFromSage = async (id:string) => {
+	const finalPostFromSage = async (id) => {
 		try {
 			const resp = await finalPostFromSageApiTrigger({
 				data: {

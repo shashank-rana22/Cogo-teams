@@ -2,12 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface Profile {
-	profile?: { user: { id: string } }
-}
-
 const useCreateJv = ({ setShow, refetch }) => {
-	const profile: Profile = useSelector((state) => state);
+	const profile = useSelector((state) => state);
 	const { profile: { user } } = profile || {};
 	const { id: profileid } = user || {};
 	const [{ loading }, trigger] = useRequestBf(

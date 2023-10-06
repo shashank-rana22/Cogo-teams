@@ -5,13 +5,12 @@ import { useState } from 'react';
 
 import { AP_FILE_URL, AR_FILE_URL } from '../../../../Constants';
 import useGetUploadFile from '../../../../hooks/useGetUploadFile';
-import { UploadFileInterface } from '../../interface';
 
 import styles from './styles.module.css';
 
 const SUCCESS = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/approval animation';
 
-function UploadFile({ showModal, setShowModal, refetch }:UploadFileInterface) {
+function UploadFile({ showModal, setShowModal, refetch }) {
 	const [toggleValue, setToggleValue] = useState('AP');
 	const [uploadProof, setUploadProof] = useState();
 	const [showUrlModal, setShowUrlModal] = useState(false);
@@ -28,7 +27,7 @@ function UploadFile({ showModal, setShowModal, refetch }:UploadFileInterface) {
 			result = 'payments';
 	}
 
-	const onChangeToggle = (event:{ target?:{ checked?:boolean } }) => {
+	const onChangeToggle = (event) => {
 		setToggleValue((event.target.checked ? 'AR' : 'AP'));
 	};
 

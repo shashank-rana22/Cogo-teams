@@ -2,7 +2,6 @@ import { Pill } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import { format, getByKey, isEmpty, startCase } from '@cogoport/utils';
 
-import { Refetch } from '../common/interfaces';
 import Remarks from '../page-components/ListComponents/Remarks';
 import UploadInvoice from '../page-components/ListComponents/UploadInvoice';
 import checkInvoice from '../utils/checkInvoice';
@@ -10,7 +9,7 @@ import { getDocumentNumber, getDocumentUrl } from '../utils/getDocumentNumber';
 
 import styles from './styles.module.css';
 
-const pendingColumns = (refetch: Refetch) => [
+const pendingColumns = (refetch) => [
 	{
 		Header   : <div className={styles.name}>Name</div>,
 		id       : 'name',
@@ -22,7 +21,7 @@ const pendingColumns = (refetch: Refetch) => [
 			<div className={styles.fieldPair}>
 				<div
 					className={styles.link}
-					onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
+					onClick={() => window.open(getDocumentUrl({ itemData: row }), '_blank')}
 					role="presentation"
 				>
 					{getDocumentNumber({ itemData: row })}
@@ -43,10 +42,10 @@ const pendingColumns = (refetch: Refetch) => [
 				<div
 					className={styles.sid}
 				>
-					{getByKey(row, 'job.jobNumber') as string}
+					{getByKey(row, 'job.jobNumber')}
 
 				</div>
-				<div className={styles.service}>{startCase(getByKey(row, 'job.shipmentType') as string)}</div>
+				<div className={styles.service}>{startCase(getByKey(row, 'job.shipmentType'))}</div>
 			</div>
 		),
 	},
@@ -54,7 +53,7 @@ const pendingColumns = (refetch: Refetch) => [
 		Header   : 'Invoice Amount',
 		accessor : (row) => (
 			<div className={styles.amount}>
-				<div>{getPrice(getByKey(row, 'grandTotal') as number, getByKey(row, 'currency') as string)}</div>
+				<div>{getPrice(getByKey(row, 'grandTotal'), getByKey(row, 'currency'))}</div>
 			</div>
 		),
 	},
@@ -62,7 +61,7 @@ const pendingColumns = (refetch: Refetch) => [
 		Header   : 'Invoice Date',
 		accessor : (row) => (
 			<div className={styles.amount}>
-				<div>{format(getByKey(row, 'proformaDate') as Date, 'dd MMM yy', {}, false)}</div>
+				<div>{format(getByKey(row, 'proformaDate'), 'dd MMM yy', {}, false)}</div>
 			</div>
 		),
 	},

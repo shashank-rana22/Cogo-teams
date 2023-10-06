@@ -5,54 +5,16 @@ import { startCase, isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
-import { SummaryInterface } from '../../../commons/Interfaces';
 import { DURATION_MAPPING } from '../../../constants/DURATION_MAPPING';
 import { officeLocations } from '../../../utils/officeLocations';
 import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 
 import styles from './styles.module.css';
 
-interface SummaryElemet {
-	title?: string;
-	value?: any;
-}
-interface Entity {
-	entity_code?: number | string;
-	id?: number;
-}
-
-interface Data {
-	vendorName?: string;
-	transactionDate?: Date;
-	paymentMode?: string;
-	uploadedInvoice?: string;
-	periodOfTransaction?: string;
-	expenseCategory?: string;
-	expenseSubCategory?: string;
-	branch?: any;
-	entityObject?: Entity;
-	invoiceDate?: Date;
-	stakeholderName?: string;
-	invoiceCurrency?: string;
-	vendorID?: number | string;
-	payableAmount?: number;
-	startDate?: Date;
-	endDate?: Date;
-	repeatEvery?: string;
-	agreementNumber?: number;
-	currency?: string;
-}
-
-interface Props {
-	expenseData?: Data;
-	setExpenseData?: (p: any) => void;
-	rowData?: SummaryInterface;
-}
-
 function RenderSummary({ summary = [] }) {
 	return (
 		<div style={{ display: 'flex' }}>
-			{summary?.map((item: SummaryElemet) => (
+			{summary?.map((item) => (
 				<div key={item.title} className={styles.section}>
 					<div className={styles.title}>{item.title}</div>
 					<div className={styles.value}>{item.value}</div>
@@ -94,7 +56,7 @@ const summaryDataTwo = ({
 			currency && payableAmount ? (
 				<div>
 					{formatAmount({
-						amount  : payableAmount as any,
+						amount  : payableAmount,
 						currency,
 						options : {
 							style           : 'currency',
@@ -187,7 +149,7 @@ const summeryMappings = ({
 	{ key: '3', val: summaryDataThird },
 ];
 
-function Summary({ expenseData, setExpenseData, rowData }: Props) {
+function Summary({ expenseData, setExpenseData, rowData }) {
 	const { entityObject, branch } = expenseData || {};
 	const { entity_code: entityCode } = entityObject || {};
 	const { name: branchName } = branch || {};
@@ -216,7 +178,7 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 
 	useEffect(() => {
 		if (!isEmpty(tradePartyData)) {
-			setExpenseData((prev: object) => ({
+			setExpenseData((prev) => ({
 				...prev,
 				tradeParty: tradePartyData?.[GLOBAL_CONSTANTS.zeroth_index],
 			}));
@@ -226,10 +188,10 @@ function Summary({ expenseData, setExpenseData, rowData }: Props) {
 	useEffect(() => {
 		if (branchId) {
 			const branchData = officeLocations?.filter(
-				(location: any) => JSON.parse(location?.value)?.branchId === branchId,
+				(location) => JSON.parse(location?.value)?.branchId === branchId,
 			);
 			if (!isEmpty(branchData)) {
-				setExpenseData((p: object) => ({
+				setExpenseData((p) => ({
 					...p,
 					branch: JSON.parse(
 						branchData[GLOBAL_CONSTANTS.zeroth_index]?.value || '{}',

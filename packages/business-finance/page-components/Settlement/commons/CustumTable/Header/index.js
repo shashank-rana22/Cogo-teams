@@ -3,12 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface Props {
-	setFilters: React.Dispatch<React.SetStateAction<{}>>;
-	filters: { sortType? :string };
-}
-
-function Header({ setFilters, filters }:Props) {
+function Header({ setFilters, filters }) {
 	return (
 		<div className={styles.header}>
 			<div className={styles.jvnumb}>JV Number</div>

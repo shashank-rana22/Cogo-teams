@@ -20,7 +20,7 @@ function ValuePercentage({ data, keys, flag = false }) {
 	const variance = data[keys] < 0 && data[keys];
 	const absoluteValue = Math.abs(data[keys] || 0);
 	const absVariance = formatAmount({
-		amount   :	absoluteValue as any,
+		amount   :	absoluteValue,
 		currency : expenseCurrency,
 		options  : {
 			style           : 'currency',

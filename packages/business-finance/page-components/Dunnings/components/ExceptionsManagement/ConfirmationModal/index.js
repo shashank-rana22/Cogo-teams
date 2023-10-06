@@ -2,20 +2,13 @@ import { Button, Modal } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-interface Props {
-	showConfirmationModal?: boolean;
-	masterListId?: string;
-	deleteMasterLoading?: boolean;
-	setShowConfirmationModal?: React.Dispatch<React.SetStateAction<boolean>>;
-	deleteMasterException?: Function;
-}
 function ConfirmationModal({
 	showConfirmationModal,
 	setShowConfirmationModal,
 	deleteMasterException,
 	deleteMasterLoading,
 	masterListId,
-}:Props) {
+}) {
 	return (
 		<Modal
 			size="sm"

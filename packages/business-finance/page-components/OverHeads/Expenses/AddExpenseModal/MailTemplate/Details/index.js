@@ -5,29 +5,13 @@ import { formatDate } from '../../../../../commons/utils/formatDate';
 
 import styles from './styles.module.css';
 
-interface Data {
-	expenseCategory?:string,
-	payableAmount?:number | string,
-	invoiceDate?: Date,
-	stakeholderName?:string,
-	invoiceCurrency?:string,
-	currency?:string,
-}
-interface Props {
-	text?:string,
-	vendorName?:string,
-	category?:string,
-	isBody?:boolean,
-	mailData?:Data,
-}
-
 function Details({
 	text = '',
 	isBody = false,
 	mailData = {},
 	vendorName,
 	category,
-}:Props) {
+}) {
 	const {
 		payableAmount,
 		invoiceDate,

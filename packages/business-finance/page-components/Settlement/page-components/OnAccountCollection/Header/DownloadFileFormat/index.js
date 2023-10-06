@@ -3,13 +3,12 @@ import { useState } from 'react';
 
 import { STEPPER_ITEMS_DOWNLOAD_FILE_FORMAT } from '../../../../Constants';
 import useDownloadFileFormat from '../../../../hooks/useDownloadFileFormat';
-import { UploadFileInterface } from '../../interface';
 
 import BankName from './BankName';
 import styles from './styles.module.css';
 import TradeParty from './TradeParty';
 
-function DownloadFileFormat({ showModal, setShowModal, control }:UploadFileInterface) {
+function DownloadFileFormat({ showModal, setShowModal, control }) {
 	const [stepper, setStepper] = useState('tradeParty');
 	const [value, onChange] = useState('AP');
 	const [valueTradeParty, setValueTradeParty] = useState([]);
@@ -58,7 +57,7 @@ function DownloadFileFormat({ showModal, setShowModal, control }:UploadFileInter
 
 					<Stepper
 						active={stepper}
-						setActive={(val:string) => { setStepper(val); }}
+						setActive={(val) => { setStepper(val); }}
 						items={STEPPER_ITEMS_DOWNLOAD_FILE_FORMAT}
 						arrowed
 					/>

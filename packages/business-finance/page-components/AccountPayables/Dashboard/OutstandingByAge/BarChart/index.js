@@ -1,19 +1,11 @@
-import { BarDatum, ResponsiveBar } from '@cogoport/charts/bar';
+import { ResponsiveBar } from '@cogoport/charts/bar';
 import { Toggle } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-interface ItemDataProps {
-	ageingBucket: BarDatum[],
-	currency: string,
-}
-interface ItemProps {
-	data: ItemDataProps,
-}
-
-function BarChart({ data }:ItemProps) {
+function BarChart({ data }) {
 	const { ageingBucket = [], currency } = data || {};
 	const [isLinearView, setIsLinearView] = useState(true);
 
@@ -27,7 +19,7 @@ function BarChart({ data }:ItemProps) {
 					name="linear_view"
 					size="md"
 					showOnOff
-					value={isLinearView as unknown as string}
+					value={isLinearView}
 					onChange={() => setIsLinearView(!isLinearView)}
 					disabled={false}
 				/>
@@ -97,7 +89,7 @@ function BarChart({ data }:ItemProps) {
 							<tspan color="#000">
 								{
 									formatAmount({
-										amount  : value as any,
+										amount  : value,
 										currency,
 										options : {
 											currencyDisplay : 'code',
@@ -158,7 +150,7 @@ function BarChart({ data }:ItemProps) {
 										}}
 									>
 										{formatAmount({
-											amount  : bar.data.value as any,
+											amount  : bar.data.value,
 											currency,
 											options : {
 												currencyDisplay       : 'code',

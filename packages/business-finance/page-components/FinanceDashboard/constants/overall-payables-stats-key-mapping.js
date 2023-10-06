@@ -13,7 +13,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 			label    : '0-30 DAYS',
 			valueKey	: showInTooltop(
 				formatAmount({
-					amount   :	(thirtyDayOverdue * -1) as any,
+					amount   :	(thirtyDayOverdue * -1),
 					currency : GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style           : 'currency',
@@ -21,7 +21,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 					},
 				}),
 				formatAmount({
-					amount   :	(thirtyDayOverdue * -1) as any,
+					amount   :	(thirtyDayOverdue * -1),
 					currency : GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style           : 'currency',
@@ -37,7 +37,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 			label    : '30-60 DAYS',
 			valueKey	: showInTooltop(
 				formatAmount({
-					amount   : (threeSixtyDayOverdue * -1) as any,
+					amount   : (threeSixtyDayOverdue * -1),
 					currency : GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style           : 'currency',
@@ -45,7 +45,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 					},
 				}),
 				formatAmount({
-					amount   :	threeSixtyDayOverdue * -1 as any,
+					amount   :	threeSixtyDayOverdue * -1,
 					currency : GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style           : 'currency',
@@ -63,7 +63,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 			label    : '60-90 DAYS',
 			valueKey	: showInTooltop(
 				formatAmount({
-					amount   :	(sixtyDayOverdue * -1) as any,
+					amount   :	(sixtyDayOverdue * -1),
 					currency : GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style           : 'currency',
@@ -71,7 +71,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 					},
 				}),
 				formatAmount({
-					amount   :	sixtyDayOverdue * -1 as any,
+					amount   :	sixtyDayOverdue * -1,
 					currency : GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style           : 'currency',
@@ -88,7 +88,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 			label    : '90-180 DAYS',
 			valueKey	: showInTooltop(
 				formatAmount({
-					amount   : (ninetyDayOverdue * -1) as any,
+					amount   : (ninetyDayOverdue * -1),
 					currency : GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style           : 'currency',
@@ -96,7 +96,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 					},
 				}),
 				formatAmount({
-					amount   :	ninetyDayOverdue * -1 as any,
+					amount   :	ninetyDayOverdue * -1,
 					currency : GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style           : 'currency',
@@ -112,7 +112,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 			label    : '180-365 DAYS',
 			valueKey	: showInTooltop(
 				formatAmount({
-					amount   :	(oneEightyDayOverdue * -1) as any,
+					amount   :	(oneEightyDayOverdue * -1),
 					currency : GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style           : 'currency',
@@ -120,7 +120,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 					},
 				}),
 				formatAmount({
-					amount   :	oneEightyDayOverdue * -1 as any,
+					amount   :	oneEightyDayOverdue * -1,
 					currency : GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style           : 'currency',
@@ -136,7 +136,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 			label    : '365+ DAYS',
 			valueKey	: showInTooltop(
 				formatAmount({
-					amount   :	(threeSixtyPlusDayOverdue * -1) as any,
+					amount   :	(threeSixtyPlusDayOverdue * -1),
 					currency :	GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style           : 'currency',
@@ -144,7 +144,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 					},
 				}),
 				formatAmount({
-					amount   :	threeSixtyPlusDayOverdue * -1 as any,
+					amount   :	threeSixtyPlusDayOverdue * -1,
 					currency : GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style           : 'currency',

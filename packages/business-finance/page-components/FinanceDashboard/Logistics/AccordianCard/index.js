@@ -14,11 +14,6 @@ import showInTooltop from '../../utils/getOverFlowData';
 
 import styles from './styles.module.css';
 
-interface ItemProps {
-	key?: string;
-	label?: string;
-}
-
 function AccordianCards({ globalFilters, entityTabFilters }) {
 	const [isViewButtonOpen, setIsViewButtonOpen] = useState(null);
 	const {
@@ -106,7 +101,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 															{showInTooltop(
 																formatAmount({
 																	amount:	(Math.abs(item.accountRec
-																		+ item.accountPay)) as any,
+																		+ item.accountPay)),
 																	currency : GLOBAL_CONSTANTS.currency_code.INR,
 																	options  : {
 																		style           : 'currency',
@@ -116,7 +111,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																formatAmount({
 																	amount:	Math.abs(
 																		item.accountRec + item.accountPay,
-																	) as any,
+																	),
 																	currency : GLOBAL_CONSTANTS.currency_code.INR,
 																	options  : {
 																		style           : 'currency',
@@ -172,7 +167,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 													<span style={{ marginRight: '10px' }}>AP:</span>
 													{showInTooltop(
 														formatAmount({
-															amount   :	(Math.abs(item?.accountPay)) as any,
+															amount   :	(Math.abs(item?.accountPay)),
 															currency : GLOBAL_CONSTANTS.currency_code.INR,
 															options  : {
 																style           : 'currency',
@@ -180,7 +175,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 															},
 														}),
 														formatAmount({
-															amount   :	Math.abs(item?.accountPay) as any,
+															amount   :	Math.abs(item?.accountPay),
 															currency :	GLOBAL_CONSTANTS.currency_code.INR,
 															options  : {
 																style           : 'currency',
@@ -245,7 +240,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 									<div className={styles.borders} />
 
 									<div className={styles.stats_styles}>
-										{(statsTabs[item?.service] || []).map((val:ItemProps) => (
+										{(statsTabs[item?.service] || []).map((val) => (
 											<div
 												key={val.key}
 												className={val.key === subActiveTab
@@ -345,7 +340,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																							(accordianStatsData
 																								?.cardDataAp
 																|| {})[((serviceDataMapping[item?.service]
-																|| {})[val?.key] || {})?.AR] || '') * -1 as any,
+																|| {})[val?.key] || {})?.AR] || '') * -1,
 																						currency: GLOBAL_CONSTANTS
 																							.currency_code.INR,
 																						options: {
@@ -359,7 +354,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																							(accordianStatsData
 																								?.cardDataAp
 																|| {})[((serviceDataMapping[item?.service]
-																|| {})[val?.key] || {})?.AR] || '') * -1 as any,
+																|| {})[val?.key] || {})?.AR] || '') * -1,
 																						currency:	GLOBAL_CONSTANTS
 																							.currency_code.INR,
 																						options: {
@@ -428,7 +423,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 											<div className={styles.right_container}>
 												{(OverallReceivablesStatsKeyMapping({ accordianStatsData })
 												|| []).map((val) => (
-													<div className={styles.due_ageing} key={val as any}>
+													<div className={styles.due_ageing} key={val}>
 														{accordianStatsLoading ? (
 															<Placeholder
 																height="20px"
@@ -460,7 +455,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 															{showInTooltop(
 																formatAmount({
 																	amount:	Math.abs(accordianStatsData
-																		?.apData?.overdueAmount) as any,
+																		?.apData?.overdueAmount),
 																	currency : GLOBAL_CONSTANTS.currency_code.INR,
 																	options  : {
 																		style:
@@ -470,7 +465,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																}),
 																formatAmount({
 																	amount:	Math.abs(accordianStatsData
-																		?.apData?.overdueAmount) as any,
+																		?.apData?.overdueAmount),
 																	currency :	GLOBAL_CONSTANTS.currency_code.INR,
 																	options  : {
 																		style:
@@ -491,7 +486,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 											<div className={styles.right_container}>
 												{(OverallPayablesStatsKeyMapping({ accordianStatsData })
 												|| []).map((val) => (
-													<div className={styles.due_ageing} key={val as any}>
+													<div className={styles.due_ageing} key={val}>
 														{accordianStatsLoading ? (
 															<Placeholder
 																height="20px"

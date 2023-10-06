@@ -11,11 +11,6 @@ import { treasuryControls } from '../controls';
 
 import styles from './styles.module.css';
 
-interface ItemProps {
-	key?: string;
-	label?: string;
-	icon?: JSX.Element;
-}
 function TreasuryStatistics() {
 	const [tabs, setTabs] = useState('all');
 	const {
@@ -86,7 +81,7 @@ function TreasuryStatistics() {
 					</div>
 					<div className={styles.container}>
 						<div className={styles.flex}>
-							{tab.map((item:ItemProps) => (
+							{tab.map((item) => (
 								<div
 									key={item.key}
 									onClick={() => {
@@ -228,7 +223,7 @@ function TreasuryStatistics() {
 									<>
 										{showInTooltop(
 											formatAmount({
-												amount   :	UTRPendingAmount as any,
+												amount   :	UTRPendingAmount,
 												currency : GLOBAL_CONSTANTS.currency_code.INR,
 												options  : {
 													style           : 'currency',
@@ -236,7 +231,7 @@ function TreasuryStatistics() {
 												},
 											}),
 											formatAmount({
-												amount   :	UTRPendingAmount as any,
+												amount   :	UTRPendingAmount,
 												currency : GLOBAL_CONSTANTS.currency_code.INR,
 												options  : {
 													style           : 'currency',

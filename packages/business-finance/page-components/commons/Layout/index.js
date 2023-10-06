@@ -4,15 +4,9 @@ import FieldArray from './ChildFormat';
 import Item from './Item';
 import styles from './styles.module.css';
 
-interface LayoutInterface {
-	control?:object
-	fields?:Array<{ name?:string, span?:number }>
-	showElements?:object
-	errors?:object
-}
 function Layout({
 	control, fields, showElements = {}, errors,
-}:LayoutInterface) {
+}) {
 	let rowWiseFields = [];
 	const TOTAL_FIELDS = [];
 	let span = 0;

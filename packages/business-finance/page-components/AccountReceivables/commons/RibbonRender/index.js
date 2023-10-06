@@ -2,27 +2,12 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface InvoiceAdditionals {
-	reqCancelReason?: string,
-	reqReplaceTo?:string,
-	reqReplaceReason?:string,
-}
-
-interface ItemData {
-	daysLeftForAutoIrnGeneration?: string,
-	invoiceAdditionals?: InvoiceAdditionals
-}
-
-interface Interface {
-	row?: ItemData
-}
-
-function RibbonRender({ row = {} }: Interface) {
+function RibbonRender({ row = {} }) {
 	const { daysLeftForAutoIrnGeneration = '', invoiceAdditionals = {} } = row;
 	const { reqCancelReason = '', reqReplaceTo = '', reqReplaceReason = '' } = invoiceAdditionals || {};
 
 	let value;
-	if ((daysLeftForAutoIrnGeneration as unknown as number) >= 0) {
+	if ((daysLeftForAutoIrnGeneration) >= 0) {
 		value = `${daysLeftForAutoIrnGeneration || '--'} days left` || '0';
 	} else {
 		value = 'Expired';
@@ -31,7 +16,7 @@ function RibbonRender({ row = {} }: Interface) {
 		{
 			param      : daysLeftForAutoIrnGeneration,
 			displayVal : value || '-',
-			criteria   : (daysLeftForAutoIrnGeneration as unknown as number) >= 0,
+			criteria   : (daysLeftForAutoIrnGeneration) >= 0,
 		},
 		{ param: reqCancelReason, displayVal: 'Cancel Approved', criteria: true },
 		{ param: reqReplaceReason && reqReplaceTo, displayVal: `Replace to ${reqReplaceTo}`, criteria: true },

@@ -4,25 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import styles from './styles.module.css';
 
-interface UploadInterface {
-	item?:{
-		uploadedBy?:string
-		transactionDate?:Date
-		customerName?:string
-		accCode?:string
-		bankAccountNumber?:string
-		orgSerialId?:string
-		bankName?:string
-		paymentNumValue?:string
-		amount?:string
-		utr?:string
-		entityType?:string
-		currency?:string
-
-	}
-}
-
-const renderUploadedBy = ({ item }:UploadInterface) => {
+const renderUploadedBy = ({ item }) => {
 	const { uploadedBy = '', transactionDate } = item;
 
 	return (

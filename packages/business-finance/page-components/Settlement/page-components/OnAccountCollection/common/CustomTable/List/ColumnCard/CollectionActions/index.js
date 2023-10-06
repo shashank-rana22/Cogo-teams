@@ -10,37 +10,6 @@ import { content, contentIsFinalPosted, contentIsPosted } from './collectiveData
 import ModalFinalPost from './ModalFinalPost';
 import PostToSageModal from './PostToSageModal';
 
-interface PermissionInterface {
-	show?:boolean
-	id?:string
-	isDelete?:boolean
-}
-
-interface CollectionActionInterface {
-	itemData?:{
-		customerName?:string
-		accCode?:string
-		bankAccountNumber?:string
-		orgSerialId?:string
-		bankName?:string
-		paymentNumValue?:string
-		amount?:string
-		utr?:string
-		entityType?:string
-		currency?:string
-		id?:string
-		paymentDocumentStatus?:string
-		accMode?:string
-		paymentCode?:string
-		sageOrganizationId?:string
-	}
-	refetch?:() => void
-}
-
-interface SelectedInterface {
-	id?:string
-}
-
 const GET_STATUS = ['POSTED', 'APPROVED', 'POSTING_FAILED', 'FINAL_POSTED'];
 
 const GET_ENTITY = [];
@@ -52,11 +21,11 @@ function checkPostedValue(STATUS) {
 	return !CONDITIONAL_STATUS.includes(STATUS);
 }
 
-function CollectionActions({ itemData = {}, refetch }:CollectionActionInterface) {
+function CollectionActions({ itemData = {}, refetch }) {
 	const [show, setShow] = useState(false);
-	const [selectedId, setSelectedId] = useState<SelectedInterface>();
+	const [selectedId, setSelectedId] = useState();
 	const [selectedItem, setSelectedItem] = useState();
-	const [permissionModal, setPermissionModal] = useState<PermissionInterface>({
+	const [permissionModal, setPermissionModal] = useState({
 		show: false,
 	});
 	const [modalFinalPost, setModalFinalPost] = useState(false);

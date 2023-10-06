@@ -4,7 +4,6 @@ import React from 'react';
 
 import EmptyState from '../../../../commons/StyledTable/EmptyState';
 import Filters from '../Filters';
-import { ExceptionListProps } from '../Interfaces';
 
 import styles from './styles.module.css';
 
@@ -24,7 +23,7 @@ function ExceptionList({
 	getMasterList = null,
 	entityId = '',
 	...rest
-}:ExceptionListProps) {
+}) {
 	const { loading } = rest || {};
 
 	return (

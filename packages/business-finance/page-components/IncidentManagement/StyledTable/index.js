@@ -2,13 +2,12 @@ import { Pagination, Table } from '@cogoport/components';
 import React from 'react';
 
 import EmptyState from '../common/EmptyState';
-import { TableProps } from '../common/interface';
 
 import styles from './style.module.css';
 
 function StyledTable({
 	id, className, columns, data, pageSize, page, total, setFilters, filters, loading, showPagination = true, ...rest
-}: TableProps) {
+}) {
 	return (
 		<div className={styles.table}>
 			<Table
@@ -29,7 +28,7 @@ function StyledTable({
 						currentPage={page}
 						totalItems={total}
 						pageSize={pageSize}
-						onPageChange={(val:number) => setFilters({ ...filters, page: val })}
+						onPageChange={(val) => setFilters({ ...filters, page: val })}
 					/>
 				</div>
 			)}

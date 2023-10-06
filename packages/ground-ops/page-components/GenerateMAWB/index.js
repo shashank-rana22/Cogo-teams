@@ -50,20 +50,6 @@ const VOLUME_FACTOR = 166.67;
 const PRECISION_VALUE = 1000000;
 const LENGTH_INDEX = 1;
 
-interface NestedObj {
-	[key: string]: NestedObj | React.FC ;
-}
-
-interface Props {
-	viewDoc?: boolean;
-	setViewDoc?: Function;
-	item?: NestedObj;
-	edit?: boolean;
-	setEdit?: Function;
-	setItem?: Function;
-	setGenerate?:Function;
-}
-
 function GenerateMAWB({
 	viewDoc = false,
 	setViewDoc = () => {},
@@ -72,7 +58,7 @@ function GenerateMAWB({
 	setEdit = () => {},
 	setItem = () => {},
 	setGenerate = () => {},
-}:Props) {
+}) {
 	const [back, setBack] = useState(false);
 	const [editCopies, setEditCopies] = useState(null);
 
@@ -149,7 +135,7 @@ function GenerateMAWB({
 
 	const { data:hawbDataList = {}, loading:hawbListLoading, getHawbList } = useGetHawbList(item.shipmentId);
 
-	let cogoSeriesNumber:Array<number> = [];
+	let cogoSeriesNumber = [];
 
 	hawbDetails?.forEach((itm) => {
 		if (String(itm?.documentNo)?.includes('COGO')) {
@@ -387,8 +373,8 @@ function GenerateMAWB({
 			return;
 		}
 
-		let totalVolume:number = NULL_VALUE;
-		let totalPackage:number = NULL_VALUE;
+		let totalVolume = NULL_VALUE;
+		let totalPackage = NULL_VALUE;
 		(formValues.dimension || []).forEach((dimensionObj) => {
 			if (dimensionObj?.unit === 'inch') {
 				totalVolume

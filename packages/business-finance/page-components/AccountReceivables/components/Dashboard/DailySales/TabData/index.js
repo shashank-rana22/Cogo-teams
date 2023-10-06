@@ -5,17 +5,6 @@ import CardComponent from './CardComponent';
 import SalesComponent from './SalesComponent';
 import styles from './styles.module.css';
 
-interface TabDataProps {
-	toggleData?: boolean,
-	loading?: boolean,
-	dailyStatsData?: object,
-	subActiveTab?: string,
-	setSubActiveTab?: (p: string) => void,
-	filters?: object,
-	filterValue?: object
-	entityCode?: string
-}
-
 const tabs = (t) => [
 	{
 		key   : 'SALES_INVOICE',
@@ -40,7 +29,7 @@ const tabsKeyComponentMapping = {
 function TabData({
 	toggleData, loading, dailyStatsData, subActiveTab, setSubActiveTab,
 	filters, filterValue, entityCode,
-} : TabDataProps) {
+}) {
 	const tabComponentProps = {
 		SALES_INVOICE: {
 			subActiveTab,

@@ -2,24 +2,7 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-interface FilterInterface {
-	entityCode?:string
-	serviceType?:string
-	companyType?: string
-}
-interface ParamsInterface {
-	filterValue?:FilterInterface
-	filters?:SubFilterInterface
-	subActiveTab?:string
-	entityCode?: string
-	toggleData?: boolean
-}
-interface SubFilterInterface {
-	month?:string
-	year?:string
-	date?:Date
-}
-const useGetGraph = ({ filters, filterValue, subActiveTab, entityCode, toggleData }:ParamsInterface) => {
+const useGetGraph = ({ filters, filterValue, subActiveTab, entityCode, toggleData }) => {
 	const { serviceType = '', companyType = '' } = filterValue || {};
 	const [{ data, loading }, Trigger] = useRequestBf(
 		{

@@ -7,16 +7,7 @@ import useGetDailyPayableOutstanding from '../hooks/useGetDailyPayableOutstandin
 
 import styles from './styles.module.css';
 
-interface FilterProps {
-	service?: string,
-	currency?: string,
-}
-interface ItemData {
-	filters: FilterProps,
-	activeEntity: string,
-}
-
-function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
+function DailyPayableOutstanding({ filters, activeEntity }) {
 	const [isQuarterView, setIsQuarterView] = useState(false);
 	const { data, loading } = useGetDailyPayableOutstanding({ isQuarterView, filters, activeEntity });
 	const { list } = data || {};
@@ -62,7 +53,7 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 		{
 			amount: list?.[0],
 		},
-	] as any;
+	];
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -100,7 +91,7 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 						name="view"
 						size="md"
 						showOnOff
-						value={isQuarterView as unknown as string}
+						value={isQuarterView}
 						onChange={() => setIsQuarterView(!isQuarterView)}
 						disabled={false}
 					/>

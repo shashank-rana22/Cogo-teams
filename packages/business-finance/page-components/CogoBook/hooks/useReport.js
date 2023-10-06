@@ -3,18 +3,10 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-interface FilterInterface {
-	filters?:{
-		date?:string
-		category?:string
-		entity?:string
-	}
-	monthPayload?:string
-}
 const useReport = ({
 	filters = {},
 	monthPayload,
-}:FilterInterface) => {
+}) => {
 	const [
 		{ data:reportData, loading:reportTriggerLoading },
 		reportTrigger,
@@ -86,7 +78,7 @@ const useReport = ({
 		}
 	}, [getLastMonthData, reportTrigger, FilterDate, entityId]);
 
-	const fetchRatioApi = useCallback(async (setShowReport?:any) => {
+	const fetchRatioApi = useCallback(async (setShowReport) => {
 		try {
 			await ratioTrigger({
 				params: {

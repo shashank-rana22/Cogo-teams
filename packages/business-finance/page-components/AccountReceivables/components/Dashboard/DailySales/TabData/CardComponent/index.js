@@ -9,25 +9,10 @@ import ResponsiveChart from './ResponsiveChart';
 import BarData from './ResponsiveChart/data';
 import styles from './styles.module.css';
 
-interface SubFilterInterface {
-	month?: string,
-	year?: string,
-	date?: Date
-}
-interface CardComponentProps {
-	subActiveTab?: string,
-	dailyStatsData?: object,
-	toggleData?: boolean,
-	loading?: boolean,
-	filters?: SubFilterInterface,
-	filterValue?: object
-	entityCode?: string
-}
-
 function CardComponent({
 	subActiveTab, dailyStatsData, toggleData, loading,
 	filters, filterValue, entityCode,
-}: CardComponentProps) {
+}) {
 	const { data, loading: loadingData } = useGetGraph({ filters, filterValue, subActiveTab, entityCode, toggleData });
 	function GetData() {
 		const getFormat = (duration) => {

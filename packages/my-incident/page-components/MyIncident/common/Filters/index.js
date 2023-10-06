@@ -1,23 +1,16 @@
 import React from 'react';
 
 import { ELEMENTS_MAPPING } from '../../utils/getElements';
-import { FilterProps } from '../interfaces';
 import SearchInput from '../SearchInput';
 
 import styles from './styles.module.css';
 import { filterControls } from './utils/controls';
 
-interface Props {
-	filters: FilterProps;
-	onChangeFilters: (v: object) => void;
-	activeTab:string,
-}
-
 function Filters({
 	filters,
 	onChangeFilters = (v) => v,
 	activeTab,
-}: Props) {
+}) {
 	const { search } = filters || {};
 
 	return (
@@ -25,7 +18,7 @@ function Filters({
 			<div className={styles.select_container}>
 				{filterControls(activeTab).map((control) => {
 					// const Element: any = getElements(control.type);
-					const Element:any = ELEMENTS_MAPPING[control.type];
+					const Element = ELEMENTS_MAPPING[control.type];
 					return (
 						<Element
 							key={control.name}

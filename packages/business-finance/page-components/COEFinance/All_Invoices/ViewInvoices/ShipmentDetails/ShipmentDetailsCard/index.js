@@ -4,7 +4,6 @@ import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
 import billingPartyRejectCheckboxList from '../../../../constants/billing-party-remark-checkbox-list';
 import collectionPartyRejectCheckboxList from '../../../../constants/collection-party-remark-checkbox-list';
 import useListShipment from '../../../../hook/useListShipment';
@@ -19,27 +18,6 @@ import InvoiceDetailsCard from './InvoiceDetailsCard';
 import LineItemCard from './lineItemCard/index';
 import RejectModal from './RejectModal';
 import styles from './styles.module.css';
-
-interface ShipmentDetailsCardInterface {
-	data: any;
-	remarksVal: RemarksValInterface;
-	setRemarksVal: any;
-	lineItemsRemarks: object;
-	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
-	invoiceStatus: string;
-	lineItemsCheck?: boolean;
-	setCheckItem: any;
-	onAccept: any;
-	onTabClick: any;
-	tab?: { collectionPartyTab?: boolean,
-		billingPartyTab?: boolean,
-		invoiceDetailsTab?: boolean,
-		lineItemsTab?: boolean,
-	};
-	setCombinedRemarks?: Function;
-	docContent?: any;
-	chargesTable?: any;
-}
 
 const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
 const MAX_CARDS = 4;
@@ -60,7 +38,7 @@ function ShipmentDetailsCard({
 	setCombinedRemarks = () => {},
 	docContent = {},
 	chargesTable = [],
-}: ShipmentDetailsCardInterface) {
+}) {
 	const [showValue, setShowValue] = useState([]);
 	const [rejected, setRejected] = useState([]);
 	const [showRejected, setShowRejected] = useState({});
@@ -124,18 +102,18 @@ function ShipmentDetailsCard({
 		{ id: 2, name: 'billing-party', label: 'Billing Party' },
 		{ id: 3, name: 'invoice-details', label: 'Invoice Details' },
 		{ id: 4, name: 'line-item-details', label: 'Timeline Details' },
-	] as any);
+	]);
 
 	const isInvoiceApproved = invoiceStatus === 'FINANCE_ACCEPTED';
 
-	const handleClick = (id?: number) => {
+	const handleClick = (id) => {
 		const approveData = [...showValue, id];
 		setShowValue(approveData);
 		detailsCard.push(detailsCard.shift());
 		setDetailsCard(detailsCard);
 	};
 
-	const handleRejected = (id: number) => {
+	const handleRejected = (id) => {
 		setRejected([...rejected, id]);
 		detailsCard.push(detailsCard.shift());
 		setDetailsCard(detailsCard);
@@ -162,10 +140,10 @@ function ShipmentDetailsCard({
 		?.filter((item) => JSON.parse(JSON.stringify(item?.data || ''))?.invoice_number === billNumber
 		&& item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
 
-	const handleClickUndo = (id?: number) => {
-		const undoApprovedData = showValue.filter((item: any) => item !== id);
+	const handleClickUndo = (id) => {
+		const undoApprovedData = showValue.filter((item) => item !== id);
 		setShowValue(undoApprovedData);
-		const undoRejectedData = rejected.filter((item: any) => item !== id);
+		const undoRejectedData = rejected.filter((item) => item !== id);
 		setRejected(undoRejectedData);
 
 		if (id === 1) {
@@ -189,8 +167,8 @@ function ShipmentDetailsCard({
 		}
 	};
 
-	const handleClickReject = (id?: number) => {
-		setShowRejected((previousActions: any) => ({
+	const handleClickReject = (id) => {
+		setShowRejected((previousActions) => ({
 			...previousActions,
 			[id]: !previousActions[id],
 		}));
@@ -311,12 +289,12 @@ function ShipmentDetailsCard({
 					) : null}
 				</div>
 				<div className={styles.small_hr} />
-				{detailsCard.map((itemData: any) => {
+				{detailsCard.map((itemData) => {
 					const { id = '' } = itemData || {};
 
 					return (
 						<>
-							{showRejected[id as keyof typeof showRejected] ? (
+							{showRejected[id] ? (
 								<RejectModal
 									id={id}
 									showRejected={showRejected}

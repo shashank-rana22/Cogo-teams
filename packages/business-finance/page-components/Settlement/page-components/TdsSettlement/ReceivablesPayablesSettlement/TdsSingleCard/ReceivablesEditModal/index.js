@@ -2,24 +2,10 @@ import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React from 'react';
 
-import { GenericObject } from '../Interfaces/index';
 import ReceivablesPayablesFrom from '../ReceivablesPayablesForm';
 
 import styles from './styles.module.css';
 
-interface TdsStyleInterface {
-	rate?:number,
-	style?:string,
-	type?:string
-}
-interface Props {
-	show?:boolean
-	approveTds?:any,
-	globalFilters?:GenericObject,
-	editTdsLoading?:boolean
-	tdsStyle?:TdsStyleInterface,
-	setShow?:(p:boolean)=> void,
-}
 function ReceivablesEditModal({
 	show,
 	setShow,
@@ -27,7 +13,7 @@ function ReceivablesEditModal({
 	approveTds,
 	globalFilters,
 	tdsStyle,
-}:Props) {
+}) {
 	const {
 		handleSubmit,
 		control,

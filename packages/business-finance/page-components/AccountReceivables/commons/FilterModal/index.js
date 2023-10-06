@@ -4,17 +4,10 @@ import React, { useEffect, useState } from 'react';
 
 import Filter from '../../../commons/Filters';
 import { invoiceMoreFilter } from '../../Utils/invoicelistFilter';
-import { GenericObject } from '../Interfaces/index';
 
 import styles from './styles.module.css';
 
-interface Props {
-	filters: GenericObject;
-	setFilters: (p: object) => void;
-	clearFilter: () => void;
-}
-
-function FilterModal({ filters, setFilters, clearFilter }: Props) {
+function FilterModal({ filters, setFilters, clearFilter }) {
 	const [showModal, setShowModal] = useState(false);
 
 	useEffect(() => {
@@ -44,7 +37,7 @@ function FilterModal({ filters, setFilters, clearFilter }: Props) {
 						<div className={styles.currencys}>
 							MORE FILTERS
 						</div>
-					) as never as string}
+					)}
 				/>
 
 				<Modal.Body>

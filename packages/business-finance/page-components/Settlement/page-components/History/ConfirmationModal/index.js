@@ -1,15 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
-
-interface Props {
-	bulkPostToSageAction: (array: number[]) => void,
-	confirmation: boolean;
-	setConfirmation: Dispatch<SetStateAction<string | boolean>>;
-	notSettledIds: number[];
-	loading: boolean;
-}
 
 function ConfirmationModal(
 	{
@@ -18,7 +10,7 @@ function ConfirmationModal(
 		confirmation,
 		setConfirmation,
 		loading,
-	}: Props,
+	},
 ) {
 	return (
 		<Modal

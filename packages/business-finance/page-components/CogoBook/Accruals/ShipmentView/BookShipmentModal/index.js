@@ -5,15 +5,9 @@ import useBookShipmentCount from '../../../hooks/getBookShipmentCount';
 
 import styles from './style.module.css';
 
-interface Props {
-	showBookShipment?: boolean;
-	filters?: object;
-	setShowBookShipment?: (p:boolean)=> void,
-}
-
 const ZERO = 0;
 
-function BookShipmentModal({ showBookShipment = false, setShowBookShipment = () => {}, filters = {} }:Props) {
+function BookShipmentModal({ showBookShipment = false, setShowBookShipment = () => {}, filters = {} }) {
 	const {
 		data, loading, bookShipmentConfirmData,
 		bookShipmentConfirmLoading,

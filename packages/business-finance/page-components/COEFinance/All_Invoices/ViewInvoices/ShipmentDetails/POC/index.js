@@ -14,11 +14,7 @@ import CustomerInformation from './CustomerInformation/index';
 import POCTimeLine from './POCTimeLine/index';
 import styles from './styles.module.css';
 
-interface Props {
-	itemData: any;
-}
-
-function POCDetails({ itemData }: Props) {
+function POCDetails({ itemData }) {
 	const { bill, job } = itemData || {};
 
 	const {
@@ -41,7 +37,7 @@ function POCDetails({ itemData }: Props) {
 	};
 
 	const handleDropdown = (key = '') => {
-		setDropDownData((previousActions: any) => ({
+		setDropDownData((previousActions) => ({
 			...previousActions,
 			[key]: !previousActions[key],
 		}));
@@ -130,7 +126,7 @@ function POCDetails({ itemData }: Props) {
 												>
 													{label}
 													<div className={styles.drop_down_container}>
-														{dropDownData[id as keyof typeof dropDownData] ? (
+														{dropDownData[id] ? (
 															<IcMArrowRotateUp width={15} height={15} />
 														) : (
 															<IcMArrowRotateDown width={15} height={15} />
@@ -138,11 +134,11 @@ function POCDetails({ itemData }: Props) {
 													</div>
 												</div>
 
-												{dropDownData[id as keyof typeof dropDownData] && (
+												{dropDownData[id] && (
 													<div className={styles.hr} />
 												)}
 
-												{dropDownData[id as keyof typeof dropDownData] && (
+												{dropDownData[id] && (
 													<div>
 														<div className={styles.information_data}>
 															{label === 'Customer Information' && (

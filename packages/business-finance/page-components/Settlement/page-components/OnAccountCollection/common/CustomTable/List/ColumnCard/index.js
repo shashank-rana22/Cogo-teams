@@ -11,29 +11,7 @@ const MAX_BANK_LENGTH = 12;
 const MAX_LENGTH_ECLIPSES = 12;
 const MAX_LENGTH_VISIBLE = 12;
 
-interface ColumnCardInterface {
-	refetch?: () => void;
-	item?: {
-		customerName?: string;
-		accCode?: string;
-		bankAccountNumber?: string;
-		orgSerialId?: string;
-		bankName?: string;
-		paymentNumValue?: string;
-		amount?: string;
-		utr?: string;
-		entityType?: string;
-		currency?: string;
-		id?: string;
-		paymentDocumentStatus?: string;
-		accMode?: string;
-		paymentCode?: string;
-		sageOrganizationId?: string;
-	};
-	getTableBodyCheckbox: (val: object) => JSX.Element;
-}
-
-function ColumnCard({ item, refetch, getTableBodyCheckbox }: ColumnCardInterface) {
+function ColumnCard({ item, refetch, getTableBodyCheckbox }) {
 	const {
 		customerName = '',
 		bankName = '',

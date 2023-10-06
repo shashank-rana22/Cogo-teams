@@ -10,7 +10,6 @@ import React, { useState } from 'react';
 import useListCogoEntities from '../AccountPayables/Dashboard/hooks/useListCogoEntities';
 
 import useGetIncidentData from './common/hooks/useGetIncidentData';
-import { IncidentDataInterface } from './common/interface';
 import { getTabs } from './Constants/getTabs';
 import Controller from './Controller';
 import CommonDetailsModal from './Modals';
@@ -24,20 +23,12 @@ const tabsKeyComponentMapping = {
 	controller : Controller,
 };
 
-interface ItemProps {
-	business_name: string;
-	entity_code: string;
-}
-interface Profile {
-	profile?: { partner: { id: string } };
-}
-
 function IncidentManagement() {
 	const { query, push } = useRouter();
 
 	const { t } = useTranslation(['incidentManagement']);
 
-	const { profile }: Profile = useSelector((state) => state);
+	const { profile } = useSelector((state) => state);
 
 	const { partner } = profile || {};
 
@@ -53,7 +44,7 @@ function IncidentManagement() {
 
 	const entityDataCount = entityData.length;
 	const tabsMappingData = getTabs({ t });
-	const entityOptions = (entityData || []).map((item: ItemProps) => {
+	const entityOptions = (entityData || []).map((item) => {
 		const {
 			business_name: companyName = '',
 			entity_code: listEntityCode = '',
@@ -74,7 +65,7 @@ function IncidentManagement() {
 		isSettlementExecutive,
 		incidentLoading,
 		getIncidentData,
-	}: IncidentDataInterface = useGetIncidentData({
+	} = useGetIncidentData({
 		activeTab,
 		incidentId: query?.incidentId,
 		entityCode,
@@ -119,7 +110,7 @@ function IncidentManagement() {
 		},
 	};
 	const ActiveTabComponent = tabsKeyComponentMapping[activeTab] || null;
-	const onChange = (view: string) => {
+	const onChange = (view) => {
 		setActiveTab(view);
 		push(
 			'/business-finance/incident-management/[activeTab]',
@@ -127,7 +118,7 @@ function IncidentManagement() {
 		);
 	};
 
-	const getStatsData = (key: string) => {
+	const getStatsData = (key) => {
 		if (key === 'requested') {
 			return statsData?.REQUESTED;
 		}
@@ -151,7 +142,7 @@ function IncidentManagement() {
 		<div>
 			<div className={isEmpty(detailsModal) ? styles.nodisplay : null}>
 				<CommonDetailsModal
-					setDetailsModal={setDetailsModal as any}
+					setDetailsModal={setDetailsModal}
 					detailsModal={detailsModal}
 					refetch={getIncidentData}
 				/>
@@ -165,7 +156,7 @@ function IncidentManagement() {
 						<div className={styles.input}>
 							<Select
 								name="business_name"
-								onChange={(entityVal: string) => setEntityCode(entityVal)}
+								onChange={(entityVal) => setEntityCode(entityVal)}
 								value={entityCode}
 								options={entityOptions}
 								placeholder={t('incidentManagement:select_entity') || ''}
@@ -178,7 +169,7 @@ function IncidentManagement() {
 				<div className={styles.tabs_container}>
 					<Tabs
 						activeTab={activeTab}
-						onChange={(tab: string) => onChange(tab)}
+						onChange={(tab) => onChange(tab)}
 						fullWidth
 						themeType="primary"
 					>

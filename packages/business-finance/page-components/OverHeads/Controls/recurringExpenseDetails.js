@@ -5,36 +5,6 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-interface FormDataInterface {
-	registrationNumber?: string;
-	entityObject?: { id?: string; entity_code?: string };
-	periodOfTransaction?: string;
-	vendorName?: string;
-	expenseCategory?: string;
-}
-
-interface EntityInt {
-	id?: string | number;
-	entity_code?: string;
-	business_name?: string;
-}
-
-interface Props {
-	formData: FormDataInterface;
-	setFormData: (obj: any) => void;
-	categoryOptions: object[];
-	subCategoryOptions: object[];
-	setCategoryOptions: (obj: any) => void;
-	setSubCategoryOptions: (obj: any) => void;
-	branchOptions: object;
-	setBranchOptions: (obj: any) => void;
-	entityList: EntityInt[];
-	entityOptions: object[];
-	setEntityOptions: (obj: any) => void;
-	handleVendorChange: (obj: any) => void;
-	handleCategoryChange: (obj: any, val: object) => void;
-}
-
 export const recurringExpenseDetails = ({
 	formData,
 	setFormData,
@@ -43,9 +13,9 @@ export const recurringExpenseDetails = ({
 	entityOptions,
 	handleVendorChange = () => {},
 	handleCategoryChange = () => {},
-}: Props) => {
+}) => {
 	const geo = getGeoConstants();
-	const handleEntityChange = (e: string | number) => {
+	const handleEntityChange = (e) => {
 		const entityData = (entityList || []).filter(
 			(entityItem) => entityItem.id === e,
 		)?.[GLOBAL_CONSTANTS.zeroth_index];
@@ -66,7 +36,7 @@ export const recurringExpenseDetails = ({
 					asyncKey       : 'list_vendors',
 					params         : { filters: { kyc_status: 'verified' } },
 					value          : formData?.vendorName,
-					onChange       : (item: any, obj: object) => handleVendorChange(obj),
+					onChange       : (item, obj) => handleVendorChange(obj),
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Vendor name',
@@ -94,7 +64,7 @@ export const recurringExpenseDetails = ({
 					span           : 2.2,
 					options        : entityOptions,
 					value          : formData?.entityObject?.id,
-					onChange       : (e: any) => handleEntityChange(e),
+					onChange       : (e) => handleEntityChange(e),
 					style          : { width: '164px' },
 				},
 				{

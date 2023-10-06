@@ -5,15 +5,6 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
-import { FilterProps } from '../interface';
-
-interface Tab {
-	activeTab?: string;
-	incidentId?: string;
-	entityCode? : string
-
-}
-
 const getParams = ({
 	rest = {},
 	activeTab,
@@ -66,7 +57,7 @@ const getParams = ({
 	toBeApprovedBy: isMyTaskOnly ? userProfile.user?.id : undefined,
 });
 
-const useGetIncidentData = ({ activeTab, incidentId, entityCode }: Tab) => {
+const useGetIncidentData = ({ activeTab, incidentId, entityCode }) => {
 	const { user_profile: userProfile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
@@ -75,7 +66,7 @@ const useGetIncidentData = ({ activeTab, incidentId, entityCode }: Tab) => {
 		GLOBAL_CONSTANTS.country_entity_ids.IN,
 	);
 
-	const [filters, setFilters] = useState<FilterProps>({
+	const [filters, setFilters] = useState({
 		page        : 1,
 		pageLimit   : 10,
 		activeTab,

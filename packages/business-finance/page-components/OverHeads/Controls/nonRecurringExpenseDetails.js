@@ -6,36 +6,6 @@ import { MONTH_OPTIONS } from '../constants/MONTH_OPTIONS';
 
 import styles from './styles.module.css';
 
-interface FormDataInterface {
-	registrationNumber?: string;
-	entityObject?: { id?: string; entity_code?: string };
-	periodOfTransaction?: string;
-	vendorName?: string;
-	transactionDate?: string;
-}
-
-interface EntityInt {
-	id?: string | number;
-	entity_code?: string;
-	business_name?: string;
-}
-
-interface Props {
-	formData: FormDataInterface;
-	setFormData: (obj: any) => void;
-	categoryOptions: object[];
-	subCategoryOptions: object[];
-	setCategoryOptions: (obj: any) => void;
-	setSubCategoryOptions: (obj: any) => void;
-	branchOptions: object;
-	setBranchOptions: (obj: any) => void;
-	entityList: EntityInt[];
-	entityOptions: object[];
-	setEntityOptions: (obj: any) => void;
-	handleVendorChange?: (obj: any) => void;
-	handleCategoryChange?: (obj: any, val: object) => void;
-}
-
 export const nonRecurringExpenseDetails = ({
 	formData,
 	setFormData,
@@ -44,9 +14,9 @@ export const nonRecurringExpenseDetails = ({
 	entityOptions,
 	handleVendorChange = () => {},
 	handleCategoryChange = () => {},
-}: Props) => {
+}) => {
 	const geo = getGeoConstants();
-	const handleEntityChange = (e: number | string) => {
+	const handleEntityChange = (e) => {
 		const entityData = entityList?.filter((entityItem) => entityItem.id === e)?.[GLOBAL_CONSTANTS.zeroth_index];
 		setFormData({
 			...formData,
@@ -65,7 +35,7 @@ export const nonRecurringExpenseDetails = ({
 					asyncKey       : 'list_vendors',
 					params         : { filters: { kyc_status: 'verified' } },
 					value          : formData?.vendorName,
-					onChange       : (item: any, obj: object) => handleVendorChange(obj),
+					onChange       : (item, obj) => handleVendorChange(obj),
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Vendor name',
@@ -98,7 +68,7 @@ export const nonRecurringExpenseDetails = ({
 					placeholder    : 'Select Month',
 					span           : 2.2,
 					value          : formData?.periodOfTransaction,
-					onChange       : (month: string) => setFormData({
+					onChange       : (month) => setFormData({
 						...formData,
 						periodOfTransaction: month,
 					}),
@@ -115,7 +85,7 @@ export const nonRecurringExpenseDetails = ({
 					span           : 2.2,
 					options        : entityOptions,
 					value          : formData?.entityObject?.id,
-					onChange       : (e: any) => handleEntityChange(e),
+					onChange       : (e) => handleEntityChange(e),
 					className      : styles.input_width,
 				},
 			],

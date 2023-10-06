@@ -6,21 +6,13 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf, useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
-interface GenericObject {
-	[key: string]: any;
-}
-interface Props {
-	active?:string
-	globalFilters?: GenericObject,
-	setGlobalFilters?: (p:object)=> void,
-}
 const useTdsSettlement = ({
 	active = '',
 	globalFilters,
 	setGlobalFilters,
-}:Props) => {
+}) => {
 	const { date = {}, pageIndex, ...rest } = globalFilters;
-	const [searchValue, setSearchValue] = useState<string>('');
+	const [searchValue, setSearchValue] = useState('');
 	const [apiTdsData, setApiTdsData] = useState({});
 	const [summData, setSummData] = useState({});
 

@@ -5,32 +5,6 @@ import React, { useState } from 'react';
 import SavePayRunModal from './SavePayRunModal';
 import styles from './styles.module.css';
 
-interface ListType {
-	list:Array<{
-		checked: boolean;
-		payableAmount: number;
-	}>;
-}
-interface SelectedDataType {
-	totalValue:number,
-	currency:string,
-	invoiceCount:number,
-	list:[],
-}
-interface PropsType {
-	apiData:ListType,
-	viewSelectedInvoice:boolean,
-	setViewSelectedInvoice:Function,
-	submitSelectedInvoices: () => void,
-	getViewSelectedInvoices:Function,
-	getAdvancedPayment:Function,
-	viewSelectedData:SelectedDataType,
-	selectedPayRunId:string,
-	selectedDataLoading:boolean,
-	loading:boolean,
-	viewSelectedDataLoading:boolean
-	selectedCurrency:string,
-}
 function Footer({
 	apiData,
 	viewSelectedInvoice,
@@ -44,7 +18,7 @@ function Footer({
 	loading,
 	viewSelectedDataLoading,
 	selectedCurrency,
-}:PropsType) {
+}) {
 	const {
 		list = [],
 	} = apiData || {};
@@ -74,7 +48,7 @@ function Footer({
 					<div className={styles.amount_container}>
 						<div className={styles.amount}>
 							{ formatAmount({
-								amount   : viewSelectedInvoice ? totalValue as any : totalInvoiceAmount as any,
+								amount   : viewSelectedInvoice ? totalValue : totalInvoiceAmount,
 								currency : selectedCurrency,
 								options  : {
 									currencyDisplay : 'code',

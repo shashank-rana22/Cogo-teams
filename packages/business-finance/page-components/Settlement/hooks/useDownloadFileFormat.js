@@ -1,19 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-import { ModalInterface } from '../page-components/OnAccountCollection/interface';
-
-interface DownloadFileInterface {
-	formattedData?:object
-	value?: string
-	setShowModal?: React.Dispatch<React.SetStateAction<ModalInterface>>
-}
-
 const useDownloadFileFormat = ({
 	formattedData,
 	value,
 	setShowModal,
-}:DownloadFileInterface) => {
+}) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/sales/accounts/download-sample',

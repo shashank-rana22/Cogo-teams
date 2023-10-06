@@ -6,24 +6,7 @@ import ValuePercentage from '../ValuePercentage';
 
 import styles from './styles.module.css';
 
-interface MonthInterface {
-	data?:{
-		periodName?:string
-		expenseCurrency?:string
-		expenseBooked?:number
-		isLocked?:boolean
-		expenseAccrued?:string
-		incomeCurrency?:string
-		incomeBooked?:number
-		incomeAccrued?:string
-		actualExpense?:number
-		actualIncome?:number
-	}
-	handleClick?: () => void
-	loading?:boolean
-}
-
-function MonthInfo({ data, handleClick, loading }:MonthInterface) {
+function MonthInfo({ data, handleClick, loading }) {
 	const {
 		periodName,
 		expenseCurrency,
@@ -46,7 +29,7 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 					{' '}
 					<span className={styles.amount}>
 						{formatAmount({
-							amount   :	(expenseBooked - actualExpense) as any,
+							amount   :	(expenseBooked - actualExpense),
 							currency : expenseCurrency,
 							options  : {
 								style           : 'currency',
@@ -63,7 +46,7 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 					{' '}
 					<span className={styles.amount}>
 						{formatAmount({
-							amount   :	(incomeBooked - actualIncome) as any,
+							amount   :	(incomeBooked - actualIncome),
 							currency : expenseCurrency,
 							options  : {
 								style           : 'currency',
@@ -105,7 +88,7 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 						<div className={styles.para_data}>Expense Booked</div>
 						<div className={styles.para}>
 							{formatAmount({
-								amount   :	(expenseBooked || actualExpense) as any,
+								amount   :	(expenseBooked || actualExpense),
 								currency : expenseCurrency,
 								options  : {
 									style           : 'currency',
@@ -135,7 +118,7 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 						<div className={styles.para_data}>Income Booked</div>
 						<div className={styles.para}>
 							{formatAmount({
-								amount   :	(incomeBooked || actualIncome) as any,
+								amount   :	(incomeBooked || actualIncome),
 								currency : incomeCurrency,
 								options  : {
 									style           : 'currency',

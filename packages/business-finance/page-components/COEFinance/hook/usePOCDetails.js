@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-const usePOCDetails = (billId?: string) => {
+const usePOCDetails = (billId) => {
 	const [
 		{ data: listInvoiceDetailsApiData, loading: listInvoiceDetailsApiLoading },
 		listInvoiceDetailsApi,

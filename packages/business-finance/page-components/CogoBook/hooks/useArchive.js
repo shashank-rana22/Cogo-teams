@@ -5,26 +5,13 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
-interface GlobalInterface {
-	page?:number
-	pageLimit?:number
-	serviceType?:string
-	Amount?:string
-	Percentage?:string
-	archivedStatus?:string
-	search?:string
-	Range?:string
-	date?:any
-	entity?:string
-
-}
 const useArchive = ({ toggleValue = '', setShowTab }) => {
 	const { query = undefined, debounceQuery } = useDebounceQuery();
 	const [particularMonth, setParticularMonth] = useState(false);
 	const [apiData, setApiData] = useState({ list: [], totalRecords: 0 });
 	const [drillData, setDrillData] = useState({ list: [], totalRecords: 0 });
 	const [monthData, setMonthData] = useState({});
-	const [globalFilters, setGlobalFilters] = useState<GlobalInterface>({
+	const [globalFilters, setGlobalFilters] = useState({
 		page           : 1,
 		pageLimit      : 10,
 		serviceType    : '',

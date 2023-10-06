@@ -1,12 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import React from 'react';
 
-interface Props {
-	advanceDocumentNo:string;
-}
-interface ItemProps {
-	itemData:Props,
-}
 const DOCUMENT_NUMBER_LENGTH = 10;
 const SUBSTRING_MAX_LENGTH = 10;
 function AdvanceDocNumber({ itemData }:ItemProps) {

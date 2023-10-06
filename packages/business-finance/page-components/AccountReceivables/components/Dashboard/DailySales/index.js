@@ -11,21 +11,11 @@ import { filterControls } from '../../../Utils/filterControls';
 import styles from './styles.module.css';
 import TabData from './TabData';
 
-interface ObjectProps {
-	date?: Date,
-	month?: string,
-	year?: string
-}
-interface DailySalesProps {
-	filterValue?: object
-	entityCode?: string
-}
-
-function DailySales({ filterValue, entityCode }: DailySalesProps) {
+function DailySales({ filterValue, entityCode }) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
-	const [filters, setFilters] = useState<ObjectProps>({});
-	const [subActiveTab, setSubActiveTab] = useState<string>('SALES_INVOICE');
+	const [filters, setFilters] = useState({});
+	const [subActiveTab, setSubActiveTab] = useState('SALES_INVOICE');
 	const [toggleData, setToggleData] = useState(false);
 	const [disabledConfig, setDisabledConfig] = useState({
 		date  : false,

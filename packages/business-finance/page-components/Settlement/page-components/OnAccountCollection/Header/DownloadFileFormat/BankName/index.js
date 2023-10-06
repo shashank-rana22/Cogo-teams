@@ -9,24 +9,7 @@ import styles from './styles.module.css';
 
 const BUSINESS_NAME_LENGTH = 20;
 
-interface ValueInterface {
-	id?:string;
-	currency?:string;
-}
-interface BankInterface {
-	valueTradeParty: Array<ValueInterface>;
-	setValueTradeParty: React.Dispatch<React.SetStateAction<ValueInterface[]>>;
-	item?:{
-		legal_business_name?:string;
-		serial_id?:string;
-		cogo_entity_id?:string;
-		id?:string;
-		newVal?:{ value?:string };
-		currency?:string;
-	}
-}
-
-function BankName({ item, valueTradeParty, setValueTradeParty }:BankInterface) {
+function BankName({ item, valueTradeParty, setValueTradeParty }) {
 	const {
 		legal_business_name:businessName = '', serial_id:serialId = '',
 		cogo_entity_id:cogoEntityId = '',

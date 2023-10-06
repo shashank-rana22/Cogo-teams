@@ -9,11 +9,6 @@ import EmptyState from '../../../commons/EmptyStateDocs';
 
 import styles from './styles.module.css';
 
-interface OutsatndingProps {
-	data?: object[],
-	loading?: boolean
-}
-
 const MARGIN = {
 	top    : 10,
 	right  : 0,
@@ -21,7 +16,7 @@ const MARGIN = {
 	left   : 0,
 };
 
-function OutstandingAge({ data, loading }: OutsatndingProps) {
+function OutstandingAge({ data, loading }) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 
 	const outstandingData = Object.keys(data).map((key) => data[key]);

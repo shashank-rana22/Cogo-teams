@@ -5,15 +5,6 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useCallback } from 'react';
 
-interface DeleteInterface {
-	id?:string
-	bulkData?:string
-	handleModal?:Function
-	setBulkModal?: React.Dispatch<React.SetStateAction<boolean>>
-	handleDelete?: Function
-	selectedBulkData?:string[]
-}
-
 const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 	const { debounceQuery } = useDebounceQuery();
 	const [checkedRowsSerialId, setCheckedRowsSerialId] = useState([]);
@@ -141,7 +132,7 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 		id, bulkData, setBulkModal,
 		handleDelete,
 		selectedBulkData = [],
-	}:DeleteInterface) => {
+	}) => {
 		try {
 			await deleteSelectedInvoiceTrigger({
 				data: {

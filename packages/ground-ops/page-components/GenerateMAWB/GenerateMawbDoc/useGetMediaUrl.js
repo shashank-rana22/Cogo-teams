@@ -46,7 +46,7 @@ const useGetMediaUrl = () => {
 		const SIGNATURE_URL = `${process.env.NEXT_PUBLIC_REST_BASE_API_URL}/get_media_upload_url`;
 
 		try {
-			const response:any = getRequest(SIGNATURE_URL, params);
+			const response = getRequest(SIGNATURE_URL, params);
 			return response.success ? response.data : response;
 		} catch (error) {
 			return error;

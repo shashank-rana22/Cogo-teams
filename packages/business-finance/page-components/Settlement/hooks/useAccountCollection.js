@@ -6,21 +6,6 @@ import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../../commons/toastApiError';
 
-interface GlobalInterface {
-	page?: number;
-	pageLimit?: number;
-	accMode?: string;
-	search?: string;
-	date?: {
-		startDate?: Date;
-		endDate?: Date;
-	};
-	paymentDocumentStatus?: string;
-	docType?: string;
-	sortBy?: string;
-	sortType?: string;
-}
-
 const MAX_FILTERS_LENGTH = 3;
 
 const payloadFormatDate = (dateValue) => formatDate({
@@ -30,7 +15,7 @@ const payloadFormatDate = (dateValue) => formatDate({
 });
 
 const useAccountCollection = ({ entityType, currencyType }) => {
-	const [globalFilters, setGlobalFilters] = useState<GlobalInterface>({
+	const [globalFilters, setGlobalFilters] = useState({
 		page     : 1,
 		accMode  : 'AR',
 		sortBy   : '',

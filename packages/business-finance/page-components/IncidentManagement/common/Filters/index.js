@@ -1,7 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { FilterProps } from '../interface';
 import SearchInput from '../SearchInput';
 
 import styles from './styles.module.css';
@@ -10,19 +9,12 @@ import { getFilterControls } from './utils/getFilterControls';
 
 const DEFAULT_PAGE = 1;
 
-interface Props {
-	isSettlementExecutive:boolean
-	activeTab?:string
-	filters: FilterProps;
-	onChangeFilters: (v: object) => void;
-}
-
 function Filters({
 	isSettlementExecutive,
 	activeTab,
 	filters,
 	onChangeFilters = (v) => v,
-}: Props) {
+}) {
 	const { search } = filters || {};
 	const { t } = useTranslation(['incidentManagement']);
 	const filterControls = getFilterControls({ activeTab, isSettlementExecutive, t });

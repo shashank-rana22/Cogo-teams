@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { cl } from '@cogoport/components';
-import React, { ReactFragment } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -19,19 +19,6 @@ function formatDate(date) {
 	});
 }
 
-interface NestedObj {
-	[key: string]: ReactFragment ;
-}
-
-interface Props {
-	taskItem?: NestedObj;
-	formData?: NestedObj;
-	whiteout?:boolean;
-	awbType?: String;
-	activeHawb?: NestedObj;
-	viewDoc?:boolean;
-}
-
 function OtherChargeDetails({
 	taskItem = {},
 	formData = {},
@@ -39,7 +26,7 @@ function OtherChargeDetails({
 	awbType = '',
 	activeHawb = {},
 	viewDoc = false,
-}:Props) {
+}) {
 	const { agentOtherCharges = [], carrierOtherCharges = [] } = formData;
 	const { awbNumber = '', document_number:documentNo = '' } = taskItem;
 	const hawbNumber = activeHawb.isNew && !viewDoc ? formData?.document_number || '' : documentNo;
@@ -55,14 +42,14 @@ function OtherChargeDetails({
 				${styles.block_col} 
 				${styles.other_charge_container} 
 			`}
-			style={{ '--temp-color': tempColor } as React.CSSProperties}
+			style={{ '--temp-color': tempColor }}
 		>
 			<div
 				className={cl`
 				${styles.flex_col} 
 				${styles.other_container} 
 			`}
-				style={{ '--temp-color': tempColor } as React.CSSProperties}
+				style={{ '--temp-color': tempColor }}
 			>
 				<div className={cl`
 					${styles.flex} 
@@ -93,7 +80,7 @@ function OtherChargeDetails({
 				${styles.flex_col} 
 				${styles.hereby_container} 
 			`}
-				style={{ '--temp-color': tempColor } as React.CSSProperties}
+				style={{ '--temp-color': tempColor }}
 			>
 				<div className={cl`
 					${styles.flex} 
@@ -136,14 +123,14 @@ function OtherChargeDetails({
 				${styles.block_col} 
 				${styles.right_container} 
 			`}
-				style={{ '--temp-color': tempColor } as React.CSSProperties}
+				style={{ '--temp-color': tempColor }}
 			>
 				<div
 					className={cl`
 					${styles.flex_col} 
 					${styles.place_container} 
 				`}
-					style={{ '--temp-color': tempColor } as React.CSSProperties}
+					style={{ '--temp-color': tempColor }}
 				>
 					<div className={cl`
 						${styles.flex} 
@@ -213,7 +200,7 @@ function OtherChargeDetails({
 							${styles.flex_col} 
 							${styles.down_container_block} 
 						`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<div className={cl`
 							${styles.flex_row} 
@@ -231,7 +218,7 @@ function OtherChargeDetails({
 								${styles.collecte_block_text} 
 								${styles.trapezium}
 							`}
-								style={{ '--temp-color': tempColor } as React.CSSProperties}
+								style={{ '--temp-color': tempColor }}
 							>
 								<p style={{ fontSize: 9, color: tempColor }}>Total Collected</p>
 							</div>

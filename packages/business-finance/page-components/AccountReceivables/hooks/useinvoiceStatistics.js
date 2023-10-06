@@ -2,20 +2,7 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-interface ParamsInterface {
-	filters?:SubFilterInterface
-	subActiveTab?:string
-	entityCode?: string
-	toggleData?: boolean
-}
-
-interface SubFilterInterface {
-	month?:string
-	year?:string
-	date?:Date
-}
-
-const useInvoiceStatistics = ({ filters, subActiveTab, entityCode, toggleData }:ParamsInterface) => {
+const useInvoiceStatistics = ({ filters, subActiveTab, entityCode, toggleData }) => {
 	const [{ data:dailyStatsData, loading }, journeyTrigger] = useRequestBf(
 		{
 			url     : '/payments/dashboard/daily-sales-statistics',

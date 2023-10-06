@@ -7,7 +7,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
-import React, { createRef, useState, ReactFragment } from 'react';
+import React, { createRef, useState } from 'react';
 
 import { footerValues } from '../Helpers/configurations/footerValues';
 import { footerImages } from '../Helpers/configurations/imageCopies';
@@ -18,34 +18,6 @@ import SelectDocumentCopies from './SelectDocumentCopies';
 import styles from './styles.module.css';
 import useCreateShipmentDocument from './useCreateShipmentDocument';
 import useGetMediaUrl from './useGetMediaUrl';
-
-interface NestedObj {
-	[key: string]: ReactFragment;
-}
-
-interface Props {
-	taskItem?: NestedObj;
-	formData?: NestedObj;
-	setBack?: Function;
-	back?: boolean;
-	edit?: boolean | string;
-	setEdit?: Function;
-	viewDoc?: boolean;
-	chargeableWeight?:number;
-	setGenerate?:Function;
-	activeCategory?: string;
-	hawbDetails?: Array<NestedObj>;
-	activeHawb?: NestedObj;
-	setHawbDetails?:Function;
-	setActiveHawb?: Function;
-	setActiveKey?: Function;
-	pendingTaskId?: string;
-	category?: string;
-	setViewDoc?: Function;
-	setItem?: Function;
-	editCopies?: string;
-	setEditCopies?: Function;
-}
 
 const DOWNLOAD_BUTTON = {
 	document_accepted            : 'Download 12 Copies',
@@ -85,7 +57,7 @@ function GenerateMawb({
 	setItem = () => {},
 	editCopies = '',
 	setEditCopies = () => {},
-}:Props) {
+}) {
 	const filteredData = { ...formData };
 
 	const {
@@ -101,7 +73,7 @@ function GenerateMawb({
 
 	const [whiteout, setWhiteout] = useState(false);
 
-	const [copiesValue, copiesOnChange] = useState<string[]>([]);
+	const [copiesValue, copiesOnChange] = useState([]);
 	const [docCopies, setDocCopies] = useState(null);
 
 	const handleClick = () => {
