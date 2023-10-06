@@ -1,13 +1,13 @@
-import { IcAAirTracking } from '@cogoport/icons-react';
+import { IcATruck } from '@cogoport/icons-react';
 
 import LocationControl from '../common/LocationControl';
 import ToggleLocation from '../common/ToggleLocation';
 import getControls from '../getControls';
 
-import controls from './air-route-controls';
+import controls from './ltl-route-controls';
 import styles from './styles.module.css';
 
-function AIRRouteForm({ mode = '', setFormValues = () => {}, formValues = {}, ...rest }) {
+function LTLRouteForm({ mode = '', setFormValues = () => {}, formValues = {}, organization = {}, ...rest }) {
 	const [originControls, destinationControls] = getControls(controls, mode);
 
 	return (
@@ -17,8 +17,9 @@ function AIRRouteForm({ mode = '', setFormValues = () => {}, formValues = {}, ..
 				formValues={formValues}
 				setFormValues={setFormValues}
 				controlItem={originControls}
-				service_type="air_freight"
-				prefix={<IcAAirTracking width={26} height={26} />}
+				service_type="ltl_freight"
+				organization={organization}
+				prefix={<IcATruck width={30} height={30} />}
 			/>
 
 			<ToggleLocation
@@ -31,11 +32,12 @@ function AIRRouteForm({ mode = '', setFormValues = () => {}, formValues = {}, ..
 				formValues={formValues}
 				setFormValues={setFormValues}
 				controlItem={destinationControls}
-				service_type="air_freight"
-				prefix={<IcAAirTracking width={26} height={26} />}
+				service_type="ltl_freight"
+				organization={organization}
+				prefix={<IcATruck width={30} height={30} />}
 			/>
 		</div>
 	);
 }
 
-export default AIRRouteForm;
+export default LTLRouteForm;

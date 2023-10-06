@@ -17,7 +17,6 @@ function FTLHeader({
 	// setInfoBanner = () => {},
 	setRouterLoading = () => {},
 	// isGuideViewed = false,
-	touch_points = {},
 }) {
 	const isAllowedToEdit = activePage === 'search_results';
 
@@ -37,7 +36,6 @@ function FTLHeader({
 					isAllowedToEdit={isAllowedToEdit}
 					activePage={activePage}
 					setRouterLoading={setRouterLoading}
-					touch_points={touch_points}
 				/>
 			</div>
 
