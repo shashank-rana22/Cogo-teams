@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 function TranslateAR() {
 	const { query, push } = useRouter();
 	const { activeTab } = query;
-	const [receivables, setReceivables] = useState<string>(activeTab || 'pending');
+	const [receivables, setReceivables] = useState(activeTab || 'pending');
 
 	return (
 		<>

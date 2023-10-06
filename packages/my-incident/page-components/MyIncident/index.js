@@ -13,7 +13,7 @@ import { COLUMNS_MAPPING } from './utils/getColumns';
 function MyIncident() {
 	const { query, push } = useRouter();
 	const { activeIncidentTab } = query;
-	const [activeTab, setActiveTab] = useState<string>(activeIncidentTab || 'requested');
+	const [activeTab, setActiveTab] = useState(activeIncidentTab || 'requested');
 	const [payload, setPayload] = useState(null);
 	const [isSortActive, setIsSortActive] = useState(null);
 

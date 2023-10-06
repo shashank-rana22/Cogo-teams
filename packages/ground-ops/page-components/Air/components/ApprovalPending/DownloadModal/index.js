@@ -20,7 +20,7 @@ const options = [
 ];
 
 function DownloadModal({ show, setShow }) {
-	const [value, onChange] = useState<undefined | string[]>([]);
+	const [value, onChange] = useState([]);
 
 	const onChangeTableHeaderCheckbox = (event) => {
 		onChange(event.currentTarget.checked ? [

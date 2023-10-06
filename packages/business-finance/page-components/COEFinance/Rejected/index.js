@@ -29,7 +29,7 @@ function Rejected({ statsData }) {
 	const { push } = useRouter();
 	const [filters, setFilters] = useState({});
 
-	const [subActiveTabReject, setSubActiveTabReject] = useState<string>('coe_rejected');
+	const [subActiveTabReject, setSubActiveTabReject] = useState('coe_rejected');
 
 	const { FINANCE_REJECTED = '', COE_REJECTED = '', ON_HOLD = '' } = statsData || {};
 

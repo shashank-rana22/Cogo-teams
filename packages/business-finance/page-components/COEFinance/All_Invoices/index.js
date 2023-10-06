@@ -30,7 +30,7 @@ function AllInvoices({ statsData }) {
 		}
 		return query.view;
 	};
-	const [subActiveTab, setSubActiveTab] = useState<string>(getQueryView() || 'purchase-view');
+	const [subActiveTab, setSubActiveTab] = useState(getQueryView() || 'purchase-view');
 	const tabComponentProps = {
 		'purchase-view': {
 			filters,

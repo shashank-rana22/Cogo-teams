@@ -24,7 +24,7 @@ const tabsKeyComponentMapping = {
 function ProfitAndLoss() {
 	const { push } = useRouter();
 
-	const [subActiveTab, setSubActiveTab] = useState<string>('source_files');
+	const [subActiveTab, setSubActiveTab] = useState('source_files');
 
 	const tabComponentProps = {
 		source_files : {},

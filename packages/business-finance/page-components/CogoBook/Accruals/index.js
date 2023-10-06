@@ -30,7 +30,7 @@ const tabsKeyComponentMapping = {
 function Accruals() {
 	const { push } = useRouter();
 
-	const [subActiveTab, setSubActiveTab] = useState<string>('dashboard');
+	const [subActiveTab, setSubActiveTab] = useState('dashboard');
 	const [showTab, setShowTab] = useState(true);
 	const tabComponentProps = {
 		shipment_view : {},
