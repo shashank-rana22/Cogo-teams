@@ -2,6 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
+import React from 'react';
 
 import styles from './styles.module.css';
 import useGetUserProgress from './useGetUserProgress';
@@ -60,21 +61,21 @@ function ProgreeBar() {
 			<div>
 				<div className={styles.progress_header}>
 					<div className={styles.date}>
-						{formatDate({
+						{start_date ? formatDate({
 							date       : start_date,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 							formatType : 'date',
-						})}
+						}) : ''}
 					</div>
 
 					<div className={styles.heading}>Score</div>
 
 					<div className={styles.date}>
-						{formatDate({
+						{END_DATE ? formatDate({
 							date       : END_DATE,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 							formatType : 'date',
-						})}
+						}) : ''}
 					</div>
 				</div>
 
@@ -103,4 +104,4 @@ function ProgreeBar() {
 	);
 }
 
-export default ProgreeBar;
+export default React.memo(ProgreeBar);

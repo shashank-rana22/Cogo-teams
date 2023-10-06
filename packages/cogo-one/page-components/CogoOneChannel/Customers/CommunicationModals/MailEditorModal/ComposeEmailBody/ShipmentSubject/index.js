@@ -75,7 +75,7 @@ function ShipmentSubject({
 		setQuery,
 		setSearchQuery,
 	} = useGetUserShipmentActivity({
-		organizationId : emailState?.orgId,
+		organizationId : emailState?.orgData?.orgId || emailState?.orgId || emailState?.orgId,
 		activeTab      : emailState?.customSubject?.activeTab,
 		setInitialLoad,
 	});
@@ -121,7 +121,7 @@ function ShipmentSubject({
 				isClearable
 				value={emailState?.customSubject?.serialId}
 				onChange={handleSelectChange}
-				disabled={!emailState?.orgId}
+				disabled={!(emailState?.orgData?.orgId || emailState?.orgId)}
 				loading={emailState?.customSubject?.activeTab !== 'custom'
 					? activityLoading
 					: false}

@@ -234,3 +234,8 @@ export const SINGLE_LOCATIONS = [
 	'air_freight_local',
 	'lcl_freight_local',
 ];
+
+export const sortByOptions = ({ t }) => [
+	{ label: t('myTickets:created_at'), value: 'created_at' },
+	{ label: t('myTickets:updated_at'), value: 'updated_at' },
+];
