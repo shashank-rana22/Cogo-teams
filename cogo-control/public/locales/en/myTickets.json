@@ -90,6 +90,7 @@
     "reason_to_escalate": "Enter reason to escalate", 
     "are_you_sure": "Are you sure?",
     "re_assign_ticket": "Re-Assign Ticket",
+    "request_resolution": "Request Resolution",
     "type": "Type",
     "role": "Role",
     "user": "User",
@@ -140,5 +141,7 @@
     "service": "Service",
     "trade_type": "Trade Type",
     "category": "Category",
-    "sub_category": "Sub Category"
+    "sub_category": "Sub Category",
+    "created_at": "Created At",
+    "updated_at": "Updated At"
 }

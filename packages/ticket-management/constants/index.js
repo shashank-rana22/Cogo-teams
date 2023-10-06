@@ -137,3 +137,8 @@ export const SHIPMENT_RATE_KEYS = ['request_type', 'organization_id', 'user_id',
 export const FINANCE_PLATFORM_KEYS = ['request_type', 'category', 'sub_category', 'issue_type',
 	'additional_information', 'priority',
 	'file_url', 'notify_customer'];
+
+export const sortByOptions = ({ t }) => [
+	{ label: t('myTickets:created_at'), value: 'created_at' },
+	{ label: t('myTickets:updated_at'), value: 'updated_at' },
+];

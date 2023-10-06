@@ -1043,6 +1043,18 @@ function asyncListEnrichmentSources() {
 	};
 }
 
+function asyncListIncidentTypes() {
+	return {
+		labelKey     : 'label',
+		valueKey     : 'value',
+		endpoint     : '/incident-management/incident/list-incident-types',
+		authkey      : 'get_incident_management_incident_list_incident_types',
+		microService : 'business_finance',
+		initialCall  : true,
+		searchByq    : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1128,4 +1140,5 @@ export {
 	asyncListOverSeasTradeParties,
 	asyncListSaasPlan,
 	asyncListEnrichmentSources,
+	asyncListIncidentTypes,
 };
