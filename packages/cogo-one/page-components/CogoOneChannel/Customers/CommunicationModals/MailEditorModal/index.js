@@ -144,7 +144,7 @@ function MailEditorModal({
 			scroll
 			animate={false}
 			showCloseIcon={false}
-			closeOnOuterClick={false}
+			closeOnOuterClick={isEmpty(userActiveMails)}
 		>
 			<Modal.Header
 				title={(

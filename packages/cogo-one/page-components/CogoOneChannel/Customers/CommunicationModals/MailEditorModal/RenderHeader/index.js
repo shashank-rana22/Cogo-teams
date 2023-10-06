@@ -57,20 +57,24 @@ function RenderHeader({
 
 				<div className={styles.right_container}>
 
-					<div
-						className={cl`${styles.minimize_button} 
-						${(replyLoading || sendLoading) ? styles.disable_icon : ''}`}
-						title="minimize"
-					>
-						<IcMMinus onClick={() => {
-							if (replyLoading || sendLoading) {
-								return;
-							}
-							handleSaveDraft({ isMinimize: true });
-							setMinimizeModal(true);
-						}}
-						/>
-					</div>
+					{isEmpty(userActiveMails)
+						? null
+						: (
+							<div
+								className={cl`${styles.minimize_button} 
+									${(replyLoading || sendLoading) ? styles.disable_icon : ''}`}
+								title="minimize"
+							>
+								<IcMMinus onClick={() => {
+									if (replyLoading || sendLoading) {
+										return;
+									}
+									handleSaveDraft({ isMinimize: true });
+									setMinimizeModal(true);
+								}}
+								/>
+							</div>
+						)}
 					<div
 						className={cl`${styles.minimize_button} 
 						${(replyLoading || sendLoading) ? styles.disable_icon : ''}`}

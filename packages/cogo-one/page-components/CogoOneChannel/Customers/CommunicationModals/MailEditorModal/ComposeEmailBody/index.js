@@ -1,6 +1,7 @@
 import { RTEditor, Input, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -51,10 +52,18 @@ function ComposeEmailBody(props) {
 		}
 	}, [activeMailAddress, buttonType, setActiveMailAddress, userActiveMails]);
 
-	if (isEmpty(userActiveMails) || viewType === 'cp_support') {
+	if (isEmpty(userActiveMails)) {
 		return (
 			<div className={styles.empty_view}>
-				<div>Oops you don&apos;t have Mail Access or you don&apos;t have active Mails</div>
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.no_email_permission}
+					width={200}
+					height={200}
+					alt="email"
+				/>
+				<div className={styles.no_permission_text}>
+					Oops you don&apos;t have Mail Access or you don&apos;t have active Mails
+				</div>
 			</div>
 		);
 	}

@@ -27,15 +27,6 @@ function OrgSpecificRecipients({
 	), [viewType]);
 
 	const {
-		orgLoading = false,
-		orgData = {},
-		initialLoad = false,
-	} = useGetOrgUsers({
-		orgId   : emailState?.orgData?.orgId || emailState?.orgId,
-		orgType : emailState?.orgData?.orgType || 'organizations',
-	});
-
-	const {
 		organizationData = {},
 		setQuery,
 		setSearchQuery,
@@ -47,6 +38,16 @@ function OrgSpecificRecipients({
 		type,
 		allowedOrgs,
 		setEmailState,
+	});
+
+	const {
+		orgLoading = false,
+		orgData = {},
+		initialLoad = false,
+	} = useGetOrgUsers({
+		orgId   : emailState?.orgData?.orgId || emailState?.orgId,
+		orgType : emailState?.orgData?.orgType || 'organizations',
+		allowedOrgs,
 	});
 
 	const selectOptions = useMemo(

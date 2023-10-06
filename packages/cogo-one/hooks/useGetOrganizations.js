@@ -12,14 +12,14 @@ const API_MAPPING = {
 
 const getParam = ({ orgId, searchValue, activeTab }) => ({
 	filters: {
-		status : activeTab.includes('lead') ? undefined : 'active',
-		q      : searchValue || undefined,
+		q  : searchValue || undefined,
+		id : !searchValue ? orgId || undefined : undefined,
 		...(activeTab.includes('channel_partners')
 			? {
-				is_importer_exporter      : true,
-				twin_importer_exporter_id : !searchValue ? orgId || undefined : undefined,
+				is_importer_exporter : activeTab.includes('lead') ? undefined : true,
+				account_type         : activeTab.includes('lead') ? 'importer_exporter' : undefined,
 			} : {
-				id                 : !searchValue ? orgId || undefined : undefined,
+				status             : activeTab.includes('lead') ? undefined : 'active',
 				account_type       : 'importer_exporter',
 				is_channel_partner : false,
 			}),

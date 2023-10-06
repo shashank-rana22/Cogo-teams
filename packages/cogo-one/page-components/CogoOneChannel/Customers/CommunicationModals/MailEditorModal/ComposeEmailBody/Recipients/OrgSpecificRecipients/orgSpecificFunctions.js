@@ -2,14 +2,12 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function getOrgListOptions({ organizationData = {}, viewType = '' }) {
+function getOrgListOptions({ organizationData = {} }) {
 	const { list = [] } = organizationData || {};
-
-	const idToFetch = viewType === 'cp_support' ? 'twin_importer_exporter_id' : 'id';
 
 	return list.map((itm) => ({
 		...itm,
-		value : itm?.[idToFetch],
+		value : itm?.id,
 		label : itm?.business_name,
 	}));
 }
