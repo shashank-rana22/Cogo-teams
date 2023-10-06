@@ -71,18 +71,18 @@ function InvoiceTable({
 
 	const { sortType = '', sortBy = '' } = sort || {};
 
-	const sortStyleGrandTotalAsc = getStyle({
+	const sortStyleLedgerTotalAsc = getStyle({
 		sortType,
 		sortBy,
 		activeSortType : 'asc',
-		activeSortBy   : 'grandTotal',
+		activeSortBy   : 'ledgerTotal',
 	});
 
-	const sortStyleGrandTotalDesc = getStyle({
+	const sortStyleLedgerTotalDesc = getStyle({
 		sortType,
 		sortBy,
 		activeSortType : 'desc',
-		activeSortBy   : 'grandTotal',
+		activeSortBy   : 'ledgerTotal',
 	});
 
 	const sortStyleInvoiceDateAsc = getStyle({
@@ -118,8 +118,8 @@ function InvoiceTable({
 		refetch   : getOrganizationInvoices,
 		showName,
 		setSort,
-		sortStyleGrandTotalAsc,
-		sortStyleGrandTotalDesc,
+		sortStyleLedgerTotalAsc,
+		sortStyleLedgerTotalDesc,
 		sortStyleInvoiceDateAsc,
 		sortStyleInvoiceDateDesc,
 		sortStyleDueDateAsc,

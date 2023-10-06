@@ -49,6 +49,8 @@ interface InvoiceTable {
 	setSort?: (p: object) => void,
 	sortStyleGrandTotalAsc?: string,
 	sortStyleGrandTotalDesc?: string,
+	sortStyleLedgerTotalAsc?: string,
+	sortStyleLedgerTotalDesc?: string,
 	sortStyleInvoiceDateAsc?: string,
 	sortStyleInvoiceDateDesc?: string,
 	sortStyleDueDateAsc?: string,
@@ -70,8 +72,8 @@ const completedColumn = ({
 	refetch,
 	showName,
 	setSort,
-	sortStyleGrandTotalAsc,
-	sortStyleGrandTotalDesc,
+	sortStyleLedgerTotalAsc,
+	sortStyleLedgerTotalDesc,
 	sortStyleInvoiceDateAsc,
 	sortStyleInvoiceDateDesc,
 	sortStyleDueDateAsc,
@@ -199,22 +201,8 @@ const completedColumn = ({
 		),
 	},
 	{
-		Header: () => (
-			<div className={styles.flex}>
-				<div>
-					Invoice Amount
-				</div>
-				<SortHeaderInvoice
-					invoiceFilter={invoiceFilters}
-					setInvoiceFilter={setinvoiceFilters}
-					setOrderBy={setSort}
-					sortStyleDesc={sortStyleGrandTotalDesc}
-					sortStyleAsc={sortStyleGrandTotalAsc}
-					type="grandTotal"
-				/>
-			</div>
-		),
-		accessor: (row) => (
+		Header   : 'Invoice Amount',
+		accessor : (row) => (
 
 			<div className={styles.fieldPair}>
 				<div className={styles.column_height}>
@@ -270,8 +258,22 @@ const completedColumn = ({
 		id: 'invoice_amount',
 	},
 	{
-		Header   : 'Ledger Amount',
-		accessor : (row) => (
+		Header: () => (
+			<div className={styles.flex}>
+				<div>
+					Ledger Amount
+				</div>
+				<SortHeaderInvoice
+					invoiceFilter={invoiceFilters}
+					setInvoiceFilter={setinvoiceFilters}
+					setOrderBy={setSort}
+					sortStyleDesc={sortStyleLedgerTotalDesc}
+					sortStyleAsc={sortStyleLedgerTotalAsc}
+					type="ledgerTotal"
+				/>
+			</div>
+		),
+		accessor: (row) => (
 			<div>
 				<div>
 					{
@@ -287,6 +289,7 @@ const completedColumn = ({
 				</div>
 			</div>
 		),
+		id: 'ledger_amount',
 	},
 	{
 		Header   : 'Balance Amount',

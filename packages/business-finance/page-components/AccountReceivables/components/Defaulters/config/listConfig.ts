@@ -47,15 +47,17 @@ export const invoiceListConfig = () => ({
 			span  : 0.5,
 		},
 		{
-			label   : 'Invoice Amount',
-			span    : 1,
-			func    : 'showInvoiceAmount',
-			sorting : { name: 'grandTotal' },
+			label : 'Invoice Amount',
+			span  : 1,
+			func  : 'showInvoiceAmount',
+
 		},
 		{
-			label : 'Ledger Amount',
-			span  : 1,
-			func  : 'showLedgerAmount',
+			label   : 'Ledger Amount',
+			span    : 1,
+			func    : 'showLedgerAmount',
+			sorting : { name: 'ledgerTotal' },
+
 		},
 		{
 			label : 'Balance Amount',
