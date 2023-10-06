@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { GenericObject } from '../../../commons/Interfaces/index';
 import List from '../../../commons/List/index';
 import PURCHASE_VIEW_CONFIG from '../../configurations/PURCHASE_VIEW_LIST';
+import useGetListStats from '../../hook/useGetListStats';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
 import { FieldProps } from './interfaces/index';
@@ -44,10 +45,9 @@ interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 	subActiveTab: string;
-	statsData?:object
 }
 
-function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props) {
+function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 	const { query } = useRouter();
 	const { searchValue:previouslySearched } = query || {};
 
@@ -63,6 +63,12 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 		setTab,
 		setCurrentTab,
 	} = useGetPurchaseViewList({ filters, setFilters, sort, previouslySearched });
+
+	const { data:statsData, loading:statsLoading } = useGetListStats();
+
+	const { stat = {} } = statsData || {};
+
+	console.log(statsData, 'statsData');
 
 	const functions = {
 		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,
@@ -88,7 +94,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 		<div>
 			<SegmentedFilters
 				filters={filters}
-				statsData={statsData}
+				statsData={stat}
 				setFilters={setFilters}
 				setSearchValue={setSearchValue}
 				searchValue={searchValue}
@@ -102,7 +108,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 				config={PURCHASE_VIEW_CONFIG}
 				itemData={data}
 				functions={functions}
-				loading={loading}
+				loading={loading || statsLoading}
 				sort={sort}
 				setSort={setSort}
 				page={filters.pageIndex || 1}
