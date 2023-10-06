@@ -16,6 +16,7 @@ const STAKEHOLDER_MAPPING = {
 	document_desk         : ['service_ops2'],
 	document_desk_manager : ['service_ops2'],
 	so1_so2_ops           : ['service_ops1', 'service_ops2', 'lastmile_ops'],
+	booking_agent_manager : ['booking_agent'],
 };
 
 export default function CancelShipment({ setShow = () => {} }) {

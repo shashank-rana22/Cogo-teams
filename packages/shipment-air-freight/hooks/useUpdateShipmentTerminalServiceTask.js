@@ -1,5 +1,6 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import getPayload from '../page-components/Tasks/TaskExecution/utils/format-payload-terminal-service-task';
 
@@ -32,11 +33,13 @@ function useUpdateShipmentTerminalServiceTask({
 		});
 
 		try {
-			await trigger({
-				data: additionalServicePayload,
-			});
-			refetch();
-			onCancel();
+			if (!isEmpty(additionalServicePayload)) {
+				await trigger({
+					data: additionalServicePayload,
+				});
+				refetch();
+				onCancel();
+			}
 		} catch (err) {
 			toastApiError(err);
 		}
