@@ -6,18 +6,21 @@ import editScheduleControl from '../../../../../../../configurations/edit-schedu
 import styles from './styles.module.css';
 
 function EditSchedules({ value = {}, errors = {}, control = {}, setValue = () => {}, watch = () => {} }) {
-	const { validity_end, validity_start, schedule_id } = value || {};
+	const {
+		schedule_end,
+		schedule_start, schedule_id,
+	} = value || {};
 
 	const { start_date, start_time, end_date, end_time } = editScheduleControl({ watch });
 
 	useEffect(() => {
 		if (schedule_id) {
-			setValue('start_date', new Date(validity_start));
-			setValue('start_time', new Date(validity_start));
-			setValue('end_date', new Date(validity_end));
-			setValue('end_time', new Date(validity_end));
+			setValue('start_date', new Date(schedule_start));
+			setValue('start_time', new Date(schedule_start));
+			setValue('end_date', new Date(schedule_end));
+			setValue('end_time', new Date(schedule_end));
 		}
-	}, [schedule_id, setValue, validity_end, validity_start]);
+	}, [schedule_end, schedule_id, schedule_start, setValue]);
 
 	return (
 		<div className={styles.container}>

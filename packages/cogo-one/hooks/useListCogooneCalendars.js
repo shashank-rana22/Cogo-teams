@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
@@ -15,7 +16,7 @@ const getParams = ({ startDate = '', endDate = '', searchQuery }) => ({
 	schedule_data_required    : false,
 	metadata_required         : true,
 	participant_data_required : true,
-	page_limit                : 100,
+	page_limit                : 200,
 });
 
 const useListCogooneCalendars = ({ searchValue = '', startDate = '', endDate = '', month }) => {
@@ -32,8 +33,7 @@ const useListCogooneCalendars = ({ searchValue = '', startDate = '', endDate = '
 		} catch (error) {
 			console.error(error);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchQuery, trigger, month]);
+	}, [trigger, searchQuery, month]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);

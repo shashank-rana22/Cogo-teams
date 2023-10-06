@@ -61,7 +61,7 @@ function Events({
 		false : CreateEvent,
 	};
 
-	const ActiveComponent = ACTIVE_COMPONENT[addEvents];
+	const ActiveComponent = ACTIVE_COMPONENT[addEvents] || true;
 
 	const handleClose = () => {
 		setActionModal((prevEventDetails) => ({

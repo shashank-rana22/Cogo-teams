@@ -121,16 +121,16 @@ function UserEvents({
 				))}
 			</div>
 
-			<div className={styles.container}>
-				{activeTab === 'calendars' ? (
-					<Input
-						size="sm"
-						prefix={<IcMSearchlight width={18} height={18} />}
-						placeholder="Search here..."
-						value={searchValue}
-						onChange={(val) => setSearchValue(val)}
-					/>
-				) : null}
+			{activeTab === 'calendars' ? (
+				<Input
+					size="sm"
+					prefix={<IcMSearchlight width={18} height={18} />}
+					placeholder="Search here..."
+					value={searchValue}
+					onChange={(val) => setSearchValue(val)}
+				/>
+			) : null}
+			<div className={cl`${styles.container} ${activeTab === 'calendars' ? styles.is_calendar : ''}`}>
 
 				{(calendersLoading || schedulesLoading) ? <LoadingState /> : null}
 

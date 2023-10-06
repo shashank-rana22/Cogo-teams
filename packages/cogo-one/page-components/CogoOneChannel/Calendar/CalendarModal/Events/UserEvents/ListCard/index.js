@@ -31,10 +31,11 @@ function ListCard({
 					performed_by_id = '',
 					main_status,
 					status = '',
-					invite_link = 'gcwvdhjhgwu gfdgwhjdwj ydgbwjnk',
+					invite_link = '',
+					schedule_end = '',
+					schedule_start = '',
 				} = singleEvent || {};
 				const meetLink = invite_link;
-
 				const isOwner = userId === performed_by_id;
 				const checkStatus = activeTab === 'schedules' ? main_status : status;
 				const { organization_data = {}, user_data = {} } = metadata || {};
@@ -42,19 +43,19 @@ function ListCard({
 				const USER_CONTACT_DETAILS = [user_data?.name, user_data?.email];
 
 				const startTime = formatDate({
-					date       : new Date(validity_start),
+					date       : new Date(activeTab === 'schedules' ? schedule_start : validity_start),
 					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aa'],
 					formatType : 'time',
 				});
 
 				const endTime = formatDate({
-					date       : new Date(validity_end),
+					date       : new Date(activeTab === 'schedules' ? schedule_end : validity_end),
 					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aa'],
 					formatType : 'time',
 				});
 
 				const startDate = formatDate({
-					date       : new Date(validity_start),
+					date       : validity_start,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['MMMM dd, YYYY'],
 					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 					formatType : 'dateTime',
@@ -78,7 +79,6 @@ function ListCard({
 				const isImportant = is_important && main_status !== 'completed';
 
 				return (
-
 					<div
 						className={cl`${styles.card}
               ${isImportant ? styles.important_event : styles.not_important_event}

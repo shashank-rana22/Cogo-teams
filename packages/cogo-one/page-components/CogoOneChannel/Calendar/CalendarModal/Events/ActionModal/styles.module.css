@@ -2,6 +2,7 @@
 	:global {
 		.ui_modal_body_container {
 			padding: 0 16px;
+			overflow-x: visible;
 			border: none;
 		}
 

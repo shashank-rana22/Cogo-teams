@@ -14,20 +14,24 @@ const getFormatedEventsData = ({ data = {} }) => {
 
 		if (!GROUPPED_DATA[key]) {
 			GROUPPED_DATA[key] = {
-				start      : new Date(item.schedule_start),
-				end        : new Date(item.schedule_start),
+				start      : new Date(item?.schedule_start),
+				end        : new Date(item?.schedule_start),
 				eventsList : [
 					{
-						schedule_id : item.id,
-						main_status : item.status,
+						schedule_id    : item?.id,
+						main_status    : item?.status,
+						schedule_start : new Date(item?.schedule_start),
+						schedule_end   : new Date(item?.schedule_end),
 						...item.calendar,
 					},
 				],
 			};
 		} else {
 			GROUPPED_DATA[key].eventsList.push({
-				schedule_id : item.id,
-				main_status : item.status,
+				schedule_id    : item?.id,
+				main_status    : item?.status,
+				schedule_start : new Date(item?.schedule_start),
+				schedule_end   : new Date(item?.schedule_end),
 				...item.calendar,
 			});
 		}
