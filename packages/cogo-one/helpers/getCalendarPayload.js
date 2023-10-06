@@ -59,6 +59,17 @@ export const getPayload = ({
 
 	const isMeetingOneTime = category === 'meeting' && occurence_event !== 'one_time';
 
+	let formatedParticipants = {};
+
+	if (id) {
+		formatedParticipants = {
+			added   : addedIds ? { agent_ids: addedIds } : undefined,
+			removed : removedIds ? { agent_ids: removedIds } : undefined,
+		};
+	} else {
+		formatedParticipants = { agent_ids: participants_users };
+	}
+
 	return {
 		calendar_id    : id || undefined,
 		validity_start : combineDateAndTime({
@@ -77,12 +88,10 @@ export const getPayload = ({
 		subject         : category === 'event' ? event_type : title,
 		frequency       : category === 'event' ? 'one_time' : occurence_event,
 		recurrence_rule : category === 'event' ? { type: 'normal' } : recurrenceRule,
-		participants    : category === 'meeting' ? { user_ids: participants_users } : undefined,
+		participants    : category === 'meeting' ? formatedParticipants : undefined,
 		metadata        : category === 'event' ? {
 			organization_id,
 			user_id: organization_user_id,
 		} : undefined,
-		added_user_ids   : addedIds || undefined,
-		removed_user_ids : removedIds || undefined,
 	};
 };

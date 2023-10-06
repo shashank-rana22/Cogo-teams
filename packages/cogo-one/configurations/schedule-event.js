@@ -77,6 +77,7 @@ const scheduleEvents = ({ orgId = '', startDateField = {}, watch = () => {} }) =
 			placeholder : 'Select here...',
 			rules       : { required: 'Participates is required' },
 			asyncKey    : 'list_chat_agents',
+			isClearable : true,
 			multiple    : true,
 			renderLabel : (item) => <SelectableAgentsUserCard item={item} />,
 		},

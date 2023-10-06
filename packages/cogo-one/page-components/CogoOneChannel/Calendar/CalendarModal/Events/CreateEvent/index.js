@@ -6,6 +6,7 @@ import {
 	CheckboxController,
 	SelectController,
 } from '@cogoport/forms';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useMemo } from 'react';
 
 import scheduleEvents from '../../../../../../configurations/schedule-event';
@@ -27,6 +28,8 @@ function CreateEvent({
 	setAddEvents = () => {},
 	setMyEvents = () => {},
 }) {
+	const { userId = '' } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
+
 	const {
 		category: updateCategory = '', subject = '', id = '',
 		validity_start = '', validity_end = '', description = '',
@@ -53,6 +56,8 @@ function CreateEvent({
 		(participants || []).map((itm) => ([itm?.user_id]))?.flat()
 	), [participants]);
 
+	const participantIds = (selectedIds.filter((item) => item !== userId));
+
 	const {
 		control,
 		handleSubmit,
@@ -71,7 +76,7 @@ function CreateEvent({
 			organization_id      : orgId,
 			organization_user_id : user_id,
 			occurence_event      : frequency,
-			participants_users   : selectedIds,
+			participants_users   : participantIds,
 		},
 	});
 
@@ -108,8 +113,8 @@ function CreateEvent({
 	};
 
 	const handleChange = (val) => {
-		const addedIds = val.filter((newId) => !selectedIds.includes(newId));
-		const removedIds = selectedIds.filter((oldId) => !val?.includes(oldId));
+		const addedIds = val.filter((newId) => !participantIds.includes(newId));
+		const removedIds = participantIds.filter((oldId) => !val?.includes(oldId));
 
 		setUpdateIds((pre) => ({
 			...pre,

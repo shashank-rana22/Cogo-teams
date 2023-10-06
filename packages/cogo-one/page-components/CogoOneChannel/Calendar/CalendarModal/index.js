@@ -34,7 +34,6 @@ function CalendarModal({ setEventCalendar = () => {}, eventClender = false }) {
 	};
 
 	return (
-
 		<Modal
 			size="xl"
 			scroll={false}
