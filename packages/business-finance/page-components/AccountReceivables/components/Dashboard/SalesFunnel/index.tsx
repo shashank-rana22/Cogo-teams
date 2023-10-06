@@ -1,5 +1,6 @@
 import { Tooltip, Placeholder, Select } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -31,10 +32,8 @@ function SalesFunnel({
 	salesFunnelLoading, entityCode,
 }: SalesFunnelProps) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
-	const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
-		'August', 'September', 'October', 'November', 'December'];
 	const d = new Date();
-	const currentMonth = month[d.getMonth()];
+	const currentMonth = GLOBAL_CONSTANTS.month_name[d.getMonth()];
 	const {
 		draftInvoicesCount = '',
 		draftToFinanceAcceptedPercentage = '',
