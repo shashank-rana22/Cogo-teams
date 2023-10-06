@@ -82,11 +82,11 @@ pipeline {
                 }
                 // build docker image for admin site and push to ecr
                 script {
-                    sh "docker image build -t ${ECR_URL}/admin:${COMMIT_ID} -t ${ECR_URL}/admin:latest-stage --target admin ."
+                    sh "docker image build -t ${ECR_URL}/admin:${COMMIT_ID} -t ${ECR_URL}/admin:latest-dev --target admin ."
                     sh "aws ecr get-login-password --region ap-south-1 | docker login --username ${ECR_USERNAME} --password-stdin ${ECR_URL}"
                     sh "docker image push ${ECR_URL}/admin:${COMMIT_ID}"
-                    sh "docker image push ${ECR_URL}/admin:latest-stage"
-                    sh "docker image rm ${ECR_URL}/admin:latest-stage"
+                    sh "docker image push ${ECR_URL}/admin:latest-dev"
+                    sh "docker image rm ${ECR_URL}/admin:latest-dev || true"
                     sh "docker image rm ${ECR_URL}/admin:${COMMIT_ID}"
                 }
             }
