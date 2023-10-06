@@ -32,6 +32,9 @@ const labels = [
 	'price_type',
 	'delivery_date',
 	'container_load_type',
+	'payment_term',
+	'contract_reference_id',
+	'bl_category',
 ];
 
 /**
