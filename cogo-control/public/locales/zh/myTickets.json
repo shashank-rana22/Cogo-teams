@@ -140,5 +140,7 @@
     "service": "服务",
     "trade_type": "交易类型",
     "category": "类别",
-    "sub_category": "子类别"
+    "sub_category": "子类别",
+    "missing": "Missing ID",
+    "dislike": "Dislike ID"
 }

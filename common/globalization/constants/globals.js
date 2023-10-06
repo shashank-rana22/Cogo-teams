@@ -716,6 +716,7 @@ const GLOBAL_CONSTANTS = {
 	trade_types: [
 		{ value: 'import', label: 'Import' },
 		{ value: 'export', label: 'Export' },
+		{ value: 'domestic', label: 'Domestic' },
 	],
 	service_supported_countries: {
 		feature_supported_service: {

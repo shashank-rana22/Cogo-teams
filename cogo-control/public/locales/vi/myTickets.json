@@ -140,5 +140,7 @@
     "service": "Dịch vụ",
     "trade_type": "Loại giao dịch",
     "category": "Danh mục",
-    "sub_category": "Danh mục con"
+    "sub_category": "Danh mục con",
+    "missing": "Missing ID",
+    "dislike": "Dislike ID"
 }

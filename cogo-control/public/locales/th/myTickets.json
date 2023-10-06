@@ -140,5 +140,7 @@
     "service": "บริการ",
     "trade_type": "ประเภทการซื้อขาย",
     "category": "หมวดหมู่",
-    "sub_category": "หมวดหมู่ย่อย"
+    "sub_category": "หมวดหมู่ย่อย",
+    "missing": "Missing ID",
+    "dislike": "Dislike ID"
 }

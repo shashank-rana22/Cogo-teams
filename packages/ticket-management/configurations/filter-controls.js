@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import {
 	asyncFieldsOrganizations,
 	asyncFieldsOrganizationUser,
@@ -11,7 +12,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 
 import CustomIssueLabel from '../common/CustomIssueLabel';
-import { REQUEST_TYPE_OPTIONS } from '../constants';
+import { ASYNC_LIST_API, RATES_SHIPMENT_SERVICES, REQUEST_TYPE_OPTIONS } from '../constants';
 
 function RenderLabel({ label = '' }) {
 	return (
@@ -28,10 +29,13 @@ const useRaiseTicketcontrols = ({
 	formattedSubCategories = [], setSubCategories = () => {}, watchSubCategory = '',
 	t = () => {}, setRaiseToDesk = () => {}, formatRaiseToDeskOptions = [],
 	watchRaisedByDesk = '', watchRaisedToDesk = '', setDefaultTypeId = () => {},
+	watchServiceType = '', watchIdType = '',
 }) => {
 	const { rolesArr } = useSelector(({ profile }) => ({ rolesArr: profile?.auth_role_data?.role_functions || [] }));
 
 	const isOperation = rolesArr.includes('operations');
+
+	const checkSid = watchIdType === 'sid' ? ASYNC_LIST_API?.sid?.() : ASYNC_LIST_API[watchServiceType]?.();
 
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
 	const categoryDeskOptions = useGetAsyncTicketOptions({
@@ -79,6 +83,18 @@ const useRaiseTicketcontrols = ({
 		valueKey: 'serial_id',
 	});
 
+	const serviceSerialIdOptions = useGetAsyncOptions({
+		...checkSid,
+		params: {
+			filters: {
+				status: 'active',
+			},
+		},
+		valueKey: 'serial_id',
+	});
+
+	const checkRequest = watchRequestType === 'rate' ? serviceSerialIdOptions : serialIdOptions;
+
 	const controls = [
 		{
 			label          : <RenderLabel label={t('myTickets:request_type')} />,
@@ -110,7 +126,36 @@ const useRaiseTicketcontrols = ({
 			visible        : true,
 		},
 		{
-			...(serialIdOptions || {}),
+			label          : 'ID Type',
+			name           : 'id_type',
+			controllerType : 'select',
+			placeholder    : 'Select shipment type',
+			isClearable    : true,
+			value          : 'sid',
+			visible        : true,
+			options        : [
+				{ label: 'SID', value: 'sid' },
+				{ label: 'Missing ID', value: 'missing_id' },
+				{ label: 'Dislike ID', value: 'dislike_id' },
+			],
+			onChange: () => {
+				setValue('service_type', '');
+			},
+		},
+		{
+			label          : 'Service Type',
+			name           : 'service_type',
+			placeholder    : 'Select service type',
+			controllerType : 'select',
+			options        : RATES_SHIPMENT_SERVICES,
+			isClearable    : true,
+			visible        : true,
+			onChange       : () => {
+				setValue('serial_id', '');
+			},
+		},
+		{
+			...(checkRequest || {}),
 			label          : <RenderLabel label={t('myTickets:select_sid')} />,
 			placeholder    : t('myTickets:select_sid'),
 			name           : 'serial_id',
@@ -119,9 +164,14 @@ const useRaiseTicketcontrols = ({
 			rules          : { required: true },
 			onChange       : (_, obj) => {
 				setValue('service', obj?.shipment_type);
-				setValue('trade_type', obj?.trade_type);
+				if (!obj?.trade_type) {
+					setValue('trade_type', GLOBAL_CONSTANTS.options.inco_term?.[obj?.inco_term]?.trade_type);
+				} else {
+					setValue('trade_type', obj?.trade_type);
+				}
 			},
-			visible: true,
+			visible     : true,
+			initialCall : true,
 		},
 		{
 			label          : <RenderLabel label={t('myTickets:select_service')} />,

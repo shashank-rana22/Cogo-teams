@@ -1,3 +1,33 @@
+import {
+	asyncListFclFreightRate,
+	asyncListLclFreightRate,
+	asyncListAirFreightRate,
+	asyncListFtlFreightRate,
+	asyncListLtlFreightRate,
+	asyncListFclCfsRate,
+	asyncListHaulageFreightRate,
+	asyncListFclCustomsRate,
+	asyncListLclCustomsRate,
+	asyncListAirCustomsRate,
+	asyncListTrailerFreightRate,
+	asyncListShipments,
+} from '@cogoport/forms';
+
+export const ASYNC_LIST_API = {
+	sid             : asyncListShipments,
+	fcl_freight     : asyncListFclFreightRate,
+	lcl_freight     : asyncListLclFreightRate,
+	air_freight     : asyncListAirFreightRate,
+	ftl_freight     : asyncListFtlFreightRate,
+	ltl_freight     : asyncListLtlFreightRate,
+	fcl_cfs         : asyncListFclCfsRate,
+	haulage_freight : asyncListHaulageFreightRate,
+	fcl_customs     : asyncListFclCustomsRate,
+	lcl_customs     : asyncListLclCustomsRate,
+	air_customs     : asyncListAirCustomsRate,
+	trailer_freight : asyncListTrailerFreightRate,
+};
+
 export const STATUS_MAPPING = {
 	pending           : 'pending',
 	reject_requested  : 'pending',
@@ -132,8 +162,75 @@ export const REQUEST_TYPE_OPTIONS = [
 export const SHIPMENT_RATE_KEYS = ['request_type', 'organization_id', 'user_id',
 	'serial_id', 'service', 'trade_type', 'category', 'sub_category', 'issue_type',
 	'additional_information', 'priority', 'file_url', 'notify_customer', 'raised_by_desk',
-	'toggle_value', 'raised_to_desk'];
+	'raised_to_desk'];
 
 export const FINANCE_PLATFORM_KEYS = ['request_type', 'category', 'sub_category', 'issue_type',
 	'additional_information', 'priority',
 	'file_url', 'notify_customer'];
+
+export const RATE_KEYS = ['request_type', 'organization_id', 'user_id', 'id_type',
+	'serial_id', 'service_type', 'service', 'trade_type', 'category', 'sub_category', 'raised_by_desk',
+	'raised_to_desk', 'additional_information', 'priority', 'file_url', 'notify_customer'];
+
+export const RATES_SHIPMENT_SERVICES = [
+	{
+		label : 'FCL',
+		value : 'fcl_freight',
+	},
+	{
+		label : 'LCL',
+		value : 'lcl_freight',
+	},
+	{
+		label : 'AIR',
+		value : 'air_freight',
+	},
+	{
+		label : 'FTL',
+		value : 'ftl_freight',
+	},
+	{
+		label : 'LTL',
+		value : 'ltl_freight',
+	},
+	{
+		label : 'FCL Customs',
+		value : 'fcl_customs',
+	},
+	{
+		label : 'LCL Customs',
+		value : 'lcl_customs',
+	},
+	{
+		label : 'FCL CFS',
+		value : 'fcl_cfs',
+	},
+	{
+		label : 'Trailer',
+		value : 'trailer_freight',
+	},
+	{
+		label : 'Haulage',
+		value : 'haulage_freight',
+	},
+	{
+		label : 'Air customs',
+		value : 'air_customs',
+	},
+];
+
+export const SINGLE_LOCATIONS = [
+	'fcl_customs',
+	'lcl_customs',
+	'air_customs',
+	'origin_fcl_customs',
+	'destination_fcl_customs',
+	'origin_lcl_customs',
+	'destination_lcl_customs',
+	'origin_air_customs',
+	'destination_air_customs',
+	'fcl_cfs',
+	'fcl_freight_local',
+	'air_freight_local',
+	'lcl_freight_local',
+];

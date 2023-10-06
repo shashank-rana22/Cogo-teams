@@ -140,5 +140,7 @@
     "service": "Layanan",
     "trade_type": "Jenis Perdagangan",
     "category": "Kategori",
-    "sub_category": "Sub Kategori"
+    "sub_category": "Sub Kategori",
+    "missing": "Missing ID",
+    "dislike": "Dislike ID"
 }
