@@ -8,9 +8,12 @@ import React from 'react';
 
 import { PRIORITY_MAPPING, STATUS_MAPPING, getStatusLabelMapping } from '../../../../constants';
 import useGetCountdown from '../../../../hooks/useGetCountdown';
+import useListShipments from '../../../../hooks/useGetListShipment';
+import { handleRouteBooking, handleRouteSupply } from '../../../../utils/handleRoute';
 import TicketLoader from '../../../TicketStructure/TicketStructureLoader';
 
 import ConfigDetails from './ConfigDetails';
+import ShipmentDetails from './ShipmentDetails';
 import styles from './styles.module.css';
 
 function TicketSummary({
@@ -18,7 +21,7 @@ function TicketSummary({
 	TicketReviewer: ticketReviewer = {}, IsCurrentReviewer: isCurrentReviewer = false,
 	TicketStatus: ticketStatus = '', AgentName: agentName = '',
 	detailsLoading = false, TicketConfiguration: ticketConfiguration = {},
-	OrganizationData: organizationData = {},
+	OrganizationData: organizationData = {}, partnerId = '',
 }) {
 	const {
 		Name: name = '', Email: email = '',
@@ -51,10 +54,12 @@ function TicketSummary({
 
 	const {
 		SerialID: serialId, Service: service, TradeType: tradeType,
-		RequestType: requestType,
+		RequestType: requestType, IDType: idType,
 	} = data || {};
 
 	const authorizers = (closureAuthorizers || []).map((item) => item.Name);
+
+	const { shipmentsData = {}, listLoading = false } = useListShipments({ serialId });
 
 	const { color: textColor, label } = getStatusLabelMapping({ t })
 		?.[STATUS_MAPPING[ticketStatus]] || {};
@@ -204,15 +209,19 @@ function TicketSummary({
 					raisedByDesk={raisedByDesk}
 					isCategoryConfig={isCategoryConfig}
 				/>
-				{serialId && (
-					<div className={styles.ticket_data}>
-						{t('myTickets:sid')}
-						:
-						<span className={styles.updated_at}>
-							{serialId}
-						</span>
-					</div>
-				)}
+				{serialId ? (
+					<ShipmentDetails
+						idType={idType}
+						serialId={serialId}
+						handleRouteBooking={handleRouteBooking}
+						service={service}
+						partnerId={partnerId}
+						t={t}
+						shipmentsData={shipmentsData}
+						handleRouteSupply={handleRouteSupply}
+						listLoading={listLoading}
+					/>
+				) : null}
 				{service && (
 					<div className={styles.ticket_data}>
 						{t('myTickets:service')}

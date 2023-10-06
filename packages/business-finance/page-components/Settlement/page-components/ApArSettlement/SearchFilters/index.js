@@ -11,6 +11,8 @@ export function SearchFilters({
 	filters = {},
 	onFiltersChange = () => {},
 	loading = false,
+	jvSearch = '',
+	setJvSearch = () => {},
 }) {
 	const { t = () => {} } = useTranslation(['settlement']);
 	const handleFilterChange = (filterName = '', value = '') => {
@@ -72,8 +74,8 @@ export function SearchFilters({
 				<Input
 					name="search"
 					size="sm"
-					value={filters?.search || ''}
-					onChange={(e) => handleFilterChange('search', e)}
+					value={jvSearch || filters?.search || ''}
+					onChange={(e) => { setJvSearch(''); handleFilterChange('search', e); }}
 					placeholder={t('settlement:search_placeholder') || ''}
 				/>
 			</div>

@@ -75,5 +75,5 @@ export const SERVICE_TYPE = [
 
 export const REMARKS = [
 	{ name: 'MARK DISPUTED', value: 'DISPUTE' },
-	{ name: 'PUSH TO COE FINANCE', value: 'PUSH TO COE FINANCE' },
+	{ name: 'FINANCE REJECT', value: 'PUSH TO COE FINANCE' },
 ];

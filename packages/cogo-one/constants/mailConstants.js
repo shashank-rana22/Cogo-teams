@@ -50,6 +50,10 @@ export const DEFAULT_EMAIL_STATE = {
 		serialId    : '',
 		subjectText : '',
 	},
+	orgData: {
+		orgType : 'organizations',
+		orgId   : '',
+	},
 };
 
 export const BUTTON_MAPPING = [
@@ -125,5 +129,24 @@ export const SUBJECT_MAPPING = {
 		value         : 'custom',
 		preText       : '',
 		template_tags : ['custom_rpa'],
+	},
+};
+
+export const ORGS_MAPPING = {
+	organizations: {
+		title : "Org's",
+		value : 'organizations',
+	},
+	lead_organizations: {
+		title : "Lead Org's",
+		value : 'lead_organizations',
+	},
+	channel_partners: {
+		title : "Org's",
+		value : 'channel_partners',
+	},
+	lead_channel_partners: {
+		title : "Lead Org's",
+		value : 'lead_channel_partners',
 	},
 };
