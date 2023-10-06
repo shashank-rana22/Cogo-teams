@@ -144,5 +144,22 @@
     "missing": "ID yang hilang",
     "dislike": "ID tidak suka",
     "id_type": "Tipe id",
-    "service_type": "Jenis Layanan"
+    "service_type": "Jenis Layanan",
+    "pol": "Pol",
+    "pod": "POLONG",
+    "shipment": "Pengiriman",
+    "rate": "Kecepatan",
+    "finance": "Keuangan",
+    "platform_issue": "Masalah platform",
+    "fcl": "fcl",
+    "lcl": "lcl",
+    "air": "UDARA",
+    "ftl": "Ftl",
+    "ltl": "Ltl",
+    "fcl_customs": "Bea Cukai FCL",
+    "lcl_customs": "Bea Cukai LCL",
+    "fcl_cfs": "fclCfs",
+    "trailer": "Cuplikan",
+    "haulage":"Pengangkutan",
+    "air_customs": "Bea Cukai Udara"
 }

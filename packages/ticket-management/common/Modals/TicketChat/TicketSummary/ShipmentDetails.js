@@ -36,8 +36,8 @@ function PortDetails({ details = {}, listLoading = false }) {
 }
 
 function ShipmentDetails({
-	idType = '', serialId = 0,
-	handleRouteBooking = () => {}, service = '', partnerId = '', t = null,
+	idType = '', serialId = 0, t = () => {},
+	handleRouteBooking = () => {}, service = '', partnerId = '',
 	shipmentsData = {}, handleRouteSupply = () => {}, listLoading = false,
 }) {
 	const { shipment_type = '', trade_type: tradeType = '', id = '' } = shipmentsData || {};
@@ -97,14 +97,16 @@ function ShipmentDetails({
 				</span>
 			</div>
 			<div className={styles.port_content}>
-				POL:
+				{t('myTickets:pol')}
+				:
 				<PortDetails
 					details={originDetails}
 					listLoading={listLoading}
 				/>
 			</div>
 			<div className={styles.port_content}>
-				POD:
+				{t('myTickets:pod')}
+				:
 				<PortDetails
 					details={destinationDetails}
 					listLoading={listLoading}

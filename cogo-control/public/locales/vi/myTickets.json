@@ -144,5 +144,22 @@
     "missing": "Thiếu id",
     "dislike": "Không thích ID",
     "id_type": "Loại ID",
-    "service_type": "loại dịch vụ"
+    "service_type": "loại dịch vụ",
+    "pol": "Pol",
+    "pod": "pod",
+    "shipment": "Lô hàng",
+    "rate": "Tỷ lệ",
+    "finance": "Tài chính",
+    "platform_issue": "Vấn đề nền tảng",
+    "fcl": "fcl",
+    "lcl": "lcl",
+    "air": "KHÔNG KHÍ",
+    "ftl": "Ftl",
+    "ltl": "LTL",
+    "fcl_customs": "Hải quan FCL",
+    "lcl_customs": "Hải quan LCL",
+    "fcl_cfs": "fclCfs",
+    "trailer": "Đoạn phim giới thiệu",
+    "haulage":"Vận tải",
+    "air_customs": "Hải quan không khí"
 }

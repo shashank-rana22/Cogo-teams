@@ -152,11 +152,11 @@ export const getTicketActionLabel = ({ t, type }) => {
 	return ACTIONS[type];
 };
 
-export const REQUEST_TYPE_OPTIONS = [
-	{ label: 'Shipment', value: 'shipment' },
-	{ label: 'Rate', value: 'rate' },
-	{ label: 'Finance', value: 'finance' },
-	{ label: 'Platform Issue', value: 'platform_issue' },
+export const getRequestTypeOptions = ({ t = () => {} }) => [
+	{ label: t('myTickets:shipment'), value: 'shipment' },
+	{ label: t('myTickets:rate'), value: 'rate' },
+	{ label: t('myTickets:finance'), value: 'finance' },
+	{ label: t('myTickets:platform_issue'), value: 'platform_issue' },
 ];
 
 export const SHIPMENT_RATE_KEYS = ['request_type', 'organization_id', 'user_id',
@@ -170,51 +170,51 @@ export const FINANCE_PLATFORM_KEYS = ['request_type', 'category', 'sub_category'
 
 export const RATE_KEYS = ['request_type', 'organization_id', 'user_id', 'id_type',
 	'serial_id', 'service_type', 'service', 'trade_type', 'category', 'sub_category', 'raised_by_desk',
-	'raised_to_desk', 'additional_information', 'priority', 'file_url', 'notify_customer'];
+	'raised_to_desk', 'issue_type', 'additional_information', 'priority', 'file_url', 'notify_customer'];
 
-export const RATES_SHIPMENT_SERVICES = [
+export const getRateShipmentServices = ({ t = () => {} }) => [
 	{
-		label : 'FCL',
+		label : t('myTickets:fcl'),
 		value : 'fcl_freight',
 	},
 	{
-		label : 'LCL',
+		label : t('myTickets:lcl'),
 		value : 'lcl_freight',
 	},
 	{
-		label : 'AIR',
+		label : t('myTickets:air'),
 		value : 'air_freight',
 	},
 	{
-		label : 'FTL',
+		label : t('myTickets:ftl'),
 		value : 'ftl_freight',
 	},
 	{
-		label : 'LTL',
+		label : t('myTickets:ltl'),
 		value : 'ltl_freight',
 	},
 	{
-		label : 'FCL Customs',
+		label : t('myTickets:fcl_customs'),
 		value : 'fcl_customs',
 	},
 	{
-		label : 'LCL Customs',
+		label : t('myTickets:lcl_customs'),
 		value : 'lcl_customs',
 	},
 	{
-		label : 'FCL CFS',
+		label : t('myTickets:fcl_cfs'),
 		value : 'fcl_cfs',
 	},
 	{
-		label : 'Trailer',
+		label : t('myTickets:trailer'),
 		value : 'trailer_freight',
 	},
 	{
-		label : 'Haulage',
+		label : t('myTickets:haulage'),
 		value : 'haulage_freight',
 	},
 	{
-		label : 'Air customs',
+		label : t('myTickets:air_customs'),
 		value : 'air_customs',
 	},
 ];

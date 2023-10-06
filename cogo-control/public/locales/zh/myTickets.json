@@ -144,5 +144,22 @@
     "missing": "缺少ID",
     "dislike": "不喜欢ID",
     "id_type": "ID类型",
-    "service_type": "服务类型"
+    "service_type": "服务类型",
+    "pol": "波尔",
+    "pod": "荚",
+    "shipment": "运输",
+    "rate": "速度",
+    "finance": "金融",
+    "platform_issue": "平台问题",
+    "fcl": "fcl",
+    "lcl": "lcl",
+    "air": "空气",
+    "ftl": "ftl",
+    "ltl": "ltl",
+    "fcl_customs": "FCL海关",
+    "lcl_customs": "LCL海关",
+    "fcl_cfs": "fclCfs",
+    "trailer": "预告片",
+    "haulage":"运输",
+    "air_customs": "航空风俗"
 }

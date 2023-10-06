@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import CustomIssueLabel from '../common/CustomIssueLabel';
-import { RATES_SHIPMENT_SERVICES, REQUEST_TYPE_OPTIONS } from '../constants';
+import { getRateShipmentServices, getRequestTypeOptions } from '../constants';
 
 function RenderLabel({ label = '' }) {
 	return (
@@ -39,7 +39,7 @@ const getCreateControls = ({
 			controllerType : 'select',
 			rules          : { required: true },
 			value          : 'shipment',
-			options        : REQUEST_TYPE_OPTIONS,
+			options        : getRequestTypeOptions({ t }),
 			isClearable    : true,
 			visible        : true,
 		},
@@ -83,7 +83,7 @@ const getCreateControls = ({
 			name           : 'service_type',
 			placeholder    : 'Select service type',
 			controllerType : 'select',
-			options        : RATES_SHIPMENT_SERVICES,
+			options        : getRateShipmentServices({ t }),
 			isClearable    : true,
 			visible        : true,
 			onChange       : () => {

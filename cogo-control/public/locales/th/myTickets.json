@@ -144,5 +144,22 @@
     "missing": "รหัสที่ขาดหายไป",
     "dislike": "ไม่ชอบ ID",
     "id_type": "พิมพ์ id",
-    "service_type": "ประเภทบริการ"
+    "service_type": "ประเภทบริการ",
+    "pol": "โพล",
+    "pod": "ฝัก",
+    "shipment": "การจัดส่ง",
+    "rate": "ประเมิน",
+    "finance": "การเงิน",
+    "platform_issue": "ปัญหาแพลตฟอร์ม",
+    "fcl": "เอฟซีแอล",
+    "lcl": "แอลซีแอล",
+    "air": "อากาศ",
+    "ftl": "เอฟทีแอล",
+    "ltl": "แอลทีแอล",
+    "fcl_customs": "ศุลกากร FCL",
+    "lcl_customs": "ศุลกากร LCL",
+    "fcl_cfs": "fclCfs",
+    "trailer": "รถเทรลเลอร์",
+    "haulage":"การลาก",
+    "air_customs": "ศุลกากรอากาศ"
 }

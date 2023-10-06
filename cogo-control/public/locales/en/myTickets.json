@@ -144,5 +144,22 @@
     "missing": "Missing ID",
     "dislike": "Dislike ID",
     "id_type": "ID Type",
-    "service_type": "Service Type"
+    "service_type": "Service Type",
+    "pol": "POL",
+    "pod": "POD",
+    "shipment": "Shipment",
+    "rate": "Rate",
+    "finance": "Finance",
+    "platform_issue": "Platform Issue",
+    "fcl": "Fcl",
+    "lcl": "LCL",
+    "air": "AIR",
+    "ftl": "FTL",
+    "ltl": "LTL",
+    "fcl_customs": "FCL Customs",
+    "lcl_customs": "LCL Customs",
+    "fcl_cfs": "FCL CFS",
+    "trailer": "Trailer",
+    "haulage":"Haulage",
+    "air_customs": "Air customs"
 }
