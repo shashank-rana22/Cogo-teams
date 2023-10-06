@@ -1,11 +1,12 @@
 import { RTEditor, Input, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { getUserActiveMails } from '../../../../../../configurations/mail-configuration';
 import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
 import getRenderEmailBody from '../../../../../../helpers/getRenderEmailBody';
+import useImageUploader from '../../../../../../hooks/useImageUploader';
 
 import EmailTemplates from './EmailTemplates';
 import Recipients from './Recipients';
@@ -39,6 +40,8 @@ function ComposeEmailBody(props) {
 		showOrgSpecificMail = false,
 		signature = '',
 	} = props || {};
+	const [rteDisabled, setRteDisabled] = useState(false);
+	const { imageHandler } = useImageUploader({ setEmailState, setRteDisabled });
 
 	const userActiveMails = useMemo(() => (
 		[...new Set([
@@ -58,6 +61,13 @@ function ComposeEmailBody(props) {
 			setActiveMailAddress(userActiveMails?.[GLOBAL_CONSTANTS.zeroth_index]);
 		}
 	}, [activeMailAddress, buttonType, setActiveMailAddress, userActiveMails]);
+
+	const modules = useMemo(() => ({
+		toolbar: {
+			container : RTE_TOOL_BAR_CONFIG,
+			handlers  : { image: imageHandler },
+		},
+	}), [imageHandler]);
 
 	return (
 		<>
@@ -123,7 +133,8 @@ function ComposeEmailBody(props) {
 					value={emailState?.rteContent}
 					onChange={(val) => setEmailState((prev) => ({ ...prev, rteContent: val }))}
 					className={styles.styled_editor}
-					modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
+					modules={modules}
+					disabled={rteDisabled}
 				/>
 
 				<div className={styles.attachments_scroll}>
