@@ -90,6 +90,7 @@
     "reason_to_escalate": "输入升级原因",
     "are_you_sure": "您确定吗？",
     "re_assign_ticket": "重新分配工单",
+    "request_resolution": "请求解决",
     "type": "类型",
     "role": "角色",
     "user": "用户",
@@ -140,5 +141,7 @@
     "service": "服务",
     "trade_type": "交易类型",
     "category": "类别",
-    "sub_category": "子类别"
+    "sub_category": "子类别",
+    "created_at": "创建于",
+    "updated_at": "更新于"
 }
