@@ -13,6 +13,7 @@ function FinanceClosedCardsSet({
 	const {
 		data: taskData = {},
 		loading: taskDataLoading = true,
+		getClosedTasks = () => {},
 	} = useGetClosedTasks({ job_id, activeTab: 'financial_close' });
 
 	const [financeCardOpen, setFinanceCardOpen] = useState({});
@@ -40,6 +41,7 @@ function FinanceClosedCardsSet({
 				financeCardOpen={financeCardOpen}
 				setFinanceCardOpen={setFinanceCardOpen}
 				loading={taskDataLoading}
+				getClosedTasks={getClosedTasks}
 			/>
 
 			<FinancialClosedCards
@@ -49,6 +51,7 @@ function FinanceClosedCardsSet({
 				financeCardOpen={financeCardOpen}
 				setFinanceCardOpen={setFinanceCardOpen}
 				loading={taskDataLoading}
+				getClosedTasks={getClosedTasks}
 			/>
 
 		</div>

@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 import useGetPrePostShipmentQuotation from '../../../../hook/useGetPrePostShipmentQuotation';
 import useUpdateJobAuditStatus from '../../../../hook/useUpdateJobAuditStatus';
@@ -14,7 +14,6 @@ import styles from './styles.module.css';
 
 function Header({ jobId = '' }) {
 	const { query: { active_tab = '', job_id = '' }, push = () => {} } = useRouter();
-	const refetchRef = useRef(null);
 	const [quotationsData, setQuotationsData] = useState({
 		prePostCheckoutData : {},
 		oprClosedData       : {},
@@ -112,7 +111,7 @@ function Header({ jobId = '' }) {
 					/>
 				</div>
 
-				<OperationClosedCardsSet job_id={job_id} setQuotationsData={setQuotationsData} ref={refetchRef} />
+				<OperationClosedCardsSet job_id={job_id} setQuotationsData={setQuotationsData} />
 
 				{active_tab === 'financial_close' && (
 					<FinanceClosedCardsSet job_id={job_id} setQuotationsData={setQuotationsData} />

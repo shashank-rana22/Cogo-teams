@@ -1,4 +1,5 @@
 import { Button, Modal, Textarea } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import useApproveQuotation from '../../../hook/useApproveQuotation';
@@ -13,6 +14,7 @@ export default function RemarkModal({
 	buttonClicked = '',
 	setButtonClicked = () => {},
 	id = '',
+	getClosedTasks = () => {},
 
 }) {
 	const onClose = () => {
@@ -27,7 +29,7 @@ export default function RemarkModal({
 	} = useApproveQuotation({ id, remarks: remarkValue, status: 'APPROVED' });
 
 	const handleSubmit = () => {
-		approveQuotation(onClose);
+		approveQuotation(onClose, getClosedTasks);
 	};
 
 	return (
@@ -77,6 +79,7 @@ export default function RemarkModal({
 						size="md"
 						themeType="primary"
 						onClick={handleSubmit}
+						disabled={isEmpty(remarkValue)}
 					>
 						Approve
 					</Button>

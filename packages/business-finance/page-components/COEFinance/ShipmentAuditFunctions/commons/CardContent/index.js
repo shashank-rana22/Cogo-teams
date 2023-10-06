@@ -13,6 +13,7 @@ const ZERO_VALUE = 0;
 export default function Timeline({
 	loading = false,
 	data = {},
+	getClosedTasks = () => {},
 	operationCardOpen = {},
 	setOperationCardOpen = () => {},
 	financeCardOpen = {},
@@ -107,6 +108,7 @@ export default function Timeline({
 							data={data}
 							loading={type === 'sell' ? timeLineLoading : billTimeLineLoading}
 							timeLineData={type === 'sell' ? timeLineData?.timelineDetail : billTimeLineData}
+							getClosedTasks={getClosedTasks}
 						/>
 					</div>
 				</div>

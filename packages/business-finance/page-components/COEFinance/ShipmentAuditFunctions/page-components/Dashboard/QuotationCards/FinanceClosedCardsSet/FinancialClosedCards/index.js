@@ -11,6 +11,7 @@ function FinancialClosedCards({
 	data = [],
 	financeCardOpen = {},
 	setFinanceCardOpen = () => {},
+	getClosedTasks = () => {},
 	loading = false,
 }) {
 	return (
@@ -40,6 +41,7 @@ function FinancialClosedCards({
 									financeCardOpen={financeCardOpen}
 									source="FIN"
 									setFinanceCardOpen={setFinanceCardOpen}
+									getClosedTasks={getClosedTasks}
 								/>
 							</div>
 						))}

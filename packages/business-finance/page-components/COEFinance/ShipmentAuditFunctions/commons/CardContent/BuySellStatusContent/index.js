@@ -13,6 +13,7 @@ export default function BuySellStatusContent({
 	data = {},
 	loading = false,
 	timeLineData = [],
+	getClosedTasks = () => {},
 }) {
 	const [buttonClicked, setButtonClicked] = useState('');
 	const [queryModalShow, setQueryModalShow] = useState(false);
@@ -109,6 +110,7 @@ export default function BuySellStatusContent({
 						buttonClicked={buttonClicked}
 						setButtonClicked={setButtonClicked}
 						id={id}
+						getClosedTasks={getClosedTasks}
 					/>
 				</div>
 			</div>

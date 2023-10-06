@@ -12,6 +12,7 @@ function OperationalClosedCards({
 	operationCardOpen = {},
 	setOperationCardOpen = () => {},
 	loading = false,
+	getClosedTasks = () => {},
 }) {
 	return (
 		<div className={styles.single_card}>
@@ -40,6 +41,7 @@ function OperationalClosedCards({
 									source="OPR"
 									operationCardOpen={operationCardOpen}
 									setOperationCardOpen={setOperationCardOpen}
+									getClosedTasks={getClosedTasks}
 								/>
 							</div>
 						))}
