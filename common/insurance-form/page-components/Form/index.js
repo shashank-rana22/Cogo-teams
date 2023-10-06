@@ -9,7 +9,7 @@ import useInsurance from '../../hooks/useInsurance';
 import styles from './styles.module.css';
 
 function Insurance({ organization = {}, src = '', showFormFn = () => {} }) {
-	const [activeTab, setActiveTab] = useState('ocean');
+	const [activeTab, setActiveTab] = useState('sea');
 
 	const { formHook, loading, onSubmit, formValueRef } = useInsurance({ activeTab, organization });
 	const insuranceControls = getInsuranceControls({ activeTab });
@@ -28,9 +28,9 @@ function Insurance({ organization = {}, src = '', showFormFn = () => {} }) {
 						themeType="tertiary"
 						onChange={setActiveTab}
 					>
-						<TabPanel name="ocean" title="Ocean" icon={<IcMFsea />} />
+						<TabPanel name="sea" title="Ocean" icon={<IcMFsea />} />
 						<TabPanel name="air" title="Air" icon={<IcMFairport />} />
-						<TabPanel name="surface" title="Surface" icon={<IcMFland />} />
+						<TabPanel name="road" title="Surface" icon={<IcMFland />} />
 					</Tabs>
 				</div>
 				{src === 'cargo_insurance' ? (

@@ -2682,7 +2682,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/cargo-insurance',
 			showInNav     : false,
 			main_apis     : [],
-			possible_apis : apis.profile,
+			possible_apis : apis.cargo_insurance,
 		},
 	};
 

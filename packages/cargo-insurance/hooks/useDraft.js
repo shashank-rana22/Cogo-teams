@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { upperCase } from '@cogoport/utils';
@@ -43,6 +44,9 @@ const getPayload = ({ formValues, pocDetails, performedBy }) => {
 };
 
 function useDraft({ formValues = {} }) {
+	const { query, push } = useRouter();
+	const { draftId = '' } = query;
+
 	const { user } = useSelector((state) => state.profile);
 
 	const personalDetailRef = useRef({});
@@ -53,12 +57,23 @@ function useDraft({ formValues = {} }) {
 		authKey : 'post_saas_insurance_v2_draft',
 	}, { manual: true });
 
-	const saveDraft = ({ pocDetails }) => {
+	const [{ loading: getLoading, data: draftData }] = useRequestBf({
+		method  : 'get',
+		url     : '/saas/insurance/v2/details',
+		authKey : 'get_saas_insurance_v2_details',
+		params  : {
+			policyId: draftId,
+		},
+	}, { manual: !draftId });
+
+	const saveDraft = async ({ pocDetails }) => {
 		const payload = getPayload({ formValues, pocDetails, performedBy: user?.id });
 		try {
-			trigger({
+			const resp = await trigger({
 				data: payload,
 			});
+			const { id } = resp?.data || {};
+			push(`/cargo-insurance/${id}`);
 		} catch (error) {
 			Toast.error(error.response?.data?.message);
 		}
@@ -75,8 +90,10 @@ function useDraft({ formValues = {} }) {
 		saveDraft({ pocDetails: resp });
 	};
 
+	console.log(draftData, 'draftData');
+
 	return {
-		loading, submitHandler, personalDetailRef,
+		loading, submitHandler, personalDetailRef, getLoading, draftData,
 	};
 }
 

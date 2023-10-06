@@ -4,10 +4,9 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowBack, IcMPortArrow } from '@cogoport/icons-react';
 import InsuranceForm from '@cogoport/insurance-form';
 import { useRouter } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import SERVICE_ICON_MAPPING from '../../constants/serviceIcon';
+import { SERVICE_ICON_MAPPING, SERICE_TYPE_MAPPING } from '../../constants/serviceIcon';
 
 import styles from './styles.module.css';
 
@@ -29,12 +28,15 @@ function RenderPort({ name = '' }) {
 	);
 }
 
-function Header({ data = {} }) {
+function Header({ data = {}, draftData = {} }) {
 	const { back } = useRouter();
 
 	const [showForm, setShowForm] = useState(false);
 
 	const { originName, destinationName, orgDetails = {}, hsCode, cargoValue, currency, type } = data || {};
+	const { cargoDetails = {}, invoiceDetails = {} } = draftData || {};
+	const { invoiceCurrency, invoiceValue } = invoiceDetails || {};
+	const { hsCode: newHsCode, transitMode, originCountry, destinationCountry } = cargoDetails || {};
 
 	return (
 		<>
@@ -47,14 +49,14 @@ function Header({ data = {} }) {
 
 					<div className={cl`${styles.flex_box} ${styles.port_info}`}>
 						<div className={styles.type_container}>
-							{SERVICE_ICON_MAPPING[type]}
-							<span className={styles.type}>{startCase(type)}</span>
+							{SERVICE_ICON_MAPPING[type || transitMode]}
+							<span className={styles.type}>{SERICE_TYPE_MAPPING[type || transitMode]}</span>
 						</div>
 
 						<div className={cl`${styles.flex_box} ${styles.port_pair}`}>
-							<RenderPort name={originName} />
+							<RenderPort name={originName || originCountry} />
 							<IcMPortArrow width={25} height={25} />
-							<RenderPort name={destinationName} />
+							<RenderPort name={destinationName || destinationCountry} />
 						</div>
 					</div>
 
@@ -63,14 +65,14 @@ function Header({ data = {} }) {
 							<Pill color="#F2F2F2" size="lg">
 								HS Code:
 								{' '}
-								{hsCode}
+								{hsCode || newHsCode}
 							</Pill>
 
 							<Pill color="#ebd9fc" size="lg">
 								{formatAmount({
-									amount  : cargoValue,
-									currency,
-									options : {
+									amount   : cargoValue || invoiceValue,
+									currency : currency || invoiceCurrency,
+									options  : {
 										style           : 'currency',
 										currencyDisplay : 'code',
 									},

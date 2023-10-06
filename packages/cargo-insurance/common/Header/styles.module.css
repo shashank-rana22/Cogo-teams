@@ -71,6 +71,7 @@
 
 .port_pair {
 	justify-content: space-around;
+	width: 80%;
 
 	>svg {
 		width: 10%;
