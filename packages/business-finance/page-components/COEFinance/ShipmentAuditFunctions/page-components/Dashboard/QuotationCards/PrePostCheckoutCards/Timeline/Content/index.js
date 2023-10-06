@@ -32,7 +32,7 @@ export default function Content({
 	const handleServiceClick = (service) => {
 		setActiveService(service);
 	};
-	// console.log({ services });
+
 	return (
 		<>
 			<div className={styles.service_heading}>
