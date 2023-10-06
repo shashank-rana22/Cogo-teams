@@ -98,7 +98,7 @@
 }
 
 .sid {
-	margin-block: 2px;
+	margin: 2px 0;
 	font-size: 12px;
 	color: #1877f2;
 	text-decoration: underline;
@@ -115,7 +115,7 @@
 
 .port_content {
 	display: flex;
-	margin-block: 2px;
+	margin: 2px 0;
 	font-size: 12px;
 	color: #828282;
 	cursor: pointer;
