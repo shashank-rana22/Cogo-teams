@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 // import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 // import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMArrowRotateUp, IcCFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import Content from './Content';
@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 const SLICE_LENGTH = 2;
 const ZERO_VALUE = 0;
 
-export default function Timeline({
+export default function CardContent({
 	loading = false,
 	data = {},
 	title = '',
@@ -30,8 +30,11 @@ export default function Timeline({
 			{loading ? <Placeholder /> : (
 				<div>
 					<div className={styles.accord_title}>
-						<div>
-							{startCase(title.slice(SLICE_LENGTH))}
+						<div className={styles.status_card}>
+							<div className={styles.title}>
+								{startCase(title.slice(SLICE_LENGTH))}
+							</div>
+							{services?.finalStatus ? <IcCFtick /> : null}
 						</div>
 
 						{!title.includes('MODIFIED') && (

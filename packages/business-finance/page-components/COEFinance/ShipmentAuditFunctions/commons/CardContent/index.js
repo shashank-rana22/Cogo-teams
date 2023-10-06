@@ -1,6 +1,6 @@
 import { Placeholder } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMArrowRotateUp, IcCFtick } from '@cogoport/icons-react';
 import { upperCase } from '@cogoport/utils';
 
 import useGetBillTimeline from '../../../hook/useGetBillTimeline';
@@ -62,10 +62,12 @@ export default function Timeline({
 			{loading ? <Placeholder /> : (
 				<div>
 					<div className={styles.accord_title}>
-						<div>
+						<div className={styles.status}>
 							<div className={styles.accordion_title}>
 								{type === 'buy' ? 'Bill' : 'Invoice'}
 							</div>
+
+							{data?.quotation_state === 'APPROVED' ? <IcCFtick /> : null}
 						</div>
 
 						<div className={`${isOpen ? styles.nothing : styles.other_title}`}>

@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 import { IcMDummyCircle } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import Timeline from '../../../../../commons/Timeline';
+import Timeline from '../../../../../commons/CardContent';
 
 import styles from './styles.module.css';
 

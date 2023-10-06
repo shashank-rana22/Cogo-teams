@@ -14,8 +14,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	font-size: 16px;
-	font-weight: 500;
 }
 
 .content {
@@ -54,4 +52,13 @@
 
 .margin {
 	margin-right: 120px;
+}
+
+.status {
+	display: flex;
+	align-items: center;
+}
+
+.accordion_title {
+	margin-right: 4px;
 }

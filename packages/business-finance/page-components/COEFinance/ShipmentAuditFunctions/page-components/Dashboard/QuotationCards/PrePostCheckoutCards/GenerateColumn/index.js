@@ -1,8 +1,7 @@
 // import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Pill } from '@cogoport/components';
 import { IcMDummyCircle } from '@cogoport/icons-react';
 
-import Timeline from '../Timeline';
+import CardContent from '../CardContent';
 
 import styles from './styles.module.css';
 
@@ -19,15 +18,6 @@ function GenerateColumn({
 }) {
 	return Object.keys(data).map((key, index) => (
 		<div key={key}>
-			{/* <div className={styles.status_accordian}>
-	                <Pill color="#B4F3BE">Approved</Pill>
-	            </div> */}
-			{/* {console.log(data?.[key].finalStatus)} */}
-			{data?.[key].finalStatus ? (
-				<div className={styles.status_accordian}>
-					<Pill color="#B4F3BE">Approved</Pill>
-				</div>
-			) : null }
 			<div style={{ display: 'flex', width: '100%' }}>
 				<div className={styles.vertical_timeline}>
 					{ (index !== (Object.keys(data).length - PREV_INDEX) && !data?.[key].finalStatus) ? (
@@ -48,7 +38,7 @@ function GenerateColumn({
 						/>
 					) }
 				</div>
-				<Timeline
+				<CardContent
 					loading={loading}
 					data={data}
 					title={key}
