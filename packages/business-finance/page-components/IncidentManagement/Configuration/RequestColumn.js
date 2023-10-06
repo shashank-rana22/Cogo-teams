@@ -5,7 +5,6 @@ import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
-import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
 
 import SortIcon from './SortIcon';
@@ -38,7 +37,7 @@ export const requestColumn = ({
 			const { interCompanyJournalVoucherRequest } = data || {};
 			const { list } = interCompanyJournalVoucherRequest || {};
 			const getList = () => (list || [{}]).map(
-				(item: TooltipInterface) => item?.tradePartyName,
+				(item) => item?.tradePartyName,
 			);
 			const bankTradePartyName = data?.bankRequest && data?.organization?.tradePartyType;
 			const tdsTradePartyName = data?.tdsRequest && data?.organization?.tradePartyType;
@@ -53,7 +52,7 @@ export const requestColumn = ({
 			return list ? (
 				<Tooltip
 					interactive
-					content={(list || [{}]).map((item: TooltipInterface) => (
+					content={(list || [{}]).map((item) => (
 						<div className={styles.trade_party_name} key={item?.id}>
 							<div>{toTitleCase(item?.div || '-')}</div>
 						</div>
@@ -226,7 +225,7 @@ export const requestColumn = ({
 	{
 		Header   : '',
 		id       : 'ribbon',
-		accessor : (row: any) => {
+		accessor : (row) => {
 			const { deadlineTag } = row;
 			return (
 				deadlineTag && (

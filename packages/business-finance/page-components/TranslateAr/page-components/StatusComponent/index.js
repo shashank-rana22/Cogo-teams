@@ -3,14 +3,13 @@ import React from 'react';
 
 import EmptyStateDocs from '../../../commons/EmptyStateDocs';
 import Filters from '../../common/Filters';
-import { StatusObject } from '../../common/interfaces';
 import useGetShipmentInvoices from '../../hooks/useGetShipmentInvoices';
 import getColumns from '../../utils/getColumns';
 import StyledTable from '../Table';
 
 import styles from './styles.module.css';
 
-function StatusComponent({ status }: StatusObject) {
+function StatusComponent({ status }) {
 	const {
 		invoiceLoading, invoiceData, setShipmentFilters,
 		shipmentFilters, refetch,

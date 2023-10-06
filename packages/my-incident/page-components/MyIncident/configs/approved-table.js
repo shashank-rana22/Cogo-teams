@@ -10,26 +10,19 @@ import ViewRequested from '../accessorComponent/ViewRequested';
 import SortData from './SortData';
 import styles from './styles.module.css';
 
-interface PropsType {
-	isSortActive: string;
-	setIsSortActive: Function;
-	setGlobalFilters: Function;
-	refetch: () => void;
-}
-
 const approvedColumn = ({
 	isSortActive,
 	setIsSortActive,
 	setGlobalFilters,
 	refetch,
-}: PropsType) => [
+}) => [
 	{
 		Header   : <div>INCIDENT ID</div>,
 		id       : 'referenceId',
 		accessor : (row) => (
 			<div>
 				<div className={styles.reference_id}>
-					{getByKey(row, 'referenceId') as string}
+					{getByKey(row, 'referenceId')}
 				</div>
 			</div>
 		),
@@ -48,7 +41,7 @@ const approvedColumn = ({
 		id       : 'type',
 		accessor : (row) => (
 			<div className={styles.request_type}>
-				{startCase(getByKey(row, 'type') as string)}
+				{startCase(getByKey(row, 'type'))}
 			</div>
 		),
 	},

@@ -9,7 +9,6 @@ import {
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-import { RemarksValInterface } from '../../../../commons/Interfaces/index';
 import useGetDocumentContent from '../../../hook/useGetDocumentContent';
 import useGetVariance from '../../../hook/useGetVariance';
 import useListShipment from '../../../hook/useListShipment';
@@ -24,101 +23,6 @@ import ShipmentDetailsCard from './ShipmentDetailsCard/index';
 import SIDView from './SIDView';
 import styles from './styles.module.css';
 import VarianceView from './VarianceView/index';
-
-interface BuyerDetailInterface {
-	entityCode?: string;
-	organizationName?: string;
-	address?: string;
-	registrationNumber?: string;
-	taxNumber?: string;
-	tdsRate?: string | number;
-}
-
-interface SellerDetailInterface {
-	organizationName?: string;
-	registrationNumber?: string;
-	taxNumber?: string;
-	organizationId?: string,
-}
-
-interface SellerBankDetailInterface {
-	bankName?: string;
-	accountNumber?: string;
-	ifscCode?: string;
-	beneficiaryName?: string;
-	swiftCode?: string;
-}
-
-interface BillInterface {
-	id?: string;
-	billDocumentUrl?: string;
-	billNumber?: string;
-	billDate: Date;
-	status?: string;
-	placeOfSupply?: string;
-	taxTotal: any;
-	billCurrency: string;
-	grandTotal: any;
-	subTotal: string | number;
-	recurringState?:string,
-	billType: string;
-	isProforma: boolean,
-	tdsAmount: string | number;
-	paidTds: string | number
-}
-
-interface JobInterface {
-	jobNumber: string;
-	referenceId: string;
-}
-
-interface BillAdditionalObjectInterface {
-	collectionPartyId: string;
-	shipmentType?: string;
-	reasonForCN? : string;
-	outstandingDocument? : string;
-	paymentType? : string;
-	isIncidental? : string;
-	advancedAmountCurrency? : string;
-	serialId?: string,
-	advancedAmount?: string,
-	urgencyTag?: string,
-}
-export interface DataInterface {
-	job?: JobInterface;
-	lineItems?: Array<object>;
-	billAdditionalObject?: BillAdditionalObjectInterface;
-	buyerDetail?: BuyerDetailInterface;
-	sellerBankDetail?: SellerBankDetailInterface;
-	sellerDetail?: SellerDetailInterface;
-	bill?: BillInterface;
-	consolidatedShipmentIds?:Array<string>;
-	organizationId?: string;
-	serviceProviderDetail?: any;
-	remarks?: Array<object>;
-}
-
-interface ShipmentDetailsInterface {
-	data: DataInterface;
-	remarksVal?: RemarksValInterface;
-	setRemarksVal: any;
-	lineItemsRemarks: object;
-	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
-	status: string;
-	jobType?:string;
-	setCheckItem?: React.Dispatch<React.SetStateAction<{}>>,
-	lineItemsCheck?: boolean;
-	checkItem?: { shipmentDetailsCheck?: boolean,
-		documentsCheck?: boolean,
-		taggingCheck?: boolean,
-		sidDataCheck?: boolean,
-	};
-	isTagFound?: boolean;
-	setCurrentTab?: any;
-	setCombinedRemarks?: Function;
-	jobNumberByQuery?: string;
-	mappingsData?: any;
-}
 
 function ShipmentDetails({
 	data = {},
@@ -136,7 +40,7 @@ function ShipmentDetails({
 	setCombinedRemarks = () => {},
 	jobNumberByQuery = '',
 	mappingsData = {},
-}: ShipmentDetailsInterface) {
+}) {
 	const [showVariance, setShowVariance] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
 	const { job, consolidatedShipmentIds = [] } = data || {};
@@ -164,18 +68,18 @@ function ShipmentDetails({
 
 	const onTabClick = ({ tabName = '' }) => {
 		setTab(
-			(prev: any) => ({ ...prev, [tabName]: !prev[tabName] }),
+			(prev) => ({ ...prev, [tabName]: !prev[tabName] }),
 		);
 		setCurrentTab(tabName);
 	};
 
 	const onAccept = ({ tabName = '', tabToOpen = '', timelineItem = '' }) => {
 		setTab(
-			(prev: any) => ({ ...prev, [tabToOpen]: true, [tabName]: !prev[tabName] }),
+			(prev) => ({ ...prev, [tabToOpen]: true, [tabName]: !prev[tabName] }),
 		);
 		setCurrentTab(tabToOpen);
 		setCheckItem(
-			(prev: any) => ({ ...prev, [timelineItem]: true }),
+			(prev) => ({ ...prev, [timelineItem]: true }),
 		);
 	};
 
@@ -184,7 +88,7 @@ function ShipmentDetails({
 	useEffect(() => {
 		if (jobType === 'CONSOLIDATED') {
 			// clearing timeline elements that are not included in case of consolidated
-			setCheckItem((prev:any) => {
+			setCheckItem((prev) => {
 				const newCheckItem = { ...prev };
 				newCheckItem.shipmentDetailsCheck = true;
 				delete newCheckItem?.documentsCheck;
@@ -219,9 +123,9 @@ function ShipmentDetails({
 			{jobType === 'SHIPMENT' && (
 				<>
 					<DetailsCard
-						onTabClick={onTabClick as any}
+						onTabClick={onTabClick}
 						loadingShipment={loadingShipment}
-						onAccept={onAccept as any}
+						onAccept={onAccept}
 						shipmentDetailsTab={tab.shipmentDetailsTab}
 						shipmentDetailsCheck={checkItem.shipmentDetailsCheck}
 						dataList={dataList}
@@ -294,8 +198,8 @@ function ShipmentDetails({
 
 					<SIDView
 						shipmentId={jobNumber}
-						onTabClick={onTabClick as any}
-						onAccept={onAccept as any}
+						onTabClick={onTabClick}
+						onAccept={onAccept}
 						showTab={tab.sidDataTab}
 						sidDataChecked={checkItem.sidDataCheck}
 						jobNumberByQuery={jobNumberByQuery}

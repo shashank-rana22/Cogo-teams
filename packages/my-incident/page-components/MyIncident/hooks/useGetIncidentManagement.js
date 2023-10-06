@@ -6,11 +6,7 @@ import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-interface ItemProps {
-	activeTab:string,
-	payload:string
-}
-const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
+const useGetIncidentMangement = ({ activeTab, payload }) => {
 	const {
 		user_data:UserData,
 	} = useSelector(({ profile }) => ({
@@ -76,10 +72,10 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 					pageIndex          : globalFilters.pageIndex,
 					q                  : query !== '' ? query : undefined,
 					type               : requestType,
-					createdFrom        : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
+					createdFrom        : startDate ? format(startDate, 'yyyy-MM-dd 00:00:00', {}, false)
 						: undefined,
 					createdTo: endDate
-						? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
+						? format(endDate, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,
 				},
 			});
 		} catch (err) {

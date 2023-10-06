@@ -6,13 +6,7 @@ import Filter from '../../../../commons/Filters';
 import filterControls from './filterControls';
 import styles from './styles.module.css';
 
-interface Props {
-	globalFilters?: { search?: string; page?: number | string };
-	setGlobalFilters?: (p: object) => void;
-	setShowCreateForm?: Function;
-}
-
-function FilterHeaders({ globalFilters, setGlobalFilters, setShowCreateForm }:Props) {
+function FilterHeaders({ globalFilters, setGlobalFilters, setShowCreateForm }) {
 	return (
 		<div className={styles.filter_body}>
 			<div className={styles.filter_section}>
@@ -22,7 +16,7 @@ function FilterHeaders({ globalFilters, setGlobalFilters, setShowCreateForm }:Pr
 			<div style={{ display: 'flex', alignItems: 'center' }}>
 				<Input
 					value={globalFilters?.search}
-					onChange={(value:string) => setGlobalFilters({
+					onChange={(value) => setGlobalFilters({
 						...globalFilters,
 						search: value || undefined,
 					})}

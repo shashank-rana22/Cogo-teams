@@ -5,12 +5,7 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-interface FreezeInterface {
-	item?:{ period?:Date, periodName?:string, isLocked?:boolean }
-	refetch?:Function
-}
-
-function Freeze({ item, refetch }:FreezeInterface) {
+function Freeze({ item, refetch }) {
 	const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
 	const { period, periodName, isLocked } = item || {};

@@ -16,33 +16,19 @@ function TagMap({
 	switchDetails = () => {},
 	taggingChecked = false,
 	setCheckItem = () => {},
-}: {
-	switchDetails?:any, taggingChecked?: boolean, setCheckItem?: any,
-	mappingsData?: any, status?: string, value?: { approve?: string, reject?: string, undo?: string, remark: string, },
-	setValue: React.Dispatch<React.SetStateAction<{
-		approve: string;
-		reject: string;
-		undo: string;
-		remark:string
-	}>>, setRemarksVal: React.Dispatch<React.SetStateAction<{
-		collectionPartyRemark: string[];
-		billingPartyRemark: string[];
-		invoiceDetailsRemark: string[];
-		taggingRemark: string[];
-	}>>
 }) {
 	const [approve, setApprove] = useState(false);
 
 	const classname = !isEmpty(mappingsData?.merge) ? 'merge' : '';
 
-	const handleClickApprove = (label:string) => {
+	const handleClickApprove = (label) => {
 		setValue((prev) => ({ ...prev, approve: label, undo: 'undo' }));
 	};
 
 	const handleClickReject = () => {
 		setApprove(true);
 	};
-	const handleSubmitReject = (label: string) => {
+	const handleSubmitReject = (label) => {
 		setValue((prev) => ({ ...prev, reject: label, undo: 'undo' }));
 		setRemarksVal((prev) => ({ ...prev, taggingRemark: [value?.remark] }));
 		setApprove(false);
@@ -141,7 +127,7 @@ function TagMap({
 							size="md"
 							placeholder="Remarks Here ..."
 							value={value?.remark}
-							onChange={(val: string) => setValue((prev) => ({ ...prev, remark: val }))}
+							onChange={(val) => setValue((prev) => ({ ...prev, remark: val }))}
 							style={{ width: '700', height: '100px', marginBottom: '12px' }}
 						/>
 						<div className={styles.button}>

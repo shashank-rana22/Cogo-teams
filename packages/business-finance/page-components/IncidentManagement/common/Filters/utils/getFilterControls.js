@@ -1,12 +1,6 @@
 import { remainControls, requestControls } from './controls';
 
-interface FilterControlsInterface {
-	activeTab?:string
-	isSettlementExecutive:boolean
-	t?:Function;
-}
-
-export const getFilterControls = ({ activeTab, isSettlementExecutive, t = () => {} }: FilterControlsInterface) => {
+export const getFilterControls = ({ activeTab, isSettlementExecutive, t = () => {} }) => {
 	switch (activeTab) {
 		case 'requested':
 			return requestControls({ t, isSettlementExecutive });

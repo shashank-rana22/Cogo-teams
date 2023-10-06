@@ -1,9 +1,7 @@
 import Modals from '@cogoport/ticket-management/common/Modals';
 import React, { useState } from 'react';
 
-import { GenericObject } from '../../../commons/Interfaces';
 import List from '../../../commons/List';
-import { FieldProps } from '../../All_Invoices/PurchaseInvoiceView/interfaces';
 import FieldPair from '../../All_Invoices/PurchaseInvoiceView/RenderData/FiledPair';
 import FormatedDate from '../../All_Invoices/PurchaseInvoiceView/RenderData/FormatedDate';
 import RenderCustomer from '../../All_Invoices/PurchaseInvoiceView/RenderData/RenderCustomer/index';
@@ -20,39 +18,9 @@ import RenderApprovalStatus from './RenderApprovalStatus';
 import RenderTicket from './RenderTicket';
 import SegmentedFilters from './SegmentedFilters';
 
-interface ItemProps {
-	createdDate: Date;
-	updatedDate: Date;
-	billDate: Date;
-	dueDate: Date;
-	billCurrency: string;
-	subTotal: number;
-	grandTotal: number;
-	status: string;
-	billType: string;
-	billDocumentUrl: string;
-	serviceType: string;
-	billNumber: string;
-	isProforma: boolean;
-	jobNumber: string;
-	shipmentId: string;
-	organizationName: string;
-	urgencyTag: Array<string>;
-	remarksTimeline?: Array<{
-		billStatus: string;
-		remark: string;
-		createdAt: Date;
-	}>;
-}
-interface Props {
-	filters: GenericObject;
-	setFilters: (p?: object) => void;
-	subActiveTabReject: string | undefined;
-}
-
 const CHART_INCLUDED_TABS = ['coe_rejected', 'coe_on_hold'];
 
-function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
+function CommonListData({ filters, setFilters, subActiveTabReject }) {
 	const [sort, setSort] = useState({});
 	const [showReassign, setShowReassign] = useState(false);
 	const [modalData, setModalData] = useState({});
@@ -66,36 +34,36 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 
 	const config = constAdvocateConfig(subActiveTabReject);
 
-	const functions: any = {
-		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,
-		renderFieldPair : (itemData: ItemProps, field: FieldProps) => (
+	const functions = {
+		renderStatus    : (itemData) => <RenderStatus item={itemData} />,
+		renderFieldPair : (itemData, field) => (
 			<FieldPair itemData={itemData} field={field} />
 		),
-		renderCustomer: (itemData: ItemProps, field: FieldProps) => (
+		renderCustomer: (itemData, field) => (
 			<RenderCustomer itemData={itemData} field={field} />
 		),
-		renderFormate: (itemData: ItemProps, field: FieldProps) => (
+		renderFormate: (itemData, field) => (
 			<FormatedDate item={itemData} field={field} />
 		),
-		renderRemarks: (itemData: ItemProps) => (
+		renderRemarks: (itemData) => (
 			<RenderRemarks item={itemData} />
 		),
-		renderViewMore: (itemData: ItemProps) => (
+		renderViewMore: (itemData) => (
 			<RenderViewMoreButton itemData={itemData} />
 		),
-		renderAction: (itemData: ItemProps) => (
+		renderAction: (itemData) => (
 			<RenderActionButton itemData={itemData} refetch={refetch} />
 		),
-		renderUrgencyTag: (itemData: ItemProps, field: FieldProps) => (
+		renderUrgencyTag: (itemData, field) => (
 			<RenderUrgencyTag item={itemData} field={field} />
 		),
-		renderTicket: (itemData: ItemProps) => (
+		renderTicket: (itemData) => (
 			<RenderTicket
 				itemData={itemData}
-				setModalData={setModalData as any}
+				setModalData={setModalData}
 			/>
 		),
-		renderApprovalStatus: (itemData: ItemProps) => (
+		renderApprovalStatus: (itemData) => (
 			<RenderApprovalStatus itemData={itemData} />
 		),
 	};
@@ -125,8 +93,8 @@ function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 				sort={sort}
 				setSort={setSort}
 				page={filters.pageIndex || 1}
-				handlePageChange={(pageValue: number) => {
-					setFilters((p: GenericObject) => ({
+				handlePageChange={(pageValue) => {
+					setFilters((p) => ({
 						...p,
 						pageIndex: pageValue,
 					}));

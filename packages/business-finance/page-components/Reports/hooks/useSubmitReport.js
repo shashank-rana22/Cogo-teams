@@ -4,18 +4,7 @@ import { format } from '@cogoport/utils';
 
 import { DATE_OPTIONAL_APIS } from '../constants';
 
-interface DateInterface {
-	startDate?:Date,
-	endDate?:Date
-}
-
-interface Props {
-	reportType?:string,
-	dateRange?: DateInterface,
-	accountType?:string,
-}
-
-const useSubmitReport = (value:Props) => {
+const useSubmitReport = (value) => {
 	const { dateRange, reportType, accountType } = value || {};
 	const apiKey = reportType?.replaceAll('-', '_');
 	const dateOptionnal = DATE_OPTIONAL_APIS.includes(reportType);

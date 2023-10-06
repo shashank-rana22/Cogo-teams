@@ -17,19 +17,7 @@ function Tagging({
 	taggingChecked = false,
 	mappingsData = {},
 	setCheckItem = () => {},
-}:
-{
-	status: string, onTabClick: any,
-	showTab?: boolean, taggingChecked?: boolean,
-	onAccept?: any,
-	mappingsData?: any,
-	setCheckItem?: any,
-	setRemarksVal: React.Dispatch<React.SetStateAction<{
-		collectionPartyRemark: string[];
-		billingPartyRemark: string[];
-		invoiceDetailsRemark: string[];
-		taggingRemark: string[];
-	}>> }) {
+}) {
 	const [value, setValue] = useState({ approve: '', reject: '', undo: '', remark: '' });
 
 	const switchDetails = () => {

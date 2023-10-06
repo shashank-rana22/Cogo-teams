@@ -5,14 +5,14 @@ import styles from './styles.module.css';
 function SortIcon({ setIsAscendingActive, setFilters, isAscendingActive }) {
 	const handleOnChangeUp = () => {
 		setIsAscendingActive('true');
-		setFilters((prev:object) => ({
+		setFilters((prev) => ({
 			...prev,
 			sortType: 'ASC',
 		}));
 	};
 	const handleOnChangeDown = () => {
 		setIsAscendingActive('false');
-		setFilters((prev:object) => ({
+		setFilters((prev) => ({
 			...prev,
 			sortType: 'DESC',
 		}));

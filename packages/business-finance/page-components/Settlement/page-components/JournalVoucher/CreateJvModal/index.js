@@ -13,20 +13,10 @@ import DetailsForm from './DetailsForm';
 import LineItemDetails from './LineItemDetails';
 import styles from './styles.module.css';
 
-interface Props {
-	show: boolean;
-	onClose: () => void;
-	setShow: React.Dispatch<React.SetStateAction<boolean>>;
-	refetch: () => void;
-	Entity?: string;
-	selectedData?: { ledCurrency?: string, currency?: string }[];
-	line_items?: object[];
-}
-
 function CreateJvModal({
 	show, onClose = () => {},
 	setShow, refetch, selectedData = [], Entity = '', line_items = [EMPTY_LINE_ITEMS],
-}:Props) {
+}) {
 	const { control, watch, handleSubmit, setValue, formState: { errors = {} } } = useForm({
 		defaultValues:
 		{

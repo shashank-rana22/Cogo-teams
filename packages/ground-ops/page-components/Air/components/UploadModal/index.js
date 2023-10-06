@@ -9,18 +9,6 @@ import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
 
 import styles from './styles.module.css';
 
-interface NestedObj {
-	[key: string]: string;
-}
-
-interface Props {
-	setEdit?:Function;
-	edit?: boolean | string;
-	showUpload?: NestedObj ;
-	setShowUpload?: Function;
-	listAPI?: Function;
-}
-
 const controls = [
 	{
 		name        : 'remark',
@@ -54,7 +42,7 @@ function UploadModal({
 	listAPI = () => {},
 	edit = false,
 	setEdit = () => {},
-}:Props) {
+}) {
 	const { control, handleSubmit, formState: { errors } } = useForm();
 	const { loading, createDocument } = useCreateShipmentDocument();
 	const { loading:updateLoading, updateDocument } = useUpdateShipmentDocument();

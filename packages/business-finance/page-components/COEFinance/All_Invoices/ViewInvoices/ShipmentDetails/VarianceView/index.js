@@ -1,20 +1,9 @@
 import { Modal } from '@cogoport/components';
 import React from 'react';
 
-import {
-	ConfigType,
-	FunctionObjects,
-} from '../../../../../commons/Interfaces/index';
 import List from '../../../../../commons/List/index';
 
-interface VarianceViewInterface {
-	show: boolean;
-	onClose?: () => void;
-	data: Array<object>;
-	loading?: boolean;
-	currency?: string;
-}
-const config: ConfigType = {
+const config = {
 	showHeader   : true,
 	headerStyles : {
 		marginBottom : '16px',
@@ -54,9 +43,9 @@ function VarianceView({
 	data,
 	loading,
 	currency,
-}: VarianceViewInterface) {
-	const functions: FunctionObjects = {
-		PurchaseInvoiceLineItem: (item: any) => {
+}) {
+	const functions = {
+		PurchaseInvoiceLineItem: (item) => {
 			const {
 				purchase_line_items: purchaseLineItems,
 				purchase_invoice: purchaseInvoice,
@@ -65,7 +54,7 @@ function VarianceView({
 				<div>
 					<span>
 						{(purchaseLineItems || [])
-							.map((charge: any) => charge.name)
+							.map((charge) => charge.name)
 							.join(',')}
 					</span>
 					<span style={{ marginLeft: 4 }}>
@@ -78,12 +67,12 @@ function VarianceView({
 				</div>
 			);
 		},
-		LiveInvoiceLineItem: (item: any) => {
+		LiveInvoiceLineItem: (item) => {
 			const { buy_line_items: buyLineItems, live_invoice: LineInvoice } = item || {};
 			return (
 				<div>
 					<span>
-						{(buyLineItems || []).map((charge: any) => charge.name).join(',')}
+						{(buyLineItems || []).map((charge) => charge.name).join(',')}
 					</span>
 					<span style={{ marginLeft: 4 }}>
 						(
@@ -95,7 +84,7 @@ function VarianceView({
 				</div>
 			);
 		},
-		Variance: (item: any) => {
+		Variance: (item) => {
 			const { variance } = item || {};
 			return (
 				<div>

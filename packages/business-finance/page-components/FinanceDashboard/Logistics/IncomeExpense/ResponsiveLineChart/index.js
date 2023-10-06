@@ -4,12 +4,6 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { getAmountInLakh } from '../../getAmountInLakh';
 import styles from '../styles.module.css';
 
-interface ListDataInterface {
-	income?: number;
-	expense?: number;
-	month?: string;
-	currency?: string;
-}
 function ResponsiveLineChart({ lineData }) {
 	const lineChartData = [
 		{
@@ -18,7 +12,7 @@ function ResponsiveLineChart({ lineData }) {
 			data  : [],
 		},
 	];
-	(lineData || []).forEach((item:ListDataInterface) => {
+	(lineData || []).forEach((item) => {
 		const { income, expense, month = '', currency = '' } = item;
 		const pushData = {
 			y : Number(income - expense),
@@ -42,7 +36,7 @@ function ResponsiveLineChart({ lineData }) {
 				reverse : false,
 			}}
 			yFormat={(value) => getAmountInLakh(value)}
-			tooltip={({ point = {} }:any) => (
+			tooltip={({ point = {} }) => (
 				<div
 					style={{
 						padding      : '9px 12px',

@@ -2,20 +2,14 @@ import { Button, Toggle } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import { ModalInterface } from '../interface';
-
 import DownloadFileFormat from './DownloadFileFormat';
 import ManualEntry from './ManualEntry';
 import styles from './styles.module.css';
 import UploadFile from './UploadFile';
 
-interface HeaderInterface {
-	refetch?:()=>void;
-	control?:object;
-}
-function Header({ refetch, control }:HeaderInterface) {
+function Header({ refetch, control }) {
 	const { query } = useRouter();
-	const [showModal, setShowModal] = useState<ModalInterface>({
+	const [showModal, setShowModal] = useState({
 		upload_file     : false,
 		manual_entry    : false,
 		download_format : false,

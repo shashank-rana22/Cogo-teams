@@ -12,19 +12,10 @@ import StatusName from '../accessorComponent/StatusName';
 import SortData from './SortData';
 import styles from './styles.module.css';
 
-interface PropsType {
-	isSortActive:string;
-	setIsSortActive:Function;
-	setGlobalFilters:Function;
-	refetch:Function;
-	setActiveTab:Function;
-	setPayload:Function;
-}
-
 const rejectedColumn = ({
 	isSortActive, setIsSortActive,
 	setGlobalFilters, refetch, setActiveTab, setPayload,
-}:PropsType) => [
+}) => [
 	{
 		Header   : <div>INCIDENT ID</div>,
 		id       : 'referenceId',
@@ -47,7 +38,7 @@ const rejectedColumn = ({
 		accessor : (row) => (
 
 			<div className={styles.request_type}>
-				{startCase(getByKey(row, 'type') as string)}
+				{startCase(getByKey(row, 'type'))}
 			</div>
 
 		),

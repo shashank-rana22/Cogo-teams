@@ -9,12 +9,6 @@ import FormLayout from './FormLayout';
 import MailView from './MailView';
 import styles from './styles.module.css';
 
-interface Props {
-	showCreateForm?: boolean;
-	setShowCreateForm?: Function;
-	getDunningList?: Function;
-}
-
 const DEFAULT_STEP = 1;
 const EXCLUDE_STEP = 2;
 const MAIL_STEP = 3;
@@ -23,7 +17,7 @@ const FINAL_STEP = 3;
 const DEFAULT_SEVERITY_LEVEL = 'LOW';
 const DEFAULT_PAGE_INDEX = 1;
 
-function CreateCycleForm({ showCreateForm = false, setShowCreateForm = () => {}, getDunningList = () => {} }:Props) {
+function CreateCycleForm({ showCreateForm = false, setShowCreateForm = () => {}, getDunningList = () => {} }) {
 	const [formData, setFormData] = useState({
 		frequency           : 'DAILY',
 		severityLevel       : DEFAULT_SEVERITY_LEVEL,

@@ -2,21 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface Props {
-	tradePartyDetailId?: string | number;
-}
-interface Profile {
-	profile?: {
-		user?: {
-			email?: string;
-			id?: string | number;
-			name?: string;
-		};
-	}
-}
-
 function useSendMail() {
-	const profile: Profile = useSelector((state) => state);
+	const profile = useSelector((state) => state);
 	const user = profile?.profile?.user || {};
 	const { email: userEmail, id: userId, name: userName } = user || {};
 
@@ -32,7 +19,7 @@ function useSendMail() {
 		{ manual: true },
 	);
 
-	const sendMail = async ({ tradePartyDetailId }:Props) => {
+	const sendMail = async ({ tradePartyDetailId }) => {
 		try {
 			const response = await trigger({
 				data: {

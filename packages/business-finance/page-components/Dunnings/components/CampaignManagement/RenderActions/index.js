@@ -5,13 +5,7 @@ import useUpdateStatus from '../hooks/useUpdateStatus';
 
 import styles from './styles.module.css';
 
-interface Props {
-	setActionModal?: Function;
-	rowData?: { isDunningCycleActive?: boolean; id?: string };
-	getDunningList?: Function;
-}
-
-function RenderActions({ setActionModal, rowData, getDunningList }:Props) {
+function RenderActions({ setActionModal, rowData, getDunningList }) {
 	const { isDunningCycleActive = false	 } = rowData || {};
 	const { changeStatus, loading } = useUpdateStatus({ getDunningList });
 

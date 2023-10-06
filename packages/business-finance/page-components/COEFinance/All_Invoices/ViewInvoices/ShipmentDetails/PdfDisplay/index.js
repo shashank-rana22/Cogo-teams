@@ -1,16 +1,6 @@
 import React from 'react';
 
-interface BillDocument {
-	billDocumentUrl?:string
-}
-interface Data {
-	bill?:BillDocument
-}
-
-interface Props {
-	data?: Data;
-}
-function PdfDisplay({ data }: Props) {
+function PdfDisplay({ data }) {
 	return (
 		<div>
 			<object

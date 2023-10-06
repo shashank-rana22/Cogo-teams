@@ -2,13 +2,7 @@ import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-interface PropsType {
-	isSortActive:string;
-	setIsSortActive:Function;
-	setGlobalFilters:Function;
-}
-
-function SortData({ isSortActive, setIsSortActive, setGlobalFilters }:PropsType) {
+function SortData({ isSortActive, setIsSortActive, setGlobalFilters }) {
 	const ascending = () => {
 		setIsSortActive(true);
 		setGlobalFilters((prev) => ({

@@ -5,32 +5,10 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import { CHANNEL_OPTIONS } from '../../constant';
-import { FilterInterface } from '../../interface';
 import { optionsMonth, optionsYear } from '../constant';
 
 import MoreFilter from './MoreFilter/index';
 import styles from './styles.module.css';
-
-interface CardInterface {
-	refetch?: Function;
-	filters?: FilterInterface;
-	shipmentLoading?: boolean;
-	setFilters?: React.Dispatch<React.SetStateAction<FilterInterface>>;
-	setViewSelected?: React.Dispatch<React.SetStateAction<boolean>>;
-	setShowBtn?: React.Dispatch<React.SetStateAction<boolean>>;
-	setCheckedRows?: React.Dispatch<React.SetStateAction<{}>>;
-	setPayload?: React.Dispatch<React.SetStateAction<any[]>>;
-	isApplyEnable?: boolean;
-	searchValue?: string;
-	setSearchValue?: React.Dispatch<React.SetStateAction<string>>;
-}
-
-interface ContentInterface {
-	setProfitNumber?: React.Dispatch<React.SetStateAction<string>>;
-	profitNumber?: string;
-	filters?: FilterInterface;
-	setFilters?: React.Dispatch<React.SetStateAction<FilterInterface>>;
-}
 
 const ZEROTH_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 const FIRST_MONTH_INDEX = 1;
@@ -44,7 +22,7 @@ const FIND_SINGLE_DATE_FORMATE = GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'];
 function ContentMoreFilter({
 	setProfitNumber = () => {}, profitNumber = '',
 	filters = {}, setFilters = () => {},
-}:ContentInterface) {
+}) {
 	return (
 		<MoreFilter
 			profitNumber={profitNumber}
@@ -63,7 +41,7 @@ function Card({
 	isApplyEnable = false,
 	setSearchValue = () => {},
 	searchValue = '',
-}:CardInterface) {
+}) {
 	const [moreFilter, setMoreFilter] = useState(false);
 	const [profitNumber, setProfitNumber] = useState('');
 

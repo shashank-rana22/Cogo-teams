@@ -20,7 +20,7 @@ const completedColumn = [
 			<div className={styles.fieldPair}>
 				<div
 					className={styles.link}
-					onClick={() => window.open(getByKey(row, 'proformaPdfUrl') as string, '_blank')}
+					onClick={() => window.open(getByKey(row, 'proformaPdfUrl'), '_blank')}
 					role="presentation"
 				>
 					{getDocumentNumber({ itemData: row })}
@@ -38,7 +38,7 @@ const completedColumn = [
 		Header   : 'Vietnam Invoice No.',
 		accessor : (row) => (
 			<div>
-				{getByKey(row, 'einvoiceNumber') as string}
+				{getByKey(row, 'einvoiceNumber')}
 			</div>
 		),
 	},
@@ -49,10 +49,10 @@ const completedColumn = [
 				<div
 					className={styles.sid}
 				>
-					{getByKey(row, 'job.jobNumber') as string}
+					{getByKey(row, 'job.jobNumber')}
 
 				</div>
-				<div className={styles.service}>{startCase(getByKey(row, 'job.shipmentType') as string)}</div>
+				<div className={styles.service}>{startCase(getByKey(row, 'job.shipmentType'))}</div>
 			</div>
 		),
 	},
@@ -60,7 +60,7 @@ const completedColumn = [
 		Header   : 'Invoice Amount',
 		accessor : (row) => (
 			<div className={styles.amount}>
-				<div>{getPrice(getByKey(row, 'grandTotal') as number, getByKey(row, 'currency') as string)}</div>
+				<div>{getPrice(getByKey(row, 'grandTotal'), getByKey(row, 'currency'))}</div>
 			</div>
 		),
 	},
@@ -68,7 +68,7 @@ const completedColumn = [
 		Header   : 'Invoice Date',
 		accessor : (row) => (
 			<div className={styles.amount}>
-				<div>{format(getByKey(row, 'proformaDate') as Date, 'dd MMM yy', {}, false)}</div>
+				<div>{format(getByKey(row, 'proformaDate'), 'dd MMM yy', {}, false)}</div>
 			</div>
 		),
 	},
@@ -80,7 +80,7 @@ const completedColumn = [
 			return (
 				<div
 					className={styles.link}
-					onClick={() => window.open(url as string, '_blank')}
+					onClick={() => window.open(url, '_blank')}
 					role="presentation"
 				>
 					View Generated Invoice

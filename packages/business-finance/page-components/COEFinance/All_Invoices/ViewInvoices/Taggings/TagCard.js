@@ -3,26 +3,10 @@ import React from 'react';
 import { ProformaTagCards } from './ProformaTag';
 import styles from './styles.module.css';
 
-interface ChildBill {
-	id: string;
-	billId: string;
-}
-
-interface Props {
-	isProforma?: boolean;
-	billNumber?: string;
-	amount?: number;
-	billCurrency?: string;
-	lineItemCount?: string;
-	createdAt?: Date;
-	childBill?: ChildBill[]
-	billId: string;
-}
-
 export function TagCard({
 	item,
 	isfirst, classname, isLastChild,
-}: { item: Props, isfirst: boolean, classname?: string, isLastChild?: boolean }) {
+}) {
 	const { childBill } = item || {};
 	const labelMap = {
 		merge : 'Merge',

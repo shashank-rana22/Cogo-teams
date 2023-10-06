@@ -26,41 +26,11 @@ import useSupplierHistory from '../../../hook/useSupplierHistory';
 
 import styles from './styles.module.css';
 
-interface SellerDetail {
-	organizationName?: string;
-}
-
-interface DocumentData {
-	list: Array<object>;
-}
-interface BillAdditionalObject {
-	shipmentType?: string;
-}
-
-interface DataProps {
-	sellerDetail?: SellerDetail;
-	serviceProviderCategory?: string;
-	serviceProviderDocuments: DocumentData;
-	billAdditionalObject? : BillAdditionalObject;
-
-}
-
-interface PaymentsData {
-	payables?: string;
-	receivables?: string;
-	payablesCurrency?: string;
-	receivablesCurrency?: string;
-}
-interface SupplierDetailsProps {
-	data: DataProps;
-	paymentsData?: PaymentsData;
-	accPaymentLoading?: boolean;
-}
 function SupplierDetails({
 	data,
 	paymentsData,
 	accPaymentLoading,
-}: SupplierDetailsProps) {
+}) {
 	const { historyData, getSupplierHistory, loading } = useSupplierHistory();
 	const [showModal, setShowModal] = useState(false);
 	const [showDocsModal, setShowDocsModal] = useState(false);
@@ -80,11 +50,11 @@ function SupplierDetails({
 	const rest = { onClickOutside: () => { setShowModal(false); } };
 
 	const functions = {
-		DocumentTypeFunc: (item: any) => {
+		DocumentTypeFunc: (item) => {
 			const { document_type: DocumentType } = item;
 			return <p>{startCase(DocumentType)}</p>;
 		},
-		viewFunc: (item: any) => (
+		viewFunc: (item) => (
 			<Button
 				themeType="secondary"
 				size="md"
@@ -93,7 +63,7 @@ function SupplierDetails({
 				View
 			</Button>
 		),
-		downloadFunc: (item: any) => (
+		downloadFunc: (item) => (
 			<div
 				className={styles.download}
 				onClick={() => saveAs(item?.image_url)}
@@ -102,7 +72,7 @@ function SupplierDetails({
 				<IcMDownload height={20} width={20} />
 			</div>
 		),
-		sidDetailsFunc: (item:any) => (
+		sidDetailsFunc: (item) => (
 			<div className={styles.sid_details}>
 				{' '}
 				SID -
@@ -127,7 +97,7 @@ function SupplierDetails({
 		return (
 			<>
 				<div className={styles.details}>LAST 10 SID Details</div>
-				{historyData.map((item:any) => (
+				{historyData.map((item) => (
 					<div key={item}>
 						{' '}
 						SID -

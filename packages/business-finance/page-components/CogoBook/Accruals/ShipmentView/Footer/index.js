@@ -8,23 +8,6 @@ import { optionsRadio } from '../../constant';
 
 import styles from './styles.module.css';
 
-interface FooterInterface {
-	actionConfirm?: (isBookedActive: any) => void
-	checkedData?: any[]
-	shipmentLoading?:boolean
-	checkedRowsSerialId?: any[]
-	isBookedActive?: boolean
-	setCheckedRows: React.Dispatch<React.SetStateAction<{}>>
-	addSelect?: (setOpenModal: any) => Promise<void>
-	payload?: any[]
-	viewSelected?: boolean
-	showBtn?: boolean
-	bulkSection?:{ value?:boolean, bulkAction?:string }
-	setBulkSection?: React.Dispatch<React.SetStateAction<{}>>
-	selectedDataLoading?:boolean
-	actionConfirmedLoading?:boolean
-}
-
 function Footer({
 	checkedData = [],
 	payload = [],
@@ -40,7 +23,7 @@ function Footer({
 	isBookedActive = false,
 	bulkSection = {},
 	checkedRowsSerialId = [],
-}:FooterInterface) {
+}) {
 	const { query } = useRouter();
 	const { sub_active:subActive, active_tab:activeTab } = query;
 	const [openModal, setOpenModal] = useState(false);

@@ -6,17 +6,8 @@ import { useSelector } from '@cogoport/store';
 import { format, isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { FilterInterface } from '../Accruals/interface';
-
 import calculateAccrue from './calculateAccrue';
 
-interface ShipmentInterface {
-	filters?:FilterInterface
-	setCheckedRows: React.Dispatch<React.SetStateAction<{}>>
-	setBulkSection: React.Dispatch<React.SetStateAction<{}>>
-	checkedRows?:object
-	bulkAction?:string
-}
 const RANGE_MAPPING = {
 	''      : '',
 	'>'     : 'gt',
@@ -28,7 +19,7 @@ const RANGE_MAPPING = {
 const useShipmentView = ({
 	filters = {}, checkedRows = {}, setCheckedRows = () => {},
 	setBulkSection = () => {},
-}:ShipmentInterface) => {
+}) => {
 	const didMountRef = useRef(false);
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,

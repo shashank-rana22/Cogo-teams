@@ -9,15 +9,9 @@ import {
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { GenericObject } from '../../../../commons/Interfaces';
-
 import styles from './styles.module.css';
 
-interface Props {
-	charge: GenericObject;
-	type: string;
-}
-export function CardBody({ charge, type }: Props) {
+export function CardBody({ charge, type }) {
 	const [showFullDetails, setShowFullDetails] = useState(false);
 	const handleWidth = () => {
 		setShowFullDetails(!showFullDetails);
@@ -47,29 +41,29 @@ export function CardBody({ charge, type }: Props) {
 			className={`${showFullDetails ? styles.card : styles.custompadding} ${
 				lineItems.length < 2 ? styles.padding : ''
 			}`}
-			style={{ '--bordercolor': BORDER_COLOR } as React.CSSProperties}
+			style={{ '--bordercolor': BORDER_COLOR }}
 		>
 			<div className={styles.layout}>
 				<div
 					className={styles.heading}
-					style={{ '--span': 2 } as React.CSSProperties}
+					style={{ '--span': 2 }}
 				>
 					{startCase(serviceType) || 'Platform Fees'}
 				</div>
 				<div
 					className={styles.flex}
-					style={{ '--span': 1 } as React.CSSProperties}
+					style={{ '--span': 1 }}
 				>
 					Expected
 				</div>
 				<div
 					className={styles.flex}
-					style={{ '--span': 1 } as React.CSSProperties}
+					style={{ '--span': 1 }}
 				>
 					Actual
 				</div>
 			</div>
-			{(showFullDetails ? lineItems : lineItems.slice(0, 2)).map((lineItem: GenericObject) => {
+			{(showFullDetails ? lineItems : lineItems.slice(0, 2)).map((lineItem) => {
 				const value = Number(lineItem?.priceInInrActual) - Number(lineItem?.priceInInrQuotation);
 				let className = styles.neutral;
 				let iconClassName = styles.neutral_icon;
@@ -92,7 +86,7 @@ export function CardBody({ charge, type }: Props) {
 							className={`${styles.coloredlabel} ${
 								lineItem?.sameCurrencyDataPresent && className
 							}`}
-							style={{ '--span': 2 } as React.CSSProperties}
+							style={{ '--span': 2 }}
 						>
 							{lineItem.nameQuotation || lineItem.nameActual}
 							<Tooltip
@@ -109,7 +103,7 @@ export function CardBody({ charge, type }: Props) {
 						</div>
 						<div
 							className={styles.flex}
-							style={{ '--span': 1 } as React.CSSProperties}
+							style={{ '--span': 1 }}
 						>
 							{(lineItem?.priceQuotation && lineItem?.currencyQuotation) ? formatAmount({
 								amount   : lineItem?.priceQuotation,
@@ -122,7 +116,7 @@ export function CardBody({ charge, type }: Props) {
 						</div>
 						<div
 							className={styles.flex}
-							style={{ '--span': 1 } as React.CSSProperties}
+							style={{ '--span': 1 }}
 						>
 							{(lineItem?.priceActual && lineItem?.currencyActual) ? formatAmount({
 								amount   :	lineItem?.priceActual,
@@ -145,11 +139,11 @@ export function CardBody({ charge, type }: Props) {
 				<div className={styles.total}>
 					<div
 						className={styles.heading}
-						style={{ '--span': 2 } as React.CSSProperties}
+						style={{ '--span': 2 }}
 					/>
 					<div
 						className={`${styles.flex} ${styles.totalamount}`}
-						style={{ '--span': 1 } as React.CSSProperties}
+						style={{ '--span': 1 }}
 					>
 						{charge?.serviceTotalQuotational
 							? formatAmount({
@@ -164,7 +158,7 @@ export function CardBody({ charge, type }: Props) {
 					</div>
 					<div
 						className={`${styles.flex} ${styles.totalamount}`}
-						style={{ '--span': 1 } as React.CSSProperties}
+						style={{ '--span': 1 }}
 					>
 						{charge?.serviceTotalActual
 							? formatAmount({

@@ -5,19 +5,9 @@ import { formatDate } from '../../../../commons/utils/formatDate';
 
 import styles from './styles.module.css';
 
-interface Props {
-	isProforma?: boolean;
-	billNumber?: string;
-	amount?: number;
-	billCurrency?: string;
-	lineItemCount?: string;
-	createdAt?: Date;
-	childBill?: object[]
-}
-
 export function ProformaTagCards({
 	item, classname,
-}: { item: Props, classname?: string }) {
+}) {
 	const newItem = item;
 	return (
 		<div className={`
@@ -38,7 +28,7 @@ export function ProformaTagCards({
 				</div>
 				<div>
 					{formatAmount({
-						amount   : newItem?.amount as any,
+						amount   : newItem?.amount,
 						currency :	newItem?.billCurrency,
 						options  :	{
 							style                 : 'currency',

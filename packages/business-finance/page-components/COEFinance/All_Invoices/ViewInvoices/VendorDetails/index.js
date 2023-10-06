@@ -17,34 +17,9 @@ import useGetVendorDetails from '../../../hook/useGetVendorDetails';
 
 import styles from './styles.module.css';
 
-interface DocumentData {
-	list: Array<object>;
-}
-
-interface BillAdditionalObject {
-	shipmentType: string;
-}
-
-interface ServiceProviderDetail {
-	organizationName: string;
-	organizationId: string;
-	entityCode: number
-}
-
-interface DataProps {
-	serviceProviderCategory?: string;
-	serviceProviderDocuments: DocumentData;
-	billAdditionalObject? : BillAdditionalObject;
-	serviceProviderDetail? : ServiceProviderDetail;
-}
-
-interface SupplierDetailsProps {
-	data: DataProps;
-
-}
 function VendorDetail({
 	data,
-}: SupplierDetailsProps) {
+}) {
 	const {
 		serviceProviderCategory = '',
 		serviceProviderDocuments,

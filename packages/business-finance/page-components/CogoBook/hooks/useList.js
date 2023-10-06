@@ -3,15 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-interface FilterInterface {
-	filters?:{
-		month?:string
-		query?:string
-		entity?:string
-	}
-}
-
-const useList = ({ filters }:FilterInterface) => {
+const useList = ({ filters }) => {
 	const [
 		{ data, loading:ListDataLoading },
 		listTrigger,

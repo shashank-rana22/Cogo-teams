@@ -1,21 +1,11 @@
 import { Checkbox } from '@cogoport/components';
 
-interface Props {
-	uncheckedRows?: string[];
-	setUncheckedRows?: Function;
-	row?: {
-		registrationNumber?: string;
-		tradePartyDetailId?: string;
-	};
-	feature?: string;
-}
-
 function CheckboxItem({
 	uncheckedRows,
 	setUncheckedRows,
 	row,
 	feature = 'exception-management',
-}:Props) {
+}) {
 	const { registrationNumber, tradePartyDetailId	} = row || {};
 
 	let seedingValue;

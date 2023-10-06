@@ -1,18 +1,11 @@
 import { Placeholder } from '@cogoport/components';
-import React, { CSSProperties } from 'react';
+import React from 'react';
 
 import Line from '../Line';
 
 import styles from './styles.module.css';
 
-interface Props {
-	heading?: string;
-	expected?: string | number;
-	actual?: string | number;
-	loading?: boolean;
-}
-
-function StatRect({ heading, expected, actual, loading }: Props) {
+function StatRect({ heading, expected, actual, loading }) {
 	return (
 		<div className={styles.layout}>
 			{!loading ? (
@@ -22,10 +15,10 @@ function StatRect({ heading, expected, actual, loading }: Props) {
 					<div className={styles.spacebetween}>
 						<div
 							className={styles.column}
-							style={{ '--margin': '0px 5px 0px 0px' } as CSSProperties}
+							style={{ '--margin': '0px 5px 0px 0px' }}
 						>
 							<span className={styles.number}>
-								{((expected as number) || 0).toFixed(2) || '0'}
+								{((expected) || 0).toFixed(2) || '0'}
 								{' '}
 								%
 								{' '}
@@ -34,10 +27,10 @@ function StatRect({ heading, expected, actual, loading }: Props) {
 						</div>
 						<div
 							className={styles.column}
-							style={{ '--margin': '0px 0px 0px 5px' } as CSSProperties}
+							style={{ '--margin': '0px 0px 0px 5px' }}
 						>
 							<span className={styles.number}>
-								{((actual as number) || 0).toFixed(2) || '0'}
+								{((actual) || 0).toFixed(2) || '0'}
 								{' '}
 								%
 							</span>

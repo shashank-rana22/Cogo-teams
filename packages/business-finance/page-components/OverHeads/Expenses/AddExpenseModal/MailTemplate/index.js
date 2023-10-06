@@ -8,27 +8,12 @@ import useAddExpense from '../../hooks/useAddExpense';
 import Details from './Details';
 import styles from './styles.module.css';
 
-interface Data {
-	uploadedInvoice?: any;
-	vendorName?: string;
-	expenseCategory?: string;
-	stakeholderEmail?: string;
-	vendorData?: any;
-}
-
-interface Props {
-	expenseData?: Data;
-	setShowModal?: (p: any) => void;
-	getList?: (p: any) => void;
-	rowData?: any;
-}
-
 function MailTemplate({
 	expenseData,
 	setShowModal,
 	getList,
 	rowData,
-}: Props) {
+}) {
 	const { uploadedInvoice, vendorData, stakeholderEmail } = expenseData || {};
 	const { categoryName } = rowData || {};
 	const { business_name: vendorName } = vendorData || {};

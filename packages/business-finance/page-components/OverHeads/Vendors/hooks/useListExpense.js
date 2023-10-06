@@ -5,13 +5,6 @@ import { useContext, useCallback } from 'react';
 
 import { EntityContext } from '../../commons/Contexts';
 
-interface Props {
-	vendorId?:string | number,
-	expenseType?:string,
-	pageIndex?:number,
-	pageSize?:number,
-}
-
 const formatedDate = (date) => formatDate({
 	date,
 	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
@@ -36,7 +29,7 @@ const useListExpense = ({ filters }) => {
 	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } = uploadDate || {};
 	const { startDate: fromBillDate, endDate: toBillDate } = billDate || {};
 
-	const getList = useCallback(async ({ vendorId, expenseType, pageIndex, pageSize }:Props) => {
+	const getList = useCallback(async ({ vendorId, expenseType, pageIndex, pageSize }) => {
 		try {
 			await trigger({
 				params: {

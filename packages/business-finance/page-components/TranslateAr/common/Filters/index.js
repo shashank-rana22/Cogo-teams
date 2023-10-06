@@ -1,21 +1,15 @@
 import React from 'react';
 
 import { getElements } from '../../utils/getElements';
-import { FilterProps } from '../interfaces';
 import SearchInput from '../SearchInput';
 
 import styles from './styles.module.css';
 import { filterControls } from './utils/controls';
 
-interface Props {
-	filters: FilterProps;
-	onChangeFilters: (v: object) => void;
-}
-
 function Filters({
 	filters,
 	onChangeFilters = (v) => v,
-}: Props) {
+}) {
 	const { search } = filters || {};
 
 	return (

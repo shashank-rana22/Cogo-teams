@@ -1,8 +1,6 @@
 import { isEmpty, getByKey } from '@cogoport/utils';
 
-import { Object } from '../common/interfaces';
-
-const checkInvoice = ({ itemData }: Object) => {
+const checkInvoice = ({ itemData }) => {
 	if (getByKey(itemData, 'invoiceType') === 'CREDIT_NOTE') {
 		return 'Credit Note';
 	}

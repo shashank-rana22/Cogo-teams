@@ -1,8 +1,7 @@
-import { Refetch } from '../common/interfaces';
 import completedColumn from '../configs/completed-table';
 import pendingColumns from '../configs/pending-table';
 
-const getColumns = (status: string, refetch: Refetch) => {
+const getColumns = (status, refetch) => {
 	if (status === 'completed') {
 		return completedColumn;
 	}

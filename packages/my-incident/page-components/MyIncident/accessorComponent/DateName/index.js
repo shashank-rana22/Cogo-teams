@@ -8,7 +8,7 @@ function DateName({ itemData }) {
 	return (
 		<div className={styles.container}>
 			<div>
-				{startCase(getByKey(itemData, 'updatedBy.name') as string)}
+				{startCase(getByKey(itemData, 'updatedBy.name'))}
 			</div>
 			<div>
 
