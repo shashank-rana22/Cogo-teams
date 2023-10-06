@@ -15,7 +15,7 @@ interface RefetchInterface {
 
 export const manageBprColumn = ({ refetch } : RefetchInterface) => [
 	{
-		Header   : 'Serail Id',
+		Header   : 'Serial Id',
 		accessor : (row) => (
 			<div>
 				{getByKey(row, 'tradePartyDetailSerialId') as number}

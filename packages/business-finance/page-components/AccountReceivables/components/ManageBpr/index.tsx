@@ -46,7 +46,7 @@ function ManageBpr() {
 							onQueryChange(value);
 						}}
 						value={searchQuery}
-						placeholder="Search by serial id / business name "
+						placeholder="Search by serial id / business name"
 						type="text"
 					/>
 				</div>

@@ -21,7 +21,7 @@ interface SalesFunnelData {
 interface SalesFunnelProps {
 	salesFunnelData?: SalesFunnelData,
 	salesFunnelMonth?: string,
-	setSalesFunnelMonth?: (p:string)=>void,
+	setSalesFunnelMonth?: (p: string) => void,
 	salesFunnelLoading?: boolean
 	entityCode?: string
 }
@@ -31,7 +31,10 @@ function SalesFunnel({
 	salesFunnelLoading, entityCode,
 }: SalesFunnelProps) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
-
+	const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+		'August', 'September', 'October', 'November', 'December'];
+	const d = new Date();
+	const currentMonth = month[d.getMonth()];
 	const {
 		draftInvoicesCount = '',
 		draftToFinanceAcceptedPercentage = '',
@@ -42,7 +45,7 @@ function SalesFunnel({
 		settledPercentage = '',
 	} = salesFunnelData || {};
 
-	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
+	const { irn_label: irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 
 	const salesFunnel = [
 		{
@@ -70,7 +73,7 @@ function SalesFunnel({
 		},
 	];
 
-	const onChange = (val:string) => {
+	const onChange = (val: string) => {
 		setSalesFunnelMonth(val);
 	};
 	return (
@@ -102,11 +105,11 @@ function SalesFunnel({
 					</div>
 					<div className={styles.border} />
 				</div>
-				<div>
+				<div className={styles.date_filter}>
 					<Select
 						value={salesFunnelMonth}
-						onChange={(val:string) => onChange(val)}
-						placeholder={t('by_month_placeholder')}
+						onChange={(val: string) => onChange(val)}
+						placeholder={currentMonth}
 						options={getSalesFunnelOptions(t)}
 						isClearable
 					/>
@@ -140,11 +143,11 @@ function SalesFunnel({
 								</div>
 							</div>
 						</div>
-						{ item.name !== 'Settled' && (
+						{item.name !== 'Settled' && (
 							<>
 								<div className={styles.vertical_line} />
 								<div className={styles.count_container}>
-									{ item.percentage}
+									{item.percentage}
 									%
 								</div>
 								<div className={styles.vertical_line} />

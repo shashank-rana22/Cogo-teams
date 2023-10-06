@@ -16,13 +16,18 @@ interface InvoiceJourneyProps {
 
 function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
+	const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+		'August', 'September', 'October', 'November', 'December'];
+	const d = new Date();
+	const currentMonth = month[d.getMonth()];
+	const currentYear = d.getFullYear();
 
 	const {
 		journeyData, journeyLoading, dateFilter,
 		setDateFilter, optionsVal,
 	} = useGetInvoiceJourney({ filterValue, entityCode });
 
-	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
+	const { irn_label: irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 
 	const {
 		draftInvoicesCount, financeAcceptedInvoiceCount,
@@ -59,7 +64,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 		},
 	];
 
-	const onChange = (val:string, key:string) => {
+	const onChange = (val: string, key: string) => {
 		setDateFilter((p) => ({ ...p, [key]: val }));
 	};
 	return (
@@ -92,7 +97,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 
 						<div className={styles.invoice_journey_loader}>
 
-							{	[1, 2, 3, 4].map((item) => (
+							{[1, 2, 3, 4].map((item) => (
 
 								<Placeholder key={item} className={styles.invoice_loader} />
 
@@ -105,7 +110,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 					: (
 						<div className={styles.sub_container}>
 
-							{ getCircleData.map((item) => (
+							{getCircleData.map((item) => (
 								<div key={item.id} className={styles.column_flex}>
 									<div className={styles.circle}>
 										<div className={styles.number}>{item?.number}</div>
@@ -124,8 +129,8 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 					<div className={styles.margin_right}>
 						<Select
 							value={dateFilter.month}
-							onChange={(val:string) => onChange(val, 'month')}
-							placeholder={t('by_month_placeholder')}
+							onChange={(val: string) => onChange(val, 'month')}
+							placeholder={currentMonth}
 							options={getSalesFunnelOptions(t)}
 							isClearable
 						/>
@@ -133,8 +138,8 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 
 					<Select
 						value={dateFilter.year}
-						onChange={(val:string) => onChange(val, 'year')}
-						placeholder={t('by_year_placeholder')}
+						onChange={(val: string) => onChange(val, 'year')}
+						placeholder={currentYear}
 						options={optionsVal()}
 						isClearable
 					/>
@@ -146,7 +151,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 
 						<div className={styles.invoice_tat_loader}>
 
-							{	[1, 2, 3].map((item) => (
+							{[1, 2, 3].map((item) => (
 
 								<Placeholder key={item} className={styles.invoice_tat_placeholder} />
 

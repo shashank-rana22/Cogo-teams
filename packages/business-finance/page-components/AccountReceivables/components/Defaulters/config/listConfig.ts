@@ -1,4 +1,4 @@
-const headerStyle = {
+const HEADER_STYLES = {
 	borderRadius : '8px 8px 0px 0px',
 	borderBottom : '2px solid var(--color-accent-orange-2)',
 	background   : 'white',
@@ -7,22 +7,23 @@ const headerStyle = {
 	fontSize     : '14px',
 	fontStyle    : 'normal',
 	fontFamily   : 'Poppins',
-	padding      : '32px 0px',
+	padding      : '32px 0px 32px 10px',
 };
 
-const bodyStyles = {
-	color      : ' #333333',
-	fontWeight : '400',
-	fontSize   : '12px',
-	lineHeight : '14px',
-	fontFamily : 'Poppins',
-	fontStyle  : 'normal',
+const BODY_STYLES = {
+	backgroundColor : '#fff',
+	color           : ' #333333',
+	fontWeight      : '400',
+	fontSize        : '12px',
+	lineHeight      : '14px',
+	fontFamily      : 'Poppins',
+	fontStyle       : 'normal',
 };
 
 export const invoiceListConfig = () => ({
 	showHeader   : true,
-	headerStyles : headerStyle,
-	bodyStyles,
+	headerStyles : HEADER_STYLES,
+	bodyStyles   : BODY_STYLES,
 	fields       : [
 		{
 			label : 'Name',
@@ -84,9 +85,10 @@ export const invoiceListConfig = () => ({
 			span  : 1,
 		},
 		{
-			label : 'Actions',
-			func  : 'showActions',
-			span  : 1,
+			label            : 'Actions',
+			func             : 'showActions',
+			span             : 1,
+			infoIconRequired : true,
 		},
 	],
 });
