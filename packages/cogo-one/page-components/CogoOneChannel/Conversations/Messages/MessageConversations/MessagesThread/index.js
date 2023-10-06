@@ -4,12 +4,12 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { forwardRef, useEffect } from 'react';
 
+import TimeLine from '../../../../../../common/TimeLine';
 import { updateUnreadMessagesCount } from '../../../../../../helpers/updateUnreadMessagesCount';
 
 import { ReceiveDivComponent, SentDivComponent } from './conversationDivMappings';
 import NewUserOutBound from './NewUserOutBound';
 import styles from './styles.module.css';
-import TimeLine from './TimeLine';
 
 const DEFAULT_VALUE = 0;
 const DEFAULT_UNREAD_MESSAGES = 0;

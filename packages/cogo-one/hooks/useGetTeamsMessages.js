@@ -14,6 +14,8 @@ import { useState, useRef, useMemo, useEffect } from 'react';
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { messagesFormatter } from '../helpers/formatTeamsList';
 
+import useListTeamsTimeline from './useListTeamsTimeline';
+
 const PAGE_LIMIT = 10;
 const LAST_INDEX_FROM_END = 1;
 const DISTANCE_FROM_TOP = 10;
@@ -25,6 +27,7 @@ function newMessageSnapShot({
 	roomId = '',
 	setFirstLoadingMessages = () => {},
 	scrollToLastMessage = () => {},
+	getCogooneTimeline = () => {},
 }) {
 	if (isEmpty(chatCollection)) {
 		return;
@@ -59,6 +62,12 @@ function newMessageSnapShot({
 					},
 				}));
 
+				getCogooneTimeline({
+					endDate   : Date.now(),
+					startDate : lastDocumentTimeStamp,
+					groupId   : roomId,
+				});
+
 				setFirstLoadingMessages((prev) => {
 					if (prev) {
 						scrollToLastMessage();
@@ -78,6 +87,7 @@ async function getNextData({
 	setLoadingPrevMessages = () => {},
 	setMessagesState = () => {},
 	prevLastDocumentTimeStamp = Date.now(),
+	getCogooneTimeline = () => {},
 }) {
 	const prevTimeStamp = Number(prevLastDocumentTimeStamp);
 
@@ -115,6 +125,11 @@ async function getNextData({
 				isLastPage,
 			},
 		}));
+		getCogooneTimeline({
+			endDate   : prevTimeStamp,
+			startDate : lastDocumentTimeStamp,
+			groupId   : roomId,
+		});
 
 		setLoadingPrevMessages(false);
 	} catch (e) {
@@ -141,6 +156,8 @@ const useGetTeamsMessages = ({
 
 	const [loadingPrevMessages, setLoadingPrevMessages] = useState(false);
 
+	const { getCogooneTimeline = () => {} } = useListTeamsTimeline({ setMessagesState });
+
 	const chatCollection = useMemo(() => {
 		if (!roomId) {
 			return {};
@@ -162,6 +179,7 @@ const useGetTeamsMessages = ({
 			setLoadingPrevMessages,
 			setMessagesState,
 			prevLastDocumentTimeStamp,
+			getCogooneTimeline,
 		});
 	};
 
@@ -184,6 +202,7 @@ const useGetTeamsMessages = ({
 			roomId,
 			setFirstLoadingMessages,
 			scrollToLastMessage,
+			getCogooneTimeline,
 		});
 
 		const unSubscribe = newMessagesRef.current;
@@ -191,7 +210,7 @@ const useGetTeamsMessages = ({
 		return () => {
 			unSubscribe?.();
 		};
-	}, [chatCollection, roomId, scrollToLastMessage]);
+	}, [chatCollection, getCogooneTimeline, roomId, scrollToLastMessage]);
 
 	return {
 		messages: sortedMessageData,

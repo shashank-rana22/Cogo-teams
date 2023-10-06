@@ -2,6 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
+import TimeLine from '../../../../../../common/TimeLine';
 import useGetTeamsMessages from '../../../../../../hooks/useGetTeamsMessages';
 import ReceiveComponent from '../ReceiveComponent';
 import SentComponent from '../SendComponent';
@@ -11,6 +12,7 @@ import styles from './styles.module.css';
 const CONVERSATION_TYPE_MAPPING = {
 	sent     : SentComponent,
 	received : ReceiveComponent,
+	timeline : TimeLine,
 };
 
 function LoadPrevMessages({
@@ -48,6 +50,7 @@ function MessagesThread({
 	roomId = '',
 	conversationsDivRef = {},
 	scrollToLastMessage = () => {},
+	isGroup = false,
 }) {
 	const {
 		firstLoadingMessages,
@@ -61,6 +64,7 @@ function MessagesThread({
 		firestore,
 		roomId,
 		scrollToLastMessage,
+		isGroup,
 	});
 
 	if (firstLoadingMessages) {
@@ -93,7 +97,9 @@ function MessagesThread({
 				{(messages || []).map((eachMessage) => {
 					const conversationType = eachMessage?.send_by_id === loggedInUserId ? 'sent' : 'received';
 
-					const Component = CONVERSATION_TYPE_MAPPING[conversationType];
+					const modifiedConvType = eachMessage?.type === 'timeline' ? 'timeline' : conversationType;
+
+					const Component = CONVERSATION_TYPE_MAPPING[modifiedConvType];
 
 					if (!Component) {
 						return null;

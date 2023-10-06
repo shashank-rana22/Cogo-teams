@@ -10,6 +10,7 @@ function Messages({
 	firestore = {},
 	conversationsDivRef = {},
 	scrollToLastMessage = () => {},
+	isGroup = false,
 }) {
 	if (!internalRoomId) {
 		return (
@@ -35,6 +36,7 @@ function Messages({
 			conversationsDivRef={conversationsDivRef}
 			scrollToLastMessage={scrollToLastMessage}
 			key={internalRoomId}
+			isGroup={isGroup}
 		/>
 	);
 }

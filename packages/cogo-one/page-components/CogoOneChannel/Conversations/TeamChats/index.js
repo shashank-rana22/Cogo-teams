@@ -9,6 +9,8 @@ import styles from './styles.module.css';
 
 const TIMEOUT_FOR_SCROLL = 200;
 
+const GROUP_MEMBERS_MIN = 2;
+
 function TeamChats(props) {
 	const {
 		activeTeamCard = {},
@@ -32,6 +34,8 @@ function TeamChats(props) {
 	} = data || {};
 
 	const { group_members_ids = [] } = groupData || {};
+
+	const isGroup = group_members_ids?.length > GROUP_MEMBERS_MIN;
 
 	const hasPermissionToEdit = (id || group_id) && (is_draft || group_members_ids?.includes(loggedInUserId));
 
@@ -74,6 +78,7 @@ function TeamChats(props) {
 					loading={loading}
 					conversationsDivRef={conversationsDivRef}
 					scrollToLastMessage={scrollToLastMessage}
+					isGroup={isGroup}
 				/>
 			</div>
 			<div className={styles.footer}>
