@@ -28,7 +28,7 @@ function PortDetails({ details = {}, listLoading = false }) {
 			{listLoading ? <Placeholder width="80px" height="18px" margin="0 0 0 4px" />
 				: (
 					<div className={styles.port_name}>
-						{details?.name}
+						{details?.name || '-'}
 					</div>
 				)}
 		</div>
@@ -40,7 +40,8 @@ function ShipmentDetails({
 	handleRouteBooking = () => {}, service = '', partnerId = '', t = null,
 	shipmentsData = {}, handleRouteSupply = () => {}, listLoading = false,
 }) {
-	const { shipment_type = '', trade_type: tradeType = '' } = shipmentsData || {};
+	const { shipment_type = '', trade_type: tradeType = '', id = '' } = shipmentsData || {};
+
 	const {
 		originDetails = {},
 		destinationDetails = {},
@@ -83,7 +84,7 @@ function ShipmentDetails({
 				className={styles.sid}
 				onClick={(e) => (ROUTE_PAGE_MAPPING[idType] || ROUTE_PAGE_MAPPING?.default)?.({
 					e,
-					serialId,
+					id,
 					service,
 					partnerId,
 					endPoint: QUERY_PATH?.[idType],

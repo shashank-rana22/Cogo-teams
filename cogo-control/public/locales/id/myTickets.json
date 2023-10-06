@@ -141,6 +141,6 @@
     "trade_type": "Jenis Perdagangan",
     "category": "Kategori",
     "sub_category": "Sub Kategori",
-    "missing": "Missing ID",
-    "dislike": "Dislike ID"
+    "missing": "ID yang hilang",
+    "dislike": "ID tidak suka"
 }

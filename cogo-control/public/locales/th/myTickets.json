@@ -141,6 +141,6 @@
     "trade_type": "ประเภทการซื้อขาย",
     "category": "หมวดหมู่",
     "sub_category": "หมวดหมู่ย่อย",
-    "missing": "Missing ID",
-    "dislike": "Dislike ID"
+    "missing": "รหัสที่ขาดหายไป",
+    "dislike": "ไม่ชอบ ID"
 }
