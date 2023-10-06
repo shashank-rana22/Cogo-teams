@@ -21,7 +21,7 @@ export const renderValue = (label: string, detail: any) => {
 
 	const commodityDataDetails = detail?.commodity_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-	const valueForInput = Array.isArray(packages) && !isEmpty(packages?.length)
+	const valueForInput = Array.isArray(packages) && !isEmpty(packages)
 		? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
 
 	const chargableWeight = isLTL
