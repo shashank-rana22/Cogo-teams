@@ -1,4 +1,4 @@
-import { cl, Toast } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -47,7 +47,7 @@ function CogoOne() {
 			channel_type,
 		} : {},
 	});
-	Toast.error({ r: 'rs' });
+
 	const [viewType, setViewType] = useState('');
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
