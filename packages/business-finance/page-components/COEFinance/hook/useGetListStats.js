@@ -45,30 +45,18 @@ const useGetListStats = ({ filters = {}, searchValue = '' }) => {
 		|| filters?.updatedDate?.endDate === null)
 		? null : formatDate(filters?.updatedDate?.endDate);
 
-	const billFromData = billDatesStartFilters || undefined;
-
-	const billToData = billDatesEndFilters || undefined;
-
-	const dueFromData = dueDatesStartFilters || undefined;
-
-	const dueToData = dueDatesEndFilters || undefined;
-
-	const updatedFromData = updatedDateStartFilters || undefined;
-
-	const updatedToData = updatedDateEndFilters || undefined;
-
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url    : '/purchase/bills/list-stats',
 			method : 'get',
 			params : {
 				currency        : filters?.currency,
-				billDateFrom    : billFromData,
-				billDateTo      : billToData,
-				dueDateFrom     : dueFromData,
-				dueDateTo       : dueToData,
-				updatedDateFrom : updatedFromData || filters?.updatedDateFrom || undefined,
-				updatedDateTo   : updatedToData || filters?.updatedDateTo || undefined,
+				billDateFrom    : billDatesStartFilters || undefined,
+				billDateTo      : billDatesEndFilters || undefined,
+				dueDateFrom     : dueDatesStartFilters || undefined,
+				dueDateTo       : dueDatesEndFilters || undefined,
+				updatedDateFrom : updatedDateStartFilters || filters?.updatedDateFrom || undefined,
+				updatedDateTo   : updatedDateEndFilters || filters?.updatedDateTo || undefined,
 				urgencyTag      : filters?.urgencyTag || undefined,
 				billType        : BILL_TYPE.includes(filters?.billType) ? 'BILL' : filters?.billType || undefined,
 				jobType        	: showConsolidated,
