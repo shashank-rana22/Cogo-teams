@@ -30,7 +30,7 @@ const useImageUploader = ({ setEmailState = () => {}, setRteDisabled = () => {} 
 
 			setEmailState((prev) => ({ ...prev, rteContent: `${prev.rteContent}\n<p><img src='${finalUrl}'/></p>` }));
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(error.message);
 		}
 	}, [setEmailState]);
 
