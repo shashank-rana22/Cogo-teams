@@ -3,6 +3,7 @@ import {
 	asyncFieldsLocations,
 	asyncFieldsPartnerUsersIds,
 	useGetAsyncOptions,
+	asyncFieldListRateChargeCodes,
 } from '@cogoport/forms';
 import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { merge, startCase } from '@cogoport/utils';
@@ -109,8 +110,17 @@ function useControls({
 			},
 		),
 	);
+	const chargeControls = useGetAsyncOptions(merge(
+		asyncFieldListRateChargeCodes(),
+		{
+			params: {
+				service_name: filter?.service === 'haulage' ? `${filter?.service}_freight_charges`
+					: `${filter?.service}_charges`,
+			},
+		},
+	));
 
-	const fclCommodityOptions = getCommodityOptions(data?.container_type);
+	const CommodityOptions = getCommodityOptions(data?.container_type);
 
 	let CONTROL = [];
 	const selectedService = filter?.service;
@@ -121,9 +131,10 @@ function useControls({
 			user_id,
 			listPartnerUserOptions,
 			listAirLineOptions,
-			fclCommodityOptions,
+			CommodityOptions,
 			originLocationOptions,
 			destinationLocationOptions,
+			chargeControls,
 		});
 	}
 

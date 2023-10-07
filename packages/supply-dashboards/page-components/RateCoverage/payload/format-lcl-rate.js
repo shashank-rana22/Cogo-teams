@@ -14,6 +14,7 @@ const formatLclRate = (data, user_id) => {
 		departure_dates     : data?.departure_dates,
 		line_items          : data.line_items.map((charge) => ({
 			...charge,
+			code      : charge.code_lcl,
 			price     : Number(charge.price),
 			min_price : Number(charge.min_price),
 		})),

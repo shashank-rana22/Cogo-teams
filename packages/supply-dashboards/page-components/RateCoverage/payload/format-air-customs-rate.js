@@ -5,7 +5,7 @@ const formatAirCustomsRate = (data, user_id) => {
 	const customCharges = data?.customs_line_items;
 	for (let i = 0; i < customCharges?.length; i += INCREMETN_VALUE) {
 		const obj = {
-			code     : customCharges[i].code,
+			code     : customCharges[i].code_air,
 			currency : customCharges[i].currency,
 			price    : Number(customCharges[i].price),
 			unit     : customCharges[i].unit,
@@ -16,7 +16,7 @@ const formatAirCustomsRate = (data, user_id) => {
 	const commodity = data.commodity === 'all_commodity' ? 'all_commodities' : data.commodity;
 
 	const payload = {
-		airport_id          : data.location_id,
+		airport_id          : data.origin_location_id,
 		trade_type          : data.trade_type,
 		container_size      : data.container_size,
 		container_type      : data.container_type,

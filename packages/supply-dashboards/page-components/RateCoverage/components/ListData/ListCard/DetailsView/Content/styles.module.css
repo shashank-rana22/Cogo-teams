@@ -7,17 +7,13 @@
 	flex-wrap: wrap;
 }
 
-.line {
-	height: 2px;
-	margin-top: 10px;
-	border: 1px #bdbdbd dashed;
-}
-
 .label {
+	margin-top: 4px;
 	color: #828282;
 }
 
 .value {
+	margin-top: 4px;
 	color: #221f20;
 }
 

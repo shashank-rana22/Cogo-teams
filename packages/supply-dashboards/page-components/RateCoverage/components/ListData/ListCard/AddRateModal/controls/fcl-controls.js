@@ -8,8 +8,9 @@ import styles from '../styles.module.css';
 const fclControls = ({
 	data,
 	listShippingLineOptions,
-	fclCommodityOptions,
+	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
+	chargeControls,
 }) => [
 	{
 		name    : 'service_provicer_details',
@@ -122,7 +123,7 @@ const fclControls = ({
 		span        : 3,
 		value       : data?.commodity,
 		disabled    : data?.commodity,
-		options     : fclCommodityOptions,
+		options     : CommodityOptions,
 		rules       : { required: 'commodity is required' },
 	},
 	{
@@ -260,11 +261,17 @@ const fclControls = ({
 		buttonText : 'Add Line Items',
 		controls   : [
 			{
-				name        : 'code',
-				type        : 'select',
-				span        : 1.5,
-				placeholder : 'Charge Name',
-				rules       : { required: 'code is required' },
+				name           : 'code_fcl_freight',
+				caret          : true,
+				type           : 'select',
+				showToolTip    : true,
+				value          : data?.origin_port?.id,
+				...chargeControls,
+				placeholder    : 'Select Charge',
+				className      : 'primary lg',
+				span           : 2,
+				defaultOptions : true,
+				rules          : { required: 'This is required' },
 			},
 			{
 				name        : 'unit',
@@ -282,13 +289,13 @@ const fclControls = ({
 			},
 			{
 				name        : 'price',
-				span        : 2,
+				span        : 1.5,
 				type        : 'number',
 				placeholder : 'Amount',
 			},
 			{
 				name        : 'market_price',
-				span        : 2,
+				span        : 1.5,
 				type        : 'number',
 				placeholder : 'Market Price',
 			},

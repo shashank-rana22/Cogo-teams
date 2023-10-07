@@ -6,8 +6,9 @@ import styles from '../styles.module.css';
 
 const lclControls = ({
 	data,
-	fclCommodityOptions,
+	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
+	chargeControls,
 }) => [
 	{
 		name    : 'service_provicer_details',
@@ -16,7 +17,7 @@ const lclControls = ({
 	},
 	{
 		name        : 'service_provider_id',
-		heading     : 'Service Provider',
+		label       : 'Service Provider',
 		type        : 'select',
 		placeholder : 'Service Provider',
 		span        : 4,
@@ -25,7 +26,7 @@ const lclControls = ({
 	},
 	{
 		name        : 'sourced_by_id',
-		heading     : 'Rate Provided by user',
+		label       : 'Rate Provided by user',
 		type        : 'select',
 		placeholder : 'Rate Provided by user',
 		value       : data?.sourced_by_id,
@@ -38,7 +39,7 @@ const lclControls = ({
 	},
 	{
 		name        : 'origin_location_id',
-		heading     : 'Origin Location',
+		label       : 'Origin Location',
 		type        : 'select',
 		placeholder : 'Origin Location',
 		span        : 4,
@@ -50,7 +51,7 @@ const lclControls = ({
 
 	{
 		name        : 'destination_location_id',
-		heading     : 'Destination Location',
+		label       : 'Destination Location',
 		type        : 'select',
 		span        : 4,
 		value       : data?.destination_port?.id,
@@ -61,13 +62,13 @@ const lclControls = ({
 	},
 	{
 		name        : 'commodity',
-		heading     : 'Commodity',
+		label       : 'Commodity',
 		type        : 'select',
 		placeholder : 'Commodity',
 		span        : 3,
 		value       : data?.commodity,
 		disabled    : data?.commodity,
-		options     : fclCommodityOptions,
+		options     : CommodityOptions,
 		rules       : { required: 'commodity is required' },
 	},
 
@@ -79,7 +80,7 @@ const lclControls = ({
 	},
 	{
 		name        : 'validity_start',
-		heading     : 'Validty Start',
+		label       : 'Validty Start',
 		type        : 'date_picker',
 		placeholder : 'Validity Start',
 		span        : 3,
@@ -91,7 +92,7 @@ const lclControls = ({
 	},
 	{
 		name        : 'validity_end',
-		heading     : 'Validity End',
+		label       : 'Validity End',
 		type        : 'date_picker',
 		className   : styles.date_filter,
 		placeholder : 'Validity End',
@@ -104,7 +105,7 @@ const lclControls = ({
 	{
 		name        : 'departure_dates',
 		type        : 'departure_date',
-		heading     : 'Departure Dates',
+		label       : 'Departure Dates',
 		span        : 4,
 		placeholder : 'Enter Departure Dates',
 		className   : 'primary sm',
@@ -145,13 +146,17 @@ const lclControls = ({
 		],
 		controls: [
 			{
-				name        : 'code',
-				type        : 'select',
-				span        : 2,
-				valueKey    : 'code',
-				placeholder : 'Charge Name',
-				className   : 'primary lg',
-				rules       : { required: 'This is required' },
+				name           : 'code_lcl',
+				caret          : true,
+				type           : 'select',
+				showToolTip    : true,
+				value          : '',
+				...chargeControls,
+				placeholder    : 'Select Charge',
+				className      : 'primary lg',
+				span           : 2,
+				defaultOptions : true,
+				rules          : { required: 'This is required' },
 			},
 			{
 				name        : 'unit',

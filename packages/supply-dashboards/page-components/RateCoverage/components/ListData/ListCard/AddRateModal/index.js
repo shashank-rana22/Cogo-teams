@@ -22,6 +22,7 @@ import useControls from './controls';
 import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
+const TWO_HUNDERD = 200;
 function AddRateModal({
 	showModal = true,
 	setShowModal = () => {},
@@ -61,7 +62,7 @@ function AddRateModal({
 
 	const values = watch();
 
-	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data });
+	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data, values });
 
 	const { finalFields } = FieldMutation({
 		fields,
@@ -87,31 +88,28 @@ function AddRateModal({
 
 	const handleSubmitData = async (formData) => {
 		const rate_id = await createRate(formData);
-		if (!rate_id) {
-			return;
-		}
 		if (source === 'rate_feedback') {
-			const id = await deleteFeedbackRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
-			if (id) {
+			const resp = await deleteFeedbackRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
+			if (resp === TWO_HUNDERD) {
 				handleSuccessActions();
 			}
 		}
 		if (source === 'rate_request') {
-			const id = await deleteRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
-			if (id) {
+			const resp = await deleteRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
+			if (resp === TWO_HUNDERD) {
 				handleSuccessActions();
 			}
 		}
 		if (source === 'live_bookings') {
-			const id = await updateFlashBookingRate({ data });
-			if (id) {
+			const resp = await updateFlashBookingRate({ data });
+			if (resp === TWO_HUNDERD) {
 				handleSuccessActions();
 			}
 		}
 		if (['critical_ports', 'expiring_rates', 'cancelled_shipments']
 			?.includes(source)) {
-			const id = await deleteRateJob({ rate_id, data: formData, id: data?.id });
-			if (id) {
+			const resp = await deleteRateJob({ rate_id, data: formData, id: data?.id });
+			if (!resp?.error) {
 				handleSuccessActions();
 			}
 		}
@@ -185,7 +183,9 @@ function AddRateModal({
 
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
-			{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
+			<Modal.Header title={(
+				<div>
+					{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
 			&& (
 				<div className={styles.service_content}>
 					<ServiceDetailsContent
@@ -199,8 +199,12 @@ function AddRateModal({
 					/>
 				</div>
 			)}
-			<Modal.Header title="Please Add Rate" />
+				</div>
+			)}
+			/>
+
 			<Modal.Body>
+				<div className={styles.title}>Please Add Rate</div>
 				<Layout
 					fields={finalFields}
 					control={control}

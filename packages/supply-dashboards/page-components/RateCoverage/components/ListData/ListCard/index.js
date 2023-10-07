@@ -84,14 +84,19 @@ function ListCard({
 				<div>
 					<div className={styles.head}>
 						{data?.updated_at && (
-							<div>
-								Booked On :
-								{' '}
-								{formatDate({
-									date       : data?.updated_at,
-									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-									formatType : 'date',
-								})}
+							<div style={{ display: 'flex' }}>
+								<div>
+									Booked On :
+									{' '}
+									{formatDate({
+										date       : data?.updated_at,
+										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+										formatType : 'date',
+									})}
+								</div>
+								<div className={styles.business_name}>
+									{data?.service_provider?.business_name || data?.service_provider?.name}
+								</div>
 							</div>
 						)}
 						{data?.created_at && (

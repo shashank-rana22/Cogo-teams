@@ -1,6 +1,9 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable custom-eslint/function-name-check */
-import { asyncFieldsOrganization, asyncFieldsOrganizationUsers, useGetAsyncOptions } from '@cogoport/forms';
+import {
+	asyncFieldsOrganization, asyncFieldsOrganizationUsers,
+	useGetAsyncOptions, asyncFieldsLocations,
+} from '@cogoport/forms';
 import { merge, startCase } from '@cogoport/utils';
 
 import useGetMainPortsOptions from '../../../RfqEnquiries/hooks/useGetMainPortsOptions';
@@ -32,6 +35,17 @@ function FieldMutation({ fields, values, chargeCodes, filter }) {
 		),
 	);
 
+	const origin = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params   : { filters: { type: values?.origin_type } },
+		includes : { default_params_required: true },
+		labelKey : 'display_name',
+	}));
+	const destination = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params   : { filters: { type: values?.destination_type } },
+		includes : { default_params_required: true },
+		labelKey : 'display_name',
+	}));
+
 	const finalFields = (fields || []).map((control) => {
 		const { name } = control;
 		let newControl = { ...control };
@@ -48,6 +62,12 @@ function FieldMutation({ fields, values, chargeCodes, filter }) {
 
 		if (name === 'destination_main_port_id') {
 			newControl = { ...newControl, ...mainPortOptions2 };
+		}
+		if (name === 'origin_location_id') {
+			newControl = { ...newControl, ...origin };
+		}
+		if (name === 'destination_location_id') {
+			newControl = { ...newControl, ...destination };
 		}
 
 		if (control?.controls) {

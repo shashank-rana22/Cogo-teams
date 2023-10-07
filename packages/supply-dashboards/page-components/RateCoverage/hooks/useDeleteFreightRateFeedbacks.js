@@ -37,15 +37,17 @@ const useDeleteFreightRateFeedbacks = (service = 'fcl_freight') => {
 		try {
 			const body = {
 				[keyToSend]     : [id],
-				closing_remarks : [checkboxValue || closing_remarks],
+				closing_remarks : [checkboxValue || closing_remarks || 'Rate Created'],
 			};
 
-			await trigger({
+			const resp = await trigger({
 				data: body,
 			});
+			if (resp) { return resp?.status; }
 		} catch (e) {
-			Toast.error('failed to cancel');
+			Toast.error('Failed To Cancel');
 		}
+		return null;
 	};
 
 	return {

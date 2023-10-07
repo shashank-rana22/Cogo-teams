@@ -19,17 +19,17 @@ const formatFtlRate = (val, user_id) => {
 		formattedValues.commodity = commodity;
 	}
 
-	const { transit_time_type } = val.transit_time;
-	let { transit_time_value } = val.transit_time;
-	transit_time_value = Number(transit_time_value);
+	const { transit_time_type } = val;
+	let { transit_time } = val;
 	if (transit_time_type === 'days') {
-		transit_time_value *= TOTAL_HOURS;
+		transit_time *= TOTAL_HOURS;
 	}
-	formattedValues.transit_time = transit_time_value;
 
-	const detention_time_type = val.detention_free_time.detention_free_time_type;
+	formattedValues.transit_time = transit_time;
+
+	const detention_time_type = val?.detention_free_time_type;
 	let detention_time_value = Number(
-		val.detention_free_time.detention_free_time_value,
+		val.detention_free_time,
 	);
 	if (detention_time_type === 'days') {
 		detention_time_value *= TOTAL_HOURS;
@@ -40,17 +40,17 @@ const formatFtlRate = (val, user_id) => {
 	const basicFreightObject = {
 		code     : 'BAS',
 		unit     : 'per_truck',
-		currency : val.price_per_truck.price_per_truck_type,
-		price    : val.price_per_truck.price_per_truck_value,
+		currency : val?.price_per_truck?.price_per_truck_type,
+		price    : val?.price_per_truck?.price_per_truck_value,
 		remarks  : [val.remarks],
 	};
 	LINE_ITEMS.push(basicFreightObject);
 
 	const fuelSurchargeObject = {
 		code     : 'FSC',
-		unit     : val.fuel_surcharge.fuel_surcharge_type,
+		unit     : val?.fuel_surcharge?.fuel_surcharge_type,
 		currency : GLOBAL_CONSTANTS.currency_code.INR,
-		price    : val.fuel_surcharge.fuel_surcharge_value,
+		price    : val?.fuel_surcharge?.fuel_surcharge_value,
 	};
 
 	LINE_ITEMS.push(fuelSurchargeObject);

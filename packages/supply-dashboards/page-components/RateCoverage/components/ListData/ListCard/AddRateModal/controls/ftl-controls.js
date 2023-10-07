@@ -5,7 +5,7 @@ import { truck_types } from '../../../../../configurations/truck_types';
 
 const ftlControls = ({
 	data,
-	fclCommodityOptions,
+	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
 }) => {
 	const controls = [
@@ -16,7 +16,7 @@ const ftlControls = ({
 		},
 		{
 			name        : 'service_provider_id',
-			heading     : 'Service Provider',
+			label       : 'Service Provider',
 			type        : 'select',
 			placeholder : 'Service Provider',
 			span        : 4,
@@ -25,7 +25,7 @@ const ftlControls = ({
 		},
 		{
 			name        : 'sourced_by_id',
-			heading     : 'Rate Provided by user',
+			label       : 'Rate Provided by user',
 			type        : 'select',
 			placeholder : 'Rate Provided by user',
 			value       : data?.sourced_by_id,
@@ -39,7 +39,7 @@ const ftlControls = ({
 		},
 		{
 			name        : 'origin_location_id',
-			heading     : 'Origin Location',
+			label       : 'Origin Location',
 			type        : 'select',
 			placeholder : 'Origin Location',
 			span        : 4,
@@ -51,7 +51,7 @@ const ftlControls = ({
 		{
 			name        : 'origin_main_port_id',
 			type        : 'select',
-			heading     : 'Origin Main port',
+			label       : 'Origin Main port',
 			placeholder : 'Origin Main port',
 			span        : 4,
 			rules       : { required: 'origin main port is required' },
@@ -59,7 +59,7 @@ const ftlControls = ({
 		{
 			name        : 'destination_location_id',
 			type        : 'select',
-			heading     : 'Destination Location',
+			label       : 'Destination Location',
 			span        : 4,
 			value       : data?.destination_port?.id,
 			disabled    : data?.destination_port?.id,
@@ -70,7 +70,7 @@ const ftlControls = ({
 		{
 			name        : 'destination_main_port_id',
 			type        : 'select',
-			heading     : 'Destination main port',
+			label       : 'Destination main port',
 			span        : 4,
 			placeholder : 'Destination main port',
 			rules       : { required: 'destination main port is required' },
@@ -78,7 +78,7 @@ const ftlControls = ({
 		{
 			name        : 'truck_type',
 			placeholder : 'Select Truck Type',
-			heading     : 'Truck Type',
+			label       : 'Truck Type',
 			type        : 'select',
 			options     : truck_types,
 			className   : 'primary lg',
@@ -88,19 +88,19 @@ const ftlControls = ({
 		},
 		{
 			name        : 'commodity',
-			heading     : 'Commodity',
+			label       : 'Commodity',
 			type        : 'select',
 			placeholder : 'Commodity',
-			span        : 3,
+			span        : 4,
 			value       : data?.commodity,
 			disabled    : data?.commodity,
-			options     : fclCommodityOptions,
+			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 		{
 			name        : 'body_type',
 			placeholder : 'Select Body Type',
-			heading     : 'Body Type',
+			label       : 'Body Type',
 			type        : 'select',
 			className   : 'primary lg',
 			value       : data?.truck_body_type,
@@ -115,88 +115,63 @@ const ftlControls = ({
 			rules: { required: true },
 		},
 		{
-			name      : 'transit_time',
-			heading   : 'Transit time',
-			type      : 'input-group',
-			span      : 4,
-			className : 'primary lg',
-			value     : {
-				transit_time_type  : 'hrs',
-				transit_time_value : data?.transit_time,
-			},
-			inputControls: [
+			label       : 'Transit Time',
+			name        : 'transit_time_type',
+			type        : 'select',
+			placeholder : 'Hrs',
+			span        : 2,
+			options     : [
 				{
-					name        : 'transit_time_type',
-					type        : 'select',
-					placeholder : 'Hrs',
-					options     : [
-						{
-							value : 'hrs',
-							label : 'Hrs',
-						},
-						{
-							value : 'days',
-							label : 'Days',
-						},
-					],
-					className: 'primary lg',
+					value : 'hrs',
+					label : 'Hrs',
 				},
 				{
-					name        : 'transit_time_value',
-					type        : 'number',
-					placeholder : '0',
-					className   : 'primary lg',
+					value : 'days',
+					label : 'Days',
 				},
 			],
-			rules: {
-				required  : 'Required',
-				inputType : 'group',
-			},
+			className: 'primary lg',
 		},
 		{
-			name      : 'detention_free_time',
-			heading   : 'Detention Free time',
-			type      : 'input-group',
-			span      : 4,
-			className : 'primary lg',
-			value     : {
-				detention_free_time_type  : 'hrs',
-				detention_free_time_value : data?.detention_free_time,
-			},
-			inputControls: [
+			name        : 'transit_time',
+			type        : 'number',
+			span        : 2,
+			placeholder : '0',
+			className   : 'primary lg',
+			rules       : { required: true },
+		},
+
+		{
+			label       : 'Detention time',
+			name        : 'detention_free_time_type',
+			type        : 'select',
+			placeholder : 'Hrs',
+			span        : 2,
+			options     : [
 				{
-					name        : 'detention_free_time_type',
-					type        : 'select',
-					placeholder : 'Hrs',
-					options     : [
-						{
-							value : 'hrs',
-							label : 'Hrs',
-						},
-						{
-							value : 'days',
-							label : 'Days',
-						},
-					],
-					className: 'primary lg',
+					value : 'hrs',
+					label : 'Hrs',
 				},
 				{
-					name        : 'detention_free_time_value',
-					type        : 'number',
-					placeholder : '0',
-					className   : 'primary lg',
+					value : 'days',
+					label : 'Days',
 				},
 			],
-			rules: {
-				required  : 'Required',
-				inputType : 'group',
-			},
+			className: 'primary lg',
+		},
+		{
+			name        : 'detention_free_time',
+			type        : 'number',
+			span        : 2,
+			placeholder : '0',
+			className   : 'primary lg',
+			rules       : { required: true },
 		},
 		{
 			name        : 'date_range',
 			placeholder : 'Select Range',
-			type        : 'datepicker',
-			heading     : 'Validity of Rate',
+			type        : 'date_picker',
+			label       : 'Validity of Rate',
 			span        : 4,
 			minDate     : new Date(),
 			pickerType  : 'range',
@@ -209,7 +184,7 @@ const ftlControls = ({
 			type        : 'select',
 			span        : 4,
 			value       : data?.unit,
-			heading     : 'Unit',
+			label       : 'Unit',
 			options     : [
 				{
 					label : 'Per Truck',
@@ -226,7 +201,7 @@ const ftlControls = ({
 		},
 		{
 			name        : 'min_chargeable_weight',
-			heading     : 'Min Chargeable Weight',
+			label       : 'Min Chargeable Weight',
 			type        : 'number',
 			placeholder : 'Select Min Chargeable Weight',
 			span        : 4,
@@ -235,75 +210,54 @@ const ftlControls = ({
 			isClearable : true,
 		},
 		{
-			name          : 'price_per_truck',
-			heading       : 'Basic Freight Rate',
-			type          : 'input-group',
-			span          : 4,
-			className     : 'primary lg',
-			inputControls : [
-				{
-					name        : 'currency',
-					span        : 1.5,
-					type        : 'select',
-					placeholder : 'Curr...',
-					options     : currencyOptions,
-				},
-				{
-					name        : 'price_per_truck_value',
-					type        : 'number',
-					placeholder : '0',
-					className   : 'primary lg',
-				},
-			],
-			rules: {
-				required  : 'Required',
-				inputType : 'group',
-			},
+			label       : 'Basic Freight Rate',
+			name        : 'currency',
+			span        : 2,
+			type        : 'select',
+			placeholder : 'Curr...',
+			options     : currencyOptions,
 		},
 		{
-			name          : 'fuel_surcharge',
-			heading       : 'Fuel Surcharge',
-			type          : 'input-group',
-			span          : 4,
-			className     : 'primary lg',
-			inputControls : [
+			name        : 'price_per_truck',
+			type        : 'number',
+			placeholder : '0',
+			span        : 2,
+			className   : 'primary lg',
+		},
+		{
+			label       : 'Fuel Surcharge',
+			name        : 'fuel_surcharge_type',
+			type        : 'select',
+			span        : 2,
+			placeholder : '% of Basic Freight',
+			style       : {
+				marginLeft  : '10%',
+				marginRight : '10%',
+			},
+			options: [
 				{
-					name        : 'fuel_surcharge_type',
-					type        : 'select',
-					placeholder : '% of Basic Freight',
-					style       : {
-						marginLeft  : '10%',
-						marginRight : '10%',
-					},
-					options: [
-						{
-							value : 'percentage_of_freight',
-							label : '% of Basic Freight',
-						},
-						{
-							value : 'per_truck',
-							label : 'Net',
-						},
-					],
-					className: 'primary lg',
+					value : 'percentage_of_freight',
+					label : '% of Basic Freight',
 				},
 				{
-					name        : 'fuel_surcharge_value',
-					type        : 'number',
-					placeholder : '0',
-					className   : 'primary lg hello',
+					value : 'per_truck',
+					label : 'Net',
 				},
 			],
-			rules: {
-				required  : 'Required',
-				inputType : 'group',
-			},
+			className: 'primary lg',
+		},
+		{
+			span        : 2,
+			name        : 'fuel_surcharge_value',
+			type        : 'number',
+			placeholder : '0',
+			className   : 'primary lg hello',
 		},
 		{
 			name        : 'remarks',
 			placeholder : 'Enter Remarks',
 			type        : 'textarea',
-			span        : 3.8,
+			span        : 4,
 			heading     : 'Remarks',
 			className   : 'primary lg ',
 		},

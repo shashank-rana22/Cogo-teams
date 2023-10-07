@@ -8,6 +8,7 @@ import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 
 import styles from './styles.module.css';
 
+const TWO_HUNDERD = 200;
 function CloseModal({
 	setShowModal = () => {},
 	showModal = true,
@@ -38,7 +39,7 @@ function CloseModal({
 				closing_remarks : data?.closing_remarks,
 				checkboxValue,
 			});
-			if (resp) {
+			if (resp === TWO_HUNDERD) {
 				handelSucessAction();
 			}
 		}
@@ -48,14 +49,14 @@ function CloseModal({
 				closing_remarks : data?.closing_remarks,
 				checkboxValue,
 			});
-			if (resp) {
+			if (resp === TWO_HUNDERD) {
 				handelSucessAction();
 			}
 		}
 		if (['critical_ports', 'expiring_rates', 'cancelled_shipments']
 			?.includes(source)) {
 			const resp = await deleteRateJob({ service: filter?.service, id: data?.id, checkboxValue });
-			if (resp) {
+			if (!resp?.error) {
 				handelSucessAction();
 			}
 		}

@@ -102,3 +102,8 @@
 	width: 100%;
 	margin-bottom: 8px;
 }
+
+.business_name {
+	margin-left: 20px;
+	font-weight: 600;
+}

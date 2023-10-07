@@ -1,8 +1,36 @@
 /* eslint-disable max-lines-per-function */
+import { currencyOptions } from '../../../../../configurations/helpers/constants';
+
+const LOCATION_TYPE_OPTIONS = [
+	{
+		label : 'City',
+		value : 'city',
+	},
+	{
+		label : 'Pin Code',
+		value : 'pincode',
+	},
+	{
+		label : 'Air Port',
+		value : 'airport',
+	},
+	{
+		label : 'Sea Port',
+		value : 'seaport',
+	},
+	{
+		label : 'Zone',
+		value : 'zone',
+	},
+	{
+		label : 'Country',
+		value : 'country',
+	},
+];
 
 const ltlControls = ({
 	data,
-	fclCommodityOptions,
+	CommodityOptions,
 }) => [
 	{
 		name    : 'service_provicer_details',
@@ -11,140 +39,90 @@ const ltlControls = ({
 	},
 	{
 		name        : 'service_provider_id',
-		heading     : 'Service Provider',
+		label       : 'Service Provider',
 		type        : 'select',
 		placeholder : 'Service Provider',
-		span        : 4,
+		span        : 6,
 		value       : data?.service_provider_id,
 		rules       : { required: 'service provider is required' },
 	},
 	{
 		name        : 'sourced_by_id',
-		heading     : 'Rate Provided by user',
+		label       : 'Rate Provided by user',
 		type        : 'select',
 		placeholder : 'Rate Provided by user',
 		value       : data?.sourced_by_id,
-		span        : 4,
+		span        : 6,
 		rules       : { required: 'rate provided by user is required' },
 	},
 
 	{
-		name          : 'origin',
-		label         : 'Origin',
-		type          : 'input-group',
-		className     : 'primary lg',
-		span          : 4,
-		inputControls : [
-			{
-				name        : 'origin_type',
-				type        : 'select',
-				placeholder : 'City',
-				options     : [
-					{
-						value : 'city',
-						label : 'City',
-					},
-					{
-						value : 'pincode',
-						label : 'Pin Code',
-					},
-					{
-						value : 'airport',
-						label : 'Air Port',
-					},
-					{
-						value : 'seaport',
-						label : 'Sea Port',
-					},
-					{
-						value : 'zone',
-						label : 'Zone',
-					},
-					{
-						value : 'country',
-						label : 'Country',
-					},
-				],
-				className: 'primary lg',
-			},
-			{
-				name        : 'origin_value',
-				type        : 'select',
-				placeholder : 'Select Origin',
-				className   : 'primary lg',
-				value       : origin,
-				isClearable : true,
-				// defaultOptions: true,
-			},
-		],
-		rules: {
-			required  : true,
-			inputType : 'group',
-		},
+		label       : 'Origin Type',
+		name        : 'origin_type',
+		type        : 'select',
+		placeholder : 'City',
+		span        : 2,
+		options     : LOCATION_TYPE_OPTIONS,
+		value       : data?.origin_location?.type,
 	},
 	{
-		name          : 'destination',
-		label         : 'Destination',
-		type          : 'input-group',
-		className     : 'primary lg',
-		span          : 4,
-		inputControls : [
-			{
-				name        : 'destination_type',
-				type        : 'select',
-				placeholder : 'City',
+		name           : 'origin_location_id',
+		span           : 4,
+		value          : data?.origin_location?.id,
+		asyncKey       : 'list_locations',
+		type           : 'async_select',
+		isClearable    : true,
+		defaultOptions : true,
+		placeholder    : 'Origin Location',
+		rules          : { required: 'This is required' },
+		params         : {
+			filters: {
+				status: 'active',
+			},
+			page_limit      : 20,
+			includes        : { default_params_required: true },
+			recommendations : true,
+		},
+	},
 
-				options: [
-					{
-						value : 'city',
-						label : 'City',
-					},
-					{
-						value : 'pincode',
-						label : 'Pin Code',
-					},
-					{
-						value : 'airport',
-						label : 'Air Port',
-					},
-					{
-						value : 'seaport',
-						label : 'Sea Port',
-					},
-					{
-						value : 'zone',
-						label : 'Zone',
-					},
-					{
-						value : 'country',
-						label : 'Country',
-					},
-				],
-				className: 'primary lg',
-			},
-			{
-				name        : 'destination_value',
-				type        : 'select',
-				placeholder : 'Select Destination',
-				className   : 'primary lg',
-				isClearable : true,
-			},
-		],
-		rules: {
-			required  : true,
-			inputType : 'group',
-		},
+	{
+		label       : 'Destination Type',
+		name        : 'destination_type',
+		type        : 'select',
+		value       : data?.destination_location?.type,
+		placeholder : 'City',
+		span        : 2,
+		options     : LOCATION_TYPE_OPTIONS,
 	},
 	{
-		name          : 'commodity',
-		placeholder   : 'Select Commodity',
-		label         : 'Commodity',
-		type          : 'select',
-		className     : 'primary lg',
-		commodityType : 'ftl_freight',
-		value         : fclCommodityOptions,
-		span          : 4,
-		rules         : {
+		name           : 'destination_location_id',
+		span           : 4,
+		value          : data?.destination_location?.id,
+		asyncKey       : 'list_locations',
+		type           : 'async_select',
+		isClearable    : true,
+		defaultOptions : true,
+		placeholder    : 'Destination Location',
+		rules          : { required: 'This is required' },
+		params         : {
+			filters: {
+				status: 'active',
+			},
+			page_limit      : 20,
+			includes        : { default_params_required: true },
+			recommendations : true,
+		},
+	},
+
+	{
+		name        : 'commodity',
+		placeholder : 'Select Commodity',
+		label       : 'Commodity',
+		type        : 'select',
+		value       : data?.commodity,
+		options     : CommodityOptions,
+		span        : 4,
+		rules       : {
 			required: true,
 		},
 	},
@@ -168,70 +146,55 @@ const ltlControls = ({
 		span: 4,
 	},
 	{
-		name          : 'transit_time',
-		label         : 'Transit time',
-		type          : 'input-group',
-		span          : 4,
-		value         : { transit_time_type: 'hrs', transit_time_value: '' },
-		className     : 'primary lg',
-		inputControls : [
+		label       : 'Transit time',
+		name        : 'transit_time_type',
+		type        : 'select',
+		placeholder : 'Hrs',
+		span        : 2,
+		options     : [
 			{
-				name        : 'transit_time_type',
-				type        : 'select',
-				placeholder : 'Hrs',
-				options     : [
-					{
-						value : 'hrs',
-						label : 'Hrs',
-					},
-					{
-						value : 'days',
-						label : 'Days',
-					},
-				],
-				className: 'primary lg',
+				value : 'hrs',
+				label : 'Hrs',
 			},
 			{
-				name        : 'transit_time_value',
-				type        : 'number',
-				placeholder : '0',
-				className   : 'primary lg',
+				value : 'days',
+				label : 'Days',
 			},
 		],
-		rules: {
-			required  : true,
-			inputType : 'group',
-		},
+	},
+	{
+		name        : 'transit_time',
+		type        : 'number',
+		placeholder : '0',
+		className   : 'primary lg',
+		span        : 2,
 	},
 	{
 		name        : 'date_range',
 		placeholder : 'Select Range',
-		type        : 'datepicker',
+		type        : 'date_range',
 		label       : 'Validity of Rate',
 		span        : 4,
-		pickerType  : 'range',
 		rules       : {
 			required: true,
 		},
-		className: 'primary lg date',
 	},
-
 	{
-		name           : 'currency',
-		placeholder    : 'Enter Currency',
-		label          : 'Currency',
-		type           : 'select',
-		optionsListKey : 'currencies',
-		span           : 4,
-		rules          : {
+		name        : 'currency',
+		placeholder : 'Enter Currency',
+		label       : 'Currency',
+		type        : 'select',
+		options     : currencyOptions,
+		span        : 4,
+		rules       : {
 			required: true,
 		},
 		className: 'primary lg',
 	},
 
 	{
-		name      : 'min_freight_charge',
-		value     : 'min_freight_charge',
+		name      : 'minimum_freight_charge',
+		value     : 'minimum_freight_charge',
 		label     : 'Min Freight Charge',
 		type      : 'number',
 		span      : 4,
@@ -242,8 +205,8 @@ const ltlControls = ({
 	},
 
 	{
-		name        : 'min_chargeable_weight',
-		value       : 'min_chargeable_weight',
+		name        : 'minimum_chargeable_weight',
+		value       : 'minimum_chargeable_weight',
 		placeholder : 'Min Chargeable Weight',
 		label       : 'Min Chargeable Weight( Per Kg )',
 		type        : 'number',
@@ -259,14 +222,27 @@ const ltlControls = ({
 		label       : 'Unit',
 		type        : 'select',
 		span        : 4,
-		rules       : {
+		options     : [
+			{
+				label : 'Per Kg',
+				value : 'per_kg',
+			},
+			{
+				label : 'Per shipment',
+				value : 'per_shipment',
+			},
+			{
+				label : 'Per package',
+				value : 'per_package',
+			},
+		],
+		rules: {
 			required: true,
 		},
-		className: 'primary lg',
 	},
 
 	{
-		name               : 'slabs',
+		name               : 'weight_slabs',
 		type               : 'fieldArray',
 		noDeleteButtonTill : 1,
 		buttonText         : '',

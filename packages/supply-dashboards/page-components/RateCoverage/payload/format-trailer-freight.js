@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format } from '@cogoport/utils';
 
 const DEFAULT_TRANSIT_TIME = 0;
@@ -39,25 +39,25 @@ const formatTrailerFreight = (val, user_id) => {
 	}
 	formattedValues.detention_free_time = detention_time_value;
 
-	const LINE_ITEMS = [];
-	const basicFreightObject = {
-		code     : 'BAS',
-		unit     : 'per_trailer',
-		currency : val.price_per_trailer.price_per_trailer_type,
-		price    : val.price_per_trailer.price_per_trailer_value,
-		remarks  : [val.remarks],
-	};
-	LINE_ITEMS.push(basicFreightObject);
+	// const LINE_ITEMS = [];
+	// const basicFreightObject = {
+	// 	code     : 'BAS',
+	// 	unit     : 'per_trailer',
+	// 	currency : val.price_per_trailer.price_per_trailer_type,
+	// 	price    : val.price_per_trailer.price_per_trailer_value,
+	// 	remarks  : [val.remarks],
+	// };
+	// LINE_ITEMS.push(basicFreightObject);
 
-	const fuelSurchargeObject = {
-		code     : 'FSC',
-		unit     : val.fuel_surcharge.fuel_surcharge_type,
-		currency : GLOBAL_CONSTANTS.currency_code.INR,
-		price    : val.fuel_surcharge.fuel_surcharge_value,
-	};
+	// const fuelSurchargeObject = {
+	// 	code     : 'FSC',
+	// 	unit     : val.fuel_surcharge.fuel_surcharge_type,
+	// 	currency : GLOBAL_CONSTANTS.currency_code.INR,
+	// 	price    : val.fuel_surcharge.fuel_surcharge_value,
+	// };
 
-	LINE_ITEMS.push(fuelSurchargeObject);
-	formattedValues.line_items = LINE_ITEMS;
+	// LINE_ITEMS.push(fuelSurchargeObject);
+	// formattedValues.line_items = LINE_ITEMS;
 	formattedValues.validity_start = format(val.date_range.startDate);
 	formattedValues.validity_end = format(val.date_range.endDate);
 	formattedValues.transport_modes = ['trailer'];
