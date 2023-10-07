@@ -1,34 +1,37 @@
+import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { publicRequest, request } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useImageUploader = ({ setEmailState, setRteDisabled }) => {
-	const uploadFile = useCallback(async (file, fileName) => {
-		const { data } = await request({
-			method : 'GET',
-			url    : '/get_media_upload_url',
-			params : {
-				file_name: fileName,
-			},
-		});
+const useImageUploader = ({ setEmailState = () => {}, setRteDisabled = () => {} }) => {
+	const uploadFile = useCallback(async ({ file, fileName }) => {
+		try {
+			const { data } = await request({
+				method : 'GET',
+				url    : '/get_media_upload_url',
+				params : {
+					file_name: fileName,
+				},
+			});
 
-		const { url, headers } = data;
+			const { url = '', headers } = data;
 
-		await publicRequest({
-			url,
-			data    : file,
-			method  : 'PUT',
-			headers : {
-				...headers,
-				'Content-Type': file.type,
-			},
-		});
+			await publicRequest({
+				url,
+				data    : file,
+				method  : 'PUT',
+				headers : {
+					...headers,
+					'Content-Type': file.type,
+				},
+			});
 
-		const finalUrl = url.split('?')[GLOBAL_CONSTANTS.zeroth_index];
+			const finalUrl = url.split('?')[GLOBAL_CONSTANTS.zeroth_index];
 
-		setEmailState((prev) => ({ ...prev, rteContent: `${prev.rteContent}\n<p><img src='${finalUrl}'/></p>` }));
-
-		return finalUrl;
+			setEmailState((prev) => ({ ...prev, rteContent: `${prev.rteContent}\n<p><img src='${finalUrl}'/></p>` }));
+		} catch (error) {
+			Toast.error(error);
+		}
 	}, [setEmailState]);
 
 	const imageHandler = useCallback(() => {
@@ -46,7 +49,7 @@ const useImageUploader = ({ setEmailState, setRteDisabled }) => {
 
 			const fileName = file.name;
 			setRteDisabled(true);
-			await uploadFile(file, fileName);
+			await uploadFile({ file, fileName });
 			setRteDisabled(false);
 		};
 	}, [uploadFile, setRteDisabled]);
