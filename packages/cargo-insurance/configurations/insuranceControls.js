@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 
 const getRegistrationControls = ({ billingType }) => ([
 	{
@@ -133,30 +134,54 @@ const getInsuranceControls = () => ([
 
 const getFileControls = () => ([
 	{
-		name  : 'invoiceDoc',
-		label : 'invoice Doc',
-		type  : 'fileUpload',
-		size  : 'sm',
-		rules : {
+		name       : 'invoiceDoc',
+		label      : 'invoice Doc',
+		type       : 'fileUpload',
+		size       : 'sm',
+		uploadIcon : (
+			<Image
+				src={GLOBAL_CONSTANTS.image_url.upload_icon}
+				width={40}
+				height={40}
+				alt="upload"
+			/>
+		),
+		rules: {
 			required: true,
 		},
 	},
 	{
-		name  : 'aadharDoc',
-		label : 'Aadhar Doc',
-		type  : 'fileUpload',
-		size  : 'sm',
-		rules : {
+		name       : 'aadharDoc',
+		label      : 'Aadhar Doc',
+		type       : 'fileUpload',
+		size       : 'sm',
+		uploadIcon : (
+			<Image
+				src={GLOBAL_CONSTANTS.image_url.upload_icon}
+				width={40}
+				height={40}
+				alt="upload"
+			/>
+		),
+		rules: {
 			required: true,
 		},
 
 	},
 	{
-		name  : 'gstDoc',
-		label : 'GST Doc',
-		type  : 'fileUpload',
-		size  : 'sm',
-		rules : {
+		name       : 'gstDoc',
+		label      : 'GST Doc',
+		type       : 'fileUpload',
+		size       : 'sm',
+		uploadIcon : (
+			<Image
+				src={GLOBAL_CONSTANTS.image_url.upload_icon}
+				width={40}
+				height={40}
+				alt="upload"
+			/>
+		),
+		rules: {
 			required: true,
 		},
 

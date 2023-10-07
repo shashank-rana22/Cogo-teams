@@ -1,5 +1,5 @@
 import { Button, Tabs, TabPanel, cl } from '@cogoport/components';
-import { IcMFsea, IcMFairport, IcMFland, IcMCross } from '@cogoport/icons-react';
+import { IcMFsea, IcMFairport, IcMFland } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import getInsuranceControls from '../../configuration/insuranceControls';
@@ -8,7 +8,7 @@ import useInsurance from '../../hooks/useInsurance';
 
 import styles from './styles.module.css';
 
-function Insurance({ organization = {}, src = '', showFormFn = () => {} }) {
+function Insurance({ organization = {}, src = '' }) {
 	const [activeTab, setActiveTab] = useState('sea');
 
 	const { formHook, loading, onSubmit, formValueRef } = useInsurance({ activeTab, organization });
@@ -33,11 +33,7 @@ function Insurance({ organization = {}, src = '', showFormFn = () => {} }) {
 						<TabPanel name="road" title="Surface" icon={<IcMFland />} />
 					</Tabs>
 				</div>
-				{src === 'cargo_insurance' ? (
-					<div className={styles.close_icon} role="presentation" onClick={() => showFormFn(false)}>
-						<IcMCross />
-					</div>
-				) : null}
+
 			</div>
 
 			<div className={styles.form_container}>

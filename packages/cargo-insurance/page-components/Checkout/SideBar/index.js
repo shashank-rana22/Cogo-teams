@@ -1,10 +1,11 @@
-import { cl } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMEdit } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
+import PersonalDetailsModal from './PersonalDetailsModal';
 import styles from './styles.module.css';
 
 const POC_DETAILS = {
@@ -75,6 +76,11 @@ const getFormatedAmount = ({ currency = 'INR', value }) => formatAmount({
 });
 
 function SideBar() {
+	const [detailModal, setDetailModal] = useState({
+		openModal : false,
+		info      : POC_DETAILS,
+	});
+
 	return (
 		<div style={{ width: '30%' }}>
 
@@ -85,9 +91,18 @@ function SideBar() {
 					{Object.keys(MAPPING).map((detail) => {
 						if (detail === 'edit') {
 							return (
-								<div key={detail} className={styles.edit_icon}>
-									<IcMEdit width={12} height={12} />
-								</div>
+								<Button
+									size="sm"
+									key={detail}
+									className={styles.edit_btn}
+									themeType="secondary"
+									onClick={() => setDetailModal({
+										openModal : true,
+										info      : POC_DETAILS,
+									})}
+								>
+									Edit
+								</Button>
 							);
 						}
 
@@ -133,6 +148,7 @@ function SideBar() {
 					))}
 				</div>
 			</div>
+			<PersonalDetailsModal detailModal={detailModal} setDetailModal={setDetailModal} />
 		</div>
 	);
 }

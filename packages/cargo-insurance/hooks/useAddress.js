@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { upperCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 const addressData = [
@@ -145,8 +146,10 @@ function useAddress({ billingType }) {
 	const getBillingAddress = () => {
 		try {
 			trigger({
-				billing_type    : billingType,
-				organization_id : '',
+				params: {
+					billing_type    : upperCase(billingType),
+					organization_id : '7cdbd9fb-76d0-45ae-9f06-a876d37fba82',
+				},
 			});
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));

@@ -17,8 +17,13 @@
 			flex-direction: row;
 			min-height: auto;
 			padding: 10px;
+			margin: 0;
 			border: 1px dashed #6fa5ab;
 			border-radius: 12px;
+		}
+
+		.ui_upload_droparea_heading {
+			color: #034afd;
 		}
 	}
 }
@@ -26,4 +31,9 @@
 .form_title {
 	margin-bottom: 20px;
 	font-weight: 600;
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
 }

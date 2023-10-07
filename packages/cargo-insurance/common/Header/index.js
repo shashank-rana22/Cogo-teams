@@ -1,7 +1,7 @@
-import { Button, Pill, cl } from '@cogoport/components';
+import { Pill, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMArrowBack, IcMPortArrow } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMCross, IcMEdit, IcMPortArrow } from '@cogoport/icons-react';
 import InsuranceForm from '@cogoport/insurance-form';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
@@ -39,7 +39,7 @@ function Header({ data = {}, draftData = {} }) {
 	const { hsCode: newHsCode, transitMode, originCountry, destinationCountry } = cargoDetails || {};
 
 	return (
-		<>
+		<div style={{ position: 'relative' }}>
 			<div className={cl`${styles.container} ${styles.flex_box}`}>
 				<div className={styles.back_container}>
 					<IcMArrowBack width={20} height={20} onClick={back} />
@@ -80,7 +80,13 @@ function Header({ data = {}, draftData = {} }) {
 							</Pill>
 						</div>
 
-						<Button size="sm" themeType="accent" onClick={() => setShowForm((prev) => !prev)}>Edit</Button>
+						<div
+							className={cl`${styles.edit_icon} ${styles.flex_box} ${showForm ? styles.rotate : ''}`}
+							onClick={() => setShowForm((prev) => !prev)}
+							role="presentation"
+						>
+							{!showForm ? <IcMEdit /> : <IcMCross />}
+						</div>
 					</div>
 				</div>
 
@@ -88,7 +94,8 @@ function Header({ data = {}, draftData = {} }) {
 			<div className={cl`${styles.drill_content} ${showForm ? styles.show_drill_content : ''}`}>
 				<InsuranceForm organization={orgDetails} src="cargo_insurance" showFormFn={setShowForm} />
 			</div>
-		</>
+			{showForm ? <div className={styles.overlay} /> : null}
+		</div>
 	);
 }
 

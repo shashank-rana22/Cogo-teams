@@ -1,4 +1,4 @@
-import React from 'react';
+import { Button } from '@cogoport/components';
 
 import FormItem from '../../../common/FormItem';
 import { getInsuranceControls, getFileControls } from '../../../configurations/insuranceControls';
@@ -18,6 +18,9 @@ function FormFields({ formHook = {} }) {
 
 			<div className={styles.form_elements}>
 				<FormItem formhook={formHook} controls={fileControls} />
+			</div>
+			<div className={styles.footer}>
+				<Button>Confirm Purchase</Button>
 			</div>
 		</div>
 	);

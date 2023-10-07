@@ -39,20 +39,10 @@
 	}
 }
 
-.edit_icon {
+.edit_btn {
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	width: 28px;
-	height: 28px;
-	cursor: pointer;
-	border: 1px solid #333;
-	border-radius: 50%;
-
-	>svg {
-		display: block;
-		margin: 6px auto;
-	}
 }
 
 .line_item_flex {
