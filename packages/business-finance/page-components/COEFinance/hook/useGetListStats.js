@@ -7,9 +7,11 @@ import { useEffect, useCallback } from 'react';
 
 const BILL_TYPE = ['PURCHASE', 'PROFORMA', 'CONSOLIDATED'];
 
-const formatDate = (date) => (
-	format(date, "yyyy-MM-dd'T'HH:mm:sso", {}, false)
-);
+const formatDate = (date) => {
+	if (!date) return undefined;
+
+	return (format(date, "yyyy-MM-dd'T'HH:mm:sso", {}, false));
+};
 const useGetListStats = ({ filters = {}, searchValue = '' }) => {
 	const profile = useSelector((state) => state);
 
@@ -21,36 +23,18 @@ const useGetListStats = ({ filters = {}, searchValue = '' }) => {
 	const showProforma = filters?.billType === 'PROFORMA' ? true : undefined;
 	const showConsolidated = filters?.billType === 'CONSOLIDATED' ? 'CONSOLIDATED' : undefined;
 
-	const billDatesStartFilters = 	!filters?.billDate?.startDate
-		? undefined : formatDate(filters?.billDate?.startDate);
-
-	const billDatesEndFilters = 	!filters?.billDate?.endDate
-		? undefined : formatDate(filters?.billDate?.endDate);
-
-	const dueDatesStartFilters = !filters?.dueDate?.startDate
-		? null : formatDate(filters?.dueDate?.startDate);
-
-	const dueDatesEndFilters = 	!filters?.dueDate?.endDate
-		? null : formatDate(filters?.dueDate?.endDate);
-
-	const updatedDateStartFilters = !filters?.updatedDate?.startDate
-		? null : formatDate(filters?.updatedDate?.startDate);
-
-	const updatedDateEndFilters = 	!filters?.updatedDate?.endDate
-		? null : formatDate(filters?.updatedDate?.endDate);
-
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url    : '/purchase/bills/list-stats',
 			method : 'get',
 			params : {
 				currency        : filters?.currency,
-				billDateFrom    : billDatesStartFilters,
-				billDateTo      : billDatesEndFilters || undefined,
-				dueDateFrom     : dueDatesStartFilters || undefined,
-				dueDateTo       : dueDatesEndFilters || undefined,
-				updatedDateFrom : updatedDateStartFilters || filters?.updatedDateFrom || undefined,
-				updatedDateTo   : updatedDateEndFilters || filters?.updatedDateTo || undefined,
+				billDateFrom    : formatDate(filters?.billDate?.startDate),
+				billDateTo      : formatDate(filters?.billDate?.endDate),
+				dueDateFrom     : formatDate(filters?.dueDate?.startDate),
+				dueDateTo       : formatDate(filters?.dueDate?.endDate),
+				updatedDateFrom : formatDate(filters?.updatedDate?.startDate) || filters?.updatedDateFrom || undefined,
+				updatedDateTo   : formatDate(filters?.updatedDate?.endDate) || filters?.updatedDateTo || undefined,
 				urgencyTag      : filters?.urgencyTag || undefined,
 				billType        : BILL_TYPE.includes(filters?.billType) ? 'BILL' : filters?.billType || undefined,
 				jobType        	: showConsolidated,
