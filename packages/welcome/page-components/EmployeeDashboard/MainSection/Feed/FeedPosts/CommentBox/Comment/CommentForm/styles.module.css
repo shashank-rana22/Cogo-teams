@@ -1,0 +1,35 @@
+.post_comment_container {
+	display: flex;
+	align-items: center;
+	margin-top: 4px;
+	background-color: #f5f5f5;
+	border-radius: 16px;
+
+	.text_area {
+		width: 100%;
+		padding-top: 4px;
+		padding-left: 8px;
+		font-family: var(--font-family);
+		resize: none;
+		background-color: #f5f5f5;
+		border: none;
+		border-radius: 16px;
+		outline: none;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+}
+
+.submit_comment_container {
+	display: flex;
+	flex: 0 0 20%;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 0 12px 0 4px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #ee3425;
+	cursor: pointer;
+}
