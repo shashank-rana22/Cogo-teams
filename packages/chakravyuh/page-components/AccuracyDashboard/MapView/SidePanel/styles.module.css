@@ -132,7 +132,7 @@
 	margin: 16px 0;
 	cursor: default !important;
 	background: #fdfbf7;
-	border: 1px solid transparent;
+	border: 1px solid #f9efe0;
 	border-radius: 6px;
 
 	&:hover {
@@ -152,14 +152,18 @@
 		}
 
 		h4 {
+			width: 100%;
 			margin: 0;
+			overflow: hidden;
 			font-size: 18px;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 		}
 	}
 
 	.left {
-		width: 100%;
-		border-right: 1px dotted #f2e3c3;
+		width: calc(100% - 80px);
+		border-right: 1px solid #f2e3c3;
 
 		>p {
 			margin: 12px 0 0;

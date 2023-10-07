@@ -205,7 +205,7 @@ function Map({
 				: (
 					<div className={cl`${styles.legend} ${styles.legend_container}`}>
 						<div className={styles.count_legend}>
-							{!!maxCount && COLORS.map((color, idx) => (
+							{(!!maxCount && Math.abs(maxCount) !== Infinity) && COLORS.map((color, idx) => (
 								<p key={color}>
 									{formatBigNumbers(range * (idx + (INITIAL_ZOOM / INITIAL_ZOOM)))}
 								</p>
