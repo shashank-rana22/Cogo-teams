@@ -6,7 +6,6 @@ const enrichment_request_filters = [
 		asyncKey    : 'list_enrichment_sources',
 		valueKey    : 'id',
 		params      : { page_limit: 20, filters: { status: 'active', service: 'contact_enrichment' } },
-		initialCall : true,
 		width       : '18%',
 	},
 	{

@@ -28,7 +28,7 @@ const onCardClick = ({
 	}
 
 	if (otherChannelType === 'email') {
-		const { setButtonType, setEmailState, buttonType } = mailProps;
+		const { setButtonType, setEmailState, buttonType, signature } = mailProps;
 
 		if (buttonType) {
 			Toast.warn('Email compose is already in progress');
@@ -39,7 +39,8 @@ const onCardClick = ({
 		setEmailState(
 			(prev) => ({
 				...prev,
-				body          : '',
+				rteContent    : '',
+				body          : signature,
 				subject       : '',
 				toUserEmail   : [userData?.email],
 				ccrecipients  : [],

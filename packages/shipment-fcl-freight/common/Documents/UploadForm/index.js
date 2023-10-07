@@ -9,7 +9,7 @@ import WalletForm from './WalletForm';
 function UploadForm({
 	showDoc = {},
 	setShowDoc = () => {},
-	activeWallet,
+	activeWallet = '',
 	setActiveWallet = () => {},
 	refetch = () => {},
 }) {

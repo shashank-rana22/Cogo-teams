@@ -7,7 +7,7 @@ import { VENDER_LIST_OPTIONS } from '../Constants';
 import useGetBySupplier from '../hooks/useGetBySupplier';
 
 import styles from './styles.module.css';
-import VendorsColumn from './vendorsColumn';
+import vendorsColumn from './vendorsColumn';
 
 interface ItemProps {
 	activeEntity: string,
@@ -54,7 +54,7 @@ function VendorsList({ activeEntity }:ItemProps) {
 					/>
 				</div>
 			</div>
-			<StyledTable data={list} columns={VendorsColumn(currency)} loading={loading} />
+			<StyledTable data={list} columns={vendorsColumn(currency)} loading={loading} />
 		</div>
 	);
 }

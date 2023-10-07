@@ -1,8 +1,3 @@
-import { ShipmentChat } from '@cogoport/shipment-chat';
-
-import Loader from '../../commons/Loader';
-import useListLastMileDeskShipments from '../../hooks/useListLastMileDeskShipments';
-
 import AppliedFilters from './AppliedFilters';
 import DeskTabs from './DeskTabs';
 import Filters from './Filters';
@@ -10,8 +5,6 @@ import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
 function Fcl() {
-	const { data = {}, loading } = useListLastMileDeskShipments();
-
 	return (
 		<div>
 			<div className={styles.header}>
@@ -24,16 +17,7 @@ function Fcl() {
 
 			<DeskTabs />
 
-			<ShipmentChat />
-
-			{loading
-				? <Loader />
-				: (
-					<ShipmentList
-						loading={loading}
-						data={data}
-					/>
-				)}
+			<ShipmentList />
 
 		</div>
 	);

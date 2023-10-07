@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	width: calc(100% - 30px);
+	margin-left: 10px;
+
+	:global {
+		.ui_multiselect_input_control {
+			display: flex;
+		}
+	}
+}
+
+.org_select {
+	width: 47%;
+}
+
+.users_select {
+	width: 60%;
+	margin-left: 10px;
+}
+
+.users_cc_select {
+	width: 100%;
+}
+
+.agent_label {
+	font-size: 12px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.lower_label {
+	font-size: 10px;
+	color: #838080;
+}

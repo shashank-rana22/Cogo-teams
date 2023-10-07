@@ -15,12 +15,12 @@ const EMAIL_SUBJECT_PREFIX_MAPPING = {
 };
 
 export function getSubject({ subject = '', newButtonType = '' }) {
-	const formatedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
+	const formattedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
 
 	const emailPrefix = EMAIL_SUBJECT_PREFIX_MAPPING[newButtonType] || '';
 
-	return (formatedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
-		? subject : `${emailPrefix}: ${formatedSubject}`;
+	return (formattedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
+		? subject : `${emailPrefix}: ${formattedSubject}`;
 }
 
 const getReplyMails = ({
@@ -110,12 +110,17 @@ export function getRecipientData({
 		bcc_mails = [],
 		message_id = '',
 		attachments = [],
-		draftQuillMessage = '',
+		draftQuillMessage = {},
+		custom_subject = {},
+		org_id = '',
+		orgData = {},
 	} = response || {};
 
-	const filteredRecipientData = recipientData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
-	const filteredCcData = ccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
-	const filteredBccData = bccData.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase());
+	const filteredRecipientData = recipientData?.filter(
+		(itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase(),
+	) || [];
+	const filteredCcData = ccData?.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase()) || [];
+	const filteredBccData = bccData?.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase()) || [];
 
 	const handleClick = ({
 		buttonType: newButtonType = '',
@@ -137,7 +142,8 @@ export function getRecipientData({
 				(prev) => ({
 					...prev,
 					emailVia,
-					body             : draftQuillMessage || body || '',
+					rteContent       : draftQuillMessage?.rteContent || body || '',
+					body             : draftQuillMessage?.body || '',
 					from_mail        : sender || '',
 					subject          : draftSubject || '',
 					toUserEmail      : to_mails || [],
@@ -146,6 +152,9 @@ export function getRecipientData({
 					formattedData,
 					eachMessage      : parent_email_message,
 					draftMessageData : eachMessage,
+					customSubject    : custom_subject,
+					orgId            : org_id,
+					orgData,
 				}),
 			);
 
@@ -180,6 +189,7 @@ export function getRecipientData({
 			(prev) => ({
 				...prev,
 				emailVia,
+				rteContent: '',
 				body:
 				emailVia === 'firebase_emails' && !CREATE_DRAFT_FOR.includes(newButtonType) ? signature : '',
 				from_mail        : activeMailAddress,

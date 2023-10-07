@@ -3,7 +3,11 @@ import { useState } from 'react';
 
 import { billedOptions, draftOptions, miscellaneousOptions, mismatchedOptions, notBilledOptions } from './options';
 import styles from './styles.module.css';
-import { formatReason } from './utilityFunctions';
+import formatReason from './utilityFunctions';
+
+const NOT_BILLED_LABEL = 'Charges not billed for same service in sales invoice';
+const BILLED_LABEL = 'Charges billed with less amount for same service in sales invoice';
+const DRAFT_LABEL = 'Sales invoice in draft state';
 
 function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalData = '' }) {
 	const [active, setActive] = useState('');
@@ -22,7 +26,7 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 				{`Please select the reason to ${(modalData || '').toLowerCase()}:`}
 			</div>
 			<Checkbox
-				label={`Profitability ${formatReason(chosenProfitabilityReason)}`}
+				label={`Profitability ${formatReason({ reason: chosenProfitabilityReason })}`}
 				checked={remarkData?.profitability}
 				onChange={() => {
 					setRemarkData((prev) => ({ ...prev, profitability: prev?.profitability ? undefined : {} }));
@@ -34,7 +38,7 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 				<div style={{ margin: '0 28px' }}>
 					<Radio
 						name="notBilled"
-						label="Charges not billed for same service in sales invoice"
+						label={NOT_BILLED_LABEL}
 						checked={remarkData?.profitability?.notBilled}
 						onChange={() => handleCategoryChange('notBilled')}
 					/>
@@ -44,7 +48,13 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 							<RadioGroup
 								options={notBilledOptions}
 								onChange={(val) => {
-									setRemarkData((prev) => ({ ...prev, profitability: { notBilled: val } }));
+									setRemarkData((prev) => ({
+										...prev,
+										profitability: {
+											notBilled:
+										`${NOT_BILLED_LABEL} - ${val}`,
+										},
+									}));
 									setActive('');
 								}}
 								value={typeof (remarkData?.profitability?.notBilled) === 'string'
@@ -56,7 +66,7 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 
 					<Radio
 						name="billed"
-						label="Charges billed with less amount for same service in sales invoice"
+						label={BILLED_LABEL}
 						checked={remarkData?.profitability?.billed}
 						onChange={() => handleCategoryChange('billed')}
 					/>
@@ -66,7 +76,13 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 							<RadioGroup
 								options={billedOptions}
 								onChange={(val) => {
-									setRemarkData((prev) => ({ ...prev, profitability: { billed: val } }));
+									setRemarkData((prev) => ({
+										...prev,
+										profitability: {
+											billed:
+										`${BILLED_LABEL} - ${val}`,
+										},
+									}));
 									setActive('');
 								}}
 								value={typeof (remarkData?.profitability?.billed) === 'string'
@@ -78,7 +94,7 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 
 					<Radio
 						name="draft"
-						label="Sales invoice in draft state"
+						label={DRAFT_LABEL}
 						checked={remarkData?.profitability?.draft}
 						onChange={() => handleCategoryChange('draft')}
 					/>
@@ -88,7 +104,13 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 							<RadioGroup
 								options={draftOptions}
 								onChange={(val) => {
-									setRemarkData((prev) => ({ ...prev, profitability: {	draft: val }	}));
+									setRemarkData((prev) => ({
+										...prev,
+										profitability: {
+											draft:
+										`${DRAFT_LABEL} - ${val}`,
+										},
+									}));
 									setActive('');
 								}}
 								value={typeof (remarkData?.profitability?.draft) === 'string'
@@ -138,7 +160,10 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 			) : undefined}
 
 			<Checkbox
-				label={`Document number mismatched ${formatReason(chosenMismatchedReason)}`}
+				label={formatReason({
+					reason         : chosenMismatchedReason,
+					isMainCategory : true,
+				}) || 'Document number mismatched'}
 				checked={remarkData?.mismatched}
 				onChange={() => {
 					setRemarkData((prev) => ({ ...prev, mismatched: prev?.mismatched ? undefined : true }));
@@ -151,7 +176,10 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 					<RadioGroup
 						options={mismatchedOptions}
 						onChange={(val) => {
-							setRemarkData((prev) => ({ ...prev, mismatched: val }));
+							setRemarkData((prev) => ({
+								...prev,
+								mismatched: `Document number mismatched - ${val}`,
+							}));
 							setActive('');
 						}}
 						value={typeof (remarkData?.mismatched) === 'string'
@@ -162,7 +190,7 @@ function AdditionalRemarks({ remarkData = {}, setRemarkData = () => {}, modalDat
 			</div>
 
 			<Checkbox
-				label={`Miscellaneous ${formatReason(chosenMiscReason)}`}
+				label={`Miscellaneous ${formatReason({ reason: chosenMiscReason })}`}
 				checked={remarkData?.miscellaneous}
 				onChange={() => {
 					setRemarkData((prev) => ({ ...prev, miscellaneous: prev?.miscellaneous ? undefined : true }));

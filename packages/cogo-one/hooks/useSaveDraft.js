@@ -8,12 +8,13 @@ import updateEmailState from '../helpers/updateEmailState';
 const INCREASE_MESSAGE_COUNT_BY_ONE = 1;
 
 const formatMailDraftMessage = ({
-	communication_id,
-	payload,
-	buttonType,
-	parentEmailMessage,
-	roomId,
-	body,
+	communication_id = '',
+	payload = {},
+	buttonType = '',
+	parentEmailMessage = {},
+	roomId = '',
+	emailState = {},
+	showOrgSpecificMail = false,
 }) => ({
 	agent_type           : 'bot',
 	conversation_type    : 'received',
@@ -35,7 +36,14 @@ const formatMailDraftMessage = ({
 		subject           : payload?.subject || '',
 		to_mails          : payload?.toUserEmail || [],
 		draft_type        : buttonType,
-		draftQuillMessage : body,
+		draftQuillMessage : {
+			rteContent : emailState?.rteContent || '',
+			body       : emailState?.body || '',
+		},
+		...(showOrgSpecificMail ? {
+			custom_subject : emailState?.customSubject || '',
+			orgData        : emailState?.orgData || {},
+		} : {}),
 	},
 });
 
@@ -45,30 +53,33 @@ const createDraftRoom = async ({
 	communication_id = '',
 	rteEditorPayload = {},
 	buttonType = '',
-	body = '',
+	emailState = {},
 }) => {
 	const emailCollection = collection(
 		firestore,
 		`${FIRESTORE_PATH.email}`,
 	);
 
+	const msgDocument = formatMailDraftMessage({
+		communication_id,
+		buttonType,
+		payload : rteEditorPayload,
+		roomId  : '',
+		emailState,
+	});
+
 	const newDraftRoomPayload = {
-		agent_type          : 'bot',
-		channel_type        : 'email',
-		created_at          : Date.now(),
-		show_in_drafts      : true,
-		session_type        : 'admin',
-		new_message_sent_at : Date.now(),
-		updated_at          : Date.now(),
-		no_of_drafts        : 1,
-		support_agent_id    : agentId,
-		last_draft_document : formatMailDraftMessage({
-			communication_id,
-			buttonType,
-			payload : rteEditorPayload,
-			roomId  : '',
-			body,
-		}),
+		agent_type            : 'bot',
+		channel_type          : 'email',
+		created_at            : Date.now(),
+		show_in_drafts        : true,
+		session_type          : 'admin',
+		new_message_sent_at   : Date.now(),
+		updated_at            : Date.now(),
+		last_message_document : msgDocument,
+		no_of_drafts          : 1,
+		support_agent_id      : agentId,
+		last_draft_document   : msgDocument,
 	};
 
 	const res = await addDoc(emailCollection, newDraftRoomPayload);
@@ -90,8 +101,9 @@ const updateMessage = async ({
 	isNewRoomCreated = false,
 	setEmailState = () => {},
 	isMinimize = false,
-	body = '',
 	setSendLoading = () => {},
+	emailState = {},
+	showOrgSpecificMail = false,
 }) => {
 	const updatePayload = formatMailDraftMessage({
 		communication_id,
@@ -99,17 +111,19 @@ const updateMessage = async ({
 		buttonType,
 		parentEmailMessage: parent_email_message,
 		roomId,
-		body,
+		emailState,
+		showOrgSpecificMail,
 	});
 
 	if (!isNewRoomCreated) {
 		const updateRoomPayload = {
-			show_in_drafts      : true,
-			new_message_sent_at : Date.now(),
-			no_of_drafts        : no_of_drafts + INCREASE_MESSAGE_COUNT_BY_ONE,
-			last_draft_document : updatePayload,
-			updated_at          : Date.now(),
-			session_type        : 'admin',
+			show_in_drafts        : true,
+			new_message_sent_at   : Date.now(),
+			no_of_drafts          : no_of_drafts + INCREASE_MESSAGE_COUNT_BY_ONE,
+			last_draft_document   : updatePayload,
+			last_message_document : updatePayload,
+			updated_at            : Date.now(),
+			session_type          : 'admin',
 		};
 
 		const roomDoc = doc(
@@ -176,8 +190,9 @@ const useSaveDraft = ({
 	rteEditorPayload = {},
 	parentMessageData = {},
 	setEmailState = () => {},
-	body = '',
 	setSendLoading = () => {},
+	emailState = {},
+	showOrgSpecificMail = false,
 }) => {
 	const agentId = useSelector((state) => state.profile?.user?.id);
 
@@ -201,7 +216,7 @@ const useSaveDraft = ({
 				communication_id,
 				rteEditorPayload,
 				buttonType,
-				body,
+				emailState,
 			});
 		}
 
@@ -220,8 +235,9 @@ const useSaveDraft = ({
 			isNewRoomCreated     : !roomId,
 			setEmailState,
 			isMinimize,
-			body,
 			setSendLoading,
+			emailState,
+			showOrgSpecificMail,
 		});
 	};
 

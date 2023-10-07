@@ -38,7 +38,7 @@ const useListCogooneFlashRatesLogs = ({ sidQuery, filtersParams }) => {
 				});
 				setPagination(page);
 			} catch (error) {
-				console.log('error:', error);
+				console.error('error:', error);
 			}
 		},
 		[trigger],

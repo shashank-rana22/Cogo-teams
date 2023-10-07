@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -30,6 +31,8 @@ const handleShipmentClick = ({
 		mobile_number = '',
 	} = activeUserChat || {};
 
+	const finalMobileNumber = mobile_number?.replace(GLOBAL_CONSTANTS?.regex_patterns?.first_number_contains_zeros, '');
+
 	const chatData = {
 		user_id                 : userId,
 		user_name               : name,
@@ -37,7 +40,7 @@ const handleShipmentClick = ({
 		email,
 		channel_type            : 'whatsapp',
 		countryCode             : mobile_country_code,
-		mobile_no               : `${mobile_country_code.replace('+', '')}${mobile_number}`,
+		mobile_no               : `${mobile_country_code.replace('+', '')}${finalMobileNumber}`,
 	};
 
 	setActiveTab((prev) => ({
