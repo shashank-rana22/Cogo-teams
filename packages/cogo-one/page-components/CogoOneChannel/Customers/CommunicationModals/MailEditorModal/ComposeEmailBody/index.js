@@ -138,7 +138,11 @@ function ComposeEmailBody(props) {
 			<div className={styles.rte_container}>
 				<RTEditor
 					value={emailState?.rteContent}
-					onChange={(val) => setEmailState((prev) => ({ ...prev, rteContent: val }))}
+					onChange={(val, delta, source, editor) => {
+						const rawRTEContent = editor.getText(val);
+
+						setEmailState((prev) => ({ ...prev, rteContent: val, rawRTEContent }));
+					}}
 					className={styles.styled_editor}
 					modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
 				/>
