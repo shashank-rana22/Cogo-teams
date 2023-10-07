@@ -214,7 +214,7 @@
 	margin-left: 3px;
 }
 
-.popover_container{
-	overflow: scroll !important;
+.popover_container {
 	align-items: flex-start !important;
+	overflow: scroll !important;
 }
