@@ -34,11 +34,10 @@ function useSendTeamsMessage({
 
 	const sendTeamsMessage = async ({ draftMessage = '', attachments = [] }) => {
 		try {
-			setLoading(true);
-
-			if (!draftMessage && isEmpty(attachments) && !draftRoomId) {
+			if ((!draftMessage && isEmpty(attachments)) || !draftRoomId || loading) {
 				return;
 			}
+			setLoading(true);
 
 			const groupId = await createOrGetCogooneGroup();
 
