@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { SECOND_IDX } from '../constants/map_constants';
 
-const DECIMALS = 12;
+const DECIMALS = 1;
 const MAX_SAFE_LIMIT = 10;
 const UNIT_MAPPING = {
 	T : 1000000000000,
