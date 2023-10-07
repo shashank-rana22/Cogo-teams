@@ -19,7 +19,6 @@ const getProps = (props) => {
 			color         : '#ddebc0',
 			leftSideText  : `${currentAllocatedCount} TEU Allocated`,
 			rightSideText : `${currentForecastCount} TEU Forecast`,
-			percent       : 'ff',
 			progress      : Math.min(((currentAllocatedCount / currentForecastCount) * HUNDRED), HUNDRED),
 		},
 		past_container_allocation: {

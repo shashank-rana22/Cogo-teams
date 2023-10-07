@@ -46,6 +46,11 @@ const getEmailBorder = ({ isDraft = false, emailStatus = '' }) => {
 	return '#EE3425';
 };
 
+const formatEmailBody = ({ message = '' }) => message?.replace(
+	GLOBAL_CONSTANTS.regex_patterns.line_break_regex,
+	'<br>',
+);
+
 function MailBody({
 	eachMessage = {},
 	hasPermissionToEdit = false,
@@ -55,7 +60,7 @@ function MailBody({
 	isTheFirstMessageId = '',
 }) {
 	const { source = '' } = formattedData || {};
-
+	const [initialLoad, setInitialLoad] = useState(true);
 	const { viewType } = mailProps;
 
 	const {
@@ -131,13 +136,14 @@ function MailBody({
 	const emailBorderColor = getEmailBorder({ isDraft, emailStatus });
 
 	useEffect(() => {
-		if (isFirstMessage) {
+		if (isFirstMessage && !expandedState && initialLoad) {
 			if (!bodyMessage && !isDraft) {
 				getEmailBody();
 			}
 			setExpandedState(true);
+			setInitialLoad(false);
 		}
-	}, [bodyMessage, getEmailBody, isDraft, isFirstMessage]);
+	}, [bodyMessage, expandedState, getEmailBody, initialLoad, isDraft, isFirstMessage]);
 
 	return (
 		<div className={styles.email_container}>
@@ -166,7 +172,7 @@ function MailBody({
 				<div
 					className={cl`${styles.body} 
 					${expandedState ? styles.expanded_body : styles.collapsed_body}`}
-					dangerouslySetInnerHTML={{ __html: bodyMessage || body }}
+					dangerouslySetInnerHTML={{ __html: formatEmailBody({ message: bodyMessage || body }) }}
 				/>
 
 				{hasPermissionToEdit ? (

@@ -56,8 +56,8 @@ function PayRunModal({ showPayrunModal = false, setShowPayrunModal = () => {}, a
 					</div>
 
 					<Toggle
-						onLabel="expense"
-						offLabel="bill"
+						onLabel="Expense"
+						offLabel="Bill"
 						size="sm"
 						value={toggleValue}
 						onChange={onToggleChange}

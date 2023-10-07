@@ -110,7 +110,9 @@ function MessageCardData({
 						)}
 					>
 						<div className={styles.user_name_title}>
-							{startCase(search_user_name) || 'User'}
+							{search_user_name !== 'website_user'
+								? (startCase(search_user_name) || 'User')
+								: mailToBeShown.join(', ')}
 						</div>
 					</Tooltip>
 

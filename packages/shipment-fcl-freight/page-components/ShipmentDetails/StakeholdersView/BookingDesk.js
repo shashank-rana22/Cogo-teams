@@ -64,11 +64,9 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 
 					<RolloverDetails />
 
-					{shipment_data?.is_job_closed && (
-						<JobStatus
-							shipment_data={shipment_data}
-						/>
-					)}
+					<JobStatus
+						shipment_data={shipment_data}
+					/>
 
 					<ShipmentChat />
 				</div>

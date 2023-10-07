@@ -5,7 +5,7 @@ import Announcements from '../../Announcements';
 import QuestionListComponent from '../../QuestionListComponent';
 import Header from '../QuestionList/Header';
 
-import Feedback from './Feedback';
+// import Feedback from './Feedback';
 import styles from './styles.module.css';
 import useTopicList from './useTopicList';
 
@@ -18,9 +18,9 @@ function TopicList({
 	setShow = () => {},
 	announcementProps = {},
 	selectedAnnouncement = '',
-	setModalData = () => {},
+	// setModalData = () => {},
 }) {
-	const [showFeedback, setShowFeedback] = useState(false);
+	// const [showFeedback, setShowFeedback] = useState(false);
 	const [activeTab, setActiveTab] = useState('faq');
 	const [input, setInput] = useState('');
 
@@ -125,55 +125,55 @@ function TopicList({
 		<div
 			className={cl`${styles.container} ${(showHistory || from === 'test_module') ? styles.hide_tabs : ''}`}
 		>
-			{showFeedback
+			{/* {showFeedback
 				? (
 					<Feedback setShowFeedback={setShowFeedback} />
 				)
 
 				: (
-					<>
-						<Header
-							activeTab={activeTab}
-							search={search}
-							setSearch={setSearch}
-							announcementHeaderProps={announcementHeaderProps}
-							topic={topic}
-							setTopic={setTopic}
-							question={question}
-							showHistory={showHistory}
-							setQuestion={setQuestion}
-							setShowHistory={setShowHistory}
-							setShowNotificationContent={setShowNotificationContent}
-							showNotificationContent={showNotificationContent}
-							fetchFaqNotification={fetchFaqNotification}
-							refetch={refetch}
-							from={from}
-							setInput={setInput}
-							input={input}
-							showFeedback={showFeedback}
-							setModalData={setModalData}
-							setShowFeedback={setShowFeedback}
-						/>
+					<> */}
+			<Header
+				activeTab={activeTab}
+				search={search}
+				setSearch={setSearch}
+				announcementHeaderProps={announcementHeaderProps}
+				topic={topic}
+				setTopic={setTopic}
+				question={question}
+				showHistory={showHistory}
+				setQuestion={setQuestion}
+				setShowHistory={setShowHistory}
+				setShowNotificationContent={setShowNotificationContent}
+				showNotificationContent={showNotificationContent}
+				fetchFaqNotification={fetchFaqNotification}
+				refetch={refetch}
+				from={from}
+				setInput={setInput}
+				input={input}
+				// showFeedback={showFeedback}
+				// setModalData={setModalData}
+				// setShowFeedback={setShowFeedback}
+			/>
 
-						<Tabs
-							activeTab={activeTab}
-							onChange={setActiveTab}
-							fullWidth
-							className={styles.tab_hide}
-							themeType="main_tabs"
-						>
-							{TABS_MAPPING.map((tabItem) => {
-								const { name, title, component: Component, props } = tabItem;
+			<Tabs
+				activeTab={activeTab}
+				onChange={setActiveTab}
+				fullWidth
+				className={styles.tab_hide}
+				themeType="main_tabs"
+			>
+				{TABS_MAPPING.map((tabItem) => {
+					const { name, title, component: Component, props } = tabItem;
 
-								return (
-									<TabPanel key={name} name={name} title={title}>
-										<Component {...props} />
-									</TabPanel>
-								);
-							})}
-						</Tabs>
-					</>
-				)}
+					return (
+						<TabPanel key={name} name={name} title={title}>
+							<Component {...props} />
+						</TabPanel>
+					);
+				})}
+			</Tabs>
+			{/* </>
+				)} */}
 		</div>
 	);
 }

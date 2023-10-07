@@ -4,7 +4,7 @@ import React from 'react';
 import AllStakeHolderTimeline from '../../AllStakeHolderTimeline';
 import EmptyState from '../../common/EmptyStateCommon';
 import ViewPdf from '../../common/ViewPdf';
-import allStakeHolderTimeLineData from '../../utils/formatAllStakeHolderData';
+import allStakeHolderTimeLineData from '../../utils/useFormatAllStakeHolderData';
 
 import { DOCUMENT_MAPPING, HEADER_MAPPING, REQUEST_MAPPING, TYPE_COMPONENT_MAPPING } from './contants';
 import styles from './styles.module.css';
@@ -13,6 +13,7 @@ function CommonPage({ row = {}, setDetailsModal = () => {}, refetch = () => {}, 
 	const {
 		level3 = {}, level2 = {}, level1 = {}, createdBy = {},
 		remark = '', status = '', updatedBy = {}, financeRemark = '',
+		type = '', data = {},
 	} = row || {};
 	const level0 = { ...createdBy, remark };
 	const request = REQUEST_MAPPING[header];
@@ -42,7 +43,9 @@ function CommonPage({ row = {}, setDetailsModal = () => {}, refetch = () => {}, 
 			</div>
 			<AllStakeHolderTimeline
 				timeline={allStakeHolderTimeLineData(
-					{ level0, level1, level2, level3, status, updatedBy, financeRemark },
+					{
+						level0, level1, level2, level3, status, updatedBy, financeRemark, type, data,
+					},
 				)}
 			/>
 			<div className={styles.request_heading}>

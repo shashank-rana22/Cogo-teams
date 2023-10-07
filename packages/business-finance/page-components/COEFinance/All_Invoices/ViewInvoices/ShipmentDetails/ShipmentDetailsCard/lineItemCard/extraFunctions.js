@@ -25,7 +25,7 @@ const extraFunctions = ({ chargesTable = [] }) => ({
 	},
 	renderTaxAmount: (row) => {
 		const { taxAmount = '-' } = row || {};
-		return <div style={{ color: getLineItemsMappedColor({ row, chargesTable }) }}>{taxAmount}</div>;
+		return <div>{taxAmount}</div>;
 	},
 	renderTotalCost: (row) => {
 		const { total = '-' } = row || {};

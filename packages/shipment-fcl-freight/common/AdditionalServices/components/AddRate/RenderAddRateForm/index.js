@@ -1,5 +1,6 @@
 import { SelectController, InputController, AsyncSelectController } from '@cogoport/forms';
 import UNIT_VALUE_MAPPING from '@cogoport/ocean-modules/constants/UNIT_VALUE_MAPPING';
+import { useEffect } from 'react';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -42,10 +43,15 @@ function RenderAddRateForm({
 	services = services?.find((service) => service?.service_type === service_type);
 
 	const selectedUnit = watch('unit');
-	const prefillValue = UNIT_VALUE_MAPPING?.[selectedUnit];
-	const prefillQuantity = selectedUnit === 'per_shipment' ? PREFILL_QUANTITY_ONE : services?.[prefillValue];
 
-	setValue('quantity', prefillQuantity);
+	const prefillValue = UNIT_VALUE_MAPPING?.[selectedUnit];
+
+	const prefillQuantity = selectedUnit === 'per_shipment'
+		? PREFILL_QUANTITY_ONE : services?.[prefillValue] || serviceData?.quantity;
+
+	useEffect(() => {
+		setValue('quantity', prefillQuantity);
+	}, [prefillQuantity, selectedUnit, setValue]);
 
 	return (
 		<form className={styles.form_container}>

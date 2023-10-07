@@ -24,7 +24,7 @@ function getAllowedEmailsList({ orgData = {} }) {
 
 	let options = [];
 
-	usersList.forEach((itm) => {
+	usersList?.forEach((itm) => {
 		if (itm?.email) {
 			options = [
 				...options,

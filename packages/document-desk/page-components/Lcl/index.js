@@ -1,5 +1,3 @@
-import { ShipmentChat } from '@cogoport/shipment-chat';
-
 import Header from '../../common/Header';
 import Loader from '../../common/Loader';
 import useLclListDocumentDesk from '../../hooks/useLclListDocumentDesk';
@@ -24,8 +22,6 @@ function Lcl() {
 			</div>
 
 			<StepperTabs />
-
-			<ShipmentChat />
 
 			<DeskTabs />
 
