@@ -1,8 +1,5 @@
 import { cl, Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import {
-	IcMPin, IcCPin,
-} from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -10,6 +7,7 @@ import React from 'react';
 import { togglePinChat } from '../../../../../helpers/teamsPinChatHelpers';
 import dateTimeConverter from '../../../../../utils/dateTimeConverter';
 
+import PopUp from './PopUp';
 import styles from './styles.module.css';
 
 const DEFAULT_UNREAD_MESSAGES = 0;
@@ -84,6 +82,12 @@ function GroupCard({
 								: self_unread_messages_count}
 						</div>
 					)}
+					<div className={styles.popover_styles}>
+						<PopUp
+							isPinned={is_pinned}
+							updatePinnedChats={updatePinnedChats}
+						/>
+					</div>
 				</div>
 				<div className={styles.description}>
 					<div className={cl`${styles.label} ${is_draft ? styles.draft_styles : ''}`}>
@@ -93,10 +97,6 @@ function GroupCard({
 						{renderTime}
 					</div>
 				</div>
-			</div>
-			<div className={styles.pinned_div}>
-				{is_pinned ? <IcCPin onClick={(e) => updatePinnedChats(e, 'unpin')} />
-					: <IcMPin onClick={(e) => updatePinnedChats(e, 'pin')} />}
 			</div>
 		</div>
 	);

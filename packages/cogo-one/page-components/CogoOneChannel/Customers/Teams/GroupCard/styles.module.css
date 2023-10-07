@@ -75,18 +75,6 @@
 	white-space: nowrap;
 }
 
-.pinned_div {
-	position: absolute;
-	top: 3px;
-	left: 2px;
-	cursor: pointer;
-	transition: 0.5s ease-in-out;
-
-	&:hover {
-		transform: rotate(-20deg) scale(1.1);
-	}
-}
-
 .styled_avatar {
 	background: #ffd761;
 	border-radius: 50% !important;
@@ -143,4 +131,9 @@
 	align-items: center;
 	justify-content: space-between;
 	margin-top: 5px;
+}
+
+.popover_styles {
+	width: 25px;
+	height: 25px;
 }
