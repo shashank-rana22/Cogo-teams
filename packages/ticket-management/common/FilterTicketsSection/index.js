@@ -18,12 +18,15 @@ function FilterTicketsSection({
 	const [searchParams, setSearchParams] = useState({ text: '', agent: '', category: '' });
 	const [modalData, setModalData] = useState(ticket_id ? { ticketId: ticket_id } : {});
 	const [isUpdated, setIsUpdated] = useState(false);
+	const [sortBy, setSortBy] = useState('');
 
 	const isAdmin = type === 'admin';
 
 	return (
 		<div className={cl`${styles.filter_tickets_container} ${isAdmin ? styles.bridge_gap : ''}`}>
 			<FilterType
+				sortBy={sortBy}
+				setSortBy={setSortBy}
 				setSearchParams={setSearchParams}
 				searchParams={searchParams}
 				isAdmin={isAdmin}
@@ -32,6 +35,7 @@ function FilterTicketsSection({
 			/>
 			<TicketsSection
 				date={date}
+				sortBy={sortBy}
 				searchParams={searchParams}
 				spectatorType={spectatorType}
 				isAdmin={isAdmin}

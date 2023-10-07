@@ -82,7 +82,7 @@
 .right_top_header {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: space-between;
 	width: 98%;
 	margin: 4px 8px 0 0;
 }
@@ -166,4 +166,15 @@
 
 .disable_icon {
 	cursor: not-allowed;
+}
+
+.actions_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.from_address {
+	padding-left: 16px;
+	font-size: 12px;
 }

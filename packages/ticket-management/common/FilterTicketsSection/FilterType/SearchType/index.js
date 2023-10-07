@@ -1,13 +1,19 @@
 import { Input, Select } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMDescendingSort, IcMSearchlight } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 
-import { getSpectatorTypeOptions } from '../../../../constants';
+import { sortByOptions, getSpectatorTypeOptions } from '../../../../constants';
 
 import styles from './styles.module.css';
 
 function SearchType({
-	searchParams = {}, setSearchParams = () => {}, isAdmin = false, spectatorType = '', setSpectatorType = () => {},
+	setSpectatorType = () => {},
+	setSearchParams = () => {},
+	setSortBy = () => {},
+	spectatorType = '',
+	searchParams = {},
+	isAdmin = false,
+	sortBy = '',
 }) {
 	const { t } = useTranslation(['myTickets']);
 
@@ -15,6 +21,7 @@ function SearchType({
 		<div className={styles.search_container}>
 			<Input
 				size="sm"
+				className={styles.global_search}
 				prefix={(
 					<IcMSearchlight
 						width={16}
@@ -29,8 +36,10 @@ function SearchType({
 					text: val,
 				}))}
 			/>
+
 			{!isAdmin && (
 				<Select
+					className={styles.spectator_type}
 					size="sm"
 					placeholder={t('myTickets:spectator_placeholder_text')}
 					value={spectatorType}
@@ -39,6 +48,18 @@ function SearchType({
 					isClearable
 				/>
 			)}
+
+			<Select
+				size="sm"
+				value={sortBy}
+				onChange={setSortBy}
+				placeholder="Sort by"
+				className={styles.sort_by}
+				options={sortByOptions({ t })}
+				isClearable
+				prefix={<IcMDescendingSort />}
+			/>
+
 		</div>
 	);
 }

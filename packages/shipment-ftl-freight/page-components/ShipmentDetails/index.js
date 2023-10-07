@@ -184,12 +184,10 @@ function ShipmentDetails() {
 
 					<div className={styles.toggle_chat}>
 
-						{shipment_data?.is_job_closed && (
-							<JobStatus
-								shipment_data={shipment_data}
-								job_open_request={job_open_request}
-							/>
-						)}
+						<JobStatus
+							shipment_data={shipment_data}
+							job_open_request={job_open_request}
+						/>
 
 						{conditionMapping?.scope ? (
 							<ScopeSelect
