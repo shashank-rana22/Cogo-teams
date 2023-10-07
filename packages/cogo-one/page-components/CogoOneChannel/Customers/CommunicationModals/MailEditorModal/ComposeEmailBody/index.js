@@ -1,9 +1,10 @@
 import { RTEditor, Input, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useMemo, useState } from 'react';
 
-import { getUserActiveMails } from '../../../../../../configurations/mail-configuration';
 import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
 import getRenderEmailBody from '../../../../../../helpers/getRenderEmailBody';
 import useImageUploader from '../../../../../../hooks/useImageUploader';
@@ -24,10 +25,7 @@ function ComposeEmailBody(props) {
 		handleCancel = () => {},
 		handleAttachmentDelete = () => {},
 		getDecodedData = () => {},
-		userEmailAddress,
 		setEmailState = () => {},
-		userSharedMails = [],
-		viewType = '',
 		errorValue = '',
 		attachments = [],
 		emailState = {},
@@ -39,17 +37,12 @@ function ComposeEmailBody(props) {
 		mailProps = {},
 		showOrgSpecificMail = false,
 		signature = '',
+		userActiveMails = [],
+		hideFromMail = false,
+		viewType = '',
 	} = props || {};
 	const [rteDisabled, setRteDisabled] = useState(false);
 	const { imageHandler } = useImageUploader({ setEmailState, setRteDisabled });
-
-	const userActiveMails = useMemo(() => (
-		[...new Set([
-			...getUserActiveMails({ userEmailAddress, viewType }),
-			...(userSharedMails || []),
-			...([emailState?.from_mail || activeMailAddress]),
-		])]
-	), [activeMailAddress, emailState?.from_mail, userEmailAddress, userSharedMails, viewType]);
 
 	const userActiveMailOptions = (userActiveMails || []).map(
 		(curr) => ({ label: curr, value: curr }),
@@ -69,23 +62,42 @@ function ComposeEmailBody(props) {
 		},
 	}), [imageHandler]);
 
-	return (
-		<>
-			<div className={styles.type_to}>
-				<div className={styles.sub_text}>
-					From:
-				</div>
-				<div className={styles.select_container}>
-					<Select
-						value={emailState?.from_mail || activeMailAddress}
-						onChange={(val) => setEmailState((prev) => ({ ...prev, from_mail: val }))}
-						disabled={buttonType !== 'send_mail'}
-						options={userActiveMailOptions}
-						size="sm"
-					/>
+	if (isEmpty(userActiveMails)) {
+		return (
+			<div className={styles.empty_view}>
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.no_email_permission}
+					width={200}
+					height={200}
+					alt="email"
+				/>
+				<div className={styles.no_permission_text}>
+					Oops you don&apos;t have Mail Access or you don&apos;t have active Mails
 				</div>
 			</div>
+		);
+	}
 
+	return (
+		<>
+			{hideFromMail
+				? null
+				: (
+					<div className={styles.type_to}>
+						<div className={styles.sub_text}>
+							From:
+						</div>
+						<div className={styles.select_container}>
+							<Select
+								value={emailState?.from_mail || activeMailAddress}
+								onChange={(val) => setEmailState((prev) => ({ ...prev, from_mail: val }))}
+								disabled={buttonType !== 'send_mail'}
+								options={userActiveMailOptions}
+								size="sm"
+							/>
+						</div>
+					</div>
+				)}
 			<Recipients
 				emailState={emailState}
 				handleChange={handleChange}
@@ -98,10 +110,15 @@ function ComposeEmailBody(props) {
 				setEmailState={setEmailState}
 				mailProps={mailProps}
 				showOrgSpecificMail={showOrgSpecificMail}
+				hideFromMail={hideFromMail}
+				viewType={viewType}
 			/>
 
 			<div className={styles.type_to}>
-				<div className={styles.sub_text}>
+				<div
+					className={styles.sub_text}
+					style={{ width: hideFromMail ? '30px' : '40px' }}
+				>
 					Sub:
 				</div>
 

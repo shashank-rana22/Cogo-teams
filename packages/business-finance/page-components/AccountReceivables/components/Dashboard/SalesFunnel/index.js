@@ -1,37 +1,24 @@
 import { Tooltip, Placeholder, Select } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { getSalesFunnelOptions } from '../../../constants';
+import { getSalesFunnelOptions } from '../../../constants/index.ts';
 
 import styles from './styles.module.css';
 
-interface SalesFunnelData {
-	draftInvoicesCount?: string,
-	draftToFinanceAcceptedPercentage?: string,
-	financeAcceptedInvoiceCount?: string,
-	financeToIrnPercentage?: string,
-	irnGeneratedInvoicesCount?: string,
-	settledInvoicesCount?: string,
-	settledPercentage?: string
-}
-
-interface SalesFunnelProps {
-	salesFunnelData?: SalesFunnelData,
-	salesFunnelMonth?: string,
-	setSalesFunnelMonth?: (p:string)=>void,
-	salesFunnelLoading?: boolean
-	entityCode?: string
-}
+const FIRST_ARRAY_SIZE = 4;
+const DEFAULT_VALUE = 0;
 
 function SalesFunnel({
 	salesFunnelData, salesFunnelMonth, setSalesFunnelMonth,
 	salesFunnelLoading, entityCode,
-}: SalesFunnelProps) {
+}) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
-
+	const d = new Date();
+	const currentMonth = GLOBAL_CONSTANTS.month_name[d.getMonth()];
 	const {
 		draftInvoicesCount = '',
 		draftToFinanceAcceptedPercentage = '',
@@ -42,35 +29,35 @@ function SalesFunnel({
 		settledPercentage = '',
 	} = salesFunnelData || {};
 
-	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
+	const { irn_label: irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 
 	const salesFunnel = [
 		{
 			id         : 1,
 			name       : t('draft'),
-			count      : draftInvoicesCount || 0,
-			percentage : draftToFinanceAcceptedPercentage || 0,
+			count      : draftInvoicesCount || DEFAULT_VALUE,
+			percentage : draftToFinanceAcceptedPercentage || DEFAULT_VALUE,
 		},
 		{
 			id         : 2,
 			name       : t('finance_accepted'),
-			count      : financeAcceptedInvoiceCount || 0,
-			percentage : financeToIrnPercentage || 0,
+			count      : financeAcceptedInvoiceCount || DEFAULT_VALUE,
+			percentage : financeToIrnPercentage || DEFAULT_VALUE,
 		},
 		{
 			id         : 3,
 			name       : `${irnLabel} ${t('generated')}`,
-			count      : irnGeneratedInvoicesCount || 0,
-			percentage : settledPercentage || 0,
+			count      : irnGeneratedInvoicesCount || DEFAULT_VALUE,
+			percentage : settledPercentage || DEFAULT_VALUE,
 		},
 		{
 			id    : 4,
 			name  : t('settled'),
-			count : settledInvoicesCount || 0,
+			count : settledInvoicesCount || DEFAULT_VALUE,
 		},
 	];
 
-	const onChange = (val:string) => {
+	const onChange = (val) => {
 		setSalesFunnelMonth(val);
 	};
 	return (
@@ -102,18 +89,18 @@ function SalesFunnel({
 					</div>
 					<div className={styles.border} />
 				</div>
-				<div>
+				<div className={styles.date_filter}>
 					<Select
 						value={salesFunnelMonth}
-						onChange={(val:string) => onChange(val)}
-						placeholder={t('by_month_placeholder')}
+						onChange={(val) => onChange(val)}
+						placeholder={currentMonth}
 						options={getSalesFunnelOptions(t)}
 						isClearable
 					/>
 				</div>
 			</div>
 
-			{salesFunnelLoading ? ([1, 2, 3, 4].map((item) => (
+			{salesFunnelLoading ? ([...Array(FIRST_ARRAY_SIZE).keys()].map((item) => (
 				<div key={item} className={styles.sales_funnel_loader}>
 
 					<Placeholder className={styles.sales_sub_funnel_loader} />
@@ -140,11 +127,11 @@ function SalesFunnel({
 								</div>
 							</div>
 						</div>
-						{ item.name !== 'Settled' && (
+						{item.name !== 'Settled' && (
 							<>
 								<div className={styles.vertical_line} />
 								<div className={styles.count_container}>
-									{ item.percentage}
+									{item.percentage}
 									%
 								</div>
 								<div className={styles.vertical_line} />
