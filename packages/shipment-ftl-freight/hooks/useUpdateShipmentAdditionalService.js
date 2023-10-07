@@ -32,6 +32,7 @@ const useUpdateShipmentAdditionalService = ({
 			refetch();
 		} catch (err) {
 			toastApiError(err);
+			throw new Error(err);
 		}
 	};
 

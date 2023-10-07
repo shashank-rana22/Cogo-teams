@@ -72,6 +72,8 @@ function JournalVoucher({ entityCode }) {
 					setShow={setShow}
 					onClose={onClose}
 					refetch={refetch}
+					setJvSearch={() => {}}
+					setDryRun={() => {}}
 				/>
 			) : null}
 			{showBulkJV ? (

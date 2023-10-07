@@ -18,7 +18,7 @@ const useCheckCustomerQuotationConflict = ({ orgId = '' }) => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	}, [orgId, trigger]);
 

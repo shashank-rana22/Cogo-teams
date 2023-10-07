@@ -15,12 +15,12 @@ const EMAIL_SUBJECT_PREFIX_MAPPING = {
 };
 
 export function getSubject({ subject = '', newButtonType = '' }) {
-	const formatedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
+	const formattedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
 
 	const emailPrefix = EMAIL_SUBJECT_PREFIX_MAPPING[newButtonType] || '';
 
-	return (formatedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
-		? subject : `${emailPrefix}: ${formatedSubject}`;
+	return (formattedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
+		? subject : `${emailPrefix}: ${formattedSubject}`;
 }
 
 const getReplyMails = ({
@@ -113,6 +113,7 @@ export function getRecipientData({
 		draftQuillMessage = {},
 		custom_subject = {},
 		org_id = '',
+		orgData = {},
 	} = response || {};
 
 	const filteredRecipientData = recipientData?.filter(
@@ -153,6 +154,7 @@ export function getRecipientData({
 					draftMessageData : eachMessage,
 					customSubject    : custom_subject,
 					orgId            : org_id,
+					orgData,
 				}),
 			);
 
