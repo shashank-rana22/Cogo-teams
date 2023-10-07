@@ -19,7 +19,7 @@ function JobStatus({ shipment_data = {}, job_open_request = false }) {
 		incidentStatusData = {},
 		incidentStatusLoading = false,
 		incidentStatusRefetch = () => {},
-	} = useCheckIncidentStatus({ defaultParams });
+	} = useCheckIncidentStatus({ defaultParams, isJobClosed: shipment_data?.is_job_closed });
 
 	const isNotIncident = isEmpty(incidentStatusData);
 
@@ -39,42 +39,46 @@ function JobStatus({ shipment_data = {}, job_open_request = false }) {
 		);
 	}
 
-	return (
-		<div className={styles.job_closed_container}>
-			{!isNotIncident ? (
-				<Tooltip
-					content={`Incident ID: ${incidentStatusData?.incidentId || '--'}`}
-					placement="bottom"
-					interactive
-					disabled={!incidentStatusData?.incidentId}
-				>
-					<Pill className={styles.tooltip}>Job Open Requested</Pill>
-				</Tooltip>
-			) : null}
+	if (shipment_data?.is_job_closed) {
+		return (
+			<div className={styles.job_closed_container}>
+				{!isNotIncident ? (
+					<Tooltip
+						content={`Incident ID: ${incidentStatusData?.incidentId || '--'}`}
+						placement="bottom"
+						interactive
+						disabled={!incidentStatusData?.incidentId}
+					>
+						<Pill className={styles.tooltip}>Job Open Requested</Pill>
+					</Tooltip>
+				) : null}
 
-			<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
+				<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
 
-			{(job_open_request && isNotIncident) ? (
-				<Button
-					className={styles.job_reopen_button}
-					themeType="link"
-					size="md"
-					onClick={() => setShowModal(true)}
-				>
-					Re-open
-				</Button>
-			) : null}
+				{(job_open_request && isNotIncident) ? (
+					<Button
+						className={styles.job_reopen_button}
+						themeType="link"
+						size="md"
+						onClick={() => setShowModal(true)}
+					>
+						Re-open
+					</Button>
+				) : null}
 
-			{showModal ? (
-				<ReOpenJob
-					shipmentData={shipment_data}
-					showModal={showModal}
-					setShowModal={setShowModal}
-					incidentStatusRefetch={incidentStatusRefetch}
-				/>
-			) : null}
-		</div>
-	);
+				{showModal ? (
+					<ReOpenJob
+						shipmentData={shipment_data}
+						showModal={showModal}
+						setShowModal={setShowModal}
+						incidentStatusRefetch={incidentStatusRefetch}
+					/>
+				) : null}
+			</div>
+		);
+	}
+
+	return null;
 }
 
 export default JobStatus;

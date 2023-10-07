@@ -253,6 +253,9 @@ const GLOBAL_CONSTANTS = {
 
 	months: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
 
+	month_name: ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+		'August', 'September', 'October', 'November', 'December'],
+
 	image_url: {
 		empty_state_margins_url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
 		empty_state_margins_breakup_url:
@@ -718,6 +721,7 @@ const GLOBAL_CONSTANTS = {
 	trade_types: [
 		{ value: 'import', label: 'Import' },
 		{ value: 'export', label: 'Export' },
+		{ value: 'domestic', label: 'Domestic' },
 	],
 	service_supported_countries: {
 		feature_supported_service: {

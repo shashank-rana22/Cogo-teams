@@ -21,7 +21,7 @@ const useDeleteTaggedDocuments = ({ generateInvoice = () => {} }) => {
 			method  : 'delete',
 			authKey : 'delete_purchase_payrun_documents',
 		},
-		{ manual: false },
+		{ manual: true },
 	);
 
 	const deleteTaggedDocuments = async ({ itemData = {} }) => {

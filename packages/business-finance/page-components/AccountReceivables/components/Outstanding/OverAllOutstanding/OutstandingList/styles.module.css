@@ -127,8 +127,7 @@
 .popover_wrapper {
 	display: flex;
 	justify-content: flex-end;
-	width: 72%;
-	padding-right: 50px;
+	padding-right: 340px;
 	margin-top: -23px;
 }
 
