@@ -89,11 +89,20 @@
 	.reload_btn {
 		position: absolute;
 		right: 0;
+		width: 40px;
+		height: 40px;
+		padding: 10px;
+		color: #221f20;
+		background-color: #f6f6f6;
+		border-radius: 50%;
 		transition: all 300ms ease-in-out;
+		transform: rotate(90deg);
 
 		&:hover {
+			color: #fff;
 			cursor: pointer;
-			scale: 1.15;
+			background-color: #221f20;
+			transform: rotate(45deg);
 		}
 
 		&:active {

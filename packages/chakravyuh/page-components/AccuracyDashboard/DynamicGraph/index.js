@@ -38,7 +38,7 @@ function DynamicGraph({ globalFilters = {}, setGlobalFilters = () => {} }) {
 						key={key}
 						className={styles.graph_placeholder}
 						width="100%"
-						height="400px"
+						height={`${675 - key * 225}px`}
 						margin="24px 0"
 					/>
 				))}
