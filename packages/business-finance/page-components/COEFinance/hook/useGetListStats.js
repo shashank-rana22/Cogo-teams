@@ -21,28 +21,22 @@ const useGetListStats = ({ filters = {}, searchValue = '' }) => {
 	const showProforma = filters?.billType === 'PROFORMA' ? true : undefined;
 	const showConsolidated = filters?.billType === 'CONSOLIDATED' ? 'CONSOLIDATED' : undefined;
 
-	const billDatesStartFilters = 	(filters?.billDate?.startDate === undefined
-		|| filters?.billDate?.startDate === null)
-		? null : formatDate(filters?.billDate?.startDate);
+	const billDatesStartFilters = 	!filters?.billDate?.startDate
+		? undefined : formatDate(filters?.billDate?.startDate);
 
-	const billDatesEndFilters = 	(filters?.billDate?.endDate === undefined
-		|| filters?.billDate?.endDate === null)
-		? null : formatDate(filters?.billDate?.endDate);
+	const billDatesEndFilters = 	!filters?.billDate?.endDate
+		? undefined : formatDate(filters?.billDate?.endDate);
 
-	const dueDatesStartFilters = 	(filters?.dueDate?.startDate === undefined
-		|| filters?.dueDate?.startDate === null)
+	const dueDatesStartFilters = !filters?.dueDate?.startDate
 		? null : formatDate(filters?.dueDate?.startDate);
 
-	const dueDatesEndFilters = 	(filters?.dueDate?.endDate === undefined
-		|| filters?.dueDate?.endDate === null)
+	const dueDatesEndFilters = 	!filters?.dueDate?.endDate
 		? null : formatDate(filters?.dueDate?.endDate);
 
-	const updatedDateStartFilters = 	(filters?.updatedDate?.startDate === undefined
-		|| filters?.updatedDate?.startDate === null)
+	const updatedDateStartFilters = !filters?.updatedDate?.startDate
 		? null : formatDate(filters?.updatedDate?.startDate);
 
-	const updatedDateEndFilters = 	(filters?.updatedDate?.endDate === undefined
-		|| filters?.updatedDate?.endDate === null)
+	const updatedDateEndFilters = 	!filters?.updatedDate?.endDate
 		? null : formatDate(filters?.updatedDate?.endDate);
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -51,7 +45,7 @@ const useGetListStats = ({ filters = {}, searchValue = '' }) => {
 			method : 'get',
 			params : {
 				currency        : filters?.currency,
-				billDateFrom    : billDatesStartFilters || undefined,
+				billDateFrom    : billDatesStartFilters,
 				billDateTo      : billDatesEndFilters || undefined,
 				dueDateFrom     : dueDatesStartFilters || undefined,
 				dueDateTo       : dueDatesEndFilters || undefined,
