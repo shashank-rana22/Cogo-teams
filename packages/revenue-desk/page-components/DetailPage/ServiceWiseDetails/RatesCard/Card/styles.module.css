@@ -213,3 +213,8 @@
 .infoicon {
 	margin-left: 3px;
 }
+
+.popover_container{
+	overflow: scroll !important;
+	align-items: flex-start !important;
+}
