@@ -51,7 +51,7 @@ const useGetListStats = ({ filters = {}, searchValue = '' }) => {
 		try {
 			await trigger();
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	}, [trigger]);
 
