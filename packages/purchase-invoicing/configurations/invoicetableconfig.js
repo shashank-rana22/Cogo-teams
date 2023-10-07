@@ -125,9 +125,11 @@ export const invoiceconfig = ({ utrData = [], utrLoading = false }) => [
 						placement="left"
 						content={(
 							<div className={styles.contentutr}>
-								{(utrDetailsBills || []).map(({ transactionRef, createdAt, billId }) => (
-									<>
-										<div key={billId} className={styles.utrval}>{transactionRef}</div>
+								{!isEmpty(utrDetailsBills) ? (utrDetailsBills || []).map(({
+									transactionRef, createdAt, billId,
+								}) => (
+									<div key={billId} className={styles.singleutr}>
+										<div className={styles.utrval}>{transactionRef}</div>
 										{utrDetailsBills?.[GLOBAL_CONSTANTS.zeroth_index]?.createdAt
 											? formatDate({
 												date       : createdAt,
@@ -136,15 +138,22 @@ export const invoiceconfig = ({ utrData = [], utrLoading = false }) => [
 												formatType : 'dateTime',
 												separator  : '-',
 											}) : '-'}
-									</>
+									</div>
 
+								)) : (utr_nos || []).map((number) => (
+									<div
+										key={number}
+										className={styles.utrval}
+									>
+										{number}
+									</div>
 								))}
 							</div>
 						)}
 					>
 						<div className={styles.utr}>
 							{utrDetailsBills?.[GLOBAL_CONSTANTS.zeroth_index]?.transactionRef
-							|| utr_nos?.[GLOBAL_CONSTANTS.zeroth_index]}
+								|| utr_nos?.[GLOBAL_CONSTANTS.zeroth_index]}
 						</div>
 						<div className={styles.utr}>
 							{utrDetailsBills?.[GLOBAL_CONSTANTS.zeroth_index]?.createdAt

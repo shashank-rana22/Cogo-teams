@@ -154,6 +154,7 @@ function Footer({ data, shipmentData, singleServiceData, setSellRates, sellRates
 						<Popover
 							placement="top"
 							trigger="mouseenter"
+							className={styles.popover_container}
 							render={(
 								<ShowLineItems
 									serviceType={singleServiceData?.service_type}
