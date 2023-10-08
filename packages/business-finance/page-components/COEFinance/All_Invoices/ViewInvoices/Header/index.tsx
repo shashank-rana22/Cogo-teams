@@ -3,6 +3,7 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import TIMELINE_ELIGIBLE_JOB_TYPES from '../../../constants/timelineEligibleList';
 import useApproveReject from '../../../hook/useApproveReject';
 import AdditionalRemarks from '../../AdditionalRemarks';
 import TimeLineItemCheck from '../ShipmentDetails/TimelineItemCheck';
@@ -142,13 +143,15 @@ function Header({
 				</div>
 			</div>
 			<div className={styles.timeline}>
-				<TimeLineItemCheck
-					checkItem={checkItem}
-					status={status}
-					isTagFound={isTagFound}
-					currentTab={currentTab}
-					jobType={jobType}
-				/>
+				{TIMELINE_ELIGIBLE_JOB_TYPES.includes(jobType) ? (
+					<TimeLineItemCheck
+						checkItem={checkItem}
+						status={status}
+						isTagFound={isTagFound}
+						currentTab={currentTab}
+						jobType={jobType}
+					/>
+				) : null}
 			</div>
 
 			{approve && (

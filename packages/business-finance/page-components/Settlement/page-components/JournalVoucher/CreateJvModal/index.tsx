@@ -21,11 +21,14 @@ interface Props {
 	Entity?: string;
 	selectedData?: { ledCurrency?: string, currency?: string }[];
 	line_items?: object[];
+	setJvSearch: React.Dispatch<React.SetStateAction<boolean>>;
+	setDryRun: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function CreateJvModal({
 	show, onClose = () => {},
 	setShow, refetch, selectedData = [], Entity = '', line_items = [EMPTY_LINE_ITEMS],
+	setJvSearch = () => {}, setDryRun = () => {},
 }:Props) {
 	const { control, watch, handleSubmit, setValue, formState: { errors = {} } } = useForm({
 		defaultValues:
@@ -71,7 +74,7 @@ function CreateJvModal({
 		}
 	}, [entity, lineItems, setValue, getGlCode]);
 
-	const { create, loading } = useCreateJv({ setShow, refetch });
+	const { create, loading } = useCreateJv({ setShow, refetch, setJvSearch, setDryRun });
 
 	const debitAmount = formValues?.line_items
 		?.filter((lineItem) => lineItem?.type === 'DEBIT')

@@ -22,9 +22,20 @@ const CONTROLLER_MAPPINGS = {
 	asyncSelect : AsyncSelectController,
 };
 
-function Form({ controls = () => { }, setLevel = () => { } }, ref) {
+function Form({ controls = () => { }, setLevel = () => { }, editData = () => {} }, ref) {
 	const { t } = useTranslation(['incidentManagement']);
-	const { formState: { errors }, control, handleSubmit, watch, setValue } = useForm();
+
+	const { incidentType = '', approvalType = '', incidentSubType = '', entityCode = '' } = editData;
+	const { formState: { errors }, control, handleSubmit, watch, setValue } = useForm(
+		{
+			defaultValues: {
+				incidentType,
+				approvalType,
+				incidentSubtype: incidentSubType,
+				entityCode,
+			},
+		},
+	);
 
 	const finalControls = controls({ t, incidentType: watch('incidentType'), setValue });
 
@@ -57,6 +68,7 @@ function Form({ controls = () => { }, setLevel = () => { } }, ref) {
 										control={control}
 										key={el.name}
 										id={`${el.name}_input`}
+										disabled={editData?.id && el.name !== 'approvalType'}
 									/>
 									<div className={styles.error_message}>
 										{errors?.[el.name]?.message}

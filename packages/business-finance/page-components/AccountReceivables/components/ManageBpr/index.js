@@ -2,11 +2,11 @@ import { Input, Pagination } from '@cogoport/components';
 import { IcMCross, IcMSearchdark } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import StyledTable from '../../commons/styledTable';
-import useGetOrganizationList from '../../hooks/useGetOrganizationList';
+import StyledTable from '../../commons/styledTable/index.tsx';
+import useGetOrganizationList from '../../hooks/useGetOrganizationList.ts';
 
 import { manageBprColumn } from './Config/manageBprColumn';
-import SearchCard from './SearchCard';
+import SearchCard from './SearchCard/index.tsx';
 import styles from './styles.module.css';
 
 function ManageBpr() {
@@ -46,7 +46,7 @@ function ManageBpr() {
 							onQueryChange(value);
 						}}
 						value={searchQuery}
-						placeholder="Search by serial id / business name "
+						placeholder="Search by serial id / business name"
 						type="text"
 					/>
 				</div>
