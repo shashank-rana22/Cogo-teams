@@ -1,5 +1,4 @@
 function splitStringIntoChunks({ content, chunkSize = 500 * 1024 }) {
-	console.log('content:', content.length);
 	let chunks = [];
 	for (let i = 0; i < content.length; i += chunkSize) {
 		chunks = [...chunks, content.slice(i, i + chunkSize)];
@@ -9,8 +8,11 @@ function splitStringIntoChunks({ content, chunkSize = 500 * 1024 }) {
 
 function combineChunks({ chunks = {} }) {
 	return chunks.docs.reduce(
-		(prevChunk, chunk) => prevChunk + chunk.data().content,
-		'',
+		(prevChunk, chunk) => ({
+			ids     : [...prevChunk.ids, chunk.id],
+			content : prevChunk?.content || `${chunk.data().content}`,
+		}),
+		{ content: '', ids: [] },
 	);
 }
 

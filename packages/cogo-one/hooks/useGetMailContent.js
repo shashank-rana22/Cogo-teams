@@ -98,7 +98,7 @@ function useGetMailContent({
 								[itm?.type]: content,
 							}),
 						);
-						return `${acc}<br>${content}`;
+						return `${acc}<br>${content.content}`;
 					},
 					'',
 				);

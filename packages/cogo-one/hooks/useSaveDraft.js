@@ -121,6 +121,7 @@ const updateMessage = async ({
 	emailState = {},
 	showOrgSpecificMail = false,
 	saveChunks = () => {},
+	deleteChunks = () => {},
 }) => {
 	const messageChunks = splitStringIntoChunks({ content: emailState?.body });
 	const rteContentChunks = splitStringIntoChunks({ content: emailState?.rteContent });
@@ -154,7 +155,7 @@ const updateMessage = async ({
 		try {
 			await updateDoc(roomDoc, updateRoomPayload);
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	}
 
@@ -177,19 +178,15 @@ const updateMessage = async ({
 			);
 
 			await saveChunks({
-				firestore,
 				roomId,
 				messageId   : res?.id,
-				channel_type,
 				messageChunks,
 				messageType : 'body',
 			});
 
 			await saveChunks({
-				firestore,
 				roomId,
 				messageId     : res?.id,
-				channel_type,
 				messageChunks : rteContentChunks,
 				messageType   : 'rte_content',
 			});
@@ -203,7 +200,7 @@ const updateMessage = async ({
 				});
 			}
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 
 		setSendLoading(false);
@@ -222,25 +219,35 @@ const updateMessage = async ({
 			updatePayload,
 		);
 
-		await saveChunks({
-			firestore,
+		await deleteChunks({
 			roomId,
 			messageId,
-			channel_type,
+			chunkIds    : emailState?.draftQuillBody?.body?.ids,
+			messageType : 'body',
+		});
+
+		await deleteChunks({
+			roomId,
+			messageId,
+			chunkIds    : emailState?.draftQuillBody?.rte_content?.ids,
+			messageType : 'rte_content',
+		});
+
+		await saveChunks({
+			roomId,
+			messageId,
 			messageChunks,
 			messageType: 'body',
 		});
 
 		await saveChunks({
-			firestore,
 			roomId,
 			messageId,
-			channel_type,
 			messageChunks : rteContentChunks,
 			messageType   : 'rte_content',
 		});
 	} catch (err) {
-		console.log(err);
+		console.error(err);
 	}
 
 	if (isMinimize) {
@@ -271,7 +278,10 @@ const useSaveDraft = ({
 }) => {
 	const agentId = useSelector((state) => state.profile?.user?.id);
 
-	const { saveChunks } = useSaveChunks({});
+	const { saveChunks, deleteChunks } = useSaveChunks({
+		firestore,
+		channel_type: 'email',
+	});
 
 	const saveDraft = async ({
 		communication_id = '',
@@ -322,6 +332,7 @@ const useSaveDraft = ({
 			emailState,
 			showOrgSpecificMail,
 			saveChunks,
+			deleteChunks,
 		});
 	};
 
@@ -329,4 +340,5 @@ const useSaveDraft = ({
 		saveDraft,
 	};
 };
+
 export default useSaveDraft;

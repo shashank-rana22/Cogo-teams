@@ -141,8 +141,8 @@ export function getRecipientData({
 				(prev) => ({
 					...prev,
 					emailVia,
-					rteContent       : draftQuillBody?.rte_content || '',
-					body             : draftQuillBody?.body || '',
+					rteContent       : draftQuillBody?.rte_content?.content || '',
+					body             : draftQuillBody?.body?.content || '',
 					from_mail        : sender || '',
 					subject          : draftSubject || '',
 					toUserEmail      : to_mails || [],
@@ -154,6 +154,7 @@ export function getRecipientData({
 					customSubject    : custom_subject,
 					orgId            : org_id,
 					orgData,
+					draftQuillBody,
 				}),
 			);
 

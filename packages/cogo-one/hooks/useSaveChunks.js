@@ -1,13 +1,30 @@
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
-function useSaveChunks() {
-	const saveChunks = async ({
-		firestore = {},
+function useSaveChunks({ firestore = {}, channel_type = '' }) {
+	const deleteChunks = async ({
 		roomId = '',
 		messageId = '',
-		channel_type = '',
+		chunkIds = [],
+		messageType = '',
+	}) => {
+		await Promise.all(chunkIds?.map(
+			(chunkId) => {
+				const activeMessageCollection = doc(
+					firestore,
+					`${FIRESTORE_PATH[channel_type]}/${roomId}/messages/${messageId}/${messageType}/${chunkId}`,
+				);
+				return deleteDoc(
+					activeMessageCollection,
+				);
+			},
+		));
+	};
+
+	const saveChunks = async ({
+		roomId = '',
+		messageId = '',
 		messageChunks = [],
 		messageType = '',
 	}) => {
@@ -29,7 +46,7 @@ function useSaveChunks() {
 		));
 	};
 
-	return { saveChunks };
+	return { saveChunks, deleteChunks };
 }
 
 export default useSaveChunks;
