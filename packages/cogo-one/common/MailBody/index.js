@@ -139,7 +139,7 @@ function MailBody({
 	});
 
 	const handleExpandClick = () => {
-		if (!expandedState && !bodyMessage && !isDraft) {
+		if (!expandedState && (isDraft || !bodyMessage)) {
 			getEmailBody();
 			return;
 		}

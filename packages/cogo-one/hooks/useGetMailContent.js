@@ -80,7 +80,7 @@ function useGetMailContent({
 	}, [channel_type, firestore, roomId, messageRoomId]);
 
 	const getEmailBody = useCallback(async () => {
-		if (combinedLoading || message) {
+		if (combinedLoading || (!isDraft && message)) {
 			return;
 		}
 
