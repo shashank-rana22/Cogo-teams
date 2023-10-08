@@ -20,41 +20,47 @@ const formatMailDraftMessage = ({
 	roomId = '',
 	emailState = {},
 	showOrgSpecificMail = false,
-	roomLevel = false,
-}) => ({
-	agent_type           : 'bot',
-	conversation_type    : 'received',
-	last_draft_saved_on  : Date.now(),
-	updated_at           : Date.now(),
-	message_type         : 'text',
-	is_draft             : true,
-	communication_id     : communication_id || '',
-	room_id              : roomId,
-	draft_type           : buttonType,
-	parent_email_message : parentEmailMessage || {},
-	response             : {
-		attachments  : payload?.attachments || [],
-		bcc_mails    : payload?.bccrecipients || [],
-		body         : '',
-		body_preview : emailState?.rawRTEContent?.slice(
-			GLOBAL_CONSTANTS.zeroth_index,
-			LIMIT_FOR_BODY_PREVIEW,
-		) || '',
-		cc_mails          : payload?.ccrecipients || [],
-		message_id        : payload?.msgId || '',
-		sender            : payload?.sender || '',
-		subject           : payload?.subject || '',
-		to_mails          : payload?.toUserEmail || [],
-		draft_type        : buttonType,
-		draftQuillMessage : roomLevel ? {} : {
-			rteContent: emailState?.rteContent || '',
+}) => {
+	const updateParentMessage = {
+		...parentEmailMessage,
+		response: {
+			...parentEmailMessage?.response,
+			body: '',
 		},
-		...(showOrgSpecificMail ? {
-			custom_subject : emailState?.customSubject || '',
-			orgData        : emailState?.orgData || {},
-		} : {}),
-	},
-});
+	};
+
+	return {
+		agent_type           : 'bot',
+		conversation_type    : 'received',
+		last_draft_saved_on  : Date.now(),
+		updated_at           : Date.now(),
+		message_type         : 'text',
+		is_draft             : true,
+		communication_id     : communication_id || '',
+		room_id              : roomId,
+		draft_type           : buttonType,
+		parent_email_message : updateParentMessage || {},
+		response             : {
+			attachments  : payload?.attachments || [],
+			bcc_mails    : payload?.bccrecipients || [],
+			body         : '',
+			body_preview : emailState?.rawRTEContent?.slice(
+				GLOBAL_CONSTANTS.zeroth_index,
+				LIMIT_FOR_BODY_PREVIEW,
+			) || '',
+			cc_mails   : payload?.ccrecipients || [],
+			message_id : payload?.msgId || '',
+			sender     : payload?.sender || '',
+			subject    : payload?.subject || '',
+			to_mails   : payload?.toUserEmail || [],
+			draft_type : buttonType,
+			...(showOrgSpecificMail ? {
+				custom_subject : emailState?.customSubject || '',
+				orgData        : emailState?.orgData || {},
+			} : {}),
+		},
+	};
+};
 
 const createDraftRoom = async ({
 	agentId = '',
@@ -135,6 +141,7 @@ const updateMessage = async ({
 		emailState,
 		showOrgSpecificMail,
 	});
+	console.log('updatePayload:', updatePayload);
 
 	if (!isNewRoomCreated) {
 		const updateRoomPayload = {
