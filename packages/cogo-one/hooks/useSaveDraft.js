@@ -141,7 +141,6 @@ const updateMessage = async ({
 		emailState,
 		showOrgSpecificMail,
 	});
-	console.log('updatePayload:', updatePayload);
 
 	if (!isNewRoomCreated) {
 		const updateRoomPayload = {
