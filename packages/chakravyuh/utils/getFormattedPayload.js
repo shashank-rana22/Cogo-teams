@@ -6,6 +6,7 @@ import { LOCATION_KEYS } from '../constants/map_constants';
 
 const EXCLUDE_KEYS = ['origin', 'destination', 'service_type', 'origin_type', 'destination_type',
 	'is_origin_icd', 'is_destination_icd', 'page', 'weight_slab_in_kg'];
+const DATE_KEYS = ['start_date', 'end_date'];
 
 const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
 	const { service_type } = globalFilters;
@@ -14,16 +15,15 @@ const getFormattedPayload = (globalFilters = {}, excludeKeys = []) => {
 	const filters = Object.fromEntries(Object.entries(globalFilters)
 		.filter(([key, v]) => v && !keysToExclude.includes(key)));
 
-	const { start_date, end_date, weight_slab_in_kg } = globalFilters;
+	const { weight_slab_in_kg } = globalFilters;
 
-	filters.start_date = start_date ? formatDate({
-		date       : start_date,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-	}) : undefined;
-	filters.end_date = end_date ? formatDate({
-		date       : end_date,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-	}) : undefined;
+	DATE_KEYS.forEach((key) => {
+		filters[key] = globalFilters[key] && !keysToExclude.includes(key) ? formatDate({
+			date       : globalFilters[key],
+			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		}) : undefined;
+	});
+
 	filters.commodity = !isEmpty(filters?.commodity) ? filters.commodity : undefined;
 
 	if (filters.chart_type === 'trend') {

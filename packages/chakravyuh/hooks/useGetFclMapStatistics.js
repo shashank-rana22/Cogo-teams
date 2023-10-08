@@ -54,8 +54,7 @@ const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
 		if (service_type === 'fcl') {
 			const params = getFormattedPayload({
 				...globalFilters,
-				start_date: new Date(),
-			}, ['end_date', 'chart_type', ...EXCLUDE_KEYS]);
+			}, ['start_date', 'end_date', 'chart_type', ...EXCLUDE_KEYS]);
 
 			getStats(merge(params, {
 				filters,
