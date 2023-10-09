@@ -48,6 +48,7 @@ function AddRate({
 		item,
 		task,
 		refetch: refetchForUpdateSubService,
+
 	});
 
 	const whoIsAddingRate = getWhoIsAddingRate({
@@ -86,7 +87,10 @@ function AddRate({
 		successMessage : 'Successfully Added Additional Service',
 	});
 
-	const { handleAddSellPrice: apiTriggerUpdate } = useUpdateShipmentAdditionalService({ refetch: afterAddRate });
+	const {
+		handleAddSellPrice: apiTriggerUpdate,
+		loading:updateAdditionalLoading,
+	} = useUpdateShipmentAdditionalService({ refetch: afterAddRate });
 
 	const onAddRate = (data) => {
 		const payload = getPayload(data, item, preProps, filters, billToCustomer, whoIsAddingRate);
@@ -119,6 +123,7 @@ function AddRate({
 				updateResponse={updateResponse}
 				onCancel={() => setAddSellPrice(false)}
 				onBillToCustomer={() => setBillToCustomer(true)}
+				loading={updateResponse.loading}
 			/>
 		);
 	}
@@ -154,7 +159,7 @@ function AddRate({
 				handleSubmit={handleSubmit}
 				status={status}
 				updateResponse={updateResponse}
-				loading={loading || updateResponse.loading}
+				loading={loading || updateResponse.loading || updateAdditionalLoading}
 				onCancel={() => onCancel()}
 				setAddSellPrice={setAddSellPrice}
 				setSecondStep={setSecondStep}

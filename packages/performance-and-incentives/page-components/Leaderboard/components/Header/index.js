@@ -100,7 +100,6 @@ function Header(props) {
 								maxDate={new Date()}
 								isPreviousDaysAllowed
 								onChange={setDateRange}
-
 							/>
 						)}
 					</div>

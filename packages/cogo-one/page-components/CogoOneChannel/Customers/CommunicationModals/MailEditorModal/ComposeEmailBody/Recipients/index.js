@@ -38,6 +38,8 @@ function Recipients({
 	showControl = '',
 	errorValue = '',
 	showOrgSpecificMail = false,
+	hideFromMail = false,
+	viewType = '',
 }) {
 	const [enabledRecipients, setEnabledRecipients] = useState({
 		ccrecipients  : !isEmpty(emailState?.ccrecipients),
@@ -67,7 +69,10 @@ function Recipients({
 						style={{ borderBottom: showOrgSpecificMail ? 'unset' : '1px solid #e0e0e0' }}
 					>
 						<div className={styles.mail_recipient_container}>
-							<div className={styles.sub_text}>
+							<div
+								className={styles.sub_text}
+								style={{ width: hideFromMail ? '30px' : '40px' }}
+							>
 								{itm.label}
 								:
 							</div>
@@ -84,6 +89,7 @@ function Recipients({
 								emailState={emailState}
 								setEmailState={setEmailState}
 								recipientTypes={EMAIL_RECIPIENTS}
+								viewType={viewType}
 							/>
 						</div>
 

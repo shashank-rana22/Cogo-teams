@@ -24,7 +24,7 @@ const useDeletePayrunInvoice = ({ generateInvoice = () => {} }) => {
 			method  : 'delete',
 			authKey : 'delete_purchase_payrun_bill',
 		},
-		{ manual: false },
+		{ manual: true },
 	);
 
 	const deleteInvoices = async (id = '') => {
