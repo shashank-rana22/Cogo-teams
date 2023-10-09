@@ -14,8 +14,11 @@ import styles from './styles.module.css';
 
 function ReassignTicket({
 	ticketId = '', showReassign = true, setShowReassign = () => {}, getTicketActivity = () => {},
-	getTicketDetails = () => {}, setListData = () => {},
+	getTicketDetails = () => {}, setListData = () => {}, ticket = {},
 }) {
+	const { Data: data = {} } = ticket || {};
+	const { RequestType: requestType = '' } = data || {};
+
 	const { t } = useTranslation(['myTickets']);
 
 	const [userData, setUserData] = useState({});
@@ -23,11 +26,11 @@ function ReassignTicket({
 
 	const { control, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm();
 
-	const { stakeHoldersData = [] } = useListShipmentStakeholders();
+	const { stakeHoldersData = [] } = useListShipmentStakeholders({ requestType });
 
 	const watchType = watch('type');
 
-	const controls = useReassignTicketsControls({ t, watchType, setUserData, stakeHoldersData });
+	const controls = useReassignTicketsControls({ t, watchType, setUserData, stakeHoldersData, requestType });
 
 	const { reassignTicket, reassignLoading } = useReassignTicket({
 		ticketId,

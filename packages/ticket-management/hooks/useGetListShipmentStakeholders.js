@@ -5,7 +5,7 @@ const getParams = () => ({
 	page_limit: 100,
 });
 
-function useListShipmentStakeholders() {
+function useListShipmentStakeholders({ requestType = '' }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_shipment_stakeholders',
 		method : 'get',
@@ -25,8 +25,10 @@ function useListShipmentStakeholders() {
 	);
 
 	useEffect(() => {
-		getShipmentStakeholdersList();
-	}, [getShipmentStakeholdersList]);
+		if (requestType === 'shipment') {
+			getShipmentStakeholdersList();
+		}
+	}, [getShipmentStakeholdersList, requestType]);
 
 	return {
 		loading,

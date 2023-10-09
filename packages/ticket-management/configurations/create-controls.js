@@ -95,7 +95,7 @@ const getCreateControls = ({
 			label          : <RenderLabel label={t('myTickets:select_sid')} />,
 			placeholder    : t('myTickets:select_sid'),
 			name           : 'serial_id',
-			controllerType : 'select',
+			controllerType : 'asyncSelect',
 			isClearable    : true,
 			rules          : { required: true },
 			onChange       : (_, obj) => {
@@ -108,6 +108,7 @@ const getCreateControls = ({
 			},
 			visible     : true,
 			initialCall : true,
+			valueKey    : 'serial_id',
 		},
 		{
 			label          : <RenderLabel label={t('myTickets:select_service')} />,
