@@ -132,10 +132,18 @@ function MessageCardData({
 				{subject || last_message}
 			</div>
 
-			<div
-				className={styles.message_content}
-				dangerouslySetInnerHTML={{ __html: bodyPreview || body }}
-			/>
+			{bodyPreview
+				? (
+					<div className={styles.body_preview}>
+						{bodyPreview}
+					</div>
+				)
+				: (
+					<div
+						className={styles.message_content}
+						dangerouslySetInnerHTML={{ __html: body || '' }}
+					/>
+				)}
 
 			<DisplayAttachments
 				mediaUrls={mediaUrls}
