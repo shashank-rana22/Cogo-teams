@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcCFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import { getFormatAmount } from '../../../../../utils/getFormatAmount';
+import { getFormatAmount } from '../../../../../../utils/getFormatAmount';
 
 import Content from './Content';
 import styles from './styles.module.css';

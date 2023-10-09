@@ -19,7 +19,7 @@ function PrePostCheckoutCards({
 	return (
 		<div style={{ width: '100%' }}>
 			<div>
-				<div>
+				<div style={{ marginBottom: '20px' }}>
 					<Headings headingText={type} />
 				</div>
 				{loading

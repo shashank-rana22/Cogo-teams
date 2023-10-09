@@ -2,7 +2,7 @@
 import { cl } from '@cogoport/components';
 import { IcMDummyCircle } from '@cogoport/icons-react';
 
-import { getTimelineClassNames, getCircleColor } from '../../../../../utils/getStyleAttributes';
+import { getTimelineClassNames, getCircleColor } from '../../../../../../utils/getStyleAttributes';
 import MilestoneCardContent from '../MilestoneCardContent';
 
 import styles from './styles.module.css';

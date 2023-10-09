@@ -1,14 +1,10 @@
 import { Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
-import { useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 
-import useGetPrePostShipmentQuotation from '../../../../hook/useGetPrePostShipmentQuotation';
 import useUpdateJobAuditStatus from '../../../../hook/useUpdateJobAuditStatus';
 import getApproveJobAuditBttnCondition from '../../../utils/getApproveJobAuditButtonCondition';
-import FinanceClosedCardsSet from '../QuotationCards/FinanceClosedCardsSet';
-import OperationClosedCardsSet from '../QuotationCards/OperationClosedCardsSet';
-import PrePostCheckoutCards from '../QuotationCards/PrePostCheckoutCards';
+import Body from '../Body';
 
 import styles from './styles.module.css';
 
@@ -20,16 +16,8 @@ function Header({ jobId = '' }) {
 		financialClosedData : {},
 	});
 
-	const [accordionState, setAccordionState] = useState({});
-	const {
-		data: quoteData = {},
-		loading: quoteLoading = false,
-		getPrePostShipmentQuotes = () => {},
-	} = useGetPrePostShipmentQuotation({ jobId });
+	const getPrePostShipmentQuoteRef = useRef(null);
 
-	const toggleAccordion = (key) => {
-		setAccordionState((prev) => ({ ...prev, [key]: !prev[key] }));
-	};
 	const handleClick = () => {
 		if (active_tab === 'financial_close') {
 			push(
@@ -42,22 +30,12 @@ function Header({ jobId = '' }) {
 		}
 	};
 
-	const { apiTrigger, loading } = useUpdateJobAuditStatus({ getPrePostShipmentQuotes });
+	const {
+		apiTrigger,
+		loading,
+	} = useUpdateJobAuditStatus({ getPrePostShipmentQuote: getPrePostShipmentQuoteRef.current });
 
 	const { bttnDisableCondition } = getApproveJobAuditBttnCondition({ quotationsData });
-
-	useEffect(() => {
-		const INITIAL_STATE = {};
-		Object.keys(quoteData).forEach((category) => {
-			Object.keys(quoteData[category]).forEach((subCategory, index) => {
-				INITIAL_STATE[`${category}_${subCategory}`] = (index === GLOBAL_CONSTANTS.zeroth_index);
-			});
-		});
-		setAccordionState(INITIAL_STATE);
-
-		setQuotationsData((prev) => ({ ...prev, prePostCheckoutData: quoteData }));
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(quoteData)]);
 
 	return (
 		<div className={styles.main_container}>
@@ -88,36 +66,12 @@ function Header({ jobId = '' }) {
 					</div>
 				</div>
 			</div>
-			<div className={styles.all_task_container}>
-				<div className={styles.task_specific_container}>
-					<PrePostCheckoutCards
-						getPrePostShipmentQuotes={getPrePostShipmentQuotes}
-						data={quoteData?.SELL}
-						loading={quoteLoading}
-						type="SELL Quotation"
-						accordionState={accordionState}
-						toggleAccordion={toggleAccordion}
-						setAccordionState={setAccordionState}
-						category="SELL"
-					/>
-					<PrePostCheckoutCards
-						data={quoteData?.BUY}
-						loading={quoteLoading}
-						type="BUY Quotation"
-						accordionState={accordionState}
-						toggleAccordion={toggleAccordion}
-						setAccordionState={setAccordionState}
-						category="BUY"
-						getPrePostShipmentQuotes={getPrePostShipmentQuotes}
-					/>
-				</div>
-
-				<OperationClosedCardsSet job_id={job_id} setQuotationsData={setQuotationsData} />
-
-				{active_tab === 'financial_close' && (
-					<FinanceClosedCardsSet job_id={job_id} setQuotationsData={setQuotationsData} />
-				)}
-			</div>
+			<Body
+				job_id={job_id}
+				getPrePostShipmentQuoteRef={getPrePostShipmentQuoteRef}
+				setQuotationsData={setQuotationsData}
+				active_tab={active_tab}
+			/>
 		</div>
 	);
 }

@@ -4,7 +4,7 @@ import { IcCFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { getFormatAmount } from '../../../../../../../utils/getFormatAmount';
+import { getFormatAmount } from '../../../../../../../../utils/getFormatAmount';
 
 import styles from './styles.module.css';
 
