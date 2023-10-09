@@ -147,7 +147,7 @@ function AmendmentList({ data, setViewDoc, setItem, listAPI, edit, setEdit, setG
 					{fields.map((field) => (
 						<div
 							className={styles.col}
-							style={{ '--span': field.span || 1 } as React.CSSProperties}
+							style={{ '--span': field.span || 1 }}
 							key={field.key}
 						>
 							{ field.label }

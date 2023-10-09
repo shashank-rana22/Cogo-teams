@@ -1,6 +1,6 @@
 import { useRequestBf } from '@cogoport/request';
 
-const useGetTaggingBills = ({ billId }: { billId:string }) => {
+const useGetTaggingBills = ({ billId }) => {
 	const [{ data, loading }] = useRequestBf(
 		{
 			url     : '/purchase/bills/tagging-map',

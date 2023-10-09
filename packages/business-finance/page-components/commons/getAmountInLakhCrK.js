@@ -1,4 +1,4 @@
-const getAmountInLakhCrK = (value:number) => {
+const getAmountInLakhCrK = (value) => {
 	const val = Math.abs(value);
 
 	let formatedAmount = '';

@@ -34,7 +34,7 @@ function SettlementModal({
 							Document -
 						</div>
 						<div className={styles.value}>
-							{supportingDocUrl?.map((url:string) => (url !== '' ? (
+							{supportingDocUrl?.map((url) => (url !== '' ? (
 								<div className={styles.link}>
 									<a href={url} target="_blank" rel="noreferrer">
 										document.pdf

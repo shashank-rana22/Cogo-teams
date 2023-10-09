@@ -1,4 +1,4 @@
-const getAmountLineChartInLakh = (value:number) => {
+const getAmountLineChartInLakh = (value) => {
 	const val = value;
 	let formatedAmount = '';
 

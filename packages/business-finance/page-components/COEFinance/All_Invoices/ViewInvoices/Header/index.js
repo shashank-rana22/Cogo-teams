@@ -22,7 +22,7 @@ function Header({
 	isTagFound = false,
 	currentTab = '',
 	jobType = '',
-}: any) {
+}) {
 	const [approve, setApprove] = useState(false);
 	const [modalData, setModalData] = useState('');
 	const [remarkData, setRemarkData] = useState({
@@ -48,7 +48,7 @@ function Header({
 		billId,
 	});
 
-	const handleModalData = (e: any) => {
+	const handleModalData = (e) => {
 		setModalData(e.target.innerText);
 		setApprove(true);
 	};
@@ -119,7 +119,7 @@ function Header({
 						themeType="secondary"
 						disabled={isItemNotChecked || isApproveDisabled}
 						style={{ border: '1px solid #06a106', color: '#06a106' }}
-						onClick={(e: any) => handleModalData(e)}
+						onClick={(e) => handleModalData(e)}
 					>
 						Approve
 					</Button>
@@ -128,14 +128,14 @@ function Header({
 						themeType="secondary"
 						style={{ margin: '0 16px' }}
 						disabled={status === 'FINANCE_ACCEPTED'}
-						onClick={(e: any) => handleModalData(e)}
+						onClick={(e) => handleModalData(e)}
 					>
 						Hold
 					</Button>
 					<Button
 						size="md"
 						disabled={isItemNotChecked}
-						onClick={(e: any) => handleModalData(e)}
+						onClick={(e) => handleModalData(e)}
 					>
 						Reject
 					</Button>
@@ -211,7 +211,7 @@ function Header({
 										size="md"
 										placeholder="Remarks Here ..."
 										value={overAllRemark}
-										onChange={(value: string) => setOverAllRemark(value)}
+										onChange={(value) => setOverAllRemark(value)}
 										style={{ width: '700', height: '100px', marginBottom: '12px' }}
 									/>
 									<div className={styles.button}>

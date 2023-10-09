@@ -56,10 +56,10 @@ export const SHIPMENT_TYPES = [
 export const getEntityOptions = () => {
 	const filteredEntity = Object.entries(ENTITY_FEATURE_MAPPING).filter(
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		([_, value]: any) => value.feature_supported.includes('cogo_books'),
+		([_, value]) => value.feature_supported.includes('cogo_books'),
 	);
 
-	const ENTITY_OPTIONS = (filteredEntity || []).map(([key]: any) => (
+	const ENTITY_OPTIONS = (filteredEntity || []).map(([key]) => (
 		{
 			label : key,
 			name  : key,

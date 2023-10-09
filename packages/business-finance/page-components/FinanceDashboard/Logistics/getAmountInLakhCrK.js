@@ -1,4 +1,4 @@
-const getAmountInLakhCrK = (value?: number, currency?: string) => {
+const getAmountInLakhCrK = (value, currency) => {
 	const val = value;
 
 	let formatedAmount = '';

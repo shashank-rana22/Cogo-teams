@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
-function ApproveAndReject({ row }:any) {
+function ApproveAndReject({ row }) {
 	const { status, updatedBy } = row || {};
 	const { t } = useTranslation(['incidentManagement']);
 	return (

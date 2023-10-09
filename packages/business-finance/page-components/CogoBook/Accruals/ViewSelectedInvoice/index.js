@@ -194,7 +194,7 @@ function ViewSelectedInvoice() {
 				<div className={styles.filter}>
 					<Input
 						value={filters?.search}
-						onChange={(val:string) => { setFilters((prev) => ({ ...prev, search: val })); }}
+						onChange={(val) => { setFilters((prev) => ({ ...prev, search: val })); }}
 						placeholder="Search by SID"
 						suffix={<IcMSearchlight height="20px" width="20px" style={{ marginRight: '8px' }} />}
 					/>

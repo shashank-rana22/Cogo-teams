@@ -15,7 +15,7 @@ export const optionsYear = (newArray || [{}]).map((item) => (
 
 const getMonth = GLOBAL_CONSTANTS.months;
 
-export const optionsMonth = (getMonth || [{}]).map((item: string, index: number) => {
+export const optionsMonth = (getMonth || [{}]).map((item, index) => {
 	const count = index + 1;
 	const options = { value: count?.toString(), label: item };
 	return options;
@@ -444,7 +444,7 @@ export const accrualColumn = (
 	{
 		Header   : '',
 		id       : 'ribbon',
-		accessor : (row:{ shipmentType?:string }) => {
+		accessor : (row) => {
 			const { shipmentType } = row || {};
 			return (
 				<div>

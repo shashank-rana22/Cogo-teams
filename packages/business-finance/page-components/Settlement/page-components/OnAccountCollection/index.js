@@ -46,7 +46,7 @@ function OnAccountCollection({ entity }) {
 		refetch, setShowConfirm,
 	});
 
-	const onPageChange = (val: number) => {
+	const onPageChange = (val) => {
 		setGlobalFilters((prev) => ({ ...prev, page: val }));
 	};
 
@@ -150,7 +150,7 @@ function OnAccountCollection({ entity }) {
 								name="q"
 								size="sm"
 								value={search}
-								onChange={(val: string) => setGlobalFilters((prev) => ({
+								onChange={(val) => setGlobalFilters((prev) => ({
 									...prev,
 									search: val,
 								}))}

@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useSendEmail = () => {
-	const { profile: profileData = {} } = useSelector((state:any) => state);
+	const { profile: profileData = {} } = useSelector((state) => state);
 
 	const { id: userId, name, email } = profileData?.user || {};
 

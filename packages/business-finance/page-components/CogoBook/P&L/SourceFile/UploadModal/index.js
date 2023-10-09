@@ -43,7 +43,7 @@ function UploadModal({ uploadModal, setUploadModal }) {
 								value={modalData.month}
 								placeholder="Month"
 								options={OptionMonth()}
-								onChange={(val:string) => { setModalData((prev) => ({ ...prev, month: val })); }}
+								onChange={(val) => { setModalData((prev) => ({ ...prev, month: val })); }}
 								isClearable
 								style={{ width: '200px' }}
 							/>
@@ -54,7 +54,7 @@ function UploadModal({ uploadModal, setUploadModal }) {
 								value={modalData.entity}
 								placeholder="Entity"
 								options={entityOptions}
-								onChange={(val:string) => { setModalData((prev) => ({ ...prev, entity: val })); }}
+								onChange={(val) => { setModalData((prev) => ({ ...prev, entity: val })); }}
 								isClearable
 								style={{ width: '200px' }}
 							/>
@@ -64,7 +64,7 @@ function UploadModal({ uploadModal, setUploadModal }) {
 					<div className={styles.month}>Upload Trial Balance*</div>
 					<FileUploader
 						value={uploader}
-						onChange={(val:string) => { setUploader(val); }}
+						onChange={(val) => { setUploader(val); }}
 						showProgress
 						draggable
 						accept=".xlsx"

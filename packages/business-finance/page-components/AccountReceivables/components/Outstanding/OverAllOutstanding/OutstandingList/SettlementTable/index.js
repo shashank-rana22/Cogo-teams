@@ -30,7 +30,7 @@ function SettlementTable({ organizationId = '', entityCode = '' }) {
 				<Select
 					placeholder="Select Status"
 					value={filters?.accountType}
-					onChange={(val: string) => onChange(val, 'accountType')}
+					onChange={(val) => onChange(val, 'accountType')}
 					options={ACCOUNT_TYPE}
 					style={{ width: 200, marginRight: '16px' }}
 				/>

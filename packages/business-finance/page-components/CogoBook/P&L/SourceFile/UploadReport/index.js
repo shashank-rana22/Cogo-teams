@@ -520,7 +520,7 @@ function UploadReport() {
 			<div className={styles.stepper}>
 				<Stepper
 					active={globalStepper}
-					setActive={(val:string) => { setGlobalStepper(val); }}
+					setActive={(val) => { setGlobalStepper(val); }}
 					items={stepperItems}
 					arrowed
 				/>

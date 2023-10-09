@@ -1,7 +1,7 @@
 import IcJvColumns from '../../configs/ic-jv-approval';
 import SettlementColumn from '../../configs/settelement-table';
 
-const getModalColumns = (type: string) => {
+const getModalColumns = (type) => {
 	if (type === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL') {
 		return IcJvColumns;
 	}

@@ -41,7 +41,7 @@ function CogoBook() {
 		},
 	};
 	const ActiveTabComponent = tabsKeyComponentMapping[activeTab] || null;
-	const onChange = (view:string) => {
+	const onChange = (view) => {
 		setActiveTab(view);
 
 		push(
@@ -60,7 +60,7 @@ function CogoBook() {
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
-					onChange={(tab:string) => onChange(tab)}
+					onChange={(tab) => onChange(tab)}
 					fullWidth
 					themeType="primary"
 				>

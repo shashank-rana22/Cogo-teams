@@ -1,4 +1,4 @@
-export function getNumber(labelValue:string) {
+export function getNumber(labelValue) {
 	if (Math.abs(Number(labelValue)) >= 1.0e9) {
 		return `${(Math.abs(Number(labelValue)) / 1.0e9).toFixed(2)}B`;
 	}

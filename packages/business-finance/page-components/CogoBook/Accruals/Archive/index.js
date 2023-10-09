@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 
 const IS_BOOKED = (key) => (key ? styles.selected : styles.button_tab);
 
-function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateAction<boolean>> }) {
+function Archive({ setShowTab }) {
 	const [toggleValue, setToggleValue] = useState('declared');
 	const [isBookedActive, setIsBookActive] = useState(true);
 	const [showSub, setShowSub] = useState(false);
@@ -194,7 +194,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 						<div className={styles.div_select}>
 							<Select
 								value={globalFilters?.serviceType}
-								onChange={(val:string) => {
+								onChange={(val) => {
 									setGlobalFilters((prev) => ({ ...prev, serviceType: val }));
 								}}
 								placeholder="Service Type"
@@ -208,7 +208,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 							<Select
 								value={globalFilters?.entity}
 								size="sm"
-								onChange={(val:string) => {
+								onChange={(val) => {
 									setGlobalFilters((prev) => ({ ...prev, entity: val }));
 								}}
 								placeholder="Entity"

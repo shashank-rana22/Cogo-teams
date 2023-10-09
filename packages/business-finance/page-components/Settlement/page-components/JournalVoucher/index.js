@@ -23,7 +23,7 @@ function JournalVoucher({ entityCode }) {
 		window.location.href = `/${query.partner_id}/business-finance/settlement/JournalVoucher`;
 	};
 
-	const onPageChange = (val:number) => {
+	const onPageChange = (val) => {
 		setFilters({ ...filters, page: val });
 	};
 

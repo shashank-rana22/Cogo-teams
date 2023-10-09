@@ -30,7 +30,7 @@ const usePaymentConfirm = ({
 		refetch();
 	};
 
-	const onAction = async ({ inputValues, status }:Props) => {
+	const onAction = async ({ inputValues, status }) => {
 		const { remarks = '' } = inputValues || {};
 		try {
 			const apiResponse = await trigger({

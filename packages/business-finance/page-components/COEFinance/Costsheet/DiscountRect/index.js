@@ -18,11 +18,11 @@ function DiscountRect({
 				'--width'      : width,
 				'--margin-top' : marginTop,
 				'--padding'    : padding,
-			} as CSSProperties}
+			}}
 		>
 			<div
 				className={styles.label}
-				style={{ '--headingwidth': headingwidth } as CSSProperties}
+				style={{ '--headingwidth': headingwidth }}
 			>
 				{heading}
 			</div>

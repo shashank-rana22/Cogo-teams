@@ -29,7 +29,7 @@ function AccountReceivables() {
 
 	const [entityCode, setEntityCode] = useState(entity);
 
-	const handleChange = (val: string) => {
+	const handleChange = (val) => {
 		setReceivables(val);
 		push(
 			'/business-finance/account-receivables/[active_tab]',
@@ -40,7 +40,7 @@ function AccountReceivables() {
 
 	const entityDataCount = entityData.length;
 
-	const entityOptions = (entityData || []).map((item: ItemProps) => {
+	const entityOptions = (entityData || []).map((item) => {
 		const {
 			business_name: companyName = '',
 			entity_code: listEntityCode = '',
@@ -63,7 +63,7 @@ function AccountReceivables() {
 						{isEmpty(selectedOrgId) ? (
 							<Select
 								name="business_name"
-								onChange={(entityVal: string) => setEntityCode(entityVal)}
+								onChange={(entityVal) => setEntityCode(entityVal)}
 								value={entityCode}
 								options={entityOptions}
 								placeholder="Select Entity Code"
@@ -78,7 +78,7 @@ function AccountReceivables() {
 			<div className={isEmpty(selectedOrgId) ? styles.tabs_container : styles.nodisplay}>
 				<Tabs
 					activeTab={receivables}
-					onChange={(val: string) => handleChange(val)}
+					onChange={(val) => handleChange(val)}
 					fullWidth
 					themeType="primary"
 				>

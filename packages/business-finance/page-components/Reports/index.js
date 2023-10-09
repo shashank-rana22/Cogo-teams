@@ -14,7 +14,7 @@ function Reports() {
 
 	const { api, loading } = useSubmitReport(value);
 
-	const onChange = (val:string, name:string) => {
+	const onChange = (val, name) => {
 		setValue((p) => ({ ...p, [name]: val }));
 	};
 
@@ -50,7 +50,7 @@ function Reports() {
 					<div className={styles.input}>
 						<Select
 							value={value.reportType}
-							onChange={(val:string) => onChange(val, 'reportType')}
+							onChange={(val) => onChange(val, 'reportType')}
 							placeholder="Select Report Type"
 							options={REPORT_TYPE_OPTIONS}
 						/>
@@ -62,7 +62,7 @@ function Reports() {
 						<div>
 							<Select
 								value={value.accountType}
-								onChange={(val:string) => onChange(val, 'accountType')}
+								onChange={(val) => onChange(val, 'accountType')}
 								placeholder="Select Account Type"
 								options={ACCOUNT_TYPE_OPTIONS}
 							/>
@@ -77,7 +77,7 @@ function Reports() {
 								placeholder="Enter Date Range"
 								dateFormat="yyyy-MM-dd"
 								name="date"
-								onChange={(e:any) => setValue((p) => ({ ...p, dateRange: e }))}
+								onChange={(e) => setValue((p) => ({ ...p, dateRange: e }))}
 								value={value.dateRange}
 								isPreviousDaysAllowed
 							/>

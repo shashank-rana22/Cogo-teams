@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-const useReceivablesDashboard = (entityCode: string) => {
+const useReceivablesDashboard = (entityCode) => {
 	const [filterValue, setFilterValue] = useState({
 		serviceType : '',
 		companyType : 'All',

@@ -68,7 +68,7 @@ function ViewInvoices() {
 	useEffect(() => {
 		if (!isTagFound && !loading) {
 			setCheckItem(
-				(prev: any) => ({ ...prev, taggingCheck: true }),
+				(prev) => ({ ...prev, taggingCheck: true }),
 			);
 		}
 	}, [isTagFound, loading]);

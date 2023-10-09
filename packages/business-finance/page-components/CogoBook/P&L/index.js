@@ -33,7 +33,7 @@ function ProfitAndLoss() {
 	};
 
 	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
-	const handleChange = (view:string) => {
+	const handleChange = (view) => {
 		setSubActiveTab(view);
 		push(
 			'/business-finance/cogo-book/[active_tab]/[view]',

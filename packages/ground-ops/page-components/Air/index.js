@@ -71,7 +71,7 @@ function Air({ setGenerate = () => {}, setItem = () => {}, setViewDoc = () => {}
 	useEffect(() => {
 		if (searchValue) {
 			const statsObj = stats || {};
-			const statsObjValues:Array<number> = Object.values(statsObj) || [];
+			const statsObjValues = Object.values(statsObj) || [];
 			const maxStats = Math.max(...statsObjValues);
 			const maxStatsKey = Object.keys(statsObj).find((key) => statsObj[key] === maxStats);
 			setMaxStatsTabKey(TABS_STATS_MAPPING[maxStatsKey]);

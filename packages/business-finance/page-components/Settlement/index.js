@@ -30,7 +30,7 @@ function Settlement() {
 
 	const entityDataCount = entityData.length;
 
-	const entityOptions = (entityData || []).map((item: ItemProps) => {
+	const entityOptions = (entityData || []).map((item) => {
 		const {
 			business_name: companyName = '',
 			entity_code: listEntityCode = '',
@@ -45,7 +45,7 @@ function Settlement() {
 
 	const [activeTab, setActiveTab] = useState(query?.active_tab);
 
-	const handleChange = (tab: string) => {
+	const handleChange = (tab) => {
 		if (['ap-ar-settlement', 'JournalVoucher', 'tds-settlement', 'onAccountCollection', 'history'].includes(tab)) {
 			setActiveTab(tab);
 			push(
@@ -68,7 +68,7 @@ function Settlement() {
 					<div className={styles.input}>
 						<Select
 							name="business_name"
-							onChange={(entityVal: string) => setEntityCode(entityVal)}
+							onChange={(entityVal) => setEntityCode(entityVal)}
 							value={entityCode}
 							options={entityOptions}
 							placeholder="Select Entity Code"

@@ -97,7 +97,7 @@ function Profitabillity({ globalFilters, entityTabFilters }) {
 						&& (
 							<Select
 								value={jobsFilters}
-								onChange={(e: any) => setJobsFilters(e)}
+								onChange={(e) => setJobsFilters(e)}
 								placeholder="Job Filters"
 								options={jobsOptions}
 								size="md"
@@ -108,7 +108,7 @@ function Profitabillity({ globalFilters, entityTabFilters }) {
 						name="q"
 						size="sm"
 						value={searchValue}
-						onChange={(e: any) => setSearchValue(e)}
+						onChange={(e) => setSearchValue(e)}
 						placeholder={tabs === 'shipment'
 							? 'Search by SID/Booking Party Name..' : 'Search by Booking Party Name..'}
 						suffix={(
@@ -132,7 +132,7 @@ function Profitabillity({ globalFilters, entityTabFilters }) {
 						currentPage={pageIndex}
 						totalItems={totalRecord}
 						pageSize={pageSize}
-						onPageChange={(pageValue: number) => {
+						onPageChange={(pageValue) => {
 							setFilters((p) => ({ ...p, pageIndex: pageValue }));
 						}}
 

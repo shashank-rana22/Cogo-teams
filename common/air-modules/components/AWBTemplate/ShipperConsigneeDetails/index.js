@@ -37,7 +37,7 @@ function ShipperConsigneeDetails({
 						${styles.flex_font_bold} 
 						${styles.mawb_number_subdivision} 
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<p style={{ fontSize: 18 }}>
 							{awbNumber ? awbNumber.substring(0, 3) : documentNo.substring(0, 3)}
@@ -49,7 +49,7 @@ function ShipperConsigneeDetails({
 						${styles.flex_font_bold} 
 						${styles.mawb_number_subdivision_portcode} 
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 						<p style={{ fontSize: 18 }}>{taskItem?.originPortCode}</p>
 					</div>
@@ -79,7 +79,7 @@ function ShipperConsigneeDetails({
 					${styles.block} 
 					${styles.shipper_consignee_details} 
 				`}
-					style={{ '--temp-color': tempColor } as React.CSSProperties}
+					style={{ '--temp-color': tempColor }}
 				>
 					<div style={{ display: 'flex' }}>
 						<div className={cl`
@@ -95,7 +95,7 @@ function ShipperConsigneeDetails({
 							${styles.flex_col} 
 							${styles.shipper_consignee_account_number} 
 						`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 
 							<p style={{ fontSize: 10, color: tempColor }}>Shipper&apos;s Account Number</p>
@@ -127,7 +127,7 @@ function ShipperConsigneeDetails({
 					${styles.block_col} 
 					${styles.issuedby_validation_conditions} 
 				`}
-					style={{ '--temp-color': tempColor } as React.CSSProperties}
+					style={{ '--temp-color': tempColor }}
 				>
 					<div className={cl`
 						${styles.flex} 
@@ -161,7 +161,7 @@ function ShipperConsigneeDetails({
 						${styles.flex_left_padding} 
 						${styles.business_name} 
 					`}
-						style={{ '--temp-color': tempColor } as React.CSSProperties}
+						style={{ '--temp-color': tempColor }}
 					>
 
 						<p
@@ -193,7 +193,7 @@ function ShipperConsigneeDetails({
 					${styles.block} 
 					${styles.shipper_consignee_details} 
 				`}
-					style={{ '--temp-color': tempColor } as React.CSSProperties}
+					style={{ '--temp-color': tempColor }}
 				>
 					<div style={{ display: 'flex' }}>
 						<div className={cl`
@@ -208,7 +208,7 @@ function ShipperConsigneeDetails({
 							${styles.flex_col} 
 							${styles.shipper_consignee_account_number} 
 						`}
-							style={{ '--temp-color': tempColor } as React.CSSProperties}
+							style={{ '--temp-color': tempColor }}
 						>
 
 							<p style={{ fontSize: 10, color: tempColor }}>Consignee&apos;s Account Number</p>
@@ -240,7 +240,7 @@ function ShipperConsigneeDetails({
 					${styles.block} 
 					${styles.issuedby_validation_conditions} 
 				`}
-					style={{ '--temp-color': tempColor } as React.CSSProperties}
+					style={{ '--temp-color': tempColor }}
 				>
 					<div className={cl`
 							${styles.flex} 

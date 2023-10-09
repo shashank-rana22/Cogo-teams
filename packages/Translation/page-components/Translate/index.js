@@ -34,7 +34,7 @@ function Translate() {
 			<div className={styles.tabs}>
 				{/* <Tabs
 					activeTab={receivables}
-					onChange={(val:string) => handleTabChange(val, setReceivables, push)}
+					onChange={(val) => handleTabChange(val, setReceivables, push)}
 					themeType="primary"
 					id="translate_tab_view"
 				>

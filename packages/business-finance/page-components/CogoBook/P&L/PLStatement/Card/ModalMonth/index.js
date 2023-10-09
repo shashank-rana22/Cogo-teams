@@ -19,7 +19,7 @@ function ModalMonth({ modal, setModal, filters, setFilters }) {
 						<div>
 							<Select
 								value={filters?.monthFrom}
-								onChange={(val:string) => {
+								onChange={(val) => {
 									setFilters((prev) => ({
 										...prev,
 										monthFrom: val,
@@ -34,7 +34,7 @@ function ModalMonth({ modal, setModal, filters, setFilters }) {
 						<div>
 							<Select
 								value={filters?.monthTo}
-								onChange={(val:string) => {
+								onChange={(val) => {
 									setFilters((prev) => ({ ...prev, monthTo: val }));
 								}}
 								placeholder="Month"

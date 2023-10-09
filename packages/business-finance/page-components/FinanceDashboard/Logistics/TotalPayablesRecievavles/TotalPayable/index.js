@@ -25,7 +25,7 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 
 	let onAccountPayable = 0;
 	let outstandingPayable = 0;
-	(AccountAndOutStandingData || []).forEach((item:any) => {
+	(AccountAndOutStandingData || []).forEach((item) => {
 		if (item?.id === 'onAccount') {
 			onAccountPayable = item?.value;
 			return onAccountPayable;

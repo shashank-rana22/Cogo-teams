@@ -14,7 +14,7 @@ function CoeFinance() {
 	const [filters, setFilters] = useState({ timePeriod: 'day' });
 	const { statsData, statsCOEApprovedData, statsLoading } = usePurchaseViewStats({ filters });
 	const [activeTab, setActiveTab] = useState(query.active_tab || 'dashboard');
-	const handleTabChange = (tab:string) => {
+	const handleTabChange = (tab) => {
 		setActiveTab(tab);
 		setFilters({});
 		push(
@@ -34,7 +34,7 @@ function CoeFinance() {
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
-					onChange={(tab:string) => handleTabChange(tab)}
+					onChange={(tab) => handleTabChange(tab)}
 					fullWidth
 					themeType="primary"
 				>

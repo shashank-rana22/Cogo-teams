@@ -47,7 +47,7 @@ function Logistics() {
 					/>
 				</div>
 				<div className={styles.flex}>
-					{entityTab.map((item:ItemProps) => (
+					{entityTab.map((item) => (
 						<div
 							key={item.key}
 							onClick={() => {

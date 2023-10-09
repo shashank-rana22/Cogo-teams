@@ -3,7 +3,7 @@ import React from 'react';
 
 const DOCUMENT_NUMBER_LENGTH = 10;
 const SUBSTRING_MAX_LENGTH = 10;
-function AdvanceDocNumber({ itemData }:ItemProps) {
+function AdvanceDocNumber({ itemData }) {
 	const { advanceDocumentNo = '' } = itemData || {};
 	return (
 		<div>

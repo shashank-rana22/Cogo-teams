@@ -122,7 +122,7 @@ function HawbList({ data, setViewDoc, setItem }) {
 							{fields.map((field) => (
 								<div
 									className={styles.col}
-									style={{ '--span': field.span || 1 } as React.CSSProperties}
+									style={{ '--span': field.span || 1 }}
 								>
 									{ field.label }
 								</div>

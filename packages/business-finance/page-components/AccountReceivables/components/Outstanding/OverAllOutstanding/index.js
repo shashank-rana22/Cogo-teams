@@ -73,7 +73,7 @@ function OverAllOutstanding({
 	const { page, pageLimit } = outStandingFilters || {};
 	const { totalRecords, list = [] } = outStandingData || {};
 
-	const handleChange = (val:string) => {
+	const handleChange = (val) => {
 		setoutStandingFilters({ ...outStandingFilters, search: val });
 	};
 

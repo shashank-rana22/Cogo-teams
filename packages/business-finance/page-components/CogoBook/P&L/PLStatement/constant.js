@@ -11,7 +11,7 @@ export const optionsPills = [
 	{ key: 'Segment', children: 'Segment' },
 	{ key: 'Service', children: 'Service' },
 ];
-export const optionsRadio = (chip:string) => {
+export const optionsRadio = (chip) => {
 	if (chip === 'DemandChannel') {
 		return [
 			{ label: 'Ocean ( IE,CP,ES )', value: 'Ocean', name: 'Ocean' },

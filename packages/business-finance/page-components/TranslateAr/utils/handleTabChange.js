@@ -1,7 +1,7 @@
 export const handleTabChange = (
-	v: string,
-	setReceivables: React.Dispatch<React.SetStateAction<string>>,
-	push: (a: string, b: string) => void,
+	v,
+	setReceivables,
+	push,
 ) => {
 	push(
 		'/business-finance/translate-account-receivables/[activeTab]',

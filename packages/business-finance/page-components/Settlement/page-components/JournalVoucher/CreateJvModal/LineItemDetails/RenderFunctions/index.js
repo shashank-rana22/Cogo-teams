@@ -12,7 +12,7 @@ function RenderButtons({
 	lineitemvalue = {},
 	insert = () => {},
 	index = 0,
-}: any) {
+}) {
 	return (
 		<div className={styles.flexcol}>
 			<Button
@@ -69,7 +69,7 @@ const handleModeChange = ({
 	accMode = '',
 	setValue = () => {},
 	getGlCode = () => {},
-}: any) => {
+}) => {
 	getGlCode({ index, entityCode, accMode, setValue });
 };
 
@@ -245,7 +245,7 @@ export const renderLineItemFunctions = {
 					control={control}
 					placeholder="Amount"
 					rules={{
-						validate: (val: number) => {
+						validate: (val) => {
 							if (val <= 0) {
 								return 'Must greater than 0';
 							}

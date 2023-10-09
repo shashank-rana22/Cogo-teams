@@ -93,7 +93,7 @@ function JobOpenModal({
 							<div className={styles.label}>{'Document - '}</div>
 
 							{!isEmpty(documentUrls)
-								? (documentUrls || []).map((url: string) => (
+								? (documentUrls || []).map((url) => (
 									<a key={url} href={url} target="_blank" rel="noreferrer">
 										View Document
 										<IcMEyeopen className={styles.icon} />

@@ -1,4 +1,4 @@
-const getAmountInLakh = (value:any) => {
+const getAmountInLakh = (value) => {
 	const val = value;
 
 	let formatedAmount = '';

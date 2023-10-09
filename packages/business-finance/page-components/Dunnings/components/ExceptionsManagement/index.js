@@ -144,7 +144,7 @@ function ExceptionsManagement() {
 					currentPage={SUB_TABS_VALUE ? pageNo : cyclePageNo}
 					totalItems={SUB_TABS_VALUE ? finalTotalRecords : finalCycleTotalRecords}
 					pageSize={10}
-					onPageChange={(pageValue: number) => {
+					onPageChange={(pageValue) => {
 						setExceptionFilter((prev) => ({ ...prev, pageIndex: pageValue }));
 					}}
 				/>

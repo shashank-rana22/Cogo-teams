@@ -26,7 +26,7 @@ const useGetInterJvData = ({
 		{ manual: true },
 	);
 
-	const useOnAction = async (status:string) => {
+	const useOnAction = async (status) => {
 		const payload = {
 			incidentId  : id,
 			parentJvId  : interCompanyJournalVoucherRequest?.id,

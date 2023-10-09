@@ -42,7 +42,7 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 		}
 	}, [showExpenseModal]);
 
-	const handlePageChange = (pageValue: number) => {
+	const handlePageChange = (pageValue) => {
 		setCurrentPage(pageValue);
 	};
 

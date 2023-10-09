@@ -72,7 +72,7 @@ function Card({
 					size="md"
 					items={optionsPills}
 					selectedItems={filters?.chip}
-					onItemChange={(val:string) => { setFilters((prev) => ({ ...prev, chip: val })); }}
+					onItemChange={(val) => { setFilters((prev) => ({ ...prev, chip: val })); }}
 				/>
 			</div>
 			<div className={styles.radio}>
@@ -120,7 +120,7 @@ function Card({
 							<div className={styles.bold_font_data}>Entity*</div>
 							<Select
 								value={filters?.entity}
-								onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
+								onChange={(val) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 								placeholder="Entity"
 								options={entityOptions}
 								isClearable
@@ -132,7 +132,7 @@ function Card({
 							<div className={styles.bold_font_data}>Month*</div>
 							<Select
 								value={filters?.date}
-								onChange={(val:string) => { setFilters((prev) => ({ ...prev, date: val })); }}
+								onChange={(val) => { setFilters((prev) => ({ ...prev, date: val })); }}
 								placeholder="Month"
 								options={OptionMonth()}
 								disabled={filters?.category}
@@ -146,7 +146,7 @@ function Card({
 							<div className={styles.bold_font_data}>Report Period*</div>
 							<Select
 								value={filters?.category}
-								onChange={(val:string) => { setFilters((prev) => ({ ...prev, category: val })); }}
+								onChange={(val) => { setFilters((prev) => ({ ...prev, category: val })); }}
 								placeholder="Category"
 								options={optionsPeriod}
 								disabled={filters?.month}

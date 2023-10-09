@@ -11,7 +11,7 @@ const useUpdateJob = ({
 }) => {
 	const { shipmentId, jobNumber, jobSource, jobType } = query || {};
 
-	const { user_data: userData } = useSelector(({ profile }: any) => ({
+	const { user_data: userData } = useSelector(({ profile }) => ({
 		user_data: profile?.user || {},
 	}));
 
@@ -48,7 +48,7 @@ const useUpdateJob = ({
 			Toast.error(error?.response?.data?.message);
 		}
 	};
-	const getData = async (data: string) => {
+	const getData = async (data) => {
 		const jobClose = () => {
 			if (data === 'Undo') {
 				return false;

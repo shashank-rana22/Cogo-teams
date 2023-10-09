@@ -3,7 +3,6 @@ import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-
 const useApproveReject = ({
 	remarksVal, overAllRemark,
 	lineItemsRemarks, modalData, setApprove, billId,
@@ -57,7 +56,7 @@ const useApproveReject = ({
 				getRoute()[0],
 				getRoute()[1],
 			);
-		} catch (error:any) {
+		} catch (error) {
 			Toast.error(error?.response?.data?.message || 'Something went wrong');
 		}
 	};

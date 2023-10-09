@@ -11,7 +11,7 @@ const getColor = () => {
 	return color;
 };
 
-function UserCard({ userData = {}, type = '' }:Props) {
+function UserCard({ userData = {}, type = '' }) {
 	const getInitials = (name = '') => {
 		if (!name) {
 			return '';

@@ -12,7 +12,7 @@ export const config = (
 	{
 		Header   : '',
 		id       : 'checkbox',
-		accessor : (row?:object) => (
+		accessor : (row) => (
 			<CheckboxItem
 				uncheckedRows={uncheckedRows}
 				setUncheckedRows={setUncheckedRows}

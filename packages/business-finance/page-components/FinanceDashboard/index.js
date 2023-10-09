@@ -10,7 +10,7 @@ function FinanceDashboard() {
 	const { query, push } = useRouter();
 
 	const [activeTab, setActiveTab] = useState(query?.activeTab || 'logistics');
-	const handleTabChange = (tab:string) => {
+	const handleTabChange = (tab) => {
 		setActiveTab(tab);
 		push(
 			'/business-finance/finance-dashboard/[activeTab]',
@@ -26,7 +26,7 @@ function FinanceDashboard() {
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
-					onChange={(tab:string) => handleTabChange(tab)}
+					onChange={(tab) => handleTabChange(tab)}
 					fullWidth
 					themeType="primary"
 				>

@@ -30,7 +30,7 @@ function ChargeDetails({
 	edit,
 	viewDoc = false,
 	activeHawb = {},
-}:Props) {
+}) {
 	let tempColor = '#333';
 	if (whiteout) {
 		tempColor = 'transparent';

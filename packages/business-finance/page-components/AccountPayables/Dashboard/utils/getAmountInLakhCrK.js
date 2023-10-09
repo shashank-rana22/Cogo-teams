@@ -1,4 +1,4 @@
-const getAmountInLakhCrK = (value:number) => {
+const getAmountInLakhCrK = (value) => {
 	const val = Math.abs(value);
 	let formatedAmount = '0';
 	if (val >= 10000000) {

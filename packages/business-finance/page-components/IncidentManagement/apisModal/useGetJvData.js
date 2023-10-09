@@ -31,7 +31,7 @@ const useGetJvData = ({ refetch, setShowJVModal, journalVoucherRequest, id, rema
 		{ manual: true },
 	);
 
-	const useOnAction = async (status:string) => {
+	const useOnAction = async (status) => {
 		const api = status === 'APPROVED' ? ApproveTrigger : RejectTrigger;
 		const payload =	status === 'APPROVED'
 			? {

@@ -1,6 +1,6 @@
 import { MultiSelect, Select, SingleDateRange, Toggle } from '@cogoport/components';
 
-export const getElements = (type: string) => {
+export const getElements = (type) => {
 	switch (type) {
 		case 'select':
 			return Select;

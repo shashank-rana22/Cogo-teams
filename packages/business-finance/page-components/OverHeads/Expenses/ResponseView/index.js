@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 function ResponseView() {
 	const {
 		profile,
-	} = useSelector((state:any) => state);
+	} = useSelector((state) => state);
 	const userId = profile?.user?.id;
 
 	const { query } = useRouter();

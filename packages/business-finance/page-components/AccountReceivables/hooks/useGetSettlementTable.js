@@ -5,7 +5,7 @@ import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
-function useGetSettlementTable(organizationId: string, entityCode?: string) {
+function useGetSettlementTable(organizationId, entityCode) {
 	const [filters, setFilters] = useState({
 		query       : '',
 		date        : { startDate: '', endDate: '' },

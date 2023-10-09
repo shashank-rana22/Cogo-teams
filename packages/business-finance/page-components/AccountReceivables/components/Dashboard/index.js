@@ -45,7 +45,7 @@ function Dashboard({ entityCode = '' }) {
 		salesFunnelLoading,
 	} = loading || {};
 
-	const onChange = (val:string, name:string) => {
+	const onChange = (val, name) => {
 		setFilterValue((p) => ({ ...p, [name]: val }));
 	};
 
@@ -67,7 +67,7 @@ function Dashboard({ entityCode = '' }) {
 					<div className={styles.input}>
 						<Select
 							value={filterValue.serviceType}
-							onChange={(val:string) => onChange(val, 'serviceType')}
+							onChange={(val) => onChange(val, 'serviceType')}
 							placeholder={t('service_type_placeholder')}
 							options={SHIPMENT_TYPE_OPTIONS}
 							isClearable
@@ -77,7 +77,7 @@ function Dashboard({ entityCode = '' }) {
 						<SegmentedControl
 							options={SERVICE_PROVIDER}
 							activeTab={filterValue.companyType}
-							setActiveTab={(val:string) => (
+							setActiveTab={(val) => (
 								setFilterValue({ ...filterValue, companyType: val }))}
 							background="#FFFAEB"
 							color="#ED3726"

@@ -1,6 +1,6 @@
 import { InputController, MultiselectController, SelectController, TextAreaController } from '@cogoport/forms';
 
-export const getElementController = (type: string) => {
+export const getElementController = (type) => {
 	switch (type) {
 		case 'text':
 			return InputController;

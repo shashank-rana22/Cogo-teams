@@ -60,7 +60,7 @@ function SourceFile() {
 					<div className={styles.select_container}>
 						<Select
 							value={filters?.month}
-							onChange={(val:string) => { setFilters((prev) => ({ ...prev, month: val })); }}
+							onChange={(val) => { setFilters((prev) => ({ ...prev, month: val })); }}
 							placeholder="Month"
 							options={OptionMonth()}
 							isClearable
@@ -72,7 +72,7 @@ function SourceFile() {
 					<div className={styles.select_container}>
 						<Select
 							value={filters?.entity}
-							onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
+							onChange={(val) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 							placeholder="Entity"
 							options={entityOptions}
 							isClearable
@@ -87,7 +87,7 @@ function SourceFile() {
 						<div className={styles.input_container}>
 							<Input
 								value={filters?.query}
-								onChange={(val:string) => { setFilters((prev) => ({ ...prev, query: val })); }}
+								onChange={(val) => { setFilters((prev) => ({ ...prev, query: val })); }}
 								placeholder="Search"
 								suffix={<IcMSearchlight height="20px" width="20px" style={{ marginRight: '8px' }} />}
 							/>

@@ -32,7 +32,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 	let onAccountReceivable = 0;
 	let outstandingReceivable = 0;
 
-	(onAccountAndOutStandingData || []).forEach((item:any) => {
+	(onAccountAndOutStandingData || []).forEach((item) => {
 		if (item?.id === 'onAccount') {
 			onAccountReceivable = item?.value;
 			return onAccountReceivable;

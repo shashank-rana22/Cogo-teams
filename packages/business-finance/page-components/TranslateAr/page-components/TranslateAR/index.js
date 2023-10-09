@@ -19,13 +19,13 @@ function TranslateAR() {
 			<div className={styles.tabs}>
 				<Tabs
 					activeTab={receivables}
-					onChange={(val:string) => handleTabChange(val, setReceivables, push)}
+					onChange={(val) => handleTabChange(val, setReceivables, push)}
 					themeType="primary"
 					id="translate_tab_view"
 				>
 					{TABS_MAPPING.map(({ label = '', value = '', Component }) => (
 						<TabPanel name={value} title={label}>
-							<Component {...PropMapping[value as keyof typeof PropMapping]} />
+							<Component {...PropMapping[value]} />
 						</TabPanel>
 					))}
 				</Tabs>
