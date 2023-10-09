@@ -1,4 +1,4 @@
-import { Button, cl, Input } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -10,8 +10,6 @@ import UserCard from '../UserCard';
 
 import styles from './styles.module.css';
 
-const MIN_GROUP_LENGTH = 1;
-
 function ToUser({
 	viewType = '',
 	firestore = {},
@@ -19,14 +17,10 @@ function ToUser({
 }) {
 	const [users, setUsers] = useState({ userIds: [], userData: [] });
 
-	const [groupName, setGroupName] = useState('');
-
-	const [showGroupError, setShowGroupError] = useState(false);
-
 	const {
 		createOrGetDraftTeamRoom = () => {},
 		loading = false,
-	} = useCreateOrGetDraftTeamRoom({ firestore, setActiveTab, setShowGroupError });
+	} = useCreateOrGetDraftTeamRoom({ firestore, setActiveTab });
 
 	const handleSave = () => {
 		const { userIds = [], userData = [] } = users || {};
@@ -41,33 +35,13 @@ function ToUser({
 		createOrGetDraftTeamRoom({
 			userIds,
 			userIdsData: modifiedUserData,
-			groupName,
 		});
 	};
 
 	const isEmptyList = isEmpty(users?.userIds);
 
-	const isGroup = users?.userIds?.length > MIN_GROUP_LENGTH;
-
-	const isNameEmpty = isGroup && isEmpty(groupName);
-
-	const showGroupInput = isGroup && showGroupError;
-
 	return (
 		<div className={styles.wrapper}>
-			<div className={cl`${styles.group_name} ${showGroupInput ? styles.group_name_visible : ''}`}>
-				{showGroupInput ? (
-					<>
-						<div className={styles.group_name_label}>*Group Name:</div>
-						<Input
-							size="sm"
-							value={groupName}
-							onChange={setGroupName}
-							placeholder=" "
-						/>
-					</>
-				) : null}
-			</div>
 			<div className={styles.flex_common}>
 				<div className={styles.flex_child}>
 					To:
@@ -100,7 +74,7 @@ function ToUser({
 					className={styles.button_styles}
 					loading={loading}
 					onClick={handleSave}
-					disabled={isEmptyList || (isNameEmpty && showGroupError)}
+					disabled={isEmptyList}
 				>
 					<IcMPlus className={styles.plus_icon} />
 				</Button>

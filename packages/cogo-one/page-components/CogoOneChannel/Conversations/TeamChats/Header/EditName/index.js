@@ -1,11 +1,14 @@
 import { Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEdit } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EditGroupName from '../EditGroupName';
 
 import styles from './styles.module.css';
+
+const groupNameRegex = new RegExp(GLOBAL_CONSTANTS.regex_patterns.group_draft_name);
 
 function EditName({
 	searchName = '',
@@ -15,11 +18,12 @@ function EditName({
 	isDraft = false,
 }) {
 	const [openPopover, setOpenPopover] = useState(false);
+	const isDraftName = !isEmpty(searchName.match(groupNameRegex));
 
 	return (
 		<>
 			<div className={styles.name_display}>
-				{startCase(searchName?.toLowerCase() || 'Unkown User')}
+				{!isDraftName ? startCase(searchName?.toLowerCase() || 'Unkown User') : searchName}
 			</div>
 			<div className={styles.popover_container}>
 				{isGroup ? (

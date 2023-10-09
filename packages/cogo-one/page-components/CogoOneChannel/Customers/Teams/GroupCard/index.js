@@ -1,7 +1,7 @@
 import { cl, Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import { togglePinChat } from '../../../../../helpers/teamsPinChatHelpers';
@@ -12,6 +12,8 @@ import styles from './styles.module.css';
 
 const DEFAULT_UNREAD_MESSAGES = 0;
 const MAXIMUM_UNREAD_MESSAGES = 100;
+
+const groupNameRegex = new RegExp(GLOBAL_CONSTANTS.regex_patterns.group_draft_name);
 
 function GroupCard({
 	eachRoom = {},
@@ -38,6 +40,8 @@ function GroupCard({
 	const mediaText = last_message_document?.response?.message_type === 'media' ? 'media' : '';
 
 	const lastMessage = last_message_document?.response?.message || mediaText;
+
+	const isDraftName = !isEmpty(search_name?.match(groupNameRegex));
 
 	const { renderTime } = dateTimeConverter(
 		Date.now() - Number(lastActive),
@@ -73,7 +77,7 @@ function GroupCard({
 						/>
 					)}
 					<div className={styles.type}>
-						{startCase(search_name?.toLowerCase() || '')}
+						{!isDraftName ? startCase(search_name?.toLowerCase() || '') : search_name }
 					</div>
 					{self_unread_messages_count > DEFAULT_UNREAD_MESSAGES && (
 						<div className={styles.new_message_count}>

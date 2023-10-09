@@ -12,6 +12,7 @@ import {
 import { useState } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
+import formatNames from '../helpers/getGroupName';
 
 import useHashFunction from './useHashFunction';
 
@@ -82,6 +83,8 @@ async function createDraftRoom({
 
 	if (!isGroup) {
 		searchName = userIdsData?.find((member) => member?.id !== loggedInAgendId)?.name || 'user';
+	} else {
+		searchName = formatNames({ userIdsData });
 	}
 
 	const draftRoomPayload = {
@@ -107,7 +110,6 @@ async function createDraftRoom({
 function useCreateOrGetDraftTeamRoom({
 	firestore = {},
 	setActiveTab = () => {},
-	setShowGroupError = () => {},
 }) {
 	const { loggedInAgendId, loggedInAgentName, agentData } = useSelector(({ profile }) => ({
 		loggedInAgendId   : profile.user.id,
@@ -134,7 +136,7 @@ function useCreateOrGetDraftTeamRoom({
 		}));
 	};
 
-	const createOrGetDraftTeamRoom = async ({ userIds = [], userIdsData = [], groupName = '' }) => {
+	const createOrGetDraftTeamRoom = async ({ userIds = [], userIdsData = [] }) => {
 		setLoading(true);
 
 		const modifiedUserIdsData = [...userIdsData, {
@@ -165,23 +167,16 @@ function useCreateOrGetDraftTeamRoom({
 				return;
 			}
 
-			if (!groupName && userIds?.length > GROUP_COUNT_MIN) {
-				setShowGroupError(true);
-				return;
-			}
-
 			const res = await createDraftRoom({
 				userIds     : modifiedUserIds,
 				userIdsData : modifiedUserIdsData,
 				firestore,
 				loggedInAgendId,
 				groupMembersHashString,
-				groupName,
 				length      : userIds?.length,
 			});
 
 			setActiveRoom({ val: res });
-			setShowGroupError(false);
 		} catch (e) {
 			console.error('e', e);
 			Toast.error('Something Went Wrong');

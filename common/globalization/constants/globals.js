@@ -623,6 +623,7 @@ const GLOBAL_CONSTANTS = {
 		hyphen_characters           : /-/g,
 		text_pattern_classifier     : /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
 		first_number_contains_zeros : /^0+/,
+		group_draft_name            : /\+(\d+) MORE/g,
 	},
 	zeroth_index                 : 0,
 	one                          : 1,
