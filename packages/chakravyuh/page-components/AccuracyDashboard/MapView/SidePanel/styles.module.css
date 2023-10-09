@@ -114,6 +114,15 @@
 	max-height: calc(100vh - 78px);
 	padding: 20px 24px 78px;
 	overflow-y: auto;
+
+	:global .ui_select_options_container {
+		max-height: 200px;
+		padding: 4px;
+
+		.ui_select_option_item {
+			font-size: 12px;
+		}
+	}
 }
 
 .list_header {
