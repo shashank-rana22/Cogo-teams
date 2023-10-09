@@ -34,7 +34,9 @@ const WorldGeometry = React.forwardRef(({
 	const onEachFeature = (feature, layer, id, name) => {
 		const fillColor = !accuracyMapping[id]
 			? 'transparent'
-			: COLORS[Math.floor((accuracyMapping[id] - minCount) / range)];
+			: COLORS[Object.keys(accuracyMapping).length === 1 || minCount === maxCount
+				? COLORS.length - 1
+				: Math.floor((accuracyMapping[id] - minCount) / range)];
 
 		const styleProps = filterBy.includes('accuracy') ? getPolygonStyleProps(accuracyMapping[id]) : {
 			weight      : 0.5,

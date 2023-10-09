@@ -6,12 +6,12 @@ import styles from './styles.module.css';
 
 const ANCHOR = -15;
 const DEFAULT_SIZE = 12;
-const getIcon = ({ className, backgroundColor, size }) => L.divIcon({
+const getIcon = ({ className, backgroundColor, size, lightFill = false }) => L.divIcon({
 	className   : styles.remove_bg,
 	iconSize    : L.point(...size),
 	popupAnchor : [GLOBAL_CONSTANTS.zeroth_index, ANCHOR],
 	html        : `<div class="${className}" 
-					style="background: ${backgroundColor}"
+					style="background: ${backgroundColor}; ${lightFill ? 'border:1px solid #333' : ''}"
 					/>`,
 
 });
@@ -27,6 +27,7 @@ const Point = React.forwardRef(({
 			${!animate ? styles.hide_animation : ''} ${className}`,
 			size,
 			backgroundColor,
+			lightFill: rest?.lightFill,
 		})}
 		{...rest}
 		ref={ref}
