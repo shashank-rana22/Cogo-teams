@@ -1,5 +1,3 @@
-import { cl } from '@cogoport/components';
-
 import CardLoadingState from '../../../../../../../../common/LoadingState/CardLoadingState';
 
 import styles from './styles.module.css';
@@ -8,7 +6,6 @@ function EmailPreview({
 	emailPreviews = {},
 	emailWatch = () => {},
 	loading = false,
-	agent_email = '',
 	selected = {},
 }) {
 	if (loading) {
@@ -17,16 +14,6 @@ function EmailPreview({
 
 	return (
 		<>
-			<div className={cl`${styles.label} ${styles.email_preview}`}>
-				Email preview
-				{' '}
-				<span style={{ fontWeight: '500' }}>
-					(sent from
-					{' '}
-					{agent_email}
-					)
-				</span>
-			</div>
 			<div className={styles.text}>
 				Subject -
 				{' '}

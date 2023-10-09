@@ -11,6 +11,7 @@ function ModalHeader({
 	refreshTickets = () => {},
 	setShowReassign = () => {},
 	setShowEscalate = () => {},
+	setShowResolveRequest = () => {},
 	updateTicketActivity = () => {},
 }) {
 	const {
@@ -42,6 +43,7 @@ function ModalHeader({
 				setShowEscalate={setShowEscalate}
 				isCurrentReviewer={isCurrentReviewer}
 				isClosureAuthorizer={isClosureAuthorizer}
+				setShowResolveRequest={setShowResolveRequest}
 			/>
 		</div>
 	);
