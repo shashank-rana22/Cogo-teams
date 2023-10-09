@@ -3,8 +3,8 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 function CommodityDetails({ isAir = false, detail = {}, commodityDataDetails = {} }) {
-	const { commodity, commodity_sub_type, commodity_type } = detail;
-	const { commodity_subtype } = commodityDataDetails;
+	const { commodity, commodity_sub_type, commodity_type } = detail || {};
+	const { commodity_subtype } = commodityDataDetails || {};
 	if (isAir) {
 		return (
 			<div>

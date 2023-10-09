@@ -8,7 +8,7 @@ const INCREMENT_NUM = 1;
 function FormatCertificate({ certificates = [] }) {
 	return (
 		<div className={styles.certificate_container}>
-			{(certificates).map((item, key) => (
+			{(certificates || []).map((item, key) => (
 				<a href={item} target="_blank" rel="noreferrer" key={item}>
 					Click to view certificate
 					{' '}

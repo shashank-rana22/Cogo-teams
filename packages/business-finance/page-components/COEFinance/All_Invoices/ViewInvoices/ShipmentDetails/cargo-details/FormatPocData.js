@@ -1,7 +1,7 @@
 import React from 'react';
 
 function FormatPocData({ pocDetails = {} }) {
-	const { name = '', mobile_country_code = '', mobile_number = '', email = '' } = pocDetails;
+	const { name = '', mobile_country_code = '', mobile_number = '', email = '' } = pocDetails || {};
 	return (
 		<div>
 			<div>{name}</div>
