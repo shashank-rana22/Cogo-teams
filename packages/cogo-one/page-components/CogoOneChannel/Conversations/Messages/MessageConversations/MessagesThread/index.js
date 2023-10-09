@@ -4,11 +4,11 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { forwardRef, useEffect, useMemo } from 'react';
 
+import TimeLine from '../../../../../../common/TimeLine';
 import { updateUnreadMessagesCount } from '../../../../../../helpers/updateUnreadMessagesCount';
 
 import { ReceiveDivComponent, SentDivComponent } from './conversationDivMappings';
 import GroupedTimeLine from './GroupedTimeLine';
-import TimeLine from './GroupedTimeLine/TimeLine';
 import NewUserOutBound from './NewUserOutBound';
 import styles from './styles.module.css';
 

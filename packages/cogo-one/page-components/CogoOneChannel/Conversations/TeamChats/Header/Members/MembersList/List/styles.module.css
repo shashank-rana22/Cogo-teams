@@ -1,0 +1,65 @@
+.list {
+	width: 100%;
+	height: fit-content;
+	max-height: 175px;
+	padding: 8px 2px 0;
+	overflow: auto;
+
+	:global {
+		.ui_avatar_text {
+			background: none;
+		}
+	}
+}
+
+.each_member {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 8px;
+	border-radius: 4px;
+
+	&:hover {
+		background-color: #f8f2e7;
+
+		svg {
+			display: block;
+		}
+	}
+}
+
+.styled_avatar {
+	margin-right: 8px;
+	background: #ffd761;
+	border-radius: 50% !important;
+}
+
+.name {
+	max-width: 100px;
+	overflow: hidden;
+	font-size: 12px;
+	word-break: break-word;
+}
+
+.flex_name {
+	display: flex;
+	align-items: center;
+	width: calc(100% - 20px);
+}
+
+.cross_styles {
+	display: none;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+	fill: #4f4f4f;
+}
+
+.admin {
+	width: 14px;
+	height: 14px;
+	margin-left: 6px;
+	color: #828282;
+	cursor: pointer;
+}

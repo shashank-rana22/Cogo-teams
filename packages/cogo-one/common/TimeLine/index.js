@@ -4,8 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowDoubleUp } from '@cogoport/icons-react';
 import React from 'react';
 
-import { CHANNEL_TYPE } from '../../../../../../../../constants';
-import getVoiceCallStatement from '../../../../../../../../utils/getVoiceCallStatement';
+import { CHANNEL_TYPE } from '../../constants';
+import getVoiceCallStatement from '../../utils/getVoiceCallStatement';
 
 import styles from './styles.module.css';
 

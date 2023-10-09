@@ -1,8 +1,9 @@
 import { IcMArrowDoubleDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import TimeLine from '../../../../../../../common/TimeLine';
+
 import styles from './styles.module.css';
-import TimeLine from './TimeLine';
 
 function GroupedTimeLine({ eachMessage = {} }) {
 	const [expandedState, setExpandedState] = useState(false);
