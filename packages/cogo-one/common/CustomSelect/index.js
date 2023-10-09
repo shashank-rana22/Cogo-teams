@@ -15,16 +15,15 @@ function CustomSelect({
 		labelKey = 'label',
 		onChange = () => {},
 		value = '',
-		renderLabel = () => {},
+		renderLabel = null,
 		disabled = false,
 		onSearch = () => {},
 		optionsHeader = null,
+		keyProp = '',
 	} = props || {};
 
 	const [isOpen, setIsOpen] = useState(false);
 	const rootRef = useRef(null);
-
-	const selectRef = useRef(null);
 
 	const handleClickOpen = () => {
 		if (!disabled && !isOpen) {
@@ -37,18 +36,19 @@ function CustomSelect({
 	};
 
 	useEffect(() => {
-		const handleClickOutside = (e) => {
+		const handleOuterClick = (e) => {
 			if (rootRef.current && !rootRef.current.contains(e.target)) {
 				setIsOpen(false);
+				onSearch('');
 			}
 		};
 
-		document.addEventListener('mousedown', handleClickOutside);
+		document.addEventListener('mouseup', handleOuterClick);
 
 		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
+			document.removeEventListener('mouseup', handleOuterClick);
 		};
-	}, [rootRef]);
+	}, [onSearch, rootRef]);
 
 	return (
 		<div
@@ -62,12 +62,13 @@ function CustomSelect({
 			>
 				<Select
 					{...props}
-					ref={selectRef}
+					key={`${disabled}_${keyProp}_${!isOpen ? loading : ''}`}
 					onSearch={onSearch}
 				/>
 			</div>
 
-			<div className={cl`${styles.select_options_container} 
+			<div
+				className={cl`${styles.select_options_container} 
 				${isOpen ? styles.select_options_container_open : ''}`}
 			>
 				<div className={cl`${styles.custom_header} ${cl.ns('custom_header')}`}>
@@ -87,7 +88,7 @@ function CustomSelect({
 										<li>
 											<span className={styles.list_item}>No Results</span>
 										</li>
-									) : options.map(
+									) : (options || [])?.map(
 										(option) => (
 											<li
 												role="option"
@@ -96,6 +97,7 @@ function CustomSelect({
 												onClick={() => {
 													onChange(option?.[valueKey], option);
 													setIsOpen(false);
+													onSearch('');
 												}}
 												aria-selected={option?.[valueKey] === value}
 											>

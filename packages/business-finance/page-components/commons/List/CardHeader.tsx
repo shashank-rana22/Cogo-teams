@@ -1,4 +1,5 @@
-import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import { Tooltip } from '@cogoport/components';
+import { IcMArrowRotateDown, IcMArrowRotateUp, IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
 import React, { ReactNode } from 'react';
 
 import { NestedObj, FieldType } from '../Interfaces/index';
@@ -10,13 +11,14 @@ export interface Props {
 	sort?: NestedObj;
 	setSort?: React.Dispatch<React.SetStateAction<NestedObj>>;
 	headerStyles?: React.CSSProperties;
-	showHeaderCheckbox?:boolean;
+	showHeaderCheckbox?: boolean;
 	renderHeaderCheckbox?: () => (ReactNode | '');
 }
 
 function Header({
 	fields, sort, setSort = () => [], headerStyles, renderHeaderCheckbox = () => '', showHeaderCheckbox = false,
-}:Props) {
+
+}: Props) {
 	const handleOnChangeUp = (item: FieldType) => {
 		const fieldType = item.sorting!.name;
 		setSort(() => ({
@@ -48,21 +50,50 @@ function Header({
 							<div className={styles.center}>
 								<IcMArrowRotateUp
 									className={
-									sort?.[field.sorting.name] === 'asc' && styles.asc
-								}
+										sort?.[field.sorting.name] === 'asc' && styles.asc
+									}
 									onClick={() => handleOnChangeUp(field)}
 								/>
 							</div>
 							<div className={styles.centers}>
 								<IcMArrowRotateDown
 									className={
-								sort?.[field.sorting.name] === 'desc' && styles.desc
-							}
+										sort?.[field.sorting.name] === 'desc' && styles.desc
+									}
 									onClick={() => handleOnChangeDown(field)}
 								/>
 							</div>
 						</>
 					) : null}
+					{field.infoIconRequired ? (
+						<Tooltip
+							placement="top"
+							content={(
+								<div>
+									<div className={styles.div_flex}>
+										<IcMProvision
+											height={24}
+											width={24}
+											color="#F68B21"
+										/>
+										<span className={styles.margin_span}>
+											Remarks
+										</span>
+									</div>
+									<div className={styles.div_flex}>
+										<IcMOverview width={24} height={24} color="#F68B21" />
+										<span className={styles.margin_span}>
+											Invoice TimeLine
+										</span>
+									</div>
+								</div>
+
+							)}
+						>
+							<IcMInfo className={styles.icon_style} />
+						</Tooltip>
+					)
+						: null}
 				</div>
 			))}
 		</header>

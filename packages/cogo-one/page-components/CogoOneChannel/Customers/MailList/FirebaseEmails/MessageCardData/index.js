@@ -110,7 +110,9 @@ function MessageCardData({
 						)}
 					>
 						<div className={styles.user_name_title}>
-							{startCase(search_user_name) || 'User'}
+							{search_user_name !== 'website_user'
+								? (startCase(search_user_name) || 'User')
+								: mailToBeShown.join(', ')}
 						</div>
 					</Tooltip>
 
@@ -130,10 +132,18 @@ function MessageCardData({
 				{subject || last_message}
 			</div>
 
-			<div
-				className={styles.message_content}
-				dangerouslySetInnerHTML={{ __html: bodyPreview || body }}
-			/>
+			{bodyPreview
+				? (
+					<div className={styles.body_preview}>
+						{bodyPreview}
+					</div>
+				)
+				: (
+					<div
+						className={styles.message_content}
+						dangerouslySetInnerHTML={{ __html: body || '' }}
+					/>
+				)}
 
 			<DisplayAttachments
 				mediaUrls={mediaUrls}

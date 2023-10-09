@@ -1,28 +1,31 @@
 import { Placeholder, Tooltip, Select } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { getSalesFunnelOptions } from '../../../constants';
-import useGetInvoiceJourney from '../../../hooks/useGetInvoiceJourney';
+import { getSalesFunnelOptions } from '../../../constants/index.ts';
+import useGetInvoiceJourney from '../../../hooks/useGetInvoiceJourney.ts';
 
 import styles from './styles.module.css';
 
-interface InvoiceJourneyProps {
-	filterValue?: object
-	entityCode?: string
-}
+const FIRST_ARRAY_SIZE = 3;
+const SECOND_ARRAY_SIZE = 4;
+const DEFAULT_VALUE = 0;
 
-function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
+function InvoiceJourney({ filterValue, entityCode }) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
+	const d = new Date();
+	const currentMonth = GLOBAL_CONSTANTS.month_name[d.getMonth()];
+	const currentYear = d.getFullYear();
 
 	const {
 		journeyData, journeyLoading, dateFilter,
 		setDateFilter, optionsVal,
 	} = useGetInvoiceJourney({ filterValue, entityCode });
 
-	const { irn_label:irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
+	const { irn_label: irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 
 	const {
 		draftInvoicesCount, financeAcceptedInvoiceCount,
@@ -32,34 +35,34 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 	} = journeyData || {};
 
 	const getCircleData = [
-		{ id: 1, number: draftInvoicesCount || 0, label: t('draft') },
-		{ id: 2, number: financeAcceptedInvoiceCount || 0, label: t('finance_accepted') },
-		{ id: 3, number: irnGeneratedInvoicesCount || 0, label: `${irnLabel} ${t('generated')}` },
-		{ id: 4, number: settledInvoicesCount || 0, label: t('settled') },
+		{ id: 1, number: draftInvoicesCount || DEFAULT_VALUE, label: t('draft') },
+		{ id: 2, number: financeAcceptedInvoiceCount || DEFAULT_VALUE, label: t('finance_accepted') },
+		{ id: 3, number: irnGeneratedInvoicesCount || DEFAULT_VALUE, label: `${irnLabel} ${t('generated')}` },
+		{ id: 4, number: settledInvoicesCount || DEFAULT_VALUE, label: t('settled') },
 	];
 
 	const getTatData = [
 		{
 			id    : 1,
 			label : `${t('draft')} - ${t('finance_accepted')} `,
-			TAT   : `${tatHoursFromDraftToFinanceAccepted || 0} ${t('hours')} `,
-			Count : financeAcceptedInvoiceEventCount || 0,
+			TAT   : `${tatHoursFromDraftToFinanceAccepted || DEFAULT_VALUE} ${t('hours')} `,
+			Count : financeAcceptedInvoiceEventCount || DEFAULT_VALUE,
 		},
 		{
 			id    : 2,
 			label : `${t('finance_accepted')} - ${irnLabel} ${t('generated')}`,
-			TAT   : `${tatHoursFromFinanceAcceptedToIrnGenerated || 0} ${t('hours')} `,
-			Count : irnGeneratedInvoiceEventCount || 0,
+			TAT   : `${tatHoursFromFinanceAcceptedToIrnGenerated || DEFAULT_VALUE} ${t('hours')} `,
+			Count : irnGeneratedInvoiceEventCount || DEFAULT_VALUE,
 		},
 		{
 			id    : 3,
 			label : `${irnLabel} ${t('generated')} - ${t('settled')} `,
-			TAT   : `${tatHoursFromIrnGeneratedToSettled || 0} ${t('hours')} `,
-			Count : settledInvoiceEventCount || 0,
+			TAT   : `${tatHoursFromIrnGeneratedToSettled || DEFAULT_VALUE} ${t('hours')} `,
+			Count : settledInvoiceEventCount || DEFAULT_VALUE,
 		},
 	];
 
-	const onChange = (val:string, key:string) => {
+	const onChange = (val, key) => {
 		setDateFilter((p) => ({ ...p, [key]: val }));
 	};
 	return (
@@ -92,7 +95,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 
 						<div className={styles.invoice_journey_loader}>
 
-							{	[1, 2, 3, 4].map((item) => (
+							{[...Array(SECOND_ARRAY_SIZE).keys()].map((item) => (
 
 								<Placeholder key={item} className={styles.invoice_loader} />
 
@@ -105,7 +108,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 					: (
 						<div className={styles.sub_container}>
 
-							{ getCircleData.map((item) => (
+							{getCircleData.map((item) => (
 								<div key={item.id} className={styles.column_flex}>
 									<div className={styles.circle}>
 										<div className={styles.number}>{item?.number}</div>
@@ -124,8 +127,8 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 					<div className={styles.margin_right}>
 						<Select
 							value={dateFilter.month}
-							onChange={(val:string) => onChange(val, 'month')}
-							placeholder={t('by_month_placeholder')}
+							onChange={(val) => onChange(val, 'month')}
+							placeholder={currentMonth}
 							options={getSalesFunnelOptions(t)}
 							isClearable
 						/>
@@ -133,8 +136,8 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 
 					<Select
 						value={dateFilter.year}
-						onChange={(val:string) => onChange(val, 'year')}
-						placeholder={t('by_year_placeholder')}
+						onChange={(val) => onChange(val, 'year')}
+						placeholder={currentYear}
 						options={optionsVal()}
 						isClearable
 					/>
@@ -146,7 +149,7 @@ function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 
 						<div className={styles.invoice_tat_loader}>
 
-							{	[1, 2, 3].map((item) => (
+							{[...Array(FIRST_ARRAY_SIZE).keys()].map((item) => (
 
 								<Placeholder key={item} className={styles.invoice_tat_placeholder} />
 
