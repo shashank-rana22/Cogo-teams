@@ -1,4 +1,5 @@
-import { cl, Button, Select } from '@cogoport/components';
+import { cl, Button, Select, Toggle } from '@cogoport/components';
+import { useHandleVersionChangeToOld } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
 import React, { useState, useMemo } from 'react';
 
@@ -12,6 +13,8 @@ import OrTag from './OrTag';
 import styles from './styles.module.css';
 
 function Header() {
+	const { handleRouteChange } = useHandleVersionChangeToOld({});
+
 	const { t } = useTranslation(['common', 'airOceanTracking']);
 
 	const options = useMemo(() => getOptions({ t }), [t]);
@@ -29,7 +32,17 @@ function Header() {
 
 	return (
 		<div className={styles.container}>
-			<h2>{t('airOceanTracking:track_your_shipments_text')}</h2>
+			<div className={styles.heading}>
+				<h2>{t('airOceanTracking:track_your_shipments_text')}</h2>
+				<div className={styles.toggle}>
+					<Toggle
+						size="md"
+						onLabel="Old"
+						offLabel="New"
+						onChange={handleRouteChange}
+					/>
+				</div>
+			</div>
 			<div className={styles.form_container}>
 
 				<div className={styles.row}>
