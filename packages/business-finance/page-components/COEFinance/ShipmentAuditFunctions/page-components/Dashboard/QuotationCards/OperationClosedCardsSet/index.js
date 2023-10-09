@@ -30,7 +30,8 @@ function OperationClosedCardsSet({
 		}
 
 		setQuotationsData((prev) => ({ ...prev, oprClosedData: taskData }));
-	}, [taskData, setQuotationsData]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(taskData), setQuotationsData]);
 	return (
 		<div className={styles.task_specific_container}>
 			<OperationalClosedCards

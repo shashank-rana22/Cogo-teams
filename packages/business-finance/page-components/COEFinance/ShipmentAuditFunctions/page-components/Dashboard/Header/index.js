@@ -56,7 +56,8 @@ function Header({ jobId = '' }) {
 		setAccordionState(INITIAL_STATE);
 
 		setQuotationsData((prev) => ({ ...prev, prePostCheckoutData: quoteData }));
-	}, [quoteData]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(quoteData)]);
 
 	return (
 		<div className={styles.main_container}>
