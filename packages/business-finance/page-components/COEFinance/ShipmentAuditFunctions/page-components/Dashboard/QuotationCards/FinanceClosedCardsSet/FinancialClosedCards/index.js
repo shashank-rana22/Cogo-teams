@@ -1,18 +1,19 @@
-import { Placeholder } from '@cogoport/components';
-import { IcMDummyCircle } from '@cogoport/icons-react';
+// import { Placeholder } from '@cogoport/components';
+// import { IcMDummyCircle } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import Timeline from '../../../../../commons/CardContent';
+// import Timeline from '../../../../../commons/CardContent';
+import SellBuyCards from '../../../../../commons/SellBuyCards';
 
 import styles from './styles.module.css';
 
 function FinancialClosedCards({
 	type = '',
 	data = [],
-	financeCardOpen = {},
-	setFinanceCardOpen = () => {},
-	getClosedTasks = () => {},
-	loading = false,
+	// financeCardOpen = {},
+	// setFinanceCardOpen = () => {},
+	// getClosedTasks = () => {},
+	// loading = false,
 }) {
 	return (
 		<div className={styles.single_card}>
@@ -25,7 +26,10 @@ function FinancialClosedCards({
 								<div className={styles.line} />
 							</div>
 						</div>
-						{loading ? <Placeholder height="60px" /> : data?.map((item) => (
+
+						<SellBuyCards source="FIN" type={type} data={data} />
+
+						{/* {loading ? <Placeholder height="60px" /> : data?.map((item) => (
 							<div key={item?.id} style={{ display: 'flex', alignItems: 'center' }}>
 								<div className={styles.vertical_timeline}>
 									<IcMDummyCircle
@@ -44,7 +48,7 @@ function FinancialClosedCards({
 									getClosedTasks={getClosedTasks}
 								/>
 							</div>
-						))}
+						))} */}
 					</div>
 				</div>
 			</div>
