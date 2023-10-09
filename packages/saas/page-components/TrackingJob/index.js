@@ -1,4 +1,5 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Toggle } from '@cogoport/components';
+import { useHandleVersionChangeToOld } from '@cogoport/next';
 import { useState } from 'react';
 
 import AirTracking from './pages-component/Tracking/AirTracking';
@@ -12,11 +13,20 @@ function TrackingJob() {
 	const onTabChange = (name) => {
 		setActiveTab(name);
 	};
+	const { handleRouteChange } = useHandleVersionChangeToOld({});
 	return (
 
 		<div className={styles.main_container}>
+			<div className={styles.header}>
+				<h1>Tracking Job</h1>
+				<Toggle
+					size="md"
+					onLabel="Old"
+					offLabel="New"
+					onChange={handleRouteChange}
+				/>
 
-			<h1>Tracking Job</h1>
+			</div>
 
 			<Tabs
 				activeTab={activeTab}
