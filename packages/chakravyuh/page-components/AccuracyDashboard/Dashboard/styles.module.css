@@ -3,6 +3,10 @@
 
 	position: relative;
 	display: flex;
+
+	&.max_view {
+		height: calc(100vh - 156px);
+	}
 }
 
 .side_container {
@@ -31,7 +35,7 @@
 
 	&.highlight {
 		width: 100%;
-		height: 100%;
+		height: calc(100vh - 300px);
 
 		>div:first-of-type {
 			position: absolute;

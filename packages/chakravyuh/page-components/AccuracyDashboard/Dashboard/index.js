@@ -59,7 +59,7 @@ function DashboardView(props) {
 
 	return (
 		<>
-			<div className={styles.main_container}>
+			<div className={cl`${styles.main_container} ${isHighlighted ? styles.max_view : ''}`}>
 				<div className={cl`${styles.graph_container} ${isHighlighted ? styles.highlight : ''}`}>
 					<ScallableAccuracy
 						loading={loading}
