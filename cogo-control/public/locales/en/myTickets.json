@@ -166,5 +166,7 @@
     "air_customs": "Air customs",
     "created_at": "Created At",
     "updated_at": "Updated At",
-    "stakeholders": "Stakeholder"
+    "stakeholders": "Stakeholder",
+    "missing_id": "Missing Id",
+    "dislike_id": "Dislike Id"
 }

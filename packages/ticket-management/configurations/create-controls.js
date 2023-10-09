@@ -70,9 +70,9 @@ const getCreateControls = ({
 			value          : 'sid',
 			visible        : true,
 			options        : [
-				{ label: 'SID', value: 'sid' },
-				{ label: 'Missing ID', value: 'missing_id' },
-				{ label: 'Dislike ID', value: 'dislike_id' },
+				{ label: t('myTickets:sid'), value: 'sid' },
+				{ label: t('myTickets:missing_id'), value: 'missing_id' },
+				{ label: t('myTickets:dislike_id'), value: 'dislike_id' },
 			],
 			onChange: () => {
 				setValue('service_type', '');
