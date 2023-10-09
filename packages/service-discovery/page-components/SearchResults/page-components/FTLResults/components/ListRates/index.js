@@ -5,11 +5,10 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import DotLoader from '../../../../../../common/LoadingState/DotLoader';
-// import AppliedFilters from '../../../../common/AppliedFilters';
 import ContractAd from '../../../../common/ContractAd';
 import RequestRate from '../../../../common/RequestRate';
-import Schedules from '../../../../common/Schedules';
 
+import AppliedFilters from './components/AppliedFilters';
 import ComparisonHeader from './components/ComparisonHeader';
 import EmptyState from './components/EmptyState';
 import Header from './components/Header';
@@ -26,9 +25,6 @@ function ListRates({
 	comparisonRates = {},
 	setScreen = () => {},
 	setComparisonRates = () => {},
-	setPage = () => {},
-	selectedWeek = {},
-	setSelectedWeek = () => {},
 	paginationProps = {},
 	contract_detail = {},
 	infoBanner = {},
@@ -101,23 +97,12 @@ function ListRates({
 				</div>
 			</div>
 
-			<Schedules
-				paginationProps={paginationProps}
-				filters={filters}
-				setFilters={setFilters}
-				setPage={setPage}
-				setComparisonRates={setComparisonRates}
-				setSelectedWeek={setSelectedWeek}
-				selectedWeek={selectedWeek}
-				loading={loading}
-			/>
-
-			{/* <AppliedFilters
+			<AppliedFilters
 				setShowFilterModal={setShowFilterModal}
 				setOpenAccordian={setOpenAccordian}
 				filters={filters}
 				setFilters={setFilters}
-			/> */}
+			/>
 
 			{(rates || []).map((rateItem, index) => (
 				<div key={rateItem.id}>

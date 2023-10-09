@@ -10,10 +10,11 @@ const LAST_INDEX = -1;
 const THIRD_TO_LAST_INDEX = -3;
 
 function Route({ detail = {}, rate = {} }) {
-	const { transit_time = 0 } = rate;
+	const { transit_time = 0, transit_time_unit } = rate;
 
 	const scheduleData = {
 		transit_time,
+		transit_time_unit,
 	};
 
 	const { origin = {}, destination = {} } = getLocationInfo(detail, {}, 'service_type');

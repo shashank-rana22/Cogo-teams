@@ -1,4 +1,4 @@
-import { Button, Modal, Tooltip, cl } from '@cogoport/components';
+import { Button, Tooltip, cl } from '@cogoport/components';
 import { IcMInfo, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, {
@@ -85,23 +85,18 @@ function TouchPoint(
 				</Tooltip>
 			) : null}
 
-			<Modal
-				show={show}
-				onClose={() => setShow(false)}
-			>
-				<Modal.Header title="Add Touch Points" />
-
-				<Modal.Body>
-					<AddTouchPointModal
-						onClick={onOuterClick}
-						setFtlFormData={setFtlFormData}
-						touchPointItems={touchPoints}
-						typeOfJourney={typeOfJourney}
-						location={location}
-						type={type}
-					/>
-				</Modal.Body>
-			</Modal>
+			{show ? (
+				<AddTouchPointModal
+					onClick={onOuterClick}
+					setFtlFormData={setFtlFormData}
+					touchPointItems={touchPoints}
+					typeOfJourney={typeOfJourney}
+					location={location}
+					type={type}
+					show={show}
+					setShow={setShow}
+				/>
+			) : null}
 		</div>
 	);
 }

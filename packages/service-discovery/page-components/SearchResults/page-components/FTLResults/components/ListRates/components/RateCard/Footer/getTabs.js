@@ -1,4 +1,3 @@
-import PossibleSchedules from '../../../../../../../common/PossibleSchedules';
 import PriceBreakup from '../../../../../../../common/PriceBreakUp';
 import TermsConditions from '../../../../../../../common/TermsConditions';
 
@@ -23,15 +22,6 @@ const getTabs = ({
 			props     : {
 				rateCardData: rate,
 				detail,
-			},
-		},
-		possible_schedules: {
-			key       : 'possible_schedules',
-			label     : 'Possible Schedules',
-			component : PossibleSchedules,
-			props     : {
-				rateCardData : rate,
-				service_type : detail.service_type,
 			},
 		},
 	};

@@ -1,4 +1,4 @@
-import { Toast, Button } from '@cogoport/components';
+import { Toast, Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import AsyncSelectController from '@cogoport/forms/page-components/Controlled/AsyncSelectController';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -47,6 +47,8 @@ function AddTouchPointModal({
 	typeOfJourney = '',
 	location = {},
 	type = 'one_way',
+	show = false,
+	setShow = () => {},
 }) {
 	const [value, setValue] = useState({
 		id           : '',
@@ -127,53 +129,62 @@ function AddTouchPointModal({
 	};
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.form} key={value.id}>
-				<div className={styles.form_item}>
-					<AsyncSelectController
-						{...location_control}
-						control={control}
-						onChange={handleObj}
+		<Modal
+			show={show}
+			onClose={() => setShow(false)}
+		>
+			<Modal.Header title="Add Touch Points" />
+
+			<Modal.Body>
+				<div className={styles.container}>
+					<div className={styles.form} key={value.id}>
+						<div className={styles.form_item}>
+							<AsyncSelectController
+								{...location_control}
+								control={control}
+								onChange={handleObj}
+							/>
+
+							{errors.touch_point_location_id ? (
+								<div className={styles.error_message}>
+									Location is required
+								</div>
+							) : null}
+
+							{value?.error ? (
+								<div className={styles.error_message}>
+									Touchpoint must be diffrent from origin and destination!!
+								</div>
+							) : null}
+						</div>
+
+						<Button themeType="accent" onClick={handleSubmit(onSubmit)}>
+							Add
+						</Button>
+					</div>
+
+					<List
+						touchPoints={touchPoints}
+						onDeleteTouchPoint={onDeleteTouchPoint}
+						setTouchPoints={setTouchPoints}
 					/>
 
-					{errors.touch_point_location_id ? (
-						<div className={styles.error_message}>
-							Location is required
-						</div>
-					) : null}
+					<div className={styles.buttons_container}>
+						<Button
+							themeType="secondary"
+							onClick={onCancel}
+							style={{ marginRight: 12 }}
+						>
+							Cancel
+						</Button>
 
-					{value?.error ? (
-						<div className={styles.error_message}>
-							Touchpoint must be diffrent from origin and destination!!
-						</div>
-					) : null}
+						<Button themeType="accent" onClick={handleSave}>
+							Save
+						</Button>
+					</div>
 				</div>
-
-				<Button themeType="accent" onClick={handleSubmit(onSubmit)}>
-					Add
-				</Button>
-			</div>
-
-			<List
-				touchPoints={touchPoints}
-				onDeleteTouchPoint={onDeleteTouchPoint}
-				setTouchPoints={setTouchPoints}
-			/>
-
-			<div className={styles.buttons_container}>
-				<Button
-					themeType="secondary"
-					onClick={onCancel}
-					style={{ marginRight: 12 }}
-				>
-					Cancel
-				</Button>
-
-				<Button themeType="accent" onClick={handleSave}>
-					Save
-				</Button>
-			</div>
-		</div>
+			</Modal.Body>
+		</Modal>
 	);
 }
 
