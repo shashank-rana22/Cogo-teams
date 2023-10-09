@@ -11,6 +11,7 @@ function ProfitOutlook({
 	profitPercent = 0,
 	latestDemandMargin = 0,
 	condition = {},
+	isMobile = false,
 }) {
 	const {
 		supply = 0,
@@ -69,6 +70,10 @@ function ProfitOutlook({
 			visible: condition.isSuperAdmin,
 		},
 	];
+
+	if (isMobile) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>

@@ -51,7 +51,7 @@ function EditMarginFooter({
 }) {
 	const { push } = useRouter();
 
-	const { detail = {}, rate } = useContext(CheckoutContext);
+	const { detail = {}, rate, isMobile = false } = useContext(CheckoutContext);
 
 	const timerRef = useRef(null);
 
@@ -134,7 +134,7 @@ function EditMarginFooter({
 		{
 			label     : <SaveButton state={state} />,
 			themeType : 'secondary',
-			size      : 'lg',
+			size      : !isMobile ? 'lg' : 'sm',
 			key       : 'save_for_later',
 			onClick   : onClickSaveForLater,
 			loading   : updateLoading,
@@ -143,7 +143,7 @@ function EditMarginFooter({
 		{
 			label     : <SubmitButton rate={rate} quotation_email_sent_at={quotation_email_sent_at} />,
 			themeType : 'accent',
-			size      : 'lg',
+			size      : !isMobile ? 'lg' : 'sm',
 			loading   : updateLoading || loading || updateCheckoutMarginLoading,
 			disabled  : noRatesPresent,
 			style     : { marginLeft: '16px' },

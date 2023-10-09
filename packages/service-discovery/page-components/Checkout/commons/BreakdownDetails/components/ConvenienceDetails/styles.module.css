@@ -48,6 +48,10 @@
 
 		.ui_accordion_header {
 			background-color: #f3fafa;
+
+			@media (max-width: 768px) {
+				padding: 12px 0;
+			}
 		}
 
 		.ui_accordion_title {
