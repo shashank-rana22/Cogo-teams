@@ -1,7 +1,7 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
-import { format, getByKey, startCase } from '@cogoport/utils';
+import { format, getByKey, isEmpty, startCase } from '@cogoport/utils';
 
 import InvoiceDetails from '../commons/invoiceDetails';
 import Remarks from '../commons/Remarks';
@@ -162,7 +162,7 @@ const completedColumn = ({
 								)}
 							>
 								<text
-									className={styles.link}
+									className={!isEmpty(invoicePdf) ? styles.link : null}
 									onClick={() => window.open(invoicePdf, '_blank')}
 									role="presentation"
 								>
@@ -182,11 +182,13 @@ const completedColumn = ({
 									{invoiceNumber}
 								</div>
 							)}
-						<div className={styles.qwerty}>
-							<Pill size="sm" color={INVOICE_TYPE[row?.invoiceType]}>
-								{invoiceType.replaceAll('_', ' ')}
-							</Pill>
-						</div>
+						{invoiceType && (
+							<div className={styles.qwerty}>
+								<Pill size="sm" color={INVOICE_TYPE[row?.invoiceType]}>
+									{invoiceType.replaceAll('_', ' ')}
+								</Pill>
+							</div>
+						)}
 					</div>
 				</div>
 			);
