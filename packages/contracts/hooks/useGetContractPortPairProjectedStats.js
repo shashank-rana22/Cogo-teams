@@ -21,6 +21,7 @@ const useGetContractPortPairProjectedStats = ({ payload }) => {
 					service_type             : payload?.service_type,
 					origin_port_id           : payload?.origin_port_id || undefined,
 					destination_port_id      : payload?.destination_port_id || undefined,
+					port_id                  : payload?.single_port_id || undefined,
 					requested_contract_price : parseInt(payload?.requested_contract_price, 10) || undefined,
 					origin_airport_id        : payload?.origin_airport_id || undefined,
 					destination_airport_id   : payload?.destination_airport_id || undefined,
