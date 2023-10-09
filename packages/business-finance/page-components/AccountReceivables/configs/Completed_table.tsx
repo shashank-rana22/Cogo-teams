@@ -185,7 +185,7 @@ const completedColumn = ({
 						{invoiceType && (
 							<div className={styles.qwerty}>
 								<Pill size="sm" color={INVOICE_TYPE[row?.invoiceType]}>
-									{invoiceType.replaceAll('_', ' ')}
+									{startCase(invoiceType)}
 								</Pill>
 							</div>
 						)}
