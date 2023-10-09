@@ -126,7 +126,7 @@ function ConvenienceDetails({
 					})}
 
 					<div className={styles.item_container}>
-						<div className={styles.convenience_container}>
+						<div className={cl`${styles.convenience_container} ${styles.convenience}`}>
 							<div className={styles.text}>Convenience Fee</div>
 
 							{loading ? <Spinner width="24px" height="24px" /> : null}
@@ -155,7 +155,6 @@ function ConvenienceDetails({
 									options={currencies}
 									value={currency}
 									disabled={!shouldEditConvenienceFee || loading}
-									style={{ marginLeft: '12px' }}
 									onChange={onChangeCurrency}
 								/>
 
@@ -163,7 +162,6 @@ function ConvenienceDetails({
 									value={price}
 									size="sm"
 									onChange={(val) => onChange({ value: val, itemKey: 'price' })}
-									style={{ marginLeft: '12px' }}
 									disabled={!shouldEditConvenienceFee || loading}
 								/>
 							</div>

@@ -2,8 +2,8 @@ import { useContext } from 'react';
 
 import Cancellation from '../../../../../commons/Cancellation';
 import ConfirmationTexts from '../../../../../commons/ConfirmationTexts';
-import DefaultQuotationInfo from '../../../../../commons/DefaultQuotationInfo';
 import { CheckoutContext } from '../../../../../context';
+import DefaultQuotationInfo from '../../../commons/DefaultQuotationInfo';
 
 import AdditionalServices from './AdditionalServices';
 import EditMarginFooter from './EditMarginFooter';

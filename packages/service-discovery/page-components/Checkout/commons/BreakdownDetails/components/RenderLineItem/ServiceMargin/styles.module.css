@@ -1,6 +1,7 @@
 .currency {
 	align-items: center;
 	width: 9%;
+	min-width: 72px;
 
 	:global {
 		.ui_select_container {

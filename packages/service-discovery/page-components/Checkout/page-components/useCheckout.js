@@ -1,10 +1,12 @@
 import { isEmpty } from '@cogoport/utils';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 
 import useGetCheckout from '../hooks/useGetCheckout';
 import useUpdateCheckout from '../hooks/useUpdateCheckout';
 
 import FclCheckout from './FclCheckout';
+
+const MOBILE_SCREEN_SIZE = 768;
 
 const MAPPING = {
 	fcl_freight: FclCheckout,
@@ -14,6 +16,7 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 	const [headerProps, setHeaderProps] = useState({});
 	const [isShipmentCreated, setIsShipmentCreated] = useState(false);
 	const [isLoadingStateRequired, setIsLoadingStateRequired] = useState(false);
+	const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_SCREEN_SIZE);
 
 	const {
 		checkout_id = '',
@@ -107,6 +110,15 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 	&& !isSkippable
 	&& checkout_type !== 'rfq';
 
+	useEffect(() => {
+		function handleResize() {
+			setIsMobile(window.innerWidth < MOBILE_SCREEN_SIZE);
+		}
+
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+
 	const checkoutData = useMemo(
 		() => ({
 			primaryService,
@@ -134,6 +146,7 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 			activated_on_paylater,
 			checkout_type,
 			earnable_cogopoints,
+			isMobile,
 		}),
 		[
 			primaryService,
@@ -160,6 +173,7 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 			activated_on_paylater,
 			checkout_type,
 			earnable_cogopoints,
+			isMobile,
 		],
 	);
 

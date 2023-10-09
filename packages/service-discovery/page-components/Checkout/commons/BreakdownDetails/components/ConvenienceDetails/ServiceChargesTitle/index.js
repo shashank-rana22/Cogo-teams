@@ -1,3 +1,7 @@
+import { useContext } from 'react';
+
+import { CheckoutContext } from '../../../../../context';
+
 import styles from './styles.module.css';
 
 function ServiceChargesTitle({
@@ -8,44 +12,48 @@ function ServiceChargesTitle({
 	localedDiscount = '',
 	showTaxes = true,
 }) {
+	const { isMobile = false } = useContext(CheckoutContext);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.service_name}>Bill Summary</div>
 
-			<div className={styles.flex}>
-				<div className={styles.price_display} style={{ marginRight: '8px' }}>
-					<div
-						style={{ color: '#c26d1a' }}
-						className={styles.label}
-					>
-						{discount ? 'Coupon Applied' : 'Apply Coupon'}
-					</div>
+			{ !isMobile ? (
+				<div className={styles.flex}>
+					<div className={styles.price_display} style={{ marginRight: '8px' }}>
+						<div
+							style={{ color: '#c26d1a' }}
+							className={styles.label}
+						>
+							{discount ? 'Coupon Applied' : 'Apply Coupon'}
+						</div>
 
-					{discount ? <div className={styles.coupon_value}>{localedDiscount}</div> : null}
-				</div>
-				|
-				<div className={styles.price_display} style={{ marginRight: '12px' }}>
-					<div className={styles.label}>Services Sub Total:</div>
-					{' '}
-					{subTotalDisplay}
-				</div>
-				|
-				{showTaxes ? (
+						{discount ? <div className={styles.coupon_value}>{localedDiscount}</div> : null}
+					</div>
+					|
 					<div className={styles.price_display} style={{ marginRight: '12px' }}>
-						<div className={styles.label}>Taxes:</div>
+						<div className={styles.label}>Services Sub Total:</div>
 						{' '}
-						{taxesDisplay}
+						{subTotalDisplay}
 					</div>
-				)
-					: null}
+					|
+					{showTaxes ? (
+						<div className={styles.price_display} style={{ marginRight: '12px' }}>
+							<div className={styles.label}>Taxes:</div>
+							{' '}
+							{taxesDisplay}
+						</div>
+					)
+						: null}
 
-				{showTaxes ? '|' : null}
-				<div className={styles.price_display}>
-					<div className={styles.label}>Convenience Fee:</div>
-					{' '}
-					{convenienceFeeDisplay}
+					{showTaxes ? '|' : null}
+					<div className={styles.price_display}>
+						<div className={styles.label}>Convenience Fee:</div>
+						{' '}
+						{convenienceFeeDisplay}
+					</div>
 				</div>
-			</div>
+			) : null}
 		</div>
 	);
 }

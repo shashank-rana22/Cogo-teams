@@ -23,13 +23,14 @@ function ServiceIcons({
 	primaryService = {},
 	primary_service = '',
 	source = '',
+	isMobile = false,
 }) {
 	const { selectedServices, iconMapping } = getIconMapping({
 		primaryService,
 		detailedServices,
 	});
 
-	if (primary_service !== 'fcl_freight') {
+	if (primary_service !== 'fcl_freight' || isMobile) {
 		return null;
 	}
 
