@@ -462,13 +462,15 @@ const GLOBAL_CONSTANTS = {
 		no_email_permission     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no_email_permission.png',
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
+		edit_square_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/edit_square.png',
+		cogoport_login_logo : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
+		edit_square         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/edit_square_light.png',
+		new_conversation    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/new-message.png',
+		teams               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/teams.png',
+		groups              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/group.png',
 		performance_leaderboard_confetti:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti_svg.svg',
-		cogoport_login_logo:
-		'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
 		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
-		edit_square_icon:
-		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/edit_square.png',
 	},
 
 	video_call_ring_tone_url:
@@ -621,6 +623,7 @@ const GLOBAL_CONSTANTS = {
 		hyphen_characters           : /-/g,
 		text_pattern_classifier     : /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
 		first_number_contains_zeros : /^0+/,
+		group_draft_name            : /\+(\d+) MORE/g,
 	},
 	zeroth_index                 : 0,
 	one                          : 1,

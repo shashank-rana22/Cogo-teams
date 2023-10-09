@@ -152,5 +152,11 @@
 }
 
 .contentutr {
+	height: 80px;
+	overflow-y: scroll;
 	font-size: var(--font-size-md);
+}
+
+.singleutr {
+	margin-bottom: 12px;
 }
