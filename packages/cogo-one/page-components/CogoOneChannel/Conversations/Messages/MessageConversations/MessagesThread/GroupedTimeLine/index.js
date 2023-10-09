@@ -1,9 +1,13 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDoubleDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import TimeLine from '../../../../../../../common/TimeLine';
 
 import styles from './styles.module.css';
+
+const THRESHOLD_LIMIT = 2;
+const INDEX_STEP = 1;
 
 function GroupedTimeLine({ eachMessage = {} }) {
 	const [expandedState, setExpandedState] = useState(false);
@@ -14,7 +18,7 @@ function GroupedTimeLine({ eachMessage = {} }) {
 			{groupedData.map(
 				(itm, index) => {
 					if (!expandedState) {
-						if (groupedData.length > 2 && index === groupedData.length - 2) {
+						if (groupedData.length > THRESHOLD_LIMIT && index === groupedData.length - THRESHOLD_LIMIT) {
 							return (
 								<div
 									onClick={() => setExpandedState(true)}
@@ -26,14 +30,14 @@ function GroupedTimeLine({ eachMessage = {} }) {
 									{' '}
 									see
 									{' '}
-									{groupedData.length - 2}
+									{groupedData.length - THRESHOLD_LIMIT}
 									{' '}
 									more activities.
 								</div>
 							);
 						}
 
-						if (!(index === 0 || index === groupedData.length - 1)) {
+						if (!(index === GLOBAL_CONSTANTS.zeroth_index || index === groupedData.length - INDEX_STEP)) {
 							return null;
 						}
 					}
@@ -42,7 +46,8 @@ function GroupedTimeLine({ eachMessage = {} }) {
 						<TimeLine
 							key={itm?.created_at}
 							eachMessage={itm}
-							showHideOption={groupedData.length > 2 && expandedState && index === 1}
+							showHideOption={(groupedData.length > THRESHOLD_LIMIT
+											&& expandedState && index === INDEX_STEP)}
 							setExpandedState={setExpandedState}
 						/>
 					);

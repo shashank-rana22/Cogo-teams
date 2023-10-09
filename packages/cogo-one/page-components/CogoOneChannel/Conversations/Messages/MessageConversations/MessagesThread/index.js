@@ -171,7 +171,7 @@ function MessagesThread(
 				/>
 			) : null}
 
-			{(updatedMessageArray || []).map((eachMessage, index) => {
+			{(updatedMessageArray || [])?.map((eachMessage, index) => {
 				const Component = CONVERSATION_TYPE_MAPPING[eachMessage?.conversation_type]
                  || CONVERSATION_TYPE_MAPPING.default;
 

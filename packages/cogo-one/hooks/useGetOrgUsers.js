@@ -19,18 +19,23 @@ const getPayload = ({ orgId = '', userIds = [], searchQuery = '', orgType = '' }
 		q                    : searchQuery || undefined,
 		organization_id      : orgType === 'organizations' ? orgId || undefined : undefined,
 		is_importer_exporter : orgType === 'channel_partners' ? true : undefined,
-		...(orgType.includes('other') ? {
+		...(orgType?.includes('other') ? {
 			is_channel_partner : orgType !== 'other_organizations',
 			lifecycle_stage    : ['enriched', 'marketing_qualified'],
 		} : {}),
 	},
-	...(orgType === 'channel_partners' ? { account_types: ['importer_exporter'] } : {}),
-
+	...(orgType === 'channel_partners'
+		? { account_types: ['importer_exporter'] }
+		: {}),
 	partner_id : orgType === 'channel_partners' ? orgId || undefined : undefined,
 	page_limit : PAGE_LIMIT,
 });
 
-const useGetOrgUsers = ({ orgId = '', userIds = null, orgType = '' }) => {
+const useGetOrgUsers = ({
+	orgId = '',
+	userIds = null,
+	orgType = '',
+}) => {
 	const [query, setQuery] = useState('');
 	const [initialLoad, setInitialLoad] = useState(true);
 
