@@ -191,8 +191,8 @@ const fclCustomsControls = ({
 		noDeleteButtonTill : 0,
 		controls           : [
 			{
-				name        : 'fcl_customs_cfs_line_items',
-				valueKey    : 'code',
+				name        : 'code',
+				value       : 'code',
 				type        : 'async_select',
 				span        : 2,
 				asyncKey    : 'list_rate_charge_codes',

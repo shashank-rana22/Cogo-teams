@@ -17,7 +17,7 @@ const haulageControls = ({
 	},
 	{
 		name        : 'service_provider_id',
-		heading     : 'Service Provider',
+		label       : 'Service Provider',
 		type        : 'select',
 		placeholder : 'Service Provider',
 		span        : 4,
@@ -26,7 +26,7 @@ const haulageControls = ({
 	},
 	{
 		name        : 'sourced_by_id',
-		heading     : 'Rate Provided by user',
+		label       : 'Rate Provided by user',
 		type        : 'select',
 		placeholder : 'Rate Provided by user',
 		value       : data?.sourced_by_id,
@@ -67,7 +67,7 @@ const haulageControls = ({
 	},
 	{
 		name        : 'container_type',
-		heading     : 'Container Type',
+		label       : 'Container Type',
 		type        : 'select',
 		placeholder : 'Container Type',
 		span        : 3,
@@ -78,7 +78,7 @@ const haulageControls = ({
 	},
 	{
 		name        : 'container_size',
-		heading     : 'Container Size',
+		label       : 'Container Size',
 		type        : 'select',
 		placeholder : 'Container Size',
 		span        : 3,
@@ -89,7 +89,7 @@ const haulageControls = ({
 	},
 	{
 		name        : 'commodity',
-		heading     : 'Commodity',
+		label       : 'Commodity',
 		type        : 'select',
 		placeholder : 'Commodity',
 		span        : 3,
