@@ -11,23 +11,10 @@
 			color: #333;
 		}
 	}
-}
-
-.heading {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
 
 	h2 {
-		margin: 0 auto 10px;
 		text-align: center;
 	}
-}
-
-.toggle {
-	align-items: flex-end;
-	margin: 0 0 10px;
 }
 
 .form_container {
