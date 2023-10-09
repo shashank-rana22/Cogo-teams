@@ -4,7 +4,6 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import Layout from '../../../../../RfqEnquiries/Layout';
@@ -14,7 +13,7 @@ import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteFreightRateFeedbacks from '../../../../hooks/useDeleteFreightRateFeedbacks';
 import useDeleteFreightRateRequests from '../../../../hooks/useDeleteFreightRateRequests';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
-import useGetFreightRate from '../../../../hooks/useGetFreightRate';
+import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
 import useUpdateFlashBookingRate from '../../../../hooks/useUpdateFlashBookingRate';
 import ServiceDetailsContent from '../DetailsView/Content';
 
@@ -62,15 +61,16 @@ function AddRateModal({
 
 	const values = watch();
 
-	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data, values });
+	const { data: chargeCodesData } = useGetChargeCodes({
+		service_name : filter?.service,
+		trade_type   : data?.trade_type,
+	});
 
 	const { finalFields } = FieldMutation({
 		fields,
 		values,
-		rateData,
 		filter,
 		chargeCodes,
-		setChargeCodes,
 	});
 
 	const { createRate } = useCreateFreightRate(filter?.service);
@@ -136,34 +136,23 @@ function AddRateModal({
 
 	useEffect(() => {
 		let prefillFreightCodes = [];
-		if (rateData?.freight) {
-			const { freight = {} } = rateData;
-			const { validities = [] } = freight;
-			if (!isEmpty(validities)) {
-				const { line_items = [] } = validities[DEFAULT_VALUE];
-				prefillFreightCodes = line_items;
-				setValue('schedule_type', validities[DEFAULT_VALUE]?.schedule_type);
-				setValue('validity_start', new Date(validities[DEFAULT_VALUE]?.validity_start));
-				setValue('validity_end', new Date(validities[DEFAULT_VALUE]?.validity_end));
-			}
-		}
-
 		let mandatoryFreightCodes = [];
-		Object.keys(rateData?.freight_charge_codes || {}).forEach((code) => {
-			if (rateData?.freight_charge_codes?.[code].tags?.includes('mandatory')) {
+		Object.keys(chargeCodesData?.list || {}).forEach((code) => {
+			if (chargeCodesData?.list?.[code].tags?.includes('mandatory')) {
 				let flag = {};
 				prefillFreightCodes.forEach((charge) => {
 					if (charge.code === code) {
 						flag = charge;
 					}
 				});
+
 				if (Object.keys(flag).length) {
 					prefillFreightCodes = prefillFreightCodes.filter((item) => item.code !== flag.code);
 					mandatoryFreightCodes = [...mandatoryFreightCodes,
 						{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
 				} else {
 					mandatoryFreightCodes = [...mandatoryFreightCodes,
-						{ code, price: '', unit: '', currency: '' }];
+						{ code: '', price: '', unit: '', currency: '' }];
 				}
 			}
 		});
@@ -171,15 +160,13 @@ function AddRateModal({
 		if (mandatoryFreightCodes.length || prefillFreightCodes.length) {
 			setValue('line_items', [...mandatoryFreightCodes, ...prefillFreightCodes]);
 		}
-
-		setValue('free_weight', rateData?.weight_limit?.free_limit);
-	}, [JSON.stringify(rateData)]);
+	}, []);
 
 	useEffect(() => {
-		if (rateData?.freight_charge_codes) {
-			setChargeCodes(rateData?.freight_charge_codes);
+		if (chargeCodesData?.list) {
+			setChargeCodes(chargeCodesData?.list);
 		}
-	}, [JSON.stringify(rateData?.freight_charge_codes)]);
+	}, [JSON.stringify(chargeCodesData?.list)]);
 
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">

@@ -7,7 +7,6 @@ import { currencyOptions } from '../../../../../configurations/helpers/constants
 const haulageControls = ({
 	data,
 	CommodityOptions,
-	chargeControls,
 	originLocationOptions,
 	destinationLocationOptions,
 }) => [
@@ -95,7 +94,6 @@ const haulageControls = ({
 		placeholder : 'Commodity',
 		span        : 3,
 		value       : data?.commodity,
-		disabled    : data?.commodity,
 		options     : CommodityOptions,
 		rules       : { required: 'commodity is required' },
 	},
@@ -126,12 +124,6 @@ const haulageControls = ({
 			{ label: 'Barge', value: 'barge' },
 		],
 		rules: { required: 'This is required' },
-	},
-	{
-		name         : 'line_item',
-		span         : 12,
-		heading      : 'Line Items',
-		showOptional : false,
 	},
 	{
 		name    : 'weight_slabs',
@@ -183,17 +175,10 @@ const haulageControls = ({
 		buttonText : 'Add Line Items',
 		controls   : [
 			{
-				name           : 'code_haulage',
-				caret          : true,
-				type           : 'select',
-				showToolTip    : true,
-				value          : '',
-				...chargeControls,
-				placeholder    : 'Select Charge',
-				className      : 'primary lg',
-				span           : 2,
-				defaultOptions : true,
-				rules          : { required: 'This is required' },
+				name        : 'code',
+				type        : 'select',
+				span        : 2,
+				placeholder : 'Charge Name',
 			},
 			{
 				name        : 'currency',

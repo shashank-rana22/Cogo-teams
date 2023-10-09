@@ -8,7 +8,6 @@ const fclCustomsControls = ({
 	data,
 	originLocationOptions,
 	CommodityOptions,
-	chargeControls,
 }) => [
 	{
 		name    : 'service_provicer_details',
@@ -108,9 +107,8 @@ const fclCustomsControls = ({
 		placeholder : 'Commodity',
 		span        : 3,
 		value       : 'general',
-		disabled    : data?.commodity,
 		options     : CommodityOptions,
-		// rules       : { required: 'commodity is required' },
+		rules       : { required: 'commodity is required' },
 	},
 	{
 		name        : 'rate_type',
@@ -135,21 +133,14 @@ const fclCustomsControls = ({
 		type               : 'fieldArray',
 		showButtons        : true,
 		buttonText         : 'Add Custom Line Items',
-		noDeleteButtonTill : 1,
+		noDeleteButtonTill : 0,
 
 		controls: [
 			{
-				name           : 'code_fcl_line_items',
-				caret          : true,
-				type           : 'select',
-				showToolTip    : true,
-				value          : data?.origin_port?.id,
-				...chargeControls,
-				placeholder    : 'Select Charge',
-				className      : 'primary lg',
-				span           : 2,
-				defaultOptions : true,
-				rules          : { required: 'This is required' },
+				name        : 'code',
+				type        : 'select',
+				span        : 2,
+				placeholder : 'Charge Name',
 			},
 			{
 				name        : 'currency',
@@ -201,7 +192,6 @@ const fclCustomsControls = ({
 		controls           : [
 			{
 				name        : 'fcl_customs_cfs_line_items',
-				label       : 'Code',
 				valueKey    : 'code',
 				type        : 'async_select',
 				span        : 2,

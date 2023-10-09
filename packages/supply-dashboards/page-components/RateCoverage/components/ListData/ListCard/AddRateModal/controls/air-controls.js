@@ -14,7 +14,7 @@ const airControls = ({
 }) => [
 	{
 		name        : 'rate_type',
-		heading     : 'Rate type',
+		label       : 'Rate type',
 		placeholder : 'Select Rate Type',
 		type        : 'select',
 		options     : rateTypeOptions,
@@ -24,7 +24,7 @@ const airControls = ({
 	},
 	{
 		name        : 'origin_airport_id',
-		heading     : 'Origin Airport',
+		label       : 'Origin Airport',
 		placeholder : 'Origin Location',
 		type        : 'select',
 		value       : data?.origin_airport?.id,
@@ -35,7 +35,7 @@ const airControls = ({
 	},
 	{
 		name        : 'destination_airport_id',
-		heading     : 'Destination Airport',
+		label       : 'Destination Airport',
 		placeholder : 'Destination Location',
 		type        : 'select',
 		value       : data?.destination_airport?.id,
@@ -46,7 +46,7 @@ const airControls = ({
 	},
 	{
 		name        : 'service_provider_id',
-		heading     : 'Service Provider',
+		label       : 'Service Provider',
 		placeholder : 'Service Provider',
 		type        : 'select',
 		...serviceProviders,
@@ -56,7 +56,7 @@ const airControls = ({
 	},
 	{
 		name        : 'sourced_by_id',
-		heading     : 'Rate Provided By LSP User',
+		label       : 'Rate Provided By LSP User',
 		placeholder : 'Rate Provided By LSP User',
 		type        : 'select',
 		span        : 4,
@@ -64,7 +64,7 @@ const airControls = ({
 	},
 	{
 		name        : 'procured_by_id',
-		heading     : 'Rate Procured by Cogoport Agent',
+		label       : 'Rate Procured by Cogoport Agent',
 		placeholder : 'Rate Procured by Cogoport Agent',
 		type        : 'select',
 		...listPartnerUserOptions,
@@ -74,18 +74,17 @@ const airControls = ({
 	},
 	{
 		name        : 'commodity',
-		heading     : 'Commodity',
+		label       : 'Commodity',
 		placeholder : 'Commodity',
 		type        : 'select',
 		value       : data?.commodity || 'general',
-		disabled    : data?.commodity,
 		options     : commodityOptions,
 		span        : 4,
 		rules       : { required: 'commodity is required' },
 	},
 	{
 		name        : 'airline_id',
-		heading     : 'Airline',
+		label       : 'Airline',
 		placeholder : 'AirLine Line',
 		type        : 'select',
 		span        : 4,
@@ -94,7 +93,7 @@ const airControls = ({
 		rules       : { required: 'airline is required' },
 	},
 	{
-		heading : 'Flight Operation Type',
+		label   : 'Flight Operation Type',
 		name    : 'flight_operation_type',
 		type    : 'select',
 		span    : 4,
@@ -103,7 +102,7 @@ const airControls = ({
 		rules   : { required: 'flight operation type is required' },
 	},
 	{
-		heading   : 'Validity Start',
+		label     : 'Validity Start',
 		name      : 'validity_start',
 		type      : 'date_picker',
 		className : styles.air_date_filter,
@@ -111,7 +110,7 @@ const airControls = ({
 		rules     : { required: 'validity is required' },
 	},
 	{
-		heading   : 'Validity End',
+		label     : 'Validity End',
 		name      : 'validity_end',
 		type      : 'date_picker',
 		className : styles.air_date_filter,
@@ -119,7 +118,7 @@ const airControls = ({
 		rules     : { required: 'validity end is required' },
 	},
 	{
-		heading : 'Packaging Type',
+		label   : 'Packaging Type',
 		name    : 'packaging_type',
 		type    : 'select',
 		span    : 4,
@@ -128,7 +127,7 @@ const airControls = ({
 		rules   : { required: 'packaging type is required' },
 	},
 	{
-		heading : 'Handling Type',
+		label   : 'Handling Type',
 		name    : 'handling_type',
 		type    : 'select',
 		span    : 4,
@@ -137,16 +136,16 @@ const airControls = ({
 		rules   : { required: 'handling type is required' },
 	},
 	{
-		heading : 'Minimum Price',
-		name    : 'minimum_price',
-		span    : 4,
-		type    : 'number',
-		rules   : {
+		label : 'Minimum Price',
+		name  : 'minimum_price',
+		span  : 4,
+		type  : 'number',
+		rules : {
 			required: 'min price is required',
 		},
 	},
 	{
-		heading : 'Currency',
+		label   : 'Currency',
 		name    : 'currency',
 		span    : 4,
 		options : currencyOptions,
@@ -154,7 +153,7 @@ const airControls = ({
 		rules   : { required: 'currency is required' },
 	},
 	{
-		heading : 'Price Type',
+		label   : 'Price Type',
 		name    : 'price_type',
 		type    : 'select',
 		options : priceTypeOptions,
@@ -163,7 +162,7 @@ const airControls = ({
 		rules   : { required: 'price type is required' },
 	},
 	{
-		heading  : 'Density Cargo',
+		label    : 'Density Cargo',
 		name     : 'density_cargo',
 		type     : 'select',
 		value    : data?.density_cargo || 'high_density',
@@ -173,7 +172,7 @@ const airControls = ({
 		rules    : { required: 'density cargo is required' },
 	},
 	{
-		heading     : 'Density Ratio',
+		label       : 'Density Ratio',
 		name        : 'density_ratio',
 		value       : data?.density_ratio || '1_500',
 		disabled    : true,

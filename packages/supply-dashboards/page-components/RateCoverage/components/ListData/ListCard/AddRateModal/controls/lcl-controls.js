@@ -2,13 +2,12 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { currencyOptions } from '../../../../../configurations/helpers/constants';
-import styles from '../styles.module.css';
 
 const lclControls = ({
 	data,
 	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
-	chargeControls,
+
 }) => [
 	{
 		name    : 'service_provicer_details',
@@ -67,7 +66,6 @@ const lclControls = ({
 		placeholder : 'Commodity',
 		span        : 3,
 		value       : data?.commodity,
-		disabled    : data?.commodity,
 		options     : CommodityOptions,
 		rules       : { required: 'commodity is required' },
 	},
@@ -83,9 +81,7 @@ const lclControls = ({
 		label       : 'Validty Start',
 		type        : 'date_picker',
 		placeholder : 'Validity Start',
-		span        : 3,
-		minDate     : new Date(),
-		className   : styles.date_filter,
+		span        : 4,
 		rules       : {
 			required: 'validity start date is required',
 		},
@@ -94,10 +90,8 @@ const lclControls = ({
 		name        : 'validity_end',
 		label       : 'Validity End',
 		type        : 'date_picker',
-		className   : styles.date_filter,
 		placeholder : 'Validity End',
-		span        : 3,
-		minDate     : new Date(),
+		span        : 4,
 		rules       : {
 			required: 'validity end date is required',
 		},
@@ -130,11 +124,17 @@ const lclControls = ({
 		rules       : { required: 'This is required' },
 	},
 	{
+		heading      : 'Line Items',
+		name         : 'line_item',
+		showOptional : false,
+		span         : 12,
+	},
+	{
 		type               : 'fieldArray',
 		showButtons        : true,
 		name               : 'line_items',
 		buttonText         : 'Add Line Items',
-		noDeleteButtonTill : 1,
+		noDeleteButtonTill : 0,
 		value              : [
 			{
 				code      : 'BAS',
@@ -146,24 +146,16 @@ const lclControls = ({
 		],
 		controls: [
 			{
-				name           : 'code_lcl',
-				caret          : true,
-				type           : 'select',
-				showToolTip    : true,
-				value          : '',
-				...chargeControls,
-				placeholder    : 'Select Charge',
-				className      : 'primary lg',
-				span           : 2,
-				defaultOptions : true,
-				rules          : { required: 'This is required' },
+				name        : 'code',
+				type        : 'select',
+				span        : 2,
+				placeholder : 'Charge Name',
 			},
 			{
 				name        : 'unit',
-				span        : 1.5,
-				type        : 'select',
-				className   : 'primary lg',
 				placeholder : 'Unit',
+				type        : 'select',
+				span        : 1.5,
 				rules       : { required: 'This is required' },
 			},
 			{

@@ -3,10 +3,9 @@ import {
 	asyncFieldsLocations,
 	asyncFieldsPartnerUsersIds,
 	useGetAsyncOptions,
-	asyncFieldListRateChargeCodes,
 } from '@cogoport/forms';
-import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
-import { merge, startCase } from '@cogoport/utils';
+import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
+import { merge } from '@cogoport/utils';
 
 import { filterOption } from '../../../../../configurations/helpers/constants';
 
@@ -36,8 +35,10 @@ const serviceControlsMap = {
 
 const getDefaultValues = (oldfields) => {
 	const DEFAULT_VALUES = {};
+
 	const newfields = oldfields?.map((field) => {
 		const { value, ...rest } = field;
+
 		if (field.type === 'fieldArray') {
 			DEFAULT_VALUES[field.name] = value || [];
 		} else {
@@ -45,20 +46,11 @@ const getDefaultValues = (oldfields) => {
 		}
 		return rest;
 	});
+
 	return { DEFAULT_VALUES, fields: newfields };
 };
 
-function useControls({
-	data, user_id, filter,
-}) {
-	const getCommodityOptions = (container_type = 'standard') => {
-		const commodities = FREIGHT_CONTAINER_COMMODITY_MAPPINGS[container_type];
-		return (commodities || []).map((commodity) => ({
-			label : (commodity.split('-') || []).map((item) => parseFloat(item) || startCase(item)).join(' '),
-			value : commodity,
-		}));
-	};
-
+function useControls({ data, user_id, filter }) {
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params   : { filters: { type: filterOption?.[filter?.service] } },
 		includes : { default_params_required: true },
@@ -110,19 +102,11 @@ function useControls({
 			},
 		),
 	);
-	const chargeControls = useGetAsyncOptions(merge(
-		asyncFieldListRateChargeCodes(),
-		{
-			params: {
-				service_name: filter?.service === 'haulage' ? `${filter?.service}_freight_charges`
-					: `${filter?.service}_charges`,
-			},
-		},
-	));
 
-	const CommodityOptions = getCommodityOptions(data?.container_type);
+	const CommodityOptions = getCommodityList(filter?.service, data?.container_type);
 
 	let CONTROL = [];
+
 	const selectedService = filter?.service;
 	if (selectedService && serviceControlsMap[selectedService]) {
 		CONTROL = serviceControlsMap[selectedService]({
@@ -134,7 +118,6 @@ function useControls({
 			CommodityOptions,
 			originLocationOptions,
 			destinationLocationOptions,
-			chargeControls,
 		});
 	}
 

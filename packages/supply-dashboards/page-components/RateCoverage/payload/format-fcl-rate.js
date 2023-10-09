@@ -21,7 +21,7 @@ const formatFclRate = (data, user_id) => {
 			...charge,
 			price: Number(charge.price),
 			slabs:
-				data?.container_slabs.length && charge.code_fcl_freight === 'BAS'
+				data?.container_slabs.length && charge.code === 'BAS'
 					? (data?.container_slabs || [])?.map((slab) => ({
 						...slab,
 						price       : Number(slab.price),

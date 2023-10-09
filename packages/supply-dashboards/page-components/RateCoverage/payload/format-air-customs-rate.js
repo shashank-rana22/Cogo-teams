@@ -5,7 +5,7 @@ const formatAirCustomsRate = (data, user_id) => {
 	const customCharges = data?.customs_line_items;
 	for (let i = 0; i < customCharges?.length; i += INCREMETN_VALUE) {
 		const obj = {
-			code     : customCharges[i].code_air,
+			code     : customCharges[i].code,
 			currency : customCharges[i].currency,
 			price    : Number(customCharges[i].price),
 			unit     : customCharges[i].unit,

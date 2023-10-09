@@ -4,7 +4,6 @@ const lclCustomsControls = ({
 	data,
 	CommodityOptions,
 	originLocationOptions,
-	chargeControls,
 }) => [
 	{
 		name    : 'service_provicer_details',
@@ -89,20 +88,13 @@ const lclCustomsControls = ({
 		type               : 'fieldArray',
 		showButtons        : true,
 		buttonText         : 'Add Custom Line Items',
-		noDeleteButtonTill : 1,
+		noDeleteButtonTill : 0,
 		controls           : [
 			{
-				name           : 'code_lcl',
-				caret          : true,
-				type           : 'select',
-				showToolTip    : true,
-				value          : data?.location?.port_code,
-				...chargeControls,
-				placeholder    : 'Select Charge',
-				className      : 'primary lg',
-				span           : 2,
-				defaultOptions : true,
-				rules          : { required: 'This is required' },
+				name        : 'code',
+				type        : 'select',
+				span        : 2,
+				placeholder : 'Charge Name',
 			},
 			{
 				name        : 'currency',

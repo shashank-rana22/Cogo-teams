@@ -88,10 +88,10 @@ function FieldMutation({ fields, values, chargeCodes, filter }) {
 				}
 
 				if (childCtrl.name === 'code') {
-					const OPTIONS = [];
-					Object.keys(chargeCodes || {}).forEach((code) => {
-						OPTIONS.push({ label: `${code} ${chargeCodes[code]?.name}`, value: code });
-					});
+					const OPTIONS = (chargeCodes || []).map((chargeCode) => ({
+						label : `${chargeCode?.code} ${chargeCode?.name}`,
+						value : chargeCode?.code,
+					}));
 					childCtrl.options =	OPTIONS;
 				}
 			});

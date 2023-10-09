@@ -35,11 +35,13 @@ function ListCard({
 		destination_port,
 		destination_airport,
 		destination_location,
+		shipping_line_id,
 	} = data;
 
-	const { data:shipmemnt_data, getShipment = () => {}, shipment_loading = false } = useGetShipment({
-		source_id,
-	});
+	const {
+		data:shipmemnt_data, getShipment = () => {},
+		shipment_loading = false,
+	} =	 useGetShipment({ shipping_line_id });
 
 	const { data:requestData, getRequest, loading:request_loading } = useListFreightRateRequests({ source_id, filter });
 	const {

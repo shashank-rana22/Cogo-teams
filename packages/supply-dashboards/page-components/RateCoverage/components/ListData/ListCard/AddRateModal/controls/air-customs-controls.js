@@ -4,7 +4,6 @@ const airCustomsControls = ({
 	data,
 	CommodityOptions,
 	originLocationOptions,
-	chargeControls,
 }) => [
 	{
 		name    : 'service_provicer_details',
@@ -13,7 +12,7 @@ const airCustomsControls = ({
 	},
 	{
 		name        : 'service_provider_id',
-		heading     : 'Service Provider',
+		label       : 'Service Provider',
 		type        : 'select',
 		placeholder : 'Service Provider',
 		span        : 4,
@@ -22,7 +21,7 @@ const airCustomsControls = ({
 	},
 	{
 		name        : 'sourced_by_id',
-		heading     : 'Rate Provided by user',
+		label       : 'Rate Provided by user',
 		type        : 'select',
 		placeholder : 'Rate Provided by user',
 		value       : data?.sourced_by_id,
@@ -31,7 +30,7 @@ const airCustomsControls = ({
 	},
 	{
 		name        : 'origin_location_id',
-		heading     : 'Origin Location',
+		label       : 'Origin Location',
 		type        : 'select',
 		placeholder : 'Origin Location',
 		span        : 4,
@@ -41,7 +40,7 @@ const airCustomsControls = ({
 		rules       : { required: 'origin location is required' },
 	},
 	{
-		heading     : 'Trade Type',
+		label       : 'Trade Type',
 		name        : 'trade_type',
 		placeholder : 'Select Trade Type',
 		value       : data?.trade_type,
@@ -64,12 +63,11 @@ const airCustomsControls = ({
 	},
 	{
 		name        : 'commodity',
-		heading     : 'Commodity',
+		label       : 'Commodity',
 		type        : 'select',
 		placeholder : 'Commodity',
 		span        : 3,
 		value       : data?.commodity,
-		disabled    : !!data?.commodity,
 		options     : CommodityOptions,
 		rules       : { required: 'commodity is required' },
 	},
@@ -85,20 +83,13 @@ const airCustomsControls = ({
 		type               : 'fieldArray',
 		showButtons        : true,
 		buttonText         : 'Add Custom Line Items',
-		noDeleteButtonTill : 1,
+		noDeleteButtonTill : 0,
 		controls           : [
 			{
-				name           : 'code_air',
-				caret          : true,
-				type           : 'select',
-				showToolTip    : true,
-				value          : data?.location?.port_code,
-				...chargeControls,
-				placeholder    : 'Select Charge',
-				className      : 'primary lg',
-				span           : 2,
-				defaultOptions : true,
-				rules          : { required: 'This is required' },
+				name        : 'code',
+				type        : 'select',
+				span        : 2,
+				placeholder : 'Charge Name',
 			},
 			{
 				name        : 'currency',

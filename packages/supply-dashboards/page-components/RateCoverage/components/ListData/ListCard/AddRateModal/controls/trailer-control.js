@@ -132,7 +132,6 @@ const trailerControls = ({
 			placeholder : 'Commodity',
 			span        : 4,
 			value       : data?.commodity,
-			disabled    : data?.commodity,
 			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},

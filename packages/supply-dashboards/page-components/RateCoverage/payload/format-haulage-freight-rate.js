@@ -5,12 +5,12 @@ const formatHaulageFreightRate = (data, user_id) => {
 	const charges = data?.line_items || [];
 	for (let i = 0; i < charges.length; i += INCREMENT_VALUE) {
 		const obj = {
-			code     : charges[i].code_haulage,
+			code     : charges[i].code,
 			currency : charges[i].currency,
 			price    : Number(charges[i].price),
 			unit     : charges[i].unit,
 			remarks  : charges[i].remarks ? [charges[i].remarks] : [],
-			slabs    : ['IHE', 'IHI'].includes(charges[i].code_haulage)
+			slabs    : ['IHE', 'IHI'].includes(charges[i].code)
 				? (data?.weight_slabs || []).map((slab) => ({
 					...slab,
 					price       : Number(slab.price),

@@ -5,7 +5,7 @@ const formatFclCustomsRate = (data, user_id) => {
 	let customCharges = data.customs_line_items;
 	for (let i = 0; i < customCharges.length; i += INCREMENT_VALUE) {
 		const obj = {
-			code     : customCharges[i].code_fcl_line_items,
+			code     : customCharges[i].code,
 			currency : customCharges[i].currency,
 			price    : Number(customCharges[i].price),
 			unit     : customCharges[i].unit,
