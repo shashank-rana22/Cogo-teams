@@ -1,7 +1,6 @@
 .container {
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
 }
 
 .name_container {
@@ -24,6 +23,7 @@
 
 .list_users {
 	height: calc(100% - 45px);
+	overflow: hidden;
 }
 
 .loader_div {
