@@ -10,6 +10,7 @@ import React, { useState, useEffect } from 'react';
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR, FIREBASE_TABS } from '../../constants';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
+import { getInitialData } from '../../helpers/getInitialData';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
@@ -37,17 +38,8 @@ function CogoOne() {
 		token            : general.firestoreToken,
 		userEmailAddress : profile?.user?.email,
 	}));
-	const [activeTab, setActiveTab] = useState({
-		tab               : channel_type === 'email' ? 'firebase_emails' : 'message',
-		subTab            : 'all',
-		hasNoFireBaseRoom : false,
-		expandSideBar     : false,
-		data              : assigned_chat ? {
-			id: assigned_chat,
-			channel_type,
-		} : {},
-	});
 
+	const [activeTab, setActiveTab] = useState(getInitialData({ assigned_chat, channel_type }));
 	const [viewType, setViewType] = useState('');
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
@@ -120,7 +112,7 @@ function CogoOne() {
 		queryAssignedChat: assigned_chat,
 	};
 
-	const teamsSideBarCheck = (activeTab?.tab === 'teams' && !!activeTab?.data?.id);
+	const teamsSideBarCheck = (activeTab?.tab === 'teams' && (!!activeTab?.data?.id || !!activeTab?.data?.group_id));
 	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
 	const { user_id = '', lead_user_id = '' } = tabData || {};
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};

@@ -16,6 +16,7 @@ function mountActiveRoomSnapShot({
 	firestore,
 	setActiveTab,
 	setLoading,
+	loggedInAgentId = '',
 	listCogooneGroupMembers = () => {},
 }) {
 	const snapshotRef = activeRoomSnapshotListener;
@@ -31,6 +32,9 @@ function mountActiveRoomSnapShot({
 		snapshotRef.current.globalRoom = onSnapshot(activeMessageDoc, (activeMessageData) => {
 			setActiveTab((prev) => {
 				const newDocData = activeMessageData.data() || {};
+				const { group_members_rooms = {} } = newDocData || {};
+
+				const draftRoomId = group_members_rooms?.[loggedInAgentId] || '';
 
 				const prevLastGroupUpdatedAt = prev?.groupData?.last_group_updated_at || FALLBACK;
 
@@ -43,6 +47,9 @@ function mountActiveRoomSnapShot({
 				return {
 					...prev,
 					groupData: { id: activeMessageData?.id, ...newDocData },
+					...((draftRoomId && isEmpty(prev?.data)) ? {
+						data: { id: draftRoomId, ...(prev?.data || {}) },
+					} : {}),
 				};
 			});
 			setLoading(false);
@@ -75,12 +82,17 @@ function mountDraftActiveRoomSnapShot({
 			const snapShotdata = snapshotData.data() || {};
 
 			if (isEmpty(snapShotdata)) {
+				setActiveTab((prev) => ({
+					...prev,
+					data: {},
+				}));
+
 				return;
 			}
 
 			setActiveTab((prev) => ({
 				...prev,
-				data: { id: snapshotData?.id, ...(snapShotdata) },
+				data: { id: snapshotData?.id, ...snapShotdata },
 			}));
 			setLoading(false);
 		});
@@ -109,6 +121,7 @@ function useFetchGlobalRoom({
 			setActiveTab,
 			setLoading,
 			listCogooneGroupMembers,
+			loggedInAgentId,
 		});
 		mountDraftActiveRoomSnapShot({
 			activeRoomSnapshotListener,

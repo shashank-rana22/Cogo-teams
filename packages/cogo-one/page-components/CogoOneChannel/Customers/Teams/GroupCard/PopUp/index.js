@@ -3,7 +3,6 @@ import {
 	IcMOverflowDot,
 	IcMPin, IcCPin,
 } from '@cogoport/icons-react';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -48,8 +47,6 @@ function PopUp({
 	updatePinnedChats = () => {},
 	isPinned = false,
 }) {
-	const [open, setOpen] = useState(false);
-
 	return (
 		<div
 			className={styles.container}
@@ -61,12 +58,11 @@ function PopUp({
 						isPinned={isPinned}
 					/>
 				)}
-				visible={open}
+				caret={false}
 			>
 				<IcMOverflowDot
 					onClick={(e) => {
 						e.stopPropagation();
-						setOpen((prev) => !prev);
 					}}
 					className={styles.overflow_dot}
 				/>

@@ -5,14 +5,6 @@ import {
 
 import sendNotification from './sendNotification';
 
-export function snapshotCleaner({ ref }) {
-	const tempRef = ref;
-	if (tempRef.current) {
-		tempRef.current();
-		tempRef.current = null;
-	}
-}
-
 function dataFormatter(list) {
 	const resultList = list?.reduce((accumulator, item) => {
 		const { created_at, updated_at, new_message_count, ...rest } = item.data() || {};
@@ -41,7 +33,6 @@ export function mountFloatingNotificationSnapShot({
 }) {
 	const mailSnapshotRef = unreadCountSnapshotListener;
 
-	snapshotCleaner({ ref: unreadCountSnapshotListener });
 	try {
 		const floatNotificationChatQuery = query(
 			omniChannelCollection,
@@ -53,7 +44,7 @@ export function mountFloatingNotificationSnapShot({
 			orderBy('new_message_sent_at', 'desc'),
 		);
 
-		mailSnapshotRef.current = onSnapshot(
+		mailSnapshotRef.current.mailNotifications = onSnapshot(
 			floatNotificationChatQuery,
 			(floatNotificationChatSnapshot) => {
 				const { resultList } = dataFormatter(floatNotificationChatSnapshot?.docs);

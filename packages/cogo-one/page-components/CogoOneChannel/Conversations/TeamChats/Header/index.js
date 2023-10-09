@@ -51,7 +51,7 @@ function Header({
 					/>
 				) : (
 					<Avatar
-						personName={search_name}
+						personName={search_name || 'Unkown User'}
 						alt="name"
 						size="28px"
 						className={styles.styled_avatar}
