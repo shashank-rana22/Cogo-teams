@@ -13890,6 +13890,30 @@ const partner = {
 			service_name : 'haulage_freight_rate',
 			feature      : 'rate_requests',
 		},
+		{
+			api          : 'list_fcl_freight_rate_requests',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'rate_requests',
+		},
+		{
+			api          : 'list_air_freight_rate_requests',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+			feature      : 'rate_requests',
+		},
+		{
+			api          : 'list_fcl_cfs_rate_requests',
+			access_type  : 'private',
+			service_name : 'fcl_cfs_rate',
+			feature      : 'rate_requests',
+		},
+		{
+			api          : 'list_fcl_customs_rate_requests',
+			access_type  : 'private',
+			service_name : 'fcl_customs_rate',
+			feature      : 'rate_requests',
+		},
 	],
 	cogo_one_dashboard: [
 		{
