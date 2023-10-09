@@ -27,7 +27,7 @@ const useGetTdsData = ({
 	};
 
 	const formattedData = row.type === 'TDS_APPROVAL' ? {
-		...data,
+		...(data || {}),
 		tdsRequest: {
 			...(data?.tdsRequest || {}),
 			validFrom : getDateFormat({ date: data?.tdsRequest?.validFrom }),
