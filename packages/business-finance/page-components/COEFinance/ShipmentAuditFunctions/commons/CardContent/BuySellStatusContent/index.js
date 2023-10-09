@@ -2,6 +2,7 @@ import { Pill, Button, Placeholder, Tooltip } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import ShowOverflowingNumber from '../../../utils/getShowOverFlowingNumbers';
+import RaiseTicketModal from '../../RaiseTicketModal';
 import RemarkModal from '../../RemarkModal';
 
 import DocumentFlow from './DocumentFlow';
@@ -17,6 +18,7 @@ export default function BuySellStatusContent({
 }) {
 	const [buttonClicked, setButtonClicked] = useState('');
 	const [queryModalShow, setQueryModalShow] = useState(false);
+	const [showTicketModal, setShowTicketModal] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
 	const {
 		grand_total: income = '', document_number = '',
@@ -78,19 +80,20 @@ export default function BuySellStatusContent({
 						size="md"
 						themeType="secondary"
 						style={{ marginRight: '10px' }}
-						// onClick={() => { setQueryModalShow(true); setButtonClicked('Query'); }}
+						onClick={() => setShowTicketModal(true)}
 					>
 						Raise Query
 					</Button>
 
-					{/* <RemarkModal
-						remarkValue={remarkValue}
-						setRemarkValue={setRemarkValue}
-						queryModalShow={queryModalShow}
-						setQueryModalShow={setQueryModalShow}
-						buttonClicked={buttonClicked}
-						setButtonClicked={setButtonClicked}
-					/> */}
+					{
+						showTicketModal ? (
+							<RaiseTicketModal
+								setShowTicketModal={setShowTicketModal}
+								showTicketModal={showTicketModal}
+								itemData={data}
+							/>
+						) : null
+					}
 
 					{quotation_state !== 'APPROVED' && (
 						<Button

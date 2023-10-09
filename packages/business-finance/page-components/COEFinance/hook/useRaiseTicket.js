@@ -5,6 +5,7 @@ import { useSelector } from '@cogoport/store';
 const useRaiseTicket = ({
 	shipmentData = {},
 	updateBillsTicketId = () => {},
+	service = {},
 }) => {
 	const { profile } = useSelector((state) => state);
 	const [{ loading }, trigger] = useTicketsRequest({
@@ -26,7 +27,6 @@ const useRaiseTicket = ({
 		const {
 			serial_id,
 			trade_type,
-			shipment_type,
 		} = shipmentData || {};
 
 		try {
@@ -39,15 +39,15 @@ const useRaiseTicket = ({
 					Description      : describe_issue,
 					Type             : issue_type || undefined,
 					TicketReviewerID : raised_to,
-					RaisedByDesk     : 'Auditor' || undefined,
+					RaisedByDesk     : 'Auditor',
 					RaisedToDesk     : raised_to_desk || undefined,
 					CategoryDeskType : 'by_desk',
 					Data             : {
 						Attachment  : [finalUrl] || [],
-						RequestType : 'shipment' || undefined,
+						RequestType : 'shipment',
 						SerialID    : serial_id || undefined,
 						TradeType   : trade_type || undefined,
-						Service     : shipment_type || undefined,
+						Service     : service?.value || undefined,
 					},
 				},
 			});

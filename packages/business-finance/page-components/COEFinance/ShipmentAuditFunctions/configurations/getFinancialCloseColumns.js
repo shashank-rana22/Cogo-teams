@@ -183,7 +183,12 @@ const getFinancialCloseColumns = ({
 			accessor : (row) => (
 
 				<div>
-					<Button themeType="secondary" onClick={() => handleClick(row?.jobId)}>Audit</Button>
+					<Button
+						themeType="secondary"
+						onClick={() => handleClick(row?.jobId, row?.jobNumber)}
+					>
+						Audit
+					</Button>
 				</div>
 			),
 		},

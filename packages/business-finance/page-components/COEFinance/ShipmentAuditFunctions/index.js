@@ -51,9 +51,9 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 		setPaginationFilters((prev) => ({ ...prev, page: val }));
 	};
 
-	const handleClick = (jobId) => {
+	const handleClick = (jobId, jobNumber) => {
 		push(
-			`/business-finance/coe-finance/${activeTab}/audit?job_id=${jobId}`,
+			`/business-finance/coe-finance/${activeTab}/audit?job_id=${jobId}&job_number=${jobNumber}`,
 		);
 	};
 
