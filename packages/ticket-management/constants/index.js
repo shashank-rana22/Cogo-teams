@@ -125,7 +125,7 @@ export const PRIORITY_MAPPING = {
 	low    : 'low',
 };
 
-export const REQUIRED_ROLES = ['partner-roles', 'partner-users'];
+export const REQUIRED_ROLES = ['partner-roles', 'partner-users', 'stakeholders'];
 
 export const getSpectatorTypeOptions = ({ t }) => [
 	{ label: t('myTickets:spectator_type_1'), value: 'reviewer' },

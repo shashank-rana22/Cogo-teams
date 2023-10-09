@@ -9,6 +9,7 @@ export const useReassignTicketsControls = ({
 	t = () => {},
 	watchType = '',
 	setUserData = () => {},
+	stakeHoldersData = [],
 }) => {
 	const rolesOptions = useGetAsyncOptionsMicroservice({
 		...{
@@ -23,9 +24,15 @@ export const useReassignTicketsControls = ({
 
 	const usersOptions = useGetAsyncOptions({ ...asyncFieldsPartnerUsers() });
 
+	const stakeholdersOptions = (stakeHoldersData || []).map((itm) => ({
+		label : itm?.user?.name,
+		value : itm.user?.id,
+	}));
+
 	const ASYNC_OPTION_MAPPING = {
 		'partner-roles' : rolesOptions,
 		'partner-users' : usersOptions,
+		stakeholders    : stakeholdersOptions,
 	};
 
 	const assignToOptions = ASYNC_OPTION_MAPPING[watchType];
@@ -42,6 +49,7 @@ export const useReassignTicketsControls = ({
 				{ label: t('myTickets:credit_controller'), value: 'credit_controller' },
 				{ label: t('myTickets:sales_agent'), value: 'sales_agent' },
 				{ label: t('myTickets:kam_owner'), value: 'kam_owner' },
+				{ label: t('myTickets:stakeholders'), value: 'stakeholders' },
 			],
 		},
 		{
@@ -50,6 +58,15 @@ export const useReassignTicketsControls = ({
 			label          : t('myTickets:assign_to'),
 			controllerType : 'select',
 			className      : 'primary md',
+			placeholder    : t('myTickets:search_by_name'),
+			onChange       : (_, obj) => setUserData(obj),
+			rules          : { required: true },
+		},
+		{
+			label          : t('myTickets:assign_to'),
+			name           : 'stakeholder',
+			controllerType : 'select',
+			options        : stakeholdersOptions,
 			placeholder    : t('myTickets:search_by_name'),
 			onChange       : (_, obj) => setUserData(obj),
 			rules          : { required: true },

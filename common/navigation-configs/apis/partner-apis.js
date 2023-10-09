@@ -13870,6 +13870,11 @@ const partner = {
 			service_name : 'haulage_freight_rate',
 			feature      : 'rate_requests',
 		},
+		{
+			api          : 'list_shipment_stakeholders',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	cogo_one_dashboard: [
 		{

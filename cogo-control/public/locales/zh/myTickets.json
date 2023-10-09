@@ -165,5 +165,6 @@
     "haulage":"运输",
     "air_customs": "航空风俗",
     "created_at": "创建于",
-    "updated_at": "更新于"
+    "updated_at": "更新于",
+    "stakeholders": "利益相关者"
 }

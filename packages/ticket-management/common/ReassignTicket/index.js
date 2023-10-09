@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 import { useReassignTicketsControls } from '../../configurations/reassign-controls';
 import { REQUIRED_ROLES } from '../../constants';
+import useListShipmentStakeholders from '../../hooks/useGetListShipmentStakeholders';
 import useReassignTicket from '../../hooks/useReassignTicket';
 import { getFieldController } from '../../utils/getFieldController';
 import Confirmation from '../Confirmation';
@@ -22,9 +23,11 @@ function ReassignTicket({
 
 	const { control, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm();
 
+	const { stakeHoldersData = [] } = useListShipmentStakeholders();
+
 	const watchType = watch('type');
 
-	const controls = useReassignTicketsControls({ t, watchType, setUserData });
+	const controls = useReassignTicketsControls({ t, watchType, setUserData, stakeHoldersData });
 
 	const { reassignTicket, reassignLoading } = useReassignTicket({
 		ticketId,
@@ -62,8 +65,11 @@ function ReassignTicket({
 							const elementItem = { ...controlItem };
 							const { name, label, controllerType } = elementItem || {};
 							const Element = getFieldController(controllerType);
+							const hideAssignField = name === 'assign_to' && watchType === 'stakeholders';
+							const hidestakeholderField = name === 'stakeholder' && watchType !== 'stakeholders';
 
-							if (!Element || (name === 'assign_to' && !REQUIRED_ROLES.includes(watchType))) {
+							if (!Element || (name === 'assign_to' && !REQUIRED_ROLES.includes(watchType))
+								|| hideAssignField || hidestakeholderField) {
 								return null;
 							}
 

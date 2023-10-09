@@ -165,5 +165,6 @@
     "haulage":"Pengangkutan",
     "air_customs": "Bea Cukai Udara",
     "created_at": "Dibuat Pada",
-    "updated_at": "Diperbarui Pada"
+    "updated_at": "Diperbarui Pada",
+    "stakeholders": "Pemangku kepentingan"
 }

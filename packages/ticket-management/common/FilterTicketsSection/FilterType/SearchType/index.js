@@ -1,5 +1,5 @@
-import { Input, Select } from '@cogoport/components';
-import { IcMDescendingSort, IcMSearchlight } from '@cogoport/icons-react';
+import { Input, Select, cl } from '@cogoport/components';
+import { IcMArrowRotateDown, IcMArrowRotateUp, IcMSearchlight } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 
 import { sortByOptions, getSpectatorTypeOptions } from '../../../../constants';
@@ -13,9 +13,16 @@ function SearchType({
 	spectatorType = '',
 	searchParams = {},
 	isAdmin = false,
-	sortBy = '',
+	sortBy = {},
 }) {
+	const { sortOrder = '', sortType = '' } = sortBy || {};
+
 	const { t } = useTranslation(['myTickets']);
+
+	const handleClick = (e) => {
+		e.stopPropagation();
+		setSortBy((prev) => ({ ...prev, sortOrder: sortOrder === 'desc' ? 'asc' : 'desc' }));
+	};
 
 	return (
 		<div className={styles.search_container}>
@@ -49,17 +56,28 @@ function SearchType({
 				/>
 			)}
 
-			<Select
-				size="sm"
-				value={sortBy}
-				onChange={setSortBy}
-				placeholder="Sort by"
-				className={styles.sort_by}
-				options={sortByOptions({ t })}
-				isClearable
-				prefix={<IcMDescendingSort />}
-			/>
+			<div className={styles.sort_section}>
+				<Select
+					size="sm"
+					value={sortType}
+					onChange={(val) => setSortBy((prev) => ({ ...prev, sortType: val }))}
+					placeholder="Sort by"
+					className={styles.sort_by}
+					options={sortByOptions({ t })}
+					isClearable
+				/>
 
+				<div className={styles.sort_arrow_section}>
+					<IcMArrowRotateUp
+						onClick={(e) => handleClick(e)}
+						className={cl`${styles.ascend_arrow} ${sortOrder === 'asc' ? styles.disable : ''}`}
+					/>
+					<IcMArrowRotateDown
+						onClick={(e) => handleClick(e)}
+						className={cl`${styles.arrow_icon} ${sortOrder === 'desc' ? styles.disable : ''}`}
+					/>
+				</div>
+			</div>
 		</div>
 	);
 }
