@@ -1,4 +1,5 @@
-import { Button } from '@cogoport/components';
+import { Button, Toggle } from '@cogoport/components';
+import { useHandleVersionChangeToOld } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
 import { useTranslation } from 'next-i18next';
 
@@ -8,11 +9,19 @@ import styles from './styles.module.css';
 
 function Header({ setFilters = () => {}, filters = {}, setSideBar = () => {} }) {
 	const { t } = useTranslation(['locations']);
+	const { handleRouteChange } = useHandleVersionChangeToOld({});
 	return (
 		<div className={styles.header_container}>
 
 			<h1>{t('locations:locations_heading')}</h1>
 			<div className={styles.btn_align}>
+				<Toggle
+					size="md"
+					onLabel="Old"
+					offLabel="New"
+					onChange={handleRouteChange}
+				/>
+
 				<Filter setFilters={setFilters} filters={filters} activeTab={filters.type} />
 				<ScopeSelect size="md" showChooseAgent={false} />
 				<Button onClick={() => setSideBar('create')}>{t('locations:create_location')}</Button>
