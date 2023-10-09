@@ -1,0 +1,37 @@
+import { Toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
+
+const useBlockUserBudgetAllocation = (blockAndRefetch = () => {}) => {
+	const [{ loading }, trigger] = useRequest(
+		{
+			url    : '/update_agent_budget_allocation_status',
+			method : 'POST',
+		},
+		{ manual: true },
+	);
+
+	const blockUserBudget = async (value) => {
+		const { agent_id = '', status = '' } = value;
+
+		try {
+			const payload = {
+				agent_id,
+				status: status === 'active' ? 'blocked' : 'active',
+			};
+			await trigger({
+				data: payload,
+			});
+			Toast.success(`Agent ${(status === 'active') ? 'Blocked' : 'UnBlocked'}!`);
+			blockAndRefetch();
+		} catch (error) {
+			Toast.error(error.message);
+		}
+	};
+
+	return {
+		loading,
+		blockUserBudget,
+	};
+};
+
+export default useBlockUserBudgetAllocation;

@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 function BudgetAllocation() {
 	const [activeTab, setActiveTab] = useState('dashboard');
+
 	return (
 		<div>
 			<h1>Promotions</h1>

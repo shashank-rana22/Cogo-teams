@@ -42,7 +42,6 @@ function Layout({
 				}
 
 				const width = getWidthPercent(span);
-
 				return (
 					<div
 						key={restCtrl.name}
@@ -51,17 +50,23 @@ function Layout({
 					>
 						{label ? (
 							<div
-								className={cl`${styles.label} ${removeLabelMargin ? styles.removeLabelMargin : ''}`}
+								className={cl`${styles.label} ${
+									removeLabelMargin ? styles.removeLabelMargin : ''
+								}`}
 							>
 								{label}
 							</div>
 						) : null}
 
-						{type ? <FormElement control={control} {...restCtrl} type={type} /> : null}
+						{type ? (
+							<FormElement control={control} {...restCtrl} type={type} />
+						) : null}
 
-						{errors?.[restCtrl.name]
-							? <div className={styles.errors}>{errors[restCtrl.name]?.message}</div>
-							: null}
+						{errors?.[restCtrl.name] ? (
+							<div className={styles.errors}>
+								{errors[restCtrl.name]?.message}
+							</div>
+						) : null}
 					</div>
 				);
 			})}
