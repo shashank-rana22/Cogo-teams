@@ -47,7 +47,7 @@ function mountActiveRoomSnapShot({
 				return {
 					...prev,
 					groupData: { id: activeMessageData?.id, ...newDocData },
-					...((draftRoomId && isEmpty(prev?.data)) ? {
+					...((draftRoomId && !prev?.data?.id) ? {
 						data: { id: draftRoomId, ...(prev?.data || {}) },
 					} : {}),
 				};
