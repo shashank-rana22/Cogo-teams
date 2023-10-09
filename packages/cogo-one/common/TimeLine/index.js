@@ -3,8 +3,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import React from 'react';
 
-import { CHANNEL_TYPE } from '../../../../../../../constants';
-import getVoiceCallStatement from '../../../../../../../utils/getVoiceCallStatement';
+import { CHANNEL_TYPE } from '../../constants';
+import getVoiceCallStatement from '../../utils/getVoiceCallStatement';
 
 import styles from './styles.module.css';
 
