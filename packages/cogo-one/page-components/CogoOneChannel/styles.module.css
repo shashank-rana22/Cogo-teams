@@ -13,19 +13,18 @@
 
 .chat_body {
 	height: 100%;
-	background-color: #fff;
 	border-radius: 4px;
 	transition: 0.3s ease-in-out;
 }
 
 .chats_layout {
 	width: 47%;
-	margin-right: 10px;
+	padding-right: 10px;
 }
 
 .mail_layout {
-	width: calc(75% - 70px);
-	margin-right: 10px;
+	width: calc(75% - 50px);
+	padding-right: 10px;
 	overflow: hidden;
 }
 
@@ -38,7 +37,6 @@
 	width: 28%;
 	height: 100%;
 	overflow-x: hidden;
-	background-color: #fff;
 	border-radius: 4px;
 	transition: 0.3s ease-in-out;
 }
