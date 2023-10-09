@@ -24,7 +24,7 @@
 }
 
 .mail_layout {
-	width: calc(75% - 50px);
+	width: calc(75% - 70px);
 	margin-right: 10px;
 	overflow: hidden;
 }

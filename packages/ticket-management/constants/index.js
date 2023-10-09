@@ -1,3 +1,33 @@
+import {
+	asyncListFclFreightRate,
+	asyncListLclFreightRate,
+	asyncListAirFreightRate,
+	asyncListFtlFreightRate,
+	asyncListLtlFreightRate,
+	asyncListFclCfsRate,
+	asyncListHaulageFreightRate,
+	asyncListFclCustomsRate,
+	asyncListLclCustomsRate,
+	asyncListAirCustomsRate,
+	asyncListTrailerFreightRate,
+	asyncListShipments,
+} from '@cogoport/forms';
+
+export const ASYNC_LIST_API = {
+	sid             : asyncListShipments,
+	fcl_freight     : asyncListFclFreightRate,
+	lcl_freight     : asyncListLclFreightRate,
+	air_freight     : asyncListAirFreightRate,
+	ftl_freight     : asyncListFtlFreightRate,
+	ltl_freight     : asyncListLtlFreightRate,
+	fcl_cfs         : asyncListFclCfsRate,
+	haulage_freight : asyncListHaulageFreightRate,
+	fcl_customs     : asyncListFclCustomsRate,
+	lcl_customs     : asyncListLclCustomsRate,
+	air_customs     : asyncListAirCustomsRate,
+	trailer_freight : asyncListTrailerFreightRate,
+};
+
 export const STATUS_MAPPING = {
 	pending           : 'pending',
 	reject_requested  : 'pending',
@@ -102,6 +132,7 @@ export const getSpectatorTypeOptions = ({ t }) => [
 	{ label: t('myTickets:spectator_type_2'), value: 'agent' },
 	{ label: t('myTickets:spectator_type_3'), value: 'closure_authorizer' },
 	{ label: t('myTickets:spectator_type_4'), value: 'configuration_owner' },
+	{ label: t('myTickets:spectator_type_5'), value: 'user_manager' },
 ];
 
 export const getTicketActionLabel = ({ t, type }) => {
@@ -122,21 +153,88 @@ export const getTicketActionLabel = ({ t, type }) => {
 	return ACTIONS[type];
 };
 
-export const REQUEST_TYPE_OPTIONS = [
-	{ label: 'Shipment', value: 'shipment' },
-	{ label: 'Rate', value: 'rate' },
-	{ label: 'Finance', value: 'finance' },
-	{ label: 'Platform Issue', value: 'platform_issue' },
+export const getRequestTypeOptions = ({ t = () => {} }) => [
+	{ label: t('myTickets:shipment'), value: 'shipment' },
+	{ label: t('myTickets:rate'), value: 'rate' },
+	{ label: t('myTickets:finance'), value: 'finance' },
+	{ label: t('myTickets:platform_issue'), value: 'platform_issue' },
 ];
 
 export const SHIPMENT_RATE_KEYS = ['request_type', 'organization_id', 'user_id',
 	'serial_id', 'service', 'trade_type', 'category', 'sub_category', 'issue_type',
 	'additional_information', 'priority', 'file_url', 'notify_customer', 'raised_by_desk',
-	'toggle_value', 'raised_to_desk'];
+	'raised_to_desk'];
 
 export const FINANCE_PLATFORM_KEYS = ['request_type', 'category', 'sub_category', 'issue_type',
 	'additional_information', 'priority',
 	'file_url', 'notify_customer'];
+
+export const RATE_KEYS = ['request_type', 'organization_id', 'user_id', 'id_type',
+	'serial_id', 'service_type', 'service', 'trade_type', 'category', 'sub_category', 'raised_by_desk',
+	'raised_to_desk', 'issue_type', 'additional_information', 'priority', 'file_url', 'notify_customer'];
+
+export const getRateShipmentServices = ({ t = () => {} }) => [
+	{
+		label : t('myTickets:fcl'),
+		value : 'fcl_freight',
+	},
+	{
+		label : t('myTickets:lcl'),
+		value : 'lcl_freight',
+	},
+	{
+		label : t('myTickets:air'),
+		value : 'air_freight',
+	},
+	{
+		label : t('myTickets:ftl'),
+		value : 'ftl_freight',
+	},
+	{
+		label : t('myTickets:ltl'),
+		value : 'ltl_freight',
+	},
+	{
+		label : t('myTickets:fcl_customs'),
+		value : 'fcl_customs',
+	},
+	{
+		label : t('myTickets:lcl_customs'),
+		value : 'lcl_customs',
+	},
+	{
+		label : t('myTickets:fcl_cfs'),
+		value : 'fcl_cfs',
+	},
+	{
+		label : t('myTickets:trailer'),
+		value : 'trailer_freight',
+	},
+	{
+		label : t('myTickets:haulage'),
+		value : 'haulage_freight',
+	},
+	{
+		label : t('myTickets:air_customs'),
+		value : 'air_customs',
+	},
+];
+
+export const SINGLE_LOCATIONS = [
+	'fcl_customs',
+	'lcl_customs',
+	'air_customs',
+	'origin_fcl_customs',
+	'destination_fcl_customs',
+	'origin_lcl_customs',
+	'destination_lcl_customs',
+	'origin_air_customs',
+	'destination_air_customs',
+	'fcl_cfs',
+	'fcl_freight_local',
+	'air_freight_local',
+	'lcl_freight_local',
+];
 
 export const sortByOptions = ({ t }) => [
 	{ label: t('myTickets:created_at'), value: 'created_at' },
