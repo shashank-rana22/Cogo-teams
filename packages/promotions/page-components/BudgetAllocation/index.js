@@ -1,4 +1,5 @@
-import { TabPanel, Tabs } from '@cogoport/components';
+import { TabPanel, Tabs, Toggle } from '@cogoport/components';
+import { useHandleVersionChangeToOld } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import BudgetAllocationTab from './BudgetAllocationTab';
@@ -7,11 +8,21 @@ import RuleSettingTab from './RuleSettingTab';
 import styles from './styles.module.css';
 
 function BudgetAllocation() {
+	const { handleRouteChange } = useHandleVersionChangeToOld({});
+
 	const [activeTab, setActiveTab] = useState('dashboard');
 
 	return (
 		<div>
-			<h1>Promotions</h1>
+			<div className={styles.container}>
+				<h1>Promotions</h1>
+				<Toggle
+					size="md"
+					onLabel="Old"
+					offLabel="New"
+					onChange={handleRouteChange}
+				/>
+			</div>
 			<div>
 				<Tabs
 					activeTab={activeTab}
