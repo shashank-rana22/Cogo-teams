@@ -17,6 +17,7 @@ const ActivePorts = React.forwardRef(({
 	filterBy,
 	hierarchy,
 	minCount,
+	maxCount,
 	range,
 	currentId,
 	setBounds,
@@ -34,15 +35,19 @@ const ActivePorts = React.forwardRef(({
 				const value = filterBy.includes('accuracy')
 					? (accuracyMapping[item.destination_id] || GLOBAL_CONSTANTS.zeroth_index).toFixed(DECIMAL)
 					: formatBigNumbers(accuracyMapping[item.destination_id]);
+				const idx = activeList.length === 1 || minCount === maxCount
+					? COLORS.length - 1
+					: Math.floor((accuracyMapping[item.destination_id] - minCount) / range);
 				const color = filterBy.includes('accuracy')
 					? getPolygonStyleProps(accuracyMapping[item.destination_id])?.color
-					: COLORS[Math.floor((accuracyMapping[item.destination_id] - minCount) / range)];
+					: COLORS[idx];
 				return (
 					<Point
 						key={item.destination_id}
 						position={position}
 						ref={currentId === item.destination_id ? ref : null}
 						backgroundColor={color}
+						lightFill={idx < 3}
 						eventHandlers={{
 							click: (e) => {
 								L.DomEvent.stopPropagation(e);

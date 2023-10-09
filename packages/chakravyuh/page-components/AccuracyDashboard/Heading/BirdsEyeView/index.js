@@ -34,7 +34,9 @@ function BirdsEyeView({ countMapping = {}, maxCount = 0, minCount = 0, loading =
 	const range = K + (maxCount - minCount) / COLORS.length;
 
 	const onEachFeature = (feature, layer, id, name) => {
-		const fillColor = COLORS[Math.floor((countMapping[id] - minCount) / range)];
+		const fillColor = COLORS[Object.keys(countMapping).length === 1 || minCount === maxCount
+			? COLORS.length - 1
+			: Math.floor((countMapping[id] - minCount) / range)];
 
 		layer?.setStyle({
 			weight      : 1,

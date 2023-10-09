@@ -145,6 +145,7 @@ function Map({
 				filterBy={filterBy}
 				hierarchy={hierarchy}
 				minCount={minCount}
+				maxCount={maxCount}
 				range={range}
 				currentId={currentId}
 				setBounds={setBounds}
