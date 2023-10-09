@@ -82,7 +82,7 @@ export default function BuySellStatusContent({
 						style={{ marginRight: '10px' }}
 						onClick={() => setShowTicketModal(true)}
 					>
-						Raise Query
+						Raise Ticket
 					</Button>
 
 					{

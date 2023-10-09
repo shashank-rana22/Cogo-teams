@@ -87,7 +87,7 @@ export default function Content({
 							)
 							: null}
 
-						{(!item?.modifiedBy && item?.quotationState !== 'APPROVED') ? (
+						{(item?.quotationState !== 'APPROVED') ? (
 							<div className={styles.flex_content}>
 								<div />
 								<div className={styles.flex_content}>
@@ -97,7 +97,7 @@ export default function Content({
 										style={{ marginRight: '10px' }}
 										onClick={() => { setQueryModalShow(true); setButtonClicked('Query'); }}
 									>
-										Raise Query
+										Raise Ticket
 									</Button>
 
 									<RemarkModal

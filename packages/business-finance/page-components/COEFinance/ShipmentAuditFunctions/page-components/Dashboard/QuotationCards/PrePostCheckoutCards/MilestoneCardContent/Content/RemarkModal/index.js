@@ -51,7 +51,7 @@ export default function RemarkModal({
 			placement="center"
 			scroll
 		>
-			<Modal.Header title={buttonClicked === 'Query' ? 'RAISE QUERY' : 'APPROVE'} />
+			<Modal.Header title={buttonClicked === 'Query' ? 'RAISE TICKET' : 'APPROVE'} />
 			<Modal.Body>
 				{buttonClicked === 'Query' ? (
 					<div className={styles.modify}>
