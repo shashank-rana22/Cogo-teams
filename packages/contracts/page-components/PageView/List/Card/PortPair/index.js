@@ -32,6 +32,20 @@ function PortPair({ portPair, fromDetails }) {
 
 	const isLocals = SINGLE_PORT_SERVICES.includes(portPair?.service_type);
 
+	function LocationDetails({ name, code, country }) {
+		return (
+			<div>
+				<div className={styles.code}>{`(${code})`}</div>
+				<div className={styles.name}>
+					<Tooltip content={name}>
+						<div className={styles.subname}>{`${name}`}</div>
+					</Tooltip>
+					<div className={styles.country}>{`,${country}`}</div>
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			{fromDetails ? null : (
@@ -42,39 +56,15 @@ function PortPair({ portPair, fromDetails }) {
 			)}
 			<div className={styles.upper_body}>
 				{isLocals ? (
-					<div>
-						<div className={styles.code}>{`(${singlePortCode})`}</div>
-						<div className={styles.name}>
-							<Tooltip content={singlePortName}>
-								<div className={styles.subname}>{`${singlePortName}`}</div>
-							</Tooltip>
-							<div className={styles.country}>{`,${singlePortCountry}`}</div>
-						</div>
-					</div>
+					<LocationDetails name={singlePortName} code={singlePortCode} country={singlePortCountry} />
 				) : (
 					<>
-						<div>
-							<div className={styles.code}>{`(${originCode})`}</div>
-							<div className={styles.name}>
-								<Tooltip content={originName}>
-									<div className={styles.subname}>{`${originName}`}</div>
-								</Tooltip>
-								<div className={styles.country}>{`,${originCountry}`}</div>
-							</div>
-						</div>
+
+						<LocationDetails name={originName} code={originCode} country={originCountry} />
 						<div>
 							<IcMPortArrow />
 						</div>
-						<div>
-							<div className={styles.code}>{`(${destinationCode})`}</div>
-
-							<div className={styles.name}>
-								<Tooltip content={destinationName}>
-									<div className={styles.subname}>{`${destinationName}`}</div>
-								</Tooltip>
-								<div className={styles.country}>{`,${destinationCountry}`}</div>
-							</div>
-						</div>
+						<LocationDetails name={destinationName} code={destinationCode} country={destinationCountry} />
 					</>
 				)}
 			</div>
