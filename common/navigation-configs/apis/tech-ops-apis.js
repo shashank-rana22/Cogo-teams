@@ -184,6 +184,12 @@ const apis = [
 		service_name : 'contract',
 	},
 	{
+		api          : 'list_contract_fcl_freight_local_services',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'contract',
+	},
+	{
 		api          : 'list_contract_lcl_freight_services',
 		access_type  : 'private',
 		feature      : 'tech_ops',
