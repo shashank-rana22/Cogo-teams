@@ -1,6 +1,7 @@
 const getFormattedTouchPointDataprefill = (touch_points = {}) => {
 	const { primary_service = {} } = touch_points || {};
 	const { enroute = [] } = primary_service || {};
+
 	const forwardJourney = enroute.filter(
 		(element) => element.trip_type === 'one_way',
 	);
@@ -14,6 +15,7 @@ const getFormattedTouchPointDataprefill = (touch_points = {}) => {
 	const returnJourney = enroute.filter(
 		(element) => element.trip_type === 'round',
 	);
+
 	const returnJourneyTouchPoints = returnJourney.map((touchPoint) => ({
 		id           : touchPoint.touch_point_location_id,
 		name         : touchPoint.name,

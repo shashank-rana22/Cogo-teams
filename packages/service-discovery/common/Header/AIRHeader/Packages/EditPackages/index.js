@@ -13,6 +13,9 @@ import FormModal from './FormModal';
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 1;
+const SERVICE_KEY = 'search_type';
+const SERVICE = 'air_freight';
+const MAX_WEIGHT_ALLOWED = 150;
 
 const getTabWisePrefilledValues = (activeTab, values = {}) => {
 	let formValues = {};
@@ -51,10 +54,6 @@ const getTabWisePrefilledValues = (activeTab, values = {}) => {
 
 	return formValues;
 };
-
-const SERVICE_KEY = 'search_type';
-const SERVICE = 'air_freight';
-const MAX_WEIGHT_ALLOWED = 150;
 
 function EditPackages({
 	show = false,
