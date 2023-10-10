@@ -5,21 +5,18 @@ import React from 'react';
 
 import NoDataState from '../../../../../common/NoDataState';
 import { COLOR_MAPPINGS } from '../../../../../constants/pie_chart_config';
-import useGetFclFreightRateTrends from '../../../../../hooks/useGetFclFreightRateTrends';
 import SeriesChart from '../SeriesChart';
 import styles from '../styles.module.css';
 
-const VALID_IDS = ['supply', 'rate_extension', 'cluster_extension'];
+const VALID_IDS = ['supply', 'rate_extension', 'predicted', 'cluster_extension'];
 
-function TrendChart({
-	parent_mode = null,
+function RateAccuracy({
+	accuracy = [],
+	loading = false, parent_mode = null,
 	isAnimating = false,
 	isHighlighted = false,
-	globalFilters = {},
 }) {
 	const IDS = parent_mode ? [parent_mode] : VALID_IDS;
-	const { loading, trendsData } = useGetFclFreightRateTrends({ filters: globalFilters });
-	const filteredDataForChart = trendsData?.map(({ predicted, ...rest }) => ({ ...rest })) || [];
 
 	return (
 		<div className={cl`${styles.rate_accuracy_chart_container} 
@@ -37,9 +34,9 @@ function TrendChart({
 				))}
 			</div>
 			<div className={cl`${styles.chart_container} ${isAnimating ? styles.blur : ''}`}>
-				{(loading || !isEmpty(trendsData))
+				{(loading || !isEmpty(accuracy))
 					? (
-						<SeriesChart loading={loading} data={filteredDataForChart} seriesIds={IDS} />
+						<SeriesChart loading={loading} data={accuracy} seriesIds={IDS} />
 					)
 					: <NoDataState flow="column" />}
 			</div>
@@ -47,4 +44,4 @@ function TrendChart({
 	);
 }
 
-export default TrendChart;
+export default RateAccuracy;
