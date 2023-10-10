@@ -36,8 +36,6 @@ function DetailsCard({
 
 	const { source, trade_type: tradeType } = dataList;
 
-	console.log('dataList', dataList);
-
 	const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
 	return (
 		<div className={styles.card}>
