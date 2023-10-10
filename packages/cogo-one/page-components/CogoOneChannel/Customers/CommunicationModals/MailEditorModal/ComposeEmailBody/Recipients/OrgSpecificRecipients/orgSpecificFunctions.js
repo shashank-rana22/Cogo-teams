@@ -2,8 +2,20 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function getOrgListOptions({ organizationData = {} }) {
+function getOrgListOptions({
+	organizationData = {},
+	activeTab = '',
+}) {
 	const { list = [] } = organizationData || {};
+
+	if (activeTab.includes('other')) {
+		return [
+			{
+				value : 'lead_users',
+				label : 'Lead Users',
+			},
+		];
+	}
 
 	return list.map((itm) => ({
 		...itm,
@@ -16,10 +28,10 @@ function RenderLabel({ item = {} }) {
 	return (
 		<div>
 			<div className={styles.agent_label}>
-				{startCase(item?.label)}
+				{item?.value}
 			</div>
 			<div className={styles.lower_label}>
-				{item?.value}
+				{startCase(item?.label)}
 			</div>
 		</div>
 	);
@@ -31,11 +43,13 @@ function RenderOrgLabel({ item = {} }) {
 			<div className={styles.agent_label}>
 				{startCase(item?.label)}
 			</div>
-			<div className={styles.lower_label}>
-				Serial ID:
-				{' '}
-				{item?.serial_id}
-			</div>
+			{item?.serial_id ? (
+				<div className={styles.lower_label}>
+					Serial ID:
+					{' '}
+					{item?.serial_id}
+				</div>
+			) : null}
 		</div>
 	);
 }

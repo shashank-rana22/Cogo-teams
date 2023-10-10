@@ -216,6 +216,7 @@ function TicketChat({
 						getTicketActivity={getTicketActivity}
 						getTicketDetails={getTicketDetails}
 						setListData={setListData}
+						ticket={ticket}
 					/>
 				)}
 
