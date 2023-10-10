@@ -31,6 +31,14 @@
 	white-space: nowrap;
 }
 
+.singlePort {
+	max-width: 350px;
+	overflow: hidden;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .button {
 	display: flex;
 	justify-content: flex-end;

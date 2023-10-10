@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Service from './Service';
 import styles from './styles.module.css';
 
+const SINGLE_PORT_SERVICES = ['fcl_freight_local', 'lcl_freight_local'];
+
 function NegotiateRate({ selectedCard = {}, setRevertCounts = () => {} }) {
 	const SERVICE = [];
 	const ZERO_VALUE = 0;
@@ -26,16 +28,19 @@ function NegotiateRate({ selectedCard = {}, setRevertCounts = () => {} }) {
 			<div className={styles.heading}>Negotiate Rates</div>
 			<div className={styles.service}>
 				{(SERVICE || []).map((item) => (
-					<Service
-						key={item?.id}
-						selectedCard={selectedCard}
-						service={item}
-						activeService={activeService}
-						setActiveService={setActiveService}
-						submittedEnquiry={submittedEnquiry}
-						setSubmittedEnquiry={setSubmittedEnquiry}
-						setRevertCounts={setRevertCounts}
-					/>
+					item?.service === 'subsidiary' && SINGLE_PORT_SERVICES.includes(selectedCard?.search_type) ? null
+						: (
+							<Service
+								key={item?.id}
+								selectedCard={selectedCard}
+								service={item}
+								activeService={activeService}
+								setActiveService={setActiveService}
+								submittedEnquiry={submittedEnquiry}
+								setSubmittedEnquiry={setSubmittedEnquiry}
+								setRevertCounts={setRevertCounts}
+							/>
+						)
 
 				))}
 			</div>

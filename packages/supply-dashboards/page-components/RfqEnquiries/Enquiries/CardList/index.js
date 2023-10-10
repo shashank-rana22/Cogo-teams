@@ -16,6 +16,7 @@ function CardList({
 			</div>
 			{!loading && (data?.data || []).map((item) => (
 				<Card
+					key={item.id}
 					item={item}
 					selectedCard={selectedCard}
 					setSelectedCard={setSelectedCard}
@@ -23,7 +24,7 @@ function CardList({
 				/>
 			))}
 			{
-				loading && [1, 2, 3, 4, 5].map(() => (<Loader />))
+				loading && [1, 2, 3, 4, 5].map((i) => (<Loader key={i} />))
 			}
 			{!loading && (data?.total > data?.page) ? (
 				<Pagination
