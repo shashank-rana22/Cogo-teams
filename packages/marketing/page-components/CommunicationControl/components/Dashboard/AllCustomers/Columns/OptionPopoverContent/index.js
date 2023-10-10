@@ -21,6 +21,12 @@ function OptionPopoverContent({ item = {} }) {
 			<Button
 				themeType="secondary"
 				style={{ minWidth: '145px' }}
+				onClick={() => {
+					router.push(
+						'/details/demand/[id]',
+						`/details/demand/${id}`,
+					);
+				}}
 			>
 				SEE PROFILE
 			</Button>
