@@ -15,7 +15,7 @@ const OPTIONS = [
 		highlight_key    : 'spot_search_to_checkout_count',
 		highlight_suffix : '% Conversions',
 		highlight_info   : 'From Search to Checkout',
-		func             : (val) => formatBigNumbers(100.32 - formatBigNumbers(val)),
+		func             : (val) => formatBigNumbers(100 - formatBigNumbers(val)),
 	},
 	{
 		key              : 'map_view',
