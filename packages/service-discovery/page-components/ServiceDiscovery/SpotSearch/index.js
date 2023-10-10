@@ -1,7 +1,10 @@
+import { cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
+
+import DotLoader from '../../../common/LoadingState/DotLoader';
 
 import Header from './components/Header';
 import ModeSelection from './components/ModeSelection';
@@ -35,7 +38,13 @@ function SpotSearch() {
 	const { createSearch, loading } = useCreateSearch();
 
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${loading && styles.disabled}`}>
+			{loading ? (
+				<div className={styles.loader}>
+					<span className={styles.loading_text}>Please Wait!</span>
+					<DotLoader dotsLegth={4} />
+				</div>
+			) : null}
 
 			<div className={styles.header}>
 				<div className={styles.scope_select}>

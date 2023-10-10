@@ -4,6 +4,37 @@
 	background: #fff;
 }
 
+.disabled {
+	pointer-events: none;
+	opacity: 0.6;
+}
+
+.loader {
+	position: fixed;
+	top: 45%;
+	left: 45%;
+	z-index: 9999;
+	display: flex;
+	align-items: baseline;
+	animation: center-animation 0.4s ease-in-out;
+}
+
+@keyframes center-animation {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.loading_text {
+	margin-right: 12px;
+	font-size: 28px;
+	font-weight: 600;
+}
+
 .header {
 	min-height: 300px;
 	padding: 24px 40px;
