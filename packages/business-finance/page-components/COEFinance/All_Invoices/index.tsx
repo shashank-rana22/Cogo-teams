@@ -25,7 +25,7 @@ function AllInvoices({ statsData }) {
 	const { push, query } = useRouter();
 	const [filters, setFilters] = useState({});
 	const getQueryView = () => {
-		if (query.view === 'finance_rejected' || query.view === 'coe_rejected') {
+		if (['finance_rejected', 'coe_rejected', 'coe_on_hold'].includes(query.view)) {
 			return null;
 		}
 		return query.view;
