@@ -21,12 +21,12 @@ function ServiceDetailsContent({
 		free_days_detention_destination,
 		bl_type,
 		commodity_description,
-		selected_schedule_departure,
+		schedule_departure,
 		shipping_line,
 		preferred_shipping_lines,
 		serial_id,
 		feedbacks,
-		closing_remarks = '',
+		closing_remarks,
 		status,
 	} = primary_service_detail || feedbackData || requestData || {};
 
@@ -49,18 +49,14 @@ function ServiceDetailsContent({
 	const contentMapping = [
 		{
 			label : 'Cargo Ready',
-			value : cargo_readiness_date && `${formatDate({
-				date       : cargo_readiness_date,
-				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-				formatType : 'date',
-			})}`,
+			value : cargo_readiness_date,
 		},
 		{ label: 'BL Type', value: bl_type },
 		{ label: 'Destination Detention Free Days', value: free_days_detention_destination },
 		{
 			label : 'Expected Departure',
-			value : selected_schedule_departure && `${formatDate({
-				date       : selected_schedule_departure,
+			value : schedule_departure && `${formatDate({
+				date       : schedule_departure,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
 				formatType : 'date',
 			})}`,

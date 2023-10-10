@@ -13,6 +13,7 @@ const API_NAME = {
 	trailer     : 'delete_trailer_freight_rate_job',
 	ltl_freight : 'delete_ltl_freight_rate_job',
 	ftl_freight : 'delete_ftl_freight_rate_job',
+	fcl_cfs     : 'delete_fcl_cfs_rate_job',
 };
 
 const useDeleteRateJob = (service) => {

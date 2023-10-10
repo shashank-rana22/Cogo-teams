@@ -13,6 +13,7 @@ const API_NAME = {
 	haulage     : 'list_haulage_freight_rate_jobs',
 	fcl_customs : 'list_fcl_customs_rate_jobs',
 	ftl_freight : 'list_ftl_freight_rate_jobs',
+	fcl_cfs     : 'list_fcl_cfs_rate_jobs',
 };
 
 const FCL_PARAMS_MAPPING = {

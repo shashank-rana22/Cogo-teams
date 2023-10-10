@@ -98,6 +98,10 @@ export const serviceOptions = [
 		label : 'Trailer Freight',
 		value : 'trailer',
 	},
+	{
+		label : 'FCL CFS',
+		value : 'fcl_cfs',
+	},
 ];
 
 export const taskStatusOptions = [

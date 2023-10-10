@@ -88,19 +88,19 @@ function AddRateModal({
 
 	const handleSubmitData = async (formData) => {
 		const rate_id = await createRate(formData);
-		if (source === 'rate_feedback') {
+		if (rate_id && source === 'rate_feedback') {
 			const resp = await deleteFeedbackRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
 			if (resp === TWO_HUNDERD) {
 				handleSuccessActions();
 			}
 		}
-		if (source === 'rate_request') {
+		if (rate_id && source === 'rate_request') {
 			const resp = await deleteRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
 			if (resp === TWO_HUNDERD) {
 				handleSuccessActions();
 			}
 		}
-		if (source === 'live_bookings') {
+		if (rate_id && source === 'live_bookings') {
 			const resp = await updateFlashBookingRate({ data });
 			if (resp === TWO_HUNDERD) {
 				handleSuccessActions();

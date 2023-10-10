@@ -12,7 +12,8 @@ const API_END_POINT_MAPPING = {
 	air_customs : 'get_air_customs_rate_job_stats',
 	trailer     : 'get_trailer_freight_rate_job_stats',
 	ltl_freight : 'get_ltl_freight_rate_job_stats',
-	ftl_freight : 'get_ftl_freight_rate_jobs_stats',
+	ftl_freight : 'get_ftl_freight_rate_job_stats',
+	fcl_cfs     : 'get_fcl_cfs_rate_job_stats',
 };
 
 const FCL_PARAMS_MAPPING = {
