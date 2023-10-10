@@ -73,6 +73,7 @@ function DashboardView(props) {
 						setGlobalFilters={setGlobalFilters}
 					/>
 					<RateAddition
+						key={`rate_addition_graph_${isHighlighted ? 'hidden' : 'visible'}`}
 						dateString={dateString}
 						globalFilters={globalFilters}
 					/>
