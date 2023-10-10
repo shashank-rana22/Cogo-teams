@@ -19,7 +19,10 @@ const COGOPORT_MAILS = [
 	},
 ];
 
-function getAllowedEmailsList({ orgData = {}, searchQuery = '' }) {
+function getAllowedEmailsList({
+	orgData = {},
+	searchQuery = '',
+}) {
 	const { list: usersList = [] } = orgData || {};
 
 	let options = [];
@@ -30,7 +33,7 @@ function getAllowedEmailsList({ orgData = {}, searchQuery = '' }) {
 				...options,
 				{
 					id    : itm?.id,
-					label : itm?.name,
+					label : itm?.name || itm?.email,
 					value : itm?.email,
 				},
 			];
