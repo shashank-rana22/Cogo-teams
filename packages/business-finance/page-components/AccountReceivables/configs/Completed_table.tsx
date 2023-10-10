@@ -182,13 +182,13 @@ const completedColumn = ({
 									{invoiceNumber}
 								</div>
 							)}
-						{invoiceType && (
+						{invoiceType ? (
 							<div className={styles.qwerty}>
 								<Pill size="sm" color={INVOICE_TYPE[row?.invoiceType]}>
 									{startCase(invoiceType)}
 								</Pill>
 							</div>
-						)}
+						) : null}
 					</div>
 				</div>
 			);
