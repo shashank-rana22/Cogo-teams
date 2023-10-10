@@ -35,7 +35,7 @@ function Body(props) {
 		setParams,
 		debounceQuery,
 		listRefetch,
-	} = useScoringReports({ currLevel, setCurrLevel, dateRange, entity, isChannel, levelStack, setLevelStack });
+	} = useScoringReports({ currLevel, dateRange, entity, isChannel, levelStack });
 
 	const {
 		data, statsLoading, refetchStats,
