@@ -11,7 +11,7 @@ import getReportViewType from '../../helpers/getReportViewType';
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
-const { ADMIN_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
+const { ADMIN_REPORT, OWNER_REPORT, MANAGER_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 
 const getReportTypeFilter = ({ currLevel }) => {
 	if (currLevel.report_type === ADMIN_REPORT || !isEmpty(currLevel.user)) {
@@ -43,6 +43,7 @@ const useScoringReports = (props) => {
 		role_data_required       : true,
 		pagination_data_required : false,
 		add_current_user_report  : incentive_leaderboard_viewtype !== ADMIN,
+		add_self_kam_report_data : [OWNER_REPORT, MANAGER_REPORT].includes(getReportTypeFilter({ currLevel })),
 		filters                  : {
 			report_view_type        : getReportViewType({ currLevel, isChannel }),
 			report_type             : incentive_leaderboard_viewtype !== ADMIN ? `${view}_report` : undefined,
@@ -67,8 +68,9 @@ const useScoringReports = (props) => {
 		if (currLevel.report_type !== AGENT_REPORT || (currLevel.isExpanded && isEmpty(currLevel.user))) {
 			setParams((previousParams) => ({
 				...previousParams,
-				is_expanded_view : (currLevel.isExpanded && isEmpty(currLevel.user)) ? true : undefined,
-				filters          : {
+				is_expanded_view         : (currLevel.isExpanded && isEmpty(currLevel.user)) ? true : undefined,
+				add_self_kam_report_data : [OWNER_REPORT, MANAGER_REPORT].includes(getReportTypeFilter({ currLevel })),
+				filters                  : {
 					...(previousParams.filters || {}),
 					report_view_type   : getReportViewType({ currLevel, isChannel }),
 					office_location_id : currLevel.location_id || undefined,
