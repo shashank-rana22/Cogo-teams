@@ -29,9 +29,10 @@ function Header({
 					name="user_select"
 					asyncKey="organization_users"
 					labelKey="name"
-					valueKey="id"
+					valueKey="user_id"
 					initialCall
 					value={user}
+					isClearable
 					onChange={onChange}
 					label="Select Users"
 					placeholder="Select All"

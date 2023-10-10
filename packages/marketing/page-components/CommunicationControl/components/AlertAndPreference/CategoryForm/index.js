@@ -1,27 +1,38 @@
 import { Button, Checkbox, Loader } from '@cogoport/components';
 import { CheckboxController, useForm } from '@cogoport/forms';
+import { useRouter } from '@cogoport/next';
 import { useState, useEffect } from 'react';
 
 import defaultValuesHelper from '../../../helpers/defaultValuesHelper';
 import getPayloadAlertsPreferences from '../../../helpers/getPayloadAlertsPreferences';
 import selectAllAlertsHelper from '../../../helpers/selectAllAlertsHelper';
+import useUpdatePreference from '../../../hooks/useUpdatePreference';
 
 import Card from './Card';
 import styles from './styles.module.css';
 
 function CategoryForm({
-	query = {}, handleSave = () => {}, data = {}, preferencesLoading = '', updateLoading = '',
+	data = {}, preferencesLoading = '', user = '',
 }) {
+	const router = useRouter();
+	const { query } = router || {};
+	const refetch = router?.back;
+
 	const [selectAllChecked, setSelectAllChecked] = useState(false);
 
-	const { control, watch, setValue } = useForm({ defaultValues: defaultValuesHelper(data) });
+	const { control, watch, setValue, handleSubmit } = useForm({ defaultValues: defaultValuesHelper(data) });
 	const formValues = watch();
 
-	const preferences = getPayloadAlertsPreferences(formValues);
+	const { updatePreference, loading:updateLoading } = useUpdatePreference({ refetch });
 
-	const PAYLOAD = {
-		organization_id: query?.company_id,
-		preferences,
+	const onSubmit = async (values) => {
+		// console.log(values);
+		const preferences = getPayloadAlertsPreferences(values);
+		await updatePreference({
+			organization_id : query?.company_id,
+			user_id         : user,
+			preferences,
+		});
 	};
 
 	useEffect(() => {
@@ -120,7 +131,7 @@ function CategoryForm({
 						</div>
 						<Button
 							className={styles.btn}
-							onClick={() => handleSave(PAYLOAD)}
+							onClick={handleSubmit(onSubmit)}
 							disabled={updateLoading}
 						>
 							UPDATE EMAIL PREFERENCES

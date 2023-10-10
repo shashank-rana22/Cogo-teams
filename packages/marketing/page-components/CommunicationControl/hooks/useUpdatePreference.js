@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 
 import toastApiError from '../utils/toastApiError';
 
-const useUpdatePreference = () => {
+const useUpdatePreference = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_user_alert_preference',
 		method : 'POST',
@@ -15,6 +15,7 @@ const useUpdatePreference = () => {
 				data: payload,
 			});
 			Toast.success('Preferences has been successfully saved');
+			refetch();
 		} catch (error) {
 			toastApiError(error);
 		}

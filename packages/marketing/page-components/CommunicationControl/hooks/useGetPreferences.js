@@ -23,13 +23,13 @@ const useGetPreferences = ({ DEFAULT_PARAMS = {} }) => {
 		}
 	}, [trigger]);
 
-	const { userId } = DEFAULT_PARAMS;
+	const { user_id } = DEFAULT_PARAMS;
 
 	useEffect(() => {
-		if (userId) {
+		if (user_id) {
 			getPreferences();
 		}
-	}, [userId, getPreferences]);
+	}, [user_id, getPreferences]);
 	return {
 		preferences: data?.preferences || {},
 		loading,

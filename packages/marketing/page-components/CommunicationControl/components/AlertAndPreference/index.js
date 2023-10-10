@@ -3,7 +3,6 @@ import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import useGetPreferences from '../../hooks/useGetPreferences';
-import useUpdatePreference from '../../hooks/useUpdatePreference';
 
 import CategoryForm from './CategoryForm';
 import Header from './Header';
@@ -16,19 +15,12 @@ function AlertAndPreference() {
 	const [user, setUser] = useState('');
 
 	const DEFAULT_PARAMS = {
-		companyId : company_id,
-		userId    : user,
+		organization_id : company_id,
+		user_id         : user,
 	};
-
 	const { preferences = {}, loading:getPreferencesLoading = '' } = useGetPreferences({
 		DEFAULT_PARAMS,
 	});
-	const { updatePreference, loading:updateLoading } = useUpdatePreference();
-
-	const handleSave = async (payload) => {
-		await updatePreference({ ...(payload || {}), user_id: user });
-		router?.back();
-	};
 
 	return (
 		<div className={styles.container}>
@@ -47,11 +39,9 @@ function AlertAndPreference() {
 			/>
 			{!getPreferencesLoading ? (
 				<CategoryForm
-					handleSave={handleSave}
-					query={router?.query}
 					data={preferences}
-					getPreferencesLoading={getPreferencesLoading}
-					updateLoading={updateLoading}
+					preferencesLoading={getPreferencesLoading}
+					user={user}
 				/>
 			) : null}
 		</div>
