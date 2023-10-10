@@ -31,7 +31,7 @@ function RenderLabel({ item = {} }) {
 				{item?.value}
 			</div>
 			<div className={styles.lower_label}>
-				{startCase(item?.label)}
+				{(item?.label)}
 			</div>
 		</div>
 	);
