@@ -2,13 +2,18 @@ import { Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import AssignRoleModal from '../../../../../../common/AssignRoleModal';
+import useUpdateStatus from '../../../../../../hooks/useUpdateStatus';
 
 function OptionPopoverContent({
-	item = {}, updateStatus = () => {}, updateStatusLoading = '', getChannelConfig = () => {},
+	item = {}, getChannelConfig = () => {},
 }) {
 	const isActive = item?.status === 'active';
 	const [show, setShow] = useState(false);
 	const [val, setVal] = useState(item?.role_ids);
+	const {
+		updateStatus = () => {},
+		updateStatusLoading = '',
+	} = useUpdateStatus({ getChannelConfig, channel: 'whatsapp' });
 	return (
 		<div>
 			{isActive ? (

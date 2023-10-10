@@ -1,15 +1,17 @@
 import { Button } from '@cogoport/components';
 import { useState } from 'react';
 
+import useUpdateSegment from '../../../../../hooks/useUpdateSegment';
 import AddEditRule from '../../AddEditRule';
 
 function OptionPopoverContent(
 	{
-		item = {}, setShowDeleteModal = () => {}, updateSegment = () => {},
-		setVisible = () => {}, setItemData = () => {}, updateLoading = '',
+		item = {}, setShowDeleteModal = () => {}, setVisible = () => {},
+		setItemData = () => {}, getSegmentData = () => {},
 	},
 ) {
 	const [showModal, setShowModal] = useState(false);
+	const { updateSegment = () => {}, updateLoading = '' } = useUpdateSegment({ getSegmentData });
 
 	return (
 		<div>

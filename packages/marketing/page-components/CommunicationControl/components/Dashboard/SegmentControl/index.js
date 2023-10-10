@@ -2,9 +2,7 @@ import { dynamic } from '@cogoport/next';
 import { useState } from 'react';
 
 import TableView from '../../../common/TableView';
-import useCreateSegment from '../../../hooks/useCreateSegment';
 import useGetSegment from '../../../hooks/useGetSegment';
-import useUpdateSegment from '../../../hooks/useUpdateSegment';
 
 import getColumns from './Columns';
 import styles from './styles.module.css';
@@ -26,18 +24,13 @@ function SegmentControl() {
 		setFilters = () => {}, pagination = PAGE_ONE, setPagination = () => {},
 	} = useGetSegment({ statusFilter });
 
-	const { createSegment = () => {}, createSegmentLoading = '' } = useCreateSegment({ getSegmentData });
-
-	const { updateSegment = () => {}, updateLoading = '' } = useUpdateSegment({ getSegmentData });
-
 	const cols = getColumns({
 		page      : data?.page,
 		pageLimit : data?.page_limit,
 		setShowDeleteModal,
 		setItemData,
 		statusFilter,
-		updateSegment,
-		updateLoading,
+		getSegmentData,
 	});
 
 	return (
@@ -58,25 +51,18 @@ function SegmentControl() {
 				setPagination={setPagination}
 				loading={loading}
 			/>
-
-			{showDeleteModal ? (
-				<DeleteRule
-					showDeleteModal={showDeleteModal}
-					setShowDeleteModal={setShowDeleteModal}
-					itemData={itemData}
-					updateSegment={updateSegment}
-				/>
-			) : null}
-
-			{showDeleteModal ? (
-				<AddEditRule
-					showAddModal={showAddModal}
-					setShowAddModal={setShowAddModal}
-					submit={createSegment}
-					loading={createSegmentLoading}
-					title="Add"
-				/>
-			) : null}
+			<DeleteRule
+				showDeleteModal={showDeleteModal}
+				setShowDeleteModal={setShowDeleteModal}
+				itemData={itemData}
+				getSegmentData={getSegmentData}
+			/>
+			<AddEditRule
+				showAddModal={showAddModal}
+				setShowAddModal={setShowAddModal}
+				getSegmentData={getSegmentData}
+				title="Add"
+			/>
 		</div>
 	);
 }

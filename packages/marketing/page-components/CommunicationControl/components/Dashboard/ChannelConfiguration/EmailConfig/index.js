@@ -4,7 +4,6 @@ import { useState, useMemo } from 'react';
 
 import TableView from '../../../../common/TableView';
 import useGetCommunicationChannel from '../../../../hooks/useGetCommunicationChannel';
-import useUpdateStatus from '../../../../hooks/useUpdateStatus';
 
 import getColumns from './Columns';
 import styles from './styles.module.css';
@@ -36,11 +35,6 @@ function EmailConfig() {
 		pagination = PAGE_ONE, setPagination = () => {},
 	} = useGetCommunicationChannel({ defaultParams });
 
-	const { updateStatus, updateStatusLoading } = useUpdateStatus({
-		getChannelConfig,
-		channel: 'email',
-	});
-
 	const refetch = () => {
 		setEmail('');
 		getChannelConfig();
@@ -49,8 +43,6 @@ function EmailConfig() {
 	const cols = getColumns({
 		page      : data?.page,
 		pageLimit : data?.page_limit,
-		updateStatus,
-		updateStatusLoading,
 		getChannelConfig,
 	});
 

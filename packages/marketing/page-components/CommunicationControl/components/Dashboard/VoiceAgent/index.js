@@ -4,8 +4,6 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import TableView from '../../../common/TableView';
-import useBulkUpdateServetalAgents from '../../../hooks/useBulkUpdateServetalAgents';
-import useCreateServetalAgent from '../../../hooks/useCreateServetalAgent';
 import useGetListServetalAgent from '../../../hooks/useGetListServetalAgent';
 
 import getColumns from './Columns';
@@ -27,26 +25,6 @@ function VoiceAgent() {
 		listServetalAgent = () => {},
 	} = useGetListServetalAgent({ partnerUser, pagination });
 
-	const getPayload = () => {
-		const agents = checkedRowsSerialId.map((item) => ({
-			agent_name   : item?.agent_data?.name,
-			agent_number : item?.mobile_number,
-			id           : item?.id,
-			action_type  : 'delete_agent',
-		}));
-
-		return { agents };
-	};
-
-	const { bulkUpdateAgents = () => {}, deleteLoading = '' } = useBulkUpdateServetalAgents();
-
-	const deleteHandler = () => {
-		bulkUpdateAgents({ setDeleteAgentsModal, listServetalAgent, payload: getPayload() });
-		setDeleteAgentsModal(false);
-	};
-
-	const { servetalAgent = () => {}, createServetalAgentloading = '' } = useCreateServetalAgent({ listServetalAgent });
-
 	const cols = getColumns({
 		checkedRowsSerialId,
 		setCheckedRowsSerialId,
@@ -67,8 +45,7 @@ function VoiceAgent() {
 					<CreateAgentModal
 						showCreateModal={showCreateModal}
 						setShowCreateModal={setShowCreateModal}
-						servetalAgent={servetalAgent}
-						loading={createServetalAgentloading}
+						listServetalAgent={listServetalAgent}
 					/>
 					<AsyncSelect
 						type="async_select"
@@ -81,7 +58,7 @@ function VoiceAgent() {
 						style={{ minWidth: '300px' }}
 					/>
 					<Button
-						disabled={deleteLoading || isEmpty(checkedRowsSerialId)}
+						disabled={isEmpty(checkedRowsSerialId)}
 						className={styles.btn}
 						onClick={() => setDeleteAgentsModal(true)}
 					>
@@ -91,7 +68,7 @@ function VoiceAgent() {
 						deleteAgentsModal={deleteAgentsModal}
 						checkedRowsSerialId={checkedRowsSerialId}
 						setDeleteAgentsModal={setDeleteAgentsModal}
-						deleteHandler={deleteHandler}
+						listServetalAgent={listServetalAgent}
 					/>
 				</div>
 			</div>

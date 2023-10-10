@@ -4,12 +4,18 @@ import { useState } from 'react';
 
 import Layout from '../../../../common/Layout';
 import getControls from '../../../../configurations/add-edit-rule-controls';
+import useCreateSegment from '../../../../hooks/useCreateSegment';
 import removeObjEmptyValue from '../../../../utils/removeObjEmptyValue';
 
-function AddEditRule({
-	showAddModal = '', setShowAddModal = () => {}, submit = () => {}, loading = '', title = '', item = {},
-}) {
+function AddEditRule(
+	{
+		showAddModal = '', setShowAddModal = () => {}, title = '', item = {}, getSegmentData = () => {},
+	},
+) {
 	const [segmentData, setSegmentData] = useState({});
+
+	const { createSegment = () => {}, createSegmentLoading = '' } = useCreateSegment({ getSegmentData });
+
 	const isEdit = title === 'Edit';
 
 	const modifiedControls = getControls({ setSegmentData, isEdit, itemVal: item });
@@ -44,9 +50,9 @@ function AddEditRule({
 			PAYLOAD_ADD.validity_end = formValues?.validity_end?.toISOString();
 		}
 		if (isEdit) {
-			submit(PAYLOAD_ADD, true);
+			createSegment(PAYLOAD_ADD, true);
 		} else {
-			submit(PAYLOAD_ADD);
+			createSegment(PAYLOAD_ADD);
 		}
 		setShowAddModal(false);
 		reset();
@@ -84,7 +90,7 @@ function AddEditRule({
 					onClick={
 						handleSubmit(onSubmit)
 					}
-					disabled={loading}
+					disabled={createSegmentLoading}
 				>
 					SAVE
 				</Button>

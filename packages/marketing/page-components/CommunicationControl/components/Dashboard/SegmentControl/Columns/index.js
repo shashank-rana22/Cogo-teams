@@ -9,10 +9,12 @@ import OptionPopoverContent from './OptionPopoverContent';
 const PAGE_OFFSET = 1;
 const INDEX_OFFSET = 1;
 
-function PopoverItem({
-	item = {}, setShowDeleteModal = () => {}, setItemData = () => {},
-	updateSegment = () => {}, updateLoading = '',
-}) {
+function PopoverItem(
+	{
+		item = {}, setShowDeleteModal = () => {}, setItemData = () => {},
+		getSegmentData = () => {},
+	},
+) {
 	const [visible, setVisible] = useState(false);
 	return (
 		<Popover
@@ -25,8 +27,7 @@ function PopoverItem({
 					setShowDeleteModal={setShowDeleteModal}
 					setVisible={setVisible}
 					setItemData={setItemData}
-					updateSegment={updateSegment}
-					updateLoading={updateLoading}
+					getSegmentData={getSegmentData}
 				/>
 			)}
 		>
@@ -38,7 +39,7 @@ function PopoverItem({
 const getColumns = (
 	{
 		page = 1, pageLimit = 10, setShowDeleteModal = () => {}, statusFilter = '',
-		setItemData = () => {}, updateSegment = () => {}, updateLoading = '',
+		setItemData = () => {}, getSegmentData = () => {},
 	},
 ) => {
 	const dateTime = (item) => (
@@ -103,8 +104,7 @@ const getColumns = (
 					item={item}
 					setShowDeleteModal={setShowDeleteModal}
 					setItemData={setItemData}
-					updateSegment={updateSegment}
-					updateLoading={updateLoading}
+					getSegmentData={getSegmentData}
 				/>
 			),
 		},

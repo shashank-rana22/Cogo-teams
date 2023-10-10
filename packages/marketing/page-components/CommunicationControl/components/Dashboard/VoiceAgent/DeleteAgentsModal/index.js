@@ -1,11 +1,31 @@
 import { Modal, Button } from '@cogoport/components';
 
+import useBulkUpdateServetalAgents from '../../../../hooks/useBulkUpdateServetalAgents';
+
 function DeleteAgentsModal({
 	deleteAgentsModal = '',
 	checkedRowsSerialId = [],
 	setDeleteAgentsModal = () => {},
-	deleteHandler = () => {},
+	listServetalAgent = () => {},
 }) {
+	const getPayload = () => {
+		const agents = checkedRowsSerialId.map((item) => ({
+			agent_name   : item?.agent_data?.name,
+			agent_number : item?.mobile_number,
+			id           : item?.id,
+			action_type  : 'delete_agent',
+		}));
+
+		return { agents };
+	};
+
+	const { bulkUpdateAgents = () => {}, deleteLoading = '' } = useBulkUpdateServetalAgents();
+
+	const deleteHandler = () => {
+		bulkUpdateAgents({ setDeleteAgentsModal, listServetalAgent, payload: getPayload() });
+		setDeleteAgentsModal(false);
+	};
+
 	return (
 		<div>
 			{deleteAgentsModal ? (
@@ -28,6 +48,7 @@ function DeleteAgentsModal({
 						</Button>
 						<Button
 							onClick={deleteHandler}
+							disabled={deleteLoading}
 						>
 							YES
 						</Button>

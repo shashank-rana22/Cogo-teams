@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import TableView from '../../../../common/TableView';
 import useGetCommunicationChannel from '../../../../hooks/useGetCommunicationChannel';
-import useUpdateStatus from '../../../../hooks/useUpdateStatus';
 
 import columns from './Columns';
 import styles from './styles.module.css';
@@ -17,16 +16,9 @@ function WhatsappConfig() {
 		getChannelConfig = () => {},
 	} = useGetCommunicationChannel({ defaultParams: { channel: 'whatsapp' } });
 
-	const {
-		updateStatus = () => {},
-		updateStatusLoading = '',
-	} = useUpdateStatus({ getChannelConfig, channel: 'whatsapp' });
-
 	const cols = columns({
 		page      : data?.page,
 		pageLimit : data?.page_limit,
-		updateStatus,
-		updateStatusLoading,
 		getChannelConfig,
 	});
 

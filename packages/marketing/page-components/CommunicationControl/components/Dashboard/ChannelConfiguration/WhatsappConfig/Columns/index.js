@@ -10,8 +10,6 @@ const INDEX_OFFSET = 1;
 const columns = ({
 	page = 1,
 	pageLimit = 10,
-	updateStatus = () => {},
-	updateStatusLoading = '',
 	getChannelConfig = () => {},
 }) => [
 	{
@@ -50,8 +48,6 @@ const columns = ({
 				content={(
 					<OptionPopoverContent
 						item={item}
-						updateStatus={updateStatus}
-						updateStatusLoading={updateStatusLoading}
 						getChannelConfig={getChannelConfig}
 					/>
 				)}

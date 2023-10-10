@@ -5,12 +5,12 @@ import { useEffect, useState } from 'react';
 
 import Layout from '../../../../common/Layout';
 import getControls from '../../../../configurations/create-agent-controls';
+import useCreateServetalAgent from '../../../../hooks/useCreateServetalAgent';
 
 function CreateAgentModal({
 	showCreateModal = '',
 	setShowCreateModal = () => {},
-	servetalAgent = () => {},
-	loading = '',
+	listServetalAgent = () => {},
 }) {
 	const [itemVal, setItemval] = useState({});
 	const { control, formState:{ errors }, setValue, watch, handleSubmit } = useForm();
@@ -35,6 +35,8 @@ function CreateAgentModal({
 		name            : itemVal?.name,
 		provider_number : formValues?.provider_number,
 	};
+
+	const { servetalAgent = () => {}, createServetalAgentloading = '' } = useCreateServetalAgent({ listServetalAgent });
 
 	const onSubmit = async () => {
 		await servetalAgent({ payload: PAYLOAD });
@@ -69,7 +71,7 @@ function CreateAgentModal({
 						</Button>
 						<Button
 							onClick={handleSubmit(onSubmit)}
-							disabled={loading}
+							disabled={createServetalAgentloading}
 						>
 							SUBMIT
 						</Button>

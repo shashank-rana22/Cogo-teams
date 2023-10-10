@@ -1,10 +1,13 @@
 import { Modal, Button } from '@cogoport/components';
 
+import useUpdateSegment from '../../../../hooks/useUpdateSegment';
+
 import styles from './styles.module.css';
 
 function DeleteRule(
-	{ itemData = {}, showDeleteModal = false, setShowDeleteModal = () => {}, updateSegment = () => {} },
+	{ itemData = {}, showDeleteModal = false, setShowDeleteModal = () => {}, getSegmentData = () => {} },
 ) {
+	const { updateSegment = () => {}, updateLoading = '' } = useUpdateSegment({ getSegmentData });
 	return (
 		<div>
 			{showDeleteModal ? (
@@ -29,6 +32,7 @@ function DeleteRule(
 							onClick={() => {
 								updateSegment({ id: itemData?.id, status: 'deactive' });
 							}}
+							disabled={updateLoading}
 						>
 							YES
 						</Button>
