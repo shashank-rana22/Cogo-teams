@@ -1,4 +1,9 @@
 .container {
 	display: flex;
-	width: calc(100% - 40px);
+	flex-flow: row wrap;
+	justify-content: space-between;
+	width: 100%;
+	height: calc(100% - 64px);
+	padding-top: 10px;
+	overflow: auto;
 }
