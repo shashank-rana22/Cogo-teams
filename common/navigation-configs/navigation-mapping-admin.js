@@ -2165,8 +2165,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'contract_rates-international_contracts',
 					title         : t('common:overseas_contract'),
-					href          : '/contract-rates/dashboard/active',
-					as            : '/contract-rates/dashboard/active',
+					href          : '/contract-rates/dashboard?activeTab=active&page=1',
+					as            : '/contract-rates/dashboard?activeTab=active&page=1',
 					type          : 'link',
 					main_apis     : ['list_contracts'],
 					possible_apis : [...apis.contract_rates, ...apis.shipment],
