@@ -113,6 +113,7 @@ export function getRecipientData({
 		custom_subject = {},
 		org_id = '',
 		orgData = {},
+		user_ids = {},
 	} = response || {};
 
 	const filteredRecipientData = recipientData?.filter(
@@ -153,6 +154,7 @@ export function getRecipientData({
 					draftMessageData : eachMessage,
 					customSubject    : custom_subject,
 					orgId            : org_id,
+					user_ids,
 					orgData,
 					draftQuillBody,
 				}),
