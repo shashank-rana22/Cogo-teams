@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { useState, useRef, useEffect } from 'react';
 
 import useRaiseTicketcontrols from '../../../../configurations/filter-controls';
-import { FINANCE_PLATFORM_KEYS, SHIPMENT_RATE_KEYS } from '../../../../constants';
+import { FINANCE_PLATFORM_KEYS, RATE_KEYS, SHIPMENT_RATE_KEYS } from '../../../../constants';
 import { getFieldController } from '../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
@@ -14,7 +14,7 @@ const REQUEST_TYPES = ['shipment', 'rate'];
 
 const CONTROLS_MAPPING = {
 	shipment       : SHIPMENT_RATE_KEYS,
-	rate           : SHIPMENT_RATE_KEYS,
+	rate           : RATE_KEYS,
 	finance        : FINANCE_PLATFORM_KEYS,
 	platform_issue : FINANCE_PLATFORM_KEYS,
 };
@@ -47,6 +47,8 @@ function RaiseTicketsForm({
 	const watchTradeType = watch('trade_type');
 	const watchRaisedToDesk = watch('raised_to_desk');
 	const watchRaisedByDesk = watch('raised_by_desk');
+	const watchIdType = watch('id_type');
+	const watchServiceType = watch('service_type');
 
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label          : item,
@@ -85,6 +87,8 @@ function RaiseTicketsForm({
 		formatRaiseToDeskOptions,
 		watchRaisedToDesk,
 		watchRaisedByDesk,
+		watchServiceType,
+		watchIdType,
 	});
 
 	const filteredControls = defaultControls
@@ -111,7 +115,11 @@ function RaiseTicketsForm({
 				const { name, label, controllerType } = elementItem || {};
 				const Element = getFieldController(controllerType);
 
-				if (name === 'user_id' && isEmpty(watchOrgId)) {
+				const checkUserId = name === 'user_id' && isEmpty(watchOrgId);
+				const checkServiceType = name === 'service_type' && (isEmpty(watchIdType) || watchIdType === 'sid');
+				const checkService = name === 'service' && watchRequestType !== 'shipment' && watchIdType !== 'sid';
+
+				if (checkServiceType || checkService || checkUserId) {
 					return null;
 				}
 

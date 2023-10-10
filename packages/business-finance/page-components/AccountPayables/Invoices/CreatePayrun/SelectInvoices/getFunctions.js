@@ -1,3 +1,4 @@
+import RenderInvoiceNumber from '../../commons/RenderInvoiceNumber';
 import { RenderAction } from '../../InvoiceTable/RenderFunctions/RenderAction';
 import { RenderInvoiceDates } from '../../InvoiceTable/RenderFunctions/RenderInvoiceDates';
 import { RenderToolTip } from '../../InvoiceTable/RenderFunctions/RenderToolTip';
@@ -31,7 +32,7 @@ const getFunctions = ({
 		<RenderUrgency itemData={itemData} field={field} />
 	),
 	renderAction: (itemData) => (
-		<RenderAction itemData={itemData} />
+		<RenderAction itemData={itemData} hideIcDot />
 	),
 	renderEditableTds: (itemData, field) => (
 		<EditableTdsInput itemData={itemData} field={field} setEditedValue={setEditedValue} />
@@ -49,6 +50,9 @@ const getFunctions = ({
 			field={field}
 			setEditedValue={setEditedValue}
 		/>
+	),
+	renderInvoiceNumber: (itemData, field) => (
+		<RenderInvoiceNumber itemData={itemData} field={field} />
 	),
 });
 

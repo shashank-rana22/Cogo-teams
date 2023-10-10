@@ -1,3 +1,5 @@
+import { camelCase, startCase } from '@cogoport/utils';
+
 const getControls = (t = () => {}) => [
 	{
 		name        : 'incidentType',
@@ -61,6 +63,7 @@ const getControls = (t = () => {}) => [
 		isClearable : true,
 		span        : 2,
 		initialCall : true,
+		renderLabel : (item) => startCase(camelCase(item?.incidentType)) || '',
 		style       : { width: '200px', marginLeft: '8px' },
 		placeholder : t('incidentManagement:incident_sub_type_label'),
 	},

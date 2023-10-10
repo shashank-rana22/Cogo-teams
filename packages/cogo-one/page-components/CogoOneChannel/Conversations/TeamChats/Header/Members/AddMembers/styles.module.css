@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 8px;
+
+	:global {
+		.ui_multiselect_display_container {
+			width: 100% !important;
+		}
+
+		.ui_multiselect_container {
+			width: 100% !important;
+		}
+
+		.ui_multiselect_input_control {
+			font-size: 12px;
+		}
+
+		.ui_avatar_text {
+			background: none;
+		}
+	}
+}
+
+.action {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 16px;
+}
+
+.label {
+	margin-bottom: 6px;
+	font-size: 13px;
+	color: #4f4f4f;
+}

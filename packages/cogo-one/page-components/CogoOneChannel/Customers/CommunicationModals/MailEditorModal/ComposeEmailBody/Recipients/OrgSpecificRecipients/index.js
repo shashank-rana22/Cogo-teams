@@ -1,25 +1,16 @@
 import { MultiSelect } from '@cogoport/components';
-import { AsyncSelect } from '@cogoport/forms';
-import { startCase } from '@cogoport/utils';
-import React from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useMemo } from 'react';
 
+import CustomSelect from '../../../../../../../../common/CustomSelect';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../../constants/viewTypeMapping';
+import useGetOrganizations from '../../../../../../../../hooks/useGetOrganizations';
 import useGetOrgUsers from '../../../../../../../../hooks/useGetOrgUsers';
 import getAllowedEmailsList from '../../../../../../../../utils/getAllowedEmailsList';
 
+import CustomSelectHeader from './CustomSelectHeader';
+import { getOrgListOptions, RenderLabel, RenderOrgLabel, resetEmailRecipientData } from './orgSpecificFunctions';
 import styles from './styles.module.css';
-
-function RenderLabel({ item = {} }) {
-	return (
-		<div>
-			<div className={styles.agent_label}>
-				{startCase(item?.label)}
-			</div>
-			<div className={styles.lower_label}>
-				{item?.value}
-			</div>
-		</div>
-	);
-}
 
 function OrgSpecificRecipients({
 	type = '',
@@ -27,26 +18,72 @@ function OrgSpecificRecipients({
 	emailRecipientType = [],
 	recipientTypes = [],
 	emailState = {},
+	viewType = '',
 }) {
-	const { orgLoading = false, orgData = {}, initialLoad = false } = useGetOrgUsers({ orgId: emailState?.orgId });
+	const allowedOrgs = useMemo(() => (
+		isEmpty(VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.allowed_organizations)
+			? ['organizations', 'other_organizations']
+			: VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.allowed_organizations
+	), [viewType]);
 
-	const handleChange = (val) => {
-		setEmailState((prev) => ({ ...prev, orgId: val }));
+	const {
+		organizationData = {},
+		setQuery,
+		setSearchQuery,
+		initialLoad: orgInitialLoad = false,
+		organizationsLoading = false,
+	} = useGetOrganizations({
+		activeTab : emailState?.orgData?.orgType,
+		orgId     : emailState?.orgData?.orgId || emailState?.orgId,
+		type,
+		allowedOrgs,
+		setEmailState,
+	});
 
+	const {
+		orgLoading = false,
+		orgData = {},
+		handleSearch = () => {},
+		initialLoad = false,
+		searchQuery = '',
+	} = useGetOrgUsers({
+		orgId   : emailState?.orgData?.orgId || emailState?.orgId,
+		orgType : emailState?.orgData?.orgType || 'organizations',
+		userIds : emailState?.user_ids?.[type],
+		allowedOrgs,
+	});
+
+	const selectOptions = useMemo(
+		() => getOrgListOptions({
+			organizationData, activeTab: emailState?.orgData?.orgType,
+		}) || null,
+		[emailState?.orgData?.orgType, organizationData],
+	);
+
+	const handleChangeTab = (activeTab) => {
+		setSearchQuery('');
+		setEmailState(
+			(prev) => resetEmailRecipientData({
+				prev,
+				recipientTypes,
+				orgType : activeTab,
+				orgId   : '',
+			}),
+		);
+	};
+
+	const handleSelectChange = (val) => {
 		setEmailState(
 			(prev) => {
-				let newValues = {};
+				if (val === prev?.orgData?.orgId) {
+					return prev;
+				}
 
-				recipientTypes.forEach(
-					(itm) => {
-						newValues = {
-							...newValues,
-							[itm?.value]: [],
-						};
-					},
-				);
-
-				return { ...prev, ...newValues };
+				return resetEmailRecipientData({
+					prev,
+					recipientTypes,
+					orgId: val,
+				});
 			},
 		);
 	};
@@ -54,15 +91,26 @@ function OrgSpecificRecipients({
 	return (
 		<div className={styles.container}>
 			{type === 'toUserEmail' ? (
-				<AsyncSelect
+				<CustomSelect
 					className={styles.org_select}
 					placeholder="Search organization"
-					asyncKey="organizations"
 					isClearable
-					initialCall
-					value={emailState?.orgId}
-					onChange={handleChange}
+					value={emailState?.orgData?.orgId}
+					onChange={handleSelectChange}
 					size="sm"
+					loading={organizationsLoading}
+					options={selectOptions}
+					disabled={orgInitialLoad && emailState?.orgData?.orgId !== 'lead_users'}
+					onSearch={setQuery}
+					keyProp={emailState?.orgData?.orgType}
+					renderLabel={(item) => <RenderOrgLabel item={item} />}
+					optionsHeader={(
+						<CustomSelectHeader
+							activeTab={emailState?.orgData?.orgType}
+							setActiveTab={handleChangeTab}
+							allowedOrgs={allowedOrgs}
+						/>
+					)}
 				/>
 			) : null}
 
@@ -72,13 +120,23 @@ function OrgSpecificRecipients({
 				placeholder="Search user"
 				isClearable
 				value={emailRecipientType || []}
-				onChange={(val) => setEmailState(
-					(prev) => ({ ...prev, [type]: val }),
-				)}
-				disabled={!emailState?.orgId || orgLoading}
+				onSearch={handleSearch}
+				onChange={(val, obj) => {
+					setEmailState(
+						(prev) => ({
+							...prev,
+							[type]   : val,
+							user_ids : {
+								...prev?.user_ids,
+								[type]: obj?.map((itm) => itm.id || ''),
+							},
+						}),
+					);
+				}}
+				disabled={!(emailState?.orgData?.orgId || emailState?.orgId) || orgLoading}
 				size="sm"
 				multiple
-				options={(getAllowedEmailsList({ orgData }) || [])}
+				options={getAllowedEmailsList({ orgData, searchQuery }) || []}
 				renderLabel={(item) => <RenderLabel item={item} />}
 			/>
 		</div>
