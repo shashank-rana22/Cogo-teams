@@ -6,6 +6,7 @@
 	:global {
 		.ui_select_container:first-child {
 			width: 30%;
+			margin-right: 4px;
 		}
 
 		.ui_select_container:last-child {
@@ -13,4 +14,38 @@
 			margin-left: 8px;
 		}
 	}
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	padding: 4px;
+	margin-left: 2px;
+	cursor: pointer;
+	border: 1px solid #bdbdbd;
+	border-radius: 4px;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.wrap {
+	margin-bottom: 10px;
+}
+
+.label {
+	margin-bottom: 4px;
+	font-weight: 500;
+}
+
+.footer_section {
+	display: flex;
+	align-items: center;
+	width: 100%;
 }

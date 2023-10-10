@@ -53,10 +53,12 @@ const useListTickets = ({
 	isUpdated,
 	setIsUpdated,
 	sortBy,
+	// idFilters = {},
 }) => {
 	const { startDate, endDate } = date || {};
 	const { agent, category } = searchParams || {};
 	const { sortOrder = '', sortType = '' } = sortBy || {};
+	// const { sid, missingId, dislikeId } = idFilters || {};
 
 	const { id : performerId = '' } = useSelector((state) => state?.profile?.user);
 
