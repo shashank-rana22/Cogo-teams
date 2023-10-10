@@ -18,7 +18,10 @@ function FilterTicketsSection({
 	const [searchParams, setSearchParams] = useState({ text: '', agent: '', category: '' });
 	const [modalData, setModalData] = useState(ticket_id ? { ticketId: ticket_id } : {});
 	const [isUpdated, setIsUpdated] = useState(false);
-	const [sortBy, setSortBy] = useState('');
+	const [sortBy, setSortBy] = useState({
+		sortOrder : 'desc',
+		sortType  : '',
+	});
 
 	const isAdmin = type === 'admin';
 

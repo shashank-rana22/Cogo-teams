@@ -13891,6 +13891,11 @@ const partner = {
 			feature      : 'rate_requests',
 		},
 		{
+			api          : 'list_shipment_stakeholders',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'list_fcl_freight_rate_requests',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
