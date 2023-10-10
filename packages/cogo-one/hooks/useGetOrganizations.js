@@ -87,7 +87,7 @@ const useGetOrganizations = ({
 	}, [activeTab, allowedOrgs, getOrganizations, type]);
 
 	return {
-		organizationData     : loading ? {} : data,
+		organizationData     : (loading || !API_MAPPING[activeTab]) ? {} : data,
 		organizationsLoading : loading,
 		getOrganizations,
 		query,
