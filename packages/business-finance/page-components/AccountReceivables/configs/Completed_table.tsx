@@ -162,7 +162,7 @@ const completedColumn = ({
 								)}
 							>
 								<text
-									className={!isEmpty(invoicePdf) ? styles.link : undefined}
+									className={!isEmpty(invoicePdf) ? styles.link : ''}
 									onClick={() => {
 										if (!isEmpty(invoicePdf)) {
 											window.open(invoicePdf, '_blank');
@@ -179,13 +179,12 @@ const completedColumn = ({
 						)
 							: (
 								<div
-									className={!isEmpty(invoicePdf) ? styles.link : null}
+									className={!isEmpty(invoicePdf) ? styles.link : ''}
 									onClick={() => {
 										if (!isEmpty(invoicePdf)) {
 											window.open(invoicePdf, '_blank');
 										}
 									}}
-									disabled={isEmpty(invoicePdf)}
 									role="presentation"
 								>
 									{invoiceNumber}
