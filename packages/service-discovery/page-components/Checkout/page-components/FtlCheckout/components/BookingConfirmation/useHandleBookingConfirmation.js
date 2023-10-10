@@ -27,7 +27,7 @@ const useHandleBookingConfirmation = () => {
 
 	const { importer_exporter = {} } = detail;
 
-	const { organization_settings = [], tags = [] } = importer_exporter;
+	const { organization_settings = [], tags = [], is_agent_allowed_to_book = true } = importer_exporter;
 
 	const { rfq_id, checkoutType } = query || {};
 
@@ -43,7 +43,8 @@ const useHandleBookingConfirmation = () => {
 
 	const isAssistedBookingNotAllowed =	!isEmpty(assisted_booking_services)
 	&& (assisted_booking_services.includes('none')
-		|| !assisted_booking_services.includes(primary_service));
+		|| !assisted_booking_services.includes(primary_service))
+		&& !is_agent_allowed_to_book;
 
 	useEffect(() => {
 		if (bookingConfirmationMode) {
