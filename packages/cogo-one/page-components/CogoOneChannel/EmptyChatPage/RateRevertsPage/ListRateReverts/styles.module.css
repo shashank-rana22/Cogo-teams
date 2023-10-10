@@ -1,0 +1,4 @@
+.container {
+	display: flex;
+	width: calc(100% - 40px);
+}

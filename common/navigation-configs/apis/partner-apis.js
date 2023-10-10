@@ -13000,6 +13000,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'list_rate_jobs',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'create_cogoone_group_hash',
 			access_type  : 'private',
 			service_name : 'communication',

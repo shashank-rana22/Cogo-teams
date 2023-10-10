@@ -5,6 +5,7 @@ import React from 'react';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 
 import LeadVoiceCalls from './LeadVoiceCalls';
+import RateRevertsPage from './RateRevertsPage';
 import ShipmentsHomePage from './ShipmentsHomePage';
 import styles from './styles.module.css';
 
@@ -24,9 +25,11 @@ function EmptyChatPage({
 }) {
 	const displayMessage = MESSAGE_MAPPING[activeTab?.tab] || activeTab?.tab;
 
-	const showShipments = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page;
+	const showShipments = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page || false;
 
-	const showLeadVoiceCalls = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_lead_voice_calls;
+	const showLeadVoiceCalls = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_lead_voice_calls || false;
+
+	const showRateReverts = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_rate_reverts_page || false;
 
 	if (showShipments) {
 		return (
@@ -44,6 +47,10 @@ function EmptyChatPage({
 				setActiveTab={setActiveTab}
 			/>
 		);
+	}
+
+	if (showRateReverts) {
+		return <RateRevertsPage />;
 	}
 
 	return (

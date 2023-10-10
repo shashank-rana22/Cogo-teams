@@ -1,0 +1,26 @@
+.header {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.sources_container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding-top: 4px;
+}
+
+.source_select_container {
+	width: 25%;
+}
+
+.selected_sources {
+	display: flex;
+	align-items: center;
+	width: 74%;
+	overflow: auto;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
