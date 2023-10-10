@@ -1,7 +1,6 @@
-import { SingleDateRange, cl, MultiSelect, Toggle } from '@cogoport/components';
+import { SingleDateRange, cl, MultiSelect } from '@cogoport/components';
 import { AsyncSelectController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useRouter } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
 
 import { accountModeOptions } from '../../../configurations/ap-ar-settlement/acc-filter';
@@ -13,16 +12,11 @@ function Filters({
 	onFiltersChange = () => {},
 	loading = false,
 }) {
-	const { query } = useRouter();
 	const { t = () => {} } = useTranslation(['settlement']);
 
 	const { control } = useForm();
 	const handleFilterChange = (filterName, value) => {
 		onFiltersChange(filterName, value);
-	};
-
-	const handleVersionChange = () => {
-		window.location.href = `/${query.partner_id}/business-finance/settlement/ap-ar-settlement`;
 	};
 
 	return (
@@ -32,15 +26,6 @@ function Filters({
 				<span className={styles.criteria}>
 					{t('settlement:selection_criteria_label')}
 				</span>
-				<div>
-					<Toggle
-						name="toggle"
-						size="md"
-						onLabel={t('settlement:old_label')}
-						offLabel={t('settlement:new_label')}
-						onChange={handleVersionChange}
-					/>
-				</div>
 			</div>
 
 			<div className={styles.horizontal} />

@@ -15,12 +15,12 @@ const EMAIL_SUBJECT_PREFIX_MAPPING = {
 };
 
 export function getSubject({ subject = '', newButtonType = '' }) {
-	const formatedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
+	const formattedSubject = subject.replace(GLOBAL_CONSTANTS.regex_patterns.email_subject_prefix, '').trim();
 
 	const emailPrefix = EMAIL_SUBJECT_PREFIX_MAPPING[newButtonType] || '';
 
-	return (formatedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
-		? subject : `${emailPrefix}: ${formatedSubject}`;
+	return (formattedSubject?.length || NULL_SUBJECT_LENGTH) > MAXIMUM_ALLOWED_SUBJECT_LENGTH
+		? subject : `${emailPrefix}: ${formattedSubject}`;
 }
 
 const getReplyMails = ({
@@ -90,6 +90,7 @@ export function getRecipientData({
 	createReplyDraft = () => {},
 	createReplyAllDraft = () => {},
 	signature = '',
+	draftQuillBody = {},
 }) {
 	const {
 		setButtonType = () => {},
@@ -101,7 +102,6 @@ export function getRecipientData({
 	const { response = {}, created_at = '', id = '', parent_email_message = {} } = eachMessage || {};
 
 	const {
-		body = '',
 		sender = '',
 		draft_type = '',
 		subject: draftSubject = '',
@@ -110,9 +110,10 @@ export function getRecipientData({
 		bcc_mails = [],
 		message_id = '',
 		attachments = [],
-		draftQuillMessage = {},
 		custom_subject = {},
 		org_id = '',
+		orgData = {},
+		user_ids = {},
 	} = response || {};
 
 	const filteredRecipientData = recipientData?.filter(
@@ -141,8 +142,8 @@ export function getRecipientData({
 				(prev) => ({
 					...prev,
 					emailVia,
-					rteContent       : draftQuillMessage?.rteContent || body || '',
-					body             : draftQuillMessage?.body || '',
+					rteContent       : draftQuillBody?.rte_content?.content || '',
+					body             : draftQuillBody?.body?.content || '',
 					from_mail        : sender || '',
 					subject          : draftSubject || '',
 					toUserEmail      : to_mails || [],
@@ -153,6 +154,9 @@ export function getRecipientData({
 					draftMessageData : eachMessage,
 					customSubject    : custom_subject,
 					orgId            : org_id,
+					user_ids,
+					orgData,
+					draftQuillBody,
 				}),
 			);
 

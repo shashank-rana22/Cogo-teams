@@ -1,5 +1,6 @@
 import { cl } from '@cogoport/components';
 import getSideBarConfigs from '@cogoport/navigation-configs/side-bar';
+import { useGetPermission } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
@@ -18,6 +19,7 @@ import TnC from './newTnC';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
+import useGetUnreadTicketCount from './useGetUnreadTicketCount';
 import VideoCall from './VideoCall';
 import VoiceCall from './VoiceCall';
 
@@ -67,6 +69,13 @@ function AdminLayout({
 		pinListLoading = false,
 	} = useFetchPinnedNavs({ user_id, partner_id, setPinnedNavKeys, setAnnouncements });
 
+	const { permissions_navigations } = useGetPermission();
+
+	const allPermissions = Object.keys(permissions_navigations || {});
+	const isTicketAllowed = allPermissions.includes('ticket_management-my_tickets');
+
+	const { data = 0 } = useGetUnreadTicketCount({ isTicketAllowed });
+
 	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
 	const firestore = getFirestore(app);
 
@@ -112,6 +121,7 @@ function AdminLayout({
 					inCall={inCall}
 					userId={user_id}
 					firestore={firestore}
+					ticketCount={data}
 				/>
 			) : null}
 			<VoiceCall

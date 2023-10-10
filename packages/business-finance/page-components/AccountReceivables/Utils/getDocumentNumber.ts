@@ -44,7 +44,7 @@ export const getDocumentInfo = ({ itemData }: Object) => {
 	].filter((item) => (item[1] || undefined) !== undefined)[GLOBAL_CONSTANTS.zeroth_index];
 
 	return {
-		invoice_number : invoiceNumberPriority?.[GLOBAL_CONSTANTS.zeroth_index],
+		invoice_number : invoiceNumberPriority?.[GLOBAL_CONSTANTS.zeroth_index] || invoiceNumber,
 		invoice_pdf    : invoiceNumberPriority?.[FIRST],
 		invoice_type   : invoiceNumberPriority?.[SECOND],
 	};

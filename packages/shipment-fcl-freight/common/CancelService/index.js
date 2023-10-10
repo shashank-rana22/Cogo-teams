@@ -22,7 +22,7 @@ function FormElement({ name, label, errors, type, ...rest }) {
 	) : null;
 }
 
-export default function CancelService({ setShow, service_type, trade_type }) {
+export default function CancelService({ setShow = () => {}, service_type = '', trade_type = '' }) {
 	const closeModal = () => setShow(false);
 
 	const {

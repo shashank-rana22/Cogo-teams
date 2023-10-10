@@ -1,6 +1,6 @@
 .main_container {
 	.main_title {
-		padding: 16px 0 12px;
+		padding: 16px 4px 12px;
 		font-size: 16px;
 		font-weight: 600;
 		color: #221f20;
@@ -50,6 +50,13 @@
 	.row_port_code {
 		color: #f68b21;
 	}
+
+	.row_port_name {
+		max-width: 100px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }
 
 .row_default_cell {
@@ -66,6 +73,7 @@
 .row_shipping_cell {
 	display: flex;
 	align-items: center;
+	max-width: 200px;
 	padding: 16px;
 	font-size: 14px;
 	font-weight: 500;
@@ -75,11 +83,27 @@
 		height: 16px;
 		margin-right: 8px;
 	}
+
+	> p {
+		max-width: 70px;
+		margin: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }
 
 .row_commodity_cell {
 	padding: 16px;
 	font-size: 14px;
+
+	> p {
+		max-width: 70px;
+		margin: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 
 	.chip {
 		width: fit-content;
@@ -90,9 +114,9 @@
 	}
 
 	.percent {
-		font-size: 20px;
+		font-size: 18px;
 		font-weight: 600;
-		color: #ee3425;
+		color: #4f4f4f;
 		text-align: center;
 	}
 
@@ -105,7 +129,7 @@
 		background: transparent;
 		border: 1px solid transparent;
 
-		p {
+		> p {
 			margin: 0;
 		}
 

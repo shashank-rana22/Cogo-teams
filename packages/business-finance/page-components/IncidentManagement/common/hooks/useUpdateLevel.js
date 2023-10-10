@@ -6,6 +6,8 @@ import { useTranslation } from 'next-i18next';
 import toastApiError from '../../../commons/toastApiError.ts';
 import { controls } from '../../Controller/Config/create-level-config';
 
+const DEFAULT_VALUE = 1;
+
 const useUpdateLevel = ({
 	refetch = () => { },
 	setShow = () => { },
@@ -34,11 +36,13 @@ const useUpdateLevel = ({
 		try {
 			await trigger({
 				data: {
-					approvalLevelConditions : payload,
+					approvalLevelConditions : payload?.approvalLevelConditions,
+					approvalType            : payload?.approvalLevelConditions?.length <= DEFAULT_VALUE
+						? 'SINGLE' : payload?.approvalType,
 					id,
 					referenceId,
 					createdBy,
-					updatedBy               : {
+					updatedBy: {
 						userId,
 						userName  : name,
 						userEmail : email,

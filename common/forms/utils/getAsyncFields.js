@@ -1054,6 +1054,142 @@ function asyncListEnrichmentSources() {
 	};
 }
 
+function asyncListIncidentTypes() {
+	return {
+		labelKey     : 'label',
+		valueKey     : 'value',
+		endpoint     : '/incident-management/incident/list-incident-types',
+		authkey      : 'get_incident_management_incident_list_incident_types',
+		microService : 'business_finance',
+		initialCall  : true,
+		searchByq    : true,
+	};
+}
+
+function asyncListFclFreightRate() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_fcl_freight_rate_requests',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+function asyncListLclFreightRate() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_lcl_freight_rate_requests',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+function asyncListAirFreightRate() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_air_freight_rate_requests',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+function asyncListFtlFreightRate() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_ftl_freight_rate_requests',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+function asyncListLtlFreightRate() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_ltl_freight_rate_requests',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+function asyncListFclCfsRate() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_fcl_cfs_rate_requests',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+function asyncListHaulageFreightRate() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_haulage_freight_rate_requests',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListFclCustomsRate() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_fcl_customs_rate_requests',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+function asyncListLclCustomsRate() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_lcl_customs_rate_requests',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+function asyncListAirCustomsRate() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_air_customs_rate_requests',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListTrailerFreightRate() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_trailer_freight_rate_requests',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1140,4 +1276,16 @@ export {
 	asyncListShippingLineEvents,
 	asyncListSaasPlan,
 	asyncListEnrichmentSources,
+	asyncListIncidentTypes,
+	asyncListFclFreightRate,
+	asyncListLclFreightRate,
+	asyncListAirFreightRate,
+	asyncListFtlFreightRate,
+	asyncListLtlFreightRate,
+	asyncListFclCfsRate,
+	asyncListHaulageFreightRate,
+	asyncListFclCustomsRate,
+	asyncListLclCustomsRate,
+	asyncListAirCustomsRate,
+	asyncListTrailerFreightRate,
 };

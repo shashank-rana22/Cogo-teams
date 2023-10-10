@@ -11,7 +11,7 @@
 	align-items: center;
 	justify-content: center;
 	width: 36%;
-	margin: 24px 0;
+	margin: 24px 0 24px 12px;
 }
 
 .vertical_bar_graph {
@@ -78,7 +78,7 @@
 }
 
 .styled_text {
-	margin-right: 4px;
+	margin-right: 10px;
 	font-size: 16px;
 	font-weight: 600;
 }
@@ -90,9 +90,7 @@
 
 .styled_kam_text {
 	display: flex;
-	gap: 4px;
-	font-size: 16px;
-	font-weight: 600;
+	align-items: center;
 }
 
 .icon {
