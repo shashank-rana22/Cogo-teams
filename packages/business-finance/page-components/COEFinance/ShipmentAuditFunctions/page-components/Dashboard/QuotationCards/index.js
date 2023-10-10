@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import useListShipment from '../../../../hook/useListShipment.ts';
 import DetailsCard from '../DetailsCard';
+import DocumentsCard from '../DocumentsCard';
 
 import FinanceClosedCardsSet from './FinanceClosedCardsSet';
 import OperationClosedCardsSet from './OperationClosedCardsSet';
@@ -17,6 +18,7 @@ function QuotationCards({
 	const { query: { active_tab = '', job_id = '', job_number = '' } } = useRouter();
 	const { data: shipmentData, loading: loadingShipment } = useListShipment(job_number);
 	const dataList = shipmentData?.list[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const shipmentId = dataList?.id || '';
 
 	const [tab, setTab] = useState({
 		shipmentDetailsTab : true,
@@ -52,6 +54,13 @@ function QuotationCards({
 				shipmentDetailsTab={tab.shipmentDetailsTab}
 				shipmentDetailsCheck={checkItem.shipmentDetailCheck}
 				loadingShipment={loadingShipment}
+			/>
+
+			<DocumentsCard
+				shipmentId={shipmentId}
+				onTabClick={onTabClick}
+				loadingShipment={loadingShipment}
+				tab={tab}
 			/>
 
 			<div className={styles.all_task_container}>

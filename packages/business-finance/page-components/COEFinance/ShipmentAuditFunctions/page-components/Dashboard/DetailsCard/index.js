@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowRotateDown,
@@ -17,10 +16,8 @@ const DEFAULT_AMOUNT = 0;
 function DetailsCard({
 	onTabClick = () => {},
 	dataList = [],
-	onAccept = () => {},
 	shipmentDetailsTab = false,
 	loadingShipment = false,
-	shipmentDetailsCheck = false,
 }) {
 	const arrowElement = shipmentDetailsTab ? <IcMArrowRotateUp height="17px" width="17px" />
 		: <IcMArrowRotateDown height="17px" width="17px" />;
@@ -87,20 +84,6 @@ function DetailsCard({
 							shipmentId={shipmentId}
 						/>
 					</div>
-					<Button
-						size="md"
-						themeType="secondary"
-						style={{ marginRight: '8px' }}
-						disabled={shipmentDetailsCheck}
-						onClick={() => onAccept({
-							tabName      : 'shipmentDetailsTab',
-							tabToOpen    : 'documentsTab',
-							timelineItem : 'shipmentDetailsCheck',
-						})}
-						className={styles.approve_button}
-					>
-						Approve
-					</Button>
 				</div>
 			)}
 		</div>
