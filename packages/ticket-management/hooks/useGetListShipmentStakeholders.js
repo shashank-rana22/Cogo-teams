@@ -1,10 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const getParams = () => ({
-	page_limit: 100,
-});
-
 function useListShipmentStakeholders({ requestType = '' }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_shipment_stakeholders',
@@ -15,7 +11,9 @@ function useListShipmentStakeholders({ requestType = '' }) {
 		async () => {
 			try {
 				await trigger({
-					params: getParams(),
+					params: {
+						page_limit: 100,
+					},
 				});
 			} catch (e) {
 				console.error('e:', e);

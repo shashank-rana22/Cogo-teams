@@ -19,11 +19,6 @@ function SearchType({
 
 	const { t } = useTranslation(['myTickets']);
 
-	const handleClick = (e) => {
-		e.stopPropagation();
-		setSortBy((prev) => ({ ...prev, sortOrder: sortOrder === 'desc' ? 'asc' : 'desc' }));
-	};
-
 	return (
 		<div className={styles.search_container}>
 			<Input
@@ -67,13 +62,15 @@ function SearchType({
 					isClearable
 				/>
 
-				<div className={styles.sort_arrow_section}>
+				<div
+					role="presentation"
+					className={styles.sort_arrow_section}
+					onClick={() => setSortBy((prev) => ({ ...prev, sortOrder: sortOrder === 'desc' ? 'asc' : 'desc' }))}
+				>
 					<IcMArrowRotateUp
-						onClick={(e) => handleClick(e)}
 						className={cl`${styles.ascend_arrow} ${sortOrder === 'asc' ? styles.disable : ''}`}
 					/>
 					<IcMArrowRotateDown
-						onClick={(e) => handleClick(e)}
 						className={cl`${styles.arrow_icon} ${sortOrder === 'desc' ? styles.disable : ''}`}
 					/>
 				</div>
