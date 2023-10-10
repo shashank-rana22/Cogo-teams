@@ -13,7 +13,7 @@ function DetailsView({
 
 }) {
 	const handleDetailView = () => {
-		if (source === 'live_bookings') {
+		if (source === 'live_booking') {
 			return getShipment();
 		}
 		if (source === 'rate_feedback') {

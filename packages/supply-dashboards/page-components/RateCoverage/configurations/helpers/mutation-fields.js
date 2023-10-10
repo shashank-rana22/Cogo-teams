@@ -77,7 +77,7 @@ function FieldMutation({ fields, values, filter, chargeCodes }) {
 					const chargeValues = values[control.name];
 					chargeValues?.forEach((item, i) => {
 						UNIT_OPTIONS[i] = (
-							chargeCodes.find((obj) => obj.code === item.code)?.units || ['per_container']
+							(chargeCodes || [])?.find((obj) => obj?.code === item?.code)?.units || ['per_container']
 						).map((unit) => ({
 							label : startCase(unit),
 							value : unit,

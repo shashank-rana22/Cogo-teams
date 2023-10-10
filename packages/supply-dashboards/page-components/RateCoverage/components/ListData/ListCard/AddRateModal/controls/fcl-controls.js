@@ -238,7 +238,12 @@ const fclControls = ({
 		heading    : 'Line Items',
 		name       : 'line_items',
 		buttonText : 'Add Line Items',
-		controls   : [
+		value      : [
+			{
+				code: 'BAS',
+			},
+		],
+		controls: [
 			{
 				name        : 'code',
 				type        : 'select',
