@@ -148,6 +148,12 @@ const completedColumn = ({
 				invoice_type: invoiceType = '',
 			} = getDocumentInfo({ itemData: row });
 
+			const openPdfInNewTab = () => {
+				if (!isEmpty(invoicePdf)) {
+					window.open(invoicePdf, '_blank');
+				}
+			};
+
 			return (
 				<div className={styles.fieldPair}>
 					<div className={styles.column_height}>
@@ -163,11 +169,7 @@ const completedColumn = ({
 							>
 								<text
 									className={!isEmpty(invoicePdf) ? styles.link : ''}
-									onClick={() => {
-										if (!isEmpty(invoicePdf)) {
-											window.open(invoicePdf, '_blank');
-										}
-									}}
+									onClick={openPdfInNewTab}
 									role="presentation"
 								>
 									{`${(invoiceNumber).substring(
@@ -180,11 +182,7 @@ const completedColumn = ({
 							: (
 								<div
 									className={!isEmpty(invoicePdf) ? styles.link : ''}
-									onClick={() => {
-										if (!isEmpty(invoicePdf)) {
-											window.open(invoicePdf, '_blank');
-										}
-									}}
+									onClick={openPdfInNewTab}
 									role="presentation"
 								>
 									{invoiceNumber}
