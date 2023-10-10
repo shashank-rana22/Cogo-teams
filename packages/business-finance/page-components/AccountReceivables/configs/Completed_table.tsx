@@ -162,8 +162,12 @@ const completedColumn = ({
 								)}
 							>
 								<text
-									className={!isEmpty(invoicePdf) ? styles.link : null}
-									onClick={() => window.open(invoicePdf, '_blank')}
+									className={!isEmpty(invoicePdf) ? styles.link : undefined}
+									onClick={() => {
+										if (!isEmpty(invoicePdf)) {
+											window.open(invoicePdf, '_blank');
+										}
+									}}
 									role="presentation"
 								>
 									{`${(invoiceNumber).substring(
@@ -175,8 +179,13 @@ const completedColumn = ({
 						)
 							: (
 								<div
-									className={styles.link}
-									onClick={() => window.open(invoicePdf, '_blank')}
+									className={!isEmpty(invoicePdf) ? styles.link : null}
+									onClick={() => {
+										if (!isEmpty(invoicePdf)) {
+											window.open(invoicePdf, '_blank');
+										}
+									}}
+									disabled={isEmpty(invoicePdf)}
 									role="presentation"
 								>
 									{invoiceNumber}
