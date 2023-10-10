@@ -40,7 +40,7 @@ const useGetListCoverage = () => {
 	const { user: { id: user_id = '' } = {} } = user_data;
 
 	const [page, setPage] = useState(DEFAULT_PAGE);
-	const [source, setSource] = useState('live_bookings');
+	const [source, setSource] = useState('live_booking');
 	const [filter, setFilter] = useState({
 		service                   : 'fcl_freight',
 		status                    : 'pending',
@@ -64,7 +64,8 @@ const useGetListCoverage = () => {
 
 		const FINAL_FILTERS = {};
 
-		const paramsMapping = filter?.service === 'air_freight' ? AIR_PARAMS_MAPPING : FCL_PARAMS_MAPPING;
+		const paramsMapping = ['air_freight', 'air_customs']?.includes(filter?.service)
+			? AIR_PARAMS_MAPPING : FCL_PARAMS_MAPPING;
 
 		Object.keys(restFilters).forEach((ele) => {
 			if (restFilters[ele]) {

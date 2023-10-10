@@ -42,3 +42,13 @@
 		}
 	}
 }
+
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+}

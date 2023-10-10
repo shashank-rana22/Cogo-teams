@@ -49,7 +49,8 @@ const useGetCoverageStats = (filter) => {
 
 		const FINAL_FILTERS = {};
 
-		const paramsMapping = filter?.service === 'air_freight' ? AIR_PARAMS_MAPPING : FCL_PARAMS_MAPPING;
+		const paramsMapping = ['air_freight', 'air_customs']?.includes(filter?.service)
+			? AIR_PARAMS_MAPPING : FCL_PARAMS_MAPPING;
 
 		Object.keys(restFilters).forEach((ele) => {
 			if (restFilters[ele]) {

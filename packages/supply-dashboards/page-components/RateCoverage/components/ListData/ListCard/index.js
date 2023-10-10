@@ -70,7 +70,7 @@ function ListCard({
 
 	const handleAddRate = () => {
 		setShowAddRateModal((prev) => !prev);
-		if (source === 'live_bookings') {
+		if (source === 'live_booking') {
 			return getShipment();
 		}
 		if (source === 'rate_feedback') {
@@ -81,7 +81,7 @@ function ListCard({
 
 	return (
 		<div className={styles.container}>
-			{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
+			{['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
 			&& (
 				<div>
 					<div className={styles.head}>
@@ -241,7 +241,7 @@ function ListCard({
 					</div>
 					<div className={styles.vertical_line} />
 					<div className={styles.button_grp}>
-						{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
+						{['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
 								&& (
 									<DetailsView
 										data={data}
@@ -259,7 +259,7 @@ function ListCard({
 									/>
 								)}
 
-						{!['live_bookings']?.includes(source)
+						{!['live_booking']?.includes(source)
 							&& (
 								<div>
 									{!['aborted', 'completed'].includes(filter?.status) && (
