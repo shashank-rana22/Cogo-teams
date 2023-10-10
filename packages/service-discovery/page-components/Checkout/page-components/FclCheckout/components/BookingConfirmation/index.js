@@ -2,13 +2,13 @@ import { useContext, useRef } from 'react';
 
 import AdditionalConditions from '../../../../commons/AdditionalConditions';
 import BookingConfirmationFooter from '../../../../commons/BookingConfirmationFooter';
+import BookingTypeOptions from '../../../../commons/BookingTypeOptions';
 import ControlledBooking from '../../../../commons/ControlledBooking';
 import InvoicingParties from '../../../../commons/InvoicingParties';
+import PriceBreakup from '../../../../commons/PriceBreakup';
 import ShareQuotation from '../../../../commons/ShareQuotation';
 import { CheckoutContext } from '../../../../context';
 
-import BookingTypeOptions from './components/BookingTypeOptions';
-import PriceBreakup from './components/PriceBreakup';
 import styles from './styles.module.css';
 import useHandleBookingConfirmation from './useHandleBookingConfirmation';
 
@@ -23,6 +23,8 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 		loading,
 		checkoutMethod,
 		earnable_cogopoints = {},
+		kycShowCondition,
+		orgData = {},
 	} = useContext(CheckoutContext);
 
 	const ref = useRef({});
@@ -82,7 +84,9 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				setIsVeryRisky={setIsVeryRisky}
 				getCheckout={getCheckout}
 				loading={loading}
+				orgData={orgData}
 				source="booking_confirmation"
+				kycShowCondition={kycShowCondition}
 			/>
 
 			<ShareQuotation noRatesPresent={noRatesPresent} bookingConfirmationMode={bookingConfirmationMode} />
@@ -91,6 +95,7 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				radioOption={radioOption}
 				bookingConfirmationMode={bookingConfirmationMode}
 				setBookingConfirmationMode={setBookingConfirmationMode}
+				isAssistedBookingNotAllowed={isAssistedBookingNotAllowed}
 			/>
 
 			<BookingConfirmationFooter
@@ -106,6 +111,7 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				error={error}
 				isAssistedBookingNotAllowed={isAssistedBookingNotAllowed}
 				noRatesPresent={noRatesPresent}
+				updateCheckout={updateCheckout}
 			/>
 		</div>
 	);

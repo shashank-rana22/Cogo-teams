@@ -13,6 +13,7 @@ const MESSAGE_MAPPING = {
 	voice           : 'call log',
 	outlook         : 'mail',
 	firebase_emails : 'mail',
+	teams           : 'Teams',
 };
 
 function EmptyChatPage({
@@ -31,7 +32,7 @@ function EmptyChatPage({
 		return (
 			<ShipmentsHomePage
 				setActiveTab={setActiveTab}
-				showAddPrimaryUserButton={showShipments}
+				viewType={viewType}
 				mailProps={mailProps}
 			/>
 		);

@@ -116,7 +116,7 @@ const controls = [
 					'enterprise_customer_operations',
 					'mid_size_customer_operations',
 					'cp_customer_operations'],
-				status: 'active',
+				status: true,
 			},
 		},
 	},

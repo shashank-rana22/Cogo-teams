@@ -1,34 +1,60 @@
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState, useRef, useEffect } from 'react';
 
 import useRaiseTicketcontrols from '../../../../configurations/filter-controls';
+import { FINANCE_PLATFORM_KEYS, RATE_KEYS, SHIPMENT_RATE_KEYS } from '../../../../constants';
 import { getFieldController } from '../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-const CHILD_NODE = 5;
+const CHILD_NODE = 8;
+
+const REQUEST_TYPES = ['shipment', 'rate'];
+
+const CONTROLS_MAPPING = {
+	shipment       : SHIPMENT_RATE_KEYS,
+	rate           : RATE_KEYS,
+	finance        : FINANCE_PLATFORM_KEYS,
+	platform_issue : FINANCE_PLATFORM_KEYS,
+};
 
 function RaiseTicketsForm({
-	watch = () => {}, control = {}, formState = {}, additionalInfo = [], resetField = () => {},
+	watch = () => {},
+	control = {},
+	formState = {},
+	additionalInfo = [],
+	resetField = () => {},
 	setAdditionalInfo = () => {},
+	setValue = () => {},
+	setDefaultTypeId = () => {},
 }) {
 	const { errors = {} } = formState || {};
+
+	const { t } = useTranslation(['myTickets']);
+
 	const [subCategories, setSubCategories] = useState([]);
+	const [raiseToDesk, setRaiseToDesk] = useState([]);
 
 	const formRef = useRef(null);
-
+	const watchRequestType = watch('request_type');
 	const watchOrgId = watch('organization_id');
+	const watchUserId = watch('user_id');
 	const watchCategory = watch('category');
 	const watchSubCategory = watch('sub_category');
 	const watchIssueType = watch('issue_type');
 	const watchService = watch('service');
 	const watchTradeType = watch('trade_type');
+	const watchRaisedToDesk = watch('raised_to_desk');
+	const watchRaisedByDesk = watch('raised_by_desk');
+	const watchIdType = watch('id_type');
+	const watchServiceType = watch('service_type');
 
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label          : item,
 		name           : item,
 		controllerType : 'text',
-		placeholder    : `add ${item}`,
+		placeholder    : `${t('myTickets:add')} ${item}`,
 		showOptional   : false,
 	}));
 
@@ -37,41 +63,67 @@ function RaiseTicketsForm({
 		value : item?.name,
 	}));
 
+	const formatRaiseToDeskOptions = (raiseToDesk || []).map((item) => ({
+		label : item?.name,
+		value : item?.name,
+	}));
+
 	const defaultControls = useRaiseTicketcontrols({
-		formattedSubCategories,
 		setAdditionalInfo,
-		setSubCategories,
+		watchRequestType,
 		watchSubCategory,
+		setDefaultTypeId,
 		watchTradeType,
 		watchCategory,
 		watchService,
+		watchUserId,
 		watchOrgId,
 		resetField,
+		setValue,
+		formattedSubCategories,
+		setSubCategories,
+		t,
+		setRaiseToDesk,
+		formatRaiseToDeskOptions,
+		watchRaisedToDesk,
+		watchRaisedByDesk,
+		watchServiceType,
+		watchIdType,
 	});
 
-	const controls = defaultControls?.concat(additionalControls);
+	const filteredControls = defaultControls
+		.filter((val) => CONTROLS_MAPPING[watchRequestType || 'shipment']?.includes(val.name));
 
-	const DISABLE_MAPPING = {
-		sub_category : [watchCategory],
-		issue_type   : [watchCategory, watchSubCategory, watchTradeType, watchService],
-	};
+	const controls = filteredControls?.concat(additionalControls);
 
 	useEffect(() => {
-		if (!isEmpty(watchIssueType)) {
-			formRef.current?.childNodes?.[CHILD_NODE].scrollIntoView({ behavior: 'smooth', block: 'start' });
+		if (!isEmpty(watchIssueType) && REQUEST_TYPES.includes(watchRequestType)) {
+			formRef.current?.childNodes?.[CHILD_NODE]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 		}
-	}, [watchIssueType]);
+	}, [watchIssueType, watchRequestType]);
+
+	useEffect(() => {
+		SHIPMENT_RATE_KEYS.forEach((element) => {
+			if (element !== 'request_type') { resetField(element); }
+		});
+	}, [resetField, watchRequestType]);
 
 	return (
-		<div ref={formRef}>
+		<div ref={formRef} className={styles.form}>
 			{controls.map((controlItem) => {
 				const elementItem = { ...controlItem };
 				const { name, label, controllerType } = elementItem || {};
 				const Element = getFieldController(controllerType);
 
-				if (!Element) { return null; }
+				const checkUserId = name === 'user_id' && isEmpty(watchOrgId);
+				const checkServiceType = name === 'service_type' && (isEmpty(watchIdType) || watchIdType === 'sid');
+				const checkService = name === 'service' && watchRequestType !== 'shipment' && watchIdType !== 'sid';
 
-				if (name === 'user_id' && isEmpty(watchOrgId)) { return null; }
+				if (checkServiceType || checkService || checkUserId) {
+					return null;
+				}
+
+				if (!Element) { return null; }
 
 				return (
 					<div
@@ -83,7 +135,13 @@ function RaiseTicketsForm({
 								<div className={styles.label}>
 									<div className={styles.sub_label}>{label}</div>
 									{controlItem.name === 'additional_information'
-									&& <div className={styles.info_label}>(max 200 characters)</div>}
+									&& (
+										<div className={styles.info_label}>
+											(
+											{t('myTickets:max_200_characters')}
+											)
+										</div>
+									)}
 								</div>
 							)}
 						<Element
@@ -92,9 +150,10 @@ function RaiseTicketsForm({
 							key={name}
 							control={control}
 							id={`${name}_input`}
-							disabled={DISABLE_MAPPING[name]?.some(isEmpty)}
 						/>
-						<div className={styles.error}>{errors?.[controlItem.name] && 'Required'}</div>
+						<div className={styles.error}>
+							{errors?.[controlItem.name] && t('myTickets:required')}
+						</div>
 					</div>
 				);
 			})}

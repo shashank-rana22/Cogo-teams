@@ -1,151 +1,113 @@
 import {
-	asyncFieldsTicketTypes, asyncFieldsOrganizations, asyncFieldsOrganizationUser,
+	asyncFieldsOrganizations,
+	asyncFieldsOrganizationUser,
 	asyncTicketsCategory,
+	asyncFieldsTicketTypes,
 } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
+
+import { SERVICE_API_MAPPING } from '../constants';
+
+import getCreateControls from './create-controls';
 
 const useRaiseTicketcontrols = ({
-	watchOrgId = '', setAdditionalInfo = () => {}, formattedSubCategories = [], setSubCategories = () => {},
-	watchCategory = '', watchSubCategory = '', watchService = '', watchTradeType = '', resetField = () => {},
+	watchOrgId = '', watchUserId = '', watchService = '', watchTradeType = '', watchCategory = '',
+	watchRequestType = '', resetField = () => {}, setAdditionalInfo = () => {}, setValue = () => {},
+	formattedSubCategories = [], setSubCategories = () => {}, watchSubCategory = '',
+	t = () => {}, setRaiseToDesk = () => {}, formatRaiseToDeskOptions = [],
+	watchRaisedByDesk = '', watchRaisedToDesk = '', setDefaultTypeId = () => {},
+	watchServiceType = '',
+	watchIdType = '',
 }) => {
+	const { rolesArr } = useSelector(({ profile }) => ({ rolesArr: profile?.auth_role_data?.role_functions || [] }));
+
+	const isOperation = rolesArr.includes('operations');
+
+	const checkSid = watchIdType === 'sid'
+		? 'list_shipments' : SERVICE_API_MAPPING[watchServiceType];
+
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
-	const categoryOptions = useGetAsyncTicketOptions({ ...asyncTicketsCategory() });
+
+	const categoryDeskOptions = useGetAsyncTicketOptions({
+		...asyncTicketsCategory(),
+		params: {
+			Service          : watchServiceType || watchService || undefined,
+			TradeType        : watchTradeType || undefined,
+			RequestType      : watchRequestType || undefined,
+			CategoryDeskType : isOperation ? 'by_desk' : 'by_category',
+		},
+		valueKey : 'raised_by_desk',
+		labelKey : 'raised_by_desk',
+	});
+
+	const organizationUserOptions = useGetAsyncOptions({
+		...asyncFieldsOrganizationUser(),
+		params   : { filters: { organization_id: watchOrgId } },
+		valueKey : 'user_id',
+
+	});
+
 	const ticketTypeOptions = useGetAsyncTicketOptions({
 		...asyncFieldsTicketTypes(),
 		params: {
-			Audience    : 'cogoport_user',
-			Service     : watchService || undefined,
-			Category    : watchCategory || undefined,
-			TradeType   : watchTradeType || undefined,
-			Subcategory : watchSubCategory || undefined,
+			Audience         : 'cogoport_user',
+			RequestType      : watchRequestType || undefined,
+			Category         : watchCategory || undefined,
+			Subcategory      : watchSubCategory || undefined,
+			Service          : watchService || undefined,
+			TradeType        : watchTradeType || undefined,
+			RaisedByDesk     : watchRaisedByDesk || undefined,
+			RaisedToDesk     : watchRaisedToDesk || undefined,
+			CategoryDeskType : isOperation ? 'by_desk' : 'by_category',
 		},
-	});
-	const organizationUserOptions = useGetAsyncOptions({
-		...asyncFieldsOrganizationUser(),
-		params: {
-			filters: { organization_id: watchOrgId },
-		},
-		valueKey: 'user_id',
 	});
 
-	return [
-		{
-			label          : 'Select Service',
-			name           : 'service',
-			controllerType : 'select',
-			placeholder    : 'Select service',
-			rules          : { required: true },
-			options        : GLOBAL_CONSTANTS.shipment_types,
-			isClearable    : true,
-			onChange       : () => resetField('issue_type'),
-		},
-		{
-			label          : 'Select Trade Type',
-			name           : 'trade_type',
-			controllerType : 'select',
-			placeholder    : 'Select Trade Type',
-			rules          : { required: true },
-			options        : GLOBAL_CONSTANTS.trade_types,
-			isClearable    : true,
-			onChange       : () => resetField('issue_type'),
-		},
-		{
-			...(categoryOptions || {}),
-			label          : 'Select category',
-			name           : 'category',
-			controllerType : 'select',
-			placeholder    : 'Select Type',
-			isClearable    : true,
-			rules          : { required: true },
-			defaultOptions : true,
-			onChange       : (_, val) => {
-				setSubCategories(val?.subcategories);
-				resetField('sub_category');
-				resetField('issue_type');
+	const serialIdOptions = {
+		asyncKey : 'list_shipments',
+		key      : watchRequestType,
+		params   : {
+			filters: {
+				importer_exporter_id : watchOrgId || undefined,
+				user_id              : watchUserId || undefined,
 			},
 		},
-		{
-			label          : 'Select Sub-category',
-			name           : 'sub_category',
-			controllerType : 'select',
-			placeholder    : 'Select sub category',
-			rules          : { required: true },
-			isClearable    : true,
-			options        : formattedSubCategories,
-			onChange       : () => resetField('issue_type'),
-		},
-		{
-			...(ticketTypeOptions || {}),
-			label          : 'Select issue type',
-			name           : 'issue_type',
-			controllerType : 'select',
-			placeholder    : 'Select Type',
-			isClearable    : true,
-			rules          : { required: true },
-			defaultOptions : true,
-			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
-		},
-		{
-			label          : 'Describe Issue',
-			name           : 'additional_information',
-			controllerType : 'textarea',
-			placeholder    : 'Enter Comments',
-			rules          : { required: true },
-		},
-		{
-			...(organizationOptions || {}),
-			label          : 'On behalf of',
-			name           : 'organization_id',
-			controllerType : 'select',
-			placeholder    : 'Select Organization',
-			isClearable    : true,
-		},
-		{
-			...(organizationUserOptions || {}),
-			label          : 'Select User',
-			name           : 'user_id',
-			controllerType : 'select',
-			placeholder    : 'Select User',
-			isClearable    : true,
-			rules          : { required: true },
+		valueKey: 'serial_id',
+	};
 
+	const serviceSerialIdOptions = {
+		asyncKey : checkSid,
+		key      : watchServiceType,
+		params   : {
+			filters: {
+				status: 'active',
+			},
 		},
-		{
-			label          : 'Priority',
-			name           : 'priority',
-			controllerType : 'select',
-			value          : 'medium',
-			placeholder    : 'Select Type',
-			options        : [
-				{
-					label : 'Medium',
-					value : 'medium',
-				},
-				{
-					label : 'low',
-					value : 'Low',
-				},
-				{
-					label : 'High',
-					value : 'high',
-				},
-			],
-			theme     : 'admin',
-			className : 'primary md',
-		},
-		{
-			label          : 'Upload Supporting Document',
-			name           : 'file_url',
-			controllerType : 'uploader',
-		},
-		{
-			label          : 'Notify customer',
-			name           : 'notify_customer',
-			controllerType : 'checkbox',
-		},
-	];
+		valueKey    : 'serial_id',
+		initialCall : false,
+	};
+	const checkRequest = watchRequestType === 'rate' ? serviceSerialIdOptions : serialIdOptions;
+
+	const controls = getCreateControls({
+		t,
+		checkRequest,
+		ticketTypeOptions,
+		organizationUserOptions,
+		organizationOptions,
+		categoryDeskOptions,
+		resetField,
+		setAdditionalInfo,
+		setValue,
+		formattedSubCategories,
+		setRaiseToDesk,
+		setSubCategories,
+		formatRaiseToDeskOptions,
+		setDefaultTypeId,
+		isOperation,
+	});
+
+	return controls.filter((itm) => itm?.visible);
 };
 
 export default useRaiseTicketcontrols;

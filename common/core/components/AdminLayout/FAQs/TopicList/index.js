@@ -1,10 +1,11 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, cl } from '@cogoport/components';
 import React, { useEffect, useState } from 'react';
 
 import Announcements from '../../Announcements';
 import QuestionListComponent from '../../QuestionListComponent';
 import Header from '../QuestionList/Header';
 
+// import Feedback from './Feedback';
 import styles from './styles.module.css';
 import useTopicList from './useTopicList';
 
@@ -17,7 +18,9 @@ function TopicList({
 	setShow = () => {},
 	announcementProps = {},
 	selectedAnnouncement = '',
+	// setModalData = () => {},
 }) {
+	// const [showFeedback, setShowFeedback] = useState(false);
 	const [activeTab, setActiveTab] = useState('faq');
 	const [input, setInput] = useState('');
 
@@ -119,7 +122,16 @@ function TopicList({
 	];
 
 	return (
-		<div className={`${styles.container} ${(showHistory || from === 'test_module') && styles.hide_tabs}`}>
+		<div
+			className={cl`${styles.container} ${(showHistory || from === 'test_module') ? styles.hide_tabs : ''}`}
+		>
+			{/* {showFeedback
+				? (
+					<Feedback setShowFeedback={setShowFeedback} />
+				)
+
+				: (
+					<> */}
 			<Header
 				activeTab={activeTab}
 				search={search}
@@ -138,6 +150,9 @@ function TopicList({
 				from={from}
 				setInput={setInput}
 				input={input}
+				// showFeedback={showFeedback}
+				// setModalData={setModalData}
+				// setShowFeedback={setShowFeedback}
 			/>
 
 			<Tabs
@@ -157,6 +172,8 @@ function TopicList({
 					);
 				})}
 			</Tabs>
+			{/* </>
+				)} */}
 		</div>
 	);
 }

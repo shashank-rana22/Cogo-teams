@@ -58,13 +58,7 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 
 	const { createSearch, loading } = useCreateSearch();
 
-	const { destination_port = {}, origin_port = {} } = primaryService;
-
-	const mainServiceObject = Object.values(services).find(
-		(item) => item.service_type === primary_service,
-	);
-
-	const { shipping_line = {} } = mainServiceObject || {};
+	const { destination_port = {}, origin_port = {}, shipping_line = {} } = primaryService;
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
 
@@ -181,7 +175,7 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 		shipping_line,
 		BUTTON_MAPPING,
 		primary_service,
-		mainServiceObject,
+		primaryService,
 		services,
 		hasExpired,
 		timerRef,

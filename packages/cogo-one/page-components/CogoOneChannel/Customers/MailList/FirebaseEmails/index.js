@@ -2,10 +2,12 @@ import {
 	IcMArrowRotateRight,
 	IcMArrowRotateDown,
 } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import ViewAttachmentsModal from '../../../../../common/ViewAttachmentsModal';
 import useListChats from '../../../../../hooks/useListChats';
+import getDownloadFiles from '../../../../../utils/getDownloadFiles';
 import LoadingState from '../../LoadingState';
 
 import Header from './Header';
@@ -16,7 +18,7 @@ function FirebaseEmails(messageProps) {
 	const {
 		activeFolder = '',
 		setActiveTab = () => {},
-		activeTab = '',
+		activeTab = {},
 		tagOptions = [],
 		userId = '',
 		firestore = {},
@@ -24,9 +26,11 @@ function FirebaseEmails(messageProps) {
 		isBotSession = false,
 		setIsBotSession = () => {},
 		workPrefernceLoading = false,
+		mailsToBeShown = [],
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
+	const [activeAttachmentData, setActiveAttachmentData] = useState({});
 	const [searchValue, setSearchValue] = useState('');
 
 	const {
@@ -43,11 +47,21 @@ function FirebaseEmails(messageProps) {
 		searchValue,
 		viewType,
 		setActiveTab,
-		activeSubTab  : 'all',
+		activeSubTab  : activeTab?.subTab,
 		workPrefernceLoading,
 		listOnlyMails : true,
 		activeFolder,
+		sidFilters    : activeTab?.hiddenFilters?.sid || '',
+		mailsToBeShown,
 	});
+
+	const setActiveSubTab = (val) => {
+		setActiveTab((prev) => ({ ...prev, subTab: val, data: {} }));
+	};
+
+	const resetSidFilter = () => {
+		setActiveTab((prev) => ({ ...prev, subTab: 'all', data: {}, tab: 'firebase_emails', hiddenFilters: {} }));
+	};
 
 	const { messagesList, sortedPinnedChatList } = chatsData;
 
@@ -57,10 +71,6 @@ function FirebaseEmails(messageProps) {
 
 	return (
 		<div className={styles.main_container}>
-			<div className={styles.active_folder_title}>
-				{startCase(activeFolder)}
-			</div>
-
 			<Header
 				setSearchValue={setSearchValue}
 				searchValue={searchValue}
@@ -70,6 +80,11 @@ function FirebaseEmails(messageProps) {
 				setIsBotSession={setIsBotSession}
 				appliedFilters={appliedFilters}
 				isBotSession={isBotSession}
+				setActiveSubTab={setActiveSubTab}
+				activeSubTab={activeTab?.subTab}
+				activeTab={activeTab?.tab}
+				resetSidFilter={resetSidFilter}
+				sidFilter={activeTab?.hiddenFilters?.sid || ''}
 			/>
 
 			{(isEmpty(messagesList) && isPinnedChatEmpty && !loadingState?.chatsLoading)
@@ -109,6 +124,7 @@ function FirebaseEmails(messageProps) {
 													activeTab={activeTab}
 													viewType={viewType}
 													activeFolder={activeFolder}
+													setActiveAttachmentData={setActiveAttachmentData}
 												/>
 											),
 										)}
@@ -132,6 +148,7 @@ function FirebaseEmails(messageProps) {
 									activeTab={activeTab}
 									viewType={viewType}
 									activeFolder={activeFolder}
+									setActiveAttachmentData={setActiveAttachmentData}
 								/>
 							),
 						)}
@@ -139,6 +156,12 @@ function FirebaseEmails(messageProps) {
 						{loadingState?.chatsLoading && <LoadingState />}
 					</div>
 				)}
+			<ViewAttachmentsModal
+				activeAttachmentData={activeAttachmentData}
+				setActiveAttachmentData={setActiveAttachmentData}
+				urlType="urlBased"
+				handleDownload={getDownloadFiles}
+			/>
 		</div>
 	);
 }

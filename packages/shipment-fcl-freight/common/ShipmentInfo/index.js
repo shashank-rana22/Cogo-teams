@@ -5,13 +5,18 @@ import { useShipmentBack } from '@cogoport/ocean-modules';
 import { startCase } from '@cogoport/utils';
 import { useContext } from 'react';
 
+import useGetDaysToClosure from '../../hooks/useGetDaysToClosure';
+
 import styles from './styles.module.css';
 
 function ShipmentInfo() {
 	const { shipment_data, primary_service, isGettingShipment, stakeholderConfig } = useContext(ShipmentDetailContext);
 	const { bl_type = '' } = primary_service || {};
+	const { serial_id = '' } = shipment_data || {};
 
 	const { handleShipmentsClick } = useShipmentBack();
+
+	const { remaining_closure_days = 0 } = useGetDaysToClosure({ serial_id });
 
 	const sourceText = shipment_data?.source === 'direct'
 		? 'Sell Without Buy'
@@ -53,6 +58,16 @@ function ShipmentInfo() {
 					alt="cogo-assured"
 					height={16}
 				/>
+			) : null}
+
+			{remaining_closure_days ? (
+				<Pill size="sm" color="#c4dc91" className={styles.pill}>
+					Operational Closure in:
+					{' '}
+					{remaining_closure_days}
+					{' '}
+					Day(s)
+				</Pill>
 			) : null}
 
 		</div>

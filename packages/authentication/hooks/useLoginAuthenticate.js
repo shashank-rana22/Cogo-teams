@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import languageMapping from '@cogoport/globalization/constants/languageLocaleMapping';
 import { useRouter } from '@cogoport/next';
 import { useAuthRequest } from '@cogoport/request';
 import useRequest from '@cogoport/request/hooks/useRequest';
@@ -15,13 +15,21 @@ import redirections from '../utils/redirections';
 const EMPTY_PATH = '/empty';
 
 const COOKIE_EXPIRY = -1;
+const getFormattedPayload = ({ mobileNumber = {}, otpId = '', otpValue = '' }) => ({
+	id                  : otpId,
+	mobile_otp          : otpValue,
+	mobile_number       : mobileNumber?.number,
+	mobile_country_code : mobileNumber?.country_code,
+	auth_scope          : 'partner',
+	platform            : 'admin',
+});
 
-const LANGUAGE_LOCALE_MAPPING = Object.keys(languageMapping).reduce((acc, key) => {
-	acc[languageMapping[key].value] = key;
-	return acc;
-}, {});
-
-const useLoginAuthenticate = () => {
+const useLoginAuthenticate = ({
+	mobileNumber = {},
+	otpId = '',
+	otpValue = '',
+	type = '',
+}) => {
 	const router = useRouter();
 
 	const { t } = useTranslation(['login']);
@@ -38,6 +46,13 @@ const useLoginAuthenticate = () => {
 		method : 'post',
 	}, { manual: true });
 
+	const [{ loading: otpLoading }, triggerOtp] = useRequest(
+		{
+			url    : 'login_user_with_mobile',
+			method : 'post',
+		},
+		{ manual: true },
+	);
 	const [{ loading: sessionLoading }, triggerSession] = useAuthRequest({
 		url    : '/get_user_session',
 		method : 'get',
@@ -77,34 +92,21 @@ const useLoginAuthenticate = () => {
 	}, []);
 
 	const redirectFunction = async () => {
-		let locale = 'en';
 		const configs = redirections(profile);
 		const redirectPath = decodeURIComponent(redirect_path);
-		const { user } = profile || {};
-		const { preferred_languages } = user || {};
-
-		const userLanguagePreferenece = preferred_languages?.[GLOBAL_CONSTANTS.zeroth_index]
-		|| GLOBAL_CONSTANTS.default_preferred_language;
-
-		if (userLanguagePreferenece in LANGUAGE_LOCALE_MAPPING) {
-			locale = LANGUAGE_LOCALE_MAPPING[userLanguagePreferenece];
-		}
 
 		if (redirectPath) {
-			await router.push(`${redirectPath}`, `${redirectPath}`, { locale });
+			window.location.href = `/v2/${profile?.partner?.id}${redirectPath || EMPTY_PATH}`;
 		} else if (configs?.href?.includes('/v2')) {
 			const replaceHref = configs?.href?.replace('/v2', '');
-			const replaceAs = configs?.as?.replace('/v2', '');
 
-			await router.push(replaceHref, replaceAs, { locale });
+			window.location.href = `/v2/${profile?.partner?.id}${replaceHref || EMPTY_PATH}`;
 		} else if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
 			// eslint-disable-next-line no-undef
 			window.location.href = `/${profile?.partner?.id}${configs?.href || EMPTY_PATH}`;
 		} else {
-			await router.push(configs?.href || EMPTY_PATH, configs?.as || EMPTY_PATH, { locale });
+			await router.push(configs?.href || EMPTY_PATH, configs?.as || EMPTY_PATH);
 		}
-
-		setCookie('locale', locale);
 	};
 
 	useEffect(() => {
@@ -115,11 +117,11 @@ const useLoginAuthenticate = () => {
 	}, [profile, router, source]);
 
 	const onSubmit = async (values, e) => {
-		e.preventDefault();
+		e?.preventDefault();
 		try {
 			let is_already_added_email = false;
 			let user_data = {};
-
+			const userPayload = getFormattedPayload({ mobileNumber, otpId, otpValue });
 			if (cogo_admin_auth_token) {
 				const mapping_response = await triggerUserSessionMapping({
 					params: { parent_user_session_id: cogo_admin_auth_token },
@@ -146,17 +148,26 @@ const useLoginAuthenticate = () => {
 
 				return;
 			}
+			let response = {};
 
-			const response = await trigger({
-				data: {
-					...values,
-					auth_scope   : 'partner',
-					platform     : 'admin',
-					parent_token : cogo_admin_auth_token || undefined,
-				},
-			});
+			if (type === 'eamil_auth') {
+				response = await trigger({
+					data: {
+						...values,
+						auth_scope   : 'partner',
+						platform     : 'admin',
+						parent_token : cogo_admin_auth_token || undefined,
+					},
+				});
+			}
 
-			const { token } = response.data || {};
+			if (type === 'otp_auth') {
+				response = await triggerOtp({
+					data: userPayload,
+				});
+			}
+
+			const { token } = response?.data || {};
 
 			const payload = {
 				active_user_session_id : token,
@@ -190,13 +201,14 @@ const useLoginAuthenticate = () => {
 				window.location.href = '/';
 			}
 		} catch (err) {
-			Toast.error(err?.response?.data.error || t('login:failed_to_login_toast_error'));
+			Toast.error(getApiErrorString(err?.response?.data) || t('login:failed_to_login_toast_error'));
 		}
 	};
 
 	return {
 		onSubmit,
-		loading: loginLoading || sessionLoading || updateSessionMappingLoading || userSessionMappingLoading,
+		loading: loginLoading || sessionLoading || updateSessionMappingLoading
+		|| userSessionMappingLoading || otpLoading,
 		source,
 	};
 };

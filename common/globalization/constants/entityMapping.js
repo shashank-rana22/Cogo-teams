@@ -19,6 +19,7 @@ const ENTITY_MAPPING = {
 		code                : '101',
 		default_entity_code : '301',
 		GSTIN               : ['27AAGCC4470P1Z5', 'MUMC22090F', 'MUMC26454B'],
+		display_name        : 'Cogoport India',
 	},
 	201: {
 		country_code        : 'NL',
@@ -29,6 +30,7 @@ const ENTITY_MAPPING = {
 		default_entity_code : '201',
 		code                : '201',
 		GSTIN               : [],
+		display_name        : 'Cogoport Netherlands',
 	},
 	301: {
 		country_code        : 'IN',
@@ -44,6 +46,7 @@ const ENTITY_MAPPING = {
 		},
 		GSTIN: ['06AAICC8838P1ZV', '07AAACF2136K1ZT',
 			'27AAACF2136K1ZR', '27AAICC8838P1ZR', 'MUMC26454B'],
+		display_name: 'COGOPORT PRIVATE LIMITED',
 	},
 	401: {
 		country_code        : 'SG',
@@ -54,6 +57,7 @@ const ENTITY_MAPPING = {
 		default_entity_code : '401',
 		code                : '401',
 		GSTIN               : [],
+		display_name        : 'Cogoport Universe',
 	},
 	501: {
 		country_code        : 'VN',
@@ -64,6 +68,7 @@ const ENTITY_MAPPING = {
 		code                : '501',
 		currency            : 'VND',
 		GSTIN               : [],
+		display_name        : 'Cogoport Vietnam',
 	},
 	601: {
 		country_code        : 'TH',
@@ -74,6 +79,7 @@ const ENTITY_MAPPING = {
 		code                : '601',
 		currency            : 'THB',
 		GSTIN               : [],
+		display_name        : 'Cogoport Thailand',
 	},
 	701: {
 		country_code        : 'ID',
@@ -84,6 +90,7 @@ const ENTITY_MAPPING = {
 		code                : '701',
 		currency            : 'IDR',
 		GSTIN               : [],
+		display_name        : 'Cogoport Indonesia',
 	},
 	801: {
 		country_code        : 'CN',
@@ -94,6 +101,7 @@ const ENTITY_MAPPING = {
 		currency            : 'CNY',
 		code                : '801',
 		GSTIN               : [],
+		display_name        : 'Cogoport China',
 	},
 };
 

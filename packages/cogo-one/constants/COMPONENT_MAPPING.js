@@ -8,8 +8,9 @@ import FlashReverts from '../page-components/CogoOneChannel/ProfileDetails/Flash
 import HelpDesk from '../page-components/CogoOneChannel/ProfileDetails/HelpDesk';
 import OrganizationDetails from '../page-components/CogoOneChannel/ProfileDetails/OrganizationDetails';
 import QuickActions from '../page-components/CogoOneChannel/ProfileDetails/QuickActions';
-import Tickets from '../page-components/CogoOneChannel/ProfileDetails/Tickets';
+import TeamsProfile from '../page-components/CogoOneChannel/ProfileDetails/TeamsProfile';
 import UserActivities from '../page-components/CogoOneChannel/ProfileDetails/UserActivity';
+import UserMails from '../page-components/CogoOneChannel/ProfileDetails/UserMails';
 
 const COMPONENT_MAPPING = {
 	profile                 : AgentDetails,
@@ -21,9 +22,10 @@ const COMPONENT_MAPPING = {
 	customer_insights       : CustomerInsight,
 	help_desk               : HelpDesk,
 	documents               : Documents,
-	tickets                 : Tickets,
 	flash_shipment_bookings : FlashReverts,
 	add_on_services         : AddOnServices,
+	user_mails              : UserMails,
+	teams_profile           : TeamsProfile,
 };
 
 export default COMPONENT_MAPPING;

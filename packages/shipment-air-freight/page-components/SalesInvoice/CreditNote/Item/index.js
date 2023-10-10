@@ -23,6 +23,8 @@ const CN_STATUS_MAPPING = {
 	finance_rejected : 'finance_rejected',
 };
 
+const REJECTED_STATUS = ['rejected', 'finance_rejected'];
+
 function Item({
 	item = {},
 	cnRefetch = () => {},
@@ -95,6 +97,14 @@ function Item({
 							<span>{item?.live_invoice_number}</span>
 						</div>
 
+						{item?.incident_id && (
+							<div className={styles.in_number}>
+								Incident ID:
+								{' '}
+								{item?.incident_id}
+							</div>
+						)}
+
 						<div className={styles.invoice_value}>
 							Invoice Value -
 							{' '}
@@ -114,12 +124,17 @@ function Item({
 						<div className={styles.invoice_status_and_action}>
 							<div className={styles.status}>
 								<div className={cl`${styles[CN_STATUS_MAPPING[itemStatus]]} ${styles.status_text}`}>
-									{startCase(CN_STATUS_MAPPING[itemStatus])}
+									{startCase(CN_STATUS_MAPPING[itemStatus] || '')}
 								</div>
 
-								{itemStatus === 'rejected' && (
-									<IcCError width={16} height={16} />
-								)}
+								{REJECTED_STATUS.includes(itemStatus) && item?.rejection_reason ? (
+									<div className={styles.rejection_reason}>
+										<IcCError width={16} height={16} />
+										<span>
+											{item.rejection_reason}
+										</span>
+									</div>
+								) : null}
 							</div>
 
 							{itemStatus === 'pending' && (

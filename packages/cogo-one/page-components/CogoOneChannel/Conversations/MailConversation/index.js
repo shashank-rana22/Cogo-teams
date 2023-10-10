@@ -15,8 +15,6 @@ const MAIL_LOADING_SKELETON_LENGTH = 5;
 function MailConversation({ mailProps = {} }) {
 	const {
 		activeMail,
-		setButtonType = () => {},
-		setEmailState = () => {},
 		activeMailAddress = '',
 	} = mailProps;
 
@@ -44,31 +42,33 @@ function MailConversation({ mailProps = {} }) {
 
 	const { content = '' } = body || {};
 
-	const allAttachements = attachmentData?.value || [];
+	const allAttachments = attachmentData?.value || [];
 
-	const newContent = allAttachements.reduce((prevContent, attachment) => prevContent.replaceAll(
-		`cid:${attachment.contentId}`,
-		`data:${attachment.contentType};base64,${attachment.contentBytes}`,
-	), content);
+	const newContent = allAttachments.reduce(
+		(prevContent, attachment) => prevContent.replaceAll(
+			`cid:${attachment.contentId}`,
+			`data:${attachment.contentType};base64,${attachment.contentBytes}`,
+		),
+		content,
+	);
 
 	const senderAddress = sender?.emailAddress?.address;
-	const recipientData = (toRecipients || []).map((item) => item?.emailAddress?.address);
-	const ccData = (ccRecipients || []).map((item) => item?.emailAddress?.address);
-	const bccData = (bccRecipients || []).map((item) => item?.emailAddress?.address);
+	const recipientData = (toRecipients || [])?.map((item) => item?.emailAddress?.address);
+	const ccData = (ccRecipients || [])?.map((item) => item?.emailAddress?.address);
+	const bccData = (bccRecipients || [])?.map((item) => item?.emailAddress?.address);
 
 	return (
 		<div className={styles.container}>
 			<Header
 				subject={subject}
 				loading={loading}
-				setButtonType={setButtonType}
-				setEmailState={setEmailState}
 				senderAddress={senderAddress}
 				recipientData={recipientData}
 				ccData={ccData}
 				bccData={bccData}
 				activeMailAddress={activeMailAddress}
 				isDraft={isDraft}
+				mailProps={mailProps}
 			/>
 
 			<div className={styles.email_body}>

@@ -7,6 +7,11 @@
 	height: 100%;
 }
 
+.required_field::after {
+	color: var(--color-primary-error-red-2);
+	content: " *";
+}
+
 .element {
 	:global {
 		.ui_input_container {

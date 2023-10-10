@@ -4,8 +4,6 @@ import { useState } from 'react';
 
 import handleCopy from '../../helpers/handleCopyUrl';
 
-const ONE = 1;
-
 const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRatesPresent = false }) => {
 	const { query } = useSelector(({ general }) => ({
 		query: general.query,
@@ -13,28 +11,51 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 
 	const { checkout_id, shipment_id } = query || {};
 
+	const { tags = [], quotation_communication_channels = {}, importer_exporter_poc = {} } = detail;
+
 	const [showWhatsappVerificationModal, setShowWhatsappVerificationModal] = useState(false);
 	const [showShareQuotationModal, setShowShareQuotationModal] = useState(false);
-	const [selectedModes, setSelectedModes] = useState(['email']);
 	const [show, setShow] = useState(false);
 	const [confirmation, setConfirmation] = useState(false);
+	const [showPopover, setShowPopover] = useState(false);
+	const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+	const { EMAIL = false, WHATSAPP = false, SMS = false } = quotation_communication_channels;
+
+	const {
+		mobile_number = '',
+		whatsapp_number = '',
+		email = '',
+	} = importer_exporter_poc;
 
 	const quotationOptions = [
 		{
-			label : 'Email',
-			value : 'email',
+			label      : 'Email',
+			value      : 'email',
+			enabled    : EMAIL,
+			isEligible : !!email,
 		},
 		{
-			label    : 'Whatsapp',
-			value    : 'whatsapp',
-			disabled : true,
+			label      : 'Whatsapp',
+			value      : 'whatsapp',
+			enabled    : WHATSAPP,
+			isEligible : !!whatsapp_number,
 		},
 		{
-			label    : 'Sms',
-			value    : 'sms',
-			disabled : true,
+			label      : 'Sms',
+			value      : 'sms',
+			enabled    : SMS,
+			isEligible : !!mobile_number,
 		},
 	];
+
+	const selectedModes = quotationOptions.reduce((acc, curr) => {
+		if (curr.enabled) {
+			return [...acc, curr.value];
+		}
+
+		return acc;
+	}, []);
 
 	const handleCopyQuoteLink = () => {
 		if (detail?.quotation_email_sent_at) {
@@ -46,12 +67,15 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 			values: {
 				id                      : checkout_id,
 				quotation_email_sent_at : new Date(),
+				tags                    : [...new Set([...tags, 'added_to_cart'])],
 			},
 			type: 'copy_link',
 		});
 	};
 
 	const handleClick = () => {
+		setShowPopover(false);
+
 		if (detail?.primary_service === 'fcl_freight') {
 			setConfirmation(true);
 			return;
@@ -64,19 +88,19 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 		}
 	};
 
-	const getModalSize = () => {
-		if (selectedModes.includes('email') && selectedModes.length > ONE) {
-			return { size: 'xl', widths: { email: '65%', message: '35%' } };
-		}
+	// const getModalSize = () => {    // USE THIS IF YOU WANT TO CONFIGURE WIDTHS
+	// 	if (selectedModes.includes('email') && selectedModes.length > ONE) {
+	// 		return { size: 'xl', widths: { email: '65%', message: '35%' } };
+	// 	}
 
-		if (selectedModes.includes('email') && selectedModes.length === ONE) {
-			return { size: 'xl', widths: { email: '100%', message: '0%' } };
-		}
+	// 	if (selectedModes.includes('email') && selectedModes.length === ONE) {
+	// 		return { size: 'xl', widths: { email: '100%', message: '0%' } };
+	// 	}
 
-		return { size: 'md', widths: { email: '0%', message: '100%' } };
-	};
+	// 	return { size: 'md', widths: { email: '0%', message: '100%' } };
+	// };
 
-	const { size, widths } = getModalSize();
+	// const { size, widths } = getModalSize();
 
 	const BUTTON_MAPPING = [
 		{
@@ -86,35 +110,43 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 			style           : {},
 			onClickFunction : handleClick,
 			loading         : false,
+			size            : 'md',
 			disabled        : noRatesPresent,
 		},
 		{
 			key             : 'share_quotation',
 			label           : 'Share Quotation',
-			themeType       : 'primary',
-			onClickFunction : () => setShowShareQuotationModal(true),
-			style           : { marginLeft: '20px' },
-			disabled        : isEmpty(selectedModes) || noRatesPresent,
-			loading         : false,
+			themeType       : 'accent',
+			onClickFunction : () => {
+				setShowShareQuotationModal(true);
+				setShowPopover(false);
+			},
+			style    : { marginLeft: '20px' },
+			size     : 'md',
+			disabled : isEmpty(selectedModes) || noRatesPresent,
+			loading  : false,
 		},
 	];
 
 	return {
 		BUTTON_MAPPING,
-		size,
-		widths,
+		size   : 'xl',
+		widths : { email: '100%' },
 		show,
 		setShow,
 		quotationOptions,
 		showWhatsappVerificationModal,
 		setShowWhatsappVerificationModal,
 		showShareQuotationModal,
-		setSelectedModes,
 		selectedModes,
 		setShowShareQuotationModal,
 		confirmation,
 		setConfirmation,
 		handleCopyQuoteLink,
+		showPopover,
+		setShowPopover,
+		showSuccessModal,
+		setShowSuccessModal,
 	};
 };
 

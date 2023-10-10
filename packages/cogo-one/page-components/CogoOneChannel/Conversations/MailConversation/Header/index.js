@@ -9,8 +9,7 @@ import styles from './styles.module.css';
 function Header({
 	subject = '',
 	loading = false,
-	setButtonType = () => {},
-	setEmailState = () => {},
+	mailProps = {},
 	senderAddress = '',
 	recipientData = [],
 	ccData = [],
@@ -19,8 +18,7 @@ function Header({
 	isDraft = false,
 }) {
 	const { handleClick = () => {} } = getRecipientData({
-		setButtonType,
-		setEmailState,
+		mailProps,
 		senderAddress,
 		recipientData,
 		ccData,
@@ -49,7 +47,7 @@ function Header({
 							<div
 								role="presentation"
 								className={styles.header_actions_reply}
-								onClick={() => handleClick(value)}
+								onClick={() => handleClick({ buttonType: value })}
 							>
 								{icon}
 							</div>

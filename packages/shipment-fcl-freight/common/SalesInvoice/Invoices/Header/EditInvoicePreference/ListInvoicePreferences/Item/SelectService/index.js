@@ -2,6 +2,7 @@ import { Button, Tooltip, CheckboxGroup, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
+import SelectLanguage from '@cogoport/select-language';
 import { startCase } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
@@ -14,18 +15,53 @@ const MAIN_SERVICES = 'fcl_freight_service';
 
 const TAX_TOTAL_CUTOFF_VALUE = 0;
 
+function Content({ service = {}, invoiceAmount = {} }) {
+	return (
+		<div className={styles.service_details}>
+			<div>
+				<b>
+					Invoice Currency:
+					{' '}
+				</b>
+				<span>{service?.currency}</span>
+			</div>
+
+			{service?.detail?.container_size ? (
+				<div>
+					<b>Container Size: </b>
+					<span>{`${startCase(service?.detail?.container_size)} FT`}</span>
+				</div>
+			) : null}
+
+			{service?.detail?.commodity ? (
+				<div>
+					<b>Commodity: </b>
+					<span>{startCase(service?.detail?.commodity)}</span>
+				</div>
+			) : null}
+
+			{invoiceAmount ? (
+				<div>
+					<b>Invoice Amount: </b>
+					<span>{invoiceAmount}</span>
+				</div>
+			) : null}
+		</div>
+	);
+}
+
 function SelectService({
 	invoice = {},
 	handleServiceChange = () => {},
 	onClose = () => {},
 	allTakenServices = [],
 }) {
-	const { services = [], invoice_currency, invoice_source = '' } = invoice;
+	const { services = [], invoice_currency, invoice_source = '', invoice_language = '' } = invoice;
 	const selected = useMemo(() => services?.map((service) => service?.serviceKey || ''), [services]);
 
 	const [value, onChange] = useState(selected);
 	const [invoiceCurrency, setInvoiceCurrency] = useState(invoice_currency);
-
+	const [invoiceLanguage, setInvoiceLanguage] = useState(invoice_language);
 	let options = [];
 
 	allTakenServices?.forEach((service) => {
@@ -54,37 +90,6 @@ function SelectService({
 				},
 			});
 
-			const content = (
-				<div className={styles.service_details}>
-					<div>
-						<b>Invoice Currency: </b>
-						&nbsp;
-						<span>{service?.currency}</span>
-					</div>
-
-					{service?.detail?.container_size ? (
-						<div>
-							<b>Container Size: </b>
-							<span>{`${startCase(service?.detail?.container_size)} FT`}</span>
-						</div>
-					) : null}
-
-					{service?.detail?.commodity ? (
-						<div>
-							<b>Commodity: </b>
-							<span>{startCase(service?.detail?.commodity)}</span>
-						</div>
-					) : null}
-
-					{invoiceAmount ? (
-						<div>
-							<b>Invoice Amount: </b>
-							<span>{invoiceAmount}</span>
-						</div>
-					) : null}
-				</div>
-			);
-
 			const id_with_igst = service?.serviceKey;
 
 			const serviceName = service?.service_name || service?.service_type;
@@ -96,7 +101,11 @@ function SelectService({
 
 			const servicesToPush = {
 				label: (
-					<Tooltip content={content} placement="bottom" theme="light">
+					<Tooltip
+						content={<Content service={service} invoiceAmount={invoiceAmount} />}
+						placement="bottom"
+						theme="light"
+					>
 						<div className={styles.service_name}>
 							{serviceType}
 						</div>
@@ -110,15 +119,13 @@ function SelectService({
 			options.push(servicesToPush);
 		}
 
-		options = options?.filter(
-			(opt) => !(
-				opt?.service_type === 'cargo_insurance_service'
-					&& !GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
-						.cargo_insurance.countries.includes(
-							countryCode,
-						)
-			),
-		);
+		options = options?.filter((opt) => {
+			const isCargoInsuranceService = opt?.service_type === 'cargo_insurance_service';
+			const isCountrySupported = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
+				.cargo_insurance.countries.includes(countryCode);
+
+			return !(isCargoInsuranceService && !isCountrySupported) && !opt?.processing;
+		});
 	});
 
 	const handleChange = (newValue) => {
@@ -146,14 +153,19 @@ function SelectService({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>Select service and invoice currency</div>
+			<div className={styles.heading}>Select service, invoice currency and language</div>
 
-			<ChangeCurrency
-				invoice={invoice}
-				invoiceCurrency={invoiceCurrency}
-				setInvoiceCurrency={setInvoiceCurrency}
-			/>
-
+			<div className={styles.select_container}>
+				<ChangeCurrency
+					invoice={invoice}
+					invoiceCurrency={invoiceCurrency}
+					setInvoiceCurrency={setInvoiceCurrency}
+				/>
+				<SelectLanguage
+					invoiceLanguage={invoiceLanguage}
+					setInvoiceLanguage={setInvoiceLanguage}
+				/>
+			</div>
 			<div className={styles.checkbox_container}>
 				<CheckboxGroup
 					options={options}
@@ -177,6 +189,7 @@ function SelectService({
 					onClick={() => handleServiceChange(invoice, {
 						service_ids      : value,
 						invoice_currency : invoiceCurrency,
+						invoice_language : invoiceLanguage,
 					})}
 				>
 					Add Services

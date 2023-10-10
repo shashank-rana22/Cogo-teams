@@ -19,6 +19,7 @@
     "@cogoport/authentication": "workspace:0.1.0",
     "@cogoport/authority-desk": "workspace:0.1.0",
     "@cogoport/advance-booking-manager": "workspace:1.0.0",
+    "@cogoport/ams-submission": "workspace:1.0.0",
     "@cogoport/bl_do-collection-release": "workspace:0.1.0",
     "@cogoport/bn-salvage": "workspace:0.1.0",
     "@cogoport/booking-desk": "workspace:0.1.0",
@@ -95,6 +96,8 @@
     "@cogoport/utils": "^1.2.6",
     "@cogoport/vendor-rm": "workspace:0.1.0",
     "@cogoport/centralised-customer-service": "workspace:0.1.0",
+    "@cogoport/convenience-rates":"workspace:0.1.0",
+    "@cogoport/service-management":"workspace:1.0.0",
     "@cogoport/welcome": "workspace:0.1.0",
     "@cogoport/trade-parties":"workspace:0.1.0",
     "@next/bundle-analyzer": "^13.2.3",
@@ -112,11 +115,18 @@
     "@cogoport/schedules": "workspace:^0.1.0",
     "@cogoport/airline-booking-plugin":"workspace:1.0.0",
     "@cogoport/booking-desk-surface": "workspace:1.0.0",
+    "@cogoport/terms-and-conditions": "workspace:1.0.0",
     "@cogoport/attendance-leave-management":"workspace:0.1.0",
     "@cogoport/supply-tools": "workspace:0.1.0",
-    "@cogoport/error":"workspace:1.0.0",
+    "@cogoport/marketing":"workspace:0.1.0",
+    "@cogoport/profile":"workspace:0.1.0",
+    "@cogoport/performance-and-incentives": "workspace:0.1.0",
+    "@cogoport/margin-management":"workspace:0.1.0",
     "@cogoport/warehouse-management": "workspace:1.0.0",
-    "@cogoport/marketing":"workspace:0.1.0"
+    "@cogoport/business":"workspace:1.0.0",
+    "@cogoport/saas": "workspace:0.1.0",
+    "@cogoport/cogo-assured": "workspace:0.1.0",
+    "@cogoport/error":"workspace:1.0.0"
   },
   "browserslist": [
     "defaults"

@@ -8,6 +8,7 @@ import getAdSellerBankDetails from './getAdSellerBankDetails';
 const getAdvanceDocumentPayload = ({
 	performedById = '',
 	serial_id = '',
+	shipment_type = '',
 	formValues = {},
 	billingParty = {},
 	billingPartyAddress = {},
@@ -53,7 +54,7 @@ const getAdvanceDocumentPayload = ({
 		jobSource                           : 'LOGISTICS',
 		jobType                             : 'SHIPMENT',
 		currency,
-		serviceType                         : 'testing',
+		serviceType                         : shipment_type,
 		tdsAmount                           : collectionParty?.tds_deduction_rate,
 		amount                              : amount * quantity,
 		refundable                          : true,

@@ -1,27 +1,28 @@
-const pricingListConfig = [
+const getPricingListConfig = ({ t }) => [
 	{
 		key   : 'currency',
-		title : 'Currency',
+		title : t('saasSubscription:pricing_config_curr'),
 		width : '22%',
 	},
 	{
-		key   : 'period',
-		title : 'Frequency',
-		width : '22%',
+		key        : 'period_unit',
+		title      : t('saasSubscription:pricing_config_frequency'),
+		width      : '22%',
+		renderFunc : 'renderPeriod',
 	},
 	{
 		key        : 'price',
-		title      : 'Price',
+		title      : t('saasSubscription:pricing_config_price'),
 		width      : '22%',
 		renderFunc : 'renderPrice',
 	},
 	{
 		key        : 'discount',
-		title      : 'Plan Discount',
+		title      : t('saasSubscription:pricing_config_discount'),
 		width      : '22%',
 		renderFunc : 'renderDiscount',
 	},
 
 ];
 
-export default pricingListConfig;
+export default getPricingListConfig;

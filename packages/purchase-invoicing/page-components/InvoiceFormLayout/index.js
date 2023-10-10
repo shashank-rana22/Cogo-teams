@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm, RadioGroupController, SelectController, CheckboxController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -43,9 +43,10 @@ function InvoiceFormLayout({
 	collectionParty = {},
 	setCollectionParty = () => {},
 	purchaseInvoiceValues = {},
-	billId,
+	billId = '',
 	editData = {},
 }, ref) {
+	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 	const [codes, setCodes] = useState(purchaseInvoiceValues?.codes || {});
 
 	const [showTaggings, setShowTaggings] = useState(false);
@@ -53,7 +54,7 @@ function InvoiceFormLayout({
 	const [selectedProforma, setSelectedProforma] = useState([]);
 	const [showCollectionParty, setShowCollectionParty] = useState(false);
 	const [showBankform, setShowBankForm] = useState(false);
-	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
+
 	const isJobClosed = shipment_data?.is_job_closed;
 	const { billing_addresses: billingAddresses = [], other_addresses: otherAddresses = [] } = collectionParty || {};
 	const allAddresses = [...billingAddresses, ...otherAddresses];
@@ -92,6 +93,9 @@ function InvoiceFormLayout({
 		(item) => item?.registration_number
 			=== (purchaseInvoiceValues?.billing_party),
 	);
+
+	const urgencyTagOptions = shipment_data?.shipment_type === 'air_freight'
+		? [...URGENCY_TAG_OPTIONS, { label: 'THC', value: 'thc' }] : URGENCY_TAG_OPTIONS;
 
 	useEffect(() => {
 		if (initialValueBP && Object.keys(billingParty || {}).length === GLOBAL_CONSTANTS.zeroth_index) {
@@ -155,6 +159,7 @@ function InvoiceFormLayout({
 		codes,
 		shipment_data,
 		activeTab       : billCatogory,
+		calculatedValues,
 	}));
 
 	const isTagDissable = () => {
@@ -197,11 +202,11 @@ function InvoiceFormLayout({
 			</div>
 			<div className={styles.formlayout}>
 				<div className={styles.select}>
-					<SelectController name="urgency_tag" control={control} options={URGENCY_TAG_OPTIONS} isClearable />
+					<SelectController name="urgency_tag" control={control} options={urgencyTagOptions} isClearable />
 				</div>
 
 				<AccordianView title="Select Invoice Type" fullwidth open={isEdit || isJobClosed}>
-					<div className={`${styles.flex} ${styles.justifiy}`}>
+					<div className={cl`${styles.flex} ${styles.justify}`}>
 						<div className={styles.flex}>
 							{!isJobClosed ? (
 								<Segmented
@@ -217,7 +222,7 @@ function InvoiceFormLayout({
 								value={purchaseInvoiceValues?.invoice_type || isCreditNoteOnly || 'purchase_invoice'}
 							/>
 							{errors?.invoice_type ? (
-								<div className={`${styles.errors} ${styles.marginleft}`}>
+								<div className={cl`${styles.errors} ${styles.marginleft}`}>
 									Invoice type is Required
 								</div>
 							) : null}
@@ -249,6 +254,7 @@ function InvoiceFormLayout({
 					errors={errors}
 					purchaseInvoiceValues={purchaseInvoiceValues}
 					isEdit={isEdit}
+					formValues={formValues}
 				/>
 				<BillingPartyDetails
 					control={control}
@@ -309,6 +315,7 @@ function InvoiceFormLayout({
 					primary_service={primary_service}
 					serviceProvider={serviceProvider}
 					formValues={formValues}
+					calculatedValues={calculatedValues}
 				/>
 				<Taggings
 					showTagings={showTaggings}

@@ -43,7 +43,9 @@ function Actions({
 
 	const [showModal, setShowModal] = useState('');
 
-	const showForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+	const { serial_id = '', is_job_closed_financially = false } = shipment_data || {};
+
+	const showForOldShipments = serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice?.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice?.status)
@@ -97,14 +99,19 @@ function Actions({
 									size="sm"
 									onClick={() => setShowModal('show_review')}
 									themeType="accent"
-									disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
+									disabled={disableMarkAsReviewed || invoice?.is_eta_etd
+										|| is_job_closed_financially}
 								>
 									Mark as Reviewed
 								</Button>
 							) : null}
 
 							{invoice?.status === 'reviewed' ? (
-								<Button size="sm" onClick={() => setShowModal('otp_verification')}>
+								<Button
+									size="sm"
+									onClick={() => setShowModal('otp_verification')}
+									disabled={is_job_closed_financially}
+								>
 									Send OTP for Approval
 								</Button>
 							) : null}

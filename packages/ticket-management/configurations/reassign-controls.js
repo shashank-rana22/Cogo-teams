@@ -1,42 +1,93 @@
-import { asyncFieldsPartnerRoles, asyncFieldsPartnerUsers, useGetAsyncOptions } from '@cogoport/forms';
+import {
+	asyncFieldsPartnerRoles,
+	asyncFieldsPartnerUsers,
+	useGetAsyncOptions,
+	useGetAsyncOptionsMicroservice,
+} from '@cogoport/forms';
 
-const ASYNC_OPTION_MAPPING = {
-	'partner-roles' : asyncFieldsPartnerRoles(),
-	'partner-users' : asyncFieldsPartnerUsers(),
+const getShipmentTypeOption = ({ t = () => {}, requestType = '' }) => {
+	const options = [
+		{ label: t('myTickets:role'), value: 'partner-roles' },
+		{ label: t('myTickets:user'), value: 'partner-users' },
+		{ label: t('myTickets:credit_controller'), value: 'credit_controller' },
+		{ label: t('myTickets:sales_agent'), value: 'sales_agent' },
+		{ label: t('myTickets:kam_owner'), value: 'kam_owner' },
+		{ label: t('myTickets:stakeholders'), value: 'stakeholders' },
+	];
+
+	if (requestType !== 'shipment') {
+		return options?.filter((option) => option?.value !== 'stakeholders');
+	}
+	return options;
 };
 
-export const useReassignTicketsControls = ({ watchType, setUserData }) => {
-	const assignToOptions = useGetAsyncOptions({ ...ASYNC_OPTION_MAPPING[watchType] });
+export const useReassignTicketsControls = ({
+	t = () => {},
+	watchType = '',
+	setUserData = () => {},
+	stakeHoldersData = [],
+	requestType = '',
+}) => {
+	const rolesOptions = useGetAsyncOptionsMicroservice({
+		...{
+			...asyncFieldsPartnerRoles(),
+			params: {
+				filters: {
+					entity_types: ['cogoport'],
+				},
+			},
+		},
+	});
+
+	const usersOptions = useGetAsyncOptions({ ...asyncFieldsPartnerUsers() });
+
+	const stakeholdersOptions = (stakeHoldersData || []).map((itm) => ({
+		label  : itm?.user?.name,
+		value  : itm.user?.id,
+		roleId : itm?.role_id,
+		userId : itm.user?.id,
+	}));
+
+	const ASYNC_OPTION_MAPPING = {
+		'partner-roles' : rolesOptions,
+		'partner-users' : usersOptions,
+		stakeholders    : stakeholdersOptions,
+	};
+
+	const assignToOptions = ASYNC_OPTION_MAPPING[watchType];
 
 	return [
 		{
 			name           : 'type',
-			label          : 'Type',
+			label          : t('myTickets:type'),
 			controllerType : 'select',
 			value          : 'partner-roles',
-			options        : [
-				{ label: 'Role', value: 'partner-roles' },
-				{ label: 'User', value: 'partner-users' },
-				{ label: 'Credit Controller', value: 'credit_controller' },
-				{ label: 'Sales Agent', value: 'sales_agent' },
-				{ label: 'Kam Owner', value: 'kam_owner' },
-			],
+			options        : getShipmentTypeOption({ t, requestType }),
 		},
 		{
 			...(assignToOptions || {}),
 			name           : 'assign_to',
-			label          : 'Assign To',
+			label          : t('myTickets:assign_to'),
 			controllerType : 'select',
 			className      : 'primary md',
-			placeholder    : 'Search by Name',
+			placeholder    : t('myTickets:search_by_name'),
 			onChange       : (_, obj) => setUserData(obj),
+			rules          : { required: true },
+		},
+		{
+			label          : t('myTickets:assign_to'),
+			name           : 'stakeholder',
+			controllerType : 'select',
+			options        : stakeholdersOptions,
+			placeholder    : t('myTickets:search_by_name'),
+			onChange       : (_, obj) => setUserData(obj),
+			rules          : { required: true },
 		},
 		{
 			name           : 'comment',
 			controllerType : 'textarea',
-			label          : 'Comments',
-			placeholder    : 'Enter Comments',
-			rules          : { required: true },
+			label          : t('myTickets:comments'),
+			placeholder    : t('myTickets:enter_comments'),
 		},
 	];
 };

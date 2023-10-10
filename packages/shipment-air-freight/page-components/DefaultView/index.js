@@ -1,6 +1,6 @@
 import { RaiseAlarm, RaiseAlarmCard } from '@cogoport/air-modules/components/RaiseAlarm';
 import useGetShipmentFaultAlarmDescription from '@cogoport/air-modules/hooks/useGetShipmentFaultAlarmDescription';
-import { Tabs, TabPanel, Toggle, Button, cl } from '@cogoport/components';
+import { Tabs, TabPanel, Toggle, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
@@ -9,12 +9,14 @@ import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useContext, useState, useCallback, useEffect } from 'react';
 
+import JobStatus from '../../commons/JobStatus';
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
 import ShipmentTags from '../ShipmentTags';
 import TimeLine from '../TimeLine';
 
+import ReOpenShipment from './ReOpenShipment';
 import styles from './styles.module.css';
 
 const TAB_MAPPING = {
@@ -30,7 +32,12 @@ const TAB_MAPPING = {
 const UNAUTHORIZED_STATUS_CODE = 403;
 const ALLOWED_ROLES = ['superadmin', 'booking_agent', 'service_ops2'];
 
-function HandleRaiseContainer({ shipment_data = {}, alarmId = '', setAlarmId = () => {}, isGettingShipment = false }) {
+function HandleRaiseContainer({
+	shipment_data = {},
+	alarmId = '',
+	setAlarmId = () => {},
+	isGettingShipment = false,
+}) {
 	const isTrue = shipment_data?.stakeholder_types?.some((role) => ALLOWED_ROLES?.includes(role));
 
 	if (!shipment_data?.is_job_closed && isTrue) {
@@ -44,33 +51,39 @@ function HandleRaiseContainer({ shipment_data = {}, alarmId = '', setAlarmId = (
 			</div>
 		);
 	}
-	if (shipment_data?.is_job_closed) {
-		return <div className={cl`${styles.raise_alarm_container} ${styles.job_closed}`}>Job Closed</div>;
-	}
+
 	return null;
 }
 
 function DefaultView() {
 	const router = useRouter();
-
+	const { navigation = '' } = router.query;
 	const {
 		shipment_data = {}, stakeholderConfig = {},
 		getShipmentStatusCode = 0, isGettingShipment = false,
 		refetchServices = () => {},
 	} = useContext(ShipmentDetailContext) || {};
 
-	const { features = [], default_tab = 'tasks' } = stakeholderConfig || {};
+	const {
+		id: shipment_id,
+		is_job_closed_financially = false,
+	} = shipment_data || {};
+
+	const { features = [], default_tab = 'tasks', job_open_request = false } = stakeholderConfig || {};
 	const [activeTab, setActiveTab] = useState(default_tab);
+	const [finJobOpenConfirmation, setFinJobOpenConfirmation] = useState(false);
 
 	const [alarmId, setAlarmId] = useState('');
 	const [reload, setReload] = useState(false);
 
 	const { data: alarmData = {} } = useGetShipmentFaultAlarmDescription(alarmId, reload);
 	const handleVersionChange = useCallback(() => {
-		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data.id}`;
+		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data.id}${
+			navigation ? `?navigation=${navigation}` : ''
+		}`;
 		window.location.replace(newHref);
 		window.sessionStorage.setItem('prev_nav', newHref);
-	}, [router?.query?.partner_id, shipment_data.id]);
+	}, [router?.query?.partner_id, shipment_data.id, navigation]);
 
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
@@ -127,18 +140,34 @@ function DefaultView() {
 			<div className={styles.top_header}>
 				<ShipmentInfo />
 				<div className={styles.toggle_chat}>
-					<Toggle
-						size="md"
-						onLabel="Old"
-						offLabel="New"
-						onChange={handleVersionChange}
+
+					<JobStatus
+						shipment_data={shipment_data}
+						isJobOpenAllowed={job_open_request}
 					/>
+
 					<HandleRaiseContainer
 						shipment_data={shipment_data}
 						alarmId={alarmId}
 						setAlarmId={setAlarmId}
 						isGettingShipment={isGettingShipment}
 					/>
+
+					{is_job_closed_financially && (
+						<ReOpenShipment
+							finJobOpenConfirmation={finJobOpenConfirmation}
+							setFinJobOpenConfirmation={setFinJobOpenConfirmation}
+							shipment_id={shipment_id}
+						/>
+					)}
+
+					<Toggle
+						size="md"
+						onLabel="Old"
+						offLabel="New"
+						onChange={handleVersionChange}
+					/>
+
 					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
 			</div>

@@ -29,10 +29,12 @@ function List({ isSeller = false, source = '' }) {
 	const {
 		servicesList = [], refetchServices = () => {},
 		shipment_data = {}, activeStakeholder = '', primary_service = {}, stakeholderConfig,
-		showRequestCSD,
+		showRequestCSD, refetch: getShipmentRefetch = () => {},
 	} = useContext(ShipmentDetailContext);
 
 	const { trade_type = '', security_dd_type = '' } = primary_service || {};
+
+	const { id = '', is_job_closed = false, is_job_closed_financially = false } = shipment_data || {};
 
 	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
 		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
@@ -138,6 +140,7 @@ function List({ isSeller = false, source = '' }) {
 					<Button
 						onClick={() => setShowRequestModal(true)}
 						className={styles.request_button}
+						disabled={is_job_closed_financially}
 					>
 						Request CSD
 
@@ -148,7 +151,7 @@ function List({ isSeller = false, source = '' }) {
 					? (
 						<Button
 							onClick={() => setShowModal('charge_code')}
-							disabled={shipment_data?.is_job_closed}
+							disabled={is_job_closed_financially}
 						>
 							<span className={styles.add_icon}>+</span>
 							Add Additional Services
@@ -160,7 +163,7 @@ function List({ isSeller = false, source = '' }) {
 					<Button
 						onClick={() => setShowModal('cargo_insurance_service')}
 						className={styles.btn_div}
-						disabled={!!isCargoInsured}
+						disabled={!!isCargoInsured || is_job_closed}
 					>
 						<span className={styles.add_icon}>+</span>
 						Add Cargo Insurance
@@ -208,7 +211,7 @@ function List({ isSeller = false, source = '' }) {
 			{showModal === 'charge_code'
 				? (
 					<AddService
-						shipmentId={shipment_data?.id}
+						shipmentId={id}
 						services={servicesList}
 						isSeller={isSeller}
 						refetch={refetch}
@@ -232,6 +235,7 @@ function List({ isSeller = false, source = '' }) {
 				<NewRequestModal
 					showRequestModal={showRequestModal}
 					setShowRequestModal={setShowRequestModal}
+					getShipmentRefetch={getShipmentRefetch}
 				/>
 			) : null}
 		</section>

@@ -1,9 +1,11 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 import { useState, useEffect } from 'react';
 
 import { useReassignTicketsControls } from '../../configurations/reassign-controls';
 import { REQUIRED_ROLES } from '../../constants';
+import useListShipmentStakeholders from '../../hooks/useGetListShipmentStakeholders';
 import useReassignTicket from '../../hooks/useReassignTicket';
 import { getFieldController } from '../../utils/getFieldController';
 import Confirmation from '../Confirmation';
@@ -12,16 +14,23 @@ import styles from './styles.module.css';
 
 function ReassignTicket({
 	ticketId = '', showReassign = true, setShowReassign = () => {}, getTicketActivity = () => {},
-	getTicketDetails = () => {}, setListData = () => {},
+	getTicketDetails = () => {}, setListData = () => {}, ticket = {},
 }) {
+	const { Data: data = {} } = ticket || {};
+	const { RequestType: requestType = '' } = data || {};
+
+	const { t } = useTranslation(['myTickets']);
+
 	const [userData, setUserData] = useState({});
 	const [showConfirmation, setShowConfirmation] = useState(false);
 
 	const { control, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm();
 
+	const { stakeHoldersData = [] } = useListShipmentStakeholders({ requestType });
+
 	const watchType = watch('type');
 
-	const controls = useReassignTicketsControls({ watchType, setUserData });
+	const controls = useReassignTicketsControls({ t, watchType, setUserData, stakeHoldersData, requestType });
 
 	const { reassignTicket, reassignLoading } = useReassignTicket({
 		ticketId,
@@ -40,7 +49,6 @@ function ReassignTicket({
 		await reassignTicket({ val, type: watchType, userData });
 		handleClose();
 	};
-
 	useEffect(() => {
 		setValue('assign_to', '');
 	}, [watchType, setValue]);
@@ -52,7 +60,7 @@ function ReassignTicket({
 			onClose={handleClose}
 		>
 			<form onSubmit={handleSubmit(handleReassignTicket)}>
-				<Modal.Header title={`Re-Assign Ticket (${ticketId})`} />
+				<Modal.Header title={`${t('myTickets:re_assign_ticket')} (${ticketId})`} />
 
 				<Modal.Body>
 					<div>
@@ -60,8 +68,11 @@ function ReassignTicket({
 							const elementItem = { ...controlItem };
 							const { name, label, controllerType } = elementItem || {};
 							const Element = getFieldController(controllerType);
+							const hideAssignField = name === 'assign_to' && watchType === 'stakeholders';
+							const hidestakeholderField = name === 'stakeholder' && watchType !== 'stakeholders';
 
-							if (!Element || (name === 'assign_to' && !REQUIRED_ROLES.includes(watchType))) {
+							if (!Element || (name === 'assign_to' && !REQUIRED_ROLES.includes(watchType))
+								|| hideAssignField || hidestakeholderField) {
 								return null;
 							}
 
@@ -78,7 +89,10 @@ function ReassignTicket({
 										size="sm"
 										control={control}
 									/>
-									<div className={styles.error}>{errors?.[controlItem.name] && 'Required'}</div>
+
+									<div className={styles.error}>
+										{errors?.[controlItem.name] && t('myTickets:required')}
+									</div>
 								</div>
 							);
 						})}
@@ -89,12 +103,13 @@ function ReassignTicket({
 					{showConfirmation
 						? (
 							<Confirmation
+								t={t}
 								loading={reassignLoading}
 								handleChange={setShowConfirmation}
 							/>
 						) : (
 							<Button size="md" onClick={() => setShowConfirmation(true)} loading={reassignLoading}>
-								Submit
+								{t('myTickets:submit')}
 							</Button>
 						)}
 				</Modal.Footer>

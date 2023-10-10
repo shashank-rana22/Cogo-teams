@@ -1,10 +1,9 @@
-import { SingleDateRange, cl, MultiSelect, Toggle } from '@cogoport/components';
+import { SingleDateRange, cl, MultiSelect } from '@cogoport/components';
 import { AsyncSelectController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMInfo } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 
-import { ACCOUNT_MODE_OPTIONS } from '../../../configurations/ap-ar-settlement/acc-filter';
+import { accountModeOptions } from '../../../configurations/ap-ar-settlement/acc-filter';
 
 import styles from './styles.module.css';
 
@@ -13,16 +12,11 @@ function Filters({
 	onFiltersChange = () => {},
 	loading = false,
 }) {
-	const handleFilterChange = (filterName, value) => {
-		onFiltersChange(filterName, value);
-	};
-
-	const { query } = useRouter();
+	const { t = () => {} } = useTranslation(['settlement']);
 
 	const { control } = useForm();
-
-	const handleVersionChange = () => {
-		window.location.href = `/${query.partner_id}/business-finance/settlement/ap-ar-settlement`;
+	const handleFilterChange = (filterName, value) => {
+		onFiltersChange(filterName, value);
 	};
 
 	return (
@@ -30,32 +24,22 @@ function Filters({
 
 			<div className={styles.header}>
 				<span className={styles.criteria}>
-					Selection Criteria
-					<IcMInfo style={{ marginLeft: '4px' }} />
+					{t('settlement:selection_criteria_label')}
 				</span>
-				<div>
-					<Toggle
-						name="toggle"
-						size="md"
-						onLabel="Old"
-						offLabel="New"
-						onChange={handleVersionChange}
-					/>
-				</div>
 			</div>
 
 			<div className={styles.horizontal} />
 			<br />
 			<div className={styles.select}>
 				<div className={cl`${styles.entity} ${styles.reqMargin}`}>
-					Site/Entity
+					{t('settlement:site_entity_text')}
 					<AsyncSelectController
 						style={{ height: '32px' }}
 						control={control}
 						name="entityCode"
 						asyncKey="list_cogo_entity"
 						renderLabel={(item) => `${item?.entity_code} - ${item?.business_name}`}
-						placeholder="Select Entity"
+						placeholder={t('settlement:select_entity_placeholder') || ''}
 						labelKey="business_name"
 						value={filters?.entityCode}
 						initialCall
@@ -67,9 +51,9 @@ function Filters({
 				</div>
 
 				<div className={styles.reqMargin}>
-					Date
+					{t('settlement:date_text')}
 					<SingleDateRange
-						placeholder="Enter Date"
+						placeholder={t('settlement:date_placeholder') || ''}
 						dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
 						name="date"
 						isPreviousDaysAllowed
@@ -80,13 +64,13 @@ function Filters({
 				</div>
 
 				<div className={styles.reqMargin}>
-					Trade Party
+					{t('settlement:trade_party_text')}
 					<AsyncSelectController
 						control={control}
 						name="orgId"
 						asyncKey="list_trade_parties"
 						renderLabel={(item) => `${item?.legal_business_name}`}
-						placeholder="Business Partner"
+						placeholder={t('settlement:trade_party_placeholder') || ''}
 						labelKey="legal_business_name"
 						value={filters?.tradeParty}
 						initialCall
@@ -99,13 +83,13 @@ function Filters({
 				</div>
 
 				<div className={styles.reqMargin}>
-					Acc Mode
+					{t('settlement:acc_mode_placeholder')}
 					<MultiSelect
 						value={filters?.accMode}
 						className={styles.reqMargin}
 						onChange={(e) => handleFilterChange('accMode', e)}
-						placeholder="Acc Mode"
-						options={ACCOUNT_MODE_OPTIONS}
+						placeholder={t('settlement:acc_mode_placeholder') || ''}
+						options={accountModeOptions({ t })}
 						isClearable
 						style={{ width: '250px' }}
 					/>

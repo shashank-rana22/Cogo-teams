@@ -1,0 +1,13 @@
+.main_container {
+	padding: 10px 20px;
+}
+
+.submit_button {
+	display: flex;
+	justify-content: flex-end;
+	margin: 15px 0;
+}
+
+.submit {
+	margin-left: 15px;
+}

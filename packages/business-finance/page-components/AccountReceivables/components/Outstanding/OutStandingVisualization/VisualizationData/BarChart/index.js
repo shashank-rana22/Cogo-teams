@@ -19,7 +19,7 @@ const TOOLTIP_STYLE = {
 	zIndex       : 10,
 	color        : '#000',
 };
-const FOURTY = 40;
+const LABEL_OFF_SET_FIFTY = 50;
 const TEN = 10;
 const TWO = 2;
 const ZERO = 0;
@@ -37,7 +37,7 @@ function BarChart({ data = [], filterValues = {}, setSelectedBarData = () => {} 
 
 	const finalData = bifurcation_type === 'service' ? formattedData : data;
 
-	const getAmount = (amount, decimal = 4) => formatAmount({
+	const getAmount = (amount, decimal = 2) => formatAmount({
 		amount   : amount || ZERO,
 		currency : ENTITY_CURRENCY[Number(bifurcation_type)],
 		options  : {
@@ -50,13 +50,13 @@ function BarChart({ data = [], filterValues = {}, setSelectedBarData = () => {} 
 
 	const handleHover = (_, val) => {
 		const event = val;
-		event.target.style.cursor =			view_type === 'outstanding' ? 'pointer' : 'auto';
+		event.target.style.cursor = view_type === 'outstanding' ? 'pointer' : 'auto';
 	};
 
 	const barTotalsLayer = (props) => {
 		const { bars, xScale, yScale } = props || {};
 
-		const labelOffset = bifurcation_type === 'ageing_bucket' ? FOURTY : TEN;
+		const labelOffset = bifurcation_type === 'ageing_bucket' ? LABEL_OFF_SET_FIFTY : TEN;
 		const LABEL_FONT_SIZE = 12;
 		if (isEmpty(bars)) return null;
 		// compute totals for each index/bar

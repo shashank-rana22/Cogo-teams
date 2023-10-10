@@ -21,6 +21,7 @@ const PAGE_SIZE = 2;
 const CHECK_DATA_LENGTH = 0;
 
 function VisualizationData({
+	entityCode = '',
 	openVisualization = false,
 }) {
 	const [selectedBarData, setSelectedBarData] = useState();
@@ -47,6 +48,7 @@ function VisualizationData({
 		filterValues,
 		kamOwnerId,
 		toggleValue,
+		entityCode,
 	);
 	const { page_number } = filters || {};
 
@@ -86,7 +88,6 @@ function VisualizationData({
 			<LineChart data={data} />
 		);
 	}
-
 	const handleTabs = (e) => {
 		setFilterValues((prev) => ({
 			...prev,
@@ -99,16 +100,32 @@ function VisualizationData({
 		<div className={styles.visualization_container}>
 			{openVisualization && (
 				<>
-					<Headers
-						filterValues={filterValues}
-						setFilterValues={setFilterValues}
-						setSelectedBarData={setSelectedBarData}
-						setKamOwnerId={setKamOwnerId}
-						setToggleValue={setToggleValue}
-						toggleValue={toggleValue}
-						loading={loading}
-						setFilters={setFilters}
-					/>
+					<div className={styles.visualization_header_container}>
+						{!toggleValue && (
+							<div className={styles.tab_container}>
+								<Tabs
+									activeTab={filterValues?.view_type}
+									themeType="primary"
+									onChange={handleTabs}
+									className={styles.custom_tabs}
+								>
+									<TabPanel name="outstanding" title="Outstanding" />
+									<TabPanel name="invoice" title="Invoice" />
+									<TabPanel name="payment" title="Payment" />
+								</Tabs>
+							</div>
+						)}
+						<Headers
+							filterValues={filterValues}
+							setFilterValues={setFilterValues}
+							setSelectedBarData={setSelectedBarData}
+							setKamOwnerId={setKamOwnerId}
+							setToggleValue={setToggleValue}
+							toggleValue={toggleValue}
+							loading={loading}
+							setFilters={setFilters}
+						/>
+					</div>
 					<div className={styles.chart_container}>
 						<div
 							className={cl`${disabled ? styles.arrow_container_disabled : styles.arrow_container} `}
@@ -132,20 +149,6 @@ function VisualizationData({
 							/>
 						</div>
 					</div>
-					{!toggleValue && (
-						<div className={styles.tab_container}>
-							<Tabs
-								activeTab={filterValues.view_type}
-								themeType="primary"
-								onChange={(e) => handleTabs(e)}
-								className={styles.custom_tabs}
-							>
-								<TabPanel name="outstanding" title="Outstanding" />
-								<TabPanel name="invoice" title="Invoice" />
-								<TabPanel name="payment" title="Payment" />
-							</Tabs>
-						</div>
-					)}
 					{!toggleValue
 						&& filterValues.view_type === 'outstanding'
 						&& selectedBarData?.id !== 'on_account_amount' && (
@@ -158,6 +161,7 @@ function VisualizationData({
 										barData={data}
 										setKamOwnerId={setKamOwnerId}
 										pageNumber={page_number}
+										entityCode={entityCode}
 									/>
 								)}
 							</>

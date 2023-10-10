@@ -39,7 +39,7 @@
     "view_btn": "查看",
     "invoice_proforma_search": "按发票/形式发票编号搜索",
     "user_label": "用户",
-    "levels_label": "级别",
+    "levels_label": "l",
     "id_label": "ID",
     "incident_type_label": "事故类型",
     "incident_sub_type_label": "事故子类型",
@@ -69,7 +69,8 @@
     "urgent": "紧急",
     "no_data": "无数据",
     "payment_confirmation_label": "付款确认",
-    "select_category_placeholder": "类别",
+    "select_category_placeholder": "请求类型",
+    "select_request_sub_type_placeholder": "请求子类型",
     "select_urgency_placeholder": "紧急情况",
     "urgency_label_all": "全部",
     "urgency_label_urgent": "紧急",
@@ -228,5 +229,10 @@
     "approval_type_required_message": "必须填写批准类型",
     "entity_code_required_message": "必须填写实体代码",
     "user_required_message": "必须填写用户",
-    "criteria_required_message": "必须填写标准"
+    "criteria_required_message": "必须填写标准",
+    "shipment_re_open_request": "货件重新打开请求",
+    "job_open_label": "职位空缺",
+    "total_buy_label": "总购买量",
+    "total_sell_label": "总销售",
+    "profit_margin_label" : "利润率"
 }

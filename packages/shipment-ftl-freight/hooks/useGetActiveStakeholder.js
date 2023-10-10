@@ -9,21 +9,29 @@ const useGetActiveStakeholder = () => {
 	const { role_ids } = useSelector(({ profile }) => ({ role_ids: profile?.partner?.user_role_ids }));
 
 	const stakeholderMap = [
+		{ role_ids: geo.uuid.kam_manager_ids, stakeholder: 'booking_agent_manager' },
 		{ role_ids: geo.uuid.kam_ids, stakeholder: 'booking_agent' },
 		{ role_ids: geo.uuid.service_ops1_role_ids, stakeholder: 'booking_desk' },
 		{ role_ids: [geo.uuid.so_1_manager], stakeholder: 'booking_desk_manager' },
 		{ role_ids: geo.uuid.service_ops2_role_id, stakeholder: 'document_desk' },
 		{ role_ids: [geo.uuid.so_2_manager], stakeholder: 'document_desk_manager' },
-		{ role_ids: [geo.uuid.super_admin_id, geo.uuid.tech_super_admin_id], stakeholder: 'superadmin' },
+		{
+			role_ids: [
+				geo.uuid.super_admin_id, geo.uuid.tech_super_admin_id, geo.uuid.data_superadmin],
+			stakeholder: 'superadmin',
+		},
 		{ role_ids: geo.uuid.sales_role, stakeholder: 'sales_agent' },
+		{ role_ids: geo.uuid.costbooking_ops_manager_role_ids, stakeholder: 'costbooking_manager' },
 		{ role_ids: [geo.uuid.admin_id], stakeholder: 'admin' },
 		{ role_ids: [geo.uuid.prod_process_owner], stakeholder: 'prod_process_owner' },
 		{ role_ids: [geo.uuid.coe_head], stakeholder: 'coe_head' },
+		{ role_ids: geo.uuid.kam_admin, stakeholder: 'kam_admin' },
 		{ role_ids: [geo.uuid.coe_finance_head, geo.uuid.prod_settlement_executive], stakeholder: 'credit_control' },
 		{ role_ids: [geo.uuid.corporate_owner_id], stakeholder: 'corporate_owner' },
 		{ role_ids: geo.uuid.credit_controller_ids, stakeholder: 'credit_controller' },
 		{ role_ids: geo.uuid.service_ops3_role_ids, stakeholder: 'service_ops3' },
 		{ role_ids: [geo.uuid.ftl_ground_ops_role_id], stakeholder: 'ftl_ground_ops' },
+		{ role_ids: geo.uuid.operation_manager, stakeholder: 'operation_manager' },
 		{ role_ids: [geo.uuid.field_service_ops_role_id], stakeholder: 'field_service_ops' },
 		{ role_ids: [geo.uuid.kam_service_ops1_role_id], stakeholder: 'kam_so1' },
 	];

@@ -24,6 +24,7 @@ function VoiceList(voiceProps) {
 		activeVoiceCard = {},
 		activeTab = '',
 		fetchUnreadCall = () => {},
+		viewType = '',
 	} = voiceProps;
 
 	const [searchValue, setSearchValue] = useState('');
@@ -35,7 +36,7 @@ function VoiceList(voiceProps) {
 		appliedFilters = {},
 		setAppliedFilters = () => {},
 		setListData = () => {},
-	} = useGetVoiceCallList({ activeTab, searchValue });
+	} = useGetVoiceCallList({ activeTab, searchValue, viewType });
 
 	const { updateMissedVoiceCount } = useUpdateVoiceCallRecord({ fetchUnreadCall });
 
@@ -186,7 +187,7 @@ function VoiceList(voiceProps) {
 										<div className={styles.activity_duration}>
 											{ start_time_of_call ? formatDate({
 												date       : new Date(start_time_of_call),
-												timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm a'],
+												timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 												formatType : 'time',
 											}) : ''}
 										</div>

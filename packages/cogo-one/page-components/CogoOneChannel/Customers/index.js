@@ -9,12 +9,14 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useGetUnreadCallsCount from '../../../hooks/useGetUnreadCallsCount';
 import useGetUnreadMailsCount from '../../../hooks/useGetUnreadMailsCount';
 import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
+import useGetUnreadTeamsCount from '../../../hooks/useGetUnreadTeamsCount';
 
 import AgentSettings from './AgentSettings';
 import CommunicationModals from './CommunicationModals';
 import MailsList from './MailList';
 import MessageList from './MessageList';
 import styles from './styles.module.css';
+import Teams from './Teams';
 import VoiceList from './VoiceList';
 
 const COMPONENT_MAPPING = {
@@ -22,9 +24,10 @@ const COMPONENT_MAPPING = {
 	voice           : VoiceList,
 	outlook         : MailsList,
 	firebase_emails : MailsList,
+	teams           : Teams,
 };
 
-const DEFAULT_PADDING_NOT_REQUIRED = ['outlook', 'firebase_emails'];
+const DEFAULT_PADDING_NOT_REQUIRED = ['outlook', 'firebase_emails', 'teams'];
 
 function Customers({
 	setActiveTab = () => {},
@@ -68,7 +71,10 @@ function Customers({
 		viewType,
 		agentId: userId,
 		isBotSession,
+		userSharedMails,
 	});
+
+	const { unreadTeamsCount = 0 } = useGetUnreadTeamsCount({ firestore });
 
 	const { data = {}, fetchUnreadCall = () => {} } = useGetUnreadCallsCount({ activeTab });
 
@@ -89,6 +95,7 @@ function Customers({
 			setAutoAssignChats,
 			workPrefernceLoading,
 			setSendBulkTemplates,
+			mailsToBeShown: userSharedMails,
 		},
 		voice: {
 			setActiveVoiceCard: (val) => {
@@ -96,6 +103,7 @@ function Customers({
 			},
 			activeVoiceCard : activeTab?.data || {},
 			activeTab       : activeTab?.tab,
+			viewType,
 		},
 		outlook: {
 			mailProps,
@@ -108,6 +116,20 @@ function Customers({
 			mailsToBeShown: userSharedMails,
 			firestore,
 			userId,
+			isBotSession,
+		},
+		teams: {
+			setActiveTeamCard: (val) => {
+				setActiveTab((prev) => ({
+					...prev,
+					data: val,
+				}));
+			},
+			activeTeamCard  : activeTab?.data || {},
+			activeTab       : activeTab?.tab,
+			viewType,
+			firestore,
+			loggedInAgentId : userId,
 		},
 	};
 
@@ -116,6 +138,7 @@ function Customers({
 		unReadMissedCallCount,
 		unReadMailsCount,
 		viewType,
+		unreadTeamsCount,
 	});
 
 	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
@@ -217,6 +240,7 @@ function Customers({
 				viewType={viewType}
 				setOpenKamContacts={setOpenKamContacts}
 				setSendBulkTemplates={setSendBulkTemplates}
+				firestore={firestore}
 			/>
 		</div>
 	);

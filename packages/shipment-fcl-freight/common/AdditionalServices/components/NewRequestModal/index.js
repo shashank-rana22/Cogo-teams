@@ -31,13 +31,22 @@ const getCollectionPartyParams = (organization_id = '') => ({
 function NewRequestModal({
 	showRequestModal = false,
 	setShowRequestModal = () => {},
+	getShipmentRefetch = () => {},
 }) {
 	const { partner, user } = useSelector(({ profile }) => profile);
 
-	const { loading = false, apiTrigger = () => {} } = useAdvanceDocument({ setShowRequestModal });
+	const refetchAdvanceDocument = () => {
+		setShowRequestModal(false);
+		getShipmentRefetch();
+	};
+
+	const { loading = false, apiTrigger = () => {} } = useAdvanceDocument({ refetchAdvanceDocument });
 	const { listEntities = {} } = useGetEntities();
 
-	const { primary_service = {}, shipment_data: { serial_id } } = useContext(ShipmentDetailContext);
+	const {
+		primary_service = {},
+		shipment_data: { serial_id = '', shipment_type = '' },
+	} = useContext(ShipmentDetailContext);
 
 	const organization_id = primary_service?.service_provider?.id || '';
 	const { handleModifiedOptions = () => {} } = getCollectionPartyDetails();
@@ -105,6 +114,7 @@ function NewRequestModal({
 		const payload = getAdvanceDocumentPayload({
 			performedById : user?.id || '',
 			serial_id,
+			shipment_type,
 			formValues,
 			billingParty,
 			billingPartyAddress,

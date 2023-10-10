@@ -16,6 +16,7 @@ function KamOrgData({
 	setFilters = () => {},
 	filters = {},
 	barData = [],
+	entityCode = '',
 }) {
 	const { data, loading } = useGetQueryBuilder({
 		kamOwner,
@@ -24,6 +25,7 @@ function KamOrgData({
 		outstandingPagination : filters,
 		path                  : 'kam_owners',
 		barGraphData          : barData,
+		entityCode,
 	});
 
 	if (loading) {
@@ -50,6 +52,7 @@ function KamOrgData({
 					filterValues={filterValues}
 					key={val?.credit_controller_id}
 					barData={barData}
+					entityCode={entityCode}
 				/>
 			))}
 			<div className={styles.pagination_container}>

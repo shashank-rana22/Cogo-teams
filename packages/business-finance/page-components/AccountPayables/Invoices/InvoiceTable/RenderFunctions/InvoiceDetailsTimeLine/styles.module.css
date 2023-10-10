@@ -12,7 +12,6 @@
 }
 
 .icon_view {
-	margin-left: 12px;
 	color: #f68b21;
 	cursor: pointer;
 }
@@ -156,5 +155,9 @@
 
 .amount {
 	margin-left: 4px;
+	font-weight: 600;
+}
+
+.supplier {
 	font-weight: 600;
 }

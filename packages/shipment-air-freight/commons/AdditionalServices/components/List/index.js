@@ -24,8 +24,9 @@ function List({ isSeller = false, source = '' }) {
 	const { servicesList, refetchServices, shipment_data, stakeholderConfig } = useContext(
 		ShipmentDetailContext,
 	);
+	const { id = '', is_job_closed_financially = false, inco_term = '' } = shipment_data || {};
 
-	const tradeType = GLOBAL_CONSTANTS.options.inco_term?.[shipment_data?.inco_term]?.trade_type;
+	const tradeType = GLOBAL_CONSTANTS.options.inco_term?.[inco_term]?.trade_type;
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
@@ -123,14 +124,16 @@ function List({ isSeller = false, source = '' }) {
 					<Button
 						onClick={() => setTerminalChargeModal(true)}
 						className={styles.terminal_charges}
+						disabled={is_job_closed_financially}
 					>
 						<div className={styles.add_icon}>+</div>
 						Add Terminal Charge
 					</Button>
 				) : null}
+
 				<Button
 					onClick={() => setShowModal('charge_code')}
-					disabled={shipment_data?.is_job_closed}
+					disabled={is_job_closed_financially}
 				>
 					<div className={styles.add_icon}>+</div>
 					Add Additional Services
@@ -162,7 +165,7 @@ function List({ isSeller = false, source = '' }) {
 
 			{showModal === 'charge_code' && (
 				<AddService
-					shipmentId={shipment_data?.id}
+					shipmentId={id}
 					services={servicesList}
 					isSeller={isSeller}
 					refetch={refetch}
@@ -177,7 +180,7 @@ function List({ isSeller = false, source = '' }) {
 					<ConfirmTerminalChargeModal
 						terminalChargeModal={terminalChargeModal}
 						setTerminalChargeModal={setTerminalChargeModal}
-						shipment_id={shipment_data?.id}
+						shipment_id={id}
 					/>
 				) : null}
 

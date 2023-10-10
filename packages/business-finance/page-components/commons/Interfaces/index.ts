@@ -33,9 +33,11 @@ export interface FieldType {
 	label?: string | ReactNode;
 	sorting?: SortingType;
 	span: number;
+	hideColumn?: boolean;
 	className?: string;
 	styles?: NestedObj;
 	func?: string;
+	infoIconRequired?: boolean;
 }
 
 export interface TableProps {
@@ -54,7 +56,7 @@ export interface TableProps {
 }
 
 export interface ListDataProps {
-	list: object[];
+	list?: object[];
 	pageIndex?: number;
 	totalPage?: number;
 	totalRecords?: number;

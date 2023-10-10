@@ -1,9 +1,9 @@
 import { Modal, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect } from 'react';
 
-import useGetJVList from '../../../hooks/useGetJvsList';
 import usePaymentsSettlementCheck from '../../../hooks/usePaymentsSettlementCheck';
 import CreateJvModal from '../../JournalVoucher/CreateJvModal/index.tsx';
 
@@ -18,10 +18,13 @@ const ZERO_VALUE = 0;
 export default function MatchModal({
 	matchModalShow = false, setMatchModalShow = () => {},
 	selectedData = [], filters = {}, setSelectedData = () => {},
+	loading = false,
 	isDelete = false, setIsDelete = () => {},
 	reRender = false, setReRender = () => {},
 	matchBal = 0, submitSettleMatch = () => {}, settleLoading = true,
+	refetch = () => {}, setJvSearch = '',
 }) {
+	const { t = () => {} } = useTranslation(['settlement']);
 	const [updateBal, setUpdateBal] = useState(matchBal);
 	const [dryRun, setDryRun] = useState(false);
 	const [showJV, setShowJV] = useState(false);
@@ -32,15 +35,13 @@ export default function MatchModal({
 	const [settleConfirmation, setSettleConfirmation] = useState(false);
 
 	const {
-		checkData, postPaymentsSettlementCheck, checkLoading,
-		success, setSuccess,
-	} = usePaymentsSettlementCheck({ selectedData: updatedData, date });
+		checkData = {}, postPaymentsSettlementCheck = () => {}, checkLoading = false,
+		success = false, setSuccess = () => {},
+	} = usePaymentsSettlementCheck({ selectedData: updatedData, date, t });
+
 	const [canSettle, setCanSettle] = useState(checkData?.canSettle || false);
 	const [checkedData, setCheckedData] = useState(checkData?.stackDetails || []);
 	const dryRunData = (dryRun ? (checkData?.stackDetails) : []);
-	const {
-		jvListRefetch,
-	} = useGetJVList({ filters });
 	function onClose() {
 		setMatchModalShow(false);
 		setUpdatedData(JSON.parse(JSON.stringify(selectedData)));
@@ -61,7 +62,7 @@ export default function MatchModal({
 	useEffect(() => {
 		setCheckedData(checkData?.stackDetails || []);
 		setCanSettle(checkData?.canSettle || false);
-	}, [checkData]);
+	}, [checkData?.stackDetails, checkData?.canSettle]);
 
 	useEffect(() => {
 		if (success && !isEmpty(checkedData)) {
@@ -102,6 +103,7 @@ export default function MatchModal({
 						dryRun={dryRun}
 						fileValue={fileValue}
 						checkLoading={checkLoading}
+						t={t}
 					/>
 				)}
 				/>
@@ -124,6 +126,7 @@ export default function MatchModal({
 						checkLoading={checkLoading}
 						setUpdateBal={setUpdateBal}
 						setCanSettle={setCanSettle}
+						loading={loading}
 					/>
 				</Modal.Body>
 				<Modal.Footer>
@@ -131,7 +134,7 @@ export default function MatchModal({
 						disabled={!canSettle || !dryRun || settleLoading}
 						onClick={() => setSettleConfirmation(true)}
 					>
-						Settle
+						{t('settlement:settle_btn')}
 					</Button>
 					{
 						settleConfirmation
@@ -145,6 +148,8 @@ export default function MatchModal({
 									fileValue={fileValue}
 									settleLoading={settleLoading}
 									setMatchModalShow={setMatchModalShow}
+									t={t}
+									setJvSearch={setJvSearch}
 								/>
 							) : null
 					}
@@ -155,10 +160,12 @@ export default function MatchModal({
 					show={showJV}
 					setShow={setShowJV}
 					onClose={() => setShowJV(false)}
-					refetch={jvListRefetch}
+					refetch={refetch}
 					Entity={filters?.entityCode}
 					selectedData={updatedData}
 					line_items={LINE_ITEMS}
+					setJvSearch={setJvSearch}
+					setDryRun={setDryRun}
 				/>
 			) : null}
 		</div>

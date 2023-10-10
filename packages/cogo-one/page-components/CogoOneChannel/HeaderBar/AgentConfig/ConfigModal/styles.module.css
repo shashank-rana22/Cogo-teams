@@ -4,8 +4,9 @@
 }
 
 .modal_body {
-	height: 464px;
+	height: 344px;
 	padding: 8px 0;
+	border-top: 1px solid #dedede;
 }
 
 .footer_styles {
@@ -36,7 +37,7 @@
 	align-items: center;
 	justify-content: center;
 	width: 30%;
-	height: 48%;
+	height: 46%;
 	margin: 6px;
 	cursor: pointer;
 	background: #fef3e9;
@@ -58,5 +59,29 @@
 }
 
 .modal_header {
+	display: flex;
+	align-items: center;
 	padding: 10px 16px;
+
+	:global {
+		.ui_modal_header_title {
+			display: flex;
+			align-items: center;
+
+			>div {
+				font-weight: 600;
+			}
+		}
+	}
+}
+
+.header_label {
+	font-weight: 600;
+}
+
+.back_icon {
+	width: 30px;
+	height: 20px;
+	margin: 0 10px 0 0;
+	cursor: pointer;
 }

@@ -2,18 +2,16 @@ import { Button, TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { getTaxLabels } from '../../../../constants/index';
-import useGetPartnerRmMapping from '../../../../hooks/useGetPartnerRmMapping';
 
 import DownloadLedgerModal from './DownloadLedgerModal';
-import PopoverTags from './PopoverTags';
 import StatsOutstanding from './StatsOutstanding/index';
 import styles from './styles.module.css';
 import TabsOptions from './TabOptions';
+import UserDetails from './UserDetails';
 
 interface CreditController {
 	id?: string;
@@ -47,6 +45,7 @@ interface OutstandingListProps {
 	outStandingFilters?: object;
 	formFilters?: object;
 	organizationId?: string;
+	setSelectedOrgId?: any;
 }
 
 function OutstandingList({
@@ -54,16 +53,12 @@ function OutstandingList({
 	entityCode = '',
 	showElement = false,
 	organizationId = '',
+	setSelectedOrgId = () => {},
 }: OutstandingListProps) {
-	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('invoice_details');
 	const [showLedgerModal, setShowLedgerModal] = useState(false);
 
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
-	const { data, getPartnerMappingData, loading } = useGetPartnerRmMapping();
-	const handleClick = (val) => {
-		getPartnerMappingData(val);
-	};
 
 	const handleActiveTabs = (val) => {
 		if (val === activeTab) {
@@ -126,14 +121,6 @@ function OutstandingList({
 			</div>
 		);
 	}
-
-	const handleViewDetailClick = () => {
-		router.push(
-			`/business-finance/account-receivables/outstanding/
-			viewOrgDetail/?orgSerialId=${organizationSerialId}&entityCode=${entityCode}
-			&organizationId=${organizationId}`,
-		);
-	};
 
 	return (
 		<div
@@ -254,26 +241,23 @@ function OutstandingList({
 							</div>
 						)}
 					</div>
-					<div className={styles.category_container}>
-						<PopoverTags
-							data={data}
-							loading={loading}
-							handleClick={handleClick}
-							item={item}
-						/>
-					</div>
 					<div className={styles.ledger_style}>
+						{isEmpty(item) ? null : (
+							<UserDetails item={item} />
+						)}
 						<Tooltip content="Ledger Download" placement="top">
-							<IcMDownload
-								className={styles.download_icon_div}
-								onClick={() => setShowLedgerModal(true)}
-							/>
+							<div className={styles.download_icon_div}>
+								<IcMDownload
+									fill="black"
+									onClick={() => setShowLedgerModal(true)}
+								/>
+							</div>
 						</Tooltip>
 						{!showElement && (
 							<Button
 								size="md"
 								style={{ marginLeft: '20px' }}
-								onClick={() => handleViewDetailClick()}
+								onClick={() => setSelectedOrgId(item)}
 							>
 								View Details
 							</Button>
@@ -284,7 +268,6 @@ function OutstandingList({
 				<div className={styles.org_list}>
 					<StatsOutstanding item={item} />
 				</div>
-
 				{showElement && (
 					<Tabs
 						activeTab={activeTab}

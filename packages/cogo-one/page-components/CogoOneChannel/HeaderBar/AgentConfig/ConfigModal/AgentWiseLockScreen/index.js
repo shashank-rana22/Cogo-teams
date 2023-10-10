@@ -1,4 +1,4 @@
-import { Input, Select } from '@cogoport/components';
+import { Input, Select, Toggle } from '@cogoport/components';
 import { IcMSearchlight, IcMArrowBack, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -21,6 +21,8 @@ function AgentWiseLockScreen({
 	setAgentType = () => {},
 	setActiveCard = () => {},
 	firestore = {},
+	setIsInActive = () => {},
+	isInActive = false,
 }) {
 	const {
 		updateAgentPreference = () => {},
@@ -37,12 +39,22 @@ function AgentWiseLockScreen({
 	return (
 		<div className={styles.padding_inner}>
 			<div className={styles.search_switch_toggle_space}>
-				<div><IcMArrowBack className={styles.back_icon} onClick={() => setActiveCard('')} /></div>
+				<div><IcMArrowBack className={styles.back_icon} onClick={() => setActiveCard('config_modal')} /></div>
 				<div className={styles.toogle_section}>
 					<IcMRefresh className={styles.refresh_icon} onClick={() => syncWorkPreference()} />
 				</div>
 			</div>
 			<div className={styles.header_filters}>
+				<Toggle
+					name="a4"
+					size="sm"
+					disabled={false}
+					onLabel="Inactive"
+					offLabel="Active"
+					onChange={() => setIsInActive((prev) => !prev)}
+					value={!isInActive}
+				/>
+
 				<Input
 					size="sm"
 					placeholder="Search here"

@@ -1,3 +1,4 @@
+import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
 import List from '../../commons/List/index.tsx';
@@ -10,7 +11,12 @@ import renderFunctions from './renderFunction';
 import styles from './styles.module.css';
 
 function Payruns({ activeEntity = '' }) {
-	const [activePayrunTab, setActivePayrunTab] = useState('INITIATED');
+	const {
+		query = {},
+	} = useSelector(({ general }) => ({
+		query: general?.query,
+	}));
+	const [activePayrunTab, setActivePayrunTab] = useState(query?.initiated || 'INITIATED');
 	const [isInvoiceView, setIsInvoiceView] = useState(false);
 	const [overseasData, setOverseasData] = useState('NORMAL');
 	const [viewId, setViewId] = useState(null);
@@ -29,6 +35,7 @@ function Payruns({ activeEntity = '' }) {
 		setOverseasData,
 		setViewId,
 		setCheckedRow,
+		activeEntity,
 	});
 
 	const { functions } = renderFunctions(
@@ -79,35 +86,38 @@ function Payruns({ activeEntity = '' }) {
 					loading={loading}
 				/>
 			) : null}
-			<List
-				itemData={data}
-				config={config}
-				loading={loading}
-				functions={functions}
-				page={globalFilters.pageIndex}
-				pageSize={10}
-				sort={sort}
-				setSort={setSort}
-				handlePageChange={(val) => setGlobalFilters((prev) => ({
-					...prev,
-					pageIndex: val,
-				}))}
-				showPagination
-				viewId={viewId}
-				dropDownData={dropDownData}
-				loadingDropDown={loadingDropDown}
-				activePayrunTab={activePayrunTab}
-				paginationType="number"
-				renderDropDown={(singleitem) => (
-					<RenderPaidAccordian
-						dropDownData={dropDownData}
-						loadingDropDown={loadingDropDown}
-						viewId={viewId}
-						singleitem={singleitem}
-						country_code={country_code}
-					/>
-				)}
-			/>
+			<div className={styles.list_container}>
+				<List
+					itemData={data}
+					config={config}
+					loading={loading}
+					functions={functions}
+					page={globalFilters.pageIndex}
+					pageSize={10}
+					sort={sort}
+					setSort={setSort}
+					handlePageChange={(val) => setGlobalFilters((prev) => ({
+						...prev,
+						pageIndex: val,
+					}))}
+					showPagination
+					dropDownData={dropDownData}
+					loadingDropDown={loadingDropDown}
+					activePayrunTab={activePayrunTab}
+					paginationType="number"
+					idKey="objectId"
+					showId={viewId}
+					RenderAccordianData={(props) => (
+						<RenderPaidAccordian
+							dropDownData={dropDownData}
+							loadingDropDown={loadingDropDown}
+							viewId={viewId}
+							singleitem={props}
+							country_code={country_code}
+						/>
+					)}
+				/>
+			</div>
 		</div>
 	);
 }

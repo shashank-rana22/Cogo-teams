@@ -1,5 +1,13 @@
 import { useLensRequest } from '@cogoport/request';
+import {
+	query, getDocs, collection, orderBy,
+} from 'firebase/firestore';
 import { useCallback, useState } from 'react';
+
+import { FIRESTORE_PATH } from '../configurations/firebase-config';
+import { combineChunks } from '../utils/chunkUtils';
+
+const MESSAGE_TYPES = ['rte_content', 'body'];
 
 const getParams = ({ messageId = '', source = '' }) => ({
 	email_address : source,
@@ -9,9 +17,9 @@ const getParams = ({ messageId = '', source = '' }) => ({
 const formatBody = ({ mailResData = {}, attachmentResData = {} }) => {
 	const { body } = mailResData?.data || {};
 	const { content = '' } = body || {};
-	const { value: allAttachements } = attachmentResData?.data || {};
+	const { value: allAttachments } = attachmentResData?.data || {};
 
-	return allAttachements?.reduce(
+	return allAttachments?.reduce(
 		(prevContent, attachment) => prevContent?.replaceAll(
 			`cid:${attachment.contentId}`,
 			`data:${attachment.contentType};base64,${attachment.contentBytes}`,
@@ -24,6 +32,12 @@ function useGetMailContent({
 	messageId = '',
 	source = '',
 	setExpandedState = () => {},
+	isDraft = false,
+	channel_type = 'email',
+	firestore = {},
+	roomId = '',
+	messageRoomId = '',
+	setDraftQuillBody = () => {},
 }) {
 	const [message, setMessage] = useState('');
 
@@ -39,29 +53,79 @@ function useGetMailContent({
 
 	const combinedLoading = loading || attachmentLoading;
 
+	const getFirebaseEmailBody = useCallback(async () => {
+		const messagesData = await Promise.all(
+			MESSAGE_TYPES.map(
+				async (itm) => {
+					const activeChatCollection = collection(
+						firestore,
+						`${FIRESTORE_PATH[channel_type]}/${roomId}/messages/${messageRoomId}/${itm}`,
+					);
+
+					const assignedChatsQuery = query(
+						activeChatCollection,
+						orderBy('serial_id', 'asc'),
+					);
+
+					const getAssignedChatsQuery = await getDocs(assignedChatsQuery);
+					return {
+						type : itm,
+						data : getAssignedChatsQuery,
+					};
+				},
+			),
+		);
+
+		return messagesData;
+	}, [channel_type, firestore, roomId, messageRoomId]);
+
 	const getEmailBody = useCallback(async () => {
-		if (combinedLoading || message) {
+		if (combinedLoading || (!isDraft && message)) {
 			return;
 		}
 
 		try {
-			const mailResData = await trigger({
-				params: getParams({ messageId, source }),
-			});
+			if (isDraft) {
+				const messageDocs = await getFirebaseEmailBody();
 
-			setMessage(mailResData?.data?.body?.content);
+				const newContent = messageDocs?.reduce(
+					(acc, itm) => {
+						const content = combineChunks({ chunks: itm?.data });
 
-			const attachmentResData = await attachmentTrigger({
-				params: getParams({ messageId, source }),
-			});
+						setDraftQuillBody(
+							(prev) => ({
+								...(prev || {}),
+								[itm?.type]: content,
+							}),
+						);
+						return `${acc}<br>${content.content}`;
+					},
+					'',
+				);
 
-			const newContent = formatBody({ mailResData, attachmentResData });
-			setMessage(newContent);
-			setExpandedState(true);
+				setMessage(newContent);
+			} else {
+				const mailResData = await trigger({
+					params: getParams({ messageId, source }),
+				});
+
+				setMessage(mailResData?.data?.body?.content);
+
+				const attachmentResData = await attachmentTrigger({
+					params: getParams({ messageId, source }),
+				});
+
+				const newContent = formatBody({ mailResData, attachmentResData });
+
+				setMessage(newContent);
+			}
 		} catch (err) {
 			console.error(err);
+		} finally {
+			setExpandedState(true);
 		}
-	}, [combinedLoading, message, trigger, messageId, source, attachmentTrigger, setExpandedState]);
+	}, [combinedLoading, message, isDraft, getFirebaseEmailBody, setDraftQuillBody,
+		trigger, messageId, source, attachmentTrigger, setExpandedState]);
 
 	return {
 		getEmailBody,

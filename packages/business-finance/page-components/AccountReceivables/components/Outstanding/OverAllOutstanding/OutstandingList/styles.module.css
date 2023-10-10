@@ -38,6 +38,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	min-height: 54px;
 	padding: 2px 8px;
 }
 
@@ -126,8 +127,8 @@
 .popover_wrapper {
 	display: flex;
 	justify-content: flex-end;
-	width: 75%;
-	margin-top: -22px;
+	padding-right: 340px;
+	margin-top: -23px;
 }
 
 .org_list {
@@ -147,13 +148,15 @@
 }
 
 .download_icon_div {
-	width: 32px;
-	height: 32px;
-	padding: 8px;
-	color: var(--color-secondary-5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 32px;
+	padding: 0 12px;
+	margin-left: 12px;
 	cursor: pointer;
-	background-color: var(--color-secondary-greyscale-2);
-	border-radius: 4px;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
 }
 
 .ledger_style {

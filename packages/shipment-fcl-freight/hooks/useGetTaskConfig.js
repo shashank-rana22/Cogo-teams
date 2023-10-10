@@ -3,6 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
 const EXCLUDE_TASK_TYPES = ['approve_document', 'amend_document'];
+const EXCLUDE_TASKS = ['upload_compliance_documents', 'confirm_with_shipper'];
 
 function useGetTaskConfig({ task = {} }) {
 	const [apiData, setApiData] = useState({});
@@ -27,7 +28,7 @@ function useGetTaskConfig({ task = {} }) {
 	}, [trigger, task.id]);
 
 	useEffect(() => {
-		if (EXCLUDE_TASK_TYPES.includes(task?.task_type) || task?.task === 'upload_compliance_documents') {
+		if (EXCLUDE_TASK_TYPES.includes(task?.task_type) || EXCLUDE_TASKS.includes(task?.task)) {
 			return;
 		}
 

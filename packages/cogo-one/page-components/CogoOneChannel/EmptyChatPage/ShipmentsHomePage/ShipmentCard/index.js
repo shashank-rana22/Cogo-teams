@@ -1,9 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import PocContainer from '../../../../../common/PocContainer';
 import ShipmentsCard from '../../../../../common/ShipmentsCard';
 
-import PocContainer from './PocContainer';
 import styles from './styles.module.css';
 
 const handleShipmentClick = ({
@@ -30,6 +31,8 @@ const handleShipmentClick = ({
 		mobile_number = '',
 	} = activeUserChat || {};
 
+	const finalMobileNumber = mobile_number?.replace(GLOBAL_CONSTANTS?.regex_patterns?.first_number_contains_zeros, '');
+
 	const chatData = {
 		user_id                 : userId,
 		user_name               : name,
@@ -37,7 +40,7 @@ const handleShipmentClick = ({
 		email,
 		channel_type            : 'whatsapp',
 		countryCode             : mobile_country_code,
-		mobile_no               : `${mobile_country_code.replace('+', '')}${mobile_number}`,
+		mobile_no               : `${mobile_country_code.replace('+', '')}${finalMobileNumber}`,
 	};
 
 	setActiveTab((prev) => ({
@@ -59,8 +62,9 @@ function ShipmentCard({
 	setShowPopover = () => {},
 	showPopover = '',
 	setShowPocModal = () => {},
-	showAddPrimaryUserButton = false,
+	viewType = '',
 	mailProps = {},
+	showModalType = () => {},
 	params = {},
 	range = '',
 }) {
@@ -109,8 +113,10 @@ function ShipmentCard({
 				setShowPopover={setShowPopover}
 				showPopover={showPopover}
 				setShowPocModal={setShowPocModal}
-				showAddPrimaryUserButton={showAddPrimaryUserButton}
+				viewType={viewType}
 				handleShipmentChat={handleShipmentChat}
+				setActiveTab={setActiveTab}
+				showModalType={showModalType}
 			/>
 		</div>
 	);

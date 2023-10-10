@@ -1,0 +1,33 @@
+.action_button {
+	font-size: 12px;
+	color: #828282;
+	cursor: pointer;
+}
+
+.pending_actions {
+	display: flex;
+	align-items: center;
+}
+
+.modal_button {
+	width: 100%;
+}
+
+.modal_wrapper {
+	display: flex;
+	flex-direction: column;
+
+	button {
+		margin-top: 4px;
+	}
+}
+
+.action_wrapper {
+	display: flex;
+}
+
+.hamburger {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}

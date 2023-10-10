@@ -3,45 +3,43 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const geo = getGeoConstants();
 
-export const INVOICE_FILTER = () => [
-	{
-		name        : 'migrated',
-		placeholder : 'Migration',
-		size        : 'sm',
-		type        : 'select',
-		caret       : true,
-		isClearable : true,
-		options     : [
-			{ value: 'true', label: 'True' },
-			{ value: 'false', label: 'False' },
-		],
-	},
-	{
-		name        : 'paymentStatusList',
-		placeholder : 'Payment',
-		size        : 'sm',
-		isClearable : true,
-		type        : 'multiSelect',
-		options     : [
-			{ value: 'paid', label: 'Paid' },
-			{ value: 'unpaid', label: 'Unpaid' },
-			{ value: 'partial_paid', label: 'Partially paid' },
+const USER_IDS = [
+	GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
+	GLOBAL_CONSTANTS.uuid.hk_user_id,
+	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id];
 
-		],
-	},
-	{
-		name        : 'invoiceStatus',
-		placeholder : 'Invoice',
-		size        : 'sm',
-		type        : 'select',
-		caret       : true,
-		isClearable : true,
-		options     : geo.options.invoice_status,
+export const invoiceFilter = ({ profile = {} }) => {
+	const selectedOption = USER_IDS.includes(profile?.user?.id)
+		? geo.options.invoice_status
+		: geo.options.invoice_status_new;
+	return [
+		{
+			name        : 'paymentStatusList',
+			placeholder : 'Paid Status',
+			size        : 'sm',
+			isClearable : true,
+			type        : 'multiSelect',
+			options     : [
+				{ value: 'paid', label: 'Paid' },
+				{ value: 'unpaid', label: 'Unpaid' },
+				{ value: 'partial_paid', label: 'Partially paid' },
 
-	},
-];
+			],
+		},
+		{
+			name        : 'invoiceStatus',
+			placeholder : 'Invoice Status',
+			size        : 'sm',
+			type        : 'select',
+			caret       : true,
+			isClearable : true,
+			options     : selectedOption,
 
-export const INVOICE_MORE_FILTERS = () => [
+		},
+	];
+};
+
+export const invoiceMoreFilter = () => [
 	{
 		label       : 'Services',
 		name        : 'services',

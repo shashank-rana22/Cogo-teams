@@ -8,12 +8,12 @@ import styles from './styles.module.css';
 
 const PRINT_TIME = 200;
 
-function PrintDocument({ shipment_data = {}, primary_service = {}, show = {}, setShow = () => {}, data = {} }) {
+function PrintDocument({ shipment_data = {}, primary_service = {}, show = {}, setShow = () => { }, data = {} }) {
+	const { servicesList = [] } = useContext(ShipmentDetailContext);
 	const printRef = useRef();
 	const ref = useRef();
 	const [watermarkText, setWatermarkText] = useState(null);
 
-	const { servicesList = [] } = useContext(ShipmentDetailContext);
 	const fcl_service = servicesList?.find(
 		(service) => service?.service_type === 'fcl_freight_service',
 	) || {};

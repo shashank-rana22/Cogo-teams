@@ -1,23 +1,23 @@
-const planListConfig = [
+const getPlanListConfig = ({ t }) => [
 	{
 		key   : 'display_name',
-		title : 'Plan Name',
+		title : t('saasSubscription:plan_config_name'),
 		width : '20%',
 	},
 	{
 		key   : 'description',
-		title : 'Plan Description',
+		title : t('saasSubscription:plan_config_desc'),
 		width : '20%',
 	},
 	{
 		key        : 'family',
-		title      : 'Family',
+		title      : t('saasSubscription:plan_config_family'),
 		width      : '23%',
 		renderFunc : 'renderFamilyName',
 	},
 	{
 		key        : 'updated_at',
-		title      : 'Last Modified',
+		title      : t('saasSubscription:plan_config_updated_at'),
 		width      : '20%',
 		renderFunc : 'renderDate',
 	},
@@ -30,10 +30,13 @@ const planListConfig = [
 	},
 ];
 
-const getPlanDetailsConfig = ({ isPlanDetail = false }) => {
+const getPlanDetailsConfig = ({ isPlanDetail = false, t }) => {
+	const planListConfig = getPlanListConfig({ t });
+
 	if (!isPlanDetail) return planListConfig;
+
 	return planListConfig.filter((planList) => planList.key !== 'family');
 };
 
-export default planListConfig;
+export default getPlanListConfig;
 export { getPlanDetailsConfig };

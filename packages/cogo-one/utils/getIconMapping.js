@@ -3,11 +3,11 @@ import {
 	IcMSearchdark,
 	IcMDocument,
 	IcMShip,
-	IcMTicket,
 	IcMProfile,
 	IcMServices,
 	IcMCrossInCircle,
 	IcMArrowDoubleLeft,
+	IcMEmail,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
@@ -94,12 +94,6 @@ const iconMapping = ({ expandSideBar = false }) => [
 		/>,
 	},
 	{
-		name    : 'tickets',
-		content : 'Tickets',
-		icon    : <IcMTicket width={22} height={22} />,
-
-	},
-	{
 		name    : 'spot_search',
 		content : 'Spot Search',
 		icon    : <IcMSearchdark width={20} height={20} />,
@@ -125,6 +119,11 @@ const iconMapping = ({ expandSideBar = false }) => [
 		icon    : <IcMServices width={20} height={20} />,
 	},
 	{
+		name    : 'user_mails',
+		content : 'Users Mails',
+		icon    : <IcMEmail width={20} height={20} />,
+	},
+	{
 		name    : 'help_desk',
 		content : 'Help Desk',
 		icon    : <Image
@@ -134,18 +133,28 @@ const iconMapping = ({ expandSideBar = false }) => [
 			height={22}
 		/>,
 	},
+	{
+		name    : 'teams_profile',
+		content : 'teams Profile',
+		icon    : <IcMProfile width={20} height={20} />,
+	},
 ];
 
 const getIconMapping = ({
 	viewType = '',
 	expandSideBar = false,
 	channelType = '',
-}) => iconMapping({ expandSideBar }).filter(
-	(eachIcon) => [
+	isTeams = false,
+}) => {
+	const CHANNEL_WISE_NAV_MAPPING = isTeams ? ['teams_profile'] : [
 		...COMMON_ACCESIBLE_NAVIGATIONS,
 		...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.extra_side_bar_navs_access || []),
 		...(ENABLE_EXPAND_SIDE_BAR.includes(channelType) ? SIDEBAR_CONTROLS : []),
-	].includes(eachIcon.name),
-);
+	];
+
+	return iconMapping({ expandSideBar })?.filter(
+		(eachIcon) => CHANNEL_WISE_NAV_MAPPING.includes(eachIcon.name),
+	) || [];
+};
 
 export default getIconMapping;

@@ -6,31 +6,42 @@ import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../../../commons/toastApiError.ts';
 
-function formatToTimeStamp(dateString) {
+const COE_ACCEPTED_INVOICES = 'coe_accepted';
+
+function formatToTimeStamp(dateString = '') {
 	const date = new Date(dateString);
 	const formatedDate = formatDate({
 		date,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
 		formatType : 'dateTime',
-		seperator  : 'T',
+		separator  : 'T',
 	});
 	return formatedDate;
 }
-
-function useGetBillsList({ organizationId = '', setStats = () => { } }) {
-	const [billsFilters, setBillsFilters] = useState({ invoiceView: 'coe_accepted', pageSize: 10, pageIndex: 1 });
+function useGetBillsList({
+	activeTab = '',
+	activeEntity = '',
+	organizationId = '',
+	showElement = false,
+}) {
+	const [billsFilters, setBillsFilters] = useState({
+		entity    : activeEntity,
+		pageSize  : 10,
+		pageIndex : 1,
+	});
 	const [orderBy, setOrderBy] = useState({});
 
 	const {
-		search = '', pageSize, pageIndex, invoiceView, category, currency, invoiceType, entity, urgencyTag,
-		serviceType, invoiceDate, dueDate, updatedDate,
+		search = '', pageSize = 10, pageIndex = 1, category = '', currency = '',
+		invoiceType = '', urgencyTag = '', services = '', invoiceDate = {}, dueDate = {}, updatedDate = {},
 	} = billsFilters || {};
 
-	const { dueDateSortType } = orderBy || {};
+	const { dueDateSortType = '' } = orderBy || {};
 
-	const { startDate, endDate } = invoiceDate || {};
-	const { startDate: fromBillDate, endDate: toBillDate } = dueDate || {};
-	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } = updatedDate || {};
+	const { startDate = '', endDate = '' } = invoiceDate || {};
+	const { startDate: fromBillDate = '', endDate: toBillDate = '' } = dueDate || {};
+	const { startDate: fromUploadBillDate = '', endDate: toUploadBillDate = '' } = updatedDate || {};
 
 	const { debounceQuery, query = '' } = useDebounceQuery();
 
@@ -56,18 +67,19 @@ function useGetBillsList({ organizationId = '', setStats = () => { } }) {
 						pageIndex          : pageIndex || undefined,
 						pageSize           : pageSize || undefined,
 						category           : category || undefined,
-						invoiceView        : invoiceView || undefined,
+						invoiceView        : COE_ACCEPTED_INVOICES,
 						currency           : currency || undefined,
 						invoiceType        : invoiceType || undefined,
-						entity             : entity || undefined,
+						entity             : activeEntity || undefined,
 						urgencyTag         : urgencyTag || undefined,
-						serviceType        : serviceType || undefined,
+						type               : activeTab || undefined,
+						services           : services || undefined,
 						dueDateSortType    : dueDateSortType || undefined,
 						startDate          : startDate ? formatToTimeStamp(startDate) : undefined,
 						endDate            : endDate ? formatToTimeStamp(endDate) : undefined,
 						fromBillDate       : fromBillDate ? formatToTimeStamp(fromBillDate) : undefined,
 						toBillDate         : toBillDate ? formatToTimeStamp(toBillDate) : undefined,
-						fromUploadBillDate : toBillDate ? formatToTimeStamp(fromUploadBillDate) : undefined,
+						fromUploadBillDate : fromUploadBillDate ? formatToTimeStamp(fromUploadBillDate) : undefined,
 						toUploadBillDate   : toUploadBillDate ? formatToTimeStamp(toUploadBillDate) : undefined,
 						organizationId     : organizationId || undefined,
 					},
@@ -77,20 +89,27 @@ function useGetBillsList({ organizationId = '', setStats = () => { } }) {
 			}
 		},
 		[pageIndex, pageSize,
-			query, currency, urgencyTag, entity, invoiceType,
-			invoiceView, category, dueDateSortType, serviceType, startDate,
+			query, currency, urgencyTag, invoiceType,
+			category, dueDateSortType, services, startDate,
 			endDate, fromBillDate,
 			toBillDate, fromUploadBillDate,
-			toUploadBillDate, billsTrigger, organizationId],
+			toUploadBillDate, billsTrigger, activeTab, organizationId, activeEntity],
 	);
 
 	useEffect(() => {
-		refetch();
-	}, [refetch]);
+		if (showElement) {
+			refetch();
+		}
+	}, [refetch, showElement]);
 
 	useEffect(() => {
-		setStats((prevStats) => ({ ...prevStats, invoice_details: billsData?.totalRecords }));
-	}, [billsData, setStats]);
+		setBillsFilters({
+			invoiceView : 'coe_accepted',
+			entity      : activeEntity,
+			pageSize    : 10,
+			pageIndex   : 1,
+		});
+	}, [activeEntity]);
 
 	return {
 		billsData,
@@ -99,6 +118,7 @@ function useGetBillsList({ organizationId = '', setStats = () => { } }) {
 		setBillsFilters,
 		orderBy,
 		setOrderBy,
+		refetch,
 	};
 }
 

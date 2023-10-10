@@ -52,6 +52,11 @@ const useListShipmentPendingTasks = ({ activeTab = 'approved_awb', filter = {}, 
 				...PAYLOAD_ITEM,
 				handedOverForTd: true,
 			},
+			completed_awb: {
+				assignedStakeholder : 'service_ops2_docs',
+				status              : 'completed',
+				task                : ['upload_airway_bill'],
+			},
 		};
 
 		try {
@@ -71,7 +76,6 @@ const useListShipmentPendingTasks = ({ activeTab = 'approved_awb', filter = {}, 
 			toastApiError(err);
 		}
 	}, [activeTab, filter, page, query, relevantToMe, trigger, userData.user.id]);
-
 	useEffect(() => {
 		if (searchValue) {
 			setPage(CONSTANTS.START_PAGE);

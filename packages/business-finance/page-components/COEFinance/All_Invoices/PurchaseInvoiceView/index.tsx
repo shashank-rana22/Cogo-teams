@@ -10,7 +10,7 @@ import { FieldProps } from './interfaces/index';
 import FieldPair from './RenderData/FiledPair/index';
 import FormatedDate from './RenderData/FormatedDate/index';
 import RenderCustomer from './RenderData/RenderCustomer/index';
-import RenderRemarks from './RenderData/RenderRemarks/index';
+import RenderRemarks from './RenderData/RenderRemarks';
 import RenderStatus from './RenderData/RenderStatus/index';
 import RenderUrgencyTag from './RenderData/RenderUrgencyTag/index';
 import RenderViewMoreButton from './RenderData/RenderViewMoreButton/index';
@@ -18,6 +18,7 @@ import SegmentedFilters from './SegmentedFilters/index';
 
 interface ItemProps {
 	createdDate: Date;
+	updatedDate: Date;
 	billDate: Date;
 	dueDate: Date;
 	billCurrency: string;
@@ -30,6 +31,7 @@ interface ItemProps {
 	billNumber: string;
 	isProforma: boolean;
 	jobNumber: string;
+	shipmentId: string;
 	organizationName: string;
 	urgencyTag: Array<string>;
 	remarksTimeline?: Array<{
@@ -47,7 +49,7 @@ interface Props {
 
 function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props) {
 	const { query } = useRouter();
-	const { jobNumber } = query || {};
+	const { searchValue:previouslySearched } = query || {};
 
 	const [sort, setSort] = useState({});
 
@@ -60,7 +62,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 		tab,
 		setTab,
 		setCurrentTab,
-	} = useGetPurchaseViewList({ filters, setFilters, sort, jobNumber });
+	} = useGetPurchaseViewList({ filters, setFilters, sort, previouslySearched });
 
 	const functions = {
 		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,
@@ -75,7 +77,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 		),
 		renderRemarks  : (itemData: ItemProps) => <RenderRemarks item={itemData} />,
 		renderViewMore : (itemData: ItemProps) => (
-			<RenderViewMoreButton itemData={itemData} />
+			<RenderViewMoreButton itemData={itemData} searchValue={searchValue} />
 		),
 		renderUrgencyTag: (itemData: ItemProps, field: FieldProps) => (
 			<RenderUrgencyTag item={itemData} field={field} />
@@ -95,6 +97,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props
 				currentTab={currentTab}
 				setCurrentTab={setCurrentTab}
 			/>
+
 			<List
 				config={PURCHASE_VIEW_CONFIG}
 				itemData={data}

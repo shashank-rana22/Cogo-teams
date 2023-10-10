@@ -10,6 +10,17 @@ import styles from './styles.module.css';
 
 const DEFAULT_ROUNDING = 2;
 
+const getTruckNumberOptions = ({ serviceProvider, options:newOptions = [] }) => {
+	serviceProvider?.service_charges.forEach((item) => {
+		if (item?.service_type === 'ftl_freight_service') {
+			newOptions.push(
+				{ label: item?.detail?.truck_number, value: item?.detail?.truck_number },
+			);
+		}
+	});
+	return newOptions;
+};
+
 const handleModifiedOptions = ({ options: newOptions = [] }) => newOptions?.map((option) => ({
 	...option,
 	actualname : option?.item_name,
@@ -61,6 +72,23 @@ export const renderLineItemFunctions = {
 			) : null}
 		</div>
 	),
+	truck_number: ({ control, index, errors, serviceProvider, options:  otherOptions }) => (
+		<div className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
+			<SelectController
+				control={control}
+				name={`line_items.${index}.truck_number`}
+				placeholder="Enter"
+				initialCall
+				options={isEmpty(otherOptions) ? getTruckNumberOptions({ serviceProvider }) : otherOptions}
+				rules={{ required: true }}
+			/>
+			{errors?.line_items?.[index]?.truck_number ? (
+				<div className={styles.errors}>
+					* Required
+				</div>
+			) : null}
+		</div>
+	),
 	code: ({ control, index, extradata, setCodes, errors }) => (
 		<div className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
 			<AsyncSelectController
@@ -81,6 +109,7 @@ export const renderLineItemFunctions = {
 							? [extradata?.shipment_type] : extradata?.serviceNames,
 						invoicing_type: 'PURCHASE',
 					},
+					job_created_at: extradata?.job_created_at || undefined,
 				}}
 				onChange={(_, obj) => (setCodes((codes) => ({ ...codes, [obj?.code]: obj })))}
 				rules={{ required: true }}

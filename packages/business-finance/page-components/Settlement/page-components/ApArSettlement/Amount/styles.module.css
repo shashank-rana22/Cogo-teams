@@ -4,7 +4,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 95%;
+	width: 96%;
 	padding: 16px 20px;
 	margin-left: -36px;
 	background: var(--color-secondary-5);
@@ -28,9 +28,13 @@
 .diffbalances {
 	display: flex;
 	flex-direction: column;
-	justify-content: start;
+	justify-content: flex-start;
 }
 
 .amount {
 	font-size: 18px;
+}
+
+.match_button {
+	margin-right: 80px;
 }

@@ -1,4 +1,5 @@
 import { RadioGroup, Button, cl } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useUpdatePlan from '../../../../../hooks/useUpdatePlan';
@@ -10,12 +11,14 @@ const getOptions = (data = []) => (
 	}))
 );
 
-function Plan({ subscriptionId = '', modalChangeHandler }) {
+function Plan({ featureInfo = {}, modalChangeHandler }) {
+	const { t } = useTranslation(['saasSubscription']);
 	const [planId, setPlanId] = useState('');
+
 	const {
 		loading = false,
 		changePlanHandler, listData = {},
-	} = useUpdatePlan({ planId, subscriptionId, modalChangeHandler });
+	} = useUpdatePlan({ planId, featureInfo, modalChangeHandler });
 
 	const { list = [] } = listData || {};
 	const options = getOptions(list);
@@ -32,7 +35,7 @@ function Plan({ subscriptionId = '', modalChangeHandler }) {
 					loading={loading}
 					onClick={() => modalChangeHandler(false)}
 				>
-					Cancel
+					{t('saasSubscription:cancel')}
 				</Button>
 				<Button
 					themeType="accent"
@@ -41,7 +44,7 @@ function Plan({ subscriptionId = '', modalChangeHandler }) {
 					loading={loading}
 					onClick={changePlanHandler}
 				>
-					Save
+					{t('saasSubscription:save')}
 				</Button>
 			</div>
 		</>

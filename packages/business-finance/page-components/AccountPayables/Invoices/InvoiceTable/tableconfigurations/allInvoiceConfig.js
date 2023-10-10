@@ -24,14 +24,15 @@ export const ALL_INVOICE_CONFIG = {
 			key       : 'organizationName',
 			func      : 'renderToolTip',
 			maxLength : 36,
-			span      : 1.8,
+			span      : 1.4,
 		},
 		{
 			label  : 'Invoice Number',
 			key    : 'invoice_number',
-			func   : 'renderFieldPair',
-			span   : 1,
+			func   : 'renderInvoiceNumber',
+			span   : 1.2,
 			topKey : {
+				maxLength   : 12,
 				key         : 'invoiceNumber',
 				type        : 'href',
 				redirectKey : 'documentUrl',
@@ -75,7 +76,7 @@ export const ALL_INVOICE_CONFIG = {
 			},
 		},
 		{
-			label       : 'Tds',
+			label       : 'TDS',
 			key         : 'tdsAmount',
 			func        : 'renderAmount',
 			currencyKey : 'currency',
@@ -105,13 +106,13 @@ export const ALL_INVOICE_CONFIG = {
 		{
 			label : 'Urgency',
 			key   : 'urgencyTag',
-			span  : 1,
 			func  : 'renderUrgencyTag',
+			span  : 0.8,
 		},
 		{
 			label : 'Action',
 			key   : 'action',
-			span  : 0.6,
+			span  : 1,
 			func  : 'renderAction',
 		},
 	],

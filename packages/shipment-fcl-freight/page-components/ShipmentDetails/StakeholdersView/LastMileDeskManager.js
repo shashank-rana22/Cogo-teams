@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Pill } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Tracking } from '@cogoport/ocean-modules';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
@@ -10,6 +10,7 @@ import React, { useMemo, useState } from 'react';
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
+import JobStatus from '../../../common/JobStatus';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import PurchaseInvoice from '../../../common/PurchaseInvoice';
@@ -65,9 +66,9 @@ function LastMileDeskManager({ get = {}, activeStakeholder = '' }) {
 
 					<RolloverDetails />
 
-					{shipment_data?.is_job_closed
-						? <Pill className={styles.job_close_pill} size="xl">Job Closed</Pill>
-						: null}
+					<JobStatus
+						shipment_data={shipment_data}
+					/>
 
 					<ShipmentChat />
 				</div>
@@ -92,7 +93,7 @@ function LastMileDeskManager({ get = {}, activeStakeholder = '' }) {
 						onChange={setActiveTab}
 					>
 						<TabPanel name="overview" title="Overview">
-							<Overview shipmentData={shipment_data} />
+							<Overview shipmentData={shipment_data} stakeholderConfig={stakeholderConfig} />
 						</TabPanel>
 
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">

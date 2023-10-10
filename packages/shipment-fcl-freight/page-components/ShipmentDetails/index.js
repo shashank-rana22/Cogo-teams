@@ -24,6 +24,7 @@ const SHIPMENT_ADDITIONAL_METHODS = ['main_service',
 	'containers',
 	'rollover_shipments',
 	'advance_documents',
+	'remaining_closure_days',
 ];
 
 function ShipmentDetails() {
@@ -62,6 +63,8 @@ function ShipmentDetails() {
 		finance_superadmin       : Superadmin,
 		finops_manager           : Superadmin,
 		so1_revenue_desk         : Superadmin,
+		data_superadmin          : Superadmin,
+		kam_admin                : Kam,
 		default                  : () => (
 			<h1 className={styles.not_allowed}>
 				You are not allowed to visit this page!

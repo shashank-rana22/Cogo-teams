@@ -1,11 +1,12 @@
 import { cl } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
+import { useTranslation } from 'next-i18next';
 
 import { getFeatureMapping } from '../../constant/featureMapping';
 import useGetPlanDetails from '../../hooks/useGetPlanDetails';
 
+import Discount from './Discount';
 import Header from './Header';
 import PlanFeature from './PlanFeature';
 import Pricing from './Pricing';
@@ -14,22 +15,23 @@ import UpdateFeatureModal from './UpdateFeatureModal';
 
 function PlanDetails() {
 	const { back } = useRouter();
-	const [featureModal, setFeatureModal] = useState({});
+	const { t } = useTranslation(['saasSubscription']);
 
-	const { loading = false, planDetails } = useGetPlanDetails({ featureModal });
-	const { plan = {}, pricing = [], plan_features = [], add_ons = [] } = planDetails || {};
+	const { loading = false, planDetails, featureModal, setFeatureModal } = useGetPlanDetails();
 
-	const featureMapping = getFeatureMapping({ add_ons, plan_features });
+	const { plan = {}, pricing = [], plan_features = [], add_ons = [], discounts = [] } = planDetails || {};
+
+	const featureMapping = getFeatureMapping({ add_ons, plan_features, t });
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<IcMArrowBack className={styles.back_icon} width={23} height={23} onClick={back} />
-				<h2>Select Plan</h2>
+				<h2>{t('saasSubscription:plan_details_title')}</h2>
 			</div>
 
 			<div className={styles.cell}>
-				<Header plan={plan} loading={loading} />
+				<Header plan={plan} loading={loading} setFeatureModal={setFeatureModal} />
 			</div>
 
 			<div className={styles.cell}>
@@ -50,6 +52,11 @@ function PlanDetails() {
 					</div>
 				))}
 			</div>
+
+			<div className={styles.cell}>
+				<Discount planId={plan?.id} loading={loading} discounts={discounts} setFeatureModal={setFeatureModal} />
+			</div>
+
 			<UpdateFeatureModal featureModal={featureModal} setFeatureModal={setFeatureModal} planId={plan?.id} />
 		</div>
 	);

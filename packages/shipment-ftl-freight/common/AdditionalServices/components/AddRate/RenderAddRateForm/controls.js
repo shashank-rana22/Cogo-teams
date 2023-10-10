@@ -62,11 +62,11 @@ const controls = ({ serviceData = {}, source = '' }) => {
 		},
 		{
 			name        : 'price',
-			label       : 'Price',
+			label       : 'Sell Price',
 			type        : 'number',
 			placeholder : 'Enter Sell Price',
 			rules       : { required: 'Price is required', min: 0 },
-			show        : ['task', 'purchase'].includes(source),
+			show        : !['purchase'].includes(source),
 			size        : 'sm',
 		},
 		{
@@ -79,10 +79,11 @@ const controls = ({ serviceData = {}, source = '' }) => {
 				filters: {
 					account_type : 'service_provider',
 					kyc_status   : 'verified',
+					service      : 'ftl_freight',
 				},
 			},
 			size  : 'sm',
-			show  : ['overview'].includes(source),
+			show  : ['purchase'].includes(source),
 			rules : { required: 'org is required' },
 		},
 		{

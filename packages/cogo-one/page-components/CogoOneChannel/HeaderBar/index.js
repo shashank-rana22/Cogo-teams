@@ -1,9 +1,10 @@
 import { cl } from '@cogoport/components';
-import { IcMEyeopen } from '@cogoport/icons-react';
+import { IcMComment, IcMEyeopen } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
+import FeedbackModal from '../FeedbackModal';
 
 import AgentConfig from './AgentConfig';
 import FlashRevertLogs from './FlashRevertLogs';
@@ -30,6 +31,8 @@ function HeaderBar({
 		punch_in_out : isPunchPresent = false,
 	} = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions || {};
 
+	const [activeCard, setActiveCard] = useState('');
+	const [showFeedback, setShowFeedback] = useState(false);
 	const [timePeriodValue, setTimePeriodValue] = useState('day');
 	const [showDetails, setShowDetails] = useState(false);
 
@@ -58,76 +61,105 @@ function HeaderBar({
 	|| VIEW_TYPE_GLOBAL_MAPPING[viewType]?.to_show_agent_activity_graph;
 
 	return (
-		<div className={cl`${styles.header_container} ${showDetails ? styles.show_on_top : ''}`}>
-			<div className={cl`${styles.hide_stats_section} ${showDetails ? styles.show_stats_section : ''}`}>
-				{(showDetails && showStats) ? (
-					<ShowMoreStats
-						setShowDetails={setShowDetails}
-						showDetails={showDetails}
-						updateWorkPreference={updateWorkPreference}
-						loading={loading}
-						punchedTime={lastBreakTime}
-						status={status}
-						handlePunchIn={handlePunchIn}
-						viewType={viewType}
-						timePeriodValue={timePeriodValue}
-						setTimePeriodValue={setTimePeriodValue}
-						isPunchPresent={isPunchPresent}
-					/>
-				) : null}
-			</div>
-
-			<div
-				className={styles.navigation_bar}
-				style={{ justifyContent: showDetails ? 'center' : 'space-between' }}
-			>
-				<div className={styles.label_styles}>
-					{(showDetails || initialViewType !== 'cogoone_admin')
-						? null
-						: (
-							<>
-								<IcMEyeopen className={styles.eye_icon} />
-								{`${startCase(viewType)} View`}
-							</>
-						)}
-				</div>
-
-				{(isPunchPresent && !preferenceLoading) ? (
-					<PunchInOut
-						timelineLoading={timelineLoading}
-						preferenceLoading={preferenceLoading}
-						showDetails={showDetails}
-						setShowDetails={setShowDetails}
-						showStats={showStats}
-						status={status}
-						setIsShaking={setIsShaking}
-						shakeButton={shakeButton}
-						handlePunchIn={handlePunchIn}
-						handlePunchOut={handlePunchOut}
-						loading={loading}
-						isShaking={isShaking}
-						lastBreakTime={lastBreakTime}
-					/>
-				) : null}
-
-				<div className={cl`${styles.configs} ${showDetails ? styles.hide_section : ''}`}>
-					{flashRevertLogs ? (
-						<FlashRevertLogs />
-					) : null}
-
-					{(!isEmpty(configurationsToBeShown) || initialViewType === 'cogoone_admin') ? (
-						<AgentConfig
-							firestore={firestore}
-							configurationsToBeShown={configurationsToBeShown}
-							setViewType={setViewType}
-							initialViewType={initialViewType}
-							viewType={viewType}
+		<>
+			<div className={cl`${styles.header_container} ${showDetails ? styles.show_on_top : ''}`}>
+				<div className={cl`${styles.hide_stats_section} ${showDetails ? styles.show_stats_section : ''}`}>
+					{(showDetails && showStats) ? (
+						<ShowMoreStats
+							setShowDetails={setShowDetails}
 							showDetails={showDetails}
+							updateWorkPreference={updateWorkPreference}
+							loading={loading}
+							punchedTime={lastBreakTime}
+							status={status}
+							handlePunchIn={handlePunchIn}
+							viewType={viewType}
+							timePeriodValue={timePeriodValue}
+							setTimePeriodValue={setTimePeriodValue}
+							isPunchPresent={isPunchPresent}
 						/>
 					) : null}
 				</div>
+
+				<div
+					className={styles.navigation_bar}
+					style={{ justifyContent: showDetails ? 'center' : 'space-between' }}
+				>
+					<div className={styles.label_styles}>
+						{(showDetails || initialViewType !== 'cogoone_admin')
+							? null
+							: (
+								<div
+									role="presentation"
+									className={styles.navigation_bar}
+									onClick={() => setActiveCard('switch_views')}
+								>
+									<IcMEyeopen className={styles.eye_icon} />
+									{`${startCase(viewType)} View`}
+								</div>
+							)}
+					</div>
+
+					{(isPunchPresent && !preferenceLoading) ? (
+						<PunchInOut
+							timelineLoading={timelineLoading}
+							preferenceLoading={preferenceLoading}
+							showDetails={showDetails}
+							setShowDetails={setShowDetails}
+							showStats={showStats}
+							status={status}
+							setIsShaking={setIsShaking}
+							shakeButton={shakeButton}
+							handlePunchIn={handlePunchIn}
+							handlePunchOut={handlePunchOut}
+							loading={loading}
+							isShaking={isShaking}
+							lastBreakTime={lastBreakTime}
+						/>
+					) : null}
+
+					<div className={cl`${styles.configs} ${showDetails ? styles.hide_section : ''}`}>
+						{flashRevertLogs ? (
+							<FlashRevertLogs />
+						) : null}
+
+						{(!isEmpty(configurationsToBeShown) || initialViewType === 'cogoone_admin') ? (
+							<AgentConfig
+								firestore={firestore}
+								configurationsToBeShown={configurationsToBeShown}
+								setViewType={setViewType}
+								initialViewType={initialViewType}
+								viewType={viewType}
+								showDetails={showDetails}
+								activeCard={activeCard}
+								setActiveCard={setActiveCard}
+							/>
+						) : null}
+					</div>
+				</div>
 			</div>
-		</div>
+			{!showFeedback && (
+				<div
+					role="presentation"
+					className={styles.feedback}
+					onClick={() => setShowFeedback(((prev) => !prev))}
+				>
+					<span className={styles.feedback_icon}>
+						<IcMComment />
+					</span>
+					<span className={styles.feedback_label}>
+						Feedback
+					</span>
+				</div>
+			)}
+			{showFeedback && (
+				<FeedbackModal
+					showFeedback={showFeedback}
+					setShowFeedback={setShowFeedback}
+				/>
+			)}
+		</>
+
 	);
 }
 

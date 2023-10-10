@@ -39,7 +39,7 @@
     "view_btn": "Lihat",
     "invoice_proforma_search": "Cari berdasarkan Nomor Faktur/Proforma",
     "user_label": "Pengguna",
-    "levels_label": "Level",
+    "levels_label": "L",
     "id_label": "ID",
     "incident_type_label": "Jenis Insiden",
     "incident_sub_type_label": "Subjenis Insiden",
@@ -69,7 +69,8 @@
     "urgent": "Penting",
     "no_data": "Tidak Ada Data",
     "payment_confirmation_label": "Konfirmasi Pembayaran",
-    "select_category_placeholder": "Kategori",
+    "select_category_placeholder": "Jenis Permintaan",
+    "select_request_sub_type_placeholder": "Sub Jenis Permintaan",
     "select_urgency_placeholder": "Urgensi",
     "urgency_label_all": "Semua",
     "urgency_label_urgent": "Penting",
@@ -228,5 +229,10 @@
     "approval_type_required_message": "Jenis Persetujuan dibutuhkan",
     "entity_code_required_message": "Kode Entitas dibutuhkan",
     "user_required_message": "Pengguna dibutuhkan",
-    "criteria_required_message": "Kriteria dibutuhkan"
+    "criteria_required_message": "Kriteria dibutuhkan",
+    "shipment_re_open_request": "Permintaan Pembukaan Kembali Pengiriman",
+    "job_open_label": "Pekerjaan Terbuka",
+    "total_buy_label": "Jumlah Pembelian",
+    "total_sell_label": "Jual Total",
+    "profit_margin_label" : "Margin Keuntungan"
 }

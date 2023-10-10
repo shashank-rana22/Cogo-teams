@@ -25,7 +25,6 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
-
 		{
 			api          : 'bulk_upload_employee_details',
 			access_type  : 'private',
@@ -110,13 +109,58 @@ const HRMS = {
 			api          : 'list_employee_departments',
 			access_type  : 'private',
 			service_name : 'hrms',
-
 		},
 		{
 			api          : 'list_employee_roles',
 			access_type  : 'private',
 			service_name : 'hrms',
-
+		},
+	],
+	separation: [
+		{
+			api          : 'get_employee_application_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_application_process_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_application_process_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'generate_exit_code',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'complete_separation',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_application',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_off_boarding_application',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'download_outstanding_sheet',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_fnf_detail_status',
+			access_type  : 'private',
+			service_name : 'hrms',
 		},
 	],
 	employee_portal: [
@@ -407,6 +451,26 @@ const HRMS = {
 		},
 		{
 			api          : 'get_rating_cycle',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_manager_level',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_ratings',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_departments',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_and_publish_employee_rating',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
@@ -749,6 +813,13 @@ const HRMS = {
 		},
 		{
 			api          : 'download_team_attendance',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+	],
+	profile: [
+		{
+			api          : 'get_employee_directory',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},

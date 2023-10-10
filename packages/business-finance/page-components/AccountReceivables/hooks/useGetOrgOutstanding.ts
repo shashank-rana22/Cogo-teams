@@ -1,23 +1,28 @@
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
 interface Outstanding {
-	page?:number,
-	pageLimit?:number,
-	search?:string,
-	organizationSerialId?:string
-	q?:string
-	sageId?:string
-	tradePartySerialId?:string
+	page?: number;
+	pageLimit?: number;
+	search?: string;
+	organizationSerialId?: string;
+	q?: string;
+	sageId?: string;
+	tradePartySerialId?: string;
 }
 
 interface GetOrgOutstanding {
-	entityCode?: string
+	entityCode?: string;
 }
 
 const useGetOrgOutstanding = ({ entityCode = '' }: GetOrgOutstanding) => {
+	const {
+		profile: { authorizationparameters, selected_agent_id: selectedAgentId },
+	} = useSelector((state) => state);
+
 	const [outStandingFilters, setoutStandingFilters] = useState<Outstanding>({
 		page      : 1,
 		pageLimit : 10,
@@ -30,15 +35,18 @@ const useGetOrgOutstanding = ({ entityCode = '' }: GetOrgOutstanding) => {
 		label : 'Total Outstanding Amount',
 	});
 	const {
-		search, organizationSerialId, pageLimit, page, q, sageId, tradePartySerialId,
+		search,
+		organizationSerialId,
+		pageLimit,
+		page,
+		q,
+		sageId,
+		tradePartySerialId,
 	} = outStandingFilters || {};
 
 	const { order, key } = orderBy || {};
 
-	const [
-		{ data, loading },
-		trigger,
-	] = useRequestBf(
+	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/payments/outstanding/by-customer',
 			method  : 'get',
@@ -52,34 +60,62 @@ const useGetOrgOutstanding = ({ entityCode = '' }: GetOrgOutstanding) => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);
 
-	const refetch = useCallback((formFilter) => {
-		try {
-			trigger({
-				params: {
-					sortBy               : key || undefined,
-					sortType             : order || undefined,
-					page,
-					pageLimit,
-					salesAgentId         : formFilter?.salesAgentId || undefined,
-					creditControllerId   : formFilter?.creditControllerId || undefined,
-					kamId                : formFilter?.kamId || undefined,
-					companyType          : formFilter?.companyType || undefined,
-					entityCode           : entityCode || undefined,
-					organizationSerialId : organizationSerialId || undefined,
-					sageId               : sageId || undefined,
-					tradePartySerialId   : tradePartySerialId || undefined,
-					q                    : q || undefined,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.message);
-		}
-	}, [entityCode, key, order, organizationSerialId, page, pageLimit, q, sageId, tradePartySerialId, trigger]);
+	const refetch = useCallback(
+		(formFilter) => {
+			try {
+				trigger({
+					params: {
+						sortBy       : key || undefined,
+						sortType     : order || undefined,
+						page,
+						pageLimit,
+						salesAgentId : formFilter?.salesAgentId || undefined,
+						creditControllerId:
+							formFilter?.creditControllerId || undefined,
+						kamId                : selectedAgentId || formFilter?.kamId || undefined,
+						companyType          : formFilter?.companyType || undefined,
+						entityCode           : entityCode || undefined,
+						organizationSerialId : organizationSerialId || undefined,
+						sageId               : sageId || undefined,
+						tradePartySerialId   : tradePartySerialId || undefined,
+						q                    : q || undefined,
+					},
+				});
+			} catch (e) {
+				Toast.error(e?.message);
+			}
+		},
+		[
+			entityCode,
+			key,
+			order,
+			organizationSerialId,
+			page,
+			pageLimit,
+			q,
+			sageId,
+			tradePartySerialId,
+			trigger,
+			selectedAgentId,
+		],
+	);
 
 	useEffect(() => {
 		refetch();
-	}, [entityCode, orderBy, organizationSerialId, page,
-		pageLimit, sageId, tradePartySerialId, q, key, order, refetch]);
+	}, [
+		entityCode,
+		orderBy,
+		organizationSerialId,
+		page,
+		pageLimit,
+		sageId,
+		tradePartySerialId,
+		q,
+		key,
+		order,
+		authorizationparameters,
+		refetch,
+	]);
 
 	useEffect(() => {
 		const resetQuery = {

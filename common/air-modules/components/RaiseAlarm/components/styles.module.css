@@ -2,6 +2,12 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+
+	:global {
+		.ui_button_container {
+			margin-right: 10px !important;
+		}
+	}
 }
 
 .button_text {

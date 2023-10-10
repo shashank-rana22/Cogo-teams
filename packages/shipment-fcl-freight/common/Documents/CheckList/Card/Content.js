@@ -2,6 +2,7 @@ import { Button, Modal, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCError } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -45,6 +46,10 @@ function Content({
 	bl_details = [],
 	do_details = [],
 }) {
+	const { user_id = '' } = useSelector(({ profile }) => ({
+		user_id: profile?.user?.id,
+	}));
+
 	const [siReviewState, setSiReviewState] = useState(false);
 	const [printDoc, setPrintDoc] = useState(false);
 	const [updateFreightCertificate, setUpdateFreightCertificate] = useState(false);
@@ -64,10 +69,13 @@ function Content({
 	const isRestrictedImportBlDo = (uploadedItem?.document_type === 'bill_of_lading' && tradeType === 'import'
 	&& isEmpty(do_details) && activeStakeholder !== 'document_control_manager');
 
-	const { document_type, state } = uploadedItem;
+	const { document_type, state, document_url = '' } = uploadedItem;
+
+	const isBlDocVisiblityAllowed = document_type === 'bill_of_lading' && isEmpty(document_url);
 
 	function GetUploadButton() {
-		if (showUploadText.length && canEditDocuments) {
+		if (showUploadText?.length
+			&& canEditDocuments && GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id === user_id) {
 			return (
 				<Button
 					themeType="link"
@@ -198,6 +206,7 @@ function Content({
 									<Button
 										themeType="link"
 										onClick={() => handleView(uploadedItem?.document_url)}
+										disabled={isBlDocVisiblityAllowed}
 									>
 										View
 									</Button>

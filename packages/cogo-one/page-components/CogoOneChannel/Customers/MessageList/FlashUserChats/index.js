@@ -16,7 +16,10 @@ function FlashUserChats({
 	setCarouselState = () => {},
 	viewType = '',
 }) {
-	const { claimChat = () => {}, claimLoading = false } = useClaimChat({ userId, setCarouselState, firestore });
+	const {
+		claimChat = () => {},
+		claimLoading = false,
+	} = useClaimChat({ userId, setCarouselState, firestore, viewType });
 
 	const canShowCarousel = carouselState === 'show' && !isEmpty(flashMessagesList);
 

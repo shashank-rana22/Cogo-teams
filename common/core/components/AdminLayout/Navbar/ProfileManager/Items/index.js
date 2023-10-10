@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMNotifications } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
@@ -13,9 +13,10 @@ const SESSION_DISABLED = ['logout', 'logout_all_accounts'];
 
 const TOTAL_TIME = 1000;
 const THIRTY_SECONDS = 30;
+const MAX_NOTIFICATION_COUNT = 99;
+const ZERO = 0;
 const ONE = 1;
 const TWO = 2;
-const ZERO_COUNT = 0;
 
 function ProfileAvatar({ picture = '' }) {
 	return (
@@ -54,19 +55,26 @@ function SingleNav({
 }
 
 function Items({
-	item,
-	resetSubnavs,
+	item = [],
+	resetSubnavs = false,
 	setOpenPopover = () => {},
-	timeLeft,
-	loading,
-	openPopover,
+	timeLeft = '',
+	loading = false,
+	openPopover = false,
 	refetch = () => {},
-	checkIfSessionExpiring,
-	notificationCount = ZERO_COUNT,
+	checkIfSessionExpiring = false,
+	notificationCount = ZERO,
+	notificationPopover = false,
+	setNotificationPopover = () => {},
+	mobileShow = false,
 }) {
 	const { t } = useTranslation(['common']);
 
-	const { user_data, userSessionMappings, query } = useSelector(({ profile, general }) => ({
+	const {
+		user_data,
+		userSessionMappings,
+		query,
+	} = useSelector(({ profile, general }) => ({
 		user_data           : profile?.user || {},
 		userSessionMappings : profile?.user_session_mappings || [],
 		query               : general?.query || {},
@@ -81,14 +89,20 @@ function Items({
 		window.location.href = '/v2/login?source=add_account';
 	};
 
-	const notificationRedirect = () => {
-		window.location.href = `/v2/${partner_id}/notifications`;
-	};
-
 	const { picture = '', name = '' } = user_data;
 
 	const handlePopover = () => {
 		setOpenPopover(!openPopover);
+		setNotificationPopover(false);
+	};
+
+	const handleNotificationClick = () => {
+		if (mobileShow) {
+			window.location.href = `/v2/${partner_id}/notifications`;
+		} else {
+			setOpenPopover(false);
+			setNotificationPopover(!notificationPopover);
+		}
 	};
 
 	let activeUser = {};
@@ -195,26 +209,6 @@ function Items({
 				})}
 			</div>
 
-			{(notificationCount > ZERO_COUNT && showSubNav) && (
-				<div className={styles.button_container}>
-					<Button
-						size="md"
-						style={{ width: '100%', marginTop: 10 }}
-						themeType="primary"
-						onClick={notificationRedirect}
-						disabled={loadingState}
-					>
-						{t('common:you_have')}
-						{' '}
-						{notificationCount}
-						{' '}
-						{t('common:new')}
-						{' '}
-						{notificationCount > ONE ? t('common:notifications') : t('common:notification')}
-					</Button>
-				</div>
-			)}
-
 			{showSubNav && (
 				<div className={styles.button_container}>
 					<Button
@@ -228,6 +222,35 @@ function Items({
 					</Button>
 				</div>
 			)}
+
+			<div className={styles.button_container}>
+				<Button
+					size="md"
+					className={styles.button_styles}
+					themeType="primary"
+					onClick={handleNotificationClick}
+					disabled={loadingState}
+				>
+					{resetSubnavs || notificationPopover ? (
+						`${t('common:you_have')} ${!notificationCount ? 'no' : notificationCount} 
+						${t('common:new')} ${
+							notificationCount > ONE ? t('common:notifications') : t('common:notification')
+						}`
+					) : (
+						<div className={styles.notification_wrapper}>
+							<IcMNotifications height="24px" width="24px" />
+
+							{notificationCount > ZERO ? (
+								<div className={styles.notifications_badge}>
+									{notificationCount > MAX_NOTIFICATION_COUNT
+										? `${MAX_NOTIFICATION_COUNT}+`
+										: notificationCount}
+								</div>
+							) : null}
+						</div>
+					)}
+				</Button>
+			</div>
 		</>
 	);
 }

@@ -1,4 +1,4 @@
-const getPlatformCardsData = (t) => [
+const getPlatformCardsData = ({ t = () => {} }) => [
 	{
 		icon_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/f74a76fc45de3258e88066a982649371.png',
 		heading  : t('welcome:for_channel_partners_suppliers_heading'),

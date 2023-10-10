@@ -1,16 +1,26 @@
 import getSourceEmails from '../helpers/getSourceEmails';
 
+const COMMON_CONTROL_KEYS_TAB_WISE_MAPPING = {
+	all           : ['status', 'assigned_to', 'user_email', 'shipment_serial_id', 'source_email', 'assigned_agent'],
+	groups        : ['status', 'assigned_to', 'user_email', 'shipment_serial_id', 'source_email', 'assigned_agent'],
+	teams         : ['status', 'assigned_to', 'user_email', 'shipment_serial_id', 'source_email', 'assigned_agent'],
+	observer      : ['status', 'assigned_to', 'user_email', 'shipment_serial_id', 'source_email', 'assigned_agent'],
+	kamContacts   : ['status', 'assigned_to', 'user_email', 'shipment_serial_id', 'source_email', 'assigned_agent'],
+	hidden_filter : ['status', 'user_email', 'source_email'],
+};
+
 const getFilterControls = ({
 	configLoading = false,
 	configData = [],
 	viewType = '',
+	activeSubTab = '',
 }) => {
 	const sourceEmails = getSourceEmails({
 		configData,
 		viewType,
 	});
 
-	return [
+	const controls = [
 		{
 			label          : '',
 			name           : 'status',
@@ -56,7 +66,7 @@ const getFilterControls = ({
 			className      : 'escalation_field_controller',
 			placeholder    : 'Select Agent',
 			rules          : {
-				required: 'This is Requied',
+				required: 'This is Required',
 			},
 		},
 		{
@@ -87,6 +97,8 @@ const getFilterControls = ({
 			loading        : configLoading,
 		},
 	];
+
+	return controls.filter((item) => COMMON_CONTROL_KEYS_TAB_WISE_MAPPING[activeSubTab]?.includes(item.name)) || [];
 };
 
 export default getFilterControls;

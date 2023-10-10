@@ -27,43 +27,41 @@ function KebabContent({
 		),
 	);
 
-	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
-	&& invoice.status === 'pending';
+	const { serial_id = '', is_cogo_assured = false } = shipment_data || {};
 
-	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
-	|| isEmpty(invoiceData.invoice_trigger_date);
+	const showForOldShipments = serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+	&& invoice?.status === 'pending';
+
+	const disableActionCondition = ['reviewed', 'approved'].includes(invoice?.status)
+	|| isEmpty(invoiceData?.invoice_trigger_date);
 
 	let disableAction = showForOldShipments ? isIRNGenerated : disableActionCondition;
 
-	if (invoice.status === 'amendment_requested') {
+	if (invoice?.status === 'amendment_requested') {
 		disableAction = false;
 	}
 
-	const commonActions = invoice.status !== 'approved' && !disableAction;
+	const commonActions = invoice?.status !== 'approved'
+	&& !disableAction;
 
-	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true
-		&& !invoice?.is_igst
-		&& (!invoice?.processing || invoice?.invoice_total_discounted === ZERO))
+	const editInvoicesVisiblity = ((is_cogo_assured !== true && !invoice?.is_igst && !invoice?.processing)
+	|| (invoice?.processing && invoice?.invoice_total_discounted === ZERO))
 		|| [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
 			GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
-
-	const handleClick = (modalName) => {
-		setShowModal(modalName);
-		setShow(false);
-	};
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 			{(!disableAction || invoice.exchange_rate_document?.length)
 					&& invoice.status !== 'revoked'
-					&& (!invoice?.processing || invoice?.invoice_total_discounted === ZERO)
+					&& (!invoice?.processing
+					|| (invoice?.invoice_total_discounted === ZERO && commonActions && editInvoicesVisiblity))
 					&& notInsuranceService ? (
 						<Popover
 							interactive
 							placement="bottom"
 							visible={show}
 							className={styles.popover_content}
-							content={!(invoice?.processing) ? (
+							content={(
 								<PopoverContent
 									setShow={setShow}
 									setShowModal={setShowModal}
@@ -71,15 +69,8 @@ function KebabContent({
 									commonActions={commonActions}
 									editInvoicesVisiblity={editInvoicesVisiblity}
 									showCancelOptions={showCancelOptions}
+									shipment_data={shipment_data}
 								/>
-							) : editInvoicesVisiblity && (
-								<Button
-									themeType="tertiary"
-									className={styles.text}
-									onClick={() => handleClick('edit_invoice')}
-								>
-									Edit Invoice
-								</Button>
 							)}
 							onClickOutside={() => setShow(false)}
 						>

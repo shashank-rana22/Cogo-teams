@@ -9,7 +9,8 @@ export default {
 			code   : 'IDR',
 			symbol : 'Rp',
 		},
-		mobile_country_code: '+62',
+		mobile_country_code       : '+62',
+		invoice_allowed_languages : ['english'],
 	},
 	formats: {
 		amount: {
@@ -50,6 +51,7 @@ export default {
 		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		cogoverse_user_id                : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',
 		cogo_demo_account_shipper        : ['302bdc56-e807-4c71-a27c-92f83640f140'],
+		cogo_auditor_id                  : 'fc2f1dac-6de9-4dd9-990e-bd8746fc10ce',
 		spot_booking_shipping_lines      : [
 			'c3649537-0c4b-4614-b313-98540cffcf40',
 			'b2f92d49-6180-43bd-93a5-4d64f5819a9b',
@@ -95,6 +97,7 @@ export default {
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
 		operation_manager          : 'ed3e6418-6013-4710-83cf-5b0b117aa8a1',
 		finops_manager             : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
+		cogo_auditor               : 'fc2f1dac-6de9-4dd9-990e-bd8746fc10ce',
 		ff_cost_booking_executive  : '8cc096a8-e279-425c-ba95-3970614c3d8e',
 		kam_ids                    : [
 			'9ead41d4-ced8-45c2-b370-4399cbfcf478', // Prod_KAM Location Sales
@@ -126,6 +129,7 @@ export default {
 			'dc5e8695-c30e-4350-9de9-8218ed1abfc4', // CCS Manager - Enterprise
 
 		],
+		cp_program_manager               : '122c2266-6c55-4b97-9f61-1056f87b53a7',
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 		freight_force_org_id             : '36cee6fb-eeaf-4643-9db5-397544339635',
@@ -275,6 +279,9 @@ export default {
 		finops                    : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
 		cogo_one_kyc              : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
 		finance_branch_accounts   : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
+		service_ops3              : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
+		data_superadmin           : 'df340ea2-91b5-4cbc-80ab-d11cec21f040',
+		kam_admin                 : 'df6591f0-f41b-4283-9966-7d0225e1df00', // Kam Admin Vietnam
 	},
 	options: {
 		registration_types: [
@@ -400,6 +407,14 @@ export default {
 			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
 			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
 			{ label: 'Requested', value: 'REQUESTED' },
+		],
+		invoice_status_new: [
+			{ label: 'Draft', value: 'DRAFT' },
+			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
+			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
+			{ label: 'E-Invoice Generated', value: 'IRN_GENERATED' },
+			{ label: 'E-Invoice Failed', value: 'IRN_FAILED' },
+			{ label: 'E-Invoice Cancelled', value: 'IRN_CANCELLED' },
 		],
 		freight_container_types: [
 			{
@@ -541,7 +556,7 @@ export default {
 	others: {
 		registration_number: {
 			label      : 'NPWP',
-			pattern    : /^\d{13}$/,
+			pattern    : /^\d{15}|\d{16}$/,
 			max_length : 13,
 		},
 		banking_code: {
@@ -576,6 +591,12 @@ export default {
 						request_replace_invoice : false,
 						request_credit_note     : false,
 					},
+				},
+				common: {
+					validate_registration_number : false,
+					validate_pan_number          : false,
+					include_gst                  : false,
+					is_export_tradeType          : false,
 				},
 			},
 		},

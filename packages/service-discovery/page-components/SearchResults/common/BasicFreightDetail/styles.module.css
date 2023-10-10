@@ -1,33 +1,11 @@
-.amount {
+.container {
 	display: flex;
 	align-items: baseline;
+	margin-right: 20px;
 	font-size: 22px;
 	font-weight: 600;
 	line-height: 150%;
 	color: #000;
-}
-
-.wrapper {
-	display: inline-block;
-}
-
-.container_details {
-	font-size: 10px;
-	line-height: 150%;
-	color: #000;
-	opacity: 0.5;
-}
-
-.text {
-	padding-left: 4px;
-	font-size: 10px;
-	line-height: 150%;
-	color: #000;
-	opacity: 0.5;
-}
-
-.container {
-	margin-right: 20px;
 }
 
 .tooltip_content {

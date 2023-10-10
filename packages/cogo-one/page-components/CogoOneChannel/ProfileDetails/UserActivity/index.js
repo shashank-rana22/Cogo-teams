@@ -9,6 +9,7 @@ import useListCogooneTimeline from '../../../../hooks/useListCogooneTimeline';
 import useListUserChatSummary from '../../../../hooks/useListUserChatSummary';
 
 import ActiveComponent from './ActiveComponent';
+import CommunicationTabs from './CommunicationTabs';
 import Filters from './Filters';
 import LoadingState from './LoadingState';
 import ShipmentLoadingState from './ShipmentActivities/LoadingState';
@@ -27,10 +28,11 @@ function Loader({ activityTab = '' }) {
 
 function UserActivities(props) {
 	const {
-		activeTab = '', activeVoiceCard = {}, customerId, formattedMessageData, activeMessageCard, showMore,
+		activeTab = '', activeVoiceCard = {}, customerId, formattedMessageData, activeMessageCard,
 		setRaiseTicketModal = () => {},
 		viewType = '',
 		setActiveTab = () => {},
+		mailProps = {},
 	} = props || {};
 
 	const [activityTab, setActivityTab] = useState('transactional');
@@ -78,7 +80,6 @@ function UserActivities(props) {
 		type: 'activity',
 		pagination,
 		setPagination,
-
 	});
 
 	const {
@@ -161,13 +162,6 @@ function UserActivities(props) {
 		emptyCheck = isEmpty(timeLineList);
 	}
 
-	useEffect(() => {
-		if (showMore) {
-			setActivityTab('communication');
-			setActiveSubTab('summary');
-		}
-	}, [showMore]);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.tabs}>
@@ -193,18 +187,7 @@ function UserActivities(props) {
 			</div>
 
 			{(FIREBASE_TABS.includes(activeTab) && activityTab === 'communication') && (
-				<div className={styles.communication_options}>
-					<Tabs
-						activeTab={activeSubTab}
-						themeType="secondary"
-						onChange={setActiveSubTab}
-						fullWidth={false}
-					>
-						<TabPanel name="channels" title="Channels" />
-						<TabPanel name="agent" title="Agents" />
-						<TabPanel name="summary" title="Summary" />
-					</Tabs>
-				</div>
+				<CommunicationTabs activeSubTab={activeSubTab} setActiveSubTab={setActiveSubTab} />
 			)}
 
 			{activeSubTab !== 'agent' && (
@@ -259,6 +242,7 @@ function UserActivities(props) {
 					viewType={viewType}
 					fetchActivityLogs={fetchActivityLogs}
 					setActiveTab={setActiveTab}
+					mailProps={mailProps}
 				/>
 			)}
 

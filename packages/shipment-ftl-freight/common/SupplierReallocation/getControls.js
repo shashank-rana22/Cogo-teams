@@ -1,5 +1,5 @@
 const validServiceType = ['trailer_freight_service', 'haulage_freight_service', 'ftl_freight_service'];
-const displayServiceType = ['ftl_freight', 'haulage_freight'];
+const displayServiceType = ['ftl_freight'];
 const SPLIT_SERVICE_TEXT = 2;
 
 export default function getControls({

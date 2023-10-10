@@ -1,13 +1,12 @@
 import { Button, Modal } from '@cogoport/components';
 import OTPInput from '@cogoport/forms/page-components/Business/OTPInput';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcCWaitForTimeSlots, IcMArrowDoubleRight } from '@cogoport/icons-react';
+import { IcCWaitForTimeSlots, IcMArrowDoubleRight, IcCFtick } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useRef, useContext } from 'react';
+import { useContext } from 'react';
 
 import { CheckoutContext } from '../../context';
-import handleTimer from '../../utils/handleTimer';
 
 import CogoPoint from './CogoPoint';
 import domesticServices from './domestic-services.json';
@@ -18,9 +17,48 @@ import useHandleBookingConfirmationFooter from './useHandleBookingConfirmationFo
 import getButtonLabel from './utils/getButtonLabel';
 import getDisabledCondition from './utils/getDisabledCondition';
 
-const SECOND_TO_MILLISECOND = 1000;
-
 const OTP_LENGTH = 4;
+
+function AddToCartButton({ updateCheckout = () => {}, detail = {} }) {
+	const { tags = [], quotation_email_sent_at = '', id = '' } = detail;
+
+	if (!quotation_email_sent_at) {
+		return null;
+	}
+
+	const isAddedToCart = tags.includes('added_to_cart');
+
+	const handleAddToCart = () => {
+		if (isAddedToCart) {
+			return;
+		}
+
+		updateCheckout({ values: { id, tags: [...tags, 'added_to_cart'] } });
+	};
+
+	return (
+		<Button
+			type="button"
+			size="xl"
+			themeType="secondary"
+			style={{ marginRight: '12px' }}
+			onClick={handleAddToCart}
+			disabled={isAddedToCart}
+		>
+			<div className={styles.flex} style={{ justifyContent: 'space-between' }}>
+				{isAddedToCart ? 'Added to cart' : 'Add to cart'}
+
+				{isAddedToCart ? <IcCFtick className={styles.cart_icon} /> : (
+					<img
+						src={GLOBAL_CONSTANTS.image_url.cart_png}
+						alt="order"
+						className={styles.cart_icon}
+					/>
+				)}
+			</div>
+		</Button>
+	);
+}
 
 function BookingConfirmationFooter({
 	detail = {},
@@ -35,6 +73,7 @@ function BookingConfirmationFooter({
 	error = '',
 	isAssistedBookingNotAllowed = false,
 	noRatesPresent = false,
+	updateCheckout = () => {},
 }) {
 	const {
 		query: { shipment_id },
@@ -49,8 +88,6 @@ function BookingConfirmationFooter({
 		invoice = {},
 		rate = {},
 	} = useContext(CheckoutContext);
-
-	const timerRef = useRef(null);
 
 	const {
 		primary_service = '',
@@ -82,6 +119,9 @@ function BookingConfirmationFooter({
 			&& !is_tnc_accepted
 			&& credit_source === 'pre_approved_clean_credit');
 
+	const isKycPending = (detail?.importer_exporter?.kyc_status !== 'verified'
+	&& !detail?.importer_exporter?.skippable_checks?.includes('kyc'));
+
 	const {
 		handleSubmit,
 		onClickSubmitOtp,
@@ -94,9 +134,9 @@ function BookingConfirmationFooter({
 		setShowOtpModal = () => {},
 		otpValue = '',
 		submitForOtpVerification = () => {},
-		validity_end = '',
 		showMarginModal = false,
 		setShowMarginModal = () => {},
+		timerRef,
 	} = useHandleBookingConfirmationFooter({
 		rate,
 		detail,
@@ -109,27 +149,8 @@ function BookingConfirmationFooter({
 		invoicingParties,
 		disableConditionForFcl,
 		noRatesPresent,
+		isKycPending,
 	});
-
-	useEffect(() => {
-		let time;
-
-		if (!hasExpired) {
-			const interval = setInterval(() => {
-				time = handleTimer(validity_end);
-
-				if (time) {
-					timerRef.current.innerText = time;
-				}
-			}, SECOND_TO_MILLISECOND);
-
-			if (!validity_end) {
-				return () => clearInterval(interval);
-			}
-			return () => clearInterval(interval);
-		}
-		return () => {};
-	}, [hasExpired, validity_end]);
 
 	const {
 		booking_status = '',
@@ -152,7 +173,8 @@ function BookingConfirmationFooter({
 	|| isVeryRisky
 	|| noRatesPresent
 	|| isEmpty(invoicingParties)
-	|| disableConditionForBookingMethods;
+	|| disableConditionForBookingMethods
+	|| isKycPending;
 
 	return (
 		<div className={styles.container}>
@@ -190,6 +212,11 @@ function BookingConfirmationFooter({
 
 			{!hasExpired && bookingConfirmationMode !== 'email' ? (
 				<div className={styles.button_container}>
+					<AddToCartButton
+						updateCheckout={updateCheckout}
+						detail={detail}
+					/>
+
 					<Button
 						type="button"
 						size="xl"

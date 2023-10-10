@@ -29,6 +29,7 @@ import governance_manager from './governance-manager-apis';
 import HRMS from './hrms-apis';
 import igm_desk from './igm-desk-apis';
 import igm_shipment from './igm-shipment-apis';
+import ihls from './ihls-apis';
 import ingestion from './ingestion-apis';
 import cargo_insurance from './insurance-apis';
 import kam_desk from './kam-desk-apis';
@@ -40,6 +41,7 @@ import manage_rfq from './manage-rfq-apis';
 import okam_task_apis from './okam-task-dashboard';
 import partner from './partner-apis';
 import payments from './payments-apis';
+import performance_and_incentives from './performance-and-incentives-apis';
 import performance_management from './performance-managment-apis';
 import poc from './poc-apis';
 import pms from './port-management';
@@ -63,6 +65,7 @@ import supply_allocation from './supply-allocation';
 import tech_ops from './tech-ops-apis';
 import tools from './tools';
 import vendor_rm_apis from './vendor_rm_apis';
+import welcome from './welcome-apis';
 
 const apis = {
 	search: search.map((api) => ({
@@ -152,6 +155,7 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
+	welcome,
 	cargo_insurance,
 	...saas_tools,
 	...performance_management,
@@ -173,7 +177,9 @@ const apis = {
 	supply_allocation,
 	centralised_customer_service,
 	...authApis,
+	...ihls,
 	ssr,
+	...performance_and_incentives,
 	service_discovery,
 };
 

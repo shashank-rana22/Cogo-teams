@@ -1,8 +1,9 @@
 import { Input, Select } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { DOC_TYPE_OPTIONS } from '../../../configurations/ap-ar-settlement/docType-options';
-import { STATUS_OPTIONS1, STATUS_OPTIONS2 } from '../../../configurations/ap-ar-settlement/status-options';
+import { getDocTypeOptions } from '../../../configurations/ap-ar-settlement/docType-options';
+import { statusOptionsPayment, statusOptionsInvoice } from '../../../configurations/ap-ar-settlement/status-options';
 
 import styles from './styles.module.css';
 
@@ -10,7 +11,10 @@ export function SearchFilters({
 	filters = {},
 	onFiltersChange = () => {},
 	loading = false,
+	jvSearch = '',
+	setJvSearch = () => {},
 }) {
+	const { t = () => {} } = useTranslation(['settlement']);
 	const handleFilterChange = (filterName = '', value = '') => {
 		onFiltersChange(filterName, value);
 	};
@@ -22,8 +26,8 @@ export function SearchFilters({
 					<Select
 						value={filters?.docType}
 						onChange={(e) => handleFilterChange('docType', e)}
-						placeholder="Document Type"
-						options={DOC_TYPE_OPTIONS}
+						placeholder={t('settlement:doc_type_placeholder') || ''}
+						options={getDocTypeOptions({ t })}
 						size="sm"
 						className={styles.common}
 						isClearable
@@ -36,12 +40,12 @@ export function SearchFilters({
 
 				&& ((filters?.docType === 'PAYMENT' || filters?.docType === 'CREDIT_NOTE')
 					? (
-						<div style={{ marginLeft: '20px' }}>
+						<div className={styles.statusMargin}>
 							<Select
 								value={filters?.status}
 								onChange={(e) => handleFilterChange('status', e)}
-								placeholder="Status"
-								options={STATUS_OPTIONS1}
+								placeholder={t('settlement:status_placeholder') || ''}
+								options={statusOptionsPayment({ t })}
 								size="sm"
 								className={styles.common}
 								isClearable
@@ -49,12 +53,12 @@ export function SearchFilters({
 							/>
 						</div>
 					) : (
-						<div style={{ marginLeft: '20px' }}>
+						<div className={styles.statusMargin}>
 							<Select
 								value={filters?.status}
 								onChange={(e) => handleFilterChange('status', e)}
-								placeholder="Status"
-								options={STATUS_OPTIONS2}
+								placeholder={t('settlement:status_placeholder') || ''}
+								options={statusOptionsInvoice({ t })}
 								size="sm"
 								className={styles.common}
 								isClearable
@@ -70,9 +74,9 @@ export function SearchFilters({
 				<Input
 					name="search"
 					size="sm"
-					value={filters?.search || ''}
-					onChange={(e) => handleFilterChange('search', e)}
-					placeholder="Search By Document Number"
+					value={jvSearch || filters?.search || ''}
+					onChange={(e) => { setJvSearch(''); handleFilterChange('search', e); }}
+					placeholder={t('settlement:search_placeholder') || ''}
 				/>
 			</div>
 		</div>

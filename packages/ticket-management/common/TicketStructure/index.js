@@ -1,4 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import EmptyTicket from '../EmptyTicket';
 
@@ -12,11 +13,14 @@ function TicketStructure({
 	setModalData = () => {},
 	label = '',
 	updateTicketActivity = () => {},
+	updateLoading = false,
 	listLoading = false,
 	reachedBottom = false,
 }) {
+	const { t } = useTranslation(['myTickets']);
+
 	if (!listLoading && isEmpty(data)) {
-		return <EmptyTicket emptyText={`No ${label} Tickets`} />;
+		return <EmptyTicket emptyText={`${t('myTickets:no_label')} ${label} ${t('myTickets:tickets_label')}`} />;
 	}
 
 	return (
@@ -33,10 +37,10 @@ function TicketStructure({
 			{
 				(data || []).map((item = {}) => (
 					<TicketStructureBody
-						data={item}
 						key={item.id}
-						label={label}
+						data={item}
 						setModalData={setModalData}
+						updateLoading={updateLoading}
 						updateTicketActivity={updateTicketActivity}
 					/>
 				))
@@ -44,7 +48,7 @@ function TicketStructure({
 
 			{reachedBottom ? (
 				<div className={styles.footer_no_data}>
-					No more tickets are available
+					{t('myTickets:reached_bottom_label')}
 				</div>
 			) : null}
 

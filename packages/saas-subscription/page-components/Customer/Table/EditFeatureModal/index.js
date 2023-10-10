@@ -1,6 +1,7 @@
-import { ButtonIcon, Modal } from '@cogoport/components';
+import { ButtonIcon, Modal, cl } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import CancelSub from './CancelSub';
 import Plan from './Plan';
@@ -15,10 +16,15 @@ const cancelObj = {
 	featureInfo          : {},
 };
 
-const RenderTitle = ({ editAddon, product_name = '' }) => {
-	if (editAddon) return startCase(product_name);
-	return 'Change Plan';
-};
+function RenderTitle({ editAddon, product_name = '' }) {
+	const { t } = useTranslation(['saasSubscription']);
+	if (editAddon) {
+		return (
+			<span>{startCase(product_name)}</span>
+		);
+	}
+	return <span>{t('saasSubscription:edit_feature_title')}</span>;
+}
 
 function EditFeatureModal({ editModal, setEditModal }) {
 	const {
@@ -45,7 +51,7 @@ function EditFeatureModal({ editModal, setEditModal }) {
 		>
 			{!editCancelSub ? (
 				<div>
-					<div className={`${styles.flex_box} ${styles.title_container}`}>
+					<div className={cl`${styles.flex_box} ${styles.title_container}`}>
 						<h3 className={styles.title}>
 							<RenderTitle editAddon={editAddon} product_name={product_name} />
 						</h3>
@@ -65,7 +71,7 @@ function EditFeatureModal({ editModal, setEditModal }) {
 					{editPlan && (
 						<Plan
 							modalChangeHandler={modalChangeHandler}
-							subscriptionId={featureInfo}
+							featureInfo={featureInfo}
 						/>
 					)}
 				</div>

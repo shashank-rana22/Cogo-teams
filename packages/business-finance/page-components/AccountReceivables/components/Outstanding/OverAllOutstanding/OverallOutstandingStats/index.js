@@ -1,4 +1,4 @@
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
@@ -10,6 +10,8 @@ import {
 
 import OutStandingStatsCommonCard from './OutStandingStatsCommonCard';
 import styles from './styles.module.css';
+
+const DEFAULT_AMOUNT = 0;
 
 function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 	const { openInvoiceBucket, onAccountBucket, totalOutstandingBucket, creditNoteBucket } = item || {};
@@ -30,31 +32,34 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 				</div>
 				<div style={{ margin: '12px 0px 20px 11px' }}>
 					<OutStandingStatsCommonCard
-						label="Open invoices"
+						label="OPEN INVOICES"
 						item={openInvoiceBucket}
 						amountValue={OVERALL_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
 						amountColor="#FC5555"
 					/>
 					<OutStandingStatsCommonCard
-						label="On Account Payments"
+						label="ON ACCOUNT PAYMENTS"
 						item={onAccountBucket}
 						amountValue={ONACCOUNT_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
 						amountColor="#29CC6A"
 					/>
 					<OutStandingStatsCommonCard
-						label="Credit Notes"
+						label="CREDIT NOTES"
 						item={creditNoteBucket}
 						amountValue={OVERALL_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
-						amountColor="#FC5555"
+						amountColor={creditNoteBucket?.totalLedAmount
+							<= DEFAULT_AMOUNT ? '#29CC6A' : '#FC5555'}
 					/>
 				</div>
 			</div>
 			<div className={styles.outstanding_card}>
 				<div className={styles.total_outstanding_label}>Total Outstanding</div>
-				<div className={styles.amount}>
+				<div className={cl`${totalLedAmount > GLOBAL_CONSTANTS.zeroth_index
+					? styles.amount : styles.credit_note_amount} ${styles.common_amount}`}
+				>
 					{statsLoading ? <Placeholder /> : formatAmount({
 						amount   : totalLedAmount || GLOBAL_CONSTANTS.zeroth_index,
 						currency : ledCurrency,

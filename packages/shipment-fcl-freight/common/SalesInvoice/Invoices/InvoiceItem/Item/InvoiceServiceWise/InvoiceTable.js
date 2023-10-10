@@ -1,9 +1,14 @@
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import getFormattedAmount from '../../../../helpers/getFormattedAmount';
 import getServiceNameforTableColumn from '../../../../helpers/getServiceNameforTableColumn';
 
-export const InvoiceTable = (serviceItem = {}) => {
+const TWO = 2;
+const SIX = 6;
+
+export const invoiceTable = (serviceItem = {}) => {
 	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, serviceItem?.trade_type);
+	const { zeroth_index } = GLOBAL_CONSTANTS;
 
 	return [
 		{
@@ -23,78 +28,35 @@ export const InvoiceTable = (serviceItem = {}) => {
 		},
 		{
 			label  : 'Rate',
-			render : (item) => formatAmount({
-				amount   : item?.price_discounted || 0,
-				currency : item?.currency,
-				options  : {
-					style                 : 'decimal',
-					maximumFractionDigits : 2,
-				},
-			}),
-			span: 1,
+			render : (item) => getFormattedAmount(item?.price_discounted, item?.currency, TWO),
+			span   : 1,
 		},
 		{
 			label  : 'Quantity',
-			render : (item) => formatAmount({
-				amount   : item?.quantity || 0,
-				currency : item?.currency,
-				options  : {
-					style                 : 'decimal',
-					maximumFractionDigits : 2,
-				},
-			}),
-			span: 1,
+			render : (item) => getFormattedAmount(item?.quantity, item?.currency, TWO),
+			span   : 1,
 		},
 		{
 			label  : 'Discount',
-			render : (item) => formatAmount({
-				amount   : item?.discount_price || 0,
-				currency : item?.currency,
-				options  : {
-					style                 : 'decimal',
-					maximumFractionDigits : 2,
-				},
-			}),
-			span: 1,
+			render : (item) => getFormattedAmount(item?.discount_price, item?.currency, TWO),
+			span   : 1,
 		},
 
 		{
 			label  : 'Exc. Rate',
-			render : (item) => formatAmount({
-				amount   : item?.exchange_rate || 0,
-				currency : item?.currency,
-				options  : {
-					style                 : 'decimal',
-					maximumFractionDigits : 2,
-				},
-			}),
-			span: 1,
+			render : (item) => getFormattedAmount(item?.exchange_rate, item?.currency, SIX),
+			span   : 1,
 		},
 		{
 			label  : 'Tax Amt.',
-			render : (item) => `${formatAmount({
-				amount   : item?.tax_price_discounted || 0,
-				currency : item?.currency,
-				options  : {
-					style                 : 'currency',
-					currencyDisplay       : 'code',
-					maximumFractionDigits : 2,
-				},
-			})} (${item?.tax_percent || 0}%)`,
+			render : (item) => `${getFormattedAmount(item?.tax_price_discounted, item?.currency, TWO)} (${
+				item?.tax_percent || zeroth_index}%)`,
 			span: 1,
 		},
 		{
 			label  : 'Amt. with Tax',
-			render : (item) => formatAmount({
-				amount   : item?.tax_total_price_discounted || 0,
-				currency : item?.currency,
-				options  : {
-					style                 : 'currency',
-					currencyDisplay       : 'code',
-					maximumFractionDigits : 2,
-				},
-			}),
-			span: 1,
+			render : (item) => getFormattedAmount(item?.tax_total_price_discounted, item?.currency, TWO),
+			span   : 1,
 		},
 	];
 };

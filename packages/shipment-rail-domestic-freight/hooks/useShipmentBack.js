@@ -15,13 +15,15 @@ export default function useShipmentBack() {
 	const [isBackAllowed, setIsBackAllowed] = useState();
 	const router = useRouter();
 
+	const { navigation = '' } = router.query;
+
 	const { navToRedirect, version } = useMemo(() => {
 		const { nav_items: { partner: allSideBarNavs } } = getSideBarConfigs({
 			userData: { permissions_navigations, email },
 		});
 
-		return getRedirectNavMapping(allSideBarNavs);
-	}, [permissions_navigations, email]);
+		return getRedirectNavMapping(allSideBarNavs, navigation);
+	}, [permissions_navigations, email, navigation]);
 
 	useEffect(() => {
 		setIsBackAllowed(() => {
@@ -45,7 +47,9 @@ export default function useShipmentBack() {
 		if (isBackAllowed) {
 			router.back();
 		} else if (version === 'v2') {
-			router.push(navToRedirect?.href, navToRedirect?.as);
+			const REMOVE_V2 = '/v2';
+			const routerPushURL = navToRedirect?.href?.slice(REMOVE_V2.length);
+			router.push(routerPushURL, routerPushURL);
 		} else {
 			const newUrl = `${window.location.origin}/${router?.query?.partner_id}/${navToRedirect.href}`;
 

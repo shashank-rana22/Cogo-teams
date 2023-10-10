@@ -154,6 +154,7 @@ function Footer({ data, shipmentData, singleServiceData, setSellRates, sellRates
 						<Popover
 							placement="top"
 							trigger="mouseenter"
+							className={styles.popover_container}
 							render={(
 								<ShowLineItems
 									serviceType={singleServiceData?.service_type}
@@ -183,7 +184,7 @@ function Footer({ data, shipmentData, singleServiceData, setSellRates, sellRates
 								<div className={styles.price_value}>
 									{formatAmount({
 										amount   : data?.rowData?.origin_locals_price,
-										currency : data?.rowData?.origin_locals_price_currency,
+										currency : data?.rowData?.currency,
 										options  : {
 											style                 : 'currency',
 											currencyDisplay       : 'code',
@@ -201,7 +202,7 @@ function Footer({ data, shipmentData, singleServiceData, setSellRates, sellRates
 								<div className={styles.price_value}>
 									{formatAmount({
 										amount   : data?.rowData?.destination_locals_price,
-										currency : data?.rowData?.destination_locals_price_currency,
+										currency : data?.rowData?.currency,
 										options  : {
 											style                 : 'currency',
 											currencyDisplay       : 'code',

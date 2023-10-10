@@ -11,6 +11,8 @@ export default function ConfirmSettle({
 	date = '',
 	fileValue = {},
 	settleLoading = false,
+	setJvSearch = () => {},
+	t = () => {},
 }) {
 	return (
 		<div>
@@ -20,13 +22,13 @@ export default function ConfirmSettle({
 				onOuterClick={() => { setSettleConfirmation(false); }}
 				size="md"
 			>
-				<Modal.Header title="SETTLEMENT CONFIRMATION" />
+				<Modal.Header title={t('settlement:settle_confirmation_title')} />
 				<Modal.Body>
 					<div
 						className={styles.settleModalBody}
 					>
 
-						<p>Are you sure you want to settle?</p>
+						<p>{t('settlement:settle_confirm_message')}</p>
 
 					</div>
 				</Modal.Body>
@@ -38,16 +40,17 @@ export default function ConfirmSettle({
 						themeType="secondary"
 						disabled={settleLoading}
 					>
-						NO
+						{t('settlement:no_btn')}
 					</Button>
 					<Button
 						themeType="primary"
 						onClick={() => {
 							submitSettleMatch({ updatedData, date, fileValue, setSettleConfirmation });
+							setJvSearch('');
 						}}
 						disabled={settleLoading}
 					>
-						YES
+						{t('settlement:yes_btn')}
 					</Button>
 				</Modal.Footer>
 			</Modal>

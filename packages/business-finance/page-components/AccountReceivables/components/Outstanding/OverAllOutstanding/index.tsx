@@ -1,8 +1,13 @@
-import { Pagination } from '@cogoport/components';
+import { Button, Pagination, cl } from '@cogoport/components';
 import { startCase, isEmpty, startOfMonth } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
 import EmptyState from '../../../commons/EmptyStateDocs';
+import {
+	kamWiseList,
+	serviceWiseList,
+	ccWiseList,
+} from '../../../configs/dummy-graph-stats';
 import useGetCallPriority from '../../../hooks/useGetCallPriority';
 import useGetCcCommunicationStats from '../../../hooks/useGetCcCommunicationStats';
 import useGetCcWiseOutstandingStats from '../../../hooks/useGetCcWiseOutstandingStats';
@@ -21,7 +26,12 @@ import ScrollBar from './ScrollBar';
 import styles from './styles.module.css';
 
 const LOADER_LEN = 7;
-function OverAllOutstanding({ entityCode = '' }) {
+const ONLY_LEFT = true;
+
+function OverAllOutstanding({
+	entityCode = '',
+	setSelectedOrgId = () => {},
+}) {
 	const [formFilters, setFormFilters] = useState({
 		kamId              : '',
 		salesAgentId       : '',
@@ -49,14 +59,16 @@ function OverAllOutstanding({ entityCode = '' }) {
 	const { statsData, statsLoading } = useGetSageArOutstandingsStats({
 		entityCode,
 	});
+	const [viewGraphStats, setViewGraphStats] = useState(false);
 	const ref = useRef(null);
 	const RIGHT_OFF_SET = 2000;
 	const LEFT_OFF_SET = -2000;
-	const { kamWiseStats, kamWiseLoading } = useGetKamWiseOutstandingsStats();
-	const { serviceWiseStats, serviceWiseLoading } =	useGetServiceWiseOutstandingsStats();
-	const { ccWiseStats, ccWiseLoading } = useGetCcWiseOutstandingStats();
+	const { kamWiseStats, kamWiseLoading } = useGetKamWiseOutstandingsStats({ viewGraphStats });
+	const { serviceWiseStats, serviceWiseLoading } =	useGetServiceWiseOutstandingsStats({ viewGraphStats });
+	const { ccWiseStats, ccWiseLoading } = useGetCcWiseOutstandingStats({ viewGraphStats });
 	const { ccCommStats = [], ccCommLoading = false } = useGetCcCommunicationStats({
 		dateFilter,
+		viewGraphStats,
 	});
 	const { page, pageLimit } = outStandingFilters || {};
 	const { totalRecords, list = [] } = outStandingData || {};
@@ -99,7 +111,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 
 	const graphPropsList = {
 		kam_wise_outstandings: {
-			data        : KamDataPoints,
+			data        : viewGraphStats ? KamDataPoints : kamWiseList,
 			heading     : 'KAM Wise Outstandings',
 			loading     : kamWiseLoading,
 			isKamWise   : true,
@@ -112,7 +124,7 @@ function OverAllOutstanding({ entityCode = '' }) {
 			},
 		},
 		service_wise_outstandings: {
-			data        : ServiceDataPoints,
+			data        : viewGraphStats ? ServiceDataPoints : serviceWiseList,
 			heading     : 'Service Wise Open Invoices',
 			loading     : serviceWiseLoading,
 			isKamWise   : false,
@@ -127,8 +139,8 @@ function OverAllOutstanding({ entityCode = '' }) {
 	};
 	const graphPropsChild = {
 		cc_wise_outstandings: {
-			data        : ccDataPoints,
-			heading     : 'CC Wise Outstandings',
+			data        : viewGraphStats ? ccDataPoints : ccWiseList,
+			heading     : 'CC Wise Outstanding',
 			loading     : ccWiseLoading,
 			isKamWise   : true,
 			graphStyles : {
@@ -145,6 +157,15 @@ function OverAllOutstanding({ entityCode = '' }) {
 		<>
 			<OverallOutstandingStats item={statsData} statsLoading={statsLoading} />
 			<div className={`${styles.overlay_container} overlay_section`}>
+				{viewGraphStats && (
+					<ScrollBar
+						ref={ref}
+						rightOffSet={RIGHT_OFF_SET}
+						leftOffSet={LEFT_OFF_SET}
+						left={ONLY_LEFT}
+						right={!ONLY_LEFT}
+					/>
+				)}
 				<div className={styles.scroll_container}>
 					<div ref={ref}>
 						<div className={`${styles.outstanding_card} overlay_section`}>
@@ -157,36 +178,49 @@ function OverAllOutstanding({ entityCode = '' }) {
 									</div>
 								))}
 							</div>
-							<div className={styles.cc_graph_card_div}>
+							<div className={styles.graph_div}>
 								{Object.keys(graphPropsChild || {}).map((singleGraphProp) => (
-									<div key={singleGraphProp} style={{ width: '100%' }}>
+									<div key={singleGraphProp} className={styles.card}>
 										<ResponsivePieChart
 											{...(graphPropsChild[singleGraphProp] || {})}
 										/>
 									</div>
 								))}
-							</div>
-							<div className={styles.cc_call_table}>
-								<CcCallList
-									data={ccCommStats || []}
-									loading={ccCommLoading}
-									dateFilter={dateFilter}
-									setDateFilter={setDateFilter}
-									range={range}
-									setRange={setRange}
-								/>
+								<div className={cl`${styles.cc_call_table} ${styles.card}`}>
+									<CcCallList
+										data={ccCommStats || []}
+										loading={ccCommLoading}
+										dateFilter={dateFilter}
+										setDateFilter={setDateFilter}
+										range={range}
+										setRange={setRange}
+									/>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div>
-						<ScrollBar
-							ref={ref}
-							rightOffSet={RIGHT_OFF_SET}
-							leftOffSet={LEFT_OFF_SET}
-						/>
-
+						{!viewGraphStats && (
+							<div className={styles.overlay}>
+								<Button
+									onClick={() => setViewGraphStats(true)}
+									className="primary md"
+								>
+									View
+								</Button>
+							</div>
+						)}
 					</div>
 				</div>
+				{viewGraphStats && (
+					<ScrollBar
+						ref={ref}
+						rightOffSet={RIGHT_OFF_SET}
+						leftOffSet={LEFT_OFF_SET}
+						left={!ONLY_LEFT}
+						right={ONLY_LEFT}
+					/>
+				)}
 			</div>
 			<OutstandingFilter
 				params={outStandingFilters}
@@ -222,10 +256,11 @@ function OverAllOutstanding({ entityCode = '' }) {
 							outStandingFilters={outStandingFilters}
 							formFilters={formFilters}
 							organizationId={item?.organizationId}
+							setSelectedOrgId={setSelectedOrgId}
 						/>
 					))}
 					{isEmpty(list) && <div className={styles.empty_state}><EmptyState /></div>}
-					{!isEmpty(list) && (
+					{!isEmpty(list) && (totalRecords >= pageLimit) && (
 						<div className={styles.pagination_container}>
 							<Pagination
 								type="table"
