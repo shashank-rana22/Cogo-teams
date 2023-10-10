@@ -26,7 +26,7 @@ const useRaiseTicketcontrols = ({
 	const isOperation = rolesArr.includes('operations');
 
 	const checkSid = watchIdType === 'sid'
-		? 'list_shipments' : SERVICE_API_MAPPING[watchServiceType];
+		? 'list_shipments' : SERVICE_API_MAPPING?.[watchIdType]?.[watchServiceType];
 
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
 
@@ -81,7 +81,8 @@ const useRaiseTicketcontrols = ({
 		key      : watchServiceType,
 		params   : {
 			filters: {
-				status: 'active',
+				status        : 'active',
+				feedback_type : watchIdType === 'dislike_id' ? 'disliked' : undefined,
 			},
 		},
 		valueKey    : 'serial_id',
@@ -105,6 +106,7 @@ const useRaiseTicketcontrols = ({
 		formatRaiseToDeskOptions,
 		setDefaultTypeId,
 		isOperation,
+		watchIdType,
 	});
 
 	return controls.filter((itm) => itm?.visible);
