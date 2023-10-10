@@ -5,8 +5,6 @@ import { useState, useEffect } from 'react';
 function useGetLeaderbordList(props) {
 	const { view, dateRange } = props;
 
-	console.log('view :: ', view);
-
 	const [params, setParams] = useState({
 		page                     : 1,
 		page_limit               : 8,
