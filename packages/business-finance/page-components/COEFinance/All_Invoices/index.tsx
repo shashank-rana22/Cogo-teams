@@ -16,7 +16,7 @@ const tabs = [
 	},
 ];
 
-const VIEWS = ['finance_rejected', 'coe_rejected', 'coe_on_hold'];
+const COST_ADVOCATE_VIEWS = ['finance_rejected', 'coe_rejected', 'coe_on_hold'];
 
 const tabsKeyComponentMapping = {
 	'purchase-view' : PurchaseInvoice,
@@ -27,7 +27,7 @@ function AllInvoices({ statsData }) {
 	const { push, query } = useRouter();
 	const [filters, setFilters] = useState({});
 	const getQueryView = () => {
-		if (VIEWS.includes(query.view)) {
+		if (COST_ADVOCATE_VIEWS.includes(query.view)) {
 			return null;
 		}
 		return query.view;
