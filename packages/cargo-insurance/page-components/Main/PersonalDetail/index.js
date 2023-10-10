@@ -9,7 +9,7 @@ import getPersonalDetailControls from '../../../configurations/personalDetailCon
 import styles from './styles.module.css';
 
 function PersonalDetail(props, ref) {
-	const { pocDetails } = props;
+	const { pocDetails = {} } = props;
 	const personalDetailControls = getPersonalDetailControls();
 
 	const formhook = useForm();
@@ -33,7 +33,7 @@ function PersonalDetail(props, ref) {
 			setValue('firstName', pocDetails?.insuredFirstName);
 			setValue('lastName', pocDetails?.insuredLastName);
 			setValue('email', pocDetails?.email);
-			setValue('phoneNo', pocDetails?.phoneNo);
+			setValue('phoneNo', { country_code: pocDetails?.phoneCode, number:	pocDetails?.phoneNo });
 		}
 	}, [pocDetails, setValue]);
 

@@ -1,12 +1,10 @@
-import { Button } from '@cogoport/components';
-
 import FormItem from '../../../common/FormItem';
 import { getInsuranceControls, getFileControls } from '../../../configurations/insuranceControls';
 
 import styles from './styles.module.css';
 
-function FormFields({ formHook = {}, billingType = '' }) {
-	const controls = getInsuranceControls();
+function FormFields({ formHook = {}, billingType = '', incoterm = {} }) {
+	const controls = getInsuranceControls({ incoterm });
 	const fileControls = getFileControls({ billingType });
 	return (
 		<div className={styles.container}>
@@ -19,9 +17,7 @@ function FormFields({ formHook = {}, billingType = '' }) {
 			<div className={styles.form_elements}>
 				<FormItem formhook={formHook} controls={fileControls} />
 			</div>
-			<div className={styles.footer}>
-				<Button>Confirm Purchase</Button>
-			</div>
+
 		</div>
 	);
 }

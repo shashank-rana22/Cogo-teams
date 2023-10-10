@@ -1,5 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
+import { addDays } from '@cogoport/utils';
+
+const ONE_DAY = 1;
 
 const getRegistrationControls = ({ billingType }) => ([
 	{
@@ -17,8 +20,8 @@ const getRegistrationControls = ({ billingType }) => ([
 		},
 	},
 	{
-		name        : 'aadharCard',
-		label       : 'Aadhar Card',
+		name        : 'aadharNumber',
+		label       : 'Aadhar Number',
 		placeholder : 'Aadhar Card Number',
 		size        : 'sm',
 		type        : 'number',
@@ -33,112 +36,118 @@ const getRegistrationControls = ({ billingType }) => ([
 	},
 ]);
 
-const getInsuranceControls = () => ([
-	{
-		name        : 'cargoDescription',
-		label       : 'Cargo Description',
-		placeholder : 'Enter Cargo Description',
-		size        : 'sm',
-		type        : 'text',
-		rules       : {
-			required: true,
+const getInsuranceControls = ({ incoterm = {} }) => {
+	const { list = [], display = false } = incoterm || {};
+	return ([
+		{
+			name        : 'cargoDescription',
+			label       : 'Cargo Description',
+			placeholder : 'Enter Cargo Description',
+			size        : 'sm',
+			type        : 'text',
+			rules       : {
+				required: true,
+			},
 		},
-	},
-	{
-		name        : 'packageDescription',
-		label       : 'Package Description',
-		placeholder : 'Enter Package Description',
-		size        : 'sm',
-		type        : 'text',
-		rules       : {
-			required: true,
-		},
+		{
+			name        : 'packageDescription',
+			label       : 'Package Description',
+			placeholder : 'Enter Package Description',
+			size        : 'sm',
+			type        : 'text',
+			rules       : {
+				required: true,
+			},
 
-	},
-	{
-		name        : 'transitDate',
-		label       : 'Sailing Date',
-		placeholder : 'Select Sailing Date',
-		size        : 'sm',
-		type        : 'datepicker',
-		minDate     : new Date(),
-		rules       : {
-			required: true,
 		},
-	},
-	{
-		name        : 'coverageFrom',
-		label       : 'Coverage From',
-		placeholder : 'Enter Coverage From',
-		size        : 'sm',
-		type        : 'text',
-		rules       : {
-			required: true,
+		{
+			name                  : 'transitDate',
+			label                 : 'Sailing Date',
+			placeholder           : 'Select Sailing Date',
+			size                  : 'sm',
+			type                  : 'datepicker',
+			minDate               : addDays(new Date(), ONE_DAY),
+			isPreviousDaysAllowed : true,
+			rules                 : {
+				required: true,
+			},
 		},
+		{
+			name        : 'coverageFrom',
+			label       : 'Coverage From',
+			placeholder : 'Enter Coverage From',
+			size        : 'sm',
+			type        : 'text',
+			rules       : {
+				required: true,
+			},
 
-	},
-	{
-		name        : 'coverageTo',
-		label       : 'Coverage To',
-		placeholder : 'Enter Coverage To',
-		size        : 'sm',
-		type        : 'text',
-		rules       : {
-			required: true,
 		},
+		{
+			name        : 'coverageTo',
+			label       : 'Coverage To',
+			placeholder : 'Enter Coverage To',
+			size        : 'sm',
+			type        : 'text',
+			rules       : {
+				required: true,
+			},
 
-	},
-	{
-		name        : 'coverage',
-		label       : 'Coverage',
-		placeholder : 'Enter Coverage',
-		size        : 'sm',
-		type        : 'select',
-		options     : [
-			{ label: 'All Risk', value: 'ALL_RISK' },
-			{ label: 'Basic Risk', value: 'BASIC_RISK' },
-		],
-		rules: {
-			required: true,
 		},
-		disabled: true,
+		{
+			name        : 'riskCoverage',
+			label       : 'Coverage',
+			placeholder : 'Enter Coverage',
+			size        : 'sm',
+			type        : 'select',
+			options     : [
+				{ label: 'All Risk', value: 'ALL_RISK' },
+				{ label: 'Basic Risk', value: 'BASIC_RISK' },
+			],
+			rules: {
+				required: true,
+			},
+			disabled: true,
 
-	},
-	{
-		name        : 'invoiceNo',
-		label       : 'Invoice No',
-		placeholder : 'Enter Invoice No',
-		size        : 'sm',
-		type        : 'text',
-		rules       : {
-			required: true,
 		},
+		{
+			name        : 'invoiceNo',
+			label       : 'Invoice No',
+			placeholder : 'Enter Invoice No',
+			size        : 'sm',
+			type        : 'text',
+			rules       : {
+				required: true,
+			},
 
-	},
-	{
-		name                  : 'invoiceDate',
-		label                 : 'Invoice Date',
-		placeholder           : 'Select Invoice Date',
-		size                  : 'sm',
-		type                  : 'datepicker',
-		maxDate               : new Date(),
-		isPreviousDaysAllowed : true,
-		rules                 : {
-			required: true,
 		},
+		{
+			name                  : 'invoiceDate',
+			label                 : 'Invoice Date',
+			placeholder           : 'Select Invoice Date',
+			size                  : 'sm',
+			type                  : 'datepicker',
+			maxDate               : new Date(),
+			isPreviousDaysAllowed : true,
+			rules                 : {
+				required: true,
+			},
 
-	},
-	{
-		name        : 'incoterm',
-		label       : 'Incoterm',
-		placeholder : 'Select Incoterm',
-		size        : 'sm',
-		type        : 'select',
-		rules       : {
-			required: true,
 		},
-	},
-]);
+		{
+			name        : 'incoterm',
+			label       : 'Incoterm',
+			placeholder : 'Select Incoterm',
+			size        : 'sm',
+			type        : 'select',
+			options     : (list || []).map((ele) => ({ label: ele, value: ele })),
+			rules       : {
+				required: true,
+			},
+			showEle: display,
+		},
+	]);
+};
 
 const getFileControls = ({ billingType }) => ([
 	{

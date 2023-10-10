@@ -21,15 +21,15 @@ const getPayload = ({ data = {}, organization, formValueRef, activeTab }) => {
 		},
 		rate: {
 			hsCode,
-			cargoValue,
-			cargoCurrency        : currency,
+			invoiceValue         : cargoValue,
+			invoiceCurrency      : currency,
 			originCountryId      : refOrigin?.country_id,
 			destinationCountryId : refDestination?.country_id,
 		},
 	};
 };
 
-const useInsurance = ({ activeTab, organization = {}, formValues = {} }) => {
+const useInsurance = ({ activeTab, organization = {}, formValues = {}, setActiveTab }) => {
 	const { push, query } = useRouter();
 
 	const formValueRef = useRef({});
@@ -106,13 +106,14 @@ const useInsurance = ({ activeTab, organization = {}, formValues = {} }) => {
 
 	useEffect(() => {
 		if (!isEmpty(formValues)) {
-			setValue('origin_point', formValues?.originCountryId);
-			setValue('destination_point', formValues?.destinationCountryId);
+			setActiveTab(formValues?.transitMode);
+			setValue('origin_point', formValues?.origin);
+			setValue('destination_point', formValues?.destination);
 			setValue('hsCode', formValues?.hsCode);
-			setValue('currency', formValues?.cargoCurrency);
-			setValue('cargoValue', formValues?.cargoValue);
+			setValue('currency', formValues?.invoiceCurrency);
+			setValue('cargoValue', formValues?.invoiceValue);
 		}
-	}, [formValues, setValue]);
+	}, [formValues, setValue, setActiveTab]);
 
 	return { formHook, onSubmit, formValueRef, loading };
 };

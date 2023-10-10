@@ -15,11 +15,9 @@ const useGetRates = () => {
 		url     : '/saas/insurance/v2/search-rate',
 		authKey : 'get_saas_insurance_v2_search_rate',
 		params  : {
-			id: policySearchId,
+			policySearchId,
 		},
 	}, { manual: !policySearchId });
-
-	console.log(data, 'data');
 
 	useEffect(() => {
 		if (!isEmpty(data?.rateResponse)) {

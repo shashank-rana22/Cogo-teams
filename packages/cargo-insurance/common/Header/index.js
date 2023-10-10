@@ -33,9 +33,30 @@ function RenderPort({ name = '', loading = false }) {
 	);
 }
 
+const getFormValues = ({ src, metadata, rateRequest, invoiceDetails, cargoDetails }) => {
+	const { origin = {}, destination = {}, transitMode } = metadata || {};
+
+	if (src === 'checkout') {
+		return ({
+			...invoiceDetails,
+			hsCode      : cargoDetails?.hsCode,
+			origin      : origin?.id,
+			destination : destination?.id,
+			transitMode,
+		});
+	}
+
+	return ({
+		...rateRequest,
+		origin      : origin?.id,
+		destination : destination?.id,
+		transitMode,
+	});
+};
+
 function Header({
 	metadata = {}, rateRequest = {}, cargoDetails = {}, invoiceDetails = {},
-	organizationId, userId, loading = false,
+	organizationId, userId, loading = false, src = '',
 }) {
 	const { back } = useRouter();
 
@@ -47,7 +68,7 @@ function Header({
 	};
 
 	const { hsCode: cargoHsCode } = cargoDetails || {};
-	const { cargoCurrency = '', cargoValue, hsCode } = rateRequest || {};
+	const { invoiceCurrency: cargoCurrency = '', invoiceValue: cargoValue = '', hsCode } = rateRequest || {};
 	const { origin = {}, destination = {}, transitMode } = metadata || {};
 	const { invoiceCurrency = '', invoiceValue = '' } = invoiceDetails || {};
 
@@ -111,7 +132,11 @@ function Header({
 			</div>
 
 			<div className={cl`${styles.drill_content} ${showForm ? styles.show_drill_content : ''}`}>
-				<InsuranceForm organization={orgDetails} src="cargo_insurance" formValues={rateRequest} />
+				<InsuranceForm
+					organization={orgDetails}
+					src="cargo_insurance"
+					formValues={getFormValues({ src, metadata, rateRequest, cargoDetails, invoiceDetails })}
+				/>
 			</div>
 
 			{showForm ? <div className={styles.overlay} /> : null}

@@ -33,7 +33,10 @@ function SideBar({ pocDetails = {}, rateResponse = [] }) {
 		info      : pocDetails,
 	});
 
-	const { serviceChargeList = [], serviceProvider, netCharges } = rateResponse?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const {
+		serviceChargeList = [], serviceProvider, netCharges,
+		chargeCurrency,
+	} = rateResponse?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	return (
 		<div style={{ width: '30%' }}>
@@ -90,7 +93,7 @@ function SideBar({ pocDetails = {}, rateResponse = [] }) {
 								alt={serviceProvider}
 							/>
 							<h3 className={styles.total_price}>
-								{getFormatedAmount({ value: netCharges })}
+								{getFormatedAmount({ currency: chargeCurrency, value: netCharges })}
 							</h3>
 						</div>
 					</div>
@@ -98,7 +101,7 @@ function SideBar({ pocDetails = {}, rateResponse = [] }) {
 					{serviceChargeList.map((item) => (
 						<div key={item?.productCodeId} className={styles.line_item_flex}>
 							<span>{startCase(item?.displayName)}</span>
-							<span>{getFormatedAmount({ value: item?.netCharges })}</span>
+							<span>{getFormatedAmount({ currency: chargeCurrency, value: item?.netCharges })}</span>
 						</div>
 					))}
 				</div>

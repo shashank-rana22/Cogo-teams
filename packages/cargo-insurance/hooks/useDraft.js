@@ -10,7 +10,8 @@ const getPayload = ({ data = {}, pocDetails, performedBy, policySearchId }) => {
 	const { userId = '', organizationId = '', metadata = {}, rateRequest = {}	} = data || {};
 
 	const {
-		cargoValue = '', cargoCurrency = '', hsCode = '',
+		invoiceValue
+		= '', invoiceCurrency = '', hsCode = '',
 		destinationCountryId = '', originCountryId = '',
 	} = rateRequest || {};
 
@@ -30,8 +31,8 @@ const getPayload = ({ data = {}, pocDetails, performedBy, policySearchId }) => {
 			billingType: 'CORPORATE',
 		},
 		invoiceDetails: {
-			invoiceCurrency : cargoCurrency,
-			invoiceValue    : cargoValue,
+			invoiceCurrency,
+			invoiceValue,
 		},
 		cargoDetails: {
 			originCountryId,
@@ -93,8 +94,6 @@ function useDraft({ data = {} }) {
 		}
 		saveDraft({ pocDetails: resp });
 	};
-
-	console.log(draftData, 'draftData');
 
 	return {
 		loading, submitHandler, personalDetailRef, getLoading, draftData,

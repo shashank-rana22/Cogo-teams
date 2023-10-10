@@ -11,7 +11,12 @@ import styles from './styles.module.css';
 function Insurance({ organization = {}, src = '', formValues = {} }) {
 	const [activeTab, setActiveTab] = useState('sea');
 
-	const { formHook, loading, onSubmit, formValueRef } = useInsurance({ activeTab, organization, formValues });
+	const { formHook, loading, onSubmit, formValueRef } = useInsurance({
+		activeTab,
+		organization,
+		formValues,
+		setActiveTab,
+	});
 	const insuranceControls = getInsuranceControls({ activeTab });
 
 	const { control, handleSubmit, formState:{ errors } } = formHook;

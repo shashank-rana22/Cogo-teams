@@ -1,6 +1,7 @@
 import { Button, Toggle, cl } from '@cogoport/components';
 import { IcMArrowRight, IcMPlusInCircle } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useImperativeHandle, forwardRef } from 'react';
 
 import useAddress from '../../../hooks/useAddress';
 
@@ -10,7 +11,7 @@ import styles from './styles.module.css';
 
 const MAX_ADDRESS_TO_DISPLAY = 2;
 
-function Address({ billingType, setBillingType }) {
+function Address({ billingType, setBillingType, orgId = '' }, ref) {
 	const [selectedAddress, setSelectedAddress] = useState({});
 	const [addressModal, setAddressModal] = useState({
 		isCreate  : false,
@@ -18,7 +19,10 @@ function Address({ billingType, setBillingType }) {
 		openModal : false,
 	});
 
-	const { data, loading } = useAddress({ billingType });
+	const { addressData, setAddressData, loading } = useAddress({ billingType, orgId });
+	const { mainAddress = [], remainingAddress = [] } = addressData || {};
+
+	useImperativeHandle(ref, () => () => selectedAddress, [selectedAddress]);
 
 	return (
 		<>
@@ -41,23 +45,25 @@ function Address({ billingType, setBillingType }) {
 						<span className={styles.btn_text}>Add New Address</span>
 					</Button>
 
-					<Button
-						themeType="linkUi"
-						onClick={() => setAddressModal({
-							openModal : true,
-							isView    : true,
-							isCreate  : false,
-						})}
-					>
-						<span className={styles.btn_text}>View All</span>
-						{' '}
-						<IcMArrowRight />
-					</Button>
+					{!isEmpty(remainingAddress) ? (
+						<Button
+							themeType="linkUi"
+							onClick={() => setAddressModal({
+								openModal : true,
+								isView    : true,
+								isCreate  : false,
+							})}
+						>
+							<span className={styles.btn_text}>View All</span>
+							{' '}
+							<IcMArrowRight />
+						</Button>
+					) : null}
 				</div>
 			</div>
 
 			<div className={styles.flex_box}>
-				{data.map((ele, index) => (
+				{(mainAddress || []).map((ele, index) => (
 					index < MAX_ADDRESS_TO_DISPLAY ? (
 						<div key={ele?.id} className={styles.card_container}>
 							<AddressCard
@@ -73,7 +79,8 @@ function Address({ billingType, setBillingType }) {
 			</div>
 
 			<AddressModal
-				data={data}
+				data={remainingAddress}
+				setAddressData={setAddressData}
 				addressModal={addressModal}
 				setAddressModal={setAddressModal}
 				selectedAddress={selectedAddress}
@@ -84,4 +91,4 @@ function Address({ billingType, setBillingType }) {
 	);
 }
 
-export default Address;
+export default forwardRef(Address);
