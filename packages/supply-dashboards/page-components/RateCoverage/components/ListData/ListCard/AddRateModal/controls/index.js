@@ -11,6 +11,7 @@ import { filterOption } from '../../../../../configurations/helpers/constants';
 
 import airControls from './air-controls';
 import airCustomsControls from './air-customs-controls';
+import cfsControls from './fcl-cfs-controls';
 import fclControls from './fcl-controls';
 import fclCustomsControls from './fcl-customs';
 import ftlControls from './ftl-controls';
@@ -31,6 +32,7 @@ const serviceControlsMap = {
 	trailer     : trailerControls,
 	ftl_freight : ftlControls,
 	ltl_freight : ltlControls,
+	fcl_cfs     : cfsControls,
 };
 
 const getDefaultValues = (oldfields) => {
@@ -106,7 +108,6 @@ function useControls({ data, user_id, filter }) {
 	const CommodityOptions = getCommodityList(filter?.service, data?.container_type);
 
 	let CONTROL = [];
-
 	const selectedService = filter?.service;
 	if (selectedService && serviceControlsMap[selectedService]) {
 		CONTROL = serviceControlsMap[selectedService]({

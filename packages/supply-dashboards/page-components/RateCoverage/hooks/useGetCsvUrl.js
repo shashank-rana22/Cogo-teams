@@ -16,6 +16,7 @@ const END_POINT_MAPPING = {
 	haulage     : 'get_haulage_freight_rate_job_csv_url',
 	fcl_customs : 'get_fcl_customs_rate_job_csv_url',
 	ftl_freight : 'get_ftl_freight_rate_job_csv_url',
+	fcl_cfs     : 'get_fcl_cfs_rate_job_csv_url',
 };
 
 const sources = Object.keys(HEADINGS);

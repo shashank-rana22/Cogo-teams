@@ -9,6 +9,7 @@ const SERVICE_NAMES = {
 	fcl_customs : 'fcl_customs_charges',
 	air_customs : 'air_customs_charges',
 	lcl_customs : 'lcl_customs_charges',
+	fcl_cfs     : 'fcl_cfs_charges',
 };
 
 const useGetChargeCodes = ({

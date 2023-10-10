@@ -8,7 +8,7 @@ import { merge, startCase } from '@cogoport/utils';
 
 import useGetMainPortsOptions from '../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 
-function FieldMutation({ fields, values, chargeCodes, filter }) {
+function FieldMutation({ fields, values, filter, chargeCodes }) {
 	const organizationUsers = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganizationUsers(),
@@ -77,7 +77,7 @@ function FieldMutation({ fields, values, chargeCodes, filter }) {
 					const chargeValues = values[control.name];
 					chargeValues?.forEach((item, i) => {
 						UNIT_OPTIONS[i] = (
-							chargeCodes?.[item.code]?.units || ['per_container']
+							chargeCodes.find((obj) => obj.code === item.code)?.units || ['per_container']
 						).map((unit) => ({
 							label : startCase(unit),
 							value : unit,
@@ -96,7 +96,6 @@ function FieldMutation({ fields, values, chargeCodes, filter }) {
 				}
 			});
 		}
-
 		return { ...newControl };
 	});
 
