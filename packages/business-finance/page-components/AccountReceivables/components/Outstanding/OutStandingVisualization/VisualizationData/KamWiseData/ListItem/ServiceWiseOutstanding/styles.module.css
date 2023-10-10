@@ -13,11 +13,7 @@
 }
 
 .custom_tag {
-	display: flex;
-	justify-content: center;
-	width: 8%;
 	font-weight: 600;
 	color: #0c244f;
-	background-color: #d9eafd;
 	border-radius: 4px;
 }

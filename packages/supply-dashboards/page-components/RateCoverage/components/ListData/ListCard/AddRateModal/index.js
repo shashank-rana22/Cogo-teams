@@ -4,21 +4,24 @@ import {
 	useForm,
 } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import Layout from '../../../../../RfqEnquiries/Layout';
 import { DEFAULT_VALUE, DELTA_VALUE, VALUE_ONE } from '../../../../configurations/helpers/constants';
 import FieldMutation from '../../../../configurations/helpers/mutation-fields';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
+import useDeleteFreightRateFeedbacks from '../../../../hooks/useDeleteFreightRateFeedbacks';
+import useDeleteFreightRateRequests from '../../../../hooks/useDeleteFreightRateRequests';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
-import useGetFreightRate from '../../../../hooks/useGetFreightRate';
+import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
+import useUpdateFlashBookingRate from '../../../../hooks/useUpdateFlashBookingRate';
 import ServiceDetailsContent from '../DetailsView/Content';
 
 import useControls from './controls';
 import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
+const TWO_HUNDERD = 200;
 function AddRateModal({
 	showModal = true,
 	setShowModal = () => {},
@@ -58,30 +61,58 @@ function AddRateModal({
 
 	const values = watch();
 
-	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data });
+	const { data: chargeCodesData } = useGetChargeCodes({
+		service_name : filter?.service,
+		trade_type   : data?.trade_type,
+	});
 
 	const { finalFields } = FieldMutation({
 		fields,
 		values,
-		rateData,
 		filter,
 		chargeCodes,
-		setChargeCodes,
 	});
 
 	const { createRate } = useCreateFreightRate(filter?.service);
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
-	const handleSubmitData = async (formData) => {
-		const rate_id = await createRate(formData);
-		if (!rate_id) {
-			return;
-		}
-		const id = await deleteRateJob({ rate_id, data: formData, id: data?.id });
-		if (!id) { return; }
+	const { deleteRequest } = useDeleteFreightRateRequests(filter?.service);
+	const { deleteFeedbackRequest } = useDeleteFreightRateFeedbacks(filter?.service);
+	const { updateFlashBookingRate } = useUpdateFlashBookingRate();
+
+	const handleSuccessActions = () => {
 		Toast.success('Rate added successfully');
 		setShowModal(false);
 		getStats();
 		getListCoverage();
+	};
+
+	const handleSubmitData = async (formData) => {
+		const rate_id = await createRate(formData);
+		if (source === 'rate_feedback') {
+			const resp = await deleteFeedbackRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
+			if (resp === TWO_HUNDERD) {
+				handleSuccessActions();
+			}
+		}
+		if (source === 'rate_request') {
+			const resp = await deleteRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
+			if (resp === TWO_HUNDERD) {
+				handleSuccessActions();
+			}
+		}
+		if (source === 'live_bookings') {
+			const resp = await updateFlashBookingRate({ data });
+			if (resp === TWO_HUNDERD) {
+				handleSuccessActions();
+			}
+		}
+		if (['critical_ports', 'expiring_rates', 'cancelled_shipments']
+			?.includes(source)) {
+			const resp = await deleteRateJob({ rate_id, data: formData, id: data?.id });
+			if (!resp?.error) {
+				handleSuccessActions();
+			}
+		}
 	};
 
 	const freeWeight = values?.free_weight;
@@ -105,34 +136,23 @@ function AddRateModal({
 
 	useEffect(() => {
 		let prefillFreightCodes = [];
-		if (rateData?.freight) {
-			const { freight = {} } = rateData;
-			const { validities = [] } = freight;
-			if (!isEmpty(validities)) {
-				const { line_items = [] } = validities[DEFAULT_VALUE];
-				prefillFreightCodes = line_items;
-				setValue('schedule_type', validities[DEFAULT_VALUE]?.schedule_type);
-				setValue('validity_start', new Date(validities[DEFAULT_VALUE]?.validity_start));
-				setValue('validity_end', new Date(validities[DEFAULT_VALUE]?.validity_end));
-			}
-		}
-
 		let mandatoryFreightCodes = [];
-		Object.keys(rateData?.freight_charge_codes || {}).forEach((code) => {
-			if (rateData?.freight_charge_codes?.[code].tags?.includes('mandatory')) {
+		Object.keys(chargeCodesData?.list || {}).forEach((code) => {
+			if (chargeCodesData?.list?.[code].tags?.includes('mandatory')) {
 				let flag = {};
 				prefillFreightCodes.forEach((charge) => {
 					if (charge.code === code) {
 						flag = charge;
 					}
 				});
+
 				if (Object.keys(flag).length) {
 					prefillFreightCodes = prefillFreightCodes.filter((item) => item.code !== flag.code);
 					mandatoryFreightCodes = [...mandatoryFreightCodes,
 						{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
 				} else {
 					mandatoryFreightCodes = [...mandatoryFreightCodes,
-						{ code, price: '', unit: '', currency: '' }];
+						{ code: '', price: '', unit: '', currency: '' }];
 				}
 			}
 		});
@@ -140,19 +160,19 @@ function AddRateModal({
 		if (mandatoryFreightCodes.length || prefillFreightCodes.length) {
 			setValue('line_items', [...mandatoryFreightCodes, ...prefillFreightCodes]);
 		}
-
-		setValue('free_weight', rateData?.weight_limit?.free_limit);
-	}, [JSON.stringify(rateData)]);
+	}, []);
 
 	useEffect(() => {
-		if (rateData?.freight_charge_codes) {
-			setChargeCodes(rateData?.freight_charge_codes);
+		if (chargeCodesData?.list) {
+			setChargeCodes(chargeCodesData?.list);
 		}
-	}, [JSON.stringify(rateData?.freight_charge_codes)]);
+	}, [JSON.stringify(chargeCodesData?.list)]);
 
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
-			{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
+			<Modal.Header title={(
+				<div>
+					{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
 			&& (
 				<div className={styles.service_content}>
 					<ServiceDetailsContent
@@ -166,8 +186,12 @@ function AddRateModal({
 					/>
 				</div>
 			)}
-			<Modal.Header title="Please Add Rate" />
+				</div>
+			)}
+			/>
+
 			<Modal.Body>
+				<div className={styles.title}>Please Add Rate</div>
 				<Layout
 					fields={finalFields}
 					control={control}

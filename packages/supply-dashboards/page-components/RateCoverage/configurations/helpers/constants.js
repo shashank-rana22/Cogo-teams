@@ -71,11 +71,11 @@ export const serviceOptions = [
 		value : 'air_freight',
 	},
 	{
-		label : 'Ltl Freight',
+		label : 'LTL Freight',
 		value : 'ltl_freight',
 	},
 	{
-		label : 'ftl Freight',
+		label : 'FTL Freight',
 		value : 'ftl_freight',
 	},
 	{

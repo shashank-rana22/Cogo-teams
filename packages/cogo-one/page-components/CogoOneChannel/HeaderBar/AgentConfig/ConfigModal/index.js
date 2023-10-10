@@ -1,5 +1,6 @@
 import { Modal, Pagination, cl } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AGENT_CONFIG_MAPPING from '../../../../../constants/agentConfigMapping';
@@ -45,8 +46,6 @@ const TAB_CONFIG_MAPPING = {
 const ALLOW_BACK_BUTTON_FOR = ['fire_base_configuration', 'shift_configuration'];
 
 function ConfigModal({
-	showAgentDetails = false,
-	setShowAgentDetails = () => {},
 	firestore = {},
 	configurationsToBeShown = [],
 	viewType = '',
@@ -63,6 +62,8 @@ function ConfigModal({
 	} = TAB_CONFIG_MAPPING[activeCard] || TAB_CONFIG_MAPPING.list_agents;
 
 	const showRmAgentsDetails = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_rm_agent_details;
+
+	const isModalActive = Object.keys(TAB_CONFIG_MAPPING).includes(activeCard);
 
 	const {
 		getListChatAgents = () => { },
@@ -89,11 +90,10 @@ function ConfigModal({
 
 	const handleClose = () => {
 		setActiveCard('');
-		setShowAgentDetails(false);
 	};
 
 	const handleBack = () => {
-		setActiveCard('');
+		setActiveCard('config_modal');
 	};
 
 	const COMPONENT_PROPS = {
@@ -137,10 +137,14 @@ function ConfigModal({
 		},
 	};
 
+	if (!activeCard) {
+		return null;
+	}
+
 	return (
 		<Modal
 			size="md"
-			show={showAgentDetails}
+			show
 			onClose={handleClose}
 			placement="top"
 			scroll={activeCard !== 'shift_configuration'}
@@ -150,15 +154,23 @@ function ConfigModal({
 				title={ALLOW_BACK_BUTTON_FOR.includes(activeCard) ? (
 					<>
 						<IcMArrowBack className={styles.back_icon} onClick={handleBack} />
-						<span className={styles.header_label}>{headerText || 'Configuration'}</span>
+						<span className={styles.header_label}>
+							{isModalActive
+								? (headerText || 'Configuration')
+								: startCase(activeCard)}
+						</span>
 					</>
 				) : (
-					headerText || 'Configuration'
+					<div>
+						{isModalActive
+							? (headerText || 'Configuration')
+							: startCase(activeCard)}
+					</div>
 				)}
 			/>
 
 			<Modal.Body className={styles.modal_body}>
-				{(activeCard && Component)
+				{(isModalActive && Component)
 					? (
 						<Component
 							key={activeCard}

@@ -58,7 +58,6 @@ function Layout({
 										register={register}
 										showElements={showElements}
 									/>
-
 								</div>
 							);
 						}

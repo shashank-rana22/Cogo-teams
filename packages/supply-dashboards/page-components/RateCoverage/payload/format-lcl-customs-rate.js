@@ -15,7 +15,7 @@ const formatLclCustomsRate = (data, user_id) => {
 	}
 	const commodity =		data.commodity === 'all_commodity' ? 'general' : data.commodity;
 	const payload = {
-		location_id         : data.location_id,
+		location_id         : data.origin_location_id,
 		trade_type          : data.trade_type,
 		container_size      : data.container_size,
 		container_type      : data.container_type,

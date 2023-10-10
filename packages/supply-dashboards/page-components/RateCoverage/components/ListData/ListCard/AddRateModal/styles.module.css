@@ -20,11 +20,6 @@
 	margin-top: 24px;
 }
 
-.date_filter input {
-	width: 240px !important;
-	height: 40px !important;
-}
-
 .air_date_filter input {
 	width: 340px !important;
 	height: 40px !important;
@@ -32,4 +27,10 @@
 
 .service_content {
 	padding: 10px;
+}
+
+.title {
+	margin-left: 10px;
+	font-size: 16px;
+	font-weight: 600;
 }

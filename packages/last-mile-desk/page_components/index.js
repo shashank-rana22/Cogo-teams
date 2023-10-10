@@ -1,3 +1,4 @@
+import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useState, useMemo } from 'react';
 
 import LastMileDeskContext from '../context/LastMileDeskContext';
@@ -22,6 +23,7 @@ function LastMileDesk() {
 
 	return (
 		<LastMileDeskContext.Provider value={contextValues}>
+			<ShipmentChat />
 			{activeTab ? <Fcl /> : null}
 		</LastMileDeskContext.Provider>
 	);

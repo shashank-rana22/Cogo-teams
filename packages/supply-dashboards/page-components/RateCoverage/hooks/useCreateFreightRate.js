@@ -11,6 +11,7 @@ import formatFtlRate from '../payload/format-ftl-rate';
 import formatHaulageFreightRate from '../payload/format-haulage-freight-rate';
 import formatLclCustomsRate from '../payload/format-lcl-customs-rate';
 import formatLclRate from '../payload/format-lcl-rate';
+import formatLtlRate from '../payload/format-ltl-rate';
 import formatTrailerFreight from '../payload/format-trailer-freight';
 
 const API_NAME = {
@@ -53,6 +54,9 @@ const getPayload = (service, data, user_id) => {
 	}
 	if (service === 'trailer') {
 		return formatTrailerFreight(data, user_id);
+	}
+	if (service === 'ltl_freight') {
+		return formatLtlRate(data, user_id);
 	}
 	return data;
 };

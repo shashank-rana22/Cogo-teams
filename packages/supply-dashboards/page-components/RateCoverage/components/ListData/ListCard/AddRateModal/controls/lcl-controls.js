@@ -2,12 +2,12 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { currencyOptions } from '../../../../../configurations/helpers/constants';
-import styles from '../styles.module.css';
 
 const lclControls = ({
 	data,
-	fclCommodityOptions,
+	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
+
 }) => [
 	{
 		name    : 'service_provicer_details',
@@ -16,7 +16,7 @@ const lclControls = ({
 	},
 	{
 		name        : 'service_provider_id',
-		heading     : 'Service Provider',
+		label       : 'Service Provider',
 		type        : 'select',
 		placeholder : 'Service Provider',
 		span        : 4,
@@ -25,7 +25,7 @@ const lclControls = ({
 	},
 	{
 		name        : 'sourced_by_id',
-		heading     : 'Rate Provided by user',
+		label       : 'Rate Provided by user',
 		type        : 'select',
 		placeholder : 'Rate Provided by user',
 		value       : data?.sourced_by_id,
@@ -38,7 +38,7 @@ const lclControls = ({
 	},
 	{
 		name        : 'origin_location_id',
-		heading     : 'Origin Location',
+		label       : 'Origin Location',
 		type        : 'select',
 		placeholder : 'Origin Location',
 		span        : 4,
@@ -50,7 +50,7 @@ const lclControls = ({
 
 	{
 		name        : 'destination_location_id',
-		heading     : 'Destination Location',
+		label       : 'Destination Location',
 		type        : 'select',
 		span        : 4,
 		value       : data?.destination_port?.id,
@@ -61,13 +61,12 @@ const lclControls = ({
 	},
 	{
 		name        : 'commodity',
-		heading     : 'Commodity',
+		label       : 'Commodity',
 		type        : 'select',
 		placeholder : 'Commodity',
 		span        : 3,
 		value       : data?.commodity,
-		disabled    : data?.commodity,
-		options     : fclCommodityOptions,
+		options     : CommodityOptions,
 		rules       : { required: 'commodity is required' },
 	},
 
@@ -79,24 +78,20 @@ const lclControls = ({
 	},
 	{
 		name        : 'validity_start',
-		heading     : 'Validty Start',
+		label       : 'Validty Start',
 		type        : 'date_picker',
 		placeholder : 'Validity Start',
-		span        : 3,
-		minDate     : new Date(),
-		className   : styles.date_filter,
+		span        : 4,
 		rules       : {
 			required: 'validity start date is required',
 		},
 	},
 	{
 		name        : 'validity_end',
-		heading     : 'Validity End',
+		label       : 'Validity End',
 		type        : 'date_picker',
-		className   : styles.date_filter,
 		placeholder : 'Validity End',
-		span        : 3,
-		minDate     : new Date(),
+		span        : 4,
 		rules       : {
 			required: 'validity end date is required',
 		},
@@ -104,7 +99,7 @@ const lclControls = ({
 	{
 		name        : 'departure_dates',
 		type        : 'departure_date',
-		heading     : 'Departure Dates',
+		label       : 'Departure Dates',
 		span        : 4,
 		placeholder : 'Enter Departure Dates',
 		className   : 'primary sm',
@@ -129,11 +124,17 @@ const lclControls = ({
 		rules       : { required: 'This is required' },
 	},
 	{
+		heading      : 'Line Items',
+		name         : 'line_item',
+		showOptional : false,
+		span         : 12,
+	},
+	{
 		type               : 'fieldArray',
 		showButtons        : true,
 		name               : 'line_items',
 		buttonText         : 'Add Line Items',
-		noDeleteButtonTill : 1,
+		noDeleteButtonTill : 0,
 		value              : [
 			{
 				code      : 'BAS',
@@ -148,17 +149,13 @@ const lclControls = ({
 				name        : 'code',
 				type        : 'select',
 				span        : 2,
-				valueKey    : 'code',
 				placeholder : 'Charge Name',
-				className   : 'primary lg',
-				rules       : { required: 'This is required' },
 			},
 			{
 				name        : 'unit',
-				span        : 1.5,
-				type        : 'select',
-				className   : 'primary lg',
 				placeholder : 'Unit',
+				type        : 'select',
+				span        : 1.5,
 				rules       : { required: 'This is required' },
 			},
 			{

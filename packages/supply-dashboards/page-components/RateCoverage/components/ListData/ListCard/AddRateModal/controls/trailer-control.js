@@ -4,13 +4,12 @@ import containerTypes from '@cogoport/constants/container-types.json';
 
 import { currencyOptions } from '../../../../../configurations/helpers/constants';
 
-const TOTAL_HOURS = 24;
 const trailerControls = ({
 	data,
-	fclCommodityOptions,
+	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
-	transit_time_type,
-	transit_time_value,
+	user_id,
+	listPartnerUserOptions,
 }) => {
 	const controls = [
 		{
@@ -37,19 +36,14 @@ const trailerControls = ({
 			rules       : { required: 'rate provided by user is required' },
 		},
 		{
-			name           : 'rate_procured',
-			placeholder    : 'Rate Procured',
-			type           : 'select',
-			valueKey       : 'user_id',
-			span           : 4,
-			label          : 'Rate Procured by Cogoport Agent',
-			optionsListKey : 'partner-users',
-			defaultOptions : true,
-			rules          : {
-				required: true,
-			},
-			isClearable : true,
-			className   : 'primary lg',
+			name        : 'procured_by_id',
+			heading     : 'Rate Procured by Cogoport Agent',
+			placeholder : 'Rate Procured by Cogoport Agent',
+			type        : 'select',
+			...listPartnerUserOptions,
+			value       : user_id,
+			span        : 4,
+			rules       : { required: 'procured by is required' },
 		},
 		{
 			heading : 'Location Details',
@@ -86,7 +80,7 @@ const trailerControls = ({
 		},
 		{
 			name        : 'container_type',
-			heading     : 'Container Type',
+			label       : 'Container Type',
 			type        : 'select',
 			placeholder : 'Container Type',
 			span        : 3,
@@ -97,7 +91,7 @@ const trailerControls = ({
 		},
 		{
 			name        : 'container_size',
-			heading     : 'Container Size',
+			label       : 'Container Size',
 			type        : 'select',
 			placeholder : 'Container Size',
 			span        : 3,
@@ -133,19 +127,18 @@ const trailerControls = ({
 		},
 		{
 			name        : 'commodity',
-			heading     : 'Commodity',
+			label       : 'Commodity',
 			type        : 'select',
 			placeholder : 'Commodity',
-			span        : 3,
+			span        : 4,
 			value       : data?.commodity,
-			disabled    : data?.commodity,
-			options     : fclCommodityOptions,
+			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 		{
 			name        : 'date_range',
 			placeholder : 'Select Range',
-			type        : 'datepicker',
+			type        : 'date_range',
 			label       : 'Validity of Rate',
 			span        : 4,
 			minDate     : new Date(),
@@ -155,152 +148,118 @@ const trailerControls = ({
 			},
 			className: 'primary',
 		},
+
 		{
-			name      : 'detention_free_time',
-			label     : 'Detention Free time',
-			type      : 'input-group',
-			span      : 4,
-			className : 'primary lg',
-			value     : {
-				detention_free_time_type  : 'hrs',
-				detention_free_time_value : '',
-			},
-			inputControls: [
+			label       : 'Detention Free Time',
+			name        : 'detention_free_time_type',
+			type        : 'select',
+			placeholder : 'Hrs',
+
+			span    : 1.5,
+			options : [
 				{
-					name        : 'detention_free_time_type',
-					type        : 'select',
-					placeholder : 'Hrs',
-					options     : [
-						{
-							value : 'hrs',
-							label : 'Hrs',
-						},
-						{
-							value : 'days',
-							label : 'Days',
-						},
-					],
-					className: 'primary lg',
+					value : 'hrs',
+					label : 'Hrs',
 				},
 				{
-					name        : 'detention_free_time_value',
-					type        : 'number',
-					placeholder : '0',
-					className   : 'primary lg',
+					value : 'days',
+					label : 'Days',
 				},
 			],
-			rules: {
-				required  : 'Required',
-				inputType : 'group',
-			},
+			className: 'primary lg',
 		},
 		{
-			name      : 'transit_time',
-			label     : 'Transit time',
-			type      : 'input-group',
-			span      : 4,
-			className : 'primary lg',
-			value     : {
-				transit_time_type: 'hrs',
-				transit_time_value:
-					transit_time_type === 'days'
-						? transit_time_value * TOTAL_HOURS
-						: transit_time_value,
+			name        : 'detention_free_time',
+			type        : 'number',
+			span        : 1.5,
+			placeholder : '0',
+			className   : 'primary lg',
+			rules       : {
+				required: true,
 			},
-			inputControls: [
+		},
+
+		{
+			label       : 'Transit Time',
+			name        : 'transit_time_type',
+			type        : 'select',
+			placeholder : 'Hrs',
+			span        : 1.5,
+			options     : [
 				{
-					name        : 'transit_time_type',
-					type        : 'select',
-					placeholder : 'Hrs',
-					options     : [
-						{
-							value : 'hrs',
-							label : 'Hrs',
-						},
-						{
-							value : 'days',
-							label : 'Days',
-						},
-					],
-					className: 'primary lg',
+					value : 'hrs',
+					label : 'Hrs',
 				},
 				{
-					name        : 'transit_time_value',
-					type        : 'number',
-					placeholder : '0',
-					className   : 'primary lg',
+					value : 'days',
+					label : 'Days',
 				},
 			],
-			rules: {
-				required  : 'Required',
-				inputType : 'group',
-			},
+			className: 'primary lg',
 		},
 		{
-			name          : 'price_per_trailer',
-			label         : 'Basic Freight Rate (Per Trailer)',
-			type          : 'input-group',
-			span          : 4,
-			className     : 'primary lg',
-			inputControls : [
-				{
-					name        : 'currency',
-					span        : 1.5,
-					type        : 'select',
-					placeholder : 'Curr...',
-					options     : currencyOptions,
-				},
-				{
-					name        : 'price_per_trailer_value',
-					type        : 'number',
-					placeholder : '0',
-					className   : 'primary lg',
-				},
-			],
-			rules: {
-				required  : 'Required',
-				inputType : 'group',
+			name        : 'transit_time',
+			type        : 'number',
+			span        : 2,
+			placeholder : '0',
+			className   : 'primary lg',
+			rules       : {
+				required: true,
 			},
+		},
+
+		{
+			label       : 'Basic Freight Rate (Per Trailer)',
+			name        : 'currency',
+			span        : 1.5,
+			type        : 'select',
+			placeholder : 'Curr...',
+			options     : currencyOptions,
 		},
 		{
-			name          : 'fuel_surcharge',
-			label         : 'Fuel Surcharge',
-			type          : 'input-group',
-			span          : 4,
-			className     : 'primary lg',
-			inputControls : [
-				{
-					name        : 'fuel_surcharge_type',
-					type        : 'select',
-					placeholder : '% of Basic Freight',
-					style       : {
-						marginLeft  : '10%',
-						marginRight : '10%',
-					},
-					options: [
-						{
-							value : 'percentage_of_freight',
-							label : '% of Basic Freight',
-						},
-						{
-							value : 'per_trailer',
-							label : 'Net',
-						},
-					],
-					className: 'primary lg',
-				},
-				{
-					name        : 'fuel_surcharge_value',
-					type        : 'number',
-					placeholder : '0',
-					className   : 'primary lg hello',
-				},
-			],
-			rules: {
-				required  : 'Required',
-				inputType : 'group',
+			name        : 'price_per_trailer',
+			type        : 'number',
+			span        : 2,
+			placeholder : '0',
+			className   : 'primary lg',
+			rules       : {
+				required: true,
 			},
 		},
+
+		{
+			label       : 'Fuel Surcharge',
+			name        : 'fuel_surcharge_type',
+			type        : 'select',
+			span        : 1.5,
+			placeholder : '% of Basic Freight',
+			style       : {
+				marginLeft  : '10%',
+				marginRight : '10%',
+			},
+			options: [
+				{
+					value : 'percentage_of_freight',
+					label : '% of Basic Freight',
+				},
+				{
+					value : 'per_trailer',
+					label : 'Net',
+				},
+			],
+			className: 'primary lg',
+		},
+		{
+			name        : 'fuel_surcharge',
+			type        : 'number',
+			placeholder : '0',
+			span        : 2,
+			className   : 'primary lg hello',
+			rules       : {
+				required: true,
+			},
+		},
+
 		{
 			name        : 'remarks',
 			placeholder : 'Enter Remarks',

@@ -144,6 +144,7 @@ function List({ isSeller = false, source = 'overview' }) {
 								setAddSellPrice={setShowModal}
 								updateResponse={updateResponse}
 								source="add_sell_price"
+								refetch={refetch}
 							/>
 						</Modal.Body>
 					</Modal>

@@ -47,7 +47,14 @@ function ServiceDetailsContent({
 	];
 
 	const contentMapping = [
-		{ label: 'Cargo Ready', value: cargo_readiness_date },
+		{
+			label : 'Cargo Ready',
+			value : cargo_readiness_date && `${formatDate({
+				date       : cargo_readiness_date,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+				formatType : 'date',
+			})}`,
+		},
 		{ label: 'BL Type', value: bl_type },
 		{ label: 'Destination Detention Free Days', value: free_days_detention_destination },
 		{
@@ -84,8 +91,6 @@ function ServiceDetailsContent({
 						))}
 					</div>
 
-					<div className={styles.line} />
-
 					<div className={styles.pill}>
 						{contentMapping?.map((val) => (
 							<div key={val?.label}>
@@ -97,14 +102,18 @@ function ServiceDetailsContent({
 											:
 											{' '}
 										</div>
-										<div className={styles.value}>{val?.value}</div>
+										<Pill
+											key={val?.value}
+											size="md"
+											color=""
+										>
+											{val?.value}
+										</Pill>
 									</div>
 								)}
 							</div>
 						))}
 					</div>
-
-					<div className={styles.line} />
 
 					<div className={styles.pill}>
 						{data?.service_provider?.short_name

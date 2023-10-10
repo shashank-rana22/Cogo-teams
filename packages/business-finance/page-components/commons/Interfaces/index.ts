@@ -37,6 +37,7 @@ export interface FieldType {
 	className?: string;
 	styles?: NestedObj;
 	func?: string;
+	infoIconRequired?: boolean;
 }
 
 export interface TableProps {

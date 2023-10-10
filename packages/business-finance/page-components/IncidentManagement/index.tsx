@@ -94,6 +94,7 @@ function IncidentManagement() {
 			getIncidentData,
 			detailsModal,
 			setDetailsModal,
+			entityCode,
 		},
 		approved: {
 			activeTab,
@@ -105,6 +106,7 @@ function IncidentManagement() {
 			getIncidentData,
 			detailsModal,
 			setDetailsModal,
+			entityCode,
 		},
 		rejected: {
 			activeTab,
@@ -116,6 +118,7 @@ function IncidentManagement() {
 			getIncidentData,
 			detailsModal,
 			setDetailsModal,
+			entityCode,
 		},
 	};
 	const ActiveTabComponent = tabsKeyComponentMapping[activeTab] || null;

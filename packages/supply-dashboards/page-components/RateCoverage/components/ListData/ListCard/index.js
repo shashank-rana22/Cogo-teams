@@ -35,11 +35,13 @@ function ListCard({
 		destination_port,
 		destination_airport,
 		destination_location,
+		shipping_line_id,
 	} = data;
 
-	const { data:shipmemnt_data, getShipment = () => {}, shipment_loading = false } = useGetShipment({
-		source_id,
-	});
+	const {
+		data:shipmemnt_data, getShipment = () => {},
+		shipment_loading = false,
+	} =	 useGetShipment({ shipping_line_id });
 
 	const { data:requestData, getRequest, loading:request_loading } = useListFreightRateRequests({ source_id, filter });
 	const {
@@ -84,14 +86,19 @@ function ListCard({
 				<div>
 					<div className={styles.head}>
 						{data?.updated_at && (
-							<div>
-								Booked On :
-								{' '}
-								{formatDate({
-									date       : data?.updated_at,
-									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-									formatType : 'date',
-								})}
+							<div style={{ display: 'flex' }}>
+								<div>
+									Booked On :
+									{' '}
+									{formatDate({
+										date       : data?.updated_at,
+										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+										formatType : 'date',
+									})}
+								</div>
+								<div className={styles.business_name}>
+									{data?.service_provider?.business_name || data?.service_provider?.name}
+								</div>
 							</div>
 						)}
 						{data?.created_at && (
@@ -252,7 +259,7 @@ function ListCard({
 									/>
 								)}
 
-						{['critical_ports', 'expiring_rates', 'cancelled_shipments']?.includes(source)
+						{!['live_bookings']?.includes(source)
 							&& (
 								<div>
 									{!['aborted', 'completed'].includes(filter?.status) && (
@@ -281,6 +288,7 @@ function ListCard({
 					getListCoverage={getListCoverage}
 					filter={filter}
 					getStats={getStats}
+					source={source}
 				/>
 			)}
 
