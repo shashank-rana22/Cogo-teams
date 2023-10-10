@@ -1,0 +1,86 @@
+.container {
+	display: flex;
+	padding: 12px;
+	border: 1px solid #b0b0b0;
+	border-radius: 4px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 50%;
+	border-right: 2px solid red;
+}
+
+.sub_div {
+	display: flex;
+	align-items: center;
+	width: 16%;
+	border-right: 2px solid red;
+}
+
+.orgnization_name {
+	width: 150px;
+	overflow: hidden;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.tags {
+	display: flex;
+	align-self: center;
+	justify-content: space-around;
+	width: 20%;
+	margin-left: 20px;
+}
+
+.icon {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 24px;
+	color: #5936f0;
+}
+
+.arrow {
+	font-size: 24px;
+}
+
+.bold {
+	font-weight: 600;
+}
+
+.name {
+	width: 100%;
+	font-size: 10.9px;
+	font-weight: 600;
+}
+
+.flex_div {
+	display: flex;
+	align-items: center;
+	margin-left: 40px;
+	color: red;
+	cursor: pointer;
+}
+
+.timeline_container {
+	display: flex;
+	padding: 12px;
+	margin-top: 20px;
+	border: 1px solid #b0b0b0;
+	border-radius: 4px;
+}
+
+.shipment_type {
+	width: 47px;
+	overflow: auto;
+	font-size: 8px;
+	text-overflow: ellipsis;
+}
+
+.postal_data {
+	font-size: 10px;
+}

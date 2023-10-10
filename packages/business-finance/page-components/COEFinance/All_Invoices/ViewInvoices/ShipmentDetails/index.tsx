@@ -109,7 +109,8 @@ interface ShipmentDetailsInterface {
 	jobType?:string;
 	setCheckItem?: React.Dispatch<React.SetStateAction<{}>>,
 	lineItemsCheck?: boolean;
-	checkItem?: { shipmentDetailsCheck?: boolean,
+	checkItem?: {
+		shipmentDetailsCheck?: boolean,
 		documentsCheck?: boolean,
 		taggingCheck?: boolean,
 		sidDataCheck?: boolean,

@@ -1,4 +1,3 @@
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { cl } from '@cogoport/components';
 import { IcMDummyCircle } from '@cogoport/icons-react';
 

@@ -38,7 +38,7 @@ function FinanceClosedCardsSet({
 			<FinancialClosedCards
 				jobId={job_id}
 				data={taskData?.SELL}
-				type="SELL"
+				type="sell"
 				financeCardOpen={financeCardOpen}
 				setFinanceCardOpen={setFinanceCardOpen}
 				loading={taskDataLoading}
@@ -48,7 +48,7 @@ function FinanceClosedCardsSet({
 			<FinancialClosedCards
 				jobId={job_id}
 				data={taskData?.BUY}
-				type="BUY"
+				type="buy"
 				financeCardOpen={financeCardOpen}
 				setFinanceCardOpen={setFinanceCardOpen}
 				loading={taskDataLoading}

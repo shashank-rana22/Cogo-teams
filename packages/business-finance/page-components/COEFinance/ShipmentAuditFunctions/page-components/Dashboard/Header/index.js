@@ -9,7 +9,7 @@ import Body from '../Body';
 import styles from './styles.module.css';
 
 function Header({ jobId = '' }) {
-	const { query: { active_tab = '', job_id = '' }, push = () => {} } = useRouter();
+	const { query: { active_tab = '' }, push = () => {} } = useRouter();
 	const [quotationsData, setQuotationsData] = useState({
 		prePostCheckoutData : {},
 		oprClosedData       : {},
@@ -17,6 +17,13 @@ function Header({ jobId = '' }) {
 	});
 
 	const getPrePostShipmentQuoteRef = useRef(null);
+
+	const {
+		apiTrigger,
+		loading,
+	} = useUpdateJobAuditStatus({ getPrePostShipmentQuote: getPrePostShipmentQuoteRef.current });
+
+	const { bttnDisableCondition } = getApproveJobAuditBttnCondition({ quotationsData });
 
 	const handleClick = () => {
 		if (active_tab === 'financial_close') {
@@ -29,13 +36,6 @@ function Header({ jobId = '' }) {
 			);
 		}
 	};
-
-	const {
-		apiTrigger,
-		loading,
-	} = useUpdateJobAuditStatus({ getPrePostShipmentQuote: getPrePostShipmentQuoteRef.current });
-
-	const { bttnDisableCondition } = getApproveJobAuditBttnCondition({ quotationsData });
 
 	return (
 		<div className={styles.main_container}>
@@ -66,12 +66,32 @@ function Header({ jobId = '' }) {
 					</div>
 				</div>
 			</div>
+
 			<Body
-				job_id={job_id}
 				getPrePostShipmentQuoteRef={getPrePostShipmentQuoteRef}
 				setQuotationsData={setQuotationsData}
-				active_tab={active_tab}
 			/>
+
+			{/* <div className={styles.custom_accordion}>
+				<div className={styles.accord_title}>
+					<div className={styles.status_card}>
+						<div className={styles.title}>
+							{startCase('Documents')}
+						</div>
+					</div>
+
+					{true ? (
+						<IcMArrowRotateUp
+							className={styles.cursor}
+						/>
+					)
+						: (
+							<IcMArrowRotateDown
+								className={styles.cursor}
+							/>
+						)}
+				</div>
+			</div> */}
 		</div>
 	);
 }
