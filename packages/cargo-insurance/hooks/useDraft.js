@@ -5,20 +5,23 @@ import { useSelector } from '@cogoport/store';
 import { upperCase } from '@cogoport/utils';
 import { useRef } from 'react';
 
-const getPayload = ({ formValues, pocDetails, performedBy }) => {
+const getPayload = ({ data = {}, pocDetails, performedBy, policySearchId }) => {
 	const { firstName, lastName, email, phoneNo } = pocDetails || {};
-	const {
-		orgDetails, cargoValue, currency,
-		destinationCountryId, originCountryId, origin_point, destination_point, hsCode, type,
-	} = formValues || {};
+	const { userId = '', organizationId = '', metadata = {}, rateRequest = {}	} = data || {};
 
-	const { user_id, organization_id } = orgDetails || {};
+	const {
+		invoiceValue
+		= '', invoiceCurrency = '', hsCode = '',
+		destinationCountryId = '', originCountryId = '',
+	} = rateRequest || {};
+
+	const { origin = {}, destination = {}, transitMode = '' } = metadata || {};
 
 	return {
-		userId         : user_id,
-		organizationId : organization_id,
-		source         : 'ADMIN',
-		pocDetails     : {
+		userId,
+		organizationId,
+		source     : 'ADMIN',
+		pocDetails : {
 			insuredFirstName : firstName,
 			insuredLastName  : lastName,
 			email,
@@ -28,24 +31,26 @@ const getPayload = ({ formValues, pocDetails, performedBy }) => {
 			billingType: 'CORPORATE',
 		},
 		invoiceDetails: {
-			invoiceCurrency : currency,
-			invoiceValue    : cargoValue,
+			invoiceCurrency,
+			invoiceValue,
 		},
 		cargoDetails: {
 			originCountryId,
 			destinationCountryId,
 			hsCode,
-			transitMode       : upperCase(type),
-			destinationPortId : origin_point,
-			originPortId      : destination_point,
+			transitMode       : upperCase(transitMode),
+			destinationPortId : origin?.id,
+			originPortId      : destination?.id,
 		},
 		performedBy,
+		policySearchId,
+		metadata,
 	};
 };
 
-function useDraft({ formValues = {} }) {
+function useDraft({ data = {} }) {
 	const { query, push } = useRouter();
-	const { draftId = '' } = query;
+	const { policySearchId, draftId = '' } = query;
 
 	const { user } = useSelector((state) => state.profile);
 
@@ -67,13 +72,13 @@ function useDraft({ formValues = {} }) {
 	}, { manual: !draftId });
 
 	const saveDraft = async ({ pocDetails }) => {
-		const payload = getPayload({ formValues, pocDetails, performedBy: user?.id });
+		const payload = getPayload({ data, pocDetails, performedBy: user?.id, policySearchId });
 		try {
 			const resp = await trigger({
 				data: payload,
 			});
 			const { id } = resp?.data || {};
-			push(`/cargo-insurance/${id}`);
+			push(`/cargo-insurance/${policySearchId}/${id}`);
 		} catch (error) {
 			Toast.error(error.response?.data?.message);
 		}
@@ -81,16 +86,14 @@ function useDraft({ formValues = {} }) {
 
 	const submitHandler = async () => {
 		const resp = await personalDetailRef.current.getPersonalDetails();
+
 		const { phoneNo } = resp || {};
 
 		if (!phoneNo?.country_code) {
 			Toast.error('Please Select Mobile Code');
-			return;
 		}
 		saveDraft({ pocDetails: resp });
 	};
-
-	console.log(draftData, 'draftData');
 
 	return {
 		loading, submitHandler, personalDetailRef, getLoading, draftData,

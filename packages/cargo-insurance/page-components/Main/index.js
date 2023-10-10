@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import { IcCVerySad } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import Header from '../../common/Header';
@@ -12,21 +11,18 @@ import RateCard from './RateCard';
 import styles from './styles.module.css';
 
 function Insurance() {
-	const { query } = useRouter();
-	const formValues = JSON.parse(query?.data);
+	const { loading, data = {}, selectedRateCard, setSelectedRateCard } = useGetRates();
 
-	console.log(formValues, 'formValues');
-
-	const { loading, data = [], selectedRateCard, setSelectedRateCard } = useGetRates();
-	const { loading: draftLoading, submitHandler, personalDetailRef } = useDraft({ formValues });
+	const { rateResponse = [], pocDetails = {}, ...rest	} = data || {};
+	const { loading: draftLoading, submitHandler, personalDetailRef } = useDraft({ data });
 
 	return (
 		<div>
 			<h2>Cargo Insurance</h2>
-			<Header data={formValues} />
+			<Header loading={loading} {...rest} />
 
 			<div className={styles.container}>
-				{isEmpty(data) ? (
+				{isEmpty(rateResponse) ? (
 					<div className={styles.empty_state}>
 						<IcCVerySad width={70} height={70} />
 						<div>
@@ -39,7 +35,7 @@ function Insurance() {
 						<div className={styles.flex_box}>
 							<div className={styles.rate_card}>
 								<RateCard
-									data={data}
+									data={rateResponse}
 									loading={loading}
 									selectedRateCard={selectedRateCard}
 									setSelectedRateCard={setSelectedRateCard}
@@ -47,7 +43,10 @@ function Insurance() {
 							</div>
 
 							<div className={styles.personal_detail}>
-								<PersonalDetail ref={(r) => { personalDetailRef.current = r; }} />
+								<PersonalDetail
+									pocDetails={pocDetails}
+									ref={(r) => { personalDetailRef.current = r; }}
+								/>
 							</div>
 						</div>
 

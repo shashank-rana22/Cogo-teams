@@ -37,7 +37,7 @@
 }
 
 .type_container {
-	width: 20%;
+	width: 15%;
 	font-weight: 600;
 	color: #356efd;
 
@@ -57,6 +57,9 @@
 }
 
 .drill_content {
+	position: absolute;
+	z-index: 100;
+	width: 100%;
 	max-height: 0;
 	overflow: hidden;
 	background-color: #fff;
@@ -71,9 +74,33 @@
 
 .port_pair {
 	justify-content: space-around;
-	width: 80%;
+	width: 85%;
 
 	>svg {
 		width: 10%;
 	}
+}
+
+.edit_icon {
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	cursor: pointer;
+	background: #fffce6;
+	border: 1px solid #ffe000;
+	border-radius: 50%;
+	transition: 0.5s ease;
+
+	&.rotate {
+		transition: 0.5s ease;
+		transform: rotate(180deg);
+	}
+}
+
+.overlay {
+	position: absolute;
+	z-index: 90;
+	width: 100%;
+	height: 100vh;
+	background: rgb(0 0 0 / 30%);
 }

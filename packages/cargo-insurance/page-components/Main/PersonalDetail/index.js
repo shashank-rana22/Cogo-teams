@@ -1,67 +1,52 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { useImperativeHandle, forwardRef } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useImperativeHandle, forwardRef, useEffect } from 'react';
 
+import FormItem from '../../../common/FormItem';
 import getPersonalDetailControls from '../../../configurations/personalDetailControls';
-import { getFieldController } from '../../../helper/getFieldController';
 
 import styles from './styles.module.css';
 
 function PersonalDetail(props, ref) {
+	const { pocDetails = {} } = props;
 	const personalDetailControls = getPersonalDetailControls();
 
-	const {
-		control,
-		handleSubmit,
-		register,
-		formState:{ errors = {} },
-	} = useForm();
+	const formhook = useForm();
+	const { setValue, handleSubmit } = formhook;
 
 	const submitHandler = (data) => {
 		console.log(data, 'data');
 	};
 
 	useImperativeHandle(ref, () => ({
-		getPersonalDetails: () => {
-			const onSubmit = (data) => data;
-			const onError = (data) => data;
-
-			return new Promise((resolve) => {
-				handleSubmit(
-					(data) => resolve(onSubmit(data)),
-					(err) => resolve(onError(err)),
-				)();
-			});
-		},
+		getPersonalDetails: () => new Promise((resolve) => {
+			handleSubmit(
+				(data) => resolve(data),
+				(error) => resolve(error),
+			)();
+		}),
 	}), [handleSubmit]);
+
+	useEffect(() => {
+		if (!isEmpty(pocDetails)) {
+			setValue('firstName', pocDetails?.insuredFirstName);
+			setValue('lastName', pocDetails?.insuredLastName);
+			setValue('email', pocDetails?.email);
+			setValue('phoneNo', { country_code: pocDetails?.phoneCode, number:	pocDetails?.phoneNo });
+		}
+	}, [pocDetails, setValue]);
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.header}>
 				<h3>Personal Details</h3>
-				<Button size="sm" themeType="secondary">Add New</Button>
 			</div>
 
 			<div className={styles.form_container}>
 				<h3 className={styles.form_title}>Insurance Quotation</h3>
 
-				{personalDetailControls.map((config) => {
-					const { name, type, label, rules } = config;
-					const Element = getFieldController(type);
-					const isMobileNo = type === 'mobileSelect';
-
-					return (
-						<div key={name} className={styles.col}>
-							<p className={styles.label}>{label}</p>
-							<Element
-								{...config}
-								control={control}
-								mobileSelectRef={isMobileNo ? register(name, rules).ref : undefined}
-							/>
-							<p className={styles.error}>{errors?.[name]?.message || errors?.[name]?.type}</p>
-						</div>
-					);
-				})}
+				<FormItem formhook={formhook} controls={personalDetailControls} />
 
 				<div className={styles.footer}>
 					<Button themeType="accent" onClick={handleSubmit(submitHandler)}>Send Quotation</Button>

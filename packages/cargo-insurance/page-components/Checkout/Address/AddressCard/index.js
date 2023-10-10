@@ -27,6 +27,7 @@ function AddressCard({
 					<Placeholder height="10px" width="30%" margin="0px 0px 10px 0px" />
 					<Placeholder height="15px" margin="0px 0px 10px 0px" />
 					<Placeholder height="15px" margin="0px 0px 10px 0px" />
+					<Placeholder height="15px" width="50%" margin="0px 0px 10px 0px" />
 				</div>
 			</div>
 		);

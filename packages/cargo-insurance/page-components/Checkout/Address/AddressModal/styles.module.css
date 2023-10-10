@@ -10,3 +10,8 @@
 .card_container {
 	margin: 20px;
 }
+
+.view_container {
+	max-height: 600px;
+	overflow-y: scroll;
+}
