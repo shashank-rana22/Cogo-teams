@@ -27,10 +27,10 @@ function Address({ billingType, setBillingType }) {
 					<h3 className={styles.title}>Billing Details</h3>
 					<Toggle
 						size="sm"
-						onLabel="Corporate"
-						offLabel="Individual"
+						onLabel="Individual"
+						offLabel="Corporate"
 						value={billingType}
-						onChange={(e) => setBillingType(e.target.checked ? 'Corporate' : 'Individual')}
+						onChange={(e) => setBillingType(e.target.checked ? 'Individual' : 'Corporate')}
 					/>
 				</div>
 

@@ -5,21 +5,33 @@ import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useRef } from 'react';
 
-const getPayload = ({ data = {}, formValueRef }) => {
+const getPayload = ({ data = {}, organization, formValueRef, activeTab }) => {
 	const { cargoValue, currency, hsCode } = data || {};
+	const { user_id, organization_id } = organization || {};
 	const { origin_point: refOrigin, destination_point: refDestination } = formValueRef.current || {};
 
 	return {
-		hsCode,
-		cargoValue,
-		cargoCurrency        : currency,
-		originCountryId      : refOrigin?.country_id,
-		destinationCountryId : refDestination?.country_id,
+		userId         : user_id,
+		organizationId : organization_id,
+		source         : 'ADMIN',
+		metadata       : {
+			origin      : refOrigin,
+			destination : refDestination,
+			transitMode : activeTab,
+		},
+		rate: {
+			hsCode,
+			cargoValue,
+			cargoCurrency        : currency,
+			originCountryId      : refOrigin?.country_id,
+			destinationCountryId : refDestination?.country_id,
+		},
 	};
 };
 
-const useInsurance = ({ activeTab, organization = {} }) => {
-	const { push } = useRouter();
+const useInsurance = ({ activeTab, organization = {}, formValues = {} }) => {
+	const { push, query } = useRouter();
+
 	const formValueRef = useRef({});
 
 	const formHook = useForm();
@@ -28,29 +40,24 @@ const useInsurance = ({ activeTab, organization = {} }) => {
 	const { origin_point, destination_point } = watch();
 
 	const [{ loading }, trigger] = useRequestBf({
-		method  : 'get',
-		url     : '/saas/insurance/v2/rate',
-		authKey : 'get_saas_insurance_v2_rate',
+		method  : 'post',
+		url     : 'saas/insurance/v2/search-rate',
+		authKey : 'get_saas_insurance_v2_search-rate',
 	}, { manual: true });
 
-	const verifyDetails = async (data) => {
-		const payload = getPayload({ data, formValueRef });
-		const { origin_point: refOrigin, destination_point: refDestination } = formValueRef.current || {};
+	const verifyDetails = async (info) => {
+		const payload = getPayload({ data: info, formValueRef, organization, activeTab });
 
 		try {
-			await trigger({
-				params: payload,
+			const resp = await trigger({
+				data: {
+					...payload,
+					performedBy: query?.partner_id,
+				},
 			});
-			const queryData = {
-				...data,
-				originName           : refOrigin?.display_name,
-				destinationName      : refDestination?.display_name,
-				originCountryId      : refOrigin?.country_id,
-				destinationCountryId : refDestination?.country_id,
-				type                 : activeTab,
-				orgDetails           : organization,
-			};
-			push(`/cargo-insurance?data=${JSON.stringify(queryData)}`);
+
+			const { data } = resp || {};
+			push(`/cargo-insurance/${data?.id}`);
 		} catch (err) {
 			Toast.error(err.response?.data?.message);
 		}
@@ -61,7 +68,7 @@ const useInsurance = ({ activeTab, organization = {} }) => {
 			Toast.error('Please Select Organization');
 			return;
 		}
-		if (isEmpty(organization?.organization_id)) {
+		if (isEmpty(organization?.user_id)) {
 			Toast.error('Please Select User');
 			return;
 		}
@@ -96,6 +103,16 @@ const useInsurance = ({ activeTab, organization = {} }) => {
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [destination_point, origin_point, setError]);
+
+	useEffect(() => {
+		if (!isEmpty(formValues)) {
+			setValue('origin_point', formValues?.originCountryId);
+			setValue('destination_point', formValues?.destinationCountryId);
+			setValue('hsCode', formValues?.hsCode);
+			setValue('currency', formValues?.cargoCurrency);
+			setValue('cargoValue', formValues?.cargoValue);
+		}
+	}, [formValues, setValue]);
 
 	return { formHook, onSubmit, formValueRef, loading };
 };

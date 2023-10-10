@@ -5,9 +5,9 @@ import { getInsuranceControls, getFileControls } from '../../../configurations/i
 
 import styles from './styles.module.css';
 
-function FormFields({ formHook = {} }) {
+function FormFields({ formHook = {}, billingType = '' }) {
 	const controls = getInsuranceControls();
-	const fileControls = getFileControls();
+	const fileControls = getFileControls({ billingType });
 	return (
 		<div className={styles.container}>
 			<p className={styles.form_title}>Additional fields required to finish the purchase of Insurance</p>

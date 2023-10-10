@@ -4,9 +4,9 @@ import { IcMLocation, IcMProductCodeMapping } from '@cogoport/icons-react';
 import ListLocationOpt from '../page-components/ListLocationOpt';
 
 const FILTER_TYPE_MAPPGING = {
-	ocean   : ['seaport', 'country'],
-	air     : ['airport', 'city', 'country'],
-	surface : ['pincode', 'seaport', 'airport', 'city'],
+	sea  : ['seaport', 'country'],
+	air  : ['airport', 'city', 'country'],
+	road : ['pincode', 'seaport', 'airport', 'city'],
 };
 
 const getInsuranceControls = ({ activeTab = 'ocean' }) => [

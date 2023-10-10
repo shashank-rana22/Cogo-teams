@@ -1,5 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import FormItem from '../../../../common/FormItem';
 import getPersonalDetailControls from '../../../../configurations/personalDetailControls';
@@ -11,11 +13,20 @@ function PersonalDetailsModal({ detailModal, setDetailModal }) {
 	const personalDetailControls = getPersonalDetailControls();
 
 	const formhook = useForm();
-	const { handleSubmit } = formhook;
+	const { handleSubmit, setValue } = formhook;
 
 	const submitHandler = (data) => {
-		console.log(data, 'data', info);
+		console.log(data, 'data');
 	};
+
+	useEffect(() => {
+		if (!isEmpty(info)) {
+			setValue('firstName', info?.insuredFirstName);
+			setValue('lastName', info?.insuredLastName);
+			setValue('email', info?.email);
+			setValue('phoneNo', info?.phoneNo);
+		}
+	}, [info, setValue]);
 
 	return (
 		<Modal show={openModal} onClose={() => setDetailModal({ openModal: false })} placement="top-right" size="sm">

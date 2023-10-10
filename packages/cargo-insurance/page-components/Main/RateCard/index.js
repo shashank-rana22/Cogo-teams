@@ -3,13 +3,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Image } from '@cogoport/next';
 
+import INSURANCE_PROVIDER from '../../../constant/insuranceProvider';
+
 import styles from './styles.module.css';
 
 const SINGLE_RATE = 1;
-
-const INSURANCE_PROVIDER = {
-	BAJAJ: GLOBAL_CONSTANTS.image_url.bajaj_insurance,
-};
 
 const getFormatedAmount = ({ currency, value }) => formatAmount({
 	amount  : value,
@@ -55,7 +53,7 @@ function RateCard({ data = [], loading, selectedRateCard, setSelectedRateCard })
 									<div className={cl`${styles.flex_box} ${styles.header}`}>
 										<div>
 											<Image
-												src={INSURANCE_PROVIDER[serviceProvider]}
+												src={INSURANCE_PROVIDER?.[serviceProvider]}
 												width={140}
 												height={15}
 												alt={serviceProvider}

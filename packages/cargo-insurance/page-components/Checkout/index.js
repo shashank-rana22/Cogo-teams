@@ -12,18 +12,22 @@ import SideBar from './SideBar';
 import styles from './styles.module.css';
 
 function Checkout() {
-	const [billingType, setBillingType] = useState('Individual');
+	const [billingType, setBillingType] = useState('Corporate');
 
 	const { getLoading, draftData = {} } = useDraft({});
-	console.log(getLoading, 'getLoading');
-	const formHook = useForm();
+
+	const formHook = useForm({
+		defaultValues: {
+			coverage: 'ALL_RISK',
+		},
+	});
 
 	const controls = getRegistrationControls({ billingType });
 
 	return (
 		<div>
 			<h2>Cargo Insurance</h2>
-			<Header draftData={draftData} />
+			<Header {...draftData} loading={getLoading} />
 
 			<div className={styles.container}>
 				<div className={styles.flex_box}>
@@ -38,10 +42,10 @@ function Checkout() {
 						</div>
 					</div>
 
-					<SideBar />
+					<SideBar {...draftData} />
 				</div>
 
-				<FormFields formHook={formHook} />
+				<FormFields formHook={formHook} billingType={billingType} />
 			</div>
 
 		</div>

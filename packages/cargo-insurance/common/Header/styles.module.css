@@ -59,6 +59,7 @@
 .drill_content {
 	position: absolute;
 	z-index: 100;
+	width: 100%;
 	max-height: 0;
 	overflow: hidden;
 	background-color: #fff;

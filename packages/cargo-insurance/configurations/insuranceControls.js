@@ -56,11 +56,12 @@ const getInsuranceControls = () => ([
 
 	},
 	{
-		name        : 'transit-date',
-		label       : 'Transit Start Date',
-		placeholder : 'Select Transit Start Date',
+		name        : 'transitDate',
+		label       : 'Sailing Date',
+		placeholder : 'Select Sailing Date',
 		size        : 'sm',
 		type        : 'datepicker',
+		minDate     : new Date(),
 		rules       : {
 			required: true,
 		},
@@ -92,10 +93,15 @@ const getInsuranceControls = () => ([
 		label       : 'Coverage',
 		placeholder : 'Enter Coverage',
 		size        : 'sm',
-		type        : 'text',
-		rules       : {
+		type        : 'select',
+		options     : [
+			{ label: 'All Risk', value: 'ALL_RISK' },
+			{ label: 'Basic Risk', value: 'BASIC_RISK' },
+		],
+		rules: {
 			required: true,
 		},
+		disabled: true,
 
 	},
 	{
@@ -110,12 +116,14 @@ const getInsuranceControls = () => ([
 
 	},
 	{
-		name        : 'invoiceDate',
-		label       : 'Invoice Date',
-		placeholder : 'Select Invoice Date',
-		size        : 'sm',
-		type        : 'datepicker',
-		rules       : {
+		name                  : 'invoiceDate',
+		label                 : 'Invoice Date',
+		placeholder           : 'Select Invoice Date',
+		size                  : 'sm',
+		type                  : 'datepicker',
+		maxDate               : new Date(),
+		isPreviousDaysAllowed : true,
+		rules                 : {
 			required: true,
 		},
 
@@ -132,12 +140,13 @@ const getInsuranceControls = () => ([
 	},
 ]);
 
-const getFileControls = () => ([
+const getFileControls = ({ billingType }) => ([
 	{
 		name       : 'invoiceDoc',
-		label      : 'invoice Doc',
+		label      : 'Invoice Doc',
 		type       : 'fileUpload',
 		size       : 'sm',
+		uploadDesc : 'Upload Invoice Doc',
 		uploadIcon : (
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.upload_icon}
@@ -151,10 +160,11 @@ const getFileControls = () => ([
 		},
 	},
 	{
-		name       : 'aadharDoc',
-		label      : 'Aadhar Doc',
+		name       : 'panDoc',
+		label      : 'Pan Doc',
 		type       : 'fileUpload',
 		size       : 'sm',
+		uploadDesc : 'Upload PAN Doc',
 		uploadIcon : (
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.upload_icon}
@@ -166,6 +176,26 @@ const getFileControls = () => ([
 		rules: {
 			required: true,
 		},
+
+	},
+	{
+		name       : 'aadharDoc',
+		label      : 'Aadhar Doc',
+		type       : 'fileUpload',
+		size       : 'sm',
+		uploadDesc : 'Upload Aadhar Doc',
+		uploadIcon : (
+			<Image
+				src={GLOBAL_CONSTANTS.image_url.upload_icon}
+				width={40}
+				height={40}
+				alt="upload"
+			/>
+		),
+		rules: {
+			required: true,
+		},
+		showEle: billingType === 'Individual',
 
 	},
 	{
@@ -173,6 +203,7 @@ const getFileControls = () => ([
 		label      : 'GST Doc',
 		type       : 'fileUpload',
 		size       : 'sm',
+		uploadDesc : 'Upload GST Doc',
 		uploadIcon : (
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.upload_icon}
@@ -184,7 +215,7 @@ const getFileControls = () => ([
 		rules: {
 			required: true,
 		},
-
+		showEle: billingType === 'Corporate',
 	},
 ]);
 

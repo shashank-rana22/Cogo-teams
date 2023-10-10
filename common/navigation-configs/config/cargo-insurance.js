@@ -1,5 +1,8 @@
 const cargoInsurance = {
-	'/[partner_id]/cargo-insurance/[draftId]': {
+	'/[partner_id]/cargo-insurance/[policySearchId]': {
+		navigation: 'cargo_insurance',
+	},
+	'/[partner_id]/cargo-insurance/[policySearchId]/[draftId]': {
 		navigation: 'cargo_insurance',
 	},
 };

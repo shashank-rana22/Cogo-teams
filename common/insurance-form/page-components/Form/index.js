@@ -8,10 +8,10 @@ import useInsurance from '../../hooks/useInsurance';
 
 import styles from './styles.module.css';
 
-function Insurance({ organization = {}, src = '' }) {
+function Insurance({ organization = {}, src = '', formValues = {} }) {
 	const [activeTab, setActiveTab] = useState('sea');
 
-	const { formHook, loading, onSubmit, formValueRef } = useInsurance({ activeTab, organization });
+	const { formHook, loading, onSubmit, formValueRef } = useInsurance({ activeTab, organization, formValues });
 	const insuranceControls = getInsuranceControls({ activeTab });
 
 	const { control, handleSubmit, formState:{ errors } } = formHook;
@@ -20,7 +20,6 @@ function Insurance({ organization = {}, src = '' }) {
 		<>
 			<div className={styles.header}>
 				<div>
-
 					<h3>Select Service</h3>
 
 					<Tabs

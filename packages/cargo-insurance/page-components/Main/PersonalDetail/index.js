@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { useImperativeHandle, forwardRef } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useImperativeHandle, forwardRef, useEffect } from 'react';
 
 import FormItem from '../../../common/FormItem';
 import getPersonalDetailControls from '../../../configurations/personalDetailControls';
@@ -8,34 +9,38 @@ import getPersonalDetailControls from '../../../configurations/personalDetailCon
 import styles from './styles.module.css';
 
 function PersonalDetail(props, ref) {
+	const { pocDetails } = props;
 	const personalDetailControls = getPersonalDetailControls();
 
 	const formhook = useForm();
-	const { handleSubmit } = formhook;
+	const { setValue, handleSubmit } = formhook;
 
 	const submitHandler = (data) => {
 		console.log(data, 'data');
 	};
 
 	useImperativeHandle(ref, () => ({
-		getPersonalDetails: () => {
-			const onSubmit = (data) => data;
-			const onError = (data) => data;
-
-			return new Promise((resolve) => {
-				handleSubmit(
-					(data) => resolve(onSubmit(data)),
-					(err) => resolve(onError(err)),
-				)();
-			});
-		},
+		getPersonalDetails: () => new Promise((resolve) => {
+			handleSubmit(
+				(data) => resolve(data),
+				(error) => resolve(error),
+			)();
+		}),
 	}), [handleSubmit]);
+
+	useEffect(() => {
+		if (!isEmpty(pocDetails)) {
+			setValue('firstName', pocDetails?.insuredFirstName);
+			setValue('lastName', pocDetails?.insuredLastName);
+			setValue('email', pocDetails?.email);
+			setValue('phoneNo', pocDetails?.phoneNo);
+		}
+	}, [pocDetails, setValue]);
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.header}>
 				<h3>Personal Details</h3>
-				<Button size="sm" themeType="secondary">Add New</Button>
 			</div>
 
 			<div className={styles.form_container}>
