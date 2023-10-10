@@ -6,7 +6,6 @@ const TAG_COLOR_MAPPING = {
 	[OWNER_REPORT]   : '#ddebc0',
 	[MANAGER_REPORT] : '#cfeaed',
 	[AGENT_REPORT]   : '#ced1ed',
-
 };
 
 export default TAG_COLOR_MAPPING;

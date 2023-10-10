@@ -8,7 +8,9 @@ import styles from './styles.module.css';
 
 const ZERO_RANK = 0;
 
-const getListColumnMapping = () => {
+const getListColumnMapping = (items) => {
+	const { levelStack } = items || {};
+
 	const LIST_COLUMN_MAPPING = [
 		{
 			id     : 'rank',
@@ -23,16 +25,32 @@ const getListColumnMapping = () => {
 		{
 			id     : 'name',
 			key    : 'name',
-			flex   : 2,
+			flex   : 2.5,
 			Header : <div className={styles.top_heading}>Name</div>,
 
-			accessor: ({ user = {}, name = '' }) => ((isEmpty(user?.name) && isEmpty(name))
-				? null : <div className={styles.name}>{user.name || (name === 'sme' ? 'SME' : startCase(name))}</div>),
+			accessor: ({ user, name }) => {
+				if (!isEmpty(user)) {
+					const { name: user_name = '', status, block_access } = user;
+
+					return (
+						<>
+							<div className={styles.name}>{user_name || ''}</div>
+							{!isEmpty(levelStack) && status === 'inactive'
+								? <span className={styles.inactive}>Inactive</span>
+								: (block_access && <span className={styles.inactive}>Blocked</span>)}
+						</>
+					);
+				}
+
+				if (isEmpty(name)) return null;
+
+				return <div className={styles.name}>{name === 'sme' ? 'SME' : startCase(name)}</div>;
+			},
 		},
 		{
 			id     : 'total_score',
 			key    : 'total_score',
-			flex   : 1.5,
+			flex   : 1.25,
 			Header : <div className={styles.top_heading}>Score</div>,
 
 			accessor: ({ total_score = 0 }) => <div>{total_score}</div>,
