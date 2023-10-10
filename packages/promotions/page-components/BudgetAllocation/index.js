@@ -1,11 +1,26 @@
 import { TabPanel, Tabs, Toggle } from '@cogoport/components';
-import { useHandleVersionChangeToOld } from '@cogoport/next';
+import { useHandleVersionChangeToOld, dynamic } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import BudgetAllocationTab from './BudgetAllocationTab';
-import DashboardTab from './DashboardTab';
-import RuleSettingTab from './RuleSettingTab';
 import styles from './styles.module.css';
+
+const TABS = [
+	{
+		name      : 'dashboard',
+		title     : 'Dashboard',
+		Component : dynamic(() => import('./DashboardTab'), { ssr: false }),
+	},
+	{
+		name      : 'budget_allocation',
+		title     : 'Budget Allocation',
+		Component : dynamic(() => import('./BudgetAllocationTab'), { ssr: false }),
+	},
+	{
+		name      : 'rule_setting',
+		title     : 'Rule Setting',
+		Component : dynamic(() => import('./RuleSettingTab'), { ssr: false }),
+	},
+];
 
 function BudgetAllocation() {
 	const { handleRouteChange } = useHandleVersionChangeToOld({});
@@ -23,41 +38,24 @@ function BudgetAllocation() {
 					onChange={handleRouteChange}
 				/>
 			</div>
+
 			<div>
 				<Tabs
 					activeTab={activeTab}
 					themeType="primary"
 					onChange={setActiveTab}
 				>
-					<TabPanel
-						name="dashboard"
-						key="dashboard"
-						title="Dashboard"
-					>
-						<div className={styles.tab_margin}>
-							<DashboardTab />
-						</div>
-					</TabPanel>
+					{TABS.map((tab) => {
+						const { Component, name, title } = tab;
 
-					<TabPanel
-						name="budget_allocation"
-						key="budget_allocation"
-						title="Budget Allocation"
-					>
-						<div className={styles.tab_margin}>
-							<BudgetAllocationTab />
-						</div>
-					</TabPanel>
-
-					<TabPanel
-						name="rule_setting"
-						key="rule_setting"
-						title="Rule Setting"
-					>
-						<div className={styles.tab_margin}>
-							<RuleSettingTab />
-						</div>
-					</TabPanel>
+						return (
+							<TabPanel key={name} name={name} title={title}>
+								<div className={styles.tab_margin}>
+									<Component />
+								</div>
+							</TabPanel>
+						);
+					})}
 				</Tabs>
 			</div>
 		</div>

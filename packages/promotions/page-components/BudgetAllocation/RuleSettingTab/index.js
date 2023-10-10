@@ -1,4 +1,5 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+// import { dynamic } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import SERVICE_TABS_MAPPING from '../../../configs/SERVICE_TABS_MAPPING.json';

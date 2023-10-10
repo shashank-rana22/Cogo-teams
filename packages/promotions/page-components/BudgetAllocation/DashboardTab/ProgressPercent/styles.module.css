@@ -77,3 +77,7 @@
 	display: flex;
 	align-items: center;
 }
+
+.amount {
+	color: var(--color-accent-orange-2);
+}

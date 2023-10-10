@@ -7,17 +7,13 @@ const useGetPromotionBudgetDashboard = ({
 	defaultParams = {},
 }) => {
 	const [data, setData] = useState({});
-	const { currency = '' } = defaultParams || {};
-	const [params, setParams] = useState({
-		currency,
-	});
+	const [params, setParams] = useState(defaultParams);
 
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/get_promotion_budget_dashboard',
 			method : 'GET',
 			params : {
-				...(defaultParams || {}),
 				...(params || {}),
 			},
 		},
@@ -38,7 +34,7 @@ const useGetPromotionBudgetDashboard = ({
 
 	useEffect(() => {
 		fetchDashboardData();
-	}, [fetchDashboardData, params, setParams]);
+	}, [fetchDashboardData, params]);
 
 	return {
 		data,

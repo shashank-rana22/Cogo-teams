@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
@@ -19,7 +20,7 @@ function StatsPromoCodes({
 				</div>
 				<div className={styles.divider} />
 				<div className={styles.container_column}>
-					<div className={styles.main_text}>
+					<div className={cl`${styles.main_text} ${styles.amount}`}>
 						{formatAmount({
 							amount,
 							currency : params?.currency,

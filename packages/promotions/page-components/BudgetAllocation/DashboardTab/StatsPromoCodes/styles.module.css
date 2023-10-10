@@ -42,3 +42,7 @@
 	font-size: 14px;
 	font-weight: 400;
 }
+
+.amount {
+	color: var(--color-accent-orange-2);
+}

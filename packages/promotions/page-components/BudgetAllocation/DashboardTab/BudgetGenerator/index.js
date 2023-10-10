@@ -1,18 +1,20 @@
-import { ButtonIcon, Select, Input } from '@cogoport/components';
+import { ButtonIcon, Select } from '@cogoport/components';
 import currencyCode from '@cogoport/globalization/constants/currencyCode';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMEdit, IcMTick, IcMCross } from '@cogoport/icons-react';
+import { IcMEdit } from '@cogoport/icons-react';
+import { dynamic } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import useUpdateBudgetAmount from '../../../../hooks/useUpdateBudgetAmount';
-
 import styles from './styles.module.css';
+
+const EditBudget = dynamic(() => import('./EditBudget'), {
+	ssr: false,
+});
 
 const options = [
 	{ label: currencyCode.USD, value: currencyCode.USD },
 	{ label: currencyCode.INR, value: currencyCode.INR },
 ];
-const DEFAULT_AMOUNT = 0;
 
 function BudgetGenerator({
 	budgetId = '',
@@ -22,51 +24,18 @@ function BudgetGenerator({
 	setParams = () => {},
 }) {
 	const [isEdit, setIsEdit] = useState(false);
-	const [budgetValue, setBudgetValue] = useState(amount || DEFAULT_AMOUNT);
-	const { loading = {}, updateBudgetAmount = () => {} } = useUpdateBudgetAmount({
-		refetch: () => {
-			refetchDashboard();
-			setIsEdit(false);
-		},
-	});
 
 	return (
 		<div className={styles.card}>
 			<div className={styles.content}>
 				<div className={styles.title}>Budget:</div>
 				{isEdit ? (
-					<div className={styles.content}>
-						<Input
-							className={styles.main_text}
-							size="md"
-							placeholder="Enter Budget amount"
-							value={budgetValue}
-							onChange={setBudgetValue}
-						/>
-						<ButtonIcon
-							size="md"
-							icon={<IcMTick />}
-							themeType="primary"
-							disabled={loading}
-							onClick={() => {
-								updateBudgetAmount({
-									data: {
-										id     : budgetId,
-										amount : parseFloat(budgetValue),
-									},
-								});
-							}}
-						/>
-						<ButtonIcon
-							size="md"
-							icon={<IcMCross />}
-							disabled={loading}
-							themeType="primary"
-							onClick={() => {
-								setIsEdit(false);
-							}}
-						/>
-					</div>
+					<EditBudget
+						refetchDashboard={refetchDashboard}
+						amount={amount}
+						setIsEdit={setIsEdit}
+						budgetId={budgetId}
+					/>
 				) : (
 					<div className={styles.content}>
 						<div className={styles.main_text}>
@@ -91,6 +60,7 @@ function BudgetGenerator({
 					</div>
 				)}
 			</div>
+
 			<div className={styles.content}>
 				<div className={styles.currency_text}>Currency:</div>
 				<div className={styles.currency_select}>
@@ -98,7 +68,7 @@ function BudgetGenerator({
 						value={params.currency}
 						onChange={(e) => { setParams({ ...params, currency: e }); }}
 						placeholder="Select Currency"
-						size="md"
+						size="sm"
 						options={options}
 					/>
 				</div>
@@ -107,4 +77,4 @@ function BudgetGenerator({
 	);
 }
 
-export default BudgetGenerator;
+export default React.memo(BudgetGenerator);
