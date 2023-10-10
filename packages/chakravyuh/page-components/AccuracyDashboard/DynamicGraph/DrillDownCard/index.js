@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -13,10 +13,11 @@ function DrillDownCard({
 	data = {}, cardIndex = 1, delay = 2, handleClick = () => {}, animate = false,
 	isAtTop = false, parentAction = 'Search', parent = null, parentCount = 0,
 }) {
+	const { drop, rates_count, action_type } = data;
 	const isMainCard = !cardIndex;
 	const action_text = parentAction.split('_').join(' ');
 	const indicatorHeight = !cardIndex
-		? NORMALISED_PERCENTAGE : (data.rates_count / parentCount) * NORMALISED_PERCENTAGE;
+		? NORMALISED_PERCENTAGE : (rates_count / parentCount) * NORMALISED_PERCENTAGE;
 
 	return (
 		<div
@@ -31,29 +32,49 @@ function DrillDownCard({
 			/>
 
 			<div className={styles.flex_between}>
-				<p className={styles.card_name}>{startCase(data?.action_type)}</p>
+				<p className={styles.card_name}>{`${startCase(action_type)}`}</p>
 				{(isAtTop || isMainCard) && (
 					<h3 className={styles.rate_amount}>
-						{formatBigNumbers(data?.rates_count)}
+						<Tooltip
+							content={<span>{rates_count || GLOBAL_CONSTANTS.zeroth_index}</span>}
+							placement="bottom"
+						>
+							{formatBigNumbers(rates_count || GLOBAL_CONSTANTS.zeroth_index)}
+						</Tooltip>
 					</h3>
 				)}
 			</div>
-			<div className={styles.flex_between}>
-				<p className={styles.drop_off_text}>
-					<img
-						src={GLOBAL_CONSTANTS.image_url.drop_down_red}
-						alt="drop"
-						className={styles.drop_icon}
-					/>
-					{`${formatBigNumbers(data?.drop || GLOBAL_CONSTANTS.zeroth_index)}%`}
-				</p>
+			<div className={cl`${styles.flex_between} ${styles.single_line_text}`}>
+				{
+					drop || drop === GLOBAL_CONSTANTS.zeroth_index
+						? (
+							<p className={styles.drop_off_text}>
+								<img
+									src={GLOBAL_CONSTANTS.image_url.drop_down_red}
+									alt="drop"
+									className={styles.drop_icon}
+								/>
+								{`${formatBigNumbers(drop || GLOBAL_CONSTANTS.zeroth_index)}%`}
+							</p>
+						)
+						: <p> </p>
+				}
 				{isAtTop && (
 					<p className={styles.parent_action_text}>{`from ${action_text}`}</p>
 				)}
 				{!isAtTop
 				&& (isMainCard
 					? <Button themeType="linkUi" onClick={() => handleClick(parent)}>View Dropoff</Button>
-					: <h3 className={styles.rate_amount}>{formatBigNumbers(data?.rates_count)}</h3>
+					: (
+						<h3 className={styles.rate_amount}>
+							<Tooltip
+								content={<span>{rates_count || GLOBAL_CONSTANTS.zeroth_index}</span>}
+								placement="bottom"
+							>
+								{formatBigNumbers(rates_count || GLOBAL_CONSTANTS.zeroth_index)}
+							</Tooltip>
+						</h3>
+					)
 				)}
 			</div>
 		</div>
