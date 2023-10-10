@@ -83,7 +83,7 @@ request.interceptors.request.use((oldConfig) => {
 	}
 
 	if (PEEWEE_SERVICES.includes(serviceName)) {
-		newConfig.baseURL = 'https://24ab-103-143-39-118.ngrok-free.app';
+		newConfig.baseURL = 'https://a805-2401-4900-1c20-71a3-59e5-f719-c47-bf81.ngrok-free.app';
 	}
 
 	return {
