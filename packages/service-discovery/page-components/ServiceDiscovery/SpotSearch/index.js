@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import DotLoader from '../../../common/LoadingState/DotLoader';
 
@@ -35,10 +35,10 @@ function SpotSearch() {
 	const [location, setLocation] = useState({});
 	const [errors, setErrors] = useState({});
 
-	const { createSearch, loading } = useCreateSearch();
+	const { createSearch = () => {}, loading = false } = useCreateSearch();
 
 	return (
-		<div className={cl`${styles.container} ${loading && styles.disabled}`}>
+		<div className={styles.container}>
 			{loading ? (
 				<div className={styles.loader}>
 					<span className={styles.loading_text}>Please Wait!</span>
@@ -46,34 +46,72 @@ function SpotSearch() {
 				</div>
 			) : null}
 
-			<div className={styles.header}>
-				<div className={styles.scope_select}>
-					<div className={styles.label}>Select Scope: </div>
-					<ScopeSelect size="md" />
+			<div className={cl`${styles.wrapper} ${loading && styles.disabled}`}>
+				<div className={styles.header}>
+					<div className={styles.scope_select}>
+						<div className={styles.label}>Select Scope: </div>
+						<ScopeSelect size="md" />
+					</div>
+
+					<Header
+						organization={organization}
+						setOrganization={setOrganization}
+						errors={errors}
+						setErrors={setErrors}
+					/>
 				</div>
 
-				<Header
-					organization={organization}
-					setOrganization={setOrganization}
-					errors={errors}
-					setErrors={setErrors}
-				/>
-			</div>
+				<div className={styles.mode_selection}>
+					<ModeSelection
+						selectedMode={selectedMode}
+						setSelectedMode={setSelectedMode}
+						setSelectedService={setSelectedService}
+						setLocation={setLocation}
+					/>
+				</div>
 
-			<div className={styles.mode_selection}>
-				<ModeSelection
-					selectedMode={selectedMode}
-					setSelectedMode={setSelectedMode}
-					setSelectedService={setSelectedService}
-					setLocation={setLocation}
-				/>
-			</div>
+				{!isEmpty(selectedMode) ? (
+					<>
+						<div className={styles.locations}>
+							<Routes
+								mode={selectedMode}
+								formValues={location}
+								setFormValues={setLocation}
+								organization={organization}
+								errors={errors}
+								createSearch={createSearch}
+								createSearchLoading={loading}
+								setErrors={setErrors}
+							/>
+						</div>
 
-			{!isEmpty(selectedMode) ? (
-				<>
+						<div className={styles.sales_dashboard}>
+							<SalesDashboard
+								importer_exporter_id={organization?.organization_id}
+								service_type={selectedMode?.mode_value}
+								origin_location_id={location?.origin?.id}
+								destination_location_id={location?.destination?.id}
+								setLocation={setLocation}
+								organization={organization}
+								createSearch={createSearch}
+								createSearchLoading={loading}
+							/>
+						</div>
+					</>
+				) : null}
+
+				<div className={styles.other_services}>
+					<OtherServices
+						selectedService={selectedService}
+						setSelectedService={setSelectedService}
+						setSelectedMode={setSelectedMode}
+					/>
+				</div>
+
+				{isEmpty(selectedService) ? null : (
 					<div className={styles.locations}>
 						<Routes
-							mode={selectedMode}
+							mode={selectedService}
 							formValues={location}
 							setFormValues={setLocation}
 							organization={organization}
@@ -83,44 +121,8 @@ function SpotSearch() {
 							setErrors={setErrors}
 						/>
 					</div>
-
-					<div className={styles.sales_dashboard}>
-						<SalesDashboard
-							importer_exporter_id={organization?.organization_id}
-							service_type={selectedMode?.mode_value}
-							origin_location_id={location?.origin?.id}
-							destination_location_id={location?.destination?.id}
-							setLocation={setLocation}
-							organization={organization}
-							createSearch={createSearch}
-							createSearchLoading={loading}
-						/>
-					</div>
-				</>
-			) : null}
-
-			<div className={styles.other_services}>
-				<OtherServices
-					selectedService={selectedService}
-					setSelectedService={setSelectedService}
-					setSelectedMode={setSelectedMode}
-				/>
+				)}
 			</div>
-
-			{isEmpty(selectedService) ? null : (
-				<div className={styles.locations}>
-					<Routes
-						mode={selectedService}
-						formValues={location}
-						setFormValues={setLocation}
-						organization={organization}
-						errors={errors}
-						createSearch={createSearch}
-						createSearchLoading={loading}
-						setErrors={setErrors}
-					/>
-				</div>
-			)}
 		</div>
 	);
 }
