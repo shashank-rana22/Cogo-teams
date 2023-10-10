@@ -2,9 +2,10 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-const useGetPromoAllocationDetail = ({ selectedDetails = {}, filters = {}, setFilters = () => {} }) => {
+const useGetPromoAllocationDetail = ({ selectedDetails = {} }) => {
 	const [List, setList] = useState([]);
 	const [paginationData, setPaginationData] = useState({});
+	const [filters, setFilters] = useState({ agent_id: '', page: 1 });
 
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -45,6 +46,8 @@ const useGetPromoAllocationDetail = ({ selectedDetails = {}, filters = {}, setFi
 		promoAllocationList: List,
 		paginationData,
 		refetch,
+		filters,
+		setFilters,
 	};
 };
 

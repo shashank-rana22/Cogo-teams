@@ -2,9 +2,10 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-const useListPromoBudgetAllocation = ({ filters, setFilters }) => {
+const useListPromoBudgetAllocation = () => {
 	const [List, setList] = useState([]);
 	const [paginationData, setPaginationData] = useState({});
+	const [filters, setFilters] = useState({ activeTab: 'active_budget', role: '', page: 1 });
 
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -51,6 +52,8 @@ const useListPromoBudgetAllocation = ({ filters, setFilters }) => {
 		promoBudgetList: List,
 		paginationData,
 		refetch,
+		filters,
+		setFilters,
 	};
 };
 

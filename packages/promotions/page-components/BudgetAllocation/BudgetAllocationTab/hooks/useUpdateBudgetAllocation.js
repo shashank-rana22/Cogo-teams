@@ -1,8 +1,11 @@
 import { useRequest } from '@cogoport/request';
+import { useState } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useUpdateBudgetAllocation = ({ setShowSaveLink = () => {}, refetch = () => {} }) => {
+const useUpdateBudgetAllocation = ({ refetch = () => {} }) => {
+	const [showSaveLink, setShowSaveLink] = useState(false);
+
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/update_agent_budget_allocation',
@@ -31,6 +34,8 @@ const useUpdateBudgetAllocation = ({ setShowSaveLink = () => {}, refetch = () =>
 	return {
 		loading,
 		updateBudget,
+		showSaveLink,
+		setShowSaveLink,
 	};
 };
 

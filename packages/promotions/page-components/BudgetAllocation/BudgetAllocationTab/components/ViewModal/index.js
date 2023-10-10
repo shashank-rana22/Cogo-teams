@@ -1,6 +1,6 @@
 import { Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import Layout from '../../../../../common/Layout';
 import TablePagination from '../../common/TablePagination';
@@ -19,7 +19,6 @@ function ViewModal({
 	refetchListBudgetAllocation = () => {},
 }) {
 	const DEFAULT_VALUES = {};
-	const [filters, setFilters] = useState({ agent_id: '', page: 1 });
 	const {
 		control,
 		watch,
@@ -28,18 +27,20 @@ function ViewModal({
 		defaultValues: DEFAULT_VALUES,
 	});
 	const {
-		loading = true,
-		promoAllocationList = [],
-		paginationData = {},
+		loading,
+		promoAllocationList,
+		paginationData,
 		refetch,
-	} = useGetPromoAllocationDetail({ selectedDetails, setFilters, filters });
+		filters,
+		setFilters,
+	} = useGetPromoAllocationDetail({ selectedDetails });
 
 	useEffect(() => {
 		const subscription = watch(({ agent_id }) => {
 			setFilters((state) => ({ ...state, agent_id: agent_id || '', page: 1 }));
 		});
 		return () => subscription.unsubscribe();
-	}, [watch]);
+	}, [watch, setFilters]);
 
 	const closeModal = () => {
 		setShowViewModal(false);

@@ -21,7 +21,6 @@ function BudgetAllocationTab() {
 	const [showAllocationCard, setShowAllocationCard] = useState(false);
 	const [showViewModal, setShowViewModal] = useState(false);
 	const [selectedDetails, setSelectedDetails] = useState({});
-	const [filters, setFilters] = useState({ activeTab: 'active_budget', role: '', page: 1 });
 
 	const {
 		control: roleControl,
@@ -35,7 +34,9 @@ function BudgetAllocationTab() {
 		promoBudgetList,
 		paginationData,
 		refetch,
-	} = useListPromoBudgetAllocation({ filters, setFilters });
+		filters,
+		setFilters,
+	} = useListPromoBudgetAllocation();
 
 	const budgetAllocateProps = {
 		setSelectedDetails,
@@ -51,14 +52,14 @@ function BudgetAllocationTab() {
 	useEffect(() => {
 		roleSetValue('role', '');
 		setFilters((state) => ({ ...state, role: '' }));
-	}, [filters.activeTab, roleSetValue]);
+	}, [filters.activeTab, roleSetValue, setFilters]);
 
 	useEffect(() => {
 		const subscription = roleWatch((val) => {
 			setFilters((state) => ({ ...state, role: val.role }));
 		});
 		return () => subscription.unsubscribe();
-	}, [roleWatch]);
+	}, [roleWatch, setFilters]);
 
 	return (
 		<div>
@@ -68,19 +69,21 @@ function BudgetAllocationTab() {
 				refetch={refetch}
 			/>
 			<div className={styles.tab_container}>
-				<div className={styles.select_wrapper}>
-					<Layout controls={RoleControls} control={roleControl} errors={roleErrors} />
-				</div>
-				{!showAllocationCard ? (
-					<div className={styles.allocate_button}>
-						<Button onClick={() => setShowAllocationCard((state) => !state)}>
-							ALLOCATE
-						</Button>
+				<div className={styles.tab_options}>
+					{!showAllocationCard ? (
+						<div className={styles.allocate_button}>
+							<Button onClick={() => setShowAllocationCard((state) => !state)}>
+								ALLOCATE
+							</Button>
+						</div>
+					) : null}
+					<div className={styles.select_wrapper}>
+						<Layout controls={RoleControls} control={roleControl} errors={roleErrors} />
 					</div>
-				) : null}
+				</div>
 				<Tabs
 					activeTab={filters.activeTab}
-					onChange={(val) => (setFilters((state) => ({ ...state, activeTab: val })))}
+					onChange={(val) => (setFilters((state) => ({ ...state, activeTab: val, page: 1 })))}
 					themeType="tertiary"
 				>
 					{TABS.map((item) => (

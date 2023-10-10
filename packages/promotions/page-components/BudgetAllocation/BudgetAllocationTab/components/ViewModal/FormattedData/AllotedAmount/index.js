@@ -10,13 +10,8 @@ import styles from './styles.module.css';
 const ZERO = 0;
 
 function AllotedAmount({ item = {}, refetch, selectedDetails }) {
-	const [showSaveLink, setShowSaveLink] = useState(false);
-
 	const [inputValue, setInputValue] = useState(ZERO);
-	const { updateBudget = () => {}, loading } = useUpdateBudgetAllocation({
-		setShowSaveLink,
-		refetch,
-	});
+	const { updateBudget = () => {}, loading, showSaveLink, setShowSaveLink } = useUpdateBudgetAllocation({ refetch });
 	const handleSave = (value) => {
 		updateBudget(value, inputValue);
 	};
