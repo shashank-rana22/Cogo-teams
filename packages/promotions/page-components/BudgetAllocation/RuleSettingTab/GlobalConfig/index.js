@@ -2,19 +2,15 @@ import { Button, ButtonIcon } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 
+import DiscountForm from '../../../../common/ConfigForm/DiscountForm';
+import ShipmentForm from '../../../../common/ConfigForm/ShipmentForm';
 import Layout from '../../../../common/Layout';
 import UpdateModal from '../../../../common/UpdateModal';
 
-import getControls from './controls/controls';
-import discountConfigControls from './controls/discountConfigControls';
-import getShipmentConfigControls from './controls/shipmentConfigControls';
+import controls from './controls';
 import styles from './styles.module.css';
-
-const INCREMENT = 0.01;
-const ZERO = 0;
-const ONE = 1;
 
 function GlobalConfig({
 	loading = {},
@@ -28,56 +24,28 @@ function GlobalConfig({
 	setShowActivateModal = () => {},
 }) {
 	const DEFAULT_VALUES = {
+		scope                      : 'shipment',
 		...(data || {}),
-		category            : 'business',
-		for_service         : 'fcl_customs',
-		discount_limit_unit : 'flat',
+		category                   : 'business',
+		for_service                : 'fcl_customs',
+		discount_limit_unit        : 'flat',
+		shipment_price_slab_config : (data || {})?.slab_configs,
+		discount_limit_currency    : (data || {})?.discount_config?.[GLOBAL_CONSTANTS.zeroth_index]
+			?.discount_limit_currency,
+		discount_limit_value : (data || {})?.discount_config?.[GLOBAL_CONSTANTS.zeroth_index]?.discount_limit_value,
+		frequency            : (data || {})?.discount_config?.[GLOBAL_CONSTANTS.zeroth_index]?.frequency,
 	};
-	const controls = getControls();
-	const discountControls = discountConfigControls({ disabledFrequency: false });
-	const shipmentControls = getShipmentConfigControls();
-
-	if (!data) {
-		DEFAULT_VALUES.scope = 'shipment';
-	} else {
-		const { slab_configs = [], discount_config = [] } = data || {};
-		DEFAULT_VALUES.shipment_price_slab_config = slab_configs;
-		DEFAULT_VALUES.discount_limit_currency = discount_config[GLOBAL_CONSTANTS.zeroth_index]
-			?.discount_limit_currency;
-		DEFAULT_VALUES.discount_limit_value = discount_config[GLOBAL_CONSTANTS.zeroth_index]?.discount_limit_value;
-		DEFAULT_VALUES.frequency = discount_config[GLOBAL_CONSTANTS.zeroth_index]?.frequency;
-	}
 
 	const {
 		control, formState: { errors = {} } = {}, handleSubmit, watch, setValue,
 	} = useForm({ defaultValues: DEFAULT_VALUES });
 	const formValues = watch();
-	const { organization_id = '', shipment_price_slab_config = [], scope } = formValues;
+	const { organization_id = '', scope = '' } = formValues;
 
 	const showElements = useMemo(() => ({
 		organisation_type     : !organization_id,
 		organisation_sub_type : !organization_id,
 	}), [organization_id]);
-
-	useEffect(() => {
-		shipment_price_slab_config?.forEach((_o, index) => {
-			if (index === ZERO) {
-				setValue(`shipment_price_slab_config.${index}.slab_lower_limit`, ONE);
-			} else {
-				setValue(
-					`shipment_price_slab_config.${index}.slab_lower_limit`,
-					Number(shipment_price_slab_config[index - ONE]?.slab_upper_limit) + INCREMENT,
-				);
-			}
-			setValue(`shipment_price_slab_config.${index}.slab_unit`, 'shipment_value');
-		});
-	}, [shipment_price_slab_config, setValue]);
-
-	const SHOW_ELEM = {};
-	shipment_price_slab_config?.forEach((slab, index) => {
-		SHOW_ELEM[`shipment_price_slab_config.${index}.max_allowed_discount_value`] = slab?.discount_limit_unit
-		=== 'percentage';
-	});
 
 	return (
 		<div>
@@ -103,18 +71,17 @@ function GlobalConfig({
 					<div className={styles.heading}>Global Configuration</div>
 				</div>
 				{scope === 'organization' ? (
-					<Layout
-						controls={discountControls}
+					<DiscountForm
 						control={control}
 						errors={errors}
+						disabledFrequency={false}
 					/>
 				) : (
-					<Layout
-						controls={shipmentControls}
+					<ShipmentForm
 						control={control}
 						errors={errors}
 						formValues={formValues}
-						showElements={SHOW_ELEM}
+						setValue={setValue}
 					/>
 				)}
 

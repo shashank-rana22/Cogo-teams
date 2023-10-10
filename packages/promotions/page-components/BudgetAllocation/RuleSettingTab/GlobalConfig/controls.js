@@ -1,12 +1,12 @@
-import CATEGORY_MAPPING from '../../../../../configs/CATEGORY_MAPPING.json';
-import FOR_SERVICE_MAPPING from '../../../../../configs/FOR_SERVICE_MAPPING.json';
-import ORGANISATION_SUB_TYPE_MAPPING from '../../../../../configs/ORGANISATION_SUB_TYPE_MAPPING.json';
-import ORGANISATION_TYPE_MAPPING from '../../../../../configs/ORGANISATION_TYPE_MAPPING.json';
-import RATE_SOURCE_MAPPING from '../../../../../configs/RATE_SOURCE_MAPPING.json';
-import RULE_TYPE_MAPPING from '../../../../../configs/RULE_TYPE_MAPPING.json';
-import TRADE_TYPE_MAPPING from '../../../../../configs/TRADE_TYPE_MAPPING.json';
+import CATEGORY_MAPPING from '../../../../configs/CATEGORY_MAPPING.json';
+import FOR_SERVICE_MAPPING from '../../../../configs/FOR_SERVICE_MAPPING.json';
+import ORGANISATION_SUB_TYPE_MAPPING from '../../../../configs/ORGANISATION_SUB_TYPE_MAPPING.json';
+import ORGANISATION_TYPE_MAPPING from '../../../../configs/ORGANISATION_TYPE_MAPPING.json';
+import RATE_SOURCE_MAPPING from '../../../../configs/RATE_SOURCE_MAPPING.json';
+import RULE_TYPE_MAPPING from '../../../../configs/RULE_TYPE_MAPPING.json';
+import TRADE_TYPE_MAPPING from '../../../../configs/TRADE_TYPE_MAPPING.json';
 
-const controls = () => [
+const controls = [
 	{
 		name        : 'cogo_entity_id',
 		label       : 'Cogo Entity',

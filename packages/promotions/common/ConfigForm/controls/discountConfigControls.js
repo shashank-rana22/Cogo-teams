@@ -1,4 +1,4 @@
-import FREQUENCY_MAPPING from '../../../../../configs/FREQUENCY_MAPPING.json';
+import FREQUENCY_MAPPING from '../../../configs/FREQUENCY_MAPPING.json';
 
 const MIN_DISCOUNT_PRICE = 0;
 
