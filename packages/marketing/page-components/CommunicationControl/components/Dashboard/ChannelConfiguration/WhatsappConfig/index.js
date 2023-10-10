@@ -12,13 +12,10 @@ const PAGE_ONE = 1;
 function WhatsappConfig() {
 	const [pagination, setPagination] = useState(PAGE_ONE);
 
-	const DEFAULT_PARAMS = {
-		channel: 'whatsapp',
-	};
 	const {
 		data = {}, loading = true,
 		getChannelConfig = () => {},
-	} = useGetCommunicationChannel({ DEFAULT_PARAMS });
+	} = useGetCommunicationChannel({ defaultParams: { channel: 'whatsapp' } });
 
 	const {
 		updateStatus = () => {},

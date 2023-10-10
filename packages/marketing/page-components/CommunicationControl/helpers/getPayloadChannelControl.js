@@ -9,6 +9,7 @@ const ONE_STEP = 1;
 const getPAYLOADChannelControl = (formValues) => {
 	const GROUPED = {};
 	const PAYLOAD = [];
+
 	Object.entries(formValues).forEach(([key, value]) => {
 		const temp = key.split(':');
 		const id = temp[GLOBAL_CONSTANTS.zeroth_index];

@@ -22,18 +22,20 @@ function Dashboard() {
 					onChange={handleRouteChange}
 				/>
 			</div>
+
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary"
 				onChange={setActiveTab}
 			>
 				{TAB_KEYS.map((item) => {
-					const Component = item.component;
+					const { label, name, component:Component } = item;
+
 					return (
 						<TabPanel
-							key={item?.id}
-							name={item?.name}
-							title={item?.label}
+							key={name}
+							name={name}
+							title={label}
 						>
 							<Component />
 						</TabPanel>

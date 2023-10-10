@@ -1,10 +1,11 @@
 import { Popover, Pill } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
+import { dynamic } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
 import getEmailType from '../../../../../utils/getEmailType';
 
-import OptionPopoverContent from './OptionPopoverContent';
+const OptionPopoverContent = dynamic(() => import('./OptionPopoverContent'), { ssr: false, defer: true });
 
 const PAGE_OFFSET = 1;
 const INDEX_OFFSET = 1;

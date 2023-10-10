@@ -1,34 +1,46 @@
-import AllCustomers from '../components/Dashboard/AllCustomers';
-import ChannelConfiguration from '../components/Dashboard/ChannelConfiguration';
-import ChannelControl from '../components/Dashboard/ChannelControl';
-import SegmentControl from '../components/Dashboard/SegmentControl';
-import VoiceAgent from '../components/Dashboard/VoiceAgent';
+import { dynamic } from '@cogoport/next';
 
 const TAB_KEYS = [
 	{
 		label     : 'Channel Control',
 		name      : 'channel_control',
-		component : ChannelControl,
+		component : dynamic(() => import('../components/Dashboard/ChannelControl'), {
+			ssr     : false,
+			loading : () => <div>Loading Channel Control... </div>,
+		}),
 	},
 	{
 		label     : 'Segment Control',
 		name      : 'segment_control',
-		component : SegmentControl,
+		component : dynamic(() => import('../components/Dashboard/SegmentControl'), {
+			ssr     : false,
+			loading : () => <div>Loading Segment Control... </div>,
+		}),
+
 	},
 	{
 		label     : 'All Customers',
 		name      : 'all_customers',
-		component : AllCustomers,
+		component : dynamic(() => import('../components/Dashboard/AllCustomers'), {
+			ssr     : false,
+			loading : () => <div>Loading AllCustomers... </div>,
+		}),
 	},
 	{
 		label     : 'Voice Agent',
 		name      : 'voice_agent',
-		component : VoiceAgent,
+		component : dynamic(() => import('../components/Dashboard/VoiceAgent'), {
+			ssr     : false,
+			loading : () => <div>Loading VoiceAgent... </div>,
+		}),
 	},
 	{
 		label     : 'Channel Configuration',
 		name      : 'channel_configuration',
-		component : ChannelConfiguration,
+		component : dynamic(() => import('../components/Dashboard/ChannelConfiguration'), {
+			ssr     : false,
+			loading : () => <div>Loading ChannelConfiguration... </div>,
+		}),
 	},
 ];
 export default TAB_KEYS;

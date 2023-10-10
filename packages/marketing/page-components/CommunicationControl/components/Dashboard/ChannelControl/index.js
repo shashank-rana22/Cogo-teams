@@ -2,6 +2,7 @@ import { Button, Tooltip, Table } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useMemo } from 'react';
 
 import getPayloadChannelControl from '../../../helpers/getPayloadChannelControl';
 import useGetChannelControls from '../../../hooks/useGetChannelControls';
@@ -15,23 +16,20 @@ function ChannelControl() {
 		list = [], loading = '', getChannelControls = () => {},
 	} = useGetChannelControls();
 
-	const { control, watch } = useForm();
-	const formValues = watch();
-
-	const cols = getColumns({ control });
+	const { control, handleSubmit } = useForm();
 
 	const {
 		updateChannelControl = () => {},
 		updateChannelLoading = 'true',
 	} = useUpdateChannelControls({ getChannelControls });
 
-	const handleSave = async () => {
-		const res = await getPayloadChannelControl(formValues);
-		if (isEmpty(res)) {
-			return;
-		}
-		updateChannelControl({ list: res });
+	const handleSave = (values) => {
+		const res = getPayloadChannelControl(values);
+
+		if (!isEmpty(res)) 	updateChannelControl({ list: res });
 	};
+
+	const cols = useMemo(() => getColumns({ control }), [control]);
 
 	return (
 		<div className={styles.container}>
@@ -49,7 +47,7 @@ function ChannelControl() {
 					</Tooltip>
 				</div>
 				<Button
-					onClick={() => handleSave(list)}
+					onClick={handleSubmit(handleSave)}
 					disabled={updateChannelLoading}
 					className={styles.btn}
 				>

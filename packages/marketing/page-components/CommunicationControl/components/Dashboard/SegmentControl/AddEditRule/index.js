@@ -6,11 +6,9 @@ import Layout from '../../../../common/Layout';
 import getControls from '../../../../configurations/add-edit-rule-controls';
 import removeObjEmptyValue from '../../../../utils/removeObjEmptyValue';
 
-function AddEditRule(
-	{
-		showAddModal = '', setShowAddModal = () => {}, submit = () => {}, loading = '', title = '', item = {},
-	},
-) {
+function AddEditRule({
+	showAddModal = '', setShowAddModal = () => {}, submit = () => {}, loading = '', title = '', item = {},
+}) {
 	const [segmentData, setSegmentData] = useState({});
 	const isEdit = title === 'Edit';
 
@@ -54,48 +52,44 @@ function AddEditRule(
 		reset();
 	};
 
-	return (
-		<div>
-			{showAddModal ? (
-				<Modal
-					show={showAddModal}
-					onClose={() => { setShowAddModal(false); }}
-					placement="top"
+	return showAddModal ? (
+		<Modal
+			show={showAddModal}
+			onClose={() => { setShowAddModal(false); }}
+			placement="top"
+		>
+			<Modal.Header title={`${title} Rule`} />
+			<Modal.Body
+				style={{ minHeight: 350 }}
+			>
+				<Layout
+					control={control}
+					controls={modifiedControls}
+					errors={errors}
+					showElements={SHOW_ELEMENTS}
+				/>
+			</Modal.Body>
+			<Modal.Footer>
+				<Button
+					themeType="secondary"
+					style={{ marginRight: 5 }}
+					onClick={() => {
+						setShowAddModal(false);
+						reset();
+					}}
 				>
-					<Modal.Header title={`${title} Rule`} />
-					<Modal.Body
-						style={{ minHeight: 350 }}
-					>
-						<Layout
-							control={control}
-							controls={modifiedControls}
-							errors={errors}
-							showElements={SHOW_ELEMENTS}
-						/>
-					</Modal.Body>
-					<Modal.Footer>
-						<Button
-							themeType="secondary"
-							style={{ marginRight: 5 }}
-							onClick={() => {
-								setShowAddModal(false);
-								reset();
-							}}
-						>
-							CANCEL
-						</Button>
-						<Button
-							onClick={
+					CANCEL
+				</Button>
+				<Button
+					onClick={
 						handleSubmit(onSubmit)
 					}
-							disabled={loading}
-						>
-							SAVE
-						</Button>
-					</Modal.Footer>
-				</Modal>
-			) : null}
-		</div>
-	);
+					disabled={loading}
+				>
+					SAVE
+				</Button>
+			</Modal.Footer>
+		</Modal>
+	) : null;
 }
 export default AddEditRule;

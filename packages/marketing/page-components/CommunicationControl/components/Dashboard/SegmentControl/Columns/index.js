@@ -9,12 +9,10 @@ import OptionPopoverContent from './OptionPopoverContent';
 const PAGE_OFFSET = 1;
 const INDEX_OFFSET = 1;
 
-function PopoverItem(
-	{
-		item = {}, setShowDeleteModal = () => {}, setItemData = () => {},
-		updateSegment = () => {}, updateLoading = '',
-	},
-) {
+function PopoverItem({
+	item = {}, setShowDeleteModal = () => {}, setItemData = () => {},
+	updateSegment = () => {}, updateLoading = '',
+}) {
 	const [visible, setVisible] = useState(false);
 	return (
 		<Popover
@@ -95,6 +93,7 @@ const getColumns = (
 			accessor : (item) => (format(item?.created_at, GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'])),
 		},
 	];
+
 	const withActions = [
 		{
 			id       : 'update_details',

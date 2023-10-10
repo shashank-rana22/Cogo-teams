@@ -1,13 +1,15 @@
-import { Tabs, TabPanel, Button, Modal, Input } from '@cogoport/components';
-import { useState } from 'react';
+import { Tabs, TabPanel, Button } from '@cogoport/components';
+import { dynamic } from '@cogoport/next';
+import { useState, useMemo } from 'react';
 
 import TableView from '../../../../common/TableView';
-import useAddEmail from '../../../../hooks/useAddEmail';
 import useGetCommunicationChannel from '../../../../hooks/useGetCommunicationChannel';
 import useUpdateStatus from '../../../../hooks/useUpdateStatus';
 
 import getColumns from './Columns';
 import styles from './styles.module.css';
+
+const AddModal = dynamic(() => import('./AddModal'), { ssr: false, defer: true });
 
 const PAGE_ONE = 1;
 
@@ -22,29 +24,27 @@ function EmailConfig() {
 	const [showModal, setShowModal] = useState(false);
 	const [email, setEmail] = useState('');
 
-	const DEFAULT_PARAMS = {
+	const defaultParams = useMemo(() => ({
 		filters: {
 			email_type: emailType || undefined,
 		},
 		channel: 'email',
-	};
+	}), [emailType]);
+
 	const {
 		data = {}, loading = true, getChannelConfig = () => {},
 		pagination = PAGE_ONE, setPagination = () => {},
-	} = useGetCommunicationChannel({ DEFAULT_PARAMS });
+	} = useGetCommunicationChannel({ defaultParams });
 
 	const { updateStatus, updateStatusLoading } = useUpdateStatus({
 		getChannelConfig,
 		channel: 'email',
 	});
+
 	const refetch = () => {
 		setEmail('');
 		getChannelConfig();
 	};
-	const { addEmail, addEmailLoading } = useAddEmail({
-		refetch,
-		emailType,
-	});
 
 	const cols = getColumns({
 		page      : data?.page,
@@ -53,6 +53,7 @@ function EmailConfig() {
 		updateStatusLoading,
 		getChannelConfig,
 	});
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -64,7 +65,7 @@ function EmailConfig() {
 				>
 					{EMAIL_TYPE.map((item) => (
 						<TabPanel
-							key={item?.id}
+							key={item?.value}
 							title={item?.label}
 							name={item?.value}
 						/>
@@ -77,6 +78,7 @@ function EmailConfig() {
 					ADD NEW
 				</Button>
 			</div>
+
 			<TableView
 				columns={cols}
 				data={data}
@@ -84,35 +86,17 @@ function EmailConfig() {
 				setPagination={setPagination}
 				loading={loading}
 			/>
-			<Modal
-				placement="top"
-				show={showModal}
-				onClose={() => { setShowModal(false); }}
-			>
-				<Modal.Header title="Add new email" />
-				<Modal.Body
-					style={{ minHeight: 200 }}
-				>
-					<Input
-						size="sm"
-						placeholder="Enter a valid Email"
-						value={email}
-						onChange={setEmail}
-					/>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button
-						style={{ fontWeight: 700 }}
-						disabled={addEmailLoading}
-						onClick={() => {
-							addEmail(email);
-							setShowModal(false);
-						}}
-					>
-						SUBMIT
-					</Button>
-				</Modal.Footer>
-			</Modal>
+
+			{showModal ? (
+				<AddModal
+					email={email}
+					addEmailRefetch={refetch}
+					setEmail={setEmail}
+					setShowModal={setShowModal}
+					showModal={showModal}
+					emailType={emailType}
+				/>
+			) : null}
 		</div>
 	);
 }

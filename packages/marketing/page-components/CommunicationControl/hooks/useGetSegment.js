@@ -42,6 +42,7 @@ const useGetSegment = ({ statusFilter = '' }) => {
 		getSegmentData,
 		pagination,
 		setPagination,
+		filters,
 	};
 };
 

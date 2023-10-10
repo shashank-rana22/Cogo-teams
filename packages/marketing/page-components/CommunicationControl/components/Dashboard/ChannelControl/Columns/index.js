@@ -1,7 +1,11 @@
-import InputNumberController from '@cogoport/forms/page-components/Controlled/InputNumberController';
+import { InputController } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
+
+function CustomInput(props) {
+	return <InputController type="number" size="sm" className={styles.input} {...props} />;
+}
 
 const getColumns = ({
 	control = {},
@@ -24,11 +28,11 @@ const getColumns = ({
 			</div>
 		),
 		accessor: (item) => (
-			<InputNumberController
+			<CustomInput
 				name={`${item?.id}:${item?.channel_type}:msg_per_day`}
 				value={item?.msg_per_day}
-				className={styles.input}
 				control={control}
+				placeholder="Messages Per Day"
 			/>
 		),
 	},
@@ -41,11 +45,11 @@ const getColumns = ({
 			</div>
 		),
 		accessor: (item) => (
-			<InputNumberController
+			<CustomInput
 				name={`${item?.id}:${item?.channel_type}:msg_per_week`}
 				value={item?.msg_per_week}
-				className={styles.input}
 				control={control}
+				placeholder="Messages Per Week"
 			/>
 		),
 	},
@@ -58,11 +62,11 @@ const getColumns = ({
 			</div>
 		),
 		accessor: (item) => (
-			<InputNumberController
+			<CustomInput
 				name={`${item?.id}:${item?.channel_type}:msg_per_month`}
 				value={item?.msg_per_month}
-				className={styles.input}
 				control={control}
+				placeholder="Messages Per Month"
 			/>
 		),
 	},

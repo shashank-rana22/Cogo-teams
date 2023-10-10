@@ -1,20 +1,25 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { dynamic } from '@cogoport/next';
 import { useState } from 'react';
 
-import EmailConfig from './EmailConfig';
 import styles from './styles.module.css';
-import WhatsappConfig from './WhatsappConfig';
 
 const TABS_MAPPING = [
 	{
 		label     : 'WhatsApp Config',
 		name      : 'whatsapp_config',
-		component : WhatsappConfig,
+		component : dynamic(() => import('./WhatsappConfig'), {
+			ssr     : false,
+			loading : () => <div>Loading WhatsappConfig...</div>,
+		}),
 	},
 	{
 		label     : 'Email Config',
 		name      : 'email_config',
-		component : EmailConfig,
+		component : dynamic(() => import('./EmailConfig'), {
+			ssr     : false,
+			loading : () => <div>Loading EmailConfig...</div>,
+		}),
 	},
 ];
 
@@ -27,12 +32,12 @@ function ChannelConfiguration() {
 				onChange={setActiveTab}
 			>
 				{TABS_MAPPING.map((item) => {
-					const Component = item.component;
+					const { label, name, component:Component } = item;
 					return (
 						<TabPanel
-							name={item.name}
-							title={item.label}
-							key={item?.id}
+							name={name}
+							title={label}
+							key={name}
 						>
 							<Component />
 						</TabPanel>
