@@ -1564,8 +1564,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'marketing-marketing_communication_control',
 					title         : t('common:communication_control'),
-					href          : '/marketing/communication-control',
-					as            : '/marketing/communication-control',
+					href          : '/v2/marketing/communication-control',
+					as            : '/v2/marketing/communication-control',
 					type          : 'link',
 					main_apis     : [],
 					possible_apis : apis.communication_control,
