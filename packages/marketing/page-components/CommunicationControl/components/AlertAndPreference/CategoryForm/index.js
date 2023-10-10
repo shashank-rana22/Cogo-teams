@@ -26,7 +26,6 @@ function CategoryForm({
 	const { updatePreference, loading:updateLoading } = useUpdatePreference({ refetch });
 
 	const onSubmit = async (values) => {
-		// console.log(values);
 		const preferences = getPayloadAlertsPreferences(values);
 		await updatePreference({
 			organization_id : query?.company_id,

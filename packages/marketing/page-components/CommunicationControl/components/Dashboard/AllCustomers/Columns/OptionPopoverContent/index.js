@@ -4,6 +4,8 @@ import { useRouter } from '@cogoport/next';
 function OptionPopoverContent({ item = {} }) {
 	const router = useRouter();
 	const { business_name = '', id = '' } = item || {};
+	const { partner_id } = router?.query || {};
+	const redirectUrl = `${window.location.origin}/${partner_id}/details/demand/${id}`;
 	return (
 		<div>
 			<Button
@@ -22,10 +24,7 @@ function OptionPopoverContent({ item = {} }) {
 				themeType="secondary"
 				style={{ minWidth: '145px' }}
 				onClick={() => {
-					router.push(
-						'/details/demand/[id]',
-						`/details/demand/${id}`,
-					);
+					window.location.replace(redirectUrl);
 				}}
 			>
 				SEE PROFILE
