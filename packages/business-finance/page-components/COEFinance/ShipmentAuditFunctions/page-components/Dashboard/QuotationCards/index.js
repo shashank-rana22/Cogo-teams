@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 
 import useListShipment from '../../../../hook/useListShipment.ts';
 import DetailsCard from '../DetailsCard';
-import FinanceClosedCardsSet from '../QuotationCards/FinanceClosedCardsSet';
-import OperationClosedCardsSet from '../QuotationCards/OperationClosedCardsSet';
-import PrePostCheckoutCardsSet from '../QuotationCards/PrePostCheckoutCardsSet';
 
+import FinanceClosedCardsSet from './FinanceClosedCardsSet';
+import OperationClosedCardsSet from './OperationClosedCardsSet';
+import PrePostCheckoutCardsSet from './PrePostCheckoutCardsSet';
 import styles from './styles.module.css';
 
-function Body({
+function QuotationCards({
 	getPrePostShipmentQuoteRef = {},
 	setQuotationsData = () => {},
 }) {
@@ -78,4 +78,4 @@ function Body({
 	);
 }
 
-export default Body;
+export default QuotationCards;

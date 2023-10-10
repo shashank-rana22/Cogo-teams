@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 
 import useUpdateJobAuditStatus from '../../../../hook/useUpdateJobAuditStatus';
 import getApproveJobAuditBttnCondition from '../../../utils/getApproveJobAuditButtonCondition';
-import Body from '../Body';
+import QuotationCards from '../QuotationCards';
 
 import styles from './styles.module.css';
 
@@ -67,7 +67,7 @@ function Header({ jobId = '' }) {
 				</div>
 			</div>
 
-			<Body
+			<QuotationCards
 				getPrePostShipmentQuoteRef={getPrePostShipmentQuoteRef}
 				setQuotationsData={setQuotationsData}
 			/>
