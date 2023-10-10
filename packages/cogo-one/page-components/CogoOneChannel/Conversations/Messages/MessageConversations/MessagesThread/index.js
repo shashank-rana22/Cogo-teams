@@ -50,6 +50,7 @@ function LoadPrevMessages({
 		</div>
 	);
 }
+
 function MessagesThread(
 	{
 		loadingPrevMessages = false,
@@ -68,6 +69,8 @@ function MessagesThread(
 		hasPermissionToEdit = false,
 		mailProps = {},
 		latestMessagesAtTop = false,
+		deleteMessage = () => {},
+		roomId = '',
 	},
 	messageRef,
 ) {
@@ -91,6 +94,8 @@ function MessagesThread(
 	const messagesArray = latestMessagesAtTop
 		? [...(messagesData || [])].reverse()
 		: messagesData;
+
+	const isTheFirstMessageId = messagesArray.find((item) => ['sent', 'received'].includes(item.conversation_type));
 
 	useEffect(() => {
 		if (
@@ -130,7 +135,7 @@ function MessagesThread(
 				const Component = CONVERSATION_TYPE_MAPPING[eachMessage?.conversation_type]
                  || CONVERSATION_TYPE_MAPPING.default;
 
-				const modtifiedEachMessage = {
+				const modifiedEachMessage = {
 					...(eachMessage || {}),
 					...(channel_type === 'platform_chat'
 						? {
@@ -143,7 +148,7 @@ function MessagesThread(
 					<Component
 						key={eachMessage?.created_at}
 						conversation_type={eachMessage?.conversation_type || 'unknown'}
-						eachMessage={modtifiedEachMessage}
+						eachMessage={modifiedEachMessage}
 						activeMessageCard={activeMessageCard}
 						user_name={user_name}
 						setRaiseTicketModal={setRaiseTicketModal}
@@ -151,6 +156,10 @@ function MessagesThread(
 						viewType={viewType}
 						hasPermissionToEdit={hasPermissionToEdit}
 						mailProps={mailProps}
+						deleteMessage={deleteMessage}
+						firestore={firestore}
+						isTheFirstMessageId={isTheFirstMessageId?.id}
+						roomId={roomId}
 					/>
 				);
 			})}

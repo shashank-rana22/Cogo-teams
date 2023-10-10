@@ -117,7 +117,6 @@ const rawControls = ({
 					required : true,
 					validate : (v) => v > PRICE_GREATER_THAN || 'Price must be greater than 0',
 				},
-				disabled: isFieldsDisabled,
 			},
 			{
 				label       : 'Quantity',

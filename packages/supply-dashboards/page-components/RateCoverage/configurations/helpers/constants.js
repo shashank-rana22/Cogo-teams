@@ -181,6 +181,5 @@ export const densityRatioOptions = [
 export const DEFAULT_VALUE = 0;
 export const FIFTY = 50;
 export const SEVENTY_FIVE = 75;
-export const FIVE_HUNDRED = 500;
 export const VALUE_ONE = 1;
 export const DELTA_VALUE = 0.1;

@@ -61,11 +61,9 @@ function ConsigneeShipperBookingAgent({ get = {} }) {
 
 					<RolloverDetails />
 
-					{shipment_data?.is_job_closed && (
-						<JobStatus
-							shipment_data={shipment_data}
-						/>
-					)}
+					<JobStatus
+						shipment_data={shipment_data}
+					/>
 
 					<ShipmentChat />
 				</div>
@@ -90,7 +88,7 @@ function ConsigneeShipperBookingAgent({ get = {} }) {
 						onChange={setActiveTab}
 					>
 						<TabPanel name="overview" title="Overview">
-							<Overview shipmentData={shipment_data} />
+							<Overview shipmentData={shipment_data} stakeholderConfig={stakeholderConfig} />
 						</TabPanel>
 
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">

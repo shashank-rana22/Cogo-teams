@@ -4,14 +4,18 @@ import { IcMAlert } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
+import useGetDaysToClosure from '../../hooks/useGetDaysToClosure';
 import useShipmentBack from '../../hooks/useShipmentBack';
 
 import styles from './styles.module.css';
 
 function ShipmentInfo() {
 	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
+	const { serial_id = '' } = shipment_data || {};
 
 	const { handleShipmentsClick } = useShipmentBack();
+
+	const { remaining_closure_days = 0 } = useGetDaysToClosure({ serial_id });
 
 	const sourceText = shipment_data?.source === 'direct'
 		? 'Sell Without Buy'
@@ -39,11 +43,11 @@ function ShipmentInfo() {
 				/>
 			) : null}
 
-			{shipment_data?.remaining_closure_days ? (
+			{remaining_closure_days ? (
 				<Pill size="sm" color="#c4dc91" className={styles.pill}>
 					Operational Closure in:
 					{' '}
-					{shipment_data?.remaining_closure_days}
+					{remaining_closure_days}
 					{' '}
 					Day(s)
 				</Pill>

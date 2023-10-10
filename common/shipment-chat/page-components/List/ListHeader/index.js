@@ -7,8 +7,8 @@ import styles from './styles.module.css';
 
 const TAB_MAPPING = [
 	{
-		label : 'Recent',
-		name  : 'recent',
+		label : 'Unread',
+		name  : 'unread',
 	},
 	{
 		label : 'Active',

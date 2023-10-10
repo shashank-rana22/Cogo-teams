@@ -4,7 +4,7 @@ import { getSupplySessionQuery } from '../../../helpers/viewTypeFunctions';
 import { COMMON_ADMIN_ACCESIBLE_BUTTONS } from '../defaultViewOptions';
 
 const COGOONE_ADMIN = {
-	chat_tabs_to_be_shown  : ['message', 'voice', 'outlook', 'firebase_emails'],
+	chat_tabs_to_be_shown  : ['message', 'voice', 'firebase_emails'],
 	group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 	teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 	session_type_query     : getSupplySessionQuery,
@@ -23,7 +23,8 @@ const COGOONE_ADMIN = {
 	show_relevant_templates       : ['quick_reply', 'supply', 'shipment_specialist'],
 	mails_to_be_shown             : [],
 	bulk_assign_features          : ['bulk_auto_assign', 'bulk_send_templates'],
-	configurations_to_be_shown    : ['fire_base_configuration', 'list_agents', 'switch_views'],
+	configurations_to_be_shown    : ['fire_base_configuration', 'list_agents', 'switch_views', 'shift_configuration'],
+	shift_view_default_type       : 'shipment_specialist',
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts', 'sp_contacts'],
 	permissions                   : {
 		auto_assign                                 : true,
@@ -46,6 +47,10 @@ const COGOONE_ADMIN = {
 		show_shipment_reminder                      : false,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : false,
+		restrict_mail_to_organizations              : false,
+		allow_adding_mail_template                  : true,
+		show_services                               : true,
+		show_rm_agent_details                       : false,
 	},
 };
 

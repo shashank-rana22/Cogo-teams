@@ -1,36 +1,42 @@
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../commons/EmptyState';
+import Loader from '../../../commons/Loader';
+import useListLastMileDeskShipments from '../../../hooks/useListLastMileDeskShipments';
 
 import Card from './Card';
 import ListPagination from './ListPagination';
 import styles from './styles.module.css';
 
-function ShipmentList({ loading, data = {} }) {
+function Pagination({ data = {} }) {
+	return (
+		<div className={styles.pagination_container}>
+			<ListPagination data={data} />
+		</div>
+	);
+}
+
+function ShipmentList() {
+	const { data = {}, loading } = useListLastMileDeskShipments();
+
 	const { list = [] } = data || {};
 
-	function Pagination() {
-		return (
-			<div className={styles.pagination_container}>
-				<ListPagination data={data} />
-			</div>
-		);
+	if (loading) {
+		return <Loader />;
+	}
+
+	if (!loading && isEmpty(list)) {
+		return <EmptyState />;
 	}
 
 	return (
-		<div>
-			{!loading && isEmpty(list)
-				? <EmptyState />
-				: (
-					<div>
-						<Pagination />
+		<>
+			<Pagination data={data} />
 
-						{(list || []).map((item) => <Card item={item} key={item?.id} />)}
+			{(list || []).map((item) => <Card item={item} key={item?.id} />)}
 
-						<Pagination />
-					</div>
-				)}
-		</div>
+			<Pagination data={data} />
+		</>
 	);
 }
 export default ShipmentList;

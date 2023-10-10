@@ -10,6 +10,7 @@ import { useMemo, useEffect } from 'react';
 import getDistinctOptions from '../../../../../helpers/getDistinctOptions';
 
 import controls from './controls';
+import EmailPreview from './EmailPreview';
 import styles from './styles.module.css';
 
 const ONE = 1;
@@ -37,6 +38,7 @@ function SelectRecipients({
 	orgUsersData = {},
 	emailWatch = '',
 	emailContent = {},
+	loading = false,
 }) {
 	const {
 		query: { partner_id },
@@ -51,6 +53,7 @@ function SelectRecipients({
 	}));
 
 	const user_ids = [organization?.agent_id, agent_id];
+
 	const partnerUsersParams = {
 		filters: {
 			partner_id,
@@ -77,7 +80,7 @@ function SelectRecipients({
 		params : SalesOkamParams,
 	}, { manual: false });
 
-	const ccRecipients = useMemo(() => {
+	const ccRecipientsForEnterprise = useMemo(() => {
 		const list = (data?.list || []).map((item) => ({
 			label : <CheckboxLabel item={item} />,
 			value : item?.user_id,
@@ -111,6 +114,19 @@ function SelectRecipients({
 		return list;
 	}, [orgUsersData.list]);
 
+	const ccRecipients = (recipients || []).filter(
+		(item) => !(recipientWatch().user_ids || []).includes(item.user_id),
+	);
+
+	const CC_RECIPIENTS_MAPPING = {
+		true  : [...(ccRecipients || []), ...(ccRecipientsForEnterprise || [])],
+		false : ccRecipients,
+	};
+
+	const showAdditionalRecipients = organization?.sub_type === 'enterprise' || organization?.tags?.includes('partner');
+
+	const ccRecipientsOptions = CC_RECIPIENTS_MAPPING[showAdditionalRecipients] || ccRecipients;
+
 	useEffect(() => {
 		const finalKey = selected === 'main' ? 'main' : selected.tax_number;
 
@@ -126,7 +142,7 @@ function SelectRecipients({
 	return (
 		<div className={styles.container}>
 			<div className={styles.form_container}>
-				{recipients.length && (
+				{recipients.length ? (
 					<div className={styles.flex}>
 						<div>
 							To:
@@ -139,53 +155,29 @@ function SelectRecipients({
 							control={control}
 						/>
 					</div>
-				)}
+				) : null}
 
-				{ccRecipients.length && (
+				{(ccRecipientsOptions || []).length ? (
 					<div className={cl`${styles.flex} ${styles.cc_user_ids}`}>
 						<div>
 							CC:
 						</div>
 						<CheckboxGroupController
 							{...(controls[ONE])}
-							options={[
-								...(recipients || []).filter(
-									(item) => !(recipientWatch().user_ids || []).includes(item.user_id),
-								),
-								...ccRecipients,
-							]}
+							options={ccRecipientsOptions || []}
 							id="checkout_send_emails_cc_user_ids_select"
 							control={control}
 						/>
 					</div>
-				)}
+				) : null}
 			</div>
 
-			<div className={cl`${styles.label} ${styles.email_preview}`}>
-				Email preview
-				{' '}
-				<span style={{ fontWeight: '500' }}>
-					(sent from
-					{' '}
-					{agent_email}
-					)
-				</span>
-			</div>
-			<div className={styles.text}>
-				Subject -
-				{' '}
-				{emailWatch()?.subject
-					|| emailPreviews?.[selected?.tax_number]?.template?.subject
-					|| emailPreviews?.main?.template?.subject
-					|| 'Subject is required'}
-			</div>
-			<div
-				className={styles.content}
-				dangerouslySetInnerHTML={{
-					__html:
-						emailPreviews?.[selected?.tax_number]?.template
-						|| emailPreviews?.main?.template,
-				}}
+			<EmailPreview
+				emailPreviews={emailPreviews}
+				emailWatch={emailWatch}
+				loading={loading}
+				agent_email={agent_email}
+				selected={selected}
 			/>
 		</div>
 	);

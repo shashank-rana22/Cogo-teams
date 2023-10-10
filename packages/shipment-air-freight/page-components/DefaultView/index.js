@@ -16,6 +16,7 @@ import ShipmentInfo from '../ShipmentInfo';
 import ShipmentTags from '../ShipmentTags';
 import TimeLine from '../TimeLine';
 
+import ReOpenShipment from './ReOpenShipment';
 import styles from './styles.module.css';
 
 const TAB_MAPPING = {
@@ -56,25 +57,33 @@ function HandleRaiseContainer({
 
 function DefaultView() {
 	const router = useRouter();
-
+	const { navigation = '' } = router.query;
 	const {
 		shipment_data = {}, stakeholderConfig = {},
 		getShipmentStatusCode = 0, isGettingShipment = false,
 		refetchServices = () => {},
 	} = useContext(ShipmentDetailContext) || {};
 
+	const {
+		id: shipment_id,
+		is_job_closed_financially = false,
+	} = shipment_data || {};
+
 	const { features = [], default_tab = 'tasks', job_open_request = false } = stakeholderConfig || {};
 	const [activeTab, setActiveTab] = useState(default_tab);
+	const [finJobOpenConfirmation, setFinJobOpenConfirmation] = useState(false);
 
 	const [alarmId, setAlarmId] = useState('');
 	const [reload, setReload] = useState(false);
 
 	const { data: alarmData = {} } = useGetShipmentFaultAlarmDescription(alarmId, reload);
 	const handleVersionChange = useCallback(() => {
-		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data.id}`;
+		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data.id}${
+			navigation ? `?navigation=${navigation}` : ''
+		}`;
 		window.location.replace(newHref);
 		window.sessionStorage.setItem('prev_nav', newHref);
-	}, [router?.query?.partner_id, shipment_data.id]);
+	}, [router?.query?.partner_id, shipment_data.id, navigation]);
 
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
@@ -131,10 +140,24 @@ function DefaultView() {
 			<div className={styles.top_header}>
 				<ShipmentInfo />
 				<div className={styles.toggle_chat}>
-					{shipment_data?.is_job_closed && (
-						<JobStatus
-							shipment_data={shipment_data}
-							isJobOpenAllowed={job_open_request}
+
+					<JobStatus
+						shipment_data={shipment_data}
+						isJobOpenAllowed={job_open_request}
+					/>
+
+					<HandleRaiseContainer
+						shipment_data={shipment_data}
+						alarmId={alarmId}
+						setAlarmId={setAlarmId}
+						isGettingShipment={isGettingShipment}
+					/>
+
+					{is_job_closed_financially && (
+						<ReOpenShipment
+							finJobOpenConfirmation={finJobOpenConfirmation}
+							setFinJobOpenConfirmation={setFinJobOpenConfirmation}
+							shipment_id={shipment_id}
 						/>
 					)}
 
@@ -143,13 +166,6 @@ function DefaultView() {
 						onLabel="Old"
 						offLabel="New"
 						onChange={handleVersionChange}
-					/>
-
-					<HandleRaiseContainer
-						shipment_data={shipment_data}
-						alarmId={alarmId}
-						setAlarmId={setAlarmId}
-						isGettingShipment={isGettingShipment}
 					/>
 
 					{conditionMapping.chat ? <ShipmentChat /> : null}

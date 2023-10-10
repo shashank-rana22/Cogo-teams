@@ -42,11 +42,12 @@ function getActionType({ ticketStatus, isClosureAuthorizer }) {
 function RenderContent({
 	filteredActions = [], isModal = false, isCurrentReviewer = false, handleAction = () => {},
 	updateLoading = false, actionLoading = '', setConfirmationConfig = () => {},
+	layerAction = false,
 }) {
 	const { t } = useTranslation(['myTickets']);
 
 	const handleConfirmation = ({ e, item }) => {
-		if (isModal) {
+		if (isModal || layerAction) {
 			handleAction(e, item);
 		} else {
 			setConfirmationConfig({ show: true, actionType: item });
@@ -80,12 +81,14 @@ function TicketActions({
 	id = '',
 	ticketStatus = '',
 	isModal = false,
+	layerAction = false,
 	updateLoading = false,
 	handleTicket = () => {},
 	setShowReassign = () => {},
 	setShowEscalate = () => {},
 	isClosureAuthorizer = false,
 	isCurrentReviewer = false,
+	setShowResolveRequest = () => {},
 }) {
 	const [actionLoading, setActionLoading] = useState('');
 	const [confirmationConfig, setConfirmationConfig] = useState({ show: false, actionType: '' });
@@ -97,8 +100,9 @@ function TicketActions({
 
 	const handleAction = (e, item) => {
 		const HANDLE_ACTION_MAPPING = {
-			reassign : { action: setShowReassign, args: true },
-			escalate : { action: setShowEscalate, args: true },
+			reassign        : { action: setShowReassign, args: true },
+			escalate        : { action: setShowEscalate, args: true },
+			resolve_request : { action: setShowResolveRequest, args: true },
 		};
 
 		const { action, args } = HANDLE_ACTION_MAPPING[item] || {};
@@ -141,6 +145,7 @@ function TicketActions({
 						isModal={isModal}
 						handleAction={handleAction}
 						updateLoading={updateLoading}
+						layerAction={layerAction}
 						actionLoading={actionLoading}
 						filteredActions={filteredActions}
 						setActionLoading={setActionLoading}

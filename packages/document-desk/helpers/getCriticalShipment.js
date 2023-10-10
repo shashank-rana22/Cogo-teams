@@ -13,7 +13,6 @@ const FIVE = 5;
 
 const getCriticalShipment = ({ tab, shipment }) => {
 	const { estimated_arrival = '', estimated_departure = '', cutoffs = {}, si_filed_at = '' } = shipment || {};
-	const { document_amendment_requested = '' } = shipment || {};
 	const { si_cutoff = '', gate_in_cutoff = '' } = cutoffs;
 
 	if (!estimated_arrival) return false;
@@ -26,8 +25,6 @@ const getCriticalShipment = ({ tab, shipment }) => {
 	const gate_in_cutoff_date = new Date(new Date(gate_in_cutoff).getTime() + timezoneOffset);
 	const si_filed_date = new Date(new Date(si_filed_at).getTime() + timezoneOffset);
 	const estimated_dep = new Date(new Date(estimated_departure).getTime() + timezoneOffset);
-
-	const amend_draft_bl_condition = (document_amendment_requested === true) && (estimated_dep <= addDays(TODAY, FOUR));
 
 	const telex_dep = estimated_dep <= subtractDays(TODAY, FIVE);
 	const telex_arr = estimated_arr <= addDays(TODAY, FOUR);
@@ -44,7 +41,7 @@ const getCriticalShipment = ({ tab, shipment }) => {
 		do_approval_pending_import               : gate_in_cutoff ? addDays(TODAY, ONE) >= gate_in_cutoff_date : false,
 		confirmed_by_service_provider_import     : si_cutoff ? addDays(TODAY, THREE) >= si_cutoff_date : false,
 		vessel_departed_import                   : estimated_dep <= TODAY,
-		amendment_requested_by_importer_exporter : amend_draft_bl_condition,
+		amendment_requested_by_importer_exporter : estimated_dep <= addDays(TODAY, FOUR),
 		pre_alerts                               : estimated_dep <= subtractDays(TODAY, TWO),
 		agent_invoice                            : estimated_dep <= subtractDays(TODAY, TWO),
 		telex                                    : telex_condition,

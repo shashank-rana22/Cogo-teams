@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { useState, useRef, useEffect } from 'react';
 
 import useRaiseTicketcontrols from '../../../../configurations/filter-controls';
-import { FINANCE_PLATFORM_KEYS, SHIPMENT_RATE_KEYS } from '../../../../constants';
+import { FINANCE_PLATFORM_KEYS, RATE_KEYS, SHIPMENT_RATE_KEYS } from '../../../../constants';
 import { getFieldController } from '../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
@@ -14,20 +14,27 @@ const REQUEST_TYPES = ['shipment', 'rate'];
 
 const CONTROLS_MAPPING = {
 	shipment       : SHIPMENT_RATE_KEYS,
-	rate           : SHIPMENT_RATE_KEYS,
+	rate           : RATE_KEYS,
 	finance        : FINANCE_PLATFORM_KEYS,
 	platform_issue : FINANCE_PLATFORM_KEYS,
 };
 
 function RaiseTicketsForm({
-	watch = () => {}, control = {}, formState = {}, additionalInfo = [], resetField = () => {},
-	setAdditionalInfo = () => {}, setValue = () => {},
+	watch = () => {},
+	control = {},
+	formState = {},
+	additionalInfo = [],
+	resetField = () => {},
+	setAdditionalInfo = () => {},
+	setValue = () => {},
+	setDefaultTypeId = () => {},
 }) {
 	const { errors = {} } = formState || {};
 
 	const { t } = useTranslation(['myTickets']);
 
 	const [subCategories, setSubCategories] = useState([]);
+	const [raiseToDesk, setRaiseToDesk] = useState([]);
 
 	const formRef = useRef(null);
 	const watchRequestType = watch('request_type');
@@ -38,6 +45,11 @@ function RaiseTicketsForm({
 	const watchIssueType = watch('issue_type');
 	const watchService = watch('service');
 	const watchTradeType = watch('trade_type');
+	const watchRaisedToDesk = watch('raised_to_desk');
+	const watchRaisedByDesk = watch('raised_by_desk');
+	const watchIdType = watch('id_type');
+	const watchServiceType = watch('service_type');
+
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label          : item,
 		name           : item,
@@ -51,10 +63,16 @@ function RaiseTicketsForm({
 		value : item?.name,
 	}));
 
+	const formatRaiseToDeskOptions = (raiseToDesk || []).map((item) => ({
+		label : item?.name,
+		value : item?.name,
+	}));
+
 	const defaultControls = useRaiseTicketcontrols({
 		setAdditionalInfo,
 		watchRequestType,
 		watchSubCategory,
+		setDefaultTypeId,
 		watchTradeType,
 		watchCategory,
 		watchService,
@@ -65,16 +83,18 @@ function RaiseTicketsForm({
 		formattedSubCategories,
 		setSubCategories,
 		t,
+		setRaiseToDesk,
+		formatRaiseToDeskOptions,
+		watchRaisedToDesk,
+		watchRaisedByDesk,
+		watchServiceType,
+		watchIdType,
 	});
 
 	const filteredControls = defaultControls
 		.filter((val) => CONTROLS_MAPPING[watchRequestType || 'shipment']?.includes(val.name));
 
 	const controls = filteredControls?.concat(additionalControls);
-
-	const DISABLE_MAPPING = {
-		issue_type: [watchRequestType],
-	};
 
 	useEffect(() => {
 		if (!isEmpty(watchIssueType) && REQUEST_TYPES.includes(watchRequestType)) {
@@ -95,7 +115,11 @@ function RaiseTicketsForm({
 				const { name, label, controllerType } = elementItem || {};
 				const Element = getFieldController(controllerType);
 
-				if ((name === 'user_id' && isEmpty(watchOrgId))) {
+				const checkUserId = name === 'user_id' && isEmpty(watchOrgId);
+				const checkServiceType = name === 'service_type' && (isEmpty(watchIdType) || watchIdType === 'sid');
+				const checkService = name === 'service' && watchRequestType !== 'shipment' && watchIdType !== 'sid';
+
+				if (checkServiceType || checkService || checkUserId) {
 					return null;
 				}
 
@@ -126,7 +150,6 @@ function RaiseTicketsForm({
 							key={name}
 							control={control}
 							id={`${name}_input`}
-							disabled={DISABLE_MAPPING[name]?.some(isEmpty)}
 						/>
 						<div className={styles.error}>
 							{errors?.[controlItem.name] && t('myTickets:required')}

@@ -1,6 +1,9 @@
 import { startCase, getByKey, isEmpty } from '@cogoport/utils';
 
+import MailEditorModal from '../components/Outstanding/MailModal';
+
 import HandleCall from './HandleCall';
+import styles from './styles.module.css';
 
 const organizationColumn = ({ orgData }) => [
 	{
@@ -40,8 +43,13 @@ const organizationColumn = ({ orgData }) => [
 	},
 	{
 		Header   : '',
-		accessor : (row) => <HandleCall row={row} orgData={orgData} />,
-		id       : 'mobile',
+		accessor : (row) => (
+			<div className={styles.flexmail}>
+				<HandleCall row={row} orgData={orgData} />
+				<MailEditorModal email={row?.email} />
+			</div>
+		),
+		id: 'mobile',
 	},
 ];
 

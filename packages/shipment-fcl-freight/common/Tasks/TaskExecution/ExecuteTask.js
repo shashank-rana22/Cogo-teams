@@ -55,7 +55,7 @@ function ExecuteTask({
 
 	const {
 		steps = [],
-		currentStep = {},
+		currentStep = 0,
 		setCurrentStep = () => {},
 		serviceIdMapping = [],
 	} = useTaskExecution({ task, taskConfigData });
@@ -116,7 +116,11 @@ function ExecuteTask({
 	}
 
 	if (
-		task.task === 'upload_draft_bill_of_lading' && primary_service?.trade_type === 'export'
+		task?.task === 'upload_draft_bill_of_lading'
+	&& (
+		(primary_service?.trade_type === 'import' && shipment_data?.end_to_end_shipment?.is_possible)
+		|| primary_service?.trade_type === 'export'
+	)
 	) {
 		return (
 			<UploadDraftBL
@@ -171,6 +175,13 @@ function ExecuteTask({
 		);
 	}
 
+	let isSeawayAndMarkConfirm = false;
+	if (task?.task === 'mark_confirmed'
+		&& primary_service?.bl_type === 'seaway'
+		&& task?.state === 'shipment_received') {
+		isSeawayAndMarkConfirm = true;
+	}
+
 	return (
 		<ExecuteStep
 			task={task}
@@ -182,9 +193,10 @@ function ExecuteTask({
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}
-			uiConfig={taskConfigData?.task_config?.ui_config[currentStep]}
+			uiConfig={taskConfigData?.task_config?.ui_config?.[currentStep]}
 			selectedMail={selectedMail}
 			serviceIdMapping={serviceIdMapping}
+			isSeawayAndMarkConfirm={isSeawayAndMarkConfirm}
 		/>
 	);
 }

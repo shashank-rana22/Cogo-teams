@@ -49,21 +49,6 @@
 	}
 }
 
-.modal_success_body {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	min-height: 320px;
-	padding-bottom: 56px;
-	font-size: var(--font-size-xl);
-	font-weight: 600;
-
-	svg {
-		margin-bottom: 16px;
-	}
-}
-
 .modal_footer {
 	& button:first-child {
 		margin-right: 12px;

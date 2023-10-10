@@ -6,7 +6,7 @@ import {
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const CP_SUPPORT = {
-	chat_tabs_to_be_shown     : ['message', 'voice', 'outlook'],
+	chat_tabs_to_be_shown     : ['message', 'voice', 'firebase_emails'],
 	all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 	session_type_query        : ({ sessionType }) => [where('session_type', '==', sessionType)],
@@ -27,7 +27,9 @@ const CP_SUPPORT = {
 	mails_to_be_shown             : [],
 	bulk_assign_features          : [],
 	configurations_to_be_shown    : [],
+	shift_view_default_type       : '',
 	group_agents_api_filter       : ['cp_support'],
+	allowed_organizations         : ['channel_partners', 'lead_channel_partners'],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 	permissions                   : {
 		auto_assign                                 : false,
@@ -50,6 +52,10 @@ const CP_SUPPORT = {
 		show_shipment_reminder                      : true,
 		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : false,
+		show_services                               : false,
+		show_rm_agent_details                       : false,
+		restrict_mail_to_organizations              : true,
+		hide_personal_mail                          : true,
 	},
 };
 

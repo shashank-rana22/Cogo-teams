@@ -13,11 +13,11 @@ import SelectNormal from './SelectNormal';
 import styles from './styles.module.css';
 
 function SelectRate({
-	setStep,
-	setSelectedCard,
-	selectedCard,
+	setStep = () => {},
+	setSelectedCard = () => {},
+	selectedCard = [],
 	task = {},
-	servicesList,
+	servicesList = [],
 }) {
 	const TWO = 2;
 	const ONE = 1;
@@ -60,7 +60,7 @@ function SelectRate({
 				{loading ? (
 					<div className={styles.loader}>
 						<Loader />
-						&nbsp;
+						{' '}
 						Loading Task...
 					</div>
 				) : null}

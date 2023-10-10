@@ -43,9 +43,10 @@ function InvoiceFormLayout({
 	collectionParty = {},
 	setCollectionParty = () => {},
 	purchaseInvoiceValues = {},
-	billId,
+	billId = '',
 	editData = {},
 }, ref) {
+	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 	const [codes, setCodes] = useState(purchaseInvoiceValues?.codes || {});
 
 	const [showTaggings, setShowTaggings] = useState(false);
@@ -53,7 +54,7 @@ function InvoiceFormLayout({
 	const [selectedProforma, setSelectedProforma] = useState([]);
 	const [showCollectionParty, setShowCollectionParty] = useState(false);
 	const [showBankform, setShowBankForm] = useState(false);
-	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
+
 	const isJobClosed = shipment_data?.is_job_closed;
 	const { billing_addresses: billingAddresses = [], other_addresses: otherAddresses = [] } = collectionParty || {};
 	const allAddresses = [...billingAddresses, ...otherAddresses];
@@ -92,6 +93,9 @@ function InvoiceFormLayout({
 		(item) => item?.registration_number
 			=== (purchaseInvoiceValues?.billing_party),
 	);
+
+	const urgencyTagOptions = shipment_data?.shipment_type === 'air_freight'
+		? [...URGENCY_TAG_OPTIONS, { label: 'THC', value: 'thc' }] : URGENCY_TAG_OPTIONS;
 
 	useEffect(() => {
 		if (initialValueBP && Object.keys(billingParty || {}).length === GLOBAL_CONSTANTS.zeroth_index) {
@@ -155,6 +159,7 @@ function InvoiceFormLayout({
 		codes,
 		shipment_data,
 		activeTab       : billCatogory,
+		calculatedValues,
 	}));
 
 	const isTagDissable = () => {
@@ -197,7 +202,7 @@ function InvoiceFormLayout({
 			</div>
 			<div className={styles.formlayout}>
 				<div className={styles.select}>
-					<SelectController name="urgency_tag" control={control} options={URGENCY_TAG_OPTIONS} isClearable />
+					<SelectController name="urgency_tag" control={control} options={urgencyTagOptions} isClearable />
 				</div>
 
 				<AccordianView title="Select Invoice Type" fullwidth open={isEdit || isJobClosed}>
@@ -310,6 +315,7 @@ function InvoiceFormLayout({
 					primary_service={primary_service}
 					serviceProvider={serviceProvider}
 					formValues={formValues}
+					calculatedValues={calculatedValues}
 				/>
 				<Taggings
 					showTagings={showTaggings}

@@ -19,6 +19,7 @@
 }
 
 .time {
+	margin-top: 4px;
 	margin-right: 4px;
 
 	:global(input) {
@@ -41,4 +42,8 @@
 	.time {
 		margin-bottom: 8px;
 	}
+}
+
+.filter_item {
+	margin-top: 4px;
 }

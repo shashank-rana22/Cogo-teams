@@ -4,24 +4,24 @@ import { getByKey } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const VendorsColumn = (currency) => ([
+const vendorsColumn = (currency) => ([
 	{
 		Header   : <div>Vendor Name</div>,
-		id       : 'businessName',
+		id       : 'organizationName',
 		accessor : (row) => {
-			const { businessName } = row || {};
+			const { organizationName } = row || {};
 			return (
 
 				<div className={styles.reference_id}>
-					{businessName?.length > 30
+					{organizationName?.length > 30
 						? (
 							<Tooltip
 								placement="top"
-								content={businessName}
+								content={organizationName}
 							>
 								<text>
 
-									{`${businessName.substring(
+									{`${organizationName.substring(
 										0,
 										30,
 									)}...`}
@@ -29,7 +29,7 @@ const VendorsColumn = (currency) => ([
 								</text>
 							</Tooltip>
 						)
-						:							businessName}
+						: organizationName}
 				</div>
 
 			);
@@ -37,14 +37,14 @@ const VendorsColumn = (currency) => ([
 	},
 	{
 		Header   : <div>Amount</div>,
-		id       : 'openInvoiceLedgerAmount',
+		id       : 'totalOpenInvoiceAmount',
 		accessor : (row) => {
-			const { openInvoiceLedgerAmount } = row || {};
+			const { totalOpenInvoiceAmount } = row || {};
 			return (
 				<div>
 					<Tooltip
 						content={formatAmount({
-							amount  : getByKey(row, 'openInvoiceLedgerAmount') as any,
+							amount  : getByKey(row, 'totalOpenInvoiceAmount') as any,
 							currency,
 							options : {
 								currencyDisplay : 'code',
@@ -57,13 +57,14 @@ const VendorsColumn = (currency) => ([
 					>
 						<div>
 							{formatAmount({
-								amount  : openInvoiceLedgerAmount,
+								amount  : totalOpenInvoiceAmount,
 								currency,
 								options : {
 									currencyDisplay : 'code',
 									style           : 'currency',
 									notation        : 'compact',
 									compactDisplay  : 'short',
+									currencyWise    : true,
 								},
 							})}
 						</div>
@@ -75,14 +76,14 @@ const VendorsColumn = (currency) => ([
 	},
 	{
 		Header   : <div>Invoices</div>,
-		id       : 'openInvoiceCount',
+		id       : 'totalOpenInvoiceCount',
 		accessor : (row) => (
 			<div className={styles.count}>
-				{getByKey(row, 'openInvoiceCount') as string}
+				{getByKey(row, 'totalOpenInvoiceCount') as string}
 			</div>
 
 		),
 	},
 
 ]);
-export default VendorsColumn;
+export default vendorsColumn;

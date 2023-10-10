@@ -1,9 +1,37 @@
 .chat_container {
-	position: fixed;
 	top: 20px;
 	right: 20px;
+}
+
+.chat_container_common {
+	position: fixed;
 	z-index: 100;
 	transition: 150ms ease-in-out;
+}
+
+.chat_container_booking_desk {
+	top: 24px;
+	right: 20px;
+}
+
+.chat_container_kam_desk {
+	top: 24px;
+	right: 20px;
+}
+
+.chat_container_cost_booking_desk {
+	top: 30px;
+	right: 20px;
+}
+
+.chat_container_document_desk {
+	top: 38px;
+	right: 20px;
+}
+
+.chat_container_last_mile_desk {
+	top: 40px;
+	right: 20px;
 }
 
 .chat_icon {

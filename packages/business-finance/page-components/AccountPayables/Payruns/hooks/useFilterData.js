@@ -21,11 +21,13 @@ const useFilterData = ({
 	setOverseasData,
 	setViewId,
 	setCheckedRow,
+	activeEntity = '',
 }) => {
 	const [globalFilters, setGlobalFilters] = useState({
 		search    : undefined,
 		pageIndex : 1,
 		pageSize  : 10,
+		activeEntity,
 	});
 
 	const [sort, setSort] = useState({});
@@ -43,6 +45,13 @@ const useFilterData = ({
 	useEffect(() => {
 		debounceQuery(search);
 	}, [debounceQuery, search]);
+
+	useEffect(() => {
+		setGlobalFilters((prev) => ({
+			...prev,
+			pageIndex: 1,
+		}));
+	}, [overseasData]);
 
 	const { configMapping, payrunStats, country_code } = useGetConfigDataMapping({
 		activePayrunTab,
@@ -99,11 +108,12 @@ const useFilterData = ({
 		setCheckedRow(null);
 		setSelectedIds([]);
 		setGlobalFilters({
-			search    : undefined,
+			search,
 			pageIndex : 1,
 			pageSize  : 10,
+			activeEntity,
 		});
-	}, [activePayrunTab, setCheckedRow, setOverseasData, setViewId]);
+	}, [activePayrunTab, setCheckedRow, setOverseasData, setViewId, activeEntity, search]);
 
 	return {
 		data    : apiData.listData,

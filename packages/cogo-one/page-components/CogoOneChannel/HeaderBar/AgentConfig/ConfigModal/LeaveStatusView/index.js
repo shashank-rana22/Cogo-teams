@@ -1,10 +1,12 @@
-import { Input, Placeholder, Toggle } from '@cogoport/components';
+import { Input, Placeholder } from '@cogoport/components';
 import { IcMSearchlight, IcMArrowBack } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import LeaveModal from '../../../../../../common/LeaveModal';
 import useCreateUserInactiveStatus from '../../../../../../hooks/useCreateUserInactiveStatus';
+import useListCogoOneShift from '../../../../../../hooks/useListCogoOneShift';
 
+import AgentStatusConfig from './AgentStatusConfig';
 import styles from './styles.module.css';
 
 const DEFAULT_PAGE_LIMIT = 10;
@@ -19,6 +21,9 @@ function LeaveAgentModal({
 	setActiveCard = () => {},
 }) {
 	const [openLeaveModal, setOpenLeaveModal] = useState(false);
+	const [shiftData, setShiftData] = useState({});
+
+	const { shiftList = [] } = useListCogoOneShift();
 
 	const { list = [] } = listAgentStatus || {};
 
@@ -31,44 +36,54 @@ function LeaveAgentModal({
 		firestore,
 	});
 
-	const onChangeToggle = ({ status, agent_id }) => {
+	const onChangeToggle = ({ status, agentId }) => {
+		let updated_status = 'inactive';
+		if (status === 'inactive') {
+			updated_status = 'active';
+		}
+		updateUserStatus({ status: updated_status, userId: agentId });
+	};
+
+	const handleToggle = ({ status, agentId }) => {
 		const isAgentOnLeave = status === 'on_leave';
 		if (!isAgentOnLeave) {
-			setOpenLeaveModal(agent_id);
+			setOpenLeaveModal(agentId);
 		} else {
-			updateUserStatus({ status: 'active', userId: agent_id });
+			updateUserStatus({ status: 'active', userId: agentId });
 		}
 	};
 
 	return (
 		<div className={styles.padding_inner}>
 			<div className={styles.header_bar}>
-				<IcMArrowBack
-					className={styles.arrow_back}
-					onClick={() => setActiveCard('')}
-				/>
-				Back
-			</div>
-			<div className={styles.header}>
-				<Input
-					size="sm"
-					placeholder="Search Agent Name..."
-					value={paramsState?.query}
-					onChange={setSearch}
-					disabled={isLoading}
-					prefix={(
-						<IcMSearchlight
-							height={20}
-							width={20}
-							fill="#9f9f9f"
-						/>
-					)}
-				/>
+				<div className={styles.back_section}>
+					<IcMArrowBack
+						className={styles.arrow_back}
+						onClick={() => setActiveCard('config_modal')}
+					/>
+					Back
+				</div>
+				<div className={styles.header}>
+					<Input
+						size="sm"
+						placeholder="Search Agent Name..."
+						value={paramsState?.query}
+						onChange={setSearch}
+						disabled={isLoading}
+						prefix={(
+							<IcMSearchlight
+								height={20}
+								width={20}
+								fill="#9f9f9f"
+							/>
+						)}
+					/>
+				</div>
 			</div>
 
 			<div className={styles.list_container}>
 				{(isLoading ? [...Array(DEFAULT_PAGE_LIMIT).keys()] : list).map((itm) => {
-					const { id = '', name = '', status = '', agent_id = '' } = itm;
+					const { id = '', name = '' } = itm || {};
 
 					return (
 						<div
@@ -88,13 +103,16 @@ function LeaveAgentModal({
 										width={60}
 									/>
 								) : (
-									<Toggle
-										size="md"
-										checked={status !== 'on_leave'}
-										value={status}
-										onChange={() => onChangeToggle({ agent_id, status })}
-										disabled={statusLoading}
-										className={styles.toggle}
+									<AgentStatusConfig
+										itm={itm}
+										onChangeToggle={onChangeToggle}
+										statusLoading={statusLoading}
+										handleToggle={handleToggle}
+										setShiftData={setShiftData}
+										shiftData={shiftData}
+										updateUserStatus={updateUserStatus}
+										list={list}
+										shiftList={shiftList}
 									/>
 								)}
 							</div>

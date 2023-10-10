@@ -13,6 +13,10 @@ const ChatFAQs = dynamic(() => import('../AdminLayout/FAQs'), { ssr: true });
 
 const FAQ_BUBBLE_EXCLUSION_LIST = ['external'];
 
+const NO_PADDING_LAYOUT_MAPPING = [
+	'/[partner_id]/performance-and-incentives/public-leaderboard',
+];
+
 function Layout({ children, layout }) {
 	const router = useRouter();
 
@@ -20,9 +24,11 @@ function Layout({ children, layout }) {
 
 	const hideLayout = layout === 'hidden';
 
-	const profile = useSelector((state) => state.profile || {});
+	const { general, profile } = useSelector((state) => state);
 
 	const { auth_role_data = [] } = profile;
+
+	const { pathname } = general;
 
 	const { role_functions = [] } = auth_role_data || {};
 
@@ -46,7 +52,9 @@ function Layout({ children, layout }) {
 			showTopbar
 			navbar={navigationMappingAdmin}
 		>
-			<div style={{ margin: 0, padding: '24px 20px' }}>
+			<div style={NO_PADDING_LAYOUT_MAPPING.includes(pathname)
+				? { margin: 0, padding: 0 } : { margin: 0, padding: '24px 20px' }}
+			>
 				{!role_functions.some((r) => FAQ_BUBBLE_EXCLUSION_LIST.includes(r)) && (
 					<ChatFAQs
 						faqNotificationData={faqData}

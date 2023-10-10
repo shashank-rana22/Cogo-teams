@@ -1,8 +1,10 @@
 import { Modal, Pagination, cl } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AGENT_CONFIG_MAPPING from '../../../../../constants/agentConfigMapping';
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMapping';
 import useListAgentStatus from '../../../../../hooks/useListAgentStatus';
 import useListChatAgents from '../../../../../hooks/useListChatAgents';
 import getCommonAgentType from '../../../../../utils/getCommonAgentType';
@@ -10,6 +12,7 @@ import getCommonAgentType from '../../../../../utils/getCommonAgentType';
 import AgentWiseLockScreen from './AgentWiseLockScreen';
 import FireBaseConfiguration from './FireBaseConfiguration';
 import LeaveStatusView from './LeaveStatusView';
+import ShiftConfiguration from './ShiftConfiguration';
 import styles from './styles.module.css';
 import SwitchView from './SwitchView';
 
@@ -34,11 +37,15 @@ const TAB_CONFIG_MAPPING = {
 		Component  : SwitchView,
 		headerText : 'Switch View',
 	},
+	shift_configuration: {
+		Component  : ShiftConfiguration,
+		headerText : 'Shift Configuration',
+	},
 };
 
+const ALLOW_BACK_BUTTON_FOR = ['fire_base_configuration', 'shift_configuration'];
+
 function ConfigModal({
-	showAgentDetails = false,
-	setShowAgentDetails = () => {},
 	firestore = {},
 	configurationsToBeShown = [],
 	viewType = '',
@@ -54,6 +61,10 @@ function ConfigModal({
 		headerText = '',
 	} = TAB_CONFIG_MAPPING[activeCard] || TAB_CONFIG_MAPPING.list_agents;
 
+	const showRmAgentsDetails = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_rm_agent_details;
+
+	const isModalActive = Object.keys(TAB_CONFIG_MAPPING).includes(activeCard);
+
 	const {
 		getListChatAgents = () => { },
 		loading = false,
@@ -65,7 +76,9 @@ function ConfigModal({
 		setIsInActive = () => {},
 		isInActive = false,
 	} = hookToBeUsed({
-		agentType: getCommonAgentType({ viewType }),
+		agentType  : getCommonAgentType({ viewType }),
+		showRmAgentsDetails,
+		activeCard : activeCard || 'default',
 	}) || {};
 
 	const {
@@ -77,11 +90,10 @@ function ConfigModal({
 
 	const handleClose = () => {
 		setActiveCard('');
-		setShowAgentDetails(false);
 	};
 
 	const handleBack = () => {
-		setActiveCard('');
+		setActiveCard('config_modal');
 	};
 
 	const COMPONENT_PROPS = {
@@ -119,29 +131,46 @@ function ConfigModal({
 			handleClose,
 			setViewType,
 		},
+		shift_configuration: {
+			handleClose,
+			viewType,
+		},
 	};
+
+	if (!activeCard) {
+		return null;
+	}
 
 	return (
 		<Modal
 			size="md"
-			show={showAgentDetails}
+			show
 			onClose={handleClose}
 			placement="top"
+			scroll={activeCard !== 'shift_configuration'}
 		>
 			<Modal.Header
 				className={styles.modal_header}
-				title={activeCard === 'fire_base_configuration' ? (
+				title={ALLOW_BACK_BUTTON_FOR.includes(activeCard) ? (
 					<>
 						<IcMArrowBack className={styles.back_icon} onClick={handleBack} />
-						<span className={styles.header_label}>{headerText || 'Configuration'}</span>
+						<span className={styles.header_label}>
+							{isModalActive
+								? (headerText || 'Configuration')
+								: startCase(activeCard)}
+						</span>
 					</>
 				) : (
-					headerText || 'Configuration'
+					<div>
+						{isModalActive
+							? (headerText || 'Configuration')
+							: startCase(activeCard)}
+					</div>
 				)}
 			/>
 
 			<Modal.Body className={styles.modal_body}>
-				{(activeCard && Component)
+				{(isModalActive && Component)
 					? (
 						<Component
 							key={activeCard}

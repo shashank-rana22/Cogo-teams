@@ -7,6 +7,7 @@ import useFeedbackTableData from '../../../../hooks/useFeedbackTableData';
 import Filters from '../../commons/Filters';
 import Statistics from '../../commons/Statistics';
 
+import Actions from './Actions';
 import { getFeedbackColumns } from './get-feedback-columns';
 import styles from './styles.module.css';
 
@@ -24,6 +25,7 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 		selectAll = false,
 		onChangeTableHeadCheckbox = () => {},
 		onChangeBodyCheckbox = () => {},
+		refetch = () => {},
 	} = useFeedbackTableData({});
 
 	const { page, page_limit, total_count } = paginationData;
@@ -41,7 +43,11 @@ function FeedbacksReceived({ activeTab = '', setActiveTab = () => {} }) {
 			<Filters pageFilters={filters} onChangeFilters={onChangeFilters} activeTab={activeTab} />
 
 			<Statistics activeTab={activeTab} filters={filters} />
-
+			<Actions
+				checkedRowsId={checkedRowsId}
+				setActiveTab={setActiveTab}
+				refetchFeedbackTable={refetch}
+			/>
 			<EnrichmentRequest
 				checkedRowsId={checkedRowsId}
 				setActiveTab={setActiveTab}

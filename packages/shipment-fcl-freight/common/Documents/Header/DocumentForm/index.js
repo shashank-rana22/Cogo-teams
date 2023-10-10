@@ -2,14 +2,14 @@ import useListPossibelDocuments from '../../../../hooks/useListPossibleDocuments
 import UploadDocument from '../UploadDocument';
 
 function DocumentForm({
-	shipment_data,
-	orgList,
-	activeStakeholder,
-	uploaded_by_org_id,
-	formValues,
-	control,
-	errors,
-	orgId,
+	shipment_data = {},
+	orgList = [],
+	activeStakeholder = '',
+	uploaded_by_org_id = '',
+	formValues = {},
+	control = {},
+	errors = {},
+	orgId = '',
 	setOrgId = () => {},
 }) {
 	let params = {};

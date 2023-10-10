@@ -869,5 +869,18 @@
     "is_triggered_on": "dipicu pada",
     "having_parameter": "memiliki parameter",
     "delete_event_heading": "Hapus Acara",
-    "confirmation_text_to_delete_event": "Apakah Anda yakin ingin menghapus acara ini?"
+    "confirmation_text_to_delete_event": "Apakah Anda yakin ingin menghapus acara ini?",
+    "validate_enrichment_request": "Validasi Permintaan Pengayaan",
+    "validity_status": "Status Validitas",
+    "feedback_parameter_placeholder": "Sub Jenis",
+    "feedback_placeholder": "Masukan",
+    "validity_enrichment_request_title": "Perbarui Permintaan Pengayaan",
+    "validity_enrichment_request_body": "Silakan pilih status",
+    "validity_enrichment_request_cancel": "Tidak",
+    "validity_enrichment_request_submit": "Ya",
+    "validity_enrichment_request_success_toast": "Diperbarui dengan Sukses",
+    "validity_enrichment_request_actions": "Aksi",
+    "validity_enrichment_status_valid": "Valid",
+    "validity_enrichment_status_invalid": "Tidak Valid",
+    "validity_status_placeholder": "Status validitas"
 }

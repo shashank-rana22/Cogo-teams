@@ -45,7 +45,7 @@ function ViewAttachmentsModal({
 		activeAttachmentType = activeAttachmentContent.split('/')?.[GLOBAL_CONSTANTS.zeroth_index];
 	}
 
-	const ActiveCompoonent = COMPONENT_MAPPING[activeAttachmentType] || ObjectBody;
+	const ActiveComponent = COMPONENT_MAPPING[activeAttachmentType] || ObjectBody;
 
 	return (
 		<Modal
@@ -65,7 +65,7 @@ function ViewAttachmentsModal({
 				)}
 			/>
 			<Modal.Body>
-				<ActiveCompoonent
+				<ActiveComponent
 					key={activeAttachmentType}
 					media_url={urlType === 'urlBased' ? activeAttachmentContent : renderContent(activeAttachmentData)}
 					contentType={activeAttachmentContent}

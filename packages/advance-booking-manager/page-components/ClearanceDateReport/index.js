@@ -58,7 +58,8 @@ function ClearanceDateReport({
 		<div>
 			<List
 				fields={fields}
-				data={data}
+				list={data?.list}
+				totalCount={data?.totalRecords}
 				loading={loading}
 				functions={allFunctions}
 				page={page}

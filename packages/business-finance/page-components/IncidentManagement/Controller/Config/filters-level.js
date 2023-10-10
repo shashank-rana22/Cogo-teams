@@ -1,3 +1,5 @@
+import { camelCase, startCase } from '@cogoport/utils';
+
 const getControls = (t = () => {}) => [
 	{
 		name        : 'incidentType',
@@ -47,6 +49,10 @@ const getControls = (t = () => {}) => [
 				value : 'OVERHEAD_APPROVAL',
 				label : t('incidentManagement:expense_approval'),
 			},
+			{
+				value : 'JOB_OPEN',
+				label : t('incidentManagement:job_open_label'),
+			},
 		],
 		rules: { required: t('incidentManagement:incident_type_required_message') },
 	},
@@ -57,6 +63,7 @@ const getControls = (t = () => {}) => [
 		isClearable : true,
 		span        : 2,
 		initialCall : true,
+		renderLabel : (item) => startCase(camelCase(item?.incidentType)) || '',
 		style       : { width: '200px', marginLeft: '8px' },
 		placeholder : t('incidentManagement:incident_sub_type_label'),
 	},

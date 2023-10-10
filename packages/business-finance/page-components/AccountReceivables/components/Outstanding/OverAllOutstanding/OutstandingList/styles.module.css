@@ -38,6 +38,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	min-height: 54px;
 	padding: 2px 8px;
 }
 
@@ -126,8 +127,8 @@
 .popover_wrapper {
 	display: flex;
 	justify-content: flex-end;
-	width: 75%;
-	margin-top: -22px;
+	padding-right: 340px;
+	margin-top: -23px;
 }
 
 .org_list {

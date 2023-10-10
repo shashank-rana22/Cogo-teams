@@ -1,6 +1,6 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMArrowDown } from '@cogoport/icons-react';
+import { IcMArrowUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useGetPayablesByService from '../hooks/useGetPayablesByService';
@@ -14,8 +14,14 @@ interface ItemProps {
 function AccountPayablesByService({ activeEntity }:ItemProps) {
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 	const [activeBox, setActiveBox] = useState(null);
-	const handleClick = () => {
-		setIsAccordionActive(true);
+	const handleClick = (item) => {
+		if (activeBox === null || item?.service !== activeBox) {
+			setIsAccordionActive(true);
+			setActiveBox(item?.service);
+		} else {
+			setActiveBox(null);
+			setIsAccordionActive(false);
+		}
 	};
 	const { data, loading } = useGetPayablesByService({ activeEntity });
 	const { list, currency } = data || {};
@@ -93,7 +99,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 													notation              : 'compact',
 													compactDisplay        : 'short',
 													minimumFractionDigits : 2,
-
+													currencyWise          : true,
 												},
 											})}
 										</div>
@@ -129,7 +135,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 													notation              : 'compact',
 													compactDisplay        : 'short',
 													minimumFractionDigits : 2,
-
+													currencyWise          : true,
 												},
 											})}
 										</div>
@@ -165,7 +171,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 													notation              : 'compact',
 													compactDisplay        : 'short',
 													minimumFractionDigits : 2,
-
+													currencyWise          : true,
 												},
 											})}
 										</div>
@@ -201,7 +207,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 													notation              : 'compact',
 													compactDisplay        : 'short',
 													minimumFractionDigits : 2,
-
+													currencyWise          : true,
 												},
 											})}
 										</div>
@@ -247,7 +253,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												minimumFractionDigits : 2,
-
+												currencyWise          : true,
 											},
 										})}
 
@@ -282,7 +288,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												minimumFractionDigits : 2,
-
+												currencyWise          : true,
 											},
 										})}
 
@@ -329,7 +335,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												minimumFractionDigits : 2,
-
+												currencyWise          : true,
 											},
 										})}
 
@@ -364,6 +370,54 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												minimumFractionDigits : 2,
+												currencyWise          : true,
+											},
+										})}
+
+									</div>
+								</Tooltip>
+							</div>
+						</div>
+
+					</div>
+				);
+			case 'Overseas':
+				return (
+					<div className={styles.imports_container}>
+
+						<div className={styles.sub_container}>
+							<div className={styles.ocean_text}>
+								Overseas
+							</div>
+						</div>
+						<div className={styles.vr} />
+						<div className={styles.sub_container}>
+							<div className={styles.label}>
+								Overseas
+							</div>
+							<div className={styles.ocean_value}>
+								<Tooltip
+									content={formatAmount({
+										amount  : list[7]?.amount,
+										currency,
+										options : {
+											currencyDisplay : 'code',
+											style           : 'currency',
+										},
+									})}
+									interactive
+								>
+									<div>
+										{formatAmount({
+											amount  : list[8]?.amount,
+											currency,
+											options : {
+												currencyDisplay       : 'code',
+												style                 : 'currency',
+												notation              : 'compact',
+												compactDisplay        : 'short',
+												minimumFractionDigits : 2,
+												currencyWise          : true,
 											},
 										})}
 
@@ -406,8 +460,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									key={item?.service}
 									className={activeBox === item?.service ? styles.sub_container_click : styles.amount}
 									onClick={() => {
-										handleClick();
-										setActiveBox(item?.service);
+										handleClick(item);
 									}}
 									role="presentation"
 								>
@@ -447,7 +500,7 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 							role="presentation"
 						>
 							Show less
-							<IcMArrowDown height={15} width={15} className={styles.down} />
+							<IcMArrowUp height={15} width={15} className={styles.down} />
 						</div>
 					</div>
 				)}

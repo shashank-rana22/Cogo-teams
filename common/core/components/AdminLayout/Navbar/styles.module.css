@@ -249,6 +249,10 @@
 	will-change: transform;
 }
 
+.notification_popover_bg_nav {
+	transform: none;
+}
+
 .icon {
 	width: 10px !important;
 	height: 10px !important;
@@ -287,6 +291,10 @@
 	}
 }
 
+.expanded {
+	width: var(--layout-navbar);
+}
+
 .mobile_container {
 	position: fixed;
 	top: 0;
@@ -314,4 +322,17 @@
 
 .line {
 	margin-bottom: 8px;
+}
+
+.hide {
+	display: none;
+}
+
+.count {
+	width: fit-content;
+	height: 20px;
+	padding: 0 4px;
+	color: #fff;
+	background: #ee3425;
+	border-radius: 6px;
 }

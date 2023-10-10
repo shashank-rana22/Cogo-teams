@@ -18,6 +18,8 @@ function ListHeader({ item = {} }) {
 		trade_type = '',
 		inco_term = '',
 		is_cogo_assured = '',
+		is_job_closed = false,
+		is_job_closed_financially = false,
 	} = item;
 
 	const { tags:importer_exporter_tags = [] } = importer_exporter;
@@ -39,6 +41,12 @@ function ListHeader({ item = {} }) {
 			) : null}
 			{importer_exporter_tags.includes('partner') && (
 				<span className={styles.importer_exporter_tags}>{t('airBookingDesk:channel_partner')}</span>)}
+			{is_job_closed && (
+				<span className={styles.job_closed}>{t('airBookingDesk:operationally_closed')}</span>
+			)}
+			{is_job_closed_financially && (
+				<span className={styles.financially_closed}>{t('airBookingDesk:financially_closed')}</span>
+			)}
 			{source && (
 				<span className={styles.source}>
 					{source === 'direct'
@@ -46,7 +54,14 @@ function ListHeader({ item = {} }) {
 						: startCase(source)}
 				</span>
 			) }
-			{tags.map((tag) => TAGS.includes(tag) && <span key={tag} className={styles[tag]}>{startCase(tag)}</span>)}
+			{(tags || []).map((tag) => TAGS.includes(tag) && (
+				<span
+					key={tag}
+					className={styles[tag]}
+				>
+					{startCase(tag)}
+				</span>
+			))}
 		</div>
 	);
 }

@@ -28,7 +28,6 @@ function Header({
 	if (searchKey) {
 		searchBar = (
 			<SearchInput
-				type="search"
 				style={{ marginRight: 8 }}
 				onSearch={(val) => {
 					setFilters({

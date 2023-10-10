@@ -34,15 +34,23 @@ const TAB_MAPPING = {
 	tracking        : dynamic(() => import('@cogoport/surface-modules/components/Tracking'), { ssr: false }),
 };
 const FORBIDDEN_STATUS_CODE = 403;
+const LAST_VALUE_INDEX = -1;
+
+const VIEW_MAPPING = {
+	booking_agent_view : 'booking_agent',
+	service_ops1_view  : 'booking_desk',
+};
 
 function ShipmentDetails() {
 	const router = useRouter();
+	const { navigation = '' } = router.query;
 	const prof = useSelector(
 		({ profile }) => profile,
 	);
 	const { authParams } = prof || {};
 
 	const activeStakeholder = useGetActiveStakeholder();
+
 	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder, authParams });
 	const { get } = useGetShipment();
 	const {
@@ -61,18 +69,28 @@ function ShipmentDetails() {
 	const { servicesGet = {} } = useServiceList();
 
 	const handleVersionChange = useCallback(() => {
-		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
+		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}${
+			navigation ? `?navigation=${navigation}` : ''
+		}`;
 		window.location.replace(newHref);
 		window.sessionStorage.setItem('prev_nav', newHref);
-	}, [router?.query?.partner_id, shipment_data?.id]);
+	}, [router?.query?.partner_id, shipment_data?.id, navigation]);
 
-	const contextValues = useMemo(() => ({
-		...get,
-		...getTimeline,
-		...servicesGet,
-		activeStakeholder,
-		stakeholderConfig,
-	}), [get, servicesGet, getTimeline, stakeholderConfig, activeStakeholder]);
+	const contextValues = useMemo(() => {
+		let stakeholder = activeStakeholder;
+		if (activeStakeholder === 'kam_so1') {
+			const view = authParams?.split(':')?.at(LAST_VALUE_INDEX);
+			stakeholder = VIEW_MAPPING[view] || stakeholder;
+		}
+
+		return {
+			...get,
+			...getTimeline,
+			...servicesGet,
+			activeStakeholder: stakeholder,
+			stakeholderConfig,
+		};
+	}, [get, servicesGet, getTimeline, stakeholderConfig, activeStakeholder, authParams]);
 
 	useEffect(() => {
 		router.prefetch(router.asPath);
@@ -166,12 +184,10 @@ function ShipmentDetails() {
 
 					<div className={styles.toggle_chat}>
 
-						{shipment_data?.is_job_closed && (
-							<JobStatus
-								shipment_data={shipment_data}
-								job_open_request={job_open_request}
-							/>
-						)}
+						<JobStatus
+							shipment_data={shipment_data}
+							job_open_request={job_open_request}
+						/>
 
 						{conditionMapping?.scope ? (
 							<ScopeSelect

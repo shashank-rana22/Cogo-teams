@@ -1,4 +1,5 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
@@ -10,6 +11,7 @@ import styled from './styles.module.css';
 
 interface ItemProps {
 	createdDate: Date;
+	updatedDate: Date
 	billDate: Date;
 	dueDate: Date;
 	billCurrency?: string;
@@ -27,11 +29,13 @@ interface Props {
 }
 
 function FormatedDate({ item, field }: Props) {
-	const { createdDate, billDate, dueDate, subTotal, billCurrency, grandTotal } = item || {};
+	const { createdDate, billDate, dueDate, subTotal, billCurrency, grandTotal, updatedDate } = item || {};
 	const getCreatedDate = format(createdDate, 'dd MMM, yyyy', {}, false);
 	const getCreatedDateTime = format(createdDate, 'h:mm:aa', {}, false);
 	const getBillDate = format(billDate, 'dd MMM, yyyy', {}, false);
 	const getDueDate = format(dueDate, 'dd MMM, yyyy', {}, false);
+	const getUpdateDate = format(updatedDate, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'], {}, false);
+	const getUpdatedDateTime = format(updatedDate, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'], {}, false);
 
 	const content = (
 		<>
@@ -88,10 +92,18 @@ function FormatedDate({ item, field }: Props) {
 					</Tooltip>
 				</div>
 			)}
-			{field?.label === 'Last Modified Date' && (
+			{(field?.label === 'Last Modified Date')
+			&& (
 				<div>
 					<text className={styled.sid}>{getCreatedDate}</text>
 					<div className={styled.service_type}>{getCreatedDateTime}</div>
+				</div>
+			)}
+			{(field?.key === 'createdDate' && field?.label !== 'Last Modified Date')
+			&& (
+				<div>
+					<text className={styled.sid}>{getUpdateDate}</text>
+					<div className={styled.service_type}>{getUpdatedDateTime}</div>
 				</div>
 			)}
 		</div>

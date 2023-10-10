@@ -2,12 +2,16 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
-const useGetPlanDetails = ({ featureModal }) => {
+const useGetPlanDetails = () => {
 	const { query } = useRouter();
 	const { plan_id = '' } = query || {};
+
+	const [featureModal, setFeatureModal] = useState({});
+
 	const { apiCall = false } = featureModal;
+
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_saas_plan_details',
@@ -28,12 +32,17 @@ const useGetPlanDetails = ({ featureModal }) => {
 	}, [plan_id, trigger]);
 
 	useEffect(() => {
-		if (apiCall) { refetchPlanDetails(); }
+		if (apiCall) {
+			refetchPlanDetails();
+			setFeatureModal({ apiCall: false });
+		}
 	}, [refetchPlanDetails, apiCall]);
 
 	return {
 		planDetails: data,
 		loading,
+		featureModal,
+		setFeatureModal,
 	};
 };
 

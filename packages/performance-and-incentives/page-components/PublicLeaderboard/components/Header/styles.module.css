@@ -1,0 +1,50 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	height: fit-content;
+	padding: 20px 32px;
+
+	@media (min-width: 2560px) {
+		padding: 64px 100px;
+	}
+}
+
+.heading {
+	@media (min-width: 2560px) {
+		font-size: 60px;
+	}
+}
+
+.sub_container {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+
+.sub_heading {
+	margin: 0;
+	font-size: 18px;
+	color: #4f4f4f;
+
+	@media (min-width: 2560px) {
+		font-size: 56px;
+	}
+}
+
+.actions_container {
+	display: flex;
+}
+
+.view_selector {
+	width: 150px;
+}
+
+.period_selector {
+	width: 220px;
+
+	:global {
+		.ui_select_option_item span {
+			width: 100%;
+		}
+	}
+}

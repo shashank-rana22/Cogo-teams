@@ -2,7 +2,7 @@ import { Popover, Input, Pagination, Button, Toggle } from '@cogoport/components
 import { IcMFilter } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { upperCase } from '@cogoport/utils';
+import { isEmpty, upperCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import FilterContent from './FilterContent';
@@ -13,8 +13,6 @@ import useVendorStats from './hooks/useVendorStats';
 import KycStatusTabs from './KycStatusTabs';
 import styles from './styles.module.css';
 import TabularSection from './TabularSection';
-
-const PAGE_LEN = 10;
 
 function ListVendors() {
 	const router = useRouter();
@@ -150,10 +148,10 @@ function ListVendors() {
 				columns={columns}
 			/>
 
-			{list?.length > PAGE_LEN && (
+			{!isEmpty(list) && (
 				<div className={styles.pagination_container}>
 					<Pagination
-						type="number"
+						type="table"
 						currentPage={params?.page}
 						totalItems={total_count}
 						pageSize={pageLimit}
@@ -164,6 +162,7 @@ function ListVendors() {
 					/>
 				</div>
 			)}
+
 		</>
 	);
 }
