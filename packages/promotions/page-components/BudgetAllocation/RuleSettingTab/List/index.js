@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import useListPromotionRules from '../../../../hooks/useListPromotionRules';
 
 import ListContent from './ListContent';
@@ -10,21 +12,21 @@ function List({
 	setViewAndEditRuleId = () => {},
 	setShowAddRuleForm = () => {},
 }) {
-	const defaultFilters = {
+	const defaultFilters = useMemo(() => ({
 		status          : activeList,
 		primary_service : activeService,
 		categories      : ['business'],
-	};
-	const DEFAULT_PARAMS = {
-		cogo_entity_data_required     : true,
-		slab_configs_data_required    : true,
-		agent_rules_data_required     : true,
-		updated_by_user_data_required : true,
-		discount_config_data_required : true,
-	};
+	}), [activeList, activeService]);
+
 	const { data, loading, filters, setFilters, getListRules } = useListPromotionRules({
 		defaultFilters,
-		defaultParams: DEFAULT_PARAMS,
+		defaultParams: {
+			cogo_entity_data_required     : true,
+			slab_configs_data_required    : true,
+			agent_rules_data_required     : true,
+			updated_by_user_data_required : true,
+			discount_config_data_required : true,
+		},
 	});
 
 	return (

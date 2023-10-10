@@ -1,13 +1,14 @@
 import { TabPanel, Tabs } from '@cogoport/components';
-// import { dynamic } from '@cogoport/next';
+import { dynamic } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import SERVICE_TABS_MAPPING from '../../../configs/SERVICE_TABS_MAPPING.json';
 
-import AddRuleForm from './AddRuleForm';
-import EditRuleForm from './EditRuleForm';
 import List from './List';
 import styles from './styles.module.css';
+
+const AddRuleForm = dynamic(() => import('./AddRuleForm'), { ssr: false });
+const EditRuleForm = dynamic(() => import('./EditRuleForm'), { ssr: false });
 
 function RuleSettingTab() {
 	const [activeService, setActiveService] = useState('fcl_freight');
@@ -58,6 +59,7 @@ function RuleSettingTab() {
 					})}
 				</Tabs>
 			</div>
+
 			<List
 				activeList={activeList}
 				setActiveList={setActiveList}

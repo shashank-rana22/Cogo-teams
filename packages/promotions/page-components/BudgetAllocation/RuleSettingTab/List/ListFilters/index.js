@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 
 import Layout from '../../../../../common/Layout';
 
-import getControls from './controls';
+import controls from './controls';
 import styles from './styles.module.css';
 
 function ListFilters({
@@ -12,16 +12,7 @@ function ListFilters({
 	setFilters = () => {},
 	setShowPopover = () => {},
 }) {
-	const controls = getControls();
-
-	const {
-		control,
-		formState: { errors = {} } = {},
-		handleSubmit,
-		reset,
-	} = useForm({
-		defaultValues: {},
-	});
+	const { control, handleSubmit, reset } = useForm();
 
 	const onClickReset = useCallback(() => {
 		setShowPopover(false);
@@ -36,20 +27,23 @@ function ListFilters({
 
 	const onSave = (values) => {
 		const existingSerialId = filters?.serial_id;
+
 		const filter = Object.fromEntries(
 			Object.entries(values).filter(([, value]) => value),
 		);
+
 		if (existingSerialId) {
 			filter.serial_id = existingSerialId;
 		}
 
 		setFilters({ ...filter });
+
 		setShowPopover(false);
 	};
 
 	return (
 		<div className={styles.container}>
-			<Layout controls={controls} control={control} errors={errors} />
+			<Layout controls={controls} control={control} />
 			<div className={styles.btn_container}>
 				<Button
 					themeType="secondary"

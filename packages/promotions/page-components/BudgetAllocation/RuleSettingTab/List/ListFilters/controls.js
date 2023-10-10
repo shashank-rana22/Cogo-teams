@@ -5,7 +5,7 @@ import RATE_SOURCE_MAPPING from '../../../../../configs/RATE_SOURCE_MAPPING.json
 import RULE_TYPE_MAPPING from '../../../../../configs/RULE_TYPE_MAPPING.json';
 import TRADE_TYPE_MAPPING from '../../../../../configs/TRADE_TYPE_MAPPING.json';
 
-const controls = () => [
+const controls = [
 	{
 		name        : 'cogo_entity_id',
 		label       : 'Cogo Entity',

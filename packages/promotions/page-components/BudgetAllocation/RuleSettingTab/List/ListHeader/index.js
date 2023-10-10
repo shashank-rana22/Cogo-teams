@@ -26,15 +26,18 @@ function ListHeader({
 	setShowAddRuleForm = '',
 }) {
 	const [showPopover, setShowPopover] = useState(false);
+
+	const onTabChange = (val) => {
+		setActiveList(val);
+		setFilters((p) => ({ ...p, page: 1 }));
+	};
 	return (
 		<div className={styles.container}>
 			<div>
 				<Tabs
 					themeType="primary"
 					activeTab={activeList}
-					onChange={(val) => {
-						setActiveList(val);
-					}}
+					onChange={onTabChange}
 				>
 					{OPTIONS.map((item) => {
 						const { label = '', value = '' } = item;
@@ -51,6 +54,7 @@ function ListHeader({
 			<div className={styles.filter_create}>
 				<Input
 					size="sm"
+					type="search"
 					suffix={(
 						<ButtonIcon
 							size="sm"
@@ -63,9 +67,7 @@ function ListHeader({
 				/>
 				<div className={styles.filter}>
 					<Popover
-						theme="light"
-						placement="left"
-						animation="scale"
+						placement="bottom"
 						interactive
 						visible={showPopover}
 						onClickOutside={() => setShowPopover(false)}
@@ -80,7 +82,7 @@ function ListHeader({
 						<div className={styles.btn}>
 							<Button
 								themeType="secondary"
-								size="lg"
+								size="md"
 								onClick={() => setShowPopover(!showPopover)}
 							>
 								{Object.keys(filters).some((key) => key !== 'serial_id') ? (
@@ -92,8 +94,9 @@ function ListHeader({
 						</div>
 					</Popover>
 				</div>
+
 				<Button
-					size="lg"
+					size="md"
 					className={styles.add_btn}
 					onClick={() => setShowAddRuleForm(true)}
 				>

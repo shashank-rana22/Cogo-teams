@@ -2,7 +2,7 @@ import { Button, ButtonIcon } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import Layout from '../../../../common/Layout';
 import UpdateModal from '../../../../common/UpdateModal';
@@ -52,14 +52,13 @@ function GlobalConfig({
 		control, formState: { errors = {} } = {}, handleSubmit, watch, setValue,
 	} = useForm({ defaultValues: DEFAULT_VALUES });
 	const formValues = watch();
-	const { organization_id = '' } = formValues;
+	const { organization_id = '', shipment_price_slab_config = [], scope } = formValues;
 
-	const SHOW_ELEMENTS = {
+	const showElements = useMemo(() => ({
 		organisation_type     : !organization_id,
 		organisation_sub_type : !organization_id,
-	};
+	}), [organization_id]);
 
-	const { shipment_price_slab_config = [] } = formValues;
 	useEffect(() => {
 		shipment_price_slab_config?.forEach((_o, index) => {
 			if (index === ZERO) {
@@ -98,12 +97,12 @@ function GlobalConfig({
 					control={control}
 					errors={errors}
 					formValues={formValues}
-					showElements={SHOW_ELEMENTS}
+					showElements={showElements}
 				/>
 				<div className={styles.head}>
 					<div className={styles.heading}>Global Configuration</div>
 				</div>
-				{formValues?.scope === 'organization' ? (
+				{scope === 'organization' ? (
 					<Layout
 						controls={discountControls}
 						control={control}
@@ -130,6 +129,7 @@ function GlobalConfig({
 					</Button>
 				</div>
 			</div>
+
 			{showActivateModal
 				? (
 					<UpdateModal
