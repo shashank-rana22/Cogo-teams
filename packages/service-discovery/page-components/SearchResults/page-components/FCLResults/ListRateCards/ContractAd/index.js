@@ -14,8 +14,8 @@ function ContractAd({ loading = false, importerExporterId = '', contractDetail =
 	const { count = 0 } = contractDetail || {};
 
 	const redirectToContract = () => {
-		const newHref = `${window.location.origin}/${partner_id}/contract-rates/dashboard/
-		active?importerExporterId=${importerExporterId}`;
+		const newHref = `${window.location.origin}/${partner_id}/contract-rates/dashboard
+    ?activeTab=active&page=1&importerExporterId=${importerExporterId}`;
 		window.location.href = newHref;
 	};
 
