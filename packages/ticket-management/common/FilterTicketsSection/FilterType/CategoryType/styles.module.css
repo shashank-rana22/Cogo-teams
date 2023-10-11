@@ -1,4 +1,19 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	:global {
+		.ui_select_container {
+			min-width: 160px;
+			max-width: 160px;
+			margin-left: 0 !important;
+		}
+	}
+}
+
 .category_container {
+	position: relative;
 	display: flex;
 	justify-content: flex-end;
 	width: 50%;
@@ -29,12 +44,6 @@
 	border-radius: 4px;
 }
 
-.container {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-}
-
 .wrap {
 	margin-bottom: 10px;
 }
@@ -44,8 +53,20 @@
 	font-weight: 500;
 }
 
+.applied_dot {
+	position: absolute;
+	top: 15%;
+	right: 1%;
+	width: 8px;
+	height: 8px;
+	background: #f33;
+	border-radius: 50%;
+}
+
 .footer_section {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	width: 100%;
+	margin-top: 18px;
 }

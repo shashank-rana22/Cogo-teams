@@ -168,5 +168,7 @@
     "updated_at": "อัปเดตเมื่อ",
     "stakeholders": "การจัดส่งน้อย",
     "missing_id": "รหัสที่ขาดหายไป",
-    "dislike_id": "ไม่ชอบ ID"
+    "dislike_id": "ไม่ชอบ ID",
+    "enter_serial_id": "ป้อนรหัสซีเรียล",
+    "apply": "นำมาใช้"
 }

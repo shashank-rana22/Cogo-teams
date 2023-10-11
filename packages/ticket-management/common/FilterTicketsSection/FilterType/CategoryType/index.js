@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function CategoryType(props) {
 	const { searchParams, setSearchParams, isAdmin, idFilters = {}, setIdFilters = () => {} } = props;
-	const { show = false } = idFilters || {};
+	const { show = false, idType = '', serialId = '' } = idFilters || {};
 
 	const { t } = useTranslation(['myTickets']);
 
@@ -58,6 +58,9 @@ function CategoryType(props) {
 					<IcMDoubleFilter width={20} height={20} />
 				</div>
 			</Popover>
+			{idType && serialId && (
+				<div className={styles.applied_dot} />
+			)}
 		</div>
 	);
 }

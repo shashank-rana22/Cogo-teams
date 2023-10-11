@@ -23,10 +23,9 @@ function FilterTicketsSection({
 		sortType  : '',
 	});
 	const [idFilters, setIdFilters] = useState({
-		show      : false,
-		sid       : '',
-		missingId : '',
-		dislikeId : '',
+		show     : false,
+		idType   : '',
+		serialId : '',
 	});
 
 	const isAdmin = type === 'admin';

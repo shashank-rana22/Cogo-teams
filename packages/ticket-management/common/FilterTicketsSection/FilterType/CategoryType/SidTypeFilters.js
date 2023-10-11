@@ -1,82 +1,77 @@
-import { InputNumber, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
+import { useTranslation } from 'next-i18next';
 
-// import useListTickets from '../../../../hooks/useListTickets';
+import { getSidFilterControls } from '../../../../configurations/sid-filters-controls';
+import { getFieldController } from '../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
 function SidTypeFilters(props) {
-	const {
-		// searchParams = {},
-		// setSearchParams = () => {},
-		// isAdmin,
-		idFilters = {}, setIdFilters = () => {},
-		// sortBy = {}, spectatorType = '', date = {},
-		// refreshList = {}, setRefreshList = () => {},
-		// isUpdated = false, setIsUpdated = () => {},
-	} = props;
+	const { setIdFilters = () => {} } = props;
 
-	const {
-		sid = '',
-		missingId = '',
-		dislikeId = '',
-	} = idFilters || {};
+	const { t } = useTranslation(['myTickets']);
 
-	// const { fetchTickets = () => {} } = useListTickets({
-	// 	searchParams,
-	// 	setSearchParams,
-	// 	isAdmin,
-	// 	sortBy,
-	// 	spectatorType,
-	// 	date,
-	// 	refreshList,
-	// 	setRefreshList,
-	// 	isUpdated,
-	// 	setIsUpdated,
-	// 	idFilters,
-	// 	// setIdFilters,
-	// });
+	const { control, handleSubmit, reset, watch, setValue } = useForm();
+	const watchIdType = watch('id_type');
+	const watchSerial = watch('serial_id');
+
+	const controls = getSidFilterControls({ setValue, t });
+
+	const onSubmit = (val) => {
+		const { serial_id, id_type } = val || {};
+		setIdFilters(() => ({
+			serialId : serial_id,
+			idType   : id_type,
+		}));
+	};
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.wrap}>
-				<div className={styles.label}>SID</div>
-				<InputNumber
-					size="sm"
-					arrow={false}
-					step={1}
-					min={0}
-					placeholder="Search serial id"
-					value={sid}
-					onChange={(val) => setIdFilters((prev) => ({ ...prev, sid: val }))}
-				/>
-			</div>
-			<div className={styles.wrap}>
-				<div className={styles.label}>Missing Id</div>
-				<InputNumber
-					size="sm"
-					arrow={false}
-					step={1}
-					min={0}
-					placeholder="Search missing id"
-					value={missingId}
-					onChange={(val) => setIdFilters((prev) => ({ ...prev, missingId: val }))}
-				/>
-			</div>
-			<div className={styles.wrap}>
-				<div className={styles.label}>Dislike Id</div>
-				<InputNumber
-					size="sm"
-					arrow={false}
-					step={1}
-					min={0}
-					placeholder="Search dislike id"
-					value={dislikeId}
-					onChange={(val) => setIdFilters((prev) => ({ ...prev, dislikeId: val }))}
-				/>
-			</div>
+			{(controls || []).map((controlItem) => {
+				const { name, label, controllerType } = controlItem || {};
+				const Element = getFieldController(controllerType);
+
+				if (!Element) {
+					return null;
+				}
+
+				return (
+					<div className={styles.wrap} key={name}>
+						<div className={styles.label}>{label}</div>
+						<Element
+							{...controlItem}
+							key={name}
+							id={name}
+							size="sm"
+							control={control}
+						/>
+					</div>
+				);
+			})}
 			<div className={styles.footer_section}>
-				<Button themeType="secondary" size="sm">Cancel</Button>
-				<Button themeType="accent" size="sm">Apply</Button>
+				<Button
+					themeType="secondary"
+					size="sm"
+					onClick={() => {
+						reset();
+						setIdFilters(() => ({
+							serialId : '',
+							idType   : '',
+							show     : false,
+						}));
+					}}
+				>
+					{t('myTickets:cancel')}
+				</Button>
+				<Button
+					themeType="accent"
+					size="sm"
+					onClick={handleSubmit(onSubmit)}
+					disabled={!watchIdType || !watchSerial}
+				>
+					{t('myTickets:apply')}
+				</Button>
 			</div>
 		</div>
 	);

@@ -168,5 +168,7 @@
     "updated_at": "Diperbarui Pada",
     "stakeholders": "Sedikit pengiriman",
     "missing_id": "ID yang hilang",
-    "dislike_id": "ID tidak suka"
+    "dislike_id": "ID tidak suka",
+    "enter_serial_id": "Masukkan ID serial",
+    "apply": "Menerapkan"
 }

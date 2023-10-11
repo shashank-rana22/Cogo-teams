@@ -168,5 +168,7 @@
     "updated_at": "Updated At",
     "stakeholders": "Shipment POCs",
     "missing_id": "Missing Id",
-    "dislike_id": "Dislike Id"
+    "dislike_id": "Dislike Id",
+    "enter_serial_id": "Enter Serial Id",
+    "apply": "Apply"
 }

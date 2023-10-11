@@ -168,5 +168,7 @@
     "updated_at": "更新于",
     "stakeholders": "发货很少",
     "missing_id": "缺少ID",
-    "dislike_id": "不喜欢ID"
+    "dislike_id": "不喜欢ID",
+    "enter_serial_id": "输入序列ID",
+    "apply": "申请"
 }
