@@ -21,7 +21,7 @@ const getPillData = ({ item = {}, service_type = '' }) => {
 	const commonPackageDetails = [
 		`${packages_count} Pkgs, ${volume} CBM Vol., ${weight} KG WT.`,
 		COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity),
-	];
+	].filter(Boolean);
 
 	const SUBSIDIARY_CONTENT_MAPPING = {
 		fcl_freight       : commonContainerDetails,
@@ -52,10 +52,13 @@ const getPillData = ({ item = {}, service_type = '' }) => {
 		],
 		ftl_freight: [
 			`${trucks_count} truck`,
-			`${truck_type}`,
-			`${commodity || 'General'}`,
-		],
-		ltl_freight : [`${volume} cc`, `${weight} kg`, `${COMMODITY_NAME_MAPPING[commodity]?.name}`],
+			`${startCase(truck_type)}`,
+			commodity && (COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity)),
+		].filter(Boolean),
+		ltl_freight: [
+			`${volume} CBM Vol., ${weight} KG WT.`,
+			commodity && (COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity)),
+		].filter(Boolean),
 		fcl_customs : commonContainerDetails,
 		fcl_cfs     : commonContainerDetails,
 		lcl_customs : [

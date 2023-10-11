@@ -38,7 +38,7 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 		};
 
 		function RenderPill() {
-			const pillData = getPillData({ item: service, service_type: serviceItem.service_type });
+			const pillData = getPillData({ item: service, service_type: service.service_type });
 
 			return (
 				<div className={styles.pills_container}>
