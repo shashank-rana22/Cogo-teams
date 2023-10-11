@@ -15,6 +15,40 @@
 	justify-content: space-between;
 }
 
+.flex {
+	display: flex;
+}
+
+.sub_container_after_click {
+	color: #ed3726;
+	background: #fffaeb;
+}
+
+.sub_container_before_click {
+	background: #fff;
+}
+
+.sub_container {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	justify-content: center;
+	width: 93%;
+	height: 42px;
+	padding: 12px 16px;
+	margin-right: 16px;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+
+	&:hover {
+		box-shadow: 0 0 8px rgb(44 62 80 / 30%);
+		transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
+	}
+}
+
 .empty_container {
 	display: flex;
 	flex-direction: column;

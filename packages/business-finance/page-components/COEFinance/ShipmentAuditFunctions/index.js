@@ -1,5 +1,5 @@
 import {
-	Button, Input, Table, Pagination, Popover, Toggle,
+	Button, Input, Table, Pagination, Popover, Toggle, cl,
 } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -16,8 +16,16 @@ import styles from './styles.module.css';
 
 const DEFAULT_PAGE_LIMIT = 10;
 
+const TABS = [
+	{ key: 'to_be_audited', label: 'To be Audited' },
+	{ key: 'partially_audited', label: 'Partially Audited' },
+	{ key: 'audited', label: 'Audited' },
+];
+
 function ShipmentAuditFunction({ activeTab = '' }) {
 	const { push } = useRouter();
+
+	const [subActiveTab, setSubActiveTab] = useState('to_be_audited');
 	const [tradeTab, setTradeTab] = useState('');
 	const [tax, setTax] = useState('Pre');
 	const [filters, setFilters] = useState({
@@ -40,7 +48,7 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 		data = {},
 		loading = false,
 		refetch = () => {},
-	} =	 useGetJobList({ paginationFilters, search, activeTab });
+	} =	 useGetJobList({ paginationFilters, search, activeTab, subActiveTab });
 	const { list = [] } = data || {};
 
 	const handlePrePostChange = () => {
@@ -55,6 +63,10 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 		push(
 			`/business-finance/coe-finance/${activeTab}/audit?job_id=${jobId}&job_number=${jobNumber}`,
 		);
+	};
+
+	const handleSubTabChange = (tab) => {
+		setSubActiveTab(tab.key);
 	};
 
 	const rest = { onClickOutside: () => setShow(false) };
@@ -77,36 +89,52 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 		<>
 			<main className={styles.main_container}>
 				<div className={styles.container}>
-					<div>
-						<Popover
-							visible={show}
-							placement="bottom"
-							render={(
-								<Content
-									filters={filters}
-									setFilters={setFilters}
-									receivables={receivables}
-									setReceivables={setReceivables}
-									setShow={setShow}
-									refetch={refetch}
-									tradeTab={tradeTab}
-									setTradeTab={setTradeTab}
-								/>
-							)}
-							className={styles.pop_over_style}
-							{...rest}
-						>
-							<Button
-								themeType="primary"
-								size="md"
+					<div className={styles.flex}>
+						{TABS.map((tab) => (
+							<div
+								key={tab.key}
 								onClick={() => {
-									setShow(!show);
+									handleSubTabChange(tab);
 								}}
+								role="presentation"
 							>
-								Filters
-							</Button>
-						</Popover>
+								<div className={cl` ${styles.sub_container} ${tab.key === subActiveTab
+									? styles.sub_container_after_click : styles.sub_container_before_click}`}
+								>
+									{tab.label}
+								</div>
+
+							</div>
+						))}
 					</div>
+					<Popover
+						visible={show}
+						placement="bottom"
+						render={(
+							<Content
+								filters={filters}
+								setFilters={setFilters}
+								receivables={receivables}
+								setReceivables={setReceivables}
+								setShow={setShow}
+								refetch={refetch}
+								tradeTab={tradeTab}
+								setTradeTab={setTradeTab}
+							/>
+						)}
+						className={styles.pop_over_style}
+						{...rest}
+					>
+						<Button
+							themeType="primary"
+							size="md"
+							onClick={() => {
+								setShow(!show);
+							}}
+						>
+							Filters
+						</Button>
+					</Popover>
 				</div>
 
 				<div className={styles.search}>

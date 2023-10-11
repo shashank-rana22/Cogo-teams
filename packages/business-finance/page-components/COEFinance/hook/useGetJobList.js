@@ -11,10 +11,18 @@ const getFormatDate = (date = '') => formatDate({
 	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 	formatType : 'date',
 });
+
+const SUB_ACTIVE_TAB_STATUS_MAPPING = {
+	to_be_audited     : 'INIT',
+	partially_audited : 'INIT',
+	audited           : 'INIT',
+};
+
 const useGetJobList = ({
 	paginationFilters = {},
 	search = '',
 	activeTab = '',
+	subActiveTab = '',
 }) => {
 	const CLOSING_STATUS = activeTab === 'operational_close' ? 'OPR_CLOSED' : 'CLOSED';
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -46,7 +54,7 @@ const useGetJobList = ({
 				await trigger({
 					params: {
 						currentState      : CLOSING_STATUS,
-						status            : 'INIT',
+						status            : SUB_ACTIVE_TAB_STATUS_MAPPING[subActiveTab],
 						pageIndex         : page,
 						pageSize          : pageLimit,
 						serviceType       : Service || undefined,
@@ -70,7 +78,7 @@ const useGetJobList = ({
 			}
 		};
 		func();
-	}, [CLOSING_STATUS, page, pageLimit, query, trigger]);
+	}, [CLOSING_STATUS, page, pageLimit, query, trigger, subActiveTab]);
 
 	useEffect(() => {
 		debounceQuery(search);
