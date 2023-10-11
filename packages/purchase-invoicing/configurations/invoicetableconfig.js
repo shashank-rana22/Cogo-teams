@@ -134,9 +134,7 @@ export const invoiceconfig = ({ utrData = [], utrLoading = false }) => [
 											? formatDate({
 												date       : createdAt,
 												dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-												timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-												formatType : 'dateTime',
-												separator  : '-',
+												formatType : 'date',
 											}) : '-'}
 									</div>
 
@@ -160,9 +158,7 @@ export const invoiceconfig = ({ utrData = [], utrLoading = false }) => [
 								? formatDate({
 									date       : utrDetailsBills?.[GLOBAL_CONSTANTS.zeroth_index]?.createdAt,
 									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-									timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-									formatType : 'dateTime',
-									separator  : '-',
+									formatType : 'date',
 								}) : '-'}
 						</div>
 					</Tooltip>

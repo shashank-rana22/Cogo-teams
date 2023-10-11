@@ -50,7 +50,7 @@ function Map({
 	const maxCount = Math.max(...Object.values(accuracyMapping));
 	const range = (minCount === maxCount && !!maxCount)
 		? maxCount / COLORS.length
-		: K + (maxCount - minCount) / COLORS.length;
+		: K + (maxCount - minCount) / (COLORS.length - 1);
 	const originId = locationFilters.origin?.id;
 	const showLoading = loading || accuracyLoading;
 	const originPosition = locationFilters?.origin?.latitude
@@ -208,7 +208,7 @@ function Map({
 						<div className={styles.count_legend}>
 							{(!!maxCount && Math.abs(maxCount) !== Infinity) && COLORS.map((color, idx) => (
 								<p key={color}>
-									{formatBigNumbers(range * (idx + (INITIAL_ZOOM / INITIAL_ZOOM)))}
+									{formatBigNumbers(minCount + (range * idx))}
 								</p>
 							))}
 						</div>

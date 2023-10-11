@@ -13924,6 +13924,66 @@ const partner = {
 			service_name : 'fcl_customs_rate',
 			feature      : 'rate_requests',
 		},
+		{
+			api          : 'list_fcl_freight_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'rate_feedbacks',
+		},
+		{
+			api          : 'list_lcl_freight_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'lcl_freight_rate',
+			feature      : 'rate_feedbacks',
+		},
+		{
+			api          : 'list_air_freight_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+			feature      : 'rate_feedbacks',
+		},
+		{
+			api          : 'list_ftl_freight_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
+			feature      : 'rate_feedbacks',
+		},
+		{
+			api          : 'list_ltl_freight_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'ltl_freight_rate',
+			feature      : 'rate_feedbacks',
+		},
+		{
+			api          : 'list_fcl_customs_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'fcl_customs_rate',
+			feature      : 'rate_feedbacks',
+		},
+		{
+			api          : 'list_lcl_customs_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'lcl_customs_rate',
+			feature      : 'rate_feedbacks',
+		},
+		{
+			api          : 'list_trailer_freight_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+			feature      : 'rate_feedbacks',
+		},
+		{
+			api          : 'list_haulage_freight_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+			feature      : 'rate_feedbacks',
+		},
+		{
+			api          : 'list_air_customs_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'air_customs_rate',
+			feature      : 'rate_feedbacks',
+		},
 	],
 	cogo_one_dashboard: [
 		{

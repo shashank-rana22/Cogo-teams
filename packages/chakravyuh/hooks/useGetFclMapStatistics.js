@@ -12,7 +12,7 @@ const EXCLUDE_KEYS = LOCATION_KEYS.map((key) => [key,
 	...HIERARCHY_KEYS.map((sub_key) => `${key}_${sub_key}_id`)]).flat();
 
 const useGetFclMapStatistics = ({ locationFilters, globalFilters }) => {
-	const [filterBy, setFilterBy] = useState('bas_standard_price_accuracy');
+	const [filterBy, setFilterBy] = useState('spot_search');
 	const [page, setPage] = useState(START_PAGE);
 	const [activeList, setActiveList] = useState([]);
 
