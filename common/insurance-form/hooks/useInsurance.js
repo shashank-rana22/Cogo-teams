@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useEffect, useRef } from 'react';
 
 const getPayload = ({ data = {}, organization, formValueRef, activeTab }) => {
@@ -32,7 +33,7 @@ const getPayload = ({ data = {}, organization, formValueRef, activeTab }) => {
 const useInsurance = ({ activeTab, organization = {}, formValues = {}, setActiveTab }) => {
 	const { push, query } = useRouter();
 
-	const { t } = useRouter(['cargoInsurance']);
+	const { t } = useTranslation(['cargoInsurance']);
 
 	const formValueRef = useRef({});
 
