@@ -38,7 +38,7 @@ const useGetInvoiceSelection = ({ sort = {} }) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const [globalFilters, setGlobalFilters] = useState({
 		pageIndex   : 1,
-		pageSize    : 10,
+		pageSize    : 20,
 		entity,
 		currency    : queryCurr,
 		invoiceView : 'coe_accepted',
