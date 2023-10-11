@@ -46,6 +46,7 @@ const useGetJobList = ({
 				await trigger({
 					params: {
 						currentState      : CLOSING_STATUS,
+						status            : 'INIT',
 						pageIndex         : page,
 						pageSize          : pageLimit,
 						serviceType       : Service || undefined,
