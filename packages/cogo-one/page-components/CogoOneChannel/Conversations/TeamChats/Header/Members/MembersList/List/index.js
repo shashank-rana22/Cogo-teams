@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 function EachMember({
 	eachPerson = {},
 	isDraft = false,
-	hasPermissionToEdit = false,
 	loading = false,
 	updateGroup = () => {},
 	loggedInAgentId = '',
@@ -60,7 +59,7 @@ function EachMember({
 					/>
 				) : null}
 			</div>
-			{(hasPermissionToEdit && loggedInAgentId !== modifiedUserId) ? (
+			{(isAgentAdmin && loggedInAgentId !== modifiedUserId) ? (
 				<IcMCross
 					className={styles.cross_styles}
 					style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
@@ -80,7 +79,6 @@ function EachMember({
 function List({
 	membersList = [],
 	isDraft = false,
-	hasPermissionToEdit = false,
 	loading = false,
 	updateGroup = () => {},
 	loggedInAgentId = '',
@@ -93,7 +91,6 @@ function List({
 					key={eachPerson?.user_id}
 					eachPerson={eachPerson}
 					isDraft={isDraft}
-					hasPermissionToEdit={hasPermissionToEdit}
 					loading={loading}
 					updateGroup={updateGroup}
 					loggedInAgentId={loggedInAgentId}
