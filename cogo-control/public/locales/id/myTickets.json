@@ -170,5 +170,7 @@
     "missing_id": "ID yang hilang",
     "dislike_id": "ID tidak suka",
     "enter_serial_id": "Masukkan ID serial",
-    "apply": "Menerapkan"
+    "apply": "Menerapkan",
+    "reset": "Mengatur ulang",
+    "serial_id": "ID Serial"
 }

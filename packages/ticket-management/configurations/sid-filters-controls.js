@@ -12,10 +12,10 @@ export const getSidFilterControls = ({ setValue = () => {}, t = () => {} }) => [
 		onChange       : () => { setValue('serial_id', ''); },
 	},
 	{
-		label          : t('myTickets:enter_serial_id'),
+		label          : t('myTickets:serial_id'),
 		name           : 'serial_id',
 		controllerType : 'number',
-		placeholder    : 'Enter',
+		placeholder    : t('myTickets:enter_serial_id'),
 		arrow          : false,
 		step           : 1,
 		min            : 0,

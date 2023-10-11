@@ -170,5 +170,7 @@
     "missing_id": "รหัสที่ขาดหายไป",
     "dislike_id": "ไม่ชอบ ID",
     "enter_serial_id": "ป้อนรหัสซีเรียล",
-    "apply": "นำมาใช้"
+    "apply": "นำมาใช้",
+    "reset": "รีเซ็ต",
+    "serial_id": "ID อนุกรม"
 }

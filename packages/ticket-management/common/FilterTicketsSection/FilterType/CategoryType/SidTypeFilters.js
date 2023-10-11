@@ -62,7 +62,7 @@ function SidTypeFilters(props) {
 						}));
 					}}
 				>
-					{t('myTickets:cancel')}
+					{t('myTickets:reset')}
 				</Button>
 				<Button
 					themeType="accent"

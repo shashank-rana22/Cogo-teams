@@ -145,7 +145,7 @@
     "sub_category": "Sub Category",
     "missing": "Missing ID",
     "dislike": "Dislike ID",
-    "id_type": "ID Type",
+    "id_type": "ID type",
     "service_type": "Service Type",
     "pol": "POL",
     "pod": "POD",
@@ -167,8 +167,10 @@
     "created_at": "Created At",
     "updated_at": "Updated At",
     "stakeholders": "Shipment POCs",
-    "missing_id": "Missing Id",
-    "dislike_id": "Dislike Id",
-    "enter_serial_id": "Enter Serial Id",
-    "apply": "Apply"
+    "missing_id": "Missing ID",
+    "dislike_id": "Dislike ID",
+    "enter_serial_id": "Enter Serial ID",
+    "apply": "Apply",
+    "reset": "Reset",
+    "serial_id": "Serial ID"
 }
