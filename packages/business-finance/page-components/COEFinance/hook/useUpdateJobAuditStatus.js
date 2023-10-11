@@ -17,7 +17,7 @@ const useUpdateJobAuditStatus = ({ getPrePostShipmentQuotes = () => {} }) => {
 		authKey : 'post_common_job_profitability_audit_job_profitability',
 	}, { manual: true });
 
-	const apiTrigger = async (params) => {
+	const updateJobAuditStatus = async (params) => {
 		try {
 			await trigger({
 				data: { ...params },
@@ -30,7 +30,7 @@ const useUpdateJobAuditStatus = ({ getPrePostShipmentQuotes = () => {} }) => {
 	};
 
 	return {
-		apiTrigger,
+		updateJobAuditStatus,
 		loading,
 	};
 };

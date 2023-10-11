@@ -8,8 +8,9 @@ import QuotationCards from '../QuotationCards';
 
 import styles from './styles.module.css';
 
-function Header({ jobId = '' }) {
-	const { query: { active_tab = '' }, push = () => {} } = useRouter();
+function Header() {
+	const { query: { active_tab = '', job_id = '' }, push = () => {} } = useRouter();
+
 	const [quotationsData, setQuotationsData] = useState({
 		prePostCheckoutData : {},
 		oprClosedData       : {},
@@ -19,7 +20,7 @@ function Header({ jobId = '' }) {
 	const getPrePostShipmentQuoteRef = useRef(null);
 
 	const {
-		apiTrigger,
+		updateJobAuditStatus,
 		loading,
 	} = useUpdateJobAuditStatus({ getPrePostShipmentQuote: getPrePostShipmentQuoteRef.current });
 
@@ -48,7 +49,7 @@ function Header({ jobId = '' }) {
 							size="md"
 							themeType="secondary"
 							disabled={loading}
-							onClick={() => apiTrigger({ jobId, status: 'PARTIALLY_AUDITED' })}
+							onClick={() => updateJobAuditStatus({ jobId: job_id, status: 'PARTIALLY_AUDITED' })}
 						>
 							Save Changes
 
@@ -59,7 +60,7 @@ function Header({ jobId = '' }) {
 							size="md"
 							themeType="primary"
 							disabled={!bttnDisableCondition || loading}
-							onClick={() => apiTrigger({ jobId, status: 'AUDITED' })}
+							onClick={() => updateJobAuditStatus({ jobId: job_id, status: 'AUDITED' })}
 						>
 							Approve
 						</Button>
