@@ -172,7 +172,7 @@ function AddRateModal({
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
 			<Modal.Header title={(
 				<div>
-					{['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
+					{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
 			&& (
 				<div className={styles.service_content}>
 					<ServiceDetailsContent
