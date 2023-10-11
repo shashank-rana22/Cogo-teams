@@ -75,16 +75,14 @@ function Content({
 					Raise Ticket
 				</Button>
 
-				{
-						showTicketModal ? (
-							<RaiseTicketModal
-								setShowTicketModal={setShowTicketModal}
-								showTicketModal={showTicketModal}
-								itemData={data}
-								id={job_number}
-							/>
-						) : null
-					}
+				{ showTicketModal ? (
+					<RaiseTicketModal
+						setShowTicketModal={setShowTicketModal}
+						showTicketModal={showTicketModal}
+						itemData={data}
+						id={job_number}
+					/>
+				) : null}
 
 				<Button
 					size="md"

@@ -1,11 +1,12 @@
 import { Table, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
+import RaiseTicketModal from '../../../../../../../commons/RaiseTicketModal';
 import getServiceColumns from '../../../../../../../configurations/getServiceColumns';
 
-import RemarkModal from './RemarkModal';
 import Services from './Services';
 import styles from './styles.module.css';
 
@@ -23,10 +24,10 @@ export default function Content({
 	const nextItem = (nextIndex < (keys.length - NEXT)) ? keys[nextIndex] : '';
 	const defaultSelectedService = Object.keys(services)?.[GLOBAL_CONSTANTS.zeroth_index] || '';
 
-	const [queryModalShow, setQueryModalShow] = useState(false);
-	const [remarkValue, setRemarkValue] = useState('');
+	const { query: { job_number = '' } } = useRouter();
+
+	const [showTicketModal, setShowTicketModal] = useState(false);
 	const [activeService, setActiveService] = useState(defaultSelectedService);
-	const [buttonClicked, setButtonClicked] = useState('');
 	const handleServiceClick = (service) => {
 		setActiveService(service);
 	};
@@ -94,45 +95,27 @@ export default function Content({
 										size="md"
 										themeType="secondary"
 										style={{ marginRight: '10px' }}
-										onClick={() => { setQueryModalShow(true); setButtonClicked('Query'); }}
+										onClick={setShowTicketModal}
 									>
-										Raise Query
+										Raise Ticket
 									</Button>
 
-									<RemarkModal
-										remarkValue={remarkValue}
-										setRemarkValue={setRemarkValue}
-										queryModalShow={queryModalShow}
-										setQueryModalShow={setQueryModalShow}
-										buttonClicked={buttonClicked}
-										setButtonClicked={setButtonClicked}
-										toggleAccordion={toggleAccordion}
-										currentKey={currentKey}
-										nextKey={nextItem}
-										item={item}
-										getPrePostShipmentQuotes={getPrePostShipmentQuotes}
-									/>
+									{ showTicketModal ? (
+										<RaiseTicketModal
+											setShowTicketModal={setShowTicketModal}
+											showTicketModal={showTicketModal}
+											// itemData={data}
+											id={job_number}
+										/>
+									) : null}
 									<Button
 										size="md"
 										themeType="primary"
-										onClick={() => { setQueryModalShow(true); setButtonClicked('Accept'); }}
+										// onClick={() => { setQueryModalShow(true); setButtonClicked('Accept'); }}
 									>
 										Accept
 									</Button>
 
-									<RemarkModal
-										remarkValue={remarkValue}
-										setRemarkValue={setRemarkValue}
-										queryModalShow={queryModalShow}
-										setQueryModalShow={setQueryModalShow}
-										buttonClicked={buttonClicked}
-										setButtonClicked={setButtonClicked}
-										toggleAccordion={toggleAccordion}
-										currentKey={currentKey}
-										nextKey={nextItem}
-										item={item}
-										getPrePostShipmentQuotes={getPrePostShipmentQuotes}
-									/>
 								</div>
 							</div>
 						) : null}
