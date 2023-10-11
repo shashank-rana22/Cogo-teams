@@ -58,9 +58,9 @@ function CategoryType(props) {
 					<IcMDoubleFilter width={20} height={20} />
 				</div>
 			</Popover>
-			{idType && serialId && (
+			{idType && serialId ? (
 				<div className={styles.applied_dot} />
-			)}
+			) : null}
 		</div>
 	);
 }

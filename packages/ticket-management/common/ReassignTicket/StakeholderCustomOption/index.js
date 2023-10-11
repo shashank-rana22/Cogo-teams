@@ -11,9 +11,7 @@ function StakeholderCustomOption({ optionsLabel = {} }) {
 		<div>
 			<div>{startCase(name)}</div>
 			<div className={styles.container}>
-				<div className={styles.service}>
-					{startCase(stakeholder_type)}
-				</div>
+				{startCase(stakeholder_type)}
 			</div>
 		</div>
 	);
