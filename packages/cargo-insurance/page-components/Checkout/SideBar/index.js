@@ -3,22 +3,16 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import INSURANCE_PROVIDER from '../../../constant/insuranceProvider';
+import getPocMapping from '../../../constant/pocMapping';
 
 import PersonalDetailsModal from './PersonalDetailsModal';
 import styles from './styles.module.css';
 
-const MAPPING = {
-	insuredFirstName : 'First Name',
-	insuredLastName  : 'Last Name',
-	edit             : 'edit',
-	phoneNo          : 'Contact No',
-	email            : 'Email ID',
-};
-
-const getFormatedAmount = ({ currency = 'INR', value }) => formatAmount({
+const getFormatedAmount = ({ currency = '', value }) => formatAmount({
 	amount  : value,
 	currency,
 	options : {
@@ -28,24 +22,28 @@ const getFormatedAmount = ({ currency = 'INR', value }) => formatAmount({
 });
 
 function SideBar({ pocDetails = {}, rateResponse = [] }) {
+	const { t } = useTranslation(['cargoInsurance']);
+
 	const [detailModal, setDetailModal] = useState({
 		openModal : false,
-		info      : pocDetails,
+		info      : pocDetails || {},
 	});
+	const POC_MAPPING = getPocMapping({ t });
 
 	const {
-		serviceChargeList = [], serviceProvider, netCharges,
-		chargeCurrency,
+		serviceChargeList = [], serviceProvider = '', netCharges = '',
+		chargeCurrency = '',
 	} = rateResponse?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	return (
 		<div style={{ width: '30%' }}>
 
 			<div className={cl`${styles.section} ${styles.personal_detail}`}>
-				<h3>Personal Details</h3>
+				<h3>{t('cargoInsurance:personal_details_title')}</h3>
 
 				<div className={cl`${styles.container} ${styles.flex_box}`}>
-					{Object.keys(MAPPING).map((detail) => {
+
+					{Object.keys(POC_MAPPING).map((detail) => {
 						if (detail === 'edit') {
 							return (
 								<Button
@@ -58,14 +56,14 @@ function SideBar({ pocDetails = {}, rateResponse = [] }) {
 										info      : pocDetails,
 									})}
 								>
-									Edit
+									{t('cargoInsurance:edit')}
 								</Button>
 							);
 						}
 
 						return (
 							<div key={detail} className={styles.col}>
-								<p className={styles.label}>{MAPPING[detail]}</p>
+								<p className={styles.label}>{POC_MAPPING[detail]}</p>
 								<p className={styles.value}>{pocDetails[detail]}</p>
 							</div>
 						);
@@ -75,7 +73,8 @@ function SideBar({ pocDetails = {}, rateResponse = [] }) {
 			</div>
 
 			<div className={styles.section}>
-				<h3>Rate Card</h3>
+				<h3>{t('cargoInsurance:rate_card')}</h3>
+
 				<div className={styles.container}>
 					<div className={cl`${styles.header} ${styles.flex_box}`}>
 						<Image
@@ -83,7 +82,7 @@ function SideBar({ pocDetails = {}, rateResponse = [] }) {
 							className={styles.pkg_img}
 							width={60}
 							height={60}
-							alt="package"
+							alt={t('cargoInsurance:pkg')}
 						/>
 						<div className={styles.title_container}>
 							<Image
@@ -106,6 +105,7 @@ function SideBar({ pocDetails = {}, rateResponse = [] }) {
 					))}
 				</div>
 			</div>
+
 			<PersonalDetailsModal detailModal={detailModal} setDetailModal={setDetailModal} />
 		</div>
 	);

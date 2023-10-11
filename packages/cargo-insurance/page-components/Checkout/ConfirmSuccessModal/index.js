@@ -1,11 +1,16 @@
 import { Modal, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
+import { Image, useRouter } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
-function ConfirmSuccessModal({ confirmSuccess = {}, setConfirmSuccess, handleSubmit, loading, submitHandler }) {
-	const { isOpen = false, isConfirm = false, isSuccess = false } = confirmSuccess;
+function ConfirmSuccessModal({ confirmSuccess = {}, setConfirmSuccess, handleSubmit, loading = false, submitHandler }) {
+	const { isOpen = false, isConfirm = false, isSuccess = false } = confirmSuccess || {};
+
+	const { push } = useRouter();
+
+	const { t } = useTranslation(['cargoInsurance']);
 
 	return (
 		<Modal show={isOpen} closeOnOuterClick={isConfirm}>
@@ -13,7 +18,7 @@ function ConfirmSuccessModal({ confirmSuccess = {}, setConfirmSuccess, handleSub
 				{isConfirm ? (
 					<>
 						{' '}
-						<h3 className={styles.title}>Are you sure you want to Purchase Insurance?</h3>
+						<h3 className={styles.title}>{t('cargoInsurance:confirm_title')}</h3>
 
 						<div className={styles.footer}>
 							<Button
@@ -23,7 +28,7 @@ function ConfirmSuccessModal({ confirmSuccess = {}, setConfirmSuccess, handleSub
 								className={styles.cancel_btn}
 								onClick={() => setConfirmSuccess({ isOpen: false })}
 							>
-								Cancel
+								{t('cargoInsurance:cancel')}
 							</Button>
 
 							<Button
@@ -32,7 +37,7 @@ function ConfirmSuccessModal({ confirmSuccess = {}, setConfirmSuccess, handleSub
 								themeType="accent"
 								onClick={handleSubmit(submitHandler)}
 							>
-								Confirm
+								{t('cargoInsurance:confirm')}
 							</Button>
 						</div>
 					</>
@@ -42,11 +47,11 @@ function ConfirmSuccessModal({ confirmSuccess = {}, setConfirmSuccess, handleSub
 					<>
 						<Image src={GLOBAL_CONSTANTS.image_url.mail_sent} width={140} height={140} />
 
-						<h1 className={styles.header}>
-							Mail sent successfully
-						</h1>
-						<Button size="sm" themeType="linkUi">Go To Service Discovery</Button>
+						<h1 className={styles.header}>{t('cargoInsurance:success_mail')}</h1>
 
+						<Button size="sm" themeType="linkUi" onClick={() => push('/service-discovery')}>
+							{t('cargoInsurance:service_discovery_cta')}
+						</Button>
 					</>
 				) : null}
 			</div>

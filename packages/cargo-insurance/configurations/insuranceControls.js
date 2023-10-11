@@ -4,25 +4,25 @@ import { addDays } from '@cogoport/utils';
 
 const ONE_DAY = 1;
 
-const getRegistrationControls = ({ billingType }) => ([
+const getRegistrationControls = ({ billingType = '', t }) => ([
 	{
 		name        : 'pan_number',
-		label       : 'Pan Number',
-		placeholder : 'Enter Pan Number',
+		label       : t('cargoInsurance:insurance_control_pan_no'),
+		placeholder : t('cargoInsurance:insurance_control_pan_no_placeholder'),
 		size        : 'sm',
 		type        : 'text',
 		rules       : {
 			required : true,
 			pattern  : {
 				value   : GLOBAL_CONSTANTS.regex_patterns.pan_number,
-				message : 'PAN/Registration Number is invalid',
+				message : t('cargoInsurance:insurance_control_pan_no_err'),
 			},
 		},
 	},
 	{
 		name        : 'aadharNumber',
-		label       : 'Aadhar Number',
-		placeholder : 'Aadhar Card Number',
+		label       : t('cargoInsurance:insurance_control_aadhar'),
+		placeholder : t('cargoInsurance:insurance_control_aadhar_placeholder'),
 		size        : 'sm',
 		type        : 'number',
 		showEle     : billingType === 'Individual',
@@ -30,19 +30,19 @@ const getRegistrationControls = ({ billingType }) => ([
 			required : true,
 			pattern  : {
 				value   : GLOBAL_CONSTANTS.regex_patterns.aadhar_number,
-				message : 'Aadhar Card Number is invalid',
+				message : t('cargoInsurance:insurance_control_aadhar_err'),
 			},
 		},
 	},
 ]);
 
-const getInsuranceControls = ({ incoterm = {} }) => {
+const getInsuranceControls = ({ incoterm = {}, t }) => {
 	const { list = [], display = false } = incoterm || {};
 	return ([
 		{
 			name        : 'cargoDescription',
-			label       : 'Cargo Description',
-			placeholder : 'Enter Cargo Description',
+			label       : t('cargoInsurance:insurance_control_cargo_desc'),
+			placeholder : t('cargoInsurance:insurance_control_cargo_desc_placeholder'),
 			size        : 'sm',
 			type        : 'text',
 			rules       : {
@@ -51,8 +51,8 @@ const getInsuranceControls = ({ incoterm = {} }) => {
 		},
 		{
 			name        : 'packageDescription',
-			label       : 'Package Description',
-			placeholder : 'Enter Package Description',
+			label       : t('cargoInsurance:insurance_control_pkg_dsc'),
+			placeholder : t('cargoInsurance:insurance_control_pkg_dsc_placeholder'),
 			size        : 'sm',
 			type        : 'text',
 			rules       : {
@@ -62,8 +62,8 @@ const getInsuranceControls = ({ incoterm = {} }) => {
 		},
 		{
 			name                  : 'transitDate',
-			label                 : 'Sailing Date',
-			placeholder           : 'Select Sailing Date',
+			label                 : t('cargoInsurance:insurance_control_sail_date'),
+			placeholder           : t('cargoInsurance:insurance_control_sail_date_placeholder'),
 			size                  : 'sm',
 			type                  : 'datepicker',
 			minDate               : addDays(new Date(), ONE_DAY),
@@ -74,8 +74,8 @@ const getInsuranceControls = ({ incoterm = {} }) => {
 		},
 		{
 			name        : 'coverageFrom',
-			label       : 'Coverage From',
-			placeholder : 'Enter Coverage From',
+			label       : t('cargoInsurance:insruance_control_coverage_frm'),
+			placeholder : t('cargoInsurance:insruance_control_coverage_frm_placeholder'),
 			size        : 'sm',
 			type        : 'text',
 			rules       : {
@@ -85,8 +85,8 @@ const getInsuranceControls = ({ incoterm = {} }) => {
 		},
 		{
 			name        : 'coverageTo',
-			label       : 'Coverage To',
-			placeholder : 'Enter Coverage To',
+			label       : t('cargoInsurance:insurance_control_coverage_to'),
+			placeholder : t('cargoInsurance:insurance_control_coverage_to_placeholder'),
 			size        : 'sm',
 			type        : 'text',
 			rules       : {
@@ -96,13 +96,13 @@ const getInsuranceControls = ({ incoterm = {} }) => {
 		},
 		{
 			name        : 'riskCoverage',
-			label       : 'Coverage',
-			placeholder : 'Enter Coverage',
+			label       : t('cargoInsurance:insurance_control_risk'),
+			placeholder : t('cargoInsurance:insurance_control_risk_placeholder'),
 			size        : 'sm',
 			type        : 'select',
 			options     : [
-				{ label: 'All Risk', value: 'ALL_RISK' },
-				{ label: 'Basic Risk', value: 'BASIC_RISK' },
+				{ label: t('cargoInsurance:insurance_control_risk_opt1'), value: 'ALL_RISK' },
+				{ label: t('cargoInsurance:insurance_control_risk_opt2'), value: 'BASIC_RISK' },
 			],
 			rules: {
 				required: true,
@@ -112,8 +112,8 @@ const getInsuranceControls = ({ incoterm = {} }) => {
 		},
 		{
 			name        : 'invoiceNo',
-			label       : 'Invoice No',
-			placeholder : 'Enter Invoice No',
+			label       : t('cargoInsurance:insurance_control_invoice_no'),
+			placeholder : t('cargoInsurance:insurance_control_invoice_no_placeholder'),
 			size        : 'sm',
 			type        : 'text',
 			rules       : {
@@ -123,8 +123,8 @@ const getInsuranceControls = ({ incoterm = {} }) => {
 		},
 		{
 			name                  : 'invoiceDate',
-			label                 : 'Invoice Date',
-			placeholder           : 'Select Invoice Date',
+			label                 : t('cargoInsurance:insurance_control_invoice_date'),
+			placeholder           : t('cargoInsurance:insurance_control_invoice_date_placeholder'),
 			size                  : 'sm',
 			type                  : 'datepicker',
 			maxDate               : new Date(),
@@ -136,8 +136,8 @@ const getInsuranceControls = ({ incoterm = {} }) => {
 		},
 		{
 			name        : 'incoterm',
-			label       : 'Incoterm',
-			placeholder : 'Select Incoterm',
+			label       : t('cargoInsurance:insurance_control_incoterm'),
+			placeholder : t('cargoInsurance:insurance_control_incoterm_placeholder'),
 			size        : 'sm',
 			type        : 'select',
 			options     : (list || []).map((ele) => ({ label: ele, value: ele })),
@@ -149,19 +149,19 @@ const getInsuranceControls = ({ incoterm = {} }) => {
 	]);
 };
 
-const getFileControls = ({ billingType }) => ([
+const getFileControls = ({ billingType = '', t }) => ([
 	{
 		name       : 'invoiceDoc',
-		label      : 'Invoice Doc',
+		label      : t('cargoInsurance:insurance_control_invoice_doc'),
 		type       : 'fileUpload',
 		size       : 'sm',
-		uploadDesc : 'Upload Invoice Doc',
+		uploadDesc : t('cargoInsurance:insurance_control_invoice_doc_desc'),
 		uploadIcon : (
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.upload_icon}
 				width={40}
 				height={40}
-				alt="upload"
+				alt={t('cargoInsurance:upload')}
 			/>
 		),
 		rules: {
@@ -170,16 +170,16 @@ const getFileControls = ({ billingType }) => ([
 	},
 	{
 		name       : 'panDoc',
-		label      : 'Pan Doc',
+		label      : t('cargoInsurance:insurance_control_pan_doc'),
 		type       : 'fileUpload',
 		size       : 'sm',
-		uploadDesc : 'Upload PAN Doc',
+		uploadDesc : t('cargoInsurance:insurance_control_pan_doc_desc'),
 		uploadIcon : (
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.upload_icon}
 				width={40}
 				height={40}
-				alt="upload"
+				alt={t('cargoInsurance:upload')}
 			/>
 		),
 		rules: {
@@ -189,16 +189,16 @@ const getFileControls = ({ billingType }) => ([
 	},
 	{
 		name       : 'aadharDoc',
-		label      : 'Aadhar Doc',
+		label      : t('cargoInsurance:insurance_control_aadhar_doc'),
 		type       : 'fileUpload',
 		size       : 'sm',
-		uploadDesc : 'Upload Aadhar Doc',
+		uploadDesc : t('cargoInsurance:insurance_control_aadhar_doc_desc'),
 		uploadIcon : (
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.upload_icon}
 				width={40}
 				height={40}
-				alt="upload"
+				alt={t('cargoInsurance:upload')}
 			/>
 		),
 		rules: {
@@ -209,16 +209,16 @@ const getFileControls = ({ billingType }) => ([
 	},
 	{
 		name       : 'gstDoc',
-		label      : 'GST Doc',
+		label      : t('cargoInsurance:insurance_control_gst_doc'),
 		type       : 'fileUpload',
 		size       : 'sm',
-		uploadDesc : 'Upload GST Doc',
+		uploadDesc : t('cargoInsurance:insurance_control_gst_doc_desc'),
 		uploadIcon : (
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.upload_icon}
 				width={40}
 				height={40}
-				alt="upload"
+				alt={t('cargoInsurance:upload')}
 			/>
 		),
 		rules: {

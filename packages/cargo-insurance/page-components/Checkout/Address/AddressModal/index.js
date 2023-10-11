@@ -1,15 +1,18 @@
 import { Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useTranslation } from 'next-i18next';
 
 import AddressCard from '../AddressCard';
 
 import styles from './styles.module.css';
 
 function AddressModal({
-	addressModal, setAddressModal, data = [], selectedAddress,
+	data = [], addressModal, setAddressModal, selectedAddress,
 	setSelectedAddress, setAddressData,
 }) {
 	const { openModal, isCreate, isView } = addressModal || {};
+
+	const { t } = useTranslation(['cargoInsurance']);
 
 	const closeModalHandler = () => {
 		setAddressModal({
@@ -35,10 +38,13 @@ function AddressModal({
 			placement={isCreate ? 'center' : 'right'}
 			closeOnOuterClick
 		>
-			<Modal.Header title="Select Address" />
+			<Modal.Header title={t('cargoInsurance:select_address')} />
+
 			<div className={styles.modal_body}>
+
 				{isView ? (
 					<div className={styles.view_container}>
+
 						{data.map((ele) => (
 							<div key={ele?.id} className={styles.card_container}>
 								<AddressCard
@@ -49,14 +55,11 @@ function AddressModal({
 								/>
 							</div>
 						))}
+
 					</div>
 				) : null}
-			</div>
-			{/* <Modal.Footer>
-				<Button>Cancel</Button>
-				<Button />
-			</Modal.Footer> */}
 
+			</div>
 		</Modal>
 	);
 }

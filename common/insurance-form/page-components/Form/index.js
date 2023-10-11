@@ -1,5 +1,6 @@
 import { Button, Tabs, TabPanel, cl } from '@cogoport/components';
 import { IcMFsea, IcMFairport, IcMFland } from '@cogoport/icons-react';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import getInsuranceControls from '../../configuration/insuranceControls';
@@ -9,6 +10,8 @@ import useInsurance from '../../hooks/useInsurance';
 import styles from './styles.module.css';
 
 function Insurance({ organization = {}, src = '', formValues = {} }) {
+	const { t } = useTranslation(['cargoInsurance']);
+
 	const [activeTab, setActiveTab] = useState('sea');
 
 	const { formHook, loading, onSubmit, formValueRef } = useInsurance({
@@ -17,7 +20,7 @@ function Insurance({ organization = {}, src = '', formValues = {} }) {
 		formValues,
 		setActiveTab,
 	});
-	const insuranceControls = getInsuranceControls({ activeTab });
+	const insuranceControls = getInsuranceControls({ activeTab, t });
 
 	const { control, handleSubmit, formState:{ errors } } = formHook;
 
@@ -25,7 +28,7 @@ function Insurance({ organization = {}, src = '', formValues = {} }) {
 		<>
 			<div className={styles.header}>
 				<div>
-					<h3>Select Service</h3>
+					<h3>{t('cargoInsurance:select_service')}</h3>
 
 					<Tabs
 						activeTab={activeTab}
@@ -70,7 +73,7 @@ function Insurance({ organization = {}, src = '', formValues = {} }) {
 					themeType="accent"
 					onClick={handleSubmit(onSubmit)}
 				>
-					Search Rates
+					{t('cargoInsurance:search_rates')}
 				</Button>
 			</div>
 		</>

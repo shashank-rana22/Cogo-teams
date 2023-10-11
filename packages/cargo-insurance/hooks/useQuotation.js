@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import { useEffect } from 'react';
 
 const getPayload = ({ data = {} }) => {
@@ -16,6 +17,8 @@ const getPayload = ({ data = {} }) => {
 function useQuotation({ pocDetails = {} }) {
 	const { query } = useRouter();
 	const { policySearchId } = query || {};
+
+	const { t } = useTranslation(['cargoInsurance']);
 
 	const formhook = useForm();
 	const { setValue } = formhook;
@@ -35,7 +38,7 @@ function useQuotation({ pocDetails = {} }) {
 					policySearchId,
 				},
 			});
-			Toast.success('Quotation sent successfully');
+			Toast.success(t('cargoInsurance:quote_send_success'));
 		} catch (err) {
 			console.log(err, 'err');
 			Toast.error(err.response?.data?.message);
