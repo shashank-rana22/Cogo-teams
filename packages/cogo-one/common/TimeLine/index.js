@@ -2,6 +2,7 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowDoubleUp } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import { CHANNEL_TYPE } from '../../constants';
@@ -14,6 +15,8 @@ function TimeLine({
 	showHideOption = false,
 	setExpandedState = () => {},
 }) {
+	const loggedInAgentId = useSelector((state) => state?.profile?.user?.id);
+
 	const {
 		conversation_type = '',
 		agent_data = {},
@@ -30,10 +33,12 @@ function TimeLine({
 	const { name : previousAgent, id: prevAgentId = '' } = performed_by_data || {};
 	const { name: voiceCallUserName = '' } = user_data || {};
 
+	const prevName = prevAgentId === loggedInAgentId ? 'You' : previousAgent;
+
 	const timelineText = getVoiceCallStatement({
 		type            : conversation_type,
-		present         : presentAgent,
-		previous        : CHANNEL_TYPE.includes(channel) ? voiceCallUserName : previousAgent,
+		present         : presentAgentId === loggedInAgentId ? 'You' : presentAgent,
+		previous        : CHANNEL_TYPE.includes(channel) ? voiceCallUserName : prevName,
 		startAt         : conversation_started_at,
 		voiceCallStatus : status,
 		channel,
