@@ -1,0 +1,54 @@
+.title {
+	font-size: 16px;
+	font-weight: 700;
+	color: #221f20;
+}
+
+.desc {
+	margin-top: 4px;
+	font-size: 12px;
+	color: #221f20;
+}
+
+.button {
+	margin-top: 10px;
+}
+
+.details {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+
+	:global {
+		.ui_select_container {
+			width: 250px;
+		}
+	}
+}
+
+.radio {
+	:global {
+		.ui_radiogroup_container {
+			padding: 0;
+		}
+	}
+}
+
+.body {
+	:global {
+		.ui_modal_body_container {
+			max-height: fit-content;
+			overflow-x: visible;
+		}
+	}
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+}

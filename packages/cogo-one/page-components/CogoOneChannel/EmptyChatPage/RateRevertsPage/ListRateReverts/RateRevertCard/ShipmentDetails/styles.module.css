@@ -57,6 +57,7 @@
 .shipping_service {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	width: 32%;
 	padding-right: 10px;
 }

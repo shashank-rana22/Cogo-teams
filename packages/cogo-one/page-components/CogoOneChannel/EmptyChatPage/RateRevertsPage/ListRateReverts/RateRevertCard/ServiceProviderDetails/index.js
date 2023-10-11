@@ -1,5 +1,4 @@
 import { Pill, Tooltip, Popover } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo, IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -9,7 +8,7 @@ import styles from './styles.module.css';
 const INDEX_STEP = 1;
 
 function ServiceProviderDetails({ cardData = {} }) {
-	const { service_provider = {}, service_provider_poc = {}, sources = [] } = cardData || {};
+	const { service_provider = {}, service_provider_poc = {}, source = '' } = cardData || {};
 
 	const { category_types = [], short_name = '', business_name = '' } = service_provider || {};
 	const { name = '' } = service_provider_poc || {};
@@ -26,7 +25,7 @@ function ServiceProviderDetails({ cardData = {} }) {
 						size="sm"
 						color="#F7FAEF"
 					>
-						{startCase(sources?.[GLOBAL_CONSTANTS.zeroth_index])}
+						{startCase(source)}
 					</Pill>
 					<Tooltip content="Tool tip" placement="bottom">
 						<IcMInfo className={styles.info_icon} />

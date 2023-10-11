@@ -2,15 +2,16 @@
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
 
-import { currencyOptions, rateTypeOptions } from '../../../../configurations/helpers/constants';
-
-import styles from './styles.module.css';
+import {
+	currencyOptions, rateTypeOptions,
+} from '../../../../../../../constants/rateRevertsFilters';
 
 const fclControls = ({
 	data,
 	listShippingLineOptions,
-	fclCommodityOptions,
+	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
+
 }) => [
 	{
 		name    : 'service_provicer_details',
@@ -19,7 +20,7 @@ const fclControls = ({
 	},
 	{
 		name        : 'service_provider_id',
-		heading     : 'Service Provider',
+		label       : 'Service Provider',
 		type        : 'select',
 		placeholder : 'Service Provider',
 		span        : 4,
@@ -28,7 +29,7 @@ const fclControls = ({
 	},
 	{
 		name        : 'sourced_by_id',
-		heading     : 'Rate Provided by user',
+		label       : 'Rate Provided by user',
 		type        : 'select',
 		placeholder : 'Rate Provided by user',
 		value       : data?.sourced_by_id,
@@ -37,7 +38,7 @@ const fclControls = ({
 	},
 	{
 		name        : 'shipping_line_id',
-		heading     : 'Shipping Line',
+		label       : 'Shipping Line',
 		type        : 'select',
 		placeholder : 'Shipping Line',
 		span        : 4,
@@ -52,7 +53,7 @@ const fclControls = ({
 	},
 	{
 		name        : 'origin_location_id',
-		heading     : 'Origin Location',
+		label       : 'Origin Location',
 		type        : 'select',
 		placeholder : 'Origin Location',
 		span        : 4,
@@ -64,7 +65,7 @@ const fclControls = ({
 	{
 		name        : 'origin_main_port_id',
 		type        : 'select',
-		heading     : 'Origin Main port',
+		label       : 'Origin Main port',
 		placeholder : 'Origin Main port',
 		span        : 4,
 		rules       : { required: 'origin main port is required' },
@@ -72,7 +73,7 @@ const fclControls = ({
 	{
 		name        : 'destination_location_id',
 		type        : 'select',
-		heading     : 'Destination Location',
+		label       : 'Destination Location',
 		span        : 4,
 		value       : data?.destination_port?.id,
 		disabled    : data?.destination_port?.id,
@@ -83,7 +84,7 @@ const fclControls = ({
 	{
 		name        : 'destination_main_port_id',
 		type        : 'select',
-		heading     : 'Destination main port',
+		label       : 'Destination main port',
 		span        : 4,
 		placeholder : 'Destination main port',
 		rules       : { required: 'destination main port is required' },
@@ -95,7 +96,7 @@ const fclControls = ({
 	},
 	{
 		name        : 'container_type',
-		heading     : 'Container Type',
+		label       : 'Container Type',
 		type        : 'select',
 		placeholder : 'Container Type',
 		span        : 3,
@@ -106,7 +107,7 @@ const fclControls = ({
 	},
 	{
 		name        : 'container_size',
-		heading     : 'Container Size',
+		label       : 'Container Size',
 		type        : 'select',
 		placeholder : 'Container Size',
 		span        : 3,
@@ -117,19 +118,18 @@ const fclControls = ({
 	},
 	{
 		name        : 'commodity',
-		heading     : 'Commodity',
+		label       : 'Commodity',
 		type        : 'select',
 		placeholder : 'Commodity',
 		span        : 3,
 		value       : data?.commodity,
-		disabled    : data?.commodity,
-		options     : fclCommodityOptions,
+		options     : CommodityOptions,
 		rules       : { required: 'commodity is required' },
 	},
 	{
 		name        : 'rate_type',
 		type        : 'select',
-		heading     : 'Rate Type',
+		label       : 'Rate Type',
 		span        : 3,
 		placeholder : 'Rate Type',
 		options     : rateTypeOptions,
@@ -144,31 +144,27 @@ const fclControls = ({
 	},
 	{
 		name        : 'validity_start',
-		heading     : 'Validty Start',
+		label       : 'Validty Start',
 		type        : 'date_picker',
 		placeholder : 'Validity Start',
-		span        : 3,
-		minDate     : new Date(),
-		className   : styles.date_filter,
+		span        : 4,
 		rules       : {
 			required: 'validity start date is required',
 		},
 	},
 	{
 		name        : 'validity_end',
-		heading     : 'Validity End',
+		label       : 'Validity End',
 		type        : 'date_picker',
-		className   : styles.date_filter,
 		placeholder : 'Validity End',
-		span        : 3,
-		minDate     : new Date(),
+		span        : 4,
 		rules       : {
 			required: 'validity end date is required',
 		},
 	},
 	{
 		name        : 'detention_free_days',
-		heading     : 'Detention Free Days',
+		label       : 'Detention Free Days',
 		type        : 'number',
 		placeholder : 'Detention Free Days',
 		span        : 3,
@@ -177,7 +173,7 @@ const fclControls = ({
 	},
 	{
 		name        : 'payment_term',
-		heading     : 'Payment Term',
+		label       : 'Payment Term',
 		type        : 'select',
 		placeholder : 'Payment Term',
 		value       : 'prepaid',
@@ -189,7 +185,7 @@ const fclControls = ({
 	},
 	{
 		name        : 'free_weight',
-		heading     : 'Free Weight Limit',
+		label       : 'Free Weight Limit',
 		type        : 'number',
 		span        : 3,
 		placeholder : 'Free Weight Limit',
@@ -197,7 +193,7 @@ const fclControls = ({
 	},
 	{
 		name        : 'schedule_type',
-		heading     : 'Shipment Type',
+		label       : 'Shipment Type',
 		type        : 'select',
 		span        : 3,
 		placeholder : 'Select Shipment Type',
@@ -211,16 +207,22 @@ const fclControls = ({
 		rules: { required: 'shipment type is required' },
 	},
 	{
-		name       : 'weight_slabs',
-		heading    : 'Weight Slabs',
-		type       : 'fieldArray',
+		name               : 'weight_slabs',
+		heading            : 'Weight Slabs',
+		type               : 'fieldArray',
+		noDeleteButtonTill : 1,
+		value              : [{
+			lower_limit : '',
+			upper_limit : '',
+			currency    : '',
+			price       : '',
+		}],
 		buttonText : 'Add Weight Slabs',
 		controls   : [
 			{
 				name        : 'lower_limit',
 				type        : 'number',
 				span        : 4,
-				disabled    : true,
 				placeholder : 'Lower Limit (in MT)',
 				rules       : { required: 'lower limit is required' },
 			},
@@ -249,17 +251,26 @@ const fclControls = ({
 		],
 	},
 	{
-		type       : 'fieldArray',
-		heading    : 'Line Items',
-		name       : 'line_items',
-		buttonText : 'Add Line Items',
-		controls   : [
+		type               : 'fieldArray',
+		heading            : 'Line Items',
+		name               : 'line_items',
+		showButtons        : true,
+		buttonText         : 'Add Line Items',
+		noDeleteButtonTill : 0,
+		value              : [{
+			code         : '',
+			unit         : '',
+			currency     : '',
+			price        : '',
+			market_price : '',
+			remarks      : '',
+		}],
+		controls: [
 			{
 				name        : 'code',
 				type        : 'select',
-				span        : 1.5,
+				span        : 2,
 				placeholder : 'Charge Name',
-				rules       : { required: 'code is required' },
 			},
 			{
 				name        : 'unit',
@@ -277,13 +288,13 @@ const fclControls = ({
 			},
 			{
 				name        : 'price',
-				span        : 2,
+				span        : 1.5,
 				type        : 'number',
 				placeholder : 'Amount',
 			},
 			{
 				name        : 'market_price',
-				span        : 2,
+				span        : 1.5,
 				type        : 'number',
 				placeholder : 'Market Price',
 			},

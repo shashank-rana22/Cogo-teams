@@ -1,25 +1,20 @@
 import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
-
-import { SOURCE_OPTIONS } from '../constants/rateRevertsConstants';
 
 const getPayload = ({ params }) => ({
 	all_jobs_required : false,
 	stats_required    : true,
-	service           : 'fcl_freight',
+	service           : params?.service || 'fcl_freight',
 	page_limit        : 6,
 	page              : params?.page || 1,
 	filters           : {
-		source: isEmpty(params?.source)
-			? Object.keys(SOURCE_OPTIONS)
-			: params?.source || undefined,
-		status: 'pending',
+		source : params?.source || 'live_booking',
+		status : 'pending',
 	},
 });
 
 const useListRateJobs = () => {
-	const [params, setParams] = useState(null);
+	const [params, setParams] = useState({ source: 'live_booking', service: 'fcl_freight' });
 
 	const [{ loading: rateJobsLoading, data }, trigger] = useRequest({
 		url    : '/list_rate_jobs',

@@ -1,6 +1,5 @@
 import React from 'react';
 
-// import dummyData from './dummyData';
 import RateRevertCard from './RateRevertCard';
 import styles from './styles.module.css';
 
