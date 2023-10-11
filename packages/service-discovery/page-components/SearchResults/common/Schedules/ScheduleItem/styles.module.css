@@ -22,13 +22,13 @@
 
 	&.active {
 		background: #faf4c6;
-		border: 1px solid #faf4c6;
+		border: 1px solid #fef199;
 		border-radius: 8px;
 
 		&:hover {
 			background: #fdebe9;
 			border: 1px solid #fdebe9;
-			box-shadow: 0 2px 8px 0 #f8aea8;
+			box-shadow: 0 0 6px 0 #f8aea8;
 
 			.show_cross_icon {
 				display: flex;
