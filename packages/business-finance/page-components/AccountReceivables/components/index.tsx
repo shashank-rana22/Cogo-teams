@@ -24,7 +24,7 @@ interface Profile {
 
 function AccountReceivables() {
 	const { push, query } = useRouter();
-	const { profile }:Profile = useSelector((state) => state);
+	const { profile }: Profile = useSelector((state) => state);
 	const [selectedOrgId, setSelectedOrgId] = useState({});
 	const { partner } = profile || {};
 
@@ -84,7 +84,13 @@ function AccountReceivables() {
 				)}
 			</div>
 
-			<div className={isEmpty(selectedOrgId) ? styles.tabs_container : styles.nodisplay}>
+			<div
+				className={
+					isEmpty(selectedOrgId)
+						? styles.tabs_container
+						: styles.nodisplay
+				}
+			>
 				<Tabs
 					activeTab={receivables}
 					onChange={(val: string) => handleChange(val)}
@@ -95,7 +101,7 @@ function AccountReceivables() {
 						<Dashboard entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="invoices" title="Invoices">
-						<Invoice entityCode={entityCode} />
+						<Invoice entityCode={entityCode} invoiceJourney />
 					</TabPanel>
 					<TabPanel name="outstanding" title="Outstanding">
 						<Outstanding
