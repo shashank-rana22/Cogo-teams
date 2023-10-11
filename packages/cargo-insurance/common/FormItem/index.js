@@ -20,7 +20,7 @@ function FormItem({ controls, formhook }) {
 
 			return (
 				showEle ? (
-					<div key={name} className={cl`${styles.col} form_col`}>
+					<div key={name} className={cl`${styles.col} ${name} form_col`}>
 						<p className={styles.label}>{label}</p>
 						<Element
 							{...config}

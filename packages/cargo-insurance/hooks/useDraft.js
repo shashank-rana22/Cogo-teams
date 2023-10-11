@@ -50,7 +50,7 @@ const getPayload = ({ data = {}, pocDetails, performedBy, policySearchId }) => {
 
 function useDraft({ data = {} }) {
 	const { query, push } = useRouter();
-	const { policySearchId, draftId = '' } = query;
+	const { policySearchId = '', draftId = '' } = query;
 
 	const { user } = useSelector((state) => state.profile);
 

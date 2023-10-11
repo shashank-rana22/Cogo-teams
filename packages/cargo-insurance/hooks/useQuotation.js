@@ -1,34 +1,58 @@
 import { Toast } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
+import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
-const getPayload = ({ data = {}, selectedRates = {} }) => ({
-	...data,
-	...selectedRates,
-});
+const getPayload = ({ data = {} }) => {
+	const { firstName, lastName, email } = data || {};
+	return ({
+		pocName  : `${firstName} ${lastName}`,
+		pocEmail : email,
+	});
+};
 
-function useQuotation() {
+function useQuotation({ pocDetails = {} }) {
+	const { query } = useRouter();
+	const { policySearchId } = query || {};
+
+	const formhook = useForm();
+	const { setValue } = formhook;
+
 	const [{ loading, data }, trigger] = useRequestBf({
 		method  : 'post',
 		url     : '/saas/insurance/v2/send/quote',
 		authKey : 'post_saas_insurance_v2_send_quote',
 	}, { manual: true });
 
-	const sendQuotation = (values) => {
+	const sendQuotation = async (values) => {
 		const payload = getPayload({ data: values });
 		try {
-			trigger({
-				data: payload,
+			await trigger({
+				data: {
+					...payload,
+					policySearchId,
+				},
 			});
+			Toast.success('Quotation sent successfully');
 		} catch (err) {
 			console.log(err, 'err');
 			Toast.error(err.response?.data?.message);
 		}
 	};
 
-	console.log(data, 'data');
+	useEffect(() => {
+		if (!isEmpty(pocDetails)) {
+			setValue('firstName', pocDetails?.insuredFirstName);
+			setValue('lastName', pocDetails?.insuredLastName);
+			setValue('email', pocDetails?.email);
+			setValue('phoneNo', { country_code: pocDetails?.phoneCode, number:	pocDetails?.phoneNo });
+		}
+	}, [pocDetails, setValue]);
 
 	return {
-		loading, sendQuotation,
+		loading, sendQuotation, data, formhook,
 	};
 }
 
