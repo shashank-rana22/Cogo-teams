@@ -16,8 +16,6 @@
 .submit_button {
 	display: flex;
 	justify-content: flex-end;
-	width: 100%;
-	margin-top: 24px;
 }
 
 .air_date_filter input {

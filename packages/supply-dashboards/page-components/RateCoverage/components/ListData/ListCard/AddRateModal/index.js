@@ -170,9 +170,9 @@ function AddRateModal({
 
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
-			<Modal.Header title={(
-				<div>
-					{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
+
+			<div>
+				{['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
 			&& (
 				<div className={styles.service_content}>
 					<ServiceDetailsContent
@@ -186,9 +186,7 @@ function AddRateModal({
 					/>
 				</div>
 			)}
-				</div>
-			)}
-			/>
+			</div>
 
 			<Modal.Body>
 				<div className={styles.title}>Please Add Rate</div>
@@ -198,14 +196,25 @@ function AddRateModal({
 					errors={errors}
 					showElements={showElements}
 				/>
+			</Modal.Body>
+			<Modal.Footer>
 				<div className={styles.submit_button}>
 					<Button
+						size="md"
+						onClick={setShowModal(showModal)}
+						style={{ marginRight: '20px' }}
+						themeType="secondary"
+					>
+						Close
+					</Button>
+					<Button
+						size="md"
 						onClick={handleSubmit(handleSubmitData)}
 					>
 						Submit
 					</Button>
 				</div>
-			</Modal.Body>
+			</Modal.Footer>
 		</Modal>
 	);
 }

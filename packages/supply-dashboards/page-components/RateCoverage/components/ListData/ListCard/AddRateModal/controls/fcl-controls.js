@@ -234,15 +234,20 @@ const fclControls = ({
 		],
 	},
 	{
-		type       : 'fieldArray',
-		heading    : 'Line Items',
-		name       : 'line_items',
-		buttonText : 'Add Line Items',
-		value      : [
-			{
-				code: 'BAS',
-			},
-		],
+		type               : 'fieldArray',
+		heading            : 'Line Items',
+		name               : 'line_items',
+		showButtons        : true,
+		buttonText         : 'Add Line Items',
+		noDeleteButtonTill : 0,
+		value              : [{
+			code         : '',
+			unit         : '',
+			currency     : '',
+			price        : '',
+			market_price : '',
+			remarks      : '',
+		}],
 		controls: [
 			{
 				name        : 'code',

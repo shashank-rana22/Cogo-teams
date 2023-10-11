@@ -1,7 +1,9 @@
-import { Popover, Button, Placeholder } from '@cogoport/components';
-import React from 'react';
+import { Placeholder } from '@cogoport/components';
+import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
 import ServiceDetailsContent from './Content';
+import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
 const LOADER_COUNT = 3;
@@ -12,7 +14,9 @@ function DetailsView({
 	source = {}, getShipment = () => {}, getFeedback = () => {}, getRequest = () => {},
 
 }) {
+	const [showServiceDetails, setShowServiceDetails] = useState(false);
 	const handleDetailView = () => {
+		setShowServiceDetails(!showServiceDetails);
 		if (source === 'live_booking') {
 			return getShipment();
 		}
@@ -23,17 +27,14 @@ function DetailsView({
 	};
 
 	return (
-		<Popover
-			placement="left"
-			size="md"
-			render={(
+		<div>
+			{showServiceDetails && (
 				<div>
 					{(shipment_loading || request_loading
-					|| feedback_loading) ? [...new Array(LOADER_COUNT).keys()].map((ind) => (
+					|| feedback_loading) ? [...new Array(LOADER_COUNT).keys()].map((index) => (
 						<Placeholder
 							height="4vh"
-							width="600px"
-							key={ind}
+							key={index}
 							style={{ marginTop: '10px' }}
 						/>
 						))
@@ -50,16 +51,18 @@ function DetailsView({
 						)}
 				</div>
 			)}
-		>
-			<Button
+
+			<div
+				className={styles.container}
+				role="presentation"
 				size="md"
-				style={{ marginRight: '10px' }}
-				themeType="secondary"
 				onClick={handleDetailView}
 			>
-				View Details
-			</Button>
-		</Popover>
+				{showServiceDetails ? 'Hide Details' : 'View Details'}
+				{showServiceDetails ? <IcMArrowUp style={{ margin: '-2px 2px' }} />
+					: <IcMArrowDown style={{ margin: '-2px 2px' }} />}
+			</div>
+		</div>
 	);
 }
 

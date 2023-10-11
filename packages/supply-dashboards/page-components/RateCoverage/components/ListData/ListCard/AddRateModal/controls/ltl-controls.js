@@ -245,7 +245,7 @@ const ltlControls = ({
 		name               : 'weight_slabs',
 		type               : 'fieldArray',
 		noDeleteButtonTill : 1,
-		buttonText         : '',
+		buttonText         : 'Add Weight Slabs',
 		initialCount       : 0,
 		value              : [
 			{

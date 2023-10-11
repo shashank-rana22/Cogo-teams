@@ -88,7 +88,7 @@ const useCreateFreightRate = (service) => {
 			});
 			if (resp?.data) { return resp?.data?.id; }
 		} catch (err) {
-			Toast.error(startCase(err?.response?.data?.detail));
+			Toast.error(startCase(err?.response?.data?.detail || err?.response?.data?.base));
 		}
 		return null;
 	};
