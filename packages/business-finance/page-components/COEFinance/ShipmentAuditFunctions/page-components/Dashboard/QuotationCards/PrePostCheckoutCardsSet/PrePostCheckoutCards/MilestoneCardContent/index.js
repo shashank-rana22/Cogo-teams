@@ -44,12 +44,6 @@ export default function MilestoneCardContent({
 										)}
 									</div>
 								</div>
-								{/* <div className={`${isOpen ? styles.nothing : styles.other_title}`}>
-									<div className={styles.regular}>Profitability :</div>
-									<div className={`${PROFITABILITY > ZERO_VALUE ? styles.green : styles.red}`}>
-										10
-									</div>
-								</div> */}
 							</div>
 						)}
 						{isOpen ? (

@@ -1,16 +1,25 @@
-import { cl } from '@cogoport/components';
-import { IcMDummyCircle, IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { Placeholder } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMArrowRotateUp, IcMArrowRotateDown, IcCFtick } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import AccordionContent from './AccordionContent';
+import Content from './Content';
 import styles from './styles.module.css';
 
 const TITLE_MAPPING = {
-	FIN : 'FINAL',
-	OPR : 'OPERATIONAL',
+	FIN : 'Final',
+	OPR : 'Operational',
 };
 
-function SellBuyCards({ source = 'FIN', type = '', data = [] }) {
+const ZERO_VALUE = 0;
+
+function SellBuyCards({
+	source = 'FIN',
+	type = '',
+	data = [],
+	loading = false,
+}) {
 	const [open, setOpen] = useState(false);
 
 	let profitabilityData = 0;
@@ -21,47 +30,67 @@ function SellBuyCards({ source = 'FIN', type = '', data = [] }) {
 		grandTotal += i.grand_total;
 	});
 
+	const checkIsApproved = () => data.every((item) => item?.quotation_status);
+
 	return (
-		<div className={styles.container}>
-			<div className={cl`${styles.card_content} ${styles.border}`}>
-				<IcMDummyCircle
-					fill="#EE3425"
-					height="20"
-					width="20"
-				/>
-				<div className={styles.card_container}>
-					<div className={styles.title}>{`${TITLE_MAPPING[source]} ${type}`}</div>
+		<div className={styles.custom_accordion}>
+			{loading ? <Placeholder /> : (
+				<div>
+					<div className={styles.accord_title}>
+						<div className={styles.status}>
+							<div className={styles.accordion_title}>
+								{`${TITLE_MAPPING[source]} ${startCase(type)}`}
+							</div>
 
-					<div className={styles.amount}>
-						{type === 'BUY' ? 'Expense' : 'Income'}
-						:
-						{' '}
-						{grandTotal}
-					</div>
+							{checkIsApproved() ? <IcCFtick /> : null}
+						</div>
 
-					<div className={styles.profitability_content}>
-						Profitability:
-						{' '}
-						{profitabilityData}
-					</div>
-
-					{open ? (
-						<IcMArrowRotateUp
-							style={{ cursor: 'pointer' }}
-							onClick={() => setOpen(false)}
-						/>
-					)
-						: (
-							<IcMArrowRotateDown
+						<div className={`${open ? styles.nothing : styles.other_title}`}>
+							<div className={styles.regular}>
+								{type === 'buy' ? 'Expense' : 'Income: '}
+							</div>
+							<div>
+								{formatAmount({
+									amount   : grandTotal,
+									currency : 'INR',
+									options  : {
+										currencyDisplay : 'code',
+										style           : 'currency',
+									},
+								})}
+							</div>
+						</div>
+						<div className={`${open ? styles.nothing : styles.other_title}`}>
+							<div className={styles.regular}>Profitability </div>
+							<div className={`${profitabilityData > ZERO_VALUE ? styles.green : styles.red}`}>
+								{profitabilityData}
+							</div>
+						</div>
+						{open ? (
+							<IcMArrowRotateUp
 								style={{ cursor: 'pointer' }}
-								onClick={() => setOpen(true)}
+								onClick={() => setOpen(false)}
 							/>
-						)}
+						)
+							: (
+								<IcMArrowRotateDown
+									style={{ cursor: 'pointer' }}
+									onClick={() => setOpen(true)}
+								/>
+							)}
+					</div>
+					<div className={`${!open ? styles.nothing : styles.content}`}>
+						<Content
+							data={data}
+							loading={loading}
+							income={grandTotal}
+							source={source}
+							type={type}
+							profitability={profitabilityData}
+						/>
+					</div>
 				</div>
-			</div>
-
-			{open ? <AccordionContent data={data} /> : null}
-
+			)}
 		</div>
 	);
 }

@@ -1,34 +1,64 @@
-.container {
-	padding-right: 8px;
+.nothing {
+	display: none;
 }
 
-.card_content {
-	display: flex;
-	align-items: center;
-}
-
-.card_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+.custom_accordion {
 	width: 92%;
 	padding: 12px 20px;
-	background: #fff;
+	margin-bottom: 12px;
+	background: white;
 	border-radius: 8px;
 }
 
-.border {
-	border-radius: 0 0 4px 4px;
+.accord_title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.title {
-	font-size: 16px;
+.content {
+	margin-top: 20px;
 }
 
-.amount {
+.open_title {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.close_title {
+	display: flex;
+	justify-content: space-between;
+}
+
+.other_title {
 	display: flex;
 }
 
-.profitability_content {
+.regular {
 	display: flex;
+	align-items: center;
+	font-size: 12px;
+	color: #828282;
+}
+
+.green {
+	color: #29cc6a;
+}
+
+.red {
+	color: #fc5555;
+}
+
+.margin {
+	margin-right: 120px;
+}
+
+.status {
+	display: flex;
+	align-items: center;
+}
+
+.accordion_title {
+	margin-right: 4px;
 }

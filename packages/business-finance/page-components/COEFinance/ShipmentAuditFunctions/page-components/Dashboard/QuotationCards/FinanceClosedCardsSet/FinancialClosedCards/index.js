@@ -27,7 +27,25 @@ function FinancialClosedCards({
 							</div>
 						</div>
 
-						<SellBuyCards source="FIN" type={type} data={data} />
+						{loading ? <Placeholder height="60px" />
+							: (
+								<div style={{ display: 'flex', alignItems: 'center' }}>
+									<div className={styles.vertical_timeline}>
+										<IcMDummyCircle
+											fill="#EE3425"
+											height="20"
+											width="20"
+										/>
+										<div className={styles.vertical_rule} />
+									</div>
+									<SellBuyCards
+										source="FIN"
+										type={type}
+										data={data}
+										loading={loading}
+									/>
+								</div>
+							)}
 
 						{loading ? <Placeholder height="60px" /> : data?.map((item) => (
 							<div key={item?.id} style={{ display: 'flex', alignItems: 'center' }}>

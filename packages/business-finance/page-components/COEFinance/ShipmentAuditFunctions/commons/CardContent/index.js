@@ -10,6 +10,7 @@ import BuySellStatusContent from './BuySellStatusContent';
 import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
+
 export default function Timeline({
 	loading = false,
 	data = {},

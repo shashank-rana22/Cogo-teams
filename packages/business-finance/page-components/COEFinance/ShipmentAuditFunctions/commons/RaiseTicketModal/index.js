@@ -21,6 +21,7 @@ function RaiseTicketModal({
 	setShowTicketModal = () => {},
 	showTicketModal = false,
 	itemData = {},
+	id = '',
 	refetch = () => {},
 }) {
 	const [additionalInfo, setAdditionalInfo] = useState([]);
@@ -38,7 +39,7 @@ function RaiseTicketModal({
 		loading: updateLoading = false,
 	} = useUpdateBillsTicketId({ setShowTicketModal, refetch, itemData });
 
-	const { data, loading:shipmentLoading } = useListShipment(itemData?.id);
+	const { data, loading:shipmentLoading } = useListShipment(id);
 
 	const shipmentData = data?.list[GLOBAL_CONSTANTS.zeroth_index];
 
@@ -47,7 +48,7 @@ function RaiseTicketModal({
 	const {
 		data:stakeholderData = [],
 		loading:stakeholderLoading,
-	} = useListStakeholders({ shipmentId: shipmentData?.id });
+	} = useListStakeholders({ shipmentId: id });
 
 	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({
 		additionalInfo,
@@ -109,7 +110,7 @@ function RaiseTicketModal({
 						<div className={styles.pill_container}>
 							<div className={styles.label}>
 
-								{`#${itemData?.jobNumber}`}
+								{`#${id}`}
 							</div>
 							<div className={styles.pill}>
 								<Pill size="md" color="#D9EAFD">{service?.label}</Pill>
