@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 
@@ -10,6 +11,9 @@ import styles from './styles.module.css';
 
 function Dashboard() {
 	const { query: { active_tab = '', job_id = '' }, push = () => {} } = useRouter();
+	const { partner: { id = '' } } = useSelector(({ profile }) => ({
+		partner: profile?.partner,
+	}));
 
 	const [quotationsData, setQuotationsData] = useState({
 		prePostCheckoutData : {},
@@ -29,11 +33,11 @@ function Dashboard() {
 	const handleClick = () => {
 		if (active_tab === 'financial_close') {
 			push(
-				'/business-finance/coe-finance/financial_close',
+				`/${id}/business-finance/coe-finance/financial_close`,
 			);
 		} else {
 			push(
-				'/business-finance/coe-finance/operational_close',
+				`/${id}/business-finance/coe-finance/operational_close`,
 			);
 		}
 	};
