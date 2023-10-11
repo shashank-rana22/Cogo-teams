@@ -14,7 +14,7 @@ function ConfirmSuccessModal({ confirmSuccess = {}, setConfirmSuccess, handleSub
 
 	return (
 		<Modal show={isOpen} closeOnOuterClick={isConfirm}>
-			<div>
+			<div className={styles.body}>
 				{isConfirm ? (
 					<>
 						{' '}

@@ -25,7 +25,7 @@ function Insurance() {
 			<Header loading={loading} {...rest} />
 
 			<div className={styles.container}>
-				{isEmpty(rateResponse) ? (
+				{isEmpty(rateResponse) && !loading ? (
 					<div className={styles.empty_state}>
 						<IcCVerySad width={70} height={70} />
 						<div>
@@ -33,37 +33,36 @@ function Insurance() {
 							<p>{t('cargoInsurance:rate_empty_state_2')}</p>
 						</div>
 					</div>
-				) : (
-					<>
-						<div className={styles.flex_box}>
-							<div className={styles.rate_card}>
-								<RateCard
-									data={rateResponse}
-									loading={loading}
-									selectedRateCard={selectedRateCard}
-									setSelectedRateCard={setSelectedRateCard}
-								/>
-							</div>
+				) : null}
 
-							<div className={styles.personal_detail}>
-								<PersonalDetail
-									pocDetails={pocDetails}
-									ref={(r) => { personalDetailRef.current = r; }}
-								/>
-							</div>
-						</div>
+				<div className={styles.flex_box}>
+					<div className={styles.rate_card}>
+						<RateCard
+							data={rateResponse}
+							loading={loading}
+							selectedRateCard={selectedRateCard}
+							setSelectedRateCard={setSelectedRateCard}
+						/>
+					</div>
 
-						<div className={styles.footer}>
-							<Button
-								loading={draftLoading}
-								onClick={submitHandler}
-								size="lg"
-							>
-								{t('cargoInsurance:continue_purchase')}
-							</Button>
-						</div>
-					</>
-				)}
+					<div className={styles.personal_detail}>
+						<PersonalDetail
+							pocDetails={pocDetails}
+							ref={(r) => { personalDetailRef.current = r; }}
+						/>
+					</div>
+				</div>
+
+				<div className={styles.footer}>
+					<Button
+						loading={draftLoading}
+						onClick={submitHandler}
+						size="lg"
+					>
+						{t('cargoInsurance:continue_purchase')}
+					</Button>
+				</div>
+
 			</div>
 		</div>
 	);
