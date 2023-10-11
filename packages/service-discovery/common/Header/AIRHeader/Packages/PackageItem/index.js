@@ -58,12 +58,6 @@ function PackageItem({
 			</div>
 
 			<div className={styles.load_item} style={{ marginLeft: 12 }}>
-				<span className={styles.text}>
-					{startCase(commodity === 'general' ? commodity : commodity_type)}
-				</span>
-			</div>
-
-			<div className={styles.load_item} style={{ margin: '0 12px' }}>
 				<Tooltip
 					placement="top"
 					content={(
@@ -87,6 +81,12 @@ function PackageItem({
 						Kgs
 					</span>
 				</Tooltip>
+			</div>
+
+			<div className={styles.load_item} style={{ margin: '0 12px' }}>
+				<span className={styles.text}>
+					{startCase(commodity === 'general' ? commodity : commodity_type)}
+				</span>
 			</div>
 		</div>
 	);
