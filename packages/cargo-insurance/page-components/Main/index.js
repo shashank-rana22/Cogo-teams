@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcCVerySad } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 import Header from '../../common/Header';
 import useDraft from '../../hooks/useDraft';
@@ -11,6 +12,8 @@ import RateCard from './RateCard';
 import styles from './styles.module.css';
 
 function Insurance() {
+	const { t } = useTranslation(['cargoInsurance']);
+
 	const { loading, data = {}, selectedRateCard, setSelectedRateCard } = useGetRates();
 
 	const { rateResponse = [], pocDetails = {}, ...rest	} = data || {};
@@ -18,7 +21,7 @@ function Insurance() {
 
 	return (
 		<div>
-			<h2>Cargo Insurance</h2>
+			<h2>{t('cargoInsurance:title')}</h2>
 			<Header loading={loading} {...rest} />
 
 			<div className={styles.container}>
@@ -26,8 +29,8 @@ function Insurance() {
 					<div className={styles.empty_state}>
 						<IcCVerySad width={70} height={70} />
 						<div>
-							<h2>Sorry! No rates found</h2>
-							<p>Oops, this is unusual and we are working on finding rates for this route.</p>
+							<h2>{t('cargoInsurance:rate_empty_state_1')}</h2>
+							<p>{t('cargoInsurance:rate_empty_state_2')}</p>
 						</div>
 					</div>
 				) : (
@@ -51,7 +54,13 @@ function Insurance() {
 						</div>
 
 						<div className={styles.footer}>
-							<Button loading={draftLoading} onClick={submitHandler} size="lg">Continue Purchase</Button>
+							<Button
+								loading={draftLoading}
+								onClick={submitHandler}
+								size="lg"
+							>
+								{t('cargoInsurance:continue_purchase')}
+							</Button>
 						</div>
 					</>
 				)}

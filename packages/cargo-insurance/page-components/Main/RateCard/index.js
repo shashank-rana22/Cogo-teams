@@ -2,6 +2,7 @@ import { cl, Checkbox } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Image } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 
 import INSURANCE_PROVIDER from '../../../constant/insuranceProvider';
 
@@ -19,14 +20,16 @@ const getFormatedAmount = ({ currency, value }) => formatAmount({
 });
 
 function RateCard({ data = [], loading, selectedRateCard, setSelectedRateCard }) {
+	const { t } = useTranslation(['cargoInsurance']);
+
 	console.log(loading, 'loading');
 	return (
 		<div className={styles.main_container}>
-			<h3>Rate Card</h3>
+			<h3>{t('cargoInsurance:rate_card')}</h3>
 
 			<div className={styles.scroll_container}>
 				{(data || []).map((info) => {
-					const { netCharges, serviceChargeList = [], currency = 'INR', serviceProvider } = info || {};
+					const { netCharges, serviceChargeList = [], currency = '', serviceProvider } = info || {};
 					const IsSelectedRate = selectedRateCard?.serviceProvider === serviceProvider;
 
 					return (
@@ -58,21 +61,21 @@ function RateCard({ data = [], loading, selectedRateCard, setSelectedRateCard })
 												height={15}
 												alt={serviceProvider}
 											/>
-											<p className={styles.sub_title}>Insurance Company</p>
+											<p className={styles.sub_title}>{t('cargoInsurance:insurance_company')}</p>
 										</div>
 
 										<div style={{ textAlign: 'right' }}>
 											<h3 className={styles.total_price}>
 												{getFormatedAmount({ currency, value: netCharges })}
 											</h3>
-											<p className={styles.sub_title}>Inclusive of all taxes</p>
+											<p className={styles.sub_title}>{t('cargoInsurance:incl_tax')}</p>
 										</div>
 									</div>
 
 									<div className={styles.line_items}>
 										<div className={cl`${styles.flex_box} ${styles.line_item_header}`}>
-											<span>Line Items</span>
-											<span>Charges</span>
+											<span>{t('cargoInsurance:rate_col_1')}</span>
+											<span>{t('cargoInsurance:rate_col_1')}</span>
 										</div>
 
 										<div>

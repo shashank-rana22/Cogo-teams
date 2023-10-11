@@ -4,6 +4,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowBack, IcMCross, IcMEdit, IcMPortArrow } from '@cogoport/icons-react';
 import InsuranceForm from '@cogoport/insurance-form';
 import { useRouter } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import { SERVICE_ICON_MAPPING, SERICE_TYPE_MAPPING } from '../../constants/serviceIcon';
@@ -56,9 +57,11 @@ const getFormValues = ({ src, metadata, rateRequest, invoiceDetails, cargoDetail
 
 function Header({
 	metadata = {}, rateRequest = {}, cargoDetails = {}, invoiceDetails = {},
-	organizationId, userId, loading = false, src = '',
+	organizationId = '', userId = '', loading = false, src = '',
 }) {
 	const { back } = useRouter();
+
+	const { t } = useTranslation(['cargoInsurance']);
 
 	const [showForm, setShowForm] = useState(false);
 
@@ -99,7 +102,7 @@ function Header({
 							<>
 								<div>
 									<Pill color="#F2F2F2" size="lg">
-										HS Code:
+										{t('cargoInsurance:hsCode')}
 										{' '}
 										{hsCode || cargoHsCode}
 									</Pill>

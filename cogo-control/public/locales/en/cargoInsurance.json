@@ -1,0 +1,12 @@
+{
+    "title":"Cargo Insurance",
+    "rate_empty_state_1":"Sorry! No rates found",
+    "rate_empty_state_2":"Oops, this is unusual and we are working on finding rates for this route.",
+    "continue_purchase":"Continue Purchase",
+    "hsCode":"HS Code:",
+    "rate_card":"Rate Card",
+    "insurance_company":"Insurance Company",
+    "incl_tax":"Inclusive of all taxes",
+    "rate_col_1":"Line Items",
+    "rate_col_2":"Charges"
+}
