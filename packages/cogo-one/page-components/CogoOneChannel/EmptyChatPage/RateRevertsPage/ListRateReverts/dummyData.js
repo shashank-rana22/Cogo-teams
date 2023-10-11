@@ -14,6 +14,8 @@ const dummyData = [
 		commodity      : 'general',
 		container_size : '20',
 		status         : 'completed',
+		service_type   : 'fcl_freight',
+		trade_type     : 'import',
 		shipping_line  : {
 			id            : 'b2f92d49-6180-43bd-93a5-4d64f5819a9b',
 			status        : 'active',
@@ -124,6 +126,7 @@ const dummyData = [
 		commodity      : 'general',
 		container_size : '20',
 		status         : 'completed',
+		trade_type     : 'export',
 		shipping_line  : {
 			id            : 'b2f92d49-6180-43bd-93a5-4d64f5819a9b',
 			status        : 'active',
@@ -176,6 +179,7 @@ const dummyData = [
 			'rate_request',
 		],
 		origin_main_port_id      : null,
+		service_type             : 'rail_domestic_freight',
 		destination_main_port_id : null,
 		source_id                : '79bf91ce-575c-41ee-8075-96c96d660947',
 		service_provider_poc_id  : 'a5b49a25-a0f1-4c1f-99a8-e91e2393dbcc',
@@ -233,6 +237,8 @@ const dummyData = [
 		closed_by_id   : '2dbe768e-929d-4e54-baf0-309ef68c978b',
 		commodity      : 'general',
 		container_size : '20',
+		service_type   : 'domestic_air_freight',
+		trade_type     : 'import',
 		status         : 'completed',
 		shipping_line  : {
 			id            : 'b2f92d49-6180-43bd-93a5-4d64f5819a9b',

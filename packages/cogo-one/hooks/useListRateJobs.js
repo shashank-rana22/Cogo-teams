@@ -7,7 +7,7 @@ import { SOURCE_OPTIONS } from '../constants/rateRevertsConstants';
 const getPayload = ({ params }) => ({
 	all_jobs_required : false,
 	stats_required    : true,
-	service           : undefined,
+	service           : 'fcl_freight',
 	page_limit        : 6,
 	page              : params?.page || 1,
 	filters           : {

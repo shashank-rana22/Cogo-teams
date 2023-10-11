@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function RateRevertsPage() {
 	const { setParams = () => {}, params = {}, rateJobsData = {} } = useListRateJobs({});
 
-	const { total_items = 0, page = 1 } = rateJobsData || {};
+	const { total_items = 0, page = 1, list = [] } = rateJobsData || {};
 
 	return (
 		<>
@@ -19,7 +19,7 @@ function RateRevertsPage() {
 					params={params}
 					setParams={setParams}
 				/>
-				<ListRateReverts />
+				<ListRateReverts list={list} />
 			</div>
 			<div className={styles.footer_bar}>
 				<Pagination

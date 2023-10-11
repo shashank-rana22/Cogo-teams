@@ -10,3 +10,43 @@
 	border-radius: 6px;
 	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
 }
+
+.card_footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 4px 0;
+}
+
+.expiry_time {
+	font-size: 14px;
+	font-weight: 600;
+	color: #f37166;
+}
+
+.actions_container {
+	display: flex;
+
+	:global {
+		.ui_button_container {
+			margin: 0 4px;
+		}
+	}
+}
+
+.call_icon {
+	width: 16px;
+	height: 16px;
+	fill: #849e4c;
+}
+
+.email_icon {
+	width: 16px;
+	height: 16px;
+	fill: #ee3425;
+}
+
+.icon_buttons {
+	padding: 4px 16px !important;
+}

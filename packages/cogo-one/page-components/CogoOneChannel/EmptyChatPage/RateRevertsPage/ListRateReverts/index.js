@@ -1,13 +1,13 @@
 import React from 'react';
 
-import dummyData from './dummyData';
+// import dummyData from './dummyData';
 import RateRevertCard from './RateRevertCard';
 import styles from './styles.module.css';
 
-function ListRateReverts() {
+function ListRateReverts({ list = [] }) {
 	return (
 		<div className={styles.container}>
-			{dummyData.map((itm) => (
+			{(list || []).map((itm) => (
 				<RateRevertCard
 					key={itm?.id}
 					cardData={itm}
