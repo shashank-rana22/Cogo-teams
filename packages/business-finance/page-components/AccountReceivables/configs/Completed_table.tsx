@@ -125,10 +125,12 @@ const completedColumn = ({
 		id       : 'checkbox',
 		accessor : (row?: object) => (
 			<CheckboxItem
+				setIsHeaderChecked={setIsHeaderChecked}
 				IRN_GENERATEABLE_STATUSES={IRN_GENERATEABLE_STATUSES}
 				checkedRows={checkedRows}
 				setCheckedRows={setCheckedRows}
 				row={row}
+				totalRows={totalRows}
 			/>
 		),
 	},

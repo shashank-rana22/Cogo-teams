@@ -2,6 +2,7 @@ import { cl, Pagination } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Filters from '../../../commons/Filters/index.tsx';
@@ -220,7 +221,7 @@ function InvoiceTable({
 					</div>
 				)
 				: null}
-			{showFilters ? (
+			{showFilters && !isEmpty(checkedRows) ? (
 				<FooterCard
 					entityCode={entityCode}
 					bulkIrnGenerate={bulkIrnGenerate}
