@@ -18,7 +18,8 @@ const MIN_TICKET_COUNT = 1;
 const WINDOW_VIEW = 20;
 
 const getPayload = ({
-	performerId, pageIndex, agent, searchQuery, category, spectatorType, startDate, endDate, sortBy,
+	performerId, pageIndex, agent, searchQuery, category, spectatorType, startDate, endDate, sortType = '',
+	sortOrder = '',
 }) => ({
 	PerformedByID : performerId,
 	size          : 10,
@@ -27,7 +28,8 @@ const getPayload = ({
 	QFilter       : searchQuery || undefined,
 	Type          : category || undefined,
 	SpectatorType : spectatorType || undefined,
-	SortBy        : sortBy || undefined,
+	SortBy        : sortType || undefined,
+	SortType      : sortOrder || undefined,
 	StartDate     : formatDate({
 		date       : startDate,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
@@ -54,6 +56,7 @@ const useListTickets = ({
 }) => {
 	const { startDate, endDate } = date || {};
 	const { agent, category } = searchParams || {};
+	const { sortOrder = '', sortType = '' } = sortBy || {};
 
 	const { id : performerId = '' } = useSelector((state) => state?.profile?.user);
 
@@ -71,10 +74,19 @@ const useListTickets = ({
 
 	const formattedPayload = useCallback((pageIndex) => {
 		const payload = getPayload({
-			performerId, pageIndex, agent, searchQuery, category, spectatorType, startDate, endDate, sortBy,
+			performerId,
+			pageIndex,
+			agent,
+			searchQuery,
+			category,
+			spectatorType,
+			startDate,
+			endDate,
+			sortType,
+			sortOrder,
 		});
 		return { ...payload, ...(TICKET_SECTION_MAPPING?.[status] || {}) };
-	}, [performerId, agent, searchQuery, category, spectatorType, startDate, endDate, status, sortBy]);
+	}, [performerId, agent, searchQuery, category, spectatorType, startDate, endDate, status, sortType, sortOrder]);
 
 	const fetchTickets = useCallback(async (pageIndex) => {
 		try {

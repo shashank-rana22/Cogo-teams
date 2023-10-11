@@ -48,6 +48,8 @@ function AddMembers({
 		);
 	};
 
+	const teamsAdminFilter = viewType === 'cogoone_admin' ? undefined : getCommonAgentType({ viewType });
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.label}>
@@ -66,9 +68,10 @@ function AddMembers({
 				initialCall
 				params={{
 					filters: {
-						status: 'active',
-						agent_type:
-						viewType === 'cogoone_admin' ? undefined : getCommonAgentType({ viewType }) || undefined,
+						status     : 'active',
+						agent_type : viewType?.includes('admin')
+							? undefined : teamsAdminFilter || undefined,
+						team_admins: !viewType?.includes('admin') ? undefined : [teamsAdminFilter],
 					},
 					sort_by: 'agent_type',
 				}}

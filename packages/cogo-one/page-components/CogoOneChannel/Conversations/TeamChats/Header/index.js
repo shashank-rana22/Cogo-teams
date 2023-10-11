@@ -35,6 +35,7 @@ function Header({
 			<ToUser
 				firestore={firestore}
 				setActiveTab={setActiveTab}
+				viewType={viewType}
 			/>
 		);
 	}

@@ -165,5 +165,8 @@
     "haulage":"Haulage",
     "air_customs": "Air customs",
     "created_at": "Created At",
-    "updated_at": "Updated At"
+    "updated_at": "Updated At",
+    "stakeholders": "Shipment POCs",
+    "missing_id": "Missing Id",
+    "dislike_id": "Dislike Id"
 }

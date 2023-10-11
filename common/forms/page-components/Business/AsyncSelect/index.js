@@ -82,6 +82,17 @@ import {
 	asyncListEnrichmentSources,
 	asyncListIncidentTypes,
 	asyncAllocationEligibleRoles,
+	asyncListFclFreightRate,
+	asyncListLclFreightRate,
+	asyncListAirFreightRate,
+	asyncListFtlFreightRate,
+	asyncListLtlFreightRate,
+	asyncListFclCfsRate,
+	asyncListHaulageFreightRate,
+	asyncListFclCustomsRate,
+	asyncListLclCustomsRate,
+	asyncListAirCustomsRate,
+	asyncListTrailerFreightRate,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -182,6 +193,17 @@ const keyAsyncFieldsParamsMapping = {
 	list_enrichment_sources              : asyncListEnrichmentSources,
 	list_incident_types                  : asyncListIncidentTypes,
 	agent_scoring_eligible_roles         : asyncAllocationEligibleRoles,
+	list_fcl_freight_rate_requests       : asyncListFclFreightRate,
+	list_lcl_freight_rate_requests       : asyncListLclFreightRate,
+	list_air_freight_rate_requests       : asyncListAirFreightRate,
+	list_ftl_freight_rate_requests       : asyncListFtlFreightRate,
+	list_ltl_freight_rate_requests       : asyncListLtlFreightRate,
+	list_fcl_cfs_rate_requests           : asyncListFclCfsRate,
+	list_haulage_freight_rate_requests   : asyncListHaulageFreightRate,
+	list_fcl_customs_rate_requests       : asyncListFclCustomsRate,
+	list_lcl_customs_rate_requests       : asyncListLclCustomsRate,
+	list_air_customs_rate_requests       : asyncListAirCustomsRate,
+	list_trailer_freight_rate_requests   : asyncListTrailerFreightRate,
 };
 
 const SINGLE_ENTITY = 1;

@@ -27,11 +27,12 @@ const useReassignTicket = ({
 	}, { manual: true });
 
 	const reassignTicket = async ({ val, type = '', userData = {} }) => {
-		const { id = '', user_id = '', role_ids = [] } = userData || {};
+		const { id = '', user_id = '', role_ids = [], roleId = '', userId = '' } = userData || {};
 
 		const ADDITIONAL_DATA_MAPPING = {
 			'partner-roles' : { RoleID: id },
 			'partner-users' : { RoleID: role_ids?.[GLOBAL_CONSTANTS.zeroth_index], ReviewerUserID: user_id },
+			stakeholders    : { RoleID: roleId, ReviewerUserID: userId },
 		};
 
 		const additionalData = ADDITIONAL_DATA_MAPPING[type] || { StakeholderType: type };

@@ -1,31 +1,15 @@
-import {
-	asyncListFclFreightRate,
-	asyncListLclFreightRate,
-	asyncListAirFreightRate,
-	asyncListFtlFreightRate,
-	asyncListLtlFreightRate,
-	asyncListFclCfsRate,
-	asyncListHaulageFreightRate,
-	asyncListFclCustomsRate,
-	asyncListLclCustomsRate,
-	asyncListAirCustomsRate,
-	asyncListTrailerFreightRate,
-	asyncListShipments,
-} from '@cogoport/forms';
-
-export const ASYNC_LIST_API = {
-	sid             : asyncListShipments,
-	fcl_freight     : asyncListFclFreightRate,
-	lcl_freight     : asyncListLclFreightRate,
-	air_freight     : asyncListAirFreightRate,
-	ftl_freight     : asyncListFtlFreightRate,
-	ltl_freight     : asyncListLtlFreightRate,
-	fcl_cfs         : asyncListFclCfsRate,
-	haulage_freight : asyncListHaulageFreightRate,
-	fcl_customs     : asyncListFclCustomsRate,
-	lcl_customs     : asyncListLclCustomsRate,
-	air_customs     : asyncListAirCustomsRate,
-	trailer_freight : asyncListTrailerFreightRate,
+export const SERVICE_API_MAPPING = {
+	fcl_freight     : 'list_fcl_freight_rate_requests',
+	lcl_freight     : 'list_lcl_freight_rate_requests',
+	air_freight     : 'list_air_freight_rate_requests',
+	ftl_freight     : 'list_ftl_freight_rate_requests',
+	ltl_freight     : 'list_ltl_freight_rate_requests',
+	fcl_customs     : 'list_fcl_customs_rate_requests',
+	lcl_customs     : 'list_lcl_customs_rate_requests',
+	fcl_cfs         : 'list_fcl_cfs_rate_requests',
+	trailer_freight : 'list_trailer_freight_rate_requests',
+	haulage_freight : 'list_haulage_freight_rate_requests',
+	air_customs     : 'list_air_customs_rate_requests',
 };
 
 export const STATUS_MAPPING = {
@@ -125,7 +109,7 @@ export const PRIORITY_MAPPING = {
 	low    : 'low',
 };
 
-export const REQUIRED_ROLES = ['partner-roles', 'partner-users'];
+export const REQUIRED_ROLES = ['partner-roles', 'partner-users', 'stakeholders'];
 
 export const getSpectatorTypeOptions = ({ t }) => [
 	{ label: t('myTickets:spectator_type_1'), value: 'reviewer' },

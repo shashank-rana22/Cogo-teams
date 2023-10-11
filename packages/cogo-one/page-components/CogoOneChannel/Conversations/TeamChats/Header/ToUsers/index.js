@@ -40,6 +40,8 @@ function ToUser({
 
 	const isEmptyList = isEmpty(users?.userIds);
 
+	const teamsAdminFilter = viewType === 'cogoone_admin' ? undefined : getCommonAgentType({ viewType });
+
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.flex_common}>
@@ -60,8 +62,9 @@ function ToUser({
 						params={{
 							filters: {
 								status     : 'active',
-								agent_type : viewType === 'cogoone_admin'
-									? undefined : getCommonAgentType({ viewType }) || undefined,
+								agent_type : viewType?.includes('admin')
+									? undefined : teamsAdminFilter || undefined,
+								team_admins: !viewType?.includes('admin') ? undefined : [teamsAdminFilter],
 							},
 							sort_by: 'agent_type',
 						}}

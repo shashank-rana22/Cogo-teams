@@ -70,16 +70,16 @@ const getCreateControls = ({
 			value          : 'sid',
 			visible        : true,
 			options        : [
-				{ label: 'SID', value: 'sid' },
-				{ label: 'Missing ID', value: 'missing_id' },
-				{ label: 'Dislike ID', value: 'dislike_id' },
+				{ label: t('myTickets:sid'), value: 'sid' },
+				{ label: t('myTickets:missing_id'), value: 'missing_id' },
+				{ label: t('myTickets:dislike_id'), value: 'dislike_id' },
 			],
 			onChange: () => {
 				setValue('service_type', '');
 			},
 		},
 		{
-			label          : <RenderLabel label={t('myTicket:service_type')} />,
+			label          : <RenderLabel label={t('myTickets:service_type')} />,
 			name           : 'service_type',
 			placeholder    : 'Select service type',
 			controllerType : 'select',
@@ -95,7 +95,7 @@ const getCreateControls = ({
 			label          : <RenderLabel label={t('myTickets:select_sid')} />,
 			placeholder    : t('myTickets:select_sid'),
 			name           : 'serial_id',
-			controllerType : 'select',
+			controllerType : 'asyncSelect',
 			isClearable    : true,
 			rules          : { required: true },
 			onChange       : (_, obj) => {
@@ -108,6 +108,7 @@ const getCreateControls = ({
 			},
 			visible     : true,
 			initialCall : true,
+			valueKey    : 'serial_id',
 		},
 		{
 			label          : <RenderLabel label={t('myTickets:select_service')} />,
