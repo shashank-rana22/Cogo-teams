@@ -43,7 +43,7 @@ const useScoringReports = (props) => {
 		role_data_required       : true,
 		pagination_data_required : false,
 		add_current_user_report  : incentive_leaderboard_viewtype !== ADMIN,
-		add_self_kam_report_data : [OWNER_REPORT, MANAGER_REPORT].includes(getReportTypeFilter({ currLevel })),
+		add_user_kam_report_data : [OWNER_REPORT, MANAGER_REPORT].includes(getReportTypeFilter({ currLevel })),
 		filters                  : {
 			report_view_type        : getReportViewType({ currLevel, isChannel }),
 			report_type             : incentive_leaderboard_viewtype !== ADMIN ? `${view}_report` : undefined,
@@ -62,14 +62,14 @@ const useScoringReports = (props) => {
 		params,
 	}, { manual: false });
 
-	const { list = [], current_user_report: currentUserData } = data || {};
+	const { list = [], current_user_report: currentUserData, report_synced_at: lastUpdatedAt = '' } = data || {};
 
 	useEffect(() => {
 		if (currLevel.report_type !== AGENT_REPORT || (currLevel.isExpanded && isEmpty(currLevel.user))) {
 			setParams((previousParams) => ({
 				...previousParams,
 				is_expanded_view         : (currLevel.isExpanded && isEmpty(currLevel.user)) ? true : undefined,
-				add_self_kam_report_data : [OWNER_REPORT, MANAGER_REPORT].includes(getReportTypeFilter({ currLevel })),
+				add_user_kam_report_data : [OWNER_REPORT, MANAGER_REPORT].includes(getReportTypeFilter({ currLevel })),
 				filters                  : {
 					...(previousParams.filters || {}),
 					report_view_type   : getReportViewType({ currLevel, isChannel }),
@@ -103,6 +103,7 @@ const useScoringReports = (props) => {
 		setParams,
 		debounceQuery,
 		listRefetch : trigger,
+		lastUpdatedAt,
 	};
 };
 

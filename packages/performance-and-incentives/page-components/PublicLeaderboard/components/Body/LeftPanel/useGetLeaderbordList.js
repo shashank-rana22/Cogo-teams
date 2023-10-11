@@ -10,7 +10,7 @@ function useGetLeaderbordList(props) {
 		page_limit               : 8,
 		user_data_required       : true,
 		role_data_required       : true,
-		add_self_kam_report_data : ['owner_wise', 'manager_wise'].includes(view),
+		add_user_kam_report_data : ['owner_wise', 'manager_wise'].includes(view),
 		filters                  : {
 			report_view_type        : view,
 			created_at_greater_than : dateRange?.startDate || undefined,
@@ -30,7 +30,7 @@ function useGetLeaderbordList(props) {
 	useEffect(() => {
 		setParams((previousParams) => ({
 			...previousParams,
-			add_self_kam_report_data : ['owner_wise', 'manager_wise'].includes(view),
+			add_user_kam_report_data : ['owner_wise', 'manager_wise'].includes(view),
 			filters                  : {
 				...(previousParams.filters || {}),
 				report_view_type : view || undefined,
