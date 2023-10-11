@@ -72,26 +72,6 @@ function Header({ jobId = '' }) {
 				setQuotationsData={setQuotationsData}
 			/>
 
-			{/* <div className={styles.custom_accordion}>
-				<div className={styles.accord_title}>
-					<div className={styles.status_card}>
-						<div className={styles.title}>
-							{startCase('Documents')}
-						</div>
-					</div>
-
-					{true ? (
-						<IcMArrowRotateUp
-							className={styles.cursor}
-						/>
-					)
-						: (
-							<IcMArrowRotateDown
-								className={styles.cursor}
-							/>
-						)}
-				</div>
-			</div> */}
 		</div>
 	);
 }
