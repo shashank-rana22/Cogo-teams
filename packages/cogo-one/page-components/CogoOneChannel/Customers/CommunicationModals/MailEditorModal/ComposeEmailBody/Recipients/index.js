@@ -16,10 +16,6 @@ const EMAIL_RECIPIENTS = [
 		label : 'Cc',
 		value : 'ccrecipients',
 	},
-	{
-		label : 'Bcc',
-		value : 'bccrecipients',
-	},
 ];
 
 const ACTIVE_RECIPIENTS_COMP = {
@@ -95,7 +91,7 @@ function Recipients({
 
 						<div className={styles.button_styles}>
 							{itm.value === 'toUserEmail' ? (
-								<>
+								<div>
 									{!enabledRecipients?.ccrecipients && (
 										<Button
 											size="md"
@@ -107,18 +103,7 @@ function Recipients({
 											Cc
 										</Button>
 									)}
-									{!enabledRecipients?.bccrecipients && (
-										<Button
-											size="md"
-											themeType="linkUi"
-											onClick={() => setEnabledRecipients((prev) => (
-												{ ...prev, bccrecipients: true }
-											))}
-										>
-											Bcc
-										</Button>
-									)}
-								</>
+								</div>
 							) : (
 								<Button
 									size="md"

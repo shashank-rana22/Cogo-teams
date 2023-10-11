@@ -17,7 +17,6 @@ const controls = ({
 		placeholder : 'Select Raised To',
 		name        : 'raised_to',
 		type        : 'select',
-		rules       : { required: true },
 		options     : STAKEHOLDER_OPTIONS,
 	},
 	{
