@@ -28,3 +28,8 @@
 		transform: scale(1.1);
 	}
 }
+
+.tooltip_content {
+	font-size: 12px;
+	word-break: keep-all;
+}

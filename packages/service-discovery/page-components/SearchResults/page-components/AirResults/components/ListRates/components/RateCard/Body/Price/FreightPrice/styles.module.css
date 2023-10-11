@@ -6,6 +6,7 @@
 .price_item {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	margin-right: 2rem;
 }
 

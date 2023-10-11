@@ -20,7 +20,14 @@ const MAX_WEIGHT_ALLOWED = 150;
 const getTabWisePrefilledValues = (activeTab, values = {}) => {
 	let formValues = {};
 	if (activeTab === 'cargo_gross') {
-		const { total_quantity = 1, total_volume = 1, total_weight = 1, packing_list, packages = [] } = values || {};
+		const {
+			total_quantity = 1,
+			total_volume = 1,
+			total_weight = 1,
+			packing_list,
+			packages = [],
+			commodity_details = [],
+		} = values || {};
 
 		formValues = {
 			total_quantity : total_quantity || DEFAULT_VALUE,
@@ -28,7 +35,7 @@ const getTabWisePrefilledValues = (activeTab, values = {}) => {
 			total_volume   : total_volume || DEFAULT_VALUE,
 			handling_type  : packages?.[GLOBAL_CONSTANTS.zeroth_index]?.handling_type || 'stackable',
 			packing_type   : packages?.[GLOBAL_CONSTANTS.zeroth_index]?.packing_type || 'box',
-			packing_list,
+			packing_list   : packing_list || commodity_details?.[GLOBAL_CONSTANTS.zeroth_index]?.packing_list,
 		};
 	}
 
