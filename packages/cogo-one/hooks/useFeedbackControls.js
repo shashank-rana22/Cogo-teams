@@ -31,6 +31,7 @@ const useFeedbackControls = ({
 			RequestType : 'feedback',
 			Audience    : 'cogoone_demand',
 			Category    : watchCategory || undefined,
+			size        : 100,
 		},
 	});
 

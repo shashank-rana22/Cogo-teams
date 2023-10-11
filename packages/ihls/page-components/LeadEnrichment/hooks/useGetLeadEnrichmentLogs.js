@@ -1,11 +1,11 @@
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useGetLeadEnrichmentLogs = ({ lead_id = null }) => {
+const useGetLeadEnrichmentLogs = ({ leadId }) => {
 	const [params, setParams] = useState({
 		page_limit               : 10,
 		page                     : 1,
-		allocation_lead_id       : lead_id,
+		allocation_lead_id       : leadId,
 		pagination_data_required : true,
 	});
 

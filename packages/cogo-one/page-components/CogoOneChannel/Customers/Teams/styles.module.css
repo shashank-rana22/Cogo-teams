@@ -1,0 +1,31 @@
+.header {
+	padding: 6px 0;
+}
+
+.list_container {
+	height: calc(100% - 44px);
+	padding: 6px 10px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	transition: height 0.5s ease;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.recent_text {
+	font-size: 10px;
+	font-weight: 600;
+	color: #828282;
+	user-select: none;
+}
+
+.pinned_chats_div {
+	margin-bottom: 10px;
+	border-bottom: 0.5px solid #b0b0b0;
+}
+
+.container {
+	height: calc(100% - 100px);
+}

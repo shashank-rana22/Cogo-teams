@@ -170,14 +170,15 @@ function ServiceCard({ outstandingData = {}, outstandingLoading = false, entityC
 														>
 															<div className={styles.wrapper}>
 																{formatAmount({
-																	amount   : item.amount as any,
-																	currency : item.currency,
+																	amount   : item?.amount as any,
+																	currency : item?.currency,
 																	options  : {
 																		notation              : 'compact',
 																		compactDisplay        : 'short',
 																		maximumFractionDigits : 2,
 																		style                 : 'currency',
 																		currencyDisplay       : 'code',
+																		currencyWise          : true,
 																	},
 																})}
 															</div>
@@ -258,6 +259,7 @@ function ServiceCard({ outstandingData = {}, outstandingLoading = false, entityC
 												maximumFractionDigits : 2,
 												style                 : 'currency',
 												currencyDisplay       : 'code',
+												currencyWise          : true,
 											},
 										})}
 									</div>

@@ -9,7 +9,7 @@ const useGetFields = ({
 		value : `${obj.container_number}:${obj.id}`,
 	}));
 
-	const mutatedFields = [];
+	const MUTATED_FIELDS = [];
 
 	(data || []).forEach((bl) => {
 		const obj = {
@@ -17,11 +17,11 @@ const useGetFields = ({
 			bl_id     : bl?.id,
 			options,
 		};
-		mutatedFields.push(obj);
+		MUTATED_FIELDS.push(obj);
 	});
 
 	const defaultValues = {
-		bl_mappings: mutatedFields.map((field) => ({
+		bl_mappings: MUTATED_FIELDS.map((field) => ({
 			bl_number : field.bl_number,
 			bl_id     : field.bl_id,
 		})),
@@ -34,7 +34,7 @@ const useGetFields = ({
 		errors,
 		register,
 		handleSubmit,
-		mutatedFields,
+		mutatedFields: MUTATED_FIELDS,
 	};
 };
 

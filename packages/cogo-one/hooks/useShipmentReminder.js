@@ -50,7 +50,7 @@ function useShipmentReminder({
 				}, timer);
 			});
 		} catch (e) {
-			console.log('e:', e);
+			console.error('e:', e);
 		}
 	}, [agentId, firestore, getAgentShipmentsCount]);
 

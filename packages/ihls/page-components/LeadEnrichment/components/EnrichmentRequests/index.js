@@ -1,5 +1,5 @@
 import { Button, Pagination } from '@cogoport/components';
-import { IcMDown, IcMUndo } from '@cogoport/icons-react';
+import { IcMDown, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -63,6 +63,7 @@ function EnrichmentRequests() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.template}>
+				<div>Requests List</div>
 				<Button
 					loading={templateLoading}
 					className="primary"
@@ -117,7 +118,7 @@ function EnrichmentRequests() {
 						disabled={loading}
 						className={styles.icmUndo}
 					>
-						<IcMUndo style={{ width: '16px', height: 'auto' }} />
+						<IcMRefresh style={{ width: '16px', height: 'auto' }} />
 					</Button>
 				</div>
 			</div>

@@ -73,6 +73,10 @@ function DailySalesOutstanding({
 		newArray = [currentMonth1];
 	}
 
+	if (newArray.includes('SEP')) {
+		newArray.push('SEPT');
+	}
+
 	(dailySalesOutstandingData || []).forEach((element) => {
 		if (newArray.includes(element?.month)) {
 			ARRAY_MONTHS.push(element);
