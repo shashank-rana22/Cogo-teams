@@ -841,6 +841,7 @@ const GLOBAL_CONSTANTS = {
 
 	default_preferred_language : 'english',
 	supplier_entity_mapping    : supplierEntityMapping.shippingCompanies,
+	cogopor_care_user_id       : '413eb04c-037b-44cd-b68c-ce4fc277c156',
 };
 
 export default GLOBAL_CONSTANTS;

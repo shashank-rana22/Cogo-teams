@@ -17,6 +17,7 @@ const getParams = ({ pagination, serialId, shipmentType = '', dateFilters = {} }
 			shipment_type           : shipmentType || undefined,
 			created_at_greater_than : !serialId ? start_date : undefined,
 			created_at_less_than    : !serialId ? end_date : undefined,
+			// sales_agent_id          : '413eb04c-037b-44cd-b68c-ce4fc277c156',
 		},
 		get_shipment_quotation_data  : true,
 		milestone_data_required      : true,
