@@ -1,3 +1,11 @@
+.filter_container {
+	:global {
+		.ui_input_container {
+			width: 300px;
+		}
+	}
+}
+
 .title_container {
 	font-size: 24px;
 	font-weight: 500;

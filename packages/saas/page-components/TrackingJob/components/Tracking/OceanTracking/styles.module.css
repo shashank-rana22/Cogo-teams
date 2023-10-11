@@ -13,4 +13,10 @@
 .filter_container {
 	display: flex;
 	justify-content: space-between;
+
+	:global {
+		.ui_popover_container {
+			max-width: 300px !important;
+		}
+	}
 }

@@ -10,7 +10,7 @@ const COLOR_MAPPING = {
 	completed     : '#CDF7D4',
 	cargo_dropped : '#CDF7D4',
 };
-export const columns = ({
+const getColumns = ({
 	handleShowModal = () => {},
 	setFilters = () => {},
 	filters = {},
@@ -19,24 +19,23 @@ export const columns = ({
 
 		Header   : <p>SERIAL ID</p>,
 		accessor : (item) => (
-			<div>
-				{item?.serial_id ? (
-					<p className="serialId">
-						{`${item?.serial_id}`}
-					</p>
-				) : (
-					''
-				)}
-			</div>
+			item?.serial_id ? (
+				<b>
+					{`${item?.serial_id}`}
+				</b>
+			) : (
+				'-'
+			)
+
 		),
 		id: 'serial_id',
 	},
 	{
 		Header   : <p>Truck No./LR NO</p>,
 		accessor : (item) => (
-			<p>
-				{`${item?.truck_number}`}
-			</p>
+			<Pill>
+				<b>{`${item?.truck_number}`}</b>
+			</Pill>
 		),
 		id: 'truck_no',
 	},
@@ -100,3 +99,5 @@ export const columns = ({
 
 	},
 ];
+
+export default getColumns;

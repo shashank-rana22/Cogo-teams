@@ -1,13 +1,13 @@
-import { Table, Modal, TabPanel, Popover, Tabs, Button, Loader } from '@cogoport/components';
+import { Table, Modal, TabPanel, Popover, Tabs, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 
 import EmptyState from '../../../common/EmptyState';
 import ListPagination from '../../../common/ListPagination';
-import { columns } from '../../../config/ocean-tracking-columns';
-import useGetContainerData from '../../../hooks/useGetContainerData';
-import useGetOceanTrackingList from '../../../hooks/useGetOceanTrackingList';
+import getColumns from '../../../config/ocean-tracking-columns';
+import useListUntrackedContainers from '../../../hooks/useListUntrackedContainers';
+import useUpdateContainerAndBlMiles from '../../../hooks/useUpdateContainerAndBlMiles';
 import Filters from '../../Filter';
 import SearchFilters from '../../Filter/Search/search';
 import Form from '../../Forms/FormOcean/index';
@@ -16,6 +16,8 @@ import styles from './styles.module.css';
 import TrackerDetails from './TrackerDetails';
 
 function OceanTracking() {
+	const formRef = useRef(null);
+
 	const {
 		data,
 		loading,
@@ -26,28 +28,31 @@ function OceanTracking() {
 		setSearchString,
 		setSerialId,
 		refetch,
-	} = useGetOceanTrackingList();
+	} = useListUntrackedContainers();
 
+	const [filterVisible, setFilterVisible] = useState(false);
 	const [showUpdate, setShowUpdate] = useState({ show: false, data: {} });
 	const [activeTab, setActiveTab] = useState('add_location');
-	const handleShowModal = (item) => {
-		setShowUpdate({ show: true, data: item?.data });
-	};
+
+	const handleShowModal = (item) => setShowUpdate({ show: true, data: item?.data });
+
 	const handleCloseModal = () => {
 		setShowUpdate({ show: false, data: {} });
 	};
-	const column = columns({
+
+	const columns = useMemo(() => getColumns({
 		handleShowModal,
 		filters,
 		setFilters,
-	});
-	const formRef = useRef(null);
-	const { apiTrigger, createLoading } = useGetContainerData({
+	}), [setFilters, filters]);
+
+	const { apiTrigger, createLoading } = useUpdateContainerAndBlMiles({
 		refetch: () => {
 			setShowUpdate({ show: false, data: {} });
 			refetch();
 		},
 	});
+
 	const onSubmit = () => {
 		formRef.current.formSubmit();
 	};
@@ -69,17 +74,20 @@ function OceanTracking() {
 					setSerialId={setSerialId}
 				/>
 				<Popover
-					placement="right"
+					placement="bottom"
 					theme="light"
-					interactive
-					content={(
+					visible={filterVisible}
+					onClickOutside={() => setFilterVisible(false)}
+					content={filterVisible ? (
 						<Filters
 							filters={filters}
 							setFilters={setFilters}
+							setShow={setFilterVisible}
+							show={filterVisible}
 						/>
-					)}
+					) : null}
 				>
-					<Button themeType="secondary" size="lg">
+					<Button themeType="secondary" size="md" onClick={() => setFilterVisible(!filterVisible)}>
 						<IcMFilter />
 						{' '}
 						FILTERS
@@ -88,20 +96,19 @@ function OceanTracking() {
 
 			</div>
 			<ListPagination filters={filters} setFilters={setFilters} data={data} />
-			{!loading && isEmpty(data?.list)
-				? <EmptyState /> : null}
 
-			{loading
-				? <Loader className={styles.loader} />
-				: null}
-			{!loading
-			&& !isEmpty(data?.list)
-				? <Table columns={column} data={data?.list || []} loading={loading} className={styles.table} /> : null}
+			<Table columns={columns || []} data={data?.list || []} loading={loading} className={styles.table} />
+
+			{!loading && isEmpty(data?.list) ? <EmptyState /> : null}
+
+			<ListPagination filters={filters} setFilters={setFilters} data={data} />
+
 			<Modal
 				show={showUpdate.show}
-				onClose={() => handleCloseModal()}
-				onOuterClick={() => handleCloseModal()}
-				size="lg"
+				onClose={handleCloseModal}
+				onOuterClick={handleCloseModal}
+				placement="top"
+				size="xl"
 			>
 				<Modal.Header title={`Search Value. -
 				${showUpdate?.data?.search_value}`}
@@ -131,8 +138,7 @@ function OceanTracking() {
 
 				</Modal.Body>
 				<Modal.Footer>
-					{
-					activeTab === 'add_location' ? (
+					{activeTab === 'add_location' ? (
 						<Button
 							className={styles.btn_align}
 							onClick={onSubmit}
@@ -141,12 +147,11 @@ function OceanTracking() {
 							Submit
 						</Button>
 					) :	(
-						<Button onClick={() => handleCloseModal()}>Close</Button>
-					)
-				}
+						<Button onClick={handleCloseModal}>Close</Button>
+					)}
 				</Modal.Footer>
 			</Modal>
-			<ListPagination filters={filters} setFilters={setFilters} data={data} />
+
 		</div>
 	);
 }

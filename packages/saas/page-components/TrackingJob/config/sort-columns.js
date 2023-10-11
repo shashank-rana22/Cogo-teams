@@ -12,7 +12,7 @@ function SortColumns({ filters = {}, setFilters = () => {}, sortType = '' }) {
 	return (
 		<p>
 			{sortType === 'created_at' ? (
-				<span>
+				<div className={styles.center}>
 					Created At
 					{' '}
 					{(isAscending && filters.sort_by !== 'updated_at') ? (
@@ -26,6 +26,7 @@ function SortColumns({ filters = {}, setFilters = () => {}, sortType = '' }) {
 							}}
 						/>
 					) : null}
+
 					{(isDescending || filters.sort_by === 'updated_at') ? (
 						<IcMArrowRotateDown
 							onClick={() => handleSorting('created_at', 'asc')}
@@ -37,10 +38,11 @@ function SortColumns({ filters = {}, setFilters = () => {}, sortType = '' }) {
 							}}
 						/>
 					) : null}
-				</span>
+				</div>
 			) : null}
+
 			{sortType === 'updated_at' ? (
-				<span>
+				<div className={styles.center}>
 					Updated At
 					{' '}
 					{(isAscending && filters.sort_by !== 'created_at') ? (
@@ -65,7 +67,7 @@ function SortColumns({ filters = {}, setFilters = () => {}, sortType = '' }) {
 							}}
 						/>
 					) : null}
-				</span>
+				</div>
 			) : null}
 		</p>
 	);

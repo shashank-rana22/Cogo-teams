@@ -4,11 +4,11 @@ import { useRequest } from '@cogoport/request';
 import getOceanFormatterValues from '../helpers/getOceanFormattedValue';
 import toastApiError from '../utlis/toastApiError';
 
-const useGetContainerData = ({ refetch }) => {
+const useUpdateContainerAndBlMiles = ({ refetch }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_container_and_bl_milestones',
-	});
+	}, { manual: true });
 	const apiTrigger = async ({ values = {}, showUpdate }) => {
 		try {
 			const formatPayload = getOceanFormatterValues(values);
@@ -32,4 +32,4 @@ const useGetContainerData = ({ refetch }) => {
 	};
 };
 
-export default useGetContainerData;
+export default useUpdateContainerAndBlMiles;

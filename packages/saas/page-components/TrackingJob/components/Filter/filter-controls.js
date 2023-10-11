@@ -13,8 +13,11 @@ const control = [
 		type        : 'multi_select',
 		clearable   : true,
 		placeholder : 'Select Tags',
+		label       : 'Select Tags',
+		isClearable : true,
 		options     : OPTIONS,
 		span        : 12,
+		size        : 'sm',
 	},
 	{
 		name        : 'shipping_line_id',
@@ -22,8 +25,11 @@ const control = [
 		clearable   : true,
 		placeholder : 'Shipping Line',
 		asyncKey    : 'list_operators',
+		label       : 'Select Shipping Line',
 		multiple    : true,
 		span        : 12,
+		isClearable : true,
+		size        : 'sm',
 		params      : {
 			filters: {
 				status        : 'active',

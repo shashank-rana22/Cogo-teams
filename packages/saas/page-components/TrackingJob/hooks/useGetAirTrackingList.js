@@ -8,17 +8,19 @@ const useGetAirTrackingList = () => {
 	const [filters, setFilters] = useState({ page: 1, sort_by: 'updated_at', sort_type: 'desc' });
 	const [searchString, setSearchString] = useState('');
 	const [serialId, setSerialId] = useState('');
+	const [apiData, setApiData] = useState({});
 
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_untracked_air_shipments',
-	});
+	}, { manual: true });
 
 	const { query = '', debounceQuery } = useDebounceQuery();
+
 	const { serialIdQuery = '', serialDebounceQuery = debounceQuery } = useDebounceQuery();
 	const refetch = useCallback(async () => {
 		try {
-			await trigger({
+			const res = await trigger({
 				params: {
 					filters: {
 						...filters,
@@ -30,7 +32,10 @@ const useGetAirTrackingList = () => {
 					sort_by   : filters?.sort_by,
 				},
 			});
+
+			setApiData(res?.data);
 		} catch (err) {
+			setApiData({});
 			toastApiError(err);
 		}
 	}, [filters, query, trigger, serialIdQuery]);
@@ -43,7 +48,7 @@ const useGetAirTrackingList = () => {
 	}, [refetch]);
 
 	return {
-		data,
+		data: apiData,
 		filters,
 		setFilters,
 		loading,

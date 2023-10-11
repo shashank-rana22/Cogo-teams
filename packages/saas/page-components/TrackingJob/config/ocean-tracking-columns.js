@@ -1,79 +1,76 @@
 import { Button, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { Image } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 
 import SortColumns from './sort-columns';
 import styles from './styles.module.css';
 
-const FIRST_INDEX = 1;
 const COLOR_MAPPING = {
-	track_new       : '#CDF7D4',
-	update_required : '#FFF4D0',
-	seen            : '#caf0f8',
+	track_new: {
+		color : '#CDF7D4',
+		label : 'New',
+	},
+	update_required: {
+		color : '#FFF4D0',
+		label : 'Update',
+	},
+	Seen: {
+		color : '#caf0f8',
+		label : 'Seen',
+	},
+
 };
 
-export const columns = ({
+const getColumns = ({
 	handleShowModal = () => {},
 	setFilters = () => {},
 	filters = {},
 }) => [
 	{
-		Header   : <p>SERIAL ID</p>,
+		Header   : <p>Serial ID</p>,
 		accessor : ({ data = {} }) => (
-			<div>
-				{`#${data?.serial_id}`}
-			</div>
+			data?.serial_id ? (
+				<b>
+					{`#${data?.serial_id}`}
+				</b>
+			) : '--'
+
 		),
 		id: 'serial_id',
 	},
 	{
-		Header   : <p>CONTAINER NO./BL NO</p>,
+		Header   : <p>Container No. / BL No.</p>,
 		accessor : ({ data = {} }) => {
 			const { tags = [] } = data;
 
 			const totalFunctionPills = tags?.length;
-			if (totalFunctionPills <= FIRST_INDEX) {
-				(tags || [])?.map((items) => (
-					<Pill
-						key={items}
-						className={styles.function_head}
-						color="red"
-					>
-						{items}
-					</Pill>
-				));
-			}
 
-			const renderTooltip = tags?.slice(FIRST_INDEX)?.map((itemd) => (
-				<Pill
-					key={itemd}
-					className={styles.function_head}
-					color="red"
-				>
-					{itemd}
+			const renderTooltip = () => tags?.slice(2)?.map((tag) => (
+				<Pill key={tag}>
+					{startCase(tag)}
 				</Pill>
 			));
 
 			return (
 				<section>
-					<p>{`#${data?.search_value}`}</p>
+					<strong>{`#${data?.search_value}`}</strong>
 					<div className={styles.sub_functions_container}>
-						{tags[GLOBAL_CONSTANTS.zeroth_index] ? (
-							<Pill className={styles.function_head} color="red">
-								{tags && tags[GLOBAL_CONSTANTS.zeroth_index]}
-							</Pill>
-						) : null}
 
-						{totalFunctionPills > FIRST_INDEX ? (
-							<Tooltip content={renderTooltip} placement="top">
-								<strong>
-									(+
-									{totalFunctionPills - FIRST_INDEX}
-									)
-								</strong>
+						{(tags || []).slice(0, 2)?.map((tag) => (
+							<Pill key={tag}>
+								{startCase(tag)}
+							</Pill>
+						))}
+
+						{totalFunctionPills > 2 ? (
+							<Tooltip content={renderTooltip()} placement="top">
+								<Button size="sm" themeType="linkUi">
+									{`+${totalFunctionPills - 2} More`}
+								</Button>
 							</Tooltip>
 						) : null}
-
 					</div>
 				</section>
 			);
@@ -82,15 +79,17 @@ export const columns = ({
 	},
 	{
 		id       : 'company_logo',
-		Header   : <p className="shippingline">SHIPPING LINE</p>,
+		Header   : 'Shipping Line',
 		accessor : (item) => (
 			<div className={styles.shipping_line_data}>
-				{item?.shipping_line?.logo_url && (
-					<img
-						src={item?.shipping_line?.logo_url}
+				{item?.shipping_line?.logo_url ? (
+					<Image
+						src={`${item?.shipping_line?.logo_url}`}
 						alt=""
+						height={40}
+						width={40}
 					/>
-				)}
+				) : null}
 				<div className="title">{item?.shipping_line?.short_name}</div>
 			</div>
 		),
@@ -101,13 +100,12 @@ export const columns = ({
 			<SortColumns filters={filters} setFilters={setFilters} sortType="created_at" />
 		),
 		accessor: (item) => (
-			<p>
-				{formatDate({
-					date       : item?.data?.created_at,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
-					formatType : 'date',
-				})}
-			</p>
+			formatDate({
+				date       : item?.data?.created_at,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+				formatType : 'date',
+			})
+
 		),
 	},
 	{
@@ -116,60 +114,41 @@ export const columns = ({
 			<SortColumns filters={filters} setFilters={setFilters} sortType="updated_at" />
 		),
 		accessor: (item) => (
-			<div>
-				<p>
-					{formatDate({
-						date       : item?.data?.updated_at,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
-						formatType : 'date',
-					})}
-				</p>
-			</div>
+			formatDate({
+				date       : item?.data?.updated_at,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+				formatType : 'date',
+			})
 		),
 	},
 	{
 		id       : 'container_update',
-		Header   : <p>ACTIONS</p>,
+		Header   : <p>Actions</p>,
 		accessor : (item) => (
 			<Button onClick={() => handleShowModal(item)} size="sm">
-				update
+				Update
 			</Button>
 		),
 	},
 	{
-		Header   : <p>LAST UPDATED BY</p>,
+		Header   : <p>Last Updated By</p>,
 		accessor : (item) => <span>{item?.performed_by?.name}</span>,
 		id       : 'last_updated_by',
 	},
 	{
-		Header   : <p>STATUS</p>,
+		Header   : <p>Status</p>,
 		accessor : (item) => {
-			let action = '';
-			if (item?.data?.action) {
-				action = (
-					<div>
-						{item?.data?.action === 'track_new' ? (
-							<Pill color={COLOR_MAPPING[item?.data?.action]}> New</Pill>
+			const action = item?.data?.action;
 
-						) : (
-							''
-						)}
-						{item?.data?.action === 'update_required' ? (
-							<Pill color={COLOR_MAPPING[item?.data?.action]}>Update</Pill>
-						) : (
-							''
-						)}
-						{item?.data?.action === 'seen' ? (
-							<Pill color={COLOR_MAPPING[item?.data?.action]}>Seen</Pill>
-						) : (
-							''
-						)}
-					</div>
-				);
-			}
-			return <span>{action}</span>;
+			return action in COLOR_MAPPING ? (
+				<Pill color={COLOR_MAPPING[action]?.color}>
+					{COLOR_MAPPING[action]?.label}
+				</Pill>
+			) : action;
 		},
 
 		id: 'actions',
 	},
 ];
+
+export default getColumns;

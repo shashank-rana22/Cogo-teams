@@ -4,57 +4,53 @@ import { useEffect, useState, useCallback } from 'react';
 
 import toastApiError from '../utlis/toastApiError';
 
-const useGetOceanTrackingList = () => {
-	const [filters, setFilters] = useState({ page: 1, sort_by: 'updated_at', sort_type: 'desc' });
+const useListSaasSurfaceShipmentDetails = () => {
+	const [params, setParams] = useState({ page: 1, sort_by: 'updated_at', sort_type: 'desc' });
 	const [searchString, setSearchString] = useState('');
 	const [serialId, setSerialId] = useState('');
 
+	const { query = '', debounceQuery } = useDebounceQuery();
+	const { query:serialIdQuery = '', debounceQuery:serialDebounceQuery } = useDebounceQuery();
+
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : '/list_untracked_containers',
-	});
-
-	const { query = '', debounceQuery } = useDebounceQuery();
-	const { serialIdQuery = '', serialDebounceQuery = debounceQuery } = useDebounceQuery();
+		url    : '/list_saas_surface_shipment_details',
+		params : {
+			filters: {
+				serial_id    : serialIdQuery || undefined,
+				truck_number : query || undefined,
+			},
+			...params,
+		},
+	}, { manual: true });
 
 	const refetch = useCallback(async () => {
 		try {
-			await trigger({
-				params: {
-					filters: {
-						...filters,
-						q         : query || undefined,
-						serial_id : serialIdQuery,
-					},
-					page      : filters?.page,
-					sort_type : filters?.sort_type,
-					sort_by   : filters?.sort_by,
-				},
-			});
+			await trigger();
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [filters, query, trigger, serialIdQuery]);
+	}, [trigger]);
 
 	useEffect(() => debounceQuery(searchString), [searchString, debounceQuery]);
+
 	useEffect(() => serialDebounceQuery(serialId), [serialId, serialDebounceQuery]);
 
 	useEffect(() => {
 		refetch();
-	}, [refetch]);
+	}, [refetch, params, query, serialIdQuery]);
 
 	return {
 		data,
-		filters,
-		setFilters,
+		filters    : params,
+		setFilters : setParams,
 		loading,
 		searchString,
 		setSearchString,
 		serialId,
 		setSerialId,
-		trigger,
 		refetch,
 	};
 };
 
-export default useGetOceanTrackingList;
+export default useListSaasSurfaceShipmentDetails;

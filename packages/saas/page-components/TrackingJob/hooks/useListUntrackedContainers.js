@@ -4,43 +4,48 @@ import { useEffect, useState, useCallback } from 'react';
 
 import toastApiError from '../utlis/toastApiError';
 
-const useGetSurfaceTrackingList = () => {
+const useListUntrackedContainers = () => {
 	const [filters, setFilters] = useState({ page: 1, sort_by: 'updated_at', sort_type: 'desc' });
+
 	const [searchString, setSearchString] = useState('');
+
 	const [serialId, setSerialId] = useState('');
+
+	const { query = '', debounceQuery } = useDebounceQuery();
+
+	const { query:serialIdQuery = '', debounceQuery:serialDebounceQuery } = useDebounceQuery();
+
+	const { page, sort_by, sort_type, ...restFilters } = filters;
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : '/list_saas_surface_shipment_details',
-	});
-	const { query = '', debounceQuery } = useDebounceQuery();
-	const { serialIdQuery = '', serialDebounceQuery = debounceQuery } = useDebounceQuery();
+		url    : '/list_untracked_containers',
+		params : {
+			filters: {
+				...restFilters,
+				q         : query || undefined,
+				serial_id : serialIdQuery || undefined,
+			},
+			page,
+			sort_type,
+			sort_by,
+		},
+	}, { manual: true });
 
 	const refetch = useCallback(async () => {
 		try {
-			await trigger({
-				params: {
-					filters: {
-						...filters,
-						serial_id    : serialIdQuery,
-						truck_number : query || undefined,
-					},
-					page      : filters?.page,
-					sort_type : filters?.sort_type,
-					sort_by   : filters?.sort_by,
-				},
-			});
+			await trigger();
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [filters, query, trigger, serialIdQuery]);
+	}, [trigger]);
 
 	useEffect(() => debounceQuery(searchString), [searchString, debounceQuery]);
 	useEffect(() => serialDebounceQuery(serialId), [serialId, serialDebounceQuery]);
 
 	useEffect(() => {
 		refetch();
-	}, [refetch]);
+	}, [refetch, serialIdQuery, query, filters]);
 
 	return {
 		data,
@@ -51,9 +56,8 @@ const useGetSurfaceTrackingList = () => {
 		setSearchString,
 		serialId,
 		setSerialId,
-		trigger,
 		refetch,
 	};
 };
 
-export default useGetSurfaceTrackingList;
+export default useListUntrackedContainers;

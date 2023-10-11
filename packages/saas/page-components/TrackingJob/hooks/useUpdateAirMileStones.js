@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 import getFormatterValues from '../helpers/getFormattedValue';
 import toastApiError from '../utlis/toastApiError';
 
-const useGetAirData = ({ refetch }) => {
+const useUpdateAirMileStones = ({ refetch }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_air_milestones',
@@ -33,4 +33,4 @@ const useGetAirData = ({ refetch }) => {
 	};
 };
 
-export default useGetAirData;
+export default useUpdateAirMileStones;

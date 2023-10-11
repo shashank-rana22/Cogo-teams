@@ -1,11 +1,11 @@
-import { Modal, Table, Button, Loader } from '@cogoport/components';
+import { Modal, Table, Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import EmptyState from '../../../common/EmptyState';
 import ListPagination from '../../../common/ListPagination';
-import { columns } from '../../../config/truck-tracking-columns';
-import useGetSurfaceTrackingList from '../../../hooks/useGetSurfaceTrackingList';
+import getColumns from '../../../config/truck-tracking-columns';
+import useListSaasSurfaceShipmentDetails from '../../../hooks/useListSaasSurfaceShipmentDetails';
 import SearchFilters from '../../Filter/Search/search';
 
 import styles from './styles.module.css';
@@ -22,7 +22,8 @@ function TruckTracking() {
 		setSearchString,
 		setSerialId,
 		refetch,
-	} = useGetSurfaceTrackingList();
+	} = useListSaasSurfaceShipmentDetails();
+
 	const [showUpdate, setShowUpdate] = useState({ show: false, data: {} });
 
 	const handleShowModal = (item) => {
@@ -32,11 +33,12 @@ function TruckTracking() {
 	const handleCloseModal = () => {
 		setShowUpdate({ show: false, data: {} });
 	};
-	const column = columns({
+
+	const columns = useMemo(() => getColumns({
 		handleShowModal,
 		filters,
 		setFilters,
-	});
+	}), [filters, setFilters]);
 
 	return (
 		<div>
@@ -49,16 +51,16 @@ function TruckTracking() {
 				setFilters={setFilters}
 				setSerialId={setSerialId}
 			/>
+
 			<ListPagination filters={filters} setFilters={setFilters} data={data} />
+
+			<Table columns={columns} data={data?.list || []} loading={loading} className={styles.table} />
+
 			{!loading && isEmpty(data?.list)
 				? <EmptyState /> : null}
 
-			{loading
-				? <Loader className={styles.loader} />
-				: null}
-			{!loading
-			&& !isEmpty(data?.list)
-				? <Table columns={column} data={data?.list || []} loading={loading} className={styles.table} /> : null}
+			<ListPagination filters={filters} setFilters={setFilters} data={data} />
+
 			<Modal
 				show={showUpdate.show}
 				onClose={() => handleCloseModal()}
@@ -76,7 +78,7 @@ function TruckTracking() {
 					<Button onClick={() => handleCloseModal()}>Close</Button>
 				</Modal.Footer>
 			</Modal>
-			<ListPagination filters={filters} setFilters={setFilters} data={data} />
+
 		</div>
 	);
 }
