@@ -1,9 +1,11 @@
 import { cl, Pagination } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
 import Filters from '../../../commons/Filters/index.tsx';
+import InvoiceJourney from '../../components/Dashboard/InvoiceJourney';
 import completedColumn from '../../configs/Completed_table.tsx';
 import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate.ts';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard.ts';
@@ -39,6 +41,8 @@ function InvoiceTable({
 	showFilters = true,
 	limit = 10,
 }) {
+	const { query } = useRouter();
+	const { partner_id } = query || {};
 	const { profile } = useSelector((state) => state);
 	const [checkedRows, setCheckedRows] = useState([]);
 	const [isHeaderChecked, setIsHeaderChecked] = useState(false);
@@ -132,6 +136,7 @@ function InvoiceTable({
 		isHeaderChecked,
 		setIsHeaderChecked,
 		showFilters,
+		partner_id,
 	});
 
 	const columnsFiltered = showFilters
@@ -140,6 +145,7 @@ function InvoiceTable({
 
 	return (
 		<div>
+			<InvoiceJourney entityCode={entityCode} />
 			{showFilters ? (
 				<div className={styles.filter_container}>
 					<div className={styles.filter_div}>
