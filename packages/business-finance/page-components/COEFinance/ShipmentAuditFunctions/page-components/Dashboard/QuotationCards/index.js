@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import useListShipment from '../../../../hook/useListShipment.ts';
 import DetailsCard from '../DetailsCard';
 import DocumentsCard from '../DocumentsCard';
+import TicketsCard from '../TicketsCard/index';
 
 import FinanceClosedCardsSet from './FinanceClosedCardsSet';
 import OperationClosedCardsSet from './OperationClosedCardsSet';
@@ -23,11 +24,13 @@ function QuotationCards({
 	const [tab, setTab] = useState({
 		shipmentDetailsTab : true,
 		documentsTab       : false,
+		ticketsTab         : false,
 	});
 
 	const [checkItem, setCheckItem] = useState({
 		shipmentDetailCheck  : false,
 		documentDetailsCheck : false,
+		ticketDetailsCheck   : false,
 	});
 
 	const onTabClick = ({ tabName = '' }) => {
@@ -57,6 +60,13 @@ function QuotationCards({
 			/>
 
 			<DocumentsCard
+				shipmentId={shipmentId}
+				onTabClick={onTabClick}
+				loadingShipment={loadingShipment}
+				tab={tab}
+			/>
+
+			<TicketsCard
 				shipmentId={shipmentId}
 				onTabClick={onTabClick}
 				loadingShipment={loadingShipment}
