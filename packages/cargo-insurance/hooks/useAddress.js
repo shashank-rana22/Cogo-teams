@@ -37,9 +37,11 @@ function useAddress({ billingType, orgId = '' }) {
 	};
 
 	useEffect(() => {
-		getBillingAddress();
+		if (orgId) {
+			getBillingAddress();
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [billingType]);
+	}, [billingType, orgId]);
 
 	return {
 		addressData, loading, setAddressData,

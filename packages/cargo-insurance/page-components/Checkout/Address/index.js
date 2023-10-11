@@ -1,5 +1,5 @@
 import { Button, Toggle, cl } from '@cogoport/components';
-import { IcMArrowRight, IcMPlusInCircle } from '@cogoport/icons-react';
+import { IcCVerySad, IcMArrowRight, IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState, useImperativeHandle, forwardRef } from 'react';
@@ -64,6 +64,13 @@ function Address({ billingType, setBillingType, orgId = '' }, ref) {
 					) : null}
 				</div>
 			</div>
+
+			{isEmpty(mainAddress) ? (
+				<div className={styles.empty_state}>
+					<IcCVerySad width={30} height={30} />
+					<h2>No Address Found</h2>
+				</div>
+			) : null}
 
 			<div className={styles.flex_box}>
 				{(mainAddress || []).map((ele, index) => (

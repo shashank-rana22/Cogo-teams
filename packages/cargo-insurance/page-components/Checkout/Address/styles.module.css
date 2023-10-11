@@ -25,3 +25,16 @@
 .btn_text {
 	margin: 0 5px;
 }
+
+.empty_state {
+	display: flex;
+	align-items: center;
+	padding: 30px;
+	background-color: #f7f7f7;
+	border: 1px dashed #b1b1b1;
+	border-radius: 10px;
+
+	>h2 {
+		margin: 0 0 0 10px;
+	}
+}
