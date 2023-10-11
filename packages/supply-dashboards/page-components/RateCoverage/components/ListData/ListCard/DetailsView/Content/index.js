@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCopy } from '@cogoport/icons-react';
@@ -10,6 +10,7 @@ import copyToClipboard from '../../../../../utilis/copyToClipboard';
 
 import styles from './styles.module.css';
 
+const LOADER_COUNT = 3;
 function ServiceDetailsContent({
 	shipmemnt_data = {}, data = {}, requestData = {},
 	feedbackData = {}, shipment_loading = false,
@@ -96,8 +97,20 @@ function ServiceDetailsContent({
 	];
 
 	return (
-		<div className={styles.container}>
-			{(!feedback_loading || !request_loading || !shipment_loading)
+		<div>
+
+			{(shipment_loading || request_loading
+					|| feedback_loading) ? [...new Array(LOADER_COUNT).keys()].map((index) => (
+						<Placeholder
+							height="4vh"
+							key={index}
+							style={{ marginTop: '10px' }}
+						/>
+				))
+				: (
+
+					<div className={styles.container}>
+						{(!feedback_loading || !request_loading || !shipment_loading)
 			&& (
 				<div>
 					<div className={styles.pill}>
@@ -180,6 +193,8 @@ function ServiceDetailsContent({
 					</div>
 				</div>
 			)}
+					</div>
+				)}
 		</div>
 	);
 }

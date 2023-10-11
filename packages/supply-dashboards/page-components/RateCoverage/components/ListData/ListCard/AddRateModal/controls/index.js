@@ -58,6 +58,7 @@ function useControls({ data, user_id, filter }) {
 		includes : { default_params_required: true },
 		labelKey : 'display_name',
 	}));
+
 	const destinationLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params   : { filters: { type: filterOption?.[filter?.service] } },
 		includes : { default_params_required: true },

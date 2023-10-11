@@ -22,6 +22,7 @@ import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
 const TWO_HUNDERD = 200;
+
 function AddRateModal({
 	showModal = true,
 	setShowModal = () => {},
@@ -31,8 +32,8 @@ function AddRateModal({
 	getStats = () => {},
 	getListCoverage = () => {},
 	shipmemnt_data = {},
-	requestData,
-	feedbackData,
+	requestData = [],
+	feedbackData = [],
 	shipment_loading = false,
 	request_loading = false,
 	feedback_loading = false,
@@ -152,7 +153,7 @@ function AddRateModal({
 						{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
 				} else {
 					mandatoryFreightCodes = [...mandatoryFreightCodes,
-						{ code: '', price: '', unit: '', currency: '' }];
+						{ code, price: '', unit: '', currency: '' }];
 				}
 			}
 		});

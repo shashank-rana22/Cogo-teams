@@ -1,4 +1,3 @@
-import { Placeholder } from '@cogoport/components';
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -6,7 +5,6 @@ import ServiceDetailsContent from './Content';
 import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
-const LOADER_COUNT = 3;
 
 function DetailsView({
 	data = {}, shipment_loading = false,
@@ -29,27 +27,15 @@ function DetailsView({
 	return (
 		<div>
 			{showServiceDetails && (
-				<div>
-					{(shipment_loading || request_loading
-					|| feedback_loading) ? [...new Array(LOADER_COUNT).keys()].map((index) => (
-						<Placeholder
-							height="4vh"
-							key={index}
-							style={{ marginTop: '10px' }}
-						/>
-						))
-						: (
-							<ServiceDetailsContent
-								shipmemnt_data={shipmemnt_data}
-								data={data}
-								requestData={requestData?.list?.[ZERO_VALUE] || null}
-								feedbackData={feedbackData?.list?.[ZERO_VALUE] || null}
-								shipment_loading={shipment_loading}
-								request_loading={request_loading}
-								feedback_loading={feedback_loading}
-							/>
-						)}
-				</div>
+				<ServiceDetailsContent
+					shipmemnt_data={shipmemnt_data}
+					data={data}
+					requestData={requestData?.list?.[ZERO_VALUE] || null}
+					feedbackData={feedbackData?.list?.[ZERO_VALUE] || null}
+					shipment_loading={shipment_loading}
+					request_loading={request_loading}
+					feedback_loading={feedback_loading}
+				/>
 			)}
 
 			<div
