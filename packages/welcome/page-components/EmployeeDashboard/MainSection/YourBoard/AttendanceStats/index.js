@@ -1,9 +1,23 @@
 import { cl } from '@cogoport/components';
 import React from 'react';
 
+// import useGetLeaveStats from '../../../../../hooks/useGetLeaveBalances';
+
+import Loader from '../../../../../common/Loader';
+
 import styles from './styles.module.css';
 
-function AttendanceStats() {
+function AttendanceStats({ self_working_stats = {}, loading }) {
+	const { avg_work_hrs, on_time_arrival } = self_working_stats || {};
+
+	if (loading) {
+		return (
+			<div className={styles.container}>
+				<Loader height="20px" count={3} />
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -12,15 +26,18 @@ function AttendanceStats() {
 			<div className={styles.summary}>
 				<div className={cl`${styles.avg_data} ${styles.mr_30}`}>
 					<div className={styles.avg_summary}>
-						3 hrs
+						{avg_work_hrs?.toFixed(2) || 0}
+						{' '}
+						hrs
 					</div>
 					Avg hrs/day
 				</div>
 				<div className={styles.avg_data}>
 					<div className={styles.avg_summary}>
-						82%
+						{on_time_arrival || 0}
+						%
 					</div>
-					Avg hrs/day
+					On Time Arrival
 				</div>
 			</div>
 			<div className={styles.avg_data}>

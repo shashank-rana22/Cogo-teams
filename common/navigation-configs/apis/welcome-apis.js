@@ -54,6 +54,26 @@ const welcome = [
 		access_type  : 'private',
 		service_name : 'hrms',
 	},
+	{
+		api          : 'get_dashboard_summary',
+		access_type  : 'private',
+		service_name : 'hrms',
+	},
+	{
+		api          : 'get_day_stats',
+		access_type  : 'private',
+		service_name : 'hrms',
+	},
+	{
+		api          : 'get_employee_leave_balances',
+		access_type  : 'private',
+		service_name : 'hrms',
+	},
+	{
+		api          : 'update_attendance',
+		access_type  : 'private',
+		service_name : 'hrms',
+	},
 ];
 
 export default welcome;

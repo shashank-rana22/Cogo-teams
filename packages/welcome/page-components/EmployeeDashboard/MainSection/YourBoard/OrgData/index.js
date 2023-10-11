@@ -2,9 +2,18 @@ import { cl } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
+import Loader from '../../../../../common/Loader';
+
 import styles from './styles.module.css';
 
-function SalaryUpdate() {
+function OrgData({ manager_name = '', hrbp_name = '', loading = false }) {
+	if (loading) {
+		return (
+			<div className={styles.container}>
+				<Loader height="20px" count={3} />
+			</div>
+		);
+	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -13,13 +22,13 @@ function SalaryUpdate() {
 			<div className={styles.summary}>
 				<div className={cl`${styles.avg_data} ${styles.mr_30}`}>
 					<div className={styles.avg_summary}>
-						Ankur Verma
+						{manager_name}
 					</div>
 					Manager
 				</div>
 				<div className={styles.avg_data}>
 					<div className={styles.avg_summary}>
-						Mukti Shetty
+						{hrbp_name}
 					</div>
 					HRBP
 				</div>
@@ -35,4 +44,4 @@ function SalaryUpdate() {
 	);
 }
 
-export default SalaryUpdate;
+export default OrgData;

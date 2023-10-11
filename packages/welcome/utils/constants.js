@@ -1,28 +1,34 @@
-import { IcMCalendar, IcMTimer, IcMUpwardGraph, IcMAppInvoiceSubmission, IcMProfile } from '@cogoport/icons-react';
+import {
+	IcMCalendar,
+	// IcMTimer, IcMUpwardGraph, IcMAppInvoiceSubmission,
+	IcMProfile,
+} from '@cogoport/icons-react';
 
 export const HEADER_NAV = [
 	{
 		label : 'Attendance',
 		icon  : IcMCalendar,
+		route : '/attendance-leave-management',
 	},
-	{
-		label : 'Time Off',
-		icon  : IcMTimer,
-	},
-	{
-		label : 'Performance',
-		icon  : IcMUpwardGraph,
-	},
-	{
-		label : 'Payslip',
-		icon  : IcMAppInvoiceSubmission,
-	},
-	{
-		label : 'Tax Submissions',
-		icon  : IcMAppInvoiceSubmission,
-	},
+	// {
+	// 	label : 'Time Off',
+	// 	icon  : IcMTimer,
+	// },
+	// {
+	// 	label : 'Performance',
+	// 	icon  : IcMUpwardGraph,
+	// },
+	// {
+	// 	label : 'Payslip',
+	// 	icon  : IcMAppInvoiceSubmission,
+	// },
+	// {
+	// 	label : 'Tax Submissions',
+	// 	icon  : IcMAppInvoiceSubmission,
+	// },
 	{
 		label : 'Profile',
 		icon  : IcMProfile,
+		route : '/profile',
 	},
 ];

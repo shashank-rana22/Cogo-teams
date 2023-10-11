@@ -7,7 +7,7 @@ import Feed from '../Feed';
 import Leaderboard from './Leaderboard';
 import StoryPoints from './StoryPoints';
 import styles from './styles.module.css';
-import WorkingHrs from './WorkingHrs';
+// import WorkingHrs from './WorkingHrs';
 
 // https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rectangle_126.svg
 
@@ -70,7 +70,7 @@ function YourPerformance() {
 						<Leaderboard />
 					</div>
 					<div className={styles.working_hrs}>
-						<WorkingHrs />
+						{/* <WorkingHrs /> */}
 					</div>
 				</div>
 			</div>
