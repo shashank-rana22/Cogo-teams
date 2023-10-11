@@ -26,8 +26,8 @@ function TimeLine({
 		reason = '',
 	} = eachMessage;
 
-	const { name : presentAgent } = agent_data || {};
-	const { name : previousAgent } = performed_by_data || {};
+	const { name : presentAgent, id: presentAgentId = '' } = agent_data || {};
+	const { name : previousAgent, id: prevAgentId = '' } = performed_by_data || {};
 	const { name: voiceCallUserName = '' } = user_data || {};
 
 	const timelineText = getVoiceCallStatement({
@@ -38,6 +38,7 @@ function TimeLine({
 		voiceCallStatus : status,
 		channel,
 		reason,
+		isSameAgent     : presentAgentId === prevAgentId,
 	});
 
 	if (!timelineText) {

@@ -33,7 +33,7 @@ function TeamChats(props) {
 		is_draft = false,
 	} = data || {};
 
-	const { group_members_ids = [] } = groupData || {};
+	const { group_members_ids = [], last_group_updated_at = 0 } = groupData || {};
 
 	const isGroup = group_members_ids?.length > GROUP_MEMBERS_MIN;
 
@@ -79,6 +79,7 @@ function TeamChats(props) {
 					conversationsDivRef={conversationsDivRef}
 					scrollToLastMessage={scrollToLastMessage}
 					isGroup={isGroup}
+					lastGroupUpdatedAt={last_group_updated_at}
 				/>
 			</div>
 			<div className={styles.footer}>
