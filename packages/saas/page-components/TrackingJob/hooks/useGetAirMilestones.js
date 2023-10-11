@@ -7,8 +7,7 @@ const useGetAirMilestones = ({ id = null }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_saas_air_subscription',
-
-	});
+	}, { manual: true });
 
 	const getMilestones = useCallback(async () => {
 		try {

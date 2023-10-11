@@ -7,7 +7,7 @@ const useEditContainerMilestones = ({ refetch }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_saas_container_timeline_detail',
-	});
+	}, { manual: true });
 
 	const updateMilestoneData = async ({ id, values }) => {
 		try {

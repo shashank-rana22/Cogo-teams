@@ -7,7 +7,7 @@ const useGetTruckMilestones = ({ id = null }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_saas_ftl_tracking_detail',
-	});
+	}, { manual: true });
 
 	const getMilestones = useCallback(async () => {
 		try {

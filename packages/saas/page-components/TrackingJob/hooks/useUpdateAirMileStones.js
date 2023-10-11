@@ -8,7 +8,7 @@ const useUpdateAirMileStones = ({ refetch }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_air_milestones',
-	});
+	}, { manual: true });
 	const apiTrigger = async ({ values = {}, showUpdate, setShowUpdate }) => {
 		const payload = getFormatterValues(values);
 

@@ -7,7 +7,7 @@ const useGetContainerMilestones = ({ id = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : 'get_saas_container_subscription',
-	});
+	}, { manual: true });
 
 	const getMilestones = useCallback(async () => {
 		try {

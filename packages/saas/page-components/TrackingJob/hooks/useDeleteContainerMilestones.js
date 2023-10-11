@@ -7,7 +7,7 @@ const useDeleteContainerMilestones = ({ refetch }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/delete_saas_container_timeline_detail',
-	});
+	}, { manual: true });
 
 	const deleteMileStones = async (id) => {
 		try {
