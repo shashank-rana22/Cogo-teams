@@ -23,7 +23,7 @@ function PersonalDetail(props, ref) {
 		getPersonalDetails: () => new Promise((resolve) => {
 			handleSubmit(
 				(data) => resolve(data),
-				(error) => resolve(error),
+				(error) => resolve({ hasError: true, error }),
 			)();
 		}),
 	}), [handleSubmit]);

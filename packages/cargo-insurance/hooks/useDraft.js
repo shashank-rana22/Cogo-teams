@@ -25,7 +25,8 @@ const getPayload = ({ data = {}, pocDetails, performedBy, policySearchId }) => {
 			insuredFirstName : firstName,
 			insuredLastName  : lastName,
 			email,
-			phoneNo          : phoneNo.country_code + phoneNo.number,
+			phoneCode        : phoneNo?.country_code,
+			phoneNo          : phoneNo?.number,
 		},
 		billingParty: {
 			billingType: 'CORPORATE',
@@ -87,10 +88,16 @@ function useDraft({ data = {} }) {
 	const submitHandler = async () => {
 		const resp = await personalDetailRef.current.getPersonalDetails();
 
-		const { phoneNo } = resp || {};
+		const { hasError, phoneNo } = resp || {};
+
+		if (hasError) {
+			Toast.error('Please fill all personal details');
+			return;
+		}
 
 		if (!phoneNo?.country_code) {
 			Toast.error('Please Select Mobile Code');
+			return;
 		}
 		saveDraft({ pocDetails: resp });
 	};
