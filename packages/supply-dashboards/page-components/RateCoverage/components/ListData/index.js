@@ -12,7 +12,6 @@ import ListCard from './ListCard';
 import styles from './styles.module.css';
 
 const DEFAULT_VALUE = 0;
-
 const DEFAULT_PAGE_VALUE = 1;
 const LIST_CARD_LOADER_COUNT = 5;
 

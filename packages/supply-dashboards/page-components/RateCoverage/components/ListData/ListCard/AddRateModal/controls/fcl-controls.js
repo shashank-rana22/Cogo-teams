@@ -56,11 +56,18 @@ const fclControls = ({
 		placeholder : 'Origin Location',
 		span        : 4,
 		value       : data?.origin_port?.id,
-		disabled  	 : data?.origin_port?.id,
+		disabled	   : data?.origin_port?.id,
 		...originLocationOptions,
 		rules       : { required: 'origin location is required' },
 	},
-
+	{
+		name        : 'origin_main_port_id',
+		type        : 'select',
+		label       : 'Origin Main port',
+		placeholder : 'Origin Main port',
+		span        : 4,
+		rules       : { required: 'origin main port is required' },
+	},
 	{
 		name        : 'destination_location_id',
 		type        : 'select',
@@ -71,6 +78,14 @@ const fclControls = ({
 		...destinationLocationOptions,
 		placeholder : 'Destination Location',
 		rules       : { required: 'destination location is required' },
+	},
+	{
+		name        : 'destination_main_port_id',
+		type        : 'select',
+		label       : 'Destination main port',
+		span        : 4,
+		placeholder : 'Destination main port',
+		rules       : { required: 'destination main port is required' },
 	},
 	{
 		heading : 'Container Details',

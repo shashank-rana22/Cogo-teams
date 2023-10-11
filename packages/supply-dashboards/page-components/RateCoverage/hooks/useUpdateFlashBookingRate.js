@@ -10,11 +10,9 @@ const useUpdateFlashBookingRate = () => {
 		try {
 			const resp = await trigger({
 				data: {
-					is_create_required  : false,
-					shipment_id         : data?.shipment_id,
-					id                  : data?.source_id,
-					service_provider_id : data?.service_provider_id,
-					service_type        : 'fcl_freight',
+					is_create_required : false,
+					shipment_id        : data?.shipment_id,
+					id                 : data?.source_id,
 				},
 			});
 			if (resp) { return resp?.status; }
