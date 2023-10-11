@@ -18,11 +18,11 @@ export default function Content({
 	toggleAccordion = () => {},
 	getPrePostShipmentQuotes = () => {},
 }) {
-	const TABLE_COLUMNS = getServiceColumns({ currentKey });
 	const keys = Object.keys(accordionState);
 	const nextIndex = keys.indexOf(currentKey) + NEXT;
 	const nextItem = (nextIndex < (keys.length - NEXT)) ? keys[nextIndex] : '';
 	const defaultSelectedService = Object.keys(services)?.[GLOBAL_CONSTANTS.zeroth_index] || '';
+
 	const [queryModalShow, setQueryModalShow] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
 	const [activeService, setActiveService] = useState(defaultSelectedService);
@@ -54,9 +54,8 @@ export default function Content({
 					<div key={item?.id} className={styles.quotation}>
 						<div className={styles.table}>
 							<Table
-								columns={TABLE_COLUMNS}
-								data={currentKey.includes('MODIFIED')
-									? item?.changedItems || [] : item?.lineItems || []}
+								columns={getServiceColumns({ currentKey, item })}
+								data={item?.lineItems || []}
 							/>
 						</div>
 
