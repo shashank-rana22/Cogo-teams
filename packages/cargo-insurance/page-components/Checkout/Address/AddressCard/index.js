@@ -2,6 +2,7 @@ import { Placeholder, Radio, cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.css';
 
@@ -12,8 +13,9 @@ function AddressCard({
 	loading = false,
 }) {
 	const geo = getGeoConstants();
+	const { t } = useTranslation(['cargoInsurance']);
 
-	const { id, name = '', address = '', tax_number = '' } = info || {};
+	const { id = '', name = '', address = '', tax_number = '' } = info || {};
 
 	const isAddressSelected = id === selectedAddress?.id;
 
@@ -59,7 +61,7 @@ function AddressCard({
 					<p className={styles.info}>
 						{`${
 							geo.others.registration_number.label
-						} Number : ${tax_number}`}
+						} ${t('cargoInsurance:number')} : ${tax_number}`}
 
 					</p>
 				) : null}

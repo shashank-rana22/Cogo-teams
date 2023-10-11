@@ -32,6 +32,8 @@ const getPayload = ({ data = {}, organization, formValueRef, activeTab }) => {
 const useInsurance = ({ activeTab, organization = {}, formValues = {}, setActiveTab }) => {
 	const { push, query } = useRouter();
 
+	const { t } = useRouter(['cargoInsurance']);
+
 	const formValueRef = useRef({});
 
 	const formHook = useForm();
@@ -65,11 +67,11 @@ const useInsurance = ({ activeTab, organization = {}, formValues = {}, setActive
 
 	const onSubmit = (data) => {
 		if (isEmpty(organization?.organization_id)) {
-			Toast.error('Please Select Organization');
+			Toast.error(t('cargoInsurance:err_msg_org'));
 			return;
 		}
 		if (isEmpty(organization?.user_id)) {
-			Toast.error('Please Select User');
+			Toast.error(t('cargoInsurance:err_msg_user'));
 			return;
 		}
 		verifyDetails(data);
@@ -89,14 +91,14 @@ const useInsurance = ({ activeTab, organization = {}, formValues = {}, setActive
 			const { origin_point: refOrigin, destination_point: refDestination } = formValueRef.current || {};
 
 			if (origin_point === destination_point) {
-				errorMessage = 'Origin and Destination Point cannot be the same';
+				errorMessage = t('cargoInsurance:err_msg_same_point');
 			} else if (activeTab === 'ocean' && refOrigin.country.id === refDestination.country.id) {
-				errorMessage = 'Origin and Destination Point cannot be of the same country';
+				errorMessage = t('cargoInsurance:err_msg_same_country');
 			}
 
 			if (errorMessage) {
 				Toast.error(errorMessage);
-				setError('destination_point', { type: 'custom', message: 'Select a different Destination Point' });
+				setError('destination_point', { type: 'custom', message: t('cargoInsurance:err_msg_dest') });
 			} else {
 				clearErrors('destination_point');
 			}

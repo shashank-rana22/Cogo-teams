@@ -58,6 +58,7 @@ const GLOBAL_CONSTANTS = {
 		IDR : 'id-ID',
 		THB : 'th-TH',
 		CNY : 'zh-CN',
+		EUR : 'en-EU',
 	},
 	currency_symbol: {
 		USD : '$',
@@ -216,6 +217,7 @@ const GLOBAL_CONSTANTS = {
 		vinod_talapa_user_id    : '6d713339-c528-4696-9f7b-c01f86887ac1',
 		manoj_mahapatra_user_id : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		santram_gurjar_user_id 	: '039a0141-e6f3-43b0-9c51-144b22b9fc84',
+		abhishek_kumar_user_id  : 'fa0dcd74-4b68-4783-a2f9-81dfab26008a',
 		local_charge_providers  : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 			GB : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
@@ -250,6 +252,9 @@ const GLOBAL_CONSTANTS = {
 	cogoport_entities: ENTITY_MAPPING,
 
 	months: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+
+	month_name: ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+		'August', 'September', 'October', 'November', 'December'],
 
 	image_url: {
 		empty_state_margins_url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
@@ -454,6 +459,7 @@ const GLOBAL_CONSTANTS = {
 		filter_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_228.svg',
 		no_rates_found_emoji    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_216.svg',
 		fcl_container_icon_s2c  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image_221.svg',
+		no_email_permission     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no_email_permission.png',
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
 		secure_now          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/secureNow.png',
@@ -464,6 +470,13 @@ const GLOBAL_CONSTANTS = {
 		globe_sub           : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/globe',
 		upload_icon         : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/upload_icon.png',
 		mail_sent           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mail_sent.gif',
+		edit_square         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/edit_square_light.png',
+		new_conversation    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/new-message.png',
+		teams               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/teams.png',
+		groups              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/group.png',
+		performance_leaderboard_confetti:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti_svg.svg',
+		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
 	},
 
 	video_call_ring_tone_url:
@@ -593,27 +606,30 @@ const GLOBAL_CONSTANTS = {
 		email_template_name_pattern       : /^[a-zA-Z0-9_ -]+$/g,
 		url_match_regex:
 		/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/,
-		ends_with_star_space       : /\* /,
-		ends_with_star_char        : /\*[^0-9a-zA-Z]/,
-		string_to_array            : /'/g,
-		file_upload_url            : /:finalUrl=>"([^"]*)"/,
-		four_characters_pin        : /^.{4}$/,
-		amount_seperator           : /\D/g,
-		white_space_characters     : /\s/g,
-		mobile_country_code_format : /^./,
-		email_subject_prefix       : /^(re|fwd|fw):\s*/i,
-		para_html_tag_text         : /<p>([\s\S]*?)<\/p>/gm,
-		h1_html_tag_text           : /<h1>([\s\S]*?)<\/h1>/gm,
-		h2_html_tag_text           : /<h2>([\s\S]*?)<\/h2>/gm,
-		h3_html_tag_text           : /<h3>([\s\S]*?)<\/h3>/gm,
-		li_html_tag_text           : /<li>([\s\S]*?)<\/li>/gm,
-		iframe_html_tag_text       : /<iframe([\s\S]*?)<\/iframe>/gm,
-		html_class_regex           : /class="([^"]+)"/g,
-		static_url                 : /([^:]\/)\/+/g,
-		gst_number                 : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
-		otp                        : /[^0-9]/g,
-		hyphen_characters          : /-/g,
-		text_pattern_classifier    : /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
+		ends_with_star_space        : /\* /,
+		ends_with_star_char         : /\*[^0-9a-zA-Z]/,
+		string_to_array             : /'/g,
+		file_upload_url             : /:finalUrl=>"([^"]*)"/,
+		four_characters_pin         : /^.{4}$/,
+		amount_seperator            : /\D/g,
+		white_space_characters      : /\s/g,
+		mobile_country_code_format  : /^./,
+		email_subject_prefix        : /^(re|fwd|fw):\s*/i,
+		para_html_tag_text          : /<p>([\s\S]*?)<\/p>/gm,
+		h1_html_tag_text            : /<h1>([\s\S]*?)<\/h1>/gm,
+		h2_html_tag_text            : /<h2>([\s\S]*?)<\/h2>/gm,
+		h3_html_tag_text            : /<h3>([\s\S]*?)<\/h3>/gm,
+		li_html_tag_text            : /<li>([\s\S]*?)<\/li>/gm,
+		iframe_html_tag_text        : /<iframe([\s\S]*?)<\/iframe>/gm,
+		html_class_regex            : /class="([^"]+)"/g,
+		static_url                  : /([^:]\/)\/+/g,
+		gst_number                  : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
+		otp                         : /[^0-9]/g,
+		line_break_regex            : /(?:\r\n|\r|\n)/g,
+		hyphen_characters           : /-/g,
+		text_pattern_classifier     : /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
+		first_number_contains_zeros : /^0+/,
+		group_draft_name            : /\+(\d+) MORE/g,
 	},
 	zeroth_index                 : 0,
 	one                          : 1,
@@ -667,7 +683,8 @@ const GLOBAL_CONSTANTS = {
 			orissa_metaliks  : 'AAACO8663L',
 			varun_beverages  : 'AAACV2678L',
 		},
-		ftl_disable_backdate_date: '2023-06-13T00:00:00',
+		ftl_disable_backdate_date            : '2023-06-13T00:00:00',
+		percentage_factor_for_advance_amount : 0.8,
 	},
 	freight_unit_mapping: {
 		per_container         : '/Ctr.',
@@ -713,6 +730,7 @@ const GLOBAL_CONSTANTS = {
 	trade_types: [
 		{ value: 'import', label: 'Import' },
 		{ value: 'export', label: 'Export' },
+		{ value: 'domestic', label: 'Domestic' },
 	],
 	service_supported_countries: {
 		feature_supported_service: {
@@ -810,7 +828,8 @@ const GLOBAL_CONSTANTS = {
 		internal_service         : 'internal.customer@cogoport.com',
 	},
 	mobile_number: {
-		cogoone_sales_contact_no: '+91-8069195810',
+		cogoone_sales_contact_no  : '+918069195810',
+		cogoone_supply_contact_no : '+918069195980',
 	},
 	websites: {
 		cogoport : 'www.cogoport.com',

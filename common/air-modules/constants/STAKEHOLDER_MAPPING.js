@@ -12,6 +12,8 @@ const STAKEHOLDER_MAPPING = {
 	ground_ops                : 'Ground Ops',
 	service_ops2_docs         : 'Service Ops 2 Docs',
 	printing_desk             : 'Printing Desk',
+	entity_manager            : 'Entity Manager',
+	portfolio_manager         : 'Portfolio Manager',
 };
 
 export const STAKEHOLDER_CAN_BE_ADDED = {
@@ -28,6 +30,7 @@ export const STAKEHOLDER_CAN_BE_ADDED = {
 	ground_ops                : 'Ground Ops',
 	service_ops2_docs         : 'Service Ops 2 Docs',
 	printing_desk             : 'Printing Desk',
+	portfolio_manager         : 'Portfolio Manager',
 };
 
 export const SERVICE_LEVEL_STATKEHOLDERS = [

@@ -1,41 +1,41 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const getPersonalDetailControls = () => [
+const getPersonalDetailControls = ({ t }) => [
 	{
 		name        : 'firstName',
-		label       : 'First Name*',
-		placeholder : 'Enter First Name',
+		label       : t('cargoInsurance:poc_control_first_name'),
+		placeholder : t('cargoInsurance:poc_control_first_name_placeholder'),
 		size        : 'sm',
 		type        : 'text',
 		rules       : { required: true },
 	},
 	{
 		name        : 'lastName',
-		label       : 'Last Name*',
-		placeholder : 'Enter Last Name',
+		label       : t('cargoInsurance:poc_control_last_name'),
+		placeholder : t('cargoInsurance:poc_control_last_name_placeholder'),
 		type        : 'text',
 		size        : 'sm',
 		rules       : { required: true },
 	},
 	{
 		name        : 'email',
-		label       : 'Email Id*',
-		placeholder : 'Enter Email Name',
+		label       : t('cargoInsurance:poc_control_email'),
+		placeholder : t('cargoInsurance:poc_control_email_placeholder'),
 		type        : 'text',
 		size        : 'sm',
 		rules       : {
 			required : true,
 			pattern  : {
 				value   : GLOBAL_CONSTANTS.regex_patterns.email,
-				message : 'Enter valid email',
+				message : t('cargoInsurance:poc_control_email_err'),
 			},
 		},
 	},
 	{
 		name        : 'phoneNo',
-		label       : 'Phone Number*',
+		label       : t('cargoInsurance:poc_control_phone'),
 		type        : 'mobileSelect',
-		placeholder : 'Enter Mobile number',
+		placeholder : t('cargoInsurance:poc_control_phone_placeholder'),
 		size        : 'sm',
 		rules       : { required: true },
 	},

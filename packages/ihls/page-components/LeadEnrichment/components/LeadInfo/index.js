@@ -1,15 +1,14 @@
-import { Button, Modal, Pagination, Popover, Tooltip } from '@cogoport/components';
-import { IcMEyeopen } from '@cogoport/icons-react';
+import { Button, Pagination, Popover } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../commons/EmptyState';
 import LeadTable from '../../commons/LeadTable';
-import EnrichmentRequestModal from '../EnrichmentRequestModal';
-import LeadEnrichmentLogs from '../LeadEnrichmentLogs';
-import ObjectiveInfo from '../ObjectiveInfo';
+import ActionModal from '../ActionModal';
 
 import getLeadInfoColumns from './getLeadInfoColumns';
+import LeadEnrichmentLogs from './LeadEnrichmentLogs';
+import ObjectiveInfo from './ObjectiveInfo';
 import styles from './styles.module.css';
 
 function LeadInfo({
@@ -23,7 +22,7 @@ function LeadInfo({
 	onChangeTableHeadCheckbox = () => {},
 	onChangeBodyCheckbox = () => {},
 }) {
-	const [showRequest, setShowRequest] = useState(false);
+	const [showRequestModal, setShowRequestModal] = useState('');
 	const [visible, setVisible] = useState(false);
 	const [leadId, setLeadId] = useState(null);
 	const [allocationLeadId, setAllocationLeadId] = useState(null);
@@ -35,10 +34,6 @@ function LeadInfo({
 		setLeadId,
 		setAllocationLeadId,
 	});
-
-	const onClose = () => setAllocationLeadId(null);
-
-	const onCloseLogs = () => setLeadId(null);
 
 	const onPageChange = (pageNumber) => setParams((p) => ({ ...p, page: pageNumber }));
 
@@ -62,33 +57,29 @@ function LeadInfo({
 							<Button
 								className={styles.popover_buttons}
 								size="md"
-								themeType="primary"
-								onClick={() => { setShowRequest(true); setVisible(false); }}
+								themeType="secondary"
+								onClick={() => { setShowRequestModal('enrichment'); setVisible(false); }}
 							>
-								Send to Enrichment
+								Enrichment Request
 
 							</Button>
-							<Tooltip
-								content="Feature coming soon"
-								placement="bottom"
-								caret={false}
+							<Button
+								className={styles.popover_buttons}
+								size="md"
+								themeType="secondary"
+								onClick={() => { setShowRequestModal('ingestion'); setVisible(false); }}
 							>
-								<Button
-									className={styles.popover_buttons}
-									size="md"
-									themeType="primary"
-									disabled
-								>
-									Push to CRM
+								Push to CRM
 
-								</Button>
-							</Tooltip>
+							</Button>
 
 						</>
 					)}
 					visible={visible}
 				>
-					<Button themeType="secondary" onClick={() => setVisible(!visible)}>Action</Button>
+					<Button themeType="primary" onClick={() => setVisible(!visible)}>
+						Action
+					</Button>
 				</Popover>
 			</div>
 
@@ -104,52 +95,22 @@ function LeadInfo({
 				/>
 			</div>
 
-			<Modal style={{ width: '70%' }} show={allocationLeadId} onClose={onClose} placement="center">
-				<Modal.Header title={(
-					<>
-						<IcMEyeopen className={styles.eye_icon} />
-						<span>
-							View Objectives
-						</span>
-					</>
-				)}
+			{allocationLeadId ? (
+				<ObjectiveInfo
+					allocationLeadId={allocationLeadId}
+					setAllocationLeadId={setAllocationLeadId}
 				/>
-				<Modal.Body className={styles.modal_body}>
-					<ObjectiveInfo allocationLeadId={allocationLeadId} />
-				</Modal.Body>
-				<Modal.Footer>
-					<Button onClick={onClose}>Close</Button>
-				</Modal.Footer>
-			</Modal>
-			{leadId
-				? (
-					<Modal style={{ width: '60%' }} show={leadId} onClose={onCloseLogs} placement="center">
-						<Modal.Header title={(
-							<>
-								<IcMEyeopen className={styles.eye_icon} />
-								<span>
-									Enrichment History
-								</span>
-							</>
-						)}
-						/>
-						<Modal.Body>
-							<LeadEnrichmentLogs lead_id={leadId} />
-						</Modal.Body>
-						<Modal.Footer>
-							<Button onClick={onCloseLogs}>Close</Button>
-						</Modal.Footer>
-					</Modal>
-				) : null}
+			) : null}
 
-			<EnrichmentRequestModal
+			{leadId ? <LeadEnrichmentLogs leadId={leadId} setLeadId={setLeadId} /> : null}
+
+			<ActionModal
 				checkedRowsId={checkedRowsId}
 				params={params}
-				showRequest={showRequest}
-				setShowRequest={setShowRequest}
+				showModal={showRequestModal}
+				setShowRequestModal={setShowRequestModal}
 				lead_count={paginationData.count}
 			/>
-
 		</div>
 	);
 }

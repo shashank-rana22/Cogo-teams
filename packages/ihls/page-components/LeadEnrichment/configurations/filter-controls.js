@@ -10,8 +10,7 @@ const controls = [
 			page       : 1,
 			page_limit : 10,
 		},
-		width       : '19%',
-		initialCall : true,
+		width: '19%',
 	},
 	{
 		name        : 'services',

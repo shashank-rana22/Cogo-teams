@@ -27,6 +27,7 @@ function Navbar({
 	inCall = false,
 	userId = '',
 	firestore = {},
+	ticketCount = 0,
 }) {
 	const ref = useRef(null);
 	const navRef = useRef(null);
@@ -153,6 +154,7 @@ function Navbar({
 									setPinnedNavKeys={setPinnedNavKeys}
 									showPin={showPin}
 									inCall={inCall}
+									ticketCount={ticketCount}
 								/>
 							))}
 						</div>
@@ -167,6 +169,7 @@ function Navbar({
 									setPinnedNavKeys={setPinnedNavKeys}
 									showPin={showPin}
 									inCall={inCall}
+									ticketCount={ticketCount}
 								/>
 							))}
 						</div>

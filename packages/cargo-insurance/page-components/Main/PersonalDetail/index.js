@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { useTranslation } from 'next-i18next';
 import { useImperativeHandle, forwardRef } from 'react';
 
 import FormItem from '../../../common/FormItem';
@@ -10,7 +11,9 @@ import styles from './styles.module.css';
 function PersonalDetail(props, ref) {
 	const { pocDetails = {} } = props;
 
-	const personalDetailControls = getPersonalDetailControls();
+	const { t } = useTranslation(['cargoInsurance']);
+
+	const personalDetailControls = getPersonalDetailControls({ t });
 
 	const { loading, sendQuotation, formhook } = useQuotation({ pocDetails });
 
@@ -28,11 +31,11 @@ function PersonalDetail(props, ref) {
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.header}>
-				<h3>Personal Details</h3>
+				<h3>{t('cargoInsurance:personal_details_title')}</h3>
 			</div>
 
 			<div className={styles.form_container}>
-				<h3 className={styles.form_title}>Insurance Quotation</h3>
+				<h3 className={styles.form_title}>{t('cargoInsurance:personal_details_subtitle')}</h3>
 
 				<FormItem formhook={formhook} controls={personalDetailControls} />
 
@@ -42,7 +45,7 @@ function PersonalDetail(props, ref) {
 						loading={loading}
 						onClick={handleSubmit(sendQuotation)}
 					>
-						Send Quotation
+						{t('cargoInsurance:send_quote')}
 					</Button>
 				</div>
 			</div>

@@ -4,9 +4,15 @@ import { useEffect, useCallback } from 'react';
 import getFormattedPayload from '../utils/getFormattedPayload';
 import toastApiError from '../utils/toastApiError';
 
+const API_MAPPING = {
+	fcl : 'get_fcl_freight_rate_trends',
+	air : 'get_air_freight_rate_trends',
+};
+
 const useGetFclFreightRateTrends = ({ filters }) => {
+	const { service_type } = filters;
 	const [{ data, loading }, trigger] = useRequest({
-		url    : 'get_fcl_freight_rate_trends',
+		url    : API_MAPPING[service_type],
 		method : 'GET',
 	}, { manual: true });
 
@@ -24,9 +30,10 @@ const useGetFclFreightRateTrends = ({ filters }) => {
 	useEffect(() => {
 		const params = getFormattedPayload(filters);
 		getTrends(params);
-	}, [filters, getTrends]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(filters), getTrends]);
 
-	return { trendsData: data?.rate_trend, loading };
+	return { data: data?.rate_trend || [], loading, getTrends };
 };
 
 export default useGetFclFreightRateTrends;

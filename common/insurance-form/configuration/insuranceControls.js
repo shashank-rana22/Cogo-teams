@@ -9,11 +9,11 @@ const FILTER_TYPE_MAPPGING = {
 	road : ['pincode', 'seaport', 'airport', 'city'],
 };
 
-const getInsuranceControls = ({ activeTab = 'ocean' }) => [
+const getInsuranceControls = ({ activeTab = 'ocean', t }) => [
 	{
 		name        : 'origin_point',
-		label       : 'Origin Point',
-		placeholder : 'Select Origin Point',
+		label       : t('cargoInsurance:form_control_origin'),
+		placeholder : t('cargoInsurance:form_control_origin_placeholder'),
 		prefix      : <IcMLocation width={18} height={18} />,
 		type        : 'asyncSelect',
 		initialCall : true,
@@ -31,8 +31,8 @@ const getInsuranceControls = ({ activeTab = 'ocean' }) => [
 	},
 	{
 		name        : 'destination_point',
-		label       : 'Destination Point',
-		placeholder : 'Select Destination Point',
+		label       : t('cargoInsurance:form_control_destination'),
+		placeholder : t('cargoInsurance:form_control_destination_placeholder'),
 		prefix      : <IcMLocation width={18} height={18} />,
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
@@ -51,8 +51,8 @@ const getInsuranceControls = ({ activeTab = 'ocean' }) => [
 	},
 	{
 		name               : 'hsCode',
-		label              : 'HS Code',
-		placeholder        : 'Enter HS Code',
+		label              : t('cargoInsurance:form_control_hscode'),
+		placeholder        : t('cargoInsurance:form_control_hscode_placeholder'),
 		prefix             : <IcMProductCodeMapping width={14} height={14} />,
 		type               : 'asyncSelect',
 		asyncKey           : 'list_saas_hs_codes',
@@ -76,16 +76,16 @@ const getInsuranceControls = ({ activeTab = 'ocean' }) => [
 	},
 	{
 		name        : 'currency',
-		label       : 'Invoice Currency',
-		placeholder : 'Select Invoice Currency',
+		label       : t('cargoInsurance:form_control_currency'),
+		placeholder : t('cargoInsurance:form_control_currency_placeholder'),
 		type        : 'select',
 		options     : currencyOptions,
 		rules       : { required: true },
 	},
 	{
 		name        : 'cargoValue',
-		label       : 'Invoice Value',
-		placeholder : 'Enter Invoice Value',
+		label       : t('cargoInsurance:form_control_value'),
+		placeholder : t('cargoInsurance:form_control_value_placeholder'),
 		type        : 'number',
 		rules       : { required: true },
 	},

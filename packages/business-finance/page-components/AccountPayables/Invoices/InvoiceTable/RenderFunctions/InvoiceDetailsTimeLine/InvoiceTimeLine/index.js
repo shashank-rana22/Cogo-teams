@@ -158,6 +158,7 @@ function InvoiceTimeLine({ data, loading }) {
 													currencyDisplay       : 'code',
 													maximumFractionDigits : 0,
 													notation              : 'compact',
+													currencyWise          : true,
 												},
 											})}
 										</div>
