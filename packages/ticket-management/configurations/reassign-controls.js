@@ -48,6 +48,7 @@ export const useReassignTicketsControls = ({
 		value  : itm.user?.id,
 		roleId : itm?.role_id,
 		userId : itm.user?.id,
+		data   : itm,
 	}));
 
 	const ASYNC_OPTION_MAPPING = {

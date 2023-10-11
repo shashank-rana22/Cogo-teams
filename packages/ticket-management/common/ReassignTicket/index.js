@@ -58,6 +58,7 @@ function ReassignTicket({
 			size="sm"
 			show={showReassign}
 			onClose={handleClose}
+			scroll={false}
 		>
 			<form onSubmit={handleSubmit(handleReassignTicket)}>
 				<Modal.Header title={`${t('myTickets:re_assign_ticket')} (${ticketId})`} />

@@ -3,7 +3,8 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function StakeholderCustomOption({ optionsLabel = {} }) {
-	const { stakeholder_type = '', user = {} } = optionsLabel || {};
+	const { data = {} } = optionsLabel || {};
+	const { stakeholder_type = '', user = {} } = data || {};
 	const { name = '' } = user || {};
 
 	return (
