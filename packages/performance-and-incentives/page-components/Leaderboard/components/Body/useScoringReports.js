@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../constants/leaderboard-reporttype-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
@@ -11,7 +11,7 @@ import getReportViewType from '../../helpers/getReportViewType';
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
-const { ADMIN_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
+const { ADMIN_REPORT, OWNER_REPORT, MANAGER_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 
 const getReportTypeFilter = ({ currLevel }) => {
 	if (currLevel.report_type === ADMIN_REPORT || !isEmpty(currLevel.user)) {
@@ -30,7 +30,7 @@ const getUserRmIdsFilter = ({ currLevel, levelStack }) => {
 };
 
 const useScoringReports = (props) => {
-	const { currLevel, setCurrLevel, dateRange, entity, isChannel, levelStack, setLevelStack } = props;
+	const { currLevel, dateRange, entity, isChannel, levelStack } = props;
 
 	const { incentive_leaderboard_viewtype, user } = useSelector(({ profile }) => profile);
 
@@ -43,6 +43,7 @@ const useScoringReports = (props) => {
 		role_data_required       : true,
 		pagination_data_required : false,
 		add_current_user_report  : incentive_leaderboard_viewtype !== ADMIN,
+		add_user_kam_report_data : [OWNER_REPORT, MANAGER_REPORT].includes(getReportTypeFilter({ currLevel })),
 		filters                  : {
 			report_view_type        : getReportViewType({ currLevel, isChannel }),
 			report_type             : incentive_leaderboard_viewtype !== ADMIN ? `${view}_report` : undefined,
@@ -59,32 +60,17 @@ const useScoringReports = (props) => {
 		method  : 'GET',
 		authkey : 'get_agent_scoring_reports',
 		params,
-	}, { manual: true });
+	}, { manual: false });
 
-	const { list = [], current_user_report: currentUserData } = data || {};
-
-	const fetchList = useCallback(async () => {
-		try {
-			trigger();
-		} catch (err) {
-			setCurrLevel(levelStack[GLOBAL_CONSTANTS.zeroth_index]);
-
-			setLevelStack((prev) => {
-				const curr = [...prev];
-				curr.shift();
-
-				return curr;
-			});
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [setLevelStack, setCurrLevel, trigger]);
+	const { list = [], current_user_report: currentUserData, report_synced_at: lastUpdatedAt = '' } = data || {};
 
 	useEffect(() => {
 		if (currLevel.report_type !== AGENT_REPORT || (currLevel.isExpanded && isEmpty(currLevel.user))) {
 			setParams((previousParams) => ({
 				...previousParams,
-				is_expanded_view : (currLevel.isExpanded && isEmpty(currLevel.user)) ? true : undefined,
-				filters          : {
+				is_expanded_view         : (currLevel.isExpanded && isEmpty(currLevel.user)) ? true : undefined,
+				add_user_kam_report_data : [OWNER_REPORT, MANAGER_REPORT].includes(getReportTypeFilter({ currLevel })),
+				filters                  : {
 					...(previousParams.filters || {}),
 					report_view_type   : getReportViewType({ currLevel, isChannel }),
 					office_location_id : currLevel.location_id || undefined,
@@ -109,10 +95,6 @@ const useScoringReports = (props) => {
 		}));
 	}, [searchQuery, dateRange, entity, setParams]);
 
-	useEffect(() => {
-		fetchList();
-	}, [params, fetchList]);
-
 	return {
 		list,
 		listLoading : loading,
@@ -121,6 +103,7 @@ const useScoringReports = (props) => {
 		setParams,
 		debounceQuery,
 		listRefetch : trigger,
+		lastUpdatedAt,
 	};
 };
 

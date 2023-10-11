@@ -21,7 +21,8 @@ function Submitted({ detail = {}, contractData = {} }) {
 	const { origin, destination } = getLocationInfo(detail, 'search_type');
 
 	const redirectToContract = () => {
-		const newHref = `${window.location.origin}/${partner_id}/contract-rates/dashboard/pending_approval`;
+		const newHref = `${window.location.origin}/${partner_id}/
+    contract-rates/dashboard?activeTab=pending_approval&page=1`;
 		window.location.href = newHref;
 	};
 

@@ -30,7 +30,7 @@ function Details({
 	const [remarks, setRemarks] = useState('');
 	const { id = '', status = '' } = row || {};
 	const { onSubmit = () => {}, loading = false } = usePostJobOpenRemark({
-		setShowModal: setDetailsModal,
+		setDetailsModal,
 		id,
 		remarks,
 		refetch,

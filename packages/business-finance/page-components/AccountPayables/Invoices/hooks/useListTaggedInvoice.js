@@ -12,6 +12,8 @@ const useListTaggedInvoices = () => {
 		pageSize  : 10,
 	});
 
+	const { pageSize = 10, pageIndex = 1 } = params || {};
+
 	const { payrun = '' } = query || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -27,15 +29,15 @@ const useListTaggedInvoices = () => {
 		try {
 			trigger({
 				params: {
-					payrunId  : payrun,
-					pageSize  : 10,
-					pageIndex : 1,
+					payrunId: payrun,
+					pageSize,
+					pageIndex,
 				},
 			});
 		} catch (e) {
 			toastApiError(e || 'Failed to Fetch Data');
 		}
-	}, [payrun, trigger]);
+	}, [payrun, trigger, pageSize, pageIndex]);
 
 	useEffect(() => {
 		generateInvoice();

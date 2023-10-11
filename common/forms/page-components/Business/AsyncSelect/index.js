@@ -94,6 +94,16 @@ import {
 	asyncListLclCustomsRate,
 	asyncListAirCustomsRate,
 	asyncListTrailerFreightRate,
+	asyncListFclRateFeedback,
+	asyncListLclRateFeedback,
+	asyncListAirRateFeedback,
+	asyncListFtlRateFeedback,
+	asyncListLtlRateFeedback,
+	asyncListFclCustomFeedback,
+	asyncListLclCustomFeedback,
+	asyncListTrailerRateFeedback,
+	asyncListHaulageRateFeedback,
+	asyncListAirCustomFeedback,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -206,6 +216,16 @@ const keyAsyncFieldsParamsMapping = {
 	list_lcl_customs_rate_requests       : asyncListLclCustomsRate,
 	list_air_customs_rate_requests       : asyncListAirCustomsRate,
 	list_trailer_freight_rate_requests   : asyncListTrailerFreightRate,
+	list_fcl_freight_rate_feedbacks      : asyncListFclRateFeedback,
+	list_lcl_freight_rate_feedbacks      : asyncListLclRateFeedback,
+	list_air_freight_rate_feedbacks      : asyncListAirRateFeedback,
+	list_ftl_freight_rate_feedbacks      : asyncListFtlRateFeedback,
+	list_ltl_freight_rate_feedbacks      : asyncListLtlRateFeedback,
+	list_fcl_customs_rate_feedbacks      : asyncListFclCustomFeedback,
+	list_lcl_customs_rate_feedbacks      : asyncListLclCustomFeedback,
+	list_trailer_freight_rate_feedbacks  : asyncListTrailerRateFeedback,
+	list_haulage_freight_rate_feedbacks  : asyncListHaulageRateFeedback,
+	list_air_customs_rate_feedbacks      : asyncListAirCustomFeedback,
 };
 
 const SINGLE_ENTITY = 1;
