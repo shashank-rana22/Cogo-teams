@@ -10,7 +10,7 @@ function LeftPanel(props) {
 	const {
 		list, listLoading, currentUserData, listRefetch, params, setParams,
 		entity, isChannel, setIsChannel, debounceQuery, refetchStats, statsLoading,
-		currLevel, setCurrLevel, levelStack, setLevelStack,
+		currLevel, setCurrLevel, levelStack, setLevelStack, lastUpdatedAt,
 	} = props;
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
@@ -27,6 +27,7 @@ function LeftPanel(props) {
 				currLevel={currLevel}
 				setCurrLevel={setCurrLevel}
 				entity={entity}
+				lastUpdatedAt={lastUpdatedAt}
 			/>
 
 			<LeaderboardFilters

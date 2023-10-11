@@ -3,13 +3,12 @@ import {
 	asyncFieldsOrganizationUser,
 	asyncTicketsCategory,
 	asyncFieldsTicketTypes,
-	asyncListShipments,
 } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
 import { useSelector } from '@cogoport/store';
 
-import { ASYNC_LIST_API } from '../constants';
+import { SERVICE_API_MAPPING } from '../constants';
 
 import getCreateControls from './create-controls';
 
@@ -19,15 +18,18 @@ const useRaiseTicketcontrols = ({
 	formattedSubCategories = [], setSubCategories = () => {}, watchSubCategory = '',
 	t = () => {}, setRaiseToDesk = () => {}, formatRaiseToDeskOptions = [],
 	watchRaisedByDesk = '', watchRaisedToDesk = '', setDefaultTypeId = () => {},
-	watchServiceType = '', watchIdType = '',
+	watchServiceType = '',
+	watchIdType = '',
 }) => {
 	const { rolesArr } = useSelector(({ profile }) => ({ rolesArr: profile?.auth_role_data?.role_functions || [] }));
 
 	const isOperation = rolesArr.includes('operations');
 
-	const checkSid = watchIdType === 'sid' ? ASYNC_LIST_API?.sid?.() : ASYNC_LIST_API[watchServiceType]?.();
+	const checkSid = watchIdType === 'sid'
+		? 'list_shipments' : SERVICE_API_MAPPING?.[watchIdType]?.[watchServiceType];
 
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
+
 	const categoryDeskOptions = useGetAsyncTicketOptions({
 		...asyncTicketsCategory(),
 		params: {
@@ -62,27 +64,30 @@ const useRaiseTicketcontrols = ({
 		},
 	});
 
-	const serialIdOptions = useGetAsyncOptions({
-		...asyncListShipments(),
-		params: {
+	const serialIdOptions = {
+		asyncKey : 'list_shipments',
+		key      : watchRequestType,
+		params   : {
 			filters: {
 				importer_exporter_id : watchOrgId || undefined,
 				user_id              : watchUserId || undefined,
 			},
 		},
 		valueKey: 'serial_id',
-	});
+	};
 
-	const serviceSerialIdOptions = useGetAsyncOptions({
-		...checkSid,
-		params: {
+	const serviceSerialIdOptions = {
+		asyncKey : checkSid,
+		key      : watchServiceType,
+		params   : {
 			filters: {
-				status: 'active',
+				status        : 'active',
+				feedback_type : watchIdType === 'dislike_id' ? 'disliked' : undefined,
 			},
 		},
-		valueKey: 'serial_id',
-	});
-
+		valueKey    : 'serial_id',
+		initialCall : false,
+	};
 	const checkRequest = watchRequestType === 'rate' ? serviceSerialIdOptions : serialIdOptions;
 
 	const controls = getCreateControls({
@@ -101,6 +106,7 @@ const useRaiseTicketcontrols = ({
 		formatRaiseToDeskOptions,
 		setDefaultTypeId,
 		isOperation,
+		watchIdType,
 	});
 
 	return controls.filter((itm) => itm?.visible);

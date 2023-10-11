@@ -19,7 +19,10 @@ const COGOPORT_MAILS = [
 	},
 ];
 
-function getAllowedEmailsList({ orgData = {} }) {
+function getAllowedEmailsList({
+	orgData = {},
+	searchQuery = '',
+}) {
 	const { list: usersList = [] } = orgData || {};
 
 	let options = [];
@@ -29,8 +32,9 @@ function getAllowedEmailsList({ orgData = {} }) {
 			options = [
 				...options,
 				{
-					label : itm?.name,
-					value : itm.email,
+					id    : itm?.id,
+					label : itm?.name || itm?.email,
+					value : itm?.email,
 				},
 			];
 		}
@@ -38,7 +42,9 @@ function getAllowedEmailsList({ orgData = {} }) {
 
 	options = [
 		...options,
-		...COGOPORT_MAILS,
+		...COGOPORT_MAILS.filter(
+			(itm) => (itm.value.includes(searchQuery) || itm.label.includes(searchQuery)),
+		),
 	];
 
 	return options;

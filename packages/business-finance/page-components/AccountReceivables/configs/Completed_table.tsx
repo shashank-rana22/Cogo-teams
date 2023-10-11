@@ -1,7 +1,7 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
-import { format, getByKey, startCase } from '@cogoport/utils';
+import { format, getByKey, isEmpty, startCase } from '@cogoport/utils';
 
 import InvoiceDetails from '../commons/invoiceDetails';
 import Remarks from '../commons/Remarks';
@@ -148,6 +148,12 @@ const completedColumn = ({
 				invoice_type: invoiceType = '',
 			} = getDocumentInfo({ itemData: row });
 
+			const openPdfInNewTab = () => {
+				if (!isEmpty(invoicePdf)) {
+					window.open(invoicePdf, '_blank');
+				}
+			};
+
 			return (
 				<div className={styles.fieldPair}>
 					<div className={styles.column_height}>
@@ -162,8 +168,8 @@ const completedColumn = ({
 								)}
 							>
 								<text
-									className={styles.link}
-									onClick={() => window.open(invoicePdf, '_blank')}
+									className={!isEmpty(invoicePdf) ? styles.link : ''}
+									onClick={openPdfInNewTab}
 									role="presentation"
 								>
 									{`${(invoiceNumber).substring(
@@ -175,18 +181,20 @@ const completedColumn = ({
 						)
 							: (
 								<div
-									className={styles.link}
-									onClick={() => window.open(invoicePdf, '_blank')}
+									className={!isEmpty(invoicePdf) ? styles.link : ''}
+									onClick={openPdfInNewTab}
 									role="presentation"
 								>
 									{invoiceNumber}
 								</div>
 							)}
-						<div className={styles.qwerty}>
-							<Pill size="sm" color={INVOICE_TYPE[row?.invoiceType]}>
-								{invoiceType.replaceAll('_', ' ')}
-							</Pill>
-						</div>
+						{invoiceType ? (
+							<div className={styles.qwerty}>
+								<Pill size="sm" color={INVOICE_TYPE[row?.invoiceType]}>
+									{startCase(invoiceType)}
+								</Pill>
+							</div>
+						) : null}
 					</div>
 				</div>
 			);

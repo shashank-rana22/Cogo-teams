@@ -1,0 +1,27 @@
+.name_display {
+	max-width: calc(100% - 30px);
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.edit_icon {
+	width: 14px;
+	height: 14px;
+	margin-left: 4px;
+	color: #4f4f4f;
+	cursor: pointer;
+}
+
+.popover_container {
+	display: flex !important;
+	max-width: 30px;
+	height: fit-content;
+
+	>div {
+		height: 20px;
+	}
+}
