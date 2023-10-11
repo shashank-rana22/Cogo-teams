@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-function getFormatedEmailBody({ emailState }) {
+function getFormattedEmailBody({ emailState }) {
 	const emailBody = emailState?.rteContent || '';
 
 	const checkRegex = GLOBAL_CONSTANTS?.regex_patterns?.para_html_tag_text || '';
@@ -28,4 +28,4 @@ function getFormatedEmailBody({ emailState }) {
 	return isEmpty && isListEmpty && isH1Empty && isH2Empty && isH3Empty && isIframeEmpty;
 }
 
-export default getFormatedEmailBody;
+export default getFormattedEmailBody;

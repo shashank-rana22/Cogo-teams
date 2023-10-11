@@ -61,7 +61,7 @@ function ToUser({
 						initialCall
 						params={{
 							filters: {
-								status     : 'active',
+								status_not : 'inactive',
 								agent_type : viewType?.includes('admin')
 									? undefined : teamsAdminFilter || undefined,
 								team_admins: !viewType?.includes('admin') ? undefined : [teamsAdminFilter],

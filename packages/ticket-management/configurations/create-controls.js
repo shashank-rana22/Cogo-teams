@@ -28,6 +28,7 @@ const getCreateControls = ({
 	formatRaiseToDeskOptions = [],
 	setDefaultTypeId = () => {},
 	isOperation = false,
+	watchIdType = '',
 }) => {
 	let controls = [];
 
@@ -83,7 +84,7 @@ const getCreateControls = ({
 			name           : 'service_type',
 			placeholder    : 'Select service type',
 			controllerType : 'select',
-			options        : getRateShipmentServices({ t }),
+			options        : getRateShipmentServices({ t, watchIdType }),
 			isClearable    : true,
 			visible        : true,
 			onChange       : () => {
