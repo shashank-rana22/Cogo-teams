@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import Filters from '../../../commons/Filters/index.tsx';
 import InvoiceJourney from '../../components/Dashboard/InvoiceJourney';
@@ -145,10 +145,14 @@ function InvoiceTable({
 		? columns
 		: columns?.filter((column) => column.id !== 'checkbox');
 
-	useEffect(() => {
+	const resetCheckboxes = useCallback(() => {
 		setIsHeaderChecked(false);
 		setCheckedRows([]);
-	}, [listData]);
+	}, [setCheckedRows, setIsHeaderChecked]);
+
+	useEffect(() => {
+		resetCheckboxes();
+	}, [listData, resetCheckboxes]);
 
 	return (
 		<div>
