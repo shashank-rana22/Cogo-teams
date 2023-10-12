@@ -86,7 +86,7 @@ function SubsidiaryServices({
 				<SearchInput
 					value={searchValue}
 					onSearch={setSearchValue}
-					placeholder="Eg. - Origin Entry Summary Declaration"
+					placeholder={`Eg. - ${possible_subsidiary_services?.[GLOBAL_CONSTANTS.zeroth_index]?.name}`}
 					showPrefix={false}
 					onReset={() => setSearchValue('')}
 				/>
