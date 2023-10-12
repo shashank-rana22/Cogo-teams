@@ -2,16 +2,14 @@
 	width: 100%;
 
 	:global {
-		.ui_select_display_container {
-			width: 100%;
-		}
-
-		.ui_select_options_relative_container {
-			display: none;
-		}
-
+		.ui_select_display_container,
 		.ui_select_container {
 			width: 100%;
+		}
+
+		.ui_select_options_relative_container,
+		.ui_multiselect_options_relative_container {
+			display: none;
 		}
 	}
 }
@@ -53,6 +51,58 @@
 }
 
 .option_item {
+	display: flex;
+	align-items: center;
+	padding: 8px;
+	overflow: hidden;
+	white-space: break-all;
+	cursor: pointer;
+	border-bottom: 1px solid #dedede;
+
+	&:hover {
+		background-color: #dedede;
+		border-color: #2c3e50;
+	}
+
+	&:last-of-type {
+		border-bottom: none;
+	}
+}
+
+.selected_items_container {
+	display: flex;
+	flex-flow: row wrap;
+	padding-top: 6px;
+	transition: 2s;
+}
+
+.cross {
+	padding: 4px 8px;
+	margin-bottom: 8px;
+	cursor: pointer;
+	background-color: #f2e3c3;
+	border-radius: 0 6px 6px 0;
+}
+
+.items {
+	display: flex;
+	flex-direction: row;
+	width: fit-content;
+	margin-right: 8px;
+}
+
+.selected_options {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	padding: 4px;
+	margin-bottom: 8px;
+	font-size: 14px;
+	background: #edd7a9;
+	border-radius: 6px 0 0 6px;
+}
+
+.multi_option_item {
 	display: flex;
 	align-items: center;
 	padding: 8px;

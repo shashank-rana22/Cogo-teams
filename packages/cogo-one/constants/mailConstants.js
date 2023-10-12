@@ -151,3 +151,14 @@ export const ORGS_MAPPING = {
 		value : 'other_channel_partners',
 	},
 };
+
+export const USERS_MAPPING = {
+	users: {
+		title : 'Users',
+		value : 'users',
+	},
+	pocs: {
+		title : "POC's",
+		value : 'pocs',
+	},
+};

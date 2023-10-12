@@ -5,11 +5,14 @@ import { useEffect, useCallback, useState } from 'react';
 
 const PAGE_LIMIT = 100;
 
+const ORGANIZATION_ID_REQUIRED_FOR = ['organizations', 'pocs'];
+
 const API_MAPPING = {
 	organizations          : 'list_organization_users',
 	other_organizations    : 'list_lead_users',
 	channel_partners       : 'get_channel_partner_users',
 	other_channel_partners : 'list_lead_users',
+	pocs                   : 'list_organization_billing_addresses',
 };
 
 const getPayload = ({ orgId = '', userIds = [], searchQuery = '', orgType = '' }) => ({
@@ -17,7 +20,7 @@ const getPayload = ({ orgId = '', userIds = [], searchQuery = '', orgType = '' }
 		status               : orgType === 'organizations' ? 'active' : undefined,
 		id                   : isEmpty(userIds) ? undefined : userIds,
 		q                    : searchQuery || undefined,
-		organization_id      : orgType === 'organizations' ? orgId || undefined : undefined,
+		organization_id      : ORGANIZATION_ID_REQUIRED_FOR.includes(orgType) ? orgId || undefined : undefined,
 		is_importer_exporter : orgType === 'channel_partners' ? true : undefined,
 		...(orgType?.includes('other') ? {
 			is_channel_partner : orgType !== 'other_organizations',
@@ -65,7 +68,7 @@ const useGetOrgUsers = ({
 	useEffect(
 		() => {
 			if (orgId && !(isLeadUser && type !== 'toUserEmail')) {
-				fetchUser({ selectedUserIds: initialLoad ? userIds : undefined });
+				fetchUser({ selectedUserIds: initialLoad ? userIds?.map((itm) => itm?.id) : undefined });
 			}
 		},
 		[fetchUser, initialLoad, isLeadUser, orgId, type, userIds],
@@ -77,10 +80,17 @@ const useGetOrgUsers = ({
 
 	const isOrgUserIdPresent = !isEmpty(data?.list);
 
+	const orgData = (
+		loading
+		|| !API_MAPPING[orgType]
+		|| !orgId
+		|| (isLeadUser && type !== 'toUserEmail')
+	) ? {} : data;
+
 	return {
 		orgLoading   : loading,
 		isOrgUserIdPresent,
-		orgData      : (loading || !API_MAPPING[orgType] || !orgId) ? {} : data,
+		orgData,
 		handleSearch : setQuery,
 		initialLoad,
 		searchQuery  : query,

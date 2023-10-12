@@ -1,3 +1,5 @@
+import { Tooltip } from '@cogoport/components';
+import { IcMInfo } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -24,15 +26,52 @@ function getOrgListOptions({
 	}));
 }
 
-function RenderLabel({ item = {} }) {
+function RenderLabel({ item = {}, activeTab = '' }) {
 	return (
-		<div>
-			<div className={styles.agent_label}>
-				{item?.value}
+		<div className={styles.option_container}>
+			<div className={styles.option_data}>
+				<div className={styles.agent_label}>
+					{item?.value}
+				</div>
+				<div className={styles.lower_label}>
+					{(item?.label)}
+				</div>
 			</div>
-			<div className={styles.lower_label}>
-				{(item?.label)}
-			</div>
+
+			{activeTab === 'pocs' ? (
+				<Tooltip
+					content={(
+						<div className={styles.poc_container}>
+							{item?.data?.map(
+								(itm) => (
+									<div className={styles.poc_data} key={itm?.id}>
+										<div>
+											<span>Billing Party Name:</span>
+											{itm?.name}
+										</div>
+										<div>
+											<span>Branch:</span>
+											{itm?.branch?.branch_name}
+										</div>
+										<div>
+											<span>Branch Code:</span>
+											{itm?.branch?.branch_code}
+										</div>
+										<div>
+											<span>Address:</span>
+											{itm?.address}
+										</div>
+									</div>
+								),
+							)}
+						</div>
+					)}
+					className={styles.tooltip_container}
+					placement="right"
+				>
+					<IcMInfo height={18} width={18} />
+				</Tooltip>
+			) : null}
 		</div>
 	);
 }
@@ -92,6 +131,7 @@ function resetEmailRecipientData({
 			orgType: orgType || prev?.orgData?.orgType,
 			orgId,
 		},
+		user_ids: newValues,
 	};
 }
 
