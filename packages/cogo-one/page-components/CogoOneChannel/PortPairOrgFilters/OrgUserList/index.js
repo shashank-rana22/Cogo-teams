@@ -168,6 +168,7 @@ function OrgUsersList({
 						const {
 							user_id,
 							userName,
+							business_name,
 						} = eachUser || {};
 
 						if (loading) {
@@ -192,10 +193,15 @@ function OrgUsersList({
 										onCardClick({ item: eachUser });
 									}}
 								>
-									<div className={styles.all_user_select}>
-										<UserAvatar type="whatsapp" />
-										<div className={styles.name}>{startCase(userName)}</div>
+									<div>
+										<div className={styles.user_select}>
+											<UserAvatar type="whatsapp" />
+											<div className={styles.name}>{startCase(userName)}</div>
+										</div>
+
+										<div className={styles.name}>{startCase(business_name)}</div>
 									</div>
+
 									<IcMArrowNext className={styles.arrow_icon} />
 								</div>
 							</div>

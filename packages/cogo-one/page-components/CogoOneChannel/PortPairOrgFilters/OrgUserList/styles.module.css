@@ -123,6 +123,11 @@
 	align-items: center;
 }
 
+.user_select {
+	display: flex;
+	align-items: center;
+}
+
 .selector {
 	width: 80px;
 	margin-left: 4px;
