@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
 
 import toastApiError from '../../commons/toastApiError.ts';
@@ -7,10 +8,12 @@ import toastApiError from '../../commons/toastApiError.ts';
 const getParams = ({
 	idList = [],
 	status = '',
+	id = '',
 
 }) => ({
-	ids: idList,
+	ids         : idList,
 	status,
+	performedBy : id,
 });
 
 const useApproveQuotation = ({
@@ -18,6 +21,7 @@ const useApproveQuotation = ({
 	status = '',
 	source = 'Quotation',
 }) => {
+	const { id = '' } = useSelector((state) => state?.profile?.user);
 	const [{ loading = false }, trigger] = useRequestBf(
 		{
 			url     : '/common/job/shipment-quotation-status',
@@ -30,14 +34,14 @@ const useApproveQuotation = ({
 	const approveQuotation = useCallback(async (refetch) => {
 		try {
 			await trigger({
-				data: getParams({ idList, status }),
+				data: getParams({ idList, status, id }),
 			});
 			Toast.success(`${source} updated succesfully`);
 			refetch();
 		} catch (error) {
 			toastApiError(error);
 		}
-	}, [trigger, idList, status, source]);
+	}, [trigger, idList, status, source, id]);
 
 	return {
 		approveQuotation,
