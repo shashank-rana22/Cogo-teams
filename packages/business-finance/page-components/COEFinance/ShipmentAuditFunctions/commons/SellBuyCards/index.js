@@ -32,7 +32,7 @@ function SellBuyCards({
 		grandTotal += i.grand_total;
 	});
 
-	const checkIsApproved = () => data.every((item) => item?.quotation_status);
+	const checkIsApproved = () => data.every((item) => item?.quotation_state === 'APPROVED');
 
 	return (
 		<div className={styles.custom_accordion}>

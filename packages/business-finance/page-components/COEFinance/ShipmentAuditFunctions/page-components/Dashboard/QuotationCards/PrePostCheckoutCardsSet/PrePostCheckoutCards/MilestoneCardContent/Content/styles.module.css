@@ -57,20 +57,9 @@
 	color: #828282;
 }
 
-/* .parent_timeline {
-
-}
-
-.scroll {
-
-} */
-
 .timeline_heading {
 	margin-bottom: 20px;
 	font-weight: 600;
-
-	/* overflow-x: scroll;
-    white-space: nowrap; */
 }
 
 .timeline {
@@ -109,5 +98,5 @@
 
 .flex_content {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 }

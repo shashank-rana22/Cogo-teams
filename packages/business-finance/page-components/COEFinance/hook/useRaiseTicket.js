@@ -3,6 +3,7 @@ import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useRaiseTicket = ({
+	setShowTicketModal = () => {},
 	shipmentData = {},
 	service = {},
 }) => {
@@ -50,6 +51,8 @@ const useRaiseTicket = ({
 					},
 				},
 			});
+
+			setShowTicketModal(false);
 
 			Toast.success('Successfully Created');
 		} catch (error) {

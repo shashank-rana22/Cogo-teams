@@ -29,7 +29,7 @@ const getApproveJobAuditBttnCondition = ({ quotationsData }) => {
 		return false;
 	});
 
-	const isPrePostQuotationsApproved = isPrePostBuyApproved && isPrePostSellApproved;
+	const isPrePostQuotationsApproved = isPrePostBuyApproved.every((i) => i) && isPrePostSellApproved.every((i) => i);
 
 	const bttnDisableCondition = isOprClosedQuotationsApproved
     && isFinClosedQuotationsApproved

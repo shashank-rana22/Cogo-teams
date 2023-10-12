@@ -10,6 +10,7 @@ function FinancialClosedCards({
 	type = '',
 	data = [],
 	loading = false,
+	shipment_id = '',
 }) {
 	return (
 		<div className={styles.single_card}>
@@ -37,6 +38,7 @@ function FinancialClosedCards({
 									<SellBuyCards
 										source="FIN"
 										type={type}
+										shipment_id={shipment_id}
 										data={data}
 										loading={loading}
 									/>

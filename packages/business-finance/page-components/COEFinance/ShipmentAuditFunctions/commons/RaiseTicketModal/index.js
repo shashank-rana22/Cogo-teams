@@ -45,6 +45,7 @@ function RaiseTicketModal({
 	} = useListStakeholders({ shipmentId: shipment_id });
 
 	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({
+		setShowTicketModal,
 		additionalInfo,
 		shipmentData,
 		service,
@@ -68,11 +69,6 @@ function RaiseTicketModal({
 		shipmentData,
 		STAKEHOLDER_OPTIONS,
 	});
-
-	const onSubmit = async () => {
-		await raiseTickets(formValues);
-		setShowTicketModal(false);
-	};
 
 	(fields || []).forEach((item) => {
 		if (item?.rules?.required && !formValues[item?.name]) {
@@ -133,7 +129,7 @@ function RaiseTicketModal({
 				<Button
 					size="md"
 					disabled={loading || shipmentLoading || stakeholderLoading || disableButton}
-					onClick={handleSubmit(onSubmit)}
+					onClick={handleSubmit(raiseTickets)}
 				>
 					Submit
 				</Button>

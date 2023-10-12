@@ -99,35 +99,31 @@ export default function Content({
 
 						{(!item?.modifiedBy && item?.quotationState !== 'APPROVED') ? (
 							<div className={styles.flex_content}>
-								<div />
-								<div className={styles.flex_content}>
-									<Button
-										size="md"
-										themeType="secondary"
-										style={{ marginRight: '10px' }}
-										onClick={setShowTicketModal}
-									>
-										Raise Ticket
-									</Button>
+								<Button
+									size="md"
+									themeType="secondary"
+									style={{ marginRight: '10px' }}
+									onClick={setShowTicketModal}
+								>
+									Raise Ticket
+								</Button>
 
-									{ showTicketModal ? (
-										<RaiseTicketModal
-											setShowTicketModal={setShowTicketModal}
-											showTicketModal={showTicketModal}
-											shipment_id={shipment_id}
-											id={job_number}
-											refetch={getPrePostShipmentQuotes}
-										/>
-									) : null}
-									<Button
-										size="md"
-										themeType="primary"
-										onClick={() => approveQuotation(getPrePostShipmentQuotes)}
-									>
-										Accept
-									</Button>
-
-								</div>
+								{ showTicketModal ? (
+									<RaiseTicketModal
+										setShowTicketModal={setShowTicketModal}
+										showTicketModal={showTicketModal}
+										shipment_id={shipment_id}
+										id={job_number}
+										refetch={getPrePostShipmentQuotes}
+									/>
+								) : null}
+								<Button
+									size="md"
+									themeType="primary"
+									onClick={() => approveQuotation(getPrePostShipmentQuotes)}
+								>
+									Accept
+								</Button>
 							</div>
 						) : null}
 
