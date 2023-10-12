@@ -11,7 +11,7 @@
 }
 
 .org_select {
-	width: 40%;
+	width: 47% !important;
 }
 
 .users_select {
@@ -24,12 +24,12 @@
 }
 
 .agent_label {
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 600;
 	color: #4f4f4f;
 }
 
 .lower_label {
-	font-size: 12px;
+	font-size: 10px;
 	color: #838080;
 }

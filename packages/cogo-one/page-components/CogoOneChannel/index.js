@@ -10,6 +10,7 @@ import React, { useState, useEffect } from 'react';
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR, FIREBASE_TABS } from '../../constants';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
+import { getInitialData } from '../../helpers/getInitialData';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
@@ -17,6 +18,7 @@ import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
 import useGetSignature from '../../hooks/useGetSignature';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
+import useListCogooneGroupMembers from '../../hooks/useListCogooneGroupMembers';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
 import Calender from './Calendar';
@@ -37,16 +39,8 @@ function CogoOne() {
 		token            : general.firestoreToken,
 		userEmailAddress : profile?.user?.email,
 	}));
-	const [activeTab, setActiveTab] = useState({
-		tab               : channel_type === 'email' ? 'firebase_emails' : 'message',
-		subTab            : 'all',
-		hasNoFireBaseRoom : false,
-		expandSideBar     : false,
-		data              : assigned_chat ? {
-			id: assigned_chat,
-			channel_type,
-		} : {},
-	});
+
+	const [activeTab, setActiveTab] = useState(getInitialData({ assigned_chat, channel_type }));
 	const [viewType, setViewType] = useState('');
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
@@ -75,6 +69,14 @@ function CogoOne() {
 	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
+
+	const { group_id = '' } = activeTab?.data || {};
+
+	const {
+		listCogooneGroupMembers = () => {},
+		membersList = [], groupMembersLoading,
+	} = useListCogooneGroupMembers({ globalGroupId: group_id });
+
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 	const firestore = getFirestore(app);
 
@@ -111,6 +113,7 @@ function CogoOne() {
 		queryAssignedChat: assigned_chat,
 	};
 
+	const teamsSideBarCheck = (activeTab?.tab === 'teams' && (!!activeTab?.data?.id || !!activeTab?.data?.group_id));
 	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
 	const { user_id = '', lead_user_id = '' } = tabData || {};
 	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
@@ -118,8 +121,10 @@ function CogoOne() {
 		? formattedMessageData?.organization_id
 		: activeTab?.data?.organization_id;
 	const expandedSideBar = (ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
-		|| (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) && activeTab?.expandSideBar));
-	const collapsedSideBar = ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
+		|| ((ENABLE_EXPAND_SIDE_BAR.includes(
+			activeTab?.data?.channel_type,
+		) || teamsSideBarCheck) && activeTab?.expandSideBar));
+	const collapsedSideBar = (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) || teamsSideBarCheck)
 								&& !activeTab?.expandSideBar;
 	useEffect(() => {
 		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
@@ -208,11 +213,14 @@ function CogoOne() {
 									setActiveTab={setActiveTab}
 									suggestions={suggestions}
 									setModalType={setModalType}
+									listCogooneGroupMembers={listCogooneGroupMembers}
+									membersList={membersList}
 								/>
 							</div>
 							{(
 								ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
 								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
+								|| teamsSideBarCheck
 							) ? (
 								<div className={cl`${styles.user_profile_layout} 
 								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}
@@ -235,6 +243,10 @@ function CogoOne() {
 										orgId={orgId}
 										mailProps={mailProps}
 										chatsConfig={activeTab}
+										membersList={membersList}
+										teamsSideBarCheck={teamsSideBarCheck}
+										groupMembersLoading={groupMembersLoading}
+										userName={userName}
 									/>
 									{(hasNoFireBaseRoom && !user_id && !lead_user_id)
 									&& <div className={styles.overlay_div} />}

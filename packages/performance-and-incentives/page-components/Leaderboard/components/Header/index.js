@@ -22,7 +22,7 @@ import styles from './styles.module.css';
 
 const { TODAY, LAST_MONTH, THIS_MONTH, LAST_QUARTER, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
 
-const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
+const { ADMIN, MANAGER, AGENT } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 const GET_START_DATE_FUNCTION_MAPPING = {
 	[TODAY]        : getTodayStartDate,
@@ -100,14 +100,13 @@ function Header(props) {
 								maxDate={new Date()}
 								isPreviousDaysAllowed
 								onChange={setDateRange}
-
 							/>
 						)}
 					</div>
 				</div>
 
 				<div>
-					{incentive_leaderboard_viewtype !== ADMIN && (<ProgressBar />)}
+					{[MANAGER, AGENT].includes(incentive_leaderboard_viewtype) && (<ProgressBar />)}
 
 					{incentive_leaderboard_viewtype === ADMIN && (
 						<Button

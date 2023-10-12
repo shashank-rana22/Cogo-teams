@@ -13,6 +13,7 @@ const MESSAGE_MAPPING = {
 	voice           : 'call log',
 	outlook         : 'mail',
 	firebase_emails : 'mail',
+	teams           : 'Teams',
 };
 
 function EmptyChatPage({

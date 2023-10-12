@@ -4,7 +4,7 @@ import { getSupplySessionQuery } from '../../../helpers/viewTypeFunctions';
 import { COMMON_ADMIN_ACCESIBLE_BUTTONS } from '../defaultViewOptions';
 
 const COGOONE_ADMIN = {
-	chat_tabs_to_be_shown  : ['message', 'voice', 'outlook', 'firebase_emails'],
+	chat_tabs_to_be_shown  : ['message', 'voice', 'firebase_emails', 'teams'],
 	group_chats_query      : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 	teams_chats_base_query : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
 	session_type_query     : getSupplySessionQuery,

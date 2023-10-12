@@ -1,8 +1,9 @@
-import { addDays, subtractDays } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import { DEFAULT_GLOBAL_FILTERS } from '../../constants/default_global_filters';
+
 import DashboardView from './Dashboard';
-import DrillDownView from './DrillDown';
+import DynamicGraph from './DynamicGraph';
 import Filters from './Filters';
 import Heading from './Heading';
 import MapView from './MapView';
@@ -14,7 +15,7 @@ const VIEW_MAPPING = {
 		heading   : 'Price Accuracy Dashboard',
 	},
 	drilldown: {
-		Component : DrillDownView,
+		Component : DynamicGraph,
 		heading   : 'Rates Life Cycle',
 		backView  : 'dashboard',
 	},
@@ -25,17 +26,9 @@ const VIEW_MAPPING = {
 	},
 };
 
-const MONTH_DAYS = 30;
-
 function AccuracyDashboard() {
 	const [view, setView] = useState('dashboard');
-	const [globalFilters, setGlobalFilters] = useState({
-		service_type : 'fcl',
-		parent_mode  : null,
-		start_date   : subtractDays(new Date(), MONTH_DAYS),
-		end_date     : addDays(new Date(), MONTH_DAYS),
-		chartType    : 'trend',
-	});
+	const [globalFilters, setGlobalFilters] = useState(DEFAULT_GLOBAL_FILTERS);
 
 	const { Component, heading, backView } = VIEW_MAPPING[view];
 	const showCommons = view !== 'map_view';
@@ -57,6 +50,7 @@ function AccuracyDashboard() {
 					<Filters
 						globalFilters={globalFilters}
 						setGlobalFilters={setGlobalFilters}
+						view={view}
 					/>
 				</>
 			)}
