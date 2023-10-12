@@ -6,11 +6,10 @@ const TRADE_TYPE = {
 	import : 'Destination',
 };
 
-const MAIN_FREIGHT = ['air_freight', 'fcl_freight'];
-
-const getServiceName = (service = {}) => {
+const getServiceName = (service = {}, primary_service = '') => {
 	const { trade_type = '', service_type } = service;
-	if (MAIN_FREIGHT.includes(service_type)) {
+
+	if (primary_service === service_type) {
 		return service_type;
 	}
 	return trade_type ? `${TRADE_TYPE[trade_type]}_${service_type}` : service_type;
@@ -30,7 +29,7 @@ const getDetails = ({ item, primary_service }) => {
 		container_type = '',
 	} = item || {};
 
-	const serviceName = getServiceName(item);
+	const serviceName = getServiceName(item, primary_service);
 
 	const MAPPING = {
 		fcl_freight: [

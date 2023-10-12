@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 const getServiceName = (service) => {
 	const { trade_type = '', service_type = '' } = service || {};
+
 	if (trade_type === 'export') {
 		return `origin_${service_type}`;
 	}

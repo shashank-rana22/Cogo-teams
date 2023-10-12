@@ -52,7 +52,7 @@ const useAdditionalServices = ({ rateCardData = {}, detail = {}, source = '' }) 
 	Object.keys(finalServiceDetails).forEach((serviceId) => {
 		const serviceItem = finalServiceDetails[serviceId];
 
-		const serviceName = getServiceName(serviceItem);
+		const serviceName = getServiceName(serviceItem, primaryService);
 
 		if (!SERVICE_DATA[serviceName]) {
 			SERVICE_DATA[serviceName] = [];
@@ -137,10 +137,12 @@ const useAdditionalServices = ({ rateCardData = {}, detail = {}, source = '' }) 
 			isSelected,
 			rateData: Object.values(finalServiceDetails).filter(
 				(serviceItem) => {
-					if (TRANSPORTATION_SERVICES.includes(serviceItem.service_type)) {
+					if (TRANSPORTATION_SERVICES.includes(serviceItem.service_type)
+					&& primaryService !== serviceItem.service_type) {
 						return service.name === `${serviceItem.trade_type}_transportation`;
 					}
-					return getServiceName(serviceItem) === service.name;
+
+					return getServiceName(serviceItem, primaryService) === service.name;
 				},
 			),
 			source: rateCardData.source,

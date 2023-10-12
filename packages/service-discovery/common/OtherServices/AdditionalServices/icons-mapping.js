@@ -10,6 +10,8 @@ import {
 
 const ICONS_MAPPING = {
 	transportation    : <IcMAppTruck width={30} height={30} />,
+	ftl_freight       : <IcMAppTruck width={30} height={30} />,
+	ltl_freight       : <IcMAppTruck width={30} height={30} />,
 	haulage_freight   : <IcMAppTruck width={28} height={28} />,
 	fcl_customs       : <IcMAppCustoms width={28} height={28} />,
 	air_customs       : <IcMAppCustoms width={28} height={28} />,

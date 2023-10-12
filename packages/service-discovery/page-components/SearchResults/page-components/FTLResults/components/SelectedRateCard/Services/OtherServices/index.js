@@ -18,7 +18,6 @@ function OtherServices({
 }) {
 	return (
 		<div className={styles.container}>
-
 			<AdditionalServices
 				rateCardData={rateCardData}
 				detail={detail}
@@ -26,11 +25,6 @@ function OtherServices({
 				refetchSearch={refetch}
 				source="search-results"
 				refetchLoading={loading}
-			/>
-			<TotalLandedCost
-				rateCardData={rateCardData}
-				createCheckoutLoading={createCheckoutLoading}
-				handleBook={handleBook}
 			/>
 
 			{!isEmpty(possible_subsidiary_services) && (
@@ -44,6 +38,12 @@ function OtherServices({
 					/>
 				</div>
 			)}
+
+			<TotalLandedCost
+				rateCardData={rateCardData}
+				createCheckoutLoading={createCheckoutLoading}
+				handleBook={handleBook}
+			/>
 		</div>
 	);
 }
