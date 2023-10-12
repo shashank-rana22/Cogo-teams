@@ -10,7 +10,9 @@ import styles from './styles.module.css';
 
 function outerClick({ event, ref, setTriggerCreation }) {
 	if (ref.current && !ref.current.contains(event.target)) {
-		setTriggerCreation(true);
+		setTimeout(() => {
+			setTriggerCreation(true);
+		}, 0);
 	}
 }
 
@@ -18,6 +20,8 @@ function ToUser({
 	viewType = '',
 	firestore = {},
 	setActiveTab = () => {},
+	setLoadingDraft = () => {},
+	loadingDraft = false,
 }) {
 	const selectRef = useRef(null);
 
@@ -26,8 +30,7 @@ function ToUser({
 
 	const {
 		createOrGetDraftTeamRoom = () => {},
-		loading,
-	} = useCreateOrGetDraftTeamRoom({ firestore, setActiveTab, setTriggerCreation });
+	} = useCreateOrGetDraftTeamRoom({ firestore, setActiveTab, setTriggerCreation, setLoadingDraft });
 
 	const isEmptyList = isEmpty(users?.userIds);
 
@@ -45,7 +48,7 @@ function ToUser({
 	}, []);
 
 	useEffect(() => {
-		if (!triggerCreation || loading) {
+		if (!triggerCreation || loadingDraft) {
 			return;
 		}
 
@@ -68,36 +71,38 @@ function ToUser({
 			userIds,
 			userIdsData: modifiedUserData,
 		});
-	}, [createOrGetDraftTeamRoom, isEmptyList, loading, triggerCreation, users]);
+	}, [createOrGetDraftTeamRoom, isEmptyList, loadingDraft, triggerCreation, users]);
 
 	return (
 		<div className={styles.wrapper} ref={selectRef}>
 			<div className={styles.flex_common}>
 				To:
-				<AsyncSelect
-					multiple
-					value={users?.userIds || []}
-					className={styles.input_styles}
-					size="sm"
-					placeholder="Enter a name or email"
-					onChange={(val, obj) => {
-						setUsers({ userIds: val, userData: obj });
-					}}
-					caret={false}
-					isClearable
-					asyncKey="list_chat_agents"
-					initialCall
-					params={{
-						filters: {
-							status_not : 'inactive',
-							agent_type : viewType?.includes('admin')
-								? undefined : teamsAdminFilter || undefined,
-							team_admins: !viewType?.includes('admin') ? undefined : [teamsAdminFilter],
-						},
-						sort_by: 'agent_type',
-					}}
-					renderLabel={(item) => <UserCard item={item} />}
-				/>
+				{loadingDraft ? <div className={styles.loading}>loading...</div> : (
+					<AsyncSelect
+						multiple
+						value={users?.userIds || []}
+						className={styles.input_styles}
+						size="sm"
+						placeholder="Enter a name or email"
+						onChange={(val, obj) => {
+							setUsers({ userIds: val, userData: obj });
+						}}
+						caret={false}
+						isClearable
+						asyncKey="list_chat_agents"
+						initialCall
+						params={{
+							filters: {
+								status_not : 'inactive',
+								agent_type : viewType?.includes('admin')
+									? undefined : teamsAdminFilter || undefined,
+								team_admins: !viewType?.includes('admin') ? undefined : [teamsAdminFilter],
+							},
+							sort_by: 'agent_type',
+						}}
+						renderLabel={(item) => <UserCard item={item} />}
+					/>
+				)}
 			</div>
 		</div>
 	);

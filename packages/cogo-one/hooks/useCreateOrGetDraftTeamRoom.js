@@ -9,7 +9,7 @@ import {
 	where,
 	orderBy, addDoc,
 } from 'firebase/firestore';
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import formatNames from '../helpers/getGroupName';
@@ -111,6 +111,7 @@ function useCreateOrGetDraftTeamRoom({
 	firestore = {},
 	setActiveTab = () => {},
 	setTriggerCreation = () => {},
+	setLoadingDraft = () => {},
 }) {
 	const {
 		loggedInAgendId,
@@ -130,12 +131,10 @@ function useCreateOrGetDraftTeamRoom({
 		},
 	}));
 
-	const [loading, setLoading] = useState(false);
-
 	const { hashFunction } = useHashFunction();
 
 	const createOrGetDraftTeamRoom = useCallback(async ({ userIds = [], userIdsData = [] }) => {
-		setLoading(true);
+		setLoadingDraft(true);
 
 		const setActiveRoom = ({ val = {} }) => {
 			setActiveTab((prev) => ({
@@ -194,7 +193,7 @@ function useCreateOrGetDraftTeamRoom({
 			console.error('e', e);
 			Toast.error('Something Went Wrong');
 		} finally {
-			setLoading(false);
+			setLoadingDraft(false);
 			setTriggerCreation(false);
 		}
 	}, [
@@ -206,11 +205,11 @@ function useCreateOrGetDraftTeamRoom({
 		loggedInAgentNumber,
 		setActiveTab,
 		setTriggerCreation,
+		setLoadingDraft,
 	]);
 
 	return {
 		createOrGetDraftTeamRoom,
-		loading,
 	};
 }
 

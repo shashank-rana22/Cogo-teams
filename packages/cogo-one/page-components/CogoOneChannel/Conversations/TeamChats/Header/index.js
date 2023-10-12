@@ -18,6 +18,8 @@ function Header({
 	activeTab = {},
 	hasPermissionToEdit = false,
 	loggedInUserId = '',
+	setLoadingDraft = () => {},
+	loadingDraft = false,
 }) {
 	const {
 		is_draft = false,
@@ -36,6 +38,8 @@ function Header({
 				firestore={firestore}
 				setActiveTab={setActiveTab}
 				viewType={viewType}
+				setLoadingDraft={setLoadingDraft}
+				loadingDraft={loadingDraft}
 			/>
 		);
 	}
