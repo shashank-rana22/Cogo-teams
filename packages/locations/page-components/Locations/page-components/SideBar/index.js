@@ -1,14 +1,16 @@
 import { Button } from '@cogoport/components';
+import { dynamic } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 
 import getHeader from '../../constants/header';
 import useUpdateLocation from '../../hooks/useUpdateLocation';
-import Details from '../Details';
 
-import CreateUpdateForm from './AddEdit';
-import Form from './AddEdit/Form';
 import styles from './styles.module.css';
+
+const CreateUpdateForm = dynamic(() => import('./AddEdit'), { ssr: false });
+const Form = dynamic(() => import('./AddEdit/Form'), { ssr: false });
+const Details = dynamic(() => import('../Details'), { ssr: false });
 
 function SideBarComponent({
 	sideBar = '',
@@ -17,28 +19,32 @@ function SideBarComponent({
 	setSelectedLocation = () => {},
 	refetch = () => {},
 }) {
+	const editRef = useRef(null);
 	const { t } = useTranslation(['locations']);
 
 	const onClose = () => {
 		setSideBar('');
 		setSelectedLocation({});
 	};
+
 	const { loading = false, apiTrigger = () => {} } = useUpdateLocation({
 		refetch: () => {
 			setSideBar('');
 			refetch();
 		},
 	});
-	const editRef = useRef(null);
+
 	const onEditSubmit = () => {
 		editRef.current.formSubmit();
 	};
+
 	const handleEditSubmit = ({ data = {} }) => {
 		apiTrigger({ data, id: selectedLocation?.id });
 	};
+
 	const callBack = () => setSideBar(null);
 
-	const header = getHeader({ t });
+	const header = useMemo(() => getHeader({ t }), [t]);
 
 	const renderBody = () => {
 		switch (sideBar) {
@@ -53,8 +59,10 @@ function SideBarComponent({
 						/>
 					</div>
 				);
+
 			case 'create':
 				return <CreateUpdateForm setSideBar={setSideBar} refetch={refetch} item={selectedLocation} />;
+
 			case 'update':
 				return (
 					<div>
@@ -65,6 +73,7 @@ function SideBarComponent({
 							handleSubmitForm={handleEditSubmit}
 							callBack={callBack}
 						/>
+
 						<div className={styles.btn_align}>
 							<Button
 								themeType="secondary"
@@ -85,6 +94,7 @@ function SideBarComponent({
 					</div>
 
 				);
+
 			default:
 				return null;
 		}

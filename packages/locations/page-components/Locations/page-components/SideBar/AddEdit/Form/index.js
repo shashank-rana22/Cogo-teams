@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useImperativeHandle, forwardRef } from 'react';
 
@@ -8,11 +9,15 @@ import getShowElement from '../../../../utils/get-show-control';
 
 function Form({ handleSubmitForm = () => {}, callBack = () => {}, item = {} }, ref) {
 	const DEFAULT_VALUES = {};
+
 	const { t } = useTranslation(['locations']);
+
 	let fields = controls({ t, item });
-	if (item) {
-		fields = fields?.map((data) => ({ ...data, value: item[data.name] }));
+
+	if (!isEmpty(item)) {
+		fields = fields?.map((data) => ({ ...data, value: item[data?.name] }));
 	}
+
 	fields.forEach((ctrl) => {
 		if (ctrl?.value) {
 			DEFAULT_VALUES[ctrl.name] = ctrl.value;

@@ -1,10 +1,11 @@
+import { dynamic } from '@cogoport/next';
 import { useState } from 'react';
 
 import useGetLocationsList from './hooks/useGetLocationsList';
 import Header from './page-components/Header';
 import PageView from './page-components/PageView';
-import SideBarComponent from './page-components/SideBar';
-import styles from './styles.module.css';
+
+const SideBarComponent = dynamic(() => import('./page-components/SideBar'), { ssr: false });
 
 function Locations() {
 	const [sideBar, setSideBar] = useState('');
@@ -23,9 +24,7 @@ function Locations() {
 		refetch = () => {},
 	} = useGetLocationsList();
 	return (
-		<div className={styles.container}>
-			<div className={styles.header} />
-
+		<div>
 			<Header setFilters={setFilters} setSideBar={setSideBar} filters={filters} activeTab={filters.type} />
 			<PageView
 				onClickCard={onClickCard}

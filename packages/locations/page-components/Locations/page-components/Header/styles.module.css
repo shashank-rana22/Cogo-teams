@@ -7,8 +7,8 @@
 
 .btn_align {
 	display: flex;
+}
 
-	button {
-		margin-left: 5px;
-	}
+.create {
+	margin: 0 8px;
 }

@@ -5,6 +5,7 @@ const getFilterControls = ({ t = () => {} }) => [
 		type        : 'text',
 		placeholder : t('locations:controls_name_placeholder'),
 		span        : 12,
+		size        : 'sm',
 	},
 	{
 		name        : 'status',
@@ -15,8 +16,8 @@ const getFilterControls = ({ t = () => {} }) => [
 			{ label: t('locations:controls_status_options_active'), value: 'active' },
 			{ label: t('locations:controls_status_options_inactive'), value: 'inactive' },
 		],
-		rules : { required: t('locations:controls_status_rules_required') },
-		span  : 12,
+		span : 12,
+		size : 'sm',
 	},
 	{
 		name        : 'postal_code',
@@ -25,6 +26,7 @@ const getFilterControls = ({ t = () => {} }) => [
 		placeholder : t('locations:controls_postal_code_placeholder'),
 		condition   : { type: ['pincode', 'airport', 'seaport'] },
 		span        : 12,
+		size        : 'sm',
 
 	},
 	{
@@ -32,16 +34,16 @@ const getFilterControls = ({ t = () => {} }) => [
 		label       : t('locations:controls_latitude_label'),
 		type        : 'number',
 		placeholder : t('locations:controls_latitude_placeholder'),
-		rules       : { required: t('locations:controls_latitude_rules_required') },
 		span        : 12,
+		size        : 'sm',
 	},
 	{
 		name        : 'longitude',
 		label       : t('locations:controls_longitude_label'),
 		type        : 'number',
 		placeholder : t('locations:controls_longitude_placeholder'),
-		rules       : { required: t('locations:controls_longitude_rules_required') },
 		span        : 12,
+		size        : 'sm',
 	},
 	{
 		name        : 'currency_code',
@@ -49,8 +51,8 @@ const getFilterControls = ({ t = () => {} }) => [
 		type        : 'text',
 		placeholder : t('locations:controls_currency_code_placeholder'),
 		condition   : { type: ['country'] },
-		rules       : { required: t('locations:controls_currency_code_rules_required') },
 		span        : 12,
+		size        : 'sm',
 	},
 	{
 		name           : 'continent_id',
@@ -60,6 +62,7 @@ const getFilterControls = ({ t = () => {} }) => [
 		optionsListKey : 'locations',
 		params         : { filters: { type: ['continent'] } },
 		span           : 12,
+		size           : 'sm',
 	},
 	{
 		name           : 'trade_id',
@@ -69,6 +72,7 @@ const getFilterControls = ({ t = () => {} }) => [
 		optionsListKey : 'locations',
 		params         : { filters: { type: ['trade'] } },
 		span           : 12,
+		size           : 'sm',
 	},
 	{
 		name        : 'country_id',
@@ -91,8 +95,9 @@ const getFilterControls = ({ t = () => {} }) => [
 				'warehouse',
 			],
 		},
-		rules : { required: t('locations:controls_country_id_rules_required') },
-		span  : 12,
+		span : 12,
+		size : 'sm',
+
 	},
 	{
 		name        : 'region_id',
@@ -102,6 +107,7 @@ const getFilterControls = ({ t = () => {} }) => [
 		params      : { filters: { type: ['region'] } },
 		placeholder : t('locations:controls_region_id_placeholder'),
 		span        : 12,
+		size        : 'sm',
 	},
 	{
 		name        : 'city_id',
@@ -122,8 +128,8 @@ const getFilterControls = ({ t = () => {} }) => [
 				'railway_terminal',
 			],
 		},
-		rules : { message: t('locations:controls_city_id_rules_required') },
-		span  : 12,
+		span : 12,
+		size : 'sm',
 	},
 	{
 		name        : 'cluster_id',
@@ -136,7 +142,8 @@ const getFilterControls = ({ t = () => {} }) => [
 			type: ['seaport', 'airport', 'pincode', 'cfs', 'cluster', 'yard'],
 
 		},
-		span: 12,
+		span : 12,
+		size : 'sm',
 	},
 	{
 		name           : 'seaport_id',
@@ -146,6 +153,7 @@ const getFilterControls = ({ t = () => {} }) => [
 		optionsListKey : 'locations',
 		params         : { filters: { type: ['seaport'] } },
 		span           : 12,
+		size           : 'sm',
 	},
 	{
 		name           : 'airport_id',
@@ -155,6 +163,7 @@ const getFilterControls = ({ t = () => {} }) => [
 		optionsListKey : 'locations',
 		params         : { filters: { type: ['airport'] } },
 		span           : 12,
+		size           : 'sm',
 	},
 	{
 		name        : 'pincode_id',
@@ -173,8 +182,8 @@ const getFilterControls = ({ t = () => {} }) => [
 				'warehouse',
 			],
 		},
-		rules : { required: t('locations:controls_pincode_id_rules_required') },
-		span  : 12,
+		span : 12,
+		size : 'sm',
 	},
 	{
 		name        : 'cfs_code',
@@ -185,6 +194,7 @@ const getFilterControls = ({ t = () => {} }) => [
 		placeholder : t('locations:controls_cfs_code_placeholder'),
 		condition   : { type: ['cfs'] },
 		span        : 12,
+		size        : 'sm',
 	},
 	{
 		name        : 'port_code',
@@ -193,6 +203,7 @@ const getFilterControls = ({ t = () => {} }) => [
 		placeholder : t('locations:controls_port_code_placeholder'),
 		condition   : { type: ['seaport', 'airport'] },
 		span        : 12,
+		size        : 'sm',
 	},
 	{
 		name        : 'inttra_code',
@@ -201,6 +212,7 @@ const getFilterControls = ({ t = () => {} }) => [
 		condition   : { type: ['seaport'] },
 		placeholder : t('locations:controls_inttra_code_placeholder'),
 		span        : 12,
+		size        : 'sm',
 	},
 ];
 export default getFilterControls;

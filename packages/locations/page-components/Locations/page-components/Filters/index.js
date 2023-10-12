@@ -1,44 +1,38 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
+import { dynamic } from '@cogoport/next';
 import { useState } from 'react';
 
-import Filters from './Filter';
-import styles from './styles.module.css';
+const Filter = dynamic(() => import('./Filter'), { ssr: false });
 
-function Filter({ filters = {}, setFilters = () => {}, activeTab = 'create' }) {
+function Filters({ filters = {}, setFilters = () => {}, activeTab = 'create' }) {
 	const [show, setShow] = useState(false);
 
 	return (
-		<div className={styles.container}>
-			<Button themeType="secondary" onClick={() => setShow(!show)}>
-				<IcMFilter />
-				{' '}
-				FILTERS
-			</Button>
-
-			<Modal
-				show={show}
-				placement="top-right"
-				closeOnOuterClick={() => setShow(!show)}
-				size="sm"
-				onClose={() => setShow(!show)}
-			>
-				<Modal.Header title="Apply Filter" />
-				<Modal.Body>
-
-					<Filters
+		<div>
+			<Popover
+				placement="bottom"
+				visible={show}
+				onClickOutside={() => setShow(false)}
+				render={show ? (
+					<Filter
 						filters={filters}
 						setFilters={setFilters}
 						setShow={setShow}
 						activeTab={activeTab}
 					/>
 
-				</Modal.Body>
-
-			</Modal>
+				) : null}
+			>
+				<Button themeType="secondary" onClick={() => setShow(!show)}>
+					<IcMFilter />
+					{' '}
+					FILTERS
+				</Button>
+			</Popover>
 		</div>
 
 	);
 }
 
-export default Filter;
+export default Filters;
