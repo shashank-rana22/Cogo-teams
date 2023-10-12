@@ -1,0 +1,23 @@
+.wrap {
+	width: 100%;
+
+	:global {
+		.ui_select_display_container {
+			min-width: 180px;
+			max-width: 180px;
+		}
+	}
+}
+
+.label {
+	margin-bottom: 6px;
+	font-weight: 500;
+}
+
+.button_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 18px;
+}

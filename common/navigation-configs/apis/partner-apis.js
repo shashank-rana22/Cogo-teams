@@ -13629,6 +13629,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'get_shipment',
+			access_type  : 'private',
+			service_name : 'bookings',
+		},
 	],
 	analytics_dashboard: [
 		{

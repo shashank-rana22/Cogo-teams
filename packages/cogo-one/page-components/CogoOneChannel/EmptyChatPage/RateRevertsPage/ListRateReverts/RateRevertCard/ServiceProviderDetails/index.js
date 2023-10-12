@@ -1,14 +1,18 @@
-import { Pill, Tooltip, Popover } from '@cogoport/components';
+import { Pill, Popover } from '@cogoport/components';
 import { IcMInfo, IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import ShipmentInfoDetail from './ShipmentInfoDetail';
 import styles from './styles.module.css';
 
 const INDEX_STEP = 1;
 
-function ServiceProviderDetails({ cardData = {} }) {
-	const { service_provider = {}, service_provider_poc = {}, source = '' } = cardData || {};
+function ServiceProviderDetails({
+	cardData = {},
+	shipmentPopover = {}, setShipmentPopover = () => {},
+}) {
+	const { service_provider = {}, service_provider_poc = {}, source = '', id = '', shipment_id = '' } = cardData || {};
 
 	const { category_types = [], short_name = '', business_name = '' } = service_provider || {};
 	const { name = '' } = service_provider_poc || {};
@@ -27,9 +31,31 @@ function ServiceProviderDetails({ cardData = {} }) {
 					>
 						{startCase(source)}
 					</Pill>
-					<Tooltip content="Tool tip" placement="bottom">
-						<IcMInfo className={styles.info_icon} />
-					</Tooltip>
+
+					{source === 'live_booking' ? (
+						<Popover
+							render={(
+								<ShipmentInfoDetail
+									shipmentId={shipment_id}
+									id={id}
+									shipmentPopover={shipmentPopover}
+								/>
+							)}
+							placement="left"
+							interactive
+							onClickOutside={() => setShipmentPopover({})}
+							visible={shipmentPopover?.id === id}
+						>
+							<div
+								role="presentation"
+								onClick={() => setShipmentPopover(cardData)}
+								className={styles.wrap}
+							>
+								<IcMInfo className={styles.info_icon} />
+							</div>
+						</Popover>
+					) : null}
+
 					<Popover>
 						<IcMOverflowDot className={styles.info_icon} />
 					</Popover>

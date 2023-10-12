@@ -1,17 +1,36 @@
-import React from 'react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState } from 'react';
 
 import RateRevertCard from './RateRevertCard';
 import styles from './styles.module.css';
 
-function ListRateReverts({ list = [] }) {
+function ListRateReverts({ list = [], mailProps = {} }) {
+	const [shipmentPopover, setShipmentPopover] = useState({});
+
 	return (
 		<div className={styles.container}>
-			{(list || []).map((itm) => (
-				<RateRevertCard
-					key={itm?.id}
-					cardData={itm}
-				/>
-			))}
+			{!isEmpty(list) ? (
+				(list || []).map((itm) => (
+					<RateRevertCard
+						key={itm?.id}
+						cardData={itm}
+						mailProps={mailProps}
+						setShipmentPopover={setShipmentPopover}
+						shipmentPopover={shipmentPopover}
+					/>
+				))
+			) : (
+				<div className={styles.loader}>
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.empty_state}
+						alt="empty"
+						width={250}
+						height={200}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

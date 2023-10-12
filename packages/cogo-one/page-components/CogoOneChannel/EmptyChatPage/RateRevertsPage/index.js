@@ -1,17 +1,25 @@
 import { Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useListRateJobs from '../../../../hooks/useListRateJobs';
 
-import FilersModal from './FilersModal';
+// import FilersModal from './FilersModal';
 import Header from './Header';
 import ListRateReverts from './ListRateReverts';
 import styles from './styles.module.css';
 
-function RateRevertsPage() {
-	const [showFilters, setShowFilters] = useState(false);
+function RateRevertsPage({ mailProps = {} }) {
+	const [showFilters, setShowFilters] = useState({
+		show      : false,
+		isApplied : false,
+	});
 
-	const { setParams = () => {}, params = {}, rateJobsData = {} } = useListRateJobs({});
+	const {
+		setParams = () => {}, params = {}, rateJobsData = {},
+		loading = false,
+	} = useListRateJobs();
 
 	const { total_items = 0, page = 1, list = [] } = rateJobsData || {};
 
@@ -22,8 +30,19 @@ function RateRevertsPage() {
 					params={params}
 					setParams={setParams}
 					setShowFilters={setShowFilters}
+					showFilters={showFilters}
 				/>
-				<ListRateReverts list={list} />
+				{loading ? (
+					<div className={styles.loader}>
+						<Image
+							src={GLOBAL_CONSTANTS.image_url.cogo_one_loader}
+							alt="load"
+							width={160}
+							height={160}
+						/>
+					</div>
+				) : <ListRateReverts list={list} mailProps={mailProps} />}
+
 			</div>
 			<div className={styles.footer_bar}>
 				<Pagination
@@ -34,13 +53,13 @@ function RateRevertsPage() {
 					onPageChange={() => setParams((prev) => ({ ...prev, page: page + 1 }))}
 				/>
 			</div>
-			<FilersModal
+			{/* <FilersModal
 				showFilters={showFilters}
 				setFilter={setParams}
 				filter={params}
 				setShowFilters={setShowFilters}
 				source={params?.source}
-			/>
+			/> */}
 		</>
 	);
 }

@@ -18,7 +18,7 @@ const getPayload = ({ params }) => ({
 const useListRateJobs = () => {
 	const [params, setParams] = useState({ source: [], service: 'fcl_freight' });
 
-	const [{ loading: rateJobsLoading, data }, trigger] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_rate_jobs',
 		method : 'get',
 	}, { manual: true });
@@ -41,7 +41,7 @@ const useListRateJobs = () => {
 	}, [fetchRateJobs]);
 
 	return {
-		rateJobsLoading,
+		loading,
 		fetchRateJobs,
 		rateJobsData: data,
 		setParams,

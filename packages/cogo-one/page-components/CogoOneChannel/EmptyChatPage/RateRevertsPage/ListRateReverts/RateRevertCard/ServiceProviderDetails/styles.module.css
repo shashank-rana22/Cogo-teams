@@ -58,6 +58,10 @@
 		.ui_pill_container {
 			margin: 0 2px !important;
 		}
+
+		.tippy-box {
+			max-width: 300px !important;
+		}
 	}
 }
 
@@ -65,4 +69,9 @@
 	width: 16px;
 	height: 16px;
 	margin: 0 2px;
+	cursor: pointer;
+}
+
+.wrap {
+	display: flex;
 }

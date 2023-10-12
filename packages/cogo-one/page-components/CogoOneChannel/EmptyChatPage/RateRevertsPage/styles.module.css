@@ -6,6 +6,14 @@
 	border-radius: 8px;
 }
 
+.loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: calc(100% - 95px);
+}
+
 .footer_bar {
 	display: flex;
 	align-items: center;

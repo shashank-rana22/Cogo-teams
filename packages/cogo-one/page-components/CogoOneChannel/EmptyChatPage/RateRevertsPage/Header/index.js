@@ -1,13 +1,16 @@
-import { MultiSelect, Badge, Tags } from '@cogoport/components';
+import { MultiSelect, Tags, Popover } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
 
 import { SOURCE_OPTIONS } from '../../../../../constants/rateRevertsConstants';
+import FilterModal from '../FilterModal';
 
 import getSourceTags from './getSourceTags';
 import styles from './styles.module.css';
 
-function Header({ setParams = () => {}, params = {}, setShowFilters = () => {} }) {
+function Header({ setParams = () => {}, params = {}, setShowFilters = () => {}, showFilters = {} }) {
+	const { isApplied = false, show = false } = showFilters || {};
+
 	const sourceTags = useMemo(
 		() => getSourceTags({ sources: params?.source || [] }),
 		[params?.source],
@@ -46,12 +49,24 @@ function Header({ setParams = () => {}, params = {}, setShowFilters = () => {} }
 					/>
 				</div>
 
-				<Badge color="orange">
-					<IcMFilter
-						className={styles.filter_icon}
-						onClick={() => setShowFilters(true)}
-					/>
-				</Badge>
+				<Popover
+					placement="left"
+					render={<FilterModal setParams={setParams} setShowFilters={setShowFilters} />}
+					interactive
+					onClickOutside={() => setShowFilters((prev) => ({ ...prev, show: false }))}
+					visible={show}
+				>
+					<div
+						className={styles.filter_box}
+						role="presentation"
+						onClick={() => setShowFilters((prev) => ({ ...prev, show: true }))}
+					>
+						<IcMFilter
+							className={styles.filter_icon}
+						/>
+					</div>
+				</Popover>
+				{isApplied ? <div className={styles.dot} /> : null}
 			</div>
 		</>
 	);
