@@ -45,7 +45,7 @@ const useGetInvoiceJourney = ({ filterValue, entityCode }:ParamsInterface) => {
 				params: {
 					entityCode  : entityCode || undefined,
 					serviceType : serviceType || undefined,
-					companyType : companyType !== 'All' ? companyType : undefined,
+					companyType : companyType !== 'All' ? (companyType || undefined) : undefined,
 					month       : dateFilter.month || undefined,
 					year        : dateFilter.year || undefined,
 

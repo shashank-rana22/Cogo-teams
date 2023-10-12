@@ -202,11 +202,24 @@ function MultiMediaMessage({
 					return null;
 				}
 				return (
-					<Comp
-						item={item}
+					<div
+						role="presentation"
 						key={item}
-						mediaUrl={item}
-					/>
+						onClick={(e) => {
+							window.open(
+								item,
+								'_blank',
+								'noreferrer',
+							);
+							e.stopPropagation();
+						}}
+						style={{ cursor: 'pointer' }}
+					>
+						<Comp
+							item={item}
+							mediaUrl={item}
+						/>
+					</div>
 				);
 			})}
 			<ShowMessage messageType={messageType} message={message} />
