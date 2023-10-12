@@ -3,13 +3,13 @@
 import { Button, Modal, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
-import { DEFAULT_VALUE, DELTA_VALUE, VALUE_ONE } from '@cogoport/supply-dashboards/page-components/RateCoverage/configurations/helpers/constants';
 import FieldMutation from '@cogoport/supply-dashboards/page-components/RateCoverage/configurations/helpers/mutation-fields';
 import useCreateFreightRate from '@cogoport/supply-dashboards/page-components/RateCoverage/hooks/useCreateFreightRate';
 import useDeleteRateJob from '@cogoport/supply-dashboards/page-components/RateCoverage/hooks/useDeleteRateJob';
 import React, { useEffect, useState } from 'react';
 
 import Layout from '../../../../../../common/FormLayout';
+import { DEFAULT_VALUE, DELTA_VALUE, VALUE_ONE } from '../../../../../../constants/rateRevertsFilters';
 import useDeleteFreightRateFeedbacks from '../../../../../../hooks/useDeleteFreightRateFeedbacks';
 import useDeleteFreightRateRequests from '../../../../../../hooks/useDeleteFreightRateRequests';
 import useGetChargeCodes from '../../../../../../hooks/useGetChargeCodes';
@@ -30,7 +30,7 @@ function AddRateModal({
 	source = {},
 	getStats = () => {},
 	getListCoverage = () => {},
-	shipmemnt_data = {},
+	shipment_data = {},
 	requestData = [],
 	feedbackData = [],
 	shipment_loading = false,
@@ -176,7 +176,7 @@ function AddRateModal({
 			&& (
 				<div className={styles.service_content}>
 					<ServiceDetailsContent
-						shipmemnt_data={shipmemnt_data}
+						shipment_data={shipment_data}
 						data={data}
 						requestData={requestData?.list?.[ZERO_VALUE] || null}
 						feedbackData={feedbackData?.list?.[ZERO_VALUE] || null}

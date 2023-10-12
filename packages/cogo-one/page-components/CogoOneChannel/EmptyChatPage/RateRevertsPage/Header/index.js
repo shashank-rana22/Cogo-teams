@@ -1,26 +1,24 @@
-import { Select, Badge } from '@cogoport/components';
+import { MultiSelect, Badge, Tags } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
-import React, {
-// useMemo
-} from 'react';
+import React, { useMemo } from 'react';
 
 import { SOURCE_OPTIONS } from '../../../../../constants/rateRevertsConstants';
 
-// import getSourceTags from './getSourceTags';
+import getSourceTags from './getSourceTags';
 import styles from './styles.module.css';
 
 function Header({ setParams = () => {}, params = {}, setShowFilters = () => {} }) {
-	// const sourceTags = useMemo(
-	// 	() => getSourceTags({ sources: params?.source || [] }),
-	// 	[params?.source],
-	// );
+	const sourceTags = useMemo(
+		() => getSourceTags({ sources: params?.source || [] }),
+		[params?.source],
+	);
 
-	// const handleItemsChange = (val) => setParams(
-	// 	(prev) => ({
-	// 		...(prev || {}),
-	// 		source: val.map((itm) => itm?.key),
-	// 	}),
-	// );
+	const handleItemsChange = (val) => setParams(
+		(prev) => ({
+			...(prev || {}),
+			source: val.map((itm) => itm?.key),
+		}),
+	);
 
 	return (
 		<>
@@ -29,23 +27,23 @@ function Header({ setParams = () => {}, params = {}, setShowFilters = () => {} }
 			</div>
 
 			<div className={styles.sources_container}>
-				<Select
+				<MultiSelect
 					className={styles.source_select_container}
 					value={params?.source}
 					onChange={(val) => setParams((prev) => ({ ...(prev || {}), source: val }))}
 					placeholder="Select Source"
 					options={Object.values(SOURCE_OPTIONS)}
-					// isClearable
+					isClearable
 					size="sm"
 					prefix={null}
 				/>
 
 				<div className={styles.selected_sources}>
-					{/* <Tags
+					<Tags
 						items={sourceTags}
 						onItemsChange={handleItemsChange}
 						size="md"
-					/> */}
+					/>
 				</div>
 
 				<Badge color="orange">

@@ -23,12 +23,12 @@ const copyToClipboard = async (text, item) => {
 };
 
 function ServiceDetailsContent({
-	shipmemnt_data = {}, data = {}, requestData = {},
+	shipment_data = {}, data = {}, requestData = {},
 	feedbackData = {}, shipment_loading = false,
 	request_loading = false,
 	feedback_loading = false,
 }) {
-	const { primary_service_detail, summary } = shipmemnt_data || {};
+	const { primary_service_detail, summary } = shipment_data || {};
 	const {
 		commodity = '', container_size = '', container_type = '', containers_count = '', inco_term = '',
 		cargo_readiness_date = '',
@@ -50,11 +50,11 @@ function ServiceDetailsContent({
 		copyToClipboard(value, 'Data');
 	};
 
-	const transitTime =	shipmemnt_data?.serviceType === 'ftl_freight'
-		? shipmemnt_data?.transit_time || '0'
+	const transitTime =	shipment_data?.serviceType === 'ftl_freight'
+		? shipment_data?.transit_time || '0'
 		: differenceInDays(
-			new Date(shipmemnt_data?.selected_schedule_arrival || new Date()),
-			new Date(shipmemnt_data?.selected_schedule_departure || new Date()),
+			new Date(shipment_data?.selected_schedule_arrival || new Date()),
+			new Date(shipment_data?.selected_schedule_departure || new Date()),
 		);
 
 	const pillMapping = [
@@ -85,17 +85,17 @@ function ServiceDetailsContent({
 		{ label: 'Commodity Description', value: commodity_description },
 		{
 			label : 'Transit Time',
-			value : `${transitTime} ${shipmemnt_data?.serviceType === 'ftl_freight' ? 'Hrs' : 'Days'}`,
+			value : `${transitTime} ${shipment_data?.serviceType === 'ftl_freight' ? 'Hrs' : 'Days'}`,
 		},
 		{ label: 'Preferred Shipping', value: shipping_line?.short_name },
-		feedbacks?.length > 0 && (
+		feedbacks?.length && (
 			{
 				label : 'feedbacks',
 				value : feedbacks && (feedbacks || []).map((val) => startCase(val)).join(', '),
 			}
 		),
 
-		closing_remarks?.length > 0 && (
+		closing_remarks?.length && (
 			{
 				label: 'Closing Remarks',
 				value:
@@ -181,7 +181,7 @@ function ServiceDetailsContent({
 							<div className={styles.content}>
 								<div className={styles.label}>
 									{' '}
-									Shippling Line :
+									Shipping Line :
 								</div>
 								<div className={styles.value}>
 									{' '}
