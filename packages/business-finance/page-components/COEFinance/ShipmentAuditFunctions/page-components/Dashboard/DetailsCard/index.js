@@ -1,3 +1,4 @@
+import { Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
@@ -58,25 +59,34 @@ function DetailsCard({
 					</div>
 
 					<div className={styles.wallet_amount_container}>
-						{`KAM Margin: ${formatAmount({
-							amount  : kamMargin,
-							currency,
-							options : {
-								currencyDisplay : 'code',
-								style           : 'currency',
-							},
-						})}`}
+						<div className={styles.specific_wallet_container}>
+							<div>KAM Margin</div>
+							<Pill color="green">
+								{formatAmount({
+									amount  : kamMargin,
+									currency,
+									options : {
+										currencyDisplay : 'code',
+										style           : 'currency',
+									},
+								})}
+							</Pill>
+						</div>
 
-						<span style={{ marginLeft: '15px' }}>
-							{`RD Wallet: ${formatAmount({
-								amount  : rdWallet,
-								currency,
-								options : {
-									currencyDisplay : 'code',
-									style           : 'currency',
-								},
-							})}`}
-						</span>
+						<div className={styles.specific_wallet_container}>
+							<div>RD Wallet</div>
+							<Pill color="green">
+								{formatAmount({
+									amount  : rdWallet,
+									currency,
+									options : {
+										currencyDisplay : 'code',
+										style           : 'currency',
+									},
+								})}
+							</Pill>
+						</div>
+
 					</div>
 
 					{dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] && (

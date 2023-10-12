@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 function PrePostCheckoutCardsSet({
 	jobId = '',
 	setQuotationsData = () => {},
+	shipment_id = '',
 }, ref) {
 	const [accordionState, setAccordionState] = useState({});
 	const {
@@ -48,6 +49,7 @@ function PrePostCheckoutCardsSet({
 				accordionState={accordionState}
 				toggleAccordion={toggleAccordion}
 				setAccordionState={setAccordionState}
+				shipment_id={shipment_id}
 				category="SELL"
 			/>
 			<PrePostCheckoutCards
@@ -57,6 +59,7 @@ function PrePostCheckoutCardsSet({
 				accordionState={accordionState}
 				toggleAccordion={toggleAccordion}
 				setAccordionState={setAccordionState}
+				shipment_id={shipment_id}
 				category="BUY"
 				getPrePostShipmentQuotes={getPrePostShipmentQuotes}
 			/>

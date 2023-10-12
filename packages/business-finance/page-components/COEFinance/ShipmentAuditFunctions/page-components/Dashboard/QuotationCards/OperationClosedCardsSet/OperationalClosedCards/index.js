@@ -10,6 +10,8 @@ function OperationalClosedCards({
 	type = '',
 	data = [],
 	loading = false,
+	getClosedTasks = () => {},
+	shipment_id = '',
 }) {
 	return (
 		<div className={styles.single_card}>
@@ -36,8 +38,10 @@ function OperationalClosedCards({
 									<SellBuyCards
 										source="OPR"
 										type={type}
+										shipment_id={shipment_id}
 										data={data}
 										loading={loading}
+										getClosedTasks={getClosedTasks}
 									/>
 								</div>
 							)}

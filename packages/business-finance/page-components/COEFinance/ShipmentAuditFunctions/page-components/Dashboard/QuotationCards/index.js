@@ -75,18 +75,21 @@ function QuotationCards({
 
 			<div className={styles.all_task_container}>
 				<PrePostCheckoutCardsSet
+					shipment_id={shipmentId}
 					jobId={job_id}
 					setQuotationsData={setQuotationsData}
 					ref={getPrePostShipmentQuoteRef}
 				/>
 
 				<OperationClosedCardsSet
+					shipment_id={shipmentId}
 					job_id={job_id}
 					setQuotationsData={setQuotationsData}
 				/>
 
 				{active_tab === 'financial_close' && (
 					<FinanceClosedCardsSet
+						shipment_id={shipmentId}
 						job_id={job_id}
 						setQuotationsData={setQuotationsData}
 					/>

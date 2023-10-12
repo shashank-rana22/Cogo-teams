@@ -1,59 +1,49 @@
 import { Toast } from '@cogoport/components';
 import { useTicketsRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect } from 'react';
 
-const PAGE_DECREMENT = 1;
+// eslint-disable-next-line max-len
+const TICKET_POSSIBLE_STATUS = 'closed,rejected,unresolved,pending,escalated,overdue,reject_requested,resolve_requested';
 
 const getPayload = ({
-	performerId,
-	status,
-	page,
 	serialId,
 }) => ({
-	PerformedByID : performerId,
-	UserID        : performerId,
-	size          : 10,
-	page          : page - PAGE_DECREMENT,
-	RequestType   : 'feedback',
-	Statuses      : status || undefined,
-	SerialID      : serialId,
+	status   : TICKET_POSSIBLE_STATUS,
+	SortType : 'desc',
+	SerialID : serialId,
+	size     : 10,
 });
 
-const useListTickets = ({ serialId = '', page = 1 }) => {
-	const { id : performerId = '' } = useSelector((state) => state?.profile?.user);
-
+const useListTickets = ({ serialId = '' }) => {
 	const [{ data, loading }, trigger] = useTicketsRequest({
 		url     : '/list',
 		method  : 'get',
 		authkey : 'get_tickets_list',
 	}, { manual: true });
 
-	const getFeedbacks = useCallback(() => {
+	const getTickets = useCallback(() => {
 		try {
 			trigger({
 				params: getPayload({
-					performerId,
-					page,
 					serialId,
 				}),
 			});
 		} catch (error) {
 			Toast.error(error);
 		}
-	}, [trigger, performerId, page, serialId]);
+	}, [trigger, serialId]);
 
 	const { items, ...rest } = data || {};
 
 	useEffect(() => {
-		getFeedbacks();
-	}, [getFeedbacks]);
+		getTickets();
+	}, [getTickets]);
 
 	return {
 		loading,
-		getFeedbacks,
-		feedbacks : items || [],
-		pageData  : rest,
+		getTickets,
+		tickets  : items || [],
+		pageData : rest,
 	};
 };
 

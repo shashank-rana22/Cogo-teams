@@ -5,20 +5,17 @@ import { useCallback } from 'react';
 import toastApiError from '../../commons/toastApiError.ts';
 
 const getParams = ({
-	id = '',
+	idList = [],
 	status = '',
-	remarks = '',
 
 }) => ({
-	id,
+	ids: idList,
 	status,
-	remarks,
 });
 
 const useApproveQuotation = ({
-	id = '',
+	idList = [],
 	status = '',
-	remarks = '',
 	source = 'Quotation',
 }) => {
 	const [{ loading = false }, trigger] = useRequestBf(
@@ -30,18 +27,17 @@ const useApproveQuotation = ({
 		{ manual: true },
 	);
 
-	const approveQuotation = useCallback(async (cb, refetch) => {
+	const approveQuotation = useCallback(async (refetch) => {
 		try {
 			await trigger({
-				data: getParams({ id, status, remarks }),
+				data: getParams({ idList, status }),
 			});
 			Toast.success(`${source} updated succesfully`);
-			cb();
 			refetch();
 		} catch (error) {
 			toastApiError(error);
 		}
-	}, [trigger, id, status, remarks, source]);
+	}, [trigger, idList, status, source]);
 
 	return {
 		approveQuotation,

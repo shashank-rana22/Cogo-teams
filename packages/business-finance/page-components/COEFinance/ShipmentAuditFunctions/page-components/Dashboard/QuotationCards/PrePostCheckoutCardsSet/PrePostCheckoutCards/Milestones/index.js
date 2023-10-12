@@ -15,6 +15,7 @@ function Milestones({
 	category = '',
 	accordionState = {},
 	getPrePostShipmentQuotes = () => {},
+	shipment_id = '',
 }) {
 	return Object.keys(data).map((key, index) => (
 		<div key={key}>
@@ -60,6 +61,7 @@ function Milestones({
 					title={key}
 					services={data?.[key]}
 					accordionState={accordionState}
+					shipment_id={shipment_id}
 					toggleAccordion={toggleAccordion}
 					category={category}
 					getPrePostShipmentQuotes={getPrePostShipmentQuotes}

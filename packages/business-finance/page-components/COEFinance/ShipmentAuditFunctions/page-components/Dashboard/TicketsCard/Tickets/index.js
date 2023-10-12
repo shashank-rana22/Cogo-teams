@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function Tickets({
 	serialId = '',
 }) {
-	const { data: ticketData, loading } = useListTickets({ serialId });
+	const { tickets, loading } = useListTickets({ serialId });
 
 	const columns = [
 		{
@@ -19,7 +19,7 @@ function Tickets({
 		},
 		{
 			Header   : 'Raised by',
-			accessor : (row) => row?.User?.name,
+			accessor : (row) => row?.User?.name || '-',
 		},
 		{
 			Header   : 'Priority',
@@ -46,13 +46,13 @@ function Tickets({
 			</div>
 		);
 	}
-	if (isEmpty(ticketData)) {
+	if (isEmpty(tickets)) {
 		return <EmptyStateDocs />;
 	}
 
 	return (
 		<div style={{ width: '1270px' }}>
-			<Table columns={columns} data={ticketData} />
+			<Table columns={columns} data={tickets} />
 		</div>
 	);
 }

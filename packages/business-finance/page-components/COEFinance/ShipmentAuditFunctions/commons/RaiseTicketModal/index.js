@@ -20,6 +20,7 @@ const SHIPMENT_TYPES = GLOBAL_CONSTANTS.shipment_types;
 function RaiseTicketModal({
 	setShowTicketModal = () => {},
 	showTicketModal = false,
+	shipment_id = '',
 	itemData = {},
 	id = '',
 	refetch = () => {},
@@ -48,7 +49,7 @@ function RaiseTicketModal({
 	const {
 		data:stakeholderData = [],
 		loading:stakeholderLoading,
-	} = useListStakeholders({ shipmentId: id });
+	} = useListStakeholders({ shipmentId: shipment_id });
 
 	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({
 		additionalInfo,

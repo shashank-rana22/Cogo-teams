@@ -12,7 +12,7 @@ function RenderSubContent({
 		<div className={styles.sub_content} style={{ width: wdth }}>
 			<div className={styles.light}>{title}</div>
 			{data.map((item) => (
-				<div className={styles.actual_content}>{item}</div>
+				<div className={styles.actual_content}>{item || '-'}</div>
 			))}
 		</div>
 	);

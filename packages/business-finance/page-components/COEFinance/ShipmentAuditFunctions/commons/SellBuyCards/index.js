@@ -19,6 +19,8 @@ function SellBuyCards({
 	type = '',
 	data = [],
 	loading = false,
+	shipment_id = '',
+	getClosedTasks = () => {},
 }) {
 	const [open, setOpen] = useState(false);
 
@@ -63,7 +65,7 @@ function SellBuyCards({
 						<div className={`${open ? styles.nothing : styles.other_title}`}>
 							<div className={styles.regular}>Profitability </div>
 							<div className={`${profitabilityData > ZERO_VALUE ? styles.green : styles.red}`}>
-								{profitabilityData}
+								{profitabilityData.toFixed(3)}
 							</div>
 						</div>
 						{open ? (
@@ -86,7 +88,9 @@ function SellBuyCards({
 							income={grandTotal}
 							source={source}
 							type={type}
+							shipment_id={shipment_id}
 							profitability={profitabilityData}
+							getClosedTasks={getClosedTasks}
 						/>
 					</div>
 				</div>

@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 
 function OperationClosedCardsSet({
 	job_id = '',
+	shipment_id = '',
 }) {
 	const {
 		data: taskData = {},
@@ -17,6 +18,7 @@ function OperationClosedCardsSet({
 			<OperationalClosedCards
 				jobId={job_id}
 				data={taskData?.SELL}
+				shipment_id={shipment_id}
 				type="sell"
 				loading={taskDataLoading}
 				getClosedTasks={getClosedTasks}
@@ -27,6 +29,7 @@ function OperationClosedCardsSet({
 				data={taskData?.BUY}
 				type="buy"
 				loading={taskDataLoading}
+				shipment_id={shipment_id}
 				getClosedTasks={getClosedTasks}
 			/>
 		</div>

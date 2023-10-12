@@ -17,6 +17,7 @@ export default function MilestoneCardContent({
 	accordionState = {},
 	toggleAccordion = '',
 	category = '',
+	shipment_id = '',
 	getPrePostShipmentQuotes = () => {},
 }) {
 	const isOpen = accordionState[`${category}_${title}`];
@@ -84,6 +85,7 @@ export default function MilestoneCardContent({
 							currentKey={currentKey}
 							toggleAccordion={toggleAccordion}
 							accordionState={accordionState}
+							shipment_id={shipment_id}
 							getPrePostShipmentQuotes={getPrePostShipmentQuotes}
 						/>
 

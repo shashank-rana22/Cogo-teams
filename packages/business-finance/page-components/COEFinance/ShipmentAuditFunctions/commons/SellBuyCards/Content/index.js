@@ -15,20 +15,28 @@ const ZERO_VALUE = 0;
 function Content({
 	data = [],
 	loading = false,
+	shipment_id = '',
 	income = '',
 	profitability = '',
 	source = '',
 	type = '',
-	id = '',
+	getClosedTasks = () => {},
 }) {
 	const { query: { job_number = '' } } = useRouter();
 
 	const [lineItemSectionOpen, setLineItemSectionOpen] = useState({});
 	const [showTicketModal, setShowTicketModal] = useState(false);
 
+	const approvedIdList = data.filter((item) => item?.quotation_state === 'APPROVED').map((item) => item?.id);
+	const initIdList = data.filter((item) => item?.quotation_state === 'INIT').map((item) => item?.id);
+	const currentStatus = data.some((item) => item?.quotation_state === 'INIT');
+
 	const {
 		approveQuotation = () => {},
-	} = useApproveQuotation({ id, status: 'APPROVED' });
+	} = useApproveQuotation({
+		idList : (currentStatus ? initIdList : approvedIdList),
+		status : (currentStatus ? 'APPROVED' : 'INIT'),
+	});
 
 	return (
 		<div className={styles.overall_container}>
@@ -65,33 +73,49 @@ function Content({
 					type={type}
 				/>
 			))}
-			<div className={styles.buttons_container}>
-				<Button
-					size="md"
-					themeType="secondary"
-					style={{ marginRight: '10px' }}
-					onClick={setShowTicketModal}
-				>
-					Raise Ticket
-				</Button>
+			{currentStatus ? (
+				<div className={styles.buttons_container}>
+					<Button
+						size="md"
+						themeType="secondary"
+						style={{ marginRight: '10px' }}
+						onClick={setShowTicketModal}
+					>
+						Raise Ticket
+					</Button>
 
-				{ showTicketModal ? (
-					<RaiseTicketModal
-						setShowTicketModal={setShowTicketModal}
-						showTicketModal={showTicketModal}
-						itemData={data}
-						id={job_number}
-					/>
-				) : null}
+					{ showTicketModal ? (
+						<RaiseTicketModal
+							setShowTicketModal={setShowTicketModal}
+							shipment_id={shipment_id}
+							showTicketModal={showTicketModal}
+							itemData={data}
+							id={job_number}
+							refetch={getClosedTasks}
+						/>
+					) : null}
 
-				<Button
-					size="md"
-					themeType="primary"
-					onClick={approveQuotation}
-				>
-					Accept
-				</Button>
-			</div>
+					<Button
+						size="md"
+						themeType="primary"
+						onClick={() => approveQuotation(getClosedTasks)}
+					>
+						Accept
+					</Button>
+				</div>
+			) : null}
+
+			{!currentStatus ? (
+				<div className={styles.buttons_container}>
+					<Button
+						size="md"
+						themeType="primary"
+						onClick={() => approveQuotation(getClosedTasks)}
+					>
+						Undo
+					</Button>
+				</div>
+			) : null}
 		</div>
 	);
 }

@@ -4,6 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
+import useApproveQuotation from '../../../../../../../../hook/useApproveQuotation';
 import RaiseTicketModal from '../../../../../../../commons/RaiseTicketModal';
 import getServiceColumns from '../../../../../../../configurations/getServiceColumns';
 
@@ -16,6 +17,7 @@ export default function Content({
 	services = {},
 	currentKey = '',
 	accordionState = {},
+	shipment_id = '',
 	toggleAccordion = () => {},
 	getPrePostShipmentQuotes = () => {},
 }) {
@@ -31,6 +33,14 @@ export default function Content({
 	const handleServiceClick = (service) => {
 		setActiveService(service);
 	};
+
+	const idList = [services?.[activeService]?.[GLOBAL_CONSTANTS.zeroth_index]?.id];
+
+	const currentStatus = services?.[activeService]?.[GLOBAL_CONSTANTS.zeroth_index]?.quotationState;
+
+	const {
+		approveQuotation = () => {},
+	} = useApproveQuotation({ idList, status: (currentStatus === 'APPROVED' ? 'INIT' : 'APPROVED') });
 
 	return (
 		<>
@@ -104,18 +114,33 @@ export default function Content({
 										<RaiseTicketModal
 											setShowTicketModal={setShowTicketModal}
 											showTicketModal={showTicketModal}
-											// itemData={data}
+											shipment_id={shipment_id}
 											id={job_number}
+											refetch={getPrePostShipmentQuotes}
 										/>
 									) : null}
 									<Button
 										size="md"
 										themeType="primary"
-										// onClick={() => { setQueryModalShow(true); setButtonClicked('Accept'); }}
+										onClick={() => approveQuotation(getPrePostShipmentQuotes)}
 									>
 										Accept
 									</Button>
 
+								</div>
+							</div>
+						) : null}
+
+						{(!item?.modifiedBy && item?.quotationState === 'APPROVED') ? (
+							<div className={styles.flex_content}>
+								<div className={styles.flex_content}>
+									<Button
+										size="md"
+										themeType="primary"
+										onClick={() => approveQuotation(getPrePostShipmentQuotes)}
+									>
+										Undo
+									</Button>
 								</div>
 							</div>
 						) : null}

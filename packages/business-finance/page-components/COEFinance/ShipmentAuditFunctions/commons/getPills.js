@@ -11,7 +11,7 @@ function GetPills({ loadingShipment = false, sourceText = '', tradeType = '' }) 
 	if (tradeType) {
 		return <Pill color="yellow">{startCase(tradeType)}</Pill>;
 	}
-	return <div>NO DATA FOUND</div>;
+	return <Pill color="red">NO DATA FOUND</Pill>;
 }
 
 export default GetPills;
