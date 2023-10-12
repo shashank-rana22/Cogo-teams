@@ -70,7 +70,7 @@ function RaiseTicketModal({
 	});
 
 	const onSubmit = async () => {
-		await raiseTickets();
+		await raiseTickets(formValues);
 		setShowTicketModal(false);
 	};
 
