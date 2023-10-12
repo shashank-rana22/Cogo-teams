@@ -31,8 +31,13 @@ const useGetActiveStakeholder = () => {
 		},
 		{ role_ids: geo.uuid.sales_role, stakeholder: 'sales_agent' },
 		{
-			role_ids: [geo.uuid.admin_id, geo.uuid.corporate_owner_id,
-				geo.uuid.corporate_owner_finance_id, geo.uuid.supply_relations_head_role_id],
+			role_ids: [
+				geo.uuid.admin_id,
+				geo.uuid.corporate_owner_id,
+				geo.uuid.corporate_owner_finance_id,
+				geo.uuid.supply_relations_head_role_id,
+				geo.uuid.fin_ops_manager_role_id,
+			],
 			stakeholder: 'admin',
 		},
 		{ role_ids: [geo.uuid.air_prod_process_owner, geo.uuid.prod_process_owner], stakeholder: 'prod_process_owner' },
