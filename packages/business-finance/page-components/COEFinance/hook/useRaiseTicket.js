@@ -4,7 +4,6 @@ import { useSelector } from '@cogoport/store';
 
 const useRaiseTicket = ({
 	shipmentData = {},
-	updateBillsTicketId = () => {},
 	service = {},
 }) => {
 	const { profile } = useSelector((state) => state);
@@ -30,7 +29,7 @@ const useRaiseTicket = ({
 		} = shipmentData || {};
 
 		try {
-			const response = await trigger({
+			await trigger({
 				data: {
 					UserID           : profile?.user?.id || undefined,
 					PerformedByID    : profile?.user?.id || undefined,
@@ -53,8 +52,6 @@ const useRaiseTicket = ({
 			});
 
 			Toast.success('Successfully Created');
-
-			updateBillsTicketId(response);
 		} catch (error) {
 			Toast.error(error?.response?.data);
 		}

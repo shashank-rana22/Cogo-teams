@@ -9,7 +9,6 @@ import useGetConfigurationCategory from '../../../hook/useGetConfigurationCatego
 import useListShipment from '../../../hook/useListShipment.ts';
 import useListStakeholders from '../../../hook/useListShipmentStakeholders';
 import useRaiseTicket from '../../../hook/useRaiseTicket';
-import useUpdateBillsTicketId from '../../../hook/useUpdateBIllsTicketId';
 import getStakeholderData from '../../../utils/getStakeholderData';
 import controls from '../../configurations/raise-ticket-controls';
 
@@ -23,7 +22,6 @@ function RaiseTicketModal({
 	shipment_id = '',
 	itemData = {},
 	id = '',
-	refetch = () => {},
 }) {
 	const [additionalInfo, setAdditionalInfo] = useState([]);
 
@@ -34,11 +32,6 @@ function RaiseTicketModal({
 	const formValues = watch();
 
 	const watchRaisedToDesk = watch('raised_to_desk');
-
-	const {
-		updateBillsTicketId = () => {},
-		loading: updateLoading = false,
-	} = useUpdateBillsTicketId({ setShowTicketModal, refetch, itemData });
 
 	const { data, loading:shipmentLoading } = useListShipment(id);
 
@@ -53,7 +46,6 @@ function RaiseTicketModal({
 
 	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({
 		additionalInfo,
-		updateBillsTicketId,
 		shipmentData,
 		service,
 	});
@@ -76,6 +68,11 @@ function RaiseTicketModal({
 		shipmentData,
 		STAKEHOLDER_OPTIONS,
 	});
+
+	const onSubmit = async () => {
+		await raiseTickets();
+		setShowTicketModal(false);
+	};
 
 	(fields || []).forEach((item) => {
 		if (item?.rules?.required && !formValues[item?.name]) {
@@ -135,8 +132,8 @@ function RaiseTicketModal({
 			<Modal.Footer style={{ padding: 12 }}>
 				<Button
 					size="md"
-					disabled={loading || updateLoading || shipmentLoading || stakeholderLoading || disableButton}
-					onClick={handleSubmit(raiseTickets)}
+					disabled={loading || shipmentLoading || stakeholderLoading || disableButton}
+					onClick={handleSubmit(onSubmit)}
 				>
 					Submit
 				</Button>

@@ -1,5 +1,5 @@
-import { Loader, Table } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { Loader, Pill, Table } from '@cogoport/components';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyStateDocs from '../../../../../../commons/EmptyStateDocs/index.tsx';
@@ -19,11 +19,11 @@ function Tickets({
 		},
 		{
 			Header   : 'Raised by',
-			accessor : (row) => row?.User?.name || '-',
+			accessor : (row) => row?.User?.Name || '-',
 		},
 		{
 			Header   : 'Priority',
-			accessor : 'Priority',
+			accessor : (row) => startCase(row?.Priority) || '-',
 		},
 		{
 			Header   : 'Type',
@@ -35,7 +35,13 @@ function Tickets({
 		},
 		{
 			Header   : 'Status',
-			accessor : 'Status',
+			accessor : (row) => {
+				const status = row?.Status;
+				if (status === 'unresolved') {
+					return <Pill color="red">{status}</Pill>;
+				}
+				return <Pill color="green">{startCase(status)}</Pill>;
+			},
 		},
 	];
 
