@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
 import ComingSoon from '../../../common/ComingSoonTag';
@@ -18,7 +19,10 @@ function ModeItem({
 }) {
 	const [bouncing, setBouncing] = useState(false);
 
-	const { label, value, icon, is_available } = data;
+	const { label, value, icon } = data;
+
+	const is_available = GLOBAL_CONSTANTS.new_search_supported_services.includes(data?.value)
+	|| GLOBAL_CONSTANTS.new_search_supported_services.find((service) => service.includes(data?.value));
 
 	const handleClick = () => {
 		if (!is_available) {
