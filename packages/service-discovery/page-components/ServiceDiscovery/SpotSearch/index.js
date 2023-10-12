@@ -1,8 +1,9 @@
 import { cl } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useRouter, Router } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import DotLoader from '../../../common/LoadingState/DotLoader';
 
@@ -34,19 +35,41 @@ function SpotSearch() {
 	const [selectedService, setSelectedService] = useState({});
 	const [location, setLocation] = useState({});
 	const [errors, setErrors] = useState({});
+	const [routerLoading, setRouterLoading] = useState(false);
 
 	const { createSearch = () => {}, loading = false } = useCreateSearch();
 
+	useEffect(() => {
+		Router.events.on('routeChangeStart', () => {
+			setRouterLoading(true);
+		});
+		Router.events.on('routeChangeComplete', () => {
+			setRouterLoading(false);
+		});
+	}, [setRouterLoading]);
+
 	return (
 		<div className={styles.container}>
-			{loading ? (
+			{loading || routerLoading ? (
 				<div className={styles.loader}>
-					<span className={styles.loading_text}>Please Wait!</span>
-					<DotLoader dotsLegth={4} />
+					<div className={styles.loading_text_container}>
+						<img
+							src={GLOBAL_CONSTANTS.image_url.cogo_logo_without_bg}
+							alt="cogoport-logo"
+							width={66}
+							style={{ objectFit: 'cover' }}
+						/>
+
+						<span className={styles.loading_text}>Please Wait!</span>
+					</div>
+
+					<div className={styles.dot_loader}>
+						<DotLoader dotsLegth={4} />
+					</div>
 				</div>
 			) : null}
 
-			<div className={cl`${styles.wrapper} ${loading && styles.disabled}`}>
+			<div className={cl`${styles.wrapper} ${(loading || routerLoading) && styles.disabled}`}>
 				<div className={styles.header}>
 					<div className={styles.scope_select}>
 						<div className={styles.label}>Select Scope: </div>
