@@ -97,7 +97,7 @@ export default function Content({
 							)
 							: null}
 
-						{(!item?.modifiedBy && item?.quotationState !== 'APPROVED') ? (
+						{(item?.quotationState !== 'APPROVED') ? (
 							<div className={styles.flex_content}>
 								<Button
 									size="md"
@@ -127,7 +127,7 @@ export default function Content({
 							</div>
 						) : null}
 
-						{(!item?.modifiedBy && item?.quotationState === 'APPROVED') ? (
+						{(item?.quotationState === 'APPROVED') ? (
 							<div className={styles.flex_content}>
 								<div className={styles.flex_content}>
 									<Button
