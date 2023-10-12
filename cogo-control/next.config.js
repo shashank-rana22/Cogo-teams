@@ -46,6 +46,10 @@ module.exports = withBundleAnalyzer({
 				protocol : 'https',
 				hostname : 'cdn.cogoport.io',
 			},
+			{
+				protocol : 'https',
+				hostname : 'prod-cogoport.s3.ap-south-1.amazonaws.com',
+			},
 		],
 	},
 	webpack: (config, { isServer }) => {
