@@ -1,4 +1,4 @@
-import { MultiSelect, Select } from '@cogoport/components';
+import { MultiSelect, Select, CreatableMultiSelect, CreatableSelect } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
@@ -78,6 +78,7 @@ import {
 	asyncListSpotSearchRateCardOperators,
 	asyncListLocationClusters,
 	asyncListFclFreightCommodityClusters,
+	asyncListShippingLineEvents,
 	asyncListSaasPlan,
 	asyncListEnrichmentSources,
 	asyncListIncidentTypes,
@@ -93,6 +94,16 @@ import {
 	asyncListLclCustomsRate,
 	asyncListAirCustomsRate,
 	asyncListTrailerFreightRate,
+	asyncListFclRateFeedback,
+	asyncListLclRateFeedback,
+	asyncListAirRateFeedback,
+	asyncListFtlRateFeedback,
+	asyncListLtlRateFeedback,
+	asyncListFclCustomFeedback,
+	asyncListLclCustomFeedback,
+	asyncListTrailerRateFeedback,
+	asyncListHaulageRateFeedback,
+	asyncListAirCustomFeedback,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -189,6 +200,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_organizations_on_call           : asyncFieldsOrganizationOnCall,
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
+	list_shipping_line_events            : asyncListShippingLineEvents,
 	list_saas_plan                       : asyncListSaasPlan,
 	list_enrichment_sources              : asyncListEnrichmentSources,
 	list_incident_types                  : asyncListIncidentTypes,
@@ -204,9 +216,35 @@ const keyAsyncFieldsParamsMapping = {
 	list_lcl_customs_rate_requests       : asyncListLclCustomsRate,
 	list_air_customs_rate_requests       : asyncListAirCustomsRate,
 	list_trailer_freight_rate_requests   : asyncListTrailerFreightRate,
+	list_fcl_freight_rate_feedbacks      : asyncListFclRateFeedback,
+	list_lcl_freight_rate_feedbacks      : asyncListLclRateFeedback,
+	list_air_freight_rate_feedbacks      : asyncListAirRateFeedback,
+	list_ftl_freight_rate_feedbacks      : asyncListFtlRateFeedback,
+	list_ltl_freight_rate_feedbacks      : asyncListLtlRateFeedback,
+	list_fcl_customs_rate_feedbacks      : asyncListFclCustomFeedback,
+	list_lcl_customs_rate_feedbacks      : asyncListLclCustomFeedback,
+	list_trailer_freight_rate_feedbacks  : asyncListTrailerRateFeedback,
+	list_haulage_freight_rate_feedbacks  : asyncListHaulageRateFeedback,
+	list_air_customs_rate_feedbacks      : asyncListAirCustomFeedback,
 };
 
 const SINGLE_ENTITY = 1;
+
+const getElement = ({ type = '', multiple = false }) => {
+	if (type === 'async_create_select' && multiple) {
+		return CreatableMultiSelect;
+	}
+
+	if (type === 'async_create_select') {
+		return CreatableSelect;
+	}
+
+	if (multiple) {
+		return MultiSelect;
+	}
+
+	return Select;
+};
 
 function AsyncSelect(props) {
 	const {
@@ -219,6 +257,7 @@ function AsyncSelect(props) {
 		microService = '',
 		onOptionsChange,
 		isSingleEntity,
+		type,
 		...rest
 	} = props;
 
@@ -259,7 +298,7 @@ function AsyncSelect(props) {
 		getSelectedOption(selectedOption[GLOBAL_CONSTANTS.zeroth_index]);
 	}
 
-	const Element = multiple ? MultiSelect : Select;
+	const Element = getElement({ type, multiple });
 
 	return <Element disabled={disabled} {...getAsyncOptionsProps} {...rest} />;
 }

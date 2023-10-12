@@ -1575,8 +1575,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'marketing-marketing_communication_control',
 					title         : t('common:communication_control'),
-					href          : '/marketing/communication-control',
-					as            : '/marketing/communication-control',
+					href          : '/v2/marketing/communication-control',
+					as            : '/v2/marketing/communication-control',
 					type          : 'link',
 					main_apis     : [],
 					possible_apis : apis.communication_control,
@@ -2176,8 +2176,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'contract_rates-international_contracts',
 					title         : t('common:overseas_contract'),
-					href          : '/contract-rates/dashboard/active',
-					as            : '/contract-rates/dashboard/active',
+					href          : '/contract-rates/dashboard?activeTab=active&page=1',
+					as            : '/contract-rates/dashboard?activeTab=active&page=1',
 					type          : 'link',
 					main_apis     : ['list_contracts'],
 					possible_apis : [...apis.contract_rates, ...apis.shipment],

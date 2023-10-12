@@ -18,11 +18,11 @@ export const COLORS = [
 ];
 
 export const FILTER_OPTIONS = [
+	{ label: 'Spot Search', value: 'spot_search' },
 	{ label: 'Avg Accuracy', value: 'bas_standard_price_accuracy' },
 	{ label: 'Avg Standard Price', value: 'average_standard_price' },
 	{ label: 'Likes', value: 'liked' },
 	{ label: 'Dislikes', value: 'disliked' },
-	{ label: 'Spot Search', value: 'spot_search' },
 	{ label: 'Checkout', value: 'checkout' },
 	{ label: 'Shipment Completed', value: 'shipment_completed' },
 	{ label: 'Shipment Cancelled', value: 'shipment_cancelled' },

@@ -1,6 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import TimeLine from '../../../../../../common/TimeLine';
 import useGetTeamsMessages from '../../../../../../hooks/useGetTeamsMessages';
@@ -9,6 +11,7 @@ import SentComponent from '../SendComponent';
 
 import styles from './styles.module.css';
 
+const SCROLL_WHEN_REQUIRED_HEIGHT = 2;
 const CONVERSATION_TYPE_MAPPING = {
 	sent     : SentComponent,
 	received : ReceiveComponent,
@@ -51,6 +54,7 @@ function MessagesThread({
 	conversationsDivRef = {},
 	scrollToLastMessage = () => {},
 	isGroup = false,
+	lastGroupUpdatedAt = 0,
 }) {
 	const {
 		firstLoadingMessages,
@@ -60,12 +64,29 @@ function MessagesThread({
 		isLastPage = false,
 		loggedInUserId = '',
 		handleScroll = () => {},
+		messagesState = {},
 	} = useGetTeamsMessages({
 		firestore,
 		roomId,
 		scrollToLastMessage,
 		isGroup,
+		lastGroupUpdatedAt,
 	});
+
+	useEffect(() => {
+		const {
+			scrollHeight = 0,
+			scrollTop = 0,
+			clientHeight = 0,
+		} = conversationsDivRef?.current || {};
+
+		if (
+			!isEmpty(messagesState) && !firstLoadingMessages
+			&& (scrollHeight - scrollTop < SCROLL_WHEN_REQUIRED_HEIGHT * clientHeight)
+		) {
+			scrollToLastMessage();
+		}
+	}, [conversationsDivRef, firstLoadingMessages, messagesState, scrollToLastMessage]);
 
 	if (firstLoadingMessages) {
 		return (

@@ -24,5 +24,10 @@ const saas = {
 		navigation : 'saas_air_tracking',
 		isMainNav  : true,
 	},
+	'/[partner_id]/saas/tracking-job': {
+		layoutType : 'no_header',
+		navigation : 'tracking_job',
+		isMainNav  : true,
+	},
 };
 module.exports = saas;

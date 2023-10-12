@@ -46,7 +46,6 @@ export const getCallingRoomData = ({
 	const videoCallComingQuery = query(
 		videoCallRef,
 		where('call_status', '==', 'calling'),
-		where('calling_by', '==', 'user'),
 		where('peer_id', '==', userId),
 		limit(ONE),
 	);
