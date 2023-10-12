@@ -9,7 +9,7 @@ import {
 	where,
 	orderBy, addDoc,
 } from 'firebase/firestore';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import formatNames from '../helpers/getGroupName';
@@ -110,11 +110,19 @@ async function createDraftRoom({
 function useCreateOrGetDraftTeamRoom({
 	firestore = {},
 	setActiveTab = () => {},
+	setTriggerCreation = () => {},
 }) {
-	const { loggedInAgendId, loggedInAgentName, agentData } = useSelector(({ profile }) => ({
-		loggedInAgendId   : profile.user.id,
-		loggedInAgentName : profile.user.name,
-		agentData         : {
+	const {
+		loggedInAgendId,
+		loggedInAgentName,
+		loggedInAgentEmail,
+		loggedInAgentNumber,
+	} = useSelector(({ profile }) => ({
+		loggedInAgendId     : profile.user.id,
+		loggedInAgentName   : profile.user.name,
+		loggedInAgentEmail  : profile?.user?.email,
+		loggedInAgentNumber : profile?.user?.mobile_number,
+		agentData           : {
 			id            : profile?.user?.id,
 			email         : profile?.user?.email,
 			mobile_number : profile?.user?.mobile_number,
@@ -126,24 +134,29 @@ function useCreateOrGetDraftTeamRoom({
 
 	const { hashFunction } = useHashFunction();
 
-	const setActiveRoom = ({ val = {} }) => {
-		setActiveTab((prev) => ({
-			...prev,
-			data: {
-				...(prev?.data || {}),
-				...val,
-			},
-		}));
-	};
-
-	const createOrGetDraftTeamRoom = async ({ userIds = [], userIdsData = [] }) => {
+	const createOrGetDraftTeamRoom = useCallback(async ({ userIds = [], userIdsData = [] }) => {
 		setLoading(true);
+
+		const setActiveRoom = ({ val = {} }) => {
+			setActiveTab((prev) => ({
+				...prev,
+				data: {
+					...(prev?.data || {}),
+					...val,
+				},
+			}));
+		};
 
 		const modifiedUserIdsData = [...userIdsData, {
 			id         : loggedInAgendId,
 			name       : loggedInAgentName,
 			is_admin   : true,
-			agent_data : agentData,
+			agent_data : {
+				id            : loggedInAgendId,
+				email         : loggedInAgentEmail,
+				mobile_number : loggedInAgentNumber,
+				name          : loggedInAgentName,
+			},
 		}];
 		const modifiedUserIds = [loggedInAgendId, ...userIds];
 		const groupMembersHashString = await hashFunction({ groupMemberIds: modifiedUserIds });
@@ -182,8 +195,18 @@ function useCreateOrGetDraftTeamRoom({
 			Toast.error('Something Went Wrong');
 		} finally {
 			setLoading(false);
+			setTriggerCreation(false);
 		}
-	};
+	}, [
+		firestore,
+		hashFunction,
+		loggedInAgendId,
+		loggedInAgentEmail,
+		loggedInAgentName,
+		loggedInAgentNumber,
+		setActiveTab,
+		setTriggerCreation,
+	]);
 
 	return {
 		createOrGetDraftTeamRoom,
