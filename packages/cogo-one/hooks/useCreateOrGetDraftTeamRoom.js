@@ -119,7 +119,7 @@ function useCreateOrGetDraftTeamRoom({
 		loggedInAgentEmail,
 		loggedInAgentNumber,
 	} = useSelector(({ profile }) => ({
-		loggedInAgendId     : profile.user.id,
+		loggedInAgendId     : profile?.user?.id,
 		loggedInAgentName   : profile.user.name,
 		loggedInAgentEmail  : profile?.user?.email,
 		loggedInAgentNumber : profile?.user?.mobile_number,
@@ -127,7 +127,7 @@ function useCreateOrGetDraftTeamRoom({
 			id            : profile?.user?.id,
 			email         : profile?.user?.email,
 			mobile_number : profile?.user?.mobile_number,
-			name          : profile.user.name,
+			name          : profile?.user?.name,
 		},
 	}));
 
