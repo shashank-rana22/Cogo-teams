@@ -27,7 +27,7 @@ const useHandleBookingConfirmation = () => {
 
 	const { importer_exporter = {} } = detail;
 
-	const { organization_settings = [], tags = [], is_agent_allowed_to_book = true } = importer_exporter;
+	const { organization_settings = [], tags = [], is_agent_allowed_to_book = false } = importer_exporter;
 
 	const { rfq_id, checkoutType } = query || {};
 
