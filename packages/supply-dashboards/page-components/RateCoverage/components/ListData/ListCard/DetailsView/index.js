@@ -1,10 +1,10 @@
-import { Popover, Button, Placeholder } from '@cogoport/components';
-import React from 'react';
+import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
 import ServiceDetailsContent from './Content';
+import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
-const LOADER_COUNT = 3;
 
 function DetailsView({
 	data = {}, shipment_loading = false,
@@ -12,8 +12,10 @@ function DetailsView({
 	source = {}, getShipment = () => {}, getFeedback = () => {}, getRequest = () => {},
 
 }) {
+	const [showServiceDetails, setShowServiceDetails] = useState(false);
 	const handleDetailView = () => {
-		if (source === 'live_bookings') {
+		setShowServiceDetails(!showServiceDetails);
+		if (source === 'live_booking') {
 			return getShipment();
 		}
 		if (source === 'rate_feedback') {
@@ -23,43 +25,30 @@ function DetailsView({
 	};
 
 	return (
-		<Popover
-			placement="left"
-			size="md"
-			render={(
-				<div>
-					{(shipment_loading || request_loading
-					|| feedback_loading) ? [...new Array(LOADER_COUNT).keys()].map((ind) => (
-						<Placeholder
-							height="4vh"
-							width="600px"
-							key={ind}
-							style={{ marginTop: '10px' }}
-						/>
-						))
-						: (
-							<ServiceDetailsContent
-								shipmemnt_data={shipmemnt_data}
-								data={data}
-								requestData={requestData?.list?.[ZERO_VALUE] || null}
-								feedbackData={feedbackData?.list?.[ZERO_VALUE] || null}
-								shipment_loading={shipment_loading}
-								request_loading={request_loading}
-								feedback_loading={feedback_loading}
-							/>
-						)}
-				</div>
+		<div>
+			{showServiceDetails && (
+				<ServiceDetailsContent
+					shipmemnt_data={shipmemnt_data}
+					data={data}
+					requestData={requestData?.list?.[ZERO_VALUE] || null}
+					feedbackData={feedbackData?.list?.[ZERO_VALUE] || null}
+					shipment_loading={shipment_loading}
+					request_loading={request_loading}
+					feedback_loading={feedback_loading}
+				/>
 			)}
-		>
-			<Button
+
+			<div
+				className={styles.container}
+				role="presentation"
 				size="md"
-				style={{ marginRight: '10px' }}
-				themeType="secondary"
 				onClick={handleDetailView}
 			>
-				View Details
-			</Button>
-		</Popover>
+				{showServiceDetails ? 'Hide Details' : 'View Details'}
+				{showServiceDetails ? <IcMArrowUp style={{ margin: '-2px 2px' }} />
+					: <IcMArrowDown style={{ margin: '-2px 2px' }} />}
+			</div>
+		</div>
 	);
 }
 

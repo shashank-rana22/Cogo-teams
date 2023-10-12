@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin: 30px 15px;
+	margin: 15px 15px 0;
 }
 
 .break_the_chat {
@@ -30,8 +30,29 @@
 	background: #f9f9f9;
 }
 
-.datetime_styles {
+.date_time_styles {
 	font-size: 10px;
 	font-weight: 600;
 	color: #616161;
+}
+
+.grouped_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 0 15px;
+	font-size: 12px;
+	cursor: pointer;
+	user-select: none;
+
+	svg {
+		width: 14px;
+		height: 14px;
+		margin-right: 4px;
+	}
+
+	&:hover {
+		font-weight: 600;
+	}
 }

@@ -14,9 +14,9 @@ export const WEEKLY_BACKLOG = {
 };
 
 export const CARDS_MAPPING = {
-	live_bookings: {
+	live_booking: {
 		title        : 'Live Bookings',
-		status       : 'live_bookings',
+		status       : 'live_booking',
 		showViewMore : true,
 	},
 	rate_feedback: {
@@ -97,6 +97,10 @@ export const serviceOptions = [
 	{
 		label : 'Trailer Freight',
 		value : 'trailer',
+	},
+	{
+		label : 'FCL CFS',
+		value : 'fcl_cfs',
 	},
 ];
 

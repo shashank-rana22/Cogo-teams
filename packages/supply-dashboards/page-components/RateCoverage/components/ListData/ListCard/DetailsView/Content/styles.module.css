@@ -1,5 +1,6 @@
 .container {
-	width: 600px;
+	padding: 6px;
+	background: #f9f9f9;
 }
 
 .pill {
@@ -21,4 +22,8 @@
 	display: flex;
 	flex-wrap: wrap;
 	padding: 6px;
+}
+
+.pointer {
+	cursor: pointer;
 }

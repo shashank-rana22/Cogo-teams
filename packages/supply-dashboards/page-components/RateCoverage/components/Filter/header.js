@@ -24,8 +24,8 @@ function HeaderCompoment({
 		setShowWeekData(false);
 	};
 	return (
-		<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-			<div style={{ display: 'flex', flexDirection: 'column' }}>
+		<div className={styles.container}>
+			<div className={styles.header}>
 				<div className={styles.title}>Apply Filter</div>
 				<div className={styles.desc}>(These filters will be applied throughout the page)</div>
 			</div>

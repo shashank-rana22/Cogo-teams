@@ -1,6 +1,4 @@
 /* eslint-disable max-lines-per-function */
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 import { currencyOptions } from '../../../../../configurations/helpers/constants';
 
 const lclControls = ({
@@ -135,16 +133,7 @@ const lclControls = ({
 		name               : 'line_items',
 		buttonText         : 'Add Line Items',
 		noDeleteButtonTill : 0,
-		value              : [
-			{
-				code      : 'BAS',
-				unit      : 'per_wm',
-				currency  : GLOBAL_CONSTANTS.currency_code.USD,
-				min_price : null,
-				price     : null,
-			},
-		],
-		controls: [
+		controls           : [
 			{
 				name        : 'code',
 				type        : 'select',
@@ -153,10 +142,10 @@ const lclControls = ({
 			},
 			{
 				name        : 'unit',
-				placeholder : 'Unit',
-				type        : 'select',
 				span        : 1.5,
-				rules       : { required: 'This is required' },
+				type        : 'select',
+				className   : 'primary lg',
+				placeholder : 'Unit',
 			},
 			{
 				name        : 'currency',

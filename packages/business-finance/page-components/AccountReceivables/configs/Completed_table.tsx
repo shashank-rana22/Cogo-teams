@@ -1,7 +1,8 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
-import { format, getByKey, startCase } from '@cogoport/utils';
+import { format, getByKey, isEmpty, startCase } from '@cogoport/utils';
+import React from 'react';
 
 import InvoiceDetails from '../commons/invoiceDetails';
 import Remarks from '../commons/Remarks';
@@ -12,7 +13,6 @@ import getStatus from '../Utils/getStatus';
 
 import CheckboxItem from './CheckboxItem';
 import HeaderCheckbox from './HeaderCheckbox';
-import ShipmentView from './ShipmentView';
 import SortHeaderInvoice from './SortHeaderInvoice';
 import styles from './styles.module.css';
 
@@ -42,6 +42,29 @@ const INVOICE_STATUS_MAPPING = {
 
 const IRN_GENERATEABLE_STATUSES = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 
+const SHIPMENT_MAPPING = {
+	FCL_FREIGHT           : 'fcl',
+	AIR_FREIGHT           : 'air-freight',
+	FTL_FREIGHT           : 'ftl',
+	LCL_FREIGHT           : 'lcl',
+	HAULAGE_FREIGHT       : 'haulage',
+	RAIL_DOMESTIC_FREIGHT : 'rail-domestic',
+	FCL_CUSTOMS        	  : 'fcl-custom',
+	AIR_CUSTOMS           : 'air-customs',
+};
+
+const OLD_ADMIN_NAVS = ['fcl_freight_local', 'domestic_air_freight', 'rail_domestic_freight'];
+
+function openLink({ event, partnerId, shipmentId, serviceTypeUpper }) {
+	event.preventDefault();
+	if (OLD_ADMIN_NAVS.includes(serviceTypeUpper)) {
+		window.open(`/${partnerId}/shipments/${shipmentId}`, '_blank');
+		return;
+	}
+	const serviceTypeMap = SHIPMENT_MAPPING[serviceTypeUpper?.toUpperCase()];
+	window.open(`/v2/${partnerId}/booking/${serviceTypeMap}/${shipmentId}`, '_blank');
+}
+
 interface InvoiceTable {
 	entityCode?: string,
 	refetch?: Function,
@@ -63,6 +86,7 @@ interface InvoiceTable {
 	isHeaderChecked?: boolean,
 	setIsHeaderChecked?: Function,
 	showFilters?: boolean,
+	partner_id?: string,
 }
 const MIN_NAME_STRING = 0;
 const MAX_NAME_STRING = 14;
@@ -87,6 +111,7 @@ const completedColumn = ({
 	setIsHeaderChecked,
 	entityCode,
 	showFilters = true,
+	partner_id,
 }: InvoiceTable) => [
 	{
 		Header: <HeaderCheckbox
@@ -100,10 +125,12 @@ const completedColumn = ({
 		id       : 'checkbox',
 		accessor : (row?: object) => (
 			<CheckboxItem
+				setIsHeaderChecked={setIsHeaderChecked}
 				IRN_GENERATEABLE_STATUSES={IRN_GENERATEABLE_STATUSES}
 				checkedRows={checkedRows}
 				setCheckedRows={setCheckedRows}
 				row={row}
+				totalRows={totalRows}
 			/>
 		),
 	},
@@ -148,6 +175,12 @@ const completedColumn = ({
 				invoice_type: invoiceType = '',
 			} = getDocumentInfo({ itemData: row });
 
+			const openPdfInNewTab = () => {
+				if (!isEmpty(invoicePdf)) {
+					window.open(invoicePdf, '_blank');
+				}
+			};
+
 			return (
 				<div className={styles.fieldPair}>
 					<div className={styles.column_height}>
@@ -162,8 +195,8 @@ const completedColumn = ({
 								)}
 							>
 								<text
-									className={styles.link}
-									onClick={() => window.open(invoicePdf, '_blank')}
+									className={!isEmpty(invoicePdf) ? styles.link : ''}
+									onClick={openPdfInNewTab}
 									role="presentation"
 								>
 									{`${(invoiceNumber).substring(
@@ -175,18 +208,20 @@ const completedColumn = ({
 						)
 							: (
 								<div
-									className={styles.link}
-									onClick={() => window.open(invoicePdf, '_blank')}
+									className={!isEmpty(invoicePdf) ? styles.link : ''}
+									onClick={openPdfInNewTab}
 									role="presentation"
 								>
 									{invoiceNumber}
 								</div>
 							)}
-						<div className={styles.qwerty}>
-							<Pill size="sm" color={INVOICE_TYPE[row?.invoiceType]}>
-								{invoiceType.replaceAll('_', ' ')}
-							</Pill>
-						</div>
+						{invoiceType ? (
+							<div className={styles.qwerty}>
+								<Pill size="sm" color={INVOICE_TYPE[row?.invoiceType]}>
+									{startCase(invoiceType)}
+								</Pill>
+							</div>
+						) : null}
 					</div>
 				</div>
 			);
@@ -196,8 +231,21 @@ const completedColumn = ({
 	},
 	{
 		Header   : 'SID',
-		accessor : (row) => (
-			<div className={styles.column_height}><ShipmentView row={row} /></div>
+		accessor : ({ sidNo, serviceType = '', shipmentId }) => (
+			<a
+				href={shipmentId}
+				onClick={(event) => {
+					openLink({
+						event,
+						partnerId        : partner_id,
+						shipmentId,
+						serviceTypeUpper : serviceType,
+					});
+				}}
+				className={styles.link}
+			>
+				{sidNo || '-'}
+			</a>
 		),
 	},
 	{

@@ -13,6 +13,7 @@ const API_NAME = {
 	trailer     : 'delete_trailer_freight_rate_job',
 	ltl_freight : 'delete_ltl_freight_rate_job',
 	ftl_freight : 'delete_ftl_freight_rate_job',
+	fcl_cfs     : 'delete_fcl_cfs_rate_job',
 };
 
 const useDeleteRateJob = (service) => {
@@ -48,12 +49,11 @@ const useDeleteRateJob = (service) => {
 			}
 		});
 
-		const params = (service === 'air_freight') ? {
+		const params = (service === 'air_freight' || service === 'air_customs') ? {
 			origin_airport_id      : data?.origin_airport_id,
 			destination_airport_id : data?.destination_airport_id,
 			commodity_type         : data?.commodity_type || 'all',
 			commodity_sub_type     : data?.commodity_sub_type || 'all',
-
 			weight_slabs,
 		} : {
 			origin_port_id      : data?.origin_location_id,

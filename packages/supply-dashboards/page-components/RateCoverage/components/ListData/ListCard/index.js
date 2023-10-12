@@ -24,24 +24,24 @@ function ListCard({
 	const [showCloseModal, setShowCloseModal] = useState(false);
 	const [showAddRateModal, setShowAddRateModal] = useState(false);
 	const {
-		sources = [], container_size, container_type,
-		commodity, weight_slabs, stacking_type, price_type, source_id = '',
-		origin_port,
-		origin_airport,
-		port,
-		origin_location,
-		location,
-		airport,
-		destination_port,
-		destination_airport,
-		destination_location,
-		shipping_line_id,
+		sources = [], container_size = '', container_type,
+		commodity = '', weight_slabs = '', stacking_type = '', price_type = '', source_id = '',
+		origin_port = '',
+		origin_airport = '',
+		port = '',
+		origin_location = '',
+		location = '',
+		airport = '',
+		destination_port = '',
+		destination_airport = '',
+		destination_location = '',
+		shipment_id = '',
 	} = data;
 
 	const {
 		data:shipmemnt_data, getShipment = () => {},
 		shipment_loading = false,
-	} =	 useGetShipment({ shipping_line_id });
+	} =	 useGetShipment({ shipment_id });
 
 	const { data:requestData, getRequest, loading:request_loading } = useListFreightRateRequests({ source_id, filter });
 	const {
@@ -70,7 +70,7 @@ function ListCard({
 
 	const handleAddRate = () => {
 		setShowAddRateModal((prev) => !prev);
-		if (source === 'live_bookings') {
+		if (source === 'live_booking') {
 			return getShipment();
 		}
 		if (source === 'rate_feedback') {
@@ -81,7 +81,8 @@ function ListCard({
 
 	return (
 		<div className={styles.container}>
-			{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
+			<div className={styles.details_content}>
+				{['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
 			&& (
 				<div>
 					<div className={styles.head}>
@@ -95,6 +96,16 @@ function ListCard({
 										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
 										formatType : 'date',
 									})}
+								</div>
+								<div className={styles.pill}>
+									TID:
+									{' '}
+									{data?.serial_id}
+								</div>
+								<div className={styles.pill}>
+									Assigned to:
+									{' '}
+									{data?.assigned_to?.name}
 								</div>
 								<div className={styles.business_name}>
 									{data?.service_provider?.business_name || data?.service_provider?.name}
@@ -122,7 +133,7 @@ function ListCard({
 							</div>
 							{data?.shipping_line?.short_name && (
 								<div>
-									<Pill size="md" color="blue">
+									<Pill size="md" color="orange">
 										{(filter?.service === 'air_freight' || filter?.service === 'air_customs')
 											? 'Air Line:' : 'Shipping Line:'}
 										{data?.shipping_line?.short_name}
@@ -130,31 +141,17 @@ function ListCard({
 								</div>
 							)}
 						</div>
-						<div>
-							<Pill size="md" color="orange">
-								TID:
-								{' '}
-								{data?.serial_id}
-							</Pill>
-						</div>
-						<div>
-							<Pill size="md" color="blue">
-								Assigned to:
-								{' '}
-								{data?.assigned_to?.name}
-							</Pill>
-						</div>
 					</div>
 				</div>
 			)}
 
-			{['critical_ports', 'expiring_rates', 'cancelled_shipments']?.includes(source)
+				{['critical_ports', 'expiring_rates', 'cancelled_shipments']?.includes(source)
 			&& (
 				<CardContent data={data} filter={filter} service={service} />
 			)}
 
-			<div className={styles.footer}>
-				<div className={styles.port_details}>
+				<div className={styles.footer}>
+
 					<div className={styles.row}>
 						{originName
 						&& (
@@ -212,23 +209,21 @@ function ListCard({
 						)}
 						<div className={styles.line} />
 					</div>
-				</div>
-				<div className={styles.vertical_line} />
-				<div className={styles.shipment_details}>
-					<div>
-						<div className={styles.tags_container}>
-							{(ITEM_LIST || [])?.map((val) => (
-								<div key={val?.label}>
-									{val?.label !== undefined && val?.label !== null
+
+					<div className={styles.vertical_line} />
+
+					<div className={styles.tags_container}>
+						{(ITEM_LIST || [])?.map((val) => (
+							<div key={val?.label}>
+								{ val?.label
 									&& (
 										<Pill>
-											{' '}
 											{val?.label}
 										</Pill>
 									)}
-								</div>
-							))}
-						</div>
+							</div>
+						))}
+
 						{!isEmpty(sources) && (
 							<span>
 								{(sources || []).map((val) => (
@@ -239,27 +234,10 @@ function ListCard({
 							</span>
 						)}
 					</div>
+
 					<div className={styles.vertical_line} />
 					<div className={styles.button_grp}>
-						{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
-								&& (
-									<DetailsView
-										data={data}
-										source={source}
-										filter={filter}
-										shipment_loading={shipment_loading}
-										request_loading={request_loading}
-										feedback_loading={feedback_loading}
-										shipmemnt_data={shipmemnt_data}
-										requestData={requestData}
-										feedbackData={feedbackData}
-										getShipment={getShipment}
-										getFeedback={getFeedback}
-										getRequest={getRequest}
-									/>
-								)}
-
-						{!['live_bookings']?.includes(source)
+						{!['live_booking']?.includes(source)
 							&& (
 								<div>
 									{!['aborted', 'completed'].includes(filter?.status) && (
@@ -278,7 +256,26 @@ function ListCard({
 						</Button>
 					</div>
 				</div>
+
 			</div>
+
+			{['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
+								&& (
+									<DetailsView
+										data={data}
+										source={source}
+										filter={filter}
+										shipment_loading={shipment_loading}
+										request_loading={request_loading}
+										feedback_loading={feedback_loading}
+										shipmemnt_data={shipmemnt_data}
+										requestData={requestData}
+										feedbackData={feedbackData}
+										getShipment={getShipment}
+										getFeedback={getFeedback}
+										getRequest={getRequest}
+									/>
+								)}
 
 			{showCloseModal && (
 				<CloseModal

@@ -1,0 +1,44 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	background: linear-gradient(270deg, #ff8f86 -4.9%, #ffef7e 20.69%, #fffdf1 58.44%);
+	border-radius: 6px;
+}
+
+.date_container {
+	display: flex;
+	padding: 0 24px;
+}
+
+.today_date {
+	font-size: var(--font-size-xl);
+	font-weight: 500;
+}
+
+.separator {
+	width: 1px;
+	margin: 0 16px;
+	background: #fde74d;
+}
+
+.score_container {
+	display: flex;
+	align-items: center;
+	padding: 8px 64px;
+	background: #fde74d;
+	border: 1px solid #fde74d;
+	border-radius: 6px;
+}
+
+.score {
+	margin-right: 8px;
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 700;
+}
+
+.points {
+	color: #4f4f4f;
+}

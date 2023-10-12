@@ -54,6 +54,7 @@ const formatMailDraftMessage = ({
 			subject    : payload?.subject || '',
 			to_mails   : payload?.toUserEmail || [],
 			draft_type : buttonType,
+			user_ids   : emailState?.user_ids,
 			...(showOrgSpecificMail ? {
 				custom_subject : emailState?.customSubject || '',
 				orgData        : emailState?.orgData || {},

@@ -35,6 +35,7 @@ function Header({
 			<ToUser
 				firestore={firestore}
 				setActiveTab={setActiveTab}
+				viewType={viewType}
 			/>
 		);
 	}
@@ -102,7 +103,12 @@ function Header({
 						</div>
 					</>
 				) : null}
-				{(hasPermissionToEdit && !isGroup) ? <VideoCalling activeTab={activeTab} /> : null}
+				{(hasPermissionToEdit && !isGroup) ? (
+					<VideoCalling
+						activeTab={activeTab}
+						membersList={membersList}
+					/>
+				) : null}
 			</div>
 		</div>
 	);

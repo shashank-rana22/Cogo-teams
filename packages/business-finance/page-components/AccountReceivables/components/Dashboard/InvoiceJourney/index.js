@@ -14,7 +14,7 @@ const FIRST_ARRAY_SIZE = 3;
 const SECOND_ARRAY_SIZE = 4;
 const DEFAULT_VALUE = 0;
 
-function InvoiceJourney({ filterValue, entityCode }) {
+function InvoiceJourney({ filterValue, entityCode = '' }) {
 	const { t = () => '' } = useTranslation(['accountRecievables']);
 	const d = new Date();
 	const currentMonth = GLOBAL_CONSTANTS.month_name[d.getMonth()];
@@ -25,7 +25,7 @@ function InvoiceJourney({ filterValue, entityCode }) {
 		setDateFilter, optionsVal,
 	} = useGetInvoiceJourney({ filterValue, entityCode });
 
-	const { irn_label: irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
+	const { irn_label: irnLabel } = ENTITY_FEATURE_MAPPING[entityCode]?.labels || {};
 
 	const {
 		draftInvoicesCount, financeAcceptedInvoiceCount,

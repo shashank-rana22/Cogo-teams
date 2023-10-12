@@ -18,7 +18,7 @@ function CardContent({ data = {}, filter = {}, service = {} }) {
 				<div className={styles.vertical_line} />
 				<div>
 					<Pill size="md" color="green">
-						{filter?.service === 'fcl_freight' ? 'Shipping Line:' : 'Air Line:'}
+						{['air_freight', 'air_customs']?.includes(filter?.service) ? 'Air Line:' : 'Shipping Line:'}
 						{data?.shipping_line?.short_name || data?.airline?.short_name}
 					</Pill>
 				</div>
@@ -67,11 +67,11 @@ function CardContent({ data = {}, filter = {}, service = {} }) {
 				<div>
 					Last Updated At:
 					{' '}
-					{data?.created_at ? formatDate({
+					{data?.created_at && formatDate({
 						date       : data?.created_at,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
 						formatType : 'date',
-					}) : '_'}
+					})}
 				</div>
 			</div>
 		</div>

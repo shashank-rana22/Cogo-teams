@@ -13,6 +13,7 @@ const useListFreightRateRequests = ({ source_id, filter }) => {
 		trailer     : 'list_trailer_freight_rate_requests',
 		ltl_freight : 'list_ltl_freight_rate_requests',
 		ftl_freight : 'list_ftl_freight_rate_requests',
+		fcl_cfs     : 'list_fcl_cfs_rate_requests',
 	};
 
 	const apiName = API[filter?.service];

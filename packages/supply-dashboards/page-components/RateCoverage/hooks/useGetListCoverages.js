@@ -13,6 +13,7 @@ const API_NAME = {
 	haulage     : 'list_haulage_freight_rate_jobs',
 	fcl_customs : 'list_fcl_customs_rate_jobs',
 	ftl_freight : 'list_ftl_freight_rate_jobs',
+	fcl_cfs     : 'list_fcl_cfs_rate_jobs',
 };
 
 const FCL_PARAMS_MAPPING = {
@@ -39,7 +40,7 @@ const useGetListCoverage = () => {
 	const { user: { id: user_id = '' } = {} } = user_data;
 
 	const [page, setPage] = useState(DEFAULT_PAGE);
-	const [source, setSource] = useState('live_bookings');
+	const [source, setSource] = useState('live_booking');
 	const [filter, setFilter] = useState({
 		service                   : 'fcl_freight',
 		status                    : 'pending',
@@ -63,7 +64,8 @@ const useGetListCoverage = () => {
 
 		const FINAL_FILTERS = {};
 
-		const paramsMapping = filter?.service === 'air_freight' ? AIR_PARAMS_MAPPING : FCL_PARAMS_MAPPING;
+		const paramsMapping = ['air_freight', 'air_customs']?.includes(filter?.service)
+			? AIR_PARAMS_MAPPING : FCL_PARAMS_MAPPING;
 
 		Object.keys(restFilters).forEach((ele) => {
 			if (restFilters[ele]) {

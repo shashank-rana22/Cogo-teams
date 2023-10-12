@@ -131,7 +131,7 @@ function Filter({
 							/>
 						</div>
 					</div>
-					{(source === 'live_bookings' || source === 'rate_feedback' || source === 'rate_request')
+					{(source === 'live_booking' || source === 'rate_feedback' || source === 'rate_request')
 				&& (
 					<div className={styles.radio}>
 						<div style={{ marginTop: '20px' }}>Entity</div>
@@ -146,7 +146,7 @@ function Filter({
 						/>
 					</div>
 				)}
-					{(source === 'live_bookings')
+					{(source === 'live_booking')
 					&& (
 						<div className={styles.radio}>
 							<RadioGroup

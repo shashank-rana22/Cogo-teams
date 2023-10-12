@@ -1,13 +1,13 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
-function useGetShipment({ shipping_line_id }) {
+function useGetShipment({ shipment_id }) {
 	const [{ loading: shipment_loading, data }, trigger] = useRequest({
 		url          : '/get_shipment',
 		method       : 'GET',
 		service_name : 'shipment',
 		params       : {
-			id: shipping_line_id,
+			id: shipment_id,
 		},
 	}, { manual: true });
 

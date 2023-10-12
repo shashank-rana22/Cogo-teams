@@ -122,9 +122,7 @@ const ltlControls = ({
 		value       : data?.commodity,
 		options     : CommodityOptions,
 		span        : 4,
-		rules       : {
-			required: true,
-		},
+		rules       : { required: 'commodity is required' },
 	},
 	{
 		name        : 'density_factor',
@@ -175,9 +173,7 @@ const ltlControls = ({
 		type        : 'date_range',
 		label       : 'Validity of Rate',
 		span        : 4,
-		rules       : {
-			required: true,
-		},
+		rules       : { required: 'Date Range is required' },
 	},
 	{
 		name        : 'currency',
@@ -186,10 +182,8 @@ const ltlControls = ({
 		type        : 'select',
 		options     : currencyOptions,
 		span        : 4,
-		rules       : {
-			required: true,
-		},
-		className: 'primary lg',
+		rules       : { required: 'currency is required' },
+		className   : 'primary lg',
 	},
 
 	{
@@ -199,9 +193,7 @@ const ltlControls = ({
 		type      : 'number',
 		span      : 4,
 		className : 'primary lg',
-		rules     : {
-			required: true,
-		},
+		rules     : { required: 'is required' },
 	},
 
 	{
@@ -211,10 +203,8 @@ const ltlControls = ({
 		label       : 'Min Chargeable Weight( Per Kg )',
 		type        : 'number',
 		span        : 4,
-		rules       : {
-			required: true,
-		},
-		className: 'primary lg',
+		rules       : { required: 'is required' },
+		className   : 'primary lg',
 	},
 	{
 		name        : 'unit',
@@ -236,16 +226,14 @@ const ltlControls = ({
 				value : 'per_package',
 			},
 		],
-		rules: {
-			required: true,
-		},
+		rules: { required: 'is required' },
 	},
 
 	{
 		name               : 'weight_slabs',
 		type               : 'fieldArray',
 		noDeleteButtonTill : 1,
-		buttonText         : '',
+		buttonText         : 'Add Weight Slabs',
 		initialCount       : 0,
 		value              : [
 			{

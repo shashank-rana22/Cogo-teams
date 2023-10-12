@@ -1,10 +1,15 @@
+import { Popover } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import { IcMDoubleFilter } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 
+import SidTypeFilters from './SidTypeFilters';
 import styles from './styles.module.css';
 
 function CategoryType(props) {
-	const { searchParams, setSearchParams, isAdmin } = props;
+	const { searchParams, setSearchParams, isAdmin, idFilters = {}, setIdFilters = () => {} } = props;
+	const { show = false, idType = '', serialId = '' } = idFilters || {};
+
 	const { t } = useTranslation(['myTickets']);
 
 	return (
@@ -38,6 +43,24 @@ function CategoryType(props) {
 				isClearable
 				initialCall
 			/>
+			<Popover
+				visible={show}
+				placement="left"
+				render={<SidTypeFilters {...props} />}
+				interactive
+				onClickOutside={() => setIdFilters((prev) => ({ ...prev, show: false }))}
+			>
+				<div
+					role="presentation"
+					className={styles.filter_container}
+					onClick={() => setIdFilters((prev) => ({ ...prev, show: true }))}
+				>
+					<IcMDoubleFilter width={20} height={20} />
+				</div>
+			</Popover>
+			{idType && serialId ? (
+				<div className={styles.applied_dot} />
+			) : null}
 		</div>
 	);
 }

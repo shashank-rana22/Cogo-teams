@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Modal, Toast } from '@cogoport/components';
-import {
-	useForm,
-} from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
 import React, { useEffect, useState } from 'react';
 
@@ -22,6 +20,7 @@ import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
 const TWO_HUNDERD = 200;
+
 function AddRateModal({
 	showModal = true,
 	setShowModal = () => {},
@@ -31,8 +30,8 @@ function AddRateModal({
 	getStats = () => {},
 	getListCoverage = () => {},
 	shipmemnt_data = {},
-	requestData,
-	feedbackData,
+	requestData = [],
+	feedbackData = [],
 	shipment_loading = false,
 	request_loading = false,
 	feedback_loading = false,
@@ -88,19 +87,19 @@ function AddRateModal({
 
 	const handleSubmitData = async (formData) => {
 		const rate_id = await createRate(formData);
-		if (source === 'rate_feedback') {
+		if (rate_id && source === 'rate_feedback') {
 			const resp = await deleteFeedbackRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
 			if (resp === TWO_HUNDERD) {
 				handleSuccessActions();
 			}
 		}
-		if (source === 'rate_request') {
+		if (rate_id && source === 'rate_request') {
 			const resp = await deleteRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
 			if (resp === TWO_HUNDERD) {
 				handleSuccessActions();
 			}
 		}
-		if (source === 'live_bookings') {
+		if (rate_id && source === 'live_booking') {
 			const resp = await updateFlashBookingRate({ data });
 			if (resp === TWO_HUNDERD) {
 				handleSuccessActions();
@@ -152,7 +151,7 @@ function AddRateModal({
 						{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
 				} else {
 					mandatoryFreightCodes = [...mandatoryFreightCodes,
-						{ code: '', price: '', unit: '', currency: '' }];
+						{ code, price: '', unit: '', currency: '' }];
 				}
 			}
 		});
@@ -170,9 +169,9 @@ function AddRateModal({
 
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
-			<Modal.Header title={(
-				<div>
-					{['live_bookings', 'rate_feedback', 'rate_request']?.includes(source)
+
+			<div>
+				{['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
 			&& (
 				<div className={styles.service_content}>
 					<ServiceDetailsContent
@@ -186,9 +185,7 @@ function AddRateModal({
 					/>
 				</div>
 			)}
-				</div>
-			)}
-			/>
+			</div>
 
 			<Modal.Body>
 				<div className={styles.title}>Please Add Rate</div>
@@ -198,14 +195,25 @@ function AddRateModal({
 					errors={errors}
 					showElements={showElements}
 				/>
+			</Modal.Body>
+			<Modal.Footer>
 				<div className={styles.submit_button}>
 					<Button
+						size="md"
+						onClick={setShowModal(showModal)}
+						style={{ marginRight: '20px' }}
+						themeType="secondary"
+					>
+						Close
+					</Button>
+					<Button
+						size="md"
 						onClick={handleSubmit(handleSubmitData)}
 					>
 						Submit
 					</Button>
 				</div>
-			</Modal.Body>
+			</Modal.Footer>
 		</Modal>
 	);
 }

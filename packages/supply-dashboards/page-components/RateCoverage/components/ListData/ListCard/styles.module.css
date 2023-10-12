@@ -8,7 +8,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-top: 14px;
+	margin-top: 6px;
 }
 
 .top_left_details {
@@ -32,27 +32,13 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-}
-
-.port_details {
-	display: flex;
-	align-items: center;
-	width: 45%;
-}
-
-.shipment_details {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	:global(.ui_button_childeren) {
-		width: max-content;
-	}
+	margin-top: 6px;
 }
 
 .row {
 	display: flex;
 	align-items: center;
+	width: 45%;
 }
 
 .column {
@@ -78,7 +64,6 @@
 }
 
 .container {
-	padding: 16px;
 	margin-bottom: 20px;
 	background: #fff;
 	border-radius: 6px;
@@ -99,11 +84,22 @@
 
 .tags_container {
 	display: flex;
-	width: 100%;
+	flex-wrap: wrap;
 	margin-bottom: 8px;
 }
 
 .business_name {
 	margin-left: 20px;
 	font-weight: 600;
+}
+
+.details_content {
+	padding: 16px;
+}
+
+.pill {
+	padding: 0 4px;
+	margin-left: 10px;
+	background: #f9f9f9;
+	border-radius: 6px;
 }
