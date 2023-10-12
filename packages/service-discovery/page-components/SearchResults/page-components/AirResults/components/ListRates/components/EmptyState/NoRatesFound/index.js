@@ -1,9 +1,9 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import Reset from '../../../../../../../common/Reset';
 import Filters from '../../../../../common/Filters';
 import AppliedFilters from '../../AppliedFilters';
 
-import Reset from './Reset';
 import styles from './styles.module.css';
 
 function NoRatesFound({

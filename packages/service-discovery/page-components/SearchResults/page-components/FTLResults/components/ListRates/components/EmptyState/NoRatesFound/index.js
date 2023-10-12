@@ -1,36 +1,34 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-// import AppliedFilters from '../../../../../../../common/AppliedFilters';
-// import Filters from '../../../../../common/Filters';
+import Reset from '../../../../../../../common/Reset';
+import Filters from '../../../../../common/Filters';
+import AppliedFilters from '../../AppliedFilters';
 
-import Reset from './Reset';
 import styles from './styles.module.css';
 
 function NoRatesFound({
-	// details = {},
-	// filters = {},
+	details = {},
+	filters = {},
 	setFilters = () => {},
-	// filtersRef = {},
-	// setOpenAccordian = () => {},
-	// setShowFilterModal = () => {},
-	// openAccordian = '',
-	// showFilterModal = false,
+	setOpenAccordian = () => {},
+	setShowFilterModal = () => {},
+	openAccordian = '',
+	showFilterModal = false,
 }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_section}>
-				{/* <div className={styles.applied_filters}>
+				<div className={styles.applied_filters}>
 					<AppliedFilters
-						filtersRef={filtersRef}
 						filters={filters}
 						setFilters={setFilters}
 						setShowFilterModal={setShowFilterModal}
 						setOpenAccordian={setOpenAccordian}
 					/>
-				</div> */}
+				</div>
 
 				<div className={styles.buttons_container}>
-					{/* <Filters
+					<Filters
 						showFilterModal={showFilterModal}
 						setShowFilterModal={setShowFilterModal}
 						data={details}
@@ -38,7 +36,7 @@ function NoRatesFound({
 						setFilters={setFilters}
 						openAccordian={openAccordian}
 						setOpenAccordian={setOpenAccordian}
-					/> */}
+					/>
 
 					<Reset setFilters={setFilters} />
 				</div>

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import getHeaderHeight from '../../../../../../../../helpers/getHeaderHeight';
 import RequestRate from '../../../../../../common/RequestRate';
 
 import NoRatesFound from './NoRatesFound';
@@ -16,7 +17,7 @@ function EmptyState({
 	setShowFilterModal = () => {},
 }) {
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={{ height: `calc(100vh - ${getHeaderHeight()}px)` }}>
 			<NoRatesFound
 				details={details}
 				filters={filters}

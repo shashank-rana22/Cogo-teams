@@ -2,9 +2,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import DetentionDemurrage from '../../../../../common/D&D';
 import Filters from '../../../../../common/Filters';
+import Reset from '../../../../../common/Reset';
 import AppliedFilters from '../../AppliedFilters';
 
-import Reset from './Reset';
 import styles from './styles.module.css';
 
 function NoRatesFound({

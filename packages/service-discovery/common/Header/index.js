@@ -33,7 +33,10 @@ function Header(props = {}) {
 	if (!service_type || isEmpty(data) || !ActiveHeader) return null;
 
 	return (
-		<div className={cl`${styles.container} ${showAdditionalHeader ? styles.show : {}}`}>
+		<div
+			id="search_to_checkout_main_header"
+			className={cl`${styles.container} ${showAdditionalHeader ? styles.show : {}}`}
+		>
 			<ActiveHeader {...props} />
 
 			{showAdditionalHeader ? (
