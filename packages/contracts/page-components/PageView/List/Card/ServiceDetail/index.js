@@ -5,7 +5,7 @@ import getService from '../../../../../utils/getService';
 
 import styles from './styles.module.css';
 
-const serviceMap = {
+const SERVICE_MAPPING = {
 	fcl_freight       : { label: 'FCL', color: '#436DF4' },
 	lcl_freight       : { label: 'LCL', color: '#436DF4' },
 	air_freight       : { label: 'Air', color: '#221F20' },
@@ -22,8 +22,8 @@ function ServiceDetail({ item, service, formattedData }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.service}>
-				<Element width={24} height={24} style={{ color: serviceMap[service].color }} />
-				{startCase(serviceMap[service].label)}
+				<Element width={24} height={24} style={{ color: SERVICE_MAPPING[service].color }} />
+				{startCase(SERVICE_MAPPING[service].label)}
 			</div>
 			<div className={styles.port_pair}>
 				{(item[`${service}_services`] || []).length }

@@ -1,6 +1,6 @@
 import { startCase } from '@cogoport/utils';
 
-const SERVICE_MAPPING = {
+const CARGO_MAPPING = {
 	fcl_freight       : { label: 'containers_count', unit: 'Ctr' },
 	lcl_freight       : { label: 'volume', unit: 'CBM' },
 	air_freight       : { label: 'weight', unit: 'Kg' },
@@ -13,9 +13,9 @@ const ZERO = 0;
 const getQuantity = ({ portPairdata, service }) => {
 	let contentToShow = Number(ZERO);
 	(portPairdata || []).forEach((item) => {
-		contentToShow += Number(item?.[SERVICE_MAPPING?.[service]?.label]) || ZERO;
+		contentToShow += Number(item?.[CARGO_MAPPING?.[service]?.label]) || ZERO;
 	});
-	const unit = startCase([SERVICE_MAPPING[service]?.unit]);
+	const unit = startCase([CARGO_MAPPING[service]?.unit]);
 
 	return { contentToShow, unit };
 };

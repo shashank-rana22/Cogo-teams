@@ -8,7 +8,7 @@ import PortPair from '../../../PageView/List/Card/PortPair';
 import Footer from './Footer';
 import styles from './styles.module.css';
 
-const serviceMapping = {
+const SERVICE_MAPPING = {
 	fcl_freight       : { label: 'FCL Freight', icon: IcMFcl },
 	lcl_freight       : { label: 'LCL Freight', icon: IcMLcl },
 	air_freight       : { label: 'AIR Freight', icon: IcMAir },
@@ -46,7 +46,7 @@ function Content({
 		});
 	};
 
-	const Element = serviceMapping[portPair?.service_type || 'fcl_freight'].icon;
+	const Element = SERVICE_MAPPING[portPair?.service_type || 'fcl_freight'].icon;
 	return (
 		<div
 			role="presentation"
@@ -61,7 +61,7 @@ function Content({
 
 						<div className={styles.display_service}>
 							<Element width={30} height={30} style={{ padding: '4px' }} />
-							{serviceMapping[portPair?.service_type]?.label}
+							{SERVICE_MAPPING[portPair?.service_type]?.label}
 						</div>
 						<div className={styles.information}>
 							{(portPair?.status === 'quoted' || portPair?.status === 'pending')

@@ -11,61 +11,30 @@ const ZEROVALUE = 0;
 const SINGLE_PORT_SERVICES = ['fcl_freight_local', 'lcl_freight_local'];
 
 const destructureDetails = (serviceLocation) => {
-	const originCode = (
+	const origin = (
 		serviceLocation?.origin_port
     || serviceLocation?.origin_airport
     || serviceLocation?.port
     || serviceLocation?.origin_location
-	)?.port_code;
-
-	const originName = (
-		serviceLocation?.origin_port
-    || serviceLocation?.origin_airport
-    || serviceLocation?.port
-    || serviceLocation?.origin_location
-    || serviceLocation?.location
-    || serviceLocation?.airport
-	)?.name.split('(')?.[ZEROVALUE];
-
-	const originCountry = (
-		serviceLocation?.origin_port
-    || serviceLocation?.origin_airport
-    || serviceLocation?.port
-    || serviceLocation?.origin_location
-    || serviceLocation?.location
-    || serviceLocation?.airport
-	)?.display_name
-		.split(' ')
-		.pop();
-
-	const destinationCode = (
+	);
+	const destination = (
 		serviceLocation?.destination_port
     || serviceLocation?.destination_airport
     || serviceLocation?.port
     || serviceLocation?.destination_location
-	)?.port_code;
+	);
 
-	const destinationName = (
-		serviceLocation?.destination_port
-    || serviceLocation?.destination_airport
-    || serviceLocation?.port
-    || serviceLocation?.destination_location
-	)?.name.split('(')?.[ZEROVALUE];
+	const originCode = origin?.port_code;
+	const originName = origin?.name.split('(')?.[ZEROVALUE];
+	const originCountry = origin?.display_name.split(' ').pop();
 
-	const destinationCountry = (
-		serviceLocation?.destination_port
-    || serviceLocation?.destination_airport
-    || serviceLocation?.port
-    || serviceLocation?.destination_location
-	)?.display_name
-		.split(' ')
-		.pop();
+	const destinationCode = destination?.port_code;
+	const destinationName = destination?.name.split('(')?.[ZEROVALUE];
+	const destinationCountry = destination?.display_name.split(' ').pop();
 
 	const singlePortCode = serviceLocation?.port?.port_code;
 	const singlePortName = serviceLocation?.port?.name.split('(')?.[ZEROVALUE];
-	const singlePortCountry = serviceLocation?.port?.display_name
-		.split(' ')
-		.pop();
+	const singlePortCountry = serviceLocation?.port?.display_name.split(' ').pop();
 
 	return {
 		singlePortCode,

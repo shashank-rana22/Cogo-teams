@@ -10,6 +10,7 @@ const QUERY_MAPPING = {
 	lcl_freight       : 'lcl_freight',
 	air_freight       : 'air_freight',
 	fcl_freight_local : 'fcl_freight',
+	lcl_freight_local : 'lcl_freight',
 };
 
 const useFieldMutation = ({

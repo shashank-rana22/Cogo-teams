@@ -3,6 +3,7 @@ const OPTION_MAPPING = {
 	lcl_freight       : { label: 'LCL', value: 'lcl_freight' },
 	air_freight       : { label: 'AIR', value: 'air_freight' },
 	fcl_freight_local : { label: 'FCL Local', value: 'fcl_freight_local' },
+	lcl_freight_local : { label: 'LCL Local', value: 'lcl_freight_local' },
 };
 
 const useGetPartnerUserServices = ({ partner_user = {} }) => {

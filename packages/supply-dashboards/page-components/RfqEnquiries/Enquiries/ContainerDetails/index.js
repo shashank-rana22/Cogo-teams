@@ -11,12 +11,14 @@ function ContainerDetails({ selectedCard = {} }) {
 		fcl_freight_services_attributes = {},
 		air_freight_services_attributes = {},
 		fcl_freight_local_services_attributes = {},
+		lcl_freight_local_services_attributes = {},
 		search_type = '',
 	} = search_params || {};
 
-	const serviceTypeMapping = lcl_freight_services_attributes?.[ZEROVALUE]
-	|| fcl_freight_services_attributes?.[ZEROVALUE]
+	const serviceTypeMapping = fcl_freight_services_attributes?.[ZEROVALUE]
+  || lcl_freight_services_attributes?.[ZEROVALUE]
   || fcl_freight_local_services_attributes?.[ZEROVALUE]
+  || lcl_freight_local_services_attributes?.[ZEROVALUE]
   || air_freight_services_attributes?.[ZEROVALUE];
 
 	const {
