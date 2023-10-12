@@ -193,13 +193,13 @@ function OrgUsersList({
 										onCardClick({ item: eachUser });
 									}}
 								>
-									<div>
+									<div className={styles.all_user_select}>
+										<UserAvatar type="whatsapp" />
 										<div className={styles.user_select}>
-											<UserAvatar type="whatsapp" />
 											<div className={styles.name}>{startCase(userName)}</div>
+											<div className={styles.business_name}>{startCase(business_name)}</div>
 										</div>
 
-										<div className={styles.name}>{startCase(business_name)}</div>
 									</div>
 
 									<IcMArrowNext className={styles.arrow_icon} />
