@@ -1,5 +1,5 @@
 import { useForm } from '@cogoport/forms';
-import React, { useImperativeHandle, forwardRef, useState, useEffect } from 'react';
+import React, { useImperativeHandle, forwardRef, useMemo } from 'react';
 
 import NestedLayout from '../../../../../common/NestedLayout';
 
@@ -10,17 +10,15 @@ function Form({
 	handleSubmitForm = () => {},
 	showUpdate = {},
 }, ref) {
-	const [isDisabled, setDisabled] = useState(false);
-	useEffect(() => {
-		if (showUpdate?.data?.search_type === 'CONTAINER_NO') {
-			setDisabled(true);
-		} else {
-			setDisabled(false);
-		}
-	}, [showUpdate]);
-	const { control, handleSubmit, formState:{ errors = {} } } = useForm();
+	const { control, handleSubmit, formState:{ errors = {} } } = useForm({
+		defaultValues: {
+			containers: [{
+				container_no: showUpdate?.data?.container_no?.[0],
+			}],
+		},
+	});
 
-	const controls = formControls({ isDisabled, showUpdate });
+	const controls = useMemo(() => formControls(showUpdate), [showUpdate]);
 
 	const onSubmit = (values) => handleSubmitForm({ values });
 

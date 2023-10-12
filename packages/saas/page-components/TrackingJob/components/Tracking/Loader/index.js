@@ -2,20 +2,20 @@ import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMAirTracking, IcMOceanTracking, IcMAppEndTracking } from '@cogoport/icons-react';
 import Image from 'next/image';
-
-import getLoadingArr from '../../../utlis/getLoadingArr';
+import React from 'react';
 
 import styles from './styles.module.css';
 
-const THREE = 3;
-const LOADING_ARR = getLoadingArr(THREE);
+const LOADING_ARR = [1, 2, 3];
+
 const LOADING_ICON = {
-	ocean   : <IcMOceanTracking width={40} height={40} fill="#838383" />,
-	air     : <IcMAirTracking width={40} height={40} fill="#838383" />,
-	surface : <IcMAppEndTracking width={40} height={40} fill="#838383" />,
+	ocean   : IcMOceanTracking,
+	air     : IcMAirTracking,
+	surface : IcMAppEndTracking,
 };
 
 function Loader({ type = 'ocean' }) {
+	const LoadingIcon = LOADING_ICON[type] || <div />;
 	return (
 		<div className={styles.container}>
 			<div className={styles.milestone_loader}>
@@ -23,7 +23,7 @@ function Loader({ type = 'ocean' }) {
 					<div key={ele} className={styles.card}>
 						<Placeholder height="35x" margin="0px 0px 20px 0px" />
 						<Placeholder height="100px">
-							{LOADING_ICON[type]}
+							<LoadingIcon width={40} height={40} fill="#838383" />
 						</Placeholder>
 					</div>
 				))}
@@ -40,4 +40,4 @@ function Loader({ type = 'ocean' }) {
 	);
 }
 
-export default Loader;
+export default React.memo(Loader);

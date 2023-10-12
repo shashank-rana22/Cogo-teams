@@ -90,6 +90,7 @@ const GLOBAL_CONSTANTS = {
 			yyyy                : 'yyyy',
 			'MMM, dd'           : 'MMM, dd',
 			EEEE                : 'EEEE',
+			eee                 : 'eee',
 			'MMM dd yyyy'       : 'MMM dd yyyy',
 		},
 		time: {
@@ -334,6 +335,7 @@ const GLOBAL_CONSTANTS = {
 		whatsapp_icon        : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg',
 		email_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg',
 		login_failed         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/login_failed.png',
+		map_loading          : 'https://cogoport-maps.s3.ap-south-1.amazonaws.com/world+(2).svg',
 		checkout_failed      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/checkout_failed.png',
 		email_clicked        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email_clicked.png',
 		abandon_shipmemts    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/abandon_shipmemts.png',

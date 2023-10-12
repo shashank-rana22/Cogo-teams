@@ -39,6 +39,7 @@ function Card({
 	const { MILESTONE_ICON } = GET_MAPPING[trackingType];
 
 	const url = getIconUrl({ mapping: MILESTONE_ICON, type: trackingType, transportMode: transport_mode });
+
 	return (
 		<div className={cl`${styles.container} ${isCurrentMilestone ? styles.current_milestone_box : ''}`}>
 			<div className={cl`${styles.flex_box} ${styles.heading_container}`}>
@@ -52,7 +53,7 @@ function Card({
 			</div>
 
 			<div className={styles.info}>
-				{combineList.map((item, index) => {
+				{combineList?.map((item, index) => {
 					const {
 						id = '',
 						event_date = '',

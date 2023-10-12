@@ -3,7 +3,7 @@ import { useEffect, useCallback } from 'react';
 
 import toastApiError from '../utlis/toastApiError';
 
-const useGetAirMilestones = ({ id = null }) => {
+const useGetSaasAirSubscription = ({ id = null }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_saas_air_subscription',
@@ -30,4 +30,4 @@ const useGetAirMilestones = ({ id = null }) => {
 	};
 };
 
-export default useGetAirMilestones;
+export default useGetSaasAirSubscription;

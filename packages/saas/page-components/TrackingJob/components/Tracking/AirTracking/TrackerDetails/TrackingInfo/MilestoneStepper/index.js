@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const LAST_INDEX = -1;
 
-function MilestoneStepper({ combineMileStoneList = [], trackingType = 'air' }) {
+function MilestoneStepper({ combineMileStoneList = [] }) {
 	const scrollRef = useRef({});
 
 	const {
@@ -49,7 +49,7 @@ function MilestoneStepper({ combineMileStoneList = [], trackingType = 'air' }) {
 						>
 							<Card
 								combineList={combineList}
-								trackingType={trackingType}
+								trackingType="air"
 								isCurrentMilestone={index === currentMilestoneIndex}
 								milestoneSubIndex={milestoneSubIndex}
 							/>

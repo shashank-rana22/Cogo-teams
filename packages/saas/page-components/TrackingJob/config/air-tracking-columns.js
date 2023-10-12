@@ -1,45 +1,43 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { Image } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 
 import SortColumns from './sort-columns';
 import styles from './styles.module.css';
 
-export const columns = ({
+const getColumns = ({
 	handleShowModal = () => {},
 	setFilters = () => {},
 	filters = {},
 }) => [
 	{
 		id       : 'airway_bill_no',
-		Header   : <p>AIRWAY BILL NO.</p>,
+		Header   : 'Airway Bill No.',
 		accessor : (item) => (
-			<div>{item?.data?.airway_bill_no}</div>
+			<b>{item?.data?.airway_bill_no}</b>
 		),
 	},
 	{
 		id       : 'company_logo',
-		Header   : <p>AIRLINE</p>,
+		Header   : 'Airline',
 		accessor : (item) => (
 			<div className={styles.airline_data}>
-				{item?.airline?.logo_url && (
-					<img className="image" src={item?.airline?.logo_url} alt="" />
-				)}
-				<div className="title">
-					{' '}
+				{item?.airline?.logo_url ? (
+					<Image src={item?.airline?.logo_url} height={30} width={30} />
+				) : null}
+
+				<div>
 					{item?.airline?.short_name}
 				</div>
 			</div>
 		),
 	},
 	{
-		id     : 'created_at',
-		Header : (
-
-			<SortColumns filters={filters} setFilters={setFilters} sortType="created_at" />
-
-		),
-		accessor: (item) => (
+		id       : 'created_at',
+		Header   : <SortColumns filters={filters} setFilters={setFilters} sortType="created_at" />,
+		accessor : (item) => (
 			<p>
 				{formatDate({
 					date       : item?.data?.created_at,
@@ -67,19 +65,19 @@ export const columns = ({
 
 	{
 		id       : 'status',
-		Header   : <p>STATUS</p>,
-		accessor : (item) => <p>{item?.data?.status}</p>,
+		Header   : 'Status',
+		accessor : (item) => startCase(item?.data?.status),
 	},
 	{
 		id       : 'last_updated_by',
-		Header   : <p>LAST UPDATED BY</p>,
+		Header   : 'Last Updated By',
 		accessor : (item) => (
 			<p>{item?.performed_by?.name}</p>
 		),
 	},
 	{
 		id       : 'actions',
-		Header   : <p>ACTIONS</p>,
+		Header   : 'Actions',
 		accessor : (item) => {
 			let action = '';
 			if (item?.data?.action === 'track_new') {
@@ -95,14 +93,15 @@ export const columns = ({
 			return <span>{action}</span>;
 		},
 	},
-
 	{
 		id       : 'flight_update',
 		Header   : '',
 		accessor : (item) => (
 			<Button size="sm" onClick={() => handleShowModal(item)}>
-				update
+				Update
 			</Button>
 		),
 	},
 ];
+
+export default getColumns;

@@ -39,9 +39,11 @@ function SearchFilters({
 		setSearchString(q);
 	}, [q, setSearchString]);
 
+	const showElements = useMemo(() => getShowElements({ activeTab, controls }), [controls, activeTab]);
+
 	return (
 		<div className={styles.container_class}>
-			<Layout controls={controls} control={control} showElements={getShowElements({ activeTab, controls })} />
+			<Layout controls={controls} control={control} showElements={showElements} />
 		</div>
 	);
 }

@@ -23,7 +23,7 @@ const TAB_MAPPING = [
 ];
 
 function TrackingJob() {
-	const [activeTab, setActiveTab] = useState('truck_tracking');
+	const [activeTab, setActiveTab] = useState('air_tracking');
 
 	const { handleRouteChange } = useHandleVersionChangeToOld({});
 

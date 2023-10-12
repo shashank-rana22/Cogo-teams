@@ -1,24 +1,23 @@
 import { Modal, TabPanel, Tabs, Button } from '@cogoport/components';
+import { dynamic } from '@cogoport/next';
 import { useRef, useState } from 'react';
 
 import useUpdateAirMileStones from '../../../../hooks/useUpdateAirMileStones';
-import Form from '../../../Forms/FormAir';
+import FormAir from '../../../Forms/FormAir';
 import styles from '../styles.module.css';
-import TrackerDetails from '../TrackerDetails';
+
+const TrackingInfo = dynamic(() => import('../TrackerDetails/TrackingInfo'), { ssr: false });
 
 function Update({ showUpdate = {}, setShowUpdate = () => {}, triggerListAirTracking }) {
 	const formRef = useRef(null);
 
 	const [activeTab, setActiveTab] = useState('add_location');
 
-	const refetch = () => {
-		triggerListAirTracking();
-	};
 	const { apiTrigger, createLoading } = useUpdateAirMileStones({
 		refetch: () => {
 			setShowUpdate({ show: false, data: {} });
 			setActiveTab('add_location');
-			refetch();
+			triggerListAirTracking();
 		},
 	});
 	const handleCloseModal = () => {
@@ -41,6 +40,7 @@ function Update({ showUpdate = {}, setShowUpdate = () => {}, triggerListAirTrack
 				onClose={handleCloseModal}
 				onOuterClick={handleCloseModal}
 				closeOnOuterClick
+				className={styles.update_container}
 				placement="top"
 				size="xl"
 			>
@@ -52,8 +52,8 @@ function Update({ showUpdate = {}, setShowUpdate = () => {}, triggerListAirTrack
 						onChange={setActiveTab}
 					>
 						<TabPanel name="add_location" title="Add Location">
-							<Form
-								refetch={refetch}
+							<FormAir
+								refetch={triggerListAirTracking}
 								ref={formRef}
 								handleSubmitForm={handleSubmitForm}
 								showUpdate={showUpdate}
@@ -62,10 +62,9 @@ function Update({ showUpdate = {}, setShowUpdate = () => {}, triggerListAirTrack
 						</TabPanel>
 
 						<TabPanel name="tracking" title="Tracking">
-							<TrackerDetails id={showUpdate?.data?.saas_air_subscription_id} trackingType="air" />
+							<TrackingInfo id={showUpdate?.data?.saas_air_subscription_id} />
 						</TabPanel>
 					</Tabs>
-					<div />
 
 				</Modal.Body>
 
@@ -83,6 +82,7 @@ function Update({ showUpdate = {}, setShowUpdate = () => {}, triggerListAirTrack
 					)}
 				</Modal.Footer>
 			</Modal>
+
 		)
 		: null;
 }

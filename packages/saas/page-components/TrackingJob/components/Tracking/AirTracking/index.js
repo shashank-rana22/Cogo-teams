@@ -1,13 +1,15 @@
 import { Table } from '@cogoport/components';
-import React, { useState } from 'react';
+import { dynamic } from '@cogoport/next';
+import React, { useState, useMemo } from 'react';
 
 import ListPagination from '../../../common/ListPagination';
-import { columns } from '../../../config/air-tracking-columns';
+import getColumns from '../../../config/air-tracking-columns';
 import useGetAirTrackingList from '../../../hooks/useGetAirTrackingList';
 import SearchFilters from '../../Filter/Search/search';
 
 import styles from './styles.module.css';
-import Update from './Update';
+
+const Update = dynamic(() => import('./Update'), { ssr: false });
 
 function AirTracking() {
 	const {
@@ -28,18 +30,14 @@ function AirTracking() {
 		setShowUpdate({ show: true, data: item?.data });
 	};
 
-	const column = columns({
-		handleShowModal,
-		setFilters,
-		filters,
-	});
+	const columns = useMemo(() => getColumns({ handleShowModal, setFilters, filters }), [filters, setFilters]);
 
 	function CustomPagination() {
 		return <ListPagination filters={filters} setFilters={setFilters} data={data} />;
 	}
 
 	return (
-		<div>
+		<>
 			<div className={styles.filter_container}>
 				<SearchFilters
 					searchString={searchString}
@@ -54,13 +52,20 @@ function AirTracking() {
 
 			<CustomPagination />
 
-			<Table columns={column} data={data?.list || []} loading={loading} className={styles.table} />
+			<Table columns={columns} data={data?.list || []} loading={loading} className={styles.table} />
 
 			<CustomPagination />
 
-			<Update showUpdate={showUpdate} setShowUpdate={setShowUpdate} triggerListAirTracking={refetch} />
+			{showUpdate.show
+				? (
+					<Update
+						showUpdate={showUpdate}
+						setShowUpdate={setShowUpdate}
+						triggerListAirTracking={refetch}
+					/>
+				) : null}
 
-		</div>
+		</>
 	);
 }
 

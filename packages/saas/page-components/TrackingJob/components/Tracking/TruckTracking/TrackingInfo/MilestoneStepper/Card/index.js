@@ -4,7 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMInfo } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
-import getMappingObject from '../../../../../../../config/milestone-card-mapping';
+import getMappingObject from '../../../../../../config/milestone-card-mapping';
 
 import Stepper from './Stepper';
 import styles from './styles.module.css';

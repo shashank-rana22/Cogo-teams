@@ -10,7 +10,7 @@ function SortColumns({ filters = {}, setFilters = () => {}, sortType = '' }) {
 	const isDescending = filters.sort_type === 'desc';
 
 	return (
-		<p>
+		<>
 			{sortType === 'created_at' ? (
 				<div className={styles.center}>
 					Created At
@@ -69,7 +69,7 @@ function SortColumns({ filters = {}, setFilters = () => {}, sortType = '' }) {
 					) : null}
 				</div>
 			) : null}
-		</p>
+		</>
 	);
 }
 

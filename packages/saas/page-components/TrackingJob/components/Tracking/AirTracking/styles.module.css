@@ -58,3 +58,11 @@
 	border-spacing: 3px;
 	background-color: #fff;
 }
+
+.update_container {
+	:global {
+		.ui_modal_body_container {
+			min-height: 40vh;
+		}
+	}
+}

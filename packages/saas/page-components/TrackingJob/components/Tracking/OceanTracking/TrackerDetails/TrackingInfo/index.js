@@ -3,21 +3,21 @@ import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../common/EmptyState';
 import useGetCurrentInfo from '../../../../../hooks/useCurrentInfo';
-import useGetContainerMilestones from '../../../../../hooks/useGetContainerMilestones';
+import useGetSaasContainerSubscription from '../../../../../hooks/useGetSaasContainerSubscription';
 import Loader from '../../../Loader';
 
 import MilestoneStepper from './MilestoneStepper';
 import styles from './styles.module.css';
 
 function TrackingInfo({ id = null }) {
-	const { loading, data, refetch } = useGetContainerMilestones({ id });
+	const { loading, data, refetch } = useGetSaasContainerSubscription({ id });
 
 	const {
 		combineMileStoneList,
 	} = useGetCurrentInfo({ data, trackingType: 'ocean' });
 
 	if (loading) {
-		return <Loader type="air" />;
+		return <Loader />;
 	}
 	if (isEmpty(combineMileStoneList)) {
 		return (

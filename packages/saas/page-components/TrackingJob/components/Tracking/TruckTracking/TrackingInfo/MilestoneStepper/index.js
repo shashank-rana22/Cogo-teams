@@ -2,8 +2,8 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useRef } from 'react';
 
-import useGetMilestoneInfo from '../../../../../../hooks/useGetMilestoneInfo';
-import { isCurrentDate, isFutureDate } from '../../../../../../utlis/dateCompare';
+import useGetMilestoneInfo from '../../../../../hooks/useGetMilestoneInfo';
+import { isCurrentDate, isFutureDate } from '../../../../../utlis/dateCompare';
 
 import Card from './Card';
 import styles from './styles.module.css';
