@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -9,7 +10,6 @@ function Content({
 	loading,
 	postToSage,
 	setShowCancellationModal,
-	setShow,
 	irnLabel,
 }) {
 	return (
@@ -19,7 +19,7 @@ function Content({
 					size="sm"
 					type="button"
 					onClick={() => {
-						setShowCancellationModal(true); setShow(false);
+						setShowCancellationModal(true);
 					}}
 					style={{ marginBottom: '8px' }}
 				>

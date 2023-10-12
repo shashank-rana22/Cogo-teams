@@ -13,7 +13,7 @@ const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [invoiceFilters, setinvoiceFilters] = useState({
+	const [invoiceFilters, setinvoiceFilters] = useState<any>({
 		page              : 1,
 		pageLimit         : limit,
 		orgId             : organizationId,
@@ -124,7 +124,6 @@ const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
 						invoiceStatus     : invoiceStatus || undefined,
 						services          : filters?.services || undefined,
 						query             : query !== '' ? query : undefined,
-						role              : userData.id,
 						orgId             : orgId || undefined,
 						dueDateStart      : dueDateStartFilter || undefined,
 						dueDateEnd        : dueDateEndFilter || undefined,
@@ -159,7 +158,6 @@ const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
 			paymentStatusList,
 			invoiceStatus,
 			query,
-			userData.id,
 			orgId,
 			entityCode,
 			sort.sortBy,
