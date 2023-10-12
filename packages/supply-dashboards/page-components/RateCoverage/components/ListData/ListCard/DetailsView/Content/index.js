@@ -5,12 +5,11 @@ import { IcMCopy } from '@cogoport/icons-react';
 import { differenceInDays, startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { DEFAULT_VALUE } from '../../../../../configurations/helpers/constants';
+import { DEFAULT_VALUE, LOADER_COUNT } from '../../../../../configurations/helpers/constants';
 import copyToClipboard from '../../../../../utilis/copyToClipboard';
 
 import styles from './styles.module.css';
 
-const LOADER_COUNT = 3;
 function ServiceDetailsContent({
 	shipmemnt_data = {}, data = {}, requestData = {},
 	feedbackData = {}, shipment_loading = false,
@@ -146,12 +145,28 @@ function ServiceDetailsContent({
 						))}
 					</div>
 
+					{summary?.services?.length > DEFAULT_VALUE && (
+						<div className={styles.content}>
+							<div className={styles.label}>Additional Service : </div>
+							{(summary?.services || []).map((services_value) => (
+								<Pill
+									key={services_value}
+									size="md"
+									color="#F8F2E7"
+								>
+									{startCase(services_value)?.replace('Service', '')}
+								</Pill>
+							))}
+						</div>
+					)}
+
 					<div className={styles.pill}>
 						{data?.service_provider?.short_name
 						&& (
 							<div className={styles.content}>
-								<div className={styles.label}> Supplier :</div>
-								<div className={styles.value}>{startCase(data?.service_provider?.short_name)}</div>
+								<div className={styles.label}> Supplier : </div>
+								{' '}
+								<div className={styles.name}>{startCase(data?.service_provider?.short_name)}</div>
 							</div>
 						)}
 
@@ -159,7 +174,8 @@ function ServiceDetailsContent({
 						&& (
 							<div className={styles.content}>
 								<div className={styles.label}> Customer : </div>
-								<div className={styles.value}>
+								<div className={styles.name}>
+									{' '}
 									{startCase(summary?.importer_exporter?.business_name)}
 								</div>
 							</div>
@@ -172,7 +188,7 @@ function ServiceDetailsContent({
 									{' '}
 									Shippling Line :
 								</div>
-								<div className={styles.value}>
+								<div className={styles.name}>
 									{' '}
 									{startCase(preferred_shipping_lines?.[DEFAULT_VALUE]?.business_name)}
 								</div>

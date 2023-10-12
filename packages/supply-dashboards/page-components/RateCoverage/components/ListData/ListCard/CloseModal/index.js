@@ -1,14 +1,13 @@
 import { Button, Checkbox, Modal, Toast } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import { CLOSE_REASON_OPTIONS } from '../../../../configurations/helpers/constants';
+import { CLOSE_REASON_OPTIONS, TWO_HUNDERD } from '../../../../configurations/helpers/constants';
 import useDeleteFreightRateFeedbacks from '../../../../hooks/useDeleteFreightRateFeedbacks';
 import useDeleteFreightRateRequests from '../../../../hooks/useDeleteFreightRateRequests';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 
 import styles from './styles.module.css';
 
-const TWO_HUNDERD = 200;
 function CloseModal({
 	setShowModal = () => {},
 	showModal = true,

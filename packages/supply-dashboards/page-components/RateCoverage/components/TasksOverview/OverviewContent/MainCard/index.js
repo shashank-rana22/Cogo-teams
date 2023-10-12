@@ -1,9 +1,9 @@
 import { ProgressBar } from '@cogoport/components';
 import React from 'react';
 
-import styles from './styles.module.css';
+import { DEFAULT_VALUE } from '../../../../configurations/helpers/constants';
 
-const DEFAULT_VALUE = 0;
+import styles from './styles.module.css';
 
 function MainCard({ data = {}, statsLoading = false }) {
 	const { completed = 0, total = 0, completed_percentage = 0 } = data;

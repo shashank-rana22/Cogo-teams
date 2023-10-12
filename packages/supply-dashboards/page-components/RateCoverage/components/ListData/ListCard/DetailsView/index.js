@@ -1,10 +1,10 @@
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import { DEFAULT_VALUE } from '../../../../configurations/helpers/constants';
+
 import ServiceDetailsContent from './Content';
 import styles from './styles.module.css';
-
-const ZERO_VALUE = 0;
 
 function DetailsView({
 	data = {}, shipment_loading = false,
@@ -30,8 +30,8 @@ function DetailsView({
 				<ServiceDetailsContent
 					shipmemnt_data={shipmemnt_data}
 					data={data}
-					requestData={requestData?.list?.[ZERO_VALUE] || null}
-					feedbackData={feedbackData?.list?.[ZERO_VALUE] || null}
+					requestData={requestData?.list?.[DEFAULT_VALUE] || null}
+					feedbackData={feedbackData?.list?.[DEFAULT_VALUE] || null}
 					shipment_loading={shipment_loading}
 					request_loading={request_loading}
 					feedback_loading={feedback_loading}

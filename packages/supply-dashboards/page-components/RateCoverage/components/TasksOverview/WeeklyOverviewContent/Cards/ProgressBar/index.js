@@ -1,10 +1,9 @@
 import { cl } from '@cogoport/components';
 import React from 'react';
 
-import styles from './styles.module.css';
+import { HUNDRED, VALUE_TWO } from '../../../../../configurations/helpers/constants';
 
-const VALUE_TWO = 2;
-const HUNDRED = 100;
+import styles from './styles.module.css';
 
 function CircularProgressBar({
 	sqSize = 80,

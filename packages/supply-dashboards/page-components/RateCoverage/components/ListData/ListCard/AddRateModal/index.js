@@ -5,7 +5,7 @@ import { useSelector } from '@cogoport/store';
 import React, { useEffect, useState } from 'react';
 
 import Layout from '../../../../../RfqEnquiries/Layout';
-import { DEFAULT_VALUE, DELTA_VALUE, VALUE_ONE } from '../../../../configurations/helpers/constants';
+import { DEFAULT_VALUE, DELTA_VALUE, TWO_HUNDERD, VALUE_ONE } from '../../../../configurations/helpers/constants';
 import FieldMutation from '../../../../configurations/helpers/mutation-fields';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteFreightRateFeedbacks from '../../../../hooks/useDeleteFreightRateFeedbacks';
@@ -17,9 +17,6 @@ import ServiceDetailsContent from '../DetailsView/Content';
 
 import useControls from './controls';
 import styles from './styles.module.css';
-
-const ZERO_VALUE = 0;
-const TWO_HUNDERD = 200;
 
 function AddRateModal({
 	showModal = true,
@@ -169,7 +166,6 @@ function AddRateModal({
 
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
-
 			<div>
 				{['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
 			&& (
@@ -177,8 +173,8 @@ function AddRateModal({
 					<ServiceDetailsContent
 						shipmemnt_data={shipmemnt_data}
 						data={data}
-						requestData={requestData?.list?.[ZERO_VALUE] || null}
-						feedbackData={feedbackData?.list?.[ZERO_VALUE] || null}
+						requestData={requestData?.list?.[DEFAULT_VALUE] || null}
+						feedbackData={feedbackData?.list?.[DEFAULT_VALUE] || null}
 						shipment_loading={shipment_loading}
 						request_loading={request_loading}
 						feedback_loading={feedback_loading}
@@ -200,7 +196,7 @@ function AddRateModal({
 				<div className={styles.submit_button}>
 					<Button
 						size="md"
-						onClick={setShowModal(showModal)}
+						onClick={() => setShowModal((prev) => !prev)}
 						style={{ marginRight: '20px' }}
 						themeType="secondary"
 					>

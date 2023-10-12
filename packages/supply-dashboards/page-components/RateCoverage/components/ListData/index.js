@@ -4,16 +4,15 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import { CARDS_MAPPING, HEADINGS } from '../../configurations/helpers/constants';
+import {
+	CARDS_MAPPING, DEFAULT_VALUE, HEADINGS,
+	LIST_CARD_LOADER_COUNT, VALUE_ONE,
+} from '../../configurations/helpers/constants';
 import Filter from '../Filter';
 import Card from '../TasksOverview/OverviewContent/Card';
 
 import ListCard from './ListCard';
 import styles from './styles.module.css';
-
-const DEFAULT_VALUE = 0;
-const DEFAULT_PAGE_VALUE = 1;
-const LIST_CARD_LOADER_COUNT = 5;
 
 function ListData({
 	data = {},
@@ -41,7 +40,7 @@ function ListData({
 
 	const handleClick = (card) => {
 		setSource(card);
-		setPage(DEFAULT_PAGE_VALUE);
+		setPage(VALUE_ONE);
 		setSerialId('');
 	};
 

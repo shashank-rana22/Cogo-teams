@@ -1,5 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMAir, IcMFcl, IcCFlclCustoms, IcMFhaulage } from '@cogoport/icons-react';
+import {
+	IcMAir, IcMFcl, IcCFlclCustoms, IcMFhaulage,
+	IcCAirCustoms, IcMFlcl, IcMFltl, IcMFftl, IcCLclCustoms, IcMTransport, IcCFcl,
+} from '@cogoport/icons-react';
 
 export const STAT_CARDS_MAPPING = {
 	pending   : { title: 'Today\'s Pending', color: '#FF5733', status: 'pending' },
@@ -47,9 +50,16 @@ export const CARDS_MAPPING = {
 };
 export const SERVICE_ICON_MAPPING = {
 	fcl_freight : <IcMFcl height={20} width={20} />,
+	lcl_freight : <IcMFlcl height={20} width={20} />,
 	air_freight : <IcMAir height={20} width={20} />,
+	ltl_freight : <IcMFltl height={20} width={20} />,
+	ftl_freight : <IcMFftl height={20} width={20} />,
+	air_customs : <IcCAirCustoms height={20} width={20} />,
 	fcl_customs : <IcCFlclCustoms height={20} width={20} />,
+	lcl_customs : <IcCLclCustoms height={20} width={20} />,
 	haulage     : <IcMFhaulage height={20} width={20} />,
+	trailer     : <IcMTransport height={20} width={20} />,
+	fcl_cfs     : <IcCFcl height={20} width={20} />,
 };
 
 export const CLOSE_REASON_OPTIONS = [
@@ -257,3 +267,8 @@ export const FIFTY = 50;
 export const SEVENTY_FIVE = 75;
 export const VALUE_ONE = 1;
 export const DELTA_VALUE = 0.1;
+export const TWO_HUNDERD = 200;
+export const LOADER_COUNT = 3;
+export const LIST_CARD_LOADER_COUNT = 5;
+export const VALUE_TWO = 2;
+export const HUNDRED = 100;

@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 
 import { currencyOptions } from '../../../../../configurations/helpers/constants';
-import { truck_types } from '../../../../../configurations/truck_types';
+import { truck_types } from '../../../../../configurations/truck-types';
 
 const ftlControls = ({
 	data,
