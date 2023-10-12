@@ -181,7 +181,6 @@ const getFinancialCloseColumns = ({
 			id       : 'estimated',
 			Header   : '',
 			accessor : (row) => (
-
 				<div>
 					<Button
 						themeType="secondary"
