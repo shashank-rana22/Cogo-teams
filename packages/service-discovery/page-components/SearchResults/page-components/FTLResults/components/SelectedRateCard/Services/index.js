@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Bundles from './Bundles';
+import Bundles from '../../../../../common/Bundles';
+
 import OtherServices from './OtherServices';
 import styles from './styles.module.css';
 
