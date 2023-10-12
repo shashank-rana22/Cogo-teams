@@ -63,20 +63,6 @@ function ShipmentDetails({
 
 	const isSingleLocation = SINGLE_LOCATIONS?.includes(shipment_type);
 
-	if (isSingleLocation) {
-		return (
-			<div className={styles.port_container}>
-				<div className={styles.trade_type}>
-					{TRADE_TYPE_MAPPING[tradeType]}
-				</div>
-				:
-				<PortDetails
-					details={DISPLAY_DATA_MAPPING[tradeType]}
-				/>
-			</div>
-		);
-	}
-
 	return (
 		<>
 			<div
@@ -96,22 +82,36 @@ function ShipmentDetails({
 					{serialId}
 				</span>
 			</div>
-			<div className={styles.port_content}>
-				{t('myTickets:pol')}
-				:
-				<PortDetails
-					details={originDetails}
-					listLoading={listLoading}
-				/>
-			</div>
-			<div className={styles.port_content}>
-				{t('myTickets:pod')}
-				:
-				<PortDetails
-					details={destinationDetails}
-					listLoading={listLoading}
-				/>
-			</div>
+			{isSingleLocation ? (
+				<div className={styles.port_container}>
+					<div className={styles.trade_type}>
+						{TRADE_TYPE_MAPPING[tradeType]}
+					</div>
+					:
+					<PortDetails
+						details={DISPLAY_DATA_MAPPING[tradeType]}
+					/>
+				</div>
+			) : (
+				<>
+					<div className={styles.port_content}>
+						{t('myTickets:pol')}
+						:
+						<PortDetails
+							details={originDetails}
+							listLoading={listLoading}
+						/>
+					</div>
+					<div className={styles.port_content}>
+						{t('myTickets:pod')}
+						:
+						<PortDetails
+							details={destinationDetails}
+							listLoading={listLoading}
+						/>
+					</div>
+				</>
+			)}
 		</>
 
 	);
