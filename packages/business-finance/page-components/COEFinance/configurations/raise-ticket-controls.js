@@ -17,7 +17,6 @@ const controls = ({
 		placeholder : 'Select Raised To',
 		name        : 'raised_to',
 		type        : 'select',
-		rules       : { required: true },
 		options     : STAKEHOLDER_OPTIONS,
 	},
 	{
@@ -47,7 +46,7 @@ const controls = ({
 		type       : 'file',
 		themeType  : 'secondary',
 		drag       : true,
-		label      : 'Upload Supporting Document',
+		label      : 'Upload Supporting Document(Optional)',
 		uploadType : 'aws',
 	},
 ]);

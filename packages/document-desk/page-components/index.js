@@ -1,4 +1,5 @@
 import { dynamic } from '@cogoport/next';
+import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useState, useMemo } from 'react';
 
 import DocumentDeskContext from '../context/DocumentDeskContext';
@@ -44,6 +45,7 @@ export default function DocumentDesk() {
 
 	return (
 		<DocumentDeskContext.Provider value={contextValues}>
+			<ShipmentChat />
 			{shipmentType ? <RenderDesk /> : null}
 		</DocumentDeskContext.Provider>
 	);

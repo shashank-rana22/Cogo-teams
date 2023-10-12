@@ -15,11 +15,10 @@
 	font-weight: 600;
 }
 
-.amount {
+.common_amount {
 	margin-top: 2px;
 	font-size: 12px;
 	font-weight: 600;
-	color: #ed3726;
 	word-break: break-word;
 }
 
@@ -90,4 +89,12 @@
 	margin-left: 22%;
 	font-size: 12px;
 	font-weight: 600;
+}
+
+.credit_note_amount {
+	color: #29cc6a;
+}
+
+.amount {
+	color: #ed3726;
 }

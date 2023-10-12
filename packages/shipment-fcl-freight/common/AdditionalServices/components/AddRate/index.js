@@ -64,6 +64,8 @@ function AddRate({
 		handleSubmit,
 		control,
 		formState: { errors },
+		watch = () => {},
+		setValue = () => {},
 	} = useForm({ defaultValues: item });
 
 	const afterAddRate = () => {
@@ -127,7 +129,7 @@ function AddRate({
 			{SHOW_REMARKS_STATUS.includes(status?.status) ? (
 				<p className={styles.mt_8}>
 					<strong> Comment:</strong>
-					&nbsp;
+					{' '}
 					{item?.remarks[GLOBAL_CONSTANTS.zeroth_index]}
 				</p>
 			) : null}
@@ -136,6 +138,8 @@ function AddRate({
 				control={control}
 				errors={errors}
 				serviceData={item}
+				watch={watch}
+				setValue={setValue}
 				source={source}
 			/>
 

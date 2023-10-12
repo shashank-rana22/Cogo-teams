@@ -16,16 +16,16 @@ function StepTwo({
 	contentText = '',
 	purchaseInvoiceValues = {},
 	serviceProvider = {},
-	setExchangeRateModal = () => {},
+	setExchangeRateModal = () => { },
 	billingPartyObj = {},
 	collectionPartyObj = {},
 	editData = {},
-	setStep = () => {},
+	setStep = () => { },
 	exchangeRateModal = false,
-	onClose = () => {},
+	onClose = () => { },
 	billId = '',
 	partyId = '',
-	closeModal = () => {},
+	closeModal = () => { },
 	formValues = {},
 }) {
 	const [globalSelected, setGlobalSelected] = useState({});
@@ -58,9 +58,9 @@ function StepTwo({
 				<Button
 					themeType="secondary"
 					onClick={
-					iseditable
-						? () => setStep(STEP_ONE)
-						: closeModal
+						iseditable
+							? () => setStep(STEP_ONE)
+							: closeModal
 					}
 				>
 					Go Back

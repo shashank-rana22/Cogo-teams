@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { getRecipientData } from '../../helpers/getRecipientData';
 import useCreateReplyAllDraft from '../../hooks/useCreateReplyAllDraft ';
@@ -46,6 +46,11 @@ const getEmailBorder = ({ isDraft = false, emailStatus = '' }) => {
 	return '#EE3425';
 };
 
+const formatEmailBody = ({ message = '' }) => message?.replace(
+	GLOBAL_CONSTANTS.regex_patterns.line_break_regex,
+	'<br>',
+);
+
 function MailBody({
 	eachMessage = {},
 	hasPermissionToEdit = false,
@@ -53,8 +58,15 @@ function MailBody({
 	mailProps = {},
 	deleteMessage = () => {},
 	isTheFirstMessageId = '',
+	firestore = {},
+	roomId = '',
 }) {
+	const [initialLoad, setInitialLoad] = useState(true);
+	const [expandedState, setExpandedState] = useState(false);
+	const [draftQuillBody, setDraftQuillBody] = useState({});
+
 	const { source = '' } = formattedData || {};
+	const { viewType } = mailProps;
 
 	const {
 		response,
@@ -63,16 +75,15 @@ function MailBody({
 		media_url = [],
 		is_draft: isDraft = false,
 		email_status: emailStatus = '',
-		communication_id = '',
+		id = '',
 	} = eachMessage || {};
 
-	const isFirstMessage = isTheFirstMessageId === communication_id;
-	const [expandedState, setExpandedState] = useState(isFirstMessage);
+	const isFirstMessage = isTheFirstMessageId === id;
 
 	const {
 		subject = '',
 		message_id = '',
-		body = '',
+		body_preview = '',
 		sender: senderAddress = '',
 		to_mails: recipientData = [],
 		cc_mails: ccData = [],
@@ -84,20 +95,29 @@ function MailBody({
 		getEmailBody = () => {},
 		message: bodyMessage = '',
 		loading = false,
-	} = useGetMailContent({ messageId: message_id, source, setExpandedState });
+	} = useGetMailContent({
+		messageId     : message_id,
+		source,
+		setExpandedState,
+		isDraft,
+		firestore,
+		roomId,
+		setDraftQuillBody,
+		messageRoomId : id,
+	});
 
-	const { signature } = useGetSignature();
+	const { signature } = useGetSignature({ viewType });
 
 	const { createReplyAllDraft } = useCreateReplyAllDraft();
 	const { createReplyDraft } = useCreateReplyDraft();
 
-	const date = created_at && formatDate({
+	const date = created_at ? formatDate({
 		date       : new Date(created_at),
 		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
 		formatType : 'dateTime',
 		separator  : ' ',
-	});
+	}) : '';
 
 	const { handleClick = () => {} } = getRecipientData({
 		mailProps,
@@ -115,10 +135,11 @@ function MailBody({
 		createReplyDraft,
 		createReplyAllDraft,
 		signature,
+		draftQuillBody,
 	});
 
 	const handleExpandClick = () => {
-		if (!expandedState && !bodyMessage && !isDraft) {
+		if (!expandedState && (isDraft || !bodyMessage)) {
 			getEmailBody();
 			return;
 		}
@@ -126,6 +147,16 @@ function MailBody({
 	};
 
 	const emailBorderColor = getEmailBorder({ isDraft, emailStatus });
+
+	useEffect(() => {
+		if (isFirstMessage && !expandedState && initialLoad) {
+			if (!bodyMessage) {
+				getEmailBody();
+			}
+			setExpandedState(true);
+			setInitialLoad(false);
+		}
+	}, [bodyMessage, expandedState, getEmailBody, initialLoad, isFirstMessage]);
 
 	return (
 		<div className={styles.email_container}>
@@ -148,12 +179,23 @@ function MailBody({
 					isDraft={isDraft}
 					emailStatus={emailStatus}
 				/>
+
 				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
-				<div
-					className={cl`${styles.body} 
-					${expandedState ? styles.expanded_body : styles.collapsed_body}`}
-					dangerouslySetInnerHTML={{ __html: bodyMessage || body }}
-				/>
+
+				{(bodyMessage && expandedState) ? (
+					<div
+						className={cl`${styles.body} 
+							${expandedState ? styles.expanded_body : styles.collapsed_body}`}
+						dangerouslySetInnerHTML={{ __html: formatEmailBody({ message: bodyMessage || '' }) }}
+					/>
+				) : (
+					<div
+						className={cl`${styles.body_preview} 
+							${expandedState ? styles.expanded_body_preview : styles.collapsed_body_preview}`}
+					>
+						{body_preview || ''}
+					</div>
+				)}
 
 				{hasPermissionToEdit ? (
 					<MailActions

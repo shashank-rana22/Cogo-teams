@@ -1,12 +1,15 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import useReplyMail from '../hooks/useReplyMail';
 import useSaveDraft from '../hooks/useSaveDraft';
 import useSendOmnichannelMail from '../hooks/useSendOmnichannelMail';
 
-import getFormatedEmailBody from './getFormatedEmailBody';
+import getFormattedEmailBody from './getFormattedEmailBody';
 import getRenderEmailBody from './getRenderEmailBody';
+
+const LIMIT_FOR_BODY_PREVIEW = 200;
 
 function useMailEditorFunctions({
 	uploading = false,
@@ -17,6 +20,7 @@ function useMailEditorFunctions({
 	firestore = {},
 	sendLoading = false,
 	setSendLoading = () => {},
+	showOrgSpecificMail = false,
 }) {
 	const {
 		buttonType = '',
@@ -39,17 +43,32 @@ function useMailEditorFunctions({
 		bccrecipients = [],
 		body = '',
 		draftMessageData = {},
+		customSubject = {},
+		rteContent = '',
+		rawRTEContent = '',
 	} = emailState || {};
 
+	let subjectToSend = subject;
+
+	if (showOrgSpecificMail) {
+		if (customSubject?.serialId === 'custom' && customSubject?.subjectText) {
+			subjectToSend = customSubject?.subjectText;
+		} else if (customSubject?.serialId && customSubject?.subjectText) {
+			subjectToSend = `${customSubject?.serialId} | ${customSubject?.subjectText}`;
+		} else {
+			subjectToSend = '';
+		}
+	}
+
 	const handlePayload = () => {
-		const emailBody = getRenderEmailBody({ html: body });
+		const emailBody = getRenderEmailBody({ html: `${rteContent}<br/>${body}` });
 
 		return {
 			sender  : from_mail || activeMailAddress,
 			toUserEmail,
 			ccrecipients,
 			bccrecipients,
-			subject,
+			subject : subjectToSend,
 			content : emailBody,
 			msgId   : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 			attachments,
@@ -67,6 +86,8 @@ function useMailEditorFunctions({
 		parentMessageData : eachMessage,
 		setEmailState,
 		body,
+		emailState,
+		showOrgSpecificMail,
 	});
 
 	const {
@@ -99,9 +120,9 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		const isEmptyMail = getFormatedEmailBody({ emailState });
+		const isEmptyMail = getFormattedEmailBody({ emailState });
 
-		if (isEmptyMail || !subject) {
+		if (isEmptyMail || !subjectToSend) {
 			Toast.error('Both Subject and Body are Required');
 			return;
 		}
@@ -118,11 +139,16 @@ function useMailEditorFunctions({
 					data       : eachMessage,
 				},
 				emailState,
-				dataForFirebase: payload,
 			});
 			return;
 		}
-		replyMailApi(payload);
+		replyMailApi({
+			payload,
+			bodyPreview: rawRTEContent?.slice(
+				GLOBAL_CONSTANTS.zeroth_index,
+				LIMIT_FOR_BODY_PREVIEW,
+			) || '',
+		});
 	};
 
 	const handleSaveDraft = async ({ isMinimize = false } = {}) => {
@@ -135,7 +161,7 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		const isEmptyMail = getFormatedEmailBody({ emailState });
+		const isEmptyMail = getFormattedEmailBody({ emailState });
 
 		if (isEmptyMail && isEmpty(attachments)) {
 			Toast.error('There is nothing in email body to save as draft');

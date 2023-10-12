@@ -43,6 +43,18 @@ export const DEFAULT_EMAIL_STATE = {
 	toUserEmail   : [],
 	ccrecipients  : [],
 	bccrecipients : [],
+	user_ids      : {},
+	orgId         : '',
+	rteContent    : '',
+	customSubject : {
+		activeTab   : 'shipment',
+		serialId    : '',
+		subjectText : '',
+	},
+	orgData: {
+		orgType : 'organizations',
+		orgId   : '',
+	},
 };
 
 export const BUTTON_MAPPING = [
@@ -98,4 +110,44 @@ export const BUTTON_MAPPING = [
 export const BUTTON_KEYS_MAPPING = {
 	draft : ['preview', 'delete'],
 	mail  : ['forward', 'reply', 'reply_all'],
+};
+
+export const SUBJECT_MAPPING = {
+	shipment: {
+		title         : 'SIDs',
+		value         : 'shipment',
+		preText       : 'SID:',
+		template_tags : ['shipments_rpa'],
+	},
+	quotation: {
+		title         : 'Quotations',
+		value         : 'quotation',
+		preText       : 'Quotation ID:',
+		template_tags : ['quotation_rpa'],
+	},
+	custom: {
+		title         : 'Others',
+		value         : 'custom',
+		preText       : '',
+		template_tags : ['custom_rpa'],
+	},
+};
+
+export const ORGS_MAPPING = {
+	organizations: {
+		title : "Org's",
+		value : 'organizations',
+	},
+	other_organizations: {
+		title : 'Others',
+		value : 'other_organizations',
+	},
+	channel_partners: {
+		title : "Org's",
+		value : 'channel_partners',
+	},
+	other_channel_partners: {
+		title : 'Others',
+		value : 'other_channel_partners',
+	},
 };

@@ -1,12 +1,11 @@
-import { Select, cl, Loader } from '@cogoport/components';
+import { Select, Loader, cl } from '@cogoport/components';
 import { countriesHash } from '@cogoport/globalization/utils/getCountriesHash';
 import { IcMArrowLeft } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useCallback, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import SortButton from '../../../../common/SortButton';
-import { SORT_OPTIONS } from '../../../../constants/map_constants';
+import { FILTER_OPTIONS } from '../../../../constants/map_constants';
 import Heading from '../../Heading';
 
 import GeoCoder from './GeoCoder';
@@ -15,8 +14,7 @@ import styles from './styles.module.css';
 
 const SCOPE_MAPPING = {
 	continents : 'country',
-	country    : 'region',
-	region     : 'ports',
+	country    : 'ports',
 };
 
 const TIMEOUT_TIME = 400;
@@ -39,10 +37,9 @@ function SidePanel({
 	setPage = () => {},
 	accuracyLoading = false,
 	setActiveList = () => {},
-	setSort = () => {},
-	sort = {},
+	setFilterBy = () => {},
+	filterBy = '',
 }) {
-	const { sort_by, sort_type } = sort;
 	const originName = locationFilters.origin?.name || countriesHash?.[locationFilters?.origin?.id]?.name;
 	const destinationType = locationFilters?.destination?.type || '';
 	const destination = destinationType.includes('port')
@@ -54,32 +51,20 @@ function SidePanel({
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
-			if (!accuracyLoading) {
+			if (!accuracyLoading && hasMore) {
 				setPage(page + START_PAGE);
 			}
 		}, TIMEOUT_TIME);
-	}, [accuracyLoading, page, setPage]);
+	}, [accuracyLoading, hasMore, page, setPage]);
 
 	useEffect(() => {
-		if (!isEmpty(list)) {
-			if (page === START_PAGE) {
-				setActiveList([...list]);
-			} else {
-				setActiveList((prev) => {
-					const uniqueSet = new Set(prev);
-					const uniqueItems = list.filter((item) => {
-						if (!uniqueSet.has(item)) {
-							uniqueSet.add(item);
-							return true;
-						}
-						return false;
-					});
-
-					return prev.concat(uniqueItems);
-				});
-			}
+		if (page !== START_PAGE) {
+			setActiveList(activeList.concat(list));
+		} else {
+			setActiveList([...list]);
 		}
-	}, [list, page, setActiveList]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(list)]);
 
 	return (
 		<>
@@ -112,36 +97,31 @@ function SidePanel({
 							<span className={styles.elipsis}>{startCase(originName)}</span>
 							<span>{` to ${startCase(destination || 'Countries')}`}</span>
 						</h4>
-						<SortButton
-							type={sort_type}
-							onChange={(val) => setSort(((prev) => ({ ...prev, sort_type: val })))}
-						/>
 						<Select
 							size="sm"
-							placeholder="sort by"
-							options={SORT_OPTIONS}
+							placeholder="Filter by"
+							options={FILTER_OPTIONS}
 							style={{ width: '140px' }}
-							value={sort_by}
-							onChange={(val) => setSort({ sort_by: val, sort_type: 'asc' })}
+							value={filterBy}
+							onChange={(val) => setFilterBy(val)}
 						/>
 					</div>
 					<InfiniteScroll
 						pageStart={1}
 						initialLoad={false}
-						loadMore={hasMore && loadMore}
+						loadMore={loadMore}
 						hasMore={hasMore}
-						loader={accuracyLoading ? (
-							<div className={styles.loading_style}>
-								<Loader />
-							</div>
-						) : null}
 						useWindow={false}
+						threshold={500}
+						loader={<div className={styles.mini_loader}><Loader /></div>}
 					>
 						<List
+							key={`${filterBy} ${destination}`}
 							setActiveId={setActiveId}
 							loading={accuracyLoading}
 							finalList={activeList}
 							originName={originName}
+							filterBy={filterBy}
 						/>
 					</InfiniteScroll>
 					{!hasMore && !isEmpty(activeList) && !accuracyLoading && (

@@ -1,34 +1,30 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 
 const PLAN_LIST_PAGE_LIMIT = 50;
 
-const useUpdatePlan = ({ planId, subscriptionId, modalChangeHandler }) => {
-	const [{ loading, data: listData }, listTrigger] = useRequest({
+const useUpdatePlan = ({ planId, modalChangeHandler, featureInfo = {} }) => {
+	const { id:subscriptionId, ...rest } = featureInfo || {};
+
+	const [{ loading, data: listData }] = useRequest({
 		method : 'get',
 		url    : '/list_saas_plan_pricings',
-	}, { manual: true });
+		params : {
+			filters: {
+				is_active : true,
+				plan_type : 'P',
+				...rest,
+			},
+			page_limit: PLAN_LIST_PAGE_LIMIT,
+		},
+	}, { manual: false });
 
 	const [{ loading: postLoading }, postTrigger] = useRequest({
 		method : 'post',
 		url    : '/update_saas_subscription',
 	}, { manual: true });
-
-	// getting cancel error by removing async await
-	const getPlanList = useCallback(async () => {
-		try {
-			await listTrigger({
-				params: {
-					filters    : { is_active: true, plan_type: 'P' },
-					page_limit : PLAN_LIST_PAGE_LIMIT,
-				},
-			});
-		} catch (err) {
-			Toast.error(getApiErrorString(err.response?.data));
-		}
-	}, [listTrigger]);
 
 	const changePlanHandler = useCallback(async () => {
 		try {
@@ -43,10 +39,6 @@ const useUpdatePlan = ({ planId, subscriptionId, modalChangeHandler }) => {
 			Toast.error(getApiErrorString(err.response?.data));
 		}
 	}, [modalChangeHandler, planId, postTrigger, subscriptionId]);
-
-	useEffect(() => {
-		getPlanList();
-	}, [getPlanList]);
 
 	return {
 		loading: loading || postLoading, changePlanHandler, listData,

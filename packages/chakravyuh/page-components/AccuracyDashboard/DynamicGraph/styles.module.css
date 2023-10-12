@@ -1,0 +1,153 @@
+.container {
+	--animation-duration: 3.5s;
+
+	.zoom_container {
+		position: absolute;
+		top: 180px;
+		right: 40px;
+
+		> div {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 30px;
+			height: 30px;
+			margin-top: 2px;
+			cursor: pointer;
+			background-color: #fafbfc;
+			border: 1px solid #8080806f;
+			transition: all 300ms ease-in-out;
+
+			svg {
+				width: 20px;
+				height: 20px;
+				transition: all 300ms ease-in-out;
+			}
+
+			&:hover {
+				background-color: #eff0f3;
+
+				svg {
+					scale: 1.15;
+				}
+			}
+
+			&:active {
+				scale: 0.25;
+			}
+
+			&.zoom_disabled {
+				&:hover {
+					cursor: not-allowed;
+					background-color: inherit;
+
+					svg {
+						scale: 1;
+					}
+				}
+
+				&:active {
+					scale: 1;
+				}
+			}
+		}
+	}
+
+	&.parent_zoom_level_1 {
+		.zoom_child {
+			width: 134%;
+			height: calc(133.33vh - 186px);
+			transform-origin: 0 0;
+			scale: 0.75;
+		}
+	}
+
+	&.parent_zoom_level_2 {
+		.zoom_child {
+			width: 200%;
+			height: 156vh;
+			transform-origin: 0 0;
+			scale: 0.5;
+		}
+	}
+
+	> h3 {
+		position: relative;
+		top: 60px;
+		left: 50px;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: calc(100vw - 250px);
+		height: 0;
+		font-size: 20px;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.reload_btn {
+		position: absolute;
+		right: 0;
+		width: 40px;
+		height: 40px;
+		padding: 10px;
+		color: #221f20;
+		background-color: #f6f6f6;
+		border-radius: 50%;
+		transition: all 300ms ease-in-out;
+		transform: rotate(90deg);
+
+		&:hover {
+			color: #fff;
+			cursor: pointer;
+			background-color: #221f20;
+			transform: rotate(45deg);
+		}
+
+		&:active {
+			transition: all 100ms ease-in-out;
+			scale: 1.15;
+			transform: rotate(-45deg);
+		}
+	}
+}
+
+.graph_layout {
+	position: relative;
+	z-index: 0;
+	margin-top: 16px;
+	overflow-y: auto;
+	background-color: #fff;
+	background-image: url("https://cogoport-testing.sgp1.digitaloceanspaces.com/158bab1b368e6a2b4082a4aeeea3dda8/Globe.png");
+	background-repeat: space;
+	background-position: 50% 50%;
+	border-radius: 8px;
+	transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+	&.minimize {
+		height: 200px;
+		min-height: 200px;
+	}
+
+	&.empty_state {
+		height: calc(100vh - 200px);
+		min-height: 500px;
+	}
+}
+
+.svg_layout {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.card_container {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.graph_placeholder {
+	border-radius: 8px;
+}

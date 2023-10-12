@@ -9,27 +9,25 @@ import {
 } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import {
-	SORTBY_OPTION,
-} from '../../../../constants/index.ts';
+import { SORTBY_OPTION } from '../../../../constants/index.ts';
 
 import CallPriorityModal from './CallPriorityModal';
 import FilterpopOver from './FilterpopOver/index.tsx';
 import styles from './styles.module.css';
 
 function Filters({
-	handleChange = () => { },
-	handleInputReset = () => { },
-	setOrderBy = () => { },
+	handleChange = () => {},
+	handleInputReset = () => {},
+	setOrderBy = () => {},
 	orderBy = { key: '', order: '', label: '' },
-	setParams = () => { },
+	setParams = () => {},
 	params = {},
 	formFilters = {},
-	setFormFilters = () => { },
-	clearFilter = () => { },
+	setFormFilters = () => {},
+	clearFilter = () => {},
 	queryKey = '',
 	entityCode = '',
-	refetch = () => { },
+	refetch = () => {},
 	callPriorityData = {},
 	callPriorityLoading = false,
 }) {
@@ -41,7 +39,7 @@ function Filters({
 	const sortStyleDesc = orderBy.order === 'Desc' ? '#303B67' : '#BDBDBD';
 
 	function Content() {
-		return ((
+		return (
 			<div className={styles.styled_row}>
 				{SORTBY_OPTION.map((item) => (
 					<div
@@ -53,9 +51,7 @@ function Filters({
 								order : 'Desc',
 								label : item.label,
 							});
-							setShowSortPopover(
-								!showSortPopover,
-							);
+							setShowSortPopover(false);
 							setParams({
 								...params,
 								page: 1,
@@ -63,15 +59,11 @@ function Filters({
 						}}
 						role="presentation"
 					>
-						<div
-							className={styles.tile_heading}
-						>
-							{item.label}
-						</div>
+						<div className={styles.tile_heading}>{item.label}</div>
 					</div>
 				))}
 			</div>
-		));
+		);
 	}
 
 	let placeholder;
@@ -94,6 +86,8 @@ function Filters({
 						<Popover
 							placement="bottom"
 							render={<Content />}
+							visible={showSortPopover}
+							onClickOutside={() => setShowSortPopover(false)}
 						>
 							<div
 								style={{ display: 'flex', cursor: 'pointer' }}
@@ -148,13 +142,14 @@ function Filters({
 							role="presentation"
 						>
 							<div className={styles.calllabel}>
-								{callPriorityLoading ? <Placeholder width="60px" />
-									: callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]
-										?.businessName}
+								{callPriorityLoading ? (
+									<Placeholder width="60px" />
+								) : (
+									callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]
+										?.businessName
+								)}
 							</div>
-							<div className={styles.callpriority}>
-								Call Priority
-							</div>
+							<div className={styles.callpriority}>Call Priority</div>
 						</div>
 					</div>
 					<div className={styles.flex_wrap}>
@@ -163,29 +158,28 @@ function Filters({
 							value={search}
 							onChange={(e) => handleChange(e)}
 							suffix={
-								search ? (
-									<IcMCross
-										onClick={handleInputReset}
-										cursor="pointer"
-										className={styles.icon_style}
-									/>
-								) : <IcMAppSearch />
-							}
+                search ? (
+	<IcMCross
+		onClick={handleInputReset}
+		cursor="pointer"
+		className={styles.icon_style}
+	/>
+                ) : (
+	<IcMAppSearch />)
+              }
 							prefix={null}
 							className={styles.styled_input}
 						/>
 					</div>
 				</div>
 			</div>
-			{
-				showCallPriority ? (
-					<CallPriorityModal
-						showCallPriority={showCallPriority}
-						setShowCallPriority={setShowCallPriority}
-						data={callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]}
-					/>
-				) : null
-			}
+			{showCallPriority ? (
+				<CallPriorityModal
+					showCallPriority={showCallPriority}
+					setShowCallPriority={setShowCallPriority}
+					data={callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]}
+				/>
+			) : null}
 		</div>
 	);
 }

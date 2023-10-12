@@ -46,6 +46,13 @@ const useFilterData = ({
 		debounceQuery(search);
 	}, [debounceQuery, search]);
 
+	useEffect(() => {
+		setGlobalFilters((prev) => ({
+			...prev,
+			pageIndex: 1,
+		}));
+	}, [overseasData]);
+
 	const { configMapping, payrunStats, country_code } = useGetConfigDataMapping({
 		activePayrunTab,
 		overseasData,
@@ -101,12 +108,12 @@ const useFilterData = ({
 		setCheckedRow(null);
 		setSelectedIds([]);
 		setGlobalFilters({
-			search    : undefined,
+			search,
 			pageIndex : 1,
 			pageSize  : 10,
 			activeEntity,
 		});
-	}, [activePayrunTab, setCheckedRow, setOverseasData, setViewId, activeEntity]);
+	}, [activePayrunTab, setCheckedRow, setOverseasData, setViewId, activeEntity, search]);
 
 	return {
 		data    : apiData.listData,

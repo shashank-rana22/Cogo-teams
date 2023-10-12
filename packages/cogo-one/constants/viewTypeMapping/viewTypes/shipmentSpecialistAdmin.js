@@ -6,7 +6,7 @@ import { COGOVERSE_AGENT_MAPPINGS } from '../../../utils/getViewTypeFromWorkPref
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SHIPMENT_SPECIALIST_ADMIN = {
-	chat_tabs_to_be_shown : ['message', 'voice', 'firebase_emails'],
+	chat_tabs_to_be_shown : ['message', 'voice', 'firebase_emails', 'teams'],
 	all_chats_base_query  : ({ userSharedEmails, agentId }) => (isEmpty(userSharedEmails)
 		? [where('support_agent_id', '==', agentId)]
 		: [where('source', 'in', userSharedEmails)]),
@@ -26,6 +26,7 @@ const SHIPMENT_SPECIALIST_ADMIN = {
 	accessible_new_communications : ['new_mail'],
 	stats_feedback_count          : [],
 	to_show_agent_activity_graph  : false,
+	email_signature_designation   : 'Customer Support',
 	group_agents_api_filter       : ['shipment_specialist',
 		'support', 'shipment_specialist_admin', ...COGOVERSE_AGENT_MAPPINGS.sales],
 	permissions: {

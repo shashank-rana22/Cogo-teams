@@ -158,6 +158,75 @@ function CustomContacts({ message = '' }) {
 	);
 }
 
+const EXTENSION_WISE_MAPPINGS = {
+	png  : CustomImage,
+	jpg  : CustomImage,
+	gif  : CustomImage,
+	jpeg : CustomImage,
+	bmp  : CustomImage,
+	svg  : CustomImage,
+	webp : CustomImage,
+	pdf  : CustomFileDiv,
+	xlsx : CustomFileDiv,
+	mp4  : CustomVideo,
+	mkv  : CustomVideo,
+	mov  : CustomVideo,
+	webm : CustomVideo,
+	avi  : CustomVideo,
+};
+
+const DEFAULT_URL_LENGTH = 0;
+
+const NEGATIVE_NUMBER = 1;
+
+function MultiMediaMessage({
+	message = '',
+	response = {},
+	messageType = '',
+}) {
+	const { media_url = [] } = response || {};
+
+	const formattedMediaUrl = typeof media_url === 'string' ? [media_url] : media_url || [];
+
+	return (
+		<>
+			{(formattedMediaUrl || []).map((item) => {
+				const urlArray = decodeURI(item)?.split('/');
+				const fileNameFromUrl = urlArray[(urlArray?.length || DEFAULT_URL_LENGTH) - NEGATIVE_NUMBER] || '';
+				const fileArray = fileNameFromUrl.split('.') || [];
+				const extension = fileArray.pop();
+
+				const Comp = EXTENSION_WISE_MAPPINGS[extension] || EXTENSION_WISE_MAPPINGS.pdf;
+
+				if (!Comp) {
+					return null;
+				}
+				return (
+					<div
+						role="presentation"
+						key={item}
+						onClick={(e) => {
+							window.open(
+								item,
+								'_blank',
+								'noreferrer',
+							);
+							e.stopPropagation();
+						}}
+						style={{ cursor: 'pointer' }}
+					>
+						<Comp
+							item={item}
+							mediaUrl={item}
+						/>
+					</div>
+				);
+			})}
+			<ShowMessage messageType={messageType} message={message} />
+		</>
+	);
+}
+
 export const MESSAGE_TYPE_WISE_MAPPING = {
 	text        : ShowMessage,
 	template    : ShowMessage,
@@ -171,4 +240,5 @@ export const MESSAGE_TYPE_WISE_MAPPING = {
 	event       : UserActivityMessages,
 	order       : Order,
 	default     : ShowMessage,
+	media       : MultiMediaMessage,
 };

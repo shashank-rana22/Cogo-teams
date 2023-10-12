@@ -10,6 +10,7 @@ import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
+import TIMELINE_ELIGIBLE_JOB_TYPES from '../../../constants/timelineEligibleList';
 import useGetDocumentContent from '../../../hook/useGetDocumentContent';
 import useGetVariance from '../../../hook/useGetVariance';
 import useListShipment from '../../../hook/useListShipment';
@@ -160,7 +161,7 @@ function ShipmentDetails({
 		lineItemsTab       : false,
 	});
 
-	const { docContent = '', chargesTable = [] } = useGetDocumentContent({ data });
+	const { docContent = {}, chargesTable = [] } = useGetDocumentContent({ data });
 
 	const onTabClick = ({ tabName = '' }) => {
 		setTab(
@@ -187,6 +188,18 @@ function ShipmentDetails({
 			setCheckItem((prev:any) => {
 				const newCheckItem = { ...prev };
 				newCheckItem.shipmentDetailsCheck = true;
+				delete newCheckItem?.documentsCheck;
+				delete newCheckItem?.sidDataCheck;
+				delete newCheckItem?.taggingCheck;
+				return { ...newCheckItem };
+			});
+		}
+
+		if (!(TIMELINE_ELIGIBLE_JOB_TYPES).includes(jobType)) {
+			// timeline checks to be removed for all jobType that are not showing timeline
+			setCheckItem((prev:any) => {
+				const newCheckItem = { ...prev };
+				delete newCheckItem?.shipmentDetailsCheck;
 				delete newCheckItem?.documentsCheck;
 				delete newCheckItem?.sidDataCheck;
 				delete newCheckItem?.taggingCheck;
@@ -255,7 +268,7 @@ function ShipmentDetails({
 						</div>
 						{tab.documentsTab && <div className={styles.hr} />}
 						<div className={styles.documents}>
-							{tab.documentsTab && <Documents shipmentId={shipmentId} docContent={docContent} />}
+							{tab.documentsTab && <Documents shipmentId={shipmentId} />}
 							{' '}
 						</div>
 						{tab.documentsTab && (

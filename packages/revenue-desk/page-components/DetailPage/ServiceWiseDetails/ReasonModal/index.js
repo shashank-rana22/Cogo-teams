@@ -1,12 +1,21 @@
 import { Button, Modal, Radio, Textarea } from '@cogoport/components';
 
-import { VALUE_TWO, VALUE_ZERO, VALUE_ONE } from '../../../constants';
+import { VALUE_TWO, VALUE_ZERO, VALUE_ONE, PERCENTAGE_CHECK } from '../../../constants';
 
 import styles from './styles.module.css';
 
 function ReasonModal({
-	modalStep, setModalStep, updateTrigger, reason, setReason, othertext, setOthertext,
+	modalStep, setModalStep, updateTrigger, reason, setReason, othertext, setOthertext, supplierPayload,
 }) {
+	let hasNegativeProfitability = false;
+	Object.values(supplierPayload).forEach((rates) => {
+		rates.forEach((rate) => {
+			if (rate?.data?.rowData?.profit_percentage < PERCENTAGE_CHECK) {
+				hasNegativeProfitability = true;
+			}
+		});
+	});
+
 	const handleOnChange = (val) => {
 		if (reason === val) {
 			setReason(null);
@@ -40,19 +49,23 @@ function ReasonModal({
 		<Modal size="lg" show={modalStep === VALUE_TWO} onClose={() => setModalStep(VALUE_ZERO)} placement="center">
 			<Modal.Header title="PREVIEW" />
 			<Modal.Body>
-				<div className={styles.modal_text}>
-					*You have used Revenue Desk wallet to apply discount.
-					Please provide a reason for approving this booking at this rate.
-				</div>
-				{options.map((option) => (
-					<Radio
-						key={option.value}
-						label={option.label}
-						value={option.value}
-						onChange={() => handleOnChange(option.value)}
-						checked={reason === option.value}
-					/>
-				))}
+				{hasNegativeProfitability && (
+					<>
+						<div className={styles.modal_text}>
+							*You have used Revenue Desk wallet to apply discount.
+							Please provide a reason for approving this booking at this rate.
+						</div>
+						{options.map((option) => (
+							<Radio
+								key={option.value}
+								label={option.label}
+								value={option.value}
+								onChange={() => handleOnChange(option.value)}
+								checked={reason === option.value}
+							/>
+						))}
+					</>
+				)}
 				<div style={{ padding: '0 10px' }}>
 					Remarks:
 					<Textarea
@@ -69,7 +82,7 @@ function ReasonModal({
 					<Button themeType="secondary" onClick={() => setModalStep(VALUE_ONE)}>Back</Button>
 					<Button
 						themeType="accent"
-						disabled={!reason}
+						disabled={!reason && !othertext}
 						onClick={() => updateTrigger()}
 					>
 						Submit

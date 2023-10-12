@@ -5,7 +5,7 @@ import { COGOVERSE_AGENT_MAPPINGS } from '../../../utils/getViewTypeFromWorkPref
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SHIPMENT_SPECIALIST = {
-	chat_tabs_to_be_shown        : ['message', 'voice', 'firebase_emails'],
+	chat_tabs_to_be_shown        : ['message', 'voice', 'firebase_emails', 'teams'],
 	all_chats_base_query         : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	group_chats_query            : ({ agentId }) => [where('group_members', 'array-contains', agentId)],
 	session_type_query           : () => [where('session_type', '==', 'admin')],
@@ -22,6 +22,7 @@ const SHIPMENT_SPECIALIST = {
 	to_show_agent_activity_graph : false,
 	configurations_to_be_shown   : ['agents_status'],
 	shift_view_default_type      : '',
+	email_signature_designation  : 'Customer Support',
 	group_agents_api_filter      : ['shipment_specialist',
 		'support', 'shipment_specialist_admin', ...COGOVERSE_AGENT_MAPPINGS.sales],
 	accessible_new_communications : ['new_mail'],

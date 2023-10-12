@@ -1,0 +1,14 @@
+.container {
+	width: 100%;
+}
+
+.label_styles {
+	font-size: 10px;
+}
+
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding-top: 12px;
+}
