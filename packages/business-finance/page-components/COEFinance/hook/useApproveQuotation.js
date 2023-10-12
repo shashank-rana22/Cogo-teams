@@ -23,9 +23,9 @@ const useApproveQuotation = ({
 }) => {
 	const [{ loading = false }, trigger] = useRequestBf(
 		{
-			url     : '/common/job/update-shipment-quotation-status',
-			authKey : 'post_common_job_update_shipment_quotation_status',
-			method  : 'post',
+			url     : '/common/job/shipment-quotation-status',
+			authKey : 'put_common_job_shipment_quotation_status',
+			method  : 'put',
 		},
 		{ manual: true },
 	);

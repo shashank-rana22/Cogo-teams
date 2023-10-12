@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMArrowRotateDown,
 	IcMArrowRotateUp,
@@ -15,7 +16,7 @@ const DEFAULT_AMOUNT = 0;
 
 function DetailsCard({
 	onTabClick = () => {},
-	dataList = [],
+	dataList = {},
 	shipmentDetailsTab = false,
 	loadingShipment = false,
 }) {
@@ -23,6 +24,11 @@ function DetailsCard({
 		: <IcMArrowRotateDown height="17px" width="17px" />;
 
 	const shipmentId = dataList?.id || '';
+
+	const kamMargin = window.sessionStorage.getItem('kam_margin');
+	const rdWallet = window.sessionStorage.getItem('rd_wallet');
+	const currency = window.sessionStorage.getItem('currency');
+
 	const { data: dataWallet } = useGetWallet(shipmentId);
 	const {
 		agent_data: agentData,
@@ -50,6 +56,29 @@ function DetailsCard({
 							tradeType={tradeType}
 						/>
 					</div>
+
+					<div className={styles.wallet_amount_container}>
+						{`KAM Margin: ${formatAmount({
+							amount  : kamMargin,
+							currency,
+							options : {
+								currencyDisplay : 'code',
+								style           : 'currency',
+							},
+						})}`}
+
+						<span style={{ marginLeft: '15px' }}>
+							{`RD Wallet: ${formatAmount({
+								amount  : rdWallet,
+								currency,
+								options : {
+									currencyDisplay : 'code',
+									style           : 'currency',
+								},
+							})}`}
+						</span>
+					</div>
+
 					{dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] && (
 						<div className={styles.data}>
 							<div className={styles.kam_data}>KAM -</div>

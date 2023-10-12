@@ -9,7 +9,7 @@ const useGetClosedTasks = ({
 }) => {
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : '/common/job/get-milestone-job-audits',
+			url     : '/common/job/milestone-job-audits',
 			method  : 'get',
 			authKey : 'get_common_job_milestone_job_audits',
 		},

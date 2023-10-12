@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 import Tickets from './Tickets';
 
 function TicketsCard({
-	shipmentId = '',
+	serialId = '',
 	onTabClick = () => {},
 	loadingShipment = false,
 	tab = {},
@@ -39,7 +39,7 @@ function TicketsCard({
 			</div>
 			{tab.ticketsTab && <div className={styles.hr} />}
 			<div className={styles.tickets}>
-				{tab.ticketsTab && <Tickets shipmentId={shipmentId} />}
+				{tab.ticketsTab && <Tickets serialId={serialId} />}
 				{' '}
 			</div>
 		</div>

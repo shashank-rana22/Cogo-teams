@@ -8,7 +8,9 @@ import TimeLineItem from './TimeLineItem/index';
 
 const ONE = 1;
 
-function TimeLine({ shipmentId = '' }) {
+function TimeLine({
+	shipmentId = '',
+}) {
 	const { data: timelineData, loading } = useGetShipmentTimeLine(shipmentId);
 
 	const SHIPMENT_DATA = {};

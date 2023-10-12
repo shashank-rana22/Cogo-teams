@@ -14,8 +14,8 @@ const getFormatDate = (date = '') => formatDate({
 
 const SUB_ACTIVE_TAB_STATUS_MAPPING = {
 	to_be_audited     : 'INIT',
-	partially_audited : 'INIT',
-	audited           : 'INIT',
+	partially_audited : 'PARTIALLY_AUDITED',
+	audited           : 'AUDITED',
 };
 
 const useGetJobList = ({

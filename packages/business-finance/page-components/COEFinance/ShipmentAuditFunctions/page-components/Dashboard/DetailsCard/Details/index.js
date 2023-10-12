@@ -46,7 +46,10 @@ const DEFAULT_VALUE = {
 	drop                        : null,
 };
 
-function Details({ dataList = DEFAULT_VALUE, shipmentId = '' }) {
+function Details({
+	dataList = DEFAULT_VALUE,
+	shipmentId = '',
+}) {
 	const { importer_exporter: importerExporter } = dataList || {};
 	const Router = useRouter();
 
@@ -87,7 +90,9 @@ function Details({ dataList = DEFAULT_VALUE, shipmentId = '' }) {
 			</div>
 
 			<div className={styles.timeline_container}>
-				<TimeLine shipmentId={shipmentId} />
+				<TimeLine
+					shipmentId={shipmentId}
+				/>
 			</div>
 		</div>
 	);

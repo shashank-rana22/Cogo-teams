@@ -185,7 +185,13 @@ const getFinancialCloseColumns = ({
 				<div>
 					<Button
 						themeType="secondary"
-						onClick={() => handleClick(row?.jobId, row?.jobNumber)}
+						onClick={() => handleClick({
+							jobId     : row?.jobId,
+							jobNumber : row?.jobNumber,
+							currency  : row?.currency,
+							rdWallet  : row?.rdWalletUtilizationAmount,
+							kamMargin : row?.kamMarginUtilizationAmount,
+						})}
 					>
 						Audit
 					</Button>

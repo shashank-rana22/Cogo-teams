@@ -59,10 +59,16 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 		setPaginationFilters((prev) => ({ ...prev, page: val }));
 	};
 
-	const handleClick = (jobId, jobNumber) => {
+	const handleClick = ({
+		jobId = '', jobNumber = '', kamMarginUtilizationAmount = '',
+		rdWalletUtilizationAmount = '', currency = '',
+	}) => {
 		push(
 			`/business-finance/coe-finance/${activeTab}/audit?job_id=${jobId}&job_number=${jobNumber}`,
 		);
+		window.sessionStorage.setItem('kam_margin', kamMarginUtilizationAmount);
+		window.sessionStorage.setItem('rd_wallet', rdWalletUtilizationAmount);
+		window.sessionStorage.setItem('currency', currency);
 	};
 
 	const handleSubTabChange = (tab) => {
@@ -107,6 +113,24 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 							</div>
 						))}
 					</div>
+				</div>
+
+				<div className={styles.search}>
+					<Toggle
+						name="prePostToggle"
+						size="md"
+						onLabel="Post"
+						offLabel="Pre"
+						checked={tax === 'Post'}
+						onChange={handlePrePostChange}
+					/>
+					<Input
+						size="md"
+						placeholder="Search"
+						value={search}
+						suffix={<IcMSearchlight height="16" width="16" />}
+						onChange={(val) => setSearch(val)}
+					/>
 					<Popover
 						visible={show}
 						placement="bottom"
@@ -135,24 +159,6 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 							Filters
 						</Button>
 					</Popover>
-				</div>
-
-				<div className={styles.search}>
-					<Toggle
-						name="prePostToggle"
-						size="md"
-						onLabel="Post"
-						offLabel="Pre"
-						checked={tax === 'Post'}
-						onChange={handlePrePostChange}
-					/>
-					<Input
-						size="md"
-						placeholder="Search"
-						value={search}
-						suffix={<IcMSearchlight height="16" width="16" />}
-						onChange={(val) => setSearch(val)}
-					/>
 				</div>
 
 			</main>

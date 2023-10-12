@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 
 function Dashboard() {
 	const { query: { active_tab = '', job_id = '' }, push = () => {} } = useRouter();
+
 	const { partner: { id = '' } } = useSelector(({ profile }) => ({
 		partner: profile?.partner,
 	}));
@@ -31,6 +32,10 @@ function Dashboard() {
 	const { bttnDisableCondition } = getApproveJobAuditBttnCondition({ quotationsData });
 
 	const handleClick = () => {
+		window.sessionStorage.removeItem('kam_margin');
+		window.sessionStorage.removeItem('rd_wallet');
+		window.sessionStorage.removeItem('currency');
+
 		if (active_tab === 'financial_close') {
 			push(
 				`/${id}/business-finance/coe-finance/financial_close`,
@@ -56,7 +61,6 @@ function Dashboard() {
 							onClick={() => updateJobAuditStatus({ jobId: job_id, status: 'PARTIALLY_AUDITED' })}
 						>
 							Save Changes
-
 						</Button>
 					</div>
 					<div className={styles.header_button}>

@@ -1,30 +1,58 @@
-import { Table } from '@cogoport/components';
+import { Loader, Table } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-function Tickets() {
-	const data = [{ ticketId: '123', ticketStatus: 'Done' },
-		{ ticketId: '456', ticketStatus: 'Done' }, { ticketId: '678', ticketStatus: 'Done' },
-		{ ticketId: '987', ticketStatus: 'Done' }, { ticketId: '954678', ticketStatus: 'Done' }];
-	const columns = [{
-		Header   : 'Id',
-		accessor : 'ticketId',
-	},
-	{
-		Header   : 'Status',
-		accessor : 'ticketStatus',
-	},
-	{
-		Header   : 'Raised to',
-		accessor : 'raisedTo',
-	},
-	{
-		Header   : 'Raised from',
-		accessor : 'raisedFrom',
-	},
+import EmptyStateDocs from '../../../../../../commons/EmptyStateDocs/index.tsx';
+import useListTickets from '../../../../../hook/useListTickets';
+
+import styles from './styles.module.css';
+
+function Tickets({
+	serialId = '',
+}) {
+	const { data: ticketData, loading } = useListTickets({ serialId });
+
+	const columns = [
+		{
+			Header   : 'ID',
+			accessor : 'ID',
+		},
+		{
+			Header   : 'Raised by',
+			accessor : (row) => row?.User?.name,
+		},
+		{
+			Header   : 'Priority',
+			accessor : 'Priority',
+		},
+		{
+			Header   : 'Type',
+			accessor : 'Type',
+		},
+		{
+			Header   : 'Reviewer Name',
+			accessor : 'ReviewerName',
+		},
+		{
+			Header   : 'Status',
+			accessor : 'Status',
+		},
 	];
+
+	if (loading) {
+		return (
+			<div className={styles.loader_main}>
+				<Loader className={styles.loader} />
+			</div>
+		);
+	}
+	if (isEmpty(ticketData)) {
+		return <EmptyStateDocs />;
+	}
+
 	return (
 		<div style={{ width: '1270px' }}>
-			<Table columns={columns} data={data} />
+			<Table columns={columns} data={ticketData} />
 		</div>
 	);
 }

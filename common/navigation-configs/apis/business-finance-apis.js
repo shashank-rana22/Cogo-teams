@@ -51,7 +51,7 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
-			api         : 'post_common_job_update_shipment_quotation_status',
+			api         : 'put_common_job_shipment_quotation_status',
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},

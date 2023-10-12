@@ -67,7 +67,7 @@ function QuotationCards({
 			/>
 
 			<TicketsCard
-				shipmentId={shipmentId}
+				serialId={job_number}
 				onTabClick={onTabClick}
 				loadingShipment={loadingShipment}
 				tab={tab}
