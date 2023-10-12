@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Popover, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -15,6 +15,7 @@ function PackageItem({
 	popoverComponentData = {},
 	setShowModal = () => {},
 	setInfoBanner = () => {},
+	chargeable_weight = 0,
 }) {
 	const { commodity = '', commodity_details = [], total_volume = 1, total_weight = 1 } = loadItem;
 
@@ -54,6 +55,32 @@ function PackageItem({
 						/>
 					</Popover>
 				) : null}
+			</div>
+
+			<div className={styles.load_item} style={{ marginLeft: 12 }}>
+				<Tooltip
+					placement="top"
+					content={(
+						<div className={styles.tooltip_content}>
+							Chargeable Weight:
+							{' '}
+							<strong>
+								{chargeable_weight}
+								{' '}
+								{' '}
+								Kgs
+							</strong>
+							<br />
+							( 1CBM = 166.67kgs )
+						</div>
+					)}
+				>
+					<span className={styles.text}>
+						{chargeable_weight}
+						{' '}
+						Kgs
+					</span>
+				</Tooltip>
 			</div>
 
 			<div className={styles.load_item} style={{ margin: '0 12px' }}>

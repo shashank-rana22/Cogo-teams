@@ -21,7 +21,6 @@ function OtherServices({
 			<AdditionalServices
 				rateCardData={rateCardData}
 				detail={detail}
-				// setHeaderProps={setHeaderProps}
 				refetchSearch={refetch}
 				source="search-results"
 				refetchLoading={loading}

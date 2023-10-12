@@ -1,0 +1,25 @@
+.container {
+	width: 100%;
+	height: fit-content;
+}
+
+.grouped_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 0 15px;
+	font-size: 12px;
+	cursor: pointer;
+	user-select: none;
+
+	svg {
+		width: 14px;
+		height: 14px;
+		margin-right: 4px;
+	}
+
+	&:hover {
+		font-weight: 600;
+	}
+}

@@ -21,7 +21,7 @@ function Packages({
 }) {
 	const [showModal, setShowModal] = useState(false);
 
-	const { service_details, services } = data || {};
+	const { service_details, services, chargeable_weight = 0 } = data || {};
 
 	const load = getLoadArray(SERVICE, service_details || services || []);
 
@@ -50,6 +50,7 @@ function Packages({
 				showPopover={showPopover}
 				popoverComponentData={popoverComponentData}
 				setShowModal={setShowModal}
+				chargeable_weight={chargeable_weight}
 			/>
 
 			{showModal ? (

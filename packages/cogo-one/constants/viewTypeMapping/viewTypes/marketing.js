@@ -7,7 +7,7 @@ import {
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const MARKETING = {
-	chat_tabs_to_be_shown     : ['message', 'voice', 'outlook'],
+	chat_tabs_to_be_shown     : ['message', 'voice', 'teams'],
 	all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 	teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],

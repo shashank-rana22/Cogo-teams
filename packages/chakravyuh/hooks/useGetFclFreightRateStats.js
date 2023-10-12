@@ -22,8 +22,11 @@ const useGetFclFreightRateStats = ({ filters }) => {
 	);
 
 	useEffect(() => {
-		const params = getFormattedPayload(filters);
-		getStats(params);
+		const { service_type } = filters;
+		if (service_type === 'fcl') {
+			const params = getFormattedPayload(filters);
+			getStats(params);
+		}
 	}, [filters, getStats]);
 
 	return { data, loading };

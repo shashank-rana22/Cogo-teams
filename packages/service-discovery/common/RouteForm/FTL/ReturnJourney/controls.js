@@ -2,6 +2,7 @@ const controls = [
 	{
 		name : 'halt_time_value',
 		type : 'number',
+		min  : 0,
 	},
 	{
 		name        : 'halt_time_unit',

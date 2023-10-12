@@ -28,7 +28,7 @@ const getAirPayload = (values, origin, destination) => {
 		commodity_type = '',
 		commodity_subtype = '',
 		load_selection_type = '',
-		packing_list = '',
+		packing_list = {},
 		commodity = '',
 		commodity_details = [],
 	} = values;
@@ -39,6 +39,8 @@ const getAirPayload = (values, origin, destination) => {
 		subclass_id = '',
 		subclass_codes = [],
 	} = CLASS_MAPPING?.[commodity_subtype] || {};
+
+	const packing_list_url = isEmpty(packing_list) ? undefined : packing_list.finalUrl || packing_list;
 
 	let totalWeight = 0;
 	let totalQuantity = 0;
@@ -148,7 +150,7 @@ const getAirPayload = (values, origin, destination) => {
 		commodity_details_values = [
 			{
 				commodity_type : commodity_subtype || 'all',
-				packing_list   : packing_list || undefined,
+				packing_list   : packing_list_url,
 				commodity_subtype,
 			},
 		];
@@ -161,7 +163,7 @@ const getAirPayload = (values, origin, destination) => {
 				commodity_type,
 				temp_controlled_type,
 				temp_controlled_range,
-				packing_list: packing_list || undefined,
+				packing_list: packing_list_url,
 			},
 		];
 	} else if (commodity_type === 'dangerous') {
@@ -174,7 +176,7 @@ const getAirPayload = (values, origin, destination) => {
 					subclass_id,
 					subclass_codes: subclass_codes && !isEmpty(subclass_codes) ? subclass_codes : undefined,
 				},
-				packing_list: packing_list || undefined,
+				packing_list: packing_list_url,
 			},
 		];
 	} else if (commodity_type === 'other_special') {
@@ -182,7 +184,7 @@ const getAirPayload = (values, origin, destination) => {
 			{
 				commodity_type,
 				commodity_subtype,
-				packing_list: packing_list || undefined,
+				packing_list: packing_list_url,
 			},
 		];
 	}

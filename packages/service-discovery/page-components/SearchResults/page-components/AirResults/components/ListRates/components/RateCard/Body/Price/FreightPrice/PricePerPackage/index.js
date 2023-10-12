@@ -7,10 +7,20 @@ import styles from './styles.module.css';
 const DEFAULT_PRICE_VALUE = 0;
 const ONE_PACKAGE_COUNT = 1;
 
+const format = (price, currency) => formatAmount({
+	amount  : price || DEFAULT_PRICE_VALUE,
+	currency,
+	options : {
+		style                 : 'currency',
+		currencyDisplay       : 'symbol',
+		maximumFractionDigits : 0,
+	},
+});
+
 function PricePerPackage({
 	price = 0,
 	price_currency = 'INR',
-	isTotalPrice = false,
+	total_price = 0,
 	showKgTag = false,
 	packages_count = 0,
 }) {
@@ -24,24 +34,22 @@ function PricePerPackage({
 				</span>
 			) : null}
 
-			<div className={styles.amount_wrapper}>
-				<span className={styles.amount}>
-					{formatAmount({
-						amount   : price || DEFAULT_PRICE_VALUE,
-						currency : price_currency,
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'symbol',
-							maximumFractionDigits : 0,
-						},
-					})}
-
-					{showKgTag ? (
-						<span className={styles.per_kg_label}>Per Kg.</span>
+			<div className={styles.amount}>
+				<div className={styles.amount_values}>
+					{total_price && total_price !== price ? (
+						<span className={styles.discounted_price}>
+							{format(total_price, price_currency)}
+						</span>
 					) : null}
-				</span>
 
-				{isTotalPrice ? (
+					<span>{format(price, price_currency)}</span>
+				</div>
+
+				{showKgTag ? (
+					<span className={styles.per_kg_label}>Per Kg.</span>
+				) : null}
+
+				{total_price ? (
 					<Tooltip
 						placement="top"
 						trigger="mouseenter"

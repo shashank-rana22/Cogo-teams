@@ -31,7 +31,7 @@
 		"value": "ltl_freight", 
 		"label": "LTL", 
 		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/b2fc24951d7692249a305f7fa38fe02e.png",
-		"is_available": false,
+		"is_available": true,
 		"type": ["seaport", "airport", "pincode","warehouse"] 
 	},
 	{ 

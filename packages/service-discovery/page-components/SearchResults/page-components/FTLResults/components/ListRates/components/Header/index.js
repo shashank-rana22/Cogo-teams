@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
 import RefreshRate from '../../../../../../common/RefreshRate';
-// import Filters from '../../../../common/Filters';
+import Filters from '../../../../common/Filters';
 
 import styles from './styles.module.css';
 
@@ -9,15 +9,15 @@ const CopyUrl = dynamic(() => import('../../../../../../common/CopyUrl'), { ssr:
 
 function Header({
 	details = {},
-	// filters = {},
-	// setFilters = () => {},
+	filters = {},
+	setFilters = () => {},
 	refetch = () => {},
 	total_rates_count = 0,
-	// loading = false,
-	// openAccordian = '',
-	// setOpenAccordian = () => {},
-	// showFilterModal = false,
-	// setShowFilterModal = () => {},
+	loading = false,
+	openAccordian = '',
+	setOpenAccordian = () => {},
+	showFilterModal = false,
+	setShowFilterModal = () => {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -26,7 +26,7 @@ function Header({
 			</div>
 
 			<div className={styles.filters_container}>
-				{/* <Filters
+				<Filters
 					showFilterModal={showFilterModal}
 					setShowFilterModal={setShowFilterModal}
 					data={details}
@@ -35,7 +35,7 @@ function Header({
 					loading={loading}
 					openAccordian={openAccordian}
 					setOpenAccordian={setOpenAccordian}
-				/> */}
+				/>
 
 				<RefreshRate refetch={refetch} details={details} />
 

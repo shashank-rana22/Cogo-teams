@@ -30,7 +30,6 @@ function ServiceItem({
 	itemData = {},
 	data = {},
 	possible_subsidiary_services = [],
-	setPopularServices = () => {},
 	refetch = () => {},
 	disabled = false,
 	setIsDisabled = () => {},
@@ -51,11 +50,9 @@ function ServiceItem({
 	const onClickAdd = async () => {
 		setIsDisabled(value);
 
-		const added = await handleAddService(value);
+		await handleAddService(value);
 
 		setIsDisabled('');
-		if (!added) return;
-		setPopularServices((prev) => (prev.filter((item) => item.value !== value)));
 	};
 
 	return (

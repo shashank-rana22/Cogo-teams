@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase, upperCase } from '@cogoport/utils';
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import SearchInput from '../../SearchInput';
 
@@ -21,8 +21,8 @@ function SubsidiaryServices({
 	const [searchValue, setSearchValue] = useState('');
 	const [disabled, setIsDisabled] = useState('');
 
-	const added_services = Object.values(data.service_details || {})
-		.filter((serviceItem) => serviceItem.service_type === 'subsidiary');
+	const added_services = useMemo(() => Object.values(data?.service_details || {})
+		.filter((serviceItem) => serviceItem.service_type === 'subsidiary'), [data]);
 
 	const SUBSIDIARY_OPTIONS = [];
 
@@ -68,9 +68,9 @@ function SubsidiaryServices({
 			);
 			searchArray = removeSelectedOptions(searchArray);
 		}
-		setPopularServices(searchArray);
+		setPopularServices(removeSelectedOptions(searchArray));
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchValue]);
+	}, [searchValue, added_services]);
 
 	const servicesToShow = useMemo(() => [...popularServices], [popularServices]);
 
@@ -86,7 +86,7 @@ function SubsidiaryServices({
 				<SearchInput
 					value={searchValue}
 					onSearch={setSearchValue}
-					placeholder="Eg. - Origin Entry Summary Declaration"
+					placeholder={`Eg. - ${possible_subsidiary_services?.[GLOBAL_CONSTANTS.zeroth_index]?.name}`}
 					showPrefix={false}
 					onReset={() => setSearchValue('')}
 				/>
@@ -103,8 +103,6 @@ function SubsidiaryServices({
 							data={data}
 							itemData={item}
 							key={`${item.label}_${item.value}`}
-							popularServices={popularServices}
-							setPopularServices={setPopularServices}
 							possible_subsidiary_services={possible_subsidiary_services}
 							refetch={refetch}
 							setIsDisabled={setIsDisabled}
