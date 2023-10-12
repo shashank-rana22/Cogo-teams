@@ -20,10 +20,10 @@ const useGetBySupplier = ({ showVendorsList, activeEntity }) => {
 			try {
 				await trigger({
 					params: {
-						flag     : activeEntity,
-						sortBy   : 'openInvoiceLedgerAmount',
-						sortType : 'Desc',
-						category : showVendorsList || undefined,
+						entityCode : activeEntity,
+						sortBy     : 'openInvoiceAmount',
+						sortType   : 'Desc',
+						category   : showVendorsList || undefined,
 					},
 				});
 			} catch (err) {

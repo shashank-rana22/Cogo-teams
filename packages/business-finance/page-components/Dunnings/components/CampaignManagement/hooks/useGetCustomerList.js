@@ -16,7 +16,7 @@ const useGetCustomerList = ({ formData, search, setFormData }) => {
 		{
 			url     : '/payments/dunning/customer-outstanding-and-on-account',
 			method  : 'get',
-			authKey : 'payments_dunning_customer_outstanding_and_on_account',
+			authKey : 'get_payments_dunning_customer_outstanding_and_on_account',
 		},
 		{ manual: true },
 	);

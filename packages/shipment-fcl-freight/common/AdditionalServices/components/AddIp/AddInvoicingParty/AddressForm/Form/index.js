@@ -47,9 +47,9 @@ function FormElement({
 }
 
 function Form({
-	control,
-	errors,
-	showComponent,
+	control = {},
+	errors = {},
+	showComponent = '',
 }) {
 	const { formControls, pocControls } = controls({ showComponent, mobileCountryCodeOptions });
 
@@ -90,7 +90,7 @@ function Form({
 
 			<Button type="button" onClick={() => append({ name: '' })}>
 				<IcMPlusInCircle />
-				&nbsp;
+				{' '}
 				Add POC
 			</Button>
 		</form>

@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetEmployeeDetails = () => {
+const useGetEmployeeDetails = (user_id = '') => {
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/get_employee_application_details',
@@ -12,12 +12,19 @@ const useGetEmployeeDetails = () => {
 	const getApplicationDetails = useCallback(
 		() => {
 			try {
-				trigger();
+				const params = !user_id ? {} : {
+					params: {
+						employee_user_id    : user_id,
+						action_performed_by : 'hrbp',
+					},
+				};
+
+				trigger(params);
 			} catch (error) {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		},
-		[trigger],
+		[trigger, user_id],
 	);
 
 	useEffect(() => {

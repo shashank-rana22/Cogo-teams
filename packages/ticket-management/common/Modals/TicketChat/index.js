@@ -3,10 +3,12 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
 
 import useCreateTicketActivity from '../../../hooks/useCreateTicketActivity';
+import useListShipments from '../../../hooks/useGetListShipment';
 import useGetTicketActivity from '../../../hooks/useGetTicketActivity';
 import useGetTicketDetails from '../../../hooks/useGetTicketDetails';
 import useUpdateTicketActivity from '../../../hooks/useUpdateTicketActivity';
 import ReassignTicket from '../../ReassignTicket';
+import ResolveRequest from '../../ResolveRequest';
 
 import ChatBody from './ChatBody';
 import EscalateTicket from './EscalateTicket';
@@ -35,7 +37,7 @@ const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 
 function TicketChat({
 	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign = false,
-	setShowReassign = () => {}, isInternal = true, setIsInternal = () => {},
+	setShowReassign = () => {}, isInternal = true, setIsInternal = () => {}, partnerId = '',
 }) {
 	const { ticketId = '' } = modalData || {};
 
@@ -44,6 +46,7 @@ function TicketChat({
 	const [message, setMessage] = useState('');
 	const [uploading, setUploading] = useState(false);
 	const [showEscalate, setShowEscalate] = useState(false);
+	const [showResolveRequest, setShowResolveRequest] = useState(false);
 
 	const scrollToBottom = () => {
 		setTimeout(() => {
@@ -67,7 +70,8 @@ function TicketChat({
 	});
 
 	const { Ticket: ticket = {}, IsCurrentReviewer: isCurrentReviewer = false } = ticketData || {};
-	const { Status: status = '', NotifyCustomer: notifyCustomer = false } = ticket || {};
+	const { Status: status = '', NotifyCustomer: notifyCustomer = false, Data: data = {} } = ticket || {};
+	const { SerialID: serialId } = data || {};
 
 	const {
 		listData = {},
@@ -102,6 +106,8 @@ function TicketChat({
 	const { updateTicketActivity = () => {}, updateLoading = false } = useUpdateTicketActivity({
 		refreshTickets,
 	});
+
+	const { shipmentsData = {}, listLoading = false } = useListShipments({ serialId, ticketId });
 
 	const doesTicketsExists = !isEmpty(ticketData);
 
@@ -143,6 +149,7 @@ function TicketChat({
 						refreshTickets={refreshTickets}
 						setShowReassign={setShowReassign}
 						setShowEscalate={setShowEscalate}
+						setShowResolveRequest={setShowResolveRequest}
 						updateTicketActivity={updateTicketActivity}
 					/>
 				)}
@@ -191,26 +198,49 @@ function TicketChat({
 							)}
 				{doesTicketsExists && (
 					<div className={styles.sub_modal_container}>
-						<TicketSummary {...ticketData} detailsLoading={detailsLoading} />
+						<TicketSummary
+							{...ticketData}
+							detailsLoading={detailsLoading}
+							partnerId={partnerId}
+							listLoading={listLoading}
+							shipmentsData={shipmentsData}
+						/>
 					</div>
 				)}
 
-				<EscalateTicket
-					ticketId={ticketId}
-					showEscalate={showEscalate}
-					updateLoading={updateLoading}
-					setShowEscalate={setShowEscalate}
-					updateTicketActivity={updateTicketActivity}
-				/>
+				{showEscalate && (
+					<EscalateTicket
+						ticketId={ticketId}
+						showEscalate={showEscalate}
+						updateLoading={updateLoading}
+						setShowEscalate={setShowEscalate}
+						updateTicketActivity={updateTicketActivity}
+					/>
+				)}
 
-				<ReassignTicket
-					ticketId={ticketId}
-					showReassign={showReassign}
-					setShowReassign={setShowReassign}
-					getTicketActivity={getTicketActivity}
-					getTicketDetails={getTicketDetails}
-					setListData={setListData}
-				/>
+				{showReassign && (
+					<ReassignTicket
+						ticketId={ticketId}
+						showReassign={showReassign}
+						setShowReassign={setShowReassign}
+						getTicketActivity={getTicketActivity}
+						getTicketDetails={getTicketDetails}
+						setListData={setListData}
+						ticket={ticket}
+						shipmentsData={shipmentsData}
+					/>
+				)}
+
+				{showResolveRequest && (
+					<ResolveRequest
+						ticketId={ticketId}
+						updateLoading={updateLoading}
+						showResolveRequest={showResolveRequest}
+						setShowResolveRequest={setShowResolveRequest}
+						updateTicketActivity={updateTicketActivity}
+					/>
+				)}
+
 			</Modal.Body>
 		</>
 	);

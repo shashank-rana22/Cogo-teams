@@ -1,5 +1,4 @@
-import { Button, Toggle } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
+import { Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import DownloadFileFormat from './DownloadFileFormat';
@@ -8,24 +7,13 @@ import styles from './styles.module.css';
 import UploadFile from './UploadFile';
 
 function Header({ refetch, control }) {
-	const { query } = useRouter();
 	const [showModal, setShowModal] = useState({
 		upload_file     : false,
 		manual_entry    : false,
 		download_format : false,
 	});
-	const handleVersionChange = () => {
-		window.location.href = `/${query.partner_id}/business-finance/settlement/onAccountCollection`;
-	};
 	return (
 		<div className={styles.header_container}>
-			<Toggle
-				name="toggle"
-				size="md"
-				onLabel="Old"
-				offLabel="New"
-				onChange={handleVersionChange}
-			/>
 			<div>
 				<Button
 					type="button"

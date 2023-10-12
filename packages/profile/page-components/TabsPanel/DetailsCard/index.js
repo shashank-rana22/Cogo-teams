@@ -44,9 +44,9 @@ function DetailsCard({ heading = '', details = [], isGrid = true, data = {}, loa
 		if (Array.isArray(value)) {
 			let str = '';
 			value.forEach((Value) => {
-				str += `${mapping(key, Value)} `;
+				str += `${mapping(key, Value) ? mapping(key, Value) : ''} `;
 			});
-			return (str === '  ') ? ' — ' : str;
+			return (str.trim() === '') ? ' — ' : str;
 		}
 		return (mapping(key, value)) ? mapping(key, value) : ' — ';
 	};

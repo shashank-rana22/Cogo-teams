@@ -9,6 +9,7 @@ import {
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
+import TIMELINE_ELIGIBLE_JOB_TYPES from '../../../constants/timelineEligibleList';
 import useGetDocumentContent from '../../../hook/useGetDocumentContent';
 import useGetVariance from '../../../hook/useGetVariance';
 import useListShipment from '../../../hook/useListShipment';
@@ -91,6 +92,18 @@ function ShipmentDetails({
 			setCheckItem((prev) => {
 				const newCheckItem = { ...prev };
 				newCheckItem.shipmentDetailsCheck = true;
+				delete newCheckItem?.documentsCheck;
+				delete newCheckItem?.sidDataCheck;
+				delete newCheckItem?.taggingCheck;
+				return { ...newCheckItem };
+			});
+		}
+
+		if (!(TIMELINE_ELIGIBLE_JOB_TYPES).includes(jobType)) {
+			// timeline checks to be removed for all jobType that are not showing timeline
+			setCheckItem((prev) => {
+				const newCheckItem = { ...prev };
+				delete newCheckItem?.shipmentDetailsCheck;
 				delete newCheckItem?.documentsCheck;
 				delete newCheckItem?.sidDataCheck;
 				delete newCheckItem?.taggingCheck;

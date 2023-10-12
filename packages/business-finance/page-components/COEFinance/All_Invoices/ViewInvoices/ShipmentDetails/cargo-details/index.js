@@ -24,6 +24,15 @@ const labels = [
 	'truck_type',
 	'trip_type',
 	'lr_number',
+	'truck_types',
+	'awb_execution_date',
+	'is_minimum_price_shipment',
+	'price_type',
+	'delivery_date',
+	'container_load_type',
+	'payment_term',
+	'contract_reference_id',
+	'bl_category',
 ];
 
 /**
@@ -41,7 +50,7 @@ function CargoDetails({ detail }) {
           && renderValue(label, detail)
 				) {
 					return (
-						<div className={styles.container}>
+						<div className={styles.container} key={label}>
 							<div className={`${styles.box} cargo-detail-pill`} key={label}>
 								{renderValue(label, detail)}
 							</div>

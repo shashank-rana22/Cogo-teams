@@ -14,10 +14,11 @@ function Filters({
 	activeTab,
 	filters,
 	onChangeFilters = (v) => v,
+	entityCode = '',
 }) {
 	const { search } = filters || {};
 	const { t } = useTranslation(['incidentManagement']);
-	const filterControls = getFilterControls({ activeTab, isSettlementExecutive, t });
+	const filterControls = getFilterControls({ activeTab, isSettlementExecutive, t, entityCode, filters });
 
 	return (
 		<section className={styles.container} id="filters">

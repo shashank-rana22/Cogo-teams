@@ -58,7 +58,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 						salesAgentId : formFilter?.salesAgentId || undefined,
 						creditControllerId:
 							formFilter?.creditControllerId || undefined,
-						kamId                : selectedAgentId || undefined,
+						kamId                : selectedAgentId || formFilter?.kamId || undefined,
 						companyType          : formFilter?.companyType || undefined,
 						entityCode           : entityCode || undefined,
 						organizationSerialId : organizationSerialId || undefined,

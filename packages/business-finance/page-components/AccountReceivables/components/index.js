@@ -13,6 +13,7 @@ import Invoice from './Invoice';
 import ManageBpr from './ManageBpr';
 import Outstanding from './Outstanding';
 import styles from './styles.module.css';
+
 function AccountReceivables() {
 	const { push, query } = useRouter();
 	const { profile } = useSelector((state) => state);
@@ -75,7 +76,13 @@ function AccountReceivables() {
 				)}
 			</div>
 
-			<div className={isEmpty(selectedOrgId) ? styles.tabs_container : styles.nodisplay}>
+			<div
+				className={
+					isEmpty(selectedOrgId)
+						? styles.tabs_container
+						: styles.nodisplay
+				}
+			>
 				<Tabs
 					activeTab={receivables}
 					onChange={(val) => handleChange(val)}
@@ -86,7 +93,7 @@ function AccountReceivables() {
 						<Dashboard entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="invoices" title="Invoices">
-						<Invoice entityCode={entityCode} />
+						<Invoice entityCode={entityCode} invoiceJourney />
 					</TabPanel>
 					<TabPanel name="outstanding" title="Outstanding">
 						<Outstanding

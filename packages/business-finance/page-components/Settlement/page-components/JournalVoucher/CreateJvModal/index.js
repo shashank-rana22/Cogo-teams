@@ -16,20 +16,21 @@ import styles from './styles.module.css';
 function CreateJvModal({
 	show, onClose = () => {},
 	setShow, refetch, selectedData = [], Entity = '', line_items = [EMPTY_LINE_ITEMS],
+	setJvSearch = () => {}, setDryRun = () => {},
 }) {
 	const { control, watch, handleSubmit, setValue, formState: { errors = {} } } = useForm({
 		defaultValues:
-		{
-			entityCode     : Entity || '',
-			ledCurrency    : selectedData?.[0]?.ledCurrency || '',
-			category       : '',
-			currency       : selectedData?.[0]?.currency || '',
-			accountingDate : new Date(),
-			journal        : '',
-			exchangeRate   : '',
-			description    : '',
-			line_items     : line_items || [EMPTY_LINE_ITEMS],
-		},
+			{
+				entityCode     : Entity || '',
+				ledCurrency    : selectedData?.[0]?.ledCurrency || '',
+				category       : '',
+				currency       : selectedData?.[0]?.currency || '',
+				accountingDate : new Date(),
+				journal        : '',
+				exchangeRate   : '',
+				description    : '',
+				line_items     : line_items || [EMPTY_LINE_ITEMS],
+			},
 	});
 
 	const formValues = watch();
@@ -61,7 +62,7 @@ function CreateJvModal({
 		}
 	}, [entity, lineItems, setValue, getGlCode]);
 
-	const { create, loading } = useCreateJv({ setShow, refetch });
+	const { create, loading } = useCreateJv({ setShow, refetch, setJvSearch, setDryRun });
 
 	const debitAmount = formValues?.line_items
 		?.filter((lineItem) => lineItem?.type === 'DEBIT')

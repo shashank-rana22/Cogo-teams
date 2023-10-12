@@ -35,7 +35,8 @@ function Body(props) {
 		setParams,
 		debounceQuery,
 		listRefetch,
-	} = useScoringReports({ currLevel, setCurrLevel, dateRange, entity, isChannel, levelStack, setLevelStack });
+		lastUpdatedAt,
+	} = useScoringReports({ currLevel, dateRange, entity, isChannel, levelStack });
 
 	const {
 		data, statsLoading, refetchStats,
@@ -67,6 +68,7 @@ function Body(props) {
 				setCurrLevel={setCurrLevel}
 				levelStack={levelStack}
 				setLevelStack={setLevelStack}
+				lastUpdatedAt={lastUpdatedAt}
 			/>
 
 			<RightPanel

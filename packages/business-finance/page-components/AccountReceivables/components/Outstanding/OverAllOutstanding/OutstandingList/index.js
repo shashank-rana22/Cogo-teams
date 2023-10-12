@@ -1,11 +1,12 @@
 import { Button, TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMDownload } from '@cogoport/icons-react';
+import { IcMArrowDoubleDown, IcMDownload } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { getTaxLabels } from '../../../../constants/index';
+import useSendOutstandingReportMail from '../../../../hooks/useSendOutstandingReportMail';
 
 import DownloadLedgerModal from './DownloadLedgerModal';
 import StatsOutstanding from './StatsOutstanding/index';
@@ -44,7 +45,10 @@ function OutstandingList({
 		lastUpdatedAt,
 		selfOrganizationName,
 		selfOrganizationId = '',
+		registrationNumber,
 	} = item;
+
+	const { downloadOsReport, data } = useSendOutstandingReportMail(registrationNumber);
 
 	const propsData = {
 		invoice_details: {
@@ -67,6 +71,11 @@ function OutstandingList({
 		communication: {
 			orgData: item,
 		},
+	};
+
+	const handleDownload = async () => {
+		await downloadOsReport();
+		window.open(data?.uploaded_file_path, '_blank');
 	};
 
 	function Content({ types = [], head = '' }) {
@@ -153,7 +162,7 @@ function OutstandingList({
 									? item[it.valueKey]
 									: startCase(
 										item[it.valueKey]?.name
-												|| item[it.valueKey],
+									|| item[it.valueKey],
 									) || it.defaultValueKey}
 							</div>
 						</div>
@@ -218,6 +227,19 @@ function OutstandingList({
 								/>
 							</div>
 						</Tooltip>
+
+						<Tooltip content="Outstanding Report Download" placement="top">
+							<div
+								className={styles.download_icon_div}
+								role="presentation"
+								onClick={handleDownload}
+							>
+								<IcMArrowDoubleDown
+									fill="black"
+								/>
+							</div>
+						</Tooltip>
+
 						{!showElement && (
 							<Button
 								size="md"

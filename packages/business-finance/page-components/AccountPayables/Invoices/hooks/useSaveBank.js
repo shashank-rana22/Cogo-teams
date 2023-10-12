@@ -25,7 +25,7 @@ const useSaveBank = () => {
 			method  : 'post',
 			authKey : 'post_purchase_payrun_bill_allot_bank',
 		},
-		{ manual: false },
+		{ manual: true },
 	);
 
 	const selectBank = async (id = '', callback = () => {}) => {

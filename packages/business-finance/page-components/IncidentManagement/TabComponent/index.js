@@ -15,6 +15,7 @@ function TabComponent({
 	getIncidentData = () => {},
 	detailsModal = {},
 	setDetailsModal = () => {},
+	entityCode = '',
 }) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [isAscendingActive, setIsAscendingActive] = useState('');
@@ -43,6 +44,7 @@ function TabComponent({
 				isSettlementExecutive={isSettlementExecutive}
 				activeTab={activeTab}
 				filters={filters}
+				entityCode={entityCode}
 			/>
 
 			<StyledTable

@@ -7,21 +7,21 @@ import styles from './styles.module.css';
 const vendorsColumn = (currency) => ([
 	{
 		Header   : <div>Vendor Name</div>,
-		id       : 'businessName',
+		id       : 'organizationName',
 		accessor : (row) => {
-			const { businessName } = row || {};
+			const { organizationName } = row || {};
 			return (
 
 				<div className={styles.reference_id}>
-					{businessName?.length > 30
+					{organizationName?.length > 30
 						? (
 							<Tooltip
 								placement="top"
-								content={businessName}
+								content={organizationName}
 							>
 								<text>
 
-									{`${businessName.substring(
+									{`${organizationName.substring(
 										0,
 										30,
 									)}...`}
@@ -29,7 +29,7 @@ const vendorsColumn = (currency) => ([
 								</text>
 							</Tooltip>
 						)
-						:							businessName}
+						: organizationName}
 				</div>
 
 			);
@@ -37,14 +37,14 @@ const vendorsColumn = (currency) => ([
 	},
 	{
 		Header   : <div>Amount</div>,
-		id       : 'openInvoiceLedgerAmount',
+		id       : 'totalOpenInvoiceAmount',
 		accessor : (row) => {
-			const { openInvoiceLedgerAmount } = row || {};
+			const { totalOpenInvoiceAmount } = row || {};
 			return (
 				<div>
 					<Tooltip
 						content={formatAmount({
-							amount  : getByKey(row, 'openInvoiceLedgerAmount'),
+							amount  : getByKey(row, 'totalOpenInvoiceAmount'),
 							currency,
 							options : {
 								currencyDisplay : 'code',
@@ -57,7 +57,7 @@ const vendorsColumn = (currency) => ([
 					>
 						<div>
 							{formatAmount({
-								amount  : openInvoiceLedgerAmount,
+								amount  : totalOpenInvoiceAmount,
 								currency,
 								options : {
 									currencyDisplay : 'code',
@@ -76,10 +76,10 @@ const vendorsColumn = (currency) => ([
 	},
 	{
 		Header   : <div>Invoices</div>,
-		id       : 'openInvoiceCount',
+		id       : 'totalOpenInvoiceCount',
 		accessor : (row) => (
 			<div className={styles.count}>
-				{getByKey(row, 'openInvoiceCount')}
+				{getByKey(row, 'totalOpenInvoiceCount')}
 			</div>
 
 		),

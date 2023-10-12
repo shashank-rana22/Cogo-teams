@@ -44,6 +44,7 @@ const useListExpense = ({ filters }) => {
 					fromBillDate       : fromBillDate ? formatedDate(fromBillDate) : undefined,
 					toBillDate         : toBillDate ? formatedDate(toBillDate) : undefined,
 					cogoEntityId       : entity,
+					status             : 'FINANCE_ACCEPTED',
 				},
 			});
 		} catch (err) {

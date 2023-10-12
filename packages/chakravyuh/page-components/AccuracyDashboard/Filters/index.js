@@ -1,7 +1,7 @@
 import { Select, cl, Datepicker } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMPortArrow } from '@cogoport/icons-react';
-import { addDays, merge, startCase } from '@cogoport/utils';
+import { addDays, startCase } from '@cogoport/utils';
 
 import {
 	LOCATIONS_PROPS, MAIN_PORT_PROPS, TYPE_MAPPING,
@@ -19,8 +19,10 @@ import styles from './styles.module.css';
 const MONTH_DAYS = 30;
 
 function Filters(props) {
-	const { globalFilters = {}, setGlobalFilters = () => {} } = props;
+	const { globalFilters = {}, setGlobalFilters = () => {}, view = 'dashboard' } = props;
 	const { service_type, start_date, end_date } = globalFilters;
+	const serviceTypeOptions = view === 'dashboard'
+		? SERVICE_TYPE_OPTIONS : SERVICE_TYPE_OPTIONS.filter(({ value }) => value !== 'air');
 
 	const changePrimaryFilters = (key, value) => {
 		setGlobalFilters((prev) => ({ ...prev, [key]: value || undefined }));
@@ -47,7 +49,7 @@ function Filters(props) {
 					isClearable={false}
 					placeholder="Select here"
 					value={service_type}
-					options={SERVICE_TYPE_OPTIONS}
+					options={serviceTypeOptions}
 					prefix={SELECT_ICON_MAPPING[service_type] || null}
 					onChange={(value) => changePrimaryFilters('service_type', value)}
 					className={styles.dropdown}
@@ -65,14 +67,7 @@ function Filters(props) {
 									onChange={(value, obj) => handleChange(key, value, obj)}
 									value={globalFilters[key]}
 									className={styles.location_select}
-									params={merge(getLocationParams(service_type), {
-										filters: {
-											type: [
-												`${service_type === 'fcl' ? 'seaport' : 'airport'}`,
-												'country',
-											],
-										},
-									})}
+									params={getLocationParams(service_type)}
 									{...LOCATIONS_PROPS}
 								/>
 							</div>

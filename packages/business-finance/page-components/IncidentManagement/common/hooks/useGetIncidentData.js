@@ -40,8 +40,8 @@ const getParams = ({
 		? formatDate({
 			date       : startDate,
 			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-			formatType : 'date',
+			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+			formatType : 'dateTime',
 			separator  : ' ',
 		})
 		: undefined,
@@ -49,8 +49,8 @@ const getParams = ({
 		? formatDate({
 			date       : endDate,
 			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-			formatType : 'date',
+			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+			formatType : 'dateTime',
 			separator  : ' ',
 		})
 		: undefined,

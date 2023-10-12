@@ -1,3 +1,4 @@
+import RenderInvoiceNumber from '../../commons/RenderInvoiceNumber';
 import EditableTdsInput from '../../CreatePayrun/SelectInvoices/EditableInput';
 import EditablePayableAmount from '../../CreatePayrun/SelectInvoices/EditableInput/EditablePayableAmount';
 import BankDetails from '../../CreatePayrun/ViewSelectedInvoices/BankDetails/index';
@@ -40,7 +41,7 @@ const getFunctions = ({
 		/>
 	),
 	renderAction: (itemData) => (
-		<RenderAction itemData={itemData} />
+		<RenderAction itemData={itemData} hideIcDot />
 	),
 	renderEditableTds: (itemData, field) => (
 		<EditableTdsInput
@@ -63,7 +64,10 @@ const getFunctions = ({
 			setEditedValue={setEditedValue}
 		/>
 	),
-	renderDelete: (itemData) => (<Delete itemData={itemData} refetch={refetch} />),
+	renderDelete        : (itemData) => (<Delete itemData={itemData} refetch={refetch} />),
+	renderInvoiceNumber : (itemData, field) => (
+		<RenderInvoiceNumber itemData={itemData} field={field} />
+	),
 
 });
 

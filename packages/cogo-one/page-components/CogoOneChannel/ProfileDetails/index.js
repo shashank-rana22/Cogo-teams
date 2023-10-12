@@ -29,6 +29,10 @@ function ProfileDetails({
 	orgId = '',
 	mailProps = {},
 	chatsConfig = {},
+	membersList = [],
+	teamsSideBarCheck = false,
+	groupMembersLoading = false,
+	userName = '',
 }) {
 	const customerId = (FIREBASE_TABS.includes(activeTab) ? activeMessageCard : activeVoiceCard)?.id;
 
@@ -36,7 +40,7 @@ function ProfileDetails({
 		? formattedMessageData?.user_id : activeVoiceCard?.user_data?.id;
 
 	const [activeSelect, setActiveSelect] = useState(
-		VIEW_TYPE_GLOBAL_MAPPING[viewType]?.default_side_nav || 'profile',
+		activeTab === 'teams' ? 'teams_profile' : VIEW_TYPE_GLOBAL_MAPPING[viewType]?.default_side_nav || 'profile',
 	);
 
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
@@ -69,7 +73,9 @@ function ProfileDetails({
 	);
 	const quotationEmailSentAt = quotationSentData?.quotation_email_sent_at;
 	const expandedSideBar = (ENABLE_SIDE_BAR.includes(chatsConfig?.data?.channel_type)
-		|| (ENABLE_EXPAND_SIDE_BAR.includes(chatsConfig?.data?.channel_type) && chatsConfig?.expandSideBar));
+		|| ((ENABLE_EXPAND_SIDE_BAR.includes(
+			chatsConfig?.data?.channel_type,
+		) || teamsSideBarCheck) && chatsConfig?.expandSideBar));
 
 	return (
 		<div className={styles.profile_div}>
@@ -107,6 +113,10 @@ function ProfileDetails({
 							userData={(getUserLoading || !customerUserId) ? {} : userData}
 							getUserLoading={getUserLoading}
 							organizationData={organizationData}
+							membersList={membersList}
+							chatsConfig={chatsConfig}
+							groupMembersLoading={groupMembersLoading}
+							userName={userName}
 						/>
 					)}
 				</div>

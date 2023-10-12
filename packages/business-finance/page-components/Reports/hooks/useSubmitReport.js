@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
-import { format } from '@cogoport/utils';
 
 import { DATE_OPTIONAL_APIS } from '../constants';
 
@@ -22,9 +23,18 @@ const useSubmitReport = (value) => {
 		try {
 			const response = await trigger({
 				params: {
-					start_date   : !dateOptionnal ? format(startDate, 'yyyy-MM-dd', {}, false) : undefined,
-					end_date     : !dateOptionnal ? format(endDate, 'yyyy-MM-dd', {}, false) : undefined,
-					account_type : accountType || undefined,
+					start_date: !dateOptionnal ? formatDate({
+						date       : startDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+						formatType : 'date',
+					}) : undefined,
+					end_date: !dateOptionnal ? formatDate({
+						date       : endDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+						formatType : 'date',
+					}) : undefined,
+					account_type   : accountType || undefined,
+					entity_code_id : value?.activeEntity || undefined,
 				},
 			});
 

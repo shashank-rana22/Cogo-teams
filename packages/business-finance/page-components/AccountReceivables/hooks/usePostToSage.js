@@ -2,10 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
 const usePostToSage = ({ id }) => {
-	const [
-		{ data, loading },
-		trigger,
-	] = useRequestBf(
+	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/sales/invoice/post-to-sage',
 			method  : 'post',
@@ -16,8 +13,12 @@ const usePostToSage = ({ id }) => {
 
 	const postToSage = async () => {
 		try {
-			await trigger({ data: { id } });
-			Toast.success('Post to sage successful');
+			const resp = await trigger({ data: { id } });
+			if (resp?.data?.data === 'Success.') {
+				Toast.success('Post to sage successful');
+			} else {
+				Toast.error('Post to failed');
+			}
 		} catch (err) {
 			Toast.error(err?.response?.data?.message);
 		}

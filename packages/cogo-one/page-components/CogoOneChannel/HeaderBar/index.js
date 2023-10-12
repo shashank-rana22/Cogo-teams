@@ -30,8 +30,9 @@ function HeaderBar({
 		flash_revert_logs : flashRevertLogs = false,
 		punch_in_out : isPunchPresent = false,
 	} = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions || {};
-	const [showFeedback, setShowFeedback] = useState(false);
 
+	const [activeCard, setActiveCard] = useState('');
+	const [showFeedback, setShowFeedback] = useState(false);
 	const [timePeriodValue, setTimePeriodValue] = useState('day');
 	const [showDetails, setShowDetails] = useState(false);
 
@@ -88,10 +89,14 @@ function HeaderBar({
 						{(showDetails || initialViewType !== 'cogoone_admin')
 							? null
 							: (
-								<>
+								<div
+									role="presentation"
+									className={styles.navigation_bar}
+									onClick={() => setActiveCard('switch_views')}
+								>
 									<IcMEyeopen className={styles.eye_icon} />
 									{`${startCase(viewType)} View`}
-								</>
+								</div>
 							)}
 					</div>
 
@@ -126,6 +131,8 @@ function HeaderBar({
 								initialViewType={initialViewType}
 								viewType={viewType}
 								showDetails={showDetails}
+								activeCard={activeCard}
+								setActiveCard={setActiveCard}
 							/>
 						) : null}
 					</div>

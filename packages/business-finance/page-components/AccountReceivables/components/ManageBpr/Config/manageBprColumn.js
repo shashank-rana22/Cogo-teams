@@ -1,7 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import { getByKey } from '@cogoport/utils';
 
-import RemoveBpr from '../RemoveBpr';
+import RemoveBpr from '../RemoveBpr/index';
 
 import styles from './styles.module.css';
 
@@ -10,7 +10,7 @@ const END_POSITION_BUSINESS_NAME = 40;
 
 export const manageBprColumn = ({ refetch }) => [
 	{
-		Header   : 'Serail Id',
+		Header   : 'Serial Id',
 		accessor : (row) => (
 			<div>
 				{getByKey(row, 'tradePartyDetailSerialId')}

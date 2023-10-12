@@ -1,5 +1,6 @@
 import { cl } from '@cogoport/components';
-import { getByKey, startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { getByKey } from '@cogoport/utils';
 import { useState, useMemo } from 'react';
 
 import getConfigs from '../../configurations/get-configs';
@@ -7,32 +8,32 @@ import getConfigs from '../../configurations/get-configs';
 import Item from './Item';
 import styles from './styles.module.css';
 
-function Details({ serviceData = [] }) {
-	const [multiTruck, setMultiTruck] = useState(serviceData?.[0]);
+const SERVICE_DATA_LENGTH_DEFAULT_VALUE = 1;
+const TRUCK_NUMBER_INCREMENTER = 1;
 
-	const { service_type, state } = serviceData[0];
+function Details({ serviceData = [] }) {
+	const [multiTruck, setMultiTruck] = useState(serviceData?.[GLOBAL_CONSTANTS.zeroth_index]);
+
+	const { service_type, state } = serviceData[GLOBAL_CONSTANTS.zeroth_index];
 	const serviceItemsKey = getConfigs(service_type).details || {};
 
-	const totalTruck = ['truck-1', 'truck-2'];
-	const [showTruck, setShowTruck] = useState('truck-1');
+	const totalTruck = serviceData?.map((item) => item?.id);
+	const [showTruck, setShowTruck] = useState(serviceData?.[GLOBAL_CONSTANTS.zeroth_index]?.id);
 
 	const keys = useMemo(
 		() => Array(totalTruck.length).fill(null).map(() => Math.random()),
 		[totalTruck.length],
 	);
 	const handleSelect = (key) => {
-		if (key === 'truck-2') {
-			setMultiTruck(serviceData?.[1]);
-		} else {
-			setMultiTruck(serviceData?.[0]);
-		}
+		const selected = serviceData?.find((item) => item?.id === key);
+		setMultiTruck(selected);
 		setShowTruck(key);
 	};
 
 	return (
 		<div className={cl`${styles.container} ${styles[state]}`}>
 
-			{serviceData.length > 1 ?	(
+			{serviceData.length > SERVICE_DATA_LENGTH_DEFAULT_VALUE ?	(
 				<div className={cl`${styles.multiservices_heading}`}>
 					{totalTruck.map((key, i) => (
 						<div
@@ -43,7 +44,7 @@ function Details({ serviceData = [] }) {
 							key={keys[i]}
 							onClick={() => handleSelect(key)}
 						>
-							{`${startCase(key)}`}
+							{`Truck - ${i + TRUCK_NUMBER_INCREMENTER}`}
 						</div>
 					))}
 				</div>

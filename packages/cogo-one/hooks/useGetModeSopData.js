@@ -102,7 +102,6 @@ const useGetModeSopData = ({
 	}, [getModeSopData]);
 
 	const { data:notesData, procedureId } = dataFormatter({ data }) || {};
-	console.log('notesData', notesData);
 
 	return {
 		loading,

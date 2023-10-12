@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import useGetCommodityOptions from '../../../hooks/useGetCommodityOptions';
 
@@ -25,6 +25,7 @@ function ExecuteStep({
 	getApisData = {},
 	selectedMail = [],
 	serviceIdMapping = [],
+	isSeawayAndMarkConfirm = false,
 }) {
 	const [showApprovalModal, setShowApprovalModal] = useState(false);
 	const [approvalChanges, setApprovalChanges] = useState({});
@@ -47,7 +48,7 @@ function ExecuteStep({
 		allCommodity,
 	});
 
-	const { control, formState: { errors }, handleSubmit, watch } = formProps;
+	const { control, formState: { errors }, handleSubmit, watch, setValue } = formProps;
 
 	const { editBookingParams } = showElements || {};
 
@@ -108,6 +109,11 @@ function ExecuteStep({
 			handleApiSubmit();
 		}
 	};
+	useEffect(() => {
+		if (isSeawayAndMarkConfirm) {
+			setValue('bl_type', 'seaway');
+		}
+	}, [isSeawayAndMarkConfirm, setValue]);
 
 	if (restrictTask) {
 		return (
@@ -135,6 +141,8 @@ function ExecuteStep({
 					showElements={showElements}
 					formValues={watch()}
 					shipment_id={task?.shipment_id}
+					isSeawayAndMarkConfirm={isSeawayAndMarkConfirm}
+					setValue={setValue}
 				/>
 
 				{isShipmentRolloverable && editBookingParams ? (
