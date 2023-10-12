@@ -1,7 +1,16 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-function useListShipmentStakeholders({ requestType = '' }) {
+const getParams = ({ shipmentId = '' }) => ({
+	page_limit : 100,
+	filters    : {
+		shipment_id : shipmentId,
+		status      : 'active',
+	},
+});
+
+function useListShipmentStakeholders({ requestType = '', shipmentId = '' }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_shipment_stakeholders',
 		method : 'get',
@@ -9,17 +18,20 @@ function useListShipmentStakeholders({ requestType = '' }) {
 
 	const getShipmentStakeholdersList = useCallback(
 		async () => {
+			if (!shipmentId) {
+				Toast.error('Shipment Id is required');
+				return;
+			}
+
 			try {
 				await trigger({
-					params: {
-						page_limit: 100,
-					},
+					params: getParams({ shipmentId }),
 				});
 			} catch (e) {
 				console.error('e:', e);
 			}
 		},
-		[trigger],
+		[trigger, shipmentId],
 	);
 
 	useEffect(() => {

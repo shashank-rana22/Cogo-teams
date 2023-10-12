@@ -241,6 +241,7 @@ function Customers({
 				setOpenKamContacts={setOpenKamContacts}
 				setSendBulkTemplates={setSendBulkTemplates}
 				firestore={firestore}
+				activeSelect={activeTab?.tab || ''}
 			/>
 		</div>
 	);
