@@ -78,9 +78,9 @@ const airPayload = ({ service, value }) => {
 		data                           : {
 			airline_id          : value?.airline_id,
 			operation_type      : value?.operation_type,
-			[KEY1]              : { LINE_ITEMS: ORIGIN_LINE_ITEMS },
-			[KEY2]              : { LINE_ITEMS: DESTINATION_LINE_ITEMS },
-			surcharge           : { LINE_ITEMS: SURCHARGE_LINE_ITEMS },
+			[KEY1]              : { line_items: ORIGIN_LINE_ITEMS },
+			[KEY2]              : { line_items: DESTINATION_LINE_ITEMS },
+			surcharge           : { line_items: SURCHARGE_LINE_ITEMS },
 			destination_storage : {
 				slabs      : DESTINATION_SLABS,
 				unit       : value?.destination_unit,
@@ -94,7 +94,7 @@ const airPayload = ({ service, value }) => {
 			freights: [{
 				validity_end   : value?.validity_end,
 				validity_start : value?.validity_start,
-				LINE_ITEMS,
+				line_items     : LINE_ITEMS,
 			}],
 			origin_main_port_id      : value?.origin_main_port_id,
 			destination_main_port_id : value?.destination_main_port_id,
