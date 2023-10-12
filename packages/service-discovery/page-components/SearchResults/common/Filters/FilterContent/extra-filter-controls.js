@@ -1,5 +1,7 @@
 import { addDays } from '@cogoport/utils';
 
+import CustomSelectOption from '../../../../../common/CustomSelectOption';
+
 const ONE = 1;
 
 export const FILTERS_DEFAULT_VALUES = {
@@ -26,6 +28,7 @@ export const getExtraFilters = ({ item, id }) => {
 					asyncKey    : 'list_spot_search_operators',
 					initialCall : true,
 					span        : 12,
+					renderLabel : (option = {}) => CustomSelectOption({ option, key: 'shipping-lines' }),
 					isClearable : true,
 					params      : {
 						pagination_data_required : false,

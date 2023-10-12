@@ -110,7 +110,9 @@ function ListItem({
 		const { rateData = [], source:rateCardSource = '' } = serviceItem;
 
 		if (!rateData || isEmpty(rateData) || !rateData[GLOBAL_CONSTANTS.zeroth_index]?.total_price_discounted) {
-			if (serviceItem.service_type === 'fcl_freight_local') {
+			let text = 'No Rates';
+
+			if (['fcl_freight_local', 'air_freight_local'].includes(serviceItem.service_type)) {
 				if (rateCardSource === 'cogo_assured_rate') {
 					return (
 						<div>
@@ -129,9 +131,10 @@ function ListItem({
 							<span className={styles.remove_heading}>** Remove this service to continue</span>
 						</div>
 					);
-				} return 'At Actuals';
+				}
+				text = 'At actuals';
 			}
-			return 'No Rates';
+			return text;
 		}
 		const currency = rateData?.[GLOBAL_CONSTANTS.zeroth_index]?.total_price_currency;
 		let ratesAvailableForAll = true;

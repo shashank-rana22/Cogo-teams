@@ -100,14 +100,14 @@ function IndividualPriceBreakup({ service = {}, restServiceDetail = {} }) {
 
 	const ifRateAvailabe = !isEmpty(line_items);
 
-	let noRatesText = 'No Rates';
+	let text = 'No Rates';
 
 	if (!ifRateAvailabe) {
-		if (service.service_type === 'fcl_freight_local') {
-			if (service.source === 'cogo_assured_rate') {
-				noRatesText = 'No Rates';
-			} else noRatesText = 'At Actuals';
-		} else noRatesText = 'No Rates';
+		if (['fcl_freight_local', 'air_freight_local'].includes(service.service_type)) {
+			if (service.source !== 'cogo_assured_rate') {
+				text = 'At Actuals';
+			}
+		}
 	}
 
 	return (
@@ -141,7 +141,7 @@ function IndividualPriceBreakup({ service = {}, restServiceDetail = {} }) {
 
 				{!ifRateAvailabe ? (
 					<span className={styles.service}>
-						{noRatesText}
+						{text}
 					</span>
 				) : null}
 			</div>

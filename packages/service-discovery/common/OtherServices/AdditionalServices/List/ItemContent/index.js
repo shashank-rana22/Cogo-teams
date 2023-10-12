@@ -60,7 +60,7 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 			const showRequestRateButton = serviceItem.service_type !== 'subsidiary';
 
 			if (conditionToRequestRate) {
-				if (serviceItem.service_type === 'fcl_freight_local') {
+				if (['fcl_freight_local', 'air_freight_local'].includes(serviceItem.service_type)) {
 					if (serviceItem.source === 'cogo_assured_rate') {
 						return 'No Rates';
 					} return 'At Actuals';
