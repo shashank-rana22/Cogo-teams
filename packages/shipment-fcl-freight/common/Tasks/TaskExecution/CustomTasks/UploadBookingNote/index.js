@@ -82,7 +82,7 @@ function UploadBookingNote({
 	return (
 		<div>
 			{isEmpty(listBookingPreferences) ? (
-				<div className={styles.revert_rates}>Please revert rates first</div>
+				<div className={styles.revert_rates}>Please wait for RD to revert rates.</div>
 			) : (
 				<>
 					{step === GLOBAL_CONSTANTS.zeroth_index ? (
