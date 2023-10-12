@@ -11,6 +11,8 @@ const useCreateUpsell = ({
 }) => {
 	const router = useRouter();
 
+	const { navigation = '' } = router.query;
+
 	const [{ loading }, trigger] = useRequest({
 		url    : 'create_spot_search',
 		method : 'POST',
@@ -29,7 +31,8 @@ const useCreateUpsell = ({
 			const res = await trigger({ data: { ...payload } });
 			if (!res.hasError) {
 				let newHref = `${window.location.origin}/${router?.query?.partner_id}/book/`;
-				newHref += `${res.data?.id}/${res.data?.importer_exporter_id}/${shipment_data?.id}`;
+				newHref
+				+= `${res.data?.id}/${res.data?.importer_exporter_id}/${shipment_data?.id}?navigation=${navigation}`;
 
 				window.location.href = newHref;
 			}

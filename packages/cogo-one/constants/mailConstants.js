@@ -43,12 +43,17 @@ export const DEFAULT_EMAIL_STATE = {
 	toUserEmail   : [],
 	ccrecipients  : [],
 	bccrecipients : [],
+	user_ids      : {},
 	orgId         : '',
 	rteContent    : '',
 	customSubject : {
 		activeTab   : 'shipment',
 		serialId    : '',
 		subjectText : '',
+	},
+	orgData: {
+		orgType : 'organizations',
+		orgId   : '',
 	},
 };
 
@@ -125,5 +130,24 @@ export const SUBJECT_MAPPING = {
 		value         : 'custom',
 		preText       : '',
 		template_tags : ['custom_rpa'],
+	},
+};
+
+export const ORGS_MAPPING = {
+	organizations: {
+		title : "Org's",
+		value : 'organizations',
+	},
+	other_organizations: {
+		title : 'Others',
+		value : 'other_organizations',
+	},
+	channel_partners: {
+		title : "Org's",
+		value : 'channel_partners',
+	},
+	other_channel_partners: {
+		title : 'Others',
+		value : 'other_channel_partners',
 	},
 };

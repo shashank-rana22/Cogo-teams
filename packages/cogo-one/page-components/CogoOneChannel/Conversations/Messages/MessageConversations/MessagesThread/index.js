@@ -2,14 +2,15 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMRefresh, IcMArrowDoubleDown } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef, useEffect, useMemo } from 'react';
 
+import TimeLine from '../../../../../../common/TimeLine';
 import { updateUnreadMessagesCount } from '../../../../../../helpers/updateUnreadMessagesCount';
 
 import { ReceiveDivComponent, SentDivComponent } from './conversationDivMappings';
+import GroupedTimeLine from './GroupedTimeLine';
 import NewUserOutBound from './NewUserOutBound';
 import styles from './styles.module.css';
-import TimeLine from './TimeLine';
 
 const DEFAULT_VALUE = 0;
 const DEFAULT_UNREAD_MESSAGES = 0;
@@ -17,10 +18,13 @@ const SCROLL_WHEN_REQUIRED_HEIGHT = 2;
 const MAXIMUM_NUMBER_OF_UNREAD_MESSAGES_COUNT = 99;
 
 const CONVERSATION_TYPE_MAPPING = {
-	sent     : ReceiveDivComponent,
-	received : SentDivComponent,
-	default  : TimeLine,
+	sent              : ReceiveDivComponent,
+	received          : SentDivComponent,
+	default           : TimeLine,
+	grouped_timelines : GroupedTimeLine,
 };
+
+const MESSAGE_CONVERSATION_TYPES = ['sent', 'received'];
 
 function LoadPrevMessages({
 	loadingPrevMessages = false,
@@ -70,6 +74,7 @@ function MessagesThread(
 		mailProps = {},
 		latestMessagesAtTop = false,
 		deleteMessage = () => {},
+		roomId = '',
 	},
 	messageRef,
 ) {
@@ -94,7 +99,43 @@ function MessagesThread(
 		? [...(messagesData || [])].reverse()
 		: messagesData;
 
-	const isTheFirstMessageId = messagesArray.find((item) => ['sent', 'received'].includes(item.conversation_type));
+	const isTheFirstMessageId = messagesArray.find(
+		(item) => MESSAGE_CONVERSATION_TYPES.includes(item.conversation_type),
+	);
+
+	const updatedMessageArray = useMemo(
+		() => messagesArray.reduce((acc, itm) => {
+			if (!MESSAGE_CONVERSATION_TYPES.includes(
+				itm.conversation_type || 'default',
+			)) {
+				const lastElement = !isEmpty(acc) ? acc.pop() : {};
+
+				if (lastElement?.conversation_type === 'grouped_timelines') {
+					return [
+						...acc,
+						{
+							...lastElement,
+							conversation_type : 'grouped_timelines',
+							groupedData       : [...(lastElement?.groupedData || []), itm],
+						},
+					];
+				}
+
+				const arrayToAdd = isEmpty(lastElement) ? [{
+					conversation_type : 'grouped_timelines',
+					groupedData       : [itm],
+				}] : [lastElement, {
+					conversation_type : 'grouped_timelines',
+					groupedData       : [itm],
+				}];
+
+				return [...acc, ...arrayToAdd];
+			}
+
+			return [...acc, itm];
+		}, []),
+		[messagesArray],
+	);
 
 	useEffect(() => {
 		if (
@@ -130,11 +171,11 @@ function MessagesThread(
 				/>
 			) : null}
 
-			{(messagesArray || []).map((eachMessage, index) => {
+			{(updatedMessageArray || [])?.map((eachMessage, index) => {
 				const Component = CONVERSATION_TYPE_MAPPING[eachMessage?.conversation_type]
                  || CONVERSATION_TYPE_MAPPING.default;
 
-				const modtifiedEachMessage = {
+				const modifiedEachMessage = {
 					...(eachMessage || {}),
 					...(channel_type === 'platform_chat'
 						? {
@@ -147,7 +188,7 @@ function MessagesThread(
 					<Component
 						key={eachMessage?.created_at}
 						conversation_type={eachMessage?.conversation_type || 'unknown'}
-						eachMessage={modtifiedEachMessage}
+						eachMessage={modifiedEachMessage}
 						activeMessageCard={activeMessageCard}
 						user_name={user_name}
 						setRaiseTicketModal={setRaiseTicketModal}
@@ -156,7 +197,9 @@ function MessagesThread(
 						hasPermissionToEdit={hasPermissionToEdit}
 						mailProps={mailProps}
 						deleteMessage={deleteMessage}
+						firestore={firestore}
 						isTheFirstMessageId={isTheFirstMessageId?.id}
+						roomId={roomId}
 					/>
 				);
 			})}

@@ -66,14 +66,39 @@
 	}
 }
 
-.worse {
-	background: #ee3425;
+.legend_container {
+	right: 8px;
+	bottom: 28px;
+	width: 100px;
+	background-color: #fff;
 }
 
-.bad {
-	background: #f68b21;
-}
+.count_legend {
+	right: 100px;
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: space-between;
+	width: 18px;
+	height: 180px;
+	background:
+		linear-gradient(
+			to bottom,
+			#011b18,
+			#01261f,
+			#07492a,
+			#166d30,
+			#31a353,
+			#78c679,
+			#addd8e,
+			#d8f0a3
+		);
+	border-radius: 2px;
+	box-shadow: 0 0 2px #a1a1a1;
 
-.good {
-	background: #849e4c;
+	p {
+		margin: 0 0 0 28px;
+		font-size: 12px;
+		font-weight: bold;
+		color: #333;
+	}
 }
