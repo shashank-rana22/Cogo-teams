@@ -40,7 +40,7 @@ function ListCard({
 	} = data;
 
 	const {
-		data:shipmemnt_data, getShipment = () => {},
+		data:shipment_data, getShipment = () => {},
 		shipment_loading = false,
 	} =	 useGetShipment({ shipment_id });
 
@@ -108,7 +108,9 @@ function ListCard({
 									{' '}
 									{data?.assigned_to?.name}
 								</div>
-								<div className={styles.business_name}>
+								<div className={styles.pill}>
+									Supplier :
+									{' '}
 									{data?.service_provider?.business_name || data?.service_provider?.name}
 								</div>
 							</div>
@@ -136,7 +138,8 @@ function ListCard({
 								<div>
 									<Pill size="md" color="orange">
 										{(filter?.service === 'air_freight' || filter?.service === 'air_customs')
-											? 'Air Line:' : 'Shipping Line:'}
+											? 'Air Line :' : 'Shipping Line :'}
+										{' '}
 										{data?.shipping_line?.short_name}
 									</Pill>
 								</div>
@@ -145,7 +148,8 @@ function ListCard({
 							&& (
 								<Pill size="md" color="green">
 									Reverted Status :
-									{startCase(reverted_status)}
+									{' '}
+									{startCase(reverted_status === 'reverted' ? 'reverted' : 'not reverted')}
 								</Pill>
 							)}
 						</div>
@@ -276,7 +280,7 @@ function ListCard({
 										shipment_loading={shipment_loading}
 										request_loading={request_loading}
 										feedback_loading={feedback_loading}
-										shipmemnt_data={shipmemnt_data}
+										shipment_data={shipment_data}
 										requestData={requestData}
 										feedbackData={feedbackData}
 										getShipment={getShipment}
@@ -306,7 +310,7 @@ function ListCard({
 					source={source}
 					getStats={getStats}
 					getListCoverage={getListCoverage}
-					shipmemnt_data={shipmemnt_data}
+					shipment_data={shipment_data}
 					requestData={requestData}
 					feedbackData={feedbackData}
 					shipment_loading={shipment_loading}

@@ -11,12 +11,13 @@ import copyToClipboard from '../../../../../utilis/copyToClipboard';
 import styles from './styles.module.css';
 
 function ServiceDetailsContent({
-	shipmemnt_data = {}, data = {}, requestData = {},
+	shipment_data = {}, requestData = {},
 	feedbackData = {}, shipment_loading = false,
 	request_loading = false,
 	feedback_loading = false,
+	filter = {},
 }) {
-	const { primary_service_detail, summary } = shipmemnt_data || {};
+	const { primary_service_detail, summary } = shipment_data || {};
 	const {
 		commodity = '', container_size = '', container_type = '', containers_count = '', inco_term = '',
 		cargo_readiness_date = '',
@@ -31,6 +32,8 @@ function ServiceDetailsContent({
 		closing_remarks = [],
 		status = '',
 		trade_type = '',
+		selected_schedule_arrival,
+		selected_schedule_departure,
 	} = primary_service_detail || feedbackData || requestData || {};
 
 	const handleCopy = (text) => {
@@ -38,11 +41,10 @@ function ServiceDetailsContent({
 		copyToClipboard(value, 'Data');
 	};
 
-	const transitTime =	shipmemnt_data?.serviceType === 'ftl_freight'
-		? shipmemnt_data?.transit_time || '0'
-		: differenceInDays(
-			new Date(shipmemnt_data?.selected_schedule_arrival || new Date()),
-			new Date(shipmemnt_data?.selected_schedule_departure || new Date()),
+	const transitTime =	filter?.service === 'ftl_freight'
+		? shipment_data?.transit_time : differenceInDays(
+			new Date(selected_schedule_arrival || new Date()),
+			new Date(selected_schedule_departure || new Date()),
 		);
 
 	const pillMapping = [
@@ -60,7 +62,7 @@ function ServiceDetailsContent({
 			label : 'Cargo Ready',
 			value : cargo_readiness_date,
 		},
-		{ label: 'BL Type', value: bl_type },
+		{ label: 'BL Type', value: startCase(bl_type) },
 		{ label: 'Destination Detention Free Days', value: free_days_detention_destination },
 		{
 			label : 'Expected Departure',
@@ -73,7 +75,7 @@ function ServiceDetailsContent({
 		{ label: 'Commodity Description', value: commodity_description },
 		{
 			label : 'Transit Time',
-			value : `${transitTime} ${shipmemnt_data?.serviceType === 'ftl_freight' ? 'Hrs' : 'Days'}`,
+			value : `${transitTime} ${filter?.service === 'ftl_freight' ? 'Hrs' : 'Days'}`,
 		},
 		{ label: 'Preferred Shipping', value: shipping_line?.short_name },
 		feedbacks?.length > 0 && (
@@ -161,15 +163,6 @@ function ServiceDetailsContent({
 					)}
 
 					<div className={styles.pill}>
-						{data?.service_provider?.short_name
-						&& (
-							<div className={styles.content}>
-								<div className={styles.label}> Supplier : </div>
-								{' '}
-								<div className={styles.name}>{startCase(data?.service_provider?.short_name)}</div>
-							</div>
-						)}
-
 						{summary?.importer_exporter?.business_name
 						&& (
 							<div className={styles.content}>

@@ -7,10 +7,10 @@ import ServiceDetailsContent from './Content';
 import styles from './styles.module.css';
 
 function DetailsView({
-	data = {}, shipment_loading = false,
-	request_loading = false, feedback_loading = false, shipmemnt_data = {}, requestData = {}, feedbackData = {},
+	shipment_loading = false,
+	request_loading = false, feedback_loading = false, shipment_data = {}, requestData = {}, feedbackData = {},
 	source = {}, getShipment = () => {}, getFeedback = () => {}, getRequest = () => {},
-
+	filter = {},
 }) {
 	const [showServiceDetails, setShowServiceDetails] = useState(false);
 	const handleDetailView = () => {
@@ -31,13 +31,13 @@ function DetailsView({
 		<div>
 			{showServiceDetails && (
 				<ServiceDetailsContent
-					shipmemnt_data={shipmemnt_data}
-					data={data}
+					shipment_data={shipment_data}
 					requestData={requestData?.list?.[DEFAULT_VALUE] || null}
 					feedbackData={feedbackData?.list?.[DEFAULT_VALUE] || null}
 					shipment_loading={shipment_loading}
 					request_loading={request_loading}
 					feedback_loading={feedback_loading}
+					filter={filter}
 				/>
 			)}
 

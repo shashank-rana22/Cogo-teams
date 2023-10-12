@@ -69,7 +69,7 @@ function AddRateModal({
 		chargeCodes,
 	});
 
-	const { createRate } = useCreateFreightRate(filter?.service);
+	const { createRate, loading } = useCreateFreightRate(filter?.service);
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
 	const { deleteRequest } = useDeleteFreightRateRequests(filter?.service);
 	const { deleteFeedbackRequest } = useDeleteFreightRateFeedbacks(filter?.service);
@@ -83,7 +83,6 @@ function AddRateModal({
 	};
 
 	const handleSubmitData = async (formData) => {
-		console.log(formData, 'formData');
 		const rate_id = await createRate(formData);
 		if (rate_id && source === 'rate_feedback') {
 			const resp = await deleteFeedbackRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
@@ -134,6 +133,7 @@ function AddRateModal({
 	useEffect(() => {
 		let prefillFreightCodes = [];
 		let mandatoryFreightCodes = [];
+
 		Object.keys(chargeCodesData?.list || {}).forEach((code) => {
 			if (chargeCodesData?.list?.[code].tags?.includes('mandatory')) {
 				let flag = {};
@@ -173,7 +173,6 @@ function AddRateModal({
 				<div className={styles.service_content}>
 					<ServiceDetailsContent
 						shipmemnt_data={shipmemnt_data}
-						data={data}
 						requestData={requestData?.list?.[DEFAULT_VALUE] || null}
 						feedbackData={feedbackData?.list?.[DEFAULT_VALUE] || null}
 						shipment_loading={shipment_loading}
@@ -207,6 +206,7 @@ function AddRateModal({
 					<Button
 						size="md"
 						onClick={handleSubmit(handleSubmitData)}
+						disabled={loading}
 					>
 						Submit
 					</Button>

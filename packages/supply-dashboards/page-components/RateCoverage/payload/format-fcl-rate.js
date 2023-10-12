@@ -1,8 +1,7 @@
 const formatFclRate = (data, user_id) => {
 	const payload = {
-		origin_port_id: data?.origin_location_id,
-		destination_port_id:
-		data?.destination_location_id,
+		origin_port_id           : data?.origin_location_id,
+		destination_port_id      : data?.destination_location_id,
 		origin_main_port_id      : data?.origin_main_port_id || undefined,
 		destination_main_port_id : data?.destination_main_port_id || undefined,
 		container_size           : data?.container_size,

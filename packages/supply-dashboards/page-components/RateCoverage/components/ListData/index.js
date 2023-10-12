@@ -1,6 +1,6 @@
-import { Placeholder, Pagination, Input, Button } from '@cogoport/components';
+import { Placeholder, Pagination, Input, Button, Tags } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
@@ -33,6 +33,11 @@ function ListData({
 	const { statistics = {} } = statsData;
 	const { list = [] } = data;
 	const { dynamic_statistics = {} } = statsData;
+
+	const {
+		service = '', cogo_entity_id = '', is_flash_booking_reverted = '',
+		is_flash_booking_delayed = '',
+	} = filter || {};
 
 	useEffect(() => {
 		getListCoverage(serialId);
@@ -79,8 +84,87 @@ function ListData({
 						style={{ width: '200px', marginLeft: '10px' }}
 					/>
 				</div>
-
-				<div>
+				<div style={{ display: 'flex' }}>
+					<div className={styles.tags}>
+						<Tags
+							size="md"
+							items={[{
+								disabled : false,
+								children : startCase(service),
+								color    : 'blue',
+								tooltip  : false,
+								closable : true,
+							}]}
+							onItemsChange={() => {
+								setFilter({ ...filter, service: 'fcl_freight' });
+							}}
+						/>
+						{source && (
+							<Tags
+								size="md"
+								items={[{
+									disabled : false,
+									children : startCase(source),
+									color    : 'blue',
+									tooltip  : false,
+									closable : true,
+								}]}
+								onItemsChange={() => {
+									setSource('live_booking');
+								}}
+							/>
+						)}
+						{cogo_entity_id && (
+							<Tags
+								size="md"
+								items={[{
+									disabled : false,
+									children : startCase(cogo_entity_id === 'no_cogo_entity_id'
+										? 'All Entity' : 'My Entity'),
+									color    : 'blue',
+									tooltip  : false,
+									closable : true,
+								}]}
+								onItemsChange={() => {
+									setFilter({ ...filter, cogo_entity_id: '' });
+								}}
+							/>
+						)}
+						{is_flash_booking_reverted
+					&& (
+						<Tags
+							size="md"
+							items={[{
+								disabled : false,
+								children : startCase(is_flash_booking_reverted === 'reverted'
+									? 'Reverted' : 'Non Reverted'),
+								color    : 'blue',
+								tooltip  : false,
+								closable : true,
+							}]}
+							onItemsChange={() => {
+								setFilter({ ...filter, is_flash_booking_reverted: '' });
+							}}
+						/>
+					)}
+						{is_flash_booking_delayed
+					&& (
+						<Tags
+							size="md"
+							items={[{
+								disabled : false,
+								children : startCase(is_flash_booking_delayed === 'delayed'
+									? 'Delayed' : 'In Time'),
+								color    : 'blue',
+								tooltip  : false,
+								closable : true,
+							}]}
+							onItemsChange={() => {
+								setFilter({ ...filter, is_flash_booking_delayed: '' });
+							}}
+						/>
+					)}
+					</div>
 					<Button
 						themeType="secondary"
 						onClick={() => { setShowFilters((prev) => !prev); }}

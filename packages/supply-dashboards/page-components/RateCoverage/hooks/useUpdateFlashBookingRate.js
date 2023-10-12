@@ -7,8 +7,7 @@ const useUpdateFlashBookingRate = () => {
 	}, { manual: true });
 
 	const updateFlashBookingRate = async ({ data, formData, shipmemnt_data }) => {
-		console.log(data, '123');
-		const { shipment_id = '', source_id = '', sourced_by_id = '' } = data || {};
+		const { shipment_id = '', source_id = '', service_provider_id = '' } = data || {};
 		const { is_shipper_specific = false, schedule_type = '', line_items = [] } = formData || {};
 		const { summary } = shipmemnt_data || {};
 		try {
@@ -18,7 +17,7 @@ const useUpdateFlashBookingRate = () => {
 					shipment_id,
 					id                      : source_id,
 					is_reverted             : true,
-					sourced_by_id,
+					sourced_by_id           : service_provider_id,
 					advance_amount_currency : line_items[0].currency,
 					is_shipper_specific     : is_shipper_specific || undefined,
 					schedule_type,

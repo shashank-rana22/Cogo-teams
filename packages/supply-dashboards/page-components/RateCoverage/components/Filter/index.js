@@ -1,5 +1,9 @@
+/* eslint-disable max-lines-per-function */
 import { DateRangepicker, Select, Modal, RadioGroup } from '@cogoport/components';
-import { asyncFieldsLocations, asyncFieldsOperators, useGetAsyncOptions } from '@cogoport/forms';
+import {
+	asyncFieldsLocations, asyncFieldsOperators,
+	useGetAsyncOptions, asyncFieldsOrganization,
+} from '@cogoport/forms';
 import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { merge, startCase } from '@cogoport/utils';
 
@@ -20,7 +24,7 @@ function Filter({
 	setSerialId = () => {},
 	setShowWeekData = () => {},
 }) {
-	const isAirService = filter?.service === 'air_freight';
+	const isAirService = filter?.service === 'air_freight' || filter?.service === 'air_customs';
 
 	const type = (isAirService) ? 'airport' : 'seaport';
 	const operator_type = (isAirService) ? 'airline' : 'shipping_line';
@@ -38,6 +42,10 @@ function Filter({
 	const shippingLineOptions = useGetAsyncOptions(merge(
 		asyncFieldsOperators(),
 		{ params: { filters: { operator_type } } },
+	));
+
+	const serviceProvider = useGetAsyncOptions(merge(
+		asyncFieldsOrganization(),
 	));
 
 	const FCL_COMMODITY_OPTIONS = [];
@@ -80,24 +88,43 @@ function Filter({
 						/>
 					</div>
 				)}
-					<div>
-						<p>Service</p>
-						<Select
-							placeholder="select"
-							options={serviceOptions}
-							value={filter?.service}
-							style={{ width: '250px' }}
-							onChange={(value) => {
-								setFilter({
-									service           : value,
-									status            : 'pending',
-									releventToMeValue : true,
-									daily_stats       : true,
-									assign_to_id      : '',
-								});
-								setShowWeekData(false);
-							}}
-						/>
+					<div className={styles.details}>
+						<div>
+							<p>Service</p>
+							<Select
+								placeholder="select"
+								options={serviceOptions}
+								value={filter?.service}
+								style={{ width: '250px' }}
+								onChange={(value) => {
+									setFilter({
+										service             : value,
+										status              : 'pending',
+										releventToMeValue   : true,
+										daily_stats         : true,
+										assign_to_id        : '',
+										service_provider_id : '',
+									});
+									setShowWeekData(false);
+								}}
+							/>
+						</div>
+						<div>
+							<p>Service Provider</p>
+							<Select
+								placeholder="Search here"
+								{...serviceProvider}
+								value={filter?.service_provider_id}
+								isClearable
+								onChange={(val) => {
+									setFilter((prevFilters) => ({
+										...prevFilters,
+										service_provider_id : val,
+										page                : 1,
+									}));
+								}}
+							/>
+						</div>
 					</div>
 					<div className={styles.details}>
 						<div>
