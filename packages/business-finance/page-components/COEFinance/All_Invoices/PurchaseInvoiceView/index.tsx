@@ -115,6 +115,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 					setFilters((p: GenericObject) => ({ ...p, pageIndex: pageValue }));
 				}}
 				subActiveTab={subActiveTab}
+				paginationType="number"
 				showPagination
 			/>
 		</div>
