@@ -6,6 +6,7 @@ import {
 	CheckboxController,
 	ToggleController,
 	AsyncSelectController,
+	InputNumberController,
 } from '@cogoport/forms';
 
 const CONTROLLER_MAPPING = {
@@ -17,6 +18,7 @@ const CONTROLLER_MAPPING = {
 	checkbox           : CheckboxController,
 	toggle             : ToggleController,
 	asyncSelect        : AsyncSelectController,
+	number             : InputNumberController,
 
 };
 

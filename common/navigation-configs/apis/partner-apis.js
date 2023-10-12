@@ -9056,6 +9056,12 @@ const partner = {
 			feature     : 'outstanding',
 		},
 		{
+			api         : 'send_outstanding_report_mail',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
 			api         : 'get_sage_ar_outstanding_stat',
 			access_type : 'private',
 			module      : 'outstanding',

@@ -11,6 +11,7 @@ function Messages({
 	conversationsDivRef = {},
 	scrollToLastMessage = () => {},
 	isGroup = false,
+	lastGroupUpdatedAt = 0,
 }) {
 	if (!internalRoomId) {
 		return (
@@ -37,6 +38,7 @@ function Messages({
 			scrollToLastMessage={scrollToLastMessage}
 			key={internalRoomId}
 			isGroup={isGroup}
+			lastGroupUpdatedAt={lastGroupUpdatedAt}
 		/>
 	);
 }
