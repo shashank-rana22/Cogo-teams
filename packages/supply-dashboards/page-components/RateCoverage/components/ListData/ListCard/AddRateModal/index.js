@@ -45,7 +45,7 @@ function AddRateModal({
 		destination_main_port_id : data?.destination_port?.is_icd,
 	};
 
-	const { DEFAULT_VALUES, fields } = useControls({ data, user_id, filter });
+	const { DEFAULT_VALUES, fields } = useControls({ data, user_id, filter, source });
 
 	const {
 		control,
@@ -83,6 +83,7 @@ function AddRateModal({
 	};
 
 	const handleSubmitData = async (formData) => {
+		console.log(formData, 'formData');
 		const rate_id = await createRate(formData);
 		if (rate_id && source === 'rate_feedback') {
 			const resp = await deleteFeedbackRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
@@ -97,7 +98,7 @@ function AddRateModal({
 			}
 		}
 		if (rate_id && source === 'live_booking') {
-			const resp = await updateFlashBookingRate({ data });
+			const resp = await updateFlashBookingRate({ data, formData, shipmemnt_data });
 			if (resp === TWO_HUNDERD) {
 				handleSuccessActions();
 			}
@@ -190,6 +191,7 @@ function AddRateModal({
 					control={control}
 					errors={errors}
 					showElements={showElements}
+					source={source}
 				/>
 			</Modal.Body>
 			<Modal.Footer>

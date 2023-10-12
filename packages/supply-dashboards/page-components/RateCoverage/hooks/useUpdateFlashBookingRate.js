@@ -6,13 +6,23 @@ const useUpdateFlashBookingRate = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const updateFlashBookingRate = async ({ data }) => {
+	const updateFlashBookingRate = async ({ data, formData, shipmemnt_data }) => {
+		console.log(data, '123');
+		const { shipment_id = '', source_id = '', sourced_by_id = '' } = data || {};
+		const { is_shipper_specific = false, schedule_type = '', line_items = [] } = formData || {};
+		const { summary } = shipmemnt_data || {};
 		try {
 			const resp = await trigger({
 				data: {
-					is_create_required : false,
-					shipment_id        : data?.shipment_id,
-					id                 : data?.source_id,
+					is_create_required      : false,
+					shipment_id,
+					id                      : source_id,
+					is_reverted             : true,
+					sourced_by_id,
+					advance_amount_currency : line_items[0].currency,
+					is_shipper_specific     : is_shipper_specific || undefined,
+					schedule_type,
+					importer_exporter_id    : is_shipper_specific === true ? summary?.importer_exporter_id : undefined,
 				},
 			});
 			if (resp) { return resp?.status; }

@@ -36,6 +36,7 @@ function ListCard({
 		destination_airport = '',
 		destination_location = '',
 		shipment_id = '',
+		reverted_status = '',
 	} = data;
 
 	const {
@@ -139,6 +140,13 @@ function ListCard({
 										{data?.shipping_line?.short_name}
 									</Pill>
 								</div>
+							)}
+							{reverted_status
+							&& (
+								<Pill size="md" color="green">
+									Reverted Status :
+									{startCase(reverted_status)}
+								</Pill>
 							)}
 						</div>
 					</div>

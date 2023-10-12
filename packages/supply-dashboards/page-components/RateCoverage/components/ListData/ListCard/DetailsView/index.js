@@ -15,13 +15,16 @@ function DetailsView({
 	const [showServiceDetails, setShowServiceDetails] = useState(false);
 	const handleDetailView = () => {
 		setShowServiceDetails(!showServiceDetails);
-		if (source === 'live_booking') {
-			return getShipment();
+		if (!showServiceDetails) {
+			if (source === 'live_booking') {
+				return getShipment();
+			}
+			if (source === 'rate_feedback') {
+				return getFeedback();
+			}
+			return getRequest();
 		}
-		if (source === 'rate_feedback') {
-			return getFeedback();
-		}
-		return getRequest();
+		return null;
 	};
 
 	return (
@@ -44,9 +47,17 @@ function DetailsView({
 				size="md"
 				onClick={handleDetailView}
 			>
-				{showServiceDetails ? 'Hide Details' : 'View Details'}
-				{showServiceDetails ? <IcMArrowUp style={{ margin: '-2px 2px' }} />
-					: <IcMArrowDown style={{ margin: '-2px 2px' }} />}
+				{showServiceDetails ? (
+					<>
+						Hide Details
+						<IcMArrowUp style={{ margin: '-2px 2px' }} />
+					</>
+				) : (
+					<>
+						View Details
+						<IcMArrowDown style={{ margin: '-2px 2px' }} />
+					</>
+				)}
 			</div>
 		</div>
 	);

@@ -7,6 +7,7 @@ const ftlControls = ({
 	data,
 	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
+	source,
 }) => {
 	const controls = [
 		{
@@ -260,8 +261,16 @@ const ftlControls = ({
 			heading     : 'Remarks',
 			className   : 'primary lg ',
 		},
+		source === 'live_booking'
+			? {
+				name  : 'is_shipper_specific',
+				label : 'Shipper Specific Rate',
+				type  : 'checkbox',
+				span  : 4,
+			}
+			: null,
 	];
-	return controls;
+	return controls.filter((control) => control !== null);
 };
 
 export default ftlControls;

@@ -10,6 +10,7 @@ const trailerControls = ({
 	originLocationOptions, destinationLocationOptions,
 	user_id,
 	listPartnerUserOptions,
+	source,
 }) => {
 	const controls = [
 		{
@@ -259,7 +260,14 @@ const trailerControls = ({
 				required: true,
 			},
 		},
-
+		source === 'live_booking'
+			? 			{
+				name  : 'is_shipper_specific',
+				label : 'Shipper Specific Rate',
+				type  : 'checkbox',
+				span  : 4,
+			}
+			: null,
 		{
 			name        : 'remarks',
 			placeholder : 'Enter Remarks',
@@ -269,7 +277,7 @@ const trailerControls = ({
 			className   : 'primary lg ',
 		},
 	];
-	return controls;
+	return controls.filter((control) => control !== null);
 };
 
 export default trailerControls;

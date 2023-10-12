@@ -9,6 +9,7 @@ import {
 	SingleDateRangeController,
 	TextAreaController,
 	MultiselectController,
+	CheckboxController,
 } from '@cogoport/forms';
 
 import DepartureDateSelectController from './DepartureDateSelect/index';
@@ -50,6 +51,9 @@ const getElementController = (type = 'text') => {
 
 		case 'multiSelect':
 			return MultiselectController;
+
+		case 'checkbox':
+			return CheckboxController;
 
 		default:
 			return null;
