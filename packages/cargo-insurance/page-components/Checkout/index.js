@@ -1,11 +1,12 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import FormItem from '../../common/FormItem';
 import Header from '../../common/Header';
 import { getRegistrationControls } from '../../configurations/insuranceControls';
+import useCheckout from '../../hooks/useCheckout';
 import useCheckoutSend from '../../hooks/useCheckoutSend';
 import useDraft from '../../hooks/useDraft';
 
@@ -23,16 +24,25 @@ function Checkout() {
 		isOpen: false,
 	});
 
+	const formRef = useRef({});
+
 	const formHook = useForm({
 		defaultValues: {
 			riskCoverage: 'ALL_RISK',
 		},
 	});
-	const { handleSubmit } = formHook;
+	const { handleSubmit, getValues } = formHook;
 
-	const { getLoading, draftData = {} } = useDraft({});
-	const { loading, submitHandler, formRef } = useCheckoutSend({ setConfirmSuccess, draftData, billingType });
+	const {
+		getLoading, draftData = {}, loading:saveDraftLoading,
+		saveAsDraft,
+	} = useDraft({ getValues, formRef, billingType });
 
+	useCheckout({ draftData, formHook, setBillingType });
+
+	const { loading, submitHandler } = useCheckoutSend({ setConfirmSuccess, draftData, billingType, formRef });
+
+	const { metadata = {} } = draftData || {};
 	const controls = getRegistrationControls({ billingType, t });
 
 	return (
@@ -48,6 +58,7 @@ function Checkout() {
 							billingType={billingType}
 							setBillingType={setBillingType}
 							orgId={draftData?.organizationId}
+							preSelectedAddress={metadata?.selectedAddress}
 							ref={(r) => { formRef.current.address = r; }}
 						/>
 
@@ -62,10 +73,20 @@ function Checkout() {
 					<SideBar {...draftData} />
 				</div>
 
-				<FormFields formHook={formHook} billingType={billingType} incoterm={draftData?.incotermResponse} />
+				<FormFields formHook={formHook} billingType={billingType} {...draftData} />
 
 				<div className={styles.footer}>
 					<Button
+						themeType="accent"
+						loading={saveDraftLoading}
+						className={styles.save_draft_btn}
+						onClick={saveAsDraft}
+					>
+						Save As Draft
+					</Button>
+
+					<Button
+						disabled={saveDraftLoading}
 						onClick={handleSubmit(() => setConfirmSuccess({ isOpen: true, isConfirm: true }))}
 					>
 						{t('cargoInsurance:confirm_purchase')}

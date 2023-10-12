@@ -115,6 +115,8 @@ const useInsurance = ({ activeTab, organization = {}, formValues = {}, setActive
 			setValue('hsCode', formValues?.hsCode);
 			setValue('currency', formValues?.invoiceCurrency);
 			setValue('cargoValue', formValues?.invoiceValue);
+			formValueRef.current.origin_point = formValues?.metadata?.origin;
+			formValueRef.current.destination_point = formValues?.metadata?.destination;
 		}
 	}, [formValues, setValue, setActiveTab]);
 

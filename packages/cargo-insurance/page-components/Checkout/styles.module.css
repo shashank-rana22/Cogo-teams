@@ -33,4 +33,8 @@
 .footer {
 	display: flex;
 	justify-content: flex-end;
+
+	.save_draft_btn {
+		margin-right: 20px;
+	}
 }

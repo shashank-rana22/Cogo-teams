@@ -45,12 +45,14 @@ function Insurance() {
 						/>
 					</div>
 
-					<div className={styles.personal_detail}>
-						<PersonalDetail
-							pocDetails={pocDetails}
-							ref={(r) => { personalDetailRef.current = r; }}
-						/>
-					</div>
+					{!isEmpty(rateResponse) ? (
+						<div className={styles.personal_detail}>
+							<PersonalDetail
+								pocDetails={pocDetails}
+								ref={(r) => { personalDetailRef.current = r; }}
+							/>
+						</div>
+					) : null}
 				</div>
 
 				<div className={styles.footer}>

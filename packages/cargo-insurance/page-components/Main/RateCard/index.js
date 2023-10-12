@@ -1,6 +1,7 @@
 import { cl, Checkbox } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
 import RateCardInfo from './RateCardInfo.';
@@ -11,6 +12,8 @@ const SINGLE_RATE = 1;
 
 function RateCard({ data = [], loading = false, selectedRateCard, setSelectedRateCard }) {
 	const { t } = useTranslation(['cargoInsurance']);
+
+	if (isEmpty(data)) return null;
 
 	return (
 		<div className={styles.main_container}>

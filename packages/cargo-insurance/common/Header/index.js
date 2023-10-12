@@ -39,19 +39,21 @@ const getFormValues = ({ src, metadata, rateRequest, invoiceDetails, cargoDetail
 
 	if (src === 'checkout') {
 		return ({
-			...invoiceDetails,
+			...(invoiceDetails || {}),
 			hsCode      : cargoDetails?.hsCode,
 			origin      : origin?.id,
 			destination : destination?.id,
 			transitMode,
+			metadata,
 		});
 	}
 
 	return ({
-		...rateRequest,
+		...(rateRequest || {}),
 		origin      : origin?.id,
 		destination : destination?.id,
 		transitMode,
+		metadata,
 	});
 };
 
@@ -64,7 +66,6 @@ function Header({
 	const { t } = useTranslation(['cargoInsurance']);
 
 	const [showForm, setShowForm] = useState(false);
-
 	const orgDetails = {
 		user_id         : userId,
 		organization_id : organizationId,

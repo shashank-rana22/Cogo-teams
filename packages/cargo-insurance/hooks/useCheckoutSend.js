@@ -2,7 +2,6 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, upperCase } from '@cogoport/utils';
-import { useRef } from 'react';
 
 const getPayload = ({ formData = {}, draftData = {}, selectedAddress = {}, performedBy = '', billingType }) => {
 	const {
@@ -76,10 +75,8 @@ const getPayload = ({ formData = {}, draftData = {}, selectedAddress = {}, perfo
 	};
 };
 
-const useCheckoutSend = ({ setConfirmSuccess, draftData = {}, billingType }) => {
+const useCheckoutSend = ({ setConfirmSuccess, draftData = {}, billingType, formRef }) => {
 	const { user } = useSelector((state) => state.profile);
-
-	const formRef = useRef({});
 
 	const [{ loading }, trigger] = useRequestBf({
 		method  : 'post',

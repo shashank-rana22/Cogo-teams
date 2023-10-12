@@ -1,19 +1,20 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
-import { upperCase } from '@cogoport/utils';
+import { upperCase, isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 const START_INDEX = 0;
 const MAX = 2;
 
-function useAddress({ billingType, orgId = '' }) {
+function useAddress({ billingType, orgId = '', preSelectedAddress = {}, setSelectedAddress }) {
 	const [addressData, setAddressData] = useState({
 		remainingAddress : [],
 		mainAddress      : [],
 	});
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading, data: addressList }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_address_for_insurance',
 	}, { manual: true });
@@ -32,7 +33,7 @@ function useAddress({ billingType, orgId = '' }) {
 				remainingAddress : data.slice(MAX),
 			});
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			if (error?.code !== 'ERR_CANCELED') Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 
@@ -42,6 +43,22 @@ function useAddress({ billingType, orgId = '' }) {
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [billingType, orgId]);
+
+	useEffect(() => {
+		if (!isEmpty(preSelectedAddress) && !isEmpty(addressList)) {
+			setSelectedAddress(preSelectedAddress);
+			const selectedAddIndex = addressList.findIndex((ele) => ele?.id === preSelectedAddress?.id);
+			const firstAddress = addressList[GLOBAL_CONSTANTS.zeroth_index];
+
+			addressList[selectedAddIndex] = firstAddress;
+			addressList[GLOBAL_CONSTANTS.zeroth_index] = preSelectedAddress;
+
+			setAddressData({
+				mainAddress      : addressList.slice(START_INDEX, MAX),
+				remainingAddress : addressList.slice(MAX),
+			});
+		}
+	}, [addressList, preSelectedAddress, setSelectedAddress]);
 
 	return {
 		addressData, loading, setAddressData,

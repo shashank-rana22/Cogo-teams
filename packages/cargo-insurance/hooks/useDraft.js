@@ -2,54 +2,11 @@ import { Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { upperCase } from '@cogoport/utils';
 import { useRef } from 'react';
 
-const getPayload = ({ data = {}, pocDetails, performedBy, policySearchId }) => {
-	const { firstName, lastName, email, phoneNo } = pocDetails || {};
-	const { userId = '', organizationId = '', metadata = {}, rateRequest = {}	} = data || {};
+import { getPayloadForDraft, getPayloadForSaveAsDraft } from '../helper/saveDraftPayload';
 
-	const {
-		invoiceValue
-		= '', invoiceCurrency = '', hsCode = '',
-		destinationCountryId = '', originCountryId = '',
-	} = rateRequest || {};
-
-	const { origin = {}, destination = {}, transitMode = '' } = metadata || {};
-
-	return {
-		userId,
-		organizationId,
-		source     : 'ADMIN',
-		pocDetails : {
-			insuredFirstName : firstName,
-			insuredLastName  : lastName,
-			email,
-			phoneCode        : phoneNo?.country_code,
-			phoneNo          : phoneNo?.number,
-		},
-		billingParty: {
-			billingType: 'CORPORATE',
-		},
-		invoiceDetails: {
-			invoiceCurrency,
-			invoiceValue,
-		},
-		cargoDetails: {
-			originCountryId,
-			destinationCountryId,
-			hsCode,
-			transitMode       : upperCase(transitMode),
-			destinationPortId : origin?.id,
-			originPortId      : destination?.id,
-		},
-		performedBy,
-		policySearchId,
-		metadata,
-	};
-};
-
-function useDraft({ data = {} }) {
+function useDraft({ data = {}, getValues = () => {}, formRef = {}, billingType = '' }) {
 	const { query, push } = useRouter();
 	const { policySearchId = '', draftId = '' } = query;
 
@@ -73,13 +30,33 @@ function useDraft({ data = {} }) {
 	}, { manual: !draftId });
 
 	const saveDraft = async ({ pocDetails }) => {
-		const payload = getPayload({ data, pocDetails, performedBy: user?.id, policySearchId });
+		const payload = getPayloadForDraft({ data, pocDetails, performedBy: user?.id, policySearchId });
 		try {
 			const resp = await trigger({
 				data: payload,
 			});
 			const { id } = resp?.data || {};
 			push(`/cargo-insurance/${policySearchId}/${id}`);
+		} catch (error) {
+			Toast.error(error.response?.data?.message);
+		}
+	};
+
+	const saveAsDraft = async () => {
+		const payload = getPayloadForSaveAsDraft({
+			draftData,
+			getValues,
+			formRef,
+			billingType,
+			performedBy: user?.id,
+			draftId,
+		});
+
+		try {
+			await trigger({
+				data: payload,
+			});
+			Toast.success('Draft Saved successfully');
 		} catch (error) {
 			Toast.error(error.response?.data?.message);
 		}
@@ -103,7 +80,7 @@ function useDraft({ data = {} }) {
 	};
 
 	return {
-		loading, submitHandler, personalDetailRef, getLoading, draftData,
+		loading, submitHandler, personalDetailRef, getLoading, draftData, saveAsDraft,
 	};
 }
 

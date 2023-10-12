@@ -5,11 +5,11 @@ import { getInsuranceControls, getFileControls } from '../../../configurations/i
 
 import styles from './styles.module.css';
 
-function FormFields({ formHook = {}, billingType = '', incoterm = {} }) {
+function FormFields({ formHook = {}, billingType = '', incoterm = {}, verificationDoc = {} }) {
 	const { t } = useTranslation(['cargoInsurance']);
 
 	const controls = getInsuranceControls({ incoterm, t });
-	const fileControls = getFileControls({ billingType, t });
+	const fileControls = getFileControls({ billingType, t, verificationDoc });
 	return (
 		<div className={styles.container}>
 			<p className={styles.form_title}>{t('cargoInsurance:form_field_title_2')}</p>

@@ -50,6 +50,7 @@ function AddressCard({
 						width={24}
 						height={24}
 						className={styles.globe_icon}
+						alt="globe"
 					/>
 				</div>
 			</div>

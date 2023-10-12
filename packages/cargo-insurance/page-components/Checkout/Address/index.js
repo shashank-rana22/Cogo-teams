@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 const MAX_ADDRESS_TO_DISPLAY = 2;
 
-function Address({ billingType, setBillingType, orgId = '' }, ref) {
+function Address({ billingType, setBillingType, orgId = '', preSelectedAddress = {} }, ref) {
 	const { t } = useTranslation(['cargoInsurance']);
 
 	const [selectedAddress, setSelectedAddress] = useState({});
@@ -22,7 +22,11 @@ function Address({ billingType, setBillingType, orgId = '' }, ref) {
 		openModal : false,
 	});
 
-	const { addressData, setAddressData, loading } = useAddress({ billingType, orgId });
+	const {
+		addressData, setAddressData,
+		loading,
+	} = useAddress({ billingType, setSelectedAddress, orgId, preSelectedAddress });
+
 	const { mainAddress = [], remainingAddress = [] } = addressData || {};
 
 	useImperativeHandle(ref, () => () => selectedAddress, [selectedAddress]);
@@ -65,7 +69,7 @@ function Address({ billingType, setBillingType, orgId = '' }, ref) {
 				</div>
 			</div>
 
-			{isEmpty(mainAddress) ? (
+			{isEmpty(mainAddress) && !loading ? (
 				<div className={styles.empty_state}>
 					<IcCVerySad width={30} height={30} />
 					<h2>No Address Found</h2>

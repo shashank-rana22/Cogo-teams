@@ -149,83 +149,94 @@ const getInsuranceControls = ({ incoterm = {}, t }) => {
 	]);
 };
 
-const getFileControls = ({ billingType = '', t }) => ([
-	{
-		name       : 'invoiceDoc',
-		label      : t('cargoInsurance:insurance_control_invoice_doc'),
-		type       : 'fileUpload',
-		size       : 'sm',
-		uploadDesc : t('cargoInsurance:insurance_control_invoice_doc_desc'),
-		uploadIcon : (
-			<Image
-				src={GLOBAL_CONSTANTS.image_url.upload_icon}
-				width={40}
-				height={40}
-				alt={t('cargoInsurance:upload')}
-			/>
-		),
-		rules: {
-			required: true,
-		},
-	},
-	{
-		name       : 'panDoc',
-		label      : t('cargoInsurance:insurance_control_pan_doc'),
-		type       : 'fileUpload',
-		size       : 'sm',
-		uploadDesc : t('cargoInsurance:insurance_control_pan_doc_desc'),
-		uploadIcon : (
-			<Image
-				src={GLOBAL_CONSTANTS.image_url.upload_icon}
-				width={40}
-				height={40}
-				alt={t('cargoInsurance:upload')}
-			/>
-		),
-		rules: {
-			required: true,
-		},
+const getFileControls = ({ billingType = '', t, verificationDoc = {} }) => {
+	const { aadharDoc = {}, invoiceDoc = {}, panDoc = {}, gstDoc = {} } = verificationDoc || {};
 
-	},
-	{
-		name       : 'aadharDoc',
-		label      : t('cargoInsurance:insurance_control_aadhar_doc'),
-		type       : 'fileUpload',
-		size       : 'sm',
-		uploadDesc : t('cargoInsurance:insurance_control_aadhar_doc_desc'),
-		uploadIcon : (
-			<Image
-				src={GLOBAL_CONSTANTS.image_url.upload_icon}
-				width={40}
-				height={40}
-				alt={t('cargoInsurance:upload')}
-			/>
-		),
-		rules: {
-			required: true,
-		},
-		showEle: billingType === 'Individual',
+	return ([
+		{
+			name       : 'invoiceDoc',
+			label      : t('cargoInsurance:insurance_control_invoice_doc'),
+			type       : 'fileUpload',
+			size       : 'sm',
+			uploadDesc : t('cargoInsurance:insurance_control_invoice_doc_desc'),
+			uploadIcon : (
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.upload_icon}
+					width={40}
+					height={40}
+					alt={t('cargoInsurance:upload')}
+				/>
+			),
+			defaultValues: invoiceDoc?.url,
 
-	},
-	{
-		name       : 'gstDoc',
-		label      : t('cargoInsurance:insurance_control_gst_doc'),
-		type       : 'fileUpload',
-		size       : 'sm',
-		uploadDesc : t('cargoInsurance:insurance_control_gst_doc_desc'),
-		uploadIcon : (
-			<Image
-				src={GLOBAL_CONSTANTS.image_url.upload_icon}
-				width={40}
-				height={40}
-				alt={t('cargoInsurance:upload')}
-			/>
-		),
-		rules: {
-			required: true,
+			rules: {
+				required: true,
+			},
 		},
-		showEle: billingType === 'Corporate',
-	},
-]);
+		{
+			name       : 'panDoc',
+			label      : t('cargoInsurance:insurance_control_pan_doc'),
+			type       : 'fileUpload',
+			size       : 'sm',
+			uploadDesc : t('cargoInsurance:insurance_control_pan_doc_desc'),
+			uploadIcon : (
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.upload_icon}
+					width={40}
+					height={40}
+					alt={t('cargoInsurance:upload')}
+				/>
+			),
+			defaultValues: panDoc?.url,
+
+			rules: {
+				required: true,
+			},
+
+		},
+		{
+			name       : 'aadharDoc',
+			label      : t('cargoInsurance:insurance_control_aadhar_doc'),
+			type       : 'fileUpload',
+			size       : 'sm',
+			uploadDesc : t('cargoInsurance:insurance_control_aadhar_doc_desc'),
+			uploadIcon : (
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.upload_icon}
+					width={40}
+					height={40}
+					alt={t('cargoInsurance:upload')}
+				/>
+			),
+			defaultValues : aadharDoc?.url,
+			rules         : {
+				required: true,
+			},
+			showEle: billingType === 'Individual',
+
+		},
+		{
+			name       : 'gstDoc',
+			label      : t('cargoInsurance:insurance_control_gst_doc'),
+			type       : 'fileUpload',
+			size       : 'sm',
+			uploadDesc : t('cargoInsurance:insurance_control_gst_doc_desc'),
+			uploadIcon : (
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.upload_icon}
+					width={40}
+					height={40}
+					alt={t('cargoInsurance:upload')}
+				/>
+			),
+			defaultValues: gstDoc?.url,
+
+			rules: {
+				required: true,
+			},
+			showEle: billingType === 'Corporate',
+		},
+	]);
+};
 
 export { getInsuranceControls, getRegistrationControls, getFileControls };
