@@ -90,6 +90,7 @@ const GLOBAL_CONSTANTS = {
 			yyyy                : 'yyyy',
 			'MMM, dd'           : 'MMM, dd',
 			EEEE                : 'EEEE',
+			eee                 : 'eee',
 			'MMM dd yyyy'       : 'MMM dd yyyy',
 		},
 		time: {
@@ -257,7 +258,12 @@ const GLOBAL_CONSTANTS = {
 		'August', 'September', 'October', 'November', 'December'],
 
 	image_url: {
-		empty_state_margins_url: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
+		ship_icon               : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipIcon.jpg',
+		truck_icon              : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/truckIcon.png',
+		air_icon2               : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/airplane.png',
+		loading                 : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/loading.svg',
+		extract_data            : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/Data-extraction.jpg',
+		empty_state_margins_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
 		empty_state_margins_breakup_url:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-nonfunded.svg',
 		general_icon              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg',
@@ -329,6 +335,7 @@ const GLOBAL_CONSTANTS = {
 		whatsapp_icon        : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg',
 		email_icon           : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg',
 		login_failed         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/login_failed.png',
+		map_loading          : 'https://cogoport-maps.s3.ap-south-1.amazonaws.com/world+(2).svg',
 		checkout_failed      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/checkout_failed.png',
 		email_clicked        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email_clicked.png',
 		abandon_shipmemts    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/abandon_shipmemts.png',
