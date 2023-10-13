@@ -30,11 +30,7 @@ function RateRevertCard({
 	});
 
 	return (
-		<div
-			role="presentation"
-			className={styles.container}
-			onClick={handleOpenMessage}
-		>
+		<div className={styles.container}>
 			<ServiceProviderDetails
 				cardData={cardData}
 				setShipmentPopover={setShipmentPopover}
@@ -45,10 +41,10 @@ function RateRevertCard({
 
 			<ShipmentDetails
 				cardData={cardData}
+				handleOpenMessage={handleOpenMessage}
 			/>
-			<ShipmentProgress
-				cardData={cardData}
-			/>
+
+			<ShipmentProgress cardData={cardData} />
 
 			<div className={styles.card_footer}>
 				<div className={styles.actions_container}>

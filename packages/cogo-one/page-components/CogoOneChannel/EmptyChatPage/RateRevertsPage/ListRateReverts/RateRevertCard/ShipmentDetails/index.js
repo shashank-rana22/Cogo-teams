@@ -33,7 +33,7 @@ function PortDetails({ details = {} }) {
 	);
 }
 
-function ShipmentDetails({ cardData = {} }) {
+function ShipmentDetails({ cardData = {}, handleOpenMessage = () => {} }) {
 	const { service_type = '', trade_type = '', shipping_line = {} } = cardData || {};
 
 	const {
@@ -75,7 +75,7 @@ function ShipmentDetails({ cardData = {} }) {
 	const ActiveIcon = ICONS_MAPPING[service_type] || ICONS_MAPPING.default;
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} role="presentation" onClick={handleOpenMessage}>
 			<div className={styles.shipping_details}>
 				<div className={styles.service_type}>
 					<div className={styles.icon_container}>
