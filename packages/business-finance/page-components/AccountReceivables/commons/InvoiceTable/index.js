@@ -6,7 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Filters from '../../../commons/Filters/index.tsx';
-import InvoiceJourney from '../../components/Dashboard/InvoiceJourney';
+import SalesFunnelView from '../../components/Invoice/SalesFunnelView';
 import completedColumn from '../../configs/Completed_table.tsx';
 import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate.ts';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard.ts';
@@ -147,7 +147,7 @@ function InvoiceTable({
 
 	return (
 		<div>
-			{invoiceJourney ? <InvoiceJourney entityCode={entityCode} /> : null}
+			{invoiceJourney ? <SalesFunnelView entityCode={entityCode} /> : null}
 			{showFilters ? (
 				<div className={styles.filter_container}>
 					<div className={styles.filter_div}>
