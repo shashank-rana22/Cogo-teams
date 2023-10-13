@@ -17,22 +17,21 @@ function ShowModal({
 	reset = () => {},
 }) {
 	const [showErrorModal, setShowErrorModal] = useState(false);
-	const DEFAULT_VALUES = {};
 
 	const {
 		control: radioControl,
 		handleSubmit: radiohandleSubmit,
 		formState: { errors: radioErrors },
 		reset: radioReset,
-	} = useForm({
-		defaultValues: DEFAULT_VALUES,
-	});
+	} = useForm();
+
 	const closeModal = () => {
 		setShowModal(false);
 		setShowErrorModal(false);
 		radioReset();
 	};
-	const useBudgetAllocationRefetch = () => {
+
+	const budgetAllocationRefetch = () => {
 		setShowErrorModal(false);
 		setShowModal(false);
 		refetch();
@@ -41,9 +40,10 @@ function ShowModal({
 		radioReset();
 	};
 
-	const { fetchCreateDataApi = () => {}, loading = false } = useBudgetAllocation(
-		useBudgetAllocationRefetch,
-	);
+	const { fetchCreateDataApi = () => {}, loading = false } = useBudgetAllocation({
+		refetch: budgetAllocationRefetch,
+	});
+
 	const radiohandleSubmitFunction = (data) => {
 		let payload = { ...formData, role_ids: [formData.role_ids] };
 		if (data.radio === 'allocate_budget_after_completion_of_active_budget') {
@@ -52,8 +52,10 @@ function ShowModal({
 		if (data.radio === 'deactivate_the_active_budget_and_allocate') {
 			payload = { ...payload, overlap_save: 'activate_now' };
 		}
+
 		fetchCreateDataApi({ payload });
 	};
+
 	return (
 		showModal ? (
 			<Modal show showCloseIcon onClose={closeModal}>

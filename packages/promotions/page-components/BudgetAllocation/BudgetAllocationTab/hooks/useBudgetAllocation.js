@@ -4,9 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 import toastApiError from '../utils/toastApiError';
 
-const useBudgetAllocation = (
-	refetch = () => {},
-) => {
+const useBudgetAllocation = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/create_promotion_budget_allocation',

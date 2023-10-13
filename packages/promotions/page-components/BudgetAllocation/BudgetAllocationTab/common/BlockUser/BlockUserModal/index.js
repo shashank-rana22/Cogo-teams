@@ -12,7 +12,7 @@ function BlockUserModal({ block = false, setBlock = () => {}, item = {}, refetch
 		setBlock(false);
 		refetch();
 	};
-	const { loading = true, blockUserBudget = () => {} } = useBlockUserBudgetAllocation(blockAndRefetch);
+	const { loading = true, blockUserBudget = () => {} } = useBlockUserBudgetAllocation({ refetch: blockAndRefetch });
 	return (
 		block
 			? (

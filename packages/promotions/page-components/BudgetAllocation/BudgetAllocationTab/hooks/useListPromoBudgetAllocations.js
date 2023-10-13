@@ -1,9 +1,10 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-const useListPromoBudgetAllocation = ({ filters, setFilters }) => {
-	const [List, setList] = useState([]);
+import toastApiError from '../utils/toastApiError';
+
+const useListPromoBudgetAllocation = ({ filters = {}, setFilters = () => {} }) => {
+	const [list, setList] = useState([]);
 	const [paginationData, setPaginationData] = useState({});
 
 	const [{ loading }, trigger] = useRequest(
@@ -22,25 +23,25 @@ const useListPromoBudgetAllocation = ({ filters, setFilters }) => {
 		{ manual: true },
 	);
 
-	const ListPromoBudget = useCallback(async () => {
+	const triggerPromoBudget = useCallback(async () => {
 		try {
-			const { data } = await trigger();
-			const { list = [], ...paginationdata } = data;
-			setList(list);
+			const res = await trigger();
+			const { list:resList = [], ...paginationdata } = res?.data || {};
+			setList(resList);
 			setPaginationData(paginationdata);
 		} catch (error) {
-			Toast.error(error.message);
+			toastApiError(error);
 		}
 	}, [trigger]);
 
 	const refetch = () => {
 		setFilters((state) => ({ ...state, page: 1 }));
-		ListPromoBudget();
+		triggerPromoBudget();
 	};
 
 	useEffect(() => {
-		ListPromoBudget();
-	}, [filters.page, filters.activeTab, filters.role, ListPromoBudget]);
+		triggerPromoBudget();
+	}, [filters.page, filters.activeTab, filters.role, triggerPromoBudget]);
 
 	useEffect(() => {
 		setFilters((state) => ({ ...state, page: 1 }));
@@ -48,7 +49,7 @@ const useListPromoBudgetAllocation = ({ filters, setFilters }) => {
 
 	return {
 		loading,
-		promoBudgetList: List,
+		promoBudgetList: list,
 		paginationData,
 		refetch,
 	};

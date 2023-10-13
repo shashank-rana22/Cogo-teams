@@ -7,54 +7,31 @@ import useUpdateBudgetAllocation from '../../../../hooks/useUpdateBudgetAllocati
 
 import styles from './styles.module.css';
 
-const ZERO = 0;
-
-function AllotedAmount({ item = {}, refetch, selectedDetails }) {
+function AllotedAmount({ item = {}, refetch = () => { }, selectedDetails = {} }) {
 	const [showSaveLink, setShowSaveLink] = useState(false);
 
-	const [inputValue, setInputValue] = useState(ZERO);
+	const [inputValue, setInputValue] = useState(0);
+
 	const { updateBudget = () => {}, loading } = useUpdateBudgetAllocation({
 		setShowSaveLink,
-		refetch,
+		refetch: () => {
+			refetch();
+			setShowSaveLink(false);
+		},
 	});
+
 	const handleSave = (value) => {
-		updateBudget(value, inputValue);
+		updateBudget({ value, inputValue });
 	};
 
 	const handleShow = () => {
-		if (item.status !== 'deactivated') {
+		if (item?.status !== 'deactivated') {
 			setShowSaveLink(true);
 		}
 	};
+
 	return (
 		<div className={styles.amount_div}>
-			{!showSaveLink ? (
-				<div className={styles.styled_div}>
-					<div className={styles.amount}>
-						{formatAmount({
-							amount   : item?.budget_amount || ZERO,
-							currency : item?.budget_amount_currency,
-							options  : {
-								style                 : 'currency',
-								currencyDisplay       : 'symbol',
-								maximumFractionDigits : 0,
-							},
-						})}
-					</div>
-					{selectedDetails?.status !== 'deactivated' ? (
-						<Button
-							className={styles.edit_button}
-							style={{
-								cursor: item.status === 'deactivated' ? 'no-drop' : 'pointer',
-							}}
-							disabled={loading}
-							onClick={handleShow}
-						>
-							<IcMPlus height={21} width={21} className={styles.addicon} />
-						</Button>
-					) : null}
-				</div>
-			) : null}
 			{showSaveLink ? (
 				<>
 					<div className={styles.input_styled}>
@@ -81,7 +58,35 @@ function AllotedAmount({ item = {}, refetch, selectedDetails }) {
 						</Button>
 					</div>
 				</>
-			) : null}
+			)
+				: (
+					<div className={styles.styled_div}>
+						<div className={styles.amount}>
+							{formatAmount({
+								amount   : item?.budget_amount || 0,
+								currency : item?.budget_amount_currency,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'symbol',
+									maximumFractionDigits : 0,
+								},
+							})}
+						</div>
+
+						{selectedDetails?.status !== 'deactivated' ? (
+							<Button
+								className={styles.edit_button}
+								style={{
+									cursor: item.status === 'deactivated' ? 'no-drop' : 'pointer',
+								}}
+								disabled={loading}
+								onClick={handleShow}
+							>
+								<IcMPlus height={21} width={21} className={styles.addicon} />
+							</Button>
+						) : null}
+					</div>
+				)}
 		</div>
 	);
 }

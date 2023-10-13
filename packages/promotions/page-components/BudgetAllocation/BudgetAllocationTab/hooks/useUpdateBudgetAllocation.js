@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 
 import toastApiError from '../utils/toastApiError';
 
-const useUpdateBudgetAllocation = ({ setShowSaveLink = () => {}, refetch = () => {} }) => {
+const useUpdateBudgetAllocation = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/update_agent_budget_allocation',
@@ -11,8 +11,8 @@ const useUpdateBudgetAllocation = ({ setShowSaveLink = () => {}, refetch = () =>
 		{ manual: true },
 	);
 
-	const updateBudget = async (value, inputValue) => {
-		const { agent_id = '' } = value;
+	const updateBudget = async ({ value = {}, inputValue }) => {
+		const { agent_id = '' } = value || {};
 		try {
 			const payload = {
 				agent_id,
@@ -22,7 +22,6 @@ const useUpdateBudgetAllocation = ({ setShowSaveLink = () => {}, refetch = () =>
 				data: payload,
 			});
 			refetch();
-			setShowSaveLink(false);
 		} catch (error) {
 			toastApiError(error);
 		}

@@ -15,12 +15,12 @@ const TABS = [
 	{ name: 'active_budget', title: 'Active', key: 'active_budget' },
 	{ name: 'inactive_budget', title: 'Deactivated', key: 'inactive_budget' },
 ];
-const DEFAULT_VALUES = {};
 
 function BudgetAllocationTab() {
 	const [showAllocationCard, setShowAllocationCard] = useState(false);
 	const [showViewModal, setShowViewModal] = useState(false);
 	const [selectedDetails, setSelectedDetails] = useState({});
+
 	const [filters, setFilters] = useState({ activeTab: 'active_budget', role: '', page: 1 });
 
 	const {
@@ -28,7 +28,7 @@ function BudgetAllocationTab() {
 		watch: roleWatch,
 		setValue: roleSetValue,
 		errors: roleErrors,
-	} = useForm({ defaultValues: DEFAULT_VALUES });
+	} = useForm();
 
 	const {
 		loading,
@@ -67,10 +67,12 @@ function BudgetAllocationTab() {
 				setShowAllocationCard={setShowAllocationCard}
 				refetch={refetch}
 			/>
+
 			<div className={styles.tab_container}>
 				<div className={styles.select_wrapper}>
 					<Layout controls={RoleControls} control={roleControl} errors={roleErrors} />
 				</div>
+
 				{!showAllocationCard ? (
 					<div className={styles.allocate_button}>
 						<Button onClick={() => setShowAllocationCard((state) => !state)}>
@@ -78,6 +80,7 @@ function BudgetAllocationTab() {
 						</Button>
 					</div>
 				) : null}
+
 				<Tabs
 					activeTab={filters.activeTab}
 					onChange={(val) => (setFilters((state) => ({ ...state, activeTab: val })))}
@@ -94,12 +97,15 @@ function BudgetAllocationTab() {
 					))}
 				</Tabs>
 			</div>
-			<ViewModal
-				showViewModal={showViewModal}
-				setShowViewModal={setShowViewModal}
-				selectedDetails={selectedDetails}
-				refetchListBudgetAllocation={refetch}
-			/>
+
+			{showViewModal ? (
+				<ViewModal
+					showViewModal={showViewModal}
+					setShowViewModal={setShowViewModal}
+					selectedDetails={selectedDetails}
+					refetchListBudgetAllocation={refetch}
+				/>
+			) : null}
 		</div>
 	);
 }

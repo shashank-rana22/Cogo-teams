@@ -1,5 +1,6 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+
+import toastApiError from '../utils/toastApiError';
 
 const useDeactivatePromoBudget = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest(
@@ -21,7 +22,7 @@ const useDeactivatePromoBudget = ({ refetch = () => {} }) => {
 			});
 			refetch();
 		} catch (error) {
-			Toast.error(error.message);
+			toastApiError(error);
 		}
 	};
 
