@@ -5,12 +5,6 @@ import { useRequestBf } from '@cogoport/request';
 import toastApiError from '../../commons/toastApiError.ts';
 
 const useUpdateJobAuditStatus = ({ getPrePostShipmentQuotes = () => {} }) => {
-	// const { user_data: userData } = useSelector(({ profile }) => ({
-	// 	user_data: profile || {},
-	// }));
-
-	// const { user: { id: userId } = {} } = userData || {};
-
 	const [{ loading }, trigger] = useRequestBf({
 		url     : '/common/job-profitability/audit-job-profitability',
 		method  : 'POST',

@@ -14,7 +14,7 @@ function Body({
 	lineItemSectionOpen = {},
 }) {
 	const {
-		document_number = '', trade_party = '', document_date = '',
+		document_number = '', trade_party = '', document_date = '', document_status = '',
 		grand_total = '', quotation_state = '', id = '', line_items = [],
 	} = data;
 
@@ -45,7 +45,7 @@ function Body({
 									size="md"
 									className={cl`${quotation_state === 'INIT' ? styles.red : styles.green}`}
 								>
-									{quotation_state}
+									{document_status}
 								</Pill>
 							</div>
 						</div>

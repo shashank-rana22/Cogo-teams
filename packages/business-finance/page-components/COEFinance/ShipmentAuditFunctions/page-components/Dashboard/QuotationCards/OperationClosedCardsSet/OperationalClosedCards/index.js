@@ -3,6 +3,7 @@ import { IcMDummyCircle } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import SellBuyCards from '../../../../../commons/SellBuyCards';
+import { getCircleColor } from '../../../../../utils/getStyleAttributes';
 
 import styles from './styles.module.css';
 
@@ -13,6 +14,7 @@ function OperationalClosedCards({
 	getClosedTasks = () => {},
 	shipment_id = '',
 }) {
+	const finalStatus = data?.every((i) => i?.quotation_state === 'APPROVED');
 	return (
 		<div className={styles.single_card}>
 			<div className={styles.row}>
@@ -26,15 +28,18 @@ function OperationalClosedCards({
 						</div>
 						{loading ? <Placeholder height="60px" />
 							: (
-								<div style={{ display: 'flex', alignItems: 'center' }}>
+								<div style={{ display: 'flex', width: '100%' }}>
 									<div className={styles.vertical_timeline}>
 										<IcMDummyCircle
-											fill="#EE3425"
+											fill={getCircleColor(
+												finalStatus,
+											)}
 											height="20"
 											width="20"
+											style={{ marginBottom: '24px' }}
 										/>
-										<div className={styles.vertical_rule} />
 									</div>
+
 									<SellBuyCards
 										source="OPR"
 										type={type}

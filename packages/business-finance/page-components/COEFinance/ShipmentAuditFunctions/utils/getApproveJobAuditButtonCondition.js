@@ -3,7 +3,7 @@ const getApproveJobAuditBttnCondition = ({ quotationsData }) => {
 
 	const { BUY: oprClosedBuy = [], SELL: oprClosedSell = [] } = oprClosedData;
 	const { BUY: financeClosedBuy = [], SELL: financeClosedSell = [] } = financialClosedData;
-	const { BUY: prePostBuy = {}, prePostSell = {} } = prePostCheckoutData;
+	const { BUY: prePostBuy = {}, SELL: prePostSell = {} } = prePostCheckoutData;
 
 	const isOprClosedBuyQuotationApproved = (oprClosedBuy || []).every((i) => i?.quotation_state === 'APPROVED');
 	const isOprClosedSellQuotationApproved = (oprClosedSell || []).every((i) => i?.quotation_state === 'APPROVED');
@@ -35,7 +35,7 @@ const getApproveJobAuditBttnCondition = ({ quotationsData }) => {
     && isFinClosedQuotationsApproved
     && isPrePostQuotationsApproved;
 
-	return bttnDisableCondition;
+	return { bttnDisableCondition };
 };
 
 export default getApproveJobAuditBttnCondition;

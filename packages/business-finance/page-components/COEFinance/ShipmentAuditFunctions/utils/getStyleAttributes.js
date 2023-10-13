@@ -13,7 +13,7 @@ export const getTimelineClassNames = (quotationStatus, accordionState, currentAc
 };
 
 export const getCircleColor = (quotationStatus, accordionState, currentAccordion) => {
-	const currentAccordionState = accordionState[currentAccordion];
+	const currentAccordionState = accordionState?.[currentAccordion];
 
 	if (currentAccordionState && !quotationStatus) {
 		return '#000';
