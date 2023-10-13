@@ -108,28 +108,24 @@ function SpotSearch() {
 							/>
 						</div>
 
-						<div className={styles.sales_dashboard}>
-							<SalesDashboard
-								importer_exporter_id={organization?.organization_id}
-								service_type={selectedMode?.mode_value}
-								origin_location_id={location?.origin?.id}
-								destination_location_id={location?.destination?.id}
-								setLocation={setLocation}
-								organization={organization}
-								createSearch={createSearch}
-								createSearchLoading={loading}
-							/>
-						</div>
+						<SalesDashboard
+							importer_exporter_id={organization?.organization_id}
+							service_type={selectedMode?.mode_value}
+							origin_location_id={location?.origin?.id}
+							destination_location_id={location?.destination?.id}
+							setLocation={setLocation}
+							organization={organization}
+							createSearch={createSearch}
+							createSearchLoading={loading}
+						/>
 					</>
 				) : null}
 
-				<div className={styles.other_services}>
-					<OtherServices
-						selectedService={selectedService}
-						setSelectedService={setSelectedService}
-						setSelectedMode={setSelectedMode}
-					/>
-				</div>
+				<OtherServices
+					selectedService={selectedService}
+					setSelectedService={setSelectedService}
+					setSelectedMode={setSelectedMode}
+				/>
 
 				{isEmpty(selectedService) ? null : (
 					<div className={styles.locations}>
