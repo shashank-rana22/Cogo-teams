@@ -5,7 +5,7 @@ import {
 	densityRatioOptions,
 	flighOperationTypeOptions,
 	handlingtypeOptions, packagingTypeOptions, priceTypeOptions, rateTypeOptions,
-} from '../../../../../../constants/rateRevertsFilters';
+} from '../../../../configurations/helpers/constants';
 
 import styles from './styles.module.css';
 

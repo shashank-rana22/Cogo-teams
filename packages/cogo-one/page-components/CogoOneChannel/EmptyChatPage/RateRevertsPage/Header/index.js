@@ -3,8 +3,8 @@ import { IcMFilter } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
 
 import { SOURCE_OPTIONS } from '../../../../../constants/rateRevertsConstants';
-import FilterModal from '../FilterModal';
 
+import FilterModal from './FilterModal';
 import getSourceTags from './getSourceTags';
 import styles from './styles.module.css';
 

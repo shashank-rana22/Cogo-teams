@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 
 import useListRateJobs from '../../../../hooks/useListRateJobs';
 
-// import FilersModal from './FilersModal';
 import Header from './Header';
 import ListRateReverts from './ListRateReverts';
 import styles from './styles.module.css';
@@ -53,13 +52,6 @@ function RateRevertsPage({ mailProps = {} }) {
 					onPageChange={() => setParams((prev) => ({ ...prev, page: page + 1 }))}
 				/>
 			</div>
-			{/* <FilersModal
-				showFilters={showFilters}
-				setFilter={setParams}
-				filter={params}
-				setShowFilters={setShowFilters}
-				source={params?.source}
-			/> */}
 		</>
 	);
 }

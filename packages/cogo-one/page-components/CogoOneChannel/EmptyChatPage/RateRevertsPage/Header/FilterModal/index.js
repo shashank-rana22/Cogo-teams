@@ -1,18 +1,18 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import { serviceOptions } from '../../../../../constants/rateRevertsFilters';
-import { getFieldController } from '../../../../../utils/getFieldController';
+import SHIPMENT_TYPE_OPTIONS from '../../../../../../constants/shipmentTypes';
+import { getFieldController } from '../../../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
 const controls = [
 	{
-		label        : 'Select Services',
-		name         : 'service_type',
-		controllType : 'select',
-		placeholder  : 'select',
-		options      : serviceOptions,
+		label       : 'Select Services',
+		name        : 'service_type',
+		controlType : 'select',
+		placeholder : 'select',
+		options     : Object.values(SHIPMENT_TYPE_OPTIONS),
 	},
 ];
 
@@ -53,8 +53,8 @@ function FilterModal({ setParams = () => {}, setShowFilters = () => {} }) {
 	return (
 		<div>
 			{controls?.map((controlItem) => {
-				const { label = '', name = '', controllType = '' } = controlItem || {};
-				const Element = getFieldController(controllType);
+				const { label = '', name = '', controlType = '' } = controlItem || {};
+				const Element = getFieldController(controlType);
 
 				if (!Element) {
 					return null;
