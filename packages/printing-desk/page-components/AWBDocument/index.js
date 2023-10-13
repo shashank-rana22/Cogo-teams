@@ -1,7 +1,7 @@
-import ChargeDetails from '@cogoport/air-modules/components/AWBTemplate/ChargeDetails/index.js';
-import ContainerDetails from '@cogoport/air-modules/components/AWBTemplate/ContainerDetails/index.js';
-import ShipmentDetails from '@cogoport/air-modules/components/AWBTemplate/ShipmentDetails/index.js';
-import ShipperConsigneeDetails from '@cogoport/air-modules/components/AWBTemplate/ShipperConsigneeDetails/index.js';
+import ChargeDetails from '@cogoport/air-modules/components/AWBTemplate/ChargeDetails/index';
+import ContainerDetails from '@cogoport/air-modules/components/AWBTemplate/ContainerDetails/index';
+import ShipmentDetails from '@cogoport/air-modules/components/AWBTemplate/ShipmentDetails/index';
+import ShipperConsigneeDetails from '@cogoport/air-modules/components/AWBTemplate/ShipperConsigneeDetails/index';
 import { cl } from '@cogoport/components';
 import React, { createRef, useState } from 'react';
 

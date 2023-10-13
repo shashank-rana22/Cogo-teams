@@ -3,8 +3,6 @@
 	"version": "0.1.0",
 	"description": "Package for Business Finance",
 	"private": true,
-	"main": "dist/cjs/index.js",
-	"module": "dist/es/index.js",
 	"dependencies": {
 		"@cogoport/charts": "^1.0.1",
 		"@cogoport/components": "^1.0.432",

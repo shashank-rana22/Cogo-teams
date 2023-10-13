@@ -3,8 +3,8 @@ import { IcMArrowBack, IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import Filter from '../../../../commons/Filters/index.js';
-import StyledTable from '../../../../commons/StyledTable/index.js';
+import Filter from '../../../../commons/Filters/index';
+import StyledTable from '../../../../commons/StyledTable/index';
 import useViewDataList from '../../../hooks/useViewDataList';
 import { getSupplierData } from '../helper';
 

@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.js';
+import toastApiError from '../../../commons/toastApiError';
 
 const useGetCustomerOutstanding = ({ serialId = '', entityCode = '', orgSerialId = '' }) => {
 	const [

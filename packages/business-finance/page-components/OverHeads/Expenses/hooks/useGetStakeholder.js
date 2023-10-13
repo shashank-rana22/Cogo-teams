@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useContext, useEffect } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.js';
+import toastApiError from '../../../commons/toastApiError';
 import { EntityContext } from '../../commons/Contexts';
 
 const useGetStakeholder = ({ billId }) => {

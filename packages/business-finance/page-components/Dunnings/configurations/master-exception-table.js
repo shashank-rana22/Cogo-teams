@@ -3,8 +3,8 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
-import showOverflowingNumber from '../../commons/showOverflowingNumber.js';
-import GetSortingData from '../components/ExceptionsManagement/sorting.js';
+import showOverflowingNumber from '../../commons/showOverflowingNumber';
+import GetSortingData from '../components/ExceptionsManagement/sorting';
 
 import styles from './styles.module.css';
 

@@ -2,7 +2,7 @@ import { Input } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import React from 'react';
 
-import List from '../../../../commons/List/index.js';
+import List from '../../../../commons/List/index';
 import { RenderAction } from '../../../Invoices/InvoiceTable/RenderFunctions/RenderAction';
 import { RenderInvoiceDates } from '../../../Invoices/InvoiceTable/RenderFunctions/RenderInvoiceDates';
 import { RenderToolTip } from '../../../Invoices/InvoiceTable/RenderFunctions/RenderToolTip';

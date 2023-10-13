@@ -1,7 +1,7 @@
 import { useTicketsRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-import toastApiError from '../../commons/toastApiError.js';
+import toastApiError from '../../commons/toastApiError';
 
 const useGetConfigurationCategory = (shipmentData = {}) => {
 	const [{ data, loading }, trigger] = useTicketsRequest({

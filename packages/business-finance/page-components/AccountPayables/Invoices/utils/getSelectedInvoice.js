@@ -1,4 +1,4 @@
-import toastApiError from '../../../commons/toastApiError.js';
+import toastApiError from '../../../commons/toastApiError';
 
 const INCREEMENT_BY = 1;
 

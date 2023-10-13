@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useTranslation } from 'next-i18next';
 
-import toastApiError from '../../../commons/toastApiError.js';
+import toastApiError from '../../../commons/toastApiError';
 import { controls } from '../../Controller/Config/create-level-config';
 
 const DEFAULT_VALUE = 1;

@@ -6,8 +6,8 @@ import {
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import useGetWallet from '../../../../hook/useGetWallet.js';
-import Details from '../Details/index.js';
+import useGetWallet from '../../../../hook/useGetWallet';
+import Details from '../Details/index';
 import GetPills from '../GetPills';
 
 import styles from './styles.module.css';

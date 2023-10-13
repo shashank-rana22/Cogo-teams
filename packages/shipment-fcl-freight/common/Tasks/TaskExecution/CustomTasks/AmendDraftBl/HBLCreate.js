@@ -3,7 +3,7 @@ import { TradeDocTemplate } from '@cogoport/ocean-modules';
 import { omit } from '@cogoport/utils';
 import { forwardRef, useRef, useState } from 'react';
 
-import Form from './Form/index.js';
+import Form from './Form/index';
 import styles from './styles.module.css';
 
 const EXCLUDED_KEYS = ['container_number',

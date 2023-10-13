@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import toastApiError from '../../../commons/toastApiError.js';
+import toastApiError from '../../../commons/toastApiError';
 
 const useMergedPdf = ({ generateInvoice = () => {} }) => {
 	const { query = {} } = useSelector(({ general }) => ({ query: general.query }));

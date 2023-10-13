@@ -1,6 +1,6 @@
 import { useRequestBf } from '@cogoport/request';
 
-import toastApiError from '../../../commons/toastApiError.js';
+import toastApiError from '../../../commons/toastApiError';
 
 const useGetDocument = () => {
 	const [{ data: documentData, loading: billsLoading }, trigger] = useRequestBf(

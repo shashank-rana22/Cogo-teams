@@ -2,8 +2,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useShipmentIdView from '../../../hook/useShipmentIdView.js';
-import AccordianCards from '../../ShipmentIdView/AccordianCards/index.js';
+import useShipmentIdView from '../../../hook/useShipmentIdView';
+import AccordianCards from '../../ShipmentIdView/AccordianCards/index';
 
 function SIDView({
 	shipmentId = '',

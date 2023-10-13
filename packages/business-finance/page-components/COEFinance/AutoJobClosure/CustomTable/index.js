@@ -1,7 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import EmptyStateDocs from '../../../commons/EmptyStateDocs/index.js';
+import EmptyStateDocs from '../../../commons/EmptyStateDocs/index';
 import styles from '../styles.module.css';
 
 import ColumnCard from './ColumnCard/index';

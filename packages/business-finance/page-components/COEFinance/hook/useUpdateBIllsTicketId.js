@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-import toastApiError from '../../commons/toastApiError.js';
+import toastApiError from '../../commons/toastApiError';
 
 const useUpdateBillsTicketId = ({ setShowTicketModal = () => {}, refetch = () => {}, itemData = {} }) => {
 	const [{ loading }, trigger] = useRequestBf({

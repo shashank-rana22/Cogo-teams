@@ -1,8 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
-import NoData from './NoData/index.js';
-import PieData from './PieData/index.js';
+import NoData from './NoData/index';
+import PieData from './PieData/index';
 import styles from './styles.module.css';
 
 const SINGLE_DECREMENT = 1;
