@@ -2,6 +2,7 @@ import { Button, ButtonIcon } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
 
 import DiscountForm from '../../../../common/ConfigForm/DiscountForm';
@@ -9,12 +10,13 @@ import ShipmentForm from '../../../../common/ConfigForm/ShipmentForm';
 import Layout from '../../../../common/Layout';
 import UpdateModal from '../../../../common/UpdateModal';
 
-import controls from './controls';
+import getControls from './controls';
 import styles from './styles.module.css';
 
 function GlobalConfig({
 	loading = {},
 	activeList = '',
+	activeService = '',
 	setShowAddRuleForm = () => {},
 	data = {},
 	setViewAndEditRuleId = () => {},
@@ -26,8 +28,8 @@ function GlobalConfig({
 	const DEFAULT_VALUES = {
 		scope                      : 'shipment',
 		...(data || {}),
-		category                   : 'business',
-		for_service                : 'fcl_customs',
+		category                   : data?.category?.[GLOBAL_CONSTANTS.zeroth_index],
+		for_service                : activeService,
 		discount_limit_unit        : 'flat',
 		shipment_price_slab_config : (data || {})?.slab_configs,
 		discount_limit_currency    : (data || {})?.discount_config?.[GLOBAL_CONSTANTS.zeroth_index]
@@ -35,6 +37,7 @@ function GlobalConfig({
 		discount_limit_value : (data || {})?.discount_config?.[GLOBAL_CONSTANTS.zeroth_index]?.discount_limit_value,
 		frequency            : (data || {})?.discount_config?.[GLOBAL_CONSTANTS.zeroth_index]?.frequency,
 	};
+	const controls = getControls({ disabledCategory: !isEmpty(data?.category) });
 
 	const {
 		control, formState: { errors = {} } = {}, handleSubmit, watch, setValue,

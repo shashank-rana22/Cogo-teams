@@ -1,3 +1,5 @@
+import removeObjEmptyValue from '../../../../../helpers/removeObjEmptyValue';
+
 const getShipmentUpdateRuleData = ({ values = {} }) => {
 	const {
 		id = '',
@@ -15,7 +17,7 @@ const getShipmentUpdateRuleData = ({ values = {} }) => {
 		discount_limit_currency       : slab?.slab_unit_currency,
 		slab_unit                     : 'shipment_value',
 	}));
-	return {
+	const data = {
 		slab_details,
 		id,
 		scope: values?.scope,
@@ -26,6 +28,7 @@ const getShipmentUpdateRuleData = ({ values = {} }) => {
 		organization_type,
 		organization_sub_type,
 	};
+	return removeObjEmptyValue(data);
 };
 
 export default getShipmentUpdateRuleData;

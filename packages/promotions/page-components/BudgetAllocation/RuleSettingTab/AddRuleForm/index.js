@@ -38,6 +38,7 @@ function AddRuleForm({
 		<GlobalConfig
 			loading={loading}
 			activeList="active"
+			activeService={activeService}
 			setShowAddRuleForm={setShowAddRuleForm}
 			data={null}
 			setViewAndEditRuleId={setViewAndEditRuleId}

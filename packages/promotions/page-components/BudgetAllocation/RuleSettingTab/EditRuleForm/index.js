@@ -79,6 +79,7 @@ function EditRuleForm({
 			<GlobalConfig
 				loading={updatePromotionRuleLoading}
 				activeList={activeList}
+				activeService={activeService}
 				setShowAddRuleForm={setShowAddRuleForm}
 				data={data}
 				setViewAndEditRuleId={setViewAndEditRuleId}

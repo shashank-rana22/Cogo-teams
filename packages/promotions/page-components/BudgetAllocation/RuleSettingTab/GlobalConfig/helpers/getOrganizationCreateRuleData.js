@@ -1,13 +1,17 @@
+import removeObjEmptyValue from '../../../../../helpers/removeObjEmptyValue';
+
 const getOrganizationCreateRuleData = ({ values = {} }) => {
 	const {
 		discount_limit_currency = '',
 		discount_limit_unit = '',
 		discount_limit_value = '',
 		frequency = '',
+		category = '',
 		...restValues
 	} = values || {};
+	const nonEmptyValues = removeObjEmptyValue(restValues);
 	return {
-		...restValues,
+		...nonEmptyValues,
 		discount_config: {
 			discount_limit_currency,
 			discount_limit_unit,
@@ -19,7 +23,7 @@ const getOrganizationCreateRuleData = ({ values = {} }) => {
 			'negative_margin_applicability',
 			'promotion_consumption',
 		],
-		category : ['business'],
+		category : [category],
 		scope    : values?.scope,
 	};
 };

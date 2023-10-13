@@ -2,5 +2,9 @@
 	{
 		"label": "Business",
 		"value": "business"
+	},
+	{
+		"label": "Marketing",
+		"value": "marketing"
 	}
 ]

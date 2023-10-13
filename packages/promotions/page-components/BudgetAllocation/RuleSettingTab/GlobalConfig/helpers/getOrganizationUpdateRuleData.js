@@ -1,3 +1,5 @@
+import removeObjEmptyValue from '../../../../../helpers/removeObjEmptyValue';
+
 const getOrganizationUpdateRuleData = ({ values = {} }) => {
 	const {
 		id = '',
@@ -12,7 +14,7 @@ const getOrganizationUpdateRuleData = ({ values = {} }) => {
 		discount_limit_unit = '',
 		discount_limit_value = '',
 	} = values || {};
-	return {
+	const data = {
 		discount_config: {
 			frequency,
 			discount_limit_currency,
@@ -28,6 +30,7 @@ const getOrganizationUpdateRuleData = ({ values = {} }) => {
 		organization_type,
 		organization_sub_type,
 	};
+	return removeObjEmptyValue(data);
 };
 
 export default getOrganizationUpdateRuleData;

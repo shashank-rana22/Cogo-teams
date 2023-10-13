@@ -1,12 +1,12 @@
 import CATEGORY_MAPPING from '../../../../configs/CATEGORY_MAPPING.json';
-import FOR_SERVICE_MAPPING from '../../../../configs/FOR_SERVICE_MAPPING.json';
 import ORGANISATION_SUB_TYPE_MAPPING from '../../../../configs/ORGANISATION_SUB_TYPE_MAPPING.json';
 import ORGANISATION_TYPE_MAPPING from '../../../../configs/ORGANISATION_TYPE_MAPPING.json';
 import RATE_SOURCE_MAPPING from '../../../../configs/RATE_SOURCE_MAPPING.json';
 import RULE_TYPE_MAPPING from '../../../../configs/RULE_TYPE_MAPPING.json';
+import SERVICE_TABS_MAPPING from '../../../../configs/SERVICE_TABS_MAPPING.json';
 import TRADE_TYPE_MAPPING from '../../../../configs/TRADE_TYPE_MAPPING.json';
 
-const controls = [
+const getControls = ({ disabledCategory = false }) => [
 	{
 		name        : 'cogo_entity_id',
 		label       : 'Cogo Entity',
@@ -36,7 +36,8 @@ const controls = [
 		name     : 'category',
 		type     : 'select',
 		options  : CATEGORY_MAPPING,
-		disabled : true,
+		rules    : { required: 'Category is required' },
+		disabled : disabledCategory,
 		span     : 1.5,
 		size     : 'sm',
 	},
@@ -44,7 +45,7 @@ const controls = [
 		label    : 'For Service',
 		name     : 'for_service',
 		type     : 'select',
-		options  : FOR_SERVICE_MAPPING,
+		options  : SERVICE_TABS_MAPPING,
 		disabled : true,
 		span     : 1.5,
 		size     : 'sm',
@@ -100,4 +101,4 @@ const controls = [
 	},
 ];
 
-export default controls;
+export default getControls;
