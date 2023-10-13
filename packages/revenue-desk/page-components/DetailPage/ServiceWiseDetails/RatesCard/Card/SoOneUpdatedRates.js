@@ -13,7 +13,7 @@ function SoOneUpdatedRates({ data = {}, singleServiceData = {} }) {
 	return (
 		<div style={{ display: 'flex' }}>
 			<div>
-				So1 Updated Rates :
+				So1 Updated Rate :
 			</div>
 			<div>
 				{isDisplaySo1LineItems ? (
