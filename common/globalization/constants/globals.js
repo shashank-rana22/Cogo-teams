@@ -627,6 +627,7 @@ const GLOBAL_CONSTANTS = {
 		white_space_characters      : /\s/g,
 		mobile_country_code_format  : /^./,
 		email_subject_prefix        : /^(re|fwd|fw):\s*/i,
+		html_tags                   : /<[^>]+>/g,
 		para_html_tag_text          : /<p>([\s\S]*?)<\/p>/gm,
 		h1_html_tag_text            : /<h1>([\s\S]*?)<\/h1>/gm,
 		h2_html_tag_text            : /<h2>([\s\S]*?)<\/h2>/gm,
@@ -634,6 +635,7 @@ const GLOBAL_CONSTANTS = {
 		li_html_tag_text            : /<li>([\s\S]*?)<\/li>/gm,
 		iframe_html_tag_text        : /<iframe([\s\S]*?)<\/iframe>/gm,
 		html_class_regex            : /class="([^"]+)"/g,
+		html_td_regex               : /<td/g,
 		static_url                  : /([^:]\/)\/+/g,
 		gst_number                  : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 		otp                         : /[^0-9]/g,
@@ -860,6 +862,7 @@ const GLOBAL_CONSTANTS = {
 
 	default_preferred_language : 'english',
 	supplier_entity_mapping    : supplierEntityMapping.shippingCompanies,
+	cogoport_care_user_id      : '413eb04c-037b-44cd-b68c-ce4fc277c156',
 };
 
 export default GLOBAL_CONSTANTS;
