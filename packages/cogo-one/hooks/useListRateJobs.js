@@ -16,7 +16,7 @@ const getPayload = ({ params }) => ({
 });
 
 const useListRateJobs = () => {
-	const [params, setParams] = useState({ source: [], service: 'fcl_freight' });
+	const [params, setParams] = useState({ source: ['live_booking'], service: 'fcl_freight' });
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_smt_rate_jobs',

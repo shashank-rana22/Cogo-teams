@@ -1,15 +1,17 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-function useGetShipment({ shipmentId = '' }) {
+function useGetShipment({ shipmentId = '', shipmentPopover = {}, id = '' }) {
+	const { id: cardId = '' } = shipmentPopover || {};
+
 	const [{ loading, data }, trigger] = useRequest({
 		url          : '/get_shipment',
 		service_name : 'shipment',
 		method       : 'GET',
 	}, { manual: true });
-	// (shipmentPopover?.id !== id)
+
 	const getShipment = useCallback(() => {
-		if (!shipmentId) {
+		if (!shipmentId || (cardId !== id)) {
 			return;
 		}
 
@@ -22,7 +24,7 @@ function useGetShipment({ shipmentId = '' }) {
 		} catch (error) {
 			console.error(error, 'error');
 		}
-	}, [shipmentId, trigger]);
+	}, [cardId, id, shipmentId, trigger]);
 
 	useEffect(() => {
 		getShipment();

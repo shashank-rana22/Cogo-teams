@@ -1,4 +1,4 @@
-import { Button, Pill, Popover, Tooltip } from '@cogoport/components';
+import { Button, Pill, Popover } from '@cogoport/components';
 import { IcMInfo, IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -11,7 +11,7 @@ const INDEX_STEP = 1;
 
 function ServiceProviderDetails({
 	cardData = {}, assignData = {}, setAssignData = () => {},
-	// shipmentPopover = {}, setShipmentPopover = () => {},
+	shipmentPopover = {}, setShipmentPopover = () => {},
 }) {
 	const {
 		service_provider = {}, service_provider_poc = {}, sources = [], id = '',
@@ -37,28 +37,27 @@ function ServiceProviderDetails({
 					</Pill>
 
 					{sources.includes('live_booking') ? (
-						<Tooltip
-							content={(
+						<Popover
+							render={(
 								<ShipmentInfoDetail
 									shipmentId={shipment_id}
 									id={id}
-									// shipmentPopover={shipmentPopover}
+									shipmentPopover={shipmentPopover}
 								/>
 							)}
 							placement="left"
 							interactive
-							// onClickOutside={() => setShipmentPopover({})}
-							// visible={shipmentPopover?.id === id}
-							// key={shipmentPopover?.id === id}
+							onClickOutside={() => setShipmentPopover({})}
+							visible={shipmentPopover?.id === id}
 						>
 							<div
 								role="presentation"
-								// onClick={() => setShipmentPopover(cardData)}
+								onClick={() => setShipmentPopover(cardData)}
 								className={styles.wrap}
 							>
 								<IcMInfo className={styles.info_icon} />
 							</div>
-						</Tooltip>
+						</Popover>
 					) : null}
 
 					<Popover

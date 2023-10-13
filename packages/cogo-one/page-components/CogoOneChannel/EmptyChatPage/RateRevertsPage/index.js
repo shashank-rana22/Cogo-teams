@@ -9,7 +9,7 @@ import Header from './Header';
 import ListRateReverts from './ListRateReverts';
 import styles from './styles.module.css';
 
-function RateRevertsPage({ mailProps = {} }) {
+function RateRevertsPage({ mailProps = {}, setActiveTab = () => {} }) {
 	const [showFilters, setShowFilters] = useState({
 		show      : false,
 		isApplied : false,
@@ -40,7 +40,7 @@ function RateRevertsPage({ mailProps = {} }) {
 							height={160}
 						/>
 					</div>
-				) : <ListRateReverts list={list} mailProps={mailProps} />}
+				) : <ListRateReverts list={list} mailProps={mailProps} setActiveTab={setActiveTab} />}
 
 			</div>
 			<div className={styles.footer_bar}>

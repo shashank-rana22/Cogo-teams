@@ -6,6 +6,7 @@
 	width: 49%;
 	padding: 16px;
 	margin: 4px 0;
+	cursor: pointer;
 	background: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
@@ -27,6 +28,8 @@
 
 .actions_container {
 	display: flex;
+	justify-content: flex-end;
+	width: 100%;
 
 	:global {
 		.ui_button_container {
