@@ -33,7 +33,6 @@ function ShipmentsCard({
 		last_completed_task = {},
 		agent: sales_agent = {},
 	} = shipmentItem;
-	// const sales_agent = agents.find((x) => x.stakeholder_type === 'sales_agent');
 
 	const ShipmentIcon = ICONS_MAPPING[shipment_type] || null;
 
