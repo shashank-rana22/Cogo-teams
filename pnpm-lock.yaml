@@ -1025,7 +1025,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1034,7 +1034,7 @@ importers:
         version: link:../../common/globalization
       '@cogoport/icons-react':
         specifier: ^1.0.51
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/next':
         specifier: workspace:0.1.0
         version: link:../../common/next
@@ -1055,7 +1055,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1064,7 +1064,7 @@ importers:
         version: link:../../common/globalization
       '@cogoport/icons-react':
         specifier: ^1.0.51
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/next':
         specifier: workspace:0.1.0
         version: link:../../common/next
@@ -1091,10 +1091,10 @@ importers:
     dependencies:
       '@cogoport/charts':
         specifier: ^1.0.1
-        version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.4(prop-types@15.8.1)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.431
-        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1103,7 +1103,7 @@ importers:
         version: link:../../common/globalization
       '@cogoport/icons-react':
         specifier: ^1.0.65
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/navigation-configs':
         specifier: workspace:0.1.0
         version: link:../../common/navigation-configs
@@ -1133,7 +1133,7 @@ importers:
         version: link:../../common/air-modules
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1142,7 +1142,7 @@ importers:
         version: link:../../common/globalization
       '@cogoport/icons-react':
         specifier: ^1.0.51
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/next':
         specifier: workspace:0.1.0
         version: link:../../common/next
@@ -1909,6 +1909,9 @@ importers:
       stylelint:
         specifier: ^14.16.1
         version: 14.16.1
+      suneditor:
+        specifier: ^2.45.1
+        version: 2.45.1
       suneditor-react:
         specifier: ^3.6.1
         version: 3.6.1(react-dom@18.2.0)(react@18.2.0)(suneditor@2.45.1)
@@ -7887,7 +7890,7 @@ packages:
       prop-types: '>= 15.5.10 < 16.0.0'
       react: '>= 16.14.0 < 19.0.0'
     dependencies:
-      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
       d3-color: 2.0.0
       d3-scale: 3.3.0
       d3-scale-chromatic: 2.0.0
@@ -8069,7 +8072,7 @@ packages:
       prop-types: '>= 15.5.10 < 16.0.0'
       react: '>= 16.14.0 < 19.0.0'
     dependencies:
-      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
       prop-types: 15.8.1
       react: 18.2.0
     dev: false
@@ -8518,7 +8521,7 @@ packages:
       '@nivo/core': 0.80.0
       react: '>= 16.14.0 < 19.0.0'
     dependencies:
-      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
       d3-delaunay: 5.3.0
       d3-scale: 3.3.0
       react: 18.2.0
