@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import List from '../../../commons/List/index';
 import PURCHASE_VIEW_CONFIG from '../../configurations/PURCHASE_VIEW_LIST';
+import useGetListStats from '../../hook/useGetListStats';
 import useGetPurchaseViewList from '../../hook/usePurchaseViewList';
 
 import FieldPair from './RenderData/FiledPair/index';
@@ -14,7 +15,7 @@ import RenderUrgencyTag from './RenderData/RenderUrgencyTag/index';
 import RenderViewMoreButton from './RenderData/RenderViewMoreButton/index';
 import SegmentedFilters from './SegmentedFilters/index';
 
-function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }) {
+function PurchaseInvoice({ filters, setFilters, subActiveTab }) {
 	const { query } = useRouter();
 	const { searchValue:previouslySearched } = query || {};
 
@@ -30,6 +31,10 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }) {
 		setTab,
 		setCurrentTab,
 	} = useGetPurchaseViewList({ filters, setFilters, sort, previouslySearched });
+
+	const { data:statsData, loading:statsLoading } = useGetListStats({ filters, searchValue });
+
+	const { stat = {} } = statsData || {};
 
 	const functions = {
 		renderStatus    : (itemData) => <RenderStatus item={itemData} />,
@@ -55,13 +60,14 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }) {
 		<div>
 			<SegmentedFilters
 				filters={filters}
-				statsData={statsData}
+				statsData={stat}
 				setFilters={setFilters}
 				setSearchValue={setSearchValue}
 				searchValue={searchValue}
 				tab={tab}
 				setTab={setTab}
 				currentTab={currentTab}
+				itemData={data}
 				setCurrentTab={setCurrentTab}
 			/>
 
@@ -69,7 +75,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }) {
 				config={PURCHASE_VIEW_CONFIG}
 				itemData={data}
 				functions={functions}
-				loading={loading}
+				loading={loading || statsLoading}
 				sort={sort}
 				setSort={setSort}
 				page={filters.pageIndex || 1}
@@ -77,6 +83,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }) {
 					setFilters((p) => ({ ...p, pageIndex: pageValue }));
 				}}
 				subActiveTab={subActiveTab}
+				paginationType="number"
 				showPagination
 			/>
 		</div>

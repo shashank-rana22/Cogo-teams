@@ -209,20 +209,46 @@ const completedColumn = ({
 	{
 		Header   : 'SID',
 		accessor : ({ sidNo, serviceType = '', shipmentId }) => (
-			<a
-				href={shipmentId}
-				onClick={(event) => {
-					openLink({
-						event,
-						partnerId        : partner_id,
-						shipmentId,
-						serviceTypeUpper : serviceType,
-					});
-				}}
-				className={styles.link}
-			>
-				{sidNo || '-'}
-			</a>
+			<>
+				<a
+					href={shipmentId}
+					onClick={(event) => {
+						openLink({
+							event,
+							partnerId        : partner_id,
+							shipmentId,
+							serviceTypeUpper : serviceType,
+						});
+					}}
+					className={styles.link}
+				>
+					{sidNo || '-'}
+				</a>
+				{startCase(serviceType as string)?.length > MAX_NAME_STRING ? (
+
+					<Tooltip
+						interactive
+						placement="top"
+						content={(
+							<div className={styles.tool_tip}>
+								{startCase(serviceType as string)}
+							</div>
+						)}
+					>
+						<text className={styles.cursor}>
+							{`${startCase(serviceType as string)?.substring(
+								MIN_NAME_STRING,
+								MAX_NAME_STRING,
+							)}...`}
+						</text>
+					</Tooltip>
+				)
+					: (
+						<div className={styles.cursor}>
+							{startCase(serviceType as string)}
+						</div>
+					)}
+			</>
 		),
 	},
 	{

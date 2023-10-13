@@ -21,6 +21,7 @@ function SegmentedFilters({
 	searchValue,
 	filters,
 	setFilters,
+	itemData,
 }) {
 	return (
 		<>
@@ -39,7 +40,7 @@ function SegmentedFilters({
 				<div className={styled.segment}>
 					<div className={styled.filter_data_urgent}>
 						<SegmentedControl
-							options={filtersUrgentData(statsData)}
+							options={filtersUrgentData({ itemData, tab })}
 							activeTab={tab}
 							setActiveTab={setTab}
 							color="#ED3726"

@@ -42,11 +42,13 @@ function Dashboard({
 		{ id: 4, label: 'Finance Rejected', value: FINANCE_REJECTED },
 	];
 
+	const finalControls = filterControls(filters);
+
 	return (
 		<>
 			<div className={styles.filter_flex}>
 				<Filter
-					controls={filterControls}
+					controls={finalControls}
 					filters={filters}
 					setFilters={setFilters}
 				/>

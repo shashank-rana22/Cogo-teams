@@ -18,9 +18,11 @@ function IRNCancel({ itemData, refetch }) {
 		irnGeneratedAt,
 		invoiceAdditionals = {},
 	} = itemData || {};
-	const statusPresent = ['IRN_GENERATED', 'FAILED'].includes(invoiceStatus);
 
-	const { postToSage, loading } = usePostToSage({ id });
+	const statusPresent = ['IRN_GENERATED', 'FAILED', 'IRN_CANCELLED'].includes(
+		invoiceStatus,
+	);
+	const { postToSage, loading } = usePostToSage({ id, refetch });
 
 	const { irn_label: irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
 

@@ -1,4 +1,4 @@
-export const filterControls = [
+export const filterControls = (filters) => ([
 
 	{
 
@@ -32,6 +32,7 @@ export const filterControls = [
 		span           : 1,
 		multiple       : true,
 		defaultOptions : false,
+		disabled       : filters?.dateRange?.startDate,
 		options        : [
 			{ label: 'Last 10 Days', value: 'day' },
 			{ label: 'Last 10 weeks', value: 'week' },
@@ -43,10 +44,12 @@ export const filterControls = [
 		type                  : 'singleDateRange',
 		placeholder           : 'Date Range',
 		isPreviousDaysAllowed : true,
+		disable               : filters?.timePeriod,
+		maxDate               : new Date(),
 		span                  : 2,
 	},
 
-];
+]);
 export const reportControls = [
 	{
 

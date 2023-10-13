@@ -1,13 +1,18 @@
 function filtersData(statsData) {
-	const { LOCKED = '', FINANCE_ACCEPTED = '', ON_HOLD = '', POSTED = '', FAILED = '' } = statsData || {};
-
-	const ALL = Object.values(statsData || {}).reduce((total, value) => total + value, 0);
+	const {
+		LOCKED = '',
+		FINANCE_ACCEPTED = '',
+		ON_HOLD = '',
+		POSTED = '',
+		FAILED = '',
+		ALL_INVOICE = '',
+	} = statsData || {};
 
 	return [
 		{
 			label : 'All',
 			value : 'ALL',
-			badge : ALL || '0',
+			badge : ALL_INVOICE || '0',
 		},
 		{
 			label : 'Locked',
