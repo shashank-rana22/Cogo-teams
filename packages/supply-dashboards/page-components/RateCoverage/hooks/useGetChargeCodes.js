@@ -1,19 +1,23 @@
 import { useRequest } from '@cogoport/request';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
-const SERVICE_NAMES = {
-	fcl_freight : 'fcl_freight_charges',
-	lcl_freight : 'lcl_freight_charges',
-	air_freight : 'air_freight_charges',
-	haulage     : 'haulage_freight_charges',
-	fcl_customs : 'fcl_customs_charges',
-	air_customs : 'air_customs_charges',
-	lcl_customs : 'lcl_customs_charges',
-	fcl_cfs     : 'fcl_cfs_charges',
-};
+const SERVICE_NAMES = [
+	'fcl_customs_charges',
+	'air_customs_charges',
+	'lcl_customs_charges',
+	'lcl_freight_charges',
+	'fcl_freight_charges',
+	'haulage_freight_charges',
+	'air_freight_surcharges',
+	'air_freight_local_charges',
+	'fcl_freight_local_charges',
+	'air_freight_charges',
+];
 
 const useGetChargeCodes = ({
-	service_name,
+	service_name = 'fcl_customs_charges',
+	trade_type = null,
+	cfsChargeRequired = false,
 }) => {
 	const [{ data }, trigger] = useRequest(
 		{
@@ -23,23 +27,38 @@ const useGetChargeCodes = ({
 		{ manual: true },
 	);
 
-	const listApi = useCallback(async () => {
-		const service = SERVICE_NAMES[service_name];
-
+	const listApi = async () => {
 		try {
 			await trigger({
-				params: { service_name: service },
+				params: {
+					service_name,
+				},
 			});
 		} catch (error) {
 			// console.error(error);
 		}
-	}, [service_name, trigger]);
+	};
+
+	const list = (data?.list || [])
+		.map((item) => ({
+			...item,
+			label : `${item.code} ${item.name}`,
+			value : item.code,
+		}))
+		.filter(
+			(item) => !trade_type
+				|| !item?.trade_types
+				|| (item?.trade_types || []).includes(trade_type),
+		);
 
 	useEffect(() => {
-		listApi();
-	}, [listApi]);
+		if (SERVICE_NAMES.includes(service_name) || cfsChargeRequired) {
+			listApi();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [service_name, cfsChargeRequired]);
 
-	return { data };
+	return { list };
 };
 
 export default useGetChargeCodes;

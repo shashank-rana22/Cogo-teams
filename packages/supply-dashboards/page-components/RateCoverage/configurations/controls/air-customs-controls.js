@@ -1,10 +1,9 @@
-import { currencyOptions } from '../../../../../configurations/helpers/constants';
+import { currencyOptions } from '../helpers/constants';
 
-const lclCustomsControls = ({
+const airCustomsControls = ({
 	data,
 	CommodityOptions,
-	originLocationOptions,
-	source,
+	originLocationOptions, source,
 }) => {
 	const controls = [
 		{
@@ -31,19 +30,13 @@ const lclCustomsControls = ({
 			rules       : { required: 'rate provided by user is required' },
 		},
 		{
-			name         : 'location_details',
-			heading      : 'Location Details',
-			span         : 12,
-			showOptional : false,
-		},
-		{
 			name        : 'origin_location_id',
 			label       : 'Origin Location',
 			type        : 'select',
 			placeholder : 'Origin Location',
 			span        : 4,
-			value       : data?.origin_port?.id,
-			disabled 	  : data?.origin_port?.id,
+			value       : data?.location_id,
+			disabled  	 : data?.location_id,
 			...originLocationOptions,
 			rules       : { required: 'origin location is required' },
 		},
@@ -70,16 +63,18 @@ const lclCustomsControls = ({
 			rules     : { required: 'This is required' },
 		},
 		{
-			label       : 'Commodity',
 			name        : 'commodity',
+			label       : 'Commodity',
 			type        : 'select',
 			placeholder : 'Commodity',
-			span        : 4,
+			span        : 3,
 			value       : data?.commodity,
+			disabled    : data?.commodity,
 			options     : CommodityOptions,
+			rules       : { required: 'commodity is required' },
 		},
 		source === 'live_booking'
-			? {
+			? 			{
 				name  : 'is_shipper_specific',
 				label : 'Shipper Specific Rate',
 				type  : 'checkbox',
@@ -105,12 +100,13 @@ const lclCustomsControls = ({
 					type        : 'select',
 					span        : 2,
 					placeholder : 'Charge Name',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'currency',
 					type        : 'select',
 					options     : currencyOptions,
-					span        : 1.5,
+					span        : 2,
 					placeholder : 'Curr...',
 					rules       : { required: 'currency is required' },
 				},
@@ -132,7 +128,7 @@ const lclCustomsControls = ({
 					name        : 'remarks',
 					placeholder : 'Remarks',
 					type        : 'text',
-					span        : 3,
+					span        : 2,
 				},
 			],
 		},
@@ -140,4 +136,4 @@ const lclCustomsControls = ({
 	return controls.filter((control) => control !== null);
 };
 
-export default lclCustomsControls;
+export default airCustomsControls;

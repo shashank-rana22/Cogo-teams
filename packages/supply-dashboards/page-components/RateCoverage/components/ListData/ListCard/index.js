@@ -15,6 +15,7 @@ import AddRateModal from './AddRateModal';
 import CardContent from './CardContent';
 import CloseModal from './CloseModal';
 import DetailsView from './DetailsView';
+import ServicesDetails from './ServicesDetails';
 import styles from './styles.module.css';
 
 function ListCard({
@@ -224,29 +225,30 @@ function ListCard({
 
 					<div className={styles.vertical_line} />
 
-					<div className={styles.tags_container}>
-						{(ITEM_LIST || [])?.map((val) => (
-							<div key={val?.label}>
-								{ val?.label
+					<div style={{ display: 'flex', flexDirection: 'column' }}>
+						<div className={styles.tags_container}>
+							{(ITEM_LIST || [])?.map((val) => (
+								<div key={val?.label}>
+									{ val?.label
 									&& (
 										<Pill>
 											{val?.label}
 										</Pill>
 									)}
-							</div>
-						))}
+								</div>
+							))}
 
-						{!isEmpty(sources) && (
-							<span>
-								{(sources || []).map((val) => (
-									<Pill size="md" color="#EEF0F0" key={val}>
-										{startCase(val)}
-									</Pill>
-								))}
-							</span>
-						)}
+							{!isEmpty(sources) && (
+								<span>
+									{(sources || []).map((val) => (
+										<Pill size="md" color="#EEF0F0" key={val}>
+											{startCase(val)}
+										</Pill>
+									))}
+								</span>
+							)}
+						</div>
 					</div>
-
 					<div className={styles.vertical_line} />
 					<div className={styles.button_grp}>
 						{!['live_booking']?.includes(source)
@@ -263,12 +265,24 @@ function ListCard({
 						<Button
 							style={{ marginLeft: '16px' }}
 							onClick={handleAddRate}
+							disabled={reverted_status === 'reverted'}
 						>
 							{filter?.status !== 'completed' ? 'Add Rate' : 'Edit Rate'}
 						</Button>
+
 					</div>
 				</div>
-
+				<div className={styles.services}>
+					{['rate_feedback', 'rate_request'].includes(source) && (
+						<ServicesDetails
+							data={data}
+							source={source}
+							filter={filter}
+							getFeedback={getFeedback}
+							feedbackData={feedbackData}
+						/>
+					)}
+				</div>
 			</div>
 
 			{['live_booking', 'rate_feedback', 'rate_request']?.includes(source)

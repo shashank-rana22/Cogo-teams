@@ -2,7 +2,7 @@
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
 
-import { currencyOptions } from '../../../../../configurations/helpers/constants';
+import { currencyOptions } from '../helpers/constants';
 
 const CARGO_HANDLING_OPTIONS = [
 	{ label: 'Dock Stuffing', value: 'stuffing_at_dock', type: 'origin' },
@@ -151,6 +151,7 @@ const cfsControls = ({ data, originLocationOptions, CommodityOptions, source }) 
 			placeholder : 'Commodity',
 			span        : 3,
 			value       : data?.commodity,
+			disabled    : data?.commodity,
 			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
@@ -276,6 +277,7 @@ const cfsControls = ({ data, originLocationOptions, CommodityOptions, source }) 
 					type        : 'select',
 					span        : 2,
 					placeholder : 'Charge Name',
+					rules       : { required: 'currency is required' },
 				},
 				{
 					name        : 'currency',

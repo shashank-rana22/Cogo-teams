@@ -7,7 +7,7 @@ import {
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { merge } from '@cogoport/utils';
 
-import { filterOption } from '../../../../../configurations/helpers/constants';
+import { filterOption } from '../helpers/constants';
 
 import airControls from './air-controls';
 import airCustomsControls from './air-customs-controls';

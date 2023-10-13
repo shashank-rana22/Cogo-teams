@@ -2,7 +2,7 @@
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
 
-import { currencyOptions } from '../../../../../configurations/helpers/constants';
+import { currencyOptions } from '../helpers/constants';
 
 const haulageControls = ({
 	data,

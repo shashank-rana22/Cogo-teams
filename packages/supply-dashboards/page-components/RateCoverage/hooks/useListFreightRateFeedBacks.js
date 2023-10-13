@@ -28,7 +28,8 @@ const useListFreightRateFeedBacks = ({ filter = {}, source_id }) => {
 			await trigger(
 				{
 					params: {
-						filters: { id: source_id },
+						filters                  : { id: source_id },
+						booking_details_required : true,
 					},
 				},
 			);

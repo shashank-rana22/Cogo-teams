@@ -70,6 +70,32 @@ function FieldMutation({ fields, values, filter, chargeCodes }) {
 			newControl = { ...newControl, ...destination };
 		}
 
+		// if (control?.controls) {
+		// 	control.controls.forEach((childCtrl) => {
+		// 		if (childCtrl.name === 'unit') {
+		// 			const UNIT_OPTIONS = {};
+		// 			const chargeValues = values[control.name];
+		// 			chargeValues?.forEach((item, i) => {
+		// 				UNIT_OPTIONS[i] = (
+		// 					(chargeCodes || [])?.find((obj) => obj?.code === item?.code)?.units || ['per_container']
+		// 				).map((unit) => ({
+		// 					label : startCase(unit),
+		// 					value : unit,
+		// 				}));
+		// 			});
+		// 			childCtrl.customProps = {};
+		// 			childCtrl.customProps.options = UNIT_OPTIONS;
+		// 		}
+
+		// 		if (childCtrl.name === 'code') {
+		// 			const OPTIONS = (chargeCodes || []).map((chargeCode) => ({
+		// 				label : `${chargeCode?.code} ${chargeCode?.name}`,
+		// 				value : chargeCode?.code,
+		// 			}));
+		// 			childCtrl.options =	OPTIONS;
+		// 		}
+		// 	});
+		// }
 		if (control?.controls) {
 			control.controls.forEach((childCtrl) => {
 				if (childCtrl.name === 'unit') {
@@ -77,7 +103,7 @@ function FieldMutation({ fields, values, filter, chargeCodes }) {
 					const chargeValues = values[control.name];
 					chargeValues?.forEach((item, i) => {
 						UNIT_OPTIONS[i] = (
-							(chargeCodes || [])?.find((obj) => obj?.code === item?.code)?.units || ['per_container']
+							chargeCodes?.[item.code]?.units || ['per_container']
 						).map((unit) => ({
 							label : startCase(unit),
 							value : unit,
@@ -88,14 +114,15 @@ function FieldMutation({ fields, values, filter, chargeCodes }) {
 				}
 
 				if (childCtrl.name === 'code') {
-					const OPTIONS = (chargeCodes || []).map((chargeCode) => ({
-						label : `${chargeCode?.code} ${chargeCode?.name}`,
-						value : chargeCode?.code,
-					}));
+					const OPTIONS = [];
+					Object.keys(chargeCodes || {}).forEach((code) => {
+						OPTIONS.push({ label: `${code} ${chargeCodes[code]?.name}`, value: code });
+					});
 					childCtrl.options =	OPTIONS;
 				}
 			});
 		}
+
 		return { ...newControl };
 	});
 

@@ -98,3 +98,9 @@
 	background: #f9f9f9;
 	border-radius: 6px;
 }
+
+.services {
+	display: flex;
+	justify-content: end;
+	margin-right: 40px;
+}

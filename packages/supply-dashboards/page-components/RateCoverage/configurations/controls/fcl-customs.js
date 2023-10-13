@@ -2,7 +2,7 @@
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
 
-import { currencyOptions, rateTypeOptions } from '../../../../../configurations/helpers/constants';
+import { currencyOptions, rateTypeOptions } from '../helpers/constants';
 
 const fclCustomsControls = ({
 	data,
@@ -151,6 +151,7 @@ const fclCustomsControls = ({
 					type        : 'select',
 					span        : 2,
 					placeholder : 'Charge Name',
+					rules       : { required: 'This is required' },
 				},
 				{
 					name        : 'currency',

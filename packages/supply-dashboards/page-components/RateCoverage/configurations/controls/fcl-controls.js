@@ -2,7 +2,7 @@
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
 
-import { currencyOptions, rateTypeOptions } from '../../../../../configurations/helpers/constants';
+import { currencyOptions, rateTypeOptions } from '../helpers/constants';
 
 const fclControls = ({
 	data,
@@ -122,6 +122,7 @@ const fclControls = ({
 			placeholder : 'Commodity',
 			span        : 3,
 			value       : data?.commodity,
+			disabled    : data?.commodity,
 			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
@@ -278,6 +279,7 @@ const fclControls = ({
 					type        : 'select',
 					span        : 2,
 					placeholder : 'Charge Name',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'unit',
@@ -285,6 +287,7 @@ const fclControls = ({
 					type        : 'select',
 					className   : 'primary lg',
 					placeholder : 'Unit',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'currency',
@@ -292,18 +295,21 @@ const fclControls = ({
 					type        : 'select',
 					placeholder : 'Curr...',
 					options     : currencyOptions,
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'price',
 					span        : 1.5,
 					type        : 'number',
 					placeholder : 'Amount',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'market_price',
 					span        : 1.5,
 					type        : 'number',
 					placeholder : 'Market Price',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'remarks',

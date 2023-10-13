@@ -1,15 +1,12 @@
 /* eslint-disable max-lines-per-function */
-import containerSizes from '@cogoport/constants/container-sizes.json';
-import containerTypes from '@cogoport/constants/container-types.json';
 
-import { currencyOptions } from '../../../../../configurations/helpers/constants';
+import { currencyOptions } from '../helpers/constants';
+import { truck_types } from '../truck-types';
 
-const trailerControls = ({
+const ftlControls = ({
 	data,
 	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
-	user_id,
-	listPartnerUserOptions,
 	source,
 }) => {
 	const controls = [
@@ -20,7 +17,7 @@ const trailerControls = ({
 		},
 		{
 			name        : 'service_provider_id',
-			heading     : 'Service Provider',
+			label       : 'Service Provider',
 			type        : 'select',
 			placeholder : 'Service Provider',
 			span        : 4,
@@ -29,22 +26,12 @@ const trailerControls = ({
 		},
 		{
 			name        : 'sourced_by_id',
-			heading     : 'Rate Provided by user',
+			label       : 'Rate Provided by user',
 			type        : 'select',
 			placeholder : 'Rate Provided by user',
 			value       : data?.sourced_by_id,
 			span        : 4,
 			rules       : { required: 'rate provided by user is required' },
-		},
-		{
-			name        : 'procured_by_id',
-			heading     : 'Rate Procured by Cogoport Agent',
-			placeholder : 'Rate Procured by Cogoport Agent',
-			type        : 'select',
-			...listPartnerUserOptions,
-			value       : user_id,
-			span        : 4,
-			rules       : { required: 'procured by is required' },
 		},
 		{
 			heading : 'Location Details',
@@ -53,7 +40,7 @@ const trailerControls = ({
 		},
 		{
 			name        : 'origin_location_id',
-			heading     : 'Origin Location',
+			label       : 'Origin Location',
 			type        : 'select',
 			placeholder : 'Origin Location',
 			span        : 4,
@@ -63,9 +50,17 @@ const trailerControls = ({
 			rules       : { required: 'origin location is required' },
 		},
 		{
+			name        : 'origin_main_port_id',
+			type        : 'select',
+			label       : 'Origin Main port',
+			placeholder : 'Origin Main port',
+			span        : 4,
+			rules       : { required: 'origin main port is required' },
+		},
+		{
 			name        : 'destination_location_id',
 			type        : 'select',
-			heading     : 'Destination Location',
+			label       : 'Destination Location',
 			span        : 4,
 			value       : data?.destination_port?.id,
 			disabled    : data?.destination_port?.id,
@@ -73,58 +68,24 @@ const trailerControls = ({
 			placeholder : 'Destination Location',
 			rules       : { required: 'destination location is required' },
 		},
-
 		{
-			heading : 'Container Details',
-			name    : 'container_details',
-			span    : 12,
+			name        : 'destination_main_port_id',
+			type        : 'select',
+			label       : 'Destination main port',
+			span        : 4,
+			placeholder : 'Destination main port',
+			rules       : { required: 'destination main port is required' },
 		},
 		{
-			name        : 'container_type',
-			label       : 'Container Type',
+			name        : 'truck_type',
+			placeholder : 'Select Truck Type',
+			label       : 'Truck Type',
 			type        : 'select',
-			placeholder : 'Container Type',
-			span        : 3,
-			value       : data?.container_type || 'standard',
-			disabled    : data?.container_type,
-			options     : containerTypes,
-			rules       : { required: 'container type is required' },
-		},
-		{
-			name        : 'container_size',
-			label       : 'Container Size',
-			type        : 'select',
-			placeholder : 'Container Size',
-			span        : 3,
-			value       : data?.container_size || '20',
-			disabled    : data?.container_size,
-			options     : containerSizes,
-			rules       : { required: 'container size is required' },
-		},
-		{
-			name        : 'trailer_type',
-			placeholder : 'Select Trailer Type',
-			label       : 'Trailer Type',
-			type        : 'select',
+			options     : truck_types,
 			className   : 'primary lg',
-			options     : [
-				{
-					value : 'flat_bed',
-					label : 'Flat Bed',
-				},
-				{
-					value : 'semi_flat_bed',
-					label : 'Semi Flat Bed',
-				},
-				{
-					value : 'xl_bed',
-					label : 'XL Bed',
-				},
-			],
-			span  : 4,
-			rules : {
-				required: true,
-			},
+			value       : data?.truck_type,
+			span        : 4,
+			rules       : { required: true },
 		},
 		{
 			name        : 'commodity',
@@ -137,55 +98,28 @@ const trailerControls = ({
 			rules       : { required: 'commodity is required' },
 		},
 		{
-			name        : 'date_range',
-			placeholder : 'Select Range',
-			type        : 'date_range',
-			label       : 'Validity of Rate',
-			span        : 4,
-			minDate     : new Date(),
-			pickerType  : 'range',
-			rules       : {
-				required: true,
-			},
-			className: 'primary',
-		},
-
-		{
-			label       : 'Detention Free Time',
-			name        : 'detention_free_time_type',
+			name        : 'body_type',
+			placeholder : 'Select Body Type',
+			label       : 'Body Type',
 			type        : 'select',
-			placeholder : 'Hrs',
-
-			span    : 1.5,
-			options : [
-				{
-					value : 'hrs',
-					label : 'Hrs',
-				},
-				{
-					value : 'days',
-					label : 'Days',
-				},
-			],
-			className: 'primary lg',
-		},
-		{
-			name        : 'detention_free_time',
-			type        : 'number',
-			span        : 1.5,
-			placeholder : '0',
 			className   : 'primary lg',
-			rules       : {
-				required: true,
-			},
+			value       : data?.truck_body_type,
+			span        : 4,
+			options     : [
+				{
+					value : 'open',
+					label : 'Open',
+				},
+				{ value: 'closed', label: 'Closed' },
+			],
+			rules: { required: true },
 		},
-
 		{
 			label       : 'Transit Time',
 			name        : 'transit_time_type',
 			type        : 'select',
 			placeholder : 'Hrs',
-			span        : 1.5,
+			span        : 2,
 			options     : [
 				{
 					value : 'hrs',
@@ -204,35 +138,97 @@ const trailerControls = ({
 			span        : 2,
 			placeholder : '0',
 			className   : 'primary lg',
-			rules       : {
-				required: true,
-			},
+			rules       : { required: true },
 		},
 
 		{
-			label       : 'Basic Freight Rate (Per Trailer)',
+			label       : 'Detention time',
+			name        : 'detention_free_time_type',
+			type        : 'select',
+			placeholder : 'Hrs',
+			span        : 2,
+			options     : [
+				{
+					value : 'hrs',
+					label : 'Hrs',
+				},
+				{
+					value : 'days',
+					label : 'Days',
+				},
+			],
+			className: 'primary lg',
+		},
+		{
+			name        : 'detention_free_time',
+			type        : 'number',
+			span        : 2,
+			placeholder : '0',
+			className   : 'primary lg',
+			rules       : { required: true },
+		},
+		{
+			name        : 'date_range',
+			placeholder : 'Select Range',
+			type        : 'date_picker',
+			label       : 'Validity of Rate',
+			span        : 4,
+			minDate     : new Date(),
+			pickerType  : 'range',
+			rules       : { required: true },
+			className   : 'primary',
+		},
+		{
+			name        : 'unit',
+			placeholder : 'Select Unit',
+			type        : 'select',
+			span        : 4,
+			value       : data?.unit,
+			label       : 'Unit',
+			options     : [
+				{
+					label : 'Per Truck',
+					value : 'per_truck',
+				},
+				{
+					label : 'Per Ton',
+					value : 'per_ton',
+				},
+			],
+			defaultOptions : true,
+			rules          : { required: true },
+			className      : 'primary lg',
+		},
+		{
+			name        : 'min_chargeable_weight',
+			label       : 'Min Chargeable Weight',
+			type        : 'number',
+			placeholder : 'Select Min Chargeable Weight',
+			span        : 4,
+			rules       : { required: true },
+			className   : 'primary lg',
+			isClearable : true,
+		},
+		{
+			label       : 'Basic Freight Rate',
 			name        : 'currency',
-			span        : 1.5,
+			span        : 2,
 			type        : 'select',
 			placeholder : 'Curr...',
 			options     : currencyOptions,
 		},
 		{
-			name        : 'price_per_trailer',
+			name        : 'price_per_truck',
 			type        : 'number',
-			span        : 2,
 			placeholder : '0',
+			span        : 2,
 			className   : 'primary lg',
-			rules       : {
-				required: true,
-			},
 		},
-
 		{
 			label       : 'Fuel Surcharge',
 			name        : 'fuel_surcharge_type',
 			type        : 'select',
-			span        : 1.5,
+			span        : 2,
 			placeholder : '% of Basic Freight',
 			style       : {
 				marginLeft  : '10%',
@@ -244,40 +240,37 @@ const trailerControls = ({
 					label : '% of Basic Freight',
 				},
 				{
-					value : 'per_trailer',
+					value : 'per_truck',
 					label : 'Net',
 				},
 			],
 			className: 'primary lg',
 		},
 		{
-			name        : 'fuel_surcharge',
+			span        : 2,
+			name        : 'fuel_surcharge_value',
 			type        : 'number',
 			placeholder : '0',
-			span        : 2,
 			className   : 'primary lg hello',
-			rules       : {
-				required: true,
-			},
+		},
+		{
+			name        : 'remarks',
+			placeholder : 'Enter Remarks',
+			type        : 'textarea',
+			span        : 4,
+			heading     : 'Remarks',
+			className   : 'primary lg ',
 		},
 		source === 'live_booking'
-			? 			{
+			? {
 				name  : 'is_shipper_specific',
 				label : 'Shipper Specific Rate',
 				type  : 'checkbox',
 				span  : 4,
 			}
 			: null,
-		{
-			name        : 'remarks',
-			placeholder : 'Enter Remarks',
-			type        : 'textarea',
-			span        : 3.8,
-			label       : 'Remarks',
-			className   : 'primary lg ',
-		},
 	];
 	return controls.filter((control) => control !== null);
 };
 
-export default trailerControls;
+export default ftlControls;

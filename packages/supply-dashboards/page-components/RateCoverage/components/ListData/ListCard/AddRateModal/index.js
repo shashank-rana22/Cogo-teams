@@ -2,20 +2,21 @@
 import { Button, Modal, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import Layout from '../../../../../RfqEnquiries/Layout';
+import useControls from '../../../../configurations/controls';
 import { DEFAULT_VALUE, DELTA_VALUE, TWO_HUNDERD, VALUE_ONE } from '../../../../configurations/helpers/constants';
 import FieldMutation from '../../../../configurations/helpers/mutation-fields';
 import useCreateFreightRate from '../../../../hooks/useCreateFreightRate';
 import useDeleteFreightRateFeedbacks from '../../../../hooks/useDeleteFreightRateFeedbacks';
 import useDeleteFreightRateRequests from '../../../../hooks/useDeleteFreightRateRequests';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
-import useGetChargeCodes from '../../../../hooks/useGetChargeCodes';
+import useGetFreightRate from '../../../../hooks/useGetFreightRate';
 import useUpdateFlashBookingRate from '../../../../hooks/useUpdateFlashBookingRate';
 import ServiceDetailsContent from '../DetailsView/Content';
 
-import useControls from './controls';
 import styles from './styles.module.css';
 
 function AddRateModal({
@@ -57,16 +58,14 @@ function AddRateModal({
 
 	const values = watch();
 
-	const { data: chargeCodesData } = useGetChargeCodes({
-		service_name : filter?.service,
-		trade_type   : data?.trade_type,
-	});
+	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data });
 
 	const { finalFields } = FieldMutation({
 		fields,
 		values,
 		filter,
 		chargeCodes,
+		rateData,
 	});
 
 	const { createRate, loading } = useCreateFreightRate(filter?.service);
@@ -132,17 +131,27 @@ function AddRateModal({
 
 	useEffect(() => {
 		let prefillFreightCodes = [];
-		let mandatoryFreightCodes = [];
+		if (rateData?.freight) {
+			const { freight = {} } = rateData;
+			const { validities = [] } = freight;
+			if (!isEmpty(validities)) {
+				const { line_items = [] } = validities[DEFAULT_VALUE];
+				prefillFreightCodes = line_items;
+				setValue('schedule_type', validities[DEFAULT_VALUE]?.schedule_type);
+				setValue('validity_start', new Date(validities[DEFAULT_VALUE]?.validity_start));
+				setValue('validity_end', new Date(validities[DEFAULT_VALUE]?.validity_end));
+			}
+		}
 
-		Object.keys(chargeCodesData?.list || {}).forEach((code) => {
-			if (chargeCodesData?.list?.[code].tags?.includes('mandatory')) {
+		let mandatoryFreightCodes = [];
+		Object.keys(rateData?.freight_charge_codes || {}).forEach((code) => {
+			if (rateData?.freight_charge_codes?.[code].tags?.includes('mandatory')) {
 				let flag = {};
 				prefillFreightCodes.forEach((charge) => {
 					if (charge.code === code) {
 						flag = charge;
 					}
 				});
-
 				if (Object.keys(flag).length) {
 					prefillFreightCodes = prefillFreightCodes.filter((item) => item.code !== flag.code);
 					mandatoryFreightCodes = [...mandatoryFreightCodes,
@@ -157,13 +166,15 @@ function AddRateModal({
 		if (mandatoryFreightCodes.length || prefillFreightCodes.length) {
 			setValue('line_items', [...mandatoryFreightCodes, ...prefillFreightCodes]);
 		}
-	}, []);
+
+		setValue('free_weight', rateData?.weight_limit?.free_limit);
+	}, [JSON.stringify(rateData)]);
 
 	useEffect(() => {
-		if (chargeCodesData?.list) {
-			setChargeCodes(chargeCodesData?.list);
+		if (rateData?.freight_charge_codes) {
+			setChargeCodes(rateData?.freight_charge_codes);
 		}
-	}, [JSON.stringify(chargeCodesData?.list)]);
+	}, [JSON.stringify(rateData?.freight_charge_codes)]);
 
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">

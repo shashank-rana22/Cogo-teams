@@ -1,9 +1,10 @@
-import { currencyOptions } from '../../../../../configurations/helpers/constants';
+import { currencyOptions } from '../helpers/constants';
 
-const airCustomsControls = ({
+const lclCustomsControls = ({
 	data,
 	CommodityOptions,
-	originLocationOptions, source,
+	originLocationOptions,
+	source,
 }) => {
 	const controls = [
 		{
@@ -30,13 +31,19 @@ const airCustomsControls = ({
 			rules       : { required: 'rate provided by user is required' },
 		},
 		{
+			name         : 'location_details',
+			heading      : 'Location Details',
+			span         : 12,
+			showOptional : false,
+		},
+		{
 			name        : 'origin_location_id',
 			label       : 'Origin Location',
 			type        : 'select',
 			placeholder : 'Origin Location',
 			span        : 4,
 			value       : data?.location_id,
-			disabled  	 : data?.location_id,
+			disabled 	  : data?.location_id,
 			...originLocationOptions,
 			rules       : { required: 'origin location is required' },
 		},
@@ -63,17 +70,16 @@ const airCustomsControls = ({
 			rules     : { required: 'This is required' },
 		},
 		{
-			name        : 'commodity',
 			label       : 'Commodity',
+			name        : 'commodity',
 			type        : 'select',
 			placeholder : 'Commodity',
-			span        : 3,
+			span        : 4,
 			value       : data?.commodity,
 			options     : CommodityOptions,
-			rules       : { required: 'commodity is required' },
 		},
 		source === 'live_booking'
-			? 			{
+			? {
 				name  : 'is_shipper_specific',
 				label : 'Shipper Specific Rate',
 				type  : 'checkbox',
@@ -104,7 +110,7 @@ const airCustomsControls = ({
 					name        : 'currency',
 					type        : 'select',
 					options     : currencyOptions,
-					span        : 2,
+					span        : 1.5,
 					placeholder : 'Curr...',
 					rules       : { required: 'currency is required' },
 				},
@@ -126,7 +132,7 @@ const airCustomsControls = ({
 					name        : 'remarks',
 					placeholder : 'Remarks',
 					type        : 'text',
-					span        : 2,
+					span        : 3,
 				},
 			],
 		},
@@ -134,4 +140,4 @@ const airCustomsControls = ({
 	return controls.filter((control) => control !== null);
 };
 
-export default airCustomsControls;
+export default lclCustomsControls;

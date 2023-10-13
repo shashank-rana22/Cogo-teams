@@ -1,5 +1,6 @@
 /* eslint-disable max-lines-per-function */
-import { currencyOptions } from '../../../../../configurations/helpers/constants';
+
+import { currencyOptions } from '../helpers/constants';
 
 const LOCATION_TYPE_OPTIONS = [
 	{
