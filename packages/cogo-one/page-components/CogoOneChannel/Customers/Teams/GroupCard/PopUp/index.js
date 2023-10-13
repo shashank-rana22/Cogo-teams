@@ -1,12 +1,16 @@
 import { Popover } from '@cogoport/components';
 import {
 	IcMOverflowDot,
-	IcMPin, IcCPin,
+	IcMPin, IcCPin, IcMDelete,
 } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const getIconMapping = ({ updatePinnedChats = () => {}, isPinned = false }) => [
+const getIconMapping = ({
+	updatePinnedChats = () => {},
+	isPinned = false, deleteDraft = () => {},
+	isDraft = false,
+}) => [
 	{
 		name    : 'pin',
 		label   : isPinned ? 'Unpin' : 'Pin',
@@ -15,16 +19,34 @@ const getIconMapping = ({ updatePinnedChats = () => {}, isPinned = false }) => [
 		},
 		icon: isPinned ? IcCPin : IcMPin,
 	},
+	{
+		name    : 'discard',
+		label   : 'Discard',
+		onClick : (e) => {
+			e.stopPropagation();
+			deleteDraft();
+		},
+		hide : !isDraft,
+		icon : IcMDelete,
+	},
 ];
 
-function ListOptions({ isPinned = false, updatePinnedChats = () => {} }) {
-	const iconMapping = getIconMapping({ isPinned, updatePinnedChats });
+function ListOptions({
+	isPinned = false,
+	updatePinnedChats = () => {}, deleteDraft = () => {}, isDraft = false,
+}) {
+	const iconMapping = getIconMapping({ isPinned, updatePinnedChats, deleteDraft, isDraft });
 
 	return (
 		<div className={styles.list_div}>
 			{
 				iconMapping?.map((eachItem) => {
-					const { icon:Icon, onClick = () => {} } = eachItem || {};
+					const { icon:Icon, onClick = () => {}, hide = false } = eachItem || {};
+
+					if (hide) {
+						return null;
+					}
+
 					return (
 						<div
 							key={eachItem?.name}
@@ -46,6 +68,8 @@ function ListOptions({ isPinned = false, updatePinnedChats = () => {} }) {
 function PopUp({
 	updatePinnedChats = () => {},
 	isPinned = false,
+	deleteDraft = () => {},
+	isDraft = false,
 }) {
 	return (
 		<div
@@ -56,6 +80,8 @@ function PopUp({
 					<ListOptions
 						updatePinnedChats={updatePinnedChats}
 						isPinned={isPinned}
+						deleteDraft={deleteDraft}
+						isDraft={isDraft}
 					/>
 				)}
 				caret={false}

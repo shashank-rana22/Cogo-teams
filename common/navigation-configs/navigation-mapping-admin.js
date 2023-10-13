@@ -620,8 +620,12 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/saas/tracking',
 			type          : 'link',
 			main_apis     : [],
-			possible_apis : apis.app_saas_tracking,
-			module_type   : 'crm',
+			possible_apis : [
+				...apis.app_saas_tracking,
+				...apis.app_saas_air_tracking,
+				...apis.app_saas_air_ocean_tracking,
+			],
+			module_type: 'crm',
 		},
 		saas_schedules: {
 			key           : 'saas_schedules',
@@ -773,8 +777,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		rate_sheet: {
 			key           : 'rate_sheet',
 			title         : t('common:rate_sheets'),
-			href          : '/rate-sheets',
-			as            : '/rate-sheets',
+			href          : '/v2/rate-sheets',
+			as            : '/v2/rate-sheets',
 			type          : 'link',
 			possible_apis : apis.rate_sheet,
 			icon          : IcMRateSheets,
@@ -1121,16 +1125,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.app_saas_air_schedules,
 			icon          : IcMAir,
 			main_apis     : [],
-			module_type   : 'crm',
-		},
-		saas_air_tracking: {
-			key           : 'saas_air_tracking',
-			title         : t('common:air_tracking'),
-			href          : '/saas/air-tracking',
-			as            : '/saas/air-tracking',
-			type          : 'link',
-			main_apis     : [],
-			possible_apis : apis.app_saas_air_tracking,
 			module_type   : 'crm',
 		},
 		unified_dashboard: {
@@ -1481,8 +1475,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		terms_and_conditions: {
 			key           : 'terms_and_conditions',
 			title         : t('common:terms_and_conditions'),
-			href          : '/terms-and-conditions',
-			as            : '/terms-and-conditions',
+			href          : '/v2/terms-and-conditions',
+			as            : '/v2/terms-and-conditions',
 			type          : 'link',
 			icon          : IcMPaylater,
 			main_apis     : ['list_terms_and_conditions'],
@@ -1836,8 +1830,8 @@ const navigationMapping = ({ t = () => {} }) => {
 			options       : [
 				{
 					title : t('common:weight_slabs'),
-					href  : '/supply-tools/weight-slabs',
-					as    : '/supply-tools/weight-slabs',
+					href  : '/v2/supply-tools/weight-slabs',
+					as    : '/v2/supply-tools/weight-slabs',
 				},
 				{
 					title : t('common:commodity_cluster'),
@@ -1846,8 +1840,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				},
 				{
 					title : t('common:fcl_freight_rate_extension'),
-					href  : '/supply-tools/fcl-freight-rate-extensions',
-					as    : '/supply-tools/fcl-freight-rate-extensions',
+					href  : '/v2/supply-tools/fcl-freight-rate-extensions',
+					as    : '/v2/supply-tools/fcl-freight-rate-extensions',
 				},
 				{
 					title : t('common:detention_demurrage'),
