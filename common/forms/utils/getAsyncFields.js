@@ -1020,6 +1020,17 @@ function asyncListOverSeasTradeParties() {
 	};
 }
 
+function asyncListShippingLineEvents() {
+	return {
+		labelKey    : 'milestone',
+		valueKey    : 'id',
+		endpoint    : 'list_shipping_line_events',
+		initialCall : true,
+		params      : {
+			filters: { status: 'active' },
+		},
+	};
+}
 function asyncListSaasPlan() {
 	return {
 		labelKey : 'display_name',
@@ -1382,6 +1393,7 @@ export {
 	asyncListFclFreightCommodityClusters,
 	asyncListSpotSearchRateCardOperators,
 	asyncListOverSeasTradeParties,
+	asyncListShippingLineEvents,
 	asyncListSaasPlan,
 	asyncListEnrichmentSources,
 	asyncListIncidentTypes,
