@@ -9,7 +9,6 @@ import ContractAd from '../../../../common/ContractAd';
 import RequestRate from '../../../../common/RequestRate';
 
 import AppliedFilters from './components/AppliedFilters';
-import ComparisonHeader from './components/ComparisonHeader';
 import EmptyState from './components/EmptyState';
 import Header from './components/Header';
 import RateCard from './components/RateCard';
@@ -22,21 +21,13 @@ function ListRates({
 	setFilters = () => {},
 	refetch = () => {},
 	loading = false,
-	comparisonRates = {},
-	setScreen = () => {},
-	setComparisonRates = () => {},
 	paginationProps = {},
 	contract_detail = {},
-	infoBanner = {},
-	setInfoBanner = () => {},
-	isGuideViewed = false,
 	routerLoading = false,
 	setRouterLoading = () => {},
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
-
-	const showComparison = !isEmpty(comparisonRates);
 
 	const { total_count, page_limit, page } = paginationProps;
 
@@ -86,14 +77,6 @@ function ListRates({
 						setOpenAccordian={setOpenAccordian}
 						setRouterLoading={setRouterLoading}
 					/>
-
-					{showComparison ? (
-						<ComparisonHeader
-							comparisonRates={comparisonRates}
-							setComparisonRates={setComparisonRates}
-							setScreen={setScreen}
-						/>
-					) : null}
 				</div>
 			</div>
 
@@ -112,12 +95,7 @@ function ListRates({
 						rate={rateItem}
 						detail={detail}
 						index={index}
-						setComparisonRates={setComparisonRates}
-						comparisonRates={comparisonRates}
 						routerLoading={routerLoading}
-						showGuide={!index && !isGuideViewed}
-						infoBanner={infoBanner}
-						setInfoBanner={setInfoBanner}
 					/>
 
 					{index === GLOBAL_CONSTANTS.zeroth_index ? (

@@ -9,14 +9,9 @@ import styles from './styles.module.css';
 function RateCard({
 	rate = {},
 	detail = {},
-	comparisonRates = {},
-	setComparisonRates = () => {},
 	isSelectedCard = false,
 	index = 0,
 	setRouterLoading = () => {},
-	infoBanner = {},
-	showGuide = false,
-	setInfoBanner = () => {},
 }) {
 	return (
 		<div
@@ -28,12 +23,6 @@ function RateCard({
 			<Header
 				detail={detail}
 				rate={rate}
-				comparisonRates={comparisonRates}
-				setComparisonRates={setComparisonRates}
-				isSelectedCard={isSelectedCard}
-				infoBanner={infoBanner}
-				showGuide={showGuide}
-				setInfoBanner={setInfoBanner}
 			/>
 
 			<Body

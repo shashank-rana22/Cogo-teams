@@ -1,5 +1,3 @@
-import Comparison from '../../common/Comparison';
-
 import ListRates from './components/ListRates';
 import SelectedRateCard from './components/SelectedRateCard';
 
@@ -9,9 +7,6 @@ function FTLResults({
 	contract_detail = {},
 	setSelectedCard = () => {},
 	selectedCard = {},
-	setScreen = () => {},
-	setComparisonRates = () => {},
-	comparisonRates = {},
 	filters = {},
 	setFilters = () => {},
 	setPage = () => {},
@@ -21,9 +16,6 @@ function FTLResults({
 	paginationProps = {},
 	loading = false,
 	screen = 'listRateCard',
-	infoBanner = {},
-	setInfoBanner = () => {},
-	isGuideViewed = false,
 	routerLoading = false,
 	setRouterLoading = () => {},
 }) {
@@ -36,9 +28,6 @@ function FTLResults({
 				contract_detail,
 				setSelectedCard,
 				selectedCard,
-				setScreen,
-				setComparisonRates,
-				comparisonRates,
 				filters,
 				setFilters,
 				setPage,
@@ -47,21 +36,8 @@ function FTLResults({
 				selectedWeek,
 				setSelectedWeek,
 				refetch,
-				infoBanner,
-				setInfoBanner,
-				isGuideViewed,
 				routerLoading,
 				setRouterLoading,
-			},
-		},
-		comparison: {
-			component : Comparison,
-			props     : {
-				detail,
-				setScreen,
-				comparisonRates,
-				setComparisonRates,
-				mode: 'ftl_freight',
 			},
 		},
 		selectedCardScreen: {

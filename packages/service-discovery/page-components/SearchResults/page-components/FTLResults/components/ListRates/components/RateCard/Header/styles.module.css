@@ -47,11 +47,6 @@
 	}
 }
 
-.trip_type_container {
-	display: flex;
-	align-items: center;
-}
-
 .trip_type_icon {
 	font-size: 20px;
 
