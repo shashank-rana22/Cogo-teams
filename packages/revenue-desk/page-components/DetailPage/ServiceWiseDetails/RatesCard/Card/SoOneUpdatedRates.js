@@ -5,9 +5,10 @@ import ShowLineItems from './ShowLineItems';
 import styles from './styles.module.css';
 
 function SoOneUpdatedRates({ data = {}, singleServiceData = {} }) {
-	const so1UpdatedLineItems = data?.rowData?.so1_updated_rates?.fcl_freight_service || [];
+	const so1UpdatedLineItems = data?.rowData?.so1_updated_rates?.fcl_freight_service
+	|| data?.rowData?.so1_updated_rates?.air_freight_service || [];
 	const so1UpdatedOriginLocalsLineItems = data?.rowData?.so1_updated_rates?.origin_local || [];
-	const so1UpdatedDestinationLocalsLineItems = data?.rowData?.so1_updated_rates?.destination_locals || [];
+	const so1UpdatedDestinationLocalsLineItems = data?.rowData?.so1_updated_rates?.destination_local || [];
 	const isDisplaySo1LineItems = !isEmpty([...so1UpdatedLineItems,
 		...so1UpdatedOriginLocalsLineItems, ...so1UpdatedDestinationLocalsLineItems]);
 	return (
