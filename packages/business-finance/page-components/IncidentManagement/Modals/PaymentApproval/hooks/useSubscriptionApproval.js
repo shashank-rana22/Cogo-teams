@@ -2,13 +2,15 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import toastApiError from '../../../../commons/toastApiError.ts';
+
 const useSubscriptionApproval = ({
+	remarks,
 	refetch = () => {},
 	setDetailsModal = () => {},
 	saasUtrUploadRequest = {},
 	id = '',
 	apiData = {},
-	t = () => {},
 }) => {
 	const { user_id: userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -24,8 +26,8 @@ const useSubscriptionApproval = ({
 	);
 
 	const successToast = () => {
-		Toast.success(t('incidentManagement:request_updated_successfully_message'));
-		setDetailsModal(false);
+		Toast.success('Request Updated Sucessfully');
+		setDetailsModal(null);
 		refetch();
 	};
 
@@ -33,9 +35,12 @@ const useSubscriptionApproval = ({
 		try {
 			const apiResponse = await trigger({
 				data: {
-					saasUtrUploadRequest : { ...(saasUtrUploadRequest || {}), utr_details: apiData },
+					data: {
+						saasUtrUploadRequest: { ...(saasUtrUploadRequest || {}), utr_details: apiData },
+					},
+					remark    : remarks,
 					status,
-					updatedBy            : userId,
+					updatedBy : userId,
 				},
 			});
 			const {
@@ -47,7 +52,7 @@ const useSubscriptionApproval = ({
 				Toast.error(message);
 			}
 		} catch (e) {
-			Toast.error(e?.response?.data?.message || t('incidentManagement:something_went_wrong_message'));
+			toastApiError(e);
 		}
 	};
 

@@ -7,12 +7,14 @@ import { paymentApprovalColumns } from '../tableconfig';
 import styles from './styles.module.css';
 
 function StyledTable({
-	apiData = {}, setApiData = () => { },
+	apiData = {},
+	setApiData = () => {},
+	incidentStatus = '',
 }) {
 	return (
 		<div className={styles.table}>
 			<Table
-				columns={paymentApprovalColumns({ setApiData })}
+				columns={paymentApprovalColumns({ setApiData, incidentStatus })}
 				data={apiData}
 			/>
 

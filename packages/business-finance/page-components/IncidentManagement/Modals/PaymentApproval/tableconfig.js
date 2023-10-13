@@ -4,16 +4,18 @@ import styles from './styles.module.css';
 
 const NOT_FOUND = -1;
 
-const getOptionsData = [
+const getOptionsData = ({ incidentStatus }) => [
 	{
-		label : 'Approve',
-		value : 'APPROVED',
-		name  : '',
+		label    : 'Approve',
+		value    : 'APPROVED',
+		name     : '',
+		disabled : incidentStatus !== 'REQUESTED',
 	},
 	{
-		label : 'Reject',
-		value : 'REJECTED',
-		name  : '',
+		label    : 'Reject',
+		value    : 'REJECTED',
+		name     : '',
+		disabled : incidentStatus !== 'REQUESTED',
 	}];
 
 const handleApiAmount = ({ key, val, id, setApiData }) => {
@@ -29,6 +31,7 @@ const handleApiAmount = ({ key, val, id, setApiData }) => {
 
 export const paymentApprovalColumns = ({
 	setApiData = () => {},
+	incidentStatus = '',
 }) => [
 	{
 		Header   : 'UTR Number',
@@ -50,17 +53,27 @@ export const paymentApprovalColumns = ({
 					placeholder="Amount"
 					type="number"
 					value={row?.amount}
+					disabled={incidentStatus !== 'REQUESTED'}
 				/>
 			</div>
 		),
-		id: 'paidAmount',
+		id: 'amount',
+	},
+	{
+		Header   : 'Currency',
+		accessor : (row) => (
+			<div className={styles.input}>
+				{row?.currency || ''}
+			</div>
+		),
+		id: 'currency',
 	},
 	{
 		Header   : '',
 		accessor : (row) => (
 			<div className={styles.radio}>
 				<RadioGroup
-					options={getOptionsData}
+					options={getOptionsData({ incidentStatus })}
 					onChange={(val) => handleApiAmount({ val, id: row?.id, key: 'status', setApiData })}
 					value={row?.status}
 				/>
@@ -78,6 +91,7 @@ export const paymentApprovalColumns = ({
 				onChange={(val) => handleApiAmount({ val, id: row?.id, key: 'remarks', setApiData })}
 				value={row?.remarks}
 				style={{ height: '40px' }}
+				disabled={incidentStatus !== 'REQUESTED'}
 			/>
 		),
 		id: 'text',

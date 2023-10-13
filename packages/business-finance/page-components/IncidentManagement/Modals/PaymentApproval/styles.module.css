@@ -62,3 +62,7 @@
 	justify-content: flex-end;
 	padding: 12px;
 }
+
+.text_area {
+	margin: 8px 18px;
+}

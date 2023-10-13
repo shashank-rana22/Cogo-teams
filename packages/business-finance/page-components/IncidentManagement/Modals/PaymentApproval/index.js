@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, cl, Textarea } from '@cogoport/components';
 import { useState } from 'react';
 
 import getDetails from './details';
@@ -14,6 +14,9 @@ function PaymentApproval({
 	setDetailsModal = () => { },
 }) {
 	const [apiData, setApiData] = useState([...(row?.data?.saasUtrUploadRequest?.utr_details || [])]);
+	const [remarks, setRemerks] = useState('');
+
+	const incidentStatus = row?.status || '';
 
 	let isDisabled = false;
 	let allFieldsNotMarked = false;
@@ -27,6 +30,7 @@ function PaymentApproval({
 	});
 
 	const { onAction, loading } = useSubscriptionApproval({
+		remarks,
 		apiData,
 		refetch,
 		setDetailsModal,
@@ -52,28 +56,43 @@ function PaymentApproval({
 				<StyledTable
 					apiData={apiData}
 					setApiData={setApiData}
+					incidentStatus={incidentStatus}
 				/>
+				<div className={styles.text_area}>
+					<div className={styles.span}>Remarks</div>
+					<Textarea
+						name="remarks"
+						size="md"
+						placeholder="Enter Remarks Here..."
+						onChange={setRemerks}
+						value={remarks}
+						style={{ height: '80px' }}
+						disabled={incidentStatus !== 'REQUESTED'}
+					/>
+				</div>
 			</div>
-			<div className={styles.button_container}>
-				<Button
-					size="md"
-					themeType="secondary"
-					disabled={allFieldsNotMarked || loading}
-					loading={loading}
-					onClick={() => onAction({ status: 'REJECTED' })}
-				>
-					Reject
-				</Button>
-				<Button
-					size="md"
-					themeType="primary"
-					disabled={isDisabled || loading || allFieldsNotMarked}
-					loading={loading}
-					onClick={() => onAction({ status: 'APPROVED' })}
-				>
-					Approve
-				</Button>
-			</div>
+			{incidentStatus === 'REQUESTED' ? (
+				<div className={styles.button_container}>
+					<Button
+						size="md"
+						themeType="secondary"
+						disabled={allFieldsNotMarked || loading}
+						loading={loading}
+						onClick={() => onAction({ status: 'REJECTED' })}
+					>
+						Reject
+					</Button>
+					<Button
+						size="md"
+						themeType="primary"
+						disabled={isDisabled || loading || allFieldsNotMarked}
+						loading={loading}
+						onClick={() => onAction({ status: 'APPROVED' })}
+					>
+						Approve
+					</Button>
+				</div>
+			) : null}
 		</div>
 	);
 }
