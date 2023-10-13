@@ -124,7 +124,7 @@ function ShipmentsCard({
 			<div className={styles.shipment_type_container}>
 				{ShipmentIcon && <ShipmentIcon className={styles.ship_icon} /> }
 				{startCase(shipment_type)}
-				{GLOBAL_CONSTANTS.cogopor_care_user_id === sales_agent.id && (
+				{GLOBAL_CONSTANTS.cogoport_care_user_id === sales_agent.id && (
 					<div className={styles.shipment_tag}>
 						Self Served
 					</div>
