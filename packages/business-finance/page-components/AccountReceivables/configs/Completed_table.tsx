@@ -1,7 +1,8 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
-import { format, getByKey, startCase } from '@cogoport/utils';
+import { format, getByKey, isEmpty, startCase } from '@cogoport/utils';
+import React from 'react';
 
 import InvoiceDetails from '../commons/invoiceDetails';
 import Remarks from '../commons/Remarks';
@@ -12,7 +13,6 @@ import getStatus from '../Utils/getStatus';
 
 import CheckboxItem from './CheckboxItem';
 import HeaderCheckbox from './HeaderCheckbox';
-import ShipmentView from './ShipmentView';
 import SortHeaderInvoice from './SortHeaderInvoice';
 import styles from './styles.module.css';
 
@@ -42,36 +42,62 @@ const INVOICE_STATUS_MAPPING = {
 
 const IRN_GENERATEABLE_STATUSES = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 
+const SHIPMENT_MAPPING = {
+	FCL_FREIGHT           : 'fcl',
+	AIR_FREIGHT           : 'air-freight',
+	FTL_FREIGHT           : 'ftl',
+	LCL_FREIGHT           : 'lcl',
+	HAULAGE_FREIGHT       : 'haulage',
+	RAIL_DOMESTIC_FREIGHT : 'rail-domestic',
+	FCL_CUSTOMS        	  : 'fcl-custom',
+	AIR_CUSTOMS           : 'air-customs',
+};
+
+const OLD_ADMIN_NAVS = ['fcl_freight_local', 'domestic_air_freight', 'rail_domestic_freight'];
+
+function openLink({ event, partnerId, shipmentId, serviceTypeUpper }) {
+	event.preventDefault();
+	if (OLD_ADMIN_NAVS.includes(serviceTypeUpper)) {
+		window.open(`/${partnerId}/shipments/${shipmentId}`, '_blank');
+		return;
+	}
+	const serviceTypeMap = SHIPMENT_MAPPING[serviceTypeUpper?.toUpperCase()];
+	window.open(`/v2/${partnerId}/booking/${serviceTypeMap}/${shipmentId}`, '_blank');
+}
+
 interface InvoiceTable {
-	entityCode ?: string,
+	entityCode?: string,
 	refetch?: Function,
 	showName?: boolean,
-	setSort?: (p: object)=>void,
+	setSort?: (p: object) => void,
 	sortStyleGrandTotalAsc?: string,
 	sortStyleGrandTotalDesc?: string,
+	sortStyleLedgerTotalAsc?: string,
+	sortStyleLedgerTotalDesc?: string,
 	sortStyleInvoiceDateAsc?: string,
 	sortStyleInvoiceDateDesc?: string,
 	sortStyleDueDateAsc?: string,
 	sortStyleDueDateDesc?: string,
 	invoiceFilters?: object,
-	setinvoiceFilters?: (p:object) => void,
-	checkedRows?:object[],
-	setCheckedRows?:Function,
-	totalRows?:object[],
-	isHeaderChecked?:boolean,
-	setIsHeaderChecked?:Function,
+	setinvoiceFilters?: (p: object) => void,
+	checkedRows?: object[],
+	setCheckedRows?: Function,
+	totalRows?: object[],
+	isHeaderChecked?: boolean,
+	setIsHeaderChecked?: Function,
 	showFilters?: boolean,
+	partner_id?: string,
 }
 const MIN_NAME_STRING = 0;
-const MAX_NAME_STRING = 12;
+const MAX_NAME_STRING = 14;
 const NINE = 9;
 
 const completedColumn = ({
 	refetch,
 	showName,
 	setSort,
-	sortStyleGrandTotalAsc,
-	sortStyleGrandTotalDesc,
+	sortStyleLedgerTotalAsc,
+	sortStyleLedgerTotalDesc,
 	sortStyleInvoiceDateAsc,
 	sortStyleInvoiceDateDesc,
 	sortStyleDueDateAsc,
@@ -85,6 +111,7 @@ const completedColumn = ({
 	setIsHeaderChecked,
 	entityCode,
 	showFilters = true,
+	partner_id,
 }: InvoiceTable) => [
 	{
 		Header: <HeaderCheckbox
@@ -96,12 +123,14 @@ const completedColumn = ({
 		/>,
 		span     : 1,
 		id       : 'checkbox',
-		accessor : (row?:object) => (
+		accessor : (row?: object) => (
 			<CheckboxItem
+				setIsHeaderChecked={setIsHeaderChecked}
 				IRN_GENERATEABLE_STATUSES={IRN_GENERATEABLE_STATUSES}
 				checkedRows={checkedRows}
 				setCheckedRows={setCheckedRows}
 				row={row}
+				totalRows={totalRows}
 			/>
 		),
 	},
@@ -110,75 +139,89 @@ const completedColumn = ({
 		id       : 'name',
 		accessor : (row) => (
 			showName
-			&& (
-				(getByKey(row, 'organizationName') as string).length > MAX_NAME_STRING ? (
-					<Tooltip
-						interactive
-						placement="top"
-						content={<div className={styles.tool_tip}>{getByKey(row, 'organizationName') as string}</div>}
-					>
-						<text className={styles.cursor}>
-							{`${(getByKey(row, 'organizationName') as string).substring(
-								MIN_NAME_STRING,
-								MAX_NAME_STRING,
-							)}...`}
-						</text>
-					</Tooltip>
-				)
-					: (
-						<div>
-							{getByKey(row, 'organizationName') as string}
-						</div>
+				&& (
+					(getByKey(row, 'organizationName') as string).length > MAX_NAME_STRING ? (
+						<Tooltip
+							interactive
+							placement="top"
+							content={(
+								<div className={styles.tool_tip}>
+									{getByKey(row, 'organizationName') as string}
+								</div>
+							)}
+						>
+							<text className={styles.cursor}>
+								{`${(getByKey(row, 'organizationName') as string).substring(
+									MIN_NAME_STRING,
+									MAX_NAME_STRING,
+								)}...`}
+							</text>
+						</Tooltip>
 					)
-			)
+						: (
+							<div className={styles.cursor}>
+								{getByKey(row, 'organizationName') as string}
+							</div>
+						)
+				)
 		),
 	},
 	{
 		Header   : 'Invoice Number',
 		accessor : (row) => {
 			const {
-				invoice_number:invoiceNumber = '',
+				invoice_number: invoiceNumber = '',
 				invoice_pdf: invoicePdf = '',
 				invoice_type: invoiceType = '',
 			} = getDocumentInfo({ itemData: row });
 
+			const openPdfInNewTab = () => {
+				if (!isEmpty(invoicePdf)) {
+					window.open(invoicePdf, '_blank');
+				}
+			};
+
 			return (
 				<div className={styles.fieldPair}>
-					{(invoiceNumber)?.length > 10 ? (
-						<Tooltip
-							interactive
-							placement="top"
-							content={(
-								<div className={styles.tool_tip}>
+					<div className={styles.column_height}>
+						{(invoiceNumber)?.length > 10 ? (
+							<Tooltip
+								interactive
+								placement="top"
+								content={(
+									<div className={styles.tool_tip}>
+										{invoiceNumber}
+									</div>
+								)}
+							>
+								<text
+									className={!isEmpty(invoicePdf) ? styles.link : ''}
+									onClick={openPdfInNewTab}
+									role="presentation"
+								>
+									{`${(invoiceNumber).substring(
+										0,
+										10,
+									)}...`}
+								</text>
+							</Tooltip>
+						)
+							: (
+								<div
+									className={!isEmpty(invoicePdf) ? styles.link : ''}
+									onClick={openPdfInNewTab}
+									role="presentation"
+								>
 									{invoiceNumber}
 								</div>
 							)}
-						>
-							<text
-								className={styles.link}
-								onClick={() => window.open(invoicePdf, '_blank')}
-								role="presentation"
-							>
-								{`${(invoiceNumber).substring(
-									0,
-									10,
-								)}...`}
-							</text>
-						</Tooltip>
-					)
-						: (
-							<div
-								className={styles.link}
-								onClick={() => window.open(invoicePdf, '_blank')}
-								role="presentation"
-							>
-								{invoiceNumber}
+						{invoiceType ? (
+							<div className={styles.qwerty}>
+								<Pill size="sm" color={INVOICE_TYPE[row?.invoiceType]}>
+									{startCase(invoiceType)}
+								</Pill>
 							</div>
-						)}
-					<div>
-						<Pill size="sm" color={INVOICE_TYPE[row?.invoiceType]}>
-							{invoiceType}
-						</Pill>
+						) : null}
 					</div>
 				</div>
 			);
@@ -188,98 +231,139 @@ const completedColumn = ({
 	},
 	{
 		Header   : 'SID',
-		accessor : (row) => (
-			<ShipmentView row={row} />
+		accessor : ({ sidNo, serviceType = '', shipmentId }) => (
+			<>
+				<a
+					href={shipmentId}
+					onClick={(event) => {
+						openLink({
+							event,
+							partnerId        : partner_id,
+							shipmentId,
+							serviceTypeUpper : serviceType,
+						});
+					}}
+					className={styles.link}
+				>
+					{sidNo || '-'}
+				</a>
+				{startCase(serviceType as string)?.length > MAX_NAME_STRING ? (
+
+					<Tooltip
+						interactive
+						placement="top"
+						content={(
+							<div className={styles.tool_tip}>
+								{startCase(serviceType as string)}
+							</div>
+						)}
+					>
+						<text className={styles.cursor}>
+							{`${startCase(serviceType as string)?.substring(
+								MIN_NAME_STRING,
+								MAX_NAME_STRING,
+							)}...`}
+						</text>
+					</Tooltip>
+				)
+					: (
+						<div className={styles.cursor}>
+							{startCase(serviceType as string)}
+						</div>
+					)}
+			</>
 		),
 	},
 	{
-		Header: () => (
-			<div className={styles.flex}>
-				<div>
-					Invoice Amount
-				</div>
-				<SortHeaderInvoice
-					invoiceFilter={invoiceFilters}
-					setInvoiceFilter={setinvoiceFilters}
-					setOrderBy={setSort}
-					sortStyleDesc={sortStyleGrandTotalDesc}
-					sortStyleAsc={sortStyleGrandTotalAsc}
-					type="grandTotal"
-				/>
-			</div>
-		),
-		accessor: (row) => (
+		Header   : 'Invoice Amount',
+		accessor : (row) => (
 
 			<div className={styles.fieldPair}>
-				<div>
+				<div className={styles.column_height}>
 					<div>
-						{
-						formatAmount({
-							amount   : getByKey(row, 'invoiceAmount') as any,
-							currency : getByKey(row, 'invoiceCurrency') as string,
-							options  : {
-								style           : 'currency',
-								currencyDisplay : 'code',
-							},
-						})
-					}
+						<div>
+							{
+									formatAmount({
+										amount   : getByKey(row, 'invoiceAmount') as any,
+										currency : getByKey(row, 'invoiceCurrency') as string,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									})
+								}
+						</div>
 					</div>
-				</div>
 
-				<div
-					className={styles.styled_pills}
-					style={{
-						'--color': STATUS[(getByKey(row, 'status') as string)],
-					} as any}
-				>
+					<div
+						className={styles.styled_pills}
+						style={{
+							'--color': STATUS[(getByKey(row, 'status') as string)],
+						} as any}
+					>
 
-					{startCase(getByKey(row, 'status') as string).length > 10 ? (
-						<Tooltip
-							interactive
-							placement="top"
-							content={(
-								<div className={styles.tool_tip}>
+						{startCase(getByKey(row, 'status') as string).length > 10 ? (
+							<Tooltip
+								interactive
+								placement="top"
+								content={(
+									<div className={styles.tool_tip}>
+										{startCase(getByKey(row, 'status') as string)}
+									</div>
+								)}
+							>
+								<text className={styles.style_text}>
+									{`${startCase(getByKey(row, 'status') as string).substring(
+										0,
+										10,
+									)}...`}
+								</text>
+							</Tooltip>
+						)
+							: (
+								<div className={styles.style_text}>
 									{startCase(getByKey(row, 'status') as string)}
 								</div>
 							)}
-						>
-							<text className={styles.style_text}>
-								{`${startCase(getByKey(row, 'status') as string).substring(
-									0,
-									10,
-								)}...`}
-							</text>
-						</Tooltip>
-					)
-						: (
-							<div className={styles.style_text}>
-								{startCase(getByKey(row, 'status') as string)}
-							</div>
-						)}
+					</div>
 				</div>
-
 			</div>
 		),
 		id: 'invoice_amount',
 	},
 	{
-		Header   : 'Ledger Amount',
-		accessor : (row) => (
+		Header: () => (
+			<div className={styles.flex}>
+				<div>
+					Ledger Amount
+				</div>
+				<SortHeaderInvoice
+					invoiceFilter={invoiceFilters}
+					setInvoiceFilter={setinvoiceFilters}
+					setOrderBy={setSort}
+					sortStyleDesc={sortStyleLedgerTotalDesc}
+					sortStyleAsc={sortStyleLedgerTotalAsc}
+					type="ledgerTotal"
+				/>
+			</div>
+		),
+		accessor: (row) => (
 			<div>
 				<div>
 					{
-					formatAmount({
-						amount   : getByKey(row, 'ledgerAmount') as any,
-						currency : getByKey(row, 'ledgerCurrency') as string,
-						options  : {
-							style           : 'currency',
-							currencyDisplay : 'code',
-						},
-					})
-					}
+							formatAmount({
+								amount   : getByKey(row, 'ledgerAmount') as any,
+								currency : getByKey(row, 'ledgerCurrency') as string,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})
+						}
 				</div>
 			</div>
 		),
+		id: 'ledger_amount',
 	},
 	{
 		Header   : 'Balance Amount',
@@ -287,15 +371,15 @@ const completedColumn = ({
 			<div>
 				<div>
 					{
-						formatAmount({
-							amount   : getByKey(row, 'balanceAmount') as any,
-							currency : getByKey(row, 'invoiceCurrency') as string,
-							options  : {
-								style           : 'currency',
-								currencyDisplay : 'code',
-							},
-						})
-					}
+							formatAmount({
+								amount   : getByKey(row, 'balanceAmount') as any,
+								currency : getByKey(row, 'invoiceCurrency') as string,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})
+						}
 
 				</div>
 			</div>

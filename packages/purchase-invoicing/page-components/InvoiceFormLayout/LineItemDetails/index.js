@@ -51,7 +51,7 @@ function LineItemDetails({
 		(item) => item?.value === collectionPartyTaxNumber,
 	)?.id;
 
-	const finalLineItemConfig = [...(extraLineItems({ serviceProvider }) || []), ...lineItemConfig];
+	const finalLineItemConfig = [...(extraLineItems({ serviceProvider, shipment_data }) || []), ...lineItemConfig];
 
 	return (
 		<AccordianView title="Line Item Details" fullwidth showerror={errMszs.line_items} open={open}>
@@ -100,6 +100,7 @@ function LineItemDetails({
 												shipment_type  : shipment_data?.shipment_type,
 												job_created_at : shipment_data?.created_at,
 											},
+											options: field?.options || [],
 											errors,
 											setCodes,
 											shipmentId,

@@ -1,4 +1,19 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	:global {
+		.ui_select_container {
+			min-width: 160px;
+			max-width: 160px;
+			margin-left: 0 !important;
+		}
+	}
+}
+
 .category_container {
+	position: relative;
 	display: flex;
 	justify-content: flex-end;
 	width: 50%;
@@ -6,11 +21,52 @@
 	:global {
 		.ui_select_container:first-child {
 			width: 30%;
+			margin-right: 4px;
 		}
 
 		.ui_select_container:last-child {
-			width: 70%;
+			width: 50%;
 			margin-left: 8px;
 		}
 	}
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	padding: 4px;
+	margin-left: 2px;
+	cursor: pointer;
+	border: 1px solid #bdbdbd;
+	border-radius: 4px;
+}
+
+.wrap {
+	margin-bottom: 10px;
+}
+
+.label {
+	margin-bottom: 4px;
+	font-weight: 500;
+}
+
+.applied_dot {
+	position: absolute;
+	top: 15%;
+	right: 1%;
+	width: 8px;
+	height: 8px;
+	background: #f33;
+	border-radius: 50%;
+}
+
+.footer_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 18px;
 }

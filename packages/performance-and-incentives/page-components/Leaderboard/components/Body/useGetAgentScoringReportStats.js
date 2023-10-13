@@ -46,10 +46,8 @@ function useGetAgentScoringReportStats(props) {
 				...previousParams,
 				filters: {
 					...(previousParams.filters || {}),
-					created_at_greater_than : dateRange?.startDate || undefined,
-					created_at_less_than    : dateRange?.endDate || undefined,
-					partner_id              : entity || undefined,
-					report_type             : currLevel.report_type === ADMIN_REPORT
+
+					report_type: currLevel.report_type === ADMIN_REPORT
 						? AGENT_REPORT : currLevel.report_type,
 					office_location_id : currLevel.location_id || undefined,
 					channel            : currLevel.channel || undefined,
@@ -58,7 +56,19 @@ function useGetAgentScoringReportStats(props) {
 				},
 			}));
 		}
-	}, [dateRange, entity, currLevel, levelStack, loggedInUser, viewType]);
+	}, [currLevel, levelStack, loggedInUser, viewType]);
+
+	useEffect(() => {
+		setStatParams((previousParams) => ({
+			...previousParams,
+			filters: {
+				...(previousParams.filters || {}),
+				created_at_greater_than : dateRange?.startDate || undefined,
+				created_at_less_than    : dateRange?.endDate || undefined,
+				partner_id              : entity || undefined,
+			},
+		}));
+	}, [dateRange, entity]);
 
 	return {
 		data,

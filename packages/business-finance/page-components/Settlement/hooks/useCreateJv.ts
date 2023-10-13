@@ -6,7 +6,7 @@ interface Profile {
 	profile?: { user: { id: string } }
 }
 
-const useCreateJv = ({ setShow, refetch }) => {
+const useCreateJv = ({ setShow, refetch, setJvSearch, setDryRun }) => {
 	const profile: Profile = useSelector((state) => state);
 	const { profile: { user } } = profile || {};
 	const { id: profileid } = user || {};
@@ -21,10 +21,13 @@ const useCreateJv = ({ setShow, refetch }) => {
 
 	const create = async (payload) => {
 		try {
-			await trigger({ data: { ...(payload || {}), createdBy: profileid } });
-			Toast.error('Jv Created Successfully');
+			const res = await trigger({ data: { ...(payload || {}), createdBy: profileid } });
+			Toast.success('Jv Created Successfully');
+			const { data: jvNum = '' } = res || {};
 			setShow(false);
-			refetch();
+			setDryRun(false);
+			setJvSearch(jvNum.data || '');
+			refetch(jvNum.data || '');
 		} catch (e) {
 			Toast.error(e?.response?.data?.message || 'Jv Creation Failed');
 		}

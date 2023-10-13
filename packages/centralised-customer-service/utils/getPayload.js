@@ -8,7 +8,12 @@ const getPayload = ({
 	id, source = '',
 }) => {
 	const shipmentCapacities = Object.keys(values)?.reduce((acc, curr) => {
-		const [index, service_type, service_duration_type] = curr.split('-');
+		if (curr.includes('trigger')) return acc;
+
+		const [index, ...rest] = curr.split('-');
+		const [service_type, trade_type, service_duration_type] = rest;
+
+		const releaseTrigger = rest.join('-');
 
 		if (index >= agentExperienceSlabs.length) {
 			return acc;
@@ -28,7 +33,10 @@ const getPayload = ({
 					? Number(slabDetails.slab_upper_limit) : SLAB_UPPER_LIMIT_MAX,
 				service_type,
 				service_transit_type : service_duration_type,
+				trade_type,
 				shipment_capacity    : Number(values[curr]),
+				release_triggers     : values[`${releaseTrigger}-release_triggers`]
+					.filter((item) => item !== 'trigger'),
 			},
 		];
 	}, []);

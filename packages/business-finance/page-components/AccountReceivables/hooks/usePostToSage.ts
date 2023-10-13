@@ -2,14 +2,12 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
 interface PostToSage {
-	id?: string,
+	id?: string;
+	refetch?: Function
 }
 
-const usePostToSage = ({ id }: PostToSage) => {
-	const [
-		{ data, loading },
-		trigger,
-	] = useRequestBf(
+const usePostToSage = ({ id, refetch = () => {} }: PostToSage) => {
+	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/sales/invoice/post-to-sage',
 			method  : 'post',
@@ -20,8 +18,13 @@ const usePostToSage = ({ id }: PostToSage) => {
 
 	const postToSage = async () => {
 		try {
-			await trigger({ data: { id } });
-			Toast.success('Post to sage successful');
+			const resp = await trigger({ data: { id } });
+			if (resp?.data?.data === 'Success.') {
+				refetch();
+				Toast.success('Post to sage successful');
+			} else {
+				Toast.error('Post to failed');
+			}
 		} catch (err) {
 			Toast.error(err?.response?.data?.message);
 		}
