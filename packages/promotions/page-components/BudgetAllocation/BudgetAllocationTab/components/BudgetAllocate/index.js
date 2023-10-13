@@ -17,6 +17,7 @@ function BudgetAllocate({
 }) {
 	return (
 		<div className={styles.container}>
+			<TablePagination filters={filters} setFilters={setFilters} data={paginationData} />
 			<TableView
 				columns={tableColumns}
 				formattedData={

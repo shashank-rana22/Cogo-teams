@@ -5,7 +5,7 @@ const RoleControls = [
 		type           : 'async_select',
 		asyncKey       : 'partner_roles',
 		initialCall    : false,
-		span           : 10,
+		span           : 12,
 		labelKey       : 'name',
 		valueKey       : 'id',
 		theme          : 'admin',
