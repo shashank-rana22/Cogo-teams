@@ -6,7 +6,11 @@ import React, { useState } from 'react';
 import RateRevertCard from './RateRevertCard';
 import styles from './styles.module.css';
 
-function ListRateReverts({ list = [], mailProps = {}, setActiveTab = () => {} }) {
+function ListRateReverts({
+	list = [],
+	mailProps = {},
+	setActiveTab = () => {},
+}) {
 	const [shipmentPopover, setShipmentPopover] = useState({});
 	const [assignData, setAssignData] = useState({
 		show          : false,
@@ -14,10 +18,23 @@ function ListRateReverts({ list = [], mailProps = {}, setActiveTab = () => {} })
 		assignUser    : '',
 	});
 
+	if (isEmpty(list)) {
+		return (
+			<div className={styles.loader}>
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.empty_state}
+					alt="empty"
+					width={310}
+					height={200}
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
-			{!isEmpty(list) ? (
-				(list || []).map((itm) => (
+			{(list || []).map(
+				(itm) => (
 					<RateRevertCard
 						key={itm?.id}
 						cardData={itm}
@@ -28,16 +45,7 @@ function ListRateReverts({ list = [], mailProps = {}, setActiveTab = () => {} })
 						assignData={assignData}
 						setActiveTab={setActiveTab}
 					/>
-				))
-			) : (
-				<div className={styles.loader}>
-					<Image
-						src={GLOBAL_CONSTANTS.image_url.empty_state}
-						alt="empty"
-						width={250}
-						height={200}
-					/>
-				</div>
+				),
 			)}
 		</div>
 	);

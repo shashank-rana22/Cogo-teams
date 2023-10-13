@@ -1,7 +1,7 @@
 import { Pagination } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import React, { useState } from 'react';
+import React from 'react';
 
 import useListRateJobs from '../../../../hooks/useListRateJobs';
 
@@ -9,18 +9,18 @@ import Header from './Header';
 import ListRateReverts from './ListRateReverts';
 import styles from './styles.module.css';
 
-function RateRevertsPage({ mailProps = {}, setActiveTab = () => {} }) {
-	const [showFilters, setShowFilters] = useState({
-		show      : false,
-		isApplied : false,
-	});
-
+function RateRevertsPage({
+	mailProps = {},
+	setActiveTab = () => {},
+}) {
 	const {
-		setParams = () => {}, params = {}, rateJobsData = {},
+		setParams = () => {},
+		params = {},
+		rateJobsData = {},
 		loading = false,
 	} = useListRateJobs();
 
-	const { total_items = 0, page = 1, list = [] } = rateJobsData || {};
+	const { total_count = 0, page = 1, list = [] } = rateJobsData || {};
 
 	return (
 		<>
@@ -28,9 +28,8 @@ function RateRevertsPage({ mailProps = {}, setActiveTab = () => {} }) {
 				<Header
 					params={params}
 					setParams={setParams}
-					setShowFilters={setShowFilters}
-					showFilters={showFilters}
 				/>
+
 				{loading ? (
 					<div className={styles.loader}>
 						<Image
@@ -40,16 +39,27 @@ function RateRevertsPage({ mailProps = {}, setActiveTab = () => {} }) {
 							height={160}
 						/>
 					</div>
-				) : <ListRateReverts list={list} mailProps={mailProps} setActiveTab={setActiveTab} />}
-
+				) : (
+					<ListRateReverts
+						list={list}
+						mailProps={mailProps}
+						setActiveTab={setActiveTab}
+					/>
+				)}
 			</div>
+
 			<div className={styles.footer_bar}>
 				<Pagination
 					type="table"
 					currentPage={page}
-					totalItems={total_items}
+					totalItems={total_count}
 					pageSize={6}
-					onPageChange={() => setParams((prev) => ({ ...prev, page: page + 1 }))}
+					onPageChange={() => setParams(
+						(prev) => ({
+							...prev,
+							page: page + 1,
+						}),
+					)}
 				/>
 			</div>
 		</>

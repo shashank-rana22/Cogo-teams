@@ -16,24 +16,25 @@ function RateRevertCard({
 	setShipmentPopover = () => {},
 	assignData = {}, setAssignData = () => {}, setActiveTab = () => {},
 }) {
-	// const { setButtonType, setEmailState, signature } = mailProps;
-	// const { service_provider_poc = {} } = cardData || {};
-	// const {
-	// 	email = '', mobile_country_code = '', mobile_number = '',
-	// 	whatsapp_country_code = '', whatsapp_number = '',
-	// 	id = '', name = '',
-	// } = service_provider_poc || {};
-
 	const dispatch = useDispatch();
 
 	const {
 		handleOpenMessage,
 		handleSendMail,
 		handleVoiceCall,
-	} = getRateCardFunction({ mailProps, dispatch, setActiveTab, cardData });
+	} = getRateCardFunction({
+		mailProps,
+		dispatch,
+		setActiveTab,
+		cardData,
+	});
 
 	return (
-		<div role="presentation" className={styles.container} onClick={handleOpenMessage}>
+		<div
+			role="presentation"
+			className={styles.container}
+			onClick={handleOpenMessage}
+		>
 			<ServiceProviderDetails
 				cardData={cardData}
 				setShipmentPopover={setShipmentPopover}
@@ -41,29 +42,34 @@ function RateRevertCard({
 				setAssignData={setAssignData}
 				assignData={assignData}
 			/>
-			<ShipmentDetails cardData={cardData} />
-			<ShipmentProgress cardData={cardData} />
+
+			<ShipmentDetails
+				cardData={cardData}
+			/>
+			<ShipmentProgress
+				cardData={cardData}
+			/>
+
 			<div className={styles.card_footer}>
-				{/* <div className={styles.expiry_time}>
-					10:09 m left
-				</div> */}
 				<div className={styles.actions_container}>
 					<Button
 						size="md"
 						themeType="secondary"
 						className={styles.icon_buttons}
-						onClick={(e) => handleVoiceCall(e)}
+						onClick={handleVoiceCall}
 					>
 						<IcMCall className={styles.call_icon} />
 					</Button>
+
 					<Button
 						size="md"
 						themeType="secondary"
 						className={styles.icon_buttons}
-						onClick={(e) => handleSendMail(e)}
+						onClick={handleSendMail}
 					>
 						<IcMEmail className={styles.email_icon} />
 					</Button>
+
 					<Button size="md" themeType="secondary">
 						+ Verify And Add Rate
 					</Button>

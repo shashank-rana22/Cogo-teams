@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-import { SOURCE_OPTIONS } from '../constants/rateRevertsConstants';
+import { SOURCE_OPTIONS, DEFAULT_RATE_JOBS_FILTERS } from '../constants/rateRevertsConstants';
 
 const getPayload = ({ params }) => ({
 	all_jobs_required : false,
@@ -16,7 +16,7 @@ const getPayload = ({ params }) => ({
 });
 
 const useListRateJobs = () => {
-	const [params, setParams] = useState({ source: ['live_booking'], service: 'fcl_freight' });
+	const [params, setParams] = useState(DEFAULT_RATE_JOBS_FILTERS);
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_smt_rate_jobs',

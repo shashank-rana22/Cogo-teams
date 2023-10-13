@@ -24,3 +24,8 @@ export const SOURCE_OPTIONS = {
 		value : 'cancelled_shipments',
 	},
 };
+
+export const DEFAULT_RATE_JOBS_FILTERS = {
+	source  : ['live_booking'],
+	service : 'fcl_freight',
+};

@@ -16,7 +16,10 @@ const API_NAME = {
 	fcl_cfs     : 'update_fcl_cfs_rate_job',
 };
 
-function useUpdateSMTRateJob({ serviceType = '', setAssignData = () => {} }) {
+function useUpdateSMTRateJob({
+	serviceType = '',
+	setAssignData = () => {},
+}) {
 	const [{ loading }, trigger] = useRequest({
 		url    : `${API_NAME[serviceType]}`,
 		method : 'post',
@@ -24,12 +27,17 @@ function useUpdateSMTRateJob({ serviceType = '', setAssignData = () => {} }) {
 
 	const updateRateJob = async ({ assignUser = '', id = '' }) => {
 		try {
+			if (!API_NAME[serviceType]) {
+				return;
+			}
+
 			await trigger({
 				data: {
 					user_id: assignUser,
 					id,
 				},
 			});
+
 			Toast.success('User update Successful');
 			setAssignData(() => ({
 				assignUser : '',

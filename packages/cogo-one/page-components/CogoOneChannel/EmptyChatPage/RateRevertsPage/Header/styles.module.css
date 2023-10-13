@@ -3,6 +3,10 @@
 	font-weight: 600;
 }
 
+.header_container {
+	padding-bottom: 4px;
+}
+
 .sources_container {
 	position: relative;
 	display: flex;
@@ -25,6 +29,12 @@
 	&::-webkit-scrollbar {
 		display: none;
 	}
+
+	:global {
+		.ui_tag_container {
+			padding-left: 0;
+		}
+	}
 }
 
 .filter_icon {
@@ -32,24 +42,4 @@
 	width: 20px;
 	height: 20px;
 	cursor: pointer;
-}
-
-.filter_box {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 38px;
-	height: 38px;
-	border: 1px solid #bdbdbd;
-	border-radius: 6px;
-}
-
-.dot {
-	position: absolute;
-	top: 24%;
-	right: 0.8%;
-	width: 8px;
-	height: 8px;
-	background: #f33;
-	border-radius: 50%;
 }

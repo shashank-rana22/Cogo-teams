@@ -1,20 +1,18 @@
-import { MultiSelect, Tags, Popover } from '@cogoport/components';
+import { MultiSelect, Tags, Popover, Badge } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
-import React, { useMemo } from 'react';
+import React, { useState } from 'react';
 
 import { SOURCE_OPTIONS } from '../../../../../constants/rateRevertsConstants';
 
 import FilterModal from './FilterModal';
-import getSourceTags from './getSourceTags';
+import { getSourceTags, getAppliedFilters } from './getHeaderFunctions';
 import styles from './styles.module.css';
 
-function Header({ setParams = () => {}, params = {}, setShowFilters = () => {}, showFilters = {} }) {
-	const { isApplied = false, show = false } = showFilters || {};
-
-	const sourceTags = useMemo(
-		() => getSourceTags({ sources: params?.source || [] }),
-		[params?.source],
-	);
+function Header({
+	setParams = () => {},
+	params = {},
+}) {
+	const [showFilters, setShowFilters] = useState(false);
 
 	const handleItemsChange = (val) => setParams(
 		(prev) => ({
@@ -23,8 +21,19 @@ function Header({ setParams = () => {}, params = {}, setShowFilters = () => {}, 
 		}),
 	);
 
+	const {
+		isFiltersApplied = false,
+		filterValues = {},
+		defaultValues = {},
+	} = getAppliedFilters({ params });
+
+	const sourceTags = getSourceTags({
+		sources: params?.source || [],
+		filterValues,
+	});
+
 	return (
-		<>
+		<div className={styles.header_container}>
 			<div className={styles.header}>
 				Rate Reverts
 			</div>
@@ -33,12 +42,17 @@ function Header({ setParams = () => {}, params = {}, setShowFilters = () => {}, 
 				<MultiSelect
 					className={styles.source_select_container}
 					value={params?.source}
-					onChange={(val) => setParams((prev) => ({ ...(prev || {}), source: val }))}
 					placeholder="Select Source"
 					options={Object.values(SOURCE_OPTIONS)}
 					isClearable
 					size="sm"
 					prefix={null}
+					onChange={(val) => setParams(
+						(prev) => ({
+							...(prev || {}),
+							source: val,
+						}),
+					)}
 				/>
 
 				<div className={styles.selected_sources}>
@@ -51,24 +65,35 @@ function Header({ setParams = () => {}, params = {}, setShowFilters = () => {}, 
 
 				<Popover
 					placement="left"
-					render={<FilterModal setParams={setParams} setShowFilters={setShowFilters} />}
 					interactive
-					onClickOutside={() => setShowFilters((prev) => ({ ...prev, show: false }))}
-					visible={show}
+					visible={showFilters}
+					render={(
+						showFilters ? (
+							<FilterModal
+								filterValues={filterValues}
+								defaultValues={defaultValues}
+								setParams={setParams}
+								setShowFilters={setShowFilters}
+							/>
+						) : null
+					)}
 				>
-					<div
-						className={styles.filter_box}
-						role="presentation"
-						onClick={() => setShowFilters((prev) => ({ ...prev, show: true }))}
-					>
+					{isFiltersApplied ? (
+						<Badge color="orange">
+							<IcMFilter
+								className={styles.filter_icon}
+								onClick={() => setShowFilters((prev) => !prev)}
+							/>
+						</Badge>
+					) : (
 						<IcMFilter
 							className={styles.filter_icon}
+							onClick={() => setShowFilters((prev) => !prev)}
 						/>
-					</div>
+					)}
 				</Popover>
-				{isApplied ? <div className={styles.dot} /> : null}
 			</div>
-		</>
+		</div>
 	);
 }
 

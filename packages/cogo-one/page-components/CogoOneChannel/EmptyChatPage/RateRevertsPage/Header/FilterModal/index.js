@@ -1,75 +1,90 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import SHIPMENT_TYPE_OPTIONS from '../../../../../../constants/shipmentTypes';
+import SMT_RATE_REVERT_FILTERS from '../../../../../../configurations/smtRateRevertsFilters';
 import { getFieldController } from '../../../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-const controls = [
-	{
-		label       : 'Select Services',
-		name        : 'service_type',
-		controlType : 'select',
-		placeholder : 'select',
-		options     : Object.values(SHIPMENT_TYPE_OPTIONS),
-	},
-];
-
-function FilterModal({ setParams = () => {}, setShowFilters = () => {} }) {
+function FilterModal({
+	filterValues = {},
+	defaultValues = {},
+	setParams = () => {},
+	setShowFilters = () => {},
+}) {
 	const {
 		control,
 		handleSubmit = () => {},
 		reset = () => {},
-	} = useForm();
+	} = useForm({ defaultValues: filterValues });
 
 	const onSubmit = (val) => {
-		const { service_type } = val || {};
-
-		setShowFilters((prev) => ({
-			...prev,
-			isApplied : true,
-			show      : false,
-		}));
+		setShowFilters(false);
 
 		setParams((prev) => ({
 			...prev,
-			service: service_type,
+			...val,
 		}));
 	};
 
 	const handleReset = () => {
-		reset();
+		reset(defaultValues);
+
 		setParams((prev) => ({
 			...prev,
-			service: '',
+			...defaultValues,
 		}));
-		setShowFilters({
-			show      : false,
-			isApplied : false,
-		});
+
+		setShowFilters(false);
 	};
 
 	return (
 		<div>
-			{controls?.map((controlItem) => {
-				const { label = '', name = '', controlType = '' } = controlItem || {};
-				const Element = getFieldController(controlType);
+			{SMT_RATE_REVERT_FILTERS?.map(
+				(controlItem) => {
+					const {
+						label = '',
+						name = '',
+						controlType = '',
+					} = controlItem || {};
 
-				if (!Element) {
-					return null;
-				}
+					const Element = getFieldController(controlType);
 
-				return (
-					<div className={styles.wrap} key={name}>
-						<div className={styles.label}>{label}</div>
-						<Element control={control} {...controlItem} />
-					</div>
-				);
-			})}
+					if (!Element) {
+						return null;
+					}
+
+					return (
+						<div className={styles.wrap} key={name}>
+							<div className={styles.label}>
+								{label}
+							</div>
+
+							<Element
+								control={control}
+								{...controlItem}
+							/>
+						</div>
+					);
+				},
+			)}
+
 			<div className={styles.button_section}>
-				<Button size="sm" themeType="secondary" onClick={handleReset}>Reset</Button>
-				<Button size="sm" themeType="primary" onClick={handleSubmit(onSubmit)}>Apply</Button>
+				<Button
+					size="md"
+					themeType="secondary"
+					onClick={handleReset}
+				>
+					Reset
+				</Button>
+
+				<Button
+					size="md"
+					themeType="primary"
+					onClick={handleSubmit(onSubmit)}
+				>
+					Apply
+				</Button>
 			</div>
 		</div>
 	);

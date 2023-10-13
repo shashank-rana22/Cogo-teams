@@ -5,10 +5,13 @@ import useUpdateSMTRateJob from '../../../../../../../../hooks/useUpdateSMTRateJ
 
 import styles from './styles.module.css';
 
-function AssignModal({ assignData = {}, setAssignData = () => {}, serviceType = '', id = '' }) {
+function AssignModal({
+	assignData = {},
+	setAssignData = () => {},
+	serviceType = '',
+	id = '',
+}) {
 	const { show = false, assignUser = '' } = assignData || {};
-
-	// const isSameUser = show?.id === id;
 
 	const {
 		updateRateJob = () => {},
@@ -23,7 +26,6 @@ function AssignModal({ assignData = {}, setAssignData = () => {}, serviceType = 
 	};
 
 	const handleSubmit = () => {
-		console.log('assignUser', assignUser);
 		updateRateJob({ assignUser, id });
 	};
 
@@ -32,19 +34,20 @@ function AssignModal({ assignData = {}, setAssignData = () => {}, serviceType = 
 			size="sm"
 			show={show}
 			onClose={handleClose}
-			// closeOnOuterClick={handleClose}
 			className={styles.styled_modal}
 			scroll={false}
 		>
 			<Modal.Header title="Assign" />
 			<Modal.Body>
-				<div className={styles.label}>Select User</div>
+				<div className={styles.label}>
+					Select User
+				</div>
 				<AsyncSelect
 					value={assignUser}
 					placeholder="Select user"
-					onChange={(val) => setAssignData((prev) => ({ ...prev, assignUser: val }))}
 					asyncKey="list_chat_agents"
 					initialCall
+					size="sm"
 					params={{
 						filters: {
 							common_agent_type : 'supply',
@@ -52,12 +55,29 @@ function AssignModal({ assignData = {}, setAssignData = () => {}, serviceType = 
 						},
 						sort_by: 'agent_type',
 					}}
-					size="sm"
+					onChange={(val) => setAssignData(
+						(prev) => ({
+							...prev,
+							assignUser: val,
+						}),
+					)}
 				/>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button themeType="tertiary" onClick={handleClose} disabled={loading}>Cancel</Button>
-				<Button themeType="primary" onClick={handleSubmit} loading={loading}>Submit</Button>
+				<Button
+					themeType="tertiary"
+					onClick={handleClose}
+					disabled={loading}
+				>
+					Cancel
+				</Button>
+				<Button
+					themeType="primary"
+					onClick={handleSubmit}
+					loading={loading}
+				>
+					Submit
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

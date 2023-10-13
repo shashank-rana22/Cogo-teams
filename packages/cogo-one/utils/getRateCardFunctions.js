@@ -1,16 +1,27 @@
 import { setProfileState } from '@cogoport/store/reducers/profile';
 
-export const getRateCardFunction = ({ cardData = {}, mailProps = {}, dispatch = null, setActiveTab = () => {} }) => {
+export const getRateCardFunction = ({
+	cardData = {},
+	mailProps = {},
+	dispatch = null,
+	setActiveTab = () => {},
+}) => {
 	const { setButtonType, setEmailState, signature } = mailProps;
 	const { service_provider_poc = {} } = cardData || {};
+
 	const {
-		email = '', mobile_country_code = '', mobile_number = '',
-		whatsapp_country_code = '', whatsapp_number = '',
-		id = '', name = '',
+		email = '',
+		mobile_country_code = '',
+		mobile_number = '',
+		whatsapp_country_code = '',
+		whatsapp_number = '',
+		id = '',
+		name = '',
 	} = service_provider_poc || {};
 
 	const handleVoiceCall = (e) => {
 		e.stopPropagation();
+
 		if (!mobile_number) {
 			return;
 		}
@@ -34,6 +45,7 @@ export const getRateCardFunction = ({ cardData = {}, mailProps = {}, dispatch = 
 	const handleSendMail = (e) => {
 		e.stopPropagation();
 		setButtonType('send_mail');
+
 		setEmailState(
 			(prev) => ({
 				...prev,
@@ -48,12 +60,12 @@ export const getRateCardFunction = ({ cardData = {}, mailProps = {}, dispatch = 
 	};
 
 	const handleOpenMessage = () => {
-		let numberEformat;
+		let numberEFormat;
 
 		if (whatsapp_country_code) {
-			numberEformat = `${whatsapp_country_code?.replace('+', '') || ''}${whatsapp_number || ''}`;
+			numberEFormat = `${whatsapp_country_code?.replace('+', '') || ''}${whatsapp_number || ''}`;
 		} else if (mobile_country_code) {
-			numberEformat = `${mobile_country_code?.replace('+', '') || ''}${mobile_number || ''}`;
+			numberEFormat = `${mobile_country_code?.replace('+', '') || ''}${mobile_number || ''}`;
 		}
 
 		const chatData = {
@@ -63,7 +75,7 @@ export const getRateCardFunction = ({ cardData = {}, mailProps = {}, dispatch = 
 			email,
 			channel_type            : 'whatsapp',
 			countryCode             : whatsapp_country_code || mobile_country_code,
-			mobile_no               : numberEformat,
+			mobile_no               : numberEFormat,
 		};
 
 		setActiveTab((prev) => ({

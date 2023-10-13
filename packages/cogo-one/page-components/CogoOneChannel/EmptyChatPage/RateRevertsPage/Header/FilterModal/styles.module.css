@@ -2,9 +2,8 @@
 	width: 100%;
 
 	:global {
-		.ui_select_display_container {
-			min-width: 180px;
-			max-width: 180px;
+		.ui_select_container {
+			width: 180px;
 		}
 	}
 }
