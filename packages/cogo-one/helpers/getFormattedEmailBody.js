@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 
 function getFormattedEmailBody({ emailState }) {
 	const emailBody = emailState?.rteContent || '';
@@ -8,10 +9,7 @@ function getFormattedEmailBody({ emailState }) {
 		.replaceAll(GLOBAL_CONSTANTS?.regex_patterns?.html_tags, '')
 		.trim();
 
-	if ((strippedContent).length) {
-		return false;
-	}
-	return true;
+	return !isEmpty(strippedContent);
 }
 
 export default getFormattedEmailBody;

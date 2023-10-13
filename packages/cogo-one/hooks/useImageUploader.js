@@ -37,8 +37,8 @@ const useImageUploader = () => {
 	};
 
 	const onImageUploadBefore = (files, _info, uploadHandler) => {
-		const file = files[GLOBAL_CONSTANTS.zeroth_index];
 		try {
+			const file = files[GLOBAL_CONSTANTS.zeroth_index];
 			setDisablRTE(true);
 			uploadFile({ file, fileName: file.name }).then((src) => {
 				const response = {
