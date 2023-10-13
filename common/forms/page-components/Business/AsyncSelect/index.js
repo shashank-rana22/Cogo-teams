@@ -1,4 +1,4 @@
-import { MultiSelect, Select } from '@cogoport/components';
+import { MultiSelect, Select, CreatableMultiSelect, CreatableSelect } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
@@ -78,6 +78,7 @@ import {
 	asyncListSpotSearchRateCardOperators,
 	asyncListLocationClusters,
 	asyncListFclFreightCommodityClusters,
+	asyncListShippingLineEvents,
 	asyncListSaasPlan,
 	asyncListEnrichmentSources,
 	asyncListIncidentTypes,
@@ -199,6 +200,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_organizations_on_call           : asyncFieldsOrganizationOnCall,
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
+	list_shipping_line_events            : asyncListShippingLineEvents,
 	list_saas_plan                       : asyncListSaasPlan,
 	list_enrichment_sources              : asyncListEnrichmentSources,
 	list_incident_types                  : asyncListIncidentTypes,
@@ -228,6 +230,22 @@ const keyAsyncFieldsParamsMapping = {
 
 const SINGLE_ENTITY = 1;
 
+const getElement = ({ type = '', multiple = false }) => {
+	if (type === 'async_create_select' && multiple) {
+		return CreatableMultiSelect;
+	}
+
+	if (type === 'async_create_select') {
+		return CreatableSelect;
+	}
+
+	if (multiple) {
+		return MultiSelect;
+	}
+
+	return Select;
+};
+
 function AsyncSelect(props) {
 	const {
 		params,
@@ -239,6 +257,7 @@ function AsyncSelect(props) {
 		microService = '',
 		onOptionsChange,
 		isSingleEntity,
+		type,
 		...rest
 	} = props;
 
@@ -277,7 +296,7 @@ function AsyncSelect(props) {
 		getSelectedOption(selectedOption[GLOBAL_CONSTANTS.zeroth_index]);
 	}
 
-	const Element = multiple ? MultiSelect : Select;
+	const Element = getElement({ type, multiple });
 
 	return (
 		<Element
