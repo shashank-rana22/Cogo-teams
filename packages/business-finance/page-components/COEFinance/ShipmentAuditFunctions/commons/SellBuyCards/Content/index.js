@@ -27,9 +27,9 @@ function Content({
 	const [lineItemSectionOpen, setLineItemSectionOpen] = useState({});
 	const [showTicketModal, setShowTicketModal] = useState(false);
 
-	const approvedIdList = data.filter((item) => item?.quotation_state === 'APPROVED').map((item) => item?.id);
-	const initIdList = data.filter((item) => item?.quotation_state === 'INIT').map((item) => item?.id);
-	const currentStatus = data.some((item) => item?.quotation_state === 'INIT');
+	const approvedIdList = data?.filter((item) => item?.quotation_state === 'APPROVED').map((item) => item?.id);
+	const initIdList = data?.filter((item) => item?.quotation_state === 'INIT').map((item) => item?.id);
+	const currentStatus = data?.some((item) => item?.quotation_state === 'INIT');
 
 	const {
 		approveQuotation = () => {},
@@ -62,7 +62,7 @@ function Content({
 				</div>
 			</div>
 			<Header />
-			{data.map((item) => (
+			{data?.map((item) => (
 				<Body
 					key={item.id}
 					lineItemSectionOpen={lineItemSectionOpen}

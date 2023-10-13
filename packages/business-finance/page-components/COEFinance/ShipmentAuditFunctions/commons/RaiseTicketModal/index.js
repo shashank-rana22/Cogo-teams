@@ -33,7 +33,7 @@ function RaiseTicketModal({
 
 	const watchRaisedToDesk = watch('raised_to_desk');
 
-	const { data, loading:shipmentLoading } = useListShipment(id);
+	const { data = {}, loading:shipmentLoading = false } = useListShipment(id);
 
 	const shipmentData = data?.list[GLOBAL_CONSTANTS.zeroth_index];
 
@@ -41,7 +41,7 @@ function RaiseTicketModal({
 
 	const {
 		data:stakeholderData = [],
-		loading:stakeholderLoading,
+		loading:stakeholderLoading = false,
 	} = useListStakeholders({ shipmentId: shipment_id });
 
 	const { raiseTickets = () => {}, loading = false } = useRaiseTicket({

@@ -26,13 +26,13 @@ interface SegmentFilterProps {
 
 function SegmentedFilters({
 	setCurrentTab = () => {},
-	currentTab,
-	statsData,
-	tab,
+	currentTab = '',
+	statsData = {},
+	tab = '',
 	setTab = () => {},
 	setSearchValue = () => {},
-	searchValue,
-	filters,
+	searchValue = '',
+	filters = {},
 	setFilters = () => {},
 }: SegmentFilterProps) {
 	return (
