@@ -33,7 +33,7 @@ function RateRevertCard({
 	} = getRateCardFunction({ mailProps, dispatch, setActiveTab, cardData });
 
 	return (
-		<div role="presentation" className={styles.container} onClick={handleOpenMessage}>
+		<div className={styles.container}>
 			<ServiceProviderDetails
 				cardData={cardData}
 				setShipmentPopover={setShipmentPopover}
@@ -41,7 +41,7 @@ function RateRevertCard({
 				setAssignData={setAssignData}
 				assignData={assignData}
 			/>
-			<ShipmentDetails cardData={cardData} />
+			<ShipmentDetails cardData={cardData} handleOpenMessage={handleOpenMessage} />
 			<ShipmentProgress cardData={cardData} />
 			<div className={styles.card_footer}>
 				{/* <div className={styles.expiry_time}>

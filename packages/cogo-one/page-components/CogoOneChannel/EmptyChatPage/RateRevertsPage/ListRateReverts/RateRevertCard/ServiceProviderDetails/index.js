@@ -52,7 +52,10 @@ function ServiceProviderDetails({
 						>
 							<div
 								role="presentation"
-								onClick={() => setShipmentPopover(cardData)}
+								onClick={(e) => {
+									e.stopPropagation();
+									setShipmentPopover(cardData);
+								}}
 								className={styles.wrap}
 							>
 								<IcMInfo className={styles.info_icon} />
@@ -66,7 +69,10 @@ function ServiceProviderDetails({
 						render={(
 							<Button
 								themeType="secondary"
-								onClick={() => setAssignData((prev) => ({ ...prev, show: true }))}
+								onClick={(e) => {
+									e.stopPropagation();
+									setAssignData((prev) => ({ ...prev, show: true }));
+								}}
 							>
 								Assign
 							</Button>
@@ -74,7 +80,10 @@ function ServiceProviderDetails({
 					>
 						<div
 							role="presentation"
-							onClick={() => setAssignData((prev) => ({ ...prev, revertDetails: cardData }))}
+							onClick={(e) => {
+								e.stopPropagation();
+								setAssignData((prev) => ({ ...prev, revertDetails: cardData }));
+							}}
 							className={styles.wrap}
 						>
 							<IcMOverflowDot className={styles.info_icon} />
