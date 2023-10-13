@@ -80,9 +80,9 @@ function getAllowedEmailsList({
 			}
 		});
 		optionsToShow = Object.values(options)?.filter((itm) => !value.includes(itm.value)) || [];
-
-		optionsToShow = [...selectedOptions, ...optionsToShow];
 	}
+
+	optionsToShow = [...(selectedOptions || []), ...optionsToShow];
 
 	return [
 		...(optionsToShow || []),

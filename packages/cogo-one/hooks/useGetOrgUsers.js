@@ -1,7 +1,7 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback, useState, useMemo } from 'react';
 
 const PAGE_LIMIT = 100;
 
@@ -40,11 +40,14 @@ const useGetOrgUsers = ({
 	orgType = '',
 	type = '',
 	isLeadUser = false,
+	twinImporterExporterId = '',
+	isChannelPartner = false,
 }) => {
 	const [query, setQuery] = useState('');
+	const [searchQuery, setSearchQuery] = useState('');
 	const [initialLoad, setInitialLoad] = useState(true);
 
-	const { query: searchQuery, debounceQuery } = useDebounceQuery();
+	const { query: newQuery, debounceQuery } = useDebounceQuery();
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : `/${API_MAPPING[orgType] || ''}`,
@@ -57,28 +60,46 @@ const useGetOrgUsers = ({
 				return;
 			}
 			await trigger({
-				params: getPayload({ orgId, userIds: selectedUserIds, searchQuery, orgType }),
+				params: getPayload({
+					orgId   : (isChannelPartner && orgType === 'pocs') ? twinImporterExporterId : orgId,
+					userIds : selectedUserIds,
+					searchQuery,
+					orgType,
+				}),
 			});
 			setInitialLoad(false);
 		} catch (error) {
 			console.error(error);
 		}
-	}, [orgId, orgType, searchQuery, trigger]);
+	}, [isChannelPartner, orgId, orgType, searchQuery, trigger, twinImporterExporterId]);
+
+	const selectedUsers = useMemo(
+		() => (initialLoad
+			? userIds?.map(
+				(itm) => itm?.id,
+			) : undefined),
+		[initialLoad, userIds],
+	);
 
 	useEffect(
 		() => {
 			if (orgId && !(isLeadUser && type !== 'toUserEmail')) {
-				fetchUser({ selectedUserIds: initialLoad ? userIds?.map((itm) => itm?.id) : undefined });
+				fetchUser({ selectedUserIds: selectedUsers });
 			}
 		},
-		[fetchUser, initialLoad, isLeadUser, orgId, type, userIds],
+		[fetchUser, isLeadUser, orgId, type, selectedUsers],
 	);
 
 	useEffect(() => {
 		debounceQuery(query?.trim());
 	}, [debounceQuery, query]);
 
-	const isOrgUserIdPresent = !isEmpty(data?.list);
+	useEffect(
+		() => {
+			setSearchQuery(newQuery);
+		},
+		[newQuery],
+	);
 
 	const orgData = (
 		loading
@@ -88,12 +109,12 @@ const useGetOrgUsers = ({
 	) ? {} : data;
 
 	return {
-		orgLoading   : loading,
-		isOrgUserIdPresent,
+		orgLoading         : loading,
 		orgData,
-		handleSearch : setQuery,
+		handleSearch       : setQuery,
 		initialLoad,
-		searchQuery  : query,
+		searchQuery        : query,
+		setUserSearchQuery : setSearchQuery,
 	};
 };
 

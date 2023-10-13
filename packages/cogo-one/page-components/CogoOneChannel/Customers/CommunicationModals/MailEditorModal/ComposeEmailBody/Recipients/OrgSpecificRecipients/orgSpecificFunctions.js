@@ -40,6 +40,10 @@ function RenderLabel({ item = {}, activeTab = '' }) {
 
 			{activeTab === 'pocs' ? (
 				<Tooltip
+					interactive
+					placement="right"
+					appendTo={() => document.body}
+					className={styles.tooltip_container}
 					content={(
 						<div className={styles.poc_container}>
 							{item?.data?.map(
@@ -63,11 +67,9 @@ function RenderLabel({ item = {}, activeTab = '' }) {
 										</div>
 									</div>
 								),
-							)}
+							) || null}
 						</div>
 					)}
-					className={styles.tooltip_container}
-					placement="right"
 				>
 					<IcMInfo height={18} width={18} />
 				</Tooltip>
@@ -98,6 +100,7 @@ function resetEmailRecipientData({
 	recipientTypes = [],
 	orgId = '',
 	orgType = '',
+	twin_importer_exporter_id = '',
 }) {
 	let newValues = {};
 
@@ -130,6 +133,7 @@ function resetEmailRecipientData({
 		orgData: {
 			orgType: orgType || prev?.orgData?.orgType,
 			orgId,
+			twin_importer_exporter_id,
 		},
 		user_ids: newValues,
 	};

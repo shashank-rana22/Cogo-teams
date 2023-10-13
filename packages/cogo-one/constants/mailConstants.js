@@ -52,8 +52,9 @@ export const DEFAULT_EMAIL_STATE = {
 		subjectText : '',
 	},
 	orgData: {
-		orgType : 'organizations',
-		orgId   : '',
+		orgType                   : 'organizations',
+		orgId                     : '',
+		twin_importer_exporter_id : '',
 	},
 };
 

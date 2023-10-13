@@ -36,6 +36,8 @@ function OrgSpecificRecipients({
 	const [activeTab, setActiveTab] = useState('users');
 	const isLeadUser = emailState?.orgData?.orgId === 'lead_users';
 
+	const isChannelPartner = viewType.includes('cp_support');
+
 	const allowedOrgs = useMemo(() => (
 		isEmpty(VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.allowed_organizations)
 			? ['organizations', 'other_organizations']
@@ -66,13 +68,16 @@ function OrgSpecificRecipients({
 		handleSearch = () => {},
 		initialLoad = false,
 		searchQuery = '',
+		setUserSearchQuery = () => {},
 	} = useGetOrgUsers({
-		orgId   : emailState?.orgData?.orgId || emailState?.orgId,
-		orgType : organizationType,
-		userIds : emailState?.user_ids?.[type],
+		orgId                  : emailState?.orgData?.orgId || emailState?.orgId,
+		twinImporterExporterId : emailState?.orgData?.twin_importer_exporter_id || '',
+		orgType                : organizationType,
+		userIds                : emailState?.user_ids?.[type],
 		allowedOrgs,
 		type,
 		isLeadUser,
+		isChannelPartner,
 	});
 
 	const selectOptions = useMemo(
@@ -95,7 +100,7 @@ function OrgSpecificRecipients({
 		);
 	};
 
-	const handleSelectChange = (val) => {
+	const handleSelectChange = (val, obj) => {
 		setEmailState(
 			(prev) => {
 				if (val === prev?.orgData?.orgId) {
@@ -105,7 +110,8 @@ function OrgSpecificRecipients({
 				return resetEmailRecipientData({
 					prev,
 					recipientTypes,
-					orgId: val,
+					orgId                     : val,
+					twin_importer_exporter_id : obj?.twin_importer_exporter_id || val,
 				});
 			},
 		);
@@ -165,7 +171,10 @@ function OrgSpecificRecipients({
 				optionsHeader={(
 					<CustomSelectHeader
 						activeTab={activeTab}
-						setActiveTab={setActiveTab}
+						setActiveTab={(val) => {
+							setUserSearchQuery('');
+							setActiveTab(val);
+						}}
 						type="users_select"
 					/>
 				)}
