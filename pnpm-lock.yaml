@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -173,7 +169,7 @@ importers:
         version: link:../packages/cogo-verse-analytics
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/contracts':
         specifier: workspace:0.1.0
         version: link:../packages/contracts
@@ -431,7 +427,7 @@ importers:
         version: 13.5.4
       next:
         specifier: 13.1.6
-        version: 13.1.6(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
+        version: 13.1.6(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -456,7 +452,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.395
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../context
@@ -468,10 +464,10 @@ importers:
         version: link:../globalization
       '@cogoport/icons-react':
         specifier: ^1.0.65
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/maps':
         specifier: ^1.0.2
-        version: 1.0.3(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.3(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/navigation-configs':
         specifier: workspace:^0.1.0
         version: link:../navigation-configs
@@ -515,7 +511,7 @@ importers:
         version: link:../../packages/authentication
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../constants
@@ -527,7 +523,7 @@ importers:
         version: link:../globalization
       '@cogoport/icons-react':
         specifier: ^1.0.101
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/navigation-configs':
         specifier: workspace:0.1.0
         version: link:../navigation-configs
@@ -575,13 +571,13 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.441
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/globalization':
         specifier: workspace:*
         version: link:../globalization
       '@cogoport/icons-react':
         specifier: ^1.0.73
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/request':
         specifier: workspace:0.1.0
         version: link:../request
@@ -641,7 +637,7 @@ importers:
         version: link:../store
       next:
         specifier: 13.1.6
-        version: 13.1.6(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
+        version: 13.1.6(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -653,7 +649,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.395
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../context
@@ -665,10 +661,10 @@ importers:
         version: link:../globalization
       '@cogoport/icons-react':
         specifier: ^1.0.65
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/maps':
         specifier: ^1.0.2
-        version: 1.0.3(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.3(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/navigation-configs':
         specifier: workspace:^0.1.0
         version: link:../navigation-configs
@@ -740,7 +736,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.392
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../forms
@@ -749,7 +745,7 @@ importers:
         version: link:../globalization
       '@cogoport/icons-react':
         specifier: ^1.0.61
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/navigation-configs':
         specifier: workspace:^0.1.0
         version: link:../navigation-configs
@@ -770,7 +766,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.395
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/globalization':
         specifier: workspace:^0.0.1
         version: link:../globalization
@@ -779,7 +775,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.377
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../context
@@ -791,7 +787,7 @@ importers:
         version: link:../globalization
       '@cogoport/icons-react':
         specifier: ^1.0.60
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/navigation-configs':
         specifier: workspace:^0.1.0
         version: link:../navigation-configs
@@ -821,7 +817,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.391
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../context
@@ -833,7 +829,7 @@ importers:
         version: link:../globalization
       '@cogoport/icons-react':
         specifier: ^1.0.60
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/next':
         specifier: workspace:^0.1.0
         version: link:../next
@@ -866,7 +862,7 @@ importers:
         version: 1.9.7(react-redux@8.1.3)(react@18.2.0)
       next:
         specifier: 13.1.6
-        version: 13.1.6(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
+        version: 13.1.6(react-dom@18.2.0)(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -881,7 +877,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.395
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../context
@@ -893,10 +889,10 @@ importers:
         version: link:../globalization
       '@cogoport/icons-react':
         specifier: ^1.0.65
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/maps':
         specifier: ^1.0.2
-        version: 1.0.3(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.3(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/navigation-configs':
         specifier: workspace:^0.1.0
         version: link:../navigation-configs
@@ -929,13 +925,13 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.432
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
       '@cogoport/icons-react':
         specifier: ^1.0.58
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/next':
         specifier: workspace:0.1.0
         version: link:../../common/next
@@ -960,7 +956,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -969,7 +965,7 @@ importers:
         version: link:../../common/globalization
       '@cogoport/icons-react':
         specifier: ^1.0.58
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/navigation-configs':
         specifier: workspace:0.1.0
         version: link:../../common/navigation-configs
@@ -993,7 +989,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1002,7 +998,7 @@ importers:
         version: link:../../common/globalization
       '@cogoport/icons-react':
         specifier: ^1.0.51
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/next':
         specifier: workspace:0.1.0
         version: link:../../common/next
@@ -1029,7 +1025,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1059,7 +1055,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1098,7 +1094,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.431
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1137,7 +1133,7 @@ importers:
         version: link:../../common/air-modules
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1173,7 +1169,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.395
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1206,7 +1202,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.441
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1239,7 +1235,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1275,7 +1271,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.410
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -1314,7 +1310,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.390
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/core':
         specifier: workspace:^0.1.0
         version: link:../../common/core
@@ -1362,7 +1358,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.413
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -1386,7 +1382,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.390
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/core':
         specifier: workspace:^0.1.0
         version: link:../../common/core
@@ -1422,7 +1418,7 @@ importers:
         version: link:../../common/air-modules
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1455,7 +1451,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1494,7 +1490,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.345
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -1600,7 +1596,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.428
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -1636,7 +1632,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.439
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -1669,10 +1665,10 @@ importers:
     dependencies:
       '@cogoport/charts':
         specifier: ^1.0.2
-        version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.4(prop-types@15.8.1)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/core':
         specifier: workspace:*
         version: link:../../common/core
@@ -1684,7 +1680,7 @@ importers:
         version: link:../../common/globalization
       '@cogoport/icons-react':
         specifier: ^1.0.58
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/next':
         specifier: workspace:0.1.0
         version: link:../../common/next
@@ -1708,7 +1704,7 @@ importers:
         version: 18.2.0
       react-rte:
         specifier: ^0.16.5
-        version: 0.16.5(react-dom@18.2.0)(react@18.2.0)
+        version: 0.16.5(react@18.2.0)
 
   packages/chakravyuh:
     dependencies:
@@ -1720,7 +1716,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.366
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:0.1.0
         version: link:../../common/constants
@@ -1765,7 +1761,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.345
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -1795,10 +1791,10 @@ importers:
     dependencies:
       '@cogoport/charts':
         specifier: ^1.0.2
-        version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.4(prop-types@15.8.1)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/core':
         specifier: workspace:*
         version: link:../../common/core
@@ -1810,7 +1806,7 @@ importers:
         version: link:../../common/globalization
       '@cogoport/icons-react':
         specifier: ^1.0.58
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/next':
         specifier: workspace:0.1.0
         version: link:../../common/next
@@ -1834,13 +1830,13 @@ importers:
         version: 18.2.0
       react-rte:
         specifier: ^0.16.5
-        version: 0.16.5(react-dom@18.2.0)(react@18.2.0)
+        version: 0.16.5(react@18.2.0)
 
   packages/cogo-assured:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.442
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../../common/context
@@ -1876,7 +1872,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.441
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../../common/context
@@ -1913,6 +1909,9 @@ importers:
       stylelint:
         specifier: ^14.16.1
         version: 14.16.1
+      suneditor-react:
+        specifier: ^3.6.1
+        version: 3.6.1(react-dom@18.2.0)(react@18.2.0)(suneditor@2.45.1)
       uuid:
         specifier: ^9.0.0
         version: 9.0.1
@@ -1924,7 +1923,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1975,7 +1974,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -2008,7 +2007,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.423
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -2038,7 +2037,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.441
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/core':
         specifier: workspace:*
         version: link:../../common/core
@@ -2074,7 +2073,7 @@ importers:
         version: link:../../common/air-modules
       '@cogoport/components':
         specifier: ^1.0.390
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -2116,7 +2115,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -2155,7 +2154,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.394
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -2194,7 +2193,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.428
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -2230,7 +2229,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.432
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -2260,7 +2259,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.420
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -2293,7 +2292,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.319
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -2329,7 +2328,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -2362,7 +2361,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -2398,7 +2397,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.366
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -2437,7 +2436,7 @@ importers:
         version: link:../../common/air-modules
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -2485,7 +2484,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.390
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/core':
         specifier: workspace:^0.1.0
         version: link:../../common/core
@@ -2524,7 +2523,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:*
         version: link:../../common/forms
@@ -2560,7 +2559,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.389
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -2593,7 +2592,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.390
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -2632,7 +2631,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.390
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/icons-react':
         specifier: ^1.0.61
         version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
@@ -2665,7 +2664,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.403
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -2695,7 +2694,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -2725,7 +2724,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -2755,7 +2754,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.423
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -2794,7 +2793,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:*
         version: link:../../common/forms
@@ -2830,7 +2829,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.432
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -2864,7 +2863,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.362
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -2894,10 +2893,10 @@ importers:
     dependencies:
       '@cogoport/charts':
         specifier: ^1.0.2
-        version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.4(prop-types@15.8.1)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.430
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0)
       '@cogoport/core':
         specifier: workspace:*
         version: link:../../common/core
@@ -2909,7 +2908,7 @@ importers:
         version: link:../../common/globalization
       '@cogoport/icons-react':
         specifier: ^1.0.58
-        version: 1.0.105(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.105(react@18.2.0)
       '@cogoport/next':
         specifier: workspace:0.1.0
         version: link:../../common/next
@@ -2933,13 +2932,13 @@ importers:
         version: 18.2.0
       react-rte:
         specifier: ^0.16.5
-        version: 0.16.5(react-dom@18.2.0)(react@18.2.0)
+        version: 0.16.5(react@18.2.0)
 
   packages/notifications:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.437
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -2969,7 +2968,7 @@ importers:
         version: 2.30.0
       react-redux:
         specifier: ^8.0.5
-        version: 8.1.3(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
+        version: 8.1.3(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       react:
         specifier: 18.2.0
@@ -2982,7 +2981,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -3015,7 +3014,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.431
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -3051,7 +3050,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.423
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -3090,7 +3089,7 @@ importers:
         version: link:../../common/air-modules
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -3132,7 +3131,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.442
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -3168,7 +3167,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -3210,7 +3209,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.432
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -3258,7 +3257,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.423
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -3294,7 +3293,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.419
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -3321,7 +3320,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.413
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -3363,7 +3362,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.412
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -3408,7 +3407,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.366
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:0.1.0
         version: link:../../common/constants
@@ -3454,7 +3453,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.442
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -3490,7 +3489,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.417
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -3520,7 +3519,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.410
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -3553,7 +3552,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.366
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -3592,7 +3591,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.442
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:*
         version: link:../../common/constants
@@ -3640,7 +3639,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -3676,7 +3675,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -3709,7 +3708,7 @@ importers:
         version: link:../../common/air-modules
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../../common/context
@@ -3760,7 +3759,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -3790,7 +3789,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -3820,7 +3819,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.395
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -3889,7 +3888,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.422
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../../common/context
@@ -3946,7 +3945,7 @@ importers:
         version: link:../../common/air-modules
       '@cogoport/components':
         specifier: ^1.0.395
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../../common/context
@@ -4018,7 +4017,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.421
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -4069,7 +4068,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.421
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -4132,7 +4131,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.395
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../../common/context
@@ -4195,7 +4194,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.395
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -4261,7 +4260,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.421
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -4312,7 +4311,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.395
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../../common/context
@@ -4375,7 +4374,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.322
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -4426,7 +4425,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.441
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -4465,7 +4464,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.366
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:0.1.0
         version: link:../../common/constants
@@ -4501,7 +4500,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.441
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -4537,7 +4536,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.441
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -4567,7 +4566,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -4603,7 +4602,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.441
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/constants':
         specifier: workspace:^0.1.0
         version: link:../../common/constants
@@ -4642,7 +4641,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.418
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -4675,7 +4674,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.316
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:*
         version: link:../../common/forms
@@ -4714,7 +4713,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/core':
         specifier: workspace:*
         version: link:../../common/core
@@ -4756,7 +4755,7 @@ importers:
         version: 1.0.4(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.359
-        version: 1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/core':
         specifier: workspace:*
         version: link:../../common/core
@@ -6095,6 +6094,35 @@ packages:
       - react-dom
     dev: false
 
+  /@cogoport/charts@1.0.4(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-ohES5KmYgcHycrbcb1mbRqzuVXahh4Oq7VvHsEituROXBg4cPlb7T1O52uXUx1qPhYezIBcQAQWqtZ2IhxZ7OQ==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      '@nivo/bar': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/bullet': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/bump': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/calendar': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/funnel': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/geo': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/heatmap': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/line': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/marimekko': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/pie': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/radar': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/radial-bar': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/scatterplot': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/stream': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/sunburst': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@nivo/treemap': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
   /@cogoport/components@1.0.449(@babel/core@7.23.2)(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-MF5A0AwWN+OjKp8jjznNuEnKETQonD0WmikctSgfBjTAwwH6gMA/ynvt9xhSbMYF0UsxUohGaVBl7F0SkD9ytw==}
     peerDependencies:
@@ -6120,6 +6148,75 @@ packages:
       tippy.js: 6.3.7
     optionalDependencies:
       next: 12.3.1(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - encoding
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components@1.0.449(@cogoport/icons-react@1.0.105)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-MF5A0AwWN+OjKp8jjznNuEnKETQonD0WmikctSgfBjTAwwH6gMA/ynvt9xhSbMYF0UsxUohGaVBl7F0SkD9ytw==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.105(react-dom@18.2.0)(react@18.2.0)
+      '@tippyjs/react': 4.2.6(react-dom@18.2.0)(react@18.2.0)
+      '@types/quill': 2.0.12
+      '@types/react-rte': 0.16.6
+      axios: 1.5.1
+      axios-hooks: 4.0.0(axios@1.5.1)(react@18.2.0)
+      date-fns: 2.30.0
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0(date-fns@2.30.0)(react@18.2.0)
+      react-dom: 18.2.0(react@18.2.0)
+      react-hook-form: 7.47.0(react@18.2.0)
+      react-quill: 2.0.0(react-dom@18.2.0)(react@18.2.0)
+      react-rte: 0.16.5(react-dom@18.2.0)(react@18.2.0)
+      react-table: 7.8.0(react@18.2.0)
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1(react-dom@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - encoding
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components@1.0.449(@cogoport/icons-react@1.0.105)(react@18.2.0):
+    resolution: {integrity: sha512-MF5A0AwWN+OjKp8jjznNuEnKETQonD0WmikctSgfBjTAwwH6gMA/ynvt9xhSbMYF0UsxUohGaVBl7F0SkD9ytw==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.105(react@18.2.0)
+      '@tippyjs/react': 4.2.6(react@18.2.0)
+      '@types/quill': 2.0.12
+      '@types/react-rte': 0.16.6
+      axios: 1.5.1
+      axios-hooks: 4.0.0(axios@1.5.1)(react@18.2.0)
+      date-fns: 2.30.0
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0(date-fns@2.30.0)(react@18.2.0)
+      react-hook-form: 7.47.0(react@18.2.0)
+      react-quill: 2.0.0(react@18.2.0)
+      react-rte: 0.16.5(react@18.2.0)
+      react-table: 7.8.0(react@18.2.0)
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1(react@18.2.0)
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
@@ -6167,6 +6264,16 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /@cogoport/icons-react@1.0.105(react@18.2.0):
+    resolution: {integrity: sha512-4kAvMe7429T+f3jDF0NinmpWRDgJZ89QEF1iAujdN6QAUo0NWs6y32jQfPlRB1jEiC0AIek71+5POFE6SsCslQ==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/icons': 1.0.105
+      react: 18.2.0
+    dev: false
+
   /@cogoport/icons@1.0.105:
     resolution: {integrity: sha512-ja2ZEtG+Q3yix7Sv2xi6UtxpEnQI5mo+020MQC7/cGSRSvPwSZAur4iewXmBhDdU2VetXmjwLhxr3/ArD+b7mg==}
     dev: false
@@ -6183,6 +6290,19 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-leaflet: 4.2.1(leaflet@1.9.4)(react-dom@18.2.0)(react@18.2.0)
+    dev: false
+
+  /@cogoport/maps@1.0.3(@cogoport/icons-react@1.0.105)(react@18.2.0):
+    resolution: {integrity: sha512-nWNhGesbEQNqBGy1KO9O85eU04zcVaIVvuHXcq7CKa+pij74yU3BKB4PTBvoSrbLHAgIctxe8KOQVzBVgTLl/w==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.105(react@18.2.0)
+      leaflet: 1.9.4
+      react: 18.2.0
+      react-leaflet: 4.2.1(leaflet@1.9.4)(react@18.2.0)
     dev: false
 
   /@cogoport/stylelint-config@1.0.3(stylelint@14.16.1):
@@ -7516,6 +7636,22 @@ packages:
       - react-dom
     dev: false
 
+  /@nivo/annotations@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-bC9z0CLjU07LULTMWsqpjovRtHxP7n8oJjqBQBLmHOGB4IfiLbrryBfu9+aEZH3VN2jXHhdpWUz+HxeZzOzsLg==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
+      lodash: 4.17.21
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
   /@nivo/arcs@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-g5m/wM36Ey45J3hrVDBPMw1Z6GOgIRwgb5zTh7TFoPuhRBZEDQLmctk8XYOm0xOMVCzsm6WkU5wlSQUeBY6IHQ==}
     peerDependencies:
@@ -7525,6 +7661,22 @@ packages:
       '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
       '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@react-spring/web': 9.4.5(react-dom@18.2.0)(react@18.2.0)
+      d3-shape: 1.3.7
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@nivo/arcs@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-g5m/wM36Ey45J3hrVDBPMw1Z6GOgIRwgb5zTh7TFoPuhRBZEDQLmctk8XYOm0xOMVCzsm6WkU5wlSQUeBY6IHQ==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
       d3-shape: 1.3.7
       react: 18.2.0
     transitivePeerDependencies:
@@ -7542,6 +7694,24 @@ packages:
       '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@nivo/scales': 0.80.0
       '@react-spring/web': 9.4.5(react-dom@18.2.0)(react@18.2.0)
+      d3-format: 1.4.5
+      d3-time-format: 3.0.0
+      prop-types: 15.8.1
+      react: 18.2.0
+    transitivePeerDependencies:
+      - react-dom
+    dev: false
+
+  /@nivo/axes@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-AsUyaSHGwQVSEK8QXpsn8X+poZxvakLMYW7crKY1xTGPNw+SU4SSBohPVumm2jMH3fTSLNxLhAjWo71GBJXfdA==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      prop-types: '>= 15.5.10 < 16.0.0'
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/scales': 0.80.0
+      '@react-spring/web': 9.4.5(react@18.2.0)
       d3-format: 1.4.5
       d3-time-format: 3.0.0
       prop-types: 15.8.1
@@ -7573,6 +7743,29 @@ packages:
       - react-dom
     dev: false
 
+  /@nivo/bar@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-woE/S12Sp+RKQeOHtp302WXfy5usj73cV/gjP95PzJxMv+Rn01i1Uwys3BILzc9h4+OxYuWTFqLADAySAmi7qQ==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/annotations': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/axes': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/scales': 0.80.0
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
+      d3-scale: 3.3.0
+      d3-shape: 1.3.7
+      lodash: 4.17.21
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
   /@nivo/bullet@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-EnJsKPrnTGzCkIxKRwj/ORmx+TnzvYfNb+NSVXVO1hxf1Kf13SU5mNz8H0PObYKbvfyAfI3VMBlxqjTu8bVk5g==}
     peerDependencies:
@@ -7585,6 +7778,24 @@ packages:
       '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
       '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react-dom@18.2.0)(react@18.2.0)
       '@react-spring/web': 9.4.5(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@nivo/bullet@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-EnJsKPrnTGzCkIxKRwj/ORmx+TnzvYfNb+NSVXVO1hxf1Kf13SU5mNz8H0PObYKbvfyAfI3VMBlxqjTu8bVk5g==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/axes': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
       - prop-types
@@ -7611,6 +7822,26 @@ packages:
       - react-dom
     dev: false
 
+  /@nivo/bump@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-Qpi8mC0c9UukBXawgOha0rIOT1EO5hE+CidplbcynjGem5D3TiwUZlB2EGKOpm9Mf3Y+Geg+3klObqGmpLwksA==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/axes': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/scales': 0.80.0
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
+      d3-shape: 1.3.7
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
   /@nivo/calendar@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-UfBnfzdQs9tZz/APH8DqYnGBraqovyUr6S5zxKI0T+LX5RV9p7uEcz1mBIlbvwFudMWuuXBB6Jc7pqmwnn2ZpQ==}
     peerDependencies:
@@ -7620,6 +7851,25 @@ packages:
       '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
       '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react-dom@18.2.0)(react@18.2.0)
+      d3-scale: 3.3.0
+      d3-time: 1.1.0
+      d3-time-format: 3.0.0
+      lodash: 4.17.21
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@nivo/calendar@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-UfBnfzdQs9tZz/APH8DqYnGBraqovyUr6S5zxKI0T+LX5RV9p7uEcz1mBIlbvwFudMWuuXBB6Jc7pqmwnn2ZpQ==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
       d3-scale: 3.3.0
       d3-time: 1.1.0
       d3-time-format: 3.0.0
@@ -7670,6 +7920,30 @@ packages:
       - react-dom
     dev: false
 
+  /@nivo/core@0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-6caih0RavXdWWSfde+rC2pk17WrX9YQlqK26BrxIdXzv3Ydzlh5SkrC7dR2TEvMGBhunzVeLOfiC2DWT1S8CFg==}
+    peerDependencies:
+      '@nivo/tooltip': 0.80.0
+      prop-types: '>= 15.5.10 < 16.0.0'
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/recompose': 0.80.0(react@18.2.0)
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
+      d3-color: 2.0.0
+      d3-format: 1.4.5
+      d3-interpolate: 2.0.1
+      d3-scale: 3.3.0
+      d3-scale-chromatic: 2.0.0
+      d3-shape: 1.3.7
+      d3-time-format: 3.0.0
+      lodash: 4.17.21
+      prop-types: 15.8.1
+      react: 18.2.0
+    transitivePeerDependencies:
+      - react-dom
+    dev: false
+
   /@nivo/funnel@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-KkyTGMK2dqMrp51vNIhWuZMzu0t7fBbYlPLBFEfdxC6oAV52uZqEja+EIomkEmHP+7FZXeL1AuRsay4yj/zofw==}
     peerDependencies:
@@ -7681,6 +7955,25 @@ packages:
       '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react-dom@18.2.0)(react@18.2.0)
       '@react-spring/web': 9.4.5(react-dom@18.2.0)(react@18.2.0)
+      d3-scale: 3.3.0
+      d3-shape: 1.3.7
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@nivo/funnel@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-KkyTGMK2dqMrp51vNIhWuZMzu0t7fBbYlPLBFEfdxC6oAV52uZqEja+EIomkEmHP+7FZXeL1AuRsay4yj/zofw==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/annotations': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
       d3-scale: 3.3.0
       d3-shape: 1.3.7
       react: 18.2.0
@@ -7709,6 +8002,26 @@ packages:
       - react-dom
     dev: false
 
+  /@nivo/geo@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-WKPXaE3K6/4x0hjhGMJqo/vOES3vY/z3R2gmY2h1kghvqpoJZqcygpB3YkU72U1yDD0pTevaQS5XZVUEqVJ/Aw==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      prop-types: '>= 15.5.10 < 16.0.0'
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      d3-format: 1.4.5
+      d3-geo: 1.12.1
+      lodash: 4.17.21
+      prop-types: 15.8.1
+      react: 18.2.0
+    transitivePeerDependencies:
+      - react-dom
+    dev: false
+
   /@nivo/heatmap@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-FZufo3Y79NaO2mTlboGj3kBpNYGEJhgI0WpONkkUwnjqF27FkLZ6geuqBnsRSpK+3vgUQeakd8ZvSBtBHhHUvQ==}
     peerDependencies:
@@ -7722,6 +8035,26 @@ packages:
       '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
       '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react-dom@18.2.0)(react@18.2.0)
       '@react-spring/web': 9.4.5(react-dom@18.2.0)(react@18.2.0)
+      d3-scale: 3.3.0
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@nivo/heatmap@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-FZufo3Y79NaO2mTlboGj3kBpNYGEJhgI0WpONkkUwnjqF27FkLZ6geuqBnsRSpK+3vgUQeakd8ZvSBtBHhHUvQ==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/annotations': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/axes': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
       d3-scale: 3.3.0
       react: 18.2.0
     transitivePeerDependencies:
@@ -7764,6 +8097,29 @@ packages:
       - react-dom
     dev: false
 
+  /@nivo/line@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-6UAD/y74qq3DDRnVb+QUPvXYojxMtwXMipGSNvCGk8omv1QZNTaUrbV+eQacvn9yh//a0yZcWipnpq0tGJyJCA==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      prop-types: '>= 15.5.10 < 16.0.0'
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/annotations': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/axes': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/scales': 0.80.0
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@nivo/voronoi': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
+      d3-shape: 1.3.7
+      prop-types: 15.8.1
+      react: 18.2.0
+    transitivePeerDependencies:
+      - react-dom
+    dev: false
+
   /@nivo/marimekko@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-0u20SryNtbOQhtvhZsbxmgnF7o8Yc2rjDQ/gCYPTXtxeooWCuhSaRZbDCnCeyKQY3B62D7z2mu4Js4KlTEftjA==}
     peerDependencies:
@@ -7776,6 +8132,26 @@ packages:
       '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
       '@nivo/scales': 0.80.0
       '@react-spring/web': 9.4.5(react-dom@18.2.0)(react@18.2.0)
+      d3-shape: 1.3.7
+      lodash: 4.17.21
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@nivo/marimekko@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-0u20SryNtbOQhtvhZsbxmgnF7o8Yc2rjDQ/gCYPTXtxeooWCuhSaRZbDCnCeyKQY3B62D7z2mu4Js4KlTEftjA==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/axes': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/scales': 0.80.0
+      '@react-spring/web': 9.4.5(react@18.2.0)
       d3-shape: 1.3.7
       lodash: 4.17.21
       react: 18.2.0
@@ -7802,6 +8178,24 @@ packages:
       - react-dom
     dev: false
 
+  /@nivo/pie@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-Zj2PtozUg5wizxdI/2o13YzwnBwf8lLrgc8vH7ucsgOu5nj6oLLpGTuNd3CBmRJHFGIGNT39bP63lKnB3P6qOQ==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/arcs': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      d3-shape: 1.3.7
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
   /@nivo/polar-axes@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-lhk8ZtpEg7qT6/UFnrXOd0Tg5M6ZipTxjT2JmC6gxAADDiha5BzlAuBZaSudgbwhWbnzTdNGqHBkR5Dp/yqUcA==}
     peerDependencies:
@@ -7812,6 +8206,22 @@ packages:
       '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@nivo/scales': 0.80.0
       '@react-spring/web': 9.4.5(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@nivo/polar-axes@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-lhk8ZtpEg7qT6/UFnrXOd0Tg5M6ZipTxjT2JmC6gxAADDiha5BzlAuBZaSudgbwhWbnzTdNGqHBkR5Dp/yqUcA==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/arcs': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/scales': 0.80.0
+      '@react-spring/web': 9.4.5(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
       - prop-types
@@ -7837,6 +8247,25 @@ packages:
       - react-dom
     dev: false
 
+  /@nivo/radar@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-zEXuFb/XlJhaxRoLkoFI4GzKjVO46z+DAfRCNEVr/ijMSEh+56JqN58rDl4TzBGyAEbw2GPzDtchMFMFUsEy6Q==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
+      d3-scale: 3.3.0
+      d3-shape: 1.3.7
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
   /@nivo/radial-bar@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-IJ+IvGCXcy3y0uwcAsMyjyV5WTPe3vP5aUuV+bglTOUd1PmyD+6XY5FIAX0x3049t8mpHZnVRTewPpfaAZYLPw==}
     peerDependencies:
@@ -7851,6 +8280,28 @@ packages:
       '@nivo/scales': 0.80.0
       '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react-dom@18.2.0)(react@18.2.0)
       '@react-spring/web': 9.4.5(react-dom@18.2.0)(react@18.2.0)
+      d3-scale: 3.3.0
+      d3-shape: 1.3.7
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@nivo/radial-bar@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-IJ+IvGCXcy3y0uwcAsMyjyV5WTPe3vP5aUuV+bglTOUd1PmyD+6XY5FIAX0x3049t8mpHZnVRTewPpfaAZYLPw==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/arcs': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/polar-axes': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/scales': 0.80.0
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
       d3-scale: 3.3.0
       d3-shape: 1.3.7
       react: 18.2.0
@@ -7901,6 +8352,30 @@ packages:
       - react-dom
     dev: false
 
+  /@nivo/scatterplot@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-IoJZDKKysHrF1psGq9CN7Gp9K4kn5oHc4iB46ebyfV3Dq1MmuRdgUsVUb/O+7DIBaA7u9/DoX1pRt36r19BAHw==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/annotations': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/axes': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/scales': 0.80.0
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@nivo/voronoi': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
+      d3-scale: 3.3.0
+      d3-shape: 1.3.7
+      lodash: 4.17.21
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
   /@nivo/stream@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-0oCSnNSjBQYdX/GV6YNQPQbe89wILiCZ1D8QJrMTSrzCWTlp3Fvw2RWFUf5hlV4VJwioWmPeEBGwzaKAQkFyuA==}
     peerDependencies:
@@ -7914,6 +8389,26 @@ packages:
       '@nivo/scales': 0.80.0
       '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react-dom@18.2.0)(react@18.2.0)
       '@react-spring/web': 9.4.5(react-dom@18.2.0)(react@18.2.0)
+      d3-shape: 1.3.7
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@nivo/stream@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-0oCSnNSjBQYdX/GV6YNQPQbe89wILiCZ1D8QJrMTSrzCWTlp3Fvw2RWFUf5hlV4VJwioWmPeEBGwzaKAQkFyuA==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/axes': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/legends': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/scales': 0.80.0
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
       d3-shape: 1.3.7
       react: 18.2.0
     transitivePeerDependencies:
@@ -7939,6 +8434,24 @@ packages:
       - react-dom
     dev: false
 
+  /@nivo/sunburst@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-IMjolRg+nwdPpkoyAcgvAzUfzslAd5FASbCuHWZikjcGLrchlAT1sZNchKwYzUSHKSfvs6RrDC4anj4bh7zZFQ==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/arcs': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      d3-hierarchy: 1.1.9
+      lodash: 4.17.21
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
   /@nivo/tooltip@0.80.0(@nivo/core@0.80.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-qGmrreRwnCsYjn/LAuwBtxBn/tvG8y+rwgd4gkANLBAoXd3bzJyvmkSe+QJPhUG64bq57ibDK+lO2pC48a3/fw==}
     peerDependencies:
@@ -7946,6 +8459,18 @@ packages:
     dependencies:
       '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@react-spring/web': 9.4.5(react-dom@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: false
+
+  /@nivo/tooltip@0.80.0(@nivo/core@0.80.0)(react@18.2.0):
+    resolution: {integrity: sha512-qGmrreRwnCsYjn/LAuwBtxBn/tvG8y+rwgd4gkANLBAoXd3bzJyvmkSe+QJPhUG64bq57ibDK+lO2pC48a3/fw==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+    dependencies:
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
     transitivePeerDependencies:
       - react
       - react-dom
@@ -7961,6 +8486,24 @@ packages:
       '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react-dom@18.2.0)(react@18.2.0)
       '@react-spring/web': 9.4.5(react-dom@18.2.0)(react@18.2.0)
+      d3-hierarchy: 1.1.9
+      lodash: 4.17.21
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@nivo/treemap@0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-0jN0dtZYZTakpqCS4jWPTNkgSy+VUrTFdvM+jHxKYvIa8K7Y6SfxwkCj0+IcIE3czwXczI/ZZ/YJz1dccpXg2w==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/colors': 0.80.0(@nivo/core@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/core': 0.80.0(@nivo/tooltip@0.80.0)(prop-types@15.8.1)(react@18.2.0)
+      '@nivo/tooltip': 0.80.0(@nivo/core@0.80.0)(react@18.2.0)
+      '@react-spring/web': 9.4.5(react@18.2.0)
       d3-hierarchy: 1.1.9
       lodash: 4.17.21
       react: 18.2.0
@@ -8062,6 +8605,17 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /@react-leaflet/core@2.1.0(leaflet@1.9.4)(react@18.2.0):
+    resolution: {integrity: sha512-Qk7Pfu8BSarKGqILj4x7bCSZ1pjuAPZ+qmRwH5S7mDS91VSbVVsJSrW4qA+GPrro8t69gFYVMWb1Zc4yFmPiVg==}
+    peerDependencies:
+      leaflet: ^1.9.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      leaflet: 1.9.4
+      react: 18.2.0
+    dev: false
+
   /@react-spring/animated@9.4.5(react@18.2.0):
     resolution: {integrity: sha512-KWqrtvJSMx6Fj9nMJkhTwM9r6LIriExDRV6YHZV9HKQsaolUFppgkOXpC+rsL1JEtEvKv6EkLLmSqHTnuYjiIA==}
     peerDependencies:
@@ -8114,6 +8668,19 @@ packages:
       '@react-spring/types': 9.4.5
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@react-spring/web@9.4.5(react@18.2.0):
+    resolution: {integrity: sha512-NGAkOtKmOzDEctL7MzRlQGv24sRce++0xAY7KlcxmeVkR7LRSGkoXHaIfm9ObzxPMcPHQYQhf3+X9jepIFNHQA==}
+    peerDependencies:
+      react: ^16.8.0  || >=17.0.0 || >=18.0.0
+      react-dom: ^16.8.0  || >=17.0.0 || >=18.0.0
+    dependencies:
+      '@react-spring/animated': 9.4.5(react@18.2.0)
+      '@react-spring/core': 9.4.5(react@18.2.0)
+      '@react-spring/shared': 9.4.5(react@18.2.0)
+      '@react-spring/types': 9.4.5
+      react: 18.2.0
     dev: false
 
   /@reduxjs/toolkit@1.9.7(react-redux@8.1.3)(react@18.2.0):
@@ -8514,6 +9081,16 @@ packages:
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+      tippy.js: 6.3.7
+    dev: false
+
+  /@tippyjs/react@4.2.6(react@18.2.0):
+    resolution: {integrity: sha512-91RicDR+H7oDSyPycI13q3b7o4O60wa2oRbjlz2fyRLmHImc4vyDwuUP8NtZaN0VARJY5hybvDYrFzhY9+Lbyw==}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+    dependencies:
+      react: 18.2.0
       tippy.js: 6.3.7
     dev: false
 
@@ -10727,6 +11304,20 @@ packages:
       object-assign: 4.1.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
+  /draft-js@0.11.7(react@18.2.0):
+    resolution: {integrity: sha512-ne7yFfN4sEL82QPQEn80xnADR8/Q6ALVworbC5UOSzOvjffmYfFsr3xSZtxbIirti14R7Y33EZC5rivpLgIbsg==}
+    peerDependencies:
+      react: '>=0.14.0'
+      react-dom: '>=0.14.0'
+    dependencies:
+      fbjs: 2.0.0
+      immutable: 3.7.6
+      object-assign: 4.1.1
+      react: 18.2.0
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -13152,6 +13743,99 @@ packages:
     dev: false
     optional: true
 
+  /next@12.3.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-l7bvmSeIwX5lp07WtIiP9u2ytZMv7jIeB8iacR28PuUEFG5j0HGAPnMqyG5kbZNBG2H7tRsrQ4HCjuMOPnANZw==}
+    engines: {node: '>=12.22.0'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      fibers: '>= 3.1.0'
+      node-sass: ^6.0.0 || ^7.0.0
+      react: ^17.0.2 || ^18.0.0-0
+      react-dom: ^17.0.2 || ^18.0.0-0
+      sass: ^1.3.0
+    peerDependenciesMeta:
+      fibers:
+        optional: true
+      node-sass:
+        optional: true
+      sass:
+        optional: true
+    dependencies:
+      '@next/env': 12.3.1
+      '@swc/helpers': 0.4.11
+      caniuse-lite: 1.0.30001547
+      postcss: 8.4.14
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      styled-jsx: 5.0.7(react@18.2.0)
+      use-sync-external-store: 1.2.0(react@18.2.0)
+    optionalDependencies:
+      '@next/swc-android-arm-eabi': 12.3.1
+      '@next/swc-android-arm64': 12.3.1
+      '@next/swc-darwin-arm64': 12.3.1
+      '@next/swc-darwin-x64': 12.3.1
+      '@next/swc-freebsd-x64': 12.3.1
+      '@next/swc-linux-arm-gnueabihf': 12.3.1
+      '@next/swc-linux-arm64-gnu': 12.3.1
+      '@next/swc-linux-arm64-musl': 12.3.1
+      '@next/swc-linux-x64-gnu': 12.3.1
+      '@next/swc-linux-x64-musl': 12.3.1
+      '@next/swc-win32-arm64-msvc': 12.3.1
+      '@next/swc-win32-ia32-msvc': 12.3.1
+      '@next/swc-win32-x64-msvc': 12.3.1
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+    dev: false
+    optional: true
+
+  /next@12.3.1(react@18.2.0):
+    resolution: {integrity: sha512-l7bvmSeIwX5lp07WtIiP9u2ytZMv7jIeB8iacR28PuUEFG5j0HGAPnMqyG5kbZNBG2H7tRsrQ4HCjuMOPnANZw==}
+    engines: {node: '>=12.22.0'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      fibers: '>= 3.1.0'
+      node-sass: ^6.0.0 || ^7.0.0
+      react: ^17.0.2 || ^18.0.0-0
+      react-dom: ^17.0.2 || ^18.0.0-0
+      sass: ^1.3.0
+    peerDependenciesMeta:
+      fibers:
+        optional: true
+      node-sass:
+        optional: true
+      sass:
+        optional: true
+    dependencies:
+      '@next/env': 12.3.1
+      '@swc/helpers': 0.4.11
+      caniuse-lite: 1.0.30001547
+      postcss: 8.4.14
+      react: 18.2.0
+      styled-jsx: 5.0.7(react@18.2.0)
+      use-sync-external-store: 1.2.0(react@18.2.0)
+    optionalDependencies:
+      '@next/swc-android-arm-eabi': 12.3.1
+      '@next/swc-android-arm64': 12.3.1
+      '@next/swc-darwin-arm64': 12.3.1
+      '@next/swc-darwin-x64': 12.3.1
+      '@next/swc-freebsd-x64': 12.3.1
+      '@next/swc-linux-arm-gnueabihf': 12.3.1
+      '@next/swc-linux-arm64-gnu': 12.3.1
+      '@next/swc-linux-arm64-musl': 12.3.1
+      '@next/swc-linux-x64-gnu': 12.3.1
+      '@next/swc-linux-x64-musl': 12.3.1
+      '@next/swc-win32-arm64-msvc': 12.3.1
+      '@next/swc-win32-ia32-msvc': 12.3.1
+      '@next/swc-win32-x64-msvc': 12.3.1
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+    dev: false
+    optional: true
+
   /next@13.1.6(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-hHlbhKPj9pW+Cymvfzc15lvhaOZ54l+8sXDXJWm3OBNBzgrVj6hwGPmqqsXg40xO1Leq+kXpllzRPuncpC0Phw==}
     engines: {node: '>=14.6.0'}
@@ -13177,6 +13861,50 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       styled-jsx: 5.1.1(@babel/core@7.23.2)(react@18.2.0)
+    optionalDependencies:
+      '@next/swc-android-arm-eabi': 13.1.6
+      '@next/swc-android-arm64': 13.1.6
+      '@next/swc-darwin-arm64': 13.1.6
+      '@next/swc-darwin-x64': 13.1.6
+      '@next/swc-freebsd-x64': 13.1.6
+      '@next/swc-linux-arm-gnueabihf': 13.1.6
+      '@next/swc-linux-arm64-gnu': 13.1.6
+      '@next/swc-linux-arm64-musl': 13.1.6
+      '@next/swc-linux-x64-gnu': 13.1.6
+      '@next/swc-linux-x64-musl': 13.1.6
+      '@next/swc-win32-arm64-msvc': 13.1.6
+      '@next/swc-win32-ia32-msvc': 13.1.6
+      '@next/swc-win32-x64-msvc': 13.1.6
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+    dev: false
+
+  /next@13.1.6(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-hHlbhKPj9pW+Cymvfzc15lvhaOZ54l+8sXDXJWm3OBNBzgrVj6hwGPmqqsXg40xO1Leq+kXpllzRPuncpC0Phw==}
+    engines: {node: '>=14.6.0'}
+    hasBin: true
+    peerDependencies:
+      fibers: '>= 3.1.0'
+      node-sass: ^6.0.0 || ^7.0.0
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      sass: ^1.3.0
+    peerDependenciesMeta:
+      fibers:
+        optional: true
+      node-sass:
+        optional: true
+      sass:
+        optional: true
+    dependencies:
+      '@next/env': 13.1.6
+      '@swc/helpers': 0.4.14
+      caniuse-lite: 1.0.30001547
+      postcss: 8.4.14
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      styled-jsx: 5.1.1(react@18.2.0)
     optionalDependencies:
       '@next/swc-android-arm-eabi': 13.1.6
       '@next/swc-android-arm64': 13.1.6
@@ -14338,6 +15066,18 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /react-leaflet@4.2.1(leaflet@1.9.4)(react@18.2.0):
+    resolution: {integrity: sha512-p9chkvhcKrWn/H/1FFeVSqLdReGwn2qmiobOQGO3BifX+/vV/39qhY8dGqbdcPh1e6jxh/QHriLXr7a4eLFK4Q==}
+    peerDependencies:
+      leaflet: ^1.9.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      '@react-leaflet/core': 2.1.0(leaflet@1.9.4)(react@18.2.0)
+      leaflet: 1.9.4
+      react: 18.2.0
+    dev: false
+
   /react-lifecycles-compat@3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
     dev: false
@@ -14364,6 +15104,18 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /react-quill@2.0.0(react@18.2.0):
+    resolution: {integrity: sha512-4qQtv1FtCfLgoD3PXAur5RyxuUbPXQGOHgTlFie3jtxp43mXDtzCKaOgQ3mLyZfi1PUlyjycfivKelFhy13QUg==}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+      react-dom: ^16 || ^17 || ^18
+    dependencies:
+      '@types/quill': 1.3.10
+      lodash: 4.17.21
+      quill: 1.3.7
+      react: 18.2.0
+    dev: false
+
   /react-redux@8.1.3(@types/react@18.2.28)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-n0ZrutD7DaX/j9VscF+uTALI3oUPa/pO4Z3soOBIjuRn/FzVu6aehhysxZCLi6y7duMf52WNZGMl7CtuK5EnRw==}
     peerDependencies:
@@ -14388,6 +15140,37 @@ packages:
       '@babel/runtime': 7.23.2
       '@types/hoist-non-react-statics': 3.3.3
       '@types/react': 18.2.28
+      '@types/use-sync-external-store': 0.0.3
+      hoist-non-react-statics: 3.3.2
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-is: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
+
+  /react-redux@8.1.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-n0ZrutD7DaX/j9VscF+uTALI3oUPa/pO4Z3soOBIjuRn/FzVu6aehhysxZCLi6y7duMf52WNZGMl7CtuK5EnRw==}
+    peerDependencies:
+      '@types/react': ^16.8 || ^17.0 || ^18.0
+      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+      react-native: '>=0.59'
+      redux: ^4 || ^5.0.0-beta.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+      redux:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.2
+      '@types/hoist-non-react-statics': 3.3.3
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
@@ -14458,6 +15241,27 @@ packages:
       immutable: 3.8.2
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
+  /react-rte@0.16.5(react@18.2.0):
+    resolution: {integrity: sha512-KoUBbl8jgAaxQIRpAfnDYjcx7Xlc/4EsgASxYKPIj/HzPuSgBxOlkPAK73V5fe7aHVhq0IfvNvhmNNpoDLQX4A==}
+    peerDependencies:
+      react: 0.14.x || 15.x.x || 16.x.x || 17.x.x
+      react-dom: 0.14.x || 15.x.x || 16.x.x || 17.x.x
+    dependencies:
+      babel-runtime: 6.26.0
+      class-autobind: 0.1.4
+      classnames: 2.3.2
+      draft-js: 0.11.7(react@18.2.0)
+      draft-js-export-html: 1.4.1(draft-js@0.11.7)(immutable@3.8.2)
+      draft-js-export-markdown: 1.4.0(draft-js@0.11.7)(immutable@3.8.2)
+      draft-js-import-html: 1.4.1(draft-js@0.11.7)(immutable@3.8.2)
+      draft-js-import-markdown: 1.4.1(draft-js@0.11.7)(immutable@3.8.2)
+      draft-js-utils: 1.4.1(draft-js@0.11.7)(immutable@3.8.2)
+      immutable: 3.8.2
+      react: 18.2.0
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -15239,6 +16043,24 @@ packages:
     dev: false
     optional: true
 
+  /styled-jsx@5.0.7(react@18.2.0):
+    resolution: {integrity: sha512-b3sUzamS086YLRuvnaDigdAewz1/EFYlHpYBP5mZovKEdQQOIIYq8lApylub3HHZ6xFjV051kkGU7cudJmrXEA==}
+    engines: {node: '>= 12.0.0'}
+    requiresBuild: true
+    peerDependencies:
+      '@babel/core': '*'
+      babel-plugin-macros: '*'
+      react: '>= 16.8.0 || 17.x.x || ^18.0.0-0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      babel-plugin-macros:
+        optional: true
+    dependencies:
+      react: 18.2.0
+    dev: false
+    optional: true
+
   /styled-jsx@5.1.1(@babel/core@7.23.2)(react@18.2.0):
     resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
     engines: {node: '>= 12.0.0'}
@@ -15253,6 +16075,23 @@ packages:
         optional: true
     dependencies:
       '@babel/core': 7.23.2
+      client-only: 0.0.1
+      react: 18.2.0
+    dev: false
+
+  /styled-jsx@5.1.1(react@18.2.0):
+    resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
+    engines: {node: '>= 12.0.0'}
+    peerDependencies:
+      '@babel/core': '*'
+      babel-plugin-macros: '*'
+      react: '>= 16.8.0 || 17.x.x || ^18.0.0-0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      babel-plugin-macros:
+        optional: true
+    dependencies:
       client-only: 0.0.1
       react: 18.2.0
     dev: false
@@ -16190,3 +17029,7 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     requiresBuild: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
