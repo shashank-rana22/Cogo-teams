@@ -46,7 +46,11 @@ function SelectFilters({ filters = {}, setFilters = () => {}, activeEntity = '',
 				<SingleDateRange
 					name="date"
 					isPreviousDaysAllowed
-					onChange={(e) => setFilters((prev) => ({ ...prev, dateRange: e }))}
+					onChange={(e) => {
+						setFilters((prev) => (
+							{ ...prev, dateRange: e || { startDate: '', endDate: '' } }
+						));
+					}}
 					value={dateRange}
 					dateFormat={GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd']}
 				/>
