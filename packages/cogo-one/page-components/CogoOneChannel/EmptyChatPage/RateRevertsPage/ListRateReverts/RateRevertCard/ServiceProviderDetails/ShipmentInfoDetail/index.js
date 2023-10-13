@@ -7,8 +7,8 @@ import useGetShipment from '../../../../../../../../hooks/useGetShipment';
 
 import styles from './styles.module.css';
 
-function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) {
-	const { loading = false, data = {} } = useGetShipment({ shipmentId, shipmentPopover, id });
+function ShipmentInfoDetail({ shipmentId = '' }) {
+	const { loading = false, data = {} } = useGetShipment({ shipmentId });
 
 	const { primary_service_detail = {} } = data || {};
 	const {
@@ -32,8 +32,8 @@ function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) 
 			<div className={styles.loader}>
 				<Image
 					src={GLOBAL_CONSTANTS.image_url.spinner_loader}
-					width={30}
-					height={30}
+					width={50}
+					height={50}
 					alt="loader"
 				/>
 			</div>

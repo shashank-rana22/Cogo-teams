@@ -13006,7 +13006,7 @@ const partner = {
 	],
 	cogo_one: [
 		{
-			api          : 'list_rate_jobs',
+			api          : 'list_smt_rate_jobs',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

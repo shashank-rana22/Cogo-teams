@@ -19,7 +19,7 @@ const useListRateJobs = () => {
 	const [params, setParams] = useState({ source: [], service: 'fcl_freight' });
 
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/list_rate_jobs',
+		url    : '/list_smt_rate_jobs',
 		method : 'get',
 	}, { manual: true });
 

@@ -1,15 +1,15 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-function useGetShipment({ shipmentId = '', shipmentPopover = {}, id = '' }) {
+function useGetShipment({ shipmentId = '' }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url          : '/get_shipment',
 		service_name : 'shipment',
 		method       : 'GET',
 	}, { manual: true });
-
+	// (shipmentPopover?.id !== id)
 	const getShipment = useCallback(() => {
-		if (!shipmentId || (shipmentPopover?.id !== id)) {
+		if (!shipmentId) {
 			return;
 		}
 
@@ -22,7 +22,7 @@ function useGetShipment({ shipmentId = '', shipmentPopover = {}, id = '' }) {
 		} catch (error) {
 			console.error(error, 'error');
 		}
-	}, [shipmentId, shipmentPopover?.id, id, trigger]);
+	}, [shipmentId, trigger]);
 
 	useEffect(() => {
 		getShipment();

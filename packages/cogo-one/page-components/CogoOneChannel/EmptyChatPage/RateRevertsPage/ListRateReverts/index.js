@@ -8,6 +8,11 @@ import styles from './styles.module.css';
 
 function ListRateReverts({ list = [], mailProps = {} }) {
 	const [shipmentPopover, setShipmentPopover] = useState({});
+	const [assignData, setAssignData] = useState({
+		show          : false,
+		revertDetails : {},
+		assignUser    : '',
+	});
 
 	return (
 		<div className={styles.container}>
@@ -19,6 +24,8 @@ function ListRateReverts({ list = [], mailProps = {} }) {
 						mailProps={mailProps}
 						setShipmentPopover={setShipmentPopover}
 						shipmentPopover={shipmentPopover}
+						setAssignData={setAssignData}
+						assignData={assignData}
 					/>
 				))
 			) : (

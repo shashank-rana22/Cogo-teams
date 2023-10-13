@@ -12,7 +12,11 @@ import styles from './styles.module.css';
 
 const MIN_SLICE_ITEM = 2;
 
-function RateRevertCard({ cardData = {}, mailProps = {}, shipmentPopover = {}, setShipmentPopover = () => {} }) {
+function RateRevertCard({
+	cardData = {}, mailProps = {}, shipmentPopover = {},
+	setShipmentPopover = () => {},
+	assignData = {}, setAssignData = () => {},
+}) {
 	const { setButtonType, setEmailState, signature } = mailProps;
 	const { assigned_to = {} } = cardData || {};
 	const { email = '', mobile_number_eformat = '', id = '', name = '' } = assigned_to || {};
@@ -64,6 +68,8 @@ function RateRevertCard({ cardData = {}, mailProps = {}, shipmentPopover = {}, s
 				cardData={cardData}
 				setShipmentPopover={setShipmentPopover}
 				shipmentPopover={shipmentPopover}
+				setAssignData={setAssignData}
+				assignData={assignData}
 			/>
 			<ShipmentDetails cardData={cardData} />
 			<ShipmentProgress cardData={cardData} />
