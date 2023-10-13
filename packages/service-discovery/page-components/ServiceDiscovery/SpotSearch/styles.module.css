@@ -50,6 +50,7 @@
 .header {
 	min-height: 300px;
 	padding: 24px 40px;
+	margin: -24px -40px;
 	background: #f7f9f9;
 
 	@media (max-width: 950px) {
@@ -60,10 +61,13 @@
 	}
 }
 
+.wrapper {
+	padding: 24px 40px;
+}
+
 .mode_selection {
 	display: inline-block;
-	padding: 24px 40px;
-	margin-top: -100px;
+	margin-top: -60px;
 
 	@media (max-width: 950px) {
 		margin-top: -120px;
@@ -71,15 +75,7 @@
 }
 
 .locations {
-	padding: 24px 40px;
-}
-
-.sales_dashboard {
-	padding: 24px 40px;
-}
-
-.other_services {
-	padding: 24px 40px;
+	margin: 40px 0 60px;
 }
 
 .scope_select {
