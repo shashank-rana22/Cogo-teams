@@ -187,6 +187,11 @@ const apis = [
 		feature      : 'rfq',
 		service_name : 'rfq',
 	},
+	{
+		api          : 'get_platform_config_constant',
+		access_type  : 'private',
+		service_name : 'platform_config',
+	},
 ];
 
 export default apis;
