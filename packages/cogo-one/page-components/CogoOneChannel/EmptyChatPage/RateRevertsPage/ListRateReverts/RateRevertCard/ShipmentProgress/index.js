@@ -1,22 +1,25 @@
 import {
-	IcMCalendar,
-	IcMClock,
+	// IcMCalendar,
+	// IcMClock,
 	IcMDummyCircle,
-	IcMEmail,
+	// IcMEmail,
 	IcMProfile,
 	IcMCall,
 } from '@cogoport/icons-react';
+import { differenceInDays, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function ShipmentProgress({ cardData = {} }) {
-	const { assigned_to = {} } = cardData || {};
+	const { call_details = {}, reverted_status = '' } = cardData || {};
+	const { agent_data = {}, end_time_of_call = '', start_time_of_call = '' } = call_details || {};
+	const { name = '' } = agent_data || {};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.contact_info}>
-				<span className={styles.label}>
+				{/* <span className={styles.label}>
 					Contacted At:
 				</span>
 
@@ -30,7 +33,7 @@ function ShipmentProgress({ cardData = {} }) {
 
 				<span className={styles.primary_data}>
 					04:00 pm
-				</span>
+				</span> */}
 			</div>
 
 			<div className={styles.contact_info}>
@@ -39,16 +42,16 @@ function ShipmentProgress({ cardData = {} }) {
 				</span>
 
 				<span className={styles.primary_data}>
-					No reply
+					{startCase(reverted_status)}
 				</span>
 
-				<IcMDummyCircle className={styles.dummy_circle} />
+				{/* <IcMDummyCircle className={styles.dummy_circle} /> */}
 
-				<IcMEmail className={styles.icon_styles} fill="#EE3425" />
+				{/* <IcMEmail className={styles.icon_styles} fill="#EE3425" />
 
 				<span className={styles.secondary_data}>
 					34m ago
-				</span>
+				</span> */}
 			</div>
 
 			<div className={styles.contact_info}>
@@ -59,7 +62,7 @@ function ShipmentProgress({ cardData = {} }) {
 				<IcMProfile className={styles.icon_styles} />
 
 				<span className={styles.primary_data}>
-					{assigned_to?.name || ''}
+					{startCase(name) || 'NA'}
 				</span>
 
 				<IcMDummyCircle className={styles.dummy_circle} />
@@ -67,7 +70,16 @@ function ShipmentProgress({ cardData = {} }) {
 				<IcMCall className={styles.icon_styles} fill="#849E4C" />
 
 				<span className={styles.secondary_data}>
-					Contacted 10m ago
+					Contacted
+					{' '}
+					<span>
+						{differenceInDays(
+							new Date(end_time_of_call || new Date()),
+							new Date(start_time_of_call || new Date()),
+						)}
+					</span>
+					{' '}
+					day
 				</span>
 			</div>
 		</div>

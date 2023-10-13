@@ -7,8 +7,8 @@ import useGetShipment from '../../../../../../../../hooks/useGetShipment';
 
 import styles from './styles.module.css';
 
-function ShipmentInfoDetail({ shipmentId = '' }) {
-	const { loading = false, data = {} } = useGetShipment({ shipmentId });
+function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) {
+	const { loading = false, data = {} } = useGetShipment({ shipmentId, shipmentPopover, id });
 
 	const { primary_service_detail = {} } = data || {};
 	const {

@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import RateRevertCard from './RateRevertCard';
 import styles from './styles.module.css';
 
-function ListRateReverts({ list = [], mailProps = {} }) {
+function ListRateReverts({ list = [], mailProps = {}, setActiveTab = () => {} }) {
 	const [shipmentPopover, setShipmentPopover] = useState({});
 	const [assignData, setAssignData] = useState({
 		show          : false,
@@ -26,6 +26,7 @@ function ListRateReverts({ list = [], mailProps = {} }) {
 						shipmentPopover={shipmentPopover}
 						setAssignData={setAssignData}
 						assignData={assignData}
+						setActiveTab={setActiveTab}
 					/>
 				))
 			) : (

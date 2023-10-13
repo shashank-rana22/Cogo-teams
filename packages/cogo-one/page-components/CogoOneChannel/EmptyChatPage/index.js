@@ -50,7 +50,7 @@ function EmptyChatPage({
 	}
 
 	if (showRateReverts) {
-		return <RateRevertsPage mailProps={mailProps} />;
+		return <RateRevertsPage mailProps={mailProps} setActiveTab={setActiveTab} />;
 	}
 
 	return (

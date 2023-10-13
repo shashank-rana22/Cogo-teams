@@ -51,7 +51,7 @@ const COGOONE_ADMIN = {
 		allow_adding_mail_template                  : true,
 		show_services                               : true,
 		show_rm_agent_details                       : false,
-		show_rate_reverts_page                      : true,
+		// show_rate_reverts_page                      : true,
 	},
 };
 
