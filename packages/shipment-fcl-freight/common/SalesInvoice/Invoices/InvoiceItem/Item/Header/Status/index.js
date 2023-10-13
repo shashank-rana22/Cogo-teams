@@ -67,7 +67,7 @@ function Status({
 	const geo = getGeoConstants();
 
 	const isCNApproved = (creditNoteList || []).some((creditNote) => creditNote?.invoice_combination_id === invoice?.id
-	&& creditNote.status === 'approved');
+	&& creditNote?.status === 'approved');
 
 	const showRequestCN = showCN
 	&& !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice?.status)
