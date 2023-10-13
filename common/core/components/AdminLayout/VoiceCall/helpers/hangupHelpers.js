@@ -1,6 +1,6 @@
 export const checkHangupStatus = ({
-	setCallState,
-	openFeedbackform, timeoutId = '', unmountVoiceCall, feedbackFormStatus = '',
+	setCallState = () => {},
+	openFeedbackform = () => {}, timeoutId = '', unmountVoiceCall, feedbackFormStatus = '',
 }) => {
 	clearInterval(timeoutId);
 	setCallState(((prev) => {
