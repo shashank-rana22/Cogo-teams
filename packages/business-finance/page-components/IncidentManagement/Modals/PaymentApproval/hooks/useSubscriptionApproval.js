@@ -10,6 +10,7 @@ const useSubscriptionApproval = ({
 	setDetailsModal = () => {},
 	saasUtrUploadRequest = {},
 	id = '',
+	orgData = {},
 	apiData = {},
 }) => {
 	const { user_id: userId } = useSelector(({ profile }) => ({
@@ -36,7 +37,8 @@ const useSubscriptionApproval = ({
 			const apiResponse = await trigger({
 				data: {
 					data: {
-						saasUtrUploadRequest: { ...(saasUtrUploadRequest || {}), utr_details: apiData },
+						organization         : orgData,
+						saasUtrUploadRequest : { ...(saasUtrUploadRequest || {}), utr_details: apiData },
 					},
 					remark    : remarks,
 					status,

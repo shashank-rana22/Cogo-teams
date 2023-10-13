@@ -35,6 +35,7 @@ function PaymentApproval({
 		refetch,
 		setDetailsModal,
 		saasUtrUploadRequest : row?.data?.saasUtrUploadRequest,
+		orgData              : row?.data?.organization,
 		id                   : row?.id,
 	});
 
