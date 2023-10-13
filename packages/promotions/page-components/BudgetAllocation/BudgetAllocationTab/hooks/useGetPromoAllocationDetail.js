@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
+import toastApiError from '../utils/toastApiError';
+
 const useGetPromoAllocationDetail = ({ selectedDetails = {} }) => {
 	const [List, setList] = useState([]);
 	const [paginationData, setPaginationData] = useState({});
