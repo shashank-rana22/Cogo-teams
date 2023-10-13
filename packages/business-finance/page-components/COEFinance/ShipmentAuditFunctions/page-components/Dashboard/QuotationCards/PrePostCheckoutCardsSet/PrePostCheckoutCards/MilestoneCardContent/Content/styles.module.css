@@ -9,8 +9,6 @@
 	display: flex;
 	width: 100%;
 	overflow-x: scroll;
-
-	/* flex-wrap: wrap; */
 	font-weight: 400;
 }
 

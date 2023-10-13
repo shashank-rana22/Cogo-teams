@@ -94,7 +94,6 @@ const getServiceColumns = ({ currentKey = '', item = {} }) => {
 			),
 			accessor: (row) => (
 				<div className={changes?.includes(row?.code) && isModified && row?.price ? styles.changed : ''}>
-					{/* {ShowOverflowingNumber(row?.price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) } */}
 					{row?.price?.toFixed(TRUNCATED_UPTO) || '-'}
 				</div>
 			),
@@ -106,7 +105,6 @@ const getServiceColumns = ({ currentKey = '', item = {} }) => {
 			),
 			accessor: (row) => (
 				<div className={changes?.includes(row?.code) && isModified && row?.margin_price ? styles.changed : ''}>
-					{/* {ShowOverflowingNumber(row?.margin_price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) } */}
 					{row?.margin_price?.toFixed(TRUNCATED_UPTO) || '-'}
 				</div>
 			),
@@ -131,7 +129,6 @@ const getServiceColumns = ({ currentKey = '', item = {} }) => {
 				<div className={changes?.includes(row?.code) && isModified
 				&& row?.tax_total_price ? styles.changed : ''}
 				>
-					{/* {ShowOverflowingNumber(row?.tax_total_price || ZERO_PRICE, CONCAT_LENGTH, row?.currency) } */}
 					{row?.tax_total_price?.toFixed(TRUNCATED_UPTO) || '-'}
 				</div>
 			),
@@ -145,12 +142,6 @@ const getServiceColumns = ({ currentKey = '', item = {} }) => {
 				<div className={changes?.includes(row?.code) && isModified
 				&& row?.tax_total_price_discounted ? styles.changed : ''}
 				>
-					{/* {ShowOverflowingNumber(
-						row?.tax_total_price_discounted || ZERO_PRICE,
-						CONCAT_LENGTH,
-
-						row?.currency,
-					) } */}
 					{row?.tax_total_price_discounted?.toFixed(TRUNCATED_UPTO) || '-'}
 				</div>
 			),
