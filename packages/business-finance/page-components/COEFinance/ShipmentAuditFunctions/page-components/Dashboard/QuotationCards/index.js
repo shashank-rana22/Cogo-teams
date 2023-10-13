@@ -50,6 +50,13 @@ function QuotationCards({
 
 	return (
 		<div>
+			<TicketsCard
+				serialId={job_number}
+				onTabClick={onTabClick}
+				loadingShipment={loadingShipment}
+				tab={tab}
+			/>
+
 			<DetailsCard
 				onTabClick={onTabClick}
 				dataList={dataList}
@@ -61,13 +68,6 @@ function QuotationCards({
 
 			<DocumentsCard
 				shipmentId={shipmentId}
-				onTabClick={onTabClick}
-				loadingShipment={loadingShipment}
-				tab={tab}
-			/>
-
-			<TicketsCard
-				serialId={job_number}
 				onTabClick={onTabClick}
 				loadingShipment={loadingShipment}
 				tab={tab}

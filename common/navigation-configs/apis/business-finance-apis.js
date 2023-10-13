@@ -61,6 +61,11 @@ const business_finance = {
 			service_name : 'shipment',
 		},
 		{
+			api         : 'get_common_job_profitability_shipment_summary',
+			access_type : 'private',
+			feature     : 'coe_finance',
+		},
+		{
 			api          : 'list_shipments',
 			access_type  : 'private',
 			service_name : 'shipment',
