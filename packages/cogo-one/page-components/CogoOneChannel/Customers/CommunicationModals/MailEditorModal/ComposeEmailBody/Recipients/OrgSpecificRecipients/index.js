@@ -149,7 +149,7 @@ function OrgSpecificRecipients({
 				name="users"
 				key={initialLoad ? orgLoading : ''}
 				className={type === 'toUserEmail' ? styles.users_select : styles.users_cc_select}
-				placeholder={activeTab === 'pocs' ? 'Search Billing Party Name' : 'Search user'}
+				placeholder="Search user"
 				isClearable
 				onSearch={handleSearch}
 				disabled={!(emailState?.orgData?.orgId || emailState?.orgId)}
@@ -164,7 +164,7 @@ function OrgSpecificRecipients({
 					selectedOptions : emailState?.user_ids?.[type],
 					value           : emailRecipientType,
 				}) || []}
-				renderLabel={(item) => <RenderLabel item={item} activeTab={activeTab} />}
+				renderLabel={(item) => <RenderLabel item={item} activeTab={organizationType} />}
 				value={isLeadUser
 					? emailRecipientType?.[GLOBAL_CONSTANTS.zeroth_index] || ''
 					: emailRecipientType || []}
