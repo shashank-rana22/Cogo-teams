@@ -5129,6 +5129,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'margin',
 		},
+		{
+			api          : 'get_margin_booking_insights',
+			access_type  : 'private',
+			service_name : 'margin',
+		},
+		{
+			api          : 'get_service_wise_booking_insights',
+			access_type  : 'private',
+			service_name : 'margin',
+		},
 	],
 	rate_sheet: [
 		{
