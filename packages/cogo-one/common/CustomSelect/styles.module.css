@@ -55,7 +55,7 @@
 	align-items: center;
 	padding: 8px;
 	overflow: hidden;
-	white-space: break-all;
+	white-space: pre-wrap;
 	cursor: pointer;
 	border-bottom: 1px solid #dedede;
 
@@ -73,7 +73,6 @@
 	display: flex;
 	flex-flow: row wrap;
 	padding-top: 6px;
-	transition: 2s;
 }
 
 .cross {
@@ -86,37 +85,15 @@
 
 .items {
 	display: flex;
-	flex-direction: row;
 	width: fit-content;
 	margin-right: 8px;
 }
 
 .selected_options {
 	display: flex;
-	flex-direction: row;
 	width: 100%;
 	padding: 4px;
 	margin-bottom: 8px;
-	font-size: 14px;
 	background: #edd7a9;
 	border-radius: 6px 0 0 6px;
-}
-
-.multi_option_item {
-	display: flex;
-	align-items: center;
-	padding: 8px;
-	overflow: hidden;
-	white-space: break-all;
-	cursor: pointer;
-	border-bottom: 1px solid #dedede;
-
-	&:hover {
-		background-color: #dedede;
-		border-color: #2c3e50;
-	}
-
-	&:last-of-type {
-		border-bottom: none;
-	}
 }

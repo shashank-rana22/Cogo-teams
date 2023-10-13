@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import OptionsBody from './optionsBody';
 import styles from './styles.module.css';
 
 function SingleSelectBody(props) {
@@ -11,7 +11,6 @@ function SingleSelectBody(props) {
 		valueKey = 'value',
 		labelKey = 'label',
 		onChange = () => {},
-		value = '',
 		renderLabel = null,
 		onSearch = () => {},
 		optionsHeader = null,
@@ -31,34 +30,15 @@ function SingleSelectBody(props) {
 				)
 				: (
 					<ul className={styles.options_container}>
-						{isEmpty(options)
-							? (
-								<li>
-									<span className={styles.list_item}>No Results</span>
-								</li>
-							) : (options || [])?.map(
-								(option) => (
-									<li
-										role="option"
-										key={`${option?.[valueKey]}-${option?.[labelKey]}`}
-										className={styles.option_item}
-										onClick={() => {
-											onChange(option?.[valueKey], option);
-											setIsOpen(false);
-											onSearch('');
-										}}
-										aria-selected={option?.[valueKey] === value}
-									>
-										{typeof renderLabel !== 'function'
-											? (
-												<span className={styles.list_item}>
-													{option?.[labelKey]}
-												</span>
-											)
-											: renderLabel(option, labelKey)}
-									</li>
-								),
-							)}
+						<OptionsBody
+							valueFilteredOptions={options}
+							handleChange={onChange}
+							setIsOpen={setIsOpen}
+							valueKey={valueKey}
+							labelKey={labelKey}
+							onSearch={onSearch}
+							renderLabel={renderLabel}
+						/>
 					</ul>
 				)}
 		</div>

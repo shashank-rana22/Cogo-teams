@@ -26,6 +26,35 @@ function getOrgListOptions({
 	}));
 }
 
+function TooltipContent({ item = {} }) {
+	return (
+		<div className={styles.poc_container}>
+			{item?.data?.map(
+				(itm) => (
+					<div className={styles.poc_data} key={itm?.id}>
+						<div>
+							<span>Billing Party Name:</span>
+							{itm?.name}
+						</div>
+						<div>
+							<span>Branch:</span>
+							{itm?.branch?.branch_name}
+						</div>
+						<div>
+							<span>Branch Code:</span>
+							{itm?.branch?.branch_code}
+						</div>
+						<div>
+							<span>Address:</span>
+							{itm?.address}
+						</div>
+					</div>
+				),
+			) || null}
+		</div>
+	);
+}
+
 function RenderLabel({ item = {}, activeTab = '' }) {
 	return (
 		<div className={styles.option_container}>
@@ -45,30 +74,7 @@ function RenderLabel({ item = {}, activeTab = '' }) {
 					appendTo={() => document.body}
 					className={styles.tooltip_container}
 					content={(
-						<div className={styles.poc_container}>
-							{item?.data?.map(
-								(itm) => (
-									<div className={styles.poc_data} key={itm?.id}>
-										<div>
-											<span>Billing Party Name:</span>
-											{itm?.name}
-										</div>
-										<div>
-											<span>Branch:</span>
-											{itm?.branch?.branch_name}
-										</div>
-										<div>
-											<span>Branch Code:</span>
-											{itm?.branch?.branch_code}
-										</div>
-										<div>
-											<span>Address:</span>
-											{itm?.address}
-										</div>
-									</div>
-								),
-							) || null}
-						</div>
+						<TooltipContent item={item} />
 					)}
 				>
 					<IcMInfo height={18} width={18} />
@@ -100,7 +106,7 @@ function resetEmailRecipientData({
 	recipientTypes = [],
 	orgId = '',
 	orgType = '',
-	twin_importer_exporter_id = '',
+	twinImporterExporterId = '',
 }) {
 	let newValues = {};
 
@@ -133,7 +139,7 @@ function resetEmailRecipientData({
 		orgData: {
 			orgType: orgType || prev?.orgData?.orgType,
 			orgId,
-			twin_importer_exporter_id,
+			twinImporterExporterId,
 		},
 		user_ids: newValues,
 	};

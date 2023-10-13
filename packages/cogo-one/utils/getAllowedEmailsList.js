@@ -20,6 +20,43 @@ const COGOPORT_MAILS = [
 	},
 ];
 
+function getOrgPoc({
+	itm = {},
+	defaultOptions = {},
+}) {
+	let options = { ...defaultOptions };
+
+	itm?.organization_pocs?.forEach(
+		(poc) => {
+			if (poc?.email) {
+				options = {
+					...options,
+					[poc?.email]: {
+						id        : poc?.id,
+						label     : poc?.name || poc?.email,
+						value     : poc?.email,
+						user_type : 'pocs',
+						data      : [
+							...(options?.[poc?.email]?.data || []),
+							{
+								name                : itm?.name,
+								branch              : itm?.branch,
+								address             : itm?.address,
+								is_sez              : itm?.is_sez,
+								pincode             : itm?.pincode,
+								verification_status : itm?.verification_status,
+								id                  : itm?.id,
+							},
+						],
+					},
+				};
+			}
+		},
+	);
+
+	return options;
+}
+
 function getAllowedEmailsList({
 	orgData = {},
 	searchQuery = '',
@@ -46,43 +83,24 @@ function getAllowedEmailsList({
 				};
 			}
 		});
+
 		optionsToShow = Object.values(options);
 	} else {
 		usersList?.forEach((itm) => {
 			if (!isEmpty(itm?.organization_pocs)) {
-				itm?.organization_pocs?.forEach(
-					(poc) => {
-						if (poc?.email) {
-							options = {
-								...options,
-								[poc?.email]: {
-									id        : poc?.id,
-									label     : poc?.name || poc?.email,
-									value     : poc?.email,
-									user_type : 'pocs',
-									data      : [
-										...(options?.[poc?.email]?.data || []),
-										{
-											name                : itm?.name,
-											branch              : itm?.branch,
-											address             : itm?.address,
-											is_sez              : itm?.is_sez,
-											pincode             : itm?.pincode,
-											verification_status : itm?.verification_status,
-											id                  : itm?.id,
-										},
-									],
-								},
-							};
-						}
-					},
-				);
+				options = getOrgPoc({ itm, defaultOptions: options });
 			}
 		});
-		optionsToShow = Object.values(options)?.filter((itm) => !value.includes(itm.value)) || [];
+
+		optionsToShow = Object.values(options)?.filter(
+			(itm) => !value.includes(itm.value),
+		) || [];
 	}
 
-	optionsToShow = [...(selectedOptions || []), ...optionsToShow];
+	optionsToShow = [
+		...(selectedOptions || []),
+		...optionsToShow,
+	];
 
 	return [
 		...(optionsToShow || []),

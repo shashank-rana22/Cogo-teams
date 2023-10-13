@@ -18,12 +18,26 @@ import {
 } from './orgSpecificFunctions';
 import styles from './styles.module.css';
 
-const getActiveComponent = ({ emailState }) => {
+function ActiveSelectComponent({
+	emailState = {},
+	...rest
+}) {
 	if (emailState?.orgData?.orgId === 'lead_users') {
-		return Select;
+		return (
+			<Select
+				key="select"
+				{...rest}
+			/>
+		);
 	}
-	return CustomSelect;
-};
+
+	return (
+		<CustomSelect
+			key="customSelect"
+			{...rest}
+		/>
+	);
+}
 
 function OrgSpecificRecipients({
 	type = '',
@@ -71,7 +85,7 @@ function OrgSpecificRecipients({
 		setUserSearchQuery = () => {},
 	} = useGetOrgUsers({
 		orgId                  : emailState?.orgData?.orgId || emailState?.orgId,
-		twinImporterExporterId : emailState?.orgData?.twin_importer_exporter_id || '',
+		twinImporterExporterId : emailState?.orgData?.twinImporterExporterId || '',
 		orgType                : organizationType,
 		userIds                : emailState?.user_ids?.[type],
 		allowedOrgs,
@@ -110,14 +124,12 @@ function OrgSpecificRecipients({
 				return resetEmailRecipientData({
 					prev,
 					recipientTypes,
-					orgId                     : val,
-					twin_importer_exporter_id : obj?.twin_importer_exporter_id || val,
+					orgId                  : val,
+					twinImporterExporterId : obj?.twin_importer_exporter_id || val,
 				});
 			},
 		);
 	};
-
-	const ActiveSelectComponent = getActiveComponent({ emailState });
 
 	return (
 		<div className={styles.container}>
@@ -147,6 +159,7 @@ function OrgSpecificRecipients({
 
 			<ActiveSelectComponent
 				name="users"
+				emailState={emailState}
 				key={initialLoad ? orgLoading : ''}
 				className={type === 'toUserEmail' ? styles.users_select : styles.users_cc_select}
 				placeholder="Search user"
