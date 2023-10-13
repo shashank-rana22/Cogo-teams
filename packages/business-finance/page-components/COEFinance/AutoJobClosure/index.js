@@ -1,5 +1,5 @@
-import { Input, Button, cl, Pagination } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { Select, Button, cl, Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -76,18 +76,14 @@ function AutoJobClosure() {
 			<div
 				className={cl` ${styles.topContainer} ${styles.topContainerComponents}  `}
 			>
-				<Input
-					name="searchValue"
-					size="sm"
-					placeholder="Search by Service"
-					className={styles.searchBox}
+				<Select
 					value={searchValue}
-					onChange={(value) => onQueryChange(value)}
-					suffix={(
-						<div className={styles.searchIcon}>
-							<IcMSearchlight height={15} width={15} />
-						</div>
-					)}
+					onChange={onQueryChange}
+					placeholder="Select Service"
+					options={GLOBAL_CONSTANTS.shipment_types}
+					size="sm"
+					style={{ width: '200px' }}
+					isClearable
 				/>
 
 				{ configButton ? (

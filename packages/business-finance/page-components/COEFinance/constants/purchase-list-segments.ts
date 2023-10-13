@@ -1,5 +1,4 @@
-function filtersUrgentData(statsData) {
-	const { URGENT_INVOICE_COUNT = '' } = statsData || {};
+function filtersUrgentData({ itemData, tab }) {
 	return [
 		{
 			label : 'All',
@@ -8,7 +7,7 @@ function filtersUrgentData(statsData) {
 		{
 			label : 'Urgent Invoices',
 			value : 'Urgency_tag',
-			badge : URGENT_INVOICE_COUNT,
+			badge : tab === 'Urgency_tag' ? itemData?.totalRecords : '',
 		},
 
 	];
