@@ -5,6 +5,7 @@ import { isEmpty, upperCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useCallback, useEffect, useState } from 'react';
 
+import toastApiError from '../../../utils/toastApiError';
 import headerFormControls, { DEFAULT_VALUES } from '../configuration/headerFormControls';
 
 import useRedirectFn from './useRedirectFn';
@@ -64,7 +65,7 @@ const useCreateTracker = ({ operatorData }) => {
 				},
 			});
 		} catch (err) {
-			console.error(err);
+			toastApiError(err);
 		}
 	}, [payloadKey, trigger]);
 

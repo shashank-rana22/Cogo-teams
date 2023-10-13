@@ -17,10 +17,10 @@ const headerFormControls = ({ trackingType = 'ocean',	operatorData = {}, t }) =>
 			rules       : { required: t('airOceanTracking:tracking_header_form_control_required_text_1') },
 		},
 		{
-			name        : 'shippingLine',
-			type        : 'select',
-			asyncKey    : 'shippingline_list',
-			initialCall : true,
+			name     : 'shippingLine',
+			type     : 'async_select',
+			asyncKey : 'shipping_lines',
+
 			placeholder : t('airOceanTracking:tracking_header_form_control_label_2'),
 			rules       : { required: t('airOceanTracking:tracking_header_form_control_required_text_2') },
 		},
@@ -41,11 +41,15 @@ const headerFormControls = ({ trackingType = 'ocean',	operatorData = {}, t }) =>
 		},
 		{
 			name        : 'airLine',
-			type        : 'select',
-			asyncKey    : 'airline_list',
-			initialCall : true,
+			type        : 'async_select',
+			asyncKey    : 'list_operators',
 			placeholder : t('airOceanTracking:tracking_header_form_control_label_4'),
 			rules       : { required: t('airOceanTracking:tracking_header_form_control_required_text_4') },
+			params      : {
+				filters: {
+					operator_type: 'airline',
+				},
+			},
 
 		},
 	];

@@ -27,6 +27,7 @@ function Header(props) {
 	const { activeTab = '', search_type = '' } = globalFilter;
 
 	const { redirectArchivedList, redirectToDashboard, redirectToList } = useRedirectFn();
+
 	const { loading, getTrackingData } = useExportData();
 
 	const backHandler = () => {

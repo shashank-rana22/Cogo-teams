@@ -1,7 +1,10 @@
-import Header from './Header';
-import InfoContainer from './InfoContainer';
-import MainContainer from './MainContainer';
+import { dynamic } from '@cogoport/next';
+
 import styles from './styles.module.css';
+
+const Header = dynamic(() => import('./Header'), { ssr: false });
+const InfoContainer = dynamic(() => import('./InfoContainer'), { ssr: false });
+const MainContainer = dynamic(() => import('./MainContainer'), { ssr: false });
 
 function Dashboard() {
 	return (
