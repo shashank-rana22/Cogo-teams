@@ -19,7 +19,7 @@ const getParams = ({
 const useApproveQuotation = ({
 	idList = [],
 	status = '',
-	source = 'Quotation',
+	type = '',
 }) => {
 	const { id = '' } = useSelector((state) => state?.profile?.user);
 	const [{ loading = false }, trigger] = useRequestBf(
@@ -36,12 +36,12 @@ const useApproveQuotation = ({
 			await trigger({
 				data: getParams({ idList, status, id }),
 			});
-			Toast.success(`${source} updated succesfully`);
+			Toast.success(`${type === 'sell' ? 'Quotation' : 'Bill'} updated succesfully`);
 			refetch();
 		} catch (error) {
 			toastApiError(error);
 		}
-	}, [trigger, idList, status, source, id]);
+	}, [trigger, idList, status, type, id]);
 
 	return {
 		approveQuotation,

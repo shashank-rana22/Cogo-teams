@@ -36,6 +36,7 @@ function Content({
 	} = useApproveQuotation({
 		idList : (currentStatus ? initIdList : approvedIdList),
 		status : (currentStatus ? 'APPROVED' : 'INIT'),
+		type,
 	});
 
 	return (
