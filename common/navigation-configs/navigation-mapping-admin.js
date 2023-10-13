@@ -81,10 +81,8 @@ const navigationMapping = ({ t = () => {} }) => {
 			type          : 'link',
 			icon          : IcMDashboard,
 			main_apis     : [],
-			possible_apis : [
-				...apis.welcome,
-			],
-			module_type: 'dashboards',
+			possible_apis : [...apis.welcome],
+			module_type   : 'dashboards',
 		},
 		employee_portal: {
 			key           : 'employee_portal',
@@ -238,11 +236,9 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/governance-manager',
 			type          : 'link',
 			icon          : IcMCrm,
-			possible_apis : [
-				...apis.governance_manager,
-			],
-			main_apis   : [],
-			module_type : 'crm',
+			possible_apis : [...apis.governance_manager],
+			main_apis     : [],
+			module_type   : 'crm',
 		},
 		support_crm: {
 			key           : 'support_crm',
@@ -1210,7 +1206,6 @@ const navigationMapping = ({ t = () => {} }) => {
 					type          : '',
 					main_apis     : [],
 					possible_apis : [...apis.revenue_desk, ...apis.sop],
-
 				},
 				{
 					key           : 'revenue_desk-contracts',
@@ -1247,8 +1242,13 @@ const navigationMapping = ({ t = () => {} }) => {
 					type          : 'link',
 					statsKey      : 'shipments',
 					main_apis     : ['list_shipments'],
-					possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback,
-						...apis.sales_invoice, ...apis.cargo_insurance],
+					possible_apis : [
+						...apis.shipment,
+						...apis.search,
+						...apis.feedback,
+						...apis.sales_invoice,
+						...apis.cargo_insurance,
+					],
 				},
 				{
 					key           : 'coe-shipment_air',
@@ -1334,7 +1334,11 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/cost-booking-desk',
 					type          : 'link',
 					main_apis     : ['list_cost_booking_desk_shipments'],
-					possible_apis : [...apis.cost_booking_desk, ...apis.cogolens, ...apis.shipment],
+					possible_apis : [
+						...apis.cost_booking_desk,
+						...apis.cogolens,
+						...apis.shipment,
+					],
 				},
 				{
 					key           : 'coe-cancellation_policies',
@@ -1388,7 +1392,10 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/bl_do-collection-release',
 					type          : 'link',
 					main_apis     : ['list_shipment_document_collections'],
-					possible_apis : [...apis.bl_do_collection_release, ...apis.shipment],
+					possible_apis : [
+						...apis.bl_do_collection_release,
+						...apis.shipment,
+					],
 				},
 				{
 					key           : 'coe-kam_desk',
@@ -1408,7 +1415,11 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/document-desk',
 					type          : 'link',
 					main_apis     : ['list_document_desk_shipments'],
-					possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
+					possible_apis : [
+						...apis.document_desk,
+						...apis.cogolens,
+						...apis.shipment,
+					],
 				},
 				{
 					key           : 'coe-last_mile',
@@ -1741,8 +1752,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'promotions-budget_allocation',
 					title         : t('common:budget_allocation'),
-					href          : '/promotions/budget-allocation',
-					as            : '/promotions/budget-allocation',
+					href          : '/v2/promotions/budget-allocation',
+					as            : '/v2/promotions/budget-allocation',
 					type          : 'link',
 					main_apis     : [],
 					possible_apis : apis.promotions,
@@ -2231,7 +2242,10 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/learning/course',
 					type          : 'link',
 					main_apis     : [],
-					possible_apis : [...apis.create_course, ...apis.course_module],
+					possible_apis : [
+						...apis.create_course,
+						...apis.course_module,
+					],
 				},
 			],
 			module_type: 'crm',
@@ -2572,9 +2586,12 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/employee-dashboard',
 			type          : 'link',
 			icon          : IcMDashboard,
-			possible_apis : [...apis.employee_performance_dashboard, ...apis.separation],
-			main_apis     : [],
-			module_type   : 'dashboards',
+			possible_apis : [
+				...apis.employee_performance_dashboard,
+				...apis.separation,
+			],
+			main_apis   : [],
+			module_type : 'dashboards',
 		},
 		ftl_admin: {
 			key           : 'ftl_admin',
@@ -2624,7 +2641,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			icon        : IcMUpwardGraph,
 			options     : [
 				{
-					key         	 : 'forecast-supply_allocation',
+					key           : 'forecast-supply_allocation',
 					title         : t('common:supply_allocation'),
 					href          : '/v2/supply-allocation',
 					as            : '/v2/supply-allocation',
@@ -2639,7 +2656,10 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/demand-forecast',
 					type          : 'link',
 					possible_apis : apis.demand_forecast,
-					main_apis     : ['get_rolling_forecast_fcl_freight_clusters', 'get_rolling_forecast_port_pairs'],
+					main_apis     : [
+						'get_rolling_forecast_fcl_freight_clusters',
+						'get_rolling_forecast_port_pairs',
+					],
 				},
 			],
 		},
