@@ -1,0 +1,86 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 20px 25px 10px 45px;
+}
+
+.shippingline {
+	display: flex;
+	align-items: center;
+	padding: 0 8px;
+	margin-bottom: 20px;
+	border-radius: 12px;
+	box-shadow: 0 0 8px 0 #627fac33;
+
+	.shippingName {
+		padding: 6px 12px;
+	}
+}
+
+.stepper {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.dot_line {
+	display: flex;
+	align-items: center;
+	width: 33%;
+
+	&.first_dot {
+		width: auto;
+	}
+}
+
+.line {
+	width: 95%;
+	height: 2px;
+	background-color: #d3d3d3;
+
+	&.active_line {
+		background-color: #108ee9;
+	}
+}
+
+.dot_container {
+	position: relative;
+	margin: 0 2px;
+}
+
+.dot {
+	width: 10px;
+	height: 10px;
+	background-color: #d3d3d3;
+	border-radius: 50px;
+
+	&.active_dot {
+		background-color: #108ee9;
+	}
+}
+
+.milestoneName {
+	position: absolute;
+	margin: 6px 0;
+	font-size: 12px;
+
+	&.origin {
+		left: -10px;
+	}
+
+	&.portLoading {
+		left: -33px;
+		width: 100px;
+	}
+
+	&.portDischarge {
+		left: -37px;
+		width: 120px;
+	}
+
+	&.destination {
+		left: -27px;
+	}
+}
