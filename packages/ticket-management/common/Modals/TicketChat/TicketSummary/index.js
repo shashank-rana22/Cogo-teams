@@ -8,7 +8,6 @@ import React from 'react';
 
 import { PRIORITY_MAPPING, STATUS_MAPPING, getStatusLabelMapping } from '../../../../constants';
 import useGetCountdown from '../../../../hooks/useGetCountdown';
-import useListShipments from '../../../../hooks/useGetListShipment';
 import { handleRouteBooking, handleRouteSupply } from '../../../../utils/handleRoute';
 import TicketLoader from '../../../TicketStructure/TicketStructureLoader';
 
@@ -22,6 +21,7 @@ function TicketSummary({
 	TicketStatus: ticketStatus = '', AgentName: agentName = '',
 	detailsLoading = false, TicketConfiguration: ticketConfiguration = {},
 	OrganizationData: organizationData = {}, partnerId = '',
+	shipmentsData = {}, listLoading = false,
 }) {
 	const {
 		Name: name = '', Email: email = '',
@@ -58,8 +58,6 @@ function TicketSummary({
 	} = data || {};
 
 	const authorizers = (closureAuthorizers || []).map((item) => item.Name);
-
-	const { shipmentsData = {}, listLoading = false } = useListShipments({ serialId });
 
 	const { color: textColor, label } = getStatusLabelMapping({ t })
 		?.[STATUS_MAPPING[ticketStatus]] || {};

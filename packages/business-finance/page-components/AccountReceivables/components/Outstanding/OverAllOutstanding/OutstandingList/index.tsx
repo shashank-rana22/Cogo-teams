@@ -36,6 +36,7 @@ interface ItemProps {
 	selfOrganizationName?: string;
 	organizationId?: string;
 	selfOrganizationId?: string;
+	registrationNumber?: any;
 }
 interface OutstandingListProps {
 	item?: ItemProps;
@@ -253,6 +254,7 @@ function OutstandingList({
 								/>
 							</div>
 						</Tooltip>
+
 						{!showElement && (
 							<Button
 								size="md"

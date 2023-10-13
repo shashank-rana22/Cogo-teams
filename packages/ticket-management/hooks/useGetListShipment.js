@@ -8,7 +8,7 @@ const getParams = ({ serialId }) => ({
 	},
 });
 
-function useListShipments({ serialId = 0 }) {
+function useListShipments({ serialId = 0, ticketId = 0 }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_shipments',
 		method : 'get',
@@ -29,7 +29,7 @@ function useListShipments({ serialId = 0 }) {
 
 	useEffect(() => {
 		getShipmentsList({});
-	}, [getShipmentsList]);
+	}, [getShipmentsList, ticketId]);
 
 	const shipmentsData = data?.list?.[GLOBAL_CONSTANTS.zeroth_index];
 

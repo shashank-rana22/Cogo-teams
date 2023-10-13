@@ -129,6 +129,8 @@ export default {
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42', // ES Team Lead - Enterprise Demand
 			'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63', // Trade Expert Team Lead - Long Tail
 		],
+		supply_relations_head_role_id    : '0a623fc0-bd23-4990-b2ec-0115d3f1095b',
+		fin_ops_manager_role_id          : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 		freight_force_org_id             : '36cee6fb-eeaf-4643-9db5-397544339635',

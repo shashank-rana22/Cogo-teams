@@ -193,7 +193,12 @@ export const invoiceconfig = ({ utrData = [], utrLoading = false }) => [
 						<Tooltip
 							theme="light"
 							interactive
-							content={<p>{(row?.remarks || []).join(' , ')}</p>}
+							content={(
+								<p>
+									{' '}
+									{(row?.remarks || []).filter((item) => (item !== ''))?.join(' , ')}
+								</p>
+							)}
 						>
 							<Pill size="sm" color="#FEF1DF">
 								{purchaseType(row)}
