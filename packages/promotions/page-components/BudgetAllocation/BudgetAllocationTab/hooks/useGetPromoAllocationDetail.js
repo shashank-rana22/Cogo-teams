@@ -1,10 +1,12 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-const useGetPromoAllocationDetail = ({ selectedDetails = {}, filters = {}, setFilters = () => {} }) => {
+import toastApiError from '../utils/toastApiError';
+
+const useGetPromoAllocationDetail = ({ selectedDetails = {} }) => {
 	const [List, setList] = useState([]);
 	const [paginationData, setPaginationData] = useState({});
+	const [filters, setFilters] = useState({ agent_id: '', page: 1 });
 
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -28,7 +30,7 @@ const useGetPromoAllocationDetail = ({ selectedDetails = {}, filters = {}, setFi
 			setList(list);
 			setPaginationData(paginationdata);
 		} catch (error) {
-			Toast.error(error.message);
+			toastApiError(error);
 		}
 	}, [trigger, setList, setPaginationData]);
 
@@ -40,11 +42,14 @@ const useGetPromoAllocationDetail = ({ selectedDetails = {}, filters = {}, setFi
 		setFilters({ ...filters, page: 1 });
 		getAllocationDetail();
 	};
+
 	return {
 		loading,
 		promoAllocationList: List,
 		paginationData,
 		refetch,
+		filters,
+		setFilters,
 	};
 };
 

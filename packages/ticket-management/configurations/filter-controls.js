@@ -8,7 +8,7 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
 import { useSelector } from '@cogoport/store';
 
-import { SERVICE_API_MAPPING } from '../constants';
+import { DISABLE_STATUS_KEY, SERVICE_API_MAPPING } from '../constants';
 
 import getCreateControls from './create-controls';
 
@@ -26,7 +26,7 @@ const useRaiseTicketcontrols = ({
 	const isOperation = rolesArr.includes('operations');
 
 	const checkSid = watchIdType === 'sid'
-		? 'list_shipments' : SERVICE_API_MAPPING[watchServiceType];
+		? 'list_shipments' : SERVICE_API_MAPPING?.[watchIdType]?.[watchServiceType];
 
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
 
@@ -56,7 +56,7 @@ const useRaiseTicketcontrols = ({
 			RequestType      : watchRequestType || undefined,
 			Category         : watchCategory || undefined,
 			Subcategory      : watchSubCategory || undefined,
-			Service          : watchService || undefined,
+			Service          : watchServiceType || watchService || undefined,
 			TradeType        : watchTradeType || undefined,
 			RaisedByDesk     : watchRaisedByDesk || undefined,
 			RaisedToDesk     : watchRaisedToDesk || undefined,
@@ -81,8 +81,10 @@ const useRaiseTicketcontrols = ({
 		key      : watchServiceType,
 		params   : {
 			filters: {
-				status: 'active',
+				status        : DISABLE_STATUS_KEY.includes(watchIdType) ? undefined : 'active',
+				feedback_type : watchIdType === 'dislike_id' ? 'disliked' : undefined,
 			},
+			booking_details_required: watchIdType === 'dislike_id' ? true : undefined,
 		},
 		valueKey    : 'serial_id',
 		initialCall : false,
@@ -105,6 +107,7 @@ const useRaiseTicketcontrols = ({
 		formatRaiseToDeskOptions,
 		setDefaultTypeId,
 		isOperation,
+		watchIdType,
 	});
 
 	return controls.filter((itm) => itm?.visible);

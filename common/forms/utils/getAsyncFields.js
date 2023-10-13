@@ -1020,6 +1020,17 @@ function asyncListOverSeasTradeParties() {
 	};
 }
 
+function asyncListShippingLineEvents() {
+	return {
+		labelKey    : 'milestone',
+		valueKey    : 'id',
+		endpoint    : 'list_shipping_line_events',
+		initialCall : true,
+		params      : {
+			filters: { status: 'active' },
+		},
+	};
+}
 function asyncListSaasPlan() {
 	return {
 		labelKey : 'display_name',
@@ -1179,6 +1190,126 @@ function asyncListTrailerFreightRate() {
 	};
 }
 
+function asyncListFclRateFeedback() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_fcl_freight_rate_feedbacks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListLclRateFeedback() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_lcl_freight_rate_feedbacks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListAirRateFeedback() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_air_freight_rate_feedbacks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListFtlRateFeedback() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_ftl_freight_rate_feedbacks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListLtlRateFeedback() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_ltl_freight_rate_feedbacks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListFclCustomFeedback() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_fcl_customs_rate_feedbacks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListLclCustomFeedback() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_lcl_customs_rate_feedbacks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListTrailerRateFeedback() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_trailer_freight_rate_feedbacks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListHaulageRateFeedback() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_haulage_freight_rate_feedbacks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListAirCustomFeedback() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_air_customs_rate_feedbacks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1262,6 +1393,7 @@ export {
 	asyncListFclFreightCommodityClusters,
 	asyncListSpotSearchRateCardOperators,
 	asyncListOverSeasTradeParties,
+	asyncListShippingLineEvents,
 	asyncListSaasPlan,
 	asyncListEnrichmentSources,
 	asyncListIncidentTypes,
@@ -1276,4 +1408,14 @@ export {
 	asyncListLclCustomsRate,
 	asyncListAirCustomsRate,
 	asyncListTrailerFreightRate,
+	asyncListFclRateFeedback,
+	asyncListLclRateFeedback,
+	asyncListAirRateFeedback,
+	asyncListFtlRateFeedback,
+	asyncListLtlRateFeedback,
+	asyncListFclCustomFeedback,
+	asyncListLclCustomFeedback,
+	asyncListTrailerRateFeedback,
+	asyncListHaulageRateFeedback,
+	asyncListAirCustomFeedback,
 };

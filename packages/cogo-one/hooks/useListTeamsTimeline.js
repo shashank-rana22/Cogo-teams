@@ -1,6 +1,10 @@
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
+
+const BUFFER_DURATION = 600000;
+
+const BUFFER_IN_API_CALL = 5000;
 
 const getPayload = ({ endDate = Date.now(), startDate = Date.now(), groupId = '' }) => ({
 	page_limit               : 100,
@@ -34,7 +38,12 @@ const dataFormatter = ({ res = {}, setMessagesState = () => {}, groupId = '' }) 
 	}));
 };
 
-const useListTeamsTimeline = ({ setMessagesState = () => {} }) => {
+const useListTeamsTimeline = ({
+	setMessagesState = () => {},
+	lastGroupUpdatedAt = 0,
+	roomId = '',
+	scrollToLastMessage = () => {},
+}) => {
 	const [, trigger] = useRequest({
 		url    : '/list_cogoone_timelines',
 		method : 'get',
@@ -44,16 +53,35 @@ const useListTeamsTimeline = ({ setMessagesState = () => {} }) => {
 		endDate = '',
 		startDate = '',
 		groupId = '',
+		callBackFuc = () => {},
 	}) => {
 		try {
 			const res = await trigger({
 				params: getPayload({ endDate, startDate, groupId }),
 			});
 			dataFormatter({ res, setMessagesState, groupId });
+			callBackFuc();
 		} catch (error) {
 			console.error(error);
 		}
 	}, [setMessagesState, trigger]);
+
+	useEffect(() => {
+		let timeoutId;
+		if (roomId && lastGroupUpdatedAt) {
+			setTimeout(() => {
+				timeoutId = getCogooneTimeline({
+					endDate     : Date.now() + BUFFER_DURATION,
+					startDate   : Date.now() - BUFFER_DURATION,
+					groupId     : roomId,
+					callBackFuc : scrollToLastMessage,
+				});
+			}, BUFFER_IN_API_CALL);
+		}
+		return () => {
+			clearTimeout(timeoutId);
+		};
+	}, [lastGroupUpdatedAt, roomId, getCogooneTimeline, scrollToLastMessage]);
 
 	return {
 		getCogooneTimeline,

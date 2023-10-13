@@ -1,0 +1,81 @@
+.flex_box {
+	display: flex;
+}
+
+.container {
+	padding: 20px;
+	border: 1px solid #e0e0e0;
+	border-radius: 12px;
+	box-shadow: 0 6px 20px rgb(220 224 249 / 50%);
+}
+
+.current_milestone_box {
+	background-color: #fffefc;
+	border: 2px solid #034afd;
+	box-shadow: 0 6px 20px 0 #dce0f980;
+}
+
+.heading_container {
+	border-bottom: 1px solid #e0e0e0;
+
+	.title {
+		width: 90%;
+	}
+}
+
+.info {
+	margin-top: 15px;
+}
+
+.row {
+	justify-content: space-between;
+
+	&.not_last_row {
+		padding-bottom: 10px;
+		margin-bottom: 10px;
+		border-bottom: 0.5px solid #e0e0e0;
+	}
+
+	&.current_milestone {
+		border: none;
+	}
+
+	.date {
+		width: 25%;
+	}
+
+	.milestone {
+		width: 50%;
+		padding: 3px 7px;
+	}
+
+	.curr_info {
+		padding: 0;
+
+		:global {
+			.ui_pill_container {
+				padding: 5px 11px;
+				font-weight: 500;
+			}
+		}
+	}
+
+	.time {
+		width: 20%;
+		text-align: right;
+	}
+
+	div[role="tooltip"] {
+		display: inline-block;
+	}
+}
+
+.info_icon {
+	margin-left: 3px;
+	vertical-align: middle;
+}
+
+.day {
+	font-size: 10px;
+	color: #828282;
+}

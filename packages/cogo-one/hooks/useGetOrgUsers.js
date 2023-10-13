@@ -35,6 +35,8 @@ const useGetOrgUsers = ({
 	orgId = '',
 	userIds = null,
 	orgType = '',
+	type = '',
+	isLeadUser = false,
 }) => {
 	const [query, setQuery] = useState('');
 	const [initialLoad, setInitialLoad] = useState(true);
@@ -62,11 +64,11 @@ const useGetOrgUsers = ({
 
 	useEffect(
 		() => {
-			if (orgId) {
+			if (orgId && !(isLeadUser && type !== 'toUserEmail')) {
 				fetchUser({ selectedUserIds: initialLoad ? userIds : undefined });
 			}
 		},
-		[fetchUser, initialLoad, orgId, userIds],
+		[fetchUser, initialLoad, isLeadUser, orgId, type, userIds],
 	);
 
 	useEffect(() => {

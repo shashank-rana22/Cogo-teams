@@ -1,7 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const useBlockUserBudgetAllocation = (blockAndRefetch = () => {}) => {
+import toastApiError from '../utils/toastApiError';
+
+const useBlockUserBudgetAllocation = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/update_agent_budget_allocation_status',
@@ -11,20 +13,21 @@ const useBlockUserBudgetAllocation = (blockAndRefetch = () => {}) => {
 	);
 
 	const blockUserBudget = async (value) => {
-		const { agent_id = '', status = '' } = value;
+		const { agent_id = '', status = '' } = value || {};
 
 		try {
-			const payload = {
-				agent_id,
-				status: status === 'active' ? 'blocked' : 'active',
-			};
 			await trigger({
-				data: payload,
+				data: {
+					agent_id,
+					status: status === 'active' ? 'blocked' : 'active',
+				},
 			});
+
 			Toast.success(`Agent ${(status === 'active') ? 'Blocked' : 'UnBlocked'}!`);
-			blockAndRefetch();
+
+			refetch();
 		} catch (error) {
-			Toast.error(error.message);
+			toastApiError(error);
 		}
 	};
 

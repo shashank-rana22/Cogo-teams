@@ -18,7 +18,7 @@
 .mail_recipient_container {
 	display: flex;
 	align-items: center;
-	width: calc(100% - 106px);
+	width: calc(100% - 82px);
 }
 
 .button_styles {

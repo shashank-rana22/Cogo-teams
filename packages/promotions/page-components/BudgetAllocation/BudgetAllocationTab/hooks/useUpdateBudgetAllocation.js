@@ -1,37 +1,41 @@
-import { useRequest } from '@cogoport/request';
+import { useRequest } from "@cogoport/request";
+import { useState } from "react";
 
-import toastApiError from '../utils/toastApiError';
+import toastApiError from "../utils/toastApiError";
 
-const useUpdateBudgetAllocation = ({ setShowSaveLink = () => {}, refetch = () => {} }) => {
-	const [{ loading }, trigger] = useRequest(
-		{
-			url    : '/update_agent_budget_allocation',
-			method : 'POST',
-		},
-		{ manual: true },
-	);
+const useUpdateBudgetAllocation = ({ refetch = () => {} }) => {
+  const [showSaveLink, setShowSaveLink] = useState(false);
 
-	const updateBudget = async (value, inputValue) => {
-		const { agent_id = '' } = value;
-		try {
-			const payload = {
-				agent_id,
-				amount: inputValue || undefined,
-			};
-			await trigger({
-				data: payload,
-			});
-			refetch();
-			setShowSaveLink(false);
-		} catch (error) {
-			toastApiError(error);
-		}
-	};
+  const [{ loading }, trigger] = useRequest(
+    {
+      url: "/update_agent_budget_allocation",
+      method: "POST",
+    },
+    { manual: true }
+  );
 
-	return {
-		loading,
-		updateBudget,
-	};
+  const updateBudget = async ({ value = {}, inputValue }) => {
+    const { agent_id = "" } = value || {};
+    try {
+      const payload = {
+        agent_id,
+        amount: inputValue || undefined,
+      };
+      await trigger({
+        data: payload,
+      });
+      refetch();
+    } catch (error) {
+      toastApiError(error);
+    }
+  };
+
+  return {
+    loading,
+    updateBudget,
+    showSaveLink,
+    setShowSaveLink,
+  };
 };
 
 export default useUpdateBudgetAllocation;

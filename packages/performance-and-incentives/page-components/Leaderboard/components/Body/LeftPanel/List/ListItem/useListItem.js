@@ -3,7 +3,6 @@ import { isEmpty } from '@cogoport/utils';
 
 import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../../../../constants/leaderboard-reporttype-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../../constants/leaderboard-viewtype-constants';
-import getListColumnMapping from '../get-list-column-mapping';
 
 const { ADMIN, AGENT } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 const { ADMIN_REPORT, OWNER_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
@@ -33,8 +32,6 @@ const useListItem = (props) => {
 		listItem = {}, user, viewType, currLevel, setCurrLevel, isChannel, levelStack, setLevelStack,
 	} = props;
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping();
-
 	const isAllowed = !isEmpty(levelStack)
 		|| (user.id === listItem.user?.id && viewType !== AGENT) || viewType === ADMIN;
 
@@ -55,7 +52,6 @@ const useListItem = (props) => {
 	};
 
 	return {
-		LIST_COLUMN_MAPPING,
 		isAllowed,
 		handleClick,
 	};
