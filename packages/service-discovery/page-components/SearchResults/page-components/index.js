@@ -34,58 +34,7 @@ function SearchResults() {
 	const [headerProps, setHeaderProps] = useState({});
 	const [comparisonRates, setComparisonRates] = useState([]);
 	const [selectedWeek, setSelectedWeek] = useState({});
-	const [infoBanner, setInfoBanner] = useState({
-		current      : 'edit_button',
-		totalBanners : 2,
-		buttonProps  : {
-			edit_button: {
-				buttons: [
-					{
-						label     : 'Close',
-						themeType : 'link',
-						type      : 'button',
-						name      : 'close',
-					},
-					{
-						label     : 'Next',
-						themeType : 'accent',
-						type      : 'button',
-						name      : 'next',
-						size      : 'sm',
-					},
-				],
-				heading : 'Filter your preferences',
-				content : `Want to add another container type? Or, 
-				want to update the current one?`,
-				subText         : 'Update it from here.',
-				sequence_number : 1,
-			},
-			comparision_button: {
-				buttons: [
-					{
-						label     : 'Close',
-						themeType : 'link',
-						type      : 'button',
-						name      : 'close',
-					},
-					{
-						label     : 'Prev',
-						themeType : 'accent',
-						type      : 'button',
-						name      : 'prev',
-						size      : 'sm',
-					},
-				],
-				heading: `Select to compare rates, or create a 
-				multiline quotation`,
-				content: `Select multiple rate cards to compare the 
-				rates between the shipping lines, & 
-				create a multi shipping line quotation.`,
-				subText         : '',
-				sequence_number : 2,
-			},
-		},
-	});
+	const [infoBanner, setInfoBanner] = useState({});
 
 	const isGuideViewed = localStorage.getItem(`guide_completed_for_${id}`) || false;
 
@@ -101,7 +50,7 @@ function SearchResults() {
 		selectedCard,
 		page = 1,
 		rates = [],
-	} = useGetSpotSearch({ setComparisonRates });
+	} = useGetSpotSearch({ setComparisonRates, setInfoBanner });
 
 	const {
 		spot_search_detail:detail = {},
@@ -187,7 +136,6 @@ function SearchResults() {
 				}
 				className={styles.children}
 			>
-
 				<ActiveComponent
 					rates={rates}
 					detail={detail}

@@ -4,10 +4,12 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
+const BANNER_OPTIONS = require('../utils/getBannerOptions');
+
 const DEFAULT_PAGE = 1;
 const ONE = 1;
 
-const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
+const useGetSpotSearch = ({ setComparisonRates = () => {}, setInfoBanner = () => {} }) => {
 	const { general: { query = {} } } = useSelector((state) => state);
 	const { spot_search_id = '', rate_card_id, checkout_id } = query;
 
@@ -52,7 +54,43 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 				setPage((prev) => prev + ONE);
 			}
 
-			const { list = [] } = rateData;
+			const { list = [], spot_search_detail = {} } = rateData;
+
+			const { service_type = '' } = spot_search_detail;
+
+			let sequence_number = 1;
+			let initialBanner = '';
+			let totalBanners = 0;
+
+			const buttonProps = Object.entries(BANNER_OPTIONS).reduce((acc, [key, value]) => {
+				const { show = [] } = value;
+
+				const curr_sequence_number = sequence_number;
+
+				const isBannerAllowed = show.includes(service_type) && screen === 'listRateCard';
+
+				sequence_number += 1;
+
+				if (isBannerAllowed && curr_sequence_number === 1) {
+					initialBanner = key;
+				}
+
+				if (isBannerAllowed) {
+					totalBanners += 1;
+
+					return {
+						...acc,
+						[key]: {
+							...value,
+							sequence_number: curr_sequence_number,
+						},
+					};
+				}
+
+				return acc;
+			}, {});
+
+			setInfoBanner({ buttonProps, current: initialBanner, totalBanners });
 
 			if (show_more) {
 				setRates((prevRates) => ([...prevRates, ...list]));
@@ -66,7 +104,7 @@ const useGetSpotSearch = ({ setComparisonRates = () => {} }) => {
 				Toast.error(getApiErrorString(error.response?.data));
 			}
 		}
-	}, [filters, page, setComparisonRates, spot_search_id, trigger]);
+	}, [filters, page, screen, setComparisonRates, setInfoBanner, spot_search_id, trigger]);
 
 	useEffect(() => {
 		if (screen === 'comparison') return;

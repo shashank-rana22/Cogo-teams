@@ -13,10 +13,10 @@ function FTLHeader({
 	service_key = 'search_type',
 	loading = false,
 	activePage = '',
-	// infoBanner = {},
-	// setInfoBanner = () => {},
+	infoBanner = {},
+	setInfoBanner = () => {},
 	setRouterLoading = () => {},
-	// isGuideViewed = false,
+	isGuideViewed = false,
 	touch_points = {},
 }) {
 	const isAllowedToEdit = activePage === 'search_results';
@@ -47,9 +47,9 @@ function FTLHeader({
 					loading={loading && isEmpty(data)}
 					activePage={activePage}
 					isAllowedToEdit={isAllowedToEdit}
-					// infoBanner={infoBanner}
-					// setInfoBanner={setInfoBanner}
-					// isGuideViewed={isGuideViewed}
+					infoBanner={infoBanner}
+					setInfoBanner={setInfoBanner}
+					isGuideViewed={isGuideViewed}
 					setRouterLoading={setRouterLoading}
 					touch_points={touch_points}
 				/>
