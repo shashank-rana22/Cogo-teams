@@ -94,6 +94,7 @@ function Invoices({
 						isIRNGenerated={isIRNGenerated}
 						org_outstanding={outstanding_by_reg_num?.[item]}
 						salesInvoicesRefetch={salesInvoicesRefetch}
+						creditNoteList={list}
 						refetchCN={cnRefetch}
 					/>
 

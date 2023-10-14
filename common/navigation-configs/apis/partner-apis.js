@@ -1093,6 +1093,11 @@ const partner = {
 	],
 	demand_crm: [
 		{
+			api          : 'get_platform_config_constant',
+			access_type  : 'private',
+			service_name : 'platform_config',
+		},
+		{
 			api          : 'create_shipment_trade_partner_organization',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -5297,6 +5302,36 @@ const partner = {
 			api          : 'list_partner_users',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'saas_get_plan_features',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'saas_get_user_active_plan',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'get_active_subscription',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'list_saas_plans',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'get_margin_stats',
+			access_type  : 'private',
+			service_name : 'margin',
 		},
 	],
 	rate_sheet: [

@@ -18,6 +18,7 @@ function TeamsBody({
 	loggedInAgentId = '',
 	setActiveCard = () => {},
 	firestore = {},
+	setActiveTab = () => {},
 }) {
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 
@@ -57,6 +58,7 @@ function TeamsBody({
 									loggedInUserId={loggedInAgentId}
 									setActiveCard={setActiveCard}
 									firestore={firestore}
+									setActiveTab={setActiveTab}
 								/>
 							))}
 						</div>
@@ -75,6 +77,7 @@ function TeamsBody({
 							loggedInUserId={loggedInAgentId}
 							setActiveCard={setActiveCard}
 							firestore={firestore}
+							setActiveTab={setActiveTab}
 						/>
 					))}
 				</>
