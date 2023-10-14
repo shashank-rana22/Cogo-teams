@@ -45,21 +45,6 @@ export const paymentApprovalColumns = ({
 		id: 'utrNumber',
 	},
 	{
-		Header   : 'Amount',
-		accessor : (row) => (
-			<div className={styles.input}>
-				<Input
-					onChange={(val) => handleApiAmount({ val, id: row?.id, key: 'amount', setApiData })}
-					placeholder="Amount"
-					type="number"
-					value={row?.amount}
-					disabled={incidentStatus !== 'REQUESTED'}
-				/>
-			</div>
-		),
-		id: 'amount',
-	},
-	{
 		Header   : 'Currency',
 		accessor : (row) => (
 			<div className={styles.input}>
@@ -67,6 +52,21 @@ export const paymentApprovalColumns = ({
 			</div>
 		),
 		id: 'currency',
+	},
+	{
+		Header   : 'Amount',
+		accessor : (row) => (
+			<div className={styles.input}>
+				<Input
+					onChange={(val) => handleApiAmount({ val, id: row?.id, key: 'amount', setApiData })}
+					placeholder="Amount"
+					type="number"
+					value={row?.amount || ''}
+					disabled={incidentStatus !== 'REQUESTED'}
+				/>
+			</div>
+		),
+		id: 'amount',
 	},
 	{
 		Header   : '',
