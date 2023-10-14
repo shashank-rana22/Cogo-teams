@@ -1,4 +1,6 @@
-import { format, getByKey, startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { getByKey, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -13,7 +15,19 @@ function DateName({ itemData }) {
 			<div>
 				{startCase(getByKey(itemData, 'updatedBy.name') as string)}
 			</div>
-			<div>{format(reversedDate, 'dd MMM YYYY hh:mm a', {}, false)}</div>
+			<div>
+				{reversedDate
+					? formatDate({
+						date: reversedDate,
+						dateFormat:
+								GLOBAL_CONSTANTS.formats.date['dd MMM YYYY'],
+						timeFormat:
+								GLOBAL_CONSTANTS.formats.time['hh:mm a'],
+						formatType : 'dateTime',
+						separator  : ' ',
+					})
+					: '-'}
+			</div>
 		</div>
 	);
 }
