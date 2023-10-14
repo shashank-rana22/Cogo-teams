@@ -3,6 +3,7 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import AssignModal from './AssignModal';
 import RateRevertCard from './RateRevertCard';
 import styles from './styles.module.css';
 
@@ -13,7 +14,8 @@ function ListRateReverts({
 }) {
 	const [shipmentPopover, setShipmentPopover] = useState({});
 	const [assignData, setAssignData] = useState({
-		show          : false,
+		showModal     : false,
+		showPopover   : false,
 		revertDetails : {},
 		assignUser    : '',
 	});
@@ -47,6 +49,14 @@ function ListRateReverts({
 					/>
 				),
 			)}
+			{assignData?.showModal
+				? (
+					<AssignModal
+						assignData={assignData}
+						setAssignData={setAssignData}
+					/>
+				)
+				: null}
 		</div>
 	);
 }

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { SOURCE_OPTIONS, DEFAULT_RATE_JOBS_FILTERS } from '../constants/rateRevertsConstants';
 
 const getPayload = ({ params }) => ({
-	all_jobs_required : false,
+	all_jobs_required : true,
 	stats_required    : true,
 	service           : params?.service || 'fcl_freight',
 	page_limit        : 6,

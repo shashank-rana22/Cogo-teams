@@ -1,17 +1,19 @@
 import { Button, Modal } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 
-import useUpdateSMTRateJob from '../../../../../../../../hooks/useUpdateSMTRateJob';
+import useUpdateSMTRateJob from '../../../../../../hooks/useUpdateSMTRateJob';
 
 import styles from './styles.module.css';
 
 function AssignModal({
 	assignData = {},
 	setAssignData = () => {},
-	serviceType = '',
-	id = '',
 }) {
-	const { show = false, assignUser = '' } = assignData || {};
+	const { assignUser = '', revertDetails = {} } = assignData || {};
+	const {
+		serviceType = '',
+		id = '',
+	} = revertDetails || {};
 
 	const {
 		updateRateJob = () => {},
@@ -20,7 +22,7 @@ function AssignModal({
 
 	const handleClose = () => {
 		setAssignData(() => ({
-			show       : false,
+			showModal  : false,
 			assignUser : '',
 		}));
 	};
@@ -32,7 +34,7 @@ function AssignModal({
 	return (
 		<Modal
 			size="sm"
-			show={show}
+			show
 			onClose={handleClose}
 			className={styles.styled_modal}
 			scroll={false}

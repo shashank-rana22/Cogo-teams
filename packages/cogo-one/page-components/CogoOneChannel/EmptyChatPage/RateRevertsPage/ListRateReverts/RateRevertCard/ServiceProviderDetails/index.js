@@ -1,33 +1,48 @@
 import { Button, Pill, Popover } from '@cogoport/components';
 import { IcMInfo, IcMOverflowDot } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import AssignModal from './AssignModal';
 import ShipmentInfoDetail from './ShipmentInfoDetail';
 import styles from './styles.module.css';
 
 const INDEX_STEP = 1;
 
 function ServiceProviderDetails({
-	cardData = {}, assignData = {}, setAssignData = () => {},
-	shipmentPopover = {}, setShipmentPopover = () => {},
+	cardData = {},
+	assignData = {},
+	setAssignData = () => {},
+	shipmentPopover = {},
+	setShipmentPopover = () => {},
 }) {
 	const {
-		service_provider = {}, service_provider_poc = {}, sources = [], id = '',
-		shipment_id = '', service_type = '',
+		service_provider = {},
+		service_provider_poc = {},
+		sources = [],
+		id = '',
+		shipment_id = '',
 	} = cardData || {};
 
-	const { category_types = [], short_name = '', business_name = '' } = service_provider || {};
+	const {
+		category_types = [],
+		short_name = '',
+		business_name = '',
+	} = service_provider || {};
+
 	const { name = '' } = service_provider_poc || {};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.service_details}>
 				<div className={styles.details_container}>
-					<div className={styles.provider_name}>{short_name || business_name}</div>
-					<div className={styles.poc_name}>{name}</div>
+					<div className={styles.provider_name}>
+						{short_name || business_name}
+					</div>
+					<div className={styles.poc_name}>
+						{name}
+					</div>
 				</div>
+
 				<div className={styles.actions_container}>
 					<Pill
 						size="sm"
@@ -36,34 +51,33 @@ function ServiceProviderDetails({
 						{startCase(sources)}
 					</Pill>
 
-					{sources.includes('live_booking') ? (
-						<Popover
-							render={(
-								<ShipmentInfoDetail
-									shipmentId={shipment_id}
-									id={id}
-									shipmentPopover={shipmentPopover}
-								/>
-							)}
-							placement="left"
-							interactive
-							onClickOutside={() => setShipmentPopover({})}
-							visible={shipmentPopover?.id === id}
+					<Popover
+						render={(
+							<ShipmentInfoDetail
+								shipmentId={shipment_id}
+								id={id}
+								shipmentPopover={shipmentPopover}
+							/>
+						)}
+						placement="left"
+						interactive
+						onClickOutside={() => setShipmentPopover({})}
+						visible={shipmentPopover?.id === id}
+					>
+						<div
+							role="presentation"
+							onClick={(e) => {
+								e.stopPropagation();
+								setShipmentPopover(cardData);
+							}}
+							className={styles.wrap}
 						>
-							<div
-								role="presentation"
-								onClick={(e) => {
-									e.stopPropagation();
-									setShipmentPopover(cardData);
-								}}
-								className={styles.wrap}
-							>
-								<IcMInfo className={styles.info_icon} />
-							</div>
-						</Popover>
-					) : null}
+							<IcMInfo className={styles.info_icon} />
+						</div>
+					</Popover>
 
 					<Popover
+						visible={(assignData?.revertDetails?.id === cardData?.id) && assignData?.showPopover}
 						placement="bottom"
 						interactive
 						render={(
@@ -71,7 +85,13 @@ function ServiceProviderDetails({
 								themeType="secondary"
 								onClick={(e) => {
 									e.stopPropagation();
-									setAssignData((prev) => ({ ...prev, show: true }));
+									setAssignData(
+										(prev) => ({
+											...prev,
+											showModal   : true,
+											showPopover : false,
+										}),
+									);
 								}}
 							>
 								Assign
@@ -82,7 +102,13 @@ function ServiceProviderDetails({
 							role="presentation"
 							onClick={(e) => {
 								e.stopPropagation();
-								setAssignData((prev) => ({ ...prev, revertDetails: cardData }));
+								setAssignData(
+									(prev) => ({
+										...prev,
+										revertDetails : isEmpty(prev?.revertDetails) ? cardData : {},
+										showPopover   : !prev?.showPopover,
+									}),
+								);
 							}}
 							className={styles.wrap}
 						>
@@ -91,22 +117,12 @@ function ServiceProviderDetails({
 					</Popover>
 				</div>
 			</div>
+
 			<div className={styles.categories}>
 				{category_types?.reduce((acc, itm, index) => (
 					`${acc}${startCase(itm)}${index !== category_types.length - INDEX_STEP ? ', ' : ''}`
 				), '')}
 			</div>
-
-			{assignData?.revertDetails?.id === id
-				? (
-					<AssignModal
-						assignData={assignData}
-						setAssignData={setAssignData}
-						id={id}
-						serviceType={service_type}
-					/>
-				)
-				: null}
 		</div>
 	);
 }

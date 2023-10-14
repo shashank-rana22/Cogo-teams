@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMEmail, IcMCall } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
-// import { setProfileState } from '@cogoport/store/reducers/profile';
 import React from 'react';
 
 import { getRateCardFunction } from '../../../../../../utils/getRateCardFunctions';
@@ -12,9 +11,13 @@ import ShipmentProgress from './ShipmentProgress';
 import styles from './styles.module.css';
 
 function RateRevertCard({
-	cardData = {}, mailProps = {}, shipmentPopover = {},
+	cardData = {},
+	mailProps = {},
+	shipmentPopover = {},
 	setShipmentPopover = () => {},
-	assignData = {}, setAssignData = () => {}, setActiveTab = () => {},
+	assignData = {},
+	setAssignData = () => {},
+	setActiveTab = () => {},
 }) {
 	const dispatch = useDispatch();
 
