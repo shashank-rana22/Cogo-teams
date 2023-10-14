@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	min-height: 40vh;
+	padding: 16px;
+
+	:global {
+		.ui_tab_container {
+			width: 100%;
+			padding: 13px 16px;
+			text-align: left;
+			white-space: normal;
+		}
+
+		.ui_tab_container.ui_tab_active.ui_ps_themeType_primary-vertical {
+			padding: 13px 16px;
+		}
+
+		.ui_tabs_list_title {
+			height: auto;
+		}
+	}
+}
+
+.tab_panel {
+	width: 22%;
+}
+
+.content {
+	width: 76%;
+	min-height: 45vh;
+	padding: 10px 10px 0 22px;
+	border-left: 1px solid #f8f2e7;
+}

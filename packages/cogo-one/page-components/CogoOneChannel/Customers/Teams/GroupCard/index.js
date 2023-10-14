@@ -4,7 +4,7 @@ import { Image } from '@cogoport/next';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { togglePinChat } from '../../../../../helpers/teamsPinChatHelpers';
+import { togglePinChat, deleteDraftDoc } from '../../../../../helpers/teamsPinChatHelpers';
 import dateTimeConverter from '../../../../../utils/dateTimeConverter';
 
 import PopUp from './PopUp';
@@ -21,6 +21,7 @@ function GroupCard({
 	setActiveCard = () => {},
 	loggedInUserId = '',
 	firestore = {},
+	setActiveTab = () => {},
 }) {
 	const {
 		id = '',
@@ -51,6 +52,21 @@ function GroupCard({
 	const updatePinnedChats = (e, type) => {
 		e.stopPropagation();
 		togglePinChat({ firestore, loggedInAgentId: loggedInUserId, roomId: id, type });
+	};
+
+	const closeRoom = () => {
+		if (activeCard) {
+			setActiveTab((prev) => ({ ...prev, data: {}, groupData: {} }));
+		}
+	};
+
+	const deleteDraft = () => {
+		deleteDraftDoc({
+			firestore,
+			roomId          : id,
+			loggedInAgentId : loggedInUserId,
+			clearActiveRoom : closeRoom,
+		});
 	};
 
 	return (
@@ -90,6 +106,8 @@ function GroupCard({
 						<PopUp
 							isPinned={is_pinned}
 							updatePinnedChats={updatePinnedChats}
+							isDraft={is_draft}
+							deleteDraft={deleteDraft}
 						/>
 					</div>
 				</div>
