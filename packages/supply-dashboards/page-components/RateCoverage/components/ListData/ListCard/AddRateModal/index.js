@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Modal, Toast } from '@cogoport/components';
+/* eslint-disable max-lines-per-function */
+import { Button, Modal, Toast, Tabs, TabPanel } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -14,7 +15,9 @@ import useDeleteFreightRateFeedbacks from '../../../../hooks/useDeleteFreightRat
 import useDeleteFreightRateRequests from '../../../../hooks/useDeleteFreightRateRequests';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetFreightRate from '../../../../hooks/useGetFreightRate';
+import useGetSpoetSearches from '../../../../hooks/useGetSpoetSearches';
 import useUpdateFlashBookingRate from '../../../../hooks/useUpdateFlashBookingRate';
+import AddAdditionalRates from '../AddRate/AddAdditionalRate';
 import ServiceDetailsContent from '../DetailsView/Content';
 
 import styles from './styles.module.css';
@@ -38,6 +41,12 @@ function AddRateModal({
 		user_data: profile || {},
 	}));
 	const [chargeCodes, setChargeCodes] = useState(null);
+	const [activeTab, setActiveTab] = useState('main_freight');
+	const [dependentMainFreight, setDependentMainFreight] = useState([
+		{ service: 'main_freight' },
+	]);
+
+	const [payload, setPayload] = useState({});
 
 	const { user: { id: user_id = '' } = {} } = user_data;
 
@@ -59,6 +68,7 @@ function AddRateModal({
 	const values = watch();
 
 	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data });
+	const { spot_data, getData } = useGetSpoetSearches({ id: data?.source_id });
 
 	const { finalFields } = FieldMutation({
 		fields,
@@ -83,6 +93,7 @@ function AddRateModal({
 
 	const handleSubmitData = async (formData) => {
 		const rate_id = await createRate(formData);
+		setPayload(formData);
 		if (rate_id && source === 'rate_feedback') {
 			const resp = await deleteFeedbackRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
 			if (resp === TWO_HUNDERD) {
@@ -176,6 +187,28 @@ function AddRateModal({
 		}
 	}, [JSON.stringify(rateData?.freight_charge_codes)]);
 
+	useEffect(() => {
+		if (spot_data) {
+			const TOTAL_SERVICES = [];
+			const primary_service_id = spot_data?.primary_service_id;
+			Object.keys(spot_data?.service_details).forEach((spot) => {
+				if (
+					spot !== primary_service_id
+					&& spot_data?.service_details?.[spot]?.service_type === 'fcl_freight'
+				) {
+					TOTAL_SERVICES.push(spot_data?.service_details?.[spot]);
+				}
+			});
+			setDependentMainFreight([...dependentMainFreight, ...TOTAL_SERVICES]);
+		}
+	}, [spot_data]);
+
+	useEffect(() => {
+		if (data?.source_id) {
+			getData();
+		}
+	}, []);
+
 	return (
 		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
 			<div>
@@ -194,35 +227,56 @@ function AddRateModal({
 			)}
 			</div>
 
-			<Modal.Body>
-				<div className={styles.title}>Please Add Rate</div>
-				<Layout
-					fields={finalFields}
-					control={control}
-					errors={errors}
-					showElements={showElements}
-					source={source}
-				/>
-			</Modal.Body>
-			<Modal.Footer>
-				<div className={styles.submit_button}>
-					<Button
-						size="md"
-						onClick={() => setShowModal((prev) => !prev)}
-						style={{ marginRight: '20px' }}
-						themeType="secondary"
-					>
-						Close
-					</Button>
-					<Button
-						size="md"
-						onClick={handleSubmit(handleSubmitData)}
-						disabled={loading}
-					>
-						Submit
-					</Button>
-				</div>
-			</Modal.Footer>
+			<Tabs
+				activeTab={activeTab}
+				themeType="secondary"
+				onChange={setActiveTab}
+				style={{ marginLeft: '10px' }}
+			>
+				<TabPanel name="main_freight" title="ADD MAIN FREIGHT RATE">
+					<Modal.Body>
+						<div className={styles.title}>Please Add Rate</div>
+						<Layout
+							fields={finalFields}
+							control={control}
+							errors={errors}
+							showElements={showElements}
+							source={source}
+						/>
+					</Modal.Body>
+					<Modal.Footer>
+						<div className={styles.submit_button}>
+							<Button
+								size="md"
+								onClick={() => setShowModal((prev) => !prev)}
+								style={{ marginRight: '20px' }}
+								themeType="secondary"
+							>
+								Close
+							</Button>
+							<Button
+								size="md"
+								onClick={handleSubmit(handleSubmitData)}
+								disabled={loading}
+							>
+								Submit
+							</Button>
+						</div>
+					</Modal.Footer>
+				</TabPanel>
+
+				{['fcl_freight', 'air_freight'].includes(filter?.service) && (
+					<TabPanel name="additional_freight" title="ADD OTHER SERVICES RATES">
+						<AddAdditionalRates
+							payload={payload}
+							showAddRate={data}
+							additionalService={spot_data?.service_details}
+							dependentMainFreight={dependentMainFreight}
+						/>
+					</TabPanel>
+				)}
+			</Tabs>
+
 		</Modal>
 	);
 }

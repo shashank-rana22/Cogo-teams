@@ -10,7 +10,7 @@ function AddAdditionalRates({
 	dependentMainFreight = [],
 }) {
 	const reference = useRef(null);
-	const serviceType = showAddRate.service_type;
+	const serviceType = showAddRate?.service_type;
 	const charges = {
 		fcl_freight : ['export:fcl_freight_local', 'import:fcl_freight_local'],
 		air_freight : [

@@ -35,13 +35,14 @@ function CargoDetails({ primary_service = {} }) {
 				} || {}}
 				labels={LABELS}
 			/>
+
 			{primary_service?.cargo_details?.length > CARGO_DETAILS_MIN_LENGTH ? (
 				<div className={styles.multi_service}>
 					<MultiServiceDetailsPopover mainServices={primary_service.cargo_details}>
 						<div className={styles.more_details_popover_text}>
 							{`+
 							${(primary_service.cargo_details?.length
-									|| CARGO_DETAILS_MIN_LENGTH) - CARGO_DETAILS_LENGTH_CHECK} 
+									|| CARGO_DETAILS_MIN_LENGTH) - CARGO_DETAILS_LENGTH_CHECK}
 							Details`}
 						</div>
 					</MultiServiceDetailsPopover>
