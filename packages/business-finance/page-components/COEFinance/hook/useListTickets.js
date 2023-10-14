@@ -7,14 +7,16 @@ const TICKET_POSSIBLE_STATUS = 'closed,rejected,unresolved,pending,escalated,ove
 
 const getPayload = ({
 	serialId,
+	page,
 }) => ({
 	status   : TICKET_POSSIBLE_STATUS,
 	SortType : 'desc',
 	SerialID : serialId,
 	size     : 10,
+	page,
 });
 
-const useListTickets = ({ serialId = '' }) => {
+const useListTickets = ({ serialId = '', page = '' }) => {
 	const [{ data, loading }, trigger] = useTicketsRequest({
 		url     : '/list',
 		method  : 'get',
@@ -26,12 +28,13 @@ const useListTickets = ({ serialId = '' }) => {
 			trigger({
 				params: getPayload({
 					serialId,
+					page,
 				}),
 			});
 		} catch (error) {
 			Toast.error(error);
 		}
-	}, [trigger, serialId]);
+	}, [trigger, serialId, page]);
 
 	const { items, ...rest } = data || {};
 

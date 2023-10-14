@@ -1,6 +1,7 @@
-import { Loader, Pill, Table } from '@cogoport/components';
+import { Button, Loader, Pagination, Pill, Table } from '@cogoport/components';
+import Modals from '@cogoport/ticket-management/common/Modals';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import EmptyStateDocs from '../../../../../../commons/EmptyStateDocs/index.tsx';
 import useListTickets from '../../../../../hook/useListTickets';
@@ -10,7 +11,10 @@ import styles from './styles.module.css';
 function Tickets({
 	serialId = '',
 }) {
-	const { tickets, loading } = useListTickets({ serialId });
+	const [page, setPage] = useState(1);
+	const { tickets, loading, pageData } = useListTickets({ serialId, page: page - 1 });
+	const [modalData, setModalData] = useState({});
+	const [showReassign, setShowReassign] = useState(false);
 
 	const columns = [
 		{
@@ -43,6 +47,17 @@ function Tickets({
 				return <Pill color="green">{startCase(status)}</Pill>;
 			},
 		},
+		{
+			Header   : 'Action',
+			accessor : (row) => (
+				<Button
+					themeType="secondary"
+					onClick={() => setModalData({ ticketId: row?.ID })}
+				>
+					View
+				</Button>
+			),
+		},
 	];
 
 	if (loading) {
@@ -57,8 +72,23 @@ function Tickets({
 	}
 
 	return (
-		<div style={{ width: '1270px' }}>
+		<div className={styles.content}>
 			<Table columns={columns} data={tickets} />
+			<Modals
+				modalData={modalData}
+				setModalData={setModalData}
+				showReassign={showReassign}
+				setShowReassign={setShowReassign}
+			/>
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="compact"
+					currentPage={page}
+					totalItems={1 + (pageData?.total_pages || 0)}
+					pageSize={pageData?.total_pages}
+					onPageChange={setPage}
+				/>
+			</div>
 		</div>
 	);
 }

@@ -7,3 +7,12 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.content {
+	width: 1270px;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}
