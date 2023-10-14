@@ -49,7 +49,7 @@ function SellBuyCards({
 
 						<div className={`${open ? styles.nothing : styles.other_title}`}>
 							<div className={styles.regular}>
-								{type === 'buy' ? 'Expense' : 'Income: '}
+								{type === 'buy' ? 'Expense: ' : 'Income: '}
 							</div>
 							<div>
 								{formatAmount({
@@ -63,7 +63,7 @@ function SellBuyCards({
 							</div>
 						</div>
 						<div className={`${open ? styles.nothing : styles.other_title}`}>
-							<div className={styles.regular}>Profitability </div>
+							<div className={styles.regular}>Profitability:</div>
 							<div className={`${profitabilityData > ZERO_VALUE ? styles.green : styles.red}`}>
 								{profitabilityData.toFixed(3)}
 							</div>

@@ -9,6 +9,10 @@
 	}
 }
 
+.input {
+	width: 284px;
+}
+
 .spacebetween {
 	display: flex;
 	justify-content: space-between;

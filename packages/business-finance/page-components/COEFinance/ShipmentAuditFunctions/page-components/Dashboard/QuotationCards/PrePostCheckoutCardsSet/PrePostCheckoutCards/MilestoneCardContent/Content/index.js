@@ -42,6 +42,11 @@ export default function Content({
 		approveQuotation = () => {},
 	} = useApproveQuotation({ idList, status: (currentStatus === 'APPROVED' ? 'INIT' : 'APPROVED') });
 
+	const onApprove = () => {
+		toggleAccordion(nextItem);
+		getPrePostShipmentQuotes();
+	};
+
 	return (
 		<>
 			<div className={styles.service_heading}>
@@ -120,7 +125,7 @@ export default function Content({
 								<Button
 									size="md"
 									themeType="primary"
-									onClick={() => approveQuotation(getPrePostShipmentQuotes)}
+									onClick={() => approveQuotation(onApprove)}
 								>
 									Accept
 								</Button>

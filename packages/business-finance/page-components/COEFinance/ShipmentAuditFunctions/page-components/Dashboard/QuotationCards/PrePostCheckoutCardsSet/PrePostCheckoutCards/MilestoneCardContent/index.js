@@ -1,4 +1,4 @@
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, cl } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcCFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -37,7 +37,9 @@ export default function MilestoneCardContent({
 						{!title.includes('MODIFIED') && (
 							<div style={{ display: 'flex', width: '50%', justifyContent: 'space-between' }}>
 								<div className={`${isOpen ? styles.nothing : styles.other_title}`}>
-									<div className={styles.regular}>{category === 'BUY' ? 'Expense' : 'Income'}</div>
+									<div className={cl`${styles.regular} ${styles.spacing}`}>
+										{category === 'BUY' ? 'Expense: ' : 'Income: '}
+									</div>
 									<div>
 										{getFormatAmount(
 											services?.grandTotal,
@@ -65,8 +67,8 @@ export default function MilestoneCardContent({
 						&& (
 							<div style={{ display: 'flex', alignItems: 'center', marginBottom: '24px' }}>
 								<div className={`${!isOpen ? styles.nothing : styles.margin}`}>
-									<div className={styles.regular}>
-										{category === 'BUY' ? 'Expense' : 'Income'}
+									<div className={cl`${styles.regular} ${styles.spacing}`}>
+										{category === 'BUY' ? 'Expense: ' : 'Income: '}
 									</div>
 									<div>
 										{getFormatAmount(

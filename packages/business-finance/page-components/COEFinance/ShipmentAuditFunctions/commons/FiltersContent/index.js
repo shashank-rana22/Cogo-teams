@@ -3,7 +3,6 @@ import {
 } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import { entityType } from '../../../utils/constants/entityOptions';
 import { serviceType } from '../../../utils/constants/filterOptions';
 import { walletType } from '../../../utils/constants/walletOptions';
 
@@ -94,16 +93,6 @@ function Content({
 								options={serviceType}
 								value={filters?.Service}
 								onChange={(val) => onChange(val, 'Service')}
-								className={styles.style_radio}
-							/>
-						</div>
-					</TabPanel>
-					<TabPanel name="Entity" title="Entity">
-						<div className={styles.style_radio}>
-							<RadioGroup
-								options={entityType}
-								value={filters?.Entity}
-								onChange={(val) => onChange(val, 'Entity')}
 								className={styles.style_radio}
 							/>
 						</div>

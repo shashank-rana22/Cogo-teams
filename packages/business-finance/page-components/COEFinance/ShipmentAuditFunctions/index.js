@@ -22,7 +22,10 @@ const TABS = [
 	{ key: 'audited', label: 'Audited' },
 ];
 
-function ShipmentAuditFunction({ activeTab = '' }) {
+function ShipmentAuditFunction({
+	activeTab = '',
+	entityCode = '',
+}) {
 	const { push } = useRouter();
 
 	const [subActiveTab, setSubActiveTab] = useState('to_be_audited');
@@ -48,7 +51,7 @@ function ShipmentAuditFunction({ activeTab = '' }) {
 		data = {},
 		loading = false,
 		refetch = () => {},
-	} =	 useGetJobList({ paginationFilters, search, activeTab, subActiveTab });
+	} =	 useGetJobList({ paginationFilters, search, activeTab, subActiveTab, entityCode });
 	const { list = [] } = data || {};
 
 	const handlePrePostChange = () => {

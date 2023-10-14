@@ -35,7 +35,7 @@ export default function RenderTableData({ data = 0, profit = 0, category = '', c
 					<IcMArrowNext height="20" width="20" />
 				</div>
 				<div>
-					{`${absoluteProfit}%`}
+					{`${absoluteProfit}${category !== 'Profitability' ? '%' : ''}`}
 				</div>
 			</div>
 		</div>

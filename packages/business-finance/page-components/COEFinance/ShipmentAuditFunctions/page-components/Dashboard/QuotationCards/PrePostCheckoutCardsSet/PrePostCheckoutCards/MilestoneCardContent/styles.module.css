@@ -22,6 +22,10 @@
 	margin-top: 20px;
 }
 
+.spacing {
+	padding-right: 6px;
+}
+
 .open_title {
 	display: flex;
 	flex-direction: column;

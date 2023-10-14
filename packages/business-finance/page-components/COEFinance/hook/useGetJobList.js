@@ -23,6 +23,7 @@ const useGetJobList = ({
 	search = '',
 	activeTab = '',
 	subActiveTab = '',
+	entityCode = '',
 }) => {
 	const CLOSING_STATUS = activeTab === 'operational_close' ? 'OPR_CLOSED' : 'CLOSED';
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -40,7 +41,7 @@ const useGetJobList = ({
 	const refetch = useCallback(({ filters = {}, setShow = () => {} }) => {
 		const func = async () => {
 			const {
-				Service = '', Entity = '',
+				Service = '',
 				operationalClosedDate = '', creationDate = '',
 				walletUsed = '', tradeType = '',
 			} = filters || {};
@@ -58,7 +59,7 @@ const useGetJobList = ({
 						pageIndex         : page,
 						pageSize          : pageLimit,
 						serviceType       : Service || undefined,
-						entityCode        : Entity || undefined,
+						entityCode        : entityCode || undefined,
 						tradeType         : tradeType || undefined,
 						creationStartDate : (creationStartDate && creationEndDate && getFormatDate(creationStartDate))
 						|| undefined,
@@ -78,7 +79,7 @@ const useGetJobList = ({
 			}
 		};
 		func();
-	}, [CLOSING_STATUS, page, pageLimit, query, trigger, subActiveTab]);
+	}, [CLOSING_STATUS, page, pageLimit, query, trigger, subActiveTab, entityCode]);
 
 	useEffect(() => {
 		debounceQuery(search);
