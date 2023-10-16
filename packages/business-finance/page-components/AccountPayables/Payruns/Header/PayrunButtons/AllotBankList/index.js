@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import List from '../../../../../commons/List/index.tsx';
+import List from '../../../../../commons/List/index';
 import useInitiatePaymentAllotBank from '../../../hooks/useInitiatePaymentAllotBank';
 
 import { ALLOT_BANK_CONFIG } from './allotBankConfig';

@@ -777,8 +777,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		rate_sheet: {
 			key           : 'rate_sheet',
 			title         : t('common:rate_sheets'),
-			href          : '/v2/rate-sheets',
-			as            : '/v2/rate-sheets',
+			href          : '/rate-sheets',
+			as            : '/rate-sheets',
 			type          : 'link',
 			possible_apis : apis.rate_sheet,
 			icon          : IcMRateSheets,
