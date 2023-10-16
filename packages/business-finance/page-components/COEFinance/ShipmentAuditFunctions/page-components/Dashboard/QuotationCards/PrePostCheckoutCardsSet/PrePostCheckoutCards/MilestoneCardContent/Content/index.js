@@ -38,6 +38,8 @@ export default function Content({
 
 	const currentStatus = services?.[activeService]?.[GLOBAL_CONSTANTS.zeroth_index]?.quotationState;
 
+	const auditStatus = window.sessionStorage.getItem('audit_status');
+
 	const {
 		approveQuotation = () => {},
 	} = useApproveQuotation({ idList, status: (currentStatus === 'APPROVED' ? 'INIT' : 'APPROVED') });
@@ -102,7 +104,7 @@ export default function Content({
 							)
 							: null}
 
-						{(item?.quotationState !== 'APPROVED') ? (
+						{(item?.quotationState !== 'APPROVED' && auditStatus !== 'audited') ? (
 							<div className={styles.flex_content}>
 								<Button
 									size="md"
@@ -132,7 +134,7 @@ export default function Content({
 							</div>
 						) : null}
 
-						{(item?.quotationState === 'APPROVED') ? (
+						{(item?.quotationState === 'APPROVED' && auditStatus !== 'audited') ? (
 							<div className={styles.flex_content}>
 								<div className={styles.flex_content}>
 									<Button

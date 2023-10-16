@@ -63,7 +63,7 @@ export default function MilestoneCardContent({
 							)}
 					</div>
 					<div className={`${!isOpen ? styles.nothing : styles.content}`}>
-						{!title.includes('MODIFIED')
+						{!title?.includes('MODIFIED')
 						&& (
 							<div style={{ display: 'flex', alignItems: 'center', marginBottom: '24px' }}>
 								<div className={`${!isOpen ? styles.nothing : styles.margin}`}>

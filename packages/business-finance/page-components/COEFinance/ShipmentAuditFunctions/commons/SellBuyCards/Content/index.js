@@ -30,6 +30,7 @@ function Content({
 	const approvedIdList = data?.filter((item) => item?.quotation_state === 'APPROVED').map((item) => item?.id);
 	const initIdList = data?.filter((item) => item?.quotation_state === 'INIT').map((item) => item?.id);
 	const currentStatus = data?.some((item) => item?.quotation_state === 'INIT');
+	const auditStatus = window.sessionStorage.getItem('audit_status');
 
 	const {
 		approveQuotation = () => {},
@@ -74,7 +75,7 @@ function Content({
 					type={type}
 				/>
 			))}
-			{currentStatus ? (
+			{currentStatus && auditStatus !== 'audited' ? (
 				<div className={styles.buttons_container}>
 					<Button
 						size="md"
@@ -106,7 +107,7 @@ function Content({
 				</div>
 			) : null}
 
-			{!currentStatus ? (
+			{!currentStatus && auditStatus !== 'audited' ? (
 				<div className={styles.buttons_container}>
 					<Button
 						size="md"
