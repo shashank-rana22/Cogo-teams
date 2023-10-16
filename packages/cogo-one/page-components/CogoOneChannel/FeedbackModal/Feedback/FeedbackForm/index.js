@@ -28,6 +28,7 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 	const { errors = {} } = formState || {};
 
 	const watchCategory = watch('category');
+	const watchDescription = watch('additional_information');
 
 	const { addFeedback, loading } = useAddFeedback({
 		getFeedbacks,
@@ -85,7 +86,11 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 								<div className={styles.label}>
 									<div className={styles.sub_label}>{label}</div>
 									{controlItem.name === 'additional_information'
-									&& <div className={styles.info_label}>(max 200 characters)</div>}
+										? (
+											<div className={styles.info_label}>
+												{`${watchDescription?.length} / 350 characters`}
+											</div>
+										) : null}
 								</div>
 							)}
 							<Element
