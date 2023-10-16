@@ -2,6 +2,7 @@ import { Toast, Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import AsyncSelectController from '@cogoport/forms/page-components/Controlled/AsyncSelectController';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import CustomSelectOption from '../../../../CustomSelectOption';
@@ -178,7 +179,11 @@ function AddTouchPointModal({
 							Cancel
 						</Button>
 
-						<Button themeType="accent" onClick={handleSave}>
+						<Button
+							themeType="accent"
+							onClick={handleSave}
+							disabled={isEmpty(touchPoints)}
+						>
 							Save
 						</Button>
 					</div>
