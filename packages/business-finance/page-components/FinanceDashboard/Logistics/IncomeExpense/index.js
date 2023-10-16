@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 
 import useGetIncomeExpense from '../../hooks/getIncomeExpenseData';
 
+import Content from './Content';
+import RenderYearData from './RenderYearData';
 import ResponsiveBarChart from './ResponsiveBarChart/index';
 import ResponsiveLineChart from './ResponsiveLineChart';
 import styles from './styles.module.css';
@@ -58,63 +60,12 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 		setVisible(false);
 	};
 
-	function RenderYearData(years) {
-		return (
-			<div>
-				{(years || [])?.map((year) => (
-					<div key={year} style={{ marginBottom: '10px', cursor: year === 'FINANCIALYEARS' && 'pointer' }}>
-						<div
-							key={year}
-							role="presentation"
-							onClick={() => onClickFinancialYear(year, years)}
-						>
-							{year}
-
-						</div>
-						<div className={styles.year_bottom_border} />
-					</div>
-				))}
-			</div>
-		);
-	}
-
 	const yearHandleChange = () => {
 		if (yearHandle) {
-			return RenderYearData(CALENDARYEAR);
+			return RenderYearData(CALENDARYEAR, onClickFinancialYear);
 		}
-		return RenderYearData(FINANCIALYEARS);
+		return RenderYearData(FINANCIALYEARS, onClickFinancialYear);
 	};
-	function Content() {
-		return (
-			<Popover
-				placement="right"
-				caret={false}
-				render={yearHandleChange()}
-				className={styles.years_styles}
-				visible={visible}
-			>
-				<>
-					<div
-						className={styles.data_styles}
-						onClick={() => { setYearHandle(true); setVisible(true); }}
-						role="presentation"
-					>
-						Calendar Year
-
-					</div>
-					<div className={styles.borders} />
-					<div
-						className={styles.data_styles}
-						onClick={() => { setYearHandle(false); setVisible(true); }}
-						role="presentation"
-					>
-						Financial Year
-
-					</div>
-				</>
-			</Popover>
-		);
-	}
 
 	return (
 		<div>
@@ -148,7 +99,13 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 							</Tooltip>
 						</div>
 						<div style={{ marginTop: '10px', marginLeft: '20px' }}>
-							<Popover render={Content()} caret={false} placement="bottom">
+							<Popover
+								render={
+									Content({ yearHandleChange, visible, setVisible, setYearHandle })
+								}
+								caret={false}
+								placement="bottom"
+							>
 								<div className={styles.input_div}>
 									<Input
 										placeholder="Select Year Mode"
