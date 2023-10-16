@@ -18,6 +18,7 @@ function RateRevertCard({
 	assignData = {},
 	setAssignData = () => {},
 	setActiveTab = () => {},
+	setShowAddRateModal = () => {},
 }) {
 	const dispatch = useDispatch();
 
@@ -69,7 +70,11 @@ function RateRevertCard({
 						<IcMEmail className={styles.email_icon} />
 					</Button>
 
-					<Button size="md" themeType="secondary">
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => setShowAddRateModal(true)}
+					>
 						+ Verify And Add Rate
 					</Button>
 				</div>

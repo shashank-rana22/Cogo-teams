@@ -1,5 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
+// eslint-disable-next-line max-len
+import AddRateModal from '@cogoport/supply-dashboards/page-components/RateCoverage/components/ListData/ListCard/AddRateModal';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -14,6 +16,7 @@ function ListRateReverts({
 	fetchRateJobs = () => {},
 }) {
 	const [shipmentPopover, setShipmentPopover] = useState({});
+	const [showAddRateModal, setShowAddRateModal] = useState(false);
 	const [assignData, setAssignData] = useState({
 		showModal     : false,
 		showPopover   : false,
@@ -47,6 +50,7 @@ function ListRateReverts({
 						setAssignData={setAssignData}
 						assignData={assignData}
 						setActiveTab={setActiveTab}
+						setShowAddRateModal={setShowAddRateModal}
 					/>
 				),
 			)}
@@ -60,6 +64,16 @@ function ListRateReverts({
 					/>
 				)
 				: null}
+
+			{showAddRateModal ? (
+				<AddRateModal
+					showModal={showAddRateModal}
+					setShowModal={setShowAddRateModal}
+					filter={{}}
+					data={{}}
+					getListCoverage={fetchRateJobs}
+				/>
+			) : null}
 		</div>
 	);
 }
