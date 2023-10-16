@@ -3,7 +3,7 @@ import Modals from '@cogoport/ticket-management/common/Modals';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import EmptyStateDocs from '../../../../../../commons/EmptyStateDocs/index.tsx';
+import EmptyStateDocs from '../../../../../../commons/EmptyStateDocs/index';
 import useListTickets from '../../../../../hook/useListTickets';
 
 import styles from './styles.module.css';

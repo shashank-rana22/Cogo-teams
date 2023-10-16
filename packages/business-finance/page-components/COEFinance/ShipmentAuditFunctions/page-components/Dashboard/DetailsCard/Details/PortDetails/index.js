@@ -4,8 +4,8 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
-import getLocations from '../../../../../../../../utils/getLocationConfig.ts';
-import GetServiceInfo from '../../../../../../../commons/GetServiceInfo.tsx';
+import getLocations from '../../../../../../../../utils/getLocationConfig';
+import GetServiceInfo from '../../../../../../../commons/GetServiceInfo';
 
 import styles from './styles.module.css';
 

@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import useListShipment from '../../../../hook/useListShipment.ts';
+import useListShipment from '../../../../hook/useListShipment';
 import DetailsCard from '../DetailsCard';
 import DocumentsCard from '../DocumentsCard';
 import TicketsCard from '../TicketsCard/index';

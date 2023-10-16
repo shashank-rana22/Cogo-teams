@@ -4,11 +4,11 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
 import React from 'react';
 
-import EmptyStateDocs from '../../../../../../commons/EmptyStateDocs/index.tsx';
-import List from '../../../../../../commons/List/index.tsx';
-import { formatDate } from '../../../../../../commons/utils/formatDate.ts';
-import config from '../../../../../configurations/SHIPMENT_DOCUMENTS_CONFIG.ts';
-import useShipmentDocument from '../../../../../hook/useShipmentDocument.ts';
+import EmptyStateDocs from '../../../../../../commons/EmptyStateDocs/index';
+import List from '../../../../../../commons/List/index';
+import { formatDate } from '../../../../../../commons/utils/formatDate';
+import config from '../../../../../configurations/SHIPMENT_DOCUMENTS_CONFIG';
+import useShipmentDocument from '../../../../../hook/useShipmentDocument';
 
 import styles from './styles.module.css';
 

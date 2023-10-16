@@ -8,7 +8,7 @@ import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
 import useGetShipmentSummary from '../../../../hook/useGetShipmentSummary';
-import useGetWallet from '../../../../hook/useGetWallet.ts';
+import useGetWallet from '../../../../hook/useGetWallet';
 import GetPill from '../../../commons/getPill';
 
 import Details from './Details';

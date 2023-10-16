@@ -4,9 +4,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { upperCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import Layout from '../../../../commons/Layout/index.tsx';
+import Layout from '../../../../commons/Layout/index';
 import useGetConfigurationCategory from '../../../hook/useGetConfigurationCategory';
-import useListShipment from '../../../hook/useListShipment.ts';
+import useListShipment from '../../../hook/useListShipment';
 import useListStakeholders from '../../../hook/useListShipmentStakeholders';
 import useRaiseTicket from '../../../hook/useRaiseTicket';
 import getStakeholderData from '../../../utils/getStakeholderData';
