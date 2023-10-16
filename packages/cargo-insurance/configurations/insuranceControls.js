@@ -36,8 +36,8 @@ const getRegistrationControls = ({ billingType = '', t }) => ([
 	},
 ]);
 
-const getInsuranceControls = ({ incoterm = {}, t }) => {
-	const { list = [], display = false } = incoterm || {};
+const getInsuranceControls = ({ incotermResponse = {}, t }) => {
+	const { list = [], display = false } = incotermResponse || {};
 	return ([
 		{
 			name        : 'cargoDescription',
