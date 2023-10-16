@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 
-import useUpdateSMTRateJob from '../../../../../../hooks/useUpdateSMTRateJob';
+import useUpdateSMTRateJob from '../../../../hooks/useUpdateSMTRateJob';
 
 import styles from './styles.module.css';
 

@@ -3,7 +3,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { Image } from '@cogoport/next';
 import { startCase, differenceInDays, isEmpty } from '@cogoport/utils';
 
-import useGetShipment from '../../../../../../../../hooks/useGetShipment';
+import useGetShipment from '../../../../../../hooks/useGetShipment';
 
 import styles from './styles.module.css';
 

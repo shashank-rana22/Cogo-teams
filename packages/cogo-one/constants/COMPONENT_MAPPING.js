@@ -8,6 +8,7 @@ import FlashReverts from '../page-components/CogoOneChannel/ProfileDetails/Flash
 import HelpDesk from '../page-components/CogoOneChannel/ProfileDetails/HelpDesk';
 import OrganizationDetails from '../page-components/CogoOneChannel/ProfileDetails/OrganizationDetails';
 import QuickActions from '../page-components/CogoOneChannel/ProfileDetails/QuickActions';
+import RateReverts from '../page-components/CogoOneChannel/ProfileDetails/RateReverts';
 import TeamsProfile from '../page-components/CogoOneChannel/ProfileDetails/TeamsProfile';
 import UserActivities from '../page-components/CogoOneChannel/ProfileDetails/UserActivity';
 import UserMails from '../page-components/CogoOneChannel/ProfileDetails/UserMails';
@@ -26,6 +27,7 @@ const COMPONENT_MAPPING = {
 	add_on_services         : AddOnServices,
 	user_mails              : UserMails,
 	teams_profile           : TeamsProfile,
+	smt_rate_reverts        : RateReverts,
 };
 
 export default COMPONENT_MAPPING;

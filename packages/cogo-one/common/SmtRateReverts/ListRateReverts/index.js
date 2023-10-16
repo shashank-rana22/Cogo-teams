@@ -14,15 +14,19 @@ function ListRateReverts({
 	mailProps = {},
 	setActiveTab = () => {},
 	fetchRateJobs = () => {},
+	params = {},
+	triggeredFrom = '',
 }) {
 	const [shipmentPopover, setShipmentPopover] = useState({});
-	const [showAddRateModal, setShowAddRateModal] = useState(false);
+	const [showAddRateModal, setShowAddRateModal] = useState({});
 	const [assignData, setAssignData] = useState({
 		showModal     : false,
 		showPopover   : false,
 		revertDetails : {},
 		assignUser    : '',
 	});
+
+	const isTriggeredFromSideBar = triggeredFrom === 'sideBar';
 
 	if (isEmpty(list)) {
 		return (
@@ -38,7 +42,10 @@ function ListRateReverts({
 	}
 
 	return (
-		<div className={styles.container}>
+		<div
+			className={styles.container}
+			style={{ height: isTriggeredFromSideBar ? '100%' : 'calc(100% - 64px)' }}
+		>
 			{(list || []).map(
 				(itm) => (
 					<RateRevertCard
@@ -51,6 +58,7 @@ function ListRateReverts({
 						assignData={assignData}
 						setActiveTab={setActiveTab}
 						setShowAddRateModal={setShowAddRateModal}
+						isTriggeredFromSideBar={isTriggeredFromSideBar}
 					/>
 				),
 			)}
@@ -65,13 +73,16 @@ function ListRateReverts({
 				)
 				: null}
 
-			{showAddRateModal ? (
+			{showAddRateModal?.showModal ? (
 				<AddRateModal
-					showModal={showAddRateModal}
-					setShowModal={setShowAddRateModal}
-					filter={{}}
-					data={{}}
+					showModal={showAddRateModal?.showModal}
+					filter={params}
+					data={showAddRateModal?.cardData}
 					getListCoverage={fetchRateJobs}
+					setShowModal={() => setShowAddRateModal({
+						showModal : false,
+						cardData  : {},
+					})}
 				/>
 			) : null}
 		</div>

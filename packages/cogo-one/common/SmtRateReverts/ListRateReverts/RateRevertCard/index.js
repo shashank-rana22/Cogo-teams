@@ -3,7 +3,7 @@ import { IcMEmail, IcMCall } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
 import React from 'react';
 
-import { getRateCardFunction } from '../../../../../../utils/getRateCardFunctions';
+import { getRateCardFunction } from '../../../../utils/getRateCardFunctions';
 
 import ServiceProviderDetails from './ServiceProviderDetails';
 import ShipmentDetails from './ShipmentDetails';
@@ -19,6 +19,7 @@ function RateRevertCard({
 	setAssignData = () => {},
 	setActiveTab = () => {},
 	setShowAddRateModal = () => {},
+	isTriggeredFromSideBar = false,
 }) {
 	const dispatch = useDispatch();
 
@@ -31,21 +32,27 @@ function RateRevertCard({
 		dispatch,
 		setActiveTab,
 		cardData,
+		isTriggeredFromSideBar,
 	});
 
 	return (
-		<div className={styles.container}>
+		<div
+			className={styles.container}
+			style={{ width: isTriggeredFromSideBar ? '100%' : '49%' }}
+		>
 			<ServiceProviderDetails
 				cardData={cardData}
 				setShipmentPopover={setShipmentPopover}
 				shipmentPopover={shipmentPopover}
 				setAssignData={setAssignData}
 				assignData={assignData}
+				isTriggeredFromSideBar={isTriggeredFromSideBar}
 			/>
 
 			<ShipmentDetails
 				cardData={cardData}
 				handleOpenMessage={handleOpenMessage}
+				isTriggeredFromSideBar={isTriggeredFromSideBar}
 			/>
 
 			<ShipmentProgress cardData={cardData} />
@@ -73,9 +80,9 @@ function RateRevertCard({
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => setShowAddRateModal(true)}
+						onClick={() => setShowAddRateModal({ showModal: true, cardData })}
 					>
-						+ Verify And Add Rate
+						+ Add Rate
 					</Button>
 				</div>
 			</div>

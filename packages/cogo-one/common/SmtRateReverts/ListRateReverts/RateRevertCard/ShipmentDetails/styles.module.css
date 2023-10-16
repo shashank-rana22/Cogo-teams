@@ -48,11 +48,20 @@
 	white-space: nowrap;
 }
 
+.side_bar_service {
+	padding-left: 6px;
+	font-size: 16px;
+}
+
 .shipping_line {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: calc(100% - 80px);
+}
+
+.side_bar_shipping {
+	width: 100%;
 }
 
 .shipping_service {

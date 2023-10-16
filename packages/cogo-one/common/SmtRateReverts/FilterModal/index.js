@@ -1,8 +1,8 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import SMT_RATE_REVERT_FILTERS from '../../../../../../configurations/smtRateRevertsFilters';
-import { getFieldController } from '../../../../../../utils/getFieldController';
+import smtRateRevertsFilters from '../../../configurations/smtRateRevertsFilters';
+import { getFieldController } from '../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
@@ -11,6 +11,7 @@ function FilterModal({
 	defaultValues = {},
 	setParams = () => {},
 	setShowFilters = () => {},
+	triggeredFrom = '',
 }) {
 	const {
 		control,
@@ -39,8 +40,8 @@ function FilterModal({
 	};
 
 	return (
-		<div>
-			{SMT_RATE_REVERT_FILTERS?.map(
+		<div className={styles.container}>
+			{smtRateRevertsFilters({ triggeredFrom })?.map(
 				(controlItem) => {
 					const {
 						label = '',

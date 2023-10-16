@@ -1,7 +1,7 @@
 import { startCase } from '@cogoport/utils';
 
-import SMT_RATE_REVERT_FILTERS from '../../../../../configurations/smtRateRevertsFilters';
-import { SOURCE_OPTIONS, DEFAULT_RATE_JOBS_FILTERS } from '../../../../../constants/rateRevertsConstants';
+import smtRateRevertsFilter from '../configurations/smtRateRevertsFilters';
+import { SOURCE_OPTIONS, DEFAULT_RATE_JOBS_FILTERS } from '../constants/rateRevertsConstants';
 
 export function getSourceTags({ sources = [], filterValues = {} }) {
 	const sourceTags = sources?.map(
@@ -29,12 +29,12 @@ export function getSourceTags({ sources = [], filterValues = {} }) {
 	return [...filterTags, ...sourceTags];
 }
 
-export const getAppliedFilters = ({ params = {} }) => {
+export const getAppliedFilters = ({ params = {}, triggeredFrom = '' }) => {
 	let filterValues = {};
 	let defaultValues = {};
 	let isFiltersApplied = false;
 
-	SMT_RATE_REVERT_FILTERS.forEach(
+	smtRateRevertsFilter({ triggeredFrom })?.forEach(
 		(itm) => {
 			if (params?.[itm?.name] !== DEFAULT_RATE_JOBS_FILTERS?.[itm?.name]) {
 				isFiltersApplied = true;

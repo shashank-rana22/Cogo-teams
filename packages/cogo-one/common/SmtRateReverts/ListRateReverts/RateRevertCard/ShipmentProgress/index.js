@@ -2,7 +2,7 @@ import { IcMDummyCircle, IcMProfile, IcMCall } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import dateTimeConverter from '../../../../../../../utils/dateTimeConverter';
+import dateTimeConverter from '../../../../../utils/dateTimeConverter';
 
 import styles from './styles.module.css';
 

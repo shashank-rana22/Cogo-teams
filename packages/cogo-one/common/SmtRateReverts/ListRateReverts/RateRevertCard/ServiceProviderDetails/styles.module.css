@@ -15,7 +15,16 @@
 	}
 }
 
+.side_bar_service_details {
+	flex-direction: column;
+
+	>div[aria-label="tooltip"] {
+		width: 100% !important;
+	}
+}
+
 .categories {
+	height: 18px;
 	font-size: 12px;
 	color: #828282;
 }
@@ -67,6 +76,10 @@
 			max-width: 300px !important;
 		}
 	}
+}
+
+.sidebar_actions_container {
+	width: 100%;
 }
 
 .info_icon {

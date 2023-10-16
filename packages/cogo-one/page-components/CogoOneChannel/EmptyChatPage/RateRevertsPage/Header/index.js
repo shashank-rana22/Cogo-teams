@@ -2,10 +2,10 @@ import { MultiSelect, Tags, Popover, Badge } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import { FilterModal } from '../../../../../common/SmtRateReverts';
 import { SOURCE_OPTIONS } from '../../../../../constants/rateRevertsConstants';
+import { getSourceTags, getAppliedFilters } from '../../../../../helpers/getRateRevertsHeaderFunctions';
 
-import FilterModal from './FilterModal';
-import { getSourceTags, getAppliedFilters } from './getHeaderFunctions';
 import styles from './styles.module.css';
 
 function Header({

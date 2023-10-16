@@ -1,6 +1,21 @@
+import { SOURCE_OPTIONS } from '../constants/rateRevertsConstants';
 import SHIPMENT_TYPE_OPTIONS from '../constants/shipmentTypes';
 
-const controls = [
+const smtRateRevertsFilters = ({ triggeredFrom = '' }) => [
+	...(
+		triggeredFrom === 'sideBar'
+			? [
+				{
+					label       : 'Source',
+					name        : 'source',
+					controlType : 'multi-select',
+					placeholder : 'Select Source',
+					options     : Object.values(SOURCE_OPTIONS),
+					size        : 'sm',
+					prefix      : null,
+				},
+			] : []
+	),
 	{
 		label       : 'Select Services',
 		name        : 'service',
@@ -11,4 +26,4 @@ const controls = [
 	},
 ];
 
-export default controls;
+export default smtRateRevertsFilters;

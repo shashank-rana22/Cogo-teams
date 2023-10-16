@@ -3,23 +3,34 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import React from 'react';
 
-import ListRateReverts from '../../../../common/SmtRateReverts/ListRateReverts';
+import { ListRateReverts } from '../../../../common/SmtRateReverts';
+import { FIREBASE_TABS } from '../../../../constants';
 import useListRateJobs from '../../../../hooks/useListRateJobs';
 
 import Header from './Header';
 import styles from './styles.module.css';
 
-function RateRevertsPage({
+function RateReverts({
 	mailProps = {},
 	setActiveTab = () => {},
+	formattedMessageData = {},
+	activeVoiceCard = {},
+	activeTab = '',
 }) {
+	const {
+		user_id: messageUserId,
+	} = formattedMessageData || {};
+	const { user_id: voiceCallUserId = '' } = activeVoiceCard || {};
+
+	const userId = FIREBASE_TABS.includes(activeTab) ? messageUserId : voiceCallUserId;
+
 	const {
 		setParams = () => {},
 		params = {},
 		rateJobsData = {},
 		loading = false,
 		fetchRateJobs = () => {},
-	} = useListRateJobs();
+	} = useListRateJobs({ userId, triggeredFrom: 'sideBar' });
 
 	const {
 		total_count = 0,
@@ -28,20 +39,20 @@ function RateRevertsPage({
 	} = rateJobsData || {};
 
 	return (
-		<>
-			<div className={styles.container}>
-				<Header
-					params={params}
-					setParams={setParams}
-				/>
+		<div className={styles.container}>
+			<Header
+				params={params}
+				setParams={setParams}
+			/>
 
+			<div className={styles.body}>
 				{loading ? (
 					<div className={styles.loader}>
 						<Image
 							src={GLOBAL_CONSTANTS.image_url.cogo_one_loader}
-							alt="load"
-							width={160}
-							height={160}
+							alt="loader"
+							width={100}
+							height={100}
 						/>
 					</div>
 				) : (
@@ -51,13 +62,13 @@ function RateRevertsPage({
 						params={params}
 						setActiveTab={setActiveTab}
 						fetchRateJobs={fetchRateJobs}
+						triggeredFrom="sideBar"
 					/>
 				)}
 			</div>
 
-			<div className={styles.footer_bar}>
+			<div className={styles.footer}>
 				<Pagination
-					type="table"
 					currentPage={page}
 					totalItems={total_count}
 					pageSize={6}
@@ -70,8 +81,8 @@ function RateRevertsPage({
 					)}
 				/>
 			</div>
-		</>
+		</div>
 	);
 }
 
-export default RateRevertsPage;
+export default RateReverts;

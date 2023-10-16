@@ -1,14 +1,14 @@
-import { Pill, Tooltip } from '@cogoport/components';
+import { Pill, Tooltip, cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { LABELS } from '../../../../../../../constants/flashRatesMapping';
-import { ICONS_MAPPING, SINGLE_LOCATIONS } from '../../../../../../../constants/shipmentConstants';
-import SHIPMENT_TYPE_OPTIONS from '../../../../../../../constants/shipmentTypes';
+import { LABELS } from '../../../../../constants/flashRatesMapping';
+import { ICONS_MAPPING, SINGLE_LOCATIONS } from '../../../../../constants/shipmentConstants';
+import SHIPMENT_TYPE_OPTIONS from '../../../../../constants/shipmentTypes';
 import {
 	RENDER_VALUE_MAPPING, serviceDetails,
-} from '../../../../../../../utils/detailsHelperFuncs';
-import { formatRouteData } from '../../../../../../../utils/routeDataHelpers';
+} from '../../../../../utils/detailsHelperFuncs';
+import { formatRouteData } from '../../../../../utils/routeDataHelpers';
 
 import styles from './styles.module.css';
 
@@ -39,7 +39,11 @@ function PortDetails({ details = {} }) {
 	);
 }
 
-function ShipmentDetails({ cardData = {}, handleOpenMessage = () => {} }) {
+function ShipmentDetails({
+	cardData = {},
+	handleOpenMessage = () => {},
+	isTriggeredFromSideBar = false,
+}) {
 	const { service_type = '', trade_type = '', shipping_line = {} } = cardData || {};
 
 	const {
@@ -81,19 +85,32 @@ function ShipmentDetails({ cardData = {}, handleOpenMessage = () => {} }) {
 	const ActiveIcon = ICONS_MAPPING[service_type] || ICONS_MAPPING.default;
 
 	return (
-		<div className={styles.container} role="presentation" onClick={handleOpenMessage}>
-			<div className={styles.shipping_details}>
-				<div className={styles.service_type}>
+		<div
+			className={styles.container}
+			role="presentation"
+			onClick={handleOpenMessage}
+			style={{ cursor: isTriggeredFromSideBar ? 'default' : 'pointer' }}
+		>
+			<div
+				className={styles.shipping_details}
+				style={{ flexDirection: isTriggeredFromSideBar ? 'column' : 'row' }}
+			>
+				<div
+					className={styles.service_type}
+					style={{ flexDirection: isTriggeredFromSideBar ? 'row' : 'column' }}
+				>
 					<div className={styles.icon_container}>
 						<ActiveIcon />
 					</div>
 
-					<div className={styles.service_label}>
+					<div
+						className={cl`${styles.service_label} ${isTriggeredFromSideBar ? styles.side_bar_service : ''}`}
+					>
 						{SHIPMENT_TYPE_OPTIONS[service_type]?.label || startCase(service_type)}
 					</div>
 				</div>
 
-				<div className={styles.shipping_line}>
+				<div className={cl`${styles.shipping_line} ${isTriggeredFromSideBar ? styles.side_bar_shipping : ''}`}>
 					<PortDetails details={originDetails} />
 					<div className={styles.shipping_service}>
 						<img height="30px" width="90px" alt="logo" src={logo_url} />

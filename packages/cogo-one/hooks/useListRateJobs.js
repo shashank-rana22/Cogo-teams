@@ -3,19 +3,23 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { DEFAULT_RATE_JOBS_FILTERS } from '../constants/rateRevertsConstants';
 
-const getPayload = ({ params }) => ({
+const getPayload = ({ params, userId, triggeredFrom }) => ({
 	all_jobs_required : true,
 	stats_required    : true,
 	service           : params?.service || 'fcl_freight',
 	page_limit        : 6,
 	page              : params?.page || 1,
 	filters           : {
-		source : params?.source || undefined,
-		status : 'pending',
+		source              : params?.source || undefined,
+		status              : 'pending',
+		service_provider_id : (triggeredFrom === 'sideBar' && userId) ? userId : undefined,
 	},
 });
 
-const useListRateJobs = () => {
+const useListRateJobs = ({
+	userId = '',
+	triggeredFrom = '',
+} = {}) => {
 	const [params, setParams] = useState(DEFAULT_RATE_JOBS_FILTERS);
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -25,15 +29,19 @@ const useListRateJobs = () => {
 
 	const fetchRateJobs = useCallback(
 		async () => {
+			if (triggeredFrom === 'sideBar' && !userId) {
+				return;
+			}
+
 			try {
 				await trigger({
-					params: getPayload({ params }),
+					params: getPayload({ params, userId, triggeredFrom }),
 				});
 			} catch (error) {
 				console.error('error:', error);
 			}
 		},
-		[params, trigger],
+		[params, trigger, triggeredFrom, userId],
 	);
 
 	useEffect(() => {
@@ -43,7 +51,7 @@ const useListRateJobs = () => {
 	return {
 		loading,
 		fetchRateJobs,
-		rateJobsData: data,
+		rateJobsData: (triggeredFrom === 'sideBar' && !userId) ? {} : data,
 		setParams,
 		params,
 	};

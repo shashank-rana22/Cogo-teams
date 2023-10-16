@@ -1,4 +1,4 @@
-import { Button, Pill, Popover, Tooltip } from '@cogoport/components';
+import { Button, Pill, Popover, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo, IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
@@ -15,6 +15,7 @@ function ServiceProviderDetails({
 	setAssignData = () => {},
 	shipmentPopover = {},
 	setShipmentPopover = () => {},
+	isTriggeredFromSideBar = false,
 }) {
 	const {
 		service_provider = {},
@@ -34,7 +35,10 @@ function ServiceProviderDetails({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.service_details}>
+			<div
+				className={cl`${styles.service_details} 
+					${isTriggeredFromSideBar ? styles.side_bar_service_details : ''}`}
+			>
 				<Tooltip
 					placement="bottom"
 					className={styles.tooltip_container}
@@ -62,7 +66,22 @@ function ServiceProviderDetails({
 					</div>
 				</Tooltip>
 
-				<div className={styles.actions_container}>
+				{isTriggeredFromSideBar
+					? (
+						<div className={styles.categories}>
+							{category_types?.reduce(
+								(acc, itm, index) => (
+									`${acc}${startCase(itm)}${index !== category_types.length - INDEX_STEP ? ', ' : ''}`
+								),
+								'',
+							)}
+						</div>
+					)
+					: null}
+
+				<div className={cl`${styles.actions_container} 
+					${isTriggeredFromSideBar ? styles.sidebar_actions_container : ''}`}
+				>
 					<Pill
 						size="sm"
 						color="#F7FAEF"
@@ -178,14 +197,18 @@ function ServiceProviderDetails({
 				</div>
 			</div>
 
-			<div className={styles.categories}>
-				{category_types?.reduce(
-					(acc, itm, index) => (
-						`${acc}${startCase(itm)}${index !== category_types.length - INDEX_STEP ? ', ' : ''}`
-					),
-					'',
+			{isTriggeredFromSideBar
+				? null
+				: (
+					<div className={styles.categories}>
+						{category_types?.reduce(
+							(acc, itm, index) => (
+								`${acc}${startCase(itm)}${index !== category_types.length - INDEX_STEP ? ', ' : ''}`
+							),
+							'',
+						)}
+					</div>
 				)}
-			</div>
 		</div>
 	);
 }

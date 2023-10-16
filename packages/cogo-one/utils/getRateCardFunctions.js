@@ -5,6 +5,7 @@ export const getRateCardFunction = ({
 	mailProps = {},
 	dispatch = null,
 	setActiveTab = () => {},
+	isTriggeredFromSideBar = false,
 }) => {
 	const { setButtonType, setEmailState, signature } = mailProps;
 	const { service_provider_poc = {} } = cardData || {};
@@ -61,6 +62,10 @@ export const getRateCardFunction = ({
 	};
 
 	const handleOpenMessage = () => {
+		if (isTriggeredFromSideBar) {
+			return;
+		}
+
 		let numberEFormat;
 
 		if (whatsapp_country_code) {
