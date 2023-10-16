@@ -113,7 +113,7 @@
     },
     "kam_admin":{
         "trade_parties":["collection_party"],
-        "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party","shipper", "consignee"],
+        "can_view":["notifying_party","invoicing_party","pocs","collection_party","shipper", "consignee"],
         "can_edit":["notifying_party","collection_party","pocs"],
         "can_add_service_provider_poc":true,
         "add_internal_poc":true,
