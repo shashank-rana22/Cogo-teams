@@ -37,6 +37,12 @@
 				width: 45%;
 			}
 		}
+
+		.ui_select_display_container {
+			div[role="button"] {
+				padding-right: 6px;
+			}
+		}
 	}
 }
 

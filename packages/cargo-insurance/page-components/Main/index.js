@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcCVerySad } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
@@ -12,6 +13,9 @@ import RateCard from './RateCard';
 import styles from './styles.module.css';
 
 function Insurance() {
+	const { query } = useRouter();
+	const { policySearchId } = query || {};
+
 	const { t } = useTranslation(['cargoInsurance']);
 
 	const { loading, data = {}, selectedRateCard, setSelectedRateCard } = useGetRates();
@@ -22,7 +26,7 @@ function Insurance() {
 	return (
 		<div>
 			<h2>{t('cargoInsurance:title')}</h2>
-			<Header loading={loading} {...rest} />
+			<Header key={policySearchId} loading={loading} {...rest} />
 
 			<div className={styles.container}>
 				{isEmpty(rateResponse) && !loading ? (

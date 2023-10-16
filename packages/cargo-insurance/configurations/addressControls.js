@@ -96,7 +96,7 @@ const getAddressControls = ({ includeTax = false, country, setValue, showPocFiel
 			required: 'required *',
 		},
 		extraComp: (
-			<Button themeType="accent" onClick={() => setShowPocFeilds((prev) => !prev)}>
+			<Button size="sm" themeType="accent" onClick={() => setShowPocFeilds((prev) => !prev)}>
 				{!showPocFields ? 'Add POC' : 'Remove POC'}
 			</Button>
 		),
