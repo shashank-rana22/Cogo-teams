@@ -72,6 +72,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'saas',
 	},
+	{
+		api          : 'create_organization_address',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_billing_address',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
 ];
 
 export default apis;

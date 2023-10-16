@@ -4,7 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState, useImperativeHandle, forwardRef } from 'react';
 
-import useAddress from '../../../hooks/useAddress';
+import useGetAddress from '../../../hooks/useGetAddress';
 
 import AddressCard from './AddressCard';
 import AddressModal from './AddressModal';
@@ -24,8 +24,8 @@ function Address({ billingType, setBillingType, orgId = '', preSelectedAddress =
 
 	const {
 		addressData, setAddressData,
-		loading,
-	} = useAddress({ billingType, setSelectedAddress, orgId, preSelectedAddress });
+		loading, getBillingAddress,
+	} = useGetAddress({ billingType, setSelectedAddress, orgId, preSelectedAddress });
 
 	const { mainAddress = [], remainingAddress = [] } = addressData || {};
 
@@ -46,7 +46,15 @@ function Address({ billingType, setBillingType, orgId = '', preSelectedAddress =
 				</div>
 
 				<div className={styles.flex_box}>
-					<Button size="sm" themeType="accent">
+					<Button
+						size="sm"
+						themeType="accent"
+						onClick={() => setAddressModal({
+							openModal : true,
+							isView    : false,
+							isCreate  : true,
+						})}
+					>
 						<IcMPlusInCircle width={12} height={12} />
 						{' '}
 						<span className={styles.btn_text}>{t('cargoInsurance:create_address')}</span>
@@ -92,14 +100,18 @@ function Address({ billingType, setBillingType, orgId = '', preSelectedAddress =
 				))}
 			</div>
 
-			<AddressModal
-				data={remainingAddress}
-				setAddressData={setAddressData}
-				addressModal={addressModal}
-				setAddressModal={setAddressModal}
-				selectedAddress={selectedAddress}
-				setSelectedAddress={setSelectedAddress}
-			/>
+			{addressModal.openModal ? (
+				<AddressModal
+					orgId={orgId}
+					data={remainingAddress}
+					setAddressData={setAddressData}
+					addressModal={addressModal}
+					setAddressModal={setAddressModal}
+					selectedAddress={selectedAddress}
+					getBillingAddress={getBillingAddress}
+					setSelectedAddress={setSelectedAddress}
+				/>
+			) : null}
 
 		</>
 	);

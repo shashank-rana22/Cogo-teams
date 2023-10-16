@@ -61,7 +61,7 @@ function useAddress({ billingType, orgId = '', preSelectedAddress = {}, setSelec
 	}, [addressList, preSelectedAddress, setSelectedAddress]);
 
 	return {
-		addressData, loading, setAddressData,
+		addressData, loading, setAddressData, getBillingAddress,
 	};
 }
 

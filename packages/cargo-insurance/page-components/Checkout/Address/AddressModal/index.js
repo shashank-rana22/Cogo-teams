@@ -1,24 +1,27 @@
-import { Modal } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useTranslation } from 'next-i18next';
 
+import FormItem from '../../../../common/FormItem';
+import useAddressModal from '../../../../hooks/useAddressModal';
 import AddressCard from '../AddressCard';
 
 import styles from './styles.module.css';
 
 function AddressModal({
-	data = [], addressModal, setAddressModal, selectedAddress,
-	setSelectedAddress, setAddressData,
+	data = [], orgId = '', addressModal, setAddressModal, selectedAddress,
+	setSelectedAddress, setAddressData, getBillingAddress,
 }) {
 	const { openModal, isCreate, isView } = addressModal || {};
 
 	const { t } = useTranslation(['cargoInsurance']);
 
-	const closeModalHandler = () => {
-		setAddressModal({
-			openModal: false,
-		});
-	};
+	const {
+		formhook, addressControl, submitHandler, loading,
+		closeModalHandler,
+	} = useAddressModal({ orgId, setAddressModal, getBillingAddress });
+
+	const { handleSubmit } = formhook || {};
 
 	const changeSelectedAdd = (info) => {
 		setAddressData((prev) => ({
@@ -32,7 +35,7 @@ function AddressModal({
 
 	return (
 		<Modal
-			size="sm"
+			size={isCreate ? 'md' : 'sm'}
 			show={openModal}
 			onClose={closeModalHandler}
 			placement={isCreate ? 'center' : 'right'}
@@ -57,6 +60,27 @@ function AddressModal({
 						))}
 
 					</div>
+				) : null}
+
+				{isCreate ? (
+					<>
+						<div className={styles.form_body}>
+							<FormItem controls={addressControl} formhook={formhook} />
+						</div>
+
+						<div className={styles.footer}>
+							<Button themeType="secondary" disabled={loading}>Cancel</Button>
+							<Button
+								themeType="accent"
+								className={styles.submit_btn}
+								onClick={handleSubmit(submitHandler)}
+								loading={loading}
+							>
+								Add
+							</Button>
+						</div>
+					</>
+
 				) : null}
 
 			</div>

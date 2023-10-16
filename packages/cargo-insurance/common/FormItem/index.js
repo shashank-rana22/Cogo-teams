@@ -14,14 +14,14 @@ function FormItem({ controls, formhook }) {
 
 	return (
 		controls.map((config) => {
-			const { name, type, label, rules, showEle = true } = config;
+			const { name, type, label, rules, showEle = true, extraComp = null } = config;
 			const Element = getFieldController(type);
 			const isMobileNo = type === 'mobileSelect';
 
 			return (
 				showEle ? (
 					<div key={name} className={cl`${styles.col} ${name} form_col`}>
-						<p className={styles.label}>{label}</p>
+						{type !== 'checkbox' ? <p className={styles.label}>{label}</p> : null}
 						<Element
 							{...config}
 							control={control}
@@ -29,6 +29,7 @@ function FormItem({ controls, formhook }) {
 							mobileSelectRef={isMobileNo ? register(name, rules).ref : undefined}
 						/>
 						<p className={styles.error}>{errors?.[name]?.message || errors?.[name]?.type}</p>
+						{extraComp}
 					</div>
 				) : null
 			);

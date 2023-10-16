@@ -1,4 +1,7 @@
-const getAddressControls = ({ includeTax = false }) => [
+import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+const getAddressControls = ({ includeTax = false, country, setValue, showPocFields, setShowPocFeilds }) => [
 	{
 		name        : 'name',
 		label       : 'Billing Party Name',
@@ -19,7 +22,10 @@ const getAddressControls = ({ includeTax = false }) => [
 		name        : 'country',
 		label       : 'Country',
 		type        : 'asyncSelect',
+		asyncKey    : 'list_locations',
 		placeholder : 'Select Country',
+		initialCall : true,
+		params      : { filters: { type: ['country'] } },
 		rules       : {
 			required: 'required *',
 		},
@@ -28,9 +34,21 @@ const getAddressControls = ({ includeTax = false }) => [
 		name        : 'pincode',
 		label       : 'Pincode',
 		type        : 'asyncSelect',
+		asyncKey    : 'list_locations',
 		placeholder : 'Select Placeholder',
-		params      : { filters: { type: ['pincode'] } },
-		rules       : {
+		disabled    : !country,
+		params      : {
+			filters  : { type: ['pincode'], country_id: country },
+			includes : { region: true, city: true },
+		},
+		labelKey : 'display_name',
+		valueKey : 'postal_code',
+		onChange : (val, obj) => {
+			const { region, city } = obj || {};
+			setValue('state', region?.name);
+			setValue('city', city?.name);
+		},
+		rules: {
 			required: 'required *',
 		},
 	},
@@ -63,13 +81,54 @@ const getAddressControls = ({ includeTax = false }) => [
 			{ children: 'Ware House', key: 'warehouse' },
 		],
 		multiple : false,
-		showEle  : !includeTax,
+		rules    : {
+			required: 'required *',
+		},
+		showEle: !includeTax,
 	},
 	{
 		name        : 'tax_number',
 		label       : 'Tax Number',
 		type        : 'text',
 		placeholder : 'Enter Tax Number',
+		showEle     : includeTax,
+		rules       : {
+			required: 'required *',
+		},
+		extraComp: (
+			<Button themeType="accent" onClick={() => setShowPocFeilds((prev) => !prev)}>
+				{!showPocFields ? 'Add POC' : 'Remove POC'}
+			</Button>
+		),
+	},
+	{
+		name        : 'poc_name',
+		label       : 'POC Name',
+		type        : 'text',
+		placeholder : 'Enter POC Name',
+		showEle     : showPocFields,
+	},
+	{
+		name        : 'email',
+		label       : 'Email Id',
+		type        : 'text',
+		placeholder : 'Enter Email Id',
+		showEle     : showPocFields,
+		rules       : {
+			pattern: {
+				value   : GLOBAL_CONSTANTS.regex_patterns.email,
+				message : 'Email Id is Invalid',
+			},
+		},
+
+	},
+	{
+		name        : 'phoneNumber',
+		label       : 'Phone Number',
+		type        : 'mobileSelect',
+		placeholder : 'Enter Phone Number',
+		showEle     : showPocFields,
+
 	},
 ];
 

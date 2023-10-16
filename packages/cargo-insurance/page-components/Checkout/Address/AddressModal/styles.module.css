@@ -4,7 +4,6 @@
 
 .modal_body {
 	border-top: 1px solid #dedede;
-	border-bottom: 1px solid #dedede;
 }
 
 .card_container {
@@ -14,4 +13,40 @@
 .view_container {
 	max-height: 600px;
 	overflow-y: scroll;
+}
+
+.form_body {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 16px 24px;
+
+	:global {
+		.form_col {
+			width: 45%;
+		}
+
+		.includeTax,
+		.address_type,
+		.tax_number {
+			width: 100%;
+		}
+
+		.tax_number {
+			.ui_input_container {
+				width: 45%;
+			}
+		}
+	}
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+	padding: 12px 24px;
+	border-top: 1px solid #dedede;
+
+	.submit_btn {
+		margin-left: 12px;
+	}
 }
