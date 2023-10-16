@@ -70,7 +70,7 @@ pipeline {
                     sh "scp -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} -P ${SSH_PORT} ${SERVER_NAME}@${SERVER_IP}:/home/${SERVER_NAME}/.env.admin .env"
 					sh "sed -i '/NODE_ENV=production/d' .env"
 					}
-                }
+
                 // build docker image for admin site and push to ecr
                 script {
                     sh "docker image build --build-arg NPM_TOKEN=${NPM_TOKEN} -t ${ECR_URL}/admin:${COMMIT_ID} -t ${ECR_URL}/admin:latest-dev --target runner ."
