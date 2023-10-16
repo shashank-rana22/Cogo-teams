@@ -72,6 +72,18 @@ function EditMarginFooter({
 
 	const updateQuotation = () => {
 		try {
+			if (quotation_email_sent_at) {
+				updateCheckout({
+					values: {
+						id,
+						state: 'locked',
+					},
+					scrollToTop: true,
+				});
+
+				return;
+			}
+
 			const marginValues = rateDetails.reduce((acc, curr) => {
 				const { id: currId = '', line_items = [] } = curr;
 
