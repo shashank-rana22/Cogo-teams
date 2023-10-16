@@ -13,6 +13,7 @@ import styles from './styles.module.css';
 const MAX_LENGTH = 18;
 
 const FIRST_INDEX = 1;
+const ZERO_POINT_ZERO_ZERO = 0.00;
 
 function RenderSummaryData({ summary = [] }) {
 	return (
@@ -197,16 +198,43 @@ const summaryDataFourth = ({ paidTds, payableTds, billCurrency, tdsAmount, payme
 	},
 ];
 
+const summaryDataFifth = ({ billCurrency, subTotal = ZERO_POINT_ZERO_ZERO, grandTotal = ZERO_POINT_ZERO_ZERO }) => [
+	{
+		title : 'Sub Total Amount',
+		value : formatAmount({
+			amount   : subTotal,
+			currency : billCurrency,
+			options  : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+	},
+	{
+		title : 'Tax Total Amount',
+		value : formatAmount({
+			amount   : (grandTotal - subTotal).toFixed(2),
+			currency : billCurrency,
+			options  : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+	},
+];
+
 const summeryMappings = ({
 	summaryDataFirst,
 	summaryDataSecond,
 	summaryDataThird,
 	summaryDataFour,
+	summaryDataFive,
 }) => [
 	{ key: '1', val: summaryDataFirst },
 	{ key: '2', val: summaryDataSecond },
 	{ key: '3', val: summaryDataThird },
 	{ key: '4', val: summaryDataFour },
+	{ key: '5', val: summaryDataFive },
 ];
 
 function Summery({
@@ -230,7 +258,9 @@ function Summery({
 		paidAmount,
 		paidTds = 0,
 		payableTds,
-		tdsAmount, paymentStatus,
+		tdsAmount,
+		paymentStatus,
+		subTotal,
 	} = itemData || {};
 	const { stakeholders } = useGetStakeholder({ billId });
 
@@ -258,11 +288,16 @@ function Summery({
 		grandTotal,
 	});
 	const summaryDataFour = summaryDataFourth({ paidTds, payableTds, billCurrency, tdsAmount, paymentStatus });
+	const summaryDataFive = summaryDataFifth({
+		subTotal,
+		grandTotal,
+	});
 	const summeryMapping = summeryMappings({
 		summaryDataFirst,
 		summaryDataSecond,
 		summaryDataThird,
 		summaryDataFour,
+		summaryDataFive,
 	});
 	return (
 		<div className={styles.container}>
