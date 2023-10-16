@@ -60,12 +60,6 @@ const app_contract_management = [
 		service_name : 'contract',
 	},
 	{
-		api          : 'list_contract_fcl_freight_local_services',
-		access_type  : 'private',
-		feature      : 'contract',
-		service_name : 'contract',
-	},
-	{
 		api          : 'list_contract_lcl_freight_services',
 		access_type  : 'private',
 		feature      : 'contract',
