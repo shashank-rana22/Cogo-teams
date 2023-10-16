@@ -87,8 +87,24 @@ const useCreateFreightRate = (service) => {
 				},
 			});
 			if (resp?.data) { return resp?.data?.id; }
-		} catch (err) {
-			Toast.error(startCase(err?.response?.data?.detail || err?.response?.data?.base));
+		} catch (error) {
+			const { response = {} } = error;
+			const { data: err_data = {} } = response;
+			const {
+				base = undefined,
+				length: lengthError = '',
+				breadth: breadthError = '',
+				height: heightError = '',
+			} = err_data;
+
+			let clearStr = '';
+			if (base) {
+				const cleanStr = base?.replace(/Error/g, '');
+				clearStr = cleanStr?.replace(/Base/g, '');
+			}
+			Toast.error(
+				startCase(clearStr || lengthError || breadthError || heightError),
+			);
 		}
 		return null;
 	};

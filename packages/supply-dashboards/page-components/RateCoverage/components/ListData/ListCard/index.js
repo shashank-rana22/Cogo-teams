@@ -21,12 +21,10 @@ import styles from './styles.module.css';
 function ListCard({
 	data = {}, getListCoverage = () => {}, filter = {}, getStats = () => {},
 	source = {},
-	setShowAddRateModal = () => {},
-	showAddRateModal = false,
 }) {
 	const [showCloseModal, setShowCloseModal] = useState(false);
-
 	const [serviceIdPresent, setServiceIdPresent] = useState('');
+	const [showAddRateModal, setShowAddRateModal] = useState(false);
 
 	const {
 		sources = [], container_size = '', container_type,
