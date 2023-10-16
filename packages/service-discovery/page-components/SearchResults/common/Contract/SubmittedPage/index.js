@@ -2,7 +2,6 @@ import { Button, Pill } from '@cogoport/components';
 import { IcCFtick, IcMArrowNext } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
 
 import getLocationInfo from '../../../utils/locations-search';
 
@@ -14,9 +13,9 @@ function Submitted({ detail = {}, contractData = {} }) {
 
 	const { partner_id = '' } = query;
 
-	const { max_containers_count = 100 } = contractData;
+	const { max_containers_count = 0, max_weight = 0 } = contractData;
 
-	const { container_type, container_size, commodity = '', volume, weight } = detail;
+	const { container_type, container_size, commodity = '', volume, weight, search_type = '' } = detail;
 
 	const { origin, destination } = getLocationInfo(detail, 'search_type');
 
@@ -67,11 +66,21 @@ function Submitted({ detail = {}, contractData = {} }) {
 					</div>
 
 					<div className={styles.right_section}>
-						<div className={styles.containers_count}>
-							Count:
-							{' '}
-							<strong>{`${max_containers_count} Ctr.`}</strong>
-						</div>
+						{search_type === 'fcl_freight' ? (
+							<div className={styles.requested_amount}>
+								Count:
+								{' '}
+								<strong>{`${max_containers_count} Ctr.`}</strong>
+							</div>
+						) : null}
+
+						{search_type === 'air_freight' ? (
+							<div className={styles.requested_amount}>
+								Weight:
+								{' '}
+								<strong>{`${max_weight} Kgs`}</strong>
+							</div>
+						) : null}
 
 						<div className={styles.load_details}>
 							{container_size ? (

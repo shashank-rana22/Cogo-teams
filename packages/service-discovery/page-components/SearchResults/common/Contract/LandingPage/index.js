@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -24,6 +23,7 @@ const FEATURES_MAPPING = [
 function LandingPage({
 	setShow = () => {},
 	setScreen = () => {},
+	service = '',
 }) {
 	return (
 		<div className={styles.container}>
@@ -32,9 +32,11 @@ function LandingPage({
 					<span className={styles.main_heading}>Get more benefit with a contract</span>
 
 					<div className={styles.supporting_text_container}>
-						<span className={styles.supporting_text}>
-							Usually, for container counts greater than 50, we recommend going for a contract.
-						</span>
+						{service === 'fcl_freight' ? (
+							<span className={styles.supporting_text}>
+								Usually, for container counts greater than 50, we recommend going for a contract.
+							</span>
+						) : null}
 
 						<strong className={styles.supporting_text}>
 							Following are the benefits of having a contract with Cogoport -

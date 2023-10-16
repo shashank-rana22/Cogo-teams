@@ -1,3 +1,5 @@
+import validate from '../../../utils/validateNumber';
+
 const getParams = ({ status, operator_type }) => ({
 	filters    : { operator_type, status },
 	page_limit : 100,
@@ -54,11 +56,16 @@ const createContracts = () => [
 	{
 		name   : 'max_weight',
 		label  : 'Maximum Weight',
-		type   : 'number',
+		type   : 'input',
 		min    : 0,
 		span   : 4,
+		suffix : <span style={{ marginRight: 12 }}>Kgs</span>,
 		showIn : ['air_freight', 'lcl_freight'],
-		rules  : { required: 'Maximum weight is required', min: 50 },
+		rules  : {
+			required : 'Maximum weight is required',
+			min      : 50,
+			validate : (val) => validate(val),
+		},
 	},
 	{
 		name         : 'preferred_shipping_line_ids',
@@ -81,7 +88,7 @@ const createContracts = () => [
 	},
 	{
 		name         : 'preferred_airline_line_ids',
-		label        : 'Prefered Airline line',
+		label        : 'Prefered Airlines',
 		type         : 'async-select',
 		asyncKey     : 'list_operators',
 		showOptional : true,
@@ -99,7 +106,7 @@ const createContracts = () => [
 	},
 	{
 		name           : 'exclude_airline_ids',
-		label          : 'Unprefered Airline line',
+		label          : 'Unprefered Airlines',
 		type           : 'async-select',
 		asyncKey       : 'list_operators',
 		initialCall    : true,

@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { addDays } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import LocationDetails from '../../../../../common/LocationDetails';
 import getElementController from '../../../../../configs/getElementController';

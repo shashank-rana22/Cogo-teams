@@ -67,7 +67,7 @@
 	}
 }
 
-.containers_count {
+.requested_amount {
 	min-width: max-content;
 	font-size: 10px;
 	font-weight: 500;

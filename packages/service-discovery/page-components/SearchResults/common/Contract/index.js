@@ -21,6 +21,7 @@ function Contract({
 			component : LandingPage,
 			closable  : false,
 			props     : {
+				service: detail?.search_type,
 				setShow,
 				setScreen,
 			},
