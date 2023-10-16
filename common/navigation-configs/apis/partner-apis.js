@@ -13041,6 +13041,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'list_organization_pocs',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'create_cogoone_group_hash',
 			access_type  : 'private',
 			service_name : 'communication',
