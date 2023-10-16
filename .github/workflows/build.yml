@@ -23,32 +23,3 @@ jobs:
     secrets: inherit
     with:
       platform: cogo-action-large-runner
-
-  stop-runner:
-    name: Stop self-hosted EC2 runner
-
-    needs:
-      - start-runner # required to get output from the start-runner job
-      - init # required to wait when the main job is done
-      - build # required to wait when the main job is done
-
-    runs-on: ubuntu-latest
-
-    if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
-
-    steps:
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.PROD_ECS_DEPLOY_AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.PROD_ECS_DEPLOY_AWS_SECRET_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Stop EC2 runner
-        uses: maytan-cogo/ec2-github-runner@v2.0.0
-        with:
-          mode: stop
-          github-token: ${{ secrets.COGOPORT_DEV_ADMIN_TOKEN }}
-          label: ${{ needs.start-runner.outputs.label }}
-          ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
-    
