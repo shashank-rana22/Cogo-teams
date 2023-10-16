@@ -12,7 +12,7 @@ function TermsConditions({ rateCardData = {}, detail = {} }) {
 		return searchTerms;
 	}, [rateTerms, searchTerms]);
 
-	if (isEmpty(terms)) {
+	if (isEmpty(terms) || !terms.some((item) => item)) {
 		return (
 			<div className={styles.container}>
 				<b>Nothing to show here!</b>
