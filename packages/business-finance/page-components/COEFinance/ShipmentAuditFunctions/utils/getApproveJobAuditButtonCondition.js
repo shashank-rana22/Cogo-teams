@@ -15,21 +15,21 @@ const getApproveJobAuditBttnCondition = ({ quotationsData }) => {
 
 	const isFinClosedQuotationsApproved = isFinClosedBuyQuotationApproved && isFinClosedSellQuotationApproved;
 
-	const isPrePostBuyApproved = (Object.keys(prePostBuy) || []).map((i) => {
+	const isPrePostBuyApproved = (Object.keys(prePostBuy) || [])?.map((i) => {
 		if (prePostBuy?.[i]?.finalStatus) {
 			return true;
 		}
 		return false;
 	});
 
-	const isPrePostSellApproved = (Object.keys(prePostSell) || []).map((i) => {
+	const isPrePostSellApproved = (Object.keys(prePostSell) || [])?.map((i) => {
 		if (prePostSell?.[i]?.finalStatus) {
 			return true;
 		}
 		return false;
 	});
 
-	const isPrePostQuotationsApproved = isPrePostBuyApproved.every((i) => i) && isPrePostSellApproved.every((i) => i);
+	const isPrePostQuotationsApproved = isPrePostBuyApproved?.every((i) => i) && isPrePostSellApproved?.every((i) => i);
 
 	const bttnDisableCondition = isOprClosedQuotationsApproved
     && isFinClosedQuotationsApproved

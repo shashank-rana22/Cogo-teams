@@ -1,7 +1,7 @@
 import { Table, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { useRouter } from 'next/router';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import useApproveQuotation from '../../../../../../../../hook/useApproveQuotation';

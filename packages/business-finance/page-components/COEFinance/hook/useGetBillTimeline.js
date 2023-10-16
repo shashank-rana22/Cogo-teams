@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 const useGetBillTimeline = ({
 	id = '',
 }) => {
-	const [{ data, loading }, trigger] = useRequestBf(
+	const [{ data = {}, loading = false }, trigger] = useRequestBf(
 		{
 			url     : `/purchase/bills/${id}/bill-time-line`,
 			method  : 'get',

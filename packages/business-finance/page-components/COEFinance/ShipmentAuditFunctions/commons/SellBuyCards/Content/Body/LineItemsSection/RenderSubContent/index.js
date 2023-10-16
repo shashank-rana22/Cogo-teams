@@ -14,7 +14,7 @@ function RenderSubContent({
 	return (
 		<div className={styles.sub_content} style={{ width: wdth }}>
 			<div className={styles.light}>{title}</div>
-			{data.map((item) => (
+			{data?.map((item) => (
 				<Tooltip
 					placement="top"
 					theme="light"

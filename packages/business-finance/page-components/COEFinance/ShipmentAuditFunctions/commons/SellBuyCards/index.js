@@ -27,12 +27,12 @@ function SellBuyCards({
 	let profitabilityData = 0;
 	let grandTotal = 0;
 
-	data.forEach((i) => {
+	data?.forEach((i) => {
 		profitabilityData += i.profitability;
 		grandTotal += i.grand_total;
 	});
 
-	const checkIsApproved = () => data.every((item) => item?.quotation_state === 'APPROVED');
+	const checkIsApproved = () => data?.every((item) => item?.quotation_state === 'APPROVED');
 
 	return (
 		<div className={styles.custom_accordion}>
@@ -65,7 +65,7 @@ function SellBuyCards({
 						<div className={`${open ? styles.nothing : styles.other_title}`}>
 							<div className={styles.regular}>Profitability:</div>
 							<div className={`${profitabilityData > ZERO_VALUE ? styles.green : styles.red}`}>
-								{profitabilityData.toFixed(3)}
+								{profitabilityData.toFixed(2)}
 							</div>
 						</div>
 						{open ? (

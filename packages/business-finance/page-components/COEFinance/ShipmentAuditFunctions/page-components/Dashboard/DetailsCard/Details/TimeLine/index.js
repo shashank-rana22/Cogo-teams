@@ -11,7 +11,7 @@ const ONE = 1;
 function TimeLine({
 	shipmentId = '',
 }) {
-	const { data: timelineData, loading } = useGetShipmentTimeLine(shipmentId);
+	const { data: timelineData = [], loading = false } = useGetShipmentTimeLine(shipmentId);
 
 	const SHIPMENT_DATA = {};
 	let isCompleted = true;

@@ -44,9 +44,9 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 			),
 			accessor: (row) => {
 				const {
-					estimatedRevenuePreTax, estimatedRevenuePostTax,
-					operationalRevenuePreTax, operationalRevenuePostTax,
-					operationalSellDeviationToEstimatedPreTax, operationalSellDeviationToEstimatedPostTax,
+					estimatedRevenuePreTax = '', estimatedRevenuePostTax = '',
+					operationalRevenuePreTax = '', operationalRevenuePostTax = '',
+					operationalSellDeviationToEstimatedPreTax = '', operationalSellDeviationToEstimatedPostTax = '',
 					currency = '',
 				} = row || {};
 				const dataOperational = tax === 'Pre' ? operationalRevenuePreTax : operationalRevenuePostTax;
@@ -80,9 +80,9 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 			),
 			accessor: (row) => {
 				const {
-					estimatedCostPreTax, estimatedCostPostTax,
-					operationalCostPreTax, operationalCostPostTax,
-					operationalBuyDeviationToEstimatedPreTax, operationalBuyDeviationToEstimatedPostTax,
+					estimatedCostPreTax = '', estimatedCostPostTax = '',
+					operationalCostPreTax = '', operationalCostPostTax = '',
+					operationalBuyDeviationToEstimatedPreTax = '', operationalBuyDeviationToEstimatedPostTax = '',
 					currency = '',
 				} = row || {};
 				const dataOperational = tax === 'Pre' ? operationalCostPreTax : operationalCostPostTax;
@@ -121,9 +121,9 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 			),
 			accessor: (row) => {
 				const {
-					estimatedProfitabilityPreTax, estimatedProfitabilityPostTax,
-					operationalProfitabilityPreTax, operationalProfitabilityPostTax,
-					operationalProfitabilityDeviationToPreTax, operationalProfitabilityDeviationToPostTax,
+					estimatedProfitabilityPreTax = '', estimatedProfitabilityPostTax = '',
+					operationalProfitabilityPreTax = '', operationalProfitabilityPostTax = '',
+					operationalProfitabilityDeviationToPreTax = '', operationalProfitabilityDeviationToPostTax = '',
 				} = row || {};
 				const dataOperational = tax === 'Pre'
 					? operationalProfitabilityPreTax : operationalProfitabilityPostTax;
@@ -157,8 +157,6 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 							jobId     : row?.jobId,
 							jobNumber : row?.jobNumber,
 							currency  : row?.currency,
-							rdWallet  : row?.rdWalletUtilizationAmount,
-							kamMargin : row?.kamMarginUtilizationAmount,
 						})}
 					>
 						Audit

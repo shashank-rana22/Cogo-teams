@@ -26,7 +26,7 @@ const useGetJobList = ({
 	entityCode = '',
 }) => {
 	const CLOSING_STATUS = activeTab === 'operational_close' ? 'OPR_CLOSED' : 'CLOSED';
-	const [{ data, loading }, trigger] = useRequestBf(
+	const [{ data = {}, loading = false }, trigger] = useRequestBf(
 		{
 			url     : '/common/job-profitability/list-jobs-stats',
 			authKey : 'get_common_job_profitability_list_jobs_stats',

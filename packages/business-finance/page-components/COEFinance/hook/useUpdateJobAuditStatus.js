@@ -5,7 +5,7 @@ import { useRequestBf } from '@cogoport/request';
 import toastApiError from '../../commons/toastApiError.ts';
 
 const useUpdateJobAuditStatus = ({ getPrePostShipmentQuotes = () => {} }) => {
-	const [{ loading }, trigger] = useRequestBf({
+	const [{ loading = false }, trigger] = useRequestBf({
 		url     : '/common/job-profitability/audit-job-profitability',
 		method  : 'POST',
 		authKey : 'post_common_job_profitability_audit_job_profitability',

@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 
 import useUpdateJobAuditStatus from '../../../hook/useUpdateJobAuditStatus';
@@ -32,8 +32,6 @@ function Dashboard() {
 	const { bttnDisableCondition } = getApproveJobAuditBttnCondition({ quotationsData });
 
 	const handleClick = () => {
-		window.sessionStorage.removeItem('kam_margin');
-		window.sessionStorage.removeItem('rd_wallet');
 		window.sessionStorage.removeItem('currency');
 
 		if (active_tab === 'financial_close') {

@@ -13,7 +13,7 @@ import useShipmentDocument from '../../../../../hook/useShipmentDocument.ts';
 import styles from './styles.module.css';
 
 function Documents({ shipmentId = '' }) {
-	const { data: documentData, loading } = useShipmentDocument(shipmentId);
+	const { data: documentData = {}, loading = false } = useShipmentDocument(shipmentId);
 
 	const functions = {
 		DocumentTypeFunc: (item) => {

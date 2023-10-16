@@ -42,10 +42,10 @@ function DetailsCard({
 
 	const { data: dataWallet } = useGetWallet(shipmentId);
 	const {
-		agent_data: agentData,
-		agent_role_data: agentRoleData,
-		amount,
-		amount_currency: amountCurrency,
+		agent_data: agentData = {},
+		agent_role_data: agentRoleData = {},
+		amount = '',
+		amount_currency: amountCurrency = '',
 	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { source = '', trade_type: tradeType = '' } = dataList;

@@ -39,7 +39,7 @@ function TicketsCard({
 			</div>
 			{tab.ticketsTab && <div className={styles.hr} />}
 			<div className={styles.tickets}>
-				{tab.ticketsTab && <Tickets serialId={serialId} />}
+				{tab?.ticketsTab && <Tickets serialId={serialId} />}
 				{' '}
 			</div>
 		</div>

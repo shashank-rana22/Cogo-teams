@@ -29,7 +29,7 @@ function PrePostCheckoutCardsSet({
 	useEffect(() => {
 		const INITIAL_STATE = {};
 		Object.keys(quoteData).forEach((category) => {
-			Object.keys(quoteData[category]).forEach((subCategory, index) => {
+			Object.keys(quoteData?.[category])?.forEach((subCategory, index) => {
 				INITIAL_STATE[`${category}_${subCategory}`] = (index === GLOBAL_CONSTANTS.zeroth_index);
 			});
 		});

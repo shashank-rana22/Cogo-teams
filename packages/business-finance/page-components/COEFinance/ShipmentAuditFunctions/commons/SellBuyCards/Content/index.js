@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { useRouter } from 'next/router';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import useApproveQuotation from '../../../../hook/useApproveQuotation';

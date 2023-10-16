@@ -9,7 +9,7 @@ function LineItemsSection({
 	const {
 		names, quantities, units, currencies, prices, margins,
 		exchange_rates, tax_price, total_prices,
-	} = lineItems.reduce(
+	} = (lineItems || []).reduce(
 		(acc, item) => {
 			acc.names.push(item.name);
 			acc.quantities.push(item.quantity);

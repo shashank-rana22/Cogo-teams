@@ -7,7 +7,7 @@ const useGetClosedTasks = ({
 	job_id = '',
 	activeTab = '',
 }) => {
-	const [{ data, loading }, trigger] = useRequestBf(
+	const [{ data = {}, loading = false }, trigger] = useRequestBf(
 		{
 			url     : '/common/job/milestone-job-audits',
 			method  : 'get',

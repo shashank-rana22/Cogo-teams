@@ -19,7 +19,6 @@ export default function Services(
 	return (
 		<>
 			{Object.keys(services).map((service) => (
-
 				service?.includes('service') || service?.includes('platform_fee')
 					? (
 						<div

@@ -17,7 +17,7 @@ const getPayload = ({
 });
 
 const useListTickets = ({ serialId = '', page = '' }) => {
-	const [{ data, loading }, trigger] = useTicketsRequest({
+	const [{ data = {}, loading = false }, trigger] = useTicketsRequest({
 		url     : '/list',
 		method  : 'get',
 		authkey : 'get_tickets_list',

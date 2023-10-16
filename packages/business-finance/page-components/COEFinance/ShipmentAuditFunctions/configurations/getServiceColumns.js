@@ -7,9 +7,9 @@ const DOC_LENGTH = 6;
 const TRUNCATED_UPTO = 2;
 
 const getServiceColumns = ({ currentKey = '', item = {} }) => {
-	const { changedItems = [] } = item;
-	const isModified = currentKey.includes('MODIFIED');
-	const changes = changedItems.map((it) => it.code);
+	const { changedItems = [] } = item || {};
+	const isModified = currentKey?.includes('MODIFIED');
+	const changes = changedItems?.map((it) => it?.code);
 
 	const columns = [
 		{

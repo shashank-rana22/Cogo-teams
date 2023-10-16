@@ -4,7 +4,7 @@ import { useCallback, useEffect } from 'react';
 import toastApiError from '../../commons/toastApiError.ts';
 
 function useGetShipmentSummary({ jobId = '' }) {
-	const [{ loading, data }, trigger] = useRequestBf({
+	const [{ loading = false, data = {} }, trigger] = useRequestBf({
 		url     : '/common/job-profitability/shipment-summary',
 		method  : 'GET',
 		authKey : 'get_common_job_profitability_shipment_summary',

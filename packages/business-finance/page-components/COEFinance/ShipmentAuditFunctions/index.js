@@ -63,14 +63,11 @@ function ShipmentAuditFunction({
 	};
 
 	const handleClick = ({
-		jobId = '', jobNumber = '', kamMargin = '',
-		rdWallet = '', currency = '',
+		jobId = '', jobNumber = '', currency = '',
 	}) => {
 		push(
 			`/business-finance/coe-finance/${activeTab}/audit?job_id=${jobId}&job_number=${jobNumber}`,
 		);
-		window.sessionStorage.setItem('kam_margin', kamMargin);
-		window.sessionStorage.setItem('rd_wallet', rdWallet);
 		window.sessionStorage.setItem('currency', currency);
 	};
 

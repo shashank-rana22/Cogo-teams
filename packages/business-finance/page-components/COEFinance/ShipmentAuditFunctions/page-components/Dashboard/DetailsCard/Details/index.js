@@ -50,7 +50,7 @@ function Details({
 	dataList = DEFAULT_VALUE,
 	shipmentId = '',
 }) {
-	const { importer_exporter: importerExporter } = dataList || {};
+	const { importer_exporter: importerExporter = {} } = dataList || {};
 	const Router = useRouter();
 
 	const { shipment_type:shipmentType } = dataList || {};

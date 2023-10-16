@@ -188,8 +188,6 @@ const getFinancialCloseColumns = ({
 							jobId     : row?.jobId,
 							jobNumber : row?.jobNumber,
 							currency  : row?.currency,
-							rdWallet  : row?.rdWalletUtilizationAmount,
-							kamMargin : row?.kamMarginUtilizationAmount,
 						})}
 					>
 						Audit

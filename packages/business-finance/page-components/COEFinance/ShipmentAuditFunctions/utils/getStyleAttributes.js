@@ -1,5 +1,5 @@
 export const getTimelineClassNames = (quotationStatus, accordionState, currentAccordion, styles) => {
-	const currentAccordionState = accordionState[currentAccordion];
+	const currentAccordionState = accordionState?.[currentAccordion];
 
 	if (currentAccordionState && !quotationStatus) {
 		return styles.black;

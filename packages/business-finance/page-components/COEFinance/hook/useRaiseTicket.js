@@ -8,7 +8,7 @@ const useRaiseTicket = ({
 	service = {},
 }) => {
 	const { profile } = useSelector((state) => state);
-	const [{ loading }, trigger] = useTicketsRequest({
+	const [{ loading = false }, trigger] = useTicketsRequest({
 		url     : '/ticket',
 		method  : 'post',
 		authkey : 'post_tickets_ticket',
@@ -25,8 +25,8 @@ const useRaiseTicket = ({
 		const { finalUrl = '' } = supporting_document || {};
 
 		const {
-			serial_id,
-			trade_type,
+			serial_id = '',
+			trade_type = '',
 		} = shipmentData || {};
 
 		try {
@@ -53,14 +53,16 @@ const useRaiseTicket = ({
 			});
 
 			setShowTicketModal(false);
-
 			Toast.success('Successfully Created');
 		} catch (error) {
 			Toast.error(error?.response?.data);
 		}
 	};
 
-	return { raiseTickets, loading };
+	return {
+		raiseTickets,
+		loading,
+	};
 };
 
 export default useRaiseTicket;

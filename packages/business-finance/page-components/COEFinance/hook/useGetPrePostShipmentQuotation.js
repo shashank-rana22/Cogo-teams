@@ -6,7 +6,7 @@ import toastApiError from '../../commons/toastApiError.ts';
 const useGetPrePostShipmentQuotation = ({
 	jobId = '',
 }) => {
-	const [{ data, loading }, trigger] = useRequestBf(
+	const [{ data = {}, loading = false }, trigger] = useRequestBf(
 		{
 			url     : 'common/job/pre-post-shipment-quotation',
 			method  : 'get',
