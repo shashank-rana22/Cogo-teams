@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect } from 'react';
 
 import usePaymentsSettlementCheck from '../../../hooks/usePaymentsSettlementCheck';
-import CreateJvModal from '../../JournalVoucher/CreateJvModal/index.tsx';
+import CreateJvModal from '../../JournalVoucher/CreateJvModal/index';
 
 import Header from './Header';
 import getLineItems from './LineItems';

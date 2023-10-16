@@ -5,7 +5,7 @@ import { IcMInfo } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { getSalesFunnelOptions } from '../../../constants/index.ts';
+import { getSalesFunnelOptions } from '../../../constants/index';
 
 import styles from './styles.module.css';
 
@@ -107,7 +107,6 @@ function SalesFunnel({
 					<Placeholder className={styles.sales_sub_funnel_lower_loader} />
 
 				</div>
-
 			)))
 
 				: (salesFunnel.map((item) => (

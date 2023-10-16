@@ -5,7 +5,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	StatsKeyMapping,
 	StatsKeyMappingPayment,
-} from '../../../../../constants/index.ts';
+} from '../../../../../constants/index';
 
 import styles from './styles.module.css';
 
@@ -78,11 +78,11 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 									>
 										{formatAmount({
 											amount:
-											invoiceObject.LedgerAmount
-												?.ledgerAmount || DEFAULT_AMOUNT,
+												invoiceObject.LedgerAmount
+													?.ledgerAmount || DEFAULT_AMOUNT,
 											currency:
-											invoiceObject.LedgerAmount
-												?.ledgerCurrency || currency,
+												invoiceObject.LedgerAmount
+													?.ledgerCurrency || currency,
 											options: {
 												style                 : 'currency',
 												currencyDisplay       : 'code',
@@ -100,18 +100,18 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 									{(invoiceObject.statsKey || []).map((val) => (
 										<div key={val.label} className={styles.label}>
 											<div className={cl`${invoiceType
-										&& invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount
-										<= DEFAULT_AMOUNT ? styles.account : styles.amount}`}
+											&& invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount
+											<= DEFAULT_AMOUNT ? styles.account : styles.amount}`}
 											>
 												{formatAmount({
 													amount:
-													invoiceObject.ageingBucket[
-														val.valueKey
-													]?.ledgerAmount || DEFAULT_AMOUNT,
+														invoiceObject.ageingBucket[
+															val.valueKey
+														]?.ledgerAmount || DEFAULT_AMOUNT,
 													currency:
-													invoiceObject.ageingBucket[
-														val.valueKey
-													]?.ledgerCurrency || currency,
+														invoiceObject.ageingBucket[
+															val.valueKey
+														]?.ledgerCurrency || currency,
 													options: {
 														style                 : 'currency',
 														currencyDisplay       : 'code',
@@ -166,7 +166,7 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 						<div className={styles.flex_column}>
 							<div className={styles.label_outstanding}>Total Outstanding</div>
 							<div className={cl`${totalOutstanding.ledgerAmount
-								> DEFAULT_AMOUNT ? styles.amountout
+							> DEFAULT_AMOUNT ? styles.amountout
 								: styles.negative_amountout} ${styles.common_amountout}`}
 							>
 								{formatAmount({

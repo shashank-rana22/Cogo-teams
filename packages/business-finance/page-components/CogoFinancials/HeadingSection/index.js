@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlatformDemo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import SegmentedControl from '../../commons/SegmentedControl/index.tsx';
+import SegmentedControl from '../../commons/SegmentedControl/index';
 import { getTimeRangeOptions } from '../constants';
 import MultipleFilters from '../MultipleFilters';
 

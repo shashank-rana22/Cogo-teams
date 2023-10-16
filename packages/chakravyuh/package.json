@@ -4,7 +4,6 @@
   "description": "Cogoport dynamic pricing engine",
   "private": true,
   "main": "./index.js",
-  "types": "./index.js",
   "dependencies": {
     "@amcharts/amcharts5": "^5.4.1",
     "@cogoport/charts": "^1.0.1",

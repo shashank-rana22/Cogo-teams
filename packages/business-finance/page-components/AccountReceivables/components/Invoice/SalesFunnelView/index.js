@@ -5,8 +5,8 @@ import { IcMInfo } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
-import SegmentedControl from '../../../../commons/SegmentedControl/index.tsx';
-import { SERVICE_PROVIDER, SHIPMENT_TYPE_OPTIONS, getSalesFunnelOptions } from '../../../constants/index.ts';
+import SegmentedControl from '../../../../commons/SegmentedControl/index';
+import { SERVICE_PROVIDER, SHIPMENT_TYPE_OPTIONS, getSalesFunnelOptions } from '../../../constants/index';
 import useGetSalesFunnel from '../../../hooks/useGetSalesFunnel';
 
 import styles from './styles.module.css';
