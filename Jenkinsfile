@@ -69,7 +69,7 @@ pipeline {
 
                 // build docker image for admin site and push to ecr
                 script {
-                    sh "docker image build --build-arg NPM_TOKEN=${NPM_TOKEN} -t ${ECR_URL}/admin:${COMMIT_ID} -t ${ECR_URL}/admin:latest-dev --target admin ."
+                    sh "docker image build --build-arg NPM_TOKEN=${NPM_TOKEN} -t ${ECR_URL}/admin:${COMMIT_ID} -t ${ECR_URL}/admin:latest-dev --target runner ."
                     sh "aws ecr get-login-password --region ap-south-1 | docker login --username ${ECR_USERNAME} --password-stdin ${ECR_URL}"
                     sh "docker image push ${ECR_URL}/admin:${COMMIT_ID}"
                     sh "docker image push ${ECR_URL}/admin:latest-dev || true"
