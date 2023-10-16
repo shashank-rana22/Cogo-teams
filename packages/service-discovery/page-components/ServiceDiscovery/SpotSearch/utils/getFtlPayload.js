@@ -19,8 +19,12 @@ const getFtlPayload = (values, origin, destination) => {
 		ftlFormData = {},
 	} = values;
 
+	const finalTripType = ftlFormData?.typeOfJourney || trip_type;
+
 	const ftl_touch_points = getFormattedTouchPointDataPayload({
-		...(!isEmpty(ftlFormData) ? ftlFormData : (getFtlPrefillValues({ trip_type }, touch_points) || {})),
+		...(!isEmpty(ftlFormData) ? ftlFormData : (
+			getFtlPrefillValues({ trip_type: finalTripType }, touch_points) || {})
+		),
 		location: {
 			origin,
 			destination,
@@ -36,7 +40,7 @@ const getFtlPayload = (values, origin, destination) => {
 		origin_location_id                          : origin?.id,
 		status                                      : 'active',
 		trade_type                                  : 'domestic',
-		trip_type,
+		trip_type                                   : finalTripType,
 	};
 
 	let payloadArray = [];

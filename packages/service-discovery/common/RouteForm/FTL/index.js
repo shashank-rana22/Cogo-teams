@@ -29,7 +29,7 @@ function FTLRouteForm({
 
 	const [originControls, destinationControls] = getControls(controls, mode);
 
-	const { typeOfJourney = '', touchPoints = {} } = ftlFormData || {};
+	const { typeOfJourney = 'one_way', touchPoints = {} } = ftlFormData || {};
 
 	const { one_way:oneWayTouchPoints = [], round:roundTouchPoints = [] } = touchPoints || {};
 
@@ -68,13 +68,6 @@ function FTLRouteForm({
 			return false;
 		});
 	}, [formValues]);
-
-	useEffect(() => {
-		setFtlFormData((prev) => ({
-			...prev,
-			typeOfJourney: 'one_way',
-		}));
-	}, [mode, setFtlFormData]);
 
 	return (
 		<div className={styles.container}>

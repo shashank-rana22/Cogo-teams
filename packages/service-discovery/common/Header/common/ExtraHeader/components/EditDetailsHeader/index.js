@@ -1,6 +1,6 @@
 import { Button, Toast, cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import getPrefillForm from '../../../../../../page-components/SearchResults/utils/getPrefillForm';
 import getLocationInfo from '../../../../../../page-components/SearchResults/utils/locations-search';

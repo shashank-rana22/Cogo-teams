@@ -116,8 +116,8 @@ function PortPair({ item = {}, field = {} }) {
 		});
 	};
 
-	const originPortName = origin_display_name.split(',')?.[GLOBAL_CONSTANTS.zeroth_index];
-	const destinationPortName = destination_display_name.split(',')?.[GLOBAL_CONSTANTS.zeroth_index];
+	const originPortName = origin_display_name?.split(',')?.[GLOBAL_CONSTANTS.zeroth_index];
+	const destinationPortName = destination_display_name?.split(',')?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	return (
 		<div className={styles.container}>
