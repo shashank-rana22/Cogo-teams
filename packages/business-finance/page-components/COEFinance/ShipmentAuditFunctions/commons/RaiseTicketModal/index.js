@@ -35,7 +35,7 @@ function RaiseTicketModal({
 
 	const { data = {}, loading:shipmentLoading = false } = useListShipment(id);
 
-	const shipmentData = data?.list[GLOBAL_CONSTANTS.zeroth_index];
+	const shipmentData = data?.list?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const service = (SHIPMENT_TYPES || []).find((item) => item?.value === itemData?.serviceType);
 
