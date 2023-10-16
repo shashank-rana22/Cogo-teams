@@ -1,7 +1,7 @@
 import PricePerPackage from './PricePerPackage';
 import styles from './styles.module.css';
 
-function FreightPrice({ rate = {} }) {
+function FreightPrice({ rate = {}, isContract = false }) {
 	const {
 		total_price_discounted = 0,
 		total_price_currency = 'INR',
@@ -12,7 +12,11 @@ function FreightPrice({ rate = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.price_item}>
-				<span className={styles.label}>Basic Freight Price</span>
+				<span className={styles.label}>
+					{isContract ? 'Locked' : 'Basic'}
+					{' '}
+					Freight Price
+				</span>
 
 				<PricePerPackage
 					price={freight_price_discounted}

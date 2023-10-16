@@ -1,8 +1,10 @@
 import { cl, Tooltip } from '@cogoport/components';
 import { IcCCogoCoin, IcMInfo } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import BottomTabs from './BottomTabs';
+import BottomTabs from '../../RateCard/Footer/BottomTabs';
+
 import getTabs from './getTabs';
 import styles from './styles.module.css';
 
@@ -33,6 +35,12 @@ function Footer({
 
 	const countOfNoRates = ifRatesNotAvailable(service_rates);
 
+	const contractData = Object.values(service_rates).find((service) => service.source === 'contract');
+
+	console.log('contractData', contractData);
+
+	const { truck_type = '', trucks_count = 0, rate_type = '' } = contractData;
+
 	const showCogoPoints = rate?.earnable_cogopoints;
 
 	if (isSelectedCard) {
@@ -41,7 +49,30 @@ function Footer({
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.pills_container}>
+				<div className={styles.pill}>
+					Truck type:
+					{' '}
+					<strong>{startCase(truck_type)}</strong>
+				</div>
+
+				<div className={styles.pill}>
+					Truck Count:
+					{' '}
+					<strong>{trucks_count}</strong>
+				</div>
+
+				<div className={styles.pill}>
+					Rate Type:
+					{' '}
+					<strong>{startCase(rate_type)}</strong>
+				</div>
+			</div>
 			<div className={styles.wrapper}>
+				<div className={styles.left_section}>
+					<i>Incidentals, Surcharges, any additional charges will apply as per contract terms</i>
+				</div>
+
 				<div className={styles.right_section}>
 					<div className={cl`${styles.tabs} ${showCogoPoints ? styles.less_width : styles.more_width}`}>
 						{Object.keys(TABS).map((item) => (

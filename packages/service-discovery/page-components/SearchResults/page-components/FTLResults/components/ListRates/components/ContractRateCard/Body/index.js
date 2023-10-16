@@ -1,25 +1,27 @@
-import FreightPrice from './FreightPrice';
-import ProceedButton from './ProceedButton';
+import Price from '../../RateCard/Body/Price';
+import Route from '../../RateCard/Body/Route';
+
 import styles from './styles.module.css';
 
-function Price({
+function Body({
 	rate = {},
 	detail = {},
 	isSelectedCard = false,
 	setRouterLoading = () => {},
-	isContract = false,
 }) {
 	return (
 		<div className={styles.container}>
-			<FreightPrice rate={rate} detail={detail} isContract={isContract} />
+			<Route detail={detail} rate={rate} />
 
-			<ProceedButton
+			<Price
+				detail={detail}
 				rate={rate}
 				isSelectedCard={isSelectedCard}
 				setRouterLoading={setRouterLoading}
+				isContract={rate?.source === 'contract'}
 			/>
 		</div>
 	);
 }
 
-export default Price;
+export default Body;

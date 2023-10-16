@@ -1,32 +1,18 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import ContractRateCard from '../ContractRateCard';
-
 import Body from './Body';
 import Footer from './Footer';
 import Header from './Header';
 import styles from './styles.module.css';
 
-function RateCard({
+function ContractRateCard({
 	rate = {},
 	detail = {},
 	isSelectedCard = false,
 	index = 0,
 	setRouterLoading = () => {},
 }) {
-	if (rate?.source === 'contract') {
-		return (
-			<ContractRateCard
-				rate={rate}
-				detail={detail}
-				isSelectedCard={isSelectedCard}
-				index={index}
-				setRouterLoading={setRouterLoading}
-			/>
-		);
-	}
-
 	return (
 		<div
 			className={cl`${styles.container} ${isSelectedCard && styles.selected_card}`}
@@ -55,4 +41,4 @@ function RateCard({
 	);
 }
 
-export default RateCard;
+export default ContractRateCard;

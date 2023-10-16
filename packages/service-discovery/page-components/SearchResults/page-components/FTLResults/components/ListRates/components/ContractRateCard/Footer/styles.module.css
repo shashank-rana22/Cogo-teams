@@ -9,7 +9,15 @@
 	justify-content: space-between;
 	width: 100%;
 	padding: 12px 20px;
-	background: #f3f9f9;
+	background: #fffce6;
+}
+
+.left_section {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 600;
+	color: #ee3425;
 }
 
 .right_section {
@@ -84,4 +92,22 @@
 
 .tooltip_content {
 	word-break: keep-all;
+}
+
+.pills_container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 0 16px;
+	margin-bottom: 20px;
+}
+
+.pill {
+	width: max-content;
+	padding: 4px 6px;
+	margin-right: 12px;
+	font-size: 12px;
+	background: #fef199;
+	border: 1px solid #fcdc00;
+	border-radius: 8px;
 }
