@@ -4,10 +4,10 @@ import { IcCWaitForTimeSlots, IcMArrowDoubleRight, IcCFtick } from '@cogoport/ic
 import { useRouter } from '@cogoport/next';
 import { useRef, useEffect, useContext } from 'react';
 
-import { CheckoutContext } from '../../../../../../context';
-import useUpdateCheckoutMargin from '../../../../../../hooks/useUpdateCheckoutMargin';
-import handleTimer from '../../../../../../utils/handleTimer';
-import { transformMargins } from '../../../../../../utils/transformMargins';
+import { CheckoutContext } from '../../context';
+import useUpdateCheckoutMargin from '../../hooks/useUpdateCheckoutMargin';
+import handleTimer from '../../utils/handleTimer';
+import { transformMargins } from '../../utils/transformMargins';
 
 import styles from './styles.module.css';
 import TotalCost from './TotalCost';
