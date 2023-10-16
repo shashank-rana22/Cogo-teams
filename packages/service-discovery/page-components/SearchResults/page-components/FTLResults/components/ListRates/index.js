@@ -1,4 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { Router } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
@@ -87,25 +86,21 @@ function ListRates({
 				setFilters={setFilters}
 			/>
 
-			{(rates || []).map((rateItem, index) => (
-				<div key={rateItem.id}>
-					<RateCard
-						key={rateItem.id}
-						loading={loading}
-						rate={rateItem}
-						detail={detail}
-						index={index}
-						routerLoading={routerLoading}
-					/>
+			<ContractAd
+				loading={loading}
+				importerExporterId={detail.importer_exporter_id}
+				contractDetail={contract_detail}
+			/>
 
-					{index === GLOBAL_CONSTANTS.zeroth_index ? (
-						<ContractAd
-							loading={loading}
-							importerExporterId={detail.importer_exporter_id}
-							contractDetail={contract_detail}
-						/>
-					) : null}
-				</div>
+			{(rates || []).map((rateItem, index) => (
+				<RateCard
+					key={rateItem.id}
+					loading={loading}
+					rate={rateItem}
+					detail={detail}
+					index={index}
+					routerLoading={routerLoading}
+				/>
 			))}
 
 			{!loading && page < Math.ceil(total_count / page_limit) ? (
