@@ -129,8 +129,9 @@ export default {
 			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
 			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
 			'dc5e8695-c30e-4350-9de9-8218ed1abfc4', // CCS Manager - Enterprise
-
 		],
+		supply_relations_head_role_id    : '0a623fc0-bd23-4990-b2ec-0115d3f1095b',
+		fin_ops_manager_role_id          : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
 		cp_program_manager               : '122c2266-6c55-4b97-9f61-1056f87b53a7',
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',

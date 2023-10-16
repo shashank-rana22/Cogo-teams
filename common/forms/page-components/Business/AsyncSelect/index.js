@@ -177,7 +177,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_employee_roles                  : asyncListRoles,
 	list_employee_departments            : asyncListDepartment,
 	default_types                        : asyncFieldsTicketTypes,
-	insurance_commodities              	 : asyncInsuranceCommoditiesList,
+	insurance_commodities                : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
 	list_expense_category                : asyncListExpenseCategories,
@@ -263,7 +263,7 @@ function AsyncSelect(props) {
 
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
-	const asyncOptionsHook = (microService || defaultParams.microService)
+	const asyncOptionsHook = microService || defaultParams.microService
 		? useGetAsyncOptionsMicroservice
 		: useGetAsyncOptions;
 
@@ -278,8 +278,9 @@ function AsyncSelect(props) {
 		microService : microService || defaultParams.microService,
 	});
 
-	const disabled = isSingleEntity && asyncKey === 'list_cogo_entity'
-	&& getAsyncOptionsProps?.options?.length <= SINGLE_ENTITY;
+	const disabled = isSingleEntity
+    && asyncKey === 'list_cogo_entity'
+    && getAsyncOptionsProps?.options?.length <= SINGLE_ENTITY;
 
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
@@ -290,7 +291,8 @@ function AsyncSelect(props) {
 		}
 
 		const selectedOption = getAsyncOptionsProps.options.filter(
-			(option) => option[rest.valueKey || defaultParams.valueKey || 'id'] === selectedValue,
+			(option) => option[rest.valueKey || defaultParams.valueKey || 'id']
+        === selectedValue,
 		);
 
 		getSelectedOption(selectedOption[GLOBAL_CONSTANTS.zeroth_index]);
@@ -298,14 +300,7 @@ function AsyncSelect(props) {
 
 	const Element = getElement({ type, multiple });
 
-	return (
-		<Element
-			disabled={disabled}
-			{...getAsyncOptionsProps}
-			{...rest}
-
-		/>
-	);
+	return <Element disabled={disabled} {...getAsyncOptionsProps} {...rest} />;
 }
 
 export default AsyncSelect;

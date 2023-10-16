@@ -6,7 +6,7 @@ import {
 	IcMOverview,
 	IcMArrowRotateUp,
 } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useInvoiceDetails from '../../hooks/useGetinvoiceTimeline';
@@ -48,6 +48,8 @@ function InvoiceDetails({
 			[key]: !previousActions[key],
 		}));
 	};
+
+	const { cancelledEInvoiceDetails = {} } = data || {};
 
 	return (
 		<>
@@ -333,7 +335,8 @@ function InvoiceDetails({
 																		/>
 																)}
 																{label
-																	=== 'Cancellation Agreement' && (
+																	=== 'Cancellation Agreement'
+																	&& !isEmpty(cancelledEInvoiceDetails) && (
 																		<CancellationAgreement
 																			data={
 																			data
