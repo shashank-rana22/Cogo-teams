@@ -3,7 +3,7 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import Filter from '../../../../commons/Filters/index.tsx';
+import Filter from '../../../../commons/Filters/index';
 import { INNER_TAB_MAPPING, TAB_NAME } from '../../constants';
 import useGetEntityBanks from '../../hooks/useGetEntityBank';
 import PayrunButtons from '../PayrunButtons/index';
