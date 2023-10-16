@@ -42,7 +42,7 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# RUN yarn global add pnpm@7.5.2 && pnpm run build
+RUN yarn global add pnpm@7.5.2 && pnpm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
@@ -72,14 +72,9 @@ EXPOSE 4160
 ENV PORT 4160
 ENV HOSTNAME "0.0.0.0"
 
-CMD ["node", "./packages/project-partner/server.js"]
+CMD ["node", "/app/cogo-control/server.js"]
 
 
-# FROM node:18-bullseye-slim as partner
-# WORKDIR /app
-# COPY . .
-# WORKDIR /app/packages/project-partner
-# CMD ["node","server/index.js"]
 
 
 # FROM node:18-bullseye-slim as admin
