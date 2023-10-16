@@ -14,8 +14,8 @@ jobs:
     uses: ./.github/workflows/reusable-run-setup.yml
     secrets: inherit
     with:
-      platform: cogo-action-runner
-  
+      platform: cogo-action-xlarge-runner
+
   lint:
     name: Test
     needs: [init]
