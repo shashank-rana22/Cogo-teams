@@ -11,7 +11,7 @@ function SearchInput({
 	placeholder = '',
 	size = 'md',
 	onReset = () => {},
-	showPrefix = true,
+	showPrefix = false,
 	...rest
 }) {
 	return (
