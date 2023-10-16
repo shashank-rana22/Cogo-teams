@@ -1,8 +1,6 @@
 import { cl } from '@cogoport/components';
 import { IcMRoundtrip, IcMUp } from '@cogoport/icons-react';
 
-import LikeDislike from '../../../../../../../common/LikeDislike';
-
 import styles from './styles.module.css';
 
 const IMAGE_MAPPING = {
@@ -29,29 +27,23 @@ function Header({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.left_section}>
-				<div className={styles.contract}>
-					<span className={styles.contract_tag}>Contract</span>
+			<div className={styles.contract}>
+				<span className={styles.contract_tag}>Contract</span>
 
-					<span>
-						#
-						{contractData?.contract_reference_id}
-					</span>
-				</div>
-
-				<div className={styles.trip_type_container}>
-					{ImageComponent ? (
-						<ImageComponent className={cl`${styles.trip_type_icon} ${styles[trip_type]}`} />
-					) : null}
-
-					<span className={styles.trip_type_label}>
-						{LABEL_MAPPING[trip_type]}
-					</span>
-				</div>
+				<span>
+					#
+					{contractData?.contract_reference_id}
+				</span>
 			</div>
 
-			<div className={styles.right_section}>
-				<LikeDislike rateCardData={rate} detail={detail} />
+			<div className={styles.trip_type_container}>
+				{ImageComponent ? (
+					<ImageComponent className={cl`${styles.trip_type_icon} ${styles[trip_type]}`} />
+				) : null}
+
+				<span className={styles.trip_type_label}>
+					{LABEL_MAPPING[trip_type]}
+				</span>
 			</div>
 		</div>
 	);
