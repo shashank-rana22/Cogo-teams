@@ -176,20 +176,24 @@ function getColumns({
 				</div>
 			),
 			accessor: (row) => {
-				const { createdAt } = row || {};
+				const { createdAt = '' } = row || {};
+				const [date, time] = createdAt?.split(' ') || [];
+				const [day, month, year] = date.split('-');
+				const reversedDate = `${year}-${month}-${day} ${time}`;
+
 				return (
 					<>
 						<div className={styles.time}>
-							{createdAt ? formatDate({
-								date: createdAt,
+							{date ? formatDate({
+								date: reversedDate,
 								dateFormat:
 									GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 								formatType: 'date',
 							}) : '_'}
 						</div>
 						<div>
-							{createdAt ? formatDate({
-								date       : createdAt,
+							{time ? formatDate({
+								date       : reversedDate,
 								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 								formatType : 'time',
 							}) : '_'}

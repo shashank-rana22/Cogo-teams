@@ -10,7 +10,12 @@ import ViewRequested from '../accessorComponent/ViewRequested';
 import SortData from './SortData';
 import styles from './styles.module.css';
 
-const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refetch }) => [
+const requestedColumn = ({
+	isSortActive,
+	setIsSortActive,
+	setGlobalFilters,
+	refetch,
+}) => [
 	{
 		Header   : <div>INCIDENT ID</div>,
 		id       : 'referenceId',
@@ -35,11 +40,9 @@ const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refe
 		Header   : <div>REQUEST TYPE</div>,
 		id       : 'type',
 		accessor : (row) => (
-
 			<div className={styles.request_type}>
 				{startCase(getByKey(row, 'type'))}
 			</div>
-
 		),
 	},
 	{
@@ -48,34 +51,51 @@ const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refe
 		id       : 'request_sub_type',
 	},
 	{
-		Header:
-	<div>
-		<SortData isSortActive={isSortActive} setIsSortActive={setIsSortActive} setGlobalFilters={setGlobalFilters} />
-	</div>,
+		Header: (
+			<div>
+				<SortData
+					isSortActive={isSortActive}
+					setIsSortActive={setIsSortActive}
+					setGlobalFilters={setGlobalFilters}
+				/>
+			</div>
+		),
 		id       : 'createdAt',
 		accessor : (row) => {
-			const { createdAt } = row;
+			const { createdAt = '' } = row || {};
+			const [date, time] = createdAt?.split(' ') || [];
+			const [day, month, year] = date.split('-');
+			const reversedDate = `${year}-${month}-${day} ${time}`;
+
 			return (
-				<div>
-					{formatDate({
-						date: createdAt,
-						dateFormat:
-							GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-						formatType : 'date',
-					})}
-					<div>
-						{formatDate({
-							date: createdAt,
-							timeFormat:
-								GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-							formatType: 'time',
-						})}
+				<>
+					<div className={styles.time}>
+						{date
+							? formatDate({
+								date: reversedDate,
+								dateFormat:
+										GLOBAL_CONSTANTS.formats.date[
+											'dd MMM yyyy'
+										],
+								formatType: 'date',
+							})
+							: '_'}
 					</div>
-				</div>
+					<div>
+						{time
+							? formatDate({
+								date: reversedDate,
+								timeFormat:
+										GLOBAL_CONSTANTS.formats.time[
+											'hh:mm aaa'
+										],
+								formatType: 'time',
+							})
+							: '_'}
+					</div>
+				</>
 			);
 		},
-
 	},
 	{
 		Header   : <div>STATUS</div>,
@@ -96,7 +116,6 @@ const requestedColumn = ({ isSortActive, setIsSortActive, setGlobalFilters, refe
 			<div>
 				<ViewRequested itemData={row} name="" refetch={refetch} />
 			</div>
-
 		),
 	},
 	{
