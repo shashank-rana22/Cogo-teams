@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { useRef, useState } from 'react';
 
 import useUpdateJobAuditStatus from '../../../hook/useUpdateJobAuditStatus';
@@ -12,10 +11,6 @@ import styles from './styles.module.css';
 function Dashboard() {
 	const { query: { active_tab = '', job_id = '' }, push = () => {} } = useRouter();
 
-	const { partner: { id = '' } } = useSelector(({ profile }) => ({
-		partner: profile?.partner,
-	}));
-
 	const [quotationsData, setQuotationsData] = useState({
 		prePostCheckoutData : {},
 		oprClosedData       : {},
@@ -23,24 +18,26 @@ function Dashboard() {
 	});
 
 	const getPrePostShipmentQuoteRef = useRef(null);
+	const auditStatus = window.sessionStorage.getItem('audit_status');
 
 	const {
 		updateJobAuditStatus,
 		loading,
-	} = useUpdateJobAuditStatus({ getPrePostShipmentQuote: getPrePostShipmentQuoteRef.current });
+	} = useUpdateJobAuditStatus({ getPrePostShipmentQuote: getPrePostShipmentQuoteRef.current, active_tab });
 
 	const { bttnDisableCondition } = getApproveJobAuditBttnCondition({ quotationsData });
 
 	const handleClick = () => {
 		window.sessionStorage.removeItem('currency');
+		window.sessionStorage.removeItem('audit_status');
 
 		if (active_tab === 'financial_close') {
 			push(
-				`/${id}/business-finance/coe-finance/financial_close`,
+				'/business-finance/coe-finance/financial_close',
 			);
 		} else {
 			push(
-				`/${id}/business-finance/coe-finance/operational_close`,
+				'/business-finance/coe-finance/operational_close',
 			);
 		}
 	};
@@ -52,24 +49,28 @@ function Dashboard() {
 
 				<div className={styles.actions}>
 					<div>
-						<Button
-							size="md"
-							themeType="secondary"
-							disabled={loading}
-							onClick={() => updateJobAuditStatus({ jobId: job_id, status: 'PARTIALLY_AUDITED' })}
-						>
-							Save Changes
-						</Button>
+						{auditStatus !== 'audited' && (
+							<Button
+								size="md"
+								themeType="secondary"
+								disabled={loading}
+								onClick={() => updateJobAuditStatus({ jobId: job_id, status: 'PARTIALLY_AUDITED' })}
+							>
+								Save Changes
+							</Button>
+						)}
 					</div>
 					<div className={styles.header_button}>
-						<Button
-							size="md"
-							themeType="primary"
-							disabled={!bttnDisableCondition || loading}
-							onClick={() => updateJobAuditStatus({ jobId: job_id, status: 'AUDITED' })}
-						>
-							Approve
-						</Button>
+						{auditStatus !== 'audited' && (
+							<Button
+								size="md"
+								themeType="primary"
+								disabled={!bttnDisableCondition || loading}
+								onClick={() => updateJobAuditStatus({ jobId: job_id, status: 'AUDITED' })}
+							>
+								Approve
+							</Button>
+						)}
 					</div>
 				</div>
 			</div>

@@ -26,7 +26,7 @@ function ShipmentAuditFunction({
 	activeTab = '',
 	entityCode = '',
 }) {
-	const { push } = useRouter();
+	const { push = () => {} } = useRouter();
 
 	const [subActiveTab, setSubActiveTab] = useState('to_be_audited');
 	const [tradeTab, setTradeTab] = useState('');
@@ -69,6 +69,7 @@ function ShipmentAuditFunction({
 			`/business-finance/coe-finance/${activeTab}/audit?job_id=${jobId}&job_number=${jobNumber}`,
 		);
 		window.sessionStorage.setItem('currency', currency);
+		window.sessionStorage.setItem('audit_status', subActiveTab);
 	};
 
 	const handleSubTabChange = (tab) => {

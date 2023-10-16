@@ -51,7 +51,7 @@ function Details({
 	shipmentId = '',
 }) {
 	const { importer_exporter: importerExporter = {} } = dataList || {};
-	const Router = useRouter();
+	const { push = () => {} } = useRouter();
 
 	const { shipment_type:shipmentType } = dataList || {};
 
@@ -82,7 +82,7 @@ function Details({
 				</div>
 				<div
 					className={styles.flex_div}
-					onClick={() => Router.push(`/booking/${SHIPMENT_ROUTE_MAPPING[shipmentType]}/${shipmentId}`)}
+					onClick={() => push(`/booking/${SHIPMENT_ROUTE_MAPPING[shipmentType]}/${shipmentId}`)}
 					role="presentation"
 				>
 					Go to SID →

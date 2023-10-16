@@ -1,10 +1,13 @@
 import { Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
-// import { useSelector } from '@cogoport/store';
 
 import toastApiError from '../../commons/toastApiError.ts';
 
-const useUpdateJobAuditStatus = ({ getPrePostShipmentQuotes = () => {} }) => {
+const useUpdateJobAuditStatus = ({
+	active_tab = '',
+}) => {
+	const { push = () => {} } = useRouter();
 	const [{ loading = false }, trigger] = useRequestBf({
 		url     : '/common/job-profitability/audit-job-profitability',
 		method  : 'POST',
@@ -17,7 +20,15 @@ const useUpdateJobAuditStatus = ({ getPrePostShipmentQuotes = () => {} }) => {
 				data: { ...params },
 			});
 			Toast.success('Success');
-			getPrePostShipmentQuotes();
+			if (active_tab === 'financial_close') {
+				push(
+					'/business-finance/coe-finance/financial_close',
+				);
+			} else {
+				push(
+					'/business-finance/coe-finance/operational_close',
+				);
+			}
 		} catch (err) {
 			toastApiError(err);
 		}
