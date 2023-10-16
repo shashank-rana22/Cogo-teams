@@ -66,7 +66,11 @@ pipeline {
             }
             steps {
                 office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Starting to build admin for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** for user **${PUSHER_NAME}** on server ${SERVER_NAME}", color: '#3366ff'
-
+                script{
+                    sh "scp -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} -P ${SSH_PORT} ${SERVER_NAME}@${SERVER_IP}:/home/${SERVER_NAME}/.env.admin .env"
+					sh "sed -i '/NODE_ENV=production/d' .env"
+					}
+                }
                 // build docker image for admin site and push to ecr
                 script {
                     sh "docker image build --build-arg NPM_TOKEN=${NPM_TOKEN} -t ${ECR_URL}/admin:${COMMIT_ID} -t ${ECR_URL}/admin:latest-dev --target runner ."
