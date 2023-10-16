@@ -26,6 +26,6 @@ export const SOURCE_OPTIONS = {
 };
 
 export const DEFAULT_RATE_JOBS_FILTERS = {
-	source  : ['live_booking'],
+	source  : [],
 	service : 'fcl_freight',
 };

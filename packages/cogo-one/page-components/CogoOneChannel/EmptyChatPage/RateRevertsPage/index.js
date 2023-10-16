@@ -18,9 +18,14 @@ function RateRevertsPage({
 		params = {},
 		rateJobsData = {},
 		loading = false,
+		fetchRateJobs = () => {},
 	} = useListRateJobs();
 
-	const { total_count = 0, page = 1, list = [] } = rateJobsData || {};
+	const {
+		total_count = 0,
+		page = 1,
+		list = [],
+	} = rateJobsData || {};
 
 	return (
 		<>
@@ -44,6 +49,7 @@ function RateRevertsPage({
 						list={list}
 						mailProps={mailProps}
 						setActiveTab={setActiveTab}
+						fetchRateJobs={fetchRateJobs}
 					/>
 				)}
 			</div>

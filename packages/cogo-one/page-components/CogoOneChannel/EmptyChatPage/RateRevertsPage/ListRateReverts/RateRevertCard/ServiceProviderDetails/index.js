@@ -1,4 +1,5 @@
-import { Button, Pill, Popover } from '@cogoport/components';
+import { Button, Pill, Popover, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo, IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -34,24 +35,75 @@ function ServiceProviderDetails({
 	return (
 		<div className={styles.container}>
 			<div className={styles.service_details}>
-				<div className={styles.details_container}>
-					<div className={styles.provider_name}>
-						{short_name || business_name}
+				<Tooltip
+					placement="bottom"
+					className={styles.tooltip_container}
+					delay={[500, 0]}
+					content={(
+						<>
+							<div className={styles.tooltip_data}>
+								<span>Service Provider :</span>
+								{short_name || business_name || '-'}
+							</div>
+							<div className={styles.tooltip_data}>
+								<span>Service Provider Poc :</span>
+								{name || '-'}
+							</div>
+						</>
+					)}
+				>
+					<div className={styles.details_container}>
+						<div className={styles.provider_name}>
+							{short_name || business_name}
+						</div>
+						<div className={styles.poc_name}>
+							{name}
+						</div>
 					</div>
-					<div className={styles.poc_name}>
-						{name}
-					</div>
-				</div>
+				</Tooltip>
 
 				<div className={styles.actions_container}>
 					<Pill
 						size="sm"
 						color="#F7FAEF"
 					>
-						{startCase(sources)}
+						{startCase(sources?.[GLOBAL_CONSTANTS.zeroth_index])}
 					</Pill>
 
+					{sources.length > 1 ? (
+						<Tooltip
+							placement="bottom"
+							delay={[300, 0]}
+							content={((sources?.slice(1) || [])?.map(
+								(itm) => (
+									<Pill
+										key={itm}
+										size="sm"
+										color="#F7FAEF"
+									>
+										{startCase(itm)}
+									</Pill>
+								),
+							)
+							)}
+						>
+							<Pill
+								size="sm"
+								color="#F7FAEF"
+							>
+								+
+								{sources.length - 1}
+								{' '}
+								more
+							</Pill>
+						</Tooltip>
+					) : null}
+
 					<Popover
+						placement="left"
+						interactive
+						onClickOutside={() => setShipmentPopover({})}
+						visible={shipmentPopover?.id === id}
 						render={(
 							<ShipmentInfoDetail
 								shipmentId={shipment_id}
@@ -59,10 +111,6 @@ function ServiceProviderDetails({
 								shipmentPopover={shipmentPopover}
 							/>
 						)}
-						placement="left"
-						interactive
-						onClickOutside={() => setShipmentPopover({})}
-						visible={shipmentPopover?.id === id}
 					>
 						<div
 							role="presentation"
@@ -80,11 +128,23 @@ function ServiceProviderDetails({
 						visible={(assignData?.revertDetails?.id === cardData?.id) && assignData?.showPopover}
 						placement="bottom"
 						interactive
+						onClickOutside={() => {
+							if ((assignData?.revertDetails?.id === cardData?.id) && assignData?.showPopover) {
+								setAssignData(
+									(prev) => ({
+										...prev,
+										revertDetails : {},
+										showPopover   : false,
+									}),
+								);
+							}
+						}}
 						render={(
 							<Button
 								themeType="secondary"
 								onClick={(e) => {
 									e.stopPropagation();
+
 									setAssignData(
 										(prev) => ({
 											...prev,
@@ -119,9 +179,12 @@ function ServiceProviderDetails({
 			</div>
 
 			<div className={styles.categories}>
-				{category_types?.reduce((acc, itm, index) => (
-					`${acc}${startCase(itm)}${index !== category_types.length - INDEX_STEP ? ', ' : ''}`
-				), '')}
+				{category_types?.reduce(
+					(acc, itm, index) => (
+						`${acc}${startCase(itm)}${index !== category_types.length - INDEX_STEP ? ', ' : ''}`
+					),
+					'',
+				)}
 			</div>
 		</div>
 	);

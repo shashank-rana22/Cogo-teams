@@ -19,6 +19,7 @@ const API_NAME = {
 function useUpdateSMTRateJob({
 	serviceType = '',
 	setAssignData = () => {},
+	fetchRateJobs = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : `${API_NAME[serviceType]}`,
@@ -39,6 +40,9 @@ function useUpdateSMTRateJob({
 			});
 
 			Toast.success('User update Successful');
+
+			fetchRateJobs();
+
 			setAssignData(() => ({
 				assignUser : '',
 				show       : false,

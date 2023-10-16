@@ -9,6 +9,10 @@
 .service_details {
 	display: flex;
 	width: 100%;
+
+	>div[aria-label="tooltip"] {
+		width: 60%;
+	}
 }
 
 .categories {
@@ -19,7 +23,7 @@
 .details_container {
 	display: flex;
 	align-items: center;
-	width: 60%;
+	width: 100%;
 	overflow: hidden;
 }
 
@@ -74,4 +78,17 @@
 
 .wrap {
 	display: flex;
+}
+
+.tooltip_data {
+	font-size: 12px;
+
+	span {
+		padding-right: 4px;
+		font-weight: 600;
+	}
+}
+
+.tooltip_container {
+	max-width: 300px !important;
 }

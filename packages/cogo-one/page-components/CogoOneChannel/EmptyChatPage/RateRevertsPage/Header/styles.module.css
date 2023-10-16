@@ -23,7 +23,7 @@
 .selected_sources {
 	display: flex;
 	align-items: center;
-	width: calc(72% - 30px);
+	width: calc(74% - 30px);
 	overflow: auto;
 
 	&::-webkit-scrollbar {

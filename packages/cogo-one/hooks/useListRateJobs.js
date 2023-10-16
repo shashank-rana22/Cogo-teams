@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-import { SOURCE_OPTIONS, DEFAULT_RATE_JOBS_FILTERS } from '../constants/rateRevertsConstants';
+import { DEFAULT_RATE_JOBS_FILTERS } from '../constants/rateRevertsConstants';
 
 const getPayload = ({ params }) => ({
 	all_jobs_required : true,
@@ -10,7 +10,7 @@ const getPayload = ({ params }) => ({
 	page_limit        : 6,
 	page              : params?.page || 1,
 	filters           : {
-		source : params?.source || Object.keys(SOURCE_OPTIONS),
+		source : params?.source || undefined,
 		status : 'pending',
 	},
 });
@@ -37,7 +37,7 @@ const useListRateJobs = () => {
 	);
 
 	useEffect(() => {
-		fetchRateJobs({});
+		fetchRateJobs();
 	}, [fetchRateJobs]);
 
 	return {

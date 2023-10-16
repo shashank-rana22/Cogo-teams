@@ -4,6 +4,7 @@
 	align-items: flex-start;
 	justify-content: flex-start;
 	width: 49%;
+	height: fit-content;
 	padding: 16px;
 	margin: 4px 0;
 	background: #fff;

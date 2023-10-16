@@ -8,22 +8,25 @@ import styles from './styles.module.css';
 function AssignModal({
 	assignData = {},
 	setAssignData = () => {},
+	fetchRateJobs = () => {},
 }) {
 	const { assignUser = '', revertDetails = {} } = assignData || {};
 	const {
-		serviceType = '',
+		service_type: serviceType = '',
 		id = '',
 	} = revertDetails || {};
 
 	const {
 		updateRateJob = () => {},
 		loading = false,
-	} = useUpdateSMTRateJob({ serviceType, setAssignData });
+	} = useUpdateSMTRateJob({ serviceType, setAssignData, fetchRateJobs });
 
 	const handleClose = () => {
-		setAssignData(() => ({
-			showModal  : false,
-			assignUser : '',
+		setAssignData((prev) => ({
+			...prev,
+			showModal     : false,
+			assignUser    : '',
+			revertDetails : {},
 		}));
 	};
 
@@ -40,10 +43,12 @@ function AssignModal({
 			scroll={false}
 		>
 			<Modal.Header title="Assign" />
+
 			<Modal.Body>
 				<div className={styles.label}>
 					Select User
 				</div>
+
 				<AsyncSelect
 					value={assignUser}
 					placeholder="Select user"
@@ -65,6 +70,7 @@ function AssignModal({
 					)}
 				/>
 			</Modal.Body>
+
 			<Modal.Footer>
 				<Button
 					themeType="tertiary"
@@ -73,6 +79,7 @@ function AssignModal({
 				>
 					Cancel
 				</Button>
+
 				<Button
 					themeType="primary"
 					onClick={handleSubmit}

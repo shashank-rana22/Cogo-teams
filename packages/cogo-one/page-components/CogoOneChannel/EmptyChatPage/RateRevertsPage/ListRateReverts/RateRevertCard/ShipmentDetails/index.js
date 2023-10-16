@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -26,9 +26,15 @@ function PortDetails({ details = {} }) {
 				)
 			</div>
 
-			<div className={styles.country_name}>
-				{details?.name}
-			</div>
+			<Tooltip
+				placement="bottom"
+				delay={[500, 0]}
+				content={details?.name}
+			>
+				<div className={styles.country_name}>
+					{details?.name}
+				</div>
+			</Tooltip>
 		</div>
 	);
 }
@@ -110,7 +116,15 @@ function ShipmentDetails({ cardData = {}, handleOpenMessage = () => {} }) {
 							return null;
 						}
 
-						return <Pill size="sm" color="#FEF3E9" key={label}>{value}</Pill>;
+						return (
+							<Pill
+								size="sm"
+								color="#FEF3E9"
+								key={label}
+							>
+								{value}
+							</Pill>
+						);
 					},
 				)}
 			</div>

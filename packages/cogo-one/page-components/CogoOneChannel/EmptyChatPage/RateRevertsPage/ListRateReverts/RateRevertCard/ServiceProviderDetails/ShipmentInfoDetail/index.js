@@ -8,14 +8,21 @@ import useGetShipment from '../../../../../../../../hooks/useGetShipment';
 import styles from './styles.module.css';
 
 function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) {
-	const { loading = false, data = {} } = useGetShipment({ shipmentId, shipmentPopover, id });
+	const {
+		loading = false,
+		data = {},
+	} = useGetShipment({ shipmentId, shipmentPopover, id });
 
 	const { primary_service_detail = {} } = data || {};
+
 	const {
 		cargo_readiness_date = '',
-		free_days_detention_destination = 0, bl_type = '',
-		commodity_description = '', estimated_departure = '',
-		selected_schedule_arrival = '', selected_schedule_departure,
+		free_days_detention_destination = 0,
+		bl_type = '',
+		commodity_description = '',
+		estimated_departure = '',
+		selected_schedule_arrival = '',
+		selected_schedule_departure,
 	} = primary_service_detail || {};
 
 	const transitTime = differenceInDays(
@@ -48,8 +55,7 @@ function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) 
 		<div className={styles.container}>
 			{cargo_readiness_date ? (
 				<div className={styles.each_content}>
-					Cargo Ready :
-					{' '}
+					Cargo Ready:
 					<span>
 						{formatDate({
 							date       : cargo_readiness_date,
@@ -60,9 +66,10 @@ function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) 
 
 				</div>
 			) : null}
+
 			{free_days_detention_destination ? (
 				<div className={styles.each_content}>
-					Destination Detention Free Days :
+					Destination Detention Free Days:
 					<span>
 						{free_days_detention_destination}
 					</span>
@@ -71,24 +78,21 @@ function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) 
 
 			{bl_type ? (
 				<div className={styles.each_content}>
-					BL Type :
-					{' '}
+					BL Type:
 					<span>{startCase(bl_type)}</span>
 				</div>
 			) : null}
 
 			{commodity_description ? (
 				<div className={styles.each_content}>
-					Commodity Description :
-					{' '}
+					Commodity Description:
 					<span>{startCase(commodity_description)}</span>
 				</div>
 			) : null}
 
 			{estimated_departure ? (
 				<div className={styles.each_content}>
-					Expected Departure :
-					{' '}
+					Expected Departure:
 					<span>
 						{formatDate({
 							date       : estimated_departure,
@@ -98,10 +102,10 @@ function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) 
 					</span>
 				</div>
 			) : null}
+
 			{transitTime ? (
 				<div className={styles.each_content}>
-					Transit Time :
-					{' '}
+					Transit Time:
 					<span>{`${transitTime} Days`}</span>
 				</div>
 			) : null}

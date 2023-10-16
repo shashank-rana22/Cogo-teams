@@ -11,6 +11,7 @@ function ListRateReverts({
 	list = [],
 	mailProps = {},
 	setActiveTab = () => {},
+	fetchRateJobs = () => {},
 }) {
 	const [shipmentPopover, setShipmentPopover] = useState({});
 	const [assignData, setAssignData] = useState({
@@ -49,11 +50,13 @@ function ListRateReverts({
 					/>
 				),
 			)}
+
 			{assignData?.showModal
 				? (
 					<AssignModal
 						assignData={assignData}
 						setAssignData={setAssignData}
+						fetchRateJobs={fetchRateJobs}
 					/>
 				)
 				: null}

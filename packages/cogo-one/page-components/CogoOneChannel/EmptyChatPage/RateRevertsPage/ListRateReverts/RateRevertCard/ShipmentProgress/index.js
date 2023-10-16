@@ -1,5 +1,5 @@
 import { IcMDummyCircle, IcMProfile, IcMCall } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import dateTimeConverter from '../../../../../../../utils/dateTimeConverter';
@@ -15,12 +15,15 @@ function ShipmentProgress({ cardData = {} }) {
 
 	const startTimeEpoch = (new Date(start_time_of_call)).getTime();
 
+	const currentTime = Date.now();
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.contact_info}>
 				<span className={styles.label}>
 					Revert Status:
 				</span>
+
 				<span className={styles.primary_data}>
 					{startCase(reverted_status)}
 				</span>
@@ -28,15 +31,16 @@ function ShipmentProgress({ cardData = {} }) {
 
 			<div className={styles.contact_info}>
 				<span className={styles.label}>
-					Agent :
+					Last Contact :
 				</span>
 
 				<IcMProfile className={styles.icon_styles} />
+
 				<span className={styles.primary_data}>
 					{startCase(name) || 'NA'}
 				</span>
 
-				{!isEmpty(call_details) ? (
+				{(endTimeEpoch || startTimeEpoch) ? (
 					<>
 						<IcMDummyCircle className={styles.dummy_circle} />
 						<IcMCall
@@ -49,8 +53,8 @@ function ShipmentProgress({ cardData = {} }) {
 							<span>
 								{
 									dateTimeConverter(
-										endTimeEpoch - startTimeEpoch,
-										startTimeEpoch,
+										currentTime - (endTimeEpoch || startTimeEpoch),
+										(endTimeEpoch || startTimeEpoch),
 									)?.renderTime
 								}
 							</span>

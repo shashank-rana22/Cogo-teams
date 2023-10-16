@@ -44,6 +44,7 @@ export const getRateCardFunction = ({
 
 	const handleSendMail = (e) => {
 		e.stopPropagation();
+
 		setButtonType('send_mail');
 
 		setEmailState(
