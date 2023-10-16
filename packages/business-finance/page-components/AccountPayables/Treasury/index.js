@@ -2,7 +2,7 @@ import { Toggle } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useEffect } from 'react';
 
-import StyledTable from '../../commons/StyledTable/index.tsx';
+import StyledTable from '../../commons/StyledTable/index';
 
 import EntityConfig from './Configuration/EntityConfig';
 import CustomTable from './CustomTable';

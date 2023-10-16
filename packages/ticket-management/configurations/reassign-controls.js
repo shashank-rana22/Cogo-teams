@@ -5,6 +5,8 @@ import {
 	useGetAsyncOptionsMicroservice,
 } from '@cogoport/forms';
 
+import StakeholderCustomOption from '../common/ReassignTicket/StakeholderCustomOption';
+
 const getShipmentTypeOption = ({ t = () => {}, requestType = '' }) => {
 	const options = [
 		{ label: t('myTickets:role'), value: 'partner-roles' },
@@ -46,6 +48,7 @@ export const useReassignTicketsControls = ({
 		value  : itm.user?.id,
 		roleId : itm?.role_id,
 		userId : itm.user?.id,
+		data   : itm,
 	}));
 
 	const ASYNC_OPTION_MAPPING = {
@@ -82,6 +85,7 @@ export const useReassignTicketsControls = ({
 			placeholder    : t('myTickets:search_by_name'),
 			onChange       : (_, obj) => setUserData(obj),
 			rules          : { required: true },
+			renderLabel    : (item) => <StakeholderCustomOption optionsLabel={item} />,
 		},
 		{
 			name           : 'comment',
