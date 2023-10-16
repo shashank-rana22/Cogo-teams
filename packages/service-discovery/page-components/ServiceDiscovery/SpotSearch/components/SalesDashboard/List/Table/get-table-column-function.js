@@ -16,14 +16,10 @@ const PERCENTAGE_FACTOR = 100;
 
 const getTableColumnFunction = (key) => {
 	const newFunction = {
-		renderButton: (data, field, router, organization, createSearch, createSearchLoading) => (
+		renderButton: (data, field) => (
 			<CustomButton
 				item={data}
 				field={field}
-				router={router}
-				organization={organization}
-				createSearch={createSearch}
-				createSearchLoading={createSearchLoading}
 			/>
 		),
 		renderSerialId: (itemData) => {

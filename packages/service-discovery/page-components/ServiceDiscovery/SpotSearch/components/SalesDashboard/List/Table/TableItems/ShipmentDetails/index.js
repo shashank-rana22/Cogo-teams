@@ -17,6 +17,7 @@ function LoadDetails({ data = {}, item = {} }) {
 		total_volume = 0,
 		total_weight = 0,
 		commodity = '',
+		cargo_handling_type = '',
 	} = data;
 
 	return (
@@ -59,6 +60,10 @@ function LoadDetails({ data = {}, item = {} }) {
 				{startCase(commodity) || 'All Commodities'}
 			</Pill>
 
+			{cargo_handling_type ? (
+				<Pill size="md" color="#F9F9F9">{startCase(cargo_handling_type)}</Pill>
+			) : null}
+
 			{item?.inco_term ? (
 				<Pill size="md" color="#FDEBE9">
 					{`Inco: ${upperCase(item.inco_term)}`}
@@ -83,7 +88,7 @@ function ShipmentDetails({ item = {}, field = {} }) {
 	) {
 		return (
 			<TruckShipments
-				item={item}
+				itemData={item}
 				commodityKey={commodityKey}
 				shipment_type={shipment_type}
 			/>
@@ -97,7 +102,7 @@ function ShipmentDetails({ item = {}, field = {} }) {
 			<LoadDetails data={firstLoadObject || {}} item={item} />
 
 			{!isEmpty(load) ? (
-				<Pill size="md" color="#F9F9F9">
+				<Pill size="md" color="#E0E0E0">
 					<Tooltip
 						placement="top"
 						content={(

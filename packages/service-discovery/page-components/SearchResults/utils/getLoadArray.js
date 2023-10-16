@@ -81,6 +81,14 @@ const getLoadArray = (search_type, serviceDetails) => {
 					containers_count           : service.containers_count,
 					trip_type                  : service.trip_type,
 				});
+			} else if (service.service_type === 'fcl_customs') {
+				LOAD.push({
+					commodity           : service.commodity,
+					container_size      : service.container_size,
+					container_type      : service.container_type,
+					containers_count    : service.containers_count,
+					cargo_handling_type : service.cargo_handling_type,
+				});
 			}
 		}
 	});

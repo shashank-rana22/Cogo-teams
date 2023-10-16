@@ -6,11 +6,16 @@ import getPrefillForm from '../../../../../../../../SearchResults/utils/getPrefi
 function CustomButton({
 	item = {},
 	field = {},
-	router = {},
-	organization = {},
-	createSearch = () => {},
-	createSearchLoading = false,
 }) {
+	const { props = {} } = field;
+
+	const {
+		router = {},
+		createSearch = () => {},
+		createSearchLoading = false,
+		organization = {},
+	} = props || {};
+
 	const { query = {} } = router;
 
 	const isNewS2C = item?.tags?.[GLOBAL_CONSTANTS.zeroth_index]?.includes('version2');
