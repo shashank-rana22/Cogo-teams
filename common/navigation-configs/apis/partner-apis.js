@@ -1093,6 +1093,11 @@ const partner = {
 	],
 	demand_crm: [
 		{
+			api          : 'get_platform_config_constant',
+			access_type  : 'private',
+			service_name : 'platform_config',
+		},
+		{
 			api          : 'create_shipment_trade_partner_organization',
 			access_type  : 'private',
 			service_name : 'organization',

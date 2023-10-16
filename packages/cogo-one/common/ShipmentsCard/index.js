@@ -1,4 +1,5 @@
 import { Pill, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 
@@ -31,6 +32,7 @@ function ShipmentsCard({
 		documents = [],
 		id: shipmentId = '',
 		last_completed_task = {},
+		agent: sales_agent = {},
 	} = shipmentItem;
 
 	const ShipmentIcon = ICONS_MAPPING[shipment_type] || null;
@@ -123,6 +125,11 @@ function ShipmentsCard({
 			<div className={styles.shipment_type_container}>
 				{ShipmentIcon && <ShipmentIcon className={styles.ship_icon} /> }
 				{startCase(shipment_type)}
+				{GLOBAL_CONSTANTS.cogoport_care_user_id === sales_agent?.id && (
+					<div className={styles.shipment_tag}>
+						Self Served
+					</div>
+				)}
 			</div>
 		</>
 	);

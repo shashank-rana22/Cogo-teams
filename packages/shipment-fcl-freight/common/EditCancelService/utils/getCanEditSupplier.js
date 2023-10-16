@@ -1,9 +1,17 @@
+import { ENTITY_IDS_MAPPING } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+const { ID } = GLOBAL_CONSTANTS.country_entity_ids;
 
 const EDIT_SUPPLIER_SERVICE_STATES = [
 	'init',
 	'awaiting_service_provider_confirmation',
 	'confirmed_by_service_provider',
+];
+
+const EDIT_SUPPLIER_SERVICE_STATES_COE_HEAD = [
+	'init',
+	'awaiting_service_provider_confirmation',
 ];
 
 const SHOW_EDIT_SUPPLIER_STAKEHOLDERS = [
@@ -20,9 +28,10 @@ const SERVICE_COMPLETED_OR_CANCELLED = ['completed', 'cancelled'];
 
 export default function getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder }) {
 	if (user_data?.id
-		&& [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
-			GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id,
-		].includes(user_data?.id)) {
+		&& ([GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id, GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id]
+			.includes(user_data?.id)
+			|| (user_data?.id === ENTITY_IDS_MAPPING[ID].coe_head
+				&& EDIT_SUPPLIER_SERVICE_STATES_COE_HEAD?.includes(state)))) {
 		return true;
 	}
 

@@ -130,6 +130,7 @@ function Customers({
 			viewType,
 			firestore,
 			loggedInAgentId : userId,
+			setActiveTab,
 		},
 	};
 

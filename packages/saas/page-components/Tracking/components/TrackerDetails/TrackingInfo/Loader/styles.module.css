@@ -1,0 +1,29 @@
+.container {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	margin-top: 20px;
+
+	@media screen and (max-width: 767px) {
+		flex-direction: column;
+	}
+}
+
+.milestone_loader {
+	width: 38%;
+}
+
+.map_loader {
+	width: 60%;
+	height: 80vh;
+	border: 1px solid #e0e0e0;
+	border-radius: 12px;
+}
+
+.card {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid #e0e0e0;
+	border-radius: 12px;
+	box-shadow: 0 6px 20px rgb(220 224 249 / 50%);
+}
