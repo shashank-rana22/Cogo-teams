@@ -1,6 +1,5 @@
 import React from 'react';
 
-import getHeaderHeight from '../../../../../../../../helpers/getHeaderHeight';
 import RequestRate from '../../../../../../common/RequestRate';
 
 import NoRatesFound from './NoRatesFound';
@@ -18,7 +17,7 @@ function EmptyState({
 	airlines = [],
 }) {
 	return (
-		<div className={styles.container} style={{ height: `calc(100vh - ${getHeaderHeight()}px)` }}>
+		<div className={styles.container}>
 			<NoRatesFound
 				details={details}
 				filters={filters}
