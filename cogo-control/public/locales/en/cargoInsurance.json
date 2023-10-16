@@ -94,5 +94,10 @@
     "err_msg_user":"Please Select User",
     "err_msg_same_point":"Origin and Destination Point cannot be the same",
     "err_msg_same_country":"Origin and Destination Point cannot be of the same country",
-    "err_msg_dest":"Select a different Destination Point"
+    "err_msg_dest":"Select a different Destination Point",
+    "package_alt":"package",
+    "secure_now":"secure now",
+    "save_as_draft":"Save As Draft",
+    "address_empty":"No Address Found",
+    "add":"Add"
 }

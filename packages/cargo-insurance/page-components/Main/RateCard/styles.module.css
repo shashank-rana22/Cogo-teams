@@ -78,3 +78,16 @@
 	background-color: #fffef7;
 	border: 1px solid #fde74d;
 }
+
+.secure_now {
+	padding: 3px 10px;
+	background: #fff;
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
+}
+
+.secure_now_text {
+	margin-right: 6px;
+	font-size: 8px;
+	color: #404040;
+}

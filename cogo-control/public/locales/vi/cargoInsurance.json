@@ -94,5 +94,10 @@
     "err_msg_user":"Vui lòng chọn người dùng",
     "err_msg_same_point":"Điểm gốc và điểm đích không thể giống nhau",
     "err_msg_same_country":"Điểm gốc và điểm đến không thể thuộc cùng một quốc gia",
-    "err_msg_dest":"Chọn một điểm đích khác"
+    "err_msg_dest":"Chọn một điểm đích khác",
+    "package_alt":"bưu kiện",
+    "secure_now":"an toàn ngay bây giờ",
+    "save_as_draft":"Lưu dưới dạng bản nháp",
+    "address_empty":"Không tìm thấy địa chỉ",
+    "add":"Thêm vào"
 }

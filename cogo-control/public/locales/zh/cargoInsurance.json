@@ -94,5 +94,10 @@
     "err_msg_user":"请选择用户",
     "err_msg_same_point":"起源和目的地不能相同",
     "err_msg_same_country":"起源和目的地不能是同一国家",
-    "err_msg_dest":"选择其他目的地"
+    "err_msg_dest":"选择其他目的地",
+    "package_alt":"包裹",
+    "secure_now":"现在确保",
+    "save_as_draft":"保存为草稿",
+    "address_empty":"找不到地址",
+    "add":"添加"
 }

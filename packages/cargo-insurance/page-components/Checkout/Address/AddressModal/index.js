@@ -41,7 +41,7 @@ function AddressModal({
 			placement={isCreate ? 'center' : 'right'}
 			closeOnOuterClick
 		>
-			<Modal.Header title={t('cargoInsurance:select_address')} />
+			<Modal.Header title={isCreate ? t('cargoInsurance:create_address') : t('cargoInsurance:select_address')} />
 
 			<div className={styles.modal_body}>
 
@@ -69,14 +69,14 @@ function AddressModal({
 						</div>
 
 						<div className={styles.footer}>
-							<Button themeType="secondary" disabled={loading}>Cancel</Button>
+							<Button themeType="secondary" disabled={loading}>{t('cargoInsurance:cancel')}</Button>
 							<Button
 								themeType="accent"
 								className={styles.submit_btn}
 								onClick={handleSubmit(submitHandler)}
 								loading={loading}
 							>
-								Add
+								{t('cargoInsurance:add')}
 							</Button>
 						</div>
 					</>

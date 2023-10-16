@@ -94,5 +94,10 @@
     "err_msg_user":"Pilih Pengguna",
     "err_msg_same_point":"Titik asal dan tujuan tidak bisa sama",
     "err_msg_same_country":"Titik asal dan tujuan tidak bisa dari negara yang sama",
-    "err_msg_dest":"Pilih titik tujuan yang berbeda"
+    "err_msg_dest":"Pilih titik tujuan yang berbeda",
+    "package_alt":"kemasan",
+    "secure_now":"aman sekarang",
+    "save_as_draft":"Simpan sebagai draf",
+    "address_empty":"Tidak ada alamat yang ditemukan",
+    "add":"Menambahkan"
 }

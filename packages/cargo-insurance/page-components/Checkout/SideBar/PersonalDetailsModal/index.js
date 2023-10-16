@@ -16,11 +16,7 @@ function PersonalDetailsModal({ detailModal = {}, setDetailModal }) {
 	const personalDetailControls = getPersonalDetailControls({ t });
 
 	const formhook = useForm();
-	const { handleSubmit, setValue } = formhook;
-
-	const submitHandler = (data) => {
-		console.log(data, 'data');
-	};
+	const { setValue } = formhook;
 
 	useEffect(() => {
 		if (!isEmpty(info)) {
@@ -48,7 +44,7 @@ function PersonalDetailsModal({ detailModal = {}, setDetailModal }) {
 					{t('cargoInsurance:cancel')}
 				</Button>
 
-				<Button themeType="accent" onClick={handleSubmit(submitHandler)}>{t('cargoInsurance:save')}</Button>
+				<Button themeType="accent">{t('cargoInsurance:save')}</Button>
 			</Modal.Footer>
 		</Modal>
 	);

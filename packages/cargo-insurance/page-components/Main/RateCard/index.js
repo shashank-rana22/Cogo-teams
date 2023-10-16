@@ -42,8 +42,20 @@ function RateCard({ data = [], loading = false, selectedRateCard, setSelectedRat
 											className={styles.pkg_img}
 											width={160}
 											height={160}
-											alt="package"
+											alt={t('cargoInsurance:package_alt')}
 										/>
+
+										<div className={styles.secure_now}>
+											<span className={styles.secure_now_text}>Powered By</span>
+											<Image
+												className={styles.secure_now_img}
+												src={GLOBAL_CONSTANTS.image_url.secure_now}
+												width={70}
+												height={10}
+												alt={t('cargoInsurance:secure_now')}
+											/>
+										</div>
+
 									</div>
 
 									<RateCardInfo info={info} />

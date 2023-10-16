@@ -82,7 +82,7 @@ function Checkout() {
 						className={styles.save_draft_btn}
 						onClick={saveAsDraft}
 					>
-						Save As Draft
+						{t('cargoInsurance:save_as_draft')}
 					</Button>
 
 					<Button

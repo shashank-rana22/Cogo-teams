@@ -80,7 +80,7 @@ function Address({ billingType, setBillingType, orgId = '', preSelectedAddress =
 			{isEmpty(mainAddress) && !loading ? (
 				<div className={styles.empty_state}>
 					<IcCVerySad width={30} height={30} />
-					<h2>No Address Found</h2>
+					<h2>{t('cargoInsurance:address_empty')}</h2>
 				</div>
 			) : null}
 
