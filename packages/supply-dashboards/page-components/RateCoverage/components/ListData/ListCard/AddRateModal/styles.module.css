@@ -27,3 +27,11 @@
 	font-size: 16px;
 	font-weight: 600;
 }
+
+.local {
+	:global {
+		.ui_tab_list_container {
+			display: none;
+		}
+	}
+}

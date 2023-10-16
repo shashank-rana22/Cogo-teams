@@ -10,6 +10,7 @@ const fclControls = ({
 	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
 	source,
+	serviceIdPresent,
 }) => {
 	const controls = [
 		{
@@ -23,7 +24,7 @@ const fclControls = ({
 			type        : 'select',
 			placeholder : 'Service Provider',
 			span        : 4,
-			value       : data?.service_provider_id,
+			value       : serviceIdPresent || data?.service_provider_id,
 			rules       : { required: 'service provider is required' },
 		},
 		{

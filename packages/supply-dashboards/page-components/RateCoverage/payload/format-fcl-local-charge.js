@@ -16,9 +16,9 @@ const HAZ_CLASSES = [
 
 const formatFclLocalCharge = (payload, value, charge) => {
 	const tradeType = charge === 'export:fcl_freight_local' ? 'export' : 'import';
-	const portId =		charge === 'export:fcl_freight_local'
-		? payload?.origin_port_id
-		: payload?.destination_port_id;
+	const portId = charge === 'export:fcl_freight_local'
+		? payload?.origin_location_id
+		: payload?.destination_location_id;
 	let main_port_id;
 	if (charge === 'export:fcl_freight_local' && payload?.origin_main_port_id) {
 		main_port_id = payload?.origin_main_port_id || undefined;

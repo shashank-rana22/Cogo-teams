@@ -4906,12 +4906,12 @@ const partner = {
 		{
 			api          : 'get_lcl_freight_rate_job_csv_url',
 			access_type  : 'private',
-			service_name : 'lcl_freight_rate',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'get_lcl_customs_rate_job_csv_url',
 			access_type  : 'private',
-			service_name : 'lcl_customs_rate',
+			service_name : 'fcl_customs_rate',
 		},
 		{
 			api          : 'get_air_customs_rate_job_csv_url',
@@ -4927,7 +4927,7 @@ const partner = {
 		{
 			api          : 'get_ltl_freight_rate_job_csv_url',
 			access_type  : 'private',
-			service_name : 'ltl_freight_rate',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'get_haulage_freight_rate_job_csv_url',

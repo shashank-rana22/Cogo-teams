@@ -21,7 +21,6 @@ import getDefaultValues from '../utilis/get-default-values';
 import showErrorsInToast from '../utilis/showErrorsInToast';
 
 import useGetChargeCodes from './useGetChargeCodes';
-import useGetRates from './useGetRates';
 
 const URL_MAPPING = {
 	add_surcharge     : '/create_air_freight_rate_surcharge',
@@ -46,8 +45,6 @@ const SERVICE_MAPPING = {
 
 const DEFAULT_VALUE = 0;
 const INCREMENT_VALUE = 1;
-const FIRST_LINE_ITEM_IDX = 0;
-const SECOND_LINE_ITEM_IDX = 1;
 
 const getPayload = ({ values, payload, charge, chargeName }) => {
 	switch (chargeName) {
@@ -82,9 +79,10 @@ const useCreateAdditionalRates = ({
 	setChargeAdded,
 	message,
 	containerDetails,
+	getStats = () => {},
+	getListCoverage = () => {},
 }) => {
 	const [errors, setErrors] = useState({});
-	const [mandatoryChargeCnt, setMandatoryChargeCnt] = useState(DEFAULT_VALUE);
 
 	const [trade_type, chargeName] = (charge !== 'add_surcharge' ? charge : ':add_surcharge').split(':');
 
@@ -101,13 +99,6 @@ const useCreateAdditionalRates = ({
 	const {
 		control, watch, handleSubmit, setValue, reset,
 	} = useForm({ defaultValues });
-
-	const { data } = useGetRates({
-		payload,
-		chargeName,
-		watch,
-		trade_type,
-	});
 
 	const service_name = SERVICE_MAPPING[chargeName] || 'fcl_cfs_charges';
 	const values = watch();
@@ -137,35 +128,32 @@ const useCreateAdditionalRates = ({
 		values,
 		chargeCodesAll,
 		cfsCharges,
-		data,
-		mandatoryChargeCnt,
 		setValue,
 	});
 
 	const freeLimitDays = watch('free_limit_days');
 	const addSlabs = watch('add_slabs');
 
-	const { user_profile } = useSelector(({ profile }) => ({
-		user_profile: profile,
-	}));
+	const { user_profile } = useSelector(({ profile }) => ({ user_profile: profile }));
 
 	const onError = (errs, e) => {
 		e.preventDefault();
 		setErrors({ ...errs });
 	};
 
-	const url = URL_MAPPING[chargeName] || '/create_fcl_freight_rate_local';
+	const url = URL_MAPPING[chargeName] || 'create_fcl_freight_rate_local';
 
 	const [{ loading }, trigger] = useRequest({ url, method: 'post' }, { manual: true });
 
 	const handleData = async (val, e) => {
 		e.preventDefault();
 		try {
-			const newValues = { ...val, procured_by_id: user_profile?.user?.id };
+			const newValues = { ...val };
 			const payloadRequired = getPayload({ values: newValues, payload, charge, chargeName });
 			const res = await trigger({
 				data: {
 					...payloadRequired,
+					procured_by_id: user_profile?.user?.id,
 				},
 			});
 			if (res?.hasError) {
@@ -175,6 +163,8 @@ const useCreateAdditionalRates = ({
 			setChargeAdded((prev) => [...prev, `${charge}${message}`]);
 			setAdditionalCharge(null);
 			reset();
+			getStats();
+			getListCoverage();
 		} catch (err) {
 			showErrorsInToast(err.data);
 		}
@@ -194,107 +184,6 @@ const useCreateAdditionalRates = ({
 			});
 		}
 	}, [freeLimitDays, JSON.stringify(addSlabs)]);
-
-	useEffect(() => {
-		if (chargeName === 'fcl_freight_local') {
-			const line_items = data?.line_items || [];
-			Object.entries(data?.local_charge_codes || {}).forEach(([code, item]) => {
-				if (item.tags.includes('mandatory')) {
-					line_items.push({
-						code,
-						label : item?.name,
-						value : code,
-						...item,
-					});
-				}
-			});
-			setMandatoryChargeCnt(line_items.length);
-			setValue('line_items', line_items);
-		} else if (chargeName === 'air_freight_local') {
-			setValue('line_items', data?.local?.line_items);
-		} else if (chargeName === 'ftl_freight') {
-			setValue('fuel_surcharge', {
-				fuel_surcharge_type  : data?.ftl_freight?.line_items[SECOND_LINE_ITEM_IDX].unit,
-				fuel_surcharge_value : data?.ftl_freight?.line_items[SECOND_LINE_ITEM_IDX].price,
-			});
-			setValue('price_per_truck', {
-				price_per_truck_type  : data?.ftl_freight?.line_items[FIRST_LINE_ITEM_IDX].unit,
-				price_per_truck_value : data?.ftl_freight?.line_items[FIRST_LINE_ITEM_IDX].price,
-			});
-		} else if (chargeName === 'ltl_freight') {
-			setValue('fuel_surcharge', {
-				fuel_surcharge_type  : data?.ltl_freight?.line_items[SECOND_LINE_ITEM_IDX].unit,
-				fuel_surcharge_value : data?.ltl_freight?.line_items[SECOND_LINE_ITEM_IDX].price,
-			});
-			setValue('freight_on_value', {
-				freight_on_value_type  : data?.ltl_freight?.line_items[FIRST_LINE_ITEM_IDX].unit,
-				freight_on_value_value : data?.ltl_freight?.line_items[FIRST_LINE_ITEM_IDX].price,
-			});
-		} else if (chargeName === 'trailer_freight') {
-			setValue('fuel_surcharge', {
-				fuel_surcharge_type  : data?.trailer_freight?.line_items[SECOND_LINE_ITEM_IDX].unit,
-				fuel_surcharge_value : data?.trailer_freight?.line_items[SECOND_LINE_ITEM_IDX].price,
-			});
-			setValue('price_per_trailer', {
-				price_per_trailer_type  : data?.trailer_freight?.line_items[FIRST_LINE_ITEM_IDX].unit,
-				price_per_trailer_value : data?.trailer_freight?.line_items[FIRST_LINE_ITEM_IDX].price,
-			});
-		} else if (chargeName === 'fcl_customs') {
-			const CUSTOMS_LINE_ITEMS = [];
-			(data?.fcl_customs?.customs_line_items || []).forEach((item) => {
-				CUSTOMS_LINE_ITEMS.push({
-					code     : item?.code,
-					currency : item?.currency,
-					price    : item?.price,
-					unit     : item?.unit,
-				});
-			});
-			const FCL_CUSTOMS_CFS = [];
-			(data?.fcl_customs?.cfs_line_items || []).forEach((item) => {
-				FCL_CUSTOMS_CFS.push({
-					code     : item?.code,
-					currency : item?.currency,
-					price    : item?.price,
-					unit     : item?.unit,
-				});
-			});
-			setValue('customs_line_items', CUSTOMS_LINE_ITEMS);
-			setValue('fcl_customs_cfs_line_items', FCL_CUSTOMS_CFS);
-		} else if (chargeName === 'air_customs') {
-			const CUSTOMS_LINE_ITEMS = [];
-			(data?.air_customs?.line_items || []).forEach((item) => {
-				CUSTOMS_LINE_ITEMS.push({
-					code     : item?.code,
-					currency : item?.currency,
-					price    : item?.price,
-					unit     : item?.unit,
-				});
-			});
-			setValue('customs_line_items', CUSTOMS_LINE_ITEMS);
-		} else if (chargeName === 'fcl_cfs') {
-			const CFS_LINE_ITEMS = [];
-			(data?.fcl_cfs?.line_items || []).forEach((item) => {
-				CFS_LINE_ITEMS.push({
-					code     : item?.code,
-					currency : item?.currency,
-					price    : item?.price,
-					unit     : item?.unit,
-				});
-			});
-			setValue('line_items', CFS_LINE_ITEMS);
-		} else if (chargeName === 'haulage_freight') {
-			const LINE_ITEMS = [];
-			(data?.haulage_freight?.line_items || []).forEach((item) => {
-				LINE_ITEMS.push({
-					code     : item?.code,
-					currency : item?.currency,
-					price    : item?.price,
-					unit     : item?.unit,
-				});
-			});
-			setValue('line_items', LINE_ITEMS);
-		}
-	}, [JSON.stringify(data)]);
 
 	return {
 		loading,

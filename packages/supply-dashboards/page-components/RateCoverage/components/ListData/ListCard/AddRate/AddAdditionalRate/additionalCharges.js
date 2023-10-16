@@ -6,9 +6,11 @@ import useCreateAdditionalRates from '../../../../../hooks/useCreateAdditionalRa
 import styles from './styles.module.css';
 
 function AdditionalCharges({
-	payload,
-	charge,
-	setAdditionalCharge,
+	payload = {},
+	charge = {},
+	setAdditionalCharge = () => {},
+	getStats = () => {},
+	getListCoverage = () => {},
 	setChargeAdded,
 	additionalService,
 	message,
@@ -31,6 +33,8 @@ function AdditionalCharges({
 		additionalService,
 		message,
 		containerDetails,
+		getStats,
+		getListCoverage,
 	});
 
 	return (

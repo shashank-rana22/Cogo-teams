@@ -1,4 +1,4 @@
-import { Button, Popover } from '@cogoport/components';
+import { Button, Placeholder, Popover } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -13,21 +13,29 @@ import ViewRates from './ViewRates';
 import ViewRevertedRates from './ViewRevertedRates';
 import ViewSuggestedServices from './ViewSuggestedServices';
 
-function ServicesDetails({ data = {}, source = {}, filter = {}, getFeedback = () => {}, feedbackData = [] }) {
+const LOADER_COUNT = 3;
+function ServicesDetails({
+	data = {}, source = {}, filter = {}, getFeedback = () => {}, feedbackData = [],
+	feedback_loading = false,
+	serviceIdPresent = {},
+	setShowAddRateModal = () => {},
+	setServiceIdPresent = () => {},
+}) {
 	const [showPopover, setShowPopover] = useState(false);
 	const [page, setPage] = useState(1);
 	const user_id = useSelector(({ profile }) => profile.id);
-	const { serviceList, getData, spot_data } =	useGetSpoetSearches({ id: data?.source_id });
+	const { serviceList, getData, spot_data, loadingSpotSearch } = useGetSpoetSearches({ id: data?.source_id });
 	const {
 		data: listview,
 		loading,
+		fetch = () => {},
 	} = useListLocationExpertServiceProvider({
 		cogo_entity_id                            : data.cogo_entity_id,
 		service_expertise_destination_location_id : data.destination_port_id,
 		service_expertise_origin_location_id      : data.origin_port_id,
 		supply_agent_id                           : user_id,
-		showPopover,
 		page,
+
 	});
 
 	const rateList = source === 'rate_feedback'
@@ -36,15 +44,31 @@ function ServicesDetails({ data = {}, source = {}, filter = {}, getFeedback = ()
 
 	const customer_name = spot_data?.importer_exporter?.business_name || undefined;
 
+	const Loader = [...new Array(LOADER_COUNT).keys()].map((index) => (
+		<Placeholder
+			height="4vh"
+			key={index}
+			width={400}
+			style={{ marginTop: '10px' }}
+		/>
+	));
+
+	const handelSuggestedRates = () => {
+		if (serviceIdPresent) {
+			setShowPopover(false);
+		}
+		setShowPopover(true);
+		fetch();
+	};
+
 	return (
 		<div className={styles.container}>
-
 			{source === 'rate_feedback'
 			&& (
 				<div>
 					<Popover
 						theme="light"
-						content={<ViewRates rateList={rateList} />}
+						content={feedback_loading ? Loader : <ViewRates rateList={rateList} />}
 						interactive
 						maxWidth="none"
 						animation="perspective"
@@ -86,12 +110,8 @@ function ServicesDetails({ data = {}, source = {}, filter = {}, getFeedback = ()
 
 			<Popover
 				theme="light"
-				content={(
-					<ViewMoreServices
-						serviceList={serviceList}
-						customer_name={customer_name}
-					/>
-				)}
+				content={loadingSpotSearch
+					? Loader : <ViewMoreServices serviceList={serviceList} customer_name={customer_name} />}
 				interactive
 				maxWidth="none"
 				animation="perspective"
@@ -107,34 +127,32 @@ function ServicesDetails({ data = {}, source = {}, filter = {}, getFeedback = ()
 				</Button>
 			</Popover>
 
-			{filter?.service === 'fcl_freight' ? (
+			{filter?.service === 'fcl_freight' && (
 				<Popover
 					theme="light"
-					content={(
+					content={showPopover && (
 						<ViewSuggestedServices
 							listview={listview}
 							page={page}
 							setPage={setPage}
 							loading={loading}
-								// handleAddRate={handleAddRate}
+							showPopover={showPopover}
 							setShowPopover={setShowPopover}
+							setShowAddRateModal={setShowAddRateModal}
+							setServiceIdPresent={setServiceIdPresent}
 						/>
 					)}
 					interactive
-					maxWidth="20vw"
-					animation="scale"
 				>
 					<Button
 						size="md"
 						themeType="link"
-						onClick={() => {
-							setShowPopover(true);
-						}}
+						onClick={handelSuggestedRates}
 					>
 						Suggested Service Provider
 					</Button>
 				</Popover>
-			) : null}
+			)}
 
 			<div>
 				<Popover

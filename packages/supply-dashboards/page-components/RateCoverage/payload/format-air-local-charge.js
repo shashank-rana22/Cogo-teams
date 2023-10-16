@@ -1,6 +1,6 @@
 const formatAirLocalCharge = (payload, values, charge) => {
 	const tradeType = charge === 'export:air_freight_local' ? 'export' : 'import';
-	const airportId =		charge === 'export:air_freight_local'
+	const airportId = charge === 'export:air_freight_local'
 		? payload?.origin_airport_id
 		: payload?.destination_airport_id;
 	const payloadRequired = {

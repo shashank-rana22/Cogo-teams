@@ -20,16 +20,3 @@
 .shipment_cargo_details_root {
 	justify-content: start;
 }
-
-.multi_service {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	overflow-x: auto;
-	white-space: nowrap;
-}
-
-.more_details_popover_text {
-	color: #f68b21;
-	cursor: pointer;
-}

@@ -3,51 +3,43 @@ import {
 	IcMArrowRotateDown,
 	IcMFtick,
 } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import AdditionalCharges from './additionalCharges';
 import styles from './styles.module.css';
 
 function Charge({
-	additionalCharge,
-	setAdditionalCharge,
-	charge,
-	payload,
-	additionalService,
-	chargeAdded,
-	setChargeAdded,
-	message,
-	containerDetails,
+	additionalCharge = false,
+	setAdditionalCharge = () => {},
+	charge = {},
+	payload = {},
+	additionalService = [],
+	chargeAdded = [],
+	setChargeAdded = () => {},
+	message = {},
+	containerDetails = {},
+	getStats = () => {},
+	getListCoverage = () => {},
 }) {
 	const [messageToShow, setMessageToShow] = useState('');
-	const showContent = additionalCharge === `${charge}${message}`;
+
+	const showContent = additionalCharge === charge;
 
 	useEffect(() => {
 		if (payload) setMessageToShow('');
 	}, [payload]);
 
 	const handleClick = () => {
-		if (showContent) {
-			setAdditionalCharge(null);
-		} else if (
-			[
-				'export:air_freight_local',
-				'import:air_freight_local',
-				'export:fcl_freight_local',
-				'import:fcl_freight_local',
-				'add_surcharge',
-			].includes(charge)
-			&& !payload
-		) {
+		if (isEmpty(payload)) {
 			setMessageToShow(message);
 		} else {
-			setAdditionalCharge(`${charge}${message}`);
+			setAdditionalCharge((prev) => (prev === charge ? null : charge));
 		}
 	};
 
 	return (
-		<div className={`${styles.border_shadow} ${showContent ? styles.open : ''}`}>
+		<div className={`${styles.border_shadow}`}>
 			<div
 				role="button"
 				tabIndex={0}
@@ -55,18 +47,14 @@ function Charge({
 					handleClick();
 				}}
 				className={`${styles.title_container}`}
+
 			>
-				{additionalCharge === charge ? (
-					<IcMArrowRotateDown />
-				) : (
-					<IcMArrowRotateRight />
-				)}
+				{showContent === true ? (<IcMArrowRotateDown />) : (<IcMArrowRotateRight />)}
 				{startCase(charge)}
 				<span>{`${messageToShow}`}</span>
-				{chargeAdded.includes(`${charge}${message}`) && (
-					<IcMFtick style={{ color: '#67C676' }} />
-				)}
+				{chargeAdded.includes(`${charge}${message}`) && (<IcMFtick style={{ color: '#67C676' }} />)}
 			</div>
+
 			{showContent && (
 				<AdditionalCharges
 					payload={payload}
@@ -76,6 +64,8 @@ function Charge({
 					additionalService={additionalService}
 					message={message}
 					containerDetails={containerDetails}
+					getStats={getStats}
+					getListCoverage={getListCoverage}
 				/>
 			)}
 		</div>

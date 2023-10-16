@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 
 const useListLocationExpertServiceProvider = ({
 	cogo_entity_id,
@@ -8,7 +8,7 @@ const useListLocationExpertServiceProvider = ({
 	supply_agent_id,
 	page,
 	labeledValue,
-	showPopover,
+
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_location_expert_service_providers',
@@ -35,12 +35,6 @@ const useListLocationExpertServiceProvider = ({
 	}, [cogo_entity_id, labeledValue,
 		page, service_expertise_destination_location_id,
 		service_expertise_origin_location_id, supply_agent_id, trigger]);
-
-	useEffect(() => {
-		if (showPopover) {
-			fetch();
-		}
-	}, [fetch, showPopover]);
 
 	return {
 		data,

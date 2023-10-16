@@ -4,13 +4,15 @@ import Charge from './charge';
 import styles from './styles.module.css';
 
 function AddAdditionalRates({
-	showAddRate,
-	payload,
+	data = {},
+	payload = {},
 	additionalService = undefined,
-	dependentMainFreight = [],
+	dependentMainFreight = [], filter = {},
+	getStats = () => {},
+	getListCoverage = () => {},
 }) {
 	const reference = useRef(null);
-	const serviceType = showAddRate?.service_type;
+	const serviceType = filter?.service;
 	const charges = {
 		fcl_freight : ['export:fcl_freight_local', 'import:fcl_freight_local'],
 		air_freight : [
@@ -20,7 +22,7 @@ function AddAdditionalRates({
 		],
 		lcl_freight: [],
 	};
-	const [additionalCharge, setAdditionalCharge] = useState();
+	const [additionalCharge, setAdditionalCharge] = useState(false);
 	const [chargeAdded, setChargeAdded] = useState([]);
 
 	Object.keys(additionalService || {}).forEach((service) => {
@@ -31,7 +33,7 @@ function AddAdditionalRates({
 				'fcl_freight',
 				'air_freight',
 				'lcl_freight',
-			].includes(additionalService[service].service_type)
+			].includes(additionalService[service]?.service_type)
 			&& !charges[serviceType].includes(
 				`${additionalService[service].trade_type}:${additionalService[service].service_type}`,
 			)
@@ -53,56 +55,53 @@ function AddAdditionalRates({
 
 	return (
 		<div>
-			<div>
-				{(dependentMainFreight || []).map((service) => {
-					const requiredPayload =	service?.service === 'main_freight'
-						? payload?.[showAddRate?.id || showAddRate?.user_id]
-						: payload?.[service?.id];
-
-					const containerDetails = service?.service === 'main_freight'
-						? {
-							container_size : showAddRate?.container_size,
-							container_type : showAddRate?.container_type,
-							commodity      : showAddRate?.commodity,
-						}
-						: {
-							container_size : service?.container_size,
-							container_type : service?.container_type,
-							commodity      : service?.commodity,
-						};
-					const message = containerDetails?.container_size
-						? `Add Rates For  :- ${containerDetails?.container_size},
+			{(dependentMainFreight || []).map((service) => {
+				const containerDetails = service?.service === 'main_freight'
+					? {
+						container_size : data?.container_size,
+						container_type : data?.container_type,
+						commodity      : data?.commodity,
+					}
+					: {
+						container_size : service?.container_size,
+						container_type : service?.container_type,
+						commodity      : service?.commodity,
+					};
+				const message = containerDetails?.container_size
+					? `Add Rates For  :- ${containerDetails?.container_size},
 						 ${containerDetails?.container_type}, ${containerDetails?.commodity} First.`
-						: 'Add Rates For Main Freight First';
-					return (
-						<div className={styles.addtional_container} key={service?.service}>
-							<h4>
-								{containerDetails?.container_size
-									? `Add Additional Rates For : ${containerDetails?.container_size},
+					: 'Add Rates For Main Freight First';
+				return (
+					<div className={styles.addtional_container} key={service?.service}>
+						<h4 style={{ margin: '10px 26px 0' }}>
+							{containerDetails?.container_size
+								? `Add Additional Rates For : ${containerDetails?.container_size},
 								${containerDetails?.container_type},
 								${containerDetails?.commodity}`
-									: 'Add Additional Rates'}
-							</h4>
-							{(charges[serviceType] || []).map((charge) => (
-								<Charge
-									key={charge}
-									additionalCharge={additionalCharge}
-									setAdditionalCharge={setAdditionalCharge}
-									charge={charge}
-									payload={requiredPayload}
-									additionalService={additionalService}
-									chargeAdded={chargeAdded}
-									setChargeAdded={setChargeAdded}
-									message={message}
-									containerDetails={containerDetails}
-									ref={additionalCharge === charge ? reference : null}
-								/>
-							))}
-						</div>
-					);
-				})}
-			</div>
+								: 'Add Additional Rates'}
+						</h4>
+						{(charges[serviceType] || []).map((charge) => (
+							<Charge
+								key={charge}
+								additionalCharge={additionalCharge}
+								setAdditionalCharge={setAdditionalCharge}
+								charge={charge}
+								payload={payload}
+								additionalService={additionalService}
+								chargeAdded={chargeAdded}
+								setChargeAdded={setChargeAdded}
+								message={message}
+								getStats={getStats}
+								getListCoverage={getListCoverage}
+								containerDetails={containerDetails}
+								ref={additionalCharge === charge ? reference : null}
+							/>
+						))}
+					</div>
+				);
+			})}
 		</div>
+
 	);
 }
 export default AddAdditionalRates;

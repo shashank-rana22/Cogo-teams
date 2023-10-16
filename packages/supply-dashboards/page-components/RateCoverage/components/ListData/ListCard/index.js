@@ -24,6 +24,8 @@ function ListCard({
 }) {
 	const [showCloseModal, setShowCloseModal] = useState(false);
 	const [showAddRateModal, setShowAddRateModal] = useState(false);
+	const [serviceIdPresent, setServiceIdPresent] = useState({});
+
 	const {
 		sources = [], container_size = '', container_type,
 		commodity = '', weight_slabs = '', stacking_type = '', price_type = '', source_id = '',
@@ -237,7 +239,6 @@ function ListCard({
 									)}
 								</div>
 							))}
-
 							{!isEmpty(sources) && (
 								<span>
 									{(sources || []).map((val) => (
@@ -280,6 +281,10 @@ function ListCard({
 							filter={filter}
 							getFeedback={getFeedback}
 							feedbackData={feedbackData}
+							feedback_loading={feedback_loading}
+							setShowAddRateModal={setShowAddRateModal}
+							serviceIdPresent={serviceIdPresent}
+							setServiceIdPresent={setServiceIdPresent}
 						/>
 					)}
 				</div>
@@ -330,6 +335,7 @@ function ListCard({
 					shipment_loading={shipment_loading}
 					request_loading={request_loading}
 					feedback_loading={feedback_loading}
+					serviceIdPresent={serviceIdPresent}
 				/>
 			)}
 
