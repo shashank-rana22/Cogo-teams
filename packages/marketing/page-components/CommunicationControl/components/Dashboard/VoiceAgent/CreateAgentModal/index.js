@@ -24,6 +24,7 @@ function CreateAgentModal({
 	};
 	useEffect(() => {
 		setValue('agent_name', itemVal?.name);
+		setValue('mobile_number', itemVal?.mobile_number);
 	}, [itemVal, setValue]);
 
 	const controls = getControls({ itemVal, setItemval });
