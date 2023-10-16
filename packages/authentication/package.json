@@ -4,7 +4,6 @@
   "description": "Authentication for Cogoport",
   "private": true,
   "main": "./index.js",
-  "types": "./index.js",
   "dependencies": {
     "@cogoport/components": "^1.0.359",
     "@cogoport/forms": "workspace:0.1.0",

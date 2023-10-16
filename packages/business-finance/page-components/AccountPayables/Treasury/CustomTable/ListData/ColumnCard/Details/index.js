@@ -3,7 +3,7 @@ import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
-import SegmentedControl from '../../../../../../commons/SegmentedControl/index.tsx';
+import SegmentedControl from '../../../../../../commons/SegmentedControl/index';
 import Loader from '../../../../Loader';
 
 import LineItemsHeader from './LineItemsHeader';

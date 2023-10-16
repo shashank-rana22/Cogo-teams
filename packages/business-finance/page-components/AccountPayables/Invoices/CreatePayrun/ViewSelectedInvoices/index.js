@@ -2,7 +2,7 @@ import { Breadcrumb, Button } from '@cogoport/components';
 import { Link } from '@cogoport/next';
 import React from 'react';
 
-import List from '../../../../commons/List/index.tsx';
+import List from '../../../../commons/List/index';
 import RenderInvoiceNumber from '../../commons/RenderInvoiceNumber';
 import useGetSelectedInvoices from '../../hooks/useGetSelectedInvoices';
 import { RenderAction } from '../../InvoiceTable/RenderFunctions/RenderAction';
