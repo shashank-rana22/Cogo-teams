@@ -2,11 +2,11 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback, useState } from 'react';
 
-const EmptyFunction = () => {};
+const emptyFunction = () => {};
 
 const useListCogooneTimeline = ({
 	id = '',
-	setMessagesState = EmptyFunction,
+	setMessagesState = emptyFunction,
 	activeSubTab = '',
 	user_id = '',
 	lead_user_id = '',
@@ -51,7 +51,7 @@ const useListCogooneTimeline = ({
 				params: payload,
 			});
 		} catch (error) {
-			// console.log(error);
+			console.error(error);
 		} finally {
 			if (type === 'messages') {
 				let formatTimeLineData = { ...prevMessageData };
@@ -64,17 +64,16 @@ const useListCogooneTimeline = ({
 					}
 				});
 
-				const sortedMessages = {};
+				const MESSAGES = {};
 				Object.keys(formatTimeLineData).map((x) => Number(x))
 					.sort().forEach((key) => {
-						sortedMessages[key] = formatTimeLineData[key];
+						MESSAGES[key] = formatTimeLineData[key];
 					});
 
 				setMessagesState((prev) => ({
-					...prev,
 					[id]: {
 						...(prev?.[id] || {}),
-						messagesData: { ...prev?.[id]?.messagesData, ...sortedMessages },
+						messagesData: { ...prev?.[id]?.messagesData, ...MESSAGES },
 						lastDocumentTimeStamp,
 						islastPage,
 					},

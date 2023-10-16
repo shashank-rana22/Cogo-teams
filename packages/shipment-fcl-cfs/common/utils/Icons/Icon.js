@@ -1,4 +1,3 @@
-import { string } from 'prop-types';
 
 function Icon(props, ref) {
 	const { type, ...rest } = props;
@@ -12,6 +11,5 @@ function Icon(props, ref) {
 	) : null;
 }
 
-Icon.propTypes = { type: string.isRequired };
 
 export default Icon;

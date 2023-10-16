@@ -1,6 +1,6 @@
 import { useRequestBf } from '@cogoport/request';
 
-import toastApiError from '../../commons/toastApiError.ts';
+import toastApiError from '../../commons/toastApiError';
 import quotationConfig from '../configurations/ShipmentIdView/quotationConfig.json';
 
 const QUOTATION_TYPE_MAPPING = {
