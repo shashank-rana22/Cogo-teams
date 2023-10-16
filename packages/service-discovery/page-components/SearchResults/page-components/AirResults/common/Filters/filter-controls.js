@@ -8,8 +8,6 @@ export const FILTERS_DEFAULT_VALUES = {
 	cargo_readiness_date : '',
 	source               : null,
 	payment_term         : null,
-	offers               : null,
-	schedule_type        : '',
 };
 
 export const getControls = ({ airlines = [], airlineParams = {}, setAirlineParams = () => {} }) => {
@@ -120,50 +118,6 @@ export const getControls = ({ airlines = [], airlineParams = {}, setAirlineParam
 						{
 							label : 'Collect',
 							value : 'collect',
-						},
-					],
-				},
-			],
-		},
-		offers: {
-			name     : 'offers',
-			label    : 'Offers Available',
-			controls : [
-				{
-					name    : 'offers',
-					type    : 'chips',
-					options : [
-						{
-							label : 'All',
-							value : null,
-						},
-						{
-							label : 'Yes',
-							value : 'yes',
-						},
-						{
-							label : 'No',
-							value : 'no',
-						},
-					],
-				},
-			],
-		},
-		schedule_type: {
-			name     : 'schedule_type',
-			label    : 'Shipment Type',
-			controls : [
-				{
-					name    : 'schedule_type',
-					type    : 'chips',
-					options : [
-						{
-							label : 'Direct-Shipment',
-							value : 'direct',
-						},
-						{
-							label : 'Trans-Shipment',
-							value : 'transhipment',
 						},
 					],
 				},
