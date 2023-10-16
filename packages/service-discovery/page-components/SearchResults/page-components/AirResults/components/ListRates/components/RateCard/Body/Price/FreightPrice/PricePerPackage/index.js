@@ -7,13 +7,16 @@ import styles from './styles.module.css';
 const DEFAULT_PRICE_VALUE = 0;
 const ONE_PACKAGE_COUNT = 1;
 
-const format = (price, currency) => formatAmount({
+const ZERO_FRACTION = 0;
+const TWO_FRACTION = 2;
+
+const format = (price, currency, fraction = ZERO_FRACTION) => formatAmount({
 	amount  : price || DEFAULT_PRICE_VALUE,
 	currency,
 	options : {
 		style                 : 'currency',
 		currencyDisplay       : 'symbol',
-		maximumFractionDigits : 0,
+		maximumFractionDigits : fraction,
 	},
 });
 
@@ -42,7 +45,7 @@ function PricePerPackage({
 						</span>
 					) : null}
 
-					<span>{format(price, price_currency)}</span>
+					<span>{format(price, price_currency, total_price ? ZERO_FRACTION : TWO_FRACTION)}</span>
 				</div>
 
 				{showKgTag ? (
