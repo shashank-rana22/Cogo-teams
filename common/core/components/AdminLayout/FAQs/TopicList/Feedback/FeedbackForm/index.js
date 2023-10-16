@@ -8,6 +8,8 @@ import { getFieldController } from '../utils/getFieldController';
 
 import styles from './styles.module.css';
 
+const MIN_CHARACTER_COUNT = 0;
+
 function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }) {
 	const formProps = useForm();
 
@@ -58,7 +60,7 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 									{controlItem.name === 'additional_information'
 										? (
 											<div className={styles.info_label}>
-												{`${watchDescription?.length} / 350 characters`}
+												{`${watchDescription?.length || MIN_CHARACTER_COUNT} / 350 characters`}
 											</div>
 										) : null}
 								</div>
