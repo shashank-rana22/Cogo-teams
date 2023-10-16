@@ -9,8 +9,6 @@ function AdditionalCharges({
 	payload = {},
 	charge = {},
 	setAdditionalCharge = () => {},
-	getStats = () => {},
-	getListCoverage = () => {},
 	setChargeAdded,
 	additionalService,
 	message,
@@ -33,8 +31,6 @@ function AdditionalCharges({
 		additionalService,
 		message,
 		containerDetails,
-		getStats,
-		getListCoverage,
 	});
 
 	return (

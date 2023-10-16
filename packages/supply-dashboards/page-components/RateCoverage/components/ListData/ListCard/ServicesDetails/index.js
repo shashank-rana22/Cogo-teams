@@ -130,6 +130,7 @@ function ServicesDetails({
 			{filter?.service === 'fcl_freight' && (
 				<Popover
 					theme="light"
+					visible={showPopover}
 					content={showPopover && (
 						<ViewSuggestedServices
 							listview={listview}

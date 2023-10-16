@@ -6,10 +6,10 @@ const useUpdateFlashBookingRate = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const updateFlashBookingRate = async ({ data, formData, shipmemnt_data }) => {
+	const updateFlashBookingRate = async ({ data, formData, shipment_data }) => {
 		const { shipment_id = '', source_id = '', service_provider_id = '' } = data || {};
 		const { is_shipper_specific = false, schedule_type = '', line_items = [] } = formData || {};
-		const { summary } = shipmemnt_data || {};
+		const { summary } = shipment_data || {};
 		try {
 			const resp = await trigger({
 				data: {

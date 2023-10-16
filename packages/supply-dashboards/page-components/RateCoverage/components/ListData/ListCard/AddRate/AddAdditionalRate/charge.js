@@ -19,8 +19,6 @@ function Charge({
 	setChargeAdded = () => {},
 	message = {},
 	containerDetails = {},
-	getStats = () => {},
-	getListCoverage = () => {},
 }) {
 	const [messageToShow, setMessageToShow] = useState('');
 
@@ -64,8 +62,6 @@ function Charge({
 					additionalService={additionalService}
 					message={message}
 					containerDetails={containerDetails}
-					getStats={getStats}
-					getListCoverage={getListCoverage}
 				/>
 			)}
 		</div>

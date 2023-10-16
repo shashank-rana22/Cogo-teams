@@ -30,13 +30,14 @@ function AddRateModal({
 	source = {},
 	getStats = () => {},
 	getListCoverage = () => {},
-	shipmemnt_data = {},
+	shipment_data = {},
 	requestData = [],
 	feedbackData = [],
 	shipment_loading = false,
 	request_loading = false,
 	feedback_loading = false,
 	serviceIdPresent = {},
+	setServiceIdPresent = () => {},
 }) {
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	const [chargeCodes, setChargeCodes] = useState(null);
@@ -87,9 +88,9 @@ function AddRateModal({
 		getListCoverage();
 	};
 
-	const handelAdditionalServices = () => {
-		setShowModal(true);
+	const handelAdditionalServices = async () => {
 		setActiveTab('additional_freight');
+		await getStats();
 	};
 
 	const handleSubmitData = async (formData) => {
@@ -98,7 +99,6 @@ function AddRateModal({
 			setPayload(formData);
 		}
 		if (rate_id && source === 'rate_feedback') {
-			handelAdditionalServices();
 			const resp = await deleteFeedbackRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
 			if (resp === TWO_HUNDERD) {
 				handelAdditionalServices();
@@ -111,7 +111,7 @@ function AddRateModal({
 			}
 		}
 		if (rate_id && source === 'live_booking') {
-			const resp = await updateFlashBookingRate({ data, formData, shipmemnt_data });
+			const resp = await updateFlashBookingRate({ data, formData, shipment_data });
 			if (resp === TWO_HUNDERD) {
 				handleSuccessActions();
 			}
@@ -212,13 +212,24 @@ function AddRateModal({
 	}, []);
 
 	return (
-		<Modal show={showModal} onClose={() => { setShowModal((prev) => !prev); }} placement="top" size="xl">
+		<Modal
+			show={showModal}
+			onClose={() => {
+				setShowModal((prev) => !prev);
+				setServiceIdPresent('');
+				if (activeTab) {
+					getListCoverage();
+				}
+			}}
+			placement="top"
+			size="xl"
+		>
 			<div>
 				{['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
 			&& (
 				<div className={styles.service_content}>
 					<ServiceDetailsContent
-						shipmemnt_data={shipmemnt_data}
+						shipment_data={shipment_data}
 						requestData={requestData?.list?.[DEFAULT_VALUE] || null}
 						feedbackData={feedbackData?.list?.[DEFAULT_VALUE] || null}
 						shipment_loading={shipment_loading}
@@ -254,7 +265,10 @@ function AddRateModal({
 							<div className={styles.submit_button}>
 								<Button
 									size="md"
-									onClick={() => setShowModal((prev) => !prev)}
+									onClick={() => {
+										setShowModal((prev) => !prev);
+										setServiceIdPresent('');
+									}}
 									style={{ marginRight: '20px' }}
 									themeType="secondary"
 								>
@@ -279,8 +293,6 @@ function AddRateModal({
 								additionalService={spot_data?.service_details}
 								dependentMainFreight={dependentMainFreight}
 								filter={filter}
-								getStats={getStats}
-								getListCoverage={getListCoverage}
 							/>
 						</TabPanel>
 					)}

@@ -79,8 +79,6 @@ const useCreateAdditionalRates = ({
 	setChargeAdded,
 	message,
 	containerDetails,
-	getStats = () => {},
-	getListCoverage = () => {},
 }) => {
 	const [errors, setErrors] = useState({});
 
@@ -163,8 +161,6 @@ const useCreateAdditionalRates = ({
 			setChargeAdded((prev) => [...prev, `${charge}${message}`]);
 			setAdditionalCharge(null);
 			reset();
-			getStats();
-			getListCoverage();
 		} catch (err) {
 			showErrorsInToast(err.data);
 		}
