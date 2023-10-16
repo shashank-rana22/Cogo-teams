@@ -1,6 +1,5 @@
 import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowNext } from '@cogoport/icons-react';
 
 import getLocationInfo from '../../page-components/SearchResults/utils/locations-search';
 
@@ -72,7 +71,11 @@ function LocationDetails({
 
 			{destination ? (
 				<div className={styles.container}>
-					<IcMArrowNext style={{ width: '1.5em', height: '1.5em' }} className={styles.icon} />
+					<img
+						src={GLOBAL_CONSTANTS.image_url.wider_arrow}
+						alt="arrow"
+						className={styles.icon}
+					/>
 
 					<LocationItem location={destination} service_type={service_type} />
 				</div>
