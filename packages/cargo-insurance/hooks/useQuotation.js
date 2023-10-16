@@ -40,7 +40,6 @@ function useQuotation({ pocDetails = {} }) {
 			});
 			Toast.success(t('cargoInsurance:quote_send_success'));
 		} catch (err) {
-			console.log(err, 'err');
 			Toast.error(err.response?.data?.message);
 		}
 	};

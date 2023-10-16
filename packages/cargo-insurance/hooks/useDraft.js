@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useTranslation } from 'next-i18next';
 import { useRef } from 'react';
 
 import { getPayloadForDraft, getPayloadForSaveAsDraft } from '../helper/saveDraftPayload';
@@ -9,6 +10,8 @@ import { getPayloadForDraft, getPayloadForSaveAsDraft } from '../helper/saveDraf
 function useDraft({ data = {}, getValues = () => {}, formRef = {}, billingType = '' }) {
 	const { query, push } = useRouter();
 	const { policySearchId = '', draftId = '' } = query;
+
+	const { t } = useTranslation(['cargoInsurance']);
 
 	const { user } = useSelector((state) => state.profile);
 
@@ -56,7 +59,7 @@ function useDraft({ data = {}, getValues = () => {}, formRef = {}, billingType =
 			await trigger({
 				data: payload,
 			});
-			Toast.success('Draft Saved successfully');
+			Toast.success(t('cargoInsurance:draft_save'));
 		} catch (error) {
 			Toast.error(error.response?.data?.message);
 		}
@@ -68,12 +71,12 @@ function useDraft({ data = {}, getValues = () => {}, formRef = {}, billingType =
 		const { hasError, phoneNo } = resp || {};
 
 		if (hasError) {
-			Toast.error('Please fill all personal details');
+			Toast.error(t('cargoInsurance:draft_err_details'));
 			return;
 		}
 
 		if (!phoneNo?.country_code) {
-			Toast.error('Please Select Mobile Code');
+			Toast.error(t('cargoInsurance:draft_err_mobile'));
 			return;
 		}
 		saveDraft({ pocDetails: resp });

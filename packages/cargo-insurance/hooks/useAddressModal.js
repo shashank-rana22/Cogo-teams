@@ -52,7 +52,7 @@ const useAddressModal = ({ orgId = '', setAddressModal, getBillingAddress }) => 
 			await apiTrigger({
 				data: payload,
 			});
-			Toast.success('Successfully Created Address');
+			Toast.success(t('cargoInsurance:create_address_success'));
 			return true;
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));

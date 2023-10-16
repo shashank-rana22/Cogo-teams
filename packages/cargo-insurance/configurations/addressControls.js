@@ -1,29 +1,29 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const getAddressControls = ({ includeTax = false, country, setValue, showPocFields, setShowPocFeilds }) => [
+const getAddressControls = ({ t, includeTax = false, country, setValue, showPocFields, setShowPocFeilds }) => [
 	{
 		name        : 'name',
-		label       : 'Billing Party Name',
+		label       : t('cargoInsurance:address_control_name'),
 		type        : 'text',
-		placeholder : 'Enter Billing Party Name',
+		placeholder : t('cargoInsurance:address_control_name_placeholder'),
 		rules       : { required: 'required *' },
 	},
 	{
 		name        : 'address',
-		label       : 'Address',
+		label       : t('cargoInsurance:address_control_address'),
 		type        : 'text',
-		placeholder : 'Enter Address',
+		placeholder : t('cargoInsurance:address_control_address_placeholder'),
 		rules       : {
 			required: 'required *',
 		},
 	},
 	{
 		name        : 'country',
-		label       : 'Country',
+		label       : t('cargoInsurance:address_control_country'),
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
-		placeholder : 'Select Country',
+		placeholder : t('cargoInsurance:address_control_country_placeholder'),
 		initialCall : true,
 		params      : { filters: { type: ['country'] } },
 		rules       : {
@@ -32,10 +32,10 @@ const getAddressControls = ({ includeTax = false, country, setValue, showPocFiel
 	},
 	{
 		name        : 'pincode',
-		label       : 'Pincode',
+		label       : t('cargoInsurance:address_control_pincode'),
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
-		placeholder : 'Select Placeholder',
+		placeholder : t('cargoInsurance:address_control_pincode_placeholder'),
 		disabled    : !country,
 		params      : {
 			filters  : { type: ['pincode'], country_id: country },
@@ -54,31 +54,31 @@ const getAddressControls = ({ includeTax = false, country, setValue, showPocFiel
 	},
 	{
 		name        : 'state',
-		label       : 'State',
+		label       : t('cargoInsurance:address_control_state'),
 		type        : 'text',
-		placeholder : 'Enter State',
+		placeholder : t('cargoInsurance:address_control_state_placeholder'),
 		disabled    : true,
 	},
 	{
 		name        : 'city',
-		label       : 'City',
+		label       : t('cargoInsurance:address_control_city'),
 		type        : 'text',
-		placeholder : 'Enter City',
+		placeholder : t('cargoInsurance:address_control_city_placeholder'),
 		disabled    : true,
 	},
 	{
 		name  : 'includeTax',
-		label : 'Include Tax Number',
+		label : t('cargoInsurance:address_control_include_tax'),
 		type  : 'checkbox',
 	},
 	{
 		name    : 'address_type',
-		label   : 'Save Address as',
+		label   : t('cargoInsurance:address_control_address_type'),
 		type    : 'chips',
 		options : [
-			{ children: 'Factory', key: 'factory' },
-			{ children: 'Office', key: 'office' },
-			{ children: 'Ware House', key: 'warehouse' },
+			{ children: t('cargoInsurance:address_control_address_type_opt1'), key: 'factory' },
+			{ children: t('cargoInsurance:address_control_address_type_opt2'), key: 'office' },
+			{ children: t('cargoInsurance:address_control_address_type_opt3'), key: 'warehouse' },
 		],
 		multiple : false,
 		rules    : {
@@ -88,45 +88,45 @@ const getAddressControls = ({ includeTax = false, country, setValue, showPocFiel
 	},
 	{
 		name        : 'tax_number',
-		label       : 'Tax Number',
+		label       : t('cargoInsurance:address_control_tax'),
 		type        : 'text',
-		placeholder : 'Enter Tax Number',
+		placeholder : t('cargoInsurance:address_control_tax_placeholder'),
 		showEle     : includeTax,
 		rules       : {
 			required: 'required *',
 		},
 		extraComp: (
 			<Button size="sm" themeType="accent" onClick={() => setShowPocFeilds((prev) => !prev)}>
-				{!showPocFields ? 'Add POC' : 'Remove POC'}
+				{!showPocFields ? t('cargoInsurance:add_poc') : t('cargoInsurance:remove_poc')}
 			</Button>
 		),
 	},
 	{
 		name        : 'poc_name',
-		label       : 'POC Name',
+		label       : t('cargoInsurance:address_control_poc_name'),
 		type        : 'text',
-		placeholder : 'Enter POC Name',
+		placeholder : t('cargoInsurance:address_control_poc_name_placeholder'),
 		showEle     : showPocFields,
 	},
 	{
 		name        : 'email',
-		label       : 'Email Id',
+		label       : t('cargoInsurance:address_control_email'),
 		type        : 'text',
-		placeholder : 'Enter Email Id',
+		placeholder : t('cargoInsurance:address_control_email_placeholder'),
 		showEle     : showPocFields,
 		rules       : {
 			pattern: {
 				value   : GLOBAL_CONSTANTS.regex_patterns.email,
-				message : 'Email Id is Invalid',
+				message : t('cargoInsurance:address_control_email_invalid'),
 			},
 		},
 
 	},
 	{
 		name        : 'phoneNumber',
-		label       : 'Phone Number',
+		label       : t('cargoInsurance:address_control_mobile'),
 		type        : 'mobileSelect',
-		placeholder : 'Enter Phone Number',
+		placeholder : t('cargoInsurance:address_control_mobile_placeholder'),
 		showEle     : showPocFields,
 
 	},

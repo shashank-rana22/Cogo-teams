@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, upperCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
 const getPayload = ({ formData = {}, draftData = {}, selectedAddress = {}, performedBy = '', billingType }) => {
 	const {
@@ -76,6 +77,8 @@ const getPayload = ({ formData = {}, draftData = {}, selectedAddress = {}, perfo
 };
 
 const useCheckoutSend = ({ setConfirmSuccess, draftData = {}, billingType, formRef }) => {
+	const { t } = useTranslation(['cargoInsurance']);
+
 	const { user } = useSelector((state) => state.profile);
 
 	const [{ loading }, trigger] = useRequestBf({
@@ -100,7 +103,7 @@ const useCheckoutSend = ({ setConfirmSuccess, draftData = {}, billingType, formR
 		const selectedAddress = formRef.current.address();
 
 		if (isEmpty(selectedAddress)) {
-			Toast.error('Please Select Billing Address');
+			Toast.error(t('cargoInsurance:address_err'));
 			return;
 		}
 		confirmSendInsurance({ formData: data, selectedAddress });
