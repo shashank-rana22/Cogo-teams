@@ -22,4 +22,4 @@ jobs:
     uses: ./.github/workflows/comment-test-lint.yml
     secrets: inherit
     with:
-      platform: cogo-action-runner
+      platform: cogo-action-large-runner
