@@ -14,6 +14,7 @@ function ItemHeader({
 	salesInvoicesRefetch = () => {},
 	refetchCN = () => {},
 	isCrossEntity = false,
+	creditNoteList = [],
 }) {
 	return (
 		<div className={styles.container}>
@@ -26,6 +27,7 @@ function ItemHeader({
 				salesInvoicesRefetch={salesInvoicesRefetch}
 				refetchCN={refetchCN}
 				isCrossEntity={isCrossEntity}
+				creditNoteList={creditNoteList}
 			>
 				<div className={styles.invoice_info}>
 					{(invoice?.services || []).map((item) => (

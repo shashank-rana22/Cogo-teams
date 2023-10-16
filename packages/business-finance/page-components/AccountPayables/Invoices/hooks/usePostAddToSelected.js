@@ -4,7 +4,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 import getSelectedInvoice from '../utils/getSelectedInvoice';
 
 const usePostAddToSelected = ({ getPayrunInvoices = () => {}, apiData = {} }) => {

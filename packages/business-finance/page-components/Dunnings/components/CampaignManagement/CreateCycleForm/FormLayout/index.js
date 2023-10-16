@@ -3,8 +3,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import Filter from '../../../../../commons/Filters/index.tsx';
-import { HOURS, MINUTES, MONTH_DAYS, WEEK_OPTIONS } from '../../constants/index.ts';
+import Filter from '../../../../../commons/Filters/index';
+import { HOURS, MINUTES, MONTH_DAYS, WEEK_OPTIONS } from '../../constants/index';
 
 import { controls } from './controls';
 import styles from './styles.module.css';

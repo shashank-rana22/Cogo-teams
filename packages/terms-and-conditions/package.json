@@ -4,7 +4,6 @@
   "description": "Terms and Conditions Package",
   "main": "./index.js",
   "private": true,
-  "types": "./index.js",
   "dependencies": {
     "@cogoport/components": "^1.0.441",
     "@cogoport/request": "workspace:0.1.0",

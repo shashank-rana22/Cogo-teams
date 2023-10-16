@@ -6,7 +6,7 @@ import {
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const CP_SUPPORT = {
-	chat_tabs_to_be_shown     : ['message', 'voice', 'firebase_emails'],
+	chat_tabs_to_be_shown     : ['message', 'voice', 'firebase_emails', 'teams'],
 	all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 	session_type_query        : ({ sessionType }) => [where('session_type', '==', sessionType)],
@@ -29,7 +29,7 @@ const CP_SUPPORT = {
 	configurations_to_be_shown    : [],
 	shift_view_default_type       : '',
 	group_agents_api_filter       : ['cp_support'],
-	allowed_organizations         : ['channel_partners', 'lead_channel_partners'],
+	allowed_organizations         : ['channel_partners', 'other_channel_partners'],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 	permissions                   : {
 		auto_assign                                 : false,

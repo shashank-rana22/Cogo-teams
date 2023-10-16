@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import toastApiError from '../../commons/toastApiError.ts';
+import toastApiError from '../../commons/toastApiError';
 
 const useListStakeholders = ({ shipmentId = '' }) => {
 	const [{ data, loading }, trigger] = useRequest({

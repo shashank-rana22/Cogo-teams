@@ -17,7 +17,7 @@ const PENDING_TICKETS_CHECK = ['pending', 'resolve_requested'];
 const PENDING_TICKETS_VALUES = ['approve', 'reject', 'reassign', 'escalate'];
 
 const CLOSED_TICKETS_VALUES = ['reopen'];
-
+const TICKET_STATUS_REOPEN = ['closed', 'overdue'];
 const MODAL_ACTIONS = ['reassign', 'escalate'];
 
 function getActionType({ ticketStatus, isClosureAuthorizer }) {
@@ -32,7 +32,7 @@ function getActionType({ ticketStatus, isClosureAuthorizer }) {
 		return PENDING_TICKETS_VALUES;
 	}
 
-	if (ticketStatus === 'closed') {
+	if (TICKET_STATUS_REOPEN.includes(ticketStatus)) {
 		return	CLOSED_TICKETS_VALUES;
 	}
 
@@ -95,7 +95,6 @@ function TicketActions({
 	const { show, actionType } = confirmationConfig || {};
 
 	const actionMappings = getActionType({ ticketStatus, isClosureAuthorizer });
-
 	const filteredActions = isModal ? actionMappings : actionMappings.filter((item) => !MODAL_ACTIONS.includes(item));
 
 	const handleAction = (e, item) => {

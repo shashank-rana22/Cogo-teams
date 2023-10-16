@@ -1,0 +1,17 @@
+.tab_container {
+	position: relative;
+	margin-top: 50px;
+}
+
+.allocate_button {
+	margin-right: 10px;
+}
+
+.tab_options {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+}

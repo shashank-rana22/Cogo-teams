@@ -1,7 +1,7 @@
 import { Pagination } from '@cogoport/components';
 import React from 'react';
 
-import StyledTable from '../../commons/styledTable/index.tsx';
+import StyledTable from '../../commons/styledTable/index';
 import organizationColumn from '../../configs/OrganizationUserTable';
 
 import styles from './styles.module.css';
