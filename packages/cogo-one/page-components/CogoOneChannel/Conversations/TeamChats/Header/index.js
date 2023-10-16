@@ -1,7 +1,10 @@
 import { Popover, Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMAppDelete } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
+
+import { deleteDraftDoc } from '../../../../../helpers/teamsPinChatHelpers';
 
 import EditName from './EditName';
 import Members from './Members';
@@ -18,6 +21,8 @@ function Header({
 	activeTab = {},
 	hasPermissionToEdit = false,
 	loggedInUserId = '',
+	setLoadingDraft = () => {},
+	loadingDraft = false,
 }) {
 	const {
 		is_draft = false,
@@ -30,12 +35,27 @@ function Header({
 
 	const newDraft = isEmpty(group_members_ids);
 
+	const closeRoom = () => {
+		setActiveTab((prev) => ({ ...prev, data: {}, groupData: {} }));
+	};
+
+	const deleteDraft = () => {
+		deleteDraftDoc({
+			firestore,
+			roomId          : id,
+			loggedInAgentId : loggedInUserId,
+			clearActiveRoom : closeRoom,
+		});
+	};
+
 	if (is_draft && newDraft) {
 		return (
 			<ToUser
 				firestore={firestore}
 				setActiveTab={setActiveTab}
 				viewType={viewType}
+				setLoadingDraft={setLoadingDraft}
+				loadingDraft={loadingDraft}
 			/>
 		);
 	}
@@ -103,8 +123,14 @@ function Header({
 						</div>
 					</>
 				) : null}
-				{(hasPermissionToEdit && !isGroup) ? <VideoCalling activeTab={activeTab} /> : null}
+				{(hasPermissionToEdit && !isGroup) ? (
+					<VideoCalling
+						activeTab={activeTab}
+						membersList={membersList}
+					/>
+				) : null}
 			</div>
+			{is_draft ? <IcMAppDelete className={styles.delete_icon} onClick={deleteDraft} /> : null}
 		</div>
 	);
 }

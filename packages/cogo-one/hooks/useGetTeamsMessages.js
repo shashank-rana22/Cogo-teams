@@ -16,6 +16,8 @@ import { messagesFormatter } from '../helpers/formatTeamsList';
 
 import useListTeamsTimeline from './useListTeamsTimeline';
 
+const BUFFER_FOR_INTIAL_START_TIME = 600000;
+
 const PAGE_LIMIT = 10;
 const LAST_INDEX_FROM_END = 1;
 const DISTANCE_FROM_TOP = 10;
@@ -64,7 +66,7 @@ function newMessageSnapShot({
 
 				getCogooneTimeline({
 					endDate   : Date.now(),
-					startDate : lastDocumentTimeStamp,
+					startDate : Number(lastDocumentTimeStamp - BUFFER_FOR_INTIAL_START_TIME),
 					groupId   : roomId,
 				});
 
@@ -141,6 +143,7 @@ const useGetTeamsMessages = ({
 	roomId = '',
 	firestore = {},
 	scrollToLastMessage = () => {},
+	lastGroupUpdatedAt = 0,
 }) => {
 	const loggedInUserId = useSelector(({ profile }) => profile.user.id);
 
@@ -156,7 +159,12 @@ const useGetTeamsMessages = ({
 
 	const [loadingPrevMessages, setLoadingPrevMessages] = useState(false);
 
-	const { getCogooneTimeline = () => {} } = useListTeamsTimeline({ setMessagesState });
+	const { getCogooneTimeline = () => {} } = useListTeamsTimeline({
+		setMessagesState,
+		lastGroupUpdatedAt,
+		roomId,
+		scrollToLastMessage,
+	});
 
 	const chatCollection = useMemo(() => {
 		if (!roomId) {
@@ -220,6 +228,7 @@ const useGetTeamsMessages = ({
 		isLastPage,
 		refetch,
 		loggedInUserId,
+		messagesState,
 	};
 };
 

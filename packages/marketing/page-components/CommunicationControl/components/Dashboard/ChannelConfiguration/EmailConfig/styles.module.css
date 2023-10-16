@@ -1,0 +1,40 @@
+.container {
+	margin: 10px;
+	overflow: hidden;
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(0 0 0 / 15%);
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin: 10px;
+}
+
+.table_container {
+	width: 100%;
+	background-color: #fff;
+
+	:global {
+		.ui_table_body_cell {
+			max-width: calc(95vw/6);
+			padding-top: 12px;
+			padding-bottom: 12px;
+			font-weight: 500;
+			white-space: normal;
+		}
+
+		.ui_table_head_cell {
+			min-width: 100px;
+			padding-top: 16px;
+			padding-bottom: 16px;
+			font-weight: 900;
+		}
+
+		.ui_table_head_cell:last-of-type {
+			min-width: 40px;
+		}
+	}
+}

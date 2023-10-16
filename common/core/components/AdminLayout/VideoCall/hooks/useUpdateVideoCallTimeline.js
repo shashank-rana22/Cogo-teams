@@ -25,7 +25,7 @@ const getPayload = ({
 			separator  : ' ',
 		}),
 		start_stamp: formatDate({
-			date       : new Date(createdAt),
+			date       : new Date(createdAt || 0),
 			dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 			timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
 			formatType : 'dateTime',

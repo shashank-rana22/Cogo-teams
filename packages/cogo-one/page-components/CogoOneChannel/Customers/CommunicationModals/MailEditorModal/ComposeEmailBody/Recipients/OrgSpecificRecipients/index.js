@@ -1,4 +1,5 @@
-import { MultiSelect } from '@cogoport/components';
+import { MultiSelect, Select } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useMemo } from 'react';
 
@@ -20,6 +21,8 @@ function OrgSpecificRecipients({
 	emailState = {},
 	viewType = '',
 }) {
+	const isLeadUser = emailState?.orgData?.orgId === 'lead_users';
+
 	const allowedOrgs = useMemo(() => (
 		isEmpty(VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.allowed_organizations)
 			? ['organizations', 'other_organizations']
@@ -51,6 +54,8 @@ function OrgSpecificRecipients({
 		orgType : emailState?.orgData?.orgType || 'organizations',
 		userIds : emailState?.user_ids?.[type],
 		allowedOrgs,
+		type,
+		isLeadUser,
 	});
 
 	const selectOptions = useMemo(
@@ -88,6 +93,8 @@ function OrgSpecificRecipients({
 		);
 	};
 
+	const ActiveSelectComponent = emailState?.orgData?.orgId === 'lead_users' ? Select : MultiSelect;
+
 	return (
 		<div className={styles.container}>
 			{type === 'toUserEmail' ? (
@@ -114,21 +121,24 @@ function OrgSpecificRecipients({
 				/>
 			) : null}
 
-			<MultiSelect
+			<ActiveSelectComponent
 				key={initialLoad ? orgLoading : ''}
 				className={type === 'toUserEmail' ? styles.users_select : styles.users_cc_select}
 				placeholder="Search user"
 				isClearable
-				value={emailRecipientType || []}
+				value={isLeadUser
+					? emailRecipientType?.[GLOBAL_CONSTANTS.zeroth_index] || ''
+					: emailRecipientType || []}
 				onSearch={handleSearch}
 				onChange={(val, obj) => {
 					setEmailState(
 						(prev) => ({
 							...prev,
-							[type]   : val,
+							[type]   : isLeadUser ? [val] : val,
 							user_ids : {
 								...prev?.user_ids,
-								[type]: obj?.map((itm) => itm.id || ''),
+								[type]: isLeadUser
+									? [obj.id] : obj?.map((itm) => itm.id || ''),
 							},
 						}),
 					);

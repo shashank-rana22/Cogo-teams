@@ -3,7 +3,10 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import React from 'react';
 
 import Filter from '../../../../commons/Filters';
-import { GenericObject } from '../../../../commons/Interfaces/index';
+import {
+	GenericObject,
+	ListDataProps,
+} from '../../../../commons/Interfaces/index';
 import SegmentedControl from '../../../../commons/SegmentedControl/index';
 import FilterModal from '../../../Components/FilterModal/index';
 import filtersData from '../../../constants/purchase-list-filters';
@@ -21,6 +24,7 @@ interface SegmentFilterProps {
 	setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
 	setTab: React.Dispatch<React.SetStateAction<string>>;
 	filters: GenericObject;
+	itemData?:ListDataProps;
 	setFilters: (p: object) => void;
 }
 
@@ -34,6 +38,7 @@ function SegmentedFilters({
 	searchValue,
 	filters,
 	setFilters,
+	itemData,
 }: SegmentFilterProps) {
 	return (
 		<>
@@ -52,7 +57,7 @@ function SegmentedFilters({
 				<div className={styled.segment}>
 					<div className={styled.filter_data_urgent}>
 						<SegmentedControl
-							options={filtersUrgentData(statsData)}
+							options={filtersUrgentData({ itemData, tab })}
 							activeTab={tab}
 							setActiveTab={setTab}
 							color="#ED3726"

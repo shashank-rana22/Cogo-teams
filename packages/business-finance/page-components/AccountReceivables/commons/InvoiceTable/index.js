@@ -1,9 +1,12 @@
 import { cl, Pagination } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Filters from '../../../commons/Filters/index.tsx';
+import SalesFunnelView from '../../components/Invoice/SalesFunnelView';
 import completedColumn from '../../configs/Completed_table.tsx';
 import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate.ts';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard.ts';
@@ -38,7 +41,10 @@ function InvoiceTable({
 	showName = false,
 	showFilters = true,
 	limit = 10,
+	invoiceJourney = false,
 }) {
+	const { query } = useRouter();
+	const { partner_id } = query || {};
 	const { profile } = useSelector((state) => state);
 	const [checkedRows, setCheckedRows] = useState([]);
 	const [isHeaderChecked, setIsHeaderChecked] = useState(false);
@@ -132,6 +138,7 @@ function InvoiceTable({
 		isHeaderChecked,
 		setIsHeaderChecked,
 		showFilters,
+		partner_id,
 	});
 
 	const columnsFiltered = showFilters
@@ -140,6 +147,7 @@ function InvoiceTable({
 
 	return (
 		<div>
+			{invoiceJourney ? <SalesFunnelView entityCode={entityCode} /> : null}
 			{showFilters ? (
 				<div className={styles.filter_container}>
 					<div className={styles.filter_div}>
@@ -194,16 +202,9 @@ function InvoiceTable({
 					/>
 				</div>
 			)}
-			<div className={styles.table}>
-				<StyledTable
-					data={invoiceList}
-					columns={columnsFiltered}
-					loading={invoiceLoading}
-				/>
-			</div>
-			{recordInvoiceList >= invoiceFilters.pageLimit
+			{recordInvoiceList >= invoiceFilters.pageLimit && invoiceJourney
 				? (
-					<div className={cl`${styles.pagination_container} ${showFilters ? '' : styles.nomargin}`}>
+					<div className={styles.count}>
 						<Pagination
 							type="table"
 							currentPage={pageInvoiceList}
@@ -214,14 +215,38 @@ function InvoiceTable({
 					</div>
 				)
 				: null}
-			{showFilters ? (
-				<FooterCard
-					entityCode={entityCode}
-					bulkIrnGenerate={bulkIrnGenerate}
-					bulkIrnLoading={bulkIrnLoading}
-					checkedRows={checkedRows}
+			<div className={styles.table}>
+				<StyledTable
+					data={invoiceList}
+					columns={columnsFiltered}
+					loading={invoiceLoading}
 				/>
-			) : null}
+			</div>
+			{
+				recordInvoiceList >= invoiceFilters.pageLimit
+					? (
+						<div className={cl`${styles.pagination_container} ${showFilters ? '' : styles.nomargin}`}>
+							<Pagination
+								type="table"
+								currentPage={pageInvoiceList}
+								totalItems={recordInvoiceList}
+								pageSize={invoiceFilters.pageLimit}
+								onPageChange={(val) => setinvoiceFilters({ ...invoiceFilters, page: val })}
+							/>
+						</div>
+					)
+					: null
+			}
+			{
+				showFilters && !isEmpty(checkedRows) ? (
+					<FooterCard
+						entityCode={entityCode}
+						bulkIrnGenerate={bulkIrnGenerate}
+						bulkIrnLoading={bulkIrnLoading}
+						checkedRows={checkedRows}
+					/>
+				) : null
+			}
 		</div>
 	);
 }
