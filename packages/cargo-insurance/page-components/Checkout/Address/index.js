@@ -10,8 +10,6 @@ import AddressCard from './AddressCard';
 import AddressModal from './AddressModal';
 import styles from './styles.module.css';
 
-const MAX_ADDRESS_TO_DISPLAY = 2;
-
 function Address({ billingType, setBillingType, orgId = '', preSelectedAddress = {} }, ref) {
 	const { t } = useTranslation(['cargoInsurance']);
 
@@ -28,6 +26,7 @@ function Address({ billingType, setBillingType, orgId = '', preSelectedAddress =
 	} = useGetAddress({ billingType, setSelectedAddress, orgId, preSelectedAddress });
 
 	const { mainAddress = [], remainingAddress = [] } = addressData || {};
+	const addressList = loading ? [...Array(2).keys()] : mainAddress;
 
 	useImperativeHandle(ref, () => () => selectedAddress, [selectedAddress]);
 
@@ -85,18 +84,15 @@ function Address({ billingType, setBillingType, orgId = '', preSelectedAddress =
 			) : null}
 
 			<div className={styles.flex_box}>
-				{(mainAddress || []).map((ele, index) => (
-					index < MAX_ADDRESS_TO_DISPLAY ? (
-						<div key={ele?.id} className={styles.card_container}>
-							<AddressCard
-								info={ele}
-								loading={loading}
-								selectedAddress={selectedAddress}
-								setSelectedAddress={setSelectedAddress}
-							/>
-						</div>
-
-					) : null
+				{(addressList || []).map((ele) => (
+					<div key={ele?.id} className={styles.card_container}>
+						<AddressCard
+							info={ele}
+							loading={loading}
+							selectedAddress={selectedAddress}
+							setSelectedAddress={setSelectedAddress}
+						/>
+					</div>
 				))}
 			</div>
 

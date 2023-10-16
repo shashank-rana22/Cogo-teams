@@ -13,7 +13,7 @@ const SINGLE_RATE = 1;
 function RateCard({ data = [], loading = false, selectedRateCard, setSelectedRateCard }) {
 	const { t } = useTranslation(['cargoInsurance']);
 
-	if (isEmpty(data)) return null;
+	if (isEmpty(data) && !loading) return null;
 
 	return (
 		<div className={styles.main_container}>
