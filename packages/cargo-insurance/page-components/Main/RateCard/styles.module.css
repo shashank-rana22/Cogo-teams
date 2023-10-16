@@ -80,10 +80,10 @@
 }
 
 .secure_now {
-	padding: 3px 10px;
-	background: #fff;
-	border-top-left-radius: 12px;
-	border-top-right-radius: 12px;
+	position: absolute;
+	bottom: 0;
+	width: 95%;
+	text-align: center;
 }
 
 .secure_now_text {
