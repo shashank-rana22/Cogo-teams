@@ -1,10 +1,10 @@
+import { Tooltip } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function EmailHeader({ formattedData = {} }) {
 	const {
-		last_message = '',
 		last_message_document = {},
 	} = formattedData || {};
 
@@ -13,9 +13,16 @@ function EmailHeader({ formattedData = {} }) {
 
 	return (
 		<div className={styles.email_header}>
-			Sub:
-			{' '}
-			{subject || last_message}
+			<Tooltip
+				placement="bottom"
+				content={subject || ''}
+				className={styles.tooltip_container}
+				delay={[300, 0]}
+			>
+				Sub:
+				{' '}
+				{subject || ''}
+			</Tooltip>
 		</div>
 	);
 }

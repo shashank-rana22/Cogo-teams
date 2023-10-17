@@ -17,7 +17,9 @@ function ShowModal({
 	reset = () => {},
 }) {
 	const [showErrorModal, setShowErrorModal] = useState(false);
+	console.log('shoemodal');
 
+	console.log(formData);
 	const {
 		control: radioControl,
 		handleSubmit: radiohandleSubmit,
@@ -46,13 +48,12 @@ function ShowModal({
 
 	const radiohandleSubmitFunction = (data) => {
 		let payload = { ...formData, role_ids: [formData.role_ids] };
-		if (data.radio === 'allocate_budget_after_completion_of_active_budget') {
+		if (data?.radio === 'allocate_budget_after_completion_of_active_budget') {
 			payload = { ...payload, overlap_save: 'activate_later' };
 		}
-		if (data.radio === 'deactivate_the_active_budget_and_allocate') {
+		if (data?.radio === 'deactivate_the_active_budget_and_allocate') {
 			payload = { ...payload, overlap_save: 'activate_now' };
 		}
-
 		fetchCreateDataApi({ payload });
 	};
 
@@ -69,7 +70,10 @@ function ShowModal({
 							<Button onClick={() => closeModal()} disabled={loading}>
 								No
 							</Button>
-							<Button onClick={fetchCreateDataApi} disabled={loading}>
+							<Button
+								onClick={radiohandleSubmit(radiohandleSubmitFunction)}
+								disabled={loading}
+							>
 								Yes
 							</Button>
 						</div>

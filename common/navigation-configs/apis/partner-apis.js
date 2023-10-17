@@ -13110,6 +13110,12 @@ const partner = {
 			api          : 'list_smt_rate_jobs',
 			access_type  : 'private',
 			service_name : 'communication',
+			feature      : 'rate_requests',
+		},
+		{
+			api          : 'list_organization_pocs',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api          : 'create_cogoone_group_hash',
