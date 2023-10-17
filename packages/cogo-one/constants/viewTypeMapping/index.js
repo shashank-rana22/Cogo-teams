@@ -3,7 +3,6 @@ import COGOONE_ADMIN from './viewTypes/cogooneAdmin';
 import CP_SUPPORT from './viewTypes/cpSupport';
 import CREDIT_CONTROLLER from './viewTypes/creditController';
 import DEFAULT from './viewTypes/default';
-import FINANCE from './viewTypes/finance';
 import HR from './viewTypes/hr';
 import MARKETING from './viewTypes/marketing';
 import SALES from './viewTypes/sales';
@@ -29,9 +28,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 	cp_support                : CP_SUPPORT,
 	marketing                 : MARKETING,
 	default                   : DEFAULT,
-	credit_controller         : CREDIT_CONTROLLER,
+	finance                   : CREDIT_CONTROLLER,
 	admin                     : ADMIN,
 	hr                        : HR,
-	finance                   : FINANCE,
 	service_ops               : SERVICE_OPS,
 };
