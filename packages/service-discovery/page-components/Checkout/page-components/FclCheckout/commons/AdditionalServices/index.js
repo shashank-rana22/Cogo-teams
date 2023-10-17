@@ -44,13 +44,6 @@ function AdditionalServices({
 				source="checkout"
 			/>
 
-			{/* <CargoInsurance
-				key={loading}
-				data={finalDetails}
-				rateCardData={rateCardData}
-				refetch={getCheckout}
-			/> */}
-
 			<SubsidiaryServices
 				possible_subsidiary_services={possible_subsidiary_services}
 				data={finalDetails}

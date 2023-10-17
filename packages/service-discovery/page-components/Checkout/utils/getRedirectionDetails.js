@@ -44,7 +44,7 @@ const getRedirectionDetails = ({
 
 	return {
 		url     : `/${partner_id}/checkout/${checkout_id}`,
-		message : 'new admin supports only FCL, redirecting to old admin',
+		message : 'new admin does not support this service, redirecting to old admin',
 	};
 };
 
