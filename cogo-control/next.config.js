@@ -81,7 +81,7 @@ module.exports = withBundleAnalyzer({
 	},
 	output       : 'standalone',
 	experimental : {
-		outputFileTracingRoot : path.join(__dirname, '../../'), // specify seearch path for packages
+		outputFileTracingRoot : path.join(__dirname, '../'), // specify seearch path for packages
 		externalDir           : true,
 	},
 });
