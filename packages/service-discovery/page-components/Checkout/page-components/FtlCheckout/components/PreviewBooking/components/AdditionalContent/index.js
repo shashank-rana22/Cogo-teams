@@ -18,11 +18,9 @@ function AdditionalContent({
 		detail = {},
 		getCheckout,
 		isChannelPartner,
-		kycShowCondition,
 		tncPresent,
 		updateCheckout,
 		updateLoading,
-		orgData,
 		loading,
 		possible_subsidiary_services = [],
 	} = useContext(CheckoutContext);
@@ -84,8 +82,6 @@ function AdditionalContent({
 				updateCheckout={updateCheckout}
 				updateLoading={updateLoading}
 				tncPresent={tncPresent}
-				kycShowCondition={kycShowCondition}
-				orgData={orgData}
 				getCheckout={getCheckout}
 				loading={loading}
 				source="locked"

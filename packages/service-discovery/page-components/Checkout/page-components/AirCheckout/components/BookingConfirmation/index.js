@@ -22,6 +22,8 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 		loading,
 		checkoutMethod,
 		earnable_cogopoints = {},
+		kycShowCondition,
+		orgData = {},
 	} = useContext(CheckoutContext);
 
 	const ref = useRef({});
@@ -68,7 +70,9 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 				setIsVeryRisky={setIsVeryRisky}
 				getCheckout={getCheckout}
 				loading={loading}
+				orgData={orgData}
 				source="booking_confirmation"
+				kycShowCondition={kycShowCondition}
 			/>
 
 			<ShareQuotation noRatesPresent={noRatesPresent} />
