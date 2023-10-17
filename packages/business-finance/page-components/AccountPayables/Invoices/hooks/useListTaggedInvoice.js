@@ -2,7 +2,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 
 const useListTaggedInvoices = () => {
 	const { query = {} } = useSelector(({ general }) => ({ query: general.query }));

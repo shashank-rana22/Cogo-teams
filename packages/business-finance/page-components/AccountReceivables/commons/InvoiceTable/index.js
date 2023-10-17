@@ -3,18 +3,18 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import Filters from '../../../commons/Filters/index.tsx';
+import Filters from '../../../commons/Filters/index';
 import SalesFunnelView from '../../components/Invoice/SalesFunnelView';
-import completedColumn from '../../configs/Completed_table.tsx';
-import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate.ts';
-import useGetOutstandingCard from '../../hooks/useGetoutstandingCard.ts';
-import { invoiceFilter } from '../../Utils/invoicelistFilter.ts';
+import completedColumn from '../../configs/Completed_table';
+import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate';
+import useGetOutstandingCard from '../../hooks/useGetoutstandingCard';
+import { invoiceFilter } from '../../Utils/invoicelistFilter';
 import FilterPopover from '../FilterPopover';
 import FooterCard from '../FooterCard';
-import SearchInput from '../searchInput/index.tsx';
-import StyledTable from '../styledTable/index.tsx';
+import SearchInput from '../searchInput/index';
+import StyledTable from '../styledTable/index';
 
 import styles from './styles.module.css';
 
@@ -144,6 +144,15 @@ function InvoiceTable({
 	const columnsFiltered = showFilters
 		? columns
 		: columns?.filter((column) => column.id !== 'checkbox');
+
+	const resetCheckboxes = useCallback(() => {
+		setIsHeaderChecked(false);
+		setCheckedRows([]);
+	}, [setCheckedRows, setIsHeaderChecked]);
+
+	useEffect(() => {
+		resetCheckboxes();
+	}, [listData, resetCheckboxes]);
 
 	return (
 		<div>
