@@ -1,4 +1,5 @@
 import { Tooltip, Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCopy } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 
@@ -7,10 +8,17 @@ function CopyUrl({ details = {} }) {
 		spot_search_id: general?.query?.spot_search_id,
 	}));
 
+	const { importer_exporter_id, importer_exporter_branch_id, importer_exporter = {} } = details;
+
 	const handleCopy = async () => {
-		await navigator.clipboard.writeText(`https://app.cogoport.com/app/${details?.importer_exporter_id}/${
-			details?.importer_exporter_branch_id
-		}/importer-exporter/book/${spot_search_id}`);
+		const url = importer_exporter.tags?.
+			[GLOBAL_CONSTANTS.zeroth_index] === 'partner' ? `https://partners.cogoport.com/${
+				importer_exporter.partner_id
+			}/book/${spot_search_id}` : `https://app.cogoport.com/${importer_exporter_id}/${
+				importer_exporter_branch_id
+			}/book/${spot_search_id}`;
+
+		await navigator.clipboard.writeText(url);
 
 		Toast.success('Copied to clipboard');
 	};
