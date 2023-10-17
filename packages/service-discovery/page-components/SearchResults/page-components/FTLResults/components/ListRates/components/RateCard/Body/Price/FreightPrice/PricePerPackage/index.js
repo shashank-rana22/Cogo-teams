@@ -30,7 +30,7 @@ function PricePerPackage({
 						options  : {
 							style                 : 'currency',
 							currencyDisplay       : 'symbol',
-							maximumFractionDigits : 0,
+							maximumFractionDigits : isTotalPrice ? 0 : 2,
 						},
 					})}
 
