@@ -1,11 +1,10 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-// eslint-disable-next-line max-len
-import AddRateModal from '@cogoport/supply-dashboards/page-components/RateCoverage/components/ListData/ListCard/AddRateModal';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import AssignModal from './AssignModal';
+import RateModal from './RateModal';
 import RateRevertCard from './RateRevertCard';
 import styles from './styles.module.css';
 
@@ -74,15 +73,11 @@ function ListRateReverts({
 				: null}
 
 			{showAddRateModal?.showModal ? (
-				<AddRateModal
-					showModal={showAddRateModal?.showModal}
-					filter={params}
-					data={showAddRateModal?.cardData}
-					getListCoverage={fetchRateJobs}
-					setShowModal={() => setShowAddRateModal({
-						showModal : false,
-						cardData  : {},
-					})}
+				<RateModal
+					params={params}
+					fetchRateJobs={fetchRateJobs}
+					showAddRateModal={showAddRateModal}
+					setShowAddRateModal={setShowAddRateModal}
 				/>
 			) : null}
 		</div>

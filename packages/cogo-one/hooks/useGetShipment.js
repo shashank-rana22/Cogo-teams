@@ -15,10 +15,6 @@ function useGetShipment({
 	}, { manual: true });
 
 	const getShipment = useCallback(async () => {
-		if (!shipmentId || (cardId !== id)) {
-			return;
-		}
-
 		try {
 			await trigger({
 				params: {
@@ -28,17 +24,22 @@ function useGetShipment({
 		} catch (error) {
 			console.error(error, 'error');
 		}
-	}, [cardId, id, shipmentId, trigger]);
+	}, [shipmentId, trigger]);
 
-	useEffect(() => {
-		getShipment();
-	}, [getShipment]);
-
-	const shipmentData = ((!shipmentId || (cardId !== id)) || loading) ? {} : data;
+	useEffect(
+		() => {
+			if (!shipmentId || (cardId !== id)) {
+				return;
+			}
+			getShipment();
+		},
+		[cardId, getShipment, id, shipmentId],
+	);
 
 	return {
 		loading,
-		data: shipmentData,
+		data: loading ? {} : data,
+		getShipment,
 	};
 }
 

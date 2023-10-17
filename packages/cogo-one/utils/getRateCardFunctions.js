@@ -83,6 +83,7 @@ export const getRateCardFunction = ({
 			countryCode             : whatsapp_country_code || mobile_country_code,
 			mobile_no               : numberEFormat,
 			organization_id         : service_provider_id,
+			defaultSideNav          : 'flash_shipment_bookings',
 		};
 
 		setActiveTab((prev) => ({

@@ -8,7 +8,6 @@ import {
 	IcMCrossInCircle,
 	IcMArrowDoubleLeft,
 	IcMEmail,
-	IcMRateManagement,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
@@ -62,14 +61,6 @@ const iconMapping = ({ expandSideBar = false }) => [
 			alt="activities"
 			width={40}
 			height={40}
-		/>,
-	},
-	{
-		name    : 'smt_rate_reverts',
-		content : 'Rate Reverts',
-		icon    : <IcMRateManagement
-			width={26}
-			height={26}
 		/>,
 	},
 	{
