@@ -29,7 +29,7 @@ function ShippingLines(props) {
 					<IcMShip
 						width={22}
 						height={22}
-						fill="#888888"
+						fill="#888"
 						style={{ marginRight: '22px' }}
 					/>
 				)}

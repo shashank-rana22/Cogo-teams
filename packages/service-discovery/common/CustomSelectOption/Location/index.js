@@ -5,7 +5,15 @@ import styles from './styles.module.css';
 function Location(props) {
 	const { data = {}, returnOnlyIcon } = props || {};
 
-	const { display_name = '', country = {} } = data || {};
+	const {
+		display_name = '',
+		country = {},
+		port_code = '',
+		type = '',
+		is_icd = false,
+		postal_code = '',
+		name = '',
+	} = data || {};
 
 	const { name: countryName = '' } = country || {};
 
@@ -16,20 +24,20 @@ function Location(props) {
 	let portCode = null;
 	let iconToShow = IcMLocation;
 
-	if (data.type === 'seaport' && data.is_icd) {
-		portCode = countryName ? `${data.port_code}, ${countryName}` : data.port_code;
+	if (type === 'seaport' && is_icd) {
+		portCode = countryName ? `${port_code}, ${countryName}` : port_code;
 		iconToShow = IcMLocation;
-	} else if (data.type === 'seaport') {
-		portCode = countryName ? `${data.port_code}, ${countryName}` : data.port_code;
+	} else if (type === 'seaport') {
+		portCode = countryName ? `${port_code}, ${countryName}` : port_code;
 		iconToShow = IcMPort;
-	} else if (data.type === 'airport') {
-		// portCode = countryName ? `${data.port_code}, ${countryName}` : data.port_code;
-		portCode = data.port_code;
+	} else if (type === 'airport') {
+		// portCode = countryName ? `${port_code}, ${countryName}` : port_code;
+		portCode = port_code;
 		iconToShow = IcMAirport;
-	} else if (data.type === 'pincode') {
+	} else if (type === 'pincode') {
 		portCode = countryName
-			? `${data.postal_code}, ${countryName}`
-			: data.postal_code;
+			? `${postal_code}, ${countryName}`
+			: postal_code;
 	} else if (countryName) {
 		portCode = countryName;
 	}
@@ -49,7 +57,7 @@ function Location(props) {
 			<div className={styles.name_container}>
 				<div className={styles.name_sub_container}>
 					<div className={styles.label_name}>
-						{data.name}
+						{name}
 					</div>
 
 					<div className={styles.city_country_name}>
