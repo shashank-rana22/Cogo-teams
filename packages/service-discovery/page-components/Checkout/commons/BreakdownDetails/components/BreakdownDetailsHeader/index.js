@@ -41,6 +41,7 @@ function BreakdownDetailsHeader({
 				base_currency,
 				currencies,
 				currency_conversion_delta = 0.04,
+				cogofx_currencies = {},
 			} = conversions || {};
 
 			const fxFees = ONE + currency_conversion_delta;
@@ -48,10 +49,10 @@ function BreakdownDetailsHeader({
 				return value;
 			}
 			if (base_currency === fromCurrency) {
-				return (value / currencies[toCurrency]) * fxFees;
+				return (value / (currencies[toCurrency] || cogofx_currencies[toCurrency])) * fxFees;
 			}
-			const inBase = value * currencies[fromCurrency];
-			return (inBase / currencies[toCurrency]) * fxFees;
+			const inBase = value * (currencies[fromCurrency] || cogofx_currencies[fromCurrency]);
+			return (inBase / (currencies[toCurrency] || cogofx_currencies[toCurrency])) * fxFees;
 		},
 		[conversions],
 	);
@@ -80,6 +81,8 @@ function BreakdownDetailsHeader({
 		rate?.total_margins?.currency,
 		geo.country.currency.code,
 	);
+
+	console.log('cogoAndSupplyMargin', cogoAndSupplyMargin);
 
 	const editedMargins = useMemo(
 		() => rateDetails.reduce((acc, cur) => {
@@ -164,6 +167,7 @@ function BreakdownDetailsHeader({
 				profitPercent={profitPercent}
 				latestDemandMargin={latestDemandMargin}
 				condition={condition}
+				convertCurrencyValue={convertCurrencyValue}
 			/>
 
 			{!disableForm ? (

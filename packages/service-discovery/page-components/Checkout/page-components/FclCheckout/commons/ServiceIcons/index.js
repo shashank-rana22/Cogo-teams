@@ -29,7 +29,7 @@ function ServiceIcons({
 		detailedServices,
 	});
 
-	if (primary_service !== 'fcl_freight') {
+	if (!['fcl_freight', 'air_freight'].includes(primary_service)) {
 		return null;
 	}
 
