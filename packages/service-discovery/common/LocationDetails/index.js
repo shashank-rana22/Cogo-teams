@@ -22,7 +22,7 @@ function LocationItem({ location = {}, service_type = '' }) {
 			<span className={styles.location_country_text}>
 				{postal_code && SHOW_PINCODES.includes(service_type) ? `${postal_code}, ` : null}
 				{port_code ? `${port_code}, ` : null}
-				{SHOW_PINCODES.includes(service_type) ? city_name : country_code}
+				{SHOW_PINCODES.includes(service_type) && !port_code ? city_name : country_code}
 			</span>
 
 			<Tooltip
