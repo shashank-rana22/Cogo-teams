@@ -1,4 +1,3 @@
-
 .container {
 	padding: 16px;
 	background-color: #fff;
@@ -28,22 +27,22 @@
 
 .header_flex {
 	display: flex;
-    justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
+	height: 48px;
+	padding-bottom: 0;
 	font-weight: 600;
 	color: #221f20;
-    height: 48px;
-    padding-bottom: 0px;
-    border-bottom: 1px solid  #E0E0E0;
+	border-bottom: 1px solid  #e0e0e0;
 }
 
 .sub_text {
+	display: flex;
+	justify-content: center;
+	width: 100%;
 	margin-top: 24px;
 	font-size: 16px;
 	color: #4f4f4f;
-    display: flex;
-    justify-content: center;
-    width: 100%;
 }
 
 .progress_flex {
@@ -53,6 +52,7 @@
 	margin-top: 16px;
 	color: #4f4f4f;
 }
+
 .progress_flex_2 {
 	display: flex;
 	align-items: center;
@@ -62,68 +62,69 @@
 }
 
 .achieved_target {
+	display: flex;
+	align-items: center;
 	font-weight: 600;
 	color: #221f20;
-    display: flex;
-    align-items: center;
 }
 
-.avatar{
-    display: flex;
-    align-items: center;
+.avatar {
+	display: flex;
+	align-items: center;
 }
 
-.points{
-    color:  #4F4F4F;
-font-size: 14px;
-font-weight: 500;
+.points {
+	font-size: 14px;
+	font-weight: 500;
+	color: #4f4f4f;
 }
 
-.badge{
-    display: flex;
-    flex-direction: column;
-    flex-basis: 33%;
-}
-.dot_2{
-    display: flex;
-    flex-direction: column;
-    flex-basis: 34%;
+.badge {
+	display: flex;
+	flex-basis: 33%;
+	flex-direction: column;
 }
 
-.upper_text{
-    color: #828282;
-font-size: 12px;
-font-weight: 400;
+.dot_2 {
+	display: flex;
+	flex-basis: 34%;
+	flex-direction: column;
 }
 
-.lower_text{
-    color: #4F4F4F;
-font-weight: 400;
+.upper_text {
+	font-size: 12px;
+	font-weight: 400;
+	color: #828282;
 }
 
-.dot{
-	width: 10px; 
-  height: 10px; 
-  background-color: #849E4C; 
-  border-radius: 50%; 
-  display: inline-block; 
-  margin-right: 5px;
+.lower_text {
+	font-weight: 400;
+	color: #4f4f4f;
 }
 
-.dot_g{
-	width: 10px; 
-	height: 10px; 
-	background-color: #F37166; 
-	border-radius: 50%; 
-	display: inline-block; 
+.dot {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
 	margin-right: 5px;
+	background-color: #849e4c;
+	border-radius: 50%;
 }
 
-.dot_b{
-	width: 10px; 
-	height: 10px; 
-	background-color:#888FD1; 
-	border-radius: 50%; 
-	display: inline-block; 
+.dot_g {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
 	margin-right: 5px;
+	background-color: #f37166;
+	border-radius: 50%;
+}
+
+.dot_b {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin-right: 5px;
+	background-color: #888fd1;
+	border-radius: 50%;
 }

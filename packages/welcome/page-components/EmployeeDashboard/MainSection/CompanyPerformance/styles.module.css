@@ -22,7 +22,7 @@
 	color: #4f4f4f;
 }
 
-.performance_achievement {
+.performance_company {
 	display: flex;
 	align-items: center;
 }
@@ -54,49 +54,46 @@
 	margin-right: 12px;
 }
 
-.kpi_flex {
+.employee_flex {
 	display: flex;
 	align-items: center;
-	margin-top: 12px;
+	margin: 12px;
 }
 
-.kpi_data {
+.employee_data {
 	flex: 1 0 45%;
 	padding-right: 6px;
 
 	/* height: 170px; */
 }
 
-.kpi_okr {
+.employee_abs {
 	position: relative;
 	padding: 14px 14px 18px 20px;
 	color: #221f20;
-	background-color: #f8f2e7;
+	background-color: #f1f2f8;
 	border-radius: 16px;
 
 	/* height: 100%; */
 }
 
-.happiness_index {
-	position: relative;
-	padding: 14px 14px 18px 20px;
-	color: #221f20;
-	background-color: #f2f3fa;
-	border-radius: 16px;
-
-	/* height: 100%; */
-}
-
-.kpi_okr_title {
+.employee_abs_title {
 	font-size: 16px;
 }
 
-.kpi_okr_count {
+.employee_tot_count {
 	font-size: 32px;
 	font-weight: 600;
 }
 
-.view_okr_flex {
+.present_count {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.view_abs_flex {
 	display: flex;
 	align-items: center;
 	margin-top: 38px;
@@ -105,26 +102,19 @@
 	text-transform: capitalize;
 }
 
-.kpi_img {
+.employee_abs_img {
 	position: absolute;
-	top: -20px;
+	top: 27px;
 	right: -10px;
 }
 
-.kpi_img_2 {
-	position: absolute;
-	top: 40px;
-	right: -10px;
-}
-
-.story_points_data {
-	flex: 1 0 55%;
+.department_data {
+	flex: 1 0 45%;
 	padding-left: 6px;
 }
 
 .leaderboard_data {
 	display: flex;
-	width: 100%;
 	margin-top: 12px;
 }
 
@@ -150,9 +140,3 @@
 	color: #221f20;
 	text-transform: uppercase;
 }
-
-.leaderboard_container {
-	display: flex;
-}
-
-/* new addition */
