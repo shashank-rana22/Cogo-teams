@@ -8,7 +8,7 @@ export const getRateCardFunction = ({
 	isTriggeredFromSideBar = false,
 }) => {
 	const { setButtonType, setEmailState, signature } = mailProps;
-	const { service_provider_poc = {} } = cardData || {};
+	const { service_provider_poc = {}, service_provider_id = '' } = cardData || {};
 
 	const {
 		email = '',
@@ -35,7 +35,7 @@ export const getRateCardFunction = ({
 					orgId               : '',
 					id,
 					mobile_number,
-					mobile_country_code : `+${mobile_country_code}`,
+					mobile_country_code : `+${mobile_country_code?.replace('+', '')}`,
 					userName            : name,
 					isUnkownUser        : !id,
 				},
@@ -82,6 +82,7 @@ export const getRateCardFunction = ({
 			channel_type            : 'whatsapp',
 			countryCode             : whatsapp_country_code || mobile_country_code,
 			mobile_no               : numberEFormat,
+			organization_id         : service_provider_id,
 		};
 
 		setActiveTab((prev) => ({

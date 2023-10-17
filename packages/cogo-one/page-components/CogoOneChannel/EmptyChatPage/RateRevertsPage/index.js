@@ -13,18 +13,21 @@ function RateRevertsPage({
 	mailProps = {},
 	setActiveTab = () => {},
 }) {
+	const { viewType = '' } = mailProps || {};
+
 	const {
 		setParams = () => {},
 		params = {},
 		rateJobsData = {},
 		loading = false,
 		fetchRateJobs = () => {},
-	} = useListRateJobs();
+	} = useListRateJobs({ viewType });
 
 	const {
 		total_count = 0,
 		page = 1,
 		list = [],
+		stats = {},
 	} = rateJobsData || {};
 
 	return (
@@ -33,6 +36,7 @@ function RateRevertsPage({
 				<Header
 					params={params}
 					setParams={setParams}
+					stats={stats}
 				/>
 
 				{loading ? (

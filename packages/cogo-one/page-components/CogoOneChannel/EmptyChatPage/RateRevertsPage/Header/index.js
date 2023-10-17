@@ -1,6 +1,7 @@
 import { MultiSelect, Tags, Popover, Badge } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState, useMemo } from 'react';
 
 import { FilterModal } from '../../../../../common/SmtRateReverts';
 import { SOURCE_OPTIONS } from '../../../../../constants/rateRevertsConstants';
@@ -11,6 +12,7 @@ import styles from './styles.module.css';
 function Header({
 	setParams = () => {},
 	params = {},
+	stats = {},
 }) {
 	const [showFilters, setShowFilters] = useState(false);
 
@@ -27,10 +29,33 @@ function Header({
 		defaultValues = {},
 	} = getAppliedFilters({ params });
 
+	const { dynamic_statistics = {} } = stats || {};
+
 	const sourceTags = getSourceTags({
-		sources: params?.source || [],
+		sources           : params?.source || [],
 		filterValues,
+		dynamicStatistics : dynamic_statistics,
 	});
+
+	const sourceOptions = useMemo(
+		() => {
+			if (isEmpty(dynamic_statistics)) {
+				return Object.values(SOURCE_OPTIONS);
+			}
+
+			return Object.values(SOURCE_OPTIONS).reduce(
+				(acc, itm) => (
+					[...acc,
+						{
+							...itm,
+							label: `${itm?.label} (${dynamic_statistics?.[itm?.value] || 0})`,
+						}]
+				),
+				[],
+			);
+		},
+		[dynamic_statistics],
+	);
 
 	return (
 		<div className={styles.header_container}>
@@ -43,7 +68,7 @@ function Header({
 					className={styles.source_select_container}
 					value={params?.source}
 					placeholder="Select Source"
-					options={Object.values(SOURCE_OPTIONS)}
+					options={sourceOptions}
 					isClearable
 					size="sm"
 					prefix={null}

@@ -1,18 +1,29 @@
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import smtRateRevertsFilter from '../configurations/smtRateRevertsFilters';
 import { SOURCE_OPTIONS, DEFAULT_RATE_JOBS_FILTERS } from '../constants/rateRevertsConstants';
 
-export function getSourceTags({ sources = [], filterValues = {} }) {
+export function getSourceTags({
+	sources = [],
+	filterValues = {},
+	dynamicStatistics = {},
+}) {
+	const showStats = !isEmpty(dynamicStatistics);
+
 	const sourceTags = sources?.map(
-		(itm) => ({
-			key      : itm,
-			disabled : false,
-			children : SOURCE_OPTIONS?.[itm]?.label,
-			color    : 'green',
-			tooltip  : false,
-			closable : false,
-		}),
+		(itm) => {
+			const statValue = ` (${dynamicStatistics?.[itm] || 0})`;
+
+			return {
+				key      : itm,
+				disabled : false,
+				children : `${SOURCE_OPTIONS?.[itm]?.label}${showStats
+					? statValue : ''}`,
+				color    : 'green',
+				tooltip  : false,
+				closable : false,
+			};
+		},
 	) || [];
 
 	const filterTags = Object.values(filterValues).map(

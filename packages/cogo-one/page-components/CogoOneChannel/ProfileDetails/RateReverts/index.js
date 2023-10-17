@@ -18,11 +18,13 @@ function RateReverts({
 	activeTab = '',
 }) {
 	const {
-		user_id: messageUserId,
+		organization_id: messageOrgId,
 	} = formattedMessageData || {};
-	const { user_id: voiceCallUserId = '' } = activeVoiceCard || {};
+	const { organization_id: voiceCallOrgId = '' } = activeVoiceCard || {};
 
-	const userId = FIREBASE_TABS.includes(activeTab) ? messageUserId : voiceCallUserId;
+	const orgId = FIREBASE_TABS.includes(activeTab) ? messageOrgId : voiceCallOrgId;
+
+	const { viewType = '' } = mailProps || {};
 
 	const {
 		setParams = () => {},
@@ -30,7 +32,7 @@ function RateReverts({
 		rateJobsData = {},
 		loading = false,
 		fetchRateJobs = () => {},
-	} = useListRateJobs({ userId, triggeredFrom: 'sideBar' });
+	} = useListRateJobs({ orgId, triggeredFrom: 'sideBar', viewType });
 
 	const {
 		total_count = 0,
