@@ -13041,6 +13041,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'update_video_conference',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_organization_pocs',
 			access_type  : 'private',
 			service_name : 'organization',
