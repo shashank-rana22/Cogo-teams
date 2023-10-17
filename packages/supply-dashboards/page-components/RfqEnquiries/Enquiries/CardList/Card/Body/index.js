@@ -6,6 +6,20 @@ import styles from './styles.module.css';
 
 const SINGLE_PORT_SERVICES = ['fcl_freight_local', 'lcl_freight_local'];
 
+function LocationDetails({ name = '', code = '', country = '', isLocalService = false }) {
+	return (
+		<div>
+			<div className={styles.code}>{`(${code})`}</div>
+			<div className={styles.name}>
+				<Tooltip content={name}>
+					<div className={isLocalService ? styles.subnameFull : styles.subname}>{`${name}`}</div>
+				</Tooltip>
+				<div className={styles.country}>{`,${country}`}</div>
+			</div>
+		</div>
+	);
+}
+
 function Body({ item }) {
 	const originCode = (item?.origin_port || item?.origin_airport)?.port_code;
 	const originName = (item?.origin_port || item?.origin_airport)?.name.split('(')[0];
@@ -21,38 +35,35 @@ function Body({ item }) {
 			item?.commodity.split('.')[1]}`
 		: startCase(item?.commodity);
 
-	const isLocals = SINGLE_PORT_SERVICES.includes(item?.service_type);
-
-	function LocationDetails({ name, code, country }) {
-		return (
-			<div>
-				<div className={styles.code}>{`(${code})`}</div>
-				<div className={styles.name}>
-					<Tooltip content={name}>
-						<div className={isLocals ? styles.subnameFull : styles.subname}>{`${name}`}</div>
-					</Tooltip>
-					<div className={styles.country}>{`,${country}`}</div>
-				</div>
-			</div>
-		);
-	}
+	const isLocalService = SINGLE_PORT_SERVICES.includes(item?.service_type);
 
 	return (
 		<div className={styles.body}>
 			<div className={styles.upper_body}>
-				{isLocals ? (
+				{isLocalService ? (
 					<LocationDetails
 						name={singlePortName}
 						code={singlePortCode}
 						country={singlePortCountry}
+						isLocalService={isLocalService}
 					/>
 				) : (
 					<>
-						<LocationDetails name={originName} code={originCode} country={originCountry} />
+						<LocationDetails
+							name={originName}
+							code={originCode}
+							country={originCountry}
+							isLocalService={isLocalService}
+						/>
 						<div>
 							<IcMPortArrow />
 						</div>
-						<LocationDetails name={destinationName} code={destinationCode} country={destinationCountry} />
+						<LocationDetails
+							name={destinationName}
+							code={destinationCode}
+							country={destinationCountry}
+							isLocalService={isLocalService}
+						/>
 					</>
 				)}
 			</div>

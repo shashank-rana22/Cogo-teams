@@ -18,6 +18,20 @@ const SINGLE_PORT_SERVICES = ['fcl_freight_local', 'lcl_freight_local'];
 const ZERO = 0; const
 	MINUS_ONE = -1;
 
+function LocationDetails({ name = '', code = '', country = '' }) {
+	return (
+		<div>
+			<div className={styles.code}>{`(${code})`}</div>
+			<div className={styles.name}>
+				<Tooltip content={name}>
+					<div className={styles.subname}>{`${name}`}</div>
+				</Tooltip>
+				<div className={styles.country}>{`,${country}`}</div>
+			</div>
+		</div>
+	);
+}
+
 function PortPair({ portPair, fromDetails }) {
 	const originCode = portPair?.origin_code;
 	const originName = portPair?.origin?.split('(')[ZERO];
@@ -30,21 +44,7 @@ function PortPair({ portPair, fromDetails }) {
 	const singlePortCountry = portPair?.single_port?.split(' ')?.slice(MINUS_ONE);
 	const Element = getService({ portPair });
 
-	const isLocals = SINGLE_PORT_SERVICES.includes(portPair?.service_type);
-
-	function LocationDetails({ name, code, country }) {
-		return (
-			<div>
-				<div className={styles.code}>{`(${code})`}</div>
-				<div className={styles.name}>
-					<Tooltip content={name}>
-						<div className={styles.subname}>{`${name}`}</div>
-					</Tooltip>
-					<div className={styles.country}>{`,${country}`}</div>
-				</div>
-			</div>
-		);
-	}
+	const isLocalService = SINGLE_PORT_SERVICES.includes(portPair?.service_type);
 
 	return (
 		<div className={styles.container}>
@@ -55,7 +55,7 @@ function PortPair({ portPair, fromDetails }) {
 				</div>
 			)}
 			<div className={styles.upper_body}>
-				{isLocals ? (
+				{isLocalService ? (
 					<LocationDetails name={singlePortName} code={singlePortCode} country={singlePortCountry} />
 				) : (
 					<>
