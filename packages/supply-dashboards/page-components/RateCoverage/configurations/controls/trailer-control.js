@@ -57,8 +57,8 @@ const trailerControls = ({
 			type        : 'select',
 			placeholder : 'Origin Location',
 			span        : 4,
-			value       : data?.origin_port?.id,
-			disabled	   : data?.origin_port?.id,
+			value       : data?.origin_location_id,
+			disabled	   : data?.origin_location_id,
 			...originLocationOptions,
 			rules       : { required: 'origin location is required' },
 		},
@@ -67,8 +67,8 @@ const trailerControls = ({
 			type        : 'select',
 			heading     : 'Destination Location',
 			span        : 4,
-			value       : data?.destination_port?.id,
-			disabled    : data?.destination_port?.id,
+			value       : data?.destination_location_id,
+			disabled    : data?.destination_location_id,
 			...destinationLocationOptions,
 			placeholder : 'Destination Location',
 			rules       : { required: 'destination location is required' },
@@ -84,7 +84,7 @@ const trailerControls = ({
 			label       : 'Container Type',
 			type        : 'select',
 			placeholder : 'Container Type',
-			span        : 3,
+			span        : 4,
 			value       : data?.container_type || 'standard',
 			disabled    : data?.container_type,
 			options     : containerTypes,
@@ -95,7 +95,7 @@ const trailerControls = ({
 			label       : 'Container Size',
 			type        : 'select',
 			placeholder : 'Container Size',
-			span        : 3,
+			span        : 4,
 			value       : data?.container_size || '20',
 			disabled    : data?.container_size,
 			options     : containerSizes,
@@ -149,14 +149,13 @@ const trailerControls = ({
 			},
 			className: 'primary',
 		},
-
 		{
 			label       : 'Detention Free Time',
 			name        : 'detention_free_time_type',
 			type        : 'select',
 			placeholder : 'Hrs',
 
-			span    : 1.5,
+			span    : 2,
 			options : [
 				{
 					value : 'hrs',
@@ -172,7 +171,7 @@ const trailerControls = ({
 		{
 			name        : 'detention_free_time',
 			type        : 'number',
-			span        : 1.5,
+			span        : 2,
 			placeholder : '0',
 			className   : 'primary lg',
 			rules       : {
@@ -185,7 +184,7 @@ const trailerControls = ({
 			name        : 'transit_time_type',
 			type        : 'select',
 			placeholder : 'Hrs',
-			span        : 1.5,
+			span        : 2,
 			options     : [
 				{
 					value : 'hrs',
@@ -212,7 +211,7 @@ const trailerControls = ({
 		{
 			label       : 'Basic Freight Rate (Per Trailer)',
 			name        : 'currency',
-			span        : 1.5,
+			span        : 2,
 			type        : 'select',
 			placeholder : 'Curr...',
 			options     : currencyOptions,
@@ -232,7 +231,7 @@ const trailerControls = ({
 			label       : 'Fuel Surcharge',
 			name        : 'fuel_surcharge_type',
 			type        : 'select',
-			span        : 1.5,
+			span        : 2,
 			placeholder : '% of Basic Freight',
 			style       : {
 				marginLeft  : '10%',
@@ -272,7 +271,7 @@ const trailerControls = ({
 			name        : 'remarks',
 			placeholder : 'Enter Remarks',
 			type        : 'textarea',
-			span        : 3.8,
+			span        : 4,
 			label       : 'Remarks',
 			className   : 'primary lg ',
 		},

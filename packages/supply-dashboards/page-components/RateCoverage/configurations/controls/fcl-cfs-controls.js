@@ -273,11 +273,14 @@ const cfsControls = ({ data, originLocationOptions, CommodityOptions, source }) 
 			noDeleteButtonTill : 0,
 			controls           : [
 				{
-					name        : 'code',
-					type        : 'select',
+					name        : 'cfs_line_items',
+					valueKey    : 'code',
+					type        : 'async_select',
 					span        : 2,
-					placeholder : 'Charge Name',
-					rules       : { required: 'currency is required' },
+					asyncKey    : 'list_rate_charge_codes',
+					params      : { service_name: 'fcl_cfs_charges' },
+					initialCall : true,
+					rules       : { required: 'Code is required' },
 				},
 				{
 					name        : 'currency',

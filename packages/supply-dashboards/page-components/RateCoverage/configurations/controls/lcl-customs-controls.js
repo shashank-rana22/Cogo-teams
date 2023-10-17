@@ -87,12 +87,6 @@ const lclCustomsControls = ({
 			}
 			: null,
 		{
-			name         : 'line_items',
-			heading      : 'Line Items',
-			span         : 12,
-			showOptional : false,
-		},
-		{
 			label              : 'Add Custom Line Items',
 			name               : 'customs_line_items',
 			type               : 'fieldArray',
@@ -101,10 +95,14 @@ const lclCustomsControls = ({
 			noDeleteButtonTill : 0,
 			controls           : [
 				{
-					name        : 'code',
-					type        : 'select',
+					name        : 'lcl_customs_code',
+					valueKey    : 'code',
+					type        : 'async_select',
 					span        : 2,
-					placeholder : 'Charge Name',
+					asyncKey    : 'list_rate_charge_codes',
+					params      : { service_name: 'lcl_customs_charges' },
+					initialCall : true,
+					rules       : { required: 'Code is required' },
 				},
 				{
 					name        : 'currency',

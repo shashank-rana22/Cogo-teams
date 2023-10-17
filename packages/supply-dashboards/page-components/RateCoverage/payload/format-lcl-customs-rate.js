@@ -5,7 +5,7 @@ const formatLclCustomsRate = (data, user_id) => {
 	const customCharges = data.customs_line_items;
 	for (let i = 0; i < customCharges.length; i += INCREMENT_VALUE) {
 		const obj = {
-			code     : customCharges[i].code,
+			code     : customCharges[i].lcl_customs_code,
 			currency : customCharges[i].currency,
 			price    : Number(customCharges[i].price),
 			unit     : customCharges[i].unit,

@@ -150,7 +150,7 @@ const fclCustomsControls = ({
 					type        : 'async_select',
 					span        : 2,
 					asyncKey    : 'list_rate_charge_codes',
-					params      : { service_name: 'fcl_cfs_charges' },
+					params      : { service_name: 'fcl_customs_charges' },
 					initialCall : true,
 					rules       : { required: 'Code is required' },
 				},

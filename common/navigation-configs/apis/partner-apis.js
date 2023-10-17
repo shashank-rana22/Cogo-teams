@@ -5042,7 +5042,7 @@ const partner = {
 		{
 			api          : 'list_trailer_freight_rate_jobs',
 			access_type  : 'private',
-			service_name : 'trailer_freight_rate',
+			service_name : 'haulage_freight_rate',
 		},
 		{
 			api          : 'list_ltl_freight_rate_jobs',
@@ -5103,7 +5103,7 @@ const partner = {
 		{
 			api          : 'get_trailer_freight_rate_job_stats',
 			access_type  : 'private',
-			service_name : 'trailer_freight_rate',
+			service_name : 'haulage_freight_rate',
 		},
 		{
 			api          : 'get_ltl_freight_rate_job_stats',

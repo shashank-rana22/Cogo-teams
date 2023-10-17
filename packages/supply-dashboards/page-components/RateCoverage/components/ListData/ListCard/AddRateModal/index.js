@@ -124,8 +124,7 @@ function AddRateModal({
 		}
 
 		if (rate_id && source === 'live_booking') {
-			console.log(formData, 'formData');
-			const resp = await updateFlashBookingRate({ data, formData, shipment_data });
+			const resp = await updateFlashBookingRate({ data, formData, shipment_data, filter });
 			if (resp === TWO_HUNDERD) {
 				if (addLocalServices) {
 					handelAdditionalServices();
