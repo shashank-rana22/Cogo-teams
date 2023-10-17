@@ -90,6 +90,7 @@ function ListRates({
 				loading={loading}
 				importerExporterId={detail.importer_exporter_id}
 				contractDetail={contract_detail}
+				style={{ marginBottom: 40 }}
 			/>
 
 			{(rates || []).map((rateItem, index) => (
