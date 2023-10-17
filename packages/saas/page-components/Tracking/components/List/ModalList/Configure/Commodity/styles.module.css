@@ -1,0 +1,23 @@
+.form_container {
+	min-height: 35vh;
+}
+
+.col {
+	width: 80%;
+	padding: 0 8px;
+}
+
+.errors {
+	color: #f33;
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+	padding: 14px 16px 0;
+	border-top: 1px solid #d3d3d3;
+
+	.submit_btn {
+		margin-left: 10px;
+	}
+}

@@ -4,7 +4,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 import VIEW_SELECTED_CONFIG from '../CreatePayrun/Configurations/viewSelectedConfig.json';
 import VIEW_SELECTED_CONFIG_VN from '../CreatePayrun/Configurations/viewSelectedConfigVN.json';
 import getKeyByValue from '../utils/getKeyByValue';

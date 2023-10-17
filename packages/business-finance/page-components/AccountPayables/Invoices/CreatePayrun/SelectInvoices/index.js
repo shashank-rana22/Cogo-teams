@@ -3,8 +3,8 @@ import { IcMSearchdark } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
 import React, { useImperativeHandle, forwardRef } from 'react';
 
-import Filter from '../../../../commons/Filters/index.tsx';
-import List from '../../../../commons/List/index.tsx';
+import Filter from '../../../../commons/Filters/index';
+import List from '../../../../commons/List/index';
 import { invoiceFilters } from '../../configurations';
 import useGetPayrunInvoices from '../../hooks/useGetPayrunInvoices';
 import FilterModal from '../../MoreFilters';

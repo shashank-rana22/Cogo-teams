@@ -1,9 +1,10 @@
-import { RTEditor, Input, Select } from '@cogoport/components';
+import { Input, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useMemo, useState } from 'react';
+import dynamic from 'next/dynamic';
+import { useEffect } from 'react';
 
 import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
 import getRenderEmailBody from '../../../../../../helpers/getRenderEmailBody';
@@ -13,8 +14,13 @@ import EmailTemplates from './EmailTemplates';
 import Recipients from './Recipients';
 import ShipmentSubject from './ShipmentSubject';
 import styles from './styles.module.css';
+// eslint-disable-next-line custom-eslint/import-from-react, import/no-unresolved
+import 'suneditor/dist/css/suneditor.min.css';
 
-const DISABLED_SUBJECT = ['reply_all', 'reply'];
+// eslint-disable-next-line import/no-unresolved
+const SunEditor = dynamic(() => import('suneditor-react'), {
+	ssr: false,
+});
 
 function ComposeEmailBody(props) {
 	const {
@@ -41,26 +47,17 @@ function ComposeEmailBody(props) {
 		hideFromMail = false,
 		viewType = '',
 	} = props || {};
-	const [rteDisabled, setRteDisabled] = useState(false);
-	const { imageHandler } = useImageUploader({ setEmailState, setRteDisabled });
+	const { onImageUploadBefore, disablRTE } = useImageUploader();
 
 	const userActiveMailOptions = (userActiveMails || []).map(
 		(curr) => ({ label: curr, value: curr }),
 	);
-	const isDisabledSubject = ((DISABLED_SUBJECT || []).includes(buttonType));
 
 	useEffect(() => {
 		if (buttonType === 'send_mail' && !activeMailAddress) {
 			setActiveMailAddress(userActiveMails?.[GLOBAL_CONSTANTS.zeroth_index]);
 		}
 	}, [activeMailAddress, buttonType, setActiveMailAddress, userActiveMails]);
-
-	const modules = useMemo(() => ({
-		toolbar: {
-			container : RTE_TOOL_BAR_CONFIG,
-			handlers  : { image: imageHandler },
-		},
-	}), [imageHandler]);
 
 	if (isEmpty(userActiveMails)) {
 		return (
@@ -136,7 +133,6 @@ function ComposeEmailBody(props) {
 							size="xs"
 							placeholder="Enter your Subject"
 							className={styles.styled_input}
-							disabled={isDisabledSubject}
 						/>
 					)}
 			</div>
@@ -146,16 +142,19 @@ function ComposeEmailBody(props) {
 				: null }
 
 			<div className={styles.rte_container}>
-				<RTEditor
-					value={emailState?.rteContent}
-					onChange={(val, delta, source, editor) => {
-						const rawRTEContent = editor.getText(val);
-
-						setEmailState((prev) => ({ ...prev, rteContent: val, rawRTEContent }));
+				<SunEditor
+					onImageUploadBefore={onImageUploadBefore}
+					defaultValue={emailState?.rteContent}
+					onChange={(val) => setEmailState((p) => ({ ...p, rteContent: val }))}
+					setOptions={{
+						buttonList    : RTE_TOOL_BAR_CONFIG,
+						defaultTag    : 'div',
+						minHeight     : '300px',
+						showPathLabel : false,
 					}}
-					className={styles.styled_editor}
-					modules={modules}
-					disabled={rteDisabled}
+					disable={disablRTE}
+					autoFocus
+
 				/>
 
 				<div className={styles.attachments_scroll}>

@@ -52,8 +52,9 @@ export const DEFAULT_EMAIL_STATE = {
 		subjectText : '',
 	},
 	orgData: {
-		orgType : 'organizations',
-		orgId   : '',
+		orgType                : 'organizations',
+		orgId                  : '',
+		twinImporterExporterId : '',
 	},
 };
 
@@ -149,5 +150,16 @@ export const ORGS_MAPPING = {
 	other_channel_partners: {
 		title : 'Others',
 		value : 'other_channel_partners',
+	},
+};
+
+export const USERS_MAPPING = {
+	users: {
+		title : 'Users',
+		value : 'users',
+	},
+	pocs: {
+		title : "POC's",
+		value : 'pocs',
 	},
 };

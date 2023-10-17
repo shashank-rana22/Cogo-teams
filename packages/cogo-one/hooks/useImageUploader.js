@@ -1,10 +1,11 @@
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { publicRequest, request } from '@cogoport/request';
-import { useCallback } from 'react';
+import { useState } from 'react';
 
-const useImageUploader = ({ setEmailState = () => {}, setRteDisabled = () => {} }) => {
-	const uploadFile = useCallback(async ({ file, fileName }) => {
+const useImageUploader = () => {
+	const [disablRTE, setDisablRTE] = useState(false);
+	const uploadFile = async ({ file, fileName }) => {
 		try {
 			const { data } = await request({
 				method : 'GET',
@@ -28,33 +29,38 @@ const useImageUploader = ({ setEmailState = () => {}, setRteDisabled = () => {} 
 
 			const finalUrl = url.split('?')[GLOBAL_CONSTANTS.zeroth_index];
 
-			setEmailState((prev) => ({ ...prev, rteContent: `${prev.rteContent}\n<p><img src='${finalUrl}'/></p>` }));
+			return finalUrl;
 		} catch (error) {
 			Toast.error(error.message);
 		}
-	}, [setEmailState]);
+		return null;
+	};
 
-	const imageHandler = useCallback(() => {
-		const input = document.createElement('input');
+	const onImageUploadBefore = (files, _info, uploadHandler) => {
+		try {
+			const file = files[GLOBAL_CONSTANTS.zeroth_index];
+			setDisablRTE(true);
+			uploadFile({ file, fileName: file.name }).then((src) => {
+				const response = {
+					errorMessage : 'insert error message',
+					result       : [
+						{
+							url  : src,
+							name : file.name,
+							size : file.size,
+						},
+					],
+				};
+				setDisablRTE(false);
+				uploadHandler(response);
+			});
+		} catch (e) {
+			console.error(e);
+		}
+		return undefined;
+	};
 
-		input.setAttribute('type', 'file');
-		input.setAttribute('accept', 'image/*');
-		input.click();
-
-		input.onchange = async () => {
-			const file = input.files[GLOBAL_CONSTANTS.zeroth_index];
-			const formData = new FormData();
-
-			formData.append('image', file);
-
-			const fileName = file.name;
-			setRteDisabled(true);
-			await uploadFile({ file, fileName });
-			setRteDisabled(false);
-		};
-	}, [uploadFile, setRteDisabled]);
-
-	return { imageHandler };
+	return { disablRTE, onImageUploadBefore };
 };
 
 export default useImageUploader;

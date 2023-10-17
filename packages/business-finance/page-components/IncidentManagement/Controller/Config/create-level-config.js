@@ -17,6 +17,7 @@ export const controls = ({ t = () => {}, incidentType = '', setValue = () => {} 
 			{ value: 'SETTLEMENT_APPROVAL', label: t('incidentManagement:settlement_label') },
 			{ value: 'JOURNAL_VOUCHER_APPROVAL', label: t('incidentManagement:journal_voucher_label') },
 			{ value: 'ISSUE_CREDIT_NOTE', label: t('incidentManagement:credit_note_request') },
+			{ value: 'SAAS', label: 'SAAS' },
 			{
 				value : 'CONSOLIDATED_CREDIT_NOTE',
 				label : t('incidentManagement:consolidated_credit_note_request'),

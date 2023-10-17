@@ -14,6 +14,8 @@ import styles from './styles.module.css';
 const ICON_STYLES = ['position_1', 'position_2', 'position_3', 'position_4', 'position_5'];
 const NO_EXPANDABLE_MENU_IF_LENGTH = 1;
 
+const HIDE_NEW_COMMUNICATIONS = ['teams'];
+
 function CommunicationModals({
 	mailProps = {},
 	setModalType = () => {},
@@ -23,6 +25,7 @@ function CommunicationModals({
 	setOpenKamContacts = () => {},
 	setSendBulkTemplates = () => {},
 	firestore = {},
+	activeSelect = '',
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
@@ -54,6 +57,10 @@ function CommunicationModals({
 
 	const Component = ICONS_MAPPING[ACCESSIBLE_BUTTONS[GLOBAL_CONSTANTS.zeroth_index]] || null;
 	const clickFunction = CLICK_FUNCTIONS[ACCESSIBLE_BUTTONS[GLOBAL_CONSTANTS.zeroth_index]] || null;
+
+	if (HIDE_NEW_COMMUNICATIONS.includes(activeSelect)) {
+		return null;
+	}
 
 	return (
 		<>
