@@ -197,7 +197,10 @@ const summaryDataFourth = ({ paidTds, payableTds, billCurrency, tdsAmount, payme
 	},
 ];
 
-const summaryDataFifth = ({ billCurrency = '', subTotal = '', grandTotal = '' }) => [
+const summaryDataFifth = ({
+	billCurrency = '', subTotal = GLOBAL_CONSTANTS.zeroth_index,
+	grandTotal = GLOBAL_CONSTANTS.zeroth_index,
+}) => [
 	{
 		title : 'Sub Total Amount',
 		value : formatAmount({
