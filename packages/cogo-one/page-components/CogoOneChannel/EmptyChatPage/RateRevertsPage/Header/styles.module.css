@@ -30,6 +30,14 @@
 
 .source_select_container {
 	width: 25%;
+
+	:global {
+		.ui_multiselect_input_control {
+			span {
+				display: none;
+			}
+		}
+	}
 }
 
 .selected_sources {
