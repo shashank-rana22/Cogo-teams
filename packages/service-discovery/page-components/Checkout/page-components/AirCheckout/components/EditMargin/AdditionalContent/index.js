@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 
+import EditMarginFooter from '../../../../../commons/EditMarginFooter';
 import { CheckoutContext } from '../../../../../context';
 import AdditionalServices from '../../../commons/AdditionalServices';
 
-import EditMarginFooter from './EditMarginFooter';
 import styles from './styles.module.css';
 
 function AdditionalContent({
