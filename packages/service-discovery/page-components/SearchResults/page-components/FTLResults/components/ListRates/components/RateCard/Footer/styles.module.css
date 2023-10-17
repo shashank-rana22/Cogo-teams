@@ -6,7 +6,7 @@
 .wrapper {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
 	width: 100%;
 	padding: 12px 20px;
 	background: #f3f9f9;

@@ -1,5 +1,5 @@
 .container {
-	width: 40%;
+	width: 50%;
 
 	@media (max-width: 768px) {
 		width: 100%;
@@ -39,4 +39,12 @@
 	padding: 4px 0 0;
 	font-size: 20px;
 	color: #000;
+
+	&.overflow_hidden {
+		width: 60%;
+		min-width: auto;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }

@@ -1,5 +1,5 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import React from 'react';
 
 import getLocationInfo from '../../../../../../../../utils/locations-search';
 
@@ -29,26 +29,24 @@ function Route({ detail = {}, rate = {} }) {
 		<div className={styles.container}>
 			<div className={styles.postal_code_container}>
 				<span className={styles.postal_code}>
-					{origin.postal_code}
-					{', '}
-					{origin_city}
+					{origin?.port_code ? `${origin?.postal_code}, ${origin?.port_code}`
+						: `${origin.postal_code}, ${origin_city}`}
 				</span>
 
 				<span className={styles.postal_code}>
-					{destination.postal_code}
-					{', '}
-					{destination_city}
+					{destination?.port_code ? `${destination?.postal_code}, ${destination?.port_code}`
+						: `${destination.postal_code}, ${destination_city}`}
 				</span>
 			</div>
 
 			<div className={styles.schedule_container}>
-				<span className={styles.schedule_item}>
+				<span className={cl`${styles.schedule_item} ${origin.port_code && styles.overflow_hidden}`}>
 					{origin.name}
 				</span>
 
 				<JourneyLine scheduleData={scheduleData} />
 
-				<span className={styles.schedule_item}>
+				<span className={cl`${styles.schedule_item} ${destination.port_code && styles.overflow_hidden}`}>
 					{destination.name}
 				</span>
 			</div>

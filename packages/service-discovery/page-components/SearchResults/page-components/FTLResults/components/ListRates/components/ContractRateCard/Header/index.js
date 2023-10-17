@@ -1,5 +1,6 @@
 import { cl } from '@cogoport/components';
 import { IcMRoundtrip, IcMUp } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -21,6 +22,8 @@ function Header({
 
 	const contractData = Object.values(service_rates).find((service) => service.source === 'contract');
 
+	const { contract_reference_id = '', rate_type } = contractData || {};
+
 	const { trip_type = '' } = detail;
 
 	const ImageComponent = IMAGE_MAPPING[trip_type] || null;
@@ -32,7 +35,13 @@ function Header({
 
 				<span>
 					#
-					{contractData?.contract_reference_id}
+					{contract_reference_id}
+				</span>
+
+				<span className={styles.rate_type_pill}>
+					Rate Type:
+					{' '}
+					<strong>{startCase(rate_type)}</strong>
 				</span>
 			</div>
 
