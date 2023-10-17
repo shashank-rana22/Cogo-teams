@@ -239,6 +239,7 @@ const GLOBAL_CONSTANTS = {
 			'6d713339-c528-4696-9f7b-c01f86887ac1',		// Vinod's ID
 			'039a0141-e6f3-43b0-9c51-144b22b9fc84', 	// Santram's ID
 			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8',		// Rishi's ID
+			'7f31a684-61dd-4a65-8ca7-f16bc9bcafd3',		// Akash's ID
 		],
 	},
 	view_key_mappings: {
