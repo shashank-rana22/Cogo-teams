@@ -6,7 +6,10 @@ import dateTimeConverter from '../../../../../utils/dateTimeConverter';
 
 import styles from './styles.module.css';
 
-function ShipmentProgress({ cardData = {} }) {
+function ShipmentProgress({
+	cardData = {},
+	isTriggeredFromSideBar = false,
+}) {
 	const { call_details = {}, reverted_status = '' } = cardData || {};
 	const { agent_data = {}, end_time_of_call = '', start_time_of_call = '' } = call_details || {};
 	const { name = '' } = agent_data || {};
@@ -19,7 +22,9 @@ function ShipmentProgress({ cardData = {} }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.contact_info}>
+			<div
+				className={styles.contact_info}
+			>
 				<span className={styles.label}>
 					Revert Status:
 				</span>
@@ -29,39 +34,44 @@ function ShipmentProgress({ cardData = {} }) {
 				</span>
 			</div>
 
-			<div className={styles.contact_info}>
-				<span className={styles.label}>
+			<div
+				className={styles.contact_info}
+				style={{
+					flexDirection: isTriggeredFromSideBar ? 'column' : 'row',
+				}}
+			>
+				<div className={styles.label}>
 					Last Contact :
-				</span>
+				</div>
 
-				<IcMProfile className={styles.icon_styles} />
+				<div className={styles.details}>
+					<IcMDummyCircle className={styles.dummy_circle} />
+					<IcMProfile className={styles.icon_styles} />
+					<span className={styles.primary_data}>
+						{startCase(name) || 'NA'}
+					</span>
+				</div>
 
-				<span className={styles.primary_data}>
-					{startCase(name) || 'NA'}
-				</span>
-
-				{(endTimeEpoch || startTimeEpoch) ? (
-					<>
-						<IcMDummyCircle className={styles.dummy_circle} />
-						<IcMCall
-							className={styles.icon_styles}
-							fill="#849E4C"
-						/>
-						<span className={styles.secondary_data}>
-							Contacted
-							{' '}
-							<span>
-								{
+				<div className={styles.details}>
+					{(endTimeEpoch || startTimeEpoch) ? (
+						<>
+							<IcMDummyCircle className={styles.dummy_circle} />
+							<IcMCall className={styles.icon_styles} fill="#849E4C" />
+							<span className={styles.secondary_data}>
+								Contacted
+								{' '}
+								<span>
+									{
 									dateTimeConverter(
 										currentTime - (endTimeEpoch || startTimeEpoch),
 										(endTimeEpoch || startTimeEpoch),
 									)?.renderTime
 								}
+								</span>
 							</span>
-						</span>
-					</>
-				) : null}
-
+						</>
+					) : null}
+				</div>
 			</div>
 		</div>
 	);

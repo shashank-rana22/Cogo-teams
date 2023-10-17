@@ -55,7 +55,10 @@ function RateRevertCard({
 				isTriggeredFromSideBar={isTriggeredFromSideBar}
 			/>
 
-			<ShipmentProgress cardData={cardData} />
+			<ShipmentProgress
+				cardData={cardData}
+				isTriggeredFromSideBar={isTriggeredFromSideBar}
+			/>
 
 			<div className={styles.card_footer}>
 				<div className={styles.actions_container}>
