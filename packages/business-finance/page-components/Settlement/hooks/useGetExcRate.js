@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 
-import toastApiError from '../../commons/toastApiError.ts';
+import toastApiError from '../../commons/toastApiError';
 
 const useGetExcRate = ({ from_cur = '', to_cur = '' }) => {
 	const [{ data, loading }, trigger] = useRequest(

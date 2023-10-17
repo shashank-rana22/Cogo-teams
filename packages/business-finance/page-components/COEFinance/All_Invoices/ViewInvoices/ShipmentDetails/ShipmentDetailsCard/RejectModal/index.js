@@ -9,7 +9,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import invoiceDetailsRejectCheckboxList from '../../../../../constants/invoice-details-checkbox-list.ts';
+import invoiceDetailsRejectCheckboxList from '../../../../../constants/invoice-details-checkbox-list';
 
 import styles from './styles.module.css';
 
