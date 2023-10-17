@@ -1,30 +1,12 @@
 export const FILTERS_DEFAULT_VALUES = {
-	operation_type       : '',
-	cargo_readiness_date : '',
-	source               : null,
-	payment_term         : null,
-	offers               : null,
-	schedule_type        : '',
+	source: null,
 };
 
-export const getControls = () => {
+export const getControls = ({ transitTime = {} }) => {
 	const FILTER_CONTROLS = {
-		// cargo_readiness_date: {
-		// 	name     : 'cargo_readiness_date',
-		// 	label    : 'Cargo Readiness Date',
-		// 	controls : [
-		// 		{
-		// 			name       : 'cargo_readiness_date',
-		// 			label      : 'Pick a Date',
-		// 			type       : 'datepicker',
-		// 			dateFormat : 'dd-MM-yyyy',
-		// 			span       : 12,
-		// 		},
-		// 	],
-		// },
 		source: {
 			name     : 'source',
-			label    : 'Source',
+			label    : 'Rate type',
 			controls : [
 				{
 					name    : 'source',
@@ -35,13 +17,44 @@ export const getControls = () => {
 							value : null,
 						},
 						{
+							label : 'Cogo Assured',
+							value : 'cogo_assured_rate',
+						},
+						{
+							label : 'System Rate',
+							value : 'system_rate',
+						},
+						{
+							label : 'Promotional',
+							value : 'promotional',
+						},
+						{
 							label : 'Spot Booking',
-							value : 'spot_rates',
+							value : 'spot_booking',
+						},
+						{
+							label : 'Contract',
+							value : 'contract',
 						},
 					],
 				},
 			],
 		},
+		...(transitTime.min !== transitTime.max ? {
+			transit_time: {
+				name     : 'transit_time',
+				label    : 'Transit Time',
+				controls : [
+					{
+						name        : 'transit_time',
+						type        : 'range-slider',
+						sliderWidth : '80%',
+						min         : transitTime.min,
+						max         : transitTime.max,
+					},
+				],
+			},
+		} : {}),
 	};
 	return FILTER_CONTROLS;
 };

@@ -36,6 +36,18 @@ function ListRates({
 		});
 	}, [setRouterLoading]);
 
+	const transitTime = (rates || []).reduce((acc, rate) => {
+		if (!acc.min || rate.transit_time < acc.min) {
+			acc.min = rate.transit_time;
+		}
+
+		if (!acc.max || rate.transit_time > acc.max) {
+			acc.max = rate.transit_time;
+		}
+
+		return acc;
+	}, { min: null, max: null });
+
 	if (!loading && isEmpty(rates)) {
 		return (
 			<EmptyState
@@ -75,6 +87,7 @@ function ListRates({
 						openAccordian={openAccordian}
 						setOpenAccordian={setOpenAccordian}
 						setRouterLoading={setRouterLoading}
+						transitTime={transitTime}
 					/>
 				</div>
 			</div>

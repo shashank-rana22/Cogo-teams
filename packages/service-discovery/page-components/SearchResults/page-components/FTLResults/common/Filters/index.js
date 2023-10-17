@@ -37,6 +37,7 @@ function Filters({
 	setOpenAccordian = () => {},
 	showFilterModal = false,
 	setShowFilterModal = () => {},
+	transitTime = {},
 }) {
 	const filtersApplied = checkIfFiltersChanged(FILTERS_DEFAULT_VALUES, filters);
 
@@ -76,6 +77,7 @@ function Filters({
 					loading={loading}
 					DEFAULT_VALUES={FILTERS_DEFAULT_VALUES}
 					openAccordian={openAccordian}
+					transitTime={transitTime}
 				/>
 			) : null}
 		</div>

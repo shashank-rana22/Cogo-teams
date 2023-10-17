@@ -15,8 +15,9 @@ function FilterModal({
 	loading = false,
 	DEFAULT_VALUES = {},
 	openAccordian = '',
+	transitTime = {},
 }) {
-	const controls = getControls();
+	const controls = getControls({ transitTime });
 
 	const defaultValues = { ...DEFAULT_VALUES, ...filters };
 
