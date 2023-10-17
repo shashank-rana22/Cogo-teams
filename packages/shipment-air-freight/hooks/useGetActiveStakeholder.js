@@ -11,8 +11,11 @@ const useGetActiveStakeholder = () => {
 	const stakeholderMap = [
 		{ role_ids: geo.uuid.kam_manager_ids, stakeholder: 'booking_agent_manager' },
 		{
-			role_ids    : [...geo.uuid.kam_ids, ...geo.uuid.cogo_fx_settings_allowed_role_ids],
-			stakeholder : 'booking_agent',
+			role_ids: [...geo.uuid.kam_ids,
+				...geo.uuid.cogo_fx_settings_allowed_role_ids,
+				...geo.uuid.centralised_customer_support,
+			],
+			stakeholder: 'booking_agent',
 		},
 		{ role_ids: geo.uuid.account_receivable_executive, stakeholder: 'account_receivable_executive' },
 		{ role_ids: [geo.uuid.so1_so2_ops_role_id, geo.uuid.so1_so2_role_id], stakeholder: 'so1_so2_ops' },
