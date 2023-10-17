@@ -13,7 +13,6 @@ import styles from './styles.module.css';
 const MAX_LENGTH = 18;
 
 const FIRST_INDEX = 1;
-const ZERO_POINT_ZERO_ZERO = 0.00;
 
 function RenderSummaryData({ summary = [] }) {
 	return (
@@ -198,7 +197,7 @@ const summaryDataFourth = ({ paidTds, payableTds, billCurrency, tdsAmount, payme
 	},
 ];
 
-const summaryDataFifth = ({ billCurrency, subTotal = ZERO_POINT_ZERO_ZERO, grandTotal = ZERO_POINT_ZERO_ZERO }) => [
+const summaryDataFifth = ({ billCurrency = '', subTotal = '', grandTotal = '' }) => [
 	{
 		title : 'Sub Total Amount',
 		value : formatAmount({
