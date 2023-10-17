@@ -2,7 +2,7 @@ import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import EmptyStateDocs from '../../../commons/EmptyStateDocs/index.tsx';
+import EmptyStateDocs from '../../../commons/EmptyStateDocs/index';
 import Loader from '../Loader';
 
 import Header from './Header';

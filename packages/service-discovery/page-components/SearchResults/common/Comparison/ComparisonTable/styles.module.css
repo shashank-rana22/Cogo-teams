@@ -70,7 +70,7 @@
 }
 
 .row:last-child {
-	align-items: end;
+	align-items: flex-end;
 	background-color: #fff;
 	border: none;
 }
