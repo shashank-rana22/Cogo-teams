@@ -2,7 +2,7 @@ import RateCoverageContent from '../Content';
 
 export const tabPanelMappings = [
 	{
-		name      : 'live_booking',
+		name      : 'live_bookings',
 		title     : 'Live Bookings',
 		component : <>--</>,
 	},

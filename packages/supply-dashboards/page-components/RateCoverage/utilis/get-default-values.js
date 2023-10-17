@@ -1,6 +1,6 @@
 const getDefaultValues = (oldfields) => {
 	const DEFAULT_VALUES = {};
-	const newfields = oldfields.map((field) => {
+	const newfields = oldfields?.map((field) => {
 		const { value, ...rest } = field;
 		if (field.type === 'fieldArray') {
 			DEFAULT_VALUES[field.name] = value || [];

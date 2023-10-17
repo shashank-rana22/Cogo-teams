@@ -28,7 +28,6 @@ const getCommoditiesDetails = (list = [], isNullValue = true) => {
 };
 
 const getCommodityList = (type, container_type) => {
-	console.log(type, container_type, 'type');
 	const containerType = isEmpty(container_type) ? 'standard' : container_type;
 
 	switch (type) {

@@ -84,6 +84,7 @@ const fclLocalChargesControls = (payload) => [
 		showOptional : false,
 		className    : 'primary lg',
 		min          : 0,
+		rules        : { required: 'This is required' },
 	},
 	{
 		name               : 'detention_days',
@@ -154,7 +155,7 @@ const fclLocalChargesControls = (payload) => [
 		span        : 4,
 		className   : 'primary lg',
 		placeholder : 'Free Days',
-		rules       : { required: 'Required' },
+		rules       : { required: 'This is required' },
 	},
 	{
 		name               : 'demurrage_days',

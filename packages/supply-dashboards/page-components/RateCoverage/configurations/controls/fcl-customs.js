@@ -44,12 +44,12 @@ const fclCustomsControls = ({
 
 		{
 			name        : 'origin_location_id',
-			label       : 'Origin Location',
+			label       : 'Location',
 			type        : 'select',
 			placeholder : 'Origin Location',
 			span        : 4,
-			value       : data?.origin_port?.id,
-			disabled  	 : data?.origin_port?.id,
+			value       : data?.location.id,
+			disabled    : data?.location?.id,
 			...originLocationOptions,
 			rules       : { required: 'origin location is required' },
 		},

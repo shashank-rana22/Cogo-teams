@@ -4,8 +4,8 @@ const formatAirLocalCharge = (payload, values, charge) => {
 		? payload?.origin_airport_id
 		: payload?.destination_airport_id;
 	const payloadRequired = {
-		commodity_type      : payload.commodity_type,
-		commodity           : values?.commodity,
+		commodity           : payload?.commodity,
+		commodity_type      : payload?.commodity_type || 'all',
 		airport_id          : airportId,
 		airline_id          : payload.airline_id,
 		service_provider_id : payload?.service_provider_id,

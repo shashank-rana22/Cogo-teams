@@ -30,13 +30,13 @@ const airCustomsControls = ({
 			rules       : { required: 'rate provided by user is required' },
 		},
 		{
-			name        : 'origin_location_id',
-			label       : 'Origin Location',
+			name        : 'location_id',
+			label       : 'Location',
 			type        : 'select',
-			placeholder : 'Origin Location',
+			placeholder : 'Location',
 			span        : 4,
-			value       : data?.location_id,
-			disabled  	 : data?.location_id,
+			value       : data?.airport_id,
+			disabled  	 : data?.airport_id,
 			...originLocationOptions,
 			rules       : { required: 'origin location is required' },
 		},
@@ -81,12 +81,12 @@ const airCustomsControls = ({
 				span  : 4,
 			}
 			: null,
-		{
-			name         : 'line_items',
-			heading      : 'Line Items',
-			span         : 12,
-			showOptional : false,
-		},
+		// {
+		// 	name         : 'line_items',
+		// 	heading      : 'Line Items',
+		// 	span         : 12,
+		// 	showOptional : false,
+		// },
 		{
 			label              : 'Add Custom Line Items',
 			name               : 'customs_line_items',

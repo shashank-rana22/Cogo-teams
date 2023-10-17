@@ -16,7 +16,7 @@ const formatAirCustomsRate = (data, user_id) => {
 	const commodity = data.commodity === 'all_commodity' ? 'all_commodities' : data.commodity;
 
 	const payload = {
-		airport_id          : data.origin_location_id,
+		airport_id          : data.location_id,
 		trade_type          : data.trade_type,
 		container_size      : data.container_size,
 		container_type      : data.container_type,

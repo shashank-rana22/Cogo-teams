@@ -91,19 +91,16 @@ const useCreateFreightRate = (service) => {
 			const { response = {} } = error;
 			const { data: err_data = {} } = response;
 			const {
+				detail = undefined,
 				base = undefined,
+				validity_end = undefined,
 				length: lengthError = '',
 				breadth: breadthError = '',
 				height: heightError = '',
 			} = err_data;
 
-			let clearStr = '';
-			if (base) {
-				const cleanStr = base?.replace(/Error/g, '');
-				clearStr = cleanStr?.replace(/Base/g, '');
-			}
 			Toast.error(
-				startCase(clearStr || lengthError || breadthError || heightError),
+				startCase(base || lengthError || breadthError || heightError || detail || validity_end),
 			);
 		}
 		return null;

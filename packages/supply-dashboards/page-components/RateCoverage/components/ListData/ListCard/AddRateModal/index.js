@@ -95,32 +95,53 @@ function AddRateModal({
 
 	const handleSubmitData = async (formData) => {
 		const rate_id = await createRate(formData);
-		if (filter?.service === 'air_freight' || filter?.service === 'fcl_freight') {
+		if (addLocalServices) {
 			setPayload(formData);
 		}
 		if (rate_id && source === 'rate_feedback') {
+			if (filter?.service === 'air_freight' || filter?.service === 'fcl_freight') {
+				setPayload(formData);
+			}
 			const resp = await deleteFeedbackRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
 			if (resp === TWO_HUNDERD) {
-				handelAdditionalServices();
+				if (addLocalServices) {
+					handelAdditionalServices();
+				} else {
+					handleSuccessActions();
+				}
 			}
 		}
+
 		if (rate_id && source === 'rate_request') {
 			const resp = await deleteRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
 			if (resp === TWO_HUNDERD) {
-				handelAdditionalServices();
+				if (addLocalServices) {
+					handelAdditionalServices();
+				} else {
+					handleSuccessActions();
+				}
 			}
 		}
+
 		if (rate_id && source === 'live_booking') {
 			const resp = await updateFlashBookingRate({ data, formData, shipment_data });
 			if (resp === TWO_HUNDERD) {
-				handleSuccessActions();
+				if (addLocalServices) {
+					handelAdditionalServices();
+				} else {
+					handleSuccessActions();
+				}
 			}
 		}
 		if (['critical_ports', 'expiring_rates', 'cancelled_shipments']
 			?.includes(source)) {
 			const resp = await deleteRateJob({ rate_id, data: formData, id: data?.id });
-			if (!resp?.error) {
-				handleSuccessActions();
+			if (rate_id && resp === TWO_HUNDERD) {
+				if (addLocalServices) {
+					handelAdditionalServices();
+				} else {
+					handleSuccessActions();
+				}
 			}
 		}
 	};
@@ -245,6 +266,7 @@ function AddRateModal({
 					activeTab={activeTab}
 					themeType="secondary"
 					onChange={setActiveTab}
+					style={{ padding: '10px 0 0' }}
 				>
 
 					<TabPanel

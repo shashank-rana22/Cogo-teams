@@ -4,6 +4,7 @@ import {
 	FREIGHT_CONTAINER_COMMODITY_MAPPINGS,
 	LCL_FRIEGHT_COMMODITIES,
 	FCL_CUSTOMS_CONTAINER_COMMODITY_MAPPING,
+	AIR_LOCAL_COMMODITIES,
 } from '@cogoport/globalization/constants/commodities';
 import { startCase } from '@cogoport/utils';
 
@@ -13,10 +14,7 @@ const COMMODITY_MAPPINGS = {
 	freight     : FREIGHT_CONTAINER_COMMODITY_MAPPINGS,
 	lcl_freight : LCL_FRIEGHT_COMMODITIES,
 	fcl_customs : FCL_CUSTOMS_CONTAINER_COMMODITY_MAPPING,
-	// ftl_freight     : 'ftl_freight',
-	// trailer_freight : 'local',
-	// ltl_freight     : 'hazardous',
-	// haulage_freight : 'local',
+	air_local   : AIR_LOCAL_COMMODITIES,
 };
 
 const TRADE_TYPES = ['import', 'export'];

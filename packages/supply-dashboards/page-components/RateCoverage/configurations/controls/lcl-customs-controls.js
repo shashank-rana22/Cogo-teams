@@ -38,9 +38,9 @@ const lclCustomsControls = ({
 		},
 		{
 			name        : 'origin_location_id',
-			label       : 'Origin Location',
+			label       : 'Location',
 			type        : 'select',
-			placeholder : 'Origin Location',
+			placeholder : 'Location',
 			span        : 4,
 			value       : data?.location_id,
 			disabled 	  : data?.location_id,

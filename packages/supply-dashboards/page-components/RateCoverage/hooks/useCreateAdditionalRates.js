@@ -148,6 +148,7 @@ const useCreateAdditionalRates = ({
 		try {
 			const newValues = { ...val };
 			const payloadRequired = getPayload({ values: newValues, payload, charge, chargeName });
+
 			const res = await trigger({
 				data: {
 					...payloadRequired,

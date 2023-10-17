@@ -21,7 +21,7 @@ const configuration = (
 		case 'fcl_freight_local':
 			return fclLocalChargesControls(payload);
 		case 'air_freight_local':
-			return airLocalChargesControls;
+			return airLocalChargesControls(payload);
 		case 'haulage_freight':
 			Object.keys(additionalService).forEach((service) => {
 				if (
