@@ -6,7 +6,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function ContractAd({ loading = false, importerExporterId = '', contractDetail = {} }) {
+function ContractAd({ loading = false, importerExporterId = '', contractDetail = {}, style = {} }) {
 	const { query = {} } = useSelector(({ general }) => ({ query: general.query }));
 
 	const { partner_id = '' } = query;
@@ -24,7 +24,7 @@ function ContractAd({ loading = false, importerExporterId = '', contractDetail =
 	}
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={style}>
 			<img
 				src={GLOBAL_CONSTANTS.image_url.cogo_contract_banner}
 				alt="cogo-contract-banner"

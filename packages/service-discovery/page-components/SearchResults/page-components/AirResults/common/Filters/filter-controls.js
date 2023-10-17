@@ -3,11 +3,9 @@ import { isEmpty } from '@cogoport/utils';
 import CustomSelectOption from '../../../../../../common/CustomSelectOption';
 
 export const FILTERS_DEFAULT_VALUES = {
-	airline_id           : [],
-	operation_type       : '',
-	cargo_readiness_date : '',
-	source               : null,
-	payment_term         : null,
+	airline_id   : [],
+	source       : null,
+	payment_term : null,
 };
 
 export const getControls = ({ airlines = [], airlineParams = {}, setAirlineParams = () => {} }) => {
@@ -41,47 +39,47 @@ export const getControls = ({ airlines = [], airlineParams = {}, setAirlineParam
 				},
 			],
 		},
-		operation_type: {
-			name     : 'operation_type',
-			label    : 'Operation Type',
-			controls : [
-				{
-					name    : 'operation_type',
-					label   : 'Flight Operation Type',
-					type    : 'chips',
-					options : [
-						{
-							label : 'Passenger',
-							value : 'passenger',
-						},
-						{
-							label : 'Freighter',
-							value : 'freighter',
-						},
-						{
-							label : 'Charter',
-							value : 'charter',
-						},
-					],
-				},
-			],
-		},
-		cargo_readiness_date: {
-			name     : 'cargo_readiness_date',
-			label    : 'Cargo Readiness Date',
-			controls : [
-				{
-					name       : 'cargo_readiness_date',
-					label      : 'Pick a Date',
-					type       : 'datepicker',
-					dateFormat : 'dd-MM-yyyy',
-					span       : 12,
-				},
-			],
-		},
+		// operation_type: {
+		// 	name     : 'operation_type',
+		// 	label    : 'Operation Type',
+		// 	controls : [
+		// 		{
+		// 			name    : 'operation_type',
+		// 			label   : 'Flight Operation Type',
+		// 			type    : 'chips',
+		// 			options : [
+		// 				{
+		// 					label : 'Passenger',
+		// 					value : 'passenger',
+		// 				},
+		// 				{
+		// 					label : 'Freighter',
+		// 					value : 'freighter',
+		// 				},
+		// 				{
+		// 					label : 'Charter',
+		// 					value : 'charter',
+		// 				},
+		// 			],
+		// 		},
+		// 	],
+		// },
+		// cargo_readiness_date: {
+		// 	name     : 'cargo_readiness_date',
+		// 	label    : 'Cargo Readiness Date',
+		// 	controls : [
+		// 		{
+		// 			name       : 'cargo_readiness_date',
+		// 			label      : 'Pick a Date',
+		// 			type       : 'datepicker',
+		// 			dateFormat : 'dd-MM-yyyy',
+		// 			span       : 12,
+		// 		},
+		// 	],
+		// },
 		source: {
 			name     : 'source',
-			label    : 'Source',
+			label    : 'Rate Type',
 			controls : [
 				{
 					name    : 'source',
@@ -92,8 +90,20 @@ export const getControls = ({ airlines = [], airlineParams = {}, setAirlineParam
 							value : null,
 						},
 						{
+							label : 'Cogo Assured',
+							value : 'cogo_assured_rate',
+						},
+						{
+							label : 'System Rate',
+							value : 'system_rate',
+						},
+						{
+							label : 'Promotional',
+							value : 'promotional',
+						},
+						{
 							label : 'Spot Booking',
-							value : 'spot_rates',
+							value : 'spot_booking',
 						},
 					],
 				},

@@ -18,7 +18,15 @@ function FilterModal({
 	controls = [],
 	openAccordian = '',
 }) {
-	const defaultValues = { ...DEFAULT_VALUES, ...filters };
+	const defaultValues = {
+		...DEFAULT_VALUES,
+		...filters,
+		...(!isEmpty(filters?.source) ? {
+			source: Array.isArray(filters.source) && filters?.source?.some(
+				(value) => ['spot_rates', 'predicted'].includes(value),
+			) ? 'system_rate' : filters.source,
+		} : {}),
+	};
 
 	const {
 		control,

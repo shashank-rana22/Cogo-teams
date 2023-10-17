@@ -147,6 +147,7 @@ function ListRates({
 							loading={loading}
 							importerExporterId={detail.importer_exporter_id}
 							contractDetail={contract_detail}
+							style={{ marginTop: 40 }}
 						/>
 					) : null}
 				</div>
