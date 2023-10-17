@@ -21,12 +21,6 @@ const controls = [
 			},
 		],
 	},
-	// {
-	// 	label        : 'Line Items',
-	// 	span         : 12,
-	// 	name         : 'line_items_label',
-	// 	showOptional : false,
-	// },
 	{
 		label              : 'Add Line Items',
 		name               : 'line_items',

@@ -9,7 +9,7 @@ const useUpdateFlashBookingRate = () => {
 
 	const updateFlashBookingRate = async ({ data, formData, shipment_data }) => {
 		const { shipment_id, source_id, service_provider_id } = data || {};
-		const { is_shipper_specific = false, schedule_type, line_items = [], currency } = formData || {};
+		const { is_shipper_specific = false, schedule_type, customs_line_items = [], currency } = formData || {};
 		const { summary } = shipment_data || {};
 		try {
 			const resp = await trigger({
@@ -23,7 +23,7 @@ const useUpdateFlashBookingRate = () => {
 					is_shipper_specific  : is_shipper_specific || undefined,
 					schedule_type,
 					importer_exporter_id : is_shipper_specific === true ? summary?.importer_exporter_id : undefined,
-					line_items,
+					line_items           : customs_line_items || undefined,
 				},
 			});
 			if (resp) { return resp?.status; }

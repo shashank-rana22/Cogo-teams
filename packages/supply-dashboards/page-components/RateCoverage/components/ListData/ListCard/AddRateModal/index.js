@@ -124,6 +124,7 @@ function AddRateModal({
 		}
 
 		if (rate_id && source === 'live_booking') {
+			console.log(formData, 'formData');
 			const resp = await updateFlashBookingRate({ data, formData, shipment_data });
 			if (resp === TWO_HUNDERD) {
 				if (addLocalServices) {
@@ -135,12 +136,14 @@ function AddRateModal({
 		}
 		if (['critical_ports', 'expiring_rates', 'cancelled_shipments']
 			?.includes(source)) {
-			const resp = await deleteRateJob({ rate_id, data: formData, id: data?.id });
-			if (rate_id && resp === TWO_HUNDERD) {
-				if (addLocalServices) {
-					handelAdditionalServices();
-				} else {
-					handleSuccessActions();
+			if (rate_id) {
+				const resp = await deleteRateJob({ rate_id, data: formData, id: data?.id });
+				if (resp === TWO_HUNDERD) {
+					if (addLocalServices) {
+						handelAdditionalServices();
+					} else {
+						handleSuccessActions();
+					}
 				}
 			}
 		}

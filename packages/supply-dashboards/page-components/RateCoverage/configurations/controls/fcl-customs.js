@@ -133,7 +133,6 @@ const fclCustomsControls = ({
 			: null,
 		{
 			heading      : 'Line Items',
-			name         : 'line_item',
 			showOptional : false,
 			span         : 12,
 		},
@@ -144,14 +143,16 @@ const fclCustomsControls = ({
 			showButtons        : true,
 			buttonText         : 'Add Custom Line Items',
 			noDeleteButtonTill : 0,
-
-			controls: [
+			controls           : [
 				{
-					name        : 'code',
-					type        : 'select',
+					name        : 'fcl_line_items',
+					valueKey    : 'code',
+					type        : 'async_select',
 					span        : 2,
-					placeholder : 'Charge Name',
-					rules       : { required: 'This is required' },
+					asyncKey    : 'list_rate_charge_codes',
+					params      : { service_name: 'fcl_cfs_charges' },
+					initialCall : true,
+					rules       : { required: 'Code is required' },
 				},
 				{
 					name        : 'currency',
@@ -202,8 +203,8 @@ const fclCustomsControls = ({
 			noDeleteButtonTill : 0,
 			controls           : [
 				{
-					name        : 'code',
-					value       : 'code',
+					name        : 'cfs_line_items',
+					valueKey    : 'code',
 					type        : 'async_select',
 					span        : 2,
 					asyncKey    : 'list_rate_charge_codes',

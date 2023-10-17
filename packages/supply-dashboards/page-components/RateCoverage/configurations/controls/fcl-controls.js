@@ -66,8 +66,8 @@ const fclControls = ({
 			name        : 'origin_main_port_id',
 			type        : 'select',
 			label       : 'Origin Main port',
-			placeholder : 'Origin Main port',
 			span        : 4,
+			placeholder : 'Origin Main port',
 			rules       : { required: 'origin main port is required' },
 		},
 		{

@@ -1,5 +1,4 @@
 const formatAirSurcharge = (payload, values) => {
-	console.log(payload, 'payload123');
 	const payloadRequired = {
 		...payload,
 		commodity_type              : payload?.commodity_type || 'all',
