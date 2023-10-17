@@ -1,6 +1,10 @@
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const getCommonAgentType = ({ viewType = '' }) => {
+	if (viewType === 'cogoone_admin') {
+		return '';
+	}
+
 	if (viewType.includes('supply')) {
 		return 'supply';
 	}
