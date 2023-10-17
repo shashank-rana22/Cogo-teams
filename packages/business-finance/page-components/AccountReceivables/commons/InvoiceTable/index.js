@@ -1,10 +1,13 @@
-import { cl, Pagination } from '@cogoport/components';
+/* eslint-disable max-lines-per-function */
+import { cl, Pagination, Placeholder, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, upperCase } from '@cogoport/utils';
 import React, { useCallback, useEffect, useState } from 'react';
 
+import useListCogoEntities from '../../../AccountPayables/Dashboard/hooks/useListCogoEntities';
 import Filters from '../../../commons/Filters/index';
 import SalesFunnelView from '../../components/Invoice/SalesFunnelView';
 import completedColumn from '../../configs/Completed_table';
@@ -49,6 +52,12 @@ function InvoiceTable({
 	const [checkedRows, setCheckedRows] = useState([]);
 	const [isHeaderChecked, setIsHeaderChecked] = useState(false);
 
+	const entity = getDefaultEntityCode(partner_id);
+
+	const [entityCodes, setEntityCode] = useState(entity);
+
+	const entityCode_in_use = invoiceJourney ? entityCode : entityCodes;
+
 	const {
 		listData,
 		clearInvoiceFilters,
@@ -59,7 +68,7 @@ function InvoiceTable({
 		sendReport,
 		sort,
 		setSort,
-	} = useGetOutstandingCard({ organizationId, entityCode, limit });
+	} = useGetOutstandingCard({ organizationId, entityCode_in_use, limit });
 
 	const { bulkIrnGenerate, bulkIrnLoading } = useBulkIrnGenerate({
 		entityCode,
@@ -145,6 +154,22 @@ function InvoiceTable({
 		? columns
 		: columns?.filter((column) => column.id !== 'checkbox');
 
+	const { loading, entityData = [] } = useListCogoEntities();
+	const entityDataCount = entityData.length;
+	const entityOptions = (entityData || []).map((item) => {
+		const {
+			business_name: companyName = '',
+			entity_code: listEntityCode = '',
+		} = item || {};
+		return {
+			label : `${upperCase(companyName)} (${listEntityCode})`,
+			value : listEntityCode,
+		};
+	});
+
+	const showEntityBar = !loading && !invoiceJourney;
+	const showLoadingEntityBar = loading && !invoiceJourney;
+
 	const resetCheckboxes = useCallback(() => {
 		setIsHeaderChecked(false);
 		setCheckedRows([]);
@@ -165,6 +190,27 @@ function InvoiceTable({
 							setFilters={setinvoiceFilters}
 							controls={invoiceFilter({ profile })}
 						/>
+						{showEntityBar
+							? (
+								<div style={{ width: 'fit-content' }}>
+									<Select
+										name="business_name"
+										onChange={(entityVal) => {
+											setEntityCode(entityVal);
+										}}
+										value={entityCodes}
+										options={entityOptions}
+										placeholder="Select Entity Code"
+										size="sm"
+										disabled={entityDataCount <= 1}
+									/>
+								</div>
+							)
+							: null}
+						{showLoadingEntityBar
+							? <Placeholder width="200px" height="30px" />
+							: null}
+
 						<FilterPopover
 							filters={invoiceFilters}
 							setFilters={setinvoiceFilters}
