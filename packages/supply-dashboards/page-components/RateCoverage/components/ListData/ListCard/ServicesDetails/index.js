@@ -127,33 +127,38 @@ function ServicesDetails({
 				</Button>
 			</Popover>
 
-			{filter?.service === 'fcl_freight' && (
-				<Popover
-					theme="light"
-					visible={showPopover}
-					content={showPopover && (
-						<ViewSuggestedServices
-							listview={listview}
-							page={page}
-							setPage={setPage}
-							loading={loading}
-							showPopover={showPopover}
-							setShowPopover={setShowPopover}
-							setShowAddRateModal={setShowAddRateModal}
-							setServiceIdPresent={setServiceIdPresent}
-						/>
-					)}
-					interactive
-				>
-					<Button
-						size="md"
-						themeType="link"
-						onClick={handelSuggestedRates}
+			<div>
+				{filter?.service === 'fcl_freight' && (
+					<Popover
+						theme="light"
+						visible={showPopover}
+						content={(
+							<ViewSuggestedServices
+								listview={listview}
+								page={page}
+								setPage={setPage}
+								loading={loading}
+								showPopover={showPopover}
+								setShowPopover={setShowPopover}
+								setShowAddRateModal={setShowAddRateModal}
+								setServiceIdPresent={setServiceIdPresent}
+							/>
+						)}
+						onClickOutside={() => setShowPopover(false)}
+						interactive
+						maxWidth="none"
+						animation="perspective"
 					>
-						Suggested Service Provider
-					</Button>
-				</Popover>
-			)}
+						<Button
+							size="md"
+							themeType="link"
+							onClick={handelSuggestedRates}
+						>
+							Suggested Service Provider
+						</Button>
+					</Popover>
+				)}
+			</div>
 
 			<div>
 				<Popover
