@@ -6,8 +6,8 @@ import { useCallback, useEffect } from 'react';
 const TICKET_POSSIBLE_STATUS = 'closed,rejected,unresolved,pending,escalated,overdue,reject_requested,resolve_requested';
 
 const getPayload = ({
-	serialId,
-	page,
+	serialId = '',
+	page = '',
 }) => ({
 	status   : TICKET_POSSIBLE_STATUS,
 	SortType : 'desc',

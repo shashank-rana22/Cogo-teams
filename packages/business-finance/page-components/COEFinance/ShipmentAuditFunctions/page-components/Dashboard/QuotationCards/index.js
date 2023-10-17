@@ -17,7 +17,7 @@ function QuotationCards({
 	setQuotationsData = () => {},
 }) {
 	const { query: { active_tab = '', job_id = '', job_number = '' } } = useRouter();
-	const { data: shipmentData, loading: loadingShipment } = useListShipment(job_number);
+	const { data: shipmentData = {}, loading: loadingShipment = false } = useListShipment(job_number);
 	const dataList = shipmentData?.list[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const shipmentId = dataList?.id || '';
 

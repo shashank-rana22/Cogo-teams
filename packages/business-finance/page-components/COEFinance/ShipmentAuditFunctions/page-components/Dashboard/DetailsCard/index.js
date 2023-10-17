@@ -40,7 +40,7 @@ function DetailsCard({
 
 	const pointsAndPromocode = cogopointUtilizationAmount + organizationPromocodesAmount;
 
-	const { data: dataWallet } = useGetWallet(shipmentId);
+	const { data: dataWallet = {} } = useGetWallet(shipmentId);
 	const {
 		agent_data: agentData = {},
 		agent_role_data: agentRoleData = {},

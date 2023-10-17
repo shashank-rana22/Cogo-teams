@@ -1,4 +1,4 @@
-const getApproveJobAuditBttnCondition = ({ quotationsData }) => {
+const getApproveJobAuditBttnCondition = ({ quotationsData = {} }) => {
 	const { prePostCheckoutData = {}, oprClosedData = {}, financialClosedData = {} } = quotationsData || {};
 
 	const { BUY: oprClosedBuy = [], SELL: oprClosedSell = [] } = oprClosedData;
