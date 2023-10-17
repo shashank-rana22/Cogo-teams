@@ -4,6 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 
+import OrgName from './OrgName';
 import styles from './styles.module.css';
 
 export const getFeedbackColumns = ({
@@ -27,18 +28,14 @@ export const getFeedbackColumns = ({
 			/>
 		),
 	},
+
 	{
 		Header   : t('allocation:organization_feedback_label'),
 		key      : 'organization',
 		id       : 'organization',
-		accessor : ({ organization, lead_organization_id, lead_organization }) => (
-			<section className={styles.table_cell}>
-				{lead_organization_id ? (
-					startCase(lead_organization?.business_name || '___')
-				) : (
-					startCase(organization?.business_name || '___')
-				)}
-			</section>
+		accessor : (item) => (
+			<OrgName item={item} />
+
 		),
 	},
 	{
