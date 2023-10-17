@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 // eslint-disable-next-line max-len
 import AddRateModal from '@cogoport/supply-dashboards/page-components/RateCoverage/components/ListData/ListCard/AddRateModal';
 import React, { useEffect } from 'react';
@@ -49,10 +50,10 @@ function RateModal({
 				return;
 			}
 			if (source === 'rate_feedback' || sources.includes('rate_feedback')) {
-				getFreightRateRequest();
+				getFreightRateFeedback();
 				return;
 			}
-			getFreightRateFeedback();
+			getFreightRateRequest();
 		},
 		[getFreightRateFeedback, getFreightRateRequest, getShipment, source, sources],
 	);
@@ -61,6 +62,7 @@ function RateModal({
 		<AddRateModal
 			showModal={showAddRateModal?.showModal}
 			filter={params}
+			source={source || sources?.[GLOBAL_CONSTANTS.zeroth_index]}
 			data={showAddRateModal?.cardData}
 			getListCoverage={fetchRateJobs}
 			requestData={requestData}
