@@ -27,7 +27,10 @@ function RaiseTicketModal({
 
 	let disableButton = false;
 
-	const { control, watch, handleSubmit, formState:{ errors = {} } = {} } = useForm();
+	const {
+		control = {}, watch = () => {},
+		handleSubmit = () => {}, formState:{ errors = {} } = {},
+	} = useForm();
 
 	const formValues = watch();
 
@@ -55,7 +58,7 @@ function RaiseTicketModal({
 
 	const raiseToDesk = configData?.items?.[GLOBAL_CONSTANTS.zeroth_index]?.raised_to_desk;
 
-	const formatRaiseToDeskOptions = (raiseToDesk || []).map((item) => ({
+	const formatRaiseToDeskOptions = (raiseToDesk || [])?.map((item) => ({
 		label : item?.name,
 		value : item?.name,
 	}));

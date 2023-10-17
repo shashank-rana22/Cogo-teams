@@ -31,7 +31,7 @@ function DetailsCard({
 
 	const currency = window.sessionStorage.getItem('currency');
 
-	const { data: summary = {}, loading: summaryLoading } = useGetShipmentSummary({ jobId });
+	const { data: summary = {}, loading: summaryLoading = false } = useGetShipmentSummary({ jobId });
 
 	const {
 		cogopointUtilizationAmount = '', kamMarginUtilizationAmount: kamMargin = '',

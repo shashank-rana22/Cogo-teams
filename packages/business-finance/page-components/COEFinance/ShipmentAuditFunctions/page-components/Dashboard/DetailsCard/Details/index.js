@@ -53,7 +53,7 @@ function Details({
 	const { importer_exporter: importerExporter = {} } = dataList || {};
 	const { push = () => {} } = useRouter();
 
-	const { shipment_type:shipmentType } = dataList || {};
+	const { shipment_type:shipmentType = '' } = dataList || {};
 
 	return (
 		<div>

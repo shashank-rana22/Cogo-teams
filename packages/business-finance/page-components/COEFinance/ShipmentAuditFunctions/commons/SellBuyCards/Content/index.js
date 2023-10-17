@@ -66,7 +66,7 @@ function Content({
 			<Header />
 			{data?.map((item) => (
 				<Body
-					key={item.id}
+					key={item?.id}
 					lineItemSectionOpen={lineItemSectionOpen}
 					setLineItemSectionOpen={setLineItemSectionOpen}
 					data={item}

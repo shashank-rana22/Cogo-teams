@@ -12,6 +12,8 @@ const TITLE_MAPPING = {
 	OPR : 'Operational',
 };
 
+const checkIsApproved = (data = []) => data?.every((item) => item?.quotation_state === 'APPROVED');
+
 const ZERO_VALUE = 0;
 
 function SellBuyCards({
@@ -32,8 +34,6 @@ function SellBuyCards({
 		grandTotal += i.grand_total;
 	});
 
-	const checkIsApproved = () => data?.every((item) => item?.quotation_state === 'APPROVED');
-
 	return (
 		<div className={styles.custom_accordion}>
 			{loading ? <Placeholder /> : (
@@ -44,7 +44,7 @@ function SellBuyCards({
 								{`${TITLE_MAPPING[source]} ${startCase(type)}`}
 							</div>
 
-							{checkIsApproved() ? <IcCFtick /> : null}
+							{checkIsApproved(data) ? <IcCFtick /> : null}
 						</div>
 
 						<div className={`${open ? styles.nothing : styles.other_title}`}>

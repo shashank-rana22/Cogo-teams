@@ -16,7 +16,7 @@ function Body({
 	const {
 		document_number = '', trade_party = '', document_date = '', document_status = '',
 		grand_total = '', quotation_state = '', id = '', line_items = [],
-	} = data;
+	} = data || {};
 
 	const key = `${type}_${source}_${id}`;
 	const isOpen = lineItemSectionOpen?.[key];
