@@ -20,6 +20,9 @@ function AdditionalContent({
 		loading,
 		updateCheckout,
 		updateLoading = false,
+		primaryService = {},
+		setHeaderProps = () => {},
+		rate = {},
 	} = useContext(CheckoutContext);
 
 	return (
@@ -29,6 +32,10 @@ function AdditionalContent({
 				getCheckout={getCheckout}
 				possible_subsidiary_services={possible_subsidiary_services}
 				servicesLength={rateDetails.length}
+				loading={loading}
+				primaryService={primaryService}
+				setHeaderProps={setHeaderProps}
+				rate={rate}
 			/>
 
 			<EditMarginFooter

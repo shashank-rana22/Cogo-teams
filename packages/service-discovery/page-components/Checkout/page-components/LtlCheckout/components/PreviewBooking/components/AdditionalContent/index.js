@@ -22,7 +22,9 @@ function AdditionalContent({
 		updateCheckout,
 		updateLoading,
 		loading,
+		primaryService = {},
 		possible_subsidiary_services = [],
+		setHeaderProps = () => {},
 	} = useContext(CheckoutContext);
 
 	const [noRatesPresent, setNoRatesPresent] = useState(false);
@@ -69,6 +71,10 @@ function AdditionalContent({
 				getCheckout={getCheckout}
 				possible_subsidiary_services={possible_subsidiary_services}
 				servicesLength={Object.values(rateServices).length}
+				loading={loading}
+				primaryService={primaryService}
+				setHeaderProps={setHeaderProps}
+				rate={rate}
 			/>
 
 			<BookingContent
