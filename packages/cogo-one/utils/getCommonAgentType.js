@@ -29,7 +29,7 @@ const getCommonAgentType = ({ viewType = '' }) => {
 		return 'marketing';
 	}
 
-	return '';
+	return viewType;
 };
 
 const FILTER_AGENT_TYPES = ['cogoone_admin', 'default'];
