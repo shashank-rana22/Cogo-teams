@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { cl, Pagination, Placeholder, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
@@ -10,6 +9,15 @@ import React, { useCallback, useEffect, useState } from 'react';
 import useListCogoEntities from '../../../AccountPayables/Dashboard/hooks/useListCogoEntities';
 import Filters from '../../../commons/Filters/index';
 import SalesFunnelView from '../../components/Invoice/SalesFunnelView';
+import sortStyleLedgerTotalAsc,
+{
+	sortStyleDueDateAsc,
+	sortStyleDueDateDesc,
+	sortStyleInvoiceDateAsc,
+	sortStyleInvoiceDateDesc,
+	sortStyleLedgerTotalDesc,
+}
+	from '../../configs/columns_sort_helper';
 import completedColumn from '../../configs/Completed_table';
 import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard';
@@ -21,22 +29,12 @@ import StyledTable from '../styledTable/index';
 
 import styles from './styles.module.css';
 
-const ORANGE = '#F68B21';
-const GREY = '#BDBDBD';
-
 const USER_IDS = [
 	GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
 	GLOBAL_CONSTANTS.uuid.hk_user_id,
 	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id];
 
 const SEARCH_PLACEHOLDER = 'Search by Invoice number / SID';
-
-const getStyle = ({
-	sortType = '',
-	sortBy = '',
-	activeSortType = '',
-	activeSortBy = '',
-}) => (sortType === activeSortType && sortBy === activeSortBy ? ORANGE : GREY);
 
 function InvoiceTable({
 	organizationId = '',
@@ -86,64 +84,22 @@ function InvoiceTable({
 
 	const { sortType = '', sortBy = '' } = sort || {};
 
-	const sortStyleLedgerTotalAsc = getStyle({
-		sortType,
-		sortBy,
-		activeSortType : 'asc',
-		activeSortBy   : 'ledgerTotal',
-	});
-
-	const sortStyleLedgerTotalDesc = getStyle({
-		sortType,
-		sortBy,
-		activeSortType : 'desc',
-		activeSortBy   : 'ledgerTotal',
-	});
-
-	const sortStyleInvoiceDateAsc = getStyle({
-		sortType,
-		sortBy,
-		activeSortType : 'asc',
-		activeSortBy   : 'invoiceDate',
-	});
-
-	const sortStyleInvoiceDateDesc = getStyle({
-		sortType,
-		sortBy,
-		activeSortType : 'desc',
-		activeSortBy   : 'invoiceDate',
-	});
-
-	const sortStyleDueDateAsc = getStyle({
-		sortType,
-		sortBy,
-		activeSortType : 'asc',
-		activeSortBy   : 'dueDate',
-	});
-
-	const sortStyleDueDateDesc = getStyle({
-		sortType,
-		sortBy,
-		activeSortType : 'desc',
-		activeSortBy   : 'dueDate',
-	});
-
 	const columns = completedColumn({
 		entityCode,
-		refetch   : getOrganizationInvoices,
+		refetch                  : getOrganizationInvoices,
 		showName,
 		setSort,
-		sortStyleLedgerTotalAsc,
-		sortStyleLedgerTotalDesc,
-		sortStyleInvoiceDateAsc,
-		sortStyleInvoiceDateDesc,
-		sortStyleDueDateAsc,
-		sortStyleDueDateDesc,
+		sortStyleLedgerTotalAsc  : sortStyleLedgerTotalAsc({ sortType, sortBy }),
+		sortStyleLedgerTotalDesc : sortStyleLedgerTotalDesc({ sortType, sortBy }),
+		sortStyleInvoiceDateAsc  : sortStyleInvoiceDateAsc({ sortType, sortBy }),
+		sortStyleInvoiceDateDesc : sortStyleInvoiceDateDesc({ sortType, sortBy }),
+		sortStyleDueDateAsc      : sortStyleDueDateAsc({ sortType, sortBy }),
+		sortStyleDueDateDesc     : sortStyleDueDateDesc({ sortType, sortBy }),
 		invoiceFilters,
 		setinvoiceFilters,
 		checkedRows,
 		setCheckedRows,
-		totalRows : listData?.list || [],
+		totalRows                : listData?.list || [],
 		isHeaderChecked,
 		setIsHeaderChecked,
 		showFilters,
