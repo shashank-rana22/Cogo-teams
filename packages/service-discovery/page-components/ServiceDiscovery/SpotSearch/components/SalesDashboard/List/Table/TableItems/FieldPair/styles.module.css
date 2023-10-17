@@ -43,6 +43,14 @@
 	white-space: nowrap;
 }
 
+.lower_text {
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
 .card {
 	display: flex;
 	align-items: center;
