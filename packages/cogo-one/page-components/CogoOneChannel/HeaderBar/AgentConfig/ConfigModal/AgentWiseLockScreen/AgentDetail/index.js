@@ -1,4 +1,5 @@
-import { Toggle, Placeholder, cl } from '@cogoport/components';
+import { Toggle, Placeholder, cl, Pill } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -24,19 +25,26 @@ function AgentDetail({
 			key={agent_id}
 		>
 			{loading ? <Placeholder className={styles.agent_ph} /> : agent}
+
 			{loading
 				? <Placeholder className={styles.toggle_ph} />
 				: (
-					<Toggle
-						key={agent_id}
-						name={agent}
-						size="md"
-						checked={status !== 'inactive'}
-						value={status}
-						onChange={onToggle}
-						disabled={createLoading}
-						className={styles.toggle}
-					/>
+					<div className={styles.status}>
+						<Pill color="#C4DC91" size="sm">
+							{startCase(status)}
+						</Pill>
+
+						<Toggle
+							key={agent_id}
+							name={agent}
+							size="md"
+							checked={status !== 'inactive'}
+							value={status}
+							onChange={onToggle}
+							disabled={createLoading}
+							className={styles.toggle}
+						/>
+					</div>
 				)}
 		</div>
 	);
