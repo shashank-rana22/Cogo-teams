@@ -1,5 +1,6 @@
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
+import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 
@@ -17,16 +18,19 @@ function OrgName({ item = {} }) {
 		organization_id = '',
 		source_id = '',
 		source_type = '',
-	} = item;
+	} = item || {};
 
-	const urlMapping = {
-		user              : `${window.location.origin}/${partner_id}/details/demand/${organization_id}`,
-		organization      : `${window.location.origin}/${partner_id}/details/demand/${organization_id}`,
-		lead_organization : `${window.location.origin}/${partner_id}/lead-organization/${lead_organization_id}`,
-		lead_user         : organization_id
-			? `${window.location.origin}/${partner_id}/details/demand/${organization_id}`
-			: `${window.location.origin}/${partner_id}/lead-user/${source_id}`,
-	};
+	const urlMapping = useMemo(
+		() => ({
+			user              : `${window.location.origin}/${partner_id}/details/demand/${organization_id}`,
+			organization      : `${window.location.origin}/${partner_id}/details/demand/${organization_id}`,
+			lead_organization : `${window.location.origin}/${partner_id}/lead-organization/${lead_organization_id}`,
+			lead_user         : organization_id
+				? `${window.location.origin}/${partner_id}/details/demand/${organization_id}`
+				: `${window.location.origin}/${partner_id}/lead-user/${source_id}`,
+		}),
+		[partner_id, organization_id, lead_organization_id, source_id],
+	);
 
 	return (
 		<section
