@@ -120,6 +120,7 @@ function getExtraCharges({
 	currencies,
 	currency_conversion_delta,
 	primaryServiceDetails,
+	cogofx_currencies = {},
 }) {
 	let extraCharges = 0;
 	const { booking_charges } = rate;
@@ -135,7 +136,7 @@ function getExtraCharges({
 			const toBaseCurrency = lineItem[GLOBAL_CONSTANTS.zeroth_index].total_price_discounted
 				* currencies[lineItem?.[GLOBAL_CONSTANTS.zeroth_index].currency];
 
-			price = toBaseCurrency / currencies[invoicingPartyCurrency];
+			price = toBaseCurrency / (currencies[invoicingPartyCurrency] || cogofx_currencies[invoicingPartyCurrency]);
 		}
 		const tax = getTax(
 			price,
@@ -205,6 +206,7 @@ function TotalCost({
 			rate,
 			invoicingPartyCurrency,
 			currencies,
+			cogofx_currencies,
 			currency_conversion_delta,
 			primaryServiceDetails,
 		});
@@ -213,7 +215,7 @@ function TotalCost({
 	invoicingPartyPrice += extraCharges;
 
 	const totalDisplayString = formatAmount({
-		amount   : invoicingPartyPrice,
+		amount   : invoicingPartyPrice || 0,
 		currency : invoicingPartyCurrency,
 		options  : {
 			style                 : 'currency',
