@@ -6,6 +6,7 @@ import {
 	IcMTransport,
 	IcMFcl,
 	IcMLocalCharges,
+	IcMAir,
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -27,6 +28,13 @@ const MAPPING = {
 	destination_transportation    : IcMTransport,
 	destination_ftl_freight       : IcMTransport,
 	destination_trailer_freight   : IcMTransport,
+	origin_ltl_freight            : IcMTransport,
+	destination_ltl_freight       : IcMTransport,
+	destination_air_customs       : IcMCustoms,
+	origin_air_customs            : IcMCustoms,
+	origin_air_freight_local      : IcMLocalCharges,
+	destination_air_freight_local : IcMLocalCharges,
+	air_freight                   : IcMAir,
 };
 
 const classNameSelector = ({ service = {}, selectedServices = [] }) => {
