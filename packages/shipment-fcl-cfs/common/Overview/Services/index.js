@@ -40,6 +40,7 @@ function Services() {
 									<ServiceDetails
 										key={service?.id}
 										servicesData={serviceObj[serviceCategory][service]}
+										activeStakeholder={activeStakeholder}
 									/>
 								))}
 							</div>
