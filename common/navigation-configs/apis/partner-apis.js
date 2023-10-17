@@ -9684,6 +9684,10 @@ const partner = {
 			feature     : 'JournalVoucher',
 		},
 		{
+			api         : 'post_payments_invoice_exchange_rates',
+			access_type : 'private',
+		},
+		{
 			api         : 'post_payments_parent_jv_bulk_jv_upload',
 			access_type : 'private',
 			module      : 'JournalVoucher',

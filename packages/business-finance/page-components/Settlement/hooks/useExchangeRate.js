@@ -1,15 +1,16 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
 import { transactionDates } from './helper';
 
 const useExchangeRate = ({ paymentDateValue, fromCur, toCur, setValue }) => {
-	const [{ loading:exchangeLoading }, exRateTrigger] = useRequest(
+	const [{ loading:exchangeLoading }, exRateTrigger] = useRequestBf(
 		{
-			url    : 'payments/invoice/exchange-rates',
-			method : 'post',
-			data   : {
+			url     : 'payments/invoice/exchange-rates',
+			method  : 'post',
+			authKey : 'post_payments_invoice_exchange_rates',
+			data    : {
 				from_curr     : fromCur,
 				to_curr       : toCur,
 				exchange_date : transactionDates(paymentDateValue),
