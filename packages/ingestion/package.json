@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "productisation of ingestion",
   "main": "index.js",
-  "types": "./index.js",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -3,7 +3,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import showOverflowingNumber from '../../../../../../commons/showOverflowingNumber.tsx';
+import showOverflowingNumber from '../../../../../../commons/showOverflowingNumber';
 
 import styles from './styles.module.css';
 

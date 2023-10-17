@@ -79,6 +79,15 @@
 	color: #4f4f4f;
 }
 
+.business_name {
+	max-width: 140px;
+	overflow: hidden;
+	font-size: 10px;
+	color: #828282;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .input_styles {
 	width: 100%;
 	height: 10%;
@@ -121,6 +130,11 @@
 .all_user_select {
 	display: flex;
 	align-items: center;
+}
+
+.user_select {
+	display: flex;
+	flex-direction: column;
 }
 
 .selector {

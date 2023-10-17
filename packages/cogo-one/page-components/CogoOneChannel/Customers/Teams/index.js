@@ -13,6 +13,7 @@ function Teams(teamsProps) {
 		setActiveTeamCard = () => {},
 		activeTeamCard = {},
 		loggedInAgentId = '',
+		setActiveTab = () => {},
 	} = teamsProps;
 
 	const [searchValue, setSearchValue] = useState('');
@@ -49,6 +50,7 @@ function Teams(teamsProps) {
 					loggedInAgentId={loggedInAgentId}
 					setActiveCard={setActiveCard}
 					firestore={firestore}
+					setActiveTab={setActiveTab}
 				/>
 			</div>
 		</div>

@@ -1093,6 +1093,11 @@ const partner = {
 	],
 	demand_crm: [
 		{
+			api          : 'get_platform_config_constant',
+			access_type  : 'private',
+			service_name : 'platform_config',
+		},
+		{
 			api          : 'create_shipment_trade_partner_organization',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -13040,6 +13045,11 @@ const partner = {
 		},
 	],
 	cogo_one: [
+		{
+			api          : 'list_organization_pocs',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 		{
 			api          : 'create_cogoone_group_hash',
 			access_type  : 'private',

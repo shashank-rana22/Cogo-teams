@@ -31,9 +31,9 @@ function Services() {
 		main        : true,
 	};
 
-	const heading = (serviceCategory) => (
-		<div className={styles.header}>{ startCase(serviceCategory)}</div>
-	);
+	function Heading(serviceCategory) {
+		return <div className={styles.header}>{ startCase(serviceCategory)}</div>;
+	}
 
 	return !servicesLoading && !isGettingShipment
 		? (
@@ -42,13 +42,14 @@ function Services() {
 					{serviceCategories.map((serviceCategory) => (
 						<>
 							{showTradeHeading[`${serviceCategory.split('Services')[0]}`]
-								? heading(serviceCategory) : null}
+								? Heading(serviceCategory) : null}
 
 							<div className={styles.trade_services}>
 								{(Object.keys(serviceObj[serviceCategory])).map((service) => (
 									<ServiceDetails
 										key={service}
 										servicesData={serviceObj[serviceCategory][service]}
+										activeStakeholder={activeStakeholder}
 									/>
 								))}
 							</div>
