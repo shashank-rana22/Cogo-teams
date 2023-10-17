@@ -27,6 +27,7 @@ function ServiceIcons({
 	const { selectedServices, iconMapping } = getIconMapping({
 		primaryService,
 		detailedServices,
+		primary_service,
 	});
 
 	if (!['fcl_freight', 'air_freight'].includes(primary_service)) {
