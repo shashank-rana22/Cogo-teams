@@ -1,5 +1,6 @@
 import { ButtonIcon, Tooltip, Checkbox } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 
@@ -195,13 +196,32 @@ export const getFeedbackColumns = ({
 		id       : 'is_valid_feedback',
 		accessor : ({ is_valid_feedback }) => {
 			if (is_valid_feedback == null) {
-				return null;
+				return <section className={styles.table_cell} />;
 			}
 
 			return (
 				<section className={styles.table_cell}>
 					{is_valid_feedback ? t('allocation:validity_enrichment_status_valid')
 						: t('allocation:validity_enrichment_status_invalid')}
+				</section>
+			);
+		},
+	},
+	{
+		Header   : t('allocation:org_created_at'),
+		key      : 'org_created_at',
+		id       : 'org_created_at',
+		accessor : ({ organization }) => {
+			const { created_at = '' } = organization || {};
+
+			return (
+				<section className={styles.table_cell}>
+					{formatDate({
+						date       : created_at,
+						formatType : 'date',
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					})}
+
 				</section>
 			);
 		},
