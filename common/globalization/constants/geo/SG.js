@@ -253,7 +253,7 @@ export default {
 		cogo_one_kam_agent_ids: [
 			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse Kam
 		],
-		so1_so2_role_id     : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+		so1_so2_role_id     : '902ef814-8bea-47d1-b11b-38763cebd943', // SO1 + SO2 - Singapore
 		fortigo_network_ids : [
 			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',

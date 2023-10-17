@@ -39,6 +39,8 @@ const CONFIG_MAPPING = {
 	kam_admin             : bookingAgent,
 };
 
+console.log('hello');
+
 const stakeholderConfig = ({ stakeholder, authParams = '' }) => {
 	if (stakeholder === 'kam_so1') {
 		const view = authParams?.split(':')?.at(LAST_VALUE_INDEX);

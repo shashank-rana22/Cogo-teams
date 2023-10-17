@@ -46,6 +46,7 @@ const useGetActiveStakeholder = () => {
 			stakeholder: 'credit_control',
 		},
 		{ role_ids: geo.uuid.operation_manager, stakeholder: 'operation_manager' },
+		{ role_ids: geo.uuid.so1_so2_role_id, stakeholder: 'so1_so2_ops' },
 	];
 	const matchingStakeholders = stakeholderMap
 		.filter(({ role_ids: ids }) => (role_ids || [])
