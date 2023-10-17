@@ -253,7 +253,7 @@ export default {
 		cogo_one_kam_agent_ids: [
 			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse Kam
 		],
-		so1_so2_role_id     : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+		so1_so2_role_id     : '902ef814-8bea-47d1-b11b-38763cebd943', // SO1 + SO2 - Singapore
 		fortigo_network_ids : [
 			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
@@ -268,6 +268,7 @@ export default {
 			'9380aaeb-53e3-4e6a-ba39-405b4b822ea5', // SME
 			'447c2b70-90c9-4e9d-a0df-49bb803b0314',	// Enterprise Sales
 			'5f79d531-50e0-4843-995f-71057e659e0f', // Channel Partner
+			'87428a7a-ca97-46f5-a18a-5847babfd48f', // CCS Singapore
 		],
 		igm_desk                  : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
 		document_control_manager  : '123951fe-78aa-4ad1-b2da-fa6191e3a876',

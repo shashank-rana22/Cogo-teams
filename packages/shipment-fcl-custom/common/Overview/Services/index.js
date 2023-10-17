@@ -10,6 +10,7 @@ function Services() {
 		isGettingShipment,
 		servicesList,
 		servicesLoading,
+		activeStakeholder,
 	} = useContext(ShipmentDetailContext);
 
 	return !servicesLoading && !isGettingShipment
@@ -23,6 +24,7 @@ function Services() {
 							<ServiceDetails
 								servicesData={service}
 								key={service?.id}
+								activeStakeholder={activeStakeholder}
 							/>
 						))}
 					</div>
