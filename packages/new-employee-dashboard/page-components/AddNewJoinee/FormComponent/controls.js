@@ -157,7 +157,8 @@ const controls = [
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
 			},
-			page_limit: 20,
+			show_all_data : true,
+			page_limit    : 20,
 		},
 	},
 	{
@@ -176,7 +177,8 @@ const controls = [
 				partner_entity_types : ['cogoport'],
 
 			},
-			page_limit: 20,
+			show_all_data : true,
+			page_limit    : 20,
 		},
 	},
 	{
@@ -194,7 +196,8 @@ const controls = [
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
 			},
-			page_limit: 20,
+			show_all_data : true,
+			page_limit    : 20,
 		},
 	},
 	{
@@ -212,7 +215,8 @@ const controls = [
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
 			},
-			page_limit: 20,
+			show_all_data : true,
+			page_limit    : 20,
 		},
 	},
 ];

@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 
 import useGetIncomeExpense from '../../hooks/getIncomeExpenseData';
 
+import Content from './Content';
+import RenderYearData from './RenderYearData';
 import ResponsiveBarChart from './ResponsiveBarChart/index';
 import ResponsiveLineChart from './ResponsiveLineChart';
 import styles from './styles.module.css';
@@ -32,24 +34,24 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 	};
 
 	const currentYear = new Date().getFullYear();
-	const calendarYear = [];
+	const CALENDARYEAR = [];
 	for (let i = 0; i < 5; i += 1) {
 		const year = `${currentYear - i}`;
-		calendarYear.push(year);
+		CALENDARYEAR.push(year);
 	}
 
 	const today = new Date();
-	const financialYears = [];
+	const FINANCIALYEARS = [];
 	for (let i = 1; i <= 5; i += 1) {
 		const yearStart = new Date(today.getFullYear() - i, 3, 1);
 		const yearEnd = new Date(today.getFullYear() - i + 2, 2, 31);
 		const financialYear = `${getFinancialYear(yearStart)}-${getFinancialYear(yearEnd)}`;
-		financialYears.push(financialYear);
+		FINANCIALYEARS.push(financialYear);
 	}
 
 	const onClickFinancialYear = (year, type) => {
 		let yearType = 'CY';
-		if (type === financialYears) {
+		if (type === FINANCIALYEARS) {
 			yearType = 'FY';
 		}
 		const years = year?.split('-');
@@ -58,61 +60,12 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 		setVisible(false);
 	};
 
-	const renderYearData = (years) => (
-		<div>
-			{years.map((year) => (
-				<div key={year} style={{ marginBottom: '10px', cursor: year === 'financialYears' && 'pointer' }}>
-					<div
-						key={year}
-						role="presentation"
-						onClick={() => onClickFinancialYear(year, years)}
-					>
-						{year}
-
-					</div>
-					<div className={styles.year_bottom_border} />
-				</div>
-			))}
-		</div>
-	);
-
 	const yearHandleChange = () => {
 		if (yearHandle) {
-			return renderYearData(calendarYear);
+			return RenderYearData(CALENDARYEAR, onClickFinancialYear);
 		}
-		return renderYearData(financialYears);
+		return RenderYearData(FINANCIALYEARS, onClickFinancialYear);
 	};
-	const content = () => (
-
-		<Popover
-			placement="right"
-			caret={false}
-			render={yearHandleChange()}
-			className={styles.years_styles}
-			visible={visible}
-		>
-			<>
-				<div
-					className={styles.data_styles}
-					onClick={() => { setYearHandle(true); setVisible(true); }}
-					role="presentation"
-				>
-					Calendar Year
-
-				</div>
-				<div className={styles.borders} />
-				<div
-					className={styles.data_styles}
-					onClick={() => { setYearHandle(false); setVisible(true); }}
-					role="presentation"
-				>
-					Financial Year
-
-				</div>
-			</>
-		</Popover>
-
-	);
 
 	return (
 		<div>
@@ -146,7 +99,13 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 							</Tooltip>
 						</div>
 						<div style={{ marginTop: '10px', marginLeft: '20px' }}>
-							<Popover render={content()} caret={false} placement="bottom">
+							<Popover
+								render={
+									Content({ yearHandleChange, visible, setVisible, setYearHandle })
+								}
+								caret={false}
+								placement="bottom"
+							>
 								<div className={styles.input_div}>
 									<Input
 										placeholder="Select Year Mode"
@@ -159,14 +118,15 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 					</div>
 
 					<div className={styles.toggle_div}>
-						<div style={{ marginTop: '10px' }}>Contribution Margin Line Graph</div>
+						<div style={{ marginTop: '10px' }}>Contribution Margin Graph</div>
 						<Toggle
 							name="a1"
 							size="md"
 							showOnOff
 							disabled={false}
 							onChange={() => onChangeToggle()}
-							value={String(toggleStatus)}
+							onLabel="Line Chart"
+							offLabel="Bar Chart"
 						/>
 					</div>
 				</div>
