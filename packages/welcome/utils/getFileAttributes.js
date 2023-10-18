@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMDocument, IcMImage } from '@cogoport/icons-react';
+import { IcMDocument, IcMImage, IcMVideoCall } from '@cogoport/icons-react';
 
 const STEP_COUNT = 1;
 const MINIMUM_COUNT = 2;
@@ -9,6 +9,7 @@ const DOT_AFTER_SLASH = 1;
 const FILE_ICON_MAPPING = {
 	document : <IcMDocument height={18} width={18} fill="#bdbdbd" />,
 	img      : <IcMImage height={22} width={25} fill="#bdbdbd" />,
+	video    : <IcMVideoCall height={22} width={25} fill="#bdbdbd" />,
 };
 
 const EXTENSIONS_MAPPING = {
@@ -21,7 +22,7 @@ const EXTENSIONS_MAPPING = {
 		type : 'audio',
 	},
 	video: {
-		icon : FILE_ICON_MAPPING.img,
+		icon : FILE_ICON_MAPPING.video,
 		type : 'video',
 	},
 	default: {

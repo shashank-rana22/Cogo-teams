@@ -50,22 +50,10 @@ function Post() {
 		setDraftMessages('');
 	};
 
+	console.log('draftMessages', draftMessages);
+
 	return (
 		<>
-			<div className={styles.img_container}>
-				{(hasUploadedFiles) && !uploading ? (
-					<UploadedFiles
-						setDraftUploadedFiles={setDraftUploadedFiles}
-						uploaderRef={uploaderRef}
-						eachFileData={fileMetaData}
-					/>
-				) : null}
-				{uploading ? (
-					<div className={styles.uploading}>
-						uploading.....
-					</div>
-				) : null}
-			</div>
 			<div className={styles.container}>
 				<MentionsInput
 					value={draftMessages}
@@ -161,6 +149,20 @@ function Post() {
 						</Button>
 					</div>
 				</div>
+			</div>
+			<div className={styles.img_container}>
+				{(hasUploadedFiles) && !uploading ? (
+					<UploadedFiles
+						setDraftUploadedFiles={setDraftUploadedFiles}
+						uploaderRef={uploaderRef}
+						eachFileData={fileMetaData}
+					/>
+				) : null}
+				{uploading ? (
+					<div className={styles.uploading}>
+						uploading.....
+					</div>
+				) : null}
 			</div>
 		</>
 	);

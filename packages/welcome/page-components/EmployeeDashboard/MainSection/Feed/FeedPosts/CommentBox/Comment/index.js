@@ -13,6 +13,10 @@ function Comment({ user_name, comment, nested_comments, time_ago }) {
 	const [showNestedComments, setShowNestedComments] = useState(false);
 	const [showReplyComment, setShowReplyComment] = useState(false);
 
+	const handleCommentonChange = (text) => {
+		console.log('text', text);
+	};
+
 	return (
 		<div style={{ marginTop: 16, marginBottom: 16 }}>
 			<div className={styles.comment_container}>
@@ -75,7 +79,7 @@ function Comment({ user_name, comment, nested_comments, time_ago }) {
 					</div>
 				</div>
 			</div>
-			{showReplyComment && <CommentForm />}
+			{showReplyComment && <CommentForm handleSubmit={handleCommentonChange} />}
 			{showNestedComments && nested_comments.length > 0 && (
 				<div className={styles.child_comments}>
 					<CommentList comments={nested_comments} />
