@@ -250,6 +250,7 @@ function CollectionPartyDetails({
 									onChange={setUploadInvoiceUrl}
 									draggable
 									uploadIcon={<IcMUpload height={40} width={40} />}
+									accept=".pdf,.jpeg,.png,.jpg,.jfif,.xlsx,.xls,.docx,.doc"
 								/>
 								<hr />
 								{
