@@ -38,10 +38,6 @@ function Content({
 		setFilters((p) => ({ ...p, tradeType: val }));
 	};
 
-	const tabPanels = tabData.map((tab) => (
-		<TabPanel key={tab.name} name={tab.name} title={tab.title} />
-	));
-
 	return (
 		<div className={styles.filter_div_style}>
 			<div className={styles.tab_container}>
@@ -92,7 +88,9 @@ function Content({
 								onChange={(val) => handleTradeTabChange(val)}
 								themeType="primary-horizontal"
 							>
-								{tabPanels}
+								{tabData.map((tab) => (
+									<TabPanel key={tab.name} name={tab.name} title={tab.title} />
+								))}
 							</Tabs>
 							<RadioGroup
 								options={serviceType}

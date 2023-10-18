@@ -35,25 +35,23 @@ function LineItemsSection({
 		},
 	);
 
+	const subContentData = [
+		{ data: names, wdth: '15%', title: 'Name' },
+		{ data: quantities, wdth: '10%', title: 'Qty' },
+		{ data: units, wdth: '10%', title: 'Unit' },
+		{ data: currencies, wdth: '10%', title: 'Curr' },
+		{ data: prices, wdth: '10%', title: 'Price' },
+		{ data: margins, wdth: '15%', title: 'Margin' },
+		{ data: exchange_rates, wdth: '15%', title: 'Ex. Rate' },
+		{ data: tax_price, wdth: '10%', title: 'Tax' },
+		{ data: total_prices, wdth: '10%', title: 'Total' },
+	];
+
 	return (
 		<div className={styles.main_content}>
-			<RenderSubContent data={names} wdth="15%" title="Name" />
-
-			<RenderSubContent data={quantities} wdth="10%" title="Qty" />
-
-			<RenderSubContent data={units} wdth="10%" title="Unit" />
-
-			<RenderSubContent data={currencies} wdth="10%" title="Curr" />
-
-			<RenderSubContent data={prices} wdth="10%" title="Price" />
-
-			<RenderSubContent data={margins} wdth="15%" title="Margin" />
-
-			<RenderSubContent data={exchange_rates} wdth="15%" title="Ex. Rate" />
-
-			<RenderSubContent data={tax_price} wdth="10%" title="Tax" />
-
-			<RenderSubContent data={total_prices} wdth="10%" title="Total" />
+			{subContentData.map((item) => (
+				<RenderSubContent key={item.title} data={item.data} wdth={item.wdth} title={item.title} />
+			))}
 		</div>
 	);
 }
