@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -35,7 +36,7 @@ const useCreateTicketActivity = ({
 			fetchDetails();
 			scrollToBottom();
 		} catch (error) {
-			Toast.error(error?.response?.data);
+			Toast.error(getApiErrorString(error?.response));
 		}
 	};
 
