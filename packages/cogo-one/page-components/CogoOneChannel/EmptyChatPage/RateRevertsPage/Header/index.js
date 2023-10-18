@@ -93,6 +93,7 @@ function Header({
 					placement="left"
 					interactive
 					visible={showFilters}
+					onClickOutside={() => setShowFilters(false)}
 					render={(
 						showFilters ? (
 							<FilterModal

@@ -24,7 +24,7 @@ const SUPPLY_ADMIN = {
 		'no_of_rate_sheets_received', 'chats_assigned', 'avg_response_time', 'emails_send_count',
 		'calls_made', 'calls_received'],
 	to_show_agent_activity_graph  : false,
-	extra_side_bar_navs_access    : ['flash_shipment_bookings', 'smt_rate_reverts'],
+	extra_side_bar_navs_access    : ['flash_shipment_bookings'],
 	accesible_agent_types_query   : [where('agent_type', 'in', COMMON_AGENT_TYPES)],
 	get_accesible_assign_buttons  : () => COMMON_ADMIN_ACCESIBLE_BUTTONS,
 	default_side_nav              : 'flash_shipment_bookings',
