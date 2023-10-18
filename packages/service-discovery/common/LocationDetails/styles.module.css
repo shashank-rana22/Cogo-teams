@@ -14,9 +14,17 @@
 }
 
 .location_country_text {
+	max-width: 120px;
+	overflow: hidden;
 	font-size: 14px;
 	font-weight: 500;
 	color: #d6b300;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	@media (max-width: 1080px) {
+		max-width: 80px;
+	}
 }
 
 .location_port_text {
