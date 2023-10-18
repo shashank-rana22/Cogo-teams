@@ -18,6 +18,8 @@ function ContainerDetails({
 	setInfoBanner = () => {},
 	setRouterLoading = () => {},
 	isGuideViewed = false,
+	createLoading = false,
+	createSearch = () => {},
 }) {
 	const [showModal, setShowModal] = useState(false);
 
@@ -91,6 +93,8 @@ function ContainerDetails({
 					data={data}
 					setShow={setShowModal}
 					setRouterLoading={setRouterLoading}
+					createLoading={createLoading}
+					createSearch={createSearch}
 				/>
 			) : null}
 		</div>

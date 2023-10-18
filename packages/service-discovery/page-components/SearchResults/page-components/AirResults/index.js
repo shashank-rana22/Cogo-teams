@@ -26,8 +26,9 @@ function AIRResults({
 	infoBanner = {},
 	setInfoBanner = () => {},
 	isGuideViewed = false,
-	routerLoading = false,
 	setRouterLoading = () => {},
+	setScheduleLoading = () => {},
+	scheduleLoading = false,
 }) {
 	const SCREENS_MAPPING = {
 		listRateCard: {
@@ -52,8 +53,9 @@ function AIRResults({
 				infoBanner,
 				setInfoBanner,
 				isGuideViewed,
-				routerLoading,
 				setRouterLoading,
+				setScheduleLoading,
+				scheduleLoading,
 			},
 		},
 		comparison: {

@@ -17,6 +17,7 @@ function FilterModal({
 	DEFAULT_VALUES = {},
 	openAccordian = '',
 	airlines = [],
+	setScheduleLoading = () => {},
 }) {
 	const [airlineParams, setAirlineParams] = useState({
 		filters: {
@@ -43,6 +44,7 @@ function FilterModal({
 		const finalValues = { ...values };
 
 		setFilters({ ...filters, ...finalValues });
+		setScheduleLoading(true);
 		setShow(false);
 	};
 

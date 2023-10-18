@@ -39,6 +39,7 @@ function Filters({
 	setOpenAccordian = () => {},
 	showFilterModal = false,
 	setShowFilterModal = () => {},
+	setScheduleLoading = () => {},
 }) {
 	const controls = getFilterControls({ data, service_key: SERVICE_KEY });
 
@@ -83,6 +84,7 @@ function Filters({
 					DEFAULT_VALUES={DEFAULT_VALUES}
 					controls={controls}
 					openAccordian={openAccordian}
+					setScheduleLoading={setScheduleLoading}
 				/>
 			) : null}
 		</div>

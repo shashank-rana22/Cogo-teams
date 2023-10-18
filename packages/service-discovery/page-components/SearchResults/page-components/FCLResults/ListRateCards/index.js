@@ -1,9 +1,8 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import { Router } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import DotLoader from '../../../../../common/LoadingState/DotLoader';
 import ContractAd from '../../../common/ContractAd';
@@ -32,6 +31,7 @@ function RateCard({
 	setInfoBanner = () => {},
 	showGuide = false,
 	cogoAssuredRates = [],
+	setRouterLoading = () => {},
 }) {
 	return (
 		<FclCard
@@ -47,6 +47,7 @@ function RateCard({
 			setInfoBanner={setInfoBanner}
 			showGuide={showGuide}
 			cogoAssuredRates={cogoAssuredRates}
+			setRouterLoading={setRouterLoading}
 		/>
 	);
 }
@@ -71,8 +72,9 @@ function ListRateCards({
 	isGuideViewed = false,
 	cogoAssuredRates = [],
 	marketplaceRates = [],
-	routerLoading = false,
 	setRouterLoading = () => {},
+	setScheduleLoading = () => {},
+	scheduleLoading = false,
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
@@ -86,12 +88,6 @@ function ListRateCards({
 	const showComparison = !isEmpty(comparisonRates);
 
 	const { total_count, page_limit, page } = paginationProps;
-
-	useEffect(() => {
-		Router.events.on('routeChangeComplete', () => {
-			setRouterLoading(false);
-		});
-	}, [setRouterLoading]);
 
 	if (!primary_service) {
 		return null;
@@ -112,15 +108,6 @@ function ListRateCards({
 		);
 	}
 
-	if (routerLoading) {
-		return (
-			<div className={styles.loading}>
-				<span className={styles.loading_text}>Loading Rates</span>
-				<DotLoader />
-			</div>
-		);
-	}
-
 	return (
 		<div className={cl`${styles.container} ${show_dim_bg && styles.dim_bg}`}>
 			<div className={styles.header_wrapper}>
@@ -136,6 +123,7 @@ function ListRateCards({
 						setShowFilterModal={setShowFilterModal}
 						openAccordian={openAccordian}
 						setOpenAccordian={setOpenAccordian}
+						setScheduleLoading={setScheduleLoading}
 						setRouterLoading={setRouterLoading}
 					/>
 
@@ -157,6 +145,7 @@ function ListRateCards({
 				setSelectedWeek={setSelectedWeek}
 				selectedWeek={selectedWeek}
 				loading={loading}
+				setScheduleLoading={setScheduleLoading}
 			/>
 
 			<AppliedFilters
@@ -179,6 +168,7 @@ function ListRateCards({
 					infoBanner={infoBanner}
 					setInfoBanner={setInfoBanner}
 					isGuideViewed={isGuideViewed}
+					setRouterLoading={setRouterLoading}
 				/>
 			)}
 
@@ -207,7 +197,7 @@ function ListRateCards({
 						setInfoBanner={setInfoBanner}
 						showGuide={isEmpty(cogoAssuredRates) && !index && !isGuideViewed}
 						cogoAssuredRates={cogoAssuredRates}
-						routerLoading={routerLoading}
+						setRouterLoading={setRouterLoading}
 					/>
 					{index === GLOBAL_CONSTANTS.zeroth_index && isEmpty(cogoAssuredRates) ? (
 						<ContractAd
@@ -234,7 +224,7 @@ function ListRateCards({
 				</div>
 			) : null}
 
-			{loading && (
+			{loading && !scheduleLoading && (
 				<div className={styles.spinner_container}>
 					<DotLoader size="lg" />
 					<div className={styles.text}>Fetching rates, please wait</div>

@@ -9,7 +9,11 @@ const BANNER_OPTIONS = require('../utils/getBannerOptions');
 const DEFAULT_PAGE = 1;
 const ONE = 1;
 
-const useGetSpotSearch = ({ setComparisonRates = () => {}, setInfoBanner = () => {} }) => {
+const useGetSpotSearch = ({
+	setComparisonRates = () => {},
+	setInfoBanner = () => {},
+	setScheduleLoading = () => {},
+}) => {
 	const { general: { query = {} } } = useSelector((state) => state);
 	const { spot_search_id = '', rate_card_id, checkout_id } = query;
 
@@ -69,14 +73,14 @@ const useGetSpotSearch = ({ setComparisonRates = () => {}, setInfoBanner = () =>
 
 				const isBannerAllowed = show.includes(service_type) && screen === 'listRateCard';
 
-				sequence_number += 1;
+				sequence_number += ONE;
 
-				if (isBannerAllowed && curr_sequence_number === 1) {
+				if (isBannerAllowed && curr_sequence_number === ONE) {
 					initialBanner = key;
 				}
 
 				if (isBannerAllowed) {
-					totalBanners += 1;
+					totalBanners += ONE;
 
 					return {
 						...acc,
@@ -99,12 +103,15 @@ const useGetSpotSearch = ({ setComparisonRates = () => {}, setInfoBanner = () =>
 			}
 
 			setComparisonRates({});
+			setScheduleLoading(false);
 		} catch (error) {
 			if (error?.response?.data) {
 				Toast.error(getApiErrorString(error.response?.data));
 			}
+
+			setScheduleLoading(false);
 		}
-	}, [filters, page, screen, setComparisonRates, setInfoBanner, spot_search_id, trigger]);
+	}, [filters, page, screen, setComparisonRates, setInfoBanner, setScheduleLoading, spot_search_id, trigger]);
 
 	useEffect(() => {
 		if (screen === 'comparison') return;

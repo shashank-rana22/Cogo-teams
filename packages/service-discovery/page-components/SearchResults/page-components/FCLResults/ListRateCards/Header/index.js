@@ -19,6 +19,7 @@ function Header({
 	setOpenAccordian = () => {},
 	showFilterModal = false,
 	setShowFilterModal = () => {},
+	setScheduleLoading = () => {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -38,6 +39,7 @@ function Header({
 					loading={loading}
 					openAccordian={openAccordian}
 					setOpenAccordian={setOpenAccordian}
+					setScheduleLoading={setScheduleLoading}
 				/>
 
 				<RefreshRate refetch={refetch} details={details} />

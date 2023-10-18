@@ -1,12 +1,15 @@
 import { Loader, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Router } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Header from '../../../common/Header';
+import CustomLoadingState from '../../../common/LoadingState/CustomLoadingState';
 import DotLoader from '../../../common/LoadingState/DotLoader';
 // import TryOldBanner from '../../../common/TryOldBanner';
+import useCreateSearch from '../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 import useGetSpotSearch from '../hooks/useGetSpotSearch';
 import getRedirectionDetails from '../utils/getRedirectionDetails';
 
@@ -31,6 +34,7 @@ function SearchResults() {
 	const { redirect_required = 'true' } = query || {};
 
 	const [routerLoading, setRouterLoading] = useState(false);
+	const [scheduleLoading, setScheduleLoading] = useState(false);
 	const [headerProps, setHeaderProps] = useState({});
 	const [comparisonRates, setComparisonRates] = useState([]);
 	const [selectedWeek, setSelectedWeek] = useState({});
@@ -50,7 +54,9 @@ function SearchResults() {
 		selectedCard,
 		page = 1,
 		rates = [],
-	} = useGetSpotSearch({ setComparisonRates, setInfoBanner });
+	} = useGetSpotSearch({ setComparisonRates, setInfoBanner, setRouterLoading, setScheduleLoading });
+
+	const { createSearch, loading: createLoading } = useCreateSearch({ setRouterLoading, setHeaderProps });
 
 	const {
 		spot_search_detail:detail = {},
@@ -64,6 +70,12 @@ function SearchResults() {
 	const paginationProps = { page, page_limit, total_count };
 
 	const showAdditionalHeader = headerProps && !isEmpty(headerProps);
+
+	useEffect(() => {
+		Router.events.on('routeChangeComplete', () => {
+			setRouterLoading(false);
+		});
+	}, [setRouterLoading]);
 
 	if (loading && isEmpty(data) && screen === 'listRateCard') {
 		return (
@@ -109,8 +121,10 @@ function SearchResults() {
 	return (
 		<div className={cl`${styles.container} ${
 			(showAdditionalHeader || (infoBanner.current === 'edit_button' && !isGuideViewed))
-				? styles.backdrop : {}}`}
+				? styles.backdrop : {}} ${(routerLoading || scheduleLoading) && styles.disabled}`}
 		>
+			{routerLoading || scheduleLoading ? <CustomLoadingState loadingText="Loading Rates" /> : null}
+
 			<Header
 				data={detail}
 				showAdditionalHeader={showAdditionalHeader}
@@ -126,6 +140,8 @@ function SearchResults() {
 				service_key="service_type"
 				setRouterLoading={setRouterLoading}
 				touch_points={touch_points}
+				createSearch={createSearch}
+				createLoading={createLoading}
 			/>
 
 			<div
@@ -158,8 +174,9 @@ function SearchResults() {
 					infoBanner={infoBanner}
 					setInfoBanner={setInfoBanner}
 					isGuideViewed={isGuideViewed}
-					routerLoading={routerLoading}
 					setRouterLoading={setRouterLoading}
+					setScheduleLoading={setScheduleLoading}
+					scheduleLoading={scheduleLoading}
 				/>
 			</div>
 		</div>

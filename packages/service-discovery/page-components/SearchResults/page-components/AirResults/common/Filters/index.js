@@ -38,6 +38,7 @@ function Filters({
 	showFilterModal = false,
 	setShowFilterModal = () => {},
 	airlines = [],
+	setScheduleLoading = () => {},
 }) {
 	const filtersApplied = checkIfFiltersChanged(FILTERS_DEFAULT_VALUES, filters);
 
@@ -78,6 +79,7 @@ function Filters({
 					DEFAULT_VALUES={FILTERS_DEFAULT_VALUES}
 					openAccordian={openAccordian}
 					airlines={airlines}
+					setScheduleLoading={setScheduleLoading}
 				/>
 			) : null}
 		</div>
