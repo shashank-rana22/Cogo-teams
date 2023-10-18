@@ -8,7 +8,9 @@ function TermsConditions({ rateCardData = {}, detail = {} }) {
 	const { terms_and_conditions: searchTerms = [] } = detail;
 
 	const terms = useMemo(() => {
-		if (!isEmpty(rateTerms)) return rateTerms;
+		if (!isEmpty(rateTerms) && rateTerms.every((item) => item)) {
+			return rateTerms;
+		}
 		return searchTerms;
 	}, [rateTerms, searchTerms]);
 
