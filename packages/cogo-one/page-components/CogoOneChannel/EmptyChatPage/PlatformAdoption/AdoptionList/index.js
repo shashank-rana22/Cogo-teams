@@ -20,10 +20,10 @@ function AdoptionList() {
 
 				return (
 					<React.Fragment key={name}>
-						{kycVerify ? <KycVerifyCard /> : null}
+						{kycVerify ? <KycVerifyCard itm={itm} /> : null}
 						{accountAllocate ? <AccountAllocateCard /> : null}
-						{demo ? <DemoCard /> : null}
-						{tradeTypeVerify ? <TradeTypeVerifyCard /> : null}
+						{demo ? <DemoCard itm={itm} /> : null}
+						{tradeTypeVerify ? <TradeTypeVerifyCard itm={itm} /> : null}
 					</React.Fragment>
 				);
 			})}
