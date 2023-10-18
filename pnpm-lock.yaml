@@ -1338,10 +1338,12 @@ importers:
       firebase: ^9.17.2
       react: 18.2.0
       stylelint: ^14.16.1
+      suneditor: ^2.45.1
+      suneditor-react: ^3.6.1
       uuid: ^9.0.0
     dependencies:
       '@cogoport/charts': 1.0.4_v2m5e27vhdewzwhryxwfaorcca
-      '@cogoport/components': 1.0.441_o4a5hjhkopcb7h5fofegu6jqg4
+      '@cogoport/components': 1.0.441_ffjgift7kvvkojsliwtnrot64y
       '@cogoport/context': link:../../common/context
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
@@ -1354,6 +1356,8 @@ importers:
       firebase: 9.23.0
       react: 18.2.0
       stylelint: 14.16.1
+      suneditor: 2.45.1
+      suneditor-react: 3.6.1_sn67ubekdycchaaemaxs7nqeea
       uuid: 9.0.1
 
   packages/cogo-verse-analytics:
@@ -4737,11 +4741,10 @@ packages:
       - react-dom
     dev: false
 
-  /@cogoport/components/1.0.441_o4a5hjhkopcb7h5fofegu6jqg4:
+  /@cogoport/components/1.0.441_ffjgift7kvvkojsliwtnrot64y:
     resolution: {integrity: sha512-CUmEn3R0bcnEXBnKnhLmcxM5y9pwDaIegGIZM/7lu5RYHUtk6+AJkRg7yQfNvSaZ7uG9KyGmR7IZM0RYCQnQrQ==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
-      react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
       '@cogoport/icons-react': 1.0.104_biqbaboplfbrettd7655fr4n2y
@@ -6688,7 +6691,7 @@ packages:
       prop-types: '>= 15.5.10 < 16.0.0'
       react: '>= 16.14.0 < 19.0.0'
     dependencies:
-      '@nivo/core': 0.80.0_dtjgeyjt4v73rqsopvxmvhs5cm
+      '@nivo/core': 0.80.0_g5kln477lwx3caqucf3exzf3du
       d3-color: 2.0.0
       d3-scale: 3.3.0
       d3-scale-chromatic: 2.0.0
@@ -6870,7 +6873,7 @@ packages:
       prop-types: '>= 15.5.10 < 16.0.0'
       react: '>= 16.14.0 < 19.0.0'
     dependencies:
-      '@nivo/core': 0.80.0_dtjgeyjt4v73rqsopvxmvhs5cm
+      '@nivo/core': 0.80.0_g5kln477lwx3caqucf3exzf3du
       prop-types: 15.8.1
       react: 18.2.0
     dev: false
@@ -7319,7 +7322,7 @@ packages:
       '@nivo/core': 0.80.0
       react: '>= 16.14.0 < 19.0.0'
     dependencies:
-      '@nivo/core': 0.80.0_dtjgeyjt4v73rqsopvxmvhs5cm
+      '@nivo/core': 0.80.0_g5kln477lwx3caqucf3exzf3du
       d3-delaunay: 5.3.0
       d3-scale: 3.3.0
       react: 18.2.0
