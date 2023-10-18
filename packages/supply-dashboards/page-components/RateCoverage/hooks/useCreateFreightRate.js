@@ -29,7 +29,7 @@ const API_NAME = {
 	fcl_cfs     : 'create_fcl_cfs_rate',
 };
 
-const getPayload = (service, data, user_id) => {
+const getPayload = (service, data, user_id, listData) => {
 	if (service === 'fcl_freight') {
 		return formatFclRate(data, user_id);
 	}
@@ -52,7 +52,7 @@ const getPayload = (service, data, user_id) => {
 		return formatLclCustomsRate(data, user_id);
 	}
 	if (service === 'haulage') {
-		return formatHaulageFreightRate(data, user_id);
+		return formatHaulageFreightRate(data, user_id, listData);
 	}
 	if (service === 'trailer') {
 		return formatTrailerFreight(data, user_id);
@@ -77,8 +77,8 @@ const useCreateFreightRate = (service) => {
 		method : 'POST',
 	}, { manual: true });
 
-	const createRate = async (data) => {
-		const newPayload = getPayload(service, data, user_id);
+	const createRate = async (data, listData) => {
+		const newPayload = getPayload(service, data, user_id, listData);
 
 		try {
 			const resp = await trigger({
@@ -93,6 +93,7 @@ const useCreateFreightRate = (service) => {
 			const {
 				detail = undefined,
 				base = undefined,
+				line_items = undefined,
 				validity_end = undefined,
 				length: lengthError = '',
 				breadth: breadthError = '',
@@ -100,7 +101,7 @@ const useCreateFreightRate = (service) => {
 			} = err_data;
 
 			Toast.error(
-				startCase(base || lengthError || breadthError || heightError || detail || validity_end),
+				startCase(base || lengthError || breadthError || heightError || detail || validity_end || line_items),
 			);
 		}
 		return null;

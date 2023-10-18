@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
-function useGetSpoetSearches({ feedbackData, requestData, id }) {
+function useGetSpoetSearches({ feedbackData, requestData, showPopover }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url          : '/list_spot_searches',
 		method       : 'GET',
@@ -14,13 +14,19 @@ function useGetSpoetSearches({ feedbackData, requestData, id }) {
 		try {
 			await trigger({
 				params: {
-					filters: { id: id || rate_id },
+					filters: { id: rate_id || rate_id },
 				},
 			});
 		} catch (err) {
 			// console.log(err);
 		}
-	}, [id, rate_id, trigger]);
+	}, [rate_id, trigger]);
+
+	useEffect(() => {
+		if (showPopover && rate_id) {
+			getData();
+		}
+	}, [getData, rate_id, showPopover]);
 
 	const serviceList = Object.values(data?.list?.[0]?.service_details || {});
 	const spot_data = data?.list?.[0];

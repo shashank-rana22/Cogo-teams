@@ -185,7 +185,7 @@ const haulageControls = ({
 			buttonText : 'Add Line Items',
 			controls   : [
 				{
-					name        : 'haulage_freight_code',
+					name        : 'customs_code',
 					valueKey    : 'code',
 					type        : 'async_select',
 					span        : 2,

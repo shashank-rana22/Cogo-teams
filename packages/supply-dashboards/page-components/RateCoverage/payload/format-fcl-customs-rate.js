@@ -2,10 +2,10 @@ const INCREMENT_VALUE = 1;
 
 const formatFclCustomsRate = (data, user_id) => {
 	const CUSTOMS_LINE_ITEM = [];
-	let customCharges = data.customs_line_items;
+	let customCharges = data.line_items;
 	for (let i = 0; i < customCharges.length; i += INCREMENT_VALUE) {
 		const obj = {
-			code     : customCharges[i].fcl_line_items,
+			code     : customCharges[i].customs_code,
 			currency : customCharges[i].currency,
 			price    : Number(customCharges[i].price),
 			unit     : customCharges[i].unit,
@@ -36,10 +36,10 @@ const formatFclCustomsRate = (data, user_id) => {
 		service_provider_id : data?.service_provider_id,
 		sourced_by_id       : data?.sourced_by_id,
 		procured_by_id      : data?.procured_by_id || user_id,
-		customs_line_items  : CUSTOMS_LINE_ITEM,
+		line_items          : CUSTOMS_LINE_ITEM,
 		cfs_line_items      : CFS_LINE_ITEM,
 	};
-
+	console.log(payload, 'payload');
 	return payload;
 };
 

@@ -27,7 +27,7 @@ const FieldMutation = ({
 
 	);
 
-	const genericLineitems = values.line_items || values.customs_line_items;
+	const genericLineitems = values.line_items;
 	const chargeCfsCode = values.fcl_customs_cfs_line_items;
 	const detentionSlabs = values?.detention_days;
 	const freeDetentionDays = values?.detention_free_days;

@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 
 import { SERVICE_ICON_MAPPING } from '../../../configurations/helpers/constants';
 import useGetShipment from '../../../hooks/useGetShipment';
+import useGetSpoetSearches from '../../../hooks/useGetSpoetSearches';
 import useListFreightRateFeedBacks from '../../../hooks/useListFreightRateFeedBacks';
 import useListFreightRateRequests from '../../../hooks/useListFreightRateRequests';
 
@@ -26,6 +27,7 @@ function ListCard({
 	const [serviceIdPresent, setServiceIdPresent] = useState('');
 	const [showAddRateModal, setShowAddRateModal] = useState(false);
 
+	const [showPopover, setShowPopover] = useState(false);
 	const {
 		sources = [], container_size = '', container_type,
 		commodity = '', weight_slabs = '', stacking_type = '', price_type = '', source_id = '',
@@ -52,6 +54,11 @@ function ListCard({
 		data:feedbackData, getFeedback,
 		loading: feedback_loading,
 	}	= 	useListFreightRateFeedBacks({ source_id, filter });
+
+	const {
+		serviceList, getData, spot_data,
+		loadingSpotSearch,
+	} = useGetSpoetSearches({ feedbackData, requestData, showPopover });
 
 	const originCode = (origin_port || origin_airport || port || origin_location || location)?.port_code;
 
@@ -285,6 +292,13 @@ function ListCard({
 							setShowAddRateModal={setShowAddRateModal}
 							serviceIdPresent={serviceIdPresent}
 							setServiceIdPresent={setServiceIdPresent}
+							getRequest={getRequest}
+							requestData={requestData}
+							serviceList={serviceList}
+							loadingSpotSearch={loadingSpotSearch}
+							spot_data={spot_data}
+							showServicePopover={showPopover}
+							setShowServicePopover={setShowPopover}
 						/>
 					)}
 				</div>
@@ -337,6 +351,8 @@ function ListCard({
 					feedback_loading={feedback_loading}
 					serviceIdPresent={serviceIdPresent}
 					setServiceIdPresent={setServiceIdPresent}
+					spot_data={spot_data}
+					getData={getData}
 				/>
 			)}
 

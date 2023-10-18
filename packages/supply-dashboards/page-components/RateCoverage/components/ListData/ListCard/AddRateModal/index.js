@@ -15,7 +15,6 @@ import useDeleteFreightRateFeedbacks from '../../../../hooks/useDeleteFreightRat
 import useDeleteFreightRateRequests from '../../../../hooks/useDeleteFreightRateRequests';
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetFreightRate from '../../../../hooks/useGetFreightRate';
-import useGetSpoetSearches from '../../../../hooks/useGetSpoetSearches';
 import useUpdateFlashBookingRate from '../../../../hooks/useUpdateFlashBookingRate';
 import AddAdditionalRates from '../AddRate/AddAdditionalRate';
 import ServiceDetailsContent from '../DetailsView/Content';
@@ -38,6 +37,8 @@ function AddRateModal({
 	feedback_loading = false,
 	serviceIdPresent = {},
 	setServiceIdPresent = () => {},
+	spot_data = {},
+	getData = () => {},
 }) {
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	const [chargeCodes, setChargeCodes] = useState(null);
@@ -66,7 +67,6 @@ function AddRateModal({
 	const values = watch();
 
 	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data });
-	const { spot_data, getData } = useGetSpoetSearches({ feedbackData, requestData });
 	const { createRate, loading } = useCreateFreightRate(filter?.service);
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
 	const { deleteRequest } = useDeleteFreightRateRequests(filter?.service);
@@ -94,7 +94,7 @@ function AddRateModal({
 	};
 
 	const handleSubmitData = async (formData) => {
-		const rate_id = await createRate(formData);
+		const rate_id = await createRate(formData, data);
 		if (addLocalServices) {
 			setPayload(formData);
 		}
@@ -218,7 +218,7 @@ function AddRateModal({
 		if (spot_data) {
 			const TOTAL_SERVICES = [];
 			const primary_service_id = spot_data?.primary_service_id;
-			Object.keys(spot_data?.service_details).forEach((spot) => {
+			Object.keys(spot_data?.service_details || {})?.forEach((spot) => {
 				if (
 					spot !== primary_service_id
 					&& spot_data?.service_details?.[spot]?.service_type === 'fcl_freight'
@@ -231,7 +231,9 @@ function AddRateModal({
 	}, [spot_data]);
 
 	useEffect(() => {
-		if (spot_data) 	getData();
+		if (spot_data) 	{
+			getData();
+		}
 	}, []);
 
 	return (

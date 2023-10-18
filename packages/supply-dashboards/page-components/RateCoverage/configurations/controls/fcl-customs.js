@@ -138,14 +138,14 @@ const fclCustomsControls = ({
 		},
 		{
 			label              : 'Add Custom Line Items',
-			name               : 'customs_line_items',
+			name               : 'line_items',
 			type               : 'fieldArray',
 			showButtons        : true,
 			buttonText         : 'Add Custom Line Items',
 			noDeleteButtonTill : 0,
 			controls           : [
 				{
-					name        : 'fcl_line_items',
+					name        : 'customs_code',
 					valueKey    : 'code',
 					type        : 'async_select',
 					span        : 2,

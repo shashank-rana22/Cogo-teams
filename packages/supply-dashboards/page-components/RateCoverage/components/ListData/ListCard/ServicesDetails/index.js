@@ -3,7 +3,6 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useGetSpoetSearches from '../../../../hooks/useGetSpoetSearches';
 import useListLocationExpertServiceProvider from '../../../../hooks/useListLocationExpertServiceProvider';
 
 import styles from './styles.module.css';
@@ -18,13 +17,19 @@ function ServicesDetails({
 	data = {}, source = {}, filter = {}, getFeedback = () => {}, feedbackData = [],
 	feedback_loading = false,
 	serviceIdPresent = {},
+	getRequest = () => {},
 	setShowAddRateModal = () => {},
 	setServiceIdPresent = () => {},
+	serviceList = [],
+	loadingSpotSearch = false,
+	spot_data = {},
+	showServicePopover = false,
+	setShowServicePopover = () => {},
 }) {
-	const [showPopover, setShowPopover] = useState(false);
+	const [showPopover, setShowPopover] = useState(true);
 	const [page, setPage] = useState(1);
 	const user_id = useSelector(({ profile }) => profile.id);
-	const { serviceList, getData, spot_data, loadingSpotSearch } = useGetSpoetSearches({ id: data?.source_id });
+
 	const {
 		data: listview,
 		loading,
@@ -59,6 +64,17 @@ function ServicesDetails({
 		}
 		setShowPopover(true);
 		fetch();
+	};
+
+	const handelServices = () => {
+		setShowServicePopover((p) => !p);
+		if (!showServicePopover) {
+			if (source === 'rate_feedback') {
+				getFeedback();
+			} if (source === 'rate_request') {
+				getRequest();
+			}
+		}
 	};
 
 	return (
@@ -115,12 +131,14 @@ function ServicesDetails({
 				interactive
 				maxWidth="none"
 				animation="perspective"
+				visible={showServicePopover}
+				onClickOutside={() => setShowServicePopover(false)}
 			>
 				<Button
 					size="md"
 					themeType="link"
 					onClick={() => {
-						getData();
+						handelServices();
 					}}
 				>
 					View all Services
