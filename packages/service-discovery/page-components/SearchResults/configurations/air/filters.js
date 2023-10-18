@@ -1,16 +1,16 @@
 import { isEmpty } from '@cogoport/utils';
 
-import CustomSelectOption from '../../../../../../common/CustomSelectOption';
+import CustomSelectOption from '../../../../common/CustomSelectOption';
 
-export const FILTERS_DEFAULT_VALUES = {
+export const defaultValues = {
 	airline_id   : [],
 	source       : null,
 	payment_term : null,
 };
 
-export const getControls = ({ airlines = [], airlineParams = {}, setAirlineParams = () => {} }) => {
-	const FILTER_CONTROLS = {
-		airline_id: {
+export const getAirControls = ({ airlines = [], airlineParams = {}, setAirlineParams = () => {} }) => {
+	const controls = [
+		{
 			name     : 'airline_id',
 			label    : 'Airline',
 			controls : [
@@ -39,45 +39,7 @@ export const getControls = ({ airlines = [], airlineParams = {}, setAirlineParam
 				},
 			],
 		},
-		// operation_type: {
-		// 	name     : 'operation_type',
-		// 	label    : 'Operation Type',
-		// 	controls : [
-		// 		{
-		// 			name    : 'operation_type',
-		// 			label   : 'Flight Operation Type',
-		// 			type    : 'chips',
-		// 			options : [
-		// 				{
-		// 					label : 'Passenger',
-		// 					value : 'passenger',
-		// 				},
-		// 				{
-		// 					label : 'Freighter',
-		// 					value : 'freighter',
-		// 				},
-		// 				{
-		// 					label : 'Charter',
-		// 					value : 'charter',
-		// 				},
-		// 			],
-		// 		},
-		// 	],
-		// },
-		// cargo_readiness_date: {
-		// 	name     : 'cargo_readiness_date',
-		// 	label    : 'Cargo Readiness Date',
-		// 	controls : [
-		// 		{
-		// 			name       : 'cargo_readiness_date',
-		// 			label      : 'Pick a Date',
-		// 			type       : 'datepicker',
-		// 			dateFormat : 'dd-MM-yyyy',
-		// 			span       : 12,
-		// 		},
-		// 	],
-		// },
-		source: {
+		{
 			name     : 'source',
 			label    : 'Rate Type',
 			controls : [
@@ -109,7 +71,7 @@ export const getControls = ({ airlines = [], airlineParams = {}, setAirlineParam
 				},
 			],
 		},
-		payment_term: {
+		{
 			name     : 'payment_term',
 			label    : 'Payment Terms',
 			controls : [
@@ -133,6 +95,6 @@ export const getControls = ({ airlines = [], airlineParams = {}, setAirlineParam
 				},
 			],
 		},
-	};
-	return FILTER_CONTROLS;
+	];
+	return controls;
 };

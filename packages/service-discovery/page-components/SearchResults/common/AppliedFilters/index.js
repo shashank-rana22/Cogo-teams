@@ -8,6 +8,7 @@ function AppliedFilters({
 	setFilters = () => {},
 	setOpenAccordian = () => {},
 	setShowFilterModal = () => {},
+	service_type = '',
 }) {
 	return (
 		<div className={styles.container}>
@@ -19,6 +20,7 @@ function AppliedFilters({
 						setFilters={setFilters}
 						setOpenAccordian={setOpenAccordian}
 						setShowFilterModal={setShowFilterModal}
+						service_type={service_type}
 					/>
 				))}
 			</div>

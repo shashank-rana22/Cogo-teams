@@ -30,14 +30,21 @@ const useGetSpotSearch = ({ setComparisonRates = () => {}, setInfoBanner = () =>
 	const getSearch = useCallback(async ({ show_more = false } = {}) => {
 		if (!spot_search_id || (page > ONE && !show_more)) return;
 
-		let finalFilters = {};
+		const finalFilters = Object.entries(filters).reduce((acc, [key, value]) => {
+			if (key === 'transit_time') {
+				const [min, max] = value;
 
-		Object.keys(filters).forEach((key) => {
-			finalFilters = {
-				...finalFilters,
-				[key]: filters[key] || undefined,
+				return {
+					...acc,
+					transit_time_greater_than : min,
+					transit_time_less_than    : max,
+				};
+			}
+			return {
+				...acc,
+				[key]: value || undefined,
 			};
-		});
+		}, {});
 
 		try {
 			const { data:rateData } = await trigger({

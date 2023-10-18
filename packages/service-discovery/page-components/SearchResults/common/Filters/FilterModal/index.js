@@ -3,10 +3,26 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import deepEqual from '../../../utils/deepEqual';
 import FilterContent from '../FilterContent';
-import { FILTERS_DEFAULT_VALUES } from '../FilterContent/extra-filter-controls';
 
 import styles from './styles.module.css';
+
+const removeDefaultValues = (
+	defaultValues,
+	finalValues,
+) => Object.keys(finalValues).reduce((acc, key) => {
+	const filterValue = finalValues[key];
+	const defaultValue = defaultValues[key];
+
+	if (
+		(defaultValue !== undefined && deepEqual(defaultValue, filterValue))
+	) {
+		return acc;
+	}
+
+	return { ...acc, [key]: filterValue };
+}, {});
 
 function FilterModal({
 	show = false,
@@ -14,12 +30,12 @@ function FilterModal({
 	filters = {},
 	setFilters = () => {},
 	loading = false,
-	DEFAULT_VALUES = {},
-	controls = [],
 	openAccordian = '',
+	defaultValues:controlsDefaultValues = {},
+	controls = [],
 }) {
 	const defaultValues = {
-		...DEFAULT_VALUES,
+		...controlsDefaultValues,
 		...filters,
 		...(!isEmpty(filters?.source) ? {
 			source: Array.isArray(filters.source) && filters?.source?.some(
@@ -45,17 +61,17 @@ function FilterModal({
 
 		const finalValues = {
 			...values,
-			source: source === 'system_rate' ? ['spot_rates', 'predicted'] : source || DEFAULT_VALUES.source,
+			source: source === 'system_rate' ? ['spot_rates', 'predicted'] : source || controlsDefaultValues.source,
 		};
 
-		setFilters({ ...filters, ...finalValues });
+		setFilters(removeDefaultValues(controlsDefaultValues, { ...filters, ...finalValues }) || {});
 		setShow(false);
 	};
 
 	const handleReset = (key) => {
 		setFilters((prev) => ({
 			...prev,
-			[key]: FILTERS_DEFAULT_VALUES[key],
+			[key]: controlsDefaultValues[key],
 		}));
 		setShow(false);
 	};
@@ -80,6 +96,7 @@ function FilterModal({
 					filters={filters}
 					openAccordian={openAccordian}
 					handleReset={handleReset}
+					defaultValues={controlsDefaultValues}
 				/>
 			</Modal.Body>
 

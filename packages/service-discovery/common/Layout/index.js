@@ -138,8 +138,11 @@ function Layout({
 							name={name}
 							label={label}
 							control={control}
-							type={newControl?.uploaderType}
-							uploaderType={null}
+							{...(newControl?.uploaderType ? {
+								type         : newControl?.uploaderType,
+								uploaderType : null,
+							} : {})}
+
 						/>
 
 						{errors[name] && (

@@ -1,12 +1,33 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import { FILTERS_DEFAULT_VALUES } from '../../../../../common/Filters/FilterContent/extra-filter-controls';
+import deepEqual from '../../../utils/deepEqual';
+import getControls from '../../Filters/getControls';
 
 import styles from './styles.module.css';
 
+const formattedDate = (date = '', format = 'dd-MMM-yy') => formatDate({
+	date,
+	dateFormat : GLOBAL_CONSTANTS.formats.date[format],
+	formatType : 'date',
+});
+
 const getLabel = (key, value) => {
+	if (key === 'cargo_readiness_date') {
+		return `Cargo ready date - ${formattedDate(value)}`;
+	}
+
+	if (key === 'transit_time') {
+		return `Transit Time - ${value?.[GLOBAL_CONSTANTS.zeroth_index]} to ${value?.[GLOBAL_CONSTANTS.one]} days`;
+	}
+
 	const formattedValue = startCase(value);
+
+	if (!formattedValue) {
+		return '';
+	}
 
 	if (key === 'schedule_type') {
 		return `${formattedValue}-Shipment`;
@@ -20,6 +41,10 @@ const getLabel = (key, value) => {
 		return 'Preferred shipping line(s)';
 	}
 
+	if (key === 'airline_id') {
+		return 'Preferred airline(s)';
+	}
+
 	return formattedValue;
 };
 
@@ -28,17 +53,21 @@ function FilterItem({
 	setFilters = () => {},
 	setOpenAccordian = () => {},
 	setShowFilterModal = () => {},
+	service_type = '',
 }) {
 	const [key, value] = item;
 
-	const notGoingToShow = !value || isEmpty(value) || !Object.keys(FILTERS_DEFAULT_VALUES).includes(key);
+	const { defaultValues = {} } = getControls({ service_type });
+
+	const show = value && ((value instanceof Date) || !isEmpty(value))
+				&& Object.keys(defaultValues).includes(key) && !deepEqual(defaultValues[key], value);
 
 	const label = getLabel(key, value);
 
 	const handleRemove = () => {
 		setFilters((prev) => ({
 			...prev,
-			[key]: FILTERS_DEFAULT_VALUES[key],
+			[key]: defaultValues[key],
 		}));
 	};
 
@@ -47,7 +76,7 @@ function FilterItem({
 		setOpenAccordian(key);
 	};
 
-	if (notGoingToShow || !label) return null;
+	if (!show || !label) return null;
 
 	return (
 		<div className={styles.container}>

@@ -5,11 +5,11 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useMemo } from 'react';
 
 import DotLoader from '../../../../../../common/LoadingState/DotLoader';
+import AppliedFilters from '../../../../common/AppliedFilters';
 import ContractAd from '../../../../common/ContractAd';
 import RequestRate from '../../../../common/RequestRate';
 import Schedules from '../../../../common/Schedules';
 
-import AppliedFilters from './components/AppliedFilters';
 import ComparisonHeader from './components/ComparisonHeader';
 import EmptyState from './components/EmptyState';
 import Header from './components/Header';
@@ -124,6 +124,7 @@ function ListRates({
 				setOpenAccordian={setOpenAccordian}
 				filters={filters}
 				setFilters={setFilters}
+				service_type="air_freight"
 			/>
 
 			{(rates || []).map((rateItem, index) => (

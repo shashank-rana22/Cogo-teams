@@ -6,13 +6,13 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import DotLoader from '../../../../../common/LoadingState/DotLoader';
+import AppliedFilters from '../../../common/AppliedFilters';
 import ContractAd from '../../../common/ContractAd';
 import RequestRate from '../../../common/RequestRate';
 import Schedules from '../../../common/Schedules';
 import CogoAssuredCard from '../CogoAssuredCard';
 import FclCard from '../FclCard';
 
-import AppliedFilters from './AppliedFilters';
 import ComparisonHeader from './ComparisonHeader';
 import EmptyState from './EmptyState';
 import Header from './Header';
@@ -87,6 +87,18 @@ function ListRateCards({
 
 	const { total_count, page_limit, page } = paginationProps;
 
+	const transitTime = (rates || []).reduce((acc, rate) => {
+		if (!acc.min || rate.transit_time < acc.min) {
+			acc.min = rate.transit_time;
+		}
+
+		if (!acc.max || rate.transit_time > acc.max) {
+			acc.max = rate.transit_time;
+		}
+
+		return acc;
+	}, { min: null, max: null });
+
 	useEffect(() => {
 		Router.events.on('routeChangeComplete', () => {
 			setRouterLoading(false);
@@ -108,6 +120,7 @@ function ListRateCards({
 				setShowFilterModal={setShowFilterModal}
 				setOpenAccordian={setOpenAccordian}
 				openAccordian={openAccordian}
+				transitTime={transitTime}
 			/>
 		);
 	}
@@ -137,6 +150,7 @@ function ListRateCards({
 						openAccordian={openAccordian}
 						setOpenAccordian={setOpenAccordian}
 						setRouterLoading={setRouterLoading}
+						transitTime={transitTime}
 					/>
 
 					{showComparison ? (
@@ -164,6 +178,7 @@ function ListRateCards({
 				setOpenAccordian={setOpenAccordian}
 				filters={filters}
 				setFilters={setFilters}
+				service_type="fcl_freight"
 			/>
 
 			{isEmpty(cogoAssuredRates) ? null : (

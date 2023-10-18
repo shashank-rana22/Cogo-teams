@@ -12,6 +12,7 @@ function EmptyState({
 	setOpenAccordian = () => {},
 	showFilterModal = false,
 	setShowFilterModal = () => {},
+	transitTime = {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -24,6 +25,7 @@ function EmptyState({
 				setOpenAccordian={setOpenAccordian}
 				showFilterModal={showFilterModal}
 				setShowFilterModal={setShowFilterModal}
+				transitTime={transitTime}
 			/>
 
 			<div className={styles.request_rate_container}>
