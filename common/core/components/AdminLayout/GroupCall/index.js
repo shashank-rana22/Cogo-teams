@@ -11,7 +11,7 @@ const COMPONENT_MAPPING = {
 };
 
 function GroupCall({ firestore = {}, agentId = '' }) {
-	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const [showDeleteModal, setShowDeleteModal] = useState(true);
 	const { videoCallDetails } = useFetchFirebaseRoom({ firestore, agentId });
 
 	const { meeting_id } = videoCallDetails || {};
