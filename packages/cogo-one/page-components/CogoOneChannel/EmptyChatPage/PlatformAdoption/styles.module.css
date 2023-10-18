@@ -1,0 +1,89 @@
+.container {
+	height: 100%;
+	padding: 16px 16px 10px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 4px #efefef;
+}
+
+.top_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 16px;
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.history_title {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	color: #034afd;
+	text-decoration: underline;
+	cursor: pointer;
+
+	svg {
+		width: 16px;
+		height: 16px;
+	}
+}
+
+.stats_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.tabs {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 45%;
+}
+
+.each_tab {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 48%;
+	padding: 6px 16px;
+	cursor: pointer;
+	border: 0.5px solid #e0e0e0;
+	border-radius: 26px;
+	box-shadow: 0 0 4px 0 rgb(98 127 172 / 20%);
+}
+
+.label {
+	font-size: 12px;
+}
+
+.red_dot {
+	position: absolute;
+	right: 90%;
+	bottom: 88%;
+	width: 8px;
+	height: 8px;
+	background: #ee3425;
+	border-radius: 50%;
+}
+
+.arrow_button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px 8px;
+	margin-left: 10px;
+	border: 0.5px solid #e0e0e0;
+	border-radius: 8px;
+
+	svg {
+		fill: #034afd;
+	}
+}

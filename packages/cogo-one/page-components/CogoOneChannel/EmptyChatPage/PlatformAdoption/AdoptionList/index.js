@@ -1,0 +1,34 @@
+import React from 'react';
+
+import ADOPTION_CONTROLS from '../../../../../configurations/ADOPTION_CONTROLS';
+
+import AccountAllocateCard from './AccountAllocateCard';
+import DemoCard from './DemoCard';
+import KycVerifyCard from './KycVerifyCard';
+import styles from './styles.module.css';
+import TradeTypeVerifyCard from './TradeTypeVerifyCard';
+
+function AdoptionList() {
+	return (
+		<div className={styles.container}>
+			{ADOPTION_CONTROLS?.map((itm) => {
+				const {
+					name = '', kycVerify = false,
+					tradeTypeVerify = false, demo = false,
+					accountAllocate = false,
+				} = itm || {};
+
+				return (
+					<React.Fragment key={name}>
+						{kycVerify ? <KycVerifyCard /> : null}
+						{accountAllocate ? <AccountAllocateCard /> : null}
+						{demo ? <DemoCard /> : null}
+						{tradeTypeVerify ? <TradeTypeVerifyCard /> : null}
+					</React.Fragment>
+				);
+			})}
+		</div>
+	);
+}
+
+export default AdoptionList;

@@ -5,6 +5,7 @@ import React from 'react';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 
 import LeadVoiceCalls from './LeadVoiceCalls';
+import PlatformAdoption from './PlatformAdoption';
 import ShipmentsHomePage from './ShipmentsHomePage';
 import styles from './styles.module.css';
 
@@ -28,6 +29,8 @@ function EmptyChatPage({
 
 	const showLeadVoiceCalls = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_lead_voice_calls;
 
+	const showPlatformAdoption = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_platform_adoption;
+
 	if (showShipments) {
 		return (
 			<ShipmentsHomePage
@@ -44,6 +47,10 @@ function EmptyChatPage({
 				setActiveTab={setActiveTab}
 			/>
 		);
+	}
+
+	if (showPlatformAdoption) {
+		return <PlatformAdoption />;
 	}
 
 	return (
