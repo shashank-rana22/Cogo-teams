@@ -168,24 +168,6 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 		condition   : { services: ['import_transportation'] },
 	},
 	{
-		label       : 'Comments to Procurement',
-		name        : 'negotiation_remarks',
-		placeholder : 'Type here',
-		style       : { width: 200 },
-		type        : 'textarea',
-		condition   : {
-			services: [
-				'import_air_freight_local',
-				'export_air_freight_local',
-				'import_transportation',
-				'export_transportation',
-				'import_air_customs',
-				'export_air_customs',
-				'warehouse',
-			],
-		},
-	},
-	{
 		label     : 'Expected cargo gated in',
 		name      : 'expected_cargo_gated_in',
 		type      : 'datepicker',
