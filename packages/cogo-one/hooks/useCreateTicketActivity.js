@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -34,7 +35,7 @@ const useCreateTicketActivity = ({
 			fetchDetails();
 			scrollToBottom();
 		} catch (error) {
-			console.error(error?.error);
+			Toast.error(error?.response?.data);
 		}
 	};
 
