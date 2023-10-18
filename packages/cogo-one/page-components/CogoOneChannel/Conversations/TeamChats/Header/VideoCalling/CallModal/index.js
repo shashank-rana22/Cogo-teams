@@ -6,9 +6,10 @@ import styles from './styles.module.css';
 function CallModal({
 	url = '',
 	showDeleteModal = false,
+	setShowDeleteModal = () => {},
 }) {
 	return (
-		<Modal show={showDeleteModal} size="fullscreen" placement="center">
+		<Modal show={showDeleteModal} size="fullscreen" placement="center" onClose={() => setShowDeleteModal(false)}>
 			<Modal.Header title="Video Call" className={styles.modal_header} />
 			<Modal.Body className={styles.modal_body}>
 				<iframe
