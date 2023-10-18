@@ -1,8 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import AppliedFilters from '../../../../../../../common/AppliedFilters';
+import Filters from '../../../../../../../common/Filters';
 import Reset from '../../../../../../../common/Reset';
-import Filters from '../../../../../common/Filters';
-import AppliedFilters from '../../AppliedFilters';
 
 import styles from './styles.module.css';
 
@@ -24,6 +24,7 @@ function NoRatesFound({
 						setFilters={setFilters}
 						setShowFilterModal={setShowFilterModal}
 						setOpenAccordian={setOpenAccordian}
+						service_type="ftl_freight"
 					/>
 				</div>
 

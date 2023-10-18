@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
+import Filters from '../../../../../../common/Filters';
 import RefreshRate from '../../../../../../common/RefreshRate';
-import Filters from '../../../../common/Filters';
 
 import styles from './styles.module.css';
 

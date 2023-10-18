@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
+import Filters from '../../../../../../common/Filters';
 import RefreshRate from '../../../../../../common/RefreshRate';
-import Filters from '../../../../common/Filters';
 
 import styles from './styles.module.css';
 
@@ -18,7 +18,6 @@ function Header({
 	setOpenAccordian = () => {},
 	showFilterModal = false,
 	setShowFilterModal = () => {},
-	transitTime = {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -36,7 +35,6 @@ function Header({
 					loading={loading}
 					openAccordian={openAccordian}
 					setOpenAccordian={setOpenAccordian}
-					transitTime={transitTime}
 				/>
 
 				<RefreshRate refetch={refetch} details={details} />

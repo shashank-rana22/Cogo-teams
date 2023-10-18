@@ -17,6 +17,7 @@ const getFtlPayload = (values, origin, destination) => {
 		touch_points = {},
 		trucks = [],
 		ftlFormData = {},
+		source = '',
 	} = values;
 
 	const finalTripType = ftlFormData?.typeOfJourney || trip_type;
@@ -93,7 +94,7 @@ const getFtlPayload = (values, origin, destination) => {
 	}
 
 	if (load_selection_type === 'cargo_gross') {
-		const formattedPackages = getFTLGrossFormattedData(isEmpty(packages) ? values : packages);
+		const formattedPackages = getFTLGrossFormattedData(source === 'edit' ? values : packages);
 
 		const {
 			dimensions = {},

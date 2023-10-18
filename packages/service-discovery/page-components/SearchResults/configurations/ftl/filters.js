@@ -1,10 +1,10 @@
-export const FILTERS_DEFAULT_VALUES = {
+export const DEFAULT_VALUES = {
 	source: null,
 };
 
-export const getControls = ({ transitTime = {} }) => {
-	const FILTER_CONTROLS = {
-		source: {
+export const getFtlControls = () => {
+	const controls = [
+		{
 			name     : 'source',
 			label    : 'Rate type',
 			controls : [
@@ -40,21 +40,7 @@ export const getControls = ({ transitTime = {} }) => {
 				},
 			],
 		},
-		...(transitTime.min !== transitTime.max ? {
-			transit_time: {
-				name     : 'transit_time',
-				label    : 'Transit Time',
-				controls : [
-					{
-						name        : 'transit_time',
-						type        : 'range-slider',
-						sliderWidth : '80%',
-						min         : transitTime.min,
-						max         : transitTime.max,
-					},
-				],
-			},
-		} : {}),
-	};
-	return FILTER_CONTROLS;
+	];
+
+	return controls;
 };

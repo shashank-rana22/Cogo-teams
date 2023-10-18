@@ -3,10 +3,10 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import DotLoader from '../../../../../../common/LoadingState/DotLoader';
+import AppliedFilters from '../../../../common/AppliedFilters';
 import ContractAd from '../../../../common/ContractAd';
 import RequestRate from '../../../../common/RequestRate';
 
-import AppliedFilters from './components/AppliedFilters';
 import EmptyState from './components/EmptyState';
 import Header from './components/Header';
 import RateCard from './components/RateCard';
@@ -27,18 +27,6 @@ function ListRates({
 	const [openAccordian, setOpenAccordian] = useState('');
 
 	const { total_count, page_limit, page } = paginationProps;
-
-	const transitTime = (rates || []).reduce((acc, rate) => {
-		if (!acc.min || rate.transit_time < acc.min) {
-			acc.min = rate.transit_time;
-		}
-
-		if (!acc.max || rate.transit_time > acc.max) {
-			acc.max = rate.transit_time;
-		}
-
-		return acc;
-	}, { min: null, max: null });
 
 	if (!loading && isEmpty(rates)) {
 		return (
@@ -71,7 +59,6 @@ function ListRates({
 						openAccordian={openAccordian}
 						setOpenAccordian={setOpenAccordian}
 						setRouterLoading={setRouterLoading}
-						transitTime={transitTime}
 					/>
 				</div>
 			</div>
@@ -81,6 +68,7 @@ function ListRates({
 				setOpenAccordian={setOpenAccordian}
 				filters={filters}
 				setFilters={setFilters}
+				service_type="ftl_freight"
 			/>
 
 			<ContractAd

@@ -1,10 +1,49 @@
 import { Accordion } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCross } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-import FilterItem from './FilterItem';
+import Layout from '../../../../../common/Layout';
+import deepEqual from '../../../utils/deepEqual';
+
 import styles from './styles.module.css';
+
+function Value({ name = '', value = {}, defaultValues = {}, onReset = () => {} }) {
+	const show = value && ((value instanceof Date) || !isEmpty(value))
+				&& Object.keys(defaultValues).includes(name) && !deepEqual(defaultValues[name], value);
+
+	if (!show) {
+		return null;
+	}
+
+	let formattedValue = startCase(value);
+
+	if (value instanceof Date) {
+		formattedValue = formatDate({
+			date       : value,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MMM-yy'],
+			formatType : 'date',
+		});
+	}
+
+	if (name === 'transit_time') {
+		formattedValue = `Transit Time - ${value?.[GLOBAL_CONSTANTS.zeroth_index]} to 
+		${value?.[GLOBAL_CONSTANTS.one]} days`;
+	}
+
+	if (typeof value === 'object') {
+		formattedValue = `${value.length} Selected`;
+	}
+
+	return (
+		<span className={styles.filter_value_pill}>
+			{formattedValue}
+
+			<IcMCross className={styles.cross_icon} onClick={onReset} />
+		</span>
+	);
+}
 
 function FilterContent(props) {
 	const {
@@ -17,6 +56,7 @@ function FilterContent(props) {
 		filters = {},
 		openAccordian = '',
 		handleReset = () => {},
+		defaultValues = {},
 	} = props;
 
 	function AccordianContent({ label = '', name = '' }) {
@@ -28,14 +68,12 @@ function FilterContent(props) {
 			<div className={styles.label_container}>
 				{label}
 
-				{filters[name] && !isEmpty(filters[name]) ? (
-					<span className={styles.filter_value_pill}>
-						{typeof filters[name] === 'object'
-							? `${filters[name].length} Selected` : startCase(filters[name])}
-
-						<IcMCross className={styles.cross_icon} onClick={onReset} />
-					</span>
-				) : null}
+				<Value
+					name={name}
+					value={filters[name]}
+					defaultValues={defaultValues}
+					onReset={onReset}
+				/>
 			</div>
 		);
 	}
@@ -57,7 +95,7 @@ function FilterContent(props) {
 								style={{ width: '100%' }}
 								isOpen={openedAccordian}
 							>
-								<FilterItem
+								<Layout
 									controls={itemControls}
 									control={control}
 									watch={watch}

@@ -1,9 +1,9 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import AppliedFilters from '../../../../../common/AppliedFilters';
 import DetentionDemurrage from '../../../../../common/D&D';
 import Filters from '../../../../../common/Filters';
 import Reset from '../../../../../common/Reset';
-import AppliedFilters from '../../AppliedFilters';
 
 import styles from './styles.module.css';
 
@@ -12,22 +12,22 @@ function NoRatesFound({
 	filters = {},
 	setFilters = () => {},
 	refetch = () => {},
-	filtersRef = {},
 	setOpenAccordian = () => {},
 	setShowFilterModal = () => {},
 	openAccordian = '',
 	showFilterModal = false,
+	transitTime = {},
 }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_section}>
 				<div className={styles.applied_filters}>
 					<AppliedFilters
-						filtersRef={filtersRef}
 						filters={filters}
 						setFilters={setFilters}
 						setShowFilterModal={setShowFilterModal}
 						setOpenAccordian={setOpenAccordian}
+						service_type="fcl_freight"
 					/>
 				</div>
 
@@ -45,6 +45,7 @@ function NoRatesFound({
 						setOpenAccordian={setOpenAccordian}
 						showFilterModal={showFilterModal}
 						setShowFilterModal={setShowFilterModal}
+						transitTime={transitTime}
 					/>
 
 					<Reset setFilters={setFilters} />

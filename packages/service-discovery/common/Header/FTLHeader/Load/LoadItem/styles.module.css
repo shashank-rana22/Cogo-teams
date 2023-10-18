@@ -8,6 +8,7 @@
 	align-items: center;
 	min-width: max-content;
 	padding: 4px 14px;
+	margin-right: 12px;
 	background: #fef199;
 	border: 1px solid #fcdc00;
 	border-radius: 24px;
@@ -17,6 +18,13 @@
 	font-size: 12px;
 	font-weight: 400;
 	color: #4f4f4f;
+
+	&.overflow {
+		max-width: 120px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }
 
 .edit {
@@ -27,8 +35,4 @@
 	&:hover {
 		transform: scale(1.1);
 	}
-}
-
-.horizontal_margin {
-	margin-right: 12px;
 }
