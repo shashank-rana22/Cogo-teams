@@ -8609,7 +8609,7 @@ const partner = {
 			module      : 'Expenses',
 		},
 		{
-			api         : 'get_purchase_expense_by_id',
+			api         : 'get_purchase_expense',
 			access_type : 'private',
 			module      : 'Expenses',
 		},
