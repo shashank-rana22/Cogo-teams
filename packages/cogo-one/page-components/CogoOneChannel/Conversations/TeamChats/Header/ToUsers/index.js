@@ -2,6 +2,7 @@ import { AsyncSelect } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef, useEffect } from 'react';
 
+import { COGOVERSE_AGENT_FILTERS_MAPPINGS, HR_TEAM_FILTER } from '../../../../../../constants/filterKeysMapping';
 import useCreateOrGetDraftTeamRoom from '../../../../../../hooks/useCreateOrGetDraftTeamRoom';
 import getCommonAgentType from '../../../../../../utils/getCommonAgentType';
 import UserCard from '../UserCard';
@@ -9,6 +10,8 @@ import UserCard from '../UserCard';
 import styles from './styles.module.css';
 
 const ADMIN_VIEW = ['admin', 'cogoone_admin', 'hr', 'hr_admin'];
+
+const TEAM_WISE_ADMINS = ['sales_admin', 'supply_admin', 'shipment_specialist_admin'];
 
 function outerClick({ event, ref, setTriggerCreation }) {
 	if (ref.current && !ref.current.contains(event.target)) {
@@ -36,9 +39,11 @@ function ToUser({
 
 	const isEmptyList = isEmpty(users?.userIds);
 
-	const allowToMessageAll = viewType?.includes('admin') || viewType === 'hr';
+	const isTeamsAdmin = ADMIN_VIEW.includes(viewType);
 
-	const teamsAdminFilter = ADMIN_VIEW.includes(viewType) ? undefined : getCommonAgentType({ viewType });
+	const isTeamWiseAdmin = TEAM_WISE_ADMINS.includes(viewType);
+
+	const commonAgentType = getCommonAgentType({ viewType });
 
 	useEffect(() => {
 		function wrapper(event) {
@@ -98,10 +103,12 @@ function ToUser({
 						params={{
 							filters: {
 								status_not : 'inactive',
-								agent_type : allowToMessageAll
-									? undefined : [teamsAdminFilter, 'hr'] || undefined,
-								team_admins: (viewType?.includes('admin') && teamsAdminFilter)
-									? [teamsAdminFilter] : undefined,
+								agent_type : isTeamsAdmin
+									? undefined : [
+										...(COGOVERSE_AGENT_FILTERS_MAPPINGS[viewType] || []),
+										...HR_TEAM_FILTER,
+									],
+								teams_admins: isTeamWiseAdmin ? [commonAgentType] : undefined,
 							},
 							sort_by: 'agent_type',
 						}}
