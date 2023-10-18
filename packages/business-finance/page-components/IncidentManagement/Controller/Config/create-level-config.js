@@ -69,7 +69,7 @@ export const controls = ({ t = () => {}, incidentType = '', setValue = () => {} 
 		span        : 5.5,
 		initialCall : true,
 		placeholder : t('incidentManagement:incident_sub_type_label'),
-		renderLabel : (item) => startCase(camelCase(item?.incidentType)) || '',
+		renderLabel : (item) => startCase(camelCase(item?.incidentSubtype)) || '',
 		disabled    : isEmpty(incidentType),
 		params      : { incidentType: incidentType || undefined },
 		rules       : { required: t('incidentManagement:incident_sub_type_required_message') },
