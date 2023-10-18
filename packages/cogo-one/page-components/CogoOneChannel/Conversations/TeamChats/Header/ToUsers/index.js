@@ -8,7 +8,7 @@ import UserCard from '../UserCard';
 
 import styles from './styles.module.css';
 
-const ADMIN_VIEW = ['admin', 'cogoone_admin'];
+const ADMIN_VIEW = ['admin', 'cogoone_admin', 'hr', 'hr_admin'];
 
 function outerClick({ event, ref, setTriggerCreation }) {
 	if (ref.current && !ref.current.contains(event.target)) {
@@ -35,6 +35,8 @@ function ToUser({
 	} = useCreateOrGetDraftTeamRoom({ firestore, setActiveTab, setTriggerCreation, setLoadingDraft });
 
 	const isEmptyList = isEmpty(users?.userIds);
+
+	const allowToMessageAll = viewType?.includes('admin') || viewType === 'hr';
 
 	const teamsAdminFilter = ADMIN_VIEW.includes(viewType) ? undefined : getCommonAgentType({ viewType });
 
@@ -96,9 +98,10 @@ function ToUser({
 						params={{
 							filters: {
 								status_not : 'inactive',
-								agent_type : viewType?.includes('admin')
-									? undefined : teamsAdminFilter || undefined,
-								team_admins: !viewType?.includes('admin') ? undefined : [teamsAdminFilter],
+								agent_type : allowToMessageAll
+									? undefined : [teamsAdminFilter, 'hr'] || undefined,
+								team_admins: (viewType?.includes('admin') && teamsAdminFilter)
+									? [teamsAdminFilter] : undefined,
 							},
 							sort_by: 'agent_type',
 						}}
