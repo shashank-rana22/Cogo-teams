@@ -226,7 +226,7 @@ const common_apis = {
 		{
 			api          : 'get_shipping_line_for_search_value',
 			access_type  : 'private',
-			service_name : 'air_tracking',
+			service_name : 'saas_traceability',
 			feature      : 'tracking',
 		},
 		{

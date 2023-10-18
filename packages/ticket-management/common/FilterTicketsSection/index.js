@@ -18,7 +18,15 @@ function FilterTicketsSection({
 	const [searchParams, setSearchParams] = useState({ text: '', agent: '', category: '' });
 	const [modalData, setModalData] = useState(ticket_id ? { ticketId: ticket_id } : {});
 	const [isUpdated, setIsUpdated] = useState(false);
-	const [sortBy, setSortBy] = useState('');
+	const [sortBy, setSortBy] = useState({
+		sortOrder : 'desc',
+		sortType  : '',
+	});
+	const [idFilters, setIdFilters] = useState({
+		show     : false,
+		idType   : '',
+		serialId : '',
+	});
 
 	const isAdmin = type === 'admin';
 
@@ -32,6 +40,8 @@ function FilterTicketsSection({
 				isAdmin={isAdmin}
 				spectatorType={spectatorType}
 				setSpectatorType={setSpectatorType}
+				setIdFilters={setIdFilters}
+				idFilters={idFilters}
 			/>
 			<TicketsSection
 				date={date}
@@ -44,6 +54,8 @@ function FilterTicketsSection({
 				setIsUpdated={setIsUpdated}
 				setRefreshList={setRefreshList}
 				refreshList={refreshList}
+				setIdFilters={setIdFilters}
+				idFilters={idFilters}
 			/>
 			<Modals
 				modalData={modalData}

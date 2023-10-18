@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import useListShipment from '../../../../hook/useListShipment.ts';
+import useListShipment from '../../../../hook/useListShipment';
 import DetailsCard from '../DetailsCard';
 import DocumentsCard from '../DocumentsCard';
 import TicketsCard from '../TicketsCard/index';
@@ -17,8 +17,8 @@ function QuotationCards({
 	setQuotationsData = () => {},
 }) {
 	const { query: { active_tab = '', job_id = '', job_number = '' } } = useRouter();
-	const { data: shipmentData, loading: loadingShipment } = useListShipment(job_number);
-	const dataList = shipmentData?.list[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const { data: shipmentData = {}, loading: loadingShipment = false } = useListShipment(job_number);
+	const dataList = shipmentData?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const shipmentId = dataList?.id || '';
 
 	const [tab, setTab] = useState({

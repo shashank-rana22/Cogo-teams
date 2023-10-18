@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 const SHOW_LENGTH = 11;
 const NO_PROFIT = 0;
 
-function check(profit = 0, category = '') {
+function checkProfitLoss(profit = 0, category = '') {
 	if (profit >= NO_PROFIT) {
 		if (category === 'BUY') {
 			return false;
@@ -23,7 +23,7 @@ function check(profit = 0, category = '') {
 }
 
 export default function RenderTableData({ data = 0, profit = 0, category = '', currency = '' }) {
-	const absoluteProfit = Math.abs(profit);
+	const absoluteProfit = Math.abs(profit || NO_PROFIT);
 	return (
 		<div>
 			<div className={styles.fix_layout}>
@@ -31,7 +31,7 @@ export default function RenderTableData({ data = 0, profit = 0, category = '', c
 				{category === 'Profitability' ? `${data}%` : ShowOverflowingNumber(data, SHOW_LENGTH, currency) }
 			</div>
 			<div className={styles.flex}>
-				<div className={check(profit, category) ? styles.profit_icon : styles.loss_icon}>
+				<div className={checkProfitLoss(profit, category) ? styles.profit_icon : styles.loss_icon}>
 					<IcMArrowNext height="20" width="20" />
 				</div>
 				<div>

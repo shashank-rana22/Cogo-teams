@@ -6,10 +6,10 @@ import config from '../../../../configurations/fin-opr-config';
 import styles from './styles.module.css';
 
 function Header() {
-	const { headerStyles = {}, fields = [] } = config;
+	const { headerStyles = {}, fields = [] } = config || {};
 	return (
 		<header className={styles.header} style={headerStyles}>
-			{(fields || []).filter((itm) => !itm?.hideColumn).map((field) => (
+			{(fields || []).filter((itm) => !itm?.hideColumn)?.map((field) => (
 				<div
 					className={cl`${styles.col} ${field?.className || ''}`}
 					style={{
@@ -18,7 +18,7 @@ function Header() {
 					}}
 					key={field?.key}
 				>
-					{field.label}
+					{field?.label}
 				</div>
 			))}
 		</header>

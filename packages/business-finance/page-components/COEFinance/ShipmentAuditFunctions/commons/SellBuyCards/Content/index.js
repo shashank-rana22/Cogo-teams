@@ -31,6 +31,7 @@ function Content({
 	const initIdList = data?.filter((item) => item?.quotation_state === 'INIT').map((item) => item?.id);
 	const currentStatus = data?.some((item) => item?.quotation_state === 'INIT');
 	const auditStatus = window.sessionStorage.getItem('audit_status');
+	const currency = window.sessionStorage.getItem('currency');
 
 	const {
 		approveQuotation = () => {},
@@ -47,9 +48,9 @@ function Content({
 					<div className={styles.regular}>Income</div>
 					<div>
 						{formatAmount({
-							amount   : income,
-							currency : 'INR',
-							options  : {
+							amount  : income,
+							currency,
+							options : {
 								currencyDisplay : 'code',
 								style           : 'currency',
 							},
@@ -66,7 +67,7 @@ function Content({
 			<Header />
 			{data?.map((item) => (
 				<Body
-					key={item.id}
+					key={item?.id}
 					lineItemSectionOpen={lineItemSectionOpen}
 					setLineItemSectionOpen={setLineItemSectionOpen}
 					data={item}

@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import Filter from '../../../../commons/Filters/index.tsx';
+import Filter from '../../../../commons/Filters/index';
 import { exceptionMasterFilters, exceptionCycleWiseFilters } from '../../../configurations/exceptions-filters';
 import useAddUploadList from '../../../hooks/useAddUploadList';
 

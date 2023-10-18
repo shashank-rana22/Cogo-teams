@@ -3,8 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
-// import CargoDetailPills from '../cargo-details/index';
-
+import CargoDetailPills from './CargoDetailPills';
 import PortDetails from './PortDetails/index';
 import styles from './styles.module.css';
 import TimeLine from './TimeLine/index';
@@ -53,7 +52,7 @@ function Details({
 	const { importer_exporter: importerExporter = {} } = dataList || {};
 	const { push = () => {} } = useRouter();
 
-	const { shipment_type:shipmentType } = dataList || {};
+	const { shipment_type:shipmentType = '' } = dataList || {};
 
 	return (
 		<div>
@@ -78,7 +77,7 @@ function Details({
 				</div>
 
 				<div className={styles.tags}>
-					{/* <CargoDetailPills detail={dataList} /> */}
+					<CargoDetailPills detail={dataList} />
 				</div>
 				<div
 					className={styles.flex_div}

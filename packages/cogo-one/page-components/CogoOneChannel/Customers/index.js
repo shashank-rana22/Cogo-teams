@@ -9,12 +9,14 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useGetUnreadCallsCount from '../../../hooks/useGetUnreadCallsCount';
 import useGetUnreadMailsCount from '../../../hooks/useGetUnreadMailsCount';
 import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
+import useGetUnreadTeamsCount from '../../../hooks/useGetUnreadTeamsCount';
 
 import AgentSettings from './AgentSettings';
 import CommunicationModals from './CommunicationModals';
 import MailsList from './MailList';
 import MessageList from './MessageList';
 import styles from './styles.module.css';
+import Teams from './Teams';
 import VoiceList from './VoiceList';
 
 const COMPONENT_MAPPING = {
@@ -22,9 +24,10 @@ const COMPONENT_MAPPING = {
 	voice           : VoiceList,
 	outlook         : MailsList,
 	firebase_emails : MailsList,
+	teams           : Teams,
 };
 
-const DEFAULT_PADDING_NOT_REQUIRED = ['outlook', 'firebase_emails'];
+const DEFAULT_PADDING_NOT_REQUIRED = ['outlook', 'firebase_emails', 'teams'];
 
 function Customers({
 	setActiveTab = () => {},
@@ -71,6 +74,8 @@ function Customers({
 		userSharedMails,
 	});
 
+	const { unreadTeamsCount = 0 } = useGetUnreadTeamsCount({ firestore });
+
 	const { data = {}, fetchUnreadCall = () => {} } = useGetUnreadCallsCount({ activeTab });
 
 	const unReadMissedCallCount = data?.total_missed_call_count;
@@ -113,6 +118,20 @@ function Customers({
 			userId,
 			isBotSession,
 		},
+		teams: {
+			setActiveTeamCard: (val) => {
+				setActiveTab((prev) => ({
+					...prev,
+					data: val,
+				}));
+			},
+			activeTeamCard  : activeTab?.data || {},
+			activeTab       : activeTab?.tab,
+			viewType,
+			firestore,
+			loggedInAgentId : userId,
+			setActiveTab,
+		},
 	};
 
 	const tabMappings = getTabMappings({
@@ -120,6 +139,7 @@ function Customers({
 		unReadMissedCallCount,
 		unReadMailsCount,
 		viewType,
+		unreadTeamsCount,
 	});
 
 	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
@@ -222,6 +242,7 @@ function Customers({
 				setOpenKamContacts={setOpenKamContacts}
 				setSendBulkTemplates={setSendBulkTemplates}
 				firestore={firestore}
+				activeSelect={activeTab?.tab || ''}
 			/>
 		</div>
 	);

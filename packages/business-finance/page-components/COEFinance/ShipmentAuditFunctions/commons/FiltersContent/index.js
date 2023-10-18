@@ -8,6 +8,13 @@ import { walletType } from '../../../utils/constants/walletOptions';
 
 import styles from './styles.module.css';
 
+const tabData = [
+	{ name: 'IMPORT', title: 'Import' },
+	{ name: 'EXPORT', title: 'Export' },
+	{ name: 'LOCAL', title: 'Local' },
+	{ name: 'DOMESTIC', title: 'Domestic' },
+];
+
 function Content({
 	filters = {},
 	setFilters = () => {},
@@ -31,16 +38,10 @@ function Content({
 		setFilters((p) => ({ ...p, tradeType: val }));
 	};
 
-	const clearFilter = () => {
-		setFilters({
-			Service               : null,
-			Entity                : null,
-			walletUsed            : null,
-			operationalClosedDate : null,
-			creationDate          : null,
-			tradeType             : '',
-		});
-	};
+	const tabPanels = tabData.map((tab) => (
+		<TabPanel key={tab.name} name={tab.name} title={tab.title} />
+	));
+
 	return (
 		<div className={styles.filter_div_style}>
 			<div className={styles.tab_container}>
@@ -52,7 +53,14 @@ function Content({
 								themeType="secondary"
 								size="sm"
 								onClick={() => {
-									clearFilter();
+									setFilters({
+										Service               : null,
+										Entity                : null,
+										walletUsed            : null,
+										operationalClosedDate : null,
+										creationDate          : null,
+										tradeType             : '',
+									});
 									setTradeTab('');
 									refetch({ setShow });
 								}}
@@ -84,10 +92,7 @@ function Content({
 								onChange={(val) => handleTradeTabChange(val)}
 								themeType="primary-horizontal"
 							>
-								<TabPanel name="IMPORT" title="Import" />
-								<TabPanel name="EXPORT" title="Export" />
-								<TabPanel name="LOCAL" title="Local" />
-								<TabPanel name="DOMESTIC" title="Domestic" />
+								{tabPanels}
 							</Tabs>
 							<RadioGroup
 								options={serviceType}

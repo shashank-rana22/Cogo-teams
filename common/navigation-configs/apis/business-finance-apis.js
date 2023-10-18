@@ -73,7 +73,7 @@ const business_finance = {
 		{
 			api         : 'get_common_job_profitability_shipment_summary',
 			access_type : 'private',
-			feature     : 'coe_finance',
+			feature     : 'coeFinance',
 		},
 		{
 			api          : 'list_shipments',
@@ -284,6 +284,11 @@ const business_finance = {
 		},
 		{
 			api         : 'get_purchase_bills_tagging_map',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'get_purchase_bills_list_stats',
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},

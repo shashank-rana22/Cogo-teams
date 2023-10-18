@@ -1,7 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import useGetShipmentTimeLine from '../../../../../../hook/useGetShipmentTimeLine.ts';
+import useGetShipmentTimeLine from '../../../../../../hook/useGetShipmentTimeLine';
 
 import styles from './styles.module.css';
 import TimeLineItem from './TimeLineItem/index';

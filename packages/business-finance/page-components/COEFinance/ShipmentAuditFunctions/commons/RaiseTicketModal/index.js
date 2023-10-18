@@ -4,9 +4,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { upperCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import Layout from '../../../../commons/Layout/index.tsx';
+import Layout from '../../../../commons/Layout/index';
 import useGetConfigurationCategory from '../../../hook/useGetConfigurationCategory';
-import useListShipment from '../../../hook/useListShipment.ts';
+import useListShipment from '../../../hook/useListShipment';
 import useListStakeholders from '../../../hook/useListShipmentStakeholders';
 import useRaiseTicket from '../../../hook/useRaiseTicket';
 import getStakeholderData from '../../../utils/getStakeholderData';
@@ -27,7 +27,10 @@ function RaiseTicketModal({
 
 	let disableButton = false;
 
-	const { control, watch, handleSubmit, formState:{ errors = {} } = {} } = useForm();
+	const {
+		control = {}, watch = () => {},
+		handleSubmit = () => {}, formState:{ errors = {} } = {},
+	} = useForm();
 
 	const formValues = watch();
 
@@ -55,7 +58,7 @@ function RaiseTicketModal({
 
 	const raiseToDesk = configData?.items?.[GLOBAL_CONSTANTS.zeroth_index]?.raised_to_desk;
 
-	const formatRaiseToDeskOptions = (raiseToDesk || []).map((item) => ({
+	const formatRaiseToDeskOptions = (raiseToDesk || [])?.map((item) => ({
 		label : item?.name,
 		value : item?.name,
 	}));

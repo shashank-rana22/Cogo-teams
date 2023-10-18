@@ -80,6 +80,10 @@ const businessFinance = {
 	'/[partner_id]/business-finance/account-payables/[active_tab]/create-new-payrun': {
 		navigation: 'business_finance-account_payables',
 	},
+	'/[partner_id]/business-finance/account-payables/audit/[payrun_id]': {
+		navigation : 'business_finance-account_payables',
+		isMainNav  : true,
+	},
 	'/[partner_id]/business-finance/overheads': {
 		navigation : 'business_finance-overheads',
 		isMainNav  : true,

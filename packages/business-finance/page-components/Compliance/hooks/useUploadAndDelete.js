@@ -1,6 +1,6 @@
 import { useRequestBf } from '@cogoport/request';
 
-import toastApiError from '../../commons/toastApiError.ts';
+import toastApiError from '../../commons/toastApiError';
 
 const useUploadAndDelete = ({ refetch }) => {
 	const [{ loading:deleteIdLoading }, trigger] = useRequestBf(

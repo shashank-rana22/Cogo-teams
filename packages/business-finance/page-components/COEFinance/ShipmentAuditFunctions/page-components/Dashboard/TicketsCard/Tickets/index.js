@@ -3,7 +3,7 @@ import Modals from '@cogoport/ticket-management/common/Modals';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import EmptyStateDocs from '../../../../../../commons/EmptyStateDocs/index.tsx';
+import EmptyStateDocs from '../../../../../../commons/EmptyStateDocs/index';
 import useListTickets from '../../../../../hook/useListTickets';
 
 import styles from './styles.module.css';
@@ -82,11 +82,11 @@ function Tickets({
 			/>
 			<div className={styles.pagination_container}>
 				<Pagination
-					type="compact"
+					type="table"
 					currentPage={page}
-					totalItems={1 + (pageData?.total_pages || 0)}
-					pageSize={pageData?.total_pages}
-					onPageChange={setPage}
+					totalItems={pageData?.total}
+					pageSize={10}
+					onPageChange={(val) => setPage(val)}
 				/>
 			</div>
 		</div>

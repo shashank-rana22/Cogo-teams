@@ -1,7 +1,7 @@
 import { cl, Placeholder } from '@cogoport/components';
 import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 
-import showOverflowingNumber from '../../../../commons/showOverflowingNumber.tsx';
+import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 
 import styles from './styles.module.css';
 

@@ -8,7 +8,7 @@ import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
 import useGetShipmentSummary from '../../../../hook/useGetShipmentSummary';
-import useGetWallet from '../../../../hook/useGetWallet.ts';
+import useGetWallet from '../../../../hook/useGetWallet';
 import GetPill from '../../../commons/getPill';
 
 import Details from './Details';
@@ -31,7 +31,7 @@ function DetailsCard({
 
 	const currency = window.sessionStorage.getItem('currency');
 
-	const { data: summary = {}, loading: summaryLoading } = useGetShipmentSummary({ jobId });
+	const { data: summary = {}, loading: summaryLoading = false } = useGetShipmentSummary({ jobId });
 
 	const {
 		cogopointUtilizationAmount = '', kamMarginUtilizationAmount: kamMargin = '',
@@ -40,7 +40,7 @@ function DetailsCard({
 
 	const pointsAndPromocode = cogopointUtilizationAmount + organizationPromocodesAmount;
 
-	const { data: dataWallet } = useGetWallet(shipmentId);
+	const { data: dataWallet = {} } = useGetWallet(shipmentId);
 	const {
 		agent_data: agentData = {},
 		agent_role_data: agentRoleData = {},

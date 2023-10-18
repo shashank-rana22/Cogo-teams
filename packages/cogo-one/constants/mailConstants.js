@@ -43,6 +43,7 @@ export const DEFAULT_EMAIL_STATE = {
 	toUserEmail   : [],
 	ccrecipients  : [],
 	bccrecipients : [],
+	user_ids      : {},
 	orgId         : '',
 	rteContent    : '',
 	customSubject : {
@@ -51,8 +52,9 @@ export const DEFAULT_EMAIL_STATE = {
 		subjectText : '',
 	},
 	orgData: {
-		orgType : 'organizations',
-		orgId   : '',
+		orgType                : 'organizations',
+		orgId                  : '',
+		twinImporterExporterId : '',
 	},
 };
 
@@ -137,16 +139,27 @@ export const ORGS_MAPPING = {
 		title : "Org's",
 		value : 'organizations',
 	},
-	lead_organizations: {
-		title : "Lead Org's",
-		value : 'lead_organizations',
+	other_organizations: {
+		title : 'Others',
+		value : 'other_organizations',
 	},
 	channel_partners: {
 		title : "Org's",
 		value : 'channel_partners',
 	},
-	lead_channel_partners: {
-		title : "Lead Org's",
-		value : 'lead_channel_partners',
+	other_channel_partners: {
+		title : 'Others',
+		value : 'other_channel_partners',
+	},
+};
+
+export const USERS_MAPPING = {
+	users: {
+		title : 'Users',
+		value : 'users',
+	},
+	pocs: {
+		title : "POC's",
+		value : 'pocs',
 	},
 };

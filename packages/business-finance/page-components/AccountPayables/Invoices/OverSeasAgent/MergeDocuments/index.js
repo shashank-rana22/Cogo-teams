@@ -4,7 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
-import List from '../../../../commons/List/index.tsx';
+import List from '../../../../commons/List/index';
 import useDeletePayrunInvoice from '../../hooks/useDeletePayrunInvoice';
 import useDeleteTaggedDocuments from '../../hooks/useDeleteTaggedDocuments';
 import useListTaggedInvoice from '../../hooks/useListTaggedInvoice';

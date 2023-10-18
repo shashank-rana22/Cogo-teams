@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { getFormatAmount } from './getFormatAmount';
 
-function ShowOverflowingNumber(value, maxLength, currency) {
+function ShowOverflowingNumber(value = '', maxLength = '', currency = '') {
 	const formatter = new Intl.NumberFormat('en-IN');
 	const newValue = formatter.format(value) || '';
 

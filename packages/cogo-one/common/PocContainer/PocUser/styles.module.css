@@ -143,6 +143,12 @@
 .action_icons {
 	display: flex;
 	align-items: center;
+
+	>div[aria-label="tooltip"] {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 }
 
 .message_icon_styles {

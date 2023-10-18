@@ -12,6 +12,8 @@ const TITLE_MAPPING = {
 	OPR : 'Operational',
 };
 
+const checkIsApproved = (data = []) => data?.every((item) => item?.quotation_state === 'APPROVED');
+
 const ZERO_VALUE = 0;
 
 function SellBuyCards({
@@ -23,6 +25,7 @@ function SellBuyCards({
 	getClosedTasks = () => {},
 }) {
 	const [open, setOpen] = useState(false);
+	const currency = window.sessionStorage.getItem('currency');
 
 	let profitabilityData = 0;
 	let grandTotal = 0;
@@ -31,8 +34,6 @@ function SellBuyCards({
 		profitabilityData += i.profitability;
 		grandTotal += i.grand_total;
 	});
-
-	const checkIsApproved = () => data?.every((item) => item?.quotation_state === 'APPROVED');
 
 	return (
 		<div className={styles.custom_accordion}>
@@ -44,7 +45,7 @@ function SellBuyCards({
 								{`${TITLE_MAPPING[source]} ${startCase(type)}`}
 							</div>
 
-							{checkIsApproved() ? <IcCFtick /> : null}
+							{checkIsApproved(data) ? <IcCFtick /> : null}
 						</div>
 
 						<div className={`${open ? styles.nothing : styles.other_title}`}>
@@ -53,9 +54,9 @@ function SellBuyCards({
 							</div>
 							<div>
 								{formatAmount({
-									amount   : grandTotal,
-									currency : 'INR',
-									options  : {
+									amount  : grandTotal,
+									currency,
+									options : {
 										currencyDisplay : 'code',
 										style           : 'currency',
 									},

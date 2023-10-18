@@ -165,5 +165,12 @@
     "haulage":"การลาก",
     "air_customs": "ศุลกากรอากาศ",
     "created_at": "สร้างเมื่อ",
-    "updated_at": "อัปเดตเมื่อ"
+    "updated_at": "อัปเดตเมื่อ",
+    "stakeholders": "การจัดส่งน้อย",
+    "missing_id": "รหัสที่ขาดหายไป",
+    "dislike_id": "ไม่ชอบ ID",
+    "enter_serial_id": "ป้อนรหัสซีเรียล",
+    "apply": "นำมาใช้",
+    "reset": "รีเซ็ต",
+    "serial_id": "ID อนุกรม"
 }
