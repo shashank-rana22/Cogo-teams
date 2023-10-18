@@ -6,7 +6,7 @@ import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
-const useGetOutstandingCard = ({ organizationId, entityCode, limit = 10 }) => {
+const useGetOutstandingCard = ({ organizationId, entityCode_in_use:entityCode, limit = 10 }) => {
 	const { userData } = useSelector(({ profile }) => ({
 		userData: profile?.user || {},
 	}));
