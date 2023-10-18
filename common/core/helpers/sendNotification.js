@@ -67,7 +67,6 @@ const sendNotification = async ({ resultList = {}, firestore = {} }) => {
 				});
 
 				audio.play();
-				console.log('audio', audio, notification);
 
 				notification.onclick = async () => {
 					const messageDoc = createMessageDoc();
