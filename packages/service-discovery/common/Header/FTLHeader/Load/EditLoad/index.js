@@ -135,9 +135,10 @@ function EditLoad({
 				...requiredParams,
 				formValues   : {
 					...finalValues,
-					load_selection_type: loadType,
+					load_selection_type : loadType,
 					trip_type,
 					touch_points,
+					source              : 'edit',
 				},
 			},
 		});

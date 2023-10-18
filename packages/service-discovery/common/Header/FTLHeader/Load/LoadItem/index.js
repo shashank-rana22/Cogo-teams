@@ -1,4 +1,4 @@
-import { Popover, cl } from '@cogoport/components';
+import { Popover, Tooltip, cl } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -22,13 +22,25 @@ function LoadItem({
 
 	return (
 		<div className={styles.container} style={{ margin }}>
-			<div className={cl`${styles.load_item} ${toShowTruckDetails && styles.horizontal_margin}`}>
+			<div className={styles.load_item}>
 				{(toShowTruckDetails) ? (
-					<span className={styles.text}>
-						{trucks_count}
-						{' X '}
-						{startCase(truck_type)}
-					</span>
+
+					<Tooltip
+						placement="bottom"
+						content={(
+							<div className={styles.text}>
+								{trucks_count}
+								{' X '}
+								{startCase(truck_type)}
+							</div>
+						)}
+					>
+						<div className={cl`${styles.text} ${styles.overflow}`}>
+							{trucks_count}
+							{' X '}
+							{startCase(truck_type)}
+						</div>
+					</Tooltip>
 				) : (
 					<span className={styles.text}>
 						{volume}
@@ -37,7 +49,7 @@ function LoadItem({
 						{', '}
 						{weight}
 						{' '}
-						KG
+						Tons
 					</span>
 				)}
 
@@ -64,11 +76,20 @@ function LoadItem({
 				) : null}
 			</div>
 
-			{commodity && !truck_type ? (
-				<div className={cl`${styles.load_item} ${styles.horizontal_margin}`}>
-					<span className={styles.text}>
-						{startCase(commodity)}
-					</span>
+			{commodity ? (
+				<div className={styles.load_item}>
+					<Tooltip
+						placement="bottom"
+						content={(
+							<div className={styles.text}>
+								{startCase(commodity)}
+							</div>
+						)}
+					>
+						<div className={cl`${styles.text} ${styles.overflow}`}>
+							{startCase(commodity)}
+						</div>
+					</Tooltip>
 				</div>
 			) : null}
 		</div>
