@@ -4,6 +4,7 @@ import { startCase, format } from '@cogoport/utils';
 
 import Footer from './Footer';
 import PriorityNumber from './PriorityNumber';
+import SoOneUpdatedRates from './SoOneUpdatedRates';
 import styles from './styles.module.css';
 
 function Card({
@@ -171,6 +172,13 @@ function Card({
 							) : null
 						}
 					</div>
+					{
+						data?.rowData?.so1_updated_rates ? (
+							<div>
+								<SoOneUpdatedRates data={data} singleServiceData={singleServiceData} />
+							</div>
+						) : null
+					}
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						{rate_key
 							? (
