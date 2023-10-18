@@ -12,7 +12,7 @@ const SEMIBOLD_FONT_WEIGHT = 600;
 
 function ModeItem({
 	data = {},
-	selectedMode = {},
+	selectedMode = '',
 	setSelectedMode = () => {},
 	setSelectedService = () => {},
 	setLocation = () => {},
@@ -33,24 +33,26 @@ function ModeItem({
 			}, SET_TIMEOUT_DURATION);
 			return;
 		}
-		if (selectedMode.mode_value === value) setSelectedMode({});
-		else setSelectedMode({ mode_label: label, mode_value: value });
+		if (selectedMode === value) setSelectedMode('');
+		else setSelectedMode(value);
 		setSelectedService(null);
 		setLocation(null);
 	};
+
+	const isSelected = selectedMode === value;
 
 	return (
 		<div
 			className={styles.mode_item}
 			style={{
-				background: selectedMode.mode_value === value ? '#FCDC00' : '#FFFFFF',
+				background: isSelected ? '#FCDC00' : '#FFFFFF',
 			}}
 			key={value}
 			onClick={handleClick}
 			role="presentation"
 		>
 			<div className={styles.img_container}>
-				{selectedMode.mode_value === value ? null : (
+				{isSelected ? null : (
 					<div className={styles.yellow_circle} />
 				)}
 
@@ -59,13 +61,13 @@ function ModeItem({
 					width={34}
 					height={34}
 					alt="mode-icon"
-					className={cl`${styles.icon} ${selectedMode.mode_value !== value && styles.icon_hover}`}
+					className={cl`${styles.icon} ${!isSelected && styles.icon_hover}`}
 				/>
 			</div>
 
 			<div
 				className={styles.label}
-				style={{ fontWeight: selectedMode.mode_value === value ? SEMIBOLD_FONT_WEIGHT : MEDIUM_FONT_WEIGHT }}
+				style={{ fontWeight: isSelected ? SEMIBOLD_FONT_WEIGHT : MEDIUM_FONT_WEIGHT }}
 			>
 				{label}
 			</div>

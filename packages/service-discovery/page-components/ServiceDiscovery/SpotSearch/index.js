@@ -27,10 +27,7 @@ function SpotSearch() {
 		return {};
 	});
 
-	const [selectedMode, setSelectedMode] = useState({
-		mode_label : 'FCL',
-		mode_value : 'fcl_freight',
-	});
+	const [selectedMode, setSelectedMode] = useState('fcl_freight');
 	const [selectedService, setSelectedService] = useState({});
 	const [location, setLocation] = useState({});
 	const [errors, setErrors] = useState({});
@@ -94,7 +91,7 @@ function SpotSearch() {
 
 						<SalesDashboard
 							importer_exporter_id={organization?.organization_id}
-							service_type={selectedMode?.mode_value}
+							service_type={selectedMode}
 							origin_location_id={location?.origin?.id}
 							destination_location_id={location?.destination?.id}
 							setLocation={setLocation}

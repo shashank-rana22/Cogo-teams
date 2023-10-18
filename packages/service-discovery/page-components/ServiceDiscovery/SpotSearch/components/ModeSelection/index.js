@@ -6,7 +6,7 @@ import ModeItem from './ModeItem';
 import styles from './styles.module.css';
 
 function ModeSelection({
-	selectedMode = {},
+	selectedMode = '',
 	setSelectedMode = () => {},
 	setSelectedService = () => {},
 	setLocation = () => {},

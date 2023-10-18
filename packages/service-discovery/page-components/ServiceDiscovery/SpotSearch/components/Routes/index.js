@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import RouteForm from '../../../../../common/RouteForm';
+import MODES from '../../configurations/modes.json';
 
 import styles from './styles.module.css';
 
@@ -25,7 +26,7 @@ const isFormValid = (values, setErrors) => {
 };
 
 function Routes({
-	mode = {},
+	mode = '',
 	formValues = {},
 	setFormValues = () => {},
 	organization = {},
@@ -46,8 +47,6 @@ function Routes({
 		haltTime: {},
 	});
 
-	const service_type = mode.mode_value;
-
 	const onClickSearch = async () => {
 		const valuesToBeChecked = {
 			...organization,
@@ -67,7 +66,7 @@ function Routes({
 		const spot_search_id = await createSearch({
 			action : 'default',
 			values : {
-				service_type,
+				service_type: mode,
 				...organization,
 				...formValues,
 				setButtonDisabled,
@@ -98,13 +97,15 @@ function Routes({
 		setButtonDisabled(!canContinue);
 	}, [formValues]);
 
+	const label = MODES.find(({ value }) => value === mode)?.label;
+
 	return (
 		<div className={styles.container}>
-			<div className={cl`${styles.route_form} ${styles[service_type]}`}>
-				<div className={styles.heading}>{`Enter ${mode?.mode_label} Details`}</div>
+			<div className={cl`${styles.route_form} ${styles[mode]}`}>
+				<div className={styles.heading}>{`Enter ${label} Details`}</div>
 
 				<RouteForm
-					mode={mode.mode_value}
+					mode={mode}
 					formValues={formValues}
 					setFormValues={setFormValues}
 					organization={organization}

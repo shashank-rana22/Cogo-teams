@@ -35,7 +35,7 @@ function ServiceItem({
 		}
 		if (selectedService?.mode_value === value) setSelectedService(null);
 		else setSelectedService({ mode_label: startCase(value), mode_value: value });
-		setSelectedMode({});
+		setSelectedMode('');
 	};
 
 	return (

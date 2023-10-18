@@ -26,6 +26,7 @@ function OrganisationForm({
 	organization = {},
 	setOrganization = () => {},
 	errors = {},
+	defaultValues = {},
 	...rest
 }) {
 	const { query = {} } = useRouter();
@@ -104,12 +105,15 @@ function OrganisationForm({
 
 	useEffect(() => {
 		if (!user_id) {
+			const userIdValue = defaultValues?.user_id && defaultValues?.user_id === organization?.user_id
+				? defaultValues?.user_id : userOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value;
+
 			setOrganization((prev) => ({
 				...prev,
-				user_id: userOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
+				user_id: userIdValue,
 			}));
 		}
-	}, [setOrganization, userOptions, user_id]);
+	}, [defaultValues?.user_id, organization?.user_id, setOrganization, userOptions, user_id]);
 
 	return (
 		<div className={styles.container} style={rest.style}>
@@ -124,7 +128,7 @@ function OrganisationForm({
 					name="organization_id"
 					placeholder="Select Organisation"
 					asyncKey="organizations"
-					initialCall={rest.action !== 'edit' && !organization?.organization_id}
+					initialCall={!organization?.organization_id}
 					isClearable
 					params={ORG_PARAMS}
 					value={organization?.organization_id}

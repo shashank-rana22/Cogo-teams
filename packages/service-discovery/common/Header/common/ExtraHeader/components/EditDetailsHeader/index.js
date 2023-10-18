@@ -111,7 +111,11 @@ function EditDetailsHeader({
 					<OrganisationForm
 						organization={organization}
 						setOrganization={setOrganization}
-						action="edit"
+						defaultValues={{
+							organization_id        : importer_exporter_id,
+							organization_branch_id : importer_exporter_branch_id,
+							user_id,
+						}}
 					/>
 				</div>
 
