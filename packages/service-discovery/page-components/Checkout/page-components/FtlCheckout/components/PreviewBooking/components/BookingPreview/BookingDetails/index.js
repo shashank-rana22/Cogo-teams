@@ -8,6 +8,7 @@ import LocationDetails from '../../../../../../../../../common/LocationDetails';
 import PromocodesModal from '../../../../../../../commons/Promocodes/components/PromocodesModal';
 import { CheckoutContext } from '../../../../../../../context';
 
+import ServiceDetails from './ServiceDetails';
 import styles from './styles.module.css';
 import useHandleBookingDetails from './useHandleBookingDetails';
 
@@ -44,6 +45,8 @@ function BookingDetails({
 	return (
 		<div className={styles.container}>
 			<div className={styles.main_content}>
+				<ServiceDetails />
+
 				<LocationDetails data={mainServiceObject} />
 
 				<ContainerDetails

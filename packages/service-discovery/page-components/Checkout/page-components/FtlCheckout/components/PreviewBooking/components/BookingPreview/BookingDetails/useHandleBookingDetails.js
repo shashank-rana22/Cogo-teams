@@ -58,13 +58,11 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 
 	const { createSearch, loading } = useCreateSearch();
 
-	const { destination_port = {}, origin_port = {} } = primaryService;
+	const { destination_location = {}, origin_location = {} } = primaryService;
 
 	const mainServiceObject = Object.values(services).find(
 		(item) => item.service_type === primary_service,
 	);
-
-	const { shipping_line = {} } = mainServiceObject || {};
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
 
@@ -111,8 +109,8 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 			organization_id        : importer_exporter_id,
 			service_type           : primary_service,
 			user_id                : user.id,
-			origin                 : origin_port,
-			destination            : destination_port,
+			origin                 : origin_location,
+			destination            : destination_location,
 			formValues,
 		};
 
@@ -178,7 +176,6 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 	};
 
 	return {
-		shipping_line,
 		BUTTON_MAPPING,
 		primary_service,
 		mainServiceObject,

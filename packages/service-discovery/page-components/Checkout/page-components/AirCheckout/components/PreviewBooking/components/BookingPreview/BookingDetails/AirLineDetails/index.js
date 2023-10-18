@@ -1,3 +1,5 @@
+import { IcCAir } from '@cogoport/icons-react';
+
 import styles from './styles.module.css';
 
 function AirLineDetails({ airline = {} }) {
@@ -13,7 +15,12 @@ function AirLineDetails({ airline = {} }) {
 					width={30}
 					style={{ objectFit: 'cover' }}
 				/>
-			) : null}
+			) : (
+				<IcCAir
+					height={30}
+					width={30}
+				/>
+			)}
 
 			<div className={styles.name}>{short_name}</div>
 		</div>
