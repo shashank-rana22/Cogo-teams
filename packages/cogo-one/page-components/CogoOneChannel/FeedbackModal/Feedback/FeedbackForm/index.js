@@ -42,11 +42,17 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 	const defaultControls = useRaiseTicketcontrols({ setAdditionalInfo, watchCategory, setDefaultTypeId });
 
 	const additionalControls = (additionalInfo || []).map((item) => ({
-		label          : item,
+		label: (
+			<div>
+				{item}
+				<span style={{ color: '#ee3425', marginLeft: '2px' }}>*</span>
+			</div>
+		),
 		name           : item,
 		controllerType : 'text',
 		placeholder    : `${t('myTickets:add')} ${item?.toLowerCase()}`,
 		showOptional   : false,
+		rules          : { required: true },
 	}));
 
 	const fileUploader = defaultControls.pop();
