@@ -44,17 +44,33 @@ function useQuotation({ pocDetails = {} }) {
 		}
 	};
 
+	const submitHandler = (values) => {
+		const { phoneNo } = values || {};
+
+		if (!phoneNo?.country_code) {
+			Toast.error(t('cargoInsurance:draft_err_mobile'));
+			return;
+		}
+		sendQuotation(values);
+	};
+
 	useEffect(() => {
 		if (!isEmpty(pocDetails)) {
-			setValue('firstName', pocDetails?.insuredFirstName);
-			setValue('lastName', pocDetails?.insuredLastName);
-			setValue('email', pocDetails?.email);
-			setValue('phoneNo', { country_code: pocDetails?.phoneCode, number:	pocDetails?.phoneNo });
+			const prefilValueHash = {
+				firstName : pocDetails?.insuredFirstName,
+				lastName  : pocDetails?.insuredLastName,
+				email     : pocDetails?.email,
+				phoneNo   : { country_code: pocDetails?.phoneCode, number:	pocDetails?.phoneNo },
+			};
+
+			Object.entries(prefilValueHash).forEach(([controlKey, value]) => {
+				setValue(controlKey, value);
+			});
 		}
 	}, [pocDetails, setValue]);
 
 	return {
-		loading, sendQuotation, data, formhook,
+		loading, data, formhook, submitHandler,
 	};
 }
 

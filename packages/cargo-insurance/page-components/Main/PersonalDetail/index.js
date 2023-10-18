@@ -15,7 +15,7 @@ function PersonalDetail(props, ref) {
 
 	const personalDetailControls = getPersonalDetailControls({ t });
 
-	const { loading, sendQuotation, formhook } = useQuotation({ pocDetails });
+	const { loading, submitHandler, formhook } = useQuotation({ pocDetails });
 
 	const { handleSubmit } = formhook;
 
@@ -43,7 +43,7 @@ function PersonalDetail(props, ref) {
 					<Button
 						themeType="accent"
 						loading={loading}
-						onClick={handleSubmit(sendQuotation)}
+						onClick={handleSubmit(submitHandler)}
 					>
 						{t('cargoInsurance:send_quote')}
 					</Button>
