@@ -8524,6 +8524,12 @@ const partner = {
 			feature     : 'Expenses',
 		},
 		{
+			api         : 'get_vendor_trade_parties_data',
+			access_type : 'private',
+			module      : 'Vendors',
+			feature     : 'Vendors',
+		},
+		{
 			api         : 'get_purchase_expense_list_expense_configurations',
 			access_type : 'private',
 			module      : 'Expenses',
