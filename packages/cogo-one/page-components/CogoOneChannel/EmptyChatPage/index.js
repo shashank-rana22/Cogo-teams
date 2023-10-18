@@ -1,13 +1,20 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
+import { Image, dynamic } from '@cogoport/next';
 import React from 'react';
 
+import CommonLoader from '../../../common/CommonLoader';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 
-import LeadVoiceCalls from './LeadVoiceCalls';
 import PlatformAdoption from './PlatformAdoption';
-import ShipmentsHomePage from './ShipmentsHomePage';
 import styles from './styles.module.css';
+
+const LeadVoiceCalls = dynamic(() => import('./LeadVoiceCalls'), {
+	loading: () => <div className={styles.container}><CommonLoader /></div>,
+});
+
+const ShipmentsHomePage = dynamic(() => import('./ShipmentsHomePage'), {
+	loading: () => <div className={styles.container}><CommonLoader /></div>,
+});
 
 const MESSAGE_MAPPING = {
 	message         : 'chat',
