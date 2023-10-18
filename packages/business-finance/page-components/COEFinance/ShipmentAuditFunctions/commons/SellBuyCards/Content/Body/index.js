@@ -28,25 +28,60 @@ function Body({
 					<div className={styles.accord_body}>
 						<div className={styles.accord_row_content}>
 							<div className={styles.regular}>{document_number}</div>
+							<div className={styles.trade_party_container}>
+								{trade_party ? (
+									<Tooltip
+										content={(
+											<div>{trade_party}</div>
+										)}
+										placement="top"
+									>
+										<div className={styles.trade_party_overflowing}>
+											{trade_party}
+										</div>
+									</Tooltip>
+								) : '-'}
+							</div>
+							<div className={styles.date_container}>
+								{document_date ? (
+									<Tooltip
+										content={(
+											<div>{document_date}</div>
+										)}
+										placement="top"
+									>
+										<div className={styles.date_content}>{document_date}</div>
+									</Tooltip>
+								) : '-'}
+							</div>
+							<div className={styles.date_container}>
+								{grand_total ? (
+									<Tooltip
+										content={(
+											<div>{grand_total}</div>
+										)}
+										placement="top"
+									>
+										<div className={styles.date_content}>{grand_total}</div>
+									</Tooltip>
+								) : '-'}
+							</div>
 							<div className={styles.tooltip_container}>
 								<Tooltip
 									content={(
-										<div className={styles.regular}>{trade_party}</div>
+										<div>{document_status}</div>
 									)}
 									placement="top"
 								>
-									<div className={styles.overflowing}>{trade_party}</div>
+									<div>
+										<Pill
+											size="sm"
+											className={cl`${quotation_state === 'INIT' ? styles.red : styles.green}`}
+										>
+											{document_status}
+										</Pill>
+									</div>
 								</Tooltip>
-							</div>
-							<div className={styles.regular} style={{ width: '17.5%' }}>{document_date}</div>
-							<div className={styles.regular} style={{ width: '17.5%' }}>{grand_total}</div>
-							<div>
-								<Pill
-									size="md"
-									className={cl`${quotation_state === 'INIT' ? styles.red : styles.green}`}
-								>
-									{document_status}
-								</Pill>
 							</div>
 						</div>
 						{isOpen ? (

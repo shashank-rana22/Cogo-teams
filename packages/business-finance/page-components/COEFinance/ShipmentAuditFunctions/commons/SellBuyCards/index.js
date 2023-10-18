@@ -1,7 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateUp, IcMArrowRotateDown, IcCFtick } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import Content from './Content';
@@ -45,7 +45,7 @@ function SellBuyCards({
 								{`${TITLE_MAPPING[source]} ${startCase(type)}`}
 							</div>
 
-							{checkIsApproved(data) ? <IcCFtick /> : null}
+							{!isEmpty(data) && checkIsApproved(data) ? <IcCFtick /> : null}
 						</div>
 
 						<div className={`${open ? styles.nothing : styles.other_title}`}>

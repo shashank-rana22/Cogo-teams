@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useApproveQuotation from '../../../../hook/useApproveQuotation';
@@ -64,59 +65,63 @@ function Content({
 					</div>
 				</div>
 			</div>
-			<Header />
-			{data?.map((item) => (
-				<Body
-					key={item?.id}
-					lineItemSectionOpen={lineItemSectionOpen}
-					setLineItemSectionOpen={setLineItemSectionOpen}
-					data={item}
-					loading={loading}
-					source={source}
-					type={type}
-				/>
-			))}
-			{currentStatus && auditStatus !== 'audited' ? (
-				<div className={styles.buttons_container}>
-					<Button
-						size="md"
-						themeType="secondary"
-						style={{ marginRight: '10px' }}
-						onClick={setShowTicketModal}
-					>
-						Raise Ticket
-					</Button>
-
-					{ showTicketModal ? (
-						<RaiseTicketModal
-							setShowTicketModal={setShowTicketModal}
-							shipment_id={shipment_id}
-							showTicketModal={showTicketModal}
-							itemData={data}
-							id={job_number}
-							refetch={getClosedTasks}
+			{!isEmpty(data) ? (
+				<div>
+					<Header />
+					{data?.map((item) => (
+						<Body
+							key={item?.id}
+							lineItemSectionOpen={lineItemSectionOpen}
+							setLineItemSectionOpen={setLineItemSectionOpen}
+							data={item}
+							loading={loading}
+							source={source}
+							type={type}
 						/>
+					))}
+					{currentStatus && auditStatus !== 'audited' ? (
+						<div className={styles.buttons_container}>
+							<Button
+								size="md"
+								themeType="secondary"
+								style={{ marginRight: '10px' }}
+								onClick={setShowTicketModal}
+							>
+								Raise Ticket
+							</Button>
+
+							{ showTicketModal ? (
+								<RaiseTicketModal
+									setShowTicketModal={setShowTicketModal}
+									shipment_id={shipment_id}
+									showTicketModal={showTicketModal}
+									itemData={data}
+									id={job_number}
+									refetch={getClosedTasks}
+								/>
+							) : null}
+
+							<Button
+								size="md"
+								themeType="primary"
+								onClick={() => approveQuotation(getClosedTasks)}
+							>
+								Accept
+							</Button>
+						</div>
 					) : null}
 
-					<Button
-						size="md"
-						themeType="primary"
-						onClick={() => approveQuotation(getClosedTasks)}
-					>
-						Accept
-					</Button>
-				</div>
-			) : null}
-
-			{!currentStatus && auditStatus !== 'audited' ? (
-				<div className={styles.buttons_container}>
-					<Button
-						size="md"
-						themeType="primary"
-						onClick={() => approveQuotation(getClosedTasks)}
-					>
-						Undo
-					</Button>
+					{!currentStatus && auditStatus !== 'audited' ? (
+						<div className={styles.buttons_container}>
+							<Button
+								size="md"
+								themeType="primary"
+								onClick={() => approveQuotation(getClosedTasks)}
+							>
+								Undo
+							</Button>
+						</div>
+					) : null}
 				</div>
 			) : null}
 		</div>
