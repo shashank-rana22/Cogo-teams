@@ -8,6 +8,8 @@ import UserCard from '../UserCard';
 
 import styles from './styles.module.css';
 
+const ADMIN_VIEW = ['admin', 'cogoone_admin'];
+
 function outerClick({ event, ref, setTriggerCreation }) {
 	if (ref.current && !ref.current.contains(event.target)) {
 		setTimeout(() => {
@@ -34,7 +36,7 @@ function ToUser({
 
 	const isEmptyList = isEmpty(users?.userIds);
 
-	const teamsAdminFilter = viewType === 'cogoone_admin' ? undefined : getCommonAgentType({ viewType });
+	const teamsAdminFilter = ADMIN_VIEW.includes(viewType) ? undefined : getCommonAgentType({ viewType });
 
 	useEffect(() => {
 		function wrapper(event) {
