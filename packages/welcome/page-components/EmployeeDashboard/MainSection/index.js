@@ -1,6 +1,7 @@
 import React from 'react';
 
 // import CompanyPerformance from './CompanyPerformance';
+import PhoenixPerformance from './PhoenixPerformance';
 import styles from './styles.module.css';
 import YourBoard from './YourBoard';
 import YourPerformance from './YourPerformance';
@@ -11,6 +12,7 @@ function MainSection() {
 			<div className={styles.left_section}>
 				{/* <CompanyPerformance /> */}
 				<YourPerformance />
+				<PhoenixPerformance />
 			</div>
 			<div className={styles.right_section}>
 				<YourBoard />
