@@ -5,7 +5,6 @@ import { useContext } from 'react';
 
 import { CheckoutContext } from '../../context';
 import { displayTotal, convertCurrencyValue } from '../../helpers/dynamic-values';
-import ServiceIcons from '../../page-components/FclCheckout/commons/ServiceIcons';
 
 import AddLineItemModal from './components/AddLineItemModal';
 import BreakdownDetailsHeader from './components/BreakdownDetailsHeader';
@@ -15,6 +14,7 @@ import EditLineItemModal from './components/EditLineItemModal';
 import Header from './components/Header';
 import LandingCost from './components/LandingCost';
 import ServiceBreakup from './components/ServiceBreakup';
+import ServiceIcons from './components/ServiceIcons';
 import renderServiceType from './renderServiceType';
 import styles from './styles.module.css';
 import useHandleBreakdownDetails from './useHandleBreakdownDetails';

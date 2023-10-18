@@ -5,7 +5,6 @@ import { useState, useMemo, useEffect } from 'react';
 
 import getPrefillForm from '../../../../../page-components/SearchResults/utils/getPrefillForm';
 import getLocationInfo from '../../../../../page-components/SearchResults/utils/locations-search';
-import useCreateSearch from '../../../../../page-components/ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 
 import FormModal from './FormModal';
 import styles from './styles.module.css';
@@ -86,10 +85,10 @@ function EditLoad({
 	setRouterLoading = () => {},
 	data = {},
 	touch_points = {},
+	createLoading = false,
+	createSearch = () => {},
 }) {
 	const router = useRouter();
-
-	const { createSearch, loading } = useCreateSearch();
 
 	const defaultValues = useMemo(() => getPrefillForm(data, SERVICE_KEY), [data]);
 
@@ -200,8 +199,8 @@ function EditLoad({
 					size="xl"
 					themeType="accent"
 					className={styles.button}
-					loading={loading}
-					disabled={loading}
+					loading={createLoading}
+					disabled={createLoading}
 					onClick={handleSubmit(handleApply)}
 				>
 					Apply Changes

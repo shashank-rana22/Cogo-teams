@@ -18,6 +18,8 @@ function FTLHeader({
 	setRouterLoading = () => {},
 	isGuideViewed = false,
 	touch_points = {},
+	createLoading = false,
+	createSearch = () => {},
 }) {
 	const isAllowedToEdit = activePage === 'search_results';
 
@@ -52,6 +54,8 @@ function FTLHeader({
 					isGuideViewed={isGuideViewed}
 					setRouterLoading={setRouterLoading}
 					touch_points={touch_points}
+					createLoading={createLoading}
+					createSearch={createSearch}
 				/>
 
 				<Wallet

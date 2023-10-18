@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 import getDefaultPayload from '../utils/getDefaultPayload';
 import getEditPayload from '../utils/getEditPayload';
 
-const useCreateSearch = () => {
+const useCreateSearch = ({ setRouterLoading = () => {}, setHeaderProps = () => {} } = {}) => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'post',
 		url    : '/create_spot_search',
@@ -13,6 +13,10 @@ const useCreateSearch = () => {
 
 	const createSearch = async ({ action, values }) => {
 		try {
+			if (setRouterLoading) {
+				setRouterLoading(true);
+			}
+
 			let payload = {};
 
 			const {
@@ -55,6 +59,10 @@ const useCreateSearch = () => {
 				tags                        : ['version2'],
 			};
 
+			if (setHeaderProps) {
+				setHeaderProps({});
+			}
+
 			const res = await trigger({ data: payload });
 
 			return res?.data?.id;
@@ -62,6 +70,8 @@ const useCreateSearch = () => {
 			if (err?.response?.data) {
 				Toast.error(getApiErrorString(err?.response?.data));
 			}
+
+			setRouterLoading(false);
 
 			return err;
 		}

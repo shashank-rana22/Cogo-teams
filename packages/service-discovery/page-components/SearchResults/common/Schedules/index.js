@@ -18,6 +18,7 @@ function Schedules({
 	setFilters = () => {},
 	setComparisonRates = () => {},
 	loading = false,
+	setScheduleLoading = () => {},
 }) {
 	const { schedules = [], loading: weeklySchedulesLoading } = useGetWeeklySchedules({
 		filters,
@@ -55,6 +56,7 @@ function Schedules({
 								setSelectedWeek={setSelectedWeek}
 								setFilters={setFilters}
 								setComparisonRates={setComparisonRates}
+								setScheduleLoading={setScheduleLoading}
 							/>
 						))}
 					</div>

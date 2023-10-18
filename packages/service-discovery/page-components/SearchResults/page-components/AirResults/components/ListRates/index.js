@@ -1,8 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import { Router } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 
 import DotLoader from '../../../../../../common/LoadingState/DotLoader';
 import AppliedFilters from '../../../../common/AppliedFilters';
@@ -34,8 +33,9 @@ function ListRates({
 	infoBanner = {},
 	setInfoBanner = () => {},
 	isGuideViewed = false,
-	routerLoading = false,
 	setRouterLoading = () => {},
+	setScheduleLoading = () => {},
+	scheduleLoading = false,
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
@@ -48,12 +48,6 @@ function ListRates({
 		const uniqueAirlineIds = new Set((rates || []).map(({ airline_id = '' } = {}) => airline_id));
 		return Array.from(uniqueAirlineIds);
 	}, [rates]);
-
-	useEffect(() => {
-		Router.events.on('routeChangeComplete', () => {
-			setRouterLoading(false);
-		});
-	}, [setRouterLoading]);
 
 	if (!loading && isEmpty(rates)) {
 		return (
@@ -68,14 +62,6 @@ function ListRates({
 				openAccordian={openAccordian}
 				airlines={airlines}
 			/>
-		);
-	}
-	if (routerLoading) {
-		return (
-			<div className={styles.loading}>
-				<span className={styles.loading_text}>Loading Rates</span>
-				<DotLoader />
-			</div>
 		);
 	}
 
@@ -96,6 +82,7 @@ function ListRates({
 						setOpenAccordian={setOpenAccordian}
 						setRouterLoading={setRouterLoading}
 						airlines={airlines}
+						setScheduleLoading={setScheduleLoading}
 					/>
 
 					{showComparison ? (
@@ -117,6 +104,7 @@ function ListRates({
 				setSelectedWeek={setSelectedWeek}
 				selectedWeek={selectedWeek}
 				loading={loading}
+				setScheduleLoading={setScheduleLoading}
 			/>
 
 			<AppliedFilters
@@ -137,10 +125,10 @@ function ListRates({
 						index={index}
 						setComparisonRates={setComparisonRates}
 						comparisonRates={comparisonRates}
-						routerLoading={routerLoading}
 						showGuide={!index && !isGuideViewed}
 						infoBanner={infoBanner}
 						setInfoBanner={setInfoBanner}
+						setRouterLoading={setRouterLoading}
 					/>
 
 					{index === GLOBAL_CONSTANTS.zeroth_index ? (
@@ -168,7 +156,7 @@ function ListRates({
 				</div>
 			) : null}
 
-			{loading && (
+			{loading && !scheduleLoading && (
 				<div className={styles.spinner_container}>
 					<DotLoader size="lg" />
 					<div className={styles.text}>Fetching rates, please wait</div>

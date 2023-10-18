@@ -7,7 +7,6 @@ import { useState, useEffect, useMemo } from 'react';
 import CLASS_MAPPING from '../../../../../page-components/SearchResults/configurations/air/classMapping';
 import getPrefillForm from '../../../../../page-components/SearchResults/utils/getPrefillForm';
 import getLocationInfo from '../../../../../page-components/SearchResults/utils/locations-search';
-import useCreateSearch from '../../../../../page-components/ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 
 import FormModal from './FormModal';
 import styles from './styles.module.css';
@@ -67,12 +66,12 @@ function EditPackages({
 	setShow = () => {},
 	setRouterLoading = () => {},
 	data = {},
+	createLoading = false,
+	createSearch = () => {},
 }) {
 	const router = useRouter();
 
 	const [showModal, setShowModal] = useState(''); // suggestion,warning
-
-	const { createSearch, loading } = useCreateSearch();
 
 	const defaultValues = useMemo(() => getPrefillForm(data, SERVICE_KEY), [data]);
 
@@ -221,8 +220,8 @@ function EditPackages({
 					size="xl"
 					themeType="accent"
 					className={styles.button}
-					loading={loading}
-					disabled={loading}
+					loading={createLoading}
+					disabled={createLoading}
 					onClick={handleSubmit(handleApply)}
 				>
 					Apply Changes

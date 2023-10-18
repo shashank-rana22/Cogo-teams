@@ -1,11 +1,10 @@
 import { cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter, Router } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import DotLoader from '../../../common/LoadingState/DotLoader';
+import CustomLoadingState from '../../../common/LoadingState/CustomLoadingState';
 
 import Header from './components/Header';
 import ModeSelection from './components/ModeSelection';
@@ -51,22 +50,7 @@ function SpotSearch() {
 	return (
 		<div className={styles.container}>
 			{loading || routerLoading ? (
-				<div className={styles.loader}>
-					<div className={styles.loading_text_container}>
-						<img
-							src={GLOBAL_CONSTANTS.image_url.cogo_logo_without_bg}
-							alt="cogoport-logo"
-							width={66}
-							style={{ objectFit: 'cover' }}
-						/>
-
-						<span className={styles.loading_text}>Please Wait!</span>
-					</div>
-
-					<div className={styles.dot_loader}>
-						<DotLoader dotsLegth={4} />
-					</div>
-				</div>
+				<CustomLoadingState />
 			) : null}
 
 			<div className={cl`${styles.wrapper} ${(loading || routerLoading) && styles.disabled}`}>

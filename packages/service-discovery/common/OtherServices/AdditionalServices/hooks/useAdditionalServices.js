@@ -156,7 +156,9 @@ const useAdditionalServices = ({ rateCardData = {}, detail = {}, source = '' }) 
 	// 	rateCardData,
 	// });
 
-	const filteredAllServices = ALL_SERVICES.filter((service_item) => service_item?.inco_terms?.includes(inco_term));
+	const filteredAllServices = ALL_SERVICES.filter(
+		(service_item) => service_item?.inco_terms?.includes(inco_term) || service_item.isSelected,
+	);
 
 	const SHIPPER_SIDE_SERVICES = [];
 	const CONSIGNEE_SIDE_SERVICES = [];

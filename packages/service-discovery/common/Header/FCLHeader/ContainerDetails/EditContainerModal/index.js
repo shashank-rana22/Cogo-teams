@@ -5,7 +5,6 @@ import { useRouter } from '@cogoport/next';
 import fclControls from '../../../../../page-components/SearchResults/configurations/fcl/form-controls';
 import getPrefillForm from '../../../../../page-components/SearchResults/utils/getPrefillForm';
 import getLocationInfo from '../../../../../page-components/SearchResults/utils/locations-search';
-import useCreateSearch from '../../../../../page-components/ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 
 import Form from './Form';
 import styles from './styles.module.css';
@@ -18,9 +17,9 @@ function EditContainerModal({
 	setShow = () => {},
 	setRouterLoading = () => {},
 	data = {},
+	createLoading = false,
+	createSearch = () => {},
 }) {
-	const { createSearch, loading } = useCreateSearch();
-
 	const router = useRouter();
 
 	const controls = fclControls();
@@ -96,8 +95,8 @@ function EditContainerModal({
 					size="xl"
 					themeType="accent"
 					className={styles.button}
-					loading={loading}
-					disabled={loading}
+					loading={createLoading}
+					disabled={createLoading}
 					onClick={handleSubmit(handleApply)}
 				>
 					Apply Changes

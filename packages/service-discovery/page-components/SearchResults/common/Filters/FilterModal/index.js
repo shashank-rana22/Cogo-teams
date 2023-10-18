@@ -33,6 +33,7 @@ function FilterModal({
 	openAccordian = '',
 	defaultValues:controlsDefaultValues = {},
 	controls = [],
+	setScheduleLoading = () => {},
 }) {
 	const defaultValues = {
 		...controlsDefaultValues,
@@ -65,6 +66,7 @@ function FilterModal({
 		};
 
 		setFilters(removeDefaultValues(controlsDefaultValues, { ...filters, ...finalValues }) || {});
+		setScheduleLoading(true);
 		setShow(false);
 	};
 

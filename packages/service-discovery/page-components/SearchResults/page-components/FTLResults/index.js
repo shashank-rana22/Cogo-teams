@@ -16,7 +16,6 @@ function FTLResults({
 	paginationProps = {},
 	loading = false,
 	screen = 'listRateCard',
-	routerLoading = false,
 	setRouterLoading = () => {},
 }) {
 	const SCREENS_MAPPING = {
@@ -36,7 +35,6 @@ function FTLResults({
 				selectedWeek,
 				setSelectedWeek,
 				refetch,
-				routerLoading,
 				setRouterLoading,
 			},
 		},

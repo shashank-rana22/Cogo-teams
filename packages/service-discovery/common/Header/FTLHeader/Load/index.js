@@ -19,6 +19,8 @@ function Load({
 	setRouterLoading = () => {},
 	isGuideViewed = false,
 	touch_points = {},
+	createLoading = false,
+	createSearch = () => {},
 }) {
 	const [showModal, setShowModal] = useState(false);
 
@@ -96,6 +98,8 @@ function Load({
 					setShow={setShowModal}
 					setRouterLoading={setRouterLoading}
 					touch_points={touch_points}
+					createLoading={createLoading}
+					createSearch={createSearch}
 				/>
 			) : null}
 		</div>

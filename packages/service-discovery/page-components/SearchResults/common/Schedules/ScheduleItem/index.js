@@ -15,6 +15,7 @@ function ScheduleItem({
 	setSelectedWeek = () => {},
 	setFilters = () => {},
 	setComparisonRates = () => {},
+	setScheduleLoading = () => {},
 }) {
 	const {
 		end_date = '',
@@ -42,6 +43,8 @@ function ScheduleItem({
 			departure_before : !isExistingSchedule ? end_date : undefined,
 			departure_after  : !isExistingSchedule ? start_date : undefined,
 		}));
+
+		setScheduleLoading(true);
 	};
 
 	return (

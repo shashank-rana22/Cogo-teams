@@ -6,7 +6,7 @@ import Wallet from '../common/Wallet';
 // import Load from './Load';
 import styles from './styles.module.css';
 
-function FTLHeader({
+function LTLHeader({
 	data = {},
 	showAdditionalHeader = false,
 	setHeaderProps = () => {},
@@ -60,4 +60,4 @@ function FTLHeader({
 	);
 }
 
-export default FTLHeader;
+export default LTLHeader;

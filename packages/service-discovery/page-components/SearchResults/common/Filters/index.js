@@ -40,6 +40,7 @@ function Filters({
 	setShowFilterModal = () => {},
 	airlines = [],
 	transitTime = {},
+	setScheduleLoading = () => {},
 }) {
 	const [airlineParams, setAirlineParams] = useState({
 		filters: {
@@ -97,6 +98,7 @@ function Filters({
 					airlines={airlines}
 					defaultValues={defaultValues}
 					controls={controls}
+					setScheduleLoading={setScheduleLoading}
 				/>
 			) : null}
 		</div>

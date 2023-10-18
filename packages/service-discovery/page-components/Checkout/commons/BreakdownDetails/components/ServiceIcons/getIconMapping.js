@@ -1,10 +1,9 @@
-const getIconMapping = ({ primaryService = {}, detailedServices = {} }) => {
+const getIconMapping = ({ primaryService = {}, detailedServices = {}, primary_service = '' }) => {
 	const {
 		origin_main_port = {},
 		origin_port = {},
 		destination_main_port = {},
 		destination_port = {},
-		service_type: primary_service = '',
 		destination_airport = {},
 		origin_airport,
 	} = primaryService;

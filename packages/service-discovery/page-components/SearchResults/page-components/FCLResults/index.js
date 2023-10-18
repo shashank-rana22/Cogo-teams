@@ -31,8 +31,9 @@ function FCLResults({
 	infoBanner = {},
 	setInfoBanner = () => {},
 	isGuideViewed = false,
-	routerLoading = false,
 	setRouterLoading = () => {},
+	setScheduleLoading = () => {},
+	scheduleLoading = false,
 }) {
 	const { cogoAssuredRates, marketplaceRates } = rates.reduce((acc, rate) => {
 		if (rate.source === 'cogo_assured_rate') {
@@ -64,8 +65,9 @@ function FCLResults({
 			isGuideViewed,
 			cogoAssuredRates,
 			marketplaceRates,
-			routerLoading,
 			setRouterLoading,
+			setScheduleLoading,
+			scheduleLoading,
 		},
 		comparison: {
 			detail,

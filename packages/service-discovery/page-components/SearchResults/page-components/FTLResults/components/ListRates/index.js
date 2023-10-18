@@ -1,7 +1,6 @@
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import { Router } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import DotLoader from '../../../../../../common/LoadingState/DotLoader';
 import AppliedFilters from '../../../../common/AppliedFilters';
@@ -22,19 +21,12 @@ function ListRates({
 	loading = false,
 	paginationProps = {},
 	contract_detail = {},
-	routerLoading = false,
 	setRouterLoading = () => {},
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
 
 	const { total_count, page_limit, page } = paginationProps;
-
-	useEffect(() => {
-		Router.events.on('routeChangeComplete', () => {
-			setRouterLoading(false);
-		});
-	}, [setRouterLoading]);
 
 	if (!loading && isEmpty(rates)) {
 		return (
@@ -48,14 +40,6 @@ function ListRates({
 				setOpenAccordian={setOpenAccordian}
 				openAccordian={openAccordian}
 			/>
-		);
-	}
-	if (routerLoading) {
-		return (
-			<div className={styles.loading}>
-				<span className={styles.loading_text}>Loading Rates</span>
-				<DotLoader />
-			</div>
 		);
 	}
 
@@ -101,7 +85,7 @@ function ListRates({
 					rate={rateItem}
 					detail={detail}
 					index={index}
-					routerLoading={routerLoading}
+					setRouterLoading={setRouterLoading}
 				/>
 			))}
 

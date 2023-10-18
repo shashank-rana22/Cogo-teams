@@ -26,6 +26,8 @@ function Header(props = {}) {
 		headerProps = {},
 	} = props || {};
 
+	const { createLoading = false, createSearch = () => {} } = props;
+
 	const service_type = data[service_key] || '';
 
 	const ActiveHeader = HEADER_COMPONENT_MAPPING[service_type];
@@ -40,7 +42,7 @@ function Header(props = {}) {
 			<ActiveHeader {...props} />
 
 			{showAdditionalHeader ? (
-				<ExtraHeader headerProps={headerProps} />
+				<ExtraHeader headerProps={headerProps} createLoading={createLoading} createSearch={createSearch} />
 			) : null}
 		</div>
 	);

@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 import getPrefillForm from '../../../../../../page-components/SearchResults/utils/getPrefillForm';
 import getLocationInfo from '../../../../../../page-components/SearchResults/utils/locations-search';
-import useCreateSearch from '../../../../../../page-components/ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 import OrganisationForm from '../../../../../OrganisationForm';
 import RouteForm from '../../../../../RouteForm';
 import getFtlPrefillValues from '../../../../utils/getFtlPrefillValues';
@@ -22,13 +21,13 @@ function EditDetailsHeader({
 	setShow = () => {},
 	setRouterLoading = () => {},
 	touch_points = {},
+	createLoading = false,
+	createSearch = () => {},
 	...rest
 }) {
 	const router = useRouter();
 
 	const [ftlFormData, setFtlFormData] = useState(getFtlPrefillValues(data, touch_points));
-
-	const { createSearch, loading } = useCreateSearch();
 
 	const {
 		importer_exporter_id = '',
@@ -132,8 +131,8 @@ function EditDetailsHeader({
 			<Button
 				size="lg"
 				themeType="accent"
-				disabled={loading}
-				loading={loading}
+				disabled={createLoading}
+				loading={createLoading}
 				onClick={onClickApply}
 				className={styles.button}
 			>
