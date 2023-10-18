@@ -1,5 +1,4 @@
 import { Placeholder, Pill } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
 
 function GetPill({ loading = false, content = 0, color = '' }) {
 	if (loading) {
@@ -8,7 +7,7 @@ function GetPill({ loading = false, content = 0, color = '' }) {
 	if (content) {
 		return (
 			<Pill color={color}>
-				{typeof content !== 'string' ? startCase(content) : content}
+				{content}
 			</Pill>
 		);
 	}

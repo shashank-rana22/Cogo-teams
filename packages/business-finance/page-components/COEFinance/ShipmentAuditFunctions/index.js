@@ -72,11 +72,6 @@ function ShipmentAuditFunction({
 		window.sessionStorage.setItem('audit_status', subActiveTab);
 	};
 
-	const handleSubTabChange = (tab) => {
-		setSubActiveTab(tab.key);
-	};
-
-	const rest = { onClickOutside: () => setShow(false) };
 	const operationColumns = getJobColumns({ handleClick, tax });
 	const financeColumns = getFinancialCloseColumns({ handleClick, tax });
 
@@ -101,7 +96,7 @@ function ShipmentAuditFunction({
 							<div
 								key={tab.key}
 								onClick={() => {
-									handleSubTabChange(tab);
+									setSubActiveTab(tab.key);
 								}}
 								role="presentation"
 							>
@@ -135,6 +130,7 @@ function ShipmentAuditFunction({
 					<Popover
 						visible={show}
 						placement="bottom"
+						onClickOutside={() => setShow(false)}
 						render={(
 							<Content
 								filters={filters}
@@ -148,7 +144,6 @@ function ShipmentAuditFunction({
 							/>
 						)}
 						className={styles.pop_over_style}
-						{...rest}
 					>
 						<Button
 							themeType="primary"

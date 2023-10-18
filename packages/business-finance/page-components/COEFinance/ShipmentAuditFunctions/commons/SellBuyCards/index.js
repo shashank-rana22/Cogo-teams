@@ -25,6 +25,7 @@ function SellBuyCards({
 	getClosedTasks = () => {},
 }) {
 	const [open, setOpen] = useState(false);
+	const currency = window.sessionStorage.getItem('currency');
 
 	let profitabilityData = 0;
 	let grandTotal = 0;
@@ -53,9 +54,9 @@ function SellBuyCards({
 							</div>
 							<div>
 								{formatAmount({
-									amount   : grandTotal,
-									currency : 'INR',
-									options  : {
+									amount  : grandTotal,
+									currency,
+									options : {
 										currencyDisplay : 'code',
 										style           : 'currency',
 									},
