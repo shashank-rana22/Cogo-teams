@@ -109,12 +109,19 @@ const useInsurance = ({ activeTab, organization = {}, formValues = {}, setActive
 
 	useEffect(() => {
 		if (!isEmpty(formValues)) {
+			const prefilValueHash = {
+				origin_point      : formValues?.origin,
+				destination_point : formValues?.destination,
+				hsCode            : formValues?.hsCode,
+				currency          : formValues?.invoiceCurrency,
+				cargoValue        : formValues?.invoiceValue,
+			};
+
+			Object.entries(prefilValueHash).forEach(([controlKey, value]) => {
+				setValue(controlKey, value);
+			});
+
 			setActiveTab(formValues?.transitMode);
-			setValue('origin_point', formValues?.origin);
-			setValue('destination_point', formValues?.destination);
-			setValue('hsCode', formValues?.hsCode);
-			setValue('currency', formValues?.invoiceCurrency);
-			setValue('cargoValue', formValues?.invoiceValue);
 			formValueRef.current.origin_point = formValues?.metadata?.origin;
 			formValueRef.current.destination_point = formValues?.metadata?.destination;
 		}

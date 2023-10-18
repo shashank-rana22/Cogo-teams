@@ -16,16 +16,24 @@ const useCheckout = ({ draftData = {}, formHook, setBillingType }) => {
 				invoiceDetails = {},
 			} = draftData || {};
 
-			setValue('pan_number', billingDetails?.panNumber);
-			setValue('aadharNumber', billingDetails?.aadharNumber);
-			setValue('cargoDescription', cargoDetails?.cargoDescription);
-			setValue('packageDescription', cargoDetails?.packaging);
-			setValue('transitDate', cargoDetails?.transitDate ? new Date(cargoDetails.transitDate) : null);
-			setValue('coverageFrom', cargoDetails?.locationFrom);
-			setValue('coverageTo', cargoDetails?.locationTo);
-			setValue('invoiceNo', invoiceDetails?.invoiceNo);
-			setValue('invoiceDate', invoiceDetails?.invoiceDate ? new Date(invoiceDetails.invoiceDate) : null);
-			setValue('incoterm', cargoDetails?.incoterm);
+			const prefilValueHash = {
+				pan_number         : billingDetails?.panNumber,
+				aadharNumber       : billingDetails?.aadharNumber,
+				cargoDescription   : cargoDetails?.cargoDescription,
+				packageDescription : cargoDetails?.packaging,
+				transitDate        : cargoDetails?.transitDate ? new Date(cargoDetails.transitDate) : null,
+				coverageFrom       : cargoDetails?.locationFrom,
+				coverageTo         : cargoDetails?.locationTo,
+				invoiceNo          : invoiceDetails?.invoiceNo,
+				invoiceDate        : invoiceDetails?.invoiceDate ? new Date(invoiceDetails.invoiceDate) : null,
+				incoterm           : cargoDetails?.incoterm,
+
+			};
+
+			Object.entries(prefilValueHash).forEach(([controlKey, value]) => {
+				setValue(controlKey, value);
+			});
+
 			setBillingType(BILLING_TYPE_MAPPING[billingDetails?.billingType]);
 		}
 	}, [draftData, setBillingType, setValue]);

@@ -18,20 +18,20 @@ function FormItem({ controls, formhook }) {
 			const Element = getFieldController(type);
 			const isMobileNo = type === 'mobileSelect';
 
+			if (!showEle) return null;
+
 			return (
-				showEle ? (
-					<div key={name} className={cl`${styles.col} ${name} form_col`}>
-						{type !== 'checkbox' ? <p className={styles.label}>{label}</p> : null}
-						<Element
-							{...config}
-							control={control}
-							type="card"
-							mobileSelectRef={isMobileNo ? register(name, rules).ref : undefined}
-						/>
-						<p className={styles.error}>{errors?.[name]?.message || errors?.[name]?.type}</p>
-						{extraComp}
-					</div>
-				) : null
+				<div key={name} className={cl`${styles.col} ${name} form_col`}>
+					{type !== 'checkbox' ? <p className={styles.label}>{label}</p> : null}
+					<Element
+						{...config}
+						control={control}
+						type="card"
+						mobileSelectRef={isMobileNo ? register(name, rules).ref : undefined}
+					/>
+					<p className={styles.error}>{errors?.[name]?.message || errors?.[name]?.type}</p>
+					{extraComp}
+				</div>
 			);
 		})
 	);
