@@ -123,6 +123,7 @@ function ServiceProviderDetails({
 						interactive
 						onClickOutside={() => setShipmentPopover({})}
 						visible={shipmentPopover?.id === id}
+						appendTo={() => document.body}
 						render={(
 							<ShipmentInfoDetail
 								shipmentId={shipment_id}

@@ -25,6 +25,7 @@ function FilterModal({
 		setParams((prev) => ({
 			...prev,
 			...val,
+			page: 1,
 		}));
 	};
 
@@ -34,6 +35,7 @@ function FilterModal({
 		setParams((prev) => ({
 			...prev,
 			...defaultValues,
+			page: 1,
 		}));
 
 		setShowFilters(false);

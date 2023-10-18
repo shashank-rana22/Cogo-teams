@@ -83,6 +83,7 @@ function RateRevertCard({
 					<Button
 						size="md"
 						themeType="secondary"
+						disabled={cardData?.status !== 'pending'}
 						onClick={() => setShowAddRateModal({ showModal: true, cardData })}
 					>
 						+ Add Rate

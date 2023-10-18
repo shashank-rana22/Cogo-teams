@@ -1,4 +1,5 @@
 import { Pill, Tooltip, cl } from '@cogoport/components';
+import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -10,20 +11,14 @@ import {
 } from '../../../../../utils/detailsHelperFuncs';
 import { formatRouteData } from '../../../../../utils/routeDataHelpers';
 
+import { getShippingData } from './getShipperFunctions';
 import styles from './styles.module.css';
-
-const TRADE_TYPE_MAPPING = {
-	import : 'Origin',
-	export : 'Destination',
-};
 
 function PortDetails({ details = {} }) {
 	return (
-		<div className={styles.shipping_service}>
+		<>
 			<div className={styles.port_name}>
-				(
-				{details?.code}
-				)
+				{details?.code ? `(${details?.code})` : '-'}
 			</div>
 
 			<Tooltip
@@ -35,7 +30,7 @@ function PortDetails({ details = {} }) {
 					{details?.name}
 				</div>
 			</Tooltip>
-		</div>
+		</>
 	);
 }
 
@@ -44,13 +39,7 @@ function ShipmentDetails({
 	handleOpenMessage = () => {},
 	isTriggeredFromSideBar = false,
 }) {
-	const { service_type = '', trade_type = '', shipping_line = {} } = cardData || {};
-
-	const {
-		short_name = '',
-		business_name = '',
-		logo_url = '',
-	} = shipping_line || {};
+	const { service_type = '', trade_type = '' } = cardData || {};
 
 	const details = serviceDetails({ detail: cardData, service: service_type });
 
@@ -61,28 +50,11 @@ function ShipmentDetails({
 		singleDestinationDisplay = {},
 	} = formatRouteData({ item: cardData });
 
-	const DISPLAY_DATA_MAPPING = {
-		import : singleOriginDisplay,
-		export : singleDestinationDisplay,
-	};
-
 	const isSingleLocation = SINGLE_LOCATIONS.includes(service_type);
 
-	if (isSingleLocation) {
-		return (
-			<div className={styles.port_container}>
-				<div className={styles.trade_type}>
-					{TRADE_TYPE_MAPPING[trade_type]}
-				</div>
-				:
-				<PortDetails
-					details={DISPLAY_DATA_MAPPING[trade_type]}
-				/>
-			</div>
-		);
-	}
-
 	const ActiveIcon = ICONS_MAPPING[service_type] || ICONS_MAPPING.default;
+
+	const { showLogo = false, logoUrl = '', belowText = '' } = getShippingData({ cardData });
 
 	return (
 		<div
@@ -96,8 +68,7 @@ function ShipmentDetails({
 				style={{ flexDirection: isTriggeredFromSideBar ? 'column' : 'row' }}
 			>
 				<div
-					className={styles.service_type}
-					style={{ flexDirection: isTriggeredFromSideBar ? 'row' : 'column' }}
+					className={cl`${styles.service_type} ${isTriggeredFromSideBar ? styles.sidebar_service_type : ''}`}
 				>
 					<div className={styles.icon_container}>
 						<ActiveIcon />
@@ -110,17 +81,45 @@ function ShipmentDetails({
 					</div>
 				</div>
 
-				<div className={cl`${styles.shipping_line} ${isTriggeredFromSideBar ? styles.side_bar_shipping : ''}`}>
-					<PortDetails details={originDetails} />
-					<div className={styles.shipping_service}>
-						<img height="30px" width="90px" alt="logo" src={logo_url} />
-
-						<div className={styles.service_provider}>
-							{short_name || business_name}
-						</div>
+				<div className={cl`${styles.shipping_line} 
+					${isTriggeredFromSideBar ? styles.side_bar_shipping : ''}`}
+				>
+					<div className={cl`${styles.shipping_service} ${showLogo ? '' : styles.full_service}`}>
+						{(isSingleLocation && trade_type === 'export')
+							? '-'
+							: (
+								<PortDetails
+									details={(isSingleLocation && trade_type === 'import')
+										? singleOriginDisplay : originDetails}
+								/>
+							)}
 					</div>
 
-					<PortDetails details={destinationDetails} />
+					{showLogo ? (
+						<div className={styles.shipping_service}>
+							<img
+								height="30px"
+								width="90px"
+								alt="logo"
+								src={logoUrl}
+							/>
+
+							<div className={styles.service_provider}>
+								{belowText || ''}
+							</div>
+						</div>
+					) : <IcMPortArrow height={20} width={20} className={styles.port_icon} />}
+
+					<div className={cl`${styles.shipping_service} ${showLogo ? '' : styles.full_service}`}>
+						{(isSingleLocation && trade_type === 'import')
+							? '-'
+							: (
+								<PortDetails
+									details={(isSingleLocation && trade_type === 'export')
+										? singleDestinationDisplay : destinationDetails}
+								/>
+							)}
+					</div>
 				</div>
 			</div>
 

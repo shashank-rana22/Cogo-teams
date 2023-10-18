@@ -13,7 +13,7 @@ const getPayload = ({ params, orgId, triggeredFrom, viewType }) => ({
 	page              : params?.page || 1,
 	filters           : {
 		source              : params?.source || undefined,
-		status              : 'pending',
+		status              : triggeredFrom !== 'sideBar' ? 'pending' : undefined,
 		service_provider_id : (triggeredFrom === 'sideBar' && orgId) ? orgId : undefined,
 	},
 });

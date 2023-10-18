@@ -6,21 +6,25 @@
 }
 
 .label {
+	width: 100px;
 	padding-right: 4px;
 	font-size: 14px;
 	color: #828282;
+	white-space: nowrap;
 }
 
 .contact_info {
 	display: flex;
 	justify-content: flex-start;
+	width: 100%;
 	padding: 2px 0;
+	overflow: hidden;
 }
 
 .icon_styles {
-	width: 12px;
-	height: 12px;
-	margin: 0 4px;
+	width: 13px;
+	height: 13px;
+	margin: 0 2px;
 }
 
 .dummy_circle {
@@ -32,18 +36,42 @@
 }
 
 .primary_data {
-	padding: 0 4px;
+	width: calc(100% - 100px);
+	overflow: hidden;
 	font-size: 14px;
 	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .secondary_data {
+	width: calc(100% - 18px);
 	padding: 0 4px;
+	overflow: hidden;
 	font-size: 12px;
 	color: #828282;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.details_secondary_data {
+	flex: 1;
+	width: unset;
 }
 
 .details {
 	display: flex;
 	align-items: center;
+	max-width: calc(50% - 50px);
+}
+
+.secondary_details {
+	flex-grow: 1;
+	max-width: unset;
+}
+
+.contact_details {
+	display: flex;
+	align-items: center;
+	width: 38px;
 }

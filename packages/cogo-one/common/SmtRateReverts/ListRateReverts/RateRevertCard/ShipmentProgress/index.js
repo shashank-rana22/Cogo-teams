@@ -1,3 +1,6 @@
+import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDummyCircle, IcMProfile, IcMCall } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -10,9 +13,11 @@ function ShipmentProgress({
 	cardData = {},
 	isTriggeredFromSideBar = false,
 }) {
-	const { call_details = {}, reverted_status = '' } = cardData || {};
+	const { call_details = {}, reverted_status = '', assigned_to = {}, created_at = '' } = cardData || {};
 	const { agent_data = {}, end_time_of_call = '', start_time_of_call = '' } = call_details || {};
 	const { name = '' } = agent_data || {};
+
+	const { name: assignedAgentName = '' } = assigned_to || {};
 
 	const endTimeEpoch = (new Date(end_time_of_call)).getTime();
 
@@ -22,15 +27,45 @@ function ShipmentProgress({
 
 	return (
 		<div className={styles.container}>
-			<div
-				className={styles.contact_info}
-			>
+			{isTriggeredFromSideBar ? (
+				<div className={styles.contact_info}>
+					<span className={styles.label}>
+						Created At
+					</span>
+
+					<span className={styles.primary_data}>
+						{`: ${
+							formatDate({
+								date       : created_at,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
+								formatType : 'dateTime',
+								separator  : ', ',
+							})
+						}`}
+					</span>
+				</div>
+			) : null}
+
+			<div className={styles.contact_info}>
 				<span className={styles.label}>
-					Revert Status:
+					Assigned To
 				</span>
 
 				<span className={styles.primary_data}>
-					{startCase(reverted_status)}
+					:
+					<IcMProfile className={styles.icon_styles} />
+					{startCase(assignedAgentName) || 'NA'}
+				</span>
+			</div>
+
+			<div className={styles.contact_info}>
+				<span className={styles.label}>
+					Revert Status
+				</span>
+
+				<span className={styles.primary_data}>
+					{`: ${startCase(reverted_status) || 'NA'}`}
 				</span>
 			</div>
 
@@ -41,23 +76,33 @@ function ShipmentProgress({
 				}}
 			>
 				<div className={styles.label}>
-					Last Contact :
+					Last Contact
 				</div>
 
-				<div className={styles.details}>
-					<IcMDummyCircle className={styles.dummy_circle} />
-					<IcMProfile className={styles.icon_styles} />
-					<span className={styles.primary_data}>
+				<div
+					className={styles.details}
+					style={{ maxWidth: isTriggeredFromSideBar ? '100%' : 'calc(50% - 50px)' }}
+				>
+					<div
+						className={styles.contact_details}
+						style={{ width: isTriggeredFromSideBar ? '38px' : '22px' }}
+					>
+						{isTriggeredFromSideBar ? <IcMDummyCircle className={styles.dummy_circle} /> : ':'}
+						<IcMProfile className={styles.icon_styles} />
+					</div>
+					<span className={styles.secondary_data}>
 						{startCase(name) || 'NA'}
 					</span>
 				</div>
 
-				<div className={styles.details}>
+				<div className={cl`${styles.details} ${styles.secondary_details}`}>
 					{(endTimeEpoch || startTimeEpoch) ? (
 						<>
-							<IcMDummyCircle className={styles.dummy_circle} />
-							<IcMCall className={styles.icon_styles} fill="#849E4C" />
-							<span className={styles.secondary_data}>
+							<div className={styles.contact_details}>
+								<IcMDummyCircle className={styles.dummy_circle} />
+								<IcMCall className={styles.icon_styles} fill="#849E4C" />
+							</div>
+							<div className={cl`${styles.secondary_data} ${styles.details_secondary_data}`}>
 								Contacted
 								{' '}
 								<span>
@@ -68,7 +113,7 @@ function ShipmentProgress({
 									)?.renderTime
 								}
 								</span>
-							</span>
+							</div>
 						</>
 					) : null}
 				</div>

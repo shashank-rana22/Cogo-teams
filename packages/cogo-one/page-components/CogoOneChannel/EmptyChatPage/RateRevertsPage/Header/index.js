@@ -75,7 +75,8 @@ function Header({
 					onChange={(val) => setParams(
 						(prev) => ({
 							...(prev || {}),
-							source: val,
+							source : val,
+							page   : 1,
 						}),
 					)}
 				/>

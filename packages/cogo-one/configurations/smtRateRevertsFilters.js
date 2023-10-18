@@ -22,7 +22,7 @@ const smtRateRevertsFilters = ({ triggeredFrom = '' }) => [
 		controlType : 'select',
 		size        : 'sm',
 		placeholder : 'select',
-		options     : Object.values(SHIPMENT_TYPE_OPTIONS),
+		options     : Object.values(SHIPMENT_TYPE_OPTIONS).filter((itm) => !itm?.hideFor?.includes('smtRateReverts')),
 	},
 ];
 

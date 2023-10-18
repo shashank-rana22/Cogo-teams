@@ -37,6 +37,7 @@ function Header({
 					/>
 				) : null
 				)}
+				onClickOutside={() => setShowFilters(false)}
 			>
 				{isFiltersApplied ? (
 					<Badge color="orange">
