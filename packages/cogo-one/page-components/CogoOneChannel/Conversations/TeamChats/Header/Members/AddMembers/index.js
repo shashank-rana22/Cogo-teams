@@ -8,6 +8,8 @@ import UserCard from '../../UserCard';
 
 import styles from './styles.module.css';
 
+const ADMIN_VIEW = ['admin', 'cogoone_admin'];
+
 function AddMembers({
 	viewType = '',
 	setAddMembers = () => {},
@@ -48,7 +50,7 @@ function AddMembers({
 		);
 	};
 
-	const teamsAdminFilter = viewType === 'cogoone_admin' ? undefined : getCommonAgentType({ viewType });
+	const teamsAdminFilter = ADMIN_VIEW.includes(viewType) ? undefined : getCommonAgentType({ viewType });
 
 	return (
 		<div className={styles.container}>
