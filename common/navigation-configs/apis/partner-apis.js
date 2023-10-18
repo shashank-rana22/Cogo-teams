@@ -5329,7 +5329,12 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'get_margin_stats',
+			api          : 'get_margin_booking_insights',
+			access_type  : 'private',
+			service_name : 'margin',
+		},
+		{
+			api          : 'get_service_wise_booking_insights',
 			access_type  : 'private',
 			service_name : 'margin',
 		},
