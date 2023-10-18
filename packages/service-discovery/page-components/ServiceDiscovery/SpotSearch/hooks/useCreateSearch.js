@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 import getDefaultPayload from '../utils/getDefaultPayload';
 import getEditPayload from '../utils/getEditPayload';
 
-const useCreateSearch = ({ setRouterLoading = () => {}, setHeaderProps = () => {} }) => {
+const useCreateSearch = ({ setRouterLoading = () => {}, setHeaderProps = () => {} } = {}) => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'post',
 		url    : '/create_spot_search',

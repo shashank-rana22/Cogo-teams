@@ -17,6 +17,8 @@ function AIRHeader({
 	setInfoBanner = () => {},
 	setRouterLoading = () => {},
 	isGuideViewed = false,
+	createLoading = false,
+	createSearch = () => {},
 	...rest
 }) {
 	const isAllowedToEdit = activePage === 'search_results';
@@ -50,6 +52,8 @@ function AIRHeader({
 					setInfoBanner={setInfoBanner}
 					isGuideViewed={isGuideViewed}
 					setRouterLoading={setRouterLoading}
+					createLoading={createLoading}
+					createSearch={createSearch}
 				/>
 
 				<Wallet
