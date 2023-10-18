@@ -29,7 +29,6 @@ function VideoCalling({
 	if (data && data?.join && showDeleteModal) {
 		// eslint-disable-next-line max-len
 		const cogo_admin_auth_token = getCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME) || 'eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTc3NzgxNzIsImlhdCI6MTY5NzYwNTM3MiwiVXNlclNlc3Npb25JRCI6IjEwOWM3MWQxLTNlOGMtNDM5OS1hOGY5LWVjMzEwY2JhODk2YiJ9.R8Qb7n3gMO8EXnl-i-Sv2ZvlEBOsanmP_n1C5cvWfHoJV3-3aTtzDR0TOsDtC3RZdawxMesLU008R21TMGGL3Q';
-		console.log(cogo_admin_auth_token, 'cogo_admin_auth_token');
 		return (
 			<CallModal
 				url={`${data.join}&auth=${cogo_admin_auth_token}`}
