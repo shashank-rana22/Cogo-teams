@@ -15,8 +15,9 @@ function Feedback({ setModalData = () => {} }) {
 	const [showAddFeedback, setShowAddFeedback] = useState(false);
 	const [activeTab, setActiveTab] = useState('open');
 	const [page, setPage] = useState(DEFAULT_PAGE);
+	const [toggleValue, setToogleValue] = useState(false);
 
-	const { feedbacks, loading, getFeedbacks, pageData } = useGetFeedbacks({ activeTab, page });
+	const { feedbacks, loading, getFeedbacks, pageData } = useGetFeedbacks({ activeTab, page, toggleValue });
 	const { total = '' } = pageData || {};
 
 	return (
@@ -59,6 +60,8 @@ function Feedback({ setModalData = () => {} }) {
 					activeTab={activeTab}
 					feedbacks={feedbacks}
 					loading={loading}
+					setToogleValue={setToogleValue}
+					toggleValue={toggleValue}
 				/>
 			)}
 
