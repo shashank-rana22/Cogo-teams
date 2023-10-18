@@ -21,7 +21,7 @@ const getPayload = ({
 function useUpdateVideoConference() {
 	const userName = useSelector(({ profile }) => profile?.user?.name);
 
-	const [{ loading }, trigger] = useRequest(
+	const [{ loading, data }, trigger] = useRequest(
 		{
 			url    : 'update_video_conference',
 			method : 'post',
@@ -36,7 +36,7 @@ function useUpdateVideoConference() {
 		isGroup = false,
 	}) => {
 		try {
-			const res = await trigger({
+			await trigger({
 				data: getPayload({
 					groupId,
 					groupMemberIds,
@@ -45,7 +45,6 @@ function useUpdateVideoConference() {
 					isGroup,
 				}),
 			});
-			console.log('res', res);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something Went Wrong');
 		}
@@ -54,6 +53,7 @@ function useUpdateVideoConference() {
 	return {
 		updateVideoConference,
 		loading,
+		data,
 	};
 }
 
