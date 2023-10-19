@@ -254,24 +254,24 @@ function Details({
 						</Button>
 					</div>
 					{showRejectModal
-					&& (
-						<RejectModal
-							setShowRejectModal={setShowRejectModal}
-							onAction={onAction}
-							showRejectModal={showRejectModal}
-							loading={loading}
-						/>
-					)}
+						? (
+							<RejectModal
+								setShowRejectModal={setShowRejectModal}
+								onAction={onAction}
+								showRejectModal={showRejectModal}
+								loading={loading}
+							/>
+						) : null}
 					{showApproveModal
-					&& (
+						? (
 
-						<ApproveModal
-							setShowApproveModal={setShowApproveModal}
-							onAction={onAction}
-							showApproveModal={showApproveModal}
-							loading={loading}
-						/>
-					)}
+							<ApproveModal
+								setShowApproveModal={setShowApproveModal}
+								onAction={onAction}
+								showApproveModal={showApproveModal}
+								loading={loading}
+							/>
+						) : null}
 
 				</div>
 			) : null }

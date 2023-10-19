@@ -12,9 +12,9 @@ function ApproveModal({
 	return (
 		<div>
 			<Modal show={showApproveModal} onClose={() => setShowApproveModal(false)} placement="center" size="sm">
-				<Modal.Body style={{ height: '200px', width: '364px' }} className={styles.deleteBody}>
+				<Modal.Body className={styles.approve_body}>
 					<IcMInfo height={20} width={20} className={styles.infoIcon} />
-					<div className={styles.deleteText}>Are you sure you want to Approve?</div>
+					<div className={styles.approve_text}>Are you sure you want to Approve?</div>
 					<div className={styles.flex}>
 						<Button
 							size="sm"

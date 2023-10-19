@@ -32,7 +32,7 @@ function Details({
 	const { id = '', status = '' } = row || {};
 	const [showRejectModal, setShowRejectModal] = useState(false);
 	const [showApproveModal, setShowApproveModal] = useState(false);
-	const { onSubmit:onAction, loading = false } = usePostJobOpenRemark({
+	const { onSubmit:onAction = () => {}, loading = false } = usePostJobOpenRemark({
 		setDetailsModal,
 		id,
 		remarks,
@@ -179,24 +179,24 @@ function Details({
 						</Button>
 					</div>
 					{showRejectModal
-                    && (
-	<RejectModal
-		setShowRejectModal={setShowRejectModal}
-		onAction={onAction}
-		showRejectModal={showRejectModal}
-		loading={loading}
-	/>
-                    )}
+						? (
+							<RejectModal
+								setShowRejectModal={setShowRejectModal}
+								onAction={onAction}
+								showRejectModal={showRejectModal}
+								loading={loading}
+							/>
+						) : null}
 					{showApproveModal
-                    && (
+						? (
 
-	<ApproveModal
-		setShowApproveModal={setShowApproveModal}
-		onAction={onAction}
-		showApproveModal={showApproveModal}
-		loading={loading}
-	/>
-                    )}
+							<ApproveModal
+								setShowApproveModal={setShowApproveModal}
+								onAction={onAction}
+								showApproveModal={showApproveModal}
+								loading={loading}
+							/>
+						) : null}
 
 				</div>
 			) : null }
