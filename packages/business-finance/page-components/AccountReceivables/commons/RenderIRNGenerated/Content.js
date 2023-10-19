@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Content({ statusComponentMap, itemData, refetch }) {
+function Content({ statusComponentMap = [], itemData = {}, refetch = () => {} }) {
 	const components = statusComponentMap.filter((item) => item.status.includes(itemData?.invoiceStatus));
 
 	return components.map((item) => {
