@@ -59,6 +59,7 @@ function EditMarginFooter({
 		validity_end,
 		id = '',
 		quotation_email_sent_at = '',
+		primary_service = '',
 	} = detail;
 
 	const { convenience_fee_billing_service, adjust_convenience_fee } = convenience_line_item;
@@ -136,10 +137,7 @@ function EditMarginFooter({
 	const onClickSaveForLater = () => {
 		updateCheckout({ values: { id, state: 'save_for_later' }, refetchRequired: false });
 
-		push(
-			'/service-discovery',
-			'/service-discovery',
-		);
+		push(`/service-discovery?activeTab=saved_for_later&service_type=${primary_service}`);
 	};
 
 	const MAPPING = [

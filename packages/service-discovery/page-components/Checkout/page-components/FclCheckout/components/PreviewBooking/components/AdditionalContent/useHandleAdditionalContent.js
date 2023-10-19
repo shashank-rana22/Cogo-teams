@@ -159,7 +159,7 @@ const useHandleAdditionalContent = ({
 			refetchRequired : false,
 		});
 
-		push('/service-discovery?activeTab=saved_for_later');
+		push(`/service-discovery?activeTab=saved_for_later&service_type=${primary_service}`);
 	};
 
 	const onError = () => {

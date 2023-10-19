@@ -27,7 +27,7 @@ function SpotSearch() {
 		return {};
 	});
 
-	const [selectedMode, setSelectedMode] = useState('fcl_freight');
+	const [selectedMode, setSelectedMode] = useState(query?.service_type || 'fcl_freight');
 	const [selectedService, setSelectedService] = useState({});
 	const [location, setLocation] = useState({});
 	const [errors, setErrors] = useState({});
