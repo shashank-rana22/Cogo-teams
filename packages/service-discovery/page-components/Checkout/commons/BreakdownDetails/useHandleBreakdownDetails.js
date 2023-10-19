@@ -43,15 +43,23 @@ const useHandleBreakdownDetails = ({
 						service_type: secondElementServiceType,
 					},
 				) => {
-					const tradeTypeOrder = ['export', 'main', 'import'];
+					const tradeTypeOrder = ['export', 'main', 'import', 'other'];
 
-					const firstElementFinalTradeType = firstElementServiceType === primary_service
+					let firstElementFinalTradeType = firstElementServiceType === primary_service
 						? 'main'
 						: firstElementTradeType;
 
-					const secondElementFinalTradeType = secondElementServiceType === primary_service
+					let secondElementFinalTradeType = secondElementServiceType === primary_service
 						? 'main'
 						: secondElementTradeType;
+
+					if (['subsidiary', 'cargo_insurance', 'warehouse'].includes(firstElementServiceType)) {
+						firstElementFinalTradeType = 'other';
+					}
+
+					if (['subsidiary', 'cargo_insurance', 'warehouse'].includes(secondElementServiceType)) {
+						secondElementFinalTradeType = 'other';
+					}
 
 					if (
 						tradeTypeOrder.findIndex(

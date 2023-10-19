@@ -36,7 +36,7 @@ function TotalLandedCost({
 				className={styles.proceed_button}
 				loading={createCheckoutLoading}
 			>
-				Proceed to Modify Margin
+				Proceed to Modify Line Items
 			</Button>
 		</div>
 	);

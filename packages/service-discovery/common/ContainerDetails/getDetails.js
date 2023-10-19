@@ -8,7 +8,7 @@ const getContainerType = ({ container_type }) => {
 	return startCase(container_type);
 };
 
-const getDetails = ({ item, primary_service }) => {
+const getDetails = ({ item, service_type }) => {
 	const {
 		containers_count,
 		container_size,
@@ -20,6 +20,9 @@ const getDetails = ({ item, primary_service }) => {
 		trucks_count,
 		truck_type,
 		container_type,
+		cargo_value_currency = '',
+		cargo_value = 0,
+		code = '',
 	} = item || {};
 
 	const MAPPING = {
@@ -32,8 +35,8 @@ const getDetails = ({ item, primary_service }) => {
 			`${commodity}`,
 		],
 		air_freight: [
-			`volume: ${volume}`,
-			`weight: ${weight}`,
+			`volume: ${volume} cbm`,
+			`weight: ${weight} kgs`,
 		],
 		trailer_freight: [
 			`${containers_count} container`,
@@ -76,9 +79,13 @@ const getDetails = ({ item, primary_service }) => {
 			`weight: ${weight} kgs`,
 			`Count: ${packages_count}`,
 		],
+		cargo_insurance: [
+			`${commodity}`, `Cargo Value: ${cargo_value_currency} ${cargo_value}`,
+		],
+		subsidiary: [`code: ${code}`],
 	};
 
-	return MAPPING[primary_service] || MAPPING.fcl_freight;
+	return MAPPING[service_type] || [];
 };
 
 export default getDetails;

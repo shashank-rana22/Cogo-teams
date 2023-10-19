@@ -74,14 +74,14 @@ function BreakdownDetails({
 			/>
 
 			{rateDetails.map((item, index) => {
-				const { id = '' } = item || {};
+				const { id = '', service_type = '' } = item || {};
 
 				const fclLocalEmpty = !item?.line_items?.length
 				&& [
 					'fcl_freight_local_service',
 					'fcl_freight_local',
 					'air_freight_local',
-				].includes(item?.service_type);
+				].includes(service_type);
 
 				const serviceEditedMargins = item?.line_items.map((lineItem) => lineItem.filteredMargins);
 
@@ -115,7 +115,7 @@ function BreakdownDetails({
 
 				const noRatesFound = !item?.total_price_discounted
 				&& !(fclLocalEmpty && rateSource !== 'cogo_assured_rate')
-				&& item?.service_type !== primary_service;
+				&& service_type !== primary_service;
 
 				if (noRatesFound) {
 					setNoRatesPresent(true);
@@ -137,8 +137,8 @@ function BreakdownDetails({
 									</div>
 
 									<ContainerDetails
-										primary_service={primary_service}
 										details={detail.services[id] || {}}
+										service_type={service_type}
 									/>
 								</div>
 
@@ -150,12 +150,12 @@ function BreakdownDetails({
 											type="button"
 											size="sm"
 											themeType="accent"
-											onClick={() => handleDeleteRate({ serviceType: item?.service_type, id })}
+											onClick={() => handleDeleteRate({ serviceType: service_type, id })}
 											disabled={deleteRateLoading}
 										>
 											Remove
 											{' '}
-											{startCase(item?.service_type)}
+											{startCase(service_type)}
 										</Button>
 									</div>
 								) : <div className={styles.total_display}>{totalDisplayString}</div>}
@@ -181,9 +181,9 @@ function BreakdownDetails({
 									onClick={() => {
 										setAddLineItemData({
 											index,
-											service_type : item?.service_type,
-											service_id   : item?.id,
-											details      : detail.services[id] || {},
+											service_type,
+											service_id : item?.id,
+											details    : detail.services[id] || {},
 										});
 									}}
 								>
@@ -197,9 +197,9 @@ function BreakdownDetails({
 									onClick={() => {
 										setEditLineItemData({
 											index,
-											service_type : item?.service_type,
-											service_id   : item?.id,
-											details      : detail.services[id] || {},
+											service_type,
+											service_id : item?.id,
+											details    : detail.services[id] || {},
 										});
 									}}
 								>
