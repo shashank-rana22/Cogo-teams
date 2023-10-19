@@ -83,7 +83,6 @@ function EditPackages({
 		watch,
 		handleSubmit,
 		setValue,
-		reset,
 	} = useForm();
 
 	const { origin = {}, destination = {} } = getLocationInfo(data, {}, SERVICE_KEY);
@@ -125,7 +124,6 @@ function EditPackages({
 
 	useEffect(() => {
 		if (activeTab !== defaultValues?.load_selection_type) {
-			reset();
 			return;
 		}
 
@@ -188,7 +186,7 @@ function EditPackages({
 		setValue('cargo_clearance_date', new Date(cargo_clearance_date));
 		setValue('commodity_type', commodityData);
 		setValue('commodity_subtype', subCommodityData);
-	}, [activeTab, defaultValues, reset, setValue]);
+	}, [activeTab, defaultValues, setValue]);
 
 	return (
 		<Modal
