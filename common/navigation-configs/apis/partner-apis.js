@@ -9686,6 +9686,8 @@ const partner = {
 		{
 			api         : 'post_payments_invoice_exchange_rates',
 			access_type : 'private',
+			module      : 'settlement',
+			feature     : 'settlement',
 		},
 		{
 			api         : 'post_payments_parent_jv_bulk_jv_upload',
