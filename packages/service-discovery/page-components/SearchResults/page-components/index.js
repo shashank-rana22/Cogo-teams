@@ -8,7 +8,6 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../../common/Header';
 import CustomLoadingState from '../../../common/LoadingState/CustomLoadingState';
 import DotLoader from '../../../common/LoadingState/DotLoader';
-// import TryOldBanner from '../../../common/TryOldBanner';
 import useCreateSearch from '../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 import useGetSpotSearch from '../hooks/useGetSpotSearch';
 import getRedirectionDetails from '../utils/getRedirectionDetails';
