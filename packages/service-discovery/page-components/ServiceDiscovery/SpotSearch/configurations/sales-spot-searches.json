@@ -58,11 +58,11 @@
 				"multiple": false,
 				"options": [
 					{
-						"label": "Rates Found",
+						"label": "Rates Available",
 						"value": "is_rates_available"
 					},
 					{
-						"label": "No Rates Found",
+						"label": "Rates Not Available",
 						"value": "is_rates_not_available"
 					}
 				]

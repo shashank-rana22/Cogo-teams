@@ -1,14 +1,10 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const CURRENCY_CODE_OPTIONS = [
-	GLOBAL_CONSTANTS.currency_code.USD,
-	GLOBAL_CONSTANTS.currency_code.INR,
-	GLOBAL_CONSTANTS.currency_code.EUR,
-	GLOBAL_CONSTANTS.currency_code.GBP,
-	GLOBAL_CONSTANTS.currency_code.VND,
-].map((currencyCode) => ({
-	label : currencyCode,
-	value : currencyCode,
-}));
+import getCurrencyOptions from '../../../../../helpers/getCurrencyOptions';
+
+const ALLOWED_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
+	.common.services.feedback_services.allowed_currency;
+
+const CURRENCY_CODE_OPTIONS = getCurrencyOptions({ ALLOWED_CURRENCY });
 
 export default CURRENCY_CODE_OPTIONS;

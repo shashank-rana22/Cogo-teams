@@ -758,7 +758,24 @@ const GLOBAL_CONSTANTS = {
 		feature_supported_service: {
 			common: {
 				services: {
+					feedback_services: {
+						allowed_currency: [
+							'INR',
+							'USD',
+							'EUR',
+							'GBP',
+							'VND',
+							'IDR',
+							'SGD',
+							'THB',
+							'CNY',
+							'AED',
+						],
+					},
 					invoicing_parties_checkout: {
+						allowed_currency: ['INR', 'USD', 'VND', 'IDR', 'SGD', 'THB', 'CNY'],
+					},
+					preview_booking_checkout: {
 						allowed_currency: ['INR', 'USD', 'VND', 'IDR', 'SGD', 'THB', 'CNY'],
 					},
 					air_domestic: {

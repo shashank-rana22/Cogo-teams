@@ -19,7 +19,7 @@ function AdditionalServices({
 }) {
 	const { services, id, ...restDetails } = detail;
 
-	const { services:serviceRates } = rate;
+	const { services: serviceRates } = rate;
 
 	const finalDetails = { ...primaryService, ...restDetails, service_details: services, checkout_id: id };
 
