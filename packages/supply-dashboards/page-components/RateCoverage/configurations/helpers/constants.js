@@ -254,6 +254,20 @@ export const revertedOptions = [
 	{ name: 'not_reverted', value: 'not_reverted', label: 'Not Reverted' },
 ];
 
+export const INCO_TERM_MAPPING = {
+	cif : 'export',
+	cfr : 'export',
+	cpt : 'export',
+	cip : 'export',
+	dat : 'export',
+	dap : 'export',
+	ddp : 'export',
+	fob : 'import',
+	exw : 'import',
+	fca : 'import',
+	fas : 'import',
+};
+
 export const filterOption = {
 	fcl_freight : ['seaport'],
 	lcl_freight : ['seaport'],

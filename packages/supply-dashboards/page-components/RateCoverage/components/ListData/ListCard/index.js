@@ -42,6 +42,10 @@ function ListCard({
 		destination_location = '',
 		shipment_id = '',
 		reverted_status = '',
+		shipment_serial_id = '',
+		serial_id = '',
+		assigned_to = {},
+		service_provider = {},
 	} = data;
 
 	const {
@@ -99,20 +103,27 @@ function ListCard({
 					<div className={styles.head}>
 						{data?.updated_at && (
 							<div style={{ display: 'flex' }}>
+								{!isEmpty(shipment_serial_id) && 	(
+									<div className={styles.pill}>
+										Shipment Id:
+										{' '}
+										{shipment_serial_id}
+									</div>
+								)}
 								<div className={styles.pill}>
 									TID:
 									{' '}
-									{data?.serial_id}
+									{serial_id}
 								</div>
 								<div className={styles.pill}>
 									Assigned to:
 									{' '}
-									{data?.assigned_to?.name}
+									{assigned_to?.name}
 								</div>
 								<div className={styles.pill}>
 									Supplier :
 									{' '}
-									{data?.service_provider?.business_name || data?.service_provider?.name}
+									{service_provider?.business_name || service_provider?.name}
 								</div>
 							</div>
 						)}

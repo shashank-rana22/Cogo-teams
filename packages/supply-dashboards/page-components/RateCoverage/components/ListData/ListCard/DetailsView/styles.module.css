@@ -40,3 +40,19 @@
 .head {
 	margin-top: 6px;
 }
+
+.pill_head {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 6px;
+}
+
+.price {
+	display: flex;
+}
+
+.price_value {
+	margin: 0 6px;
+	color: #00ff;
+}

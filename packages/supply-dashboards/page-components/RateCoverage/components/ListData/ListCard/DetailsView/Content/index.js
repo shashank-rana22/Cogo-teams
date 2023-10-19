@@ -1,11 +1,12 @@
 import { Pill, Placeholder, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCopy } from '@cogoport/icons-react';
 import { differenceInDays, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { DEFAULT_VALUE, LOADER_COUNT } from '../../../../../configurations/helpers/constants';
+import { DEFAULT_VALUE, INCO_TERM_MAPPING, LOADER_COUNT } from '../../../../../configurations/helpers/constants';
 import useListShipmentFlashBookingRates from '../../../../../hooks/useListShipmentFlashBookingRates';
 import copyToClipboard from '../../../../../utilis/copyToClipboard';
 import NewServiceProviderModal from '../ServiceProviderModal';
@@ -29,21 +30,10 @@ function ServiceDetailsContent({
 	const { primary_service_detail, summary } = shipment_data || {};
 	const {
 		commodity = '', container_size = '', container_type = '', containers_count = '', inco_term = '',
-		cargo_readiness_date = '',
-		free_days_detention_destination = '',
-		bl_type = '',
-		commodity_description = '',
-		schedule_departure = '',
-		shipping_line = {},
-		preferred_shipping_lines,
-		feedbacks = [],
-		closing_remarks = [],
-		status = '',
-		trade_type = '',
-		serial_id,
-		selected_schedule_arrival,
-		selected_schedule_departure,
-		created_at,
+		cargo_readiness_date = '', free_days_detention_destination = '', bl_type = '', commodity_description = '',
+		schedule_departure = '', shipping_line = {}, preferred_shipping_lines, feedbacks = [], closing_remarks = [],
+		status = '', serial_id, selected_schedule_arrival, selected_schedule_departure, created_at,
+		preferred_freight_rate, preferred_freight_rate_currency,
 	} = primary_service_detail || feedbackData || requestData || {};
 
 	const handleCopy = (text) => {
@@ -74,7 +64,7 @@ function ServiceDetailsContent({
 		{ label: container_type && startCase(container_type) },
 		{ label: containers_count && `${containers_count} Containers` },
 		{ label: inco_term && startCase(inco_term) },
-		{ label: trade_type && startCase(trade_type) },
+		{ label: inco_term && startCase(INCO_TERM_MAPPING[inco_term]) },
 	];
 
 	const contentMapping = [
@@ -133,18 +123,36 @@ function ServiceDetailsContent({
 						/>
 				))
 				: (
-
 					<div className={styles.content_container}>
 						{(!feedback_loading || !request_loading || !shipment_loading)
 						&& (
 							<div>
-								<div className={styles.pill}>
-									{pillMapping?.map((val) => (
-										<div key={val?.label}>
-											{ val?.label
+								<div className={styles.pill_head}>
+									<div className={styles.pill}>
+										{pillMapping?.map((val) => (
+											<div key={val?.label}>
+												{ val?.label
 												&& <Pill color="blue">{val?.label}</Pill>}
+											</div>
+										))}
+									</div>
+									{preferred_freight_rate
+									&& (
+										<div className={styles.price}>
+											Preferred Price
+											<div className={styles.price_value}>
+												{formatAmount({
+													amount   : preferred_freight_rate,
+													currency : preferred_freight_rate_currency,
+													options  : {
+														style                 : 'currency',
+														currencyDisplay       : 'symbol',
+														maximumFractionDigits : 0,
+													},
+												})}
+											</div>
 										</div>
-									))}
+									)}
 								</div>
 
 								<div className={styles.pill}>

@@ -81,6 +81,10 @@ const useGetListCoverage = () => {
 
 		const DATE_PARAMS = {};
 
+		const idToUse = source === 'live_booking' ? 'shipment_serial_id' : 'serial_id';
+
+		const idValue = sid ? parseInt(sid, 10) : undefined;
+
 		if (isTodayDateRequired) {
 			DATE_PARAMS.start_date = new Date();
 		}
@@ -100,7 +104,7 @@ const useGetListCoverage = () => {
 				params: {
 					filters: {
 						...FINAL_FILTERS,
-						serial_id      : sid ? parseInt(sid, 10) : undefined,
+						[idToUse]      : idValue || undefined,
 						source         : source || undefined,
 						user_id        : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
 						cogo_entity_id : filter?.cogo_entity_id === 'cogo_entity_id'

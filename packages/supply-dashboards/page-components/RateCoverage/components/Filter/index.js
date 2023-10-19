@@ -21,7 +21,6 @@ function Filter({
 	setShowFilters = () => {},
 	filter = {},
 	setFilter = () => {},
-	setSerialId = () => {},
 	setShowWeekData = () => {},
 }) {
 	const isAirService = filter?.service === 'air_freight' || filter?.service === 'air_customs';
@@ -83,7 +82,6 @@ function Filter({
 		<Modal size="md" show={showFilters} onClose={() => setShowFilters(!showFilters)} placement="right">
 			<Modal.Header title={(
 				<HeaderComponent
-					setSerialId={setSerialId}
 					setShowWeekData={setShowWeekData}
 					setFilter={setFilter}
 				/>
@@ -194,15 +192,15 @@ function Filter({
 								/>
 							</div>
 							<div className={styles.radio}>
-								<div>Shipment Id</div>
+								<div>Task Id</div>
 								<Input
 									size="md"
-									value={filter?.shipment_id}
+									value={filter?.serial_id}
 									onChange={(val) => {
 										setFilter((prevFilters) => ({
 											...prevFilters,
-											shipment_id : val,
-											page        : 1,
+											serial_id : val,
+											page      : 1,
 										}));
 									}}
 									style={{ width: '250px' }}

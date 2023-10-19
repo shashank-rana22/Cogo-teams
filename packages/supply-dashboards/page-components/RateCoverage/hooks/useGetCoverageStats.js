@@ -74,6 +74,11 @@ const useGetCoverageStats = (filter) => {
 		if (filter?.start_date) { DATE_PARAMS.start_date = filter?.start_date; }
 		if (filter?.end_date) { DATE_PARAMS.end_date = filter?.end_date; }
 
+		let is_flash_booking_reverted;
+		if (filter?.is_flash_booking_reverted) {
+			is_flash_booking_reverted = filter?.is_flash_booking_reverted === 'reverted';
+		}
+
 		try {
 			await trigger({
 				params: {
@@ -83,6 +88,7 @@ const useGetCoverageStats = (filter) => {
 						cogo_entity_id : filter?.cogo_entity_id === 'cogo_entity_id'
 							? user_data?.partner?.id : undefined,
 						daily_stats,
+						is_flash_booking_reverted,
 						weekly_stats: !daily_stats,
 						...DATE_PARAMS,
 					},

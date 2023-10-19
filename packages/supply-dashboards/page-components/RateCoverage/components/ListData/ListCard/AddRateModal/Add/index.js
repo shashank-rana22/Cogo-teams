@@ -109,13 +109,28 @@ function AddRate({
 
 					{addLocalServices && (
 						<TabPanel name="additional_freight" title="ADD OTHER SERVICES RATES">
-							<AddAdditionalRates
-								payload={payload}
-								data={data}
-								additionalService={spot_data?.service_details}
-								dependentMainFreight={dependentMainFreight}
-								filter={filter}
-							/>
+							<Modal.Body>
+								<AddAdditionalRates
+									payload={payload}
+									data={data}
+									additionalService={spot_data?.service_details}
+									dependentMainFreight={dependentMainFreight}
+									filter={filter}
+								/>
+							</Modal.Body>
+							<Modal.Footer>
+								<Button
+									size="md"
+									onClick={() => {
+										setShowModal((prev) => !prev);
+										setServiceIdPresent('');
+									}}
+									style={{ marginRight: '20px' }}
+									themeType="secondary"
+								>
+									Close
+								</Button>
+							</Modal.Footer>
 						</TabPanel>
 					)}
 				</Tabs>

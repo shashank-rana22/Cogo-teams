@@ -29,6 +29,7 @@ function ListData({
 	setShowWeekData = () => {},
 }) {
 	const [serialId, setSerialId] = useState('');
+	const [shipmentId, setShipmentId] = useState('');
 	const [showFilters, setShowFilters] = useState(false);
 
 	const { statistics = {} } = statsData;
@@ -37,15 +38,29 @@ function ListData({
 
 	const { service = '', cogo_entity_id = '', is_flash_booking_reverted = '' } = filter || {};
 
+	const idToUse = source === 'live_booking' ? shipmentId : serialId;
+
 	const handleClick = (card) => {
 		setSource(card);
 		setPage(VALUE_ONE);
 		setSerialId('');
 	};
 
+	const handelFilter = (val) => {
+		if (source === 'live_booking') {
+			setShipmentId(val);
+		} else {
+			setSerialId(val);
+		}
+	};
+
 	useEffect(() => {
-		getListCoverage(serialId);
-	}, [getListCoverage, serialId]);
+		if (source === 'live_booking') {
+			getListCoverage(shipmentId);
+		} else {
+			getListCoverage(serialId);
+		}
+	}, [getListCoverage, serialId, shipmentId, source]);
 
 	return (
 		<div className={styles.main_container}>
@@ -76,9 +91,9 @@ function ListData({
 				)}
 					<Input
 						size="sm"
-						value={serialId}
-						onChange={(val) => setSerialId(val)}
-						placeholder="Search by TID"
+						value={idToUse}
+						onChange={(val) => handelFilter(val)}
+						placeholder={source === 'live_booking' ? 'Search by SID' : 'Search by TID'}
 						style={{ width: '200px', marginLeft: '10px' }}
 					/>
 				</div>
@@ -212,7 +227,6 @@ function ListData({
 					showFilters={showFilters}
 					setShowFilters={setShowFilters}
 					setFilter={setFilter}
-					setSerialId={setSerialId}
 					setShowWeekData={setShowWeekData}
 				/>
 			)}
