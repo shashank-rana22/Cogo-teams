@@ -5,7 +5,7 @@ import getCountryOptions from '@cogoport/globalization/utils/getCountryOptions';
 const geo = getGeoConstants();
 const countryOptions = getCountryOptions();
 
-const CREATE_LEAD_CONTROLS = [
+const createLeadControls = ({ formValues }) => [
 	{
 		label       : 'Country',
 		name        : 'country_id',
@@ -35,11 +35,16 @@ const CREATE_LEAD_CONTROLS = [
 		placeholder : 'Enter Mobile Number',
 		controlType : 'mobile_number',
 		rules       : {
-			validate: (v) => {
-				if (!v?.number || !v?.country_code) {
-					return 'Phone Number is required';
+			validate: (val) => {
+				if (!val?.number && formValues?.email_id) {
+					return true;
 				}
-				return geo.regex.MOBILE_NUMBER_WITHOUT_COUNTRY_CODE.test(v.number) || 'Invalid Phone Number';
+
+				if (!val?.number || !val?.country_code) {
+					return 'Either Phone Number or Email is Required.';
+				}
+
+				return geo.regex.MOBILE_NUMBER_WITHOUT_COUNTRY_CODE.test(val?.number) || 'Invalid Phone Number';
 			},
 		},
 	},
@@ -49,16 +54,22 @@ const CREATE_LEAD_CONTROLS = [
 		placeholder : 'Enter email address',
 		controlType : 'input',
 		rules       : {
-			required: {
-				value   : true,
-				message : 'Email is required',
-			},
 			pattern: {
 				value   : GLOBAL_CONSTANTS.regex_patterns.email,
 				message : 'Enter valid email',
+			},
+			validate: (val) => {
+				if (!val && (
+					!formValues?.mobile_number?.number
+					|| !formValues?.mobile_number?.country_code
+				)) {
+					return 'Either Phone Number or Email is Required.';
+				}
+
+				return true;
 			},
 		},
 	},
 ];
 
-export default CREATE_LEAD_CONTROLS;
+export default createLeadControls;
