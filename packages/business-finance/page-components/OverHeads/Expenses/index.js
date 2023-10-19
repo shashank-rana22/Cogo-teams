@@ -1,10 +1,11 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable max-len */
 import { Popover, Button, Input, Tooltip } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMInfo, IcMSearchlight, IcMProvision } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
@@ -23,6 +24,7 @@ import ViewRecurringSummery from './CreateExpenseModal/ViewRecurringSummery';
 import useListExpense from './hooks/useListExpense';
 import useListExpenseConfig from './hooks/useListExpenseConfig';
 import useSendEmail from './hooks/useSendEmail';
+import useSendOverheadExpense from './hooks/useSendOverheadExpense';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
 import {
@@ -66,6 +68,7 @@ function ExpenseComponent() {
 	});
 	const { getRecurringList, recurringListData, recurringListLoading } =	useListExpenseConfig({ expenseFilters, sort });
 	const { sendMail, loading: mailLoading } = useSendEmail();
+	const { sendOverheadExpense } = useSendOverheadExpense();
 
 	useEffect(() => {
 		if (recurringState === 'nonRecurring') {
@@ -175,6 +178,15 @@ function ExpenseComponent() {
 			>
 				Add Expense
 			</Button>
+		),
+		refresh: (itemData) => (
+			<IcMProvision
+				onClick={() => { sendOverheadExpense(itemData.billId); }}
+				style={{ cursor: 'pointer' }}
+				height={24}
+				width={24}
+				color="#F68B21"
+			/>
 		),
 		renderCategory: (itemData) => {
 			const { categoryName = '', category = '' } = itemData || {};

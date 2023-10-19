@@ -1,9 +1,10 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable max-len */
 import { Button, Placeholder, Pagination } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMArrowUp, IcMProvision } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
@@ -12,6 +13,7 @@ import filtersconfig from '../../Vendors/filtersconfig';
 import ViewRecurringSummery from '../CreateExpenseModal/ViewRecurringSummery';
 import useListExpense from '../hooks/useListExpense';
 import useSendEmail from '../hooks/useSendEmail';
+import useSendOverheadExpense from '../hooks/useSendOverheadExpense';
 
 import styles from './styles.module.css';
 
@@ -48,6 +50,7 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 	const handlePageChange = (pageValue) => {
 		setCurrentPage(pageValue);
 	};
+	const { sendOverheadExpense } = useSendOverheadExpense();
 
 	return (
 		<div className={styles.container}>
@@ -107,6 +110,7 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 								</div>
 								{billList?.map((bill) => {
 									const {
+										billId,
 										billNumber,
 										grandTotal,
 										paidAmount = 0,
@@ -309,6 +313,18 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 											</div>
 											<div className={styles.view}>
 												<ViewRecurringSummery itemData={bill} />
+											</div>
+											<div className={styles.section}>
+												<div className={styles.element}>
+													<IcMProvision
+														onClick={() => { sendOverheadExpense(billId); }}
+														style={{ cursor: 'pointer' }}
+														height={24}
+														width={24}
+														color="#F68B21"
+													/>
+
+												</div>
 											</div>
 										</div>
 									);
