@@ -9,8 +9,9 @@ import TicketChat from './TicketChat';
 function Modals(props) {
 	const { modalData, setModalData } = props;
 
-	const { partnerId = '' } = useSelector(({ profile }) => ({
-		partnerId: profile.partner.id,
+	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
+		partnerId : profile.partner.id,
+		userId    : profile.user.id,
 	}));
 
 	const [isInternal, setIsInternal] = useState(true);
@@ -25,7 +26,13 @@ function Modals(props) {
 			onClose={() => { setModalData(null); setIsInternal(true); }}
 			className={styles.modal_container}
 		>
-			<TicketChat {...props} isInternal={isInternal} setIsInternal={setIsInternal} partnerId={partnerId} />
+			<TicketChat
+				{...props}
+				isInternal={isInternal}
+				setIsInternal={setIsInternal}
+				partnerId={partnerId}
+				userId={userId}
+			/>
 		</Modal>
 	);
 }
