@@ -42,25 +42,25 @@
 	}
 }
 
-.fcl {
+.fcl_freight {
 	font-size: 14px;
 	font-weight: 600;
 	color: #356efd;
 }
 
-.lcl {
+.lcl_freight {
 	font-size: 14px;
 	font-weight: 600;
 	color: #65acf7;
 }
 
-.air {
+.air_freight {
 	font-size: 14px;
 	font-weight: 600;
 	color: #ef9b9b;
 }
 
-.fcl-loc {
+.fcl_freight_local {
 	font-size: 14px;
 	font-weight: 600;
 	color: #1d1d1d;

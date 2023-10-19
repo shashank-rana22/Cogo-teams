@@ -14,6 +14,7 @@ const getControls = () => {
 			name        : 'profitability',
 			label       : 'Profitability (%)',
 			type        : 'slider',
+			value       : [-100, 100],
 			min         : -100,
 			max         : 100,
 			step        : 1,

@@ -9,29 +9,24 @@ import useUpdateRfqRateMargin from './useUpdateRfqRateMargin';
 
 const ICON_MAPPING = {
 	fcl_freight: {
-		service_icon   : IcCFcl,
-		service_label  : 'FCL',
-		css_class_name : 'fcl',
+		service_icon  : IcCFcl,
+		service_label : 'FCL',
 	},
 	lcl_freight: {
-		service_icon   : IcCLcl,
-		service_label  : 'LCL',
-		css_class_name : 'lcl',
+		service_icon  : IcCLcl,
+		service_label : 'LCL',
 	},
 	air_freight: {
-		service_icon   : IcCAir,
-		service_label  : 'AIR',
-		css_class_name : 'air',
+		service_icon  : IcCAir,
+		service_label : 'AIR',
 	},
 	fcl_freight_local: {
-		service_icon   : IcMLocalCharges,
-		service_label  : 'FCL Local',
-		css_class_name : 'fcl-loc',
+		service_icon  : IcMLocalCharges,
+		service_label : 'FCL Local',
 	},
 	lcl_freight_local: {
-		service_icon   : IcMLocalCharges,
-		service_label  : 'LCL Local',
-		css_class_name : 'lcl-loc',
+		service_icon  : IcMLocalCharges,
+		service_label : 'LCL Local',
 	},
 };
 
@@ -98,7 +93,6 @@ const useGetPortCard = ({ props }) => {
 
 	const Component = ICON_MAPPING?.[service_type]?.service_icon;
 	const iconText = ICON_MAPPING?.[service_type]?.service_label;
-	const cssClassName = ICON_MAPPING?.[service_type]?.css_class_name;
 
 	return {
 		loading,
@@ -131,7 +125,6 @@ const useGetPortCard = ({ props }) => {
 		margin_limit,
 		rfq_state,
 		iconText,
-		cssClassName,
 	};
 };
 
