@@ -63,8 +63,6 @@ function ListRateCards({
 	filters = {},
 	setFilters = () => {},
 	refetchSearch = () => {},
-	selectedWeek = {},
-	setSelectedWeek = () => {},
 	paginationProps = {},
 	loading = false,
 	infoBanner = {},
@@ -75,6 +73,8 @@ function ListRateCards({
 	setRouterLoading = () => {},
 	setScheduleLoading = () => {},
 	scheduleLoading = false,
+	setSelectedSchedule = () => {},
+	selectedSchedule = () => {},
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
@@ -154,12 +154,11 @@ function ListRateCards({
 			<Schedules
 				paginationProps={paginationProps}
 				filters={filters}
-				setFilters={setFilters}
 				setComparisonRates={setComparisonRates}
-				setSelectedWeek={setSelectedWeek}
-				selectedWeek={selectedWeek}
 				loading={loading}
 				setScheduleLoading={setScheduleLoading}
+				setSelectedSchedule={setSelectedSchedule}
+				selectedSchedule={selectedSchedule}
 			/>
 
 			<AppliedFilters

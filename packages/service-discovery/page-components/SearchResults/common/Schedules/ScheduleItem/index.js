@@ -12,10 +12,9 @@ const getKey = (data) => `${data.start_date} ${data.end_date}`;
 function ScheduleItem({
 	data = {},
 	selectedWeek = {},
-	setSelectedWeek = () => {},
-	setFilters = () => {},
 	setComparisonRates = () => {},
 	setScheduleLoading = () => {},
+	setSelectedSchedule = () => {},
 }) {
 	const {
 		end_date = '',
@@ -30,19 +29,10 @@ function ScheduleItem({
 		const isExistingSchedule = selectedWeek.end_date === data.end_date
 		&& selectedWeek.start_date === data.start_date;
 
-		setSelectedWeek(() => {
-			if (isExistingSchedule) {
-				return {};
-			}
-
-			return data;
-		});
-
-		setFilters((prev) => ({
-			...prev,
+		setSelectedSchedule({
 			departure_before : !isExistingSchedule ? end_date : undefined,
 			departure_after  : !isExistingSchedule ? start_date : undefined,
-		}));
+		});
 
 		setScheduleLoading(true);
 	};
@@ -55,7 +45,6 @@ function ScheduleItem({
 			}`}
 			onClick={handleChange}
 		>
-
 			<IcMCross className={cl`${styles.cross_icon} ${styles.show_cross_icon}`} />
 
 			<span

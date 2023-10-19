@@ -9,8 +9,8 @@ const ONE_VALUE = 1;
 
 function Footer({
 	paginationProps = {},
-	selectedWeek = {},
 	schedules = [],
+	selectedWeek = {},
 }) {
 	const { total_count } = paginationProps;
 

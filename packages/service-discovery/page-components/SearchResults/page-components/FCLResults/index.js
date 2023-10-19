@@ -22,8 +22,6 @@ function FCLResults({
 	setFilters = () => {},
 	headerProps = {},
 	setHeaderProps = () => {},
-	selectedWeek = {},
-	setSelectedWeek = () => {},
 	refetchSearch = () => {},
 	paginationProps = {},
 	loading = false,
@@ -34,6 +32,8 @@ function FCLResults({
 	setRouterLoading = () => {},
 	setScheduleLoading = () => {},
 	scheduleLoading = false,
+	setSelectedSchedule = () => {},
+	selectedSchedule = () => {},
 }) {
 	const { cogoAssuredRates, marketplaceRates } = rates.reduce((acc, rate) => {
 		if (rate.source === 'cogo_assured_rate') {
@@ -57,8 +57,6 @@ function FCLResults({
 			setFilters,
 			paginationProps,
 			loading,
-			selectedWeek,
-			setSelectedWeek,
 			refetchSearch,
 			infoBanner,
 			setInfoBanner,
@@ -68,6 +66,8 @@ function FCLResults({
 			setRouterLoading,
 			setScheduleLoading,
 			scheduleLoading,
+			setSelectedSchedule,
+			selectedSchedule,
 		},
 		comparison: {
 			detail,

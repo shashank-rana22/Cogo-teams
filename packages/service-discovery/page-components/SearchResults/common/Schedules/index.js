@@ -13,21 +13,22 @@ const LOADING_ARRAY_LENGTH = 5;
 function Schedules({
 	paginationProps = {},
 	filters = {},
-	selectedWeek = {},
-	setSelectedWeek = () => {},
-	setFilters = () => {},
 	setComparisonRates = () => {},
 	loading = false,
 	setScheduleLoading = () => {},
+	setSelectedSchedule = () => {},
+	selectedSchedule = {},
 }) {
-	const { schedules = [], loading: weeklySchedulesLoading } = useGetWeeklySchedules({
-		filters,
-		setSelectedWeek,
-	});
+	const { schedules = [], loading: weeklySchedulesLoading } = useGetWeeklySchedules({ filters });
 
 	if (!loading && isEmpty(schedules)) {
 		return null;
 	}
+
+	const selectedWeek = schedules.find(
+		(item) => item.start_date === selectedSchedule.departure_after
+			&& item.end_date === selectedSchedule.departure_before,
+	) || {};
 
 	return (
 		<div className={styles.container}>
@@ -53,10 +54,9 @@ function Schedules({
 								key={`${weekItem.start_date}_${weekItem.end_date}`}
 								data={weekItem}
 								selectedWeek={selectedWeek}
-								setSelectedWeek={setSelectedWeek}
-								setFilters={setFilters}
 								setComparisonRates={setComparisonRates}
 								setScheduleLoading={setScheduleLoading}
+								setSelectedSchedule={setSelectedSchedule}
 							/>
 						))}
 					</div>
@@ -64,7 +64,6 @@ function Schedules({
 					<Footer
 						paginationProps={paginationProps}
 						selectedWeek={selectedWeek}
-						loading={loading}
 						schedules={schedules}
 					/>
 				</div>

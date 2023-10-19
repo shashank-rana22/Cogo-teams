@@ -37,7 +37,6 @@ function SearchResults() {
 	const [scheduleLoading, setScheduleLoading] = useState(false);
 	const [headerProps, setHeaderProps] = useState({});
 	const [comparisonRates, setComparisonRates] = useState([]);
-	const [selectedWeek, setSelectedWeek] = useState({});
 	const [infoBanner, setInfoBanner] = useState({});
 
 	const isGuideViewed = localStorage.getItem(`guide_completed_for_${id}`) || false;
@@ -54,6 +53,8 @@ function SearchResults() {
 		selectedCard,
 		page = 1,
 		rates = [],
+		setSelectedSchedule = () => {},
+		selectedSchedule = {},
 	} = useGetSpotSearch({ setComparisonRates, setInfoBanner, setRouterLoading, setScheduleLoading });
 
 	const { createSearch, loading: createLoading } = useCreateSearch({ setRouterLoading, setHeaderProps });
@@ -168,8 +169,6 @@ function SearchResults() {
 					setHeaderProps={setHeaderProps}
 					refetchSearch={refetchSearch}
 					screen={screen}
-					selectedWeek={selectedWeek}
-					setSelectedWeek={setSelectedWeek}
 					possible_subsidiary_services={possible_subsidiary_services}
 					infoBanner={infoBanner}
 					setInfoBanner={setInfoBanner}
@@ -177,6 +176,8 @@ function SearchResults() {
 					setRouterLoading={setRouterLoading}
 					setScheduleLoading={setScheduleLoading}
 					scheduleLoading={scheduleLoading}
+					setSelectedSchedule={setSelectedSchedule}
+					selectedSchedule={selectedSchedule}
 				/>
 			</div>
 		</div>

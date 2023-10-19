@@ -25,9 +25,6 @@ function ListRates({
 	comparisonRates = {},
 	setScreen = () => {},
 	setComparisonRates = () => {},
-	setPage = () => {},
-	selectedWeek = {},
-	setSelectedWeek = () => {},
 	paginationProps = {},
 	contract_detail = {},
 	infoBanner = {},
@@ -36,6 +33,8 @@ function ListRates({
 	setRouterLoading = () => {},
 	setScheduleLoading = () => {},
 	scheduleLoading = false,
+	setSelectedSchedule = () => {},
+	selectedSchedule = () => {},
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
@@ -98,13 +97,11 @@ function ListRates({
 			<Schedules
 				paginationProps={paginationProps}
 				filters={filters}
-				setFilters={setFilters}
-				setPage={setPage}
 				setComparisonRates={setComparisonRates}
-				setSelectedWeek={setSelectedWeek}
-				selectedWeek={selectedWeek}
 				loading={loading}
 				setScheduleLoading={setScheduleLoading}
+				setSelectedSchedule={setSelectedSchedule}
+				selectedSchedule={selectedSchedule}
 			/>
 
 			<AppliedFilters

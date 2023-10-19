@@ -14,11 +14,8 @@ function AIRResults({
 	comparisonRates = {},
 	filters = {},
 	setFilters = () => {},
-	setPage = () => {},
 	headerProps = {},
 	setHeaderProps = () => {},
-	selectedWeek = {},
-	setSelectedWeek = () => {},
 	refetchSearch:refetch = () => {},
 	paginationProps = {},
 	loading = false,
@@ -29,6 +26,8 @@ function AIRResults({
 	setRouterLoading = () => {},
 	setScheduleLoading = () => {},
 	scheduleLoading = false,
+	setSelectedSchedule = () => {},
+	selectedSchedule = () => {},
 }) {
 	const SCREENS_MAPPING = {
 		listRateCard: {
@@ -44,11 +43,8 @@ function AIRResults({
 				comparisonRates,
 				filters,
 				setFilters,
-				setPage,
 				paginationProps,
 				loading,
-				selectedWeek,
-				setSelectedWeek,
 				refetch,
 				infoBanner,
 				setInfoBanner,
@@ -56,6 +52,8 @@ function AIRResults({
 				setRouterLoading,
 				setScheduleLoading,
 				scheduleLoading,
+				setSelectedSchedule,
+				selectedSchedule,
 			},
 		},
 		comparison: {
