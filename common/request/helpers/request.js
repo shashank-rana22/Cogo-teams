@@ -70,7 +70,6 @@ request.interceptors.request.use((oldConfig) => {
 			newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
 		}
 	}
-
 	if (PEEWEE_SERVICES.includes(serviceName) && isDevMode) {
 		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
 	}

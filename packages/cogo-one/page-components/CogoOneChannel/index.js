@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
+import { useRouter, dynamic } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
@@ -26,9 +26,10 @@ import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
 import HeaderBar from './HeaderBar';
 import ModalComp from './ModalComps';
-import PortPairOrgFilters from './PortPairOrgFilters';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
+
+const PortPairOrgFilters = dynamic(() => import('./PortPairOrgFilters'));
 
 function CogoOne() {
 	const { query: { assigned_chat = '', channel_type = '' } } = useRouter();

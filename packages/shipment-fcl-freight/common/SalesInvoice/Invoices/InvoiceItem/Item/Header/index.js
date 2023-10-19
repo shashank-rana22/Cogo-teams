@@ -23,6 +23,7 @@ function Header({
 	salesInvoicesRefetch = () => {},
 	refetchCN = () => {},
 	isCrossEntity = false,
+	creditNoteList = [],
 }) {
 	const [open, setOpen] = useState(false);
 	const [askNullify, setAskNullify] = useState(false);
@@ -73,6 +74,7 @@ function Header({
 					isIRNGenerated={isIRNGenerated}
 					setAskNullify={setAskNullify}
 					isCrossEntity={isCrossEntity}
+					creditNoteList={creditNoteList}
 				/>
 
 				<div

@@ -13,6 +13,7 @@ function Services() {
 		isGettingShipment,
 		servicesList,
 		servicesLoading,
+		activeStakeholder,
 	} = useContext(ShipmentDetailContext);
 
 	const { serviceObj, upsellServices } = useMemo(() => helperFuncs(servicesList), [servicesList]);
@@ -32,6 +33,7 @@ function Services() {
 									<ServiceDetails
 										key={serviceKey}
 										servicesData={serviceData}
+										activeStakeholder={activeStakeholder}
 									/>
 								))}
 							</div>

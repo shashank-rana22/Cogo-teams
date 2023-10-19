@@ -2,11 +2,11 @@ import { Input, Pagination } from '@cogoport/components';
 import { IcMCross, IcMSearchdark } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import StyledTable from '../../commons/styledTable/index.tsx';
-import useGetOrganizationList from '../../hooks/useGetOrganizationList.ts';
+import StyledTable from '../../commons/styledTable/index';
+import useGetOrganizationList from '../../hooks/useGetOrganizationList';
 
 import { manageBprColumn } from './Config/manageBprColumn';
-import SearchCard from './SearchCard/index.tsx';
+import SearchCard from './SearchCard/index';
 import styles from './styles.module.css';
 
 function ManageBpr() {

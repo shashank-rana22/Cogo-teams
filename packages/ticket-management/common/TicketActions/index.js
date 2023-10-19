@@ -9,7 +9,6 @@ import { getTicketActionLabel } from '../../constants';
 import ActionConfirmation from './ActionConfirmation';
 import styles from './styles.module.css';
 
-const OPEN_TICKETS_CHECK = ['escalated', 'unresolved'];
 const OPEN_TICKETS_VALUES = ['resolve', 'reassign', 'escalate'];
 const AUTHORISER_TICKETS_VALUES = ['resolve_request', 'reassign', 'escalate'];
 
@@ -17,22 +16,28 @@ const PENDING_TICKETS_CHECK = ['pending', 'resolve_requested'];
 const PENDING_TICKETS_VALUES = ['approve', 'reject', 'reassign', 'escalate'];
 
 const CLOSED_TICKETS_VALUES = ['reopen'];
-
+const TICKET_STATUS_REOPEN = ['closed', 'overdue'];
 const MODAL_ACTIONS = ['reassign', 'escalate'];
 
 function getActionType({ ticketStatus, isClosureAuthorizer }) {
-	if (OPEN_TICKETS_CHECK.includes(ticketStatus)) {
+	if (ticketStatus === 'unresolved') {
 		if (isClosureAuthorizer) {
 			return OPEN_TICKETS_VALUES;
 		}
 		return AUTHORISER_TICKETS_VALUES;
+	}
+	if (ticketStatus === 'escalated') {
+		if (isClosureAuthorizer) {
+			return OPEN_TICKETS_VALUES;
+		}
+		return MODAL_ACTIONS;
 	}
 
 	if ((PENDING_TICKETS_CHECK.includes(ticketStatus) && isClosureAuthorizer)) {
 		return PENDING_TICKETS_VALUES;
 	}
 
-	if (ticketStatus === 'closed') {
+	if (TICKET_STATUS_REOPEN.includes(ticketStatus)) {
 		return	CLOSED_TICKETS_VALUES;
 	}
 
@@ -95,7 +100,6 @@ function TicketActions({
 	const { show, actionType } = confirmationConfig || {};
 
 	const actionMappings = getActionType({ ticketStatus, isClosureAuthorizer });
-
 	const filteredActions = isModal ? actionMappings : actionMappings.filter((item) => !MODAL_ACTIONS.includes(item));
 
 	const handleAction = (e, item) => {

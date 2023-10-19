@@ -882,5 +882,6 @@
     "validity_enrichment_request_actions": "操作",
     "validity_enrichment_status_valid": "有效",
     "validity_enrichment_status_invalid": "无效",
-    "validity_status_placeholder": "有效期状态"
+    "validity_status_placeholder": "有效期状态",
+    "org_created_at": "入职时间"
 }

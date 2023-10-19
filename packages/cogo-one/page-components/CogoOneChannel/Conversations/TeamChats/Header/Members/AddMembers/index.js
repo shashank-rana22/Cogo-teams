@@ -3,10 +3,15 @@ import { AsyncSelect } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import { COGOVERSE_AGENT_FILTERS_MAPPINGS, HR_TEAM_FILTER } from '../../../../../../../constants/filterKeysMapping';
 import getCommonAgentType from '../../../../../../../utils/getCommonAgentType';
 import UserCard from '../../UserCard';
 
 import styles from './styles.module.css';
+
+const ADMIN_VIEW = ['admin', 'cogoone_admin', 'hr', 'hr_admin'];
+
+const TEAM_WISE_ADMINS = ['sales_admin', 'supply_admin', 'shipment_specialist_admin'];
 
 function AddMembers({
 	viewType = '',
@@ -48,7 +53,11 @@ function AddMembers({
 		);
 	};
 
-	const teamsAdminFilter = viewType === 'cogoone_admin' ? undefined : getCommonAgentType({ viewType });
+	const isTeamsAdmin = ADMIN_VIEW.includes(viewType);
+
+	const isTeamWiseAdmin = TEAM_WISE_ADMINS.includes(viewType);
+
+	const commonAgentType = getCommonAgentType({ viewType });
 
 	return (
 		<div className={styles.container}>
@@ -69,9 +78,12 @@ function AddMembers({
 				params={{
 					filters: {
 						status_not : 'inactive',
-						agent_type : viewType?.includes('admin')
-							? undefined : teamsAdminFilter || undefined,
-						team_admins: !viewType?.includes('admin') ? undefined : [teamsAdminFilter],
+						agent_type : isTeamsAdmin
+							? undefined : [
+								...(COGOVERSE_AGENT_FILTERS_MAPPINGS[viewType] || []),
+								...HR_TEAM_FILTER,
+							],
+						teams_admins: isTeamWiseAdmin ? [commonAgentType] : undefined,
 					},
 					sort_by: 'agent_type',
 				}}
