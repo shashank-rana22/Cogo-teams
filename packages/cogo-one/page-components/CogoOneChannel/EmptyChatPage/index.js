@@ -57,7 +57,7 @@ function EmptyChatPage({
 	}
 
 	if (showPlatformAdoption) {
-		return <PlatformAdoption />;
+		return <PlatformAdoption mailProps={mailProps} />;
 	}
 
 	return (

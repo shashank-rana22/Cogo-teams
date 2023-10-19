@@ -1,13 +1,41 @@
-import { Button, Tooltip } from '@cogoport/components';
+import { Button, Tooltip, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcAWatchDemo, IcMInfo, IcMOverflowDot } from '@cogoport/icons-react';
+import { IcAWatchDemo, IcMInfo, IcMOverflowDot, IcMPlatformDemo, IcMCalendar, IcMClock } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
+import ScheduleDemo from './ScheduleDemo';
 import styles from './styles.module.css';
 
-function DemoCard({ itm = {} }) {
+function DemoCard({ itm = {}, mailProps = {} }) {
 	const { label, subLabel, accountType, source, requestedBy } = itm || {};
+	const { setButtonType, setEmailState, buttonType, signature } = mailProps;
+
+	const [scheduleDemo, setScheduleDemo] = useState({
+		isScheduleDemo : false,
+		scheduleData   : null,
+	});
+
+	const handleSendEmail = () => {
+		if (buttonType) {
+			Toast.warn('Email compose is already in progress');
+			return;
+		}
+
+		setButtonType('send_mail');
+		setEmailState(
+			(prev) => ({
+				...prev,
+				body          : signature,
+				rteContent    : '',
+				subject       : '',
+				toUserEmail   : ['bishal.saha@cogoport.com'],
+				ccrecipients  : [],
+				bccrecipients : [],
+			}),
+		);
+	};
 
 	return (
 		<div className={styles.card}>
@@ -32,21 +60,21 @@ function DemoCard({ itm = {} }) {
 					</div>
 				</div>
 				<div className={styles.action}>
-					<IcMInfo />
-					<IcMOverflowDot />
+					<IcMInfo className={styles.info_icon} />
+					<IcMOverflowDot className={styles.dot_icon} />
 				</div>
 
 			</div>
 			<div className={styles.body_info}>
 				<div className={styles.each_row}>
 					<div className={styles.title}>Requested by :</div>
-					<div className={styles.docs}>{requestedBy}</div>
+					<div className={styles.request_name}>{requestedBy}</div>
 				</div>
 				<div className={styles.each_row}>
 					<div className={styles.title}>Trade Type :</div>
-					<div className={styles.name}>
+					<div className={styles.source}>
 						{source}
-						<div className={styles.role}>
+						<div className={styles.source_date}>
 							{formatDate({
 								date       : new Date(),
 								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -58,24 +86,60 @@ function DemoCard({ itm = {} }) {
 					</div>
 				</div>
 				<div className={styles.each_row}>
-					<div className={styles.title}>Documents Uploaded :</div>
-					{/* <div className={styles.docs}>
-						<IcMDocument width={15} height={15} />
-						<span>View All</span>
-					</div> */}
+					<div className={styles.title}>Scheduled at : </div>
+					<div className={styles.schedule_time}>
+						<IcMCalendar className={styles.calendar_icon} />
+						{formatDate({
+							date       : new Date(),
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+							formatType : 'date',
+						})}
+						<div className={styles.seperator} />
+						<IcMClock className={styles.calendar_icon} />
+						{formatDate({
+							date       : new Date(),
+							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType : 'time',
+						})}
+					</div>
+				</div>
+				<div className={styles.each_row}>
+					<div className={styles.content}>
+						<div className={styles.text}>
+							Hema Sawant
+							<span>has a demo scheduled at </span>
+						</div>
+						<div className={styles.merge_button}>Merge</div>
+					</div>
 				</div>
 			</div>
 			<div className={styles.line_break} />
-			<div className={styles.footer_info}>
-				{/* <div className={styles.time_left}>
-					<IcMTimer width={20} height={20} fill="#F37166" />
-					10:09 m left
-				</div> */}
-				<Button themeType="secondary" size="sm">
-					{/* <IcMFtick width={20} height={20} fill="#ABCD62" /> */}
-					Verify
+			<div className={styles.footer_container}>
+				<Button
+					size="md"
+					themeType="secondary"
+					onClick={handleSendEmail}
+				>
+					<IcMPlatformDemo
+						fill="grey"
+						className={styles.schedule_demo_icon}
+					/>
+					Email Demo
+				</Button>
+				<Button
+					size="md"
+					themeType="secondary"
+					onClick={() => setScheduleDemo((prev) => ({
+						...prev,
+						isScheduleDemo : true,
+						scheduleData   : {},
+					}))}
+				>
+					<IcMCalendar fill="grey" className={styles.schedule_demo_icon} />
+					Schedule Demo
 				</Button>
 			</div>
+			<ScheduleDemo scheduleDemo={scheduleDemo} setScheduleDemo={setScheduleDemo} />
 		</div>
 	);
 }

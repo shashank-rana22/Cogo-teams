@@ -1,4 +1,4 @@
-import { Button, Tooltip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcAIncoterms, IcMOverflowDot, IcMInfo, IcMDocument, IcMTimer, IcMFtick, IcMCall } from '@cogoport/icons-react';
@@ -6,8 +6,13 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const DOC_ARRAY = ['Pan.pdf', 'GST.pdf', 'Aadhar.pdf', 'Income.pdf'];
+
 function KycVerifyCard({ itm = {} }) {
 	const { label, subLabel, accountType, requestedBy, agentRole } = itm || {};
+
+	const FIRST_TWO_ITEM = DOC_ARRAY.slice(0, 2);
+	const REMAINING_ITEM = DOC_ARRAY.slice(2);
 
 	return (
 		<div className={styles.card}>
@@ -32,34 +37,51 @@ function KycVerifyCard({ itm = {} }) {
 					</div>
 				</div>
 				<div className={styles.action}>
-					<IcMInfo />
-					<IcMOverflowDot />
+					<IcMInfo className={styles.info_icon} />
+					<IcMOverflowDot className={styles.dot_icon} />
 				</div>
 
 			</div>
 			<div className={styles.body_info}>
 				<div className={styles.each_row}>
 					<div className={styles.title}>Documents Uploaded :</div>
-					<div className={styles.docs}>
-						<IcMDocument width={15} height={15} />
-						<span>View All</span>
+					<div className={styles.docs_container}>
+						<div className={styles.wrap}>
+							{FIRST_TWO_ITEM.map((it) => (
+								<div className={styles.each_doc} key={it}>
+									<IcMFtick width={16} height={16} fill="#abcd62" />
+									{/* <Tooltip placement="top" content={it}> */}
+									<div className={styles.doc_name}>
+										{it}
+									</div>
+									{/* </Tooltip> */}
+								</div>
+							))}
+						</div>
+						{DOC_ARRAY.length > 2 ? (
+							<div className={styles.remaining_content}>
+								<div className={styles.remian_count}>{`+${REMAINING_ITEM.length} more`}</div>
+								<div className={styles.view_all}>
+									<IcMDocument width={15} height={15} />
+									<span>View All</span>
+								</div>
+							</div>
+						) : null}
 					</div>
 				</div>
 				<div className={styles.each_row}>
 					<div className={styles.title}>Requsted By :</div>
-					<div className={styles.name}>
+					<div className={styles.request_name}>
 						{requestedBy}
 						<div className={styles.role}>{agentRole}</div>
 						<div className={styles.role}>
-							{
-							formatDate({
+							{formatDate({
 								date       : new Date(),
 								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 								formatType : 'dateTime',
 								separator  : ' | ',
-							})
-						}
+							})}
 						</div>
 					</div>
 				</div>
@@ -71,10 +93,10 @@ function KycVerifyCard({ itm = {} }) {
 					10:09 m left
 				</div>
 				<div className={styles.button_section}>
-					<Button themeType="secondary" size="sm">
-						<IcMFtick width={20} height={20} fill="#ABCD62" />
+					<div className={styles.verify_button}>
+						<IcMFtick className={styles.ftick_icon} />
 						Verify
-					</Button>
+					</div>
 					<div className={styles.call_icon}>
 						<IcMCall width={18} height={18} fill="#fff" />
 					</div>

@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Pagination } from '@cogoport/components';
 import { IcMPlansExpiring, IcMArrowNext, IcMFilter } from '@cogoport/icons-react';
 
 import { ACTIVITY_MAPPING } from '../../../../constants/PLATFORM_ADOPTION_CONSTANTS';
@@ -6,7 +6,7 @@ import { ACTIVITY_MAPPING } from '../../../../constants/PLATFORM_ADOPTION_CONSTA
 import AdoptionList from './AdoptionList';
 import styles from './styles.module.css';
 
-function PlatformAdoption() {
+function PlatformAdoption({ mailProps = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_section}>
@@ -42,7 +42,15 @@ function PlatformAdoption() {
 					<IcMFilter width={15} height={15} />
 				</Button>
 			</div>
-			<AdoptionList />
+			<AdoptionList mailProps={mailProps} />
+			<div className={styles.pagination_info}>
+				<Pagination
+					type="number"
+					currentPage={1}
+					totalItems={30}
+					pageSize={6}
+				/>
+			</div>
 		</div>
 	);
 }

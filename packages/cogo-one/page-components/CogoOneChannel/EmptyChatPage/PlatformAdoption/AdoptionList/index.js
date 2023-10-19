@@ -8,7 +8,7 @@ import KycVerifyCard from './KycVerifyCard';
 import styles from './styles.module.css';
 import TradeTypeVerifyCard from './TradeTypeVerifyCard';
 
-function AdoptionList() {
+function AdoptionList({ mailProps = {} }) {
 	return (
 		<div className={styles.container}>
 			{ADOPTION_CONTROLS?.map((itm) => {
@@ -21,8 +21,8 @@ function AdoptionList() {
 				return (
 					<React.Fragment key={name}>
 						{kycVerify ? <KycVerifyCard itm={itm} /> : null}
-						{accountAllocate ? <AccountAllocateCard /> : null}
-						{demo ? <DemoCard itm={itm} /> : null}
+						{accountAllocate ? <AccountAllocateCard itm={itm} /> : null}
+						{demo ? <DemoCard itm={itm} mailProps={mailProps} /> : null}
 						{tradeTypeVerify ? <TradeTypeVerifyCard itm={itm} /> : null}
 					</React.Fragment>
 				);

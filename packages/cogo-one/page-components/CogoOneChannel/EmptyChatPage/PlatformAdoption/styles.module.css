@@ -1,6 +1,6 @@
 .container {
+	width: 100%;
 	height: 100%;
-	padding: 16px 16px 10px;
 	background-color: #fff;
 	border-radius: 8px;
 	box-shadow: 0 0 4px #efefef;
@@ -11,7 +11,9 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	margin-bottom: 16px;
+	padding: 16px 16px 10px;
+
+	/* margin-bottom: 16px; */
 }
 
 .title {
@@ -38,6 +40,9 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
+	padding: 0 16px;
+
+	/* margin-bottom: 16px; */
 }
 
 .tabs {
@@ -86,4 +91,14 @@
 	svg {
 		fill: #034afd;
 	}
+}
+
+.pagination_info {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	height: 45px;
+	padding-left: 8px;
+	background-color: #fff;
+	box-shadow: 0 0 8px 0 #2c3e5033;
 }

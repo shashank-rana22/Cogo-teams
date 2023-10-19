@@ -1,4 +1,4 @@
-import { Button, Tooltip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import {
@@ -35,21 +35,21 @@ function TradeTypeVerifyCard({ itm = {} }) {
 					</div>
 				</div>
 				<div className={styles.action}>
-					<IcMInfo />
-					<IcMOverflowDot />
+					<IcMInfo className={styles.info_icon} />
+					<IcMOverflowDot className={styles.dot_icon} />
 				</div>
 
 			</div>
 			<div className={styles.body_info}>
 				<div className={styles.each_row}>
 					<div className={styles.title}>Requested by :</div>
-					<div className={styles.docs}>{requestedBy}</div>
+					<div className={styles.request_name}>{requestedBy}</div>
 				</div>
 				<div className={styles.each_row}>
 					<div className={styles.title}>Trade Type :</div>
-					<div className={styles.name}>
+					<div className={styles.source}>
 						{tradeType}
-						<div className={styles.role}>
+						<div className={styles.source_date}>
 							{formatDate({
 								date       : new Date(),
 								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -74,10 +74,10 @@ function TradeTypeVerifyCard({ itm = {} }) {
 					<IcMTimer width={20} height={20} fill="#F37166" />
 					10:09 m left
 				</div>
-				<Button themeType="secondary" size="sm">
-					<IcMFtick width={20} height={20} fill="#ABCD62" />
+				<div className={styles.verify_button}>
+					<IcMFtick className={styles.ftick_icon} />
 					Verify
-				</Button>
+				</div>
 			</div>
 		</div>
 	);
