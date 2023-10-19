@@ -68,7 +68,7 @@ function CancelIrn({
 						<div className={styles.styled_button}>
 							<Button
 								type="submit"
-								onClick={() => onSubmit}
+								onClick={onSubmit}
 								disabled={
 							response.value === '' || response.remarks === '' || loading
 						}

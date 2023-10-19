@@ -1,4 +1,4 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 
 import { TABS_MAPPING } from '../../../../../constants';
 
@@ -11,9 +11,18 @@ function FeedbackList({
 	activeTab = '',
 	feedbacks = [],
 	loading = false,
+	toggleValue = false,
+	setToogleValue = () => {},
 }) {
 	return (
 		<div className={styles.list}>
+			<Toggle
+				size="sm"
+				onLabel="Raised to me"
+				offLabel="Raised by me"
+				value={toggleValue}
+				onChange={() => setToogleValue((p) => !p)}
+			/>
 			<Tabs
 				fullWidth
 				activeTab={activeTab}
