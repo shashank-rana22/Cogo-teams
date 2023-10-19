@@ -1,12 +1,10 @@
-import { Tooltip } from '@cogoport/components';
-import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMPortArrow } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import getLocations from '../../../../../../../../utils/getLocationConfig';
 import GetServiceInfo from '../../../../../../../commons/GetServiceInfo';
 
+import RenderLocation from './RenderLocation';
 import styles from './styles.module.css';
 
 function PortDetails({ data = {}, showDate = false }) {
@@ -23,115 +21,6 @@ function PortDetails({ data = {}, showDate = false }) {
 
 	const serviceIcon = GetServiceInfo(data?.shipment_type);
 
-	function HandleLocationDetails(location, icdInfo) {
-		return (
-			<>
-				<div className={styles.port_code}>
-					{location?.port_code || location?.postal_code ? (
-						<div className={styles.code}>
-							(
-							{location?.port_code || location?.postal_code}
-							)
-						</div>
-					) : (
-						<div style={{ height: '16px' }} />
-					)}
-
-					<div className={styles.country}>{location?.country}</div>
-				</div>
-
-				<div className={styles.sub_div}>
-					<Tooltip
-						interactive
-						content={(
-							<div className={styles.location_text}>
-								{location?.name}
-							</div>
-						)}
-					>
-						<div className={styles.value}>{location?.name}</div>
-					</Tooltip>
-				</div>
-
-				{icdInfo?.name ? <div className={styles.icd}>{icdInfo?.name}</div> : null}
-			</>
-		);
-	}
-
-	function RenderLocation() {
-		if (!destination) {
-			let tradeType = '';
-			if (data?.trade_type === 'export') {
-				tradeType = 'Origin';
-			} else if (data?.trade_type === 'import') {
-				tradeType = 'Destination';
-			}
-
-			if (data?.shipment_type?.includes('_local')) {
-				return (
-					<>
-						<div className={`customs ${styles.flex_row_origin}`}>
-							<div className={styles.text}>{tradeType}</div>
-							<div className={styles.text}>Location : </div>
-						</div>
-
-						<div className={styles.flex_row_origin}>
-							{HandleLocationDetails(origin, {})}
-						</div>
-					</>
-				);
-			}
-			return (
-				<>
-					<div className={`customs ${styles.flex_row_origin}`}>
-						<div className={styles.text}>{tradeType}</div>
-						<div className={styles.text}>custom clearance : </div>
-					</div>
-
-					<div className={styles.flex_row_origin}>
-						{HandleLocationDetails(origin, {})}
-					</div>
-				</>
-			);
-		}
-		return (
-			<div className={styles.location_container}>
-				<div className={styles.port_pair_container}>
-					<div className={styles.flex_row_origin}>
-						{HandleLocationDetails(origin, originMainPort)}
-						{showDate ? (
-							<div className={styles.date_container}>
-								ETD -
-								{formatDate(data?.schedule_departure, 'dd-MM-yyyy', {}, true)}
-							</div>
-						) : null}
-					</div>
-
-					<div className={styles.icon_wrapper}>
-						<IcMPortArrow />
-					</div>
-
-					<div className={styles.flex_row_dest}>
-						{HandleLocationDetails(destination, destinationMainPort)}
-						{showDate ? (
-							<div className={styles.date_container}>
-								ETA -
-								{formatDate(data?.schedule_arrival, 'dd-MM-yyyy', {}, true)}
-							</div>
-						) : null}
-					</div>
-				</div>
-
-				{showDate ? (
-					<div className={styles.status}>
-						Status:
-						{' '}
-						<div className={styles.state}>{startCase(data?.state || '')}</div>
-					</div>
-				) : null}
-			</div>
-		);
-	}
 	const shipmentTypeName = data?.shipment_type
 		?.split('_')
 		?.join(' ')
@@ -146,7 +35,14 @@ function PortDetails({ data = {}, showDate = false }) {
 				<div className={styles.service_name}>{shipmentTypeName || ''}</div>
 			</div>
 
-			{RenderLocation()}
+			<RenderLocation
+				originMainPort={originMainPort}
+				destinationMainPort={destinationMainPort}
+				origin={origin}
+				destination={destination}
+				data={data}
+				showDate={showDate}
+			/>
 		</div>
 	);
 }
