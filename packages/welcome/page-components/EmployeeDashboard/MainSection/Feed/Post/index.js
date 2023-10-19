@@ -22,6 +22,7 @@ function Post() {
 	const [draftMessages, setDraftMessages] = useState('');
 	const [clapsActive, setClapsActive] = useState(false);
 	const [postType, setPostType] = useState('public');
+	// const [taggedPeople, setTaggedPeople] = useState([])
 
 	const { getEmployeeList } = useGetEmployeeList();
 
@@ -55,6 +56,20 @@ function Post() {
 	return (
 		<>
 			<div className={styles.container}>
+				<div className={styles.feed_type}>
+					{
+						clapsActive
+							? (
+								<div className={cl`${styles.circle} ${styles.circle1_bg}`}>
+									👏
+								</div>
+							)
+							: null
+}
+					{/* <div className={cl`${styles.circle} ${styles.circle2_bg}`}>
+						RD
+					</div> */}
+				</div>
 				<MentionsInput
 					value={draftMessages}
 					onChange={(e) => setDraftMessages(e.target.value)}
