@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 
 import getSubsidiarySource from './getSubsidiarySource';
@@ -13,8 +14,6 @@ const SERVICE_MAPPING = {
 	rail_domestic_freight : 'rail_domestic_freight_rate_free_day',
 	fcl_freight           : 'fcl_freight_rate_free_day',
 };
-
-const DEFAULT_VALUE = 0;
 
 const useRequestForRate = ({
 	onClose,
@@ -60,24 +59,29 @@ const useRequestForRate = ({
 			${values.humidity}% | ventilation: ${values.ventilation}%` : '';
 
 		try {
-			if (preferred_freight_rate && !preferred_freight_rate_currency) {
-				Toast.error('Please add currency');
+			if ((preferred_freight_rate && !preferred_freight_rate_currency)
+			|| (preferred_freight_rate_currency && !preferred_freight_rate)) {
+				if (!preferred_freight_rate_currency) {
+					Toast.error('Please add currency');
+				} else Toast.error('Please add rate');
 			} else {
 				const subsidiary_source = getSubsidiarySource({
 					service_data,
 					data,
 				});
+
+				const commodityDescription = reefer_commodity_description
+					? `${reefer_commodity_description} ${commodity_description}` : commodity_description;
+
 				const body = {
-					id: spot_search_id || details?.source_id,
-					commodity_description:
-						`${reefer_commodity_description} ${commodity_description}`
-						|| undefined,
+					id                          : spot_search_id || details?.source_id,
+					commodity_description       : commodityDescription || undefined,
 					remarks                     : remarks ? [remarks] : undefined,
 					performed_by_org_id         : details.importer_exporter.id,
-					preferred_shipping_line_ids : preferred_shipping_line_ids || undefined,
-					preferred_airline_ids       : preferred_airline_ids || undefined,
-					preferred_freight_rate      : preferred_freight_rate || undefined,
-
+					preferred_shipping_line_ids : !isEmpty(preferred_shipping_line_ids)
+						? preferred_shipping_line_ids : undefined,
+					preferred_airline_ids  : !isEmpty(preferred_airline_ids) ? preferred_airline_ids : undefined,
+					preferred_freight_rate : preferred_freight_rate || undefined,
 					preferred_freight_rate_currency:
 						preferred_freight_rate_currency || undefined,
 					specificity_type:
@@ -88,7 +92,7 @@ const useRequestForRate = ({
 					preferred_total_days:
 						Number(service_data?.total_rate_quantity) || undefined,
 					preferred_free_days:
-						Number(subsidiary_source?.preferred_free_days) || DEFAULT_VALUE,
+						Number(subsidiary_source?.preferred_free_days) || undefined,
 					cargo_readiness_date,
 					service_id:
 						service_data?.service_type === 'subsidiary'
@@ -101,7 +105,7 @@ const useRequestForRate = ({
 							? SERVICE_MAPPING[data?.service_type]
 							: requestService?.service_type || undefined,
 					selected_card           : requestService?.selected_card,
-					attachment_file_urls,
+					attachment_file_urls    : !isEmpty(attachment_file_urls) ? attachment_file_urls : undefined,
 					free_days_type          : subsidiary_source?.free_days_type || undefined,
 					subsidiary_service_code : service_data?.code,
 				};
