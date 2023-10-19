@@ -1,5 +1,5 @@
 import { Checkbox } from '@cogoport/components';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // eslint-disable-next-line max-len
 import COMMODITY_SUBTYPE_MAPPING from '../../../../../../page-components/SearchResults/configurations/air/commodity-subtype-mapping';
@@ -61,6 +61,10 @@ function FormModal({
 			setValue(`packages[${index}].weight_unit`, weightUnit);
 		});
 	}, [selectedWeightType, setValue, activeTab, watch]);
+
+	useEffect(() => {
+		setCommoditySubTypeOptions(COMMODITY_SUBTYPE_MAPPING[commodity_type] || []);
+	}, [commodity_type, activeTab]);
 
 	return (
 		<div>

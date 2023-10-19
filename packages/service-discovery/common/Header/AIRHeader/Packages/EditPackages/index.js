@@ -123,16 +123,6 @@ function EditPackages({
 	};
 
 	useEffect(() => {
-		if (activeTab !== defaultValues?.load_selection_type) {
-			return;
-		}
-
-		const prefillingValuesObj = getTabWisePrefilledValues(activeTab, defaultValues);
-
-		Object.entries(prefillingValuesObj).forEach(([key, value]) => {
-			setValue(key, value);
-		});
-
 		const { cargo_clearance_date = '', commodity = '', commodity_details = [] } = defaultValues;
 
 		const {
@@ -186,6 +176,16 @@ function EditPackages({
 		setValue('cargo_clearance_date', new Date(cargo_clearance_date));
 		setValue('commodity_type', commodityData);
 		setValue('commodity_subtype', subCommodityData);
+
+		if (activeTab !== defaultValues?.load_selection_type) {
+			return;
+		}
+
+		const prefillingValuesObj = getTabWisePrefilledValues(activeTab, defaultValues);
+
+		Object.entries(prefillingValuesObj).forEach(([key, value]) => {
+			setValue(key, value);
+		});
 	}, [activeTab, defaultValues, setValue]);
 
 	return (

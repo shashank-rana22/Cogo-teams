@@ -1,5 +1,5 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import Layout from '../../../../../../Layout';
 
@@ -92,7 +92,7 @@ const DEFAULT_VALUE = {
 	special_consideration : 'gases-2.1',
 };
 
-function CommodityControl({ control = () => {}, errors = {}, commodity_type = '' }) {
+function CommodityControl({ control = () => {}, errors = {}, commodity_type = '', loadType = '' }) {
 	const [activeCommodityType, setActiveCommodityType] = useState(commodity_type || 'general_cargo');
 
 	const COMMODITY_CONTROL = useMemo(() => [{
@@ -103,6 +103,10 @@ function CommodityControl({ control = () => {}, errors = {}, commodity_type = ''
 		value   : DEFAULT_VALUE[activeCommodityType],
 		rules   : { required: 'Commodity is required' },
 	}], [activeCommodityType]);
+
+	useEffect(() => {
+		setActiveCommodityType(commodity_type || 'general_cargo');
+	}, [commodity_type, loadType]);
 
 	return (
 		<div>
