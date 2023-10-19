@@ -260,6 +260,16 @@ const GLOBAL_CONSTANTS = {
 		'August', 'September', 'October', 'November', 'December'],
 
 	image_url: {
+		DARK_BG                 : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dark_bg.png',
+		JACKET                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Cogo_Jacket.png',
+		laptop_bag              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Laptop_bag.png',
+		COGO_ICON               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_name.svg',
+		COPYRIGHT_ICON          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/copyright.svg',
+		cogo_shoes              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Cogo_Shoes.png',
+		spring_collection       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/collection.png',
+		cart                    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Cart.svg',
+		led                     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/LED.png',
+		check_circle            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/CheckCircle.svg',
 		ship_icon               : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipIcon.jpg',
 		truck_icon              : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/truckIcon.png',
 		air_icon2               : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/airplane.png',
