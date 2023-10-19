@@ -27,7 +27,6 @@ const STATIC_COMPARISON_KEY = {
 		total_landed_price : 'Total Landed Cost',
 		book_and_lock      : '',
 	},
-	default: {},
 };
 
 function HandleBookValue({
@@ -87,12 +86,12 @@ const getStaticLineItems = (item, mode, summary, setSelectedCard, setShowContrac
 
 	const { validity_start = '', validity_end = '' } = schedules || {};
 
-	const keys = Object.keys(STATIC_COMPARISON_KEY[mode || 'default']);
+	const keys = Object.keys(STATIC_COMPARISON_KEY[mode] || {}) || [];
 
 	const otherComparisonKeys = keys.map((key) => {
 		const comparisonKey = {
 			code : key,
-			name : STATIC_COMPARISON_KEY[mode || 'default'][key],
+			name : STATIC_COMPARISON_KEY[mode]?.[key],
 		};
 
 		const createValueObject = (value) => ({ ...comparisonKey, value });
@@ -141,7 +140,7 @@ const getStaticLineItems = (item, mode, summary, setSelectedCard, setShowContrac
 			default: () => ({
 				code : key,
 				rate : { ...comparisonKey },
-				name : STATIC_COMPARISON_KEY[mode || 'default'][key],
+				name : STATIC_COMPARISON_KEY[mode]?.[key],
 			}),
 		};
 
