@@ -103,7 +103,6 @@ function EditLoad({
 		watch,
 		handleSubmit,
 		setValue,
-		// setErrors,
 	} = useForm();
 
 	const { origin = {}, destination = {} } = getLocationInfo(data, {}, SERVICE_KEY);
@@ -155,6 +154,15 @@ function EditLoad({
 	};
 
 	useEffect(() => {
+		const { cargo_readiness_date = '', commodity = '' } = defaultValues;
+
+		setValue('cargo_readiness_date', new Date(cargo_readiness_date));
+		setValue('commodity', commodity);
+
+		if (loadType !== load_selection_type) {
+			return;
+		}
+
 		const prefillingValuesObj = getTabWisePrefilledValues(
 			load_selection_type,
 			defaultValues,
@@ -163,12 +171,7 @@ function EditLoad({
 		Object.entries(prefillingValuesObj).forEach(([key, value]) => {
 			setValue(key, value);
 		});
-
-		const { cargo_readiness_date = '', commodity = '' } = defaultValues;
-
-		setValue('cargo_readiness_date', new Date(cargo_readiness_date));
-		setValue('commodity', commodity);
-	}, [defaultValues, load_selection_type, setValue, loadType]);
+	}, [defaultValues, loadType, load_selection_type, setValue]);
 
 	return (
 		<Modal
@@ -191,6 +194,7 @@ function EditLoad({
 					cargoType={cargoType}
 					setCargoType={setCargoType}
 					commodity_type={data?.commodity_type}
+					loadType={loadType}
 				/>
 			</Modal.Body>
 

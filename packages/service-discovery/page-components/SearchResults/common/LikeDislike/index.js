@@ -6,11 +6,9 @@ import useLikeFeedback from '../../hooks/useLikeFeedback';
 
 import DislikeModal from './DislikeModal';
 import styles from './styles.module.css';
-import SuccessModal from './SuccessModal';
 
 function LikeDislike({ rateCardData = {}, detail = {} }) {
 	const [showFeedbackModal, setShowFeedbackModal] = useState(false);
-	const [showSuccessModal, setShowSuccessModal] = useState(false);
 
 	const [likeState, setLikeState] = useState({
 		is_liked       : rateCardData?.is_liked,
@@ -84,13 +82,8 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 					details={detail}
 					likeState={likeState}
 					setLikeState={setLikeState}
-					setShowSuccessModal={setShowSuccessModal}
 					onClose={onCloseFeedbackModal}
 				/>
-			) : null}
-
-			{showSuccessModal ? (
-				<SuccessModal show={showSuccessModal} setShow={setShowSuccessModal} />
 			) : null}
 		</div>
 	);
