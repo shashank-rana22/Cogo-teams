@@ -13747,6 +13747,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'auth',
 		},
+		{
+			api          : 'get_distinct_values_in_column',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
 	],
 	ticket_management: [
 		{
