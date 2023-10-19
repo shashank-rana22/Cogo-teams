@@ -133,7 +133,7 @@ function AdditionalServicesForm({
 					disabled={loading}
 					loading={loading}
 				>
-					Update Details
+					Add Service
 				</Button>
 			</div>
 		</div>
