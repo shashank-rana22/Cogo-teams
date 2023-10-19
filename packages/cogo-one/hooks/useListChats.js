@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import {
 	collectionGroup,
 	updateDoc,
@@ -53,7 +54,6 @@ function useListChats({
 		lastMessageTimeStamp : Date.now(),
 		isLastPage           : false,
 		pinnedMessagesData   : {},
-		query                : [],
 	});
 
 	const { query: searchQuery, debounceQuery } = useDebounceQuery();
@@ -92,6 +92,8 @@ function useListChats({
 					messagesListData : data,
 					isLastPage       : true,
 				}));
+			}).catch((error) => {
+				console.error(error);
 			});
 	}, [appliedFilters, omniChannelQuery, searchMessage, searchQuery]);
 
@@ -178,7 +180,7 @@ function useListChats({
 		updateLoadingState, workPrefernceLoading, listOnlyMails]);
 
 	useEffect(() => {
-		if (searchQuery.length && listOnlyMails) {
+		if (!isEmpty(searchQuery) && listOnlyMails) {
 			searchMsg();
 		} else {
 			mountSnapShot({
