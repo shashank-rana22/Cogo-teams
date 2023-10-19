@@ -199,7 +199,7 @@ function VenderComponent() {
 		);
 	}
 
-	function RenderDropdown(vendorId) {
+	function RenderDropdown({ vendorId = '' }) {
 		return <ShowMore vendorId={vendorId} />;
 	}
 
@@ -246,7 +246,7 @@ function VenderComponent() {
 					setFilters((p) => ({ ...p, page: pageValue }));
 				}}
 				showPagination
-				renderDropdown={({ vendorId }) => RenderDropdown(vendorId)}
+				renderDropdown={({ vendorId }) => <RenderDropdown vendorId={vendorId} />}
 			/>
 
 			{showModal && (
