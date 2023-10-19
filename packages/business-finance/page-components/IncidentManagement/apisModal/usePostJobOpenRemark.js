@@ -24,8 +24,9 @@ const usePostJobOpenRemark = ({
 		{ manual: true },
 	);
 
-	const onSubmit = async (status) => {
+	const onSubmit = async ({ status }) => {
 		try {
+			console.log(status, 'statuskkkkk');
 			const payload = {
 				remark    : remarks,
 				status,

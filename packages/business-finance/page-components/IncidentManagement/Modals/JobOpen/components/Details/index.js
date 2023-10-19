@@ -4,8 +4,9 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import usePostJobOpenRemark from '../../../../apisModal/usePostJobOpenRemark';
+import ApproveModal from '../../../../common/ApproveModal';
+import RejectModal from '../../../../common/RejectModal';
 import SHIPMENT_MAPPING from '../../../../Constants/SHIPMENT_MAPPING';
-import STATUS_MAPPING from '../../../../Constants/status_mapping';
 import { getFormatAmount } from '../../../../utils/getformatamount';
 
 import StatRect from './StatRect';
@@ -29,7 +30,9 @@ function Details({
 	const { partner_id } = query || {};
 	const [remarks, setRemarks] = useState('');
 	const { id = '', status = '' } = row || {};
-	const { onSubmit = () => {}, loading = false } = usePostJobOpenRemark({
+	const [showRejectModal, setShowRejectModal] = useState(false);
+	const [showApproveModal, setShowApproveModal] = useState(false);
+	const { onSubmit:onAction, loading = false } = usePostJobOpenRemark({
 		setDetailsModal,
 		id,
 		remarks,
@@ -141,7 +144,7 @@ function Details({
 			{ status === 'REQUESTED' ? (
 				<div>
 					<div className={cl`${styles.label} 
-								${styles.required_field}`}
+                                ${styles.required_field}`}
 					>
 						Remarks
 					</div>
@@ -160,7 +163,7 @@ function Details({
 							themeType="secondary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => onSubmit(STATUS_MAPPING.rejected)}
+							onClick={() => setShowRejectModal(true)}
 						>
 							Reject
 						</Button>
@@ -170,11 +173,30 @@ function Details({
 							themeType="primary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => { onSubmit(STATUS_MAPPING.approved); }}
+							onClick={() => setShowApproveModal(true)}
 						>
 							Approve
 						</Button>
 					</div>
+					{showRejectModal
+                    && (
+	<RejectModal
+		setShowRejectModal={setShowRejectModal}
+		onAction={onAction}
+		showRejectModal={showRejectModal}
+		loading={loading}
+	/>
+                    )}
+					{showApproveModal
+                    && (
+
+	<ApproveModal
+		setShowApproveModal={setShowApproveModal}
+		onAction={onAction}
+		showApproveModal={showApproveModal}
+		loading={loading}
+	/>
+                    )}
 
 				</div>
 			) : null }
