@@ -1,0 +1,58 @@
+.list_card {
+	width: 33%;
+	padding: 0 16px 16px 0;
+	margin-bottom: 24px;
+}
+
+.text_section {
+	display: flex;
+	flex: 1 0 0;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-bottom: 4px;
+}
+
+.stars {
+	display: flex;
+	align-items: center;
+	margin-left: -7px;
+	font-size: 10px;
+	color: #828282;
+
+	:global {
+		.ui_buttonicon_container {
+			width: 15px !important;
+			height: 4px !important;
+		}
+	}
+}
+
+.text_section .grey {
+	margin-bottom: 4px;
+	font-size: 12px;
+	color: #828282;
+}
+
+.text_section .black {
+	margin-bottom: 4px;
+	font-size: 12px;
+	color: #221f20;
+}
+
+.price_section {
+	display: flex;
+	align-items: center;
+	margin-bottom: 4px;
+}
+
+.price_section .cost_real {
+	margin-right: 8px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.price_section .cost_shown {
+	font-style: italic;
+	color: #828282;
+	text-decoration: line-through;
+}
