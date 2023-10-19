@@ -9,7 +9,7 @@ import ServiceDetails from './ServiceDetails';
 import styles from './styles.module.css';
 
 function Services() {
-	const { isGettingShipment, servicesList, servicesLoading } = useContext(ShipmentDetailContext);
+	const { isGettingShipment, servicesList, servicesLoading, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const { serviceObj, upsellServices } = useMemo(() => helperFuncs(servicesList), [servicesList]);
 
@@ -27,6 +27,7 @@ function Services() {
 								<ServiceDetails
 									key={serviceKey}
 									servicesData={serviceData}
+									activeStakeholder={activeStakeholder}
 								/>
 							))}
 						</div>

@@ -38,6 +38,7 @@ const getFormatedPreferenceSetData = ({ allPreferenceCardsData }) => {
 			shipment_type                     : element?.shipment_type,
 			total_price_in_preferred_currency : data?.total_price_in_preferred_currency,
 			preferred_currency                : data?.preferred_currency,
+			so1_updated_rates                 : data?.so1_updated_rates,
 		};
 
 		let allocation_ratio = null;

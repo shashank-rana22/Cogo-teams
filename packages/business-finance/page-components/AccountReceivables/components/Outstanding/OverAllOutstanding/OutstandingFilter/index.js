@@ -9,10 +9,10 @@ import {
 } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import { SORTBY_OPTION } from '../../../../constants/index.ts';
+import { SORTBY_OPTION } from '../../../../constants/index';
 
 import CallPriorityModal from './CallPriorityModal';
-import FilterpopOver from './FilterpopOver/index.tsx';
+import FilterpopOver from './FilterpopOver/index';
 import styles from './styles.module.css';
 
 function Filters({
@@ -158,15 +158,15 @@ function Filters({
 							value={search}
 							onChange={(e) => handleChange(e)}
 							suffix={
-                search ? (
-	<IcMCross
-		onClick={handleInputReset}
-		cursor="pointer"
-		className={styles.icon_style}
-	/>
-                ) : (
-	<IcMAppSearch />)
-              }
+								search ? (
+									<IcMCross
+										onClick={handleInputReset}
+										cursor="pointer"
+										className={styles.icon_style}
+									/>
+								) : (
+									<IcMAppSearch />)
+							}
 							prefix={null}
 							className={styles.styled_input}
 						/>

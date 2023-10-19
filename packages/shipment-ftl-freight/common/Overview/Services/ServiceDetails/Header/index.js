@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useSelector } from '@cogoport/store';
+import roleBasedView from '@cogoport/surface-modules/components/Poc/config/role_base_view.json';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -9,11 +9,11 @@ import Details from '../Details';
 
 import styles from './styles.module.css';
 
-function Header({ serviceData = [], invoicing_parties = [] }) {
-	const { partner } = useSelector(({ profile }) => ({
-		partner: profile?.auth_role_data?.name,
-	}));
+function Header({ serviceData = [], invoicing_parties = [], activeStakeholder = '' }) {
 	const [showDetails, setShowDetails] = useState(true);
+
+	const rolesPermission = roleBasedView[activeStakeholder] || {};
+	const rolesViewPermission = rolesPermission?.can_view || [];
 
 	const { state, shipment_type, service_provider, payment_term } = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
@@ -28,7 +28,7 @@ function Header({ serviceData = [], invoicing_parties = [] }) {
 
 				<div className={cl`${styles[state]} ${styles.service_details}`}>
 					<div className={styles.service_name}>{startCase(shipment_type)}</div>
-					{!partner?.includes('KAM') ? (
+					{rolesViewPermission?.includes('service_provider') ? (
 						<div className={styles.service_provider}>
 							{': '}
 							{service_provider?.business_name}

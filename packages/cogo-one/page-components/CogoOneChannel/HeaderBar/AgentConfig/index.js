@@ -1,7 +1,9 @@
 import { IcMSettings } from '@cogoport/icons-react';
+import { dynamic } from '@cogoport/next';
 
-import ConfigModal from './ConfigModal';
 import styles from './styles.module.css';
+
+const ConfigModal = dynamic(() => import('./ConfigModal'));
 
 function AgentConfig({
 	firestore = {},
