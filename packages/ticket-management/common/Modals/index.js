@@ -10,8 +10,8 @@ function Modals(props) {
 	const { modalData, setModalData } = props;
 
 	const { partnerId = '', userId = '' } = useSelector(({ profile }) => ({
-		partnerId : profile.partner.id,
-		userId    : profile.user.id,
+		partnerId : profile?.partner?.id,
+		userId    : profile?.user?.id,
 	}));
 
 	const [isInternal, setIsInternal] = useState(true);
