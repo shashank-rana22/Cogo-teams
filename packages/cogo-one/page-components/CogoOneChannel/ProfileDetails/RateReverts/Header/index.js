@@ -21,7 +21,7 @@ function Header({
 
 	return (
 		<div className={styles.header}>
-			<div>Rate Reverts</div>
+			<div>Rate Jobs</div>
 
 			<Popover
 				placement="left"

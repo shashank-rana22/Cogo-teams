@@ -13,7 +13,9 @@ function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) 
 		data = {},
 	} = useGetShipment({ shipmentId, shipmentPopover, id });
 
-	const { primary_service_detail = {} } = data || {};
+	const { primary_service_detail = {}, summary = {} } = data || {};
+
+	const tradeType = summary?.all_services?.[GLOBAL_CONSTANTS.zeroth_index]?.trade_type;
 
 	const {
 		cargo_readiness_date = '',
@@ -30,7 +32,7 @@ function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) 
 		new Date(selected_schedule_departure || new Date()),
 	);
 
-	const checkEmpty = isEmpty(cargo_readiness_date) && !free_days_detention_destination
+	const checkEmpty = !tradeType && isEmpty(cargo_readiness_date) && !free_days_detention_destination
 						&& !bl_type && !commodity_description && isEmpty(estimated_departure)
 						&& isEmpty(selected_schedule_arrival) && isEmpty(selected_schedule_departure);
 
@@ -53,6 +55,15 @@ function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) 
 
 	return (
 		<div className={styles.container}>
+			{tradeType ? (
+				<div className={styles.each_content}>
+					Trade Type:
+					<span>
+						{startCase(tradeType)}
+					</span>
+
+				</div>
+			) : null}
 			{cargo_readiness_date ? (
 				<div className={styles.each_content}>
 					Cargo Ready:

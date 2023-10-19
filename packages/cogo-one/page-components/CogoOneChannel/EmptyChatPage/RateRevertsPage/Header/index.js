@@ -1,5 +1,5 @@
-import { MultiSelect, Tags, Popover, Badge } from '@cogoport/components';
-import { IcMFilter } from '@cogoport/icons-react';
+import { MultiSelect, Tags, Popover, Badge, Input } from '@cogoport/components';
+import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useMemo } from 'react';
 
@@ -13,8 +13,11 @@ function Header({
 	setParams = () => {},
 	params = {},
 	stats = {},
+	searchQuery = '',
+	setSearchQuery = () => {},
 }) {
 	const [showFilters, setShowFilters] = useState(false);
+	const [shipmentObj, setShipmentObj] = useState({});
 
 	const handleItemsChange = (val) => setParams(
 		(prev) => ({
@@ -35,6 +38,7 @@ function Header({
 		sources           : params?.source || [],
 		filterValues,
 		dynamicStatistics : dynamic_statistics,
+		shipmentObj,
 	});
 
 	const sourceOptions = useMemo(
@@ -60,7 +64,7 @@ function Header({
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.header}>
-				Rate Reverts
+				Rate Jobs
 			</div>
 
 			<div className={styles.sources_container}>
@@ -71,7 +75,7 @@ function Header({
 					options={sourceOptions}
 					isClearable
 					size="sm"
-					prefix={null}
+					prefix={() => null}
 					onChange={(val) => setParams(
 						(prev) => ({
 							...(prev || {}),
@@ -89,6 +93,21 @@ function Header({
 					/>
 				</div>
 
+				<Input
+					size="sm"
+					value={searchQuery}
+					onChange={setSearchQuery}
+					className={styles.tid_search_input}
+					placeholder="Search Job ID"
+					prefix={(
+						<IcMSearchlight
+							height={20}
+							width={20}
+							fill="#9f9f9f"
+						/>
+					)}
+				/>
+
 				<Popover
 					placement="left"
 					interactive
@@ -101,6 +120,7 @@ function Header({
 								defaultValues={defaultValues}
 								setParams={setParams}
 								setShowFilters={setShowFilters}
+								setShipmentObj={setShipmentObj}
 							/>
 						) : null
 					)}

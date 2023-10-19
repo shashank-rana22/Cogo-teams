@@ -21,6 +21,8 @@ function RateRevertsPage({
 		rateJobsData = {},
 		loading = false,
 		fetchRateJobs = () => {},
+		searchQuery = '',
+		setSearchQuery = () => {},
 	} = useListRateJobs({ viewType });
 
 	const {
@@ -37,6 +39,8 @@ function RateRevertsPage({
 					params={params}
 					setParams={setParams}
 					stats={stats}
+					setSearchQuery={setSearchQuery}
+					searchQuery={searchQuery}
 				/>
 
 				{loading ? (
@@ -66,10 +70,10 @@ function RateRevertsPage({
 					totalItems={total_count}
 					pageSize={6}
 					disabled={loading}
-					onPageChange={() => setParams(
+					onPageChange={(val) => setParams(
 						(prev) => ({
 							...prev,
-							page: page + 1,
+							page: val,
 						}),
 					)}
 				/>

@@ -8,7 +8,7 @@
 .label {
 	width: 100px;
 	padding-right: 4px;
-	font-size: 14px;
+	font-size: 12px;
 	color: #828282;
 	white-space: nowrap;
 }
@@ -38,7 +38,7 @@
 .primary_data {
 	width: calc(100% - 100px);
 	overflow: hidden;
-	font-size: 14px;
+	font-size: 12px;
 	color: #4f4f4f;
 	text-overflow: ellipsis;
 	white-space: nowrap;

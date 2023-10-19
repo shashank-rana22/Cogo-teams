@@ -12,12 +12,15 @@ function FilterModal({
 	setParams = () => {},
 	setShowFilters = () => {},
 	triggeredFrom = '',
+	setShipmentObj = () => {},
 }) {
 	const {
 		control,
 		handleSubmit = () => {},
 		reset = () => {},
 	} = useForm({ defaultValues: filterValues });
+
+	const controls = smtRateRevertsFilters({ triggeredFrom, setShipmentObj });
 
 	const onSubmit = (val) => {
 		setShowFilters(false);
@@ -43,7 +46,7 @@ function FilterModal({
 
 	return (
 		<div className={styles.container}>
-			{smtRateRevertsFilters({ triggeredFrom })?.map(
+			{controls?.map(
 				(controlItem) => {
 					const {
 						label = '',

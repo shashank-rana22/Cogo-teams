@@ -75,10 +75,10 @@ function RateReverts({
 					totalItems={total_count}
 					pageSize={6}
 					disabled={loading}
-					onPageChange={() => setParams(
+					onPageChange={(val) => setParams(
 						(prev) => ({
 							...prev,
-							page: page + 1,
+							page: val,
 						}),
 					)}
 				/>

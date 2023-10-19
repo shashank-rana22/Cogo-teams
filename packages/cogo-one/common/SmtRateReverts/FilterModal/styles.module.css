@@ -6,6 +6,10 @@
 		.ui_select_container {
 			width: 100%;
 		}
+
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
 	}
 }
 

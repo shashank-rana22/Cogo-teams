@@ -23,6 +23,7 @@ function ServiceProviderDetails({
 		sources = [],
 		id = '',
 		shipment_id = '',
+		serial_id = '',
 	} = cardData || {};
 
 	const {
@@ -82,6 +83,14 @@ function ServiceProviderDetails({
 				<div className={cl`${styles.actions_container} 
 					${isTriggeredFromSideBar ? styles.sidebar_actions_container : ''}`}
 				>
+					<Pill
+						size="sm"
+						color="#F7FAEF"
+					>
+						TID:
+						{' '}
+						{serial_id}
+					</Pill>
 					<Pill
 						size="sm"
 						color="#F7FAEF"

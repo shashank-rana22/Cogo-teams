@@ -40,10 +40,14 @@
 	}
 }
 
+.tid_search_input {
+	width: 20%;
+}
+
 .selected_sources {
 	display: flex;
 	align-items: center;
-	width: calc(74% - 30px);
+	width: calc(54% - 30px);
 	overflow: auto;
 
 	&::-webkit-scrollbar {

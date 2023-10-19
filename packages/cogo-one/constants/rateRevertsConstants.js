@@ -25,7 +25,13 @@ export const SOURCE_OPTIONS = {
 	},
 };
 
-export const DEFAULT_RATE_JOBS_FILTERS = {
-	source  : [],
-	service : 'fcl_freight',
-};
+export const defaultRateJobFilters = () => ({
+	source    : [],
+	service   : 'fcl_freight',
+	dateRange : {
+		startDate : new Date((new Date()).setHours(0, 0, 0, 0)),
+		endDate   : new Date((new Date()).setHours(23, 59, 59, 59)),
+	},
+	shipment_id : '',
+	serial_id   : '',
+});

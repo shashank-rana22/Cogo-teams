@@ -1,11 +1,12 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-import { DEFAULT_RATE_JOBS_FILTERS } from '../constants/rateRevertsConstants';
+import { defaultRateJobFilters } from '../constants/rateRevertsConstants';
 
 const ADMIN_VIEW_REQUIRED_FOR = ['cogoone_admin', 'supply_admin'];
 
-const getPayload = ({ params, orgId, triggeredFrom, viewType }) => ({
+const getPayload = ({ params, orgId, triggeredFrom, viewType, query }) => ({
 	all_jobs_required : ADMIN_VIEW_REQUIRED_FOR.includes(viewType),
 	stats_required    : triggeredFrom !== 'sideBar',
 	service           : params?.service || 'fcl_freight',
@@ -15,6 +16,10 @@ const getPayload = ({ params, orgId, triggeredFrom, viewType }) => ({
 		source              : params?.source || undefined,
 		status              : triggeredFrom !== 'sideBar' ? 'pending' : undefined,
 		service_provider_id : (triggeredFrom === 'sideBar' && orgId) ? orgId : undefined,
+		shipment_id         : params?.shipment_id || undefined,
+		serial_id           : query || undefined,
+		// start_date          : params?.dateRange?.startDate || new Date(),
+		// end_date            : params?.dateRange?.endDate || new Date(),
 	},
 });
 
@@ -23,12 +28,15 @@ const useListRateJobs = ({
 	triggeredFrom = '',
 	viewType = '',
 } = {}) => {
-	const [params, setParams] = useState(DEFAULT_RATE_JOBS_FILTERS);
+	const [params, setParams] = useState(() => defaultRateJobFilters());
+	const [searchQuery, setSearchQuery] = useState('');
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_smt_rate_jobs',
 		method : 'get',
 	}, { manual: true });
+
+	const { debounceQuery, query } = useDebounceQuery();
 
 	const fetchRateJobs = useCallback(
 		async () => {
@@ -38,18 +46,22 @@ const useListRateJobs = ({
 
 			try {
 				await trigger({
-					params: getPayload({ params, orgId, triggeredFrom, viewType }),
+					params: getPayload({ params, orgId, triggeredFrom, viewType, query }),
 				});
 			} catch (error) {
 				console.error('error:', error);
 			}
 		},
-		[triggeredFrom, orgId, trigger, params, viewType],
+		[triggeredFrom, orgId, trigger, params, viewType, query],
 	);
 
 	useEffect(() => {
 		fetchRateJobs();
 	}, [fetchRateJobs]);
+
+	useEffect(() => {
+		debounceQuery(searchQuery);
+	}, [searchQuery, debounceQuery]);
 
 	return {
 		loading,
@@ -57,6 +69,8 @@ const useListRateJobs = ({
 		rateJobsData: (triggeredFrom === 'sideBar' && !orgId) ? {} : data,
 		setParams,
 		params,
+		searchQuery,
+		setSearchQuery,
 	};
 };
 

@@ -23,6 +23,8 @@ function RateRevertCard({
 }) {
 	const dispatch = useDispatch();
 
+	const { status = '', reverted_status = '' } = cardData || {};
+
 	const {
 		handleOpenMessage,
 		handleSendMail,
@@ -83,7 +85,7 @@ function RateRevertCard({
 					<Button
 						size="md"
 						themeType="secondary"
-						disabled={cardData?.status !== 'pending'}
+						disabled={status !== 'pending' || !reverted_status}
 						onClick={() => setShowAddRateModal({ showModal: true, cardData })}
 					>
 						+ Add Rate
