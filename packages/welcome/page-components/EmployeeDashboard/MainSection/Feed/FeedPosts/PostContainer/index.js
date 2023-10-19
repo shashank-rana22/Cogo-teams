@@ -2,45 +2,45 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { cl, Tooltip } from '@cogoport/components';
 import { IcMProvision, IcMOverflowDot, IcMLike, IcMLiveChat } from '@cogoport/icons-react';
-import Lottie from 'lottie-react';
+// import Lottie from 'lottie-react';
 import React, { useState } from 'react';
 
 import CommentBox from '../CommentBox';
 
-import clapAnimation from './clap-animation.json';
+// import clapAnimation from './clap-animation.json';
 // import dislikeAnimation from './dislike-animation.json';
-import funnyAnimation from './funny-animation.json';
-import heartAnimation from './heart-animation.json';
-import likeAnimation from './like-animation.json';
+// import funnyAnimation from './funny-animation.json';
+// import heartAnimation from './heart-animation.json';
+// import likeAnimation from './like-animation.json';
 import styles from './styles.module.css';
 
-const animationArr = [
-	{
-		width     : 60,
-		height    : 60,
-		animation : heartAnimation,
-	},
-	{
-		width     : 50,
-		height    : 50,
-		animation : likeAnimation,
-	},
-	{
-		width     : 50,
-		height    : 50,
-		animation : clapAnimation,
-	},
-	{
-		width     : 35,
-		height    : 35,
-		animation : funnyAnimation,
-	},
-	// {
-	// 	width     : 30,
-	// 	height    : 30,
-	// 	animation : dislikeAnimation,
-	// },
-];
+// const animationArr = [
+// 	{
+// 		width     : 60,
+// 		height    : 60,
+// 		animation : heartAnimation,
+// 	},
+// 	{
+// 		width     : 50,
+// 		height    : 50,
+// 		animation : likeAnimation,
+// 	},
+// 	{
+// 		width     : 50,
+// 		height    : 50,
+// 		animation : clapAnimation,
+// 	},
+// 	{
+// 		width     : 35,
+// 		height    : 35,
+// 		animation : funnyAnimation,
+// 	},
+// 	// {
+// 	// 	width     : 30,
+// 	// 	height    : 30,
+// 	// 	animation : dislikeAnimation,
+// 	// },
+// ];
 
 const comments = [
 	{
@@ -95,7 +95,7 @@ function PostContainer() {
 					Appreciating efforts of @raghuvamsi for his amazing work on the HRMS flatform
 				</div>
 			</div>
-			<div style={{ display: 'flex', alignItems: 'center' }}>
+			{/* <div style={{ display: 'flex', alignItems: 'center' }}>
 				{animationArr.map((val, index) => (
 					<div
 						key={index + 1}
@@ -113,7 +113,7 @@ function PostContainer() {
 						/>
 					</div>
 				))}
-			</div>
+			</div> */}
 			<div className={styles.footer}>
 				<div className={styles.comments_data}>
 					<div className={styles.user_comments}>
@@ -135,19 +135,7 @@ function PostContainer() {
 				<div className={styles.like_and_comment}>
 					<div className={styles.like_circle}>
 						<Tooltip
-							content={(
-								<div style={{ display: 'flex', alignItems: 'center' }}>
-									{animationArr.map((val, index) => (
-										<div key={index + 1} style={{ width: 50, height: 'auto' }}>
-											<Lottie
-												animationData={val}
-												loop
-												autoplay
-											/>
-										</div>
-									))}
-								</div>
-							)}
+							content="hello"
 							interactive
 							placement="top"
 						>
