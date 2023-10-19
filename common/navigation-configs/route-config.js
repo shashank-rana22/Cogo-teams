@@ -88,6 +88,7 @@ import supplyTools from './config/supply-tools';
 import termsAndConditions from './config/terms-and-conditions';
 import ticketManagement from './config/ticket-management';
 import tradeParties from './config/trade-parties';
+import transactionSettings from './config/transaction-settings';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
 import warehouseManagement from './config/warehouse-management';
@@ -189,6 +190,7 @@ const routeConfig = {
 	...margins,
 	...saas,
 	...serviceManagement,
+	...transactionSettings,
 };
 
 export default routeConfig;

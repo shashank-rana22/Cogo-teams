@@ -1,0 +1,42 @@
+const getAirDomesticSurchargescontrols = () => [
+	{
+		name        : 'service_provider_id',
+		type        : 'async_select',
+		label       : 'Service Provider',
+		placeholder : 'Select Service Provider',
+		asyncKey    : 'organizations',
+		span        : 12,
+		isClearable : true,
+		size        : 'sm',
+	},
+	{
+		name        : 'origin_airport_id',
+		label       : 'Origin Airport',
+		type        : 'async_select',
+		asyncKey    : 'list_locations',
+		params      : { filters: { type: ['airport'] } },
+		span        : 12,
+		isClearable : true,
+		size        : 'sm',
+	},
+	{
+		name        : 'destination_airport_id',
+		label       : 'Destination Airport',
+		type        : 'async_select',
+		asyncKey    : 'list_locations',
+		params      : { filters: { type: ['airport'] } },
+		span        : 12,
+		isClearable : true,
+		size        : 'sm',
+	},
+	{
+		name        : 'airline_id',
+		label       : 'Airline',
+		type        : 'async_select',
+		asyncKey    : 'list_operators',
+		span        : 12,
+		isClearable : true,
+		size        : 'sm',
+	},
+];
+export default getAirDomesticSurchargescontrols;

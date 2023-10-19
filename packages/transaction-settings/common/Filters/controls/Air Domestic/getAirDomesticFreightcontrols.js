@@ -1,0 +1,85 @@
+const getAirDomesticFreightcontrols = () => [
+	{
+		name        : 'service_provider_id',
+		type        : 'async_select',
+		label       : 'Service Provider',
+		placeholder : 'Select Service Provider',
+		asyncKey    : 'organizations',
+		span        : 12,
+		isClearable : true,
+		size        : 'sm',
+	},
+	{
+		name        : 'origin_airport_id',
+		label       : 'Origin Airport',
+		type        : 'async_select',
+		asyncKey    : 'list_locations',
+		params      : { filters: { type: ['airport'] } },
+		span        : 12,
+		isClearable : true,
+		size        : 'sm',
+	},
+	{
+		name        : 'destination_airport_id',
+		label       : 'Destination Airport',
+		type        : 'async_select',
+		asyncKey    : 'list_locations',
+		params      : { filters: { type: ['airport'] } },
+		span        : 12,
+		isClearable : true,
+		size        : 'sm',
+	},
+	{
+		name        : 'airline_id',
+		label       : 'Airline',
+		type        : 'async_select',
+		asyncKey    : 'list_operators',
+		span        : 12,
+		isClearable : true,
+		size        : 'sm',
+	},
+	{
+		name        : 'procured_by_id',
+		type        : 'async_select',
+		label       : 'Rate procured by agent',
+		placeholder : 'Select',
+		asyncKey    : 'partner_users',
+		isClearable : true,
+		span        : 12,
+		size        : 'sm',
+	},
+	{
+		name    : 'commodity',
+		label   : 'Commodity/service',
+		type    : 'multi_select',
+		options : [
+			{
+				label : 'General',
+				value : 'general',
+			},
+			{
+				label : 'Special consideration',
+				value : 'special_consideration',
+			},
+		],
+		span        : 12,
+		isClearable : true,
+		size        : 'sm',
+	},
+	{
+		name    : 'is_rate_about_to_expire',
+		label   : 'Rate Expiring in 7 Days',
+		type    : 'select',
+		options : [
+			{
+				label : 'Yes',
+				value : true,
+			},
+		],
+		size        : 'sm',
+		isClearable : true,
+		span        : 12,
+	},
+];
+
+export default getAirDomesticFreightcontrols;
