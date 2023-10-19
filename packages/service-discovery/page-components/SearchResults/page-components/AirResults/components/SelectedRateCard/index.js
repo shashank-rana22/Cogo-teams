@@ -8,7 +8,6 @@ import useCreateCheckout from '../../../../hooks/useCreateCheckout';
 import useGetRateCard from '../../../../hooks/useGetRateCard';
 import RateCard from '../ListRates/components/RateCard';
 
-import Header from './Header';
 import Services from './Services';
 import styles from './styles.module.css';
 
@@ -46,8 +45,6 @@ function SelectedRateCard({
 
 	return (
 		<div className={styles.container}>
-			<Header rate={selectedRate} />
-
 			<RateCard
 				loading={loading}
 				isSelectedCard

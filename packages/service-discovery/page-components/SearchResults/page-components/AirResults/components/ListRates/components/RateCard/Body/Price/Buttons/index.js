@@ -43,15 +43,17 @@ function Buttons({
 
 	return (
 		<div className={styles.container}>
-			<Button
-				size="md"
-				themeType={isSelectedCard ? 'tertiary' : 'secondary'}
-				className={styles.secondary_button}
-				disabled={isSelectedCard}
-				onClick={() => setShowContract(!showContract)}
-			>
-				{isSelectedCard ? ('Currrently Selected') : 'Lock Freight Price'}
-			</Button>
+			{!isSelectedCard ? (
+				<Button
+					size="md"
+					themeType={isSelectedCard ? 'tertiary' : 'secondary'}
+					className={styles.secondary_button}
+					disabled={isSelectedCard}
+					onClick={() => setShowContract(!showContract)}
+				>
+					Lock Freight Price
+				</Button>
+			) : null}
 
 			<Button
 				onClick={handleSelectButtonClick}

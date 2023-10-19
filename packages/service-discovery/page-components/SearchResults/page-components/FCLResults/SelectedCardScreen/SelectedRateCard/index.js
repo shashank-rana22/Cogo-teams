@@ -3,11 +3,11 @@ import { useState } from 'react';
 
 // import ShippingLineModal from '../../../../../../common/ShippingLineModal';
 import CargoModal from '../../../../common/CargoModal';
+import DetentionDemurrage from '../../../../common/D&D';
 import LoadingState from '../../../../common/Loading';
 import useCreateCheckout from '../../../../hooks/useCreateCheckout';
 import FclCard from '../../FclCard';
 
-import Header from './Header';
 import Services from './Services';
 import styles from './styles.module.css';
 
@@ -44,11 +44,9 @@ function SelectedRateCard({
 
 	return (
 		<div className={styles.container}>
-			<Header
-				detail={detail}
-				rateCardData={rateCardData}
-				refetch={refetch}
-			/>
+			<div className={styles.dnd_container}>
+				<DetentionDemurrage details={detail} refetch={refetch} />
+			</div>
 
 			<FclCard
 				rateCardData={rateCardData}

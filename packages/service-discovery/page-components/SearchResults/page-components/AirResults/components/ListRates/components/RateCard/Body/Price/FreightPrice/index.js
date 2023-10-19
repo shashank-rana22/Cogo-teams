@@ -25,7 +25,7 @@ function FreightPrice({
 	return (
 		<div className={styles.container}>
 			<div className={styles.price_item}>
-				<span className={styles.label}>Basic Freight Price</span>
+				<span className={styles.label}>Freight Price</span>
 
 				<PricePerPackage
 					price={freight_price}
