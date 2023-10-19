@@ -13,7 +13,7 @@ function FreightPrice({ rate = {}, isContract = false }) {
 		<div className={styles.container}>
 			<div className={styles.price_item}>
 				<span className={styles.label}>
-					{isContract ? 'Locked' : 'Basic'}
+					{isContract ? 'Locked' : ''}
 					{' '}
 					Freight Price
 				</span>

@@ -5,7 +5,6 @@ import BookingContent from '../../../../../../commons/BookingContent';
 import PreviewBookingFooter from '../../../../../../commons/PreviewBookingFooter';
 import ServiceTerms from '../../../../../../commons/ServiceTerms';
 import { CheckoutContext } from '../../../../../../context';
-import AdditionalServices from '../../../../commons/AdditionalServices';
 
 import styles from './styles.module.css';
 
@@ -22,9 +21,6 @@ function AdditionalContent({
 		updateCheckout,
 		updateLoading,
 		loading,
-		primaryService = {},
-		possible_subsidiary_services = [],
-		setHeaderProps = () => {},
 	} = useContext(CheckoutContext);
 
 	const [noRatesPresent, setNoRatesPresent] = useState(false);
@@ -66,17 +62,6 @@ function AdditionalContent({
 
 	return (
 		<div className={styles.container}>
-			<AdditionalServices
-				detail={detail}
-				getCheckout={getCheckout}
-				possible_subsidiary_services={possible_subsidiary_services}
-				servicesLength={Object.values(rateServices).length}
-				loading={loading}
-				primaryService={primaryService}
-				setHeaderProps={setHeaderProps}
-				rate={rate}
-			/>
-
 			<BookingContent
 				detail={detail}
 				getCheckout={getCheckout}

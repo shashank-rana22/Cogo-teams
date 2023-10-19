@@ -103,7 +103,7 @@ function MiddleSection({
 
 			<div className={styles.rate_details}>
 				<div style={{ marginRight: 24 }}>
-					<div className={styles.freight_text}>Basic Freight Price</div>
+					<div className={styles.freight_text}>Freight Price</div>
 
 					<FreightPriceDetail
 						price={rateCardData?.freight_price_discounted}
