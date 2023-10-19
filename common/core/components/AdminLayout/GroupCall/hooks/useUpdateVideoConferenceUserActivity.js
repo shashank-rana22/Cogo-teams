@@ -1,30 +1,50 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
-const getParams = ({ meeting_id = '', id = '', call_status = '' }) => ({
-	meeting_id,
-	user_id: id,
-	call_status,
+import useGetVideoConferenceLink from './useGetVideoConferenceLink';
+
+const getParams = ({
+	meetingId = '',
+	agentId = '',
+	callStatus = '',
+}) => ({
+	meeting_id  : meetingId,
+	user_id     : agentId,
+	call_status : callStatus,
 });
-function useUpdateVideoConferenceUserActivity({ meeting_id }) {
-	const { id = '' } = useSelector((state) => state?.profile?.user);
 
-	const [{ loading }, trigger] = useRequest({
+function useUpdateVideoConferenceUserActivity({
+	meetingId = '',
+}) {
+	const agentId = useSelector(({ profile }) => profile?.user?.id);
+
+	const [loading, setLoading] = useState(false);
+
+	const [, trigger] = useRequest({
 		url    : '/update_video_conference_user_activity',
 		method : 'post',
 
 	}, { manual: true });
 
-	const updateUserActivity = useCallback((call_status) => {
+	const { getMeetingLink = () => {} } = useGetVideoConferenceLink();
+
+	const updateUserActivity = useCallback(async ({ callStatus = '' }) => {
 		try {
-			trigger({
-				params: getParams({ meeting_id, id, call_status }),
+			setLoading(true);
+			await trigger({
+				params: getParams({ meetingId, agentId, callStatus }),
 			});
+
+			if (callStatus === 'ongoing') {
+				getMeetingLink({ meetingId });
+			}
 		} catch (error) {
 			console.error('error', error);
+		} finally {
+			setLoading(false);
 		}
-	}, [trigger, id, meeting_id]);
+	}, [trigger, agentId, meetingId, getMeetingLink]);
 
 	return {
 		loading,

@@ -8,14 +8,19 @@ function VideoCalling({
 	searchName = '',
 	isGroup = false,
 }) {
-	const { loading, updateVideoConference } = useUpdateVideoConference();
+	const { loading, updateVideoConference = () => {} } = useUpdateVideoConference();
 
 	const { groupData = {} } = activeTab || {};
 
 	const { id = '', group_members_ids = [] } = groupData || {};
 
 	const onClickFunc = () => {
-		updateVideoConference({ groupId: id, groupMemberIds: group_members_ids, searchName, isGroup });
+		updateVideoConference({
+			groupId        : id,
+			groupMemberIds : group_members_ids,
+			searchName,
+			isGroup,
+		});
 	};
 
 	const buttonsMappings = getButtonGroups({ onClickFunc });

@@ -1,5 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { getCookie } from '@cogoport/utils';
 import { useCallback } from 'react';
 
 const getParams = ({ meetingId = '', id = '', name = '' }) => ({
@@ -8,30 +9,30 @@ const getParams = ({ meetingId = '', id = '', name = '' }) => ({
 	user_name  : name,
 });
 
-const useGetVideoConferenceLink = ({ meetingId = '' }) => {
+const useGetVideoConferenceLink = () => {
 	const { id = '', name = '' } = useSelector((state) => state?.profile?.user);
 
-	const [{ data, loading }, trigger] = useRequest({
+	const [, trigger] = useRequest({
 		url    : '/get_video_conference_link',
 		method : 'get',
 
 	}, { manual: true });
 
-	const getLink = useCallback(() => {
+	const getMeetingLink = useCallback(async ({ meetingId = '' }) => {
 		try {
-			trigger({
+			const res = await trigger({
 				params: getParams({ meetingId, id, name }),
 			});
+
+			const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
+			window.open(`${res?.data?.join}&auth=${token}`, '_blank');
 		} catch (error) {
-			console.error('error', error);
+			console.error('conference_call_error::', error);
 		}
-	}, [trigger, meetingId, id, name]);
+	}, [trigger, id, name]);
 
 	return {
-		loading,
-		data,
-		meeting_link: data?.join,
-		getLink,
+		getMeetingLink,
 	};
 };
 

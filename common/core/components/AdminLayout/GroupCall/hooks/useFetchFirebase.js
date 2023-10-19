@@ -24,12 +24,6 @@ const useFetchFirebaseRoom = ({
 			agentId,
 		);
 
-		// const countUnreadChatQuery = query(
-		// 	userDetailsDocRef,
-		// 	where('video_call_status', '==', 'incoming'),
-		// 	orderBy('created_at', 'desc'),
-		// );
-
 		agentRoomSnapshot.current = onSnapshot(userDetailsDocRef, (roomDocument) => {
 			const roomData = roomDocument.data();
 
@@ -39,8 +33,9 @@ const useFetchFirebaseRoom = ({
 	}, [agentId, firestore]);
 
 	useEffect(() => {
-		const cleanupfunc = agentRoomSnapshot.current;
 		callRooomSnapShot();
+
+		const cleanupfunc = agentRoomSnapshot.current;
 
 		return () => {
 			cleanupfunc?.();

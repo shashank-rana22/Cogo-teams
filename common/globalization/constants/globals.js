@@ -492,6 +492,8 @@ const GLOBAL_CONSTANTS = {
 
 	video_call_ring_tone_url:
 	'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/microsoft_teams_audio_call_tone.mp3',
+	incoming_call_ring_tone_loop:
+	'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/microsoft_teams_audio_call_tone_loop.mp3',
 
 	pdf_url: {
 		exception_customer_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/'

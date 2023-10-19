@@ -1,35 +1,21 @@
-import CallModal from './CallModal';
-import useFetchFirebaseRoom from './hooks/useFetchFirebase';
-import useGetVideoConferenceLink from './hooks/useGetVideoConferenceLink';
-import IncomingCall from './IncomingCall';
+import { dynamic } from '@cogoport/next';
 
-const COMPONENT_MAPPING = {
-	incoming : IncomingCall,
-	ongoing  : CallModal,
-};
+import useFetchFirebaseRoom from './hooks/useFetchFirebase';
+
+const IncomingCall = dynamic(() => import('./IncomingCall'));
 
 function GroupCall({ firestore = {}, agentId = '' }) {
 	const { videoCallDetails } = useFetchFirebaseRoom({ firestore, agentId });
 
-	const { meeting_id: meetingId = '', video_call_status: showModalType = '' } = videoCallDetails || {};
+	const { video_call_status = '' } = videoCallDetails || {};
 
-	const Comp = COMPONENT_MAPPING[showModalType] || null;
-
-	const { meeting_link } = useGetVideoConferenceLink({ meetingId, showModalType });
-
-	if (!Object.keys(COMPONENT_MAPPING)?.includes(showModalType) || !Comp) {
+	if (video_call_status !== 'incoming') {
 		return null;
 	}
 
-	const PROPS_MAPPING = {
-		incoming : {},
-		ongoing  : { url: meeting_link },
-	};
-
 	return (
-		<Comp
-			key={showModalType}
-			{...(PROPS_MAPPING[showModalType] || {})}
+		<IncomingCall
+			videoCallDetails={videoCallDetails}
 		/>
 	);
 }
