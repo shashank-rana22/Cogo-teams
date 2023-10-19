@@ -1,6 +1,11 @@
 .container {
 	display: flex;
 	align-items: center;
+
+	@media (max-width: 768px) {
+		align-self: center;
+		margin: 12px 0;
+	}
 }
 
 .info_icon {

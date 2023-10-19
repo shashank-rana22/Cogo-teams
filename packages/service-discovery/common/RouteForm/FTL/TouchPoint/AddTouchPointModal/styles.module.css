@@ -13,6 +13,10 @@
 	:global {
 		.ui_select_display_container {
 			width: 330px;
+
+			@media (max-width: 768px) {
+				width: 250px;
+			}
 		}
 	}
 }
@@ -33,4 +37,22 @@
 	align-self: flex-end;
 	justify-content: flex-end;
 	margin-top: 40px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.button {
+	@media (max-width: 768px) {
+		width: 50%;
+		height: 40px !important;
+	}
+}
+
+.modal {
+	@media (max-width: 768px) {
+		width: 100vw !important;
+		min-height: max-content;
+	}
 }

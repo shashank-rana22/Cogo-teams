@@ -52,7 +52,6 @@ function List({
 					</div>
 
 					<div className={styles.list_item}>
-						{/* <DragIcon size={1.5} /> */}
 						<IcMDrag height={20} width={20} />
 
 						<span>{touchPoint?.display_name}</span>

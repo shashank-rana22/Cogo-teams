@@ -36,6 +36,10 @@ function Value({ name = '', value = {}, defaultValues = {}, onReset = () => {} }
 		formattedValue = `${value.length} Selected`;
 	}
 
+	if (name === 'source') {
+		formattedValue = startCase(value);
+	}
+
 	return (
 		<span className={styles.filter_value_pill}>
 			{formattedValue}
