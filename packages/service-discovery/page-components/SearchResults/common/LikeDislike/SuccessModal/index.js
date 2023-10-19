@@ -36,7 +36,7 @@ function SuccessModal({
 						themeType="accent"
 						onClick={onClose}
 					>
-						Cool, Thanks
+						Ok
 					</Button>
 				</div>
 			</div>

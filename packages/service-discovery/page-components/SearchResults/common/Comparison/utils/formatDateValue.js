@@ -5,7 +5,7 @@ const formatDateValue = (date) => (
 	formatDate({
 		date,
 		formattype : 'date',
-		dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MMM-yyyy'],
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 	}) || '-'
 );
 
