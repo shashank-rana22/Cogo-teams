@@ -80,7 +80,7 @@ function SearchResults() {
 	if (loading && isEmpty(data) && screen === 'listRateCard') {
 		return (
 			<div className={styles.loading}>
-				<span className={styles.loading_text}>Looking for Rates</span>
+				<span className={styles.loading_text}>Fetching Best Possible Rates</span>
 				<Loader themeType="primary" className={styles.loader} background="#000" />
 			</div>
 		);
