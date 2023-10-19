@@ -21,8 +21,8 @@ function ModeItem({
 
 	const { label, value, icon } = data;
 
-	const is_available = GLOBAL_CONSTANTS.new_search_supported_services.includes(data?.value)
-	|| GLOBAL_CONSTANTS.new_search_supported_services.find((service) => service.includes(data?.value));
+	const is_available = GLOBAL_CONSTANTS.new_search_supported_services.includes(value)
+	|| GLOBAL_CONSTANTS.new_search_supported_services.find((service) => service.includes(value));
 
 	const handleClick = () => {
 		if (!is_available) {

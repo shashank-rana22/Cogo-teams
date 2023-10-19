@@ -13,6 +13,7 @@ const getFtlFeedbackControls = () => {
 			name  : 'preferred_freight_rate',
 			label : 'Indicative Rate',
 			type  : 'number',
+			min   : 0,
 			span  : 4,
 		},
 		{
