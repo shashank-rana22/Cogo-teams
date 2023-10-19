@@ -1,4 +1,4 @@
-import { IcCFcl, IcCLcl, IcCAir } from '@cogoport/icons-react';
+import { IcCFcl, IcCLcl, IcCAir, IcMLocalCharges } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -9,16 +9,29 @@ import useUpdateRfqRateMargin from './useUpdateRfqRateMargin';
 
 const ICON_MAPPING = {
 	fcl_freight: {
-		service_icon  : IcCFcl,
-		service_label : 'FCL',
+		service_icon   : IcCFcl,
+		service_label  : 'FCL',
+		css_class_name : 'fcl',
 	},
 	lcl_freight: {
-		service_icon  : IcCLcl,
-		service_label : 'LCL',
+		service_icon   : IcCLcl,
+		service_label  : 'LCL',
+		css_class_name : 'lcl',
 	},
 	air_freight: {
-		service_icon  : IcCAir,
-		service_label : 'AIR',
+		service_icon   : IcCAir,
+		service_label  : 'AIR',
+		css_class_name : 'air',
+	},
+	fcl_freight_local: {
+		service_icon   : IcMLocalCharges,
+		service_label  : 'FCL Local',
+		css_class_name : 'fcl-loc',
+	},
+	lcl_freight_local: {
+		service_icon   : IcMLocalCharges,
+		service_label  : 'LCL Local',
+		css_class_name : 'lcl-loc',
 	},
 };
 
@@ -40,7 +53,7 @@ const useGetPortCard = ({ props }) => {
 	} = data;
 
 	const {
-		origin_port, destination_port, service_type, origin_airport = {}, destination_airport = {},
+		origin_port, destination_port, service_type, origin_airport = {}, destination_airport = {}, port = {},
 	} = detail;
 
 	const services = search_params[`${service_type}_services_attributes`];
@@ -85,10 +98,12 @@ const useGetPortCard = ({ props }) => {
 
 	const Component = ICON_MAPPING?.[service_type]?.service_icon;
 	const iconText = ICON_MAPPING?.[service_type]?.service_label;
+	const cssClassName = ICON_MAPPING?.[service_type]?.css_class_name;
 
 	return {
 		loading,
 		Component,
+		single_port      : port,
 		origin_port      : origin_port || origin_airport,
 		service_type,
 		destination_port : destination_port || destination_airport,
@@ -116,6 +131,7 @@ const useGetPortCard = ({ props }) => {
 		margin_limit,
 		rfq_state,
 		iconText,
+		cssClassName,
 	};
 };
 

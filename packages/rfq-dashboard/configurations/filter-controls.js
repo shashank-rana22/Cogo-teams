@@ -14,7 +14,7 @@ const getControls = () => {
 			name        : 'profitability',
 			label       : 'Profitability (%)',
 			type        : 'slider',
-			min         : 0,
+			min         : -100,
 			max         : 100,
 			step        : 1,
 			sliderWidth : 300,
@@ -64,6 +64,10 @@ const getControls = () => {
 				{
 					label : 'AIR',
 					value : 'air_freight',
+				},
+				{
+					label : 'FCL Local',
+					value : 'fcl_freight_local',
 				},
 			],
 		},
