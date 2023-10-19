@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 
 const API_ARRAY_VARIABLE_ONE = 1;
 
@@ -24,7 +24,7 @@ const useDeletePayrunInvoice = ({ generateInvoice = () => {} }) => {
 			method  : 'delete',
 			authKey : 'delete_purchase_payrun_bill',
 		},
-		{ manual: false },
+		{ manual: true },
 	);
 
 	const deleteInvoices = async (id = '') => {

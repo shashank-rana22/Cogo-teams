@@ -3,7 +3,7 @@ import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import Filter from '../../../commons/Filters/index.tsx';
+import Filter from '../../../commons/Filters/index';
 import { moreFilters } from '../configurations/moreFiltersconfig';
 import { CURRENCY_DATA } from '../Constants';
 

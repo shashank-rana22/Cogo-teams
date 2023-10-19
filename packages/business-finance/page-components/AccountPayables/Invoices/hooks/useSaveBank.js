@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 
 const useSaveBank = () => {
 	const {
@@ -25,7 +25,7 @@ const useSaveBank = () => {
 			method  : 'post',
 			authKey : 'post_purchase_payrun_bill_allot_bank',
 		},
-		{ manual: false },
+		{ manual: true },
 	);
 
 	const selectBank = async (id = '', callback = () => {}) => {

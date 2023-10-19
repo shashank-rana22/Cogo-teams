@@ -1,8 +1,8 @@
 import Header from './Header';
 
-function ServiceDetails({ servicesData = [] }) {
+function ServiceDetails({ servicesData = [], activeStakeholder = '' }) {
 	const addedServiceComponent = (
-		<Header serviceData={servicesData} />
+		<Header serviceData={servicesData} activeStakeholder={activeStakeholder} />
 	);
 
 	return addedServiceComponent;

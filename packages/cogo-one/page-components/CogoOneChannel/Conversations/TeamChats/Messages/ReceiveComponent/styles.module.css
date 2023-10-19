@@ -1,0 +1,41 @@
+.container {
+	height: fit-content;
+	margin: 12px 0;
+
+	:global {
+		.ui_avatar_text {
+			background: none;
+		}
+	}
+}
+
+.message {
+	display: flex;
+}
+
+.message_card {
+	max-width: 90%;
+	padding: 6px 8px;
+	font-size: 13px;
+	overflow-wrap: break-word;
+	background: #fff;
+	border-radius: 0 4px 4px;
+	box-shadow: 0 0 4px 0 #627fac33;
+}
+
+.sender_name {
+	margin-right: 4px;
+}
+
+.styled_avatar {
+	margin-right: 8px;
+	background: #ffd761;
+	border-radius: 50% !important;
+}
+
+.sender_details {
+	display: flex;
+	align-items: center;
+	margin: 0 0 4px 40px;
+	font-size: 10px;
+}

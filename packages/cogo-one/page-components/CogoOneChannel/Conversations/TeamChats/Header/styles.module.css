@@ -1,0 +1,83 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: 100%;
+	padding: 0 14px 0 16px;
+
+	:global {
+		.ui_avatar_text {
+			background: none;
+		}
+	}
+}
+
+.common_flex {
+	display: flex;
+	align-items: center;
+	width: calc(100% - 140px);
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+}
+
+.styled_avatar {
+	margin-right: 6px;
+	background: #ffd761;
+	border-radius: 50% !important;
+}
+
+.name {
+	display: flex;
+	align-items: flex-end;
+	width: calc(100% - 30px);
+	padding-left: 8px;
+	font-size: 14px;
+}
+
+.image_styles {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.buttons_flex {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100px;
+}
+
+.popover_styles {
+	width: 200px;
+	padding: 0 !important;
+
+	>div {
+		width: 100%;
+		padding: 0 !important;
+	}
+}
+
+.count {
+	width: 10px;
+	margin: 0 14px 0 4px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
+}
+
+.delete_icon {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	transition: transform 0.2s;
+
+	&:hover {
+		fill: red;
+		transform: scale(1.2);
+	}
+}
