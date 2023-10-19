@@ -107,6 +107,7 @@ function FTLRouteForm({
 					offLabel="One Way"
 					checked={typeOfJourney === 'round'}
 					onChange={handleToggle}
+					className={styles.toggle}
 				/>
 			</div>
 

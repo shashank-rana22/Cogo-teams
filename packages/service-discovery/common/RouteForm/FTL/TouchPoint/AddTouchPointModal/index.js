@@ -132,6 +132,7 @@ function AddTouchPointModal({
 		<Modal
 			show={show}
 			onClose={() => setShow(false)}
+			className={styles.modal}
 		>
 			<Modal.Header title="Add Touch Points" />
 
@@ -174,6 +175,7 @@ function AddTouchPointModal({
 							themeType="secondary"
 							onClick={onCancel}
 							style={{ marginRight: 12 }}
+							className={styles.button}
 						>
 							Cancel
 						</Button>
@@ -181,6 +183,7 @@ function AddTouchPointModal({
 						<Button
 							themeType="accent"
 							onClick={handleSave}
+							className={styles.button}
 						>
 							Save
 						</Button>
