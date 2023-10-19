@@ -7,9 +7,9 @@ export default function isMileStoneCompleted({
 	consecutivelyCompleted = false,
 	timelineItem = {},
 }) {
-	const { milestone, completed_on } = timelineItem || {};
+	const { milestone = '', completed_on = '' } = timelineItem || {};
 
-	let isMilestoneComplete =		!!completed_on || ICD_MILESTONES_TO_SHOW_COMPLETED.includes(milestone);
+	let isMilestoneComplete = !!completed_on || ICD_MILESTONES_TO_SHOW_COMPLETED.includes(milestone);
 
 	if (isMilestoneComplete) {
 		const todayEnd = new Date();

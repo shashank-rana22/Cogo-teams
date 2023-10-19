@@ -18,7 +18,7 @@ const useVender = ({ setVenderDataValue, tpId, accountMode }) => {
 	);
 	const vender = useCallback(async () => {
 		try {
-			const resp = await venderApiTrigger({
+			const response = await venderApiTrigger({
 				params: {
 					filters: {
 						organization_trade_party_detail_id : tpId,
@@ -28,10 +28,10 @@ const useVender = ({ setVenderDataValue, tpId, accountMode }) => {
 				},
 			});
 
-			if (isEmpty(resp.data.list[GLOBAL_CONSTANTS.zeroth_index])) {
+			if (isEmpty(response?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index])) {
 				Toast.warn('No TradeParty Exists for the Selected Organization');
 			}
-			setVenderDataValue(resp.data.list[GLOBAL_CONSTANTS.zeroth_index]);
+			setVenderDataValue(response?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index]);
 		} catch (error) {
 			Toast.error(error?.response?.data?.message || 'Something went wrong');
 		}
