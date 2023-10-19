@@ -46,6 +46,8 @@ const controls = [
 		placeholder           : 'Transaction Date',
 		isPreviousDaysAllowed : true,
 		value                 : new Date(),
+		maxDate               : new Date(),
+		isClearable           : false,
 		span                  : 4,
 		rules                 : { required: ' Transaction Date is Required' },
 	},
