@@ -16,6 +16,7 @@ function Filter({
 		const {
 			span = 0, name = '', type = '', groupby, showlabel = false, label, show = true, ...rest
 		} = singleControl || {};
+
 		const customiseControl = {
 			id       : `filter-${name}`,
 			value    : filters?.[name] || '',
@@ -37,15 +38,18 @@ function Filter({
 			filters,
 			...rest,
 		};
+
 		if (!show) {
 			return null;
 		}
+
 		return (
 			<div
 				className={styles.col}
 				style={{
 					'--width': `${(span || 1) * (100 / 12)}%`,
 				}}
+				key={name}
 			>
 				<div>
 					{!showlabel && <div className={styles.showlabel}>{label}</div>}
@@ -70,12 +74,12 @@ function Filter({
 								</div>
 							)}
 							<div className={styles.col} style={{ width: `${(span || 12) * (100 / 12)}%` }}>
-								{(groupBy).map((each) => (<GetElement key={each} singleControl={each} />))}
+								{(groupBy).map((each) => GetElement({ singleControl: each }))}
 							</div>
 						</>
 					);
 				}
-				return <GetElement key={control} singleControl={control} />;
+				return (<>{GetElement({ singleControl: control })}</>);
 			})}
 			{showClearBtn && (
 				<Button
