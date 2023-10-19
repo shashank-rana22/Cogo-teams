@@ -15,8 +15,7 @@ function ProductDetails({
 	price = '', discount_percentage = '', ADD_TO_CART = '', SYNCHRONIZE_CART = '',
 	handleBuyNow = () => {}, addedToCart = false, handleAddToCart = () => {}, selectedImage = '',
 	STAR_RATING = '', TICK_ICON = '', colorValuePairs = [], handleVariationColor = () => {}, COUPON_ICON = '',
-	handleApplyClick = () => {},
-	handleImageClick = () => {},
+	handleApplyClick = () => {}, handleImageClick = () => {},
 }) {
 	return (
 		<div className={styles.main_container}>
@@ -194,7 +193,6 @@ function ProductDetails({
 							size="lg"
 							themeType="primary"
 							className={styles.add_to_cart}
-								// onClick={() => { push('/cogo-store/my-cart'); }}
 							onClick={handleBuyNow}
 						>
 							Buy Now

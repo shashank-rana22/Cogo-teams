@@ -73,16 +73,6 @@ function OrderTable({ data, filters, setFilters, dateArray, refetch }) {
 					<div className={styles.heading}>
 						<div className={styles.search_bar}>
 							<div className={styles.sb_left}>
-								{/* <Select
-									key={loading}
-									placeholder="Sort by"
-									name="filter_date"
-									options={DATE_OPTIONS}
-									onChange={(e) => {
-										setFilters((prev) => ({ ...prev, date_sort: e, page: 1 }));
-									}}
-									value={filters.date_sort}
-								/> */}
 								<SelectController
 									size="md"
 									placeholder="date"
