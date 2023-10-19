@@ -107,7 +107,6 @@ function TicketActions({
 			reassign        : { action: setShowReassign, args: true },
 			escalate        : { action: setShowEscalate, args: true },
 			resolve_request : { action: setShowResolveRequest, args: true },
-			reject          : { action: setShowResolveRequest, args: true },
 		};
 
 		const { action, args } = HANDLE_ACTION_MAPPING[item] || {};
