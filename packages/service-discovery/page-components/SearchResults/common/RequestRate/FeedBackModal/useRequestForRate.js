@@ -47,8 +47,8 @@ const useRequestForRate = ({
 			preferred_freight_rate_currency = undefined,
 			remarks = undefined,
 			preferred_shipping_line_ids = undefined,
-			cargo_readiness_date = null,
-			file = null,
+			cargo_readiness_date = undefined,
+			file = [],
 			commodity_description = undefined,
 		} = values;
 
