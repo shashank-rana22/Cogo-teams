@@ -1,8 +1,10 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { Select, Button, Input, Tooltip } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
+	IcMProvision,
 	IcMCrossInCircle,
 	IcMSearchlight,
 	IcMFtick,
@@ -17,6 +19,7 @@ import List from '../commons/List';
 
 import CreateVendorModal from './CreateVendorModal';
 import useListVendors from './hooks/useListVendors';
+import useSendSyncOverHeadsVendor from './hooks/useSendSyncOverHeadsVendor';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
 import configs from './utils/config';
@@ -57,6 +60,7 @@ function VenderComponent() {
 			'/onboard-vendor', // redirecting to VRM(create vendor)
 		);
 	};
+	const { sendSyncOverHeadsVendor } = useSendSyncOverHeadsVendor();
 
 	function RenderHeaders() {
 		return (
@@ -202,6 +206,18 @@ function VenderComponent() {
 	function RenderDropdown(vendorId) {
 		return <ShowMore vendorId={vendorId} />;
 	}
+	function RenderRefresh(itemData) {
+		return (
+			<IcMProvision
+				onClick={() => { sendSyncOverHeadsVendor(itemData?.item); }}
+				style={{ cursor: 'pointer' }}
+				height={24}
+				width={24}
+				color="#F68B21"
+			/>
+
+		);
+	}
 
 	const functions = {
 		renderKYCStatus: (itemData) => (
@@ -212,6 +228,9 @@ function VenderComponent() {
 		),
 		renderInvoice: (itemData) => (
 			<RenderInvoice item={itemData} />
+		),
+		renderRefresh: (itemData) => (
+			<RenderRefresh item={itemData} />
 		),
 		renderName: (itemData) => {
 			const { organizationName = '' } = itemData || {};

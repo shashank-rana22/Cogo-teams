@@ -362,6 +362,7 @@ const GLOBAL_CONSTANTS = {
 		cogo_assured_svg    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-assured.svg',
 		empty_data          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
 		empty_data_image    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
+		no_data_image       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty_no_data.svg',
 		awb_docs_images     : {
 			original_3:
 			'https://cogoport-production.sgp1.digitaloceanspaces.com/1fcd0257b396ea304a7aebfeaceaee76/original_3.png',

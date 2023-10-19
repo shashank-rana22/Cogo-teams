@@ -1,7 +1,7 @@
-/* eslint-disable max-len */
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMArrowUp, IcMProvision } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
@@ -13,11 +13,13 @@ import List from '../../commons/List';
 import ViewRecurringSummery from '../../Expenses/CreateExpenseModal/ViewRecurringSummery';
 import filtersconfig from '../filtersconfig';
 import useListExpense from '../hooks/useListExpense';
+import useSendSyncOverHeadsVendorExpense from '../hooks/useSendSyncOverHeadsVendorExpense';
 import configs from '../utils/config';
 
 import styles from './styles.module.css';
 
-function ShowMore({ vendorId }) {
+// eslint-disable-next-line max-lines-per-function
+function ShowMore({ vendorId = '' }) {
 	const [moreData, setMoreData] = useState(false);
 	const [pageIndex, setPageIndex] = useState(1);
 	const [expenseType, setExpenseType] = useState('RECURRING');
@@ -41,8 +43,17 @@ function ShowMore({ vendorId }) {
 			value : 'NON_RECURRING',
 		},
 	];
-
+	const { sendSyncOverHeadsVendorExpense } = useSendSyncOverHeadsVendorExpense();
 	const functions = {
+		renderopensearch: (itemData) => (
+			<IcMProvision
+				onClick={() => { sendSyncOverHeadsVendorExpense(itemData.billId); }}
+				style={{ cursor: 'pointer' }}
+				height={24}
+				width={24}
+				color="#F68B21"
+			/>
+		),
 		renderCategory: (itemData) => {
 			const { category = '' } = itemData || {};
 			return (
@@ -295,7 +306,9 @@ function ShowMore({ vendorId }) {
 								<div className={styles.no_data}>
 									<div>No data found</div>
 									<img
-										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty_no_data.svg"
+										src={GLOBAL_CONSTANTS.image_url.no_data_image}
+										width={150}
+										height={100}
 										alt="no data"
 									/>
 								</div>
