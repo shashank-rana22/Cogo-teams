@@ -843,8 +843,6 @@ const GLOBAL_CONSTANTS = {
 		internal_operations      : 'internal.operations@cogoport.com',
 		internal_service         : 'internal.customer@cogoport.com',
 		customer_support         : 'customer.support@cogoport.com',
-		operations               : 'operations@cogoport.com',
-		cogo_supply              : 'cogosupply@cogoport.com',
 	},
 	mobile_number: {
 		cogoone_sales_contact_no  : '+918069195810',

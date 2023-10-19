@@ -10,14 +10,6 @@ const COGOPORT_MAILS = [
 		label : 'Customer Support',
 		value : GLOBAL_CONSTANTS?.emails?.customer_support,
 	},
-	{
-		label : 'Operations',
-		value : GLOBAL_CONSTANTS?.emails?.operations,
-	},
-	{
-		label : 'Cogo Supply',
-		value : GLOBAL_CONSTANTS?.emails?.cogo_supply,
-	},
 ];
 
 function getOrgPoc({
