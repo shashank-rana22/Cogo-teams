@@ -8,8 +8,7 @@ import getOptions from '../../utilis/get-options';
 
 const INCREMENT_VALUE = 1;
 
-// eslint-disable-next-line custom-eslint/function-name-check
-const FieldMutation = ({
+const useFieldMutation = ({
 	fields, values, chargeCodesAll, cfsCharges, data, service_type, mandatoryChargeCnt, setValue,
 }) => {
 	const serviceProviderOptions = useGetAsyncOptions(
@@ -145,4 +144,4 @@ const FieldMutation = ({
 	return { newfields };
 };
 
-export default FieldMutation;
+export default useFieldMutation;

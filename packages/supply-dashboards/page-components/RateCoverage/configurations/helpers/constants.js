@@ -67,6 +67,15 @@ export const CLOSE_REASON_OPTIONS = [
 	{ label: 'Rate not available', value: 'rate_not_available' },
 	{ label: 'No change in rate', value: 'no_change_in_rate' },
 ];
+
+export const CLOSE_REQUEST = [
+	{ label: 'Request not serviceable', value: 'request_not_serviceable' },
+	{ label: 'No Space With Service Provider', value: 'no_space_with_service_provider' },
+	{ label: 'Wrong Request', value: 'wrong_request' },
+	{ label: 'Lowest Rate Already Available in Platform', value: 'lowest_rate_already_available_on_platform' },
+	{ label: 'Other Reason', value: 'other_reason' },
+];
+
 export const serviceOptions = [
 	{
 		label : 'FCL Freight',
@@ -243,11 +252,6 @@ export const entityOptions = [
 export const revertedOptions = [
 	{ name: 'reverted', value: 'reverted', label: 'Reverted' },
 	{ name: 'not_reverted', value: 'not_reverted', label: 'Not Reverted' },
-];
-
-export const delayedOptions = [
-	{ name: 'delayed', value: 'delayed', label: 'Delayed' },
-	{ name: 'in_time', value: 'in_time', label: 'In Time' },
 ];
 
 export const filterOption = {

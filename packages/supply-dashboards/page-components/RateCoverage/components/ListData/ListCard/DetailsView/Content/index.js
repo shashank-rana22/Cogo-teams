@@ -1,14 +1,15 @@
-import { Pill, Placeholder } from '@cogoport/components';
+import { Pill, Placeholder, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCopy } from '@cogoport/icons-react';
 import { differenceInDays, startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { DEFAULT_VALUE, LOADER_COUNT } from '../../../../../configurations/helpers/constants';
+import useListShipmentFlashBookingRates from '../../../../../hooks/useListShipmentFlashBookingRates';
 import copyToClipboard from '../../../../../utilis/copyToClipboard';
-
-import styles from './styles.module.css';
+import NewServiceProviderModal from '../ServiceProviderModal';
+import styles from '../styles.module.css';
 
 function ServiceDetailsContent({
 	shipment_data = {}, requestData = {},
@@ -16,7 +17,15 @@ function ServiceDetailsContent({
 	request_loading = false,
 	feedback_loading = false,
 	filter = {},
+	data = {},
 }) {
+	const [serviceModal, setServiceModal] = useState(false);
+
+	const {
+		data: flashBookingRates,
+		shipmentFlashBookingRates = () => {},
+	} = useListShipmentFlashBookingRates({ source_id: data?.source_id });
+
 	const { primary_service_detail, summary } = shipment_data || {};
 	const {
 		commodity = '', container_size = '', container_type = '', containers_count = '', inco_term = '',
@@ -27,13 +36,14 @@ function ServiceDetailsContent({
 		schedule_departure = '',
 		shipping_line = {},
 		preferred_shipping_lines,
-		serial_id,
 		feedbacks = [],
 		closing_remarks = [],
 		status = '',
 		trade_type = '',
+		serial_id,
 		selected_schedule_arrival,
 		selected_schedule_departure,
+		created_at,
 	} = primary_service_detail || feedbackData || requestData || {};
 
 	const handleCopy = (text) => {
@@ -48,12 +58,22 @@ function ServiceDetailsContent({
 		);
 
 	const pillMapping = [
+		{
+			label: created_at && `Booked On ${formatDate({
+				date       : created_at,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
+				separator  : '/',
+			})}`,
+		},
+		{ label: summary?.serial_id && `Serial Id: ${summary?.serial_id}` },
+		{ label: serial_id && `Serial Id: ${serial_id}` },
 		{ label: commodity && startCase(commodity) },
 		{ label: container_size && `${container_size}ft` },
 		{ label: container_type && startCase(container_type) },
 		{ label: containers_count && `${containers_count} Containers` },
 		{ label: inco_term && startCase(inco_term) },
-		{ label: serial_id && `Serial Id : ${serial_id}` },
 		{ label: trade_type && startCase(trade_type) },
 	];
 
@@ -78,14 +98,14 @@ function ServiceDetailsContent({
 			value : `${transitTime} ${filter?.service === 'ftl_freight' ? 'Hrs' : 'Days'}`,
 		},
 		{ label: 'Preferred Shipping', value: shipping_line?.short_name },
-		feedbacks?.length > 0 && (
+		feedbacks?.length > DEFAULT_VALUE && (
 			{
 				label : 'feedbacks',
 				value : feedbacks && (feedbacks || []).map((val) => startCase(val)).join(', '),
 			}
 		),
 
-		closing_remarks?.length > 0 && (
+		closing_remarks?.length > DEFAULT_VALUE && (
 			{
 				label: 'Closing Remarks',
 				value:
@@ -97,9 +117,13 @@ function ServiceDetailsContent({
 		),
 	];
 
+	const handelNewServiceProvider = () => {
+		setServiceModal(!serviceModal);
+		shipmentFlashBookingRates();
+	};
+
 	return (
 		<div>
-
 			{(shipment_loading || request_loading
 					|| feedback_loading) ? [...new Array(LOADER_COUNT).keys()].map((index) => (
 						<Placeholder
@@ -110,100 +134,122 @@ function ServiceDetailsContent({
 				))
 				: (
 
-					<div className={styles.container}>
+					<div className={styles.content_container}>
 						{(!feedback_loading || !request_loading || !shipment_loading)
-			&& (
-				<div>
-					<div className={styles.pill}>
-						{pillMapping?.map((val) => (
-							<div key={val?.label}>
-								{ val?.label
-								&& <Pill color="blue">{val?.label}</Pill>}
-							</div>
-						))}
-					</div>
-
-					<div className={styles.pill}>
-						{contentMapping?.map((val) => (
-							<div key={val?.label}>
-								{val?.value && (
-									<div className={styles.content}>
-										<div className={styles.label}>
-											{val.label}
-											{' '}
-											:
-											{' '}
+						&& (
+							<div>
+								<div className={styles.pill}>
+									{pillMapping?.map((val) => (
+										<div key={val?.label}>
+											{ val?.label
+												&& <Pill color="blue">{val?.label}</Pill>}
 										</div>
-										<Pill
-											key={val?.value}
-											size="md"
-											color=""
-										>
-											{val?.value}
-										</Pill>
+									))}
+								</div>
+
+								<div className={styles.pill}>
+									{contentMapping?.map((val) => (
+										<div key={val?.label}>
+											{val?.value && (
+												<div className={styles.content}>
+													<div className={styles.label}>
+														{val.label}
+														{' '}
+														:
+														{' '}
+													</div>
+													<Pill
+														key={val?.value}
+														size="md"
+														color=""
+													>
+														{val?.value}
+													</Pill>
+												</div>
+											)}
+										</div>
+									))}
+								</div>
+
+								{summary?.services?.length > DEFAULT_VALUE && (
+									<div className={styles.content}>
+										<div className={styles.label}>Additional Service : </div>
+										{(summary?.services || []).map((services_value) => (
+											<Pill
+												key={services_value}
+												size="md"
+												color="#F8F2E7"
+											>
+												{startCase(services_value)?.replace('Service', '')}
+											</Pill>
+										))}
 									</div>
 								)}
-							</div>
-						))}
-					</div>
 
-					{summary?.services?.length > DEFAULT_VALUE && (
-						<div className={styles.content}>
-							<div className={styles.label}>Additional Service : </div>
-							{(summary?.services || []).map((services_value) => (
-								<Pill
-									key={services_value}
-									size="md"
-									color="#F8F2E7"
-								>
-									{startCase(services_value)?.replace('Service', '')}
-								</Pill>
-							))}
-						</div>
-					)}
+								<div className={styles.pill}>
+									{summary?.importer_exporter?.business_name
+										&& (
+											<div className={styles.content}>
+												<div className={styles.label}> Customer : </div>
+												<div className={styles.name}>
+													{' '}
+													{startCase(summary?.importer_exporter?.business_name)}
+												</div>
+											</div>
+										)}
 
-					<div className={styles.pill}>
-						{summary?.importer_exporter?.business_name
-						&& (
-							<div className={styles.content}>
-								<div className={styles.label}> Customer : </div>
-								<div className={styles.name}>
-									{' '}
-									{startCase(summary?.importer_exporter?.business_name)}
+									{preferred_shipping_lines?.[DEFAULT_VALUE]?.business_name
+										&& (
+											<div className={styles.content}>
+												<div className={styles.label}>
+													{' '}
+													Shippling Line :
+												</div>
+												<div className={styles.name}>
+													{' '}
+													{startCase(preferred_shipping_lines?.
+														[DEFAULT_VALUE]?.business_name)}
+												</div>
+											</div>
+										)}
+
+									{status
+										&& (
+											<div className={styles.content}>
+												<div className={styles.label}>
+													Status :
+													<Pill size="sm" color={status === 'inactive' ? 'red' : 'green'}>
+														{startCase(status)}
+													</Pill>
+												</div>
+											</div>
+										)}
+								</div>
+
+								<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+									<div className={styles.head}>Service Provider Not Listed?</div>
+									<Button
+										size="md"
+										themeType="linkUi"
+										style={{ color: 'blue', padding: '8px' }}
+										onClick={handelNewServiceProvider}
+									>
+										ADD NEW
+									</Button>
 								</div>
 							</div>
 						)}
-
-						{preferred_shipping_lines?.[DEFAULT_VALUE]?.business_name
-						&& (
-							<div className={styles.content}>
-								<div className={styles.label}>
-									{' '}
-									Shippling Line :
-								</div>
-								<div className={styles.name}>
-									{' '}
-									{startCase(preferred_shipping_lines?.[DEFAULT_VALUE]?.business_name)}
-								</div>
-							</div>
-						)}
-
-						{status
-						&& (
-							<div className={styles.content}>
-								<div className={styles.label}>
-									Status :
-									<Pill size="sm" color={status === 'inactive' ? 'red' : 'green'}>
-										{startCase(status)}
-									</Pill>
-								</div>
-							</div>
-						)}
-					</div>
-				</div>
-			)}
 					</div>
 				)}
+
+			{serviceModal && (
+				<NewServiceProviderModal
+					serviceModal={serviceModal}
+					setServiceModal={setServiceModal}
+					flashBookingRates={flashBookingRates}
+					filter={filter}
+				/>
+			)}
 		</div>
 	);
 }

@@ -49,8 +49,8 @@ const useGetListCoverage = () => {
 		daily_stats               : true,
 		assign_to_id              : '',
 		is_flash_booking_reverted : '',
-		is_flash_booking_delayed  : '',
 		cogo_entity_id            : '',
+		shipment_id               : '',
 	});
 	const endPoint = API_NAME[filter?.service || 'fcl_freight'];
 
@@ -92,12 +92,8 @@ const useGetListCoverage = () => {
 
 		try {
 			let is_flash_booking_reverted;
-			let is_flash_booking_delayed;
 			if (filter?.is_flash_booking_reverted) {
 				is_flash_booking_reverted = filter?.is_flash_booking_reverted === 'reverted';
-			}
-			if (filter?.is_flash_booking_delayed) {
-				is_flash_booking_delayed = filter?.is_flash_booking_delayed === 'delayed';
 			}
 
 			await trigger({
@@ -110,7 +106,6 @@ const useGetListCoverage = () => {
 						cogo_entity_id : filter?.cogo_entity_id === 'cogo_entity_id'
 							? user_data?.partner?.id : undefined,
 						is_flash_booking_reverted,
-						is_flash_booking_delayed,
 						...DATE_PARAMS,
 					},
 					page,

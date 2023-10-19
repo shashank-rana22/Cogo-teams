@@ -2,3 +2,11 @@
 	width: 340px !important;
 	height: 40px !important;
 }
+
+.date_picker {
+	:global {
+		.react-datepicker-wrapper {
+			width: 250px !important;
+		}
+	}
+}

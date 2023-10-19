@@ -19,7 +19,7 @@ function ViewMoreServices({ serviceList = [], customer_name = null }) {
 								{customer_name}
 							</div>
 						) : null}
-						{serviceList.map((service) => {
+						{(serviceList || []).map((service) => {
 							const { origin, destination } = getLocationInfo(
 								service,
 								'service_type',

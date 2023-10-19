@@ -82,6 +82,10 @@ const airCustomsControls = ({
 			}
 			: null,
 		{
+			heading : 'Line Items',
+			span    : 12,
+		},
+		{
 			label              : 'Add Custom Line Items',
 			name               : 'line_items',
 			type               : 'fieldArray',

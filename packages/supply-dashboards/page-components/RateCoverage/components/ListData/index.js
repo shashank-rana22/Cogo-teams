@@ -30,24 +30,22 @@ function ListData({
 }) {
 	const [serialId, setSerialId] = useState('');
 	const [showFilters, setShowFilters] = useState(false);
+
 	const { statistics = {} } = statsData;
 	const { list = [] } = data;
 	const { dynamic_statistics = {} } = statsData;
 
-	const {
-		service = '', cogo_entity_id = '', is_flash_booking_reverted = '',
-		is_flash_booking_delayed = '',
-	} = filter || {};
-
-	useEffect(() => {
-		getListCoverage(serialId);
-	}, [getListCoverage, serialId]);
+	const { service = '', cogo_entity_id = '', is_flash_booking_reverted = '' } = filter || {};
 
 	const handleClick = (card) => {
 		setSource(card);
 		setPage(VALUE_ONE);
 		setSerialId('');
 	};
+
+	useEffect(() => {
+		getListCoverage(serialId);
+	}, [getListCoverage, serialId]);
 
 	return (
 		<div className={styles.main_container}>
@@ -144,23 +142,6 @@ function ListData({
 							}]}
 							onItemsChange={() => {
 								setFilter({ ...filter, is_flash_booking_reverted: '' });
-							}}
-						/>
-					)}
-						{is_flash_booking_delayed
-					&& (
-						<Tags
-							size="md"
-							items={[{
-								disabled : false,
-								children : startCase(is_flash_booking_delayed === 'delayed'
-									? 'Delayed' : 'In Time'),
-								color    : 'blue',
-								tooltip  : false,
-								closable : true,
-							}]}
-							onItemsChange={() => {
-								setFilter({ ...filter, is_flash_booking_delayed: '' });
 							}}
 						/>
 					)}

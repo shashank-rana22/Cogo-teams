@@ -99,15 +99,6 @@ function ListCard({
 					<div className={styles.head}>
 						{data?.updated_at && (
 							<div style={{ display: 'flex' }}>
-								<div>
-									Booked On :
-									{' '}
-									{formatDate({
-										date       : data?.updated_at,
-										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-										formatType : 'date',
-									})}
-								</div>
 								<div className={styles.pill}>
 									TID:
 									{' '}
@@ -132,7 +123,9 @@ function ListCard({
 								{formatDate({
 									date       : data?.created_at,
 									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-									formatType : 'date',
+									timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+									formatType : 'dateTime',
+									separator  : '/',
 								})}
 							</div>
 						)}
@@ -271,7 +264,8 @@ function ListCard({
 							)}
 
 						<Button
-							style={{ marginLeft: '16px' }}
+							size="md"
+							style={{ marginLeft: '16px', padding: '10px' }}
 							onClick={handleAddRate}
 							disabled={reverted_status === 'reverted'}
 						>

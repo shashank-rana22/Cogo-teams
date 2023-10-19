@@ -1,12 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable max-lines-per-function */
-import { Button, Modal, Toast, Tabs, TabPanel } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
-import Layout from '../../../../../RfqEnquiries/Layout';
 import useControls from '../../../../configurations/controls';
 import { DEFAULT_VALUE, DELTA_VALUE, TWO_HUNDERD, VALUE_ONE } from '../../../../configurations/helpers/constants';
 import FieldMutation from '../../../../configurations/helpers/mutation-fields';
@@ -16,10 +14,8 @@ import useDeleteFreightRateRequests from '../../../../hooks/useDeleteFreightRate
 import useDeleteRateJob from '../../../../hooks/useDeleteRateJob';
 import useGetFreightRate from '../../../../hooks/useGetFreightRate';
 import useUpdateFlashBookingRate from '../../../../hooks/useUpdateFlashBookingRate';
-import AddAdditionalRates from '../AddRate/AddAdditionalRate';
-import ServiceDetailsContent from '../DetailsView/Content';
 
-import styles from './styles.module.css';
+import AddRate from './Add';
 
 function AddRateModal({
 	showModal = false,
@@ -40,15 +36,17 @@ function AddRateModal({
 	spot_data = {},
 	getData = () => {},
 }) {
-	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	const [chargeCodes, setChargeCodes] = useState(null);
 	const [activeTab, setActiveTab] = useState('main_freight');
 	const [dependentMainFreight, setDependentMainFreight] = useState([{ service: 'main_freight' }]);
 	const [payload, setPayload] = useState(null);
 
+	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
+
 	const addLocalServices = ['fcl_freight', 'air_freight']?.includes(filter?.service);
 
 	const { user: { id: user_id = '' } = {} } = user_data;
+
 	const showElements = {
 		origin_main_port_id      : data?.origin_port?.is_icd,
 		destination_main_port_id : data?.destination_port?.is_icd,
@@ -89,8 +87,17 @@ function AddRateModal({
 	};
 
 	const handelAdditionalServices = async () => {
+		Toast.success('Rate added successfully');
 		setActiveTab('additional_freight');
 		await getStats();
+	};
+
+	const handleSuccessOrAdditionalServices = () => {
+		if (addLocalServices) {
+			handelAdditionalServices();
+		} else {
+			handleSuccessActions();
+		}
 	};
 
 	const handleSubmitData = async (formData) => {
@@ -104,33 +111,21 @@ function AddRateModal({
 			}
 			const resp = await deleteFeedbackRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
 			if (resp === TWO_HUNDERD) {
-				if (addLocalServices) {
-					handelAdditionalServices();
-				} else {
-					handleSuccessActions();
-				}
+				handleSuccessOrAdditionalServices();
 			}
 		}
 
 		if (rate_id && source === 'rate_request') {
 			const resp = await deleteRequest({ id: data?.source_id, closing_remarks: data?.closing_remarks });
 			if (resp === TWO_HUNDERD) {
-				if (addLocalServices) {
-					handelAdditionalServices();
-				} else {
-					handleSuccessActions();
-				}
+				handleSuccessOrAdditionalServices();
 			}
 		}
 
 		if (rate_id && source === 'live_booking') {
 			const resp = await updateFlashBookingRate({ data, formData, shipment_data, filter });
 			if (resp === TWO_HUNDERD) {
-				if (addLocalServices) {
-					handelAdditionalServices();
-				} else {
-					handleSuccessActions();
-				}
+				handleSuccessOrAdditionalServices();
 			}
 		}
 		if (['critical_ports', 'expiring_rates', 'cancelled_shipments']
@@ -138,11 +133,7 @@ function AddRateModal({
 			if (rate_id) {
 				const resp = await deleteRateJob({ rate_id, data: formData, id: data?.id });
 				if (resp === TWO_HUNDERD) {
-					if (addLocalServices) {
-						handelAdditionalServices();
-					} else {
-						handleSuccessActions();
-					}
+					handleSuccessOrAdditionalServices();
 				}
 			}
 		}
@@ -237,94 +228,34 @@ function AddRateModal({
 	}, []);
 
 	return (
-		<Modal
-			show={showModal}
-			onClose={() => {
-				setShowModal((prev) => !prev);
-				setServiceIdPresent('');
-				if (activeTab) {
-					getListCoverage();
-				}
-			}}
-			placement="top"
-			size="xl"
-		>
-			<div>
-				{['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
-			&& (
-				<div className={styles.service_content}>
-					<ServiceDetailsContent
-						shipment_data={shipment_data}
-						requestData={requestData?.list?.[DEFAULT_VALUE] || null}
-						feedbackData={feedbackData?.list?.[DEFAULT_VALUE] || null}
-						shipment_loading={shipment_loading}
-						request_loading={request_loading}
-						feedback_loading={feedback_loading}
-					/>
-				</div>
-			)}
-			</div>
-
-			<div className={!addLocalServices ? styles.local : ''}>
-				<Tabs
-					activeTab={activeTab}
-					themeType="secondary"
-					onChange={setActiveTab}
-					style={{ padding: '10px 0 0' }}
-				>
-
-					<TabPanel
-						name="main_freight"
-						title={addLocalServices && 'ADD MAIN FREIGHT RATE'}
-					>
-						<Modal.Body>
-							<div className={styles.title}>Please Add Rate</div>
-							<Layout
-								fields={finalFields}
-								control={control}
-								errors={errors}
-								showElements={showElements}
-								source={source}
-							/>
-						</Modal.Body>
-						<Modal.Footer>
-							<div className={styles.submit_button}>
-								<Button
-									size="md"
-									onClick={() => {
-										setShowModal((prev) => !prev);
-										setServiceIdPresent('');
-									}}
-									style={{ marginRight: '20px' }}
-									themeType="secondary"
-								>
-									Close
-								</Button>
-								<Button
-									size="md"
-									onClick={handleSubmit(handleSubmitData)}
-									disabled={loading}
-								>
-									Submit
-								</Button>
-							</div>
-						</Modal.Footer>
-					</TabPanel>
-
-					{addLocalServices && (
-						<TabPanel name="additional_freight" title="ADD OTHER SERVICES RATES">
-							<AddAdditionalRates
-								payload={payload}
-								data={data}
-								additionalService={spot_data?.service_details}
-								dependentMainFreight={dependentMainFreight}
-								filter={filter}
-							/>
-						</TabPanel>
-					)}
-				</Tabs>
-			</div>
-		</Modal>
+		<AddRate
+			showModal={showModal}
+			setShowModal={setShowModal}
+			setServiceIdPresent={setServiceIdPresent}
+			getListCoverage={getListCoverage}
+			activeTab={activeTab}
+			source={source}
+			shipment_data={shipment_data}
+			requestData={requestData}
+			feedbackData={feedbackData}
+			shipment_loading={shipment_loading}
+			request_loading={request_loading}
+			feedback_loading={feedback_loading}
+			addLocalServices={addLocalServices}
+			showElements={showElements}
+			setActiveTab={setActiveTab}
+			finalFields={finalFields}
+			control={control}
+			handleSubmit={handleSubmit}
+			loading={loading}
+			errors={errors}
+			handleSubmitData={handleSubmitData}
+			payload={payload}
+			data={data}
+			spot_data={spot_data}
+			dependentMainFreight={dependentMainFreight}
+			filter={filter}
+		/>
 	);
 }
 export default AddRateModal;

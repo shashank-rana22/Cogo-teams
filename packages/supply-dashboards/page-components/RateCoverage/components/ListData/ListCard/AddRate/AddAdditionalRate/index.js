@@ -33,10 +33,10 @@ function AddAdditionalRates({
 				'lcl_freight',
 			].includes(additionalService[service]?.service_type)
 			&& !charges[serviceType].includes(
-				`${additionalService[service].trade_type}:${additionalService[service].service_type}`,
+				`${additionalService[service].trade_type}:${additionalService[service]?.service_type}`,
 			)
 		) {
-			const newService = `${additionalService[service].trade_type}:${additionalService[service].service_type}`;
+			const newService = `${additionalService[service].trade_type}:${additionalService[service]?.service_type}`;
 			charges[serviceType].push(newService);
 		}
 	});

@@ -9,10 +9,10 @@ function AdditionalCharges({
 	payload = {},
 	charge = {},
 	setAdditionalCharge = () => {},
-	setChargeAdded,
-	additionalService,
-	message,
-	containerDetails,
+	setChargeAdded = () => {},
+	additionalService = {},
+	message = {},
+	containerDetails = {},
 }) {
 	const {
 		fields,

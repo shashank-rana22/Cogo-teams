@@ -19,6 +19,7 @@ function HeaderCompoment({
 			value             : '',
 			revert            : '',
 			opt               : '',
+			shipment_id       : '',
 		});
 		setSerialId('');
 		setShowWeekData(false);

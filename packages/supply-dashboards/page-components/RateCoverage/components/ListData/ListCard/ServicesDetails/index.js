@@ -26,7 +26,7 @@ function ServicesDetails({
 	showServicePopover = false,
 	setShowServicePopover = () => {},
 }) {
-	const [showPopover, setShowPopover] = useState(true);
+	const [showPopover, setShowPopover] = useState(false);
 	const [page, setPage] = useState(1);
 	const user_id = useSelector(({ profile }) => profile.id);
 

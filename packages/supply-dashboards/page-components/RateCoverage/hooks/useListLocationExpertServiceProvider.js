@@ -30,7 +30,7 @@ const useListLocationExpertServiceProvider = ({
 				},
 			});
 		} catch (e) {
-			console.log(e);
+			// console.log(e);
 		}
 	}, [cogo_entity_id, labeledValue,
 		page, service_expertise_destination_location_id,

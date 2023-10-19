@@ -1,4 +1,3 @@
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format } from '@cogoport/utils';
 

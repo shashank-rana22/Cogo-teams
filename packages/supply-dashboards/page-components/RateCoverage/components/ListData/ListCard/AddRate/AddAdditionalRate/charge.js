@@ -50,7 +50,7 @@ function Charge({
 				{showContent === true ? (<IcMArrowRotateDown />) : (<IcMArrowRotateRight />)}
 				{startCase(charge)}
 				<span>{`${messageToShow}`}</span>
-				{chargeAdded.includes(`${charge}${message}`) && (<IcMFtick style={{ color: '#67C676' }} />)}
+				{chargeAdded?.includes(`${charge}${message}`) && (<IcMFtick style={{ color: '#67C676' }} />)}
 			</div>
 
 			{showContent && (

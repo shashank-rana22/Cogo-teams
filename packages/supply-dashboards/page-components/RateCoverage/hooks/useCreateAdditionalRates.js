@@ -6,7 +6,8 @@ import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 import configuration from '../components/ListData/ListCard/AddRate/AddAdditionalRate/configurations';
-import FieldMutation from '../configurations/helpers/field-mutation-additional';
+import { VALUE_ONE, DEFAULT_VALUE } from '../configurations/helpers/constants';
+import useFieldMutation from '../configurations/helpers/field-mutation-additional';
 import formatAirCustomsRate from '../payload/format-air-customs-rate';
 import formatAirLocalCharge from '../payload/format-air-local-charge';
 import formatAirSurcharge from '../payload/format-air-surcharge';
@@ -18,7 +19,6 @@ import formatHaulageFreightRate from '../payload/format-haulage-freight-rate';
 import formatLtlRate from '../payload/format-ltl-rate';
 import formatTrailerFreightRate from '../payload/format-trailer-freight';
 import getDefaultValues from '../utilis/get-default-values';
-import showErrorsInToast from '../utilis/showErrorsInToast';
 
 import useGetChargeCodes from './useGetChargeCodes';
 
@@ -42,9 +42,6 @@ const SERVICE_MAPPING = {
 	air_customs       : 'air_customs_charges',
 	haulage_freight   : 'haulage_freight_charges',
 };
-
-const DEFAULT_VALUE = 0;
-const INCREMENT_VALUE = 1;
 
 const getPayload = ({ values, payload, charge, chargeName }) => {
 	switch (chargeName) {
@@ -121,7 +118,7 @@ const useCreateAdditionalRates = ({
 		demurrage_days : watch('demurrage_free_days'),
 	};
 
-	const { newfields } = FieldMutation({
+	const { newfields } = useFieldMutation({
 		fields,
 		values,
 		chargeCodesAll,
@@ -163,7 +160,7 @@ const useCreateAdditionalRates = ({
 			setAdditionalCharge(null);
 			reset();
 		} catch (err) {
-			showErrorsInToast(err.data);
+			Toast.error(err.data);
 		}
 	};
 
@@ -171,11 +168,11 @@ const useCreateAdditionalRates = ({
 		if (addSlabs) {
 			addSlabs.forEach((obj, index) => {
 				if (!index) {
-					setValue('add_slabs.0.lower_limit', Number(freeLimitDays) + INCREMENT_VALUE || DEFAULT_VALUE);
+					setValue('add_slabs.0.lower_limit', Number(freeLimitDays) + VALUE_ONE || DEFAULT_VALUE);
 				} else {
 					setValue(
 						`add_slabs.${index}.lower_limit`,
-						Number(addSlabs[index - INCREMENT_VALUE].upper_limit) + INCREMENT_VALUE,
+						Number(addSlabs[index - VALUE_ONE].upper_limit) + VALUE_ONE,
 					);
 				}
 			});

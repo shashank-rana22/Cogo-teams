@@ -10,13 +10,6 @@
 	}
 }
 
-.cargo_detail_pill {
-	height: fit-content;
-	font-weight: 500;
-	color: #4f4f4f;
-	text-transform: capitalize;
-}
-
 .shipment_cargo_details_root {
 	justify-content: start;
 }

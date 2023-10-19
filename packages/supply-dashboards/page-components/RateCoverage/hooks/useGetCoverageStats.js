@@ -79,9 +79,11 @@ const useGetCoverageStats = (filter) => {
 				params: {
 					filters: {
 						...FINAL_FILTERS,
-						user_id      : releventToMeValue ? user_id : FINAL_FILTERS.user_id,
+						user_id        : releventToMeValue ? user_id : FINAL_FILTERS.user_id,
+						cogo_entity_id : filter?.cogo_entity_id === 'cogo_entity_id'
+							? user_data?.partner?.id : undefined,
 						daily_stats,
-						weekly_stats : !daily_stats,
+						weekly_stats: !daily_stats,
 						...DATE_PARAMS,
 					},
 				},
@@ -89,7 +91,7 @@ const useGetCoverageStats = (filter) => {
 		} catch (err) {
 			// console.log(err);
 		}
-	}, [trigger, user_id, filter]);
+	}, [filter, trigger, user_id, user_data?.partner?.id]);
 
 	useEffect(() => {
 		getStats();

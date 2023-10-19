@@ -23,32 +23,32 @@ const configuration = (
 		case 'air_freight_local':
 			return airLocalChargesControls(payload);
 		case 'haulage_freight':
-			Object.keys(additionalService).forEach((service) => {
+			Object.keys(additionalService)?.forEach((service) => {
 				if (
-					additionalService[service].service_type === 'haulage_freight'
-				&& additionalService[service].trade_type === trade_type
+					additionalService?.[service]?.service_type === 'haulage_freight'
+				&& additionalService?.[service]?.trade_type === trade_type
 				) {
-					PREFILLED_VALUES.origin_location_id = additionalService[service].origin_location_id
+					PREFILLED_VALUES.origin_location_id = additionalService?.[service]?.origin_location_id
 					|| payload?.destination_main_port_id;
-					PREFILLED_VALUES.destination_location_id = additionalService[service].destination_location_id
+					PREFILLED_VALUES.destination_location_id = additionalService?.[service]?.destination_location_id
 					|| payload?.origin_main_port_id;
-					PREFILLED_VALUES.container_size = containerDetails.container_size;
-					PREFILLED_VALUES.container_type = containerDetails.container_type;
+					PREFILLED_VALUES.container_size = containerDetails?.container_size;
+					PREFILLED_VALUES.container_type = containerDetails?.container_type;
 					PREFILLED_VALUES.commodity = containerDetails?.commodity;
 					PREFILLED_VALUES.service_provider = payload?.service_provider_id;
 				}
 			});
 			return haulageControls(PREFILLED_VALUES);
 		case 'trailer_freight':
-			Object.keys(additionalService).forEach((service) => {
+			Object.keys(additionalService)?.forEach((service) => {
 				if (
-					additionalService[service].service_type === 'trailer_freight'
-				&& additionalService[service].trade_type === trade_type
+					additionalService[service]?.service_type === 'trailer_freight'
+				&& additionalService[service]?.trade_type === trade_type
 				) {
-					PREFILLED_VALUES.origin = additionalService[service].origin_location_id;
-					PREFILLED_VALUES.destination = additionalService[service].destination_location_id;
-					PREFILLED_VALUES.container_size = containerDetails.container_size;
-					PREFILLED_VALUES.container_type = containerDetails.container_type;
+					PREFILLED_VALUES.origin = additionalService?.[service]?.origin_location_id;
+					PREFILLED_VALUES.destination = additionalService?.[service]?.destination_location_id;
+					PREFILLED_VALUES.container_size = containerDetails?.container_size;
+					PREFILLED_VALUES.container_type = containerDetails?.container_type;
 					PREFILLED_VALUES.commodity = containerDetails?.commodity;
 				}
 			});
@@ -59,15 +59,15 @@ const configuration = (
 			PREFILLED_VALUES.container_size = containerDetails?.container_size;
 			PREFILLED_VALUES.container_type = containerDetails?.container_type;
 			PREFILLED_VALUES.commodity = containerDetails?.commodity;
-			Object.keys(additionalService).forEach((service) => {
+			Object.keys(additionalService)?.forEach((service) => {
 				if (
-					additionalService[service].service_type === 'fcl_customs'
-				&& additionalService[service].trade_type === trade_type
+					additionalService[service]?.service_type === 'fcl_customs'
+				&& additionalService[service]?.trade_type === trade_type
 				) {
-					PREFILLED_VALUES.port_id = additionalService[service].port_id
-					|| additionalService[service].port?.id;
+					PREFILLED_VALUES.port_id = additionalService[service]?.port_id
+					|| additionalService?.[service]?.port?.id;
 					PREFILLED_VALUES.service_provider = payload?.service_provider_id;
-					PREFILLED_VALUES.trade_type = additionalService[service].trade_type;
+					PREFILLED_VALUES.trade_type = additionalService?.[service]?.trade_type;
 				}
 			});
 			return fclCustomsControls(PREFILLED_VALUES);
@@ -84,7 +84,7 @@ const configuration = (
 					PREFILLED_VALUES.airport_id = additionalService[service]?.airport_id
 					|| additionalService[service]?.airport?.id;
 					PREFILLED_VALUES.service_provider = payload?.service_provider_id;
-					PREFILLED_VALUES.trade_type = additionalService[service].trade_type;
+					PREFILLED_VALUES.trade_type = additionalService?.[service]?.trade_type;
 				}
 			});
 			return airCustomsControls(PREFILLED_VALUES);
@@ -97,9 +97,9 @@ const configuration = (
 					additionalService[service].service_type === 'fcl_cfs'
 				&& additionalService[service].trade_type === trade_type
 				) {
-					PREFILLED_VALUES.port_id = additionalService[service].port_id;
-					PREFILLED_VALUES.trade_type = additionalService[service].trade_type;
-					PREFILLED_VALUES.cargo_handling_type = additionalService[service].cargo_handling_type;
+					PREFILLED_VALUES.port_id = additionalService[service]?.port_id;
+					PREFILLED_VALUES.trade_type = additionalService[service]?.trade_type;
+					PREFILLED_VALUES.cargo_handling_type = additionalService[service]?.cargo_handling_type;
 				}
 			});
 			return cfsControls(PREFILLED_VALUES);
@@ -112,11 +112,11 @@ const configuration = (
 				) {
 					PREFILLED_VALUES.originType = additionalService[service]?.origin_location?.type;
 					PREFILLED_VALUES.destinationType = additionalService[service]?.destination_location?.type;
-					PREFILLED_VALUES.origin = additionalService[service].origin_location_id;
-					PREFILLED_VALUES.destination = additionalService[service].destination_location_id;
-					PREFILLED_VALUES.container_size = containerDetails.container_size;
-					PREFILLED_VALUES.container_type = containerDetails.container_type;
-					PREFILLED_VALUES.commodity = containerDetails.commodity;
+					PREFILLED_VALUES.origin = additionalService[service]?.origin_location_id;
+					PREFILLED_VALUES.destination = additionalService[service]?.destination_location_id;
+					PREFILLED_VALUES.container_size = containerDetails?.container_size;
+					PREFILLED_VALUES.container_type = containerDetails?.container_type;
+					PREFILLED_VALUES.commodity = containerDetails?.commodity;
 				}
 			});
 			return ltlControls({ ...PREFILLED_VALUES });
@@ -127,10 +127,10 @@ const configuration = (
 					additionalService[service].service_type === 'ftl_freight'
 				&& additionalService[service].trade_type === trade_type
 				) {
-					PREFILLED_VALUES.origin = additionalService[service].origin_location_id;
-					PREFILLED_VALUES.destination = additionalService[service].destination_location_id;
-					PREFILLED_VALUES.container_size = containerDetails.container_size;
-					PREFILLED_VALUES.container_type = containerDetails.container_type;
+					PREFILLED_VALUES.origin = additionalService[service]?.origin_location_id;
+					PREFILLED_VALUES.destination = additionalService[service]?.destination_location_id;
+					PREFILLED_VALUES.container_size = containerDetails?.container_size;
+					PREFILLED_VALUES.container_type = containerDetails?.container_type;
 					PREFILLED_VALUES.commodity = containerDetails?.commodity;
 				}
 			});

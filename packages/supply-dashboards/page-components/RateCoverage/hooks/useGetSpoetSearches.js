@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
+import { DEFAULT_VALUE } from '../configurations/helpers/constants';
+
 function useGetSpoetSearches({ feedbackData, requestData, showPopover }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url          : '/list_spot_searches',
@@ -8,7 +10,7 @@ function useGetSpoetSearches({ feedbackData, requestData, showPopover }) {
 		service_name : 'spot_search',
 	}, { manual: true });
 
-	const rate_id = feedbackData?.list?.[0]?.source_id || requestData?.list?.[0]?.source_id;
+	const rate_id = feedbackData?.list?.[DEFAULT_VALUE]?.source_id || requestData?.list?.[DEFAULT_VALUE]?.source_id;
 
 	const getData = useCallback(async () => {
 		try {
@@ -28,8 +30,8 @@ function useGetSpoetSearches({ feedbackData, requestData, showPopover }) {
 		}
 	}, [getData, rate_id, showPopover]);
 
-	const serviceList = Object.values(data?.list?.[0]?.service_details || {});
-	const spot_data = data?.list?.[0];
+	const serviceList = Object.values(data?.list?.[DEFAULT_VALUE]?.service_details || {});
+	const spot_data = data?.list?.[DEFAULT_VALUE];
 
 	return {
 		spot_data,

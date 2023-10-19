@@ -10,6 +10,7 @@ function DetailsView({
 	shipment_loading = false,
 	request_loading = false, feedback_loading = false, shipment_data = {}, requestData = {}, feedbackData = {},
 	source = {}, getShipment = () => {}, getFeedback = () => {}, getRequest = () => {},
+	data = {},
 	filter = {},
 }) {
 	const [showServiceDetails, setShowServiceDetails] = useState(false);
@@ -38,6 +39,7 @@ function DetailsView({
 					request_loading={request_loading}
 					feedback_loading={feedback_loading}
 					filter={filter}
+					data={data}
 				/>
 			)}
 

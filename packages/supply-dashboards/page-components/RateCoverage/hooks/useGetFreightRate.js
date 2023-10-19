@@ -88,7 +88,7 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	}, [cardData?.destination_airport_id, cardData?.destination_location_id,
 		cardData?.destination_port_id, cardData?.id, cardData?.location_id,

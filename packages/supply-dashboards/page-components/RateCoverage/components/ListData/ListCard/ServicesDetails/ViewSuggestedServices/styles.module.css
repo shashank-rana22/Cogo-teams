@@ -46,3 +46,25 @@
 	flex-direction: column;
 	padding: 10px;
 }
+
+.loader {
+	display: flex;
+	justify-content: center;
+	padding: 2px;
+	font-size: 14px;
+	font-weight: 400;
+	color: black;
+}
+
+.flex {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.placeholder {
+	padding: 6px;
+	margin: 2px 0 4px 4px;
+	border: 0.5px solid black;
+	border-radius: 4px;
+}

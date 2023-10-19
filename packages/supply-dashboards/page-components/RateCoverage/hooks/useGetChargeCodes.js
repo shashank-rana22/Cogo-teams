@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const SERVICE_NAMES = [
 	'fcl_customs_charges',
@@ -27,7 +27,7 @@ const useGetChargeCodes = ({
 		{ manual: true },
 	);
 
-	const listApi = async () => {
+	const listApi = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -37,7 +37,7 @@ const useGetChargeCodes = ({
 		} catch (error) {
 			// console.error(error);
 		}
-	};
+	}, [service_name, trigger]);
 
 	const list = (data?.list || [])
 		.map((item) => ({
@@ -55,8 +55,7 @@ const useGetChargeCodes = ({
 		if (SERVICE_NAMES.includes(service_name) || cfsChargeRequired) {
 			listApi();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [service_name, cfsChargeRequired]);
+	}, [service_name, cfsChargeRequired, listApi]);
 
 	return { list };
 };

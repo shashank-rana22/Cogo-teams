@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import { DateRangepicker, Select, Modal, RadioGroup } from '@cogoport/components';
+import { DateRangepicker, Select, Modal, RadioGroup, Input } from '@cogoport/components';
 import {
 	asyncFieldsLocations, asyncFieldsOperators,
 	useGetAsyncOptions, asyncFieldsOrganization,
@@ -9,7 +9,7 @@ import { merge, startCase } from '@cogoport/utils';
 
 import {
 	serviceOptions, taskStatusOptions,
-	commodityOptions, filterOptions, entityOptions, revertedOptions, delayedOptions,
+	commodityOptions, filterOptions, entityOptions, revertedOptions,
 } from '../../configurations/helpers/constants';
 
 import HeaderComponent from './header';
@@ -59,6 +59,25 @@ function Filter({
 			);
 		});
 	});
+
+	function DateRange() {
+		return (
+			<div>
+				<p>Date Range</p>
+				<DateRangepicker
+					style={{ width: '250px' }}
+					value={{ startDate: filter?.start_date, endDate: filter?.end_date }}
+					onChange={(val) => {
+						setFilter((prev) => ({
+							...prev, start_date: val?.startDate, end_date: val?.endDate, page: 1,
+						}));
+					}}
+					isPreviousDaysAllowed
+					maxDate={new Date()}
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<Modal size="md" show={showFilters} onClose={() => setShowFilters(!showFilters)} placement="right">
@@ -158,48 +177,59 @@ function Filter({
 							/>
 						</div>
 					</div>
-					{(source === 'live_booking' || source === 'rate_feedback' || source === 'rate_request')
-				&& (
-					<div className={styles.radio}>
-						<div style={{ marginTop: '20px' }}>Entity</div>
-						<RadioGroup
-							options={entityOptions}
-							onChange={(val) => setFilter((prevFilters) => ({
-								...prevFilters,
-								cogo_entity_id : val,
-								page           : 1,
-							}))}
-							value={filter?.cogo_entity_id}
-						/>
-					</div>
-				)}
+
 					{(source === 'live_booking')
 					&& (
-						<div className={styles.radio}>
-							<RadioGroup
-								options={revertedOptions}
-								onChange={(val) => setFilter((prevFilters) => ({
-									...prevFilters,
-									is_flash_booking_reverted : val,
-									page                      : 1,
-								}))}
-								value={filter?.is_flash_booking_reverted}
-							/>
-
-							{filter?.is_flash_booking_reverted === 'not_reverted'
-							&& (
+						<div className={styles.details}>
+							<div className={styles.radio}>
+								<div>Status</div>
 								<RadioGroup
-									options={delayedOptions}
+									options={revertedOptions}
 									onChange={(val) => setFilter((prevFilters) => ({
 										...prevFilters,
-										is_flash_booking_delayed : val,
-										page                     : 1,
+										is_flash_booking_reverted : val,
+										page                      : 1,
 									}))}
-									value={filter?.is_flash_booking_delayed}
+									value={filter?.is_flash_booking_reverted}
 								/>
-							)}
+							</div>
+							<div className={styles.radio}>
+								<div>Shipment Id</div>
+								<Input
+									size="md"
+									value={filter?.shipment_id}
+									onChange={(val) => {
+										setFilter((prevFilters) => ({
+											...prevFilters,
+											shipment_id : val,
+											page        : 1,
+										}));
+									}}
+									style={{ width: '250px' }}
+								/>
+							</div>
 						</div>
 					)}
+
+					<div className={styles.details}>
+						{(source === 'live_booking' || source === 'rate_feedback' || source === 'rate_request')
+								&& (
+									<div className={styles.radio}>
+										<div>Entity</div>
+										<RadioGroup
+											options={entityOptions}
+											onChange={(val) => setFilter((prevFilters) => ({
+												...prevFilters,
+												cogo_entity_id : val,
+												page           : 1,
+											}))}
+											value={filter?.cogo_entity_id}
+										/>
+									</div>
+								)}
+						{DateRange()}
+
+					</div>
 
 					{ (source === 'critical_ports' || source === 'expiring_rates'
 					|| source === 'cancelled_shipments') && (
@@ -248,20 +278,7 @@ function Filter({
 										}}
 									/>
 								</div>
-								<div>
-									<p>Date Range</p>
-									<DateRangepicker
-										style={{ width: '250px' }}
-										value={{ startDate: filter?.start_date, endDate: filter?.end_date }}
-										onChange={(val) => {
-											setFilter((prev) => ({
-												...prev, start_date: val?.startDate, end_date: val?.endDate, page: 1,
-											}));
-										}}
-										isPreviousDaysAllowed
-										maxDate={new Date()}
-									/>
-								</div>
+								{DateRange()}
 							</div>
 						</div>
 					)}
