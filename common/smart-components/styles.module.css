@@ -1,0 +1,11 @@
+.container {
+	width: 100%;
+}
+
+.with_sidebar {
+	width: 75%;
+}
+
+.without_sidebar {
+	width: 100%;
+}
