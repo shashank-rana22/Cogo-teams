@@ -2723,6 +2723,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.profile,
 			icon          : IcMAppProfile,
 		},
+
 		payroll: {
 			key           : 'payroll',
 			title         : 'Payroll',
