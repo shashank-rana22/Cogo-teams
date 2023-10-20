@@ -10,11 +10,13 @@ import styles from './styles.module.css';
 function LikeDislike({ rateCardData = {}, detail = {} }) {
 	const [showFeedbackModal, setShowFeedbackModal] = useState(false);
 
+	const { is_liked = false, likes_count = 0, is_disliked = false, dislikes_count = 0 } = rateCardData || {};
+
 	const [likeState, setLikeState] = useState({
-		is_liked       : rateCardData?.is_liked,
-		likes_count    : rateCardData?.likes_count,
-		is_disliked    : rateCardData?.is_disliked,
-		dislikes_count : rateCardData?.dislikes_count,
+		is_liked,
+		likes_count    : is_liked ? likes_count + 1 : likes_count,
+		is_disliked,
+		dislikes_count : is_disliked ? dislikes_count + 1 : dislikes_count,
 	});
 
 	const { handleLikeRateCard = () => {}, loading } = useLikeFeedback({
@@ -25,12 +27,16 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 	});
 
 	const handleLikeAction = () => {
-		if (likeState.is_liked) { return; }
+		if (likeState.is_liked) {
+			return;
+		}
 		handleLikeRateCard();
 	};
 
 	const handleDislikeAction = () => {
-		if (likeState.is_disliked) { return; }
+		if (likeState.is_disliked) {
+			return;
+		}
 		setShowFeedbackModal(true);
 	};
 
@@ -38,12 +44,12 @@ function LikeDislike({ rateCardData = {}, detail = {} }) {
 
 	useEffect(() => {
 		setLikeState({
-			is_liked       : rateCardData?.is_liked,
-			likes_count    : rateCardData?.likes_count,
-			is_disliked    : rateCardData?.is_disliked,
-			dislikes_count : rateCardData?.dislikes_count,
+			is_liked,
+			likes_count    : is_liked ? likes_count + 1 : likes_count,
+			is_disliked,
+			dislikes_count : is_disliked ? dislikes_count + 1 : dislikes_count,
 		});
-	}, [rateCardData]);
+	}, [dislikes_count, is_disliked, is_liked, likes_count]);
 
 	return (
 		<div className={styles.container}>

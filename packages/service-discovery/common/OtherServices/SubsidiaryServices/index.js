@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { isEmpty, startCase, upperCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
 import SearchInput from '../../SearchInput';
@@ -61,10 +61,12 @@ function SubsidiaryServices({
 		if (!searchValue) {
 			searchArray = removeSelectedOptions(searchArray);
 		} else {
+			const transformedSearchValue = searchValue?.toLowerCase();
+
 			searchArray = SUBSIDIARY_OPTIONS.filter(
-				(serviceItem) => serviceItem.value.includes(startCase(searchValue))
-				|| serviceItem.label.includes(startCase(searchValue))
-				|| serviceItem.code.includes(upperCase(searchValue)),
+				(serviceItem) => serviceItem.value.toLowerCase()?.includes(transformedSearchValue)
+				|| serviceItem.label.toLowerCase()?.includes(transformedSearchValue)
+				|| serviceItem.code.toLowerCase()?.includes(transformedSearchValue),
 			);
 			searchArray = removeSelectedOptions(searchArray);
 		}

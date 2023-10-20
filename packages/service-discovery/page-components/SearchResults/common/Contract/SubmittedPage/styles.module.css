@@ -105,6 +105,8 @@
 }
 
 .load_details {
+	display: flex;
+	align-items: center;
 	margin: 0 8px;
 }
 
@@ -117,6 +119,13 @@
 	background: #fef199;
 	border: 1px solid #fcdc00;
 	border-radius: 24px;
+
+	&.commodity {
+		width: 80px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }
 
 .tooltip_content {

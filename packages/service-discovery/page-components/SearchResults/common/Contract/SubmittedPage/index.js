@@ -1,4 +1,4 @@
-import { Button, Pill } from '@cogoport/components';
+import { Button, Pill, cl } from '@cogoport/components';
 import { IcCFtick, IcMArrowNext } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
@@ -84,24 +84,24 @@ function Submitted({ detail = {}, contractData = {} }) {
 
 						<div className={styles.load_details}>
 							{container_size ? (
-								<span className={styles.load_item}>
+								<div className={styles.load_item}>
 									{container_size === '20' || container_size === '40'
 										? `${container_size}ft`
 										: container_size}
 									{' '}
 									{startCase(container_type)}
-								</span>
+								</div>
 							) : null}
 
 							{volume || weight ? (
-								<span className={styles.load_item}>
+								<div className={styles.load_item}>
 									{`Vol: ${volume} CBM, WT: ${weight} KG`}
-								</span>
+								</div>
 							) : null}
 
-							<span className={styles.load_item}>
+							<div className={cl`${styles.load_item} ${styles.commodity}`}>
 								{startCase(commodity) || 'All Commodities'}
-							</span>
+							</div>
 						</div>
 
 						<Pill size="sm" color="#FBD1A6">Pending Approval</Pill>
