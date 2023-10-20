@@ -1,3 +1,5 @@
+import { cl } from '@cogoport/components';
+
 import convertMinutesToHoursOrDays from '../../../../../../../../../utils/convertMinutesToHoursOrDays';
 
 import styles from './styles.module.css';
@@ -7,7 +9,7 @@ function JourneyLine({
 }) {
 	return (
 		<div className={styles.container}>
-			<span className={styles.transit_time}>
+			<span className={cl`${styles.tag} ${styles.transit_time}`}>
 				{convertMinutesToHoursOrDays(scheduleData?.transit_time)}
 			</span>
 
@@ -19,7 +21,7 @@ function JourneyLine({
 				<span className={styles.active_circle} />
 			</span>
 
-			<span className={styles.schedule_type}>
+			<span className={cl`${styles.tag} ${styles.schedule}`}>
 				Schedule
 				{['fake', 'predicted'].includes(scheduleData?.schedule_source)
 					? ' - Estimated'

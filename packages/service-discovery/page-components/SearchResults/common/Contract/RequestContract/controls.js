@@ -1,3 +1,4 @@
+import CustomSelectOption from '../../../../../common/CustomSelectOption';
 import validate from '../../../utils/validateNumber';
 
 const getParams = ({ status, operator_type }) => ({
@@ -6,6 +7,8 @@ const getParams = ({ status, operator_type }) => ({
 	sort_by    : 'short_name',
 	sort_type  : 'asc',
 });
+
+const renderAirlinesLabel = (data) => CustomSelectOption({ data, key: 'airlines' });
 
 const createContracts = () => [
 	{
@@ -87,7 +90,7 @@ const createContracts = () => [
 		showIn         : ['fcl_freight'],
 	},
 	{
-		name         : 'preferred_airline_line_ids',
+		name         : 'preferred_shipping_line_ids',
 		label        : 'Prefered Airlines',
 		type         : 'async-select',
 		asyncKey     : 'list_operators',
@@ -103,9 +106,10 @@ const createContracts = () => [
 		multiple       : true,
 		span           : 4,
 		showIn         : ['air_freight'],
+		renderLabel    : renderAirlinesLabel,
 	},
 	{
-		name           : 'exclude_airline_ids',
+		name           : 'exclude_shipping_line_ids',
 		label          : 'Unprefered Airlines',
 		type           : 'async-select',
 		asyncKey       : 'list_operators',
@@ -121,6 +125,7 @@ const createContracts = () => [
 		multiple    : true,
 		span        : 4,
 		showIn      : ['air_freight'],
+		renderLabel : renderAirlinesLabel,
 	},
 	{
 		name           : 'exclude_shipping_line_ids',
