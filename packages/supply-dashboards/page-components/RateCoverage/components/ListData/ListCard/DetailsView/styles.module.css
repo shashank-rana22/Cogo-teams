@@ -50,9 +50,14 @@
 
 .price {
 	display: flex;
+	margin-top: 2px;
 }
 
 .price_value {
 	margin: 0 6px;
 	color: #00ff;
+}
+
+.copy_button {
+	margin: 0 8px;
 }

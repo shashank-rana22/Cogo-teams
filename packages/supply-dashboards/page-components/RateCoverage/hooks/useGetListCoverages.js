@@ -51,6 +51,7 @@ const useGetListCoverage = () => {
 		is_flash_booking_reverted : '',
 		cogo_entity_id            : '',
 		shipment_id               : '',
+		trade_type                : '',
 	});
 	const endPoint = API_NAME[filter?.service || 'fcl_freight'];
 

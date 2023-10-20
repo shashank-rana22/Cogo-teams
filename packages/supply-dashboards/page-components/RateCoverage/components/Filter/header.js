@@ -20,6 +20,7 @@ function HeaderCompoment({
 			revert            : '',
 			opt               : '',
 			serial_id         : '',
+			trade_type        : '',
 		});
 		setShowWeekData(false);
 	};

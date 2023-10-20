@@ -40,6 +40,7 @@ function DetailsView({
 					feedback_loading={feedback_loading}
 					filter={filter}
 					data={data}
+					source={source}
 				/>
 			)}
 

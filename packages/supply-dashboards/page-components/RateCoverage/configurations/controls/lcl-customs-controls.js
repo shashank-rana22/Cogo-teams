@@ -87,6 +87,11 @@ const lclCustomsControls = ({
 			}
 			: null,
 		{
+			heading      : 'Line Items',
+			showOptional : false,
+			span         : 12,
+		},
+		{
 			label              : 'Add Custom Line Items',
 			name               : 'line_items',
 			type               : 'fieldArray',

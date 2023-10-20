@@ -1,16 +1,16 @@
 import { Pill, Placeholder, Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCopy } from '@cogoport/icons-react';
-import { differenceInDays, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { DEFAULT_VALUE, INCO_TERM_MAPPING, LOADER_COUNT } from '../../../../../configurations/helpers/constants';
+import { DEFAULT_VALUE, LOADER_COUNT } from '../../../../../configurations/helpers/constants';
 import useListShipmentFlashBookingRates from '../../../../../hooks/useListShipmentFlashBookingRates';
 import copyToClipboard from '../../../../../utilis/copyToClipboard';
 import NewServiceProviderModal from '../ServiceProviderModal';
 import styles from '../styles.module.css';
+
+import contentMapping from './content-mappings';
 
 function ServiceDetailsContent({
 	shipment_data = {}, requestData = {},
@@ -19,6 +19,7 @@ function ServiceDetailsContent({
 	feedback_loading = false,
 	filter = {},
 	data = {},
+	source = {},
 }) {
 	const [serviceModal, setServiceModal] = useState(false);
 
@@ -27,89 +28,67 @@ function ServiceDetailsContent({
 		shipmentFlashBookingRates = () => {},
 	} = useListShipmentFlashBookingRates({ source_id: data?.source_id });
 
-	const { primary_service_detail, summary } = shipment_data || {};
 	const {
-		commodity = '', container_size = '', container_type = '', containers_count = '', inco_term = '',
-		cargo_readiness_date = '', free_days_detention_destination = '', bl_type = '', commodity_description = '',
-		schedule_departure = '', shipping_line = {}, preferred_shipping_lines, feedbacks = [], closing_remarks = [],
-		status = '', serial_id, selected_schedule_arrival, selected_schedule_departure, created_at,
-		preferred_freight_rate, preferred_freight_rate_currency,
-	} = primary_service_detail || feedbackData || requestData || {};
-
-	const handleCopy = (text) => {
-		const value = [text].join('\n');
-		copyToClipboard(value, 'Data');
-	};
-
-	const transitTime =	filter?.service === 'ftl_freight'
-		? shipment_data?.transit_time : differenceInDays(
-			new Date(selected_schedule_arrival || new Date()),
-			new Date(selected_schedule_departure || new Date()),
-		);
-
-	const pillMapping = [
-		{
-			label: created_at && `Booked On ${formatDate({
-				date       : created_at,
-				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-				formatType : 'dateTime',
-				separator  : '/',
-			})}`,
-		},
-		{ label: summary?.serial_id && `Serial Id: ${summary?.serial_id}` },
-		{ label: serial_id && `Serial Id: ${serial_id}` },
-		{ label: commodity && startCase(commodity) },
-		{ label: container_size && `${container_size}ft` },
-		{ label: container_type && startCase(container_type) },
-		{ label: containers_count && `${containers_count} Containers` },
-		{ label: inco_term && startCase(inco_term) },
-		{ label: inco_term && startCase(INCO_TERM_MAPPING[inco_term]) },
-	];
-
-	const contentMapping = [
-		{
-			label : 'Cargo Ready',
-			value : cargo_readiness_date,
-		},
-		{ label: 'BL Type', value: startCase(bl_type) },
-		{ label: 'Destination Detention Free Days', value: free_days_detention_destination },
-		{
-			label : 'Expected Departure',
-			value : schedule_departure && `${formatDate({
-				date       : schedule_departure,
-				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-				formatType : 'date',
-			})}`,
-		},
-		{ label: 'Commodity Description', value: commodity_description },
-		{
-			label : 'Transit Time',
-			value : `${transitTime} ${filter?.service === 'ftl_freight' ? 'Hrs' : 'Days'}`,
-		},
-		{ label: 'Preferred Shipping', value: shipping_line?.short_name },
-		feedbacks?.length > DEFAULT_VALUE && (
-			{
-				label : 'feedbacks',
-				value : feedbacks && (feedbacks || []).map((val) => startCase(val)).join(', '),
-			}
-		),
-
-		closing_remarks?.length > DEFAULT_VALUE && (
-			{
-				label: 'Closing Remarks',
-				value:
-	<div className={styles.pointer}>
-		{startCase(closing_remarks)}
-		<IcMCopy style={{ marginLeft: '4px' }} onClick={() => handleCopy(closing_remarks)} />
-	</div>,
-			}
-		),
-	];
+		pillMapping = [], contentValuesMapping = [], summary = {},
+		status = '', preferred_shipping_lines = [],	preferred_freight_rate,
+		preferred_freight_rate_currency,
+	} = contentMapping({
+		requestData,
+		feedbackData,
+		filter,
+		shipment_data,
+	});
 
 	const handelNewServiceProvider = () => {
 		setServiceModal(!serviceModal);
 		shipmentFlashBookingRates();
+	};
+
+	const handleCopy = (val) => {
+		if (!val) return;
+		const {
+			commodity_category,
+			container_size,
+			container_type,
+			containers_count,
+			inco_term,
+			cargo_readiness_date,
+			free_days_detention_destination,
+			bl_type,
+			commodity_description,
+			schedule_departure,
+			shipping_line,
+			feedbacks,
+			closing_remarks,
+			serial_id,
+			created_at,
+			payment_term,
+		} = val;
+
+		const formatLine = (label, value) => (value ? `${label} ${startCase(value)}\n` : '');
+
+		let textToCopy = '';
+		textToCopy += formatLine('commodity: ', commodity_category);
+		textToCopy += formatLine('containerSize: ', container_size);
+		textToCopy += formatLine('containerType: ', container_type);
+		textToCopy += formatLine('containersCount: ', containers_count);
+		textToCopy += formatLine('cargoReadinessDate: ', cargo_readiness_date);
+		textToCopy += formatLine('freeDaysDetentionDestination: ', free_days_detention_destination);
+		textToCopy += formatLine('blType: ', bl_type);
+		textToCopy += formatLine('commodityDescription: ', commodity_description);
+		textToCopy += formatLine('scheduleDeparture: ', schedule_departure);
+		textToCopy += formatLine('shippingLine: ', shipping_line);
+		textToCopy += formatLine('feedbacks: ', feedbacks);
+		textToCopy += formatLine('closing_remarks: ', closing_remarks);
+		textToCopy += formatLine('serialId: ', serial_id);
+		textToCopy += formatLine('createdAt: ', created_at);
+		textToCopy += formatLine('incoTerm', inco_term);
+		textToCopy += formatLine('paymentTerm', payment_term);
+
+		if (textToCopy) {
+			navigator.clipboard.writeText(textToCopy);
+			copyToClipboard(textToCopy, 'Data');
+		}
 	};
 
 	return (
@@ -156,7 +135,7 @@ function ServiceDetailsContent({
 								</div>
 
 								<div className={styles.pill}>
-									{contentMapping?.map((val) => (
+									{contentValuesMapping?.map((val) => (
 										<div key={val?.label}>
 											{val?.value && (
 												<div className={styles.content}>
@@ -233,8 +212,27 @@ function ServiceDetailsContent({
 											</div>
 										)}
 								</div>
-
 								<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+									<div className={styles.copy_button}>
+										<Button
+											size="md"
+											themeType="secondary"
+											onClick={() => {
+												if (source === 'live_booking') {
+													handleCopy(summary);
+												} if (source === 'rate_feedback') {
+													handleCopy(feedbackData);
+												} if (source === 'rate_request') {
+													handleCopy(requestData);
+												} else {
+													handleCopy(summary);
+												}
+											}}
+										>
+											<IcMCopy height="40px" width="15px" />
+											Copy
+										</Button>
+									</div>
 									<div className={styles.head}>Service Provider Not Listed?</div>
 									<Button
 										size="md"

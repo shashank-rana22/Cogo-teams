@@ -249,6 +249,11 @@ export const entityOptions = [
 	{ name: 'my_entity', value: 'cogo_entity_id', label: 'My Entity' },
 ];
 
+export const tradeTypeOptions = [
+	{ name: 'import', value: 'import', label: 'Import' },
+	{ name: 'export', value: 'export', label: 'Export' },
+];
+
 export const revertedOptions = [
 	{ name: 'reverted', value: 'reverted', label: 'Reverted' },
 	{ name: 'not_reverted', value: 'not_reverted', label: 'Not Reverted' },

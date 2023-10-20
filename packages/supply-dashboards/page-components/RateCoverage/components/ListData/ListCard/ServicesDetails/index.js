@@ -178,25 +178,27 @@ function ServicesDetails({
 				)}
 			</div>
 
-			<div>
-				<Popover
-					theme="light"
-					content={<ViewFiles urlList={feedbackData?.list?.[0]?.attachment_file_urls || []} />}
-					interactive
-					maxWidth="none"
-					animation="shift-away"
-					placement="bottom-end"
-				>
-					<Button
-						size="md"
-						themeType="link"
-						onClick={getFeedback}
+			{source === 'rate_request'
+			&& (
+				<div>
+					<Popover
+						theme="light"
+						content={<ViewFiles urlList={feedbackData?.list?.[0]?.attachment_file_urls || []} />}
+						interactive
+						maxWidth="none"
+						animation="shift-away"
+						placement="bottom-end"
 					>
-						Attached files
-					</Button>
-				</Popover>
-			</div>
-
+						<Button
+							size="md"
+							themeType="link"
+							onClick={getFeedback}
+						>
+							Attached files
+						</Button>
+					</Popover>
+				</div>
+			)}
 		</div>
 	);
 }
