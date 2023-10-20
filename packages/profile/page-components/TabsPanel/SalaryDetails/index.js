@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
-import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
+import { Button } from '@cogoport/components';
+import { IcCFtick, IcMCrossInCircle, IcMEdit } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 
 import StyledTable from '../../../common/StyledTable';
 import useGetEmployeeDirectoryPaymentDetail from '../../../hooks/useGetEmployeeDirectoryPaymentDetails';
@@ -11,24 +12,48 @@ import useGetEmployeeDirectoryPaymentDetail from '../../../hooks/useGetEmployeeD
 import { bankInfo, pfInfo } from '../../../utils/info';
 import { otherSalaryInfo } from '../../../utils/otherInfo';
 
+import EditModal from './EditModal';
 import RightGlancePayment from './RightGlance';
 import styles from './styles.module.css';
-// import useGetColumns from './useGetColumns';
+import TaxStructure from './TaxStructure';
+// import useGetSalaryStructure from './TaxStructure/useGetSalaryStructure';
+import useGetColumns from './useGetColumns';
 import useGetIrregularColumns from './useGetIrregularColumns';
 
 function SalaryDetails() {
-	// const columns = useGetColumns();
-	const columnsIrregular = useGetIrregularColumns();
 	const router = useRouter();
+	const [taxShow, setTaxShow] = useState(false);
+	const columns = useGetColumns(setTaxShow);
+	const columnsIrregular = useGetIrregularColumns();
+
 	const employee_id = router.query?.employee_id;
+	const [show, setShow] = useState(false);
+	const [modalData, setModalData] = useState([]);
+
+	const [modalUpdateData, setModalUpdateData] = useState();
 
 	const { profile: { user } } = useSelector((state) => ({
 		profile: state?.profile,
 	}));
+	const handleModal = () => {
+		setShow(false);
+	};
 
+	const handleOpenModal = (modData, modupdatedata) => {
+		setModalUpdateData(modupdatedata);
+		setModalData(modData);
+		setShow(true);
+	};
 	const user_id = employee_id || user.id;
 	const { data, loading } = useGetEmployeeDirectoryPaymentDetail(user_id);
-	console.log(data);
+	// console.log(data);
+	const salary_data = [{
+		ctc_effective    : '23/12/2000',
+		ctc_effective_to : '-',
+		monthly_gross    : data?.monthly_gross,
+		monthly_ctc      : data?.monthly_ctc,
+	},
+	];
 	// const data = SalaryData;
 	const otherInfo = otherSalaryInfo;
 
@@ -45,12 +70,24 @@ function SalaryDetails() {
 						: (
 							<>
 								<div className={styles.info_container}>
+									<span className={styles.head_text}>Salary Structure</span>
+									<StyledTable columns={columns} data={salary_data} />
+								</div>
+								<div className={styles.info_container}>
 									<span className={styles.head_text}>Active Recurring Payments</span>
 									<StyledTable columns={columnsIrregular} data={data?.irregular_payment_details} />
 								</div>
 
 								<div className={styles.info_container}>
-									<span className={styles.head_text}>Payment Information</span>
+									<div className={styles.heading}>
+										<div className={styles.head_text}>Payment Information</div>
+										<Button size="md" themeType="secondary" onClick={() => handleOpenModal(bankInfo, data?.employee_bank_details)}>
+											{' '}
+											<IcMEdit />
+											{' '}
+											Edit
+										</Button>
+									</div>
 									<div className={styles.details}>
 										{
 										bankInfo.map((item) => (
@@ -68,7 +105,15 @@ function SalaryDetails() {
 								</div>
 
 								<div className={styles.info_container}>
-									<span className={styles.head_text}>PF, Professional Tax & ESIC</span>
+									<div className={styles.heading}>
+										<div className={styles.head_text}>PF, Professional Tax & ESIC</div>
+										<Button size="md" themeType="secondary" onClick={() => handleOpenModal(pfInfo, data?.employee_salary_details?.statutory_details)}>
+											{' '}
+											<IcMEdit />
+											{' '}
+											Edit
+										</Button>
+									</div>
 									<div className={styles.details}>
 										{
 										pfInfo.map((item) => (
@@ -78,11 +123,11 @@ function SalaryDetails() {
 												</span>
 												<span className={styles.side_value}>
 													{
-													data?.employee_salary_details?.statuatory_details?.[item.value]
+													data?.employee_salary_details?.statutory_details?.[item.value]
 													=== 'active'
 														? <IcCFtick /> : <IcMCrossInCircle />
 }
-													{startCase(data?.employee_salary_details?.statuatory_details?.[item.value])}
+													{startCase(data?.employee_salary_details?.statutory_details?.[item.value])}
 												</span>
 											</div>
 										))
@@ -92,7 +137,11 @@ function SalaryDetails() {
 							</>
 						)
 				}
-
+				{
+	loading ? null
+		:	<TaxStructure taxShow={taxShow} setTaxShow={setTaxShow} employee_id={data?.employee_salary_details?.employee_id} />
+}
+				<EditModal show={show} handleModal={handleModal} modalData={modalData} modalUpdateData={modalUpdateData} />
 			</div>
 			{
 				loading ? null

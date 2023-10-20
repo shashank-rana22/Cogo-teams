@@ -90,3 +90,22 @@
 	flex-direction: column;
 	margin-bottom: 16px;
 }
+
+.btn { 
+	display: flex;
+	align-items: center;
+}
+
+.paid {
+	color: greenyellow;
+}
+
+.progress {
+	color: #C26D1A;
+}
+
+.heading {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}

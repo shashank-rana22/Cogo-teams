@@ -125,15 +125,30 @@ export const otherInfo = {
 };
 
 export const bankInfo = [
-	{ label: 'Account Holder Name', value: 'account_holder_name' },
-	{ label: 'Account Number', value: 'account_number' },
-	{ label: 'Branch Name', value: 'bank_branch_name' },
-	{ label: 'Bank Name', value: 'bank_name' },
-	{ label: 'IFSC CODE', value: 'ifsc_code' },
+	{ label: 'Account Holder Name', value: 'account_holder_name', type: 'input' },
+	{ label: 'Account Number', value: 'account_number', type: 'input' },
+	{ label: 'Branch Name', value: 'bank_branch_name', type: 'input' },
+	{ label: 'Bank Name', value: 'bank_name', type: 'input' },
+	{ label: 'IFSC CODE', value: 'ifsc_code', type: 'input' },
 ];
 
 export const pfInfo = [
-	{ label: 'ESIC', value: 'esic' },
-	{ label: 'PF APPLICABLE', value: 'pf_applicable' },
-	{ label: 'PROFESSIONAL TAX', value: 'professional_tax' },
+	{
+		label   : 'ESIC',
+		value   : 'esic',
+		type    : 'select',
+		options : [{ label: 'Active', value: 'active' }, { label: 'Non-Active', value: 'nonactive' }],
+	},
+	{
+		label   : 'PF APPLICABLE',
+		value   : 'pf_applicable',
+		type    : 'select',
+		options : [{ label: 'Active', value: 'active' }, { label: 'Non-Active', value: 'nonactive' }],
+	},
+	{
+		label   : 'PROFESSIONAL TAX',
+		value   : 'professional_tax',
+		type    : 'select',
+		options : [{ label: 'Active', value: 'active' }, { label: 'Non-Active', value: 'nonactive' }],
+	},
 ];

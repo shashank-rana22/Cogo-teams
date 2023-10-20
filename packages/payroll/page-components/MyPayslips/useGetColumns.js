@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEyeopen, IcMDownload } from '@cogoport/icons-react';
@@ -14,6 +14,7 @@ const useGetColumns = (setShowModal = () => {}, setModalUrl = () => {}, setDocum
 	};
 
 	const handleShow = (url) => {
+		console.log(url);
 		setModalUrl(url);
 		setShowModal(true);
 	};
@@ -43,16 +44,18 @@ const useGetColumns = (setShowModal = () => {}, setModalUrl = () => {}, setDocum
 			id       : 'pay_slip',
 			accessor : (item) => (
 				<div className={styles.table_items}>
-					<Button
+					<ButtonIcon
 						size="md"
-						themeType="secondary"
-						onClick={() => { handleShow(item?.payslip_link); setDocumentType('Pay slip'); }}
-					>
-						<IcMEyeopen />
-					</Button>
-					<Button size="md" themeType="secondary" onClick={() => handleDownload(item?.payslip_link)}>
-						<IcMDownload />
-					</Button>
+						icon={<IcMEyeopen />}
+						onClick={() => { handleShow(item?.payslip); setDocumentType('Pay slip'); }}
+						themeType="primary"
+					/>
+					<ButtonIcon
+						size="md"
+						icon={<IcMDownload />}
+						onClick={() => { handleDownload(item?.payslip_link); setDocumentType('Pay slip'); }}
+						themeType="primary"
+					/>
 				</div>
 			),
 		},
@@ -61,16 +64,18 @@ const useGetColumns = (setShowModal = () => {}, setModalUrl = () => {}, setDocum
 			id       : 'tax_slip',
 			accessor : (item) => (
 				<div className={styles.table_items}>
-					<Button
+					<ButtonIcon
 						size="md"
-						themeType="secondary"
+						icon={<IcMEyeopen />}
 						onClick={() => { handleShow(item?.taxslip_link); setDocumentType('Tax slip'); }}
-					>
-						<IcMEyeopen />
-					</Button>
-					<Button size="md" themeType="secondary" onClick={() => handleDownload(item?.taxslip_link)}>
-						<IcMDownload />
-					</Button>
+						themeType="primary"
+					/>
+					<ButtonIcon
+						size="md"
+						icon={<IcMDownload />}
+						onClick={() => { handleDownload(item?.taxslip_link); setDocumentType('Tax slip'); }}
+						themeType="primary"
+					/>
 				</div>
 			),
 		},
@@ -79,18 +84,20 @@ const useGetColumns = (setShowModal = () => {}, setModalUrl = () => {}, setDocum
 			id       : 'detailed_slip',
 			accessor : (item) => (
 				<div className={styles.table_items}>
-					<Button
+					<ButtonIcon
 						size="md"
-						themeType="secondary"
+						icon={<IcMEyeopen />}
+						onClick={() => { handleShow(item?.detailedpayslip_link); setDocumentType('Detailed slip'); }}
+						themeType="primary"
+					/>
+					<ButtonIcon
+						size="md"
+						icon={<IcMDownload />}
 						onClick={
-							() => { handleShow(item?.detailed_payslip_link); setDocumentType('Detailed pay slip'); }
-						}
-					>
-						<IcMEyeopen />
-					</Button>
-					<Button size="md" themeType="secondary" onClick={() => handleDownload(item?.detailed_payslip_link)}>
-						<IcMDownload />
-					</Button>
+							() => { handleDownload(item?.detailedpayslip_link); setDocumentType('Detailed slip'); }
+}
+						themeType="primary"
+					/>
 				</div>
 			),
 		},

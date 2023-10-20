@@ -1,0 +1,9 @@
+.modal_form {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.form_data {
+	flex-basis: 45%;
+}

@@ -3,6 +3,8 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState, useEffect } from 'react';
 
+import MyPayslips from '../MyPayslips';
+
 import styles from './styles.module.css';
 import tabs from './useGetTabs';
 
@@ -26,6 +28,9 @@ function PayrollDashboard() {
 		}
 	};
 
+	if (router.query?.is_payslip === 'payslip') {
+		return <MyPayslips />;
+	}
 	return (
 		<div className={styles.main}>
 			<div className={styles.top_text} />

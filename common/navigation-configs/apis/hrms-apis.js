@@ -828,6 +828,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'get_salary_structure',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	payroll: [
 		{
