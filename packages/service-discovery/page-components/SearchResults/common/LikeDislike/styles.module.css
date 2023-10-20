@@ -8,7 +8,7 @@
 	transition: color 0.5s ease;
 
 	&.active {
-		color: #40ad3e;
+		color: #849e4c;
 	}
 }
 
@@ -18,7 +18,7 @@
 	transform: rotate(180deg);
 
 	&.active {
-		color: #ee3425;
+		color: #f37166;
 	}
 }
 
