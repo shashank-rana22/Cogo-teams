@@ -71,7 +71,7 @@ function Header({
 				onClick={(e) => {
 					e.stopPropagation();
 					window.open(
-						`${window.location.origin}/${partner_id}/supply/dashboards/rate-density`,
+						`${window.location.origin}/v2/${partner_id}/supply/dashboards/rate-density`,
 						'_blank',
 					);
 				}}
