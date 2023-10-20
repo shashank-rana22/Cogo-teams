@@ -115,7 +115,8 @@
 	display: flex;
 	align-items: center;
 	margin-bottom: 16px;
-	align-self: center;
+	justify-content: center;
+	text-align: left;
 }
 
 .circle {

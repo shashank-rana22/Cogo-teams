@@ -84,6 +84,11 @@ const welcome = [
 		access_type  : 'private',
 		service_name : 'hrms',
 	},
+	{
+		api          : 'create_company_feed',
+		access_type  : 'private',
+		service_name : 'hrms',
+	},
 ];
 
 export default welcome;
