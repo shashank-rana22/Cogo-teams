@@ -13,6 +13,7 @@ const getPayload = ({
 	performerId,
 	status,
 	page,
+	toggleValue = false,
 }) => ({
 	PerformedByID : performerId,
 	UserID        : performerId,
@@ -20,9 +21,10 @@ const getPayload = ({
 	page          : page - PAGE_DECREMENT,
 	RequestType   : 'feedback',
 	Statuses      : status || undefined,
+	SpectatorType : toggleValue ? 'reviewer' : 'agent',
 });
 
-const useGetFeedbacks = ({ activeTab, page }) => {
+const useGetFeedbacks = ({ activeTab, page, toggleValue = false }) => {
 	const { id : performerId = '' } = useSelector((state) => state?.profile?.user);
 
 	const status = STATUS_KEY_MAPPING[activeTab];
@@ -40,12 +42,13 @@ const useGetFeedbacks = ({ activeTab, page }) => {
 					performerId,
 					status,
 					page,
+					toggleValue,
 				}),
 			});
 		} catch (error) {
 			console.error('error:', error);
 		}
-	}, [performerId, trigger, status, page]);
+	}, [performerId, trigger, status, page, toggleValue]);
 
 	const { items, ...rest } = data || {};
 
