@@ -20,8 +20,7 @@ const useOpenInvoicesReport = ({ organizationId = '' }) => {
 					organizationId,
 				},
 			});
-			const { data: responseData = '' } = response || {};
-			const downloadUrl = responseData?.toString();
+			const { data: downloadUrl = '' } = response || {};
 
 			if (!isEmpty(downloadUrl)) {
 				window.open(downloadUrl);

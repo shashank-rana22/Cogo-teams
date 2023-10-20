@@ -224,7 +224,7 @@ function OutstandingList({
 								<div className={styles.download_icon_div}>
 									<IcMActivePlans
 										fill="black"
-										onClick={() => downloadAROustanding()}
+										onClick={downloadAROustanding}
 										className={cl`${isDownloading ? styles.is_loading : ''}`}
 									/>
 								</div>
