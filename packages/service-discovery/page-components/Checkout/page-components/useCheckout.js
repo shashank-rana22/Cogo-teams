@@ -125,7 +125,7 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 	const isAssistedBookingNotAllowed =	!isEmpty(assisted_booking_services)
 	&& (assisted_booking_services.includes('none')
 		|| !assisted_booking_services.includes(primary_service))
-		&& !is_agent_allowed_to_book;
+		&& !is_agent_allowed_to_book && checkoutMethod !== 'controlled_checkout';
 
 	const checkoutData = useMemo(
 		() => ({
