@@ -1,11 +1,19 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import React, { useState } from 'react';
+import { useRouter } from '@cogoport/next';
+import React, { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 import useGetTabsMapping from './useGetTabsMapping';
 
 function TabsPanel({ data = {}, loading = false }) {
+	const router = useRouter();
+
 	const [activeTab, setActiveTab] = useState('personal_details');
+	useEffect(() => {
+		if (router.query.active_tab) {
+			setActiveTab(router.query.active_tab);
+		}
+	}, [router.query.active_tab]);
 	const tabsMapping = useGetTabsMapping(data, loading);
 
 	return (
