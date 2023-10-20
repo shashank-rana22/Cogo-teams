@@ -1,4 +1,5 @@
 import { Checkbox } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useState } from 'react';
 
 // eslint-disable-next-line max-len
@@ -81,7 +82,7 @@ function FormModal({
 				/>
 			) : null}
 
-			<div className={styles.form}>
+			<div className={styles.form} key={commoditySubtypeOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value}>
 				<Layout
 					controls={controls}
 					control={control}
