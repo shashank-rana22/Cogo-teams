@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 function Header({ data = {}, filters = {} }) {
 	const { discount_reason = {} } = data || {};
-	const { tags = [], name = '', discount_percentage = 0 } = discount_reason || {};
+	const { tags = [], name = '', discount_value = 0 } = discount_reason || {};
 	let subscriptionDiscountApplied = '';
 	if ((tags || []).includes('partner_subscription')) {
 		subscriptionDiscountApplied = name.split(' ')?.[GLOBAL_CONSTANTS.zeroth_index];
@@ -90,7 +90,7 @@ function Header({ data = {}, filters = {} }) {
 							{' '}
 							-
 							{' '}
-							{discount_percentage}
+							{discount_value}
 							%
 						</Pill>
 					) : null}

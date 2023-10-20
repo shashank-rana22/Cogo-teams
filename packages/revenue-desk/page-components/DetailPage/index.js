@@ -33,7 +33,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 	};
 
 	const { discount_reason = {} } = itemData || {};
-	const { tags = [], name = '', discount_percentage = 0 } = discount_reason || {};
+	const { tags = [], name = '', discount_value = 0 } = discount_reason || {};
 	let subscriptionDiscountApplied = '';
 	if ((tags || []).includes('partner_subscription')) {
 		subscriptionDiscountApplied = name.split(' ')?.[GLOBAL_CONSTANTS.zeroth_index];
@@ -93,7 +93,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 								{' '}
 								-
 								{' '}
-								{discount_percentage}
+								{discount_value}
 								%
 							</Pill>
 						) : null}
