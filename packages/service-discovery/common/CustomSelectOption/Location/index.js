@@ -15,13 +15,13 @@ function Location(props) {
 		name = '',
 	} = data || {};
 
-	const { name: countryName = '' } = country || {};
+	const { country_code: countryName = '' } = country || {};
 
 	const [firstElement = '', secondElement = ''] = display_name.split(',').reverse() || [];
 
 	const cityAndCountryName = `${secondElement},${firstElement}`;
 
-	let portCode = null;
+	let portCode = '';
 	let iconToShow = IcMLocation;
 
 	if (type === 'seaport' && is_icd) {
@@ -31,13 +31,10 @@ function Location(props) {
 		portCode = countryName ? `${port_code}, ${countryName}` : port_code;
 		iconToShow = IcMPort;
 	} else if (type === 'airport') {
-		// portCode = countryName ? `${port_code}, ${countryName}` : port_code;
-		portCode = port_code;
+		portCode = countryName ? `${port_code}, ${countryName}` : port_code;
 		iconToShow = IcMAirport;
 	} else if (type === 'pincode') {
-		portCode = countryName
-			? `${postal_code}, ${countryName}`
-			: postal_code;
+		portCode = countryName ? `${postal_code}, ${countryName}` : postal_code;
 	} else if (countryName) {
 		portCode = countryName;
 	}
@@ -51,25 +48,26 @@ function Location(props) {
 	return (
 		<div className={styles.label_container}>
 			<div className={styles.label_icon}>
-				<IconElement fill="#333333" />
+				<IconElement fill="#333" />
 			</div>
 
 			<div className={styles.name_container}>
 				<div className={styles.name_sub_container}>
-					<div className={styles.label_name}>
+					<span className={styles.label_name}>
 						{name}
-					</div>
+					</span>
 
-					<div className={styles.city_country_name}>
-						{cityAndCountryName || ''}
-					</div>
+					{portCode ? (
+						<span className={styles.sub_label}>
+							{portCode}
+						</span>
+					) : null}
+
 				</div>
 
-				{portCode ? (
-					<div className={styles.sub_label}>
-						{portCode}
-					</div>
-				) : null}
+				<div className={styles.city_country_name}>
+					{cityAndCountryName || ''}
+				</div>
 			</div>
 		</div>
 	);
