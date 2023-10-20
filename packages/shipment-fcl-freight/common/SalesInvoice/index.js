@@ -1,7 +1,7 @@
 import { ThreeDotLoader } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
 
-import useGetShipmentCrossEntityInvoice from '../../hooks/useGetShipmentCrossEntityInvoice';
+// import useGetShipmentCrossEntityInvoice from '../../hooks/useGetShipmentCrossEntityInvoice';
 import useGetShipmentInvoice from '../../hooks/useGetShipmentInvoice';
 import useListSageSalesInvoices from '../../hooks/useListSageSalesInvoices';
 import OverviewManageServices from '../Overview/OverviewManageServices';
@@ -14,15 +14,15 @@ function SalesInvoice() {
 
 	const { data: invoiceData, groupedInvoices, refetch: salesInvoicesRefetch, loading } = useGetShipmentInvoice();
 
-	const {
-		data: invoiceDataCE = {},
-		groupedInvoices:groupedInvoicesCE = {},
-		loading:loadingCE = false,
-	} = useGetShipmentCrossEntityInvoice();
+	// const {
+	// 	data: invoiceDataCE = {},
+	// 	groupedInvoices:groupedInvoicesCE = {},
+	// 	loading:loadingCE = false,
+	// } = useGetShipmentCrossEntityInvoice();
 
 	const isIRNGenerated = !!list?.find((item) => !!item?.irn_number);
 
-	if (loading || loadingCE) {
+	if (loading) {
 		return (
 			<div className={styles.loader}>
 				<ThreeDotLoader message="Loading Invoices" size={40} fontSize={18} />
@@ -35,15 +35,15 @@ function SalesInvoice() {
 
 			<OverviewManageServices isOpen={false} source="overview" />
 
-			{!(loading || loadingCE) && !(isEmpty(invoiceData) && isEmpty(invoiceDataCE)) ? (
+			{!(loading) && !(isEmpty(invoiceData)) ? (
 
 				<Invoices
 					invoiceData={invoiceData}
-					invoiceDataCE={invoiceDataCE}
+					// invoiceDataCE={invoiceDataCE}
 					groupedInvoices={groupedInvoices}
-					groupedInvoicesCE={groupedInvoicesCE}
+					// groupedInvoicesCE={groupedInvoicesCE}
 					loading={loading}
-					loadingCE={loadingCE}
+					// loadingCE={loadingCE}
 					salesInvoicesRefetch={salesInvoicesRefetch}
 					isIRNGenerated={isIRNGenerated}
 				/>

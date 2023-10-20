@@ -226,7 +226,7 @@ const common_apis = {
 		{
 			api          : 'get_shipping_line_for_search_value',
 			access_type  : 'private',
-			service_name : 'air_tracking',
+			service_name : 'saas_traceability',
 			feature      : 'tracking',
 		},
 		{
@@ -319,6 +319,11 @@ const common_apis = {
 			api          : 'create_air_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'air_customs_rate',
+		},
+		{
+			api          : 'create_ftl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
 		},
 		{
 			api          : 'update_organization',

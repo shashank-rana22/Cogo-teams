@@ -8,7 +8,7 @@ pipeline {
         JENKINS_PRIVATE_KEY = credentials('jenkins-dev-private-key')
         SSH_PORT = credentials('dev-instance-ssh-port')
         TEAMS_WEBHOOK_URL = credentials('teams-webhook-url')
-        NPMRC = credentials('cogo_product_npmrc')
+        NPM_TOKEN = credentials('cogo-npm-token')
         ECR_USERNAME = credentials('aws-dev-ecr-user')
         ECR_URL = credentials('aws-dev-ecr-url')
         SERVER_NAME = ''
@@ -65,29 +65,15 @@ pipeline {
                 expression { sh (script: "git log -1 --pretty=%B ${COMMIT_ID}", returnStdout: true).contains('#deploy_on') }
             }
             steps {
-                office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Starting to build admin for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** for user **${PUSHER_NAME}**", color: '#3366ff'
-                cache(caches: [arbitraryFileCache(path: 'node_modules')], defaultBranch: 'feat/jenkinsfile', maxCacheSize: 3000) {
-                    nodejs(nodeJSInstallationName: 'node-18') {
-                        sh "scp -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} -P ${SSH_PORT} ${SERVER_NAME}@${SERVER_IP}:/home/${SERVER_NAME}/.env.admin .env"
-                        sh "sed -i '/NODE_ENV=production/d' .env"
-                        sh (script: "echo ${NPMRC} >> .npmrc")
-                        sh 'pnpm i --frozen-lockfile'
-                    }
-                }
+                office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Starting to build admin for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** for user **${PUSHER_NAME}** on server ${SERVER_NAME}", color: '#3366ff'
+                script{
+                    sh "scp -o StrictHostKeyChecking=no -i ${JENKINS_PRIVATE_KEY} -P ${SSH_PORT} ${SERVER_NAME}@${SERVER_IP}:/home/${SERVER_NAME}/.env.admin .env"
+					sh "sed -i '/NODE_ENV=production/d' .env"
+					}
 
-                cache(caches: [arbitraryFileCache(path: 'cogo-control/.next')], defaultBranch: 'feat/jenkinsfile', maxCacheSize: 6000) {
-                    nodejs(nodeJSInstallationName: 'node-18') {
-                        sh 'pnpm run build'
-                    }
-                }
-                // build docker image for admin site and push to ecr
+                // build docker image for admin site 
                 script {
-                    sh "docker image build -t ${ECR_URL}/admin:${COMMIT_ID} -t ${ECR_URL}/admin:latest-dev --target admin ."
-                    sh "aws ecr get-login-password --region ap-south-1 | docker login --username ${ECR_USERNAME} --password-stdin ${ECR_URL}"
-                    sh "docker image push ${ECR_URL}/admin:${COMMIT_ID}"
-                    sh "docker image push ${ECR_URL}/admin:latest-dev"
-                    sh "docker image rm ${ECR_URL}/admin:latest-dev || true"
-                    sh "docker image rm ${ECR_URL}/admin:${COMMIT_ID}"
+                    sh "DOCKER_HOST=ssh://ubuntu@${SERVER_IP}:${SSH_PORT}  docker image build --build-arg NPM_TOKEN=${NPM_TOKEN} -t ${ECR_URL}/admin:${COMMIT_ID} --target runner ."
                 }
             }
         }

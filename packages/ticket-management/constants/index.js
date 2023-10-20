@@ -246,3 +246,7 @@ export const sortByOptions = ({ t }) => [
 	{ label: t('myTickets:created_at'), value: 'created_at' },
 	{ label: t('myTickets:updated_at'), value: 'updated_at' },
 ];
+
+export const DISABLE_STATUS_KEY = ['dislike_id', 'missing_id'];
+
+export const CLOSED_TICKET_STATUS = ['closed', 'overdue'];

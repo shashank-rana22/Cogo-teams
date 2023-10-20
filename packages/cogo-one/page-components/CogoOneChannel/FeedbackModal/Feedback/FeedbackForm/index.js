@@ -10,6 +10,8 @@ import useRaiseTicketcontrols from '../../../../../hooks/useFeedbackControls';
 
 import styles from './styles.module.css';
 
+const MIN_CHARACTER_COUNT = 0;
+
 function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }) {
 	const { t } = useTranslation(['myTickets']);
 
@@ -28,6 +30,7 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 	const { errors = {} } = formState || {};
 
 	const watchCategory = watch('category');
+	const watchDescription = watch('additional_information');
 
 	const { addFeedback, loading } = useAddFeedback({
 		getFeedbacks,
@@ -39,11 +42,17 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 	const defaultControls = useRaiseTicketcontrols({ setAdditionalInfo, watchCategory, setDefaultTypeId });
 
 	const additionalControls = (additionalInfo || []).map((item) => ({
-		label          : item,
+		label: (
+			<div>
+				{item}
+				<span style={{ color: '#ee3425', marginLeft: '2px' }}>*</span>
+			</div>
+		),
 		name           : item,
 		controllerType : 'text',
 		placeholder    : `${t('myTickets:add')} ${item?.toLowerCase()}`,
 		showOptional   : false,
+		rules          : { required: true },
 	}));
 
 	const fileUploader = defaultControls.pop();
@@ -85,7 +94,11 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 								<div className={styles.label}>
 									<div className={styles.sub_label}>{label}</div>
 									{controlItem.name === 'additional_information'
-									&& <div className={styles.info_label}>(max 200 characters)</div>}
+										? (
+											<div className={styles.info_label}>
+												{`${watchDescription?.length || MIN_CHARACTER_COUNT} / 350 characters`}
+											</div>
+										) : null}
 								</div>
 							)}
 							<Element

@@ -14,10 +14,11 @@ import styles from './styles.module.css';
 
 function ReassignTicket({
 	ticketId = '', showReassign = true, setShowReassign = () => {}, getTicketActivity = () => {},
-	getTicketDetails = () => {}, setListData = () => {}, ticket = {},
+	getTicketDetails = () => {}, setListData = () => {}, ticket = {}, shipmentsData = {},
 }) {
 	const { Data: data = {} } = ticket || {};
 	const { RequestType: requestType = '' } = data || {};
+	const { id = '' } = shipmentsData || {};
 
 	const { t } = useTranslation(['myTickets']);
 
@@ -26,7 +27,7 @@ function ReassignTicket({
 
 	const { control, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm();
 
-	const { stakeHoldersData = [] } = useListShipmentStakeholders({ requestType });
+	const { stakeHoldersData = [] } = useListShipmentStakeholders({ requestType, shipmentId: id });
 
 	const watchType = watch('type');
 
@@ -58,6 +59,7 @@ function ReassignTicket({
 			size="sm"
 			show={showReassign}
 			onClose={handleClose}
+			scroll={false}
 		>
 			<form onSubmit={handleSubmit(handleReassignTicket)}>
 				<Modal.Header title={`${t('myTickets:re_assign_ticket')} (${ticketId})`} />

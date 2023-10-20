@@ -6,9 +6,8 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { PRIORITY_MAPPING, STATUS_MAPPING, getStatusLabelMapping } from '../../../../constants';
+import { PRIORITY_MAPPING, STATUS_MAPPING, getStatusLabelMapping, CLOSED_TICKET_STATUS } from '../../../../constants';
 import useGetCountdown from '../../../../hooks/useGetCountdown';
-import useListShipments from '../../../../hooks/useGetListShipment';
 import { handleRouteBooking, handleRouteSupply } from '../../../../utils/handleRoute';
 import TicketLoader from '../../../TicketStructure/TicketStructureLoader';
 
@@ -16,12 +15,20 @@ import ConfigDetails from './ConfigDetails';
 import ShipmentDetails from './ShipmentDetails';
 import styles from './styles.module.css';
 
+const hideTatTimer = ({ status = '', message = '' }) => {
+	if (CLOSED_TICKET_STATUS.includes(status)) {
+		return null;
+	}
+	return message;
+};
+
 function TicketSummary({
 	Ticket: ticket = {}, ClosureAuthorizers: closureAuthorizers = false, TicketUser: ticketUser = {},
-	TicketReviewer: ticketReviewer = {}, IsCurrentReviewer: isCurrentReviewer = false,
+	TicketReviewer: ticketReviewer = {},
 	TicketStatus: ticketStatus = '', AgentName: agentName = '',
 	detailsLoading = false, TicketConfiguration: ticketConfiguration = {},
 	OrganizationData: organizationData = {}, partnerId = '',
+	shipmentsData = {}, listLoading = false, userId = '',
 }) {
 	const {
 		Name: name = '', Email: email = '',
@@ -39,15 +46,11 @@ function TicketSummary({
 	const { ShortName: shortName = '' } = organizationData || {};
 
 	const {
-		ID: id = '',
-		Tat: tat = '',
-		Type: type = '',
-		Status: status = '',
-		UpdatedAt: updatedAt = '',
-		CreatedAt: createdAt = '',
-		Priority: priority = '',
+		ID: id = '', Tat: tat = '', Type: type = '',
+		Status: status = '', UpdatedAt: updatedAt = '',
+		CreatedAt: createdAt = '', Priority: priority = '',
 		Source: source = '',
-		Data: data = {},
+		Data: data = {}, PerformedByID: performedByID = '',
 	} = ticket || {};
 
 	const { t } = useTranslation(['myTickets']);
@@ -59,21 +62,19 @@ function TicketSummary({
 
 	const authorizers = (closureAuthorizers || []).map((item) => item.Name);
 
-	const { shipmentsData = {}, listLoading = false } = useListShipments({ serialId });
-
 	const { color: textColor, label } = getStatusLabelMapping({ t })
 		?.[STATUS_MAPPING[ticketStatus]] || {};
 
 	const isSameName = agentName === name;
-
 	const isCategoryConfig = categoryDeskType === 'by_category';
 	const ticketReviewerName = ticketReviewer?.User?.Name || '';
-
 	const isTicketExpired = new Date(tat) > new Date();
-
+	const isActiveReviewer = userId === ticketReviewer?.UserID;
 	const endDate = new Date(tat);
 
 	const formattedTime = useGetCountdown({ time: endDate });
+	const showTimer = (((isActiveReviewer && isTicketExpired) || (userId === performedByID))
+	&& !CLOSED_TICKET_STATUS.includes(status));
 
 	if (detailsLoading) {
 		return <TicketLoader count={1} />;
@@ -94,14 +95,18 @@ function TicketSummary({
 							#
 							{id}
 						</div>
-						{isCurrentReviewer && isTicketExpired ? (
+						{showTimer ? (
 							<Tooltip content={t('myTickets:ticket_escalation_time')} placement="right">
 								<div className={styles.timer}>
 									<IcCWaitForTimeSlots />
 									{formattedTime}
 								</div>
 							</Tooltip>
-						) : <div className={styles.escalation_label}>{t('myTickets:already_escalated')}</div>}
+						) : (
+							<div className={styles.escalation_label}>
+								{hideTatTimer({ status, message: t('myTickets:already_escalated') })}
+							</div>
+						)}
 					</div>
 					<div className={styles.description}>{type}</div>
 				</div>

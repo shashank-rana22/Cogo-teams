@@ -10,6 +10,7 @@ function Services({ invoicing_parties = [] }) {
 		isGettingShipment,
 		servicesList,
 		servicesLoading,
+		activeStakeholder,
 	} = useContext(ShipmentDetailContext);
 
 	return !servicesLoading && !isGettingShipment
@@ -19,6 +20,7 @@ function Services({ invoicing_parties = [] }) {
 					<ServiceDetails
 						servicesData={servicesList}
 						invoicing_parties={invoicing_parties}
+						activeStakeholder={activeStakeholder}
 					/>
 				</div>
 			</div>

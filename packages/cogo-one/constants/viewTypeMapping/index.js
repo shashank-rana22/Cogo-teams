@@ -1,10 +1,13 @@
+import ADMIN from './viewTypes/admin';
 import COGOONE_ADMIN from './viewTypes/cogooneAdmin';
 import CP_SUPPORT from './viewTypes/cpSupport';
 import CREDIT_CONTROLLER from './viewTypes/creditController';
 import DEFAULT from './viewTypes/default';
+import HR from './viewTypes/hr';
 import MARKETING from './viewTypes/marketing';
 import SALES from './viewTypes/sales';
 import SALES_ADMIN from './viewTypes/salesAdmin';
+import SERVICE_OPS from './viewTypes/serviceOps';
 import SHIPMENT_SPECIALIST from './viewTypes/shipmentSpecialist';
 import SHIPMENT_SPECIALIST_ADMIN from './viewTypes/shipmentSpecialistAdmin';
 import SUPPLY from './viewTypes/supply';
@@ -25,5 +28,8 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 	cp_support                : CP_SUPPORT,
 	marketing                 : MARKETING,
 	default                   : DEFAULT,
-	credit_controller         : CREDIT_CONTROLLER,
+	finance                   : CREDIT_CONTROLLER,
+	admin                     : ADMIN,
+	hr                        : HR,
+	service_ops               : SERVICE_OPS,
 };
