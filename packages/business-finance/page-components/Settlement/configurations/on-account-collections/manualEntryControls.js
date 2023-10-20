@@ -46,6 +46,7 @@ const controls = [
 		placeholder           : 'Transaction Date',
 		isPreviousDaysAllowed : true,
 		value                 : new Date(),
+		maxDate               : new Date(),
 		span                  : 4,
 		rules                 : { required: ' Transaction Date is Required' },
 	},
