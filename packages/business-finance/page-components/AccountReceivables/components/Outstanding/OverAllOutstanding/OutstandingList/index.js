@@ -26,7 +26,8 @@ function OutstandingList({
 	organizationId = '',
 	setSelectedOrgId = () => {},
 }) {
-	const { id = '' } = useSelector((state) => state?.profile?.user);
+	const { id: roleId = '' } = useSelector((state) => state.profile.auth_role_data);
+
 	const [activeTab, setActiveTab] = useState('invoice_details');
 	const [showLedgerModal, setShowLedgerModal] = useState(false);
 
@@ -219,7 +220,7 @@ function OutstandingList({
 						{isEmpty(item) ? null : (
 							<UserDetails item={item} />
 						)}
-						{id === geo.uuid.corporate_owner_finance_id && (
+						{roleId === geo.uuid.corporate_owner_finance_id && (
 							<Tooltip content="AR Outstanding Download" placement="top">
 								<div className={styles.download_icon_div}>
 									<IcMActivePlans
