@@ -90,7 +90,7 @@ function TruckShipments({
 							>
 								{weight}
 								{' '}
-								KG WT.
+								Tons WT.
 							</Pill>
 						)}
 					</div>
