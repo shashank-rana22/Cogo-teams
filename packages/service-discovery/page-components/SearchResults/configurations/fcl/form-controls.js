@@ -1,6 +1,6 @@
 import validate from '../../utils/validateNumber';
 
-const fclControls = () => {
+const fclControls = ({ setValue = () => {} }) => {
 	const controls = [
 		{
 			name               : 'container',
@@ -22,9 +22,12 @@ const fclControls = () => {
 					label          : 'Type of Container',
 					type           : 'chips',
 					optionsListKey : 'container-types',
-					span           : 12,
-					value          : 'standard',
-					rules          : { required: 'Container type is required' },
+					onChange       : (val, obj, index) => {
+						setValue(`container[${index}].commodity`, '');
+					},
+					span  : 12,
+					value : 'standard',
+					rules : { required: 'Container type is required' },
 				},
 				{
 					label          : 'Commodity',

@@ -58,7 +58,7 @@ const getPerPackageControls = ({ formValues = {}, setValue = () => {} }) => {
 					type     : 'select',
 					value    : 'kg',
 					span     : 4,
-					onChange : (index, val) => {
+					onChange : (val, _, index) => {
 						const { unit, package_weight } = packages[index] || {};
 
 						if (unit === val) {
