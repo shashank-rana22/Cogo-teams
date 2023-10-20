@@ -1,79 +1,24 @@
-import { Button } from '@cogoport/components';
-// import { useForm } from '@cogoport/forms';
-import { IcMEdit } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { Button, Modal } from '@cogoport/components';
+import { InputController, SelectController, DatepickerController } from '@cogoport/forms';
+import React from 'react';
 
-import { personalInfo } from '../../../utils/info';
-import { otherPersonalInfo } from '../../../utils/otherInfo';
-import DetailsCard from '../DetailsCard';
-import RightGlance from '../RightGlance';
-
-import EditModal from './EditModal';
-// import FamilyDetailModal from './FamilyDetailModal';
-// import PersonalDetailModal from './PersonalDetailModal';
 import styles from './styles.module.css';
 
-function PersonalDetails({ data = {}, loading = false }) {
-	const [show, setShow] = useState(false);
-	// const { employee_detail, modified_employee_detail, processed_employee_detail, personal_details } = data || {};
-	// const { family_details } = personal_details || {};
-	// console.log('🚀 ~ file: index.js:26 ~ PersonalDetails ~ family_details:', family_details);
-	// const { control } = useForm();
-	const info = personalInfo;
-	const otherInfo = otherPersonalInfo;
-	const handleModal = () => {
-		setShow(!show);
-	};
+const options = [
+	{ label: 'Male', value: 'male' },
+	{ label: 'Female', value: 'female' },
+	{ label: 'Others', value: 'others' },
+];
 
-	const [datatoedit, setDataToEdit] = useState([]);
-	const handleClickDetails = ({ details }) => {
-		setDataToEdit(details);
-	};
+const marry_options = [
+	{ label: 'Married', value: 'married' },
+	{ label: 'Single', value: 'single' },
+];
+function PersonalDetailModal({ control = () => {}, show = false, handleModal = () => {} }) {
 	return (
-		<>
-			<div className={styles.tab_content}>
-				<div className={styles.main_container}>
-					<div className={styles.flex}>
-						<div className={styles.heading}>
-							<span className={styles.personal}>PERSONAL DETAILS</span>
-							<span className={styles.detail}>View and manage employee details</span>
-						</div>
-						<div>
-							<Button
-								themeType="secondary"
-								onClick={handleModal}
-							>
-								Edit
-							</Button>
-						</div>
-					</div>
-					<div className={styles.info_container}>
-						{info.map(({ heading, details }) => (
-							<div key={heading}>
-								<DetailsCard
-									heading={heading}
-									details={details}
-									data={data}
-									loading={loading}
-									key={heading}
-								/>
-								<Button
-									className={styles.info_button}
-									size="md"
-									themeType="secondary"
-									onClick={() => handleClickDetails({ heading, details })}
-								>
-									<IcMEdit style={{ marginRight: '5px' }} />
-									Edit
-								</Button>
-							</div>
-						))}
-					</div>
-				</div>
-				<RightGlance otherInfo={otherInfo} data={data} loading={loading} />
-			</div>
-
-			{/* <Modal size="md" show={show} onClose={handleModal} placement="center">
+		<div>
+			{' '}
+			<Modal size="md" show={show} onClose={handleModal} placement="center">
 				<Modal.Header title="Edit Personal Details" />
 				<Modal.Body>
 					<div className={styles.modal_form}>
@@ -184,16 +129,10 @@ function PersonalDetails({ data = {}, loading = false }) {
 				<Modal.Footer>
 					<Button onClick={handleModal}>OK</Button>
 				</Modal.Footer>
-			</Modal> */}
-			<EditModal show={show} handleModal={handleModal} dataToEdit={datatoedit} data={data} />
-			{/* // <FamilyDetailModal
-			// 	control={control}
-			// 	handleModal={handleModal}
-			// 	show={show}
-			// 	family_details={family_details}
-			// /> */}
-		</>
+			</Modal>
+
+		</div>
 	);
 }
 
-export default PersonalDetails;
+export default PersonalDetailModal;
