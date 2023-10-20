@@ -1,24 +1,16 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import { CheckoutContext } from '../../../../context';
 
 import AdditionalContent from './components/AdditionalContent';
 import BookingPreview from './components/BookingPreview';
 import styles from './styles.module.css';
-import useHandlePreviewBooking from './useHandlePreviewBooking';
 
 function PreviewBooking() {
-	const {
-		primaryService,
-		rate,
-	} = useContext(CheckoutContext);
+	const { rate = {} } = useContext(CheckoutContext);
 
-	const {
-		setShowBreakup = () => {},
-		showBreakup = false,
-		agreeTandC = false,
-		setAgreeTandC = () => {},
-	} = useHandlePreviewBooking({ primaryService });
+	const [showBreakup, setShowBreakup] = useState(false);
+	const [agreeTandC, setAgreeTandC] = useState(false);
 
 	return (
 		<div className={styles.container}>
