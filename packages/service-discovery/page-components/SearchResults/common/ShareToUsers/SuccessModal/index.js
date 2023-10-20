@@ -3,8 +3,18 @@ import { IcCFtick } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function SuccessModal({ show = false, setShow = () => {}, title = '', description = '', cta = 'Okay' }) {
-	const handleClose = () => { setShow(false); };
+function SuccessModal({
+	show = false,
+	setShow = () => {},
+	title = '',
+	description = '',
+	cta = 'Okay',
+	onClose = () => {},
+}) {
+	const handleClose = () => {
+		setShow(false);
+		onClose();
+	};
 
 	return (
 		<Modal show={show} onClose={handleClose} closable={false}>

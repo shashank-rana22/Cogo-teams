@@ -1,14 +1,10 @@
 import { Button } from '@cogoport/components';
 
-function ModalContent({ loading = false, onClick = () => {}, modalType = '' }) {
+function ModalContent({ loading = false, onClick = () => {} }) {
 	return (
-		<div>
-			<Button disabled={loading} onClick={onClick} size="md" themeType="accent">
-				{modalType === 'select_user'
-					? 'Share'
-					: 'Invite'}
-			</Button>
-		</div>
+		<Button disabled={loading} onClick={onClick} size="md" themeType="accent">
+			Share
+		</Button>
 	);
 }
 

@@ -4,7 +4,6 @@ import useShareModal from '../../../hooks/useShareModal';
 
 import Footer from './Footer';
 import Header from './Header';
-import InviteUser from './InviteUser';
 import List from './List';
 
 function ShareToUsersModal({
@@ -18,16 +17,11 @@ function ShareToUsersModal({
 	comparedRateCardDetails = [],
 }) {
 	const {
-		modalType = '',
-		handleModalType,
 		shareRateCardLoading = false,
 		handleSubmit,
 		onCreate,
 		selectedUser = {},
 		setSelectedUser,
-		errors = {},
-		control,
-		newControls,
 	} = useShareModal({
 		rate,
 		onSuccess,
@@ -46,26 +40,17 @@ function ShareToUsersModal({
 			<Modal.Header title="Share Rate Cards" />
 
 			<Modal.Body>
-				<Header modalType={modalType} onClick={handleModalType} />
+				<Header />
 
-				{modalType === 'select_user' ? (
-					<List
-						selectedId={selectedUser.id}
-						setSelectedUser={setSelectedUser}
-						org_id={org_id}
-					/>
-				) : (
-					<InviteUser
-						errors={errors}
-						control={control}
-						newControls={newControls}
-					/>
-				)}
+				<List
+					selectedId={selectedUser.id}
+					setSelectedUser={setSelectedUser}
+					org_id={org_id}
+				/>
 			</Modal.Body>
 
 			<Modal.Footer>
 				<Footer
-					modalType={modalType}
 					onClick={handleSubmit(onCreate)}
 					loading={shareRateCardLoading}
 				/>
