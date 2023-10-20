@@ -22,8 +22,6 @@ function EditContainerModal({
 }) {
 	const router = useRouter();
 
-	const controls = fclControls();
-
 	const defaultValues = getPrefillForm(data, SERVICE_KEY);
 
 	const {
@@ -33,6 +31,8 @@ function EditContainerModal({
 		handleSubmit,
 		setValue,
 	} = useForm({ defaultValues });
+
+	const controls = fclControls({ setValue });
 
 	const { origin = {}, destination = {} } = getLocationInfo(data, {}, SERVICE_KEY);
 
