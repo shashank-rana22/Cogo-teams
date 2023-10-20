@@ -778,6 +778,9 @@ const GLOBAL_CONSTANTS = {
 					preview_booking_checkout: {
 						allowed_currency: ['INR', 'USD', 'VND', 'IDR', 'SGD', 'THB', 'CNY'],
 					},
+					convenience_fee_checkout: {
+						allowed_currency: ['INR', 'USD', 'VND', 'IDR', 'SGD', 'THB', 'CNY'],
+					},
 					air_domestic: {
 						countries           : ['IN'],
 						default_country_id  : COUNTRY_IDS.IN,

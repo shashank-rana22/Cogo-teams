@@ -1,8 +1,9 @@
 import { Input, Select, Accordion, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 
-import currencies from '../../../../helpers/currencies';
+import getCurrencyOptions from '../../../../../../helpers/getCurrencyOptions';
 import Promocodes from '../../../Promocodes';
 import Spinner from '../../../Spinner';
 
@@ -50,6 +51,11 @@ function ConvenienceDetails({
 		setConvenienceDetails,
 		detail,
 	});
+
+	const ALLOWED_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
+		.common.services.convenience_fee_checkout.allowed_currency;
+
+	const CURRENCY_OPTIONS = getCurrencyOptions({ ALLOWED_CURRENCY });
 
 	return (
 		<Accordion
@@ -152,7 +158,7 @@ function ConvenienceDetails({
 
 								<Select
 									size="sm"
-									options={currencies}
+									options={CURRENCY_OPTIONS}
 									value={currency}
 									disabled={!shouldEditConvenienceFee || loading}
 									style={{ marginLeft: '12px' }}
