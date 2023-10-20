@@ -34,6 +34,13 @@ function ServiceProviderDetails({
 
 	const { name = '' } = service_provider_poc || {};
 
+	const categoryTypes = category_types?.reduce(
+		(acc, itm, index) => (
+			`${acc}${startCase(itm)}${index !== category_types.length - INDEX_STEP ? ', ' : ''}`
+		),
+		'',
+	);
+
 	return (
 		<div className={styles.container}>
 			<div
@@ -54,6 +61,10 @@ function ServiceProviderDetails({
 								<span>Service Provider Poc :</span>
 								{name || '-'}
 							</div>
+							<div className={styles.tooltip_data}>
+								<span>Category Types :</span>
+								{categoryTypes || '-'}
+							</div>
 						</>
 					)}
 				>
@@ -68,16 +79,7 @@ function ServiceProviderDetails({
 				</Tooltip>
 
 				{isTriggeredFromSideBar
-					? (
-						<div className={styles.categories}>
-							{category_types?.reduce(
-								(acc, itm, index) => (
-									`${acc}${startCase(itm)}${index !== category_types.length - INDEX_STEP ? ', ' : ''}`
-								),
-								'',
-							)}
-						</div>
-					)
+					? <div className={styles.categories}>{categoryTypes}</div>
 					: null}
 
 				<div className={cl`${styles.actions_container} 
@@ -209,16 +211,7 @@ function ServiceProviderDetails({
 
 			{isTriggeredFromSideBar
 				? null
-				: (
-					<div className={styles.categories}>
-						{category_types?.reduce(
-							(acc, itm, index) => (
-								`${acc}${startCase(itm)}${index !== category_types.length - INDEX_STEP ? ', ' : ''}`
-							),
-							'',
-						)}
-					</div>
-				)}
+				: <div className={styles.categories}>{categoryTypes}</div>}
 		</div>
 	);
 }

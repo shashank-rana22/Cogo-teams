@@ -85,7 +85,7 @@ function RateRevertCard({
 					<Button
 						size="md"
 						themeType="secondary"
-						disabled={status !== 'pending' || !reverted_status}
+						disabled={status !== 'pending' || reverted_status !== 'pending'}
 						onClick={() => setShowAddRateModal({ showModal: true, cardData })}
 					>
 						+ Add Rate

@@ -13,7 +13,12 @@ function ShipmentProgress({
 	cardData = {},
 	isTriggeredFromSideBar = false,
 }) {
-	const { call_details = {}, reverted_status = '', assigned_to = {}, created_at = '' } = cardData || {};
+	const {
+		call_details = {},
+		reverted_status = '',
+		assigned_to = {},
+		created_at = '',
+	} = cardData || {};
 	const { agent_data = {}, end_time_of_call = '', start_time_of_call = '' } = call_details || {};
 	const { name = '' } = agent_data || {};
 
@@ -27,27 +32,30 @@ function ShipmentProgress({
 
 	return (
 		<div className={styles.container}>
-			{isTriggeredFromSideBar ? (
-				<div className={styles.contact_info}>
-					<span className={styles.label}>
-						Created At
-					</span>
 
-					<span className={styles.primary_data}>
-						{`: ${
-							formatDate({
-								date       : created_at,
-								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-								timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
-								formatType : 'dateTime',
-								separator  : ', ',
-							})
-						}`}
-					</span>
-				</div>
-			) : null}
+			<div className={cl`${styles.contact_info} 
+				${isTriggeredFromSideBar ? styles.side_contact_info : ''}`}
+			>
+				<span className={styles.label}>
+					Created At
+				</span>
 
-			<div className={styles.contact_info}>
+				<span className={styles.primary_data}>
+					{`: ${
+						formatDate({
+							date       : created_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType : 'dateTime',
+							separator  : ', ',
+						})
+					}`}
+				</span>
+			</div>
+
+			<div className={cl`${styles.contact_info} 
+				${isTriggeredFromSideBar ? styles.side_contact_info : ''}`}
+			>
 				<span className={styles.label}>
 					Assigned To
 				</span>
@@ -59,7 +67,9 @@ function ShipmentProgress({
 				</span>
 			</div>
 
-			<div className={styles.contact_info}>
+			<div className={cl`${styles.contact_info} 
+				${isTriggeredFromSideBar ? styles.side_contact_info : ''}`}
+			>
 				<span className={styles.label}>
 					Revert Status
 				</span>
@@ -70,7 +80,7 @@ function ShipmentProgress({
 			</div>
 
 			<div
-				className={styles.contact_info}
+				className={cl`${styles.contact_info} ${styles.side_contact_info}`}
 				style={{
 					flexDirection: isTriggeredFromSideBar ? 'column' : 'row',
 				}}

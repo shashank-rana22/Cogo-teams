@@ -1,5 +1,6 @@
 import { MultiSelect, Tags, Popover, Badge, Input } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useMemo } from 'react';
 
@@ -16,6 +17,7 @@ function Header({
 	searchQuery = '',
 	setSearchQuery = () => {},
 }) {
+	const { query: { partner_id = '' } = {} } = useRouter();
 	const [showFilters, setShowFilters] = useState(false);
 	const [shipmentObj, setShipmentObj] = useState({});
 
@@ -63,7 +65,17 @@ function Header({
 
 	return (
 		<div className={styles.header_container}>
-			<div className={styles.header}>
+			<div
+				className={styles.header}
+				role="presentation"
+				onClick={(e) => {
+					e.stopPropagation();
+					window.open(
+						`${window.location.origin}/${partner_id}/supply/dashboards/rate-density`,
+						'_blank',
+					);
+				}}
+			>
 				Rate Jobs
 			</div>
 

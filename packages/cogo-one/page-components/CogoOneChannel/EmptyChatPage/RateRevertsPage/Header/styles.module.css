@@ -1,6 +1,11 @@
 .header {
 	font-size: 16px;
 	font-weight: 600;
+
+	&:hover {
+		text-decoration: underline;
+		cursor: pointer;
+	}
 }
 
 .header_container {
@@ -48,7 +53,8 @@
 	display: flex;
 	align-items: center;
 	width: calc(54% - 30px);
-	overflow: auto;
+	height: fit-content;
+	overflow-x: auto;
 
 	&::-webkit-scrollbar {
 		display: none;

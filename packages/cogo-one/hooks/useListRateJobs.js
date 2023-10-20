@@ -18,8 +18,8 @@ const getPayload = ({ params, orgId, triggeredFrom, viewType, query }) => ({
 		service_provider_id : (triggeredFrom === 'sideBar' && orgId) ? orgId : undefined,
 		shipment_id         : params?.shipment_id || undefined,
 		serial_id           : query || undefined,
-		// start_date          : params?.dateRange?.startDate || new Date(),
-		// end_date            : params?.dateRange?.endDate || new Date(),
+		start_date          : (params?.dateRange?.startDate || new Date()).toISOString(),
+		end_date            : (params?.dateRange?.endDate || new Date()).toISOString(),
 	},
 });
 
