@@ -4044,6 +4044,16 @@ const partner = {
 			service_name : 'air_customs_rate',
 		},
 		{
+			api          : 'list_ftl_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
+		},
+		{
+			api          : 'list_ftl_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -4082,6 +4092,11 @@ const partner = {
 			api          : 'update_air_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'air_customs_rate',
+		},
+		{
+			api          : 'update_ftl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -4127,6 +4142,11 @@ const partner = {
 			api          : 'create_air_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'air_customs_rate',
+		},
+		{
+			api          : 'create_ftl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
 		},
 		{
 			api          : 'list_emails',
@@ -5187,6 +5207,16 @@ const partner = {
 			service_name : 'air_customs_rate',
 		},
 		{
+			api          : 'list_ftl_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
+		},
+		{
+			api          : 'list_ftl_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -5225,6 +5255,11 @@ const partner = {
 			api          : 'update_air_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'air_customs_rate',
+		},
+		{
+			api          : 'update_ftl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -5290,6 +5325,11 @@ const partner = {
 			api          : 'create_air_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'air_customs_rate',
+		},
+		{
+			api          : 'create_ftl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
 		},
 		{
 			api          : 'list_cogo_entities',
@@ -9689,6 +9729,12 @@ const partner = {
 			feature     : 'JournalVoucher',
 		},
 		{
+			api         : 'post_payments_invoice_exchange_rates',
+			access_type : 'private',
+			module      : 'settlement',
+			feature     : 'settlement',
+		},
+		{
 			api         : 'post_payments_parent_jv_bulk_jv_upload',
 			access_type : 'private',
 			module      : 'JournalVoucher',
@@ -13746,6 +13792,11 @@ const partner = {
 			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
+		},
+		{
+			api          : 'get_distinct_values_in_column',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
 		},
 	],
 	ticket_management: [
