@@ -1,17 +1,10 @@
 .container {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
 	margin: 0 8px;
-}
-
-.transit_time {
-	padding: 4px;
-	font-size: 10px;
-	color: #000;
-	background: rgb(247 250 239);
-	border-radius: 4px;
 }
 
 .journey_line {
@@ -47,16 +40,30 @@
 	border-radius: 50%;
 }
 
-.schedule_type {
+.tags_container {
+	position: absolute;
+	right: 50%;
+	bottom: -4px;
+	left: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.tag {
 	display: flex;
 	align-items: center;
 	align-self: center;
 	justify-content: center;
-	padding: 2px 5px;
-	margin-bottom: 4px;
+	width: max-content;
+	padding: 3px 6px;
 	font-size: 10px;
 	color: #333;
 	text-align: center;
 	background: rgb(247 250 239);
 	border-radius: 4px;
+
+	&.transit_time {
+		margin-bottom: 4px;
+	}
 }
