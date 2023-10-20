@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { upperCase } from '@cogoport/utils';
+import { getMonth } from '@cogoport/utils';
 import React from 'react';
 
 // import useCreatePayroll from '../../../../hooks/useCreatePayroll';
@@ -10,12 +10,13 @@ import useDownloadPayrollDetails from '../../../../hooks/useDownloadPayrollDetai
 import useListPayroll from '../../../../hooks/useListPayroll';
 import useUpdatePayroll from '../../../../hooks/useUpdatePayroll';
 // import Heading from '../Heading';
+import { MONTHS } from '../../../../utils/constants';
 
 import PaymentDetails from './PaymentDetails';
 import Review from './ReviewSection';
 import styles from './styles.module.css';
 
-function RunPayroll({ setProceed, month = '', handleBack = () => {}, listId = '' }) {
+function RunPayroll({ setProceed, handleBack = () => {}, listId = '' }) {
 	// const { payroll_id } = useCreatePayroll();
 	const { data } = useListPayroll({ listId });
 	const { list } = data || {};
@@ -46,7 +47,7 @@ function RunPayroll({ setProceed, month = '', handleBack = () => {}, listId = ''
 						<IcMArrowBack width={14} height={14} onClick={handleBack} className={styles.back_btn} />
 						<div className={styles.top_text_container}>
 							<span className={styles.top_bold_text}>
-								{upperCase(month)}
+								{MONTHS[getMonth(new Date(payroll_data.payroll_month))]}
 								{' '}
 								cycle
 								{' '}
@@ -84,7 +85,7 @@ function RunPayroll({ setProceed, month = '', handleBack = () => {}, listId = ''
 					className={styles.btn}
 					onClick={() => router.push('/payroll')}
 				>
-					Save && Back to Dashboard
+					Save and Back to Dashboard
 
 				</Button>
 				<Button

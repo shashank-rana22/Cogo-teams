@@ -63,7 +63,7 @@ export const data_map_payroll_card = [
 
 export const CARDDATAPAYROLL = [
 	{
-		title    : 'total_payout',
+		title    : 'total_net_payout',
 		subtitle : 'Total Payroll',
 	},
 ];

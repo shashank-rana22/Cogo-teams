@@ -23,7 +23,7 @@ const useGetEmployeePayrolls = ({
 		async () => {
 			try {
 				const {
-					page_limit, page, departmentList, location, payband, payroll_status, designation, ...rest
+					page_limit, page, departmentList, location, payband, payroll_status, role_id, ...rest
 				} = filters;
 
 				await trigger({
@@ -36,7 +36,7 @@ const useGetEmployeePayrolls = ({
 							status                : payroll_status,
 							q                     : query,
 							employee_id           : employeeIds,
-							role_id               : designation,
+							role_id,
 						},
 						page_limit,
 						page,

@@ -2,13 +2,14 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { upperCase } from '@cogoport/utils';
+import { getMonth } from '@cogoport/utils';
 import React from 'react';
 
 // import EditSalaryModel from '../EditSalaryModel';
 // import useCreatePayroll from '../../../../hooks/useCreatePayroll';
 import useDownloadPayrollDetails from '../../../../hooks/useDownloadPayrollDetails';
 import useListPayroll from '../../../../hooks/useListPayroll';
+import { MONTHS } from '../../../../utils/constants';
 // import Heading from '../Heading';
 
 import SubmitPayroll from './CardSection';
@@ -18,7 +19,7 @@ import styles from './styles.module.css';
 function FinalPaymentReport(
 	{
 		setProceed = () => {},
-		month = '', listId = '', handleSetup = () => {}, handleBack = () => {},
+		listId = '', handleSetup = () => {}, handleBack = () => {},
 	},
 ) {
 	const router = useRouter();
@@ -38,7 +39,7 @@ function FinalPaymentReport(
 						<IcMArrowBack width={14} height={14} onClick={handleBack} className={styles.back_btn} />
 						<div className={styles.top_text_container}>
 							<span className={styles.top_bold_text}>
-								{upperCase(month)}
+								{MONTHS[getMonth(new Date(payroll_data.payroll_month))]}
 								{' '}
 								cycle
 								{' '}

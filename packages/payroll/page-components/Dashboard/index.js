@@ -1,5 +1,5 @@
-import { Button, Tabs, TabPanel } from '@cogoport/components';
-import { IcMPlus, IcMTaskCompleted } from '@cogoport/icons-react';
+import { Tabs, TabPanel } from '@cogoport/components';
+// import { IcMPlus, IcMTaskCompleted } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState, useEffect } from 'react';
 
@@ -31,7 +31,7 @@ function PayrollDashboard() {
 			<div className={styles.top_text} />
 			<div className={styles.head_flex}>
 				<span className={styles.heading}>Cogo Payroll (Admin)</span>
-				<div className={styles.buttons}>
+				{/* <div className={styles.buttons}>
 					<Button size="md" themeType="secondary">
 						<div className={styles.button_text_container}>
 							<span className={styles.button_text}>New request</span>
@@ -44,7 +44,7 @@ function PayrollDashboard() {
 							<IcMTaskCompleted width={18} height={18} />
 						</div>
 					</Button>
-				</div>
+				</div> */}
 			</div>
 
 			<div className={styles.tabs_container}>

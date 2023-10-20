@@ -36,16 +36,16 @@ function Review({ payroll_data = {} }) {
 					<span className={styles.sub_heading_section2}>
 						₹
 						{' '}
-						{payroll_data?.total_payout}
+						{payroll_data?.total_net_payout}
 					</span>
 					<span className={styles.sub_heading2_section2}>
 						{payroll_data?.employee_count}
 						{' '}
 						employees will be paid by
 						{' '}
-						{getDate(new Date(payroll_data?.paid_on))}
+						{getDate(new Date(payroll_data.payroll_month))}
 						{' '}
-						{MONTHS[getMonth(new Date(payroll_data?.paid_on))]}
+						{MONTHS[(getMonth(new Date(payroll_data.payroll_month)) + 1) % 12]}
 					</span>
 				</div>
 				<div className={styles.image_section}>

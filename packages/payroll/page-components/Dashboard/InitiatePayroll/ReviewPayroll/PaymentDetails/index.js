@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const PAYMENTDETAILS = [
-	{ title: 'Total Net Wages', label: 'total_net_payout' },
+	{ title: 'Total Net Wages', label: 'total_payout' },
 	{ title: 'Total Deductions', label: 'total_deductions' },
 	{ title: 'Total Reimbursements', label: 'total_reimbursements' },
 ];
@@ -29,7 +29,7 @@ function PaymentDetails({
 					<span className={styles.table_amount2}>
 						₹
 						{' '}
-						{payroll_data.total_payout}
+						{payroll_data.total_net_payout}
 					</span>
 				</div>
 

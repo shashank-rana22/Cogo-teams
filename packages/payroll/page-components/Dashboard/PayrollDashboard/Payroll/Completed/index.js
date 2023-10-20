@@ -93,9 +93,9 @@ function CompletedTab({
 		>
 			<div className={styles.text_section}>
 				<span className={styles.head_text}>
-					{MONTHS[getMonth(new Date(item?.paid_on))]}
+					{MONTHS[getMonth(new Date(item?.payroll_month))]}
 					{' '}
-					{getYear(new Date(item?.paid_on))}
+					{getYear(new Date(item?.payroll_month))}
 					{' '}
 					{item.batch_name ? '-' : ''}
 					{' '}
@@ -133,7 +133,7 @@ function CompletedTab({
 					{' '}
 					₹
 					{' '}
-					{item.total_payout}
+					{item.total_net_payout}
 				</span>
 				{
 						GetStatus(activeTab, item.status)
