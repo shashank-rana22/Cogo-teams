@@ -1,0 +1,135 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+	width: 73%;
+	padding: 16px 12px;
+	background: #fff;
+	border-radius: 16px;
+}
+
+.head_container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 24px;
+}
+
+.heading {
+	margin-top: 8px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.upload_container {
+	display: flex;
+	align-items: center;
+	padding-block: 1px;
+
+	:global {
+		.ui_input_label {
+			width: 100%;
+		}
+
+		#upload > :first-child {
+			width: 100% !important;
+		}
+	}
+}
+
+.upload_container > :not(:last-child) {
+	margin-right: 4px;
+}
+
+.bulk_upload {
+	font-weight: 500;
+	color: #221f20;
+	text-align: center;
+	text-transform: capitalize;
+}
+
+.main_container {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.main_container > :not(:last-child) {
+	margin-right: 0;
+	margin-bottom: 24px;
+}
+
+.input_container {
+	display: flex;
+	flex-basis: 100%;
+	flex-direction: column;
+	margin-right: 0;
+
+	:global {
+		.ui_input_control::placeholder {
+			font-size: 14px;
+			color: #bdbdbd;
+		}
+
+		.ui_multiselect_input_control > * {
+			font-size: 14px;
+		}
+
+		.ui_select_input_control > * {
+			font-size: 14px;
+		}
+
+		.ui_text_area_control::placeholder {
+			font-size: 14px;
+			color: #bdbdbd;
+		}
+	}
+}
+
+.input_container > :not(:last-child) {
+	margin-bottom: 7px;
+}
+
+.months_container {
+	display: flex;
+	flex-direction: row;
+}
+
+.months_container > :not(:last-child) {
+	margin-right: 24px;
+}
+
+.checkbox_container {
+	:global {
+		.ui_checkbox_container {
+			padding: 0;
+		}
+	}
+}
+
+.label {
+	font-size: 14px;
+	color: #221f20;
+}
+
+.multiselect {
+	:global {
+		.ui_nsEVQ {
+			display: none;
+		}
+	}
+}
+
+.checkbox {
+	padding: 0;
+}
+
+.half {
+	flex-basis: calc((100% - 24px)/2);
+	padding-inline: 12px;
+}
+
+.error_msg {
+	color: rgb(255 92 92);
+}

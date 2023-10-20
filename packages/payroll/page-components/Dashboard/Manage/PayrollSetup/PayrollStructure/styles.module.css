@@ -1,0 +1,50 @@
+.main_container {
+	padding: 24px;
+	background: #fff;
+	border-radius: 25px 25px 0 0;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 16px 12px;
+	background: #f9f9f9;
+	border-radius: 16px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+}
+
+.heading {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.upper_heading {
+	font-weight: 600;
+	color: #221f20;
+}
+
+.lower_heading {
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.arrow_back {
+	display: flex;
+	align-items: center;
+	margin-right: 8px;
+	cursor: pointer;
+}
+
+.tab_container {
+	display: flex;
+	align-items: flex-start;
+	width: 100%;
+	margin-top: 16px;
+}

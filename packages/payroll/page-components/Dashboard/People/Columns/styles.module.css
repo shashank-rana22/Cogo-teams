@@ -1,0 +1,71 @@
+.cogo_id {
+	color: #ed3726;
+	text-decoration-line: underline;
+	cursor: pointer;
+}
+
+.data {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	max-width: 130px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	@media (max-width: 1280px) {
+		max-width: 130px;
+	}
+}
+
+.name_data {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.name_code_data {
+	transition: text-decoration 0.3s ease;
+}
+
+.name_code_data:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.tooltip_data {
+	max-width: none;
+	word-break: normal;
+}
+
+.tooltip {
+	max-width: none !important;
+}
+
+.profile_name {
+	display: flex;
+	align-items: center;
+}
+
+.checkbox_container {
+	display: flex;
+}
+
+.avatar {
+	margin-right: 6px;
+
+	:global {
+		.ui_avatar_container {
+			padding: 8px;
+			margin-right: 5px;
+		}
+
+		.ui_avatar_text {
+			font-size: 10px !important;
+			font-weight: 400;
+			background-color: #849e4c;
+			border-radius: 50%;
+		}
+	}
+}
