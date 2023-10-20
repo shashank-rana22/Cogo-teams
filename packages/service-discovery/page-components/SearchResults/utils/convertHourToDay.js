@@ -7,10 +7,10 @@ const convertHourToDay = (time) => {
 		const t = Math.floor(time / HOURS_IN_ONE_DAY);
 		const r = time % HOURS_IN_ONE_DAY;
 		if (r === DEFAULT_ZERO_VALUE) {
-			return `${t} Day(s) `;
+			return `${t} Day${t > 1 ? 's' : ''}`;
 		}
-		return `${t} Day(s) ${r} Hour(s) `;
+		return `${t} Day${t > 1 ? 's' : ''} ${r} Hour${r > 1 ? 's' : ''} `;
 	}
-	return `${time} Hour(s)`;
+	return `${time} Hour${time > 1 ? 's' : ''}`;
 };
 export default convertHourToDay;
