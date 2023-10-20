@@ -4,12 +4,12 @@ import EmploymentDetails from './EmploymentDetails/index';
 import OtherDetails from './OtherDetails';
 import PersonalDetails from './PersonalDetails/index';
 
-const useGetTabsMapping = (data = {}, loading = false) => (
+const useGetTabsMapping = (data = {}, loading = false, getEmployeeDetails = () => {}) => (
 	[
 		{
 			name      : 'personal_details',
 			title     : 'Personal Details',
-			Component : <PersonalDetails data={data} loading={loading} />,
+			Component : <PersonalDetails data={data} loading={loading} getEmployeeDetails={getEmployeeDetails} />,
 		},
 		{
 			name      : 'education_and_skills',

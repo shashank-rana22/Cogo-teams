@@ -25,7 +25,7 @@ const useGetEmployeeDetails = (user_id = '') => {
 		}
 	}, [user_id, getEmployeeDetails]);
 
-	return { loading, data };
+	return { loading, data, getEmployeeDetails };
 };
 
 export default useGetEmployeeDetails;

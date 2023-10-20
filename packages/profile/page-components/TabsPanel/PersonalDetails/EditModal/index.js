@@ -9,6 +9,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useCallback } from 'react';
 
+import useUpdateEmployee from '../../../../hooks/useUpdateEmployee';
 import { CONTROL_MAPPING, BASIC_CONTROLS, FAMILY_CONTROLS, ADDRESS_CONTROLS } from '../../../../utils/configs/personalDetailsControls';
 
 import styles from './styles.module.css';
@@ -19,8 +20,9 @@ const controlMapping = {
 	address : ADDRESS_CONTROLS,
 };
 
-function EditModal({ show = false, handleModal = () => {}, data, mappingKey }) {
+function EditModal({ show = false, handleModal = () => {}, data, mappingKey, getEmployeeDetails }) {
 	const { control, handleSubmit, setValue } = useForm();
+	const { updateEmployeeDetails, loading } = useUpdateEmployee({ handleModal, getEmployeeDetails });
 
 	const { processed_employee_detail, employee_detail, personal_details } = data || {};
 
@@ -95,16 +97,14 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey }) {
 	}, [employee_detail.cogoport_email, employee_detail?.date_of_birth, employee_detail.gender, employee_detail?.mobile_country_code, employee_detail?.mobile_number, employee_detail.personal_email, mappingKey, personal_details.allergies, personal_details?.alternate_mobile_country_code, personal_details?.alternate_mobile_number, personal_details.disability_level, processed_employee_detail.first_name, processed_employee_detail.last_name, setValues, personal_details?.marital_status, personal_details?.blood_group, family_details?.father_mobile_country_code, family_details, employee_detail?.present_address?.address, employee_detail?.present_address?.city, employee_detail?.present_address?.country, employee_detail?.present_address?.pincode, employee_detail?.present_address?.state]);
 
 	const onSubmit = (values) => {
-		console.log('values', values);
-
 		const valuesMapping = {
 			basic: {
 				...values,
-				date_of_birth: !isEmpty(values.date_of_birth) && formatDate({
+				date_of_birth: !isEmpty(values.date_of_birth) ? formatDate({
 					date       : values.date_of_birth,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 					formatType : 'date',
-				}),
+				}) : null,
 				mobile_number                 : values?.mobile_number?.number,
 				mobile_country_code           : values?.mobile_number?.country_code,
 				alternate_mobile_number       : values?.alternate_mobile_number?.number,
@@ -128,7 +128,22 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey }) {
 
 		const finalData = valuesMapping[mappingKey];
 
-		console.log('finalData', finalData);
+		const keyObjMapping = {
+			basic   : 'personal_details',
+			family  : 'family_information',
+			address : 'address_information',
+		};
+
+		const nestedKeyMapping = {
+			family  : 'family_details',
+			address : 'present_address',
+		};
+
+		const finalValuesData = { [keyObjMapping[mappingKey]]: mappingKey === 'basic' ? finalData : { [nestedKeyMapping[mappingKey]]: finalData } };
+
+		console.log('finalValuesData', finalValuesData);
+
+		updateEmployeeDetails(finalValuesData);
 	};
 
 	return (
@@ -158,7 +173,7 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey }) {
 								<Button themeType="secondary" className={styles.edit_btn} onClick={handleModal}>
 									Cancel
 								</Button>
-								<Button type="submit">
+								<Button type="submit" loading={loading} disabled={loading}>
 									Apply
 								</Button>
 							</div>

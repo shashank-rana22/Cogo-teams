@@ -205,10 +205,10 @@ export const ADDRESS_CONTROLS = [
 		placeholder : 'City',
 	},
 	{
-		label       : 'Country',
-		name        : 'country',
+		label       : 'State',
+		name        : 'state',
 		controlType : 'text',
-		placeholder : 'Country',
+		placeholder : 'State',
 	},
 	{
 		label       : 'Pincode',

@@ -1,6 +1,5 @@
-import { Button } from '@cogoport/components';
 // import { useForm } from '@cogoport/forms';
-import { IcMEdit } from '@cogoport/icons-react';
+
 import React, { useState } from 'react';
 
 import { personalInfo } from '../../../utils/info';
@@ -13,7 +12,7 @@ import EditModal from './EditModal';
 // import PersonalDetailModal from './PersonalDetailModal';
 import styles from './styles.module.css';
 
-function PersonalDetails({ data = {}, loading = false }) {
+function PersonalDetails({ data = {}, loading = false, getEmployeeDetails }) {
 	const [show, setShow] = useState(false);
 	// const { employee_detail, modified_employee_detail, processed_employee_detail, personal_details } = data || {};
 	// const { family_details } = personal_details || {};
@@ -51,16 +50,9 @@ function PersonalDetails({ data = {}, loading = false }) {
 									data={data}
 									loading={loading}
 									key={heading}
+									keyMapping={key}
+									handleClickDetails={handleClickDetails}
 								/>
-								<Button
-									className={styles.info_button}
-									size="md"
-									themeType="secondary"
-									onClick={() => handleClickDetails({ heading, details, key })}
-								>
-									<IcMEdit style={{ marginRight: '5px' }} />
-									Edit
-								</Button>
 							</div>
 						))}
 					</div>
@@ -180,7 +172,15 @@ function PersonalDetails({ data = {}, loading = false }) {
 					<Button onClick={handleModal}>OK</Button>
 				</Modal.Footer>
 			</Modal> */}
-			{show && <EditModal show={show} handleModal={handleModal} data={data} mappingKey={datatoedit?.key} />}
+			{show && (
+				<EditModal
+					show={show}
+					handleModal={handleModal}
+					data={data}
+					mappingKey={datatoedit}
+					getEmployeeDetails={getEmployeeDetails}
+				/>
+			)}
 			{/* // <FamilyDetailModal
 			// 	control={control}
 			// 	handleModal={handleModal}

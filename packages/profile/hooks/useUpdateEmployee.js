@@ -1,18 +1,24 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
-const 	useUpdateEmployee = () => {
+const useUpdateEmployee = ({ handleModal = () => {}, getEmployeeDetails }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/update_employee_directory',
 	}, { manual: true });
 
-	const updateEmployeeDetails = async ({ payload }) => {
+	const { profile } = useSelector((state) => state);
+
+	const updateEmployeeDetails = async (payload) => {
+		console.log('payload', payload);
 		try {
 			await trigger({
-				education_details: payload,
+				data: { ...payload, user_id: profile?.user?.id },
 			});
+			getEmployeeDetails();
+			handleModal();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}

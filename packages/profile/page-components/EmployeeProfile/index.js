@@ -30,7 +30,7 @@ function EmployeeProfile() {
 
 	const user_id = employee_id || user.id;
 
-	const { loading, data } = useGetEmployeeDetails(user_id);
+	const { loading, data, getEmployeeDetails } = useGetEmployeeDetails(user_id);
 
 	const { employee_detail } = data || {};
 	const employeeData = getEmployeeData(employee_detail);
@@ -167,7 +167,7 @@ function EmployeeProfile() {
 							onHide={() => setOpenEditProfile(false)}
 						/>
 					) }
-					<TabsPanel data={data} loading={loading} />
+					<TabsPanel data={data} loading={loading} getEmployeeDetails={getEmployeeDetails} />
 				</div>
 			) : (<EmptyState height={250} width={450} />)}
 		</div>
