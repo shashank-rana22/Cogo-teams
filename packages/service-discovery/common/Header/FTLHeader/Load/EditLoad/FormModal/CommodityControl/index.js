@@ -109,7 +109,7 @@ function CommodityControl({ control = () => {}, errors = {}, commodity_type = ''
 	}, [commodity_type, loadType]);
 
 	return (
-		<div>
+		<>
 			<span className={styles.label}>Commodity</span>
 
 			<div className={styles.toggle}>
@@ -130,7 +130,7 @@ function CommodityControl({ control = () => {}, errors = {}, commodity_type = ''
 				errors={errors}
 				key={activeCommodityType}
 			/>
-		</div>
+		</>
 	);
 }
 

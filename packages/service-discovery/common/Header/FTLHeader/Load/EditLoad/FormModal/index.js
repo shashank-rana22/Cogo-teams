@@ -36,7 +36,7 @@ function FormModal({
 	});
 
 	return (
-		<div>
+		<>
 			<Header
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
@@ -72,7 +72,7 @@ function FormModal({
 					loadType={loadType}
 				/>
 			</div>
-		</div>
+		</>
 	);
 }
 

@@ -71,7 +71,7 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 	}
 
 	return (
-		<div>
+		<>
 			<AccordionView
 				itemKey="cargo_insurance"
 				active={active}
@@ -116,7 +116,7 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 					title={DELETE_TITLE}
 				/>
 			) : null}
-		</div>
+		</>
 	);
 }
 

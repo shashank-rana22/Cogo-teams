@@ -10,6 +10,30 @@ import styles from './styles.module.css';
 
 const ONE_VALUE = 1;
 
+function Content({ touchPoints = [] }) {
+	return (touchPoints || []).map((touchPoint, idx) => (
+		<div className={styles.touchpoint_container} key={touchPoint.id}>
+			<div className={styles.circle} />
+
+			{idx < touchPoints.length - ONE_VALUE && <div className={styles.line} />}
+
+			<div className={styles.label}>
+				{' '}
+				Touch Point
+				{' '}
+				{idx + ONE_VALUE}
+			</div>
+
+			<div className={styles.name}>
+				{touchPoint.name?.split(' ', ONE_VALUE)}
+				,
+				{' '}
+				{touchPoint.display_name?.split('-', ONE_VALUE)}
+			</div>
+		</div>
+	));
+}
+
 function TouchPoint(
 	{
 		typeOfJourney = 'one_way',
@@ -29,34 +53,6 @@ function TouchPoint(
 		setShow(false);
 	};
 
-	function Content() {
-		return (
-			<>
-				{(touchPoints || []).map((touchPoint, idx) => (
-					<div className={styles.touchpoint_container} key={touchPoint.id}>
-						<div className={styles.circle} />
-
-						{idx < touchPoints.length - ONE_VALUE && <div className={styles.line} />}
-
-						<div className={styles.label}>
-							{' '}
-							Touch Point
-							{' '}
-							{idx + ONE_VALUE}
-						</div>
-
-						<div className={styles.name}>
-							{touchPoint.name?.split(' ', ONE_VALUE)}
-							,
-							{' '}
-							{touchPoint.display_name?.split('-', ONE_VALUE)}
-						</div>
-					</div>
-				))}
-			</>
-		);
-	}
-
 	const disabled = typeOfJourney === 'round';
 
 	return (
@@ -75,9 +71,10 @@ function TouchPoint(
 			{!isEmpty(touchPoints) ? (
 				<Tooltip
 					placement="bottom"
+					interactive
 					content={(
 						<div style={{ fontSize: '10px', width: '150px' }}>
-							<Content />
+							<Content touchPoints={touchPoints} />
 						</div>
 					)}
 				>
