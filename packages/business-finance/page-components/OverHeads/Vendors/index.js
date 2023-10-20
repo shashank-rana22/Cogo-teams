@@ -264,6 +264,7 @@ function VenderComponent() {
 				handlePageChange={(pageValue) => {
 					setFilters((p) => ({ ...p, page: pageValue }));
 				}}
+				page={filters?.page}
 				showPagination
 				renderDropdown={({ vendorId }) => <RenderDropdown vendorId={vendorId} />}
 			/>
