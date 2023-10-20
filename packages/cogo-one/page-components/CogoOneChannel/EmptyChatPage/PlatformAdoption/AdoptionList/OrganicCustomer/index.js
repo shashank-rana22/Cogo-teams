@@ -6,7 +6,7 @@ import AgentAvatar from '../../../../../../common/AgentAvatar';
 
 import styles from './styles.module.css';
 
-function OrganicCustomer({ itm = {}, setScheduleDemo = () => {} }) {
+function OrganicCustomer({ itm = {}, setScheduleDemo = () => {}, setVerifyAccount = () => {} }) {
 	const { label, subLabel, accountType, location, language_preferred } = itm || {};
 
 	return (
@@ -79,6 +79,14 @@ function OrganicCustomer({ itm = {}, setScheduleDemo = () => {} }) {
 				<Button
 					size="md"
 					themeType="secondary"
+					onClick={() => {
+						setVerifyAccount((prev) => ({
+							...prev,
+							show               : true,
+							showAccountDetails : true,
+							accountData        : {},
+						}));
+					}}
 				>
 					<IcMFtick fill="#abcd62" width={18} height={18} className={styles.schedule_demo_icon} />
 					Verify

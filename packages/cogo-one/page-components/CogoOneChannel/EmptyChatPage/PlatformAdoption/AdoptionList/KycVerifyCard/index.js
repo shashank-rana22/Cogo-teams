@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const DOC_ARRAY = ['Pan.pdf', 'GST.pdf', 'Aadhar.pdf', 'Income.pdf'];
 
-function KycVerifyCard({ itm = {} }) {
+function KycVerifyCard({ itm = {}, setVerifyAccount = () => {} }) {
 	const { label, subLabel, accountType, requestedBy, agentRole } = itm || {};
 
 	const FIRST_TWO_ITEM = DOC_ARRAY.slice(0, 2);
@@ -61,7 +61,18 @@ function KycVerifyCard({ itm = {} }) {
 						{DOC_ARRAY.length > 2 ? (
 							<div className={styles.remaining_content}>
 								<div className={styles.remian_count}>{`+${REMAINING_ITEM.length} more`}</div>
-								<div className={styles.view_all}>
+								<div
+									role="presentation"
+									className={styles.view_all}
+									onClick={() => {
+										setVerifyAccount((prev) => ({
+											...prev,
+											show               : true,
+											showAccountDetails : false,
+											accountData        : {},
+										}));
+									}}
+								>
 									<IcMDocument width={15} height={15} />
 									<span>View All</span>
 								</div>
@@ -93,7 +104,18 @@ function KycVerifyCard({ itm = {} }) {
 					10:09 m left
 				</div>
 				<div className={styles.button_section}>
-					<div className={styles.verify_button}>
+					<div
+						className={styles.verify_button}
+						role="presentation"
+						onClick={() => {
+							setVerifyAccount((prev) => ({
+								...prev,
+								show               : true,
+								showAccountDetails : true,
+								accountData        : {},
+							}));
+						}}
+					>
 						<IcMFtick className={styles.ftick_icon} />
 						Verify
 					</div>

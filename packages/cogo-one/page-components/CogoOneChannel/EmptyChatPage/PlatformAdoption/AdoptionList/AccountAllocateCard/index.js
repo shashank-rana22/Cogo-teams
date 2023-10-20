@@ -10,7 +10,7 @@ import { useState } from 'react';
 import RejectVerification from './RejectAccountModal';
 import styles from './styles.module.css';
 
-function AccountAllocateCard({ itm = {} }) {
+function AccountAllocateCard({ itm = {}, setVerifyAccount = () => {} }) {
 	const { label, subLabel, currentAgent, requestedBy } = itm || {};
 
 	const [showReject, setShowReject] = useState(false);
@@ -75,7 +75,18 @@ function AccountAllocateCard({ itm = {} }) {
 				</div>
 				<div className={styles.each_row}>
 					<div className={styles.title}>Confirmation Proof :</div>
-					<div className={styles.docs}>
+					<div
+						className={styles.docs}
+						role="presentation"
+						onClick={() => {
+							setVerifyAccount((prev) => ({
+								...prev,
+								show               : true,
+								showAccountDetails : false,
+								accountData        : {},
+							}));
+						}}
+					>
 						<IcMDocument width={15} height={15} />
 						<span>View All</span>
 					</div>

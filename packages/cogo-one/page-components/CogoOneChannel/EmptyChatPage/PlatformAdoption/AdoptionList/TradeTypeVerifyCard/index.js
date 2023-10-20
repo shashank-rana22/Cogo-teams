@@ -9,7 +9,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function TradeTypeVerifyCard({ itm = {} }) {
+function TradeTypeVerifyCard({ itm = {}, setVerifyAccount = () => {} }) {
 	const { label, subLabel, accountType, requestedBy, tradeType } = itm || {};
 
 	return (
@@ -62,7 +62,18 @@ function TradeTypeVerifyCard({ itm = {} }) {
 				</div>
 				<div className={styles.each_row}>
 					<div className={styles.title}>Documents Uploaded :</div>
-					<div className={styles.docs}>
+					<div
+						className={styles.docs}
+						role="presentation"
+						onClick={() => {
+							setVerifyAccount((prev) => ({
+								...prev,
+								show               : true,
+								showAccountDetails : false,
+								accountData        : {},
+							}));
+						}}
+					>
 						<IcMDocument width={15} height={15} />
 						<span>View All</span>
 					</div>
@@ -74,7 +85,18 @@ function TradeTypeVerifyCard({ itm = {} }) {
 					<IcMTimer width={20} height={20} fill="#F37166" />
 					10:09 m left
 				</div>
-				<div className={styles.verify_button}>
+				<div
+					className={styles.verify_button}
+					role="presentation"
+					onClick={() => {
+						setVerifyAccount((prev) => ({
+							...prev,
+							show               : true,
+							showAccountDetails : true,
+							accountData        : {},
+						}));
+					}}
+				>
 					<IcMFtick className={styles.ftick_icon} />
 					Verify
 				</div>

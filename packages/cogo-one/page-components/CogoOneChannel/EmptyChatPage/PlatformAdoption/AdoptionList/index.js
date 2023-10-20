@@ -10,8 +10,9 @@ import OrganicCustomer from './OrganicCustomer';
 import ScheduleDemo from './ScheduleDemo';
 import styles from './styles.module.css';
 import TradeTypeVerifyCard from './TradeTypeVerifyCard';
+import VerifyAccount from './VerifyAccount';
 
-function AdoptionList({ mailProps = {} }) {
+function AdoptionList({ mailProps = {}, verifyAccount = {}, setVerifyAccount = () => {} }) {
 	const [scheduleDemo, setScheduleDemo] = useState({
 		isScheduleDemo : false,
 		scheduleData   : null,
@@ -24,8 +25,18 @@ function AdoptionList({ mailProps = {} }) {
 
 				return (
 					<React.Fragment key={name}>
-						{name === 'kyc_verification' ? <KycVerifyCard itm={itm} /> : null}
-						{name === 'account_allocation_req' ? <AccountAllocateCard itm={itm} /> : null}
+						{name === 'kyc_verification' ? (
+							<KycVerifyCard
+								itm={itm}
+								setVerifyAccount={setVerifyAccount}
+							/>
+						) : null}
+						{name === 'account_allocation_req' ? (
+							<AccountAllocateCard
+								itm={itm}
+								setVerifyAccount={setVerifyAccount}
+							/>
+						) : null}
 						{name === 'demo_request' ? (
 							<DemoCard
 								itm={itm}
@@ -33,11 +44,17 @@ function AdoptionList({ mailProps = {} }) {
 								setScheduleDemo={setScheduleDemo}
 							/>
 						) : null}
-						{name === 'trade_party_verification' ? <TradeTypeVerifyCard itm={itm} /> : null}
+						{name === 'trade_party_verification' ? (
+							<TradeTypeVerifyCard
+								itm={itm}
+								setVerifyAccount={setVerifyAccount}
+							/>
+						) : null}
 						{name === 'organic_customer' ? (
 							<OrganicCustomer
 								itm={itm}
 								setScheduleDemo={setScheduleDemo}
+								setVerifyAccount={setVerifyAccount}
 							/>
 						) : null}
 						{name === 'call_customer' ? <CallDetails itm={itm} /> : null}
@@ -46,6 +63,7 @@ function AdoptionList({ mailProps = {} }) {
 				);
 			})}
 			<ScheduleDemo scheduleDemo={scheduleDemo} setScheduleDemo={setScheduleDemo} />
+			<VerifyAccount setVerifyAccount={setVerifyAccount} verifyAccount={verifyAccount} />
 		</div>
 	);
 }

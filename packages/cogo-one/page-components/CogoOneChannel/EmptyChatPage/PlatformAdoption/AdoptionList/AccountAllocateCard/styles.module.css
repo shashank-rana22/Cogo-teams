@@ -114,6 +114,7 @@
 	display: flex;
 	align-items: center;
 	font-size: 12px;
+	cursor: pointer;
 
 	span {
 		text-decoration: underline;

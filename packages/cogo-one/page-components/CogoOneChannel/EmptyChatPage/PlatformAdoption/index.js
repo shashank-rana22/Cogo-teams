@@ -16,6 +16,11 @@ function PlatformAdoption({
 	const { userSharedMails = [] } = mailProps || {};
 
 	const [platformTab, setPlatformTab] = useState('chat_pending');
+	const [verifyAccount, setVerifyAccount] = useState({
+		show               : false,
+		showAccountDetails : false,
+		accountData        : {},
+	});
 
 	const { unReadChatsCount } = useGetUnreadMessagesCount({
 		firestore,
@@ -48,7 +53,7 @@ function PlatformAdoption({
 				platformTab={platformTab}
 				setPlatformTab={setPlatformTab}
 			/>
-			<AdoptionList mailProps={mailProps} />
+			<AdoptionList mailProps={mailProps} setVerifyAccount={setVerifyAccount} verifyAccount={verifyAccount} />
 			<div className={styles.pagination_info}>
 				<Pagination
 					type="number"
