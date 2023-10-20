@@ -1,9 +1,0 @@
-.pagination_container {
-	display: flex;
-	align-items: flex-end;
-	justify-content: flex-end;
-}
-
-.list_view {
-	margin-top: 20px;
-}

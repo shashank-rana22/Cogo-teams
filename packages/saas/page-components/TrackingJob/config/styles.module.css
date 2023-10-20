@@ -1,0 +1,50 @@
+.sort-icon {
+	width: 20px;
+	height: 14px;
+}
+
+.title {
+	display: flex;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 10px;
+	color: #303b67;
+}
+
+.TagsData {
+	display: flex;
+	width: fit-content;
+	padding: 0 4px;
+	margin-left: 3px;
+	color: #fff;
+	background: #7278ad;
+	border: 1px solid #7278ad;
+	border-radius: 4px;
+}
+
+.TagMap {
+	display: flex;
+	margin: 5px 0;
+	cursor: pointer;
+}
+
+.airline_data {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.shipping_line_data {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.center {
+	display: flex;
+	align-items: center;
+}
+
+.sub_functions_container {
+	display: flex;
+}

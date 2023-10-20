@@ -66,6 +66,7 @@ function Services() {
 										key={service}
 										servicesData={serviceObj[serviceCategory][service]}
 										containerDetails={container_details}
+										activeStakeholder={activeStakeholder}
 									/>
 								))}
 							</div>

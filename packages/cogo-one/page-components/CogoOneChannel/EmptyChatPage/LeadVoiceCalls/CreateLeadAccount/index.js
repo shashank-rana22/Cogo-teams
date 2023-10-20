@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import React from 'react';
 
-import CREATE_LEAD_CONTROLS from '../../../../../configurations/create-lead-user-control';
+import createLeadControls from '../../../../../configurations/create-lead-user-control';
 import useCreateOnboardLeadOrg from '../../../../../hooks/useCreateOnboardLeadOrg';
 import { getFieldController } from '../../../../../utils/getFieldController';
 
@@ -21,11 +21,16 @@ function CreateLeadAccount({
 		handleSubmit = () => {},
 		formState: { errors },
 		reset,
+		watch,
 	} = useForm({
 		defaultValues: {
 			mobile_number: { country_code: geo.country.mobile_country_code },
 		},
 	});
+
+	const formValues = watch();
+
+	const formControls = createLeadControls({ formValues });
 
 	const { loading = false, createLeadUser = () => {} } = 	useCreateOnboardLeadOrg({
 		setCreateLeadModal,
@@ -53,7 +58,7 @@ function CreateLeadAccount({
 		>
 			<Modal.Header title="Create Lead Account" />
 			<Modal.Body>
-				{CREATE_LEAD_CONTROLS.map((item) => {
+				{formControls?.map((item) => {
 					const { label = '', name = '', controlType = '' } = item;
 
 					const Element = getFieldController(controlType);

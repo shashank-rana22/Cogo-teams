@@ -91,10 +91,17 @@ function VoiceCall({ firestore = {} }) {
 	});
 
 	useEffect(() => {
-		const formattedData = formatData({ callDetails, loggedInAgentId });
+		const { feedback_form_status = '', ...rest } = callDetails || {};
+		const formattedData = formatData({ callDetails: rest, loggedInAgentId });
 
 		if (isEmpty(formattedData)) {
-			checkHangupStatus({ setCallState, openFeedbackform, timeoutId: countdownRef.current, unmountVoiceCall });
+			checkHangupStatus({
+				setCallState,
+				openFeedbackform,
+				timeoutId          : countdownRef.current,
+				unmountVoiceCall,
+				feedbackFormStatus : feedback_form_status,
+			});
 			return;
 		}
 
@@ -159,6 +166,7 @@ function VoiceCall({ firestore = {} }) {
 					callEndAt={callEndAt}
 					callRecordId={callRecordId}
 					agentType={agent_type}
+					firestore={firestore}
 				/>
 			)}
 

@@ -1,6 +1,7 @@
 import {
 	doc,
 	updateDoc,
+	deleteDoc,
 } from 'firebase/firestore';
 
 const togglePinChat = ({
@@ -19,4 +20,20 @@ const togglePinChat = ({
 		console.error(e);
 	}
 };
-export { togglePinChat };
+
+function deleteDraftDoc({
+	firestore = {},
+	roomId = '',
+	loggedInAgentId,
+	clearActiveRoom = () => {},
+}) {
+	try {
+		const roomDoc = doc(firestore, `users/${loggedInAgentId}/groups/${roomId}`);
+		deleteDoc(roomDoc);
+		clearActiveRoom();
+	} catch (e) {
+		console.error(e);
+	}
+}
+
+export { togglePinChat, deleteDraftDoc };

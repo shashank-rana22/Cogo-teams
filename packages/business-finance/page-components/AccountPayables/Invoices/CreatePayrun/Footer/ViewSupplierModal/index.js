@@ -2,7 +2,7 @@ import { Button, Input, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import List from '../../../../../commons/List/index.tsx';
+import List from '../../../../../commons/List/index';
 import SUPPLIER_CONFIG from '../../Configurations/supplierConfig.json';
 import CN_CONFIG from '../../Configurations/viewCnConfig.json';
 

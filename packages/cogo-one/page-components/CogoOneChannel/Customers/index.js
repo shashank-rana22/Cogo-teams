@@ -130,6 +130,7 @@ function Customers({
 			viewType,
 			firestore,
 			loggedInAgentId : userId,
+			setActiveTab,
 		},
 	};
 
@@ -241,6 +242,7 @@ function Customers({
 				setOpenKamContacts={setOpenKamContacts}
 				setSendBulkTemplates={setSendBulkTemplates}
 				firestore={firestore}
+				activeSelect={activeTab?.tab || ''}
 			/>
 		</div>
 	);

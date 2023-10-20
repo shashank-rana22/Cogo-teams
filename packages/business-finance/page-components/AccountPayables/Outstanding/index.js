@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import EmptyStateDocs from './commons/EmptyStateDocs/index.tsx';
+import EmptyStateDocs from './commons/EmptyStateDocs/index';
 import useGetEntityLevelOutstanding from './hooks/useGetEntityLevelOutstanding';
 import useGetOrgOutstanding from './hooks/useGetOrgOutstanding';
 import OutstandingFilter from './OutstandingFilter';
