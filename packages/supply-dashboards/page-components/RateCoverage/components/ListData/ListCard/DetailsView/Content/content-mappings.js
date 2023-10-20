@@ -75,7 +75,7 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 		{commodity_description?.length > 5
 			? (
 				<Tooltip content={commodity_description}>
-					{`${commodity_description.slice(0, 5)}...`}
+					{`${commodity_description?.slice(0, 5)}...`}
 				</Tooltip>
 			) : commodity_description}
 	</div>,

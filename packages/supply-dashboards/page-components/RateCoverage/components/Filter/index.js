@@ -6,7 +6,7 @@ import { merge, startCase } from '@cogoport/utils';
 
 import {
 	serviceOptions, taskStatusOptions,
-	commodityOptions, filterOptions, entityOptions, revertedOptions, tradeTypeOptions,
+	commodityOptions, filterOptions, entityOptions, revertedOptions, tradeTypeOptions, filterOption,
 } from '../../configurations/helpers/constants';
 
 import HeaderComponent from './header';
@@ -22,22 +22,20 @@ function Filter({
 }) {
 	const isAirService = filter?.service === 'air_freight' || filter?.service === 'air_customs';
 
-	const type = (isAirService) ? 'airport' : 'seaport';
-	const operator_type = (isAirService) ? 'airline' : 'shipping_line';
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params   : { filters: { type } },
+		params   : { filters: { type: filterOption?.[filter?.service] } },
 		includes : { default_params_required: true },
 		labelKey : 'display_name',
 	}));
 
 	const destinationLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params   : { filters: { type } },
+		params   : { filters: { type: filterOption?.[filter?.service] } },
 		includes : { default_params_required: true },
 		labelKey : 'display_name',
 	}));
 	const shippingLineOptions = useGetAsyncOptions(merge(
 		asyncFieldsOperators(),
-		{ params: { filters: { operator_type } } },
+		{ params: { filters: { operator_type: filterOption?.[filter?.service] } } },
 	));
 
 	const FCL_COMMODITY_OPTIONS = [];

@@ -40,7 +40,13 @@ function NewServiceProviderModal({
 				/>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={setServiceModal} style={{ marginRight: '10px' }} themeType="secondary">close</Button>
+				<Button
+					onClick={() => setServiceModal()}
+					style={{ marginRight: '10px' }}
+					themeType="secondary"
+				>
+					close
+				</Button>
 				<Button onClick={handleSubmit(handleSubmitData)} disabled={loading}>Add</Button>
 			</Modal.Footer>
 		</Modal>

@@ -7,7 +7,7 @@ import styles from '../styles.module.css';
 function ViewRevertedRates({ revertedRateData = {} }) {
 	const { min_price, currency, weight_slabs } = revertedRateData;
 
-	const columns = [
+	const COLUMNS = [
 		{ Header: 'Lower Limit', accessor: 'lower_limit' },
 		{ Header: 'Upper Limit', accessor: 'upper_limit' },
 		{ Header: 'Currency', accessor: 'currency' },
@@ -37,7 +37,7 @@ function ViewRevertedRates({ revertedRateData = {} }) {
 					</div>
 				)}
 
-				<Table columns={columns} data={weight_slabs} />
+				<Table columns={COLUMNS} data={weight_slabs} />
 			</div>
 		</div>
 	);

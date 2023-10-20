@@ -25,7 +25,7 @@ function ServiceDetailsContent({
 
 	const {
 		data: flashBookingRates,
-		shipmentFlashBookingRates = () => {},
+		shipmentFlashBookingRates,
 	} = useListShipmentFlashBookingRates({ source_id: data?.source_id });
 
 	const {
@@ -237,8 +237,8 @@ function ServiceDetailsContent({
 									<Button
 										size="md"
 										themeType="linkUi"
-										style={{ color: 'blue', padding: '8px' }}
-										onClick={handelNewServiceProvider}
+										style={{ color: '#5936f0', padding: '8px' }}
+										onClick={() => handelNewServiceProvider()}
 									>
 										ADD NEW
 									</Button>

@@ -67,7 +67,6 @@ function ServicesDetails({
 	};
 
 	const handelServices = () => {
-		setShowServicePopover((p) => !p);
 		if (!showServicePopover) {
 			if (source === 'rate_feedback') {
 				getFeedback();
@@ -75,6 +74,7 @@ function ServicesDetails({
 				getRequest();
 			}
 		}
+		setShowServicePopover((p) => !p);
 	};
 
 	return (
@@ -92,7 +92,7 @@ function ServicesDetails({
 						<Button
 							size="md"
 							themeType="link"
-							onClick={getFeedback}
+							onClick={() => getFeedback()}
 						>
 							View Disliked Rate
 						</Button>
@@ -170,7 +170,7 @@ function ServicesDetails({
 						<Button
 							size="md"
 							themeType="link"
-							onClick={handelSuggestedRates}
+							onClick={() => handelSuggestedRates()}
 						>
 							Suggested Service Provider
 						</Button>
@@ -192,7 +192,7 @@ function ServicesDetails({
 						<Button
 							size="md"
 							themeType="link"
-							onClick={getFeedback}
+							onClick={() => getFeedback()}
 						>
 							Attached files
 						</Button>
