@@ -10,7 +10,7 @@
 		"@cogoport/core": "workspace:*",
 		"@cogoport/globalization": "workspace:*",
 		"@cogoport/forms": "workspace:*",
-		"@cogoport/icons-react": "^1.0.101",
+		"@cogoport/icons-react": "^1.0.106",
 		"@cogoport/next": "workspace:0.1.0",
 		"@cogoport/request": "workspace:^0.1.0",
 		"@cogoport/store": "workspace:^0.1.0",

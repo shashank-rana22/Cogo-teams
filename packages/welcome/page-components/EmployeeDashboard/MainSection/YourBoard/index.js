@@ -5,7 +5,7 @@ import useGetDashboardSummary from '../../../../hooks/useGetDashboardSummary';
 import AttendanceStats from './AttendanceStats';
 import Holiday from './Holiday';
 import LeaveBalance from './LeaveBalance';
-// import NotInOffice from './NotInOffice';
+import NotInOffice from './NotInOffice';
 import OrgData from './OrgData';
 // import SalaryUpdate from './SalaryUpdate';
 import styles from './styles.module.css';
@@ -25,7 +25,7 @@ function YourBoard() {
 				At a glance view of important stuff
 			</div>
 			<TimeSummary />
-			{/* <NotInOffice /> */}
+			<NotInOffice data={data} loading={loading} />
 			<LeaveBalance />
 			<AttendanceStats self_working_stats={self_working_stats} loading={loading} />
 			<Holiday data={next_holiday_detail} loading={loading} />

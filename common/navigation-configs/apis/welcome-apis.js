@@ -74,6 +74,16 @@ const welcome = [
 		access_type  : 'private',
 		service_name : 'hrms',
 	},
+	{
+		api          : 'create_employee_reaction',
+		access_type  : 'private',
+		service_name : 'hrms',
+	},
+	{
+		api          : 'list_all_feed',
+		access_type  : 'private',
+		service_name : 'hrms',
+	},
 ];
 
 export default welcome;
