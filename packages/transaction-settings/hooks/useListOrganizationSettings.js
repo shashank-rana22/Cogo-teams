@@ -2,6 +2,8 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback, useEffect } from 'react';
 
+import toastApiError from '../utils/toastApiError';
+
 const useListOrganizationSettings = () => {
 	const [apiData, setApiData] = useState({});
 
@@ -27,7 +29,8 @@ const useListOrganizationSettings = () => {
 			setApiData(res?.data || {});
 			return res;
 		} catch (err) {
-			return err;
+			toastApiError(err);
+			return {};
 		}
 	}, [trigger]);
 
