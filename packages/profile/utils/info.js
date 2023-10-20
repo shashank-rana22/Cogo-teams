@@ -123,17 +123,3 @@ export const otherInfo = {
 		{ label: 'Medical Policy Number', value: '24646154' },
 	],
 };
-
-export const bankInfo = [
-	{ label: 'Account Holder Name', value: 'account_holder_name' },
-	{ label: 'Account Number', value: 'account_number' },
-	{ label: 'Branch Name', value: 'bank_branch_name' },
-	{ label: 'Bank Name', value: 'bank_name' },
-	{ label: 'IFSC CODE', value: 'ifsc_code' },
-];
-
-export const pfInfo = [
-	{ label: 'ESIC', value: 'esic' },
-	{ label: 'PF APPLICABLE', value: 'pf_applicable' },
-	{ label: 'PROFESSIONAL TAX', value: 'professional_tax' },
-];

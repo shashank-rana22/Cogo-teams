@@ -1310,33 +1310,6 @@ function asyncListAirCustomFeedback() {
 	};
 }
 
-function asyncListSalaryBands() {
-	return {
-		valueKey    : 'id',
-		labelKey    : 'name',
-		endpoint    : 'list_salary_bands',
-		initialCall : true,
-	};
-}
-
-function asyncListTransactionType() {
-	return {
-		valueKey    : 'name',
-		labelKey    : 'name',
-		endpoint    : 'list_transaction_type',
-		initialCall : true,
-	};
-}
-function asyncListSalaryConfigurations() {
-	return {
-		initialCall : true,
-		valueKey    : 'id',
-		labelKey    : 'description',
-		endpoint    : 'list_salary_configurations',
-
-	};
-}
-
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1445,7 +1418,4 @@ export {
 	asyncListTrailerRateFeedback,
 	asyncListHaulageRateFeedback,
 	asyncListAirCustomFeedback,
-	asyncListSalaryConfigurations,
-	asyncListSalaryBands,
-	asyncListTransactionType,
 };
