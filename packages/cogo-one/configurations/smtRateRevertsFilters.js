@@ -1,7 +1,25 @@
-import { SOURCE_OPTIONS } from '../constants/rateRevertsConstants';
+import { SOURCE_OPTIONS, ADMIN_VIEW_REQUIRED_FOR } from '../constants/rateRevertsConstants';
 import SHIPMENT_TYPE_OPTIONS from '../constants/shipmentTypes';
 
-const smtRateRevertsFilters = ({ triggeredFrom = '', setShipmentObj = () => {} }) => [
+const smtRateRevertsFilters = ({ triggeredFrom = '', viewType = '' }) => [
+	...(ADMIN_VIEW_REQUIRED_FOR.includes(viewType)
+		? [
+			{
+				label       : 'Relevant to',
+				name        : 'relevant_to',
+				controlType : 'radio',
+				options     : [
+					{
+						label : 'All',
+						value : 'all',
+					},
+					{
+						label : 'Me',
+						value : 'me',
+					},
+				],
+			}] : []
+	),
 	...(
 		triggeredFrom === 'sideBar'
 			? [
@@ -36,14 +54,10 @@ const smtRateRevertsFilters = ({ triggeredFrom = '', setShipmentObj = () => {} }
 	},
 	{
 		label       : 'SID',
-		name        : 'shipment_id',
-		controlType : 'asyncSelect',
-		asyncKey    : 'list_shipments',
+		name        : 'shipment_serial_id',
+		controlType : 'input',
 		size        : 'sm',
 		placeholder : 'Search SID',
-		initialCall : true,
-		onChange    : (_, obj) => setShipmentObj(obj),
-		isClearable : true,
 	},
 ];
 

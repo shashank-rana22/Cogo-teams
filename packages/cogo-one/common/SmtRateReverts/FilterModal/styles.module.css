@@ -10,6 +10,14 @@
 		.react-datepicker-wrapper {
 			width: 100%;
 		}
+
+		.ui_radiogroup_container {
+			padding: 0;
+		}
+
+		.ui_radio_container {
+			padding: 0 10px;
+		}
 	}
 }
 

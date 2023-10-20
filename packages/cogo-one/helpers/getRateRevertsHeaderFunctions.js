@@ -2,14 +2,14 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, isSameDay, startCase } from '@cogoport/utils';
 
-import smtRateRevertsFilter from '../configurations/smtRateRevertsFilters';
-import { SOURCE_OPTIONS, defaultRateJobFilters } from '../constants/rateRevertsConstants';
+import smtRateRevertsFilters from '../configurations/smtRateRevertsFilters';
+import { ADMIN_VIEW_REQUIRED_FOR, SOURCE_OPTIONS, defaultRateJobFilters } from '../constants/rateRevertsConstants';
 
 export function getSourceTags({
 	sources = [],
 	filterValues = {},
 	dynamicStatistics = {},
-	shipmentObj = {},
+	viewType = '',
 }) {
 	const showStats = !isEmpty(dynamicStatistics);
 
@@ -42,7 +42,7 @@ export function getSourceTags({
 			date       : startDate,
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			formatType : 'date',
-		})}-${formatDate({
+		})} to ${formatDate({
 			date       : endDate,
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			formatType : 'date',
@@ -55,10 +55,18 @@ export function getSourceTags({
 			}
 			let value = startCase(itm);
 
-			if (key === 'shipment_id') {
-				value = `SID: ${shipmentObj?.serial_id}`;
+			if (key === 'shipment_serial_id') {
+				value = `SID: ${filterValues?.shipment_serial_id}`;
 			} else if (key === 'dateRange') {
 				value = showDate;
+			}
+
+			if (key === 'relevant_to') {
+				if (ADMIN_VIEW_REQUIRED_FOR.includes(viewType)) {
+					value = `Relevant To ${startCase(itm)}`;
+				} else {
+					return acc;
+				}
 			}
 
 			return [...acc, {
@@ -76,14 +84,14 @@ export function getSourceTags({
 	return [...filterTags, ...sourceTags];
 }
 
-export const getAppliedFilters = ({ params = {}, triggeredFrom = '' }) => {
+export const getAppliedFilters = ({ params = {}, triggeredFrom = '', viewType = '' }) => {
 	let filterValues = {};
 	let defaultValues = {};
 	let isFiltersApplied = false;
 
-	const defaultParams = defaultRateJobFilters();
+	const defaultParams = defaultRateJobFilters({ viewType });
 
-	smtRateRevertsFilter({ triggeredFrom })?.forEach(
+	smtRateRevertsFilters({ triggeredFrom, viewType })?.forEach(
 		(itm) => {
 			if (itm?.name === 'dateRange') {
 				const preStart = defaultParams?.dateRange?.startDate;

@@ -24,8 +24,9 @@ export const SOURCE_OPTIONS = {
 		value : 'cancelled_shipments',
 	},
 };
+export const ADMIN_VIEW_REQUIRED_FOR = ['cogoone_admin', 'supply_admin'];
 
-export const defaultRateJobFilters = () => ({
+export const defaultRateJobFilters = ({ viewType = '' }) => ({
 	source    : [],
 	service   : 'fcl_freight',
 	dateRange : {
@@ -34,4 +35,5 @@ export const defaultRateJobFilters = () => ({
 	},
 	shipment_id : '',
 	serial_id   : '',
+	relevant_to : ADMIN_VIEW_REQUIRED_FOR.includes(viewType) ? 'all' : '',
 });

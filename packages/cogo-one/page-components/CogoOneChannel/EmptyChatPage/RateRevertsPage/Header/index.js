@@ -16,10 +16,10 @@ function Header({
 	stats = {},
 	searchQuery = '',
 	setSearchQuery = () => {},
+	viewType = '',
 }) {
 	const { query: { partner_id = '' } = {} } = useRouter();
 	const [showFilters, setShowFilters] = useState(false);
-	const [shipmentObj, setShipmentObj] = useState({});
 
 	const handleItemsChange = (val) => setParams(
 		(prev) => ({
@@ -32,7 +32,7 @@ function Header({
 		isFiltersApplied = false,
 		filterValues = {},
 		defaultValues = {},
-	} = getAppliedFilters({ params });
+	} = getAppliedFilters({ params, viewType });
 
 	const { dynamic_statistics = {} } = stats || {};
 
@@ -40,7 +40,7 @@ function Header({
 		sources           : params?.source || [],
 		filterValues,
 		dynamicStatistics : dynamic_statistics,
-		shipmentObj,
+		viewType,
 	});
 
 	const sourceOptions = useMemo(
@@ -132,7 +132,7 @@ function Header({
 								defaultValues={defaultValues}
 								setParams={setParams}
 								setShowFilters={setShowFilters}
-								setShipmentObj={setShipmentObj}
+								viewType={viewType}
 							/>
 						) : null
 					)}

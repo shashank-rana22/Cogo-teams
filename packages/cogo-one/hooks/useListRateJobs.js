@@ -2,12 +2,10 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-import { defaultRateJobFilters } from '../constants/rateRevertsConstants';
-
-const ADMIN_VIEW_REQUIRED_FOR = ['cogoone_admin', 'supply_admin'];
+import { defaultRateJobFilters, ADMIN_VIEW_REQUIRED_FOR } from '../constants/rateRevertsConstants';
 
 const getPayload = ({ params, orgId, triggeredFrom, viewType, query }) => ({
-	all_jobs_required : ADMIN_VIEW_REQUIRED_FOR.includes(viewType),
+	all_jobs_required : ADMIN_VIEW_REQUIRED_FOR.includes(viewType) ? params?.relevant_to === 'all' : false,
 	stats_required    : triggeredFrom !== 'sideBar',
 	service           : params?.service || 'fcl_freight',
 	page_limit        : 6,
@@ -16,7 +14,7 @@ const getPayload = ({ params, orgId, triggeredFrom, viewType, query }) => ({
 		source              : params?.source || undefined,
 		status              : triggeredFrom !== 'sideBar' ? 'pending' : undefined,
 		service_provider_id : (triggeredFrom === 'sideBar' && orgId) ? orgId : undefined,
-		shipment_id         : params?.shipment_id || undefined,
+		shipment_serial_id  : params?.shipment_serial_id || undefined,
 		serial_id           : query || undefined,
 		start_date          : (params?.dateRange?.startDate || new Date()).toISOString(),
 		end_date            : (params?.dateRange?.endDate || new Date()).toISOString(),
@@ -28,7 +26,7 @@ const useListRateJobs = ({
 	triggeredFrom = '',
 	viewType = '',
 } = {}) => {
-	const [params, setParams] = useState(() => defaultRateJobFilters());
+	const [params, setParams] = useState(() => defaultRateJobFilters({ viewType }));
 	const [searchQuery, setSearchQuery] = useState('');
 
 	const [{ loading, data }, trigger] = useRequest({

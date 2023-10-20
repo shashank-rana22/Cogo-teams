@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 function Header({
 	params = {},
 	setParams = () => {},
+	viewType = '',
 }) {
 	const [showFilters, setShowFilters] = useState(false);
 
@@ -17,7 +18,7 @@ function Header({
 		isFiltersApplied = false,
 		filterValues = {},
 		defaultValues = {},
-	} = getAppliedFilters({ params, triggeredFrom: 'sideBar' });
+	} = getAppliedFilters({ params, triggeredFrom: 'sideBar', viewType });
 
 	return (
 		<div className={styles.header}>
@@ -34,6 +35,7 @@ function Header({
 						setParams={setParams}
 						setShowFilters={setShowFilters}
 						triggeredFrom="sideBar"
+						viewType={viewType}
 					/>
 				) : null
 				)}

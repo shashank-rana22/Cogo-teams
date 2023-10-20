@@ -41,6 +41,7 @@ function RateRevertsPage({
 					stats={stats}
 					setSearchQuery={setSearchQuery}
 					searchQuery={searchQuery}
+					viewType={viewType}
 				/>
 
 				{loading ? (

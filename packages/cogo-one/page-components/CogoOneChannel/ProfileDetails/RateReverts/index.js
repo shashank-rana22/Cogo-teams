@@ -45,6 +45,7 @@ function RateReverts({
 			<Header
 				params={params}
 				setParams={setParams}
+				viewType={viewType}
 			/>
 
 			<div className={styles.body}>
