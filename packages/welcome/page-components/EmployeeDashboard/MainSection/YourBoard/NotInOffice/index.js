@@ -33,7 +33,7 @@ function NotInOffice({ data = {} }) {
 				{visibleAbsentees.map((item) => (
 					<div className={styles.user_detail} key={item}>
 						<div className={styles.user_avatar}>RD</div>
-						{item}
+						<span className={styles.ellipse}>{item}</span>
 					</div>
 				))}
 				<Popover placement="bottom" trigger="mouseenter" render={<AbsentList />}>
