@@ -25,6 +25,7 @@ const onlySingleLocation = [
 	'origin_fcl_cfs',
 	'destination_fcl_cfs',
 	'fcl_locals',
+	'fcl_freight_local',
 ];
 
 const SUFFIX_MAPPING = {
@@ -119,6 +120,8 @@ function PortPair({ item = {}, field = {} }) {
 	const originPortName = origin_display_name?.split(',')?.[GLOBAL_CONSTANTS.zeroth_index];
 	const destinationPortName = destination_display_name?.split(',')?.[GLOBAL_CONSTANTS.zeroth_index];
 
+	const { port = {} } = item || {};
+
 	return (
 		<div className={styles.container}>
 
@@ -127,8 +130,8 @@ function PortPair({ item = {}, field = {} }) {
 			</span>
 
 			{ isSingleLocation ? (
-				<Tooltip content={<span className={styles.tooltip_content}>{origin_display_name}</span>}>
-					<span className={styles.location_name}>{origin}</span>
+				<Tooltip content={<div className={styles.tooltip_content}>{port?.display_name}</div>}>
+					<div className={styles.location_name}>{port?.name}</div>
 				</Tooltip>
 			) : (
 				<Tooltip
@@ -154,16 +157,16 @@ function PortPair({ item = {}, field = {} }) {
 					>
 						{(origin || origin_display_name)?.length && (
 							<>
-								<span className={styles.location_name}>
+								<div className={styles.location_name}>
 									{showPortsName ? originPortName : origin || origin_display_name}
-								</span>
+								</div>
 								{' '}
 								<IcMPortArrow height={24} width={24} style={{ margin: '0px 12px' }} />
 							</>
 						)}
-						<span className={styles.location_name}>
+						<div className={styles.location_name}>
 							{showPortsName ? destinationPortName : destination || destination_display_name}
-						</span>
+						</div>
 					</div>
 				</Tooltip>
 			)}
