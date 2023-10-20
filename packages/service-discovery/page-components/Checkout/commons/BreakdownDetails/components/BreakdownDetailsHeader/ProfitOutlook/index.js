@@ -81,7 +81,6 @@ function ProfitOutlook({
 		},
 	];
 
-	console.log('profitPercent', profitPercent);
 	return (
 		<div className={styles.container}>
 			<div>Total margin for this shipment: </div>

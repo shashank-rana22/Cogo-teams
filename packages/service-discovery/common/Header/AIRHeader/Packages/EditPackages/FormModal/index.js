@@ -68,7 +68,7 @@ function FormModal({
 	}, [commodity_type, activeTab]);
 
 	return (
-		<div>
+		<>
 			<Header
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
@@ -121,7 +121,7 @@ function FormModal({
 					handleSubmit={handleSubmit}
 				/>
 			) : null}
-		</div>
+		</>
 	);
 }
 

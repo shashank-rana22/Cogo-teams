@@ -85,22 +85,22 @@ function EditPackages({
 		setValue,
 	} = useForm();
 
-	const { origin = {}, destination = {} } = getLocationInfo(data, {}, SERVICE_KEY);
-
-	const requiredParams = {
-		organization_id        : data?.importer_exporter_id,
-		organization_branch_id : data?.importer_exporter_branch_id,
-		user_id                : data?.user_id,
-		origin,
-		destination,
-	};
-
 	const handleApply = async (finalValues) => {
 		if ((Number(finalValues?.total_weight) / Number(finalValues?.total_quantity) > MAX_WEIGHT_ALLOWED
 		&& showModal !== 'proceed')) {
 			setShowModal('warning');
 			return;
 		}
+
+		const { origin = {}, destination = {} } = getLocationInfo(data, {}, SERVICE_KEY);
+
+		const requiredParams = {
+			organization_id        : data?.importer_exporter_id,
+			organization_branch_id : data?.importer_exporter_branch_id,
+			user_id                : data?.user_id,
+			origin,
+			destination,
+		};
 
 		const spot_search_id = await createSearch({
 			action : 'edit',
@@ -222,7 +222,7 @@ function EditPackages({
 					disabled={createLoading}
 					onClick={handleSubmit(handleApply)}
 				>
-					Apply Changes
+					Create Search
 				</Button>
 			</Modal.Footer>
 		</Modal>

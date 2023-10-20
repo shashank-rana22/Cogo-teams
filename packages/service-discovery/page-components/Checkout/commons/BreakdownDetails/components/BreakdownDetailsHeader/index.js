@@ -82,8 +82,6 @@ function BreakdownDetailsHeader({
 		geo.country.currency.code,
 	);
 
-	console.log('cogoAndSupplyMargin', cogoAndSupplyMargin);
-
 	const editedMargins = useMemo(
 		() => rateDetails.reduce((acc, cur) => {
 			const { id = '', line_items = [] } = cur;
