@@ -1,50 +1,54 @@
+import { Popover } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function NotInOffice() {
+function NotInOffice({ data = {} }) {
+	const { absentee_list } = data || {};
+	const MAX_VISIBLE = 5; // Maximum number of absentees to display directly
+
+	const visibleAbsentees = (absentee_list || []).slice(0, MAX_VISIBLE);
+	const remainingAbsentees = (absentee_list || []).slice(MAX_VISIBLE);
+
+	function AbsentList() {
+		return (
+			<div className={styles.absent_list}>
+				{(absentee_list || []).map((name) => (
+					<div
+						key={name}
+						className={styles.list}
+					>
+						{name}
+					</div>
+				))}
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>
-				Not in office today
-			</div>
+			<div className={styles.heading}>Not in office today</div>
 			<div className={styles.user_data}>
-				<div className={styles.user_detail}>
-					<div className={styles.user_avatar}>
-						RD
+				{visibleAbsentees.map((item) => (
+					<div className={styles.user_detail} key={item}>
+						<div className={styles.user_avatar}>RD</div>
+						{item}
 					</div>
-					Raghu
-				</div>
-				<div className={styles.user_detail}>
-					<div className={styles.user_avatar}>
-						RD
-					</div>
-					Raghu
-				</div>
-				<div className={styles.user_detail}>
-					<div className={styles.user_avatar}>
-						RD
-					</div>
-					Raghu
-				</div>
-				<div className={styles.user_detail}>
-					<div className={styles.user_avatar}>
-						RD
-					</div>
-					Raghu
-				</div>
-				<div className={styles.user_detail}>
-					<div className={styles.user_avatar}>
-						RD
-					</div>
-					Raghu
-				</div>
-				<div className={styles.more}>
-					+8
-				</div>
+				))}
+				<Popover placement="bottom" trigger="mouseenter" render={<AbsentList />}>
+					{!isEmpty(remainingAbsentees) && (
+						<div className={styles.more}>
+							<span>+</span>
+							<span>{(remainingAbsentees)?.length}</span>
+						</div>
+					)}
+				</Popover>
 			</div>
 			<div className={styles.absent_deps}>
-				2 employees from Product Department are not present today
+				{absentee_list?.length}
+				{' '}
+				employees from Product Department are not present today
 			</div>
 		</div>
 	);

@@ -1,7 +1,10 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { cl, Tooltip } from '@cogoport/components';
-import { IcMProvision, IcMOverflowDot, IcMLike, IcMLiveChat } from '@cogoport/icons-react';
+import {
+	IcMProvision, IcMOverflowDot, IcCLike, IcMLiveChat, IcCHeart,
+	IcCLaugh, IcCClap,
+} from '@cogoport/icons-react';
 // import Lottie from 'lottie-react';
 import React, { useState } from 'react';
 
@@ -57,8 +60,57 @@ const comments = [
 	},
 ];
 
+const icons = [
+	{
+		icon   : IcCLike,
+		width  : 25,
+		height : 25,
+		fill   : '#318CE7',
+	},
+	{
+		icon   : IcCHeart,
+		width  : 25,
+		height : 25,
+	},
+	{
+		icon   : IcCLaugh,
+		width  : 30,
+		height : 30,
+	},
+	{
+		icon   : IcCClap,
+		width  : 30,
+		height : 30,
+	},
+];
+
+function PopoverContent({ handleIconSelect = () => {} }) {
+	return (
+		<div className={styles.popover_content}>
+			{(icons || []).map((option, index) => {
+				const Icon = option.icon;
+
+				return (
+					<div
+						key={index}
+						className={styles.popover_item}
+						onClick={() => { console.log('hi'); handleIconSelect(Icon); }}
+					>
+						<Icon width={option.width} height={option.height} fill={option.fill} />
+					</div>
+				);
+			})}
+		</div>
+	);
+}
+
 function PostContainer() {
 	const [openComments, setOpenComments] = useState(false);
+	const [selectedIcon, setSelectedIcon] = useState(IcCLike);
+
+	const handleIconSelect = (newIcon) => {
+		setSelectedIcon(newIcon);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -92,7 +144,7 @@ function PostContainer() {
 					</div>
 				</div>
 				<div className={styles.main_post_text}>
-					Appreciating efforts of @raghuvamsi for his amazing work on the HRMS flatform
+					Appreciating efforts of @Hritik for his amazing work on the HRMS platform
 				</div>
 			</div>
 			{/* <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -115,31 +167,16 @@ function PostContainer() {
 				))}
 			</div> */}
 			<div className={styles.footer}>
-				<div className={styles.comments_data}>
-					<div className={styles.user_comments}>
-						{comments.map((val) => (
-							<div className={styles.comments_circle} key={val.name}>
-								{val.name}
-							</div>
-						))}
-					</div>
-					23 Comments
-				</div>
-
-				{/* <Lottie
-					animationData={animationData}
-					loop
-					autoplay
-				/> */}
-
 				<div className={styles.like_and_comment}>
 					<div className={styles.like_circle}>
 						<Tooltip
-							content="hello"
+							content={<PopoverContent handleIconSelect={handleIconSelect} />}
 							interactive
+							caret={false}
 							placement="top"
+
 						>
-							<IcMLike style={{ cursor: 'pointer' }} />
+							{selectedIcon}
 						</Tooltip>
 					</div>
 					<div className={styles.comment_input} onClick={() => setOpenComments(!openComments)}>
@@ -150,6 +187,40 @@ function PostContainer() {
 						</div>
 					</div>
 				</div>
+
+				<div className={styles.likes_n_comment}>
+					<div className={styles.comments_data}>
+						<div className={styles.user_comments}>
+							{icons.map((option, index) => {
+								const Icon = option.icon;
+								return (
+									<div className={styles.comments_circle} key={index}>
+										<Icon width={25} height={25} />
+									</div>
+								);
+							})}
+						</div>
+						23 Likes
+					</div>
+
+					<div className={styles.comments_data} style={{ marginLeft: '8px' }}>
+						<div className={styles.user_comments}>
+							{comments.map((val) => (
+								<div className={styles.comments_circle} key={val.name}>
+									{val.name}
+								</div>
+							))}
+						</div>
+						23 Comments
+					</div>
+				</div>
+
+				{/* <Lottie
+					animationData={animationData}
+					loop
+					autoplay
+				/> */}
+
 			</div>
 			{ openComments && <CommentBox /> }
 		</div>
