@@ -93,7 +93,8 @@ function ExchangeRate({ conversions = {}, rate = {}, detail = {}, getCheckout = 
 					options  : {
 						style                 : 'currency',
 						currencyDisplay       : 'code',
-						minimumFractionDigits : 4,
+						minimumFractionDigits : 0,
+						maximumFractionDigits : 4,
 					},
 				})}
 			</div>
