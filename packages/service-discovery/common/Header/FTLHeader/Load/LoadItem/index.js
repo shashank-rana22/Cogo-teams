@@ -24,7 +24,6 @@ function LoadItem({
 		<div className={styles.container} style={{ margin }}>
 			<div className={styles.load_item}>
 				{(toShowTruckDetails) ? (
-
 					<Tooltip
 						placement="bottom"
 						content={(
