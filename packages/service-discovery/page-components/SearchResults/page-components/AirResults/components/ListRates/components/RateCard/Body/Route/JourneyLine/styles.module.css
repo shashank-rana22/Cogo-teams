@@ -1,5 +1,4 @@
 .container {
-	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -40,16 +39,6 @@
 	border-radius: 50%;
 }
 
-.tags_container {
-	position: absolute;
-	right: 50%;
-	bottom: -4px;
-	left: 50%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
 .tag {
 	display: flex;
 	align-items: center;
@@ -57,13 +46,10 @@
 	justify-content: center;
 	width: max-content;
 	padding: 3px 6px;
+	margin-bottom: 2px;
 	font-size: 10px;
 	color: #333;
 	text-align: center;
 	background: rgb(247 250 239);
 	border-radius: 4px;
-
-	&.transit_time {
-		margin-bottom: 4px;
-	}
 }
