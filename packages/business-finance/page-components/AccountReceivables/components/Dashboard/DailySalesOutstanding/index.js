@@ -108,7 +108,7 @@ function DailySalesOutstanding({
 							<Toggle
 								name="quarter_toggle"
 								size="md"
-								value={params.quarterView}
+								onLabel=""
 								onChange={(e) => onChangeParams((pv) => ({
 									...pv,
 									quarterView: e?.target?.checked ? 'quarterView' : 'normalView',
@@ -123,7 +123,7 @@ function DailySalesOutstanding({
 							<Toggle
 								name="graph_toggle"
 								size="md"
-								value={params.graphView}
+								onLabel=""
 								onChange={(e) => onChangeParams((pv) => ({
 									...pv,
 									graphView: e?.target?.checked ? 'graphView' : pv.quarterView,
