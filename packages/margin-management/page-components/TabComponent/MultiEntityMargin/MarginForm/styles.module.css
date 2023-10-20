@@ -1,0 +1,89 @@
+/* stylelint-disable indentation */
+.HeaderLeft {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 8px 0 24px 8px;
+}
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+}
+
+.Container .form-item-label {
+    margin: 8px 0;
+    font-size: 12px;
+    color: #393f70;
+}
+
+.Container .core-ui-select__control {
+    height: 32px;
+}
+
+.Container .core-ui-select__indicators {
+    height: 32px;
+}
+
+.Container .core-ui-input-root {
+    height: 32px;
+    min-height: unset !important;
+}
+
+.Container .core-ui-input-root.disabled {
+    cursor: not-allowed;
+    background: #f9f9f9;
+}
+
+.BtnWrap .core-ui-button-root {
+    width: 100px;
+}
+
+.Container .form-fieldArray-button-container .core-ui-button-root {
+    height: 32px;
+    color: #393f70;
+}
+
+.Container .form-field-array-add-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: #393f70;
+}
+
+.EntityNames {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.EntityName {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 32px;
+    padding: 2px 6px;
+    font-weight: 400;
+    background-color: #f1efff;
+    border-radius: 4px;
+}
+
+.BtnWrap {
+    /* position: absolute;
+    right: 24px;
+    bottom: 24px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: #fff;
+}
+
+.SelectContainer .core-ui-select__control {
+    min-width: 200px;
+    margin-left: 12px;
+}

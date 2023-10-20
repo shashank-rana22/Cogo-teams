@@ -1,5 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import Child from './Child';
 import styles from './styles.module.css';
@@ -7,18 +9,32 @@ import styles from './styles.module.css';
 function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {}, ...rest }) {
 	const { controls = [], name, buttonText = '', showAddIcon = true } = ctrl || {};
 
-	const { showElements = {} } = rest || {};
+	const { showElements = {}, watch = () => { }, setValue = () => { }, validateInputs = () => { } } = rest || {};
 
 	const { fields, append, remove } = useFieldArray({ control, name });
 
 	const CHILD_EMPTY_VALUES = {};
 	controls.forEach((controlItem) => {
-		CHILD_EMPTY_VALUES[controlItem.name] = controlItem.value || '';
+		if (controlItem.name === 'lower_limit') {
+			CHILD_EMPTY_VALUES[controlItem.name] = '0';
+		} else {
+			CHILD_EMPTY_VALUES[controlItem.name] = controlItem.value || '';
+		}
 	});
 
-	const handleAppendChild = () => {
+	if (isEmpty(fields)) {
 		append(CHILD_EMPTY_VALUES);
+	}
+
+	const handleAppendChild = () => {
+		if (validateInputs({ currSlab: formValues?.[name] })) {
+			append(CHILD_EMPTY_VALUES);
+		}
 	};
+
+	useEffect(() => {
+		setValue(`${name}.0.lower_limit`, '0');
+	}, [name, setValue]);
 
 	return (
 		<div className={styles.field_array}>
@@ -34,6 +50,8 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, f
 					name={name}
 					formValues={formValues}
 					showElements={showElements[index]}
+					watch={watch}
+					setValue={setValue}
 				/>
 			))}
 

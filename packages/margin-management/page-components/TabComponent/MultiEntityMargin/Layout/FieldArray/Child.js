@@ -1,6 +1,7 @@
 import { ButtonIcon } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import FormElement from '../FormElement';
 import getCustomOptions from '../getCustomOptions';
@@ -19,14 +20,39 @@ function Child({
 	index = 0,
 	name = '',
 	field = {},
-	noDeleteButtonTill = 0,
-	showDeleteButton = true,
+	// noDeleteButtonTill = 0,
+	// showDeleteButton = true,
 	error = {},
 	remove = () => {},
 	formValues = {},
 	showElements = {},
+	watch = () => { },
+	setValue = () => {},
 }) {
+	const disableUpperLimit = watch(`${name}`)?.length;
+
 	const total_fields = getTotalFields({ controls });
+
+	const prevSlabUpperLimit = watch(`${name}.${index - 1}.upper_limit`);
+
+	const limit_currency = watch(`${name}.0.limit_currency`);
+
+	useEffect(() => {
+		if (index === 0) {
+			setValue(`${name}.${index}.lower_limit`, 0);
+		} else if (index > 0) {
+			setValue(
+				`${name}.${index}.lower_limit`,
+				Number(prevSlabUpperLimit) + 1,
+			);
+		}
+		if (index > 0) {
+			setValue(
+				`${name}.${index}.limit_currency`,
+				limit_currency,
+			);
+		}
+	}, [index, name, prevSlabUpperLimit, setValue, limit_currency]);
 
 	return (
 		<div key={field.id} className={styles.child}>
@@ -37,7 +63,7 @@ function Child({
 			<div className={styles.row_flex}>
 				{Object.keys(total_fields).map((rowFields) => (
 					<div className={styles.row} key={rowFields}>
-						{total_fields[rowFields].map((controlItem) => {
+						{controls.map((controlItem) => {
 							const { span, name:ctrlItemName } = controlItem || {};
 
 							const flex = getWidthPercent(span || TOTAL_SPAN);
@@ -60,19 +86,42 @@ function Child({
 								return null;
 							}
 
+							let newControlItem = { ...controlItem };
+
+							if (controlItem.name === 'lower_limit') {
+								newControlItem = {
+									...newControlItem,
+									disabled: true,
+								};
+							}
+
+							if (controlItem.name === 'upper_limit' && index !== disableUpperLimit - 1) {
+								newControlItem = {
+									...newControlItem,
+									disabled: true,
+								};
+							}
+
+							if (controlItem.name === 'limit_currency' && index !== 0) {
+								newControlItem = {
+									...newControlItem,
+									disabled: true,
+								};
+							}
+
 							return (
 								<div className={styles.element} style={{ width: `${flex}%` }} key={ctrlItemName}>
 									<h4 className={styles.label}>
-										{controlItem?.label}
+										{newControlItem?.label}
 									</h4>
 
 									<FormElement
-										{...controlItem}
+										{...newControlItem}
 										key={element_name}
 										name={element_name}
 										control={control}
-										type={controlItem.type}
-										{...controlItem?.options_key ? { options } : {}}
+										type={newControlItem.type}
+										{...newControlItem?.options_key ? { options } : {}}
 
 									/>
 
@@ -89,7 +138,7 @@ function Child({
 					</div>
 				))}
 
-				{showDeleteButton && index >= noDeleteButtonTill ? (
+				{index === (watch(`${name}`) || []).length - 1 && (watch(`${name}`) || []).length > 1 ? (
 					<div className={styles.delete_icon}>
 						<ButtonIcon icon={<IcMDelete />} onClick={() => remove(index, NO_OF_ELEMENTS_TO_BE_REMOVED)} />
 					</div>

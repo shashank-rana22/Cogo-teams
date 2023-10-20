@@ -28,10 +28,34 @@ function MarginManagement() {
 			<div className={styles.flex}>
 				<div className={styles.heading}>Margin Management</div>
 				<ScopeSelect size="md" />
-
 			</div>
+			<div className={styles.search}>
+				<div className={styles.flex}>
+					<Search
+						activeTab={activeTab}
+						className={styles.search_button}
+						setFilterParams={setFilterParams}
+						filterParams={filterParams}
+					/>
+					<Link href="/margins/create" className={styles.button}>
+						<Button themeType="primary">CREATE NEW MARGIN</Button>
+					</Link>
+				</div>
+
+				{activeTab !== 'multi_entity_margin' ? (
+					<div className={styles.button}>
+						<MarginValues
+							data={marginBreakupData}
+							setMarginBreakupData={setMarginBreakupData}
+							activeTab={activeTab}
+							refetch={refetch}
+						/>
+					</div>
+				) : null}
+			</div>
+
 			<div className={styles.flex}>
-				<div className={styles.tab}>
+				<div style={{ width: activeTab === 'multi_entity_margin' ? '100vw' : '75vw' }}>
 					<TabComponent
 						setMarginBreakupData={setMarginBreakupData}
 						data={data}
@@ -43,29 +67,7 @@ function MarginManagement() {
 						setActiveService={setActiveService}
 					/>
 				</div>
-				<div className={styles.search}>
-					<div className={styles.flex}>
-						<Search
-							activeTab={activeTab}
-							className={styles.search_button}
-							setFilterParams={setFilterParams}
-							filterParams={filterParams}
-						/>
-						<Link href="/margins/create" className={styles.button}>
-							<Button themeType="primary">CREATE NEW MARGIN</Button>
-						</Link>
-					</div>
-					<div className={styles.button}>
-						<MarginValues
-							data={marginBreakupData}
-							setMarginBreakupData={setMarginBreakupData}
-							activeTab={activeTab}
-							refetch={refetch}
-						/>
-					</div>
-				</div>
 			</div>
-
 		</div>
 	);
 }

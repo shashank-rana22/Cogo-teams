@@ -1,0 +1,49 @@
+/* stylelint-disable indentation */
+.segmented-control__contents-container {
+    width: fit-content;
+}
+
+.Column {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    margin: 1px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    border-radius: 6px;
+}
+
+.Column .core-ui-input-root {
+    background-color: none;
+    border-width: 0;
+}
+
+.Column .input_controller {
+    background: none;
+}
+
+.Name {
+    font-size: 12px;
+}
+
+.Square {
+    margin: 24px 0;
+}
+
+.BtnWrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-around;
+    cursor: pointer;
+}
+
+.TableHeader {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 24px;
+}

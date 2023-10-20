@@ -8,14 +8,17 @@ import conditions from '../../utils/condition-constants';
 
 import CardComponent from './CardComponent';
 import Details from './Details';
+import MultiEntityMargin from './MultiEntityMargin';
 
 function TabComponent({
 	filterParams = {},
 	setFilterParams = () => { }, data = {}, setMarginBreakupData = () => { }, activeTab = '',
 	setActivetab = () => { },
-	activeService = '', setActiveService = () => { },
+	activeService = '',
+	setActiveService = () => { },
 }) {
 	const { isConditionMatches } = useGetPermission();
+
 	const checkConditions = useCallback(() => ({
 		demand: isConditionMatches(
 			[
@@ -29,11 +32,13 @@ function TabComponent({
 			[...conditions.SEE_ALL_MARGINS, ...conditions.SEE_SUPPLY_MARGIN],
 			'or',
 		),
-		cogoport         : isConditionMatches(conditions.SEE_ALL_MARGINS, 'or'),
-		approval_pending : isConditionMatches(conditions.SEE_PENDING_APPROVAL, 'or'),
-
+		cogoport            : isConditionMatches(conditions.SEE_ALL_MARGINS, 'or'),
+		approval_pending    : isConditionMatches(conditions.SEE_PENDING_APPROVAL, 'or'),
+		multi_entity_margin : true,
 	}), [isConditionMatches]);
+
 	const condition = useMemo(() => checkConditions(), [checkConditions]);
+
 	const setActive = (val) => {
 		setActivetab(val);
 		setMarginBreakupData({});
@@ -41,6 +46,7 @@ function TabComponent({
 			setFilterParams({ ...filterParams, status: val, margin_type: 'demand' });
 		} else setFilterParams({ ...filterParams, margin_type: val, status: 'active' });
 	};
+
 	return (
 		<div>
 			<Tabs activeTab={activeTab} onChange={setActive} themeType="primary">
@@ -123,6 +129,12 @@ function TabComponent({
 								))}
 							</div>
 						)}
+					</TabPanel>
+				) : null}
+
+				{condition.multi_entity_margin ? (
+					<TabPanel name="multi_entity_margin" title="MultiEntity Margin">
+						<MultiEntityMargin />
 					</TabPanel>
 				) : null}
 			</Tabs>
