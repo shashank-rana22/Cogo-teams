@@ -152,7 +152,7 @@ function ListCard({
 								<div>
 									<Pill size="md" color="orange">
 										{(filter?.service === 'air_freight' || filter?.service === 'air_customs')
-											? 'Air Line :' : 'Shipping Line :'}
+											? 'Air Line :' : ' Preferred Shipping Line :'}
 										{' '}
 										{data?.shipping_line?.short_name}
 									</Pill>

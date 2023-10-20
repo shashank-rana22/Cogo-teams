@@ -198,15 +198,16 @@ export const packagingTypeOptions = [
 export const rateTypeOptions = [
 	{
 		label : 'Market place',
-		value : 'market_pace',
+		value : 'market_place',
+
 	},
 	{
-		label : 'Promotional Rate',
-		value : 'promotional_rate',
+		label : 'Promotional',
+		value : 'promotional',
 	},
 	{
-		label : 'Consollidation Rate',
-		value : 'consollidation_rate',
+		label : 'Spot booking',
+		value : 'spot_booking',
 	},
 ];
 export const flighOperationTypeOptions = [
