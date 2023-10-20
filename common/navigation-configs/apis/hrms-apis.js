@@ -829,6 +829,11 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 		{
+			api          : 'update_employee_directory',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
 			api          : 'get_salary_structure',
 			access_type  : 'private',
 			service_name : 'hrms',

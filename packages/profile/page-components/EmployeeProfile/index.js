@@ -3,25 +3,30 @@ import {
 	IcMArrowBack,
 	IcMArrowDown,
 	IcMArrowRight,
+	IcMImage,
 } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import React from 'react';
+import React, { useState } from 'react';
 
 import EmptyState from '../../common/EmptyState';
 import useGetEmployeeDetails from '../../hooks/useGetEmployeeData';
 import { getEmployeeData } from '../../utils/constants';
 import TabsPanel from '../TabsPanel';
 
+import EditProfile from './EditProfile';
 import styles from './styles.module.css';
 
 function EmployeeProfile() {
 	const router = useRouter();
+
 	const employee_id = router.query?.employee_id;
 
 	const { profile: { user } } = useSelector((state) => ({
 		profile: state?.profile,
 	}));
+
+	const [openEditProfile, setOpenEditProfile] = useState(false);
 
 	const user_id = employee_id || user.id;
 
@@ -53,7 +58,20 @@ function EmployeeProfile() {
 			{(data || loading) ? (
 				<div className={styles.profile_container}>
 					<div className={styles.profile_flex}>
-						<div className={styles.left_image} />
+						<div className={styles.left_image}>
+							<img
+								className={styles.profile_img}
+								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Face.svg"
+								alt="profile"
+							/>
+							<div
+								className={styles.profile_img_icon}
+								onClick={() => setOpenEditProfile(true)}
+								aria-hidden
+							>
+								<IcMImage fill="#FFFFFF" width={50} height={50} />
+							</div>
+						</div>
 						<div className={styles.cover}>
 							<div className={styles.flex}>
 								<div className={styles.left_text}>
@@ -143,6 +161,12 @@ function EmployeeProfile() {
 							</div>
 						</div>
 					</div>
+					{ openEditProfile && (
+						<EditProfile
+							show={openEditProfile}
+							onHide={() => setOpenEditProfile(false)}
+						/>
+					) }
 					<TabsPanel data={data} loading={loading} />
 				</div>
 			) : (<EmptyState height={250} width={450} />)}

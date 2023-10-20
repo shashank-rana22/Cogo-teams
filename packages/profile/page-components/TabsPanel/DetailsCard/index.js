@@ -26,6 +26,7 @@ function DetailsCard({ heading = '', details = [], isGrid = true, data = {}, loa
 		if (employee_education_details) {
 			employee_education_details.forEach((detail) => {
 				getMapping[detail.education_level] = detail;
+				console.log(detail.education_level, 'edu');
 			});
 		}
 

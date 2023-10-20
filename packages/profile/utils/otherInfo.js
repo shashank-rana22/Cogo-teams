@@ -26,17 +26,17 @@ export const otherStatuoryInfo = [
 	{ label: 'Tax Regime', value: 'Old Regime' },
 ];
 
+export const otherSalaryInfo = [
+	{ label: 'Monthly Gross', key: 'details', value: 'monthly_gross' },
+	{ label: 'Monthly CTC', key: 'details', value: 'monthly_ctc' },
+	{ label: 'Annual CTC', value: 'annual_ctc' },
+	{ label: 'Tax Regime', value: 'tax_regime' },
+];
+
 export const otherDocumentsInfo = [
 	{ label: 'Joining Date', key: 'processed', value: 'date_of_joining' },
 	{ label: 'Age in Organsization', key: 'processed', value: 'age_in_organization' },
 	{ label: 'Reports To', key: 'details', value: 'reporting_manager_name' },
 	{ label: 'HRBP', key: 'details', value: 'hrbp_name' },
 	{ label: 'Employee Code', key: 'details', value: 'employee_code' },
-];
-
-export const otherSalaryInfo = [
-	{ label: 'Monthly Gross', key: 'details', value: 'monthly_gross' },
-	{ label: 'Monthly CTC', key: 'details', value: 'monthly_ctc' },
-	{ label: 'Annual CTC', value: 'annual_ctc' },
-	{ label: 'Tax Regime', value: 'tax_regime' },
 ];

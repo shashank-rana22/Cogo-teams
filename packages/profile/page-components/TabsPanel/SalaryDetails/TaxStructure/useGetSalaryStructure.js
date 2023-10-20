@@ -26,8 +26,10 @@ const useGetSalaryStructure = (employee_id) => {
 	);
 
 	useEffect(() => {
-		getStructure();
-	}, [getStructure]);
+		if (employee_id) {
+			getStructure();
+		}
+	}, [employee_id, getStructure]);
 
 	return { loading, data, getStructure };
 };

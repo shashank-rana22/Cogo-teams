@@ -145,7 +145,7 @@ function SalaryDetails() {
 			</div>
 			{
 				loading ? null
-					: 				<RightGlancePayment otherInfo={otherInfo} data={data} />
+					: 	<RightGlancePayment otherInfo={otherInfo} data={data} />
 			}
 
 		</div>

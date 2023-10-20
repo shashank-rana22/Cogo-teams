@@ -3,7 +3,7 @@ import EducationDetails from './EducationDetails';
 import EmploymentDetails from './EmploymentDetails/index';
 import OtherDetails from './OtherDetails';
 import PersonalDetails from './PersonalDetails/index';
-import SalaryDetails from './SalaryDetails/index';
+import SalaryDetails from './SalaryDetails';
 
 const useGetTabsMapping = (data = {}, loading = false) => (
 	[
