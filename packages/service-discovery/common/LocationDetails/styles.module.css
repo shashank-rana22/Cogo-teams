@@ -35,6 +35,10 @@
 	color: #000;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	@media (max-width: 1080px) {
+		max-width: 90px;
+	}
 }
 
 .tooltip {
