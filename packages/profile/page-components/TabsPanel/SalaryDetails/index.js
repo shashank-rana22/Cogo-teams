@@ -79,7 +79,7 @@ function SalaryDetails() {
 								</div>
 
 								<div className={styles.info_container}>
-									<div className={styles.heading}>
+									<div className={styles.heading_one}>
 										<div className={styles.head_text}>Payment Information</div>
 										<Button size="md" themeType="secondary" onClick={() => handleOpenModal(bankInfo, data?.employee_bank_details)}>
 											{' '}
@@ -105,7 +105,7 @@ function SalaryDetails() {
 								</div>
 
 								<div className={styles.info_container}>
-									<div className={styles.heading}>
+									<div className={styles.heading_one}>
 										<div className={styles.head_text}>PF, Professional Tax & ESIC</div>
 										<Button size="md" themeType="secondary" onClick={() => handleOpenModal(pfInfo, data?.employee_salary_details?.statutory_details)}>
 											{' '}
