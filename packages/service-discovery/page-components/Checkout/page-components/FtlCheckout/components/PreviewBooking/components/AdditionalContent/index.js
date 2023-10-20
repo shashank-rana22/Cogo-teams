@@ -1,3 +1,4 @@
+import { useRouter } from '@cogoport/next';
 import { useContext, useState, useEffect } from 'react';
 
 import AdditionalConditions from '../../../../../../commons/AdditionalConditions';
@@ -12,6 +13,8 @@ function AdditionalContent({
 	agreeTandC = false,
 	setAgreeTandC = () => {},
 }) {
+	const { push } = useRouter();
+
 	const {
 		rate = {},
 		detail = {},
@@ -37,6 +40,10 @@ function AdditionalContent({
 			},
 			scrollToTop: true,
 		});
+	};
+
+	const onClickSaveForLater = () => {
+		push(`/service-discovery?activeTab=saved_for_later&service_type=${primary_service}`);
 	};
 
 	useEffect(() => {
@@ -91,6 +98,7 @@ function AdditionalContent({
 				agreeTandC={agreeTandC}
 				noRatesPresent={noRatesPresent}
 				onClickNextButton={onClickNextButton}
+				onClickSaveForLater={onClickSaveForLater}
 			/>
 		</div>
 	);
