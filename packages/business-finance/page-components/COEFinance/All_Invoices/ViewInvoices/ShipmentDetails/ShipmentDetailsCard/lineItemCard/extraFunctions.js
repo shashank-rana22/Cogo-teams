@@ -28,7 +28,7 @@ const extraFunctions = ({ chargesTable = [] }) => ({
 		return <div>{taxAmount}</div>;
 	},
 	renderTotalCost: (row) => {
-		const { total = 0, exchangeRate = 0 } = row || {};
+		const { total = 0, exchangeRate = 1 } = row || {};
 		const totalAmount = (total * exchangeRate);
 		return <div>{totalAmount}</div>;
 	},
