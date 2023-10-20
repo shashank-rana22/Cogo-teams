@@ -12,11 +12,16 @@ function StatItem({
 	isActive = false,
 	onClick = () => {},
 	showCount = true,
+	disabled = false,
 }) {
 	const newClass = `${styles[className] || ''} ${isActive ? styles.active : ''}`;
 
 	return (
-		<div className={cl`${newClass} ${styles.container}`} onClick={onClick} role="presentation">
+		<div
+			className={cl`${newClass} ${styles.container} ${disabled && styles.disabled}`}
+			onClick={onClick}
+			role="presentation"
+		>
 			{isActive ? <IcMTick fontSize={20} /> : null}
 
 			<div className={cl`${newClass} ${styles.text}`}>

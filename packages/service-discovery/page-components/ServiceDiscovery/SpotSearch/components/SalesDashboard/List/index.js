@@ -45,6 +45,7 @@ function List({
 						setBucketParams={setBucketParams}
 						activeStat={activeStat}
 						restFilters={restFilters}
+						loading={listLoading}
 					/>
 
 					<Header

@@ -12,6 +12,7 @@ function Statistics({
 	setBucketParams = () => {},
 	activeStat = {},
 	restFilters = {},
+	loading = false,
 }) {
 	return (
 		<div className={styles.container}>
@@ -29,7 +30,11 @@ function Statistics({
 								: keyValue - (statsData?.not_sent || ZERO_VALUE)
 						}
 						isActive={activeStat?.key === stat?.key}
+						disabled={loading}
 						onClick={() => {
+							if (loading) {
+								return;
+							}
 							setFilters({
 								...(restFilters || {}),
 								activeStat : stat,
