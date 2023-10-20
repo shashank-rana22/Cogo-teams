@@ -12,7 +12,7 @@ jobs:
   start-runner:
     name: Start self-hosted EC2 runner
 
-    runs-on: ubuntu-latest
+    runs-on: cogo-action-runner
 
     environment: production
 
@@ -73,7 +73,7 @@ jobs:
       - lint # required to wait when the main job is done
       - build # required to wait when the main job is done
 
-    runs-on: ubuntu-latest
+    runs-on: cogo-action-runner
 
     if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
 
