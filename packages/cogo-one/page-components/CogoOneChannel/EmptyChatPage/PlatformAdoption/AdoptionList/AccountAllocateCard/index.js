@@ -5,11 +5,19 @@ import {
 	IcAJobCard,
 	IcMOverflowDot, IcMInfo, IcMDocument,
 } from '@cogoport/icons-react';
+import { useState } from 'react';
 
+import RejectVerification from './RejectAccountModal';
 import styles from './styles.module.css';
 
 function AccountAllocateCard({ itm = {} }) {
 	const { label, subLabel, currentAgent, requestedBy } = itm || {};
+
+	const [showReject, setShowReject] = useState(false);
+	const [reason, setReason] = useState({
+		type        : '',
+		otherReason : '',
+	});
 
 	return (
 		<div className={styles.card}>
@@ -75,9 +83,15 @@ function AccountAllocateCard({ itm = {} }) {
 			</div>
 			<div className={styles.line_break} />
 			<div className={styles.footer_info}>
-				<div className={styles.reject}>Reject</div>
+				<div role="presentation" className={styles.reject} onClick={() => setShowReject(true)}>Reject</div>
 				<div className={styles.allocate}>Allocate</div>
 			</div>
+			<RejectVerification
+				showReject={showReject}
+				setShowReject={setShowReject}
+				reason={reason}
+				setReason={setReason}
+			/>
 		</div>
 	);
 }

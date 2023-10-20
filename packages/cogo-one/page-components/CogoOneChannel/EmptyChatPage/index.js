@@ -29,6 +29,9 @@ function EmptyChatPage({
 	viewType = '',
 	setActiveTab = () => {},
 	mailProps = {},
+	isBotSession = false,
+	firestore = {},
+	userId = '',
 }) {
 	const displayMessage = MESSAGE_MAPPING[activeTab?.tab] || activeTab?.tab;
 
@@ -57,7 +60,16 @@ function EmptyChatPage({
 	}
 
 	if (showPlatformAdoption) {
-		return <PlatformAdoption mailProps={mailProps} />;
+		return (
+			<PlatformAdoption
+				mailProps={mailProps}
+				isBotSession={isBotSession}
+				firestore={firestore}
+				viewType={viewType}
+				userId={userId}
+				setActiveTab={setActiveTab}
+			/>
+		);
 	}
 
 	return (

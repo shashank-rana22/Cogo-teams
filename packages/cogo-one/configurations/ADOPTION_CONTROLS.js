@@ -39,6 +39,21 @@ const ADOPTION_CONTROLS = [
 		hasDocument      : true,
 		accountAllocate  : true,
 	},
+	{
+		label              : 'Akash Singh',
+		name               : 'organic_customer',
+		subLabel           : 'Reliance PVT LTD',
+		accountType        : 'Enterprise',
+		intro_call         : true,
+		demo_call          : true,
+		location           : 'Mumbai',
+		language_preferred : ['English', 'Hindi', 'Marathi'],
+	},
+	{
+		label    : 'Missed Call',
+		name     : 'call_customer',
+		subLabel : 'Himanshu Agarwal',
+	},
 ];
 
 export default ADOPTION_CONTROLS;

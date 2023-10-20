@@ -1,0 +1,31 @@
+.verification {
+	:global {
+		.ui_radiogroup_container {
+			display: flex;
+			flex-direction: column;
+			padding: 0;
+		}
+
+		.ui_radio_container {
+			padding: 6px 0 0;
+		}
+	}
+}
+
+.cancel_button {
+	margin-right: 8px;
+}
+
+.title {
+	margin-bottom: 16px;
+}
+
+.other_reason {
+	margin-top: 16px;
+}
+
+.label {
+	font-size: 13px;
+	font-weight: 600;
+	color: #4f4f4f;
+}

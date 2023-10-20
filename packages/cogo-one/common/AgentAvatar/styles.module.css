@@ -1,0 +1,16 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	background: #f68b21;
+	border-radius: 50px;
+}
+
+.name_container {
+	font-size: 12px;
+	font-weight: 600;
+	color: #fff;
+	text-transform: uppercase;
+}

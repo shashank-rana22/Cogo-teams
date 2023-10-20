@@ -3,19 +3,12 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcAWatchDemo, IcMInfo, IcMOverflowDot, IcMPlatformDemo, IcMCalendar, IcMClock } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
 
-import ScheduleDemo from './ScheduleDemo';
 import styles from './styles.module.css';
 
-function DemoCard({ itm = {}, mailProps = {} }) {
+function DemoCard({ itm = {}, mailProps = {}, setScheduleDemo = () => {} }) {
 	const { label, subLabel, accountType, source, requestedBy } = itm || {};
 	const { setButtonType, setEmailState, buttonType, signature } = mailProps;
-
-	const [scheduleDemo, setScheduleDemo] = useState({
-		isScheduleDemo : false,
-		scheduleData   : null,
-	});
 
 	const handleSendEmail = () => {
 		if (buttonType) {
@@ -139,7 +132,6 @@ function DemoCard({ itm = {}, mailProps = {} }) {
 					Schedule Demo
 				</Button>
 			</div>
-			<ScheduleDemo scheduleDemo={scheduleDemo} setScheduleDemo={setScheduleDemo} />
 		</div>
 	);
 }

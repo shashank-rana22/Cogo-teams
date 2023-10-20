@@ -24,11 +24,12 @@
 		align-self: flex-start;
 		width: 25px;
 		height: 25px;
+		fill: #ee3425;
 	}
 }
 
 .org_details {
-	width: 87%;
+	width: 85%;
 	margin-left: 8px;
 }
 
@@ -56,32 +57,17 @@
 	white-space: nowrap;
 }
 
-.account_type {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 2px 4px;
-	margin-left: 8px;
-	color: #221f20;
-	background: #fff;
-	border-radius: 4px;
-}
-
 .action {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 13%;
+	width: 15%;
+}
 
-	svg {
-		width: 18px;
-		height: 18px;
-		cursor: pointer;
-
-		&:last-child {
-			margin-left: 4px;
-		}
-	}
+.info_icon {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
 }
 
 .body_info {
@@ -104,24 +90,11 @@
 	font-size: 12px;
 }
 
-.label {
+.comment {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	width: 68%;
 	font-size: 12px;
-}
-
-.docs {
-	display: flex;
-	align-items: center;
-	font-size: 12px;
-
-	span {
-		text-decoration: underline;
-	}
-}
-
-.date {
-	font-size: 10px;
 	color: #828282;
 }
 
@@ -131,43 +104,29 @@
 	border-bottom: 1px solid #e0e0e0;
 }
 
-.footer_info {
+.footer_container {
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	justify-content: flex-end;
-	width: 100%;
 	padding: 10px 16px;
 }
 
-.reject {
+.button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 70px;
-	height: 30px;
-	padding: 8px 12px;
+	width: 55px;
+	height: 32px;
+	padding: 8px;
+	margin-left: 10px;
 	cursor: pointer;
+	background: #c4dc91;
 	border: 1px solid #e0e0e0;
 	border-radius: 6px;
 
-	&:hover {
-		background: #fdebe9;
-	}
-}
-
-.allocate {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 80px;
-	height: 30px;
-	padding: 8px 12px;
-	margin-left: 8px;
-	cursor: pointer;
-	border: 1px solid #e0e0e0;
-	border-radius: 6px;
-
-	&:hover {
-		background: #c4dc91;
+	svg {
+		path {
+			fill: #fff;
+		}
 	}
 }
