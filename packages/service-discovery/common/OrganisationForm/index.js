@@ -5,6 +5,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMManufacturing, IcMProfile } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import React, { useMemo, useEffect, useCallback } from 'react';
 
 import CustomSelectOption from '../CustomSelectOption';
@@ -32,6 +33,8 @@ function OrganisationForm({
 	const { query = {} } = useRouter();
 
 	const { user_id = '' } = query;
+
+	const source = isEmpty(defaultValues) ? 'create' : 'edit';
 
 	const USER_PARAMS = useMemo(() => (
 		{
@@ -116,8 +119,8 @@ function OrganisationForm({
 	}, [defaultValues?.user_id, organization?.user_id, setOrganization, userOptions, user_id]);
 
 	return (
-		<div className={styles.container} style={rest.style}>
-			<div className={styles.form_item}>
+		<div className={cl`${styles.container} ${styles[source]}`} style={rest.style}>
+			<div className={cl`${styles.form_item} ${styles[source]}`}>
 				<div className={styles.label}>
 					Select an organisation
 					{' '}
@@ -146,7 +149,7 @@ function OrganisationForm({
 				)}
 			</div>
 
-			<div key={loading} className={cl`${styles.form_item} ${styles.user}`}>
+			<div key={loading} className={cl`${styles.form_item} ${styles[source]} ${styles.user}`}>
 				<div className={styles.label}>
 					Select an User
 					{' '}
