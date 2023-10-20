@@ -1,27 +1,51 @@
 export const personalInfo = [
 	{
 		heading : 'BASIC INFORMATION',
+		key     : 'basic',
 		details : [
-			{ label: 'First Name', key: 'processed', value: 'first_name' },
-			{ label: 'Last Name', key: 'processed', value: 'last_name' },
-			{ label: 'Email', key: 'details', value: 'cogoport_email' },
-			{ label: 'Phone Number', key: 'details', value: ['mobile_country_code', 'mobile_number'] },
-			{ label: 'Personal Email', key: 'details', value: 'personal_email' },
+			{ label: 'First Name', key: 'processed', value: 'first_name', inputtype: 'input' },
+			{ label: 'Last Name', key: 'processed', value: 'last_name', inputtype: 'input' },
+			{ label: 'Email', key: 'details', value: 'cogoport_email', inputtype: 'input' },
 			{
-				label : 'Alternate Number',
-				key   : 'personal',
-				value : ['alternate_mobile_country_code', 'alternate_mobile_number'],
+				label     : 'Phone Number',
+				key       : 'details',
+				value     : ['mobile_country_code', 'mobile_number'],
+				inputtype : 'mobile',
 			},
-			{ label: 'Gender', key: 'details', value: 'gender' },
-			{ label: 'Date of Birth', key: 'details', value: 'date_of_birth' },
-			{ label: 'Marital Status', key: 'personal', value: 'marital_status' },
-			{ label: 'Blood Group', key: 'personal', value: 'blood_group' },
-			{ label: 'Disability Level', key: 'personal', value: 'disability_level' },
-			{ label: 'Allergies', key: 'personal', value: 'allergies' },
+			{ label: 'Personal Email', key: 'details', value: 'personal_email', inputtype: 'input' },
+			{
+				label     : 'Alternate Number',
+				key       : 'personal',
+				value     : ['alternate_mobile_country_code', 'alternate_mobile_number'],
+				inputtype : 'mobile',
+
+			},
+			{
+				label     : 'Gender',
+				key       : 'details',
+				value     : 'gender',
+				inputtype : 'select',
+				options   : [{ label: 'Male', value: 'male' },
+					{ label: 'Female', value: 'female' },
+					{ label: 'Others', value: 'others' }],
+			},
+			{ label: 'Date of Birth', key: 'details', value: 'date_of_birth', inputtype: 'date' },
+			{
+				label     : 'Marital Status',
+				key       : 'personal',
+				value     : 'marital_status',
+				inputtype : 'select',
+				options   : [{ label: 'Married', value: 'married' },
+					{ label: 'Single', value: 'single' }],
+			},
+			{ label: 'Blood Group', key: 'personal', value: 'blood_group', inputtype: 'input' },
+			{ label: 'Disability Level', key: 'personal', value: 'disability_level', inputtype: 'input' },
+			{ label: 'Allergies', key: 'personal', value: 'allergies', inputtype: 'input' },
 		],
 	},
 	{
 		heading : 'FAMILY INFORMATION',
+		key     : 'family',
 		details : [
 			{ label: 'Fathers Name', key: 'family', value: 'father_name' },
 			{ label: 'Mothers Name', key: 'family', value: 'mother_name' },
@@ -54,9 +78,9 @@ export const personalInfo = [
 	},
 	{
 		heading : 'ADDRESS INFORMATION',
+		key     : 'address',
 		details : [
-			{ label: 'Address Line 1', key: 'address', value: 'address' },
-			{ label: 'Address Line 2', key: 'address', value: '-' },
+			{ label: 'Address Line', key: 'address', value: 'address' },
 			{ label: 'City', key: 'address', value: 'city' },
 			{ label: 'State', key: 'address', value: 'state' },
 			{ label: 'Pincode', key: 'address', value: 'pincode' },
@@ -123,17 +147,3 @@ export const otherInfo = {
 		{ label: 'Medical Policy Number', value: '24646154' },
 	],
 };
-
-export const bankInfo = [
-	{ label: 'Account Holder Name', value: 'account_holder_name' },
-	{ label: 'Account Number', value: 'account_number' },
-	{ label: 'Branch Name', value: 'bank_branch_name' },
-	{ label: 'Bank Name', value: 'bank_name' },
-	{ label: 'IFSC CODE', value: 'ifsc_code' },
-];
-
-export const pfInfo = [
-	{ label: 'ESIC', value: 'esic' },
-	{ label: 'PF APPLICABLE', value: 'pf_applicable' },
-	{ label: 'PROFESSIONAL TAX', value: 'professional_tax' },
-];
