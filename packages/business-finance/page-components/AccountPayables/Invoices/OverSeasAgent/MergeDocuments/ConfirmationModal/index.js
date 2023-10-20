@@ -9,6 +9,7 @@ function ConfirmationModal({
 	setShowConfirmationModal = () => {},
 	handelMergeInvoices = () => {},
 	data = {},
+	setAllowed = () => {},
 }) {
 	return (
 		<Modal
@@ -50,6 +51,7 @@ function ConfirmationModal({
 					<Button
 						onClick={() => {
 							handelMergeInvoices();
+							setAllowed(false);
 						}}
 						className={styles.btn}
 					>

@@ -3,7 +3,10 @@ import { IcCFtick } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function GetInvoiceData({ selectBankShow = false, setShowConfirmationModal = () => {}, list = [] }) {
+function GetInvoiceData({
+	selectBankShow = false,
+	setShowConfirmationModal = () => {}, list = [],
+}) {
 	return (
 		selectBankShow
 			? (
@@ -16,7 +19,9 @@ function GetInvoiceData({ selectBankShow = false, setShowConfirmationModal = () 
 			)
 			:						(
 				<Button
-					onClick={() => setShowConfirmationModal(true)}
+					onClick={() => {
+						setShowConfirmationModal(true);
+					}}
 					disabled={!list?.length}
 				>
 					Merge Invoices

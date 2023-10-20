@@ -22,7 +22,7 @@ const SUBSTRING_CONDITON_MAX = 15;
 const SUBSTRING_CONDITON_MIN = 0;
 const TAGGED_DOC_CONDITION = 4;
 
-function MergeDocuments({ setActive = () => {} }) {
+function MergeDocuments({ setActive = () => {}, allowed = true, setAllowed = () => {} }) {
 	const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 	const [selectBankShow, setSelectBankShow] = useState(false);
 
@@ -164,8 +164,26 @@ function MergeDocuments({ setActive = () => {} }) {
 
 				<div className={styles.right}>
 					<div className={styles.header}>
-						Merged Documents
-						<div className={styles.dash} />
+						<div>
+							Merged Documents
+							<div className={styles.dash} />
+						</div>
+						<div>
+							{!allowed
+								? (
+									<IcMDelete
+										width={24}
+										height={24}
+										className={styles.delete}
+										onClick={() => {
+											deleteTaggedDocuments();
+											setSelectBankShow(false);
+											setAllowed(true);
+										}}
+									/>
+								)
+								: null}
+						</div>
 					</div>
 
 					<div className={styles.merged_doc}>
@@ -179,8 +197,6 @@ function MergeDocuments({ setActive = () => {} }) {
 									documents={documents}
 									documentsList={documentsList}
 									getDate={getDate}
-									deleteTaggedDocuments={deleteTaggedDocuments}
-									setSelectBankShow={setSelectBankShow}
 								/>
 							)}
 					</div>
@@ -193,6 +209,7 @@ function MergeDocuments({ setActive = () => {} }) {
 					setShowConfirmationModal={setShowConfirmationModal}
 					handelMergeInvoices={handelMergeInvoices}
 					data={data}
+					setAllowed={setAllowed}
 				/>
 			) : null}
 
