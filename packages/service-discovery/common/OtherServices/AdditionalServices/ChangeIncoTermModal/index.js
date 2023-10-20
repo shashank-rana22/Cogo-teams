@@ -67,8 +67,8 @@ function ChangeIncoTermModal({
 					to
 					{' '}
 					<b>{upperCase(selectedValue)}</b>
-					. As a result, we will add or remove services( if any).
-					If you want to continue with the same services, please leave the Incoterm unchanged.
+					. As a result, we will add or remove services(as applicable).
+					If you wish to continue with the current services, leave the Incoterm unchanged.
 				</div>
 
 				{!isEmpty(servicesToAdd) ? (
