@@ -1,20 +1,15 @@
-/* eslint-disable max-lines-per-function */
-/* eslint-disable max-len */
-import { Button, Placeholder, Pagination } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMArrowDown, IcMArrowUp, IcMProvision } from '@cogoport/icons-react';
+import { Placeholder } from '@cogoport/components';
+import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import Filter from '../../../commons/Filters';
 import filtersconfig from '../../Vendors/filtersconfig';
-import ViewRecurringSummery from '../CreateExpenseModal/ViewRecurringSummery';
 import useListExpense from '../hooks/useListExpense';
 import useSendEmail from '../hooks/useSendEmail';
 import useSendOverheadExpense from '../hooks/useSendOverheadExpense';
 
+import BillList from './BillList';
 import styles from './styles.module.css';
 
 function ShowMore({ id, showExpenseModal, incidentId }) {
@@ -76,6 +71,15 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 						: `${styles.more_data_container} ${styles.more_data_container_close}`
 				}
 			>
+				<div className={styles.segmented_control}>
+					<div className={styles.filtercont}>
+						<Filter
+							controls={filtersconfig}
+							filters={expenseFilters}
+							setFilters={setExpenseFilters}
+						/>
+					</div>
+				</div>
 				{listLoading ? (
 					<div>
 						{Array(3)
@@ -98,247 +102,16 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 				) : (
 					<div className={styles.list_container}>
 						{!isEmpty(billList) ? (
-							<div>
-								<div className={styles.segmented_control}>
-									<div className={styles.filtercont}>
-										<Filter
-											controls={filtersconfig}
-											filters={expenseFilters}
-											setFilters={setExpenseFilters}
-										/>
-									</div>
-								</div>
-								{billList?.map((bill) => {
-									const {
-										billId,
-										billNumber,
-										grandTotal,
-										paidAmount = 0,
-										payableTds = 0,
-										dueDate,
-										billDate,
-										createdDate,
-										status,
-										approvedByName,
-										updatedAt,
-										billDocumentUrl = '',
-										billCurrency = '',
-									} = bill || {};
-
-									return (
-										<div
-											className={styles.data_div}
-											key={bill}
-										>
-											<div className={styles.section}>
-												<div>Invoice No.</div>
-												<div
-													className={`${styles.element} ${styles.link}`}
-												>
-													<a
-														href={billDocumentUrl}
-														style={{
-															color: '#f68b21',
-														}}
-														target="_blank"
-														rel="noreferrer"
-													>
-														{billNumber || '-'}
-													</a>
-												</div>
-											</div>
-											<div className={styles.section}>
-												<div>Payable</div>
-												<div className={styles.element}>
-													{formatAmount({
-														amount: (grandTotal
-															- payableTds),
-														currency : billCurrency,
-														options  : {
-															style: 'currency',
-															currencyDisplay:
-																'code',
-														},
-													})}
-												</div>
-											</div>
-											<div className={styles.section}>
-												<div>TDS</div>
-												<div className={styles.element}>
-													{formatAmount({
-														amount   : payableTds,
-														currency : billCurrency,
-														options  : {
-															style: 'currency',
-															currencyDisplay:
-																'code',
-														},
-													})}
-												</div>
-											</div>
-											<div className={styles.section}>
-												<div>Paid</div>
-												<div className={styles.element}>
-													{formatAmount({
-														amount   : paidAmount,
-														currency : billCurrency,
-														options  : {
-															style: 'currency',
-															currencyDisplay:
-																'code',
-														},
-													})}
-												</div>
-											</div>
-											<div className={styles.section}>
-												<div>Due Date</div>
-												<div className={styles.element}>
-													{formatDate({
-														date       : dueDate,
-														formatType : 'date',
-														dateFormat:
-															GLOBAL_CONSTANTS
-																.formats.date[
-																	'dd MMM yyyy'
-																],
-													})}
-												</div>
-											</div>
-											<div className={styles.section}>
-												<div>Invoice Date</div>
-												<div className={styles.element}>
-													{formatDate({
-														date       : billDate,
-														formatType : 'date',
-														dateFormat:
-															GLOBAL_CONSTANTS
-																.formats.date[
-																	'dd MMM yyyy'
-																],
-													})}
-												</div>
-											</div>
-											<div className={styles.section}>
-												<div>Upload Date</div>
-												<div className={styles.element}>
-													{formatDate({
-														date       : createdDate,
-														formatType : 'date',
-														dateFormat:
-															GLOBAL_CONSTANTS
-																.formats.date[
-																	'dd MMM yyyy'
-																],
-													})}
-												</div>
-											</div>
-											<div className={styles.section}>
-												<div>Approved By</div>
-												<div
-													className={`${styles.element} `}
-												>
-													<div>
-														{status !== 'LOCKED' ? (
-															<div
-																style={{
-																	fontSize:
-																		'12px',
-																}}
-															>
-																<div>
-																	{
-																		approvedByName
-																	}
-																</div>
-																<div>
-																	{formatDate(
-																		{
-																			date: updatedAt,
-																			formatType:
-																				'date',
-																			dateFormat:
-																				GLOBAL_CONSTANTS
-																					.formats
-																					.date[
-																						'dd MMM yyyy'
-																					],
-																		},
-																	)}
-																</div>
-															</div>
-														) : (
-															<>
-																<div
-																	className={
-																		styles.pending_approval
-																	}
-																>
-																	Pending
-																	Approval
-																</div>
-																<div
-																	className={
-																		styles.link
-																	}
-																>
-																	<Button
-																		style={{
-																			background:
-																				'none',
-																			color: '#F68B21',
-																			fontSize:
-																				'12px',
-																			padding:
-																				'0px 4px',
-																		}}
-																		disabled={
-																		mailLoading
-																		}
-																		onClick={() => {
-																			sendMail(
-																				{
-																					incidentId,
-																				},
-																			);
-																		}}
-																	>
-																		Re-send
-																		Email
-																	</Button>
-																</div>
-															</>
-														)}
-													</div>
-												</div>
-											</div>
-											<div className={styles.view}>
-												<ViewRecurringSummery itemData={bill} />
-											</div>
-											<div className={styles.section}>
-												<div className={styles.element}>
-													<IcMProvision
-														onClick={() => { sendOverheadExpense(billId); }}
-														style={{ cursor: 'pointer' }}
-														height={24}
-														width={24}
-														color="#F68B21"
-													/>
-
-												</div>
-											</div>
-										</div>
-									);
-								})}
-								<div className={styles.pagination}>
-									<Pagination
-										type="table"
-										currentPage={currentPage}
-										totalItems={totalRecords}
-										pageSize={5}
-										onPageChange={handlePageChange}
-									/>
-								</div>
-							</div>
+							<BillList
+								billList={billList}
+								mailLoading={mailLoading}
+								sendMail={sendMail}
+								incidentId={incidentId}
+								sendOverheadExpense={sendOverheadExpense}
+								currentPage={currentPage}
+								totalRecords={totalRecords}
+								handlePageChange={handlePageChange}
+							/>
 						) : (
 							<div
 								style={{
