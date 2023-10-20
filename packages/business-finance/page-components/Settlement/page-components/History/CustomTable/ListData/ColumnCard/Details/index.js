@@ -50,7 +50,7 @@ function Details({
 	const { id = '' } = useSelector((state) => state?.profile?.user);
 	const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
 	const { notPostedSettlementIds = [], ledCurrency = '' } = item || {};
-	const allowableIds = [GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id, GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id];
+	const allowableIds = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id, GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id];
 
 	const { loading: bulkPostToSageLoading, bulkPostToSageAction } = usePostSettlementToSage({ refetch });
 	const { deleteHistory, deleteHistoryLoading } = 	useDeleteHistorySettlement(
