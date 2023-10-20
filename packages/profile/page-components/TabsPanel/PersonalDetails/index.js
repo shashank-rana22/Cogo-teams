@@ -21,13 +21,16 @@ function PersonalDetails({ data = {}, loading = false }) {
 	// const { control } = useForm();
 	const info = personalInfo;
 	const otherInfo = otherPersonalInfo;
+
 	const handleModal = () => {
 		setShow(!show);
 	};
 
-	const [datatoedit, setDataToEdit] = useState([]);
-	const handleClickDetails = ({ details }) => {
+	const [datatoedit, setDataToEdit] = useState({});
+
+	const handleClickDetails = (details) => {
 		setDataToEdit(details);
+		setShow(!show);
 	};
 	return (
 		<>
@@ -38,17 +41,9 @@ function PersonalDetails({ data = {}, loading = false }) {
 							<span className={styles.personal}>PERSONAL DETAILS</span>
 							<span className={styles.detail}>View and manage employee details</span>
 						</div>
-						<div>
-							<Button
-								themeType="secondary"
-								onClick={handleModal}
-							>
-								Edit
-							</Button>
-						</div>
 					</div>
 					<div className={styles.info_container}>
-						{info.map(({ heading, details }) => (
+						{info.map(({ heading, details, key }) => (
 							<div key={heading}>
 								<DetailsCard
 									heading={heading}
@@ -61,7 +56,7 @@ function PersonalDetails({ data = {}, loading = false }) {
 									className={styles.info_button}
 									size="md"
 									themeType="secondary"
-									onClick={() => handleClickDetails({ heading, details })}
+									onClick={() => handleClickDetails({ heading, details, key })}
 								>
 									<IcMEdit style={{ marginRight: '5px' }} />
 									Edit
@@ -185,7 +180,7 @@ function PersonalDetails({ data = {}, loading = false }) {
 					<Button onClick={handleModal}>OK</Button>
 				</Modal.Footer>
 			</Modal> */}
-			<EditModal show={show} handleModal={handleModal} dataToEdit={datatoedit} data={data} />
+			{show && <EditModal show={show} handleModal={handleModal} data={data} mappingKey={datatoedit?.key} />}
 			{/* // <FamilyDetailModal
 			// 	control={control}
 			// 	handleModal={handleModal}

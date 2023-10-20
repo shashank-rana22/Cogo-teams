@@ -1,6 +1,7 @@
 export const personalInfo = [
 	{
 		heading : 'BASIC INFORMATION',
+		key     : 'basic',
 		details : [
 			{ label: 'First Name', key: 'processed', value: 'first_name', inputtype: 'input' },
 			{ label: 'Last Name', key: 'processed', value: 'last_name', inputtype: 'input' },
@@ -44,6 +45,7 @@ export const personalInfo = [
 	},
 	{
 		heading : 'FAMILY INFORMATION',
+		key     : 'family',
 		details : [
 			{ label: 'Fathers Name', key: 'family', value: 'father_name' },
 			{ label: 'Mothers Name', key: 'family', value: 'mother_name' },
@@ -76,9 +78,9 @@ export const personalInfo = [
 	},
 	{
 		heading : 'ADDRESS INFORMATION',
+		key     : 'address',
 		details : [
-			{ label: 'Address Line 1', key: 'address', value: 'address' },
-			{ label: 'Address Line 2', key: 'address', value: '-' },
+			{ label: 'Address Line', key: 'address', value: 'address' },
 			{ label: 'City', key: 'address', value: 'city' },
 			{ label: 'State', key: 'address', value: 'state' },
 			{ label: 'Pincode', key: 'address', value: 'pincode' },
