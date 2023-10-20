@@ -4,11 +4,11 @@ import React from 'react';
 
 import PostContainer from './PostContainer';
 
-function FeedPosts() {
+function FeedPosts({ data = {} }) {
 	return (
 		<>
 			{[...Array(5).keys()].map((val) => (
-				<PostContainer key={val} />
+				<PostContainer key={val} data={data} />
 			)) }
 			{/* <div className={styles.container}>
 				<div className={styles.header_flex}>

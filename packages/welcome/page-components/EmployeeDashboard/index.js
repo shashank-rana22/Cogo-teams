@@ -12,7 +12,7 @@ function HrmsEmployeeDashboard() {
 	return (
 		<div className={styles.container}>
 			<Header />
-			<MainSection />
+			<MainSection data={data} />
 		</div>
 	);
 }
