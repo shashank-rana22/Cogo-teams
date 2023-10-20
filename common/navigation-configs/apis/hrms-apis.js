@@ -828,6 +828,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'update_employee_directory',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	payroll: [
 		{
