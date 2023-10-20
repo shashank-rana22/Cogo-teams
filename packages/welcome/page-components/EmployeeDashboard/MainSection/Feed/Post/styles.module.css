@@ -114,8 +114,8 @@
 .feed_type {
 	display: flex;
 	align-items: center;
-	margin-bottom: 16px;
 	justify-content: center;
+	margin-bottom: 16px;
 	text-align: left;
 }
 
