@@ -883,10 +883,10 @@ importers:
       cookies-next: ^2.1.1
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.447_gysxxj2k3uk5hle7nzdouwdzoi
+      '@cogoport/components': 1.0.447_xuo6qmldnjtr7r4mbulb7lqrq4
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.102_react@18.2.0
+      '@cogoport/icons-react': 1.0.102_biqbaboplfbrettd7655fr4n2y
       '@cogoport/navigation-configs': link:../../common/navigation-configs
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
