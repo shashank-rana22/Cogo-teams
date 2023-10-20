@@ -24,13 +24,13 @@ function YourBoard() {
 			<div className={styles.sub_heading}>
 				At a glance view of important stuff
 			</div>
+			<OrgData manager_name={manager_name} hrbp_name={hrbp_name} loading={loading} />
 			<TimeSummary />
 			<NotInOffice data={data} loading={loading} />
 			<LeaveBalance />
 			<AttendanceStats self_working_stats={self_working_stats} loading={loading} />
 			<Holiday data={next_holiday_detail} loading={loading} />
 			{/* <SalaryUpdate /> */}
-			<OrgData manager_name={manager_name} hrbp_name={hrbp_name} loading={loading} />
 		</div>
 	);
 }

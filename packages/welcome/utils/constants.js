@@ -1,6 +1,7 @@
 import {
 	IcMCalendar,
-	// IcMTimer, IcMUpwardGraph, IcMAppInvoiceSubmission,
+	// IcMTimer, IcMUpwardGraph,
+	IcMAppInvoiceSubmission,
 	IcMProfile,
 } from '@cogoport/icons-react';
 
@@ -18,10 +19,11 @@ export const HEADER_NAV = [
 	// 	label : 'Performance',
 	// 	icon  : IcMUpwardGraph,
 	// },
-	// {
-	// 	label : 'Payslip',
-	// 	icon  : IcMAppInvoiceSubmission,
-	// },
+	{
+		label : 'Payslip',
+		icon  : IcMAppInvoiceSubmission,
+		route : '/payroll/payroll',
+	},
 	// {
 	// 	label : 'Tax Submissions',
 	// 	icon  : IcMAppInvoiceSubmission,

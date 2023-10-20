@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMPlus, IcMEmail } from '@cogoport/icons-react';
+import { IcMRaiseTicket, IcMEmail } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React from 'react';
@@ -35,10 +35,16 @@ function Header() {
 					COGO HR
 				</div>
 				<div className={styles.header_right_flex}>
-					<Button themeType="secondary">
+					{/* <Button themeType="secondary">
 						<span className={styles.header_right_flex}>
 							New Request
 							<IcMPlus width={12} height={12} style={{ marginLeft: 4 }} />
+						</span>
+					</Button> */}
+					<Button themeType="secondary" onClick={() => router.push('/ticket-management/my-tickets')}>
+						<span className={styles.header_right_flex}>
+							My Tickets
+							<IcMRaiseTicket width={14} height={14} style={{ marginLeft: 4 }} />
 						</span>
 					</Button>
 					<Button style={{ marginLeft: 12 }}>

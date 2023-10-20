@@ -5,11 +5,12 @@ import React from 'react';
 import PostContainer from './PostContainer';
 
 function FeedPosts({ data = {} }) {
+	const { list } = data || {};
 	return (
 		<>
-			{[...Array(5).keys()].map((val) => (
-				<PostContainer key={val} data={data} />
-			)) }
+			{(list || []).map((val) => (
+				<PostContainer key={val} item={val} />
+			))}
 			{/* <div className={styles.container}>
 				<div className={styles.header_flex}>
 					<div className={styles.user_data}>

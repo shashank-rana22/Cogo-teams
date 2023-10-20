@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMAirport, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMAirport } from '@cogoport/icons-react';
 import React from 'react';
 
 import Loader from '../../../../../common/Loader';
@@ -46,11 +46,11 @@ function Holiday({ data = {}, loading = false }) {
 				</div>
 				<IcMAirport fill="#828282" width={50} height={50} />
 			</div>
-			<div className={styles.view_calendar}>
+			{/* <div className={styles.view_calendar}>
 				View Calendar
 				{' '}
 				<IcMArrowRight style={{ marginLeft: 8 }} />
-			</div>
+			</div> */}
 		</div>
 	);
 }

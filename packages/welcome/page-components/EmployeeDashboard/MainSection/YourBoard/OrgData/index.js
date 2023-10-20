@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { IcMArrowRight } from '@cogoport/icons-react';
+// import { IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
 import Loader from '../../../../../common/Loader';
@@ -33,13 +33,13 @@ function OrgData({ manager_name = '', hrbp_name = '', loading = false }) {
 					HRBP
 				</div>
 			</div>
-			<div className={styles.footer}>
+			{/* <div className={styles.footer}>
 				<div className={styles.view_org}>
 					View Organization Chart
 					{' '}
 					<IcMArrowRight style={{ marginLeft: 8 }} />
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 }
