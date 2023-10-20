@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo, useState } from 'react';
 
@@ -63,6 +64,14 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 
 	const { is_tnc_accepted = false } = credit_terms_amd_condition || {};
 
+	const { organization_settings = [], is_agent_allowed_to_book = false } = importer_exporter;
+
+	const checkout_settings = organization_settings.filter(
+		(setting) => setting.setting_type === 'checkout',
+	)?.[GLOBAL_CONSTANTS.zeroth_index];
+
+	const { setting_config: { assisted_booking_services = [] } = {} } = checkout_settings || {};
+
 	const { updateCheckout, updateLoading } = useUpdateCheckout({ getCheckout, detail });
 
 	const BREADCRUMB_MAPPING = {
@@ -105,13 +114,18 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 	const tncPresent =	Array.isArray(detail?.terms_and_conditions)
 	&& !isEmpty(terms_and_conditions);
 
-	const isSkippable =	!!detail?.importer_exporter?.skippable_checks
-	&& detail?.importer_exporter?.skippable_checks?.includes('kyc');
+	const isSkippable =	!!importer_exporter?.skippable_checks
+	&& importer_exporter?.skippable_checks?.includes('kyc');
 
 	const kycShowCondition = importer_exporter_id
-	&& detail?.importer_exporter?.kyc_status !== 'verified'
+	&& importer_exporter?.kyc_status !== 'verified'
 	&& !isSkippable
 	&& checkout_type !== 'rfq';
+
+	const isAssistedBookingNotAllowed =	!isEmpty(assisted_booking_services)
+	&& (assisted_booking_services.includes('none')
+		|| !assisted_booking_services.includes(primary_service))
+		&& !is_agent_allowed_to_book;
 
 	const checkoutData = useMemo(
 		() => ({
@@ -140,6 +154,7 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 			activated_on_paylater,
 			checkout_type,
 			earnable_cogopoints,
+			isAssistedBookingNotAllowed,
 		}),
 		[
 			primaryService,
@@ -166,6 +181,7 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 			activated_on_paylater,
 			checkout_type,
 			earnable_cogopoints,
+			isAssistedBookingNotAllowed,
 		],
 	);
 

@@ -24,6 +24,7 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 		earnable_cogopoints = {},
 		kycShowCondition,
 		orgData = {},
+		isAssistedBookingNotAllowed = false,
 	} = useContext(CheckoutContext);
 
 	const ref = useRef({});
@@ -38,10 +39,9 @@ function BookingConfirmation({ setIsShipmentCreated = () => {} }) {
 		setIsVeryRisky = () => {},
 		error = '',
 		setError = () => {},
-		isAssistedBookingNotAllowed = false,
 		noRatesPresent = false,
 		setNoRatesPresent = () => {},
-	} = useHandleBookingConfirmation();
+	} = useHandleBookingConfirmation({ detail });
 
 	const { is_any_invoice_on_credit = false } = detail?.credit_details || {};
 
