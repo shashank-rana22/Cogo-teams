@@ -16,7 +16,7 @@ import styles from './styles.module.css';
 
 const ONE_LESS_THAN_LENGTH = 1;
 
-const urlify = (text) => text.match(GLOBAL_CONSTANTS.regex_patterns.url_match)?.[GLOBAL_CONSTANTS.zeroth_index];
+const urlify = (text = {}) => text?.match(GLOBAL_CONSTANTS.regex_patterns.url_match)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 function ChildBlocks(
 	{ id, mainData, blocks, setBlocks, updatePermission },
