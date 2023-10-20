@@ -66,6 +66,7 @@ import {
 	IcASecureCloudStorage,
 	IcMUpwardGraph,
 	IcMAppProfile,
+	IcMAppPayment,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -2721,6 +2722,39 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/profile',
 			possible_apis : apis.profile,
 			icon          : IcMAppProfile,
+		},
+		payroll: {
+			key           : 'payroll',
+			title         : 'Payroll',
+			icon          : IcMAppPayment,
+			href          : '/v2/payroll',
+			as            : '/v2/payroll',
+			type          : 'link',
+			module_type   : 'dashboards',
+			possible_apis : apis.payroll,
+			isSubNavs     : true,
+			options       : [
+				{
+					key         	 : 'payroll-calculator',
+					title         : t('common:calculator'),
+					href          : '/v2/calculator',
+					as            : '/v2/calculator',
+					type          : 'link',
+					possible_apis : apis.payroll,
+					main_apis     : [],
+				},
+				{
+					key           : 'payroll',
+					title         : 'Payroll',
+					icon          : IcMAppPayment,
+					href          : '/v2/payroll',
+					as            : '/v2/payroll',
+					type          : 'link',
+					module_type   : 'dashboards',
+					possible_apis : apis.payroll,
+
+				},
+			],
 		},
 	};
 
