@@ -19,7 +19,7 @@ function GetInvoiceData({
 			)
 			:						(
 				<Button
-					onClick={() => { setShowConfirmationModal(true); }}
+					onClick={() => setShowConfirmationModal(true)}
 					disabled={!list?.length}
 				>
 					Merge Invoices
