@@ -45,7 +45,7 @@ function SalaryDetails() {
 		setShow(true);
 	};
 	const user_id = employee_id || user.id;
-	const { data, loading } = useGetEmployeeDirectoryPaymentDetail(user_id);
+	const { data, loading, getEmployeePaymentDetails } = useGetEmployeeDirectoryPaymentDetail(user_id);
 	// console.log(data);
 	const salary_data = [{
 		ctc_effective    : '23/12/2000',
@@ -107,12 +107,6 @@ function SalaryDetails() {
 								<div className={styles.info_container}>
 									<div className={styles.heading_one}>
 										<div className={styles.head_text}>PF, Professional Tax & ESIC</div>
-										<Button size="md" themeType="secondary" onClick={() => handleOpenModal(pfInfo, data?.employee_salary_details?.statutory_details)}>
-											{' '}
-											<IcMEdit />
-											{' '}
-											Edit
-										</Button>
 									</div>
 									<div className={styles.details}>
 										{
@@ -141,7 +135,13 @@ function SalaryDetails() {
 	loading ? null
 		:	<TaxStructure taxShow={taxShow} setTaxShow={setTaxShow} employee_id={data?.employee_salary_details?.employee_id} />
 }
-				<EditModal show={show} handleModal={handleModal} modalData={modalData} modalUpdateData={modalUpdateData} />
+				<EditModal
+					getEmployeePaymentDetails={getEmployeePaymentDetails}
+					show={show}
+					handleModal={handleModal}
+					modalData={modalData}
+					modalUpdateData={modalUpdateData}
+				/>
 			</div>
 			{
 				loading ? null

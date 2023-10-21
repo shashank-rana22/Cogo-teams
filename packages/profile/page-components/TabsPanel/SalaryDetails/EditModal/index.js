@@ -2,6 +2,8 @@ import { Modal, Button } from '@cogoport/components';
 import { InputController, useForm, SelectController } from '@cogoport/forms';
 import { useEffect } from 'react';
 
+import useUpdateBankDetails from '../../../../hooks/useUpdateBankAccountDetails';
+
 import styles from './styles.module.css';
 
 function GetController(item, control) {
@@ -27,8 +29,23 @@ function GetController(item, control) {
 	);
 }
 
-function EditModal({ show, handleModal, modalData, modalUpdateData }) {
-	const { control, setValue } = useForm();
+function EditModal({ show, handleModal, modalData, modalUpdateData, getEmployeePaymentDetails }) {
+	const { control, setValue, handleSubmit } = useForm();
+
+	const { updateBankDetails } = useUpdateBankDetails({ handleModal, getEmployeePaymentDetails });
+
+	const onSubmit = (values) => {
+		const PAYLOAD = {
+			is_active   : true,
+			verified_at : new Date(),
+			employee_id : modalUpdateData?.employee_id,
+		};
+
+		modalData.forEach((item) => {
+			PAYLOAD[item?.value] = values[item?.value];
+		});
+		updateBankDetails({ payload: PAYLOAD });
+	};
 
 	useEffect(() => {
 		if (modalData) {
@@ -53,7 +70,7 @@ function EditModal({ show, handleModal, modalData, modalUpdateData }) {
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={handleModal}>OK</Button>
+				<Button onClick={() => handleSubmit(onSubmit)()}>OK</Button>
 			</Modal.Footer>
 		</Modal>
 

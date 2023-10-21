@@ -838,6 +838,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'update_bank_account_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	payroll: [
 		{
