@@ -41,7 +41,8 @@ export const getTablesData = (signed_documents, other_documents) => ([
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 				formatType : 'date',
 			}),
-			url: document.document_url,
+			url    : document.document_url,
+			number : document.document_number,
 		})),
 	},
 ]);

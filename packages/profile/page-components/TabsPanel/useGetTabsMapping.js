@@ -30,7 +30,7 @@ const useGetTabsMapping = (data = {}, loading = false, getEmployeeDetails = () =
 		{
 			name      : 'documents',
 			title     : 'Documents',
-			Component : <Documents data={data} loading={loading} />,
+			Component : <Documents data={data} loading={loading} getEmployeeDetails={getEmployeeDetails} />,
 		},
 		{
 			name      : 'other_details',
