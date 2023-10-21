@@ -3,7 +3,6 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-import Announcement from '../../../../common/Announcement';
 import DURATION_CONSTANTS from '../../../../constants/duration-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
 import getEntityOptions from '../../../../utils/get-entity-options';
@@ -17,7 +16,7 @@ import {
 } from '../../../../utils/start-date-functions';
 import DURATION_OPTIONS from '../../configurations/get-duration-filter-options';
 
-import ProgressBar from './ProgressBar';
+import ProgressBars from './ProgressBars';
 import styles from './styles.module.css';
 
 const { TODAY, LAST_MONTH, THIS_MONTH, LAST_QUARTER, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
@@ -64,16 +63,19 @@ function Header(props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.head_container}>
-				<div>
-					<h2>
-						Welcome,
-						{' '}
-						{user.name}
-					</h2>
+				<div style={{ width: '100%', marginRight: '20px' }}>
+
+					<div className={styles.user_details_container}>
+						<h2>
+							Welcome,
+							{' '}
+							{user.name}
+						</h2>
+					</div>
 
 					<div className={styles.filter_container}>
 						<div>
-							You are viewing Incentive and Scoring Analytics
+							You are viewing dashboard
 							{' '}
 							<span className={styles.light}>for</span>
 						</div>
@@ -103,24 +105,25 @@ function Header(props) {
 							/>
 						)}
 					</div>
+
 				</div>
 
-				<div>
-					{[MANAGER, AGENT].includes(incentive_leaderboard_viewtype) && (<ProgressBar />)}
+				{[MANAGER, AGENT].includes(incentive_leaderboard_viewtype) && (<ProgressBars />)}
 
-					{incentive_leaderboard_viewtype === ADMIN && (
-						<Button
-							type="button"
-							size="lg"
-							themeType="secondary"
-							onClick={() => push('/performance-and-incentives/public-leaderboard')}
-						>
-							Public View Mode
-						</Button>
-					)}
-				</div>
+				{incentive_leaderboard_viewtype === ADMIN && (
+					<Button
+						type="button"
+						size="lg"
+						style={{ flexShrink: 0, alignSelf: 'flex-end' }}
+						themeType="secondary"
+						onClick={() => push('/performance-and-incentives/public-leaderboard')}
+					>
+						Public View Mode
+					</Button>
+				)}
+
 			</div>
-			<Announcement />
+
 		</div>
 	);
 }
