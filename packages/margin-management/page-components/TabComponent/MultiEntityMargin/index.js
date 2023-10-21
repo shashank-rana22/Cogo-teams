@@ -97,10 +97,7 @@ function MultiEntityMargin() {
 								style={{
 									backgroundColor:
 										showHighlighted(rowItem, colItem, rowIdx, colIdx)
-											? '#f37166' : '#fff',
-									color:
-										showHighlighted(rowItem, colItem, rowIdx, colIdx)
-											? '#fff' : '#000',
+											? '#fdebe9' : '#fff',
 								}}
 								onMouseEnter={() => (rowIdx && colIdx ? setActiveEntities(colItem) : () => { })}
 								onMouseLeave={() => setActiveEntities([])}
