@@ -13,6 +13,7 @@ const useUpdateEmployee = ({ handleModal = () => {}, getEmployeeDetails }) => {
 
 	const updateEmployeeDetails = async (payload) => {
 		console.log('payload', payload);
+
 		try {
 			await trigger({
 				data: { ...payload, user_id: profile?.user?.id },

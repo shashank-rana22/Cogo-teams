@@ -12,7 +12,7 @@ import RightGlance from '../RightGlance';
 import styles from './styles.module.css';
 import useGetEducationInfo from './useGetEducationInfo';
 
-function EducationDetails({ data = {}, loading = false }) {
+function EducationDetails({ data = {}, loading = false, getEmployeeDetails = () => {} }) {
 	const { employee_detail } = data || {};
 	const { employee_education_details } = employee_detail || {};
 	const [show, setShow] = useState(false);
@@ -76,6 +76,7 @@ function EducationDetails({ data = {}, loading = false }) {
 							loading={loading}
 							show={show}
 							setShow={setShow}
+							getEmployeeDetails={getEmployeeDetails}
 						/>
 					)
 			}

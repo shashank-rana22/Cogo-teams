@@ -1,7 +1,6 @@
 .educational_details {
 	display: flex;
-	flex-direction: column;
-	width: 100%;
+	flex-wrap: wrap;
 }
 
 .input_container {
