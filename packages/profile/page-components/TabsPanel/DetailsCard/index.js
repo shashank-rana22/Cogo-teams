@@ -11,7 +11,10 @@ function DetailsCard({
 	heading = '', details = [], isGrid = true, data = {},
 	loading = false, handleClickDetails, keyMapping,
 }) {
-	const { employee_detail, modified_employee_detail, processed_employee_detail, personal_details } = data || {};
+	const {
+		employee_detail, modified_employee_detail,
+		processed_employee_detail, personal_details, user_role,
+	} = data || {};
 
 	const { present_address, employee_education_details } = employee_detail || {};
 	const { family_details } = personal_details || {};
@@ -60,7 +63,7 @@ function DetailsCard({
 			{isGrid ? (
 				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 					<span className={styles.info_heading}>{heading}</span>
-					{keyMapping && (
+					{keyMapping && user_role && (
 						<Button
 							className={styles.info_button}
 							size="md"

@@ -61,7 +61,7 @@ function EmployeeProfile() {
 						<div className={styles.left_image}>
 							<img
 								className={styles.profile_img}
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Face.svg"
+								src={employee_detail?.passport_size_photo_url}
 								alt="profile"
 							/>
 							<div
@@ -165,6 +165,7 @@ function EmployeeProfile() {
 						<EditProfile
 							show={openEditProfile}
 							onHide={() => setOpenEditProfile(false)}
+							getEmployeeDetails={getEmployeeDetails}
 						/>
 					) }
 					<TabsPanel data={data} loading={loading} getEmployeeDetails={getEmployeeDetails} />
