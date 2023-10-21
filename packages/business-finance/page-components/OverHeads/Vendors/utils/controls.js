@@ -1,19 +1,6 @@
 import { startCase } from '@cogoport/utils';
 
-import { PAYMENT_OPTIONS } from '../../constants/REPEAT_FREQUENCY';
-
 const vendorControls = [
-	{
-		name           : 'paymentStatus',
-		type           : 'select',
-		multiple       : false,
-		defaultOptions : false,
-		placeholder    : 'Payment Status',
-		span           : 2,
-		isClearable    : true,
-		size           : 'sm',
-		options        : PAYMENT_OPTIONS,
-	},
 	{
 		name        : 'CATEGORY',
 		placeholder : 'Expense Category',
