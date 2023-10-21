@@ -8564,6 +8564,18 @@ const partner = {
 			feature     : 'Expenses',
 		},
 		{
+			api         : 'post_overhead_vendor_to_open_search',
+			access_type : 'private',
+			module      : 'Vendors',
+			feature     : 'Vendors',
+		},
+		{
+			api         : 'post_overhead_expense_to_open_search',
+			access_type : 'private',
+			module      : 'Expenses',
+			feature     : 'Expenses',
+		},
+		{
 			api         : 'get_vendor_trade_parties_data',
 			access_type : 'private',
 			module      : 'Vendors',
@@ -9320,14 +9332,6 @@ const partner = {
 		},
 		{
 			api         : 'post_incident_management_incident_send_overhead_mail',
-			access_type : 'private',
-		},
-		{
-			api         : 'post_overhead_vendor_to_open_search',
-			access_type : 'private',
-		},
-		{
-			api         : 'post_overhead_expense_to_open_search',
 			access_type : 'private',
 		},
 		{
