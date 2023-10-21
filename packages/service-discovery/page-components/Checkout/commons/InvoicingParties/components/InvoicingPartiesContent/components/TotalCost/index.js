@@ -43,7 +43,7 @@ function PriceComponent({
 			<div className={styles.flex}>
 				<Select
 					value={invoice_currency}
-					onChange={({ value }) => {
+					onChange={(value) => {
 						setEditInvoiceDetails((prev) => ({
 							...prev,
 							invoice_currency: value,
