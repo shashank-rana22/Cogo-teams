@@ -193,6 +193,18 @@ const airControls = ({
 			}
 			: null,
 		{
+			name            : 'booking_rate_procurement_proof',
+			label           : 'Booking rate procurement proof',
+			span            : 4,
+			type            : 'file',
+			themeType       : 'secondary',
+			drag            : true,
+			uploadIcon      : 'ic-upload',
+			onlyURLOnChange : true,
+			accept          : 'image/*,.pdf,.doc,.docx',
+			uploadType      : 'aws',
+		},
+		{
 			name        : 'weight_slabs',
 			type        : 'fieldArray',
 			heading     : 'Weight Slabs',
@@ -224,7 +236,7 @@ const airControls = ({
 					type        : 'number',
 					placeholder : 'Price Per Unit',
 					span        : 2,
-					rules       : { required: 'currency is required' },
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'currency',
@@ -232,6 +244,7 @@ const airControls = ({
 					type        : 'select',
 					options     : currencyOptions,
 					span        : 3,
+					rules       : { required: 'currency is required' },
 				},
 			],
 		},
