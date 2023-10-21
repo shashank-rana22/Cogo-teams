@@ -191,22 +191,18 @@ const ltlControls = ({
 
 		{
 			name      : 'minimum_freight_charge',
-			value     : 'minimum_freight_charge',
 			label     : 'Min Freight Charge',
 			type      : 'number',
 			span      : 4,
 			className : 'primary lg',
-			rules     : { required: 'is required' },
 		},
 
 		{
 			name        : 'minimum_chargeable_weight',
-			value       : 'minimum_chargeable_weight',
 			placeholder : 'Min Chargeable Weight',
 			label       : 'Min Chargeable Weight( Per Kg )',
 			type        : 'number',
 			span        : 4,
-			rules       : { required: 'is required' },
 			className   : 'primary lg',
 		},
 		{
@@ -247,7 +243,7 @@ const ltlControls = ({
 			initialCount       : 0,
 			value              : [
 				{
-					lower_limit : 0,
+					lower_limit : '',
 					upper_limit : '',
 					price       : '',
 				},

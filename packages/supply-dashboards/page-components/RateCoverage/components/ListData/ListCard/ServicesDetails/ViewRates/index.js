@@ -4,21 +4,21 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
-function ViewRates({ rateList = [] }) {
-	const columns = [
-		{ Header: 'Code', accessor: 'code' },
-		{ Header: 'Buy Price', accessor: 'buy_price' },
-		{ Header: 'Currency', accessor: 'currency' },
-		{
-			Header   : 'Unit',
-			accessor : 'unit',
-			Cell     : ({ value }) => {
-				const formattedUnit = startCase(value);
-				return <span>{formattedUnit}</span>;
-			},
+const columns = [
+	{ Header: 'Code', accessor: 'code' },
+	{ Header: 'Buy Price', accessor: 'buy_price' },
+	{ Header: 'Currency', accessor: 'currency' },
+	{
+		Header   : 'Unit',
+		accessor : 'unit',
+		Cell     : ({ value }) => {
+			const formattedUnit = startCase(value);
+			return <span>{formattedUnit}</span>;
 		},
-	];
+	},
+];
 
+function ViewRates({ rateList = [] }) {
 	return (
 		<div className={styles.pop_container}>
 			{isEmpty(rateList) ? 'No Data Found'
@@ -28,7 +28,7 @@ function ViewRates({ rateList = [] }) {
 							Service Rates
 						</div>
 
-						{(rateList || []).map((item) => (
+						{(rateList || [])?.map((item) => (
 							<div className={styles.item} key={item.id}>
 								<div className={styles.heading}>
 									{startCase(item?.service_type)}
@@ -53,7 +53,7 @@ function ViewRates({ rateList = [] }) {
 									</Tooltip>
 								</div>
 
-								<Table columns={columns} data={item?.line_items} />
+								<Table columns={columns} data={item?.line_items || []} />
 							</div>
 						))}
 					</div>

@@ -98,10 +98,14 @@ const useCreateFreightRate = (service) => {
 				length: lengthError = '',
 				breadth: breadthError = '',
 				height: heightError = '',
+				minimum_chargeable_weight = undefined,
+				minimum_freight_charge = undefined,
+				transit_time = undefined,
 			} = err_data;
 
 			Toast.error(
-				startCase(base || lengthError || breadthError || heightError || detail || validity_end || line_items),
+				startCase(base || lengthError || breadthError || heightError || detail || validity_end
+					|| line_items || minimum_chargeable_weight || minimum_freight_charge || transit_time),
 			);
 		}
 		return null;

@@ -142,8 +142,16 @@ const fclCustomsControls = ({
 			type               : 'fieldArray',
 			showButtons        : true,
 			buttonText         : 'Add Custom Line Items',
-			noDeleteButtonTill : 0,
-			controls           : [
+			noDeleteButtonTill : 1,
+			value              : [{
+				customs_code : '',
+				unit         : '',
+				currency     : '',
+				price        : '',
+				market_price : '',
+				remarks      : '',
+			}],
+			controls: [
 				{
 					name        : 'customs_code',
 					valueKey    : 'code',

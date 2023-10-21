@@ -13,18 +13,36 @@ import ViewRevertedRates from './ViewRevertedRates';
 import ViewSuggestedServices from './ViewSuggestedServices';
 
 const LOADER_COUNT = 3;
+
+function Loader() {
+	return (
+		<>
+			{[...new Array(LOADER_COUNT).keys()].map((index) => (
+				<Placeholder
+					height="4vh"
+					key={index}
+					width={400}
+					style={{ marginTop: '10px' }}
+				/>
+			))}
+		</>
+	);
+}
+
 function ServicesDetails({
-	data = {}, source = {}, filter = {}, getFeedback = () => {}, feedbackData = [],
-	feedback_loading = false,
+	data = {}, source = {}, filter = {},
 	serviceIdPresent = {},
-	getRequest = () => {},
 	setShowAddRateModal = () => {},
 	setServiceIdPresent = () => {},
+	getRequest = () => {},
 	serviceList = [],
 	loadingSpotSearch = false,
 	spot_data = {},
 	showServicePopover = false,
 	setShowServicePopover = () => {},
+	feedbackData = {},
+	getFeedback = () => {},
+	feedback_loading = false,
 }) {
 	const [showPopover, setShowPopover] = useState(false);
 	const [page, setPage] = useState(1);
@@ -49,15 +67,6 @@ function ServicesDetails({
 
 	const customer_name = spot_data?.importer_exporter?.business_name || undefined;
 
-	const Loader = [...new Array(LOADER_COUNT).keys()].map((index) => (
-		<Placeholder
-			height="4vh"
-			key={index}
-			width={400}
-			style={{ marginTop: '10px' }}
-		/>
-	));
-
 	const handelSuggestedRates = () => {
 		if (serviceIdPresent) {
 			setShowPopover(false);
@@ -67,14 +76,15 @@ function ServicesDetails({
 	};
 
 	const handelServices = () => {
+		setShowServicePopover((p) => !p);
 		if (!showServicePopover) {
 			if (source === 'rate_feedback') {
 				getFeedback();
-			} if (source === 'rate_request') {
+			}
+			if (source === 'rate_request') {
 				getRequest();
 			}
 		}
-		setShowServicePopover((p) => !p);
 	};
 
 	return (
@@ -83,11 +93,8 @@ function ServicesDetails({
 			&& (
 				<div>
 					<Popover
-						theme="light"
-						content={feedback_loading ? Loader : <ViewRates rateList={rateList} />}
-						interactive
-						maxWidth="none"
-						animation="perspective"
+						placement="top"
+						render={feedback_loading ? <Loader /> : <ViewRates rateList={rateList} />}
 					>
 						<Button
 							size="md"
@@ -126,8 +133,8 @@ function ServicesDetails({
 
 			<Popover
 				theme="light"
-				content={loadingSpotSearch
-					? Loader : <ViewMoreServices serviceList={serviceList} customer_name={customer_name} />}
+				render={loadingSpotSearch
+					? <Loader /> : <ViewMoreServices serviceList={serviceList} customer_name={customer_name} />}
 				interactive
 				maxWidth="none"
 				animation="perspective"
@@ -183,7 +190,7 @@ function ServicesDetails({
 				<div>
 					<Popover
 						theme="light"
-						content={<ViewFiles urlList={feedbackData?.list?.[0]?.attachment_file_urls || []} />}
+						render={<ViewFiles urlList={feedbackData?.list?.[0]?.attachment_file_urls || []} />}
 						interactive
 						maxWidth="none"
 						animation="shift-away"

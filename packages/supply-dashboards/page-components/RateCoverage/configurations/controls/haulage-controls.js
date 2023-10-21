@@ -152,14 +152,12 @@ const haulageControls = ({
 					type        : 'number',
 					span        : 4,
 					placeholder : 'Lower Limit (in MT)',
-					rules       : { required: 'lower limit is required' },
 				},
 				{
 					name        : 'upper_limit',
 					type        : 'number',
 					span        : 4,
 					placeholder : 'Upper Limit (in MT)',
-					rules       : { required: 'upper limit is required' },
 				},
 				{
 					name        : 'currency',
@@ -167,23 +165,30 @@ const haulageControls = ({
 					options     : currencyOptions,
 					span        : 1.5,
 					placeholder : 'Curr...',
-					rules       : { required: 'currency is required' },
 				},
 				{
 					name        : 'price',
 					type        : 'number',
 					span        : 1.5,
 					placeholder : 'Price',
-					rules       : { required: 'price is required' },
 				},
 			],
 		},
 		{
-			type       : 'fieldArray',
-			heading    : 'Line Items',
-			name       : 'line_items',
-			buttonText : 'Add Line Items',
-			controls   : [
+			type               : 'fieldArray',
+			heading            : 'Line Items',
+			name               : 'line_items',
+			buttonText         : 'Add Line Items',
+			noDeleteButtonTill : 1,
+			value              : [{
+				customs_code : '',
+				unit         : '',
+				currency     : '',
+				price        : '',
+				market_price : '',
+				remarks      : '',
+			}],
+			controls: [
 				{
 					name        : 'customs_code',
 					valueKey    : 'code',

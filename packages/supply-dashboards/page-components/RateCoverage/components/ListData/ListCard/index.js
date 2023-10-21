@@ -148,13 +148,14 @@ function ListCard({
 								<div style={{ margin: '5px 5px 0 0' }}>{SERVICE_ICON_MAPPING[service]}</div>
 								<div className={styles.service_name}>{startCase(service)}</div>
 							</div>
-							{data?.shipping_line?.short_name && (
+							{(data?.shipping_line?.short_name || data?.airline?.short_name) && (
 								<div>
 									<Pill size="md" color="orange">
 										{(filter?.service === 'air_freight' || filter?.service === 'air_customs')
-											? 'Air Line :' : ' Preferred Shipping Line :'}
+											? 'Preferred Air Line :' : ' Preferred Shipping Line :'}
 										{' '}
-										{data?.shipping_line?.short_name}
+										{filter?.service === 'air_freight' || filter?.service === 'air_customs'
+											? data?.airline?.short_name : data?.shipping_line?.short_name }
 									</Pill>
 								</div>
 							)}
@@ -291,9 +292,6 @@ function ListCard({
 							data={data}
 							source={source}
 							filter={filter}
-							getFeedback={getFeedback}
-							feedbackData={feedbackData}
-							feedback_loading={feedback_loading}
 							setShowAddRateModal={setShowAddRateModal}
 							serviceIdPresent={serviceIdPresent}
 							setServiceIdPresent={setServiceIdPresent}
@@ -304,6 +302,10 @@ function ListCard({
 							spot_data={spot_data}
 							showServicePopover={showPopover}
 							setShowServicePopover={setShowPopover}
+							source_id={source_id}
+							feedbackData={feedbackData}
+							getFeedback={getFeedback}
+							feedback_loading={feedback_loading}
 						/>
 					)}
 				</div>

@@ -2,7 +2,6 @@ import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import { DEFAULT_VALUE } from '../../../../configurations/helpers/constants';
-import useListFreightRateFeedBacks from '../../../../hooks/useListFreightRateFeedBacks';
 
 import ServiceDetailsContent from './Content';
 import styles from './styles.module.css';
@@ -13,14 +12,11 @@ function DetailsView({
 	source = {}, getShipment = () => {}, getRequest = () => {},
 	data = {},
 	filter = {},
-	source_id = '',
+	feedbackData = {},
+	getFeedback = () => {},
+	feedback_loading = false,
 }) {
 	const [showServiceDetails, setShowServiceDetails] = useState(false);
-
-	const {
-		data:feedbackData, getFeedback,
-		loading: feedback_loading,
-	} = useListFreightRateFeedBacks({ source_id, filter });
 
 	const handleDetailView = () => {
 		setShowServiceDetails(!showServiceDetails);

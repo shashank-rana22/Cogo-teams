@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Pill, Placeholder, Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMCopy } from '@cogoport/icons-react';
@@ -32,12 +33,19 @@ function ServiceDetailsContent({
 		pillMapping = [], contentValuesMapping = [], summary = {},
 		status = '', preferred_shipping_lines = [],	preferred_freight_rate,
 		preferred_freight_rate_currency,
+		preferred_airlines,
 	} = contentMapping({
 		requestData,
 		feedbackData,
 		filter,
 		shipment_data,
 	});
+
+	const { booking_params } = feedbackData || {};
+	const { rate_card } = booking_params || {};
+
+	const shippinlineName = preferred_shipping_lines?.[DEFAULT_VALUE]?.business_name;
+	const airLineName = preferred_airlines?.[DEFAULT_VALUE]?.business_name;
 
 	const handelNewServiceProvider = () => {
 		setServiceModal(!serviceModal);
@@ -63,6 +71,8 @@ function ServiceDetailsContent({
 			serial_id,
 			created_at,
 			payment_term,
+			price_type,
+			packages_count,
 		} = val;
 
 		const formatLine = (label, value) => (value ? `${label} ${startCase(value)}\n` : '');
@@ -84,6 +94,9 @@ function ServiceDetailsContent({
 		textToCopy += formatLine('createdAt: ', created_at);
 		textToCopy += formatLine('incoTerm', inco_term);
 		textToCopy += formatLine('paymentTerm', payment_term);
+		textToCopy += formatLine('priceType', price_type);
+		textToCopy += formatLine('packagesCount', packages_count);
+		textToCopy += formatLine('bookingParams', booking_params);
 
 		if (textToCopy) {
 			navigator.clipboard.writeText(textToCopy);
@@ -185,21 +198,6 @@ function ServiceDetailsContent({
 											</div>
 										)}
 
-									{preferred_shipping_lines?.[DEFAULT_VALUE]?.business_name
-										&& (
-											<div className={styles.content}>
-												<div className={styles.label}>
-													{' '}
-													Shippling Line :
-												</div>
-												<div className={styles.name}>
-													{' '}
-													{startCase(preferred_shipping_lines?.
-														[DEFAULT_VALUE]?.business_name)}
-												</div>
-											</div>
-										)}
-
 									{status
 										&& (
 											<div className={styles.content}>
@@ -211,39 +209,70 @@ function ServiceDetailsContent({
 												</div>
 											</div>
 										)}
+
+									{(airLineName || shippinlineName)
+										&& (
+											<div className={styles.content}>
+												<div className={styles.label}>
+													{shippinlineName ? 'Shippling Line : ' : 'Air Line : ' }
+												</div>
+												&nbsp;
+												<div className={styles.name}>
+													{startCase(shippinlineName || airLineName)}
+												</div>
+											</div>
+										)}
 								</div>
-								<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-									<div className={styles.copy_button}>
+
+								<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+									{source === 'rate_feedback' && rate_card?.line_items[0]?.buy_price
+										&& (
+											<div className={styles.content} style={{ width: '50%' }}>
+												<div className={styles.label}>
+													Disliked Rate:
+													<div className={styles.price_value}>
+														{rate_card?.line_items[0]?.buy_price}
+													</div>
+													{' '}
+													{' '}
+													Per Kg
+												</div>
+											</div>
+										)}
+									<div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
+										<div className={styles.copy_button}>
+											<Button
+												size="md"
+												themeType="secondary"
+												onClick={() => {
+													if (source === 'live_booking') {
+														handleCopy(summary);
+													} if (source === 'rate_feedback') {
+														handleCopy(feedbackData);
+													} if (source === 'rate_request') {
+														handleCopy(requestData);
+													} else {
+														handleCopy(summary);
+													}
+												}}
+											>
+												<IcMCopy height="40px" width="15px" />
+												Copy
+											</Button>
+										</div>
+										<div className={styles.head}>Service Provider Not Listed?</div>
 										<Button
 											size="md"
-											themeType="secondary"
-											onClick={() => {
-												if (source === 'live_booking') {
-													handleCopy(summary);
-												} if (source === 'rate_feedback') {
-													handleCopy(feedbackData);
-												} if (source === 'rate_request') {
-													handleCopy(requestData);
-												} else {
-													handleCopy(summary);
-												}
-											}}
+											themeType="linkUi"
+											style={{ color: '#5936f0', padding: '8px' }}
+											onClick={() => handelNewServiceProvider()}
 										>
-											<IcMCopy height="40px" width="15px" />
-											Copy
+											ADD NEW
 										</Button>
 									</div>
-									<div className={styles.head}>Service Provider Not Listed?</div>
-									<Button
-										size="md"
-										themeType="linkUi"
-										style={{ color: '#5936f0', padding: '8px' }}
-										onClick={() => handelNewServiceProvider()}
-									>
-										ADD NEW
-									</Button>
 								</div>
 							</div>
+
 						)}
 					</div>
 				)}

@@ -16,9 +16,11 @@
 .pill {
 	display: flex;
 	flex-wrap: wrap;
+	width: 84%;
 }
 
 .label {
+	display: flex;
 	margin-top: 4px;
 	color: #828282;
 }

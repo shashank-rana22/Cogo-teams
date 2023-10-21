@@ -219,28 +219,20 @@ const fclControls = ({
 			name               : 'weight_slabs',
 			heading            : 'Weight Slabs',
 			type               : 'fieldArray',
-			noDeleteButtonTill : 1,
-			value              : [{
-				lower_limit : '',
-				upper_limit : '',
-				currency    : '',
-				price       : '',
-			}],
-			buttonText : 'Add Weight Slabs',
-			controls   : [
+			noDeleteButtonTill : 0,
+			buttonText         : 'Add Weight Slabs',
+			controls           : [
 				{
 					name        : 'lower_limit',
 					type        : 'number',
 					span        : 4,
 					placeholder : 'Lower Limit (in MT)',
-					rules       : { required: 'lower limit is required' },
 				},
 				{
 					name        : 'upper_limit',
 					type        : 'number',
 					span        : 4,
 					placeholder : 'Upper Limit (in MT)',
-					rules       : { required: 'upper limit is required' },
 				},
 				{
 					name        : 'currency',
@@ -248,14 +240,12 @@ const fclControls = ({
 					options     : currencyOptions,
 					span        : 1.5,
 					placeholder : 'Curr...',
-					rules       : { required: 'currency is required' },
 				},
 				{
 					name        : 'price',
 					type        : 'number',
 					span        : 1.5,
 					placeholder : 'Price',
-					rules       : { required: 'price is required' },
 				},
 			],
 		},

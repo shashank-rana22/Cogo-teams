@@ -15,10 +15,15 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 		commodity = '', container_size = '', container_type = '', containers_count = '', inco_term = '',
 		cargo_readiness_date = '', free_days_detention_destination = '', bl_type = '', commodity_description = '',
 		schedule_departure = '', shipping_line = {}, preferred_shipping_lines, feedbacks = [], closing_remarks = [],
-		status = '', serial_id, selected_schedule_arrival, selected_schedule_departure, created_at,
-		preferred_freight_rate, preferred_freight_rate_currency,
-		payment_term,
+		status = '', serial_id, selected_schedule_arrival, selected_schedule_departure,
+		preferred_freight_rate, preferred_freight_rate_currency, commodity_type = '', price_type = '',
+		payment_term, booking_params = {}, preferred_airlines = [], operation_type = '', packages = [], volume, weight,
 	} = primary_service_detail || feedbackData || requestData || {};
+
+	const {
+		inco_term:booking_inco_term, packages_count:booking_packing_count,
+		cargo_weight_per_container,
+	} = booking_params || {};
 
 	const transitTime =	filter?.service === 'ftl_freight'
 		? shipment_data?.transit_time : differenceInDays(
@@ -32,17 +37,8 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 	};
 
 	const pillMapping = [
-		{
-			label: created_at && `Booked On ${formatDate({
-				date       : created_at,
-				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-				formatType : 'dateTime',
-				separator  : '/',
-			})}`,
-		},
-		{ label: summary?.serial_id && `Serial Id: ${summary?.serial_id}` },
-		{ label: serial_id && `Serial Id: ${serial_id}` },
+		{ label: summary?.serial_id && `Id: ${summary?.serial_id}` },
+		{ label: serial_id && `Id: ${serial_id}` },
 		{ label: commodity && startCase(commodity) },
 		{ label: container_size && `${container_size}ft` },
 		{ label: container_type && startCase(container_type) },
@@ -50,6 +46,71 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 		{ label: inco_term && startCase(inco_term) },
 		{ label: inco_term && startCase(INCO_TERM_MAPPING[inco_term]) },
 		{ label: payment_term && startCase(payment_term) },
+		{ label: operation_type && startCase(operation_type) },
+		{ label: commodity_type && startCase(commodity_type) },
+		{ label: price_type && startCase(`Price Type : ${price_type}`) },
+		{ label: booking_inco_term && startCase(booking_inco_term) },
+		{ label: cargo_weight_per_container && `${cargo_weight_per_container} MT` },
+		{ label: `${volume || 0} cbm` },
+		{ label: `Chargeable Weight: ${weight || '-'}` },
+		{ label: booking_packing_count && startCase(`packages count : ${booking_packing_count}`) },
+		{
+			label: packages.length > 0
+			&& (
+				packages.map((x) => (
+					<div style={{ display: 'flex' }} key={x.handling_type}>
+
+						<div>
+							Package Count:
+							{' '}
+							{x.packages_count}
+							{' '}
+							X
+						</div>
+						{x.handling_type && (
+							<div>
+								Handling Type:
+								{' '}
+								{x.handling_type}
+								{' '}
+								x
+							</div>
+						)}
+					&nbsp;
+						{x.packing_type
+					&& (
+						<div>
+							Packing Type:
+							{' '}
+							{x.packing_type}
+							{' '}
+							X
+						</div>
+					)}
+										&nbsp;
+
+						<div>
+							{x.height}
+							{' '}
+							X
+						</div>
+
+										&nbsp;
+						<div>
+							{x.width}
+							{' '}
+							X
+						</div>
+										&nbsp;
+						<div>
+							{x.length}
+							{' '}
+							X
+						</div>
+					</div>
+				))
+			),
+		},
 	];
 
 	const contentValuesMapping = [
@@ -132,6 +193,7 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 		preferred_shipping_lines,
 		preferred_freight_rate,
 		preferred_freight_rate_currency,
+		preferred_airlines,
 	};
 }
 
