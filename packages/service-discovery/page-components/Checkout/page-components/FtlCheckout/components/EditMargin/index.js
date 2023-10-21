@@ -24,7 +24,7 @@ function EditMargin({ state = '' }) {
 	const [noRatesPresent, setNoRatesPresent] = useState(false);
 
 	return (
-		<div>
+		<>
 			<BreakdownDetails
 				rateDetails={rateDetails}
 				setRateDetails={setRateDetails}
@@ -47,7 +47,7 @@ function EditMargin({ state = '' }) {
 				noRatesPresent={noRatesPresent}
 				state={state}
 			/>
-		</div>
+		</>
 	);
 }
 

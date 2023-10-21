@@ -1,10 +1,9 @@
-import { Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 
 import useShareModal from '../../../hooks/useShareModal';
 
-import Footer from './Footer';
-import Header from './Header';
 import List from './List';
+import styles from './styles.module.css';
 
 function ShareToUsersModal({
 	shareType = '',
@@ -40,7 +39,9 @@ function ShareToUsersModal({
 			<Modal.Header title="Share Rate Cards" />
 
 			<Modal.Body>
-				<Header />
+				<div className={styles.title}>
+					Select user from list below
+				</div>
 
 				<List
 					selectedId={selectedUser.id}
@@ -50,10 +51,15 @@ function ShareToUsersModal({
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Footer
+				<Button
+					type="button"
+					disabled={shareRateCardLoading}
 					onClick={handleSubmit(onCreate)}
-					loading={shareRateCardLoading}
-				/>
+					size="md"
+					themeType="accent"
+				>
+					Share
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);
