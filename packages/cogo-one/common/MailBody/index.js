@@ -5,8 +5,6 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import { getRecipientData } from '../../helpers/getRecipientData';
-import useCreateReplyAllDraft from '../../hooks/useCreateReplyAllDraft ';
-import useCreateReplyDraft from '../../hooks/useCreateReplyDraft';
 import useGetMailContent from '../../hooks/useGetMailContent';
 import useGetSignature from '../../hooks/useGetSignature';
 
@@ -108,9 +106,6 @@ function MailBody({
 
 	const { signature } = useGetSignature({ viewType });
 
-	const { createReplyAllDraft } = useCreateReplyAllDraft();
-	const { createReplyDraft } = useCreateReplyDraft();
-
 	const date = created_at ? formatDate({
 		date       : new Date(created_at),
 		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -132,8 +127,6 @@ function MailBody({
 		subject,
 		emailVia          : 'firebase_emails',
 		deleteMessage,
-		createReplyDraft,
-		createReplyAllDraft,
 		signature,
 		draftQuillBody,
 	});

@@ -46,6 +46,7 @@ function OrgSpecificRecipients({
 	recipientTypes = [],
 	emailState = {},
 	viewType = '',
+	restrictMailToSingle = false,
 }) {
 	const [activeTab, setActiveTab] = useState('users');
 	const isLeadUser = emailState?.orgData?.orgId === 'lead_users';
@@ -165,7 +166,7 @@ function OrgSpecificRecipients({
 				placeholder="Search user"
 				isClearable
 				onSearch={handleSearch}
-				disabled={!(emailState?.orgData?.orgId || emailState?.orgId)}
+				disabled={!restrictMailToSingle && !(emailState?.orgData?.orgId || emailState?.orgId)}
 				size="sm"
 				multiple
 				selectType="multi"
@@ -182,7 +183,7 @@ function OrgSpecificRecipients({
 					? emailRecipientType?.[GLOBAL_CONSTANTS.zeroth_index] || ''
 					: emailRecipientType || []}
 				optionsHeader={(
-					emailState?.orgData?.orgType?.includes('lead')
+					(emailState?.orgData?.orgType?.includes('lead') || restrictMailToSingle)
 						? null
 						: (
 							<CustomSelectHeader

@@ -6,7 +6,6 @@ import useReplyMail from '../hooks/useReplyMail';
 import useSaveDraft from '../hooks/useSaveDraft';
 import useSendOmnichannelMail from '../hooks/useSendOmnichannelMail';
 
-import getFormattedEmailBody from './getFormattedEmailBody';
 import getRenderEmailBody from './getRenderEmailBody';
 
 const LIMIT_FOR_BODY_PREVIEW = 200;
@@ -120,8 +119,6 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		// const isEmptyMail = getFormattedEmailBody({ emailState });
-
 		if (!subjectToSend) {
 			Toast.error('Subject is Required.');
 			return;
@@ -158,13 +155,6 @@ function useMailEditorFunctions({
 
 		if (uploading) {
 			Toast.error('Files are uploading...');
-			return;
-		}
-
-		const isEmptyMail = getFormattedEmailBody({ emailState });
-
-		if (isEmptyMail && isEmpty(attachments)) {
-			Toast.error('There is nothing in email body to save as draft');
 			return;
 		}
 

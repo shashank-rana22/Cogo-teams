@@ -6,12 +6,12 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
 const getSignatureText = ({ userName = '', designation = '', contactNumber = '' }) => (
 	`
-	<p>
-		<p>Regards</p>
-		<p>${userName}</p>
-		<p>${designation}</p>
-		<p>${contactNumber}</p>
-	</p>
+	<div>
+		<div>Regards</div>
+		<div>${userName}</div>
+		<div>${designation}</div>
+		<div>${contactNumber}</div>
+	</div>
 	`
 );
 

@@ -36,6 +36,7 @@ function Recipients({
 	showOrgSpecificMail = false,
 	hideFromMail = false,
 	viewType = '',
+	restrictMailToSingle = false,
 }) {
 	const [enabledRecipients, setEnabledRecipients] = useState({
 		ccrecipients  : !isEmpty(emailState?.ccrecipients),
@@ -56,7 +57,10 @@ function Recipients({
 					return null;
 				}
 
-				const ActiveRecipientComp = ACTIVE_RECIPIENTS_COMP?.[showOrgSpecificMail ? 'specific' : 'default'];
+				const ActiveRecipientComp = ACTIVE_RECIPIENTS_COMP?.[
+					(showOrgSpecificMail || (restrictMailToSingle && itm.value !== 'toUserEmail'))
+						? 'specific' : 'default'
+				];
 
 				return (
 					<div
@@ -86,6 +90,7 @@ function Recipients({
 								setEmailState={setEmailState}
 								recipientTypes={EMAIL_RECIPIENTS}
 								viewType={viewType}
+								restrictMailToSingle={restrictMailToSingle}
 							/>
 						</div>
 

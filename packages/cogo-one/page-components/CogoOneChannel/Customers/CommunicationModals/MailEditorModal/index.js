@@ -82,7 +82,17 @@ function MailEditorModal({
 		VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.permissions?.restrict_mail_to_organizations || false
 	);
 
-	const showOrgSpecificMail = buttonType === 'send_mail' && restrictMailToOrganizations;
+	const showOrgSpecificMail = (
+		buttonType === 'send_mail'
+			&& restrictMailToOrganizations
+			&& emailState?.mailView === 'orgSpecific'
+	);
+
+	const restrictMailToSingle = (
+		buttonType === 'send_mail'
+			&& restrictMailToOrganizations
+			&& !emailState?.mailView
+	);
 
 	const userActiveMails = useMemo(
 		() => (
@@ -165,7 +175,6 @@ function MailEditorModal({
 						setMinimizeModal={setMinimizeModal}
 						resetEmailState={resetEmailState}
 						sendLoading={sendLoading}
-						showOrgSpecificMail={showOrgSpecificMail}
 						hideFromMail={hideFromMail}
 						userActiveMails={userActiveMails}
 						activeMailAddress={emailState?.from_mail || activeMailAddress}
@@ -192,6 +201,7 @@ function MailEditorModal({
 						uploading={uploading}
 						mailProps={mailProps}
 						showOrgSpecificMail={showOrgSpecificMail}
+						restrictMailToSingle={restrictMailToSingle}
 					/>
 				) : (
 					<EmailTemplateList

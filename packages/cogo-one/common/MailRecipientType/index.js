@@ -19,6 +19,7 @@ function MailRecipientType({
 	handleKeyPress = () => {},
 	handleCancel = () => {},
 	handleEdit = () => {},
+	restrictMailToSingle = false,
 }) {
 	const [newEmailInput, setNewEmailInput] = useState('');
 
@@ -41,6 +42,7 @@ function MailRecipientType({
 						email={data}
 						handleDelete={handleDelete}
 						type={type}
+						restrictMailToSingle={restrictMailToSingle}
 					/>
 				),
 			)}
@@ -95,13 +97,15 @@ function MailRecipientType({
 				</Popover>
 			)}
 
-			<div
-				className={styles.add_icon}
-				onClick={() => handleEdit({ type, setNewEmailInput })}
-				role="presentation"
-			>
-				+
-			</div>
+			{(!restrictMailToSingle || (restrictMailToSingle && !emailRecipientType.length)) ? (
+				<div
+					className={styles.add_icon}
+					onClick={() => handleEdit({ type, setNewEmailInput })}
+					role="presentation"
+				>
+					+
+				</div>
+			) : null}
 		</div>
 	);
 }
