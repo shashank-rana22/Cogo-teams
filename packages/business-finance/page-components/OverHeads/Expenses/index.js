@@ -13,6 +13,7 @@ import Filter from '../../commons/Filters';
 import SegmentedControl from '../../commons/SegmentedControl';
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import List from '../commons/List';
+import TabStat from '../commons/TabStat';
 import {
 	nonRecurringFilters,
 	recurringFilters,
@@ -37,9 +38,18 @@ const DEFAULT_COUNT = 1;
 
 const MIN_AMOUNT = 0;
 
+const TABS = [
+	{ label: 'All Invoices', value: 'ALL_INVOICES' },
+	{ label: 'IM Requested', value: 'LOCKED' },
+	{ label: 'Approved', value: 'FINANCE_ACCEPTED' },
+	{ label: 'IM Rejected', value: 'IM_REJECTED' },
+	{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
+];
+
 function ExpenseComponent() {
 	const [recurringState, setRecurringState] = useState('recurring');
 	const [createExpenseType, setCreateExpenseType] = useState('');
+	const [subActiveTab, setSubActiveTab] = useState('ALL_INVOICES');
 	const [showModal, setShowModal] = useState(false);
 	const [showWarning, setShowWarning] = useState(false);
 	const [showExpenseModal, setShowExpenseModal] = useState(false);
@@ -62,11 +72,22 @@ function ExpenseComponent() {
 
 	const geo = getGeoConstants();
 
-	const { getList, listData, listLoading } = useListExpense({
+	const {
+		getList = () => {},
+		listData = {},
+		listLoading = false,
+	} = useListExpense({
+		subActiveTab,
 		expenseFilters,
 		sort,
 	});
-	const { getRecurringList, recurringListData, recurringListLoading } =	useListExpenseConfig({ expenseFilters, sort });
+
+	const {
+		getRecurringList = () => {},
+		recurringListData = {},
+		recurringListLoading = false,
+	} = useListExpenseConfig({ expenseFilters, sort });
+
 	const { sendMail, loading: mailLoading } = useSendEmail();
 	const { sendOverheadExpense } = useSendOverheadExpense();
 
@@ -600,6 +621,20 @@ function ExpenseComponent() {
 					background="#FFFAEB"
 				/>
 			</div>
+			{recurringState === 'nonRecurring' ? (
+				<div className={styles.stats_container}>
+					{TABS.map(({ label, value }) => (
+						<TabStat
+							name={label}
+							isActive={subActiveTab === value}
+							key={value}
+							number={listData?.stats?.[value] || '-'}
+							value={value}
+							setSubActiveTab={setSubActiveTab}
+						/>
+					))}
+				</div>
+			) : null}
 			<div className={styles.styled_div}>
 				{RenderHeaders()}
 				<List
