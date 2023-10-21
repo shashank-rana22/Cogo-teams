@@ -1,15 +1,20 @@
 import { cl, Select } from '@cogoport/components';
-// import { IcMArrowRotateLeft, IcMArrowRotateRight } from '@cogoport/icons-react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function FileViewer({ verifyAccount = {}, documentOptions = {}, selectDoc = {}, setSelectDoc = () => {} }) {
+function FileViewer({ verifyAccount = {}, documentOptions = [], selectDoc = {}, setSelectDoc = () => {} }) {
 	const {
 		showAccountDetails = false,
-		// accountData = {},
 	} = verifyAccount || {};
 
 	const { docUrl = '', docType = '' } = selectDoc || {};
+
+	if (isEmpty(documentOptions) && showAccountDetails) {
+		return null;
+	}
 
 	return (
 		<div className={cl`${!showAccountDetails ? styles.full_screen : styles.viewer}`}>
@@ -20,29 +25,26 @@ function FileViewer({ verifyAccount = {}, documentOptions = {}, selectDoc = {}, 
 				size="sm"
 				placeholder="Select document type"
 			/>
-			<div className={styles.content}>
-				{/* <div className={styles.top_section}>
-					{DOCUMENT_OPTIONS.map((item) => (
-						<div key={item?.value} className={styles.preview_docs}>
-							<object
-								type="application/pdf"
-								data={item?.url}
-								width={100}
-								height={108}
-								aria-label="PDF document"
-							/>
-						</div>
-					))}
-				</div> */}
-				{/* <div className={styles.preview}> */}
-				<iframe
-					loading="lazy"
-					src={docUrl}
-					width={showAccountDetails ? 734 : 765}
-					height={showAccountDetails ? 460 : 408}
-					title="PDF document"
-				/>
-			</div>
+			{!docType ? (
+				<div className={styles.empty}>
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.empty_state_margins_url}
+						width={150}
+						height={150}
+						alt="empty"
+					/>
+				</div>
+			) : (
+				<div className={styles.content}>
+					<iframe
+						loading="lazy"
+						src={docUrl}
+						width={showAccountDetails ? 734 : 765}
+						height={showAccountDetails ? 460 : 408}
+						title="PDF document"
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

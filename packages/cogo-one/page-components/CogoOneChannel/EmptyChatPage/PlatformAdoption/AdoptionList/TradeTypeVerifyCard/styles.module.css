@@ -113,8 +113,13 @@
 }
 
 .request_name {
-	display: flex;
-	align-items: center;
+	/* display: flex;
+	align-items: center; */
+	align-self: center;
+	width: 62%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .source {

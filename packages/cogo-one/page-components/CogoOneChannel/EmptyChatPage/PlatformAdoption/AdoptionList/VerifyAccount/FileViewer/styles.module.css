@@ -4,7 +4,7 @@
 
 	:global {
 		.ui_select_container {
-			width: 50%;
+			width: 40%;
 			margin-bottom: 18px;
 		}
 	}
@@ -16,7 +16,7 @@
 
 	:global {
 		.ui_select_container {
-			width: 50%;
+			width: 40%;
 			margin-bottom: 18px;
 		}
 	}
@@ -28,4 +28,11 @@
 
 	/* height: 100%; */
 	background: #262a35;
+}
+
+.empty {
+	display: flex;
+	align-self: center;
+	justify-content: center;
+	width: 100%;
 }

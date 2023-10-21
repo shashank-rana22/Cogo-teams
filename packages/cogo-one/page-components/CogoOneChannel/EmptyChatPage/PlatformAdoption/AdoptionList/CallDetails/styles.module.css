@@ -90,6 +90,14 @@
 	font-size: 12px;
 }
 
+.agent_name {
+	align-self: center;
+	width: 57%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .comment {
 	display: flex;
 	flex-wrap: wrap;

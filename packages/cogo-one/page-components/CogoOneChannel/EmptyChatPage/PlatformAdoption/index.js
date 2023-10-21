@@ -4,9 +4,11 @@ import { useState } from 'react';
 
 import useGetUnreadMailsCount from '../../../../hooks/useGetUnreadMailsCount';
 import useGetUnreadMessagesCount from '../../../../hooks/useGetUnreadMessagesCount';
+import useListOmnichannelOnboardingRequests from '../../../../hooks/useListOmnichannelOnboardingRequests';
 
 import AdoptionList from './AdoptionList';
 import FilterSection from './FilterSection';
+import Loader from './Loader';
 import styles from './styles.module.css';
 
 function PlatformAdoption({
@@ -19,7 +21,7 @@ function PlatformAdoption({
 	const [verifyAccount, setVerifyAccount] = useState({
 		show               : false,
 		showAccountDetails : false,
-		accountData        : {},
+		accountData        : [],
 	});
 
 	const { unReadChatsCount } = useGetUnreadMessagesCount({
@@ -37,6 +39,11 @@ function PlatformAdoption({
 		userSharedMails,
 	});
 
+	const { loading = false, data = {} } = useListOmnichannelOnboardingRequests();
+
+	const { list, ...rest } = data || {};
+	const { page, page_limit, total_count } = rest || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_section}>
@@ -53,13 +60,20 @@ function PlatformAdoption({
 				platformTab={platformTab}
 				setPlatformTab={setPlatformTab}
 			/>
-			<AdoptionList mailProps={mailProps} setVerifyAccount={setVerifyAccount} verifyAccount={verifyAccount} />
+			{loading ? <Loader /> : (
+				<AdoptionList
+					mailProps={mailProps}
+					setVerifyAccount={setVerifyAccount}
+					verifyAccount={verifyAccount}
+					list={list}
+				/>
+			)}
 			<div className={styles.pagination_info}>
 				<Pagination
 					type="number"
-					currentPage={1}
-					totalItems={30}
-					pageSize={6}
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={page_limit}
 				/>
 			</div>
 		</div>

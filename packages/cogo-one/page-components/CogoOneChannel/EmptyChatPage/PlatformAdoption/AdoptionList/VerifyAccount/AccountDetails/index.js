@@ -1,12 +1,12 @@
-import { Checkbox } from '@cogoport/components';
+import { Checkbox, cl } from '@cogoport/components';
 
 import AgentAvatar from '../../../../../../../common/AgentAvatar';
 
 import styles from './styles.module.css';
 
-function AccountDetails() {
+function AccountDetails({ hasDocument = false }) {
 	return (
-		<div className={styles.full_section}>
+		<div className={cl`${hasDocument ? styles.only_data : styles.full_section}`}>
 			<div className={styles.user_info}>
 				<AgentAvatar text="Cogoport" />
 				<div className={styles.org_details}>

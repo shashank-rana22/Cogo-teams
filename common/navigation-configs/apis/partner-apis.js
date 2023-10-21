@@ -13098,6 +13098,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'list_omnichannel_onboarding_requests',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_organization_pocs',
 			access_type  : 'private',
 			service_name : 'organization',

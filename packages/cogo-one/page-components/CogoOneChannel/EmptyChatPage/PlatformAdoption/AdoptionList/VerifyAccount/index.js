@@ -1,35 +1,23 @@
-/* eslint-disable max-len */
 import { Modal, Button, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AccountDetails from './AccountDetails';
 import FileViewer from './FileViewer';
 import styles from './styles.module.css';
 
-const DOCUMENT = [
-	{
-		image_url     : 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-		document_type : 'dummy.pdf',
-	},
-	{
-		image_url     : 'https://cogoport-production.sgp1.digitaloceanspaces.com/9c919e884e651b4e58ffee79479c8a23/GST%20CERTIFICATE%20PAGE-1.pdf',
-		document_type : 'gst.pdf',
-	},
-];
-
 function VerifyAccount({ verifyAccount = {}, setVerifyAccount = () => {} }) {
 	const {
 		show = false,
 		showAccountDetails = false,
-		// accountData = {},
+		accountData = [],
 	} = verifyAccount || {};
 
-	const DOCUMENT_OPTIONS = (DOCUMENT || []).map((itm) => ({
+	const DOCUMENT_OPTIONS = (accountData || []).map((itm) => ({
 		label : startCase(itm?.document_type),
 		value : itm?.document_type,
-		url   : itm?.image_url,
+		url   : itm?.document_url,
 	}));
 
 	const [selectDoc, setSelectDoc] = useState({
@@ -37,16 +25,22 @@ function VerifyAccount({ verifyAccount = {}, setVerifyAccount = () => {} }) {
 		docUrl  : DOCUMENT_OPTIONS?.[GLOBAL_CONSTANTS?.zeroth_index]?.url,
 	});
 
+	const hasDocument = isEmpty(accountData);
+
+	const handleClose = () => {
+		setSelectDoc({ docType: null, docUrl: null });
+		setVerifyAccount({ show: false, accountData: [], showAccountDetails: false });
+	};
+
 	return (
 		<Modal
 			size="lg"
 			show={show}
 			scroll={false}
-			onClose={() => {
-				setVerifyAccount({ show: false, accountData: {}, showAccountDetails: false });
-			}}
-			className={cl`${!showAccountDetails ? styles.only_docs : styles.with_docs}`}
+			onClose={handleClose}
+			className={cl`${!showAccountDetails || hasDocument ? styles.only_docs : styles.with_docs}`}
 			placement="top"
+			closeOnOuterClick={handleClose}
 		>
 			<Modal.Header title="KYC Documents Verification" />
 			<Modal.Body>
@@ -57,7 +51,9 @@ function VerifyAccount({ verifyAccount = {}, setVerifyAccount = () => {} }) {
 						selectDoc={selectDoc}
 						setSelectDoc={setSelectDoc}
 					/>
-					{showAccountDetails ? <AccountDetails /> : null}
+					{/* )} */}
+
+					{showAccountDetails ? <AccountDetails hasDocument={hasDocument} /> : null}
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
