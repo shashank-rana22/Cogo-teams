@@ -112,6 +112,15 @@ export const employmentInfo = [
 			{ label: 'PMS', key: 'details', value: 'Set C' },
 		],
 	},
+	{
+		heading : 'JOB SQUADS',
+		details : [
+			{ label: 'Chapter Name', key: 'employee_squad', value: 'chapter_name', isStartCase: true },
+			{ label: 'Squad Name', key: 'employee_squad', value: 'squad_name', isStartCase: true },
+			{ label: 'Sub Chapter Name', key: 'employee_squad', value: 'sub_chapter_name', isStartCase: true },
+			{ label: 'Tribe Name', key: 'employee_squad', value: 'tribe_name', isStartCase: true },
+		],
+	},
 ];
 
 export const statutoryInfo = {
