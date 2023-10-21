@@ -20,7 +20,7 @@ function RenderData({
 	const [allowed, setAllowed] = useState(true);
 
 	if (active === 'merge_documents') {
-		return <MergeDocuments setActive={setActive} allowed={allowed} setAllowed={setAllowed} />;
+		return <MergeDocuments setActive={setActive} allowed={allowed} setAllowed={setAllowed} setBLData={setBLData} />;
 	}
 	if (active === 'invoice_bl_check') {
 		return <InvoiceBLCheck setActive={setActive} bLData={bLData} allowed={allowed} setAllowed={setAllowed} />;

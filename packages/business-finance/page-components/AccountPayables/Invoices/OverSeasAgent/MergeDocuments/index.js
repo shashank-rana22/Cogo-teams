@@ -2,7 +2,7 @@ import { Button, Placeholder, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete } from '@cogoport/icons-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import List from '../../../../commons/List/index';
 import useDeletePayrunInvoice from '../../hooks/useDeletePayrunInvoice';
@@ -22,7 +22,7 @@ const SUBSTRING_CONDITON_MAX = 15;
 const SUBSTRING_CONDITON_MIN = 0;
 const TAGGED_DOC_CONDITION = 4;
 
-function MergeDocuments({ setActive = () => {}, allowed = true, setAllowed = () => {} }) {
+function MergeDocuments({ setActive = () => {}, allowed = true, setAllowed = () => {}, setBLData = () => {} }) {
 	const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 	const [selectBankShow, setSelectBankShow] = useState(false);
 
@@ -59,10 +59,16 @@ function MergeDocuments({ setActive = () => {}, allowed = true, setAllowed = () 
 		setSelectBankShow(true);
 	};
 
-	useEffect(() => {
+	const allowedCheck = useCallback(() => {
+		setBLData(data);
 		const isTagged = checkShipmentPdfUrl && billPdfUrl;
 		setSelectBankShow(isTagged);
-	}, [data, checkShipmentPdfUrl, billPdfUrl]);
+		setAllowed(!isTagged);
+	}, [data, setBLData, checkShipmentPdfUrl, billPdfUrl, setAllowed]);
+
+	useEffect(() => {
+		allowedCheck();
+	}, [allowedCheck]);
 
 	const FUNCTIONS = {
 		renderTrashInvoice: (itemData) => {
