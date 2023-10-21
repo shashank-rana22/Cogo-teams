@@ -2,6 +2,7 @@ import { Loader, Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import EmptyState from '../../../../common/EmptyStateMargins';
 import useGetEntityMargin from '../../../../hooks/useGetEntityMargin';
 
 import getColumns from './getColumns';
@@ -12,17 +13,7 @@ function ViewEntityMargin({ showModal = {}, service = '' }) {
 		service,
 	});
 
-	const {
-		margin_slabs = [
-			{
-				type        : 'percentage',
-				value       : 15,
-				lower_limit : 20,
-				upper_limit : 40,
-				currency    : 'USD',
-			},
-		],
-	} = data?.margin || {};
+	const { margin_slabs = [] } = data?.margin || {};
 
 	const columns = getColumns();
 
@@ -41,9 +32,7 @@ function ViewEntityMargin({ showModal = {}, service = '' }) {
 
 	if (isEmpty(margin_slabs)) {
 		return (
-			<div style={{ justifyContent: 'center', alignItems: 'center' }}>
-				No Record Found, kindly create first
-			</div>
+			<EmptyState emptyDataText="No Record Found, Kindly Create" />
 		);
 	}
 	return (

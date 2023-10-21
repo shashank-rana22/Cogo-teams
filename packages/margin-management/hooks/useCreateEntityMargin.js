@@ -36,7 +36,7 @@ function useCreateEntityMargin({
 				action: 'view',
 			}));
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.error));
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 

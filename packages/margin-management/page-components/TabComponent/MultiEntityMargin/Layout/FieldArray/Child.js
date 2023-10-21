@@ -1,6 +1,5 @@
 import { ButtonIcon } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import FormElement from '../FormElement';
@@ -11,7 +10,6 @@ import getTotalFields from './getTotalFields';
 import styles from './styles.module.css';
 
 const NO_OF_ELEMENTS_TO_BE_REMOVED = 1;
-const INCREMENT_BY_ONE = 1;
 const TOTAL_SPAN = 12;
 
 function Child({
@@ -27,7 +25,8 @@ function Child({
 	formValues = {},
 	showElements = {},
 	watch = () => { },
-	setValue = () => {},
+	setValue = () => { },
+	showLabelOnce = true,
 }) {
 	const disableUpperLimit = watch(`${name}`)?.length;
 
@@ -38,9 +37,7 @@ function Child({
 	const limit_currency = watch(`${name}.0.limit_currency`);
 
 	useEffect(() => {
-		if (index === 0) {
-			setValue(`${name}.${index}.lower_limit`, 0);
-		} else if (index > 0) {
+		if (index > 0) {
 			setValue(
 				`${name}.${index}.lower_limit`,
 				Number(prevSlabUpperLimit) + 1,
@@ -56,15 +53,11 @@ function Child({
 
 	return (
 		<div key={field.id} className={styles.child}>
-			<div className={styles.heading}>
-				{`${startCase(name || 'document')} ${index + INCREMENT_BY_ONE}`}
-			</div>
-
 			<div className={styles.row_flex}>
 				{Object.keys(total_fields).map((rowFields) => (
 					<div className={styles.row} key={rowFields}>
 						{controls.map((controlItem) => {
-							const { span, name:ctrlItemName } = controlItem || {};
+							const { span, name: ctrlItemName } = controlItem || {};
 
 							const flex = getWidthPercent(span || TOTAL_SPAN);
 							const element_name = `${name}.${index}.${ctrlItemName}`;
@@ -111,9 +104,11 @@ function Child({
 
 							return (
 								<div className={styles.element} style={{ width: `${flex}%` }} key={ctrlItemName}>
-									<h4 className={styles.label}>
-										{newControlItem?.label}
-									</h4>
+									{showLabelOnce && index === 0 ? (
+										<h4 className={styles.label}>
+											{newControlItem?.label}
+										</h4>
+									) : null}
 
 									<FormElement
 										{...newControlItem}

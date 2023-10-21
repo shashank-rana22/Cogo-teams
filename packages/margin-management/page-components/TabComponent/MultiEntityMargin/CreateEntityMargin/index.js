@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 
 import useCreateEntityMargin from '../../../../hooks/useCreateEntityMargin';
-// import useGetEntityMargin from '../../../../hooks/useGetEntityMargin';
+import useGetEntityMargin from '../../../../hooks/useGetEntityMargin';
 import Layout from '../Layout';
 
 import entityMarginControls from './controls';
@@ -19,7 +19,7 @@ function CreateEntityMargin(
 ) {
 	const { entities = [] } = showModal || {};
 
-	// const { data = {} } = useGetEntityMargin({ showModal, service });
+	const { data = {}, loading = false } = useGetEntityMargin({ showModal, service });
 
 	const {
 		// fields,
@@ -61,6 +61,14 @@ function CreateEntityMargin(
 
 	useImperativeHandle(ref, () => ({ submitFun: handleSubmit(createEntityMargin) }));
 
+	useEffect(() => {
+		const defaultSlabValues = (data?.margin?.margin_slabs || []).map((singleSlab) => ({
+			...singleSlab,
+			limit_currency: singleSlab?.currency,
+		}));
+		setValue('margin_slabs', defaultSlabValues);
+	}, [data?.margin?.margin_slabs, setValue]);
+
 	return (
 		<Layout
 			controls={entityMarginControls}
@@ -72,6 +80,7 @@ function CreateEntityMargin(
 			setValue={setValue}
 			formValues={formValues}
 			validateInputs={validateInputs}
+			key={loading}
 		/>
 	);
 }

@@ -18,10 +18,7 @@ function MarginForm({ showModal = {}, setShowModal = () => { } }, ref) {
 		entities = [],
 		action = '',
 		activeService = '',
-		// serviceOptions,
 	} = showModal || {};
-
-	// const [service, setService] = useState(activeService || 'fcl_freight');
 
 	const fromEntity = entities[GLOBAL_CONSTANTS.zeroth_index]?.business_name || '';
 	const toEntity = entities[1]?.business_name || '';
@@ -33,11 +30,9 @@ function MarginForm({ showModal = {}, setShowModal = () => { } }, ref) {
 				<div className={styles.EntityNames}>
 					<div className={styles.EntityName}>
 						{fromEntity}
-						{' '}
 					</div>
 					{' TO '}
 					<div className={styles.EntityName}>
-						{' '}
 						{toEntity}
 					</div>
 				</div>
@@ -52,12 +47,14 @@ function MarginForm({ showModal = {}, setShowModal = () => { } }, ref) {
 					</Button>
 				</div>
 			</div>
-			<Component
-				showModal={showModal}
-				setShowModal={setShowModal}
-				service={activeService}
-				ref={ref}
-			/>
+			<div style={{ flex: 1 }}>
+				<Component
+					showModal={showModal}
+					setShowModal={setShowModal}
+					service={activeService}
+					ref={ref}
+				/>
+			</div>
 		</div>
 	);
 }

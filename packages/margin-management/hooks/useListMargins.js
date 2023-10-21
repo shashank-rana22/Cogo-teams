@@ -5,8 +5,11 @@ import toastApiError from '../utils/toastApiError';
 
 const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
 	const [data, setData] = useState({});
+
 	const [filterParams, setFilterParams] = useState({ ...(defaultFilters || {}) });
+
 	const { page = 1, ...restFilters } = (filterParams || {});
+
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/list_margins',
@@ -21,6 +24,7 @@ const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
 		},
 		{ manual: true },
 	);
+
 	const apiTrigger = useCallback(async () => {
 		try {
 			const res = await trigger();

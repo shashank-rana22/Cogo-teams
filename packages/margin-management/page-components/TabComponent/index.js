@@ -4,15 +4,20 @@ import { isEmpty } from '@cogoport/utils';
 import { useMemo, useCallback } from 'react';
 
 import EmptyState from '../../common/EmptyStateMargins';
+// import SERVICE_NAME_MAPPING from '../../helpers/service-name-mapping';
 import conditions from '../../utils/condition-constants';
 
 import CardComponent from './CardComponent';
 import Details from './Details';
 import MultiEntityMargin from './MultiEntityMargin';
+// import SegmentedControlHeader from './SegmentedControlHeader';
 
 function TabComponent({
 	filterParams = {},
-	setFilterParams = () => { }, data = {}, setMarginBreakupData = () => { }, activeTab = '',
+	setFilterParams = () => { },
+	data = {},
+	setMarginBreakupData = () => { },
+	activeTab = '',
 	setActivetab = () => { },
 	activeService = '',
 	setActiveService = () => { },
@@ -46,6 +51,21 @@ function TabComponent({
 			setFilterParams({ ...filterParams, status: val, margin_type: 'demand' });
 		} else setFilterParams({ ...filterParams, margin_type: val, status: 'active' });
 	};
+
+	// const segmentedControlOptions = (
+	// 	activeTab === 'approval_pending' ? data?.list || [] : data?.margin_stats || []
+	// ).map((service) => ({
+	// 	label : SERVICE_NAME_MAPPING[service?.service],
+	// 	value : service?.service,
+	// }));
+
+	// const modifiedTabOptions = Object.keys(SERVICE_NAME_MAPPING).map((key) => {
+	// 	const i = (segmentedControlOptions || []).find((obj) => obj?.value === key);
+	// 	if (!i) {
+	// 		return null;
+	// 	}
+	// 	return { label: SERVICE_NAME_MAPPING[key], value: i.value };
+	// });
 
 	return (
 		<div>

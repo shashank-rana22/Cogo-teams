@@ -36,7 +36,7 @@ function useGetMultiEntityMargin() {
 			const payload = getPayload(values);
 			console.log('payload:: ', payload);
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.error));
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 

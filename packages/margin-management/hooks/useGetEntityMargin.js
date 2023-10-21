@@ -28,7 +28,9 @@ function useGetEntityMargin({ showModal = {}, service = '' }) {
 
 			await trigger({ params });
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.error));
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data));
+			}
 		}
 	}, [fromEntityId, toEntityId, service, trigger]);
 

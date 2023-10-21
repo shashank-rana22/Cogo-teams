@@ -40,6 +40,7 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, f
 		<div className={styles.field_array}>
 			{fields.map((field, index) => (
 				<Child
+					{...rest}
 					key={field.id}
 					remove={remove}
 					field={field}
@@ -56,7 +57,7 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, f
 			))}
 
 			{showButtons ? (
-				<div>
+				<div className={styles.button_container}>
 					<Button
 						size="sm"
 						onClick={() => handleAppendChild()}
