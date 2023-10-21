@@ -8,9 +8,9 @@ const useGetCallPriority = ({ entityCode = '' }) => {
 		trigger,
 	] = useRequestBf(
 		{
-			url     : '/payments/outstanding/by-customer',
+			url     : '/payments/outstanding/by-customer-v2',
 			method  : 'get',
-			authKey : 'get_payments_outstanding_by_customer',
+			authKey : 'get_payments_outstanding_by_customer_v2',
 		},
 		{ manual: true },
 	);

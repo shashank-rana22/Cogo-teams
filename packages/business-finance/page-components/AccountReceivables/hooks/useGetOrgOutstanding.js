@@ -16,7 +16,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 
 	const [queryKey, setQueryKey] = useState('q');
 	const [orderBy, setOrderBy] = useState({
-		key   : 'totalOutstandingLedgerAmount',
+		key   : 'totalOutstanding',
 		order : 'Desc',
 		label : 'Total Outstanding Amount',
 	});
@@ -34,9 +34,9 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : '/payments/outstanding/by-customer',
+			url     : '/payments/outstanding/by-customer-v2',
 			method  : 'get',
-			authKey : 'get_payments_outstanding_by_customer',
+			authKey : 'get_payments_outstanding_by_customer_v2',
 		},
 		{ manual: true },
 	);

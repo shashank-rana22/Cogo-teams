@@ -1,4 +1,5 @@
 import { Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMLcl } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -7,9 +8,9 @@ import PopoverContent from '../PopoverContent';
 import styles from './styles.module.css';
 
 function PopoverTags({ data = {}, loading = false, handleClick = () => {}, item = {} }) {
-	const { kam = {}, creditController = {}, salesAgent = {} } = item || {};
+	const { kam = [], creditController = [], salesAgent = [] } = item || [];
 
-	const { id = '', name = '', email = '' } = kam;
+	const { id = '', name = '', email = '' } = kam[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	return (
 		<div className={styles.details}>
@@ -37,7 +38,7 @@ function PopoverTags({ data = {}, loading = false, handleClick = () => {}, item 
 				</div>
 			) : null}
 
-			{salesAgent?.name ? (
+			{salesAgent[GLOBAL_CONSTANTS.zeroth_index]?.name ? (
 				<div className={styles.main_div}>
 					<Popover
 						placement="left"
@@ -48,7 +49,7 @@ function PopoverTags({ data = {}, loading = false, handleClick = () => {}, item 
 					>
 						<div className={styles.icon_wrapper}>
 							<IcMLcl
-								onClick={() => handleClick(salesAgent?.id)}
+								onClick={() => handleClick(salesAgent[GLOBAL_CONSTANTS.zeroth_index]?.id)}
 							/>
 						</div>
 					</Popover>
@@ -57,17 +58,17 @@ function PopoverTags({ data = {}, loading = false, handleClick = () => {}, item 
 						<div className={styles.tag_texts}>
 							AGENT :
 							<div className={styles.tag_text}>
-								{salesAgent?.name || '-'}
+								{salesAgent[GLOBAL_CONSTANTS.zeroth_index]?.name || '-'}
 							</div>
 						</div>
 						<div className={styles.tag_text}>
-							{salesAgent?.email || '-'}
+							{salesAgent[GLOBAL_CONSTANTS.zeroth_index]?.email || '-'}
 						</div>
 					</div>
 				</div>
 			) : null}
 
-			{creditController?.name ? (
+			{creditController[GLOBAL_CONSTANTS.zeroth_index]?.name ? (
 				<div className={styles.main_div}>
 					<Popover
 						render={
@@ -78,7 +79,7 @@ function PopoverTags({ data = {}, loading = false, handleClick = () => {}, item 
 					>
 						<div className={styles.icon_wrapper}>
 							<IcMLcl
-								onClick={() => handleClick(creditController?.id)}
+								onClick={() => handleClick(creditController[GLOBAL_CONSTANTS.zeroth_index]?.id)}
 							/>
 						</div>
 					</Popover>
@@ -86,12 +87,12 @@ function PopoverTags({ data = {}, loading = false, handleClick = () => {}, item 
 						<div className={styles.tag_texts}>
 							CC :
 							<div className={styles.tag_text}>
-								{creditController?.name || '-'}
+								{creditController[GLOBAL_CONSTANTS.zeroth_index]?.name || '-'}
 							</div>
 						</div>
 
 						<div className={styles.tag_text}>
-							{creditController?.email || '-'}
+							{creditController[GLOBAL_CONSTANTS.zeroth_index]?.email || '-'}
 						</div>
 					</div>
 				</div>

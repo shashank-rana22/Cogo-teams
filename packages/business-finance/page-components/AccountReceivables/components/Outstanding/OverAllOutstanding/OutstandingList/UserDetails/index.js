@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateLeft, IcMProfile } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -6,11 +7,24 @@ import styles from './styles.module.css';
 
 function UserDetails({ item = {} }) {
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
-	const { kam = {}, salesAgent = {}, creditController = {} } = item || {};
+	const { kam = [], creditController = [], salesAgent = [] } = item || [];
+	// const { kam = {}, salesAgent = {}, creditController = {} } = item || {};
 	const data = [
-		{ stakeholder_type: 'KAM Owner', email: kam?.email, name: kam?.name },
-		{ stakeholder_type: 'AGENT', email: salesAgent?.email, name: salesAgent?.name },
-		{ stakeholder_type: 'CC', email: creditController?.email, name: creditController?.name },
+		{
+			stakeholder_type : 'KAM Owner',
+			email            : kam[GLOBAL_CONSTANTS.zeroth_index]?.email,
+			name             : kam[GLOBAL_CONSTANTS.zeroth_index]?.name,
+		},
+		{
+			stakeholder_type : 'AGENT',
+			email            : salesAgent[GLOBAL_CONSTANTS.zeroth_index]?.email,
+			name             : salesAgent[GLOBAL_CONSTANTS.zeroth_index]?.name,
+		},
+		{
+			stakeholder_type : 'CC',
+			email            : creditController[GLOBAL_CONSTANTS.zeroth_index]?.email,
+			name             : creditController[GLOBAL_CONSTANTS.zeroth_index]?.name,
+		},
 	];
 	const allEmpty = data.every((el) => !el.email && !el.name);
 	return (

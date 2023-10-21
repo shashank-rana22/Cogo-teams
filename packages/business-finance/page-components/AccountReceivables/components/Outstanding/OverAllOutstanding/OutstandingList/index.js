@@ -34,18 +34,16 @@ function OutstandingList({
 			setIsAccordionActive(true);
 		}
 	};
-
 	const {
 		businessName,
 		collectionPartyType = [],
 		serialId,
 		countryCode,
 		organizationSerialId,
-		lastUpdatedAt,
+		lastUpdatedAt, // not there
 		selfOrganizationName,
 		selfOrganizationId = '',
 	} = item;
-
 	const propsData = {
 		invoice_details: {
 			organizationId,
