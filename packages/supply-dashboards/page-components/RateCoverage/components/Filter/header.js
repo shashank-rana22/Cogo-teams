@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function HeaderCompoment({
-	setSerialId = () => {}, setFilter = () => {},
+	setFilter = () => {},
 	setShowWeekData = () => {},
 }) {
 	const handleClick = () => {
@@ -19,8 +19,9 @@ function HeaderCompoment({
 			value             : '',
 			revert            : '',
 			opt               : '',
+			serial_id         : '',
+			trade_type        : '',
 		});
-		setSerialId('');
 		setShowWeekData(false);
 	};
 	return (

@@ -8,6 +8,10 @@ import { SERVICE_ICON_MAPPING } from '../../../../configurations/helpers/constan
 import styles from './styles.module.css';
 
 function CardContent({ data = {}, filter = {}, service = {} }) {
+	const {
+		shipping_line = {}, airline = {}, service_provider = {}, serial_id = {},
+		assigned_to = {}, closed_by = {}, created_at = {},
+	} = data || {};
 	return (
 		<div className={styles.header}>
 			<div className={styles.top_left_details}>
@@ -19,47 +23,47 @@ function CardContent({ data = {}, filter = {}, service = {} }) {
 				<div>
 					<Pill size="md" color="green">
 						{['air_freight', 'air_customs']?.includes(filter?.service) ? 'Air Line:' : 'Shipping Line:'}
-						{data?.shipping_line?.short_name || data?.airline?.short_name}
+						{shipping_line?.short_name || airline?.short_name}
 					</Pill>
 				</div>
 				<div className={styles.vertical_line} />
 				<div>
-					{data?.service_provider?.business_name || data?.service_provider?.name}
+					{service_provider?.business_name || service_provider?.name}
 				</div>
 			</div>
 			<div className={styles.pill_container}>
-				{data?.serial_id
+				{serial_id
 					&& (
 						<div className={styles.pill}>
 							<Pill size="md" color="#ffe7d5">
 								<span>
 									TID :
 									{' '}
-									{data?.serial_id}
+									{serial_id}
 								</span>
 							</Pill>
 						</div>
 					)}
-				{data?.assigned_to?.name
+				{assigned_to?.name
 					&& (
 						<div className={styles.pill}>
 							<Pill size="md" color="#EEF0F0">
 								<span>
 									Assigned to :
 									{' '}
-									{data?.assigned_to?.name}
+									{assigned_to?.name}
 								</span>
 							</Pill>
 						</div>
 					)}
-				{data?.closed_by?.name
+				{closed_by?.name
 					&& (
 						<div className={styles.pill}>
 							<Pill size="md" color="#EEF0F0">
 								<span>
 									Closed by :
 									{' '}
-									{data?.closed_by?.name}
+									{closed_by?.name}
 								</span>
 							</Pill>
 						</div>
@@ -67,8 +71,8 @@ function CardContent({ data = {}, filter = {}, service = {} }) {
 				<div>
 					Last Updated At:
 					{' '}
-					{data?.created_at && formatDate({
-						date       : data?.created_at,
+					{created_at && formatDate({
+						date       : created_at,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
 						formatType : 'date',
 					})}

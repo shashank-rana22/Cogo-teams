@@ -2,10 +2,10 @@ const INCREMENT_VALUE = 1;
 
 const formatFclCustomsRate = (data, user_id) => {
 	const CUSTOMS_LINE_ITEM = [];
-	let customCharges = data.customs_line_items;
+	let customCharges = data.line_items;
 	for (let i = 0; i < customCharges.length; i += INCREMENT_VALUE) {
 		const obj = {
-			code     : customCharges[i].code,
+			code     : customCharges[i].customs_code,
 			currency : customCharges[i].currency,
 			price    : Number(customCharges[i].price),
 			unit     : customCharges[i].unit,
@@ -17,7 +17,7 @@ const formatFclCustomsRate = (data, user_id) => {
 	const CFS_LINE_ITEM = [];
 	for (let i = 0; i < customCharges.length; i += INCREMENT_VALUE) {
 		const obj = {
-			code     : customCharges[i].code,
+			code     : customCharges[i].cfs_line_items,
 			currency : customCharges[i].currency,
 			price    : Number(customCharges[i].price),
 			unit     : customCharges[i].unit,
@@ -39,7 +39,6 @@ const formatFclCustomsRate = (data, user_id) => {
 		customs_line_items  : CUSTOMS_LINE_ITEM,
 		cfs_line_items      : CFS_LINE_ITEM,
 	};
-
 	return payload;
 };
 

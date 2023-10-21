@@ -90,7 +90,7 @@ const useDeleteRateJob = (service) => {
 					data            : rate_id ? { ...formData } : undefined,
 				},
 			});
-			if (resp?.data) { return resp?.data?.id; }
+			if (resp) { return resp?.status; }
 		} catch (err) {
 			Toast.error('failed to cancel');
 		}

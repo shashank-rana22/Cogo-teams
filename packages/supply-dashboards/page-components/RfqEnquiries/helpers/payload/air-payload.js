@@ -1,8 +1,8 @@
 const airPayload = ({ service, value }) => {
-	const key1 = 'origin_local';
-	const key2 = 'destination_local';
+	const KEY1 = 'origin_local';
+	const KEY2 = 'destination_local';
 
-	const line_items = [];
+	const LINE_ITEMS = [];
 	value?.freights.forEach((item) => {
 		const val = {
 			code      : item?.code,
@@ -11,9 +11,9 @@ const airPayload = ({ service, value }) => {
 			price     : Number(item?.price),
 			min_price : Number(item?.min_price),
 		};
-		line_items.push(val);
+		LINE_ITEMS.push(val);
 	});
-	const origin_line_items = [];
+	const ORIGIN_LINE_ITEMS = [];
 	(value?.origin_local || []).forEach((item) => {
 		const val = {
 			code      : item?.code,
@@ -22,10 +22,10 @@ const airPayload = ({ service, value }) => {
 			price     : Number(item?.price),
 			min_price : Number(item?.min_price),
 		};
-		origin_line_items.push(val);
+		ORIGIN_LINE_ITEMS.push(val);
 	});
 
-	const destination_line_items = [];
+	const DESTINATION_LINE_ITEMS = [];
 	(value?.destination_local || []).forEach((item) => {
 		const val = {
 			code      : item?.code,
@@ -34,10 +34,10 @@ const airPayload = ({ service, value }) => {
 			price     : Number(item?.price),
 			min_price : Number(item?.min_price),
 		};
-		destination_line_items.push(val);
+		DESTINATION_LINE_ITEMS.push(val);
 	});
 
-	const surcharge_line_items = [];
+	const SURCHARGE_LINE_ITEMS = [];
 	(value?.surcharge || []).forEach((item) => {
 		const val = {
 			code     : item?.code,
@@ -45,10 +45,10 @@ const airPayload = ({ service, value }) => {
 			currency : item?.currency,
 			price    : Number(item?.price),
 		};
-		surcharge_line_items.push(val);
+		SURCHARGE_LINE_ITEMS.push(val);
 	});
 
-	const origin_slabs = [];
+	const ORIGIN_SLABS = [];
 	(value?.origin_slabs || []).forEach((item) => {
 		const val = {
 			lower_limit : Number(item?.lower_limit),
@@ -56,9 +56,9 @@ const airPayload = ({ service, value }) => {
 			currency    : item?.currency,
 			price       : Number(item?.price),
 		};
-		origin_slabs.push(val);
+		ORIGIN_SLABS.push(val);
 	});
-	const destination_slabs = [];
+	const DESTINATION_SLABS = [];
 	(value?.destination_slabs || []).forEach((item) => {
 		const val = {
 			lower_limit : Number(item?.lower_limit),
@@ -66,7 +66,7 @@ const airPayload = ({ service, value }) => {
 			currency    : item?.currency,
 			price       : Number(item?.price),
 		};
-		destination_slabs.push(val);
+		DESTINATION_SLABS.push(val);
 	});
 
 	const payload = {
@@ -77,23 +77,24 @@ const airPayload = ({ service, value }) => {
 		spot_negotiation_id            : service?.id,
 		data                           : {
 			airline_id          : value?.airline_id,
-			[key1]              : { line_items: origin_line_items },
-			[key2]              : { line_items: destination_line_items },
-			surcharge           : { line_items: surcharge_line_items },
+			operation_type      : value?.operation_type,
+			[KEY1]              : { line_items: ORIGIN_LINE_ITEMS },
+			[KEY2]              : { line_items: DESTINATION_LINE_ITEMS },
+			surcharge           : { line_items: SURCHARGE_LINE_ITEMS },
 			destination_storage : {
-				slabs      : destination_slabs,
+				slabs      : DESTINATION_SLABS,
 				unit       : value?.destination_unit,
 				free_limit : Number(value?.destination_free_limit || 0),
 			},
 			origin_storage: {
-				slabs      : origin_slabs,
+				slabs      : ORIGIN_SLABS,
 				unit       : value?.origin_unit,
 				free_limit : Number(value?.origin_free_limit || 0),
 			},
 			freights: [{
 				validity_end   : value?.validity_end,
 				validity_start : value?.validity_start,
-				line_items,
+				line_items     : LINE_ITEMS,
 			}],
 			origin_main_port_id      : value?.origin_main_port_id,
 			destination_main_port_id : value?.destination_main_port_id,

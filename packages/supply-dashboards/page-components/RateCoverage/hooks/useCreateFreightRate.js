@@ -23,13 +23,13 @@ const API_NAME = {
 	lcl_freight : 'create_lcl_freight_rate',
 	lcl_customs : 'create_lcl_customs_rate',
 	air_customs : 'create_air_customs_rate',
-	trailer     : 'create_trailer_freight_rate',
+	trailer     : 'create_haulage_freight_rate',
 	ltl_freight : 'create_ltl_freight_rate',
 	ftl_freight : 'create_ftl_freight_rate',
 	fcl_cfs     : 'create_fcl_cfs_rate',
 };
 
-const getPayload = (service, data, user_id) => {
+const getPayload = (service, data, user_id, listData) => {
 	if (service === 'fcl_freight') {
 		return formatFclRate(data, user_id);
 	}
@@ -52,7 +52,7 @@ const getPayload = (service, data, user_id) => {
 		return formatLclCustomsRate(data, user_id);
 	}
 	if (service === 'haulage') {
-		return formatHaulageFreightRate(data, user_id);
+		return formatHaulageFreightRate(data, user_id, listData);
 	}
 	if (service === 'trailer') {
 		return formatTrailerFreight(data, user_id);
@@ -77,8 +77,8 @@ const useCreateFreightRate = (service) => {
 		method : 'POST',
 	}, { manual: true });
 
-	const createRate = async (data) => {
-		const newPayload = getPayload(service, data, user_id);
+	const createRate = async (data, listData) => {
+		const newPayload = getPayload(service, data, user_id, listData);
 
 		try {
 			const resp = await trigger({
@@ -87,8 +87,26 @@ const useCreateFreightRate = (service) => {
 				},
 			});
 			if (resp?.data) { return resp?.data?.id; }
-		} catch (err) {
-			Toast.error(startCase(err?.response?.data?.detail || err?.response?.data?.base));
+		} catch (error) {
+			const { response = {} } = error;
+			const { data: err_data = {} } = response;
+			const {
+				detail = undefined,
+				base = undefined,
+				line_items = undefined,
+				validity_end = undefined,
+				length: lengthError = '',
+				breadth: breadthError = '',
+				height: heightError = '',
+				minimum_chargeable_weight = undefined,
+				minimum_freight_charge = undefined,
+				transit_time = undefined,
+			} = err_data;
+
+			Toast.error(
+				startCase(base || lengthError || breadthError || heightError || detail || validity_end
+					|| line_items || minimum_chargeable_weight || minimum_freight_charge || transit_time),
+			);
 		}
 		return null;
 	};

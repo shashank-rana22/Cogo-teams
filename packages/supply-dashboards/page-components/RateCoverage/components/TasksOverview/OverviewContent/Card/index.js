@@ -3,12 +3,10 @@ import { IcMArrowDown, IcMDownload } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import { DEFAULT_VALUE, VALUE_ONE } from '../../../../configurations/helpers/constants';
 import useGetCsvFile from '../../../../hooks/useGetCsvUrl';
 
 import styles from './styles.module.css';
-
-const DEFAULT_VALUE = 0;
-const VALUE_ONE = 1;
 
 function Card({
 	detail = {},

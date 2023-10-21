@@ -120,10 +120,10 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		const isEmptyMail = getFormattedEmailBody({ emailState });
+		// const isEmptyMail = getFormattedEmailBody({ emailState });
 
-		if (isEmptyMail || !subjectToSend) {
-			Toast.error('Both Subject and Body are Required');
+		if (!subjectToSend) {
+			Toast.error('Subject is Required.');
 			return;
 		}
 

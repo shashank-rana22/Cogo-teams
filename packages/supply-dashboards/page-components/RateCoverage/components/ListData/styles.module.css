@@ -25,3 +25,14 @@
 	font-weight: 600;
 	color: #828282;
 }
+
+.tags {
+	display: flex;
+	margin-top: 6px;
+
+	:global {
+		.ui_tags_container {
+			margin-right: 6px;
+		}
+	}
+}

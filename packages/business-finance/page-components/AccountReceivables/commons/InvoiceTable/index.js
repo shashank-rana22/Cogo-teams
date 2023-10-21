@@ -1,25 +1,33 @@
-import { cl, Pagination } from '@cogoport/components';
+import { cl, Pagination, Placeholder, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { getDefaultEntityCode } from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { isEmpty, upperCase } from '@cogoport/utils';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import Filters from '../../../commons/Filters/index.tsx';
-import InvoiceJourney from '../../components/Dashboard/InvoiceJourney';
-import completedColumn from '../../configs/Completed_table.tsx';
-import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate.ts';
-import useGetOutstandingCard from '../../hooks/useGetoutstandingCard.ts';
-import { invoiceFilter } from '../../Utils/invoicelistFilter.ts';
+import useListCogoEntities from '../../../AccountPayables/Dashboard/hooks/useListCogoEntities';
+import Filters from '../../../commons/Filters/index';
+import SalesFunnelView from '../../components/Invoice/SalesFunnelView';
+import sortStyleLedgerTotalAsc,
+{
+	sortStyleDueDateAsc,
+	sortStyleDueDateDesc,
+	sortStyleInvoiceDateAsc,
+	sortStyleInvoiceDateDesc,
+	sortStyleLedgerTotalDesc,
+}
+	from '../../configs/columns_sort_helper';
+import completedColumn from '../../configs/Completed_table';
+import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate';
+import useGetOutstandingCard from '../../hooks/useGetoutstandingCard';
+import { invoiceFilter } from '../../Utils/invoicelistFilter';
 import FilterPopover from '../FilterPopover';
 import FooterCard from '../FooterCard';
-import SearchInput from '../searchInput/index.tsx';
-import StyledTable from '../styledTable/index.tsx';
+import SearchInput from '../searchInput/index';
+import StyledTable from '../styledTable/index';
 
 import styles from './styles.module.css';
-
-const ORANGE = '#F68B21';
-const GREY = '#BDBDBD';
 
 const USER_IDS = [
 	GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
@@ -27,13 +35,6 @@ const USER_IDS = [
 	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id];
 
 const SEARCH_PLACEHOLDER = 'Search by Invoice number / SID';
-
-const getStyle = ({
-	sortType = '',
-	sortBy = '',
-	activeSortType = '',
-	activeSortBy = '',
-}) => (sortType === activeSortType && sortBy === activeSortBy ? ORANGE : GREY);
 
 function InvoiceTable({
 	organizationId = '',
@@ -49,6 +50,12 @@ function InvoiceTable({
 	const [checkedRows, setCheckedRows] = useState([]);
 	const [isHeaderChecked, setIsHeaderChecked] = useState(false);
 
+	const entity = getDefaultEntityCode(partner_id);
+
+	const [entityCodes, setEntityCode] = useState(entity);
+
+	const entityCode_in_use = invoiceJourney ? entityCode : entityCodes;
+
 	const {
 		listData,
 		clearInvoiceFilters,
@@ -59,7 +66,7 @@ function InvoiceTable({
 		sendReport,
 		sort,
 		setSort,
-	} = useGetOutstandingCard({ organizationId, entityCode, limit });
+	} = useGetOutstandingCard({ organizationId, entityCode_in_use, limit });
 
 	const { bulkIrnGenerate, bulkIrnLoading } = useBulkIrnGenerate({
 		entityCode,
@@ -77,64 +84,22 @@ function InvoiceTable({
 
 	const { sortType = '', sortBy = '' } = sort || {};
 
-	const sortStyleLedgerTotalAsc = getStyle({
-		sortType,
-		sortBy,
-		activeSortType : 'asc',
-		activeSortBy   : 'ledgerTotal',
-	});
-
-	const sortStyleLedgerTotalDesc = getStyle({
-		sortType,
-		sortBy,
-		activeSortType : 'desc',
-		activeSortBy   : 'ledgerTotal',
-	});
-
-	const sortStyleInvoiceDateAsc = getStyle({
-		sortType,
-		sortBy,
-		activeSortType : 'asc',
-		activeSortBy   : 'invoiceDate',
-	});
-
-	const sortStyleInvoiceDateDesc = getStyle({
-		sortType,
-		sortBy,
-		activeSortType : 'desc',
-		activeSortBy   : 'invoiceDate',
-	});
-
-	const sortStyleDueDateAsc = getStyle({
-		sortType,
-		sortBy,
-		activeSortType : 'asc',
-		activeSortBy   : 'dueDate',
-	});
-
-	const sortStyleDueDateDesc = getStyle({
-		sortType,
-		sortBy,
-		activeSortType : 'desc',
-		activeSortBy   : 'dueDate',
-	});
-
 	const columns = completedColumn({
 		entityCode,
-		refetch   : getOrganizationInvoices,
+		refetch                  : getOrganizationInvoices,
 		showName,
 		setSort,
-		sortStyleLedgerTotalAsc,
-		sortStyleLedgerTotalDesc,
-		sortStyleInvoiceDateAsc,
-		sortStyleInvoiceDateDesc,
-		sortStyleDueDateAsc,
-		sortStyleDueDateDesc,
+		sortStyleLedgerTotalAsc  : sortStyleLedgerTotalAsc({ sortType, sortBy }),
+		sortStyleLedgerTotalDesc : sortStyleLedgerTotalDesc({ sortType, sortBy }),
+		sortStyleInvoiceDateAsc  : sortStyleInvoiceDateAsc({ sortType, sortBy }),
+		sortStyleInvoiceDateDesc : sortStyleInvoiceDateDesc({ sortType, sortBy }),
+		sortStyleDueDateAsc      : sortStyleDueDateAsc({ sortType, sortBy }),
+		sortStyleDueDateDesc     : sortStyleDueDateDesc({ sortType, sortBy }),
 		invoiceFilters,
 		setinvoiceFilters,
 		checkedRows,
 		setCheckedRows,
-		totalRows : listData?.list || [],
+		totalRows                : listData?.list || [],
 		isHeaderChecked,
 		setIsHeaderChecked,
 		showFilters,
@@ -145,9 +110,34 @@ function InvoiceTable({
 		? columns
 		: columns?.filter((column) => column.id !== 'checkbox');
 
+	const { loading, entityData = [] } = useListCogoEntities();
+	const entityDataCount = entityData.length;
+	const entityOptions = (entityData || []).map((item) => {
+		const {
+			business_name: companyName = '',
+			entity_code: listEntityCode = '',
+		} = item || {};
+		return {
+			label : `${upperCase(companyName)} (${listEntityCode})`,
+			value : listEntityCode,
+		};
+	});
+
+	const showEntityBar = !loading && !invoiceJourney;
+	const showLoadingEntityBar = loading && !invoiceJourney;
+
+	const resetCheckboxes = useCallback(() => {
+		setIsHeaderChecked(false);
+		setCheckedRows([]);
+	}, [setCheckedRows, setIsHeaderChecked]);
+
+	useEffect(() => {
+		resetCheckboxes();
+	}, [listData, resetCheckboxes]);
+
 	return (
 		<div>
-			{invoiceJourney ? <InvoiceJourney entityCode={entityCode} /> : null}
+			{invoiceJourney ? <SalesFunnelView entityCode={entityCode} /> : null}
 			{showFilters ? (
 				<div className={styles.filter_container}>
 					<div className={styles.filter_div}>
@@ -156,6 +146,27 @@ function InvoiceTable({
 							setFilters={setinvoiceFilters}
 							controls={invoiceFilter({ profile })}
 						/>
+						{showEntityBar
+							? (
+								<div style={{ width: 'fit-content' }}>
+									<Select
+										name="business_name"
+										onChange={(entityVal) => {
+											setEntityCode(entityVal);
+										}}
+										value={entityCodes}
+										options={entityOptions}
+										placeholder="Select Entity Code"
+										size="sm"
+										disabled={entityDataCount <= 1}
+									/>
+								</div>
+							)
+							: null}
+						{showLoadingEntityBar
+							? <Placeholder width="200px" height="30px" />
+							: null}
+
 						<FilterPopover
 							filters={invoiceFilters}
 							setFilters={setinvoiceFilters}

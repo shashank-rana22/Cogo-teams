@@ -1,62 +1,61 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { format } from '@cogoport/utils';
 
 const TOTAL_HOURS = 24;
-const formatFtlRate = (val, user_id) => {
-	const formattedValues = {
-		origin_location_id      : val.origin,
-		destination_location_id : val.destination,
-		service_provider_id     : val.service_provider,
-		procured_by_id          : val.rate_procured || user_id,
-		sourced_by_id           : val.rate_provided,
-		truck_type              : val.truck_type,
-		truck_body_type         : val.body_type,
-		trip_type               : 'one_way',
+const formatFtlRate = (data, user_id) => {
+	const LINE_ITEMS = [];
+	const basicFreightObject = {
+		code     : 'BAS',
+		unit     : 'per_truck',
+		currency : data?.currency || 'INR',
+		price    : data?.price_per_truck || 0,
+		remarks  : [data.remarks],
+	};
+	LINE_ITEMS.push(basicFreightObject);
+
+	const fuelSurchargeObject = {
+		code     : 'FSC',
+		unit     : data?.fuel_surcharge_type || 0,
+		currency : GLOBAL_CONSTANTS.currency_code.INR,
+		price    : data?.fuel_surcharge_value || 0,
 	};
 
-	const { commodity } = val;
+	LINE_ITEMS.push(fuelSurchargeObject);
+
+	const formattedValues = {
+		origin_location_id      : data.origin_location_id,
+		destination_location_id : data.destination_location_id,
+		service_provider_id     : data.service_provider_id,
+		sourced_by_id           : data?.sourced_by_id,
+		procured_by_id          : data?.procured_by_id || user_id,
+		truck_type              : data.truck_type,
+		truck_body_type         : data.body_type,
+		trip_type               : 'one_way',
+		validity_start          : data?.validity_start,
+		validity_end            : data?.validity_end,
+		line_items              : LINE_ITEMS || [],
+	};
+
+	const { commodity } = data;
 	if (commodity !== 'all_commodity') {
 		formattedValues.commodity = commodity;
 	}
 
-	const { transit_time_type } = val;
-	let { transit_time } = val;
+	const { transit_time_type } = data;
+	let { transit_time } = data;
 	if (transit_time_type === 'days') {
 		transit_time *= TOTAL_HOURS;
 	}
 
 	formattedValues.transit_time = transit_time;
 
-	const detention_time_type = val?.detention_free_time_type;
+	const detention_time_type = data?.detention_free_time_type;
 	let detention_time_value = Number(
-		val.detention_free_time,
+		data.detention_free_time,
 	);
 	if (detention_time_type === 'days') {
 		detention_time_value *= TOTAL_HOURS;
 	}
 	formattedValues.detention_free_time = detention_time_value;
-
-	const LINE_ITEMS = [];
-	const basicFreightObject = {
-		code     : 'BAS',
-		unit     : 'per_truck',
-		currency : val?.price_per_truck?.price_per_truck_type,
-		price    : val?.price_per_truck?.price_per_truck_value,
-		remarks  : [val.remarks],
-	};
-	LINE_ITEMS.push(basicFreightObject);
-
-	const fuelSurchargeObject = {
-		code     : 'FSC',
-		unit     : val?.fuel_surcharge?.fuel_surcharge_type,
-		currency : GLOBAL_CONSTANTS.currency_code.INR,
-		price    : val?.fuel_surcharge?.fuel_surcharge_value,
-	};
-
-	LINE_ITEMS.push(fuelSurchargeObject);
-	formattedValues.line_items = LINE_ITEMS;
-	formattedValues.validity_start = format(val.date_range.startDate);
-	formattedValues.validity_end = format(val.date_range.endDate);
 
 	return formattedValues;
 };

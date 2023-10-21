@@ -1,19 +1,18 @@
-import { Placeholder, Pagination, Input, Button } from '@cogoport/components';
+import { Placeholder, Pagination, Input, Button, Tags } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import { CARDS_MAPPING, HEADINGS } from '../../configurations/helpers/constants';
+import {
+	CARDS_MAPPING, DEFAULT_VALUE, HEADINGS,
+	LIST_CARD_LOADER_COUNT, VALUE_ONE,
+} from '../../configurations/helpers/constants';
 import Filter from '../Filter';
 import Card from '../TasksOverview/OverviewContent/Card';
 
 import ListCard from './ListCard';
 import styles from './styles.module.css';
-
-const DEFAULT_VALUE = 0;
-const DEFAULT_PAGE_VALUE = 1;
-const LIST_CARD_LOADER_COUNT = 5;
 
 function ListData({
 	data = {},
@@ -30,20 +29,38 @@ function ListData({
 	setShowWeekData = () => {},
 }) {
 	const [serialId, setSerialId] = useState('');
+	const [shipmentId, setShipmentId] = useState('');
 	const [showFilters, setShowFilters] = useState(false);
+
 	const { statistics = {} } = statsData;
 	const { list = [] } = data;
 	const { dynamic_statistics = {} } = statsData;
 
-	useEffect(() => {
-		getListCoverage(serialId);
-	}, [getListCoverage, serialId]);
+	const { service = '', cogo_entity_id = '', is_flash_booking_reverted = '' } = filter || {};
+
+	const idToUse = source === 'live_booking' ? shipmentId : serialId;
 
 	const handleClick = (card) => {
 		setSource(card);
-		setPage(DEFAULT_PAGE_VALUE);
+		setPage(VALUE_ONE);
 		setSerialId('');
 	};
+
+	const handelFilter = (val) => {
+		if (source === 'live_booking') {
+			setShipmentId(val);
+		} else {
+			setSerialId(val);
+		}
+	};
+
+	useEffect(() => {
+		if (source === 'live_booking') {
+			getListCoverage(shipmentId);
+		} else {
+			getListCoverage(serialId);
+		}
+	}, [getListCoverage, serialId, shipmentId, source]);
 
 	return (
 		<div className={styles.main_container}>
@@ -74,14 +91,76 @@ function ListData({
 				)}
 					<Input
 						size="sm"
-						value={serialId}
-						onChange={(val) => setSerialId(val)}
-						placeholder="Search by TID"
+						value={idToUse}
+						onChange={(val) => handelFilter(val)}
+						placeholder={source === 'live_booking' ? 'Search by SID' : 'Search by TID'}
 						style={{ width: '200px', marginLeft: '10px' }}
 					/>
 				</div>
-
-				<div>
+				<div style={{ display: 'flex' }}>
+					<div className={styles.tags}>
+						<Tags
+							size="md"
+							items={[{
+								disabled : false,
+								children : startCase(service),
+								color    : 'blue',
+								tooltip  : false,
+								closable : true,
+							}]}
+							onItemsChange={() => {
+								setFilter({ ...filter, service: 'fcl_freight' });
+							}}
+						/>
+						{source && (
+							<Tags
+								size="md"
+								items={[{
+									disabled : false,
+									children : startCase(source),
+									color    : 'blue',
+									tooltip  : false,
+									closable : true,
+								}]}
+								onItemsChange={() => {
+									setSource('live_booking');
+								}}
+							/>
+						)}
+						{cogo_entity_id && (
+							<Tags
+								size="md"
+								items={[{
+									disabled : false,
+									children : startCase(cogo_entity_id === 'no_cogo_entity_id'
+										? 'All Entity' : 'My Entity'),
+									color    : 'blue',
+									tooltip  : false,
+									closable : true,
+								}]}
+								onItemsChange={() => {
+									setFilter({ ...filter, cogo_entity_id: '' });
+								}}
+							/>
+						)}
+						{is_flash_booking_reverted
+					&& (
+						<Tags
+							size="md"
+							items={[{
+								disabled : false,
+								children : startCase(is_flash_booking_reverted === 'reverted'
+									? 'Reverted' : 'Non Reverted'),
+								color    : 'blue',
+								tooltip  : false,
+								closable : true,
+							}]}
+							onItemsChange={() => {
+								setFilter({ ...filter, is_flash_booking_reverted: '' });
+							}}
+						/>
+					)}
+					</div>
 					<Button
 						themeType="secondary"
 						onClick={() => { setShowFilters((prev) => !prev); }}
@@ -148,7 +227,6 @@ function ListData({
 					showFilters={showFilters}
 					setShowFilters={setShowFilters}
 					setFilter={setFilter}
-					setSerialId={setSerialId}
 					setShowWeekData={setShowWeekData}
 				/>
 			)}

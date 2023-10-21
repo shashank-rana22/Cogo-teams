@@ -1,11 +1,11 @@
 const INCREMENT_VALUE = 1;
 
-const formatHaulageFreightRate = (data, user_id) => {
+const formatHaulageFreightRate = (data, user_id, listData) => {
 	const LINE_ITEMS = [];
 	const charges = data?.line_items || [];
 	for (let i = 0; i < charges.length; i += INCREMENT_VALUE) {
 		const obj = {
-			code     : charges[i].code,
+			code     : charges[i].customs_code,
 			currency : charges[i].currency,
 			price    : Number(charges[i].price),
 			unit     : charges[i].unit,
@@ -31,7 +31,7 @@ const formatHaulageFreightRate = (data, user_id) => {
 		container_type      : data?.container_type,
 		commodity,
 		service_provider_id : data?.service_provider_id,
-		shipping_line_id    : data?.shipping_line_id || undefined,
+		shipping_line_id    : listData?.shipping_line_id || undefined,
 		sourced_by_id       : data?.sourced_by_id,
 		procured_by_id      : data?.procured_by_id || user_id,
 		haulage_type        : data?.haulage_type,

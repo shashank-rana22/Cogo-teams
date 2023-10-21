@@ -1,15 +1,20 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback, useState, useMemo } from 'react';
 
 const PAGE_LIMIT = 100;
 
+const ORGANIZATION_ID_REQUIRED_FOR = ['organizations', 'pocs'];
+
 const API_MAPPING = {
 	organizations          : 'list_organization_users',
+	lead_organizations     : 'get_lead_organization_users',
 	other_organizations    : 'list_lead_users',
 	channel_partners       : 'get_channel_partner_users',
+	lead_channel_partners  : 'get_lead_organization_users',
 	other_channel_partners : 'list_lead_users',
+	pocs                   : 'list_organization_billing_addresses',
 };
 
 const getPayload = ({ orgId = '', userIds = [], searchQuery = '', orgType = '' }) => ({
@@ -17,14 +22,15 @@ const getPayload = ({ orgId = '', userIds = [], searchQuery = '', orgType = '' }
 		status               : orgType === 'organizations' ? 'active' : undefined,
 		id                   : isEmpty(userIds) ? undefined : userIds,
 		q                    : searchQuery || undefined,
-		organization_id      : orgType === 'organizations' ? orgId || undefined : undefined,
+		organization_id      : ORGANIZATION_ID_REQUIRED_FOR.includes(orgType) ? orgId || undefined : undefined,
 		is_importer_exporter : orgType === 'channel_partners' ? true : undefined,
 		...(orgType?.includes('other') ? {
 			is_channel_partner : orgType !== 'other_organizations',
 			lifecycle_stage    : ['enriched', 'marketing_qualified'],
 		} : {}),
 	},
-	...(orgType === 'channel_partners'
+	lead_organization_id: orgType.includes('lead') ? orgId || undefined : undefined,
+	...((orgType === 'channel_partners' || orgType === 'lead_channel_partners')
 		? { account_types: ['importer_exporter'] }
 		: {}),
 	partner_id : orgType === 'channel_partners' ? orgId || undefined : undefined,
@@ -37,11 +43,14 @@ const useGetOrgUsers = ({
 	orgType = '',
 	type = '',
 	isLeadUser = false,
+	twinImporterExporterId = '',
+	isChannelPartner = false,
 }) => {
 	const [query, setQuery] = useState('');
+	const [searchQuery, setSearchQuery] = useState('');
 	const [initialLoad, setInitialLoad] = useState(true);
 
-	const { query: searchQuery, debounceQuery } = useDebounceQuery();
+	const { query: newQuery, debounceQuery } = useDebounceQuery();
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : `/${API_MAPPING[orgType] || ''}`,
@@ -54,36 +63,61 @@ const useGetOrgUsers = ({
 				return;
 			}
 			await trigger({
-				params: getPayload({ orgId, userIds: selectedUserIds, searchQuery, orgType }),
+				params: getPayload({
+					orgId   : (isChannelPartner && orgType === 'pocs') ? twinImporterExporterId : orgId,
+					userIds : selectedUserIds,
+					searchQuery,
+					orgType,
+				}),
 			});
 			setInitialLoad(false);
 		} catch (error) {
 			console.error(error);
 		}
-	}, [orgId, orgType, searchQuery, trigger]);
+	}, [isChannelPartner, orgId, orgType, searchQuery, trigger, twinImporterExporterId]);
+
+	const selectedUsers = useMemo(
+		() => (initialLoad
+			? userIds?.map(
+				(itm) => itm?.id,
+			) : undefined),
+		[initialLoad, userIds],
+	);
 
 	useEffect(
 		() => {
 			if (orgId && !(isLeadUser && type !== 'toUserEmail')) {
-				fetchUser({ selectedUserIds: initialLoad ? userIds : undefined });
+				fetchUser({ selectedUserIds: selectedUsers });
 			}
 		},
-		[fetchUser, initialLoad, isLeadUser, orgId, type, userIds],
+		[fetchUser, isLeadUser, orgId, type, selectedUsers],
 	);
 
 	useEffect(() => {
 		debounceQuery(query?.trim());
 	}, [debounceQuery, query]);
 
-	const isOrgUserIdPresent = !isEmpty(data?.list);
+	useEffect(
+		() => {
+			setSearchQuery(newQuery);
+		},
+		[newQuery],
+	);
+
+	const orgData = (
+		loading
+		|| !API_MAPPING[orgType]
+		|| !orgId
+		|| (isLeadUser && type !== 'toUserEmail')
+	) ? {} : data;
 
 	return {
-		orgLoading   : loading,
-		isOrgUserIdPresent,
-		orgData      : (loading || !API_MAPPING[orgType] || !orgId) ? {} : data,
-		handleSearch : setQuery,
+		orgLoading         : loading,
+		orgData,
+		handleSearch       : setQuery,
 		initialLoad,
-		searchQuery  : query,
+		searchQuery        : query,
+		setUserSearchQuery : setSearchQuery,
 	};
 };
 

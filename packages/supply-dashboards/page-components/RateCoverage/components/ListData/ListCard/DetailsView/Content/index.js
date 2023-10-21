@@ -1,104 +1,111 @@
-import { Pill, Placeholder } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
+/* eslint-disable max-lines-per-function */
+import { Pill, Placeholder, Button } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMCopy } from '@cogoport/icons-react';
-import { differenceInDays, startCase } from '@cogoport/utils';
-import React from 'react';
+import { startCase } from '@cogoport/utils';
+import React, { useState } from 'react';
 
-import { DEFAULT_VALUE } from '../../../../../configurations/helpers/constants';
+import { DEFAULT_VALUE, LOADER_COUNT } from '../../../../../configurations/helpers/constants';
+import useListShipmentFlashBookingRates from '../../../../../hooks/useListShipmentFlashBookingRates';
 import copyToClipboard from '../../../../../utilis/copyToClipboard';
+import NewServiceProviderModal from '../ServiceProviderModal';
+import styles from '../styles.module.css';
 
-import styles from './styles.module.css';
+import contentMapping from './content-mappings';
 
-const LOADER_COUNT = 3;
 function ServiceDetailsContent({
-	shipmemnt_data = {}, data = {}, requestData = {},
+	shipment_data = {}, requestData = {},
 	feedbackData = {}, shipment_loading = false,
 	request_loading = false,
 	feedback_loading = false,
+	filter = {},
+	data = {},
+	source = {},
 }) {
-	const { primary_service_detail, summary } = shipmemnt_data || {};
-	const {
-		commodity = '', container_size = '', container_type = '', containers_count = '', inco_term = '',
-		cargo_readiness_date = '',
-		free_days_detention_destination = '',
-		bl_type = '',
-		commodity_description = '',
-		schedule_departure = '',
-		shipping_line = {},
-		preferred_shipping_lines,
-		serial_id,
-		feedbacks = [],
-		closing_remarks = [],
-		status = '',
-		trade_type = '',
-	} = primary_service_detail || feedbackData || requestData || {};
+	const [serviceModal, setServiceModal] = useState(false);
 
-	const handleCopy = (text) => {
-		const value = [text].join('\n');
-		copyToClipboard(value, 'Data');
+	const {
+		data: flashBookingRates,
+		shipmentFlashBookingRates,
+	} = useListShipmentFlashBookingRates({ source_id: data?.source_id });
+
+	const {
+		pillMapping = [], contentValuesMapping = [], summary = {},
+		status = '', preferred_shipping_lines = [],	preferred_freight_rate,
+		preferred_freight_rate_currency,
+		preferred_airlines,
+	} = contentMapping({
+		requestData,
+		feedbackData,
+		filter,
+		shipment_data,
+	});
+
+	const { booking_params } = feedbackData || {};
+	const { rate_card } = booking_params || {};
+
+	const shippinlineName = preferred_shipping_lines?.[DEFAULT_VALUE]?.business_name;
+	const airLineName = preferred_airlines?.[DEFAULT_VALUE]?.business_name;
+
+	const handelNewServiceProvider = () => {
+		setServiceModal(!serviceModal);
+		shipmentFlashBookingRates();
 	};
 
-	const transitTime =	shipmemnt_data?.serviceType === 'ftl_freight'
-		? shipmemnt_data?.transit_time || '0'
-		: differenceInDays(
-			new Date(shipmemnt_data?.selected_schedule_arrival || new Date()),
-			new Date(shipmemnt_data?.selected_schedule_departure || new Date()),
-		);
+	const handleCopy = (val) => {
+		if (!val) return;
+		const {
+			commodity_category,
+			container_size,
+			container_type,
+			containers_count,
+			inco_term,
+			cargo_readiness_date,
+			free_days_detention_destination,
+			bl_type,
+			commodity_description,
+			schedule_departure,
+			shipping_line,
+			feedbacks,
+			closing_remarks,
+			serial_id,
+			created_at,
+			payment_term,
+			price_type,
+			packages_count,
+		} = val;
 
-	const pillMapping = [
-		{ label: commodity && startCase(commodity) },
-		{ label: container_size && `${container_size}ft` },
-		{ label: container_type && startCase(container_type) },
-		{ label: containers_count && `${containers_count} Containers` },
-		{ label: inco_term && startCase(inco_term) },
-		{ label: serial_id && `Serial Id : ${serial_id}` },
-		{ label: trade_type && startCase(trade_type) },
-	];
+		const formatLine = (label, value) => (value ? `${label} ${startCase(value)}\n` : '');
 
-	const contentMapping = [
-		{
-			label : 'Cargo Ready',
-			value : cargo_readiness_date,
-		},
-		{ label: 'BL Type', value: bl_type },
-		{ label: 'Destination Detention Free Days', value: free_days_detention_destination },
-		{
-			label : 'Expected Departure',
-			value : schedule_departure && `${formatDate({
-				date       : schedule_departure,
-				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-				formatType : 'date',
-			})}`,
-		},
-		{ label: 'Commodity Description', value: commodity_description },
-		{
-			label : 'Transit Time',
-			value : `${transitTime} ${shipmemnt_data?.serviceType === 'ftl_freight' ? 'Hrs' : 'Days'}`,
-		},
-		{ label: 'Preferred Shipping', value: shipping_line?.short_name },
-		feedbacks?.length > 0 && (
-			{
-				label : 'feedbacks',
-				value : feedbacks && (feedbacks || []).map((val) => startCase(val)).join(', '),
-			}
-		),
+		let textToCopy = '';
+		textToCopy += formatLine('commodity: ', commodity_category);
+		textToCopy += formatLine('containerSize: ', container_size);
+		textToCopy += formatLine('containerType: ', container_type);
+		textToCopy += formatLine('containersCount: ', containers_count);
+		textToCopy += formatLine('cargoReadinessDate: ', cargo_readiness_date);
+		textToCopy += formatLine('freeDaysDetentionDestination: ', free_days_detention_destination);
+		textToCopy += formatLine('blType: ', bl_type);
+		textToCopy += formatLine('commodityDescription: ', commodity_description);
+		textToCopy += formatLine('scheduleDeparture: ', schedule_departure);
+		textToCopy += formatLine('shippingLine: ', shipping_line);
+		textToCopy += formatLine('feedbacks: ', feedbacks);
+		textToCopy += formatLine('closingRemarks: ', closing_remarks);
+		textToCopy += formatLine('serialId: ', serial_id);
+		textToCopy += formatLine('createdAt: ', created_at);
+		textToCopy += formatLine('incoTerm', inco_term);
+		textToCopy += formatLine('paymentTerm', payment_term);
+		textToCopy += formatLine('priceType', price_type);
+		textToCopy += formatLine('packagesCount', packages_count);
+		textToCopy += formatLine('bookingParams', booking_params);
 
-		closing_remarks?.length > 0 && (
-			{
-				label: 'Closing Remarks',
-				value:
-	<div className={styles.pointer}>
-		{startCase(closing_remarks)}
-		<IcMCopy style={{ marginLeft: '4px' }} onClick={() => handleCopy(closing_remarks)} />
-	</div>,
-			}
-		),
-	];
+		if (textToCopy) {
+			navigator.clipboard.writeText(textToCopy);
+			copyToClipboard(textToCopy, 'Data');
+		}
+	};
 
 	return (
 		<div>
-
 			{(shipment_loading || request_loading
 					|| feedback_loading) ? [...new Array(LOADER_COUNT).keys()].map((index) => (
 						<Placeholder
@@ -108,93 +115,185 @@ function ServiceDetailsContent({
 						/>
 				))
 				: (
-
-					<div className={styles.container}>
+					<div className={styles.content_container}>
 						{(!feedback_loading || !request_loading || !shipment_loading)
-			&& (
-				<div>
-					<div className={styles.pill}>
-						{pillMapping?.map((val) => (
-							<div key={val?.label}>
-								{ val?.label
-								&& <Pill color="blue">{val?.label}</Pill>}
-							</div>
-						))}
-					</div>
-
-					<div className={styles.pill}>
-						{contentMapping?.map((val) => (
-							<div key={val?.label}>
-								{val?.value && (
-									<div className={styles.content}>
-										<div className={styles.label}>
-											{val.label}
-											{' '}
-											:
-											{' '}
+						&& (
+							<div>
+								<div className={styles.pill_head}>
+									<div className={styles.pill}>
+										{pillMapping?.map((val) => (
+											<div key={val?.label}>
+												{ val?.label
+												&& <Pill color="blue">{val?.label}</Pill>}
+											</div>
+										))}
+									</div>
+									{preferred_freight_rate
+									&& (
+										<div className={styles.price}>
+											Preferred Price
+											<div className={styles.price_value}>
+												{formatAmount({
+													amount   : preferred_freight_rate,
+													currency : preferred_freight_rate_currency,
+													options  : {
+														style                 : 'currency',
+														currencyDisplay       : 'symbol',
+														maximumFractionDigits : 0,
+													},
+												})}
+											</div>
 										</div>
-										<Pill
-											key={val?.value}
-											size="md"
-											color=""
-										>
-											{val?.value}
-										</Pill>
+									)}
+								</div>
+
+								<div className={styles.pill}>
+									{contentValuesMapping?.map((val) => (
+										<div key={val?.label}>
+											{val?.value && (
+												<div className={styles.content}>
+													<div className={styles.label}>
+														{val.label}
+														{' '}
+														:
+														{' '}
+													</div>
+													<Pill
+														key={val?.value}
+														size="md"
+														color=""
+													>
+														{val?.value}
+													</Pill>
+												</div>
+											)}
+										</div>
+									))}
+								</div>
+
+								{summary?.services?.length > DEFAULT_VALUE && (
+									<div className={styles.content}>
+										<div className={styles.label}>Additional Service : </div>
+										{(summary?.services || []).map((services_value) => (
+											<Pill
+												key={services_value}
+												size="md"
+												color="#F8F2E7"
+											>
+												{startCase(services_value)?.replace('Service', '')}
+											</Pill>
+										))}
 									</div>
 								)}
-							</div>
-						))}
-					</div>
 
-					<div className={styles.pill}>
-						{data?.service_provider?.short_name
-						&& (
-							<div className={styles.content}>
-								<div className={styles.label}> Supplier :</div>
-								<div className={styles.value}>{startCase(data?.service_provider?.short_name)}</div>
-							</div>
-						)}
+								<div className={styles.pill}>
+									{summary?.importer_exporter?.business_name
+										&& (
+											<div className={styles.content}>
+												<div className={styles.label}> Customer : </div>
+												<div className={styles.name}>
+													{' '}
+													{startCase(summary?.importer_exporter?.business_name)}
+												</div>
+											</div>
+										)}
 
-						{summary?.importer_exporter?.business_name
-						&& (
-							<div className={styles.content}>
-								<div className={styles.label}> Customer : </div>
-								<div className={styles.value}>
-									{startCase(summary?.importer_exporter?.business_name)}
+									{status
+										&& (
+											<div className={styles.content}>
+												<div className={styles.label}>
+													Status :
+													<Pill size="sm" color={status === 'inactive' ? 'red' : 'green'}>
+														{startCase(status)}
+													</Pill>
+												</div>
+											</div>
+										)}
+
+									{(airLineName || shippinlineName)
+										&& (
+											<div className={styles.content}>
+												<div className={styles.label}>
+													{shippinlineName ? 'Shippling Line : ' : 'Air Line : ' }
+												</div>
+												&nbsp;
+												<div className={styles.name}>
+													{startCase(shippinlineName || airLineName)}
+												</div>
+											</div>
+										)}
+								</div>
+
+								<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+									{source === 'rate_feedback' && rate_card?.line_items[0]?.buy_price
+										&& (
+											<div className={styles.content} style={{ width: '50%' }}>
+												<div className={styles.label}>
+													Disliked Rate:
+													<div className={styles.price_value}>
+														{formatAmount({
+															amount   : rate_card?.line_items[0]?.buy_price,
+															currency : rate_card?.line_items[0]?.cure,
+															options  : {
+																style                 : 'currency',
+																currencyDisplay       : 'symbol',
+																maximumFractionDigits : 0,
+															},
+														})}
+
+													</div>
+													{' '}
+													{' '}
+													Per Kg
+												</div>
+											</div>
+										)}
+									<div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
+										<div className={styles.copy_button}>
+											<Button
+												size="md"
+												themeType="secondary"
+												onClick={() => {
+													if (source === 'live_booking') {
+														handleCopy(summary);
+													} if (source === 'rate_feedback') {
+														handleCopy(feedbackData);
+													} if (source === 'rate_request') {
+														handleCopy(requestData);
+													} else {
+														handleCopy(summary);
+													}
+												}}
+											>
+												<IcMCopy height="40px" width="15px" />
+												Copy
+											</Button>
+										</div>
+										<div className={styles.head}>Service Provider Not Listed?</div>
+										<Button
+											size="md"
+											themeType="linkUi"
+											style={{ color: '#5936f0', padding: '8px' }}
+											onClick={() => handelNewServiceProvider()}
+										>
+											ADD NEW
+										</Button>
+									</div>
 								</div>
 							</div>
-						)}
 
-						{preferred_shipping_lines?.[DEFAULT_VALUE]?.business_name
-						&& (
-							<div className={styles.content}>
-								<div className={styles.label}>
-									{' '}
-									Shippling Line :
-								</div>
-								<div className={styles.value}>
-									{' '}
-									{startCase(preferred_shipping_lines?.[DEFAULT_VALUE]?.business_name)}
-								</div>
-							</div>
 						)}
-
-						{status
-						&& (
-							<div className={styles.content}>
-								<div className={styles.label}>
-									Status :
-									<Pill size="sm" color={status === 'inactive' ? 'red' : 'green'}>
-										{startCase(status)}
-									</Pill>
-								</div>
-							</div>
-						)}
-					</div>
-				</div>
-			)}
 					</div>
 				)}
+
+			{serviceModal && (
+				<NewServiceProviderModal
+					serviceModal={serviceModal}
+					setServiceModal={setServiceModal}
+					flashBookingRates={flashBookingRates}
+					filter={filter}
+				/>
+			)}
 		</div>
 	);
 }

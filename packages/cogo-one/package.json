@@ -7,7 +7,7 @@
   "sideEffects": false,
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
-    "@cogoport/components": "^1.0.441",
+    "@cogoport/components": "1.0.441",
     "@cogoport/context": "workspace:^0.1.0",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/globalization": "workspace:^0.0.1",
@@ -20,6 +20,8 @@
     "firebase": "^9.17.2",
     "react": "18.2.0",
     "stylelint": "^14.16.1",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "suneditor": "^2.45.1",
+    "suneditor-react": "^3.6.1"
   }
 }

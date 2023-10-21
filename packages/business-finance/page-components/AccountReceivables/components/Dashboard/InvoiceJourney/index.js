@@ -5,8 +5,8 @@ import { IcMInfo } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { getSalesFunnelOptions } from '../../../constants/index.ts';
-import useGetInvoiceJourney from '../../../hooks/useGetInvoiceJourney.ts';
+import { getSalesFunnelOptions } from '../../../constants/index';
+import useGetInvoiceJourney from '../../../hooks/useGetInvoiceJourney';
 
 import styles from './styles.module.css';
 

@@ -14,9 +14,10 @@
 }
 
 .message_card {
-	max-width: 50%;
+	max-width: 90%;
 	padding: 6px 8px;
 	font-size: 13px;
+	overflow-wrap: break-word;
 	background: #fff;
 	border-radius: 0 4px 4px;
 	box-shadow: 0 0 4px 0 #627fac33;

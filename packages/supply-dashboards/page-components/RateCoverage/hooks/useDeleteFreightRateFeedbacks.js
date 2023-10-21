@@ -34,12 +34,13 @@ const useDeleteFreightRateFeedbacks = (service = 'fcl_freight') => {
 
 	const [{ loading }, trigger] = useRequest({ url: `/${apiName}`, method: 'post' }, { manual: true });
 
-	const deleteFeedbackRequest = async ({ id, closing_remarks, checkboxValue }) => {
+	const deleteFeedbackRequest = async ({ id, closing_remarks, checkboxValue, remarks }) => {
 		const keyToSend = KEY_TO_SEND[service];
 		try {
 			const body = {
 				[keyToSend]     : [id],
 				closing_remarks : [checkboxValue || closing_remarks || 'Rate Created'],
+				remarks         : remarks || undefined,
 			};
 
 			const resp = await trigger({

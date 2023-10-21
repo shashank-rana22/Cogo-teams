@@ -1,4 +1,6 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import roleBasedView from '@cogoport/ocean-modules/components/Poc/config/role_base_view.json';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -7,8 +9,8 @@ import Details from '../Details';
 
 import styles from './styles.module.css';
 
-function Header({ serviceData = [] }) {
-	const { state, display_label, service_provider, payment_term } = serviceData?.[0] || {};
+function Header({ serviceData = [], activeStakeholder = '' }) {
+	const { state, display_label, service_provider, payment_term } = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const [showDetails, setShowDetails] = useState({});
 
@@ -17,12 +19,19 @@ function Header({ serviceData = [] }) {
 		statusText = 'Not Allocated';
 	}
 
+	const rolesPermission = roleBasedView[activeStakeholder] || {};
+	const rolesViewPermission = rolesPermission?.can_view || [];
+
 	return (
 		<div className={cl`${styles[state]} ${styles.main_container}`}>
 			<div className={cl` ${styles.container}`}>
 				<div className={cl`${styles[state]} ${styles.service_details}`}>
 					<div className={styles.service_name}>{display_label}</div>
-					<div className={styles.service_provider}>{service_provider?.business_name}</div>
+					{
+						rolesViewPermission?.includes('service_provider') ? (
+							<div className={styles.service_provider}>{service_provider?.business_name}</div>
+						) : null
+					}
 				</div>
 
 				<div className={styles.secondary_details}>
@@ -34,23 +43,28 @@ function Header({ serviceData = [] }) {
 					<div className={styles.extra_details}>
 						<div
 							role="button"
-							tabIndex={0}
+							tabIndex={GLOBAL_CONSTANTS.zeroth_index}
 							onClick={() => setShowDetails({
 								...showDetails,
-								[serviceData?.[0]?.display_label]: !showDetails[serviceData?.[0]?.display_label],
+								[serviceData?.[GLOBAL_CONSTANTS.zeroth_index]?.display_label]:
+									!showDetails[serviceData?.[GLOBAL_CONSTANTS.zeroth_index]?.display_label],
 							})}
 							className={styles.details_cta}
 						>
 
-							{ showDetails[serviceData?.[0]?.display_label] ? 'Hide Details' : 'View Details'}
+							{ showDetails[serviceData?.[GLOBAL_CONSTANTS.zeroth_index]?.display_label]
+								? 'Hide Details'
+								: 'View Details'}
 						</div>
 						<div className={styles.edit_cancel}>
-							<EditCancelService serviceData={serviceData?.[0]} />
+							<EditCancelService serviceData={serviceData?.[GLOBAL_CONSTANTS.zeroth_index]} />
 						</div>
 					</div>
 				</div>
 			</div>
-			{showDetails[serviceData?.[0]?.display_label] ? <Details serviceData={serviceData} /> : null}
+			{showDetails[serviceData?.[GLOBAL_CONSTANTS.zeroth_index]?.display_label]
+				? <Details serviceData={serviceData} />
+				: null}
 		</div>
 
 	);

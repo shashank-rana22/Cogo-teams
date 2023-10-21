@@ -1,5 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMAir, IcMFcl, IcCFlclCustoms, IcMFhaulage } from '@cogoport/icons-react';
+import {
+	IcMAir, IcMFcl, IcCFlclCustoms, IcMFhaulage,
+	IcCAirCustoms, IcMFlcl, IcMFltl, IcMFftl, IcCLclCustoms, IcMTransport, IcCFcl,
+} from '@cogoport/icons-react';
 
 export const STAT_CARDS_MAPPING = {
 	pending   : { title: 'Today\'s Pending', color: '#FF5733', status: 'pending' },
@@ -47,9 +50,16 @@ export const CARDS_MAPPING = {
 };
 export const SERVICE_ICON_MAPPING = {
 	fcl_freight : <IcMFcl height={20} width={20} />,
+	lcl_freight : <IcMFlcl height={20} width={20} />,
 	air_freight : <IcMAir height={20} width={20} />,
+	ltl_freight : <IcMFltl height={20} width={20} />,
+	ftl_freight : <IcMFftl height={20} width={20} />,
+	air_customs : <IcCAirCustoms height={20} width={20} />,
 	fcl_customs : <IcCFlclCustoms height={20} width={20} />,
+	lcl_customs : <IcCLclCustoms height={20} width={20} />,
 	haulage     : <IcMFhaulage height={20} width={20} />,
+	trailer     : <IcMTransport height={20} width={20} />,
+	fcl_cfs     : <IcCFcl height={20} width={20} />,
 };
 
 export const CLOSE_REASON_OPTIONS = [
@@ -57,6 +67,15 @@ export const CLOSE_REASON_OPTIONS = [
 	{ label: 'Rate not available', value: 'rate_not_available' },
 	{ label: 'No change in rate', value: 'no_change_in_rate' },
 ];
+
+export const CLOSE_REQUEST = [
+	{ label: 'Request not serviceable', value: 'request_not_serviceable' },
+	{ label: 'No Space With Service Provider', value: 'no_space_with_service_provider' },
+	{ label: 'Wrong Request', value: 'wrong_request' },
+	{ label: 'Lowest Rate Already Available in Platform', value: 'lowest_rate_already_available_on_platform' },
+	{ label: 'Other Reason', value: 'other_reason' },
+];
+
 export const serviceOptions = [
 	{
 		label : 'FCL Freight',
@@ -127,8 +146,11 @@ export const HEADINGS = {
 	critical_ports       : 'Critical Port Pairs',
 	expiring_rates       : 'Expiring Rates',
 	spot_search          : 'Spot Searches',
+	live_booking         : 'Live Booking',
 	monitoring_dashboard : 'Monitoring Dashboard',
 	cancelled_shipments  : 'Cancelled Shipments',
+	rate_feedback        : 'Disliked Rates',
+	rate_request         : 'Missing Rates',
 };
 
 export const commodityOptions = [
@@ -179,17 +201,34 @@ export const packagingTypeOptions = [
 export const rateTypeOptions = [
 	{
 		label : 'Market place',
-		value : 'market_pace',
+		value : 'market_place',
+
 	},
 	{
-		label : 'Promotional Rate',
-		value : 'promotional_rate',
+		label : 'Promotional',
+		value : 'promotional',
 	},
 	{
-		label : 'Consollidation Rate',
-		value : 'consollidation_rate',
+		label : 'Spot booking',
+		value : 'spot_booking',
 	},
 ];
+
+export const airRateTypeOptions = [
+	{
+		label : 'Market place',
+		value : 'market_place',
+	},
+	{
+		label : 'Promotional',
+		value : 'promotional',
+	},
+	{
+		label : 'Consolidation',
+		value : 'consolidated',
+	},
+];
+
 export const flighOperationTypeOptions = [
 	{
 		label : 'Passenger',
@@ -230,15 +269,29 @@ export const entityOptions = [
 	{ name: 'my_entity', value: 'cogo_entity_id', label: 'My Entity' },
 ];
 
+export const tradeTypeOptions = [
+	{ name: 'import', value: 'import', label: 'Import' },
+	{ name: 'export', value: 'export', label: 'Export' },
+];
+
 export const revertedOptions = [
 	{ name: 'reverted', value: 'reverted', label: 'Reverted' },
 	{ name: 'not_reverted', value: 'not_reverted', label: 'Not Reverted' },
 ];
 
-export const delayedOptions = [
-	{ name: 'delayed', value: 'delayed', label: 'Delayed' },
-	{ name: 'in_time', value: 'in_time', label: 'In Time' },
-];
+export const INCO_TERM_MAPPING = {
+	cif : 'export',
+	cfr : 'export',
+	cpt : 'export',
+	cip : 'export',
+	dat : 'export',
+	dap : 'export',
+	ddp : 'export',
+	fob : 'import',
+	exw : 'import',
+	fca : 'import',
+	fas : 'import',
+};
 
 export const filterOption = {
 	fcl_freight : ['seaport'],
@@ -252,8 +305,18 @@ export const filterOption = {
 	ftl_freight : ['pincode', 'seaport'],
 };
 
+export const lineOptions = {
+	fcl_freight : ['shipping_line'],
+	air_freight : ['airline'],
+};
+
 export const DEFAULT_VALUE = 0;
 export const FIFTY = 50;
 export const SEVENTY_FIVE = 75;
 export const VALUE_ONE = 1;
 export const DELTA_VALUE = 0.1;
+export const TWO_HUNDERD = 200;
+export const LOADER_COUNT = 3;
+export const LIST_CARD_LOADER_COUNT = 5;
+export const VALUE_TWO = 2;
+export const HUNDRED = 100;

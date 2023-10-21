@@ -1,26 +1,6 @@
-.row {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-}
-
-.col {
-	display: flex;
-	flex-direction: column;
-}
-
-.width {
-	width: 30%;
-}
-
 .submit_button {
 	display: flex;
 	justify-content: flex-end;
-}
-
-.air_date_filter input {
-	width: 340px !important;
-	height: 40px !important;
 }
 
 .service_content {
@@ -31,4 +11,12 @@
 	margin-left: 10px;
 	font-size: 16px;
 	font-weight: 600;
+}
+
+.local {
+	:global {
+		.ui_tab_list_container {
+			display: none;
+		}
+	}
 }

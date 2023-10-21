@@ -1,11 +1,12 @@
-import { DateRangepicker, Select, Modal, RadioGroup } from '@cogoport/components';
+/* eslint-disable max-lines-per-function */
+import { DateRangepicker, Select, Modal, RadioGroup, Input } from '@cogoport/components';
 import { asyncFieldsLocations, asyncFieldsOperators, useGetAsyncOptions } from '@cogoport/forms';
 import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { merge, startCase } from '@cogoport/utils';
 
 import {
 	serviceOptions, taskStatusOptions,
-	commodityOptions, filterOptions, entityOptions, revertedOptions, delayedOptions,
+	commodityOptions, filterOptions, entityOptions, revertedOptions, tradeTypeOptions, filterOption, lineOptions,
 } from '../../configurations/helpers/constants';
 
 import HeaderComponent from './header';
@@ -17,27 +18,25 @@ function Filter({
 	setShowFilters = () => {},
 	filter = {},
 	setFilter = () => {},
-	setSerialId = () => {},
 	setShowWeekData = () => {},
 }) {
-	const isAirService = filter?.service === 'air_freight';
+	const isAirService = filter?.service === 'air_freight' || filter?.service === 'air_customs';
 
-	const type = (isAirService) ? 'airport' : 'seaport';
-	const operator_type = (isAirService) ? 'airline' : 'shipping_line';
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params   : { filters: { type } },
+		params   : { filters: { type: filterOption?.[filter?.service] } },
 		includes : { default_params_required: true },
 		labelKey : 'display_name',
 	}));
 
 	const destinationLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params   : { filters: { type } },
+		params   : { filters: { type: filterOption?.[filter?.service] } },
 		includes : { default_params_required: true },
 		labelKey : 'display_name',
 	}));
+
 	const shippingLineOptions = useGetAsyncOptions(merge(
 		asyncFieldsOperators(),
-		{ params: { filters: { operator_type } } },
+		{ params: { filters: { operator_type: lineOptions?.[filter?.service] || 'shipping_line' } } },
 	));
 
 	const FCL_COMMODITY_OPTIONS = [];
@@ -52,11 +51,29 @@ function Filter({
 		});
 	});
 
+	function DateRange() {
+		return (
+			<div>
+				<p>Date Range</p>
+				<DateRangepicker
+					style={{ width: '250px' }}
+					value={{ startDate: filter?.start_date, endDate: filter?.end_date }}
+					onChange={(val) => {
+						setFilter((prev) => ({
+							...prev, start_date: val?.startDate, end_date: val?.endDate, page: 1,
+						}));
+					}}
+					isPreviousDaysAllowed
+					maxDate={new Date()}
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<Modal size="md" show={showFilters} onClose={() => setShowFilters(!showFilters)} placement="right">
 			<Modal.Header title={(
 				<HeaderComponent
-					setSerialId={setSerialId}
 					setShowWeekData={setShowWeekData}
 					setFilter={setFilter}
 				/>
@@ -80,30 +97,35 @@ function Filter({
 						/>
 					</div>
 				)}
-					<div>
-						<p>Service</p>
-						<Select
-							placeholder="select"
-							options={serviceOptions}
-							value={filter?.service}
-							style={{ width: '250px' }}
-							onChange={(value) => {
-								setFilter({
-									service           : value,
-									status            : 'pending',
-									releventToMeValue : true,
-									daily_stats       : true,
-									assign_to_id      : '',
-								});
-								setShowWeekData(false);
-							}}
-						/>
+					<div className={styles.details}>
+						<div>
+							<p>Service</p>
+							<Select
+								placeholder="select"
+								options={serviceOptions}
+								value={filter?.service}
+								style={{ width: '250px' }}
+								onChange={(value) => {
+									setFilter({
+										service           : value,
+										status            : 'pending',
+										releventToMeValue : true,
+										daily_stats       : true,
+										assign_to_id      : '',
+									});
+									setShowWeekData(false);
+								}}
+							/>
+						</div>
+						<div>
+							{DateRange()}
+						</div>
 					</div>
 					<div className={styles.details}>
 						<div>
 							<p>Origin</p>
 							<Select
-								placeholder="Country / Port Pair"
+								placeholder="Port Pair"
 								{...originLocationOptions}
 								value={filter?.origin_location}
 								style={{ width: '250px' }}
@@ -117,7 +139,7 @@ function Filter({
 						<div>
 							<p>Destination</p>
 							<Select
-								placeholder="Country / Port Pair"
+								placeholder="Port Pair"
 								{...destinationLocationOptions}
 								value={filter?.destination_location}
 								isClearable
@@ -131,70 +153,101 @@ function Filter({
 							/>
 						</div>
 					</div>
-					{(source === 'live_booking' || source === 'rate_feedback' || source === 'rate_request')
-				&& (
-					<div className={styles.radio}>
-						<div style={{ marginTop: '20px' }}>Entity</div>
-						<RadioGroup
-							options={entityOptions}
-							onChange={(val) => setFilter((prevFilters) => ({
-								...prevFilters,
-								cogo_entity_id : val,
-								page           : 1,
-							}))}
-							value={filter?.cogo_entity_id}
-						/>
-					</div>
-				)}
+
 					{(source === 'live_booking')
 					&& (
-						<div className={styles.radio}>
-							<RadioGroup
-								options={revertedOptions}
-								onChange={(val) => setFilter((prevFilters) => ({
-									...prevFilters,
-									is_flash_booking_reverted : val,
-									page                      : 1,
-								}))}
-								value={filter?.is_flash_booking_reverted}
-							/>
-
-							{filter?.is_flash_booking_reverted === 'not_reverted'
-							&& (
+						<div className={styles.details}>
+							<div className={styles.radio}>
+								<div>Status</div>
 								<RadioGroup
-									options={delayedOptions}
+									options={revertedOptions}
 									onChange={(val) => setFilter((prevFilters) => ({
 										...prevFilters,
-										is_flash_booking_delayed : val,
-										page                     : 1,
+										is_flash_booking_reverted : val,
+										page                      : 1,
 									}))}
-									value={filter?.is_flash_booking_delayed}
+									value={filter?.is_flash_booking_reverted}
 								/>
-							)}
+							</div>
+							<div className={styles.radio}>
+								<div>Task Id</div>
+								<Input
+									size="md"
+									value={filter?.serial_id}
+									onChange={(val) => {
+										setFilter((prevFilters) => ({
+											...prevFilters,
+											serial_id : val,
+											page      : 1,
+										}));
+									}}
+									style={{ width: '250px' }}
+								/>
+							</div>
 						</div>
 					)}
+
+					<div className={styles.details}>
+						{(source === 'live_booking' || source === 'rate_feedback' || source === 'rate_request')
+								&& (
+									<div className={styles.radio}>
+										<div>Entity</div>
+										<RadioGroup
+											options={entityOptions}
+											onChange={(val) => setFilter((prevFilters) => ({
+												...prevFilters,
+												cogo_entity_id : val,
+												page           : 1,
+											}))}
+											value={filter?.cogo_entity_id}
+										/>
+									</div>
+								)}
+						{(source === 'live_booking')
+						&& (
+							<div className={styles.radio}>
+								<div>Trade Type</div>
+								<RadioGroup
+									options={tradeTypeOptions}
+									onChange={(val) => setFilter((prevFilters) => ({
+										...prevFilters,
+										trade_type : val,
+										page       : 1,
+									}))}
+									value={filter?.trade_type}
+									style={{ width: '250px' }}
+								/>
+							</div>
+						)}
+					</div>
 
 					{ (source === 'critical_ports' || source === 'expiring_rates'
 					|| source === 'cancelled_shipments') && (
 						<div>
 							<div className={styles.details}>
-								<div>
-									<p>{(isAirService) ? 'Air Line' : 'Shipping Line'}</p>
-									<Select
-										placeholder="Search here"
-										{...shippingLineOptions}
-										value={filter?.operater_type}
-										isClearable
-										onChange={(val) => {
-											setFilter((prevFilters) => ({
-												...prevFilters,
-												operater_type:
+								{['fcl_freight', 'air_freight']?.includes(filter?.service)
+								&& (
+									<div>
+										<p>
+											{ filter?.service === 'air_freight' || filter?.service === 'air_customs'
+												? 'Air Line' : 'Shipping Line'}
+										</p>
+										<Select
+											placeholder="Search here"
+											{...shippingLineOptions}
+											value={filter?.operater_type}
+											isClearable
+											onChange={(val) => {
+												setFilter((prevFilters) => ({
+													...prevFilters,
+													operater_type:
 												val,
-												page: 1,
-											}));
-										}}
-									/>
-								</div>
+													page: 1,
+												}));
+											}}
+										/>
+									</div>
+								)}
 								<div>
 									<p>Commodity Type</p>
 									<Select
@@ -221,20 +274,7 @@ function Filter({
 										}}
 									/>
 								</div>
-								<div>
-									<p>Date Range</p>
-									<DateRangepicker
-										style={{ width: '250px' }}
-										value={{ startDate: filter?.start_date, endDate: filter?.end_date }}
-										onChange={(val) => {
-											setFilter((prev) => ({
-												...prev, start_date: val?.startDate, end_date: val?.endDate, page: 1,
-											}));
-										}}
-										isPreviousDaysAllowed
-										maxDate={new Date()}
-									/>
-								</div>
+								{DateRange()}
 							</div>
 						</div>
 					)}
