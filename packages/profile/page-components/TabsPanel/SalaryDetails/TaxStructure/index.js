@@ -10,7 +10,6 @@ function TaxStructure({ taxShow, setTaxShow, employee_id }) {
 		key,
 		value: dataArr?.salary_structure?.[key],
 	}));
-	console.log('list', list);
 	return (
 		<Modal size="lg" show={taxShow} onClose={() => setTaxShow(false)} placement="center">
 			<Modal.Header title="Salary Structure Details" />

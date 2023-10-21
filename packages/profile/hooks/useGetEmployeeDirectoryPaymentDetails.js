@@ -25,7 +25,7 @@ const useGetEmployeeDirectoryPaymentDetail = (user_id = '') => {
 		}
 	}, [user_id, getEmployeePaymentDetails]);
 
-	return { loading, data };
+	return { loading, data, getEmployeePaymentDetails };
 };
 
 export default useGetEmployeeDirectoryPaymentDetail;
