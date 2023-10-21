@@ -9,9 +9,10 @@ import styles from './styles.module.css';
 
 function DetailsCard({
 	heading = '', details = [], isGrid = true, data = {},
-	loading = false, handleClickDetails, keyMapping,
+	loading = false, handleClickDetails, keyMapping, statutoryDetails,
 }) {
 	const { employee_detail, modified_employee_detail, processed_employee_detail, personal_details } = data || {};
+	console.log('🚀 ~ file: index.js:15 ~ data:', data);
 
 	const { present_address, employee_education_details } = employee_detail || {};
 	const { family_details } = personal_details || {};
@@ -24,6 +25,7 @@ function DetailsCard({
 			modified  : modified_employee_detail,
 			personal  : personal_details,
 			family    : family_details,
+			statutory : statutoryDetails,
 		};
 
 		if (employee_education_details) {

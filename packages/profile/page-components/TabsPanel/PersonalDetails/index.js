@@ -14,6 +14,7 @@ import styles from './styles.module.css';
 
 function PersonalDetails({ data = {}, loading = false, getEmployeeDetails }) {
 	const [show, setShow] = useState(false);
+
 	// const { employee_detail, modified_employee_detail, processed_employee_detail, personal_details } = data || {};
 	// const { family_details } = personal_details || {};
 	// console.log('🚀 ~ file: index.js:26 ~ PersonalDetails ~ family_details:', family_details);

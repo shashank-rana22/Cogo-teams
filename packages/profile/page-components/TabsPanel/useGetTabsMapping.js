@@ -4,6 +4,7 @@ import EmploymentDetails from './EmploymentDetails/index';
 import OtherDetails from './OtherDetails';
 import PersonalDetails from './PersonalDetails/index';
 import SalaryDetails from './SalaryDetails';
+import StatutoryDetails from './StatutoryDetails';
 
 const useGetTabsMapping = (data = {}, loading = false, getEmployeeDetails = () => {}) => (
 	[
@@ -36,6 +37,11 @@ const useGetTabsMapping = (data = {}, loading = false, getEmployeeDetails = () =
 			name      : 'other_details',
 			title     : 'Other Details',
 			Component : <OtherDetails data={data} loading={loading} />,
+		},
+		{
+			name      : 'statuatory_details',
+			title     : 'Statuatory Details',
+			Component : <StatutoryDetails data={data} loading={loading} />,
 		},
 	]
 );
