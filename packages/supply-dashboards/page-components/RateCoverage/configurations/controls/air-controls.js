@@ -4,7 +4,7 @@ import {
 	densityCargoOptions,
 	densityRatioOptions,
 	flighOperationTypeOptions,
-	handlingtypeOptions, packagingTypeOptions, priceTypeOptions, rateTypeOptions,
+	handlingtypeOptions, packagingTypeOptions, priceTypeOptions, airRateTypeOptions,
 } from '../helpers/constants';
 
 import styles from './styles.module.css';
@@ -19,7 +19,7 @@ const airControls = ({
 			label       : 'Rate type',
 			placeholder : 'Select Rate Type',
 			type        : 'select',
-			options     : rateTypeOptions,
+			options     : airRateTypeOptions,
 			span        : 4,
 			value       : data?.rate_type,
 			rules       : { required: 'rate type is required' },

@@ -23,7 +23,7 @@ const API_NAME = {
 	lcl_freight : 'create_lcl_freight_rate',
 	lcl_customs : 'create_lcl_customs_rate',
 	air_customs : 'create_air_customs_rate',
-	trailer     : 'create_trailer_freight_rate',
+	trailer     : 'create_haulage_freight_rate',
 	ltl_freight : 'create_ltl_freight_rate',
 	ftl_freight : 'create_ftl_freight_rate',
 	fcl_cfs     : 'create_fcl_cfs_rate',

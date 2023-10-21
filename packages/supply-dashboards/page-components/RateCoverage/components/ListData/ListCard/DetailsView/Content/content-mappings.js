@@ -2,12 +2,14 @@ import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCopy } from '@cogoport/icons-react';
-import { differenceInDays, startCase } from '@cogoport/utils';
+import { differenceInDays, isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { DEFAULT_VALUE, INCO_TERM_MAPPING } from '../../../../../configurations/helpers/constants';
+import { DEFAULT_VALUE, INCO_TERM_MAPPING, VALUE_ONE } from '../../../../../configurations/helpers/constants';
 import copyToClipboard from '../../../../../utilis/copyToClipboard';
 import styles from '../styles.module.css';
+
+import BookingParamsMapping from './bookingParamsMapping';
 
 function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, shipment_data = {} }) {
 	const { primary_service_detail, summary } = shipment_data || {};
@@ -17,7 +19,7 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 		schedule_departure = '', shipping_line = {}, preferred_shipping_lines, feedbacks = [], closing_remarks = [],
 		status = '', serial_id, selected_schedule_arrival, selected_schedule_departure,
 		preferred_freight_rate, preferred_freight_rate_currency, commodity_type = '', price_type = '',
-		payment_term, booking_params = {}, preferred_airlines = [], operation_type = '', packages = [], volume, weight,
+		payment_term, booking_params = {}, preferred_airlines = [], operation_type = '', packages, volume, weight,
 	} = primary_service_detail || feedbackData || requestData || {};
 
 	const {
@@ -30,6 +32,8 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 			new Date(selected_schedule_arrival || new Date()),
 			new Date(selected_schedule_departure || new Date()),
 		);
+
+	const bookingLength = booking_params?.packages || packages;
 
 	const handleCopy = (text) => {
 		const value = [text].join('\n');
@@ -54,62 +58,20 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 		{ label: `${volume || 0} cbm` },
 		{ label: `Chargeable Weight: ${weight || '-'}` },
 		{ label: booking_packing_count && startCase(`packages count : ${booking_packing_count}`) },
-		{
-			label: packages.length > 0
-			&& (
-				packages.map((x) => (
-					<div style={{ display: 'flex' }} key={x.handling_type}>
-
-						<div>
-							Package Count:
-							{' '}
-							{x.packages_count}
-							{' '}
-							X
-						</div>
-						{x.handling_type && (
-							<div>
-								Handling Type:
-								{' '}
-								{x.handling_type}
-								{' '}
-								x
-							</div>
-						)}
-					&nbsp;
-						{x.packing_type
-					&& (
-						<div>
-							Packing Type:
-							{' '}
-							{x.packing_type}
-							{' '}
-							X
-						</div>
+		!isEmpty(bookingLength) && {
+			label: bookingLength > 1
+				? 			(
+					<Tooltip content={(
+						<BookingParamsMapping booking_params={booking_params} packages={packages} />
 					)}
-										&nbsp;
-
-						<div>
-							{x.height}
-							{' '}
-							X
-						</div>
-
-										&nbsp;
-						<div>
-							{x.width}
-							{' '}
-							X
-						</div>
-										&nbsp;
-						<div>
-							{x.length}
-							{' '}
-							X
-						</div>
-					</div>
-				))
-			),
+					>
+						{startCase(booking_params?.packages?.[GLOBAL_CONSTANTS.zeroth_index])}
+						, +
+						{bookingLength - VALUE_ONE}
+						more
+					</Tooltip>
+				)
+				:	<BookingParamsMapping booking_params={booking_params} packages={packages} />,
 		},
 	];
 

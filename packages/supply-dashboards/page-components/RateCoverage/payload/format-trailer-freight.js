@@ -1,20 +1,21 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { format } from '@cogoport/utils';
 
 const DEFAULT_TRANSIT_TIME = 0;
 const TOTAL_HOURS = 24;
 
 const formatTrailerFreight = (val, user_id) => {
 	const formattedValues = {
-		origin_location_id      : val.origin,
-		destination_location_id : val.destination,
-		service_provider_id     : val.service_provider,
-		procured_by_id          : val.rate_procured || user_id,
-		sourced_by_id           : val.rate_provided,
+		origin_location_id      : val.origin_location_id,
+		destination_location_id : val.destination_location_id,
+		service_provider_id     : val.service_provider_id,
+		sourced_by_id           : val.sourced_by_id,
+		procured_by_id          : val.procured_by_id || user_id,
 		trailer_type            : val.trailer_type,
 		container_size          : val.container_size,
 		container_type          : val.container_type,
 		trip_type               : 'one_way',
+		validity_start          : val?.validity_start,
+		validity_end            : val?.validity_end,
 	};
 
 	const { commodity } = val;
@@ -59,8 +60,6 @@ const formatTrailerFreight = (val, user_id) => {
 
 	LINE_ITEMS.push(fuelSurchargeObject);
 	formattedValues.line_items = LINE_ITEMS;
-	formattedValues.validity_start = format(val.date_range.startDate);
-	formattedValues.validity_end = format(val.date_range.endDate);
 	formattedValues.transport_modes = ['trailer'];
 	formattedValues.haulage_type = 'merchant';
 	return formattedValues;

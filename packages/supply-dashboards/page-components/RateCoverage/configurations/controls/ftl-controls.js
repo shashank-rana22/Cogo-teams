@@ -3,6 +3,8 @@
 import { currencyOptions } from '../helpers/constants';
 import { truck_types } from '../truck-types';
 
+import styles from './styles.module.css';
+
 const ftlControls = ({
 	data,
 	CommodityOptions,
@@ -44,8 +46,8 @@ const ftlControls = ({
 			type        : 'select',
 			placeholder : 'Origin Location',
 			span        : 4,
-			value       : data?.origin_port?.id,
-			disabled	   : data?.origin_port?.id,
+			value       : data?.origin_location_id,
+			disabled    : data?.origin_location_id,
 			...originLocationOptions,
 			rules       : { required: 'origin location is required' },
 		},
@@ -62,8 +64,8 @@ const ftlControls = ({
 			type        : 'select',
 			label       : 'Destination Location',
 			span        : 4,
-			value       : data?.destination_port?.id,
-			disabled    : data?.destination_port?.id,
+			value       : data?.destination_location_id,
+			disabled    : data?.destination_location_id,
 			...destinationLocationOptions,
 			placeholder : 'Destination Location',
 			rules       : { required: 'destination location is required' },
@@ -168,15 +170,20 @@ const ftlControls = ({
 			rules       : { required: true },
 		},
 		{
-			name        : 'date_range',
-			placeholder : 'Select Range',
-			type        : 'date_picker',
-			label       : 'Validity of Rate',
-			span        : 4,
-			minDate     : new Date(),
-			pickerType  : 'range',
-			rules       : { required: true },
-			className   : 'primary',
+			label     : 'Validity Start',
+			name      : 'validity_start',
+			type      : 'date_picker',
+			className : styles.air_date_filter,
+			span      : 4,
+			rules     : { required: 'validity is required' },
+		},
+		{
+			label     : 'Validity End',
+			name      : 'validity_end',
+			type      : 'date_picker',
+			className : styles.air_date_filter,
+			span      : 4,
+			rules     : { required: 'validity end is required' },
 		},
 		{
 			name        : 'unit',
@@ -228,7 +235,7 @@ const ftlControls = ({
 			label       : 'Fuel Surcharge',
 			name        : 'fuel_surcharge_type',
 			type        : 'select',
-			span        : 2,
+			span        : 1.5,
 			placeholder : '% of Basic Freight',
 			style       : {
 				marginLeft  : '10%',
@@ -247,7 +254,7 @@ const ftlControls = ({
 			className: 'primary lg',
 		},
 		{
-			span        : 2,
+			span        : 2.5,
 			name        : 'fuel_surcharge_value',
 			type        : 'number',
 			placeholder : '0',
@@ -258,7 +265,7 @@ const ftlControls = ({
 			placeholder : 'Enter Remarks',
 			type        : 'textarea',
 			span        : 4,
-			heading     : 'Remarks',
+			label       : 'Remarks',
 			className   : 'primary lg ',
 		},
 		source === 'live_booking'

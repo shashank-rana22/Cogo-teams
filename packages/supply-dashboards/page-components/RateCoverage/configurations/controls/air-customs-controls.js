@@ -91,8 +91,15 @@ const airCustomsControls = ({
 			type               : 'fieldArray',
 			showButtons        : true,
 			buttonText         : 'Add Custom Line Items',
-			noDeleteButtonTill : 0,
-			controls           : [
+			noDeleteButtonTill : 1,
+			value              : [{
+				code     : '',
+				unit     : '',
+				currency : '',
+				price    : '',
+				remarks  : '',
+			}],
+			controls: [
 				{
 					name        : 'code',
 					type        : 'select',

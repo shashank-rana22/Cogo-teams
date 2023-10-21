@@ -231,7 +231,16 @@ function ServiceDetailsContent({
 												<div className={styles.label}>
 													Disliked Rate:
 													<div className={styles.price_value}>
-														{rate_card?.line_items[0]?.buy_price}
+														{formatAmount({
+															amount   : rate_card?.line_items[0]?.buy_price,
+															currency : rate_card?.line_items[0]?.currency,
+															options  : {
+																style                 : 'currency',
+																currencyDisplay       : 'symbol',
+																maximumFractionDigits : 0,
+															},
+														})}
+
 													</div>
 													{' '}
 													{' '}

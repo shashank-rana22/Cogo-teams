@@ -5,6 +5,8 @@ import { isEmpty } from '@cogoport/utils';
 import { formatLineItems, formatFirstLineItem } from '../helpers/revertPriceHelpers';
 import getPayload from '../payload/getRevertPricePayload';
 
+const LINE_ITEMS_NOT_REQUIRED_FOR = ['air_freight', 'ftl_freight', 'ltl_freight', 'ftl_freight'];
+
 const useUpdateFlashBookingRate = () => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_shipment_flash_booking_rate',
@@ -41,7 +43,7 @@ const useUpdateFlashBookingRate = () => {
 		if (isEmpty(lineItemsParams) && !isEmpty(line_items)) {
 			lineItemsParams = formatFirstLineItem({ lineItems: line_items, values: formData });
 		}
-		if (isEmpty(lineItemsParams)) {
+		if (isEmpty(lineItemsParams) && !LINE_ITEMS_NOT_REQUIRED_FOR.includes(service)) {
 			Toast.error(
 				'You can not revert to this live booking - No LineItems!!',
 			);
@@ -70,7 +72,7 @@ const useUpdateFlashBookingRate = () => {
 					importer_exporter_id    : is_shipper_specific === true ? summary?.importer_exporter_id : undefined,
 					weight_slabs            : WEIGHT_SLABS,
 					formattedPayload        : formattedPayload || undefined,
-					service_provider_id     : new_service_provider_id || undefined,
+					service_provider_id     : new_service_provider_id || service_provider_id || undefined,
 					shipping_line_id        : shipping_line_id || undefined,
 					supplier_contract_no    : supplier_contract_no || undefined,
 				},

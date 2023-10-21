@@ -169,6 +169,7 @@ const ltlControls = ({
 			placeholder : '0',
 			className   : 'primary lg',
 			span        : 2,
+			rules       : { required: 'is required' },
 		},
 		{
 			name        : 'date_range',
@@ -195,6 +196,7 @@ const ltlControls = ({
 			type      : 'number',
 			span      : 4,
 			className : 'primary lg',
+			rules     : { required: 'is required' },
 		},
 
 		{
@@ -204,6 +206,7 @@ const ltlControls = ({
 			type        : 'number',
 			span        : 4,
 			className   : 'primary lg',
+			rules       : { required: 'is required' },
 		},
 		{
 			name        : 'unit',

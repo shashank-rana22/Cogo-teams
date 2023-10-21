@@ -92,7 +92,6 @@ const cfsControls = ({ data, originLocationOptions, CommodityOptions, source }) 
 			value       : data?.location_id,
 			disabled  	 : data?.location_id,
 			...originLocationOptions,
-			rules       : { required: 'origin location is required' },
 		},
 		{
 			label       : 'Trade Type',
@@ -270,7 +269,7 @@ const cfsControls = ({ data, originLocationOptions, CommodityOptions, source }) 
 			type               : 'fieldArray',
 			showButtons        : true,
 			buttonText         : 'Add Custom Line Items',
-			noDeleteButtonTill : 0,
+			noDeleteButtonTill : 1,
 			controls           : [
 				{
 					name        : 'cfs_line_items',

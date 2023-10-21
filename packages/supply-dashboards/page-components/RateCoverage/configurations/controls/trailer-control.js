@@ -4,6 +4,8 @@ import containerTypes from '@cogoport/constants/container-types.json';
 
 import { currencyOptions } from '../helpers/constants';
 
+import styles from './styles.module.css';
+
 const trailerControls = ({
 	data,
 	CommodityOptions,
@@ -137,17 +139,20 @@ const trailerControls = ({
 			rules       : { required: 'commodity is required' },
 		},
 		{
-			name        : 'date_range',
-			placeholder : 'Select Range',
-			type        : 'date_range',
-			label       : 'Validity of Rate',
-			span        : 4,
-			minDate     : new Date(),
-			pickerType  : 'range',
-			rules       : {
-				required: true,
-			},
-			className: 'primary',
+			label     : 'Validity Start',
+			name      : 'validity_start',
+			type      : 'date_picker',
+			className : styles.air_date_filter,
+			span      : 4,
+			rules     : { required: 'validity is required' },
+		},
+		{
+			label     : 'Validity End',
+			name      : 'validity_end',
+			type      : 'date_picker',
+			className : styles.air_date_filter,
+			span      : 4,
+			rules     : { required: 'validity end is required' },
 		},
 		{
 			label       : 'Detention Free Time',

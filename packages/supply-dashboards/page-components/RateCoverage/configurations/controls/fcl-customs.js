@@ -2,7 +2,7 @@
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
 
-import { currencyOptions, rateTypeOptions } from '../helpers/constants';
+import { currencyOptions } from '../helpers/constants';
 
 const fclCustomsControls = ({
 	data,
@@ -118,8 +118,17 @@ const fclCustomsControls = ({
 			label       : 'Rate Type',
 			span        : 3,
 			placeholder : 'Rate Type',
-			options     : rateTypeOptions,
-			rules       : {
+			options     : [
+				{
+					label : 'Market place',
+					value : 'market_place',
+				},
+				{
+					label : 'Promotional',
+					value : 'promotional',
+				},
+			],
+			rules: {
 				required: 'rate type is required',
 			},
 		},

@@ -146,8 +146,11 @@ export const HEADINGS = {
 	critical_ports       : 'Critical Port Pairs',
 	expiring_rates       : 'Expiring Rates',
 	spot_search          : 'Spot Searches',
+	live_booking         : 'Live Booking',
 	monitoring_dashboard : 'Monitoring Dashboard',
 	cancelled_shipments  : 'Cancelled Shipments',
+	rate_feedback        : 'Disliked Rates',
+	rate_request         : 'Missing Rates',
 };
 
 export const commodityOptions = [
@@ -210,6 +213,22 @@ export const rateTypeOptions = [
 		value : 'spot_booking',
 	},
 ];
+
+export const airRateTypeOptions = [
+	{
+		label : 'Market place',
+		value : 'market_place',
+	},
+	{
+		label : 'Promotional',
+		value : 'promotional',
+	},
+	{
+		label : 'Consolidation',
+		value : 'consolidated',
+	},
+];
+
 export const flighOperationTypeOptions = [
 	{
 		label : 'Passenger',
