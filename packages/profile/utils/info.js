@@ -112,22 +112,30 @@ export const employmentInfo = [
 			{ label: 'PMS', key: 'details', value: 'Set C' },
 		],
 	},
+	{
+		heading : 'JOB SQUADS',
+		details : [
+			{ label: 'Chapter Name', key: 'employee_squad', value: 'chapter_name', isStartCase: true },
+			{ label: 'Squad Name', key: 'employee_squad', value: 'squad_name', isStartCase: true },
+			{ label: 'Sub Chapter Name', key: 'employee_squad', value: 'sub_chapter_name', isStartCase: true },
+			{ label: 'Tribe Name', key: 'employee_squad', value: 'tribe_name', isStartCase: true },
+		],
+	},
 ];
 
 export const statutoryInfo = {
 	heading : 'BASIC DETAILS',
 	details : [
-		{ label: 'PF Applicable', value: true },
+		{ label: 'PF Applicable', key: 'statutory', value: 'pf_applicable' },
 		{ label: 'PF Pension Applicable', value: true },
 		{ label: 'Employee PF Ceiling Applicable', value: true },
-		{ label: 'Employer PF Ceiling Applicable', value: true },
 		{ label: 'PF Joining Date', value: '23/03/2022' },
 		{ label: 'PF Number', value: '00125510' },
 		{ label: 'UAN Number', value: '54893120051' },
 		{ label: 'PF Wage', value: 0 },
 		{ label: 'VPF', value: '0.0%' },
-		{ label: 'ESIC Applicable', value: true },
-		{ label: 'PT Applicable', value: true },
+		{ label: 'ESIC Applicable', key: 'statutory', value: 'esic' },
+		{ label: 'PT Applicable', key: 'statutory', value: 'professional_tax' },
 		{ label: 'LWF Applicable', value: true },
 		{ label: 'IT Applicable', value: true },
 		{ label: 'Gratuity Applicable', value: true },

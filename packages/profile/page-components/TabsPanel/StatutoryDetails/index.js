@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useGetEmployeeStatutoryDetails from '../../../hooks/useGetEmployeeStatutoryDetails';
 import { statutoryInfo } from '../../../utils/info';
 import { otherStatuoryInfo } from '../../../utils/otherInfo';
 import DetailsCard from '../DetailsCard';
@@ -7,9 +8,11 @@ import RightGlance from '../RightGlance';
 
 import styles from './styles.module.css';
 
-function StatutoryDetails({ loading = false }) {
+function StatutoryDetails({ data = {}, loading = false }) {
 	const info = statutoryInfo;
 	const otherInfo = otherStatuoryInfo;
+	const { employee_detail } = data || {};
+	const { data: statutoryDetails } = useGetEmployeeStatutoryDetails(employee_detail?.id);
 
 	return (
 		<div className={styles.tab_content}>
@@ -20,7 +23,13 @@ function StatutoryDetails({ loading = false }) {
 					<span className={styles.detail}>View and manage employee details</span>
 				</div>
 				<div className={styles.info_container}>
-					<DetailsCard heading={info.heading} details={info.details} loading={loading} />
+					<DetailsCard
+						heading={info.heading}
+						details={info.details}
+						data={data}
+						loading={loading}
+						statutoryDetails={statutoryDetails}
+					/>
 				</div>
 			</div>
 			<RightGlance otherInfo={otherInfo} loading={loading} />
