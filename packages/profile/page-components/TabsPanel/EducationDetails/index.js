@@ -1,5 +1,3 @@
-import { Button } from '@cogoport/components';
-import { IcMEdit } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -20,6 +18,7 @@ function EducationDetails({ data = {}, loading = false, getEmployeeDetails = () 
 	console.log(employee_education_details, 'detailsEmployee');
 
 	const info = useGetEducationInfo(employee_education_details);
+	console.log(info, 'infor');
 	const otherInfo = otherEducationInfo;
 	const [detailsToEdit, setDetailsToEdit] = useState(null);
 
@@ -47,17 +46,10 @@ function EducationDetails({ data = {}, loading = false, getEmployeeDetails = () 
 										heading={heading}
 										details={details}
 										data={data}
+										keyEdu={heading}
 										loading={loading}
+										handleClickDetails={handleClickDetails}
 									/>
-									<Button
-										className={styles.info_button}
-										size="md"
-										themeType="secondary"
-										onClick={() => handleClickDetails({ heading, details })}
-									>
-										<IcMEdit style={{ marginRight: '5px' }} />
-										Edit
-									</Button>
 								</div>
 							))}
 						</div>
