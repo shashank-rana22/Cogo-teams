@@ -305,6 +305,11 @@ export const filterOption = {
 	ftl_freight : ['pincode', 'seaport'],
 };
 
+export const lineOptions = {
+	fcl_freight : ['shipping_line'],
+	air_freight : ['airline'],
+};
+
 export const DEFAULT_VALUE = 0;
 export const FIFTY = 50;
 export const SEVENTY_FIVE = 75;

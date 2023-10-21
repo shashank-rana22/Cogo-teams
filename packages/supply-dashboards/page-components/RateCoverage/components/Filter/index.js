@@ -6,7 +6,7 @@ import { merge, startCase } from '@cogoport/utils';
 
 import {
 	serviceOptions, taskStatusOptions,
-	commodityOptions, filterOptions, entityOptions, revertedOptions, tradeTypeOptions, filterOption,
+	commodityOptions, filterOptions, entityOptions, revertedOptions, tradeTypeOptions, filterOption, lineOptions,
 } from '../../configurations/helpers/constants';
 
 import HeaderComponent from './header';
@@ -33,9 +33,10 @@ function Filter({
 		includes : { default_params_required: true },
 		labelKey : 'display_name',
 	}));
+
 	const shippingLineOptions = useGetAsyncOptions(merge(
 		asyncFieldsOperators(),
-		{ params: { filters: { operator_type: filterOption?.[filter?.service] } } },
+		{ params: { filters: { operator_type: lineOptions?.[filter?.service] || 'shipping_line' } } },
 	));
 
 	const FCL_COMMODITY_OPTIONS = [];
@@ -224,23 +225,29 @@ function Filter({
 					|| source === 'cancelled_shipments') && (
 						<div>
 							<div className={styles.details}>
-								<div>
-									<p>{(isAirService) ? 'Air Line' : 'Shipping Line'}</p>
-									<Select
-										placeholder="Search here"
-										{...shippingLineOptions}
-										value={filter?.operater_type}
-										isClearable
-										onChange={(val) => {
-											setFilter((prevFilters) => ({
-												...prevFilters,
-												operater_type:
+								{['fcl_freight', 'air_freight']?.includes(filter?.service)
+								&& (
+									<div>
+										<p>
+											{ filter?.service === 'air_freight' || filter?.service === 'air_customs'
+												? 'Air Line' : 'Shipping Line'}
+										</p>
+										<Select
+											placeholder="Search here"
+											{...shippingLineOptions}
+											value={filter?.operater_type}
+											isClearable
+											onChange={(val) => {
+												setFilter((prevFilters) => ({
+													...prevFilters,
+													operater_type:
 												val,
-												page: 1,
-											}));
-										}}
-									/>
-								</div>
+													page: 1,
+												}));
+											}}
+										/>
+									</div>
+								)}
 								<div>
 									<p>Commodity Type</p>
 									<Select

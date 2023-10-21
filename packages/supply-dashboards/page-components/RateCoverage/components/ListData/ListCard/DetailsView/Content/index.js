@@ -89,7 +89,7 @@ function ServiceDetailsContent({
 		textToCopy += formatLine('scheduleDeparture: ', schedule_departure);
 		textToCopy += formatLine('shippingLine: ', shipping_line);
 		textToCopy += formatLine('feedbacks: ', feedbacks);
-		textToCopy += formatLine('closing_remarks: ', closing_remarks);
+		textToCopy += formatLine('closingRemarks: ', closing_remarks);
 		textToCopy += formatLine('serialId: ', serial_id);
 		textToCopy += formatLine('createdAt: ', created_at);
 		textToCopy += formatLine('incoTerm', inco_term);
@@ -233,7 +233,7 @@ function ServiceDetailsContent({
 													<div className={styles.price_value}>
 														{formatAmount({
 															amount   : rate_card?.line_items[0]?.buy_price,
-															currency : rate_card?.line_items[0]?.currency,
+															currency : rate_card?.line_items[0]?.cure,
 															options  : {
 																style                 : 'currency',
 																currencyDisplay       : 'symbol',
