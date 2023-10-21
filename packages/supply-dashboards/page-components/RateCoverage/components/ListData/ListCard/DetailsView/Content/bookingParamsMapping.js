@@ -1,7 +1,6 @@
 import React from 'react';
 
 function BookingParamsMapping({ booking_params, packages }) {
-	console.log(packages, 'packages');
 	return (
 		<div>
 			{(booking_params?.packages || packages)?.map((x) => (
