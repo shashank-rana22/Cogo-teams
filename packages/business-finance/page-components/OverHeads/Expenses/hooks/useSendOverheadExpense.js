@@ -8,7 +8,7 @@ const useSendOverheadExpense = () => {
 		{
 			url     : '/purchase/expense/sync-overhead-expense-to-open-search',
 			method  : 'post',
-			authKey : 'post_incident_management_incident_send_overhead_mail',
+			authKey : 'post_overhead_expense_to_open_search',
 		},
 		{ manual: true },
 	);
