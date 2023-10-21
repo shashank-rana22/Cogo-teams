@@ -5,8 +5,6 @@ import styles from './styles.module.css';
 function Body({
 	rate = {},
 	detail = {},
-	// infoBanner = {},
-	// showGuide = false,
 	isSelectedCard = false,
 	setRouterLoading = () => {},
 }) {
