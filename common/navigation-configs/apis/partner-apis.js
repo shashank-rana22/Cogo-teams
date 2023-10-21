@@ -8719,6 +8719,12 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
+			api         : 'get_payments_outstanding_open_invoices_report',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
 			api         : 'get_shipment_cost_sheet',
 			access_type : 'private',
 		},
@@ -9727,6 +9733,12 @@ const partner = {
 			access_type : 'private',
 			module      : 'JournalVoucher',
 			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'post_payments_invoice_exchange_rates',
+			access_type : 'private',
+			module      : 'settlement',
+			feature     : 'settlement',
 		},
 		{
 			api         : 'post_payments_parent_jv_bulk_jv_upload',
