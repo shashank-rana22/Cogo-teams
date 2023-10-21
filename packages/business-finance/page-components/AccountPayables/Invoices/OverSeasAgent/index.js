@@ -4,6 +4,7 @@ import { useSelector } from '@cogoport/store';
 import React, { useState, useEffect } from 'react';
 
 import useGetInvoiceSelection from '../hooks/useInvoiceSelection';
+import useListGetSelectedPayrunActiveTab from '../hooks/useListGetSelectedPayrunActiveTab';
 
 import PayabledDetails from './PayableDetails';
 import styles from './styles.module.css';
@@ -38,9 +39,17 @@ function OverSeasAgent() {
 	const [bLData, setBLData] = useState([{}]);
 	const [showPayableAmount, setShowPayableAmount] = useState(MIN_AMOUNT);
 	const [showSaveAsDraft, setShowSaveAsDraft] = useState(false);
-	const { organizationId = '' } = query || {};
+	const { organizationId = '', payrun = '' } = query || {};
 	const { goBack, onClear, currency } = useGetInvoiceSelection({});
 	const { payrunState = '' } = bLData || {};
+
+	const { defaultTab = '' } = useListGetSelectedPayrunActiveTab({ payrun });
+
+	useEffect(() => {
+		if (defaultTab) {
+			setActive(defaultTab);
+		}
+	}, [defaultTab]);
 
 	useEffect(() => {
 		if (payrunState === 'INVOICE_BL_CHECK') {
