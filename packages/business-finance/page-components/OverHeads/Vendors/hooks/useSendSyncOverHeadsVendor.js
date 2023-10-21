@@ -6,8 +6,9 @@ import toastApiError from '../../../commons/toastApiError';
 const useSendSyncOverHeadsVendor = () => {
 	const [{ loading = false }, trigger] = useRequestBf(
 		{
-			url    : '/purchase/expense/sync-overhead-vendor-to-open-search',
-			method : 'post',
+			url     : '/purchase/expense/sync-overhead-vendor-to-open-search',
+			method  : 'post',
+			authKey : 'post_overhead_vendor_to_open_search',
 		},
 		{ manual: true },
 	);

@@ -6,8 +6,9 @@ import toastApiError from '../../../commons/toastApiError';
 const useSendOverheadExpense = () => {
 	const [{ loading = false }, trigger] = useRequestBf(
 		{
-			url    : '/purchase/expense/sync-overhead-expense-to-open-search',
-			method : 'post',
+			url     : '/purchase/expense/sync-overhead-expense-to-open-search',
+			method  : 'post',
+			authKey : 'post_incident_management_incident_send_overhead_mail',
 		},
 		{ manual: true },
 	);

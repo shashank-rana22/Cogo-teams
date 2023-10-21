@@ -9323,6 +9323,14 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'post_overhead_vendor_to_open_search',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_overhead_expense_to_open_search',
+			access_type : 'private',
+		},
+		{
 			api         : 'get_common_job_post_tax_profit',
 			access_type : 'private',
 		},
