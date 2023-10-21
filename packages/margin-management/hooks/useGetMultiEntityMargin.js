@@ -7,10 +7,28 @@ import { useState } from 'react';
 
 import SERVICE_NAME_MAPPING from '../helpers/service-name-mapping';
 
+const getPayload = (val) => Object.keys(val).map((item) => ({
+	from  : item.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
+	to    : item.split('_')?.[1],
+	value : val[item],
+}));
+
+const options = Object.keys(SERVICE_NAME_MAPPING).map((key) => ({
+	label : SERVICE_NAME_MAPPING[key],
+	value : key,
+}));
+
+options.unshift({
+	label           : 'GLOBAL SETTING',
+	value           : 'global',
+	backgroundColor : '#393f70',
+	color           : '#fff',
+});
+
 function useGetMultiEntityMargin() {
 	const [activeService, setActiveService] = useState('fcl_freight');
 
-	const [showModal, setShowModal] = useState(false);
+	const [showModal, setShowModal] = useState({});
 
 	const [{ data }] = useRequest(
 		{
@@ -25,12 +43,6 @@ function useGetMultiEntityMargin() {
 
 	const formValues = watch();
 
-	const getPayload = (val) => Object.keys(val).map((item) => ({
-		from  : item.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
-		to    : item.split('_')?.[1],
-		value : val[item],
-	}));
-
 	const onSubmit = async (values) => {
 		try {
 			const payload = getPayload(values);
@@ -39,18 +51,6 @@ function useGetMultiEntityMargin() {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
-
-	const options = Object.keys(SERVICE_NAME_MAPPING).map((key) => ({
-		label : SERVICE_NAME_MAPPING[key],
-		value : key,
-	}));
-
-	options.unshift({
-		label           : 'GLOBAL SETTING',
-		value           : 'global',
-		backgroundColor : '#393f70',
-		color           : '#fff',
-	});
 
 	return {
 		activeService,

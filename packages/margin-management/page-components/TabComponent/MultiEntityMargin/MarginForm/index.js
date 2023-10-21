@@ -25,7 +25,7 @@ function MarginForm({ showModal = {}, setShowModal = () => { } }, ref) {
 
 	const Component = componentMapping[action] || ViewEntityMargin;
 	return (
-		<div>
+		<>
 			<div className={styles.HeaderLeft}>
 				<div className={styles.EntityNames}>
 					<div className={styles.EntityName}>
@@ -55,7 +55,7 @@ function MarginForm({ showModal = {}, setShowModal = () => { } }, ref) {
 					ref={ref}
 				/>
 			</div>
-		</div>
+		</>
 	);
 }
 

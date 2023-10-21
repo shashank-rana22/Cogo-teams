@@ -1,19 +1,19 @@
 import { startCase } from '@cogoport/utils';
 
-function getColumns() {
-	const handlePercentage = (item) => {
-		if (item?.type === 'percentage') {
-			if (item?.min_value && item?.max_value) {
-				if (item?.min_value === item?.max_value) {
-					return item?.min_value;
-				}
-				return `${item?.currency}(${item?.min_value}-${item?.max_value})`;
+const handlePercentage = (item) => {
+	if (item?.type === 'percentage') {
+		if (item?.min_value && item?.max_value) {
+			if (item?.min_value === item?.max_value) {
+				return item?.min_value;
 			}
-			return item?.currency;
+			return `${item?.currency}(${item?.min_value}-${item?.max_value})`;
 		}
-		return null;
-	};
+		return item?.currency;
+	}
+	return null;
+};
 
+function getColumns() {
 	const columns = [
 		{
 			id       : 'lower_limit',

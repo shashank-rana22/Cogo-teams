@@ -3,7 +3,7 @@
     width: fit-content;
 }
 
-.Column {
+.column {
     display: flex;
     flex: 1;
     align-items: center;
@@ -15,24 +15,25 @@
     border-radius: 6px;
 }
 
-.Column .core-ui-input-root {
+.column .core-ui-input-root {
     background-color: none;
     border-width: 0;
 }
 
-.Column .input_controller {
+.column .input_controller {
     background: none;
 }
 
-.Name {
+.name {
     font-size: 12px;
 }
 
-.Square {
+.square {
     margin: 24px 0;
+    cursor: pointer;
 }
 
-.BtnWrapper {
+.btn_wrapper {
     display: flex;
     flex: 1;
     flex-direction: row;
@@ -46,4 +47,12 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 0 24px;
+}
+
+.view_btn {
+    font-size: 12px;
+}
+
+.view_btn:hover {
+    text-decoration: underline;
 }

@@ -32,18 +32,21 @@ const RadioGroupController = dynamic(
 	{ ssr: false },
 );
 
+const CONTROLLER_MAPPING = {
+	select            : SelectController,
+	async_select      : AsyncSelectController,
+	date_range_picker : DateRangePickerController,
+	chips             : ChipsController,
+	multi_select      : MultiSelectController,
+	radio             : RadioGroupController,
+};
+
 function FormElement({ type = '', ...rest }) {
-	if (type === 'select') return <SelectController {...rest} />;
+	const Controller = CONTROLLER_MAPPING[type] || null;
 
-	if (type === 'async_select') return <AsyncSelectController {...rest} />;
-
-	if (type === 'date_range_picker') return <DateRangePickerController {...rest} />;
-
-	if (type === 'chips') return <ChipsController {...rest} />;
-
-	if (type === 'multi_select') return <MultiSelectController {...rest} />;
-
-	if (type === 'radio') return <RadioGroupController {...rest} />;
+	if (Controller) {
+		return <Controller {...rest} />;
+	}
 
 	return <InputController {...rest} type={type} />;
 }

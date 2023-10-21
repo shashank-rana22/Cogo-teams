@@ -9,7 +9,6 @@ const OPTIONS = getCurrencyOptions({ ALLOWED_CURRENCY });
 const entityMarginControls = [
 	{
 		name               : 'margin_slabs',
-		// label: 'Margin values',
 		type               : 'fieldArray',
 		noDeleteButtonTill : 1,
 		buttonText         : 'Add Another Slab',
@@ -83,16 +82,6 @@ const entityMarginControls = [
 				className   : 'code-value',
 				rules       : { required: 'Value is required' },
 			},
-			// {
-			// 	name: 'currency',
-			// 	label: 'Currency',
-			// 	type: 'select',
-			// 	caret: true,
-			// 	span: 2,
-			// 	options: OPTIONS,
-			// 	watch: true,
-			// 	rules: { required: 'Currency is required' },
-			// },
 			{
 				name         : 'min_value',
 				label        : 'Min value ',
@@ -119,9 +108,6 @@ const entityMarginControls = [
 				rules        : { min: 0, message: 'Value cannot be less than 0' },
 			},
 		],
-		// validateFn: (field, callback) => {
-		// 	formFieldValues(field, callback);
-		// },
 	},
 ];
 export default entityMarginControls;

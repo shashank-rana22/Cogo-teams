@@ -41,7 +41,7 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, f
 				<div>
 					<Button
 						size="sm"
-						onClick={() => handleAppendChild()}
+						onClick={handleAppendChild}
 					>
 						{showAddIcon ? '+' : ''}
 						{buttonText || 'ADD'}
