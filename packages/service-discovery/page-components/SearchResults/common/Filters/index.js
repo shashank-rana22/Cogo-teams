@@ -39,7 +39,7 @@ function Filters({
 	showFilterModal = false,
 	setShowFilterModal = () => {},
 	airlines = [],
-	transitTime = {},
+	// transitTime = {},
 	setScheduleLoading = () => {},
 }) {
 	const [airlineParams, setAirlineParams] = useState({
@@ -56,7 +56,7 @@ function Filters({
 		airlines,
 		airlineParams,
 		setAirlineParams,
-		transitTime,
+		// transitTime,
 	});
 
 	const filtersApplied = checkIfFiltersChanged(defaultValues, filters);

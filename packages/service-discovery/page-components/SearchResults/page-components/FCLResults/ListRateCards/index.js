@@ -89,17 +89,17 @@ function ListRateCards({
 
 	const { total_count, page_limit, page } = paginationProps;
 
-	const transitTime = (rates || []).reduce((acc, rate) => {
-		if (!acc.min || rate.transit_time < acc.min) {
-			acc.min = rate.transit_time;
-		}
+	// const transitTime = (rates || []).reduce((acc, rate) => {  //COMMENTED FOR FUTURE USE
+	// 	if (!acc.min || rate.transit_time < acc.min) {
+	// 		acc.min = rate.transit_time;
+	// 	}
 
-		if (!acc.max || rate.transit_time > acc.max) {
-			acc.max = rate.transit_time;
-		}
+	// 	if (!acc.max || rate.transit_time > acc.max) {
+	// 		acc.max = rate.transit_time;
+	// 	}
 
-		return acc;
-	}, { min: null, max: null });
+	// 	return acc;
+	// }, { min: null, max: null });
 
 	if (!primary_service) {
 		return null;
@@ -116,7 +116,7 @@ function ListRateCards({
 				setShowFilterModal={setShowFilterModal}
 				setOpenAccordian={setOpenAccordian}
 				openAccordian={openAccordian}
-				transitTime={transitTime}
+				// transitTime={transitTime}
 			/>
 		);
 	}
@@ -138,7 +138,7 @@ function ListRateCards({
 						setOpenAccordian={setOpenAccordian}
 						setScheduleLoading={setScheduleLoading}
 						setRouterLoading={setRouterLoading}
-						transitTime={transitTime}
+						// transitTime={transitTime}
 					/>
 
 					{showComparison ? (

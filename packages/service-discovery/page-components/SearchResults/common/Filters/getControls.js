@@ -8,12 +8,12 @@ const getControls = ({
 	airlines = [],
 	airlineParams = {},
 	setAirlineParams = () => {},
-	transitTime = {},
+	// transitTime = {},
 }) => {
 	const MAPPING = {
 		fcl_freight: {
-			controls      : getFclControls({ id: spot_search_id, transitTime }),
-			defaultValues : getFclDefaultValues({ transitTime }),
+			controls      : getFclControls({ id: spot_search_id }),
+			defaultValues : getFclDefaultValues(),
 		},
 		air_freight: {
 			controls      : getAirControls({ airlines, airlineParams, setAirlineParams }),

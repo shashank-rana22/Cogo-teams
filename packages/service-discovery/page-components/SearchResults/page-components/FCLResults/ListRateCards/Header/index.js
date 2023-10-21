@@ -19,7 +19,7 @@ function Header({
 	setOpenAccordian = () => {},
 	showFilterModal = false,
 	setShowFilterModal = () => {},
-	transitTime = {},
+	// transitTime = {},
 	setScheduleLoading = () => {},
 }) {
 	return (
@@ -40,7 +40,7 @@ function Header({
 					loading={loading}
 					openAccordian={openAccordian}
 					setOpenAccordian={setOpenAccordian}
-					transitTime={transitTime}
+					// transitTime={transitTime}
 					setScheduleLoading={setScheduleLoading}
 				/>
 

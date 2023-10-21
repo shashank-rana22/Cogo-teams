@@ -16,7 +16,7 @@ function NoRatesFound({
 	setShowFilterModal = () => {},
 	openAccordian = '',
 	showFilterModal = false,
-	transitTime = {},
+	// transitTime = {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -45,7 +45,7 @@ function NoRatesFound({
 						setOpenAccordian={setOpenAccordian}
 						showFilterModal={showFilterModal}
 						setShowFilterModal={setShowFilterModal}
-						transitTime={transitTime}
+						// transitTime={transitTime}
 					/>
 
 					<Reset setFilters={setFilters} />
