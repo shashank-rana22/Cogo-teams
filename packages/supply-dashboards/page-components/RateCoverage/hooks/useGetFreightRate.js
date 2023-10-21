@@ -9,7 +9,6 @@ const API_NAME = {
 	haulage     : 'get_haulage_freight_rate',
 	lcl_freight : 'get_lcl_freight_rate',
 	lcl_customs : 'get_lcl_customs_rate',
-	air_customs : 'get_air_customs_rate',
 	trailer     : 'get_trailer_freight_rate',
 	ltl_freight : 'get_ltl_freight_rate',
 	ftl_freight : 'get_ftl_freight_rate',
@@ -90,11 +89,10 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 		} catch (err) {
 			// console.log(err);
 		}
-	}, [cardData?.destination_airport_id, cardData?.destination_location_id,
-		cardData?.destination_port_id, cardData?.id, cardData?.location_id,
-		cardData?.origin_airport_id, cardData?.origin_location_id, cardData?.origin_port_id,
-		cardData?.transit_time, filter?.service, formValues?.airline_id, formValues?.commodity,
-		formValues?.container_size, formValues?.container_type, formValues?.payment_term,
+	}, [cardData?.destination_airport_id, cardData?.destination_location_id, cardData?.destination_port_id,
+		cardData?.id, cardData?.location_id, cardData?.origin_airport_id, cardData?.origin_location_id,
+		cardData?.origin_port_id, cardData?.transit_time, filter?.service, formValues?.airline_id,
+		formValues?.commodity, formValues?.container_size, formValues?.container_type, formValues?.payment_term,
 		formValues?.service_provider_id, formValues?.shipping_line_id, formValues?.validity_end,
 		formValues?.validity_start, id, trigger]);
 

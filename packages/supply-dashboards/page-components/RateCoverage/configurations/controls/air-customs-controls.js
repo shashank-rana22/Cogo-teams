@@ -101,11 +101,14 @@ const airCustomsControls = ({
 			}],
 			controls: [
 				{
-					name        : 'code',
-					type        : 'select',
+					name        : 'customs_code',
+					valueKey    : 'code',
+					type        : 'async_select',
 					span        : 2,
-					placeholder : 'Charge Name',
-					rules       : { required: 'is required' },
+					asyncKey    : 'list_rate_charge_codes',
+					params      : { service_name: 'air_customs_charges' },
+					initialCall : true,
+					rules       : { required: 'Code is required' },
 				},
 				{
 					name        : 'currency',

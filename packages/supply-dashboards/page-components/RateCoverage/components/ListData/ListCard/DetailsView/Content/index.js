@@ -260,8 +260,6 @@ function ServiceDetailsContent({
 														handleCopy(feedbackData);
 													} if (source === 'rate_request') {
 														handleCopy(requestData);
-													} else {
-														handleCopy(summary);
 													}
 												}}
 											>
