@@ -8,8 +8,8 @@ import getMicroServiceName from './get-microservice-name';
 // eslint-disable-next-line custom-eslint/import-from-package-utils
 import { getCookie } from './getCookieFromCtx';
 
-const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate', 'fcl_cfs_rate',
-	'air_freight_rate', 'haulage_freight_rate', 'athena'];
+const PEEWEE_SERVICES = ['fcl_freight_rate', 'fcl_customs_rate', 'fcl_cfs_rate', 'air_freight_rate',
+	'haulage_freight_rate', 'ftl_freight_rate', 'air_customs_rate', 'athena'];
 
 const ATHENA_SERVICE = 'athena';
 

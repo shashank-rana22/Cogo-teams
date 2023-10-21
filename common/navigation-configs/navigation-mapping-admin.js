@@ -2284,6 +2284,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis : [
 						'list_analytics_dashboard_widgets',
 						'get_analytics_widget_data',
+						'get_distinct_values_in_column',
 					],
 					possible_apis: apis.analytics_dashboard,
 				},
