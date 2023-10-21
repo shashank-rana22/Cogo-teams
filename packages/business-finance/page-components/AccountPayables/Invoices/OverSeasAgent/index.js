@@ -1,7 +1,7 @@
 import { Breadcrumb, Button, Stepper, Toggle } from '@cogoport/components';
 import { Link } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import useGetInvoiceSelection from '../hooks/useInvoiceSelection';
 
@@ -40,19 +40,6 @@ function OverSeasAgent() {
 	const [showSaveAsDraft, setShowSaveAsDraft] = useState(false);
 	const { organizationId = '' } = query || {};
 	const { goBack, onClear, currency } = useGetInvoiceSelection({});
-	const { payrunState = '' } = bLData || {};
-
-	useEffect(() => {
-		if (payrunState === 'INVOICE_BL_CHECK') {
-			setActive('invoice_bl_check');
-		} else if (payrunState === 'UPLOAD_DOCUMENTS') {
-			setActive('upload_documents');
-		} else if (payrunState === 'FINAL_CONFIRMATION') {
-			setActive('final_confirmation');
-		} else if (payrunState === 'MERGE_DOCUMENTS') {
-			setActive('merge_documents');
-		} else setActive('invoice_selection');
-	}, [payrunState]);
 
 	return (
 		<div className={styles.container}>

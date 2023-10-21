@@ -2,6 +2,7 @@ import { Button, Placeholder, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useCallback } from 'react';
 
 import List from '../../../../commons/List/index';
@@ -56,15 +57,23 @@ function MergeDocuments({ setActive = () => {}, allowed = true, setAllowed = () 
 	const handelMergeInvoices = () => {
 		setShowConfirmationModal(false);
 		mergeInvoices();
-		setSelectBankShow(true);
 	};
 
+	const changeBlData = useCallback(() => {
+		if (!isEmpty(data)) {
+			setBLData(data);
+		}
+	}, [data, setBLData]);
+
+	useEffect(() => {
+		changeBlData();
+	}, [changeBlData]);
+
 	const allowedCheck = useCallback(() => {
-		setBLData(data);
 		const isTagged = checkShipmentPdfUrl && billPdfUrl;
 		setSelectBankShow(isTagged);
 		setAllowed(!isTagged);
-	}, [data, setBLData, checkShipmentPdfUrl, billPdfUrl, setAllowed]);
+	}, [checkShipmentPdfUrl, billPdfUrl, setAllowed]);
 
 	useEffect(() => {
 		allowedCheck();
