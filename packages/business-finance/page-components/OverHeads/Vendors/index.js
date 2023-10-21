@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { Select, Button, Input, Tooltip } from '@cogoport/components';
+import { Button, Input, Tooltip } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
@@ -13,6 +13,7 @@ import {
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
+import Filter from '../../commons/Filters';
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import { formatDate } from '../../commons/utils/formatDate';
 import List from '../commons/List';
@@ -23,7 +24,7 @@ import useSendSyncOverHeadsVendor from './hooks/useSendSyncOverHeadsVendor';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
 import configs from './utils/config';
-import Controls from './utils/controls';
+import vendorControls from './utils/controls';
 
 function VenderComponent() {
 	const router = useRouter();
@@ -66,25 +67,11 @@ function VenderComponent() {
 		return (
 			<div className={styles.header_container}>
 				<div className={styles.left_container}>
-					{Object.keys(Controls).map((key) => {
-						const {
-							options = [],
-							placeholder = '',
-							value = '',
-						} = Controls[key];
-						return (
-							<Select
-								key={key}
-								value={filters?.[key]}
-								onChange={(e) => handleChange(e, value)}
-								placeholder={placeholder}
-								options={options}
-								className={styles.select}
-								size="sm"
-								isClearable
-							/>
-						);
-					})}
+					<Filter
+						controls={vendorControls}
+						filters={filters}
+						setFilters={setFilters}
+					/>
 				</div>
 				<div className={styles.right_container}>
 					<Input
@@ -182,7 +169,7 @@ function VenderComponent() {
 		);
 	}
 
-	function RenderInvoice({ item }) {
+	function RenderInvoice({ item = {} }) {
 		const { openInvoices = 0, openInvoiceAmount = 0, currency = '' } = item;
 		return (
 			<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
