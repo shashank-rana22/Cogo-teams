@@ -12,11 +12,8 @@ function DetailsCard({
 	loading = false, handleClickDetails, keyMapping, keyEdu,
 }) {
 	const {
-		employee_detail,
-		modified_employee_detail,
-		processed_employee_detail,
-		personal_details,
-		employee_squads,
+		employee_detail, modified_employee_detail,
+		processed_employee_detail, personal_details, user_role, employee_squads,
 	} = data || {};
 
 	const { present_address, employee_education_details } = employee_detail || {};
@@ -66,23 +63,12 @@ function DetailsCard({
 			{isGrid ? (
 				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 					<span className={styles.info_heading}>{heading}</span>
-					{keyMapping && (
+					{(keyMapping || keyEdu) && user_role && (
 						<Button
 							className={styles.info_button}
 							size="md"
 							themeType="secondary"
-							onClick={() => handleClickDetails(keyMapping)}
-						>
-							<IcMEdit style={{ marginRight: '5px' }} />
-							Edit
-						</Button>
-					)}
-					{keyEdu && (
-						<Button
-							className={styles.info_button}
-							size="md"
-							themeType="secondary"
-							onClick={() => handleClickDetails({ heading, details })}
+							onClick={() => handleClickDetails(keyEdu ? { heading, details } : keyMapping)}
 						>
 							<IcMEdit style={{ marginRight: '5px' }} />
 							Edit
