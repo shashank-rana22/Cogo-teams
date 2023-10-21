@@ -1,88 +1,42 @@
-/* stylelint-disable indentation */
-.HeaderLeft {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.header_left {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
-.Container {
-    display: flex;
-    flex-direction: column;
-    min-height: 400px;
+.btnwrap .core-ui-button-root {
+	width: 100px;
 }
 
-.Container .form-item-label {
-    margin: 8px 0;
-    font-size: 12px;
-    color: #393f70;
+.entity_names {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+	align-items: center;
 }
 
-.Container .core-ui-select__control {
-    height: 32px;
+.entity_name {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 2px 4px;
+	font-size: 12px;
+	background-color: #f1efff;
+	border-radius: 4px;
 }
 
-.Container .core-ui-select__indicators {
-    height: 32px;
-}
-
-.Container .core-ui-input-root {
-    height: 32px;
-    min-height: unset !important;
-}
-
-.Container .core-ui-input-root.disabled {
-    cursor: not-allowed;
-    background: #f9f9f9;
-}
-
-.BtnWrap .core-ui-button-root {
-    width: 100px;
-}
-
-.Container .form-fieldArray-button-container .core-ui-button-root {
-    height: 32px;
-    color: #393f70;
-}
-
-.Container .form-field-array-add-btn {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    background-color: #393f70;
-}
-
-.EntityNames {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    align-items: center;
-}
-
-.EntityName {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 2px 4px;
-    font-size: 12px;
-    background-color: #f1efff;
-    border-radius: 4px;
-}
-
-.BtnWrap {
-    /* position: absolute;
+.btnwrap {
+	/* position: absolute;
     right: 24px;
     bottom: 24px; */
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    background-color: #fff;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	background-color: #fff;
 }
 
-.SelectContainer .core-ui-select__control {
-    min-width: 200px;
-    margin-left: 12px;
+.select_container .core-ui-select__control {
+	min-width: 200px;
+	margin-left: 12px;
 }

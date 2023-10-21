@@ -26,17 +26,17 @@ function MarginForm({ showModal = {}, setShowModal = () => { } }, ref) {
 	const Component = componentMapping[action] || ViewEntityMargin;
 	return (
 		<>
-			<div className={styles.HeaderLeft}>
-				<div className={styles.EntityNames}>
-					<div className={styles.EntityName}>
+			<div className={styles.header_left}>
+				<div className={styles.entity_names}>
+					<div className={styles.entity_name}>
 						{fromEntity}
 					</div>
 					{' TO '}
-					<div className={styles.EntityName}>
+					<div className={styles.entity_name}>
 						{toEntity}
 					</div>
 				</div>
-				<div className={styles.BtnWrap}>
+				<div className={styles.btnwrap}>
 					<Button
 						onClick={() => setShowModal((pv) => ({
 							...pv,

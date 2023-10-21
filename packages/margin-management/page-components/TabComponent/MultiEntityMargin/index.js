@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 function TableHead() {
 	return (
-		<div className={styles.TableHeader}>
+		<div className={styles.table_header}>
 			<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
 				<IcMArrowNext
 					height={20}
