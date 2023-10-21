@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useGetDashboardSummary from '../../hooks/useGetDashboardSummary';
 import useListAllFeed from '../../hooks/useListAllFeed';
 
 import Header from './Header';
@@ -8,11 +9,11 @@ import styles from './styles.module.css';
 
 function HrmsEmployeeDashboard() {
 	const { data } = useListAllFeed();
-	console.log('🚀 ~ file: index.js:11 ~ HrmsEmployeeDashboard ~ data:', data);
+	const { data : summaryData, loading } = useGetDashboardSummary();
 	return (
 		<div className={styles.container}>
-			<Header />
-			<MainSection data={data} />
+			<Header summaryData={summaryData} />
+			<MainSection data={data} summaryData={summaryData} loading={loading} />
 		</div>
 	);
 }

@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 import YourBoard from './YourBoard';
 import YourPerformance from './YourPerformance';
 
-function MainSection({ data }) {
+function MainSection({ data, summaryData, loading }) {
 	console.log('data', data);
 	return (
 		<div className={styles.container}>
@@ -16,7 +16,7 @@ function MainSection({ data }) {
 				{/* <PhoenixPerformance data={data} /> */}
 			</div>
 			<div className={styles.right_section}>
-				<YourBoard />
+				<YourBoard data={summaryData} loading={loading} />
 			</div>
 		</div>
 	);

@@ -25,6 +25,8 @@ function greetings() {
 function Header() {
 	const router = useRouter();
 
+	// const { user_role } = summaryData || {};
+
 	const profileData = useSelector(({ profile }) => profile);
 	const userName = profileData?.user.name;
 
@@ -82,6 +84,7 @@ function Header() {
 				<div className={styles.header_data_right_flex}>
 					{HEADER_NAV.map((val) => {
 						const ICON = val.icon;
+
 						return (
 							<Button key={val.label} className={styles.mr_12} onClick={() => router.push(val.route)}>
 								<ICON width={14} height={14} style={{ marginRight: 4 }} />

@@ -3,6 +3,7 @@ import {
 	// IcMTimer, IcMUpwardGraph,
 	IcMAppInvoiceSubmission,
 	IcMProfile,
+	IcMAppPayment,
 } from '@cogoport/icons-react';
 
 export const HEADER_NAV = [
@@ -22,6 +23,11 @@ export const HEADER_NAV = [
 	{
 		label : 'Payslip',
 		icon  : IcMAppInvoiceSubmission,
+		route : '/payroll?is_payslip=payslip',
+	},
+	{
+		label : 'Payroll',
+		icon  : IcMAppPayment,
 		route : '/payroll/payroll',
 	},
 	// {

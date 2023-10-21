@@ -1,7 +1,5 @@
 import React from 'react';
 
-import useGetDashboardSummary from '../../../../hooks/useGetDashboardSummary';
-
 import AttendanceStats from './AttendanceStats';
 import Holiday from './Holiday';
 import LeaveBalance from './LeaveBalance';
@@ -11,9 +9,7 @@ import OrgData from './OrgData';
 import styles from './styles.module.css';
 import TimeSummary from './TimeSummary';
 
-function YourBoard() {
-	const { data, loading } = useGetDashboardSummary();
-
+function YourBoard({ data, loading }) {
 	const { manager_name, hrbp_name, next_holiday_detail, self_working_stats } = data || {};
 
 	return (
