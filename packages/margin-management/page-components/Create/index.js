@@ -166,26 +166,20 @@ function Create({ type = 'create', item = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_wrap}>
-				<div style={{ alignItems: 'center', margin: '16px 0px 32px 0px' }}>
-					<Link href="/margins">
-						<Button themeType="link">
-							<IcMArrowBack style={{ width: '2em', height: '2em', marginRight: '4px' }} />
-							<div className={styles.heading}>Margin Management</div>
-						</Button>
-					</Link>
-
-				</div>
-
-			</div>
-			<div className={styles.heading_button}>
-				{type === 'edit' ? <div className={styles.text}>EDIT MARGIN</div>
-					: <div className={styles.text}>CREATE NEW MARGIN</div>}
+				<Link href="/margins">
+					<Button themeType="link">
+						<IcMArrowBack style={{ width: '2em', height: '2em', marginRight: '4px' }} />
+						<div className={styles.text}>
+							{type === 'edit' ? 'EDIT MARGIN' : 'CREATE MARGIN'}
+						</div>
+					</Button>
+				</Link>
 				{type === 'edit' && (
 					<Button themeType="secondary" onClick={() => setOpenModal(true)}>
 						<IcMDelete
 							style={{ width: '2em', height: '2em', marginRight: '4px' }}
 						/>
-						deactivate
+						DEACTIVATE
 					</Button>
 				)}
 			</div>
@@ -210,7 +204,7 @@ function Create({ type = 'create', item = {} }) {
 							customFieldArrayControls={customFieldArrayControls}
 						/>
 					) : null}
-					<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+					<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '12px' }}>
 						<Button
 							onClick={() => setShowAdvancedForm(!showAdvancedForm)}
 							disabled={!formValues?.service}
@@ -219,6 +213,8 @@ function Create({ type = 'create', item = {} }) {
 						</Button>
 					</div>
 				</div>
+
+				<div className={styles.hr_line} />
 
 				{formValues.organization_type === 'channel_partner'
 					&& formValues?.service ? (
@@ -239,13 +235,17 @@ function Create({ type = 'create', item = {} }) {
 					errors={errors}
 					customFieldArrayControls={customFieldArrayControls}
 				/>
+
+				<div className={styles.btn_wrapper}>
+					<Button
+						size="lg"
+						type="submit"
+						onClick={handleSubmit(handleFormSubmit)}
+					>
+						{type === 'edit' ? 'Update margin' : 'Create margin'}
+					</Button>
+				</div>
 			</form>
-			<Button
-				type="submit"
-				onClick={handleSubmit(handleFormSubmit)}
-			>
-				{type === 'edit' ? 'update margin' : 'create margin'}
-			</Button>
 
 			{openModal && (
 				<DeactiveModal
