@@ -110,3 +110,32 @@
 	color: #221f20;
 	background-color: #fde74d;
 }
+
+.feed_type {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 16px;
+	text-align: left;
+}
+
+.circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 76px;
+	height: 76px;
+	border-radius: 100px;
+}
+
+.circle1_bg {
+	font-size: 32px;
+	background-color: #f2f3fa;
+}
+
+.circle2_bg {
+	margin-left: -20px;
+	font-size: 32px;
+	color: #fff;
+	background-color: #f68b21;
+}

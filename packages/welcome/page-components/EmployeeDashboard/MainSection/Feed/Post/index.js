@@ -6,6 +6,7 @@ import React, { useState, useRef } from 'react';
 import { MentionsInput, Mention } from 'react-mentions';
 
 import CustomFileUploader from '../../../../../common/CustomFileUploader';
+import useCreateCompanyFeed from '../../../../../hooks/useCreateCompanyFeed';
 import useGetEmojiList from '../../../../../hooks/useGetEmojis';
 import useGetEmployeeList from '../../../../../hooks/useGetEmployeeList';
 import { formatFileAttributes } from '../../../../../utils/getFileAttributes';
@@ -22,8 +23,10 @@ function Post() {
 	const [draftMessages, setDraftMessages] = useState('');
 	const [clapsActive, setClapsActive] = useState(false);
 	const [postType, setPostType] = useState('public');
+	const [taggedPeople, setTaggedPeople] = useState([]);
 
 	const { getEmployeeList } = useGetEmployeeList();
+	const { createCompanyFeed } = useCreateCompanyFeed();
 
 	const fileMetaData = formatFileAttributes({ uploadedFiles: draftUploadedFiles })?.[GLOBAL_CONSTANTS.zeroth_index];
 
@@ -31,12 +34,46 @@ function Post() {
 		setUploading(val);
 	};
 
+	const handleCreatePost = () => {
+		const PAYLOAD = {
+			feed_type         : clapsActive ? 'appreciation' : 'normal',
+			feed_content      : draftMessages,
+			visibility_status : postType,
+			attachments_urls  : [{
+				attachment_type : 'image',
+				attachment_url  : draftUploadedFiles,
+			}],
+			action: 'create',
+		};
+		createCompanyFeed({ PAYLOAD });
+	};
 	const {
 		emojisList = {},
 		setOnClicked = () => {},
 		onClicked = false,
 	} = useGetEmojiList();
 
+	const handleChangeMessage = (val) => {
+		const REGEX = /@\[([A-Za-z]+ [A-Za-z]+)\]/g;
+		const matches = val.match(REGEX);
+
+		if (matches) {
+			const initialsArray = matches.map((match) => {
+				const [firstName, lastName] = match
+					.substring(2, match.length - 2)
+					.split(' ');
+
+				const initials = `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`;
+				return initials;
+			});
+
+			setTaggedPeople(initialsArray);
+		} else {
+			setTaggedPeople([]);
+		}
+
+		setDraftMessages(val);
+	};
 	const handleUpdateMessage = (val) => {
 		setDraftMessages(
 			(prev) => prev.concat(val),
@@ -55,9 +92,31 @@ function Post() {
 	return (
 		<>
 			<div className={styles.container}>
+				<div className={styles.feed_type}>
+					{
+						clapsActive
+							? (
+								<div className={cl`${styles.circle} ${styles.circle1_bg}`}>
+									👏
+								</div>
+							)
+							: null
+}
+					{
+	taggedPeople.length > 0
+		? taggedPeople?.map((item) => (
+			<div className={cl`${styles.circle} ${styles.circle2_bg}`} key={item}>
+				{item}
+			</div>
+		))
+
+		: null
+}
+					{/*  */}
+				</div>
 				<MentionsInput
 					value={draftMessages}
-					onChange={(e) => setDraftMessages(e.target.value)}
+					onChange={(e) => handleChangeMessage(e.target.value)}
 					style={defaultStyles}
 					placeholder={clapsActive ? 'Mention Employee by typing `@` followed by at least one char'
 						: 'Write post...'}
@@ -103,7 +162,9 @@ function Post() {
 									style={{ cursor: uploading ? 'not-allowed' : 'pointer' }}
 								/>
 							)}
-							onChange={(val) => setDraftUploadedFiles(val)}
+							onChange={(val) => {
+								setDraftUploadedFiles(val);
+							}}
 							ref={uploaderRef}
 						/>
 
@@ -141,7 +202,7 @@ function Post() {
 							{' '}
 							{clapsActive && <IcMCross style={{ marginLeft: 8 }} />}
 						</div>
-						<Button themeType="accent" size="lg">
+						<Button themeType="accent" size="lg" onClick={handleCreatePost}>
 							Post
 							{' '}
 							<IcMSend width={16} height={16} style={{ marginLeft: 4 }} />
