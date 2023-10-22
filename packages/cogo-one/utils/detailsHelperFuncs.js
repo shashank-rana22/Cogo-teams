@@ -83,6 +83,7 @@ export const RENDER_VALUE_MAPPING = {
 		return trucks_count > CHECK_IF_COUNT_MORE_THAN_ONE ? `${trucks_count} Trucks` : '1 Truck';
 	},
 	truck_type     : (detail) => startCase(detail.truck_type || ''),
+	trip_type      : (detail) => startCase(detail.trip_type || ''),
 	container_type : (detail) => startCase(detail.container_type || ''),
 	trade_type     : (detail) => startCase(detail.trade_type || ''),
 	commodity      : (detail) => startCase(detail.commodity || ''),
