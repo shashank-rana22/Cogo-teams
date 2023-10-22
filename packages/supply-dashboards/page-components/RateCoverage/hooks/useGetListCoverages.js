@@ -112,6 +112,7 @@ const useGetListCoverage = () => {
 							? user_data?.partner?.id : undefined,
 						is_flash_booking_reverted,
 						...DATE_PARAMS,
+						transport_modes_keyword: filter?.service === 'trailer' ? 'trailer' : undefined,
 					},
 					page,
 				},

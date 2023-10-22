@@ -260,10 +260,6 @@ export const densityRatioOptions = [
 	},
 ];
 
-export const filterOptions = [
-	{ name: 'running', value: 'running', label: 'Running' }, { name: 'closed', value: 'closed', label: 'Closed' },
-];
-
 export const entityOptions = [
 	{ name: 'all_entity', value: 'no_cogo_entity_id', label: 'All Entity' },
 	{ name: 'my_entity', value: 'cogo_entity_id', label: 'My Entity' },

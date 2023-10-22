@@ -89,8 +89,9 @@ const useGetCoverageStats = (filter) => {
 							? user_data?.partner?.id : undefined,
 						daily_stats,
 						is_flash_booking_reverted,
-						weekly_stats: !daily_stats,
+						weekly_stats            : !daily_stats,
 						...DATE_PARAMS,
+						transport_modes_keyword : filter?.service === 'trailer' ? 'trailer' : undefined,
 					},
 				},
 			});

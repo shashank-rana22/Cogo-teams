@@ -13,6 +13,9 @@ function AdditionalCharges({
 	additionalService = {},
 	message = {},
 	containerDetails = {},
+	filter = {},
+	data = {},
+	source = '',
 }) {
 	const {
 		fields,
@@ -31,6 +34,9 @@ function AdditionalCharges({
 		additionalService,
 		message,
 		containerDetails,
+		filter,
+		data,
+		source,
 	});
 
 	return (

@@ -58,6 +58,7 @@ function AddRate({
 						feedback_loading={feedback_loading}
 						data={data}
 						filter={filter}
+						source={source}
 					/>
 				</div>
 			)}
@@ -118,6 +119,7 @@ function AddRate({
 									additionalService={spot_data?.service_details}
 									dependentMainFreight={dependentMainFreight}
 									filter={filter}
+									source={source}
 								/>
 							</Modal.Body>
 							<Modal.Footer>

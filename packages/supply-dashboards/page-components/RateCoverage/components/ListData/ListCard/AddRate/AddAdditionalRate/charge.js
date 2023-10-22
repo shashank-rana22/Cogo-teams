@@ -19,6 +19,9 @@ function Charge({
 	setChargeAdded = () => {},
 	message = {},
 	containerDetails = {},
+	filter = {},
+	data = {},
+	source = '',
 }) {
 	const [messageToShow, setMessageToShow] = useState('');
 
@@ -62,6 +65,9 @@ function Charge({
 					additionalService={additionalService}
 					message={message}
 					containerDetails={containerDetails}
+					filter={filter}
+					data={data}
+					source={source}
 				/>
 			)}
 		</div>
