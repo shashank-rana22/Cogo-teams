@@ -15,6 +15,16 @@ import styles from './styles.module.css';
 const DEFAULT_COUNT = 1;
 
 function LeaveSubCard({ val = {}, isManager = false, updateLoading = false, handleLeaveUpdate = () => {} }) {
+	function getStatusClassName(leaveStatus) {
+		if (leaveStatus === 'pending') {
+			return 'pending';
+		}
+		if (leaveStatus === 'accepted') {
+			return 'accepted';
+		}
+		return 'rejected';
+	}
+
 	return (
 		<div className={styles.details} key={val.id}>
 			<div className={styles.design}>
@@ -89,9 +99,7 @@ function LeaveSubCard({ val = {}, isManager = false, updateLoading = false, hand
 					</div>
 				</div>
 			) : (
-				<div
-					className={`${styles[val.leave_status === 'pending' ? 'pending' : 'accepted']}`}
-				>
+				<div className={`${styles[getStatusClassName(val.leave_status)]}`}>
 					{startCase(val.leave_status)}
 				</div>
 			)}
