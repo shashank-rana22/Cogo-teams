@@ -5,7 +5,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import {
 	IcMProvision, IcMOverflowDot, IcCLike, IcCHeart,
-	IcCLaugh, IcCClap,
+	IcCLaugh, IcCClap, IcMAppLike,
 } from '@cogoport/icons-react';
 // import Lottie from 'lottie-react';
 import React, { useState } from 'react';
@@ -91,23 +91,25 @@ const icons = [
 ];
 
 const iconMapping = {
-	like  : IcCLike,
-	heart : IcCHeart,
-	laugh : IcCLaugh,
-	clap  : IcCClap,
+	like    : <IcCLike fill="#318CE7" width={18} height={18} />,
+	heart   : <IcCHeart width={18} height={18} />,
+	laugh   : <IcCLaugh width={18} height={18} />,
+	clap    : <IcCClap width={18} height={18} />,
+	appLike : <IcMAppLike width={18} height={18} />,
 };
 
 function PopoverContent({ handleIconSelect = () => {} }) {
 	return (
 		<div className={styles.popover_content}>
 			{(icons || []).map((option, index) => {
-				const Icon = option.name;
+				const iconName = option.name;
+				const Icon = option.icon;
 
 				return (
 					<div
 						key={index}
 						className={styles.popover_item}
-						onClick={() => { console.log('hi'); handleIconSelect(Icon); }}
+						onClick={() => { console.log('hi'); handleIconSelect(iconName); }}
 					>
 						<Icon width={option.width} height={option.height} fill={option.fill} />
 					</div>
@@ -127,10 +129,14 @@ const makeShortName = (name) => {
 
 function PostContainer({ item = {} }) {
 	// const [openComments, setOpenComments] = useState(false);
-	const [selectedIcon, setSelectedIcon] = useState('');
+	const [selectedIcon, setSelectedIcon] = useState('appLike');
 
 	const handleIconSelect = (newIcon) => {
-		setSelectedIcon(newIcon.name);
+		setSelectedIcon(newIcon);
+	};
+
+	const handleRemoveIcon = () => {
+		setSelectedIcon('appLike');
 	};
 
 	return (
@@ -204,7 +210,9 @@ function PostContainer({ item = {} }) {
 								caret={false}
 								placement="top"
 							>
-								{iconMapping[selectedIcon]}
+								<div style={{ display: 'flex' }} onClick={handleRemoveIcon}>
+									{iconMapping[selectedIcon]}
+								</div>
 							</Tooltip>
 						</div>
 						{/* <div className={styles.comment_input} onClick={() => setOpenComments(!openComments)}>
