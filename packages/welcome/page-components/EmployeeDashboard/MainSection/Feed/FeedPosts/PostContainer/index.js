@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-useless-escape */
 /* eslint-disable custom-eslint/regex-check */
 /* eslint-disable custom-eslint/variables-name-check */
@@ -9,6 +10,7 @@ import {
 	IcMProvision, IcMOverflowDot, IcCLike, IcCHeart,
 	IcCLaugh, IcCClap, IcMAppLike, IcMDelete,
 } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { formatDistanceToNow } from 'date-fns';
 // import Lottie from 'lottie-react';
 import React, { useState, useEffect } from 'react';
@@ -271,10 +273,23 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 					</div>
 				)}
 				{item.feed_type === 'normal' && (
-					<div className={styles.normal_post_text}>
-						{item.feed_content}
-					</div>
+					<>
+						<div className={styles.normal_post_text}>
+							{item.feed_content}
+						</div>
+						{ !isEmpty(item.attachment_urls) ? (
+							<>
+								{item?.attachment_urls?.[0]?.attachment_type === 'video' ? (
+									<video controls width="100%" height="auto">
+										<source src={item?.attachment_urls?.[0]?.attachment_url} type="video/mp4" />
+										Your browser does not support the video tag.
+									</video>
+								) : <img src={item?.attachment_urls?.[0]?.attachment_url} alt="img" style={{ maxWidth: '100%' }} />}
+							</>
+						) : null }
+					</>
 				)}
+
 				{/* <div style={{ display: 'flex', alignItems: 'center' }}>
 				{animationArr.map((val, index) => (
 					<div

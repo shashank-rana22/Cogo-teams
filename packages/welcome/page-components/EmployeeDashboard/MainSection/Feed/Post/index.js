@@ -35,18 +35,25 @@ function Post({ feedRefetch }) {
 	};
 
 	const handleCreatePost = async () => {
+		const {
+			fileUrl = '',
+			fileType,
+		} = fileMetaData || {};
+
 		const PAYLOAD = {
 			feed_type         : clapsActive ? 'appreciation' : 'normal',
 			feed_content      : draftMessages,
 			visibility_status : postType,
-			// attachment_urls   : [{
-			// 	attachment_type : 'image',
-			// 	attachment_url  : draftUploadedFiles || '  ',
-			// }],
-			action_name       : 'create',
+			attachment_urls   : !isEmpty(fileUrl) ? [{
+				attachment_type : fileType,
+				attachment_url  : fileUrl || '  ',
+			}] : [],
+			action_name: 'create',
 		};
 		await createCompanyFeed({ PAYLOAD });
 		setDraftMessages('');
+		setDraftUploadedFiles('');
+		setTaggedPeople([]);
 	};
 	const {
 		emojisList = {},
