@@ -69,7 +69,7 @@ function AddRateModal({
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
 	const { deleteRequest } = useDeleteFreightRateRequests(filter?.service);
 	const { deleteFeedbackRequest } = useDeleteFreightRateFeedbacks(filter?.service);
-	const { updateFlashBookingRate } = useUpdateFlashBookingRate();
+	const { updateFlashBookingRate } = useUpdateFlashBookingRate({ data, shipment_data, filter });
 
 	const { finalFields } = FieldMutation({
 		fields,
@@ -123,7 +123,7 @@ function AddRateModal({
 		}
 
 		if (rate_id && source === 'live_booking') {
-			const resp = await updateFlashBookingRate({ data, formData, shipment_data, filter });
+			const resp = await updateFlashBookingRate({ formData, isManual: false });
 			if (resp === TWO_HUNDERD) {
 				handleSuccessOrAdditionalServices();
 			}

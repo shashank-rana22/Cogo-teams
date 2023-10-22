@@ -6,7 +6,6 @@ import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { DEFAULT_VALUE, LOADER_COUNT } from '../../../../../configurations/helpers/constants';
-import useListShipmentFlashBookingRates from '../../../../../hooks/useListShipmentFlashBookingRates';
 import copyToClipboard from '../../../../../utilis/copyToClipboard';
 import NewServiceProviderModal from '../ServiceProviderModal';
 import styles from '../styles.module.css';
@@ -23,11 +22,6 @@ function ServiceDetailsContent({
 	source = {},
 }) {
 	const [serviceModal, setServiceModal] = useState(false);
-
-	const {
-		data: flashBookingRates,
-		shipmentFlashBookingRates,
-	} = useListShipmentFlashBookingRates({ source_id: data?.source_id });
 
 	const {
 		pillMapping = [], contentValuesMapping = [], summary = {},
@@ -49,7 +43,6 @@ function ServiceDetailsContent({
 
 	const handelNewServiceProvider = () => {
 		setServiceModal(!serviceModal);
-		shipmentFlashBookingRates();
 	};
 
 	const handleCopy = (val) => {
@@ -290,8 +283,9 @@ function ServiceDetailsContent({
 				<NewServiceProviderModal
 					serviceModal={serviceModal}
 					setServiceModal={setServiceModal}
-					flashBookingRates={flashBookingRates}
 					filter={filter}
+					data={data}
+					shipment_data={shipment_data}
 				/>
 			)}
 		</div>

@@ -56,6 +56,7 @@ function AddRate({
 						shipment_loading={shipment_loading}
 						request_loading={request_loading}
 						feedback_loading={feedback_loading}
+						data={data}
 					/>
 				</div>
 			)}
