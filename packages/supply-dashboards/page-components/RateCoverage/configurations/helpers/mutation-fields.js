@@ -1,11 +1,14 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable custom-eslint/function-name-check */
-import { asyncFieldsOrganization, asyncFieldsOrganizationUsers, useGetAsyncOptions } from '@cogoport/forms';
+import {
+	asyncFieldsOrganization, asyncFieldsOrganizationUsers,
+	useGetAsyncOptions, asyncFieldsLocations,
+} from '@cogoport/forms';
 import { merge, startCase } from '@cogoport/utils';
 
 import useGetMainPortsOptions from '../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 
-function FieldMutation({ fields, values, chargeCodes, filter }) {
+function FieldMutation({ fields, values, filter, chargeCodes }) {
 	const organizationUsers = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganizationUsers(),
@@ -25,12 +28,24 @@ function FieldMutation({ fields, values, chargeCodes, filter }) {
 						status       : 'active',
 						kyc_status   : 'verified',
 						account_type : 'service_provider',
-						service      : filter?.service,
+						service      : `${filter?.service}${['haulage',
+							'trailer'].includes(filter.service) ? '_freight' : ''}`,
 					},
 				},
 			},
 		),
 	);
+
+	const origin = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params   : { filters: { type: values?.origin_type } },
+		includes : { default_params_required: true },
+		labelKey : 'display_name',
+	}));
+	const destination = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params   : { filters: { type: values?.destination_type } },
+		includes : { default_params_required: true },
+		labelKey : 'display_name',
+	}));
 
 	const finalFields = (fields || []).map((control) => {
 		const { name } = control;
@@ -48,6 +63,12 @@ function FieldMutation({ fields, values, chargeCodes, filter }) {
 
 		if (name === 'destination_main_port_id') {
 			newControl = { ...newControl, ...mainPortOptions2 };
+		}
+		if (name === 'origin_location_id') {
+			newControl = { ...newControl, ...origin };
+		}
+		if (name === 'destination_location_id') {
+			newControl = { ...newControl, ...destination };
 		}
 
 		if (control?.controls) {

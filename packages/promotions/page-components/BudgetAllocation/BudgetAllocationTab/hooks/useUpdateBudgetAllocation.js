@@ -7,34 +7,34 @@ const useUpdateBudgetAllocation = ({ refetch = () => {} }) => {
   const [showSaveLink, setShowSaveLink] = useState(false);
 
   const [{ loading }, trigger] = useRequest(
-    {
-      url: "/update_agent_budget_allocation",
-      method: "POST",
-    },
-    { manual: true }
+	{
+	  url: "/update_agent_budget_allocation",
+	  method: "POST",
+	},
+	{ manual: true }
   );
 
   const updateBudget = async ({ value = {}, inputValue }) => {
-    const { agent_id = "" } = value || {};
-    try {
-      const payload = {
-        agent_id,
-        amount: inputValue || undefined,
-      };
-      await trigger({
-        data: payload,
-      });
-      refetch();
-    } catch (error) {
-      toastApiError(error);
-    }
+	const { agent_id = "" } = value || {};
+	try {
+	  const payload = {
+		agent_id,
+		amount: inputValue || undefined,
+	  };
+	  await trigger({
+		data: payload,
+	  });
+	  refetch();
+	} catch (error) {
+	  toastApiError(error);
+	}
   };
 
   return {
-    loading,
-    updateBudget,
-    showSaveLink,
-    setShowSaveLink,
+	loading,
+	updateBudget,
+	showSaveLink,
+	setShowSaveLink,
   };
 };
 

@@ -1,0 +1,121 @@
+.container {
+	display: flex;
+
+	:global {
+		.ui_popover_container {
+			max-width: fit-content !important;
+		}
+	}
+}
+
+.styled_link {
+	display: flex;
+	align-items: center;
+	max-width: 280px;
+	margin: 8px;
+	overflow: hidden;
+	color: #091b46;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	svg {
+		margin-right: 4px;
+	}
+
+	&:hover {
+		color: #5936f0;
+	}
+}
+
+.pop_container {
+	width: 400px;
+	max-height: 500px;
+	padding: 4px;
+	overflow-y: auto;
+}
+
+.item {
+	padding: 4px 4px 8px;
+	margin: 8px 4px 10px;
+	border-radius: 4px;
+	box-shadow: rgb(0 0 0 / 20%) 0 0 3px;
+}
+
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 4px;
+}
+
+.label {
+	display: block;
+	max-width: 120px;
+	overflow: hidden;
+	font-family: Roboto, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.location_wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.row {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.heading {
+	padding: 4px 16px;
+	font-size: 0.9rem;
+	font-weight: 500;
+	color: #373f6f;
+}
+
+.port_code {
+	margin: 0;
+	margin-right: 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.key {
+	margin: 0;
+	margin-right: 2px;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 12px;
+	color: #828282;
+	text-align: right;
+}
+
+.value {
+	display: block;
+	max-width: 150px;
+	margin: 0;
+	margin-left: 6px;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 12px;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.pair_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 8px;
+}

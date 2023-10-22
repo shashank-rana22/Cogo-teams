@@ -20,6 +20,7 @@ const SUPPLIER_STAKEHOLDERS = [
 ];
 
 function GenericUpload({
+	primaryService = {},
 	showModal = false,
 	setShowModal = () => {},
 	data = [],
@@ -50,6 +51,9 @@ function GenericUpload({
 			},
 		];
 
+		const serviceId = formValues?.document_type === 'booking_note'
+			? { service_id: primaryService?.id } : {};
+
 		const params = {
 			...getCreateDocumentParams({
 				shipmentData: shipment_data,
@@ -59,6 +63,7 @@ function GenericUpload({
 				orgId,
 			}),
 			documents,
+			...serviceId,
 		};
 
 		apiTrigger(params);

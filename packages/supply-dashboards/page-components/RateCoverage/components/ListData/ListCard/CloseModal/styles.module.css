@@ -1,9 +1,5 @@
-.col {
-	display: flex;
-	flex-direction: column;
-	margin: 0 20px 20px;
-}
-
 .bold_text {
+	margin-left: 10px;
+	font-size: 16px;
 	font-weight: 600;
 }
