@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
-import { formatLineItems, formatWeightSlabs } from '../helpers/revertPriceHelpers';
+import { formatLineItems, formatWeightSlabs, updateLineItems } from '../helpers/revertPriceHelpers';
 
 import useShipmentBuyQuotations from './useShipmentBuyQuotations';
 
@@ -30,9 +30,9 @@ const useUpdateFlashBookingRate = ({
 			line_items = [],
 		} = formData || {};
 		const values = { ...formData, ...manualRevertData };
-
+		const newLineItems = updateLineItems({ line_items, quotationLineItems });
 		const lineItemsParams = formatLineItems({
-			lineItems: (isManual || isEmpty(line_items)) ? quotationLineItems : line_items,
+			lineItems: (isManual || isEmpty(newLineItems)) ? quotationLineItems : newLineItems,
 			values,
 			isManual,
 			quotationLineItems,

@@ -87,3 +87,10 @@ export const formatWeightSlabs = ({ values }) => {
 
 	return formattedWeightSlabs;
 };
+
+export const updateLineItems = ({ line_items, quotationLineItems }) => {
+	const codeMapping = line_items.reduce((acc, item) => ({ ...acc, [item.code]: item }), {});
+	const newLineItems = quotationLineItems.filter((item) => !!codeMapping[item?.code])
+		.map((item) => ({ ...item, ...codeMapping[item.code] }));
+	return newLineItems;
+};
