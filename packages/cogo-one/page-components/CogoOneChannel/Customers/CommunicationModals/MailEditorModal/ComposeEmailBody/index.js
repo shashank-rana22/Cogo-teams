@@ -46,7 +46,7 @@ function ComposeEmailBody(props) {
 		userActiveMails = [],
 		hideFromMail = false,
 		viewType = '',
-		restrictMailToSingle = false,
+		restrictMailToOrganizations = false,
 	} = props || {};
 
 	const { onImageUploadBefore, disableRTE } = useImageUploader();
@@ -59,6 +59,12 @@ function ComposeEmailBody(props) {
 	const getSunEditorInstance = (sunEditor) => {
 		sunEditorRef.current = sunEditor;
 	};
+
+	const restrictMailToSingle = (
+		buttonType === 'send_mail'
+			&& restrictMailToOrganizations
+			&& !emailState?.mailView
+	);
 
 	useEffect(() => {
 		if (buttonType === 'send_mail' && !activeMailAddress) {

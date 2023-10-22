@@ -88,12 +88,6 @@ function MailEditorModal({
 			&& emailState?.mailView === 'orgSpecific'
 	);
 
-	const restrictMailToSingle = (
-		buttonType === 'send_mail'
-			&& restrictMailToOrganizations
-			&& !emailState?.mailView
-	);
-
 	const userActiveMails = useMemo(
 		() => (
 			[...new Set([
@@ -201,7 +195,7 @@ function MailEditorModal({
 						uploading={uploading}
 						mailProps={mailProps}
 						showOrgSpecificMail={showOrgSpecificMail}
-						restrictMailToSingle={restrictMailToSingle}
+						restrictMailToOrganizations={restrictMailToOrganizations}
 					/>
 				) : (
 					<EmailTemplateList
