@@ -23,7 +23,7 @@ export const HEADER_NAV = [
 	{
 		label : 'Payslip',
 		icon  : IcMAppInvoiceSubmission,
-		route : '/payroll?is_payslip=payslip',
+		route : '/welcome?is_payslip=payslip',
 	},
 	{
 		label : 'Payroll',

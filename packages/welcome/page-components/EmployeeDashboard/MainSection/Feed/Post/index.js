@@ -39,11 +39,11 @@ function Post() {
 			feed_type         : clapsActive ? 'appreciation' : 'normal',
 			feed_content      : draftMessages,
 			visibility_status : postType,
-			attachments_urls  : [{
-				attachment_type : 'image',
-				attachment_url  : draftUploadedFiles,
-			}],
-			action: 'create',
+			// attachment_urls   : [{
+			// 	attachment_type : 'image',
+			// 	attachment_url  : draftUploadedFiles || '  ',
+			// }],
+			action_name       : 'create',
 		};
 		createCompanyFeed({ PAYLOAD });
 	};
