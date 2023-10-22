@@ -48,15 +48,16 @@ const useUpdateFlashBookingRate = ({
 		try {
 			const resp = await trigger({
 				data: {
-					line_items                : lineItemsParams,
-					shipping_line_id          : values?.shipping_line_id || undefined,
-					airline_id                : values?.airline_id || undefined,
-					price_type                : values?.price_type || undefined,
-					operation_type            : values?.operation_type || undefined,
-					weight_slabs              : formattedWeightSlabs,
-					is_reverted               : true,
+					line_items       : lineItemsParams,
+					shipping_line_id : values?.shipping_line_id || undefined,
+					airline_id       : values?.airline_id || undefined,
+					price_type       : values?.price_type || undefined,
+					operation_type   : values?.operation_type || undefined,
+					weight_slabs     : formattedWeightSlabs,
+					is_reverted      : true,
 					service_id,
-					service_type              : `${service}_service`,
+					service_type     : `${service}${['haulage', 'trailer'].includes(service)
+						? '_freight' : ''}_service`,
 					shipment_id,
 					is_rate_creation_required : isManual,
 					supplier_contract_no      : values.supplier_contract_no || undefined,
