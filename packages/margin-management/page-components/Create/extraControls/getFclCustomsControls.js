@@ -9,7 +9,8 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label    : 'Select Trade Type',
 			name     : 'trade_type',
-			type     : 'radio',
+			span     : 2,
+			type     : 'select',
 			watch    : true,
 			disabled : type === 'edit',
 			options  : [
@@ -20,8 +21,10 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label       : 'Location',
 			name        : 'location_id',
+			span        : 2,
 			placeholder : 'Select Location',
 			type        : 'async_select',
+			initialCall : true,
 			caret       : true,
 			asyncKey    : 'list_locations',
 			disabled    : type === 'edit',
@@ -32,6 +35,7 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label       : 'Container Size',
 			name        : 'container_size',
+			span        : 2,
 			type        : 'select',
 			placeholder : 'Select Container Size',
 			caret       : true,
@@ -43,6 +47,7 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label       : 'Container Type',
 			name        : 'container_type',
+			span        : 2,
 			type        : 'select',
 			placeholder : 'Select Container Type',
 			caret       : true,
@@ -54,6 +59,7 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label       : 'Commodity',
 			name        : 'commodity',
+			span        : 2,
 			type        : 'select',
 			caret       : true,
 			disabled    : type === 'edit',
@@ -66,7 +72,8 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label    : 'Select Trade Type',
 			name     : 'trade_type',
-			type     : 'radio',
+			span     : 2,
+			type     : 'select',
 			watch    : true,
 			disabled : type === 'edit',
 			options  : [
@@ -77,8 +84,10 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label       : 'Location',
 			name        : 'location_id',
+			span        : 2,
 			placeholder : 'Select Location',
 			type        : 'async_select',
+			initialCall : true,
 			caret       : true,
 			asyncKey    : 'list_locations',
 			watch       : true,
@@ -89,6 +98,7 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label         : 'Commodity',
 			name          : 'commodity',
+			span          : 2,
 			type          : 'select',
 			placeholder   : 'Select Commodity',
 			watch         : true,
@@ -101,7 +111,8 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label    : 'Select Trade Type',
 			name     : 'trade_type',
-			type     : 'radio',
+			span     : 2,
+			type     : 'select',
 			watch    : true,
 			disabled : type === 'edit',
 			options  : [
@@ -113,35 +124,36 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label       : 'Origin Location',
 			name        : 'origin_location_id',
+			span        : 2,
 			placeholder : 'Select Origin',
 			type        : 'async_select',
+			initialCall : true,
 			caret       : true,
 			asyncKey    : 'list_locations',
 			watch       : true,
-			span        : 6,
-
-			disabled : type === 'edit',
-			params   : {
+			disabled    : type === 'edit',
+			params      : {
 				filters: { type: ['continent', 'country', 'seaport', 'city'] },
 			},
 		},
 		{
 			label       : 'Destination Location',
 			name        : 'destination_location_id',
+			span        : 2,
 			placeholder : 'Select Destination',
 			type        : 'async_select',
+			initialCall : true,
 			caret       : true,
 			watch       : true,
-			span        : 6,
 			asyncKey    : 'list_locations',
-
-			disabled : type === 'edit',
-			params   : {
+			disabled    : type === 'edit',
+			params      : {
 				filters: { type: ['continent', 'country', 'seaport', 'city'] },
 			},
 		},
 		{
 			name        : 'haulage_type',
+			span        : 2,
 			label       : 'Haulage Provider',
 			type        : 'select',
 			placeholder : 'Select Haulage Provider',
@@ -154,12 +166,14 @@ export default function getFclCustomsControls({ type = '' }) {
 			],
 		},
 		{
-			name     : 'shipping_line_id',
-			label    : 'Shipping line',
-			type     : 'async_select',
-			caret    : true,
-			watch    : true,
-			asyncKey : 'list_operators',
+			name        : 'shipping_line_id',
+			span        : 2,
+			label       : 'Shipping line',
+			type        : 'async_select',
+			initialCall : true,
+			caret       : true,
+			watch       : true,
+			asyncKey    : 'list_operators',
 
 			disabled    : type === 'edit',
 			placeholder : 'Select Shipping Line',
@@ -168,6 +182,7 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label       : 'Transportation mode',
 			name        : 'transport_mode',
+			span        : 2,
 			type        : 'select',
 			placeholder : 'Select Transportation Mode',
 			caret       : true,
@@ -183,6 +198,7 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label       : 'Container Size',
 			name        : 'container_size',
+			span        : 2,
 			type        : 'select',
 			placeholder : 'Select Container Size',
 			caret       : true,
@@ -194,6 +210,7 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label       : 'Container Type',
 			name        : 'container_type',
+			span        : 2,
 			type        : 'select',
 			placeholder : 'Select Container Type',
 			caret       : true,
@@ -204,6 +221,7 @@ export default function getFclCustomsControls({ type = '' }) {
 		{
 			label       : 'Commodity',
 			name        : 'commodity',
+			span        : 2,
 			type        : 'select',
 			placeholder : 'Select Commodity',
 			caret       : true,

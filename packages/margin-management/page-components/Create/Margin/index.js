@@ -1,36 +1,36 @@
-import { Pill } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+// import { Pill } from '@cogoport/components';
+// import { startCase } from '@cogoport/utils';
 
 import NestedLayout from '../../../common/NestedLayout';
-import getOriginDestination from '../../../helpers/getOriginDestination';
+// import getOriginDestination from '../../../helpers/getOriginDestination';
 
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 
 function Margin({
-	watch = () => {},
-	idValues = {},
-	type = '',
-	data = {},
-	service = '',
+	// watch = () => {},
+	// idValues = {},
+	// type = '',
+	// data = {},
+	// service = '',
 	marginControls = [],
 	control = {},
 	errors = {},
 	customFieldArrayControls = {},
 }) {
-	const formValues = watch();
-	const marginType = (margin_type) => {
-		if (margin_type === 'demand') {
-			return 'sales';
-		}
-		return margin_type;
-	};
-	const {
-		destination, origin, organization,
-		shipping_line, airline,
-	} = getOriginDestination({ type, idValues, data });
+	// const formValues = watch();
+	// const marginType = (margin_type) => {
+	// 	if (margin_type === 'demand') {
+	// 		return 'sales';
+	// 	}
+	// 	return margin_type;
+	// };
+	// const {
+	// 	destination, origin, organization,
+	// 	shipping_line, airline,
+	// } = getOriginDestination({ type, idValues, data });
 	return (
 		<div>
-			<div className={styles.details_panel}>
+			{/* <div className={styles.details_panel}>
 				<div className={styles.flex_column}>
 					<Pill color="green" className={styles.pill}>
 						{marginType(formValues?.margin_type || data?.margin_type)}
@@ -67,7 +67,7 @@ function Margin({
 					{(idValues?.trade_type || data?.trade_type)
 						? <Pill>{idValues?.trade_type || data?.trade_type}</Pill> : null}
 				</div>
-			</div>
+			</div> */}
 			<NestedLayout
 				controls={marginControls}
 				control={control}

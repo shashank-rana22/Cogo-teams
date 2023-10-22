@@ -28,6 +28,7 @@ function Child({
 	showElements = {},
 	customField = {},
 }) {
+	console.log('error:: ', error);
 	const total_fields = getTotalFields({ controls });
 	return (
 		<div key={field.id} className={styles.child}>

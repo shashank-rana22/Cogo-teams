@@ -1,5 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
-
 import conditions from '../utils/condition-constants';
 
 const notMandatoryControls = [
@@ -34,13 +32,6 @@ const getShowElements = ({
 	Object.keys(formValues).forEach((key) => { (NEW_VALUES[key] = (formValues?.[key] || item?.[key])); });
 	notMandatoryControls.forEach((key) => { (SHOW_ELEMENTS[key] = true); });
 
-	SHOW_ELEMENTS.trade_type = (!isEmpty(NEW_VALUES?.service));
-	SHOW_ELEMENTS.origin_location_id = (!isEmpty(NEW_VALUES?.trade_type));
-	SHOW_ELEMENTS.destination_location_id = (!isEmpty(NEW_VALUES?.origin_location_id));
-	SHOW_ELEMENTS.shipping_line_id = (!isEmpty(NEW_VALUES?.destination_location_id));
-	SHOW_ELEMENTS.transport_mode = (!isEmpty(NEW_VALUES?.destination_location_id));
-	SHOW_ELEMENTS.container_size = (!isEmpty(NEW_VALUES?.shipping_line_id || NEW_VALUES?.location_id));
-	SHOW_ELEMENTS.container_type = (!isEmpty(NEW_VALUES?.container_size));
 	allPresentControls.forEach((control) => {
 		if (control?.name === 'addition_type') {
 			if (isConditionMatches(conditions?.ADD_CHANNEL_PARTNER_MARGIN)) {

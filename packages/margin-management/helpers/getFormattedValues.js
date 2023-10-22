@@ -11,6 +11,7 @@ const getFormatterValues = ({ values = {} }) => {
 		margin_type,
 		rate_type,
 		margin_slabs,
+		margin_applied_on,
 		...rest
 	} = values;
 
@@ -46,6 +47,7 @@ const getFormatterValues = ({ values = {} }) => {
 					max_value : getFormattedMinMaxValue(val.max_value),
 					min_value : getFormattedMinMaxValue(val.min_value),
 					value     : Number(val.value),
+					code      : val?.code || undefined,
 				})),
 				lower_limit,
 				upper_limit,
@@ -63,6 +65,7 @@ const getFormatterValues = ({ values = {} }) => {
 		margin_type     : type,
 		rate_type       : rateType,
 		margin_slabs    : MARGINS_ARR,
+		margin_applied_on,
 		filters         : { ...allFilters, rate_type: rateType },
 	};
 };

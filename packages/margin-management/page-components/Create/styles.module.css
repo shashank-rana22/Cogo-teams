@@ -1,11 +1,15 @@
 .container {
-	width: calc(90%);
+	/* width: calc(90%); */
 }
 
 .sub_container {
-	padding: 20px 40px 60px;
+	padding: 24px;
 	background-color: white;
 	border-radius: 6px;
+}
+
+.basic_layout_ontainer {
+	margin-bottom: 24px;
 }
 
 .header_wrap {

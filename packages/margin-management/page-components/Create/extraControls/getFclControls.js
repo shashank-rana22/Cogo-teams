@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import containerSize from '@cogoport/constants/container-sizes.json';
 import containertypes from '@cogoport/constants/container-types.json';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
@@ -10,7 +11,8 @@ export default function getFclControls({ type = '' }) {
 		{
 			label    : 'Select Trade Type',
 			name     : 'trade_type',
-			type     : 'radio',
+			span     : 2,
+			type     : 'select',
 			watch    : true,
 			disabled : type === 'edit',
 			options  : [
@@ -21,50 +23,51 @@ export default function getFclControls({ type = '' }) {
 		{
 			label       : 'Origin Location',
 			name        : 'origin_location_id',
+			span        : 2,
 			placeholder : 'Select Origin',
 			type        : 'async_select',
+			initialCall : true,
 			asyncKey    : 'list_locations',
 			caret       : true,
 			watch       : true,
-			span        : 6,
-
-			disabled : type === 'edit',
-			params   : { filters: { type: ['continent', 'seaport', 'country'] } },
+			disabled    : type === 'edit',
+			params      : { filters: { type: ['continent', 'seaport', 'country'] } },
 		},
 		{
 			label       : 'Destination Location',
 			name        : 'destination_location_id',
+			span        : 2,
 			placeholder : 'Select Destination',
 			type        : 'async_select',
+			initialCall : true,
 			caret       : true,
-
-			asyncKey : 'list_locations',
-			watch    : true,
-			span     : 6,
-			disabled : type === 'edit',
-			params   : { filters: { type: ['continent', 'seaport', 'country'] } },
+			asyncKey    : 'list_locations',
+			watch       : true,
+			disabled    : type === 'edit',
+			params      : { filters: { type: ['continent', 'seaport', 'country'] } },
 		},
 		{
 			name           : 'shipping_line_id',
+			span           : 2,
 			label          : 'Shipping line',
 			type           : 'async_select',
+			initialCall    : true,
 			caret          : true,
 			defaultOptions : true,
 			watch          : true,
-
-			disabled    : type === 'edit',
-			asyncKey    : 'list_operators',
-			placeholder : 'Select Shipping Line',
+			disabled       : type === 'edit',
+			asyncKey       : 'list_operators',
+			placeholder    : 'Select Shipping Line',
 
 		},
 		{
 			label       : 'Container Size',
 			name        : 'container_size',
+			span        : 2,
 			type        : 'select',
 			caret       : true,
 			placeholder : 'Select Container Size',
 			watch       : true,
-			span        : 6,
 			disabled    : type === 'edit',
 			options     : containerSize,
 
@@ -72,11 +75,11 @@ export default function getFclControls({ type = '' }) {
 		{
 			label       : 'Container Type',
 			name        : 'container_type',
+			span        : 2,
 			type        : 'select',
 			caret       : true,
 			placeholder : 'Select Container Type',
 			watch       : true,
-			span        : 6,
 			disabled    : type === 'edit',
 			options     : containertypes,
 
@@ -84,11 +87,11 @@ export default function getFclControls({ type = '' }) {
 		{
 			label       : 'Commodity',
 			name        : 'commodity',
+			span        : 2,
 			type        : 'select',
 			caret       : true,
 			placeholder : 'Select Commodity',
 			watch       : true,
-			span        : 6,
 			disabled    : type === 'edit',
 			options     : freightOptions,
 
@@ -98,7 +101,8 @@ export default function getFclControls({ type = '' }) {
 		{
 			label    : 'Select Trade Type',
 			name     : 'trade_type',
-			type     : 'radio',
+			span     : 2,
+			type     : 'select',
 			watch    : true,
 			disabled : type === 'edit',
 			options  : [
@@ -109,32 +113,33 @@ export default function getFclControls({ type = '' }) {
 		{
 			label       : 'Origin Location',
 			name        : 'origin_location_id',
+			span        : 2,
 			placeholder : 'Select Origin',
 			type        : 'async_select',
+			initialCall : true,
 			caret       : true,
 			asyncKey    : 'list_locations',
 			watch       : true,
-			span        : 6,
-
-			disabled : type === 'edit',
-			params   : { filters: { type: ['continent', 'seaport', 'country'] } },
+			disabled    : type === 'edit',
+			params      : { filters: { type: ['continent', 'seaport', 'country'] } },
 		},
 		{
 			label       : 'Destination Location',
 			name        : 'destination_location_id',
+			span        : 2,
 			placeholder : 'Select Destination',
 			type        : 'async_select',
+			initialCall : true,
 			caret       : true,
 			asyncKey    : 'list_locations',
 			watch       : true,
-			span        : 6,
-
-			disabled : type === 'edit',
-			params   : { filters: { type: ['continent', 'seaport', 'country'] } },
+			disabled    : type === 'edit',
+			params      : { filters: { type: ['continent', 'seaport', 'country'] } },
 		},
 		{
 			label       : 'Commodity',
 			name        : 'commodity',
+			span        : 2,
 			type        : 'select',
 			placeholder : 'Select Commodity',
 			caret       : true,
@@ -148,7 +153,8 @@ export default function getFclControls({ type = '' }) {
 		{
 			label    : 'Select Trade Type',
 			name     : 'trade_type',
-			type     : 'radio',
+			span     : 2,
+			type     : 'select',
 			watch    : true,
 			disabled : type === 'edit',
 			options  : [
@@ -159,37 +165,38 @@ export default function getFclControls({ type = '' }) {
 		{
 			label       : 'Origin Location',
 			name        : 'origin_location_id',
+			span        : 2,
 			placeholder : 'Select Origin',
 			type        : 'async_select',
+			initialCall : true,
 			caret       : true,
 			asyncKey    : 'list_locations',
 			watch       : true,
-			span        : 6,
-
-			disabled : type === 'edit',
-			params   : { filters: { type: ['continent', 'country', 'airport'] } },
+			disabled    : type === 'edit',
+			params      : { filters: { type: ['continent', 'country', 'airport'] } },
 		},
 		{
 			label       : 'Destination Location',
 			name        : 'destination_location_id',
+			span        : 2,
 			placeholder : 'Select Destination',
 			type        : 'async_select',
+			initialCall : true,
 			caret       : true,
 			asyncKey    : 'list_locations',
 			watch       : true,
-			span        : 6,
-
-			disabled : type === 'edit',
-			params   : { filters: { type: ['continent', 'country', 'airport'] } },
+			disabled    : type === 'edit',
+			params      : { filters: { type: ['continent', 'country', 'airport'] } },
 		},
 		{
-			name     : 'airline_id',
-			label    : 'Airline',
-			type     : 'async_select',
-			caret    : true,
-			asyncKey : 'list_operators',
-			watch    : true,
-
+			name        : 'airline_id',
+			span        : 2,
+			label       : 'Airline',
+			type        : 'async_select',
+			initialCall : true,
+			caret       : true,
+			asyncKey    : 'list_operators',
+			watch       : true,
 			disabled    : type === 'edit',
 			placeholder : 'Select Airline',
 
@@ -197,6 +204,7 @@ export default function getFclControls({ type = '' }) {
 		{
 			label         : 'Commodity',
 			name          : 'commodity',
+			span          : 2,
 			type          : 'select',
 			placeholder   : 'Select Commodity',
 			caret         : true,
@@ -209,7 +217,8 @@ export default function getFclControls({ type = '' }) {
 		{
 			label    : 'Select Trade Type',
 			name     : 'trade_type',
-			type     : 'radio',
+			span     : 2,
+			type     : 'select',
 			disabled : type === 'edit',
 			watch    : true,
 			options  : [
@@ -220,8 +229,10 @@ export default function getFclControls({ type = '' }) {
 		{
 			label       : 'Location',
 			name        : 'location_id',
+			span        : 2,
 			placeholder : 'Select Location',
 			type        : 'async_select',
+			initialCall : true,
 			caret       : true,
 			asyncKey    : 'list_locations',
 			watch       : true,
@@ -232,6 +243,7 @@ export default function getFclControls({ type = '' }) {
 		{
 			label       : 'Commodity',
 			name        : 'commodity',
+			span        : 2,
 			type        : 'select',
 			placeholder : 'Select Commodity',
 			caret       : true,
