@@ -18,7 +18,7 @@ function MyPayslips({ handleBack = () => {} }) {
 	const columns = useGetColumns(setShowModal, setModalUrl, setDocumentType);
 
 	const { data: payslipYearData, year, setYear } = useGetPayslipYears();
-	const { loading, data: payslipData } = useGetListPayslip(parseInt(year, 10));
+	const { loading, data: payslipData } = useGetListPayslip(parseInt(2023, 10));
 	const yearOptions = payslipYearData?.map(
 		(financialYear) => (
 			{
