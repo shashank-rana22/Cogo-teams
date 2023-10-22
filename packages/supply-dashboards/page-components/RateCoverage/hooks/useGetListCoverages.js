@@ -40,11 +40,11 @@ const useGetListCoverage = () => {
 	const { user: { id: user_id = '' } = {} } = user_data;
 
 	const [page, setPage] = useState(DEFAULT_PAGE);
-	const [source, setSource] = useState('live_booking');
+	const [source, setSource] = useState('');
 	const [filter, setFilter] = useState({
 		service                   : 'fcl_freight',
 		status                    : 'pending',
-		source,
+		source                    : '',
 		releventToMeValue         : true,
 		daily_stats               : true,
 		assign_to_id              : '',

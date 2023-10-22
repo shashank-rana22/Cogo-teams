@@ -106,11 +106,7 @@ function ListData({
 								children : startCase(service),
 								color    : 'blue',
 								tooltip  : false,
-								closable : true,
 							}]}
-							onItemsChange={() => {
-								setFilter({ ...filter, service: 'fcl_freight' });
-							}}
 						/>
 						{source && (
 							<Tags
@@ -123,7 +119,7 @@ function ListData({
 									closable : true,
 								}]}
 								onItemsChange={() => {
-									setSource('live_booking');
+									setSource('');
 								}}
 							/>
 						)}

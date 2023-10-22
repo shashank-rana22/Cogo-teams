@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import { DateRangepicker, Select, Modal, RadioGroup, Input } from '@cogoport/components';
+import { Select, Modal, RadioGroup, Input } from '@cogoport/components';
 import { asyncFieldsLocations, asyncFieldsOperators, useGetAsyncOptions } from '@cogoport/forms';
 import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { merge, startCase } from '@cogoport/utils';
@@ -51,25 +51,6 @@ function Filter({
 		});
 	});
 
-	function DateRange() {
-		return (
-			<div>
-				<p>Date Range</p>
-				<DateRangepicker
-					style={{ width: '250px' }}
-					value={{ startDate: filter?.start_date, endDate: filter?.end_date }}
-					onChange={(val) => {
-						setFilter((prev) => ({
-							...prev, start_date: val?.startDate, end_date: val?.endDate, page: 1,
-						}));
-					}}
-					isPreviousDaysAllowed
-					maxDate={new Date()}
-				/>
-			</div>
-		);
-	}
-
 	return (
 		<Modal size="md" show={showFilters} onClose={() => setShowFilters(!showFilters)} placement="right">
 			<Modal.Header title={(
@@ -101,9 +82,6 @@ function Filter({
 									setShowWeekData(false);
 								}}
 							/>
-						</div>
-						<div>
-							{DateRange()}
 						</div>
 					</div>
 					<div className={styles.details}>
@@ -258,7 +236,6 @@ function Filter({
 										}}
 									/>
 								</div>
-								{DateRange()}
 							</div>
 						</div>
 					)}
