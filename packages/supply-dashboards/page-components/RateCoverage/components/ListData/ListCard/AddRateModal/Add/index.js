@@ -57,6 +57,7 @@ function AddRate({
 						request_loading={request_loading}
 						feedback_loading={feedback_loading}
 						data={data}
+						filter={filter}
 					/>
 				</div>
 			)}
