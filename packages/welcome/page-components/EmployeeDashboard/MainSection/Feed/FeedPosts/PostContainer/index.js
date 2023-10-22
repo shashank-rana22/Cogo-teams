@@ -68,29 +68,40 @@ const icons = [
 		width  : 25,
 		height : 25,
 		fill   : '#318CE7',
+		name   : 'like',
 	},
 	{
 		icon   : IcCHeart,
 		width  : 25,
 		height : 25,
+		name   : 'heart',
 	},
 	{
 		icon   : IcCLaugh,
 		width  : 30,
 		height : 30,
+		name   : 'laugh',
 	},
 	{
 		icon   : IcCClap,
 		width  : 30,
 		height : 30,
+		name   : 'clap',
 	},
 ];
+
+const iconMapping = {
+	like  : IcCLike,
+	heart : IcCHeart,
+	laugh : IcCLaugh,
+	clap  : IcCClap,
+};
 
 function PopoverContent({ handleIconSelect = () => {} }) {
 	return (
 		<div className={styles.popover_content}>
 			{(icons || []).map((option, index) => {
-				const Icon = option.icon;
+				const Icon = option.name;
 
 				return (
 					<div
@@ -116,10 +127,10 @@ const makeShortName = (name) => {
 
 function PostContainer({ item = {} }) {
 	// const [openComments, setOpenComments] = useState(false);
-	const [selectedIcon, setSelectedIcon] = useState(IcCLike);
+	const [selectedIcon, setSelectedIcon] = useState('');
 
 	const handleIconSelect = (newIcon) => {
-		setSelectedIcon(newIcon);
+		setSelectedIcon(newIcon.name);
 	};
 
 	return (
@@ -193,7 +204,7 @@ function PostContainer({ item = {} }) {
 								caret={false}
 								placement="top"
 							>
-								{selectedIcon}
+								{iconMapping[selectedIcon]}
 							</Tooltip>
 						</div>
 						{/* <div className={styles.comment_input} onClick={() => setOpenComments(!openComments)}>
