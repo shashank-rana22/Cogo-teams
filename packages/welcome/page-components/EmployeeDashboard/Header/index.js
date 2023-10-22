@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMRaiseTicket, IcMEmail } from '@cogoport/icons-react';
+import { IcMRaiseTicket } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React from 'react';
@@ -22,10 +22,10 @@ function greetings() {
 	return greet;
 }
 
-function Header() {
+function Header({ summaryData }) {
 	const router = useRouter();
 
-	// const { user_role } = summaryData || {};
+	const { user_role } = summaryData || {};
 
 	const profileData = useSelector(({ profile }) => profile);
 	const userName = profileData?.user.name;
@@ -49,12 +49,12 @@ function Header() {
 							<IcMRaiseTicket width={14} height={14} style={{ marginLeft: 4 }} />
 						</span>
 					</Button>
-					<Button style={{ marginLeft: 12 }}>
+					{/* <Button style={{ marginLeft: 12 }}>
 						<span className={styles.header_right_flex}>
 							My Inbox
 							<IcMEmail width={14} height={14} style={{ marginLeft: 4 }} />
 						</span>
-					</Button>
+					</Button> */}
 				</div>
 			</div>
 			<div className={styles.header_data_flex}>
@@ -84,6 +84,10 @@ function Header() {
 				<div className={styles.header_data_right_flex}>
 					{HEADER_NAV.map((val) => {
 						const ICON = val.icon;
+
+						if (val.label === 'Payroll' && user_role !== 'hr_admin') {
+							return null;
+						}
 
 						return (
 							<Button key={val.label} className={styles.mr_12} onClick={() => router.push(val.route)}>
