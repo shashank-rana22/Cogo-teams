@@ -34,7 +34,7 @@ function Header({ summaryData }) {
 		<div className={styles.container}>
 			<div className={styles.header_flex}>
 				<div className={styles.header_title}>
-					COGO HR
+					HRMS Dashboard
 				</div>
 				<div className={styles.header_right_flex}>
 					{/* <Button themeType="secondary">

@@ -4,13 +4,13 @@ import { cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import {
-	IcMProvision, IcMOverflowDot, IcCLike, IcMLiveChat, IcCHeart,
+	IcMProvision, IcMOverflowDot, IcCLike, IcCHeart,
 	IcCLaugh, IcCClap,
 } from '@cogoport/icons-react';
 // import Lottie from 'lottie-react';
 import React, { useState } from 'react';
 
-import CommentBox from '../CommentBox';
+// import CommentBox from '../CommentBox';
 
 // import clapAnimation from './clap-animation.json';
 // import dislikeAnimation from './dislike-animation.json';
@@ -115,7 +115,7 @@ const makeShortName = (name) => {
 };
 
 function PostContainer({ item = {} }) {
-	const [openComments, setOpenComments] = useState(false);
+	// const [openComments, setOpenComments] = useState(false);
 	const [selectedIcon, setSelectedIcon] = useState(IcCLike);
 
 	const handleIconSelect = (newIcon) => {
@@ -196,13 +196,13 @@ function PostContainer({ item = {} }) {
 								{selectedIcon}
 							</Tooltip>
 						</div>
-						<div className={styles.comment_input} onClick={() => setOpenComments(!openComments)}>
+						{/* <div className={styles.comment_input} onClick={() => setOpenComments(!openComments)}>
 							<div className={styles.label_flex}>
 								<IcMLiveChat style={{ marginRight: 8 }} />
 								{' '}
 								Comment
 							</div>
-						</div>
+						</div> */}
 					</div>
 
 					<div className={styles.likes_n_comment}>
@@ -222,7 +222,7 @@ function PostContainer({ item = {} }) {
 							Likes
 						</div>
 
-						<div className={styles.comments_data} style={{ marginLeft: '8px' }}>
+						{/* <div className={styles.comments_data} style={{ marginLeft: '8px' }}>
 							<div className={styles.user_comments}>
 								{(item.commenter_names || []).map((name) => (
 									<div className={styles.comments_circle} key={name}>
@@ -233,7 +233,7 @@ function PostContainer({ item = {} }) {
 							{item.no_of_comments || '0'}
 							{' '}
 							Comments
-						</div>
+						</div> */}
 					</div>
 
 					{/* <Lottie
@@ -243,7 +243,7 @@ function PostContainer({ item = {} }) {
 				/> */}
 
 				</div>
-				{ openComments && <CommentBox /> }
+				{/* { openComments && <CommentBox /> } */}
 			</div>
 			{/* ))} */}
 		</>

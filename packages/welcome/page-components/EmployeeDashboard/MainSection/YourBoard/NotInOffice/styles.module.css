@@ -70,3 +70,11 @@
 .list:last-child {
 	border-bottom: none;
 }
+
+.ellipse {
+	width: 50px;
+	overflow: hidden;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

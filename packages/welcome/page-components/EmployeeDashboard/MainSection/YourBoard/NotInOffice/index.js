@@ -45,11 +45,11 @@ function NotInOffice({ data = {} }) {
 					)}
 				</Popover>
 			</div>
-			<div className={styles.absent_deps}>
+			{/* <div className={styles.absent_deps}>
 				{absentee_list?.length}
 				{' '}
 				employees from Product Department are not present today
-			</div>
+			</div> */}
 		</div>
 	);
 }
