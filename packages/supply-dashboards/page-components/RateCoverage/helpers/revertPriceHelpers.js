@@ -21,17 +21,19 @@ export const formatLineItems = ({
 				const quantity = BASIC_LINE_ITEMS.includes(item?.code) && item?.unit === 'per_kg'
 					? Number(values?.chargeable_weight) || item?.quantity
 					: item?.quantity;
-				const tax_price = (Number(values?.price
+				const price = values?.price || item?.price;
+				const tax_price = (Number(price
 					|| NUMBER_FALLBACK) * (item.tax_percent || NUMBER_FALLBACK)) / PERCENTAGE;
 				is_anycharge_taken = true;
 				return {
 					...item,
 					quantity,
-					price           : Number(values?.price || NUMBER_FALLBACK),
-					total_price     : Number(values?.price || NUMBER_FALLBACK) * (quantity || MINIMUM_PRICE),
+					price       : Number(price || NUMBER_FALLBACK),
+					total_price : Number(price || NUMBER_FALLBACK)
+					* (quantity || MINIMUM_PRICE),
 					tax_price,
 					tax_total_price : tax_price * (quantity || MINIMUM_PRICE),
-					currency        : values?.currency,
+					currency        : values?.currency || item?.currency,
 					min_price       : Number(values?.min_price) || item?.min_price,
 				};
 			}
@@ -41,17 +43,18 @@ export const formatLineItems = ({
 
 	if (isEmpty(lineItemsParams) && lineItems.length) {
 		const item = lineItems[GLOBAL_CONSTANTS.zeroth_index];
+		const price = values?.price || item?.price;
 		const quantity = item?.unit === 'per_kg'
 			? Number(values?.chargeable_weight) || item.quantity
 			: item.quantity;
-		const tax_price = (Number(values?.price || NUMBER_FALLBACK)
+		const tax_price = (Number(price || NUMBER_FALLBACK)
 		* (item.tax_percent || NUMBER_FALLBACK)) / PERCENTAGE;
 		lineItemsParams = [
 			{
 				...item,
 				quantity,
-				price           : Number(values?.price || NUMBER_FALLBACK),
-				total_price     : Number(values?.price || NUMBER_FALLBACK) * (quantity || 1),
+				price           : Number(price || NUMBER_FALLBACK),
+				total_price     : Number(price || NUMBER_FALLBACK) * (quantity || 1),
 				tax_price,
 				tax_total_price : tax_price * (quantity || 1),
 				currency        : values?.currency,
@@ -66,16 +69,16 @@ export const formatWeightSlabs = ({ values }) => {
 	const formattedWeightSlabs = values?.weight_slabs || [];
 
 	formattedWeightSlabs.forEach((weight_slab, index) => {
-		const { lower_limit, upper_limit } = weight_slab;
+		const { lower_limit, upper_limit, price, currency } = weight_slab;
 		const floatLowerLimit = +lower_limit || 0;
 		const floatUpperLimit = +upper_limit || 0;
 		formattedWeightSlabs[index] = {
 			...formattedWeightSlabs[index],
 			lower_limit  : floatLowerLimit,
 			upper_limit  : floatUpperLimit,
-			tariff_price : +(values?.price || 0),
+			tariff_price : +(values?.price || price || 0),
 			unit         : 'per_kg',
-			currency     : values?.currency,
+			currency     : values?.currency || currency,
 		};
 	});
 	(formattedWeightSlabs || []).sort(
