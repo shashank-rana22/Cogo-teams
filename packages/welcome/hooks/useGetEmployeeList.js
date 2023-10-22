@@ -15,10 +15,10 @@ const useGetEmployeeList = () => {
 					filters: {
 						q      : query,
 						status : 'active',
+						source : 'bypass',
 					},
 				},
 			});
-			console.log('resData', resData);
 			const { data } = resData || {};
 			const finalData = data?.list?.map((user) => ({ display: user.name, id: user.id }));
 			callback(finalData);

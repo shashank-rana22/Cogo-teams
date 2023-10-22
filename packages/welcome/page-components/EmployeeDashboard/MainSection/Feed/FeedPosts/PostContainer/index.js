@@ -277,18 +277,20 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 						<div className={styles.normal_post_text}>
 							{item.feed_content}
 						</div>
-						{ !isEmpty(item.attachment_urls) ? (
-							<>
-								{item?.attachment_urls?.[0]?.attachment_type === 'video' ? (
-									<video controls width="100%" height="auto">
-										<source src={item?.attachment_urls?.[0]?.attachment_url} type="video/mp4" />
-										Your browser does not support the video tag.
-									</video>
-								) : <img src={item?.attachment_urls?.[0]?.attachment_url} alt="img" style={{ maxWidth: '100%' }} />}
-							</>
-						) : null }
+
 					</>
 				)}
+
+				{!isEmpty(item.attachment_urls) ? (
+					<>
+						{item?.attachment_urls?.[0]?.attachment_type === 'video' ? (
+							<video controls width="100%" height="auto">
+								<source src={item?.attachment_urls?.[0]?.attachment_url} type="video/mp4" />
+								Your browser does not support the video tag.
+							</video>
+						) : <img src={item?.attachment_urls?.[0]?.attachment_url} alt="img" style={{ maxWidth: '100%' }} />}
+					</>
+				) : null }
 
 				{/* <div style={{ display: 'flex', alignItems: 'center' }}>
 				{animationArr.map((val, index) => (
