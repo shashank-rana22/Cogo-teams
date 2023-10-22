@@ -45,7 +45,7 @@ const useGetCoverageStats = (filter) => {
 		method : 'GET',
 	}, { manual: true });
 	const getStats = useCallback(async () => {
-		const { assign_to_id, releventToMeValue, daily_stats, start_date, end_date, ...restFilters } = filter;
+		const { assign_to_id, releventToMeValue, daily_stats, ...restFilters } = filter;
 
 		const FINAL_FILTERS = {};
 
@@ -61,18 +61,8 @@ const useGetCoverageStats = (filter) => {
 				}
 			}
 		});
-		const isTodayDateRequired = ['pending', 'completed'].includes(filter?.status);
 
 		const DATE_PARAMS = {};
-
-		if (isTodayDateRequired) {
-			DATE_PARAMS.start_date = new Date();
-		}
-		if (isTodayDateRequired) {
-			DATE_PARAMS.end_date = new Date();
-		}
-		if (filter?.start_date) { DATE_PARAMS.start_date = filter?.start_date; }
-		if (filter?.end_date) { DATE_PARAMS.end_date = filter?.end_date; }
 
 		let is_flash_booking_reverted;
 		if (filter?.is_flash_booking_reverted) {
