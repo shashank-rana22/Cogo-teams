@@ -84,14 +84,16 @@ function MailEditorModal({
 
 	const showOrgSpecificMail = buttonType === 'send_mail' && restrictMailToOrganizations;
 
+	const activeFromMail = emailState?.from_mail || activeMailAddress;
+
 	const userActiveMails = useMemo(
 		() => (
 			[...new Set([
 				...(userSharedMails || []),
-				...([emailState?.from_mail || activeMailAddress]),
+				...(activeFromMail ? [activeFromMail] : []),
 			])]
 		),
-		[activeMailAddress, emailState?.from_mail, userSharedMails],
+		[activeFromMail, userSharedMails],
 	);
 
 	const hideFromMail = (
@@ -168,7 +170,7 @@ function MailEditorModal({
 						showOrgSpecificMail={showOrgSpecificMail}
 						hideFromMail={hideFromMail}
 						userActiveMails={userActiveMails}
-						activeMailAddress={emailState?.from_mail || activeMailAddress}
+						activeMailAddress={activeFromMail}
 					/>
 				)}
 				className={styles.modal_header}
