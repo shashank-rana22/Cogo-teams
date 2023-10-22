@@ -16,6 +16,15 @@ const newServiceProvider = [
 		isClearable : true,
 	},
 	{
+		name        : 'sourced_by_id',
+		label       : 'Rate Provided by user',
+		type        : 'async_select',
+		asyncKey    : 'organization_users',
+		placeholder : 'Rate Provided by user',
+		span        : 6,
+		rules       : { required: 'rate provided by user is required' },
+	},
+	{
 		label       : 'Shipping Line',
 		name        : 'shipping_line_id',
 		type        : 'async_select',
