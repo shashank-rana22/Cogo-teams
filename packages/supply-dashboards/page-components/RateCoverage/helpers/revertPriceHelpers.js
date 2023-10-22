@@ -11,16 +11,16 @@ export const formatLineItems = ({ lineItems, values }) => {
 	).map((eachitem) => {
 		const quantity = Number(chargeable_weight) || eachitem.quantity;
 		const tax_price = (Number(price) * (eachitem.tax_percent || NUMBER_FALLBACK)) / PERCENTAGE;
-		const code = eachitem.customs_code || eachitem.code;
+		const code = eachitem.customs_code || eachitem.code || undefined;
+
 		return {
 			code,
-			...eachitem,
 			quantity,
 			price           : Number(price),
 			total_price     : Number(price) * (quantity || MINIMUM_PRICE),
 			tax_price,
 			tax_total_price : tax_price * (quantity || MINIMUM_PRICE),
-			currency,
+			currency        : eachitem?.currency || currency,
 			min_price       : Number(min_price) || eachitem?.min_price,
 		};
 	}) || [];

@@ -14,7 +14,6 @@ function BookingParamsMapping({ booking_params, packages }) {
 						{' '}
 						,
 					</div>
-					&nbsp;
 					{x.handling_type && (
 						<div>
 							{x.handling_type}
@@ -28,12 +27,13 @@ function BookingParamsMapping({ booking_params, packages }) {
 					<div>
 						{x.packing_type}
 						{' '}
-						,
 					</div>
 				)}
 									&nbsp;
 					{x.height && 			(
 						<div>
+							,
+							{' '}
 							{x.height}
 							{' '}
 							X

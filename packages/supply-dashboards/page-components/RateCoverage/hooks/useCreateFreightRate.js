@@ -101,11 +101,13 @@ const useCreateFreightRate = (service) => {
 				minimum_chargeable_weight = undefined,
 				minimum_freight_charge = undefined,
 				transit_time = undefined,
+				weight_slabs = undefined,
 			} = err_data;
 
 			Toast.error(
 				startCase(base || lengthError || breadthError || heightError || detail || validity_end
-					|| line_items || minimum_chargeable_weight || minimum_freight_charge || transit_time),
+					|| line_items || minimum_chargeable_weight || minimum_freight_charge || transit_time
+					|| weight_slabs),
 			);
 		}
 		return null;

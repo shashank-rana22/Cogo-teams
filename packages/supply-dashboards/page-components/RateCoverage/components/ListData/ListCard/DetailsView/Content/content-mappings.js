@@ -78,7 +78,11 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 	const contentValuesMapping = [
 		{
 			label : 'Cargo Ready',
-			value : cargo_readiness_date,
+			value : cargo_readiness_date && `${formatDate({
+				date       : cargo_readiness_date,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+				formatType : 'date',
+			})}`,
 		},
 		{ label: 'BL Type', value: startCase(bl_type) },
 		{ label: 'Destination Detention Free Days', value: free_days_detention_destination },
