@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 
-import { currencyOptions } from '../helpers/constants';
+import { commodityOptions, currencyOptions } from '../helpers/constants';
 
 const LOCATION_TYPE_OPTIONS = [
 	{
@@ -31,7 +31,6 @@ const LOCATION_TYPE_OPTIONS = [
 
 const ltlControls = ({
 	data,
-	CommodityOptions,
 	source,
 }) => {
 	const controls = [
@@ -123,7 +122,7 @@ const ltlControls = ({
 			label       : 'Commodity',
 			type        : 'select',
 			value       : data?.commodity,
-			options     : CommodityOptions,
+			options     : commodityOptions,
 			span        : 4,
 			rules       : { required: 'commodity is required' },
 		},
