@@ -13092,6 +13092,12 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'get_shipment_quotation',
+			access_type  : 'private',
+			service_name : 'shipment',
+			feature      : 'rate_requests',
+		},
+		{
 			api          : 'get_fcl_freight_rate_local',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
