@@ -214,8 +214,7 @@ function Filter({
 								&& (
 									<div>
 										<p>
-											{ filter?.service === 'air_freight' || filter?.service === 'air_customs'
-												? 'Air Line' : 'Shipping Line'}
+											{ filter?.service === 'air_freight' ? 'Air Line' : 'Shipping Line'}
 										</p>
 										<Select
 											placeholder="Search here"
