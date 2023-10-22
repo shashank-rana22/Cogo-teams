@@ -57,18 +57,16 @@ const useUpdateFlashBookingRate = ({
 					operation_type       : values?.operation_type || undefined,
 					weight_slabs         : formattedWeightSlabs,
 					is_reverted          : true,
-					service_id           : isManual ? service_id : undefined,
-					service_type         : isManual ? `${service}_service` : undefined,
-					shipment_id          : isManual ? shipment_id : undefined,
+					service_id,
+					service_type         : `${service}_service`,
+					shipment_id,
 					supplier_contract_no : values.supplier_contract_no || undefined,
 					transit_time         : values?.transit_time || undefined,
 					detention_free_time  : values?.detention_free_time || undefined,
 					validity_end         : values?.validity_end || undefined,
 					sourced_by_id        : values?.sourced_by_id,
-					service_provider_id  : isManual
-						? values.service_provider_id
-						: undefined,
-					remarks: values?.remarks || undefined,
+					service_provider_id  : values.service_provider_id,
+					remarks              : values?.remarks || undefined,
 					advance_amount:
 					service === 'ftl_freight'
 						? Number(values?.advanced_amount || 0)
