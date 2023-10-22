@@ -44,7 +44,6 @@ const useGetListCoverage = () => {
 	const [filter, setFilter] = useState({
 		service                   : 'fcl_freight',
 		status                    : 'pending',
-		source                    : '',
 		releventToMeValue         : true,
 		daily_stats               : true,
 		assign_to_id              : '',
