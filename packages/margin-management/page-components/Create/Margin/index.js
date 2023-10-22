@@ -7,7 +7,7 @@ import NestedLayout from '../../../common/NestedLayout';
 // import styles from './styles.module.css';
 
 function Margin({
-	// watch = () => {},
+	watch = () => {},
 	// idValues = {},
 	// type = '',
 	// data = {},
@@ -16,6 +16,8 @@ function Margin({
 	control = {},
 	errors = {},
 	customFieldArrayControls = {},
+	setValue = () => { },
+	showElements = {},
 }) {
 	// const formValues = watch();
 	// const marginType = (margin_type) => {
@@ -29,7 +31,7 @@ function Margin({
 	// 	shipping_line, airline,
 	// } = getOriginDestination({ type, idValues, data });
 	return (
-		<div>
+		<>
 			{/* <div className={styles.details_panel}>
 				<div className={styles.flex_column}>
 					<Pill color="green" className={styles.pill}>
@@ -72,9 +74,12 @@ function Margin({
 				controls={marginControls}
 				control={control}
 				errors={errors}
+				watch={watch}
+				setValue={setValue}
 				customFieldArrayControls={customFieldArrayControls}
+				showElements={showElements}
 			/>
-		</div>
+		</>
 	);
 }
 export default Margin;

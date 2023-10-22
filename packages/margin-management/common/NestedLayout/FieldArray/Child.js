@@ -1,6 +1,6 @@
 import { ButtonIcon } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import FormElement from '../FormElement';
 import getCustomOptions from '../getCustomOptions';
@@ -10,7 +10,7 @@ import getTotalFields from './getTotalFields';
 import styles from './styles.module.css';
 
 const NO_OF_ELEMENTS_TO_BE_REMOVED = 1;
-const INCREMENT_BY_ONE = 1;
+// const INCREMENT_BY_ONE = 1;
 const TOTAL_SPAN = 12;
 
 function Child({
@@ -24,18 +24,21 @@ function Child({
 	error = {},
 	remove = () => {},
 	formValues = {},
-	labelName = '',
+	// labelName = '',
 	showElements = {},
 	customField = {},
+	// watch = () => { },
+	setValue = () => { },
+	currentSlabCurrency = '',
 }) {
-	console.log('error:: ', error);
 	const total_fields = getTotalFields({ controls });
+
+	useEffect(() => {
+		setValue(`${name}.${index}.currency`, currentSlabCurrency);
+	}, [currentSlabCurrency, index, name, setValue]);
+
 	return (
 		<div key={field.id} className={styles.child}>
-			<div className={styles.heading}>
-				{`${startCase(labelName || 'document')} ${index + INCREMENT_BY_ONE}`}
-			</div>
-
 			<div className={styles.row_flex}>
 				{Object.keys(total_fields).map((rowFields) => (
 					<div className={styles.row} key={rowFields}>
@@ -73,6 +76,7 @@ function Child({
 										control={control}
 										type={controlItem.type}
 										{...controlItem?.options_key ? { options } : {}}
+										size="sm"
 
 									/>
 

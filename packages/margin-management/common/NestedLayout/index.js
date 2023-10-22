@@ -7,8 +7,8 @@ import NestedFieldArray from './NestedFieldArray';
 import styles from './styles.module.css';
 
 function Layout({
-	controls = [], control = {}, errors = {}, showElements = {}, formValues = {},
-	customFieldArrayControls = {},
+	controls = [], control = {}, errors = {}, showElements = {}, formValues = {}, watch = () => { },
+	customFieldArrayControls = {}, setValue = () => { },
 }) {
 	const finalControls = controls.filter((c) => {
 		if (c.name in showElements) {
@@ -36,6 +36,8 @@ function Layout({
 							formValues={formValues}
 							showElements={showElements}
 							showButtons={showButtons}
+							watch={watch}
+							setValue={setValue}
 						/>
 					);
 				}
@@ -50,6 +52,8 @@ function Layout({
 							error={errors?.[ctrl.name]}
 							formValues={formValues}
 							showButtons={showButtons}
+							watch={watch}
+							setValue={setValue}
 						/>
 					);
 				}

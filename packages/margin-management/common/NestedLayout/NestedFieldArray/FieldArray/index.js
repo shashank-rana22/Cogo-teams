@@ -1,7 +1,7 @@
 import { Button, ButtonIcon } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import Child from '../../FieldArray/Child';
 
@@ -11,7 +11,7 @@ const HEADING_INDEX_OFFSET = 1;
 const NO_OF_ELEMENTS_TO_BE_REMOVED = 1;
 function FieldArray({
 	ctrl = {}, control = {}, error = {}, formValues = {}, name = '', index = 0,
-	showElements = {}, customFieldArrayControls = {},
+	showElements = {}, customFieldArrayControls = {}, watch = () => { }, setValue = () => { },
 }) {
 	const {
 		controls = [],
@@ -19,9 +19,25 @@ function FieldArray({
 		addButtonText = '',
 		type = '',
 		showButtons = true,
+		...rest
 	} = ctrl || {};
 
-	const { fields, append, remove } = useFieldArray({ control, name: `${name}.${index}.${nestedName}` });
+	const { fields, append, remove } = useFieldArray({
+		control,
+		name: `${name}.${index}.${nestedName}`,
+	});
+
+	const CHILD_EMPTY_VALUE = {};
+	controls.forEach((controlItem) => {
+		CHILD_EMPTY_VALUE[controlItem.name] = controlItem.value || '';
+	});
+
+	if (isEmpty(fields)) {
+		fields.push(CHILD_EMPTY_VALUE);
+	}
+
+	const currentSlabCurrency = watch(`${name}.${index}.limit_currency`);
+
 	return (
 		<div className={styles.field_array}>
 			{fields.map((field, nestedIndex) => (
@@ -56,6 +72,7 @@ function FieldArray({
 						</div>
 					) : (
 						<Child
+							{...rest}
 							showElements={showElements}
 							key={field.id}
 							remove={remove}
@@ -68,6 +85,9 @@ function FieldArray({
 							formValues={formValues}
 							labelName={nestedName}
 							customField={customFieldArrayControls?.[nestedIndex]}
+							watch={watch}
+							setValue={setValue}
+							currentSlabCurrency={currentSlabCurrency}
 						/>
 					)}
 
@@ -77,16 +97,14 @@ function FieldArray({
 			{showButtons ? (
 				<div>
 					<Button
-						size="sm"
+						size="md"
 						onClick={append}
 						style={{ margin: 4 }}
 					>
 						{addButtonText || 'Add'}
 					</Button>
-
 				</div>
 			) : null}
-
 		</div>
 	);
 }

@@ -8,8 +8,8 @@ const notMandatoryControls = [
 	'organization_id',
 	'organization_type',
 	'service',
-
 ];
+
 const AGENT_ARRAY = ['sales_agent_view', 'supply_agent_view', 'sales_team_members_view', 'supply_team_members_view'];
 const TWO = 2;
 
@@ -59,16 +59,17 @@ const getShowElements = ({
 			}
 		}
 
-		if (
-			control?.name === 'shipping_line_id'
-			&& NEW_VALUES?.service === 'haulage_freight'
-		) {
-			if (NEW_VALUES?.haulage_type === 'carrier') {
-				SHOW_ELEMENTS.shipping_line_id = true;
-			} else {
-				SHOW_ELEMENTS.shipping_line_id = false;
-			}
-		}
+		// if (
+		// 	control?.name === 'shipping_line_id'
+		// 	&& NEW_VALUES?.service === 'haulage_freight'
+		// ) {
+		// 	if (NEW_VALUES?.haulage_type === 'carrier') {
+		// 		SHOW_ELEMENTS.shipping_line_id = true;
+		// 	} else {
+		// 		SHOW_ELEMENTS.shipping_line_id = false;
+		// 	}
+		// }
+
 		if (control.name === 'transport_mode') {
 			if (NEW_VALUES?.haulage_type) {
 				SHOW_ELEMENTS.transport_mode = true;
@@ -100,6 +101,29 @@ const getShowElements = ({
 			} else {
 				SHOW_ELEMENTS[control.name] = false;
 			}
+		}
+
+		if (control.name === 'margin_values' && formValues?.margin_values) {
+			SHOW_ELEMENTS[control.name] = formValues.margin_values.map((itemValue) => {
+				if (itemValue?.type === 'percentage') {
+					return {
+						code      : formValues.margin_applied_on !== 'service_wise',
+						type      : true,
+						value     : true,
+						currency  : true,
+						min_value : true,
+						max_value : true,
+					};
+				}
+				return {
+					code      : formValues.margin_applied_on !== 'service_wise',
+					type      : true,
+					value     : true,
+					currency  : true,
+					min_value : false,
+					max_value : false,
+				};
+			});
 		}
 	});
 

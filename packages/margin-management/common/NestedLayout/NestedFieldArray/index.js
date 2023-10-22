@@ -1,4 +1,4 @@
-import { Button, ButtonIcon } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -15,7 +15,7 @@ const TOTAL_SPAN = 12;
 
 function NestedFieldArray({
 	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
-	showElements = {}, customFieldArrayControls = {},
+	showElements = {}, customFieldArrayControls = {}, watch = () => { }, setValue = () => { },
 }) {
 	const { controls = [], name, addButtonText = '' } = ctrl || {};
 
@@ -26,8 +26,19 @@ function NestedFieldArray({
 			{fields.map((field, index) => (
 				<div key={field.id} className={styles.field_container}>
 					<div className={styles.field_header}>
-						<div>{`${startCase(name || 'document')} ${index + HEADING_INDEX_OFFSET}`}</div>
-						<ButtonIcon icon={<IcMDelete />} onClick={() => remove(index, NO_OF_ELEMENTS_TO_BE_REMOVED)} />
+						<div className={styles.top_label}>
+							{`${startCase(name || 'document')} ${index + HEADING_INDEX_OFFSET}`}
+						</div>
+						{index === fields.length - 1 && index !== 0 ? (
+							<Button
+								onClick={() => remove(index, NO_OF_ELEMENTS_TO_BE_REMOVED)}
+								title="Remove"
+								themeType="secondary"
+							>
+								<IcMDelete height={16} width={16} />
+								{`Remove Slab ${index + 1}`}
+							</Button>
+						) : null}
 					</div>
 
 					{controls.map((nestCtrl) => {
@@ -35,7 +46,6 @@ function NestedFieldArray({
 						if (['fieldArray', 'nestedFieldArray'].includes(type)) {
 							return (
 								<div key={field.id} className={styles.nested_container}>
-
 									<FieldArray
 										key={field.id}
 										field={field}
@@ -45,8 +55,10 @@ function NestedFieldArray({
 										index={index}
 										name={name}
 										formValues={formValues}
-										showElements={showElements}
+										showElements={showElements?.[index]}
 										customFieldArrayControls={customFieldArrayControls?.[name]}
+										watch={watch}
+										setValue={setValue}
 									/>
 								</div>
 							);
@@ -84,7 +96,7 @@ function NestedFieldArray({
 			{showButtons ? (
 				<div>
 					<Button
-						size="sm"
+						size="md"
 						onClick={append}
 					>
 						{addButtonText || 'Add'}

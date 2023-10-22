@@ -5,21 +5,22 @@ export default function getMarginControls({ service = '' }) {
 		label              : 'Margin values',
 		type               : 'nestedFieldArray',
 		noDeleteButtonTill : 1,
-		buttonText         : 'Add Another Field',
+		addButtonText      : '+ Add Another Slab',
 		controls           : [
 			{
-				name  : 'lower_limit',
-				label : 'Lower Limit',
-				type  : 'input',
-				size  : 'md',
-				span  : 2,
-				rules : { required: 'Lower Limit is required' },
+				name     : 'lower_limit',
+				label    : 'Slab Lower Limit',
+				type     : 'input',
+				size     : 'sm',
+				disabled : true,
+				span     : 2,
+				rules    : { required: 'Lower Limit is required' },
 			},
 			{
 				name  : 'upper_limit',
-				label : 'Upper Limit',
+				label : 'Slab Upper Limit',
 				type  : 'input',
-				size  : 'md',
+				size  : 'sm',
 				span  : 2,
 				rules : { required: 'Upper Limit is required' },
 			},
@@ -29,6 +30,7 @@ export default function getMarginControls({ service = '' }) {
 				type        : 'async_select',
 				caret       : true,
 				span        : 2,
+				size        : 'sm',
 				initialCall : true,
 				asyncKey    : 'list_exchange_rate_currencies',
 				rules       : { required: 'Currency is required' },
@@ -37,7 +39,8 @@ export default function getMarginControls({ service = '' }) {
 				name               : 'margin_values',
 				label              : 'Line Items',
 				type               : 'fieldArray',
-				buttonText         : 'Add Field',
+				addButtonText      : '+ Add Another Line Item',
+				showButtons        : true,
 				noDeleteButtonTill : 1,
 				controls           : [
 					{
@@ -71,7 +74,6 @@ export default function getMarginControls({ service = '' }) {
 								value : 'absolute_unit',
 							},
 						],
-
 						rules: { required: 'Type is required' },
 					},
 					{
@@ -91,8 +93,8 @@ export default function getMarginControls({ service = '' }) {
 						caret       : true,
 						span        : 2,
 						asyncKey    : 'list_exchange_rate_currencies',
-
-						rules: { required: 'Currency is required' },
+						disabled    : true,
+						rules       : { required: 'Currency is required' },
 					},
 					{
 						name         : 'min_value',

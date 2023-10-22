@@ -90,12 +90,13 @@ function Create({ type = 'create', item = {} }) {
 	const newControls = getModifiedControls({ controls, formValues });
 
 	const showElements = getShowElements({
-		allPresentControls : controls,
+		allPresentControls : [...newControls, ...marginControls],
 		formValues,
 		item               : { ...(item || {}), ...(item?.filters || {}) },
 		isConditionMatches,
 		agent_view,
 	});
+
 	const { margin_slabs = [] } = formValues;
 	const customFieldArrayControls = { margin_slabs: [] };
 	useEffect(() => {
@@ -192,7 +193,7 @@ function Create({ type = 'create', item = {} }) {
 						fields={fields}
 						errors={errors}
 						showElements={showElements}
-						customFieldArrayControls={customFieldArrayControls}
+						// customFieldArrayControls={customFieldArrayControls}
 					/>
 					{showAdvancedForm ? (
 						<Layout
@@ -201,7 +202,7 @@ function Create({ type = 'create', item = {} }) {
 							fields={fields}
 							errors={errors}
 							showElements={showElements}
-							customFieldArrayControls={customFieldArrayControls}
+							// customFieldArrayControls={customFieldArrayControls}
 						/>
 					) : null}
 					<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '12px' }}>
@@ -232,8 +233,10 @@ function Create({ type = 'create', item = {} }) {
 					control={control}
 					data={item}
 					watch={watch}
+					setValue={setValue}
 					errors={errors}
-					customFieldArrayControls={customFieldArrayControls}
+					// customFieldArrayControls={customFieldArrayControls}
+					showElements={showElements}
 				/>
 
 				<div className={styles.btn_wrapper}>
