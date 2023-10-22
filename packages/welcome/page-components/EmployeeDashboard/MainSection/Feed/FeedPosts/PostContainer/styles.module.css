@@ -98,6 +98,12 @@
 	color: #221f20;
 }
 
+.normal_post_text {
+	margin: 16px 0;
+	font-size: 16px;
+	color: #221f20;
+}
+
 .footer {
 	display: flex;
 	align-items: center;

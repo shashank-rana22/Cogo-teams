@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useCreateCompanyFeed = () => {
+const useCreateCompanyFeed = (refetch, text = 'Created') => {
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		url    : '/create_company_feed',
 		method : 'post',
@@ -15,7 +15,8 @@ const useCreateCompanyFeed = () => {
 					...PAYLOAD,
 				},
 			});
-			Toast.success('feed updated succesfully');
+			refetch();
+			Toast.success(`Feed ${text} succesfully`);
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 		}

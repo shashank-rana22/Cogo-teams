@@ -1,8 +1,6 @@
-import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useCreateEmployeeReaction = ({ onClose }) => {
+const useCreateEmployeeReaction = () => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'POST',
 		url    : '/create_employee_reaction',
@@ -15,9 +13,8 @@ const useCreateEmployeeReaction = ({ onClose }) => {
 					...values,
 				},
 			});
-			onClose();
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			console.log('err', error);
 		}
 	};
 

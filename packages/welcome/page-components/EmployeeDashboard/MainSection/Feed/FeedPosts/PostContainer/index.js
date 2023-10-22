@@ -1,14 +1,20 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable custom-eslint/regex-check */
+/* eslint-disable custom-eslint/variables-name-check */
+/* eslint-disable max-len */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { cl, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
+import { cl, Tooltip, Popover } from '@cogoport/components';
 import {
 	IcMProvision, IcMOverflowDot, IcCLike, IcCHeart,
-	IcCLaugh, IcCClap, IcMAppLike,
+	IcCLaugh, IcCClap, IcMAppLike, IcMDelete,
 } from '@cogoport/icons-react';
+import { formatDistanceToNow } from 'date-fns';
 // import Lottie from 'lottie-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import useCreateCompanyFeed from '../../../../../../hooks/useCreateCompanyFeed';
+import useCreateEmployeeReaction from '../../../../../../hooks/useCreateEmployeeReaction';
 
 // import CommentBox from '../CommentBox';
 
@@ -127,16 +133,75 @@ const makeShortName = (name) => {
 	return shortName;
 };
 
-function PostContainer({ item = {} }) {
+function PostContainer({ item = {}, bypass, feedRefetch }) {
 	// const [openComments, setOpenComments] = useState(false);
+
+	const { createEmployeeReaction } = useCreateEmployeeReaction();
+	const { createCompanyFeed } = useCreateCompanyFeed(feedRefetch, 'deleted');
+
 	const [selectedIcon, setSelectedIcon] = useState('appLike');
+	const [taggedPeople, setTaggedPeople] = useState([]);
+
+	useEffect(() => {
+		if (item?.feed_type === 'appreciation') {
+			// Use regular expression to match the initials
+			const regex = /\[([^\]]+)\]/g;
+			const matches = item.feed_content.match(regex);
+
+			// Extract and format the initials to uppercase
+			const initials = matches.map((match) => {
+				const name = match.substring(1, match.indexOf(']'));
+				return name.split(' ').map((word) => word[0].toUpperCase()).join('');
+			});
+
+			const resultArray = initials.map((string) => (string.length > 2 ? string[0] + string.slice(-1) : string));
+
+			setTaggedPeople(resultArray);
+		}
+	}, [item.feed_content, item?.feed_type]);
+
+	useEffect(() => {
+		if (Array.isArray(item?.my_reaction)) {
+			const filteredArray = item?.my_reaction?.filter((val) => val !== null);
+			setSelectedIcon(filteredArray?.length === 0 ? 'appLike' : filteredArray?.[0]);
+		} else {
+			setSelectedIcon(item?.my_reaction === null ? 'appLike' : item?.my_reaction);
+		}
+	}, [item?.my_reaction]);
 
 	const handleIconSelect = (newIcon) => {
+		console.log('item', item);
 		setSelectedIcon(newIcon);
+		const payload = {
+			item_id       : item.id,
+			object_type   : 'feed',
+			reaction_type : newIcon,
+		};
+		createEmployeeReaction(payload);
 	};
 
 	const handleRemoveIcon = () => {
 		setSelectedIcon('appLike');
+		const payload = {
+			item_id       : item.id,
+			object_type   : 'feed',
+			reaction_type : '',
+		};
+		createEmployeeReaction(payload);
+	};
+
+	const getFeedData = (feedData) => {
+		const output = feedData.replace(/\@\[(.*?)\]\([^)]+\)/g, (match, username) => `@${username.replace(/ /g, ' ')} `);
+		return output;
+	};
+
+	const handleDelete = () => {
+		createCompanyFeed({
+			PAYLOAD: {
+				company_feed_id : item.id,
+				action_name     : 'delete',
+			},
+		});
 	};
 
 	return (
@@ -158,30 +223,58 @@ function PostContainer({ item = {} }) {
 					<div className={styles.post_time_flex}>
 						<div className={styles.post_time}>
 							<IcMProvision fill="#BCB0F5" style={{ marginRight: 4 }} />
-							{item.created_at ? formatDate({
+							{/* {item.created_at ? formatDate({
 								date       : item.created_at,
 								dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 								timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:ss'],
 								formatType : 'dateTime',
 								separator  : ' ',
-							}) : '-'}
+							}) : '-'} */}
+							{item?.created_at ? formatDistanceToNow(new Date(item?.created_at), {
+								addSuffix: true,
+							}) : null}
 						</div>
-						<IcMOverflowDot fill="#4F4F4F" />
+						{(bypass || item?.is_my_post) && (
+							<Popover
+								placement="bottom"
+								render={(
+									<div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={handleDelete}>
+										<IcMDelete style={{ marginRight: '8px' }} />
+										{' '}
+										Delete
+									</div>
+								)}
+							>
+								<IcMOverflowDot fill="#4F4F4F" />
+							</Popover>
+						)}
+
 					</div>
 				</div>
-				<div className={styles.main_post_data}>
-					<div className={styles.feed_type}>
-						<div className={cl`${styles.circle} ${styles.circle1_bg}`}>
-							👏
+				{item.feed_type === 'appreciation' && (
+					<div className={styles.main_post_data}>
+						<div className={styles.feed_type}>
+							<div className={cl`${styles.circle} ${styles.circle1_bg}`}>
+								👏
+							</div>
+							{taggedPeople?.length > 0
+								? taggedPeople?.map((val) => (
+									<div className={cl`${styles.circle} ${styles.circle2_bg}`} key={val}>
+										{val}
+									</div>
+								))
+								: null}
 						</div>
-						<div className={cl`${styles.circle} ${styles.circle2_bg}`}>
-							RD
+						<div className={styles.main_post_text}>
+							{getFeedData(item.feed_content)}
 						</div>
 					</div>
-					<div className={styles.main_post_text}>
-						Appreciating efforts of @Hritik for his amazing work on the HRMS platform
+				)}
+				{item.feed_type === 'normal' && (
+					<div className={styles.normal_post_text}>
+						{item.feed_content}
 					</div>
-				</div>
+				)}
 				{/* <div style={{ display: 'flex', alignItems: 'center' }}>
 				{animationArr.map((val, index) => (
 					<div
@@ -225,7 +318,7 @@ function PostContainer({ item = {} }) {
 					</div>
 
 					<div className={styles.likes_n_comment}>
-						<div className={styles.comments_data}>
+						{/* <div className={styles.comments_data}>
 							<div className={styles.user_comments}>
 								{icons.map((option, index) => {
 									const Icon = option.icon;
@@ -239,7 +332,7 @@ function PostContainer({ item = {} }) {
 							{item.no_of_reactions || '0'}
 							{' '}
 							Likes
-						</div>
+						</div> */}
 
 						{/* <div className={styles.comments_data} style={{ marginLeft: '8px' }}>
 							<div className={styles.user_comments}>

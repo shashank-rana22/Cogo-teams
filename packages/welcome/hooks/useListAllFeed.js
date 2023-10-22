@@ -1,9 +1,13 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
 const useListAllFeed = () => {
+	const [filters, setFilters] = useState({
+		page: 1,
+	});
+
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/list_all_feed',
@@ -12,12 +16,17 @@ const useListAllFeed = () => {
 	const listAllFeed = useCallback(
 		() => {
 			try {
-				trigger();
+				trigger({
+					params: {
+						page       : filters.page,
+						page_limit : 5,
+					},
+				});
 			} catch (error) {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		},
-		[trigger],
+		[trigger, filters],
 	);
 
 	useEffect(() => {
@@ -28,6 +37,7 @@ const useListAllFeed = () => {
 		loading,
 		data,
 		refetch: listAllFeed,
+		setFilters,
 	};
 };
 

@@ -16,7 +16,7 @@ import EmojisBody from './EmojisBody';
 import styles from './styles.module.css';
 import UploadedFiles from './UploadedFiles';
 
-function Post() {
+function Post({ feedRefetch }) {
 	const uploaderRef = useRef(null);
 	const [uploading, setUploading] = useState(false);
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState('');
@@ -26,7 +26,7 @@ function Post() {
 	const [taggedPeople, setTaggedPeople] = useState([]);
 
 	const { getEmployeeList } = useGetEmployeeList();
-	const { createCompanyFeed } = useCreateCompanyFeed();
+	const { createCompanyFeed } = useCreateCompanyFeed(feedRefetch);
 
 	const fileMetaData = formatFileAttributes({ uploadedFiles: draftUploadedFiles })?.[GLOBAL_CONSTANTS.zeroth_index];
 
@@ -34,7 +34,7 @@ function Post() {
 		setUploading(val);
 	};
 
-	const handleCreatePost = () => {
+	const handleCreatePost = async () => {
 		const PAYLOAD = {
 			feed_type         : clapsActive ? 'appreciation' : 'normal',
 			feed_content      : draftMessages,
@@ -45,7 +45,8 @@ function Post() {
 			// }],
 			action_name       : 'create',
 		};
-		createCompanyFeed({ PAYLOAD });
+		await createCompanyFeed({ PAYLOAD });
+		setDraftMessages('');
 	};
 	const {
 		emojisList = {},
@@ -138,6 +139,7 @@ function Post() {
 						onChange={setPostType}
 						placeholder="Select Books"
 						size="sm"
+						disabled
 						options={[
 							{ label: 'Public', value: 'public' },
 							{ label: 'Team', value: 'team' },

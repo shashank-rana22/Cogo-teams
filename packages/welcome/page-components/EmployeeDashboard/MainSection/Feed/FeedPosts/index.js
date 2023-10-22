@@ -4,12 +4,12 @@ import React from 'react';
 
 import PostContainer from './PostContainer';
 
-function FeedPosts({ data = {} }) {
-	const { list } = data || {};
+function FeedPosts({ data = {}, feedRefetch }) {
+	const { list, bypass } = data || {};
 	return (
 		<>
 			{(list || []).map((val) => (
-				<PostContainer key={val} item={val} />
+				<PostContainer key={val} item={val} bypass={bypass} feedRefetch={feedRefetch} />
 			))}
 			{/* <div className={styles.container}>
 				<div className={styles.header_flex}>
