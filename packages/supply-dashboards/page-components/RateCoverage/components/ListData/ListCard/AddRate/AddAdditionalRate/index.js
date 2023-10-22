@@ -8,6 +8,7 @@ function AddAdditionalRates({
 	payload = {},
 	additionalService = undefined,
 	dependentMainFreight = [], filter = {},
+	source = '',
 }) {
 	const reference = useRef(null);
 	const serviceType = filter?.service;
@@ -91,6 +92,9 @@ function AddAdditionalRates({
 								message={message}
 								containerDetails={containerDetails}
 								ref={additionalCharge === charge ? reference : null}
+								filter={filter}
+								data={data}
+								source={source}
 							/>
 						))}
 					</div>

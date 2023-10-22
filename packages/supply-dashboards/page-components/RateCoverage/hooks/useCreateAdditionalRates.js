@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
-import configuration from '../components/ListData/ListCard/AddRate/AddAdditionalRate/configurations';
+import useConfiguration from '../components/ListData/ListCard/AddRate/AddAdditionalRate/configurations';
 import { VALUE_ONE, DEFAULT_VALUE } from '../configurations/helpers/constants';
 import useFieldMutation from '../configurations/helpers/field-mutation-additional';
 import formatAirCustomsRate from '../payload/format-air-customs-rate';
@@ -76,17 +76,23 @@ const useCreateAdditionalRates = ({
 	setChargeAdded,
 	message,
 	containerDetails,
+	filter,
+	data,
+	source,
 }) => {
 	const [errors, setErrors] = useState({});
 
 	const [trade_type, chargeName] = (charge !== 'add_surcharge' ? charge : ':add_surcharge').split(':');
 
-	const controls = configuration(
+	const controls = useConfiguration(
 		chargeName,
 		additionalService,
 		payload,
 		trade_type,
 		containerDetails,
+		filter,
+		data,
+		source,
 	);
 
 	const { defaultValues, fields } = getDefaultValues(controls);

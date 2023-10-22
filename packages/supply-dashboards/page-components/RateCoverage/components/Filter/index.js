@@ -6,7 +6,7 @@ import { merge, startCase } from '@cogoport/utils';
 
 import {
 	serviceOptions, taskStatusOptions,
-	commodityOptions, filterOptions, entityOptions, revertedOptions, tradeTypeOptions, filterOption, lineOptions,
+	commodityOptions, entityOptions, revertedOptions, tradeTypeOptions, filterOption, lineOptions,
 } from '../../configurations/helpers/constants';
 
 import HeaderComponent from './header';
@@ -82,21 +82,6 @@ function Filter({
 
 			<div className={styles.body}>
 				<Modal.Body>
-					{(source === 'rate_feedback' || source === 'rate_request')
-				&& (
-					<div className={styles.radio}>
-						{`Total ${source === 'rate_feedback' ? 'Disliked' : 'Missing'} Rates`}
-						<RadioGroup
-							options={filterOptions}
-							onChange={(val) => setFilter((prevFilters) => ({
-								...prevFilters,
-								rates : val,
-								page  : 1,
-							}))}
-							value={filter?.rates}
-						/>
-					</div>
-				)}
 					<div className={styles.details}>
 						<div>
 							<p>Service</p>
