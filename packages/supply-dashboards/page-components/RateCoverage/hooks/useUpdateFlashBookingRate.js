@@ -6,8 +6,6 @@ import { formatLineItems, formatWeightSlabs } from '../helpers/revertPriceHelper
 
 import useShipmentBuyQuotations from './useShipmentBuyQuotations';
 
-const LINE_ITEMS_NOT_REQUIRED_FOR = ['air_freight', 'ftl_freight', 'ltl_freight', 'ftl_freight'];
-
 const useUpdateFlashBookingRate = ({
 	data, filter,
 }) => {
@@ -34,13 +32,13 @@ const useUpdateFlashBookingRate = ({
 		const values = { ...formData, ...manualRevertData };
 
 		const lineItemsParams = formatLineItems({
-			lineItems: isManual ? quotationLineItems : line_items,
+			lineItems: (isManual || isEmpty(line_items)) ? quotationLineItems : line_items,
 			values,
 			isManual,
 			quotationLineItems,
 		});
 		const formattedWeightSlabs = formatWeightSlabs({ values });
-		if (isEmpty(lineItemsParams) && !LINE_ITEMS_NOT_REQUIRED_FOR.includes(service)) {
+		if (isEmpty(lineItemsParams)) {
 			Toast.error(
 				'You can not revert to this live booking - No LineItems!!',
 			);
