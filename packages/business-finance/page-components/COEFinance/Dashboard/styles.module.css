@@ -208,7 +208,7 @@
 }
 
 .table_data {
-	height: 45vh;
+	height: 60vh;
 	overflow: scroll;
 
 	:global {

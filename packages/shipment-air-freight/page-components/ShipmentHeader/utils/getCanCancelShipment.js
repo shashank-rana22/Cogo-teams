@@ -10,6 +10,7 @@ const SERVICE_CANCELLATION_STATES = [
 	'init',
 	'awaiting_service_provider_confirmation',
 	'confirmed_by_service_provider',
+	'cargo_handed_over_at_origin',
 	'cancelled',
 ];
 

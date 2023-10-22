@@ -1,7 +1,5 @@
 import React from 'react';
 
-import useGetDashboardSummary from '../../../../hooks/useGetDashboardSummary';
-
 import AttendanceStats from './AttendanceStats';
 import Holiday from './Holiday';
 import LeaveBalance from './LeaveBalance';
@@ -11,9 +9,7 @@ import OrgData from './OrgData';
 import styles from './styles.module.css';
 import TimeSummary from './TimeSummary';
 
-function YourBoard() {
-	const { data, loading } = useGetDashboardSummary();
-
+function YourBoard({ data, loading }) {
 	const { manager_name, hrbp_name, next_holiday_detail, self_working_stats } = data || {};
 
 	return (
@@ -24,13 +20,13 @@ function YourBoard() {
 			<div className={styles.sub_heading}>
 				At a glance view of important stuff
 			</div>
+			<OrgData manager_name={manager_name} hrbp_name={hrbp_name} loading={loading} />
 			<TimeSummary />
 			<NotInOffice data={data} loading={loading} />
 			<LeaveBalance />
 			<AttendanceStats self_working_stats={self_working_stats} loading={loading} />
 			<Holiday data={next_holiday_detail} loading={loading} />
 			{/* <SalaryUpdate /> */}
-			<OrgData manager_name={manager_name} hrbp_name={hrbp_name} loading={loading} />
 		</div>
 	);
 }

@@ -5,12 +5,12 @@ import Post from './Post';
 import Poster from './Poster';
 import styles from './styles.module.css';
 
-function Feed() {
+function Feed({ data = {} }) {
 	return (
 		<div className={styles.container}>
 			<Post />
 			<Poster />
-			<FeedPosts />
+			<FeedPosts data={data} />
 		</div>
 	);
 }

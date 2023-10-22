@@ -4,8 +4,8 @@ import { IcMInfo } from '@cogoport/icons-react';
 import { format, getMonth, getYear } from '@cogoport/utils';
 import { useState, useEffect, memo } from 'react';
 
-import MyResponsivePie from '../../../Components/PieChart/index.tsx';
-import ResponsiveBarChart from '../../../Components/ResponsiveBarChart/index.tsx';
+import MyResponsivePie from '../../../Components/PieChart/index';
+import ResponsiveBarChart from '../../../Components/ResponsiveBarChart/index';
 import useGetBillStatusStats from '../../../hook/useGetBillStatusStats';
 import useGetCommentRemarkCounts from '../../../hook/useGetCommentRemarkCounts';
 

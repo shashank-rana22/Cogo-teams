@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
 
 import useCreateTicketActivity from '../../../hooks/useCreateTicketActivity';
+import useListShipments from '../../../hooks/useGetListShipment';
 import useGetTicketActivity from '../../../hooks/useGetTicketActivity';
 import useGetTicketDetails from '../../../hooks/useGetTicketDetails';
 import useUpdateTicketActivity from '../../../hooks/useUpdateTicketActivity';
@@ -29,14 +30,15 @@ const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 		return '100%';
 	}
 	if (isEmpty(file) && !uploading) {
-		return 'calc(100% - 82px)';
+		return 'calc(100% - 84px)';
 	}
-	return 'calc(100% - 112px)';
+	return 'calc(100% - 116px)';
 };
 
 function TicketChat({
 	modalData = {}, setModalData = () => {}, setIsUpdated = () => {}, showReassign = false,
 	setShowReassign = () => {}, isInternal = true, setIsInternal = () => {}, partnerId = '',
+	userId = '',
 }) {
 	const { ticketId = '' } = modalData || {};
 
@@ -69,7 +71,8 @@ function TicketChat({
 	});
 
 	const { Ticket: ticket = {}, IsCurrentReviewer: isCurrentReviewer = false } = ticketData || {};
-	const { Status: status = '', NotifyCustomer: notifyCustomer = false } = ticket || {};
+	const { Status: status = '', NotifyCustomer: notifyCustomer = false, Data: data = {} } = ticket || {};
+	const { SerialID: serialId } = data || {};
 
 	const {
 		listData = {},
@@ -104,6 +107,8 @@ function TicketChat({
 	const { updateTicketActivity = () => {}, updateLoading = false } = useUpdateTicketActivity({
 		refreshTickets,
 	});
+
+	const { shipmentsData = {}, listLoading = false } = useListShipments({ serialId, ticketId });
 
 	const doesTicketsExists = !isEmpty(ticketData);
 
@@ -194,7 +199,14 @@ function TicketChat({
 							)}
 				{doesTicketsExists && (
 					<div className={styles.sub_modal_container}>
-						<TicketSummary {...ticketData} detailsLoading={detailsLoading} partnerId={partnerId} />
+						<TicketSummary
+							{...ticketData}
+							detailsLoading={detailsLoading}
+							partnerId={partnerId}
+							listLoading={listLoading}
+							shipmentsData={shipmentsData}
+							userId={userId}
+						/>
 					</div>
 				)}
 
@@ -217,6 +229,7 @@ function TicketChat({
 						getTicketDetails={getTicketDetails}
 						setListData={setListData}
 						ticket={ticket}
+						shipmentsData={shipmentsData}
 					/>
 				)}
 

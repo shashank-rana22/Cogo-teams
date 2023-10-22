@@ -2,7 +2,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import showOverflowingNumber from '../../../../commons/showOverflowingNumber.tsx';
+import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import { LABEL_MAPPING } from '../../../constants';
 
 import styles from './styles.module.css';

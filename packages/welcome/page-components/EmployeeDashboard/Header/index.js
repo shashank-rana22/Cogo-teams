@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMPlus, IcMEmail } from '@cogoport/icons-react';
+import { IcMRaiseTicket, IcMEmail } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React from 'react';
@@ -25,6 +25,8 @@ function greetings() {
 function Header() {
 	const router = useRouter();
 
+	// const { user_role } = summaryData || {};
+
 	const profileData = useSelector(({ profile }) => profile);
 	const userName = profileData?.user.name;
 
@@ -35,10 +37,16 @@ function Header() {
 					COGO HR
 				</div>
 				<div className={styles.header_right_flex}>
-					<Button themeType="secondary">
+					{/* <Button themeType="secondary">
 						<span className={styles.header_right_flex}>
 							New Request
 							<IcMPlus width={12} height={12} style={{ marginLeft: 4 }} />
+						</span>
+					</Button> */}
+					<Button themeType="secondary" onClick={() => router.push('/ticket-management/my-tickets')}>
+						<span className={styles.header_right_flex}>
+							My Tickets
+							<IcMRaiseTicket width={14} height={14} style={{ marginLeft: 4 }} />
 						</span>
 					</Button>
 					<Button style={{ marginLeft: 12 }}>
@@ -76,6 +84,7 @@ function Header() {
 				<div className={styles.header_data_right_flex}>
 					{HEADER_NAV.map((val) => {
 						const ICON = val.icon;
+
 						return (
 							<Button key={val.label} className={styles.mr_12} onClick={() => router.push(val.route)}>
 								<ICON width={14} height={14} style={{ marginRight: 4 }} />

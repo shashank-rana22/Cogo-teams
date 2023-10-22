@@ -1093,6 +1093,11 @@ const partner = {
 	],
 	demand_crm: [
 		{
+			api          : 'get_platform_config_constant',
+			access_type  : 'private',
+			service_name : 'platform_config',
+		},
+		{
 			api          : 'create_shipment_trade_partner_organization',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -4039,6 +4044,16 @@ const partner = {
 			service_name : 'air_customs_rate',
 		},
 		{
+			api          : 'list_ftl_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
+		},
+		{
+			api          : 'list_ftl_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -4077,6 +4092,11 @@ const partner = {
 			api          : 'update_air_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'air_customs_rate',
+		},
+		{
+			api          : 'update_ftl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -4122,6 +4142,11 @@ const partner = {
 			api          : 'create_air_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'air_customs_rate',
+		},
+		{
+			api          : 'create_ftl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
 		},
 		{
 			api          : 'list_emails',
@@ -5099,6 +5124,41 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'saas_get_plan_features',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'saas_get_user_active_plan',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'get_active_subscription',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'list_saas_plans',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'get_margin_booking_insights',
+			access_type  : 'private',
+			service_name : 'margin',
+		},
+		{
+			api          : 'get_service_wise_booking_insights',
+			access_type  : 'private',
+			service_name : 'margin',
+		},
 	],
 	rate_sheet: [
 		{
@@ -5147,6 +5207,16 @@ const partner = {
 			service_name : 'air_customs_rate',
 		},
 		{
+			api          : 'list_ftl_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
+		},
+		{
+			api          : 'list_ftl_freight_rate_sheet_stats',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -5185,6 +5255,11 @@ const partner = {
 			api          : 'update_air_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'air_customs_rate',
+		},
+		{
+			api          : 'update_ftl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -5250,6 +5325,11 @@ const partner = {
 			api          : 'create_air_customs_rate_sheet',
 			access_type  : 'private',
 			service_name : 'air_customs_rate',
+		},
+		{
+			api          : 'create_ftl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'ftl_freight_rate',
 		},
 		{
 			api          : 'list_cogo_entities',
@@ -9056,6 +9136,12 @@ const partner = {
 			feature     : 'outstanding',
 		},
 		{
+			api         : 'send_outstanding_report_mail',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
 			api         : 'get_sage_ar_outstanding_stat',
 			access_type : 'private',
 			module      : 'outstanding',
@@ -9641,6 +9727,12 @@ const partner = {
 			access_type : 'private',
 			module      : 'JournalVoucher',
 			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'post_payments_invoice_exchange_rates',
+			access_type : 'private',
+			module      : 'settlement',
+			feature     : 'settlement',
 		},
 		{
 			api         : 'post_payments_parent_jv_bulk_jv_upload',
@@ -13000,6 +13092,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'list_organization_pocs',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'create_cogoone_group_hash',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -13695,6 +13792,11 @@ const partner = {
 			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
+		},
+		{
+			api          : 'get_distinct_values_in_column',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
 		},
 	],
 	ticket_management: [

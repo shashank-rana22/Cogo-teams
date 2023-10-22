@@ -11,7 +11,7 @@ import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { SERVICE_TYPE } from '../../constants/index.ts';
+import { SERVICE_TYPE } from '../../constants/index';
 
 import styles from './styles.module.css';
 

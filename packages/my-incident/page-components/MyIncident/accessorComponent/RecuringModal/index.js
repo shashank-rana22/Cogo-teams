@@ -6,7 +6,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { toTitleCase, showOverflowingNumber } from '../../utils';
-import ApproveAndRejectHeader from '../ApproveAndRejectHeader/index.tsx';
+import ApproveAndRejectHeader from '../ApproveAndRejectHeader/index';
 
 import styles from './style.module.css';
 

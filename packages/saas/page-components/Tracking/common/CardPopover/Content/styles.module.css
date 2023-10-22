@@ -1,0 +1,14 @@
+.row {
+	padding: 8px;
+	border-bottom: 1px solid #f8f2e7;
+
+	&:hover {
+		background-color: #f8f2e7;
+		border-color: #edd7a9;
+	}
+}
+
+.icon {
+	margin-right: 7px;
+	vertical-align: middle;
+}

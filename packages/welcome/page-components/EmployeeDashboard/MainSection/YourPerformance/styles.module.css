@@ -93,6 +93,7 @@
 	font-size: 12px;
 	font-weight: 600;
 	text-transform: capitalize;
+	cursor: pointer;
 }
 
 .kpi_img {
@@ -103,6 +104,7 @@
 
 .story_points_data {
 	flex: 1 0 55%;
+	height: 160px;
 	padding-left: 6px;
 }
 

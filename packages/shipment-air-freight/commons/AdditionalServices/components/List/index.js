@@ -20,10 +20,16 @@ import ConfirmTerminalChargeModal from './TerminalChargeModal';
 const LESS_PAGE_LIMIT = 8;
 const MORE_PAGE_LIMIT = 100;
 
+const THC_DISABLE_STATE = ['init', 'awaiting', 'confirmed_by_service_provider',
+	'awaiting_service_provider_confirmation'];
+
 function List({ isSeller = false, source = '' }) {
 	const { servicesList, refetchServices, shipment_data, stakeholderConfig } = useContext(
 		ShipmentDetailContext,
 	);
+
+	const mainFreightService = (servicesList || []).find((service) => service?.service_type === 'air_freight_service');
+
 	const { id = '', is_job_closed_financially = false, inco_term = '' } = shipment_data || {};
 
 	const tradeType = GLOBAL_CONSTANTS.options.inco_term?.[inco_term]?.trade_type;
@@ -124,7 +130,7 @@ function List({ isSeller = false, source = '' }) {
 					<Button
 						onClick={() => setTerminalChargeModal(true)}
 						className={styles.terminal_charges}
-						disabled={is_job_closed_financially}
+						disabled={is_job_closed_financially || THC_DISABLE_STATE.includes(mainFreightService?.state)}
 					>
 						<div className={styles.add_icon}>+</div>
 						Add Terminal Charge

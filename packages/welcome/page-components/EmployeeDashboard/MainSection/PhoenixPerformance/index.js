@@ -16,7 +16,7 @@ const OPTIONS = [
 	{ label: 'March 2023', value: 'march' },
 ];
 
-function PhoenixPerformance() {
+function PhoenixPerformance({ data = {} }) {
 	return (
 		<>
 			<div className={styles.container}>
@@ -114,7 +114,7 @@ function PhoenixPerformance() {
 			<div className={styles.company_feed}>
 				<div className={styles.company_feed_title}>Company Feed</div>
 				<div className={styles.sub_title}>Updates, announcements and more</div>
-				<Feed />
+				<Feed data={data} />
 			</div>
 		</>
 	);
