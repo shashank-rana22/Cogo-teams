@@ -195,7 +195,7 @@ const getPayload = ({
 				},
 				serviceProviderDetail: {
 					// vendor
-					tradePartyMappingId  : tradePartyMappingIdFromTradeParty,
+					tradePartyMappingId,
 					entityCode,
 					entityCodeId         : vendorCogoEntityId,
 					organizationId       : idFromVendor || vendorID,

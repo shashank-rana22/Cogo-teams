@@ -31,7 +31,7 @@ const useGetVendorTradeParties = ({ organization_id = '' }) => {
 
 	return {
 		vendorTradePartyDataLoading : loading,
-		vendorTradePartyList        : data?.list,
+		vendorTradePartyList        : data,
 	};
 };
 

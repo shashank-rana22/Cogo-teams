@@ -628,7 +628,7 @@ function ExpenseComponent() {
 							name={label}
 							isActive={subActiveTab === value}
 							key={value}
-							number={listData?.stats?.[value] || '-'}
+							number={listData?.stat?.[value] || '-'}
 							value={value}
 							setSubActiveTab={setSubActiveTab}
 						/>
