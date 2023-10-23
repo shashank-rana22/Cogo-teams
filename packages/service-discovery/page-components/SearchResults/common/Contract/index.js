@@ -2,6 +2,8 @@ import { Modal } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useGetIsMobile from '../../../../helpers/useGetIsMobile';
+
 import LandingPage from './LandingPage';
 import RequestContract from './RequestContract';
 import styles from './styles.module.css';
@@ -15,6 +17,8 @@ function Contract({
 }) {
 	const [screen, setScreen] = useState('landing');
 	const [contractData, setContractData] = useState({});
+
+	const isMobile = useGetIsMobile();
 
 	const COMPONENTS_MAPPING = {
 		landing: {
@@ -35,6 +39,7 @@ function Contract({
 				setShow,
 				setScreen,
 				setContractData,
+				isMobile,
 			},
 		},
 		submitted: {
@@ -43,6 +48,7 @@ function Contract({
 			props     : {
 				detail,
 				contractData,
+				isMobile,
 			},
 		},
 	};
@@ -58,8 +64,8 @@ function Contract({
 			size="lg"
 			show={show}
 			onClose={onClose}
-			placement="top"
-			closeOnOuterClick={false}
+			placement={isMobile ? 'bottom' : 'top'}
+			closeOnOuterClick={isMobile}
 		>
 			<div className={styles.container}>
 				{closable ? (

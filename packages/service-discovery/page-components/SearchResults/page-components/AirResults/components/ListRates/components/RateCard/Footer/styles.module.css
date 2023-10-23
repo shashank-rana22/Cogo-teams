@@ -10,11 +10,19 @@
 	width: 100%;
 	padding: 12px 20px;
 	background: #f3f9f9;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .left_section {
 	display: flex;
 	align-items: center;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 }
 
 .info_item {
@@ -22,6 +30,11 @@
 	align-items: center;
 	margin-right: 20px;
 	font-size: 12px;
+
+	@media (max-width: 768px) {
+		margin-right: 10px;
+		font-size: 9px;
+	}
 }
 
 .right_section {
@@ -29,6 +42,10 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 35%;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }
 
 .tabs {
@@ -38,16 +55,20 @@
 	margin-right: 20px;
 	font-size: 10px;
 
+	@media (max-width: 1080px) {
+		width: fit-content;
+	}
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-right: 0;
+	}
+
 	&.less_width {
 		width: 75%;
 	}
 
 	&.more_width {
 		width: 100%;
-	}
-
-	@media (max-width: 1080px) {
-		width: fit-content;
 	}
 }
 

@@ -1,3 +1,5 @@
+import { cl } from '@cogoport/components';
+
 import PricePerPackage from './PricePerPackage';
 import styles from './styles.module.css';
 
@@ -24,7 +26,7 @@ function FreightPrice({ rate = {}, isContract = false }) {
 				/>
 			</div>
 
-			<div className={styles.price_item}>
+			<div className={cl`${styles.price_item} ${styles.total}`}>
 				<span className={styles.label}>Total Freight Price</span>
 
 				<PricePerPackage

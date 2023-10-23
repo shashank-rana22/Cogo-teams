@@ -1,5 +1,9 @@
 .container {
 	padding-top: 26px;
+
+	@media (max-width: 768px) {
+		padding: 0;
+	}
 }
 
 .loader_container {

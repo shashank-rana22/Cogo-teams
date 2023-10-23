@@ -54,11 +54,11 @@ function PossibleSchedulesItem({ item = {}, isFirst = false }) {
 
 	return (
 		<div className={cl`${styles.container} ${isFirst ? styles.container_no_border : ''}`}>
-			{Object.values(LABEL_VALUE_MAPPING).map((displayItem) => {
+			{Object.entries(LABEL_VALUE_MAPPING).map(([key, displayItem]) => {
 				const { label = '', value, className = {} } = displayItem;
 
 				return (
-					<div key={label} className={cl`${styles.section} ${styles[className?.section]}`}>
+					<div key={key} className={cl`${styles.section} ${styles[className?.section]} ${styles[key]}`}>
 						<span className={cl`${styles.label} ${styles[className?.label]}`}>{label}</span>
 
 						<div className={cl`${styles.value} ${styles[className?.value]}`}>{value}</div>

@@ -1,8 +1,8 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
+import useGetIsMobile from '../../../../../helpers/useGetIsMobile';
 import deepEqual from '../../../utils/deepEqual';
 import FilterContent from '../FilterContent';
 
@@ -35,6 +35,8 @@ function FilterModal({
 	controls = [],
 	setScheduleLoading = () => {},
 }) {
+	const isMobile = useGetIsMobile();
+
 	const defaultValues = {
 		...controlsDefaultValues,
 		...filters,
@@ -84,7 +86,7 @@ function FilterModal({
 			size="md"
 			show={show}
 			onClose={() => setShow(false)}
-			placement="right"
+			placement={isMobile ? 'bottom' : 'right'}
 			className={styles.modal}
 		>
 			<Modal.Body>

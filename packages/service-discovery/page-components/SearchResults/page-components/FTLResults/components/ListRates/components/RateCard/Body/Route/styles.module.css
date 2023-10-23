@@ -3,7 +3,6 @@
 
 	@media (max-width: 768px) {
 		width: 100%;
-		padding: 0 20px;
 		margin-bottom: 12px;
 	}
 }
@@ -40,11 +39,23 @@
 	font-size: 20px;
 	color: #000;
 
+	@media (max-width: 768px) {
+		width: 50%;
+		min-width: auto;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
 	&.overflow_hidden {
 		width: 60%;
 		min-width: auto;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+	}
+
+	@media (max-width: 768px) {
+		font-size: 15px;
 	}
 }

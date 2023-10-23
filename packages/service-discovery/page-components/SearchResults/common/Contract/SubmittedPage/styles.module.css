@@ -1,6 +1,10 @@
 .container {
 	padding: 36px 48px;
 	background: #f7faef;
+
+	@media (max-width: 768px) {
+		padding: 24px;
+	}
 }
 
 .header {
@@ -33,6 +37,10 @@
 
 .preview_container {
 	margin: 60px 0;
+
+	@media (max-width: 768px) {
+		margin: 30px 0;
+	}
 }
 
 .preview_label {
@@ -49,6 +57,10 @@
 	background: #fbffff;
 	border: 1px solid #d7eaea;
 	border-radius: 8px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .left_section {
@@ -64,6 +76,13 @@
 		.ui_pill_text {
 			font-weight: 600;
 		}
+	}
+
+	@media (max-width: 768px) {
+		align-items: flex-start;
+		width: 100%;
+		padding: 0 12px;
+		margin-top: 12px;
 	}
 }
 
@@ -121,7 +140,7 @@
 	border-radius: 24px;
 
 	&.commodity {
-		width: 80px;
+		max-width: 80px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;

@@ -4,7 +4,12 @@ import fclIncotermsMapping from './FCL/fclIncotermsMapping.json';
 import fclAdditionalServiceControls from './FCL/serviceControls';
 import ftlIncoTersmMapping from './FTL/ftlIncotermsMapping.json';
 
-export const serviceMappings = ({ service:primaryService, origin_country_id = '', destination_country_id = '' }) => {
+export const serviceMappings = ({
+	service:primaryService,
+	origin_country_id = '',
+	destination_country_id = '',
+	airport_id = '',
+}) => {
 	const serviceMap = {
 		fcl_freight: {
 			services : fclIncotermsMapping,
@@ -12,7 +17,7 @@ export const serviceMappings = ({ service:primaryService, origin_country_id = ''
 		},
 		air_freight: {
 			services : airIncotermsMapping,
-			controls : airAdditionalServiceControls({ origin_country_id, destination_country_id }),
+			controls : airAdditionalServiceControls({ origin_country_id, destination_country_id, airport_id }),
 		},
 		ftl_freight: {
 			services : ftlIncoTersmMapping,

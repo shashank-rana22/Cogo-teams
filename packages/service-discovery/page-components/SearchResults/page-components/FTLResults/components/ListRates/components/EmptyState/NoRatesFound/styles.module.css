@@ -30,6 +30,10 @@
 .text_container {
 	display: flex;
 	flex-direction: column;
+
+	@media (max-width: 768px) {
+		margin-top: 32px;
+	}
 }
 
 .big_text {
@@ -40,4 +44,8 @@
 .small_text {
 	font-size: 18px;
 	font-weight: 400;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 }

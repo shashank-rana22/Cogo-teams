@@ -20,22 +20,29 @@
 	left: -6px;
 	width: 200px;
 	height: 100px;
+
+	@media (max-width: 768px) {
+		top: -10px;
+		width: 120px;
+		height: 60px;
+	}
 }
 
 .label {
 	font-size: 21px;
 	font-weight: 600;
 	color: #4f4f4f;
+
+	@media (max-width: 768px) {
+		font-size: 15px;
+	}
 }
 
-.contract_btn {
-	width: 123px;
-	height: 30px;
-	font-weight: 500;
-	font-weight: 12px;
-	color: #fff;
-	text-transform: capitalize !important;
-	background: #221f20;
+.button {
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-top: 12px;
+	}
 }
 
 .content {
@@ -43,4 +50,9 @@
 	justify-content: space-between;
 	padding: 0 20px 20px;
 	margin-top: -30px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		margin-top: -20px;
+	}
 }

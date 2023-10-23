@@ -53,6 +53,10 @@
 	&.selected_week {
 		font-weight: 600;
 	}
+
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
 }
 
 .rate {
@@ -60,4 +64,8 @@
 	font-weight: 400;
 	color: #000;
 	opacity: 0.6;
+
+	@media (max-width: 768px) {
+		font-size: 10px;
+	}
 }

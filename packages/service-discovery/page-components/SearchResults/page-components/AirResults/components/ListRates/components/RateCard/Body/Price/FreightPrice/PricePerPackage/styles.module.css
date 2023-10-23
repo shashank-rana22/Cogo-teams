@@ -27,6 +27,7 @@
 }
 
 .per_kg_label {
+	width: max-content;
 	margin-bottom: 4px;
 	margin-left: 4px;
 	font-size: 10px;

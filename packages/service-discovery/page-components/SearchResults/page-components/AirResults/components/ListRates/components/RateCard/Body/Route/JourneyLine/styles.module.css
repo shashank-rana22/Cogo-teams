@@ -52,4 +52,8 @@
 	text-align: center;
 	background: rgb(247 250 239);
 	border-radius: 4px;
+
+	@media (max-width: 768px) {
+		font-size: 8px;
+	}
 }

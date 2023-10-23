@@ -8,7 +8,7 @@ import getLocationInfo from '../../../utils/locations-search';
 import LocationItem from './LocationItem';
 import styles from './styles.module.css';
 
-function Submitted({ detail = {}, contractData = {} }) {
+function Submitted({ detail = {}, contractData = {}, isMobile = false }) {
 	const { query } = useSelector(({ general }) => ({ query: general.query }));
 
 	const { partner_id = '' } = query;
@@ -63,6 +63,9 @@ function Submitted({ detail = {}, contractData = {} }) {
 							) : null}
 						</div>
 
+						{isMobile ? (
+							<Pill size="sm" color="#FBD1A6" style={{ fontWeight: 600 }}>Pending Approval</Pill>
+						) : null}
 					</div>
 
 					<div className={styles.right_section}>
@@ -104,7 +107,9 @@ function Submitted({ detail = {}, contractData = {} }) {
 							</div>
 						</div>
 
-						<Pill size="sm" color="#FBD1A6">Pending Approval</Pill>
+						{isMobile ? null : (
+							<Pill size="sm" color="#FBD1A6">Pending Approval</Pill>
+						)}
 					</div>
 				</div>
 			</div>

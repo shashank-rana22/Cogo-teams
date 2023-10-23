@@ -13,6 +13,12 @@
 			border-bottom: 3px solid #ee3425;
 			transition: all 0.1s;
 		}
+
+		.ui_tab_list_container {
+			@media (max-width: 768px) {
+				display: none;
+			}
+		}
 	}
 }
 

@@ -28,7 +28,7 @@ const useAdditionalServices = ({ rateCardData = {}, detail = {}, source = '' }) 
 
 	const {
 		service_details = {},
-		service_type = '',
+		service_type:primaryService = '',
 		trade_type = '',
 		inco_term = '',
 	} = detail;
@@ -37,14 +37,13 @@ const useAdditionalServices = ({ rateCardData = {}, detail = {}, source = '' }) 
 
 	const [incoTermModalData, setIncoTermModalData] = useState({});
 
-	const primaryService = service_type;
-
-	const isSingleLocationService = singleLocationServices.includes(service_type);
+	const isSingleLocationService = singleLocationServices.includes(primaryService);
 
 	const servicesArray = serviceMappings({
 		service                : primaryService,
 		destination_country_id : detail.destination_country_id,
 		origin_country_id      : detail.origin_country_id,
+		airport_id             : trade_type === 'export' ? detail?.origin_airport_id : detail?.destination_airport_id,
 	});
 
 	const SERVICE_DATA = {};

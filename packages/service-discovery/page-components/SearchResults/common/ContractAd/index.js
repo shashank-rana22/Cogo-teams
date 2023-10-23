@@ -4,10 +4,14 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import useGetIsMobile from '../../../../helpers/useGetIsMobile';
+
 import styles from './styles.module.css';
 
 function ContractAd({ loading = false, importerExporterId = '', contractDetail = {}, style = {} }) {
 	const { query = {} } = useSelector(({ general }) => ({ query: general.query }));
+
+	const isMobile = useGetIsMobile();
 
 	const { partner_id = '' } = query;
 
@@ -42,8 +46,9 @@ function ContractAd({ loading = false, importerExporterId = '', contractDetail =
 
 				<Button
 					size="md"
-					themeType="accent"
+					themeType={isMobile ? 'secondary' : 'accent'}
 					onClick={redirectToContract}
+					className={styles.button}
 				>
 					View Contracts
 				</Button>

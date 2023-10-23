@@ -2,6 +2,8 @@ import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
 
+import styles from './styles.module.css';
+
 function ProceedButton({
 	rate = {},
 	isSelectedCard = false,
@@ -35,6 +37,7 @@ function ProceedButton({
 			onClick={handleSelectButtonClick}
 			size="md"
 			themeType="accent"
+			className={styles.button}
 		>
 			{isSelectedCard ? 'Remove' : `Select For ${formattedAmount}` }
 		</Button>

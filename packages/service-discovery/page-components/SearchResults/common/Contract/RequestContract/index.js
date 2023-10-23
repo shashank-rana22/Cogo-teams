@@ -24,8 +24,9 @@ function RequestContract({
 	setShow = () => {},
 	setScreen = () => {},
 	setContractData = () => {},
+	isMobile = false,
 }) {
-	const controls = createContracts();
+	const controls = createContracts({ isMobile });
 
 	const {
 		control,

@@ -56,6 +56,23 @@ function AdditionalServicesForm({
 		setHeaderProps({});
 	};
 
+	const fields = service?.controls?.reduce((acc, curr) => ({ ...acc, [curr.name]: curr }), {});
+
+	if (service?.name === 'warehouse') {
+		const { expected_cargo_gated_in, expected_cargo_gated_out } = watch();
+
+		if (expected_cargo_gated_in) {
+			fields.expected_cargo_gated_out.minDate = expected_cargo_gated_in;
+			fields.expected_cargo_gated_out.isPreviousDaysAllowed = true;
+		}
+
+		if (expected_cargo_gated_out) {
+			fields.expected_cargo_gated_in.maxDate = expected_cargo_gated_out;
+		}
+	}
+
+	const controls = Object.values(fields) || [];
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.text}>
@@ -67,7 +84,7 @@ function AdditionalServicesForm({
 			</div>
 
 			<div className={styles.control_container}>
-				{service.controls.map((controlItem) => {
+				{controls.map((controlItem) => {
 					let newControl = { ...controlItem };
 
 					const { condition = {}, name = '' } = newControl;

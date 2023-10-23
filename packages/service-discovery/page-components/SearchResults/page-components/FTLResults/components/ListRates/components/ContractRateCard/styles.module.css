@@ -8,5 +8,9 @@
 
 	&.selected_card {
 		margin: 10px 0 !important;
+
+		@media (max-width: 768px) {
+			display: none;
+		}
 	}
 }

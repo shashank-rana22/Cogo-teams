@@ -55,17 +55,16 @@ function RequestRate({ details = {}, className = {}, rates = [] }) {
 				</p>
 			</div>
 
-			<div className={styles.right_section}>
-				<Button
-					type="button"
-					size="md"
-					themeType="secondary"
-					onClick={() => setShowFeedBackModal(true)}
-				>
-					<span className={styles.button_text}>Send Feedback</span>
-					<IcMArrowRight fontSize={15} />
-				</Button>
-			</div>
+			<Button
+				type="button"
+				size="md"
+				themeType="secondary"
+				onClick={() => setShowFeedBackModal(true)}
+				className={styles.button}
+			>
+				<span className={styles.button_text}>Send Feedback</span>
+				<IcMArrowRight fontSize={15} />
+			</Button>
 
 			{showFeedbackModal ? (
 				<FeedBackModal

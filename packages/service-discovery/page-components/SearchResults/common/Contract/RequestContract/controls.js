@@ -10,7 +10,7 @@ const getParams = ({ status, operator_type }) => ({
 
 const renderAirlinesLabel = (data) => CustomSelectOption({ data, key: 'airlines' });
 
-const createContracts = () => [
+const createContracts = ({ isMobile = false }) => [
 	{
 		name        : 'contract_name',
 		label       : 'Contract Name',
@@ -61,7 +61,7 @@ const createContracts = () => [
 		label  : 'Maximum Weight',
 		type   : 'input',
 		min    : 0,
-		span   : 4,
+		span   : isMobile ? 12 : 4,
 		suffix : <span style={{ marginRight: 12 }}>Kgs</span>,
 		showIn : ['air_freight', 'lcl_freight'],
 		rules  : {
@@ -86,7 +86,7 @@ const createContracts = () => [
 		isClearable    : true,
 		caret          : false,
 		multiple       : true,
-		span           : 4,
+		span           : isMobile ? 12 : 4,
 		showIn         : ['fcl_freight'],
 	},
 	{
@@ -104,7 +104,7 @@ const createContracts = () => [
 		labelKey       : 'short_name',
 		isClearable    : true,
 		multiple       : true,
-		span           : 4,
+		span           : isMobile ? 12 : 4,
 		showIn         : ['air_freight'],
 		renderLabel    : renderAirlinesLabel,
 	},
@@ -123,7 +123,7 @@ const createContracts = () => [
 		}),
 		isClearable : true,
 		multiple    : true,
-		span        : 4,
+		span        : isMobile ? 12 : 4,
 		showIn      : ['air_freight'],
 		renderLabel : renderAirlinesLabel,
 	},

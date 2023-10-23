@@ -10,6 +10,12 @@
 	padding: 12px 20px;
 	background: #fffce6;
 	border-radius: 0 0 8px 8px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		padding: 0;
+		background: #fff;
+	}
 }
 
 .left_section {
@@ -17,6 +23,12 @@
 	align-items: center;
 	font-size: 12px;
 	color: #ee3425;
+
+	@media (max-width: 768px) {
+		padding: 0 20px;
+		font-size: 10px;
+		background: #fff;
+	}
 }
 
 .right_section {
@@ -24,6 +36,13 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 35%;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		padding: 12px 20px;
+		margin-top: 10px;
+		background: #fffce6;
+	}
 }
 
 .tabs {
@@ -43,6 +62,10 @@
 
 	@media (max-width: 1080px) {
 		width: fit-content;
+	}
+	@media (max-width: 768px) {
+		justify-content: space-between;
+		margin-right: 0;
 	}
 }
 

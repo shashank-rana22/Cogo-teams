@@ -3,8 +3,11 @@
 
 	:global {
 		.ui_modal_body_container {
-			min-height: 90vh !important;
 			padding: 0;
+
+			@media (min-width: 768px) {
+				min-height: 90vh !important;
+			}
 		}
 
 		.ui_accordion_title {
@@ -12,6 +15,10 @@
 			font-weight: 600;
 			color: #000;
 		}
+	}
+
+	@media (max-width: 768px) {
+		width: 100vw !important;
 	}
 }
 

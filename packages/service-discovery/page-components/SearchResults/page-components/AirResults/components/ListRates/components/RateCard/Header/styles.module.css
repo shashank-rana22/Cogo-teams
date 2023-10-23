@@ -33,6 +33,10 @@
 	background: #cfeaed;
 	border-radius: 8px 0 4px;
 
+	@media (max-width: 768px) {
+		font-size: 10px;
+	}
+
 	&.spot_negotiation_rate {
 		background: #e6fbe9;
 	}
@@ -57,6 +61,20 @@
 		.ui_checkbox_container {
 			padding-left: 0;
 		}
+	}
+
+	@media (max-width: 768px) {
+		margin-top: 22px;
+	}
+}
+
+.right_section {
+	position: absolute;
+	right: 0;
+
+	@media (max-width: 768px) {
+		top: -12px;
+		right: -12px;
 	}
 }
 
@@ -88,6 +106,10 @@
 	margin-left: 4px;
 	font-size: 18px;
 	font-weight: 600;
+
+	@media (max-width: 768px) {
+		font-size: 15px;
+	}
 }
 
 .pill {

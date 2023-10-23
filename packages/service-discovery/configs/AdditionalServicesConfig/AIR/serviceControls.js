@@ -2,7 +2,7 @@ import { IcMLocation } from '@cogoport/icons-react';
 
 import CustomSelectOption from '../../../common/CustomSelectOption';
 
-const controls = ({ destination_country_id, origin_country_id }) => [
+const controls = ({ destination_country_id, origin_country_id, airport_id }) => [
 	{
 		name    : 'export_transportation_pickup_type',
 		label   : 'Choose Pickup type ',
@@ -68,11 +68,18 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 		type        : 'async-select',
 		asyncKey    : 'list_locations',
 		params      : {
-			filters: { type: ['warehouse'] },
+			filters: {
+				type   : ['warehouse'],
+				airport_id,
+				status : 'active',
+			},
+			page_limit      : 20,
+			// includes        : { city: true, country: true, default_params_required: true },
+			recommendations : true,
 		},
-		defaultOptions : true,
-		condition      : { services: ['warehouse'] },
-		rules          : { required: 'Address is required' },
+		initialCall : true,
+		condition   : { services: ['warehouse'] },
+		rules       : { required: 'Warehouse is required' },
 	},
 	{
 		name           : 'truck_type',
@@ -173,7 +180,7 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 		type      : 'datepicker',
 		style     : { width: 200 },
 		condition : { services: ['warehouse'] },
-		rules     : { required: 'Address is required' },
+		rules     : { required: 'This is required' },
 	},
 	{
 		label     : 'Expected cargo gated out',
@@ -181,7 +188,7 @@ const controls = ({ destination_country_id, origin_country_id }) => [
 		type      : 'datepicker',
 		style     : { width: 200 },
 		condition : { services: ['warehouse'] },
-		rules     : { required: 'Address is required' },
+		rules     : { required: 'This is required' },
 	},
 ];
 

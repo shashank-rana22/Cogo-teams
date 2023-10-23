@@ -71,6 +71,7 @@ function LandingPage({
 						themeType="secondary"
 						style={{ marginRight: 16 }}
 						onClick={() => setShow(false)}
+						className={styles.button}
 					>
 						No
 					</Button>
@@ -79,6 +80,7 @@ function LandingPage({
 						size="lg"
 						themeType="accent"
 						onClick={() => setScreen('request_contract')}
+						className={styles.button}
 					>
 						Yes
 					</Button>
