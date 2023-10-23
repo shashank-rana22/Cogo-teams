@@ -74,7 +74,9 @@ function Create({ type = 'create', item = {} }) {
 		marginType : formValues?.margin_type,
 		partnerId  : formValues?.partner_id,
 		item,
+		setValue,
 	});
+
 	const marginControls = getMarginControls({ service: formValues?.service });
 
 	const extraControls = useMemo(() => {

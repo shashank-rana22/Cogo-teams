@@ -1,6 +1,6 @@
 import serviceOptions from '../../config/SERVICE_OPTIONS.json';
 
-const getControls = ({ type = '', marginType = '', partnerId = '', item = {} }) => {
+const getControls = ({ type = '', marginType = '', partnerId = '', item = {}, setValue = () => { } }) => {
 	const controls = [
 		{
 			name           : 'partner_id',
@@ -9,6 +9,7 @@ const getControls = ({ type = '', marginType = '', partnerId = '', item = {} }) 
 			caret          : true,
 			span           : 2,
 			watch          : true,
+			initialCall    : true,
 			scope          : 'partner',
 			type           : 'async_select',
 			asyncKey       : 'list_cogo_entity',
@@ -45,6 +46,9 @@ const getControls = ({ type = '', marginType = '', partnerId = '', item = {} }) 
 			multiple    : false,
 			placeholder : 'Select service',
 			rules       : { required: 'Service is Required' },
+			onChange    : () => {
+				setValue('rate_type', []);
+			},
 		},
 		{
 			label       : 'Select Rate Type',
@@ -72,7 +76,10 @@ const getControls = ({ type = '', marginType = '', partnerId = '', item = {} }) 
 				{ label: 'Importer Exporter', value: 'importer_exporter' },
 				{ label: 'Channel Partner', value: 'channel_partner' },
 			],
-			value: item?.organization_type,
+			value    : item?.organization_type,
+			onChange : () => {
+				setValue('organization_sub_type', []);
+			},
 		},
 		{
 			label       : 'Organization Sub Type',
