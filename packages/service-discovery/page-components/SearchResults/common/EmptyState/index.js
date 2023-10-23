@@ -1,6 +1,7 @@
 import React from 'react';
 
-import RequestRate from '../../../../../../common/RequestRate';
+import useGetIsMobile from '../../../../helpers/useGetIsMobile';
+import RequestRate from '../RequestRate';
 
 import NoRatesFound from './NoRatesFound';
 import styles from './styles.module.css';
@@ -14,7 +15,10 @@ function EmptyState({
 	setOpenAccordian = () => {},
 	showFilterModal = false,
 	setShowFilterModal = () => {},
+	airlines = [],
 }) {
+	const isMobile = useGetIsMobile();
+
 	return (
 		<div className={styles.container}>
 			<NoRatesFound
@@ -26,10 +30,12 @@ function EmptyState({
 				setOpenAccordian={setOpenAccordian}
 				showFilterModal={showFilterModal}
 				setShowFilterModal={setShowFilterModal}
+				airlines={airlines}
+				isMobile={isMobile}
 			/>
 
 			<div className={styles.request_rate_container}>
-				<RequestRate details={details} />
+				<RequestRate details={details} isMobile={isMobile} />
 			</div>
 		</div>
 	);

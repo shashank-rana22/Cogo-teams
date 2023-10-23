@@ -41,6 +41,7 @@ function Filters({
 	airlines = [],
 	// transitTime = {},
 	setScheduleLoading = () => {},
+	isMobile = false,
 }) {
 	const [airlineParams, setAirlineParams] = useState({
 		filters: {
@@ -70,7 +71,7 @@ function Filters({
 		<div className={styles.container}>
 			<Button
 				type="button"
-				size="lg"
+				size={isMobile ? 'md' : 'lg'}
 				themeType="link"
 				onClick={onClickButton}
 				className={styles.filter_button}

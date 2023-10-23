@@ -22,6 +22,7 @@ function FeedBackModal({
 	requestService = {},
 	proceeedWithFeedback = true,
 	rates = [],
+	isMobile = false,
 }) {
 	const service = requestService?.service_type || details?.service_type;
 
@@ -94,7 +95,7 @@ function FeedBackModal({
 			size="md"
 			show={show}
 			onClose={onClose}
-			placement="top"
+			placement={isMobile ? 'bottom' : 'top'}
 		>
 			{proceeedWithFeedback ? (
 				<>

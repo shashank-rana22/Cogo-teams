@@ -6,11 +6,11 @@ import { useState, useMemo } from 'react';
 import DotLoader from '../../../../../../common/LoadingState/DotLoader';
 import AppliedFilters from '../../../../common/AppliedFilters';
 import ContractAd from '../../../../common/ContractAd';
+import EmptyState from '../../../../common/EmptyState';
 import RequestRate from '../../../../common/RequestRate';
 import Schedules from '../../../../common/Schedules';
 
 import ComparisonHeader from './components/ComparisonHeader';
-import EmptyState from './components/EmptyState';
 import Header from './components/Header';
 import RateCard from './components/RateCard';
 import styles from './styles.module.css';

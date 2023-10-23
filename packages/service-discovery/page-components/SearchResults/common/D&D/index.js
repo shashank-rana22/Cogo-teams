@@ -42,6 +42,7 @@ const isAlreadyPresent = (service_details = {}) => {
 function DetentionDemurrage({
 	details = {},
 	refetch = () => {},
+	isMobile = false,
 }) {
 	const [show, setShow] = useState(false);
 
@@ -75,7 +76,7 @@ function DetentionDemurrage({
 			)}
 		>
 			<Button
-				size="md"
+				size={isMobile ? 'sm' : 'lg'}
 				themeType="link"
 				className={styles.button}
 				onClick={() => setShow(!show)}

@@ -12,15 +12,21 @@
 .top_section {
 	display: flex;
 	justify-content: space-between;
-}
 
-.applied_filters {
-	display: block;
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .buttons_container {
 	display: flex;
 	align-items: center;
+	align-self: end;
+
+	@media (max-width: 768px) {
+		justify-content: space-between;
+		width: 100%;
+	}
 }
 
 .icon {
