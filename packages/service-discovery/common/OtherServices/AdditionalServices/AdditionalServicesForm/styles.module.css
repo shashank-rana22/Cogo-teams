@@ -2,6 +2,10 @@
 	padding: 20px;
 	background: #fff;
 	border-top: 1px solid #ebebf0;
+
+	@media (max-width: 768px) {
+		padding: 12px 4px;
+	}
 }
 
 .text {
@@ -11,16 +15,36 @@
 	font-size: 16px;
 	font-weight: 600;
 	color: #000;
+
+	@media (max-width: 768px) {
+		font-size: 14px;
+	}
 }
 
 .control_container {
 	display: flex;
+	align-items: center;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.form {
+	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+	width: 100%;
 }
 
 .control_style {
 	margin: 16px 16px 16px 0;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-right: 0;
+		margin-bottom: 0;
+	}
 
 	:global {
 		.ui_radiogroup_container {
@@ -37,11 +61,20 @@
 				margin-right: 12px;
 			}
 		}
+
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
 	}
 }
 
 .primary_buttton {
 	margin-top: 20px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		height: 40px !important;
+	}
 }
 
 .label {

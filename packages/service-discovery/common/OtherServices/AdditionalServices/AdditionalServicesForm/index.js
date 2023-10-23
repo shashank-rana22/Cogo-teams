@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
 
 import getElementController from '../../../../configs/getElementController';
+import useGetIsMobile from '../../../../helpers/useGetIsMobile';
 import useSpotSearchService from '../../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
 import getOptions from '../../../../page-components/SearchResults/utils/getOptions';
 import { getServiceWisePayload } from '../configs';
@@ -24,6 +25,8 @@ function AdditionalServicesForm({
 		rateCardData,
 		checkout_id: detail?.checkout_id,
 	});
+
+	const isMobile = useGetIsMobile();
 
 	const {
 		control,
@@ -84,63 +87,70 @@ function AdditionalServicesForm({
 			</div>
 
 			<div className={styles.control_container}>
-				{controls.map((controlItem) => {
-					let newControl = { ...controlItem };
+				<div className={styles.form}>
+					{controls.map((controlItem) => {
+						let newControl = { ...controlItem };
 
-					const { condition = {}, name = '' } = newControl;
+						const { condition = {}, name = '', style = {} } = newControl;
 
-					const Element = getElementController(newControl.type);
+						const Element = getElementController(newControl.type);
 
-					let flag = true;
+						let flag = true;
 
-					Object.keys(condition).forEach((condItem) => {
-						if (WATCH_MAP?.[condItem] !== undefined) {
-							if (
-								!condition?.[condItem].includes(
-									WATCH_MAP?.[condItem],
-								)
-							) {
-								flag = false;
+						Object.keys(condition).forEach((condItem) => {
+							if (WATCH_MAP?.[condItem] !== undefined) {
+								if (
+									!condition?.[condItem].includes(
+										WATCH_MAP?.[condItem],
+									)
+								) {
+									flag = false;
+								}
 							}
+						});
+
+						if (!flag) {
+							return null;
 						}
-					});
 
-					if (!flag) {
-						return null;
-					}
+						const value = commonControls.includes(newControl.name) ? findKey(detail, newControl.name) : '';
 
-					const value = commonControls.includes(newControl.name) ? findKey(detail, newControl.name) : '';
+						if (newControl.optionsListKey) {
+							const finalOptions = getOptions(newControl.optionsListKey, {});
 
-					if (newControl.optionsListKey) {
-						const finalOptions = getOptions(newControl.optionsListKey, {});
+							newControl = { ...newControl, options: finalOptions };
+						}
 
-						newControl = { ...newControl, options: finalOptions };
-					}
+						return (
+							<div key={newControl.name} className={styles.control_style}>
+								<div className={styles.label}>
+									{newControl.label}
 
-					return (
-						<div key={newControl.name} className={styles.control_style}>
-							<div className={styles.label}>
-								{newControl.label}
+									{newControl?.rules?.required && newControl.label ? (
+										<div className={styles.required_mark}>*</div>
+									) : null}
 
-								{newControl?.rules?.required && newControl.label ? (
-									<div className={styles.required_mark}>*</div>
-								) : null}
-
-								{newControl?.showOptional && newControl.label ? (
-									<div className={styles.optional_text}>(Optional)</div>
-								) : null}
-							</div>
-
-							<Element {...newControl} control={control} value={value} />
-
-							{errors[name] && (
-								<div className={styles.error_message}>
-									{errors[name]?.message}
+									{newControl?.showOptional && newControl.label ? (
+										<div className={styles.optional_text}>(Optional)</div>
+									) : null}
 								</div>
-							)}
-						</div>
-					);
-				})}
+
+								<Element
+									{...newControl}
+									control={control}
+									value={value}
+									style={{ ...style, width: isMobile ? '100%' : style.width }}
+								/>
+
+								{errors[name] && (
+									<div className={styles.error_message}>
+										{errors[name]?.message}
+									</div>
+								)}
+							</div>
+						);
+					})}
+				</div>
 
 				<Button
 					onClick={handleSubmit(onSubmit)}

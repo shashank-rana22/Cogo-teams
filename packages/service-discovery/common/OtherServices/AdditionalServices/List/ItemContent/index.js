@@ -8,7 +8,7 @@ import LineItems from '../../../common/LineItems';
 import getPillData from './getPillData';
 import styles from './styles.module.css';
 
-function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
+function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {}, isMobile = false }) {
 	const [showRequestRateModal, setShowRequestRateModal] = useState(false);
 	const [requestService, setRequestService] = useState({
 		service_id    : undefined,
@@ -119,6 +119,7 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 						details={detail}
 						data={rateCardData}
 						requestService={requestService}
+						isMobile={isMobile}
 					/>
 				) : null}
 			</div>

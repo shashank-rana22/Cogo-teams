@@ -2,6 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 
+import useGetIsMobile from '../../../helpers/useGetIsMobile';
 import SearchInput from '../../SearchInput';
 
 import ServiceItem from './ServiceItem';
@@ -20,6 +21,8 @@ function SubsidiaryServices({
 }) {
 	const [searchValue, setSearchValue] = useState('');
 	const [disabled, setIsDisabled] = useState('');
+
+	const isMobile = useGetIsMobile();
 
 	const added_services = useMemo(() => Object.values(data?.service_details || {})
 		.filter((serviceItem) => serviceItem.service_type === 'subsidiary'), [data]);
@@ -106,6 +109,7 @@ function SubsidiaryServices({
 							setIsDisabled={setIsDisabled}
 							disabled={disabled && item.value !== disabled}
 							checkout_id={checkout_id}
+							isMobile={isMobile}
 						/>
 					))}
 				</div>

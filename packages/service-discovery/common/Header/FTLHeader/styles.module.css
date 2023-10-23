@@ -3,12 +3,19 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	max-height: 120px;
+
+	/* max-height: 120px; */
 	transition: height 0.6s ease;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
 		align-items: flex-start;
+	}
+}
+
+.left_section {
+	@media (max-width: 768px) {
+		width: 100%;
 	}
 }
 
@@ -18,7 +25,8 @@
 	justify-content: flex-end;
 
 	@media (max-width: 768px) {
+		justify-content: space-between;
 		width: 100%;
-		margin: 4px 0;
+		padding: 0 12px;
 	}
 }

@@ -49,6 +49,7 @@ function AddTouchPointModal({
 	type = 'one_way',
 	show = false,
 	setShow = () => {},
+	isMobile = false,
 }) {
 	const [value, setValue] = useState({
 		id           : '',
@@ -133,6 +134,7 @@ function AddTouchPointModal({
 			show={show}
 			onClose={() => setShow(false)}
 			className={styles.modal}
+			placement={isMobile ? 'bottom' : 'center'}
 		>
 			<Modal.Header title="Add Touch Points" />
 

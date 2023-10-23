@@ -82,10 +82,12 @@ function LineItems({ line_items = [] }) {
 	if (isEmpty(line_items)) return null;
 
 	return (
-		<Table
-			columns={getPriceBreakUpColumn}
-			data={line_items}
-		/>
+		<div className={styles.table}>
+			<Table
+				columns={getPriceBreakUpColumn}
+				data={line_items}
+			/>
+		</div>
 	);
 }
 

@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import getCountryCode from '../../../helpers/getCountryCode';
+import useGetIsMobile from '../../../helpers/useGetIsMobile';
 import getCombinedServiceDetails from '../AdditionalServices/utils/getCombinedServiceDetails';
 import AccordionView from '../common/AccordionView';
 import DeleteServiceModal from '../common/DeleteServiceModal';
@@ -27,6 +28,8 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [active, setActive] = useState('');
+
+	const isMobile = useGetIsMobile();
 
 	const primary_service = data?.search_type || data?.primary_service;
 
@@ -82,6 +85,7 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 						cargoInsuranceDetails={cargoInsuranceAlreadyTaken}
 						setShowDeleteModal={setShowDeleteModal}
 						setShowModal={setShowModal}
+						isMobile={isMobile}
 					/>
 				)}
 			>
@@ -103,6 +107,7 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 					setAddCargoInsurance={setShowModal}
 					// setDone={setIsSelected}
 					checkout_id={checkout_id}
+					isMobile={isMobile}
 				/>
 			)}
 

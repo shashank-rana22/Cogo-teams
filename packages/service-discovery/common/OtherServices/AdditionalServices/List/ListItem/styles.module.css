@@ -24,6 +24,14 @@
 	font-weight: 600;
 	color: #000;
 	text-transform: capitalize;
+
+	@media (max-width: 768px) {
+		max-width: 150px;
+		overflow: hidden;
+		font-size: 12px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }
 
 .icn_container {
@@ -43,6 +51,10 @@
 .rate {
 	min-width: max-content;
 	margin-right: 8px;
+
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
 }
 
 .cost_label {

@@ -2,8 +2,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .proceed_button {
-	padding: 16px 20px;
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-top: 12px;
+	}
 }

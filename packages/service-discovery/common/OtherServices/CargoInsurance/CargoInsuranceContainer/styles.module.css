@@ -7,6 +7,10 @@
 	background: #fffdf2;
 	border: 1px solid #f8f5df;
 	border-radius: 4px;
+
+	@media (max-width: 768px) {
+		padding: 14px 16px;
+	}
 }
 
 .left_section {
@@ -19,6 +23,10 @@
 	font-size: 14px;
 	font-weight: 600;
 	color: #000;
+
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
 }
 
 .right_section {
@@ -35,6 +43,10 @@
 
 .rate_found {
 	margin-right: 12px;
+
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
 }
 
 .add_icon {

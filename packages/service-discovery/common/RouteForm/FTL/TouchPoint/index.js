@@ -41,6 +41,7 @@ function TouchPoint(
 		location = {},
 		touchPoints = [],
 		type = 'one_way',
+		isMobile = false,
 	},
 ) {
 	const [show, setShow] = useState(false);
@@ -92,6 +93,7 @@ function TouchPoint(
 					type={type}
 					show={show}
 					setShow={setShow}
+					isMobile={isMobile}
 				/>
 			) : null}
 		</div>

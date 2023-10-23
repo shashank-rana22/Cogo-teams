@@ -35,6 +35,7 @@ function ListItem({
 	SERVICES_CANNOT_BE_REMOVED = [],
 	startingPrices = [],
 	startingPriceLoading = false,
+	isMobile = false,
 }) {
 	const [isHovered, setIsHovered] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -186,8 +187,8 @@ function ListItem({
 				<SelectedIcon
 					onMouseEnter={handleMouseEnter}
 					onMouseLeave={handleMouseLeave}
-					height={25}
-					width={25}
+					height={isMobile ? 18 : 25}
+					width={isMobile ? 18 : 25}
 					className={styles.tick_icon}
 					onClick={(event) => isServiceRemovable && handleDelete(event)}
 				/>
@@ -197,8 +198,8 @@ function ListItem({
 		return (
 			<IcMPlus
 				disabled={loading}
-				height={22}
-				width={22}
+				height={isMobile ? 16 : 22}
+				width={isMobile ? 16 : 22}
 				className={styles.add_icon}
 				fill="black"
 				onClick={() => handleAddServices(serviceItem)}

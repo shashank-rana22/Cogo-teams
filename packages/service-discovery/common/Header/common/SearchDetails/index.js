@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { IcMCross, IcMEdit } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMCross, IcMEdit } from '@cogoport/icons-react';
 
 import LocationDetails from '../../../LocationDetails';
 import SelectedOrgInfo from '../../../SelectedOrgInfo';
@@ -18,6 +18,9 @@ function SearchDetails({
 	setCurrentScreen = () => {},
 	setRouterLoading = () => {},
 	touch_points = {},
+	isMobile = false,
+	show = false,
+	setShow = () => {},
 	...rest
 }) {
 	const { importer_exporter = {}, user = {} } = data || {};
@@ -48,15 +51,28 @@ function SearchDetails({
 				activePage={activePage}
 			/>
 
-			{isAllowedToEdit ? (
-				<div className={styles.edit_details}>
-					{showAdditionalHeader ? (
-						<IcMCross height={16} width={16} onClick={() => setHeaderProps({})} />
-					) : (
-						<IcMEdit height={16} width={16} onClick={handleEdit} />
-					)}
-				</div>
-			) : null}
+			<div className={styles.icons_container}>
+				{isAllowedToEdit ? (
+					<div className={styles.edit_details}>
+						{showAdditionalHeader ? (
+							<IcMCross
+								height={isMobile ? 12 : 16}
+								width={isMobile ? 12 : 16}
+								onClick={() => setHeaderProps({})}
+							/>
+						) : (
+							<IcMEdit height={isMobile ? 12 : 16} width={isMobile ? 12 : 16} onClick={handleEdit} />
+						)}
+					</div>
+				) : null}
+
+				{isMobile ? (
+					<IcMArrowDown
+						className={cl`${styles.down_arrow} ${show && styles.show}`}
+						onClick={() => setShow(!show)}
+					/>
+				) : null}
+			</div>
 		</div>
 	);
 }

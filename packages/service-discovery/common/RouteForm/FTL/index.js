@@ -18,6 +18,7 @@ function FTLRouteForm({
 	ftlFormData = {},
 	setFtlFormData = () => {},
 	errors = {},
+	isMobile = false,
 	...restProps
 }) {
 	const [error, setError] = useState(() => {
@@ -88,6 +89,7 @@ function FTLRouteForm({
 					setFtlFormData={setFtlFormData}
 					touchPoints={oneWayTouchPoints}
 					type="one_way"
+					isMobile={isMobile}
 				/>
 
 				<LocationControl

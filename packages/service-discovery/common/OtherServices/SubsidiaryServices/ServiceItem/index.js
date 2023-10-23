@@ -10,6 +10,7 @@ function IconComponent({
 	addServiceLoading = false,
 	onClickAdd = () => {},
 	disabled = false,
+	isMobile = false,
 }) {
 	if (addServiceLoading) {
 		return <Loader themeType="primary" />;
@@ -17,8 +18,8 @@ function IconComponent({
 
 	return (
 		<IcMPlus
-			height={22}
-			width={22}
+			height={isMobile ? 16 : 22}
+			width={isMobile ? 16 : 22}
 			className={cl`${styles.add_icon} ${disabled ? styles.disabled : {}}`}
 			fill="black"
 			onClick={onClickAdd}
@@ -34,6 +35,7 @@ function ServiceItem({
 	disabled = false,
 	setIsDisabled = () => {},
 	checkout_id = '',
+	isMobile = false,
 }) {
 	const {
 		loading: addServiceLoading,
@@ -68,6 +70,7 @@ function ServiceItem({
 				onClickAdd={onClickAdd}
 				addServiceLoading={addServiceLoading}
 				disabled={disabled}
+				isMobile={isMobile}
 			/>
 		</div>
 	);

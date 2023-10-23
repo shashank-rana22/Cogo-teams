@@ -8,6 +8,10 @@
 	top: 85px;
 	z-index: 99;
 	width: 100%;
+
+	@media (max-width: 768px) {
+		top: 62px;
+	}
 }
 
 .header {

@@ -1,4 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import SearchDetails from '../common/SearchDetails';
 import Wallet from '../common/Wallet';
@@ -20,7 +21,10 @@ function FTLHeader({
 	touch_points = {},
 	createLoading = false,
 	createSearch = () => {},
+	isMobile = false,
 }) {
+	const [show, setShow] = useState(!isMobile);
+
 	const isAllowedToEdit = activePage === 'search_results';
 
 	if (isEmpty(data)) {
@@ -40,29 +44,35 @@ function FTLHeader({
 					activePage={activePage}
 					setRouterLoading={setRouterLoading}
 					touch_points={touch_points}
+					isMobile={isMobile}
+					show={show}
+					setShow={setShow}
 				/>
 			</div>
 
-			<div className={styles.right_section}>
-				<Load
-					data={data}
-					loading={loading && isEmpty(data)}
-					activePage={activePage}
-					isAllowedToEdit={isAllowedToEdit}
-					infoBanner={infoBanner}
-					setInfoBanner={setInfoBanner}
-					isGuideViewed={isGuideViewed}
-					setRouterLoading={setRouterLoading}
-					touch_points={touch_points}
-					createLoading={createLoading}
-					createSearch={createSearch}
-				/>
+			{show || !isMobile ? (
+				<div className={styles.right_section}>
+					<Load
+						data={data}
+						loading={loading && isEmpty(data)}
+						activePage={activePage}
+						isAllowedToEdit={isAllowedToEdit}
+						infoBanner={infoBanner}
+						setInfoBanner={setInfoBanner}
+						isGuideViewed={isGuideViewed}
+						setRouterLoading={setRouterLoading}
+						touch_points={touch_points}
+						createLoading={createLoading}
+						createSearch={createSearch}
+					/>
 
-				<Wallet
-					data={data}
-					service_key={service_key}
-				/>
-			</div>
+					<Wallet
+						data={data}
+						service_key={service_key}
+						isMobile={isMobile}
+					/>
+				</div>
+			) : null}
 		</div>
 	);
 }

@@ -34,6 +34,7 @@ function CargoInsuranceModal({
 	setShowAddInvoicingParty = () => {},
 	setDone = () => {},
 	defaultValues = {},
+	isMobile = false,
 }) {
 	const [commodity, setCommodity] = useState('');
 	const [rateData, setRateData] = useState({});
@@ -203,6 +204,7 @@ function CargoInsuranceModal({
 			show={addCargoInsurance}
 			onClose={() => setAddCargoInsurance(false)}
 			closeOnOuterClick={false}
+			placement={isMobile ? 'bottom' : 'center'}
 		>
 			<Modal.Header title="Add Cargo Insurance" />
 

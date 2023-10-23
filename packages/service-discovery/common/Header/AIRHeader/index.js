@@ -1,4 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import SearchDetails from '../common/SearchDetails';
 import Wallet from '../common/Wallet';
@@ -19,8 +20,11 @@ function AIRHeader({
 	isGuideViewed = false,
 	createLoading = false,
 	createSearch = () => {},
+	isMobile = false,
 	...rest
 }) {
+	const [show, setShow] = useState(!isMobile);
+
 	const isAllowedToEdit = activePage === 'search_results';
 
 	if (isEmpty(data)) {
@@ -39,28 +43,34 @@ function AIRHeader({
 					isAllowedToEdit={isAllowedToEdit}
 					activePage={activePage}
 					setRouterLoading={setRouterLoading}
+					isMobile={isMobile}
+					show={show}
+					setShow={setShow}
 				/>
 			</div>
 
-			<div className={styles.right_section}>
-				<Packages
-					data={data}
-					loading={loading && isEmpty(data)}
-					activePage={rest.activePage}
-					isAllowedToEdit={isAllowedToEdit}
-					infoBanner={infoBanner}
-					setInfoBanner={setInfoBanner}
-					isGuideViewed={isGuideViewed}
-					setRouterLoading={setRouterLoading}
-					createLoading={createLoading}
-					createSearch={createSearch}
-				/>
+			{show || !isMobile ? (
+				<div className={styles.right_section}>
+					<Packages
+						data={data}
+						loading={loading && isEmpty(data)}
+						activePage={rest.activePage}
+						isAllowedToEdit={isAllowedToEdit}
+						infoBanner={infoBanner}
+						setInfoBanner={setInfoBanner}
+						isGuideViewed={isGuideViewed}
+						setRouterLoading={setRouterLoading}
+						createLoading={createLoading}
+						createSearch={createSearch}
+					/>
 
-				<Wallet
-					data={data}
-					service_key={service_key}
-				/>
-			</div>
+					<Wallet
+						data={data}
+						service_key={service_key}
+						isMobile={isMobile}
+					/>
+				</div>
+			) : null}
 		</div>
 	);
 }

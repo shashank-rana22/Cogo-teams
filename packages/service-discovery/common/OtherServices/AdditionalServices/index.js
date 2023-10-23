@@ -1,6 +1,8 @@
 import { Select, Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import useGetIsMobile from '../../../helpers/useGetIsMobile';
+
 import ChangeIncoTermModal from './ChangeIncoTermModal';
 import useAdditionalServices from './hooks/useAdditionalServices';
 import List from './List';
@@ -22,6 +24,8 @@ function AdditionalServices({
 		SERVICES_LIST_MAPPING = {},
 		SERVICES_CANNOT_BE_REMOVED = [],
 	} = useAdditionalServices({ rateCardData, detail, source });
+
+	const isMobile = useGetIsMobile();
 
 	const {
 		service_details = {},
@@ -73,6 +77,7 @@ function AdditionalServices({
 							// startingPrices={startingPrices}
 							// startingPriceLoading={startingPriceLoading}
 							refetchLoading={refetchLoading}
+							isMobile={isMobile}
 						/>
 					);
 				})}

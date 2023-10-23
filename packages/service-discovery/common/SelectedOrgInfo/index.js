@@ -31,7 +31,7 @@ function SelectedOrgInfo({
 				/>
 			) : null}
 
-			<div style={{ width: activePage !== 'checkout' ? '86%' : '100%' }}>
+			<div>
 				<Tooltip
 					placement="top"
 					className={styles.tooltip}

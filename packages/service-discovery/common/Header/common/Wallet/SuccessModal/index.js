@@ -15,6 +15,7 @@ function SuccessModal({
 	promocode = '',
 	validityEnd = '',
 	allotedAmountLeft = 0,
+	isMobile = false,
 }) {
 	const onClose = () => setShow(false);
 
@@ -27,7 +28,7 @@ function SuccessModal({
 			size="md"
 			show={show}
 			onClose={onClose}
-			placement="top"
+			placement={isMobile ? 'bottom' : 'top'}
 		>
 			<div className={styles.container}>
 				<div className={styles.title}>Congratulations!</div>

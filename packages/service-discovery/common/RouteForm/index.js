@@ -1,3 +1,5 @@
+import useGetIsMobile from '../../helpers/useGetIsMobile';
+
 import AIRRouteForm from './AIR';
 import FCLRouteForm from './FCL';
 import FTLRouteForm from './FTL';
@@ -12,6 +14,8 @@ const COMPONENT_MAPPING = {
 	ltl_freight : LTLRouteForm,
 };
 function RouteForm(props) {
+	const isMobile = useGetIsMobile();
+
 	const { mode = '' } = props;
 
 	const ActiveComponent = COMPONENT_MAPPING[mode];
@@ -19,7 +23,7 @@ function RouteForm(props) {
 	if (!ActiveComponent) return null;
 
 	return (
-		<ActiveComponent {...props} />
+		<ActiveComponent {...props} isMobile={isMobile} />
 	);
 }
 

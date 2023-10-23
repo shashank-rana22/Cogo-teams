@@ -23,6 +23,7 @@ function List({
 	startingPrices = [],
 	startingPriceLoading = false,
 	refetchLoading = false,
+	isMobile = false,
 }) {
 	const [active, setActive] = useState('');
 
@@ -77,6 +78,7 @@ function List({
 									startingPrices={startingPrices}
 									startingPriceLoading={startingPriceLoading}
 									refetchLoading={refetchLoading}
+									isMobile={isMobile}
 								/>
 							)}
 						>
@@ -84,6 +86,7 @@ function List({
 								serviceItem={serviceItem}
 								detail={detail}
 								rateCardData={rateCardData}
+								isMobile={isMobile}
 							/>
 						</AccordionView>
 					);

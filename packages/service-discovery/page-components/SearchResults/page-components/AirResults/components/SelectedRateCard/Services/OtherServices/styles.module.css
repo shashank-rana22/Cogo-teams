@@ -13,4 +13,9 @@
 	padding: 36px 0;
 	margin: 36px 0;
 	border-top: 1px dashed #dcdde5;
+
+	@media (max-width: 768px) {
+		padding-bottom: 0;
+		margin-bottom: 0;
+	}
 }
