@@ -1,3 +1,5 @@
+import validateMarginSlabs from '../../helpers/validateMarginSlabs';
+
 export default function getMarginControls({ service = '' }) {
 	const service_name = `${service}_charges`;
 	const marginControls = [{
@@ -118,6 +120,9 @@ export default function getMarginControls({ service = '' }) {
 				],
 			},
 		],
+		validateFn: (field, callback) => {
+			validateMarginSlabs(field, callback);
+		},
 	}];
 	return marginControls;
 }

@@ -27,11 +27,13 @@ function Child({
 	// labelName = '',
 	showElements = {},
 	customField = {},
-	// watch = () => { },
+	watch = () => { },
 	setValue = () => { },
 	currentSlabCurrency = '',
 }) {
 	const total_fields = getTotalFields({ controls });
+
+	const currentChildMarginValueType = watch(`${name}.${index}.type`);
 
 	useEffect(() => {
 		setValue(`${name}.${index}.currency`, currentSlabCurrency);
@@ -60,6 +62,12 @@ function Child({
 									name         : element_name,
 									formValues,
 								});
+							}
+
+							if (controlItem?.name === 'min_value' || controlItem?.name === 'max_value') {
+								if (currentChildMarginValueType !== 'percentage') {
+									return null;
+								}
 							}
 
 							return (

@@ -72,8 +72,6 @@ const useGetHandleFormSubmit = ({
 			} else {
 				submitForm({ data: actualPayload });
 			}
-
-			// router.push('/margins');
 		} catch (err) {
 			toastApiError(err);
 		}

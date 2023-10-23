@@ -77,12 +77,11 @@ const getControls = ({ type = '', marginType = '', partnerId = '', item = {} }) 
 		{
 			label       : 'Organization Sub Type',
 			name        : 'organization_sub_type',
-			type        : 'select',
+			type        : 'multi_select',
 			span        : 2,
 			disabled    : type === 'edit',
 			caret       : true,
 			watch       : true,
-			multiple    : true,
 			isClearable : true,
 			placeholder : 'Select Organization Sub Type',
 		},

@@ -2,6 +2,7 @@ import { Button, ButtonIcon } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import Child from '../../FieldArray/Child';
 
@@ -37,6 +38,17 @@ function FieldArray({
 	}
 
 	const currentSlabCurrency = watch(`${name}.${index}.limit_currency`);
+
+	const limitCurrencyForAllSlabs = watch(`${name}.0.limit_currency`);
+
+	useEffect(() => {
+		if (index >= 1) {
+			setValue(
+				`${name}.${index}.limit_currency`,
+				limitCurrencyForAllSlabs || currentSlabCurrency,
+			);
+		}
+	}, [limitCurrencyForAllSlabs, currentSlabCurrency, index, setValue, name]);
 
 	return (
 		<div className={styles.field_array}>
@@ -77,7 +89,7 @@ function FieldArray({
 							key={field.id}
 							remove={remove}
 							field={field}
-							error={error?.[nestedIndex]}
+							error={error?.[nestedName]?.[nestedIndex]}
 							controls={controls}
 							control={control}
 							index={nestedIndex}
@@ -95,7 +107,7 @@ function FieldArray({
 			))}
 
 			{showButtons ? (
-				<div>
+				<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 					<Button
 						size="md"
 						onClick={append}

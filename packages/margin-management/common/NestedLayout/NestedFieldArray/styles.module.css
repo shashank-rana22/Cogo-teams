@@ -38,5 +38,6 @@
 }
 
 .error {
-	color: #cb6464;
+	font-size: 12px;
+	color: #ee3425;
 }

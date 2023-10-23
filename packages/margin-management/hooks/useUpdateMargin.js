@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback } from 'react';
@@ -6,6 +7,8 @@ import { useCallback } from 'react';
 import toastApiError from '../utils/toastApiError';
 
 const useUpdateMargin = () => {
+	const router = useRouter();
+
 	const [{ loading }, trigger] = useRequest(
 		{
 			method : 'post',
@@ -18,6 +21,7 @@ const useUpdateMargin = () => {
 			if (isEmpty(params)) {
 				await trigger({ data });
 				Toast.success('Margin has been edited sucessfully');
+				router.push('/margins');
 			} else {
 				await trigger({ params });
 				Toast.success('Margin has been deactivated.');
@@ -28,7 +32,7 @@ const useUpdateMargin = () => {
 			toastApiError(err);
 			return false;
 		}
-	}, [trigger]);
+	}, [router, trigger]);
 
 	return {
 		loading,
