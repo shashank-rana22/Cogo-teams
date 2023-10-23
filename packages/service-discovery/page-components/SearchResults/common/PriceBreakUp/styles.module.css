@@ -1,5 +1,9 @@
 .container {
 	margin-top: 24px;
+
+	@media (max-width: 768px) {
+		margin-top: 0;
+	}
 }
 
 .service_div {
@@ -103,4 +107,14 @@
 .info_icon {
 	margin-left: 4px;
 	color: #ee3425;
+}
+
+.table {
+	overflow-x: scroll;
+}
+
+.service_info_pill {
+	@media (max-width: 768px) {
+		display: none;
+	}
 }

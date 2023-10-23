@@ -6,4 +6,8 @@
 .request_rate_container {
 	width: 50%;
 	margin-top: 44px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }

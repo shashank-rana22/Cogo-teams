@@ -19,15 +19,13 @@ function NoRatesFound({
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_section}>
-				<div className={styles.applied_filters}>
-					<AppliedFilters
-						filters={filters}
-						setFilters={setFilters}
-						setShowFilterModal={setShowFilterModal}
-						setOpenAccordian={setOpenAccordian}
-						service_type="air_freight"
-					/>
-				</div>
+				<AppliedFilters
+					filters={filters}
+					setFilters={setFilters}
+					setShowFilterModal={setShowFilterModal}
+					setOpenAccordian={setOpenAccordian}
+					service_type="air_freight"
+				/>
 
 				<div className={styles.buttons_container}>
 					<Filters

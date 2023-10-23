@@ -122,6 +122,7 @@ function IndividualPriceBreakup({ service = {}, restServiceDetail = {} }) {
 								key={item}
 								size="md"
 								style={{ border: '1px solid #24C7D9', background: '#ffffff' }}
+								className={styles.service_info_pill}
 							>
 								{item}
 							</Pill>
@@ -147,7 +148,7 @@ function IndividualPriceBreakup({ service = {}, restServiceDetail = {} }) {
 			</div>
 
 			{ifRateAvailabe ? (
-				<div>
+				<div className={styles.table}>
 					<Table
 						className={styles.table_container}
 						columns={getPriceBreakUpColumn}
