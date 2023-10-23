@@ -19,6 +19,7 @@ function Filter({
 	filter = {},
 	setFilter = () => {},
 	setShowWeekData = () => {},
+	userService = {},
 }) {
 	const isAirService = filter?.service === 'air_freight' || filter?.service === 'air_customs';
 
@@ -50,6 +51,7 @@ function Filter({
 			);
 		});
 	});
+	const filteredServiceOptions = serviceOptions?.filter((option) => userService?.includes(option.value));
 
 	function DateRange() {
 		return (
@@ -87,7 +89,7 @@ function Filter({
 							<p>Service</p>
 							<Select
 								placeholder="select"
-								options={serviceOptions}
+								options={filteredServiceOptions}
 								value={filter?.service}
 								style={{ width: '250px' }}
 								onChange={(value) => {

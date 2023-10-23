@@ -27,6 +27,7 @@ function ListData({
 	setPage = () => {},
 	getStats = () => {},
 	setShowWeekData = () => {},
+	userService = {},
 }) {
 	const [serialId, setSerialId] = useState('');
 	const [shipmentId, setShipmentId] = useState('');
@@ -34,6 +35,7 @@ function ListData({
 
 	const { statistics = {} } = statsData;
 	const { list = [] } = data;
+
 	const { dynamic_statistics = {} } = statsData;
 
 	const { service = '', cogo_entity_id = '', is_flash_booking_reverted = '' } = filter || {};
@@ -187,7 +189,6 @@ function ListData({
 										getListCoverage={getListCoverage}
 										filter={filter}
 										getStats={getStats}
-										source={source}
 									/>
 								</div>
 							))}
@@ -224,6 +225,7 @@ function ListData({
 					setShowFilters={setShowFilters}
 					setFilter={setFilter}
 					setShowWeekData={setShowWeekData}
+					userService={userService}
 				/>
 			)}
 		</div>

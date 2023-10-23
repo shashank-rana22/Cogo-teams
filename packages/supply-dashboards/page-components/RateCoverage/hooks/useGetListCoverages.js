@@ -32,17 +32,19 @@ const AIR_PARAMS_MAPPING = {
 
 const DEFAULT_PAGE = 1;
 
-const useGetListCoverage = () => {
+const useGetListCoverage = ({ userService }) => {
 	const { user_data } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
 
 	const { user: { id: user_id = '' } = {} } = user_data;
 
+	const firstService = userService?.length > 0 ? userService?.[0] : null;
+
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [source, setSource] = useState('');
 	const [filter, setFilter] = useState({
-		service                   : 'fcl_freight',
+		service                   : firstService,
 		status                    : 'pending',
 		releventToMeValue         : true,
 		daily_stats               : true,
