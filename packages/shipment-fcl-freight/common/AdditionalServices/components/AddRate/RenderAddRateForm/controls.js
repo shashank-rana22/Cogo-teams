@@ -1,15 +1,5 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import currencies from '@cogoport/ocean-modules/helpers/currencies';
 import { startCase } from '@cogoport/utils';
-
-const CURRENCY_OPTIONS = [
-	GLOBAL_CONSTANTS.currency_code.INR,
-	GLOBAL_CONSTANTS.currency_code.USD,
-	GLOBAL_CONSTANTS.currency_code.EUR,
-	GLOBAL_CONSTANTS.currency_code.GBP,
-].map((currency) => ({
-	label : currency,
-	value : currency,
-}));
 
 const COMMON_SHOW_SOURCE = ['task', 'overview', 'purchase', 'add_sell_price'];
 
@@ -25,7 +15,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			name    : 'currency',
 			label   : 'Currency',
 			type    : 'select',
-			options : CURRENCY_OPTIONS,
+			options : currencies,
 			rules   : { required: 'Currency is required' },
 			show    : COMMON_SHOW_SOURCE.includes(source),
 			size    : 'sm',

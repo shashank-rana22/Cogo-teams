@@ -16,6 +16,10 @@ const ShipmentsHomePage = dynamic(() => import('./ShipmentsHomePage'), {
 	loading: () => <div className={styles.container}><CommonLoader /></div>,
 });
 
+const RateRevertsPage = dynamic(() => import('./RateRevertsPage'), {
+	loading: () => <div className={styles.container}><CommonLoader /></div>,
+});
+
 const MESSAGE_MAPPING = {
 	message         : 'chat',
 	voice           : 'call log',
@@ -35,9 +39,11 @@ function EmptyChatPage({
 }) {
 	const displayMessage = MESSAGE_MAPPING[activeTab?.tab] || activeTab?.tab;
 
-	const showShipments = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page;
+	const showShipments = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page || false;
 
-	const showLeadVoiceCalls = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_lead_voice_calls;
+	const showLeadVoiceCalls = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_lead_voice_calls || false;
+
+	const showRateReverts = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_rate_reverts_page || false;
 
 	const showPlatformAdoption = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_platform_adoption;
 
@@ -67,6 +73,14 @@ function EmptyChatPage({
 				firestore={firestore}
 				viewType={viewType}
 				userId={userId}
+			/>
+		);
+	}
+
+	if (showRateReverts) {
+		return (
+			<RateRevertsPage
+				mailProps={mailProps}
 				setActiveTab={setActiveTab}
 			/>
 		);
