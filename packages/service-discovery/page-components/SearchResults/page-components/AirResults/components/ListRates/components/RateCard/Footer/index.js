@@ -3,7 +3,8 @@ import { IcCCogoCoin, IcMInfo, IcCFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import BottomTabs from './BottomTabs';
+import BottomTabs from '../../../../../../../common/BottomTabs';
+
 import getTabs from './getTabs';
 import styles from './styles.module.css';
 

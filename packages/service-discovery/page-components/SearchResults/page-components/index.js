@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../../common/Header';
 import CustomLoadingState from '../../../common/LoadingState/CustomLoadingState';
 import DotLoader from '../../../common/LoadingState/DotLoader';
+import useGetIsMobile from '../../../helpers/useGetIsMobile';
 import useCreateSearch from '../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 import useGetSpotSearch from '../hooks/useGetSpotSearch';
 import getRedirectionDetails from '../utils/getRedirectionDetails';
@@ -55,6 +56,8 @@ function SearchResults() {
 		setSelectedSchedule = () => {},
 		selectedSchedule = {},
 	} = useGetSpotSearch({ setComparisonRates, setInfoBanner, setRouterLoading, setScheduleLoading });
+
+	const isMobile = useGetIsMobile();
 
 	const { createSearch, loading: createLoading } = useCreateSearch({ setRouterLoading, setHeaderProps });
 
@@ -177,6 +180,7 @@ function SearchResults() {
 					scheduleLoading={scheduleLoading}
 					setSelectedSchedule={setSelectedSchedule}
 					selectedSchedule={selectedSchedule}
+					isMobile={isMobile}
 				/>
 			</div>
 		</div>

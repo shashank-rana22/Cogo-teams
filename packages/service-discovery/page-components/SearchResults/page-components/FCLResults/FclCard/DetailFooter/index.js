@@ -2,11 +2,11 @@ import { cl, Tooltip } from '@cogoport/components';
 import { IcCCogoCoin, IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import BottomTabs from '../../../../common/BottomTabs';
 import PossibleSchedules from '../../../../common/PossibleSchedules';
 import PriceBreakup from '../../../../common/PriceBreakUp';
 import TermsConditions from '../../../../common/TermsConditions';
 
-import BottomTabs from './BottomTabs';
 import DetentionDemurrage from './DetentionDemurrage';
 import styles from './styles.module.css';
 
@@ -134,11 +134,9 @@ function DetailFooter({ rateCardData = {}, detail = {}, refetchSearch = () => {}
 
 			{activeTab ? (
 				<BottomTabs
-					TABS_MAPPING={TABS_MAPPING}
-					rateCardData={rateCardData}
+					TABS={TABS_MAPPING}
 					activeTab={activeTab}
 					setActiveTab={setActiveTab}
-					detail={detail}
 				/>
 			) : null}
 		</div>

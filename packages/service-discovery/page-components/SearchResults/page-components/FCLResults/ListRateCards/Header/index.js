@@ -21,6 +21,7 @@ function Header({
 	setShowFilterModal = () => {},
 	// transitTime = {},
 	setScheduleLoading = () => {},
+	isMobile = false,
 }) {
 	return (
 		<div className={styles.container}>
@@ -29,7 +30,7 @@ function Header({
 			</div>
 
 			<div className={styles.filters_container}>
-				<DetentionDemurrage details={details} refetch={refetch} />
+				<DetentionDemurrage details={details} refetch={refetch} isMobile={isMobile} />
 
 				<Filters
 					showFilterModal={showFilterModal}
@@ -42,6 +43,7 @@ function Header({
 					setOpenAccordian={setOpenAccordian}
 					// transitTime={transitTime}
 					setScheduleLoading={setScheduleLoading}
+					isMobile={isMobile}
 				/>
 
 				<RefreshRate refetch={refetch} details={details} />

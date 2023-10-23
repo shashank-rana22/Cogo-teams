@@ -18,6 +18,10 @@
 			border-bottom-color: #fef199 !important;
 		}
 	}
+
+	@media (max-width: 768px) {
+		padding-left: 0;
+	}
 }
 
 .source_tag {
@@ -33,6 +37,10 @@
 
 	&.spot_negotiation_rate {
 		background: #e6fbe9;
+	}
+
+	@media (max-width: 768px) {
+		font-size: 10px;
 	}
 }
 
@@ -52,6 +60,10 @@
 	&.cogo_assured_rate {
 		margin-top: 0;
 	}
+
+	@media (max-width: 768px) {
+		margin-top: 24px;
+	}
 }
 
 .shipping_line_info {
@@ -66,10 +78,15 @@
 
 .default_icon {
 	margin-right: 12px;
+	object-fit: cover;
 }
 
 .shipping_line_name {
 	font-size: 16px;
+
+	@media (max-width: 768px) {
+		font-size: 14px;
+	}
 }
 
 .is_nvocc {
@@ -79,4 +96,14 @@
 	background: #fef199;
 	border: 1px solid #fcdc00;
 	border-radius: 8px;
+
+	@media (max-width: 768px) {
+		font-size: 10px;
+	}
+}
+
+.right_section {
+	position: absolute;
+	top: -4px;
+	right: 0;
 }

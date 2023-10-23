@@ -2,7 +2,8 @@ import { cl, Tooltip } from '@cogoport/components';
 import { IcCCogoCoin, IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import BottomTabs from './BottomTabs';
+import BottomTabs from '../../../../../../../common/BottomTabs';
+
 import getTabs from './getTabs';
 import styles from './styles.module.css';
 

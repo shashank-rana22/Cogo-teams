@@ -75,6 +75,7 @@ function ListRateCards({
 	scheduleLoading = false,
 	setSelectedSchedule = () => {},
 	selectedSchedule = () => {},
+	isMobile = false,
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
@@ -138,6 +139,7 @@ function ListRateCards({
 						setOpenAccordian={setOpenAccordian}
 						setScheduleLoading={setScheduleLoading}
 						setRouterLoading={setRouterLoading}
+						isMobile={isMobile}
 						// transitTime={transitTime}
 					/>
 
@@ -146,6 +148,7 @@ function ListRateCards({
 							comparisonRates={comparisonRates}
 							setComparisonRates={setComparisonRates}
 							setScreen={setScreen}
+							isMobile={isMobile}
 						/>
 					) : null}
 				</div>

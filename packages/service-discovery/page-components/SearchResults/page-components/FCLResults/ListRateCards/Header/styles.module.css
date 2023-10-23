@@ -22,6 +22,7 @@
 	align-items: center;
 
 	@media (max-width: 768px) {
+		align-self: flex-end;
 		margin-top: 12px;
 	}
 }

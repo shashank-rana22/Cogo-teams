@@ -37,7 +37,7 @@ function ContractAd({ loading = false, importerExporterId = '', contractDetail =
 
 			<div className={styles.content}>
 				<div className={styles.label}>
-					This organization already has
+					This organization already have
 					{' '}
 					{count}
 					{' '}

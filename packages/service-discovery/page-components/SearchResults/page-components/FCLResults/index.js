@@ -34,6 +34,7 @@ function FCLResults({
 	scheduleLoading = false,
 	setSelectedSchedule = () => {},
 	selectedSchedule = () => {},
+	isMobile = false,
 }) {
 	const { cogoAssuredRates, marketplaceRates } = rates.reduce((acc, rate) => {
 		if (rate.source === 'cogo_assured_rate') {
@@ -68,6 +69,7 @@ function FCLResults({
 			scheduleLoading,
 			setSelectedSchedule,
 			selectedSchedule,
+			isMobile,
 		},
 		comparison: {
 			detail,

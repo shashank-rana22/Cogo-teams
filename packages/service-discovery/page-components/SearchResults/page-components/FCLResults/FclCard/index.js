@@ -102,23 +102,25 @@ function MiddleSection({
 			<RouteComponent {...props} />
 
 			<div className={styles.rate_details}>
-				<div style={{ marginRight: 24 }}>
-					<div className={styles.freight_text}>Freight Price</div>
+				<div className={styles.rates_container}>
+					<div style={{ marginRight: 24 }}>
+						<div className={styles.freight_text}>Freight Price</div>
 
-					<FreightPriceDetail
-						price={rateCardData?.freight_price_discounted}
-						price_currency={rateCardData?.freight_price_currency}
-					/>
-				</div>
+						<FreightPriceDetail
+							price={rateCardData?.freight_price_discounted}
+							price_currency={rateCardData?.freight_price_currency}
+						/>
+					</div>
 
-				<div>
-					<div className={cl`${styles.freight_text} ${styles.total}`}>Total Freight Price</div>
+					<div>
+						<div className={cl`${styles.freight_text} ${styles.total}`}>Total Freight Price</div>
 
-					<FreightPriceDetail
-						price={rateCardData?.total_price_discounted}
-						price_currency={rateCardData?.total_price_currency}
-						totalPrice
-					/>
+						<FreightPriceDetail
+							price={rateCardData?.total_price_discounted}
+							price_currency={rateCardData?.total_price_currency}
+							totalPrice
+						/>
+					</div>
 				</div>
 
 				<QuotationDetails

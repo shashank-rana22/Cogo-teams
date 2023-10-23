@@ -15,6 +15,7 @@ function ComparisonHeader({
 	comparisonRates = {},
 	setComparisonRates = () => {},
 	setScreen = () => {},
+	isMobile = false,
 }) {
 	const selectedCards = Object.values(comparisonRates);
 
@@ -36,6 +37,13 @@ function ComparisonHeader({
 		<div className={styles.container}>
 			<div className={styles.content_container}>
 				<div className={styles.count_container}>
+					{isMobile ? (
+						<IcMCross
+							className={styles.close}
+							onClick={handleDeleteAll}
+						/>
+					) : null}
+
 					<div className={styles.count_heading}>
 						{selectedCards.length}
 						{' '}
@@ -68,7 +76,9 @@ function ComparisonHeader({
 						);
 					})}
 				</div>
+			</div>
 
+			<div className={styles.buttons_container}>
 				<Button
 					type="button"
 					size="md"
@@ -78,9 +88,7 @@ function ComparisonHeader({
 				>
 					Unselect All
 				</Button>
-			</div>
 
-			<div className={styles.buttons_container}>
 				<Button
 					type="button"
 					onClick={() => setScreen('comparison')}

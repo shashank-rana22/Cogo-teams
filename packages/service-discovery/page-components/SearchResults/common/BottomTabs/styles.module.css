@@ -1,6 +1,10 @@
 .container {
 	padding: 16px 8px;
 
+	@media (max-width: 768px) {
+		padding: 0;
+	}
+
 	:global {
 		.ui_tab_container {
 			padding: 0 4px 8px;
