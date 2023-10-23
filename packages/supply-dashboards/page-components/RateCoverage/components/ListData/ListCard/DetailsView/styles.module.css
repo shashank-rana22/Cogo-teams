@@ -63,3 +63,12 @@
 .copy_button {
 	margin: 0 8px;
 }
+
+.packages {
+	margin-left: 2px;
+}
+
+.wrap {
+	display: flex;
+	flex-wrap: wrap;
+}
