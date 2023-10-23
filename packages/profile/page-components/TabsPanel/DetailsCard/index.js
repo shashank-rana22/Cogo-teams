@@ -37,7 +37,7 @@ function DetailsCard({
 			});
 		}
 
-		if (value === 'ended_at') {
+		if (['ended_at', 'date_of_birth'].includes(value)) {
 			return formatDate({
 				date       : getByKey(getMapping[key], value),
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],

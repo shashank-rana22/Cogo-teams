@@ -17,6 +17,8 @@ export const getEmployeeData = (employee_detail) => ([
 const DOCUMENT_MAPPING = {
 	aadhaar_card : 'Aadhaar Card',
 	pan_card     : 'Pan Card',
+	resume       : 'Resume',
+	passport     : 'Passport',
 };
 
 export const getTablesData = (signed_documents, other_documents) => ([
@@ -36,6 +38,7 @@ export const getTablesData = (signed_documents, other_documents) => ([
 		heading : 'Other Documents',
 		data    : other_documents.map((document) => ({
 			name      : DOCUMENT_MAPPING[document.document_type],
+			key       : document.document_type,
 			updatedAt : (document?.updated_at === undefined) ? ' — ' : formatDate({
 				date       : document.updated_at,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],

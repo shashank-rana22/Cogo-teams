@@ -20,17 +20,15 @@ function Documents({ data: employeeData = {}, getEmployeeDetails }) {
 	const [uploadShow, setUploadShow] = useState(false);
 	const [docno, setdocno] = useState(null);
 	const [documentUrl, setDocumentUrl] = useState('');
-	const columns = useGetColumns(setShow, setName, setUrl, setdocno, setUploadShow, setDocumentUrl);
+	const { signed_documents, other_documents, user_role } = employeeData;
+	const columns = useGetColumns(setShow, setName, setUrl, setdocno, setUploadShow, setDocumentUrl, user_role);
 	const signedColumns = useGetSignedDocuments(setShow, setName, setUrl);
 
 	const handleModal = () => {
 		setUploadShow(false);
 	};
 
-	const { signed_documents, other_documents } = employeeData;
 	const tablesData = getTablesData(signed_documents, other_documents);
-	const aadhar_no = tablesData[1]?.data.find((doc) => doc.name === 'Aadhar Card')?.number || '-';
-	const pan_no = tablesData[1]?.data.find((doc) => doc.name === 'Pan Card')?.number;
 	const otherInfo = otherDocumentsInfo;
 
 	return (
@@ -71,7 +69,7 @@ function Documents({ data: employeeData = {}, getEmployeeDetails }) {
 					<UploadModal
 						show={uploadShow}
 						handleModal={handleModal}
-						docno={name === 'Aadhar Card' ? aadhar_no : pan_no}
+						docno={tablesData[1]?.data.find((doc) => doc.name === name)?.number}
 						documentUrl={documentUrl}
 						name={name}
 						getEmployeeDetails={getEmployeeDetails}

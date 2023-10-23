@@ -26,6 +26,7 @@ const useGetColumns = (
 	setUploadShow = () => {},
 	setdocno = () => {},
 	setDocumentUrl = () => {},
+	user_role = '',
 ) => (
 	[
 		{
@@ -65,20 +66,27 @@ const useGetColumns = (
 					>
 						<span className={styles.view_text}>View</span>
 					</Button>
-					<Button
-						size="md"
-						themeType="secondary"
-						className={styles.view_button}
-						onClick={() => {
-							setName(item.name);
-							setdocno(item.number);
-							setDocumentUrl(item.url);
-							setUploadShow(true);
-							// handleOpenModal({ item, setdocno, setDocumentUrl, setName, setUploadShow });
-						}}
-					>
-						<span className={styles.view_text}>Update</span>
-					</Button>
+					{
+						user_role
+							? (
+								<Button
+									size="md"
+									themeType="secondary"
+									className={styles.view_button}
+									onClick={() => {
+										setName(item.name);
+										setdocno(item.number);
+										setDocumentUrl(item.url);
+										setUploadShow(true);
+										// handleOpenModal({ item, setdocno, setDocumentUrl, setName, setUploadShow });
+									}}
+								>
+									<span className={styles.view_text}>Update</span>
+								</Button>
+							)
+							: 					null
+					}
+
 				</div>
 			),
 			id: 'action',

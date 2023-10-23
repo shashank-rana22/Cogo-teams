@@ -6,7 +6,7 @@ import {
 } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { isEmpty } from '@cogoport/utils';
+// import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useCallback } from 'react';
 
 import useUpdateEmployee from '../../../../hooks/useUpdateEmployee';
@@ -100,11 +100,16 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey, get
 		const valuesMapping = {
 			basic: {
 				...values,
-				date_of_birth: !isEmpty(values.date_of_birth) ? formatDate({
+				// date_of_birth: !isEmpty(values.date_of_birth) ? formatDate({
+				// 	date       : values.date_of_birth,
+				// 	dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
+				// 	formatType : 'date',
+				// }) : null,
+				date_of_birth: formatDate({
 					date       : values.date_of_birth,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
 					formatType : 'date',
-				}) : null,
+				}),
 				mobile_number                 : values?.mobile_number?.number,
 				mobile_country_code           : values?.mobile_number?.country_code,
 				alternate_mobile_number       : values?.alternate_mobile_number?.number,
