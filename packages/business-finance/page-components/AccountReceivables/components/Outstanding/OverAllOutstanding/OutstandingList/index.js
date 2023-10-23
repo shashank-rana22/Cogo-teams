@@ -1,22 +1,20 @@
 import { Button, cl, TabPanel, Tabs, Tooltip } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMActivePlans, IcMDownload } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
+import useGetPermission from '@cogoport/request/hooks/useGetPermission';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { getTaxLabels } from '../../../../constants/index';
 import useOpenInvoicesReport from '../../../../hooks/useOpenInvoicesReport';
+import checkPermission from '../../../../Utils/checkPermission';
 
 import DownloadLedgerModal from './DownloadLedgerModal';
 import StatsOutstanding from './StatsOutstanding/index';
 import styles from './styles.module.css';
 import TabsOptions from './TabOptions';
 import UserDetails from './UserDetails';
-
-const geo = getGeoConstants();
 
 // eslint-disable-next-line max-lines-per-function
 function OutstandingList({
@@ -26,7 +24,8 @@ function OutstandingList({
 	organizationId = '',
 	setSelectedOrgId = () => {},
 }) {
-	const { id: roleId = '' } = useSelector((state) => state.profile.auth_role_data);
+	const { isConditionMatches = () => {} } = useGetPermission();
+	const isAllowedToDownload = isConditionMatches(checkPermission.CAN_DOWNLOAD_OUTSTANDING_REPORT);
 
 	const [activeTab, setActiveTab] = useState('invoice_details');
 	const [showLedgerModal, setShowLedgerModal] = useState(false);
@@ -220,7 +219,7 @@ function OutstandingList({
 						{isEmpty(item) ? null : (
 							<UserDetails item={item} />
 						)}
-						{roleId === geo.uuid.corporate_owner_finance_id && (
+						{isAllowedToDownload && (
 							<Tooltip content="AR Outstanding Download" placement="top">
 								<div className={styles.download_icon_div}>
 									<IcMActivePlans
