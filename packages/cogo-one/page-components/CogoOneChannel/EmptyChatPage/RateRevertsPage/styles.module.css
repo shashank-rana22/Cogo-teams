@@ -1,0 +1,25 @@
+.container {
+	width: 100%;
+	height: calc(100% - 40px);
+	padding: 14px 20px 0;
+	background: #fcfcfc;
+	border-radius: 8px;
+}
+
+.loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: calc(100% - 95px);
+}
+
+.footer_bar {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 8px 30px;
+	background: #fff;
+	box-shadow: 0 0 5px 0 #f0f0f0;
+}

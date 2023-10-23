@@ -40,7 +40,7 @@ const COMPONENT_MAPPING = {
 		{ loading: () => <CommonLoader /> },
 	),
 	flash_shipment_bookings: dynamic(
-		() => import('../page-components/CogoOneChannel/ProfileDetails/FlashReverts'),
+		() => import('../page-components/CogoOneChannel/ProfileDetails/RateReverts'),
 		{ loading: () => <CommonLoader /> },
 	),
 	add_on_services: dynamic(
