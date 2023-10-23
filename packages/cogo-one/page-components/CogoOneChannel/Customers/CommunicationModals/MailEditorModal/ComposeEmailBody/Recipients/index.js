@@ -60,9 +60,10 @@ function Recipients({
 
 	useEffect(() => {
 		(async () => {
-			const mails = await cogoportMails({ firestore, viewType });
+			const mails = await cogoportMails({ firestore, viewType }) || [];
+			const modifiedData = mails?.map((itm) => ({ ...itm, tag: 'internal' })) || [];
 
-			setInternalEmails(mails);
+			setInternalEmails(modifiedData);
 		})();
 	}, [firestore, viewType]);
 
