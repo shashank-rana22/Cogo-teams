@@ -7,7 +7,7 @@ const getButtonGroups = ({ onClickFunc = () => {} }) => [{
 		fill="#777"
 	/>
 	),
-	onClick: onClickFunc,
+	onClick: () => onClickFunc({ isVideoOn: false }),
 
 }, {
 	children: (<IcMVideoCall
@@ -16,7 +16,7 @@ const getButtonGroups = ({ onClickFunc = () => {} }) => [{
 		fill="#777"
 	/>
 	),
-	onClick: onClickFunc,
+	onClick: () => onClickFunc({ isVideoOn: true }),
 }];
 
 export { getButtonGroups };

@@ -14,12 +14,13 @@ function VideoCalling({
 
 	const { id = '', group_members_ids = [] } = groupData || {};
 
-	const onClickFunc = () => {
+	const onClickFunc = ({ isVideoOn=false }) => {
 		updateVideoConference({
 			groupId        : id,
 			groupMemberIds : group_members_ids,
 			searchName,
 			isGroup,
+			isVideoOn,
 		});
 	};
 
