@@ -27,7 +27,7 @@ function ListData({
 	setPage = () => {},
 	getStats = () => {},
 	setShowWeekData = () => {},
-	userService = {},
+	userService = undefined,
 }) {
 	const [serialId, setSerialId] = useState('');
 	const [shipmentId, setShipmentId] = useState('');
@@ -101,15 +101,17 @@ function ListData({
 				</div>
 				<div style={{ display: 'flex' }}>
 					<div className={styles.tags}>
-						<Tags
-							size="md"
-							items={[{
-								disabled : false,
-								children : startCase(service),
-								color    : 'blue',
-								tooltip  : false,
-							}]}
-						/>
+						{userService && (
+							<Tags
+								size="md"
+								items={[{
+									disabled : false,
+									children : startCase(service),
+									color    : 'blue',
+									tooltip  : false,
+								}]}
+							/>
+						)}
 						{source && (
 							<Tags
 								size="md"

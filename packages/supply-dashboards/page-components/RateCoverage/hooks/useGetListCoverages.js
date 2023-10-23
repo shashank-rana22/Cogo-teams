@@ -39,7 +39,7 @@ const useGetListCoverage = ({ userService }) => {
 
 	const { user: { id: user_id = '' } = {} } = user_data;
 
-	const firstService = userService?.length > 0 ? userService?.[0] : null;
+	const firstService = userService?.length > 0 ? userService?.[0] : 'fcl_freight';
 
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [source, setSource] = useState('');

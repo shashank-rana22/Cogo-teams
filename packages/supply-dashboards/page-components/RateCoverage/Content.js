@@ -18,7 +18,7 @@ function RateCoverageContent() {
 
 	const { user: { name: user_name = '', id: user_id } = {} } = user_data;
 
-	const userService = USER_SERVICES[user_id];
+	const userService = USER_SERVICES[user_id] || ['fcl_freight'];
 
 	const [showWeekData, setShowWeekData] = useState(false);
 
