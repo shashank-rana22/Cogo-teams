@@ -4,7 +4,6 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useGetListEmailSuggestions from '../../../../../../../../hooks/useGetListEmailSuggestions';
-import { COGOPORT_MAILS } from '../../../../../../../../utils/getAllowedEmailsList';
 import { RenderLabel } from '../OrgSpecificRecipients/orgSpecificFunctions';
 
 import EmailCustomTag from './EmailCustomTag';
@@ -23,6 +22,7 @@ function MailRecipientType({
 	handleEdit = () => {},
 	restrictMailToOrganizations = false,
 	restrictMailToSingle = false,
+	internalEmails = [],
 }) {
 	const [newEmailInput, setNewEmailInput] = useState('');
 
@@ -36,7 +36,9 @@ function MailRecipientType({
 
 	const showPopover = newEmailInput && !isEmpty(emailSuggestions) && !loading;
 
-	const internalMails = COGOPORT_MAILS.filter((itm) => !emailRecipientType.includes(itm?.value));
+	const filteredInternalMails = internalEmails?.filter(
+		(itm) => !emailRecipientType.includes(itm?.value),
+	);
 
 	return (
 		<div className={styles.tags_div}>
@@ -113,13 +115,13 @@ function MailRecipientType({
 			) : null}
 
 			{
-				restrictMailToOrganizations && !isEmpty(internalMails) && type !== 'toUserEmail' ? (
+				restrictMailToOrganizations && !isEmpty(filteredInternalMails) && type !== 'toUserEmail' ? (
 					<Select
-						options={internalMails}
 						size="xs"
-						renderLabel={(item) => <RenderLabel item={item} />}
-						className={styles.select_container}
+						options={filteredInternalMails}
 						placeholder="select internal mails"
+						className={styles.select_container}
+						renderLabel={(item) => <RenderLabel item={item} />}
 						onChange={(val) => handleKeyPress({
 							type,
 							email: val,

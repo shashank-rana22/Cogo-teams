@@ -47,6 +47,7 @@ function OrgSpecificRecipients({
 	emailState = {},
 	viewType = '',
 	restrictMailToSingle = false,
+	internalEmails = [],
 }) {
 	const [activeTab, setActiveTab] = useState('users');
 	const isLeadUser = emailState?.orgData?.orgId === 'lead_users';
@@ -101,6 +102,15 @@ function OrgSpecificRecipients({
 		}) || null,
 		[emailState?.orgData?.orgType, organizationData],
 	);
+
+	const userEmails = getAllowedEmailsList({
+		orgData,
+		searchQuery,
+		activeTab       : organizationType,
+		selectedOptions : emailState?.user_ids?.[type],
+		value           : emailRecipientType,
+		internalEmails,
+	}) || [];
 
 	const handleChangeTab = (tab) => {
 		setSearchQuery('');
@@ -171,13 +181,7 @@ function OrgSpecificRecipients({
 				multiple
 				selectType="multi"
 				selectedOptions={emailState?.user_ids?.[type] || []}
-				options={getAllowedEmailsList({
-					orgData,
-					searchQuery,
-					activeTab       : organizationType,
-					selectedOptions : emailState?.user_ids?.[type],
-					value           : emailRecipientType,
-				}) || []}
+				options={userEmails}
 				renderLabel={(item) => <RenderLabel item={item} activeTab={organizationType} />}
 				value={isLeadUser
 					? emailRecipientType?.[GLOBAL_CONSTANTS.zeroth_index] || ''

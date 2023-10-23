@@ -1,6 +1,8 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { cogoportMails } from '../../../../../../../utils/getAllowedEmailsList';
 
 import MailRecipientType from './MailRecipientType';
 import OrgSpecificRecipients from './OrgSpecificRecipients';
@@ -38,11 +40,14 @@ function Recipients({
 	restrictMailToSingle = false,
 	restrictMailToOrganizations = false,
 	buttonType = '',
+	firestore = {},
 }) {
 	const [enabledRecipients, setEnabledRecipients] = useState({
 		ccrecipients  : !isEmpty(emailState?.ccrecipients),
 		bccrecipients : !isEmpty(emailState?.bccrecipients),
 	});
+
+	const [internalEmails, setInternalEmails] = useState([]);
 
 	const handleRemove = (itm) => {
 		setEnabledRecipients((prev) => (
@@ -52,6 +57,14 @@ function Recipients({
 	};
 
 	const restrictForward = restrictMailToOrganizations && buttonType === 'forward';
+
+	useEffect(() => {
+		(async () => {
+			const mails = await cogoportMails({ firestore, viewType });
+
+			setInternalEmails(mails);
+		})();
+	}, [firestore, viewType]);
 
 	return (
 		<div className={styles.container}>
@@ -97,6 +110,7 @@ function Recipients({
 								restrictMailToSingle={restrictMailToSingle}
 								restrictMailToOrganizations={restrictMailToOrganizations}
 								restrictForward={restrictForward}
+								internalEmails={internalEmails}
 							/>
 						</div>
 

@@ -47,6 +47,7 @@ function ComposeEmailBody(props) {
 		hideFromMail = false,
 		viewType = '',
 		restrictMailToOrganizations = false,
+		firestore = {},
 	} = props || {};
 
 	const { onImageUploadBefore, disableRTE } = useImageUploader();
@@ -135,6 +136,7 @@ function ComposeEmailBody(props) {
 				restrictMailToSingle={restrictMailToSingle}
 				restrictMailToOrganizations={restrictMailToOrganizations}
 				buttonType={buttonType}
+				firestore={firestore}
 			/>
 
 			<div className={styles.type_to}>

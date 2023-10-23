@@ -196,6 +196,7 @@ function MailEditorModal({
 						showControl={showControl}
 						uploading={uploading}
 						mailProps={mailProps}
+						firestore={firestore}
 						showOrgSpecificMail={showOrgSpecificMail}
 						restrictMailToOrganizations={restrictMailToOrganizations}
 					/>
