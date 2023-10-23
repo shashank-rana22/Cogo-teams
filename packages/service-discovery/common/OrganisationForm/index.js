@@ -108,15 +108,23 @@ function OrganisationForm({
 
 	useEffect(() => {
 		if (!user_id) {
-			const userIdValue = defaultValues?.user_id && defaultValues?.user_id === organization?.user_id
-				? defaultValues?.user_id : userOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value;
+			let userIdValue = organization?.user_id;
+
+			if (defaultValues?.user_id === organization?.user_id) {
+				userIdValue = defaultValues?.user_id;
+			}
+
+			if (!organization?.user_id) {
+				userIdValue = userOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value;
+			}
 
 			setOrganization((prev) => ({
 				...prev,
 				user_id: userIdValue,
 			}));
 		}
-	}, [defaultValues?.user_id, organization?.user_id, setOrganization, userOptions, user_id]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [defaultValues?.user_id, setOrganization, userOptions, user_id]);
 
 	return (
 		<div className={cl`${styles.container} ${styles[source]}`} style={rest.style}>
