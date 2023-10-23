@@ -1,0 +1,15 @@
+.style_filter_button {
+	color: var(--color-primary-error-red-2);
+}
+
+.action_buttons {
+	display: flex;
+	gap: 6px;
+	justify-content: flex-end;
+}
+
+.filter_container {
+	width: 350px;
+	max-height: 500px;
+	overflow-y: scroll;
+}

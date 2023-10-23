@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Pagination, cl } from '@cogoport/components';
 import { startCase, isEmpty, startOfMonth } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
@@ -17,6 +18,8 @@ import useGetSageArOutstandingsStats from '../../../hooks/useGetSageArOustanding
 import useGetServiceWiseOutstandingsStats from '../../../hooks/useGetServiceWiseOutstandingsStats';
 
 import CcCallList from './CcCallList';
+import Filters from './Filters';
+import overAllOutstandingcontrols from './Filters/overAllOutstandingcontrols';
 import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
@@ -48,6 +51,8 @@ function OverAllOutstanding({
 		setOrderBy,
 		queryKey,
 		refetch,
+		filters,
+		setFilters,
 	} = useGetOrgOutstanding({ entityCode });
 
 	const [dateFilter, setDateFilter] = useState({
@@ -152,9 +157,19 @@ function OverAllOutstanding({
 			},
 		},
 	};
-
+	const controls = overAllOutstandingcontrols();
 	return (
 		<>
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				<Filters
+					controls={controls}
+					filters={filters}
+					setFilters={setFilters}
+					clearFilter={clearFilter}
+					refetch={refetch}
+				/>
+
+			</div>
 			<OverallOutstandingStats item={statsData} statsLoading={statsLoading} />
 			<div className={`${styles.overlay_container} overlay_section`}>
 				{viewGraphStats && (

@@ -31,6 +31,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 	} = outStandingFilters || {};
 
 	const { order, key } = orderBy || {};
+	const [filters, setFilters] = useState({});
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -47,7 +48,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 	}, [search, debounceQuery]);
 
 	const refetch = useCallback(
-		(formFilter) => {
+		() => {
 			try {
 				trigger({
 					params: {
@@ -55,11 +56,21 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 						sortType     : order || undefined,
 						page,
 						pageLimit,
-						salesAgentId : formFilter?.salesAgentId || undefined,
+						salesAgentId : filters?.salesAgentId || undefined,
+
+						portfolioManagerId: filters?.portfolioManagerId || undefined,
+
+						portfolioManagerRmId: filters?.portfolioManagerRmId || undefined,
+
+						salesAgentRmId: filters?.salesAgentRmId || undefined,
+
 						creditControllerId:
-							formFilter?.creditControllerId || undefined,
-						kamId                : selectedAgentId || formFilter?.kamId || undefined,
-						companyType          : formFilter?.companyType || undefined,
+
+                            filters?.creditControllerId || undefined,
+
+						kamId: selectedAgentId || filters?.kamId || undefined,
+
+						companyType          : filters?.companyType || undefined,
 						entityCode           : entityCode || undefined,
 						organizationSerialId : organizationSerialId || undefined,
 						sageId               : sageId || undefined,
@@ -71,19 +82,11 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 				Toast.error(e?.message);
 			}
 		},
-		[
-			entityCode,
-			key,
-			order,
-			organizationSerialId,
-			page,
-			pageLimit,
-			q,
-			sageId,
-			tradePartySerialId,
-			trigger,
-			selectedAgentId,
-		],
+		[trigger, key, order, page, pageLimit,
+			filters?.salesAgentId, filters?.portfolioManagerId,
+			filters?.portfolioManagerRmId, filters?.salesAgentRmId, filters?.creditControllerId,
+			filters?.kamId, filters?.companyType, selectedAgentId, entityCode, organizationSerialId, sageId,
+			tradePartySerialId, q],
 	);
 
 	useEffect(() => {
@@ -99,6 +102,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		q,
 		key,
 		order,
+		filters,
 		authorizationparameters,
 		refetch,
 	]);
@@ -134,6 +138,8 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		orderBy,
 		setOrderBy,
 		setQueryKey,
+		filters,
+		setFilters,
 		queryKey,
 		refetch,
 	};
