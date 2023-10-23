@@ -80,6 +80,7 @@ function SendActions({
 							emojisList={emojisList}
 							setOnClicked={setOnClicked}
 							updateMessage={handleUpdateMessage}
+							onClicked={onClicked}
 						/>
 					)}
 					visible={onClicked}
