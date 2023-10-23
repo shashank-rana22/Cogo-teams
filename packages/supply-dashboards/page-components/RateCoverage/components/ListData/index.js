@@ -101,17 +101,15 @@ function ListData({
 				</div>
 				<div style={{ display: 'flex' }}>
 					<div className={styles.tags}>
-						{userService && (
-							<Tags
-								size="md"
-								items={[{
-									disabled : false,
-									children : startCase(service),
-									color    : 'blue',
-									tooltip  : false,
-								}]}
-							/>
-						)}
+						<Tags
+							size="md"
+							items={[{
+								disabled : false,
+								children : startCase(service),
+								color    : 'blue',
+								tooltip  : false,
+							}]}
+						/>
 						{source && (
 							<Tags
 								size="md"
