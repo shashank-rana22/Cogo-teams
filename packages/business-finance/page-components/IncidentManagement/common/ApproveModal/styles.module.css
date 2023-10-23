@@ -1,0 +1,25 @@
+.infoIcon {
+	margin: 30px 0 10px 155px;
+	color: #0f0;
+}
+
+.approve_text {
+	font-size: var(--font-size-md);
+	text-align: center;
+}
+
+.approve_body {
+	width: 364px;
+	height: 200px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 15px;
+}
+
+.formButton {
+	margin-left: 20px;
+}

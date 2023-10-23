@@ -10,6 +10,7 @@ export function getSourceTags({
 	filterValues = {},
 	dynamicStatistics = {},
 	viewType = '',
+	filtersData = {},
 }) {
 	const showStats = !isEmpty(dynamicStatistics);
 
@@ -59,6 +60,11 @@ export function getSourceTags({
 				value = `SID: ${filterValues?.shipment_serial_id}`;
 			} else if (key === 'dateRange') {
 				value = showDate;
+			} else if (key === 'service_provider_id') {
+				const serviceProviderData = filtersData?.service_provider_id || {};
+				value = serviceProviderData?.short_name
+							|| serviceProviderData?.business_name
+							|| serviceProviderData?.name;
 			}
 
 			if (key === 'relevant_to') {
