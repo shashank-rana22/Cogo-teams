@@ -264,6 +264,7 @@ function OverAllOutstanding({
 					{list?.map((item) => (
 						<OutstandingList
 							item={item}
+							refetch={refetch}
 							entityCode={entityCode}
 							key={item?.serialId}
 							showElement={false}

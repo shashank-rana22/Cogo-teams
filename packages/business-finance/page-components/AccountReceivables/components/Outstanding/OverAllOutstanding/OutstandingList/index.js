@@ -1,11 +1,13 @@
-import { Button, TabPanel, Tabs, Tooltip } from '@cogoport/components';
+/* eslint-disable max-lines-per-function */
+import { Button, TabPanel, Tabs, Tooltip, Popover, RadioGroup } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMDownload } from '@cogoport/icons-react';
+import { IcMDownload, IcMOverflowLine } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { getTaxLabels } from '../../../../constants/index';
+import useUpdateAccountTagging from '../../../../hooks/useUpdateAccountTagging';
 
 import DownloadLedgerModal from './DownloadLedgerModal';
 import StatsOutstanding from './StatsOutstanding/index';
@@ -13,8 +15,49 @@ import styles from './styles.module.css';
 import TabsOptions from './TabOptions';
 import UserDetails from './UserDetails';
 
+function ChangeStatus({ item = {}, refetch = () => {} }) {
+	const [currentstatus, setCurrentStatus] = useState('creditcontroller');
+	const { apiTrigger } = useUpdateAccountTagging({ item });
+	const onSubmit = async () => {
+		await (apiTrigger(currentstatus));
+		refetch();
+	};
+	// const { apiTrigger } = useUpdateAccountTagging({ item });
+
+	return (
+
+		<>
+
+			<b>Change Current Account Status</b>
+
+			<RadioGroup
+				options={[
+					{ name: 'preLegal', value: 'prelegal', label: 'Pre Legal' },
+					{ name: 'legal', value: 'legal', label: 'Legal' },
+					{ name: 'never', value: 'never', label: 'Never' },
+					{ name: 'creditController', value: 'creditcontroller', label: 'Credit Controller' }]}
+				value={currentstatus}
+				onChange={setCurrentStatus}
+			/>
+
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+
+				<Button size="md" themeType="primary" onClick={() => onSubmit()}>
+
+					SUBMIT
+
+				</Button>
+
+			</div>
+
+		</>
+
+	);
+}
+
 function OutstandingList({
 	item = {},
+	refetch = () => {},
 	entityCode = '',
 	showElement = false,
 	organizationId = '',
@@ -216,6 +259,15 @@ function OutstandingList({
 								/>
 							</div>
 						</Tooltip>
+						<div className={styles.download_icon_div}>
+
+							<Popover placement="left" render={<ChangeStatus item={item} refetch={refetch} />}>
+
+								<IcMOverflowLine />
+
+							</Popover>
+
+						</div>
 
 						{!showElement && (
 							<Button
