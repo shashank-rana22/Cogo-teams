@@ -6,7 +6,12 @@
 	height: 100%;
 	padding: 10px 5px;
 	margin-bottom: 20px;
+	overflow-y: auto;
 	background: #fff;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .active {

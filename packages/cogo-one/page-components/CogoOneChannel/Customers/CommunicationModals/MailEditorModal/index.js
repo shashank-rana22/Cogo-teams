@@ -88,14 +88,16 @@ function MailEditorModal({
 			&& emailState?.mailView === 'orgSpecific'
 	);
 
+	const activeFromMail = emailState?.from_mail || activeMailAddress;
+
 	const userActiveMails = useMemo(
 		() => (
 			[...new Set([
 				...(userSharedMails || []),
-				...([emailState?.from_mail || activeMailAddress]),
+				...(activeFromMail ? [activeFromMail] : []),
 			])]
 		),
-		[activeMailAddress, emailState?.from_mail, userSharedMails],
+		[activeFromMail, userSharedMails],
 	);
 
 	const hideFromMail = (
@@ -171,7 +173,7 @@ function MailEditorModal({
 						sendLoading={sendLoading}
 						hideFromMail={hideFromMail}
 						userActiveMails={userActiveMails}
-						activeMailAddress={emailState?.from_mail || activeMailAddress}
+						activeMailAddress={activeFromMail}
 					/>
 				)}
 				className={styles.modal_header}
