@@ -66,6 +66,16 @@ function ComposeEmailBody(props) {
 			&& !emailState?.mailView
 	);
 
+	const handleRTEChange = (val) => {
+		const rawText = sunEditorRef.current?.getText();
+
+		setEmailState((p) => ({
+			...p,
+			rawRTEContent : rawText,
+			rteContent    : val,
+		}));
+	};
+
 	useEffect(() => {
 		if (buttonType === 'send_mail' && !activeMailAddress) {
 			setActiveMailAddress(userActiveMails?.[GLOBAL_CONSTANTS.zeroth_index]);
@@ -123,6 +133,8 @@ function ComposeEmailBody(props) {
 				hideFromMail={hideFromMail}
 				viewType={viewType}
 				restrictMailToSingle={restrictMailToSingle}
+				restrictMailToOrganizations={restrictMailToOrganizations}
+				buttonType={buttonType}
 			/>
 
 			<div className={styles.type_to}>
@@ -158,18 +170,9 @@ function ComposeEmailBody(props) {
 			<div className={styles.rte_container}>
 				<SunEditor
 					key={emailState?.reloadKey}
-					getSunEditorInstance={getSunEditorInstance}
 					onImageUploadBefore={onImageUploadBefore}
 					defaultValue={emailState?.rteContent}
-					onChange={(val) => {
-						const rawText = sunEditorRef.current?.getText();
-
-						setEmailState((p) => ({
-							...p,
-							rawRTEContent : rawText,
-							rteContent    : val,
-						}));
-					}}
+					onChange={handleRTEChange}
 					setOptions={{
 						buttonList    : RTE_TOOL_BAR_CONFIG,
 						defaultTag    : 'div',
@@ -178,6 +181,7 @@ function ComposeEmailBody(props) {
 					}}
 					disable={disableRTE}
 					autoFocus
+					getSunEditorInstance={getSunEditorInstance}
 				/>
 
 				<div className={styles.attachments_scroll}>

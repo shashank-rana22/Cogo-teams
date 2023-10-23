@@ -1,9 +1,11 @@
-import { Popover, Input, ButtonIcon } from '@cogoport/components';
+import { Popover, Input, ButtonIcon, Select } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useGetListEmailSuggestions from '../../hooks/useGetListEmailSuggestions';
+import useGetListEmailSuggestions from '../../../../../../../../hooks/useGetListEmailSuggestions';
+import { COGOPORT_MAILS } from '../../../../../../../../utils/getAllowedEmailsList';
+import { RenderLabel } from '../OrgSpecificRecipients/orgSpecificFunctions';
 
 import EmailCustomTag from './EmailCustomTag';
 import ListEmails from './ListEmails';
@@ -19,6 +21,7 @@ function MailRecipientType({
 	handleKeyPress = () => {},
 	handleCancel = () => {},
 	handleEdit = () => {},
+	restrictMailToOrganizations = false,
 	restrictMailToSingle = false,
 }) {
 	const [newEmailInput, setNewEmailInput] = useState('');
@@ -32,6 +35,8 @@ function MailRecipientType({
 	const emailSuggestions = body?.map((itm) => itm.email) || [];
 
 	const showPopover = newEmailInput && !isEmpty(emailSuggestions) && !loading;
+
+	const internalMails = COGOPORT_MAILS.filter((itm) => !emailRecipientType.includes(itm?.value));
 
 	return (
 		<div className={styles.tags_div}>
@@ -97,7 +102,7 @@ function MailRecipientType({
 				</Popover>
 			)}
 
-			{(!restrictMailToSingle || (restrictMailToSingle && !emailRecipientType.length)) ? (
+			{(!restrictMailToOrganizations && (!restrictMailToSingle || !emailRecipientType.length)) ? (
 				<div
 					className={styles.add_icon}
 					onClick={() => handleEdit({ type, setNewEmailInput })}
@@ -106,6 +111,23 @@ function MailRecipientType({
 					+
 				</div>
 			) : null}
+
+			{
+				restrictMailToOrganizations && !isEmpty(internalMails) && type !== 'toUserEmail' ? (
+					<Select
+						options={internalMails}
+						size="xs"
+						renderLabel={(item) => <RenderLabel item={item} />}
+						className={styles.select_container}
+						placeholder="select internal mails"
+						onChange={(val) => handleKeyPress({
+							type,
+							email: val,
+							setNewEmailInput,
+						})}
+					/>
+				) : null
+			}
 		</div>
 	);
 }

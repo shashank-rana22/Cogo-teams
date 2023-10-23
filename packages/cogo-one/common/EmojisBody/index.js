@@ -10,7 +10,7 @@ function EmojisBody({
 	setOnClicked = () => {},
 	onClicked = false,
 }) {
-	if (onClicked) {
+	if (!onClicked) {
 		return null;
 	}
 

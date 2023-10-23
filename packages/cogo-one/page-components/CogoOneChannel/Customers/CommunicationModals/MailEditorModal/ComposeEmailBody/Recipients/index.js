@@ -2,8 +2,7 @@ import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import MailRecipientType from '../../../../../../../common/MailRecipientType';
-
+import MailRecipientType from './MailRecipientType';
 import OrgSpecificRecipients from './OrgSpecificRecipients';
 import styles from './styles.module.css';
 
@@ -37,6 +36,8 @@ function Recipients({
 	hideFromMail = false,
 	viewType = '',
 	restrictMailToSingle = false,
+	restrictMailToOrganizations = false,
+	buttonType = '',
 }) {
 	const [enabledRecipients, setEnabledRecipients] = useState({
 		ccrecipients  : !isEmpty(emailState?.ccrecipients),
@@ -50,6 +51,8 @@ function Recipients({
 		setEmailState((prev) => ({ ...prev, [itm.value]: [] }));
 	};
 
+	const restrictForward = restrictMailToOrganizations && buttonType === 'forward';
+
 	return (
 		<div className={styles.container}>
 			{EMAIL_RECIPIENTS.map((itm) => {
@@ -58,7 +61,7 @@ function Recipients({
 				}
 
 				const ActiveRecipientComp = ACTIVE_RECIPIENTS_COMP?.[
-					(showOrgSpecificMail || (restrictMailToSingle && itm.value !== 'toUserEmail'))
+					(showOrgSpecificMail || (restrictMailToSingle && itm.value !== 'toUserEmail') || restrictForward)
 						? 'specific' : 'default'
 				];
 
@@ -76,6 +79,7 @@ function Recipients({
 								{itm.label}
 								:
 							</div>
+
 							<ActiveRecipientComp
 								emailRecipientType={emailState?.[itm.value]}
 								handleDelete={handleDelete}
@@ -91,6 +95,8 @@ function Recipients({
 								recipientTypes={EMAIL_RECIPIENTS}
 								viewType={viewType}
 								restrictMailToSingle={restrictMailToSingle}
+								restrictMailToOrganizations={restrictMailToOrganizations}
+								restrictForward={restrictForward}
 							/>
 						</div>
 

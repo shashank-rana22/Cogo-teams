@@ -73,3 +73,8 @@
 	background: #000;
 	border-radius: 50%;
 }
+
+.select_container {
+	width: 250px;
+	padding-top: 4px;
+}

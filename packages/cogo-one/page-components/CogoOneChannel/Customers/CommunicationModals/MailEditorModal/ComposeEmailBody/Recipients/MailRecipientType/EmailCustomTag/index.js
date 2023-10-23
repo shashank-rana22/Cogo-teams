@@ -1,7 +1,7 @@
 import { IcMCross } from '@cogoport/icons-react';
 
-import { EMAIL_TAGS_COLOR } from '../../../constants/mailConstants';
-import hideDetails from '../../../utils/hideDetails';
+import { EMAIL_TAGS_COLOR } from '../../../../../../../../../constants/mailConstants';
+import hideDetails from '../../../../../../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
@@ -27,6 +27,7 @@ function EmailCustomTag({
 			>
 				{restrictMailToSingle ? hideDetails({ type: 'mail', data: email }) : email}
 			</div>
+
 			{restrictMailToSingle
 				? null
 				: (

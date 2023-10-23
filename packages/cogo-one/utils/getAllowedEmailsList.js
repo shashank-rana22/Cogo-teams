@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
-const COGOPORT_MAILS = [
+export const COGOPORT_MAILS = [
 	{
 		label : 'HR',
 		value : GLOBAL_CONSTANTS?.emails?.hr,

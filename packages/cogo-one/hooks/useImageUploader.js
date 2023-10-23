@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 const useImageUploader = () => {
 	const [disableRTE, setDisableRTE] = useState(false);
+
 	const uploadFile = async ({ file, fileName }) => {
 		try {
 			const { data } = await request({
