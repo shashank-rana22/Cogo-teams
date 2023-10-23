@@ -13297,9 +13297,36 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'verify_organization_kyc',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'verify_channel_partner_kyc',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'verify_organization_trade_party',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_omnichannel_onboarding_requests',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'post_allocation_request_status',
+			access_type  : 'private',
+			feature      : 'allocation',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_request_rejection_reasons',
+			access_type  : 'private',
+			feature      : 'allocation',
+			service_name : 'allocation',
 		},
 		{
 			api          : 'get_shipment_quotation',

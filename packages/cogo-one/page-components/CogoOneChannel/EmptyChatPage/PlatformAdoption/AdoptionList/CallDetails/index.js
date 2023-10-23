@@ -7,10 +7,15 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function CallDetails({ list = [] }) {
+function CallDetails({ list = [], handlePlaceCall = () => {}, handleOpenMessage = () => {} }) {
 	return (list || []).map((item) => {
-		const { id = '', missed_agent_data = {}, request_type = '' } = item || {};
+		const { id = '', missed_agent_data = {}, request_type = '', customer = {}, voice_call_data = {} } = item || {};
 		const { name = '' } = missed_agent_data || {};
+		const {
+			name: pocName = '', lead_user_id = '', mobile_country_code = '', mobile_number = '',
+			id: pocId = '', whatsapp_country_code = '', email = '', whatsapp_number = '',
+		} = customer || {};
+		const { reason = '' } = voice_call_data || {};
 
 		return (
 			<div className={styles.card} key={id}>
@@ -28,7 +33,7 @@ function CallDetails({ list = [] }) {
 							</Tooltip>
 							<div className={styles.lower_section}>
 								<div className={styles.trade_name}>
-									{/* {subLabel || '-'} */}
+									{startCase(pocName) || '-'}
 								</div>
 							</div>
 						</div>
@@ -50,17 +55,39 @@ function CallDetails({ list = [] }) {
 					<div className={styles.each_row}>
 						<div className={styles.title}>Comments : </div>
 						<div className={styles.comment}>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua.
+							{reason || '-'}
 						</div>
 					</div>
 				</div>
 				<div className={styles.line_break} />
 				<div className={styles.footer_container}>
-					<div className={styles.button}>
+					<div
+						className={styles.button}
+						role="presentation"
+						onClick={() => handleOpenMessage({
+							number     : mobile_number,
+							code       : mobile_country_code,
+							userName   : pocName,
+							leadUserId : lead_user_id,
+							whatsapp_country_code,
+							email,
+							whatsapp_number,
+							pocId,
+						})}
+					>
 						<IcCSendWhatsapp width={20} height={20} />
 					</div>
-					<div className={styles.button}>
+					<div
+						role="presentation"
+						className={styles.button}
+						onClick={() => handlePlaceCall({
+							userName   : pocName,
+							code       : mobile_country_code,
+							number     : mobile_number,
+							pocId,
+							leadUserId : lead_user_id,
+						})}
+					>
 						<IcMCall width={20} height={20} />
 					</div>
 				</div>

@@ -1,22 +1,35 @@
 import { Checkbox, cl } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
 import AgentAvatar from '../../../../../../../common/AgentAvatar';
 
+import { formatKycOrgData, formatOnboardData, formatTradePartyData } from './formatOrgData';
 import styles from './styles.module.css';
 
-function AccountDetails({ hasDocument = false }) {
+const DATA_MAPPING = {
+	kyc_verify       : formatKycOrgData,
+	trade_party      : formatTradePartyData,
+	onboard_customer : formatOnboardData,
+};
+
+function AccountDetails({ hasDocument = false, orgData = {}, verifyType = '' }) {
+	const detailsMapping = DATA_MAPPING?.[verifyType]?.({ orgData });
+
+	const {
+		orgName = '', email = '', address = '', pincode = '', taxNumber = '',
+		pocName = '', mobileNumber = '', mobileCode = '', pan = '',
+	} = detailsMapping || {};
+
 	return (
 		<div className={cl`${hasDocument ? styles.only_data : styles.full_section}`}>
 			<div className={styles.user_info}>
 				<AgentAvatar text="Cogoport" />
 				<div className={styles.org_details}>
 					<div className={styles.business_name}>
-						{/* {label || '-'} */}
-						Reliance Pvt Ltd
+						{startCase(orgName) || '-'}
 					</div>
 					<div className={styles.trade_name}>
-						{/* {subLabel || '-'} */}
-						Akash Agarwal (Agent)
+						{startCase(pocName) || '-'}
 					</div>
 				</div>
 			</div>
@@ -27,23 +40,22 @@ function AccountDetails({ hasDocument = false }) {
 					<div className={styles.sub_contact}>
 						<div className={styles.title}>Phone</div>
 						<div className={styles.contact_details}>
-							+91 9876543210
-							{/* {mobile_number ? (
+							{mobileNumber ? (
 								<>
-									{mobile_country_code}
+									{mobileCode}
 									{' '}
-									{mobile_number}
+									{mobileNumber}
 								</>
-							) : '-'} */}
+							) : '-'}
 						</div>
 					</div>
 					<div className={styles.sub_contact}>
 						<div className={styles.title}>PAN</div>
-						<div className={styles.contact_details}>123456789098766</div>
+						<div className={styles.contact_details}>{pan}</div>
 					</div>
 					<div className={styles.sub_contact}>
 						<div className={styles.title}>Email</div>
-						<div className={styles.contact_details}>jigarshah123457@gmail.com</div>
+						<div className={styles.contact_details}>{email}</div>
 					</div>
 				</div>
 			</div>
@@ -51,22 +63,18 @@ function AccountDetails({ hasDocument = false }) {
 			<div className={styles.address_details}>
 				<div className={styles.address_column}>
 					<div className={styles.address_label}>Billing Address</div>
-					{/* <div className={styles.address}>{address || '-'}</div> */}
-					<div className={styles.address}>
-						6th floor, Ackruti Trade Centre, Rd Number 7, Kondivita, Andheri East, Mumbai, Maharashtra
-					</div>
-
+					<div className={styles.address}>{address || '-'}</div>
 				</div>
 				<div className={styles.pincode}>
 					<div className={styles.pincode_label}>Pincode: </div>
-					<div className={styles.code}>400069</div>
+					<div className={styles.code}>{pincode}</div>
 				</div>
 			</div>
 
 			<div className={styles.gst_details}>
 				<div className={styles.gst}>
 					<div className={styles.pincode_label}>Tax/ GST Number: </div>
-					<div className={styles.code}>123456789098766</div>
+					<div className={styles.code}>{taxNumber}</div>
 				</div>
 				<div className={styles.approve}>
 					<Checkbox label="I have reviewed all the KYC details thoroughly." value="a1" />

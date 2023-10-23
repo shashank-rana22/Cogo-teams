@@ -7,13 +7,19 @@ import {
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import { formatAccountType } from '../../../../../../utils/platformAdoption';
+
 import styles from './styles.module.css';
 
 function TradeTypeVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 	return (list || []).map((item) => {
-		const { trade_party = {}, request_type = '', id = '', organization = {} } = item || {};
-		const { business_name: orgName = '' } = organization || {};
-		const { business_name = '', trade_party_type = '', updated_at = '' } = trade_party || {};
+		const { trade_party = {}, request_type = '', id = '', organization = {}, requesting_user = {} } = item || {};
+		const {
+			business_name: orgName = '', account_type = '',
+			tags = [],
+		} = organization || {};
+		const { business_name = '', trade_party_type = '', updated_at = '', documents = [] } = trade_party || {};
+		const { data: { name = '' } = {} } = requesting_user || {};
 
 		return (
 			<div className={styles.card} key={id}>
@@ -33,7 +39,9 @@ function TradeTypeVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 								<div className={styles.trade_name}>
 									{startCase(orgName) || '-'}
 								</div>
-								{/* <div className={styles.account_type}>{startCase(accountType)}</div> */}
+								<div className={styles.account_type}>
+									{formatAccountType({ tags })?.[account_type]?.shortName}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -46,7 +54,7 @@ function TradeTypeVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 				<div className={styles.body_info}>
 					<div className={styles.each_row}>
 						<div className={styles.title}>Requested by :</div>
-						<div className={styles.request_name}>-</div>
+						<div className={styles.request_name}>{name}</div>
 					</div>
 					<div className={styles.each_row}>
 						<div className={styles.title}>Trade name :</div>
@@ -77,7 +85,10 @@ function TradeTypeVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 									...prev,
 									show               : true,
 									showAccountDetails : false,
-									accountData        : [],
+									accountData        : documents,
+									orgData            : {},
+									verifyType         : '',
+									accountType        : '',
 								}));
 							}}
 						>
@@ -100,7 +111,10 @@ function TradeTypeVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 								...prev,
 								show               : true,
 								showAccountDetails : true,
-								accountData        : [],
+								accountData        : documents,
+								orgData            : item,
+								verifyType         : 'trade_party',
+								accountType        : 'trade_party',
 							}));
 						}}
 					>

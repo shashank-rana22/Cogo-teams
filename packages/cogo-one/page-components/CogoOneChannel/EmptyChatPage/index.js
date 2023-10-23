@@ -73,6 +73,7 @@ function EmptyChatPage({
 				firestore={firestore}
 				viewType={viewType}
 				userId={userId}
+				setActiveTab={setActiveTab}
 			/>
 		);
 	}

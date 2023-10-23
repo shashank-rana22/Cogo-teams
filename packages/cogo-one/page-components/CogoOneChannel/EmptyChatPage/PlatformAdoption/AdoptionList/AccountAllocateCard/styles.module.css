@@ -172,3 +172,8 @@
 		background: #c4dc91;
 	}
 }
+
+.disable {
+	cursor: not-allowed;
+	background: #e0e0e0 !important;
+}

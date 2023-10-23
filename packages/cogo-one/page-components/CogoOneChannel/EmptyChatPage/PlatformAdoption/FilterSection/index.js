@@ -1,5 +1,5 @@
-import { Button, cl } from '@cogoport/components';
-import { IcMArrowNext, IcMFilter } from '@cogoport/icons-react';
+import { cl } from '@cogoport/components';
+import { IcMArrowNext } from '@cogoport/icons-react';
 
 import { ACTIVITY_MAPPING } from '../../../../../constants/PLATFORM_ADOPTION_CONSTANTS';
 
@@ -55,11 +55,6 @@ function FilterSection({
 					);
 				})}
 			</div>
-			<Button themeType="secondary">
-				Filter By
-				{' '}
-				<IcMFilter width={15} height={15} />
-			</Button>
 		</div>
 	);
 }

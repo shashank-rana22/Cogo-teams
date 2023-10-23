@@ -37,6 +37,7 @@ const useListOmnichannelOnboardingRequests = () => {
 	return {
 		loading,
 		data,
+		onboardingRequest,
 	};
 };
 

@@ -22,6 +22,9 @@ function PlatformAdoption({
 		show               : false,
 		showAccountDetails : false,
 		accountData        : [],
+		orgData            : {},
+		verifyType         : '',
+		accountType        : '',
 	});
 
 	const { unReadChatsCount } = useGetUnreadMessagesCount({
@@ -39,7 +42,7 @@ function PlatformAdoption({
 		userSharedMails,
 	});
 
-	const { loading = false, data = {} } = useListOmnichannelOnboardingRequests();
+	const { loading = false, data = {}, onboardingRequest = () => {} } = useListOmnichannelOnboardingRequests();
 
 	const { list, ...rest } = data || {};
 	const { page, page_limit, total_count } = rest || {};
@@ -62,10 +65,11 @@ function PlatformAdoption({
 			/>
 			{loading ? <Loader /> : (
 				<AdoptionList
-					mailProps={mailProps}
+					setActiveTab={setActiveTab}
 					setVerifyAccount={setVerifyAccount}
 					verifyAccount={verifyAccount}
 					list={list}
+					onboardingRequest={onboardingRequest}
 				/>
 			)}
 			<div className={styles.pagination_info}>

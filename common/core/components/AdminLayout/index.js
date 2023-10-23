@@ -21,7 +21,7 @@ import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
 import useGetUnreadTicketCount from './useGetUnreadTicketCount';
 import VideoCall from './VideoCall';
-// import VoiceCall from './VoiceCall';
+import VoiceCall from './VoiceCall';
 
 const WHITE_BACKGROUND_MAPPING = [
 	'/[partner_id]/learning/course',
@@ -124,9 +124,9 @@ function AdminLayout({
 					ticketCount={data}
 				/>
 			) : null}
-			{/* <VoiceCall
+			<VoiceCall
 				firestore={firestore}
-			/> */}
+			/>
 			<VideoCall
 				videoCallRecipientData={video_call_recipient_data}
 				inVideoCall={inVideoCall}

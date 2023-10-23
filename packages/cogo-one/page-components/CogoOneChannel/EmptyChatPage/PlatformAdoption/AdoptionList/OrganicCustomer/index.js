@@ -3,12 +3,19 @@ import { IcMOverflowDot, IcMFtick, IcMCrossInCircle, IcMCalendar } from '@cogopo
 import { startCase } from '@cogoport/utils';
 
 import AgentAvatar from '../../../../../../common/AgentAvatar';
+import { formatAccountType } from '../../../../../../utils/platformAdoption';
 
 import styles from './styles.module.css';
 
 function OrganicCustomer({ list = [], setScheduleDemo = () => {}, setVerifyAccount = () => {} }) {
 	return (list || []).map((item) => {
-		const { request_type = '', id = '' } = item || {};
+		const { request_type = '', id = '', user = {}, organization = {} } = item || {};
+		const { name = '' } = user || {};
+		const {
+			account_type = '', tags = [], organization_documents = [],
+			preferred_languages = [], city = {},
+		} = organization || {};
+		const { display_name = '' } = city || {};
 
 		return (
 			<div className={styles.card} key={id}>
@@ -26,10 +33,10 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, setVerifyAccou
 							</Tooltip>
 							<div className={styles.lower_section}>
 								<div className={styles.trade_name}>
-									{/* {subLabel || '-'} */}
+									{startCase(name) || '-'}
 								</div>
 								<div className={styles.account_type}>
-									{/* {startCase(accountType)} */}
+									{formatAccountType({ tags })?.[account_type]?.shortName}
 								</div>
 							</div>
 						</div>
@@ -50,19 +57,18 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, setVerifyAccou
 						</div>
 					</div>
 					<div className={styles.each_row}>
-						<div className={styles.title}>Location : </div>
-						{/* <div className={styles.name}>{location}</div> */}
+						<div className={styles.lang_title}>Location : </div>
+						<div className={styles.name}>{display_name}</div>
 					</div>
 					<div className={styles.each_row}>
 						<div className={styles.lang_title}>Language Preferred : </div>
-						{/* <div className={styles.wrapper}>
-							{language_preferred.map((it) => (
+						<div className={styles.wrapper}>
+							{(preferred_languages || []).map((it) => (
 								<div key={it} className={styles.lang}>
-									{it}
-									,
+									{startCase(it)}
 								</div>
 							))}
-						</div> */}
+						</div>
 					</div>
 				</div>
 				<div className={styles.line_break} />
@@ -87,7 +93,10 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, setVerifyAccou
 								...prev,
 								show               : true,
 								showAccountDetails : true,
-								accountData        : [],
+								accountData        : organization_documents,
+								orgData            : item,
+								verifyType         : 'onboard_customer',
+								accountType        : formatAccountType({ tags })?.[account_type]?.shortName,
 							}));
 						}}
 					>

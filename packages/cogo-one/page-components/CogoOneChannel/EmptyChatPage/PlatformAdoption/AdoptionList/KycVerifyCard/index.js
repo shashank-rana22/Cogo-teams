@@ -4,27 +4,27 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcAIncoterms, IcMOverflowDot, IcMInfo, IcMDocument, IcMTimer, IcMFtick, IcMCall } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import { formatAccountType } from '../../../../../../utils/platformAdoption';
+
 import styles from './styles.module.css';
 
 const DOC_ARRAY = ['Pan.pdf', 'GST.pdf', 'Aadhar.pdf', 'Income.pdf'];
 
-const ACCOUNT_TYPE_MAPPING = {
-	importer_exporter : 'IE',
-	service_provider  : 'SP',
-	enterprise        : 'enterprise',
-};
-
-function KycVerifyCard({ list = [], setVerifyAccount = () => {} }) {
+function KycVerifyCard({ list = [], setVerifyAccount = () => {}, handlePlaceCall = () => {} }) {
 	const FIRST_TWO_ITEM = DOC_ARRAY.slice(0, 2);
 	const REMAINING_ITEM = DOC_ARRAY.slice(2);
 
 	return (list || []).map((item) => {
 		const {
-			organization = {}, request_type = '', id = '', requesting_user = {},
-			performed_by_type = '', updated_at = '',
+			organization = {}, request_type = '', id = '', requesting_user = {}, performed_by_type = '',
+			updated_at = '', customer = {},
 		} = item || {};
-		const { account_type = '', business_name = '' } = organization || {};
+		const { account_type = '', business_name = '', tags = [], organization_documents = [] } = organization || {};
 		const { name = '' } = requesting_user || {};
+		const {
+			name:pocName = '', mobile_country_code = '', mobile_number = '', id: pocId = '',
+			lead_user_id = '',
+		} = customer || {};
 
 		return (
 			<div className={styles.card} key={id}>
@@ -45,7 +45,7 @@ function KycVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 									{startCase(business_name) || '-'}
 								</div>
 								<div className={styles.account_type}>
-									{startCase(ACCOUNT_TYPE_MAPPING?.[account_type])}
+									{formatAccountType({ tags })?.[account_type]?.shortName}
 								</div>
 							</div>
 						</div>
@@ -83,7 +83,10 @@ function KycVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 												...prev,
 												show               : true,
 												showAccountDetails : false,
-												accountData        : [],
+												accountData        : organization_documents,
+												orgData            : {},
+												verifyType         : '',
+												accountType        : '',
 											}));
 										}}
 									>
@@ -126,14 +129,27 @@ function KycVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 									...prev,
 									show               : true,
 									showAccountDetails : true,
-									accountData        : [],
+									accountData        : organization_documents,
+									orgData            : item,
+									verifyType         : 'kyc_verify',
+									accountType        : formatAccountType({ tags })?.[account_type]?.shortName,
 								}));
 							}}
 						>
 							<IcMFtick className={styles.ftick_icon} />
 							Verify
 						</div>
-						<div className={styles.call_icon}>
+						<div
+							role="presentation"
+							className={styles.call_icon}
+							onClick={() => handlePlaceCall({
+								userName   : pocName,
+								code       : mobile_country_code,
+								number     : mobile_number,
+								pocId,
+								leadUserId : lead_user_id,
+							})}
+						>
 							<IcMCall width={18} height={18} fill="#fff" />
 						</div>
 					</div>

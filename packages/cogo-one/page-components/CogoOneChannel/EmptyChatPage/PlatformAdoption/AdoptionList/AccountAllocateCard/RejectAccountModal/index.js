@@ -1,69 +1,79 @@
-import { Modal, RadioGroup, Input, Button } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
+import { AsyncSelect } from '@cogoport/forms';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
-
-import { REASON_OPTIONS } from '../../../../../../../constants/PLATFORM_ADOPTION_CONSTANTS';
 
 import styles from './styles.module.css';
 
 function RejectVerification({
-	setShowReject = () => {}, loading = false,
-	handleReject = () => {},
-	reason = {}, showReject = false,
-	setReason = () => {},
+	setRejectData = () => {}, rejectData = {},
+	loadingUpdate = false,
+	onStatusUpdate = () => {},
+	requestId = '',
 }) {
-	const { type = '', otherReason = '' } = reason || {};
+	const { showRejectModal = false, reason = [], type = '' } = rejectData || {};
+
+	const hancleClose = () => {
+		setRejectData(() => ({
+			reason          : [],
+			type            : '',
+			showRejectModal : false,
+		}));
+	};
+
+	const handleAllocate = () => {
+		onStatusUpdate({ requestId, type, reason });
+	};
 
 	return (
 		<Modal
-			show={showReject}
-			onClose={() => setShowReject(false)}
+			show={showRejectModal}
+			onClose={hancleClose}
 			size="sm"
-			closeOnOuterClick={() => setShowReject(false)}
+			closeOnOuterClick={hancleClose}
 			placement="top"
+			scroll={false}
 		>
-			<Modal.Header title="Reject Verification" />
+			<Modal.Header title={type === 'approved' ? 'Allocation Request' : 'Reject Verification'} />
 			<Modal.Body>
-				<div className={styles.verification}>
+				{type === 'approved' ? (
 					<div className={styles.title}>
-						Please select reason(s) to reject verification
+						Are you sure you want to Approve this request ?
 					</div>
-					<RadioGroup
-						options={REASON_OPTIONS}
-						onChange={(val) => setReason(({ type: val }))}
-						value={type}
-					/>
-					{type === 'Other' && (
-						<div className={styles.other_reason}>
-							<div className={styles.label}>Other reason: </div>
-							<Input
-								size="sm"
-								onChange={(val) => setReason((prev) => ({
-									...prev,
-									otherReason: val,
-								}))}
-								placeholder="Type here..."
-								value={otherReason}
-							/>
+				) : (
+					<div className={styles.verification}>
+						<div className={styles.title}>
+							Please provide rejection details
 						</div>
-					)}
-				</div>
+						<AsyncSelect
+							asyncKey="allocation_rejection_type"
+							multiple
+							placeholder="Select reasons"
+							isClearable
+							value={reason}
+							onChange={(val) => setRejectData((prev) => ({ ...prev, reason: val }))}
+							initialCall
+							renderLabel={(item) => <>{startCase(item?.reason)}</>}
+						/>
+					</div>
+				)}
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
 					className={styles.cancel_button}
 					themeType="secondary"
-					onClick={() => {
-						setReason({
-							type        : '',
-							otherReason : '',
-						});
-						setShowReject(false);
-					}}
-					disabled={loading}
+					onClick={hancleClose}
+					disabled={loadingUpdate}
 				>
-					Cancel
+					{type === 'approved' ? 'No' : 'Cancel'}
 				</Button>
-				<Button loading={loading} onClick={() => handleReject('rejected')}>Submit</Button>
+				<Button
+					loading={loadingUpdate}
+					onClick={handleAllocate}
+					disabled={type !== 'approved' ? isEmpty(reason) : undefined}
+				>
+					{type === 'approved' ? 'Yes, I do' : 'Submit'}
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);
