@@ -29,6 +29,8 @@
 }
 
 .tab_switch {
+	overflow: auto;
+
 	@media screen and (max-width: 768px) {
 		margin-bottom: 10px;
 	}

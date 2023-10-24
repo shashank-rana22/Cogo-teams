@@ -78,8 +78,8 @@
 	justify-content: center;
 	width: 60px;
 	height: 60px;
+	border: 2px solid #fff;
 	border-radius: 100px;
-	border : 2px solid #fff;
 }
 
 .circle1_bg {
