@@ -10,12 +10,12 @@ import styles from './styles.module.css';
 
 function ProductDetails({
 	product_images = {}, product_name = '', description = '',
-	dataArray = [], filtersVariation = {}, setFiltersVariation = () => {}, sizeValuePairs = [],
+	dataArray = [], filtersVariation = {}, setFiltersVariation = () => { }, sizeValuePairs = [],
 	discounted_price = '', applyCoupon = false, after_coupon_price = '',
 	price = '', discount_percentage = '', ADD_TO_CART = '', SYNCHRONIZE_CART = '',
-	handleBuyNow = () => {}, addedToCart = false, handleAddToCart = () => {}, selectedImage = '',
-	STAR_RATING = '', TICK_ICON = '', colorValuePairs = [], handleVariationColor = () => {}, COUPON_ICON = '',
-	handleApplyClick = () => {}, handleImageClick = () => {},
+	handleBuyNow = () => { }, addedToCart = false, handleAddToCart = () => { }, selectedImage = '',
+	STAR_RATING = '', TICK_ICON = '', colorValuePairs = [], handleVariationColor = () => { }, COUPON_ICON = '',
+	handleApplyClick = () => { }, handleImageClick = () => { },
 }) {
 	return (
 		<div className={styles.main_container}>
@@ -36,15 +36,14 @@ function ProductDetails({
 							))}
 					</div>
 					<div className={styles.product_display_image}>
-						{isEmpty(product_images) ||	(
+						{isEmpty(product_images) || (
 							<img
 								src={
-                            selectedImage
-                            || (product_images && product_images[GLOBAL_CONSTANTS.zeroth_index])
-                            }
+									selectedImage
+									|| (product_images && product_images[GLOBAL_CONSTANTS.zeroth_index])
+								}
+								className={styles.product_main_image}
 								alt="cogo-merchandise"
-								width="400px"
-								style={{ marginLeft: '30px', borderRadius: '10px' }}
 							/>
 
 						)}
