@@ -19,14 +19,31 @@
 	width: 50%;
 
 	:global {
-		.ui_select_container:first-child {
+		.ui_select_container {
 			width: 30%;
 			margin-right: 4px;
-		}
 
-		.ui_select_container:last-child {
-			width: 50%;
-			margin-left: 8px;
+			@media screen and (max-width: 768px) {
+				width: 100% !important;
+				margin-bottom: 4px;
+			}
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		display: block;
+		width: 100% !important;
+		margin-top: 1rem;
+	}
+}
+
+.sub_container {
+	display: flex;
+
+	:global {
+		.ui_select_container {
+			width: 100%;
+			margin-right: 4px;
 		}
 	}
 }
