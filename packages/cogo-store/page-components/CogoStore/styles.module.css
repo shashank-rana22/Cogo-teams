@@ -2,4 +2,9 @@
 
 .container {
 	background: #fff;
+
+	@media (max-width: 767px) {
+		padding: 12px;
+		margin-top: 54px;
+	}
 }
