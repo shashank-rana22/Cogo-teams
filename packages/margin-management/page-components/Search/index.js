@@ -3,12 +3,13 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 
 import SearchForm from './SearchForm';
 
-function Search({ activeTab = '', setFilterParams = () => {}, filterParams = {} }) {
+function Search({ activeTab = '', activeService = '', setFilterParams = () => {}, filterParams = {} }) {
 	return (
 		<Popover
 			content={(
 				<SearchForm
 					activeTab={activeTab}
+					activeService={activeService}
 					setFilterParams={setFilterParams}
 					filterParams={filterParams}
 				/>

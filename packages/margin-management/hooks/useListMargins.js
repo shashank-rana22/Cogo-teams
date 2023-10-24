@@ -5,8 +5,17 @@ import toastApiError from '../utils/toastApiError';
 
 const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
 	const [data, setData] = useState({});
+
 	const [filterParams, setFilterParams] = useState({ ...(defaultFilters || {}) });
+
+	const [marginBreakupData, setMarginBreakupData] = useState({});
+
+	const [activeTab, setActivetab] = useState('demand');
+
+	const [activeService, setActiveService] = useState('fcl_freight');
+
 	const { page = 1, ...restFilters } = (filterParams || {});
+
 	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/list_margins',
@@ -14,6 +23,7 @@ const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
 				filters: {
 					...(defaultFilters || {}),
 					...(restFilters || {}),
+					service: activeTab !== 'approval_pending' ? activeService : undefined,
 				},
 				...(defaultParams || {}),
 				page,
@@ -21,6 +31,7 @@ const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
 		},
 		{ manual: true },
 	);
+
 	const apiTrigger = useCallback(async () => {
 		try {
 			const res = await trigger();
@@ -33,7 +44,14 @@ const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
 
 	useEffect(() => {
 		apiTrigger();
-	}, [apiTrigger]);
+	}, [apiTrigger, filterParams]);
+
+	useEffect(() => {
+		setFilterParams((pv) => ({
+			...pv,
+			page: 1,
+		}));
+	}, [activeTab, setActiveService]);
 
 	return {
 		data,
@@ -42,6 +60,12 @@ const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
 		filterParams,
 		setFilterParams,
 		trigger,
+		marginBreakupData,
+		setMarginBreakupData,
+		activeTab,
+		setActivetab,
+		activeService,
+		setActiveService,
 	};
 };
 export default useListMargins;

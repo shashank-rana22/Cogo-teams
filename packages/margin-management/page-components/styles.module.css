@@ -1,10 +1,7 @@
 .heading {
-	margin-right: 20px;
-	margin-bottom: 20px;
-	font-size: 22px;
-	font-weight: 700;
-	line-height: 26px;
-	color: #333;
+	display: flex;
+	gap: 16px;
+	align-items: center;
 }
 
 .button {
@@ -14,13 +11,5 @@
 
 .flex {
 	display: flex;
-}
-
-.tab {
-	width: 75vw;
-}
-
-.search {
-	position: fixed;
-	right: 15px;
+	justify-content: space-between;
 }
