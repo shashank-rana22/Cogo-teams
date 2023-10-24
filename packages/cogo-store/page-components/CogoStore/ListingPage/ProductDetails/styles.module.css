@@ -264,14 +264,15 @@
 	}
 
 	.product_image {
-		flex-direction: column;
+		flex-direction: column-reverse;
 		margin-right: 0;
 	}
 
 	.product_select_image {
 		flex-direction: row;
 		gap: 12px;
-		justify-content: space-between;
+		justify-content: flex-start;
+		width: 100%;
 	}
 
 	.product_display_image {
