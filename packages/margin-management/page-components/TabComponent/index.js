@@ -1,7 +1,7 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Button, Modal } from '@cogoport/components';
 import { useGetPermission } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, useState } from 'react';
 
 import EmptyState from '../../common/EmptyStateMargins';
 import conditions from '../../utils/condition-constants';
@@ -12,6 +12,7 @@ import Details from './Details';
 import ListPagination from './ListPagination';
 import COMPONENT_MAPPING from './marginTypeComponentMapping';
 import SERVICE_TYPE_MAPPING from './service-name-mapping';
+import TransactionFunnelData from './TransactionFunnelData';
 
 function TabComponent({
 	marginBreakupData = {},
@@ -21,6 +22,8 @@ function TabComponent({
 	activeService = '', setActiveService = () => { },
 }) {
 	const { isConditionMatches } = useGetPermission();
+
+	const [showFunnelModal, setShowFunnelModal] = useState(false);
 
 	const checkConditions = useCallback(() => ({
 		demand: isConditionMatches(
@@ -69,22 +72,27 @@ function TabComponent({
 			</Tabs>
 
 			{activeTab !== 'approval_pending' ? (
-				<Tabs
-					themeType="tertiary"
-					activeTab={activeService}
-					onChange={setActiveService}
-				>
-					{Object.keys(SERVICE_TYPE_MAPPING).map(
-						(key) => (
-							<TabPanel
-								themeType="primary"
-								key={key}
-								name={key}
-								title={SERVICE_TYPE_MAPPING[key]}
-							/>
-						),
-					)}
-				</Tabs>
+				<div style={{ display: 'flex', gap: '4px' }}>
+					<Tabs
+						themeType="tertiary"
+						activeTab={activeService}
+						onChange={setActiveService}
+					>
+						{Object.keys(SERVICE_TYPE_MAPPING).map(
+							(key) => (
+								<TabPanel
+									themeType="primary"
+									key={key}
+									name={key}
+									title={SERVICE_TYPE_MAPPING[key]}
+								/>
+							),
+						)}
+					</Tabs>
+					<Button onClick={() => setShowFunnelModal(!showFunnelModal)}>
+						Show Transaction funnel
+					</Button>
+				</div>
 			) : null}
 
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -139,6 +147,23 @@ function TabComponent({
 					)}
 				</div>
 			)}
+
+			{showFunnelModal ? (
+				<Modal
+					className="primary xl"
+					show={showFunnelModal}
+					onClose={() => setShowFunnelModal(false)}
+					size="lg"
+				>
+					<Modal.Header title="Transaction data" />
+					<Modal.Body>
+						<TransactionFunnelData activeService={activeService} />
+					</Modal.Body>
+					<Modal.Footer>
+						Close
+					</Modal.Footer>
+				</Modal>
+			) : null}
 		</div>
 	);
 }
