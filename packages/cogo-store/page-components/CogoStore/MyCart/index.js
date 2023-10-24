@@ -29,7 +29,7 @@ function MyCart() {
 	const [couponApplied, setCouponApplied] = useState(coupon_applied === true);
 
 	const { updateCart } = useUpdateCart();
-	const { placeOrder, data:orderData } = usePlaceOrder(coupon_applied);
+	const { placeOrder, data: orderData } = usePlaceOrder(coupon_applied);
 
 	const { data, refetchCartDetails, loading } = useGetCartItems(coupon_applied);
 
@@ -61,15 +61,15 @@ function MyCart() {
 	};
 	console.log(couponApplied, 'appliedCoupon');
 	return (
-		<>
+		<div className={styles.cart_page}>
 			<Header />
 			<div className={styles.container}>
 
 				<div className={styles.cart_header}>
 					<img src={GLOBAL_CONSTANTS.image_url.cart} alt="" width="18px" height="18px" />
-					<span className={styles.header_text}>
+					<div className={styles.header_text}>
 						My Cart
-					</span>
+					</div>
 				</div>
 
 				<div className={styles.cart_body}>
@@ -77,14 +77,16 @@ function MyCart() {
 						<div className={styles.shopping_card_header}>
 							Shopping Card
 						</div>
-						{!isEmpty(list) || loading ? (
-							<Table
-								columns={columns}
-								data={list || []}
-								loading={loading}
-							/>
-						)
-							: <EmptyState />}
+						<div className={styles.table_container}>
+							{!isEmpty(list) || loading ? (
+								<Table
+									columns={columns}
+									data={list || []}
+									loading={loading}
+								/>
+							)
+								: <EmptyState />}
+						</div>
 						<div className={styles.table_footer}>
 							<Button
 								themeType="secondary"
@@ -162,29 +164,29 @@ function MyCart() {
 
 								</div>
 								{couponApplied
-								&& (
-									<Button
-										themeType="tertiary"
-										onClick={handleRemoveCoupon}
-									>
-										Remove
-									</Button>
-								)}
+									&& (
+										<Button
+											themeType="tertiary"
+											onClick={handleRemoveCoupon}
+										>
+											Remove
+										</Button>
+									)}
 							</div>
 							{!couponApplied
-							&& (
-								<Button
-									themeType="accent"
-									className={styles.apply_coupon}
-									onClick={() => {
-										setCookie('apply_coupon', true);
-										setCouponApplied(true);
-									}}
-								>
-									Apply Coupon
+								&& (
+									<Button
+										themeType="accent"
+										className={styles.apply_coupon}
+										onClick={() => {
+											setCookie('apply_coupon', true);
+											setCouponApplied(true);
+										}}
+									>
+										Apply Coupon
 
-								</Button>
-							)}
+									</Button>
+								)}
 						</div>
 
 					</div>
@@ -237,7 +239,7 @@ function MyCart() {
 					</Modal.Footer>
 				</Modal>
 			</div>
-		</>
+		</div>
 	);
 }
 

@@ -3,6 +3,7 @@
 .cart_header {
 	display: flex;
 	align-items: flex-start;
+	align-items: center;
 	padding: 0 30px;
 	margin-top: 16px;
 }
@@ -10,8 +11,7 @@
 .header_text {
 	display: flex;
 	align-self: flex-start;
-	margin-top: -9px;
-	margin-left: 6px;
+	margin-left: 8px;
 	font-size: 24px;
 	color: #221f20;
 }
@@ -235,4 +235,33 @@
 
 .cancel_btn {
 	margin-right: 8px;
+}
+
+@media (max-width: 767px) {
+	.cart_body {
+		flex-direction: column;
+		gap: 12px;
+		padding: 12px;
+
+		.shopping_card {
+			width: 100%;
+			margin-top: 12px;
+		}
+
+		.table_container {
+			overflow: scroll;
+		}
+	}
+
+	.cart_page {
+		margin-top: 54px;
+	}
+
+	.header_text {
+		font-size: 16px;
+	}
+
+	.right_cart {
+		width: 100%;
+	}
 }
