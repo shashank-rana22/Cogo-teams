@@ -4,8 +4,9 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import usePostJobOpenRemark from '../../../../apisModal/usePostJobOpenRemark';
+import ApproveModal from '../../../../common/ApproveModal';
+import RejectModal from '../../../../common/RejectModal';
 import SHIPMENT_MAPPING from '../../../../Constants/SHIPMENT_MAPPING';
-import STATUS_MAPPING from '../../../../Constants/status_mapping';
 import { getFormatAmount } from '../../../../utils/getformatamount';
 
 import StatRect from './StatRect';
@@ -29,7 +30,9 @@ function Details({
 	const { partner_id } = query || {};
 	const [remarks, setRemarks] = useState('');
 	const { id = '', status = '' } = row || {};
-	const { onSubmit = () => {}, loading = false } = usePostJobOpenRemark({
+	const [showRejectModal, setShowRejectModal] = useState(false);
+	const [showApproveModal, setShowApproveModal] = useState(false);
+	const { onSubmit:onAction = () => {}, loading = false } = usePostJobOpenRemark({
 		setDetailsModal,
 		id,
 		remarks,
@@ -38,7 +41,8 @@ function Details({
 	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
 	const {
-		currency = '',
+		buyCurrency = '',
+		sellCurrency = '',
 		jobNumber = '',
 		estimatedSell = 0,
 		totalSell = 0,
@@ -110,38 +114,38 @@ function Details({
 				<div>
 					<div className={styles.heading}>Estimated Sell</div>
 					<div className={styles.text}>
-						{getFormatAmount(estimatedSell, currency)}
+						{getFormatAmount(estimatedSell, sellCurrency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Sell</div>
 					<div className={styles.text}>
-						{getFormatAmount(totalSell, currency)}
+						{getFormatAmount(totalSell, 'INR')}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Estimated Buy</div>
 					<div className={styles.text}>
-						{getFormatAmount(estimatedBuy, currency)}
+						{getFormatAmount(estimatedBuy, buyCurrency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Buy</div>
 					<div className={styles.text}>
-						{getFormatAmount(totalBuy, currency)}
+						{getFormatAmount(totalBuy, 'INR')}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Profit Margin</div>
 					<div className={styles.text}>
-						{getFormatAmount(profitMargin, currency)}
+						{getFormatAmount(profitMargin, sellCurrency)}
 					</div>
 				</div>
 			</div>
-			{ status === 'REQUESTED' ? (
+			{status === 'REQUESTED' ? (
 				<div>
 					<div className={cl`${styles.label} 
-								${styles.required_field}`}
+                                ${styles.required_field}`}
 					>
 						Remarks
 					</div>
@@ -160,7 +164,7 @@ function Details({
 							themeType="secondary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => onSubmit(STATUS_MAPPING.rejected)}
+							onClick={() => setShowRejectModal(true)}
 						>
 							Reject
 						</Button>
@@ -170,14 +174,33 @@ function Details({
 							themeType="primary"
 							disabled={isEmpty(remarks) || loading}
 							loading={loading}
-							onClick={() => { onSubmit(STATUS_MAPPING.approved); }}
+							onClick={() => setShowApproveModal(true)}
 						>
 							Approve
 						</Button>
 					</div>
+					{showRejectModal
+						? (
+							<RejectModal
+								setShowRejectModal={setShowRejectModal}
+								onAction={onAction}
+								showRejectModal={showRejectModal}
+								loading={loading}
+							/>
+						) : null}
+					{showApproveModal
+						? (
+
+							<ApproveModal
+								setShowApproveModal={setShowApproveModal}
+								onAction={onAction}
+								showApproveModal={showApproveModal}
+								loading={loading}
+							/>
+						) : null}
 
 				</div>
-			) : null }
+			) : null}
 
 		</div>
 	);

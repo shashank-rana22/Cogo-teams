@@ -97,24 +97,37 @@ export const renderLineItemFunctions = {
 			</div>
 		);
 	},
-	entity: ({ control, index, errors, entity }) => (
-		<div
-			className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}
-		>
-			<AsyncSelectController
-				control={control}
-				name={`line_items.${index}.entityCode`}
-				finalValue={entity}
-				disabled
-				asyncKey="list_cogo_entity"
-				placeholder="Select Entity"
-				labelKey="entity_code"
-			/>
-			{errors?.line_items?.[index]?.entityCode ? (
-				<div className={styles.errors}>EntityCode is Required</div>
-			) : null}
-		</div>
-	),
+	entity: ({ control, index, errors, entity, watch, setValue, getGlCode }) => {
+		const { accMode = '' } = watch(`line_items.${index}`);
+
+		return (
+			<div
+				className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}
+			>
+				<AsyncSelectController
+					control={control}
+					name={`line_items.${index}.entityCode`}
+					finalValue={entity}
+					disabled={isEmpty(entity)}
+					asyncKey="list_cogo_entity"
+					placeholder="Select Entity"
+					onChange={(val) => {
+						handleModeChange({
+							index,
+							entityCode: val,
+							accMode,
+							setValue,
+							getGlCode,
+						});
+					}}
+					labelKey="entity_code"
+				/>
+				{errors?.line_items?.[index]?.entityCode ? (
+					<div className={styles.errors}>EntityCode is Required</div>
+				) : null}
+			</div>
+		);
+	},
 	controller: ({
 		control,
 		index,
@@ -123,40 +136,43 @@ export const renderLineItemFunctions = {
 		getGlCode,
 		watch,
 		errors,
-	}) => (
-		<div
-			className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}
-		>
-			<AsyncSelectController
-				control={control}
-				name={`line_items.${index}.accMode`}
-				placeholder="Select Mode"
-				initialCall
-				asyncKey="jv_account_mode"
-				rules={{
-					required: !isEmpty(
-						watch(`line_items.${index}.tradePartyId`),
-					),
-				}}
-				disabled={isEmpty(entity)}
-				isClearable
-				onChange={(val) => {
-					handleModeChange({
-						index,
-						entityCode : entity,
-						accMode    : val,
-						setValue,
-						getGlCode,
-					});
-				}}
-			/>
-			{errors?.line_items?.[index]?.accMode ? (
-				<div className={styles.errors}>* Required</div>
-			) : null}
-		</div>
-	),
+	}) => {
+		const { entityCode = '' } = watch(`line_items.${index}`);
+		return (
+			<div
+				className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}
+			>
+				<AsyncSelectController
+					control={control}
+					name={`line_items.${index}.accMode`}
+					placeholder="Select Mode"
+					initialCall
+					asyncKey="jv_account_mode"
+					rules={{
+						required: !isEmpty(
+							watch(`line_items.${index}.tradePartyId`),
+						),
+					}}
+					disabled={isEmpty(entity)}
+					isClearable
+					onChange={(val) => {
+						handleModeChange({
+							index,
+							entityCode : isEmpty(entityCode) ? entity : entityCode,
+							accMode    : val,
+							setValue,
+							getGlCode,
+						});
+					}}
+				/>
+				{errors?.line_items?.[index]?.accMode ? (
+					<div className={styles.errors}>* Required</div>
+				) : null}
+			</div>
+		);
+	},
 	gl_code: ({ control, index, errors, watch, entity }) => {
-		const accMode = watch(`line_items.${index}.accMode`);
+		const { accMode = '', entityCode = '' } = watch(`line_items.${index}`);
 		return (
 			<div
 				className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}
@@ -170,7 +186,7 @@ export const renderLineItemFunctions = {
 					disabled={isEmpty(entity)}
 					params={{
 						accMode    : accMode || undefined,
-						entityCode : entity || undefined,
+						entityCode : (isEmpty(entityCode) ? entity : entityCode) || undefined,
 					}}
 					rules={{ required: true }}
 				/>

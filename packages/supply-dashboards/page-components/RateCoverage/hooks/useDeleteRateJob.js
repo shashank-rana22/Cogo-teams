@@ -1,11 +1,19 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
 
 const API_NAME = {
 	fcl_freight : 'delete_fcl_freight_rate_job',
 	air_freight : 'delete_air_freight_rate_job',
+	fcl_customs : 'delete_fcl_customs_rate_job',
+	haulage     : 'delete_haulage_freight_rate_job',
+	lcl_freight : 'delete_lcl_freight_rate_job',
+	lcl_customs : 'delete_lcl_customs_rate_job',
+	air_customs : 'delete_air_customs_rate_job',
+	trailer     : 'delete_trailer_freight_rate_job',
+	ltl_freight : 'delete_ltl_freight_rate_job',
+	ftl_freight : 'delete_ftl_freight_rate_job',
+	fcl_cfs     : 'delete_fcl_cfs_rate_job',
 };
 
 const useDeleteRateJob = (service) => {
@@ -16,14 +24,12 @@ const useDeleteRateJob = (service) => {
 	}));
 	const { user: { id: user_id = '' } = {} } = user_data;
 
-	const [checkboxValue, setCheckboxValue] = useState('');
-
 	const [{ loading }, trigger] = useRequest({
 		url    : endPoint,
 		method : 'POST',
 	}, { manual: true });
 
-	const deleteRateJob = async ({ rate_id, data = {}, id }) => {
+	const deleteRateJob = async ({ rate_id, data = {}, id, checkboxValue }) => {
 		const weight_slabs = (data?.weight_slabs || []).map((item) => ({
 			lower_limit  : item?.lower_limit,
 			upper_limit  : item?.upper_limit,
@@ -43,12 +49,11 @@ const useDeleteRateJob = (service) => {
 			}
 		});
 
-		const params = (service === 'air_freight') ? {
+		const params = (service === 'air_freight' || service === 'air_customs') ? {
 			origin_airport_id      : data?.origin_airport_id,
 			destination_airport_id : data?.destination_airport_id,
 			commodity_type         : data?.commodity_type || 'all',
 			commodity_sub_type     : data?.commodity_sub_type || 'all',
-
 			weight_slabs,
 		} : {
 			origin_port_id      : data?.origin_location_id,
@@ -85,7 +90,7 @@ const useDeleteRateJob = (service) => {
 					data            : rate_id ? { ...formData } : undefined,
 				},
 			});
-			if (resp?.data) { return resp?.data?.id; }
+			if (resp) { return resp?.status; }
 		} catch (err) {
 			Toast.error('failed to cancel');
 		}
@@ -95,8 +100,6 @@ const useDeleteRateJob = (service) => {
 	return {
 		loading,
 		deleteRateJob,
-		checkboxValue,
-		setCheckboxValue,
 	};
 };
 
