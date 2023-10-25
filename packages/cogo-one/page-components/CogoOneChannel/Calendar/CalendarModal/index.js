@@ -9,7 +9,7 @@ import BgCalender from './BgCalender';
 import Events from './Events';
 import styles from './styles.module.css';
 
-function CalendarModal({ setEventCalendar = () => {}, eventClender = false }) {
+function CalendarModal({ setEventCalendar = () => {}, eventClender = false, firestore = {} }) {
 	const [addEvents, setAddEvents] = useState(true);
 	const [month, setMonth] = useState(new Date());
 	const [myEvents, setMyEvents] = useState({});
@@ -74,6 +74,7 @@ function CalendarModal({ setEventCalendar = () => {}, eventClender = false }) {
 								schedulesLoading={schedulesLoading}
 								setMonth={setMonth}
 								setMyEvents={setMyEvents}
+								firestore={firestore}
 							/>
 						</div>
 						<div className={styles.calendar}>

@@ -21,6 +21,7 @@ function Events({
 	schedulesLoading = false,
 	setMonth = () => {},
 	setMyEvents = () => {},
+	firestore = {},
 }) {
 	const [eventDetails, setEventDetails] = useState({
 		category   : 'event',
@@ -61,7 +62,7 @@ function Events({
 		false : CreateEvent,
 	};
 
-	const ActiveComponent = ACTIVE_COMPONENT[addEvents] || true;
+	const ActiveComponent = ACTIVE_COMPONENT[addEvents] || ACTIVE_COMPONENT.true;
 
 	const handleClose = () => {
 		setActionModal((prevEventDetails) => ({
@@ -118,6 +119,7 @@ function Events({
 					schedulesLoading={schedulesLoading}
 					setMonth={setMonth}
 					setMyEvents={setMyEvents}
+					firestore={firestore}
 				/>
 
 				<div className={styles.footer}>

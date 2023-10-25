@@ -256,7 +256,7 @@ function CogoOne() {
 						</>
 					)}
 			</div>
-			<Calender />
+			<Calender firestore={firestore} />
 			<ModalComp
 				raiseTicketModal={raiseTicketModal}
 				setRaiseTicketModal={setRaiseTicketModal}

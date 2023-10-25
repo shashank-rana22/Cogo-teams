@@ -1,3 +1,4 @@
+import { createDraftRoom } from '../hooks/useCreateOrGetDraftTeamRoom';
 import combineDateAndTime from '../utils/combineDateAndTime';
 
 import {
@@ -16,9 +17,12 @@ const RECURRENCE_RULE_MAPPING = {
 	custom   : getCustomRecurrence,
 };
 
-export const getPayload = ({
+export const getPayload = async ({
 	eventDetails = {}, values = {}, eventData = {}, updatedIds = {},
 	updateEventDetails = {},
+	hashFunction = () => {},
+	loggedInAgendId = '',
+	firestore = {},
 }) => {
 	const { category = '', event_type = '' } = eventDetails || {};
 	const {
@@ -70,6 +74,22 @@ export const getPayload = ({
 		formatedParticipants = { agent_ids: participants_users };
 	}
 
+	let draftRoomId = '';
+	if (category === 'meeting' && !id) {
+		const hash = await hashFunction({ groupMemberIds: [...participants_users, loggedInAgendId] });
+		const res = await createDraftRoom({
+			userIds                : [...participants_users, loggedInAgendId],
+			loggedInAgendId,
+			firestore,
+			length                 : 3,
+			groupName              : title || 'Draft Meeting',
+			category               : 'meeting',
+			groupMembersHashString : hash,
+			isGroup                : true,
+		});
+		draftRoomId = res?.id;
+	}
+
 	return {
 		calendar_id    : id || undefined,
 		validity_start : combineDateAndTime({
@@ -84,6 +104,7 @@ export const getPayload = ({
 			date : isMeetingOneTime ? endDate || new Date(validity_end) : end_date,
 			time : end_time,
 		}),
+		draft_room_id   : category === 'meeting' ? draftRoomId : undefined,
 		description     : remarks,
 		subject         : category === 'event' ? event_type : title,
 		frequency       : category === 'event' ? 'one_time' : occurence_event,

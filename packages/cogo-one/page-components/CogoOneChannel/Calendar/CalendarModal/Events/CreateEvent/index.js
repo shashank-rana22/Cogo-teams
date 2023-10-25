@@ -27,6 +27,7 @@ function CreateEvent({
 	setMonth = () => {},
 	setAddEvents = () => {},
 	setMyEvents = () => {},
+	firestore = {},
 }) {
 	const { userId = '' } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
 
@@ -96,6 +97,7 @@ function CreateEvent({
 		setAddEvents,
 		setMyEvents,
 		updateEventDetails,
+		firestore,
 	});
 	const { organization_id = '', start_date: startDateField } = formValues || {};
 

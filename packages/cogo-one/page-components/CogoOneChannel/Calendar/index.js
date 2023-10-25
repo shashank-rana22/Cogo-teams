@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import CalendarModal from './CalendarModal';
 import styles from './styles.module.css';
 
-function Calendar() {
+function Calendar({ firestore = {} }) {
 	const [eventClender, setEventCalendar] = useState(false);
 
 	return (
@@ -35,6 +35,7 @@ function Calendar() {
 					<CalendarModal
 						eventClender={eventClender}
 						setEventCalendar={setEventCalendar}
+						firestore={firestore}
 					/>
 				)
 				: null}
