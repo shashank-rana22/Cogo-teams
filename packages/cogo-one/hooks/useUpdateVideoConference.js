@@ -6,19 +6,19 @@ import { getCookie } from '@cogoport/utils';
 
 const getPayload = ({
 	groupId = '',
-	groupMemberIds = [], userName = '', isGroup = false, searchName = '', isVideoOn
+	groupMemberIds = [], userName = '', isGroup = false, searchName = '', isVideoOn,
 }) => ({
-	meeting_id: groupId,
-	user_ids: groupMemberIds,
-	additional_data: {
-		is_private: true,
-		created_by: userName,
-		team_name: isGroup ? searchName : userName,
-		is_group: isGroup,
+	meeting_id      : groupId,
+	user_ids        : groupMemberIds,
+	additional_data : {
+		is_private : true,
+		created_by : userName,
+		team_name  : isGroup ? searchName : userName,
+		is_group   : isGroup,
 	},
-	video_call_type: 'live_call',
-	video_call_action: 'create_meeting',
-	video_on: isVideoOn,
+	video_call_type   : 'live_call',
+	video_call_action : 'create_meeting',
+	video_on          : isVideoOn,
 });
 
 function useUpdateVideoConference() {
@@ -26,8 +26,8 @@ function useUpdateVideoConference() {
 
 	const [{ loading }, trigger] = useRequest(
 		{
-			url: 'update_video_conference',
-			method: 'post',
+			url    : 'update_video_conference',
+			method : 'post',
 		},
 		{ manual: true },
 	);

@@ -14,7 +14,7 @@ function VideoCalling({
 
 	const { id = '', group_members_ids = [] } = groupData || {};
 
-	const onClickFunc = ({ isVideoOn=false }) => {
+	const onClickFunc = ({ isVideoOn = false }) => {
 		updateVideoConference({
 			groupId        : id,
 			groupMemberIds : group_members_ids,
