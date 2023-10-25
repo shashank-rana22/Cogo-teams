@@ -120,12 +120,17 @@ function ServiceDetailsContent({
 							<div>
 								<div className={styles.pill_head}>
 									<div className={styles.pill}>
-										{pillMapping?.map((val) => (
-											<div key={val?.label}>
-												{ val?.label
-												&& <Pill color="blue">{val?.label}</Pill>}
-											</div>
-										))}
+										{pillMapping?.map((val) => {
+											if (!val?.label) {
+												return null;
+											}
+
+											return (
+												<div key={val?.label}>
+													<Pill color="blue">{val?.label}</Pill>
+												</div>
+											);
+										})}
 									</div>
 									{preferred_freight_rate
 									&& (
@@ -147,15 +152,16 @@ function ServiceDetailsContent({
 								</div>
 
 								<div className={styles.pill}>
-									{contentValuesMapping?.map((val) => (
-										<div key={val?.label}>
-											{val?.value && (
+									{contentValuesMapping?.map((val) => {
+										if (!val?.value) {
+											return null;
+										}
+
+										return (
+											<div key={val?.label}>
 												<div className={styles.content}>
 													<div className={styles.label}>
-														{val.label}
-														{' '}
-														:
-														{' '}
+														{`${val.label} : `}
 													</div>
 													<Pill
 														key={val?.value}
@@ -165,9 +171,9 @@ function ServiceDetailsContent({
 														{val?.value}
 													</Pill>
 												</div>
-											)}
-										</div>
-									))}
+											</div>
+										);
+									})}
 								</div>
 
 								{summary?.services?.length > DEFAULT_VALUE && (
