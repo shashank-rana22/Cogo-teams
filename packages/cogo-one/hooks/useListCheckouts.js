@@ -64,7 +64,7 @@ function useListCheckouts({ setReminderModal, agentId }) {
 			});
 			setReminderModal(true);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		} finally {
 			if (type === 'update') {
 				await setDoc(roomDoc, {

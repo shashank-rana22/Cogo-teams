@@ -301,3 +301,42 @@ export const FCL_CUSTOMS_CONTAINER_COMMODITY_MAPPING = {
 	open_side : [null],
 	iso_tank  : [null, ...HAZ_CLASSES],
 };
+
+export const AIR_EXPRESS_COMMODITIES = ['express'];
+
+export const AIR_STANDARD_COMMODITIES = [
+	'general',
+	'perishable',
+	'live_animals',
+	'pharma',
+];
+
+export const AIR_HAZARDOUS_COMMODITIES = ['hazardous'];
+
+export const AIR_LOCAL_COMMODITIES = ['general', 'special_consideration'];
+
+export const AIR_FREIGHT_COMMODITIES = [
+	...AIR_EXPRESS_COMMODITIES,
+	...AIR_STANDARD_COMMODITIES,
+	...AIR_HAZARDOUS_COMMODITIES,
+];
+
+export const AIR_CUSTOMS_COMMODITIES = [
+	'general',
+	'hazardous',
+	'temp_controlled',
+	'valuables',
+	'perishable',
+	'dangerous',
+	'others',
+];
+
+export const FTL_COMMODITIES = [
+	...HAZ_CLASSES,
+	'fmcg',
+	'fmcg_consumer_durables',
+	'consumer_durables',
+	'consumer_durables_equipments',
+	'consumer_durables_equipments_machinery',
+	'equipments_plant_machinery',
+];
