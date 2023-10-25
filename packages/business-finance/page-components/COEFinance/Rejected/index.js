@@ -25,7 +25,7 @@ const tabsKeyComponentMapping = {
 	coe_on_hold      : CommonListData,
 };
 
-function Rejected({ statsData }) {
+function Rejected({ statsData = {} }) {
 	const { push } = useRouter();
 	const [filters, setFilters] = useState({});
 
@@ -65,8 +65,8 @@ function Rejected({ statsData }) {
 
 	useEffect(() => {
 		push(
-			'/business-finance/coe-finance/[active_tab]/[view]',
-			`/business-finance/coe-finance/rejected/${subActiveTabReject}`,
+			'/business-finance/audit-function/[active_tab]/[view]',
+			`/business-finance/audit-function/rejected/${subActiveTabReject}`,
 		);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [subActiveTabReject]);
