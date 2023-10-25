@@ -14,6 +14,12 @@
 .header_right_flex {
 	display: flex;
 	align-items: center;
+	overflow: auto;
+}
+
+.header_right_flex::-webkit-scrollbar {
+	width: 0;
+	height: 0;
 }
 
 .header_title {
@@ -31,6 +37,10 @@
 	align-items: center;
 	justify-content: space-between;
 	margin-top: 20px;
+
+	@media (max-width: 768px) {
+		display: block;
+	}
 }
 
 .name_avatar {
@@ -62,9 +72,14 @@
 .header_data_right_flex {
 	display: flex;
 	align-items: center;
+	overflow: auto;
 
 	:global {
 		.ui_button_container {
+			min-width: 85px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 			background-color: transparent;
 			border: 1px solid #e0e0e0;
 			border-radius: 6px;
@@ -78,4 +93,13 @@
 	.mr_12:not(:last-child) {
 		margin-right: 12px;
 	}
+
+	@media (max-width: 768px) {
+		margin-top: 20px;
+	}
+}
+
+.header_data_right_flex::-webkit-scrollbar {
+	width: 0;
+	height: 0;
 }
