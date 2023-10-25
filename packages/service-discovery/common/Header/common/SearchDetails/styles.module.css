@@ -21,16 +21,20 @@
 	&:hover {
 		transform: scale(1.1);
 	}
+
+	@media (max-width: 768px) {
+		padding: 4px;
+	}
 }
 
 .icons_container {
 	display: flex;
 	align-items: center;
-	margin-left: 24px;
+	padding-left: 24px;
 
 	@media (max-width: 768px) {
-		margin-right: 16px;
-		margin-left: 12px;
+		padding-right: 5px;
+		padding-left: 8px;
 	}
 }
 

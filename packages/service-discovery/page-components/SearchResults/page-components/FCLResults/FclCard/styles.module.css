@@ -60,12 +60,13 @@
 }
 
 .freight_text {
+	width: max-content;
 	margin-bottom: 4px;
 	font-size: 10px;
 	color: #000;
 
 	&.total {
-		margin-right: 6px;
+		margin-right: 12px;
 		font-size: 12px;
 	}
 }

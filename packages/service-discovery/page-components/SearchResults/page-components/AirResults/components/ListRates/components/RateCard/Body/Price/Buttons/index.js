@@ -61,7 +61,7 @@ function Buttons({
 				themeType="accent"
 				className={styles.primary_button}
 			>
-				{isSelectedCard ? 'Remove' : `Select For ${formattedAmount}` }
+				{isSelectedCard ? 'Select Another' : `Select For ${formattedAmount}` }
 			</Button>
 
 			{showContract ? (

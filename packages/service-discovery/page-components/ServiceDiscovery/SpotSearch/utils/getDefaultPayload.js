@@ -1,9 +1,14 @@
+import { Toast } from '@cogoport/components';
+import { getCountryConstants } from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { addDays } from '@cogoport/utils';
 
 import getFormattedTouchPointDataPayload from './getFormattedTouchPointDataPayload';
 import getIncoterm from './getIncoterm';
 
 const PLUS_ONE_DAY = 1;
+
+const DOMESTIC_SERVICES = ['ftl_freight', 'ltl_freight'];
 
 const getPayload = ({ serviceType, origin = {}, destination = {}, ftlFormData = {} }) => {
 	const incoTerm = getIncoterm(origin, destination);
@@ -74,13 +79,14 @@ const getPayload = ({ serviceType, origin = {}, destination = {}, ftlFormData = 
 			ftl_freight_service_touch_points_attributes : ftl_touch_points,
 			load_selection_type                         : 'truck',
 			packages                                    : [],
-			truck_type                                  : 'open_body_pickup_1ton',
-			trucks_count                                : 1,
-			destination_location_id                     : destinationId,
-			origin_location_id                          : originId,
-			status                                      : 'active',
-			trade_type                                  : 'domestic',
-			trip_type                                   : typeOfJourney || 'one_way',
+			truck_type                                  : getCountryConstants({ country_id: origin?.country_id })
+				?.options?.open_truck?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
+			trucks_count            : 1,
+			destination_location_id : destinationId,
+			origin_location_id      : originId,
+			status                  : 'active',
+			trade_type              : 'domestic',
+			trip_type               : typeOfJourney || 'one_way',
 		},
 		ltl_freight: {
 			cargo_readiness_date    : addDays(new Date(), PLUS_ONE_DAY),
@@ -140,8 +146,22 @@ const getDefaultPayload = ({
 	destination = {},
 	ftlFormData = {},
 }) => {
-	const { is_icd:isOriginIcd = false, id: originId = '' } = origin;
-	const { is_icd:isDestinationIcd = false, id: destinationId = '' } = destination;
+	const {
+		is_icd:isOriginIcd = false,
+		id: originId = '',
+		country_id:originCountryId = '',
+	} = origin;
+
+	const {
+		is_icd:isDestinationIcd = false,
+		id: destinationId = '',
+		country_id:destinationCountryId = '',
+	} = destination;
+
+	if (DOMESTIC_SERVICES.includes(service_type) && originCountryId !== destinationCountryId) {
+		Toast.error('Origin and Destination contries should be same');
+		return {};
+	}
 
 	const payloadObject = {
 		...getPayload({ serviceType: service_type, origin, destination, ftlFormData }),

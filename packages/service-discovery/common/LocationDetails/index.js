@@ -1,5 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 
 import getLocationInfo from '../../page-components/SearchResults/utils/locations-search';
 
@@ -10,6 +11,59 @@ const SHOW_PINCODES = ['ftl_freight'];
 
 const LAST_INDEX = -1;
 const THIRD_TO_LAST_INDEX = -3;
+
+function TouchPoints({ touchPoints = [] }) {
+	function Content() {
+		return (touchPoints || []).map((touchPoint, idx) => (
+			<div className={styles.touchpoint_container} key={touchPoint.id}>
+				<div className={styles.circle} />
+
+				{idx < touchPoints.length - GLOBAL_CONSTANTS.one && <div className={styles.line} />}
+
+				<div className={styles.label}>
+					{' '}
+					Touch Point
+					{' '}
+					{idx + GLOBAL_CONSTANTS.one}
+				</div>
+
+				<div className={styles.name}>
+					{touchPoint.display_name?.split(',', GLOBAL_CONSTANTS.one)}
+				</div>
+			</div>
+		));
+	}
+
+	return (
+		<div className={styles.touch_points}>
+			<div className={styles.first_touch_point}>
+				{touchPoints[GLOBAL_CONSTANTS.zeroth_index].display_name?.split(',', GLOBAL_CONSTANTS.one)}
+			</div>
+
+			{touchPoints.length > 1 ? (
+				<div style={{ width: 'max-content', marginLeft: 10 }}>
+					<Tooltip
+						placement="bottom"
+						interactive
+						content={(
+							<div style={{ fontSize: '10px', width: '150px' }}>
+								<Content touchPoints={touchPoints} />
+							</div>
+						)}
+					>
+						<span className={styles.more_text}>
+							+
+							{' '}
+							{touchPoints.length - 1}
+							{' '}
+							more
+						</span>
+					</Tooltip>
+				</div>
+			) : null}
+		</div>
+	);
+}
 
 function LocationItem({ location = {}, service_type = '' }) {
 	const { name = '', port_code, country_code, postal_code } = location || {};
@@ -57,7 +111,7 @@ function LocationDetails({
 	data = {},
 	activePage = 'search_results',
 	loading = false,
-	showSmall = false,
+	touch_points = {},
 }) {
 	let finalData = data;
 
@@ -75,21 +129,29 @@ function LocationDetails({
 
 	const { origin, destination } = getLocationInfo(finalData, {}, service_key);
 
+	const { primary_service:{ enroute = {} } = {} } = touch_points || {};
+
 	if (loading) {
 		return <LoadingState />;
 	}
 
 	return (
-		<div className={styles.container} style={{ scale: showSmall ? '0.7' : '1' }}>
+		<div className={styles.container}>
 			<LocationItem location={origin} service_type={service_type} />
 
 			{destination ? (
 				<div className={styles.container}>
-					<img
-						src={GLOBAL_CONSTANTS.image_url.wider_arrow}
-						alt="arrow"
-						className={styles.icon}
-					/>
+					<div className={styles.arrow_container}>
+						<img
+							src={GLOBAL_CONSTANTS.image_url.wider_arrow}
+							alt="arrow"
+							className={styles.icon}
+						/>
+
+						{isEmpty(touch_points) ? null : (
+							<TouchPoints touchPoints={enroute} />
+						)}
+					</div>
 
 					<LocationItem location={destination} service_type={service_type} />
 				</div>

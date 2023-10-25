@@ -1,5 +1,6 @@
 import { Button, Tooltip, cl } from '@cogoport/components';
-import { IcMInfo, IcMPlus } from '@cogoport/icons-react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, {
 	useState,
@@ -25,10 +26,7 @@ function Content({ touchPoints = [] }) {
 			</div>
 
 			<div className={styles.name}>
-				{touchPoint.name?.split(' ', ONE_VALUE)}
-				,
-				{' '}
-				{touchPoint.display_name?.split('-', ONE_VALUE)}
+				{touchPoint.display_name?.split(',', ONE_VALUE)}
 			</div>
 		</div>
 	));
@@ -57,30 +55,47 @@ function TouchPoint(
 	const disabled = typeOfJourney === 'round';
 
 	return (
-		<div role="presentation" className={styles.container}>
-			<IcMPlus onClick={onClick} className={cl`${styles.add_icon} ${disabled && styles.disabled}`} />
+		<div className={styles.container}>
+			<div className={styles.flex} role="presentation" onClick={onClick}>
+				<IcMPlus className={cl`${styles.add_icon} ${disabled && styles.disabled}`} />
 
-			<Button
-				themeType="linkUi"
-				className={styles.add_button}
-				onClick={onClick}
-				disabled={disabled}
-			>
-				Add Touchpoints
-			</Button>
+				<Button
+					themeType="linkUi"
+					className={styles.add_button}
+					disabled={disabled}
+				>
+					Add Touchpoints
+				</Button>
+			</div>
 
 			{!isEmpty(touchPoints) ? (
-				<Tooltip
-					placement="bottom"
-					interactive
-					content={(
-						<div style={{ fontSize: '10px', width: '150px' }}>
-							<Content touchPoints={touchPoints} />
+				<div className={styles.touch_points}>
+					<div className={styles.first_touch_point}>
+						{touchPoints[GLOBAL_CONSTANTS.zeroth_index].display_name?.split(',', ONE_VALUE)}
+					</div>
+
+					{touchPoints.length > 1 ? (
+						<div style={{ width: 'max-content', marginLeft: 10 }}>
+							<Tooltip
+								placement="bottom"
+								interactive
+								content={(
+									<div style={{ fontSize: '10px', width: '150px' }}>
+										<Content touchPoints={touchPoints} />
+									</div>
+								)}
+							>
+								<span className={styles.more_text}>
+									+
+									{' '}
+									{touchPoints.length - 1}
+									{' '}
+									more
+								</span>
+							</Tooltip>
 						</div>
-					)}
-				>
-					<IcMInfo className={styles.info_icon} />
-				</Tooltip>
+					) : null}
+				</div>
 			) : null}
 
 			{show ? (

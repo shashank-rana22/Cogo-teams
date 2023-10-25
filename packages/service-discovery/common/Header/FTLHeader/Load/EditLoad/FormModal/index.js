@@ -20,6 +20,7 @@ function FormModal({
 	cargoType = 'cargo_per_package',
 	commodity_type = '',
 	loadType = '',
+	data = {},
 }) {
 	const radioOptions = useMemo(() => [
 		{ name: 'cargo_per_package', value: 'cargo_per_package', label: 'Per Package' },
@@ -62,6 +63,7 @@ function FormModal({
 					errors={errors}
 					watch={watch}
 					setValue={setValue}
+					data={data}
 				/>
 
 				<CommodityControl

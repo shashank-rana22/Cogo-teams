@@ -1,5 +1,6 @@
 .container {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 
 	@media (max-width: 768px) {
@@ -8,11 +9,15 @@
 	}
 }
 
-.info_icon {
-	width: 16px;
-	height: 16px;
-	margin-top: 4px;
-	cursor: pointer;
+.flex {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_button_container {
+			padding: 0;
+		}
+	}
 }
 
 .add_button {
@@ -22,7 +27,7 @@
 .add_icon {
 	width: 20px;
 	height: 20px;
-	margin-right: -4px;
+	margin-right: 8px;
 	cursor: pointer;
 	border: 1px solid #000;
 	border-radius: 50%;
@@ -67,4 +72,28 @@
 
 .name {
 	font-size: 12px;
+}
+
+.touch_points {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.first_touch_point {
+	width: fit-content;
+	max-width: 100px;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-3);
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.more_text {
+	min-width: max-content;
+	font-size: 12px;
+	font-weight: 600;
 }

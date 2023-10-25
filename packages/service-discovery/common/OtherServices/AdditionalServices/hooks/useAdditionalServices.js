@@ -159,17 +159,17 @@ const useAdditionalServices = ({ rateCardData = {}, detail = {}, source = '' }) 
 		(service_item) => service_item?.inco_terms?.includes(inco_term) || service_item.isSelected,
 	);
 
-	const SHIPPER_SIDE_SERVICES = [];
-	const CONSIGNEE_SIDE_SERVICES = [];
+	const ORIGIN_SERVICES = [];
+	const DESTINATION_SERVICES = [];
 	const MAIN_SERVICES = [];
 	const OTHER_SERVICES = [];
 	const SUBSIDIARY_SERVICES = getAddedServices(finalServiceDetails);
 
 	(source === 'checkout' ? filteredAllServices : ALL_SERVICES).forEach((item) => {
 		if (item.name.includes('import')) {
-			CONSIGNEE_SIDE_SERVICES.push(item);
+			DESTINATION_SERVICES.push(item);
 		} else if (item.name.includes('export')) {
-			SHIPPER_SIDE_SERVICES.push(item);
+			ORIGIN_SERVICES.push(item);
 		} else if (OTHER_SERVICES_ARRAY.includes(item.name)) {
 			OTHER_SERVICES.push(item);
 		} else MAIN_SERVICES.push(item);
@@ -181,9 +181,9 @@ const useAdditionalServices = ({ rateCardData = {}, detail = {}, source = '' }) 
 
 	const SERVICES_LIST_MAPPING = {
 		shipper_side_services: {
-			key  : 'shipper_side_services',
-			type : 'seller',
-			list : SHIPPER_SIDE_SERVICES,
+			key  : 'origin_services',
+			type : 'origin',
+			list : ORIGIN_SERVICES,
 		},
 		main_service: {
 			key  : 'main_service',
@@ -191,9 +191,9 @@ const useAdditionalServices = ({ rateCardData = {}, detail = {}, source = '' }) 
 			list : MAIN_SERVICES,
 		},
 		buyer_side_services: {
-			key  : 'buyer_side_services',
-			type : 'buyer',
-			list : CONSIGNEE_SIDE_SERVICES,
+			key  : 'destination_services',
+			type : 'destination',
+			list : DESTINATION_SERVICES,
 		},
 		other_services: {
 			key  : 'other_services',

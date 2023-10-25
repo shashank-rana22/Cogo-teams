@@ -43,7 +43,7 @@ const getTrucksControls = ({ setValue = () => {} }) => {
 					type        : 'select',
 					span        : 8,
 					placeholder : 'Select truck',
-					rules       : { required: true },
+					rules       : { required: 'Truck Type is required' },
 
 				},
 				{

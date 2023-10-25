@@ -63,7 +63,7 @@ function QuotationDetails({
 				themeType="accent"
 				className={styles.primary_button}
 			>
-				{!isSelectedCard ? `Select For ${formattedAmount}` : 'Remove'}
+				{!isSelectedCard ? `Select For ${formattedAmount}` : 'Select Another'}
 			</Button>
 
 			{showContract ? (

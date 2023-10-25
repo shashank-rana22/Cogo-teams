@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 import getDefaultPayload from '../utils/getDefaultPayload';
 import getEditPayload from '../utils/getEditPayload';
@@ -47,6 +48,10 @@ const useCreateSearch = ({ setRouterLoading = () => {}, setHeaderProps = () => {
 				});
 
 				payload = { ...editPayload };
+			}
+
+			if (isEmpty(payload)) {
+				return false;
 			}
 
 			payload = {

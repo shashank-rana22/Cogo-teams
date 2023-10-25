@@ -49,6 +49,7 @@ function SearchDetails({
 				data={data}
 				loading={loading}
 				activePage={activePage}
+				touch_points={touch_points}
 			/>
 
 			<div className={styles.icons_container}>

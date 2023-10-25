@@ -1,7 +1,7 @@
 import { Table, Pill, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import getDetails from './getDetails';
 import LineItem from './LineItem';
@@ -94,15 +94,14 @@ const handleServicesNames = (item) => {
 function IndividualPriceBreakup({ service = {}, restServiceDetail = {} }) {
 	const {
 		line_items = [],
+		is_rate_available:isRateAvailabe,
 	} = service;
 
 	const containerDetail = getDetails({ service: service?.service_type, item: restServiceDetail });
 
-	const ifRateAvailabe = !isEmpty(line_items);
-
 	let text = 'No Rates';
 
-	if (!ifRateAvailabe) {
+	if (!isRateAvailabe) {
 		if (['fcl_freight_local', 'air_freight_local'].includes(service.service_type)) {
 			if (service.source !== 'cogo_assured_rate') {
 				text = 'At Actuals';
@@ -128,7 +127,7 @@ function IndividualPriceBreakup({ service = {}, restServiceDetail = {} }) {
 							</Pill>
 					))}
 
-					{!ifRateAvailabe ? (
+					{!isRateAvailabe ? (
 						<Tooltip
 							placement="top"
 							trigger="mouseenter"
@@ -140,14 +139,14 @@ function IndividualPriceBreakup({ service = {}, restServiceDetail = {} }) {
 					) : null}
 				</div>
 
-				{!ifRateAvailabe ? (
+				{!isRateAvailabe ? (
 					<span className={styles.service}>
 						{text}
 					</span>
 				) : null}
 			</div>
 
-			{ifRateAvailabe ? (
+			{isRateAvailabe ? (
 				<div className={styles.table}>
 					<Table
 						className={styles.table_container}

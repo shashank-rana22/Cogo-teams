@@ -115,7 +115,7 @@ export const getGrossControls = () => {
 			name    : 'handling_type',
 			label   : 'Handling',
 			type    : 'chips',
-			span    : 10,
+			span    : 7,
 			value   : 'stackable',
 			options : [
 				{
@@ -133,9 +133,9 @@ export const getGrossControls = () => {
 			name         : 'packing_list',
 			type         : 'upload',
 			label        : 'Packing List',
+			span         : 5,
 			showOptional : true,
 			accept       : 'image/*,.pdf,.csv,.xlsx,.doc,.docx',
-			uploaderType : 'card',
 		},
 	];
 

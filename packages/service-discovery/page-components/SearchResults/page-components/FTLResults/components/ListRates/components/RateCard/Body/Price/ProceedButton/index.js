@@ -39,7 +39,7 @@ function ProceedButton({
 			themeType="accent"
 			className={styles.button}
 		>
-			{isSelectedCard ? 'Remove' : `Select For ${formattedAmount}` }
+			{isSelectedCard ? 'Select Another' : `Select For ${formattedAmount}` }
 		</Button>
 	);
 }

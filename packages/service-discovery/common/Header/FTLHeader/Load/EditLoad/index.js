@@ -196,6 +196,7 @@ function EditLoad({
 					setCargoType={setCargoType}
 					commodity_type={data?.commodity_type}
 					loadType={loadType}
+					data={{ origin_country_id: data?.origin_country_id }}
 				/>
 			</Modal.Body>
 

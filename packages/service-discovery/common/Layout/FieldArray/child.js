@@ -1,5 +1,5 @@
 import { Button, cl } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
+import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { IcMDelete } from '@cogoport/icons-react';
 
@@ -15,12 +15,12 @@ const FLEX_OFFSET = 1;
 const FIRST_INDEX = 1;
 const MIN_ELEMENTS_TO_SHOW_DELETE = 2;
 
-const getTruckOptions = (truck) => {
-	const geo = getGeoConstants();
+const getTruckOptions = (truck, country_id) => {
+	const countryData = getCountryConstants({ country_id });
 
 	const MAPPING = {
-		open_body   : geo?.options?.open_truck || [],
-		closed_body : geo?.options?.closed_truck || [],
+		open_body   : countryData?.options?.open_truck || [],
+		closed_body : countryData?.options?.closed_truck || [],
 	};
 
 	return MAPPING[truck] || [];
@@ -40,6 +40,7 @@ function Child({
 	setValue = () => {},
 	isSubControl = false,
 	fieldArrayValues = {},
+	data = {},
 }) {
 	return (
 		<div className={styles.form_container}>
@@ -98,7 +99,7 @@ function Child({
 					if (name === 'trucks' && controlName === 'truck_type') {
 						const truck = fieldArrayValues?.[index]?.truck;
 
-						const finalOptions = getTruckOptions(truck);
+						const finalOptions = getTruckOptions(truck, data?.origin_country_id);
 
 						newControl = { ...newControl, options: finalOptions };
 					}

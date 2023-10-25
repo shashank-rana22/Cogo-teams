@@ -69,7 +69,7 @@ const airControls = ({
 				setCommoditySubTypeOptions(COMMODITY_SUBTYPE_MAPPING[val] || []);
 				setValue('commodity_subtype', COMMODITY_SUBTYPE_DEFAULT_MAPPING[val] || '');
 			},
-			span  : 12,
+			span  : 6,
 			rules : { required: 'Commodity is required' },
 		},
 		{
@@ -78,7 +78,7 @@ const airControls = ({
 			type    : 'select',
 			value   : COMMODITY_SUBTYPE_DEFAULT_VALUE,
 			options : !isEmpty(commoditySubtypeOptions) ? commoditySubtypeOptions : COMMODITY_SUBTYPE_DEFAULT_OPTIONS,
-			span    : 12,
+			span    : 6,
 			rules   : { required: 'This is required' },
 		},
 	];

@@ -16,7 +16,7 @@ function List({
 	list = [],
 	detail = {},
 	rateCardData = {},
-	type = 'seller',
+	type = 'origin',
 	setHeaderProps = () => {},
 	refetch = () => {},
 	SERVICES_CANNOT_BE_REMOVED = [],

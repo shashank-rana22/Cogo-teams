@@ -76,7 +76,7 @@ function DetentionDemurrage({
 			)}
 		>
 			<Button
-				size={isMobile ? 'sm' : 'lg'}
+				size={isMobile ? 'sm' : 'md'}
 				themeType="link"
 				className={styles.button}
 				onClick={() => setShow(!show)}
