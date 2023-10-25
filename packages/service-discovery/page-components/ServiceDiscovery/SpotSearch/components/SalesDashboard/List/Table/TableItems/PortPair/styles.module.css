@@ -8,13 +8,17 @@
 }
 
 .location_name {
-	max-width: 120px;
+	max-width: 240px;
 	overflow: hidden;
 	font-size: 14px;
 	font-weight: 500;
 	text-decoration: underline;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	@media (max-width: 1220px) {
+		max-width: 200px;
+	}
 }
 
 .tooltip_content {

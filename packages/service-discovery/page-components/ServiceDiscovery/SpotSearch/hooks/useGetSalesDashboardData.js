@@ -103,9 +103,6 @@ const useGetSalesDashboardData = ({
 	};
 
 	useEffect(() => {
-		if (loading) {
-			return;
-		}
 		getList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [authParams,
