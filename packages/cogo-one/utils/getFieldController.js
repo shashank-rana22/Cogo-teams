@@ -13,6 +13,7 @@ import {
 	MobileNumberController,
 	ChipsController,
 	MultiselectController,
+	SingleDateRangeController,
 } from '@cogoport/forms';
 
 import FieldArrayController from './FieldArray';
@@ -33,6 +34,7 @@ const CONTROLLER_MAPPING = {
 	'multi-select'     : MultiselectController,
 	mobile_number      : MobileNumberController,
 	chips              : ChipsController,
+	singleDateRange    : SingleDateRangeController,
 };
 
 export const getFieldController = (type = 'text') => CONTROLLER_MAPPING[type] || null;
