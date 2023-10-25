@@ -28,7 +28,7 @@ function ListVendors() {
 		loading,
 		data = {},
 		params = {},
-		setParams = () => { },
+		setParams = () => {},
 		columns,
 		showFilter,
 		setShowFilter,
@@ -39,7 +39,7 @@ function ListVendors() {
 
 	const {
 		data: dataStats,
-	} = useVendorStats();
+	} = useVendorStats({ activeEntity });
 
 	const { total_count, page_limit: pageLimit } = data || {};
 
