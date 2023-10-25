@@ -1,13 +1,18 @@
 /* eslint-disable max-lines-per-function */
-import { Button, TabPanel, Tabs, Tooltip, Popover, RadioGroup, Pill } from '@cogoport/components';
+import {
+	Button, cl, TabPanel, Tabs, Tooltip, Popover, RadioGroup, Pill,
+} from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMDownload, IcMOverflowLine } from '@cogoport/icons-react';
+import { IcMActivePlans, IcMDownload, IcMOverflowLine } from '@cogoport/icons-react';
+import useGetPermission from '@cogoport/request/hooks/useGetPermission';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { getTaxLabels } from '../../../../constants/index';
+import useOpenInvoicesReport from '../../../../hooks/useOpenInvoicesReport';
 import useUpdateAccountTagging from '../../../../hooks/useUpdateAccountTagging';
+import checkPermission from '../../../../Utils/checkPermission';
 
 import DownloadLedgerModal from './DownloadLedgerModal';
 import StatsOutstanding from './StatsOutstanding/index';
@@ -65,6 +70,7 @@ function ChangeStatus({ item = {}, refetch = () => {} }) {
 	);
 }
 
+// eslint-disable-next-line max-lines-per-function
 function OutstandingList({
 	item = {},
 	refetch = () => {},
@@ -73,10 +79,15 @@ function OutstandingList({
 	organizationId = '',
 	setSelectedOrgId = () => {},
 }) {
+	const { isConditionMatches = () => {} } = useGetPermission();
+	const isAllowedToDownload = isConditionMatches(checkPermission.CAN_DOWNLOAD_OUTSTANDING_REPORT);
+
 	const [activeTab, setActiveTab] = useState('invoice_details');
 	const [showLedgerModal, setShowLedgerModal] = useState(false);
 
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
+
+	const { isDownloading = false, downloadAROustanding = () => {} } = useOpenInvoicesReport({ organizationId });
 
 	const handleActiveTabs = (val) => {
 		if (val === activeTab) {
@@ -260,6 +271,17 @@ function OutstandingList({
 					<div className={styles.ledger_style}>
 						{isEmpty(item) ? null : (
 							<UserDetails item={item} />
+						)}
+						{isAllowedToDownload && (
+							<Tooltip content="AR Outstanding Download" placement="top">
+								<div className={styles.download_icon_div}>
+									<IcMActivePlans
+										fill="black"
+										onClick={downloadAROustanding}
+										className={cl`${isDownloading ? styles.is_loading : ''}`}
+									/>
+								</div>
+							</Tooltip>
 						)}
 						<Tooltip content="Ledger Download" placement="top">
 							<div className={styles.download_icon_div}>
