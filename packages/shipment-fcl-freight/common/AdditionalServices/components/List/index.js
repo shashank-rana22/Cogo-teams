@@ -41,13 +41,8 @@ function List({ isSeller = false, source = '' }) {
 		(item) => item?.id === entity_id,
 	)?.[GLOBAL_CONSTANTS.zeroth_index]?.code === '301';
 
-	let isAdditionalServiceAllowed = true;
-
-	if (primary_service?.trade_type === 'import'
-		&& isEntityIndia
-		&& !ALLOWED_STAKEHOLDERS.includes(activeStakeholder)) {
-		isAdditionalServiceAllowed = false;
-	}
+	const isAdditionalServiceAllowed = !(primary_service?.trade_type === 'import'
+	&& isEntityIndia && !ALLOWED_STAKEHOLDERS.includes(activeStakeholder));
 
 	const canEditCancelService = !!stakeholderConfig?.overview?.can_edit_cancel_service;
 
