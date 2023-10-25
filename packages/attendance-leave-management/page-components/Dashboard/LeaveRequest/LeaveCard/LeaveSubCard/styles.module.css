@@ -97,12 +97,24 @@
 .deny {
 	border: 1px solid #bf291e;
 	border-radius: 6px;
+
+	:global {
+		.ui_button_container {
+			@media (max-width: 768px) {
+				padding: 7px 0;
+			}
+		}
+	}
 }
 
 .reject {
 	display: flex;
 	align-items: center;
 	padding: 7px 12px;
+
+	@media (max-width: 320px) {
+		padding: 7px 0;
+	}
 }
 
 .reject > :not(:last-child) {
@@ -120,12 +132,24 @@
 .approve {
 	border: 1px solid #849e4c;
 	border-radius: 6px;
+
+	:global {
+		.ui_button_container {
+			@media (max-width: 768px) {
+				padding: 7px 0;
+			}
+		}
+	}
 }
 
 .accept {
 	display: flex;
 	align-items: center;
 	padding: 7px 12px;
+
+	@media (max-width: 320px) {
+		padding: 7px 0;
+	}
 }
 
 .accept > :not(:last-child) {

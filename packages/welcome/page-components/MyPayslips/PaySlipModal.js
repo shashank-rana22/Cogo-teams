@@ -17,7 +17,13 @@ function PaySlipModal({ showModal, documentType, setShowModal, modalUrl }) {
 
 	console.log('formate', formattedData);
 	return (
-		<Modal size="lg" show={showModal} onClose={() => setShowModal(false)} placement="top">
+		<Modal
+			size="lg"
+			show={showModal}
+			onClose={() => setShowModal(false)}
+			placement="top"
+			className={styles.payslip_modal}
+		>
 			<Modal.Header title={documentType} />
 			<Modal.Body>
 				<div className={styles.pdf_container}>
