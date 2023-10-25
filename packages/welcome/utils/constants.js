@@ -1,6 +1,7 @@
 import {
 	IcMCalendar,
 	// IcMTimer, IcMUpwardGraph,
+	IcMCart,
 	IcMAppInvoiceSubmission,
 	IcMProfile,
 	IcMAppPayment,
@@ -12,6 +13,12 @@ export const HEADER_NAV = [
 		icon  : IcMCalendar,
 		route : '/attendance-leave-management',
 	},
+	{
+		label : 'Cogomerch',
+		icon  : IcMCart,
+		route : '/cogo-store',
+	},
+
 	// {
 	// 	label : 'Time Off',
 	// 	icon  : IcMTimer,

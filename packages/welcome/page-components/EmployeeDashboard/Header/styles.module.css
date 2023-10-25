@@ -1,8 +1,13 @@
 .container {
-	padding: 24px 24px 56px;
+	padding: 40px 24px 75px;
 	color: #fff;
 	background: #21212c;
 	border-radius: 4px;
+}
+
+.data_container {
+	position: relative;
+	z-index: 2;
 }
 
 .header_flex {
@@ -78,4 +83,33 @@
 	.mr_12:not(:last-child) {
 		margin-right: 12px;
 	}
+}
+
+.rectangle1 {
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translate(-85%, -50%);
+}
+
+.rectangle2 {
+	position: absolute;
+	top: 2%;
+	left: 50%;
+	transform: translate(30%, -50%);
+}
+
+.rectangle3 {
+	position: absolute;
+	top: 32%;
+	left: 50%;
+	transform: translate(45%, -50%);
+}
+
+.rectangle4 {
+	position: absolute;
+	top: 15%;
+	left: 50%;
+	width: 150px;
+	transform: translate(225%, -50%);
 }

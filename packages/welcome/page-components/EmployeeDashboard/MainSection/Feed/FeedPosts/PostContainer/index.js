@@ -148,12 +148,12 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 		if (item?.feed_type === 'appreciation') {
 			// Use regular expression to match the initials
 			const regex = /\[([^\]]+)\]/g;
-			const matches = item.feed_content.match(regex);
+			const matches = item?.feed_content?.match(regex);
 
 			// Extract and format the initials to uppercase
-			const initials = matches.map((match) => {
-				const name = match.substring(1, match.indexOf(']'));
-				return name.split(' ').map((word) => word[0].toUpperCase()).join('');
+			const initials = matches?.map((match) => {
+				const name = match?.substring(1, match.indexOf(']'));
+				return name?.split(' ')?.map((word) => word[0].toUpperCase()).join('');
 			});
 
 			const resultArray = initials.map((string) => (string.length > 2 ? string[0] + string.slice(-1) : string));
@@ -253,7 +253,7 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 
 					</div>
 				</div>
-				{item.feed_type === 'appreciation' && (
+				{item.feed_type !== 'normal' && (
 					<div className={styles.main_post_data}>
 						<div className={styles.feed_type}>
 							<div className={cl`${styles.circle} ${styles.circle1_bg}`}>

@@ -485,6 +485,7 @@ const GLOBAL_CONSTANTS = {
 		new_conversation        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/new-message.png',
 		teams                   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/teams.png',
 		groups                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/group.png',
+		rectangle               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rectangle.png',
 		performance_leaderboard_confetti:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti_svg.svg',
 		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',

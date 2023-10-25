@@ -1,14 +1,34 @@
+import { Modal, Table } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMAirport } from '@cogoport/icons-react';
-import React from 'react';
+import { IcMAirport, IcMArrowRight } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
 import Loader from '../../../../../common/Loader';
+import useGetHolidayList from '../../../../../hooks/useGetHolidayList';
 
 import styles from './styles.module.css';
 
+const columns = [
+	{
+		Header   : 'DATE',
+		accessor : (item) => formatDate({
+			date       : item.holiday_date,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['eee, dd MMM, yyyy'],
+			formatType : 'date',
+		}),
+	},
+	{ Header: 'NAME', accessor: 'holiday_occasion' },
+	{ Header: 'TYPE', accessor: () => 'Mandatory' },
+];
+
 function Holiday({ data = {}, loading = false }) {
 	const { holiday_date, holiday_occassion } = data || {};
+	const [openHolidayList, setOpenHolidayList] = useState(false);
+
+	const { data : holidayData } = useGetHolidayList();
+
+	console.log('holidayData', holidayData);
 
 	const getDate = (format) => formatDate({
 		date       : holiday_date,
@@ -46,11 +66,28 @@ function Holiday({ data = {}, loading = false }) {
 				</div>
 				<IcMAirport fill="#828282" width={50} height={50} />
 			</div>
-			{/* <div className={styles.view_calendar}>
+			<div
+				className={styles.view_calendar}
+				onClick={() => setOpenHolidayList(true)}
+				aria-hidden
+			>
 				View Calendar
 				{' '}
 				<IcMArrowRight style={{ marginLeft: 8 }} />
-			</div> */}
+			</div>
+			{ openHolidayList && (
+				<Modal
+					size="lg"
+					show={openHolidayList}
+					onClose={() => setOpenHolidayList(false)}
+					placement="top"
+				>
+					<Modal.Header title="Holidays" />
+					<Modal.Body>
+						<Table columns={columns} data={holidayData} />
+					</Modal.Body>
+				</Modal>
+			) }
 		</div>
 	);
 }
