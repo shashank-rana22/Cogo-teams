@@ -31,7 +31,7 @@ function getFirstAndLastDateOfMonth({ incentiveMonth }) {
 	if (month === currentMonth.toString() && year === currentYear.toString()) {
 		return {
 			firstDate : new Date(currentYear, currentMonth, OFFSET),
-			lastDate  : new Date(),
+			lastDate  : undefined,
 		};
 	}
 

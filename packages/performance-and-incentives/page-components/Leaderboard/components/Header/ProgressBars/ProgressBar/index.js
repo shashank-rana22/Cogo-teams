@@ -29,7 +29,7 @@ const setUTCtoIST = (timestamp) => {
 	return dateIST;
 };
 
-function ProgreeBar({ progressData = {} }) {
+function ProgressBar({ progressData = {} }) {
 	const { start_date, end_date, end_point, score_achieved_till_now, score_achieved_today } = progressData || {};
 
 	const END_DATE = setUTCtoIST(end_date);
@@ -90,4 +90,4 @@ function ProgreeBar({ progressData = {} }) {
 	);
 }
 
-export default React.memo(ProgreeBar);
+export default React.memo(ProgressBar);
