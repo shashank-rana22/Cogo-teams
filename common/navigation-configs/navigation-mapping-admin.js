@@ -858,8 +858,8 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis : ['get_purchase_payment_upload_list'],
 			options   : [
 				{
-					key           : 'business_finance-coe_finance',
-					title         : t('common:coe_finance'),
+					key           : 'business_finance-audit_function',
+					title         : t('common:audit_function'),
 					href          : '/v2/business-finance/coe-finance/[active_tab]',
 					as            : '/v2/business-finance/coe-finance/dashboard',
 					icon          : IcMProductCodeMapping,

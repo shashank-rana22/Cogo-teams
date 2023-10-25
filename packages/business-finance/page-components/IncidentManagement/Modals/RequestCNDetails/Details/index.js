@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, cl, Pill, Popover, Select, Textarea } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -5,6 +6,7 @@ import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
 import useGetTdsData from '../../../apisModal/useGetTdsData';
+import ApproveModal from '../../../common/ApproveModal';
 import RejectModal from '../../../common/RejectModal/index';
 import StyledTable from '../../../StyleTable';
 import { getFormatAmount } from '../../../utils/getformatamount';
@@ -24,6 +26,7 @@ function Details({
 }) {
 	const { t } = useTranslation(['incidentManagement']);
 	const [showRejectModal, setShowRejectModal] = useState(false);
+	const [showApproveModal, setShowApproveModal] = useState(false);
 	const [creditNoteApprovalType, setCreditNoteApprovalType] = useState('');
 	const [showPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
@@ -245,20 +248,31 @@ function Details({
 							disabled={!(remarks.length) || loading || (isEmpty(creditNoteApprovalType)
 										&& isEmpty(approvalType))}
 							loading={loading}
-							onClick={() => onAction({ status: 'APPROVED' })}
+							onClick={() => setShowApproveModal(true)}
 						>
 							{t('incidentManagement:approve_btn')}
 						</Button>
 					</div>
 					{showRejectModal
-					&& (
-						<RejectModal
-							setShowRejectModal={setShowRejectModal}
-							onAction={onAction}
-							showRejectModal={showRejectModal}
-							loading={loading}
-						/>
-					)}
+						? (
+							<RejectModal
+								setShowRejectModal={setShowRejectModal}
+								onAction={onAction}
+								showRejectModal={showRejectModal}
+								loading={loading}
+							/>
+						) : null}
+					{showApproveModal
+						? (
+
+							<ApproveModal
+								setShowApproveModal={setShowApproveModal}
+								onAction={onAction}
+								showApproveModal={showApproveModal}
+								loading={loading}
+							/>
+						) : null}
+
 				</div>
 			) : null }
 		</div>

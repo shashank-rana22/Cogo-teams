@@ -1,13 +1,14 @@
 import React from 'react';
 
-function BookingParamsMapping({ booking_params, packages }) {
+import styles from '../styles.module.css';
+
+function BookingParamsMapping({ bookingParams = [] }) {
 	return (
-		<div>
-			{(booking_params?.packages || packages)?.map((x) => (
-				<div style={{ display: 'flex' }} key={x.handling_type}>
-					Packages
-					&nbsp;
-					<div>
+		<div className={styles.wrap}>
+			Packages
+			{(bookingParams)?.map((x) => (
+				<div className={styles.wrap} key={x.id}>
+					<div className={styles.packages}>
 						{x.packages_count}
 						{' '}
 						pkg
@@ -15,23 +16,21 @@ function BookingParamsMapping({ booking_params, packages }) {
 						,
 					</div>
 					{x.handling_type && (
-						<div>
+						<div className={styles.packages}>
 							{x.handling_type}
 							{' '}
 							,
 						</div>
 					)}
-				&nbsp;
 					{x.packing_type
 				&& (
-					<div>
+					<div className={styles.packages}>
 						{x.packing_type}
 						{' '}
 					</div>
 				)}
-									&nbsp;
 					{x.height && 			(
-						<div>
+						<div className={styles.packages}>
 							,
 							{' '}
 							{x.height}
@@ -39,17 +38,15 @@ function BookingParamsMapping({ booking_params, packages }) {
 							X
 						</div>
 					)}
-					&nbsp;
 					{x.width && 	(
-						<div>
+						<div className={styles.packages}>
 							{x.width}
 							{' '}
 							X
 						</div>
 					)}
-									&nbsp;
 					{x.length && 	(
-						<div>
+						<div className={styles.packages}>
 							{x.length}
 							{' '}
 						</div>

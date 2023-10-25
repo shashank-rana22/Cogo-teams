@@ -13,14 +13,17 @@ function FilterModal({
 	setShowFilters = () => {},
 	triggeredFrom = '',
 	viewType = '',
+	setFiltersData = () => {},
 }) {
 	const {
 		control,
 		handleSubmit = () => {},
 		reset = () => {},
+		watch = () => {},
 	} = useForm({ defaultValues: filterValues });
 
-	const controls = smtRateRevertsFilters({ triggeredFrom, viewType });
+	const formValues = watch();
+	const controls = smtRateRevertsFilters({ triggeredFrom, viewType, setFiltersData, formValues });
 
 	const onSubmit = (val) => {
 		setShowFilters(false);
