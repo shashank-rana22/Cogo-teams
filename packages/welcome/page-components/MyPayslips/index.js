@@ -85,7 +85,7 @@ function MyPayslips({ handleBack = () => {} }) {
 				loading ? null
 					: (
 						<PaySlipModal
-							showModal={!showModal}
+							showModal={showModal}
 							modalUrl={modalUrl}
 							documentType={documentType}
 							setShowModal={setShowModal}
