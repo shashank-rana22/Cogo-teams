@@ -7185,6 +7185,8 @@ const partner = {
 		{
 			api         : 'payments/outstanding/update-account-taggings',
 			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 
 		},
 		{

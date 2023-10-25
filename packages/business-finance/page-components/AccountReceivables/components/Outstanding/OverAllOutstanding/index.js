@@ -9,7 +9,6 @@ import {
 	serviceWiseList,
 	ccWiseList,
 } from '../../../configs/dummy-graph-stats';
-import useGetCallPriority from '../../../hooks/useGetCallPriority';
 import useGetCcCommunicationStats from '../../../hooks/useGetCcCommunicationStats';
 import useGetCcWiseOutstandingStats from '../../../hooks/useGetCcWiseOutstandingStats';
 import useGetKamWiseOutstandingsStats from '../../../hooks/useGetKamWiseOutstandingsStats';
@@ -60,7 +59,6 @@ function OverAllOutstanding({
 		endDate   : new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
 	});
 	const [range, setRange] = useState('this_month');
-	const { callPriorityData = {}, callPriorityLoading = false } = useGetCallPriority({ entityCode });
 	const { statsData, statsLoading } = useGetSageArOutstandingsStats({
 		entityCode,
 	});
@@ -76,7 +74,7 @@ function OverAllOutstanding({
 		viewGraphStats,
 	});
 	const { page, pageLimit } = outStandingFilters || {};
-	const { totalRecords, list = [] } = outStandingData || {};
+	const { totalRecords, list = [], byCallPriority = {} } = outStandingData || {};
 
 	const handleChange = (val) => {
 		setoutStandingFilters({ ...outStandingFilters, search: val });
@@ -249,8 +247,8 @@ function OverAllOutstanding({
 				queryKey={queryKey}
 				entityCode={entityCode}
 				refetch={refetch}
-				callPriorityData={callPriorityData}
-				callPriorityLoading={callPriorityLoading}
+				callPriorityData={byCallPriority}
+				callPriorityLoading={outstandingLoading}
 			/>
 			{outstandingLoading ? (
 				<div>

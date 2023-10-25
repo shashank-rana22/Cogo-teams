@@ -14,7 +14,7 @@
 	overflow-y: scroll;
 
 	b {
-		font-size: 12px;
+		font-size: var(--font-size-md);
 	}
 
 	:global {
@@ -24,11 +24,7 @@
 		}
 
 		.ui_select_input_placeholder {
-			font-size: 12px;
+			font-size: var(--font-size-md);
 		}
 	}
 }
-
-/* .filter_container b {
-	font-size: 10px;
-} */

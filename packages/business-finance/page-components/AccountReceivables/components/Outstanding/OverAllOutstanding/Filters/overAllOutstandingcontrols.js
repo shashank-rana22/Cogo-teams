@@ -48,72 +48,61 @@ const overAllOutstandingcontrols = () => [
 
 	{
 
-		name: 'portfolioManagerRmId',
-
-		label: 'Select Portfolio Manager Rm',
-
-		placeholder: 'Select Portfolio Manager Rm',
-
-		asyncKey: 'partner_users_ids',
-
-		type: 'asyncSelect',
-
-		intialCall: true,
-
-		isClearable: true,
-
-		size: 'sm',
-
-		params: {
-
+		name        : 'portfolioManagerRmId',
+		label       : 'Select Portfolio Manager Rm',
+		placeholder : 'Select Portfolio Manager Rm',
+		asyncKey    : 'partner_users_ids',
+		type        : 'asyncSelect',
+		intialCall  : true,
+		isClearable : true,
+		size        : 'sm',
+		params      : {
 			filters: {
-
-				status: 'active',
-
-				partner_id: geo.uuid.parent_entity_id,
-
+				status     : 'active',
+				partner_id : geo.uuid.parent_entity_id,
 			},
-
-			rm_mappings_data_required: false,
-
-			partner_data_required: false,
-
-			pagination_data_required: false,
-
-			add_service_objects_required: false,
-
+			rm_mappings_data_required    : false,
+			partner_data_required        : false,
+			pagination_data_required     : false,
+			add_service_objects_required : false,
 		},
 
 	},
 
 	{
 
-		name: 'salesAgentId',
-
-		label: 'Select Sales Agent',
-
-		placeholder: 'Select Sales Agent',
-
-		asyncKey: 'partner_users_ids',
-
-		type: 'asyncSelect',
-
-		intialCall: true,
-
-		isClearable: true,
-
-		size: 'sm',
-
-		params: {
-
+		name        : 'salesAgentId',
+		label       : 'Select Sales Agent',
+		placeholder : 'Select Sales Agent',
+		asyncKey    : 'partner_users_ids',
+		type        : 'asyncSelect',
+		intialCall  : true,
+		isClearable : true,
+		size        : 'sm',
+		params      : {
 			filters: {
+				status         : 'active',
+				partner_id     : geo.uuid.parent_entity_id,
+				role_functions : ['sales'],
+			},
+		},
 
-				status: 'active',
+	},
 
-				partner_id: geo.uuid.parent_entity_id,
-
-				role_functions: ['sales'],
-
+	{
+		name        : 'salesAgentRmId',
+		label       : 'Select Sales Agent Manager',
+		asyncKey    : 'partner_users_ids',
+		type        : 'asyncSelect',
+		placeholder : 'Select Sales Agent Manager',
+		intialCall  : true,
+		isClearable : true,
+		size        : 'sm',
+		params      : {
+			filters: {
+				status         : 'active',
+				partner_id     : geo.uuid.parent_entity_id,
+				role_functions : ['sales'],
 			},
 
 		},
@@ -122,82 +111,29 @@ const overAllOutstandingcontrols = () => [
 
 	{
 
-		name: 'salesAgentRmId',
-
-		label: 'Select Sales Agent Manager',
-
-		asyncKey: 'partner_users_ids',
-
-		type: 'asyncSelect',
-
-		placeholder: 'Select Sales Agent Manager',
-
-		intialCall: true,
-
-		isClearable: true,
-
-		size: 'sm',
-
-		params: {
-
+		name        : 'creditControllerId',
+		label       : 'Select Credit Controller',
+		placeholder : 'Select Credit Controller',
+		asyncKey    : 'partner_users_ids',
+		type        : 'asyncSelect',
+		params      : {
 			filters: {
-
-				status: 'active',
-
-				partner_id: geo.uuid.parent_entity_id,
-
-				role_functions: ['sales'],
-
+				status     : 'active',
+				partner_id : geo.uuid.parent_entity_id,
+				role_ids   : geo.uuid.credit_controller_ids,
 			},
 
 		},
-
+		intialCall  : true,
+		isClearable : true,
+		size        : 'sm',
 	},
 
 	{
-
-		name: 'creditControllerId',
-
-		label: 'Select Credit Controller',
-
-		placeholder: 'Select Credit Controller',
-
-		asyncKey: 'partner_users_ids',
-
-		type: 'asyncSelect',
-
-		params: {
-
-			filters: {
-
-				status: 'active',
-
-				partner_id: geo.uuid.parent_entity_id,
-
-				role_ids: geo.uuid.credit_controller_ids,
-
-			},
-
-		},
-
-		intialCall: true,
-
-		isClearable: true,
-
-		size: 'sm',
-
-	},
-
-	{
-
-		label: 'Company Type',
-
-		name: 'companyType',
-
-		options: companyType,
-
-		type: 'radio',
-
+		label   : 'Company Type',
+		name    : 'companyType',
+		options : companyType,
+		type    : 'radio',
 	},
 
 ];
