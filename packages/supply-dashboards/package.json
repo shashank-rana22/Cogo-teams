@@ -4,7 +4,7 @@
   "description": "Shipment FCL freight package for Cogoport",
   "private": true,
   "main": "./index.js",
-  "types": "./index.js",
+  "sideEffects": false,
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
     "@cogoport/components": "^1.0.366",

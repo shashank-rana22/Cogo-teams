@@ -17,7 +17,7 @@ const formatValue = (all_services) => {
 	return result;
 };
 
-function ServiceDetails({ servicesData = [] }) {
+function ServiceDetails({ servicesData = [], activeStakeholder = '' }) {
 	const truckCards = formatValue(servicesData);
 	const keysLength = (Object.keys(truckCards) || []).length;
 	const keysForFields = useMemo(
@@ -27,7 +27,11 @@ function ServiceDetails({ servicesData = [] }) {
 
 	const addedServiceComponent = (
 		Object.keys(truckCards).map((truckCard, index) => (
-			<Header serviceData={truckCards[truckCard]} key={keysForFields[index]} />
+			<Header
+				serviceData={truckCards[truckCard]}
+				key={keysForFields[index]}
+				activeStakeholder={activeStakeholder}
+			/>
 		))
 	);
 

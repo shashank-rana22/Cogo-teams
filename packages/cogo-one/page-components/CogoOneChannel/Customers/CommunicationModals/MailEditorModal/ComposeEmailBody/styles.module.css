@@ -42,6 +42,11 @@
 		.ql-tooltip {
 			left: 0 !important;
 		}
+
+		.se-toolbar,
+		.se-wrapper {
+			z-index: unset !important;
+		}
 	}
 }
 
@@ -123,7 +128,7 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	height: 100%;
+	height: 80%;
 	font-size: 18px;
 	font-weight: 500;
 }

@@ -1,0 +1,14 @@
+.stats {
+	display: flex;
+	justify-content: space-between;
+}
+
+.stats_item {
+	flex: 1;
+}
+
+.loader {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}

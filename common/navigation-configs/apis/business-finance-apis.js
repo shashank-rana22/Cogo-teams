@@ -45,11 +45,35 @@ const business_finance = {
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},
-
+		{
+			api         : 'get_sales_invoice_timeline_by_id',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'put_common_job_shipment_quotation_status',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'post_common_job_profitability_audit_job_profitability',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'get_common_job_profitability_list_jobs_stats',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
 		{
 			api          : 'get_collection_party_variance',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+		{
+			api         : 'get_common_job_profitability_shipment_summary',
+			access_type : 'private',
+			feature     : 'coeFinance',
 		},
 		{
 			api          : 'list_shipments',
@@ -264,6 +288,11 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
+			api         : 'get_purchase_bills_list_stats',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
 			api          : 'update_shipment',
 			access_type  : 'private',
 			feature      : 'coeFinance',
@@ -362,7 +391,17 @@ const business_finance = {
 			access_type  : 'private',
 			service_name : 'tickets',
 		},
+		{
 
+			api         : 'get_common_job_milestone_job_audits',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'get_common_job_pre_post_shipment_quotation',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
 	],
 
 };

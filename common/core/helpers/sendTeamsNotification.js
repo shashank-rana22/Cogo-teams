@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { updateDoc } from 'firebase/firestore';
 
+import getStaticPath from './getStaticPath';
+
 function updateNotificationDoc({ docRef = {} }) {
 	try {
 		updateDoc(docRef, {
@@ -10,6 +12,11 @@ function updateNotificationDoc({ docRef = {} }) {
 	} catch (e) {
 		console.error('e', e);
 	}
+}
+
+let audio = null;
+if (typeof window !== 'undefined') {
+	audio = new Audio(getStaticPath({ path: '/mp3/chat-notification.mp3' }));
 }
 
 const sendTeamsNotification = async ({
@@ -39,6 +46,8 @@ const sendTeamsNotification = async ({
 			body : lastMessage,
 			icon : GLOBAL_CONSTANTS.image_url.cogoport_logo,
 		});
+
+		audio.play();
 
 		notification.onclick = () => {
 			const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];

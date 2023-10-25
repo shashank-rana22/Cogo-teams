@@ -1,7 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import { getByKey } from '@cogoport/utils';
 
-import RemoveBpr from '../RemoveBpr/index.tsx';
+import RemoveBpr from '../RemoveBpr/index';
 
 import styles from './styles.module.css';
 

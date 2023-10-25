@@ -1,7 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import React from 'react';
 
-import { ORGS_MAPPING } from '../../../../../../../../../constants/mailConstants';
+import { ORGS_MAPPING, USERS_MAPPING } from '../../../../../../../../../constants/mailConstants';
 
 import styles from './styles.module.css';
 
@@ -9,7 +9,12 @@ function CustomSelectHeader({
 	setActiveTab = () => {},
 	activeTab = '',
 	allowedOrgs = [],
+	type = '',
 }) {
+	const mapping = type === 'users_select' ? USERS_MAPPING : ORGS_MAPPING;
+
+	const allowedList = type === 'users_select' ? Object.keys(USERS_MAPPING) : allowedOrgs;
+
 	return (
 		<div className={styles.container}>
 			<Tabs
@@ -18,12 +23,12 @@ function CustomSelectHeader({
 				themeType="secondary"
 				onChange={setActiveTab}
 			>
-				{allowedOrgs?.map(
+				{allowedList?.map(
 					(item) => (
 						<TabPanel
-							key={ORGS_MAPPING?.[item]?.value}
-							name={ORGS_MAPPING?.[item]?.value}
-							title={ORGS_MAPPING?.[item]?.title}
+							key={mapping?.[item]?.value}
+							name={mapping?.[item]?.value}
+							title={mapping?.[item]?.title}
 						/>
 					),
 				)}

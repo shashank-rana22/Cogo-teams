@@ -5,7 +5,7 @@ import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 
 import { getDetailValueColor } from '../../../../../utils/getDetailValueColor';
 import { getLabelStyle, getIcon } from '../../../../../utils/getLabelStyle';
-import isDisabled from '../../../../../utils/isDisabled.ts';
+import isDisabled from '../../../../../utils/isDisabled';
 
 import AdditionalInvoiceDetails from './AdditionalInvoiceDetails';
 import styles from './styles.module.css';

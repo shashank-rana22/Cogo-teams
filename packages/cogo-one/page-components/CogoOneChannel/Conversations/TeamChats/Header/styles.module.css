@@ -4,7 +4,7 @@
 	justify-content: space-between;
 	width: 100%;
 	height: 100%;
-	padding-left: 16px;
+	padding: 0 14px 0 16px;
 
 	:global {
 		.ui_avatar_text {
@@ -49,8 +49,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	width: 140px;
-	padding-right: 14px;
+	width: 100px;
 }
 
 .popover_styles {
@@ -69,4 +68,16 @@
 	font-size: 12px;
 	font-weight: 600;
 	color: #000;
+}
+
+.delete_icon {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	transition: transform 0.2s;
+
+	&:hover {
+		fill: red;
+		transform: scale(1.2);
+	}
 }

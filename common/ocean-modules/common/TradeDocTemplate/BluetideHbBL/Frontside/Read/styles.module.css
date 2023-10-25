@@ -35,7 +35,7 @@
 		&-consigner {
 			display: flex;
 			flex-direction: column;
-			height: 113px;
+			height: fit-content;
 			padding: 8px;
 			border-bottom: 1px solid black;
 		}
@@ -178,7 +178,7 @@
 
 	th {
 		font-size: 10px;
-		text-align: center;
+		text-align: left;
 	}
 
 	td {
@@ -187,7 +187,7 @@
 
 	tbody td {
 		font-size: 10px;
-		text-align: center;
+		text-align: left;
 	}
 
 	span {

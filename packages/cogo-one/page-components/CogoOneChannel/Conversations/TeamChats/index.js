@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import useFetchGlobalRoom from '../../../../hooks/useFetchGlobalRoom';
 
@@ -24,6 +24,8 @@ function TeamChats(props) {
 	} = props || {};
 
 	const conversationsDivRef = useRef(null);
+
+	const [loadingDraft, setLoadingDraft] = useState(false);
 
 	const { data = {}, groupData = {} } = activeTab || {};
 
@@ -69,6 +71,8 @@ function TeamChats(props) {
 					key={id}
 					activeTab={activeTab}
 					hasPermissionToEdit={hasPermissionToEdit}
+					setLoadingDraft={setLoadingDraft}
+					loadingDraft={loadingDraft}
 				/>
 			</div>
 			<div className={styles.messages}>
@@ -80,6 +84,7 @@ function TeamChats(props) {
 					scrollToLastMessage={scrollToLastMessage}
 					isGroup={isGroup}
 					lastGroupUpdatedAt={last_group_updated_at}
+					loadingDraft={loadingDraft}
 				/>
 			</div>
 			<div className={styles.footer}>

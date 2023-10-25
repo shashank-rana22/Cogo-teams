@@ -1,4 +1,4 @@
-import { MultiSelect, Select } from '@cogoport/components';
+import { MultiSelect, Select, CreatableMultiSelect, CreatableSelect } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
@@ -78,6 +78,7 @@ import {
 	asyncListSpotSearchRateCardOperators,
 	asyncListLocationClusters,
 	asyncListFclFreightCommodityClusters,
+	asyncListShippingLineEvents,
 	asyncListSaasPlan,
 	asyncListEnrichmentSources,
 	asyncListIncidentTypes,
@@ -176,7 +177,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_employee_roles                  : asyncListRoles,
 	list_employee_departments            : asyncListDepartment,
 	default_types                        : asyncFieldsTicketTypes,
-	insurance_commodities              	 : asyncInsuranceCommoditiesList,
+	insurance_commodities                : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
 	list_expense_category                : asyncListExpenseCategories,
@@ -199,6 +200,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_organizations_on_call           : asyncFieldsOrganizationOnCall,
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
+	list_shipping_line_events            : asyncListShippingLineEvents,
 	list_saas_plan                       : asyncListSaasPlan,
 	list_enrichment_sources              : asyncListEnrichmentSources,
 	list_incident_types                  : asyncListIncidentTypes,
@@ -228,6 +230,22 @@ const keyAsyncFieldsParamsMapping = {
 
 const SINGLE_ENTITY = 1;
 
+const getElement = ({ type = '', multiple = false }) => {
+	if (type === 'async_create_select' && multiple) {
+		return CreatableMultiSelect;
+	}
+
+	if (type === 'async_create_select') {
+		return CreatableSelect;
+	}
+
+	if (multiple) {
+		return MultiSelect;
+	}
+
+	return Select;
+};
+
 function AsyncSelect(props) {
 	const {
 		params,
@@ -239,12 +257,13 @@ function AsyncSelect(props) {
 		microService = '',
 		onOptionsChange,
 		isSingleEntity,
+		type,
 		...rest
 	} = props;
 
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
-	const asyncOptionsHook = (microService || defaultParams.microService)
+	const asyncOptionsHook = microService || defaultParams.microService
 		? useGetAsyncOptionsMicroservice
 		: useGetAsyncOptions;
 
@@ -259,8 +278,9 @@ function AsyncSelect(props) {
 		microService : microService || defaultParams.microService,
 	});
 
-	const disabled = isSingleEntity && asyncKey === 'list_cogo_entity'
-	&& getAsyncOptionsProps?.options?.length <= SINGLE_ENTITY;
+	const disabled = isSingleEntity
+    && asyncKey === 'list_cogo_entity'
+    && getAsyncOptionsProps?.options?.length <= SINGLE_ENTITY;
 
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
@@ -271,22 +291,16 @@ function AsyncSelect(props) {
 		}
 
 		const selectedOption = getAsyncOptionsProps.options.filter(
-			(option) => option[rest.valueKey || defaultParams.valueKey || 'id'] === selectedValue,
+			(option) => option[rest.valueKey || defaultParams.valueKey || 'id']
+        === selectedValue,
 		);
 
 		getSelectedOption(selectedOption[GLOBAL_CONSTANTS.zeroth_index]);
 	}
 
-	const Element = multiple ? MultiSelect : Select;
+	const Element = getElement({ type, multiple });
 
-	return (
-		<Element
-			disabled={disabled}
-			{...getAsyncOptionsProps}
-			{...rest}
-
-		/>
-	);
+	return <Element disabled={disabled} {...getAsyncOptionsProps} {...rest} />;
 }
 
 export default AsyncSelect;

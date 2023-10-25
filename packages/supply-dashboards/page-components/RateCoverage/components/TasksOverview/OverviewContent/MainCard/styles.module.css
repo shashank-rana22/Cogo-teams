@@ -1,6 +1,6 @@
 .container {
-	padding: 12px;
-	margin-right: 3%;
+	padding: 6px;
+	margin-right: 2%;
 	background: #fff;
 	border: 1px solid transparent;
 	border-radius: 8px;
@@ -10,7 +10,7 @@
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	margin-top: 16px;
+	margin-top: 10px;
 }
 
 .column {
@@ -19,6 +19,6 @@
 }
 
 .bold_font {
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 600;
 }

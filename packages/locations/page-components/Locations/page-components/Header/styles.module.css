@@ -1,0 +1,14 @@
+.header_container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+	font-weight: 600;
+}
+
+.btn_align {
+	display: flex;
+}
+
+.create {
+	margin: 0 8px;
+}
