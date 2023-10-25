@@ -16,7 +16,7 @@
 
 .data_div {
 	display: flex;
-	margin: 8px;
+	margin: 8px 16px;
 	border: 1px solid #c1e8ec;
 	border-radius: 8px;
 }
@@ -90,7 +90,7 @@
 }
 
 .filtercont {
-	margin-left: 24px;
+	margin-left: 16px;
 
 	.react-datepicker__input-container {
 		height: 34px !important;
@@ -104,8 +104,9 @@
 		height: 34px !important;
 		font-size: 10px !important;
 	}
+}
 
-	.ui_select_container {
-		height: 34px !important;
-	}
+.stats_container {
+	display: flex;
+	margin: 12px 0 4px 16px;
 }

@@ -13,7 +13,7 @@ const formatedDate = (date) => formatDate({
 	separator  : 'T',
 });
 
-const useListExpenseConfig = ({ expenseFilters, sort }) => {
+const useListExpenseConfig = ({ expenseFilters, sort, subActiveTab }) => {
 	const { createdDateSortBy, amountSortBy } = sort || {};
 	const {
 		expenseCategory = '',
@@ -56,6 +56,7 @@ const useListExpenseConfig = ({ expenseFilters, sort }) => {
 					fromBillDate       : fromBillDate ? formatedDate(fromBillDate) : undefined,
 					toBillDate         : toBillDate ? formatedDate(toBillDate) : undefined,
 					cogoEntityId       : entity,
+					status             : subActiveTab === 'ALL_EXPENSE_CONFIGURATION' ? undefined : subActiveTab,
 				},
 			});
 		} catch (err) {
@@ -77,6 +78,7 @@ const useListExpenseConfig = ({ expenseFilters, sort }) => {
 		fromBillDate,
 		toBillDate,
 		entity,
+		subActiveTab,
 	]);
 
 	return {

@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import Filter from '../../../commons/Filters';
+import TabStat from '../../commons/TabStat';
 import filtersconfig from '../../Vendors/filtersconfig';
 import useListExpense from '../hooks/useListExpense';
 import useSendEmail from '../hooks/useSendEmail';
@@ -12,16 +13,19 @@ import useSendOverheadExpense from '../hooks/useSendOverheadExpense';
 import BillList from './BillList';
 import styles from './styles.module.css';
 
-function ShowMore({ id, showExpenseModal, incidentId }) {
+function ShowMore({ id, showExpenseModal, incidentId, TABS }) {
 	const [moreData, setMoreData] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [expenseFilters, setExpenseFilters] = useState({});
+	const [subActiveTab, setSubActiveTab] = useState('ALL_INVOICES');
+
 	const { getList, listData, listLoading } = useListExpense({
 		expenseFilters,
 		id,
 		expenseType  : 'RECURRING',
 		pageIndexVal : currentPage,
 		pageSizeVal  : 5,
+		subActiveTab,
 	});
 	const totalRecords = listData?.totalRecords || 0;
 	const billList = listData?.list;
@@ -71,6 +75,18 @@ function ShowMore({ id, showExpenseModal, incidentId }) {
 						: `${styles.more_data_container} ${styles.more_data_container_close}`
 				}
 			>
+				<div className={styles.stats_container}>
+					{TABS.map(({ label, value }) => (
+						<TabStat
+							name={label}
+							isActive={subActiveTab === value}
+							key={value}
+							number={listData?.stat?.[value] || 0}
+							value={value}
+							setSubActiveTab={setSubActiveTab}
+						/>
+					))}
+				</div>
 				<div className={styles.segmented_control}>
 					<div className={styles.filtercont}>
 						<Filter

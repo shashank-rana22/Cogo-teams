@@ -38,7 +38,15 @@ const DEFAULT_COUNT = 1;
 
 const MIN_AMOUNT = 0;
 
-const TABS = [
+const RECURRING_TABS = [
+	{ label: 'ALL', value: 'ALL_EXPENSE_CONFIGURATION' },
+	{ label: 'INITIATED', value: 'INITIATED' },
+	{ label: 'ACCEPTED', value: 'ACCEPTED' },
+	{ label: 'REJECTED', value: 'REJECTED' },
+	{ label: 'EXPIRED', value: 'EXPIRED' },
+];
+
+const NON_RECURRING_TABS = [
 	{ label: 'All Invoices', value: 'ALL_INVOICES' },
 	{ label: 'IM Requested', value: 'LOCKED' },
 	{ label: 'Approved', value: 'FINANCE_ACCEPTED' },
@@ -86,7 +94,7 @@ function ExpenseComponent() {
 		getRecurringList = () => {},
 		recurringListData = {},
 		recurringListLoading = false,
-	} = useListExpenseConfig({ expenseFilters, sort });
+	} = useListExpenseConfig({ expenseFilters, sort, subActiveTab });
 
 	const { sendMail, loading: mailLoading } = useSendEmail();
 	const { sendOverheadExpense } = useSendOverheadExpense();
@@ -590,6 +598,7 @@ function ExpenseComponent() {
 					id={id}
 					showExpenseModal={showExpenseModal}
 					incidentId={incidentId}
+					TABS={NON_RECURRING_TABS}
 				/>
 			);
 		}
@@ -599,15 +608,25 @@ function ExpenseComponent() {
 	let listConfig;
 	let listItemData;
 	let loading;
+	let TABS;
+	let tabData;
 
 	if (recurringState === 'recurring') {
 		listConfig = expenseRecurringConfig;
 		listItemData = recurringListData;
 		loading = false;
+		TABS = RECURRING_TABS;
+		tabData = recurringListData?.stat || {};
+
+		if (subActiveTab !== 'ALL_EXPENSE_CONFIGURATION') setSubActiveTab('ALL_EXPENSE_CONFIGURATION');
 	} else if (recurringState === 'nonRecurring') {
 		listConfig = expenseNonRecurringConfig;
 		listItemData = listData;
 		loading = listLoading;
+		TABS = NON_RECURRING_TABS;
+		tabData = listData?.stat || {};
+
+		if (subActiveTab !== 'ALL_INVOICES') setSubActiveTab('ALL_INVOICES');
 	}
 
 	return (
@@ -621,20 +640,18 @@ function ExpenseComponent() {
 					background="#FFFAEB"
 				/>
 			</div>
-			{recurringState === 'nonRecurring' ? (
-				<div className={styles.stats_container}>
-					{TABS.map(({ label, value }) => (
-						<TabStat
-							name={label}
-							isActive={subActiveTab === value}
-							key={value}
-							number={listData?.stat?.[value] || '-'}
-							value={value}
-							setSubActiveTab={setSubActiveTab}
-						/>
-					))}
-				</div>
-			) : null}
+			<div className={styles.stats_container}>
+				{TABS?.map(({ label, value }) => (
+					<TabStat
+						name={label}
+						isActive={subActiveTab === value}
+						key={value}
+						number={tabData?.[value] || 0}
+						value={value}
+						setSubActiveTab={setSubActiveTab}
+					/>
+				))}
+			</div>
 			<div className={styles.styled_div}>
 				{RenderHeaders()}
 				<List
