@@ -2,15 +2,17 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useEffect } from 'react';
 
-const getPayload = ({ data = {} }) => {
+const getPayload = ({ data = {}, userId = '' }) => {
 	const { firstName, lastName, email } = data || {};
 	return ({
-		pocName  : `${firstName} ${lastName}`,
-		pocEmail : email,
+		pocName     : `${firstName} ${lastName}`,
+		pocEmail    : email,
+		performedBy : userId,
 	});
 };
 
@@ -19,6 +21,8 @@ function useQuotation({ pocDetails = {} }) {
 	const { policySearchId } = query || {};
 
 	const { t } = useTranslation(['cargoInsurance']);
+
+	const { user } = useSelector((state) => state.profile);
 
 	const formhook = useForm();
 	const { setValue } = formhook;
@@ -30,7 +34,7 @@ function useQuotation({ pocDetails = {} }) {
 	}, { manual: true });
 
 	const sendQuotation = async (values) => {
-		const payload = getPayload({ data: values });
+		const payload = getPayload({ data: values, userId: user?.id });
 		try {
 			await trigger({
 				data: {
