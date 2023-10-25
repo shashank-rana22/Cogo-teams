@@ -38,11 +38,11 @@ function DetailsCard({
 		}
 
 		if (['ended_at', 'date_of_birth'].includes(value)) {
-			// return formatDate({
-			// 	date       : getByKey(getMapping[key], value),
-			// 	dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-			// 	formatType : 'date',
-			// });
+			return getByKey(getMapping[key], value) ? formatDate({
+				date       : getByKey(getMapping[key], value),
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+			}) : null;
 		}
 		return getByKey(getMapping[key], value);
 	};
