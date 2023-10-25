@@ -10,6 +10,7 @@ import useUpdateCart from '../../../hooks/useUpdateCart';
 import Header from '../Header';
 
 import ProductDetails from './ProductDetails';
+import styles from './styles.module.css';
 
 const TICK_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Ok.svg';
 const ADD_TO_CART = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/AddCart';
@@ -29,12 +30,12 @@ function ListingPage() {
 	console.log(productData, 'listProduce');
 
 	const [applyCoupon, setApplyCoupon] = useState(getCookie('apply_coupon') === 'true');
-	const { list:productList } = data || {};
+	const { list: productList } = data || {};
 
 	const {
 		data: productDataDetails,
 		filtersVariation = {},
-		setFiltersVariation = () => {},
+		setFiltersVariation = () => { },
 	} = useGetListProductVariationDetails();
 
 	const { product_id } = productDataDetails || {};
@@ -68,8 +69,8 @@ function ListingPage() {
 		price,
 		product_name,
 		id: addCartId,
-		size:merchSize,
-		color_id:merchColor,
+		size: merchSize,
+		color_id: merchColor,
 	} = productDataDetails || {};
 	const discount_percentage = (
 		((price - after_coupon_price) / price) * PERCENTAGE_HUNDRED)
@@ -123,7 +124,7 @@ function ListingPage() {
 	}, [product_images]);
 
 	return (
-		<>
+		<div className={styles.listing_page}>
 			<Header />
 			<ProductDetails
 				product_images={product_images}
@@ -156,7 +157,7 @@ function ListingPage() {
 				handleImageClick={handleImageClick}
 				currency_code={currency_code}
 			/>
-		</>
+		</div>
 	);
 }
 

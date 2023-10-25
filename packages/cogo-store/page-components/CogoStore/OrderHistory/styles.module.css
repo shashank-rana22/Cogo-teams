@@ -145,3 +145,37 @@
 	height: 44px;
 	padding: 8px;
 }
+
+@media (max-width: 767px) {
+	.order_history_page {
+		margin-top: 54px;
+	}
+
+	.order_details {
+		flex-direction: column;
+		gap: 12px;
+
+		.order_details_left_bar,
+		.order_main_container {
+			width: 100%;
+		}
+
+		.order_item {
+			flex-direction: column;
+			gap: 12px;
+
+			.order_item_id {
+				width: 100%;
+			}
+		}
+
+		.order_selected {
+			margin-left: 4px;
+		}
+
+		.quantity_name {
+			flex-direction: column;
+			gap: 8px;
+		}
+	}
+}

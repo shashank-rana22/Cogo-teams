@@ -54,8 +54,8 @@ function OrderHistory() {
 	let month; let date; let year;
 
 	const getDeliveryDate = ((dateDelivered) => {
-		month =	getMonth(new Date(dateDelivered));
-		date =	getDate(new Date(dateDelivered));
+		month = getMonth(new Date(dateDelivered));
+		date = getDate(new Date(dateDelivered));
 		year = getYear(new Date(dateDelivered));
 	});
 
@@ -84,7 +84,7 @@ function OrderHistory() {
 	});
 
 	return (
-		<>
+		<div className={styles.order_history_page}>
 			<Header />
 			<div className={styles.order_details_container}>
 				<div className={styles.order_details_header}>
@@ -151,7 +151,7 @@ function OrderHistory() {
 									className={styles.order_item}
 									key={item?.id}
 									aria-hidden
-									onClick={() =>	push(`/cogo-store/order-details?id=${item.id}`)}
+									onClick={() => push(`/cogo-store/order-details?id=${item.id}`)}
 								>
 									<div className={styles.order_item_id}>
 										{getOrderData(item?.order_items_list)}
@@ -222,7 +222,7 @@ function OrderHistory() {
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 

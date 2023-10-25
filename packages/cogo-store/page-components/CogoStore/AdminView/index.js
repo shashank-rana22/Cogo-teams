@@ -9,7 +9,7 @@ import OverView from './OverView';
 import styles from './styles.module.css';
 
 function AdminView() {
-	const { data:dateArray } = useGetOrderDates();
+	const { data: dateArray } = useGetOrderDates();
 	const { data, filters, setFilters, refetch } = useListAllOrders({ dateArray });
 
 	return (

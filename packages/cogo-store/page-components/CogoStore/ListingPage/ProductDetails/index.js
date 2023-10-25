@@ -36,15 +36,14 @@ function ProductDetails({
 							))}
 					</div>
 					<div className={styles.product_display_image}>
-						{isEmpty(product_images) ||	(
+						{isEmpty(product_images) || (
 							<img
 								src={
-                            selectedImage
-                            || (product_images && product_images[GLOBAL_CONSTANTS.zeroth_index])
-                            }
+									selectedImage
+									|| (product_images && product_images[GLOBAL_CONSTANTS.zeroth_index])
+								}
+								className={styles.product_main_image}
 								alt="cogo-merchandise"
-								width="400px"
-								style={{ marginLeft: '30px', borderRadius: '10px' }}
 							/>
 
 						)}

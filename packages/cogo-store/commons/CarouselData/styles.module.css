@@ -82,3 +82,37 @@
 	font-weight: 600;
 	color: #fff;
 }
+
+@media (max-width: 767px) {
+	.carousel {
+		height: 340px;
+	}
+
+	.overlay_content,
+	.overlay_content_shoes {
+		left: 50%;
+		width: 100%;
+		padding: 12px;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.home_text,
+	.home_text2,
+	.home_text3,
+	.image_header,
+	.home_text_laptop,
+	.home_text_shoes,
+	.home_text_season {
+		display: none;
+	}
+
+	.carousel > img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}

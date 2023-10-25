@@ -112,3 +112,36 @@
 .pagination_show {
 	padding: 24px;
 }
+
+@media (max-width: 767px) {
+	.list_header_left {
+		font-size: 16px;
+	}
+
+	.list_body {
+		flex-direction: column;
+		padding: 0;
+	}
+
+	.list_card {
+		width: 100%;
+		padding: 0;
+		overflow: hidden;
+		border: 1px solid #efefef;
+		border-radius: 12px;
+
+		.img_section {
+			width: 100%;
+
+			img {
+				width: 100%;
+				object-fit: cover;
+			}
+		}
+
+		.text_section {
+			gap: 12px;
+			padding: 12px;
+		}
+	}
+}

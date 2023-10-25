@@ -104,7 +104,9 @@ function OrderTable({ data, filters, setFilters, dateArray, refetch }) {
 						</div>
 					</div>
 				</div>
-				<Table columns={columns} data={list || []} />
+				<div className={styles.table_container}>
+					<Table columns={columns} data={list || []} />
+				</div>
 				<div className={styles.pagination}>
 					<Pagination
 						type="table"
