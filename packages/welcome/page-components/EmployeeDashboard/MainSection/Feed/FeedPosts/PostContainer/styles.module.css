@@ -234,3 +234,33 @@
 	display: flex;
 	justify-content: flex-end;
 }
+
+@media (max-width: 767px) {
+	.post_time_flex {
+		display: none;
+	}
+
+	.circle {
+		width: 35px;
+		height: 35px;
+		font-size: 16px;
+	}
+
+	.name_avatar {
+		width: 35px;
+		height: 35px;
+		font-size: 18px;
+
+		.user_name {
+			font-size: 18px;
+
+			.designation {
+				font-size: 12px;
+			}
+		}
+	}
+
+	.main_post_text {
+		font-size: 14px;
+	}
+}

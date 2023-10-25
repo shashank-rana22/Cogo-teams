@@ -15,3 +15,18 @@
 	flex: 1 0 35%;
 	padding-left: 6px;
 }
+
+@media (max-width: 767px) {
+	.container {
+		flex-direction: column-reverse;
+		gap: 12px;
+	}
+
+	.left_section {
+		padding-right: 0;
+	}
+
+	.right_section {
+		padding-left: 0;
+	}
+}
