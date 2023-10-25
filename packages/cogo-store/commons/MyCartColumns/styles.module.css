@@ -2,6 +2,12 @@
 	display: flex;
 }
 
+.products img {
+	padding: 10px;
+	border-radius: 5px;
+	object-fit: contain;
+}
+
 .products_right {
 	display: flex;
 	flex-direction: column;

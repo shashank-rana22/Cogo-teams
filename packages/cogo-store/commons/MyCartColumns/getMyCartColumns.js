@@ -1,5 +1,3 @@
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable linebreak-style */
 import { Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMMinus, IcMPlus, IcCFcrossInCircle } from '@cogoport/icons-react';
@@ -12,6 +10,7 @@ const getMyCartColumns = ({
 	refetchCartDetails = () => {},
 	setCouponApplied = () => {},
 	color = [],
+	currency_code,
 }) => ([
 	{
 		Header   : 'PRODUCTS',
@@ -47,8 +46,11 @@ const getMyCartColumns = ({
 		Header   : 'PRICE',
 		accessor : (item = {}) => (
 			<div className={styles.dot_list}>
-				<div className={styles.grey}>{`₹${item?.price}`}</div>
-				<div className={styles.amt_black}>{`₹${item?.after_coupon_price}`}</div>
+				{/* <div className={styles.grey}>{`₹${item?.price}`}</div> */}
+				<div className={styles.amt_black}>
+					{currency_code}
+					{item?.after_coupon_price}
+				</div>
 			</div>
 		),
 		id: 'price',
@@ -136,10 +138,15 @@ const getMyCartColumns = ({
 			return (
 				<div className={styles.dot_list}>
 					<div className={styles.amt_black}>
-						₹
+						{currency_code}
 						{item?.sub_total_amount || '-'}
 					</div>
-					<IcCFcrossInCircle style={{ marginLeft: '48px' }} width={20} height={20} onClick={deleteItem} />
+					<IcCFcrossInCircle
+						style={{ marginLeft: '48px', cursor: 'pointer' }}
+						width={20}
+						height={20}
+						onClick={deleteItem}
+					/>
 				</div>
 			);
 		},

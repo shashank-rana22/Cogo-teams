@@ -1,4 +1,4 @@
-import { Button, Pill, RatingComponent, Select } from '@cogoport/components';
+import { Button, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMTick } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -11,11 +11,10 @@ import styles from './styles.module.css';
 function ProductDetails({
 	product_images = {}, product_name = '', description = '',
 	dataArray = [], filtersVariation = {}, setFiltersVariation = () => {}, sizeValuePairs = [],
-	discounted_price = '', applyCoupon = false, after_coupon_price = '',
-	price = '', discount_percentage = '', ADD_TO_CART = '', SYNCHRONIZE_CART = '',
+	after_coupon_price = '', ADD_TO_CART = '', SYNCHRONIZE_CART = '',
 	handleBuyNow = () => {}, addedToCart = false, handleAddToCart = () => {}, selectedImage = '',
-	STAR_RATING = '', TICK_ICON = '', colorValuePairs = [], handleVariationColor = () => {}, COUPON_ICON = '',
-	handleApplyClick = () => {}, handleImageClick = () => {},
+	TICK_ICON = '', colorValuePairs = [], handleVariationColor = () => {},
+	handleImageClick = () => {}, office_location = '', currency_code = '',
 }) {
 	return (
 		<div className={styles.main_container}>
@@ -32,6 +31,7 @@ function ProductDetails({
 									aria-hidden
 									onClick={() => handleImageClick(item_img)}
 									width="100px"
+									style={{ cursor: 'pointer' }}
 								/>
 							))}
 					</div>
@@ -54,19 +54,6 @@ function ProductDetails({
 					<div className={styles.product_details_heading}>
 						<div className={styles.product_name}>
 							{product_name}
-						</div>
-						<div className={styles.product_review_rating}>
-							<RatingComponent
-								type="star"
-								totalStars={5}
-								value={STAR_RATING}
-								disabled
-								className={styles.star_rating}
-							/>
-
-							<span style={{ marginLeft: '8px' }}>
-								(45 reviews)
-							</span>
 						</div>
 					</div>
 					<div className={styles.content_product_details}>
@@ -93,6 +80,7 @@ function ProductDetails({
 							<span>Color</span>
 							<Select
 								value={filtersVariation?.color_id}
+								className={styles.select_filters}
 								onChange={(e) => handleVariationColor(e)}
 								placeholder="Select Color"
 								options={colorValuePairs}
@@ -106,40 +94,39 @@ function ProductDetails({
 									...prev,
 									size: e,
 								}))}
+								className={styles.select_filters}
 								placeholder="Select Size"
 								options={sizeValuePairs}
 							/>
 						</div>
 					</div>
 					<div className={styles.price_section}>
-						{!discounted_price ? ''
-							: (
-								<>
-									<span className={styles.discounted_price}>
-										₹
-										{' '}
-										{applyCoupon ? after_coupon_price : discounted_price}
+						{/* {!discounted_price ? ''
+							: ( */}
+						<span className={styles.discounted_price}>
+							{currency_code}
+							{' '}
+							{ after_coupon_price }
 
-									</span>
-									<span className={styles.actual_price}>
-										₹
-										{' '}
-										{price}
-									</span>
+						</span>
+						{/* <span className={styles.actual_price}>
+							₹
+							{' '}
+							{price}
+						</span> */}
 
-									{!applyCoupon && (
-										<Pill size="md" color="orange">
-											-
-											{discount_percentage}
-											% OFF
-											{' '}
-										</Pill>
-									)}
-								</>
-							)}
+						{/* {!applyCoupon && ( */}
+						{/* <Pill size="md" color="orange">
+							-
+							{discount_percentage}
+							% OFF
+							{' '}
+						</Pill> */}
+						{/* )} */}
+						{/* )} */}
 					</div>
 					<div className={styles.add_coupon_section}>
-						<img src={COUPON_ICON} alt="coupon-icon" />
+						{/* <img src={COUPON_ICON} alt="coupon-icon" />
 						<span className={styles.add_coupon_text}>
 							Get this for
 							{' '}
@@ -154,14 +141,14 @@ function ProductDetails({
 							{' '}
 							<span className={styles.add_coupon_bold}>EMPLOYEE DISCOUNT</span>
 							{' '}
-						</span>
-						<span
+						</span> */}
+						{/* <span
 							className={styles.apply_coupon}
 							onClick={() => { handleApplyClick(); }}
 							role="presentation"
 						>
 							{applyCoupon ? 'Remove' : 'Apply Coupon'}
-						</span>
+						</span> */}
 					</div>
 					<div className={styles.selected_address}>
 						<div className={styles.delivery_to_payment}>
@@ -170,7 +157,11 @@ function ProductDetails({
 							<div>
 								Delivery to
 								{' '}
-								<span className={styles.selected_office}>Mumbai Office</span>
+								<span className={styles.selected_office}>
+									{office_location || '-'}
+									{' '}
+									Office
+								</span>
 							</div>
 						</div>
 						<div className={styles.delivery_to_payment}>
@@ -208,7 +199,7 @@ function ProductDetails({
 						</div>
 						{' '}
 						<div>
-							3 day return policy
+							No return policy
 						</div>
 					</div>
 					<div className={styles.functionality_cart}>
@@ -221,7 +212,7 @@ function ProductDetails({
 						</div>
 						{' '}
 						<div>
-							Free Shipping for Cogoport Employees
+							Free Shipping at office
 						</div>
 					</div>
 				</div>

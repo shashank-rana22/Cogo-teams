@@ -24,7 +24,9 @@ function ListingPage() {
 	const [addedToCart, setAddedToCart] = useState(false);
 	let dataArray = [];
 	const { data } = useGetListProductDetail();
+
 	const { data: productData } = useGetProductFilterDetail();
+	console.log(productData, 'listProduce');
 
 	const [applyCoupon, setApplyCoupon] = useState(getCookie('apply_coupon') === 'true');
 	const { list:productList } = data || {};
@@ -40,7 +42,8 @@ function ListingPage() {
 	const product = (productList || []).find((prod) => prod.id === product_id);
 
 	const { available_colors, available_sizes } = product || {};
-	const { color } = productData || {};
+	const { color, user_details, currency_code } = productData || {};
+	const { office_location } = user_details || {};
 
 	const selectedColors = (available_colors || []).map((colorId) => {
 		const colorData = (color || []).find((c) => c.id === colorId);
@@ -56,6 +59,8 @@ function ListingPage() {
 		label : sizeAvail,
 		value : sizeAvail,
 	}));
+
+	console.log(colorValuePairs, 'valPairSize');
 	const { updateCart } = useUpdateCart();
 
 	const {
@@ -67,7 +72,7 @@ function ListingPage() {
 		color_id:merchColor,
 	} = productDataDetails || {};
 	const discount_percentage = (
-		((price - discounted_price) / price) * PERCENTAGE_HUNDRED)
+		((price - after_coupon_price) / price) * PERCENTAGE_HUNDRED)
 		.toFixed(GLOBAL_CONSTANTS.two);
 
 	if (documentation) {
@@ -143,11 +148,13 @@ function ListingPage() {
 				selectedImage={selectedImage}
 				STAR_RATING={STAR_RATING}
 				TICK_ICON={TICK_ICON}
+				office_location={office_location}
 				colorValuePairs={colorValuePairs}
 				handleVariationColor={handleVariationColor}
 				COUPON_ICON={COUPON_ICON}
 				handleApplyClick={handleApplyClick}
 				handleImageClick={handleImageClick}
+				currency_code={currency_code}
 			/>
 		</>
 	);

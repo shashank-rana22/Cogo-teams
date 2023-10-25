@@ -2,7 +2,7 @@ import { Button, Table } from '@cogoport/components';
 import { DatepickerController, SelectController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMArrowBack, IcMDownload } from '@cogoport/icons-react';
+import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { getMonth, getDate, getYear, startCase } from '@cogoport/utils';
 import React, { useEffect } from 'react';
@@ -38,9 +38,13 @@ const STATUS_OPTIONS = [
 	{ label: 'Cancelled', value: 'cancelled' },
 	{ label: 'Out for Delivery', value: 'out_for_delivery' },
 ];
+// const handleButtonClick = () => {
+// 	window.open('https://tinyurl.com/5n76dcrd', '_blank');
+// };
 
 function OrderDetails() {
 	const { query, push } = useRouter();
+
 	const {
 		control,
 		setValue,
@@ -58,10 +62,10 @@ function OrderDetails() {
 		order_items_list, order_ticket_id, delivery_date, total_amount,
 		order_status, created_at,
 	} = getOrderData || {};
-	console.log(order_status, 'getOrderData');
+
 	const { data: productData } = useGetProductFilterDetail();
 
-	const { is_hr_admin } = productData || {};
+	const { is_hr_admin, currency_code } = productData || {};
 
 	const { color } = productData || {};
 
@@ -97,18 +101,22 @@ function OrderDetails() {
 	};
 
 	const handleStatusChange = async (newStatus) => {
-		const payload = {
-			order_id     : id,
-			order_status : newStatus,
-		};
-		await updateStatus({ payload });
-		getOrderDetails();
+		if (newStatus !== '') {
+			const payload = {
+				order_id     : id,
+				order_status : newStatus,
+			};
+			await updateStatus({ payload });
+			getOrderDetails();
+		}
 	};
+
 	useEffect(() => {
 		setValue('delivery_day', delivery_date && new Date(getOrderData?.delivery_date));
 		setValue('order_status', order_status);
 	}, [delivery_date, getOrderData?.delivery_date, order_status, setValue]);
-	const columns = getOrderColumns({ color });
+
+	const columns = getOrderColumns({ color, currency_code });
 
 	return (
 		<div className={styles.order_detail_outer}>
@@ -146,7 +154,7 @@ function OrderDetails() {
 							</div>
 						</div>
 						<div className={styles.order_right_detail}>
-							₹
+							{currency_code}
 							{total_amount}
 						</div>
 					</div>
@@ -176,14 +184,15 @@ function OrderDetails() {
 
 								</Button>
 							) : null}
-							<Button
+							{/* <Button
 								size="md"
 								themeType="secondary"
+								onClick={handleButtonClick}
 							>
 								{' '}
 								Download Invoice
 								<IcMDownload />
-							</Button>
+							</Button> */}
 						</div>
 					</div>
 					{ is_hr_admin ? (

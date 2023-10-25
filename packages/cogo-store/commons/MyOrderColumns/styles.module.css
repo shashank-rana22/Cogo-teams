@@ -2,6 +2,10 @@
 	display: flex;
 }
 
+.products img {
+	padding: 10px;
+}
+
 .products_right {
 	display: flex;
 	flex-direction: column;

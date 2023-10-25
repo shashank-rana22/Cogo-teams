@@ -6,7 +6,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function OrderConfirmation({ data = {} }) {
+function OrderConfirmation({ data = {}, office_location = '' }) {
 	console.log('order_conf', data);
 	const { push } = useRouter();
 	const { id } = data || {};
@@ -20,6 +20,13 @@ function OrderConfirmation({ data = {} }) {
 			</div>
 			<div className={styles.grey_heading}>
 				You will receive your order in 7 working days
+			</div>
+			<div className={styles.grey_heading}>
+				Will be delivered to
+				{' '}
+				{office_location}
+				{' '}
+				office
 			</div>
 			<div className={styles.order_details}>
 				<div className={styles.grey}>{data.order_ticket_id}</div>

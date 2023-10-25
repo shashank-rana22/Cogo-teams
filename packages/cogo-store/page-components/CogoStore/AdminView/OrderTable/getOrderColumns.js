@@ -1,13 +1,13 @@
 import { Button, cl, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMDownload, IcMEyeopen } from '@cogoport/icons-react';
+import { IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const getOrderColumns = ({ STATUS_OPTIONS = [], updateStatus = () => {}, push }) => {
+const getOrderColumns = ({ STATUS_OPTIONS = [], updateStatus = () => {}, push, currency_code = '' }) => {
 	console.log('hi');
 	return ([
 		{
@@ -54,39 +54,48 @@ const getOrderColumns = ({ STATUS_OPTIONS = [], updateStatus = () => {}, push })
 			Header   : 'AMOUNT',
 			accessor : (item = {}) => (
 				<div>
-					<span className={styles.black_text}>{item.total_amount}</span>
+					<span className={styles.black_text}>
+						{currency_code}
+						{item.total_amount}
+					</span>
 				</div>
 			),
 			id: 'amount',
 		},
 		{
 			Header   : 'ACTIONS',
-			accessor : (item = {}) => (
-				<div className={styles.download}>
-					<Button
-						size="md"
-						themeType="secondary"
-						onClick
-					>
-						<span>Download Invoice</span>
-						<IcMDownload style={{ marginLeft: '4px' }} width={14} height={14} />
-					</Button>
-					<Button
-						size="md"
-						themeType="secondary"
-						style={{ marginLeft: '6px' }}
-						aria-hidden
-						onClick={() => { console.log('xxx'); push(`/cogo-store/order-details?id=${item.id}`); }}
-					>
-						<span>View</span>
-						<IcMEyeopen
-							style={{ marginLeft: '4px' }}
-							width={14}
-							height={14}
-						/>
-					</Button>
-				</div>
-			),
+			accessor : (item = {}) => {
+				// const handleButtonClick = () => {
+				// 	window.open('https://tinyurl.com/5n76dcrd', '_blank');
+				// };
+				console.log(item, 'item');
+				return (
+					<div className={styles.download}>
+						{/* <Button
+							size="md"
+							themeType="secondary"
+							onClick={handleButtonClick}
+						>
+							<span>Download Invoice</span>
+							<IcMDownload style={{ marginLeft: '4px' }} width={14} height={14} />
+						</Button> */}
+						<Button
+							size="md"
+							themeType="secondary"
+							style={{ marginLeft: '6px' }}
+							aria-hidden
+							onClick={() => { console.log('xxx'); push(`/cogo-store/order-details?id=${item.id}`); }}
+						>
+							<span>View</span>
+							<IcMEyeopen
+								style={{ marginLeft: '4px' }}
+								width={14}
+								height={14}
+							/>
+						</Button>
+					</div>
+				);
+			},
 			id: 'actions',
 		},
 		{

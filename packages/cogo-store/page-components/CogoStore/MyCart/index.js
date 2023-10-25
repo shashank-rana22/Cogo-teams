@@ -1,8 +1,8 @@
 import { Table, Button, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMTick, IcCFtick, IcMError } from '@cogoport/icons-react';
+import { IcMTick, IcMError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { getCookie, isEmpty, setCookie } from '@cogoport/utils';
+import { getCookie, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../commons/EmptyState';
@@ -20,10 +20,11 @@ function MyCart() {
 	const { push } = useRouter();
 	// const coupon_applied = window.sessionStorage.getItem('apply_coupon');
 	const coupon_applied = (getCookie('apply_coupon') === 'true');
-	console.log(coupon_applied, 'apploed');
 
 	const { data: productData } = useGetProductFilterDetail();
-	const { color } = productData || {};
+	const { currency_code } = productData || {};
+	const { color, user_details } = productData || {};
+	const { office_location } = user_details || {};
 
 	const [show, setShow] = useState(false);
 	const [couponApplied, setCouponApplied] = useState(coupon_applied === true);
@@ -44,16 +45,24 @@ function MyCart() {
 		placeOrder({ payload, total: card_totals?.card_total_amount });
 		setShow(false);
 	};
-	const columns = getMyCartColumns({ data, refetchCartDetails, updateCart, setCouponApplied, couponApplied, color });
+	const columns = getMyCartColumns({
+		data,
+		refetchCartDetails,
+		updateCart,
+		setCouponApplied,
+		couponApplied,
+		color,
+		currency_code,
+	});
 
 	if (orderData) {
-		return <OrderConfirmation data={orderData} />;
+		return <OrderConfirmation data={orderData} office_location={office_location} />;
 	}
 
-	const handleRemoveCoupon = () => {
-		setCookie('apply_coupon', false);
-		setCouponApplied(false);
-	};
+	// const handleRemoveCoupon = () => {
+	// 	setCookie('apply_coupon', false);
+	// 	setCouponApplied(false);
+	// };
 
 	const getColorFromCode = (colorId) => {
 		const colorName = (color || []).find((col) => col.id === colorId);
@@ -103,23 +112,32 @@ function MyCart() {
 							<div className={styles.total_section}>
 								<div className={styles.total_item}>
 									<span className={styles.grey}>Sub-total</span>
-									<span className={styles.black}>{`₹${card_totals?.card_sub_total_amount}`}</span>
+									<span className={styles.black}>
+										{currency_code}
+										{card_totals?.card_sub_total_amount}
+									</span>
 								</div>
 								<div className={styles.total_item}>
 									<span className={styles.grey}>Shipping</span>
 									<span className={styles.black}>Free</span>
 								</div>
-								<div className={styles.total_item}>
+								{/* <div className={styles.total_item}>
 									<span className={styles.grey}>Discount</span>
 									<span className={styles.black}>{`₹${card_totals?.card_total_discount}`}</span>
-								</div>
+								</div> */}
 								<div className={styles.total_item} style={{ paddingBottom: '8px' }}>
 									<span className={styles.grey}>Tax</span>
-									<span className={styles.black}>{`₹${card_totals?.taxes}`}</span>
+									<span className={styles.black}>
+										{currency_code}
+										{card_totals?.taxes}
+									</span>
 								</div>
 								<div className={styles.total_amount}>
 									<span className={styles.black} style={{ fontSize: '16px' }}>Total</span>
-									<span className={styles.black}>{`₹${card_totals?.card_total_amount}`}</span>
+									<span className={styles.black}>
+										{currency_code}
+										{card_totals?.card_total_amount}
+									</span>
 								</div>
 								<div className={styles.adjustment_tag}>
 									<IcMTick width={20} height={20} style={{ marginRight: '4px' }} />
@@ -142,7 +160,7 @@ function MyCart() {
 
 						</div>
 
-						<div className={styles.totals}>
+						{/* <div className={styles.totals}>
 
 							<h3 className={styles.heading_total}>Coupon Code</h3>
 
@@ -185,7 +203,7 @@ function MyCart() {
 
 								</Button>
 							)}
-						</div>
+						</div> */}
 
 					</div>
 				</div>

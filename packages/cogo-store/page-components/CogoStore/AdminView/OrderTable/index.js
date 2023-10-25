@@ -8,6 +8,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from '@cogoport/next';
 import React, { useEffect, useState	} from 'react';
 
+import useGetProductFilterDetail from '../../../../hooks/useGetProductFilterDetail';
 import useUpdateStatus from '../../../../hooks/useUpdateStatus';
 
 import getOrderColumns from './getOrderColumns';
@@ -24,6 +25,8 @@ const STATUS_OPTIONS = [
 function OrderTable({ data, filters, setFilters, dateArray, refetch }) {
 	const { push } = useRouter();
 	const [selectedMonth, setSelectedMonth] = useState('');
+	const { data: productData } = useGetProductFilterDetail();
+	const { currency_code } = productData || {};
 
 	const { control, setValue } = useForm();
 
@@ -36,8 +39,9 @@ function OrderTable({ data, filters, setFilters, dateArray, refetch }) {
 		}),
 		value: dateString,
 	}));
+
 	const DATE_OPTIONS = mapDateStringsToObjects(dateArray);
-	console.log('🚀 ~ file: index.js:38 ~ OrderTable ~ DATE_OPTIONS:', DATE_OPTIONS);
+
 	const { list, page, page_limit, total_count } = data || {};
 
 	const onPageChange = (pageNumber) => {
@@ -47,12 +51,12 @@ function OrderTable({ data, filters, setFilters, dateArray, refetch }) {
 		}));
 	};
 	const { updateStatus } = useUpdateStatus({ refetch });
-	const columns = getOrderColumns({ STATUS_OPTIONS, updateStatus, push });
+	const columns = getOrderColumns({ STATUS_OPTIONS, updateStatus, push, currency_code });
 
 	useEffect(() => {
 		setValue('filter_date', selectedMonth || DATE_OPTIONS[GLOBAL_CONSTANTS.zeroth_index]?.value);
 	}, [setValue, selectedMonth, DATE_OPTIONS]);
-	console.log(new Date(DATE_OPTIONS[GLOBAL_CONSTANTS.zeroth_index]), selectedMonth);
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.container}>

@@ -235,6 +235,18 @@
 	margin-right: 4px;
 }
 
+.select_filters {
+	:global {
+		.ui_select_option_item {
+			padding-bottom: 0;
+		}
+
+		.ui_select_options_container {
+			padding: 0 4px;
+		}
+	}
+}
+
 .item_key {
 	text-transform: capitalize;
 }

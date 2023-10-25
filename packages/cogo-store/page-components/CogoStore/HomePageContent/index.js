@@ -1,8 +1,7 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-import { Select, RatingComponent, Pagination } from '@cogoport/components';
+import { Select, Pagination } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
-import React, { useState } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -12,10 +11,9 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 	const { list = [], page, page_limit, total_count } = data || {};
 	// const { list, page, page_limit, total_count } = data || {};
 	// const { is_hr_admin } = productData || {};
-	console.log(data, 'home');
-	const [starRating, setStarRating] = useState(GLOBAL_CONSTANTS.zeroth_index);
+	// const [starRating, setStarRating] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
-	const { categories, color } = productData || {};
+	const { categories, color, currency_code } = productData || {};
 
 	const options = (categories || []).map((item) => ({ label: item.name, value: item.name }));
 
@@ -105,12 +103,15 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 								))}
 							</div>
 							<div>
-								<span className={styles.cost_real}>{`${item.discounted_price} ₹ `}</span>
-								<span className={styles.cost_shown}>
-									{`${item.price} ₹`}
+								<span className={styles.cost_real}>
+									{currency_code}
+									{item.after_coupon_price}
 								</span>
+								{/* <span className={styles.cost_shown}>
+									{`${item.price} ₹`}
+								</span> */}
 							</div>
-							<div className={styles.stars}>
+							{/* <div className={styles.stars}>
 								<RatingComponent
 									type="star"
 									totalStars={5}
@@ -118,8 +119,7 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 									size="xs"
 									onChange={setStarRating}
 								/>
-								{/* <span style={{ marginLeft: '8px' }}>(45)</span> */}
-							</div>
+							</div> */}
 
 						</div>
 					</div>

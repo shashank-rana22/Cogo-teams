@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const getOrderColumns = () => ([
+const getOrderColumns = ({ currency_code = '' }) => ([
 	{
 		Header   : 'PRODUCTS',
 		accessor : (item = {}) => {
@@ -14,7 +14,7 @@ const getOrderColumns = () => ([
 			console.log(item, 'item');
 			return (
 				<div className={styles.products}>
-					<img src={item?.product_images[GLOBAL_CONSTANTS.zeroth_index]} alt="" width="60px" height="60px" />
+					<img src={item?.product_images[GLOBAL_CONSTANTS.zeroth_index]} alt="" width="90px" height="90px" />
 					<div className={styles.products_right}>
 						<div className={styles.black}>{item.product_name}</div>
 						<div className={styles.dot_list}>
@@ -31,7 +31,7 @@ const getOrderColumns = () => ([
 		accessor : (item = {}) => (
 			<div className={styles.dot_list}>
 				<div className={styles.amt_black}>
-					₹
+					{currency_code}
 					{item.final_price}
 				</div>
 			</div>
@@ -52,7 +52,7 @@ const getOrderColumns = () => ([
 		accessor : (item = {}) => (
 			<div className={styles.dot_list}>
 				<div className={styles.amt_black}>
-					₹
+					{currency_code}
 					{item.order_subtotal}
 				</div>
 			</div>

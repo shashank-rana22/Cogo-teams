@@ -1,12 +1,13 @@
-import { Input, Pagination } from '@cogoport/components';
+import { Pagination } from '@cogoport/components';
 import { useForm, CheckboxGroupController, RadioGroupController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcCGreenCircle, IcMClock, IcMSearchlight } from '@cogoport/icons-react';
+import { IcCGreenCircle, IcCRedCircle, IcMClock } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { getMonth, getDate, getYear, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import useGetOrderHistory from '../../../hooks/useGetOrderHistory';
+import useGetProductFilterDetail from '../../../hooks/useGetProductFilterDetail';
 import Header from '../Header';
 
 import styles from './styles.module.css';
@@ -42,6 +43,8 @@ function OrderHistory() {
 	const { push } = useRouter();
 	const { control, errors } = useForm();
 	const { data:orderHistoryData, setFiltersHistory = () => {} } = useGetOrderHistory();
+	const { data:productData } = useGetProductFilterDetail();
+	const { currency_code } = productData || {};
 	// const { list } = orderHistoryData || {};
 	console.log('🚀 ~ file: index.js:42 ~ OrderHistory ~ orderHistoryData:', orderHistoryData);
 	const { list, page, page_limit, total_count } = orderHistoryData || {};
@@ -130,14 +133,14 @@ function OrderHistory() {
 						</div>
 					</div>
 					<div className={styles.order_main_container}>
-						<div className={styles.search_input}>
+						{/* <div className={styles.search_input}>
 							<Input
 								size="md"
 								placeholder="Search your orders"
 								prefix={<IcMSearchlight />}
 								style={{ marginBottom: 12 }}
 							/>
-						</div>
+						</div> */}
 						<div
 							className={styles.orders_list}
 							aria-hidden
@@ -175,13 +178,17 @@ function OrderHistory() {
 										</div>
 									</div>
 									<div className={styles.order_item_cost}>
-										₹
+										{currency_code}
 										{' '}
 										{item?.total_amount}
 									</div>
 									<div className={styles.order_deliver_status}>
 										<div className={styles.deliver_text}>
-											<IcCGreenCircle />
+											{item?.order_status === 'cancelled' ? (
+												<IcCRedCircle />
+											) : (
+												<IcCGreenCircle />
+											)}
 											<span>
 												{startCase(item?.order_status)}
 												{' '}
