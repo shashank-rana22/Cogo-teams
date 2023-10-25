@@ -20,7 +20,7 @@ function ContractAd({ loading = false, importerExporterId = '', contractDetail =
 	const redirectToContract = () => {
 		const newHref = `${window.location.origin}/${partner_id}/contract-rates/dashboard
 		?activeTab=active&page=1&importerExporterId=${importerExporterId}`;
-		window.location.href = newHref;
+		window.open(newHref, '_blank');
 	};
 
 	if (!count || isEmpty(count) || loading) {

@@ -1,4 +1,4 @@
-import { Toast, Button, Modal } from '@cogoport/components';
+import { Toast, Button, Modal, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import AsyncSelectController from '@cogoport/forms/page-components/Controlled/AsyncSelectController';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -8,8 +8,6 @@ import CustomSelectOption from '../../../../CustomSelectOption';
 
 import List from './List';
 import styles from './styles.module.css';
-
-const INCREMENT_VALUE_BY_ONE = 1;
 
 const SUPPORTED_COUNTRY_IDS = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service.common
 	.services.ftl_freight.default_country_ids;
@@ -87,7 +85,7 @@ function AddTouchPointModal({
 		}
 		const currId = value?.id;
 
-		for (let i = 0; i < touchPoints.length; i += INCREMENT_VALUE_BY_ONE) {
+		for (let i = 0; i < touchPoints.length; i += GLOBAL_CONSTANTS.one) {
 			if (touchPoints[i].id === currId) {
 				Toast.error('Selected touch point already exists in route');
 				return;
@@ -100,7 +98,7 @@ function AddTouchPointModal({
 	const onDeleteTouchPoint = (index) => {
 		setTouchPoints([
 			...touchPoints.slice(GLOBAL_CONSTANTS.zeroth_index, index),
-			...touchPoints.slice(index + INCREMENT_VALUE_BY_ONE, touchPoints.length),
+			...touchPoints.slice(index + GLOBAL_CONSTANTS.one, touchPoints.length),
 		]);
 	};
 
@@ -155,8 +153,8 @@ function AddTouchPointModal({
 							) : null}
 
 							{value?.error ? (
-								<div className={styles.error_message}>
-									Touchpoint must be diffrent from origin and destination!!
+								<div className={cl`${styles.error_message} ${styles.default}`}>
+									Touchpoint must be different from origin and destination!!
 								</div>
 							) : null}
 						</div>

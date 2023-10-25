@@ -29,6 +29,11 @@
 	margin-top: 4px;
 	font-size: 12px;
 	color: #e42525;
+
+	&.default {
+		font-weight: 600;
+		color: #4f4f4f;
+	}
 }
 
 .buttons_container {

@@ -1,10 +1,6 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo';
-
 import validate from '../../../utils/validateNumber';
 
-const getTrucksControls = () => {
-	const geo = getGeoConstants();
-
+const getTrucksControls = ({ setValue = () => {} }) => {
 	const TRUCKS_CONTROLS = [
 		{
 			name               : 'trucks',
@@ -14,27 +10,40 @@ const getTrucksControls = () => {
 			noDeleteButtonTill : 1,
 			value              : [
 				{
-					truck_type   : '',
-					trucks_count : '',
+					truck        : 'open_body',
+					trucks_count : '1',
 				},
 			],
 			controls: [
 				{
-					name        : 'truck_type',
+					name        : 'truck',
 					label       : 'Truck Type',
-					type        : 'select',
+					type        : 'chips',
 					placeholder : 'Select truck type',
-					options     : [
+					value       : 'open_body',
+					onChange    : (val, obj, index) => {
+						setValue(`trucks[${index}].truck_type`, '');
+					},
+					options: [
 						{
-							label   : 'Open Body',
-							options : geo?.options?.open_truck || [],
+							label : 'Open Body',
+							value : 'open_body',
 						},
 						{
-							label   : 'Closed Body',
-							options : geo?.options?.closed_truck || [],
+							label : 'Closed Body',
+							value : 'closed_body',
 						},
 					],
 					rules: { required: true },
+
+				},
+				{
+					name        : 'truck_type',
+					label       : 'Select Truck',
+					type        : 'select',
+					span        : 8,
+					placeholder : 'Select truck',
+					rules       : { required: true },
 
 				},
 				{
@@ -42,7 +51,8 @@ const getTrucksControls = () => {
 					label       : 'Truck Count',
 					placeholder : 'Enter count',
 					type        : 'input',
-					rules       : { required: true, validate: (val) => validate(val) },
+					span        : 4,
+					rules       : { required: true, validate: (val) => validate(val), min: 0 },
 				},
 			],
 		},

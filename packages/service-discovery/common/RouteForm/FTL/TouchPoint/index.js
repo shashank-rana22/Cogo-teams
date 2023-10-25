@@ -57,13 +57,13 @@ function TouchPoint(
 	const disabled = typeOfJourney === 'round';
 
 	return (
-		<div className={styles.container}>
-			<IcMPlus className={cl`${styles.add_icon} ${disabled && styles.disabled}`} />
+		<div role="presentation" className={styles.container}>
+			<IcMPlus onClick={onClick} className={cl`${styles.add_icon} ${disabled && styles.disabled}`} />
 
 			<Button
 				themeType="linkUi"
-				onClick={onClick}
 				className={styles.add_button}
+				onClick={onClick}
 				disabled={disabled}
 			>
 				Add Touchpoints

@@ -1,4 +1,5 @@
 import { Button, cl } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { IcMDelete } from '@cogoport/icons-react';
 
@@ -13,6 +14,17 @@ const PERCENTAGE_FACTOR = 100;
 const FLEX_OFFSET = 1;
 const FIRST_INDEX = 1;
 const MIN_ELEMENTS_TO_SHOW_DELETE = 2;
+
+const getTruckOptions = (truck) => {
+	const geo = getGeoConstants();
+
+	const MAPPING = {
+		open_body   : geo?.options?.open_truck || [],
+		closed_body : geo?.options?.closed_truck || [],
+	};
+
+	return MAPPING[truck] || [];
+};
 
 function Child({
 	controls = [],
@@ -55,7 +67,12 @@ function Child({
 								style={{ width: `${flex}%`, marginBottom: '12px' }}
 							>
 								{newControl?.showTopLabelOnly ? (
-									<div className={styles.heading}>{newControl.label || lowerlabel}</div>
+									<div className={styles.heading}>
+										{newControl.label || lowerlabel}
+										{newControl?.rules?.required && (newControl.label || lowerlabel) ? (
+											<div className={styles.required_mark}>*</div>
+										) : null}
+									</div>
 								) : null}
 
 								<Child
@@ -76,6 +93,14 @@ function Child({
 								/>
 							</div>
 						);
+					}
+
+					if (name === 'trucks' && controlName === 'truck_type') {
+						const truck = fieldArrayValues?.[index]?.truck;
+
+						const finalOptions = getTruckOptions(truck);
+
+						newControl = { ...newControl, options: finalOptions };
 					}
 
 					if (optionsListKey) {

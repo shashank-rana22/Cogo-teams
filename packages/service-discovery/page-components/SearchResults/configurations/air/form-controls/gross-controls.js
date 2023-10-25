@@ -34,12 +34,12 @@ export const getGrossControls = () => {
 				tooltipText="For rate calculation, volume will be converted to CBM"
 			/>,
 			showTopLabelOnly : true,
-			span             : 6,
+			span             : 5.5,
 			controls         : [
 				{
 					name  : 'total_volume',
 					type  : 'input',
-					span  : 4,
+					span  : 5,
 					value : 1,
 					rules : {
 						required : 'Volume is required',
@@ -51,7 +51,7 @@ export const getGrossControls = () => {
 					name        : 'volume_unit',
 					type        : 'select',
 					placeholder : 'Select Unit',
-					span        : 8,
+					span        : 7,
 					value       : 'cbm',
 					options     : [
 						{
@@ -78,12 +78,12 @@ export const getGrossControls = () => {
 				tooltipText="For rate calculation, weight will be converted to KG"
 			/>,
 			showTopLabelOnly : true,
-			span             : 6,
+			span             : 5.5,
 			controls         : [
 				{
 					name  : 'total_weight',
 					type  : 'input',
-					span  : 4,
+					span  : 5,
 					value : 1,
 					rules : {
 						required : 'Weight is required',
@@ -95,7 +95,7 @@ export const getGrossControls = () => {
 					name        : 'weight_unit',
 					type        : 'select',
 					placeholder : 'Select Unit',
-					span        : 8,
+					span        : 7,
 					value       : 'kg',
 					options     : [
 						{
@@ -113,6 +113,7 @@ export const getGrossControls = () => {
 		},
 		{
 			name    : 'handling_type',
+			label   : 'Handling',
 			type    : 'chips',
 			span    : 10,
 			value   : 'stackable',

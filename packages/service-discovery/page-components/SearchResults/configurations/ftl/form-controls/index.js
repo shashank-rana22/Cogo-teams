@@ -13,7 +13,12 @@ const CONTROLS_MAPPING = {
 	cargo_per_package : getPerPackageControls,
 };
 
-const ftlControls = ({ activeTab = '', cargoType = '', formValues = {}, setValue = () => {} }) => {
+const ftlControls = ({
+	activeTab = '',
+	cargoType = '',
+	formValues = {},
+	setValue = () => {},
+}) => {
 	const activeControls = activeTab === 'truck' ? activeTab : cargoType;
 
 	const controlProps = {

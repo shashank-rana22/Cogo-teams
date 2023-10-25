@@ -1,5 +1,7 @@
 import validate from '../../../utils/validateNumber';
 
+import TooltipLabel from './TooltipLabel';
+
 const TONS_TO_KGS_CONVERSION_FACTOR = 1000;
 
 const getPerPackageControls = ({ formValues = {}, setValue = () => {} }) => {
@@ -14,7 +16,7 @@ const getPerPackageControls = ({ formValues = {}, setValue = () => {} }) => {
 			controls           : [
 				{
 					name    : 'packing_type',
-					type    : 'select',
+					type    : 'chips',
 					label   : 'Package Type',
 					options : [
 						{
@@ -42,48 +44,61 @@ const getPerPackageControls = ({ formValues = {}, setValue = () => {} }) => {
 					label : 'Quantity',
 					type  : 'input',
 					value : 1,
+					span  : 3,
 					rules : { required: true, validate: (val) => validate(val) },
 				},
 				{
-					name  : 'package_weight',
-					label : 'Weight per package',
-					type  : 'input',
-					span  : 8,
-					value : 1,
-					rules : { required: true, validate: (val) => validate(val) },
-				},
-				{
-					name     : 'unit',
-					label    : 'Unit',
-					type     : 'select',
-					value    : 'kg',
-					span     : 4,
-					onChange : (val, _, index) => {
-						const { unit, package_weight } = packages[index] || {};
-
-						if (unit === val) {
-							return;
-						}
-						if (val === 'kg') {
-							setValue(
-								`packages[${index}].package_weight`,
-								package_weight * TONS_TO_KGS_CONVERSION_FACTOR,
-							);
-						} else {
-							setValue(
-								`packages[${index}].package_weight`,
-								package_weight / TONS_TO_KGS_CONVERSION_FACTOR,
-							);
-						}
-					},
-					options: [
+					name             : 'weight',
+					label            : 'Weight per package',
+					showTopLabelOnly : true,
+					span             : 7,
+					controls         : [
 						{
-							label : 'Kgs',
-							value : 'kg',
+							name  : 'package_weight',
+							label : 'Weight per package',
+							type  : 'input',
+							span  : 7,
+							value : 1,
+							rules : { required: true, validate: (val) => validate(val) },
 						},
 						{
-							label : 'Tons',
-							value : 'ton',
+							name  : 'unit',
+							label : <TooltipLabel
+								labelText="Weight unit"
+								tooltipText="For rate calculation, weight will be converted to Tons"
+							/>,
+							type     : 'select',
+							value    : 'kg',
+							span     : 5,
+							onChange : (val, _, index) => {
+								const { unit, package_weight } = packages[index] || {};
+
+								if (unit === val) {
+									return;
+								}
+								if (val === 'kg') {
+									setValue(
+										`packages[${index}].package_weight`,
+										package_weight * TONS_TO_KGS_CONVERSION_FACTOR,
+									);
+								} else {
+									setValue(
+										`packages[${index}].package_weight`,
+										package_weight / TONS_TO_KGS_CONVERSION_FACTOR,
+									);
+								}
+							},
+							options: [
+								{
+									label : 'Kgs',
+									value : 'kg',
+								},
+								{
+									label : 'Tons',
+									value : 'ton',
+								},
+							],
+							rules: { required: true },
 						},
 					],
 					rules: { required: true },
@@ -93,9 +108,10 @@ const getPerPackageControls = ({ formValues = {}, setValue = () => {} }) => {
 					label : 'Dimensions (in cm)',
 					type  : 'input-group',
 					value : {
-						length : 1,
-						width  : 1,
-						height : 1,
+						length          : 1,
+						width           : 1,
+						height          : 1,
+						dimensions_unit : 'cm',
 					},
 					inputControls: [
 						{
@@ -126,7 +142,7 @@ const getPerPackageControls = ({ formValues = {}, setValue = () => {} }) => {
 				{
 					name    : 'handling_type',
 					label   : 'Handling',
-					type    : 'select',
+					type    : 'chips',
 					value   : 'stackable',
 					options : [
 						{
