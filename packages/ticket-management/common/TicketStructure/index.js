@@ -37,7 +37,7 @@ function TicketStructure({
 			{
 				(data || []).map((item = {}) => (
 					<TicketStructureBody
-						key={item.id}
+						key={item?.ID}
 						data={item}
 						setModalData={setModalData}
 						updateLoading={updateLoading}
