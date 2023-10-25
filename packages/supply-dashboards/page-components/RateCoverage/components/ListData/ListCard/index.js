@@ -21,8 +21,8 @@ import styles from './styles.module.css';
 
 function ListCard({
 	data = {}, getListCoverage = () => {}, filter = {}, getStats = () => {},
-	source = {},
 }) {
+	const source = data?.sources?.[0];
 	const [showCloseModal, setShowCloseModal] = useState(false);
 	const [serviceIdPresent, setServiceIdPresent] = useState('');
 	const [showAddRateModal, setShowAddRateModal] = useState(false);
