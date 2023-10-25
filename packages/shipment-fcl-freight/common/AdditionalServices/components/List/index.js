@@ -43,12 +43,10 @@ function List({ isSeller = false, source = '' }) {
 
 	let isAdditionalServiceAllowed = true;
 
-	if (primary_service?.trade_type === 'import') {
-		if (isEntityIndia) {
-			if (!ALLOWED_STAKEHOLDERS.includes(activeStakeholder)) {
-				isAdditionalServiceAllowed = false;
-			}
-		}
+	if (primary_service?.trade_type === 'import'
+		&& isEntityIndia
+		&& !ALLOWED_STAKEHOLDERS.includes(activeStakeholder)) {
+		isAdditionalServiceAllowed = false;
 	}
 
 	const canEditCancelService = !!stakeholderConfig?.overview?.can_edit_cancel_service;
