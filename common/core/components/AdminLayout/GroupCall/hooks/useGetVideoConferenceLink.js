@@ -16,7 +16,7 @@ const useGetVideoConferenceLink = () => {
 		url    : '/get_video_conference_link',
 		method : 'get',
 
-	}, { manual: true });
+	}, { manual: true, autoCancel: false });
 
 	const getMeetingLink = useCallback(async ({ meetingId = '' }) => {
 		try {
