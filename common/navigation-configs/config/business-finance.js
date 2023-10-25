@@ -1,18 +1,18 @@
 const businessFinance = {
-	'/[partner_id]/business-finance/audit_function/[active_tab]': {
+	'/[partner_id]/business-finance/audit-function/[active_tab]': {
 		navigation : 'business_finance-audit_function',
 		isMainNav  : true,
 	},
-	'/[partner_id]/business-finance/audit_function/[active_tab]/view-invoices': {
+	'/[partner_id]/business-finance/audit-function/[active_tab]/view-invoices': {
 		navigation: 'business_finance-audit_function',
 	},
-	'/[partner_id]/business-finance/audit_function/[active_tab]/[view]': {
+	'/[partner_id]/business-finance/audit-function/[active_tab]/[view]': {
 		navigation: 'business_finance-audit_function',
 	},
-	'/[partner_id]/business-finance/audit_function/[active_tab]/audit': {
+	'/[partner_id]/business-finance/audit-function/[active_tab]/audit': {
 		navigation: 'business_finance-audit_function',
 	},
-	'/[partner_id]/business-finance/audit_function/cost-sheet': {
+	'/[partner_id]/business-finance/audit-function/cost-sheet': {
 		navigation: 'business_finance-audit_function',
 	},
 	'/[partner_id]/business-finance/compliance/[active_tab]': {
