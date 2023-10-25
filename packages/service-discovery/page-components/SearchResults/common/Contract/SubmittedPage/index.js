@@ -22,7 +22,7 @@ function Submitted({ detail = {}, contractData = {}, isMobile = false }) {
 	const redirectToContract = () => {
 		const newHref = `${window.location.origin}/${partner_id}/
 		contract-rates/dashboard?activeTab=pending_approval&page=1`;
-		window.location.href = newHref;
+		window.open(newHref, '_blank');
 	};
 
 	return (

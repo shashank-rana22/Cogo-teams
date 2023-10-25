@@ -1,5 +1,7 @@
 import validate from '../../../utils/validateNumber';
 
+import TooltipLabel from './TooltipLabel';
+
 const TONS_TO_KGS_CONVERSION_FACTOR = 1000;
 
 const getGrossControls = ({ formValues = {}, setValue = () => {} }) => {
@@ -8,7 +10,7 @@ const getGrossControls = ({ formValues = {}, setValue = () => {} }) => {
 	const CARGO_GROSS_CONTROLS = [
 		{
 			name    : 'packing_type',
-			type    : 'select',
+			type    : 'chips',
 			label   : 'Package Type',
 			options : [
 				{
@@ -36,65 +38,76 @@ const getGrossControls = ({ formValues = {}, setValue = () => {} }) => {
 			label : 'Total Quantity',
 			type  : 'input',
 			value : 1,
+			span  : 3.5,
 			rules : { required: true, validate: (val) => validate(val) },
 		},
 		{
-			name  : 'package_weight',
-			label : 'Total Weight',
-			span  : 8,
-			type  : 'input',
-			value : 1,
-			rules : { required: true, validate: (val) => validate(val) },
-		},
-		{
-			name     : 'unit',
-			label    : 'Unit',
-			type     : 'select',
-			value    : 'kg',
-			span     : 4,
-			onChange : (val) => {
-				if (unit === val) {
-					return;
-				}
-				if (val === 'kg') {
-					setValue('package_weight', package_weight * TONS_TO_KGS_CONVERSION_FACTOR);
-				} else {
-					setValue('package_weight', package_weight / TONS_TO_KGS_CONVERSION_FACTOR);
-				}
-			},
-			options: [
+			name     : 'weight',
+			label    : 'Total Weight',
+			span     : 6.5,
+			controls : [
 				{
-					label : 'Kgs',
-					value : 'kg',
+					name  : 'package_weight',
+					label : 'Total Weight',
+					span  : 7,
+					type  : 'input',
+					value : 1,
+					rules : { required: true, validate: (val) => validate(val) },
 				},
 				{
-					label : 'Tons',
-					value : 'ton',
+					name  : 'unit',
+					label : <TooltipLabel
+						labelText="Weight unit"
+						tooltipText="For rate calculation, weight will be converted to Tons"
+					/>,
+					type     : 'select',
+					value    : 'kg',
+					span     : 5,
+					onChange : (val) => {
+						if (unit === val) {
+							return;
+						}
+						if (val === 'kg') {
+							setValue('package_weight', package_weight * TONS_TO_KGS_CONVERSION_FACTOR);
+						} else {
+							setValue('package_weight', package_weight / TONS_TO_KGS_CONVERSION_FACTOR);
+						}
+					},
+					options: [
+						{
+							label : 'Kgs',
+							value : 'kg',
+						},
+						{
+							label : 'Tons',
+							value : 'ton',
+						},
+					],
+					rules: { required: true },
 				},
 			],
 			rules: { required: true },
 		},
 		{
-			name   : 'volume',
-			label  : 'Gross Volume',
-			type   : 'input',
-			value  : 1,
-			suffix : <span style={{ fontSize: 14, fontWeight: 600, marginRight: 16, opacity: 0.6 }}>CC</span>,
-			rules  : { required: true, validate: (val) => validate(val) },
-		},
-		{
-			name    : 'handling_type',
-			label   : 'Handling',
-			type    : 'select',
-			value   : 'stackable',
-			options : [
+			name             : 'volume_group',
+			label            : 'Total Volume',
+			showTopLabelOnly : true,
+			controls         : [
 				{
-					label : 'Stackable',
-					value : 'stackable',
+					name  : 'volume',
+					type  : 'input',
+					value : 1,
+					span  : 8,
+					rules : { required: true, validate: (val) => validate(val) },
 				},
 				{
-					label : 'Non-Stackable',
-					value : 'non_stackable',
+					name    : 'volume_unit',
+					type    : 'select',
+					value   : 'cc',
+					span    : 2.5,
+					options : [
+						{ label: 'CC', value: 'cc' },
+					],
 				},
 			],
 			rules: { required: true },
@@ -131,6 +144,23 @@ const getGrossControls = ({ formValues = {}, setValue = () => {} }) => {
 					? undefined
 					: 'Dimension is Required'),
 			},
+		},
+		{
+			name    : 'handling_type',
+			label   : 'Handling',
+			type    : 'chips',
+			value   : 'stackable',
+			options : [
+				{
+					label : 'Stackable',
+					value : 'stackable',
+				},
+				{
+					label : 'Non-Stackable',
+					value : 'non_stackable',
+				},
+			],
+			rules: { required: true },
 		},
 	];
 	return CARGO_GROSS_CONTROLS;

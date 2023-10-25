@@ -80,17 +80,16 @@ export const getPackageControls = ({
 	{
 		name               : 'packages',
 		type               : 'field-array',
-		buttonText         : 'Add another Package Type',
+		buttonText         : 'Add another Package',
 		noDeleteButtonTill : 1,
 		controls           : [
 			{
-				name           : 'packages_count',
-				label          : 'No. of Units',
-				type           : 'input',
-				optionsListKey : 'container-sizes',
-				span           : 4,
-				value          : 1,
-				rules          : {
+				name  : 'packages_count',
+				label : 'No. of Units',
+				type  : 'input',
+				span  : 4,
+				value : 1,
+				rules : {
 					required : 'Count is required',
 					validate : (val) => validate(val),
 					max      : 10000,
@@ -189,6 +188,7 @@ export const getPackageControls = ({
 			},
 			{
 				name    : 'handling_type',
+				label   : 'Handling',
 				type    : 'chips',
 				span    : 10,
 				value   : 'stackable',
