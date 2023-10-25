@@ -33,17 +33,18 @@ function AddRate({
 	filter = {},
 	getStats = () => {},
 }) {
+	const onCloseHandel = () => {
+		setShowModal((prev) => !prev);
+		setServiceIdPresent('');
+		if (activeTab) {
+			getStats();
+			getListCoverage();
+		}
+	};
 	return (
 		<Modal
 			show={showModal}
-			onClose={() => {
-				setShowModal((prev) => !prev);
-				setServiceIdPresent('');
-				if (activeTab) {
-					getStats();
-					getListCoverage();
-				}
-			}}
+			onClose={onCloseHandel}
 			placement="top"
 			size="xl"
 		>
@@ -127,14 +128,7 @@ function AddRate({
 							<Modal.Footer>
 								<Button
 									size="md"
-									onClick={() => {
-										setShowModal((prev) => !prev);
-										setServiceIdPresent('');
-										if (activeTab) {
-											getStats();
-											getListCoverage();
-										}
-									}}
+									onClick={onCloseHandel}
 									style={{ marginRight: '20px' }}
 									themeType="secondary"
 								>
