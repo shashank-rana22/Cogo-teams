@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import { Button, TabPanel, Tabs, Tooltip, Popover, RadioGroup } from '@cogoport/components';
+import { Button, TabPanel, Tabs, Tooltip, Popover, RadioGroup, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload, IcMOverflowLine } from '@cogoport/icons-react';
@@ -16,14 +16,28 @@ import TabsOptions from './TabOptions';
 import UserDetails from './UserDetails';
 
 function ChangeStatus({ item = {}, refetch = () => {} }) {
-	const [currentstatus, setCurrentStatus] = useState('creditcontroller');
+	const [currentstatus, setCurrentStatus] = useState(item?.taggedState);
 	const { apiTrigger } = useUpdateAccountTagging({ item });
-	const onSubmit = async () => {
-		await (apiTrigger(currentstatus));
-		refetch();
+	const onSubmit = () => {
+		(apiTrigger(currentstatus, refetch));
 	};
-	// const { apiTrigger } = useUpdateAccountTagging({ item });
-
+	const accountStatusOption = [
+		{ label: 'Credit Controller', value: 'credit_controller' },
+		{ label: 'Collection Agency', value: 'collection_agency' },
+		{ label: 'Pre Legal', value: 'pre_legal' },
+		{ label: 'Legal', value: 'legal' },
+		{ label: 'Never', value: 'never' },
+	];
+	let filtredOptions = [];
+	if (isEmpty(item?.taggedState)) {
+		filtredOptions = accountStatusOption.filter(
+			(ele) => ele.value !== 'credit_controller',
+		);
+	} else {
+		filtredOptions = accountStatusOption.filter(
+			(ele) => ele.value !== item?.taggedState,
+		);
+	}
 	return (
 
 		<>
@@ -31,11 +45,7 @@ function ChangeStatus({ item = {}, refetch = () => {} }) {
 			<b>Change Current Account Status</b>
 
 			<RadioGroup
-				options={[
-					{ name: 'preLegal', value: 'prelegal', label: 'Pre Legal' },
-					{ name: 'legal', value: 'legal', label: 'Legal' },
-					{ name: 'never', value: 'never', label: 'Never' },
-					{ name: 'creditController', value: 'creditcontroller', label: 'Credit Controller' }]}
+				options={filtredOptions}
 				value={currentstatus}
 				onChange={setCurrentStatus}
 			/>
@@ -83,7 +93,7 @@ function OutstandingList({
 		serialId,
 		countryCode,
 		organizationSerialId,
-		lastUpdatedAt, // not there
+		lastUpdatedAt,
 		selfOrganizationName,
 		selfOrganizationId = '',
 	} = item;
@@ -259,6 +269,11 @@ function OutstandingList({
 								/>
 							</div>
 						</Tooltip>
+						{
+							(item?.taggedState)
+								? (<Pill size="md" color="green">{startCase(item?.taggedState)}</Pill>) : null
+						}
+
 						<div className={styles.download_icon_div}>
 
 							<Popover placement="left" render={<ChangeStatus item={item} refetch={refetch} />}>

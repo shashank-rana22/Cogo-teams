@@ -1,4 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateLeft, IcMProfile } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -7,29 +6,15 @@ import styles from './styles.module.css';
 
 function UserDetails({ item = {} }) {
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
-	const { kam = [], creditController = [], salesAgent = [] } = item || [];
-	// const { kam = {}, salesAgent = {}, creditController = {} } = item || {};
-	const data = [
-		{
-			stakeholder_type : 'KAM Owner',
-			email            : kam[GLOBAL_CONSTANTS.zeroth_index]?.email,
-			name             : kam[GLOBAL_CONSTANTS.zeroth_index]?.name,
-		},
-		{
-			stakeholder_type : 'AGENT',
-			email            : salesAgent[GLOBAL_CONSTANTS.zeroth_index]?.email,
-			name             : salesAgent[GLOBAL_CONSTANTS.zeroth_index]?.name,
-		},
-		{
-			stakeholder_type : 'CC',
-			email            : creditController[GLOBAL_CONSTANTS.zeroth_index]?.email,
-			name             : creditController[GLOBAL_CONSTANTS.zeroth_index]?.name,
-		},
-	];
-	const allEmpty = data.every((el) => !el.email && !el.name);
+	const { kam = [], creditController = [], salesAgent = [], portfolioManager = [] } = item || [];
+	const kamData = (kam || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
+	const AgentData = (salesAgent || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
+	const CcData = (creditController || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
+	const portfolioManagerData = (portfolioManager || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
 	return (
 		<>
-			{!allEmpty && (
+			{(kamData.length !== 0 || AgentData.length !== 0 || CcData.length !== 0
+			|| portfolioManagerData.length !== 0) && (
 				<div className={styles.download_icon_div}>
 					<IcMProfile
 						onClick={() => setShowDetailsCard(true)}
@@ -56,21 +41,75 @@ function UserDetails({ item = {} }) {
 									DETAILS
 								</div>
 							</div>
-							<div className={styles.body_details}>
-								{(data || []).map((singleagent) => (
-									<div key={singleagent?.name} className={styles.containers}>
-										<div className={styles.stakeholder}>
-											{startCase(singleagent?.stakeholder_type || '-')}
-										</div>
-										<div className={styles.email}>
-											{singleagent?.email || '-'}
-										</div>
-										<div className={styles.name}>
-											{singleagent?.name || '-'}
-										</div>
+							{kamData.length !== 0 ? (
+								<div className={styles.body_details}>
+									<div className={styles.stakeholder}>
+										{startCase('KAM OWNER' || '-')}
 									</div>
-								))}
-							</div>
+									{(kamData || []).map((singleagent) => (
+										<div key={singleagent?.name} className={styles.containers}>
+											<div className={styles.email}>
+												{singleagent?.email || '-'}
+											</div>
+											<div className={styles.name}>
+												{singleagent?.name || '-'}
+											</div>
+										</div>
+									))}
+								</div>
+							) : null}
+							{AgentData.length !== 0 ? (
+								<div className={styles.body_details}>
+									<div className={styles.stakeholder}>
+										{startCase('AGENT' || '-')}
+									</div>
+									{(AgentData || []).map((singleagent) => (
+										<div key={singleagent?.name} className={styles.containers}>
+											<div className={styles.email}>
+												{singleagent?.email || '-'}
+											</div>
+											<div className={styles.name}>
+												{singleagent?.name || '-'}
+											</div>
+										</div>
+									))}
+								</div>
+							) : null}
+							{CcData.length !== 0 ? (
+								<div className={styles.body_details}>
+									<div className={styles.stakeholder}>
+										{startCase('CC' || '-')}
+									</div>
+									{(CcData || []).map((singleagent) => (
+										<div key={singleagent?.name} className={styles.containers}>
+											<div className={styles.email}>
+												{singleagent?.email || '-'}
+											</div>
+											<div className={styles.name}>
+												{singleagent?.name || '-'}
+											</div>
+										</div>
+									))}
+								</div>
+							) : null}
+							{portfolioManagerData.length !== 0 ? (
+								<div className={styles.body_details}>
+									<div className={styles.stakeholder}>
+										{startCase('Portfolio Manager' || '-')}
+
+									</div>
+									{(portfolioManagerData || []).map((singleagent) => (
+										<div key={singleagent?.name} className={styles.containers}>
+											<div className={styles.email}>
+												{singleagent?.email || '-'}
+											</div>
+											<div className={styles.name}>
+												{singleagent?.name || '-'}
+											</div>
+										</div>
+									))}
+								</div>
+							) : null}
 						</div>
 					</div>
 				</>

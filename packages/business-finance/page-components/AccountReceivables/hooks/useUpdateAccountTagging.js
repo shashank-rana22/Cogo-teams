@@ -1,16 +1,14 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useRequestBf } from '@cogoport/request';
 
-const useUpdateAccountTagging = ({ item }) => {
-	const [{ loading }, trigger] = useRequest({
+const useUpdateAccountTagging = ({ item = {} }) => {
+	const [{ loading }, trigger] = useRequestBf({
 
-		url: 'update_enrichment_request',
-
-		method: 'put',
-
+		url     : 'payments/outstanding/update-account-taggings',
+		method  : 'put',
+		authKey : 'update_payments_outstanding_account_tagging',
 	}, { manual: true });
-	console.log('itemkkkk', item);
-	const apiTrigger = async (val) => {
+	const apiTrigger = async (val, refetch) => {
 		try {
 			const resp = await trigger({
 				data: {
@@ -19,9 +17,10 @@ const useUpdateAccountTagging = ({ item }) => {
 					organizationId : item?.organizationId,
 				},
 			});
-			Toast.success(resp?.data?.message || 'Deleted successfully');
+			Toast.success(resp?.data?.message || 'Updated Successfully');
+			refetch();
 		} catch (err) {
-			Toast.error(err?.response?.data?.message || 'Failed to remove');
+			Toast.error(err?.response?.data?.message || 'Update Failed');
 		}
 	};
 

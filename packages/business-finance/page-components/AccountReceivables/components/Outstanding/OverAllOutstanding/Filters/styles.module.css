@@ -12,4 +12,23 @@
 	width: 350px;
 	max-height: 500px;
 	overflow-y: scroll;
+
+	b {
+		font-size: 12px;
+	}
+
+	:global {
+		.ui_radiogroup_container {
+			flex-direction: column;
+			font-size: var(--font-size-md);
+		}
+
+		.ui_select_input_placeholder {
+			font-size: 12px;
+		}
+	}
 }
+
+/* .filter_container b {
+	font-size: 10px;
+} */

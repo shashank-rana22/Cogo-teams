@@ -166,7 +166,6 @@ function OverAllOutstanding({
 					filters={filters}
 					setFilters={setFilters}
 					clearFilter={clearFilter}
-					refetch={refetch}
 				/>
 
 			</div>

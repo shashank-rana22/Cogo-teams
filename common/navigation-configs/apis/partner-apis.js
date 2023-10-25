@@ -6984,6 +6984,11 @@ const partner = {
 			service_name : 'sage',
 		},
 		{
+			api         : 'payments/outstanding/update-account-taggings',
+			access_type : 'private',
+
+		},
+		{
 			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',

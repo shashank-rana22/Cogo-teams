@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 function ShowFilterOptions({
 	controls = [],
 	setFilters = () => {},
-	refetch = () => {},
 	setShow = () => {},
 
 }) {
@@ -22,16 +21,14 @@ function ShowFilterOptions({
 	const onReset = () => {
 		setFilters({});
 		reset();
-		refetch();
+		// refetch();
 		setShow(false);
 	};
 
 	return (
 
 		<div className={styles.filter_container}>
-
 			<div className={styles.action_buttons}>
-
 				<Button
 					themeType="secondary"
 					size="md"
@@ -39,19 +36,14 @@ function ShowFilterOptions({
 						onReset();
 					}}
 				>
-
 					Reset
-
 				</Button>
-
 				<Button
 					themeType="primary"
 					size="md"
 					onClick={handleSubmit(onSubmit)}
 				>
-
 					Apply
-
 				</Button>
 
 			</div>
@@ -59,40 +51,27 @@ function ShowFilterOptions({
 			{controls.map((item) => {
 				switch (item?.type) {
 					case 'asyncSelect':
-
 						return (
-
-							<>
-
+							<div style={{ marginTop: '10px' }}>
 								<b>{item.label}</b>
 								<AsyncSelectController
 									key={item?.name}
 									{...item}
 									control={control}
 								/>
-
-							</>
-
+							</div>
 						);
-
 					case 'radio':
-
 						return (
-
 							<div style={{ marginTop: '10px' }}>
-
 								<b>{item.label}</b>
-
 								<RadioGroupController
 									key={item?.name}
 									{...item}
 									control={control}
 								/>
-
 							</div>
-
 						);
-
 					default:
 
 						return null;
@@ -105,15 +84,9 @@ function ShowFilterOptions({
 }
 
 function Filters({
-
 	controls = [], filters = {},
-
 	setFilters = () => {},
-
 	clearFilter = () => {},
-
-	refetch = () => {},
-
 }) {
 	const [show, setShow] = useState(false);
 
@@ -122,14 +95,13 @@ function Filters({
 		<Popover
 			visible={show}
 			placement="bottom"
-			onClickOutside
+			onClickOutside={() => setShow(false)}
 			render={(
 				<ShowFilterOptions
 					controls={controls}
 					setFilters={setFilters}
 					filters={filters}
 					clearFilter={clearFilter}
-					refetch={refetch}
 					setShow={setShow}
 				/>
 

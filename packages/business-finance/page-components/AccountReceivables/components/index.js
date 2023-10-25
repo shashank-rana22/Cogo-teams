@@ -40,7 +40,6 @@ function AccountReceivables() {
 	const { loading, entityData = [] } = useListCogoEntities();
 
 	const entityDataCount = entityData.length;
-
 	const entityOptions = (entityData || []).map((item) => {
 		const {
 			business_name: companyName = '',
@@ -51,7 +50,7 @@ function AccountReceivables() {
 			value : listEntityCode,
 		};
 	});
-
+	entityOptions.push({ label: 'COGO FREIGHT PVT LTD_COGOPORT PRIVATE LIMITED(101_301)', value: '101_301' });
 	return (
 		<div>
 			<div className={styles.header}>

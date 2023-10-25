@@ -48,9 +48,9 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 	}, [search, debounceQuery]);
 
 	const refetch = useCallback(
-		() => {
+		async () => {
 			try {
-				trigger({
+				await trigger({
 					params: {
 						sortBy       : key || undefined,
 						sortType     : order || undefined,
