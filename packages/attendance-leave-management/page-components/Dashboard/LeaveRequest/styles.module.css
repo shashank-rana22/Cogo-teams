@@ -36,6 +36,11 @@
 	}
 }
 
+.tab_switch::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
 .filters {
 	display: flex;
 	flex-wrap: wrap;

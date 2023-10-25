@@ -3,4 +3,9 @@
 	margin-top: 54px;
 	background-color: #fff;
 	border-radius: 4px;
+
+	@media (max-width: 576px) {
+		display: block;
+		margin-top: 50px;
+	}
 }
