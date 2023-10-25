@@ -3,8 +3,6 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-
-	/* max-height: 120px; */
 	transition: height 0.6s ease;
 
 	@media (max-width: 768px) {
