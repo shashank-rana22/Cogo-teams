@@ -1,7 +1,11 @@
+/* eslint-disable max-lines-per-function */
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
+import getPrefillForm from '../../SearchResults/utils/getPrefillForm';
+import useCreateSearch from '../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 import useGetCheckout from '../hooks/useGetCheckout';
 import useUpdateCheckout from '../hooks/useUpdateCheckout';
 
@@ -18,6 +22,8 @@ const MAPPING = {
 };
 
 const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
+	const router = useRouter();
+
 	const [headerProps, setHeaderProps] = useState({});
 	const [isShipmentCreated, setIsShipmentCreated] = useState(false);
 	const [isLoadingStateRequired, setIsLoadingStateRequired] = useState(false);
@@ -29,7 +35,11 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 		redirect_required = 'true',
 	} = query;
 
-	const { data = {}, loading, getCheckout } = useGetCheckout({ checkout_id, setIsLoadingStateRequired });
+	const {
+		data = {},
+		loading,
+		getCheckout,
+	} = useGetCheckout({ checkout_id, setIsLoadingStateRequired });
 
 	const {
 		detail = {},
@@ -54,6 +64,9 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 		source_id: search_id,
 		state = '',
 		importer_exporter = {},
+		validity_end = '',
+		importer_exporter_branch_id = '',
+		user = {},
 	} = detail || {};
 
 	const {
@@ -62,23 +75,86 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 		is_any_invoice_on_credit = false,
 	} = credit_details || {};
 
+	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
+
 	const { is_tnc_accepted = false } = credit_terms_amd_condition || {};
 
-	const { organization_settings = [], is_agent_allowed_to_book = false } = importer_exporter;
+	const { organization_settings = [], is_agent_allowed_to_book = false } =		importer_exporter;
 
 	const checkout_settings = organization_settings.filter(
 		(setting) => setting.setting_type === 'checkout',
 	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
-	const { setting_config: { assisted_booking_services = [] } = {} } = checkout_settings || {};
+	const { setting_config: { assisted_booking_services = [] } = {} } =		checkout_settings || {};
 
-	const { updateCheckout, updateLoading } = useUpdateCheckout({ getCheckout, detail });
+	const { updateCheckout, updateLoading } = useUpdateCheckout({
+		getCheckout,
+		detail,
+	});
+
+	const { createSearch, loading: createSearchLoading } = useCreateSearch();
+
+	const primaryService = Object.values(services || {}).find(
+		(service) => service?.service_type === primary_service || !service?.trade_type,
+	);
+
+	const {
+		origin_airport = null,
+		destination_airport = null,
+		origin_port = null,
+		destination_port = null,
+		origin_location = null,
+		destination_location = null,
+	} = primaryService || {};
+
+	const handleUnlockLatestRate = useCallback(async () => {
+		const formValues = getPrefillForm(
+			{
+				...detail,
+				service_details : services,
+				services        : undefined,
+			},
+			'primary_service',
+		);
+
+		const values = {
+			organization_branch_id : importer_exporter_branch_id,
+			organization_id        : importer_exporter_id,
+			service_type           : primary_service,
+			user_id                : user.id,
+			origin                 : origin_airport || origin_port || origin_location || {},
+			destination:
+				destination_airport || destination_port || destination_location || {},
+			formValues,
+		};
+
+		const spot_search_id = await createSearch({ action: 'edit', values });
+
+		if (spot_search_id && typeof spot_search_id === 'string') {
+			router.push('/book/[spot_search_id]', `/book/${spot_search_id}`);
+		}
+	}, [
+		createSearch,
+		destination_airport,
+		destination_location,
+		destination_port,
+		detail,
+		importer_exporter_branch_id,
+		importer_exporter_id,
+		origin_airport,
+		origin_location,
+		origin_port,
+		primary_service,
+		router,
+		services,
+		user.id,
+	]);
 
 	const BREADCRUMB_MAPPING = {
 		draft: {
 			label           : 'Add or Edit Margin',
 			onClickFunction : () => updateCheckout({ values: { id: detail?.id, state: 'draft' } }),
-			disabled        : ['draft', 'save_for_later'].includes(state),
+			disabled        : ['draft', 'save_for_later'].includes(state) || hasExpired,
 		},
 		locked: {
 			label           : 'Preview Booking',
@@ -86,20 +162,20 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 			disabled:
 				state === 'locked'
 				|| (['draft', 'save_for_later'].includes(state)
-					&& !quotation_email_sent_at),
+					&& !quotation_email_sent_at)
+				|| hasExpired,
 		},
 		booking_confirmation: {
 			label           : 'Set Invoicing Parties',
 			onClickFunction : () => updateCheckout({
 				values: { id: detail?.id, state: 'booking_confirmation' },
 			}),
-			disabled: state === 'booking_confirmation' || !quotation_email_sent_at,
+			disabled:
+				state === 'booking_confirmation'
+				|| !quotation_email_sent_at
+				|| hasExpired,
 		},
 	};
-
-	const primaryService = Object.values(services || {}).find(
-		(service) => service?.service_type === primary_service || !service?.trade_type,
-	);
 
 	const shouldEditMargin = !margin_approval_status && !quotation_email_sent_at;
 
@@ -111,21 +187,22 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 		&& credit_source === 'pre_approved_clean_credit'
 		&& is_any_invoice_on_credit;
 
-	const tncPresent =	Array.isArray(detail?.terms_and_conditions)
-	&& !isEmpty(terms_and_conditions);
+	const tncPresent = Array.isArray(detail?.terms_and_conditions)
+		&& !isEmpty(terms_and_conditions);
 
-	const isSkippable =	!!importer_exporter?.skippable_checks
-	&& importer_exporter?.skippable_checks?.includes('kyc');
+	const isSkippable = !!importer_exporter?.skippable_checks
+		&& importer_exporter?.skippable_checks?.includes('kyc');
 
 	const kycShowCondition = importer_exporter_id
-	&& importer_exporter?.kyc_status !== 'verified'
-	&& !isSkippable
-	&& checkout_type !== 'rfq';
+		&& importer_exporter?.kyc_status !== 'verified'
+		&& !isSkippable
+		&& checkout_type !== 'rfq';
 
-	const isAssistedBookingNotAllowed =	!isEmpty(assisted_booking_services)
-	&& (assisted_booking_services.includes('none')
-		|| !assisted_booking_services.includes(primary_service))
-		&& !is_agent_allowed_to_book && checkoutMethod !== 'controlled_checkout';
+	const isAssistedBookingNotAllowed = !isEmpty(assisted_booking_services)
+		&& (assisted_booking_services.includes('none')
+			|| !assisted_booking_services.includes(primary_service))
+		&& !is_agent_allowed_to_book
+		&& checkoutMethod !== 'controlled_checkout';
 
 	const checkoutData = useMemo(
 		() => ({
@@ -155,6 +232,8 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 			checkout_type,
 			earnable_cogopoints,
 			isAssistedBookingNotAllowed,
+			handleUnlockLatestRate,
+			createSearchLoading,
 		}),
 		[
 			primaryService,
@@ -182,6 +261,8 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 			checkout_type,
 			earnable_cogopoints,
 			isAssistedBookingNotAllowed,
+			handleUnlockLatestRate,
+			createSearchLoading,
 		],
 	);
 
@@ -192,7 +273,10 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 		return `/v2/${partner_id}/book/${search_id}`;
 	}, [importer_exporter_id, partner_id, search_id, shipment_id]);
 
-	const serviceDiscoveryUrl = useMemo(() => `/v2/${partner_id}/service-discovery`, [partner_id]);
+	const serviceDiscoveryUrl = useMemo(
+		() => `/v2/${partner_id}/service-discovery`,
+		[partner_id],
+	);
 
 	return {
 		resultsUrl,

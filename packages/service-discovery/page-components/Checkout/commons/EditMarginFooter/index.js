@@ -51,7 +51,12 @@ function EditMarginFooter({
 }) {
 	const { push } = useRouter();
 
-	const { detail = {}, rate } = useContext(CheckoutContext);
+	const {
+		detail = {},
+		rate = {},
+		handleUnlockLatestRate = () => {},
+		createSearchLoading = false,
+	} = useContext(CheckoutContext);
 
 	const timerRef = useRef(null);
 
@@ -208,9 +213,22 @@ function EditMarginFooter({
 					ref={timerRef}
 				/>
 
-				<span style={{ fontWeight: 400, marginLeft: '4px', color: '#eb3425' }}>
-					{hasExpired ? 'This Quotation has expired' : ''}
-				</span>
+				{hasExpired ? (
+					<span className={styles.quotation_expired}>
+						This Quotation has expired
+						{' '}
+						<Button
+							loading={createSearchLoading}
+							size="lg"
+							type="button"
+							themeType="link"
+							style={{ marginLeft: '4px' }}
+							onClick={handleUnlockLatestRate}
+						>
+							Create New Search
+						</Button>
+					</span>
+				) : null}
 			</div>
 
 			<div className={styles.button_container}>

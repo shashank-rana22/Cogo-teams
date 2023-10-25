@@ -107,7 +107,7 @@ function TotalLandedCost({
 				loading={createCheckoutLoading}
 				disabled={!proceedToCheckoutIsValid}
 			>
-				Proceed to Modify Line Items
+				Proceed to Adjust Margins
 			</Button>
 		</div>
 	);

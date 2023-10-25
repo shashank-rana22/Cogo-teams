@@ -48,3 +48,11 @@
 	font-weight: 600;
 	color: #f00;
 }
+
+.quotation_expired {
+	display: flex;
+	align-items: center;
+	margin-left: 4px;
+	font-weight: 400;
+	color: #eb3425;
+}
