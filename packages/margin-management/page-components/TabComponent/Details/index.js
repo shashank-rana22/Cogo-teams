@@ -192,8 +192,7 @@ function Details({
 						onClick={(e) => {
 							e.stopPropagation();
 							setShowPopover(true);
-							// setMarginBreakupData(data);
-							console.log(data?.id);
+							setMarginBreakupData(data);
 						}}
 					>
 						<Popover
