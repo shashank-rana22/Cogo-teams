@@ -53,7 +53,7 @@ function OrderDetails() {
 		id = query.id;
 	}
 
-	const { data : getOrderData, getOrderDetails } = useGetOrderDetails({ id });
+	const { data: getOrderData, getOrderDetails } = useGetOrderDetails({ id });
 	const {
 		order_items_list, order_ticket_id, delivery_date, total_amount,
 		order_status, created_at,
@@ -155,7 +155,7 @@ function OrderDetails() {
 							<span className={styles.order_expected_arrival}>Order expected arrival</span>
 							{delivery_date ? (
 								<span className={styles.order_expected_date}>
-									{ formatDate({
+									{formatDate({
 										date       : delivery_date,
 										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 										formatType : 'date',
@@ -186,9 +186,9 @@ function OrderDetails() {
 							</Button>
 						</div>
 					</div>
-					{ is_hr_admin ? (
+					{is_hr_admin ? (
 						<div className={styles.delivery_date}>
-							<div>
+							<div className={styles.delivery_date_details}>
 								<span>Expected ETD</span>
 								<DatepickerController
 									placeholder="Select Date"
@@ -198,10 +198,9 @@ function OrderDetails() {
 									size="md"
 									className={styles.date_picker}
 									onChange={onSubmit}
-									style={{ marginRight: '8px' }}
 								/>
 							</div>
-							<div>
+							<div className={styles.delivery_date_details}>
 								<span>Update Status</span>
 								<SelectController
 									placeholder="Status"
@@ -228,7 +227,9 @@ function OrderDetails() {
 							</span>
 
 						</div>
-						<Table columns={columns} data={order_items_list || []} />
+						<div className={styles.table_container}>
+							<Table columns={columns} data={order_items_list || []} />
+						</div>
 					</div>
 				</div>
 			</div>

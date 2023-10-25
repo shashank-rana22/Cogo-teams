@@ -150,3 +150,15 @@
 	justify-content: flex-end;
 	width: 100%;
 }
+
+@media (max-width: 767px) {
+	.table_container {
+		width: 100%;
+		overflow: scroll;
+	}
+
+	.header {
+		flex-direction: column;
+		margin-bottom: 24px;
+	}
+}
