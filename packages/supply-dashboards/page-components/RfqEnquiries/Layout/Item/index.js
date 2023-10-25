@@ -60,7 +60,6 @@ function Item(props) {
 					}}
 					>
 						{errorOriginal}
-
 					</p>
 				</div>
 			) : null

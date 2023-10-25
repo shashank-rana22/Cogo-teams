@@ -137,7 +137,7 @@ function ShipmentsHomePage({ setActiveTab = () => {}, viewType = '', mailProps =
 							className={styles.select_field}
 							onChange={(val) => setParams((prev) => ({ ...prev, shipmentType: val }))}
 							placeholder="Shipment Type"
-							options={SHIPMENT_TYPE_OPTIONS}
+							options={Object.values(SHIPMENT_TYPE_OPTIONS)}
 							isClearable
 						/>
 						<div className={cl`${styles.custom_date_filter}

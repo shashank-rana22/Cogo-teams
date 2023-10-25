@@ -192,6 +192,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'platform_config',
 	},
+	{
+		api          : 'update_rfq_status',
+		access_type  : 'private',
+		service_name : 'rfq',
+	},
 ];
 
 export default apis;
