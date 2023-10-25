@@ -6,12 +6,18 @@ import Post from './Post';
 import Poster from './Poster';
 import styles from './styles.module.css';
 
-function Feed({ data = {}, feedRefetch, setFilters }) {
+function Feed({ data = {}, feedRefetch, setFilters, summaryData }) {
 	const { total_count, page } = data || {};
+	const { user_role } = summaryData || {};
+
 	return (
 		<div className={styles.container}>
-			<Post feedRefetch={feedRefetch} />
-			<Poster />
+			{user_role !== 'employee' && (
+				<>
+					<Post feedRefetch={feedRefetch} data={data} />
+					<Poster />
+				</>
+			)}
 			<FeedPosts data={data} feedRefetch={feedRefetch} />
 			<div style={{ marginTop: 12, display: 'flex', justifyContent: 'flex-end' }}>
 				<Pagination

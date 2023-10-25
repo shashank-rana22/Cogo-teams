@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 // https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rectangle_126.svg
 
-function YourPerformance({ data, feedRefetch, setFilters }) {
+function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
 	return (
 		<>
 			{/* <div className={styles.container}>
@@ -72,7 +72,7 @@ function YourPerformance({ data, feedRefetch, setFilters }) {
 			<div className={styles.company_feed}>
 				<div className={styles.company_feed_title}>Company Feed</div>
 				<div className={styles.sub_title}>Updates, announcements and more</div>
-				<Feed data={data} feedRefetch={feedRefetch} setFilters={setFilters} />
+				<Feed data={data} feedRefetch={feedRefetch} setFilters={setFilters} summaryData={summaryData} />
 			</div>
 		</>
 	);

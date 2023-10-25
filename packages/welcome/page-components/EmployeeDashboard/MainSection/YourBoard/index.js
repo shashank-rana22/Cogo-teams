@@ -5,7 +5,7 @@ import Holiday from './Holiday';
 import LeaveBalance from './LeaveBalance';
 import NotInOffice from './NotInOffice';
 import OrgData from './OrgData';
-// import SalaryUpdate from './SalaryUpdate';
+import SalaryUpdate from './SalaryUpdate';
 import styles from './styles.module.css';
 import TimeSummary from './TimeSummary';
 
@@ -24,9 +24,9 @@ function YourBoard({ data, loading }) {
 			<TimeSummary />
 			<NotInOffice data={data} loading={loading} />
 			<LeaveBalance />
+			<SalaryUpdate />
 			<AttendanceStats self_working_stats={self_working_stats} loading={loading} />
 			<Holiday data={next_holiday_detail} loading={loading} />
-			{/* <SalaryUpdate /> */}
 		</div>
 	);
 }

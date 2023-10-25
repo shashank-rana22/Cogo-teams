@@ -61,7 +61,7 @@ function TimeSummary() {
 				aria-hidden
 			>
 				<div className={styles.checkout_text}>
-					Check Out
+					View Attendance
 					{' '}
 				</div>
 				<IcMArrowRight />

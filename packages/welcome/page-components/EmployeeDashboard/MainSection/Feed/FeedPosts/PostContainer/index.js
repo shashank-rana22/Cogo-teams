@@ -1,3 +1,6 @@
+/* eslint-disable no-unsafe-optional-chaining */
+/* eslint-disable custom-eslint/zeroth-index-import */
+/* eslint-disable max-lines-per-function */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-useless-escape */
 /* eslint-disable custom-eslint/regex-check */
@@ -145,22 +148,33 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 	const [taggedPeople, setTaggedPeople] = useState([]);
 
 	useEffect(() => {
-		if (item?.feed_type === 'appreciation') {
-			// Use regular expression to match the initials
-			const regex = /\[([^\]]+)\]/g;
-			const matches = item?.feed_content?.match(regex);
+		if (['appreciation', 'work_anniversary', 'birthday'].includes(item?.feed_type)) {
+			// // Use regular expression to match the initials
+			// const regex = /\[([^\]]+)\]/g;
+			// const matches = item?.feed_content?.match(regex);
 
-			// Extract and format the initials to uppercase
-			const initials = matches?.map((match) => {
-				const name = match?.substring(1, match.indexOf(']'));
-				return name?.split(' ')?.map((word) => word[0].toUpperCase()).join('');
+			// // Extract and format the initials to uppercase
+			// const initials = matches?.map((match) => {
+			// 	const name = match?.substring(1, match.indexOf(']'));
+			// 	return name?.split(' ')?.map((word) => word[0].toUpperCase()).join('');
+			// });
+
+			// const resultArray = initials?.map((string) => (string.length > 2 ? string[0] + string.slice(-1) : string));
+
+			// setTaggedPeople(resultArray);
+
+			const initials = item?.tagged_employee_names?.map((name) => {
+				const words = name?.split(' ');
+				const firstInitial = words?.[0][0]?.toUpperCase();
+				const lastInitial = words?.[words?.length - 1][0]?.toUpperCase();
+				return firstInitial + lastInitial;
 			});
 
-			const resultArray = initials.map((string) => (string.length > 2 ? string[0] + string.slice(-1) : string));
+			const filteredArray = initials.filter(Boolean);
 
-			setTaggedPeople(resultArray);
+			setTaggedPeople(filteredArray);
 		}
-	}, [item.feed_content, item?.feed_type]);
+	}, [item.feed_content, item?.feed_type, item?.tagged_employee_names]);
 
 	useEffect(() => {
 		if (Array.isArray(item?.my_reaction)) {

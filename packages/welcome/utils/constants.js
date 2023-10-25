@@ -5,6 +5,7 @@ import {
 	IcMAppInvoiceSubmission,
 	IcMProfile,
 	IcMAppPayment,
+	IcMAppUploadDocument,
 } from '@cogoport/icons-react';
 
 export const HEADER_NAV = [
@@ -36,6 +37,11 @@ export const HEADER_NAV = [
 		label : 'Payroll',
 		icon  : IcMAppPayment,
 		route : '/payroll/payroll',
+	},
+	{
+		label : 'Policies',
+		icon  : IcMAppUploadDocument,
+		route : '',
 	},
 	// {
 	// 	label : 'Tax Submissions',
