@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import containerSize from '@cogoport/constants/container-sizes.json';
 import containertypes from '@cogoport/constants/container-types.json';
 import truckTypes from '@cogoport/constants/truck-types.json';
@@ -83,7 +84,9 @@ export default function getLtlFreight({ type = '' }) {
 			label          : 'Origin Location',
 			name           : 'origin_location_id',
 			placeholder    : 'Select Origin',
-			type           : 'location-select',
+			type           : 'async_select',
+			asyncKey       : 'list_locations',
+			initialCall    : true,
 			caret          : true,
 			optionsListKey : 'locations',
 			watch          : true,
@@ -100,7 +103,9 @@ export default function getLtlFreight({ type = '' }) {
 			label          : 'Destination',
 			name           : 'destination_location_id',
 			placeholder    : 'Select Destination',
-			type           : 'location-select',
+			type           : 'async_select',
+			asyncKey       : 'list_locations',
+			initialCall    : true,
 			caret          : true,
 			optionsListKey : 'locations',
 			watch          : true,
@@ -224,5 +229,43 @@ export default function getLtlFreight({ type = '' }) {
 			commodityType : 'freight',
 		},
 	];
-	return { fcl_freight_local, ftl_freight, ltl_freight };
+	const rail_domestic_freight = [
+		{
+			label    : 'Select Trade Type',
+			name     : 'trade_type',
+			type     : 'select',
+			span     : 2,
+			watch    : true,
+			disabled : type === 'edit',
+			options  : [{ label: 'Domestic', value: 'domestic' }],
+		},
+		{
+			label       : 'Origin',
+			name        : 'origin_location_id',
+			placeholder : 'Select Origin',
+			type        : 'async_select',
+			asyncKey    : 'list_locations',
+			initialCall : true,
+			caret       : true,
+			watch       : true,
+			span        : 2,
+			disabled    : type === 'edit',
+			params      : { filters: { type: ['railway_terminal'] } },
+		},
+		{
+			label          : 'Destination',
+			name           : 'destination_location_id',
+			placeholder    : 'Select Destination',
+			type           : 'async_select',
+			asyncKey       : 'list_locations',
+			initialCall    : true,
+			caret          : true,
+			optionsListKey : 'locations',
+			watch          : true,
+			span           : 2,
+			disabled       : type === 'edit',
+			params         : { filters: { type: ['railway_terminal'] } },
+		},
+	];
+	return { fcl_freight_local, ftl_freight, ltl_freight, rail_domestic_freight };
 }
