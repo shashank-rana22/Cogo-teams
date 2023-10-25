@@ -605,6 +605,14 @@ function ExpenseComponent() {
 		return null;
 	}
 
+	useEffect(() => {
+		if (recurringState === 'recurring') {
+			setSubActiveTab('ALL_EXPENSE_CONFIGURATION');
+		} else if (recurringState === 'nonRecurring') {
+			setSubActiveTab('ALL_INVOICES');
+		}
+	}, [recurringState]);
+
 	let listConfig;
 	let listItemData;
 	let loading;
@@ -617,16 +625,12 @@ function ExpenseComponent() {
 		loading = false;
 		TABS = RECURRING_TABS;
 		tabData = recurringListData?.stat || {};
-
-		if (subActiveTab !== 'ALL_EXPENSE_CONFIGURATION') setSubActiveTab('ALL_EXPENSE_CONFIGURATION');
 	} else if (recurringState === 'nonRecurring') {
 		listConfig = expenseNonRecurringConfig;
 		listItemData = listData;
 		loading = listLoading;
 		TABS = NON_RECURRING_TABS;
 		tabData = listData?.stat || {};
-
-		if (subActiveTab !== 'ALL_INVOICES') setSubActiveTab('ALL_INVOICES');
 	}
 
 	return (
