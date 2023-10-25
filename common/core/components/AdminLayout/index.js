@@ -11,6 +11,7 @@ import React, { useState } from 'react';
 import useGetUnreadMails from '../../helpers/useGetUnreadMails';
 
 import AnnouncementModal from './Announcements/AnnouncementModal';
+import GroupCall from './GroupCall';
 import useGetUnreadMessagesCount from './helpers/useGetUnreadMessageCount';
 import LeadFeedBackVoiceCallForm from './LeadFeedBackVoiceCallForm';
 import { LockScreen } from './LockScreen';
@@ -148,6 +149,7 @@ function AdminLayout({
 				inCall={inCall}
 			/>
 			<LeadFeedBackVoiceCallForm />
+			<GroupCall agentId={user_id} firestore={firestore} />
 		</div>
 	);
 }
