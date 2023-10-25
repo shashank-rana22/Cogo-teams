@@ -11,135 +11,158 @@ import {
 	deleteDoc,
 	collection,
 } from 'firebase/firestore';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
 
-import useListCogooneTimeline from './useListCogooneTimeline';
+import useMessagesTimeline from './useMessagesTimeline';
 
 const PAGE_LIMIT = 10;
 const LAST_INDEX_FROM_END = 1;
 const ZERO_MESSAGES = 0;
 const QUERY_LIMIT = 1;
 
-const useGetMessages = ({
-	activeChatCollection, id, viewType, firestore = {},
-	channel_type = '', setActiveTab = () => {},
-}) => {
+const useGetMessages = (
+	{
+		activeChatCollection,
+		id,
+		viewType,
+		firestore = {},
+		channel_type = '',
+		setActiveTab = () => {},
+		addTimeline = false,
+	},
+) => {
+	const snapshotRef = useRef(null);
+
 	const [messagesState, setMessagesState] = useState({});
-
-	const firstMessages = useRef(null);
-	const [firstLoadingMessages, setFirstLoadingMessages] = useState(false);
-
+	const [firstLoadingMessages, setFirstLoadingMessages] = useState(true);
 	const [loadingPrevMessages, setLoadingPrevMessages] = useState(false);
 
-	const {
-		getCogooneTimeline,
-		timeLineLoading, firstTimeLineLoading, setFirstTimeLineLoading = () => {},
-	} = useListCogooneTimeline({ id, setMessagesState, type: 'messages' });
+	const { addMessageTimeline = () => {} } = useMessagesTimeline({ setMessagesState, id });
 
-	const snapshotCleaner = () => {
-		if (firstMessages.current) {
-			firstMessages.current();
-			firstMessages.current = null;
-		}
-	};
-
-	const mountSnapShot = () => {
-		snapshotCleaner();
-
+	const mountSnapShot = useCallback(() => {
 		if (isEmpty(activeChatCollection)) {
 			return;
 		}
 
-		setFirstLoadingMessages(true);
-		setFirstTimeLineLoading(true);
-		const chatCollectionQuery = query(
-			activeChatCollection,
-			...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accesible_agent_types_query || []),
-			orderBy('created_at', 'desc'),
-			limit(PAGE_LIMIT),
-		);
-		firstMessages.current = onSnapshot(
-			chatCollectionQuery,
-			(querySnapshot) => {
-				const lastDocumentTimeStamp = querySnapshot.docs[querySnapshot.docs.length
+		try {
+			const chatCollectionQuery = query(
+				activeChatCollection,
+				...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accesible_agent_types_query || []),
+				orderBy('created_at', 'desc'),
+				limit(PAGE_LIMIT),
+			);
+
+			snapshotRef.current = onSnapshot(
+				chatCollectionQuery,
+				(querySnapshot) => {
+					const lastDocumentTimeStamp = querySnapshot.docs[querySnapshot.docs.length
 						- LAST_INDEX_FROM_END]?.data()?.created_at;
-				const islastPage = querySnapshot.docs.length < PAGE_LIMIT;
-				let prevMessageData = {};
-				querySnapshot.forEach((mes) => {
-					const timeStamp = mes.data()?.created_at;
 
-					prevMessageData = {
-						...prevMessageData,
-						[timeStamp]: {
-							...(mes.data() || {}),
-							id: mes.id,
-						},
-					};
-				});
+					const islastPage = querySnapshot.docs.length < PAGE_LIMIT;
+					let prevMessageData = {};
+					querySnapshot.forEach((mes) => {
+						const timeStamp = mes.data()?.created_at;
 
-				getCogooneTimeline({
-					startDate : lastDocumentTimeStamp,
-					endDate   : Date.now(),
-					prevMessageData,
-					lastDocumentTimeStamp,
-					islastPage,
-				});
-				setFirstLoadingMessages(false);
-			},
-		);
-	};
+						prevMessageData = {
+							...prevMessageData,
+							[timeStamp]: {
+								...(mes.data() || {}),
+								id: mes.id,
+							},
+						};
+					});
 
-	const getNextData = async () => {
-		const prevTimeStamp = Number(messagesState?.[id]?.lastDocumentTimeStamp);
+					setMessagesState((prev) => ({
+						messagesData: { ...(prev?.messagesData || {}), ...(prevMessageData || {}) },
+						lastDocumentTimeStamp,
+						islastPage,
+					}));
 
+					if (addTimeline) {
+						addMessageTimeline({
+							startDate : lastDocumentTimeStamp,
+							endDate   : Date.now(),
+						});
+					}
+					setFirstLoadingMessages(false);
+				},
+			);
+		} catch (e) {
+			console.error('e', e);
+		}
+	}, [activeChatCollection, viewType, addMessageTimeline, addTimeline]);
+
+	const getNextData = useCallback(async ({ callBack = () => {} } = {}) => {
 		if (isEmpty(activeChatCollection)) {
 			return;
 		}
+		try {
+			const prevTimeStamp = Number(messagesState?.lastDocumentTimeStamp || 0);
+			setLoadingPrevMessages(true);
 
-		const chatCollectionQuery = query(
-			activeChatCollection,
-			...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accesible_agent_types_query || []),
-			where(
-				'created_at',
-				'<',
-				prevTimeStamp,
-			),
-			orderBy('created_at', 'desc'),
-			limit(PAGE_LIMIT),
-		);
+			const chatCollectionQuery = query(
+				activeChatCollection,
+				...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accesible_agent_types_query || []),
+				where(
+					'created_at',
+					'<',
+					prevTimeStamp,
+				),
+				orderBy('created_at', 'desc'),
+				limit(PAGE_LIMIT),
+			);
+			const prevMessagesPromise = await getDocs(chatCollectionQuery);
+			const prevMessages = prevMessagesPromise?.docs || [];
 
-		setLoadingPrevMessages(true);
-		const prevMessagesPromise = await getDocs(chatCollectionQuery);
-		const prevMessages = prevMessagesPromise?.docs || [];
-		const lastDocumentTimeStamp = prevMessages[(prevMessages.length
-			|| GLOBAL_CONSTANTS.zeroth_index) - LAST_INDEX_FROM_END]?.data()?.created_at;
-		const islastPage = prevMessages?.length < PAGE_LIMIT;
-		let prevMessageData = {};
+			const lastDocumentTimeStamp = prevMessages[(prevMessages.length
+				|| GLOBAL_CONSTANTS.zeroth_index) - LAST_INDEX_FROM_END]?.data()?.created_at;
+			const islastPage = prevMessages?.length < PAGE_LIMIT;
+			let prevMessageData = {};
 
-		prevMessages.forEach((mes) => {
-			const timeStamp = mes.data()?.created_at;
+			prevMessages.forEach((mes) => {
+				const timeStamp = mes.data()?.created_at;
 
-			prevMessageData = {
-				...prevMessageData,
-				[timeStamp]: {
-					...(mes.data() || {}),
-					id: mes.id,
-				},
-			};
-		});
+				prevMessageData = {
+					...prevMessageData,
+					[timeStamp]: {
+						...(mes.data() || {}),
+						id: mes.id,
+					},
+				};
+			});
 
-		getCogooneTimeline({
-			startDate : lastDocumentTimeStamp,
-			endDate   : prevTimeStamp,
-			prevMessageData,
-			lastDocumentTimeStamp,
-			islastPage,
-		});
-		setLoadingPrevMessages(false);
-	};
+			const messagesLength = Object.keys(messagesState?.messagesData || {}).length + (prevMessages?.length || 0);
+
+			setMessagesState((prev) => ({
+				messagesData: { ...(prev?.messagesData || {}), ...(prevMessageData || {}) },
+				lastDocumentTimeStamp,
+				islastPage,
+			}));
+
+			if (addTimeline) {
+				addMessageTimeline({
+					startDate : lastDocumentTimeStamp,
+					endDate   : prevTimeStamp,
+				});
+			} else {
+				callBack({ newListLength: messagesLength });
+			}
+		} catch (error) {
+			console.error('error', error);
+		} finally {
+			setLoadingPrevMessages(false);
+		}
+	}, [
+		activeChatCollection,
+		addMessageTimeline,
+		addTimeline,
+		messagesState?.lastDocumentTimeStamp,
+		messagesState?.messagesData,
+		viewType,
+	]);
 
 	const deleteMessage = async ({ timestamp = '', messageDocId = '' }) => {
 		setMessagesState((prev) => {
@@ -201,26 +224,30 @@ const useGetMessages = ({
 		}
 	};
 
-	useEffect(() => {
-		mountSnapShot();
-		return () => {
-			snapshotCleaner();
-		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [id]);
-
-	const activeMessageData = messagesState?.[id]?.messagesData || {};
+	const activeMessageData = messagesState?.messagesData || {};
 
 	const sortedMessageData = Object.keys(activeMessageData || {})
 		.sort((a, b) => Number(a) - Number(b))
 		.map((eachkey) => activeMessageData[eachkey]) || [];
 
+	useEffect(() => {
+		setMessagesState({});
+
+		setFirstLoadingMessages(true);
+		mountSnapShot();
+		const unSubscribe = snapshotRef?.current;
+
+		return () => {
+			unSubscribe?.();
+		};
+	}, [mountSnapShot]);
+
 	return {
 		getNextData,
-		lastPage             : messagesState?.[id]?.islastPage,
-		messagesData         : sortedMessageData,
-		firstLoadingMessages : firstLoadingMessages || firstTimeLineLoading,
-		loadingPrevMessages  : loadingPrevMessages || timeLineLoading,
+		lastPage     : messagesState?.islastPage,
+		messagesData : sortedMessageData,
+		firstLoadingMessages,
+		loadingPrevMessages,
 		messagesState,
 		mountSnapShot,
 		deleteMessage,
