@@ -6,10 +6,10 @@ import React from 'react';
 
 import FieldPair from './RenderFunctions/FiledPair';
 
-const getFormattedAmount = ({ amount, currency, symbol }) => formatAmount({
+const getFormattedAmount = ({ amount, currency }) => formatAmount({
 	amount,
-	currency : currency || symbol,
-	options  : {
+	currency,
+	options: {
 		style                 : 'currency',
 		currencyDisplay       : 'symbol',
 		maximumFractionDigits : 2,

@@ -1,41 +1,18 @@
-import { PAYMENT_OPTIONS } from '../../constants/REPEAT_FREQUENCY';
+import { startCase } from '@cogoport/utils';
 
-const Controls = {
-	paymentStatus: {
-		value       : 'paymentStatus',
-		placeholder : 'Payment Status',
-		options     : PAYMENT_OPTIONS,
+const vendorControls = [
+	{
+		name        : 'CATEGORY',
+		placeholder : 'Expense Category',
+		type        : 'asyncSelect',
+		asyncKey    : 'list_expense_category',
+		renderLabel : (item) => startCase(item.categoryName),
+		initialCall : true,
+		valueKey    : 'categoryName',
+		isClearable : true,
+		span        : 1,
+		style       : { width: '164px', height: '32px' },
 	},
-	CATEGORY: {
-		value       : 'CATEGORY',
-		placeholder : 'Category',
-		options     : [
-			{
-				label : 'Rent',
-				value : 'RENT',
-			},
-			{
-				label : 'Office maintenance',
-				value : 'OFFICE_MAINTENANCE',
-			},
-			{
-				label : 'Business Expenses',
-				value : 'BUSINESS_EXPENSES',
-			},
-			{
-				label : 'Internet and communication ',
-				value : 'INTERNET_AND_COMMUNICATION',
-			},
-			{
-				label : 'Professional Services Expenses',
-				value : 'PROFESSIONAL_SERVICES_EXPENSES',
-			},
-			{
-				label : 'Miscellaneous Expenses',
-				value : 'MISCELLANEOUS_EXPENSES',
-			},
-		],
-	},
-};
+];
 
-export default Controls;
+export default vendorControls;
