@@ -1,4 +1,5 @@
 import { Button, Textarea, Modal } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -12,18 +13,19 @@ import getCombinedRemarks from './getCombinedRemarks';
 import styles from './styles.module.css';
 
 function Header({
-	data,
-	remarksVal,
-	overAllRemark,
-	setOverAllRemark,
-	lineItemsRemarks,
-	status,
-	jobNumber,
+	data = {},
+	remarksVal = {},
+	overAllRemark = '',
+	setOverAllRemark = () => {},
+	lineItemsRemarks = {},
+	status = '',
+	jobNumber = '',
 	checkItem = {},
 	isTagFound = false,
 	currentTab = '',
 	jobType = '',
 }) {
+	const Router = useRouter();
 	const [approve, setApprove] = useState(false);
 	const [modalData, setModalData] = useState('');
 	const [remarkData, setRemarkData] = useState({
@@ -33,7 +35,6 @@ function Header({
 		other         : undefined,
 	});
 
-	const Router = useRouter();
 	const billId = Router?.query?.billId;
 	const { isShipment, searchValue, active_tab:activeTab, view } = Router?.query || {};
 
@@ -54,30 +55,30 @@ function Header({
 		setApprove(true);
 	};
 
-	const isApproveDisabled = Object.keys(lineItemsRemarks)?.length > 0
-    || remarksVal?.billingPartyRemark?.length > 0
-    || remarksVal?.collectionPartyRemark?.length > 0
-	|| remarksVal?.invoiceDetailsRemark?.length > 0
-	|| remarksVal?.taggingRemark?.length > 0;
+	const isApproveDisabled = !isEmpty(Object.keys(lineItemsRemarks))
+    || !isEmpty(remarksVal?.billingPartyRemark)
+    || !isEmpty(remarksVal?.collectionPartyRemark)
+	|| !isEmpty(remarksVal?.invoiceDetailsRemark)
+	|| !isEmpty(remarksVal?.taggingRemark);
 
 	const isItemNotChecked = Object.values(checkItem).some((item) => !item);
 
 	const getRoute = () => {
 		if (activeTab === 'rejected') {
 			return [
-				'/business-finance/coe-finance/[active_tab]/[view]',
-				`/business-finance/coe-finance/rejected/${view}`,
+				'/business-finance/audit-function/[active_tab]/[view]',
+				`/business-finance/audit-function/rejected/${view}`,
 			];
 		}
 		if (isShipment) {
 			return [
-				`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}`,
-				`/business-finance/coe-finance/all_invoices/shipment-view?jobNumber=${jobNumber}`,
+				`/business-finance/audit-function/[active_tab]/[view]?jobNumber=${jobNumber}`,
+				`/business-finance/audit-function/all_invoices/shipment-view?jobNumber=${jobNumber}`,
 			];
 		}
 		return [
-			`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}&searchValue=${searchValue}`,
-			`/business-finance/coe-finance/all_invoices/purchase-view?jobNumber=${jobNumber}
+			`/business-finance/audit-function/[active_tab]/[view]?jobNumber=${jobNumber}&searchValue=${searchValue}`,
+			`/business-finance/audit-function/all_invoices/purchase-view?jobNumber=${jobNumber}
 			&searchValue=${searchValue}`,
 		];
 	};
@@ -107,7 +108,7 @@ function Header({
 					size="md"
 					themeType="secondary"
 					onClick={() => Router.push(
-						getRoute()[0],
+						getRoute()[GLOBAL_CONSTANTS.zeroth_index],
 						getRoute()[1],
 					)}
 					style={{ border: '1px solid' }}

@@ -11,7 +11,7 @@ const formatCreateJvPayload = (data) => ({
 	}),
 	jvLineItems: data?.line_items?.map((lineitem) => ({
 		accMode      : lineitem?.accMode || undefined,
-		entityCode   : lineitem?.entityCode || undefined,
+		entityCode   : lineitem?.entityCode || data?.entityCode || undefined,
 		glCode       : lineitem?.glCode || undefined,
 		tradePartyId : lineitem?.tradePartyId || undefined,
 		type         : lineitem?.type || undefined,

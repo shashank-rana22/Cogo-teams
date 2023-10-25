@@ -10,8 +10,9 @@ import styles from './styles.module.css';
 function CardContent({ data = {}, filter = {}, service = {} }) {
 	const {
 		shipping_line = {}, airline = {}, service_provider = {}, serial_id = {},
-		assigned_to = {}, closed_by = {}, created_at = {},
+		assigned_to = {}, created_at = {},
 	} = data || {};
+
 	return (
 		<div className={styles.header}>
 			<div className={styles.top_left_details}>
@@ -52,18 +53,6 @@ function CardContent({ data = {}, filter = {}, service = {} }) {
 									Assigned to :
 									{' '}
 									{assigned_to?.name}
-								</span>
-							</Pill>
-						</div>
-					)}
-				{closed_by?.name
-					&& (
-						<div className={styles.pill}>
-							<Pill size="md" color="#EEF0F0">
-								<span>
-									Closed by :
-									{' '}
-									{closed_by?.name}
 								</span>
 							</Pill>
 						</div>

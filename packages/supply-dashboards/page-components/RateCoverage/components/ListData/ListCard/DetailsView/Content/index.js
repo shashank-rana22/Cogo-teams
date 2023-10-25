@@ -27,7 +27,7 @@ function ServiceDetailsContent({
 		pillMapping = [], contentValuesMapping = [], summary = {},
 		status = '', preferred_shipping_lines = [],	preferred_freight_rate,
 		preferred_freight_rate_currency,
-		preferred_airlines,
+		preferred_airlines, booking_params, transitTime,
 	} = contentMapping({
 		requestData,
 		feedbackData,
@@ -35,7 +35,6 @@ function ServiceDetailsContent({
 		shipment_data,
 	});
 
-	const { booking_params } = feedbackData || {};
 	const { rate_card } = booking_params || {};
 
 	const shippinlineName = preferred_shipping_lines?.[DEFAULT_VALUE]?.business_name;
@@ -66,16 +65,17 @@ function ServiceDetailsContent({
 			payment_term,
 			price_type,
 			packages_count,
+			commodity,
 		} = val;
 
 		const formatLine = (label, value) => (value ? `${label} ${startCase(value)}\n` : '');
 
 		let textToCopy = '';
-		textToCopy += formatLine('commodity: ', commodity_category);
+		textToCopy += formatLine('commodity: ', commodity_category || commodity);
 		textToCopy += formatLine('containerSize: ', container_size);
 		textToCopy += formatLine('containerType: ', container_type);
 		textToCopy += formatLine('containersCount: ', containers_count);
-		textToCopy += formatLine('cargoReadinessDate: ', cargo_readiness_date);
+		textToCopy += formatLine('cargoReady: ', cargo_readiness_date);
 		textToCopy += formatLine('freeDaysDetentionDestination: ', free_days_detention_destination);
 		textToCopy += formatLine('blType: ', bl_type);
 		textToCopy += formatLine('commodityDescription: ', commodity_description);
@@ -85,12 +85,18 @@ function ServiceDetailsContent({
 		textToCopy += formatLine('closingRemarks: ', closing_remarks);
 		textToCopy += formatLine('serialId: ', serial_id);
 		textToCopy += formatLine('createdAt: ', created_at);
-		textToCopy += formatLine('incoTerm', inco_term);
-		textToCopy += formatLine('paymentTerm', payment_term);
-		textToCopy += formatLine('priceType', price_type);
-		textToCopy += formatLine('packagesCount', packages_count);
-		textToCopy += formatLine('bookingParams', booking_params);
-
+		textToCopy += formatLine('incoTerm:', inco_term);
+		textToCopy += formatLine('paymentTerm:', payment_term);
+		textToCopy += formatLine('priceType:', price_type);
+		textToCopy += formatLine('packagesCount:', packages_count);
+		textToCopy += formatLine('shippingLine:', shippinlineName);
+		textToCopy += formatLine('airLine:', airLineName);
+		textToCopy += formatLine('transitTime:', transitTime);
+		textToCopy += formatLine(
+			'Dislike Rates:',
+			rate_card?.line_items[0]?.buy_price,
+			rate_card?.line_items[0]?.currency,
+		);
 		if (textToCopy) {
 			navigator.clipboard.writeText(textToCopy);
 			copyToClipboard(textToCopy, 'Data');
@@ -226,7 +232,7 @@ function ServiceDetailsContent({
 													<div className={styles.price_value}>
 														{formatAmount({
 															amount   : rate_card?.line_items[0]?.buy_price,
-															currency : rate_card?.line_items[0]?.cure,
+															currency : rate_card?.line_items[0]?.currency,
 															options  : {
 																style                 : 'currency',
 																currencyDisplay       : 'symbol',
