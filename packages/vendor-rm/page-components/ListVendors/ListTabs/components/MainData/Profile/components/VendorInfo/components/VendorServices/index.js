@@ -24,7 +24,7 @@ function VendorServices({
 	data = {},
 }) {
 	return (
-		<>
+		<div className={styles.container}>
 			{(data?.services || []).map((service) => {
 				const SERVICE_MAPPING = getSeviceMapping(service);
 
@@ -47,7 +47,7 @@ function VendorServices({
 					</div>
 				);
 			})}
-		</>
+		</div>
 	);
 }
 

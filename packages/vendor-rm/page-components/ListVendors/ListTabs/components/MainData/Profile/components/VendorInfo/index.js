@@ -1,5 +1,6 @@
-import { Modal, Button } from '@cogoport/components';
-import React from 'react';
+import { Modal, Button, cl } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
+import React, { useState } from 'react';
 
 import FormLayout from '../../../../../../../../commons/components/FormLayout/FormLayout';
 import useVendorBankDetail from '../../hooks/useVendorBankDetail';
@@ -27,6 +28,15 @@ function VendorInfo({
 		data,
 	});
 
+	const [activate, setActivate] = useState('activate');
+	const [showModal, setShowModal] = useState(false);
+
+	// Todo: hit api in handleActivate
+	const handleActivate = () => {
+		setActivate((pv) => (pv === 'activate' ? 'deactivate' : 'activate'));
+		setShowModal(false);
+	};
+
 	return (
 		<div className={styles.main}>
 
@@ -44,8 +54,10 @@ function VendorInfo({
 
 			<hr className={styles.hr} />
 
-			<span className={styles.heading}>
+			<span className={cl`${styles.heading} ${styles.payment}`}>
 				Payment Details
+
+				<Button onClick={() => setShowModal(true)}>{startCase(activate)}</Button>
 			</span>
 			<PaymentDetails data={data} />
 
@@ -94,6 +106,43 @@ function VendorInfo({
 							size="md"
 							onClick={handleSubmit(onSubmit)}
 							loading={loading}
+						>
+							Submit
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			) : null}
+
+			{showModal ? (
+				<Modal
+					show={showModal}
+					size="lg"
+					onClose={() => setShowModal(false)}
+				>
+					<Modal.Header title="Confirmation" />
+
+					<Modal.Body>
+						Are you sure, you want to activate this account?
+					</Modal.Body>
+
+					<Modal.Footer>
+						<Button
+							size="md"
+							type="button"
+							style={{ marginRight: 10 }}
+							themeType="secondary"
+							onClick={() => {
+								setShowModal(false);
+							}}
+						>
+							Cancel
+						</Button>
+
+						<Button
+							type="submit"
+							size="md"
+							onClick={handleActivate}
+							// loading={activateLoading}
 						>
 							Submit
 						</Button>

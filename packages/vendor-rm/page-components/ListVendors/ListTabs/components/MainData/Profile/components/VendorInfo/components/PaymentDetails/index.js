@@ -14,7 +14,7 @@ function PaymentDetails({
 	data = {},
 }) {
 	const FIELDS_TO_SHOW = fieldsInPaymentDetails();
-	const getDisplayValue = ({ bankDetail, key }) => {
+	function GetDisplayValue({ bankDetail, key }) {
 		const val = bankDetail[key];
 
 		if (!val) {
@@ -42,7 +42,7 @@ function PaymentDetails({
 		}
 
 		return startCase(val);
-	};
+	}
 
 	return (
 		(data.bank_details || []).map((bankDetail, index) => (
@@ -54,26 +54,21 @@ function PaymentDetails({
 				<div className={styles.bank_details_container}>
 					{Object.keys(FIELDS_TO_SHOW).map((bankDetailsKey) => {
 						const label = FIELDS_TO_SHOW[bankDetailsKey];
+
+						if (!bankDetail?.[bankDetailsKey]) return null;
+
 						return (
 							<div
 								key={bankDetailsKey}
 								className={styles.box_info}
-								style={{
-									width: bankDetail?.[bankDetailsKey] !== null
-										? '50%' : 'none',
-								}}
 							>
-								{bankDetail?.[bankDetailsKey] && (
-									<div>
-										<div className={styles.label}>
-											{label}
-										</div>
+								<div className={styles.label}>
+									{label}
+								</div>
 
-										<div className={styles.value}>
-											{getDisplayValue({ bankDetail, key: bankDetailsKey })}
-										</div>
-									</div>
-								)}
+								<div className={styles.value}>
+									{GetDisplayValue({ bankDetail, key: bankDetailsKey })}
+								</div>
 							</div>
 						);
 					})}

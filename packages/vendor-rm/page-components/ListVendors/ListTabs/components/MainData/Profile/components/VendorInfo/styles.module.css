@@ -11,6 +11,10 @@
 	color: #000;
 }
 
+.payment {
+	justify-content: space-between;
+}
+
 .hr {
 	margin: 1rem 0;
 	border: 1px solid #000;
