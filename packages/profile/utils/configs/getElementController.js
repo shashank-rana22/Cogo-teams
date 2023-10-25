@@ -10,6 +10,8 @@ import {
 	MobileNumberController,
 	DatepickerController,
 	UploadController,
+	CreatableMultiSelectController,
+	CreatableSelectController,
 } from '@cogoport/forms';
 
 const ELEMENT_MAPPING = {
@@ -29,6 +31,8 @@ const ELEMENT_MAPPING = {
 	email                  : InputController,
 	asyncSelect            : AsyncSelectController,
 	password               : InputController,
+	createmultiselect      : CreatableMultiSelectController,
+	createselect           : CreatableSelectController,
 
 };
 

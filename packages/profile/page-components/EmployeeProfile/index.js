@@ -123,20 +123,32 @@ function EmployeeProfile() {
 										<Popover
 											placement="left"
 											render={(
-												<Button
-													onClick={() => {
-														if (employee_id) {
-															router.push(
-																`/apply-resignation?employee_id=
+												<>
+													<Button
+														onClick={() => {
+															if (employee_id) {
+																router.push(
+																	`/apply-resignation?employee_id=
 																${employee_id}`,
-															);
-														} else {
-															router.push('/apply-resignation');
-														}
-													}}
-												>
-													{employee_id ? 'Initiate Separation' : 'Apply for Resignation'}
-												</Button>
+																);
+															} else {
+																router.push('/apply-resignation');
+															}
+														}}
+													>
+														{employee_id ? 'Initiate Separation' : 'Apply for Resignation'}
+													</Button>
+													<Button
+														style={{
+															marginTop : '6px',
+															width     : '160px',
+														}}
+														onClick={() => router.push('/ticket-management/my-tickets')}
+													>
+														Raise a ticket
+
+													</Button>
+												</>
 											)}
 										>
 											<Button size="md" themeType="accent">

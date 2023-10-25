@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 import { Button } from '@cogoport/components';
 import { IcCFtick, IcMCrossInCircle, IcMEdit } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 import StyledTable from '../../../common/StyledTable';
@@ -22,6 +22,8 @@ import useGetIrregularColumns from './useGetIrregularColumns';
 
 function SalaryDetails() {
 	const router = useRouter();
+	const { push } = router;
+	console.log('🚀 ~ file: index.js:25 ~ SalaryDetails ~ router:', router);
 	const [taxShow, setTaxShow] = useState(false);
 	const columns = useGetColumns(setTaxShow);
 	const columnsIrregular = useGetIrregularColumns();
@@ -62,8 +64,17 @@ function SalaryDetails() {
 			<div className={styles.main_container}>
 
 				<div className={styles.heading}>
-					<span className={styles.personal}>PAYMENT DETAILS</span>
-					<span className={styles.detail}>View and manage salary details</span>
+					<div className={styles.flex}>
+						<span className={styles.personal}>PAYMENT DETAILS</span>
+						<span className={styles.detail}>View and manage salary details</span>
+					</div>
+					<Button
+						themeType="secondary"
+						onClick={() => push('/welcome?is_payslip=payslip')}
+					>
+						View Payslip
+
+					</Button>
 				</div>
 				{
 					loading ? null

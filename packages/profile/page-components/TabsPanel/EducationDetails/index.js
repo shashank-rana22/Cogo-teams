@@ -1,3 +1,4 @@
+import { Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -7,13 +8,16 @@ import DetailsCard from '../DetailsCard';
 import EducationDetailsEdit from '../EducationDetailsEdit';
 import RightGlance from '../RightGlance';
 
+import DetailsUpdationModal from './DetailsUpdationModal';
 import styles from './styles.module.css';
 import useGetEducationInfo from './useGetEducationInfo';
 
 function EducationDetails({ data = {}, loading = false, getEmployeeDetails = () => {} }) {
 	const { employee_detail } = data || {};
+	console.log('🚀 ~ file: index.js:17 ~ EducationDetails ~ employee_detail:', employee_detail);
 	const { employee_education_details } = employee_detail || {};
 	const [show, setShow] = useState(false);
+	const [visible, setVisible] = useState(false);
 
 	console.log(employee_education_details, 'detailsEmployee');
 
@@ -29,15 +33,24 @@ function EducationDetails({ data = {}, loading = false, getEmployeeDetails = () 
 	};
 
 	return (
-		<div className={styles.tab_content}>
-			<div className={styles.main_container}>
-				<div className={styles.flex}>
-					<div className={styles.heading}>
-						<span className={styles.personal}>EDUCATION DETAILS</span>
-						<span className={styles.detail}>View and manage educational details</span>
+		<>
+			<div className={styles.tab_content}>
+				<div className={styles.main_container}>
+					<div className={styles.flex}>
+						<div className={styles.heading}>
+							<span className={styles.personal}>EDUCATION DETAILS</span>
+							<span className={styles.detail}>View and manage educational details</span>
+						</div>
+						<div>
+							<Button
+								themeType="secondary"
+								onClick={() => setVisible(true)}
+							>
+								Add Document
+							</Button>
+						</div>
 					</div>
-				</div>
-				{
+					{
 					!isEmpty(employee_education_details) ? (
 						<div className={styles.info_container}>
 							{info?.map(({ heading, details }) => (
@@ -55,9 +68,9 @@ function EducationDetails({ data = {}, loading = false, getEmployeeDetails = () 
 						</div>
 					) : (<EmptyState />)
 				}
-			</div>
-			<RightGlance otherInfo={otherInfo} data={data} loading={loading} />
-			{
+				</div>
+				<RightGlance otherInfo={otherInfo} data={data} loading={loading} />
+				{
 					!isEmpty(detailsToEdit) && (
 						<EducationDetailsEdit
 							heading={detailsToEdit.heading}
@@ -72,7 +85,18 @@ function EducationDetails({ data = {}, loading = false, getEmployeeDetails = () 
 						/>
 					)
 			}
-		</div>
+			</div>
+			<Modal size="xl" show={visible} onClose={() => setVisible(!visible)} placement="center">
+				<Modal.Header title="Add Additional Degree" />
+				<Modal.Body>
+					<DetailsUpdationModal
+						id={employee_detail?.id}
+						getEmployeeDetails={getEmployeeDetails}
+						data={data}
+					/>
+				</Modal.Body>
+			</Modal>
+		</>
 	);
 }
 

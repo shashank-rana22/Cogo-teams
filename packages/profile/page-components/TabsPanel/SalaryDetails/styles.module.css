@@ -32,7 +32,8 @@
 
 .heading {
 	display: flex;
-	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .personal {
@@ -108,4 +109,9 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+
+.flex {
+	display: flex;
+	flex-direction: column;
 }

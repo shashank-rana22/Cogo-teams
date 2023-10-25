@@ -1,5 +1,6 @@
 import { Button, Toast } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -15,7 +16,7 @@ const createDownload = (url) => {
 const useGetSignedDocuments = (setShow = () => {}, setName = () => {}, setUrl = () => {}) => ([
 	{
 		Header   : 'NAME',
-		accessor : (item) => (<div className={styles.table_item}>{item.name}</div>),
+		accessor : (item) => (<div className={styles.table_item}>{startCase(item.name)}</div>),
 		id       : 'name',
 	},
 	{

@@ -13,7 +13,7 @@ function DetailsCard({
 }) {
 	const {
 		employee_detail, modified_employee_detail,
-		processed_employee_detail, personal_details, user_role, employee_squads,
+		processed_employee_detail, personal_details, employee_squads,
 	} = data || {};
 
 	const { present_address, employee_education_details } = employee_detail || {};
@@ -38,11 +38,11 @@ function DetailsCard({
 		}
 
 		if (['ended_at', 'date_of_birth'].includes(value)) {
-			return formatDate({
-				date       : getByKey(getMapping[key], value),
-				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-				formatType : 'date',
-			});
+			// return formatDate({
+			// 	date       : getByKey(getMapping[key], value),
+			// 	dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+			// 	formatType : 'date',
+			// });
 		}
 		return getByKey(getMapping[key], value);
 	};
@@ -64,7 +64,7 @@ function DetailsCard({
 			{isGrid ? (
 				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 					<span className={styles.info_heading}>{heading}</span>
-					{(keyMapping || keyEdu) && user_role && (
+					{(keyMapping || keyEdu) && (
 						<Button
 							className={styles.info_button}
 							size="md"

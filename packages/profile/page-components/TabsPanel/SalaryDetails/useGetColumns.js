@@ -21,12 +21,12 @@ const useGetColumns = (setTaxShow) => (
 		},
 		{
 			Header   : 'MONTHLY GROSS',
-			accessor : (item) => (<div className={styles.table_item}>{item?.monthly_gross}</div>),
+			accessor : (item) => (<div className={styles.table_item}>{`₹${item?.monthly_gross}`}</div>),
 			id       : 'monthly_gross',
 		},
 		{
 			Header   : 'MONTHLY CTC',
-			accessor : (item) => (<div className={styles.table_item}>{item?.monthly_ctc}</div>),
+			accessor : (item) => (<div className={styles.table_item}>{`₹${item?.monthly_ctc}`}</div>),
 			id       : 'monthly_ctc',
 		},
 		{

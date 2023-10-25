@@ -175,12 +175,6 @@ function useGetColumns({
 				<div className={styles.button_container}>
 					<ButtonIcon
 						size="md"
-						icon={<IcMEdit />}
-						themeType="primary"
-						onClick={() => handleEmployeeId(item)}
-					/>
-					<ButtonIcon
-						size="md"
 						icon={<IcMEyeopen />}
 						themeType="primary"
 						onClick={() => {
