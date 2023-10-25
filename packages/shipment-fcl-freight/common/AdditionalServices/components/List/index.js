@@ -41,8 +41,15 @@ function List({ isSeller = false, source = '' }) {
 		(item) => item?.id === entity_id,
 	)?.[GLOBAL_CONSTANTS.zeroth_index]?.code === '301';
 
-	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
-		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) && !isEntityIndia : true;
+	let isAdditionalServiceAllowed = true;
+
+	if (primary_service?.trade_type === 'import') {
+		if (isEntityIndia) {
+			if (!ALLOWED_STAKEHOLDERS.includes(activeStakeholder)) {
+				isAdditionalServiceAllowed = false;
+			}
+		}
+	}
 
 	const canEditCancelService = !!stakeholderConfig?.overview?.can_edit_cancel_service;
 
