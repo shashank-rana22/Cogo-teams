@@ -2,11 +2,12 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useEffect, useRef } from 'react';
 
-const getPayload = ({ data = {}, organization, formValueRef, activeTab }) => {
+const getPayload = ({ data = {}, organization, formValueRef, activeTab, user = {} }) => {
 	const { cargoValue, currency, hsCode } = data || {};
 	const { user_id, organization_id } = organization || {};
 	const { origin_point: refOrigin, destination_point: refDestination } = formValueRef.current || {};
@@ -27,13 +28,15 @@ const getPayload = ({ data = {}, organization, formValueRef, activeTab }) => {
 			originCountryId      : refOrigin?.country_id,
 			destinationCountryId : refDestination?.country_id,
 		},
+		performedBy: user?.id,
 	};
 };
 
 const useInsurance = ({ activeTab, organization = {}, formValues = {}, setActiveTab }) => {
-	const { push, query } = useRouter();
+	const { push } = useRouter();
 
 	const { t } = useTranslation(['cargoInsurance']);
+	const { user } = useSelector((state) => state.profile);
 
 	const formValueRef = useRef({});
 
@@ -49,14 +52,11 @@ const useInsurance = ({ activeTab, organization = {}, formValues = {}, setActive
 	}, { manual: true });
 
 	const verifyDetails = async (info) => {
-		const payload = getPayload({ data: info, formValueRef, organization, activeTab });
+		const payload = getPayload({ data: info, formValueRef, organization, activeTab, user });
 
 		try {
 			const resp = await trigger({
-				data: {
-					...payload,
-					performedBy: query?.partner_id,
-				},
+				data: payload,
 			});
 
 			const { data } = resp || {};
