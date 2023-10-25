@@ -31,6 +31,7 @@ function AddRate({
 	spot_data = {},
 	dependentMainFreight = [],
 	filter = {},
+	triggeredFrom = '',
 }) {
 	return (
 		<Modal
@@ -120,6 +121,7 @@ function AddRate({
 									dependentMainFreight={dependentMainFreight}
 									filter={filter}
 									source={source}
+									triggeredFrom={triggeredFrom}
 								/>
 							</Modal.Body>
 							<Modal.Footer>
