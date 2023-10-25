@@ -257,6 +257,7 @@
 
 	.product_details {
 		gap: 12px;
+		width: 100%;
 	}
 
 	.main_container {
@@ -280,5 +281,9 @@
 			width: 100%;
 			margin-left: 0;
 		}
+	}
+
+	.product_standard {
+		flex-direction: column;
 	}
 }
