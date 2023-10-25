@@ -4,6 +4,8 @@ import { useSelector } from '@cogoport/store';
 
 const useRaiseTicket = ({
 	updateBillsTicketId = () => {},
+	setShowTicketModal = () => {},
+	source = '',
 	shipmentData = {},
 	service = {},
 }) => {
@@ -27,6 +29,7 @@ const useRaiseTicket = ({
 		const {
 			serial_id = '',
 			trade_type = '',
+			shipment_type = '',
 		} = shipmentData || {};
 
 		try {
@@ -47,12 +50,17 @@ const useRaiseTicket = ({
 						RequestType : 'shipment',
 						SerialID    : serial_id || undefined,
 						TradeType   : trade_type || undefined,
-						Service     : service?.value || undefined,
+						Service     : source === 'audit_function' ? service?.value : shipment_type,
 					},
 				},
 			});
+			if (source === 'cost_advocate') {
+				updateBillsTicketId(response);
+			}
+			if (source === 'audit_function') {
+				setShowTicketModal(false);
+			}
 
-			updateBillsTicketId(response);
 			Toast.success('Successfully Created');
 		} catch (error) {
 			Toast.error(error?.response?.data);
