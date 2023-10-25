@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 function HrmsEmployeeDashboard() {
 	const { data, refetch, setFilters } = useListAllFeed();
-	const { data : summaryData, loading } = useGetDashboardSummary();
+	const { data: summaryData, loading } = useGetDashboardSummary();
 	const router = useRouter();
 
 	const handleBack = () => {

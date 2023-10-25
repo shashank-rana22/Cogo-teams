@@ -78,3 +78,9 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+@media (max-width: 767px) {
+	.user_data {
+		overflow: scroll;
+	}
+}

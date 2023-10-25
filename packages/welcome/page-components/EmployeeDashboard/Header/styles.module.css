@@ -79,3 +79,23 @@
 		margin-right: 12px;
 	}
 }
+
+@media (max-width: 767px) {
+	.header_data_flex,
+	.header_data_right_flex {
+		flex-direction: column;
+		gap: 12px;
+
+		button {
+			width: 100%;
+		}
+	}
+
+	.header_data_right_flex {
+		width: 100%;
+
+		.mr_12:not(:last-child) {
+			margin-right: 0;
+		}
+	}
+}
