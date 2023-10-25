@@ -15,7 +15,7 @@ function ListPagination({ paginationProps = {} }) {
 				currentPage={filterParams.page}
 				onPageChange={setPage}
 				totalItems={data?.total_count}
-				type="table"
+				type="number"
 				pageSize={data?.page_limit}
 			/>
 		</div>

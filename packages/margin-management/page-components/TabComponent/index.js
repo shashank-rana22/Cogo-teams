@@ -59,20 +59,28 @@ function TabComponent({
 
 	return (
 		<div>
-			<Tabs
-				themeType="tertiary"
-				activeTab={activeTab}
-				onChange={setActive}
-			>
-				{Object.values(COMPONENT_MAPPING).map((item) => {
-					const { title = '', name = '' } = item;
-					return condition[activeTab]
-						? <TabPanel themeType="primary" key={name} name={name} title={title} /> : null;
-				})}
-			</Tabs>
+			<div style={{ display: 'flex', justifyContent: 'space-between', margin: '12px 0', cursor: 'pointer' }}>
+				<Tabs
+					themeType="tertiary"
+					activeTab={activeTab}
+					onChange={setActive}
+				>
+					{Object.values(COMPONENT_MAPPING).map((item) => {
+						const { title = '', name = '' } = item;
+						return condition[activeTab]
+							? <TabPanel themeType="primary" key={name} name={name} title={title} /> : null;
+					})}
+				</Tabs>
+				<Search
+					activeTab={activeTab}
+					activeService={activeService}
+					setFilterParams={setFilterParams}
+					filterParams={filterParams}
+				/>
+			</div>
 
 			{activeTab !== 'approval_pending' ? (
-				<div style={{ display: 'flex', gap: '4px' }}>
+				<div style={{ display: 'flex', gap: '4px', margin: '12px 0' }}>
 					<Tabs
 						themeType="tertiary"
 						activeTab={activeService}
@@ -94,22 +102,6 @@ function TabComponent({
 					</Button>
 				</div>
 			) : null}
-
-			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-				<Search
-					activeTab={activeTab}
-					activeService={activeService}
-					setFilterParams={setFilterParams}
-					filterParams={filterParams}
-				/>
-				<ListPagination
-					paginationProps={{
-						data,
-						filterParams,
-						setFilterParams,
-					}}
-				/>
-			</div>
 
 			{activeTab !== 'approval_pending' ? (
 				<div>
@@ -147,6 +139,14 @@ function TabComponent({
 					)}
 				</div>
 			)}
+
+			<ListPagination
+				paginationProps={{
+					data,
+					filterParams,
+					setFilterParams,
+				}}
+			/>
 
 			{showFunnelModal ? (
 				<Modal
