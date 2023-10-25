@@ -2,7 +2,9 @@ import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOpenlink } from '@cogoport/icons-react';
-import { startCase, upperCase, isEmpty } from '@cogoport/utils';
+import { startCase, upperCase, isEmpty, differenceInDays } from '@cogoport/utils';
+
+import { INCO_TERM_MAPPING } from '../constants/rateRevertsConstants';
 
 const CHECK_IF_COUNT_MORE_THAN_ONE = 1;
 const MIN_VOLUME = 1;
@@ -85,7 +87,7 @@ export const RENDER_VALUE_MAPPING = {
 	truck_type     : (detail) => startCase(detail.truck_type || ''),
 	trip_type      : (detail) => startCase(detail.trip_type || ''),
 	container_type : (detail) => startCase(detail.container_type || ''),
-	trade_type     : (detail) => startCase(detail.trade_type || ''),
+	trade_type     : (detail) => startCase(detail.trade_type || INCO_TERM_MAPPING[detail.inco_term] || ''),
 	commodity      : (detail) => startCase(detail.commodity || ''),
 	payment_term   : (detail) => startCase(detail.payment_term || ''),
 	inco_term      : (detail) => `Inco - ${upperCase(detail.inco_term || '')}`,
@@ -133,7 +135,11 @@ export const RENDER_VALUE_MAPPING = {
 			: Math.max((volume || MIN_VOLUME) * VOLUME_MULTIPLY, weight);
 
 		const chargableText = (chargableWeight && !NO_VOLUME_SERVICE_TYPES.includes(service_type))
-			? `, Chargable Weight: ${chargableWeight?.toFixed(TO_FIXED_2) || ''} kg` : '';
+			? `, Chargeable Weight: ${chargableWeight?.toFixed(TO_FIXED_2) || ''} kg` : '';
+
+		if (!calcVolume && !chargableText) {
+			return '';
+		}
 
 		return `${calcVolume || ''} ${chargableText}`;
 	},
@@ -243,7 +249,30 @@ export const RENDER_VALUE_MAPPING = {
 	origin_oversea_agent       : (detail) => <FormatPocData pocDetails={detail?.origin_oversea_agent} />,
 	shipper_details            : (detail) => <FormatShipperDetails shipperDetails={detail?.shipper_details} />,
 	buy_quotation_agreed_rates : (detail) => `${detail?.buy_quotation_agreed_rates.toFixed(TO_FIXED_2)} USD`,
-	hs_code                    : (detail) => `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`,
+	hs_code                    : (detail) => (isEmpty(detail?.hs_code)
+		? ''
+		: `${detail?.hs_code?.hs_code || ''} - ${detail?.hs_code?.name || ''}`),
+	free_days_detention_destination: (
+		detail,
+	) => `${detail?.free_days_detention_destination} ${detail?.free_days_detention_destination === 1 ? 'Day' : 'Days'}`,
+	estimated_departure: (detail) => formatDate({
+		date       : detail?.estimated_departure,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		formatType : 'date',
+	}),
+	transit_time: (detail) => {
+		const transitTime = differenceInDays(
+			new Date(detail?.selected_schedule_arrival || new Date()),
+			new Date(detail?.selected_schedule_departure || new Date()),
+		);
+
+		if (!transitTime) {
+			return '';
+		}
+
+		return `${transitTime} Day${transitTime === 1 ? '' : 's'}`;
+	},
+	commodity_description: (detail) => `${startCase(detail?.commodity_description || '')}`,
 };
 
 export function formatServiceDetails(details) {

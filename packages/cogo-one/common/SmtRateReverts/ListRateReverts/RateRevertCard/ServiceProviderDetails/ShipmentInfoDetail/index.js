@@ -1,11 +1,37 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { Image } from '@cogoport/next';
-import { startCase, differenceInDays, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 
 import useGetShipment from '../../../../../../hooks/useGetShipment';
+import { RENDER_VALUE_MAPPING } from '../../../../../../utils/detailsHelperFuncs';
 
 import styles from './styles.module.css';
+
+const DATA_TO_SHOW = {
+	trade_type                      : 'Trade Type',
+	container_size                  : 'Container Size',
+	containers_count                : 'Containers Count',
+	packages_count                  : 'Packages Count',
+	trucks_count                    : 'Trucks Count',
+	truck_type                      : 'Truck Type',
+	trip_type                       : 'Trip Type',
+	container_type                  : 'Container Type',
+	commodity                       : 'Commodity',
+	payment_term                    : 'Payment Term',
+	inco_term                       : 'Inco Term',
+	packages                        : 'Packages',
+	volume                          : 'Volume',
+	weight                          : 'Weight',
+	commodity_description           : 'Commodity Description',
+	cargo_weight_per_container      : 'Cargo Weight Per Container',
+	hs_code                         : 'Hs Code',
+	bl_type                         : 'BL Type',
+	cargo_readiness_date            : 'Cargo Ready Date',
+	schedule_departure              : 'Schedule Departure',
+	estimated_departure             : 'Expected Departure',
+	transit_time                    : 'Transit Time',
+	free_days_detention_destination : 'Destination Detention Free Days',
+};
 
 function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) {
 	const {
@@ -15,28 +41,7 @@ function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) 
 
 	const { primary_service_detail = {}, summary = {} } = data || {};
 
-	const { serial_id = '', all_services = '' } = summary || {};
-
-	const tradeType = all_services?.[GLOBAL_CONSTANTS.zeroth_index]?.trade_type;
-
-	const {
-		cargo_readiness_date = '',
-		free_days_detention_destination = 0,
-		bl_type = '',
-		commodity_description = '',
-		estimated_departure = '',
-		selected_schedule_arrival = '',
-		selected_schedule_departure,
-	} = primary_service_detail || {};
-
-	const transitTime = differenceInDays(
-		new Date(selected_schedule_arrival || new Date()),
-		new Date(selected_schedule_departure || new Date()),
-	);
-
-	const checkEmpty = !serial_id && !tradeType && isEmpty(cargo_readiness_date) && !free_days_detention_destination
-						&& !bl_type && !commodity_description && isEmpty(estimated_departure)
-						&& isEmpty(selected_schedule_arrival) && isEmpty(selected_schedule_departure);
+	const { serial_id = '' } = summary || {};
 
 	if (loading) {
 		return (
@@ -51,7 +56,7 @@ function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) 
 		);
 	}
 
-	if (checkEmpty) {
+	if (isEmpty(primary_service_detail)) {
 		return <div className={styles.loader}>No Data...</div>;
 	}
 
@@ -60,79 +65,30 @@ function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) 
 			{serial_id ? (
 				<div className={styles.each_content}>
 					Serial ID:
-					<span>
-						{serial_id}
-					</span>
-
-				</div>
-			) : null}
-			{tradeType ? (
-				<div className={styles.each_content}>
-					Trade Type:
-					<span>
-						{startCase(tradeType)}
-					</span>
-
-				</div>
-			) : null}
-			{cargo_readiness_date ? (
-				<div className={styles.each_content}>
-					Cargo Ready:
-					<span>
-						{formatDate({
-							date       : cargo_readiness_date,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'date',
-						})}
-					</span>
-
+					<span>{serial_id}</span>
 				</div>
 			) : null}
 
-			{free_days_detention_destination ? (
-				<div className={styles.each_content}>
-					Destination Detention Free Days:
-					<span>
-						{free_days_detention_destination}
-					</span>
-				</div>
-			) : null}
+			{Object.entries(DATA_TO_SHOW)?.map(
+				([key, label]) => {
+					const displayValue = RENDER_VALUE_MAPPING?.[key]?.(primary_service_detail);
 
-			{bl_type ? (
-				<div className={styles.each_content}>
-					BL Type:
-					<span>{startCase(bl_type)}</span>
-				</div>
-			) : null}
+					if (!displayValue) {
+						return null;
+					}
 
-			{commodity_description ? (
-				<div className={styles.each_content}>
-					Commodity Description:
-					<span>
-						{startCase(commodity_description)}
-					</span>
-				</div>
-			) : null}
-
-			{estimated_departure ? (
-				<div className={styles.each_content}>
-					Expected Departure:
-					<span>
-						{formatDate({
-							date       : estimated_departure,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'date',
-						})}
-					</span>
-				</div>
-			) : null}
-
-			{transitTime ? (
-				<div className={styles.each_content}>
-					Transit Time:
-					<span>{`${transitTime} Days`}</span>
-				</div>
-			) : null}
+					return (
+						<div
+							key={key}
+							className={styles.each_content}
+						>
+							{label}
+							:
+							<span>{displayValue}</span>
+						</div>
+					);
+				},
+			)}
 		</div>
 	);
 }
