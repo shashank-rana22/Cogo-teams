@@ -22,7 +22,6 @@ function AdditionalServicesForm({
 }) {
 	const { addService = () => {}, loading = false } = useSpotSearchService({
 		refetchSearch,
-		rateCardData,
 		checkout_id: detail?.checkout_id,
 	});
 
@@ -55,8 +54,11 @@ function AdditionalServicesForm({
 			additionalFormInfo : values,
 			service_name       : service.name,
 		});
-		await addService(payload);
-		setHeaderProps({});
+		const serviceAdded = await addService(payload);
+
+		if (serviceAdded) {
+			setHeaderProps({});
+		}
 	};
 
 	const fields = service?.controls?.reduce((acc, curr) => ({ ...acc, [curr.name]: curr }), {});

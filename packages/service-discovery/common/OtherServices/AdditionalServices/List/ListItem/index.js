@@ -27,7 +27,6 @@ function ListItem({
 
 	const { addService = () => {}, loading } = useSpotSearchService({
 		refetchSearch : refetch,
-		rateCardData,
 		checkout_id   : detail?.checkout_id,
 	});
 
