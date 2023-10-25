@@ -31,6 +31,7 @@ function AddRate({
 	spot_data = {},
 	dependentMainFreight = [],
 	filter = {},
+	getStats = () => {},
 }) {
 	return (
 		<Modal
@@ -39,6 +40,7 @@ function AddRate({
 				setShowModal((prev) => !prev);
 				setServiceIdPresent('');
 				if (activeTab) {
+					getStats();
 					getListCoverage();
 				}
 			}}
@@ -128,6 +130,10 @@ function AddRate({
 									onClick={() => {
 										setShowModal((prev) => !prev);
 										setServiceIdPresent('');
+										if (activeTab) {
+											getStats();
+											getListCoverage();
+										}
 									}}
 									style={{ marginRight: '20px' }}
 									themeType="secondary"
