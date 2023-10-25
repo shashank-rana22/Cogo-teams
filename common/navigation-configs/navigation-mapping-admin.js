@@ -860,8 +860,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'business_finance-audit_function',
 					title         : t('common:audit_function'),
-					href          : '/v2/business-finance/audit_function/[active_tab]',
-					as            : '/v2/business-finance/audit_function/dashboard',
+					href          : '/v2/business-finance/audit-function/[active_tab]',
+					as            : '/v2/business-finance/audit-function/dashboard',
 					icon          : IcMProductCodeMapping,
 					main_apis     : [],
 					possible_apis : [...business_finance.shipmentAuditFunction],
