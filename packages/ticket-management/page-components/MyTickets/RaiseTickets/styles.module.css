@@ -5,3 +5,22 @@
 		}
 	}
 }
+
+@media screen and (max-width: 768px) {
+	.styled_ui_modal_dialog {
+		width: 100% !important;
+		height: 100% !important;
+		max-height: none;
+		animation-name: fade-in !important;
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}

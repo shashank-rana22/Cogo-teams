@@ -2,6 +2,11 @@
 	display: flex;
 	align-items: center;
 	width: 46%;
+
+	@media screen and (max-width: 768px) {
+		display: block;
+		width: 100%;
+	}
 }
 
 .search_icon {
@@ -10,11 +15,24 @@
 
 .global_search {
 	width: calc(34% - 8px);
+
+	@media screen and (max-width: 768px) {
+		display: block;
+		width: 100%;
+		margin-bottom: 8px;
+	}
 }
 
 .spectator_type {
 	width: 36%;
 	margin-left: 8px;
+
+	@media screen and (max-width: 768px) {
+		display: block;
+		width: 100%;
+		margin-bottom: 8px;
+		margin-left: 0;
+	}
 }
 
 .sort_section {
@@ -25,13 +43,18 @@
 	margin-left: 8px;
 	border: 1px solid #e0e0e0;
 	border-radius: 6px;
+
+	@media screen and (max-width: 768px) {
+		width: 100%;
+		margin-bottom: 8px;
+		margin-left: 0;
+	}
 }
 
 .sort_by {
 	:global {
 		.ui_select_display_container {
 			min-width: 150px;
-			max-width: 150px;
 			border: none !important;
 			border-right: 1px solid #e0e0e0 !important;
 			border-radius: 6px 0 0 6px !important;
@@ -41,6 +64,10 @@
 	svg {
 		width: 14px;
 		height: 14px;
+	}
+
+	@media screen and (max-width: 768px) {
+		width: 100% !important;
 	}
 }
 
