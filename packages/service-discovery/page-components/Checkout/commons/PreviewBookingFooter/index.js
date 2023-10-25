@@ -36,6 +36,7 @@ function PreviewBookingFooter({
 		rate = {},
 		handleUnlockLatestRate = () => {},
 		createSearchLoading = false,
+		isMobile = false,
 	} = useContext(CheckoutContext);
 
 	const timerRef = useRef(null);
@@ -50,7 +51,7 @@ function PreviewBookingFooter({
 		{
 			label     : 'Save For Later',
 			themeType : 'secondary',
-			size      : 'lg',
+			size      : isMobile ? 'sm' : 'lg',
 			key       : 'save_for_later',
 			onClick   : onClickSaveForLater,
 			loading   : updateLoading,
@@ -59,7 +60,7 @@ function PreviewBookingFooter({
 		{
 			label     : <SubmitButton rate={rate} disabled={isVeryRisky || !agreeTandC || disableButton} />,
 			themeType : 'accent',
-			size      : 'lg',
+			size      : isMobile ? 'sm' : 'lg',
 			loading   : updateLoading || updateCheckoutServiceLoading,
 			disabled  : isVeryRisky || !agreeTandC || disableButton,
 			style     : { marginLeft: '16px' },

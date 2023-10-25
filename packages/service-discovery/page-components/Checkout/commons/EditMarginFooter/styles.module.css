@@ -6,6 +6,10 @@
 	margin-top: 32px;
 	background-color: #fffce6;
 	border-radius: 8px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .validity_time {
@@ -21,6 +25,10 @@
 	.visible {
 		margin-left: 6px;
 		font-weight: 600;
+	}
+
+	@media (max-width: 768px) {
+		font-size: 10px;
 	}
 }
 

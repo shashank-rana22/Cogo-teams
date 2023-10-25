@@ -2,10 +2,10 @@ import { useContext } from 'react';
 
 import Cancellation from '../../../../../commons/Cancellation';
 import ConfirmationTexts from '../../../../../commons/ConfirmationTexts';
-import DefaultQuotationInfo from '../../../../../commons/DefaultQuotationInfo';
 import EditMarginFooter from '../../../../../commons/EditMarginFooter';
 import { CheckoutContext } from '../../../../../context';
 import AdditionalServices from '../../../commons/AdditionalServices';
+import DefaultQuotationInfo from '../../../commons/DefaultQuotationInfo';
 
 import styles from './styles.module.css';
 

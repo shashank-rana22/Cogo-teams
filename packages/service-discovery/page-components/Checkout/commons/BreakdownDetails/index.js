@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Accordion, cl, Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -39,6 +40,7 @@ function BreakdownDetails({
 		loading,
 		shouldEditMargin = true,
 		primaryService,
+		isMobile = false,
 	} = useContext(CheckoutContext);
 
 	const {
@@ -71,6 +73,7 @@ function BreakdownDetails({
 				detailedServices={detail.services}
 				primary_service={primary_service}
 				source={source}
+				isMobile={isMobile}
 			/>
 
 			{rateDetails.map((item, index) => {
@@ -136,13 +139,15 @@ function BreakdownDetails({
 										{renderServiceType(item, service_details)}
 									</div>
 
-									<ContainerDetails
-										details={detail.services[id] || {}}
-										service_type={service_type}
-									/>
+									{!isMobile ? (
+										<ContainerDetails
+											service_type={service_type}
+											details={detail.services[id] || {}}
+										/>
+									) : null}
 								</div>
 
-								{noRatesFound ? (
+								{!isMobile && (noRatesFound ? (
 									<div className={styles.flex}>
 										<Pill size="lg">NO RATES</Pill>
 
@@ -158,7 +163,8 @@ function BreakdownDetails({
 											{startCase(service_type)}
 										</Button>
 									</div>
-								) : <div className={styles.total_display}>{totalDisplayString}</div>}
+								) : <div className={styles.total_display}>{totalDisplayString}</div>)}
+
 							</div>
 						)}
 					>

@@ -21,7 +21,7 @@ function BreakdownDetailsHeader({
 	resetMargins = () => {},
 	rateDetails = [],
 }) {
-	const { rate = {}, conversions = {} } = useContext(CheckoutContext);
+	const { rate = {}, conversions = {}, isMobile = false } = useContext(CheckoutContext);
 
 	const { isConditionMatches } = useGetPermission({ navigation: 'service_discovery' });
 
@@ -165,6 +165,7 @@ function BreakdownDetailsHeader({
 				profitPercent={profitPercent}
 				latestDemandMargin={latestDemandMargin}
 				condition={condition}
+				isMobile={isMobile}
 				convertCurrencyValue={convertCurrencyValue}
 			/>
 

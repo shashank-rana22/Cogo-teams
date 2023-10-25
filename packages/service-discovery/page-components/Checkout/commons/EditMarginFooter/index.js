@@ -56,6 +56,7 @@ function EditMarginFooter({
 		rate = {},
 		handleUnlockLatestRate = () => {},
 		createSearchLoading = false,
+		isMobile = false,
 	} = useContext(CheckoutContext);
 
 	const timerRef = useRef(null);
@@ -149,7 +150,7 @@ function EditMarginFooter({
 		{
 			label     : <SaveButton state={state} />,
 			themeType : 'secondary',
-			size      : 'lg',
+			size      : isMobile ? 'sm' : 'lg',
 			key       : 'save_for_later',
 			onClick   : onClickSaveForLater,
 			loading   : updateLoading,
@@ -158,7 +159,7 @@ function EditMarginFooter({
 		{
 			label     : <SubmitButton rate={rate} quotation_email_sent_at={quotation_email_sent_at} />,
 			themeType : 'accent',
-			size      : 'lg',
+			size      : isMobile ? 'sm' : 'lg',
 			loading   : updateLoading || loading || updateCheckoutMarginLoading,
 			disabled  : noRatesPresent,
 			style     : { marginLeft: '16px' },

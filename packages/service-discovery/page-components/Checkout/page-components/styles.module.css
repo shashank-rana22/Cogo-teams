@@ -9,6 +9,10 @@
 	z-index: 2;
 	padding: 12px 28px;
 	background-color: #fff;
+
+	@media (max-width: 768px) {
+		top: 62px;
+	}
 }
 
 .breadcrumb_item {
@@ -50,4 +54,8 @@
 
 .children {
 	padding-top: 140px;
+
+	@media (max-width: 768px) {
+		padding-top: 120px;
+	}
 }

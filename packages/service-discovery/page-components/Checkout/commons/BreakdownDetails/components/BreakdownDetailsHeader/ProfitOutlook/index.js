@@ -11,6 +11,7 @@ function ProfitOutlook({
 	profitPercent = 0,
 	latestDemandMargin = 0,
 	condition = {},
+	isMobile = false,
 	convertCurrencyValue = () => {},
 }) {
 	const { supply = 0, cogoport = 0, currency = '' } = rate?.total_margins || {};
@@ -80,6 +81,10 @@ function ProfitOutlook({
 			visible: condition.isSuperAdmin,
 		},
 	];
+
+	if (isMobile) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>

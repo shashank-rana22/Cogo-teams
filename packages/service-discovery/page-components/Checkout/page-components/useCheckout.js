@@ -2,7 +2,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, useEffect } from 'react';
 
 import getPrefillForm from '../../SearchResults/utils/getPrefillForm';
 import useCreateSearch from '../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
@@ -13,6 +13,8 @@ import AirCheckout from './AirCheckout';
 import FclCheckout from './FclCheckout';
 import FtlCheckout from './FtlCheckout';
 import LtlCheckout from './LtlCheckout';
+
+const MOBILE_SCREEN_SIZE = 768;
 
 const MAPPING = {
 	fcl_freight : FclCheckout,
@@ -27,6 +29,7 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 	const [headerProps, setHeaderProps] = useState({});
 	const [isShipmentCreated, setIsShipmentCreated] = useState(false);
 	const [isLoadingStateRequired, setIsLoadingStateRequired] = useState(false);
+	const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_SCREEN_SIZE);
 
 	const {
 		checkout_id = '',
@@ -204,6 +207,15 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 		&& !is_agent_allowed_to_book
 		&& checkoutMethod !== 'controlled_checkout';
 
+	useEffect(() => {
+		function handleResize() {
+			setIsMobile(window.innerWidth < MOBILE_SCREEN_SIZE);
+		}
+
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+
 	const checkoutData = useMemo(
 		() => ({
 			primaryService,
@@ -231,6 +243,7 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 			activated_on_paylater,
 			checkout_type,
 			earnable_cogopoints,
+			isMobile,
 			isAssistedBookingNotAllowed,
 			handleUnlockLatestRate,
 			createSearchLoading,
@@ -260,6 +273,7 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 			activated_on_paylater,
 			checkout_type,
 			earnable_cogopoints,
+			isMobile,
 			isAssistedBookingNotAllowed,
 			handleUnlockLatestRate,
 			createSearchLoading,
