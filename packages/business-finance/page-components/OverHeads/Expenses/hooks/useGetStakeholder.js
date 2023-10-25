@@ -10,7 +10,7 @@ const useGetStakeholder = ({ billId }) => {
 		{
 			url     : '/purchase/expense',
 			method  : 'get',
-			authKey : 'get_purchase_expense_by_id',
+			authKey : 'get_purchase_expense',
 		},
 		{ manual: true },
 	);
