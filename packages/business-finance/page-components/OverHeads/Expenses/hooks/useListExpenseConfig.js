@@ -16,7 +16,6 @@ const formatedDate = (date) => formatDate({
 const useListExpenseConfig = ({ expenseFilters, sort }) => {
 	const { createdDateSortBy, amountSortBy } = sort || {};
 	const {
-		paymentStatus = '',
 		expenseCategory = '',
 		repeatsEvery = '',
 		searchValue = '',
@@ -44,7 +43,6 @@ const useListExpenseConfig = ({ expenseFilters, sort }) => {
 			await trigger({
 				params: {
 					repeatFrequency    : repeatsEvery || undefined,
-					paymentStatus      : paymentStatus || undefined,
 					category           : expenseCategory || undefined,
 					q                  : searchValue || undefined,
 					createdDateSortBy  : createdDateSortBy || undefined,
@@ -66,7 +64,6 @@ const useListExpenseConfig = ({ expenseFilters, sort }) => {
 	}, [
 		trigger,
 		repeatsEvery,
-		paymentStatus,
 		expenseCategory,
 		searchValue,
 		pageIndex,

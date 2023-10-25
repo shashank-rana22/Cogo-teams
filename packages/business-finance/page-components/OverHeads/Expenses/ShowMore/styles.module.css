@@ -104,4 +104,8 @@
 		height: 34px !important;
 		font-size: 10px !important;
 	}
+
+	.ui_select_container {
+		height: 34px !important;
+	}
 }

@@ -66,17 +66,6 @@ export const recurringFilters = [
 		style       : { width: '164px', height: '32px' },
 	},
 	{
-		name           : 'paymentStatus',
-		type           : 'select',
-		multiple       : false,
-		defaultOptions : false,
-		placeholder    : 'Payment Status',
-		span           : 2,
-		isClearable    : true,
-		size           : 'sm',
-		options        : PAYMENT_OPTIONS,
-	},
-	{
 		name           : 'repeatsEvery',
 		type           : 'select',
 		multiple       : false,
