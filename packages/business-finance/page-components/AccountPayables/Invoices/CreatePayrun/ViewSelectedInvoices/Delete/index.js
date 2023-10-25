@@ -4,16 +4,20 @@ import React, { useState } from 'react';
 import DeleteModal from './DeleteModal';
 import styles from './styles.module.css';
 
-function Delete({ refetch = () => {}, itemData = {} }) {
+function Delete({ refetch = () => {}, itemData = {}, allowed = true }) {
 	const [show, setShow] = useState(false);
 	return (
 		<div>
-			<IcMDelete
-				className={styles.delete}
-				height={20}
-				onClick={() => setShow(true)}
-				width={20}
-			/>
+			{allowed
+				? (
+					<IcMDelete
+						className={styles.delete}
+						height={20}
+						onClick={() => setShow(true)}
+						width={20}
+					/>
+				)
+				: null}
 			{show ? (
 				<DeleteModal
 					show={show}

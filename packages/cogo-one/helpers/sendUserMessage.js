@@ -1,16 +1,4 @@
-import { Toast } from '@cogoport/components';
 import { getDoc } from 'firebase/firestore';
-
-const NO_OF_HOURS_IN_A_DAY = 24;
-const NO_OF_MILLI_SECONDS_IN_A_HOUR = 36e5;
-
-const isGreaterThan24hours = ({ newMessageSentAt, channelType }) => {
-	const lastMessageTime = new Date(newMessageSentAt);
-	const currentTime = new Date();
-	const hoursDifference = Math.abs(currentTime - lastMessageTime) / NO_OF_MILLI_SECONDS_IN_A_HOUR;
-
-	return (hoursDifference >= NO_OF_HOURS_IN_A_DAY && channelType === 'whatsapp');
-};
 
 const sendUserMessage = async ({
 	fileType = '',
@@ -25,16 +13,6 @@ const sendUserMessage = async ({
 	scrollToBottom = () => {},
 }) => {
 	const document = await getDoc(messageFireBaseDoc);
-
-	const twentyFourHoursCheck = isGreaterThan24hours({
-		newMessageSentAt: document?.data()?.new_message_sent_at,
-		channelType,
-	});
-
-	if (twentyFourHoursCheck) {
-		Toast.error('Message cannot be sent after 24 hours. Try sending a Template Instead');
-		return;
-	}
 
 	const adminChat = {
 		conversation_type : 'received',
