@@ -13297,6 +13297,21 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'update_video_conference_user_activity',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_video_conference_link',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_video_conference',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'get_shipment_quotation',
 			access_type  : 'private',
 			service_name : 'shipment',

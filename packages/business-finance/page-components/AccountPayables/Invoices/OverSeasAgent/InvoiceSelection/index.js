@@ -23,6 +23,7 @@ function InvoiceSelection({
 	setBLData = () => {},
 	setShowPayableAmount = () => {},
 	setShowSaveAsDraft = () => {},
+	allowed = true,
 }) {
 	const [sort, setSort] = useState({});
 
@@ -50,7 +51,7 @@ function InvoiceSelection({
 		selectedListData = {},
 	} = useListGetSelectedPayrun({ payload, viewSelectedInvoice, setApiData });
 
-	const renderHeaderCheckbox = () => GetTableHeaderCheckbox({ apiData, data, loading, setApiData });
+	const renderHeaderCheckbox = () => GetTableHeaderCheckbox({ apiData, data, loading, setApiData, allowed });
 
 	const {
 		onSubmitSelectedInvoices = () => {},
@@ -98,6 +99,7 @@ function InvoiceSelection({
 		refetch     : viewSelectedInvoice ? selectedListRefetch : refetch,
 		invoiceData : viewSelectedInvoice ? selectedListData : invoiceData,
 		setApiData,
+		allowed,
 	});
 
 	return (
@@ -128,6 +130,7 @@ function InvoiceSelection({
 					rowStyle="border"
 					showPagination
 					paginationType="number"
+					allowed={allowed}
 				/>
 			</div>
 
