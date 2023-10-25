@@ -1,4 +1,5 @@
 import { Pill, TabPanel, Tabs } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCCogoassured, IcMArrowBack, IcMArrowDown, IcMArrowUp, IcMTick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -30,6 +31,13 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 	const handlePillSelected = (trade_type) => {
 		setIsPillSelected((prev) => ({ ...prev, [trade_type]: !prev?.[trade_type] }));
 	};
+
+	const { discount_reason = {} } = itemData || {};
+	const { tags = [], name = '', discount_value = 0 } = discount_reason || {};
+	let subscriptionDiscountApplied = '';
+	if ((tags || []).includes('partner_subscription')) {
+		subscriptionDiscountApplied = name.split(' ')?.[GLOBAL_CONSTANTS.zeroth_index];
+	}
 
 	return (
 		<div className={styles.Detail_page}>
@@ -77,6 +85,16 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 						{itemData?.is_saas_subscribed ? (
 							<Pill size="md" color="#e6fae8">
 								Saas Subscribed
+							</Pill>
+						) : null}
+						{subscriptionDiscountApplied ? (
+							<Pill size="md" color="#e6fae8">
+								{subscriptionDiscountApplied}
+								{' '}
+								-
+								{' '}
+								{discount_value}
+								%
 							</Pill>
 						) : null}
 					</div>

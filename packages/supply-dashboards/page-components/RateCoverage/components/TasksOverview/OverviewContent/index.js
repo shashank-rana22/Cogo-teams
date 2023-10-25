@@ -6,12 +6,11 @@ import Card from './Card';
 import MainCard from './MainCard';
 import styles from './styles.module.css';
 
-function OverviewContent({ data = {}, statsLoading = false, filter = {}, setFilter = () => {}, setSource = () => {} }) {
+function OverviewContent({ data = {}, statsLoading = false, filter = {}, setFilter = () => {} }) {
 	const { statistics = {} } = data;
 
 	const handleClick = (card_detail) => {
-		setFilter((prev) => ({ ...prev, status: card_detail }));
-		setSource(null);
+		setFilter((prev) => ({ ...prev, status: card_detail, source: filter?.source }));
 	};
 
 	return (

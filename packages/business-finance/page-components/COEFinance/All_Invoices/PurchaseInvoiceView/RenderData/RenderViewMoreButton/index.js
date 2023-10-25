@@ -9,7 +9,7 @@ function RenderViewMoreButton({ itemData = {}, searchValue = '' }) {
 
 	const handleChange = (item) => {
 		router.push(
-			`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${item?.billId}
+			`/business-finance/audit-function/${router.query.active_tab}/view-invoices?billId=${item?.billId}
 			&billNumber=${item?.billNumber}&orgId=${item?.organizationId}&jobNumber=${item?.jobNumber}
 			&status=${item?.status}&billType=${item?.billType}&isProforma=${item?.isProforma}&jobType=${item?.jobType}
 			&searchValue=${searchValue}`,

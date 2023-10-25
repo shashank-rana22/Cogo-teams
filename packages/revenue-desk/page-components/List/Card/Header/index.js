@@ -1,4 +1,5 @@
 import { Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCCogoassured, IcMTimer } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
@@ -8,7 +9,14 @@ import serviceLabelMapping from '../../../../helpers/serviceLabelMapping';
 
 import styles from './styles.module.css';
 
-function Header({ data, filters }) {
+function Header({ data = {}, filters = {} }) {
+	const { discount_reason = {} } = data || {};
+	const { tags = [], name = '', discount_value = 0 } = discount_reason || {};
+	let subscriptionDiscountApplied = '';
+	if ((tags || []).includes('partner_subscription')) {
+		subscriptionDiscountApplied = name.split(' ')?.[GLOBAL_CONSTANTS.zeroth_index];
+	}
+
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.left_section}>
@@ -70,11 +78,20 @@ function Header({ data, filters }) {
 						>
 							Organic Booking
 						</Pill>
-
 					) : null}
 					{data?.is_saas_subscribed ? (
 						<Pill size="md" color="#e6fae8">
 							Saas Subscribed
+						</Pill>
+					) : null}
+					{subscriptionDiscountApplied ? (
+						<Pill size="md" color="#e6fae8">
+							{subscriptionDiscountApplied}
+							{' '}
+							-
+							{' '}
+							{discount_value}
+							%
 						</Pill>
 					) : null}
 				</div>

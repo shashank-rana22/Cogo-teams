@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function ViewInvoice({ item, field }) {
+function ViewInvoice({ item = {}, field = {} }) {
 	const { isIncome } = field || {};
 	const router = useRouter();
 	const handleChange = (itemData) => {
@@ -14,7 +14,7 @@ function ViewInvoice({ item, field }) {
 			window.open(invoicePdfUrl || proformaPdfUrl, '_blank');
 		} else {
 			router.push(
-				`/business-finance/coe-finance/${router.query.active_tab}
+				`/business-finance/audit-function/${router.query.active_tab}
 			/view-invoices?billId=${billId}&billNumber=${billNumber}
 			&orgId=${organizationId}&jobNumber=${jobNumber}&isShipment=${true}&status=${status}&jobType=${jobType}`,
 			);
