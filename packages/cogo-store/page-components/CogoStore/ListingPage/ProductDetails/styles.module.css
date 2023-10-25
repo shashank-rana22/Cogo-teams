@@ -266,6 +266,7 @@
 
 	.product_image {
 		flex-direction: column-reverse;
+		width: 100%;
 		margin-right: 0;
 	}
 
@@ -274,6 +275,7 @@
 		gap: 12px;
 		justify-content: flex-start;
 		width: 100%;
+		overflow: scroll;
 	}
 
 	.product_display_image {
