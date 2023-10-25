@@ -74,7 +74,7 @@ function Header() {
 					<span
 						aria-hidden
 						onClick={() => push('/cogo-store/admin-view')}
-						style={{ marginLeft: '12px', cursor: 'pointer', fontWeight: '600' }}
+						style={{ marginLeft: '18px', cursor: 'pointer', fontWeight: '600' }}
 					>
 						Admin View
 						<IcMArrowNext style={{ marginLeft: '3px', cursor: 'pointer' }} />

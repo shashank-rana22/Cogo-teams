@@ -188,7 +188,7 @@ function OrderDetails() {
 					</div>
 					{is_hr_admin ? (
 						<div className={styles.delivery_date}>
-							<div>
+							<div className={styles.delivery_date_details}>
 								<span>Expected ETD</span>
 								<DatepickerController
 									placeholder="Select Date"
@@ -198,10 +198,9 @@ function OrderDetails() {
 									size="md"
 									className={styles.date_picker}
 									onChange={onSubmit}
-									style={{ marginRight: '8px' }}
 								/>
 							</div>
-							<div>
+							<div className={styles.delivery_date_details}>
 								<span>Update Status</span>
 								<SelectController
 									placeholder="Status"

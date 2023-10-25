@@ -112,6 +112,7 @@
 
 .delivery_date {
 	display: flex;
+	gap: 12px;
 	align-items: center;
 	margin-bottom: 16px;
 
@@ -145,5 +146,25 @@
 
 	.table_container {
 		overflow: scroll;
+	}
+
+	.delivery_date {
+		flex-direction: column;
+		width: 100%;
+
+		:global {
+			.react-datepicker-wrapper,
+			.ui_select_display_container {
+				width: 100%;
+
+				input {
+					width: 100%;
+				}
+			}
+		}
+	}
+
+	.delivery_date_details {
+		width: 100%;
 	}
 }
