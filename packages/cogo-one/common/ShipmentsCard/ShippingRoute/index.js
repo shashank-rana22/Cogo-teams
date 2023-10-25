@@ -1,25 +1,10 @@
 import { cl } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
 
+import { SINGLE_LOCATIONS } from '../../../constants/shipmentConstants';
 import { formatRouteData } from '../../../utils/routeDataHelpers';
 
 import styles from './styles.module.css';
-
-const SINGLE_LOCATIONS = [
-	'fcl_customs',
-	'lcl_customs',
-	'air_customs',
-	'origin_fcl_customs',
-	'destination_fcl_customs',
-	'origin_lcl_customs',
-	'destination_lcl_customs',
-	'origin_air_customs',
-	'destination_air_customs',
-	'fcl_cfs',
-	'fcl_freight_local',
-	'air_freight_local',
-	'lcl_freight_local',
-];
 
 const TRADE_TYPE_MAPPING = {
 	import : 'Origin',

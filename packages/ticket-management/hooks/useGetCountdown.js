@@ -10,8 +10,10 @@ const DAY = HOUR * GENERAL_HOURS;
 
 const getFormattedTime = (val) => Math.abs(Math.floor(val));
 
-export default function useGetCountdown({ time, interval = SECOND }) {
-	const [timespan, setTimespan] = useState(new Date(time) - Date.now());
+const getTimeSpan = ({ tatTime }) => new Date(tatTime) - Date.now();
+
+export default function useGetCountdown({ tatTime = '', interval = SECOND }) {
+	const [timespan, setTimespan] = useState(() => getTimeSpan({ tatTime }));
 
 	useEffect(() => {
 		const intervalId = setInterval(() => {
@@ -22,8 +24,9 @@ export default function useGetCountdown({ time, interval = SECOND }) {
 	}, [interval]);
 
 	useEffect(() => {
-		setTimespan(new Date(time) - Date.now());
-	}, [time]);
+		const newTimeSpan = getTimeSpan({ tatTime });
+		setTimespan(newTimeSpan);
+	}, [tatTime]);
 
 	const days = getFormattedTime(timespan / DAY);
 	const hours = getFormattedTime((timespan / HOUR) % GENERAL_HOURS);
