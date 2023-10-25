@@ -1,39 +1,20 @@
+import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMCopy } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetShipment from '../../../../../../hooks/useGetShipment';
 import { RENDER_VALUE_MAPPING } from '../../../../../../utils/detailsHelperFuncs';
 
+import { handleCopyData, DATA_TO_SHOW } from './handleCopyData';
 import styles from './styles.module.css';
 
-const DATA_TO_SHOW = {
-	trade_type                      : 'Trade Type',
-	container_size                  : 'Container Size',
-	containers_count                : 'Containers Count',
-	packages_count                  : 'Packages Count',
-	trucks_count                    : 'Trucks Count',
-	truck_type                      : 'Truck Type',
-	trip_type                       : 'Trip Type',
-	container_type                  : 'Container Type',
-	commodity                       : 'Commodity',
-	payment_term                    : 'Payment Term',
-	inco_term                       : 'Inco Term',
-	packages                        : 'Packages',
-	volume                          : 'Volume',
-	weight                          : 'Weight',
-	commodity_description           : 'Commodity Description',
-	cargo_weight_per_container      : 'Cargo Weight Per Container',
-	hs_code                         : 'Hs Code',
-	bl_type                         : 'BL Type',
-	cargo_readiness_date            : 'Cargo Ready Date',
-	schedule_departure              : 'Schedule Departure',
-	estimated_departure             : 'Expected Departure',
-	transit_time                    : 'Transit Time',
-	free_days_detention_destination : 'Destination Detention Free Days',
-};
-
-function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) {
+function ShipmentInfoDetail({
+	shipmentId = '',
+	shipmentPopover = {},
+	id = '',
+}) {
 	const {
 		loading = false,
 		data = {},
@@ -62,6 +43,17 @@ function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) 
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.button_container}>
+				<Button
+					size="sm"
+					themeType="secondary"
+					onClick={() => handleCopyData({ serialId: serial_id, details: primary_service_detail })}
+				>
+					<IcMCopy />
+					Copy
+				</Button>
+			</div>
+
 			{serial_id ? (
 				<div className={styles.each_content}>
 					Serial ID:
@@ -71,7 +63,7 @@ function ShipmentInfoDetail({ shipmentId = '', shipmentPopover = {}, id = '' }) 
 
 			{Object.entries(DATA_TO_SHOW)?.map(
 				([key, label]) => {
-					const displayValue = RENDER_VALUE_MAPPING?.[key]?.(primary_service_detail);
+					const displayValue = RENDER_VALUE_MAPPING?.[key]?.(primary_service_detail, true);
 
 					if (!displayValue) {
 						return null;
