@@ -32,6 +32,7 @@ function AddRate({
 	dependentMainFreight = [],
 	filter = {},
 	getStats = () => {},
+	triggeredFrom = '',
 }) {
 	const onCloseHandel = () => {
 		setShowModal((prev) => !prev);
@@ -123,6 +124,7 @@ function AddRate({
 									dependentMainFreight={dependentMainFreight}
 									filter={filter}
 									source={source}
+									triggeredFrom={triggeredFrom}
 								/>
 							</Modal.Body>
 							<Modal.Footer>
