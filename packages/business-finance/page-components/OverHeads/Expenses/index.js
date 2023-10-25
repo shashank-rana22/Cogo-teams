@@ -57,7 +57,7 @@ const NON_RECURRING_TABS = [
 function ExpenseComponent() {
 	const [recurringState, setRecurringState] = useState('recurring');
 	const [createExpenseType, setCreateExpenseType] = useState('');
-	const [subActiveTab, setSubActiveTab] = useState('ALL_INVOICES');
+	const [subActiveTab, setSubActiveTab] = useState('ALL_EXPENSE_CONFIGURATION');
 	const [showModal, setShowModal] = useState(false);
 	const [showWarning, setShowWarning] = useState(false);
 	const [showExpenseModal, setShowExpenseModal] = useState(false);
@@ -109,6 +109,12 @@ function ExpenseComponent() {
 	}, [getList, recurringState, expenseFilters, getRecurringList]);
 
 	useEffect(() => {
+		if (recurringState === 'recurring') {
+			setSubActiveTab('ALL_EXPENSE_CONFIGURATION');
+		} else if (recurringState === 'nonRecurring') {
+			setSubActiveTab('ALL_INVOICES');
+		}
+
 		setExpenseFilters((p) => ({
 			...p,
 			expenseCategory : null,
@@ -604,14 +610,6 @@ function ExpenseComponent() {
 		}
 		return null;
 	}
-
-	useEffect(() => {
-		if (recurringState === 'recurring') {
-			setSubActiveTab('ALL_EXPENSE_CONFIGURATION');
-		} else if (recurringState === 'nonRecurring') {
-			setSubActiveTab('ALL_INVOICES');
-		}
-	}, [recurringState]);
 
 	let listConfig;
 	let listItemData;
