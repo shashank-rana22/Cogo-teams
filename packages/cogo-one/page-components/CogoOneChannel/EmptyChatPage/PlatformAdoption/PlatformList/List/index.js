@@ -1,10 +1,12 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useUpdateRequestStatus from '../../../../../hooks/useUpdateRerquestStatus';
-import useVerificationDocument from '../../../../../hooks/useVerificationDocument';
+import useUpdateRequestStatus from '../../../../../../hooks/useUpdateRerquestStatus';
+import useVerificationDocument from '../../../../../../hooks/useVerificationDocument';
 
 import AccountAllocateCard from './AccountAllocateCard';
 import CallDetails from './CallDetails';
@@ -19,7 +21,7 @@ import VerifyAccount from './VerifyAccount';
 
 const formatList = ({ list = [], type = '' }) => (list || []).filter((item) => type === item?.request_type);
 
-function AdoptionList({
+function List({
 	setActiveTab = () => {},
 	verifyAccount = {}, setVerifyAccount = () => {},
 	list = [], onboardingRequest = () => {},
@@ -115,6 +117,14 @@ function AdoptionList({
 		}));
 	};
 
+	if (isEmpty(list)) {
+		return (
+			<div className={styles.empty_container}>
+				<Image src={GLOBAL_CONSTANTS.image_url.list_empty} width={300} height={300} />
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			{!isEmpty(kycList) ? (
@@ -134,7 +144,7 @@ function AdoptionList({
 				<OrganicCustomer
 					list={organincList}
 					setScheduleDemo={setScheduleDemo}
-					setVerifyAccount={setVerifyAccount}
+					handlePlaceCall={handlePlaceCall}
 				/>
 			) : null}
 			{!isEmpty(missedList) ? (
@@ -182,4 +192,4 @@ function AdoptionList({
 	);
 }
 
-export default AdoptionList;
+export default List;

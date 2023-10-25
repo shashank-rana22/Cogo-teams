@@ -1,19 +1,22 @@
 import { Tooltip, Button } from '@cogoport/components';
-import { IcMOverflowDot, IcMFtick, IcMCrossInCircle, IcMCalendar } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { IcMOverflowDot, IcMFtick, IcMCrossInCircle, IcMCalendar, IcMCall } from '@cogoport/icons-react';
+import { isEmpty, startCase } from '@cogoport/utils';
 
-import AgentAvatar from '../../../../../../common/AgentAvatar';
-import { formatAccountType } from '../../../../../../utils/platformAdoption';
+import AgentAvatar from '../../../../../../../common/AgentAvatar';
+import { formatAccountType } from '../../../../../../../utils/platformAdoption';
 
 import styles from './styles.module.css';
 
-function OrganicCustomer({ list = [], setScheduleDemo = () => {}, setVerifyAccount = () => {} }) {
+function OrganicCustomer({ list = [], setScheduleDemo = () => {}, handlePlaceCall = () => {} }) {
 	return (list || []).map((item) => {
-		const { request_type = '', id = '', user = {}, organization = {} } = item || {};
-		const { name = '' } = user || {};
+		const { request_type = '', id = '', user = {}, organization = {}, intro_call = {} } = item || {};
 		const {
-			account_type = '', tags = [], organization_documents = [],
-			preferred_languages = [], city = {},
+			name = '', mobile_country_code = '', mobile_number = '', lead_user_id = '',
+			id: pocId = '',
+		} = user || {};
+		const {
+			account_type = '', tags = [], city = {},
+			preferred_languages = [], business_name = '', demo_requested = false,
 		} = organization || {};
 		const { display_name = '' } = city || {};
 
@@ -21,7 +24,7 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, setVerifyAccou
 			<div className={styles.card} key={id}>
 				<div className={styles.header_info}>
 					<div className={styles.user_info}>
-						<AgentAvatar text="#" />
+						<AgentAvatar text={business_name || '#'} />
 						<div className={styles.org_details}>
 							<Tooltip
 								content="Cogoport private logistix limited"
@@ -49,11 +52,14 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, setVerifyAccou
 					<div className={styles.status_row}>
 						<div className={styles.status_content}>
 							<div className={styles.title}>Intro Call : </div>
-							<IcMFtick fill="#abcd62" width={22} height={22} />
+							{isEmpty(intro_call) ? <IcMCrossInCircle fill="#EE3425" width={16} height={16} />
+								: <IcMFtick fill="#abcd62" width={20} height={20} />}
 						</div>
 						<div className={styles.status_content}>
 							<div className={styles.title}>Demo : </div>
-							<IcMCrossInCircle fill="#EE3425" width={20} height={20} />
+							{demo_requested ? <IcMFtick fill="#abcd62" width={20} height={20} />
+								: <IcMCrossInCircle fill="#EE3425" width={16} height={16} />}
+
 						</div>
 					</div>
 					<div className={styles.each_row}>
@@ -73,36 +79,36 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, setVerifyAccou
 				</div>
 				<div className={styles.line_break} />
 				<div className={styles.footer_container}>
-					<Button
-						size="md"
-						themeType="secondary"
-						onClick={() => setScheduleDemo((prev) => ({
-							...prev,
-							isScheduleDemo : true,
-							scheduleData   : {},
-						}))}
-					>
-						<IcMCalendar fill="grey" className={styles.schedule_demo_icon} />
-						Schedule Demo
-					</Button>
-					<Button
-						size="md"
-						themeType="secondary"
-						onClick={() => {
-							setVerifyAccount((prev) => ({
-								...prev,
-								show               : true,
-								showAccountDetails : true,
-								accountData        : organization_documents,
-								orgData            : item,
-								verifyType         : 'onboard_customer',
-								accountType        : formatAccountType({ tags })?.[account_type]?.shortName,
-							}));
-						}}
-					>
-						<IcMFtick fill="#abcd62" width={18} height={18} className={styles.schedule_demo_icon} />
-						Verify
-					</Button>
+					{isEmpty(intro_call)
+						? (
+							<Button
+								size="md"
+								themeType="secondary"
+								onClick={() => setScheduleDemo((prev) => ({
+									...prev,
+									isScheduleDemo : true,
+									scheduleData   : {},
+								}))}
+							>
+								<IcMCalendar fill="grey" className={styles.schedule_demo_icon} />
+								Schedule Demo
+							</Button>
+						) : null}
+					{!demo_requested ? (
+						<div
+							role="presentation"
+							className={styles.call_icon}
+							onClick={() => handlePlaceCall({
+								userName   : name,
+								code       : mobile_country_code,
+								number     : mobile_number,
+								pocId,
+								leadUserId : lead_user_id,
+							})}
+						>
+							<IcMCall width={18} height={18} fill="#fff" />
+						</div>
+					) : null}
 				</div>
 			</div>
 

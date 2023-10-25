@@ -13,20 +13,34 @@
 .full_screen {
 	width: 100%;
 	height: 100%;
+}
+
+.selected_sources {
+	display: flex;
+	width: calc(100% - 30px);
+	margin-bottom: 18px;
 
 	:global {
-		.ui_select_container {
-			width: 40%;
-			margin-bottom: 18px;
+		.ui_chips_container {
+			flex-wrap: wrap;
+			padding: 6px;
+			overflow: auto;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
 		}
 	}
+}
+
+.wrap {
+	height: 80px;
 }
 
 .content {
 	position: relative;
 	width: 100%;
-
-	/* height: 100%; */
+	height: calc(100% - 103px);
 	background: #262a35;
 }
 
@@ -35,4 +49,5 @@
 	align-self: center;
 	justify-content: center;
 	width: 100%;
+	height: calc(100% - 90px);
 }

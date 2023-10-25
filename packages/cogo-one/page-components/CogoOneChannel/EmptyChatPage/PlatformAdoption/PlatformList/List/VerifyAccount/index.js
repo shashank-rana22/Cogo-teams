@@ -1,23 +1,23 @@
 import { Modal, Button, cl } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
-import { getOrgId } from '../../../../../../utils/platformAdoption';
+import { getOrgId } from '../../../../../../../utils/platformAdoption';
 
 import AccountDetails from './AccountDetails';
 import FileViewer from './FileViewer';
 import styles from './styles.module.css';
 
-const DUMMY_PDF = [{
-	id            : '5667e89d-1d32-44f9-a482-f7fb7edc7fc3',
-	document_type : 'booking_proof',
-	state         : 'document_accepted',
-	document_url  : 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-	data          : null,
-	created_at    : '2022-10-12T09:59:48.237Z',
-	updated_at    : '2022-10-12T09:59:48.379Z',
-	source        : null,
-}];
+// const DUMMY_PDF = [{
+// 	id            : '5667e89d-1d32-44f9-a482-f7fb7edc7fc3',
+// 	document_type : 'booking_proof',
+// 	state         : 'document_accepted',
+// 	document_url  : 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+// 	data          : null,
+// 	created_at    : '2022-10-12T09:59:48.237Z',
+// 	updated_at    : '2022-10-12T09:59:48.379Z',
+// 	source        : null,
+// }];
 
 function VerifyAccount({
 	verifyAccount = {}, setVerifyAccount = () => {}, setRejectAccount = () => {},
@@ -32,26 +32,25 @@ function VerifyAccount({
 		accountType = '',
 	} = verifyAccount || {};
 
-	console.log('accountData', accountData);
-
-	// const DOCUMENT_OPTIONS = (accountData || []).map((itm) => ({
-	// 	label : startCase(itm?.document_type),
-	// 	value : itm?.document_type,
-	// 	url   : itm?.document_url,
-	// }));
-	const DOCUMENT_OPTIONS = (DUMMY_PDF || []).map((itm) => ({
+	const DOCUMENT_OPTIONS = useMemo(() => (accountData || []).map((itm) => ({
 		label : startCase(itm?.document_type),
 		value : itm?.document_type,
 		url   : itm?.document_url,
-	}));
+	})), [accountData]);
 
 	const [selectDoc, setSelectDoc] = useState({
 		docType : '',
 		docUrl  : '',
 	});
 
-	// const hasDocument = isEmpty(accountData);
-	const hasDocument = isEmpty(DUMMY_PDF);
+	// const hasDocument = isEmpty(DUMMY_PDF);
+	const hasDocument = isEmpty(accountData);
+
+	// const DOCUMENT_OPTIONS = useMemo(() => (DUMMY_PDF || []).map((itm) => ({
+	// 	label : startCase(itm?.document_type),
+	// 	value : itm?.document_type,
+	// 	url   : itm?.document_url,
+	// })), []);
 
 	const handleClose = () => {
 		setSelectDoc({ docType: null, docUrl: null });
@@ -64,6 +63,10 @@ function VerifyAccount({
 			type  : status,
 		});
 	};
+
+	if (!show) {
+		return null;
+	}
 
 	return (
 		<Modal
@@ -83,6 +86,7 @@ function VerifyAccount({
 						documentOptions={DOCUMENT_OPTIONS}
 						selectDoc={selectDoc}
 						setSelectDoc={setSelectDoc}
+						hasDocument={hasDocument}
 					/>
 
 					{showAccountDetails ? (

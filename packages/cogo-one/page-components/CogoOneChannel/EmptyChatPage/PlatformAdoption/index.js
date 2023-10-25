@@ -6,9 +6,9 @@ import useGetUnreadMailsCount from '../../../../hooks/useGetUnreadMailsCount';
 import useGetUnreadMessagesCount from '../../../../hooks/useGetUnreadMessagesCount';
 import useListOmnichannelOnboardingRequests from '../../../../hooks/useListOmnichannelOnboardingRequests';
 
-import AdoptionList from './AdoptionList';
 import FilterSection from './FilterSection';
-import Loader from './Loader';
+import PlatformHistory from './PlatformHistory';
+import PlatformList from './PlatformList';
 import styles from './styles.module.css';
 
 function PlatformAdoption({
@@ -26,6 +26,7 @@ function PlatformAdoption({
 		verifyType         : '',
 		accountType        : '',
 	});
+	const [showHistory, setShowHistory] = useState(false);
 
 	const { unReadChatsCount } = useGetUnreadMessagesCount({
 		firestore,
@@ -49,37 +50,42 @@ function PlatformAdoption({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.top_section}>
-				<div className={styles.title}>Task for the Day</div>
-				<div className={styles.history_title}>
-					<IcMPlansExpiring fill="#034afd" />
-					View History
-				</div>
-			</div>
-			<FilterSection
-				unReadChatsCount={unReadChatsCount}
-				unReadMailsCount={unReadMailsCount}
-				setActiveTab={setActiveTab}
-				platformTab={platformTab}
-				setPlatformTab={setPlatformTab}
-			/>
-			{loading ? <Loader /> : (
-				<AdoptionList
-					setActiveTab={setActiveTab}
-					setVerifyAccount={setVerifyAccount}
-					verifyAccount={verifyAccount}
-					list={list}
-					onboardingRequest={onboardingRequest}
-				/>
+			{showHistory ? <PlatformHistory setShowHistory={setShowHistory} rest={rest} list={list} /> : (
+				<>
+					<div className={styles.top_section}>
+						<div className={styles.title}>Task for the Day</div>
+						<div role="presentation" className={styles.history_title} onClick={() => setShowHistory(true)}>
+							<IcMPlansExpiring fill="#034afd" />
+							View History
+						</div>
+					</div>
+					<FilterSection
+						unReadChatsCount={unReadChatsCount}
+						unReadMailsCount={unReadMailsCount}
+						setActiveTab={setActiveTab}
+						platformTab={platformTab}
+						setPlatformTab={setPlatformTab}
+					/>
+					<PlatformList
+						list={list}
+						loading={loading}
+						onboardingRequest={onboardingRequest}
+						setActiveTab={setActiveTab}
+						setVerifyAccount={setVerifyAccount}
+						verifyAccount={verifyAccount}
+					/>
+				</>
 			)}
-			<div className={styles.pagination_info}>
-				<Pagination
-					type="number"
-					currentPage={page}
-					totalItems={total_count}
-					pageSize={page_limit}
-				/>
-			</div>
+			{page > 1 ? (
+				<div className={styles.pagination_info}>
+					<Pagination
+						type="number"
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={page_limit}
+					/>
+				</div>
+			) : null}
 		</div>
 	);
 }

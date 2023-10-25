@@ -1,7 +1,7 @@
 import { Checkbox, cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import AgentAvatar from '../../../../../../../common/AgentAvatar';
+import AgentAvatar from '../../../../../../../../common/AgentAvatar';
 
 import { formatKycOrgData, formatOnboardData, formatTradePartyData } from './formatOrgData';
 import styles from './styles.module.css';

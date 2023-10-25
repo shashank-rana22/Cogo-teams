@@ -170,3 +170,16 @@
 .schedule_demo_icon {
 	margin-right: 4px;
 }
+
+.call_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 32px;
+	padding: 8px;
+	cursor: pointer;
+	background: #c4dc91;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+}

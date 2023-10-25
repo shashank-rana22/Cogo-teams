@@ -2,7 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 
-import { getOrgId } from '../../../../../../utils/platformAdoption';
+import { getOrgId } from '../../../../../../../utils/platformAdoption';
 
 import styles from './styles.module.css';
 
@@ -62,7 +62,13 @@ function RejectAccount({
 				>
 					Cancel
 				</Button>
-				<Button themeType="primary" onClick={() => handleReject('rejected')} loading={loading}>Submit</Button>
+				<Button
+					themeType="primary"
+					onClick={() => handleReject('rejected')}
+					loading={loading}
+				>
+					Submit
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

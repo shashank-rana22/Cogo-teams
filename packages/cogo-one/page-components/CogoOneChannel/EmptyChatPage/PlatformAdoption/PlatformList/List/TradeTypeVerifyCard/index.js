@@ -7,7 +7,7 @@ import {
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import { formatAccountType } from '../../../../../../utils/platformAdoption';
+import { formatAccountType } from '../../../../../../../utils/platformAdoption';
 
 import styles from './styles.module.css';
 

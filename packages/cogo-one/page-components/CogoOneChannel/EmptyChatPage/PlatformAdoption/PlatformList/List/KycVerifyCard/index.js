@@ -4,7 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcAIncoterms, IcMOverflowDot, IcMInfo, IcMDocument, IcMTimer, IcMFtick, IcMCall } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import { formatAccountType } from '../../../../../../utils/platformAdoption';
+import { formatAccountType } from '../../../../../../../utils/platformAdoption';
 
 import styles from './styles.module.css';
 

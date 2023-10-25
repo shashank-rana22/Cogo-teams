@@ -2,8 +2,8 @@ import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React from 'react';
 
-import FormLayout from '../../../../../../common/FormLayout';
-import { SCHEDULE_DEMO_CONTROLS } from '../../../../../../configurations/schedule-demo-controls';
+import FormLayout from '../../../../../../../common/FormLayout';
+import { SCHEDULE_DEMO_CONTROLS } from '../../../../../../../configurations/schedule-demo-controls';
 
 import styles from './styles.module.css';
 
