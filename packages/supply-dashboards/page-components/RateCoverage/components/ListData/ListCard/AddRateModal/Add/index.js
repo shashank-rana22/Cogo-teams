@@ -31,17 +31,21 @@ function AddRate({
 	spot_data = {},
 	dependentMainFreight = [],
 	filter = {},
+	getStats = () => {},
+	triggeredFrom = '',
 }) {
+	const onCloseHandel = () => {
+		setShowModal((prev) => !prev);
+		setServiceIdPresent('');
+		if (activeTab) {
+			getStats();
+			getListCoverage();
+		}
+	};
 	return (
 		<Modal
 			show={showModal}
-			onClose={() => {
-				setShowModal((prev) => !prev);
-				setServiceIdPresent('');
-				if (activeTab) {
-					getListCoverage();
-				}
-			}}
+			onClose={onCloseHandel}
 			placement="top"
 			size="xl"
 		>
@@ -120,15 +124,13 @@ function AddRate({
 									dependentMainFreight={dependentMainFreight}
 									filter={filter}
 									source={source}
+									triggeredFrom={triggeredFrom}
 								/>
 							</Modal.Body>
 							<Modal.Footer>
 								<Button
 									size="md"
-									onClick={() => {
-										setShowModal((prev) => !prev);
-										setServiceIdPresent('');
-									}}
+									onClick={onCloseHandel}
 									style={{ marginRight: '20px' }}
 									themeType="secondary"
 								>

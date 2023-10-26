@@ -46,6 +46,7 @@ function ListCard({
 		serial_id = '',
 		assigned_to = {},
 		service_provider = {},
+		reverted_count,
 	} = data;
 
 	const {
@@ -96,6 +97,16 @@ function ListCard({
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.revert}>
+				{!isEmpty(reverted_count) && (
+					<Pill size="sm" color="green">
+						{' '}
+						{reverted_count}
+						{' '}
+						Reverts
+					</Pill>
+				)}
+			</div>
 			<div className={styles.details_content}>
 				{['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
 			&& (
@@ -127,6 +138,7 @@ function ListCard({
 								</div>
 							</div>
 						)}
+
 						{data?.created_at && (
 							<div>
 								Created At :

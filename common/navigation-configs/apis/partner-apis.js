@@ -8763,6 +8763,24 @@ const partner = {
 			feature     : 'Expenses',
 		},
 		{
+			api         : 'post_overhead_vendor_to_open_search',
+			access_type : 'private',
+			module      : 'Vendors',
+			feature     : 'Vendors',
+		},
+		{
+			api         : 'post_overhead_expense_to_open_search',
+			access_type : 'private',
+			module      : 'Expenses',
+			feature     : 'Expenses',
+		},
+		{
+			api         : 'get_vendor_trade_parties_data',
+			access_type : 'private',
+			module      : 'Vendors',
+			feature     : 'Vendors',
+		},
+		{
 			api         : 'get_purchase_expense_list_expense_configurations',
 			access_type : 'private',
 			module      : 'Expenses',
@@ -13297,6 +13315,17 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'list_spot_searches',
+			access_type  : 'private',
+			feature      : 'rate_requests',
+			service_name : 'spot_search',
+		},
+		{
+			api          : 'update_video_conference_user_activity',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'verify_organization_kyc',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -13327,6 +13356,16 @@ const partner = {
 			access_type  : 'private',
 			feature      : 'allocation',
 			service_name : 'allocation',
+		},
+		{
+			api          : 'get_video_conference_link',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_video_conference',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 		{
 			api          : 'get_shipment_quotation',

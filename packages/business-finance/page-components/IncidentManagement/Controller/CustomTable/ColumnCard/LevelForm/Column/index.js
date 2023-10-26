@@ -53,6 +53,7 @@ function Column({
 					control={control}
 					name={`approvalLevelConditions.${index}.user`}
 					asyncKey="partner_users"
+					renderLabel={(el) => (`${el?.name} (${el?.email})`)}
 					valueKey="user_id"
 					initialCall
 					onChange={(val, obj) => {
