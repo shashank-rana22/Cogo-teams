@@ -14,8 +14,12 @@ import styles from './styles.module.css';
 const DEFAULT_AMOUNT = 0;
 
 function OverallOutstandingStats({ item = {}, statsLoading = false }) {
-	const { openInvoiceBucket, onAccountBucket, totalOutstandingBucket, creditNoteBucket } = item || {};
-	const { totalLedAmount, ledCurrency } = totalOutstandingBucket || {};
+	const { invoice = {}, onAccount, creditNote } = item || {};
+	const { totalLedAmount:invoiceTotalAmount = 0, ledCurrency } = invoice || {};
+	const { totalLedAmount:onAccountTotalAmount = 0 } = onAccount || {};
+	const { totalLedAmount:creditNoteTotalAmount = 0 } = creditNote || {};
+
+	const TOTAL_OUTSTANDING_AMOUNT = invoiceTotalAmount + onAccountTotalAmount + creditNoteTotalAmount;
 
 	return (
 		<div className={styles.container}>
@@ -33,35 +37,35 @@ function OverallOutstandingStats({ item = {}, statsLoading = false }) {
 				<div style={{ margin: '12px 0px 20px 11px' }}>
 					<OutStandingStatsCommonCard
 						label="OPEN INVOICES"
-						item={openInvoiceBucket}
+						item={invoice}
 						amountValue={OVERALL_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
 						amountColor="#FC5555"
 					/>
 					<OutStandingStatsCommonCard
 						label="ON ACCOUNT PAYMENTS"
-						item={onAccountBucket}
+						item={onAccount}
 						amountValue={ONACCOUNT_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
 						amountColor="#29CC6A"
 					/>
 					<OutStandingStatsCommonCard
 						label="CREDIT NOTES"
-						item={creditNoteBucket}
+						item={creditNote}
 						amountValue={OVERALL_STATS_KEY_MAPPING}
 						statsLoading={statsLoading}
-						amountColor={creditNoteBucket?.totalLedAmount
+						amountColor={creditNote?.totalLedAmount
 							<= DEFAULT_AMOUNT ? '#29CC6A' : '#FC5555'}
 					/>
 				</div>
 			</div>
 			<div className={styles.outstanding_card}>
 				<div className={styles.total_outstanding_label}>Total Outstanding</div>
-				<div className={cl`${totalLedAmount > GLOBAL_CONSTANTS.zeroth_index
+				<div className={cl`${TOTAL_OUTSTANDING_AMOUNT > GLOBAL_CONSTANTS.zeroth_index
 					? styles.amount : styles.credit_note_amount} ${styles.common_amount}`}
 				>
 					{statsLoading ? <Placeholder /> : formatAmount({
-						amount   : totalLedAmount || GLOBAL_CONSTANTS.zeroth_index,
+						amount   : TOTAL_OUTSTANDING_AMOUNT || GLOBAL_CONSTANTS.zeroth_index,
 						currency : ledCurrency,
 						options  : {
 							style                 : 'currency',

@@ -7183,6 +7183,13 @@ const partner = {
 			service_name : 'sage',
 		},
 		{
+			api         : 'put_payments_outstanding_update_account_taggings',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+
+		},
+		{
 			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
@@ -9281,6 +9288,18 @@ const partner = {
 		},
 		{
 			api         : 'get_payments_outstanding_by_customer',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_payments_outstanding_by_customer_v2',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'put_payments_outstanding_customer_v2',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
