@@ -51,10 +51,6 @@
 	align-items: center;
 }
 
-.delete {
-	cursor: pointer;
-}
-
 .document_sub_card_final {
 	display: flex;
 	justify-content: space-between;

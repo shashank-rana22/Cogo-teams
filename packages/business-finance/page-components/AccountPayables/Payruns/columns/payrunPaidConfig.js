@@ -56,7 +56,7 @@ export const PAYRUN_PAID_NORMAL_CONFIG = {
 			topKey : {
 				key         : 'grandTotal',
 				type        : 'amount',
-				currencyKey : 'currency',
+				currencyKey : 'objectCurrency',
 			},
 			func : 'renderFieldPair',
 			span : 1.2,
@@ -64,14 +64,14 @@ export const PAYRUN_PAID_NORMAL_CONFIG = {
 		{
 			key         : 'totalPaidTds',
 			func        : 'renderAmount',
-			currencyKey : 'currency',
+			currencyKey : 'objectCurrency',
 			label       : 'TDS Amount',
 			span        : 1,
 		},
 		{
 			key         : 'totalPaidAmount',
 			func        : 'renderAmount',
-			currencyKey : 'currency',
+			currencyKey : 'objectCurrency',
 			label       : 'Paid Amount',
 			span        : 1,
 		},

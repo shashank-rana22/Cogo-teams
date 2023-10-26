@@ -63,6 +63,7 @@ const SUPPLY = {
 		hide_personal_mail                          : true,
 		show_services                               : true,
 		show_rm_agent_details                       : false,
+		show_rate_reverts_page                      : true,
 	},
 };
 
