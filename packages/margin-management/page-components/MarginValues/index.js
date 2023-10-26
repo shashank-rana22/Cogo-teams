@@ -43,9 +43,11 @@ function MarginValues({ data = {} }) {
 	return (
 		<div className={styles.detail_container}>
 			<div className={styles.table}>
+				<h4 className={styles.slab_details}>Slab Details</h4>
 				<Table
 					columns={columns}
 					data={LIST}
+
 				/>
 			</div>
 			<div className={styles.stats_data}>

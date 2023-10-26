@@ -76,9 +76,9 @@ function MultiEntityMargin() {
 		<div>
 			<Tabs
 				activeTab={activeService}
-				themeType="primary"
+				themeType="tertiary"
 				onChange={setActiveService}
-				style={{ marginTop: 24 }}
+				style={{ marginTop: 12 }}
 			>
 				{options.map((option) => (
 					<TabPanel key={option.value} name={option.value} title={option.label} />

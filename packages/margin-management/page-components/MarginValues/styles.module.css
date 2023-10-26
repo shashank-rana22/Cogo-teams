@@ -171,10 +171,15 @@
 
 .table {
 	flex: 1;
+	margin: 12px;
 
 	:global {
 		.ui_table_head_cell {
 			width: 20%;
 		}
 	}
+}
+
+.slab_details {
+	text-decoration: underline;
 }
