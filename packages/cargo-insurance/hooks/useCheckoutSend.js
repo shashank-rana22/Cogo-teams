@@ -1,10 +1,15 @@
 import { Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, upperCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
-const getPayload = ({ formData = {}, draftData = {}, selectedAddress = {}, performedBy = '', billingType }) => {
+const getPayload = ({
+	formData = {}, draftData = {}, selectedAddress = {}, performedBy = '',
+	billingType, query = {},
+}) => {
+	const { draftId, policySearchId } = query || {};
 	const {
 		packageDescription, coverageFrom, coverageTo, invoiceNo, invoiceDate,
 		invoiceDoc = {}, panDoc = {}, gstDoc = {}, aadharDoc = {}, pan_number, aadharNumber, ...rest
@@ -21,7 +26,9 @@ const getPayload = ({ formData = {}, draftData = {}, selectedAddress = {}, perfo
 		isPaid          : false,
 		checkoutRequest : {
 			userId,
+			policySearchId,
 			organizationId,
+			policyId     : draftId,
 			source       : 'ADMIN',
 			billingParty : {
 				partyName      : selectedAddress?.name,
@@ -77,6 +84,8 @@ const getPayload = ({ formData = {}, draftData = {}, selectedAddress = {}, perfo
 };
 
 const useCheckoutSend = ({ setConfirmSuccess, draftData = {}, billingType, formRef }) => {
+	const { query } = useRouter();
+
 	const { t } = useTranslation(['cargoInsurance']);
 
 	const { user } = useSelector((state) => state.profile);
@@ -88,7 +97,7 @@ const useCheckoutSend = ({ setConfirmSuccess, draftData = {}, billingType, formR
 	}, { manual: true });
 
 	const confirmSendInsurance = async ({ formData, selectedAddress }) => {
-		const payload = getPayload({ formData, draftData, performedBy: user?.id, selectedAddress, billingType });
+		const payload = getPayload({ formData, draftData, performedBy: user?.id, selectedAddress, billingType, query });
 		try {
 			await trigger({
 				data: payload,

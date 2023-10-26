@@ -14,47 +14,47 @@ function ConfirmSuccessModal({ confirmSuccess = {}, setConfirmSuccess, handleSub
 
 	return (
 		<Modal show={isOpen} closeOnOuterClick={isConfirm}>
-			<div className={styles.body}>
-				{isConfirm ? (
-					<>
-						{' '}
-						<h3 className={styles.title}>{t('cargoInsurance:confirm_title')}</h3>
 
-						<div className={styles.footer}>
-							<Button
-								size="sm"
-								disabled={loading}
-								themeType="secondary"
-								className={styles.cancel_btn}
-								onClick={() => setConfirmSuccess({ isOpen: false })}
-							>
-								{t('cargoInsurance:cancel')}
-							</Button>
+			{isConfirm ? (
+				<>
+					{' '}
+					<h3 className={styles.title}>{t('cargoInsurance:confirm_title')}</h3>
 
-							<Button
-								size="sm"
-								loading={loading}
-								themeType="accent"
-								onClick={handleSubmit(submitHandler)}
-							>
-								{t('cargoInsurance:confirm')}
-							</Button>
-						</div>
-					</>
-				) : null}
-
-				{isSuccess ? (
-					<>
-						<Image src={GLOBAL_CONSTANTS.image_url.mail_sent} width={140} height={140} />
-
-						<h1 className={styles.header}>{t('cargoInsurance:success_mail')}</h1>
-
-						<Button size="sm" themeType="linkUi" onClick={() => push('/service-discovery')}>
-							{t('cargoInsurance:service_discovery_cta')}
+					<div className={styles.footer}>
+						<Button
+							size="sm"
+							disabled={loading}
+							themeType="secondary"
+							className={styles.cancel_btn}
+							onClick={() => setConfirmSuccess({ isOpen: false })}
+						>
+							{t('cargoInsurance:cancel')}
 						</Button>
-					</>
-				) : null}
-			</div>
+
+						<Button
+							size="sm"
+							loading={loading}
+							themeType="accent"
+							onClick={handleSubmit(submitHandler)}
+						>
+							{t('cargoInsurance:confirm')}
+						</Button>
+					</div>
+				</>
+			) : null}
+
+			{isSuccess ? (
+				<div className={styles.body}>
+					<Image src={GLOBAL_CONSTANTS.image_url.mail_sent} width={140} height={140} />
+
+					<h1 className={styles.header}>{t('cargoInsurance:success_mail')}</h1>
+
+					<Button size="sm" themeType="linkUi" onClick={() => push('/service-discovery')}>
+						{t('cargoInsurance:service_discovery_cta')}
+					</Button>
+				</div>
+			) : null}
+
 		</Modal>
 	);
 }
