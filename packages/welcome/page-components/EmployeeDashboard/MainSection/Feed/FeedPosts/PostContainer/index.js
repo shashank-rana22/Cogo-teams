@@ -9,9 +9,10 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { cl, Tooltip, Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMProvision, IcMOverflowDot, IcCLike, IcCHeart,
-	IcCLaugh, IcCClap, IcMAppLike, IcMDelete,
+	IcCLaugh, IcCClap, IcMAppLike, IcMDelete, IcMCalendar,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { formatDistanceToNow } from 'date-fns';
@@ -107,6 +108,12 @@ const iconMapping = {
 	laugh   : <IcCLaugh width={18} height={18} />,
 	clap    : <IcCClap width={18} height={18} />,
 	appLike : <IcMAppLike width={18} height={18} />,
+};
+
+const feedTypeMapping = {
+	appreciation     : '👏',
+	work_anniversary : <IcMCalendar fill="#fc0101" width={30} height={30} />,
+	birthday         : <img src={GLOBAL_CONSTANTS.image_url.cake} width={40} height={40} alt="cake" />,
 };
 
 function PopoverContent({ handleIconSelect = () => {} }) {
@@ -269,7 +276,7 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 								addSuffix: true,
 							}) : null}
 						</div>
-						{(bypass || item?.is_my_post) && (
+						{bypass && (
 							<Popover
 								placement="bottom"
 								render={(
@@ -290,7 +297,7 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 					<div className={styles.main_post_data}>
 						<div className={styles.feed_type}>
 							<div className={cl`${styles.circle} ${styles.circle1_bg}`}>
-								👏
+								{feedTypeMapping[item.feed_type]}
 							</div>
 							{taggedPeople?.length > 0
 								? taggedPeople?.map((val) => (

@@ -12,7 +12,7 @@ function WorkingHrs({ graph_detail }) {
 			</div>
 			<div className={styles.line}>
 				<ResponsiveLine
-					data={graph_detail}
+					data={graph_detail || []}
 					colors={['#FB896B', '#6956E5']}
 					margin={{ top: 15, right: 10, bottom: 15, left: 10 }}
 					curve="natural"

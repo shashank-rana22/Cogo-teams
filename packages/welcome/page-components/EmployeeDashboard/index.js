@@ -10,7 +10,7 @@ import MainSection from './MainSection';
 import styles from './styles.module.css';
 
 function HrmsEmployeeDashboard() {
-	const { data, refetch, setFilters } = useListAllFeed();
+	const { data, refetch, setFilters, loading : feedLoading } = useListAllFeed();
 	const { data: summaryData, loading } = useGetDashboardSummary();
 	const router = useRouter();
 
@@ -26,6 +26,11 @@ function HrmsEmployeeDashboard() {
 			</div>
 		);
 	}
+
+	if (loading || feedLoading) {
+		return <h3>loading...</h3>;
+	}
+
 	return (
 		<div className={styles.container}>
 			<Header summaryData={summaryData} />

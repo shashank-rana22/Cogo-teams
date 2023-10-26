@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { IcCStarfull, IcMArrowRight } from '@cogoport/icons-react';
+// import { IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
 import CompanyPerformance from '../CompanyPerformance';
@@ -14,7 +14,9 @@ import WorkingHrs from './WorkingHrs';
 function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
 	console.log('summaryData', summaryData);
 
-	const { graph_detail } = summaryData || {};
+	const { graph_detail, clap_recieved, rating_list } = summaryData || {};
+
+	const { self_rating } = rating_list || {};
 
 	return (
 		<>
@@ -27,13 +29,9 @@ function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
 					<div className={styles.performance_achievement}>
 						<div className={cl`${styles.claps_flex} ${styles.mr_12}`}>
 							<div className={styles.claps}>👏</div>
-							32 Claps Recieved
-						</div>
-						<div className={styles.claps_flex}>
-							<div className={styles.claps}>
-								<IcCStarfull width={16} height={16} />
-							</div>
-							Believer
+							{clap_recieved}
+							{' '}
+							Claps Recieved
 						</div>
 					</div>
 				</div>
@@ -41,15 +39,15 @@ function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
 					<div className={styles.kpi_data}>
 						<div className={styles.kpi_okr}>
 							<div className={styles.kpi_okr_title}>October KPI</div>
-							<div className={styles.kpi_okr_count}>3</div>
+							<div className={styles.kpi_okr_count}>{self_rating}</div>
 							<div className={styles.view_okr_flex}>
-								View your oKR’s
+								{/* View your oKR’s
 								{' '}
 								<IcMArrowRight
 									width={12}
 									height={12}
 									style={{ marginLeft: 2 }}
-								/>
+								/> */}
 							</div>
 							<div className={styles.kpi_img}>
 								<img
@@ -65,7 +63,7 @@ function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
 				</div>
 				<div className={styles.leaderboard_data}>
 					<div className={styles.leaderboard}>
-						<Leaderboard />
+						<Leaderboard rating_list={rating_list?.rating_list} />
 					</div>
 					<div className={styles.working_hrs}>
 						<WorkingHrs graph_detail={graph_detail} />
