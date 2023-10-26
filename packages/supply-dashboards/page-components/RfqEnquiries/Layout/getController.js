@@ -4,6 +4,12 @@ import {
 	SelectController,
 	DatepickerController,
 	UploadController,
+	AsyncSelectController,
+	InputGroupController,
+	SingleDateRangeController,
+	TextAreaController,
+	MultiselectController,
+	CheckboxController,
 } from '@cogoport/forms';
 
 import DepartureDateSelectController from './DepartureDateSelect/index';
@@ -30,6 +36,24 @@ const getElementController = (type = 'text') => {
 
 		case 'departure_date':
 			return DepartureDateSelectController;
+
+		case 'async_select':
+			return AsyncSelectController;
+
+		case 'input-group':
+			return InputGroupController;
+
+		case 'date_range':
+			return SingleDateRangeController;
+
+		case 'textarea':
+			return TextAreaController;
+
+		case 'multiSelect':
+			return MultiselectController;
+
+		case 'checkbox':
+			return CheckboxController;
 
 		default:
 			return null;

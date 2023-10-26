@@ -71,6 +71,11 @@ const configs = () => {
 				func    : 'rendeDate',
 				sorting : { name: 'createdAtSortType' },
 			},
+			{
+				label : '',
+				span  : 0.5,
+				func  : 'renderRefresh',
+			},
 		],
 	};
 
@@ -128,6 +133,11 @@ const configs = () => {
 				label : '',
 				span  : 1,
 				func  : 'renderView',
+			},
+			{
+				label : '',
+				span  : 0.5,
+				func  : 'renderopensearch',
 			},
 		],
 	};

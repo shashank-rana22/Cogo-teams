@@ -1,0 +1,32 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 24px;
+}
+
+.top_left_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.service_icon {
+	display: flex;
+	align-items: center;
+}
+
+.vertical_line {
+	height: 20px;
+	margin: 0 20px;
+	border-right: 1px dashed #000;
+}
+
+.pill_container {
+	display: flex;
+	align-items: center;
+}
+
+.pill {
+	margin-right: 20px;
+}

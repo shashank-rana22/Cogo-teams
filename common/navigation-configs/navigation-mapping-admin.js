@@ -858,13 +858,13 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis : ['get_purchase_payment_upload_list'],
 			options   : [
 				{
-					key           : 'business_finance-coe_finance',
-					title         : t('common:coe_finance'),
-					href          : '/v2/business-finance/coe-finance/[active_tab]',
-					as            : '/v2/business-finance/coe-finance/dashboard',
+					key           : 'business_finance-audit_function',
+					title         : t('common:audit_function'),
+					href          : '/v2/business-finance/audit-function/[active_tab]',
+					as            : '/v2/business-finance/audit-function/dashboard',
 					icon          : IcMProductCodeMapping,
 					main_apis     : [],
-					possible_apis : [...business_finance.coeFinance],
+					possible_apis : [...business_finance.shipmentAuditFunction],
 				},
 				{
 					key           : 'business_finance-account_payables',
@@ -2284,6 +2284,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis : [
 						'list_analytics_dashboard_widgets',
 						'get_analytics_widget_data',
+						'get_distinct_values_in_column',
 					],
 					possible_apis: apis.analytics_dashboard,
 				},

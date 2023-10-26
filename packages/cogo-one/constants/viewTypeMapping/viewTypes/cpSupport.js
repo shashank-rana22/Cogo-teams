@@ -29,7 +29,7 @@ const CP_SUPPORT = {
 	configurations_to_be_shown    : [],
 	shift_view_default_type       : '',
 	group_agents_api_filter       : ['cp_support'],
-	allowed_organizations         : ['channel_partners', 'other_channel_partners'],
+	allowed_organizations         : ['channel_partners', 'lead_channel_partners', 'other_channel_partners'],
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 	permissions                   : {
 		auto_assign                                 : false,

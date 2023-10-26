@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { IcMPdf, IcMDelete } from '@cogoport/icons-react';
+import { IcMPdf } from '@cogoport/icons-react';
 import { saveAs } from 'file-saver';
 
 import styles from './styles.module.css';
@@ -8,8 +8,6 @@ function GetData({
 	documents = {},
 	documentsList = [],
 	getDate = () => {},
-	deleteTaggedDocuments = () => {},
-	setSelectBankShow = () => {},
 }) {
 	if ((['billPdfUrl', 'shipmentPdfUrl'].includes(documents))) {
 		return (
@@ -53,18 +51,6 @@ function GetData({
 							>
 								Download
 							</Button>
-
-							{item.showDeleteIcon ? (
-								<IcMDelete
-									width={24}
-									height={24}
-									className={styles.delete}
-									onClick={() => {
-										deleteTaggedDocuments({ itemData: item });
-										setSelectBankShow(false);
-									}}
-								/>
-							) : null}
 						</div>
 					</div>
 				</div>

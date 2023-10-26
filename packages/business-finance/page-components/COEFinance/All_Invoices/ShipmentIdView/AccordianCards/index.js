@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
@@ -12,9 +13,9 @@ import styles from './styles.module.css';
 const PRESENT_TAB = 'sidDataTab';
 
 function AccordianCards({
-	itemData,
-	currentOpenSID,
-	setCurrentOpenSID,
+	itemData = {},
+	currentOpenSID = '',
+	setCurrentOpenSID = () => {},
 	shipmentIdView = true,
 	onTabClick = () => {},
 	onAccept = () => {},
@@ -44,6 +45,8 @@ function AccordianCards({
 		amountCurrency = '',
 	} = itemData || {};
 
+	const router = useRouter();
+
 	const [amountTab, setAmountTab] = useState('expense');
 	const [dataCard, setDataCard] = useState({
 		jobNumber      : '',
@@ -53,7 +56,6 @@ function AccordianCards({
 		referenceId    : '',
 		shipmentId     : '',
 	});
-	const router = useRouter();
 	const arrowElement = showTab
 		? <IcMArrowRotateUp height="17px" width="17px" /> : <IcMArrowRotateDown height="17px" width="17px" />;
 
@@ -280,7 +282,7 @@ function AccordianCards({
 									onClick={() => {
 										setCurrentOpenSID(jobId);
 										router.push(
-											`/business-finance/coe-finance/cost-sheet?shipmentId=
+											`/business-finance/audit-function/cost-sheet?shipmentId=
 											${dataCard?.shipmentId || dataCard?.referenceId}
 										&jobNumber=${dataCard?.jobNumber}&jobSource=${dataCard?.jobSource}
 										&jobType=${dataCard?.jobType}&orgId=${dataCard?.organizationId}

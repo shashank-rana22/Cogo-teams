@@ -26,7 +26,7 @@ const COGOVERSE_AGENT_FILTERS_MAPPINGS = {
 	marketing                 : PERSONA_FILTER_MAPPINGS.marketing,
 	default                   : PERSONA_FILTER_MAPPINGS.sales,
 	finance                   : PERSONA_FILTER_MAPPINGS.finance,
-	service_ops               : PERSONA_FILTER_MAPPINGS.service_ops_admin,
+	service_ops               : PERSONA_FILTER_MAPPINGS.service_ops,
 };
 
 const HR_TEAM_FILTER = PERSONA_FILTER_MAPPINGS.hr;

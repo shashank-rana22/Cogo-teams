@@ -7,16 +7,8 @@ const COGOPORT_MAILS = [
 		value : GLOBAL_CONSTANTS?.emails?.hr,
 	},
 	{
-		label : 'Internal Supply',
-		value : GLOBAL_CONSTANTS?.emails?.internal_supply,
-	},
-	{
-		label : 'Internal Operations',
-		value : GLOBAL_CONSTANTS?.emails?.internal_operations,
-	},
-	{
-		label : 'Internal Service',
-		value : GLOBAL_CONSTANTS?.emails?.internal_service,
+		label : 'Customer Support',
+		value : GLOBAL_CONSTANTS?.emails?.customer_support,
 	},
 ];
 
@@ -64,10 +56,12 @@ function getAllowedEmailsList({
 	selectedOptions = [],
 	value = [],
 }) {
-	const { list: usersList = [] } = orgData || {};
+	const { list: List = [], data: DataList = [] } = orgData || {};
 
 	let options = {};
 	let optionsToShow = [];
+
+	const usersList = activeTab?.includes('lead') ? DataList : List;
 
 	if (activeTab !== 'pocs') {
 		usersList?.forEach((itm) => {

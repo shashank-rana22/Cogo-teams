@@ -1,0 +1,39 @@
+.wrap {
+	width: 100%;
+	margin-bottom: 10px;
+
+	:global {
+		.ui_select_container {
+			width: 100%;
+		}
+
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
+
+		.ui_radiogroup_container {
+			padding: 0;
+		}
+
+		.ui_radio_container {
+			padding: 0 10px;
+		}
+	}
+}
+
+.label {
+	margin-bottom: 6px;
+	font-weight: 500;
+}
+
+.button_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 18px;
+}
+
+.container {
+	width: 100%;
+}

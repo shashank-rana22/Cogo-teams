@@ -1,4 +1,4 @@
-import { Tooltip } from '@cogoport/components';
+import { Pill, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -64,6 +64,10 @@ function RenderLabel({ item = {}, activeTab = '' }) {
 				</div>
 				<div className={styles.lower_label}>
 					{(item?.label)}
+					{' '}
+					{item?.value?.includes('cogoport')
+						? <Pill size="sm" color="orange">internal</Pill>
+						: null}
 				</div>
 			</div>
 

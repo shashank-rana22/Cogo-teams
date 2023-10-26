@@ -197,16 +197,46 @@ const summaryDataFourth = ({ paidTds, payableTds, billCurrency, tdsAmount, payme
 	},
 ];
 
+const summaryDataFifth = ({
+	billCurrency = '', subTotal = GLOBAL_CONSTANTS.zeroth_index,
+	grandTotal = GLOBAL_CONSTANTS.zeroth_index,
+}) => [
+	{
+		title : 'Sub Total Amount',
+		value : formatAmount({
+			amount   : subTotal,
+			currency : billCurrency,
+			options  : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+	},
+	{
+		title : 'Tax Total Amount',
+		value : formatAmount({
+			amount   : (grandTotal - subTotal).toFixed(2),
+			currency : billCurrency,
+			options  : {
+				style           : 'currency',
+				currencyDisplay : 'code',
+			},
+		}),
+	},
+];
+
 const summeryMappings = ({
 	summaryDataFirst,
 	summaryDataSecond,
 	summaryDataThird,
 	summaryDataFour,
+	summaryDataFive,
 }) => [
 	{ key: '1', val: summaryDataFirst },
 	{ key: '2', val: summaryDataSecond },
 	{ key: '3', val: summaryDataThird },
 	{ key: '4', val: summaryDataFour },
+	{ key: '5', val: summaryDataFive },
 ];
 
 function Summery({
@@ -230,7 +260,9 @@ function Summery({
 		paidAmount,
 		paidTds = 0,
 		payableTds,
-		tdsAmount, paymentStatus,
+		tdsAmount,
+		paymentStatus,
+		subTotal,
 	} = itemData || {};
 	const { stakeholders } = useGetStakeholder({ billId });
 
@@ -258,11 +290,16 @@ function Summery({
 		grandTotal,
 	});
 	const summaryDataFour = summaryDataFourth({ paidTds, payableTds, billCurrency, tdsAmount, paymentStatus });
+	const summaryDataFive = summaryDataFifth({
+		subTotal,
+		grandTotal,
+	});
 	const summeryMapping = summeryMappings({
 		summaryDataFirst,
 		summaryDataSecond,
 		summaryDataThird,
 		summaryDataFour,
+		summaryDataFive,
 	});
 	return (
 		<div className={styles.container}>

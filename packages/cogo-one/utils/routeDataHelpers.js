@@ -8,7 +8,7 @@ const getAppendedString = ({ code, name, country }) => `${code ? `${code},` : ''
 ${name} ${country ? `(${country})` : ''}`;
 
 export function formatRouteData({ item = {} }) {
-	const originlocationData = (
+	const originLocationData = (
 		item.origin_port
 		|| item.origin_airport
 		|| item.port
@@ -23,7 +23,7 @@ export function formatRouteData({ item = {} }) {
 		port_code: originCode,
 		name: originName,
 		display_name: originDisplayName,
-	} = originlocationData;
+	} = originLocationData;
 
 	const destinationLocationData = (
 		item.destination_port
@@ -80,12 +80,12 @@ export function formatRouteData({ item = {} }) {
 		originDetails: {
 			code    : originCode,
 			country : popLastName(originDisplayName),
-			name    : originDisplayName,
+			name    : originDisplayName || originName,
 		},
 		destinationDetails: {
 			code    : destinationCode,
 			country : popLastName(destinationDisplayName),
-			name    : destinationDisplayName,
+			name    : destinationDisplayName || destinationName,
 		},
 		singleOriginDisplay: {
 			code    : originMainPortCode || originCode,

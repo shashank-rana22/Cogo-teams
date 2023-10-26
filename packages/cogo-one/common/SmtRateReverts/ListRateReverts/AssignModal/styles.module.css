@@ -1,0 +1,14 @@
+.styled_modal {
+	width: 300px !important;
+
+	:global {
+		.ui_modal_body_container {
+			padding: 0 16px !important;
+		}
+	}
+}
+
+.label {
+	margin-bottom: 10px;
+	font-weight: 500;
+}

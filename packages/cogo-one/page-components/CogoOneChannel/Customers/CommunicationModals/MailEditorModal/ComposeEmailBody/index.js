@@ -69,7 +69,7 @@ function ComposeEmailBody(props) {
 					alt="email"
 				/>
 				<div className={styles.no_permission_text}>
-					Oops you don&apos;t have Mail Access or you don&apos;t have active Mails
+					Sorry, You don&apos;t have active mails to send Mail.
 				</div>
 			</div>
 		);

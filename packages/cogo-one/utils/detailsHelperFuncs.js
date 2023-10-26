@@ -2,7 +2,9 @@ import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOpenlink } from '@cogoport/icons-react';
-import { startCase, upperCase, isEmpty } from '@cogoport/utils';
+import { startCase, upperCase, isEmpty, differenceInDays } from '@cogoport/utils';
+
+import { INCO_TERM_MAPPING } from '../constants/rateRevertsConstants';
 
 const CHECK_IF_COUNT_MORE_THAN_ONE = 1;
 const MIN_VOLUME = 1;
@@ -56,6 +58,9 @@ function FormatShipperDetails({ shipperDetails = {} }) {
 
 export const RENDER_VALUE_MAPPING = {
 	container_size: (detail) => {
+		if (!detail.container_size) {
+			return '';
+		}
 		if (detail.container_size?.includes('HC')) {
 			return detail.container_size.replace('HC', 'ft HC');
 		}
@@ -83,17 +88,33 @@ export const RENDER_VALUE_MAPPING = {
 		return trucks_count > CHECK_IF_COUNT_MORE_THAN_ONE ? `${trucks_count} Trucks` : '1 Truck';
 	},
 	truck_type     : (detail) => startCase(detail.truck_type || ''),
+	trip_type      : (detail) => startCase(detail.trip_type || ''),
 	container_type : (detail) => startCase(detail.container_type || ''),
-	trade_type     : (detail) => startCase(detail.trade_type || ''),
+	trade_type     : (detail) => startCase(detail.trade_type || INCO_TERM_MAPPING[detail.inco_term] || ''),
 	commodity      : (detail) => startCase(detail.commodity || ''),
 	payment_term   : (detail) => startCase(detail.payment_term || ''),
 	inco_term      : (detail) => `Inco - ${upperCase(detail.inco_term || '')}`,
-	packages       : (detail) => {
+	packages       : (detail, textOnly = false) => {
 		const { packages = [] } = detail || {};
 		if (isEmpty(packages)) {
 			return null;
 		}
 
+		if (textOnly) {
+			return (packages || []).map((item) => {
+				const { length = 0, width = 0, height = 0 } = item || {};
+
+				const dimension = length
+					? `${length}cm X ${width}cm X ${height}cm,`
+					: '';
+
+				return item
+					? `${item.packages_count} Pkg 
+					${dimension ? `(${dimension}) ` : ''} 
+					${startCase(item.packing_type || '')} `
+					: '';
+			});
+		}
 		const valueForInput = Array.isArray(packages) ? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
 
 		const { length = 0, width = 0, height = 0, packages_count, packing_type } = valueForInput || {};
@@ -102,6 +123,7 @@ export const RENDER_VALUE_MAPPING = {
 			: '';
 
 		const inputValue = valueForInput ? `${packages_count} Pkg, ${dimension} ${startCase(packing_type)}` : '';
+
 		if (packages?.length > CHECK_IF_COUNT_MORE_THAN_ONE) {
 			return (
 				<Tooltip
@@ -111,7 +133,7 @@ export const RENDER_VALUE_MAPPING = {
 							{(packages || []).map((item) => (item
 								? `${item.packages_count} Pkg,
 									 (${item.length}cm X ${item.width}cm X ${item.height}cm), 
-									 ${startCase(item.itempacking_type || '')}`
+									 ${startCase(item.packing_type || '')}`
 								: ''))}
 						</div>
 					)}
@@ -123,18 +145,22 @@ export const RENDER_VALUE_MAPPING = {
 		return `Package: ${inputValue}`;
 	},
 	volume: (detail) => {
-		const { chargable_weight, weight, volume, isLTL, service_type } = detail || {};
+		const { chargeable_weight, weight, volume, isLTL, service_type } = detail || {};
 
 		const calcVolume = volume && `${volume?.toFixed(TO_FIXED_2)} ${isLTL ? 'cc' : 'cbm'}`;
 
-		const chargableWeight = isLTL
-			? (chargable_weight || weight)
+		const chargeableWeight = isLTL
+			? (chargeable_weight || weight)
 			: Math.max((volume || MIN_VOLUME) * VOLUME_MULTIPLY, weight);
 
-		const chargableText = (chargableWeight && !NO_VOLUME_SERVICE_TYPES.includes(service_type))
-			? `, Chargable Weight: ${chargableWeight?.toFixed(TO_FIXED_2) || ''} kg` : '';
+		const chargeableText = (chargeableWeight && !NO_VOLUME_SERVICE_TYPES.includes(service_type))
+			? `, Chargeable Weight: ${chargeableWeight?.toFixed(TO_FIXED_2) || ''} kg` : '';
 
-		return `${calcVolume || ''} ${chargableText}`;
+		if (!calcVolume && !chargeableText) {
+			return '';
+		}
+
+		return `${calcVolume || ''} ${chargeableText}`;
 	},
 	lr_number: (detail) => {
 		const { lr_number, isLTL } = detail || {};
@@ -157,10 +183,11 @@ export const RENDER_VALUE_MAPPING = {
 	},
 	airline: (detail) => (detail?.isAir
 		? `Airline : ${detail?.airline?.business_name || ''}` : ''),
-	weight                          : (detail) => (detail.weight ? `${detail.weight} kgs` : ''),
-	haulage_type                    : (detail) => startCase(detail.haulage_type || ''),
-	transport_mode                  : (detail) => startCase(detail.transport_mode || ''),
-	cargo_weight_per_container      : (detail) => `${detail.cargo_weight_per_container} MT`,
+	weight                     : (detail) => (detail.weight ? `${detail.weight} kgs` : ''),
+	haulage_type               : (detail) => startCase(detail.haulage_type || ''),
+	transport_mode             : (detail) => startCase(detail.transport_mode || ''),
+	cargo_weight_per_container : (detail) => (detail?.cargo_weight_per_container
+		? `${detail.cargo_weight_per_container} MT` : ''),
 	destination_cargo_handling_type : (detail) => startCase(detail.destination_cargo_handling_type || ''),
 	origin_cargo_handling_type      : (detail) => startCase(detail.origin_cargo_handling_type || ''),
 	container_status                : (detail) => startCase(detail.container_status || ''),
@@ -242,7 +269,38 @@ export const RENDER_VALUE_MAPPING = {
 	origin_oversea_agent       : (detail) => <FormatPocData pocDetails={detail?.origin_oversea_agent} />,
 	shipper_details            : (detail) => <FormatShipperDetails shipperDetails={detail?.shipper_details} />,
 	buy_quotation_agreed_rates : (detail) => `${detail?.buy_quotation_agreed_rates.toFixed(TO_FIXED_2)} USD`,
-	hs_code                    : (detail) => `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`,
+	hs_code                    : (detail) => {
+		if (isEmpty(detail?.hs_code)) {
+			return '';
+		}
+		if (detail?.hs_code?.hs_code_name) {
+			return detail?.hs_code?.hs_code_name;
+		}
+		return `${detail?.hs_code?.hs_code || ''} - ${detail?.hs_code?.name || ''}`;
+	},
+	free_days_detention_destination: (
+		detail,
+	) => (detail?.free_days_detention_destination
+		? `${detail?.free_days_detention_destination} ${detail?.free_days_detention_destination === 1 ? 'Day' : 'Days'}`
+		: ''),
+	estimated_departure: (detail) => formatDate({
+		date       : detail?.estimated_departure,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		formatType : 'date',
+	}),
+	transit_time: (detail) => {
+		const transitTime = differenceInDays(
+			new Date(detail?.selected_schedule_arrival || new Date()),
+			new Date(detail?.selected_schedule_departure || new Date()),
+		);
+
+		if (!transitTime) {
+			return '';
+		}
+
+		return `${transitTime} Day${transitTime === 1 ? '' : 's'}`;
+	},
+	commodity_description: (detail) => `${startCase(detail?.commodity_description || '')}`,
 };
 
 export function formatServiceDetails(details) {

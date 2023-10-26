@@ -9,8 +9,10 @@ const ORGANIZATION_ID_REQUIRED_FOR = ['organizations', 'pocs'];
 
 const API_MAPPING = {
 	organizations          : 'list_organization_users',
+	lead_organizations     : 'get_lead_organization_users',
 	other_organizations    : 'list_lead_users',
 	channel_partners       : 'get_channel_partner_users',
+	lead_channel_partners  : 'get_lead_organization_users',
 	other_channel_partners : 'list_lead_users',
 	pocs                   : 'list_organization_billing_addresses',
 };
@@ -27,7 +29,8 @@ const getPayload = ({ orgId = '', userIds = [], searchQuery = '', orgType = '' }
 			lifecycle_stage    : ['enriched', 'marketing_qualified'],
 		} : {}),
 	},
-	...(orgType === 'channel_partners'
+	lead_organization_id: orgType.includes('lead') ? orgId || undefined : undefined,
+	...((orgType === 'channel_partners' || orgType === 'lead_channel_partners')
 		? { account_types: ['importer_exporter'] }
 		: {}),
 	partner_id : orgType === 'channel_partners' ? orgId || undefined : undefined,

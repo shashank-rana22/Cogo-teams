@@ -121,4 +121,7 @@ export const LABELS = [
 	'cargo_weight_per_container',
 	'volume',
 	'weight',
+	'truck_type',
+	'trip_type',
+	'truck_body_type',
 ];

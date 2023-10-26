@@ -139,6 +139,10 @@ export const ORGS_MAPPING = {
 		title : "Org's",
 		value : 'organizations',
 	},
+	lead_organizations: {
+		title : "Lead Org's",
+		value : 'lead_organizations',
+	},
 	other_organizations: {
 		title : 'Others',
 		value : 'other_organizations',
@@ -146,6 +150,10 @@ export const ORGS_MAPPING = {
 	channel_partners: {
 		title : "Org's",
 		value : 'channel_partners',
+	},
+	lead_channel_partners: {
+		title : "Lead Org's",
+		value : 'lead_channel_partners',
 	},
 	other_channel_partners: {
 		title : 'Others',

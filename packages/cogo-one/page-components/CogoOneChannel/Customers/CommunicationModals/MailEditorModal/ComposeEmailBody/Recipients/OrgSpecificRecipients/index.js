@@ -54,7 +54,7 @@ function OrgSpecificRecipients({
 
 	const allowedOrgs = useMemo(() => (
 		isEmpty(VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.allowed_organizations)
-			? ['organizations', 'other_organizations']
+			? ['organizations', 'lead_organizations', 'other_organizations']
 			: VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.allowed_organizations
 	), [viewType]);
 
@@ -182,14 +182,18 @@ function OrgSpecificRecipients({
 					? emailRecipientType?.[GLOBAL_CONSTANTS.zeroth_index] || ''
 					: emailRecipientType || []}
 				optionsHeader={(
-					<CustomSelectHeader
-						activeTab={activeTab}
-						setActiveTab={(val) => {
-							setUserSearchQuery('');
-							setActiveTab(val);
-						}}
-						type="users_select"
-					/>
+					emailState?.orgData?.orgType?.includes('lead')
+						? null
+						: (
+							<CustomSelectHeader
+								activeTab={activeTab}
+								setActiveTab={(val) => {
+									setUserSearchQuery('');
+									setActiveTab(val);
+								}}
+								type="users_select"
+							/>
+						)
 				)}
 				onChange={(val, obj) => {
 					setEmailState(
