@@ -74,6 +74,7 @@
 	align-self: stretch;
 	justify-content: space-between;
 	padding: 8px 0;
+	cursor: pointer;
 }
 
 .listed_item_left {
@@ -88,7 +89,6 @@
 
 .listed_item_left_subheading {
 	color: #828282;
-	text-align: center;
 }
 
 .listed_item_right {

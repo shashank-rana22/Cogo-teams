@@ -1,31 +1,37 @@
+/* eslint-disable max-len */
 import { IcMArrowRight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 const THINGS_TO_DO = [
 	{
-		src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Money_view_green.svg',
-		type           : 'Payroll',
-		employee_count : '322 employees not paid',
+		src            : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/b4501a1989c19715142a2095d65b777e/Calendar-2.svg',
+		type           : 'Offboarding Requests',
+		employee_count : '321 employees not paid',
+		link           : '/attendance-leave-management?showInbox=true ',
+		key            : 'offboarding_requests',
 	},
 	{
-		src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Money_view_green.svg',
+		src            : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/1a9f21c2f03f299fdc0161416530ed14/Calendar-3.svg',
+		type           : 'Expenses',
+		employee_count : '322 employees not paid',
+		key            : 'reimbursements',
+		link           : '',
+	},
+	{
+		src            : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/ce7894a168aed5c5b6b42e5ba1ab4b60/Calendar.svg',
 		type           : 'Leave Requests',
 		employee_count : '322 employees not paid',
-	},
-	{
-		src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Money_view_green.svg',
-		type           : 'Offboarding Requests',
-		employee_count : '322 employees not paid',
-	},
-	{
-		src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Money_view_green.svg',
-		type           : 'Reimbursements',
-		employee_count : '322 employees not paid',
+		link           : '/attendance-leave-management?showInbox=true ',
+		key            : 'leave_requests',
 	},
 ];
-function ThingsToDo() {
+function ThingsToDo({ data = {} }) {
+	const { push } = useRouter();
+	const { task_list } = data || {};
+	console.log('🚀 ~ file: index.js:27 ~ ThingsToDo ~ task_list:', task_list);
 	return (
 		<div className={styles.employee_to_do}>
 
@@ -39,7 +45,12 @@ function ThingsToDo() {
 
 				{(THINGS_TO_DO || []).map((item) => (
 
-					<div className={styles.listed_item} key={item.type}>
+					<div
+						className={styles.listed_item}
+						key={item.type}
+						aria-hidden
+						onClick={() => push(item.link)}
+					>
 
 						<div className={styles.listed_item_left}>
 
@@ -53,7 +64,11 @@ function ThingsToDo() {
 
 								<div className={styles.listed_item_left_heading}>{item?.type}</div>
 
-								<div className={styles.listed_item_left_subheading}>{item.employee_count}</div>
+								<div className={styles.listed_item_left_subheading}>
+									{task_list?.[item.key]}
+									{' '}
+									pending
+								</div>
 
 							</div>
 

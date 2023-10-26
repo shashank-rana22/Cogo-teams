@@ -76,7 +76,7 @@ function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
 				setFilters={setFilters}
 				summaryData={summaryData}
 			/>
-			<TeamPerformance />
+			<TeamPerformance data={summaryData} />
 			<div className={styles.company_feed}>
 				<div className={styles.company_feed_title}>Company Feed</div>
 				<div className={styles.sub_title}>Updates, announcements and more</div>

@@ -95,6 +95,11 @@ const welcome = [
 		service_name : 'hrms',
 	},
 	{
+		api          : 'get_individual_user_activity',
+		access_type  : 'private',
+		service_name : 'hrms',
+	},
+	{
 		api          : 'get_absentee_insights',
 		access_type  : 'private',
 		service_name : 'hrms',

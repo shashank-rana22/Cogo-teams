@@ -4,8 +4,10 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const ZERO = 0;
 function NotInOffice({ data = {} }) {
 	const { absentee_list } = data || {};
+	console.log('🚀 ~ file: index.js:9 ~ NotInOffice ~ absentee_list:', absentee_list);
 	const MAX_VISIBLE = 5; // Maximum number of absentees to display directly
 
 	const visibleAbsentees = (absentee_list || []).slice(0, MAX_VISIBLE);
@@ -19,7 +21,7 @@ function NotInOffice({ data = {} }) {
 						key={name}
 						className={styles.list}
 					>
-						{name}
+						{name[ZERO]}
 					</div>
 				))}
 			</div>
