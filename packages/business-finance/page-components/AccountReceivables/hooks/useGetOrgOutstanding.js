@@ -32,6 +32,10 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 
 	const { order, key } = orderBy || {};
 	const [filters, setFilters] = useState({});
+	const {
+		salesAgentId = '', portfolioManagerId = '', portfolioManagerRmId = '',
+		salesAgentRmId = '', kamId = '', creditControllerId = '', companyType = '',
+	} = filters || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -56,21 +60,21 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 						sortType     : order || undefined,
 						page,
 						pageLimit,
-						salesAgentId : filters?.salesAgentId || undefined,
+						salesAgentId : salesAgentId || undefined,
 
-						portfolioManagerId: filters?.portfolioManagerId || undefined,
+						portfolioManagerId: portfolioManagerId || undefined,
 
-						portfolioManagerRmId: filters?.portfolioManagerRmId || undefined,
+						portfolioManagerRmId: portfolioManagerRmId || undefined,
 
-						salesAgentRmId: filters?.salesAgentRmId || undefined,
+						salesAgentRmId: salesAgentRmId || undefined,
 
 						creditControllerId:
 
-                            filters?.creditControllerId || undefined,
+                            creditControllerId || undefined,
 
-						kamId: selectedAgentId || filters?.kamId || undefined,
+						kamId: selectedAgentId || kamId || undefined,
 
-						companyType          : filters?.companyType || undefined,
+						companyType          : companyType || undefined,
 						entityCode           : entityCode || undefined,
 						organizationSerialId : organizationSerialId || undefined,
 						sageId               : sageId || undefined,
@@ -83,10 +87,9 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 			}
 		},
 		[trigger, key, order, page, pageLimit,
-			filters?.salesAgentId, filters?.portfolioManagerId,
-			filters?.portfolioManagerRmId, filters?.salesAgentRmId, filters?.creditControllerId,
-			filters?.kamId, filters?.companyType, selectedAgentId, entityCode, organizationSerialId, sageId,
-			tradePartySerialId, q],
+			salesAgentId, portfolioManagerId, portfolioManagerRmId,
+			salesAgentRmId, creditControllerId, selectedAgentId, kamId, companyType,
+			entityCode, organizationSerialId, sageId, tradePartySerialId, q],
 	);
 
 	useEffect(() => {
