@@ -67,7 +67,7 @@ function Filters({
 
 	let placeholder;
 	if (queryKey === 'q') {
-		placeholder = ENTITY_FEATURE_MAPPING[entityCode].placeholder.tax_number;
+		placeholder = ENTITY_FEATURE_MAPPING[entityCode]?.placeholder.tax_number;
 	} else if (queryKey === 'tradePartySerialId') {
 		placeholder = 'Search By Trade Party';
 	} else if (queryKey === 'sageId') {
