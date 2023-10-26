@@ -5,6 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import useReplyMail from '../hooks/useReplyMail';
 import useSaveDraft from '../hooks/useSaveDraft';
 import useSendOmnichannelMail from '../hooks/useSendOmnichannelMail';
+import { getTimeZone } from '../utils/timeLineFunctions';
 
 import getRenderEmailBody from './getRenderEmailBody';
 
@@ -63,15 +64,16 @@ function useMailEditorFunctions({
 		const emailBody = getRenderEmailBody({ html: `${rteContent}<br/>${body}` });
 
 		return {
-			sender  : from_mail || activeMailAddress,
+			sender    : from_mail || activeMailAddress,
 			toUserEmail,
 			ccrecipients,
 			bccrecipients,
-			subject : subjectToSend,
-			content : emailBody,
-			msgId   : buttonType !== 'send_mail' ? activeMail?.id : undefined,
+			subject   : subjectToSend,
+			content   : emailBody,
+			msgId     : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 			attachments,
 			userId,
+			time_zone : getTimeZone(),
 		};
 	};
 
