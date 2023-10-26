@@ -10,7 +10,7 @@ function LeftPanel(props) {
 	const {
 		list, listLoading, currentUserData, listRefetch, params, setParams,
 		entity, isChannel, setIsChannel, debounceQuery, refetchStats, statsLoading,
-		currLevel, setCurrLevel, levelStack, setLevelStack, lastUpdatedAt,
+		currLevel, setCurrLevel, levelStack, setLevelStack, lastUpdatedAt, getUserProgress,
 	} = props;
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
@@ -44,6 +44,7 @@ function LeftPanel(props) {
 				listRefetch={listRefetch}
 				refetchStats={refetchStats}
 				statsLoading={statsLoading}
+				getUserProgress={getUserProgress}
 			/>
 
 			<List
