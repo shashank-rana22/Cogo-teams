@@ -6,7 +6,7 @@ const useUpdateAccountTagging = ({ item = {} }) => {
 
 		url     : 'payments/outstanding/update-account-taggings',
 		method  : 'put',
-		authKey : 'update_payments_outstanding_account_tagging',
+		authKey : 'put_payments_outstanding_update_account_taggings',
 	}, { manual: true });
 	const apiTrigger = async (val, refetch) => {
 		try {

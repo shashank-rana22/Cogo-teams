@@ -6,7 +6,7 @@ const useUpdateOutstandingList = ({ item = {} }) => {
 
 		url     : 'payments/outstanding/customer-v2',
 		method  : 'put',
-		authKey : 'update_payments_outstanding_by_customer_v2',
+		authKey : 'put_payments_outstanding_customer_v2',
 	}, { manual: true });
 	const apiTrigger = async (refetch) => {
 		try {
