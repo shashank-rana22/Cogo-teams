@@ -9,14 +9,20 @@ import styles from './styles.module.css';
 
 const COLUMNS = [
 	{
-		id       : 'request_id',
-		Header   : 'Request Id',
+		id       : 'id',
+		Header   : 'Id',
 		accessor : (item) => <div>{item?.serial_id}</div>,
 	},
 	{
 		id       : 'request_by',
 		Header   : 'Request By',
-		accessor : (item) => <div className={styles.label}>{startCase(item?.request_submitted_by?.name) || '-'}</div>,
+		accessor : (item) => (
+			<div className={styles.label}>
+				{startCase(item?.request_submitted_by?.name) || '-'}
+				{' '}
+				<span>{`(${startCase(item?.performed_by_type)})`}</span>
+			</div>
+		),
 	},
 	{
 		id       : 'organization_name',
@@ -29,18 +35,34 @@ const COLUMNS = [
 		accessor : (item) => <div className={styles.label}>{startCase(item?.request_type)}</div>,
 	},
 	{
+		id       : 'completed_by',
+		Header   : 'COMPLETED BY',
+		accessor : (item) => <div className={styles.label}>{startCase(item?.request_completed_by?.name) || '-'}</div>,
+	},
+	{
+		id       : 'escalation_cycle',
+		Header   : 'Escalation',
+		accessor : (item) => <div className={styles.label}>{startCase(item?.escalation_cycle)}</div>,
+	},
+	{
 		id       : 'request_on',
 		Header   : 'REQUEST ON',
 		accessor : (item) => (
-			<div>
-				{formatDate({
-					date       : item?.created_at,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-					formatType : 'dateTime',
-					separator  : ' | ',
-				}) || 'NA'}
-
+			<div className={styles.date_content}>
+				<div>
+					{formatDate({
+						date       : item?.created_at,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType : 'date',
+					})}
+				</div>
+				<div>
+					{formatDate({
+						date       : item?.created_at,
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'time',
+					})}
+				</div>
 			</div>
 		),
 	},

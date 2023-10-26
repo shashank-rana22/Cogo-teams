@@ -41,7 +41,7 @@
 .content {
 	display: flex;
 	width: 100%;
-	height: calc(100% - 120px);
+	height: calc(100% - 65px);
 	padding: 0 16px;
 	overflow-y: auto;
 }
@@ -70,6 +70,11 @@
 	color: #221f20;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	span {
+		font-size: 10px;
+		color: #4f4f4f;
+	}
 }
 
 .status_div {
@@ -90,4 +95,9 @@
 
 .pending {
 	background: #f68b21;
+}
+
+.date_content {
+	display: flex;
+	flex-direction: column;
 }
