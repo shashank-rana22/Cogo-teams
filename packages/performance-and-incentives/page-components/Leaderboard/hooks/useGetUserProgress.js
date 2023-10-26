@@ -1,31 +1,29 @@
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 function useGetUserProgress() {
 	const { user, partner } = useSelector(({ profile }) => profile);
+
+	const params = useMemo(() => ({
+		user_id    : user?.id,
+		partner_id : partner?.id,
+	}), [partner?.id, user?.id]);
 
 	const [{ data : { kam_progress = {}, manager_progress = {} } = {} }, trigger] = useAllocationRequest({
 		url     : 'user_progress',
 		method  : 'GET',
 		authkey : 'get_agent_scoring_user_progress',
-		params  : {
-			user_id    : user?.id,
-			partner_id : partner?.id,
-		},
-	}, { manual: true });
+		params,
+	}, { manual: false });
 
-	const getUserProgress = useCallback(async () => {
+	const getUserProgress = useCallback(() => {
 		try {
-			await trigger({ data: { user_id: user?.id, partner_id: partner?.id } });
+			trigger({ data: params });
 		} catch (err) {
 			console.error(err, 'err');
 		}
-	}, [partner?.id, trigger, user?.id]);
-
-	useEffect(() => {
-		getUserProgress();
-	}, [getUserProgress]);
+	}, [params, trigger]);
 
 	return {
 		kam_progress,
