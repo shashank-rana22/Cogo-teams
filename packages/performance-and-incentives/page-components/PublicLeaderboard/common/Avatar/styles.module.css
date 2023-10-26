@@ -16,9 +16,9 @@
 	border-radius: 50%;
 
 	@media (min-width: 2560px) {
-		width: 84px;
-		height: 84px;
-		font-size: 56px;
+		width: 60px;
+		height: 60px;
+		font-size: 40px;
 	}
 }
 

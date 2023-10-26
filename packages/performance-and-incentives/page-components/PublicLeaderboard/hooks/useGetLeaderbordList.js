@@ -2,11 +2,16 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-function useGetActivityCount(props) {
-	const { view, dateRange } = props;
+function useGetLeaderbordList(props) {
+	const { view, dateRange, pageLimit, setUpdatedAt = () => {} } = props;
 
-	const [statParams, setStatParams] = useState({
-		filters: {
+	const [params, setParams] = useState({
+		page                     : 1,
+		page_limit               : pageLimit,
+		user_data_required       : true,
+		role_data_required       : true,
+		add_user_kam_report_data : ['owner_wise', 'manager_wise'].includes(view),
+		filters                  : {
 			report_view_type        : view,
 			created_at_greater_than : dateRange?.startDate || undefined,
 			created_at_less_than    : dateRange?.endDate || undefined,
@@ -14,16 +19,19 @@ function useGetActivityCount(props) {
 	});
 
 	const [{ data, loading }] = useAllocationRequest({
-		url     : '/report_stats',
+		url     : '/reports',
 		method  : 'GET',
-		authkey : 'get_agent_scoring_report_stats',
-		params  : statParams,
+		authkey : 'get_agent_scoring_reports',
+		params,
 	}, { manual: false });
 
+	const { list = [], total_report_count = 0, report_synced_at = '' } = data || {};
+
 	useEffect(() => {
-		setStatParams((previousParams) => ({
+		setParams((previousParams) => ({
 			...previousParams,
-			filters: {
+			add_user_kam_report_data : ['owner_wise', 'manager_wise'].includes(view),
+			filters                  : {
 				...(previousParams.filters || {}),
 				report_view_type : view || undefined,
 				report_type      : ['owner_wise', 'manager_wise', 'kam_wise'].includes(view)
@@ -34,10 +42,15 @@ function useGetActivityCount(props) {
 		}));
 	}, [view, dateRange]);
 
+	useEffect(() => {
+		setUpdatedAt(report_synced_at);
+	}, [report_synced_at, setUpdatedAt]);
+
 	return {
-		data,
+		list,
 		loading,
+		total_report_count,
 	};
 }
 
-export default useGetActivityCount;
+export default useGetLeaderbordList;

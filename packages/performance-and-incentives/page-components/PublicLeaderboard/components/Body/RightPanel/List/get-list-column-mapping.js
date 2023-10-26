@@ -13,7 +13,7 @@ const getListColumnMapping = (props) => {
 			key      : 'rank',
 			flex     : 1,
 			Header   : <div className={styles.top_heading}>Rank</div>,
-			accessor : ({ rank }) => (isEmpty(rank) ? null : <p className={styles.rank}>{rank}</p>),
+			accessor : ({ rank }) => (isEmpty(rank) ? null : <div className={styles.rank}>{rank}</div>),
 		},
 		{
 			id       : 'name',
@@ -21,10 +21,11 @@ const getListColumnMapping = (props) => {
 			flex     : 4,
 			Header   : <div className={styles.top_heading}>Name</div>,
 			accessor : ({ name, user }) => (
-				<p className={styles.name}>
+				<div className={styles.name}>
+
 					{['owner_wise', 'manager_wise', 'kam_wise'].includes(view)
 						? user?.name : name}
-				</p>
+				</div>
 			),
 		},
 		{
@@ -33,7 +34,7 @@ const getListColumnMapping = (props) => {
 			flex     : 1.5,
 			Header   : <div className={styles.top_heading}>Score</div>,
 			accessor : ({ total_score }) => (total_score === ZERO_SCORE ? 'NA'
-				: <p className={styles.row_item}>{total_score}</p>),
+				: <div className={styles.row_item}>{total_score}</div>),
 		},
 		{
 			id       : 'percentile',
@@ -41,10 +42,10 @@ const getListColumnMapping = (props) => {
 			flex     : 1.5,
 			Header   : <div className={styles.top_heading}>%ile</div>,
 			accessor : ({ percentile }) => (isEmpty(percentile) ? null : (
-				<p className={styles.row_item}>
+				<div className={styles.row_item}>
 					{percentile}
 					%
-				</p>
+				</div>
 			)),
 		},
 	];

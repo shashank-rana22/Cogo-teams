@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 function PublicDashboard() {
 	const [view, setView] = useState('kam_wise');
+	const [updatedAt, setUpdatedAt] = useState('');
 
 	const [dateRange, setDateRange] = useState({
 		startDate : getTodayStartDate(),
@@ -16,9 +17,15 @@ function PublicDashboard() {
 
 	return (
 		<div className={styles.container}>
-			<Header view={view} setView={setView} dateRange={dateRange} setDateRange={setDateRange} />
+			<Header
+				view={view}
+				setView={setView}
+				dateRange={dateRange}
+				setDateRange={setDateRange}
+				updatedAt={updatedAt}
+			/>
 
-			<Body view={view} dateRange={dateRange} />
+			<Body view={view} dateRange={dateRange} setUpdatedAt={setUpdatedAt} />
 		</div>
 	);
 }
