@@ -1,5 +1,5 @@
 import { IcMArrowRotateLeft, IcMProfile } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -13,8 +13,8 @@ function UserDetails({ item = {} }) {
 	const portfolioManagerData = (portfolioManager || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
 	return (
 		<>
-			{(kamData.length !== 0 || agentData.length !== 0 || ccData.length !== 0
-			|| portfolioManagerData.length !== 0) && (
+			{(!isEmpty(kamData) || !isEmpty(agentData) || !isEmpty(ccData)
+			|| !isEmpty(portfolioManagerData)) && (
 				<div className={styles.download_icon_div}>
 					<IcMProfile
 						onClick={() => setShowDetailsCard(true)}
@@ -41,7 +41,7 @@ function UserDetails({ item = {} }) {
 									DETAILS
 								</div>
 							</div>
-							{kamData.length !== 0 ? (
+							{!isEmpty(kamData) ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
 										{startCase('KAM OWNER')}
@@ -58,7 +58,7 @@ function UserDetails({ item = {} }) {
 									))}
 								</div>
 							) : null}
-							{agentData.length !== 0 ? (
+							{!isEmpty(agentData) ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
 										{startCase('AGENT')}
@@ -75,7 +75,7 @@ function UserDetails({ item = {} }) {
 									))}
 								</div>
 							) : null}
-							{ccData.length !== 0 ? (
+							{!isEmpty(ccData) ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
 										{startCase('CC')}
@@ -92,7 +92,7 @@ function UserDetails({ item = {} }) {
 									))}
 								</div>
 							) : null}
-							{portfolioManagerData.length !== 0 ? (
+							{!isEmpty(portfolioManagerData) ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
 										{startCase('Portfolio Manager')}
