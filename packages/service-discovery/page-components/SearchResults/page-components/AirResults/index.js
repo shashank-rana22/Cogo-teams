@@ -28,6 +28,7 @@ function AIRResults({
 	scheduleLoading = false,
 	setSelectedSchedule = () => {},
 	selectedSchedule = () => {},
+	isMobile = false,
 }) {
 	const SCREENS_MAPPING = {
 		listRateCard: {
@@ -54,6 +55,7 @@ function AIRResults({
 				scheduleLoading,
 				setSelectedSchedule,
 				selectedSchedule,
+				isMobile,
 			},
 		},
 		comparison: {
@@ -64,6 +66,7 @@ function AIRResults({
 				comparisonRates,
 				setComparisonRates,
 				mode: 'air_freight',
+				isMobile,
 			},
 		},
 		selectedCardScreen: {

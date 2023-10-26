@@ -17,6 +17,7 @@ function RateCard({
 	infoBanner = {},
 	showGuide = false,
 	setInfoBanner = () => {},
+	isMobile = false,
 }) {
 	return (
 		<div
@@ -34,6 +35,7 @@ function RateCard({
 				infoBanner={infoBanner}
 				showGuide={showGuide}
 				setInfoBanner={setInfoBanner}
+				isMobile={isMobile}
 			/>
 
 			<Body

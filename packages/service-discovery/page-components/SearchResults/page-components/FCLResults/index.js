@@ -76,6 +76,7 @@ function FCLResults({
 			setScreen,
 			comparisonRates,
 			setComparisonRates,
+			isMobile,
 		},
 		selectedCardScreen: {
 			headerProps,
@@ -84,6 +85,7 @@ function FCLResults({
 			setScreen,
 			cogoAssuredRates,
 			setRouterLoading,
+			isMobile,
 		},
 	};
 

@@ -83,6 +83,7 @@ function RateCardTop({
 	setInfoBanner = () => {},
 	showGuide = false,
 	cogoAssuredRates = [],
+	isMobile = false,
 }) {
 	const { shipping_line = {}, id: card_id, source = '' } = rateCardData;
 
@@ -159,7 +160,7 @@ function RateCardTop({
 			</div>
 
 			<div className={styles.right_section}>
-				<LikeDislike rateCardData={rateCardData} detail={detail} />
+				<LikeDislike rateCardData={rateCardData} detail={detail} isMobile={isMobile} />
 			</div>
 		</div>
 	);

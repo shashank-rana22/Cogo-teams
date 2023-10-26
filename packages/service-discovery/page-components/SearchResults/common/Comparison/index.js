@@ -30,6 +30,7 @@ function Comparison({
 	setScreen = () => {},
 	mode = 'fcl_freight',
 	comparisonRates = {},
+	isMobile = false,
 }) {
 	const [loading, setLoading] = useState(false);
 	const [showShare, setShowShare] = useState(false);
@@ -105,7 +106,7 @@ function Comparison({
 				<div className={styles.buttons_container}>
 					<Button
 						onClick={handleBack}
-						size="md"
+						size={isMobile ? 'sm' : 'md'}
 						themeType="link"
 						className={styles.button}
 						style={{ padding: '20px 16px' }}
@@ -115,7 +116,7 @@ function Comparison({
 
 					<Button
 						onClick={() => setShowShare(true)}
-						size="md"
+						size={isMobile ? 'sm' : 'md'}
 						themeType="secondary"
 						className={styles.button}
 						style={{ padding: '20px 44px' }}

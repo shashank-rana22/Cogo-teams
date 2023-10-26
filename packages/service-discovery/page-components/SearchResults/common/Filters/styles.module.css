@@ -31,7 +31,12 @@
 	position: absolute;
 	top: 80%;
 	left: 38%;
+	width: max-content;
 	font-size: 10px;
 	font-weight: 600;
 	color: var(--color-secondary-greyscale-3);
+
+	@media (max-width: 768px) {
+		font-size: 8px;
+	}
 }

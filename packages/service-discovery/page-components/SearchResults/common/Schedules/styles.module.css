@@ -17,10 +17,19 @@
 	flex-wrap: wrap;
 	align-items: center;
 	padding: 0 6px;
+
+	@media (max-width: 768px) {
+		flex-wrap: nowrap;
+		overflow-y: auto;
+	}
 }
 
 .loading {
 	display: flex;
 	padding: 24px 0;
 	margin-bottom: 28px;
+
+	@media (max-width: 768px) {
+		margin-bottom: 0;
+	}
 }

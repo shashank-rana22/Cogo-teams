@@ -10,6 +10,7 @@ function CargoModal({
 	setCargoModal = () => {},
 	refetch = () => {},
 	goToCheckout = () => {},
+	isMobile = false,
 }) {
 	const [showForm, setShowForm] = useState(false);
 
@@ -52,6 +53,7 @@ function CargoModal({
 				addCargoInsurance    : showForm,
 				importer_exporter,
 				setAddCargoInsurance,
+				isMobile,
 			},
 		},
 		false: {
@@ -61,6 +63,7 @@ function CargoModal({
 				setCargoModal,
 				setShowForm,
 				goToCheckout,
+				isMobile,
 			},
 		},
 	};

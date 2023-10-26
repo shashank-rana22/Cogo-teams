@@ -15,6 +15,7 @@ function SelectedCardScreen({
 	setRouterLoading = () => {},
 	headerProps = {},
 	cogoAssuredRates = [],
+	isMobile = false,
 }) {
 	const [screen, setScreen] = useState('selectedCard');
 	const [showShippingLineModal, setShowShippingLineModal] = useState(false);
@@ -45,6 +46,7 @@ function SelectedCardScreen({
 				showShippingLineModal,
 				setShowShippingLineModal,
 				setRouterLoading,
+				isMobile,
 			},
 		},
 		bookCheckout: {

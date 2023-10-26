@@ -1,6 +1,5 @@
 import React from 'react';
 
-import useGetIsMobile from '../../../../helpers/useGetIsMobile';
 import RequestRate from '../RequestRate';
 
 import NoRatesFound from './NoRatesFound';
@@ -16,9 +15,8 @@ function EmptyState({
 	showFilterModal = false,
 	setShowFilterModal = () => {},
 	airlines = [],
+	isMobile = false,
 }) {
-	const isMobile = useGetIsMobile();
-
 	return (
 		<div className={styles.container}>
 			<NoRatesFound

@@ -8,8 +8,6 @@ import Footer from './Footer';
 import ScheduleItem from './ScheduleItem';
 import styles from './styles.module.css';
 
-const LOADING_ARRAY_LENGTH = 5;
-
 function Schedules({
 	paginationProps = {},
 	filters = {},
@@ -18,8 +16,11 @@ function Schedules({
 	setScheduleLoading = () => {},
 	setSelectedSchedule = () => {},
 	selectedSchedule = {},
+	isMobile = false,
 }) {
 	const { schedules = [], loading: weeklySchedulesLoading } = useGetWeeklySchedules({ filters });
+
+	const LOADING_ARRAY_LENGTH = isMobile ? 2 : 5;
 
 	if (!loading && isEmpty(schedules)) {
 		return null;

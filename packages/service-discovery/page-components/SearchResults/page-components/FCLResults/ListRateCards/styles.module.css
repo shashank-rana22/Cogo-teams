@@ -6,7 +6,7 @@
 .header_wrapper {
 	position: sticky;
 	top: 85px;
-	z-index: 99;
+	z-index: 1;
 	width: 100%;
 
 	@media (max-width: 768px) {

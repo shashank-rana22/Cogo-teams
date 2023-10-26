@@ -33,7 +33,7 @@
 	padding-left: 24px;
 
 	@media (max-width: 768px) {
-		padding-right: 5px;
+		padding-right: 12px;
 		padding-left: 8px;
 	}
 }
