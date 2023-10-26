@@ -50,7 +50,7 @@ function NewRequestModal({
 
 	const { handleModifiedOptions = () => {} } = getCollectionPartyDetails();
 
-	const orgIdList = collectionPartyList?.map(((item) => item?.service_provider_id));
+	const orgIdList = collectionPartyList?.map((item) => item?.service_provider_id);
 	const cpParams = getCollectionPartyParams(orgIdList);
 
 	const [billingParty, setBillingParty] = useState({});
