@@ -2,15 +2,19 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect } from 'react';
 
-const getParams = ({ agentId = '' }) => ({
-	page_limit : 6,
+const DEFAULT_PAGE_LIMIT = 6;
+const LIST_PAGE_LIMIT = 10;
+
+const getParams = ({ agentId = '', showHistory = false }) => ({
+	page_limit : !showHistory ? DEFAULT_PAGE_LIMIT : LIST_PAGE_LIMIT,
 	filters    : {
-		agent_id : agentId,
-		status   : 'active',
+		agent_id       : agentId,
+		status         : !showHistory ? 'active' : undefined,
+		request_status : !showHistory ? 'pending' : undefined,
 	},
 });
 
-const useListOmnichannelOnboardingRequests = () => {
+const useListOmnichannelOnboardingRequests = ({ showHistory = false }) => {
 	const { agentId = '' } = useSelector(({ profile }) => ({
 		agentId: profile?.user?.id,
 	}));
@@ -23,12 +27,12 @@ const useListOmnichannelOnboardingRequests = () => {
 	const onboardingRequest = useCallback(() => {
 		try {
 			trigger({
-				params: getParams({ agentId }),
+				params: getParams({ agentId, showHistory }),
 			});
 		} catch (error) {
 			console.error('error:', error);
 		}
-	}, [trigger, agentId]);
+	}, [trigger, agentId, showHistory]);
 
 	useEffect(() => {
 		onboardingRequest();

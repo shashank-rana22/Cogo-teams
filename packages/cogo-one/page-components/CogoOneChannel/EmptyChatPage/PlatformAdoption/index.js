@@ -43,14 +43,24 @@ function PlatformAdoption({
 		userSharedMails,
 	});
 
-	const { loading = false, data = {}, onboardingRequest = () => {} } = useListOmnichannelOnboardingRequests();
+	const {
+		loading = false, data = {},
+		onboardingRequest = () => {},
+	} = useListOmnichannelOnboardingRequests({ showHistory });
 
 	const { list, ...rest } = data || {};
 	const { page, page_limit, total_count } = rest || {};
 
 	return (
 		<div className={styles.container}>
-			{showHistory ? <PlatformHistory setShowHistory={setShowHistory} rest={rest} list={list} /> : (
+			{showHistory ? (
+				<PlatformHistory
+					setShowHistory={setShowHistory}
+					rest={rest}
+					list={list}
+					loading={loading}
+				/>
+			) : (
 				<>
 					<div className={styles.top_section}>
 						<div className={styles.title}>Task for the Day</div>

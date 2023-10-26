@@ -58,13 +58,8 @@
 	padding-right: 22px;
 }
 
-.name_content {
-	display: flex;
-	flex-direction: column;
-}
-
-.name {
-	max-width: 200px;
+.label {
+	max-width: 130px;
 	overflow: hidden;
 	font-weight: 500;
 	color: #221f20;
@@ -72,11 +67,22 @@
 	white-space: nowrap;
 }
 
-.org_section {
+.status_div {
 	display: flex;
 	align-items: center;
 }
 
-.org_name {
-	color: #034afd;
+.circle {
+	width: 10px;
+	height: 10px;
+	margin-right: 10px;
+	border-radius: 50%;
+}
+
+.complete {
+	background: #abcd62;
+}
+
+.pending {
+	background: #f68b21;
 }

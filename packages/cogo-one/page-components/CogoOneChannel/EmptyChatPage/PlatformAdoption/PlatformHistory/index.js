@@ -1,70 +1,63 @@
-import { Pagination, Table } from '@cogoport/components';
+import { Pagination, Table, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRight, IcMHome } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function OrgNameLabel({ item = {} }) {
-	console.log('item:', item);
-	return (
-		<div className={styles.name_content}>
-			<div className={styles.name}>{item?.name}</div>
-			<div className={styles.org_section}>
-				<div className={styles.org_name}>
-					{item?.organization}
-				</div>
-				<div className={styles.account_type}>{item?.account}</div>
-			</div>
-		</div>
-	);
-}
-
 const COLUMNS = [
+	{
+		id       : 'request_id',
+		Header   : 'Request Id',
+		accessor : (item) => <div>{item?.serial_id}</div>,
+	},
+	{
+		id       : 'request_by',
+		Header   : 'Request By',
+		accessor : (item) => <div className={styles.label}>{startCase(item?.request_submitted_by?.name) || '-'}</div>,
+	},
 	{
 		id       : 'organization_name',
 		Header   : 'ORGANIZATION NAME',
-		accessor : (item) => <OrgNameLabel item={item?.organization_name} />,
-	},
-	{ id: 'request_type', Header: 'REQUEST TYPE', accessor: 'request_type' },
-	{ Header: 'REQUEST ON', accessor: 'request_on', id: 'request_on' },
-	{ Header: 'ACTION TIME', accessor: 'action_time' },
-	{ Header: 'ACTION TAKEN', accessor: 'action_taken' },
-];
-
-const data = [
-	{
-		organization_name: {
-			name         : 'John Wick (Agent)',
-			organization : 'Reliance Private Limited',
-			account      : 'CP',
-		},
-		request_type : 'KYC',
-		request_on   : '25 Oct 2023',
-
+		accessor : (item) => <div className={styles.label}>{startCase(item?.organization?.business_name) || '-'}</div>,
 	},
 	{
-		organization_name: {
-			name         : 'John Wick (Agent)',
-			organization : 'Reliance Private Limited',
-			account      : 'CP',
-		},
-		request_type : 'KYC',
-		request_on   : '25 Oct 2023',
-
+		id       : 'request_type',
+		Header   : 'REQUEST TYPE',
+		accessor : (item) => <div className={styles.label}>{startCase(item?.request_type)}</div>,
 	},
 	{
-		organization_name: {
-			name         : 'John Wick (Agent)',
-			organization : 'Reliance Private Limited',
-			account      : 'CP',
-		},
-		request_type : 'KYC',
-		request_on   : '25 Oct 2023',
+		id       : 'request_on',
+		Header   : 'REQUEST ON',
+		accessor : (item) => (
+			<div>
+				{formatDate({
+					date       : item?.created_at,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+					formatType : 'dateTime',
+					separator  : ' | ',
+				}) || 'NA'}
 
+			</div>
+		),
+	},
+	{
+		id       : 'action_status',
+		Header   : 'ACTION STATUS',
+		accessor : (item) => (
+			<div className={styles.status_div}>
+				<div className={cl`${styles.circle} 
+				${item?.request_status === 'completed' ? styles.complete : styles.pending}`}
+				/>
+				<div className={styles.title}>{startCase(item?.request_status)}</div>
+			</div>
+		),
 	},
 ];
 
-function PlatformHistory({ setShowHistory = () => {}, rest = {}, list = [] }) {
-	console.log('list:', list);
+function PlatformHistory({ setShowHistory = () => {}, rest = {}, list = [], loading = false }) {
 	const { page, page_limit, total_count } = rest || {};
 
 	return (
@@ -78,18 +71,18 @@ function PlatformHistory({ setShowHistory = () => {}, rest = {}, list = [] }) {
 				<div className={styles.title}>Task History</div>
 			</div>
 			<div className={styles.content}>
-				<Table columns={COLUMNS} data={data} loading={false} />
+				<Table columns={COLUMNS} data={list} loading={loading} />
 			</div>
-			{/* {page > 1 ? ( */}
-			<div className={styles.pagination_info}>
-				<Pagination
-					type="number"
-					currentPage={page}
-					totalItems={total_count}
-					pageSize={page_limit}
-				/>
-			</div>
-			{/* ) : null} */}
+			{page >= 1 ? (
+				<div className={styles.pagination_info}>
+					<Pagination
+						type="table"
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={page_limit}
+					/>
+				</div>
+			) : null}
 		</div>
 	);
 }
