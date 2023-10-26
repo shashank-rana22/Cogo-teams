@@ -2,8 +2,6 @@ import { cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import useGetIsMobile from '../../helpers/useGetIsMobile';
-
 import AIRHeader from './AIRHeader';
 import ExtraHeader from './common/ExtraHeader';
 import FCLHeader from './FCLHeader';
@@ -21,8 +19,6 @@ const HEADER_COMPONENT_MAPPING = {
 };
 
 function Header(props = {}) {
-	const isMobile = useGetIsMobile();
-
 	const {
 		data = {},
 		service_key = 'service_type',
@@ -43,7 +39,7 @@ function Header(props = {}) {
 			id="search_to_checkout_main_header"
 			className={cl`${styles.container} ${showAdditionalHeader ? styles.show : {}}`}
 		>
-			<ActiveHeader {...props} isMobile={isMobile} />
+			<ActiveHeader {...props} />
 
 			{showAdditionalHeader ? (
 				<ExtraHeader headerProps={headerProps} createLoading={createLoading} createSearch={createSearch} />

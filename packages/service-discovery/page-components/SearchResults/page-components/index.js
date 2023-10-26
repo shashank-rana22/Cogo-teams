@@ -145,6 +145,7 @@ function SearchResults() {
 				touch_points={touch_points}
 				createSearch={createSearch}
 				createLoading={createLoading}
+				isMobile={isMobile}
 			/>
 
 			<div

@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 
 function SelectedRateCard({
 	setRouterLoading = () => {},
+	isMobile = false,
 }) {
 	const { query = {} } = useSelector(({ general }) => ({
 		query: general?.query,
@@ -34,7 +35,7 @@ function SelectedRateCard({
 	});
 
 	if (loading && isEmpty(data)) {
-		return <LoadingState />;
+		return <LoadingState isMobile={isMobile} />;
 	}
 
 	return (
@@ -45,6 +46,7 @@ function SelectedRateCard({
 				rate={selectedRate}
 				detail={detail}
 				setRouterLoading={setRouterLoading}
+				isMobile={isMobile}
 			/>
 
 			<Services

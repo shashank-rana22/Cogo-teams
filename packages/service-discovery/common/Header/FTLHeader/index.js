@@ -64,6 +64,7 @@ function FTLHeader({
 						touch_points={touch_points}
 						createLoading={createLoading}
 						createSearch={createSearch}
+						isMobile={isMobile}
 					/>
 
 					<Wallet
