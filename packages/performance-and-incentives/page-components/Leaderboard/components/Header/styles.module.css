@@ -1,6 +1,7 @@
 .container {
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 30px;
 }
 
 .head_container {
@@ -53,4 +54,10 @@
 			width: 100%;
 		}
 	}
+}
+
+.user_details_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
