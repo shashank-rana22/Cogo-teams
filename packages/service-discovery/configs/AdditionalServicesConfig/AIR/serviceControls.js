@@ -77,6 +77,7 @@ const controls = ({ destination_country_id, origin_country_id, airport_id }) => 
 			// includes        : { city: true, country: true, default_params_required: true },
 			recommendations : true,
 		},
+		renderLabel : (data) => CustomSelectOption({ data, key: 'locations' }),
 		initialCall : true,
 		condition   : { services: ['warehouse'] },
 		rules       : { required: 'Warehouse is required' },

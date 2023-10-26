@@ -1,4 +1,4 @@
-import { IcMAirport, IcMLocation, IcMPort } from '@cogoport/icons-react';
+import { IcAWarehouse, IcMAirport, IcMLocation, IcMPort } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
@@ -13,6 +13,7 @@ function Location(props) {
 		is_icd = false,
 		postal_code = '',
 		name = '',
+		site_code = '',
 	} = data || {};
 
 	const { country_code: countryName = '' } = country || {};
@@ -35,6 +36,9 @@ function Location(props) {
 		iconToShow = IcMAirport;
 	} else if (type === 'pincode') {
 		portCode = countryName ? `${postal_code}, ${countryName}` : postal_code;
+	} else if (type === 'warehouse') {
+		iconToShow = IcAWarehouse;
+		portCode = site_code || countryName;
 	} else if (countryName) {
 		portCode = countryName;
 	}
