@@ -1,13 +1,16 @@
 .container {
 	display: flex;
-	min-width: 32%;
-	max-width: 50%;
+	width: 200px;
 	padding: 16px 20px;
 	margin: 0 20px 0 -24px;
 	background: #fffafa;
 	border-radius: 0 6px 0 0;
 
+	@media (max-width: 1080px) {
+		width: 160px;
+	}
 	@media (max-width: 768px) {
+		width: 120px;
 		padding: 12px 16px;
 		margin-right: 6px;
 		margin-left: 0;
@@ -15,7 +18,7 @@
 }
 
 .org_name {
-	max-width: 120px;
+	max-width: 140px;
 	margin-bottom: 6px;
 	overflow: hidden;
 	font-weight: 400;
@@ -24,13 +27,17 @@
 	white-space: nowrap;
 	opacity: 0.6;
 
+	@media (max-width: 1080px) {
+		max-width: 100px;
+	}
 	@media (max-width: 768px) {
+		max-width: 60px;
 		font-size: 10px;
 	}
 }
 
 .user_name {
-	max-width: 120px;
+	max-width: 140px;
 	overflow: hidden;
 	font-size: 16px;
 	font-weight: 600;
@@ -39,8 +46,12 @@
 	text-transform: capitalize;
 	white-space: nowrap;
 
+	@media (max-width: 1080px) {
+		max-width: 100px;
+	}
 	@media (max-width: 768px) {
-		font-size: 11px;
+		max-width: 60px;
+		font-size: 10px;
 	}
 }
 
