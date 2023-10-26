@@ -140,12 +140,25 @@ const makeShortName = (name) => {
 
 function PostContainer({ item = {}, bypass, feedRefetch }) {
 	// const [openComments, setOpenComments] = useState(false);
+	const [reactionData, setReactionData] = useState({
+		reaction_count : item.no_of_reactions || 0,
+		reactions      : item.reactions || [],
+	});
 
-	const { createEmployeeReaction } = useCreateEmployeeReaction();
+	console.log(item.reactions, feedRefetch, bypass, 'systemItem');
+
+	const { createEmployeeReaction, data:reactionsObject } = useCreateEmployeeReaction();
 	const { createCompanyFeed } = useCreateCompanyFeed(feedRefetch, 'deleted');
 
 	const [selectedIcon, setSelectedIcon] = useState('appLike');
 	const [taggedPeople, setTaggedPeople] = useState([]);
+	console.log(reactionsObject, 'reactionsObject');
+
+	useEffect(() => {
+		if (reactionsObject) {
+			setReactionData(reactionsObject);
+		}
+	}, [reactionsObject]);
 
 	useEffect(() => {
 		if (['appreciation', 'work_anniversary', 'birthday'].includes(item?.feed_type)) {
@@ -185,7 +198,7 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 		}
 	}, [item?.my_reaction]);
 
-	const handleIconSelect = (newIcon) => {
+	const handleIconSelect = async (newIcon) => {
 		console.log('item', item);
 		setSelectedIcon(newIcon);
 		const payload = {
@@ -193,17 +206,23 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 			object_type   : 'feed',
 			reaction_type : newIcon,
 		};
-		createEmployeeReaction(payload);
+		await createEmployeeReaction(payload);
 	};
 
-	const handleRemoveIcon = () => {
+	const handleRemoveIcon = async () => {
 		setSelectedIcon('appLike');
 		const payload = {
 			item_id       : item.id,
 			object_type   : 'feed',
 			reaction_type : '',
 		};
-		createEmployeeReaction(payload);
+		await createEmployeeReaction(payload);
+		// const responseData = reactionsObject;
+		// console.log('responseData', responseData);
+		// setReactionData({
+		// 	reaction_count : responseData?.reaction_count,
+		// 	reactions      : responseData?.reactions,
+		// });
 	};
 
 	const getFeedData = (feedData) => {
@@ -349,21 +368,21 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 					</div>
 
 					<div className={styles.likes_n_comment}>
-						{/* <div className={styles.comments_data}>
+						<div className={styles.comments_data}>
 							<div className={styles.user_comments}>
-								{icons.map((option, index) => {
-									const Icon = option.icon;
+								{(reactionData?.reactions || []).map((option, index) => {
+									const Icon = iconMapping[option];
 									return (
 										<div className={styles.comments_circle} key={index}>
-											<Icon width={25} height={25} />
+											{Icon}
 										</div>
 									);
 								})}
 							</div>
-							{item.no_of_reactions || '0'}
+							{reactionData?.reaction_count || '0'}
 							{' '}
-							Likes
-						</div> */}
+							{reactionData?.reaction_count > 1 ? 'Likes' : 'Like'}
+						</div>
 
 						{/* <div className={styles.comments_data} style={{ marginLeft: '8px' }}>
 							<div className={styles.user_comments}>

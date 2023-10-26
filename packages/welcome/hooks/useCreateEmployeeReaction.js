@@ -1,7 +1,7 @@
 import { useHarbourRequest } from '@cogoport/request';
 
 const useCreateEmployeeReaction = () => {
-	const [{ loading }, trigger] = useHarbourRequest({
+	const [{ data, loading }, trigger] = useHarbourRequest({
 		method : 'POST',
 		url    : '/create_employee_reaction',
 	}, { manual: true });
@@ -17,8 +17,9 @@ const useCreateEmployeeReaction = () => {
 			console.log('err', error);
 		}
 	};
+	console.log(data, 'react-data');
 
-	return { loading, createEmployeeReaction };
+	return { data, loading, createEmployeeReaction };
 };
 
 export default useCreateEmployeeReaction;
