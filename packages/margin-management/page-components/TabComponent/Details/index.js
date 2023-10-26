@@ -105,23 +105,17 @@ function Details({
 						<div className={styles.slab}>
 							<div className={styles.small_title}>Rate Type</div>
 							<div className={styles.small_title_value}>
-								{typeof rate_type === 'string'
-									? startCase(rate_type) || 'All Rate Types'
-									: startCase(rate_type?.[GLOBAL_CONSTANTS.zeroth_index]) || 'All Rate Types'}
-								{typeof rate_type === 'string' ? (
-									''
-								) : (
-									<Tooltip
-										theme="light"
-										placement="top"
-										content={<DisplayContent typeValues={rate_type} />}
-										style={{ padding: 16 }}
-									>
-										<div className={styles.description}>
-											{rate_type?.length > 1 ? `+${rate_type.length - 1} More` : ''}
-										</div>
-									</Tooltip>
-								)}
+								{startCase(rate_type?.[GLOBAL_CONSTANTS.zeroth_index]) || 'All Rate Types'}
+								<Tooltip
+									theme="light"
+									placement="top"
+									content={<DisplayContent typeValues={rate_type} />}
+									style={{ padding: 16 }}
+								>
+									<div className={styles.description}>
+										{rate_type?.length > 1 ? `+${rate_type.length - 1} More` : ''}
+									</div>
+								</Tooltip>
 							</div>
 						</div>
 					) : null}

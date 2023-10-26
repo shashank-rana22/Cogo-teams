@@ -70,6 +70,10 @@ function Child({
 								}
 							}
 
+							if (formValues?.margin_applied_on === 'service_wise' && controlItem.name === 'code') {
+								return null;
+							}
+
 							return (
 								<div className={styles.element} style={{ width: `${flex}%` }} key={ctrlItemName}>
 									<h4 className={styles.label}>

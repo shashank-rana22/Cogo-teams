@@ -101,6 +101,16 @@ function Create({ type = 'create', item = {} }) {
 
 	const { margin_slabs = [] } = formValues;
 	const customFieldArrayControls = { margin_slabs: [] };
+
+	useEffect(() => {
+		if (!isEmpty(item)) {
+			const newItem = { ...(item || {}), ...(item?.filters || {}) };
+			extraControls.forEach((elem) => {
+				setValue(elem?.name, newItem?.[elem.name]);
+			});
+		}
+	}, [extraControls, item, setValue, showAdvancedForm]);
+
 	useEffect(() => {
 		margin_slabs?.forEach((_o, index) => {
 			setValue(
@@ -237,6 +247,7 @@ function Create({ type = 'create', item = {} }) {
 					watch={watch}
 					setValue={setValue}
 					errors={errors}
+					formValues={formValues}
 					// customFieldArrayControls={customFieldArrayControls}
 					showElements={showElements}
 				/>
