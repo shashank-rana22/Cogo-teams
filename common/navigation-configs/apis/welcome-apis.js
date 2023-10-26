@@ -104,6 +104,11 @@ const welcome = [
 		access_type  : 'private',
 		service_name : 'hrms',
 	},
+	{
+		api          : 'get_department_wise_summary',
+		access_type  : 'private',
+		service_name : 'hrms',
+	},
 ];
 
 export default welcome;

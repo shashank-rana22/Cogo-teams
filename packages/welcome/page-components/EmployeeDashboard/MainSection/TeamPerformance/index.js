@@ -20,7 +20,7 @@ function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDa
 		<div className={styles.container}>
 			<div className={styles.flex}>
 				<div>
-					<div className={styles.title}>PHONEIX PERFORMANCE</div>
+					<div className={styles.title}>TEAM PERFORMANCE</div>
 					<div className={styles.sub_title}>View how your team is doing</div>
 				</div>
 				<div className={styles.performance_achievement}>

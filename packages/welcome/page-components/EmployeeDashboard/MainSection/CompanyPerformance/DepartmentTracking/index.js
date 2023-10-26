@@ -5,11 +5,24 @@ import MyResponsiveBar from '../MyResponsiveBar';
 
 import styles from './styles.module.css';
 
-const options = [
-	{ label: 'Harper Lee', value: 'To Kill a Mockingbird' },
-];
+function DepartmentTracking({
+	depDetails = [],
+	getDepartmentWise = () => {},
+	summaryData = {},
+	setFilters = () => {},
+	filters = {},
+}) {
+	console.log(summaryData, 'sum');
 
-function DepartmentTracking() {
+	const { department_list } = summaryData || {};
+
+	console.log(department_list, 'dd');
+
+	const lableList = (department_list || []).map((item) => ({
+		label : item.department_name,
+		value : item.id,
+	}));
+
 	return (
 		<div className={styles.department_track_section}>
 			<div className={styles.header}>
@@ -18,12 +31,15 @@ function DepartmentTracking() {
 					<span className={styles.header_left_bottom}>Story Points</span>
 				</div>
 				<div className={styles.header_right}>
-					<Select placeholder="Story Points" options={options} />
-					<Select placeholder="Design" options={options} />
-					<Select placeholder="Team Lead" options={options} />
+					<Select
+						placeholder="Department"
+						options={lableList}
+						value={filters?.department_id}
+						onChange={(e) => setFilters((prev) => ({ ...prev, department_id: e }))}
+					/>
 				</div>
 			</div>
-			<MyResponsiveBar />
+			<MyResponsiveBar depDetails={depDetails} getDepartmentWise={getDepartmentWise} summaryData={summaryData} />
 		</div>
 	);
 }

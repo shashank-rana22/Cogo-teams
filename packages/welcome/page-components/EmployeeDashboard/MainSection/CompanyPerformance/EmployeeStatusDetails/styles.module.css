@@ -26,6 +26,8 @@
 }
 
 .growth {
+	display: flex;
+	align-items: center;
 	margin-right: 4px;
 	font-size: 12px;
 	color: #849e4c;

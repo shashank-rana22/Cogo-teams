@@ -4,61 +4,28 @@ import styles from './styles.module.css';
 
 const MODIFIER_VALUE = 1.6;
 
-const data = [
-	{
-		month  : 'Jan',
-		Salary : 68,
-		Others : 98,
-	},
-	{
-		month  : 'Feb',
-		Salary : 68,
-		Others : 98,
-	},
-	{
-		month  : 'March',
-		Salary : 68,
-		Others : 98,
-	},
-	{
-		month  : 'April',
-		Salary : 68,
-		Others : 98,
-	},
-	{
-		month  : 'May',
-		Salary : 68,
-		Others : 98,
-	},
-	{
-		month  : 'June',
-		Salary : 68,
-		Others : 98,
-	},
-];
-
-function MyResponsiveBar() {
+function MyResponsiveBar({ depDetails = [] }) {
 	return (
 		<div className={styles.bar_chart}>
 			<ResponsiveBar
-				data={data}
+				data={depDetails || []}
 				keys={[
-					'Salary',
-					'Others',
+					'working_hours',
 				]}
 				indexBy="month"
 				margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
 				padding={0.3}
 				valueScale={{ type: 'linear' }}
 				indexScale={{ type: 'band', round: true }}
-				colors={({ id }) => {
-					if (id === 'Salary') {
-						return '#ACDADF';
-					} if (id === 'Others') {
-						return '#4F4F4F';
-					}
-					return 'gray';
-				}}
+				// colors={({ id }) => {
+				// 	if (id === 'working_hours') {
+				// 		return '#ACDADF';
+				// 	} if (id === 'Others') {
+				// 		return '#4F4F4F';
+				// 	}
+				// 	return 'gray';
+				// }}
+				colors={['#ACDADF', '#4F4F4F']}
 				enableLabel={false}
 				enableGridY={false}
 				axisTop={null}

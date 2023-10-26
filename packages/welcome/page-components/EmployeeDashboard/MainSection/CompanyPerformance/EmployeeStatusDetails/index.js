@@ -1,14 +1,20 @@
 import { IcMArrowNext, IcMArrowRight } from '@cogoport/icons-react';
+// import { useRouter } from '@cogoport/next';
+// import { isEmpty } from '@cogoport/utils';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function EmployeeStatusDetails({ task_list = {}, summaryData = {}, absentData = {} }) {
-	const { leave_requests, offboarding_requests, payroll, reimbursements } = task_list || {};
+	const { leave_requests, offboarding_requests, payroll } = task_list || {};
 	console.log('sumarryData', summaryData);
 	const { monthly_insights } = summaryData || {};
+	// const { push } = useRouter();
 
 	const { age, offboardings, tenure } = monthly_insights || {};
+
+	const { push } = useRouter();
 
 	const COMPARE_GROWTH = [
 		{
@@ -35,25 +41,33 @@ function EmployeeStatusDetails({ task_list = {}, summaryData = {}, absentData = 
 
 	const THINGS_TO_DO = [
 		{
-			src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Money_view_green.svg',
+			src:
+			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/moneyDollar.svg',
 			type           : 'Payroll',
 			employee_count : `${payroll} employees not paid`,
+			target         : '/payroll',
 		},
 		{
-			src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/CalendWBack.png',
+			src:
+			'https://cogoport-testing.sgp1.digitaloceanspaces.com/ce7894a168aed5c5b6b42e5ba1ab4b60/Calendar.svg',
 			type           : 'Leave Requests',
 			employee_count : `${leave_requests} pending`,
+			target         : '/attendance-leave-management?showInbox=true',
 		},
 		{
-			src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/profileWBack.png',
+			src:
+			'https://cogoport-testing.sgp1.digitaloceanspaces.com/b4501a1989c19715142a2095d65b777e/Calendar-2.svg',
 			type           : 'Offboarding Requests',
 			employee_count : `${offboarding_requests} pending`,
+			target         : '/attendance-leave-management?showInbox=true',
 		},
-		{
-			src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/docWBack.png',
-			type           : 'Reimbursements',
-			employee_count : `${reimbursements} pending`,
-		},
+		// {
+		// 	src:
+		// 	'https://cogoport-testing.sgp1.digitaloceanspaces.com/1a9f21c2f03f299fdc0161416530ed14/Calendar-3.svg',
+		// 	type           : 'Reimbursements',
+		// 	employee_count : `${reimbursements} pending`,
+		// 	target         : '',
+		// },
 	];
 	return (
 		<div className={styles.employee_status_details}>
@@ -65,8 +79,17 @@ function EmployeeStatusDetails({ task_list = {}, summaryData = {}, absentData = 
 							<div className={styles.card__title}>
 								<span className={styles.percentage}>{item?.percentage}</span>
 								<span className={styles.growth}>
-									<IcMArrowNext style={{ transform: 'rotate(-45deg)' }} />
-									{item?.growth}
+									<IcMArrowNext style={{
+										alignContent : 'center',
+										transform    : item?.growth < 0 ? 'rotate(45deg)' : 'rotate(-45deg)',
+										color        : item?.growth < 0 ? 'red' : '#849e4c',
+										marginLeft   : '4px',
+									}}
+									/>
+									<span style={{ color: item?.growth < 0 ? 'red' : '#849e4c' }}>
+										{item?.growth}
+									</span>
+
 								</span>
 								{' '}
 
@@ -97,7 +120,10 @@ function EmployeeStatusDetails({ task_list = {}, summaryData = {}, absentData = 
 							</div>
 							<div className={styles.listed_item_right}>
 								{' '}
-								<IcMArrowRight style={{ width: 20, height: 20 }} />
+								<IcMArrowRight
+									style={{ width: 20, height: 20 }}
+									onClick={() => push(item?.target)}
+								/>
 							</div>
 						</div>
 					))}

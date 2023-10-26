@@ -140,3 +140,10 @@
 	color: #221f20;
 	text-transform: uppercase;
 }
+
+.bottom_bar_data {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-top: 16px;
+}

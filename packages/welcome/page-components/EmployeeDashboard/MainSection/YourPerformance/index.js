@@ -22,6 +22,7 @@ function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
 	const [isEmployeeDashboardActive, setIsEmployeeDashboardActive] = useState(true);
 
 	console.log('isEmployeeDashboardActive', isEmployeeDashboardActive);
+	console.log(user_role, 'user_role');
 
 	return (
 		<>
