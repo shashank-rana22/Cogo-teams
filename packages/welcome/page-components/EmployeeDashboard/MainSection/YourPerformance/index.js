@@ -70,7 +70,12 @@ function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
 					</div>
 				</div>
 			</div>
-			<CompanyPerformance />
+			<CompanyPerformance
+				data={data}
+				feedRefetch={feedRefetch}
+				setFilters={setFilters}
+				summaryData={summaryData}
+			/>
 			<TeamPerformance />
 			<div className={styles.company_feed}>
 				<div className={styles.company_feed_title}>Company Feed</div>

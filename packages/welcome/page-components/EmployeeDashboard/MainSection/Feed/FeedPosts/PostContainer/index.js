@@ -287,7 +287,7 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 									</div>
 								)}
 							>
-								<IcMOverflowDot fill="#4F4F4F" />
+								<IcMOverflowDot style={{ cursor: 'pointer' }} fill="#4F4F4F" />
 							</Popover>
 						)}
 
