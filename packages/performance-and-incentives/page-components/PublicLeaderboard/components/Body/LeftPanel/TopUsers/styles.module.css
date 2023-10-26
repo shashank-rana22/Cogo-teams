@@ -5,7 +5,7 @@
 	margin-bottom: 28px;
 
 	@media (min-width: 2560px) {
-		margin-bottom: 96px;
+		margin-bottom: 60px;
 	}
 }
 
@@ -33,7 +33,7 @@
 	white-space: nowrap;
 
 	@media (min-width: 2560px) {
-		font-size: 56px;
+		font-size: 40px;
 	}
 }
 
