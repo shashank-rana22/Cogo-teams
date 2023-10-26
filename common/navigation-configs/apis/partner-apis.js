@@ -7183,13 +7183,6 @@ const partner = {
 			service_name : 'sage',
 		},
 		{
-			api         : 'put_payments_outstanding_update_account_taggings',
-			access_type : 'private',
-			module      : 'outstanding',
-			feature     : 'outstanding',
-
-		},
-		{
 			api          : 'list_roles',
 			access_type  : 'private',
 			service_name : 'auth',
@@ -9303,6 +9296,13 @@ const partner = {
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
+		},
+		{
+			api         : 'put_payments_outstanding_update_account_taggings',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+
 		},
 		{
 			api         : 'get_sales_outstanding_invoice_list',
