@@ -1,4 +1,5 @@
 // import { Select } from '@cogoport/components';
+import { Toggle } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -14,7 +15,7 @@ import ThingsToDo from './ThingsToDo';
 // 	{ label: 'March 2023', value: 'march' },
 // ];
 
-function TeamPerformance({ data = {} }) {
+function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDashboardActive }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex}>
@@ -23,6 +24,14 @@ function TeamPerformance({ data = {} }) {
 					<div className={styles.sub_title}>View how your team is doing</div>
 				</div>
 				<div className={styles.performance_achievement}>
+					<Toggle
+						name="a1"
+						size="md"
+						checked={isEmployeeDashboardActive}
+						onChange={(e) => setIsEmployeeDashboardActive(e.target.checked)}
+						onLabel="Company"
+						offLabel="Employee"
+					/>
 					{/* <div className={cl`${styles.claps_flex} ${styles.mr_12}`}>
 							<div className={styles.claps}>👏</div>
 							32 Claps Recieved

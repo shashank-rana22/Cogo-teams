@@ -1,4 +1,4 @@
-import { Select } from '@cogoport/components';
+import { Select, Toggle } from '@cogoport/components';
 import { IcCGreenCircle } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -20,6 +20,8 @@ function CompanyPerformance({
 	// feedRefetch = {},
 	// setFilters = {},
 	summaryData = {},
+	setIsEmployeeDashboardActive,
+	isEmployeeDashboardActive,
 }) {
 	console.log('data-details', summaryData);
 
@@ -40,7 +42,16 @@ function CompanyPerformance({
 						View how your team is doing
 					</div>
 				</div>
+
 				<div className={styles.performance_company}>
+					<Toggle
+						name="a1"
+						size="md"
+						checked={isEmployeeDashboardActive}
+						onChange={(e) => setIsEmployeeDashboardActive(e.target.checked)}
+						onLabel="Company"
+						offLabel="Employee"
+					/>
 					<div style={{ padding: 16, width: 'fit-content' }}>
 						<Select placeholder="Select value" options={options} />
 					</div>

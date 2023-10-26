@@ -6,7 +6,7 @@
 	"sideEffects": false,
 	"dependencies": {
 		"@cogoport/charts": "^1.0.1",
-		"@cogoport/components": "^1.0.359",
+		"@cogoport/components": "^1.0.452",
 		"@cogoport/core": "workspace:*",
 		"@cogoport/globalization": "workspace:*",
 		"@cogoport/forms": "workspace:*",
