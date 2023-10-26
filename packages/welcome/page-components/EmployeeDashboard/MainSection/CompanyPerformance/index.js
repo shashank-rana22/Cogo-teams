@@ -2,11 +2,11 @@ import { Toggle } from '@cogoport/components';
 import { IcCGreenCircle } from '@cogoport/icons-react';
 import React from 'react';
 
-// import DepartmentHappyIndex from './DepartmentHappyIndex';
 import useGetAbsenteeInsight from '../../../../hooks/useGetAbsenteeInsight';
 import useGetDepartmentWise from '../../../../hooks/useGetDepartmentWise';
 
 import CompanyLeaderBoard from './CompanyLeaderBoard';
+import DepartmentHappyIndex from './DepartmentHappyIndex';
 import DepartmentTracking from './DepartmentTracking';
 import EmployeeStatusDetails from './EmployeeStatusDetails';
 import IndividualActivity from './IndividualActivity';
@@ -85,9 +85,9 @@ function CompanyPerformance({
 						</div>
 					</div>
 				</div>
-				{/* <div className={styles.department_data}>
+				<div className={styles.department_data}>
 					<DepartmentHappyIndex />
-				</div> */}
+				</div>
 			</div>
 			<EmployeeStatusDetails task_list={task_list} summaryData={summaryData} absentData={absentData} />
 			<DepartmentTracking

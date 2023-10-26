@@ -1,14 +1,13 @@
 import { IcMArrowNext, IcMArrowRight } from '@cogoport/icons-react';
-// import { useRouter } from '@cogoport/next';
+import { useRouter } from '@cogoport/next';
 // import { isEmpty } from '@cogoport/utils';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function EmployeeStatusDetails({ task_list = {}, summaryData = {}, absentData = {} }) {
-	const { leave_requests, offboarding_requests, payroll } = task_list || {};
-	console.log('sumarryData', summaryData);
+	const { leave_requests, offboarding_requests, payroll, reimbursements } = task_list || {};
+	console.log('sumarryData', task_list);
 	const { monthly_insights } = summaryData || {};
 	// const { push } = useRouter();
 
@@ -61,13 +60,13 @@ function EmployeeStatusDetails({ task_list = {}, summaryData = {}, absentData = 
 			employee_count : `${offboarding_requests} pending`,
 			target         : '/attendance-leave-management?showInbox=true',
 		},
-		// {
-		// 	src:
-		// 	'https://cogoport-testing.sgp1.digitaloceanspaces.com/1a9f21c2f03f299fdc0161416530ed14/Calendar-3.svg',
-		// 	type           : 'Reimbursements',
-		// 	employee_count : `${reimbursements} pending`,
-		// 	target         : '',
-		// },
+		{
+			src:
+			'https://cogoport-testing.sgp1.digitaloceanspaces.com/1a9f21c2f03f299fdc0161416530ed14/Calendar-3.svg',
+			type           : 'Reimbursements',
+			employee_count : `${reimbursements?.pending_count} pending`,
+			target         : '/attendance-leave-management?showInbox=true',
+		},
 	];
 	return (
 		<div className={styles.employee_status_details}>

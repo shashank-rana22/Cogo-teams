@@ -13,6 +13,7 @@ function IndividualActivity({ data = {} }) {
 	const { employees_list } = data || {};
 	const [selectedUser, setSelectedUser] = useState(employees_list?.[0]?.user_id);
 	const { data:userData, getIndividualUserActivity } = useGetIndividualUserActivity();
+
 	function EmployeeList() {
 		return (
 

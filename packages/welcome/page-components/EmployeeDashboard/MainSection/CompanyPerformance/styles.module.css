@@ -57,7 +57,7 @@
 .employee_flex {
 	display: flex;
 	align-items: center;
-	margin: 12px;
+	margin: 12px 0px;
 }
 
 .employee_data {
