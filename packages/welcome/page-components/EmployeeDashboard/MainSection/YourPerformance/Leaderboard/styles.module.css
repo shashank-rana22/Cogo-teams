@@ -22,15 +22,20 @@
 .leaderboard_users {
 	display: flex;
 	justify-content: space-between;
-	padding: 0 50px;
+	padding: 0 35px;
 	margin-top: 24px;
 	color: #4b5563;
 }
 
 .user_name {
+	width: 70px;
 	margin-top: 14px;
+	overflow: hidden;
 	font-weight: 600;
 	color: #111827;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .rank_user {
@@ -123,4 +128,8 @@
 	background-color: #fff;
 	border: 2px solid #92400e;
 	border-radius: 50%;
+}
+
+.one_item {
+	justify-content: center;
 }

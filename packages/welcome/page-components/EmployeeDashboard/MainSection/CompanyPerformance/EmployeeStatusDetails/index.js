@@ -3,49 +3,58 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const THINGS_TO_DO = [
-	{
-		src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Money_view_green.svg',
-		type           : 'Payroll',
-		employee_count : '322 employees not paid',
-	},
-	{
-		src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Money_view_green.svg',
-		type           : 'Leave Requests',
-		employee_count : '322 employees not paid',
-	},
-	{
-		src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Money_view_green.svg',
-		type           : 'Offboarding Requests',
-		employee_count : '322 employees not paid',
-	},
-	{
-		src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Money_view_green.svg',
-		type           : 'Reimbursements',
-		employee_count : '322 employees not paid',
-	},
-];
+function EmployeeStatusDetails({ task_list = {}, summaryData = {}, absentData = {} }) {
+	const { leave_requests, offboarding_requests, payroll, reimbursements } = task_list || {};
+	console.log('sumarryData', summaryData);
+	const { monthly_insights } = summaryData || {};
 
-const COMPARE_GROWTH = [
-	{
-		percentage : '119%',
-		growth     : '3.46%',
-		text       : 'Absents per month',
-	},
-	{
-		percentage : '119%',
-		growth     : '3.46%',
-		text       : 'Total Offboardings',
-	},
-	{
-		percentage : '119%',
-		growth     : '3.46%',
-		text       : 'Avg Tenure',
-	},
+	const { age, offboardings, tenure } = monthly_insights || {};
 
-];
+	const COMPARE_GROWTH = [
+		{
+			percentage : `${Math.round((absentData?.curr_month_absent || 0) * 100) / 100}%`,
+			growth     : `${Math.round((absentData?.growth || 0) * 100) / 100}%`,
+			text       : 'Absents per month',
+		},
+		{
+			percentage : `${Math.round((offboardings?.curr_month_offboardings || 0) * 100) / 100}%`,
+			growth     : `${Math.round((offboardings?.growth || 0) * 100) / 100}%`,
+			text       : 'Total Offboardings',
+		},
+		{
+			percentage : `${Math.round((tenure?.curr_month || 0) * 100) / 100}%`,
+			growth     : `${Math.round((tenure?.growth || 0) * 100) / 100}%`,
+			text       : 'Avg Tenure',
+		},
+		{
+			percentage : `${Math.round((age?.curr_month || 0) * 100) / 100}%`,
+			growth     : `${Math.round((offboardings?.growth || 0) * 100) / 100}%`,
+			text       : 'Avg Employee Age',
+		},
+	];
 
-function EmployeeStatusDetails() {
+	const THINGS_TO_DO = [
+		{
+			src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Money_view_green.svg',
+			type           : 'Payroll',
+			employee_count : `${payroll} employees not paid`,
+		},
+		{
+			src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/CalendWBack.png',
+			type           : 'Leave Requests',
+			employee_count : `${leave_requests} pending`,
+		},
+		{
+			src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/profileWBack.png',
+			type           : 'Offboarding Requests',
+			employee_count : `${offboarding_requests} pending`,
+		},
+		{
+			src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/docWBack.png',
+			type           : 'Reimbursements',
+			employee_count : `${reimbursements} pending`,
+		},
+	];
 	return (
 		<div className={styles.employee_status_details}>
 			<div className={styles.employee_status_compare}>
@@ -79,7 +88,7 @@ function EmployeeStatusDetails() {
 								<img
 									src={item?.src}
 									alt=""
-									style={{ width: 50, height: 50, marginRight: 14 }}
+									style={{ width: 40, height: 40, marginRight: 14 }}
 								/>
 								<div>
 									<div className={styles.listed_item_left_heading}>{item?.type}</div>
