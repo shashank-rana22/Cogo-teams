@@ -1,4 +1,3 @@
-import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import {
@@ -6,8 +5,7 @@ import {
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import PlatFormAdoptionAssign from '../../../../../../../common/PlatFormAdoptionAssign';
-import { formatAccountType } from '../../../../../../../utils/platformAdoption';
+import Header from '../../Header';
 
 import styles from './styles.module.css';
 
@@ -26,50 +24,15 @@ function TradeTypeVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 
 		return (
 			<div className={styles.card} key={id}>
-				<div className={styles.header_info}>
-					<div className={styles.cycle_section}>
-						<div className={styles.serail_id}>
-							ID :
-							{' '}
-							{serial_id}
-						</div>
-						{escalation_cycle ? (
-							<div className={cl`${styles.cycle} ${escalation_cycle === 'warning'
-								? styles.warning : styles.escalate}`}
-							>
-								{startCase(escalation_cycle)}
-							</div>
-						) : null}
-					</div>
-					<div className={styles.wrap}>
-						<div className={styles.user_info}>
-							<IcAHelpingHand011 />
-							<div className={styles.org_details}>
-								<Tooltip
-									content={startCase(orgName)}
-									placement="top"
-								>
-									<div className={styles.business_name}>
-										{startCase(request_type) || '-'}
-									</div>
-								</Tooltip>
-								<div className={styles.lower_section}>
-									<div className={styles.trade_name}>
-										{startCase(orgName) || '-'}
-									</div>
-									<div className={styles.account_type}>
-										{formatAccountType({ tags })?.[account_type]?.shortName}
-									</div>
-								</div>
-							</div>
-						</div>
-						<PlatFormAdoptionAssign data={item} type="trade_party_verification" />
-						{/* <div className={styles.action}>
-							<IcMInfo className={styles.info_icon} />
-							<IcMOverflowDot className={styles.dot_icon} />
-						</div> */}
-					</div>
-				</div>
+				<Header
+					serialId={serial_id}
+					escalationCycle={escalation_cycle}
+					icon={<IcAHelpingHand011 width={30} height={30} />}
+					requestType={request_type}
+					businessName={orgName}
+					tags={tags}
+					accountType={account_type}
+				/>
 				<div className={styles.body_info}>
 					<div className={styles.each_row}>
 						<div className={styles.title}>Requested by :</div>

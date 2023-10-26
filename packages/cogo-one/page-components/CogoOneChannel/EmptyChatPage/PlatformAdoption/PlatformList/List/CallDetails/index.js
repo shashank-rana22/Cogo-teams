@@ -1,10 +1,7 @@
-import { Tooltip, cl } from '@cogoport/components';
-import {
-	IcMMissedcall, IcCSendWhatsapp, IcMCall,
-} from '@cogoport/icons-react';
+import { IcMMissedcall, IcCSendWhatsapp, IcMCall } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import PlatFormAdoptionAssign from '../../../../../../../common/PlatFormAdoptionAssign';
+import Header from '../../Header';
 
 import styles from './styles.module.css';
 
@@ -47,47 +44,16 @@ function CallDetails({ list = [], handlePlaceCall = () => {}, handleOpenMessage 
 
 		return (
 			<div className={styles.card} key={id}>
-				<div className={styles.header_info}>
-					<div className={styles.cycle_section}>
-						<div className={styles.serail_id}>
-							ID :
-							{' '}
-							{serial_id}
-						</div>
-						{escalation_cycle ? (
-							<div className={cl`${styles.cycle} ${escalation_cycle === 'warning'
-								? styles.warning : styles.escalate}`}
-							>
-								{startCase(escalation_cycle)}
-							</div>
-						) : null}
-					</div>
-					<div className={styles.wrap}>
-						<div className={styles.user_info}>
-							<IcMMissedcall />
-							<div className={styles.org_details}>
-								<Tooltip
-									content="Cogoport private logistix limited"
-									placement="top"
-								>
-									<div className={styles.business_name}>
-										{startCase(request_type) || '-'}
-									</div>
-								</Tooltip>
-								<div className={styles.lower_section}>
-									<div className={styles.trade_name}>
-										{startCase(pocName) || '-'}
-									</div>
-								</div>
-							</div>
-						</div>
-						<PlatFormAdoptionAssign data={item} type="missed_call" />
-						{/* <div className={styles.action}>
-							<IcMInfo className={styles.info_icon} />
-							<IcMOverflowDot className={styles.info_icon} />
-						</div> */}
-					</div>
-				</div>
+				<Header
+					item={item}
+					icon={<IcMMissedcall width={25} height={25} fill="#ee3425" />}
+					serialId={serial_id}
+					escalationCycle={escalation_cycle}
+					requestType={request_type}
+					businessName={pocName}
+					// tags={tags}
+					// accountType={account_type}
+				/>
 				<div className={styles.body_info}>
 					<div className={styles.each_row}>
 						<div className={styles.title}>Agent Missed by : </div>

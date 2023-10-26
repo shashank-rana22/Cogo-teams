@@ -1,10 +1,9 @@
-import { Tooltip, Button, cl } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { IcMFtick, IcMCrossInCircle, IcMCalendar, IcMCall } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import AgentAvatar from '../../../../../../../common/AgentAvatar';
-import PlatFormAdoptionAssign from '../../../../../../../common/PlatFormAdoptionAssign';
-import { formatAccountType } from '../../../../../../../utils/platformAdoption';
+import Header from '../../Header';
 
 import styles from './styles.module.css';
 
@@ -26,49 +25,15 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, handlePlaceCal
 
 		return (
 			<div className={styles.card} key={id}>
-				<div className={styles.header_info}>
-					<div className={styles.cycle_section}>
-						<div className={styles.serail_id}>
-							ID :
-							{' '}
-							{serial_id}
-						</div>
-						{escalation_cycle ? (
-							<div className={cl`${styles.cycle} ${escalation_cycle === 'warning'
-								? styles.warning : styles.escalate}`}
-							>
-								{startCase(escalation_cycle)}
-							</div>
-						) : null}
-					</div>
-					<div className={styles.wrap}>
-						<div className={styles.user_info}>
-							<AgentAvatar text={business_name || '#'} />
-							<div className={styles.org_details}>
-								<Tooltip
-									content="Cogoport private logistix limited"
-									placement="top"
-								>
-									<div className={styles.business_name}>
-										{startCase(request_type) || '-'}
-									</div>
-								</Tooltip>
-								<div className={styles.lower_section}>
-									<div className={styles.trade_name}>
-										{startCase(business_name) || '-'}
-									</div>
-									<div className={styles.account_type}>
-										{formatAccountType({ tags })?.[account_type]?.shortName}
-									</div>
-								</div>
-							</div>
-						</div>
-						<PlatFormAdoptionAssign data={item} type="onboarded_customer" />
-						{/* <div className={styles.action}>
-							<IcMOverflowDot className={styles.dot_icon} />
-						</div> */}
-					</div>
-				</div>
+				<Header
+					serialId={serial_id}
+					escalationCycle={escalation_cycle}
+					icon={<AgentAvatar text={business_name || '#'} />}
+					requestType={request_type}
+					businessName={business_name}
+					tags={tags}
+					accountType={account_type}
+				/>
 				<div className={styles.body_info}>
 					<div className={styles.status_row}>
 						<div className={styles.status_content}>

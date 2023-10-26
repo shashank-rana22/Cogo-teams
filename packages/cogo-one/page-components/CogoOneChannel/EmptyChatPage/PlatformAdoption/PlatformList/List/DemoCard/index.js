@@ -1,12 +1,11 @@
-import { Button, Tooltip, Toast, cl } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcAWatchDemo, IcMPlatformDemo, IcMCalendar, IcMClock } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
-import PlatFormAdoptionAssign from '../../../../../../../common/PlatFormAdoptionAssign';
-import { formatAccountType } from '../../../../../../../utils/platformAdoption';
+import Header from '../../Header';
 
 import styles from './styles.module.css';
 
@@ -64,50 +63,15 @@ function DemoCard({ list = [], mailProps = {}, setScheduleDemo = () => {} }) {
 
 		return (
 			<div className={styles.card} key={id}>
-				<div className={styles.header_info}>
-					<div className={styles.cycle_section}>
-						<div className={styles.serail_id}>
-							ID :
-							{' '}
-							{serial_id}
-						</div>
-						{escalation_cycle ? (
-							<div className={cl`${styles.cycle} ${escalation_cycle === 'warning'
-								? styles.warning : styles.escalate}`}
-							>
-								{startCase(escalation_cycle)}
-							</div>
-						) : null}
-					</div>
-					<div className={styles.wrap}>
-						<div className={styles.user_info}>
-							<IcAWatchDemo />
-							<div className={styles.org_details}>
-								<Tooltip
-									content="Cogoport private logistix limited"
-									placement="top"
-								>
-									<div className={styles.business_name}>
-										{startCase(request_type) || '-'}
-									</div>
-								</Tooltip>
-								<div className={styles.lower_section}>
-									<div className={styles.trade_name}>
-										{startCase(business_name) || '-'}
-									</div>
-									<div className={styles.account_type}>
-										{formatAccountType({ tags })?.[account_type]?.shortName}
-									</div>
-								</div>
-							</div>
-						</div>
-						<PlatFormAdoptionAssign data={item} type="demo_request" />
-						{/* <div className={styles.action}>
-							<IcMInfo className={styles.info_icon} />
-							<IcMOverflowDot className={styles.dot_icon} />
-						</div> */}
-					</div>
-				</div>
+				<Header
+					serialId={serial_id}
+					escalationCycle={escalation_cycle}
+					icon={<IcAWatchDemo width={30} height={30} />}
+					requestType={request_type}
+					businessName={business_name}
+					tags={tags}
+					accountType={account_type}
+				/>
 				<div className={styles.body_info}>
 					<div className={styles.each_row}>
 						<div className={styles.title}>Requested by :</div>
@@ -121,8 +85,6 @@ function DemoCard({ list = [], mailProps = {}, setScheduleDemo = () => {} }) {
 						<div className={styles.title}>Source :</div>
 						<div className={styles.source}>
 							{startCase(source)}
-							{/* <div className={styles.source_date}>
-						</div> */}
 						</div>
 					</div>
 					<div className={styles.each_row}>
