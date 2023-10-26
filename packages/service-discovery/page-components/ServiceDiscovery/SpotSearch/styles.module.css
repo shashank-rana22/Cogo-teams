@@ -10,12 +10,9 @@
 	margin: -24px -40px;
 	background: #f7f9f9;
 
-	@media (max-width: 950px) {
-		min-height: 320px;
-	}
 	@media (max-width: 768px) {
-		min-height: 400px;
-		padding: 24px;
+		min-height: 420px;
+		padding: 70px 24px 24px;
 		margin: -24px;
 	}
 }
@@ -34,11 +31,10 @@
 }
 
 .mode_selection {
-	display: inline-block;
-	margin-top: -60px;
+	margin-top: -80px;
 
-	@media (max-width: 950px) {
-		margin-top: -20px;
+	@media (max-width: 768px) {
+		margin-top: -70px;
 	}
 }
 
