@@ -40,7 +40,6 @@ function renderValue(label = '', detail = {}) {
 	const volume = ` ${detail?.volume} ${isLTL ? 'cc' : 'cbm'}`;
 	const commodityDataDetails = detail?.commodity_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	function PackageDetails() {
-		console.log('packages', packages);
 		if (packages?.length > 1) {
 			return (
 				<Tooltip

@@ -28,7 +28,7 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 		creditNoteCount = 0,
 	} = item || {};
 
-	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
+	const { currency = '' } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	const invoiceContainer = [
 		{

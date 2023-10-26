@@ -8,12 +8,12 @@ function UserDetails({ item = {} }) {
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
 	const { kam = [], creditController = [], salesAgent = [], portfolioManager = [] } = item || [];
 	const kamData = (kam || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
-	const AgentData = (salesAgent || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
-	const CcData = (creditController || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
+	const agentData = (salesAgent || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
+	const ccData = (creditController || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
 	const portfolioManagerData = (portfolioManager || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
 	return (
 		<>
-			{(kamData.length !== 0 || AgentData.length !== 0 || CcData.length !== 0
+			{(kamData.length !== 0 || agentData.length !== 0 || ccData.length !== 0
 			|| portfolioManagerData.length !== 0) && (
 				<div className={styles.download_icon_div}>
 					<IcMProfile
@@ -44,7 +44,7 @@ function UserDetails({ item = {} }) {
 							{kamData.length !== 0 ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
-										{startCase('KAM OWNER' || '-')}
+										{startCase('KAM OWNER')}
 									</div>
 									{(kamData || []).map((singleagent) => (
 										<div key={singleagent?.name} className={styles.containers}>
@@ -58,12 +58,12 @@ function UserDetails({ item = {} }) {
 									))}
 								</div>
 							) : null}
-							{AgentData.length !== 0 ? (
+							{agentData.length !== 0 ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
-										{startCase('AGENT' || '-')}
+										{startCase('AGENT')}
 									</div>
-									{(AgentData || []).map((singleagent) => (
+									{(agentData || []).map((singleagent) => (
 										<div key={singleagent?.name} className={styles.containers}>
 											<div className={styles.email}>
 												{singleagent?.email || '-'}
@@ -75,12 +75,12 @@ function UserDetails({ item = {} }) {
 									))}
 								</div>
 							) : null}
-							{CcData.length !== 0 ? (
+							{ccData.length !== 0 ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
-										{startCase('CC' || '-')}
+										{startCase('CC')}
 									</div>
-									{(CcData || []).map((singleagent) => (
+									{(ccData || []).map((singleagent) => (
 										<div key={singleagent?.name} className={styles.containers}>
 											<div className={styles.email}>
 												{singleagent?.email || '-'}
@@ -95,7 +95,7 @@ function UserDetails({ item = {} }) {
 							{portfolioManagerData.length !== 0 ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
-										{startCase('Portfolio Manager' || '-')}
+										{startCase('Portfolio Manager')}
 
 									</div>
 									{(portfolioManagerData || []).map((singleagent) => (
