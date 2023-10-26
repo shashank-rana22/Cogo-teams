@@ -11,7 +11,7 @@
 	background: #f7f9f9;
 
 	@media (max-width: 768px) {
-		min-height: 420px;
+		min-height: 440px;
 		padding: 70px 24px 24px;
 		margin: -24px;
 	}
