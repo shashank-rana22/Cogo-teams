@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetailsAdmin';
 import getElementController from '../../../../utils/configs/getElementController';
@@ -10,10 +10,10 @@ import getElementController from '../../../../utils/configs/getElementController
 import getControls from './controls';
 import styles from './styles.module.css';
 
-const FORM_TYPE_EDUCATIONAL_QUALIFICATION = 'educational_qualification';
+// const FORM_TYPE_EDUCATIONAL_QUALIFICATION = 'educational_qualification';
 
 function EducationalQualification({ getEmployeeDetails, data }) {
-	const { handleSubmit, control, setValue, watch, formState: { errors } } = useForm();
+	const { handleSubmit, control, watch, formState: { errors } } = useForm();
 
 	const controls = getControls();
 
@@ -22,7 +22,7 @@ function EducationalQualification({ getEmployeeDetails, data }) {
 	const { employee_detail } = data || {};
 	console.log('🚀 ~ file: index.js:21 ~ EducationalQualification ~ detail:', employee_detail);
 
-	const { id, employee_education_details } = employee_detail || {};
+	const { id } = employee_detail || {};
 	const country_id = GLOBAL_CONSTANTS?.country_ids?.IN;
 
 	const countrySpecificOptions = getCountryConstants({ country_id });
@@ -33,8 +33,8 @@ function EducationalQualification({ getEmployeeDetails, data }) {
 	console.log('options', options);
 
 	const { education_level } = watch() || {};
-
-	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
+	const TO_ADD = true;
+	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails, TO_ADD });
 
 	const onSubmit = (values) => {
 		// updateEmployeeDetails({
