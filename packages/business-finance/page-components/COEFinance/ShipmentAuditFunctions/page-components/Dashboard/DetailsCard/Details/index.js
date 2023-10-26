@@ -63,11 +63,11 @@ function Details({
 							interactive
 							content={(
 								<div className={styles.name}>
-									{importerExporter?.business_name || '-'}
+									{`Shipment ID: #${serial_id}` || '-'}
 								</div>
 							)}
 						>
-							<div className={styles.orgnization_name}>
+							<div className={styles.organization_name}>
 								{`Shipment ID: #${serial_id}` || '-'}
 							</div>
 						</Tooltip>
@@ -81,7 +81,7 @@ function Details({
 								</div>
 							)}
 						>
-							<div className={styles.orgnization_name}>
+							<div className={styles.organization_name}>
 								{importerExporter?.business_name || '-'}
 							</div>
 						</Tooltip>
