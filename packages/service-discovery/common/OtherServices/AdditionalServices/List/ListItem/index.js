@@ -145,6 +145,7 @@ function ListItem({
 						service_name={serviceItem.title}
 						onClickDelete={handleRemoveService}
 						loading={deleteLoading}
+						isMobile={isMobile}
 					/>
 				</div>
 			) : null}

@@ -13,6 +13,7 @@ function DeleteServiceModal({
 	title = '',
 	service_name = '',
 	modalSize = 'sm',
+	isMobile = false,
 }) {
 	const handleCancel = (event) => {
 		event.stopPropagation();
@@ -54,6 +55,7 @@ function DeleteServiceModal({
 			showCloseIcon={false}
 			onClose={() => setShow(false)}
 			closeOnOuterClick={false}
+			placement={isMobile ? 'bottom' : 'center'}
 		>
 			<Modal.Header title={title || `Are you sure you want to delete 
 			${startCase(service_name || service.label || service.name)} ?`}

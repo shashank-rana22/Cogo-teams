@@ -46,7 +46,7 @@ function SelectedRateCard({
 	return (
 		<div className={styles.container}>
 			<div className={styles.dnd_container}>
-				<DetentionDemurrage details={detail} refetch={refetch} />
+				<DetentionDemurrage details={detail} refetch={refetch} isMobile={isMobile} />
 			</div>
 
 			<FclCard

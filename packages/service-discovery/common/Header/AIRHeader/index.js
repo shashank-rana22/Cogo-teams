@@ -23,7 +23,7 @@ function AIRHeader({
 	isMobile = false,
 	...rest
 }) {
-	const [show, setShow] = useState(!isMobile);
+	const [show, setShow] = useState(false);
 
 	const isAllowedToEdit = activePage === 'search_results';
 

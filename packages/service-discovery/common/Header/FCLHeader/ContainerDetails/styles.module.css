@@ -18,6 +18,7 @@
 .more_tag {
 	display: flex;
 	align-items: center;
+	width: max-content;
 	padding: 2px 6px;
 	margin-top: 8px;
 	margin-right: 16px;
@@ -28,4 +29,8 @@
 	background: #f9f9f9;
 	border: 1px solid #e0e0e0;
 	border-radius: 24px;
+
+	@media (max-width: 768px) {
+		margin: 0;
+	}
 }
